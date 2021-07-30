@@ -164,11 +164,11 @@ public:
                                   int *internalLeading,
                                   int *externalLeading,
                                   int *averageWidth) const override;
-    wxSize DoGetTextExtent(const wxString& string,
+    wxSize DoGetTextExtent(const std::string& string,
                                  wxCoord *descent = nullptr,
                                  wxCoord *externalLeading = nullptr,
                                  const wxFont *theFont = nullptr) const override;
-    std::vector<int> DoGetPartialTextExtents(const wxString& text) const override;
+    std::vector<int> DoGetPartialTextExtents(const std::string& text) const override;
 
     bool DoFloodFill(wxCoord x, wxCoord y, const wxColour& col,
                              wxFloodFillStyle style = wxFLOOD_SURFACE) override;
@@ -205,8 +205,8 @@ public:
     void DoDrawBitmap(const wxBitmap &bmp, wxCoord x, wxCoord y,
                               bool useMask = false) override;
 
-    void DoDrawText(const wxString& text, wxCoord x, wxCoord y) override;
-    void DoDrawRotatedText(const wxString& text, wxCoord x, wxCoord y,
+    void DoDrawText(const std::string& text, wxCoord x, wxCoord y) override;
+    void DoDrawRotatedText(const std::string& text, wxCoord x, wxCoord y,
                                    double angle) override;
 
     bool DoBlit(wxCoord xdest, wxCoord ydest, wxCoord width, wxCoord height,
@@ -257,7 +257,7 @@ public:
 
 protected:
     // common part of DoDrawText() and DoDrawRotatedText()
-    void DrawAnyText(const wxString& text, wxCoord x, wxCoord y);
+    void DrawAnyText(const std::string& text, wxCoord x, wxCoord y);
 
     // common part of DoSetClippingRegion() and DoSetDeviceClippingRegion()
     void SetClippingHrgn(WXHRGN hrgn);

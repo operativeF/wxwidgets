@@ -27,6 +27,8 @@
 #include "wx/html/forcelnk.h"
 FORCE_WXHTML_MODULES()
 
+#include <charconv>
+
 // ----------------------------------------------------------------------------
 // constants
 // ----------------------------------------------------------------------------
@@ -529,7 +531,9 @@ size_t wxHtmlListBox::GetItemForCell(const wxHtmlCell *cell) const
     // the cell's ID contains item index, see CacheItem():
     // TODO: Return value.
     unsigned long n;
-    if ( !cell->GetId().ToULong(&n) )
+    auto [p, ec] = std::from_chars(cell->GetId().data(), cell->GetId().data() + cell->GetId().size(), n);
+
+    if ( ec != std::errc() )
     {
         wxFAIL_MSG( wxT("unexpected root cell's ID") );
         return 0;

@@ -23,6 +23,8 @@
     #include "wx/module.h"
 #endif
 
+#include "fmt/core.h"
+
 // ===========================================================================
 // implementation
 // ===========================================================================
@@ -41,21 +43,21 @@ WX_DECLARE_EXPORTED_STRING_HASH_MAP(wxIconBundle, wxArtProviderIconBundlesHash);
 class WXDLLEXPORT wxArtProviderCache
 {
 public:
-    bool GetBitmap(const wxString& full_id, wxBitmap* bmp);
-    void PutBitmap(const wxString& full_id, const wxBitmap& bmp)
+    bool GetBitmap(const std::string& full_id, wxBitmap* bmp);
+    void PutBitmap(const std::string& full_id, const wxBitmap& bmp)
         { m_bitmapsHash[full_id] = bmp; }
 
-    bool GetIconBundle(const wxString& full_id, wxIconBundle* bmp);
-    void PutIconBundle(const wxString& full_id, const wxIconBundle& iconbundle)
+    bool GetIconBundle(const std::string& full_id, wxIconBundle* bmp);
+    void PutIconBundle(const std::string& full_id, const wxIconBundle& iconbundle)
         { m_iconBundlesHash[full_id] = iconbundle; }
 
     void Clear();
 
-    static wxString ConstructHashID(const wxArtID& id,
+    static std::string ConstructHashID(const wxArtID& id,
                                     const wxArtClient& client,
                                     const wxSize& size);
 
-    static wxString ConstructHashID(const wxArtID& id,
+    static std::string ConstructHashID(const wxArtID& id,
                                     const wxArtClient& client);
 
 private:
@@ -63,7 +65,7 @@ private:
     wxArtProviderIconBundlesHash m_iconBundlesHash; // cache of wxIconBundles
 };
 
-bool wxArtProviderCache::GetBitmap(const wxString& full_id, wxBitmap* bmp)
+bool wxArtProviderCache::GetBitmap(const std::string& full_id, wxBitmap* bmp)
 {
     wxArtProviderBitmapsHash::iterator entry = m_bitmapsHash.find(full_id);
     if ( entry == m_bitmapsHash.end() )
@@ -77,7 +79,7 @@ bool wxArtProviderCache::GetBitmap(const wxString& full_id, wxBitmap* bmp)
     }
 }
 
-bool wxArtProviderCache::GetIconBundle(const wxString& full_id, wxIconBundle* bmp)
+bool wxArtProviderCache::GetIconBundle(const std::string& full_id, wxIconBundle* bmp)
 {
     wxArtProviderIconBundlesHash::iterator entry = m_iconBundlesHash.find(full_id);
     if ( entry == m_iconBundlesHash.end() )
@@ -97,21 +99,18 @@ void wxArtProviderCache::Clear()
     m_iconBundlesHash.clear();
 }
 
-/* static */ wxString
-wxArtProviderCache::ConstructHashID(const wxArtID& id,
-                                    const wxArtClient& client)
+std::string wxArtProviderCache::ConstructHashID(const wxArtID& id,
+                                                const wxArtClient& client)
 {
-    return id + wxT('-') + client;
+    return fmt::format("{}-{}", id, client);
 }
 
 
-/* static */ wxString
-wxArtProviderCache::ConstructHashID(const wxArtID& id,
-                                    const wxArtClient& client,
-                                    const wxSize& size)
+std::string wxArtProviderCache::ConstructHashID(const wxArtID& id,
+                                                const wxArtClient& client,
+                                                const wxSize& size)
 {
-    return ConstructHashID(id, client) + wxT('-') +
-            wxString::Format(wxT("%d-%d"), size.x, size.y);
+    return fmt::format("{}-{}-{}", ConstructHashID(id, client), size.x, size.y);
 }
 
 // ============================================================================
@@ -131,7 +130,7 @@ wxArtProvider::~wxArtProvider()
 // wxArtProvider operations on provider stack
 // ----------------------------------------------------------------------------
 
-/*static*/ void wxArtProvider::CommonAddingProvider()
+void wxArtProvider::CommonAddingProvider()
 {
     if ( !sm_providers )
     {
@@ -142,19 +141,19 @@ wxArtProvider::~wxArtProvider()
     sm_cache->Clear();
 }
 
-/*static*/ void wxArtProvider::Push(wxArtProvider *provider)
+void wxArtProvider::Push(wxArtProvider *provider)
 {
     CommonAddingProvider();
     sm_providers->Insert(provider);
 }
 
-/*static*/ void wxArtProvider::PushBack(wxArtProvider *provider)
+void wxArtProvider::PushBack(wxArtProvider *provider)
 {
     CommonAddingProvider();
     sm_providers->Append(provider);
 }
 
-/*static*/ bool wxArtProvider::Pop()
+bool wxArtProvider::Pop()
 {
     wxCHECK_MSG( sm_providers, false, wxT("no wxArtProvider exists") );
     wxCHECK_MSG( !sm_providers->empty(), false, wxT("wxArtProviders stack is empty") );
@@ -164,7 +163,7 @@ wxArtProvider::~wxArtProvider()
     return true;
 }
 
-/*static*/ bool wxArtProvider::Remove(wxArtProvider *provider)
+bool wxArtProvider::Remove(wxArtProvider *provider)
 {
     wxCHECK_MSG( sm_providers, false, wxT("no wxArtProvider exists") );
 
@@ -177,7 +176,7 @@ wxArtProvider::~wxArtProvider()
     return false;
 }
 
-/*static*/ bool wxArtProvider::Delete(wxArtProvider *provider)
+bool wxArtProvider::Delete(wxArtProvider *provider)
 {
     // provider will remove itself from the stack in its dtor
     delete provider;
@@ -185,7 +184,7 @@ wxArtProvider::~wxArtProvider()
     return true;
 }
 
-/*static*/ void wxArtProvider::CleanUpProviders()
+void wxArtProvider::CleanUpProviders()
 {
     if ( sm_providers )
     {
@@ -227,16 +226,16 @@ void wxArtProvider::RescaleBitmap(wxBitmap& bmp, const wxSize& sizeNeeded)
 #endif // wxUSE_IMAGE/!wxUSE_IMAGE
 }
 
-/*static*/ wxBitmap wxArtProvider::GetBitmap(const wxArtID& id,
-                                             const wxArtClient& client,
-                                             const wxSize& size)
+wxBitmap wxArtProvider::GetBitmap(const wxArtID& id,
+                                  const wxArtClient& client,
+                                  const wxSize& size)
 {
     // safety-check against writing client,id,size instead of id,client,size:
-    wxASSERT_MSG( client.Last() == wxT('C'), wxT("invalid 'client' parameter") );
+    wxASSERT_MSG( client.back() == 'C', wxT("invalid 'client' parameter") );
 
     wxCHECK_MSG( sm_providers, wxNullBitmap, wxT("no wxArtProvider exists") );
 
-    wxString hashId = wxArtProviderCache::ConstructHashID(id, client, size);
+    std::string hashId = wxArtProviderCache::ConstructHashID(id, client, size);
 
     wxBitmap bmp;
     if ( !sm_cache->GetBitmap(hashId, &bmp) )
@@ -285,7 +284,6 @@ void wxArtProvider::RescaleBitmap(wxBitmap& bmp, const wxSize& sizeNeeded)
     return bmp;
 }
 
-/*static*/
 wxIconBundle wxArtProvider::GetIconBundle(const wxArtID& id, const wxArtClient& client)
 {
     wxIconBundle iconbundle(DoGetIconBundle(id, client));
@@ -301,15 +299,14 @@ wxIconBundle wxArtProvider::GetIconBundle(const wxArtID& id, const wxArtClient& 
     }
 }
 
-/*static*/
 wxIconBundle wxArtProvider::DoGetIconBundle(const wxArtID& id, const wxArtClient& client)
 {
     // safety-check against writing client,id,size instead of id,client,size:
-    wxASSERT_MSG( client.Last() == wxT('C'), wxT("invalid 'client' parameter") );
+    wxASSERT_MSG( client.back() == 'C', wxT("invalid 'client' parameter") );
 
     wxCHECK_MSG( sm_providers, wxNullIconBundle, wxT("no wxArtProvider exists") );
 
-    wxString hashId = wxArtProviderCache::ConstructHashID(id, client);
+    std::string hashId = wxArtProviderCache::ConstructHashID(id, client);
 
     wxIconBundle iconbundle;
     if ( !sm_cache->GetIconBundle(hashId, &iconbundle) )
@@ -328,7 +325,7 @@ wxIconBundle wxArtProvider::DoGetIconBundle(const wxArtID& id, const wxArtClient
     return iconbundle;
 }
 
-/*static*/ wxIcon wxArtProvider::GetIcon(const wxArtID& id,
+wxIcon wxArtProvider::GetIcon(const wxArtID& id,
                                          const wxArtClient& client,
                                          const wxSize& size)
 {
@@ -365,7 +362,7 @@ wxArtID wxArtProvider::GetMessageBoxIconId(int flags)
     }
 }
 
-/*static*/ wxSize wxArtProvider::GetSizeHint(const wxArtClient& client,
+wxSize wxArtProvider::GetSizeHint(const wxArtClient& client,
                                          bool platform_dependent)
 {
     if (!platform_dependent)

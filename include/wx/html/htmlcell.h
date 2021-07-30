@@ -225,8 +225,8 @@ public:
     // renderer's state.
     bool IsFormattingCell() const { return m_Width == 0 && m_Height == 0; }
 
-    const wxString& GetId() const { return m_id; }
-    void SetId(const wxString& id) { m_id = id; }
+    const std::string& GetId() const { return m_id; }
+    void SetId(const std::string& id) { m_id = id; }
 
     // returns the link associated with this cell. The position is position
     // within the cell so it varies from 0 to m_Width, from 0 to m_Height
@@ -367,8 +367,8 @@ public:
 
     // Converts the cell into text representation. If sel != NULL then
     // only part of the cell inside the selection is converted.
-    virtual wxString ConvertToText(wxHtmlSelection *WXUNUSED(sel)) const
-        { return wxEmptyString; }
+    virtual std::string ConvertToText(wxHtmlSelection *WXUNUSED(sel)) const
+        { return ""; }
 
     // This method is useful for debugging, to customize it for particular cell
     // type, override GetDescription() and not this function itself.
@@ -401,7 +401,7 @@ protected:
     // true if this cell can be placed on pagebreak, false otherwise
     bool m_CanLiveOnPagebreak{true};
     // unique identifier of the cell, generated from "id" property of tags
-    wxString m_id;
+    std::string m_id;
 
     wxDECLARE_ABSTRACT_CLASS(wxHtmlCell);
 };
@@ -419,7 +419,7 @@ protected:
 class WXDLLIMPEXP_HTML wxHtmlWordCell : public wxHtmlCell
 {
 public:
-    wxHtmlWordCell(const wxString& word, const wxDC& dc);
+    wxHtmlWordCell(const std::string& word, const wxDC& dc);
 
     wxHtmlWordCell(const wxHtmlWordCell&) = delete;
 	wxHtmlWordCell& operator=(const wxHtmlWordCell&) = delete;
@@ -427,7 +427,7 @@ public:
     void Draw(wxDC& dc, int x, int y, int view_y1, int view_y2,
               wxHtmlRenderingInfo& info) override;
     wxCursor GetMouseCursor(wxHtmlWindowInterface *window) const override;
-    wxString ConvertToText(wxHtmlSelection *sel) const override;
+    std::string ConvertToText(wxHtmlSelection *sel) const override;
     bool IsLinebreakAllowed() const override { return m_allowLinebreak; }
 
     void SetPreviousWord(wxHtmlWordCell *cell);
@@ -435,10 +435,10 @@ public:
 protected:
     wxString GetDescription() const override;
 
-    virtual wxString GetAllAsText() const
+    virtual const std::string& GetAllAsText() const
         { return m_Word; }
-    virtual wxString GetPartAsText(int begin, int end) const
-        { return m_Word.Mid(begin, end - begin); }
+    virtual std::string GetPartAsText(int begin, int end) const
+        { return m_Word.substr(begin, end - begin); }
 
     void SetSelectionPrivPos(const wxDC& dc, wxHtmlSelection *s) const;
     void Split(const wxDC& dc,
@@ -446,7 +446,7 @@ protected:
                unsigned& pos1, unsigned& pos2,
                unsigned& ext1, unsigned& ext2) const;
 
-    wxString m_Word;
+    std::string m_Word;
     bool     m_allowLinebreak{true};
 
     wxDECLARE_ABSTRACT_CLASS(wxHtmlWordCell);
@@ -459,8 +459,8 @@ protected:
 class WXDLLIMPEXP_HTML wxHtmlWordWithTabsCell : public wxHtmlWordCell
 {
 public:
-    wxHtmlWordWithTabsCell(const wxString& word,
-                           const wxString& wordOrig,
+    wxHtmlWordWithTabsCell(const std::string& word,
+                           const std::string& wordOrig,
                            size_t linepos,
                            const wxDC& dc)
         : wxHtmlWordCell(word, dc),
@@ -469,10 +469,10 @@ public:
     {}
 
 protected:
-    wxString GetAllAsText() const override;
-    wxString GetPartAsText(int begin, int end) const override;
+    const std::string& GetAllAsText() const override;
+    std::string GetPartAsText(int begin, int end) const override;
 
-    wxString m_wordOrig;
+    std::string m_wordOrig;
     size_t   m_linepos;
 };
 

@@ -22,6 +22,9 @@
 
 #include "wx/msw/dc.h"
 
+#include "boost/nowide/convert.hpp"
+#include "boost/nowide/stackstring.hpp"
+
 // ============================================================================
 // wxTextMeasure implementation
 // ============================================================================
@@ -78,13 +81,16 @@ void wxTextMeasure::EndMeasuring()
 }
 
 // Notice we don't check here the font. It is supposed to be OK before the call.
-wxSize wxTextMeasure::DoGetTextExtent(const wxString& string,
-                                       wxCoord *descent,
-                                       wxCoord *externalLeading)
+wxSize wxTextMeasure::DoGetTextExtent(const std::string& string,
+                                      wxCoord *descent,
+                                      wxCoord *externalLeading)
 {
     SIZE sizeRect{0, 0};
-    const size_t len = string.length();
-    if ( !::GetTextExtentPoint32(m_hdc, string.t_str(), len, &sizeRect) )
+
+    std::wstring tmpStr = boost::nowide::widen(string);
+    const size_t len = tmpStr.length();
+
+    if ( !::GetTextExtentPoint32W(m_hdc, tmpStr.c_str(), len, &sizeRect) )
     {
         wxLogLastError(wxT("GetTextExtentPoint32()"));
     }
@@ -101,16 +107,17 @@ wxSize wxTextMeasure::DoGetTextExtent(const wxString& string,
     if ( font.IsOk() && font.GetStyle() != wxFONTSTYLE_NORMAL && len > 0 )
     {
         ABC widthABC;
-        const wxChar chFirst = *string.begin();
-        if ( ::GetCharABCWidths(m_hdc, chFirst, chFirst, &widthABC) )
+
+        const auto chFirst = tmpStr.front();
+        if ( ::GetCharABCWidthsW(m_hdc, chFirst, chFirst, &widthABC) )
         {
             if ( widthABC.abcA < 0 )
                 sizeRect.cx -= widthABC.abcA;
 
             if ( len > 1 )
             {
-                const wxChar chLast = *string.rbegin();
-                ::GetCharABCWidths(m_hdc, chLast, chLast, &widthABC);
+                const auto chLast = tmpStr.back();
+                ::GetCharABCWidthsW(m_hdc, chLast, chLast, &widthABC);
             }
             //else: we already have the width of the last character
 
@@ -123,7 +130,7 @@ wxSize wxTextMeasure::DoGetTextExtent(const wxString& string,
     if ( descent || externalLeading )
     {
         TEXTMETRIC tm;
-        ::GetTextMetrics(m_hdc, &tm);
+        ::GetTextMetricsW(m_hdc, &tm);
         if ( descent )
             *descent = tm.tmDescent;
         if ( externalLeading )
@@ -133,7 +140,7 @@ wxSize wxTextMeasure::DoGetTextExtent(const wxString& string,
     return {sizeRect.cx, sizeRect.cy};
 }
 
-std::vector<int> wxTextMeasure::DoGetPartialTextExtents(const wxString& text, double scaleX)
+std::vector<int> wxTextMeasure::DoGetPartialTextExtents(const std::string& text, double scaleX)
 {
     if ( !m_hdc )
         return wxTextMeasureBase::DoGetPartialTextExtents(text, scaleX);
@@ -142,8 +149,8 @@ std::vector<int> wxTextMeasure::DoGetPartialTextExtents(const wxString& text, do
     SIZE sz = {0,0};
     std::vector<int> widths(text.length());
 
-    if ( !::GetTextExtentExPoint(m_hdc,
-                                 text.t_str(), // string to check
+    if ( !::GetTextExtentExPointW(m_hdc,
+                                 boost::nowide::widen(text).c_str(), // string to check
                                  text.length(),
                                  INT_MAX,      // max allowable width
                                  &fit,         // [out] count of chars
@@ -162,7 +169,7 @@ std::vector<int> wxTextMeasure::DoGetPartialTextExtents(const wxString& text, do
     int tabWidth{0};
     int* widthPtr = &widths[0];
 
-    for ( wxString::const_iterator i = text.begin(); i != text.end(); ++i )
+    for ( std::string::const_iterator i = text.begin(); i != text.end(); ++i )
     {
         if ( *i == '\t' )
         {

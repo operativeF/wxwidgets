@@ -541,13 +541,13 @@ void wxDCImpl::SetAxisOrientation( bool xLeftRight, bool yBottomUp )
     ComputeScaleAndOrigin();
 }
 
-std::vector<int> wxDCImpl::DoGetPartialTextExtents(const wxString& text) const
+std::vector<int> wxDCImpl::DoGetPartialTextExtents(const std::string& text) const
 {
     wxTextMeasure tm(GetOwner(), &m_font);
     return tm.GetPartialTextExtents(text, m_scale.x);
 }
 
-void wxDCImpl::GetMultiLineTextExtent(const wxString& text,
+void wxDCImpl::GetMultiLineTextExtent(const std::string& text,
                                       wxCoord *x,
                                       wxCoord *y,
                                       wxCoord *h,
@@ -1112,7 +1112,7 @@ void wxDC::CopyAttributes(const wxDC& dc)
     SetLayoutDirection(dc.GetLayoutDirection());
 }
 
-void wxDC::DrawLabel(const wxString& text,
+void wxDC::DrawLabel(const std::string& text,
                          const wxBitmap& bitmap,
                          const wxRect& rect,
                          int alignment,
@@ -1190,8 +1190,8 @@ void wxDC::DrawLabel(const wxString& text,
     //     wxMSW which uses this function for multi-line texts, so we may only
     //     call DrawText() for single-line strings from here to avoid infinite
     //     recursion.
-    wxString curLine;
-    for ( wxString::const_iterator pc = text.begin(); ; ++pc )
+    std::string curLine;
+    for ( std::string::const_iterator pc = text.begin(); ; ++pc )
     {
         if ( pc == text.end() || *pc == '\n' )
         {

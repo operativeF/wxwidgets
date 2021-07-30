@@ -107,8 +107,8 @@ public:
 
     wxSize DoGetBestSize() const override
     {
-        wxString minVal = m_spin->DoValueToText(m_spin->m_min);
-        wxString maxVal = m_spin->DoValueToText(m_spin->m_max);
+        std::string minVal = m_spin->DoValueToText(m_spin->m_min);
+        std::string maxVal = m_spin->DoValueToText(m_spin->m_max);
         wxSize minValSize = GetSizeFromText(minVal);
         wxSize maxValSize = GetSizeFromText(maxVal);
 

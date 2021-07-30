@@ -86,7 +86,7 @@ public:
     virtual wxSize GetTabSize(
                          wxDC& dc,
                          wxWindow* wnd,
-                         const wxString& caption,
+                         const std::string& caption,
                          const wxBitmap& bitmap,
                          bool active,
                          int closeButtonState,
@@ -172,7 +172,7 @@ public:
     wxSize GetTabSize(
                  wxDC& dc,
                  wxWindow* wnd,
-                 const wxString& caption,
+                 const std::string& caption,
                  const wxBitmap& bitmap,
                  bool active,
                  int closeButtonState,
@@ -273,7 +273,7 @@ public:
     wxSize GetTabSize(
                  wxDC& dc,
                  wxWindow* wnd,
-                 const wxString& caption,
+                 const std::string& caption,
                  const wxBitmap& bitmap,
                  bool active,
                  int closeButtonState,

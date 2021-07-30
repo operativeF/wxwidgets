@@ -308,7 +308,7 @@ void wxMessageDialog::AdjustButtonLabels()
 
         numButtons++;
 
-        const wxString label = (this->*button.getter)();
+        const std::string label = (this->*button.getter)();
         const wxSize sizeLabel = wxWindowBase::GetTextExtent(label);
 
         // check if the button is big enough for this label
@@ -331,7 +331,7 @@ void wxMessageDialog::AdjustButtonLabels()
         if ( widthNeeded > wBtnNew )
             wBtnNew = widthNeeded;
 
-        ::SetWindowText(hwndBtn, label.t_str());
+        ::SetWindowTextW(hwndBtn, boost::nowide::widen(label).c_str());
     }
 
     if ( wBtnNew <= wBtnOld )

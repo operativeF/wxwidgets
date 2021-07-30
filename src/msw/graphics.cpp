@@ -50,6 +50,9 @@
 #endif
 #include <cfloat> // for FLT_MAX, FLT_MIN
 
+#include "boost/nowide/convert.hpp"
+#include "boost/nowide/stackstring.hpp"
+
 // Define REAL_MAX, REAL_MIN
 // if it isn't done in GDI+ header(s).
 #ifndef REAL_MAX
@@ -476,9 +479,9 @@ public:
     void PushState() override;
     void PopState() override;
 
-    std::pair<double, double> GetTextExtent( const wxString &str,
+    std::pair<double, double> GetTextExtent( const std::string& str,
         double *descent, double *externalLeading ) const override;
-    std::vector<double> GetPartialTextExtents(const wxString& text) const override;
+    std::vector<double> GetPartialTextExtents(const std::string& text) const override;
     bool ShouldOffset() const override;
     virtual void GetSize( double* width, double *height );
     void GetDPI(double* dpiX, double* dpiY) const override;
@@ -491,7 +494,7 @@ protected:
     void Init(Graphics* graphics, int width, int height);
 
 private:
-    void DoDrawText(const wxString& str, double x, double y) override;
+    void DoDrawText(const std::string& str, double x, double y) override;
 
     Graphics* m_context;
     wxStack<GraphicsState> m_stateStack;
@@ -649,7 +652,7 @@ public :
                                        const wxColour& col) override;
 
     wxGraphicsFont CreateFont(double sizeInPixels,
-                                      const wxString& facename,
+                                      const std::string& facename,
                                       int flags = wxFONTFLAG_DEFAULT,
                                       const wxColour& col = *wxBLACK) override;
 
@@ -663,7 +666,7 @@ public :
     // create a subimage from a native image representation
     wxGraphicsBitmap CreateSubBitmap( const wxGraphicsBitmap &bitmap, double x, double y, double w, double h  ) override;
 
-    wxString GetName() const override;
+    std::string GetName() const override;
     void GetVersion(int *major, int *minor, int *micro) const override;
 
 protected :
@@ -2280,7 +2283,7 @@ void wxGDIPlusContext::DrawIcon( const wxIcon &icon, double x, double y, double 
     delete image ;
 }
 
-void wxGDIPlusContext::DoDrawText(const wxString& str,
+void wxGDIPlusContext::DoDrawText(const std::string& str,
                                         double x, double y )
 {
    if (m_composition == wxCOMPOSITION_DEST)
@@ -2289,15 +2292,15 @@ void wxGDIPlusContext::DoDrawText(const wxString& str,
     wxCHECK_RET( !m_font.IsNull(),
                  wxT("wxGDIPlusContext::DrawText - no valid font set") );
 
-    if ( str.IsEmpty())
-        return ;
+    if ( str.empty())
+        return;
 
     wxGDIPlusFontData * const
         fontData = (wxGDIPlusFontData *)m_font.GetRefData();
 
     m_context->DrawString
                (
-                    str.wc_str(*wxConvUI),  // string to draw, always Unicode
+                    boost::nowide::widen(str).c_str(),  // string to draw, always Unicode
                     -1,                     // length: string is NUL-terminated
                     fontData->GetGDIPlusFont(),
                     PointF(x, y),
@@ -2306,13 +2309,12 @@ void wxGDIPlusContext::DoDrawText(const wxString& str,
                );
 }
 
-std::pair<double, double> wxGDIPlusContext::GetTextExtent( const wxString &str,
+std::pair<double, double> wxGDIPlusContext::GetTextExtent( const std::string& str,
                                      double *descent, double *externalLeading ) const
 {
     // FIXME: Must return std::pair<double, double>
     //wxCHECK_RET( !m_font.IsNull(), wxT("wxGDIPlusContext::GetTextExtent - no valid font set") );
 
-    wxWCharBuffer s = str.wc_str( *wxConvUI );
     Font* f = ((wxGDIPlusFontData*)m_font.GetRefData())->GetGDIPlusFont();
 
     std::pair<double, double> textExtents;
@@ -2357,7 +2359,7 @@ std::pair<double, double> wxGDIPlusContext::GetTextExtent( const wxString &str,
     }
 
     // measuring empty strings is not guaranteed, so do it by hand
-    if ( str.IsEmpty())
+    if (str.empty())
     {
         textExtents.first = 0 ;
 
@@ -2368,7 +2370,7 @@ std::pair<double, double> wxGDIPlusContext::GetTextExtent( const wxString &str,
         RectF layoutRect(0,0, 100000.0f, 100000.0f);
 
         RectF bounds ;
-        m_context->MeasureString((const wchar_t *) s , wcslen(s) , f, layoutRect, GetDrawTextStringFormat(), &bounds ) ;
+        m_context->MeasureString(boost::nowide::widen(str).c_str() , str.size(), f, layoutRect, GetDrawTextStringFormat(), &bounds ) ;
         textExtents.first = bounds.Width;
         textExtents.second = bounds.Height;
     }
@@ -2377,7 +2379,7 @@ std::pair<double, double> wxGDIPlusContext::GetTextExtent( const wxString &str,
 }
 
 // FIXME: This function is a total mess and probably broken.
-std::vector<double> wxGDIPlusContext::GetPartialTextExtents(const wxString& text) const
+std::vector<double> wxGDIPlusContext::GetPartialTextExtents(const std::string& text) const
 {
     //wxCHECK_RET( !m_font.IsNull(), wxT("wxGDIPlusContext::GetPartialTextExtents - no valid font set") );
 
@@ -2385,8 +2387,8 @@ std::vector<double> wxGDIPlusContext::GetPartialTextExtents(const wxString& text
         return {};
 
     Font* f = ((wxGDIPlusFontData*)m_font.GetRefData())->GetGDIPlusFont();
-    wxWCharBuffer ws = text.wc_str( *wxConvUI );
-    size_t len = wcslen( ws ) ;
+    std::wstring ws = boost::nowide::widen(text);
+    size_t len = ws.size();
     wxASSERT_MSG(text.length() == len , wxT("GetPartialTextExtents not yet implemented for multichar situations"));
 
     RectF layoutRect(0,0, 100000.0f, 100000.0f);
@@ -2410,7 +2412,7 @@ std::vector<double> wxGDIPlusContext::GetPartialTextExtents(const wxString& text
             ranges[i].Length = startPosition+i+1 ;
         }
         strFormat.SetMeasurableCharacterRanges(span,ranges);
-        m_context->MeasureCharacterRanges(ws, -1 , f,layoutRect, &strFormat,span,regions) ;
+        m_context->MeasureCharacterRanges(&ws[0], -1 , f,layoutRect, &strFormat,span,regions) ;
 
         RectF bbox ;
         for ( size_t i = 0 ; i < span ; ++i)
@@ -2847,7 +2849,7 @@ wxGDIPlusRenderer::CreateFont( const wxFont &font,
 
 wxGraphicsFont
 wxGDIPlusRenderer::CreateFont(double sizeInPixels,
-                              const wxString& facename,
+                              const std::string& facename,
                               int flags,
                               const wxColour& col)
 {
@@ -2961,7 +2963,7 @@ wxGraphicsBitmap wxGDIPlusRenderer::CreateSubBitmap( const wxGraphicsBitmap &bit
         return wxNullGraphicsBitmap;
 }
 
-wxString wxGDIPlusRenderer::GetName() const
+std::string wxGDIPlusRenderer::GetName() const
 {
     return "gdiplus";
 }

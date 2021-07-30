@@ -35,7 +35,11 @@
     #include "wx/tooltip.h"
 #endif // wxUSE_TOOLTIPS
 
+#include <algorithm>
+#include <charconv>
 #include <climits>         // for INT_MIN
+
+#include "boost/nowide/convert.hpp"
 
 // ----------------------------------------------------------------------------
 // macros
@@ -161,7 +165,7 @@ bool wxSpinCtrl::ProcessTextCommand(WXWORD cmd, WXWORD WXUNUSED(id))
     {
         wxCommandEvent event(wxEVT_TEXT, GetId());
         event.SetEventObject(this);
-        wxString val = wxGetWindowText(m_hwndBuddy);
+        std::string val = wxGetWindowText(m_hwndBuddy);
         event.SetString(val);
         event.SetInt(GetValue());
         return HandleWindowEvent(event);
@@ -179,7 +183,7 @@ void wxSpinCtrl::OnChar(wxKeyEvent& event)
             {
                 wxCommandEvent evt(wxEVT_TEXT_ENTER, m_windowId);
                 InitCommandEvent(evt);
-                wxString val = wxGetWindowText(m_hwndBuddy);
+                std::string val = wxGetWindowText(m_hwndBuddy);
                 evt.SetString(val);
                 evt.SetInt(GetValue());
                 if ( HandleWindowEvent(evt) )
@@ -257,7 +261,7 @@ void wxSpinCtrl::NormalizeValue()
 
 bool wxSpinCtrl::Create(wxWindow *parent,
                         wxWindowID id,
-                        const wxString& value,
+                        const std::string& value,
                         const wxPoint& pos,
                         const wxSize& size,
                         long style,
@@ -296,7 +300,7 @@ bool wxSpinCtrl::Create(wxWindow *parent,
     m_hwndBuddy = MSWCreateWindowAtAnyPosition
                   (
                    exStyle,                // sunken border
-                   wxT("EDIT"),            // window class
+                   L"EDIT",            // window class
                    nullptr,                   // no window title
                    msStyle,                // style (will be shown later)
                    pos.x, pos.y,           // position
@@ -327,7 +331,7 @@ bool wxSpinCtrl::Create(wxWindow *parent,
     m_wndProcBuddy = wxSetWindowProc(GetBuddyHwnd(), wxBuddyTextWndProc);
 
     // associate the text window with the spin button
-    ::SendMessage(GetHwnd(), UDM_SETBUDDY, (WPARAM)m_hwndBuddy, 0);
+    ::SendMessageW(GetHwnd(), UDM_SETBUDDY, (WPARAM)m_hwndBuddy, 0);
 
     // set up fonts and colours  (This is nomally done in MSWCreateControl)
     InheritAttributes();
@@ -336,8 +340,10 @@ bool wxSpinCtrl::Create(wxWindow *parent,
 
     // If the initial text value is actually a number, it overrides the
     // "initial" argument specified later.
-    long initialFromText;
-    if ( value.ToLong(&initialFromText) )
+    int initialFromText{0};
+    auto [p, ec] = std::from_chars(value.data(), value.data() + value.size(), initialFromText);
+
+    if ( ec == std::errc() )
         initial = initialFromText;
 
     // Set the range in the native control: notice that we must do it before
@@ -426,17 +432,17 @@ bool wxSpinCtrl::SetBase(int base)
 // wxTextCtrl-like methods
 // ----------------------------------------------------------------------------
 
-wxString wxSpinCtrl::GetTextValue() const
+std::string wxSpinCtrl::GetTextValue() const
 {
     return wxGetWindowText(m_hwndBuddy);
 }
 
-void wxSpinCtrl::SetValue(const wxString& text)
+void wxSpinCtrl::SetValue(const std::string& text)
 {
     m_blockEvent = true;
     wxON_BLOCK_EXIT_SET(m_blockEvent, false);
 
-    if ( !::SetWindowText(GetBuddyHwnd(), text.c_str()) )
+    if ( !::SetWindowTextW(GetBuddyHwnd(), boost::nowide::widen(text).c_str()) )
     {
         wxLogLastError(wxT("SetWindowText(buddy)"));
     }
@@ -452,14 +458,14 @@ void  wxSpinCtrl::SetValue(int val)
     // Normally setting the value of the spin button is enough as it updates
     // its buddy control automatically but in a couple of situations it doesn't
     // do it, for whatever reason, do it explicitly then:
-    const wxString text = wxGetWindowText(m_hwndBuddy);
+    const std::string text = wxGetWindowText(m_hwndBuddy);
 
     // First case is when the text control is empty and the value is 0: the
     // spin button just leaves it empty in this case, while we want to show 0
     // in it.
     if ( text.empty() && !val )
     {
-        ::SetWindowText(GetBuddyHwnd(), wxT("0"));
+        ::SetWindowTextW(GetBuddyHwnd(), L"0");
     }
 
     // Another one is when we're using hexadecimal base but the user input
@@ -469,8 +475,8 @@ void  wxSpinCtrl::SetValue(int val)
             (text.length() < 3 || text[0] != '0' ||
                 (text[1] != 'x' && text[1] != 'X')) )
     {
-        ::SetWindowText(GetBuddyHwnd(),
-                        wxSpinCtrlImpl::FormatAsHex(val, m_max).t_str());
+        ::SetWindowTextW(GetBuddyHwnd(),
+                         wxSpinCtrlImpl::FormatAsHex(val, m_max).c_str());
     }
 
     m_oldValue = GetValue();
@@ -478,18 +484,15 @@ void  wxSpinCtrl::SetValue(int val)
 
 int wxSpinCtrl::GetValue() const
 {
-    const wxString val = wxGetWindowText(m_hwndBuddy);
+    std::string val = wxGetWindowText(m_hwndBuddy);
 
-    long n;
-    if ( !val.ToLong(&n, GetBase()) )
+    int n{0};
+
+    auto [p, ec] = std::from_chars(val.data(), val.data() + val.size(), n);
+    if ( ec != std::errc() )
         n = INT_MIN;
 
-    if ( n < m_min )
-        n = m_min;
-    if ( n > m_max )
-        n = m_max;
-
-    return n;
+    return std::clamp(n, m_min, m_max);
 }
 
 void wxSpinCtrl::SetSelection(long from, long to)
@@ -501,7 +504,7 @@ void wxSpinCtrl::SetSelection(long from, long to)
         from = 0;
     }
 
-    ::SendMessage(GetBuddyHwnd(), EM_SETSEL, (WPARAM)from, (LPARAM)to);
+    ::SendMessageW(GetBuddyHwnd(), EM_SETSEL, (WPARAM)from, (LPARAM)to);
 }
 
 void wxSpinCtrl::SetLayoutDirection(wxLayoutDirection dir)
@@ -639,7 +642,7 @@ bool wxSpinCtrl::Reparent(wxWindowBase *newParent)
 
     // associate it with the buddy control again
     ::SetParent(GetBuddyHwnd(), GetHwndOf(GetParent()));
-    ::SendMessage(GetHwnd(), UDM_SETBUDDY, (WPARAM)GetBuddyHwnd(), 0);
+    ::SendMessageW(GetHwnd(), UDM_SETBUDDY, (WPARAM)GetBuddyHwnd(), 0);
 
     // also set the size again with wxSIZE_ALLOW_MINUS_ONE flag: this is
     // necessary if our original position used -1 for either x or y

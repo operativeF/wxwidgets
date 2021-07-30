@@ -587,7 +587,7 @@ wxSize wxListBox::DoGetBestClientSize() const
     int wListbox = 0;
     for (unsigned int i = 0; i < m_noItems; i++)
     {
-        wxString str(GetString(i));
+        std::string str(GetString(i));
         auto wLine = GetTextExtent(str).x;
         if ( wLine > wListbox )
             wListbox = wLine;

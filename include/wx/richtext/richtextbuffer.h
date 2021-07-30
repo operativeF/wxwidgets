@@ -4764,7 +4764,7 @@ public:
     wxRichTextObject* Clone() const override { return new wxRichTextPlainText(*this); }
 
 private:
-    bool DrawTabbedString(wxDC& dc, const wxRichTextAttr& attr, const wxRect& rect, wxString& str, wxCoord& x, wxCoord& y, bool selected);
+    bool DrawTabbedString(wxDC& dc, const wxRichTextAttr& attr, const wxRect& rect, std::string& str, wxCoord& x, wxCoord& y, bool selected);
 
 protected:
     wxString    m_text;

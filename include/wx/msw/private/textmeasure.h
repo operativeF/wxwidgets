@@ -40,11 +40,11 @@ protected:
     void BeginMeasuring() override;
     void EndMeasuring() override;
 
-    wxSize DoGetTextExtent(const wxString& string,
+    wxSize DoGetTextExtent(const std::string& string,
                                wxCoord *descent = nullptr,
                                wxCoord *externalLeading = nullptr) override;
 
-    std::vector<int> DoGetPartialTextExtents(const wxString& text, double scaleX) override;
+    std::vector<int> DoGetPartialTextExtents(const std::string& text, double scaleX) override;
 
 
 

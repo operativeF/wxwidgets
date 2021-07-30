@@ -59,7 +59,7 @@ TEST_CASE("Ellipsization::NormalCase")
 
     for ( unsigned int s = 0; s < WXSIZEOF(stringsToTest); s++ )
     {
-        const wxString str = wxString::FromUTF8(stringsToTest[s]);
+        const std::string str = std::string(stringsToTest[s]);
 
         for ( unsigned int  f = 0; f < WXSIZEOF(flagsToTest); f++ )
         {
@@ -67,7 +67,7 @@ TEST_CASE("Ellipsization::NormalCase")
             {
                 for ( unsigned int w = 0; w < WXSIZEOF(widthsToTest); w++ )
                 {
-                    wxString ret = wxControl::Ellipsize
+                    std::string ret = wxControl::Ellipsize
                                    (
                                     str,
                                     dc,
@@ -79,9 +79,9 @@ TEST_CASE("Ellipsization::NormalCase")
                     // Note that we must measure the width of the text that
                     // will be rendered, and when mnemonics are used, this
                     // means we have to remove them first.
-                    const wxString
+                    const std::string
                         displayed = flagsToTest[f] & wxELLIPSIZE_FLAGS_PROCESS_MNEMONICS
-                                        ? wxControl::RemoveMnemonics(ret)
+                                        ? wxControl::RemoveMnemonics(ret).ToStdString()
                                         : ret;
                     const int
                         width = dc.GetMultiLineTextExtent(displayed).GetWidth();
@@ -112,7 +112,7 @@ TEST_CASE("Ellipsization::EnoughSpace")
 
     wxMemoryDC dc;
 
-    wxString testString("some label");
+    std::string testString{"some label"};
     const int width = dc.GetTextExtent(testString).GetWidth() + 50;
 
     CHECK( wxControl::Ellipsize(testString, dc, wxELLIPSIZE_START, width) == testString );
@@ -140,7 +140,7 @@ TEST_CASE("Ellipsization::HasThreeDots")
 {
     wxMemoryDC dc;
 
-    wxString testString("some longer text");
+    std::string testString("some longer text");
     const int width = dc.GetTextExtent(testString).GetWidth() - 5;
 
     CHECK( wxControl::Ellipsize(testString, dc, wxELLIPSIZE_START, width).StartsWith("...") );

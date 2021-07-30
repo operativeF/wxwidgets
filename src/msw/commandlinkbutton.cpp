@@ -147,10 +147,10 @@ wxSize wxCommandLinkButton::DoGetBestSize() const
 
         // 4/3 is the relationship between main label and note font sizes.
         dc.SetFont(noteFont.Scaled(4.0f/3.0f));
-        size = dc.GetMultiLineTextExtent(GetLabelText(GetMainLabel()));
+        size = dc.GetMultiLineTextExtent(GetLabelText(GetMainLabel()).ToStdString());
 
         dc.SetFont(noteFont);
-        wxSize noteSize = dc.GetMultiLineTextExtent(GetLabelText(GetNote()));
+        wxSize noteSize = dc.GetMultiLineTextExtent(GetLabelText(GetNote()).ToStdString());
 
         if ( noteSize.x > size.x )
             size.x = noteSize.x;

@@ -177,7 +177,7 @@ void wxGridCellEditorEvtHandler::OnChar(wxKeyEvent& event)
             // do special processing for partly visible cell...
 
             int textWidth = 0;
-            wxString value = m_grid->GetCellValue(row, col);
+            std::string value = m_grid->GetCellValue(row, col);
             if (!value.empty())
             {
                 // get width of cell CONTENTS (text)

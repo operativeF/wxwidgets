@@ -312,16 +312,16 @@ public:
                                   int *externalLeading,
                                   int *averageWidth) const;
 
-    virtual wxSize DoGetTextExtent(const wxString& string,
+    virtual wxSize DoGetTextExtent(const std::string& string,
                                  wxCoord *descent = nullptr,
                                  wxCoord *externalLeading = nullptr,
                                  const wxFont *theFont = nullptr) const = 0;
-    virtual void GetMultiLineTextExtent(const wxString& string,
+    virtual void GetMultiLineTextExtent(const std::string& string,
                                         wxCoord *width,
                                         wxCoord *height,
                                         wxCoord *heightLine = nullptr,
                                         const wxFont *font = nullptr) const;
-    virtual std::vector<int> DoGetPartialTextExtents(const wxString& text) const;
+    virtual std::vector<int> DoGetPartialTextExtents(const std::string& text) const;
 
     // clearing
 
@@ -467,8 +467,8 @@ public:
     virtual void DoDrawBitmap(const wxBitmap &bmp, wxCoord x, wxCoord y,
                               bool useMask = false) = 0;
 
-    virtual void DoDrawText(const wxString& text, wxCoord x, wxCoord y) = 0;
-    virtual void DoDrawRotatedText(const wxString& text,
+    virtual void DoDrawText(const std::string& text, wxCoord x, wxCoord y) = 0;
+    virtual void DoDrawRotatedText(const std::string& text,
                                    wxCoord x, wxCoord y, double angle) = 0;
 
     virtual bool DoBlit(wxCoord xdest, wxCoord ydest,
@@ -800,28 +800,27 @@ public:
         return fm;
     }
 
-    wxSize GetTextExtent(const wxString& string,
+    wxSize GetTextExtent(const std::string& string,
                        wxCoord *descent = nullptr,
                        wxCoord *externalLeading = nullptr,
                        const wxFont *theFont = nullptr) const
         { return m_pimpl->DoGetTextExtent(string, descent, externalLeading, theFont); }
 
-    // TODO: Forwarding parameters
-    void GetMultiLineTextExtent(const wxString& string,
+    void GetMultiLineTextExtent(const std::string& string,
                                         wxCoord *width,
                                         wxCoord *height,
                                         wxCoord *heightLine = nullptr,
                                         const wxFont *font = nullptr) const
         { m_pimpl->GetMultiLineTextExtent( string, width, height, heightLine, font ); }
 
-    wxSize GetMultiLineTextExtent(const wxString& string) const
+    wxSize GetMultiLineTextExtent(const std::string& string) const
     {
         wxCoord w, h;
         m_pimpl->GetMultiLineTextExtent(string, &w, &h);
         return wxSize(w, h);
     }
 
-    std::vector<int> GetPartialTextExtents(const wxString& text) const
+    std::vector<int> GetPartialTextExtents(const std::string& text) const
         { return m_pimpl->DoGetPartialTextExtents(text); }
 
     // clearing
@@ -1088,28 +1087,28 @@ public:
                     bool useMask = false)
         { m_pimpl->DoDrawBitmap(bmp, pt.x, pt.y, useMask); }
 
-    void DrawText(const wxString& text, wxCoord x, wxCoord y)
+    void DrawText(const std::string& text, wxCoord x, wxCoord y)
         { m_pimpl->DoDrawText(text, x, y); }
-    void DrawText(const wxString& text, const wxPoint& pt)
+    void DrawText(const std::string& text, const wxPoint& pt)
         { m_pimpl->DoDrawText(text, pt.x, pt.y); }
 
-    void DrawRotatedText(const wxString& text, wxCoord x, wxCoord y, double angle)
+    void DrawRotatedText(const std::string& text, wxCoord x, wxCoord y, double angle)
         { m_pimpl->DoDrawRotatedText(text, x, y, angle); }
-    void DrawRotatedText(const wxString& text, const wxPoint& pt, double angle)
+    void DrawRotatedText(const std::string& text, const wxPoint& pt, double angle)
         { m_pimpl->DoDrawRotatedText(text, pt.x, pt.y, angle); }
 
     // this version puts both optional bitmap and the text into the given
     // rectangle and aligns is as specified by alignment parameter; it also
     // will emphasize the character with the given index if it is != -1 and
     // return the bounding rectangle if required
-    void DrawLabel(const wxString& text,
+    void DrawLabel(const std::string& text,
                            const wxBitmap& image,
                            const wxRect& rect,
                            int alignment = wxALIGN_LEFT | wxALIGN_TOP,
                            int indexAccel = -1,
                            wxRect *rectBounding = nullptr);
 
-    void DrawLabel(const wxString& text, const wxRect& rect,
+    void DrawLabel(const std::string& text, const wxRect& rect,
                    int alignment = wxALIGN_LEFT | wxALIGN_TOP,
                    int indexAccel = -1)
         { DrawLabel(text, wxNullBitmap, rect, alignment, indexAccel); }

@@ -145,7 +145,7 @@ void wxAuiMSWToolBarArt::DrawButton(
 
             int tx, ty;
 
-            dc.GetTextExtent(wxT("ABCDHgj"), &tx, &textHeight);
+            dc.GetTextExtent("ABCDHgj", &tx, &textHeight);
             textWidth = 0;
             dc.GetTextExtent(item.GetLabel(), &textWidth, &ty);
         }
@@ -233,7 +233,7 @@ void wxAuiMSWToolBarArt::DrawDropDownButton(
             int tx, ty;
             if ( m_flags & wxAUI_TB_TEXT )
             {
-                dc.GetTextExtent(wxT("ABCDHgj"), &tx, &textHeight);
+                dc.GetTextExtent("ABCDHgj", &tx, &textHeight);
                 textWidth = 0;
             }
 

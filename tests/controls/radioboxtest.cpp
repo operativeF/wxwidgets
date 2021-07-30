@@ -112,7 +112,7 @@ TEST_CASE("Radiobox test")
 
     SUBCASE("HelpText")
     {
-        CHECK_EQ(wxEmptyString, m_radio->GetItemHelpText(0));
+        CHECK_EQ("", m_radio->GetItemHelpText(0));
 
         m_radio->SetItemHelpText(1, "Item 1 help");
 
@@ -120,7 +120,7 @@ TEST_CASE("Radiobox test")
 
         m_radio->SetItemHelpText(1, "");
 
-        CHECK_EQ(wxEmptyString, m_radio->GetItemHelpText(1));
+        CHECK_EQ("", m_radio->GetItemHelpText(1));
     }
 
 #if defined (__WXMSW__) || defined(__WXGTK__)

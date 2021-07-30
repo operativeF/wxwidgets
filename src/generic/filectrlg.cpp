@@ -399,7 +399,7 @@ void wxFileListCtrl::ChangeToReportMode()
     // don't hardcode since mm/dd is dd/mm elsewhere
     int w, h;
     wxDateTime dt(22, wxDateTime::Dec, 2002, 22, 22, 22);
-    wxString txt = dt.FormatDate() + wxT("22") + dt.Format(wxT("%I:%M:%S %p"));
+    std::string txt = dt.FormatDate() + wxT("22") + dt.Format(wxT("%I:%M:%S %p"));
     GetTextExtent(txt, &w, &h);
 
     InsertColumn( 0, _("Name"), wxLIST_FORMAT_LEFT, w );
@@ -410,7 +410,7 @@ void wxFileListCtrl::ChangeToReportMode()
     GetTextExtent(wxT("Permissions 2"), &w, &h);
     InsertColumn( 4, _("Permissions"), wxLIST_FORMAT_LEFT, w );
 #elif defined(__WIN32__)
-    GetTextExtent(wxT("Attributes 2"), &w, &h);
+    GetTextExtent("Attributes 2", &w, &h);
     InsertColumn( 4, _("Attributes"), wxLIST_FORMAT_LEFT, w );
 #endif
 

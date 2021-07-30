@@ -171,7 +171,7 @@ void wxHtmlWinParser::InitParser(const wxString& source)
 
     // we're not using GetCharWidth/Height() because of
     // differences under X and win
-    auto textExtents = m_DC->GetTextExtent( wxT("H"));
+    auto textExtents = m_DC->GetTextExtent("H");
     m_CharWidth = textExtents.x;
     m_CharHeight = textExtents.y;
 

@@ -43,7 +43,7 @@ bool wxOwnerDrawnBase::OnMeasureItem(size_t *width, size_t *height)
         dc.SetFont(font);
 
         // item name/text without mnemonics
-        wxString name = wxStripMenuCodes(GetName(), wxStrip_Mnemonics);
+        std::string name = wxStripMenuCodes(GetName(), wxStrip_Mnemonics);
 
         auto textExtents = dc.GetTextExtent(name);
 

@@ -223,7 +223,7 @@ int wxRadioBoxBase::GetNextItem(int item, wxDirection dir, long style) const
 
 #if wxUSE_TOOLTIPS
 
-void wxRadioBoxBase::SetItemToolTip(unsigned int item, const wxString& text)
+void wxRadioBoxBase::SetItemToolTip(unsigned int item, const std::string& text)
 {
     wxASSERT_MSG( item < GetCount(), wxT("Invalid item index") );
 
@@ -297,7 +297,7 @@ wxRadioBoxBase::~wxRadioBoxBase()
 #if wxUSE_HELP
 
 // set helptext for a particular item
-void wxRadioBoxBase::SetItemHelpText(unsigned int n, const wxString& helpText)
+void wxRadioBoxBase::SetItemHelpText(unsigned int n, const std::string& helpText)
 {
     wxCHECK_RET( n < GetCount(), wxT("Invalid item index") );
 
@@ -311,17 +311,17 @@ void wxRadioBoxBase::SetItemHelpText(unsigned int n, const wxString& helpText)
 }
 
 // retrieve helptext for a particular item
-wxString wxRadioBoxBase::GetItemHelpText( unsigned int n ) const
+std::string wxRadioBoxBase::GetItemHelpText( unsigned int n ) const
 {
-    wxCHECK_MSG( n < GetCount(), wxEmptyString, wxT("Invalid item index") );
+    wxCHECK_MSG( n < GetCount(), "", wxT("Invalid item index") );
 
-    return m_itemsHelpTexts.empty() ? wxString() : m_itemsHelpTexts[n];
+    return m_itemsHelpTexts.empty() ? "" : m_itemsHelpTexts[n];
 }
 
 // return help text for the item for which wxEVT_HELP was generated.
-wxString wxRadioBoxBase::DoGetHelpTextAtPoint(const wxWindow *derived,
-                                              const wxPoint& pt,
-                                              wxHelpEvent::Origin origin) const
+std::string wxRadioBoxBase::DoGetHelpTextAtPoint(const wxWindow *derived,
+                                                 const wxPoint& pt,
+                                                 wxHelpEvent::Origin origin) const
 {
     const int item = [this, pt, origin]() {
         switch ( origin )
@@ -345,7 +345,7 @@ wxString wxRadioBoxBase::DoGetHelpTextAtPoint(const wxWindow *derived,
 
     if ( item != wxNOT_FOUND )
     {
-        wxString text = GetItemHelpText(static_cast<unsigned int>(item));
+        std::string text = GetItemHelpText(static_cast<unsigned int>(item));
         if( !text.empty() )
             return text;
     }

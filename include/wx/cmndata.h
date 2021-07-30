@@ -41,7 +41,7 @@ public:
     bool Ok() const { return IsOk(); }
     bool IsOk() const ;
 
-    const wxString& GetPrinterName() const { return m_printerName; }
+    const std::string& GetPrinterName() const { return m_printerName; }
     bool GetColour() const { return m_colour; }
     wxDuplexMode GetDuplex() const { return m_duplexMode; }
     wxPaperSize GetPaperId() const { return m_paperId; }
@@ -60,7 +60,7 @@ public:
     void SetOrientation(wxPrintOrientation orient) { m_printOrientation = orient; }
     void SetOrientationReversed(bool reversed) { m_printOrientationReversed = reversed; }
 
-    void SetPrinterName(const wxString& name) { m_printerName = name; }
+    void SetPrinterName(const std::string& name) { m_printerName = name; }
     void SetColour(bool colour) { m_colour = colour; }
     void SetDuplex(wxDuplexMode duplex) { m_duplexMode = duplex; }
     void SetPaperId(wxPaperSize sizeId) { m_paperId = sizeId; }
@@ -70,8 +70,8 @@ public:
     void SetMedia(int media) { m_media = media; }
     void SetPrintMode(wxPrintMode printMode) { m_printMode = printMode; }
 
-    wxString GetFilename() const { return m_filename; }
-    void SetFilename( const wxString &filename ) { m_filename = filename; }
+    std::string GetFilename() const { return m_filename; }
+    void SetFilename( const std::string& filename ) { m_filename = filename; }
 
     wxPrintData& operator=(const wxPrintData& data);
 
@@ -96,14 +96,14 @@ private:
     bool            m_printOrientationReversed{false};
     bool            m_printCollate{false};
 
-    wxString        m_printerName;
+    std::string     m_printerName;
     bool            m_colour{true};
     wxDuplexMode    m_duplexMode{wxDuplexMode::Simplex};
     wxPrintQuality  m_printQuality{wxPRINT_QUALITY_HIGH};
     wxPaperSize     m_paperId{wxPaperSize::None};
     wxSize          m_paperSize;
 
-    wxString        m_filename;
+    std::string        m_filename;
 
     char* m_privData{nullptr};
     int   m_privDataLen{0};

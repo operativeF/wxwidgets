@@ -40,6 +40,8 @@
 #include "wx/msw/private/dc.h"
 #include "wx/private/textmeasure.h"
 
+#include "boost/nowide/convert.hpp"
+
 #ifdef _MSC_VER
     // In the previous versions of wxWidgets, AlphaBlend() was dynamically
     // loaded from msimg32.dll during the run-time, so we didn't need to link
@@ -1448,7 +1450,7 @@ void wxMSWDCImpl::DoDrawBitmap( const wxBitmap &bmp, wxCoord x, wxCoord y, bool 
     CalcBoundingBox(x + bmp.GetWidth(), y + bmp.GetHeight());
 }
 
-void wxMSWDCImpl::DoDrawText(const wxString& text, wxCoord x, wxCoord y)
+void wxMSWDCImpl::DoDrawText(const std::string& text, wxCoord x, wxCoord y)
 {
     // For compatibility with other ports (notably wxGTK) and because it's
     // genuinely useful, we allow passing multiline strings to DrawText().
@@ -1476,16 +1478,16 @@ void wxMSWDCImpl::DoDrawText(const wxString& text, wxCoord x, wxCoord y)
     CalcBoundingBox(x + textExtents.x, y + textExtents.y);
 }
 
-void wxMSWDCImpl::DrawAnyText(const wxString& text, wxCoord x, wxCoord y)
+void wxMSWDCImpl::DrawAnyText(const std::string& text, wxCoord x, wxCoord y)
 {
-    if ( ::ExtTextOut(GetHdc(), XLOG2DEV(x), YLOG2DEV(y), 0, nullptr,
-                   text.c_str(), text.length(), nullptr) == 0 )
+    if ( ::ExtTextOutW(GetHdc(), XLOG2DEV(x), YLOG2DEV(y), 0, nullptr,
+                   boost::nowide::widen(text).c_str(), text.length(), nullptr) == 0 )
     {
         wxLogLastError(wxT("TextOut"));
     }
 }
 
-void wxMSWDCImpl::DoDrawRotatedText(const wxString& text,
+void wxMSWDCImpl::DoDrawRotatedText(const std::string& text,
                              wxCoord x, wxCoord y,
                              double angle)
 {
@@ -1550,12 +1552,14 @@ void wxMSWDCImpl::DoDrawRotatedText(const wxString& text,
     const double dy = heightLine * cos(rad);
 
     // Draw all text line by line
-    const std::vector<wxString> lines = wxSplit(text, '\n', '\0');
+    // FIXME: use string
+    const wxString wxText = wxString(std::string(text));
+    const std::vector<wxString> lines = wxSplit(wxText, '\n', '\0');
     for ( size_t lineNum = 0; lineNum < lines.size(); lineNum++ )
     {
         // Calculate origin for each line to avoid accumulation of
         // rounding errors.
-        DrawAnyText(lines[lineNum],
+        DrawAnyText(lines[lineNum].ToStdString(),
                     x + wxRound(lineNum*dx),
                     y + wxRound(lineNum*dy));
     }
@@ -1894,7 +1898,7 @@ void wxMSWDCImpl::DoGetFontMetrics(int *height,
         *averageWidth = tm.tmAveCharWidth;
 }
 
-wxSize wxMSWDCImpl::DoGetTextExtent(const wxString& string,
+wxSize wxMSWDCImpl::DoGetTextExtent(const std::string& string,
                            wxCoord *descent, wxCoord *externalLeading,
                            const wxFont *font) const
 {
@@ -1905,7 +1909,7 @@ wxSize wxMSWDCImpl::DoGetTextExtent(const wxString& string,
 }
 
 
-std::vector<int> wxMSWDCImpl::DoGetPartialTextExtents(const wxString& text) const
+std::vector<int> wxMSWDCImpl::DoGetPartialTextExtents(const std::string& text) const
 {
     wxTextMeasure txm(GetOwner(), nullptr); // don't change the font
     return txm.GetPartialTextExtents(text, 1.0);

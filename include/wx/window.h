@@ -1187,7 +1187,7 @@ public:
 
         // get the width/height/... of the text using current or specified
         // font
-    wxSize GetTextExtent(const wxString& string,
+    wxSize GetTextExtent(const std::string& string,
                        int *descent = nullptr,
                        int *externalLeading = nullptr,
                        const wxFont *font = nullptr) const
@@ -1328,10 +1328,10 @@ public:
         //
         // notice that pt may be invalid if event origin is keyboard or unknown
         // and this method should return the global window help text then
-    virtual wxString GetHelpTextAtPoint(const wxPoint& pt,
+    virtual std::string GetHelpTextAtPoint(const wxPoint& pt,
                                         wxHelpEvent::Origin origin) const;
         // returns the position-independent help text
-    wxString GetHelpText() const
+    std::string GetHelpText() const
     {
         return GetHelpTextAtPoint(wxDefaultPosition, wxHelpEvent::Origin_Unknown);
     }
@@ -1765,7 +1765,7 @@ protected:
     //     only one to be virtual.
 
     // text extent
-    virtual wxSize DoGetTextExtent(const wxString& string,
+    virtual wxSize DoGetTextExtent(const std::string& string,
                                  int *descent = nullptr,
                                  int *externalLeading = nullptr,
                                  const wxFont *font = nullptr) const = 0;

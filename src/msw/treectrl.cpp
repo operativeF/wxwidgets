@@ -38,6 +38,8 @@
 #include "wx/msw/dragimag.h"
 #include "wx/msw/uxtheme.h"
 
+#include "boost/nowide/stackstring.hpp"
+
 // macros to hide the cast ugliness
 // --------------------------------
 
@@ -958,7 +960,7 @@ wxString wxTreeCtrl::GetItemText(const wxTreeItemId& item) const
     return wxString(buf);
 }
 
-void wxTreeCtrl::SetItemText(const wxTreeItemId& item, const wxString& text)
+void wxTreeCtrl::SetItemText(const wxTreeItemId& item, const std::string& text)
 {
     wxCHECK_RET( item.IsOk(), wxT("invalid tree item") );
 
@@ -966,7 +968,10 @@ void wxTreeCtrl::SetItemText(const wxTreeItemId& item, const wxString& text)
         return;
 
     wxTreeViewItem tvItem(item, TVIF_TEXT);
-    tvItem.pszText = wxMSW_CONV_LPTSTR(text);
+
+    boost::nowide::wstackstring stackText(text.c_str());
+
+    tvItem.pszText = stackText.get();
     DoSetItem(&tvItem);
 
     // when setting the text of the item being edited, the text control should
@@ -979,7 +984,7 @@ void wxTreeCtrl::SetItemText(const wxTreeItemId& item, const wxString& text)
     {
         if ( item == m_idEdited )
         {
-            ::SetWindowText(hwndEdit, text.t_str());
+            ::SetWindowTextW(hwndEdit, stackText.get());
         }
     }
 }

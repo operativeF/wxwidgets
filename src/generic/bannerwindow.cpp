@@ -178,8 +178,8 @@ void wxBannerWindow::OnPaint(wxPaintEvent& WXUNUSED(event))
         std::vector<wxString> lines = wxSplit(m_message, '\n', '\0');
         for ( const auto& line : lines )
         {
-            DrawBannerTextLine(dc, line, pos);
-            pos.y += dc.GetTextExtent(line).y;
+            DrawBannerTextLine(dc, line.ToStdString(), pos);
+            pos.y += dc.GetTextExtent(line.ToStdString()).y;
         }
     }
 }
@@ -293,7 +293,7 @@ void wxBannerWindow::DrawBitmapBackground(wxDC& dc)
 
 void
 wxBannerWindow::DrawBannerTextLine(wxDC& dc,
-                                   const wxString& str,
+                                   const std::string& str,
                                    const wxPoint& pos)
 {
     switch ( m_direction )
@@ -317,7 +317,7 @@ wxBannerWindow::DrawBannerTextLine(wxDC& dc,
             break;
 
         case wxALL:
-            wxFAIL_MSG( wxS("Unreachable") );
+            wxFAIL_MSG("Unreachable");
     }
 }
 

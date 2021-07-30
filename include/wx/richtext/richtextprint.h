@@ -140,7 +140,7 @@ private:
     void RenderPage(wxDC *dc, int page);
 
     /// Substitute keywords
-    static bool SubstituteKeywords(wxString& str, const wxString& title, int pageNum, int pageCount);
+    static bool SubstituteKeywords(std::string& str, const std::string& title, int pageNum, int pageCount);
 
 private:
 

@@ -199,11 +199,11 @@ void wxRichTextPrintout::RenderPage(wxDC *dc, int page)
         // Draw header, if any
         wxRichTextOddEvenPage oddEven = ((page % 2) == 1) ? wxRICHTEXT_PAGE_ODD : wxRICHTEXT_PAGE_EVEN;
 
-        wxString headerTextCentre = m_headerFooterData.GetHeaderText(oddEven, wxRichTextPageLocation::Centre);
-        wxString headerTextLeft = m_headerFooterData.GetHeaderText(oddEven, wxRichTextPageLocation::Left);
-        wxString headerTextRight = m_headerFooterData.GetHeaderText(oddEven, wxRichTextPageLocation::Right);
+        std::string headerTextCentre = m_headerFooterData.GetHeaderText(oddEven, wxRichTextPageLocation::Centre);
+        std::string headerTextLeft = m_headerFooterData.GetHeaderText(oddEven, wxRichTextPageLocation::Left);
+        std::string headerTextRight = m_headerFooterData.GetHeaderText(oddEven, wxRichTextPageLocation::Right);
 
-        if (!headerTextLeft.IsEmpty())
+        if (!headerTextLeft.empty())
         {
             SubstituteKeywords(headerTextLeft, GetTitle(), page, m_numPages);
 
@@ -214,7 +214,7 @@ void wxRichTextPrintout::RenderPage(wxDC *dc, int page)
             int y = headerRect.GetX();
             dc->DrawText(headerTextLeft, x, y);
         }
-        if (!headerTextCentre.IsEmpty())
+        if (!headerTextCentre.empty())
         {
             SubstituteKeywords(headerTextCentre, GetTitle(), page, m_numPages);
 
@@ -225,7 +225,7 @@ void wxRichTextPrintout::RenderPage(wxDC *dc, int page)
             int y = headerRect.GetY();
             dc->DrawText(headerTextCentre, x, y);
         }
-        if (!headerTextRight.IsEmpty())
+        if (!headerTextRight.empty())
         {
             SubstituteKeywords(headerTextRight, GetTitle(), page, m_numPages);
 
@@ -238,11 +238,11 @@ void wxRichTextPrintout::RenderPage(wxDC *dc, int page)
         }
 
         // Draw footer, if any
-        wxString footerTextCentre = m_headerFooterData.GetFooterText(oddEven, wxRichTextPageLocation::Centre);
-        wxString footerTextLeft = m_headerFooterData.GetFooterText(oddEven, wxRichTextPageLocation::Left);
-        wxString footerTextRight = m_headerFooterData.GetFooterText(oddEven, wxRichTextPageLocation::Right);
+        std::string footerTextCentre = m_headerFooterData.GetFooterText(oddEven, wxRichTextPageLocation::Centre);
+        std::string footerTextLeft = m_headerFooterData.GetFooterText(oddEven, wxRichTextPageLocation::Left);
+        std::string footerTextRight = m_headerFooterData.GetFooterText(oddEven, wxRichTextPageLocation::Right);
 
-        if (!footerTextLeft.IsEmpty())
+        if (!footerTextLeft.empty())
         {
             SubstituteKeywords(footerTextLeft, GetTitle(), page, m_numPages);
 
@@ -253,7 +253,7 @@ void wxRichTextPrintout::RenderPage(wxDC *dc, int page)
             int y = footerRect.GetBottom() - ty;
             dc->DrawText(footerTextLeft, x, y);
         }
-        if (!footerTextCentre.IsEmpty())
+        if (!footerTextCentre.empty())
         {
             SubstituteKeywords(footerTextCentre, GetTitle(), page, m_numPages);
 
@@ -264,7 +264,7 @@ void wxRichTextPrintout::RenderPage(wxDC *dc, int page)
             int y = footerRect.GetBottom() - ty;
             dc->DrawText(footerTextCentre, x, y);
         }
-        if (!footerTextRight.IsEmpty())
+        if (!footerTextRight.empty())
         {
             SubstituteKeywords(footerTextRight, GetTitle(), page, m_numPages);
 
@@ -405,27 +405,26 @@ void wxRichTextPrintout::CalculateScaling(wxDC* dc, wxRect& textRect, wxRect& he
     textRect = rect;
 }
 
-bool wxRichTextPrintout::SubstituteKeywords(wxString& str, const wxString& title, int pageNum, int pageCount)
+bool wxRichTextPrintout::SubstituteKeywords(std::string& str, const std::string& title, int pageNum, int pageCount)
 {
-    wxString num;
+    std::string num = fmt::format("{:i}", pageNum);
 
-    num.Printf(wxT("%i"), pageNum);
-    str.Replace(wxT("@PAGENUM@"), num);
+    wx::utils::ReplaceAll(str, "@PAGENUM@", num);
 
-    num.Printf(wxT("%lu"), (unsigned long) pageCount);
-    str.Replace(wxT("@PAGESCNT@"), num);
+    num = fmt::format("{:lu}", pageCount);
+    wx::utils::ReplaceAll(str, "@PAGESCNT@", num);
 
 #if wxUSE_DATETIME
     wxDateTime now = wxDateTime::Now();
 
-    str.Replace(wxT("@DATE@"), now.FormatDate());
-    str.Replace(wxT("@TIME@"), now.FormatTime());
+    wx::utils::ReplaceAll(str, "@DATE@", now.FormatDate().ToStdString());
+    wx::utils::ReplaceAll(str, "@TIME@", now.FormatTime().ToStdString());
 #else
     str.Replace(wxT("@DATE@"), wxEmptyString);
     str.Replace(wxT("@TIME@"), wxEmptyString);
 #endif
 
-    str.Replace(wxT("@TITLE@"), title);
+    wx::utils::ReplaceAll(str, "@TITLE@", title);
 
     return true;
 }

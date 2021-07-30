@@ -24,8 +24,8 @@ class wxArtProviderModule;
 // Types
 // ----------------------------------------------------------------------------
 
-using wxArtClient = wxString;
-using wxArtID = wxString;
+using wxArtClient = std::string;
+using wxArtID = std::string;
 
 #define wxART_MAKE_CLIENT_ID_FROM_STR(id)  ((id) + wxASCII_STR("_C"))
 #define wxART_MAKE_CLIENT_ID(id)           (#id "_C")

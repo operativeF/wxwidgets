@@ -605,7 +605,7 @@ public:
     wxWindow* GetWindow() const { return m_window; }
 
     // begin a new document (relevant only for printing / pdf etc) if there is a progress dialog, message will be shown
-    virtual bool StartDoc( const wxString& message );
+    virtual bool StartDoc( const std::string& message );
 
     // done with that document (relevant only for printing / pdf etc)
     virtual void EndDoc();
@@ -660,7 +660,7 @@ public:
     // creates a font
     virtual wxGraphicsFont CreateFont( const wxFont &font , const wxColour &col = *wxBLACK ) const;
     virtual wxGraphicsFont CreateFont(double sizeInPixels,
-                                      const wxString& facename,
+                                      const std::string& facename,
                                       int flags = wxFONTFLAG_DEFAULT,
                                       const wxColour& col = *wxBLACK) const;
 
@@ -808,24 +808,24 @@ public:
     // text
     //
 
-    void DrawText( const wxString &str, double x, double y )
+    void DrawText( const std::string& str, double x, double y )
         { DoDrawText(str, x, y); }
 
-    void DrawText( const wxString &str, double x, double y, double angle )
+    void DrawText( const std::string& str, double x, double y, double angle )
         { DoDrawRotatedText(str, x, y, angle); }
 
-    void DrawText( const wxString &str, double x, double y,
+    void DrawText( const std::string& str, double x, double y,
                    const wxGraphicsBrush& backgroundBrush )
         { DoDrawFilledText(str, x, y, backgroundBrush); }
 
-    void DrawText( const wxString &str, double x, double y,
+    void DrawText( const std::string& str, double x, double y,
                    double angle, const wxGraphicsBrush& backgroundBrush )
         { DoDrawRotatedFilledText(str, x, y, angle, backgroundBrush); }
 
-    virtual std::pair<double, double> GetTextExtent( const wxString &text,
+    virtual std::pair<double, double> GetTextExtent( const std::string& text,
         double *descent = nullptr, double *externalLeading = nullptr ) const  = 0;
 
-    virtual std::vector<double> GetPartialTextExtents(const wxString& text) const = 0;
+    virtual std::vector<double> GetPartialTextExtents(const std::string& text) const = 0;
 
     //
     // image support
@@ -896,12 +896,12 @@ protected:
     // classes
     virtual wxGraphicsPen DoCreatePen(const wxGraphicsPenInfo& info) const;
 
-    virtual void DoDrawText(const wxString& str, double x, double y) = 0;
-    virtual void DoDrawRotatedText(const wxString& str, double x, double y,
+    virtual void DoDrawText(const std::string& str, double x, double y) = 0;
+    virtual void DoDrawRotatedText(const std::string& str, double x, double y,
                                    double angle);
-    virtual void DoDrawFilledText(const wxString& str, double x, double y,
+    virtual void DoDrawFilledText(const std::string& str, double x, double y,
                                   const wxGraphicsBrush& backgroundBrush);
-    virtual void DoDrawRotatedFilledText(const wxString& str,
+    virtual void DoDrawRotatedFilledText(const std::string& str,
                                          double x, double y,
                                          double angle,
                                          const wxGraphicsBrush& backgroundBrush);
@@ -1048,7 +1048,7 @@ public:
     // sets the font
     virtual wxGraphicsFont CreateFont( const wxFont &font , const wxColour &col = *wxBLACK ) = 0;
     virtual wxGraphicsFont CreateFont(double sizeInPixels,
-                                      const wxString& facename,
+                                      const std::string& facename,
                                       int flags = wxFONTFLAG_DEFAULT,
                                       const wxColour& col = *wxBLACK) = 0;
     virtual wxGraphicsFont CreateFontAtDPI(const wxFont& font,
@@ -1068,7 +1068,7 @@ public:
     // create a subimage from a native image representation
     virtual wxGraphicsBitmap CreateSubBitmap( const wxGraphicsBitmap &bitmap, double x, double y, double w, double h  ) = 0;
 
-    virtual wxString GetName() const = 0;
+    virtual std::string GetName() const = 0;
     virtual void
     GetVersion(int* major, int* minor = nullptr, int* micro = nullptr) const = 0;
 

@@ -134,7 +134,7 @@ void wxGenericColourButton::UpdateColour()
         dc.SetTextForeground( col );
         dc.SetFont( GetFont() );
 
-        const wxString text = m_colour.GetAsString(wxC2S_HTML_SYNTAX);
+        const std::string text = m_colour.GetAsString(wxC2S_HTML_SYNTAX);
         const wxSize textSize = dc.GetTextExtent(text);
         const int x = (m_bitmap.GetWidth() - textSize.x) / 2;
         const int y = (m_bitmap.GetHeight() - textSize.y) / 2;

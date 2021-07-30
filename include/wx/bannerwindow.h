@@ -124,7 +124,7 @@ private:
     void DrawBitmapBackground(wxDC& dc);
 
     // Helper of OnPaint(): draw the text in the appropriate direction.
-    void DrawBannerTextLine(wxDC& dc, const wxString& str, const wxPoint& pos);
+    void DrawBannerTextLine(wxDC& dc, const std::string& str, const wxPoint& pos);
 
     // Return the font to use for the title. Currently this is hardcoded as a
     // larger bold version of the standard window font but could be made
@@ -147,8 +147,8 @@ private:
     wxColour m_colBitmapBg;
 
     // The title and main message to draw, used if m_bitmap is invalid.
-    wxString m_title,
-             m_message;
+    std::string m_title;
+    std::string m_message;
 
     // Start and stop gradient colours, only used when drawing text.
     wxColour m_colStart,

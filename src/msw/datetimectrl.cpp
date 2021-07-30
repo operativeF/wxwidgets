@@ -219,16 +219,16 @@ wxSize wxDateTimePickerCtrl::DoGetBestSize() const
     {
         // Use the same native format as the underlying native control.
 #if wxUSE_INTL
-        wxString s = wxDateTime::Now().Format(wxLocale::GetOSInfo(MSWGetFormat()));
+        std::string s = wxDateTime::Now().Format(wxLocale::GetOSInfo(MSWGetFormat()));
 #else // !wxUSE_INTL
-        wxString s("XXX-YYY-ZZZZ");
+        std::string s("XXX-YYY-ZZZZ");
 #endif // wxUSE_INTL/!wxUSE_INTL
 
         // the best size for the control is bigger than just the string
         // representation of the current value because the control must accommodate
         // any date and while the widths of all digits are usually about the same,
         // the width of the month string varies a lot, so try to account for it
-        s += wxS("W");
+        s += 'W';
 
         size = GetTextExtent(s);
 

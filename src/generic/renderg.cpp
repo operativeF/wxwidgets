@@ -443,7 +443,7 @@ wxRendererGeneric::DrawHeaderButtonContents(wxWindow *win,
         wxColour clr = params->m_labelColour.IsOk() ?
             params->m_labelColour : win->GetForegroundColour();
 
-        wxString label( params->m_labelText );
+        std::string label( params->m_labelText );
 
         dc.SetFont(font);
         dc.SetTextForeground(clr);
@@ -504,7 +504,7 @@ int wxRendererGeneric::GetHeaderButtonHeight(wxWindow *win)
     int defaultHeight{14};
     int d = 0;
     if (win)
-        defaultHeight = win->GetTextExtent(wxT("Hg"), &d).y;
+        defaultHeight = win->GetTextExtent("Hg", &d).y;
 
     return defaultHeight + d + 2 * HEADER_OFFSET_Y + EXTRA_HEIGHT;
 }
@@ -991,7 +991,7 @@ wxRendererGeneric::DrawItemText(wxWindow* WXUNUSED(win),
 
     // Be careful to avoid using the default flags here as otherwise any
     // ampersands in the text would be consumed (and tabs expanded).
-    const wxString paintText = wxControl::Ellipsize(text, dc,
+    const std::string paintText = wxControl::Ellipsize(text, dc,
                                                     ellipsizeMode,
                                                     rect.GetWidth(),
                                                     wxELLIPSIZE_FLAGS_NONE);

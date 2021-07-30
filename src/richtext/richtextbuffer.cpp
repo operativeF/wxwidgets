@@ -5020,7 +5020,7 @@ bool wxRichTextParagraph::Layout(wxDC& dc, wxRichTextDrawingContext& context, co
             {
                 wxCheckSetFont(dc, font);
                 wxCoord maxDescent = 0;
-                auto spaceW = dc.GetTextExtent(wxT(" "), & maxDescent).x;
+                auto spaceW = dc.GetTextExtent(" ", & maxDescent).x;
                 leftSubIndent = bulletSize.x + spaceW;
             }
         }
@@ -5333,7 +5333,7 @@ bool wxRichTextParagraph::Layout(wxDC& dc, wxRichTextDrawingContext& context, co
             // FIXME: Wasteful.
             if (maxDescent == 0)
             {
-                (void)dc.GetTextExtent(wxT("X"), & maxDescent);
+                (void)dc.GetTextExtent("X", & maxDescent);
             }
 
             // Add a new line
@@ -5448,7 +5448,7 @@ bool wxRichTextParagraph::Layout(wxDC& dc, wxRichTextDrawingContext& context, co
         // FIXME: Wasteful.
         if (maxDescent == 0)
         {
-            (void)dc.GetTextExtent(wxT("X"), & maxDescent);
+            (void)dc.GetTextExtent("X", & maxDescent);
         }
 
         line->SetSize(wxSize(currentWidth, lineHeight));
@@ -6814,7 +6814,7 @@ bool wxRichTextPlainText::Draw(wxDC& dc, wxRichTextDrawingContext& context, cons
         str.MakeUpper();
 
     long len = range.GetLength();
-    wxString stringChunk = str.Mid(range.GetStart() - offset, (size_t) len);
+    std::string stringChunk = str.Mid(range.GetStart() - offset, (size_t) len);
 
     // Test for the optimized situations where all is selected, or none
     // is selected.
@@ -6911,16 +6911,16 @@ bool wxRichTextPlainText::Draw(wxDC& dc, wxRichTextDrawingContext& context, cons
             {
                 wxLogDebug(wxT("Mid(%d, %d"), (int)(r1 - offset), (int)fragmentLen);
             }
-            wxString stringFragment = str.Mid(r1 - offset, fragmentLen);
+            std::string stringFragment = str.Mid(r1 - offset, fragmentLen);
 
             DrawTabbedString(dc, textAttr, rect, stringFragment, x, y, false);
 
 #if USE_KERNING_FIX
-            if (stringChunk.Find(wxT("\t")) == wxNOT_FOUND)
+            if (stringChunk.find('\t') == std::string::npos)
             {
                 // Compensate for kerning difference
-                wxString stringFragment2(str.Mid(r1 - offset, fragmentLen+1));
-                wxString stringFragment3(str.Mid(r1 - offset + fragmentLen, 1));
+                std::string stringFragment2(str.Mid(r1 - offset, fragmentLen+1));
+                std::string stringFragment3(str.Mid(r1 - offset + fragmentLen, 1));
 
                 wxCoord w1, h1, w2, h2, w3, h3;
                 dc.GetTextExtent(stringFragment,  & w1, & h1);
@@ -6944,16 +6944,17 @@ bool wxRichTextPlainText::Draw(wxDC& dc, wxRichTextDrawingContext& context, cons
             {
                 wxLogDebug(wxT("Mid(%d, %d"), (int)(s1 - offset), (int)fragmentLen);
             }
-            wxString stringFragment = str.Mid(s1 - offset, fragmentLen);
+
+            std::string stringFragment = str.Mid(s1 - offset, fragmentLen);
 
             DrawTabbedString(dc, textAttr, rect, stringFragment, x, y, true);
 
 #if USE_KERNING_FIX
-            if (stringChunk.Find(wxT("\t")) == wxNOT_FOUND)
+            if (stringChunk.find('\t') == std::string::npos)
             {
                 // Compensate for kerning difference
-                wxString stringFragment2(str.Mid(s1 - offset, fragmentLen+1));
-                wxString stringFragment3(str.Mid(s1 - offset + fragmentLen, 1));
+                std::string stringFragment2(str.Mid(s1 - offset, fragmentLen+1));
+                std::string stringFragment3(str.Mid(s1 - offset + fragmentLen, 1));
 
                 wxCoord w1, h1, w2, h2, w3, h3;
                 dc.GetTextExtent(stringFragment,  & w1, & h1);
@@ -6977,7 +6978,7 @@ bool wxRichTextPlainText::Draw(wxDC& dc, wxRichTextDrawingContext& context, cons
             {
                 wxLogDebug(wxT("Mid(%d, %d"), (int)(s2 - offset), (int)fragmentLen);
             }
-            wxString stringFragment = str.Mid(s2 - offset, fragmentLen);
+            std::string stringFragment = str.Mid(s2 - offset, fragmentLen);
 
             DrawTabbedString(dc, textAttr, rect, stringFragment, x, y, false);
         }
@@ -6986,9 +6987,9 @@ bool wxRichTextPlainText::Draw(wxDC& dc, wxRichTextDrawingContext& context, cons
     return true;
 }
 
-bool wxRichTextPlainText::DrawTabbedString(wxDC& dc, const wxRichTextAttr& attr, const wxRect& rect,wxString& str, wxCoord& x, wxCoord& y, bool selected)
+bool wxRichTextPlainText::DrawTabbedString(wxDC& dc, const wxRichTextAttr& attr, const wxRect& rect, std::string& str, wxCoord& x, wxCoord& y, bool selected)
 {
-    bool hasTabs = (str.Find(wxT('\t')) != wxNOT_FOUND);
+    bool hasTabs = (str.find('\t') != wxNOT_FOUND);
 
     std::vector<int> tabArray;
     int tabCount;
@@ -7040,8 +7041,8 @@ bool wxRichTextPlainText::DrawTabbedString(wxDC& dc, const wxRichTextAttr& attr,
     {
         // the string has a tab
         // break up the string at the Tab
-        wxString stringChunk = str.BeforeFirst(wxT('\t'));
-        str = str.AfterFirst(wxT('\t'));
+        std::string stringChunk = wx::utils::BeforeFirst(str, '\t');
+        str = wx::utils::AfterFirst(str, '\t');
         dc.GetTextExtent(stringChunk, & w, & h);
         int tabPos;
         tabPos = x + w;
@@ -7082,10 +7083,10 @@ bool wxRichTextPlainText::DrawTabbedString(wxDC& dc, const wxRichTextAttr& attr,
                 x = nextTabPos;
             }
         }
-        hasTabs = (str.Find(wxT('\t')) != wxNOT_FOUND);
+        hasTabs = (str.find('\t') != std::string::npos);
     }
 
-    if (!str.IsEmpty())
+    if (!str.empty())
     {
         dc.GetTextExtent(str, & w, & h);
         if (selected)
@@ -7212,14 +7213,14 @@ bool wxRichTextPlainText::GetRangeSize(const wxRichTextRange& range, wxSize& siz
     wxString toReplace = wxRichTextLineBreakChar;
     str.Replace(toReplace, wxT(" "));
 
-    wxString stringChunk = str.Mid(startPos, (size_t) len);
+    std::string stringChunk = str.Mid(startPos, (size_t) len);
 
     if (textAttr.HasTextEffects() && (textAttr.GetTextEffects() & (wxTEXT_ATTR_EFFECT_CAPITALS|wxTEXT_ATTR_EFFECT_SMALL_CAPITALS)))
-        stringChunk.MakeUpper();
+        wx::utils::ToUpper(stringChunk);
 
     wxCoord w, h;
     int width = 0;
-    if (stringChunk.Find(wxT('\t')) != wxNOT_FOUND)
+    if (stringChunk.find('\t') != std::string::npos)
     {
         // the string has a tab
         std::vector<int> tabArray;
@@ -7237,14 +7238,14 @@ bool wxRichTextPlainText::GetRangeSize(const wxRichTextRange& range, wxSize& siz
             tabArray[i] = pos;
         }
 
-        while (stringChunk.Find(wxT('\t')) >= 0)
+        while (stringChunk.find('\t') >= 0)
         {
             int absoluteWidth = 0;
 
             // the string has a tab
             // break up the string at the Tab
-            wxString stringFragment = stringChunk.BeforeFirst(wxT('\t'));
-            stringChunk = stringChunk.AfterFirst(wxT('\t'));
+            std::string stringFragment = wx::utils::BeforeFirst(stringChunk, '\t');
+            stringChunk = wx::utils::AfterFirst(stringChunk, '\t');
 
             if (partialExtents)
             {
@@ -7300,7 +7301,7 @@ bool wxRichTextPlainText::GetRangeSize(const wxRichTextRange& range, wxSize& siz
         }
     }
 
-    if (!stringChunk.IsEmpty())
+    if (!stringChunk.empty())
     {
         if (partialExtents)
         {
@@ -7339,7 +7340,7 @@ bool wxRichTextPlainText::GetRangeSize(const wxRichTextRange& range, wxSize& siz
 
     // FIXME: Wasteful
     if (!haveDescent)
-        (void)dc.GetTextExtent(wxT("X"), & descent);
+        (void)dc.GetTextExtent("X", &descent);
 
     if ( bScript )
         dc.SetFont(font);
@@ -9163,9 +9164,9 @@ bool wxRichTextStdRenderer::DrawTextBullet(wxRichTextParagraph* paragraph, wxDC&
     {
         SetFontForBullet(*(paragraph->GetBuffer()), dc, attr);
 
-        wxString text1(text);
+        std::string text1(text);
         if (attr.HasTextEffects() && (attr.GetTextEffects() & (wxTEXT_ATTR_EFFECT_CAPITALS|wxTEXT_ATTR_EFFECT_SMALL_CAPITALS)))
-            text1.MakeUpper();
+            wx::utils::ToUpper(text1);
 
         if (attr.GetTextColour().IsOk())
             dc.SetTextForeground(attr.GetTextColour());
@@ -9174,7 +9175,7 @@ bool wxRichTextStdRenderer::DrawTextBullet(wxRichTextParagraph* paragraph, wxDC&
 
         int charHeight = dc.GetCharHeight();
         wxCoord tw, th;
-        dc.GetTextExtent(text1, & tw, & th);
+        dc.GetTextExtent(text1, &tw, &th);
 
         int x = rect.x;
 
@@ -9276,9 +9277,9 @@ bool wxRichTextStdRenderer::MeasureBullet(wxRichTextParagraph* paragraph, wxDC& 
     else if (attr.HasBulletText())
     {
         wxCoord maxDescent;
-        wxString text(attr.GetBulletText());
+        std::string text(attr.GetBulletText());
         if (attr.HasTextEffects() && (attr.GetTextEffects() & (wxTEXT_ATTR_EFFECT_CAPITALS|wxTEXT_ATTR_EFFECT_SMALL_CAPITALS)))
-            text.MakeUpper();
+            wx::utils::ToUpper(text);
 
         sz = dc.GetTextExtent(text, & maxDescent);
     }
@@ -9292,7 +9293,7 @@ bool wxRichTextStdRenderer::MeasureBullet(wxRichTextParagraph* paragraph, wxDC& 
     {
         // Need to guess a size for a number bullet.
         wxCoord maxDescent;
-        sz = dc.GetTextExtent(wxT("8888."), & maxDescent);
+        sz = dc.GetTextExtent("8888.", & maxDescent);
     }
 
     return true;
@@ -9617,9 +9618,9 @@ bool wxRichTextFieldTypeStandard::Draw(wxRichTextField* obj, wxDC& dc, wxRichTex
         }
         else
         {
-            wxString label(m_label);
-            if (label.IsEmpty())
-                label = wxT("??");
+            std::string label(m_label);
+            if (label.empty())
+                label = "??";
             int maxDescent;
             dc.SetFont(m_font);
             auto textExtents = dc.GetTextExtent(label, &maxDescent);
@@ -9682,9 +9683,9 @@ wxSize wxRichTextFieldTypeStandard::GetSize(wxRichTextField* WXUNUSED(obj), wxDC
     }
     else
     {
-        wxString label(m_label);
-        if (label.IsEmpty())
-            label = wxT("??");
+        std::string label(m_label);
+        if (label.empty())
+            label = "??";
         dc.SetFont(m_font);
         auto textExtent = dc.GetTextExtent(label, & maxDescent);
 

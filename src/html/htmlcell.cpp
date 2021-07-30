@@ -307,7 +307,7 @@ wxString wxHtmlCell::Dump(int indent) const
 
 wxIMPLEMENT_ABSTRACT_CLASS(wxHtmlWordCell, wxHtmlCell);
 
-wxHtmlWordCell::wxHtmlWordCell(const wxString& word, const wxDC& dc) : 
+wxHtmlWordCell::wxHtmlWordCell(const std::string& word, const wxDC& dc) : 
      m_Word(word)
 {
     wxCoord d;
@@ -321,7 +321,7 @@ wxHtmlWordCell::wxHtmlWordCell(const wxString& word, const wxDC& dc) :
 void wxHtmlWordCell::SetPreviousWord(wxHtmlWordCell *cell)
 {
     if ( cell && m_Parent == cell->m_Parent &&
-         !wxIsspace(cell->m_Word.Last()) && !wxIsspace(m_Word[0u]) )
+         !wxIsspace(cell->m_Word.back()) && !wxIsspace(m_Word.front()) )
     {
         m_allowLinebreak = false;
     }
@@ -457,7 +457,7 @@ void wxHtmlWordCell::Draw(wxDC& dc, int x, int y,
     {
         // Selection changing, we must draw the word piecewise:
         wxHtmlSelection *s = info.GetSelection();
-        wxString txt;
+        std::string txt;
         int ofs = 0;
 
         // NB: this is quite a hack: in order to compute selection boundaries
@@ -471,24 +471,24 @@ void wxHtmlWordCell::Draw(wxDC& dc, int x, int y,
         }
 
         int part1 = s->GetFromCell()==this ? s->GetFromCharacterPos() : 0;
-        int part2 = s->GetToCell()==this   ? s->GetToCharacterPos()   : m_Word.Length();
+        int part2 = s->GetToCell()==this   ? s->GetToCharacterPos()   : m_Word.length();
 
         if ( part1 > 0 )
         {
-            txt = m_Word.Mid(0, part1);
+            txt = m_Word.substr(0, part1);
             dc.DrawText(txt, x + m_PosX, y + m_PosY);
             ofs += s->GetExtentBeforeSelection();
         }
 
         SwitchSelState(dc, info, true);
 
-        txt = m_Word.Mid(part1, part2-part1);
+        txt = m_Word.substr(part1, part2-part1);
         dc.DrawText(txt, ofs + x + m_PosX, y + m_PosY);
 
         if ( (size_t)part2 < m_Word.length() )
         {
             SwitchSelState(dc, info, false);
-            txt = m_Word.Mid(part2);
+            txt = m_Word.substr(part2);
             dc.DrawText(txt, x + m_PosX + s->GetExtentBeforeSelectionEnd(), y + m_PosY);
         }
         else
@@ -514,7 +514,7 @@ void wxHtmlWordCell::Draw(wxDC& dc, int x, int y,
         const bool thisUnderlined = dc.GetFont().GetUnderlined();
         if ( prevUnderlined && thisUnderlined )
         {
-            dc.DrawText(wxS(" "), x + m_PosX - 1, y + m_PosY);
+            dc.DrawText(" ", x + m_PosX - 1, y + m_PosY);
         }
         info.SetCurrentUnderlined(thisUnderlined);
 
@@ -559,7 +559,7 @@ wxCursor wxHtmlWordCell::GetMouseCursor(wxHtmlWindowInterface *window) const
     }
 }
 
-wxString wxHtmlWordCell::ConvertToText(wxHtmlSelection *s) const
+std::string wxHtmlWordCell::ConvertToText(wxHtmlSelection *s) const
 {
     if ( s && (this == s->GetFromCell() || this == s->GetToCell()) )
     {
@@ -573,9 +573,9 @@ wxString wxHtmlWordCell::ConvertToText(wxHtmlSelection *s) const
         if ( s->AreFromToCharacterPosSet() )
         {
             const int part1 = s->GetFromCell()==this ? s->GetFromCharacterPos() : 0;
-            const int part2 = s->GetToCell()==this   ? s->GetToCharacterPos()   : m_Word.Length();
+            const int part2 = s->GetToCell()==this   ? s->GetToCharacterPos()   : m_Word.length();
             if ( part1 == part2 )
-                return wxEmptyString;
+                return "";
             return GetPartAsText(part1, part2);
         }
         //else: return the whole word below
@@ -584,12 +584,12 @@ wxString wxHtmlWordCell::ConvertToText(wxHtmlSelection *s) const
     return GetAllAsText();
 }
 
-wxString wxHtmlWordWithTabsCell::GetAllAsText() const
+const std::string& wxHtmlWordWithTabsCell::GetAllAsText() const
 {
     return m_wordOrig;
 }
 
-wxString wxHtmlWordWithTabsCell::GetPartAsText(int begin, int end) const
+std::string wxHtmlWordWithTabsCell::GetPartAsText(int begin, int end) const
 {
     // NB: The 'begin' and 'end' positions are in the _displayed_ text
     //     (stored in m_Word) and not in the text with tabs that should
@@ -607,7 +607,7 @@ wxString wxHtmlWordWithTabsCell::GetPartAsText(int begin, int end) const
     wxString sel;
 
     int pos = 0;
-    wxString::const_iterator i = m_wordOrig.begin();
+    std::string::const_iterator i = m_wordOrig.begin();
 
     // find the beginning of text to copy:
     for ( ; pos < begin; ++i )

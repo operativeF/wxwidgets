@@ -292,7 +292,7 @@ WXHWND wxToolTip::GetToolTipCtrl()
 
         // we want to show the tooltips always (even when the window is not
         // active) and we don't want to strip "&"s from them
-        ms_hwndTT = (WXHWND)::CreateWindowEx(exflags,
+        ms_hwndTT = (WXHWND)::CreateWindowExW(exflags,
                                              TOOLTIPS_CLASS,
                                              (LPCTSTR)nullptr,
                                              TTS_ALWAYSTIP | TTS_NOPREFIX,
@@ -538,7 +538,7 @@ void wxToolTip::DoSetTip(WXHWND hWnd)
     // repaint of the controls under it, see #10520 -- but this doesn't
     // happen if we reset it first
     // FIXME: Not sure about the necessity of const_cast here.
-    ti.lpszText = L'';
+    ti.lpszText = nullptr;
     SendTooltipMessage(GetToolTipCtrl(), TTM_UPDATETIPTEXT, &ti);
     boost::nowide::wstackstring stackText(m_text.c_str());
     ti.lpszText = stackText.get();
@@ -580,7 +580,7 @@ bool wxToolTip::AdjustMaxWidth()
         const wxString token = tokenizer.GetNextToken();
 
         SIZE sz;
-        if ( !::GetTextExtentPoint32(hdc, token.t_str(),
+        if ( !::GetTextExtentPoint32W(hdc, token.t_str(),
                                      token.length(), &sz) )
         {
             wxLogLastError(wxT("GetTextExtentPoint32"));

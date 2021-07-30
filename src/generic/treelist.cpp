@@ -979,7 +979,7 @@ int wxTreeListCtrl::GetColumnWidth(unsigned col) const
     return column->GetWidth();
 }
 
-int wxTreeListCtrl::WidthFor(const wxString& text) const
+int wxTreeListCtrl::WidthFor(const std::string& text) const
 {
     return GetTextExtent(text).x;
 }

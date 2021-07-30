@@ -74,6 +74,7 @@
 #include "wx/stack.h"
 #include "wx/sharedptr.h"
 
+#include "boost/nowide/convert.hpp"
 #include "fmt/core.h"
 
 // This must be the last header included to only affect the DEFINE_GUID()
@@ -3169,7 +3170,7 @@ class wxD2DFontData : public wxGraphicsObjectRefData
 public:
     wxD2DFontData(wxGraphicsRenderer* renderer, const wxFont& font, const wxRealPoint& dpi, const wxColor& color);
 
-    wxCOMPtr<IDWriteTextLayout> CreateTextLayout(const wxString& text) const;
+    wxCOMPtr<IDWriteTextLayout> CreateTextLayout(const std::string& text) const;
 
     wxD2DBrushData& GetBrushData() { return m_brushData; }
 
@@ -3322,7 +3323,7 @@ wxD2DFontData::wxD2DFontData(wxGraphicsRenderer* renderer, const wxFont& font, c
     wxCHECK_HRESULT_RET(hr);
 }
 
-wxCOMPtr<IDWriteTextLayout> wxD2DFontData::CreateTextLayout(const wxString& text) const
+wxCOMPtr<IDWriteTextLayout> wxD2DFontData::CreateTextLayout(const std::string& text) const
 {
     static constexpr FLOAT MAX_WIDTH = FLT_MAX;
     static constexpr FLOAT MAX_HEIGHT = FLT_MAX;
@@ -3332,7 +3333,7 @@ wxCOMPtr<IDWriteTextLayout> wxD2DFontData::CreateTextLayout(const wxString& text
     wxCOMPtr<IDWriteTextLayout> textLayout;
 
     hr = wxDWriteFactory()->CreateTextLayout(
-        text.c_str(),
+        boost::nowide::widen(text).c_str(),
         text.length(),
         m_textFormat,
         MAX_WIDTH,
@@ -3781,8 +3782,8 @@ class wxNullContext : public wxGraphicsContext
 {
 public:
     explicit wxNullContext(wxGraphicsRenderer* renderer) : wxGraphicsContext(renderer) {}
-    std::pair<double, double> GetTextExtent(const wxString&, double*, double*) const override { return {}; }
-    std::vector<double> GetPartialTextExtents(const wxString&) const override { return {}; }
+    std::pair<double, double> GetTextExtent(const std::string&, double*, double*) const override { return {}; }
+    std::vector<double> GetPartialTextExtents(const std::string&) const override { return {}; }
     void Clip(const wxRegion&) override {}
     void Clip(double, double, double, double) override {}
     void ResetClip() override {}
@@ -3809,7 +3810,7 @@ public:
     void Flush() override {}
 
 protected:
-    void DoDrawText(const wxString&, double, double) override {}
+    void DoDrawText(const std::string&, double, double) override {}
 };
 
 class wxD2DMeasuringContext : public wxNullContext
@@ -3817,30 +3818,30 @@ class wxD2DMeasuringContext : public wxNullContext
 public:
     explicit wxD2DMeasuringContext(wxGraphicsRenderer* renderer) : wxNullContext(renderer) {}
 
-    std::pair<double, double> GetTextExtent(const wxString& str, double* descent, double* externalLeading) const override
+    std::pair<double, double> GetTextExtent(const std::string& str, double* descent, double* externalLeading) const override
     {
         return GetTextExtent(wxGetD2DFontData(m_font), str, descent, externalLeading);
     }
 
-    std::vector<double> GetPartialTextExtents(const wxString& text) const override
+    std::vector<double> GetPartialTextExtents(const std::string& text) const override
     {
         return GetPartialTextExtents(wxGetD2DFontData(m_font), text);
     }
 
-    static std::vector<double> GetPartialTextExtents(wxD2DFontData* fontData, const wxString& text)
+    static std::vector<double> GetPartialTextExtents(wxD2DFontData* fontData, const std::string& text)
     {
         std::vector<double> widths;
 
-        for (unsigned int i = 0; i < text.Length(); ++i)
+        for (unsigned int i = 0; i < text.length(); ++i)
         {
-            auto width = GetTextExtent(fontData, text.SubString(0, i), nullptr, nullptr).first;
+            auto width = GetTextExtent(fontData, text.substr(0, i), nullptr, nullptr).first;
             widths.push_back(width);
         }
 
         return widths;
     }
 
-    static std::pair<double, double> GetTextExtent(wxD2DFontData* fontData, const wxString& str, double* descent, double* externalLeading)
+    static std::pair<double, double> GetTextExtent(wxD2DFontData* fontData, const std::string& str, double* descent, double* externalLeading)
     {
         wxCOMPtr<IDWriteTextLayout> textLayout = fontData->CreateTextLayout(str);
         wxCOMPtr<IDWriteFont> font = fontData->GetFont();
@@ -3947,11 +3948,11 @@ public:
     void PopState() override;
 
     std::pair<double, double> GetTextExtent(
-        const wxString& str,
+        const std::string& str,
         double* descent,
         double* externalLeading) const override;
 
-    std::vector<double> GetPartialTextExtents(const wxString& text) const override;
+    std::vector<double> GetPartialTextExtents(const std::string& text) const override;
 
     bool ShouldOffset() const override;
 
@@ -3967,7 +3968,7 @@ public:
     }
 
 private:
-    void DoDrawText(const wxString& str, double x, double y) override;
+    void DoDrawText(const std::string& str, double x, double y) override;
 
     void EnsureInitialized();
 
@@ -4682,7 +4683,7 @@ void wxD2DContext::PopState()
 }
 
 std::pair<double, double> wxD2DContext::GetTextExtent(
-    const wxString& str,
+    const std::string& str,
     double* descent,
     double* externalLeading) const
 {
@@ -4694,7 +4695,7 @@ std::pair<double, double> wxD2DContext::GetTextExtent(
         wxGetD2DFontData(m_font), str, descent, externalLeading);
 }
 
-std::vector<double> wxD2DContext::GetPartialTextExtents(const wxString& text) const
+std::vector<double> wxD2DContext::GetPartialTextExtents(const std::string& text) const
 {
     //wxCHECK_RET(!m_font.IsNull(),
     //    wxS("wxD2DContext::GetPartialTextExtents - no valid font set"));
@@ -4726,7 +4727,7 @@ bool wxD2DContext::ShouldOffset() const
     return fmod(double(penData->GetWidth()), 2.0) == 1.0;
 }
 
-void wxD2DContext::DoDrawText(const wxString& str, double x, double y)
+void wxD2DContext::DoDrawText(const std::string& str, double x, double y)
 {
     wxCHECK_RET(!m_font.IsNull(),
         wxS("wxD2DContext::DrawText - no valid font set"));
@@ -5028,10 +5029,10 @@ public :
 
     wxGraphicsFont CreateFont(const wxFont& font, const wxColour& col) override;
 
-    wxGraphicsFont CreateFont(
-        double sizeInPixels, const wxString& facename,
-        int flags = wxFONTFLAG_DEFAULT,
-        const wxColour& col = *wxBLACK) override;
+    wxGraphicsFont CreateFont(double sizeInPixels,
+                              const std::string& facename,
+                              int flags = wxFONTFLAG_DEFAULT,
+                              const wxColour& col = *wxBLACK) override;
 
     wxGraphicsFont CreateFontAtDPI(const wxFont& font,
                                            const wxRealPoint& dpi,
@@ -5043,7 +5044,7 @@ public :
     // create a sub-image from a native image representation
     wxGraphicsBitmap CreateSubBitmap(const wxGraphicsBitmap& bitmap, double x, double y, double w, double h) override;
 
-    wxString GetName() const override;
+    std::string GetName() const override;
     void GetVersion(int* major, int* minor, int* micro) const override;
 
     ID2D1Factory* GetD2DFactory();
@@ -5280,10 +5281,10 @@ wxGraphicsFont wxD2DRenderer::CreateFont(const wxFont& font, const wxColour& col
     return CreateFontAtDPI(font, wxRealPoint(), col);
 }
 
-wxGraphicsFont wxD2DRenderer::CreateFont(
-    double sizeInPixels, const wxString& facename,
-    int flags,
-    const wxColour& col)
+wxGraphicsFont wxD2DRenderer::CreateFont(double sizeInPixels,
+                                         const std::string& facename,
+                                         int flags,
+                                         const wxColour& col)
 {
     // Use the same DPI as wxFont will use in SetPixelSize, so these cancel
     // each other out and we are left with the actual pixel size.
@@ -5326,7 +5327,7 @@ wxGraphicsBitmap wxD2DRenderer::CreateSubBitmap(const wxGraphicsBitmap& bitmap, 
     return bmpRes;
 }
 
-wxString wxD2DRenderer::GetName() const
+std::string wxD2DRenderer::GetName() const
 {
     return "direct2d";
 }

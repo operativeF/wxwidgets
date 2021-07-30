@@ -172,7 +172,7 @@ public:
     wxString GetItemText(long item, int col = 0) const;
 
     // Sets the item text
-    void SetItemText(long item, const wxString& str);
+    void SetItemText(long item, const std::string& str);
 
     // Gets the item data
     wxUIntPtr GetItemData(long item) const;

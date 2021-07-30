@@ -214,7 +214,7 @@ TEST_CASE("Bounding box tests.")
 
     SUBCASE("DrawRotatedText")
     {
-        wxString text("vertical");
+        std::string text("vertical");
         auto textExtent = m_gcdc->GetTextExtent(text);
 
         m_gcdc->DrawRotatedText(text, 43, 22, -90);
@@ -224,7 +224,7 @@ TEST_CASE("Bounding box tests.")
 
     SUBCASE("DrawText")
     {
-        wxString text("H");
+        std::string text("H");
         auto textExtent = m_gcdc->GetTextExtent(text);
 
         m_gcdc->DrawText(text, 3, 3);

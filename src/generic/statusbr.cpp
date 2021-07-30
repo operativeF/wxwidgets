@@ -202,7 +202,7 @@ bool wxStatusBarGeneric::ShowsSizeGrip() const
 
 void wxStatusBarGeneric::DrawFieldText(wxDC& dc, const wxRect& rect, int i, int textHeight)
 {
-    wxString text(GetStatusText(i));
+    std::string text(GetStatusText(i));
     if (text.empty())
         return;     // optimization
 

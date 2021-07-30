@@ -114,7 +114,7 @@ public:
         Create(image, cursor);
     }
 
-    wxGenericDragImage(const wxString& str, const wxCursor& cursor = wxNullCursor)
+    wxGenericDragImage(const std::string& str, const wxCursor& cursor = wxNullCursor)
     {
         Init();
 
@@ -166,7 +166,7 @@ public:
     bool Create(const wxIcon& image, const wxCursor& cursor = wxNullCursor);
 
     // Create a drag image from a string and optional cursor
-    bool Create(const wxString& str, const wxCursor& cursor = wxNullCursor);
+    bool Create(const std::string& str, const wxCursor& cursor = wxNullCursor);
 
 #if wxUSE_TREECTRL
     // Create a drag image for the given tree control item

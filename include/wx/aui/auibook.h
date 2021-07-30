@@ -94,7 +94,7 @@ class WXDLLIMPEXP_AUI wxAuiNotebookPage
 {
 public:
     wxWindow* window;     // page's associated window
-    wxString caption;     // caption displayed on the tab
+    std::string caption;  // caption displayed on the tab
     wxString tooltip;     // tooltip displayed when hovering over tab title
     wxBitmap bitmap;      // tab's bitmap
     wxRect rect;          // tab's hit rectangle

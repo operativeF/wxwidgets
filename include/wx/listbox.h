@@ -76,7 +76,7 @@ public:
 
     // a combination of Append() and EnsureVisible(): appends the item to the
     // listbox and ensures that it is visible i.e. not scrolled out of view
-    void AppendAndEnsureVisible(const wxString& s);
+    void AppendAndEnsureVisible(const std::string& s);
 
     // return true if the listbox allows multiple selection
     bool HasMultipleSelection() const

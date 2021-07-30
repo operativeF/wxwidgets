@@ -320,7 +320,7 @@ private:
     wxRect m_rightArrowRect;
 
     // the week day names
-    wxString m_weekdays[7];
+    std::string m_weekdays[7];
 
     // true if SetDate() is being called as the result of changing the year in
     // the year control

@@ -499,9 +499,9 @@ void wxRichTextFontPreviewCtrl::OnPaint(wxPaintEvent& WXUNUSED(event))
         // Calculate vertical and horizontal centre
         wxCoord w = 0, h = 0;
 
-        wxString text(_("ABCDEFGabcdefg12345"));
+        std::string text(_("ABCDEFGabcdefg12345").ToStdString());
         if (GetTextEffects() & wxTEXT_ATTR_EFFECT_CAPITALS)
-            text.MakeUpper();
+            wx::utils::ToUpper(text);
 
         dc.GetTextExtent( text, &w, &h);
         int cx = wxMax(2, (size.x/2) - (w/2));

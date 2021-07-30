@@ -1544,10 +1544,10 @@ wxPoint wxTextCtrl::DoPositionToCoords(long pos) const
                 return wxDefaultPosition;
             }
 
-            wxString prevChar = GetRange(pos - 1, pos);
+            std::string prevChar = GetRange(pos - 1, pos);
             wxSize prevCharSize = GetTextExtent(prevChar);
 
-            if ( prevChar == wxT("\n" ))
+            if ( prevChar == "\n" )
             {
                 // 'pos' is at the beginning of a new line so its X coordinate
                 // should be the same as X coordinate of the first character of

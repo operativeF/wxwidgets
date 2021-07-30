@@ -69,7 +69,7 @@ wxBitmap wxAuiBitmapFromBits(const unsigned char bits[], int w, int h,
 void wxAuiScaleBitmap(wxBitmap& bmp, double scale);
 float wxAuiGetColourContrast(const wxColour& c1, const wxColour& c2);
 
-wxString wxAuiChopText(wxDC& dc, const wxString& text, int max_size);
+std::string wxAuiChopText(wxDC& dc, const std::string& text, int max_size);
 
 // Check if the color has sufficient contrast ratio (4.5 recommended)
 // (based on https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast7.html)
@@ -340,9 +340,9 @@ void wxAuiGenericTabArt::DrawTab(wxDC& dc,
     wxCoord texty;
 
     // if the caption is empty, measure some temporary text
-    wxString caption = page.caption;
+    std::string caption = page.caption;
     if (caption.empty())
-        caption = wxT("Xj");
+        caption = "Xj";
 
     dc.SetFont(m_selectedFont);
     dc.GetTextExtent(caption, &selected_textx, &selected_texty);
@@ -585,7 +585,7 @@ void wxAuiGenericTabArt::DrawTab(wxDC& dc,
         close_button_width = bmp.GetScaledWidth();
     }
 
-    wxString draw_text = wxAuiChopText(dc,
+    std::string draw_text = wxAuiChopText(dc,
                           caption,
                           tab_width - (text_offset-tab_x) - close_button_width);
 
@@ -612,11 +612,11 @@ void wxAuiGenericTabArt::DrawTab(wxDC& dc,
             focusRectBitmap = wxRect(bitmap_offset, drawn_tab_yoff + (drawn_tab_height/2) - (page.bitmap.GetScaledHeight()/2),
                                             page.bitmap.GetScaledWidth(), page.bitmap.GetScaledHeight());
 
-        if (page.bitmap.IsOk() && draw_text.IsEmpty())
+        if (page.bitmap.IsOk() && draw_text.empty())
             focusRect = focusRectBitmap;
-        else if (!page.bitmap.IsOk() && !draw_text.IsEmpty())
+        else if (!page.bitmap.IsOk() && !draw_text.empty())
             focusRect = focusRectText;
-        else if (page.bitmap.IsOk() && !draw_text.IsEmpty())
+        else if (page.bitmap.IsOk() && !draw_text.empty())
             focusRect = focusRectText.Union(focusRectBitmap);
 
         focusRect.Inflate(2, 2);
@@ -653,7 +653,7 @@ int wxAuiGenericTabArt::GetAdditionalBorderSpace(wxWindow* WXUNUSED(wnd))
 
 wxSize wxAuiGenericTabArt::GetTabSize(wxDC& dc,
                                       wxWindow* wnd,
-                                      const wxString& caption,
+                                      const std::string& caption,
                                       const wxBitmap& bitmap,
                                       bool WXUNUSED(active),
                                       int close_button_state,
@@ -664,7 +664,7 @@ wxSize wxAuiGenericTabArt::GetTabSize(wxDC& dc,
     dc.SetFont(m_measuringFont);
     dc.GetTextExtent(caption, &measured_textx, &measured_texty);
 
-    dc.GetTextExtent(wxT("ABCDEFXj"), &tmp, &measured_texty);
+    dc.GetTextExtent("ABCDEFXj", &tmp, &measured_texty);
 
     // add padding around the text
     wxCoord tab_width = measured_textx;
@@ -851,7 +851,7 @@ int wxAuiGenericTabArt::GetBestTabCtrlSize(wxWindow* wnd,
         int x_ext = 0;
         wxSize s = GetTabSize(dc,
                               wnd,
-                              wxT("ABCDEFGHIj"),
+                              "ABCDEFGHIj",
                               bmp,
                               true,
                               wxAUI_BUTTON_STATE_HIDDEN,
@@ -1024,9 +1024,9 @@ void wxAuiSimpleTabArt::DrawTab(wxDC& dc,
     wxCoord textx, texty;
 
     // if the caption is empty, measure some temporary text
-    wxString caption = page.caption;
+    std::string caption = page.caption;
     if (caption.empty())
-        caption = wxT("Xj");
+        caption = "Xj";
 
     dc.SetFont(m_selectedFont);
     dc.GetTextExtent(caption, &selected_textx, &selected_texty);
@@ -1129,7 +1129,7 @@ void wxAuiSimpleTabArt::DrawTab(wxDC& dc,
         text_offset = tab_x + tab_height;
 
     // chop text if necessary
-    wxString draw_text = wxAuiChopText(dc,
+    std::string draw_text = wxAuiChopText(dc,
                           caption,
                           tab_width - (text_offset-tab_x) - close_button_width);
 
@@ -1185,7 +1185,7 @@ int wxAuiSimpleTabArt::GetAdditionalBorderSpace(wxWindow* WXUNUSED(wnd))
 
 wxSize wxAuiSimpleTabArt::GetTabSize(wxDC& dc,
                                      wxWindow* wnd,
-                                     const wxString& caption,
+                                     const std::string& caption,
                                      const wxBitmap& WXUNUSED(bitmap),
                                      bool WXUNUSED(active),
                                      int close_button_state,
@@ -1336,7 +1336,7 @@ int wxAuiSimpleTabArt::GetBestTabCtrlSize(wxWindow* wnd,
     int x_ext = 0;
     wxSize s = GetTabSize(dc,
                           wnd,
-                          wxT("ABCDEFGHIj"),
+                          "ABCDEFGHIj",
                           wxNullBitmap,
                           true,
                           wxAUI_BUTTON_STATE_HIDDEN,

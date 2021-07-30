@@ -160,7 +160,7 @@ bool wxDragImage::Create(const wxIcon& image, const wxCursor& cursor)
 }
 
 // Create a drag image from a string and optional cursor
-bool wxDragImage::Create(const wxString& str, const wxCursor& cursor)
+bool wxDragImage::Create(const std::string& str, const wxCursor& cursor)
 {
     wxFont font(wxSystemSettings::GetFont(wxSYS_DEFAULT_GUI_FONT));
 
@@ -211,7 +211,7 @@ bool wxDragImage::Create(const wxTreeCtrl& treeCtrl, wxTreeItemId& id)
     if ( !m_hImageList )
     {
         // fall back on just the item text if there is no image
-        return Create(treeCtrl.GetItemText(id));
+        return Create(treeCtrl.GetItemText(id).ToStdString());
     }
 
     return true;
@@ -233,7 +233,7 @@ bool wxDragImage::Create(const wxListCtrl& listCtrl, long id)
     if ( !m_hImageList )
     {
         // as for wxTreeCtrl, fall back on dragging just the item text
-        return Create(listCtrl.GetItemText(id));
+        return Create(listCtrl.GetItemText(id).ToStdString());
     }
 
     return true;

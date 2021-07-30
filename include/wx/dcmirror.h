@@ -189,13 +189,13 @@ protected:
         m_dc.DoDrawBitmap(bmp, GetX(x, y), GetY(x, y), useMask);
     }
 
-    void DoDrawText(const wxString& text, wxCoord x, wxCoord y) override
+    void DoDrawText(const std::string& text, wxCoord x, wxCoord y) override
     {
         // this is never mirrored
         m_dc.DoDrawText(text, x, y);
     }
 
-    void DoDrawRotatedText(const wxString& text,
+    void DoDrawRotatedText(const std::string& text,
                                    wxCoord x, wxCoord y, double angle) override
     {
         // this is never mirrored
@@ -261,7 +261,7 @@ protected:
         m_dc.DoSetClippingRegion(GetX(x, y), GetY(x, y), GetX(w, h), GetY(w, h));
     }
 
-    wxSize DoGetTextExtent(const wxString& string,
+    wxSize DoGetTextExtent(const std::string& string,
                                  wxCoord *descent = nullptr,
                                  wxCoord *externalLeading = nullptr,
                                  const wxFont *theFont = nullptr) const override

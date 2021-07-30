@@ -216,14 +216,14 @@ private:
 
     void DoDrawRectangle(wxCoord x, wxCoord y, wxCoord width, wxCoord height) override;
 
-    void DoDrawRotatedText(const wxString& text, wxCoord x, wxCoord y,
+    void DoDrawRotatedText(const std::string& text, wxCoord x, wxCoord y,
                                    double angle) override;
 
     void DoDrawRoundedRectangle(wxCoord x, wxCoord y,
                                         wxCoord width, wxCoord height,
                                         double radius) override;
 
-    void DoDrawText(const wxString& text, wxCoord x, wxCoord y) override;
+    void DoDrawText(const std::string& text, wxCoord x, wxCoord y) override;
 
     bool DoFloodFill(wxCoord WXUNUSED(x), wxCoord WXUNUSED(y),
                              const wxColour& WXUNUSED(col),
@@ -248,7 +248,7 @@ private:
         return {m_width, m_height};
     }
 
-    wxSize DoGetTextExtent(const wxString& string,
+    wxSize DoGetTextExtent(const std::string& string,
                                  wxCoord* descent = nullptr,
                                  wxCoord* externalLeading = nullptr,
                                  const wxFont* theFont = nullptr) const override;

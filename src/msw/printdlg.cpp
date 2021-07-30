@@ -31,13 +31,15 @@
 
 #include <cstdlib>
 
+#include "boost/nowide/stackstring.hpp"
+
 // smart pointer like class using OpenPrinter and ClosePrinter
 class WinPrinter
 {
 public:
     WinPrinter() = default;
 
-    explicit WinPrinter( const wxString& printerName )
+    explicit WinPrinter( const std::string& printerName )
     {
         Open( printerName );
     }
@@ -50,10 +52,11 @@ public:
         Close();
     }
 
-    BOOL Open( const wxString& printerName, LPPRINTER_DEFAULTS pDefault=(LPPRINTER_DEFAULTS)nullptr )
+    BOOL Open( const std::string& printerName, LPPRINTER_DEFAULTS pDefault=(LPPRINTER_DEFAULTS)nullptr )
     {
         Close();
-        return OpenPrinter( wxMSW_CONV_LPTSTR(printerName), &m_hPrinter, pDefault );
+        boost::nowide::wstackstring stackPrinterName(printerName.c_str());
+        return ::OpenPrinterW( stackPrinterName.get(), &m_hPrinter, pDefault );
     }
 
     BOOL Close()
@@ -351,7 +354,7 @@ bool wxWindowsPrintNativeData::TransferTo( wxPrintData &data )
         // m_printData.SetPortName((LPSTR)lpDevNames + lpDevNames->wDriverOffset);
 
         // Get the printer name
-        wxString printerName = (LPTSTR)lpDevNames + lpDevNames->wDeviceOffset;
+        std::string printerName = boost::nowide::narrow((LPWSTR)lpDevNames + lpDevNames->wDeviceOffset);
 
         // Not sure if we should check for this mismatch
 //            wxASSERT_MSG( (m_printerName.empty() || (devName == m_printerName)), "Printer name obtained from DEVMODE and DEVNAMES were different!");
@@ -474,7 +477,8 @@ void wxWindowsPrintNativeData::InitializeDevMode(const wxString& printerName, Wi
 bool wxWindowsPrintNativeData::TransferFrom( const wxPrintData &data )
 {
     WinPrinter printer;
-    LPTSTR szPrinterName = wxMSW_CONV_LPTSTR(data.GetPrinterName());
+    auto printerName = boost::nowide::widen(data.GetPrinterName());
+    LPWSTR szPrinterName = &printerName[0];
 
     if (!m_devMode)
         InitializeDevMode(data.GetPrinterName(), &printer);
@@ -650,7 +654,7 @@ bool wxWindowsPrintNativeData::TransferFrom( const wxPrintData &data )
             // Merge the new settings with the old.
             // This gives the driver an opportunity to update any private
             // portions of the DevMode structure.
-            DocumentProperties( nullptr,
+            DocumentPropertiesW( nullptr,
                 printer,
                 szPrinterName,
                 (LPDEVMODE)hDevMode, // Reuse our buffer for output.
@@ -666,7 +670,7 @@ bool wxWindowsPrintNativeData::TransferFrom( const wxPrintData &data )
     }
 
     // TODO: I hope it's OK to pass some empty strings to DEVNAMES.
-    m_devNames = wxCreateDevNames(wxEmptyString, data.GetPrinterName(), wxEmptyString);
+    m_devNames = wxCreateDevNames("", data.GetPrinterName(), "");
 
     return true;
 }

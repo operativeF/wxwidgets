@@ -664,7 +664,7 @@ unsigned int wxVListBoxComboPopup::GetCount() const
     return m_strings.size();
 }
 
-wxString wxVListBoxComboPopup::GetString( int item ) const
+std::string wxVListBoxComboPopup::GetString( int item ) const
 {
     return m_strings[item];
 }
@@ -742,7 +742,7 @@ void wxVListBoxComboPopup::CalcWidths()
 
                 if ( x < 0 )
                 {
-                    const wxString& text = m_strings[i];
+                    const std::string& text = m_strings[i];
 
                     // To make sure performance won't suck in extreme scenarios,
                     // we'll estimate length after some arbitrary number of items
@@ -1145,7 +1145,7 @@ void wxOwnerDrawnComboBox::OnDrawItem( wxDC& dc,
 {
     if ( flags & wxODCB_PAINTING_CONTROL )
     {
-        wxString text;
+        std::string text;
 
         if ( !ShouldUseHintText() )
         {

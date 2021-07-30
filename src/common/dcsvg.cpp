@@ -653,12 +653,12 @@ void wxSVGFileDCImpl::DoDrawPoint(wxCoord x, wxCoord y)
     write(s);
 }
 
-void wxSVGFileDCImpl::DoDrawText(const wxString& text, wxCoord x, wxCoord y)
+void wxSVGFileDCImpl::DoDrawText(const std::string& text, wxCoord x, wxCoord y)
 {
     DoDrawRotatedText(text, x, y, 0.0);
 }
 
-void wxSVGFileDCImpl::DoDrawRotatedText(const wxString& sText, wxCoord x, wxCoord y, double angle)
+void wxSVGFileDCImpl::DoDrawRotatedText(const std::string& sText, wxCoord x, wxCoord y, double angle)
 {
     //known bug; if the font is drawn in a scaled DC, it will not behave exactly as wxMSW
     NewGraphicsIfNeeded();
@@ -722,7 +722,9 @@ void wxSVGFileDCImpl::DoDrawRotatedText(const wxString& sText, wxCoord x, wxCoor
     style += wxS(" xml:space=\"preserve\"");
 
     // Draw all text line by line
-    const std::vector<wxString> lines = wxSplit(sText, '\n', '\0');
+    // FIXME: use string
+    wxString wxsText = std::string(sText);
+    const std::vector<wxString> lines = wxSplit(wxsText, '\n', '\0');
     for (size_t lineNum = 0; lineNum < lines.size(); lineNum++)
     {
         const double xRect = x + lineNum * dx;
@@ -731,7 +733,7 @@ void wxSVGFileDCImpl::DoDrawRotatedText(const wxString& sText, wxCoord x, wxCoor
         // convert x,y to SVG text x,y (the coordinates of the text baseline)
         wxCoord desc;
         wxString const& line = lines[lineNum];
-        auto textExtents = DoGetTextExtent(line, &desc);
+        auto textExtents = DoGetTextExtent(line.ToStdString(), &desc);
         const double xText = xRect + (textExtents.y - desc) * sin(rad);
         const double yText = yRect + (textExtents.y - desc) * cos(rad);
 
@@ -1174,7 +1176,7 @@ void wxSVGFileDCImpl::DestroyClippingRegion()
     wxDCImpl::DestroyClippingRegion();
 }
 
-wxSize wxSVGFileDCImpl::DoGetTextExtent(const wxString& string,
+wxSize wxSVGFileDCImpl::DoGetTextExtent(const std::string& string,
                                       wxCoord* descent,
                                       wxCoord* externalLeading,
                                       const wxFont* theFont) const

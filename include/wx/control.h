@@ -120,7 +120,7 @@ public:
     wxSize GetSizeFromTextSize(const wxSize& tsize) const
         { return DoGetSizeFromTextSize(tsize.x, tsize.y); }
 
-    wxSize GetSizeFromText(const wxString& text) const
+    wxSize GetSizeFromText(const std::string& text) const
     {
         return GetSizeFromTextSize(GetTextExtent(text).x);
     }

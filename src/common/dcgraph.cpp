@@ -1129,7 +1129,7 @@ bool wxGCDCImpl::DoStretchBlit(
     return retval;
 }
 
-void wxGCDCImpl::DoDrawRotatedText(const wxString& text, wxCoord x, wxCoord y,
+void wxGCDCImpl::DoDrawRotatedText(const std::string& text, wxCoord x, wxCoord y,
                                double angle)
 {
     wxCHECK_RET( IsOk(), wxT("wxGCDC(cg)::DoDrawRotatedText - invalid DC") );
@@ -1161,15 +1161,17 @@ void wxGCDCImpl::DoDrawRotatedText(const wxString& text, wxCoord x, wxCoord y,
     const double dy = heightLine * cos(rad);
 
     // Draw all text line by line
-    const std::vector<wxString> lines = wxSplit(text, '\n', '\0');
+    // FIXME: string
+    auto wxText = wxString{std::string{text}};
+    const std::vector<wxString> lines = wxSplit(wxText, '\n', '\0');
     for ( size_t lineNum = 0; lineNum < lines.size(); lineNum++ )
     {
         // Calculate origin for each line to avoid accumulation of
         // rounding errors.
         if ( m_backgroundMode == wxBrushStyle::Transparent )
-            m_graphicContext->DrawText( lines[lineNum], x + wxRound(lineNum*dx), y + wxRound(lineNum*dy), wxDegToRad(angle ));
+            m_graphicContext->DrawText( lines[lineNum].ToStdString(), x + wxRound(lineNum*dx), y + wxRound(lineNum*dy), wxDegToRad(angle ));
         else
-            m_graphicContext->DrawText( lines[lineNum], x + wxRound(lineNum*dx), y + wxRound(lineNum*dy), wxDegToRad(angle ), m_graphicContext->CreateBrush(m_textBackgroundColour) );
+            m_graphicContext->DrawText( lines[lineNum].ToStdString(), x + wxRound(lineNum*dx), y + wxRound(lineNum*dy), wxDegToRad(angle ), m_graphicContext->CreateBrush(m_textBackgroundColour) );
    }
 
     // call the bounding box by adding all four vertices of the rectangle
@@ -1187,7 +1189,7 @@ void wxGCDCImpl::DoDrawRotatedText(const wxString& text, wxCoord x, wxCoord y,
     CalcBoundingBox(x + wxCoord(w*cos(rad)), y - wxCoord(w*sin(rad)));
 }
 
-void wxGCDCImpl::DoDrawText(const wxString& str, wxCoord x, wxCoord y)
+void wxGCDCImpl::DoDrawText(const std::string& str, wxCoord x, wxCoord y)
 {
     wxCHECK_RET( IsOk(), "wxGCDC::DoDrawText - invalid DC" );
 
@@ -1200,7 +1202,7 @@ void wxGCDCImpl::DoDrawText(const wxString& str, wxCoord x, wxCoord y)
     // instead reuse the generic DrawLabel() method to render them. Of course,
     // DrawLabel() itself will call back to us but with single line strings
     // only so there won't be any infinite recursion here.
-    if ( str.find('\n') != wxString::npos )
+    if ( str.find('\n') != std::string::npos )
     {
         GetOwner()->DrawLabel(str, wxRect(x, y, 0, 0));
         return;
@@ -1232,7 +1234,7 @@ bool wxGCDCImpl::CanGetTextExtent() const
     return true;
 }
 
-wxSize wxGCDCImpl::DoGetTextExtent( const wxString &str,
+wxSize wxGCDCImpl::DoGetTextExtent( const std::string& str,
                               wxCoord *descent, wxCoord *externalLeading ,
                               const wxFont *theFont ) const
 {
@@ -1268,9 +1270,9 @@ wxSize wxGCDCImpl::DoGetTextExtent( const wxString &str,
     return { wxRound(width), wxRound(height) };
 }
 
-std::vector<int> wxGCDCImpl::DoGetPartialTextExtents(const wxString& text) const
+std::vector<int> wxGCDCImpl::DoGetPartialTextExtents(const std::string& text) const
 {
-    if ( text.IsEmpty() )
+    if ( text.empty() )
         return {};
 
     std::vector<double> widthsD = m_graphicContext->GetPartialTextExtents(text);
@@ -1284,12 +1286,12 @@ std::vector<int> wxGCDCImpl::DoGetPartialTextExtents(const wxString& text) const
 
 wxCoord wxGCDCImpl::GetCharWidth() const
 {
-    return DoGetTextExtent( wxT("g"), nullptr, nullptr, nullptr ).x;
+    return DoGetTextExtent( "g", nullptr, nullptr, nullptr ).x;
 }
 
 wxCoord wxGCDCImpl::GetCharHeight() const
 {
-    return DoGetTextExtent( wxT("g"), nullptr, nullptr, nullptr ).y;
+    return DoGetTextExtent( "g", nullptr, nullptr, nullptr ).y;
 }
 
 void wxGCDCImpl::Clear()

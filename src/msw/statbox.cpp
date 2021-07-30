@@ -162,7 +162,7 @@ wxSize wxStaticBox::DoGetBestSize() const
     // Calculate the size needed by the label
     wxSize char_size = wxGetCharSize(GetHWND(), GetFont());
 
-    int wBox = GetTextExtent(GetLabelText(wxGetWindowText(m_hWnd))).x;
+    int wBox = GetTextExtent(GetLabelText(wxGetWindowText(m_hWnd)).ToStdString()).x;
 
     wBox += 3 * char_size.x;
     int hBox = EDIT_HEIGHT_FROM_CHAR_HEIGHT(char_size.y);
@@ -533,7 +533,7 @@ void wxStaticBox::PaintForeground(wxDC& dc, const RECT&)
         }
 
         // Get the font extent
-        auto textExtent = dc.GetTextExtent(wxStripMenuCodes(label, wxStrip_Mnemonics));
+        auto textExtent = dc.GetTextExtent(wxStripMenuCodes(label, wxStrip_Mnemonics).ToStdString());
 
         // first we need to correctly paint the background of the label
         // as Windows ignores the brush offset when doing it

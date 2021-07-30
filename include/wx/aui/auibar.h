@@ -167,8 +167,8 @@ public:
     void SetSizerItem(wxSizerItem* s) { m_sizerItem = s; }
     wxSizerItem* GetSizerItem() const { return m_sizerItem; }
 
-    void SetLabel(const wxString& s) { m_label = s; }
-    const wxString& GetLabel() const { return m_label; }
+    void SetLabel(const std::string& s) { m_label = s; }
+    const std::string& GetLabel() const { return m_label; }
 
     void SetBitmap(const wxBitmap& bmp) { m_bitmap = bmp; }
     const wxBitmap& GetBitmap() const { return m_bitmap; }
@@ -224,7 +224,7 @@ public:
 private:
 
     wxWindow* m_window;          // item's associated window
-    wxString m_label;            // label displayed on the item
+    std::string m_label;         // label displayed on the item
     wxBitmap m_bitmap;           // item's bitmap
     wxBitmap m_disabledBitmap;  // item's disabled bitmap
     wxBitmap m_hoverBitmap;     // item's hover bitmap
@@ -650,7 +650,7 @@ protected:
 
     int GetOverflowState() const;
     wxRect GetOverflowRect() const;
-    wxSize GetLabelSize(const wxString& label);
+    wxSize GetLabelSize(const std::string& label);
     wxAuiToolBarItem* FindToolByPositionWithPacking(wxCoord x, wxCoord y) const;
 
 protected: // handlers

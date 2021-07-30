@@ -158,7 +158,7 @@ public:
     // trivial accessors
     wxArrayGenericTreeItems& GetChildren() { return m_children; }
 
-    const wxString& GetText() const { return m_text; }
+    const std::string& GetText() const { return m_text; }
     int GetImage(wxTreeItemIcon which = wxTreeItemIcon_Normal) const
         { return m_images[which]; }
     wxTreeItemData *GetData() const { return m_data; }
@@ -325,7 +325,7 @@ private:
     // since there can be very many of these, we save size by chosing
     // the smallest representation for the elements and by ordering
     // the members to avoid padding.
-    wxString            m_text;         // label to be rendered for item
+    std::string         m_text;         // label to be rendered for item
     int                 m_widthText{-1};
     int                 m_heightText{-1};
 
@@ -542,7 +542,7 @@ void wxTreeTextCtrl::OnKeyUp( wxKeyEvent &event )
         wxPoint myPos = GetPosition();
         wxSize mySize = GetSize();
 
-        auto sx = GetTextExtent(GetValue() + wxT("M")).x;
+        auto sx = GetTextExtent(GetValue() + 'M').x;
         if (myPos.x + sx > parentSize.x)
             sx = parentSize.x - myPos.x;
         if (mySize.x > sx)
@@ -1141,7 +1141,7 @@ wxFont wxGenericTreeCtrl::GetItemFont(const wxTreeItemId& item) const
 }
 
 void
-wxGenericTreeCtrl::SetItemText(const wxTreeItemId& item, const wxString& text)
+wxGenericTreeCtrl::SetItemText(const wxTreeItemId& item, const std::string& text)
 {
     wxCHECK_RET( item.IsOk(), wxT("invalid tree item") );
 

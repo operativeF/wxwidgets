@@ -174,7 +174,7 @@ static void DrawGradientRectangle(wxDC& dc,
     }
 }
 
-wxString wxAuiChopText(wxDC& dc, const wxString& text, int max_size)
+std::string wxAuiChopText(wxDC& dc, const std::string& text, int max_size)
 {
     wxCoord x, y;
 
@@ -184,10 +184,10 @@ wxString wxAuiChopText(wxDC& dc, const wxString& text, int max_size)
         return text;
 
     size_t last_good_length = 0;
-    for (size_t i = 0; i < text.Length(); ++i)
+    for (size_t i = 0; i < text.length(); ++i)
     {
-        wxString s = text.Left(i);
-        s += wxT("...");
+        std::string s = text.substr(0, i);
+        s += "...";
 
         dc.GetTextExtent(s, &x, &y);
         if (x > max_size)
@@ -196,8 +196,8 @@ wxString wxAuiChopText(wxDC& dc, const wxString& text, int max_size)
         last_good_length = i;
     }
 
-    wxString ret = text.Left(last_good_length);
-    ret += wxT("...");
+    std::string ret = text.substr(0, last_good_length);
+    ret += "...";
     return ret;
 }
 
@@ -664,7 +664,7 @@ void wxAuiDefaultDockArt::DrawCaption(wxDC& dc,
 
 
     wxCoord w,h;
-    dc.GetTextExtent(wxT("ABCDEFHXfgkj"), &w, &h);
+    dc.GetTextExtent("ABCDEFHXfgkj", &w, &h);
 
     wxRect clip_rect = rect;
     clip_rect.width -= window->FromDIP(3); // text offset
@@ -676,7 +676,7 @@ void wxAuiDefaultDockArt::DrawCaption(wxDC& dc,
     if (pane.HasMaximizeButton())
         clip_rect.width -= m_buttonSize;
 
-    wxString draw_text = wxAuiChopText(dc, text, clip_rect.width);
+    std::string draw_text = wxAuiChopText(dc, text, clip_rect.width);
 
     dc.SetClippingRegion(clip_rect);
     dc.DrawText(draw_text, rect.x+window->FromDIP(3) + caption_offset, rect.y+(rect.height/2)-(h/2)-1);

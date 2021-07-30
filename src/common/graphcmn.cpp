@@ -571,7 +571,7 @@ wxGraphicsContext::wxGraphicsContext(wxGraphicsRenderer* renderer,
 {
 }
 
-bool wxGraphicsContext::StartDoc(const wxString& WXUNUSED(message))
+bool wxGraphicsContext::StartDoc(const std::string& WXUNUSED(message))
 {
     return true;
 }
@@ -690,7 +690,7 @@ void wxGraphicsContext::DrawPath( const wxGraphicsPath& path, wxPolygonFillMode 
 }
 
 void
-wxGraphicsContext::DoDrawRotatedText(const wxString &str,
+wxGraphicsContext::DoDrawRotatedText(const std::string& str,
                                      double x,
                                      double y,
                                      double angle)
@@ -703,7 +703,7 @@ wxGraphicsContext::DoDrawRotatedText(const wxString &str,
 }
 
 void
-wxGraphicsContext::DoDrawFilledText(const wxString &str,
+wxGraphicsContext::DoDrawFilledText(const std::string& str,
                                     double x,
                                     double y,
                                     const wxGraphicsBrush& backgroundBrush)
@@ -726,7 +726,7 @@ wxGraphicsContext::DoDrawFilledText(const wxString &str,
 }
 
 void
-wxGraphicsContext::DoDrawRotatedFilledText(const wxString &str,
+wxGraphicsContext::DoDrawRotatedFilledText(const std::string& str,
                                            double x, double y,
                                            double angle,
                                            const wxGraphicsBrush& backgroundBrush)
@@ -945,7 +945,7 @@ wxGraphicsFont wxGraphicsContext::CreateFont( const wxFont &font , const wxColou
 
 wxGraphicsFont
 wxGraphicsContext::CreateFont(double sizeInPixels,
-                              const wxString& facename,
+                              const std::string& facename,
                               int flags,
                               const wxColour& col) const
 {

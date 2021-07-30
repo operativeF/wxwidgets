@@ -118,7 +118,7 @@ wxTangoArtProvider::CreateBitmap(const wxArtID& id,
 
     static const struct BitmapEntry
     {
-        wxString id;
+        std::string id;
         const unsigned char *data16;
         size_t len16;
         const unsigned char *data24;

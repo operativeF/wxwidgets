@@ -940,8 +940,8 @@ void wxSymbolListCtrl::OnDrawItem(wxDC& dc, const wxRect& rect, size_t n) const
 
         if (symbol >= m_minSymbolValue && symbol <= m_maxSymbolValue)
         {
-            wxString text;
-            text << (wxChar) symbol;
+            // FIXME: stupid.
+            std::string text = std::to_string(symbol);
 
             wxCoord w, h;
             dc.GetTextExtent(text, & w, & h);

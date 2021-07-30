@@ -56,7 +56,7 @@ public:
 
 #if wxUSE_TOOLTIPS
     // set the tooltip text for a radio item, empty string unsets any tooltip
-    void SetItemToolTip(unsigned int item, const wxString& text);
+    void SetItemToolTip(unsigned int item, const std::string& text);
 
     // get the individual items tooltip; returns NULL if none
     wxToolTip *GetItemToolTip(unsigned int item) const
@@ -65,15 +65,15 @@ public:
 
 #if wxUSE_HELP
     // set helptext for a particular item, pass an empty string to erase it
-    void SetItemHelpText(unsigned int n, const wxString& helpText);
+    void SetItemHelpText(unsigned int n, const std::string& helpText);
 
     // retrieve helptext for a particular item, empty string means no help text
-    wxString GetItemHelpText(unsigned int n) const;
+    std::string GetItemHelpText(unsigned int n) const;
 #else // wxUSE_HELP
     // just silently ignore the help text, it's better than requiring using
     // conditional compilation in all code using this function
     void SetItemHelpText(unsigned int WXUNUSED(n),
-                         const wxString& WXUNUSED(helpText))
+                         const std::string& WXUNUSED(helpText))
     {
     }
 #endif // wxUSE_HELP
@@ -116,7 +116,7 @@ protected:
 #if wxUSE_HELP
     // Retrieve help text for an item: this is a helper for the implementation
     // of wxWindow::GetHelpTextAtPoint() in the real radiobox class
-    wxString DoGetHelpTextAtPoint(const wxWindow *derived,
+    std::string DoGetHelpTextAtPoint(const wxWindow *derived,
                                   const wxPoint& pt,
                                   wxHelpEvent::Origin origin) const;
 #endif // wxUSE_HELP
@@ -137,7 +137,7 @@ private:
 
 #if wxUSE_HELP
     // help text associated with a particular item or empty string if none
-    std::vector<wxString> m_itemsHelpTexts;
+    std::vector<std::string> m_itemsHelpTexts;
 #endif // wxUSE_HELP
 };
 

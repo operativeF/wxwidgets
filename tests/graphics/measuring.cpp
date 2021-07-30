@@ -50,7 +50,7 @@ struct GetTextExtentTester
         CHECK( size.y == y );
 
         // Test that getting text extent of an empty string returns (0, 0).
-        CHECK( obj.GetTextExtent(wxString()) == wxSize(0, 0) );
+        CHECK( obj.GetTextExtent("") == wxSize(0, 0) );
     }
 };
 
@@ -75,7 +75,7 @@ TEST_CASE("wxDC::GetTextExtent")
     CHECK( dc.GetMultiLineTextExtent("\n\n\n").y >= 3*sz.y );
 
     // And even empty strings count like one line.
-    CHECK( dc.GetMultiLineTextExtent(wxString()) == wxSize(0, sz.y) );
+    CHECK( dc.GetMultiLineTextExtent("") == wxSize(0, sz.y) );
 
     // Test the functions with some other DC kinds also.
 #if wxUSE_PRINTING_ARCHITECTURE && wxUSE_POSTSCRIPT

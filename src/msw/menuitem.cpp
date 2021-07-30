@@ -782,7 +782,7 @@ bool wxMenuItem::OnMeasureItem(size_t *width, size_t *height)
             return true;
         }
 
-        wxString str = GetName();
+        std::string str = GetName();
 
         wxMemoryDC dc;
         wxFont font;

@@ -83,7 +83,7 @@ public:
 #endif // wxUSE_TOOLTIPS
 #if wxUSE_HELP
     // override virtual function with a platform-independent implementation
-    wxString GetHelpTextAtPoint(const wxPoint & pt, wxHelpEvent::Origin origin) const override
+    std::string GetHelpTextAtPoint(const wxPoint & pt, wxHelpEvent::Origin origin) const override
     {
         return wxRadioBoxBase::DoGetHelpTextAtPoint( this, pt, origin );
     }

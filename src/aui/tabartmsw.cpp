@@ -275,7 +275,7 @@ int wxAuiMSWTabArt::GetAdditionalBorderSpace(wxWindow* wnd)
 
 wxSize wxAuiMSWTabArt::GetTabSize(wxDC& dc,
     wxWindow* wnd,
-    const wxString& caption,
+    const std::string& caption,
     const wxBitmap& bitmap,
     bool active,
     int close_button_state,

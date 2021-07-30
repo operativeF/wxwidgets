@@ -757,7 +757,7 @@ void wxGenericCalendarCtrl::RecalcGeometry()
     }
 
     m_calendarWeekWidth = HasFlag( wxCAL_SHOW_WEEK_NUMBERS )
-        ? dc.GetTextExtent( wxString::Format( wxT( "%d" ), 42 )).x + 4 : 0;
+        ? dc.GetTextExtent( fmt::format("{:d}", 42)).x + 4 : 0;
 
     // leave some margins
     m_widthCol += 2;
@@ -799,7 +799,7 @@ void wxGenericCalendarCtrl::OnPaint(wxPaintEvent& WXUNUSED(event))
 
         // Get extent of month-name + year
         wxCoord monthw, monthh;
-        wxString headertext = m_date.Format(wxT("%B %Y"));
+        std::string headertext = m_date.Format(wxT("%B %Y"));
         dc.GetTextExtent(headertext, &monthw, &monthh);
 
         // draw month-name centered above weekdays

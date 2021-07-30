@@ -251,7 +251,7 @@ void wxAuiGenericToolBarArt::DrawLabel(
     // we only care about the text height here since the text
     // will get cropped based on the width of the item
     int textWidth = 0, textHeight = 0;
-    dc.GetTextExtent(wxT("ABCDHgj"), &textWidth, &textHeight);
+    dc.GetTextExtent("ABCDHgj", &textWidth, &textHeight);
 
     // set the clipping region
     wxRect clipRect = rect;
@@ -280,7 +280,7 @@ void wxAuiGenericToolBarArt::DrawButton(
 
         int tx, ty;
 
-        dc.GetTextExtent(wxT("ABCDHgj"), &tx, &textHeight);
+        dc.GetTextExtent("ABCDHgj", &tx, &textHeight);
         textWidth = 0;
         dc.GetTextExtent(item.GetLabel(), &textWidth, &ty);
     }
@@ -395,7 +395,7 @@ void wxAuiGenericToolBarArt::DrawDropDownButton(
         int tx, ty;
         if (m_flags & wxAUI_TB_TEXT)
         {
-            dc.GetTextExtent(wxT("ABCDHgj"), &tx, &textHeight);
+            dc.GetTextExtent("ABCDHgj", &tx, &textHeight);
             textWidth = 0;
         }
 
@@ -518,7 +518,7 @@ void wxAuiGenericToolBarArt::DrawControlLabel(
     int tx, ty;
     if (m_flags & wxAUI_TB_TEXT)
     {
-        dc.GetTextExtent(wxT("ABCDHgj"), &tx, &textHeight);
+        dc.GetTextExtent("ABCDHgj", &tx, &textHeight);
         textWidth = 0;
     }
 
@@ -549,7 +549,7 @@ wxSize wxAuiGenericToolBarArt::GetLabelSize(
 
     // get label's height
     int width = 0, height = 0;
-    dc.GetTextExtent(wxT("ABCDHgj"), &width, &height);
+    dc.GetTextExtent("ABCDHgj", &width, &height);
 
     // get item's width
     width = item.GetMinSize().x;
@@ -582,7 +582,7 @@ wxSize wxAuiGenericToolBarArt::GetToolSize(
 
         if (m_textOrientation == wxAUI_TBTOOL_TEXT_BOTTOM)
         {
-            dc.GetTextExtent(wxT("ABCDHgj"), &tx, &ty);
+            dc.GetTextExtent("ABCDHgj", &tx, &ty);
             height += ty;
 
             if ( !item.GetLabel().empty() )
@@ -1022,7 +1022,7 @@ wxAuiToolBarItem* wxAuiToolBar::AddSeparator()
 {
     wxAuiToolBarItem item;
     item.m_window = nullptr;
-    item.m_label = wxEmptyString;
+    item.m_label = "";
     item.m_bitmap = wxNullBitmap;
     item.m_disabledBitmap = wxNullBitmap;
     item.m_active = true;
@@ -1044,7 +1044,7 @@ wxAuiToolBarItem* wxAuiToolBar::AddSpacer(int pixels)
 {
     wxAuiToolBarItem item;
     item.m_window = nullptr;
-    item.m_label = wxEmptyString;
+    item.m_label = "";
     item.m_bitmap = wxNullBitmap;
     item.m_disabledBitmap = wxNullBitmap;
     item.m_active = true;
@@ -1067,7 +1067,7 @@ wxAuiToolBarItem* wxAuiToolBar::AddStretchSpacer(int proportion)
 {
     wxAuiToolBarItem item;
     item.m_window = nullptr;
-    item.m_label = wxEmptyString;
+    item.m_label = "";
     item.m_bitmap = wxNullBitmap;
     item.m_disabledBitmap = wxNullBitmap;
     item.m_active = true;
@@ -2096,7 +2096,7 @@ wxRect wxAuiToolBar::GetOverflowRect() const
     return overflow_rect;
 }
 
-wxSize wxAuiToolBar::GetLabelSize(const wxString& label)
+wxSize wxAuiToolBar::GetLabelSize(const std::string& label)
 {
     wxClientDC dc(this);
 
@@ -2106,7 +2106,7 @@ wxSize wxAuiToolBar::GetLabelSize(const wxString& label)
     dc.SetFont(m_font);
 
     // get the text height
-    dc.GetTextExtent(wxT("ABCDHgj"), &tx, &textHeight);
+    dc.GetTextExtent("ABCDHgj", &tx, &textHeight);
 
     // get the text width
     dc.GetTextExtent(label, &textWidth, &ty);

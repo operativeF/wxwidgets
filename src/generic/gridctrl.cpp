@@ -175,7 +175,7 @@ wxGridCellRenderer *wxGridCellDateRenderer::Clone() const
     return new wxGridCellDateRenderer(*this);
 }
 
-wxString wxGridCellDateRenderer::GetString(const wxGrid& grid, int row, int col)
+std::string wxGridCellDateRenderer::GetString(const wxGrid& grid, int row, int col)
 {
     wxString text;
 
@@ -187,7 +187,7 @@ wxString wxGridCellDateRenderer::GetString(const wxGrid& grid, int row, int col)
         text = val.Format(m_oformat, m_tz );
 
     // If we failed to parse string just show what we where given?
-    return text;
+    return text.ToStdString();
 }
 
 void
@@ -235,7 +235,7 @@ wxSize wxGridCellDateRenderer::GetMaxBestSize(wxGrid& WXUNUSED(grid),
     {
         const wxDateTime d(28, static_cast<wxDateTime::Month>(m), 9999);
 
-        size.IncTo(DoGetBestSize(attr, dc, d.Format(m_oformat, m_tz)));
+        size.IncTo(DoGetBestSize(attr, dc, d.Format(m_oformat, m_tz).ToStdString()));
     }
 
     return size;
@@ -281,7 +281,7 @@ wxSize wxGridCellChoiceRenderer::GetMaxBestSize(wxGrid& WXUNUSED(grid),
 
     for ( size_t n = 0; n < m_choices.size(); ++n )
     {
-        size.IncTo(DoGetBestSize(attr, dc, m_choices[n]));
+        size.IncTo(DoGetBestSize(attr, dc, m_choices[n].ToStdString()));
     }
 
     return size;
@@ -321,7 +321,7 @@ wxGridCellRenderer *wxGridCellEnumRenderer::Clone() const
     return renderer;
 }
 
-wxString wxGridCellEnumRenderer::GetString(const wxGrid& grid, int row, int col)
+std::string wxGridCellEnumRenderer::GetString(const wxGrid& grid, int row, int col)
 {
     wxGridTableBase *table = grid.GetTable();
     wxString text;
@@ -337,7 +337,7 @@ wxString wxGridCellEnumRenderer::GetString(const wxGrid& grid, int row, int col)
 
 
     //If we faild to parse string just show what we where given?
-    return text;
+    return text.ToStdString();
 }
 
 void wxGridCellEnumRenderer::Draw(wxGrid& grid,
@@ -422,7 +422,7 @@ wxGridCellAutoWrapStringRenderer::GetTextLines(wxGrid& grid,
     
     for ( const auto& line : logicalLines )
     {
-        if ( dc.GetTextExtent(line).x > maxWidth )
+        if ( dc.GetTextExtent(line.ToStdString()).x > maxWidth )
         {
             // Line does not fit, break it up.
             BreakLine(dc, line, maxWidth, physicalLines);
@@ -449,7 +449,7 @@ wxGridCellAutoWrapStringRenderer::BreakLine(wxDC& dc,
     wxStringTokenizer wordTokenizer(logicalLine, wxS(" \t"), wxTOKEN_RET_DELIMS);
     while ( wordTokenizer.HasMoreTokens() )
     {
-        const wxString word = wordTokenizer.GetNextToken();
+        const std::string word = wordTokenizer.GetNextToken();
         const wxCoord wordWidth = dc.GetTextExtent(word).x;
         if ( lineWidth + wordWidth < maxWidth )
         {
@@ -491,7 +491,7 @@ wxGridCellAutoWrapStringRenderer::BreakLine(wxDC& dc,
 
 wxCoord
 wxGridCellAutoWrapStringRenderer::BreakWord(wxDC& dc,
-                                            const wxString& word,
+                                            const std::string& word,
                                             wxCoord maxWidth,
                                             std::vector<wxString>& lines,
                                             wxString& line)
@@ -524,7 +524,7 @@ wxGridCellAutoWrapStringRenderer::BreakWord(wxDC& dc,
     // extent of the remainder may be different when it's rendered in a
     // separate line instead of as part of the same one, so we have to
     // recompute it.
-    const wxString rest = word.substr(n);
+    const std::string rest = word.substr(n);
     const wxCoord restWidth = dc.GetTextExtent(rest).x;
     if ( restWidth <= maxWidth )
     {
@@ -613,7 +613,7 @@ wxGridCellAutoWrapStringRenderer::GetBestWidth(wxGrid& grid,
 
 wxSize wxGridCellStringRenderer::DoGetBestSize(const wxGridCellAttr& attr,
                                                wxDC& dc,
-                                               const wxString& text)
+                                               const std::string& text)
 {
     dc.SetFont(attr.GetFont());
     return dc.GetMultiLineTextExtent(text);
@@ -731,7 +731,7 @@ void wxGridCellStringRenderer::Draw(wxGrid& grid,
 // wxGridCellNumberRenderer
 // ----------------------------------------------------------------------------
 
-wxString wxGridCellNumberRenderer::GetString(const wxGrid& grid, int row, int col)
+std::string wxGridCellNumberRenderer::GetString(const wxGrid& grid, int row, int col)
 {
     wxGridTableBase *table = grid.GetTable();
     wxString text;
@@ -744,7 +744,7 @@ wxString wxGridCellNumberRenderer::GetString(const wxGrid& grid, int row, int co
         text = table->GetValue(row, col);
     }
 
-    return text;
+    return text.ToStdString();
 }
 
 void wxGridCellNumberRenderer::Draw(wxGrid& grid,
@@ -826,7 +826,7 @@ wxGridCellRenderer *wxGridCellFloatRenderer::Clone() const
     return renderer;
 }
 
-wxString wxGridCellFloatRenderer::GetString(const wxGrid& grid, int row, int col)
+std::string wxGridCellFloatRenderer::GetString(const wxGrid& grid, int row, int col)
 {
     wxGridTableBase *table = grid.GetTable();
 
@@ -884,7 +884,7 @@ wxString wxGridCellFloatRenderer::GetString(const wxGrid& grid, int row, int col
     }
     //else: text already contains the string
 
-    return text;
+    return text.ToStdString();
 }
 
 void wxGridCellFloatRenderer::Draw(wxGrid& grid,

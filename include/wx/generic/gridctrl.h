@@ -44,7 +44,7 @@ protected:
     // calc the string extent for given string/font
     wxSize DoGetBestSize(const wxGridCellAttr& attr,
                          wxDC& dc,
-                         const wxString& text);
+                         const std::string& text);
 };
 
 // the default renderer for the cells containing numeric (long) data
@@ -82,7 +82,7 @@ public:
         { return new wxGridCellNumberRenderer(m_minValue, m_maxValue); }
 
 protected:
-    wxString GetString(const wxGrid& grid, int row, int col);
+    std::string GetString(const wxGrid& grid, int row, int col);
 
     long m_minValue,
          m_maxValue;
@@ -123,7 +123,7 @@ public:
     wxGridCellRenderer *Clone() const override;
 
 protected:
-    wxString GetString(const wxGrid& grid, int row, int col);
+    std::string GetString(const wxGrid& grid, int row, int col);
 
 private:
     // formatting parameters
@@ -202,7 +202,7 @@ public:
     void SetParameters(const wxString& params) override;
 
 protected:
-    wxString GetString(const wxGrid& grid, int row, int col);
+    std::string GetString(const wxGrid& grid, int row, int col);
 
     // This is overridden in wxGridCellDateTimeRenderer which uses a separate
     // input format and forbids fallback to ParseDate().
@@ -284,7 +284,7 @@ public:
     wxGridCellRenderer *Clone() const override;
 
 protected:
-    wxString GetString(const wxGrid& grid, int row, int col);
+    std::string GetString(const wxGrid& grid, int row, int col);
 };
 
 
@@ -343,7 +343,7 @@ private:
     //
     // Returns the width of the last line.
     wxCoord BreakWord(wxDC& dc,
-                      const wxString& word,
+                      const std::string& word,
                       wxCoord maxWidth,
                       std::vector<wxString>& lines,
                       wxString& line);

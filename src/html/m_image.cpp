@@ -296,7 +296,7 @@ public:
 
     // If "alt" text is set, it will be used when converting this cell to text.
     void SetAlt(const wxString& alt);
-    wxString ConvertToText(wxHtmlSelection *sel) const override;
+    std::string ConvertToText(wxHtmlSelection *sel) const override;
 
 #if wxUSE_GIF && wxUSE_TIMER
     void AdvanceAnimation(wxTimer *timer);
@@ -477,7 +477,7 @@ void wxHtmlImageCell::SetAlt(const wxString& alt)
     m_alt = alt;
 }
 
-wxString wxHtmlImageCell::ConvertToText(wxHtmlSelection* WXUNUSED(sel)) const
+std::string wxHtmlImageCell::ConvertToText(wxHtmlSelection* WXUNUSED(sel)) const
 {
     return m_alt;
 }

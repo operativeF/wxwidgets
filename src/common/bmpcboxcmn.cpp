@@ -186,7 +186,7 @@ void wxBitmapComboBoxBase::DrawBackground(wxDC& dc,
 void wxBitmapComboBoxBase::DrawItem(wxDC& dc,
                                     const wxRect& rect,
                                     int item,
-                                    const wxString& text,
+                                    const std::string& text,
                                     int WXUNUSED(flags)) const
 {
     const wxBitmap& bmp = *GetBitmapPtr(item);

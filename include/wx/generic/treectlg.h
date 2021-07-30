@@ -85,7 +85,7 @@ public:
     wxColour GetItemBackgroundColour(const wxTreeItemId& item) const override;
     wxFont GetItemFont(const wxTreeItemId& item) const override;
 
-    void SetItemText(const wxTreeItemId& item, const wxString& text) override;
+    void SetItemText(const wxTreeItemId& item, const std::string& text) override;
     void SetItemImage(const wxTreeItemId& item,
                               int image,
                               wxTreeItemIcon which = wxTreeItemIcon_Normal) override;

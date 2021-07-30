@@ -7125,7 +7125,7 @@ void wxGrid::DrawTextRectangle(wxDC& dc,
     size_t nLines = lines.size();
     for ( size_t l = 0; l < nLines; l++ )
     {
-        const wxString& line = lines[l];
+        const std::string& line = lines[l];
 
         if ( line.empty() )
         {
@@ -7248,7 +7248,7 @@ void wxGrid::GetTextBoxSize( const wxDC& dc,
         }
         else
         {
-            auto lineSize = dc.GetTextExtent( lines[i] );
+            auto lineSize = dc.GetTextExtent( lines[i].ToStdString() );
             w = wxMax( w, lineSize.x );
             h += lineSize.y;
         }
@@ -7515,7 +7515,7 @@ bool wxGrid::DoShowCellEditControl(const wxGridActivationSource& actSource)
 
     // resize editor to overflow into righthand cells if allowed
     int maxWidth = rect.width;
-    wxString value = GetCellValue(row, col);
+    std::string value = GetCellValue(row, col);
     if ( !value.empty() && attr->GetOverflow() )
     {
         maxWidth = GetTextExtent(value, nullptr, nullptr, &attr->GetFont()).x;

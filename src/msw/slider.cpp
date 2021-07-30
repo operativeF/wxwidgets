@@ -119,7 +119,7 @@ bool wxSlider::Create(wxWindow *parent,
 
             HWND wnd = ::CreateWindowW
                          (
-                            wxT("STATIC"),
+                            L"STATIC",
                             nullptr,
                             WS_CHILD | WS_VISIBLE | SS_CENTER,
                             0, 0, 0, 0,
@@ -134,7 +134,7 @@ bool wxSlider::Create(wxWindow *parent,
     }
 
     // now create the main control too
-    if ( !MSWCreateControl(TRACKBAR_CLASS, "", pos, size) )
+    if ( !MSWCreateControl(TRACKBAR_CLASSW, "", pos, size) )
         return false;
 
     if ( m_labels )
@@ -271,7 +271,7 @@ bool wxSlider::MSWOnScroll(int WXUNUSED(orientation),
             return false;
     }
 
-    int newPos = ValueInvertOrNot((int) ::SendMessage((HWND) control, TBM_GETPOS, 0, 0));
+    int newPos = ValueInvertOrNot((int) ::SendMessageW((HWND) control, TBM_GETPOS, 0, 0));
     if ( (newPos < GetMin()) || (newPos > GetMax()) )
     {
         // out of range - but we did process it
@@ -596,7 +596,7 @@ WXHBRUSH wxSlider::DoMSWControlColor(WXHDC pDC, wxColour colBg, WXHWND hWnd)
 
         // Anything really refreshing the slider would work here, we use a
         // dummy WM_ENABLE but using TBM_SETPOS would work too, for example.
-        ::PostMessage(hWnd, WM_ENABLE, ::IsWindowEnabled(hWnd), 0);
+        ::PostMessageW(hWnd, WM_ENABLE, ::IsWindowEnabled(hWnd), 0);
     }
 
     return hBrush;
@@ -629,12 +629,12 @@ void wxSlider::OnDPIChanged(wxDPIChangedEvent& event)
 
 int wxSlider::GetValue() const
 {
-    return ValueInvertOrNot(::SendMessage(GetHwnd(), TBM_GETPOS, 0, 0));
+    return ValueInvertOrNot(::SendMessageW(GetHwnd(), TBM_GETPOS, 0, 0));
 }
 
 void wxSlider::SetValue(int value)
 {
-    ::SendMessage(GetHwnd(), TBM_SETPOS, (WPARAM)TRUE, (LPARAM)ValueInvertOrNot(value));
+    ::SendMessageW(GetHwnd(), TBM_SETPOS, (WPARAM)TRUE, (LPARAM)ValueInvertOrNot(value));
 
     if ( m_labels )
     {
@@ -652,8 +652,8 @@ void wxSlider::SetRange(int minValue, int maxValue)
     m_rangeMin = minValue;
     m_rangeMax = maxValue;
 
-    ::SendMessage(GetHwnd(), TBM_SETRANGEMIN, TRUE, m_rangeMin);
-    ::SendMessage(GetHwnd(), TBM_SETRANGEMAX, TRUE, m_rangeMax);
+    ::SendMessageW(GetHwnd(), TBM_SETRANGEMIN, TRUE, m_rangeMin);
+    ::SendMessageW(GetHwnd(), TBM_SETRANGEMAX, TRUE, m_rangeMax);
 
     if ( m_labels )
     {
@@ -676,19 +676,19 @@ void wxSlider::SetRange(int minValue, int maxValue)
     // code, i.e. the one returned by GetValue(), does not change.
     if ( HasFlag(wxSL_INVERSE) )
     {
-        ::SendMessage(GetHwnd(), TBM_SETPOS, TRUE, ValueInvertOrNot(valueOld));
+        ::SendMessageW(GetHwnd(), TBM_SETPOS, TRUE, ValueInvertOrNot(valueOld));
     }
 }
 
 void wxSlider::DoSetTickFreq(int n)
 {
     m_tickFreq = n;
-    ::SendMessage( GetHwnd(), TBM_SETTICFREQ, (WPARAM) n, (LPARAM) 0 );
+    ::SendMessageW( GetHwnd(), TBM_SETTICFREQ, (WPARAM) n, (LPARAM) 0 );
 }
 
 void wxSlider::SetPageSize(int pageSize)
 {
-    ::SendMessage( GetHwnd(), TBM_SETPAGESIZE, (WPARAM) 0, (LPARAM) pageSize );
+    ::SendMessageW( GetHwnd(), TBM_SETPAGESIZE, (WPARAM) 0, (LPARAM) pageSize );
     m_pageSize = pageSize;
 }
 
@@ -699,57 +699,57 @@ int wxSlider::GetPageSize() const
 
 void wxSlider::ClearSel()
 {
-    ::SendMessage(GetHwnd(), TBM_CLEARSEL, (WPARAM) TRUE, (LPARAM) 0);
+    ::SendMessageW(GetHwnd(), TBM_CLEARSEL, (WPARAM) TRUE, (LPARAM) 0);
 }
 
 void wxSlider::ClearTicks()
 {
-    ::SendMessage(GetHwnd(), TBM_CLEARTICS, (WPARAM) TRUE, (LPARAM) 0);
+    ::SendMessageW(GetHwnd(), TBM_CLEARTICS, (WPARAM) TRUE, (LPARAM) 0);
 }
 
 void wxSlider::SetLineSize(int lineSize)
 {
     m_lineSize = lineSize;
-    ::SendMessage(GetHwnd(), TBM_SETLINESIZE, (WPARAM) 0, (LPARAM) lineSize);
+    ::SendMessageW(GetHwnd(), TBM_SETLINESIZE, (WPARAM) 0, (LPARAM) lineSize);
 }
 
 int wxSlider::GetLineSize() const
 {
-    return (int)::SendMessage(GetHwnd(), TBM_GETLINESIZE, 0, 0);
+    return (int)::SendMessageW(GetHwnd(), TBM_GETLINESIZE, 0, 0);
 }
 
 int wxSlider::GetSelEnd() const
 {
-    return (int)::SendMessage(GetHwnd(), TBM_GETSELEND, 0, 0);
+    return (int)::SendMessageW(GetHwnd(), TBM_GETSELEND, 0, 0);
 }
 
 int wxSlider::GetSelStart() const
 {
-    return (int)::SendMessage(GetHwnd(), TBM_GETSELSTART, 0, 0);
+    return (int)::SendMessageW(GetHwnd(), TBM_GETSELSTART, 0, 0);
 }
 
 void wxSlider::SetSelection(int minPos, int maxPos)
 {
-    ::SendMessage(GetHwnd(), TBM_SETSEL,
+    ::SendMessageW(GetHwnd(), TBM_SETSEL,
                   (WPARAM) TRUE /* redraw */,
                   (LPARAM) MAKELONG( minPos, maxPos) );
 }
 
 void wxSlider::SetThumbLength(int len)
 {
-    ::SendMessage(GetHwnd(), TBM_SETTHUMBLENGTH, (WPARAM) len, (LPARAM) 0);
+    ::SendMessageW(GetHwnd(), TBM_SETTHUMBLENGTH, (WPARAM) len, (LPARAM) 0);
 
     InvalidateBestSize();
 }
 
 int wxSlider::GetThumbLength() const
 {
-    return (int)::SendMessage( GetHwnd(), TBM_GETTHUMBLENGTH, 0, 0);
+    return (int)::SendMessageW( GetHwnd(), TBM_GETTHUMBLENGTH, 0, 0);
 }
 
 void wxSlider::SetTick(int tickPos)
 {
-    ::SendMessage( GetHwnd(), TBM_SETTIC, (WPARAM) 0, (LPARAM) tickPos );
+    ::SendMessageW( GetHwnd(), TBM_SETTIC, (WPARAM) 0, (LPARAM) tickPos );
 }
 
 // ----------------------------------------------------------------------------

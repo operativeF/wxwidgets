@@ -35,12 +35,12 @@ public:
 	wxTextMeasureBase& operator=(const wxTextMeasureBase&) = delete;
 
     // Return the extent of a single line string.
-    wxSize GetTextExtent(const wxString& string,
-                       wxCoord *descent = nullptr,
-                       wxCoord *externalLeading = nullptr);
+    wxSize GetTextExtent(const std::string& string,
+                         wxCoord *descent = nullptr,
+                         wxCoord *externalLeading = nullptr);
 
     // The same for a multiline (with '\n') string.
-    void GetMultiLineTextExtent(const wxString& text,
+    void GetMultiLineTextExtent(const std::string& text,
                                 wxCoord *width,
                                 wxCoord *height,
                                 wxCoord *heightOneLine = nullptr);
@@ -53,7 +53,7 @@ public:
     //
     // The scaleX argument is the horizontal scale used by wxDC and is only
     // used in the generic implementation.
-    std::vector<int> GetPartialTextExtents(const wxString& text, double scaleX);
+    std::vector<int> GetPartialTextExtents(const std::string& text, double scaleX);
 
 
     // This is another method which is only used by MeasuringGuard.
@@ -98,23 +98,23 @@ protected:
     //
     // The width and height pointers here are never NULL and the input string
     // is not empty.
-    virtual wxSize DoGetTextExtent(const wxString& string,
-                                 wxCoord *descent = nullptr,
-                                 wxCoord *externalLeading = nullptr) = 0;
+    virtual wxSize DoGetTextExtent(const std::string& string,
+                                   wxCoord *descent = nullptr,
+                                   wxCoord *externalLeading = nullptr) = 0;
 
     // The real implementation of GetPartialTextExtents().
     //
     // On input, widths array contains text.length() zero elements and the text
     // is guaranteed to be non-empty.
-    virtual std::vector<int> DoGetPartialTextExtents(const wxString& text, double scaleX) = 0;
+    virtual std::vector<int> DoGetPartialTextExtents(const std::string& text, double scaleX) = 0;
 
     // Call either DoGetTextExtent() or wxDC::GetTextExtent() depending on the
     // value of m_useDCImpl.
     //
     // This must be always used instead of calling DoGetTextExtent() directly!
-    wxSize CallGetTextExtent(const wxString& string,
-                           wxCoord *descent = nullptr,
-                           wxCoord *externalLeading = nullptr);
+    wxSize CallGetTextExtent(const std::string& string,
+                             wxCoord *descent = nullptr,
+                             wxCoord *externalLeading = nullptr);
 
     // Get line height: used when the line is empty because CallGetTextExtent()
     // would just return (0, 0) in this case.

@@ -187,7 +187,7 @@ public:
 
     // Get the width appropriate for showing the given text. This is typically
     // used as second argument for AppendColumn() or with SetColumnWidth().
-    int WidthFor(const wxString& text) const;
+    int WidthFor(const std::string& text) const;
 
 
     // Item methods

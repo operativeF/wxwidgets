@@ -104,7 +104,7 @@ bool wxGenericDragImage::Create(const wxIcon& image, const wxCursor& cursor)
 }
 
 // Create a drag image from a string and optional cursor
-bool wxGenericDragImage::Create(const wxString& str, const wxCursor& cursor)
+bool wxGenericDragImage::Create(const std::string& str, const wxCursor& cursor)
 {
     wxFont font(wxSystemSettings::GetFont(wxSYS_DEFAULT_GUI_FONT));
 
@@ -152,7 +152,7 @@ bool wxGenericDragImage::Create(const wxString& str, const wxCursor& cursor)
 // Create a drag image for the given tree control item
 bool wxGenericDragImage::Create(const wxTreeCtrl& treeCtrl, wxTreeItemId& id)
 {
-    wxString str = treeCtrl.GetItemText(id);
+    std::string str = treeCtrl.GetItemText(id);
     return Create(str);
 }
 #endif
@@ -161,7 +161,7 @@ bool wxGenericDragImage::Create(const wxTreeCtrl& treeCtrl, wxTreeItemId& id)
 // Create a drag image for the given list control item
 bool wxGenericDragImage::Create(const wxListCtrl& listCtrl, long id)
 {
-    wxString str = listCtrl.GetItemText(id);
+    std::string str = listCtrl.GetItemText(id);
     return Create(str);
 }
 #endif

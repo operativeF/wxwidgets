@@ -224,7 +224,7 @@ void wxTipWindowView::Adjust(const wxString& text, wxCoord maxLength)
 
     // calculate the length: we want each line be no longer than maxLength
     // pixels and we only break lines at words boundary
-    wxString current;
+    std::string current;
     wxCoord height, width,
             widthMax = 0;
 
@@ -305,7 +305,7 @@ void wxTipWindowView::OnPaint(wxPaintEvent& WXUNUSED(event))
     const size_t count = m_textLines.size();
     for ( size_t n = 0; n < count; n++ )
     {
-        dc.DrawText(m_textLines[n], pt);
+        dc.DrawText(m_textLines[n].ToStdString(), pt);
 
         pt.y += m_heightLine;
     }

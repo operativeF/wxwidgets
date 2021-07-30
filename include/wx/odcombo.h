@@ -102,7 +102,7 @@ public:
     void SetItemClientData(unsigned int n, void* clientData, wxClientDataType clientDataItemsType);
     void *GetItemClientData(unsigned int n) const;
     void SetString( int item, const std::string& str );
-    wxString GetString( int item ) const;
+    std::string GetString( int item ) const;
     unsigned int GetCount() const;
     int FindString(std::string_view s, bool bCase = false) const;
     int GetSelection() const;

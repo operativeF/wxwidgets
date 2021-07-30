@@ -124,7 +124,7 @@ int wxSpinCtrlImpl::GetMaxValueLength(int minVal, int maxVal, int base)
 wxSize wxSpinCtrlImpl::GetBestSize(const wxControl* spin,
                                    int minVal, int maxVal, int base)
 {
-    const wxString largestString('8', GetMaxValueLength(minVal, maxVal, base));
+    const std::string largestString('8', GetMaxValueLength(minVal, maxVal, base));
     return spin->GetSizeFromText(largestString);
 }
 

@@ -318,7 +318,7 @@ void wxListBoxBase::SetFirstItem(std::string_view s)
     DoSetFirstItem(n);
 }
 
-void wxListBoxBase::AppendAndEnsureVisible(const wxString& s)
+void wxListBoxBase::AppendAndEnsureVisible(const std::string& s)
 {
     Append(s);
     EnsureVisible(GetCount() - 1);

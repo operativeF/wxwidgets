@@ -261,14 +261,14 @@ bool wxControlBase::DoSetLabelMarkup(const std::string& markup)
 // wxControlBase - ellipsization code
 // ----------------------------------------------------------------------------
 
-constexpr wxChar wxELLIPSE_REPLACEMENT[] = wxS("...");
+constexpr char wxELLIPSE_REPLACEMENT[] = "...";
 
 namespace
 {
 
 struct EllipsizeCalculator
 {
-    EllipsizeCalculator(const wxString& s, const wxDC& dc,
+    EllipsizeCalculator(const std::string& s, const wxDC& dc,
                         int maxFinalWidthPx, int replacementWidthPx,
                         int flags)
         :
@@ -290,7 +290,7 @@ struct EllipsizeCalculator
         {
             // Create a copy of the string with the ampersands removed to get
             // the correct widths.
-            const wxString cpy = wxControl::RemoveMnemonics(s);
+            const std::string cpy = wxControl::RemoveMnemonics(s);
 
             m_charOffsetsPx = dc.GetPartialTextExtents(cpy);
             m_isOk = true;
@@ -300,7 +300,7 @@ struct EllipsizeCalculator
             // for the first ampersand in a pair (see RemoveMnemonics).
             size_t n = 0;
             bool lastWasMnemonic = false;
-            for ( wxString::const_iterator it = s.begin();
+            for ( std::string::const_iterator it = s.begin();
                   it != s.end();
                   ++it, ++n )
             {
@@ -417,7 +417,7 @@ struct EllipsizeCalculator
         if ( estimatedWidth > m_maxFinalWidthPx )
             return false;
 
-        return m_dc.GetTextExtent(GetEllipsizedText()).x <= m_maxFinalWidthPx;
+        return m_dc.GetTextExtent(GetEllipsizedText().ToStdString()).x <= m_maxFinalWidthPx;
     }
 
     // calculation state:

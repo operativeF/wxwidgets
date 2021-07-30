@@ -1084,7 +1084,7 @@ wxString wxListCtrl::GetItemText(long item, int col) const
 }
 
 // Sets the item text
-void wxListCtrl::SetItemText(long item, const wxString& str)
+void wxListCtrl::SetItemText(long item, const std::string& str)
 {
     wxListItem info;
 
