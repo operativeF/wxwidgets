@@ -702,7 +702,7 @@ bool wxGLCanvas::CreateWindow(wxWindow *parent,
     DWORD msflags = WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS | WS_CLIPCHILDREN;
     msflags |= MSWGetStyle(style, &exStyle);
 
-    if ( !MSWCreate(wxApp::GetRegisteredClassName(wxT("wxGLCanvas"), -1, CS_OWNDC),
+    if ( !MSWCreate(wxApp::GetRegisteredClassName("wxGLCanvas", -1, CS_OWNDC),
                     nullptr, pos, size, msflags, exStyle) )
         return false;
 
@@ -832,7 +832,7 @@ public:
     {
         CreateBase(nullptr, wxID_ANY);
         DWORD msflags = WS_CLIPSIBLINGS | WS_CLIPCHILDREN;
-        if( MSWCreate(wxApp::GetRegisteredClassName(wxT("wxGLCanvas"), -1, CS_OWNDC),
+        if( MSWCreate(wxApp::GetRegisteredClassName("wxGLCanvas", -1, CS_OWNDC),
                       nullptr, wxDefaultPosition, wxDefaultSize, msflags, 0) )
         {
             hdc = ::GetDC(GetHwnd());

@@ -1252,7 +1252,7 @@ void wxPropertyGrid::CalculateFontAndBitmapStuff( int vspacing )
 {
     m_captionFont = wxControl::GetFont();
 
-    auto captionSize = GetTextExtent(wxS("jG"), nullptr, nullptr, &m_captionFont);
+    auto captionSize = GetTextExtent("jG", nullptr, nullptr, &m_captionFont);
     m_subgroup_extramargin = captionSize.x + (captionSize.x / 2);
     m_fontHeight = captionSize.y;
 
@@ -1284,7 +1284,7 @@ void wxPropertyGrid::CalculateFontAndBitmapStuff( int vspacing )
 
     // FIXME: This is stupid, to just get the font...
     m_captionFont.SetWeight(wxFONTWEIGHT_BOLD);
-    auto boldCaptionSize = GetTextExtent(wxS("jG"), nullptr, nullptr, &m_captionFont);
+    auto boldCaptionSize = GetTextExtent("jG", nullptr, nullptr, &m_captionFont);
 
     m_lineHeight = m_fontHeight + (2 * m_spacingy) + 1;
 

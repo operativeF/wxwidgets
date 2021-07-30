@@ -354,7 +354,7 @@ int wxRibbonAUIArtProvider::GetTabCtrlHeight(
     if(m_flags & wxRIBBON_BAR_SHOW_PAGE_LABELS)
     {
         dc.SetFont(m_tab_active_label_font);
-        text_height = dc.GetTextExtent(wxT("ABCDEFXj")).y;
+        text_height = dc.GetTextExtent("ABCDEFXj").y;
     }
     if(m_flags & wxRIBBON_BAR_SHOW_PAGE_ICONS)
     {

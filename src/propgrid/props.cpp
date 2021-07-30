@@ -2402,7 +2402,7 @@ void wxPGArrayEditorDialog::OnEndLabelEdit(wxListEvent& event)
             // Veto() using it.
             event.m_item.SetText(wxEmptyString);
             m_elb->GetListCtrl()->SetItemText(m_itemPendingAtIndex,
-                                              wxEmptyString);
+                                              "");
 
             event.Veto();
         }
