@@ -26,6 +26,7 @@
 #include "wx/evtloop.h"
 
 #include "boost/nowide/convert.hpp"
+#include "boost/nowide/stackstring.hpp"
 
 using namespace wxMSWMessageDialog;
 
@@ -1058,8 +1059,8 @@ void* wxProgressDialogTaskRunner::Entry()
 
         if ( !m_sharedData.m_expandedInformation.empty() )
         {
-            tdc.pszExpandedInformation =
-                boost::nowide::widen(m_sharedData.m_expandedInformation).c_str();
+            boost::nowide::wstackstring stackExInfo(m_sharedData.m_expandedInformation.c_str());
+            tdc.pszExpandedInformation = stackExInfo.get();
 
             // If we have elapsed/estimated/... times to show, show them from
             // the beginning for consistency with the generic version and also

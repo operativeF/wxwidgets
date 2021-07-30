@@ -39,6 +39,7 @@
 #include <cstring>
 
 #include "boost/nowide/convert.hpp"
+#include "boost/nowide/stackstring.hpp"
 
 // ---------------------------------------------------------------------------
 // global variables
@@ -819,8 +820,10 @@ bool wxMDIChildFrame::Create(wxMDIParentFrame *parent,
                                                                   : wxApp::RegClass_ReturnNR
                               );
 
+  boost::nowide::wstackstring stackTitle(title.c_str());
+
   mcs.szClass = className.t_str();
-  mcs.szTitle = boost::nowide::widen(title).c_str();
+  mcs.szTitle = stackTitle.get();
   mcs.hOwner = wxGetInstance();
   if (x != wxDefaultCoord)
       mcs.x = x;

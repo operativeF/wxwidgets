@@ -61,8 +61,8 @@ static wxString GetFileVersion(const wxString& filename)
         {
             void *pVer;
             UINT sizeInfo;
-            if ( ::VerQueryValue(buf.data(),
-                                    const_cast<wxChar *>(wxT("\\")),
+            if ( ::VerQueryValueW(buf.data(),
+                                    L"\\",
                                     &pVer,
                                     &sizeInfo) )
             {

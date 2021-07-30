@@ -188,7 +188,8 @@ int wxDirDialog::ShowSHBrowseForFolder(WXHWND owner)
     bi.hwndOwner      = owner;
     bi.pidlRoot       = nullptr;
     bi.pszDisplayName = nullptr;
-    bi.lpszTitle      = boost::nowide::widen(m_message).c_str();
+    boost::nowide::wstackstring stackMessage(m_message.c_str());
+    bi.lpszTitle      = stackMessage.get();
     bi.ulFlags        = BIF_RETURNONLYFSDIRS | BIF_STATUSTEXT;
     bi.lpfn           = BrowseCallbackProc;
     bi.lParam         = reinterpret_cast<LPARAM>(boost::nowide::widen(m_path).c_str()); // param for the callback

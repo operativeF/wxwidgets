@@ -538,7 +538,7 @@ void wxToolTip::DoSetTip(WXHWND hWnd)
     // repaint of the controls under it, see #10520 -- but this doesn't
     // happen if we reset it first
     // FIXME: Not sure about the necessity of const_cast here.
-    ti.lpszText = const_cast<wxChar *>(wxT(""));
+    ti.lpszText = L'';
     SendTooltipMessage(GetToolTipCtrl(), TTM_UPDATETIPTEXT, &ti);
     boost::nowide::wstackstring stackText(m_text.c_str());
     ti.lpszText = stackText.get();
