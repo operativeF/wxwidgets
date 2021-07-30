@@ -516,7 +516,7 @@ const std::string& wxFontMapperBase::GetConfigPath()
 // config helpers
 // ----------------------------------------------------------------------------
 
-bool wxFontMapperBase::ChangePath(const std::string& pathNew, std::string* pathOld)
+bool wxFontMapperBase::ChangePath(const wxString& pathNew, wxString* pathOld)
 {
     wxConfigBase *config = GetConfig();
     if ( !config )
@@ -530,8 +530,9 @@ bool wxFontMapperBase::ChangePath(const std::string& pathNew, std::string* pathO
         path += wxCONFIG_PATH_SEPARATOR;
     }
 
-    wxASSERT_MSG( pathNew.empty() || (pathNew.front() != wxCONFIG_PATH_SEPARATOR),
-                  wxT("should be a relative path") );
+    // FIXME: Stupid.
+    //wxASSERT_MSG( pathNew.empty() || (pathNew.Front() != wxCONFIG_PATH_SEPARATOR),
+    //              wxT("should be a relative path") );
 
     path += pathNew;
 
@@ -540,7 +541,7 @@ bool wxFontMapperBase::ChangePath(const std::string& pathNew, std::string* pathO
     return true;
 }
 
-void wxFontMapperBase::RestorePath(const std::string& pathOld)
+void wxFontMapperBase::RestorePath(const wxString& pathOld)
 {
     GetConfig()->SetPath(pathOld);
 }
@@ -614,7 +615,7 @@ wxFontMapperBase::NonInteractiveCharsetToEncoding(const std::string& charset)
             // may be we have an alias?
             config->SetPath(FONTMAPPER_CHARSET_ALIAS_PATH);
 
-            std::string alias = config->Read(charset);
+            wxString alias = config->Read(charset);
             if ( !alias.empty() )
             {
                 // yes, we do - use it instead
@@ -795,21 +796,21 @@ std::string wxFontMapperBase::GetEncodingDescription(wxFontEncoding encoding)
 {
     if ( encoding == wxFONTENCODING_DEFAULT )
     {
-        return _("Default encoding");
+        return _("Default encoding").ToStdString();
     }
 
     for ( size_t i = 0; i < WXSIZEOF(gs_encodingDescs); i++ )
     {
         if ( gs_encodings[i] == encoding )
         {
-            return wxGetTranslation(gs_encodingDescs[i]);
+            return wxGetTranslation(gs_encodingDescs[i]).ToStdString();
         }
     }
 
     wxString str;
     str.Printf(_("Unknown encoding (%d)"), encoding);
 
-    return str;
+    return str.ToStdString();
 }
 
 /* static */
@@ -817,7 +818,7 @@ std::string wxFontMapperBase::GetEncodingName(wxFontEncoding encoding)
 {
     if ( encoding == wxFONTENCODING_DEFAULT )
     {
-        return _("default");
+        return _("default").ToStdString();
     }
 
     for ( size_t i = 0; i < gs_encodingNames.size(); i++ )
@@ -831,7 +832,7 @@ std::string wxFontMapperBase::GetEncodingName(wxFontEncoding encoding)
     wxString str;
     str.Printf(_("unknown-%d"), encoding);
 
-    return str;
+    return str.ToStdString();
 }
 
 /* static */

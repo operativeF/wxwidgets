@@ -69,7 +69,7 @@ public:
             : m_name(name), m_value(value), m_next(next) {}
     virtual ~wxXmlAttribute() = default;
 
-    const std::string& GetName() const { return m_name; }
+    const wxString& GetName() const { return m_name; }
     const wxString& GetValue() const { return m_value; }
     wxXmlAttribute *GetNext() const { return m_next; }
 
@@ -78,7 +78,7 @@ public:
     void SetNext(wxXmlAttribute *next) { m_next = next; }
 
 private:
-    std::string m_name;
+    wxString m_name;
     wxString m_value;
     wxXmlAttribute *m_next{nullptr};
 };
@@ -122,7 +122,7 @@ public:
 
     // access methods:
     wxXmlNodeType GetType() const { return m_type; }
-    const std::string& GetName() const { return m_name; }
+    const wxString& GetName() const { return m_name; }
     const wxString& GetContent() const { return m_content; }
 
     bool IsWhitespaceOnly() const;
@@ -140,9 +140,9 @@ public:
     wxXmlNode *GetChildren() const { return m_children; }
 
     wxXmlAttribute *GetAttributes() const { return m_attrs; }
-    bool GetAttribute(std::string_view attrName, std::string* value) const;
-    std::string GetAttribute(std::string_view attrName,
-                          const std::string& defaultVal = "") const;
+    bool GetAttribute(const wxString& attrName, wxString* value) const;
+    wxString GetAttribute(const wxString& attrName,
+                          const wxString& defaultVal = "") const;
     bool HasAttribute(const wxString& attrName) const;
 
     int GetLineNumber() const { return m_lineNo; }
@@ -169,7 +169,7 @@ private:
 
 private:
     wxXmlNodeType m_type;
-    std::string m_name;
+    wxString m_name;
     wxString m_content;
     wxXmlAttribute *m_attrs{nullptr};
     wxXmlNode* m_parent{nullptr};

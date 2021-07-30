@@ -35,14 +35,14 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxFileDirPickerEvent, wxCommandEvent);
 
 bool wxFileDirPickerCtrlBase::CreateBase(wxWindow *parent,
                                          wxWindowID id,
-                                         const wxString &path,
-                                         const wxString &message,
-                                         const wxString &wildcard,
+                                         const std::string& path,
+                                         const std::string& message,
+                                         const std::string& wildcard,
                                          const wxPoint &pos,
                                          const wxSize &size,
                                          long style,
                                          const wxValidator& validator,
-                                         const wxString &name )
+                                         const std::string& name )
 {
     if (!wxPickerBase::CreateBase(parent, id, path, pos, size,
                                    style, validator, name))

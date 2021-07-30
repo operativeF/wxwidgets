@@ -613,14 +613,14 @@ bool wxXmlResource::AttachUnknownControl(const wxString& name,
 
 static void ProcessPlatformProperty(wxXmlNode *node)
 {
-    std::string s;
+    wxString s;
     bool isok;
 
     wxXmlNode *c = node->GetChildren();
     while (c)
     {
         isok = false;
-        if (!c->GetAttribute("platform", &s))
+        if (!c->GetAttribute(wxT("platform"), &s))
             isok = true;
         else
         {
@@ -1714,14 +1714,14 @@ int wxXmlResourceHandlerImpl::GetID()
 
 std::string wxXmlResourceHandlerImpl::GetName()
 {
-    return m_handler->m_node->GetAttribute("name", "-1");
+    return m_handler->m_node->GetAttribute("name", "-1").ToStdString();
 }
 
 
 
-bool wxXmlResourceHandlerImpl::GetBoolAttr(std::string_view attr, bool defaultv)
+bool wxXmlResourceHandlerImpl::GetBoolAttr(const wxString& attr, bool defaultv)
 {
-    std::string v;
+    wxString v;
     return m_handler->m_node->GetAttribute(attr, &v) ? v == '1' : defaultv;
 }
 

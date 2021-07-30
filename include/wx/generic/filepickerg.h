@@ -57,7 +57,7 @@ public:     // overridable
 
     virtual wxEventType GetEventType() const = 0;
 
-    void SetInitialDirectory(const wxString& dir) override;
+    void SetInitialDirectory(const std::string& dir) override;
 
 public:
 
@@ -76,7 +76,7 @@ public:
     void OnButtonClick(wxCommandEvent &);
 
 protected:
-    wxString m_message, m_wildcard;
+    std::string m_message, m_wildcard;
 
     // we just store the style passed to the ctor here instead of passing it to
     // wxButton as some of our bits can conflict with wxButton styles and it
@@ -172,14 +172,14 @@ public:
     wxGenericDirButton() = default;
     wxGenericDirButton(wxWindow *parent,
                        wxWindowID id,
-                       const std::string& label = wxASCII_STR(wxDirPickerWidgetLabel),
+                       const std::string& label = wxDirPickerWidgetLabel,
                        const std::string& path = {},
-                       const std::string &message = wxASCII_STR(wxDirSelectorPromptStr),
+                       const std::string &message = wxDirSelectorPromptStr,
                        const wxPoint& pos = wxDefaultPosition,
                        const wxSize& size = wxDefaultSize,
                        long style = wxDIRBTN_DEFAULT_STYLE,
                        const wxValidator& validator = wxDefaultValidator,
-                       const std::string& name = wxASCII_STR(wxDirPickerWidgetNameStr))
+                       const std::string& name = wxDirPickerWidgetNameStr)
     {
         Create(parent, id, label, path, message, {},
                pos, size, style, validator, name);

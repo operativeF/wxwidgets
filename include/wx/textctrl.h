@@ -341,7 +341,7 @@ public:
     void SetBulletNumber(int n) { m_bulletNumber = n; m_flags |= wxTEXT_ATTR_BULLET_NUMBER; }
     void SetBulletText(const wxString& text) { m_bulletText = text; m_flags |= wxTEXT_ATTR_BULLET_TEXT; }
     void SetBulletFont(const wxString& bulletFont) { m_bulletFont = bulletFont; }
-    void SetBulletName(const wxString& name) { m_bulletName = name; m_flags |= wxTEXT_ATTR_BULLET_NAME; }
+    void SetBulletName(const std::string& name) { m_bulletName = name; m_flags |= wxTEXT_ATTR_BULLET_NAME; }
     void SetURL(const wxString& url) { m_urlTarget = url; m_flags |= wxTEXT_ATTR_URL; }
     void SetPageBreak(bool pageBreak = true) { SetFlags(pageBreak ? (GetFlags() | wxTEXT_ATTR_PAGE_BREAK) : (GetFlags() & ~wxTEXT_ATTR_PAGE_BREAK)); }
     void SetTextEffects(int effects) { m_textEffects = effects; SetFlags(GetFlags() | wxTEXT_ATTR_EFFECTS); }

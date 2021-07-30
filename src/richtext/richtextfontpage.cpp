@@ -574,7 +574,7 @@ bool wxRichTextFontPage::TransferDataToWindow()
 
     if (attr->HasFontPointSize())
     {
-        std::string strSize = wxString::Format(wxT("%d"), attr->GetFontSize());
+        std::string strSize = wxString::Format(wxT("%d"), attr->GetFontSize()).ToStdString();
         m_sizeTextCtrl->SetValue(strSize);
         m_fontSizeSpinButtons->SetValue(attr->GetFontSize());
         m_sizeUnitsCtrl->SetSelection(0);
@@ -583,7 +583,7 @@ bool wxRichTextFontPage::TransferDataToWindow()
     }
     else if (attr->HasFontPixelSize())
     {
-        std::string strSize = wxString::Format(wxT("%d"), attr->GetFontSize());
+        std::string strSize = wxString::Format(wxT("%d"), attr->GetFontSize()).ToStdString();
         m_sizeTextCtrl->SetValue(strSize);
         m_fontSizeSpinButtons->SetValue(attr->GetFontSize());
         m_sizeUnitsCtrl->SetSelection(1);

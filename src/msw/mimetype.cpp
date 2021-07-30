@@ -423,7 +423,7 @@ bool wxFileTypeImpl::GetIcon(wxIconLocation *iconLoc) const
 
         if ( iconLoc )
         {
-            iconLoc->SetFileName(wxExpandEnvVars(strFullPath));
+            iconLoc->SetFileName(wxExpandEnvVars(strFullPath).ToStdString());
 
             iconLoc->SetIndex(wxAtoi(strIndex));
         }

@@ -281,11 +281,11 @@ private:
 
     // returns either the given date representation using the current format or
     // an empty string if it's invalid
-    wxString GetStringValueFor(const wxDateTime& dt) const
+    std::string GetStringValueFor(const wxDateTime& dt) const
     {
-        wxString val;
+        std::string val;
         if ( dt.IsValid() )
-            val = dt.Format(m_format);
+            val = dt.Format(m_format).ToStdString();
 
         return val;
     }

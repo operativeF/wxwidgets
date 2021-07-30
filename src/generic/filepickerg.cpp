@@ -93,7 +93,7 @@ void wxGenericFileDirButton::OnButtonClick(wxCommandEvent& WXUNUSED(ev))
     }
 }
 
-void wxGenericFileDirButton::SetInitialDirectory(const wxString& dir)
+void wxGenericFileDirButton::SetInitialDirectory(const std::string& dir)
 {
     m_initialDir = dir;
 }
@@ -133,7 +133,7 @@ wxDialog *wxGenericDirButton::CreateDialog()
                                     (
                                         GetDialogParent(),
                                         m_message,
-                                        m_path.empty() ? m_initialDir : m_path,
+                                        m_path.empty() ? m_initialDir.ToStdString() : m_path,
                                         GetDialogStyle()
                                     );
     return dialog;

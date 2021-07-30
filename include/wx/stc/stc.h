@@ -5379,8 +5379,8 @@ public:
     static wxVersionInfo GetLibraryVersionInfo();
 
 protected:
-    void DoSetValue(const std::string& value, int flags) override;
-    std::string DoGetValue() const override { return GetText(); }
+    void DoSetValue(const wxString& value, int flags) override;
+    wxString DoGetValue() const override { return GetText(); }
     wxWindow *GetEditableWindow() override { return this; }
 
 #ifndef SWIG

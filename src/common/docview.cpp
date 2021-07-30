@@ -269,7 +269,7 @@ bool wxDocument::OnNewDocument()
 
     SetDocumentSaved(false);
 
-    const std::string name = GetDocumentManager()->MakeNewDocumentName();
+    const std::string name = GetDocumentManager()->MakeNewDocumentName().ToStdString();
     SetTitle(name);
     SetFilename(name, true);
 
@@ -294,7 +294,7 @@ bool wxDocument::SaveAs()
         return false;
 
 #ifdef wxHAS_MULTIPLE_FILEDLG_FILTERS
-    std::string filter = docTemplate->GetDescription() + wxT(" (") +
+    wxString filter = docTemplate->GetDescription() + wxT(" (") +
         docTemplate->GetFileFilter() + wxT(")|") +
         docTemplate->GetFileFilter();
 
@@ -331,7 +331,7 @@ bool wxDocument::SaveAs()
     std::string filter = docTemplate->GetFileFilter() ;
 #endif
 
-    std::string defaultDir = docTemplate->GetDirectory();
+    wxString defaultDir = docTemplate->GetDirectory();
     if ( defaultDir.empty() )
     {
         defaultDir = wxPathOnly(GetFilename());
@@ -339,13 +339,13 @@ bool wxDocument::SaveAs()
             defaultDir = GetDocumentManager()->GetLastDirectory();
     }
 
-    std::string fileName = wxFileSelector(_("Save As"),
+    std::string fileName = wxFileSelector(_("Save As").ToStdString(),
             defaultDir,
             wxFileNameFromPath(GetFilename()),
             docTemplate->GetDefaultExtension(),
             filter,
             wxFD_SAVE | wxFD_OVERWRITE_PROMPT,
-            GetDocumentWindow());
+            GetDocumentWindow()).ToStdString();
 
     if (fileName.empty())
         return false; // cancelled by user
@@ -354,7 +354,7 @@ bool wxDocument::SaveAs()
     if (!OnSaveDocument(fileName))
         return false;
 
-    SetTitle(wxFileNameFromPath(fileName));
+    SetTitle(wxFileNameFromPath(fileName).ToStdString());
     SetFilename(fileName, true);    // will call OnChangeFileName automatically
 
     // A file that doesn't use the default extension of its document template
@@ -422,8 +422,8 @@ bool wxDocument::Revert()
 {
     if ( wxMessageBox
          (
-            _("Discard changes and reload the last saved version?"),
-            wxTheApp->GetAppDisplayName(),
+            _("Discard changes and reload the last saved version?").ToStdString(),
+            wxTheApp->GetAppDisplayName().ToStdString(),
             wxYES_NO | wxCANCEL | wxICON_QUESTION,
             GetDocumentWindow()
           ) != wxYES )
@@ -449,9 +449,9 @@ std::string wxDocument::DoGetUserReadableName() const
         return m_documentTitle;
 
     if ( !m_documentFile.empty() )
-        return wxFileNameFromPath(m_documentFile);
+        return wxFileNameFromPath(m_documentFile).ToStdString();
 
-    return _("unnamed");
+    return _("unnamed").ToStdString();
 }
 
 wxWindow *wxDocument::GetDocumentWindow() const
@@ -477,8 +477,8 @@ bool wxDocument::OnSaveModified()
                     (
                      _("Do you want to save changes to %s?"),
                      GetUserReadableName()
-                    ),
-                    wxTheApp->GetAppDisplayName(),
+                    ).ToStdString(),
+                    wxTheApp->GetAppDisplayName().ToStdString(),
                     wxYES_NO | wxCANCEL | wxICON_QUESTION | wxCENTRE,
                     GetDocumentWindow()
                  ) )
@@ -834,7 +834,7 @@ bool wxDocTemplate::FileMatchesTemplate(const std::string& path)
     while (parser.HasMoreTokens())
     {
         wxString filter = parser.GetNextToken();
-        wxString filterExt = FindExtension (filter);
+        wxString filterExt = FindExtension (filter.ToStdString());
         if ( filter.IsSameAs (anything)    ||
              filterExt.IsSameAs (anything) ||
              filterExt.IsSameAs (FindExtension (path)) )
@@ -980,7 +980,7 @@ bool wxDocManager::Initialize()
     return true;
 }
 
-std::string wxDocManager::GetLastDirectory() const
+wxString wxDocManager::GetLastDirectory() const
 {
     // if we haven't determined the last used directory yet, do it now
     if ( m_lastDirectory.empty() )
@@ -995,11 +995,11 @@ std::string wxDocManager::GetLastDirectory() const
         // the last file he used
         if ( m_fileHistory && m_fileHistory->GetCount() )
         {
-            const std::string lastOpened = m_fileHistory->GetHistoryFile(0);
+            const std::string lastOpened = m_fileHistory->GetHistoryFile(0).ToStdString();
             const wxFileName fn(lastOpened);
             if ( fn.DirExists() )
             {
-                self->m_lastDirectory = fn.GetPath();
+                self->m_lastDirectory = fn.GetPath().ToStdString();
             }
             //else: should we try the next one?
         }
@@ -1009,7 +1009,7 @@ std::string wxDocManager::GetLastDirectory() const
         // system-dependent default location for the document files
         if ( m_lastDirectory.empty() )
         {
-            self->m_lastDirectory = wxStandardPaths::Get().GetAppDocumentsDir();
+            self->m_lastDirectory = wxStandardPaths::Get().GetAppDocumentsDir().ToStdString();
         }
     }
 
@@ -1183,7 +1183,7 @@ void wxDocManager::OnPreview(wxCommandEvent& WXUNUSED(event))
 
         wxPreviewFrame* frame = CreatePreviewFrame(preview,
                                                    wxTheApp->GetTopWindow(),
-                                                   _("Print Preview"));
+                                                   _("Print Preview").ToStdString());
         wxCHECK_RET( frame, "should create a print preview frame" );
 
         frame->Centre(wxBOTH);
@@ -1520,7 +1520,7 @@ wxCommandProcessor *wxDocManager::GetCurrentCommandProcessor() const
     return doc ? doc->GetCommandProcessor() : nullptr;
 }
 
-std::string wxDocManager::MakeNewDocumentName()
+wxString wxDocManager::MakeNewDocumentName()
 {
     wxString name;
 
@@ -1536,14 +1536,14 @@ std::string wxDocManager::MakeNewDocumentName()
 // If docName is empty, a document is not currently active.
 std::string wxDocManager::MakeFrameTitle(wxDocument* doc)
 {
-    std::string appName = wxTheApp->GetAppDisplayName();
+    std::string appName = wxTheApp->GetAppDisplayName().ToStdString();
     std::string title;
     if (!doc)
         title = appName;
     else
     {
         std::string docName = doc->GetUserReadableName();
-        title = docName + std::string(_(" - ")) + appName;
+        title = docName + _(" - ").ToStdString() + appName;
     }
     return title;
 }
@@ -1573,7 +1573,7 @@ std::string wxDocManager::GetHistoryFile(size_t i) const
     std::string histFile;
 
     if (m_fileHistory)
-        histFile = m_fileHistory->GetHistoryFile(i);
+        histFile = m_fileHistory->GetHistoryFile(i).ToStdString();
 
     return histFile;
 }
@@ -1674,9 +1674,9 @@ wxDocTemplate *wxDocManager::SelectDocumentPath(wxDocTemplate **templates,
 
     int FilterIndex = -1;
 
-    std::string pathTmp = wxFileSelectorEx(_("Open File"),
+    wxString pathTmp = wxFileSelectorEx(_("Open File"),
                                         GetLastDirectory(),
-                                        wxEmptyString,
+                                        "",
                                         &FilterIndex,
                                         descrBuf,
                                         wxFD_OPEN | wxFD_FILE_MUST_EXIST);
@@ -1686,23 +1686,23 @@ wxDocTemplate *wxDocManager::SelectDocumentPath(wxDocTemplate **templates,
     {
         if (!wxFileExists(pathTmp))
         {
-            std::string msgTitle;
+            wxString msgTitle;
             if (!wxTheApp->GetAppDisplayName().empty())
                 msgTitle = wxTheApp->GetAppDisplayName();
             else
-                msgTitle = std::string(_("File error"));
+                msgTitle = _("File error");
 
-            wxMessageBox(_("Sorry, could not open this file."),
-                         msgTitle,
+            wxMessageBox(_("Sorry, could not open this file.").ToStdString(),
+                         msgTitle.ToStdString(),
                          wxOK | wxICON_EXCLAMATION | wxCENTRE);
 
             path.clear();
             return nullptr;
         }
 
-        SetLastDirectory(wxPathOnly(pathTmp));
+        SetLastDirectory(wxPathOnly(pathTmp).ToStdString());
 
-        path = pathTmp;
+        path = pathTmp.ToStdString();
 
         // first choose the template using the extension, if this fails (i.e.
         // wxFileSelectorEx() didn't fill it), then use the path
@@ -1726,8 +1726,8 @@ wxDocTemplate *wxDocManager::SelectDocumentPath(wxDocTemplate **templates,
             // Since we do not add files with non-default extensions to the
             // file history this can only happen if the application changes the
             // allowed templates in runtime.
-            wxMessageBox(_("Sorry, the format for this file is unknown."),
-                         _("Open File"),
+            wxMessageBox(_("Sorry, the format for this file is unknown.").ToStdString(),
+                         _("Open File").ToStdString(),
                          wxOK | wxICON_EXCLAMATION | wxCENTRE);
         }
     }
@@ -2043,7 +2043,7 @@ std::string GetAppropriateTitle(const wxView *view, const std::string& titleGive
         if ( view && view->GetDocument() )
             title = view->GetDocument()->GetUserReadableName();
         else
-            title = _("Printout");
+            title = _("Printout").ToStdString();
     }
 
     return title;

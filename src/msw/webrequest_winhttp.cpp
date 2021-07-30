@@ -720,7 +720,7 @@ wxWebSessionWinHTTP::CreateRequest(wxWebSession& session,
     }
 
     return wxWebRequestImplPtr(
-        new wxWebRequestWinHTTP(session, *this, handler, url, id));
+        new wxWebRequestWinHTTP(session, *this, handler, url.ToStdString(), id));
 }
 
 wxVersionInfo wxWebSessionWinHTTP::GetLibraryVersionInfo()

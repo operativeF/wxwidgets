@@ -63,7 +63,7 @@ private:
     wxFontMapperBase *m_fontMapper;
 
     // the old path to be restored if m_ok
-    std::string m_pathOld;
+    wxString m_pathOld;
 
     // have we changed the path successfully?
     bool m_ok;

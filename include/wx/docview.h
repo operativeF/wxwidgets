@@ -485,7 +485,7 @@ public:
 
     // Return the default name for a new document (by default returns strings
     // in the form "unnamed <counter>" but can be overridden)
-    virtual std::string MakeNewDocumentName();
+    virtual wxString MakeNewDocumentName();
 
     // Make a frame title (override this to do something different)
     virtual std::string MakeFrameTitle(wxDocument* doc);
@@ -508,7 +508,7 @@ public:
     virtual void FileHistoryAddFilesToMenu();
     virtual void FileHistoryAddFilesToMenu(wxMenu* menu);
 
-    std::string GetLastDirectory() const;
+    wxString GetLastDirectory() const;
     void SetLastDirectory(const std::string& dir) { m_lastDirectory = dir; }
 
     // Get the current document manager

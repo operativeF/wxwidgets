@@ -2845,7 +2845,7 @@ wxCSConv::wxCSConv(const wxString& charset)
     }
 
 #if wxUSE_FONTMAP
-    SetEncoding(wxFontMapperBase::GetEncodingFromName(charset));
+    SetEncoding(wxFontMapperBase::GetEncodingFromName(charset.ToStdString()));
 #else
     SetEncoding(wxFONTENCODING_SYSTEM);
 #endif

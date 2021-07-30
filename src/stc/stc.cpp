@@ -4872,7 +4872,7 @@ void wxStyledTextCtrl::ScrollToColumn(int column) {
 }
 
 
-void wxStyledTextCtrl::DoSetValue(const std::string& value, int flags)
+void wxStyledTextCtrl::DoSetValue(const wxString& value, int flags)
 {
     if ( flags & SetValue_SelectionOnly )
         ReplaceSelection(value);

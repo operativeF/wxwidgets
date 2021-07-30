@@ -610,7 +610,7 @@ public:
     wxFont GetFont(const wxString& param = wxT("font"), wxWindow* parent = nullptr) override;
 
     // Gets the value of a boolean attribute (only "0" and "1" are valid values)
-    bool GetBoolAttr(std::string_view attr, bool defaultv) override;
+    bool GetBoolAttr(const wxString& attr, bool defaultv) override;
 
     // Gets a file path from the given node, expanding environment variables in
     // it if wxXRC_USE_ENVVARS is in use.

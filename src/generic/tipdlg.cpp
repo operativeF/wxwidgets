@@ -129,7 +129,7 @@ std::string wxFileTipProvider::GetTip()
     size_t count = m_textfile.GetLineCount();
     if ( !count )
     {
-        return _("Tips not available, sorry!");
+        return _("Tips not available, sorry!").ToStdString();
     }
 
     wxString tip;
@@ -175,7 +175,7 @@ std::string wxFileTipProvider::GetTip()
         tip = wxGetTranslation(tip);
     }
 
-    return tip;
+    return tip.ToStdString();
 }
 #endif // wxUSE_TEXTFILE
 
@@ -190,7 +190,7 @@ wxEND_EVENT_TABLE()
 wxTipDialog::wxTipDialog(wxWindow *parent,
                          wxTipProvider *tipProvider,
                          bool showAtStartup)
-           : wxDialog(GetParentForModalDialog(parent, 0), wxID_ANY, _("Tip of the Day"),
+           : wxDialog(GetParentForModalDialog(parent, 0), wxID_ANY, _("Tip of the Day").ToStdString(),
                       wxDefaultPosition, wxDefaultSize,
                       wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER
                       )
@@ -200,7 +200,7 @@ wxTipDialog::wxTipDialog(wxWindow *parent,
 
     // 1) create all controls in tab order
 
-    wxStaticText *text = new wxStaticText(this, wxID_ANY, _("Did you know..."));
+    wxStaticText *text = new wxStaticText(this, wxID_ANY, _("Did you know...").ToStdString());
 
     if (!isPda)
     {
@@ -225,11 +225,11 @@ wxTipDialog::wxTipDialog(wxWindow *parent,
     wxIcon icon = wxArtProvider::GetIcon(wxART_TIP, wxART_CMN_DIALOG);
     wxStaticBitmap *bmp = new wxStaticBitmap(this, wxID_ANY, icon);
 
-    m_checkbox = new wxCheckBox(this, wxID_ANY, _("&Show tips at startup"));
+    m_checkbox = new wxCheckBox(this, wxID_ANY, _("&Show tips at startup").ToStdString());
     m_checkbox->SetValue(showAtStartup);
     m_checkbox->SetFocus();
 
-    wxButton *btnNext = new wxButton(this, wxID_NEXT_TIP, _("&Next Tip"));
+    wxButton *btnNext = new wxButton(this, wxID_NEXT_TIP, _("&Next Tip").ToStdString());
 
     wxButton *btnClose = new wxButton(this, wxID_CLOSE);
     SetAffirmativeId(wxID_CLOSE);

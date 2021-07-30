@@ -155,10 +155,10 @@ protected:
     //
     // caller should provide a pointer to the string variable which should be
     // later passed to RestorePath()
-    bool ChangePath(const std::string& pathNew, std::string *pathOld);
+    bool ChangePath(const wxString& pathNew, wxString* pathOld);
 
     // restore the config path after use
-    void RestorePath(const std::string& pathOld);
+    void RestorePath(const wxString& pathOld);
 
     // config object and path (in it) to use
     wxConfigBase *m_configDummy{nullptr};

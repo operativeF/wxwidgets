@@ -519,16 +519,16 @@ int wxMessageDialog::ShowMessageBox()
     // box is not going to be too big (requiring the replacement of the static
     // control with an edit one)
     const DWORD tid = ::GetCurrentThreadId();
-    m_hook = ::SetWindowsHookEx(WH_CBT,
+    m_hook = ::SetWindowsHookExW(WH_CBT,
                                 &wxMessageDialog::HookFunction, nullptr, tid);
     HookMap()[tid] = this;
 
     // do show the dialog
-    const int msAns = MessageBox
+    const int msAns = MessageBoxW
                       (
                         hWnd,
                         GetFullMessage().t_str(),
-                        m_caption.t_str(),
+                        boost::nowide::widen(m_caption).c_str(),
                         msStyle
                       );
 

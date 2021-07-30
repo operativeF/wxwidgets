@@ -310,7 +310,7 @@ class WXDLLIMPEXP_CORE wxDataViewCustomRendererBase
 public:
     // Constructor must specify the usual renderer parameters which we simply
     // pass to the base class
-    wxDataViewCustomRendererBase(const std::string& varianttype = wxASCII_STR("string"),
+    wxDataViewCustomRendererBase(const std::string& varianttype = "string",
                                  wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT,
                                  int align = wxDVR_DEFAULT_ALIGNMENT)
         : wxDataViewCustomRendererRealBase(varianttype, mode, align)

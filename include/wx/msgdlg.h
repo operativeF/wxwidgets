@@ -104,7 +104,7 @@ public:
     wxMessageDialogBase(wxMessageDialogBase&&) = default;
     wxMessageDialogBase& operator=(wxMessageDialogBase&&) = default;
 
-    wxString GetCaption() const { return m_caption; }
+    std::string GetCaption() const { return m_caption; }
 
     // Title and caption are the same thing, GetCaption() mostly exists just
     // for compatibility.
@@ -252,7 +252,7 @@ protected:
 
     wxString m_message;
     wxString m_extendedMessage;
-    wxString m_caption;
+    std::string m_caption;
 
     long m_dialogStyle{0};
 

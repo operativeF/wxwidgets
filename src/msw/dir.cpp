@@ -179,8 +179,8 @@ public:
 private:
     FIND_DATA m_finddata;
 
-    std::string m_dirname;
-    std::string m_filespec;
+    wxString m_dirname;
+    wxString m_filespec;
 
     int      m_flags{0};
 };

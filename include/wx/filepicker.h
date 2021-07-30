@@ -89,11 +89,11 @@ public:
     virtual ~wxFileDirPickerWidgetBase() = default;
 
     // Path here is the name of the selected file or directory.
-    wxString GetPath() const { return m_path; }
-    virtual void SetPath(const wxString &str) { m_path=str; }
+    std::string GetPath() const { return m_path; }
+    virtual void SetPath(const std::string &str) { m_path=str; }
 
     // Set the directory to open the file browse dialog at initially.
-    virtual void SetInitialDirectory(const wxString& dir) = 0;
+    virtual void SetInitialDirectory(const std::string& dir) = 0;
 
     // returns the picker widget cast to wxControl
     virtual wxControl *AsControl() = 0;
@@ -102,7 +102,7 @@ protected:
     virtual void UpdateDialogPath(wxDialog *) = 0;
     virtual void UpdatePathFromDialog(wxDialog *) = 0;
 
-    wxString m_path;
+    std::string m_path;
 };
 
 // Styles which must be supported by all controls implementing wxFileDirPickerWidgetBase
@@ -156,14 +156,14 @@ protected:
     //     directly by the user and derived classes wouldn't use them
     bool CreateBase(wxWindow *parent,
                     wxWindowID id,
-                    const wxString& path,
-                    const wxString &message,
-                    const wxString &wildcard,
+                    const std::string& path,
+                    const std::string& message,
+                    const std::string& wildcard,
                     const wxPoint& pos,
                     const wxSize& size,
                     long style,
                     const wxValidator& validator,
-                    const wxString& name);
+                    const std::string& name);
 
 public:         // public API
 
@@ -171,7 +171,7 @@ public:         // public API
     void SetPath(const wxString &str);
 
     // Set the directory to open the file browse dialog at initially.
-    void SetInitialDirectory(const wxString& dir)
+    void SetInitialDirectory(const std::string& dir)
     {
         m_pickerIface->SetInitialDirectory(dir);
     }
@@ -199,9 +199,9 @@ protected:
     // creates the picker control
     virtual
     wxFileDirPickerWidgetBase *CreatePicker(wxWindow *parent,
-                                            const wxString& path,
-                                            const wxString& message,
-                                            const wxString& wildcard) = 0;
+                                            const std::string& path,
+                                            const std::string& message,
+                                            const std::string& wildcard) = 0;
 
 protected:
 
@@ -287,12 +287,12 @@ public:     // overrides
 protected:
     
     wxFileDirPickerWidgetBase *CreatePicker(wxWindow *parent,
-                                            const wxString& path,
-                                            const wxString& message,
-                                            const wxString& wildcard) override
+                                            const std::string& path,
+                                            const std::string& message,
+                                            const std::string& wildcard) override
     {
         return new wxFilePickerWidget(parent, wxID_ANY,
-                                      wxGetTranslation(wxFilePickerWidgetLabel),
+                                      wxGetTranslation(wxFilePickerWidgetLabel).ToStdString(),
                                       path, message, wildcard,
                                       wxDefaultPosition, wxDefaultSize,
                                       GetPickerStyle(GetWindowStyle()));
@@ -386,9 +386,9 @@ public:     // overrides
 protected:
     
     wxFileDirPickerWidgetBase *CreatePicker(wxWindow *parent,
-                                            const wxString& path,
-                                            const wxString& message,
-                                            const wxString& WXUNUSED(wildcard)) override
+                                            const std::string& path,
+                                            const std::string& message,
+                                            const std::string& WXUNUSED(wildcard)) override
     {
         return new wxDirPickerWidget(parent, wxID_ANY,
                                      wxGetTranslation(wxDirPickerWidgetLabel),

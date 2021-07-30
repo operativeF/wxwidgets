@@ -69,7 +69,7 @@ public:
     // set label text (mnemonics will be escaped)
     virtual void SetLabelText(const wxString& text)
     {
-        SetLabel(EscapeMnemonics(text));
+        SetLabel(EscapeMnemonics(text).ToStdString());
     }
 
     // get just the text of the label, without mnemonic characters ('&')

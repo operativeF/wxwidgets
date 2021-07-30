@@ -106,7 +106,7 @@ public:
 #endif
 
     virtual wxFont GetFont(const wxString& param = wxT("font"), wxWindow* parent = nullptr) = 0;
-    virtual bool GetBoolAttr(std::string_view attr, bool defaultv) = 0;
+    virtual bool GetBoolAttr(const wxString& attr, bool defaultv) = 0;
     virtual wxString GetFilePath(const wxXmlNode* node) = 0;
     virtual void SetupWindow(wxWindow *wnd) = 0;
     virtual void CreateChildren(wxObject *parent, bool this_hnd_only = false) = 0;
@@ -367,7 +367,7 @@ protected:
     {
         return GetImpl()->GetFont(param, parent);
     }
-    bool GetBoolAttr(std::string_view attr, bool defaultv)
+    bool GetBoolAttr(const wxString& attr, bool defaultv)
     {
         return GetImpl()->GetBoolAttr(attr, defaultv);
     }

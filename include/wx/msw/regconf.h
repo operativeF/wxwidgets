@@ -29,10 +29,10 @@ class WXDLLIMPEXP_BASE wxRegConfig : public wxConfigBase
 public:
   // ctor & dtor
     // will store data in HKLM\appName and HKCU\appName
-  wxRegConfig(const std::string& appName = {},
-              const std::string& vendorName = {},
-              const std::string& localFilename = {},
-              const std::string& globalFilename = {},
+  wxRegConfig(const wxString& appName = {},
+              const wxString& vendorName = {},
+              const wxString& localFilename = {},
+              const wxString& globalFilename = {},
               long style = wxCONFIG_USE_GLOBAL_FILE);
 
     // dtor will save unsaved data

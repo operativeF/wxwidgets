@@ -152,7 +152,7 @@ bool wxXmlNode::HasAttribute(const wxString& attrName) const
     return false;
 }
 
-bool wxXmlNode::GetAttribute(std::string_view attrName, std::string* value) const
+bool wxXmlNode::GetAttribute(const wxString& attrName, wxString* value) const
 {
     wxCHECK_MSG( value, false, "value argument must not be NULL" );
 
@@ -171,9 +171,9 @@ bool wxXmlNode::GetAttribute(std::string_view attrName, std::string* value) cons
     return false;
 }
 
-std::string wxXmlNode::GetAttribute(std::string_view attrName, const std::string& defaultVal) const
+wxString wxXmlNode::GetAttribute(const wxString& attrName, const wxString& defaultVal) const
 {
-    std::string tmp;
+    wxString tmp;
     if (GetAttribute(attrName, &tmp))
         return tmp;
 

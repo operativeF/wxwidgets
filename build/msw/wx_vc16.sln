@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29020.237
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31521.260
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_custom_build", "wx_custom_build.vcxproj", "{01F4CE10-2CFB-41A8-B41F-E54337868A1D}"
 EndProject
@@ -100,12 +100,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "richtext", "wx_richtext.vcx
 	ProjectSection(ProjectDependencies) = postProject
 		{3E6DCA27-5FA3-53EC-BBD6-2D42294B7AE6} = {3E6DCA27-5FA3-53EC-BBD6-2D42294B7AE6}
 		{24C45343-FD20-5C92-81C1-35A2AE841E79} = {24C45343-FD20-5C92-81C1-35A2AE841E79}
-	EndProjectSection
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "stc", "wx_stc.vcxproj", "{23E1C437-A951-5943-8639-A17F3CF2E606}"
-	ProjectSection(ProjectDependencies) = postProject
-		{74827EBD-93DC-5110-BA95-3F2AB029B6B0} = {74827EBD-93DC-5110-BA95-3F2AB029B6B0}
-		{6744DAD8-9C70-574A-BFF2-9F8DDDB24A75} = {6744DAD8-9C70-574A-BFF2-9F8DDDB24A75}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "gl", "wx_gl.vcxproj", "{DA8B15EF-6750-5928-BC0E-C748213CF9B2}"
@@ -477,22 +471,6 @@ Global
 		{7FB0902D-8579-5DCE-B883-DAF66A885005}.Release|Win32.Build.0 = Release|Win32
 		{7FB0902D-8579-5DCE-B883-DAF66A885005}.Release|x64.ActiveCfg = Release|x64
 		{7FB0902D-8579-5DCE-B883-DAF66A885005}.Release|x64.Build.0 = Release|x64
-		{23E1C437-A951-5943-8639-A17F3CF2E606}.Debug|Win32.ActiveCfg = Debug|Win32
-		{23E1C437-A951-5943-8639-A17F3CF2E606}.Debug|Win32.Build.0 = Debug|Win32
-		{23E1C437-A951-5943-8639-A17F3CF2E606}.Debug|x64.ActiveCfg = Debug|x64
-		{23E1C437-A951-5943-8639-A17F3CF2E606}.Debug|x64.Build.0 = Debug|x64
-		{23E1C437-A951-5943-8639-A17F3CF2E606}.DLL Debug|Win32.ActiveCfg = DLL Debug|Win32
-		{23E1C437-A951-5943-8639-A17F3CF2E606}.DLL Debug|Win32.Build.0 = DLL Debug|Win32
-		{23E1C437-A951-5943-8639-A17F3CF2E606}.DLL Debug|x64.ActiveCfg = DLL Debug|x64
-		{23E1C437-A951-5943-8639-A17F3CF2E606}.DLL Debug|x64.Build.0 = DLL Debug|x64
-		{23E1C437-A951-5943-8639-A17F3CF2E606}.DLL Release|Win32.ActiveCfg = DLL Release|Win32
-		{23E1C437-A951-5943-8639-A17F3CF2E606}.DLL Release|Win32.Build.0 = DLL Release|Win32
-		{23E1C437-A951-5943-8639-A17F3CF2E606}.DLL Release|x64.ActiveCfg = DLL Release|x64
-		{23E1C437-A951-5943-8639-A17F3CF2E606}.DLL Release|x64.Build.0 = DLL Release|x64
-		{23E1C437-A951-5943-8639-A17F3CF2E606}.Release|Win32.ActiveCfg = Release|Win32
-		{23E1C437-A951-5943-8639-A17F3CF2E606}.Release|Win32.Build.0 = Release|Win32
-		{23E1C437-A951-5943-8639-A17F3CF2E606}.Release|x64.ActiveCfg = Release|x64
-		{23E1C437-A951-5943-8639-A17F3CF2E606}.Release|x64.Build.0 = Release|x64
 		{DA8B15EF-6750-5928-BC0E-C748213CF9B2}.Debug|Win32.ActiveCfg = Debug|Win32
 		{DA8B15EF-6750-5928-BC0E-C748213CF9B2}.Debug|Win32.Build.0 = Debug|Win32
 		{DA8B15EF-6750-5928-BC0E-C748213CF9B2}.Debug|x64.ActiveCfg = Debug|x64
@@ -512,5 +490,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {53C70B19-7FDD-4CCD-87C9-43AC5BDDABFA}
 	EndGlobalSection
 EndGlobal

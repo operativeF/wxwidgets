@@ -318,7 +318,7 @@ bool wxFileType::GetIcon(wxIconLocation *iconLoc) const
     {
         if ( iconLoc )
         {
-            iconLoc->SetFileName(m_info->GetIconFile());
+            iconLoc->SetFileName(m_info->GetIconFile().ToStdString());
 #ifdef __WINDOWS__
             iconLoc->SetIndex(m_info->GetIconIndex());
 #endif // __WINDOWS__
@@ -344,7 +344,7 @@ wxFileType::GetIcon(wxIconLocation *iconloc,
     // expand this
     if ( iconloc )
     {
-        iconloc->SetFileName(ExpandCommand(iconloc->GetFileName(), params));
+        iconloc->SetFileName(ExpandCommand(iconloc->GetFileName(), params).ToStdString());
     }
 
     return true;
