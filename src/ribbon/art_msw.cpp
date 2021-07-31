@@ -1445,8 +1445,8 @@ void wxRibbonMSWArtProvider::DrawTab(
     }
     if(m_flags & wxRIBBON_BAR_SHOW_PAGE_LABELS)
     {
-        wxString label = tab.page->GetLabel();
-        if(!label.IsEmpty())
+        std::string label = tab.page->GetLabel();
+        if(!label.empty())
         {
             dc.SetFont(m_tab_label_font);
 
@@ -1896,7 +1896,7 @@ void wxRibbonMSWArtProvider::DrawPanelBackground(
         }
 
         wxRect label_rect(true_rect);
-        wxString label = wnd->GetLabel();
+        std::string label = wnd->GetLabel();
         bool clip_label = false;
         wxSize label_size(dc.GetTextExtent(label));
 
@@ -1914,7 +1914,7 @@ void wxRibbonMSWArtProvider::DrawPanelBackground(
         if(label_size.x > label_rect.GetWidth())
         {
             // Test if there is enough length for 3 letters and ...
-            wxString new_label = label.Mid(0, 3) + wxT("...");
+            std::string new_label = label.substr(0, 3) + "...";
             label_size = dc.GetTextExtent(new_label);
             if(label_size.x > label_rect.GetWidth())
             {
@@ -1926,9 +1926,9 @@ void wxRibbonMSWArtProvider::DrawPanelBackground(
             {
                 // Room for some characters and ...
                 // Display as many characters as possible and append ...
-                for(size_t len = label.Len() - 1; len >= 3; --len)
+                for(size_t len = label.length() - 1; len >= 3; --len)
                 {
-                    new_label = label.Mid(0, len) + wxT("...");
+                    new_label = label.substr(0, len) + "...";
                     label_size = dc.GetTextExtent(new_label);
                     if(label_size.x <= label_rect.GetWidth())
                     {
@@ -2465,7 +2465,7 @@ void wxRibbonMSWArtProvider::DrawButtonBarButton(
                         const wxRect& rect,
                         wxRibbonButtonKind kind,
                         long state,
-                        const wxString& label,
+                        const std::string& label,
                         const wxBitmap& bitmap_large,
                         const wxBitmap& bitmap_small)
 {
@@ -2592,7 +2592,7 @@ void wxRibbonMSWArtProvider::DrawButtonBarButtonForeground(
                         const wxRect& rect,
                         wxRibbonButtonKind kind,
                         long state,
-                        const wxString& label,
+                        const std::string& label,
                         const wxBitmap& bitmap_large,
                         const wxBitmap& bitmap_small)
 {
@@ -2625,20 +2625,20 @@ void wxRibbonMSWArtProvider::DrawButtonBarButtonForeground(
             }
             else
             {
-                size_t breaki = label.Len();
+                size_t breaki = label.length();
                 do
                 {
                     --breaki;
                     if(wxRibbonCanLabelBreakAtPosition(label, breaki))
                     {
-                        wxString label_top = label.Mid(0, breaki);
+                        std::string label_top = label.substr(0, breaki);
                         dc.GetTextExtent(label_top, &label_w, &label_h);
                         if(label_w + 2 * padding <= rect.width)
                         {
                             dc.DrawText(label_top,
                                 rect.x + (rect.width - label_w) / 2, ypos);
                             ypos += label_h;
-                            wxString label_bottom = label.Mid(breaki + 1);
+                            std::string label_bottom = label.substr(breaki + 1);
                             dc.GetTextExtent(label_bottom, &label_w, &label_h);
                             label_w += arrow_width;
                             int iX = rect.x + (rect.width - label_w) / 2;
@@ -2867,7 +2867,7 @@ void wxRibbonMSWArtProvider::DrawHelpButton(wxDC& dc,
 void wxRibbonMSWArtProvider::GetBarTabWidth(
                         wxDC& dc,
                         wxWindow* WXUNUSED(wnd),
-                        const wxString& label,
+                        const std::string& label,
                         const wxBitmap& bitmap,
                         int* ideal,
                         int* small_begin_need_separator,
@@ -2876,7 +2876,7 @@ void wxRibbonMSWArtProvider::GetBarTabWidth(
 {
     int width = 0;
     int min = 0;
-    if((m_flags & wxRIBBON_BAR_SHOW_PAGE_LABELS) && !label.IsEmpty())
+    if((m_flags & wxRIBBON_BAR_SHOW_PAGE_LABELS) && !label.empty())
     {
         dc.SetFont(m_tab_label_font);
         width += dc.GetTextExtent(label).x;
@@ -3133,7 +3133,7 @@ bool wxRibbonMSWArtProvider::GetButtonBarButtonSize(
                         wxWindow* wnd,
                         wxRibbonButtonKind kind,
                         wxRibbonButtonBarButtonState size,
-                        const wxString& label,
+                        const std::string& label,
                         wxCoord text_min_width,
                         wxSize bitmap_size_large,
                         wxSize bitmap_size_small,
@@ -3211,13 +3211,13 @@ bool wxRibbonMSWArtProvider::GetButtonBarButtonSize(
                 last_line_extra_width += 8;
             }
             size_t i;
-            for(i = 0; i < label.Len(); ++i)
+            for(i = 0; i < label.length(); ++i)
             {
                 if(wxRibbonCanLabelBreakAtPosition(label, i))
                 {
                     int width = wxMax(
-                        dc.GetTextExtent(label.Left(i)).x,
-                        dc.GetTextExtent(label.Mid(i + 1)).x + last_line_extra_width);
+                        dc.GetTextExtent(label.substr(0, i)).x,
+                        dc.GetTextExtent(label.substr(i + 1)).x + last_line_extra_width);
                     if(best_width < text_min_width)
                         best_width = text_min_width;
                     if(width < best_width)
@@ -3256,7 +3256,7 @@ bool wxRibbonMSWArtProvider::GetButtonBarButtonSize(
 }
 
 wxCoord wxRibbonMSWArtProvider::GetButtonBarButtonTextWidth(
-                        wxDC& dc, const wxString& label,
+                        wxDC& dc, const std::string& label,
                         wxRibbonButtonKind kind,
                         wxRibbonButtonBarButtonState size)
 {
@@ -3273,13 +3273,13 @@ wxCoord wxRibbonMSWArtProvider::GetButtonBarButtonTextWidth(
             last_line_extra_width += 8;
         }
         size_t i;
-        for(i = 0; i < label.Len(); ++i)
+        for(i = 0; i < label.length(); ++i)
         {
             if(wxRibbonCanLabelBreakAtPosition(label, i))
             {
                 int width = wxMax(
-                    dc.GetTextExtent(label.Left(i)).x,
-                    dc.GetTextExtent(label.Mid(i + 1)).x + last_line_extra_width);
+                    dc.GetTextExtent(label.substr(0, i)).x,
+                    dc.GetTextExtent(label.substr(i + 1)).x + last_line_extra_width);
                 if(width < best_width)
                 {
                     best_width = width;

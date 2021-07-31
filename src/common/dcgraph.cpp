@@ -1234,7 +1234,7 @@ bool wxGCDCImpl::CanGetTextExtent() const
     return true;
 }
 
-wxSize wxGCDCImpl::DoGetTextExtent( const std::string& str,
+wxSize wxGCDCImpl::DoGetTextExtent( std::string_view str,
                               wxCoord *descent, wxCoord *externalLeading ,
                               const wxFont *theFont ) const
 {
@@ -1270,7 +1270,7 @@ wxSize wxGCDCImpl::DoGetTextExtent( const std::string& str,
     return { wxRound(width), wxRound(height) };
 }
 
-std::vector<int> wxGCDCImpl::DoGetPartialTextExtents(const std::string& text) const
+std::vector<int> wxGCDCImpl::DoGetPartialTextExtents(std::string_view text) const
 {
     if ( text.empty() )
         return {};

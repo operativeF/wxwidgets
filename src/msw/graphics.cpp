@@ -479,9 +479,9 @@ public:
     void PushState() override;
     void PopState() override;
 
-    std::pair<double, double> GetTextExtent( const std::string& str,
+    std::pair<double, double> GetTextExtent( std::string_view str,
         double *descent, double *externalLeading ) const override;
-    std::vector<double> GetPartialTextExtents(const std::string& text) const override;
+    std::vector<double> GetPartialTextExtents(std::string_view text) const override;
     bool ShouldOffset() const override;
     virtual void GetSize( double* width, double *height );
     void GetDPI(double* dpiX, double* dpiY) const override;
@@ -494,7 +494,7 @@ protected:
     void Init(Graphics* graphics, int width, int height);
 
 private:
-    void DoDrawText(const std::string& str, double x, double y) override;
+    void DoDrawText(std::string_view str, double x, double y) override;
 
     Graphics* m_context;
     wxStack<GraphicsState> m_stateStack;
@@ -2283,7 +2283,7 @@ void wxGDIPlusContext::DrawIcon( const wxIcon &icon, double x, double y, double 
     delete image ;
 }
 
-void wxGDIPlusContext::DoDrawText(const std::string& str,
+void wxGDIPlusContext::DoDrawText(std::string_view str,
                                         double x, double y )
 {
    if (m_composition == wxCOMPOSITION_DEST)
@@ -2309,7 +2309,7 @@ void wxGDIPlusContext::DoDrawText(const std::string& str,
                );
 }
 
-std::pair<double, double> wxGDIPlusContext::GetTextExtent( const std::string& str,
+std::pair<double, double> wxGDIPlusContext::GetTextExtent(std::string_view str,
                                      double *descent, double *externalLeading ) const
 {
     // FIXME: Must return std::pair<double, double>
@@ -2379,7 +2379,7 @@ std::pair<double, double> wxGDIPlusContext::GetTextExtent( const std::string& st
 }
 
 // FIXME: This function is a total mess and probably broken.
-std::vector<double> wxGDIPlusContext::GetPartialTextExtents(const std::string& text) const
+std::vector<double> wxGDIPlusContext::GetPartialTextExtents(std::string_view text) const
 {
     //wxCHECK_RET( !m_font.IsNull(), wxT("wxGDIPlusContext::GetPartialTextExtents - no valid font set") );
 

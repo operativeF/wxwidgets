@@ -261,7 +261,7 @@ protected:
         m_dc.DoSetClippingRegion(GetX(x, y), GetY(x, y), GetX(w, h), GetY(w, h));
     }
 
-    wxSize DoGetTextExtent(const std::string& string,
+    wxSize DoGetTextExtent(std::string_view string,
                                  wxCoord *descent = nullptr,
                                  wxCoord *externalLeading = nullptr,
                                  const wxFont *theFont = nullptr) const override

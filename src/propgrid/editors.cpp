@@ -704,7 +704,7 @@ void wxPropertyGrid::OnComboItemPaint( const wxPGComboBox* pCb,
 {
     wxPGProperty* p = pCb->GetProperty();
 
-    wxString text;
+    std::string text;
 
     const wxPGChoices& choices = p->GetChoices();
     int comValIndex = -1;

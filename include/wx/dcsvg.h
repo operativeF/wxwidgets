@@ -248,7 +248,7 @@ private:
         return {m_width, m_height};
     }
 
-    wxSize DoGetTextExtent(const std::string& string,
+    wxSize DoGetTextExtent(std::string_view string,
                                  wxCoord* descent = nullptr,
                                  wxCoord* externalLeading = nullptr,
                                  const wxFont* theFont = nullptr) const override;

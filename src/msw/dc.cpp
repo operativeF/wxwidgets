@@ -1898,7 +1898,7 @@ void wxMSWDCImpl::DoGetFontMetrics(int *height,
         *averageWidth = tm.tmAveCharWidth;
 }
 
-wxSize wxMSWDCImpl::DoGetTextExtent(const std::string& string,
+wxSize wxMSWDCImpl::DoGetTextExtent(std::string_view string,
                            wxCoord *descent, wxCoord *externalLeading,
                            const wxFont *font) const
 {
@@ -1909,7 +1909,7 @@ wxSize wxMSWDCImpl::DoGetTextExtent(const std::string& string,
 }
 
 
-std::vector<int> wxMSWDCImpl::DoGetPartialTextExtents(const std::string& text) const
+std::vector<int> wxMSWDCImpl::DoGetPartialTextExtents(std::string_view text) const
 {
     wxTextMeasure txm(GetOwner(), nullptr); // don't change the font
     return txm.GetPartialTextExtents(text, 1.0);

@@ -90,7 +90,7 @@ wxCalendarCtrl::Create(wxWindow *parent,
         }
     }
 
-    const std::string const clsname = s_clsMonthCal.IsRegistered()
+    const std::string clsname = s_clsMonthCal.IsRegistered()
         ? s_clsMonthCal.GetName()
         : MONTHCAL_CLASSA;
 

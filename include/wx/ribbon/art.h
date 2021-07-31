@@ -267,7 +267,7 @@ public:
                         const wxRect& rect,
                         wxRibbonButtonKind kind,
                         long state,
-                        const wxString& label,
+                        const std::string& label,
                         const wxBitmap& bitmap_large,
                         const wxBitmap& bitmap_small) = 0;
 
@@ -303,7 +303,7 @@ public:
     virtual void GetBarTabWidth(
                         wxDC& dc,
                         wxWindow* wnd,
-                        const wxString& label,
+                        const std::string& label,
                         const wxBitmap& bitmap,
                         int* ideal,
                         int* small_begin_need_separator,
@@ -362,7 +362,7 @@ public:
                         wxWindow* wnd,
                         wxRibbonButtonKind kind,
                         wxRibbonButtonBarButtonState size,
-                        const wxString& label,
+                        const std::string& label,
                         wxCoord text_min_width,
                         wxSize bitmap_size_large,
                         wxSize bitmap_size_small,
@@ -371,7 +371,7 @@ public:
                         wxRect* dropdown_region) = 0;
 
     virtual wxCoord GetButtonBarButtonTextWidth(
-                        wxDC& dc, const wxString& label,
+                        wxDC& dc, const std::string& label,
                         wxRibbonButtonKind kind,
                         wxRibbonButtonBarButtonState size) = 0;
 
@@ -481,7 +481,7 @@ public:
                         const wxRect& rect,
                         wxRibbonButtonKind kind,
                         long state,
-                        const wxString& label,
+                        const std::string& label,
                         const wxBitmap& bitmap_large,
                         const wxBitmap& bitmap_small) override;
 
@@ -516,7 +516,7 @@ public:
     void GetBarTabWidth(
                         wxDC& dc,
                         wxWindow* wnd,
-                        const wxString& label,
+                        const std::string& label,
                         const wxBitmap& bitmap,
                         int* ideal,
                         int* small_begin_need_separator,
@@ -570,7 +570,7 @@ public:
                         wxWindow* wnd,
                         wxRibbonButtonKind kind,
                         wxRibbonButtonBarButtonState size,
-                        const wxString& label,
+                        const std::string& label,
                         wxCoord text_min_width,
                         wxSize bitmap_size_large,
                         wxSize bitmap_size_small,
@@ -579,7 +579,7 @@ public:
                         wxRect* dropdown_region) override;
 
     wxCoord GetButtonBarButtonTextWidth(
-                        wxDC& dc, const wxString& label,
+                        wxDC& dc, const std::string& label,
                         wxRibbonButtonKind kind,
                         wxRibbonButtonBarButtonState size) override;
 
@@ -621,7 +621,7 @@ protected:
                         const wxRect& rect,
                         wxRibbonButtonKind kind,
                         long state,
-                        const wxString& label,
+                        const std::string& label,
                         const wxBitmap& bitmap_large,
                         const wxBitmap& bitmap_small);
     void DrawMinimisedPanelCommon(
@@ -822,7 +822,7 @@ public:
     void GetBarTabWidth(
                         wxDC& dc,
                         wxWindow* wnd,
-                        const wxString& label,
+                        const std::string& label,
                         const wxBitmap& bitmap,
                         int* ideal,
                         int* small_begin_need_separator,
@@ -877,7 +877,7 @@ public:
                         const wxRect& rect,
                         wxRibbonButtonKind kind,
                         long state,
-                        const wxString& label,
+                        const std::string& label,
                         const wxBitmap& bitmap_large,
                         const wxBitmap& bitmap_small) override;
 

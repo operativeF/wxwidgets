@@ -808,24 +808,24 @@ public:
     // text
     //
 
-    void DrawText( const std::string& str, double x, double y )
+    void DrawText(std::string_view str, double x, double y )
         { DoDrawText(str, x, y); }
 
-    void DrawText( const std::string& str, double x, double y, double angle )
+    void DrawText(std::string_view str, double x, double y, double angle )
         { DoDrawRotatedText(str, x, y, angle); }
 
-    void DrawText( const std::string& str, double x, double y,
+    void DrawText(std::string_view str, double x, double y,
                    const wxGraphicsBrush& backgroundBrush )
         { DoDrawFilledText(str, x, y, backgroundBrush); }
 
-    void DrawText( const std::string& str, double x, double y,
+    void DrawText(std::string_view str, double x, double y,
                    double angle, const wxGraphicsBrush& backgroundBrush )
         { DoDrawRotatedFilledText(str, x, y, angle, backgroundBrush); }
 
-    virtual std::pair<double, double> GetTextExtent( const std::string& text,
+    virtual std::pair<double, double> GetTextExtent(std::string_view text,
         double *descent = nullptr, double *externalLeading = nullptr ) const  = 0;
 
-    virtual std::vector<double> GetPartialTextExtents(const std::string& text) const = 0;
+    virtual std::vector<double> GetPartialTextExtents(std::string_view text) const = 0;
 
     //
     // image support
@@ -896,12 +896,12 @@ protected:
     // classes
     virtual wxGraphicsPen DoCreatePen(const wxGraphicsPenInfo& info) const;
 
-    virtual void DoDrawText(const std::string& str, double x, double y) = 0;
-    virtual void DoDrawRotatedText(const std::string& str, double x, double y,
+    virtual void DoDrawText(std::string_view str, double x, double y) = 0;
+    virtual void DoDrawRotatedText(std::string_view str, double x, double y,
                                    double angle);
-    virtual void DoDrawFilledText(const std::string& str, double x, double y,
+    virtual void DoDrawFilledText(std::string_view str, double x, double y,
                                   const wxGraphicsBrush& backgroundBrush);
-    virtual void DoDrawRotatedFilledText(const std::string& str,
+    virtual void DoDrawRotatedFilledText(std::string_view str,
                                          double x, double y,
                                          double angle,
                                          const wxGraphicsBrush& backgroundBrush);

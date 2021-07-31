@@ -2834,7 +2834,7 @@ wxString wxPropertyCategory::GetValueAsString( int argFlags ) const
 }
 
 // TODO: Clearly state this returns the width.
-static int DoGetTextExtent(const wxWindow* wnd, const wxString& label, const wxFont& font)
+static int DoGetTextExtent(const wxWindow* wnd, const std::string& label, const wxFont& font)
 {
     return wnd->GetTextExtent(label, nullptr, nullptr, &font).x;
 }

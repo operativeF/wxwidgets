@@ -459,8 +459,8 @@ void wxRibbonAUIArtProvider::DrawTab(wxDC& dc,
     }
     if(m_flags & wxRIBBON_BAR_SHOW_PAGE_LABELS)
     {
-        wxString label = tab.page->GetLabel();
-        if(!label.IsEmpty())
+        std::string label = tab.page->GetLabel();
+        if(!label.empty())
         {
             if (tab.active)
             {
@@ -520,7 +520,7 @@ void wxRibbonAUIArtProvider::DrawTab(wxDC& dc,
 void wxRibbonAUIArtProvider::GetBarTabWidth(
                         wxDC& dc,
                         wxWindow* WXUNUSED(wnd),
-                        const wxString& label,
+                        const std::string& label,
                         const wxBitmap& bitmap,
                         int* ideal,
                         int* small_begin_need_separator,
@@ -529,7 +529,7 @@ void wxRibbonAUIArtProvider::GetBarTabWidth(
 {
     int width = 0;
     int min = 0;
-    if((m_flags & wxRIBBON_BAR_SHOW_PAGE_LABELS) && !label.IsEmpty())
+    if((m_flags & wxRIBBON_BAR_SHOW_PAGE_LABELS) && !label.empty())
     {
         dc.SetFont(m_tab_active_label_font);
         width += dc.GetTextExtent(label).x;
@@ -1065,7 +1065,7 @@ void wxRibbonAUIArtProvider::DrawButtonBarButton(
                         const wxRect& rect,
                         wxRibbonButtonKind kind,
                         long state,
-                        const wxString& label,
+                        const std::string& label,
                         const wxBitmap& bitmap_large,
                         const wxBitmap& bitmap_small)
 {

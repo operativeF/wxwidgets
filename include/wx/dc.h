@@ -312,16 +312,16 @@ public:
                                   int *externalLeading,
                                   int *averageWidth) const;
 
-    virtual wxSize DoGetTextExtent(const std::string& string,
+    virtual wxSize DoGetTextExtent(std::string_view string,
                                  wxCoord *descent = nullptr,
                                  wxCoord *externalLeading = nullptr,
                                  const wxFont *theFont = nullptr) const = 0;
-    virtual void GetMultiLineTextExtent(const std::string& string,
+    virtual void GetMultiLineTextExtent(std::string_view string,
                                         wxCoord *width,
                                         wxCoord *height,
                                         wxCoord *heightLine = nullptr,
                                         const wxFont *font = nullptr) const;
-    virtual std::vector<int> DoGetPartialTextExtents(const std::string& text) const;
+    virtual std::vector<int> DoGetPartialTextExtents(std::string_view text) const;
 
     // clearing
 
@@ -800,7 +800,7 @@ public:
         return fm;
     }
 
-    wxSize GetTextExtent(const std::string& string,
+    wxSize GetTextExtent(std::string_view string,
                        wxCoord *descent = nullptr,
                        wxCoord *externalLeading = nullptr,
                        const wxFont *theFont = nullptr) const

@@ -1176,7 +1176,7 @@ void wxSVGFileDCImpl::DestroyClippingRegion()
     wxDCImpl::DestroyClippingRegion();
 }
 
-wxSize wxSVGFileDCImpl::DoGetTextExtent(const std::string& string,
+wxSize wxSVGFileDCImpl::DoGetTextExtent(std::string_view string,
                                       wxCoord* descent,
                                       wxCoord* externalLeading,
                                       const wxFont* theFont) const

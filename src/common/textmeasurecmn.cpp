@@ -51,7 +51,7 @@ wxFont wxTextMeasureBase::GetFont() const
                           : m_dc->GetFont();
 }
 
-wxSize wxTextMeasureBase::CallGetTextExtent(const std::string& string,
+wxSize wxTextMeasureBase::CallGetTextExtent(std::string_view string,
                                             wxCoord *descent,
                                             wxCoord *externalLeading)
 {
@@ -61,7 +61,7 @@ wxSize wxTextMeasureBase::CallGetTextExtent(const std::string& string,
         return DoGetTextExtent(string, descent, externalLeading);
 }
 
-wxSize wxTextMeasureBase::GetTextExtent(const std::string& string,
+wxSize wxTextMeasureBase::GetTextExtent(std::string_view string,
                                         wxCoord *descent,
                                         wxCoord *externalLeading)
 {
@@ -82,7 +82,7 @@ int wxTextMeasureBase::GetEmptyLineHeight()
     return CallGetTextExtent("W").y;
 }
 
-void wxTextMeasureBase::GetMultiLineTextExtent(const std::string& text,
+void wxTextMeasureBase::GetMultiLineTextExtent(std::string_view text,
                                                wxCoord *width,
                                                wxCoord *height,
                                                wxCoord *heightOneLine)
@@ -124,8 +124,8 @@ void wxTextMeasureBase::GetMultiLineTextExtent(const std::string& text,
     wxCoord heightLine = 0;
     wxCoord heightLineDefault = 0;
 
-    std::string::const_iterator lineStart = text.begin();
-    for ( std::string::const_iterator pc = text.begin(); ; ++pc )
+    std::string_view::const_iterator lineStart = text.begin();
+    for ( std::string_view::const_iterator pc = text.begin(); ; ++pc )
     {
         if ( pc == text.end() || *pc == '\n' )
         {
@@ -148,7 +148,7 @@ void wxTextMeasureBase::GetMultiLineTextExtent(const std::string& text,
             }
             else
             {
-                auto textExtents = CallGetTextExtent(std::string(lineStart, pc));
+                auto textExtents = CallGetTextExtent({lineStart, pc});
                 widthLine = textExtents.x;
                 heightLine = textExtents.y;
 
@@ -192,7 +192,7 @@ wxSize wxTextMeasureBase::GetLargestStringExtent(const std::vector<std::string>&
     return wxSize(widthMax, heightMax);
 }
 
-std::vector<int> wxTextMeasureBase::GetPartialTextExtents(const std::string& text, double scaleX)
+std::vector<int> wxTextMeasureBase::GetPartialTextExtents(std::string_view text, double scaleX)
 {
     if ( text.empty() )
         return {};
@@ -234,7 +234,7 @@ public:
 
 static FontWidthCache s_fontWidthCache;
 
-std::vector<int> wxTextMeasureBase::DoGetPartialTextExtents(const std::string& text, double scaleX)
+std::vector<int> wxTextMeasureBase::DoGetPartialTextExtents(std::string_view text, double scaleX)
 {
     int totalWidth = 0;
 
@@ -252,7 +252,7 @@ std::vector<int> wxTextMeasureBase::DoGetPartialTextExtents(const std::string& t
     std::vector<int> widths;
     // Calculate the position of each character based on the widths of
     // the previous characters. This is inexact for not fixed fonts.
-    for ( std::string::const_iterator it = text.begin();
+    for ( std::string_view::const_iterator it = text.begin();
           it != text.end();
           ++it )
     {

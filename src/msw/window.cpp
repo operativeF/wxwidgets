@@ -2255,7 +2255,7 @@ int wxWindowMSW::GetCharWidth() const
 #endif
 }
 
-wxSize wxWindowMSW::DoGetTextExtent(const std::string& string,
+wxSize wxWindowMSW::DoGetTextExtent(std::string_view string,
                                   int *descent,
                                   int *externalLeading,
                                   const wxFont *fontToUse) const

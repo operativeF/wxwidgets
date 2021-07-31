@@ -35,12 +35,12 @@ public:
 	wxTextMeasureBase& operator=(const wxTextMeasureBase&) = delete;
 
     // Return the extent of a single line string.
-    wxSize GetTextExtent(const std::string& string,
+    wxSize GetTextExtent(std::string_view string,
                          wxCoord *descent = nullptr,
                          wxCoord *externalLeading = nullptr);
 
     // The same for a multiline (with '\n') string.
-    void GetMultiLineTextExtent(const std::string& text,
+    void GetMultiLineTextExtent(std::string_view text,
                                 wxCoord *width,
                                 wxCoord *height,
                                 wxCoord *heightOneLine = nullptr);
@@ -53,7 +53,7 @@ public:
     //
     // The scaleX argument is the horizontal scale used by wxDC and is only
     // used in the generic implementation.
-    std::vector<int> GetPartialTextExtents(const std::string& text, double scaleX);
+    std::vector<int> GetPartialTextExtents(std::string_view text, double scaleX);
 
 
     // This is another method which is only used by MeasuringGuard.
@@ -98,7 +98,7 @@ protected:
     //
     // The width and height pointers here are never NULL and the input string
     // is not empty.
-    virtual wxSize DoGetTextExtent(const std::string& string,
+    virtual wxSize DoGetTextExtent(std::string_view string,
                                    wxCoord *descent = nullptr,
                                    wxCoord *externalLeading = nullptr) = 0;
 
@@ -106,13 +106,13 @@ protected:
     //
     // On input, widths array contains text.length() zero elements and the text
     // is guaranteed to be non-empty.
-    virtual std::vector<int> DoGetPartialTextExtents(const std::string& text, double scaleX) = 0;
+    virtual std::vector<int> DoGetPartialTextExtents(std::string_view text, double scaleX) = 0;
 
     // Call either DoGetTextExtent() or wxDC::GetTextExtent() depending on the
     // value of m_useDCImpl.
     //
     // This must be always used instead of calling DoGetTextExtent() directly!
-    wxSize CallGetTextExtent(const std::string& string,
+    wxSize CallGetTextExtent(std::string_view string,
                              wxCoord *descent = nullptr,
                              wxCoord *externalLeading = nullptr);
 

@@ -5057,7 +5057,7 @@ bool wxPropertyGrid::HandleMouseMove( int x, unsigned int y,
                             font = &m_captionFont;
                         if ( cell.GetFont().IsOk() )
                             font = &cell.GetFont();
-                        auto tipStrWidth = GetTextExtent( tipString, nullptr, nullptr, font ).x;
+                        auto tipStrWidth = GetTextExtent( tipString.ToStdString(), nullptr, nullptr, font ).x;
                         if ( tipStrWidth > space )
                             SetToolTip( tipString );
                     }

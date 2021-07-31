@@ -213,12 +213,12 @@ public:
         wxCoord width, wxCoord height) override;
     bool DoGetClippingRect(wxRect& rect) const override;
 
-    wxSize DoGetTextExtent(const std::string& string,
+    wxSize DoGetTextExtent(std::string_view string,
         wxCoord *descent = nullptr,
         wxCoord *externalLeading = nullptr,
         const wxFont *theFont = nullptr) const override;
 
-    std::vector<int> DoGetPartialTextExtents(const std::string& text) const override;
+    std::vector<int> DoGetPartialTextExtents(std::string_view text) const override;
 
 #ifdef __WXMSW__
     wxRect MSWApplyGDIPlusTransform(const wxRect& r) const override;

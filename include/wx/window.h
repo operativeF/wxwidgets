@@ -1187,7 +1187,7 @@ public:
 
         // get the width/height/... of the text using current or specified
         // font
-    wxSize GetTextExtent(const std::string& string,
+    wxSize GetTextExtent(std::string_view string,
                        int *descent = nullptr,
                        int *externalLeading = nullptr,
                        const wxFont *font = nullptr) const
@@ -1765,7 +1765,7 @@ protected:
     //     only one to be virtual.
 
     // text extent
-    virtual wxSize DoGetTextExtent(const std::string& string,
+    virtual wxSize DoGetTextExtent(std::string_view string,
                                  int *descent = nullptr,
                                  int *externalLeading = nullptr,
                                  const wxFont *font = nullptr) const = 0;

@@ -690,7 +690,7 @@ void wxGraphicsContext::DrawPath( const wxGraphicsPath& path, wxPolygonFillMode 
 }
 
 void
-wxGraphicsContext::DoDrawRotatedText(const std::string& str,
+wxGraphicsContext::DoDrawRotatedText(std::string_view str,
                                      double x,
                                      double y,
                                      double angle)
@@ -703,7 +703,7 @@ wxGraphicsContext::DoDrawRotatedText(const std::string& str,
 }
 
 void
-wxGraphicsContext::DoDrawFilledText(const std::string& str,
+wxGraphicsContext::DoDrawFilledText(std::string_view str,
                                     double x,
                                     double y,
                                     const wxGraphicsBrush& backgroundBrush)
@@ -726,7 +726,7 @@ wxGraphicsContext::DoDrawFilledText(const std::string& str,
 }
 
 void
-wxGraphicsContext::DoDrawRotatedFilledText(const std::string& str,
+wxGraphicsContext::DoDrawRotatedFilledText(std::string_view str,
                                            double x, double y,
                                            double angle,
                                            const wxGraphicsBrush& backgroundBrush)

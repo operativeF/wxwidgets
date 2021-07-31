@@ -61,6 +61,7 @@
 #include "wx/msw/missing.h"
 
 #include "boost/nowide/convert.hpp"
+#include "boost/nowide/stackstring.hpp"
 
 // instead of including <shlwapi.h> which is not part of the core SDK and not
 // shipped at all with other compilers, we always define the parts of it we
@@ -661,7 +662,8 @@ const std::string& wxApp::GetRegisteredClassName(const std::string& name,
     ClassRegInfo regClass(name, flags);
     if ( !regClass.regname.empty() )
     {
-        wndclass.lpszClassName = boost::nowide::widen(regClass.regname).c_str();
+        boost::nowide::wstackstring stackRegname(regClass.regname.c_str());
+        wndclass.lpszClassName = stackRegname.get();
         if ( !::RegisterClassW(&wndclass) )
         {
             wxLogLastError(wxString::Format(wxT("RegisterClass(%s)"),
@@ -671,7 +673,8 @@ const std::string& wxApp::GetRegisteredClassName(const std::string& name,
     }
 
     wndclass.style &= ~(CS_HREDRAW | CS_VREDRAW);
-    wndclass.lpszClassName = boost::nowide::widen(regClass.regnameNR).c_str();
+    boost::nowide::wstackstring stackRegnameNR(regClass.regnameNR.c_str());
+    wndclass.lpszClassName = stackRegnameNR.get();
 
     if ( !::RegisterClassW(&wndclass) )
     {

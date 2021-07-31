@@ -81,7 +81,7 @@ void wxTextMeasure::EndMeasuring()
 }
 
 // Notice we don't check here the font. It is supposed to be OK before the call.
-wxSize wxTextMeasure::DoGetTextExtent(const std::string& string,
+wxSize wxTextMeasure::DoGetTextExtent(std::string_view string,
                                       wxCoord *descent,
                                       wxCoord *externalLeading)
 {
@@ -140,7 +140,7 @@ wxSize wxTextMeasure::DoGetTextExtent(const std::string& string,
     return {sizeRect.cx, sizeRect.cy};
 }
 
-std::vector<int> wxTextMeasure::DoGetPartialTextExtents(const std::string& text, double scaleX)
+std::vector<int> wxTextMeasure::DoGetPartialTextExtents(std::string_view text, double scaleX)
 {
     if ( !m_hdc )
         return wxTextMeasureBase::DoGetPartialTextExtents(text, scaleX);
@@ -169,7 +169,7 @@ std::vector<int> wxTextMeasure::DoGetPartialTextExtents(const std::string& text,
     int tabWidth{0};
     int* widthPtr = &widths[0];
 
-    for ( std::string::const_iterator i = text.begin(); i != text.end(); ++i )
+    for ( std::string_view::const_iterator i = text.begin(); i != text.end(); ++i )
     {
         if ( *i == '\t' )
         {

@@ -164,11 +164,11 @@ public:
                                   int *internalLeading,
                                   int *externalLeading,
                                   int *averageWidth) const override;
-    wxSize DoGetTextExtent(const std::string& string,
+    wxSize DoGetTextExtent(std::string_view string,
                                  wxCoord *descent = nullptr,
                                  wxCoord *externalLeading = nullptr,
                                  const wxFont *theFont = nullptr) const override;
-    std::vector<int> DoGetPartialTextExtents(const std::string& text) const override;
+    std::vector<int> DoGetPartialTextExtents(std::string_view text) const override;
 
     bool DoFloodFill(wxCoord x, wxCoord y, const wxColour& col,
                              wxFloodFillStyle style = wxFLOOD_SURFACE) override;

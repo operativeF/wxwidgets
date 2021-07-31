@@ -3170,7 +3170,7 @@ class wxD2DFontData : public wxGraphicsObjectRefData
 public:
     wxD2DFontData(wxGraphicsRenderer* renderer, const wxFont& font, const wxRealPoint& dpi, const wxColor& color);
 
-    wxCOMPtr<IDWriteTextLayout> CreateTextLayout(const std::string& text) const;
+    wxCOMPtr<IDWriteTextLayout> CreateTextLayout(std::string_view text) const;
 
     wxD2DBrushData& GetBrushData() { return m_brushData; }
 
@@ -3323,7 +3323,7 @@ wxD2DFontData::wxD2DFontData(wxGraphicsRenderer* renderer, const wxFont& font, c
     wxCHECK_HRESULT_RET(hr);
 }
 
-wxCOMPtr<IDWriteTextLayout> wxD2DFontData::CreateTextLayout(const std::string& text) const
+wxCOMPtr<IDWriteTextLayout> wxD2DFontData::CreateTextLayout(std::string_view text) const
 {
     static constexpr FLOAT MAX_WIDTH = FLT_MAX;
     static constexpr FLOAT MAX_HEIGHT = FLT_MAX;
@@ -3782,8 +3782,8 @@ class wxNullContext : public wxGraphicsContext
 {
 public:
     explicit wxNullContext(wxGraphicsRenderer* renderer) : wxGraphicsContext(renderer) {}
-    std::pair<double, double> GetTextExtent(const std::string&, double*, double*) const override { return {}; }
-    std::vector<double> GetPartialTextExtents(const std::string&) const override { return {}; }
+    std::pair<double, double> GetTextExtent(std::string_view, double*, double*) const override { return {}; }
+    std::vector<double> GetPartialTextExtents(std::string_view) const override { return {}; }
     void Clip(const wxRegion&) override {}
     void Clip(double, double, double, double) override {}
     void ResetClip() override {}
@@ -3810,7 +3810,7 @@ public:
     void Flush() override {}
 
 protected:
-    void DoDrawText(const std::string&, double, double) override {}
+    void DoDrawText(std::string_view, double, double) override {}
 };
 
 class wxD2DMeasuringContext : public wxNullContext
@@ -3818,17 +3818,17 @@ class wxD2DMeasuringContext : public wxNullContext
 public:
     explicit wxD2DMeasuringContext(wxGraphicsRenderer* renderer) : wxNullContext(renderer) {}
 
-    std::pair<double, double> GetTextExtent(const std::string& str, double* descent, double* externalLeading) const override
+    std::pair<double, double> GetTextExtent(std::string_view str, double* descent, double* externalLeading) const override
     {
         return GetTextExtent(wxGetD2DFontData(m_font), str, descent, externalLeading);
     }
 
-    std::vector<double> GetPartialTextExtents(const std::string& text) const override
+    std::vector<double> GetPartialTextExtents(std::string_view text) const override
     {
         return GetPartialTextExtents(wxGetD2DFontData(m_font), text);
     }
 
-    static std::vector<double> GetPartialTextExtents(wxD2DFontData* fontData, const std::string& text)
+    static std::vector<double> GetPartialTextExtents(wxD2DFontData* fontData, std::string_view text)
     {
         std::vector<double> widths;
 
@@ -3841,7 +3841,7 @@ public:
         return widths;
     }
 
-    static std::pair<double, double> GetTextExtent(wxD2DFontData* fontData, const std::string& str, double* descent, double* externalLeading)
+    static std::pair<double, double> GetTextExtent(wxD2DFontData* fontData, std::string_view str, double* descent, double* externalLeading)
     {
         wxCOMPtr<IDWriteTextLayout> textLayout = fontData->CreateTextLayout(str);
         wxCOMPtr<IDWriteFont> font = fontData->GetFont();
@@ -3948,11 +3948,11 @@ public:
     void PopState() override;
 
     std::pair<double, double> GetTextExtent(
-        const std::string& str,
+        std::string_view str,
         double* descent,
         double* externalLeading) const override;
 
-    std::vector<double> GetPartialTextExtents(const std::string& text) const override;
+    std::vector<double> GetPartialTextExtents(std::string_view text) const override;
 
     bool ShouldOffset() const override;
 
@@ -3968,7 +3968,7 @@ public:
     }
 
 private:
-    void DoDrawText(const std::string& str, double x, double y) override;
+    void DoDrawText(std::string_view str, double x, double y) override;
 
     void EnsureInitialized();
 
@@ -4683,7 +4683,7 @@ void wxD2DContext::PopState()
 }
 
 std::pair<double, double> wxD2DContext::GetTextExtent(
-    const std::string& str,
+    std::string_view str,
     double* descent,
     double* externalLeading) const
 {
@@ -4695,7 +4695,7 @@ std::pair<double, double> wxD2DContext::GetTextExtent(
         wxGetD2DFontData(m_font), str, descent, externalLeading);
 }
 
-std::vector<double> wxD2DContext::GetPartialTextExtents(const std::string& text) const
+std::vector<double> wxD2DContext::GetPartialTextExtents(std::string_view text) const
 {
     //wxCHECK_RET(!m_font.IsNull(),
     //    wxS("wxD2DContext::GetPartialTextExtents - no valid font set"));
@@ -4727,7 +4727,7 @@ bool wxD2DContext::ShouldOffset() const
     return fmod(double(penData->GetWidth()), 2.0) == 1.0;
 }
 
-void wxD2DContext::DoDrawText(const std::string& str, double x, double y)
+void wxD2DContext::DoDrawText(std::string_view str, double x, double y)
 {
     wxCHECK_RET(!m_font.IsNull(),
         wxS("wxD2DContext::DrawText - no valid font set"));
