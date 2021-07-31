@@ -1129,7 +1129,7 @@ bool wxGCDCImpl::DoStretchBlit(
     return retval;
 }
 
-void wxGCDCImpl::DoDrawRotatedText(const std::string& text, wxCoord x, wxCoord y,
+void wxGCDCImpl::DoDrawRotatedText(std::string_view text, wxCoord x, wxCoord y,
                                double angle)
 {
     wxCHECK_RET( IsOk(), wxT("wxGCDC(cg)::DoDrawRotatedText - invalid DC") );
@@ -1189,7 +1189,7 @@ void wxGCDCImpl::DoDrawRotatedText(const std::string& text, wxCoord x, wxCoord y
     CalcBoundingBox(x + wxCoord(w*cos(rad)), y - wxCoord(w*sin(rad)));
 }
 
-void wxGCDCImpl::DoDrawText(const std::string& str, wxCoord x, wxCoord y)
+void wxGCDCImpl::DoDrawText(std::string_view str, wxCoord x, wxCoord y)
 {
     wxCHECK_RET( IsOk(), "wxGCDC::DoDrawText - invalid DC" );
 
@@ -1202,7 +1202,7 @@ void wxGCDCImpl::DoDrawText(const std::string& str, wxCoord x, wxCoord y)
     // instead reuse the generic DrawLabel() method to render them. Of course,
     // DrawLabel() itself will call back to us but with single line strings
     // only so there won't be any infinite recursion here.
-    if ( str.find('\n') != std::string::npos )
+    if ( str.find('\n') != std::string_view::npos )
     {
         GetOwner()->DrawLabel(str, wxRect(x, y, 0, 0));
         return;

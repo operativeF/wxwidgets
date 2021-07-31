@@ -653,12 +653,12 @@ void wxSVGFileDCImpl::DoDrawPoint(wxCoord x, wxCoord y)
     write(s);
 }
 
-void wxSVGFileDCImpl::DoDrawText(const std::string& text, wxCoord x, wxCoord y)
+void wxSVGFileDCImpl::DoDrawText(std::string_view text, wxCoord x, wxCoord y)
 {
     DoDrawRotatedText(text, x, y, 0.0);
 }
 
-void wxSVGFileDCImpl::DoDrawRotatedText(const std::string& sText, wxCoord x, wxCoord y, double angle)
+void wxSVGFileDCImpl::DoDrawRotatedText(std::string_view sText, wxCoord x, wxCoord y, double angle)
 {
     //known bug; if the font is drawn in a scaled DC, it will not behave exactly as wxMSW
     NewGraphicsIfNeeded();

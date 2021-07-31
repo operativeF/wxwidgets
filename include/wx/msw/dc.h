@@ -205,8 +205,8 @@ public:
     void DoDrawBitmap(const wxBitmap &bmp, wxCoord x, wxCoord y,
                               bool useMask = false) override;
 
-    void DoDrawText(const std::string& text, wxCoord x, wxCoord y) override;
-    void DoDrawRotatedText(const std::string& text, wxCoord x, wxCoord y,
+    void DoDrawText(std::string_view text, wxCoord x, wxCoord y) override;
+    void DoDrawRotatedText(std::string_view text, wxCoord x, wxCoord y,
                                    double angle) override;
 
     bool DoBlit(wxCoord xdest, wxCoord ydest, wxCoord width, wxCoord height,
@@ -257,7 +257,7 @@ public:
 
 protected:
     // common part of DoDrawText() and DoDrawRotatedText()
-    void DrawAnyText(const std::string& text, wxCoord x, wxCoord y);
+    void DrawAnyText(std::string_view text, wxCoord x, wxCoord y);
 
     // common part of DoSetClippingRegion() and DoSetDeviceClippingRegion()
     void SetClippingHrgn(WXHRGN hrgn);

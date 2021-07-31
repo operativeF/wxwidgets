@@ -189,13 +189,13 @@ protected:
         m_dc.DoDrawBitmap(bmp, GetX(x, y), GetY(x, y), useMask);
     }
 
-    void DoDrawText(const std::string& text, wxCoord x, wxCoord y) override
+    void DoDrawText(std::string_view text, wxCoord x, wxCoord y) override
     {
         // this is never mirrored
         m_dc.DoDrawText(text, x, y);
     }
 
-    void DoDrawRotatedText(const std::string& text,
+    void DoDrawRotatedText(std::string_view text,
                                    wxCoord x, wxCoord y, double angle) override
     {
         // this is never mirrored

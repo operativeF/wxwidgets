@@ -1112,7 +1112,7 @@ void wxDC::CopyAttributes(const wxDC& dc)
     SetLayoutDirection(dc.GetLayoutDirection());
 }
 
-void wxDC::DrawLabel(const std::string& text,
+void wxDC::DrawLabel(std::string_view text,
                          const wxBitmap& bitmap,
                          const wxRect& rect,
                          int alignment,
@@ -1191,7 +1191,7 @@ void wxDC::DrawLabel(const std::string& text,
     //     call DrawText() for single-line strings from here to avoid infinite
     //     recursion.
     std::string curLine;
-    for ( std::string::const_iterator pc = text.begin(); ; ++pc )
+    for ( std::string_view::const_iterator pc = text.begin(); ; ++pc )
     {
         if ( pc == text.end() || *pc == '\n' )
         {

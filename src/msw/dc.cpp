@@ -1450,7 +1450,7 @@ void wxMSWDCImpl::DoDrawBitmap( const wxBitmap &bmp, wxCoord x, wxCoord y, bool 
     CalcBoundingBox(x + bmp.GetWidth(), y + bmp.GetHeight());
 }
 
-void wxMSWDCImpl::DoDrawText(const std::string& text, wxCoord x, wxCoord y)
+void wxMSWDCImpl::DoDrawText(std::string_view text, wxCoord x, wxCoord y)
 {
     // For compatibility with other ports (notably wxGTK) and because it's
     // genuinely useful, we allow passing multiline strings to DrawText().
@@ -1478,7 +1478,7 @@ void wxMSWDCImpl::DoDrawText(const std::string& text, wxCoord x, wxCoord y)
     CalcBoundingBox(x + textExtents.x, y + textExtents.y);
 }
 
-void wxMSWDCImpl::DrawAnyText(const std::string& text, wxCoord x, wxCoord y)
+void wxMSWDCImpl::DrawAnyText(std::string_view text, wxCoord x, wxCoord y)
 {
     if ( ::ExtTextOutW(GetHdc(), XLOG2DEV(x), YLOG2DEV(y), 0, nullptr,
                    boost::nowide::widen(text).c_str(), text.length(), nullptr) == 0 )
@@ -1487,7 +1487,7 @@ void wxMSWDCImpl::DrawAnyText(const std::string& text, wxCoord x, wxCoord y)
     }
 }
 
-void wxMSWDCImpl::DoDrawRotatedText(const std::string& text,
+void wxMSWDCImpl::DoDrawRotatedText(std::string_view text,
                              wxCoord x, wxCoord y,
                              double angle)
 {
