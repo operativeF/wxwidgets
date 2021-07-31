@@ -99,8 +99,8 @@ TEST_SUITE("Test auxilliary functions that work with strings")
         std::string strCaps("THE QUICK BROWN FOX JUMPED OVER THE LAZY DOG.");
         std::string strDiffSize("The quick brown fox.");
 
-        CHECK(CmpNoCase(originalStr, strCaps));
-        CHECK_FALSE(CmpNoCase(originalStr, strDiffSize));
+        CHECK(CmpNoCase(originalStr, strCaps) == 0);
+        CHECK_FALSE(CmpNoCase(originalStr, strDiffSize) == 0);
     }
 
     TEST_CASE("Contains: Check if a substring is contained inside of another string.")

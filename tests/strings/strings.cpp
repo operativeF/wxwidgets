@@ -888,7 +888,7 @@ TEST_CASE("StringBuf")
 TEST_CASE("UTF8Buf")
 {
     // "czech" in Czech ("cestina"):
-    static constexpr char *textUTF8 = "\304\215e\305\241tina";
+    static constexpr char textUTF8[] = "\304\215e\305\241tina";
     static constexpr wchar_t textUTF16[] = {0x10D, 0x65, 0x161, 0x74, 0x69, 0x6E, 0x61, 0};
 
     wxString s;

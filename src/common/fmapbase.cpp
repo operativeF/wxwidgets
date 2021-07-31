@@ -372,28 +372,6 @@ public:
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxFontMapperModule, wxModule);
 
-std::vector<std::string_view> SVSplit(std::string_view str, wchar_t delim)
-{
-    std::vector<std::string_view> output;
-
-    size_t first = 0;
-
-    while (first < str.size())
-    {
-        const auto second = str.find_first_of(delim, first);
-
-        if (first != second)
-            output.emplace_back(str.substr(first, second - first));
-
-        if (second == std::string_view::npos)
-            break;
-
-        first = second + 1;
-    }
-
-    return output;
-}
-
 // ----------------------------------------------------------------------------
 // ctor and dtor
 // ----------------------------------------------------------------------------
@@ -842,7 +820,7 @@ std::vector<std::string_view> wxFontMapperBase::GetAllEncodingNames(wxFontEncodi
     {
         if ( gs_encodings[i] == encoding )
         {
-            return SVSplit(gs_encodingNames[i], L',');
+            return wx::unsafe::StrViewSplit(gs_encodingNames[i], ',');
         }
     }
 

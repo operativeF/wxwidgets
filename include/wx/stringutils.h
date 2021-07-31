@@ -10,14 +10,14 @@ namespace wx::utils
 {
 
 #if __cplusplus >= 201907L
-#define CONSTEXPR_STR20 constexpr
+#define CONSTEXPR_CONTAINER constexpr
 #else
-#define CONSTEXPR_STR20
+#define CONSTEXPR_CONTAINER
 #endif
 
 // Modifying string functions
 
-[[maybe_unused]] inline CONSTEXPR_STR20 std::size_t ReplaceAll(std::string& instr, std::string_view candidate, std::string_view replacement)
+[[maybe_unused]] inline CONSTEXPR_CONTAINER std::size_t ReplaceAll(std::string& instr, std::string_view candidate, std::string_view replacement)
 {
     std::size_t count{ 0 };
     for (std::string::size_type pos{};
@@ -30,7 +30,7 @@ namespace wx::utils
     return count;
 }
 
-[[maybe_unused]] inline CONSTEXPR_STR20 size_t Erase(std::string& str, char value)
+[[maybe_unused]] inline CONSTEXPR_CONTAINER size_t Erase(std::string& str, char value)
 {
     auto it = std::remove(str.begin(), str.end(), value);
     const auto elems_erased = std::distance(it, str.end());
@@ -41,7 +41,7 @@ namespace wx::utils
 }
 
 template<typename Pred>
-[[maybe_unused]] inline CONSTEXPR_STR20 size_t EraseIf(std::string& str, Pred&& pred)
+[[maybe_unused]] inline CONSTEXPR_CONTAINER size_t EraseIf(std::string& str, Pred&& pred)
 {
     auto it = std::remove_if(str.begin(), str.end(), pred);
     auto elems_erased = std::distance(it, str.end());
@@ -51,18 +51,75 @@ template<typename Pred>
     return elems_erased;
 }
 
+namespace detail
+{
+    // FIXME: Not valid for unicode strings.
+    inline constexpr auto isWhitespace = [](unsigned char c)
+        {
+            return ((c == ' ')  ||
+                    (c == '\f') ||
+                    (c == '\n') ||
+                    (c == '\r') ||
+                    (c == '\t') ||
+                    (c == '\v'));
+        };
+}
+
 // FIXME: Not valid for unicode strings.
-inline CONSTEXPR_STR20 void ToUpper(std::string& str)
+inline CONSTEXPR_CONTAINER void TrimAllSpace(std::string& str)
+{
+    str.erase(std::remove_if(str.begin(), str.end(), detail::isWhitespace),  str.end());
+}
+
+// FIXME: Not valid for unicode strings.
+inline CONSTEXPR_CONTAINER void TrimLeadingSpace(std::string& str)
+{
+    auto it = std::find_if_not(str.begin(), str.end(), detail::isWhitespace);
+
+    str.erase(str.begin(), it);
+}
+
+// FIXME: Not valid for unicode strings.
+inline CONSTEXPR_CONTAINER void TrimFollowingSpace(std::string& str)
+{
+    auto it = std::find_if_not(str.rbegin(), str.rend(), detail::isWhitespace);
+
+    str.erase(it.base(), str.end());
+}
+
+// FIXME: Not valid for unicode strings.
+inline void ToUpper(std::string& str)
 {
     std::transform(str.begin(), str.end(), str.begin(), [](unsigned char c) noexcept { return std::toupper(c); });
 }
 
 // FIXME: Not valid for unicode strings.
-inline CONSTEXPR_STR20 void ToLower(std::string& str)
+inline void ToLower(std::string& str)
 {
-    std::transform(str.begin(), str.end(), str.begin(), [](char c) noexcept { return std::tolower(c); });
+    std::transform(str.begin(), str.end(), str.begin(), [](unsigned char c) noexcept { return std::tolower(c); });
 }
 
+// FIXME: Not valid for unicode strings.
+[[nodiscard]] inline std::string ToUpperCopy(std::string_view str)
+{
+    std::string out;
+    out.resize(str.size());
+
+    std::transform(str.begin(), str.end(), out.begin(), [](unsigned char c) noexcept { return std::toupper(c); });
+
+    return out;
+}
+
+// FIXME: Not valid for unicode strings.
+[[nodiscard]] inline std::string ToLowerCopy(std::string_view str)
+{
+    std::string out;
+    out.resize(str.size());
+
+    std::transform(str.begin(), str.end(), out.begin(), [](unsigned char c) noexcept { return std::tolower(c); });
+
+    return out;
+}
 
 // Non-modifying string functions
 
@@ -111,8 +168,8 @@ inline CONSTEXPR_STR20 void ToLower(std::string& str)
 {
     const auto nA = strViewA.size();
 
-    std::string strA(nA, ' ');
-    std::string strB(nA, ' ');
+    std::string strA(nA, '0');
+    std::string strB(nA, '0');
 
     std::transform(strViewA.begin(), strViewA.end(), strA.begin(), [](unsigned char c) noexcept { return std::tolower(c); });
     std::transform(strViewB.begin(), strViewB.end(), strB.begin(), [](unsigned char c) noexcept { return std::tolower(c); });
@@ -131,12 +188,13 @@ inline CONSTEXPR_STR20 void ToLower(std::string& str)
     return strViewA == strViewB;
 }
 
+// FIXME: Wrong (for Unicode), and temporary implementation of a case insensitive string comparison
 [[nodiscard]] inline bool IsSameAsNoCase(std::string_view strViewA, std::string_view strViewB) 
 {
     return CmpNoCase(strViewA, strViewB) == 0;
 }
 
-[[nodiscard]] inline CONSTEXPR_STR20 std::string BeforeFirst(std::string_view strView, std::string_view strFirst, size_t pos = 0) noexcept
+[[nodiscard]] inline CONSTEXPR_CONTAINER std::string BeforeFirst(std::string_view strView, std::string_view strFirst, size_t pos = 0) noexcept
 {
     const auto n = strView.find(strFirst, pos);
 
@@ -146,7 +204,7 @@ inline CONSTEXPR_STR20 void ToLower(std::string& str)
     return std::string(strView);
 }
 
-[[nodiscard]] inline CONSTEXPR_STR20 std::string BeforeFirst(std::string_view strView, const char ch, size_t pos = 0) noexcept
+[[nodiscard]] inline CONSTEXPR_CONTAINER std::string BeforeFirst(std::string_view strView, const char ch, size_t pos = 0) noexcept
 {
     const auto n = strView.find(ch, pos);
 
@@ -156,12 +214,12 @@ inline CONSTEXPR_STR20 void ToLower(std::string& str)
     return std::string(strView);
 }
 
-[[nodiscard]] inline CONSTEXPR_STR20 std::string BeforeFirst(std::string_view strView, const char* const chs, size_t pos = 0)
+[[nodiscard]] inline CONSTEXPR_CONTAINER std::string BeforeFirst(std::string_view strView, const char* const chs, size_t pos = 0)
 {
     return BeforeFirst(strView, std::string_view(chs), pos);
 }
 
-[[nodiscard]] inline CONSTEXPR_STR20 std::string AfterFirst(std::string_view strView, std::string_view strAfter, size_t pos = 0) noexcept
+[[nodiscard]] inline CONSTEXPR_CONTAINER std::string AfterFirst(std::string_view strView, std::string_view strAfter, size_t pos = 0) noexcept
 {
     const auto n = strView.find(strAfter, pos);
 
@@ -171,7 +229,7 @@ inline CONSTEXPR_STR20 void ToLower(std::string& str)
     return {};
 }
 
-[[nodiscard]] inline CONSTEXPR_STR20 std::string AfterFirst(std::string_view strView, const char ch, size_t pos = 0) noexcept
+[[nodiscard]] inline CONSTEXPR_CONTAINER std::string AfterFirst(std::string_view strView, const char ch, size_t pos = 0) noexcept
 {
     const auto n = strView.find(ch, pos);
 
@@ -181,12 +239,12 @@ inline CONSTEXPR_STR20 void ToLower(std::string& str)
     return {};
 }
 
-[[nodiscard]] inline CONSTEXPR_STR20 std::string AfterFirst(std::string_view strView, const char* const chs, size_t pos = 0)
+[[nodiscard]] inline CONSTEXPR_CONTAINER std::string AfterFirst(std::string_view strView, const char* const chs, size_t pos = 0)
 {
     return AfterFirst(strView, std::string_view(chs), pos);
 }
 
-[[nodiscard]] inline CONSTEXPR_STR20 std::string BeforeLast(std::string_view strView, std::string_view strBefore, size_t pos = std::string_view::npos) noexcept
+[[nodiscard]] inline CONSTEXPR_CONTAINER std::string BeforeLast(std::string_view strView, std::string_view strBefore, size_t pos = std::string_view::npos) noexcept
 {
     const auto n = strView.rfind(strBefore, pos);
 
@@ -196,7 +254,7 @@ inline CONSTEXPR_STR20 void ToLower(std::string& str)
     return {};
 }
 
-[[nodiscard]] inline CONSTEXPR_STR20 std::string BeforeLast(std::string_view strView, const char ch, size_t pos = std::string_view::npos) noexcept
+[[nodiscard]] inline CONSTEXPR_CONTAINER std::string BeforeLast(std::string_view strView, const char ch, size_t pos = std::string_view::npos) noexcept
 {
     const auto n = strView.rfind(ch, pos);
 
@@ -206,14 +264,14 @@ inline CONSTEXPR_STR20 void ToLower(std::string& str)
     return {};
 }
 
-[[nodiscard]] inline CONSTEXPR_STR20 std::string BeforeLast(std::string_view strView, const char* const chs, size_t pos = std::string_view::npos)
+[[nodiscard]] inline CONSTEXPR_CONTAINER std::string BeforeLast(std::string_view strView, const char* const chs, size_t pos = std::string_view::npos)
 {
     return BeforeLast(strView, std::string_view(chs), pos);
 }
 
 
 // TODO: Do we really want to return the whole input string if it fails to find anything?
-[[nodiscard]] inline CONSTEXPR_STR20 std::string AfterLast(std::string_view strView, std::string_view strLast, size_t pos = std::string_view::npos) noexcept
+[[nodiscard]] inline CONSTEXPR_CONTAINER std::string AfterLast(std::string_view strView, std::string_view strLast, size_t pos = std::string_view::npos) noexcept
 {
     const auto n = strView.rfind(strLast, pos);
 
@@ -223,7 +281,7 @@ inline CONSTEXPR_STR20 void ToLower(std::string& str)
     return std::string(strView);
 }
 
-[[nodiscard]] inline CONSTEXPR_STR20 std::string AfterLast(std::string_view strView, const char ch, size_t pos = std::string_view::npos) noexcept
+[[nodiscard]] inline CONSTEXPR_CONTAINER std::string AfterLast(std::string_view strView, const char ch, size_t pos = std::string_view::npos) noexcept
 {
     const auto n = strView.rfind(ch, pos);
 
@@ -233,7 +291,7 @@ inline CONSTEXPR_STR20 void ToLower(std::string& str)
     return std::string(strView);
 }
 
-[[nodiscard]] inline CONSTEXPR_STR20 std::string AfterLast(std::string_view strView, const char* const chs, size_t pos = std::string_view::npos)
+[[nodiscard]] inline CONSTEXPR_CONTAINER std::string AfterLast(std::string_view strView, const char* const chs, size_t pos = std::string_view::npos)
 {
     return AfterLast(strView, std::string_view(chs), pos);
 }
@@ -244,7 +302,7 @@ inline CONSTEXPR_STR20 void ToLower(std::string& str)
 }
 
 // FIXME: Not valid for unicode strings
-[[nodiscard]] inline CONSTEXPR_STR20 bool ContainsNoCase(std::string_view strView, std::string_view strToFind) noexcept
+[[nodiscard]] inline bool ContainsNoCase(std::string_view strView, std::string_view strToFind) noexcept
 {
     std::string str(strView);
     std::string substrToFind(strToFind);
@@ -256,5 +314,36 @@ inline CONSTEXPR_STR20 void ToLower(std::string& str)
 }
 
 } // namespace wx::util
+
+// Generally unsafe utilities to be used in circumstances where
+// speed is important and / or lifetimes are a certainty.
+namespace wx::unsafe
+{
+
+// From an input string_view, split the view on each delimiter and store each split in a vector.
+// Delimiter not included.
+inline CONSTEXPR_CONTAINER std::vector<std::string_view> StrViewSplit(std::string_view strView, char delim)
+{
+    std::vector<std::string_view> output;
+
+    size_t first = 0;
+
+    while (first < strView.size())
+    {
+        const auto second = strView.find_first_of(delim, first);
+
+        if (first != second)
+            output.emplace_back(strView.substr(first, second - first));
+
+        if (second == std::string_view::npos)
+            break;
+
+        first = second + 1;
+    }
+
+    return output;
+}
+
+}
 
 #endif _WX_WXSTRINGUTILS_H__

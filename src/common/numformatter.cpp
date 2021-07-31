@@ -180,7 +180,7 @@ wxString wxNumberFormatter::PostProcessIntString(wxString s, int style)
 
 wxString wxNumberFormatter::ToString(long val, int style)
 {
-    return PostProcessIntString(fmt::format("{:ld}", val), style);
+    return PostProcessIntString(fmt::format("{:d}", val), style);
 }
 
 #ifdef wxHAS_LONG_LONG_T_DIFFERENT_FROM_LONG

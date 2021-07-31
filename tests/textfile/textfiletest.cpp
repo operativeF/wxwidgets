@@ -24,11 +24,11 @@
 #endif
 
 // return the name of the test file we use
-constexpr char* GetTestFileName() { return "textfiletest.txt"; }
+constexpr char GetTestFileName[] = "textfiletest.txt";
 
 static void CreateTestFile(size_t len, const char *contents)
 {
-    FILE *f = fopen(GetTestFileName(), "wb");
+    FILE *f = fopen(GetTestFileName, "wb");
     CHECK( f );
 
     CHECK_EQ( len, fwrite(contents, 1, len, f) );
@@ -51,7 +51,7 @@ TEST_CASE("Text file tests")
         CreateTestFile("");
 
         wxTextFile f;
-        CHECK( f.Open(wxString::FromAscii(GetTestFileName())) );
+        CHECK( f.Open(wxString::FromAscii(GetTestFileName)) );
 
         CHECK_EQ( (size_t)0, f.GetLineCount() );
         CHECK( f.Eof() );
@@ -64,7 +64,7 @@ TEST_CASE("Text file tests")
         CreateTestFile("foo\r\nbar\r\nbaz");
 
         wxTextFile f;
-        CHECK( f.Open(wxString::FromAscii(GetTestFileName())) );
+        CHECK( f.Open(wxString::FromAscii(GetTestFileName)) );
 
         CHECK_EQ( (size_t)3, f.GetLineCount() );
         CHECK_EQ( wxTextFileType_Dos, f.GetLineType(0) );
@@ -78,7 +78,7 @@ TEST_CASE("Text file tests")
         CreateTestFile("foo\r\n");
 
         wxTextFile f;
-        CHECK( f.Open(GetTestFileName()) );
+        CHECK( f.Open(GetTestFileName) );
 
         CHECK_EQ( 1, f.GetLineCount() );
         CHECK_EQ( wxTextFileType_Dos, f.GetLineType(0) );
@@ -90,7 +90,7 @@ TEST_CASE("Text file tests")
         CreateTestFile("foo\nbar\nbaz");
 
         wxTextFile f;
-        CHECK( f.Open(wxString::FromAscii(GetTestFileName())) );
+        CHECK( f.Open(wxString::FromAscii(GetTestFileName)) );
 
         CHECK_EQ( (size_t)3, f.GetLineCount() );
         CHECK_EQ( wxTextFileType_Unix, f.GetLineType(0) );
@@ -104,7 +104,7 @@ TEST_CASE("Text file tests")
         CreateTestFile("foo\n");
 
         wxTextFile f;
-        CHECK( f.Open(GetTestFileName()) );
+        CHECK( f.Open(GetTestFileName) );
 
         CHECK_EQ( 1, f.GetLineCount() );
         CHECK_EQ( wxTextFileType_Unix, f.GetLineType(0) );
@@ -116,7 +116,7 @@ TEST_CASE("Text file tests")
         CreateTestFile("foo\rbar\r\rbaz");
 
         wxTextFile f;
-        CHECK( f.Open(wxString::FromAscii(GetTestFileName())) );
+        CHECK( f.Open(wxString::FromAscii(GetTestFileName)) );
 
         CHECK_EQ( (size_t)4, f.GetLineCount() );
         CHECK_EQ( wxTextFileType_Mac, f.GetLineType(0) );
@@ -134,7 +134,7 @@ TEST_CASE("Text file tests")
         CreateTestFile("foo\r");
 
         wxTextFile f;
-        CHECK( f.Open(GetTestFileName()) );
+        CHECK( f.Open(GetTestFileName) );
 
         CHECK_EQ( 1, f.GetLineCount() );
         CHECK_EQ( wxTextFileType_Mac, f.GetLineType(0) );
@@ -146,7 +146,7 @@ TEST_CASE("Text file tests")
         CreateTestFile("foo\rbar\r\nbaz\n");
 
         wxTextFile f;
-        CHECK( f.Open(wxString::FromAscii(GetTestFileName())) );
+        CHECK( f.Open(wxString::FromAscii(GetTestFileName)) );
 
         CHECK_EQ( (size_t)3, f.GetLineCount() );
         CHECK_EQ( wxTextFileType_Mac, f.GetLineType(0) );
@@ -184,7 +184,7 @@ TEST_CASE("Text file tests")
             CreateTestFile(data);
 
             wxTextFile f;
-            CHECK( f.Open(wxString::FromAscii(GetTestFileName())) );
+            CHECK( f.Open(wxString::FromAscii(GetTestFileName)) );
             CHECK_EQ( (size_t)linesCnt, f.GetLineCount() );
         }
     }
@@ -200,7 +200,7 @@ TEST_CASE("Text file tests")
         CreateTestFile("foo\r\r\nbar\r\r\r\nbaz\r\r\n");
 
         wxTextFile f;
-        CHECK( f.Open(wxString::FromAscii(GetTestFileName())) );
+        CHECK( f.Open(wxString::FromAscii(GetTestFileName)) );
 
         wxString all;
         for ( wxString str = f.GetFirstLine(); !f.Eof(); str = f.GetNextLine() )
@@ -215,7 +215,7 @@ TEST_CASE("Text file tests")
                        "\xd1\x80\xd0\xb8\xd0\xb2\xd0\xb5\xd1\x82");
 
         wxTextFile f;
-        CHECK( f.Open(wxString::FromAscii(GetTestFileName()), wxConvUTF8) );
+        CHECK( f.Open(wxString::FromAscii(GetTestFileName), wxConvUTF8) );
 
         CHECK_EQ( (size_t)2, f.GetLineCount() );
         CHECK_EQ( wxTextFileType_Unix, f.GetLineType(0) );
@@ -235,7 +235,7 @@ TEST_CASE("Text file tests")
 
         wxTextFile f;
         wxMBConvUTF16LE conv;
-        CHECK( f.Open(wxString::FromAscii(GetTestFileName()), conv) );
+        CHECK( f.Open(wxString::FromAscii(GetTestFileName), conv) );
 
         CHECK_EQ( (size_t)2, f.GetLineCount() );
         CHECK_EQ( wxTextFileType_Dos, f.GetLineType(0) );
@@ -253,7 +253,7 @@ TEST_CASE("Text file tests")
         static constexpr size_t NUM_LINES = 10000;
 
         {
-            wxFFile f(GetTestFileName(), "w");
+            wxFFile f(GetTestFileName, "w");
             for ( size_t n = 0; n < NUM_LINES; n++ )
             {
                 fprintf(f.fp(), "Line %lu\n", (unsigned long)n + 1);
@@ -261,7 +261,7 @@ TEST_CASE("Text file tests")
         }
 
         wxTextFile f;
-        CHECK( f.Open(GetTestFileName()) );
+        CHECK( f.Open(GetTestFileName) );
 
         CHECK_EQ( NUM_LINES, f.GetLineCount() );
         CHECK_EQ( wxString("Line 1"), f[0] );
@@ -301,7 +301,7 @@ TEST_CASE("Text file tests")
 
     #endif // __LINUX__
 
-    unlink(GetTestFileName());
+    unlink(GetTestFileName);
 }
 
 #endif // wxUSE_TEXTFILE
