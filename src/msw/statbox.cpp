@@ -162,7 +162,7 @@ wxSize wxStaticBox::DoGetBestSize() const
     // Calculate the size needed by the label
     wxSize char_size = wxGetCharSize(GetHWND(), GetFont());
 
-    int wBox = GetTextExtent(GetLabelText(wxGetWindowText(m_hWnd)).ToStdString()).x;
+    int wBox = GetTextExtent(GetLabelText(wxGetWindowText(m_hWnd))).x;
 
     wBox += 3 * char_size.x;
     int hBox = EDIT_HEIGHT_FROM_CHAR_HEIGHT(char_size.y);

@@ -415,7 +415,7 @@ wxString wxMarkupParser::Quote(const wxString& text)
 }
 
 /* static */
-wxString wxMarkupParser::Strip(const wxString& text)
+std::string wxMarkupParser::Strip(const std::string& text)
 {
     class StripOutput : public wxMarkupParserOutput
     {

@@ -32,7 +32,7 @@ static void DoTestLabel(wxControl* c)
 {
     CHECK( c->GetLabel() == ORIGINAL_LABEL );
 
-    static const std::array<wxString, 7> testLabelArray = {
+    static const std::array<std::string, 7> testLabelArray = {
         "label without mnemonics and markup",
         "label with &mnemonic",
         "label with <span foreground='blue'>some</span> <b>markup</b>",

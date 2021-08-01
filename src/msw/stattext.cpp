@@ -97,7 +97,7 @@ wxSize wxStaticText::DoGetBestClientSize() const
     dc.SetFont(font);
 
     wxCoord widthTextMax, heightTextTotal;
-    dc.GetMultiLineTextExtent(GetLabelText().ToStdString(), &widthTextMax, &heightTextTotal);
+    dc.GetMultiLineTextExtent(GetLabelText(), &widthTextMax, &heightTextTotal);
 
     // This extra pixel is a hack we use to ensure that a wxStaticText
     // vertically centered around the same position as a wxTextCtrl shows its

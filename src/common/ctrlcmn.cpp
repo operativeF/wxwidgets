@@ -146,24 +146,25 @@ wxSize wxControlBase::DoGetSizeFromTextSize(int WXUNUSED(xlen),
 }
 
 /* static */
-wxString wxControlBase::GetLabelText(const wxString& label)
+std::string wxControlBase::GetLabelText(const std::string& label)
 {
     // we don't want strip the TABs here, just the mnemonics
     return wxStripMenuCodes(label, wxStrip_Mnemonics);
 }
 
 /* static */
-wxString wxControlBase::RemoveMnemonics(const wxString& str)
+std::string wxControlBase::RemoveMnemonics(const std::string& str)
 {
     // we don't want strip the TABs here, just the mnemonics
     return wxStripMenuCodes(str, wxStrip_Mnemonics);
 }
 
 /* static */
-wxString wxControlBase::EscapeMnemonics(const wxString& text)
+std::string wxControlBase::EscapeMnemonics(const std::string& text)
 {
-    wxString label(text);
-    label.Replace("&", "&&");
+    std::string label{text};
+    wx::utils::ReplaceAll(label, "&", "&&");
+
     return label;
 }
 
@@ -241,7 +242,7 @@ wxControlBase::GetCompositeControlsDefaultAttributes(wxWindowVariant WXUNUSED(va
 /* static */
 std::string wxControlBase::RemoveMarkup(const std::string& markup)
 {
-    return wxMarkupParser::Strip(markup).ToStdString();
+    return wxMarkupParser::Strip(markup);
 }
 
 bool wxControlBase::DoSetLabelMarkup(const std::string& markup)

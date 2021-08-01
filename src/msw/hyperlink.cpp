@@ -54,13 +54,13 @@ namespace
         return wxApp::GetComCtl32Version() >= 600;
     }
 
-    wxString GetLabelForSysLink(const wxString& text, const wxString& url)
+    std::string GetLabelForSysLink(const std::string& text, const std::string& url)
     {
         // Any "&"s in the text should appear on the screen and not be (mis)
         // interpreted as mnemonics.
         return fmt::format("<A HREF=\"{:s}\">{:s}</A>",
-                                url.ToStdString(),
-                                wxControl::EscapeMnemonics(text).ToStdString());
+                                url,
+                                wxControl::EscapeMnemonics(text));
     }
 }
 

@@ -67,7 +67,7 @@ wxSize wxPGCellRenderer::GetImageSize( const wxPGProperty* WXUNUSED(property),
 }
 
 void wxPGCellRenderer::DrawText( wxDC& dc, const wxRect& rect,
-                                 int xOffset, const wxString& text ) const
+                                 int xOffset, const std::string& text ) const
 {
     dc.DrawText( text,
                  rect.x+xOffset+wxPG_XBEFORETEXT,
@@ -75,7 +75,7 @@ void wxPGCellRenderer::DrawText( wxDC& dc, const wxRect& rect,
 }
 
 void wxPGCellRenderer::DrawEditorValue( wxDC& dc, const wxRect& rect,
-                                        int xOffset, const wxString& text,
+                                        int xOffset, const std::string& text,
                                         wxPGProperty* property,
                                         const wxPGEditor* editor ) const
 {

@@ -258,7 +258,7 @@ wxSize wxRadioButton::DoGetBestSize() const
     wxSize radioTextExtents;
     if ( !str.empty() )
     {
-        radioTextExtents = GetTextExtent(GetLabelText(str).ToStdString());
+        radioTextExtents = GetTextExtent(GetLabelText(str));
         radioTextExtents.x += radioSize + GetCharWidth();
 
         if ( radioTextExtents.y < radioSize )

@@ -114,12 +114,12 @@ public:
     void DrawText( wxDC& dc,
                    const wxRect& rect,
                    int imageWidth,
-                   const wxString& text ) const;
+                   const std::string& text ) const;
 
     // Utility to draw editor's value, or vertically
     // aligned text if editor is NULL.
     void DrawEditorValue( wxDC& dc, const wxRect& rect,
-                          int xOffset, const wxString& text,
+                          int xOffset, const std::string& text,
                           wxPGProperty* property,
                           const wxPGEditor* editor ) const;
 

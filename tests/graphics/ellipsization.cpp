@@ -81,7 +81,7 @@ TEST_CASE("Ellipsization::NormalCase")
                     // means we have to remove them first.
                     const std::string
                         displayed = flagsToTest[f] & wxELLIPSIZE_FLAGS_PROCESS_MNEMONICS
-                                        ? wxControl::RemoveMnemonics(ret).ToStdString()
+                                        ? wxControl::RemoveMnemonics(ret)
                                         : ret;
                     const int
                         width = dc.GetMultiLineTextExtent(displayed).GetWidth();

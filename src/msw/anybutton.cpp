@@ -407,7 +407,7 @@ wxSize wxMSWButton::ComputeBestFittingSize(wxControl *btn, int flags)
     wxClientDC dc(btn);
 
     wxSize sizeBtn;
-    dc.GetMultiLineTextExtent(btn->GetLabelText().ToStdString(), &sizeBtn.x, &sizeBtn.y);
+    dc.GetMultiLineTextExtent(btn->GetLabelText(), &sizeBtn.x, &sizeBtn.y);
 
     return GetFittingSize(btn, sizeBtn, flags);
 }

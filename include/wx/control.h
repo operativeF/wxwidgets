@@ -67,13 +67,13 @@ public:
     std::string GetLabel() const override { return m_labelOrig; }
 
     // set label text (mnemonics will be escaped)
-    virtual void SetLabelText(const wxString& text)
+    virtual void SetLabelText(const std::string& text)
     {
-        SetLabel(EscapeMnemonics(text).ToStdString());
+        SetLabel(EscapeMnemonics(text));
     }
 
     // get just the text of the label, without mnemonic characters ('&')
-    virtual wxString GetLabelText() const { return GetLabelText(GetLabel()); }
+    virtual std::string GetLabelText() const { return GetLabelText(GetLabel()); }
 
 
 #if wxUSE_MARKUP
@@ -130,15 +130,15 @@ public:
     // ------------------------------------------------
 
     // returns the given string without mnemonic characters ('&')
-    static wxString GetLabelText(const wxString& label);
+    static std::string GetLabelText(const std::string& label);
 
     // returns the given string without mnemonic characters ('&')
     // this function is identic to GetLabelText() and is provided for clarity
     // and for symmetry with the wxStaticText::RemoveMarkup() function.
-    static wxString RemoveMnemonics(const wxString& str);
+    static std::string RemoveMnemonics(const std::string& str);
 
     // escapes (by doubling them) the mnemonics
-    static wxString EscapeMnemonics(const wxString& str);
+    static std::string EscapeMnemonics(const std::string& str);
 
 
     // miscellaneous static utilities

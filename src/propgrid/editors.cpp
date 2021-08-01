@@ -125,7 +125,7 @@ wxString wxPGEditor::GetName() const
 
 void wxPGEditor::DrawValue( wxDC& dc, const wxRect& rect,
                             wxPGProperty* WXUNUSED(property),
-                            const wxString& text ) const
+                            const std::string& text ) const
 {
     dc.DrawText( text, rect.x+wxPG_XBEFORETEXT, rect.y );
 }
@@ -1639,7 +1639,7 @@ wxPGWindowList wxPGCheckBoxEditor::CreateControls( wxPropertyGrid* propGrid,
 
 void wxPGCheckBoxEditor::DrawValue( wxDC& dc, const wxRect& rect,
                                     wxPGProperty* property,
-                                    const wxString& WXUNUSED(text) ) const
+                                    const std::string& WXUNUSED(text) ) const
 {
     int state = wxSCB_STATE_UNCHECKED;
 

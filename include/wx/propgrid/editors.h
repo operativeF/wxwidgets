@@ -97,7 +97,7 @@ public:
     virtual void DrawValue( wxDC& dc,
                             const wxRect& rect,
                             wxPGProperty* property,
-                            const wxString& text ) const;
+                            const std::string& text ) const;
 
     // Handles events. Returns true if value in control was modified
     // (see wxPGProperty::OnEvent for more information).
@@ -373,7 +373,7 @@ public:
     void DrawValue( wxDC& dc,
                             const wxRect& rect,
                             wxPGProperty* property,
-                            const wxString& text ) const override;
+                            const std::string& text ) const override;
     //virtual wxPGCellRenderer* GetCellRenderer() const;
 
     void SetControlIntValue( wxPGProperty* property,

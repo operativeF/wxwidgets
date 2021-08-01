@@ -734,17 +734,15 @@ void wxGridCellStringRenderer::Draw(wxGrid& grid,
 std::string wxGridCellNumberRenderer::GetString(const wxGrid& grid, int row, int col)
 {
     wxGridTableBase *table = grid.GetTable();
-    wxString text;
+
     if ( table->CanGetValueAs(row, col, wxGRID_VALUE_NUMBER) )
     {
-        text.Printf(wxT("%ld"), table->GetValueAsLong(row, col));
+        return fmt::format("{:ld}", table->GetValueAsLong(row, col));
     }
     else
     {
-        text = table->GetValue(row, col);
+        return table->GetValue(row, col);
     }
-
-    return text.ToStdString();
 }
 
 void wxGridCellNumberRenderer::Draw(wxGrid& grid,

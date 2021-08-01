@@ -144,7 +144,7 @@ public:
     // Strip markup from a string, i.e. simply remove all tags and replace
     // XML entities with their values (or with "&&" in case of "&amp;" to
     // prevent it from being interpreted as mnemonic marker).
-    static wxString Strip(const wxString& text);
+    static std::string Strip(const std::string& text);
 
 private:
     // Simple struct combining the name of a tag and its attributes.
