@@ -5,6 +5,7 @@
 #include <cctype>
 #include <string>
 #include <string_view>
+#include <vector>
 
 namespace wx::utils
 {
@@ -119,6 +120,73 @@ inline void ToLower(std::string& str)
     std::transform(str.begin(), str.end(), out.begin(), [](unsigned char c) noexcept { return std::tolower(c); });
 
     return out;
+}
+
+[[nodiscard]] inline std::vector<std::string> StrSplit(std::string_view strView, char delim)
+{
+    std::vector<std::string> output;
+
+    size_t first{0};
+
+    while (first < strView.size())
+    {
+        const auto second = strView.find_first_of(delim, first);
+
+        if (first != second)
+            output.emplace_back(strView.substr(first, second - first));
+
+        if (second == std::string_view::npos)
+            break;
+
+        first = second + 1;
+    }
+
+    return output;
+}
+
+// FIXME: could be improved, but is sufficient for string conversion.
+[[nodiscard]] inline CONSTEXPR_CONTAINER std::vector<std::string> StrSplitEscape(std::string_view strView, char delim, char escape)
+{
+    std::vector<std::string> output;
+
+    std::string s;
+
+    for(std::string_view::iterator i = strView.begin(); i != strView.end();++i)
+    {
+        const auto ch = *i;
+
+        if(ch != delim && ch != escape)
+        {
+            s += ch;
+        }
+        
+        if(ch == escape)
+        {
+            if(*(i + 1) == delim)
+            {
+                std::advance(i, 1);
+                s += delim;
+            }
+            else
+            {
+                s += ch;
+            }
+        }
+        
+        if(ch == delim || i == std::prev(strView.end(), 1))
+        {
+            output.emplace_back(s);
+            s.clear();
+
+            // special case of empty delimiter at end
+            if(ch == delim && i == (strView.end() - 1))
+            {
+                output.emplace_back("");
+            }
+        }
+    }
+
+    return output;
 }
 
 // Non-modifying string functions

@@ -122,4 +122,33 @@ TEST_SUITE("Test auxilliary functions that work with strings")
         CHECK(ContainsNoCase(str, containsCapsFox));
         CHECK_FALSE(ContainsNoCase(str, doesNotContainCapsBog));
     }
+
+    TEST_CASE("StrSplit: A string splitting function that splits on a single character delimiter.")
+    {
+        std::string csvCat{"Cat,,cat, cat, cat;, cat."};
+
+        static const std::vector<std::string> catSplit {
+            "Cat",
+            "cat",
+            " cat",
+            " cat;",
+            " cat."
+        };
+
+        CHECK_EQ(StrSplit(csvCat, ','), catSplit);
+    }
+
+    TEST_CASE("StrSplitEscape: A splitting function that provides a way to escape delimiters.")
+    {
+        std::string csvPuppy{"Puppy,puppy,\\,puppy,puppy\\,puppy."};
+
+        static const std::vector<std::string> puppyWithEscape {
+            "Puppy",
+            "puppy",
+            ",puppy",
+            "puppy,puppy."
+        };
+
+        CHECK_EQ(StrSplitEscape(csvPuppy, ',', '\\'), puppyWithEscape);
+    }
 }
