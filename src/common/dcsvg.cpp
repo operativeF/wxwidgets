@@ -722,18 +722,16 @@ void wxSVGFileDCImpl::DoDrawRotatedText(std::string_view sText, wxCoord x, wxCoo
     style += wxS(" xml:space=\"preserve\"");
 
     // Draw all text line by line
-    // FIXME: use string
-    wxString wxsText = std::string(sText);
-    const std::vector<wxString> lines = wxSplit(wxsText, '\n', '\0');
-    for (size_t lineNum = 0; lineNum < lines.size(); lineNum++)
+    const std::vector<std::string_view> lines = wx::unsafe::StrViewSplit(sText, '\n');
+
+    for (size_t lineNum{0}; auto line : lines)
     {
         const double xRect = x + lineNum * dx;
         const double yRect = y + lineNum * dy;
 
         // convert x,y to SVG text x,y (the coordinates of the text baseline)
         wxCoord desc;
-        wxString const& line = lines[lineNum];
-        auto textExtents = DoGetTextExtent(line.ToStdString(), &desc);
+        const auto textExtents = DoGetTextExtent(line, &desc);
         const double xText = xRect + (textExtents.y - desc) * sin(rad);
         const double yText = yRect + (textExtents.y - desc) * cos(rad);
 
@@ -765,13 +763,15 @@ void wxSVGFileDCImpl::DoDrawRotatedText(std::string_view sText, wxCoord x, wxCoo
             wxS("  <text x=\"%s\" y=\"%s\" textLength=\"%d\" %s %s>%s</text>\n"),
             NumStr(xText), NumStr(yText), textExtents.x, style, transform,
 #if wxUSE_MARKUP
-            wxMarkupParser::Quote(line)
+            wxMarkupParser::Quote(std::string{line})
 #else
-            line
+            std::string{line}
 #endif
         );
 
         write(s);
+
+        ++lineNum;
     }
 }
 

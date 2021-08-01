@@ -1552,16 +1552,15 @@ void wxMSWDCImpl::DoDrawRotatedText(std::string_view text,
     const double dy = heightLine * cos(rad);
 
     // Draw all text line by line
-    // FIXME: use string
-    const wxString wxText = wxString(std::string(text));
-    const std::vector<wxString> lines = wxSplit(wxText, '\n', '\0');
-    for ( size_t lineNum = 0; lineNum < lines.size(); lineNum++ )
+    const std::vector<std::string_view> lines = wx::unsafe::StrViewSplit(text, '\n');
+    for ( size_t lineNum{0}; auto line : lines )
     {
         // Calculate origin for each line to avoid accumulation of
         // rounding errors.
-        DrawAnyText(lines[lineNum].ToStdString(),
+        DrawAnyText(line,
                     x + wxRound(lineNum*dx),
                     y + wxRound(lineNum*dy));
+        ++lineNum;
     }
 
 

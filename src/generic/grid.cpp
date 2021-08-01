@@ -7067,7 +7067,7 @@ void wxGrid::DrawTextRectangle( wxDC& dc,
                                 int vertAlign,
                                 int textOrientation ) const
 {
-    std::vector<wxString> lines;
+    std::vector<std::string> lines;
 
     StringToLines( value, lines );
 
@@ -7075,7 +7075,7 @@ void wxGrid::DrawTextRectangle( wxDC& dc,
 }
 
 void wxGrid::DrawTextRectangle(wxDC& dc,
-                               const std::vector<wxString>& lines,
+                               const std::vector<std::string>& lines,
                                const wxRect& rect,
                                int horizAlign,
                                int vertAlign,
@@ -7199,27 +7199,27 @@ void wxGrid::DrawTextRectangle(wxDC& dc,
 // Any existing contents of the string array are preserved.
 //
 // TODO: refactor wxTextFile::Read() and reuse the same code from here
-void wxGrid::StringToLines( const wxString& value, std::vector<wxString>& lines ) const
+void wxGrid::StringToLines( const std::string& value, std::vector<std::string>& lines ) const
 {
     int startPos = 0;
-    wxString eol = wxTextFile::GetEOL( wxTextFileType_Unix );
-    wxString tVal = wxTextFile::Translate( value, wxTextFileType_Unix );
+    std::string eol = wxTextFile::GetEOL( wxTextFileType_Unix );
+    std::string tVal = wxTextFile::Translate( value, wxTextFileType_Unix );
 
     while ( startPos < (int)tVal.length() )
     {
-        int pos;
-        pos = tVal.Mid(startPos).Find( eol );
-        if ( pos < 0 )
+        int pos = tVal.substr(startPos).find( eol );
+
+        if ( pos == std::string::npos )
         {
             break;
         }
         else if ( pos == 0 )
         {
-            lines.push_back( wxEmptyString );
+            lines.push_back( "" );
         }
         else
         {
-            lines.push_back( tVal.Mid(startPos, pos) );
+            lines.push_back( tVal.substr(startPos, pos) );
         }
 
         startPos += pos + 1;
@@ -7227,20 +7227,20 @@ void wxGrid::StringToLines( const wxString& value, std::vector<wxString>& lines 
 
     if ( startPos < (int)tVal.length() )
     {
-        lines.push_back( tVal.Mid( startPos ) );
+        lines.push_back( tVal.substr( startPos ) );
     }
 }
 
 void wxGrid::GetTextBoxSize( const wxDC& dc,
-                             const std::vector<wxString>& lines,
+                             const std::vector<std::string>& lines,
                              long *width, long *height ) const
 {
     wxCoord w = 0;
     wxCoord h = 0;
 
-    for (size_t i = 0; i < lines.size(); i++ )
+    for ( const auto& line : lines )
     {
-        if ( lines[i].empty() )
+        if ( line.empty() )
         {
             // GetTextExtent() would return 0 for empty lines, but we still
             // need to account for their height.
@@ -7248,7 +7248,7 @@ void wxGrid::GetTextBoxSize( const wxDC& dc,
         }
         else
         {
-            auto lineSize = dc.GetTextExtent( lines[i].ToStdString() );
+            auto lineSize = dc.GetTextExtent( line );
             w = wxMax( w, lineSize.x );
             h += lineSize.y;
         }
@@ -9779,7 +9779,7 @@ void wxGrid::SetRowSize( int row, int height )
     if ( height == -1 && GetRowHeight(row) != 0 )
     {
         long w, h;
-        std::vector<wxString> lines;
+        std::vector<std::string> lines;
         wxClientDC dc(m_rowLabelWin);
         dc.SetFont(GetLabelFont());
         StringToLines(GetRowLabelValue( row ), lines);
@@ -9946,7 +9946,7 @@ void wxGrid::SetColSize( int col, int width )
         else
         {
             long w, h;
-            std::vector<wxString> lines;
+            std::vector<std::string> lines;
             wxClientDC dc(m_colLabelWin);
             dc.SetFont(GetLabelFont());
             StringToLines(GetColLabelValue(col), lines);
@@ -10438,7 +10438,7 @@ wxCoord wxGrid::CalcColOrRowLabelAreaMinSize(wxGridDirection direction)
     const bool
         useWidth = calcRows || (GetColLabelTextOrientation() == wxVERTICAL);
 
-    std::vector<wxString> lines;
+    std::vector<std::string> lines;
     wxCoord extentMax = 0;
 
     const int numRowsOrCols = calcRows ? m_numRows : m_numCols;

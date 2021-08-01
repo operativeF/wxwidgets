@@ -1608,7 +1608,7 @@ public:
                             int verticalAlignment = wxALIGN_TOP,
                             int textOrientation = wxHORIZONTAL ) const;
 
-    void DrawTextRectangle( wxDC& dc, const std::vector<wxString>& lines, const wxRect&,
+    void DrawTextRectangle( wxDC& dc, const std::vector<std::string>& lines, const wxRect&,
                             int horizontalAlignment = wxALIGN_LEFT,
                             int verticalAlignment = wxALIGN_TOP,
                             int textOrientation = wxHORIZONTAL ) const;
@@ -1632,10 +1632,10 @@ public:
     // Split a string containing newline characters into an array of
     // strings and return the number of lines
     //
-    void StringToLines( const wxString& value, std::vector<wxString>& lines ) const;
+    void StringToLines( const std::string& value, std::vector<std::string>& lines ) const;
 
     void GetTextBoxSize( const wxDC& dc,
-                         const std::vector<wxString>& lines,
+                         const std::vector<std::string>& lines,
                          long *width, long *height ) const;
 
     // If bottomRight is invalid, i.e. == wxGridNoCellCoords, it defaults to

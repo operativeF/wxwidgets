@@ -72,7 +72,7 @@ public:
                             wxTextFileType type = typeDefault);
 
     // get the buffer termination string
-    static const wxChar *GetEOL(wxTextFileType type = typeDefault);
+    static std::string GetEOL(wxTextFileType type = typeDefault);
 
     // the static methods of this class are compiled in even when
     // !wxUSE_TEXTBUFFER because they are used by the library itself, but the

@@ -399,7 +399,7 @@ wxGridCellAutoWrapStringRenderer::Draw(wxGrid& grid,
 }
 
 
-std::vector<wxString>
+std::vector<std::string>
 wxGridCellAutoWrapStringRenderer::GetTextLines(wxGrid& grid,
                                                wxDC& dc,
                                                const wxGridCellAttr& attr,
@@ -410,19 +410,19 @@ wxGridCellAutoWrapStringRenderer::GetTextLines(wxGrid& grid,
     const wxCoord maxWidth = rect.GetWidth();
 
     // Transform logical lines into physical ones, wrapping the longer ones.
-    const std::vector<wxString>
-        logicalLines = wxSplit(grid.GetCellValue(row, col), '\n', '\0');
+    const std::vector<std::string>
+        logicalLines = wx::utils::StrSplit(grid.GetCellValue(row, col), '\n');
 
     // Trying to do anything if the column is hidden anyhow doesn't make sense
     // and we run into problems in BreakLine() in this case.
     if ( maxWidth <= 0 )
         return logicalLines;
 
-    std::vector<wxString> physicalLines;
+    std::vector<std::string> physicalLines;
     
     for ( const auto& line : logicalLines )
     {
-        if ( dc.GetTextExtent(line.ToStdString()).x > maxWidth )
+        if ( dc.GetTextExtent(line).x > maxWidth )
         {
             // Line does not fit, break it up.
             BreakLine(dc, line, maxWidth, physicalLines);
@@ -438,12 +438,12 @@ wxGridCellAutoWrapStringRenderer::GetTextLines(wxGrid& grid,
 
 void
 wxGridCellAutoWrapStringRenderer::BreakLine(wxDC& dc,
-                                            const wxString& logicalLine,
+                                            const std::string& logicalLine,
                                             wxCoord maxWidth,
-                                            std::vector<wxString>& lines)
+                                            std::vector<std::string>& lines)
 {
     wxCoord lineWidth = 0;
-    wxString line;
+    std::string line;
 
     // For each word
     wxStringTokenizer wordTokenizer(logicalLine, wxS(" \t"), wxTOKEN_RET_DELIMS);
@@ -493,8 +493,8 @@ wxCoord
 wxGridCellAutoWrapStringRenderer::BreakWord(wxDC& dc,
                                             const std::string& word,
                                             wxCoord maxWidth,
-                                            std::vector<wxString>& lines,
-                                            wxString& line)
+                                            std::vector<std::string>& lines,
+                                            std::string& line)
 {
     std::vector<int> widths = dc.GetPartialTextExtents(word);
 

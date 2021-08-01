@@ -916,13 +916,14 @@ void DrawButtonText(HDC hdc,
         else
             dsFlags |= DST_TEXT;
 
-        const std::vector<wxString> lines = wxSplit(text, '\n', '\0');
+        const std::vector<std::string_view> lines = wx::unsafe::StrViewSplit(text, '\n');
         const int hLine = h / lines.size();
-        for ( size_t lineNum = 0; lineNum < lines.size(); lineNum++ )
+
+        for ( size_t lineNum{0}; auto line : lines )
         {
             // Each line must be aligned in horizontal direction individually.
             ::SetRectEmpty(&rc);
-            ::DrawTextW(hdc, lines[lineNum].t_str(), lines[lineNum].length(),
+            ::DrawTextW(hdc, boost::nowide::widen(line).c_str(), line.length(),
                        &rc, DT_CALCRECT);
             const LONG w = rc.right - rc.left;
 
@@ -949,8 +950,8 @@ void DrawButtonText(HDC hdc,
 
             ::OffsetRect(&rc, 0, y0 + lineNum * hLine);
 
-            ::DrawStateW(hdc, nullptr, nullptr, wxMSW_CONV_LPARAM(lines[lineNum]),
-                        lines[lineNum].length(),
+            ::DrawStateW(hdc, nullptr, nullptr, reinterpret_cast<LPARAM>(boost::nowide::widen(line).c_str()),
+                        line.length(),
                         rc.left, rc.top, rc.right, rc.bottom, dsFlags);
         }
     }

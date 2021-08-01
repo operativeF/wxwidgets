@@ -1161,17 +1161,18 @@ void wxGCDCImpl::DoDrawRotatedText(std::string_view text, wxCoord x, wxCoord y,
     const double dy = heightLine * cos(rad);
 
     // Draw all text line by line
-    // FIXME: string
-    auto wxText = wxString{std::string{text}};
-    const std::vector<wxString> lines = wxSplit(wxText, '\n', '\0');
-    for ( size_t lineNum = 0; lineNum < lines.size(); lineNum++ )
+    const std::vector<std::string_view> lines = wx::unsafe::StrViewSplit(text, '\n');
+
+    for (size_t lineNum{0}; auto line : lines )
     {
         // Calculate origin for each line to avoid accumulation of
         // rounding errors.
         if ( m_backgroundMode == wxBrushStyle::Transparent )
-            m_graphicContext->DrawText( lines[lineNum].ToStdString(), x + wxRound(lineNum*dx), y + wxRound(lineNum*dy), wxDegToRad(angle ));
+            m_graphicContext->DrawText( line, x + wxRound(lineNum*dx), y + wxRound(lineNum*dy), wxDegToRad(angle ));
         else
-            m_graphicContext->DrawText( lines[lineNum].ToStdString(), x + wxRound(lineNum*dx), y + wxRound(lineNum*dy), wxDegToRad(angle ), m_graphicContext->CreateBrush(m_textBackgroundColour) );
+            m_graphicContext->DrawText( line, x + wxRound(lineNum*dx), y + wxRound(lineNum*dy), wxDegToRad(angle ), m_graphicContext->CreateBrush(m_textBackgroundColour) );
+
+        ++lineNum;
    }
 
     // call the bounding box by adding all four vertices of the rectangle

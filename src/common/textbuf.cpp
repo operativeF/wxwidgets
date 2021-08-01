@@ -29,17 +29,17 @@
 // static methods (always compiled in)
 // ----------------------------------------------------------------------------
 
-const wxChar *wxTextBuffer::GetEOL(wxTextFileType type)
+std::string wxTextBuffer::GetEOL(wxTextFileType type)
 {
     switch ( type ) {
         default:
             wxFAIL_MSG(wxT("bad buffer type in wxTextBuffer::GetEOL."));
             [[fallthrough]]; // fall through nevertheless - we must return something...
 
-        case wxTextFileType_None: return wxEmptyString;
-        case wxTextFileType_Unix: return wxT("\n");
-        case wxTextFileType_Dos:  return wxT("\r\n");
-        case wxTextFileType_Mac:  return wxT("\r");
+        case wxTextFileType_None: return {};
+        case wxTextFileType_Unix: return "\n";
+        case wxTextFileType_Dos:  return "\r\n";
+        case wxTextFileType_Mac:  return "\r";
     }
 }
 

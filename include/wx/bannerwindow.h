@@ -124,7 +124,7 @@ private:
     void DrawBitmapBackground(wxDC& dc);
 
     // Helper of OnPaint(): draw the text in the appropriate direction.
-    void DrawBannerTextLine(wxDC& dc, const std::string& str, const wxPoint& pos);
+    void DrawBannerTextLine(wxDC& dc, std::string_view str, const wxPoint& pos);
 
     // Return the font to use for the title. Currently this is hardcoded as a
     // larger bold version of the standard window font but could be made

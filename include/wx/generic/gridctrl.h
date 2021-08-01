@@ -321,7 +321,7 @@ public:
         { return new wxGridCellAutoWrapStringRenderer; }
 
 private:
-    std::vector<wxString> GetTextLines( wxGrid& grid,
+    std::vector<std::string> GetTextLines( wxGrid& grid,
                                 wxDC& dc,
                                 const wxGridCellAttr& attr,
                                 const wxRect& rect,
@@ -333,9 +333,9 @@ private:
     // which are added to the lines array. The lines are broken at maxWidth and
     // the dc is used for measuring text extent only.
     void BreakLine(wxDC& dc,
-                   const wxString& logicalLine,
+                   const std::string& logicalLine,
                    wxCoord maxWidth,
-                   std::vector<wxString>& lines);
+                   std::vector<std::string>& lines);
 
     // Break a word, which is supposed to be wider than maxWidth, into several
     // lines, which are added to lines array and the last, incomplete, of which
@@ -345,8 +345,8 @@ private:
     wxCoord BreakWord(wxDC& dc,
                       const std::string& word,
                       wxCoord maxWidth,
-                      std::vector<wxString>& lines,
-                      wxString& line);
+                      std::vector<std::string>& lines,
+                      std::string& line);
 
 
 };

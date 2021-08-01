@@ -175,11 +175,11 @@ void wxBannerWindow::OnPaint(wxPaintEvent& WXUNUSED(event))
 
         dc.SetFont(GetFont());
 
-        std::vector<wxString> lines = wxSplit(m_message, '\n', '\0');
-        for ( const auto& line : lines )
+        const std::vector<std::string_view> lines = wx::unsafe::StrViewSplit(m_message, '\n');
+        for ( auto line : lines )
         {
-            DrawBannerTextLine(dc, line.ToStdString(), pos);
-            pos.y += dc.GetTextExtent(line.ToStdString()).y;
+            DrawBannerTextLine(dc, line, pos);
+            pos.y += dc.GetTextExtent(line).y;
         }
     }
 }
@@ -293,7 +293,7 @@ void wxBannerWindow::DrawBitmapBackground(wxDC& dc)
 
 void
 wxBannerWindow::DrawBannerTextLine(wxDC& dc,
-                                   const std::string& str,
+                                   std::string_view str,
                                    const wxPoint& pos)
 {
     switch ( m_direction )

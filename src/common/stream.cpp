@@ -1548,9 +1548,9 @@ wxFileOffset wxWrapperInputStream::OnSysTell() const
 
 wxOutputStream& wxEndL(wxOutputStream& stream)
 {
-    static const wxChar *eol = wxTextFile::GetEOL();
+    static std::string eol = wxTextFile::GetEOL();
 
-    return stream.Write(eol, wxStrlen(eol));
+    return stream.Write(eol.c_str(), wxStrlen(eol));
 }
 
 #endif // wxUSE_STREAMS
