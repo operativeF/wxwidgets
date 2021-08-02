@@ -564,7 +564,7 @@ public:
     // Draw header cell label
     virtual void DrawLabel(const wxGrid& grid,
                            wxDC& dc,
-                           const wxString& value,
+                           std::string_view value,
                            const wxRect& rect,
                            int horizAlign,
                            int vertAlign,
@@ -1603,7 +1603,7 @@ public:
 
     // ------ Cell text drawing functions
     //
-    void DrawTextRectangle( wxDC& dc, const wxString&, const wxRect&,
+    void DrawTextRectangle( wxDC& dc, std::string_view value, const wxRect&,
                             int horizontalAlignment = wxALIGN_LEFT,
                             int verticalAlignment = wxALIGN_TOP,
                             int textOrientation = wxHORIZONTAL ) const;
@@ -1614,7 +1614,7 @@ public:
                             int textOrientation = wxHORIZONTAL ) const;
 
     void DrawTextRectangle(wxDC& dc,
-                           const wxString& text,
+                           std::string_view text,
                            const wxRect& rect,
                            const wxGridCellAttr& attr,
                            int defaultHAlign = wxALIGN_INVALID,
@@ -1805,7 +1805,7 @@ public:
     int      GetCornerLabelTextOrientation() const;
     std::string GetRowLabelValue( int row ) const;
     std::string GetColLabelValue( int col ) const;
-    wxString GetCornerLabelValue() const;
+    std::string GetCornerLabelValue() const;
 
     wxColour GetCellHighlightColour() const { return m_cellHighlightColour; }
     int      GetCellHighlightPenWidth() const { return m_cellHighlightPenWidth; }

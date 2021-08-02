@@ -245,7 +245,7 @@ wxString wxStaticTextBase::GetEllipsizedLabel() const
     return ret;
 }
 
-wxString wxStaticTextBase::Ellipsize(const wxString& label) const
+std::string wxStaticTextBase::Ellipsize(const std::string& label) const
 {
     const wxSize sz(GetClientSize());
     if (sz.x < 2 || sz.y < 2)

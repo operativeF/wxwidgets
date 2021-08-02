@@ -299,7 +299,7 @@ public:
 
     void DrawItemText(wxWindow* win,
                               wxDC& dc,
-                              const wxString& text,
+                              const std::string& text,
                               const wxRect& rect,
                               int align = wxALIGN_LEFT | wxALIGN_TOP,
                               int flags = 0,
@@ -1028,7 +1028,7 @@ wxRendererXP::DrawItemSelectionRect(wxWindow *win,
 
 void wxRendererXP::DrawItemText(wxWindow* win,
                                 wxDC& dc,
-                                const wxString& text,
+                                const std::string& text,
                                 const wxRect& rect,
                                 int align,
                                 int flags,
@@ -1096,8 +1096,8 @@ void wxRendererXP::DrawItemText(wxWindow* win,
         else
             textFlags |= DT_TOP;
 
-        const wxString* drawText = &text;
-        wxString ellipsizedText;
+        const std::string* drawText = &text;
+        std::string ellipsizedText;
         switch ( ellipsizeMode )
         {
             case wxELLIPSIZE_NONE:
@@ -1122,7 +1122,7 @@ void wxRendererXP::DrawItemText(wxWindow* win,
         }
 
         s_DrawThemeTextEx(hTheme, dc.GetHDC(), LVP_LISTITEM, itemState,
-                            drawText->wchar_str(), -1, textFlags, &rc, &textOpts);
+                            boost::nowide::widen(*drawText).c_str(), -1, textFlags, &rc, &textOpts);
     }
     else
     {

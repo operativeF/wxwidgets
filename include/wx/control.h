@@ -145,7 +145,7 @@ public:
     // ------------------------------
 
     // replaces parts of the given (multiline) string with an ellipsis if needed
-    static wxString Ellipsize(const wxString& label, const wxDC& dc,
+    static std::string Ellipsize(std::string_view label, const wxDC& dc,
                               wxEllipsizeMode mode, int maxWidth,
                               int flags = wxELLIPSIZE_FLAGS_DEFAULT);
 

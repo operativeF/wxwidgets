@@ -13,6 +13,7 @@
 
 #include "wx/control.h"
 #include "wx/dcmemory.h"
+#include "wx/stringutils.h"
 
 // ----------------------------------------------------------------------------
 // test class
@@ -129,10 +130,10 @@ TEST_CASE("Ellipsization::VeryLittleSpace")
 
     const int width = dc.GetTextExtent("s...").GetWidth();
 
-    CHECK( wxControl::Ellipsize("some label", dc, wxELLIPSIZE_START, width) == "...l" );
-    CHECK( wxControl::Ellipsize("some label", dc, wxELLIPSIZE_MIDDLE, width) == "s..." );
-    CHECK( wxControl::Ellipsize("some label1", dc, wxELLIPSIZE_MIDDLE, width) == "s..." );
-    CHECK( wxControl::Ellipsize("some label", dc, wxELLIPSIZE_END, width) == "s..." );
+    CHECK_EQ( wxControl::Ellipsize("some label", dc, wxELLIPSIZE_START, width), "...l" );
+    CHECK_EQ( wxControl::Ellipsize("some label", dc, wxELLIPSIZE_MIDDLE, width), "s..." );
+    CHECK_EQ( wxControl::Ellipsize("some label1", dc, wxELLIPSIZE_MIDDLE, width), "s..." );
+    CHECK_EQ( wxControl::Ellipsize("some label", dc, wxELLIPSIZE_END, width), "s..." );
 }
 
 
@@ -143,12 +144,12 @@ TEST_CASE("Ellipsization::HasThreeDots")
     std::string testString("some longer text");
     const int width = dc.GetTextExtent(testString).GetWidth() - 5;
 
-    CHECK( wxControl::Ellipsize(testString, dc, wxELLIPSIZE_START, width).StartsWith("...") );
-    CHECK( !wxControl::Ellipsize(testString, dc, wxELLIPSIZE_START, width).EndsWith("...") );
+    CHECK( wx::utils::StartsWith(wxControl::Ellipsize(testString, dc, wxELLIPSIZE_START, width), "..."));
+    CHECK_FALSE( wx::utils::EndsWith(wxControl::Ellipsize(testString, dc, wxELLIPSIZE_START, width), "..."));
 
-    CHECK( wxControl::Ellipsize(testString, dc, wxELLIPSIZE_END, width).EndsWith("...") );
+    CHECK( wx::utils::EndsWith(wxControl::Ellipsize(testString, dc, wxELLIPSIZE_END, width), "...") );
 
-    CHECK( wxControl::Ellipsize(testString, dc, wxELLIPSIZE_MIDDLE, width).Contains("...") );
-    CHECK( !wxControl::Ellipsize(testString, dc, wxELLIPSIZE_MIDDLE, width).StartsWith("...") );
-    CHECK( !wxControl::Ellipsize(testString, dc, wxELLIPSIZE_MIDDLE, width).EndsWith("...") );
+    CHECK( wx::utils::Contains(wxControl::Ellipsize(testString, dc, wxELLIPSIZE_MIDDLE, width), "...") );
+    CHECK_FALSE( wx::utils::StartsWith(wxControl::Ellipsize(testString, dc, wxELLIPSIZE_MIDDLE, width), "...") );
+    CHECK_FALSE( wx::utils::EndsWith(wxControl::Ellipsize(testString, dc, wxELLIPSIZE_MIDDLE, width), "...") );
 }

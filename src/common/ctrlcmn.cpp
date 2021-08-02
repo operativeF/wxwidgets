@@ -247,11 +247,11 @@ std::string wxControlBase::RemoveMarkup(const std::string& markup)
 
 bool wxControlBase::DoSetLabelMarkup(const std::string& markup)
 {
-    const wxString label = RemoveMarkup(markup);
+    const std::string label = RemoveMarkup(markup);
     if ( label.empty() && !markup.empty() )
         return false;
 
-    SetLabel(label.ToStdString());
+    SetLabel(label);
 
     return true;
 }
@@ -269,8 +269,10 @@ namespace
 
 struct EllipsizeCalculator
 {
-    EllipsizeCalculator(const std::string& s, const wxDC& dc,
-                        int maxFinalWidthPx, int replacementWidthPx,
+    EllipsizeCalculator(const std::string& s,
+                        const wxDC& dc,
+                        int maxFinalWidthPx,
+                        int replacementWidthPx,
                         int flags)
         :
           m_initialCharToRemove(0),
@@ -369,7 +371,7 @@ struct EllipsizeCalculator
     size_t GetFirstRemoved() const { return m_initialCharToRemove; }
     size_t GetLastRemoved() const { return m_initialCharToRemove + m_nCharsToRemove - 1; }
 
-    const wxString& GetEllipsizedText()
+    const std::string& GetEllipsizedText()
     {
         if ( m_outputNeedsUpdate )
         {
@@ -418,7 +420,7 @@ struct EllipsizeCalculator
         if ( estimatedWidth > m_maxFinalWidthPx )
             return false;
 
-        return m_dc.GetTextExtent(GetEllipsizedText().ToStdString()).x <= m_maxFinalWidthPx;
+        return m_dc.GetTextExtent(GetEllipsizedText()).x <= m_maxFinalWidthPx;
     }
 
     // calculation state:
@@ -434,11 +436,11 @@ struct EllipsizeCalculator
     // how many chars do we need to erase? valid range is [0;len-m_initialCharToRemove]
     size_t m_nCharsToRemove;
 
-    wxString m_output;
+    std::string m_output;
     bool m_outputNeedsUpdate;
 
     // inputs:
-    wxString m_str;
+    std::string m_str;
     const wxDC& m_dc;
     int m_maxFinalWidthPx;
     int m_replacementWidthPx;
@@ -447,7 +449,7 @@ struct EllipsizeCalculator
     bool m_isOk;
 };
 
-wxString DoEllipsizeSingleLine(const wxString& curLine, const wxDC& dc,
+std::string DoEllipsizeSingleLine(const std::string& curLine, const wxDC& dc,
                                wxEllipsizeMode mode, int maxFinalWidthPx,
                                int replacementWidthPx, int flags)
 {
@@ -458,7 +460,7 @@ wxString DoEllipsizeSingleLine(const wxString& curLine, const wxDC& dc,
     wxASSERT_MSG( mode != wxELLIPSIZE_NONE, "shouldn't be called at all then" );
 
     if (maxFinalWidthPx <= 0)
-        return wxEmptyString;
+        return {};
 
     const size_t len = curLine.length();
     if (len <= 1 )
@@ -483,7 +485,7 @@ wxString DoEllipsizeSingleLine(const wxString& curLine, const wxDC& dc,
 
                 // always show at least one character of the string:
                 if ( calc.m_nCharsToRemove == len )
-                    return wxString(wxELLIPSE_REPLACEMENT) + curLine[len-1];
+                    return fmt::format("{}{}", wxELLIPSE_REPLACEMENT, curLine[len - 1]);
 
                 break;
             }
@@ -534,7 +536,7 @@ wxString DoEllipsizeSingleLine(const wxString& curLine, const wxDC& dc,
                 if ( calc.m_nCharsToRemove == len ||
                      calc.m_nCharsToRemove == len - 1 )
                 {
-                    return curLine[0] + wxString(wxELLIPSE_REPLACEMENT);
+                    return fmt::format("{}{}", curLine[0], wxELLIPSE_REPLACEMENT);
                 }
             }
             break;
@@ -547,7 +549,7 @@ wxString DoEllipsizeSingleLine(const wxString& curLine, const wxDC& dc,
 
                 // always show at least one character of the string:
                 if ( calc.m_nCharsToRemove == len )
-                    return curLine[0] + wxString(wxELLIPSE_REPLACEMENT);
+                    return fmt::format("{}{}", curLine[0], wxELLIPSE_REPLACEMENT);
 
                 break;
             }
@@ -565,14 +567,14 @@ wxString DoEllipsizeSingleLine(const wxString& curLine, const wxDC& dc,
 
 
 /* static */
-wxString wxControlBase::Ellipsize(const wxString& label, const wxDC& dc,
+std::string wxControlBase::Ellipsize(std::string_view label, const wxDC& dc,
                                   wxEllipsizeMode mode, int maxFinalWidth,
                                   int flags)
 {
     if (mode == wxELLIPSIZE_NONE)
-        return label;
+        return std::string(label);
 
-    wxString ret;
+    std::string ret;
 
     // these cannot be cached between different Ellipsize() calls as they can
     // change because of e.g. a font change; however we calculate them only once
@@ -580,32 +582,35 @@ wxString wxControlBase::Ellipsize(const wxString& label, const wxDC& dc,
     int replacementWidth = dc.GetTextExtent(wxELLIPSE_REPLACEMENT).x;
 
     // NB: we must handle correctly labels with newlines:
-    wxString curLine;
-    for ( wxString::const_iterator pc = label.begin(); ; ++pc )
+    std::string curLine;
+
+    for ( std::string_view::const_iterator pc = label.begin(); ; ++pc )
     {
-        if ( pc == label.end() || *pc == wxS('\n') )
+        auto ch = *pc;
+        if ( pc == label.end() || ch == '\n' )
         {
-            curLine.Trim();
+            wx::utils::TrimFollowingSpace(curLine);
+
             curLine = DoEllipsizeSingleLine(curLine, dc, mode, maxFinalWidth,
                                             replacementWidth, flags);
 
             // add this (ellipsized) row to the rest of the label
-            ret << curLine;
+            ret += curLine;
             if ( pc == label.end() )
                 break;
 
-            ret << *pc;
+            ret += ch;
             curLine.clear();
         }
         // we need also to expand tabs to properly calc their size
-        else if ( *pc == wxS('\t') && (flags & wxELLIPSIZE_FLAGS_EXPAND_TABS) )
+        else if ( ch == '\t' && (flags & wxELLIPSIZE_FLAGS_EXPAND_TABS) )
         {
             // Windows natively expands the TABs to 6 spaces. Do the same:
-            curLine += wxS("      ");
+            curLine += "      ";
         }
         else
         {
-            curLine += *pc;
+            curLine += ch;
         }
     }
 

@@ -145,7 +145,7 @@ public:
 
     void DrawItemText(wxWindow* win,
                               wxDC& dc,
-                              const wxString& text,
+                              const std::string& text,
                               const wxRect& rect,
                               int align = wxALIGN_LEFT | wxALIGN_TOP,
                               int flags = 0,
@@ -972,7 +972,7 @@ void wxRendererGeneric::DrawGauge(wxWindow* win,
 void
 wxRendererGeneric::DrawItemText(wxWindow* WXUNUSED(win),
                                 wxDC& dc,
-                                const wxString& text,
+                                const std::string& text,
                                 const wxRect& rect,
                                 int align,
                                 int flags,

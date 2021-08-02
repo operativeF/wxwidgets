@@ -356,7 +356,7 @@ public:
     // Draw text using the appropriate color for normal and selected states.
     virtual void DrawItemText(wxWindow* win,
                               wxDC& dc,
-                              const wxString& text,
+                              const std::string& text,
                               const wxRect& rect,
                               int align = wxALIGN_LEFT | wxALIGN_TOP,
                               int flags = 0,
@@ -575,7 +575,7 @@ public:
 
     void DrawItemText(wxWindow* win,
                       wxDC& dc,
-                      const wxString& text,
+                      const std::string& text,
                       const wxRect& rect,
                       int align = wxALIGN_LEFT | wxALIGN_TOP,
                       int flags = 0,

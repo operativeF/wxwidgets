@@ -66,7 +66,7 @@ protected:      // functions required for wxST_ELLIPSIZE_* support
 
     // Replaces parts of the string with ellipsis according to the ellipsize
     // style. Shouldn't be called if we don't have any.
-    wxString Ellipsize(const wxString& label) const;
+    std::string Ellipsize(const std::string& label) const;
 
 
     // Note that even though ports with native support for ellipsization

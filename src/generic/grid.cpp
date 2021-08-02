@@ -257,7 +257,7 @@ void wxGridCellWorker::SetParameters(const wxString& WXUNUSED(params))
 
 void wxGridHeaderLabelsRenderer::DrawLabel(const wxGrid& grid,
                                          wxDC& dc,
-                                         const wxString& value,
+                                         std::string_view value,
                                          const wxRect& rect,
                                          int horizAlign,
                                          int vertAlign,
@@ -6996,8 +6996,8 @@ void wxGrid::DrawCornerLabel(wxDC& dc)
         rend.DrawBorder(*this, dc, rect);
     }
 
-    wxString label = GetCornerLabelValue();
-    if( !label.IsEmpty() )
+    std::string label = GetCornerLabelValue();
+    if( !label.empty() )
     {
         int hAlign, vAlign;
         GetCornerLabelAlignment(&hAlign, &vAlign);
@@ -7061,7 +7061,7 @@ void wxGrid::DrawColLabel(wxDC& dc, int col)
 // TODO: these 2 functions should be replaced with wxDC::DrawLabel() to which
 //       we just have to add textOrientation support
 void wxGrid::DrawTextRectangle( wxDC& dc,
-                                const wxString& value,
+                                std::string_view value,
                                 const wxRect& rect,
                                 int horizAlign,
                                 int vertAlign,
@@ -7069,7 +7069,7 @@ void wxGrid::DrawTextRectangle( wxDC& dc,
 {
     std::vector<std::string> lines;
 
-    StringToLines( value, lines );
+    StringToLines( std::string{value}, lines );
 
     DrawTextRectangle(dc, lines, rect, horizAlign, vertAlign, textOrientation);
 }
@@ -7174,7 +7174,7 @@ void wxGrid::DrawTextRectangle(wxDC& dc,
 }
 
 void wxGrid::DrawTextRectangle(wxDC& dc,
-                               const wxString& text,
+                               std::string_view text,
                                const wxRect& rect,
                                const wxGridCellAttr& attr,
                                int hAlign,
@@ -7183,7 +7183,7 @@ void wxGrid::DrawTextRectangle(wxDC& dc,
     attr.GetNonDefaultAlignment(&hAlign, &vAlign);
 
     // This does nothing if there is no need to ellipsize.
-    const wxString& ellipsizedText = wxControl::Ellipsize
+    std::string ellipsizedText = wxControl::Ellipsize
                                      (
                                          text,
                                          dc,
@@ -8639,7 +8639,7 @@ std::string wxGrid::GetColLabelValue( int col ) const
     }
 }
 
-wxString wxGrid::GetCornerLabelValue() const
+std::string wxGrid::GetCornerLabelValue() const
 {
     if ( m_table )
     {

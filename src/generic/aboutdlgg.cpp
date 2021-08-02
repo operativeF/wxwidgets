@@ -227,15 +227,15 @@ void wxGenericAboutDialog::AddControl(wxWindow *win)
     AddControl(win, wxSizerFlags().Border(wxDOWN).Centre());
 }
 
-void wxGenericAboutDialog::AddText(const wxString& text)
+void wxGenericAboutDialog::AddText(const std::string& text)
 {
     if ( !text.empty() )
         AddControl(new wxStaticText(this, wxID_ANY, text));
 }
 
 #if wxUSE_COLLPANE
-void wxGenericAboutDialog::AddCollapsiblePane(const wxString& title,
-                                              const wxString& text)
+void wxGenericAboutDialog::AddCollapsiblePane(const std::string& title,
+                                              const std::string& text)
 {
     wxCollapsiblePane *pane = new wxCollapsiblePane(this, wxID_ANY, title);
     wxWindow * const paneContents = pane->GetPane();

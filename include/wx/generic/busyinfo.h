@@ -38,8 +38,8 @@ public:
         Init(wxBusyInfoFlags().Parent(parent).Label(message));
     }
 
-    void UpdateText(const wxString& str);
-    void UpdateLabel(const wxString& str);
+    void UpdateText(const std::string& str);
+    void UpdateLabel(const std::string& str);
 
     ~wxBusyInfo() override;
 

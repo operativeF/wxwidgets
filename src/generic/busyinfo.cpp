@@ -124,12 +124,12 @@ void wxBusyInfo::Init(const wxBusyInfoFlags& flags)
     m_InfoFrame->Update();
 }
 
-void wxBusyInfo::UpdateText(const wxString& str)
+void wxBusyInfo::UpdateText(const std::string& str)
 {
     m_text->SetLabelMarkup(str);
 }
 
-void wxBusyInfo::UpdateLabel(const wxString& str)
+void wxBusyInfo::UpdateLabel(const std::string& str)
 {
     m_text->SetLabelText(str);
 }

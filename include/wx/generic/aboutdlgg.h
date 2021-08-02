@@ -71,11 +71,11 @@ protected:
     void AddControl(wxWindow *win);
 
     // add the text, if it's not empty, to the text sizer contents
-    void AddText(const wxString& text);
+    void AddText(const std::string& text);
 
 #if wxUSE_COLLPANE
     // add a wxCollapsiblePane containing the given text
-    void AddCollapsiblePane(const wxString& title, const wxString& text);
+    void AddCollapsiblePane(const std::string& title, const std::string& text);
 #endif // wxUSE_COLLPANE
 
 private:    
