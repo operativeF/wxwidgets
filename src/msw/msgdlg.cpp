@@ -674,12 +674,12 @@ void wxMSWTaskDialogConfig::MSWCommonTaskDialogInit(TASKDIALOGCONFIG &tdc)
     // message in our ctor, see comment there.
     if ( !extendedMessage.empty() )
     {
-        tdc.pszMainInstruction = message.t_str();
-        tdc.pszContent = extendedMessage.t_str();
+        tdc.pszMainInstruction = boost::nowide::widen(message).c_str();
+        tdc.pszContent = boost::nowide::widen(extendedMessage).c_str();
     }
     else
     {
-        tdc.pszContent = message.t_str();
+        tdc.pszContent = boost::nowide::widen(message).c_str();
     }
 
     // set an icon to be used, if possible

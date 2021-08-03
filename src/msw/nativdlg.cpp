@@ -37,8 +37,8 @@ bool wxWindow::LoadNativeDialog(wxWindow* parent, wxWindowID id)
     m_windowId = id;
 
     wxWindowCreationHook hook(this);
-    m_hWnd = (WXHWND)::CreateDialog((HINSTANCE)wxGetInstance(),
-                                    MAKEINTRESOURCE(id),
+    m_hWnd = (WXHWND)::CreateDialogW((HINSTANCE)wxGetInstance(),
+                                    MAKEINTRESOURCEW(id),
                                     parent ? (HWND)parent->GetHWND() : nullptr,
                                     (DLGPROC) wxDlgProc);
 
@@ -69,13 +69,13 @@ bool wxWindow::LoadNativeDialog(wxWindow* parent, wxWindowID id)
     return true;
 }
 
-bool wxWindow::LoadNativeDialog(wxWindow* parent, const wxString& name)
+bool wxWindow::LoadNativeDialog(wxWindow* parent, const std::string& name)
 {
     SetName(name);
 
     wxWindowCreationHook hook(this);
-    m_hWnd = (WXHWND)::CreateDialog((HINSTANCE) wxGetInstance(),
-                                    name.c_str(),
+    m_hWnd = (WXHWND)::CreateDialogW((HINSTANCE) wxGetInstance(),
+                                    boost::nowide::widen(name).c_str(),
                                     parent ? (HWND)parent->GetHWND() : nullptr,
                                     (DLGPROC)wxDlgProc);
 
@@ -152,15 +152,15 @@ wxWindow* wxWindow::CreateWindowFromHWND(wxWindow* parent, WXHWND hWnd)
 {
     wxCHECK_MSG( parent, nullptr, wxT("must have valid parent for a control") );
 
-    wxString str(wxGetWindowClass(hWnd));
-    str.UpperCase();
+    std::string str(wxGetWindowClass(hWnd));
+    wx::utils::ToUpper(str);
 
     long id = wxGetWindowId(hWnd);
-    long style = GetWindowLong((HWND) hWnd, GWL_STYLE);
+    long style = GetWindowLongW((HWND) hWnd, GWL_STYLE);
 
     wxWindow* win = nullptr;
 
-    if (str == wxT("BUTTON"))
+    if (str == "BUTTON")
     {
         int style1 = (style & 0xFF);
 #if wxUSE_CHECKBOX
@@ -218,7 +218,7 @@ wxWindow* wxWindow::CreateWindowFromHWND(wxWindow* parent, WXHWND hWnd)
         }
     }
 #if wxUSE_COMBOBOX
-    else if (str == wxT("COMBOBOX"))
+    else if (str == "COMBOBOX")
     {
         win = new wxComboBox;
     }
@@ -230,38 +230,38 @@ wxWindow* wxWindow::CreateWindowFromHWND(wxWindow* parent, WXHWND hWnd)
     // for correct functioning.
     // Could have wxWindow::AdoptAttributesFromHWND(WXHWND)
     // to be overridden by each control class.
-    else if (str == wxT("EDIT"))
+    else if (str == "EDIT")
     {
         win = new wxTextCtrl;
     }
 #endif
 #if wxUSE_LISTBOX
-    else if (str == wxT("LISTBOX"))
+    else if (str == "LISTBOX")
     {
         win = new wxListBox;
     }
 #endif
 #if wxUSE_SCROLLBAR
-    else if (str == wxT("SCROLLBAR"))
+    else if (str == "SCROLLBAR")
     {
         win = new wxScrollBar;
     }
 #endif
 #if wxUSE_SPINBTN
-    else if (str == wxT("MSCTLS_UPDOWN32"))
+    else if (str == "MSCTLS_UPDOWN32")
     {
         win = new wxSpinButton;
     }
 #endif
 #if wxUSE_SLIDER
-    else if (str == wxT("MSCTLS_TRACKBAR32"))
+    else if (str == "MSCTLS_TRACKBAR32")
     {
         // Need to ascertain if it's horiz or vert
         win = new wxSlider;
     }
 #endif // wxUSE_SLIDER
 #if wxUSE_STATTEXT
-    else if (str == wxT("STATIC"))
+    else if (str == "STATIC")
     {
         int style1 = (style & 0xFF);
 
@@ -282,9 +282,8 @@ wxWindow* wxWindow::CreateWindowFromHWND(wxWindow* parent, WXHWND hWnd)
 #endif
     else
     {
-        wxString msg(wxT("Don't know how to convert from Windows class "));
-        msg += str;
-        wxLogError(msg);
+        std::string msg{ fmt::format("Don't know how to convert from Windows class {}", str) };
+        wxLogError(msg.c_str());
     }
 
     if (win)

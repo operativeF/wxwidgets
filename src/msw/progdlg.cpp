@@ -97,12 +97,12 @@ struct wxProgressDialogSharedData
     // into the title and the main content body used by the native dialog.
     //
     // Note that it uses m_message and so must be called with m_cs locked.
-    void SplitMessageIntoTitleAndBody(wxString& title, wxString& body) const
+    void SplitMessageIntoTitleAndBody(std::string& title, std::string& body) const
     {
         title = m_message;
 
         const size_t posNL = title.find('\n');
-        if ( posNL != wxString::npos )
+        if ( posNL != std::string::npos )
         {
             // There can an extra new line between the first and subsequent
             // lines to separate them as it looks better with the generic
@@ -112,7 +112,7 @@ struct wxProgressDialogSharedData
             if ( posNL < title.length() - 1 && title[posNL + 1] == '\n' )
                 numNLs++;
 
-            body.assign(title, posNL + numNLs, wxString::npos);
+            body.assign(title, posNL + numNLs, std::string::npos);
             title.erase(posNL);
         }
         else // A single line
@@ -287,18 +287,18 @@ void PerformNotificationUpdates(HWND hwnd,
     {
         // Split the message in the title string and the rest if it has
         // multiple lines.
-        wxString title, body;
+        std::string title, body;
         sharedData->SplitMessageIntoTitleAndBody(title, body);
 
         ::SendMessageW( hwnd,
                        sharedData->m_msgChangeElementText,
                        TDE_MAIN_INSTRUCTION,
-                       wxMSW_CONV_LPARAM(title) );
+                       reinterpret_cast<LPARAM>(boost::nowide::widen(title).c_str()) );
 
         ::SendMessageW( hwnd,
                        sharedData->m_msgChangeElementText,
                        TDE_CONTENT,
-                       wxMSW_CONV_LPARAM(body) );
+                       reinterpret_cast<LPARAM>(boost::nowide::widen(body).c_str()) );
 
         // After using TDM_SET_ELEMENT_TEXT once, we don't want to use it for
         // the subsequent updates as it could result in dialog size changing
@@ -316,7 +316,7 @@ void PerformNotificationUpdates(HWND hwnd,
 
     if ( sharedData->m_notifications & wxSPDD_EXPINFO_CHANGED )
     {
-        const wxString& expandedInformation =
+        const std::string& expandedInformation =
             sharedData->m_expandedInformation;
         if ( !expandedInformation.empty() )
         {
@@ -327,10 +327,10 @@ void PerformNotificationUpdates(HWND hwnd,
             // when using TDF_EXPAND_FOOTER_AREA, as we do. Without this flag,
             // only TDM_SET_ELEMENT_TEXT could be used as otherwise the dialog
             // layout becomes completely mangled (at least under Windows 7).
-            ::SendMessage( hwnd,
+            ::SendMessageW( hwnd,
                            TDM_UPDATE_ELEMENT_TEXT,
                            TDE_EXPANDED_INFORMATION,
-                           wxMSW_CONV_LPARAM(expandedInformation) );
+                           reinterpret_cast<LPARAM>(boost::nowide::widen(expandedInformation).c_str()) );
         }
     }
 
@@ -973,14 +973,12 @@ void wxProgressDialog::UpdateExpandedInformation(int value)
         remainingTime = static_cast<unsigned long>(-1);
     }
 
-    wxString expandedInformation;
+    std::string expandedInformation;
 
     // Calculate the three different timing values.
     if ( HasPDFlag(wxPD_ELAPSED_TIME) )
     {
-        expandedInformation << GetElapsedLabel()
-                            << " "
-                            << GetFormattedTime(elapsedTime);
+        expandedInformation = fmt::format("{} {}", GetElapsedLabel(), GetFormattedTime(elapsedTime));
     }
 
     if ( HasPDFlag(wxPD_ESTIMATED_TIME) )
@@ -988,9 +986,7 @@ void wxProgressDialog::UpdateExpandedInformation(int value)
         if ( !expandedInformation.empty() )
             expandedInformation += "\n";
 
-        expandedInformation << GetEstimatedLabel()
-                            << " "
-                            << GetFormattedTime(estimatedTime);
+        expandedInformation += fmt::format("{} {}", GetEstimatedLabel(), GetFormattedTime(estimatedTime));
     }
 
     if ( HasPDFlag(wxPD_REMAINING_TIME) )
@@ -998,9 +994,7 @@ void wxProgressDialog::UpdateExpandedInformation(int value)
         if ( !expandedInformation.empty() )
             expandedInformation += "\n";
 
-        expandedInformation << GetRemainingLabel()
-                            << " "
-                            << GetFormattedTime(remainingTime);
+        expandedInformation += fmt::format("{} {}", GetRemainingLabel(), GetFormattedTime(remainingTime));
     }
 
     // Update with new timing information.

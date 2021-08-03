@@ -342,7 +342,7 @@ wxVideoMode wxDisplayMSW::GetCurrentMode() const
     dm.dmSize = sizeof(dm);
     dm.dmDriverExtra = 0;
 
-    if ( !::EnumDisplaySettings(deviceName, ENUM_CURRENT_SETTINGS, &dm) )
+    if ( !::EnumDisplaySettingsW(deviceName, ENUM_CURRENT_SETTINGS, &dm) )
     {
         wxLogLastError(wxT("EnumDisplaySettings(ENUM_CURRENT_SETTINGS)"));
     }
@@ -371,7 +371,7 @@ wxArrayVideoModes wxDisplayMSW::GetModes(const wxVideoMode& modeMatch) const
     dm.dmDriverExtra = 0;
 
     for ( int iModeNum = 0;
-          ::EnumDisplaySettings(deviceName, iModeNum, &dm);
+          ::EnumDisplaySettingsW(deviceName, iModeNum, &dm);
           iModeNum++ )
     {
         // Only care about the default display output, this prevents duplicate

@@ -153,7 +153,7 @@ public:
     // Native resource loading (implemented in src/msw/nativdlg.cpp)
     // FIXME: should they really be all virtual?
     virtual bool LoadNativeDialog(wxWindow* parent, wxWindowID id);
-    virtual bool LoadNativeDialog(wxWindow* parent, const wxString& name);
+    virtual bool LoadNativeDialog(wxWindow* parent, const std::string& name);
     wxWindow* GetWindowChild1(wxWindowID id);
     wxWindow* GetWindowChild(wxWindowID id);
 #endif // __WXUNIVERSAL__
@@ -688,7 +688,7 @@ protected:
     // comctl32.dll in our code -- see the function body for more info)
     bool HandleTooltipNotify(WXUINT code,
                              WXLPARAM lParam,
-                             const wxString& ttip);
+                             const std::string& ttip);
 #endif // wxUSE_TOOLTIPS
 
     // This is used by CreateKeyEvent() and also for wxEVT_CHAR[_HOOK] event

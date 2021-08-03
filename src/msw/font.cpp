@@ -1080,12 +1080,12 @@ namespace
 {
 
 // Contains the file names of all fonts added by AddPrivateFont().
-std::vector<wxString> gs_privateFontFileNames;
+std::vector<std::string> gs_privateFontFileNames;
 
 } // anonymous namespace
 
 // Accessor for use in src/msw/graphics.cpp only.
-extern const std::vector<wxString>& wxGetPrivateFontFileNames()
+extern const std::vector<std::string>& wxGetPrivateFontFileNames()
 {
     return gs_privateFontFileNames;
 }

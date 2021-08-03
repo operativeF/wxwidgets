@@ -85,7 +85,7 @@ public:
                 const wxPoint& pos,
                 const wxSize& size,
                 long style,
-                const wxString& name);
+                const std::string& name);
 
     ~wxMSWHeaderCtrl() override;
 
@@ -210,7 +210,7 @@ bool wxMSWHeaderCtrl::Create(wxWindow *parent,
                              const wxPoint& pos,
                              const wxSize& size,
                              long style,
-                             const wxString& name)
+                             const std::string& name)
 {
     // notice that we don't need InitCommonControlsEx(ICC_LISTVIEW_CLASSES)
     // here as we already call InitCommonControls() in wxApp initialization

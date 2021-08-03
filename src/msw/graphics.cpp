@@ -357,14 +357,14 @@ public:
                        const wxRealPoint& dpi,
                        const wxColour& col );
     wxGDIPlusFontData(wxGraphicsRenderer* renderer,
-                      const wxString& name,
+                      const std::string& name,
                       REAL sizeInPixels,
                       int style,
                       const wxColour& col);
 
     // This ctor takes ownership of the brush.
     wxGDIPlusFontData(wxGraphicsRenderer* renderer,
-                      const wxString& name,
+                      const std::string& name,
                       REAL sizeInPixels,
                       int style,
                       Brush* textBrush);
@@ -385,13 +385,13 @@ public:
 private :
     // Common part of all ctors, flags here is a combination of values of
     // FontStyle GDI+ enum.
-    void Init(const wxString& name,
+    void Init(const std::string& name,
               REAL sizeInPixels,
               int style,
               Brush* textBrush);
 
     // Common part of ctors taking wxColour.
-    void Init(const wxString& name,
+    void Init(const std::string& name,
               REAL sizeInPixels,
               int style,
               const wxColour& col)
@@ -1085,7 +1085,7 @@ Gdiplus::FontFamily* gs_pFontFamily = nullptr;
 } // anonymous namespace
 
 // This function is defined in src/msw/font.cpp.
-extern const std::vector<wxString>& wxGetPrivateFontFileNames();
+extern const std::vector<std::string>& wxGetPrivateFontFileNames();
 
 #endif // wxUSE_PRIVATE_FONTS
 
@@ -1094,7 +1094,7 @@ extern const std::vector<wxString>& wxGetPrivateFontFileNames();
 //-----------------------------------------------------------------------------
 
 void
-wxGDIPlusFontData::Init(const wxString& name,
+wxGDIPlusFontData::Init(const std::string& name,
                         REAL sizeInPixels,
                         int style,
                         Brush* textBrush)
@@ -1132,7 +1132,7 @@ wxGDIPlusFontData::Init(const wxString& name,
     if ( !m_font )
 #endif // wxUSE_PRIVATE_FONTS
     {
-        m_font = new Font(name.wc_str(), sizeInPixels, style, UnitPixel);
+        m_font = new Font(boost::nowide::widen(name).c_str(), sizeInPixels, style, UnitPixel);
     }
 
     m_textBrush = textBrush;
@@ -1162,7 +1162,7 @@ wxGDIPlusFontData::wxGDIPlusFontData( wxGraphicsRenderer* renderer,
 }
 
 wxGDIPlusFontData::wxGDIPlusFontData(wxGraphicsRenderer* renderer,
-                                     const wxString& name,
+                                     const std::string& name,
                                      REAL sizeInPixels,
                                      int style,
                                      const wxColour& col) :
@@ -1172,7 +1172,7 @@ wxGDIPlusFontData::wxGDIPlusFontData(wxGraphicsRenderer* renderer,
 }
 
 wxGDIPlusFontData::wxGDIPlusFontData(wxGraphicsRenderer* renderer,
-                                     const wxString& name,
+                                     const std::string& name,
                                      REAL sizeInPixels,
                                      int style,
                                      Brush* brush)
@@ -2586,7 +2586,7 @@ void wxGDIPlusRenderer::Load()
 
 #if wxUSE_PRIVATE_FONTS
         // Make private fonts available to GDI+, if any.
-        const std::vector<wxString>& privateFonts = wxGetPrivateFontFileNames();
+        const std::vector<std::string>& privateFonts = wxGetPrivateFontFileNames();
 
         if ( !privateFonts.empty() )
         {
@@ -2594,7 +2594,7 @@ void wxGDIPlusRenderer::Load()
             
             for ( const auto& fname : privateFonts )
             {
-                gs_privateFonts->AddFontFile(fname.wc_str());
+                gs_privateFonts->AddFontFile(boost::nowide::widen(fname).c_str());
             }
 
             gs_pFontFamily = new Gdiplus::FontFamily[privateFonts.size()];

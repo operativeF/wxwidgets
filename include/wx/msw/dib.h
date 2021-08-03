@@ -75,7 +75,7 @@ public:
     [[maybe_unused]] bool Create(const wxBitmap& bmp, int depth = -1) { return Create(GetHbitmapOf(bmp), depth); }
 #endif
     [[maybe_unused]] bool Create(HBITMAP hbmp, int depth = -1);
-    bool Load(const wxString& filename);
+    bool Load(const std::string& filename);
 
     ~wxDIB();
 
@@ -97,7 +97,7 @@ public:
 #endif // defined(__WXMSW__) && wxUSE_PALETTE
 
     // save the DIB as a .BMP file to the file with the given name
-    bool Save(const wxString& filename);
+    bool Save(const std::string& filename);
 
     // return true if DIB was successfully created, false otherwise
     bool IsOk() const { return m_handle != nullptr; }

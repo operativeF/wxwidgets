@@ -34,7 +34,7 @@ public:
     wxPrinterDCImpl& operator=(wxPrinterDCImpl&&) = default;
 
     // override some base class virtuals
-    bool StartDoc(const wxString& message) override;
+    bool StartDoc(const std::string& message) override;
     void EndDoc() override;
     void StartPage() override;
     void EndPage() override;

@@ -82,9 +82,9 @@ protected:
 
     // Return the labels to use for showing the elapsed/estimated/remaining
     // times respectively.
-    static wxString GetElapsedLabel() { return wxGetTranslation("Elapsed time:"); }
-    static wxString GetEstimatedLabel() { return wxGetTranslation("Estimated time:"); }
-    static wxString GetRemainingLabel() { return wxGetTranslation("Remaining time:"); }
+    static std::string GetElapsedLabel() { return wxGetTranslation("Elapsed time:"); }
+    static std::string GetEstimatedLabel() { return wxGetTranslation("Estimated time:"); }
+    static std::string GetRemainingLabel() { return wxGetTranslation("Remaining time:"); }
 
 
     // Similar to wxWindow::HasFlag() but tests for a presence of a wxPD_XXX
@@ -103,7 +103,7 @@ protected:
                              unsigned long &remainingTime);
 
     // Converts seconds to HH:mm:ss format.
-    static wxString GetFormattedTime(unsigned long timeInSec);
+    static std::string GetFormattedTime(unsigned long timeInSec);
 
     // Create a new event loop if there is no currently running one.
     void EnsureActiveEventLoopExists();

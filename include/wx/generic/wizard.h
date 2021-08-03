@@ -134,8 +134,8 @@ protected:
     wxStaticBitmap *m_statbmp;  // the control for the bitmap
 
     // cached labels so their translations stay consistent
-    wxString    m_nextLabel,
-                m_finishLabel;
+    std::string    m_nextLabel;
+    std::string    m_finishLabel;
 
     // Border around page area sizer requested using SetBorder()
     int m_border;

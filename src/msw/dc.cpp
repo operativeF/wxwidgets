@@ -1832,7 +1832,7 @@ void wxMSWDCImpl::SetRop(WXHDC dc)
     SetROP2(GetHdc(), rop);
 }
 
-bool wxMSWDCImpl::StartDoc(const wxString& WXUNUSED(message))
+bool wxMSWDCImpl::StartDoc(const std::string& WXUNUSED(message))
 {
     // We might be previewing, so return true to let it continue.
     return true;

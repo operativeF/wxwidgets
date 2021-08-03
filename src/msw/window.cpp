@@ -4071,7 +4071,7 @@ bool wxWindowMSW::HandleNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result)
 
 bool wxWindowMSW::HandleTooltipNotify(WXUINT code,
                                       WXLPARAM lParam,
-                                      const wxString& ttip)
+                                      const std::string& ttip)
 {
     // I don't know why it happens, but the versions of comctl32.dll starting
     // from 4.70 sometimes send TTN_NEEDTEXTW even to ANSI programs (normally,
@@ -4102,9 +4102,9 @@ bool wxWindowMSW::HandleTooltipNotify(WXUINT code,
     // we get here if we got TTN_NEEDTEXTA (only happens in ANSI build) or
     // if we got TTN_NEEDTEXTW in Unicode build: in this case we just have
     // to copy the string we have into the buffer
-    static wxChar buf[513];
-    wxStrlcpy(buf, ttip.c_str(), WXSIZEOF(buf));
-    ttText->lpszText = buf;
+    std::wstring buf = boost::nowide::widen(ttip);
+
+    ttText->lpszText = &buf[0];
 
     return true;
 }
@@ -5121,7 +5121,7 @@ extern wxCOLORMAP *wxGetStdColourMap()
             // reference bitmap which can tell us what the RGB values change
             // to.
             wxLogNull logNo; // suppress error if we couldn't load the bitmap
-            wxBitmap stdColourBitmap(wxT("wxBITMAP_STD_COLOURS"));
+            wxBitmap stdColourBitmap("wxBITMAP_STD_COLOURS");
             if ( stdColourBitmap.IsOk() )
             {
                 // the pixels in the bitmap must correspond to wxSTD_COL_XXX!

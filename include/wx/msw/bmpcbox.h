@@ -61,16 +61,16 @@ public:
     bool SetFont(const wxFont& font) override;
 
     // Adds item with image to the end of the combo box.
-    int Append(const wxString& item, const wxBitmap& bitmap = wxNullBitmap);
-    int Append(const wxString& item, const wxBitmap& bitmap, void *clientData);
-    int Append(const wxString& item, const wxBitmap& bitmap, wxClientData *clientData);
+    int Append(const std::string& item, const wxBitmap& bitmap = wxNullBitmap);
+    int Append(const std::string& item, const wxBitmap& bitmap, void *clientData);
+    int Append(const std::string& item, const wxBitmap& bitmap, wxClientData *clientData);
 
     // Inserts item with image into the list before pos. Not valid for wxCB_SORT
     // styles, use Append instead.
-    int Insert(const wxString& item, const wxBitmap& bitmap, unsigned int pos);
-    int Insert(const wxString& item, const wxBitmap& bitmap,
+    int Insert(const std::string& item, const wxBitmap& bitmap, unsigned int pos);
+    int Insert(const std::string& item, const wxBitmap& bitmap,
                unsigned int pos, void *clientData);
-    int Insert(const wxString& item, const wxBitmap& bitmap,
+    int Insert(const std::string& item, const wxBitmap& bitmap,
                unsigned int pos, wxClientData *clientData);
 
 protected:

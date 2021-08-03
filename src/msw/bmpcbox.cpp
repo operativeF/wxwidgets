@@ -77,7 +77,7 @@ void wxBitmapComboBox::RecreateControl()
     // Can't use CBS_OWNERDRAWVARIABLE because it has odd
     // mouse-wheel behaviour.
     //
-    wxString value = GetValue();
+    std::string value = GetValue();
     int selection = GetSelection();
     wxPoint pos = GetPosition();
     wxSize size = GetSize();
@@ -201,7 +201,7 @@ void wxBitmapComboBox::SetItemBitmap(unsigned int n, const wxBitmap& bitmap)
         Refresh();
 }
 
-int wxBitmapComboBox::Append(const wxString& item, const wxBitmap& bitmap)
+int wxBitmapComboBox::Append(const std::string& item, const wxBitmap& bitmap)
 {
     OnAddBitmap(bitmap);
     const int n = wxComboBox::Append(item);
@@ -210,7 +210,7 @@ int wxBitmapComboBox::Append(const wxString& item, const wxBitmap& bitmap)
     return n;
 }
 
-int wxBitmapComboBox::Append(const wxString& item, const wxBitmap& bitmap,
+int wxBitmapComboBox::Append(const std::string& item, const wxBitmap& bitmap,
                              void *clientData)
 {
     OnAddBitmap(bitmap);
@@ -220,7 +220,7 @@ int wxBitmapComboBox::Append(const wxString& item, const wxBitmap& bitmap,
     return n;
 }
 
-int wxBitmapComboBox::Append(const wxString& item, const wxBitmap& bitmap,
+int wxBitmapComboBox::Append(const std::string& item, const wxBitmap& bitmap,
                              wxClientData *clientData)
 {
     OnAddBitmap(bitmap);
@@ -230,7 +230,7 @@ int wxBitmapComboBox::Append(const wxString& item, const wxBitmap& bitmap,
     return n;
 }
 
-int wxBitmapComboBox::Insert(const wxString& item,
+int wxBitmapComboBox::Insert(const std::string& item,
                              const wxBitmap& bitmap,
                              unsigned int pos)
 {
@@ -241,7 +241,7 @@ int wxBitmapComboBox::Insert(const wxString& item,
     return n;
 }
 
-int wxBitmapComboBox::Insert(const wxString& item, const wxBitmap& bitmap,
+int wxBitmapComboBox::Insert(const std::string& item, const wxBitmap& bitmap,
                              unsigned int pos, void *clientData)
 {
     OnAddBitmap(bitmap);
@@ -251,7 +251,7 @@ int wxBitmapComboBox::Insert(const wxString& item, const wxBitmap& bitmap,
     return n;
 }
 
-int wxBitmapComboBox::Insert(const wxString& item, const wxBitmap& bitmap,
+int wxBitmapComboBox::Insert(const std::string& item, const wxBitmap& bitmap,
                              unsigned int pos, wxClientData *clientData)
 {
     OnAddBitmap(bitmap);

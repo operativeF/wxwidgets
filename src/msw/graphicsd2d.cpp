@@ -361,7 +361,7 @@ HRESULT WINAPI wxD3D11CreateDevice(
 #if wxUSE_PRIVATE_FONTS
 
 // This function is defined in src/msw/font.cpp.
-extern const std::vector<wxString>& wxGetPrivateFontFileNames();
+extern const std::vector<std::string>& wxGetPrivateFontFileNames();
 
 namespace
 {
@@ -372,7 +372,7 @@ using wxDirect2DFontKey = unsigned int;
 class wxDirect2DFontFileEnumerator : public IDWriteFontFileEnumerator
 {
 public:
-    wxDirect2DFontFileEnumerator(IDWriteFactory* pFactory, const std::vector<wxString>& fontCollection)
+    wxDirect2DFontFileEnumerator(IDWriteFactory* pFactory, const std::vector<std::string>& fontCollection)
         : m_factory(pFactory)
         , m_filePaths(fontCollection)
         , m_nextIndex(0)
@@ -394,7 +394,7 @@ public:
 
         if ( m_nextIndex < m_filePaths.size() )
         {
-            hr = m_factory->CreateFontFileReference(m_filePaths[m_nextIndex].wc_str(), nullptr, &m_currentFile);
+            hr = m_factory->CreateFontFileReference(boost::nowide::widen(m_filePaths[m_nextIndex]).c_str(), nullptr, &m_currentFile);
             if ( SUCCEEDED(hr) )
             {
                 *pHasCurrentFile = TRUE;
@@ -422,7 +422,7 @@ public:
 private:
     wxCOMPtr<IDWriteFactory> m_factory;
     wxCOMPtr<IDWriteFontFile> m_currentFile;
-    std::vector<wxString> m_filePaths;
+    std::vector<std::string> m_filePaths;
     size_t m_nextIndex;
 };
 
@@ -485,14 +485,14 @@ public:
         return ms_isInitialized;
     }
 
-    static wxDirect2DFontKey SetFontList(const std::vector<wxString>& list)
+    static wxDirect2DFontKey SetFontList(const std::vector<std::string>& list)
     {
         ms_fontList = list;
         // Every time font collection is changed, generate unique key
         return ++ms_key;
     }
 
-    static const std::vector<wxString>& GetFontList()
+    static const std::vector<std::string>& GetFontList()
     {
         return ms_fontList;
     }
@@ -502,7 +502,7 @@ public:
 
 private:
     inline static bool ms_isInitialized{true};
-    inline static std::vector<wxString> ms_fontList;
+    inline static std::vector<std::string> ms_fontList;
     static wxDirect2DFontKey ms_key;
 };
 
@@ -3230,7 +3230,7 @@ wxD2DFontData::wxD2DFontData(wxGraphicsRenderer* renderer, const wxFont& font, c
         // or from private GDI font.
 #if wxUSE_PRIVATE_FONTS
         // Make private fonts available to D2D.
-        const std::vector<wxString>& privateFonts = wxGetPrivateFontFileNames();
+        const std::vector<std::string>& privateFonts = wxGetPrivateFontFileNames();
         if ( privateFonts.empty() )
         {
             wxLogApiError(wxString::Format("IDWriteGdiInterop::CreateFontFromLOGFONT() for '%s'", logfont.lfFaceName), hr);

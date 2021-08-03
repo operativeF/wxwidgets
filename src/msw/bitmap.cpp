@@ -710,7 +710,7 @@ wxBitmap::wxBitmap(const void* data, wxBitmapType type, int width, int height, i
     Create(data, type, width, height, depth);
 }
 
-wxBitmap::wxBitmap(const wxString& filename, wxBitmapType type)
+wxBitmap::wxBitmap(const std::string& filename, wxBitmapType type)
 {
     LoadFile(filename, type);
 }
@@ -1035,7 +1035,7 @@ wxImage wxBitmap::ConvertToImage() const
 // loading and saving bitmaps
 // ----------------------------------------------------------------------------
 
-bool wxBitmap::LoadFile(const wxString& filename, wxBitmapType type)
+bool wxBitmap::LoadFile(const std::string& filename, wxBitmapType type)
 {
     UnRef();
 
@@ -1093,7 +1093,7 @@ bool wxBitmap::Create(const void* data, wxBitmapType type, int width, int height
     return handler->Create(this, data, type, width, height, depth);
 }
 
-bool wxBitmap::SaveFile(const wxString& filename,
+bool wxBitmap::SaveFile(const std::string& filename,
                         wxBitmapType type,
                         const wxPalette *palette) const
 {

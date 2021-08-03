@@ -197,7 +197,7 @@ public:
 
     // page and document
 
-    virtual bool StartDoc(const wxString& WXUNUSED(message)) { return true; }
+    virtual bool StartDoc(const std::string& WXUNUSED(message)) { return true; }
     virtual void EndDoc() { }
 
     virtual void StartPage() { }

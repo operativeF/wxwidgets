@@ -57,7 +57,7 @@ public:
     explicit wxBitmap(const char* const* data);
 
     // Load a file or resource
-    wxBitmap(const wxString& name, wxBitmapType type = wxBITMAP_DEFAULT_TYPE);
+    wxBitmap(const std::string& name, wxBitmapType type = wxBITMAP_DEFAULT_TYPE);
 
     // New constructor for generalised creation from data
     wxBitmap(const void* data, wxBitmapType type, int width, int height, int depth = 1);
@@ -149,8 +149,8 @@ public:
     virtual bool CreateScaled(int w, int h, int d, double logicalScale)
         { return Create(wxRound(w*logicalScale), wxRound(h*logicalScale), d); }
 
-    virtual bool LoadFile(const wxString& name, wxBitmapType type = wxBITMAP_DEFAULT_TYPE);
-    virtual bool SaveFile(const wxString& name, wxBitmapType type, const wxPalette *cmap = nullptr) const;
+    virtual bool LoadFile(const std::string& name, wxBitmapType type = wxBITMAP_DEFAULT_TYPE);
+    virtual bool SaveFile(const std::string& name, wxBitmapType type, const wxPalette *cmap = nullptr) const;
 
     wxBitmapRefData *GetBitmapData() const
         { return (wxBitmapRefData *)m_refData; }

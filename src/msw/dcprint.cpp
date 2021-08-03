@@ -93,18 +93,18 @@ wxPrinterDCImpl::wxPrinterDCImpl( wxPrinterDC *owner, WXHDC dc ) :
 // wxPrinterDCImpl {Start/End}{Page/Doc} methods
 // ----------------------------------------------------------------------------
 
-bool wxPrinterDCImpl::StartDoc(const wxString& message)
+bool wxPrinterDCImpl::StartDoc(const std::string& message)
 {
     DOCINFO docinfo;
     docinfo.cbSize = sizeof(DOCINFO);
-    docinfo.lpszDocName = message.t_str();
+    docinfo.lpszDocName = boost::nowide::widen(message).c_str();
 
-    wxString filename(m_printData.GetFilename());
+    std::string filename{m_printData.GetFilename()};
 
     if (filename.empty())
         docinfo.lpszOutput = nullptr;
     else
-        docinfo.lpszOutput = filename.t_str();
+        docinfo.lpszOutput = boost::nowide::widen(filename).c_str();
 
     docinfo.lpszDatatype = nullptr;
     docinfo.fwType = 0;

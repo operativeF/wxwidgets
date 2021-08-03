@@ -69,10 +69,10 @@ wxIcon::wxIcon(const std::string& iconfile,
 wxIcon::wxIcon(const wxIconLocation& loc)
 {
     // wxICOFileHandler accepts names in the format "filename;index"
-    wxString fullname = loc.GetFileName();
-    if ( loc.GetIndex() )
+    std::string fullname = loc.GetFileName();
+    if ( loc.GetIndex() != 0 )
     {
-        fullname << wxT(';') << loc.GetIndex();
+        fullname += fmt::format(";{}", loc.GetIndex());
     }
     //else: 0 is default
 

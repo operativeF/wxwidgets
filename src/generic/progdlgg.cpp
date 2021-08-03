@@ -295,7 +295,7 @@ void wxGenericProgressDialog::UpdateTimeEstimates(int value,
 }
 
 // static
-wxString wxGenericProgressDialog::GetFormattedTime(unsigned long timeInSec)
+std::string wxGenericProgressDialog::GetFormattedTime(unsigned long timeInSec)
 {
     wxString timeAsHMS;
 

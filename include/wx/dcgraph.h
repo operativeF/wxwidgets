@@ -79,7 +79,7 @@ public:
     
     void Clear() override;
 
-    bool StartDoc( const wxString& message ) override;
+    bool StartDoc( const std::string& message ) override;
     void EndDoc() override;
 
     void StartPage() override;

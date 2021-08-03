@@ -28,7 +28,7 @@
 // implementation implement the corresponding functions in their wxDC and
 // wxWindow classes, so forward back to them instead of using wxTextMeasure
 // from there, as usual.
-void wxTextMeasure::DoGetTextExtent(const wxString& string,
+void wxTextMeasure::DoGetTextExtent(std::string_view string,
                                     wxCoord *width,
                                     wxCoord *height,
                                     wxCoord *descent,

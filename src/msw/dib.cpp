@@ -219,12 +219,12 @@ bool wxDIB::CopyFromDDB(HBITMAP hbmp)
 // Loading/saving the DIBs
 // ----------------------------------------------------------------------------
 
-bool wxDIB::Load(const wxString& filename)
+bool wxDIB::Load(const std::string& filename)
 {
-    m_handle = (HBITMAP)::LoadImage
+    m_handle = (HBITMAP)::LoadImageW
                          (
                             wxGetInstance(),
-                            filename.t_str(),
+                            boost::nowide::widen(filename).c_str(),
                             IMAGE_BITMAP,
                             0, 0, // don't specify the size
                             LR_CREATEDIBSECTION | LR_LOADFROMFILE
@@ -240,7 +240,7 @@ bool wxDIB::Load(const wxString& filename)
     return true;
 }
 
-bool wxDIB::Save(const wxString& filename)
+bool wxDIB::Save(const std::string& filename)
 {
     wxCHECK_MSG( m_handle, false, wxT("wxDIB::Save(): invalid object") );
 
