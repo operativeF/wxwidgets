@@ -971,13 +971,13 @@ bool wxMenuItem::OnDrawItem(wxDC& dc, const wxRect& rc,
 
 
         // item text name without mnemonic for calculating size
-        wxString text = GetName();
+        boost::nowide::wstackstring stackName(GetName().c_str());
 
         SIZE textSize;
-        ::GetTextExtentPoint32W(hdc, text.c_str(), text.length(), &textSize);
+        ::GetTextExtentPoint32W(hdc, stackName.get(), stackName.buffer_size, &textSize);
 
         // item text name with mnemonic
-        text = wx::utils::BeforeFirst(GetItemLabel(), '\t');
+        auto text = wx::utils::BeforeFirst(GetItemLabel(), '\t');
 
         int flags = DST_PREFIXTEXT;
         // themes menu is using specified color for disabled labels
@@ -991,7 +991,7 @@ bool wxMenuItem::OnDrawItem(wxDC& dc, const wxRect& rc,
         int x = rcText.left;
         int y = rcText.top + (rcText.bottom - rcText.top - textSize.cy) / 2;
 
-        ::DrawState(hdc, nullptr, nullptr, wxMSW_CONV_LPARAM(text),
+        ::DrawStateW(hdc, nullptr, nullptr, reinterpret_cast<LPARAM>(boost::nowide::widen(text).c_str()),
                     text.length(), x, y, 0, 0, flags);
 
         // ::SetTextAlign(hdc, TA_RIGHT) doesn't work with DSS_DISABLED or DSS_MONO
@@ -1002,7 +1002,8 @@ bool wxMenuItem::OnDrawItem(wxDC& dc, const wxRect& rc,
         if ( !accel.empty() )
         {
             SIZE accelSize;
-            ::GetTextExtentPoint32W(hdc, boost::nowide::widen(accel).c_str(), accel.length(), &accelSize);
+            boost::nowide::wstackstring stackAccelExt(accel.c_str());
+            ::GetTextExtentPoint32W(hdc, stackAccelExt.get(), stackAccelExt.buffer_size, &accelSize);
 
             flags = DST_TEXT;
             // themes menu is using specified color for disabled labels
@@ -1023,9 +1024,8 @@ bool wxMenuItem::OnDrawItem(wxDC& dc, const wxRect& rc,
             y = rcText.top + (rcText.bottom - rcText.top - accelSize.cy) / 2;
 
             boost::nowide::wstackstring stackAccel(accel.c_str());
-
             ::DrawStateW(hdc, nullptr, nullptr, reinterpret_cast<LPARAM>(stackAccel.get()),
-                        accel.length(), x, y, 0, 0, flags);
+                        stackAccel.buffer_size, x, y, 0, 0, flags);
         }
     }
 

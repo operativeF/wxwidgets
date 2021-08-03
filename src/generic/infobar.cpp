@@ -195,7 +195,7 @@ void wxInfoBarGeneric::DoShow()
     ShowWithEffect(GetShowEffect(), GetEffectDuration());
 }
 
-void wxInfoBarGeneric::ShowMessage(const wxString& msg, int flags)
+void wxInfoBarGeneric::ShowMessage(const std::string& msg, int flags)
 {
     // first update the controls
     const int icon = flags & wxICON_MASK;

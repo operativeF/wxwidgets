@@ -3024,7 +3024,7 @@ bool wxRichTextCtrl::RecreateBuffer(const wxSize& size)
 // file IO functions
 // ----------------------------------------------------------------------------
 #if wxUSE_FFILE && wxUSE_STREAMS
-bool wxRichTextCtrl::DoLoadFile(const wxString& filename, int fileType)
+bool wxRichTextCtrl::DoLoadFile(const std::string& filename, int fileType)
 {
     SetFocusObject(& GetBuffer(), true);
 
@@ -3050,7 +3050,7 @@ bool wxRichTextCtrl::DoLoadFile(const wxString& filename, int fileType)
     }
 }
 
-bool wxRichTextCtrl::DoSaveFile(const wxString& filename, int fileType)
+bool wxRichTextCtrl::DoSaveFile(const std::string& filename, int fileType)
 {
     if (GetBuffer().SaveFile(filename, (wxRichTextFileType)fileType))
     {

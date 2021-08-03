@@ -92,7 +92,7 @@ wxColour wxAnimationGenericImpl::GetBackgroundColour() const
     return m_decoder->GetBackgroundColour();
 }
 
-bool wxAnimationGenericImpl::LoadFile(const wxString& filename, wxAnimationType type)
+bool wxAnimationGenericImpl::LoadFile(const std::string& filename, wxAnimationType type)
 {
     wxFileInputStream stream(filename);
     if ( !stream.IsOk() )

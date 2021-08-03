@@ -439,7 +439,7 @@ public:
     wxAccStatus Navigate(wxNavDir navDir, int fromId,
                                  int* toId, wxAccessible** toObject) override;
 
-    wxAccStatus GetName(int childId, wxString* name) override;
+    wxAccStatus GetName(int childId, std::string* name) override;
 
     wxAccStatus GetChildCount(int* childCount) override;
 
@@ -450,19 +450,19 @@ public:
 
     wxAccStatus DoDefaultAction(int childId) override;
 
-    wxAccStatus GetDefaultAction(int childId, wxString* actionName) override;
+    wxAccStatus GetDefaultAction(int childId, std::string* actionName) override;
 
-    wxAccStatus GetDescription(int childId, wxString* description) override;
+    wxAccStatus GetDescription(int childId, std::string* description) override;
 
-    wxAccStatus GetHelpText(int childId, wxString* helpText) override;
+    wxAccStatus GetHelpText(int childId, std::string* helpText) override;
 
-    wxAccStatus GetKeyboardShortcut(int childId, wxString* shortcut) override;
+    wxAccStatus GetKeyboardShortcut(int childId, std::string* shortcut) override;
 
     wxAccStatus GetRole(int childId, wxAccRole* role) override;
 
     wxAccStatus GetState(int childId, long* state) override;
 
-    wxAccStatus GetValue(int childId, wxString* strValue) override;
+    wxAccStatus GetValue(int childId, std::string* strValue) override;
 
     wxAccStatus Select(int childId, wxAccSelectionFlags selectFlags) override;
 

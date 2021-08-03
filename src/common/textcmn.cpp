@@ -892,7 +892,7 @@ bool wxTextCtrlBase::SetDefaultStyle(const wxTextAttr& style)
 // file IO functions
 // ----------------------------------------------------------------------------
 
-bool wxTextAreaBase::DoLoadFile(const wxString& filename, int WXUNUSED(fileType))
+bool wxTextAreaBase::DoLoadFile(const std::string& filename, int WXUNUSED(fileType))
 {
 #if wxUSE_FFILE
     wxFFile file(filename);
@@ -918,7 +918,7 @@ bool wxTextAreaBase::DoLoadFile(const wxString& filename, int WXUNUSED(fileType)
     return false;
 }
 
-bool wxTextAreaBase::DoSaveFile(const wxString& filename, int WXUNUSED(fileType))
+bool wxTextAreaBase::DoSaveFile(const std::string& filename, int WXUNUSED(fileType))
 {
 #if wxUSE_FFILE
     wxFFile file(filename, wxT("w"));

@@ -46,7 +46,7 @@ constexpr int CANCEL_BITMAP_LIGHTNESS = 160; // a bit more lighter
 class wxSearchTextCtrl : public wxTextCtrl
 {
 public:
-    wxSearchTextCtrl(wxSearchCtrl *search, const wxString& value, int style)
+    wxSearchTextCtrl(wxSearchCtrl *search, const std::string& value, int style)
         : wxTextCtrl(search, wxID_ANY, value, wxDefaultPosition, wxDefaultSize,
                      (style & ~wxBORDER_MASK) | wxNO_BORDER | wxTE_PROCESS_ENTER),
           m_search(search)
@@ -70,12 +70,12 @@ public:
         wxTextCtrl::DoSetValue(value, flags);
     }
 
-    bool DoLoadFile(const wxString& file, int fileType) override
+    bool DoLoadFile(const std::string& file, int fileType) override
     {
         return wxTextCtrl::DoLoadFile(file, fileType);
     }
 
-    bool DoSaveFile(const wxString& file, int fileType) override
+    bool DoSaveFile(const std::string& file, int fileType) override
     {
         return wxTextCtrl::DoSaveFile(file, fileType);
     }
@@ -432,12 +432,12 @@ bool wxSearchCtrl::IsCancelButtonVisible() const
     return m_cancelButton && m_cancelButton->IsShown();
 }
 
-void wxSearchCtrl::SetDescriptiveText(const wxString& text)
+void wxSearchCtrl::SetDescriptiveText(const std::string& text)
 {
     m_text->SetHint(text);
 }
 
-wxString wxSearchCtrl::GetDescriptiveText() const
+std::string wxSearchCtrl::GetDescriptiveText() const
 {
     return m_text->GetHint();
 }
@@ -621,11 +621,11 @@ void wxSearchCtrl::Remove(long from, long to)
 }
 
 // load/save the controls contents from/to the file
-bool wxSearchCtrl::LoadFile(const wxString& file)
+bool wxSearchCtrl::LoadFile(const std::string& file)
 {
     return m_text->LoadFile(file);
 }
-bool wxSearchCtrl::SaveFile(const wxString& file)
+bool wxSearchCtrl::SaveFile(const std::string& file)
 {
     return m_text->SaveFile(file);
 }
@@ -908,12 +908,12 @@ void wxSearchCtrl::DoSetValue(const std::string& value, int flags)
     m_text->DoSetValue(value, flags);
 }
 
-bool wxSearchCtrl::DoLoadFile(const wxString& file, int fileType)
+bool wxSearchCtrl::DoLoadFile(const std::string& file, int fileType)
 {
     return m_text->DoLoadFile(file, fileType);
 }
 
-bool wxSearchCtrl::DoSaveFile(const wxString& file, int fileType)
+bool wxSearchCtrl::DoSaveFile(const std::string& file, int fileType)
 {
     return m_text->DoSaveFile(file, fileType);
 }

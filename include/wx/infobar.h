@@ -36,7 +36,7 @@ public:
     wxInfoBarBase& operator=(wxInfoBarBase&&) = default;
 
     // show the info bar with the given message and optionally an icon
-    virtual void ShowMessage(const wxString& msg,
+    virtual void ShowMessage(const std::string& msg,
                              int flags) = 0;
 
     // hide the info bar

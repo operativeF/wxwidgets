@@ -547,7 +547,7 @@ public:
 
         This function looks for a suitable wxRichTextFileHandler object.
     */
-    bool DoLoadFile(const wxString& file, int fileType) override;
+    bool DoLoadFile(const std::string& file, int fileType) override;
 #endif // wxUSE_FFILE && wxUSE_STREAMS
 
 #ifdef DOXYGEN
@@ -572,7 +572,7 @@ public:
 
         This function looks for a suitable wxRichTextFileHandler object.
     */
-    bool DoSaveFile(const wxString& file = wxEmptyString,
+    bool DoSaveFile(const std::string& file = {},
                             int fileType = wxRICHTEXT_TYPE_ANY) override;
 #endif // wxUSE_FFILE && wxUSE_STREAMS
 

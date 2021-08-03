@@ -112,7 +112,7 @@ public:
     // necessary. If s is non-empty, the horizontal extent is increased to the
     // length of this string if it's currently too short, otherwise the maximum
     // extent of all strings is used. In any case calls InvalidateBestSize()
-    virtual void SetHorizontalExtent(const wxString& s = wxEmptyString);
+    virtual void SetHorizontalExtent(const std::string& s = {});
 
     // This is a wrapper for LB_SETTABSTOPS message and takes tab stops in
     // dialog units, with the same conventions as LB_SETTABSTOPS uses.

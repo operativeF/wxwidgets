@@ -890,7 +890,7 @@ STDMETHODIMP wxIAccessible::get_accDefaultAction ( VARIANT varID, BSTR* pszDefau
         return E_INVALIDARG;
     }
 
-    wxString defaultAction;
+    std::string defaultAction;
     wxAccStatus status = m_pAccessible->GetDefaultAction(varID.lVal, & defaultAction);
     if (status == wxACC_FAIL)
         return E_FAIL;
@@ -922,7 +922,7 @@ STDMETHODIMP wxIAccessible::get_accDefaultAction ( VARIANT varID, BSTR* pszDefau
     }
     else
     {
-        if (defaultAction.IsEmpty())
+        if (defaultAction.empty())
         {
             * pszDefaultAction = nullptr;
             return S_FALSE;
@@ -952,7 +952,7 @@ STDMETHODIMP wxIAccessible::get_accDescription ( VARIANT varID, BSTR* pszDescrip
         return E_INVALIDARG;
     }
 
-    wxString description;
+    std::string description;
     wxAccStatus status = m_pAccessible->GetDescription(varID.lVal, & description);
     if (status == wxACC_FAIL)
         return E_FAIL;
@@ -1012,7 +1012,7 @@ STDMETHODIMP wxIAccessible::get_accHelp ( VARIANT varID, BSTR* pszHelp)
         return E_INVALIDARG;
     }
 
-    wxString helpString;
+    std::string helpString;
     wxAccStatus status = m_pAccessible->GetHelpText(varID.lVal, & helpString);
     if (status == wxACC_FAIL)
         return E_FAIL;
@@ -1122,7 +1122,7 @@ STDMETHODIMP wxIAccessible::get_accKeyboardShortcut ( VARIANT varID, BSTR* pszKe
         return E_INVALIDARG;
     }
 
-    wxString keyboardShortcut;
+    std::string keyboardShortcut;
     wxAccStatus status = m_pAccessible->GetKeyboardShortcut(varID.lVal, & keyboardShortcut);
     if (status == wxACC_FAIL)
         return E_FAIL;
@@ -1184,7 +1184,7 @@ STDMETHODIMP wxIAccessible::get_accName ( VARIANT varID, BSTR* pszName)
         return E_INVALIDARG;
     }
 
-    wxString name;
+    std::string name;
 
     wxAccStatus status = m_pAccessible->GetName(varID.lVal, & name);
 
@@ -1361,7 +1361,7 @@ STDMETHODIMP wxIAccessible::get_accValue ( VARIANT varID, BSTR* pszValue)
         return E_INVALIDARG;
     }
 
-    wxString strValue;
+    std::string strValue;
 
     wxAccStatus status = m_pAccessible->GetValue(varID.lVal, & strValue);
 

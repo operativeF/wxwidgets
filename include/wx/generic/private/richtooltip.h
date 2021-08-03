@@ -44,8 +44,8 @@ public:
     void ShowFor(wxWindow* win, const wxRect* rect = nullptr) override;
 
 protected:
-    wxString m_title,
-             m_message;
+    std::string m_title;
+    std::string m_message;
 
 private:
     wxIcon m_icon;

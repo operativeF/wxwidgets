@@ -612,8 +612,8 @@ public:
 
 protected:
     // implementation of loading/saving
-    virtual bool DoLoadFile(const wxString& file, int fileType);
-    virtual bool DoSaveFile(const wxString& file, int fileType);
+    virtual bool DoLoadFile(const std::string& file, int fileType);
+    virtual bool DoSaveFile(const std::string& file, int fileType);
 
     // Return true if the given position is valid, i.e. positive and less than
     // the last position.

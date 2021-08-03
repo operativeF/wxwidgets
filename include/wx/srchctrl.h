@@ -79,8 +79,8 @@ public:
     virtual void ShowCancelButton( bool show ) = 0;
     virtual bool IsCancelButtonVisible() const = 0;
 
-    virtual void SetDescriptiveText(const wxString& text) = 0;
-    virtual wxString GetDescriptiveText() const = 0;
+    virtual void SetDescriptiveText(const std::string& text) = 0;
+    virtual std::string GetDescriptiveText() const = 0;
 
 #if wxUSE_NATIVE_SEARCH_CONTROL
     const wxTextEntry* WXGetTextEntry() const override { return this; }

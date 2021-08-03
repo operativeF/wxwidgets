@@ -1458,7 +1458,7 @@ void wxMSWDCImpl::DoDrawText(std::string_view text, wxCoord x, wxCoord y)
     // instead reuse the generic DrawLabel() method to render them. Of course,
     // DrawLabel() itself will call back to us but with single line strings
     // only so there won't be any infinite recursion here.
-    if ( text.find('\n') != wxString::npos )
+    if ( text.find('\n') != std::string_view::npos )
     {
         GetOwner()->DrawLabel(text, wxRect(x, y, 0, 0));
         return;

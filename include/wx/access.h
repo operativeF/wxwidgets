@@ -257,7 +257,7 @@ public:
          { return wxACC_NOT_IMPLEMENTED; }
 
         // Gets the name of the specified object.
-    virtual wxAccStatus GetName(int WXUNUSED(childId), wxString* WXUNUSED(name))
+    virtual wxAccStatus GetName(int WXUNUSED(childId), std::string* WXUNUSED(name))
          { return wxACC_NOT_IMPLEMENTED; }
 
         // Gets the number of children.
@@ -288,20 +288,20 @@ public:
         // The retrieved string describes the action that is performed on an object,
         // not what the object does as a result. For example, a toolbar button that prints
         // a document has a default action of "Press" rather than "Prints the current document."
-    virtual wxAccStatus GetDefaultAction(int WXUNUSED(childId), wxString* WXUNUSED(actionName))
+    virtual wxAccStatus GetDefaultAction(int WXUNUSED(childId), std::string* WXUNUSED(actionName))
          { return wxACC_NOT_IMPLEMENTED; }
 
         // Returns the description for this object or a child.
-    virtual wxAccStatus GetDescription(int WXUNUSED(childId), wxString* WXUNUSED(description))
+    virtual wxAccStatus GetDescription(int WXUNUSED(childId), std::string* WXUNUSED(description))
          { return wxACC_NOT_IMPLEMENTED; }
 
         // Returns help text for this object or a child, similar to tooltip text.
-    virtual wxAccStatus GetHelpText(int WXUNUSED(childId), wxString* WXUNUSED(helpText))
+    virtual wxAccStatus GetHelpText(int WXUNUSED(childId), std::string* WXUNUSED(helpText))
          { return wxACC_NOT_IMPLEMENTED; }
 
         // Returns the keyboard shortcut for this object or child.
         // Return e.g. ALT+K
-    virtual wxAccStatus GetKeyboardShortcut(int WXUNUSED(childId), wxString* WXUNUSED(shortcut))
+    virtual wxAccStatus GetKeyboardShortcut(int WXUNUSED(childId), std::string* WXUNUSED(shortcut))
          { return wxACC_NOT_IMPLEMENTED; }
 
         // Returns a role constant.
@@ -314,7 +314,7 @@ public:
 
         // Returns a localized string representing the value for the object
         // or child.
-    virtual wxAccStatus GetValue(int WXUNUSED(childId), wxString* WXUNUSED(strValue))
+    virtual wxAccStatus GetValue(int WXUNUSED(childId), std::string* WXUNUSED(strValue))
          { return wxACC_NOT_IMPLEMENTED; }
 
         // Selects the object or child.

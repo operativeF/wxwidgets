@@ -23,13 +23,13 @@ public:
         : wxTextMeasureBase(win, font) {}
 
 protected:
-    virtual void DoGetTextExtent(const wxString& string,
+    virtual void DoGetTextExtent(const std::string& string,
                                wxCoord *width,
                                wxCoord *height,
                                wxCoord *descent = NULL,
                                wxCoord *externalLeading = NULL) override;
 
-    virtual std::vector<int> DoGetPartialTextExtents(const wxString& text, double scaleX) override;
+    virtual std::vector<int> DoGetPartialTextExtents(const std::string& text, double scaleX) override;
 
     wxTextMeasure(const wxTextMeasure&) = delete;
 	wxTextMeasure& operator=(const wxTextMeasure&) = delete;

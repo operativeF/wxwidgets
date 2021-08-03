@@ -1157,7 +1157,7 @@ public:
         // has a chance of succeeding. If reason argument is non-NULL, returns a
         // user-readable explanation of why it isn't supported if the return
         // value is false.
-    virtual bool IsTransparentBackgroundSupported(wxString* reason = nullptr) const;
+    virtual bool IsTransparentBackgroundSupported(std::string* reason = nullptr) const;
 
         // set/retrieve the font for the window (SetFont() returns true if the
         // font really changed)
@@ -2042,7 +2042,7 @@ public:
                 int* toId, wxAccessible** toObject) override;
 
         // Gets the name of the specified object.
-    wxAccStatus GetName(int childId, wxString* name) override;
+    wxAccStatus GetName(int childId, std::string* name) override;
 
         // Gets the number of children.
     wxAccStatus GetChildCount(int* childCount) override;
@@ -2068,17 +2068,17 @@ public:
         // The retrieved string describes the action that is performed on an object,
         // not what the object does as a result. For example, a toolbar button that prints
         // a document has a default action of "Press" rather than "Prints the current document."
-    wxAccStatus GetDefaultAction(int childId, wxString* actionName) override;
+    wxAccStatus GetDefaultAction(int childId, std::string* actionName) override;
 
         // Returns the description for this object or a child.
-    wxAccStatus GetDescription(int childId, wxString* description) override;
+    wxAccStatus GetDescription(int childId, std::string* description) override;
 
         // Returns help text for this object or a child, similar to tooltip text.
-    wxAccStatus GetHelpText(int childId, wxString* helpText) override;
+    wxAccStatus GetHelpText(int childId, std::string* helpText) override;
 
         // Returns the keyboard shortcut for this object or child.
         // Return e.g. ALT+K
-    wxAccStatus GetKeyboardShortcut(int childId, wxString* shortcut) override;
+    wxAccStatus GetKeyboardShortcut(int childId, std::string* shortcut) override;
 
         // Returns a role constant.
     wxAccStatus GetRole(int childId, wxAccRole* role) override;
@@ -2088,7 +2088,7 @@ public:
 
         // Returns a localized string representing the value for the object
         // or child.
-    wxAccStatus GetValue(int childId, wxString* strValue) override;
+    wxAccStatus GetValue(int childId, std::string* strValue) override;
 
         // Selects the object or child.
     wxAccStatus Select(int childId, wxAccSelectionFlags selectFlags) override;

@@ -34,6 +34,7 @@
 #include <windowsx.h>
 
 #include "boost/nowide/convert.hpp"
+#include "boost/nowide/stackstring.hpp"
 
 #if wxUSE_OWNER_DRAWN
     #include  "wx/ownerdrw.h"
@@ -175,7 +176,7 @@ void wxListBox::OnInternalIdle()
 
     if (m_updateHorizontalExtent)
     {
-        SetHorizontalExtent(wxEmptyString);
+        SetHorizontalExtent("");
         m_updateHorizontalExtent = false;
     }
 }
@@ -526,7 +527,7 @@ unsigned int wxListBox::GetCount() const
     return m_noItems;
 }
 
-void wxListBox::SetHorizontalExtent(const wxString& s)
+void wxListBox::SetHorizontalExtent(const std::string& s)
 {
     // the rest is only necessary if we want a horizontal scrollbar
     if ( !HasFlag(wxHSCROLL) )
@@ -547,8 +548,8 @@ void wxListBox::SetHorizontalExtent(const wxString& s)
         // set extent to the max length of all strings
         for ( unsigned int i = 0; i < m_noItems; i++ )
         {
-            const wxString str = GetString(i);
-            ::GetTextExtentPoint32W(dc, str.c_str(), str.length(), &extentXY);
+            boost::nowide::wstackstring stackText(GetString(i).c_str());
+            ::GetTextExtentPoint32W(dc, stackText.get(), stackText.buffer_size, &extentXY);
 
             int extentX = (int)(extentXY.cx + lpTextMetric.tmAveCharWidth);
             if ( extentX > largestExtent )
@@ -557,10 +558,11 @@ void wxListBox::SetHorizontalExtent(const wxString& s)
     }
     else // just increase the extent to the length of this string
     {
-        int existingExtent = (int)SendMessage(GetHwnd(),
+        int existingExtent = (int)SendMessageW(GetHwnd(),
                                               LB_GETHORIZONTALEXTENT, 0, 0L);
 
-        ::GetTextExtentPoint32(dc, s.c_str(), s.length(), &extentXY);
+        boost::nowide::wstackstring stackText(s.c_str());
+        ::GetTextExtentPoint32W(dc, stackText.get(), stackText.buffer_size, &extentXY);
 
         int extentX = (int)(extentXY.cx + lpTextMetric.tmAveCharWidth);
         if ( extentX > existingExtent )

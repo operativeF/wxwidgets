@@ -57,7 +57,7 @@ public:
     // implement base class methods
     // ----------------------------
 
-    void ShowMessage(const wxString& msg,
+    void ShowMessage(const std::string& msg,
                              int flags = wxICON_INFORMATION) override;
 
     void Dismiss() override;

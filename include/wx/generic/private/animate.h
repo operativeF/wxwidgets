@@ -32,7 +32,7 @@ public:
     wxImage GetFrame(unsigned int i) const override;
     wxSize GetSize() const override;
 
-    bool LoadFile(const wxString& filename,
+    bool LoadFile(const std::string& filename,
                           wxAnimationType type = wxANIMATION_TYPE_ANY) override;
     bool Load(wxInputStream& stream,
                       wxAnimationType type = wxANIMATION_TYPE_ANY) override;

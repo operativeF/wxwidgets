@@ -6678,7 +6678,7 @@ wxAccStatus wxDataViewCtrlAccessible::Navigate(wxNavDir navDir, int fromId,
 }
 
 // Gets the name of the specified object.
-wxAccStatus wxDataViewCtrlAccessible::GetName(int childId, wxString* name)
+wxAccStatus wxDataViewCtrlAccessible::GetName(int childId, std::string* name)
 {
     wxDataViewCtrl* dvCtrl = wxDynamicCast(GetWindow(), wxDataViewCtrl);
     wxCHECK( dvCtrl, wxACC_FAIL );
@@ -6799,7 +6799,7 @@ wxAccStatus wxDataViewCtrlAccessible::DoDefaultAction(int childId)
 // The retrieved string describes the action that is performed on an object,
 // not what the object does as a result. For example, a toolbar button that prints
 // a document has a default action of "Press" rather than "Prints the current document."
-wxAccStatus wxDataViewCtrlAccessible::GetDefaultAction(int childId, wxString* actionName)
+wxAccStatus wxDataViewCtrlAccessible::GetDefaultAction(int childId, std::string* actionName)
 {
     wxDataViewCtrl* dvCtrl = wxDynamicCast(GetWindow(), wxDataViewCtrl);
     wxCHECK( dvCtrl, wxACC_FAIL );
@@ -6831,7 +6831,7 @@ wxAccStatus wxDataViewCtrlAccessible::GetDefaultAction(int childId, wxString* ac
 }
 
 // Returns the description for this object or a child.
-wxAccStatus wxDataViewCtrlAccessible::GetDescription(int childId, wxString* description)
+wxAccStatus wxDataViewCtrlAccessible::GetDescription(int childId, std::string* description)
 {
     wxDataViewCtrl* dvCtrl = wxDynamicCast(GetWindow(), wxDataViewCtrl);
     wxCHECK( dvCtrl, wxACC_FAIL );
@@ -6906,7 +6906,7 @@ wxAccStatus wxDataViewCtrlAccessible::GetDescription(int childId, wxString* desc
 }
 
 // Returns help text for this object or a child, similar to tooltip text.
-wxAccStatus wxDataViewCtrlAccessible::GetHelpText(int childId, wxString* helpText)
+wxAccStatus wxDataViewCtrlAccessible::GetHelpText(int childId, std::string* helpText)
 {
     wxDataViewCtrl* dvCtrl = wxDynamicCast(GetWindow(), wxDataViewCtrl);
     wxCHECK( dvCtrl, wxACC_FAIL );
@@ -6940,7 +6940,7 @@ wxAccStatus wxDataViewCtrlAccessible::GetHelpText(int childId, wxString* helpTex
 
 // Returns the keyboard shortcut for this object or child.
 // Return e.g. ALT+K
-wxAccStatus wxDataViewCtrlAccessible::GetKeyboardShortcut(int childId, wxString* shortcut)
+wxAccStatus wxDataViewCtrlAccessible::GetKeyboardShortcut(int childId, std::string* shortcut)
 {
     wxDataViewCtrl* dvCtrl = wxDynamicCast(GetWindow(), wxDataViewCtrl);
     wxCHECK( dvCtrl, wxACC_FAIL );
@@ -7044,7 +7044,7 @@ wxAccStatus wxDataViewCtrlAccessible::GetState(int childId, long* state)
 
 // Returns a localized string representing the value for the object
 // or child.
-wxAccStatus wxDataViewCtrlAccessible::GetValue(int childId, wxString* strValue)
+wxAccStatus wxDataViewCtrlAccessible::GetValue(int childId, std::string* strValue)
 {
     wxDataViewCtrl* dvCtrl = wxDynamicCast(GetWindow(), wxDataViewCtrl);
     wxCHECK( dvCtrl, wxACC_FAIL );

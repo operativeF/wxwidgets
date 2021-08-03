@@ -152,8 +152,8 @@ public:
             {
                 EDITBALLOONTIP ebt;
                 ebt.cbStruct = sizeof(EDITBALLOONTIP);
-                ebt.pszTitle = m_title.wc_str();
-                ebt.pszText = m_message.wc_str();
+                ebt.pszTitle = boost::nowide::widen(m_title).c_str();
+                ebt.pszText = boost::nowide::widen(m_message).c_str();
                 ebt.ttiIcon = m_ttiIcon;
                 if ( Edit_ShowBalloonTip(GetHwndOf(text), &ebt) )
                     return;

@@ -1619,7 +1619,7 @@ bool wxWindowBase::SetBackgroundStyle(wxBackgroundStyle style)
     return true;
 }
 
-bool wxWindowBase::IsTransparentBackgroundSupported(wxString *reason) const
+bool wxWindowBase::IsTransparentBackgroundSupported(std::string *reason) const
 {
     if ( reason )
         *reason = _("This platform does not support background transparency.");
@@ -3725,7 +3725,7 @@ wxAccStatus wxWindowAccessible::Navigate(wxNavDir navDir, int fromId,
 }
 
 // Gets the name of the specified object.
-wxAccStatus wxWindowAccessible::GetName(int childId, wxString* name)
+wxAccStatus wxWindowAccessible::GetName(int childId, std::string* name)
 {
     wxCHECK( GetWindow() != nullptr, wxACC_FAIL );
 
@@ -3827,7 +3827,7 @@ wxAccStatus wxWindowAccessible::DoDefaultAction(int WXUNUSED(childId))
 // The retrieved string describes the action that is performed on an object,
 // not what the object does as a result. For example, a toolbar button that prints
 // a document has a default action of "Press" rather than "Prints the current document."
-wxAccStatus wxWindowAccessible::GetDefaultAction(int WXUNUSED(childId), wxString* WXUNUSED(actionName))
+wxAccStatus wxWindowAccessible::GetDefaultAction(int WXUNUSED(childId), std::string* WXUNUSED(actionName))
 {
     wxCHECK( GetWindow() != nullptr, wxACC_FAIL );
 
@@ -3835,7 +3835,7 @@ wxAccStatus wxWindowAccessible::GetDefaultAction(int WXUNUSED(childId), wxString
 }
 
 // Returns the description for this object or a child.
-wxAccStatus wxWindowAccessible::GetDescription(int WXUNUSED(childId), wxString* description)
+wxAccStatus wxWindowAccessible::GetDescription(int WXUNUSED(childId), std::string* description)
 {
     wxCHECK( GetWindow() != nullptr, wxACC_FAIL );
 
@@ -3853,7 +3853,7 @@ wxAccStatus wxWindowAccessible::GetDescription(int WXUNUSED(childId), wxString* 
 }
 
 // Returns help text for this object or a child, similar to tooltip text.
-wxAccStatus wxWindowAccessible::GetHelpText(int WXUNUSED(childId), wxString* helpText)
+wxAccStatus wxWindowAccessible::GetHelpText(int WXUNUSED(childId), std::string* helpText)
 {
     wxCHECK( GetWindow() != nullptr, wxACC_FAIL );
 
@@ -3872,7 +3872,7 @@ wxAccStatus wxWindowAccessible::GetHelpText(int WXUNUSED(childId), wxString* hel
 
 // Returns the keyboard shortcut for this object or child.
 // Return e.g. ALT+K
-wxAccStatus wxWindowAccessible::GetKeyboardShortcut(int WXUNUSED(childId), wxString* WXUNUSED(shortcut))
+wxAccStatus wxWindowAccessible::GetKeyboardShortcut(int WXUNUSED(childId), std::string* WXUNUSED(shortcut))
 {
     wxCHECK( GetWindow() != nullptr, wxACC_FAIL );
 
@@ -3941,7 +3941,7 @@ wxAccStatus wxWindowAccessible::GetState(int childId, long* state)
 
 // Returns a localized string representing the value for the object
 // or child.
-wxAccStatus wxWindowAccessible::GetValue(int WXUNUSED(childId), wxString* WXUNUSED(strValue))
+wxAccStatus wxWindowAccessible::GetValue(int WXUNUSED(childId), std::string* WXUNUSED(strValue))
 {
     wxCHECK( GetWindow() != nullptr, wxACC_FAIL );
 

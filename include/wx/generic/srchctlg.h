@@ -59,8 +59,8 @@ public:
     void ShowCancelButton( bool show ) override;
     bool IsCancelButtonVisible() const override;
 
-    void SetDescriptiveText(const wxString& text) override;
-    wxString GetDescriptiveText() const override;
+    void SetDescriptiveText(const std::string& text) override;
+    std::string GetDescriptiveText() const override;
 
     std::string GetRange(long from, long to) const override;
 
@@ -88,8 +88,8 @@ public:
     void Remove(long from, long to) override;
 
     // load/save the controls contents from/to the file
-    virtual bool LoadFile(const wxString& file);
-    virtual bool SaveFile(const wxString& file = wxEmptyString);
+    virtual bool LoadFile(const std::string& file);
+    virtual bool SaveFile(const std::string& file = {});
 
     // sets/clears the dirty flag
     void MarkDirty() override;
@@ -181,8 +181,8 @@ protected:
     void DoSetValue(const std::string& value, int flags) override;
     std::string DoGetValue() const override;
 
-    bool DoLoadFile(const wxString& file, int fileType) override;
-    bool DoSaveFile(const wxString& file, int fileType) override;
+    bool DoLoadFile(const std::string& file, int fileType) override;
+    bool DoSaveFile(const std::string& file, int fileType) override;
 
     // override the base class virtuals involved into geometry calculations
     wxSize DoGetBestClientSize() const override;

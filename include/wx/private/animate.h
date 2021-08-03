@@ -30,7 +30,7 @@ public:
     virtual wxImage GetFrame(unsigned int frame) const = 0;
     virtual wxSize GetSize() const = 0;
 
-    virtual bool LoadFile(const wxString& name,
+    virtual bool LoadFile(const std::string& name,
                           wxAnimationType type = wxANIMATION_TYPE_ANY) = 0;
     virtual bool Load(wxInputStream& stream,
                       wxAnimationType type = wxANIMATION_TYPE_ANY) = 0;
