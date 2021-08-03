@@ -24,7 +24,7 @@
 #include "wx/html/helpctrl.h"
 #include "wx/msw/helpbest.h"
 
-bool wxBestHelpController::Initialize( const wxString& filename )
+bool wxBestHelpController::Initialize( const std::string& filename )
 {
     // try wxCHMHelpController
     wxCHMHelpController* chm = new wxCHMHelpController(m_parentWindow);
@@ -61,9 +61,9 @@ bool wxBestHelpController::Initialize( const wxString& filename )
     return false;
 }
 
-wxString wxBestHelpController::GetValidFilename( const wxString& filename ) const
+std::string wxBestHelpController::GetValidFilename( const std::string& filename ) const
 {
-    wxFileName fn(filename);
+    wxFileName fn{filename};
 
     switch( m_helpControllerType )
     {
@@ -94,7 +94,7 @@ wxString wxBestHelpController::GetValidFilename( const wxString& filename ) cons
             wxFAIL_MSG( wxT("wxBestHelpController: Must call Initialize, first!") );
     }
 
-    return wxEmptyString;
+    return {};
 }
 
 #endif

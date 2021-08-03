@@ -54,16 +54,16 @@ public:
 
     void SetShouldPreventAppExit(bool enable);
 
-    void SetTitleFormat(const wxString& format);
-    void SetTempDir(const wxString& path) { m_helpData.SetTempDir(path); }
-    bool AddBook(const wxString& book_url, bool show_wait_msg = false);
+    void SetTitleFormat(const std::string& format);
+    void SetTempDir(const std::string& path) { m_helpData.SetTempDir(path); }
+    bool AddBook(const std::string& book_url, bool show_wait_msg = false);
     bool AddBook(const wxFileName& book_file, bool show_wait_msg = false);
 
-    bool Display(const wxString& x);
+    bool Display(const std::string& x);
     bool Display(int id);
     bool DisplayContents() override;
     bool DisplayIndex();
-    bool KeywordSearch(const wxString& keyword,
+    bool KeywordSearch(const std::string& keyword,
                        wxHelpSearchMode mode = wxHELP_SEARCH_ALL) override;
 
     wxHtmlHelpWindow* GetHelpWindow() { return m_helpWindow; }
@@ -73,27 +73,27 @@ public:
     wxHtmlHelpDialog* GetDialog() { return m_helpDialog; }
 
 #if wxUSE_CONFIG
-    void UseConfig(wxConfigBase *config, const wxString& rootpath = wxEmptyString);
+    void UseConfig(wxConfigBase *config, const std::string& rootpath = {});
 
     // Assigns config object to the Ctrl. This config is then
     // used in subsequent calls to Read/WriteCustomization of both help
     // Ctrl and it's wxHtmlWindow
-    virtual void ReadCustomization(wxConfigBase *cfg, const wxString& path = wxEmptyString);
-    virtual void WriteCustomization(wxConfigBase *cfg, const wxString& path = wxEmptyString);
+    virtual void ReadCustomization(wxConfigBase *cfg, const std::string& path = {});
+    virtual void WriteCustomization(wxConfigBase *cfg, const std::string& path = {});
 #endif // wxUSE_CONFIG
 
     //// Backward compatibility with wxHelpController API
 
-    bool Initialize(const wxString& file, int WXUNUSED(server) ) override { return Initialize(file); }
-    bool Initialize(const wxString& file) override;
-    void SetViewer(const wxString& WXUNUSED(viewer), long WXUNUSED(flags) = 0) override {}
-    bool LoadFile(const wxString& file = wxT("")) override;
+    bool Initialize(const std::string& file, int WXUNUSED(server) ) override { return Initialize(file); }
+    bool Initialize(const std::string& file) override;
+    void SetViewer(const std::string& WXUNUSED(viewer), long WXUNUSED(flags) = 0) override {}
+    bool LoadFile(const std::string& file = {}) override;
     bool DisplaySection(int sectionNo) override;
-    bool DisplaySection(const wxString& section) override { return Display(section); }
+    bool DisplaySection(const std::string& section) override { return Display(section); }
     bool DisplayBlock(long blockNo) override { return DisplaySection(blockNo); }
-    bool DisplayTextPopup(const wxString& text, const wxPoint& pos) override;
+    bool DisplayTextPopup(const std::string& text, const wxPoint& pos) override;
 
-    void SetFrameParameters(const wxString& titleFormat,
+    void SetFrameParameters(const std::string& titleFormat,
                                const wxSize& size,
                                const wxPoint& pos = wxDefaultPosition,
                                bool newFrameEachTime = false) override;
@@ -106,7 +106,7 @@ public:
     // Get direct access to help data:
     wxHtmlHelpData *GetHelpData() { return &m_helpData; }
 
-    bool Quit() override ;
+    bool Quit() override;
     void OnQuit() override {}
 
     void OnCloseFrame(wxCloseEvent& evt);
@@ -156,7 +156,7 @@ protected:
 class WXDLLIMPEXP_HTML wxHtmlModalHelp
 {
 public:
-    wxHtmlModalHelp(wxWindow* parent, const wxString& helpFile, const wxString& topic = wxEmptyString,
+    wxHtmlModalHelp(wxWindow* parent, const std::string& helpFile, const std::string& topic = {},
         int style = wxHF_DEFAULT_STYLE | wxHF_DIALOG | wxHF_MODAL);
 };
 

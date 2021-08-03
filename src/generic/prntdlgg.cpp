@@ -193,9 +193,10 @@ void wxGenericPrintDialog::Init(wxWindow * WXUNUSED(parent))
 
     // 2) middle row with radio box
 
-    wxString *choices = new wxString[2];
-    choices[0] = _("All");
-    choices[1] = _("Pages");
+    std::array<std::string, 2> choices {
+        _("All"),
+        _("Pages")
+    };
 
     m_fromText = nullptr;
     m_toText = nullptr;

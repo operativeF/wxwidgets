@@ -48,7 +48,7 @@ public:
 
 
 public:
-    bool LoadFile(const wxString& filename, wxAnimationType type = wxANIMATION_TYPE_ANY) override;
+    bool LoadFile(const std::string& filename, wxAnimationType type = wxANIMATION_TYPE_ANY) override;
     bool Load(wxInputStream& stream, wxAnimationType type = wxANIMATION_TYPE_ANY) override;
 
     void Stop() override;

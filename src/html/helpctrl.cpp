@@ -118,7 +118,7 @@ void wxHtmlHelpController::SetShouldPreventAppExit(bool enable)
         m_helpFrame->SetShouldPreventAppExit(enable);
 }
 
-void wxHtmlHelpController::SetTitleFormat(const wxString& title)
+void wxHtmlHelpController::SetTitleFormat(const std::string& title)
 {
     m_titleFormat = title;
     wxHtmlHelpFrame* frame = wxDynamicCast(FindTopLevelWindow(), wxHtmlHelpFrame);
@@ -139,10 +139,10 @@ wxWindow* wxHtmlHelpController::FindTopLevelWindow()
 
 bool wxHtmlHelpController::AddBook(const wxFileName& book_file, bool show_wait_msg)
 {
-    return AddBook(wxFileSystem::FileNameToURL(book_file), show_wait_msg);
+    return AddBook(wxFileSystem::FileNameToURL(book_file).ToStdString(), show_wait_msg);
 }
 
-bool wxHtmlHelpController::AddBook(const wxString& book, bool show_wait_msg)
+bool wxHtmlHelpController::AddBook(const std::string& book, bool show_wait_msg)
 {
     wxBusyCursor cur;
 #if wxUSE_BUSYINFO
@@ -234,7 +234,7 @@ wxWindow* wxHtmlHelpController::CreateHelpWindow()
 }
 
 #if wxUSE_CONFIG
-void wxHtmlHelpController::ReadCustomization(wxConfigBase* cfg, const wxString& path)
+void wxHtmlHelpController::ReadCustomization(wxConfigBase* cfg, const std::string& path)
 {
     /* should not be called by the user; call UseConfig, and the controller
      * will do the rest */
@@ -242,14 +242,14 @@ void wxHtmlHelpController::ReadCustomization(wxConfigBase* cfg, const wxString& 
         m_helpWindow->ReadCustomization(cfg, path);
 }
 
-void wxHtmlHelpController::WriteCustomization(wxConfigBase* cfg, const wxString& path)
+void wxHtmlHelpController::WriteCustomization(wxConfigBase* cfg, const std::string& path)
 {
     /* typically called by the controllers OnCloseFrame handler */
     if (m_helpWindow && cfg)
         m_helpWindow->WriteCustomization(cfg, path);
 }
 
-void wxHtmlHelpController::UseConfig(wxConfigBase *config, const wxString& rootpath)
+void wxHtmlHelpController::UseConfig(wxConfigBase *config, const std::string& rootpath)
 {
     m_Config = config;
     m_ConfigRoot = rootpath;
@@ -260,7 +260,7 @@ void wxHtmlHelpController::UseConfig(wxConfigBase *config, const wxString& rootp
 
 //// Backward compatibility with wxHelpController API
 
-bool wxHtmlHelpController::Initialize(const wxString& file)
+bool wxHtmlHelpController::Initialize(const std::string& file)
 {
     wxString dir, filename, ext;
     wxFileName::SplitPath(file, & dir, & filename, & ext);
@@ -269,7 +269,7 @@ bool wxHtmlHelpController::Initialize(const wxString& file)
         dir = dir + wxFILE_SEP_PATH;
 
     // Try to find a suitable file
-    wxString actualFilename = dir + filename + wxString(wxT(".zip"));
+    std::string actualFilename = dir + filename + wxString(wxT(".zip"));
     if (!wxFileExists(actualFilename))
     {
         actualFilename = dir + filename + wxString(wxT(".htb"));
@@ -289,7 +289,7 @@ bool wxHtmlHelpController::Initialize(const wxString& file)
     return AddBook(wxFileName(actualFilename));
 }
 
-bool wxHtmlHelpController::LoadFile(const wxString& WXUNUSED(file))
+bool wxHtmlHelpController::LoadFile(const std::string& WXUNUSED(file))
 {
     // Don't reload the file or we'll have it appear again, presumably.
     return true;
@@ -300,7 +300,7 @@ bool wxHtmlHelpController::DisplaySection(int sectionNo)
     return Display(sectionNo);
 }
 
-bool wxHtmlHelpController::DisplayTextPopup(const wxString& text, const wxPoint& WXUNUSED(pos))
+bool wxHtmlHelpController::DisplayTextPopup(const std::string& text, const wxPoint& WXUNUSED(pos))
 {
 #if wxUSE_TIPWINDOW
     static wxTipWindow* s_tipWindow = nullptr;
@@ -334,7 +334,7 @@ void wxHtmlHelpController::SetHelpWindow(wxHtmlHelpWindow* helpWindow)
         helpWindow->SetController(this);
 }
 
-void wxHtmlHelpController::SetFrameParameters(const wxString& titleFormat,
+void wxHtmlHelpController::SetFrameParameters(const std::string& titleFormat,
                                    const wxSize& size,
                                    const wxPoint& pos,
                                    bool WXUNUSED(newFrameEachTime))
@@ -399,7 +399,7 @@ void wxHtmlHelpController::MakeModalIfNeeded()
     }
 }
 
-bool wxHtmlHelpController::Display(const wxString& x)
+bool wxHtmlHelpController::Display(const std::string& x)
 {
     CreateHelpWindow();
     bool success = m_helpWindow->Display(x);
@@ -431,7 +431,7 @@ bool wxHtmlHelpController::DisplayIndex()
     return success;
 }
 
-bool wxHtmlHelpController::KeywordSearch(const wxString& keyword,
+bool wxHtmlHelpController::KeywordSearch(const std::string& keyword,
                                          wxHelpSearchMode mode)
 {
     CreateHelpWindow();
@@ -447,7 +447,7 @@ bool wxHtmlHelpController::KeywordSearch(const wxString& keyword,
  * wxHtmlModalHelp help(parent, helpFile, topic);
  */
 
-wxHtmlModalHelp::wxHtmlModalHelp(wxWindow* parent, const wxString& helpFile, const wxString& topic, int style)
+wxHtmlModalHelp::wxHtmlModalHelp(wxWindow* parent, const std::string& helpFile, const std::string& topic, int style)
 {
     // Force some mandatory styles
     style |= wxHF_DIALOG | wxHF_MODAL;
@@ -455,7 +455,7 @@ wxHtmlModalHelp::wxHtmlModalHelp(wxWindow* parent, const wxString& helpFile, con
     wxHtmlHelpController controller(style, parent);
     controller.Initialize(helpFile);
 
-    if (topic.IsEmpty())
+    if (topic.empty())
         controller.DisplayContents();
     else
         controller.DisplaySection(topic);

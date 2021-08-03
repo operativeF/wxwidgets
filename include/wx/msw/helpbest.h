@@ -35,11 +35,11 @@ public:
     wxBestHelpController& operator=(wxBestHelpController&&) = default;
 
     // Must call this to set the filename
-    bool Initialize(const wxString& file) override;
-    bool Initialize(const wxString& file, int WXUNUSED(server) ) override { return Initialize( file ); }
+    bool Initialize(const std::string& file) override;
+    bool Initialize(const std::string& file, int WXUNUSED(server) ) override { return Initialize( file ); }
 
     // If file is "", reloads file given in Initialize
-    bool LoadFile(const wxString& file = wxEmptyString) override
+    bool LoadFile(const std::string& file = {}) override
     {
         return m_helpController->LoadFile( GetValidFilename( file ) );
     }
@@ -54,7 +54,7 @@ public:
         return m_helpController->DisplaySection( sectionNo );
     }
 
-    bool DisplaySection(const wxString& section) override
+    bool DisplaySection(const std::string& section) override
     {
         return m_helpController->DisplaySection( section );
     }
@@ -69,12 +69,12 @@ public:
         return m_helpController->DisplayContextPopup( contextId );
     }
 
-    bool DisplayTextPopup(const wxString& text, const wxPoint& pos) override
+    bool DisplayTextPopup(const std::string& text, const wxPoint& pos) override
     {
         return m_helpController->DisplayTextPopup( text, pos );
     }
 
-    bool KeywordSearch(const wxString& k,
+    bool KeywordSearch(const std::string& k,
                                wxHelpSearchMode mode = wxHELP_SEARCH_ALL) override
     {
         return m_helpController->KeywordSearch( k, mode );
@@ -86,7 +86,7 @@ public:
     }
 
     // Allows one to override the default settings for the help frame.
-    void SetFrameParameters(const wxString& title,
+    void SetFrameParameters(const std::string& title,
                                     const wxSize& size,
                                     const wxPoint& pos = wxDefaultPosition,
                                     bool newFrameEachTime = false) override
@@ -112,7 +112,7 @@ public:
 
 protected:
     // Append/change extension if necessary.
-    wxString GetValidFilename(const wxString& file) const;
+    std::string GetValidFilename(const std::string& file) const;
 
 protected:
     enum HelpControllerType { wxUseNone, wxUseHtmlHelp, wxUseChmHelp };

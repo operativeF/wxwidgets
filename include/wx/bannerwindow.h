@@ -100,7 +100,7 @@ public:
     // Set the text to display. This is mutually exclusive with SetBitmap().
     // Title is rendered in bold and should be single line, message can have
     // multiple lines but is not wrapped automatically.
-    void SetText(const wxString& title, const wxString& message);
+    void SetText(const std::string& title, const std::string& message);
 
     // Set the colours between which the gradient runs. This can be combined
     // with SetText() but not SetBitmap().

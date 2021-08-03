@@ -37,7 +37,7 @@ public:
                   const wxSize &size = wxDefaultSize,
                   long style = wxLC_ICON,
                   const wxValidator& validator = wxDefaultValidator,
-                  const wxString &name = wxListCtrlNameStr)
+                  const std::string& name = wxListCtrlNameStr)
          : wxListCtrl(parent, id, pos, size, style, validator, name)
     {
         CreateColumns();
@@ -45,7 +45,7 @@ public:
 
     void CreateColumns()
     {
-        InsertColumn(0, wxT("item"));
+        InsertColumn(0, "item");
         SizeColumns();
     }
 
@@ -169,7 +169,7 @@ bool wxEditableListBox::Create(wxWindow *parent, wxWindowID id,
          st |= wxLC_EDIT_LABELS;
     m_listCtrl = new CleverListCtrl(this, wxID_ELB_LISTCTRL,
                                     wxDefaultPosition, wxDefaultSize, st);
-    std::vector<wxString> empty_ar;
+    std::vector<std::string> empty_ar;
     SetStrings(empty_ar);
 
     sizer->Add(m_listCtrl, wxSizerFlags(1).Expand());
@@ -180,19 +180,19 @@ bool wxEditableListBox::Create(wxWindow *parent, wxWindowID id,
     return true;
 }
 
-void wxEditableListBox::SetStrings(const std::vector<wxString>& strings)
+void wxEditableListBox::SetStrings(const std::vector<std::string>& strings)
 {
     m_listCtrl->DeleteAllItems();
 
     for (size_t i = 0; i < strings.size(); i++)
         m_listCtrl->InsertItem(i, strings[i]);
 
-    m_listCtrl->InsertItem(strings.size(), wxEmptyString);
+    m_listCtrl->InsertItem(strings.size(), "");
     m_listCtrl->SetItemState(0, wxLIST_STATE_SELECTED, wxLIST_STATE_SELECTED);
 }
 
 // FIXME: Just return a vector.
-void wxEditableListBox::GetStrings(std::vector<wxString>& strings) const
+void wxEditableListBox::GetStrings(std::vector<std::string>& strings) const
 {
     strings.clear();
 
@@ -230,7 +230,7 @@ void wxEditableListBox::OnEndLabelEdit(wxListEvent& event)
         // The user edited last (empty) line, i.e. added new entry. We have to
         // add new empty line here so that adding one more line is still
         // possible:
-        m_listCtrl->InsertItem(m_listCtrl->GetItemCount(), wxEmptyString);
+        m_listCtrl->InsertItem(m_listCtrl->GetItemCount(), "");
 
         // Simulate a wxEVT_LIST_ITEM_SELECTED event for the new item,
         // so that the buttons are enabled/disabled properly
@@ -255,8 +255,8 @@ void wxEditableListBox::OnEditItem(wxCommandEvent& WXUNUSED(event))
 void wxEditableListBox::SwapItems(long i1, long i2)
 {
     // swap the text
-    wxString t1 = m_listCtrl->GetItemText(i1);
-    wxString t2 = m_listCtrl->GetItemText(i2);
+    std::string t1 = m_listCtrl->GetItemText(i1);
+    std::string t2 = m_listCtrl->GetItemText(i2);
     m_listCtrl->SetItemText(i1, t2);
     m_listCtrl->SetItemText(i2, t1);
 

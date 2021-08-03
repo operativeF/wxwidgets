@@ -26,28 +26,28 @@ public:
     ~wxWinHelpController() override = default;
 
     // Must call this to set the filename
-    bool Initialize(const wxString& file) override;
-    bool Initialize(const wxString& file, int WXUNUSED(server) ) override { return Initialize( file ); }
+    bool Initialize(const std::string& file) override;
+    bool Initialize(const std::string& file, int WXUNUSED(server) ) override { return Initialize( file ); }
 
     // If file is "", reloads file given in Initialize
-    bool LoadFile(const wxString& file = wxEmptyString) override;
+    bool LoadFile(const std::string& file = {}) override;
     bool DisplayContents() override;
     bool DisplaySection(int sectionNo) override;
-    bool DisplaySection(const wxString& section) override { return KeywordSearch(section); }
+    bool DisplaySection(const std::string& section) override { return KeywordSearch(section); }
     bool DisplayBlock(long blockNo) override;
     bool DisplayContextPopup(int contextId) override;
-    bool KeywordSearch(const wxString& k,
+    bool KeywordSearch(const std::string& k,
                                wxHelpSearchMode mode = wxHELP_SEARCH_ALL) override;
     bool Quit() override;
 
-    inline wxString GetHelpFile() const { return m_helpFile; }
+    inline std::string GetHelpFile() const { return m_helpFile; }
 
 protected:
     // Append extension if necessary.
-    wxString GetValidFilename(const wxString& file) const;
+    std::string GetValidFilename(const std::string& file) const;
 
 private:
-    wxString m_helpFile;
+    std::string m_helpFile;
 };
 
 #endif // wxUSE_HELP

@@ -203,7 +203,7 @@ wxGenericAnimationCtrl::~wxGenericAnimationCtrl()
         Stop();
 }
 
-bool wxGenericAnimationCtrl::LoadFile(const wxString& filename, wxAnimationType type)
+bool wxGenericAnimationCtrl::LoadFile(const std::string& filename, wxAnimationType type)
 {
     wxFileInputStream fis(filename);
     if (!fis.IsOk())

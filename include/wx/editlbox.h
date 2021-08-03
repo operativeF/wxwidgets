@@ -53,8 +53,8 @@ public:
                 long style = wxEL_DEFAULT_STYLE,
                 const std::string& name = wxEditableListBoxNameStr);
 
-    void SetStrings(const std::vector<wxString>& strings);
-    void GetStrings(std::vector<wxString>& strings) const;
+    void SetStrings(const std::vector<std::string>& strings);
+    void GetStrings(std::vector<std::string>& strings) const;
 
     wxListCtrl* GetListCtrl()       { return m_listCtrl; }
     wxBitmapButton* GetDelButton()  { return m_bDel; }

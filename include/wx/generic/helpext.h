@@ -32,27 +32,27 @@ public:
     ~wxExtHelpController() override;
 
     // Set viewer: new name for SetBrowser
-    void SetViewer(const wxString& viewer = wxEmptyString,
+    void SetViewer(const std::string& viewer = {},
                             long flags = wxHELP_NETSCAPE) override;
 
-    bool Initialize(const wxString& dir, int WXUNUSED(server)) override
+    bool Initialize(const std::string& dir, int WXUNUSED(server)) override
         { return Initialize(dir); }
 
-    bool Initialize(const wxString& dir) override;
-    bool LoadFile(const wxString& file = wxEmptyString) override;
+    bool Initialize(const std::string& dir) override;
+    bool LoadFile(const std::string& file = {}) override;
     bool DisplayContents() override;
     bool DisplaySection(int sectionNo) override;
-    bool DisplaySection(const wxString& section) override;
+    bool DisplaySection(const std::string& section) override;
     bool DisplayBlock(long blockNo) override;
-    bool KeywordSearch(const wxString& k,
+    bool KeywordSearch(const std::string& k,
                                 wxHelpSearchMode mode = wxHELP_SEARCH_ALL) override;
 
     bool Quit() override;
     void OnQuit() override;
 
-    virtual bool DisplayHelp(const wxString &) ;
+    virtual bool DisplayHelp(const std::string &) ;
 
-    void SetFrameParameters(const wxString& WXUNUSED(title),
+    void SetFrameParameters(const std::string& WXUNUSED(title),
                                     const wxSize& WXUNUSED(size),
                                     const wxPoint& WXUNUSED(pos) = wxDefaultPosition,
                                     bool WXUNUSED(newFrameEachTime) = false) override
@@ -69,7 +69,7 @@ public:
 
 protected:
     // Filename of currently active map file.
-    wxString         m_helpDir;
+    std::string         m_helpDir;
 
     // How many entries do we have in the map file?
     int              m_NumOfEntries{0};
@@ -81,14 +81,14 @@ private:
     // parse a single line of the map file (called by LoadFile())
     //
     // return true if the line was valid or false otherwise
-    bool ParseMapFileLine(const wxString& line);
+    bool ParseMapFileLine(const std::string& line);
 
     // Deletes the list and all objects.
     void DeleteList();
 
 
     // How to call the html viewer.
-    wxString         m_BrowserName;
+    std::string         m_BrowserName;
 
     // Is the viewer a variant of netscape?
     bool             m_BrowserIsNetscape{false};

@@ -40,14 +40,14 @@ public:
     // Must call this to set the filename and server name.
     // server is only required when implementing TCP/IP-based
     // help controllers.
-    virtual bool Initialize(const wxString& WXUNUSED(file), int WXUNUSED(server) ) { return false; }
-    virtual bool Initialize(const wxString& WXUNUSED(file)) { return false; }
+    virtual bool Initialize(const std::string& WXUNUSED(file), int WXUNUSED(server) ) { return false; }
+    virtual bool Initialize(const std::string& WXUNUSED(file)) { return false; }
 
     // Set viewer: only relevant to some kinds of controller
-    virtual void SetViewer(const wxString& WXUNUSED(viewer), long WXUNUSED(flags) = 0) {}
+    virtual void SetViewer(const std::string& WXUNUSED(viewer), long WXUNUSED(flags) = 0) {}
 
     // If file is "", reloads file given  in Initialize
-    virtual bool LoadFile(const wxString& file = wxEmptyString) = 0;
+    virtual bool LoadFile(const std::string& file = {}) = 0;
 
     // Displays the contents
     virtual bool DisplayContents() = 0;
@@ -59,16 +59,16 @@ public:
     virtual bool DisplayContextPopup(int WXUNUSED(contextId)) { return false; }
 
     // Display the text in a popup, if possible
-    virtual bool DisplayTextPopup(const wxString& WXUNUSED(text), const wxPoint& WXUNUSED(pos)) { return false; }
+    virtual bool DisplayTextPopup(const std::string& WXUNUSED(text), const wxPoint& WXUNUSED(pos)) { return false; }
 
     // By default, uses KeywordSection to display a topic. Implementations
     // may override this for more specific behaviour.
-    virtual bool DisplaySection(const wxString& section) { return KeywordSearch(section); }
+    virtual bool DisplaySection(const std::string& section) { return KeywordSearch(section); }
     virtual bool DisplayBlock(long blockNo) = 0;
-    virtual bool KeywordSearch(const wxString& k,
+    virtual bool KeywordSearch(const std::string& k,
                                wxHelpSearchMode mode = wxHELP_SEARCH_ALL) = 0;
     /// Allows one to override the default settings for the help frame.
-    virtual void SetFrameParameters(const wxString& WXUNUSED(title),
+    virtual void SetFrameParameters(const std::string& WXUNUSED(title),
         const wxSize& WXUNUSED(size),
         const wxPoint& WXUNUSED(pos) = wxDefaultPosition,
         bool WXUNUSED(newFrameEachTime) = false)

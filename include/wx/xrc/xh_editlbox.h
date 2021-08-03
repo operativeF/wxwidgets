@@ -28,7 +28,7 @@ public:
 
 private:
     bool m_insideBox{false};
-    wxArrayString m_items;
+    std::vector<std::string> m_items;
 
     wxDECLARE_DYNAMIC_CLASS(wxEditableListBoxXmlHandler);
 };

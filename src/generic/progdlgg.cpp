@@ -297,21 +297,18 @@ void wxGenericProgressDialog::UpdateTimeEstimates(int value,
 // static
 std::string wxGenericProgressDialog::GetFormattedTime(unsigned long timeInSec)
 {
-    wxString timeAsHMS;
-
     if ( timeInSec == (unsigned long)-1 )
     {
-        timeAsHMS = _("Unknown");
+        return _("Unknown");
     }
     else
     {
         unsigned hours = timeInSec / 3600;
         unsigned minutes = (timeInSec % 3600) / 60;
         unsigned seconds = timeInSec % 60;
-        timeAsHMS.Printf("%u:%02u:%02u", hours, minutes, seconds);
-    }
 
-    return timeAsHMS;
+        return fmt::format("%u:%02u:%02u", hours, minutes, seconds);
+    }
 }
 
 void wxGenericProgressDialog::EnsureActiveEventLoopExists()
@@ -568,7 +565,7 @@ void wxGenericProgressDialog::SetTimeLabel(unsigned long val,
 {
     if ( label )
     {
-        wxString s;
+        std::string s;
 
         if (val != (unsigned long)-1)
         {

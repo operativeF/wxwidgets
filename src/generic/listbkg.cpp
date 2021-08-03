@@ -82,7 +82,7 @@ wxListbook::Create(wxWindow *parent,
                  );
 
     if ( GetListView()->InReportView() )
-        GetListView()->InsertColumn(0, wxS("Pages"));
+        GetListView()->InsertColumn(0, "Pages");
 
     // Ensure that we rearrange the items in our list view after all the pages
     // are added.
@@ -266,7 +266,7 @@ void wxListbook::SetImageList(wxImageList *imageList)
 
         list->SetWindowStyleFlag(flagsNew);
         if ( list->InReportView() )
-            list->InsertColumn(0, wxS("Pages"));
+            list->InsertColumn(0, "Pages");
 
         // Restore selection
         if ( oldSel != wxNOT_FOUND )

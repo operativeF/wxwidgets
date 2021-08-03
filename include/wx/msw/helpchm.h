@@ -21,38 +21,38 @@ public:
     explicit wxCHMHelpController(wxWindow* parentWindow = nullptr): wxHelpControllerBase(parentWindow) { }
 
     // Must call this to set the filename
-    bool Initialize(const wxString& file) override;
-    bool Initialize(const wxString& file, int WXUNUSED(server) ) override { return Initialize( file ); }
+    bool Initialize(const std::string& file) override;
+    bool Initialize(const std::string& file, int WXUNUSED(server) ) override { return Initialize( file ); }
 
     // If file is "", reloads file given in Initialize
-    bool LoadFile(const wxString& file = wxEmptyString) override;
+    bool LoadFile(const std::string& file = {}) override;
     bool DisplayContents() override;
     bool DisplaySection(int sectionNo) override;
-    bool DisplaySection(const wxString& section) override;
+    bool DisplaySection(const std::string& section) override;
     bool DisplayBlock(long blockNo) override;
     bool DisplayContextPopup(int contextId) override;
-    bool DisplayTextPopup(const wxString& text, const wxPoint& pos) override;
-    bool KeywordSearch(const wxString& k,
+    bool DisplayTextPopup(const std::string& text, const wxPoint& pos) override;
+    bool KeywordSearch(const std::string& k,
                                wxHelpSearchMode mode = wxHELP_SEARCH_ALL) override;
     bool Quit() override;
 
     const std::string& GetHelpFile() const { return m_helpFile; }
 
     // helper of DisplayTextPopup(), also used in wxSimpleHelpProvider::ShowHelp
-    static bool ShowContextHelpPopup(const wxString& text,
+    static bool ShowContextHelpPopup(const std::string& text,
                                      const wxPoint& pos,
                                      wxWindow *window);
 
 protected:
     // get the name of the CHM file we use from our m_helpFile
-    wxString GetValidFilename() const;
+    std::string GetValidFilename() const;
 
     // Call HtmlHelp() with the provided parameters (both overloads do the same
     // thing but allow to avoid casts in the calling code) and return false
     // (but don't crash) if HTML help is unavailable
-    static bool CallHtmlHelp(wxWindow *win, const wxChar *str,
+    static bool CallHtmlHelp(wxWindow *win, const std::string& str,
                              unsigned cmd, WXWPARAM param);
-    static bool CallHtmlHelp(wxWindow *win, const wxChar *str,
+    static bool CallHtmlHelp(wxWindow *win, const std::string& str,
                              unsigned cmd, const void *param = nullptr)
     {
         return CallHtmlHelp(win, str, cmd, reinterpret_cast<WXWPARAM>(param));
@@ -62,7 +62,7 @@ protected:
     // the first 2 HtmlHelp() parameters
     bool CallHtmlHelp(unsigned cmd, WXWPARAM param)
     {
-        return CallHtmlHelp(GetParentWindow(), GetValidFilename().t_str(),
+        return CallHtmlHelp(GetParentWindow(), GetValidFilename(),
                             cmd, param);
     }
 
@@ -73,7 +73,7 @@ protected:
 
     // wrapper around CallHtmlHelp(HH_DISPLAY_TEXT_POPUP): only one of text and
     // contextId parameters can be non-NULL/non-zero
-    static bool DoDisplayTextPopup(const wxChar *text,
+    static bool DoDisplayTextPopup(const std::string& text,
                                    const wxPoint& pos,
                                    int contextId,
                                    wxWindow *window);

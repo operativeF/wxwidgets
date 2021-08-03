@@ -36,7 +36,7 @@ class WXDLLIMPEXP_CORE wxAnimation : public wxObject
 {
 public:
     wxAnimation();
-    explicit wxAnimation(const wxString &name, wxAnimationType type = wxANIMATION_TYPE_ANY);
+    explicit wxAnimation(const std::string &name, wxAnimationType type = wxANIMATION_TYPE_ANY);
 
     wxAnimation(const wxAnimation&) = default;
     wxAnimation& operator=(const wxAnimation&) = default;
@@ -49,7 +49,7 @@ public:
     wxImage GetFrame(unsigned int frame) const;
     wxSize GetSize() const;
 
-    bool LoadFile(const wxString& name, wxAnimationType type = wxANIMATION_TYPE_ANY);
+    bool LoadFile(const std::string& name, wxAnimationType type = wxANIMATION_TYPE_ANY);
     bool Load(wxInputStream& stream, wxAnimationType type = wxANIMATION_TYPE_ANY);
 
     // Methods for managing the list of decoders
@@ -95,7 +95,7 @@ public:
     wxAnimationCtrlBase() = default;
 
     // public API
-    virtual bool LoadFile(const wxString& filename,
+    virtual bool LoadFile(const std::string& filename,
                           wxAnimationType type = wxANIMATION_TYPE_ANY) = 0;
     virtual bool Load(wxInputStream& stream,
                       wxAnimationType type = wxANIMATION_TYPE_ANY) = 0;
@@ -160,9 +160,7 @@ protected:
     class WXDLLIMPEXP_CORE wxAnimationCtrl : public wxGenericAnimationCtrl
     {
     public:
-        wxAnimationCtrl()
-             
-            = default;
+        wxAnimationCtrl() = default;
         wxAnimationCtrl(wxWindow *parent,
                         wxWindowID id,
                         const wxAnimation& anim = wxNullAnimation,

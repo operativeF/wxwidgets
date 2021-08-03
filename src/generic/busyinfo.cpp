@@ -76,7 +76,7 @@ void wxBusyInfo::Init(const wxBusyInfoFlags& flags)
     sizer->AddStretchSpacer();
 
 #if wxUSE_MARKUP
-    m_text = new wxStaticTextWithMarkupSupport(panel, wxID_ANY, wxString(),
+    m_text = new wxStaticTextWithMarkupSupport(panel, wxID_ANY, "",
                                                wxDefaultPosition,
                                                wxDefaultSize,
                                                wxALIGN_CENTRE);
@@ -85,7 +85,7 @@ void wxBusyInfo::Init(const wxBusyInfoFlags& flags)
     else
         m_text->SetLabelText(flags.m_label);
 #else
-    m_text = new wxStaticText(panel, wxID_ANY, wxString());
+    m_text = new wxStaticText(panel, wxID_ANY, "");
     m_text->SetLabelText(flags.m_label);
 #endif // wxUSE_MARKUP
 

@@ -233,7 +233,7 @@ bool wxDragImage::Create(const wxListCtrl& listCtrl, long id)
     if ( !m_hImageList )
     {
         // as for wxTreeCtrl, fall back on dragging just the item text
-        return Create(listCtrl.GetItemText(id).ToStdString());
+        return Create(listCtrl.GetItemText(id));
     }
 
     return true;

@@ -793,8 +793,8 @@ bool wxRichTextSizePage::TransferDataToWindow()
         m_heightCheckbox->SetValue(false);
         m_unitsW->SetSelection(0);
         m_unitsH->SetSelection(0);
-        m_width->SetValue(wxString::Format(wxT("%d"), (int) imageObj->GetOriginalImageSize().x));
-        m_height->SetValue(wxString::Format(wxT("%d"), (int) imageObj->GetOriginalImageSize().y));
+        m_width->SetValue(fmt::format("{:d}", (int) imageObj->GetOriginalImageSize().x));
+        m_height->SetValue(fmt::format("{:d}", (int) imageObj->GetOriginalImageSize().y));
     }
     else
     {
@@ -895,7 +895,7 @@ bool wxRichTextSizePage::TransferDataFromWindow()
  * Get bitmap resources
  */
 
-wxBitmap wxRichTextSizePage::GetBitmapResource( const wxString& name )
+wxBitmap wxRichTextSizePage::GetBitmapResource( const std::string& name )
 {
     // Bitmap retrieval
 ////@begin wxRichTextSizePage bitmap retrieval
@@ -908,7 +908,7 @@ wxBitmap wxRichTextSizePage::GetBitmapResource( const wxString& name )
  * Get icon resources
  */
 
-wxIcon wxRichTextSizePage::GetIconResource( const wxString& name )
+wxIcon wxRichTextSizePage::GetIconResource( const std::string& name )
 {
     // Icon retrieval
 ////@begin wxRichTextSizePage icon retrieval

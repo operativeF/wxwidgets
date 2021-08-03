@@ -45,7 +45,7 @@
 // ----------------------------------------------------------------------------
 
 // Name for map file.
-constexpr wxChar WXEXTHELP_MAPFILE[] = wxT("wxhelp.map");
+constexpr char WXEXTHELP_MAPFILE[] = "wxhelp.map";
 
 // Character introducing comments/documentation field in map file.
 constexpr char WXEXTHELP_COMMENTCHAR = ';';
@@ -54,19 +54,19 @@ constexpr char WXEXTHELP_COMMENTCHAR = ';';
 constexpr int WXEXTHELP_CONTENTS_ID = 0;
 
 // Name of environment variable to set help browser.
-constexpr wxChar WXEXTHELP_ENVVAR_BROWSER[] = wxT("WX_HELPBROWSER");
+constexpr char WXEXTHELP_ENVVAR_BROWSER[] = "WX_HELPBROWSER";
 
 // Is browser a netscape browser?
-constexpr wxChar WXEXTHELP_ENVVAR_BROWSERISNETSCAPE[] =  wxT("WX_HELPBROWSER_NS");
+constexpr char WXEXTHELP_ENVVAR_BROWSERISNETSCAPE[] =  "WX_HELPBROWSER_NS";
 
 wxExtHelpController::wxExtHelpController(wxWindow* parentWindow)
                    : wxHelpControllerBase(parentWindow)
 {
-    wxChar *browser = wxGetenv(WXEXTHELP_ENVVAR_BROWSER);
+    auto* browser = wxGetenv(boost::nowide::widen(WXEXTHELP_ENVVAR_BROWSER).c_str());
     if (browser)
     {
-        m_BrowserName = browser;
-        browser = wxGetenv(WXEXTHELP_ENVVAR_BROWSERISNETSCAPE);
+        m_BrowserName = boost::nowide::narrow(browser);
+        browser = wxGetenv(boost::nowide::widen(WXEXTHELP_ENVVAR_BROWSERISNETSCAPE).c_str());
         m_BrowserIsNetscape = browser && (wxAtoi(browser) != 0);
     }
 }
@@ -76,13 +76,13 @@ wxExtHelpController::~wxExtHelpController()
     DeleteList();
 }
 
-void wxExtHelpController::SetViewer(const wxString& viewer, long flags)
+void wxExtHelpController::SetViewer(const std::string& viewer, long flags)
 {
     m_BrowserName = viewer;
     m_BrowserIsNetscape = (flags & wxHELP_NETSCAPE) != 0;
 }
 
-bool wxExtHelpController::DisplayHelp(const wxString &relativeURL)
+bool wxExtHelpController::DisplayHelp(const std::string &relativeURL)
 {
     // construct hte URL to open -- it's just a file
     wxString url(wxT("file://") + m_helpDir);
@@ -113,10 +113,10 @@ class wxExtHelpMapEntry : public wxObject
 {
 public:
     int      entryid;
-    wxString url;
-    wxString doc;
+    std::string url;
+    std::string doc;
 
-    wxExtHelpMapEntry(int iid, wxString const &iurl, wxString const &idoc)
+    wxExtHelpMapEntry(int iid, std::string const &iurl, std::string const &idoc)
         : entryid(iid), url(iurl), doc(idoc)
         { }
 };
@@ -140,14 +140,14 @@ void wxExtHelpController::DeleteList()
 // This must be called to tell the controller where to find the documentation.
 //  @param file - NOT a filename, but a directory name.
 //  @return true on success
-bool wxExtHelpController::Initialize(const wxString& file)
+bool wxExtHelpController::Initialize(const std::string& file)
 {
     return LoadFile(file);
 }
 
-bool wxExtHelpController::ParseMapFileLine(const wxString& line)
+bool wxExtHelpController::ParseMapFileLine(const std::string& line)
 {
-    const wxChar *p = line.c_str();
+    const char *p = line.c_str();
 
     // skip whitespace
     while ( isascii(*p) && wxIsspace(*p) )
@@ -158,7 +158,7 @@ bool wxExtHelpController::ParseMapFileLine(const wxString& line)
         return true;
 
     // the line is of the form "num url" so we must have an integer now
-    wxChar *end;
+    char *end;
     const unsigned long id = wxStrtoul(p, &end, 0);
 
     if ( end == p )
@@ -194,7 +194,7 @@ bool wxExtHelpController::ParseMapFileLine(const wxString& line)
 }
 
 // file is a misnomer as it's the name of the base help directory
-bool wxExtHelpController::LoadFile(const wxString& file)
+bool wxExtHelpController::LoadFile(const std::string& file)
 {
     wxFileName helpDir(wxFileName::DirName(file));
     helpDir.MakeAbsolute();
@@ -298,7 +298,7 @@ bool wxExtHelpController::DisplayContents()
     if (! m_NumOfEntries)
         return false;
 
-    wxString contents;
+    std::string contents;
     wxList::compatibility_iterator node = m_MapList->GetFirst();
     wxExtHelpMapEntry *entry;
     while (node)
@@ -322,7 +322,7 @@ bool wxExtHelpController::DisplayContents()
         rc = DisplaySection(WXEXTHELP_CONTENTS_ID);
 
     // if not found, open homemade toc:
-    return rc ? true : KeywordSearch(wxEmptyString);
+    return rc ? true : KeywordSearch("");
 }
 
 bool wxExtHelpController::DisplaySection(int sectionNo)
@@ -344,9 +344,9 @@ bool wxExtHelpController::DisplaySection(int sectionNo)
     return false;
 }
 
-bool wxExtHelpController::DisplaySection(const wxString& section)
+bool wxExtHelpController::DisplaySection(const std::string& section)
 {
-    bool isFilename = (section.Find(wxT(".htm")) != -1);
+    bool isFilename = (section.find(".htm") != std::string::npos);
 
     if (isFilename)
         return DisplayHelp(section);
@@ -359,7 +359,7 @@ bool wxExtHelpController::DisplayBlock(long blockNo)
     return DisplaySection((int)blockNo);
 }
 
-bool wxExtHelpController::KeywordSearch(const wxString& k,
+bool wxExtHelpController::KeywordSearch(const std::string& k,
                                    wxHelpSearchMode WXUNUSED(mode))
 {
    if (! m_NumOfEntries)

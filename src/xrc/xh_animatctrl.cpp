@@ -40,7 +40,8 @@ wxObject *wxAnimationCtrlXmlHandler::DoCreateResource()
             ctrl = new wxAnimationCtrl(m_parentAsWindow,
                                        GetID(),
                                        wxNullAnimation,
-                                       GetPosition(), GetSize(),
+                                       GetPosition(),
+                                       GetSize(),
                                        GetStyle("style", wxAC_DEFAULT_STYLE),
                                        GetName());
         }
@@ -49,7 +50,8 @@ wxObject *wxAnimationCtrlXmlHandler::DoCreateResource()
             ctrl = new wxGenericAnimationCtrl(m_parentAsWindow,
                                               GetID(),
                                               wxNullAnimation,
-                                              GetPosition(), GetSize(),
+                                              GetPosition(),
+                                              GetSize(),
                                               GetStyle("style", wxAC_DEFAULT_STYLE),
                                               GetName());
         }

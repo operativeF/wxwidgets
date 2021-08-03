@@ -76,7 +76,7 @@ static HWND GetSuitableHWND(wxWindow *win)
 }
 
 
-bool wxCHMHelpController::Initialize(const wxString& filename)
+bool wxCHMHelpController::Initialize(const std::string& filename)
 {
     if ( !GetHtmlHelpFunction() )
         return false;
@@ -85,22 +85,22 @@ bool wxCHMHelpController::Initialize(const wxString& filename)
     return true;
 }
 
-bool wxCHMHelpController::LoadFile(const wxString& file)
+bool wxCHMHelpController::LoadFile(const std::string& file)
 {
-    if (!file.IsEmpty())
+    if (!file.empty())
         m_helpFile = file;
     return true;
 }
 
 /* static */ bool
 wxCHMHelpController::CallHtmlHelp(wxWindow *win,
-                                  const wxChar *str,
+                                  const std::string& str,
                                   unsigned cmd,
                                   WXWPARAM param)
 {
     HTMLHELP htmlHelp = GetHtmlHelpFunction();
 
-    return htmlHelp && htmlHelp(GetSuitableHWND(win), str, cmd, param);
+    return htmlHelp && htmlHelp(GetSuitableHWND(win), boost::nowide::widen(str).c_str(), cmd, param);
 }
 
 bool wxCHMHelpController::DisplayContents()
@@ -112,16 +112,16 @@ bool wxCHMHelpController::DisplayContents()
 }
 
 // Use topic or HTML filename
-bool wxCHMHelpController::DisplaySection(const wxString& section)
+bool wxCHMHelpController::DisplaySection(const std::string& section)
 {
     if (m_helpFile.empty())
         return false;
 
     // Is this an HTML file or a keyword?
-    if ( section.Find(wxT(".htm")) != wxNOT_FOUND )
+    if ( section.find(".htm") != std::string::npos )
     {
         // interpret as a file name
-        return CallHtmlHelp(HH_DISPLAY_TOPIC, wxMSW_CONV_LPCTSTR(section));
+        return CallHtmlHelp(HH_DISPLAY_TOPIC, boost::nowide::widen(section).c_str());
     }
 
     return KeywordSearch(section);
@@ -144,7 +144,7 @@ bool wxCHMHelpController::DisplaySection(int section)
 
 /* static */
 bool
-wxCHMHelpController::DoDisplayTextPopup(const wxChar *text,
+wxCHMHelpController::DoDisplayTextPopup(const std::string& text,
                                         const wxPoint& pos,
                                         int contextId,
                                         wxWindow *window)
@@ -153,7 +153,7 @@ wxCHMHelpController::DoDisplayTextPopup(const wxChar *text,
     popup.cbStruct = sizeof(popup);
     popup.hinst = (HINSTANCE) wxGetInstance();
     popup.idString = contextId;
-    popup.pszText = text;
+    popup.pszText = boost::nowide::widen(text).c_str();
     popup.pt.x = pos.x;
     popup.pt.y = pos.y;
     popup.clrForeground = ::GetSysColor(COLOR_INFOTEXT);
@@ -174,17 +174,17 @@ bool wxCHMHelpController::DisplayContextPopup(int contextId)
 }
 
 bool
-wxCHMHelpController::DisplayTextPopup(const wxString& text, const wxPoint& pos)
+wxCHMHelpController::DisplayTextPopup(const std::string& text, const wxPoint& pos)
 {
     return ShowContextHelpPopup(text, pos, GetParentWindow());
 }
 
 /* static */
-bool wxCHMHelpController::ShowContextHelpPopup(const wxString& text,
+bool wxCHMHelpController::ShowContextHelpPopup(const std::string& text,
                                                const wxPoint& pos,
                                                wxWindow *window)
 {
-    return DoDisplayTextPopup(text.t_str(), pos, 0, window);
+    return DoDisplayTextPopup(text, pos, 0, window);
 }
 
 bool wxCHMHelpController::DisplayBlock(long block)
@@ -192,13 +192,13 @@ bool wxCHMHelpController::DisplayBlock(long block)
     return DisplaySection(block);
 }
 
-bool wxCHMHelpController::KeywordSearch(const wxString& k,
+bool wxCHMHelpController::KeywordSearch(const std::string& k,
                                         wxHelpSearchMode WXUNUSED(mode))
 {
     if (m_helpFile.empty())
         return false;
 
-    if (k.IsEmpty())
+    if (k.empty())
     {
         HH_FTS_QUERY oQuery;
         oQuery.cbStruct = sizeof(HH_FTS_QUERY);
@@ -217,7 +217,7 @@ bool wxCHMHelpController::KeywordSearch(const wxString& k,
         HH_AKLINK link;
         link.cbStruct =     sizeof(HH_AKLINK);
         link.fReserved =    FALSE;
-        link.pszKeywords =  k.t_str();
+        link.pszKeywords =  boost::nowide::widen(k).c_str();
         link.pszUrl =       nullptr;
         link.pszMsgText =   nullptr;
         link.pszMsgTitle =  nullptr;
@@ -233,7 +233,7 @@ bool wxCHMHelpController::Quit()
     return CallHtmlHelp(nullptr, nullptr, HH_CLOSE_ALL);
 }
 
-wxString wxCHMHelpController::GetValidFilename() const
+std::string wxCHMHelpController::GetValidFilename() const
 {
     wxString path, name, ext;
     wxFileName::SplitPath(m_helpFile, &path, &name, &ext);

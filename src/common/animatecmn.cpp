@@ -58,7 +58,7 @@ wxAnimation::wxAnimation(wxAnimationImpl* impl)
     m_refData = impl;
 }
 
-wxAnimation::wxAnimation(const wxString &name, wxAnimationType type)
+wxAnimation::wxAnimation(const std::string& name, wxAnimationType type)
 {
     m_refData = wxAnimationImpl::CreateDefault();
     LoadFile(name, type);
@@ -105,7 +105,7 @@ wxSize wxAnimation::GetSize() const
     return GetImpl()->GetSize();
 }
 
-bool wxAnimation::LoadFile(const wxString& name, wxAnimationType type)
+bool wxAnimation::LoadFile(const std::string& name, wxAnimationType type)
 {
     // the animation impl may not be fully ready until after it has loaded the
     // file, so just check GetImpl in the Load methods
