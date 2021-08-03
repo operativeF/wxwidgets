@@ -537,10 +537,10 @@ bool wxTextCtrl::MSWCreateText(const std::string& value,
         {
             // Pass IEM_InsertText (0) as wParam, in order to have the ink always
             // converted to text.
-            ::SendMessage(GetHwnd(), EM_SETINKINSERTMODE, 0, 0);
+            ::SendMessageW(GetHwnd(), EM_SETINKINSERTMODE, 0, 0);
 
             // Make sure the mouse can be used for input
-            ::SendMessage(GetHwnd(), EM_SETUSEMOUSEFORINPUT, 1, 0);
+            ::SendMessageW(GetHwnd(), EM_SETUSEMOUSEFORINPUT, 1, 0);
         }
 #endif
 
@@ -858,7 +858,7 @@ void wxTextCtrl::SetWindowStyleFlag(long style)
     {
         bool set = (style & wxTE_NOHIDESEL) != 0;
 
-        ::SendMessage(GetHwnd(), EM_SETOPTIONS, set ? ECOOP_OR : ECOOP_AND,
+        ::SendMessageW(GetHwnd(), EM_SETOPTIONS, set ? ECOOP_OR : ECOOP_AND,
                       set ? ECO_NOHIDESEL : ~ECO_NOHIDESEL);
     }
 #endif // wxUSE_RICHEDIT
@@ -1137,7 +1137,7 @@ long wxTextCtrl::GetInsertionPoint() const
         CHARRANGE range;
         range.cpMin = 0;
         range.cpMax = 0;
-        ::SendMessage(GetHwnd(), EM_EXGETSEL, 0, (LPARAM) &range);
+        ::SendMessageW(GetHwnd(), EM_EXGETSEL, 0, (LPARAM) &range);
         return range.cpMin;
     }
 #endif // wxUSE_RICHEDIT
@@ -1155,12 +1155,12 @@ wxTextPos wxTextCtrl::GetLastPosition() const
             GETTEXTLENGTHEX gtl;
             gtl.flags = GTL_NUMCHARS | GTL_PRECISE;
             gtl.codepage = GetRichVersion() > 1 ? 1200 : CP_ACP;
-            return ::SendMessage(GetHwnd(), EM_GETTEXTLENGTHEX, (WPARAM)&gtl, 0);
+            return ::SendMessageW(GetHwnd(), EM_GETTEXTLENGTHEX, (WPARAM)&gtl, 0);
         }
         else
 #endif // wxUSE_RICHEDIT
         {
-            return ::GetWindowTextLength(GetHwnd());
+            return ::GetWindowTextLengthW(GetHwnd());
         }
     }
 
@@ -1175,7 +1175,7 @@ void wxTextCtrl::GetSelection(long *from, long *to) const
     if ( IsRich() )
     {
         CHARRANGE charRange;
-        ::SendMessage(GetHwnd(), EM_EXGETSEL, 0, (LPARAM) &charRange);
+        ::SendMessageW(GetHwnd(), EM_EXGETSEL, 0, (LPARAM) &charRange);
 
         *from = charRange.cpMin;
         *to = charRange.cpMax;
@@ -1208,7 +1208,7 @@ void wxTextCtrl::DoSetSelection(long from, long to, int flags)
         CHARRANGE range;
         range.cpMin = from;
         range.cpMax = to;
-        ::SendMessage(hWnd, EM_EXSETSEL, 0, (LPARAM)&range);
+        ::SendMessageW(hWnd, EM_EXSETSEL, 0, (LPARAM)&range);
     }
     else
 #endif // wxUSE_RICHEDIT
@@ -1243,20 +1243,20 @@ void wxTextCtrl::DoSetSelection(long from, long to, int flags)
                 // setting ECO_NOHIDESEL also sets WS_VISIBLE and possibly
                 // others, remember the style so we can reset it later if needed
                 style = ::GetWindowLong(GetHwnd(), GWL_STYLE);
-                ::SendMessage(GetHwnd(), EM_SETOPTIONS,
+                ::SendMessageW(GetHwnd(), EM_SETOPTIONS,
                               ECOOP_OR, ECO_NOHIDESEL);
             }
             //else: everything is already ok
         }
 #endif // wxUSE_RICHEDIT
 
-        ::SendMessage(hWnd, EM_SCROLLCARET, 0, (LPARAM)0);
+        ::SendMessageW(hWnd, EM_SCROLLCARET, 0, (LPARAM)0);
 
 #if wxUSE_RICHEDIT
         // restore ECO_NOHIDESEL if we changed it
         if ( GetRichVersion() > 1 && !HasFlag(wxTE_NOHIDESEL) )
         {
-            ::SendMessage(GetHwnd(), EM_SETOPTIONS,
+            ::SendMessageW(GetHwnd(), EM_SETOPTIONS,
                           ECOOP_AND, ~ECO_NOHIDESEL);
             if ( style != ::GetWindowLong(GetHwnd(), GWL_STYLE) )
                 ::SetWindowLong(GetHwnd(), GWL_STYLE, style);
@@ -1271,17 +1271,17 @@ void wxTextCtrl::DoSetSelection(long from, long to, int flags)
 
 bool wxTextCtrl::IsModified() const
 {
-    return ::SendMessage(GetHwnd(), EM_GETMODIFY, 0, 0) != 0;
+    return ::SendMessageW(GetHwnd(), EM_GETMODIFY, 0, 0) != 0;
 }
 
 void wxTextCtrl::MarkDirty()
 {
-    ::SendMessage(GetHwnd(), EM_SETMODIFY, TRUE, 0);
+    ::SendMessageW(GetHwnd(), EM_SETMODIFY, TRUE, 0);
 }
 
 void wxTextCtrl::DiscardEdits()
 {
-    ::SendMessage(GetHwnd(), EM_SETMODIFY, FALSE, 0);
+    ::SendMessageW(GetHwnd(), EM_SETMODIFY, FALSE, 0);
 }
 
 // ----------------------------------------------------------------------------
@@ -1290,7 +1290,7 @@ void wxTextCtrl::DiscardEdits()
 
 int wxTextCtrl::GetNumberOfLines() const
 {
-    return (int)::SendMessage(GetHwnd(), EM_GETLINECOUNT, 0, 0);
+    return (int)::SendMessageW(GetHwnd(), EM_GETLINECOUNT, 0, 0);
 }
 
 long wxTextCtrl::XYToPosition(long x, long y) const
@@ -1299,7 +1299,7 @@ long wxTextCtrl::XYToPosition(long x, long y) const
     long charIndex;
     if ( IsMultiLine() )
     {
-        charIndex = ::SendMessage(GetHwnd(), EM_LINEINDEX, y, 0);
+        charIndex = ::SendMessageW(GetHwnd(), EM_LINEINDEX, y, 0);
         if ( charIndex == -1 )
             return -1;
     }
@@ -1312,7 +1312,7 @@ long wxTextCtrl::XYToPosition(long x, long y) const
     }
 
     // Line is identified by a character position!
-    long lineLength = ::SendMessage(GetHwnd(), EM_LINELENGTH, charIndex, 0);
+    long lineLength = ::SendMessageW(GetHwnd(), EM_LINELENGTH, charIndex, 0);
 
     // Notice that x == lineLength is still valid because it corresponds either
     // to the position of the LF at the end of any line except the last one or
@@ -1333,12 +1333,12 @@ bool wxTextCtrl::PositionToXY(long pos, long *x, long *y) const
 #if wxUSE_RICHEDIT
     if ( IsRich() )
     {
-        lineNo = ::SendMessage(hWnd, EM_EXLINEFROMCHAR, 0, pos);
+        lineNo = ::SendMessageW(hWnd, EM_EXLINEFROMCHAR, 0, pos);
     }
     else
 #endif // wxUSE_RICHEDIT
     {
-        lineNo = ::SendMessage(hWnd, EM_LINEFROMCHAR, pos, 0);
+        lineNo = ::SendMessageW(hWnd, EM_LINEFROMCHAR, pos, 0);
     }
 
     if ( lineNo == -1 )
@@ -1348,7 +1348,7 @@ bool wxTextCtrl::PositionToXY(long pos, long *x, long *y) const
     }
 
     // This gets the char index for the _beginning_ of this line
-    long charIndex = ::SendMessage(hWnd, EM_LINEINDEX, lineNo, 0);
+    long charIndex = ::SendMessageW(hWnd, EM_LINEINDEX, lineNo, 0);
     if ( charIndex == -1 )
     {
         return false;
@@ -1356,7 +1356,7 @@ bool wxTextCtrl::PositionToXY(long pos, long *x, long *y) const
 
     // Line is identified by a character position!
     // New lines characters are not included.
-    long lineLength = ::SendMessage(hWnd, EM_LINELENGTH, charIndex, 0);
+    long lineLength = ::SendMessageW(hWnd, EM_LINELENGTH, charIndex, 0);
 
     // To simplify further calculations, make position relative
     // to the beginning of the line.
@@ -1365,7 +1365,7 @@ bool wxTextCtrl::PositionToXY(long pos, long *x, long *y) const
     // We need to apply different approach for the position referring
     // to the last line so check if the next line exists.
     long charIndexNextLn = IsMultiLine() ?
-                           ::SendMessage(hWnd, EM_LINEINDEX, lineNo + 1, 0)
+                           ::SendMessageW(hWnd, EM_LINEINDEX, lineNo + 1, 0)
                            : -1;
     if ( charIndexNextLn == -1 )
     {
@@ -1430,7 +1430,7 @@ wxTextCtrl::HitTest(const wxPoint& pt, long *posOut) const
         lParam = MAKELPARAM(pt.x, pt.y);
     }
 
-    LRESULT pos = ::SendMessage(GetHwnd(), EM_CHARFROMPOS, 0, lParam);
+    LRESULT pos = ::SendMessageW(GetHwnd(), EM_CHARFROMPOS, 0, lParam);
 
     if ( pos == -1 )
     {
@@ -1457,12 +1457,12 @@ wxTextCtrl::HitTest(const wxPoint& pt, long *posOut) const
     //        we don't know how to do it
     if ( IsRich() )
     {
-        ::SendMessage(GetHwnd(), EM_POSFROMCHAR, (WPARAM)&ptReal, pos);
+        ::SendMessageW(GetHwnd(), EM_POSFROMCHAR, (WPARAM)&ptReal, pos);
     }
     else
 #endif // wxUSE_RICHEDIT
     {
-        LRESULT lRc = ::SendMessage(GetHwnd(), EM_POSFROMCHAR, pos, 0);
+        LRESULT lRc = ::SendMessageW(GetHwnd(), EM_POSFROMCHAR, pos, 0);
 
         if ( lRc == -1 )
         {
@@ -1504,14 +1504,14 @@ wxPoint wxTextCtrl::DoPositionToCoords(long pos) const
     if ( IsRich() )
     {
         POINT pt;
-        LRESULT rc = ::SendMessage(GetHwnd(), EM_POSFROMCHAR, (WPARAM)&pt, pos);
+        LRESULT rc = ::SendMessageW(GetHwnd(), EM_POSFROMCHAR, (WPARAM)&pt, pos);
         if ( rc != -1 )
             return wxPoint(pt.x, pt.y);
     }
     else
 #endif // wxUSE_RICHEDIT
     {
-        LRESULT rc = ::SendMessage(GetHwnd(), EM_POSFROMCHAR, pos, 0);
+        LRESULT rc = ::SendMessageW(GetHwnd(), EM_POSFROMCHAR, pos, 0);
         if ( rc == -1 )
         {
             // Finding coordinates for the last position of the control fails
@@ -1529,14 +1529,14 @@ wxPoint wxTextCtrl::DoPositionToCoords(long pos) const
                 // only) position in an empty control. There is no way to get
                 // it directly with EM_POSFROMCHAR but EM_GETMARGINS returns
                 // the correct value for at least the horizontal offset.
-                rc = ::SendMessage(GetHwnd(), EM_GETMARGINS, 0, 0);
+                rc = ::SendMessageW(GetHwnd(), EM_GETMARGINS, 0, 0);
 
                 // Text control seems to effectively add 1 to margin.
                 return wxPoint(LOWORD(rc) + 1, 1);
             }
 
             // We do have a previous character, try to get its coordinates.
-            rc = ::SendMessage(GetHwnd(), EM_POSFROMCHAR, pos - 1, 0);
+            rc = ::SendMessageW(GetHwnd(), EM_POSFROMCHAR, pos - 1, 0);
             if ( rc == -1 )
             {
                 // If getting coordinates of the previous character failed as
@@ -1554,7 +1554,7 @@ wxPoint wxTextCtrl::DoPositionToCoords(long pos) const
                 // any other line while its Y coordinate will be approximately
                 // (but we can't compute it exactly...) one character height
                 // more than that of the previous character.
-                LRESULT coords0 = ::SendMessage(GetHwnd(), EM_POSFROMCHAR, 0, 0);
+                LRESULT coords0 = ::SendMessageW(GetHwnd(), EM_POSFROMCHAR, 0, 0);
                 if ( coords0 == -1 )
                     return wxDefaultPosition;
 
@@ -1597,21 +1597,21 @@ void wxTextCtrl::ShowPosition(long pos)
 
     // Is this where scrolling is relative to - the line containing the caret?
     // Or is the first visible line??? Try first visible line.
-//    int currentLineLineNo1 = (int)::SendMessage(hWnd, EM_LINEFROMCHAR, -1, 0L);
+//    int currentLineLineNo1 = (int)::SendMessageW(hWnd, EM_LINEFROMCHAR, -1, 0L);
 
-    int currentLineLineNo = (int)::SendMessage(hWnd, EM_GETFIRSTVISIBLELINE, 0, 0);
+    int currentLineLineNo = (int)::SendMessageW(hWnd, EM_GETFIRSTVISIBLELINE, 0, 0);
 
-    int specifiedLineLineNo = (int)::SendMessage(hWnd, EM_LINEFROMCHAR, pos, 0);
+    int specifiedLineLineNo = (int)::SendMessageW(hWnd, EM_LINEFROMCHAR, pos, 0);
 
     int linesToScroll = specifiedLineLineNo - currentLineLineNo;
 
     if (linesToScroll != 0)
-      ::SendMessage(hWnd, EM_LINESCROLL, 0, linesToScroll);
+      ::SendMessageW(hWnd, EM_LINESCROLL, 0, linesToScroll);
 }
 
 long wxTextCtrl::GetLengthOfLineContainingPos(long pos) const
 {
-    return ::SendMessage(GetHwnd(), EM_LINELENGTH, pos, 0);
+    return ::SendMessageW(GetHwnd(), EM_LINELENGTH, pos, 0);
 }
 
 int wxTextCtrl::GetLineLength(long lineNo) const
@@ -1624,7 +1624,7 @@ int wxTextCtrl::GetLineLength(long lineNo) const
     return GetLengthOfLineContainingPos(pos);
 }
 
-wxString wxTextCtrl::GetLineText(long lineNo) const
+std::string wxTextCtrl::GetLineText(long lineNo) const
 {
     size_t len = (size_t)GetLineLength(lineNo) + 1;
 
@@ -1638,7 +1638,7 @@ wxString wxTextCtrl::GetLineText(long lineNo) const
         wxChar *buf = tmp;
 
         *(WORD *)buf = (WORD)len;
-        len = (size_t)::SendMessage(GetHwnd(), EM_GETLINE, lineNo, (LPARAM)buf);
+        len = (size_t)::SendMessageW(GetHwnd(), EM_GETLINE, lineNo, (LPARAM)buf);
 
 #if wxUSE_RICHEDIT
         if ( IsRich() )
@@ -1679,7 +1679,7 @@ void wxTextCtrl::SetMaxLength(unsigned long len)
 #if wxUSE_RICHEDIT
     if ( IsRich() )
     {
-        ::SendMessage(GetHwnd(), EM_EXLIMITTEXT, 0, len ? len : 0x7fffffff);
+        ::SendMessageW(GetHwnd(), EM_EXLIMITTEXT, 0, len ? len : 0x7fffffff);
     }
     else
 #endif // wxUSE_RICHEDIT
@@ -1728,7 +1728,7 @@ void wxTextCtrl::Redo()
 #if wxUSE_RICHEDIT
     if ( GetRichVersion() > 1 )
     {
-        ::SendMessage(GetHwnd(), EM_REDO, 0, 0);
+        ::SendMessageW(GetHwnd(), EM_REDO, 0, 0);
         return;
     }
 #endif // wxUSE_RICHEDIT
@@ -1740,7 +1740,7 @@ bool wxTextCtrl::CanRedo() const
 {
 #if wxUSE_RICHEDIT
     if ( GetRichVersion() > 1 )
-        return ::SendMessage(GetHwnd(), EM_CANREDO, 0, 0) != 0;
+        return ::SendMessageW(GetHwnd(), EM_CANREDO, 0, 0) != 0;
 #endif // wxUSE_RICHEDIT
 
     return wxTextEntry::CanRedo();
@@ -1814,7 +1814,7 @@ bool wxTextCtrl::MSWShouldPreProcessMessage(WXMSG* msg)
             switch ( ctrl + shift )
             {
                 default:
-                    wxFAIL_MSG( wxT("how many modifiers have we got?") );
+                    wxFAIL_MSG( "how many modifiers have we got?" );
                     [[fallthrough]];
 
                 case 0:
@@ -2261,7 +2261,7 @@ bool wxTextCtrl::SendUpdateEvent()
             return false;
 
         default:
-            wxFAIL_MSG( wxT("unexpected wxTextCtrl::m_updatesCount value") );
+            wxFAIL_MSG( "unexpected wxTextCtrl::m_updatesCount value" );
             [[fallthrough]];
 
         case -1:
@@ -2330,7 +2330,7 @@ bool wxTextCtrl::HasSpaceLimit(unsigned int *len) const
     //       can only be called for small values while EN_MAXTEXT is only sent
     //       for large values (in practice the default limit seems to be 30000
     //       but make it smaller just to be on the safe side)
-    *len = ::SendMessage(GetHwnd(), EM_GETLIMITTEXT, 0, 0);
+    *len = ::SendMessageW(GetHwnd(), EM_GETLIMITTEXT, 0, 0);
     return *len < 10001;
 
 }
@@ -2341,7 +2341,7 @@ bool wxTextCtrl::AdjustSpaceLimit()
     if ( HasSpaceLimit(&limit) )
         return false;
 
-    unsigned int len = ::GetWindowTextLength(GetHwnd());
+    unsigned int len = ::GetWindowTextLengthW(GetHwnd());
     if ( len >= limit )
     {
         unsigned long increaseBy;
@@ -2438,7 +2438,7 @@ wxSize wxTextCtrl::DoGetSizeFromTextSize(int xlen, int ylen) const
     int char_height = wxGetCharSize(GetHWND(), font).y;
 
     DWORD wText = FromDIP(1);
-    ::SystemParametersInfo(SPI_GETCARETWIDTH, 0, &wText, 0);
+    ::SystemParametersInfoW(SPI_GETCARETWIDTH, 0, &wText, 0);
     wText += xlen;
 
     int hText = char_height;
@@ -2647,7 +2647,7 @@ void wxTextCtrl::MSWSetRichZoom()
     // get the current zoom ratio
     UINT num = 1;
     UINT denom = 1;
-    ::SendMessage(GetHWND(), EM_GETZOOM, (WPARAM)&num, (LPARAM)&denom);
+    ::SendMessageW(GetHWND(), EM_GETZOOM, (WPARAM)&num, (LPARAM)&denom);
 
     // combine the zoom ratio with the DPI scale factor
     float ratio = m_richDPIscale;
@@ -2658,7 +2658,7 @@ void wxTextCtrl::MSWSetRichZoom()
     // do it here as well
     num = 100 * ratio;
     denom = 100;
-    ::SendMessage(GetHWND(), EM_SETZOOM, (WPARAM)num, (LPARAM)denom);
+    ::SendMessageW(GetHWND(), EM_SETZOOM, (WPARAM)num, (LPARAM)denom);
 }
 
 void wxTextCtrl::MSWUpdateFontOnDPIChange(const wxSize& newDPI)
@@ -2815,7 +2815,7 @@ bool wxTextCtrl::SetBackgroundColour(const wxColour& colour)
     {
         // rich edit doesn't use WM_CTLCOLOR, hence we need to send
         // EM_SETBKGNDCOLOR additionally
-        ::SendMessage(GetHwnd(), EM_SETBKGNDCOLOR, 0, wxColourToRGB(colour));
+        ::SendMessageW(GetHwnd(), EM_SETBKGNDCOLOR, 0, wxColourToRGB(colour));
     }
 
     return true;
@@ -2835,7 +2835,7 @@ bool wxTextCtrl::SetForegroundColour(const wxColour& colour)
         WinStruct<CHARFORMAT> cf;
         cf.dwMask = CFM_COLOR;
         cf.crTextColor = wxColourToRGB(colour);
-        ::SendMessage(GetHwnd(), EM_SETCHARFORMAT, SCF_ALL, (LPARAM)&cf);
+        ::SendMessageW(GetHwnd(), EM_SETCHARFORMAT, SCF_ALL, (LPARAM)&cf);
     }
 
     return true;
@@ -3025,9 +3025,9 @@ bool wxTextCtrl::MSWSetCharFormat(const wxTextAttr& style, long start, long end)
         selMode = SCF_ALL;
     }
 
-    if ( !::SendMessage(GetHwnd(), EM_SETCHARFORMAT, selMode, (LPARAM)&cf) )
+    if ( !::SendMessageW(GetHwnd(), EM_SETCHARFORMAT, selMode, (LPARAM)&cf) )
     {
-        wxLogLastError(wxT("SendMessage(EM_SETCHARFORMAT)"));
+        wxLogLastError("SendMessage(EM_SETCHARFORMAT)");
         return false;
     }
 
@@ -3138,9 +3138,9 @@ bool wxTextCtrl::MSWSetParaFormat(const wxTextAttr& style, long start, long end)
         // Do format the selection.
         DoSetSelection(start, end, SetSel_NoScroll);
 
-        if ( !::SendMessage(GetHwnd(), EM_SETPARAFORMAT, 0, (LPARAM) &pf) )
+        if ( !::SendMessageW(GetHwnd(), EM_SETPARAFORMAT, 0, (LPARAM) &pf) )
         {
-            wxLogLastError(wxT("SendMessage(EM_SETPARAFORMAT)"));
+            wxLogLastError("SendMessage(EM_SETPARAFORMAT)");
 
             return false;
         }
@@ -3252,7 +3252,7 @@ bool wxTextCtrl::GetStyle(long position, wxTextAttr& style)
     }
 
     // get the selection formatting
-    (void) ::SendMessage(GetHwnd(), EM_GETCHARFORMAT,
+    (void) ::SendMessageW(GetHwnd(), EM_GETCHARFORMAT,
                             SCF_SELECTION, (LPARAM)&cf) ;
 
 
@@ -3357,7 +3357,7 @@ bool wxTextCtrl::GetStyle(long position, wxTextAttr& style)
     }
 
     // do format the selection
-    (void) ::SendMessage(GetHwnd(), EM_GETPARAFORMAT, 0, (LPARAM) &pf) ;
+    (void) ::SendMessageW(GetHwnd(), EM_GETPARAFORMAT, 0, (LPARAM) &pf) ;
 
     style.SetLeftIndent( (int) ((double) pf.dxStartIndent * twips2mm * 10.0), (int) ((double) pf.dxOffset * twips2mm * 10.0) );
     style.SetRightIndent( (int) ((double) pf.dxRightIndent * twips2mm * 10.0) );
@@ -3429,17 +3429,17 @@ bool wxRichEditModule::Load(Version version)
         return true;
     }
 
-    static const wxChar *const dllnames[] =
+    static constexpr std::string_view dllnames[] =
     {
-        wxT("riched32"),
-        wxT("riched20"),
-        wxT("msftedit"),
+        "riched32",
+        "riched20",
+        "msftedit",
     };
 
     wxCOMPILE_TIME_ASSERT( WXSIZEOF(dllnames) == Version_Max,
                             RichEditDllNamesVersionsMismatch );
 
-    ms_hRichEdit[version] = ::LoadLibrary(dllnames[version]);
+    ms_hRichEdit[version] = ::LoadLibrary(boost::nowide::widen(dllnames[version]).c_str());
 
     if ( !ms_hRichEdit[version] )
     {

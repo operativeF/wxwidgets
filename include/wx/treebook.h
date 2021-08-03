@@ -44,7 +44,7 @@ public:
                const wxPoint& pos = wxDefaultPosition,
                const wxSize& size = wxDefaultSize,
                long style = wxBK_DEFAULT,
-               const wxString& name = wxEmptyString)
+               const std::string& name = {})
     {
         Create(parent, id, pos, size, style, name);
     }
@@ -60,7 +60,7 @@ wxTreebook(const wxTreebook&) = delete;
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 long style = wxBK_DEFAULT,
-                const wxString& name = wxEmptyString);
+                const std::string& name = {});
 
 
     // Page insertion operations
@@ -74,27 +74,27 @@ wxTreebook(const wxTreebook&) = delete;
     // The new page is placed on the same level as page.
     bool InsertPage(size_t pos,
                             wxWindow *page,
-                            const wxString& text,
+                            const std::string& text,
                             bool bSelect = false,
                             int imageId = NO_IMAGE) override;
 
     // Inserts a new sub-page to the end of children of the page at given pos.
     virtual bool InsertSubPage(size_t pos,
                                wxWindow *page,
-                               const wxString& text,
+                               const std::string& text,
                                bool bSelect = false,
                                int imageId = NO_IMAGE);
 
     // Adds a new page at top level after all other pages.
     bool AddPage(wxWindow *page,
-                         const wxString& text,
+                         const std::string& text,
                          bool bSelect = false,
                          int imageId = NO_IMAGE) override;
 
     // Adds a new child-page to the last top-level page inserted.
     // Useful when constructing 1 level tree structure.
     virtual bool AddSubPage(wxWindow *page,
-                            const wxString& text,
+                            const std::string& text,
                             bool bSelect = false,
                             int imageId = NO_IMAGE);
 
@@ -128,8 +128,8 @@ wxTreebook(const wxTreebook&) = delete;
     // Standard operations inherited from wxBookCtrlBase
     // -------------------------------------------------
 
-    bool SetPageText(size_t n, const wxString& strText) override;
-    wxString GetPageText(size_t n) const override;
+    bool SetPageText(size_t n, const std::string& strText) override;
+    std::string GetPageText(size_t n) const override;
     int GetPageImage(size_t n) const override;
     bool SetPageImage(size_t n, int imageId) override;
     int SetSelection(size_t n) override { return DoSetSelection(n, SetSelection_SendEvent); }
@@ -163,16 +163,16 @@ private:
     // - update the index/TreeItemId corespondance array
     bool DoInsertPage(size_t pos,
                       wxWindow *page,
-                      const wxString& text,
+                      const std::string& text,
                       bool bSelect = false,
                       int imageId = NO_IMAGE);
     bool DoInsertSubPage(size_t pos,
                          wxWindow *page,
-                         const wxString& text,
+                         const std::string& text,
                          bool bSelect = false,
                          int imageId = NO_IMAGE);
     bool DoAddSubPage(wxWindow *page,
-                         const wxString& text,
+                         const std::string& text,
                          bool bSelect = false,
                          int imageId = NO_IMAGE);
 

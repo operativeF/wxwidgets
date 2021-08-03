@@ -48,7 +48,7 @@ USE_PROTOCOL(wxFTP)
 // Construction
 // --------------------------------------------------------------
 
-wxURL::wxURL(const wxString& url) : wxURI(url)
+wxURL::wxURL(const std::string& url) : wxURI(url)
 {
     Init(url);
     ParseURL();
@@ -66,7 +66,7 @@ wxURL::wxURL(const wxURL& url) : wxURI(url)
     ParseURL();
 }
 
-void wxURL::Init(const wxString& url)
+void wxURL::Init(const std::string& url)
 {
     m_protocol = nullptr;
     m_error = wxURL_NOERR;
@@ -78,7 +78,7 @@ void wxURL::Init(const wxString& url)
 #if wxUSE_PROTOCOL_HTTP
     if ( ms_useDefaultProxy && !ms_proxyDefault )
     {
-        SetDefaultProxy( wxGetenv(wxT("HTTP_PROXY")) );
+        SetDefaultProxy( boost::nowide::narrow(wxGetenv(L"HTTP_PROXY")) );
 
         if ( !ms_proxyDefault )
         {
@@ -97,7 +97,7 @@ void wxURL::Init(const wxString& url)
 // Assignment
 // --------------------------------------------------------------
 
-wxURL& wxURL::operator = (const wxString& url)
+wxURL& wxURL::operator = (const std::string& url)
 {
     wxURI::operator = (url);
     Free();
@@ -268,7 +268,7 @@ wxInputStream *wxURL::GetInputStream()
     {
         size_t dwPasswordPos = m_userinfo.find(':');
 
-        if (dwPasswordPos == wxString::npos)
+        if (dwPasswordPos == std::string::npos)
             m_protocol->SetUser(Unescape(m_userinfo));
         else
         {
@@ -316,7 +316,7 @@ wxInputStream *wxURL::GetInputStream()
     }
 #endif // wxUSE_SOCKETS
 
-    wxString fullPath;
+    std::string fullPath;
 
 #if wxUSE_PROTOCOL_HTTP
     // When we use a proxy, we have to pass the whole URL to it.
@@ -325,15 +325,15 @@ wxInputStream *wxURL::GetInputStream()
 #endif // wxUSE_PROTOCOL_HTTP
 
     if(m_path.empty())
-        fullPath += wxT("/");
+        fullPath += "/";
     else
         fullPath += m_path;
 
     if (HasQuery())
-        fullPath += wxT("?") + m_query;
+        fullPath += "?" + m_query;
 
     if (HasFragment())
-        fullPath += wxT("#") + m_fragment;
+        fullPath += "#" + m_fragment;
 
     wxInputStream *the_i_stream = m_protocol->GetInputStream(fullPath);
 
@@ -347,9 +347,9 @@ wxInputStream *wxURL::GetInputStream()
 }
 
 #if wxUSE_PROTOCOL_HTTP
-void wxURL::SetDefaultProxy(const wxString& url_proxy)
+void wxURL::SetDefaultProxy(const std::string& url_proxy)
 {
-    if ( !url_proxy )
+    if ( url_proxy.empty() )
     {
         if ( ms_proxyDefault )
         {
@@ -359,13 +359,13 @@ void wxURL::SetDefaultProxy(const wxString& url_proxy)
     }
     else
     {
-        wxString tmp_str = url_proxy;
-        int pos = tmp_str.Find(wxT(':'));
-        if (pos == wxNOT_FOUND)
+        std::string tmp_str = url_proxy;
+        int pos = tmp_str.find(':');
+        if (pos == std::string::npos)
             return;
 
-        wxString hostname = tmp_str(0, pos),
-        port = tmp_str(pos+1, tmp_str.length()-pos);
+        std::string hostname = tmp_str.substr(0, pos),
+        port = tmp_str.substr(pos+1, tmp_str.length() - pos);
         wxIPV4address addr;
 
         if (!addr.Hostname(hostname))
@@ -382,9 +382,9 @@ void wxURL::SetDefaultProxy(const wxString& url_proxy)
     }
 }
 
-void wxURL::SetProxy(const wxString& url_proxy)
+void wxURL::SetProxy(const std::string& url_proxy)
 {
-    if ( !url_proxy )
+    if ( url_proxy.empty() )
     {
         if ( m_proxy && m_proxy != ms_proxyDefault )
         {
@@ -398,14 +398,14 @@ void wxURL::SetProxy(const wxString& url_proxy)
     {
         wxIPV4address addr;
 
-        wxString tmp_str = url_proxy;
-        int pos = tmp_str.Find(wxT(':'));
+        std::string tmp_str = url_proxy;
+        int pos = tmp_str.find(':');
         // This is an invalid proxy name.
-        if (pos == wxNOT_FOUND)
+        if (pos == std::string::npos)
             return;
 
-        wxString hostname = tmp_str(0, pos);
-        wxString port = tmp_str(pos+1, tmp_str.length()-pos);
+        std::string hostname = tmp_str.substr(0, pos);
+        std::string port = tmp_str.substr(pos+1, tmp_str.length()-pos);
 
         addr.Hostname(hostname);
         addr.Service(port);

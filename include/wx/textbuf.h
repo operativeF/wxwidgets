@@ -186,7 +186,7 @@ protected:
 
     // Must implement these in derived classes.
     virtual bool OnExists() const = 0;
-    virtual bool OnOpen(const wxString &strBufferName,
+    virtual bool OnOpen(const std::string& strBufferName,
                         wxTextBufferOpenMode openmode) = 0;
     virtual bool OnClose() = 0;
     virtual bool OnRead(const wxMBConv& conv) = 0;

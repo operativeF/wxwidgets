@@ -263,7 +263,7 @@ bool wxAnyValueTypeImplInt::ConvertValue(const wxAnyValueBuffer& src,
         const wxLongLong ll(value);
         wxString s = ll.ToString();
 #else
-        wxString s = wxString::Format(wxS("%ld"), (long)value);
+        std::string s = fmt::format("{:ld}"), (long)value);
 #endif
         wxAnyValueTypeImpl<wxString>::SetValue(s, dst);
     }

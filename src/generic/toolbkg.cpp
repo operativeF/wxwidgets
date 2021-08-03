@@ -126,7 +126,7 @@ void wxToolbook::OnSize(wxSizeEvent& event)
 // accessing the pages
 // ----------------------------------------------------------------------------
 
-bool wxToolbook::SetPageText(size_t n, const wxString& strText)
+bool wxToolbook::SetPageText(size_t n, const std::string& strText)
 {
     const int toolId = PageToToolId(n);
     wxToolBarToolBase* tool = GetToolBar()->FindById(toolId);
@@ -139,14 +139,14 @@ bool wxToolbook::SetPageText(size_t n, const wxString& strText)
         return false;
 }
 
-wxString wxToolbook::GetPageText(size_t n) const
+std::string wxToolbook::GetPageText(size_t n) const
 {
     const int toolId = PageToToolId(n);
     wxToolBarToolBase* tool = GetToolBar()->FindById(toolId);
     if (tool)
         return tool->GetLabel();
     else
-        return wxEmptyString;
+        return {};
 }
 
 int wxToolbook::GetPageImage(size_t WXUNUSED(n)) const
@@ -271,7 +271,7 @@ void wxToolbook::OnIdle(wxIdleEvent& event)
 
 bool wxToolbook::InsertPage(size_t n,
                        wxWindow *page,
-                       const wxString& text,
+                       const std::string& text,
                        bool bSelect,
                        int imageId)
 {

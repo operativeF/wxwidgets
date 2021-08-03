@@ -123,11 +123,11 @@ public:
     // splits text up at newlines and places the lines into a vertical
     // wxBoxSizer, with the given maximum width, lines will not be wrapped
     // for negative values of widthMax
-    wxSizer *CreateTextSizer(const wxString& message, int widthMax = -1);
+    wxSizer *CreateTextSizer(const std::string& message, int widthMax = -1);
 
     // same as above but uses a customized wxTextSizerWrapper to create
     // non-standard controls for the lines
-    wxSizer *CreateTextSizer(const wxString& message,
+    wxSizer *CreateTextSizer(const std::string& message,
                              wxTextSizerWrapper& wrapper,
                              int widthMax = -1);
 #endif // wxUSE_STATTEXT // && wxUSE_TEXTCTRL

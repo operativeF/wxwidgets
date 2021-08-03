@@ -42,6 +42,9 @@
     #include "wx/msw/uxtheme.h"
 #endif
 
+#include "boost/nowide/convert.hpp"
+#include "boost/nowide/stackstring.hpp"
+
 // ----------------------------------------------------------------------------
 // macros
 // ----------------------------------------------------------------------------
@@ -353,13 +356,14 @@ int wxNotebook::ChangeSelection(size_t nPage)
     return selOld;
 }
 
-bool wxNotebook::SetPageText(size_t nPage, const wxString& strText)
+bool wxNotebook::SetPageText(size_t nPage, const std::string& strText)
 {
     wxCHECK_MSG( IS_VALID_PAGE(nPage), false, wxT("notebook page out of range") );
 
     TC_ITEM tcItem;
     tcItem.mask = TCIF_TEXT;
-    tcItem.pszText = wxMSW_CONV_LPTSTR(strText);
+    boost::nowide::wstackstring stackText(strText.c_str());
+    tcItem.pszText = stackText.get();
 
     if ( !HasFlag(wxNB_MULTILINE) )
         return TabCtrl_SetItem(GetHwnd(), nPage, &tcItem) != 0;
@@ -379,9 +383,9 @@ bool wxNotebook::SetPageText(size_t nPage, const wxString& strText)
     return ret;
 }
 
-wxString wxNotebook::GetPageText(size_t nPage) const
+std::string wxNotebook::GetPageText(size_t nPage) const
 {
-    wxCHECK_MSG( IS_VALID_PAGE(nPage), wxEmptyString, wxT("notebook page out of range") );
+    wxCHECK_MSG( IS_VALID_PAGE(nPage), "", "notebook page out of range" );
 
     wxChar buf[256];
     TC_ITEM tcItem;
@@ -600,7 +604,7 @@ bool wxNotebook::DeleteAllPages()
 // same as AddPage() but does it at given position
 bool wxNotebook::InsertPage(size_t nPage,
                             wxNotebookPage *pPage,
-                            const wxString& strText,
+                            const std::string& strText,
                             bool bSelect,
                             int imageId)
 {
@@ -629,7 +633,8 @@ bool wxNotebook::InsertPage(size_t nPage,
     if ( !strText.empty() )
     {
         tcItem.mask |= TCIF_TEXT;
-        tcItem.pszText = wxMSW_CONV_LPTSTR(strText);
+        boost::nowide::wstackstring stackText(strText.c_str());
+        tcItem.pszText = stackText.get();
     }
 
     // hide the page: unless it is selected, it shouldn't be shown (and if it
@@ -645,7 +650,7 @@ bool wxNotebook::InsertPage(size_t nPage,
     // finally do insert it
     if ( TabCtrl_InsertItem(GetHwnd(), nPage, &tcItem) == -1 )
     {
-        wxLogError(wxT("Can't create the notebook page '%s'."), strText.c_str());
+        wxLogError("Can't create the notebook page '%s'.", strText.c_str());
 
         return false;
     }
@@ -676,7 +681,7 @@ bool wxNotebook::InsertPage(size_t nPage,
         // are now big enough to fit all all of their pages on one row and
         // still reserve space for the second row of tabs, see #1792.
         const wxSize s = GetSize();
-        ::PostMessage(GetHwnd(), WM_SIZE, SIZE_RESTORED, MAKELPARAM(s.x, s.y));
+        ::PostMessageW(GetHwnd(), WM_SIZE, SIZE_RESTORED, MAKELPARAM(s.x, s.y));
     }
 
     // now deal with the selection
@@ -739,14 +744,14 @@ wxNotebookSpinBtnWndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
     if ( message == WM_ERASEBKGND )
         return 0;
 
-    return ::CallWindowProc(CASTWNDPROC gs_wndprocNotebookSpinBtn,
+    return ::CallWindowProcW(CASTWNDPROC gs_wndprocNotebookSpinBtn,
                             hwnd, message, wParam, lParam);
 }
 
 LRESULT APIENTRY
 wxNotebookWndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
-    return ::CallWindowProc(CASTWNDPROC gs_wndprocNotebook,
+    return ::CallWindowProcW(CASTWNDPROC gs_wndprocNotebook,
                             hwnd, message, wParam, lParam);
 }
 
@@ -912,7 +917,7 @@ void wxNotebook::OnSize(wxSizeEvent& event)
         if ( !s_isInOnSize )
         {
             s_isInOnSize = true;
-            SendMessage(GetHwnd(), WM_SIZE, SIZE_RESTORED,
+            ::SendMessageW(GetHwnd(), WM_SIZE, SIZE_RESTORED,
                     MAKELPARAM(rc.right, rc.bottom));
             s_isInOnSize = false;
         }

@@ -57,7 +57,7 @@ public:
     void Clear() override;
 
     int GetLineLength(long lineNo) const override;
-    wxString GetLineText(long lineNo) const override;
+    std::string GetLineText(long lineNo) const override;
     int GetNumberOfLines() const override;
 
     void SetMaxLength(unsigned long len) override;

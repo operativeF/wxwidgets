@@ -666,7 +666,7 @@ const std::string& wxApp::GetRegisteredClassName(const std::string& name,
         wndclass.lpszClassName = stackRegname.get();
         if ( !::RegisterClassW(&wndclass) )
         {
-            wxLogLastError(wxString::Format(wxT("RegisterClass(%s)"),
+            wxLogLastError(fmt::format("RegisterClass(%s)",
                            regClass.regname));
             return nullptr;
         }
@@ -680,7 +680,8 @@ const std::string& wxApp::GetRegisteredClassName(const std::string& name,
     {
         wxLogLastError(wxString::Format(wxT("RegisterClass(%s)"),
                        regClass.regname));
-        ::UnregisterClassW(boost::nowide::widen(regClass.regname).c_str(), wxGetInstance());
+        boost::nowide::wstackstring stackRegname(regClass.regname.c_str());
+        ::UnregisterClassW(stackRegname.get(), wxGetInstance());
         return nullptr;
     }
 

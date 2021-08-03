@@ -34,8 +34,8 @@ public:
     virtual ~wxTabControl(void);
 
     virtual void OnDraw(wxDC& dc, bool lastInRow);
-    void SetLabel(const wxString& str) { m_controlLabel = str; }
-    wxString GetLabel(void) const { return m_controlLabel; }
+    void SetLabel(const std::string& str) { m_controlLabel = str; }
+    const std::string& GetLabel(void) const { return m_controlLabel; }
 
     void SetFont(const wxFont& f) { m_labelFont = f; }
     wxFont *GetFont(void) const { return (wxFont*) & m_labelFont; }
@@ -63,8 +63,7 @@ public:
 
 protected:
     wxTabView*      m_view;
-    wxString        m_controlLabel;
-    bool            m_isSelected;
+    std::string     m_controlLabel;
     wxFont          m_labelFont;
     int             m_offsetX; // Offsets from top-left of tab view area (the area below the tabs)
     int             m_offsetY;
@@ -73,6 +72,8 @@ protected:
     int             m_id;
     int             m_rowPosition; // Position in row from 0
     int             m_colPosition; // Position in col from 0
+    bool            m_isSelected;
+
 };
 
 /*
@@ -107,15 +108,15 @@ public:
   inline wxWindow* GetWindow(void) const { return m_window; }
 
   // Automatically positions tabs
-  wxTabControl *AddTab(int id, const wxString& label, wxTabControl *existingTab = NULL);
+  wxTabControl *AddTab(int id, const std::string& label, wxTabControl *existingTab = NULL);
 
   // Remove the tab without deleting the window
   bool RemoveTab(int id);
 
   void ClearTabs(bool deleteTabs = true);
 
-  bool SetTabText(int id, const wxString& label);
-  wxString GetTabText(int id) const;
+  bool SetTabText(int id, const std::string& label);
+  std::string GetTabText(int id) const;
 
   // Layout tabs (optional, e.g. if resizing window)
   void LayoutTabs();

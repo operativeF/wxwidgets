@@ -75,18 +75,18 @@ wxEND_FLAGS( wxDialogStyle )
 wxIMPLEMENT_DYNAMIC_CLASS_XTI(wxDialog, wxTopLevelWindow, "wx/dialog.h");
 
 wxBEGIN_PROPERTIES_TABLE(wxDialog)
-wxPROPERTY( Title, wxString, SetTitle, GetTitle, wxString(), \
-           0 /*flags*/, wxT("Helpstring"), wxT("group"))
+wxPROPERTY( Title, std::string, SetTitle, GetTitle, "", \
+           0 /*flags*/, "Helpstring", "group")
 
 wxPROPERTY_FLAGS( WindowStyle, wxDialogStyle, long, SetWindowStyleFlag, \
                  GetWindowStyleFlag, wxEMPTY_PARAMETER_VALUE, 0 /*flags*/, \
-                 wxT("Helpstring"), wxT("group")) // style
+                 "Helpstring", "group") // style
 wxEND_PROPERTIES_TABLE()
 
 wxEMPTY_HANDLERS_TABLE(wxDialog)
 
 wxCONSTRUCTOR_6( wxDialog, wxWindow*, Parent, wxWindowID, Id, \
-                wxString, Title, wxPoint, Position, wxSize, Size, long, WindowStyle)
+                 std::string, Title, wxPoint, Position, wxSize, Size, long, WindowStyle)
 
 // ----------------------------------------------------------------------------
 // wxDialogBase
@@ -171,14 +171,14 @@ wxDialogBase::GetParentForModalDialog(wxWindow *parent, long style) const
 
 #if wxUSE_STATTEXT
 
-wxSizer *wxDialogBase::CreateTextSizer(const wxString& message, int widthMax)
+wxSizer *wxDialogBase::CreateTextSizer(const std::string& message, int widthMax)
 {
     wxTextSizerWrapper wrapper(this);
 
     return CreateTextSizer(message, wrapper, widthMax);
 }
 
-wxSizer *wxDialogBase::CreateTextSizer(const wxString& message,
+wxSizer *wxDialogBase::CreateTextSizer(const std::string& message,
                                        wxTextSizerWrapper& wrapper,
                                        int widthMax)
 {

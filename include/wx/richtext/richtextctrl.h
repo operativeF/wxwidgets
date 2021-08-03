@@ -252,7 +252,7 @@ public:
     /**
         Returns the text for the given line.
     */
-    wxString GetLineText(long lineNo) const override ;
+    std::string GetLineText(long lineNo) const override ;
 
     /**
         Returns the number of lines in the buffer.

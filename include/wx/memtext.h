@@ -30,7 +30,7 @@ protected:
     bool OnExists() const override
         { return false; }
 
-    bool OnOpen(const wxString & WXUNUSED(strBufferName),
+    bool OnOpen(const std::string& WXUNUSED(strBufferName),
                         wxTextBufferOpenMode WXUNUSED(OpenMode)) override
         { return true; }
 

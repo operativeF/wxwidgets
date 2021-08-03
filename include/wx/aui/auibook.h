@@ -295,8 +295,8 @@ public:
     wxWindow* GetPage(size_t pageIdx) const override;
     int GetPageIndex(wxWindow* pageWnd) const;
 
-    bool SetPageText(size_t page, const wxString& text) override;
-    wxString GetPageText(size_t pageIdx) const override;
+    bool SetPageText(size_t page, const std::string& text) override;
+    std::string GetPageText(size_t pageIdx) const override;
 
     bool SetPageToolTip(size_t page, const wxString& text);
     wxString GetPageToolTip(size_t pageIdx) const;
@@ -348,10 +348,10 @@ public:
 
     int ChangeSelection(size_t n) override;
 
-    bool AddPage(wxWindow *page, const wxString &text, bool select,
+    bool AddPage(wxWindow *page, const std::string &text, bool select,
                          int imageId) override;
     bool DeleteAllPages() override;
-    bool InsertPage(size_t index, wxWindow *page, const wxString &text,
+    bool InsertPage(size_t index, wxWindow *page, const std::string &text,
                             bool select, int imageId) override;
 
     wxSize DoGetBestSize() const override;

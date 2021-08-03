@@ -2148,7 +2148,7 @@ int wxAuiNotebook::GetPageIndex(wxWindow* page_wnd) const
 
 
 // SetPageText() changes the tab caption of the specified page
-bool wxAuiNotebook::SetPageText(size_t page_idx, const wxString& text)
+bool wxAuiNotebook::SetPageText(size_t page_idx, const std::string& text)
 {
     if (page_idx >= m_tabs.GetPageCount())
         return false;
@@ -2172,10 +2172,10 @@ bool wxAuiNotebook::SetPageText(size_t page_idx, const wxString& text)
 }
 
 // returns the page caption
-wxString wxAuiNotebook::GetPageText(size_t page_idx) const
+std::string wxAuiNotebook::GetPageText(size_t page_idx) const
 {
     if (page_idx >= m_tabs.GetPageCount())
-        return wxEmptyString;
+        return {};
 
     // update our own tab catalog
     const wxAuiNotebookPage& page_info = m_tabs.GetPage(page_idx);
@@ -3388,7 +3388,7 @@ int wxAuiNotebook::ChangeSelection(size_t n)
     return DoModifySelection(n, false);
 }
 
-bool wxAuiNotebook::AddPage(wxWindow *page, const wxString &text, bool select,
+bool wxAuiNotebook::AddPage(wxWindow *page, const std::string &text, bool select,
                             int imageId)
 {
     if(HasImageList())
@@ -3412,7 +3412,7 @@ bool wxAuiNotebook::DeleteAllPages()
 }
 
 bool wxAuiNotebook::InsertPage(size_t index, wxWindow *page,
-                               const wxString &text, bool select,
+                               const std::string &text, bool select,
                                int imageId)
 {
     if(HasImageList())

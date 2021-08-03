@@ -335,7 +335,7 @@ void wxBookCtrlBase::OnHelp(wxHelpEvent& event)
 bool
 wxBookCtrlBase::InsertPage(size_t nPage,
                            wxWindow *page,
-                           const wxString& WXUNUSED(text),
+                           const std::string& WXUNUSED(text),
                            bool WXUNUSED(bSelect),
                            int WXUNUSED(imageId))
 {

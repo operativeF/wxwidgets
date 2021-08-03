@@ -122,7 +122,7 @@ void wxRearrangeList::Swap(int pos1, int pos2)
     // and now also swap all the attributes of the items
 
     // first the label
-    const wxString stringTmp = GetString(pos1);
+    const std::string stringTmp = GetString(pos1);
     SetString(pos1, GetString(pos2));
     SetString(pos2, stringTmp);
 

@@ -210,14 +210,14 @@ void wxListbook::UpdateSize()
 // accessing the pages
 // ----------------------------------------------------------------------------
 
-bool wxListbook::SetPageText(size_t n, const wxString& strText)
+bool wxListbook::SetPageText(size_t n, const std::string& strText)
 {
     GetListView()->SetItemText(n, strText);
 
     return true;
 }
 
-wxString wxListbook::GetPageText(size_t n) const
+std::string wxListbook::GetPageText(size_t n) const
 {
     return GetListView()->GetItemText(n);
 }
@@ -304,7 +304,7 @@ void wxListbook::MakeChangedEvent(wxBookCtrlEvent &event)
 bool
 wxListbook::InsertPage(size_t n,
                        wxWindow *page,
-                       const wxString& text,
+                       const std::string& text,
                        bool bSelect,
                        int imageId)
 {

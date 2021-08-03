@@ -125,25 +125,25 @@ public:
                          int WXUNUSED(depth) = 1)
         { return false; }
 
-    virtual bool LoadFile(wxBitmap *WXUNUSED(bitmap), const wxString& WXUNUSED(name),
+    virtual bool LoadFile(wxBitmap *WXUNUSED(bitmap), const std::string& WXUNUSED(name),
                            wxBitmapType WXUNUSED(type), int WXUNUSED(desiredWidth),
                            int WXUNUSED(desiredHeight))
         { return false; }
 
-    virtual bool SaveFile(const wxBitmap *WXUNUSED(bitmap), const wxString& WXUNUSED(name),
+    virtual bool SaveFile(const wxBitmap *WXUNUSED(bitmap), const std::string& WXUNUSED(name),
                            wxBitmapType WXUNUSED(type), const wxPalette *WXUNUSED(palette) = NULL) const
         { return false; }
 
-    void SetName(const wxString& name)      { m_name = name; }
-    void SetExtension(const wxString& ext)  { m_extension = ext; }
+    void SetName(const std::string& name)      { m_name = name; }
+    void SetExtension(const std::string& ext)  { m_extension = ext; }
     void SetType(wxBitmapType type)         { m_type = type; }
-    const wxString& GetName() const         { return m_name; }
-    const wxString& GetExtension() const    { return m_extension; }
+    const std::string& GetName() const         { return m_name; }
+    const std::string& GetExtension() const    { return m_extension; }
     wxBitmapType GetType() const            { return m_type; }
 
 private:
-    wxString      m_name;
-    wxString      m_extension;
+    std::string      m_name;
+    std::string      m_extension;
     wxBitmapType  m_type;
 
     wxDECLARE_ABSTRACT_CLASS(wxBitmapHandler);
@@ -166,7 +166,7 @@ public:
     wxBitmap(int width, int height, int depth = wxBITMAP_SCREEN_DEPTH);
     wxBitmap(const wxSize& sz, int depth = wxBITMAP_SCREEN_DEPTH);
     wxBitmap(const char* const* bits);
-    wxBitmap(const wxString &filename, wxBitmapType type = wxBITMAP_TYPE_XPM);
+    wxBitmap(const std::string &filename, wxBitmapType type = wxBITMAP_TYPE_XPM);
     wxBitmap(const wxImage& image, int depth = wxBITMAP_SCREEN_DEPTH, double scale = 1.0);
 
     static void InitStandardHandlers();
@@ -203,9 +203,9 @@ public:
 
     virtual wxBitmap GetSubBitmap(const wxRect& rect) const = 0;
 
-    virtual bool SaveFile(const wxString &name, wxBitmapType type,
+    virtual bool SaveFile(const std::string& name, wxBitmapType type,
                           const wxPalette *palette = NULL) const = 0;
-    virtual bool LoadFile(const wxString &name, wxBitmapType type) = 0;
+    virtual bool LoadFile(const std::string& name, wxBitmapType type) = 0;
 
     /*
        If raw bitmap access is supported (see wx/rawbmp.h), the following
@@ -227,9 +227,9 @@ public:
     static inline wxList& GetHandlers() { return sm_handlers; }
     static void AddHandler(wxBitmapHandler *handler);
     static void InsertHandler(wxBitmapHandler *handler);
-    static bool RemoveHandler(const wxString& name);
-    static wxBitmapHandler *FindHandler(const wxString& name);
-    static wxBitmapHandler *FindHandler(const wxString& extension, wxBitmapType bitmapType);
+    static bool RemoveHandler(const std::string& name);
+    static wxBitmapHandler *FindHandler(const std::string& name);
+    static wxBitmapHandler *FindHandler(const std::string& extension, wxBitmapType bitmapType);
     static wxBitmapHandler *FindHandler(wxBitmapType bitmapType);
 
     //static void InitStandardHandlers();

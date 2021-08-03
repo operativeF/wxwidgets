@@ -37,7 +37,7 @@
 // wxTextFile class implementation
 // ============================================================================
 
-wxTextFile::wxTextFile(const wxString& strFileName)
+wxTextFile::wxTextFile(const std::string& strFileName)
           : wxTextBuffer(strFileName)
 {
 }
@@ -53,7 +53,7 @@ bool wxTextFile::OnExists() const
 }
 
 
-bool wxTextFile::OnOpen(const wxString &strBufferName, wxTextBufferOpenMode openMode)
+bool wxTextFile::OnOpen(const std::string& strBufferName, wxTextBufferOpenMode openMode)
 {
     wxFile::OpenMode fileOpenMode = wxFile::read_write;
 
@@ -71,7 +71,7 @@ bool wxTextFile::OnOpen(const wxString &strBufferName, wxTextBufferOpenMode open
     if ( fileOpenMode == wxFile::read_write )
     {
         // This must mean it hasn't been initialized in the switch above.
-        wxFAIL_MSG( wxT("unknown open mode in wxTextFile::Open") );
+        wxFAIL_MSG( "unknown open mode in wxTextFile::Open" );
         return false;
     }
 
@@ -88,7 +88,7 @@ bool wxTextFile::OnClose()
 bool wxTextFile::OnRead(const wxMBConv& conv)
 {
     // file should be opened
-    wxASSERT_MSG( m_file.IsOpened(), wxT("can't read closed file") );
+    wxASSERT_MSG( m_file.IsOpened(), "can't read closed file" );
 
     wxString str;
     if ( !m_file.ReadAll(&str, conv) )

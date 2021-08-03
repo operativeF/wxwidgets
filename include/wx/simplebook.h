@@ -47,7 +47,7 @@ public:
                  const wxPoint& pos = wxDefaultPosition,
                  const wxSize& size = wxDefaultSize,
                  long style = 0,
-                 const wxString& name = wxEmptyString)
+                 const std::string& name = {})
         : wxBookCtrlBase(parent, winid, pos, size, style | wxBK_TOP, name)
     {
         
@@ -74,7 +74,7 @@ public:
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 long style = 0,
-                const wxString& name = wxEmptyString)
+                const std::string& name = {})
     {
         return wxBookCtrlBase::Create(parent, winid, pos, size, style | wxBK_TOP, name);
     }
@@ -86,7 +86,7 @@ public:
     // by this control) and show it immediately.
     bool ShowNewPage(wxWindow* page)
     {
-        return AddPage(page, wxString(), true /* select it */);
+        return AddPage(page, std::string(), true /* select it */);
     }
 
 
@@ -121,7 +121,7 @@ public:
     // Page management
     bool InsertPage(size_t n,
                             wxWindow *page,
-                            const wxString& text,
+                            const std::string& text,
                             bool bSelect = false,
                             int imageId = NO_IMAGE) override
     {
@@ -148,18 +148,18 @@ public:
 
     // Neither labels nor images are supported but we still store the labels
     // just in case the user code attaches some importance to them.
-    bool SetPageText(size_t n, const wxString& strText) override
+    bool SetPageText(size_t n, const std::string& strText) override
     {
-        wxCHECK_MSG( n < GetPageCount(), false, wxS("Invalid page") );
+        wxCHECK_MSG( n < GetPageCount(), false, "Invalid page" );
 
         m_pageTexts[n] = strText;
 
         return true;
     }
 
-    wxString GetPageText(size_t n) const override
+    std::string GetPageText(size_t n) const override
     {
-        wxCHECK_MSG( n < GetPageCount(), wxString(), wxS("Invalid page") );
+        wxCHECK_MSG( n < GetPageCount(), "", "Invalid page" );
 
         return m_pageTexts[n];
     }
@@ -229,7 +229,7 @@ protected:
     }
 
 private:
-    std::vector<wxString> m_pageTexts;
+    std::vector<std::string> m_pageTexts;
 
     wxShowEffect m_showEffect,
                  m_hideEffect;

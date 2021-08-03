@@ -96,14 +96,14 @@ wxChoicebook::Create(wxWindow *parent,
 // accessing the pages
 // ----------------------------------------------------------------------------
 
-bool wxChoicebook::SetPageText(size_t n, const wxString& strText)
+bool wxChoicebook::SetPageText(size_t n, const std::string& strText)
 {
     GetChoiceCtrl()->SetString(n, strText);
 
     return true;
 }
 
-wxString wxChoicebook::GetPageText(size_t n) const
+std::string wxChoicebook::GetPageText(size_t n) const
 {
     return GetChoiceCtrl()->GetString(n);
 }
@@ -163,7 +163,7 @@ void wxChoicebook::MakeChangedEvent(wxBookCtrlEvent &event)
 bool
 wxChoicebook::InsertPage(size_t n,
                          wxWindow *page,
-                         const wxString& text,
+                         const std::string& text,
                          bool bSelect,
                          int imageId)
 {

@@ -24,6 +24,7 @@
 #include "wx/url.h"
 #include "wx/filesys.h"
 #include "wx/fs_inet.h"
+#include "wx/stringutils.h"
 
 
 namespace
@@ -52,19 +53,19 @@ protected:
     wxString m_filename;
 };
 
-wxString StripProtocolAnchor(const wxString& location)
+std::string StripProtocolAnchor(const std::string& location)
 {
-    wxString myloc(location.BeforeLast(wxT('#')));
-    if (myloc.empty()) myloc = location.AfterFirst(wxT(':'));
-    else myloc = myloc.AfterFirst(wxT(':'));
+    std::string myloc(wx::utils::BeforeLast(location, '#'));
+    if (myloc.empty()) myloc = wx::utils::AfterFirst(location, ':');
+    else myloc = wx::utils::AfterFirst(myloc, ':');
 
     // fix malformed url:
-    if (!myloc.Left(2).IsSameAs(wxT("//")))
+    if (!wx::utils::IsSameAsCase(myloc.substr(2), "//"))
     {
-        if (myloc.GetChar(0) != wxT('/')) myloc = wxT("//") + myloc;
-        else myloc = wxT("/") + myloc;
+        if (myloc.front() != '/') myloc = "//" + myloc;
+        else myloc = "/" + myloc;
     }
-    if (myloc.Mid(2).Find(wxT('/')) == wxNOT_FOUND) myloc << wxT('/');
+    if (myloc.substr(2).find('/') == std::string::npos) myloc += '/';
 
     return myloc;
 }
@@ -98,10 +99,10 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxFileSystemInternetModule, wxModule);
 bool wxInternetFSHandler::CanOpen(const wxString& location)
 {
 #if wxUSE_URL
-    wxString p = GetProtocol(location);
+    std::string p = GetProtocol(location);
     if ((p == wxT("http")) || (p == wxT("ftp")))
     {
-        wxURL url(p + wxT(":") + StripProtocolAnchor(location));
+        wxURL url(p + ":" + StripProtocolAnchor(location));
         return (url.GetError() == wxURL_NOERR);
     }
 #endif
@@ -115,8 +116,8 @@ wxFSFile* wxInternetFSHandler::OpenFile(wxFileSystem& WXUNUSED(fs),
 #if !wxUSE_URL
     return NULL;
 #else
-    wxString right =
-        GetProtocol(location) + wxT(":") + StripProtocolAnchor(location);
+    std::string right =
+        GetProtocol(location) + ":" + StripProtocolAnchor(location);
 
     wxURL url(right);
     if (url.GetError() == wxURL_NOERR)

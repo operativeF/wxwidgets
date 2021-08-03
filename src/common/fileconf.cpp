@@ -1133,7 +1133,7 @@ bool wxFileConfig::DeleteAll()
 
   
     m_pCurrentGroup =
-    m_pRootGroup    = new wxFileConfigGroup(nullptr, wxEmptyString, this);
+    m_pRootGroup    = new wxFileConfigGroup(nullptr, "", this);
 
     m_linesHead =
     m_linesTail = nullptr;

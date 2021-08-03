@@ -61,7 +61,7 @@ wxTreebook::Create(wxWindow *parent,
                    const wxPoint& pos,
                    const wxSize& size,
                    long style,
-                   const wxString& name)
+                   const std::string& name)
 {
     // Check the style flag to have either wxTBK_RIGHT or wxTBK_LEFT
     if ( (style & wxBK_ALIGN_MASK) == wxBK_DEFAULT )
@@ -105,7 +105,7 @@ wxTreebook::Create(wxWindow *parent,
 // insert a new page just before the pagePos
 bool wxTreebook::InsertPage(size_t pagePos,
                             wxWindow *page,
-                            const wxString& text,
+                            const std::string& text,
                             bool bSelect,
                             int imageId)
 {
@@ -114,21 +114,21 @@ bool wxTreebook::InsertPage(size_t pagePos,
 
 bool wxTreebook::InsertSubPage(size_t pagePos,
                                wxWindow *page,
-                               const wxString& text,
+                               const std::string& text,
                                bool bSelect,
                                int imageId)
 {
     return DoInsertSubPage(pagePos, page, text, bSelect, imageId);
 }
 
-bool wxTreebook::AddPage(wxWindow *page, const wxString& text, bool bSelect,
+bool wxTreebook::AddPage(wxWindow *page, const std::string& text, bool bSelect,
                          int imageId)
 {
     return DoInsertPage(m_treeIds.size(), page, text, bSelect, imageId);
 }
 
 // insertion time is linear to the number of top-pages
-bool wxTreebook::AddSubPage(wxWindow *page, const wxString& text, bool bSelect, int imageId)
+bool wxTreebook::AddSubPage(wxWindow *page, const std::string& text, bool bSelect, int imageId)
 {
     return DoAddSubPage(page, text, bSelect, imageId);
 }
@@ -136,7 +136,7 @@ bool wxTreebook::AddSubPage(wxWindow *page, const wxString& text, bool bSelect, 
 
 bool wxTreebook::DoInsertPage(size_t pagePos,
                               wxWindow *page,
-                              const wxString& text,
+                              const std::string& text,
                               bool bSelect,
                               int imageId)
 {
@@ -192,7 +192,7 @@ bool wxTreebook::DoInsertPage(size_t pagePos,
     return true;
 }
 
-bool wxTreebook::DoAddSubPage(wxWindow *page, const wxString& text, bool bSelect, int imageId)
+bool wxTreebook::DoAddSubPage(wxWindow *page, const std::string& text, bool bSelect, int imageId)
 {
     const wxTreeCtrl *tree = GetTreeCtrl();
 
@@ -212,7 +212,7 @@ bool wxTreebook::DoAddSubPage(wxWindow *page, const wxString& text, bool bSelect
 
 bool wxTreebook::DoInsertSubPage(size_t pagePos,
                                  wxTreebookPage *page,
-                                 const wxString& text,
+                                 const std::string& text,
                                  bool bSelect,
                                  int imageId)
 {
@@ -477,7 +477,7 @@ int wxTreebook::GetPageParent(size_t pagePos) const
     return parent.IsOk() ? DoInternalFindPageById(parent) : wxNOT_FOUND;
 }
 
-bool wxTreebook::SetPageText(size_t n, const wxString& strText)
+bool wxTreebook::SetPageText(size_t n, const std::string& strText)
 {
     const wxTreeItemId pageId = DoInternalGetPage(n);
 
@@ -488,11 +488,11 @@ bool wxTreebook::SetPageText(size_t n, const wxString& strText)
     return true;
 }
 
-wxString wxTreebook::GetPageText(size_t n) const
+std::string wxTreebook::GetPageText(size_t n) const
 {
     const wxTreeItemId pageId = DoInternalGetPage(n);
 
-    wxCHECK_MSG( pageId.IsOk(), wxString(), wxT("invalid tree item") );
+    wxCHECK_MSG( pageId.IsOk(), "", wxT("invalid tree item") );
 
     return GetTreeCtrl()->GetItemText(pageId);
 }

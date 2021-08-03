@@ -66,13 +66,13 @@ public:
 
 
     // overridden base class methods
-    bool SetPageText(size_t n, const wxString& strText) override;
-    wxString GetPageText(size_t n) const override;
+    bool SetPageText(size_t n, const std::string& strText) override;
+    std::string GetPageText(size_t n) const override;
     int GetPageImage(size_t n) const override;
     bool SetPageImage(size_t n, int imageId) override;
     bool InsertPage(size_t n,
                             wxWindow *page,
-                            const wxString& text,
+                            const std::string& text,
                             bool bSelect = false,
                             int imageId = NO_IMAGE) override;
     int SetSelection(size_t n) override { return DoSetSelection(n, SetSelection_SendEvent); }

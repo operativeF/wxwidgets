@@ -3688,7 +3688,7 @@ int wxRichTextCtrl::GetLineLength(long lineNo) const
     return GetFocusObject()->GetParagraphLength(lineNo);
 }
 
-wxString wxRichTextCtrl::GetLineText(long lineNo) const
+std::string wxRichTextCtrl::GetLineText(long lineNo) const
 {
     return GetFocusObject()->GetParagraphText(lineNo);
 }

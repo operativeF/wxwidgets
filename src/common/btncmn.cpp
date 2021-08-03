@@ -64,18 +64,18 @@ wxBEGIN_PROPERTIES_TABLE(wxButton)
 wxEVENT_PROPERTY( Click, wxEVT_BUTTON, wxCommandEvent )
 
 wxPROPERTY( Font, wxFont, SetFont, GetFont, wxEMPTY_PARAMETER_VALUE, \
-           0 /*flags*/, wxT("The font associated with the button label"), wxT("group"))
-wxPROPERTY( Label, wxString, SetLabel, GetLabel, wxString(), \
-           0 /*flags*/, wxT("The button label"), wxT("group") )
+           0 /*flags*/, "The font associated with the button label", "group")
+wxPROPERTY( Label, std::string, SetLabel, GetLabel, "", \
+           0 /*flags*/, "The button label", "group")
 
 wxPROPERTY_FLAGS( WindowStyle, wxButtonStyle, long, SetWindowStyleFlag, \
                  GetWindowStyleFlag, wxEMPTY_PARAMETER_VALUE, 0 /*flags*/,     \
-                 wxT("The button style"), wxT("group")) // style
+                 "The button style", "group") // style
 wxEND_PROPERTIES_TABLE()
 
 wxEMPTY_HANDLERS_TABLE(wxButton)
 
-wxCONSTRUCTOR_6( wxButton, wxWindow*, Parent, wxWindowID, Id, wxString, \
+wxCONSTRUCTOR_6( wxButton, wxWindow*, Parent, wxWindowID, Id, std::string, \
                 Label, wxPoint, Position, wxSize, Size, long, WindowStyle )
 
 
@@ -88,7 +88,7 @@ wxWindow *wxButtonBase::SetDefault()
     wxTopLevelWindow * const
         tlw = wxDynamicCast(wxGetTopLevelParent(this), wxTopLevelWindow);
 
-    wxCHECK_MSG( tlw, nullptr, wxT("button without top level window?") );
+    wxCHECK_MSG( tlw, nullptr, "button without top level window?");
 
     return tlw->SetDefaultItem(this);
 }

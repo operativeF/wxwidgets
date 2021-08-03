@@ -91,7 +91,7 @@ void wxBitmapBase::InsertHandler(wxBitmapHandler *handler)
     sm_handlers.Insert(handler);
 }
 
-bool wxBitmapBase::RemoveHandler(const wxString& name)
+bool wxBitmapBase::RemoveHandler(const std::string& name)
 {
     wxBitmapHandler *handler = FindHandler(name);
     if ( handler )
@@ -103,7 +103,7 @@ bool wxBitmapBase::RemoveHandler(const wxString& name)
         return false;
 }
 
-wxBitmapHandler *wxBitmapBase::FindHandler(const wxString& name)
+wxBitmapHandler *wxBitmapBase::FindHandler(std::string_view name)
 {
     wxList::compatibility_iterator node = sm_handlers.GetFirst();
     while ( node )
@@ -116,7 +116,7 @@ wxBitmapHandler *wxBitmapBase::FindHandler(const wxString& name)
     return NULL;
 }
 
-wxBitmapHandler *wxBitmapBase::FindHandler(const wxString& extension, wxBitmapType bitmapType)
+wxBitmapHandler *wxBitmapBase::FindHandler(std::string_view extension, wxBitmapType bitmapType)
 {
     wxList::compatibility_iterator node = sm_handlers.GetFirst();
     while ( node )

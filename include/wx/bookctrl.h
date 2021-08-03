@@ -103,8 +103,8 @@ public:
     virtual int GetSelection() const { return m_selection; }
 
     // set/get the title of a page
-    virtual bool SetPageText(size_t n, const wxString& strText) = 0;
-    virtual wxString GetPageText(size_t n) const = 0;
+    virtual bool SetPageText(size_t n, const std::string& strText) = 0;
+    virtual std::string GetPageText(size_t n) const = 0;
 
 
     // image list stuff: each page may have an image associated with it (all
@@ -174,7 +174,7 @@ public:
 
     // adds a new page to the control
     virtual bool AddPage(wxWindow *page,
-                         const wxString& text,
+                         const std::string& text,
                          bool bSelect = false,
                          int imageId = NO_IMAGE)
     {
@@ -185,7 +185,7 @@ public:
     // the same as AddPage(), but adds the page at the specified position
     virtual bool InsertPage(size_t n,
                             wxWindow *page,
-                            const wxString& text,
+                            const std::string& text,
                             bool bSelect = false,
                             int imageId = NO_IMAGE) = 0;
 

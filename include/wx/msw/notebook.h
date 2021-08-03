@@ -59,8 +59,8 @@ public:
   int ChangeSelection(size_t nPage) override;
 
     // set/get the title of a page
-  bool SetPageText(size_t nPage, const wxString& strText) override;
-  wxString GetPageText(size_t nPage) const override;
+  bool SetPageText(size_t nPage, const std::string& strText) override;
+  std::string GetPageText(size_t nPage) const override;
 
   // image list stuff: each page may have an image associated with it. All
   // the images belong to an image list, so you have to
@@ -93,7 +93,7 @@ public:
     // don't delete it yourself). If bSelect, this page becomes active.
   bool InsertPage(size_t nPage,
                   wxNotebookPage *pPage,
-                  const wxString& strText,
+                  const std::string& strText,
                   bool bSelect = false,
                   int imageId = NO_IMAGE) override;
 

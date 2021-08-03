@@ -972,7 +972,7 @@ wxDateTime wxDateTime::GetBeginDST(int year, Country country)
         if ( !dt.SetToLastWeekDay(Sun, Mar, year) )
         {
             // weird...
-            wxFAIL_MSG( wxT("no last Sunday in March?") );
+            wxFAIL_MSG( "no last Sunday in March?" );
         }
 
         dt += wxTimeSpan::Hours(1);
@@ -1015,7 +1015,7 @@ wxDateTime wxDateTime::GetBeginDST(int year, Country country)
                         if ( !dt.SetToLastWeekDay(Sun, Apr, year) )
                         {
                             // weird...
-                            wxFAIL_MSG( wxT("no first Sunday in April?") );
+                            wxFAIL_MSG( "no first Sunday in April?" );
                         }
                     }
                     else if ( year > 2006 )

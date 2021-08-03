@@ -30,7 +30,7 @@ class WXDLLIMPEXP_BASE wxTextFile : public wxTextBuffer
 public:
     // constructors
     wxTextFile() = default;
-    wxTextFile(const wxString& strFileName);
+    wxTextFile(const std::string& strFileName);
 
     wxTextFile(const wxTextFile&) = delete;
     wxTextFile& operator=(const wxTextFile&) = delete;
@@ -40,7 +40,7 @@ public:
 protected:
     // implement the base class pure virtuals
     bool OnExists() const override;
-    bool OnOpen(const wxString &strBufferName,
+    bool OnOpen(const std::string &strBufferName,
                         wxTextBufferOpenMode openMode) override;
     bool OnClose() override;
     bool OnRead(const wxMBConv& conv) override;

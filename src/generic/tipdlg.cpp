@@ -66,7 +66,7 @@ private:
 class WXDLLIMPEXP_CORE wxRegTipProvider : public wxTipProvider
 {
 public:
-    explicit wxRegTipProvider(const wxString& keyname);
+    explicit wxRegTipProvider(const std::string& keyname);
 
     std::string GetTip() override;
 };

@@ -46,20 +46,20 @@ public:
 class WXDLLIMPEXP_NET wxURL : public wxURI
 {
 public:
-    wxURL(const wxString& sUrl = wxEmptyString);
+    wxURL(const std::string& sUrl = {});
     wxURL(const wxURI& uri);
     wxURL(const wxURL& url);
     ~wxURL() override;
 
-    wxURL& operator = (const wxString& url);
+    wxURL& operator = (const std::string& url);
     wxURL& operator = (const wxURI& uri);
     wxURL& operator = (const wxURL& url);
 
     wxProtocol& GetProtocol()        { return *m_protocol; }
     wxURLError GetError() const      { return m_error; }
-    wxString GetURL() const          { return m_url; }
+    const std::string& GetURL() const          { return m_url; }
 
-    wxURLError SetURL(const wxString &url)
+    wxURLError SetURL(const std::string &url)
         { *this = url; return m_error; }
 
     bool IsOk() const
@@ -68,8 +68,8 @@ public:
     wxInputStream *GetInputStream();
 
 #if wxUSE_PROTOCOL_HTTP
-    static void SetDefaultProxy(const wxString& url_proxy);
-    void SetProxy(const wxString& url_proxy);
+    static void SetDefaultProxy(const std::string& url_proxy);
+    void SetProxy(const std::string& url_proxy);
 #endif // wxUSE_PROTOCOL_HTTP
 
 protected:
@@ -95,9 +95,9 @@ protected:
     wxProtocol *m_protocol;
 
     wxURLError m_error;
-    wxString m_url;
+    std::string m_url;
 
-    void Init(const wxString&);
+    void Init(const std::string&);
     bool ParseURL();
     void CleanData();
     void Free();

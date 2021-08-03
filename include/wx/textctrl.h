@@ -544,16 +544,16 @@ public:
     // ------------
 
     virtual int GetLineLength(long lineNo) const = 0;
-    virtual wxString GetLineText(long lineNo) const = 0;
+    virtual std::string GetLineText(long lineNo) const = 0;
     virtual int GetNumberOfLines() const = 0;
 
 
     // file IO
     // -------
 
-    bool LoadFile(const wxString& file, int fileType = wxTEXT_TYPE_ANY)
+    bool LoadFile(const std::string& file, int fileType = wxTEXT_TYPE_ANY)
         { return DoLoadFile(file, fileType); }
-    bool SaveFile(const wxString& file = wxEmptyString,
+    bool SaveFile(const std::string& file = {},
                   int fileType = wxTEXT_TYPE_ANY);
 
     // dirty flag handling
@@ -625,7 +625,7 @@ protected:
 
     // the name of the last file loaded with LoadFile() which will be used by
     // SaveFile() by default
-    wxString m_filename;
+    std::string m_filename;
 
     // the text style which will be used for any new text added to the control
     wxTextAttr m_defaultStyle;

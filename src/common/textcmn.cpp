@@ -100,7 +100,7 @@ wxEVENT_PROPERTY( TextEnter, wxEVT_TEXT_ENTER, wxCommandEvent )
 
 wxPROPERTY( Font, wxFont, SetFont, GetFont , wxEMPTY_PARAMETER_VALUE, \
            0 /*flags*/, wxT("Helpstring"), wxT("group") )
-wxPROPERTY( Value, wxString, SetValue, GetValue, wxString(), \
+wxPROPERTY( Value, std::string, SetValue, GetValue, "", \
            0 /*flags*/, wxT("Helpstring"), wxT("group"))
 
 wxPROPERTY_FLAGS( WindowStyle, wxTextCtrlStyle, long, SetWindowStyleFlag, \
@@ -111,7 +111,7 @@ wxEND_PROPERTIES_TABLE()
 wxEMPTY_HANDLERS_TABLE(wxTextCtrl)
 
 wxCONSTRUCTOR_6( wxTextCtrl, wxWindow*, Parent, wxWindowID, Id, \
-                wxString, Value, wxPoint, Position, wxSize, Size, \
+                std::string, Value, wxPoint, Position, wxSize, Size, \
                 long, WindowStyle)
 
 
@@ -939,9 +939,9 @@ bool wxTextAreaBase::DoSaveFile(const std::string& filename, int WXUNUSED(fileTy
     return false;
 }
 
-bool wxTextAreaBase::SaveFile(const wxString& filename, int fileType)
+bool wxTextAreaBase::SaveFile(const std::string& filename, int fileType)
 {
-    wxString filenameToUse = filename.empty() ? m_filename : filename;
+    std::string filenameToUse = filename.empty() ? m_filename : filename;
     if ( filenameToUse.empty() )
     {
         // what kind of message to give? is it an error or a program bug?
