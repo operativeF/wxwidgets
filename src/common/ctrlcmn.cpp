@@ -589,7 +589,7 @@ std::string wxControlBase::Ellipsize(std::string_view label, const wxDC& dc,
         auto ch = *pc;
         if ( pc == label.end() || ch == '\n' )
         {
-            wx::utils::TrimFollowingSpace(curLine);
+            wx::utils::TrimTrailingSpace(curLine);
 
             curLine = DoEllipsizeSingleLine(curLine, dc, mode, maxFinalWidth,
                                             replacementWidth, flags);

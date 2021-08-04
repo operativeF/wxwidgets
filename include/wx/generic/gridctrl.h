@@ -15,8 +15,8 @@
 
 #if wxUSE_GRID
 
-inline constexpr wxChar wxGRID_VALUE_CHOICEINT[]    = wxT("choiceint");
-inline constexpr wxChar wxGRID_VALUE_DATETIME[]     = wxT("datetime");
+inline constexpr char wxGRID_VALUE_CHOICEINT[]    = "choiceint";
+inline constexpr char wxGRID_VALUE_DATETIME[]     = "datetime";
 
 
 // the default renderer for the cells containing string data
@@ -76,7 +76,7 @@ public:
                                   wxDC& dc) override;
 
     // Optional parameters for this renderer are "<min>,<max>".
-    void SetParameters(const wxString& params) override;
+    void SetParameters(const std::string& params) override;
 
     wxGridCellRenderer *Clone() const override
         { return new wxGridCellNumberRenderer(m_minValue, m_maxValue); }
@@ -84,8 +84,8 @@ public:
 protected:
     std::string GetString(const wxGrid& grid, int row, int col);
 
-    long m_minValue,
-         m_maxValue;
+    long m_minValue;
+    long m_maxValue;
 };
 
 class WXDLLIMPEXP_CORE wxGridCellFloatRenderer : public wxGridCellStringRenderer
@@ -118,7 +118,7 @@ public:
 
     // parameters string format is "width[,precision[,format]]"
     // with format being one of f|e|g|E|F|G
-    void SetParameters(const wxString& params) override;
+    void SetParameters(const std::string& params) override;
 
     wxGridCellRenderer *Clone() const override;
 
@@ -131,7 +131,7 @@ private:
         m_precision;
 
     int m_style;
-    wxString m_format;
+    std::string m_format;
 };
 
 // renderer for boolean fields
@@ -199,7 +199,7 @@ public:
     wxGridCellRenderer *Clone() const override;
 
     // output strptime()-like format string
-    void SetParameters(const wxString& params) override;
+    void SetParameters(const std::string& params) override;
 
 protected:
     std::string GetString(const wxGrid& grid, int row, int col);
@@ -209,7 +209,7 @@ protected:
     virtual void
     GetDateParseParams(wxGridPrivate::DateParseParams& params) const;
 
-    wxString m_oformat;
+    std::string m_oformat;
     wxDateTime::TimeZone m_tz;
 };
 
@@ -228,7 +228,7 @@ protected:
     void
     GetDateParseParams(wxGridPrivate::DateParseParams& params) const override;
 
-    wxString m_iformat;
+    std::string m_iformat;
 };
 
 #endif // wxUSE_DATETIME
@@ -245,7 +245,7 @@ public:
                                   wxDC& dc) override;
 
     // Parameters string is a comma-separated list of values.
-    void SetParameters(const wxString& params) override;
+    void SetParameters(const std::string& params) override;
 
     wxGridCellRenderer *Clone() const override
     {
@@ -258,7 +258,7 @@ protected:
     {
     }
 
-    std::vector<wxString> m_choices;
+    std::vector<std::string> m_choices;
 };
 
 

@@ -1012,21 +1012,21 @@ public:
     wxGridTypeRegistry() = default;
     ~wxGridTypeRegistry();
 
-    void RegisterDataType(const wxString& typeName,
+    void RegisterDataType(const std::string& typeName,
                      wxGridCellRenderer* renderer,
                      wxGridCellEditor* editor);
 
     // find one of already registered data types
-    int FindRegisteredDataType(const wxString& typeName);
+    int FindRegisteredDataType(const std::string& typeName);
 
     // try to FindRegisteredDataType(), if this fails and typeName is one of
     // standard typenames, register it and return its index
-    int FindDataType(const wxString& typeName);
+    int FindDataType(const std::string& typeName);
 
     // try to FindDataType(), if it fails see if it is not one of already
     // registered data types with some params in which case clone the
     // registered data type and set params for it
-    int FindOrCloneDataType(const wxString& typeName);
+    int FindOrCloneDataType(const std::string& typeName);
 
     wxGridCellRenderer* GetRenderer(int index);
     wxGridCellEditor*   GetEditor(int index);

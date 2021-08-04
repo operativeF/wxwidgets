@@ -58,6 +58,7 @@
 
 // Required for wxIs... functions
 #include <cctype>
+#include <charconv>
 
 // ============================================================================
 // implementation
@@ -506,7 +507,7 @@ void wxGridCellTextEditor::BeginEdit(int row, int col, wxGrid* grid)
     DoBeginEdit(m_value);
 }
 
-void wxGridCellTextEditor::DoBeginEdit(const wxString& startValue)
+void wxGridCellTextEditor::DoBeginEdit(const std::string& startValue)
 {
     Text()->SetValue(startValue);
     Text()->SetInsertionPointEnd();
@@ -517,13 +518,13 @@ void wxGridCellTextEditor::DoBeginEdit(const wxString& startValue)
 bool wxGridCellTextEditor::EndEdit(int WXUNUSED(row),
                                    int WXUNUSED(col),
                                    const wxGrid* WXUNUSED(grid),
-                                   const wxString& WXUNUSED(oldval),
-                                   wxString *newval)
+                                   const std::string& WXUNUSED(oldval),
+                                   std::string *newval)
 {
     wxCHECK_MSG( m_control, false,
                  "wxGridCellTextEditor must be created first!" );
 
-    const wxString value = Text()->GetValue();
+    const std::string value = Text()->GetValue();
     if ( value == m_value )
         return false;
 
@@ -548,7 +549,7 @@ void wxGridCellTextEditor::Reset()
     DoReset(m_value);
 }
 
-void wxGridCellTextEditor::DoReset(const wxString& startValue)
+void wxGridCellTextEditor::DoReset(const std::string& startValue)
 {
     Text()->SetValue(startValue);
     Text()->SetInsertionPointEnd();
@@ -616,7 +617,7 @@ void wxGridCellTextEditor::HandleReturn( wxKeyEvent&
 #if defined(__WXMOTIF__) || defined(__WXGTK__)
     // wxMotif needs a little extra help...
     size_t pos = (size_t)( Text()->GetInsertionPoint() );
-    wxString s( Text()->GetValue() );
+    std::string s( Text()->GetValue() );
     s = s.Left(pos) + wxT("\n") + s.Mid(pos);
     Text()->SetValue(s);
     Text()->SetInsertionPoint( pos );
@@ -627,19 +628,21 @@ void wxGridCellTextEditor::HandleReturn( wxKeyEvent&
 #endif
 }
 
-void wxGridCellTextEditor::SetParameters(const wxString& params)
+void wxGridCellTextEditor::SetParameters(const std::string& params)
 {
-    if ( !params )
+    if ( params.empty() )
     {
         // reset to default
         m_maxChars = 0;
     }
     else
     {
-        long tmp;
-        if ( params.ToLong(&tmp) )
+        size_t tmp;
+        auto [p, ec] = std::from_chars(params.data(), params.data() + params.size(), tmp);
+
+        if ( ec == std::errc() )
         {
-            m_maxChars = (size_t)tmp;
+            m_maxChars = tmp;
         }
         else
         {
@@ -670,7 +673,7 @@ wxGridCellEditor *wxGridCellTextEditor::Clone() const
 }
 
 // return the value in the text control
-wxString wxGridCellTextEditor::GetValue() const
+std::string wxGridCellTextEditor::GetValue() const
 {
     return Text()->GetValue();
 }
@@ -754,8 +757,11 @@ void wxGridCellNumberEditor::BeginEdit(int row, int col, wxGrid* grid)
     else
     {
         m_value = 0;
-        wxString sValue = table->GetValue(row, col);
-        if (! sValue.ToLong(&m_value) && ! sValue.empty())
+        std::string sValue = table->GetValue(row, col);
+
+        auto [p, ec] = std::from_chars(sValue.data(), sValue.data() + sValue.size(), m_value);
+
+        if ( ec != std::errc() )
         {
             wxFAIL_MSG( wxT("this cell doesn't have numeric value") );
             return;
@@ -781,10 +787,11 @@ void wxGridCellNumberEditor::BeginEdit(int row, int col, wxGrid* grid)
 bool wxGridCellNumberEditor::EndEdit(int WXUNUSED(row),
                                      int WXUNUSED(col),
                                      const wxGrid* WXUNUSED(grid),
-                                     const wxString& oldval, wxString *newval)
+                                     const std::string& oldval,
+                                     std::string *newval)
 {
     long value = 0;
-    wxString text;
+    std::string text;
 
 #if wxUSE_SPINCTRL
     if ( HasRange() )
@@ -793,7 +800,7 @@ bool wxGridCellNumberEditor::EndEdit(int WXUNUSED(row),
         if ( value == m_value )
             return false;
 
-        text.Printf(wxT("%ld"), value);
+        text = fmt::format("{:ld}", value);
     }
     else // using unconstrained input
 #endif // wxUSE_SPINCTRL
@@ -806,7 +813,9 @@ bool wxGridCellNumberEditor::EndEdit(int WXUNUSED(row),
         }
         else // non-empty text now (maybe 0)
         {
-            if ( !text.ToLong(&value) )
+            auto [p, ec] = std::from_chars(text.data(), text.data() + text.size(), value);
+
+            if ( ec != std::errc() )
                 return false;
 
             // if value == m_value == 0 but old text was "" and new one is
@@ -830,7 +839,7 @@ void wxGridCellNumberEditor::ApplyEdit(int row, int col, wxGrid* grid)
     if ( table->CanSetValueAs(row, col, wxGRID_VALUE_NUMBER) )
         table->SetValueAsLong(row, col, m_value);
     else
-        table->SetValue(row, col, wxString::Format("%ld", m_value));
+        table->SetValue(row, col, fmt::format("{:ld}", m_value));
 }
 
 void wxGridCellNumberEditor::Reset()
@@ -900,9 +909,9 @@ void wxGridCellNumberEditor::StartingKey(wxKeyEvent& event)
     event.Skip();
 }
 
-void wxGridCellNumberEditor::SetParameters(const wxString& params)
+void wxGridCellNumberEditor::SetParameters(const std::string& params)
 {
-    if ( !params )
+    if ( params.empty() )
     {
         // reset to default
         m_min =
@@ -910,14 +919,23 @@ void wxGridCellNumberEditor::SetParameters(const wxString& params)
     }
     else
     {
-        long tmp;
-        if ( params.BeforeFirst(wxT(',')).ToLong(&tmp) )
-        {
-            m_min = (int)tmp;
+        int tmpBefore{ 0 };
 
-            if ( params.AfterFirst(wxT(',')).ToLong(&tmp) )
+        auto beforeParam = wx::utils::BeforeFirst(params, ',');
+        auto [bp, bc] = std::from_chars(beforeParam.data(), beforeParam.data() + beforeParam.size(), tmpBefore);
+
+        if ( bc == std::errc() )
+        {
+            m_min = tmpBefore;
+
+            int tmpAfter{0};
+
+            auto afterParam = wx::utils::AfterFirst(params, ',');
+            auto [ap, ac] = std::from_chars(afterParam.data(), afterParam.data() + afterParam.size(), tmpAfter);
+
+            if ( ac == std::errc() )
             {
-                m_max = (int)tmp;
+                m_max = tmpAfter;
 
                 // skip the error message below
                 return;
@@ -929,15 +947,15 @@ void wxGridCellNumberEditor::SetParameters(const wxString& params)
 }
 
 // return the value in the spin control if it is there (the text control otherwise)
-wxString wxGridCellNumberEditor::GetValue() const
+std::string wxGridCellNumberEditor::GetValue() const
 {
-    wxString s;
+    std::string s;
 
 #if wxUSE_SPINCTRL
     if ( HasRange() )
     {
         long value = Spin()->GetValue();
-        s.Printf(wxT("%ld"), value);
+        s = fmt::format("{:ld}", value);
     }
     else
 #endif
@@ -984,12 +1002,14 @@ void wxGridCellFloatEditor::BeginEdit(int row, int col, wxGrid* grid)
     {
         m_value = 0.0;
 
-        const wxString value = table->GetValue(row, col);
+        const std::string value = table->GetValue(row, col);
         if ( !value.empty() )
         {
-            if ( !value.ToDouble(&m_value) )
+            auto [p, ec] = std::from_chars(value.data(), value.data() + value.size(), m_value);
+
+            if ( ec != std::errc() )
             {
-                wxFAIL_MSG( wxT("this cell doesn't have float value") );
+                wxFAIL_MSG( "this cell doesn't have float value" );
                 return;
             }
         }
@@ -1001,22 +1021,23 @@ void wxGridCellFloatEditor::BeginEdit(int row, int col, wxGrid* grid)
 bool wxGridCellFloatEditor::EndEdit(int WXUNUSED(row),
                                     int WXUNUSED(col),
                                     const wxGrid* WXUNUSED(grid),
-                                    const wxString& oldval, wxString *newval)
+                                    const std::string& oldval, std::string *newval)
 {
-    const wxString text(Text()->GetValue());
+    const std::string text(Text()->GetValue());
 
-    double value;
+    double value{0.0};
+
     if ( !text.empty() )
     {
-        if ( !text.ToDouble(&value) )
+        auto [p, ec] = std::from_chars(text.data(), text.data() + text.size(), value);
+
+        if ( ec != std::errc() )
             return false;
     }
     else // new value is empty string
     {
         if ( oldval.empty() )
             return false;           // nothing changed
-
-        value = 0.;
     }
 
     // the test for empty strings ensures that we don't skip the value setting
@@ -1075,9 +1096,10 @@ void wxGridCellFloatEditor::StartingKey(wxKeyEvent& event)
     event.Skip();
 }
 
-void wxGridCellFloatEditor::SetParameters(const wxString& params)
+// FIXME: Temporary, make a struct of the params.
+void wxGridCellFloatEditor::SetParameters(const std::string& params)
 {
-    if ( !params )
+    if ( params.empty() )
     {
         // reset to default
         m_width =
@@ -1087,61 +1109,46 @@ void wxGridCellFloatEditor::SetParameters(const wxString& params)
     }
     else
     {
-        wxString rest;
-        wxString tmp = params.BeforeFirst(wxT(','), &rest);
-        if ( !tmp.empty() )
+        auto paramSplit = wx::utils::StrSplit(params, ',');
+
+        auto [pWidth, errW] = std::from_chars(paramSplit[0].data(), paramSplit[0].data() + paramSplit[0].size(), m_width);
+        auto [pPrec, errP] = std::from_chars(paramSplit[1].data(), paramSplit[1].data() + paramSplit[1].size(), m_precision);
+
+        if ( !paramSplit[0].empty() && errW != std::errc() )
         {
-            long width;
-            if ( tmp.ToLong(&width) )
-            {
-                m_width = (int)width;
-            }
-            else
-            {
-                wxLogDebug(wxT("Invalid wxGridCellFloatRenderer width parameter string '%s ignored"), params.c_str());
-            }
+            wxLogDebug("Invalid wxGridCellFloatRenderer width parameter string '%s ignored", params.c_str());
         }
 
-        tmp = rest.BeforeFirst(wxT(','));
-        if ( !tmp.empty() )
+        if ( !paramSplit[1].empty() && errP != std::errc() )
         {
-            long precision;
-            if ( tmp.ToLong(&precision) )
-            {
-                m_precision = (int)precision;
-            }
-            else
-            {
-                wxLogDebug(wxT("Invalid wxGridCellFloatRenderer precision parameter string '%s ignored"), params.c_str());
-            }
+            wxLogDebug("Invalid wxGridCellFloatRenderer precision parameter string '%s ignored", params.c_str());
         }
 
-        tmp = rest.AfterFirst(wxT(','));
-        if ( !tmp.empty() )
+        if ( !paramSplit[2].empty() )
         {
-            if ( tmp[0] == wxT('f') )
+            if ( paramSplit[2] == 'f' )
             {
                 m_style = wxGRID_FLOAT_FORMAT_FIXED;
             }
-            else if ( tmp[0] == wxT('e') )
+            else if ( paramSplit[2] == 'e' )
             {
                 m_style = wxGRID_FLOAT_FORMAT_SCIENTIFIC;
             }
-            else if ( tmp[0] == wxT('g') )
+            else if ( paramSplit[2] == 'g' )
             {
                 m_style = wxGRID_FLOAT_FORMAT_COMPACT;
             }
-            else if ( tmp[0] == wxT('E') )
+            else if ( paramSplit[2] == 'E' )
             {
                 m_style = wxGRID_FLOAT_FORMAT_SCIENTIFIC |
                           wxGRID_FLOAT_FORMAT_UPPER;
             }
-            else if ( tmp[0] == wxT('F') )
+            else if ( paramSplit[2] == 'F' )
             {
                 m_style = wxGRID_FLOAT_FORMAT_FIXED |
                           wxGRID_FLOAT_FORMAT_UPPER;
             }
-            else if ( tmp[0] == wxT('G') )
+            else if ( paramSplit[2] == 'G' )
             {
                 m_style = wxGRID_FLOAT_FORMAT_COMPACT |
                           wxGRID_FLOAT_FORMAT_UPPER;
@@ -1155,40 +1162,40 @@ void wxGridCellFloatEditor::SetParameters(const wxString& params)
     }
 }
 
-wxString wxGridCellFloatEditor::GetString()
+std::string wxGridCellFloatEditor::GetString()
 {
-    if ( !m_format )
+    if ( m_format.empty() )
     {
         if ( m_precision == -1 && m_width != -1)
         {
             // default precision
-            m_format.Printf(wxT("%%%d."), m_width);
+            m_format = fmt::format("%%%d.", m_width);
         }
         else if ( m_precision != -1 && m_width == -1)
         {
             // default width
-            m_format.Printf(wxT("%%.%d"), m_precision);
+            m_format = fmt::format("%%.%d", m_precision);
         }
         else if ( m_precision != -1 && m_width != -1 )
         {
-            m_format.Printf(wxT("%%%d.%d"), m_width, m_precision);
+            m_format = fmt::format("%%%d.%d", m_width, m_precision);
         }
         else
         {
             // default width/precision
-            m_format = wxT("%");
+            m_format = "%";
         }
 
         bool isUpper = (m_style & wxGRID_FLOAT_FORMAT_UPPER) != 0;
         if ( m_style & wxGRID_FLOAT_FORMAT_SCIENTIFIC )
-            m_format += isUpper ? wxT('E') : wxT('e');
+            m_format += isUpper ? 'E' : 'e';
         else if ( m_style & wxGRID_FLOAT_FORMAT_COMPACT )
-            m_format += isUpper ? wxT('G') : wxT('g');
+            m_format += isUpper ? 'G' : 'g';
         else
-            m_format += wxT('f');
+            m_format += 'f';
     }
 
-    return wxString::Format(m_format, m_value);
+    return fmt::format(m_format, m_value);
 }
 
 bool wxGridCellFloatEditor::IsAcceptedKey(wxKeyEvent& event)
@@ -1229,7 +1236,7 @@ bool wxGridCellFloatEditor::IsAcceptedKey(wxKeyEvent& event)
 // ----------------------------------------------------------------------------
 
 // the default values for GetValue()
-wxString wxGridCellBoolEditor::ms_stringValues[2] = { wxT(""), wxT("1") };
+std::string wxGridCellBoolEditor::ms_stringValues[2] = { "", "1" };
 
 wxGridActivationResult
 wxGridCellBoolEditor::TryActivate(int row, int col, wxGrid* grid,
@@ -1360,8 +1367,8 @@ void wxGridCellBoolEditor::BeginEdit(int row, int col, wxGrid* grid)
 bool wxGridCellBoolEditor::EndEdit(int WXUNUSED(row),
                                    int WXUNUSED(col),
                                    const wxGrid* WXUNUSED(grid),
-                                   const wxString& WXUNUSED(oldval),
-                                   wxString *newval)
+                                   const std::string& WXUNUSED(oldval),
+                                   std::string* newval)
 {
     bool value = CBox()->GetValue();
     if ( value == m_value )
@@ -1429,21 +1436,21 @@ void wxGridCellBoolEditor::StartingKey(wxKeyEvent& event)
     }
 }
 
-wxString wxGridCellBoolEditor::GetValue() const
+std::string wxGridCellBoolEditor::GetValue() const
 {
   return GetStringValue(CBox()->GetValue());
 }
 
 /* static */ void
-wxGridCellBoolEditor::UseStringValues(const wxString& valueTrue,
-                                      const wxString& valueFalse)
+wxGridCellBoolEditor::UseStringValues(const std::string& valueTrue,
+                                      const std::string& valueFalse)
 {
     ms_stringValues[false] = valueFalse;
     ms_stringValues[true] = valueTrue;
 }
 
 /* static */ bool
-wxGridCellBoolEditor::IsTrueValue(const wxString& value)
+wxGridCellBoolEditor::IsTrueValue(const std::string& value)
 {
     return value == ms_stringValues[true];
 }
@@ -1584,10 +1591,10 @@ void wxGridCellChoiceEditor::BeginEdit(int row, int col, wxGrid* grid)
 bool wxGridCellChoiceEditor::EndEdit(int WXUNUSED(row),
                                      int WXUNUSED(col),
                                      const wxGrid* WXUNUSED(grid),
-                                     const wxString& WXUNUSED(oldval),
-                                     wxString *newval)
+                                     const std::string& WXUNUSED(oldval),
+                                     std::string *newval)
 {
-    const wxString value = Combo()->GetValue();
+    const std::string value = Combo()->GetValue();
     if ( value == m_value )
         return false;
 
@@ -1621,9 +1628,9 @@ void wxGridCellChoiceEditor::Reset()
     }
 }
 
-void wxGridCellChoiceEditor::SetParameters(const wxString& params)
+void wxGridCellChoiceEditor::SetParameters(const std::string& params)
 {
-    if ( !params )
+    if ( params.empty() )
     {
         // what can we do?
         return;
@@ -1645,7 +1652,7 @@ void wxGridCellChoiceEditor::SetParameters(const wxString& params)
 }
 
 // return the value in the text control
-wxString wxGridCellChoiceEditor::GetValue() const
+std::string wxGridCellChoiceEditor::GetValue() const
 {
   return Combo()->GetValue();
 }
@@ -1709,12 +1716,11 @@ void wxGridCellEnumEditor::BeginEdit(int row, int col, wxGrid* grid)
     }
     else
     {
-        wxString startValue = table->GetValue(row, col);
-        if (startValue.IsNumber() && !startValue.empty())
-        {
-            startValue.ToLong(&m_index);
-        }
-        else
+        std::string startValue = table->GetValue(row, col);
+
+        auto [p, ec] = std::from_chars(startValue.data(), startValue.data() + startValue.size(), m_index);
+
+        if( ec != std::errc() )
         {
             m_index = -1;
         }
@@ -1744,8 +1750,8 @@ void wxGridCellEnumEditor::BeginEdit(int row, int col, wxGrid* grid)
 bool wxGridCellEnumEditor::EndEdit(int WXUNUSED(row),
                                    int WXUNUSED(col),
                                    const wxGrid* WXUNUSED(grid),
-                                   const wxString& WXUNUSED(oldval),
-                                   wxString *newval)
+                                   const std::string& WXUNUSED(oldval),
+                                   std::string *newval)
 {
     long idx = Combo()->GetSelection();
     if ( idx == m_index )
@@ -1754,7 +1760,7 @@ bool wxGridCellEnumEditor::EndEdit(int WXUNUSED(row),
     m_index = idx;
 
     if ( newval )
-        newval->Printf("%ld", m_index);
+        *newval = fmt::format("{:ld}", m_index);
 
     return true;
 }
@@ -1765,7 +1771,7 @@ void wxGridCellEnumEditor::ApplyEdit(int row, int col, wxGrid* grid)
     if ( table->CanSetValueAs(row, col, wxGRID_VALUE_NUMBER) )
         table->SetValueAsLong(row, col, m_index);
     else
-        table->SetValue(row, col, wxString::Format("%ld", m_index));
+        table->SetValue(row, col, fmt::format("{:ld}", m_index));
 }
 
 #endif // wxUSE_COMBOBOX
@@ -1834,12 +1840,12 @@ struct wxGridCellDateEditorKeyHandler
 };
 #endif // __WXGTK__
 
-wxGridCellDateEditor::wxGridCellDateEditor(const wxString& format)
+wxGridCellDateEditor::wxGridCellDateEditor(const std::string& format)
 {
     SetParameters(format);
 }
 
-void wxGridCellDateEditor::SetParameters(const wxString& params)
+void wxGridCellDateEditor::SetParameters(const std::string& params)
 {
     if ( params.empty() )
         m_format = "%x";
@@ -1912,8 +1918,8 @@ void wxGridCellDateEditor::BeginEdit(int row, int col, wxGrid* grid)
 
 bool wxGridCellDateEditor::EndEdit(int WXUNUSED(row), int WXUNUSED(col),
                                    const wxGrid* WXUNUSED(grid),
-                                   const wxString& WXUNUSED(oldval),
-                                   wxString *newval)
+                                   const std::string& WXUNUSED(oldval),
+                                   std::string *newval)
 {
     wxASSERT_MSG(m_control, "The wxGridCellDateEditor must be created first!");
 
@@ -1951,7 +1957,7 @@ wxGridCellEditor *wxGridCellDateEditor::Clone() const
     return new wxGridCellDateEditor(m_format);
 }
 
-wxString wxGridCellDateEditor::GetValue() const
+std::string wxGridCellDateEditor::GetValue() const
 {
     wxASSERT_MSG(m_control, "The wxGridCellDateEditor must be created first!");
 

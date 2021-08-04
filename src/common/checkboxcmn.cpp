@@ -57,21 +57,21 @@ wxBEGIN_PROPERTIES_TABLE(wxCheckBox)
     wxEVENT_PROPERTY( Click, wxEVT_CHECKBOX, wxCommandEvent )
 
     wxPROPERTY( Font, wxFont, SetFont, GetFont, wxEMPTY_PARAMETER_VALUE, \
-                0 /*flags*/, wxT("Helpstring"), wxT("group"))
-    wxPROPERTY( Label,wxString, SetLabel, GetLabel, wxString(), \
-                0 /*flags*/, wxT("Helpstring"), wxT("group"))
+                0 /*flags*/, "Helpstring", "group")
+    wxPROPERTY( Label, std::string, SetLabel, GetLabel, "", \
+                0 /*flags*/, "Helpstring", "group")
     wxPROPERTY( Value,bool, SetValue, GetValue, wxEMPTY_PARAMETER_VALUE, \
-                0 /*flags*/, wxT("Helpstring"), wxT("group"))
+                0 /*flags*/, "Helpstring", "group")
 
     wxPROPERTY_FLAGS( WindowStyle, wxCheckBoxStyle, long, SetWindowStyleFlag, \
                       GetWindowStyleFlag, wxEMPTY_PARAMETER_VALUE, 0 /*flags*/, \
-                      wxT("Helpstring"), wxT("group")) // style
+                      "Helpstring", "group") // style
 wxEND_PROPERTIES_TABLE()
 
 wxEMPTY_HANDLERS_TABLE(wxCheckBox)
 
 wxCONSTRUCTOR_6( wxCheckBox, wxWindow*, Parent, wxWindowID, Id, \
-                 wxString, Label, wxPoint, Position, wxSize, Size, long, WindowStyle )
+                 std::string, Label, wxPoint, Position, wxSize, Size, long, WindowStyle )
 
 
 #endif // wxUSE_CHECKBOX

@@ -49,7 +49,7 @@ public:
 
     bool Realize() override;
 
-    void SetToolShortHelp(int id, const wxString& helpString) override;
+    void SetToolShortHelp(int id, const std::string& helpString) override;
     wxToolBarToolBase *FindToolForPosition(wxCoord x, wxCoord y) const override;
 
 protected:
@@ -65,15 +65,15 @@ protected:
     void DoSetToggle(wxToolBarToolBase *tool, bool toggle) override;
 
     virtual wxToolBarToolBase *CreateTool(int id,
-                                          const wxString& label,
+                                          const std::string& label,
                                           const wxBitmap& bmpNormal,
                                           const wxBitmap& bmpDisabled,
                                           wxItemKind kind,
                                           wxObject *clientData,
-                                          const wxString& shortHelp,
-                                          const wxString& longHelp) override;
+                                          const std::string& shortHelp,
+                                          const std::string& longHelp) override;
     virtual wxToolBarToolBase *CreateTool(wxControl *control,
-                                          const wxString& label) override;
+                                          const std::string& label) override;
 
     wxSize DoGetBestClientSize() const override;
 

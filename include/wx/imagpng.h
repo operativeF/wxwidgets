@@ -20,13 +20,13 @@
 #include "wx/image.h"
 #include "wx/versioninfo.h"
 
-inline constexpr wxChar wxIMAGE_OPTION_PNG_FORMAT[]                   = wxT("PngFormat");
-inline constexpr wxChar wxIMAGE_OPTION_PNG_BITDEPTH[]                 = wxT("PngBitDepth");
-inline constexpr wxChar wxIMAGE_OPTION_PNG_FILTER[]                   = wxT("PngF");
-inline constexpr wxChar wxIMAGE_OPTION_PNG_COMPRESSION_LEVEL[]        = wxT("PngZL");
-inline constexpr wxChar wxIMAGE_OPTION_PNG_COMPRESSION_MEM_LEVEL[]    = wxT("PngZM");
-inline constexpr wxChar wxIMAGE_OPTION_PNG_COMPRESSION_STRATEGY[]     = wxT("PngZS");
-inline constexpr wxChar wxIMAGE_OPTION_PNG_COMPRESSION_BUFFER_SIZE[]  = wxT("PngZB");
+constexpr char wxIMAGE_OPTION_PNG_FORMAT[]                   = "PngFormat";
+constexpr char wxIMAGE_OPTION_PNG_BITDEPTH[]                 = "PngBitDepth";
+constexpr char wxIMAGE_OPTION_PNG_FILTER[]                   = "PngF";
+constexpr char wxIMAGE_OPTION_PNG_COMPRESSION_LEVEL[]        = "PngZL";
+constexpr char wxIMAGE_OPTION_PNG_COMPRESSION_MEM_LEVEL[]    = "PngZM";
+constexpr char wxIMAGE_OPTION_PNG_COMPRESSION_STRATEGY[]     = "PngZS";
+constexpr char wxIMAGE_OPTION_PNG_COMPRESSION_BUFFER_SIZE[]  = "PngZB";
 
 enum
 {
@@ -41,10 +41,10 @@ class WXDLLIMPEXP_CORE wxPNGHandler: public wxImageHandler
 public:
     wxPNGHandler()
     {
-        m_name = wxT("PNG file");
-        m_extension = wxT("png");
+        m_name = "PNG file";
+        m_extension = "png";
         m_type = wxBITMAP_TYPE_PNG;
-        m_mime = wxT("image/png");
+        m_mime = "image/png";
     }
 
     static wxVersionInfo GetLibraryVersionInfo();

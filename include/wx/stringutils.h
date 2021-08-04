@@ -81,7 +81,7 @@ inline CONSTEXPR_CONTAINER void TrimLeadingSpace(std::string& str)
 }
 
 // FIXME: Not valid for unicode strings.
-inline CONSTEXPR_CONTAINER void TrimFollowingSpace(std::string& str)
+inline CONSTEXPR_CONTAINER void TrimTrailingSpace(std::string& str)
 {
     auto it = std::find_if_not(str.rbegin(), str.rend(), detail::isWhitespace);
 

@@ -1375,8 +1375,8 @@ TEST_CASE_FIXTURE(GridTestCase, "Grid::WindowAsEditorControl")
 
         void BeginEdit(int, int, wxGrid*) override {}
 
-        bool EndEdit(int, int, wxGrid const*, wxString const&,
-                     wxString* newval) override
+        bool EndEdit(int, int, wxGrid const*, std::string const&,
+                     std::string* newval) override
         {
             *newval = GetValue();
             return true;
@@ -1391,7 +1391,7 @@ TEST_CASE_FIXTURE(GridTestCase, "Grid::WindowAsEditorControl")
 
         wxGridCellEditor* Clone() const override { return new TestEditor(); }
 
-        wxString GetValue() const override { return "value"; }
+        std::string GetValue() const override { return "value"; }
     };
 
     wxGridCellAttr* attr = new wxGridCellAttr();

@@ -22,11 +22,11 @@ class WXDLLIMPEXP_CORE wxTGAHandler : public wxImageHandler
 public:
     wxTGAHandler()
     {
-        m_name = wxT("TGA file");
-        m_extension = wxT("tga");
-        m_altExtensions.push_back(wxT("tpic"));
+        m_name = "TGA file";
+        m_extension = "tga";
+        m_altExtensions.push_back("tpic");
         m_type = wxBITMAP_TYPE_TGA;
-        m_mime = wxT("image/tga");
+        m_mime = "image/tga";
     }
 
 #if wxUSE_STREAMS

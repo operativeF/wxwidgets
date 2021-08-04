@@ -246,7 +246,7 @@ int wxGridColumnOperations::GetFirstLine(const wxGrid *grid, wxGridWindow *gridW
 // wxGridCellRenderer and wxGridCellEditor managing ref counting
 // ----------------------------------------------------------------------------
 
-void wxGridCellWorker::SetParameters(const wxString& WXUNUSED(params))
+void wxGridCellWorker::SetParameters(const std::string& WXUNUSED(params))
 {
     // nothing to do
 }
@@ -1653,14 +1653,9 @@ std::string wxGridTableBase::GetColLabelValue( int col )
             break;
     }
 
-    // reverse the string...
-    wxString s2;
-    for ( unsigned int i = 0; i < n; i++ )
-    {
-        s2 += s[n - i - 1];
-    }
+    std::reverse(s.begin(), s.end());
 
-    return s2;
+    return s;
 }
 
 std::string wxGridTableBase::GetCornerLabelValue() const
@@ -1668,18 +1663,18 @@ std::string wxGridTableBase::GetCornerLabelValue() const
     return {};
 }
 
-wxString wxGridTableBase::GetTypeName( int WXUNUSED(row), int WXUNUSED(col) )
+std::string wxGridTableBase::GetTypeName( int WXUNUSED(row), int WXUNUSED(col) )
 {
     return wxGRID_VALUE_STRING;
 }
 
 bool wxGridTableBase::CanGetValueAs( int WXUNUSED(row), int WXUNUSED(col),
-                                     const wxString& typeName )
+                                     const std::string& typeName )
 {
     return typeName == wxGRID_VALUE_STRING;
 }
 
-bool wxGridTableBase::CanSetValueAs( int row, int col, const wxString& typeName )
+bool wxGridTableBase::CanSetValueAs( int row, int col, const std::string& typeName )
 {
     return CanGetValueAs(row, col, typeName);
 }
@@ -1715,13 +1710,13 @@ void wxGridTableBase::SetValueAsBool( int WXUNUSED(row), int WXUNUSED(col),
 }
 
 void* wxGridTableBase::GetValueAsCustom( int WXUNUSED(row), int WXUNUSED(col),
-                                         const wxString& WXUNUSED(typeName) )
+                                         const std::string& WXUNUSED(typeName) )
 {
     return nullptr;
 }
 
 void  wxGridTableBase::SetValueAsCustom( int WXUNUSED(row), int WXUNUSED(col),
-                                         const wxString& WXUNUSED(typeName),
+                                         const std::string& WXUNUSED(typeName),
                                          void* WXUNUSED(value) )
 {
 }
@@ -1869,9 +1864,9 @@ bool wxGridStringTable::DeleteRows( size_t pos, size_t numRows )
 
     if ( pos >= curNumRows )
     {
-        wxFAIL_MSG( wxString::Format
+        wxFAIL_MSG( fmt::format
                     (
-                        wxT("Called wxGridStringTable::DeleteRows(pos=%lu, N=%lu)\nPos value is invalid for present table with %lu rows"),
+                        "Called wxGridStringTable::DeleteRows(pos={:lu}, N={:lu})\nPos value is invalid for present table with {:lu} rows",
                         (unsigned long)pos,
                         (unsigned long)numRows,
                         (unsigned long)curNumRows
@@ -1973,9 +1968,9 @@ bool wxGridStringTable::DeleteCols( size_t pos, size_t numCols )
 
     if ( pos >= curNumCols )
     {
-        wxFAIL_MSG( wxString::Format
+        wxFAIL_MSG( fmt::format
                     (
-                        wxT("Called wxGridStringTable::DeleteCols(pos=%lu, N=%lu)\nPos value is invalid for present table with %lu cols"),
+                        "Called wxGridStringTable::DeleteCols(pos={:lu}, N={:lu})\nPos value is invalid for present table with {:lu} cols",
                         (unsigned long)pos,
                         (unsigned long)numCols,
                         (unsigned long)curNumCols
@@ -5516,7 +5511,7 @@ wxGrid::SendEvent(wxEventType type,
 // Generate a grid event of specified type, return value same as above
 //
 wxGrid::EventResult
-wxGrid::SendEvent(wxEventType type, int row, int col, const wxString& s)
+wxGrid::SendEvent(wxEventType type, int row, int col, const std::string& s)
 {
     wxGridEvent gridEvt( GetId(), type, this, row, col );
     gridEvt.SetString(s);
@@ -6069,7 +6064,7 @@ void wxGrid::OnKeyDown( wxKeyEvent& event )
                         break;
                     }
 
-                    wxString buf;
+                    std::string buf;
                     for ( int row = sel.GetTopRow(); row <= sel.GetBottomRow(); row++ )
                     {
                         bool first = true;
@@ -7431,7 +7426,7 @@ bool wxGrid::DoShowCellEditControl(const wxGridActivationSource& actSource)
 
                 case Event_Unhandled:
                 case Event_Handled:
-                    const wxString& oldval = GetCellValue(m_currentCellCoords);
+                    const std::string& oldval = GetCellValue(m_currentCellCoords);
 
                     editor->DoActivate(row, col, this);
 
@@ -7670,11 +7665,11 @@ void wxGrid::DoSaveEditControlValue()
     int row = m_currentCellCoords.GetRow();
     int col = m_currentCellCoords.GetCol();
 
-    wxString oldval = GetCellValue(m_currentCellCoords);
+    std::string oldval = GetCellValue(m_currentCellCoords);
 
     wxGridCellEditorPtr editor = GetCurrentCellEditorPtr();
 
-    wxString newval;
+    std::string newval;
     if ( !editor->EndEdit(row, col, this, oldval, &newval) )
         return;
 
@@ -8897,7 +8892,7 @@ void wxGrid::SetCornerLabelTextOrientation( int textOrientation )
         m_cornerLabelWin->Refresh();
 }
 
-void wxGrid::SetRowLabelValue( int row, const wxString& s )
+void wxGrid::SetRowLabelValue( int row, const std::string& s )
 {
     if ( m_table )
     {
@@ -8916,7 +8911,7 @@ void wxGrid::SetRowLabelValue( int row, const wxString& s )
     }
 }
 
-void wxGrid::SetColLabelValue( int col, const wxString& s )
+void wxGrid::SetColLabelValue( int col, const std::string& s )
 {
     if ( m_table )
     {
@@ -8942,7 +8937,7 @@ void wxGrid::SetColLabelValue( int col, const wxString& s )
     }
 }
 
-void wxGrid::SetCornerLabelValue( const wxString& s )
+void wxGrid::SetCornerLabelValue( const std::string& s )
 {
     if ( m_table )
     {
@@ -9406,26 +9401,26 @@ void wxGrid::SetColFormatNumber(int col)
 
 void wxGrid::SetColFormatFloat(int col, int width, int precision)
 {
-    wxString typeName = wxGRID_VALUE_FLOAT;
+    std::string typeName = wxGRID_VALUE_FLOAT;
     if ( (width != -1) || (precision != -1) )
     {
-        typeName << wxT(':') << width << wxT(',') << precision;
+        typeName += fmt::format(":{},{}", width, precision);
     }
 
     SetColFormatCustom(col, typeName);
 }
 
-void wxGrid::SetColFormatDate(int col, const wxString& format)
+void wxGrid::SetColFormatDate(int col, const std::string& format)
 {
-    wxString typeName = wxGRID_VALUE_DATE;
+    std::string typeName = wxGRID_VALUE_DATE;
     if ( !format.empty() )
     {
-        typeName << ':' << format;
+        typeName += ':' + format;
     }
     SetColFormatCustom(col, typeName);
 }
 
-void wxGrid::SetColFormatCustom(int col, const wxString& typeName)
+void wxGrid::SetColFormatCustom(int col, const std::string& typeName)
 {
     wxGridCellAttr *attr = m_table->GetAttr(-1, col, wxGridCellAttr::Col );
     if (!attr)
@@ -9602,7 +9597,7 @@ void wxGrid::SetReadOnly(int row, int col, bool isReadOnly)
 // Data type registration
 // ----------------------------------------------------------------------------
 
-void wxGrid::RegisterDataType(const wxString& typeName,
+void wxGrid::RegisterDataType(const std::string& typeName,
                               wxGridCellRenderer* renderer,
                               wxGridCellEditor* editor)
 {
@@ -9615,7 +9610,7 @@ wxGridCellEditor * wxGrid::GetDefaultEditorForCell(int row, int col) const
     if ( !m_table )
         return nullptr;
 
-    wxString typeName = m_table->GetTypeName(row, col);
+    std::string typeName = m_table->GetTypeName(row, col);
     return GetDefaultEditorForType(typeName);
 }
 
@@ -9624,16 +9619,16 @@ wxGridCellRenderer * wxGrid::GetDefaultRendererForCell(int row, int col) const
     if ( !m_table )
         return nullptr;
 
-    wxString typeName = m_table->GetTypeName(row, col);
+    std::string typeName = m_table->GetTypeName(row, col);
     return GetDefaultRendererForType(typeName);
 }
 
-wxGridCellEditor * wxGrid::GetDefaultEditorForType(const wxString& typeName) const
+wxGridCellEditor * wxGrid::GetDefaultEditorForType(const std::string& typeName) const
 {
     int index = m_typeRegistry->FindOrCloneDataType(typeName);
     if ( index == wxNOT_FOUND )
     {
-        wxFAIL_MSG(wxString::Format(wxT("Unknown data type name [%s]"), typeName.c_str()));
+        wxFAIL_MSG(fmt::format("Unknown data type name [{:s}]", typeName.c_str()));
 
         return nullptr;
     }
@@ -9641,12 +9636,12 @@ wxGridCellEditor * wxGrid::GetDefaultEditorForType(const wxString& typeName) con
     return m_typeRegistry->GetEditor(index);
 }
 
-wxGridCellRenderer * wxGrid::GetDefaultRendererForType(const wxString& typeName) const
+wxGridCellRenderer * wxGrid::GetDefaultRendererForType(const std::string& typeName) const
 {
     int index = m_typeRegistry->FindOrCloneDataType(typeName);
     if ( index == wxNOT_FOUND )
     {
-        wxFAIL_MSG(wxString::Format(wxT("Unknown data type name [%s]"), typeName.c_str()));
+        wxFAIL_MSG(fmt::format("Unknown data type name [{:s}]", typeName.c_str()));
 
         return nullptr;
     }
@@ -10446,7 +10441,7 @@ wxCoord wxGrid::CalcColOrRowLabelAreaMinSize(wxGridDirection direction)
     {
         lines.clear();
 
-        wxString label = calcRows ? GetRowLabelValue(rowOrCol)
+        std::string label = calcRows ? GetRowLabelValue(rowOrCol)
                                   : GetColLabelValue(rowOrCol);
         StringToLines(label, lines);
 
@@ -11167,7 +11162,7 @@ wxGridTypeRegistry::~wxGridTypeRegistry()
         delete m_typeinfo[i];
 }
 
-void wxGridTypeRegistry::RegisterDataType(const wxString& typeName,
+void wxGridTypeRegistry::RegisterDataType(const std::string& typeName,
                                           wxGridCellRenderer* renderer,
                                           wxGridCellEditor* editor)
 {
@@ -11186,7 +11181,7 @@ void wxGridTypeRegistry::RegisterDataType(const wxString& typeName,
     }
 }
 
-int wxGridTypeRegistry::FindRegisteredDataType(const wxString& typeName)
+int wxGridTypeRegistry::FindRegisteredDataType(const std::string& typeName)
 {
     size_t count = m_typeinfo.GetCount();
     for ( size_t i = 0; i < count; i++ )
@@ -11200,7 +11195,7 @@ int wxGridTypeRegistry::FindRegisteredDataType(const wxString& typeName)
     return wxNOT_FOUND;
 }
 
-int wxGridTypeRegistry::FindDataType(const wxString& typeName)
+int wxGridTypeRegistry::FindDataType(const std::string& typeName)
 {
     int index = FindRegisteredDataType(typeName);
     if ( index == wxNOT_FOUND )
@@ -11270,14 +11265,14 @@ int wxGridTypeRegistry::FindDataType(const wxString& typeName)
     return index;
 }
 
-int wxGridTypeRegistry::FindOrCloneDataType(const wxString& typeName)
+int wxGridTypeRegistry::FindOrCloneDataType(const std::string& typeName)
 {
     int index = FindDataType(typeName);
     if ( index == wxNOT_FOUND )
     {
         // the first part of the typename is the "real" type, anything after ':'
         // are the parameters for the renderer
-        index = FindDataType(typeName.BeforeFirst(wxT(':')));
+        index = FindDataType(wx::utils::BeforeFirst(typeName, ':'));
         if ( index == wxNOT_FOUND )
         {
             return wxNOT_FOUND;
@@ -11290,7 +11285,7 @@ int wxGridTypeRegistry::FindOrCloneDataType(const wxString& typeName)
             editor = wxGridCellEditorPtr(GetEditor(index))->Clone();
 
         // do it even if there are no parameters to reset them to defaults
-        wxString params = typeName.AfterFirst(wxT(':'));
+        std::string params = wx::utils::AfterFirst(typeName, ':');
         renderer->SetParameters(params);
         editor->SetParameters(params);
 

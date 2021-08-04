@@ -22,10 +22,10 @@ class WXDLLIMPEXP_CORE wxXPMHandler : public wxImageHandler
 public:
     wxXPMHandler()
     {
-        m_name = wxT("XPM file");
-        m_extension = wxT("xpm");
+        m_name = "XPM file";
+        m_extension = "xpm";
         m_type = wxBITMAP_TYPE_XPM;
-        m_mime = wxT("image/xpm");
+        m_mime = "image/xpm";
     }
 
 #if wxUSE_STREAMS

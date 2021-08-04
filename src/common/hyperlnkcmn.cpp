@@ -75,20 +75,20 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxHyperlinkEvent, wxCommandEvent);
 wxDEFINE_EVENT( wxEVT_HYPERLINK, wxHyperlinkEvent );
 
 wxBEGIN_PROPERTIES_TABLE(wxHyperlinkCtrl)
-wxPROPERTY( Label, wxString, SetLabel, GetLabel, wxString(), \
-           0 /*flags*/, wxT("The link label"), wxT("group") )
+wxPROPERTY( Label, std::string, SetLabel, GetLabel, "", \
+           0 /*flags*/, "The link label", "group")
 
-wxPROPERTY( URL, wxString, SetURL, GetURL, wxString(), \
-           0 /*flags*/, wxT("The link URL"), wxT("group") )
+wxPROPERTY( URL, std::string, SetURL, GetURL, "", \
+           0 /*flags*/, "The link URL", "group")
 wxPROPERTY_FLAGS( WindowStyle, wxHyperlinkStyle, long, SetWindowStyleFlag, \
                  GetWindowStyleFlag, wxEMPTY_PARAMETER_VALUE, 0 /*flags*/,     \
-                 wxT("The link style"), wxT("group")) // style
+                 "The link style", "group") // style
 wxEND_PROPERTIES_TABLE()
 
 wxEMPTY_HANDLERS_TABLE(wxHyperlinkCtrl)
 
-wxCONSTRUCTOR_7( wxHyperlinkCtrl, wxWindow*, Parent, wxWindowID, Id, wxString, \
-                Label, wxString, URL, wxPoint, Position, wxSize, Size, long, WindowStyle )
+wxCONSTRUCTOR_7( wxHyperlinkCtrl, wxWindow*, Parent, wxWindowID, Id, std::string, \
+                Label, std::string, URL, wxPoint, Position, wxSize, Size, long, WindowStyle )
 
 
 // ----------------------------------------------------------------------------
@@ -96,13 +96,13 @@ wxCONSTRUCTOR_7( wxHyperlinkCtrl, wxWindow*, Parent, wxWindowID, Id, wxString, \
 // ----------------------------------------------------------------------------
 
 void
-wxHyperlinkCtrlBase::CheckParams(const wxString& label,
-                                 const wxString& url,
+wxHyperlinkCtrlBase::CheckParams(const std::string& label,
+                                 const std::string& url,
                                  long style)
 {
 #if wxDEBUG_LEVEL
     wxASSERT_MSG(!url.empty() || !label.empty(),
-                 wxT("Both URL and label are empty ?"));
+                 "Both URL and label are empty ?");
 
     int alignment = (int)((style & wxHL_ALIGN_LEFT) != 0) +
                     (int)((style & wxHL_ALIGN_CENTRE) != 0) +
@@ -118,7 +118,7 @@ wxHyperlinkCtrlBase::CheckParams(const wxString& label,
 
 void wxHyperlinkCtrlBase::SendEvent()
 {
-    const wxString& url = GetURL();
+    const std::string& url = GetURL();
     wxHyperlinkEvent linkEvent(this, GetId(), url);
     if (!GetEventHandler()->ProcessEvent(linkEvent))     // was the event skipped ?
     {

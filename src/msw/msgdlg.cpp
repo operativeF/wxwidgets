@@ -213,8 +213,8 @@ void wxMessageDialog::ReplaceStaticWithEdit()
     // chop of the trailing new line(s) from the message box text, they are
     // ignored by the static control but result in extra lines and hence extra
     // scrollbar position in the edit one
-    wxString text(wxGetWindowText(hwndStatic));
-    for ( wxString::reverse_iterator i = text.rbegin(); i != text.rend(); ++i )
+    std::string text(wxGetWindowText(hwndStatic));
+    for ( std::string::reverse_iterator i = text.rbegin(); i != text.rend(); ++i )
     {
         if ( *i != '\n' )
         {
@@ -227,9 +227,9 @@ void wxMessageDialog::ReplaceStaticWithEdit()
     }
 
     // do create the new control
-    HWND hwndEdit = ::CreateWindow
+    HWND hwndEdit = ::CreateWindowW
                       (
-                        wxT("EDIT"),
+                        L"EDIT",
                         wxTextBuffer::Translate(text).t_str(),
                         WS_CHILD | WS_VSCROLL | WS_VISIBLE |
                         ES_MULTILINE | ES_READONLY | ES_AUTOVSCROLL,
@@ -248,8 +248,8 @@ void wxMessageDialog::ReplaceStaticWithEdit()
     }
 
     // copy the font from the original control
-    LRESULT hfont = ::SendMessage(hwndStatic, WM_GETFONT, 0, 0);
-    ::SendMessage(hwndEdit, WM_SETFONT, hfont, 0);
+    LRESULT hfont = ::SendMessageW(hwndStatic, WM_GETFONT, 0, 0);
+    ::SendMessageW(hwndEdit, WM_SETFONT, hfont, 0);
 
     // and get rid of it
     ::DestroyWindow(hwndStatic);

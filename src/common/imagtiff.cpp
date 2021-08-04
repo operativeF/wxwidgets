@@ -88,11 +88,11 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxTIFFHandler,wxImageHandler);
 
 wxTIFFHandler::wxTIFFHandler()
 {
-    m_name = wxT("TIFF file");
-    m_extension = wxT("tif");
-    m_altExtensions.push_back(wxT("tiff"));
+    m_name = "TIFF file";
+    m_extension = "tif";
+    m_altExtensions.push_back("tiff");
     m_type = wxBITMAP_TYPE_TIFF;
-    m_mime = wxT("image/tiff");
+    m_mime = "image/tiff";
     TIFFSetWarningHandler((TIFFErrorHandler) TIFFwxWarningHandler);
     TIFFSetErrorHandler((TIFFErrorHandler) TIFFwxErrorHandler);
 }

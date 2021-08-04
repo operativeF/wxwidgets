@@ -112,21 +112,21 @@ wxIMPLEMENT_DYNAMIC_CLASS_XTI(wxFrame, wxTopLevelWindow, "wx/frame.h");
 wxBEGIN_PROPERTIES_TABLE(wxFrame)
 wxEVENT_PROPERTY( Menu, wxEVT_MENU, wxCommandEvent)
 
-wxPROPERTY( Title,wxString, SetTitle, GetTitle, wxString(), 0 /*flags*/, \
-           wxT("Helpstring"), wxT("group"))
+wxPROPERTY( Title, std::string, SetTitle, GetTitle, "", 0 /*flags*/, \
+            "Helpstring", "group")
 wxPROPERTY_FLAGS( WindowStyle, wxFrameStyle, long, SetWindowStyleFlag, \
                  GetWindowStyleFlag, wxEMPTY_PARAMETER_VALUE, 0 /*flags*/, \
-                 wxT("Helpstring"), wxT("group")) // style
+                 "Helpstring", "group") // style
 #if wxUSE_MENUS
 wxPROPERTY( MenuBar, wxMenuBar *, SetMenuBar, GetMenuBar, wxEMPTY_PARAMETER_VALUE, \
-           0 /*flags*/, wxT("Helpstring"), wxT("group"))
+           0 /*flags*/, "Helpstring", "group")
 #endif
 wxEND_PROPERTIES_TABLE()
 
 wxEMPTY_HANDLERS_TABLE(wxFrame)
 
-wxCONSTRUCTOR_6( wxFrame, wxWindow*, Parent, wxWindowID, Id, wxString, Title, \
-                wxPoint, Position, wxSize, Size, long, WindowStyle)
+wxCONSTRUCTOR_6( wxFrame, wxWindow*, Parent, wxWindowID, Id, std::string, Title, \
+                 wxPoint, Position, wxSize, Size, long, WindowStyle)
 
 wxFrameBase::~wxFrameBase()
 {

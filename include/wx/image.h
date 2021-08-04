@@ -22,16 +22,16 @@
 #  include "wx/stream.h"
 #endif
 
-inline constexpr wxChar wxIMAGE_OPTION_QUALITY[] =         wxT("quality");
-inline constexpr wxChar wxIMAGE_OPTION_FILENAME[] =        wxT("FileName");
-inline constexpr wxChar wxIMAGE_OPTION_RESOLUTION[] =      wxT("Resolution");
-inline constexpr wxChar wxIMAGE_OPTION_RESOLUTIONX[] =     wxT("ResolutionX");
-inline constexpr wxChar wxIMAGE_OPTION_RESOLUTIONY[] =     wxT("ResolutionY");
-inline constexpr wxChar wxIMAGE_OPTION_RESOLUTIONUNIT[] =  wxT("ResolutionUnit");
-inline constexpr wxChar wxIMAGE_OPTION_MAX_WIDTH[] =       wxT("MaxWidth");
-inline constexpr wxChar wxIMAGE_OPTION_MAX_HEIGHT[] =      wxT("MaxHeight");
-inline constexpr wxChar wxIMAGE_OPTION_ORIGINAL_WIDTH[] =  wxT("OriginalWidth");
-inline constexpr wxChar wxIMAGE_OPTION_ORIGINAL_HEIGHT[] = wxT("OriginalHeight");
+inline constexpr char wxIMAGE_OPTION_QUALITY[] =         "quality";
+inline constexpr char wxIMAGE_OPTION_FILENAME[] =        "FileName";
+inline constexpr char wxIMAGE_OPTION_RESOLUTION[] =      "Resolution";
+inline constexpr char wxIMAGE_OPTION_RESOLUTIONX[] =     "ResolutionX";
+inline constexpr char wxIMAGE_OPTION_RESOLUTIONY[] =     "ResolutionY";
+inline constexpr char wxIMAGE_OPTION_RESOLUTIONUNIT[] =  "ResolutionUnit";
+inline constexpr char wxIMAGE_OPTION_MAX_WIDTH[] =       "MaxWidth";
+inline constexpr char wxIMAGE_OPTION_MAX_HEIGHT[] =      "MaxHeight";
+inline constexpr char wxIMAGE_OPTION_ORIGINAL_WIDTH[] =  "OriginalWidth";
+inline constexpr char wxIMAGE_OPTION_ORIGINAL_HEIGHT[] = "OriginalHeight";
 
 // constants used with wxIMAGE_OPTION_RESOLUTIONUNIT
 //
@@ -106,9 +106,7 @@ DECLARE_VARIANT_OBJECT_EXPORTED(wxImage,WXDLLIMPEXP_CORE)
 class WXDLLIMPEXP_CORE wxImageHandler: public wxObject
 {
 public:
-    wxImageHandler()
-        : m_name(wxEmptyString), m_extension(wxEmptyString) 
-        { }
+    wxImageHandler() = default;
 
 #if wxUSE_STREAMS
     // NOTE: LoadFile and SaveFile are not pure virtuals to allow derived classes
@@ -124,19 +122,19 @@ public:
         // save the stream position, call DoGetImageCount() and restore the position
 
     bool CanRead( wxInputStream& stream ) { return CallDoCanRead(stream); }
-    bool CanRead( const wxString& name );
+    bool CanRead( const std::string& name );
 #endif // wxUSE_STREAMS
 
-    void SetName(const wxString& name) { m_name = name; }
-    void SetExtension(const wxString& ext) { m_extension = ext; }
-    void SetAltExtensions(const std::vector<wxString>& exts) { m_altExtensions = exts; }
+    void SetName(const std::string& name) { m_name = name; }
+    void SetExtension(const std::string& ext) { m_extension = ext; }
+    void SetAltExtensions(const std::vector<std::string>& exts) { m_altExtensions = exts; }
     void SetType(wxBitmapType type) { m_type = type; }
-    void SetMimeType(const wxString& type) { m_mime = type; }
-    const wxString& GetName() const { return m_name; }
-    const wxString& GetExtension() const { return m_extension; }
-    const std::vector<wxString>& GetAltExtensions() const { return m_altExtensions; }
+    void SetMimeType(const std::string& type) { m_mime = type; }
+    const std::string& GetName() const { return m_name; }
+    const std::string& GetExtension() const { return m_extension; }
+    const std::vector<std::string>& GetAltExtensions() const { return m_altExtensions; }
     wxBitmapType GetType() const { return m_type; }
-    const wxString& GetMimeType() const { return m_mime; }
+    const std::string& GetMimeType() const { return m_mime; }
 
 protected:
 #if wxUSE_STREAMS
@@ -159,11 +157,11 @@ protected:
     static wxImageResolution
     GetResolutionFromOptions(const wxImage& image, int *x, int *y);
 
-    std::vector<wxString> m_altExtensions;
+    std::vector<std::string> m_altExtensions;
 
-    wxString  m_name;
-    wxString  m_extension;
-    wxString  m_mime;
+    std::string  m_name{};
+    std::string  m_extension{};
+    std::string  m_mime;
     
     wxBitmapType m_type{wxBITMAP_TYPE_INVALID};
 
@@ -175,12 +173,10 @@ private:
 // wxImageHistogram
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxImageHistogramEntry
+struct WXDLLIMPEXP_CORE wxImageHistogramEntry
 {
-public:
-    wxImageHistogramEntry() { index = value = 0; }
-    unsigned long index;
-    unsigned long value;
+    unsigned long index{0};
+    unsigned long value{0};
 };
 
 WX_DECLARE_EXPORTED_HASH_MAP(unsigned long, wxImageHistogramEntry,
@@ -293,9 +289,9 @@ public:
     wxImage( const wxSize& sz, unsigned char* data, unsigned char* alpha, bool static_data = false )
         { Create( sz, data, alpha, static_data ); }
 
-    wxImage( const wxString& name, wxBitmapType type = wxBITMAP_TYPE_ANY, int index = -1 )
+    wxImage( const std::string& name, wxBitmapType type = wxBITMAP_TYPE_ANY, int index = -1 )
         { LoadFile( name, type, index ); }
-    wxImage( const wxString& name, const wxString& mimetype, int index = -1 )
+    wxImage( const std::string& name, const std::string& mimetype, int index = -1 )
         { LoadFile( name, mimetype, index ); }
     explicit wxImage( const char* const* xpmData )
         { Create(xpmData); }
@@ -303,7 +299,7 @@ public:
 #if wxUSE_STREAMS
     wxImage( wxInputStream& stream, wxBitmapType type = wxBITMAP_TYPE_ANY, int index = -1 )
         { LoadFile( stream, type, index ); }
-    wxImage( wxInputStream& stream, const wxString& mimetype, int index = -1 )
+    wxImage( wxInputStream& stream, const std::string& mimetype, int index = -1 )
         { LoadFile( stream, mimetype, index ); }
 #endif // wxUSE_STREAMS
 
@@ -456,25 +452,25 @@ public:
     void SetLoadFlags(int flags);
     int GetLoadFlags() const;
 
-    static bool CanRead( const wxString& name );
-    static int GetImageCount( const wxString& name, wxBitmapType type = wxBITMAP_TYPE_ANY );
-    virtual bool LoadFile( const wxString& name, wxBitmapType type = wxBITMAP_TYPE_ANY, int index = -1 );
-    virtual bool LoadFile( const wxString& name, const wxString& mimetype, int index = -1 );
+    static bool CanRead( const std::string& name );
+    static int GetImageCount( const std::string& name, wxBitmapType type = wxBITMAP_TYPE_ANY );
+    virtual bool LoadFile( const std::string& name, wxBitmapType type = wxBITMAP_TYPE_ANY, int index = -1 );
+    virtual bool LoadFile( const std::string& name, const std::string& mimetype, int index = -1 );
 
 #if wxUSE_STREAMS
     static bool CanRead( wxInputStream& stream );
     static int GetImageCount( wxInputStream& stream, wxBitmapType type = wxBITMAP_TYPE_ANY );
     virtual bool LoadFile( wxInputStream& stream, wxBitmapType type = wxBITMAP_TYPE_ANY, int index = -1 );
-    virtual bool LoadFile( wxInputStream& stream, const wxString& mimetype, int index = -1 );
+    virtual bool LoadFile( wxInputStream& stream, const std::string& mimetype, int index = -1 );
 #endif
 
-    virtual bool SaveFile( const wxString& name ) const;
-    virtual bool SaveFile( const wxString& name, wxBitmapType type ) const;
-    virtual bool SaveFile( const wxString& name, const wxString& mimetype ) const;
+    virtual bool SaveFile( const std::string& name ) const;
+    virtual bool SaveFile( const std::string& name, wxBitmapType type ) const;
+    virtual bool SaveFile( const std::string& name, const std::string& mimetype ) const;
 
 #if wxUSE_STREAMS
     virtual bool SaveFile( wxOutputStream& stream, wxBitmapType type ) const;
-    virtual bool SaveFile( wxOutputStream& stream, const wxString& mimetype ) const;
+    virtual bool SaveFile( wxOutputStream& stream, const std::string& mimetype ) const;
 #endif
 
     bool Ok() const { return IsOk(); }
@@ -529,11 +525,11 @@ public:
 #endif // wxUSE_PALETTE
 
     // Option functions (arbitrary name/value mapping)
-    void SetOption(const wxString& name, const wxString& value);
-    void SetOption(const wxString& name, int value);
-    wxString GetOption(const wxString& name) const;
-    int GetOptionInt(const wxString& name) const;
-    bool HasOption(const wxString& name) const;
+    void SetOption(const std::string& name, const std::string& value);
+    void SetOption(const std::string& name, int value);
+    std::string GetOption(const std::string& name) const;
+    int GetOptionInt(const std::string& name) const;
+    bool HasOption(const std::string& name) const;
 
     unsigned long CountColours( unsigned long stopafter = (unsigned long) -1 ) const;
 
@@ -572,14 +568,14 @@ public:
     static wxList& GetHandlers() { return sm_handlers; }
     static void AddHandler( wxImageHandler *handler );
     static void InsertHandler( wxImageHandler *handler );
-    static bool RemoveHandler( const wxString& name );
-    static wxImageHandler *FindHandler( const wxString& name );
-    static wxImageHandler *FindHandler( const wxString& extension, wxBitmapType imageType );
+    static bool RemoveHandler( const std::string& name );
+    static wxImageHandler *FindHandler( const std::string& name );
+    static wxImageHandler *FindHandler( const std::string& extension, wxBitmapType imageType );
     static wxImageHandler *FindHandler( wxBitmapType imageType );
 
-    static wxImageHandler *FindHandlerMime( const wxString& mimetype );
+    static wxImageHandler *FindHandlerMime( const std::string& mimetype );
 
-    static wxString GetImageExtWildcard();
+    static std::string GetImageExtWildcard();
 
     static void CleanUpHandlers();
     static void InitStandardHandlers();

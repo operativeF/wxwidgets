@@ -72,7 +72,7 @@ protected:
     wxBorder GetDefaultBorder() const override { return wxBORDER_NONE; }
 
     // checks for validity some of the ctor/Create() function parameters
-    void CheckParams(const wxString& label, const wxString& url, long style);
+    void CheckParams(const std::string& label, const std::string& url, long style);
 
 public:
     // Send wxHyperlinkEvent and open our link in the default browser if it

@@ -66,7 +66,7 @@ public:
     bool IsAcceptedKey(wxKeyEvent& event) override;
     void BeginEdit(int row, int col, wxGrid* grid) override;
     bool EndEdit(int row, int col, const wxGrid* grid,
-                         const wxString& oldval, wxString *newval) override;
+                         const std::string& oldval, std::string *newval) override;
     void ApplyEdit(int row, int col, wxGrid* grid) override;
 
     void Reset() override;
@@ -74,7 +74,7 @@ public:
     void HandleReturn(wxKeyEvent& event) override;
 
     // parameters string format is "max_width"
-    void SetParameters(const wxString& params) override;
+    void SetParameters(const std::string& params) override;
 #if wxUSE_VALIDATORS
     virtual void SetValidator(const wxValidator& validator);
 #endif
@@ -82,7 +82,7 @@ public:
     wxGridCellEditor *Clone() const override;
 
     // added GetValue so we can get the value which is in the control
-    wxString GetValue() const override;
+    std::string GetValue() const override;
 
 protected:
     wxTextCtrl *Text() const { return (wxTextCtrl *)m_control; }
@@ -90,15 +90,15 @@ protected:
     // parts of our virtual functions reused by the derived classes
     void DoCreate(wxWindow* parent, wxWindowID id, wxEvtHandler* evtHandler,
                   long style = 0);
-    void DoBeginEdit(const wxString& startValue);
-    void DoReset(const wxString& startValue);
+    void DoBeginEdit(const std::string& startValue);
+    void DoReset(const std::string& startValue);
 
 private:
     size_t                   m_maxChars;        // max number of chars allowed
 #if wxUSE_VALIDATORS
     std::unique_ptr<wxValidator> m_validator;
 #endif
-    wxString                 m_value;
+    std::string                 m_value;
 
     wxGridCellTextEditor(const wxGridCellTextEditor&) = delete;
 	wxGridCellTextEditor& operator=(const wxGridCellTextEditor&) = delete;
@@ -121,20 +121,20 @@ public:
     bool IsAcceptedKey(wxKeyEvent& event) override;
     void BeginEdit(int row, int col, wxGrid* grid) override;
     bool EndEdit(int row, int col, const wxGrid* grid,
-                         const wxString& oldval, wxString *newval) override;
+                         const std::string& oldval, std::string *newval) override;
     void ApplyEdit(int row, int col, wxGrid* grid) override;
 
     void Reset() override;
     void StartingKey(wxKeyEvent& event) override;
 
     // parameters string format is "min,max"
-    void SetParameters(const wxString& params) override;
+    void SetParameters(const std::string& params) override;
 
     wxGridCellEditor *Clone() const override
         { return new wxGridCellNumberEditor(m_min, m_max); }
 
     // added GetValue so we can get the value which is in the control
-    wxString GetValue() const override;
+    std::string GetValue() const override;
 
 protected:
 #if wxUSE_SPINCTRL
@@ -205,7 +205,7 @@ public:
     bool IsAcceptedKey(wxKeyEvent& event) override;
     void BeginEdit(int row, int col, wxGrid* grid) override;
     bool EndEdit(int row, int col, const wxGrid* grid,
-                         const wxString& oldval, wxString *newval) override;
+                         const std::string& oldval, std::string *newval) override;
     void ApplyEdit(int row, int col, wxGrid* grid) override;
 
     void Reset() override;
@@ -216,11 +216,11 @@ public:
 
     // parameters string format is "width[,precision[,format]]"
     // format to choose between f|e|g|E|G (f is used by default)
-    void SetParameters(const wxString& params) override;
+    void SetParameters(const std::string& params) override;
 
 protected:
     // string representation of our value
-    wxString GetString();
+    std::string GetString();
 
 private:
     int m_width,
@@ -228,7 +228,7 @@ private:
     double m_value;
 
     int m_style;
-    wxString m_format;
+    std::string m_format;
 
     wxGridCellFloatEditor(const wxGridCellFloatEditor&) = delete;
 	wxGridCellFloatEditor& operator=(const wxGridCellFloatEditor&) = delete;
@@ -259,7 +259,7 @@ public:
     bool IsAcceptedKey(wxKeyEvent& event) override;
     void BeginEdit(int row, int col, wxGrid* grid) override;
     bool EndEdit(int row, int col, const wxGrid* grid,
-                         const wxString& oldval, wxString *newval) override;
+                         const std::string& oldval, std::string *newval) override;
     void ApplyEdit(int row, int col, wxGrid* grid) override;
 
     void Reset() override;
@@ -271,16 +271,16 @@ public:
 
     // added GetValue so we can get the value which is in the control, see
     // also UseStringValues()
-    wxString GetValue() const override;
+    std::string GetValue() const override;
 
     // set the string values returned by GetValue() for the true and false
     // states, respectively
-    static void UseStringValues(const wxString& valueTrue = wxT("1"),
-                                const wxString& valueFalse = wxEmptyString);
+    static void UseStringValues(const std::string& valueTrue = "1",
+                                const std::string& valueFalse = {});
 
     // return true if the given string is equal to the string representation of
     // true value which we currently use
-    static bool IsTrueValue(const wxString& value);
+    static bool IsTrueValue(const std::string& value);
 
 protected:
     wxCheckBox *CBox() const { return (wxCheckBox *)m_control; }
@@ -290,14 +290,14 @@ private:
     void SetValueFromGrid(int row, int col, wxGrid* grid);
     void SetGridFromValue(int row, int col, wxGrid* grid) const;
 
-    wxString GetStringValue() const { return GetStringValue(m_value); }
+    std::string GetStringValue() const { return GetStringValue(m_value); }
 
     static
-    wxString GetStringValue(bool value) { return ms_stringValues[value]; }
+    std::string GetStringValue(bool value) { return ms_stringValues[value]; }
 
     bool m_value;
 
-    static wxString ms_stringValues[2];
+    static std::string ms_stringValues[2];
 
     wxGridCellBoolEditor(const wxGridCellBoolEditor&) = delete;
 	wxGridCellBoolEditor& operator=(const wxGridCellBoolEditor&) = delete;
@@ -326,18 +326,18 @@ public:
 
     void BeginEdit(int row, int col, wxGrid* grid) override;
     bool EndEdit(int row, int col, const wxGrid* grid,
-                         const wxString& oldval, wxString *newval) override;
+                         const std::string& oldval, std::string *newval) override;
     void ApplyEdit(int row, int col, wxGrid* grid) override;
 
     void Reset() override;
 
     // parameters string format is "item1[,item2[...,itemN]]"
-    void SetParameters(const wxString& params) override;
+    void SetParameters(const std::string& params) override;
 
     wxGridCellEditor *Clone() const override;
 
     // added GetValue so we can get the value which is in the control
-    wxString GetValue() const override;
+    std::string GetValue() const override;
 
 protected:
     wxComboBox *Combo() const { return (wxComboBox *)m_control; }
@@ -363,7 +363,7 @@ public:
 
     void BeginEdit(int row, int col, wxGrid* grid) override;
     bool EndEdit(int row, int col, const wxGrid* grid,
-                         const wxString& oldval, wxString *newval) override;
+                         const std::string& oldval, std::string *newval) override;
     void ApplyEdit(int row, int col, wxGrid* grid) override;
 
 private:
@@ -395,9 +395,9 @@ public:
 class WXDLLIMPEXP_CORE wxGridCellDateEditor : public wxGridCellEditor
 {
 public:
-    explicit wxGridCellDateEditor(const wxString& format = wxString());
+    explicit wxGridCellDateEditor(const std::string& format = {});
 
-    void SetParameters(const wxString& params) override;
+    void SetParameters(const std::string& params) override;
 
     void Create(wxWindow* parent,
                         wxWindowID id,
@@ -407,21 +407,21 @@ public:
 
     void BeginEdit(int row, int col, wxGrid* grid) override;
     bool EndEdit(int row, int col, const wxGrid* grid,
-                         const wxString& oldval, wxString *newval) override;
+                         const std::string& oldval, std::string *newval) override;
     void ApplyEdit(int row, int col, wxGrid* grid) override;
 
     void Reset() override;
 
     wxGridCellEditor *Clone() const override;
 
-    wxString GetValue() const override;
+    std::string GetValue() const override;
 
 protected:
     wxDatePickerCtrl* DatePicker() const;
 
 private:
     wxDateTime m_value;
-    wxString m_format;
+    std::string m_format;
 
     wxGridCellDateEditor(const wxGridCellDateEditor&) = delete;
 	wxGridCellDateEditor& operator=(const wxGridCellDateEditor&) = delete;

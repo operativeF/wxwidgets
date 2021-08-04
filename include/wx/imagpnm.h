@@ -21,13 +21,13 @@ class WXDLLIMPEXP_CORE wxPNMHandler : public wxImageHandler
 public:
     wxPNMHandler()
     {
-        m_name = wxT("PNM file");
-        m_extension = wxT("pnm");
-        m_altExtensions.push_back(wxT("ppm"));
-        m_altExtensions.push_back(wxT("pgm"));
-        m_altExtensions.push_back(wxT("pbm"));
+        m_name = "PNM file";
+        m_extension = "pnm";
+        m_altExtensions.push_back("ppm");
+        m_altExtensions.push_back("pgm");
+        m_altExtensions.push_back("pbm");
         m_type = wxBITMAP_TYPE_PNM;
-        m_mime = wxT("image/pnm");
+        m_mime = "image/pnm";
     }
 
 #if wxUSE_STREAMS

@@ -18,11 +18,11 @@
 
 #if wxUSE_GIF
 
-inline constexpr wxChar wxIMAGE_OPTION_GIF_COMMENT[] = wxT("GifComment");
+inline constexpr char wxIMAGE_OPTION_GIF_COMMENT[] = "GifComment";
 
-inline constexpr wxChar wxIMAGE_OPTION_GIF_TRANSPARENCY[]           = wxS("Transparency");
-inline constexpr wxChar wxIMAGE_OPTION_GIF_TRANSPARENCY_HIGHLIGHT[] = wxS("Highlight");
-inline constexpr wxChar wxIMAGE_OPTION_GIF_TRANSPARENCY_UNCHANGED[] = wxS("Unchanged");
+inline constexpr char wxIMAGE_OPTION_GIF_TRANSPARENCY[]           = "Transparency";
+inline constexpr char wxIMAGE_OPTION_GIF_TRANSPARENCY_HIGHLIGHT[] = "Highlight";
+inline constexpr char wxIMAGE_OPTION_GIF_TRANSPARENCY_UNCHANGED[] = "Unchanged";
 
 struct wxRGB;
 struct GifHashTableType;
@@ -33,10 +33,10 @@ class WXDLLIMPEXP_CORE wxGIFHandler : public wxImageHandler
 public:
     wxGIFHandler()
     {
-        m_name = wxT("GIF file");
-        m_extension = wxT("gif");
+        m_name = "GIF file";
+        m_extension = "gif";
         m_type = wxBITMAP_TYPE_GIF;
-        m_mime = wxT("image/gif");
+        m_mime = "image/gif";
         m_hashTable = nullptr;
     }
 

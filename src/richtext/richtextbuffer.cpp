@@ -13166,7 +13166,7 @@ bool wxRichTextImageBlock::MakeImageBlock(const wxString& filename, wxBitmapType
 // format.
 bool wxRichTextImageBlock::MakeImageBlock(wxImage& image, wxBitmapType imageType, int quality)
 {
-    image.SetOption(wxT("quality"), quality);
+    image.SetOption("quality", quality);
 
     if (imageType == wxBITMAP_TYPE_INVALID)
         return false; // Could not determine image type

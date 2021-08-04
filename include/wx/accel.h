@@ -59,7 +59,7 @@ public:
 
     // create accelerator corresponding to the specified string, return NULL if
     // string couldn't be parsed or a pointer to be deleted by the caller
-    static std::optional<wxAcceleratorEntry> Create(const wxString& str);
+    static std::optional<wxAcceleratorEntry> Create(const std::string& str);
 
     void Set(int flags, int keyCode, int cmd, wxMenuItem *item = nullptr)
     {
@@ -102,26 +102,26 @@ public:
     // string <-> wxAcceleratorEntry conversion
     // ----------------------------------------
 
-    // returns a wxString for the this accelerator.
+    // returns a std::string for the this accelerator.
     // this function formats it using the <flags>-<keycode> format
     // where <flags> maybe a hyphen-separated list of "shift|alt|ctrl"
-    wxString ToString() const { return AsPossiblyLocalizedString(true); }
+    std::string ToString() const { return AsPossiblyLocalizedString(true); }
 
     // same as above but without translating, useful if the string is meant to
     // be stored in a file or otherwise stored, instead of being shown to the
     // user
-    wxString ToRawString() const { return AsPossiblyLocalizedString(false); }
+    std::string ToRawString() const { return AsPossiblyLocalizedString(false); }
 
     // returns true if the given string correctly initialized this object
     // (i.e. if IsOk() returns true after this call)
-    bool FromString(const wxString& str);
+    bool FromString(const std::string& str);
 
 
 private:
-    wxString AsPossiblyLocalizedString(bool localized) const;
+    std::string AsPossiblyLocalizedString(bool localized) const;
 
     // common part of Create() and FromString()
-    static bool ParseAccel(const wxString& str, int *flags, int *keycode);
+    static bool ParseAccel(const std::string& str, int *flags, int *keycode);
 
 
     int m_flags;    // combination of wxACCEL_XXX constants

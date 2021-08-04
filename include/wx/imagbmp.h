@@ -17,8 +17,8 @@
 
 // These two options are filled in upon reading CUR file and can (should) be
 // specified when saving a CUR file - they define the hotspot of the cursor:
-inline constexpr wxChar wxIMAGE_OPTION_CUR_HOTSPOT_X[]  = wxT("HotSpotX");
-inline constexpr wxChar wxIMAGE_OPTION_CUR_HOTSPOT_Y[]  = wxT("HotSpotY");
+constexpr char wxIMAGE_OPTION_CUR_HOTSPOT_X[]  = "HotSpotX";
+constexpr char wxIMAGE_OPTION_CUR_HOTSPOT_Y[]  = "HotSpotY";
 
 
 enum
@@ -44,10 +44,10 @@ class WXDLLIMPEXP_CORE wxBMPHandler : public wxImageHandler
 public:
     wxBMPHandler()
     {
-        m_name = wxT("Windows bitmap file");
-        m_extension = wxT("bmp");
+        m_name = "Windows bitmap file";
+        m_extension = "bmp";
         m_type = wxBITMAP_TYPE_BMP;
-        m_mime = wxT("image/x-bmp");
+        m_mime = "image/x-bmp";
     }
 
 #if wxUSE_STREAMS
@@ -78,10 +78,10 @@ class WXDLLIMPEXP_CORE wxICOHandler : public wxBMPHandler
 public:
     wxICOHandler()
     {
-        m_name = wxT("Windows icon file");
-        m_extension = wxT("ico");
+        m_name = "Windows icon file";
+        m_extension = "ico";
         m_type = wxBITMAP_TYPE_ICO;
-        m_mime = wxT("image/x-ico");
+        m_mime = "image/x-ico";
     }
 
 #if wxUSE_STREAMS
@@ -108,10 +108,10 @@ class WXDLLIMPEXP_CORE wxCURHandler : public wxICOHandler
 public:
     wxCURHandler()
     {
-        m_name = wxT("Windows cursor file");
-        m_extension = wxT("cur");
+        m_name = "Windows cursor file";
+        m_extension = "cur";
         m_type = wxBITMAP_TYPE_CUR;
-        m_mime = wxT("image/x-cur");
+        m_mime = "image/x-cur";
     }
 
     // VS: This handler's meat is implemented inside wxICOHandler (the two
@@ -135,10 +135,10 @@ class WXDLLIMPEXP_CORE wxANIHandler : public wxCURHandler
 public:
     wxANIHandler()
     {
-        m_name = wxT("Windows animated cursor file");
-        m_extension = wxT("ani");
+        m_name = "Windows animated cursor file";
+        m_extension = "ani";
         m_type = wxBITMAP_TYPE_ANI;
-        m_mime = wxT("image/x-ani");
+        m_mime = "image/x-ani";
     }
 
 

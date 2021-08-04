@@ -95,8 +95,8 @@ struct wxImageRefData: public wxObjectRefData
     wxPalette       m_palette;
 #endif // wxUSE_PALETTE
 
-    std::vector<wxString>   m_optionNames;
-    std::vector<wxString>   m_optionValues;
+    std::vector<std::string>   m_optionNames;
+    std::vector<std::string>   m_optionValues;
 };
 
 // For compatibility, if nothing else, loading is verbose by default.
@@ -2458,13 +2458,13 @@ void wxImage::SetPalette(const wxPalette& palette)
 // Option functions (arbitrary name/value mapping)
 // ----------------------------------------------------------------------------
 
-void wxImage::SetOption(const wxString& name, const wxString& value)
+void wxImage::SetOption(const std::string& name, const std::string& value)
 {
     AllocExclusive();
 
     const auto match = std::find_if(M_IMGDATA->m_optionNames.cbegin(), M_IMGDATA->m_optionNames.cend(),
     [name](const auto& optname){
-        return name.IsSameAs(optname, false);
+        return wx::utils::IsSameAsNoCase(optname, name);
     });
 
     if ( match == M_IMGDATA->m_optionNames.cend() )
@@ -2480,21 +2480,20 @@ void wxImage::SetOption(const wxString& name, const wxString& value)
     }
 }
 
-void wxImage::SetOption(const wxString& name, int value)
+void wxImage::SetOption(const std::string& name, int value)
 {
-    wxString valStr;
-    valStr.Printf(wxT("%d"), value);
+    std::string valStr{fmt::format("{:d}", value)};
     SetOption(name, valStr);
 }
 
-wxString wxImage::GetOption(const wxString& name) const
+std::string wxImage::GetOption(const std::string& name) const
 {
     if ( !M_IMGDATA )
         return {};
 
     const auto match = std::find_if(M_IMGDATA->m_optionNames.cbegin(), M_IMGDATA->m_optionNames.cend(),
     [name](const auto& optname){
-        return name.IsSameAs(optname, false);
+        return wx::utils::IsSameAsNoCase(optname, name);
     });
 
     if ( match == M_IMGDATA->m_optionNames.cend() )
@@ -2506,18 +2505,18 @@ wxString wxImage::GetOption(const wxString& name) const
     }
 }
 
-int wxImage::GetOptionInt(const wxString& name) const
+int wxImage::GetOptionInt(const std::string& name) const
 {
     return wxAtoi(GetOption(name));
 }
 
-bool wxImage::HasOption(const wxString& name) const
+bool wxImage::HasOption(const std::string& name) const
 {
     if(M_IMGDATA)
     {
         return M_IMGDATA->m_optionNames.cend() != std::find_if(M_IMGDATA->m_optionNames.cbegin(), M_IMGDATA->m_optionNames.cend(), 
         [name](const auto& optname){
-            return name.IsSameAs(optname, false);
+            return wx::utils::IsSameAsNoCase(optname, name);
         });
     }
 
@@ -2564,7 +2563,7 @@ int wxImage::GetLoadFlags() const
 #include "wx/msw/dib.h"
 #include "wx/msw/private.h"
 
-static wxImage LoadImageFromResource(const wxString &name, wxBitmapType type)
+static wxImage LoadImageFromResource(const std::string &name, wxBitmapType type)
 {
     AutoHBITMAP
         hBitmap,
@@ -2572,7 +2571,7 @@ static wxImage LoadImageFromResource(const wxString &name, wxBitmapType type)
 
     if ( type == wxBITMAP_TYPE_BMP_RESOURCE )
     {
-        hBitmap.Init( ::LoadBitmap(wxGetInstance(), name.t_str()) );
+        hBitmap.Init( ::LoadBitmap(wxGetInstance(), boost::nowide::widen(name).c_str()) );
 
         if ( !hBitmap )
         {
@@ -2581,7 +2580,7 @@ static wxImage LoadImageFromResource(const wxString &name, wxBitmapType type)
     }
     else if ( type == wxBITMAP_TYPE_ICO_RESOURCE )
     {
-        const HICON hIcon = ::LoadIcon(wxGetInstance(), name.t_str());
+        const HICON hIcon = ::LoadIcon(wxGetInstance(), boost::nowide::widen(name).c_str());
 
         if ( !hIcon )
         {
@@ -2636,7 +2635,7 @@ static wxImage LoadImageFromResource(const wxString &name, wxBitmapType type)
 
 #endif // HAS_LOAD_FROM_RESOURCE
 
-bool wxImage::LoadFile( const wxString& filename,
+bool wxImage::LoadFile( const std::string& filename,
                         wxBitmapType type,
                         int WXUNUSED_UNLESS_STREAMS(index) )
 {
@@ -2669,8 +2668,8 @@ bool wxImage::LoadFile( const wxString& filename,
     return false;
 }
 
-bool wxImage::LoadFile( const wxString& WXUNUSED_UNLESS_STREAMS(filename),
-                        const wxString& WXUNUSED_UNLESS_STREAMS(mimetype),
+bool wxImage::LoadFile( const std::string& WXUNUSED_UNLESS_STREAMS(filename),
+                        const std::string& WXUNUSED_UNLESS_STREAMS(mimetype),
                         int WXUNUSED_UNLESS_STREAMS(index) )
 {
 #if HAS_FILE_STREAMS
@@ -2689,9 +2688,9 @@ bool wxImage::LoadFile( const wxString& WXUNUSED_UNLESS_STREAMS(filename),
 }
 
 
-bool wxImage::SaveFile( const wxString& filename ) const
+bool wxImage::SaveFile( const std::string& filename ) const
 {
-    wxString ext = filename.AfterLast('.').Lower();
+    std::string ext = wx::utils::ToLowerCopy(wx::utils::AfterLast(filename, '.'));
 
     wxImageHandler *handler = FindHandler(ext, wxBITMAP_TYPE_ANY);
     if ( !handler)
@@ -2704,7 +2703,7 @@ bool wxImage::SaveFile( const wxString& filename ) const
     return SaveFile(filename, handler->GetType());
 }
 
-bool wxImage::SaveFile( const wxString& WXUNUSED_UNLESS_STREAMS(filename),
+bool wxImage::SaveFile( const std::string& WXUNUSED_UNLESS_STREAMS(filename),
                         wxBitmapType WXUNUSED_UNLESS_STREAMS(type) ) const
 {
 #if HAS_FILE_STREAMS
@@ -2724,11 +2723,11 @@ bool wxImage::SaveFile( const wxString& WXUNUSED_UNLESS_STREAMS(filename),
     return false;
 }
 
-bool wxImage::SaveFile( const wxString& WXUNUSED_UNLESS_STREAMS(filename),
-                        const wxString& WXUNUSED_UNLESS_STREAMS(mimetype) ) const
+bool wxImage::SaveFile( const std::string& WXUNUSED_UNLESS_STREAMS(filename),
+                        const std::string& WXUNUSED_UNLESS_STREAMS(mimetype) ) const
 {
 #if HAS_FILE_STREAMS
-    wxCHECK_MSG( IsOk(), false, wxT("invalid image") );
+    wxCHECK_MSG( IsOk(), false, "invalid image" );
 
     const_cast<wxImage*>(this)->SetOption(wxIMAGE_OPTION_FILENAME, filename);
 
@@ -2744,7 +2743,7 @@ bool wxImage::SaveFile( const wxString& WXUNUSED_UNLESS_STREAMS(filename),
     return false;
 }
 
-bool wxImage::CanRead( const wxString& WXUNUSED_UNLESS_STREAMS(name) )
+bool wxImage::CanRead( const std::string& WXUNUSED_UNLESS_STREAMS(name) )
 {
 #if HAS_FILE_STREAMS
     wxImageFileInputStream stream(name);
@@ -2754,7 +2753,7 @@ bool wxImage::CanRead( const wxString& WXUNUSED_UNLESS_STREAMS(name) )
 #endif
 }
 
-int wxImage::GetImageCount( const wxString& WXUNUSED_UNLESS_STREAMS(name),
+int wxImage::GetImageCount( const std::string& WXUNUSED_UNLESS_STREAMS(name),
                             wxBitmapType WXUNUSED_UNLESS_STREAMS(type) )
 {
 #if HAS_FILE_STREAMS
@@ -2952,7 +2951,7 @@ bool wxImage::LoadFile( wxInputStream& stream, wxBitmapType type, int index )
     return DoLoad(*handler, stream, index);
 }
 
-bool wxImage::LoadFile( wxInputStream& stream, const wxString& mimetype, int index )
+bool wxImage::LoadFile( wxInputStream& stream, const std::string& mimetype, int index )
 {
     UnRef();
 
@@ -2967,7 +2966,7 @@ bool wxImage::LoadFile( wxInputStream& stream, const wxString& mimetype, int ind
     {
         if ( verbose )
         {
-            wxLogWarning( _("No image handler for type %s defined."), mimetype.GetData() );
+            wxLogWarning( _("No image handler for type %s defined."), mimetype );
         }
         return false;
     }
@@ -3008,14 +3007,14 @@ bool wxImage::SaveFile( wxOutputStream& stream, wxBitmapType type ) const
     return DoSave(*handler, stream);
 }
 
-bool wxImage::SaveFile( wxOutputStream& stream, const wxString& mimetype ) const
+bool wxImage::SaveFile( wxOutputStream& stream, const std::string& mimetype ) const
 {
     wxCHECK_MSG( IsOk(), false, wxT("invalid image") );
 
     wxImageHandler *handler = FindHandlerMime(mimetype);
     if ( !handler )
     {
-        wxLogWarning( _("No image handler for type %s defined."), mimetype.GetData() );
+        wxLogWarning( _("No image handler for type %s defined."), mimetype );
         return false;
     }
 
@@ -3065,7 +3064,7 @@ void wxImage::InsertHandler( wxImageHandler *handler )
     }
 }
 
-bool wxImage::RemoveHandler( const wxString& name )
+bool wxImage::RemoveHandler( const std::string& name )
 {
     wxImageHandler *handler = FindHandler(name);
     if (handler)
@@ -3078,20 +3077,20 @@ bool wxImage::RemoveHandler( const wxString& name )
         return false;
 }
 
-wxImageHandler *wxImage::FindHandler( const wxString& name )
+wxImageHandler *wxImage::FindHandler( const std::string& name )
 {
     wxList::compatibility_iterator node = sm_handlers.GetFirst();
     while (node)
     {
         wxImageHandler *handler = (wxImageHandler*)node->GetData();
-        if (handler->GetName().Cmp(name) == 0) return handler;
+        if (handler->GetName().compare(name) == 0) return handler;
 
         node = node->GetNext();
     }
     return nullptr;
 }
 
-wxImageHandler *wxImage::FindHandler( const wxString& extension, wxBitmapType bitmapType )
+wxImageHandler *wxImage::FindHandler( const std::string& extension, wxBitmapType bitmapType )
 {
     wxList::compatibility_iterator node = sm_handlers.GetFirst();
     while (node)
@@ -3103,7 +3102,7 @@ wxImageHandler *wxImage::FindHandler( const wxString& extension, wxBitmapType bi
                 return handler;
 
             const auto ext_idx = std::find_if(handler->GetAltExtensions().cbegin(), handler->GetAltExtensions().cend(),
-                [extension](const auto& alt_extension) { return extension.IsSameAs(alt_extension, false); });
+                [extension](const auto& alt_extension) { return wx::utils::IsSameAsNoCase(alt_extension, extension); });
 
             if (ext_idx != handler->GetAltExtensions().cend())
                 return handler;
@@ -3125,13 +3124,13 @@ wxImageHandler *wxImage::FindHandler(wxBitmapType bitmapType )
     return nullptr;
 }
 
-wxImageHandler *wxImage::FindHandlerMime( const wxString& mimetype )
+wxImageHandler *wxImage::FindHandlerMime( const std::string& mimetype )
 {
     wxList::compatibility_iterator node = sm_handlers.GetFirst();
     while (node)
     {
         wxImageHandler *handler = (wxImageHandler *)node->GetData();
-        if (handler->GetMimeType().IsSameAs(mimetype, false)) return handler;
+        if (wx::utils::IsSameAsNoCase(mimetype, handler->GetMimeType())) return handler;
         node = node->GetNext();
     }
     return nullptr;
@@ -3158,7 +3157,7 @@ void wxImage::CleanUpHandlers()
     sm_handlers.Clear();
 }
 
-wxString wxImage::GetImageExtWildcard()
+std::string wxImage::GetImageExtWildcard()
 {
     wxString fmts;
 
@@ -3466,7 +3465,7 @@ int wxImageHandler::GetImageCount( wxInputStream& stream )
     return n;
 }
 
-bool wxImageHandler::CanRead( const wxString& name )
+bool wxImageHandler::CanRead( const std::string& name )
 {
     wxImageFileInputStream stream(name);
     if ( !stream.IsOk() )

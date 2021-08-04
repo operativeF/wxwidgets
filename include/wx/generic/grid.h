@@ -39,12 +39,12 @@ inline constexpr char wxGridNameStr[] = "grid";
 #define WXGRID_MIN_COL_WIDTH                  15
 
 // type names for grid table values
-inline constexpr wxChar wxGRID_VALUE_STRING[]     = wxT("string");
-inline constexpr wxChar wxGRID_VALUE_BOOL[]       = wxT("bool");
-inline constexpr wxChar wxGRID_VALUE_NUMBER[]     = wxT("long");
-inline constexpr wxChar wxGRID_VALUE_FLOAT[]      = wxT("double");
-inline constexpr wxChar wxGRID_VALUE_CHOICE[]     = wxT("choice");
-inline constexpr wxChar wxGRID_VALUE_DATE[]       = wxT("date");
+constexpr char wxGRID_VALUE_STRING[]     = "string";
+constexpr char wxGRID_VALUE_BOOL[]       = "bool";
+constexpr char wxGRID_VALUE_NUMBER[]     = "long";
+constexpr char wxGRID_VALUE_FLOAT[]      = "double";
+constexpr char wxGRID_VALUE_CHOICE[]     = "choice";
+constexpr char wxGRID_VALUE_DATE[]       = "date";
 
 #define wxGRID_VALUE_TEXT wxGRID_VALUE_STRING
 #define wxGRID_VALUE_LONG wxGRID_VALUE_NUMBER
@@ -131,7 +131,7 @@ public:
 
     // interpret renderer parameters: arbitrary string whose interpretation is
     // left to the derived classes
-    virtual void SetParameters(const wxString& params);
+    virtual void SetParameters(const std::string& params);
 
 protected:
     // virtual dtor for any base class - private because only DecRef() can
@@ -316,7 +316,7 @@ public:
         return wxGridActivationResult(Ignore);
     }
 
-    static wxGridActivationResult DoChange(const wxString& newval)
+    static wxGridActivationResult DoChange(const std::string& newval)
     {
         return wxGridActivationResult(Change, newval);
     }
@@ -332,7 +332,7 @@ public:
     Action GetAction() const { return m_action; }
 
     // Can be called for objects with Change action type only.
-    const wxString& GetNewValue() const
+    const std::string& GetNewValue() const
     {
         wxASSERT( m_action == Change );
 
@@ -348,7 +348,7 @@ private:
     }
 
     const Action m_action;
-    const wxString m_newval;
+    const std::string m_newval;
 };
 
 // ----------------------------------------------------------------------------
@@ -406,7 +406,7 @@ public:
     // it could be used by ApplyEdit() but it must not modify the grid as the
     // change could still be vetoed.
     virtual bool EndEdit(int row, int col, const wxGrid *grid,
-                         const wxString& oldval, wxString *newval) = 0;
+                         const std::string& oldval, std::string *newval) = 0;
 
     // Complete the editing of the current cell by storing the value saved by
     // the previous call to EndEdit() in the grid
@@ -445,7 +445,7 @@ public:
     virtual wxGridCellEditor *Clone() const = 0;
 
     // added GetValue so we can get the value which is in the control
-    virtual wxString GetValue() const = 0;
+    virtual std::string GetValue() const = 0;
 
 
     // These functions exist only for backward compatibility, use Get and
@@ -536,13 +536,13 @@ public:
     void BeginEdit(int, int, wxGrid*) override
         { wxFAIL; }
     bool EndEdit(int, int, const wxGrid*,
-                         const wxString&, wxString*) override
+                         const std::string&, std::string*) override
         { wxFAIL; return false; }
     void ApplyEdit(int, int, wxGrid*) override
         { wxFAIL; }
     void Reset() override
         { wxFAIL; }
-    wxString GetValue() const override
+    std::string GetValue() const override
         { wxFAIL; return {}; }
 };
 
@@ -1196,9 +1196,9 @@ public:
     virtual void SetValue( int row, int col, const std::string& value ) = 0;
 
     // Data type determination and value access
-    virtual wxString GetTypeName( int row, int col );
-    virtual bool CanGetValueAs( int row, int col, const wxString& typeName );
-    virtual bool CanSetValueAs( int row, int col, const wxString& typeName );
+    virtual std::string GetTypeName( int row, int col );
+    virtual bool CanGetValueAs( int row, int col, const std::string& typeName );
+    virtual bool CanSetValueAs( int row, int col, const std::string& typeName );
 
     virtual long GetValueAsLong( int row, int col );
     virtual double GetValueAsDouble( int row, int col );
@@ -1209,8 +1209,8 @@ public:
     virtual void SetValueAsBool( int row, int col, bool value );
 
     // For user defined types
-    virtual void* GetValueAsCustom( int row, int col, const wxString& typeName );
-    virtual void  SetValueAsCustom( int row, int col, const wxString& typeName, void* value );
+    virtual void* GetValueAsCustom( int row, int col, const std::string& typeName );
+    virtual void  SetValueAsCustom( int row, int col, const std::string& typeName, void* value );
 
     // Overriding these is optional
     //
@@ -1832,9 +1832,9 @@ public:
     void     SetCornerLabelAlignment( int horiz, int vert );
     void     SetColLabelTextOrientation( int textOrientation );
     void     SetCornerLabelTextOrientation( int textOrientation );
-    void     SetRowLabelValue( int row, const wxString& );
-    void     SetColLabelValue( int col, const wxString& );
-    void     SetCornerLabelValue( const wxString& );
+    void     SetRowLabelValue( int row, const std::string& );
+    void     SetColLabelValue( int col, const std::string& );
+    void     SetCornerLabelValue( const std::string& );
     void     SetCellHighlightColour( const wxColour& );
     void     SetCellHighlightPenWidth( int width );
     void     SetCellHighlightROPenWidth( int width );
@@ -1964,8 +1964,8 @@ public:
     void     SetColFormatBool(int col);
     void     SetColFormatNumber(int col);
     void     SetColFormatFloat(int col, int width = -1, int precision = -1);
-    void     SetColFormatDate(int col, const wxString& format = wxString());
-    void     SetColFormatCustom(int col, const wxString& typeName);
+    void     SetColFormatDate(int col, const std::string& format = {});
+    void     SetColFormatCustom(int col, const std::string& typeName);
 
     // ------ row and col formatting
     //
@@ -2177,7 +2177,7 @@ public:
         }
     }
 
-    wxString GetCellValue( const wxGridCellCoords& coords ) const
+    std::string GetCellValue( const wxGridCellCoords& coords ) const
         { return GetCellValue( coords.GetRow(), coords.GetCol() ); }
 
     void SetCellValue( int row, int col, const std::string& s );
@@ -2254,7 +2254,7 @@ public:
 
 
     // Methods for a registry for mapping data types to Renderers/Editors
-    void RegisterDataType(const wxString& typeName,
+    void RegisterDataType(const std::string& typeName,
                           wxGridCellRenderer* renderer,
                           wxGridCellEditor* editor);
     // DJC MAPTEK
@@ -2262,8 +2262,8 @@ public:
     wxGridCellEditor* GetDefaultEditorForCell(const wxGridCellCoords& c) const
         { return GetDefaultEditorForCell(c.GetRow(), c.GetCol()); }
     virtual wxGridCellRenderer* GetDefaultRendererForCell(int row, int col) const;
-    virtual wxGridCellEditor* GetDefaultEditorForType(const wxString& typeName) const;
-    virtual wxGridCellRenderer* GetDefaultRendererForType(const wxString& typeName) const;
+    virtual wxGridCellEditor* GetDefaultEditorForType(const std::string& typeName) const;
+    virtual wxGridCellRenderer* GetDefaultRendererForType(const std::string& typeName) const;
 
     // grid may occupy more space than needed for its rows/columns, this
     // function allows to set how big this extra space is
@@ -2637,12 +2637,12 @@ protected:
         { return SendEvent(evtType, coords.GetRow(), coords.GetCol(), e); }
     EventResult SendEvent(wxEventType evtType,
                   int row, int col,
-                  const wxString& s = wxEmptyString);
+                  const std::string& s = {});
     EventResult SendEvent(wxEventType evtType,
                   const wxGridCellCoords& coords,
-                  const wxString& s = wxEmptyString)
+                  const std::string& s = {})
         { return SendEvent(evtType, coords.GetRow(), coords.GetCol(), s); }
-    EventResult SendEvent(wxEventType evtType, const wxString& s = wxEmptyString)
+    EventResult SendEvent(wxEventType evtType, const std::string& s = {})
         { return SendEvent(evtType, m_currentCellCoords, s); }
 
     // send wxEVT_GRID_{ROW,COL}_SIZE or wxEVT_GRID_COL_AUTO_SIZE, return true

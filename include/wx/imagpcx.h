@@ -22,10 +22,10 @@ class WXDLLIMPEXP_CORE wxPCXHandler : public wxImageHandler
 public:
     wxPCXHandler()
     {
-        m_name = wxT("PCX file");
-        m_extension = wxT("pcx");
+        m_name = "PCX file";
+        m_extension = "pcx";
         m_type = wxBITMAP_TYPE_PCX;
-        m_mime = wxT("image/pcx");
+        m_mime = "image/pcx";
     }
 
 #if wxUSE_STREAMS

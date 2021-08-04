@@ -37,13 +37,13 @@ class WXDLLEXPORT wxButtonToolBarTool : public wxToolBarToolBase
 public:
     wxButtonToolBarTool(wxButtonToolBar *tbar,
                   int id,
-                  const wxString& label,
+                  const std::string& label,
                   const wxBitmap& bmpNormal,
                   const wxBitmap& bmpDisabled,
                   wxItemKind kind,
                   wxObject *clientData,
-                  const wxString& shortHelp,
-                  const wxString& longHelp)
+                  const std::string& shortHelp,
+                  const std::string& longHelp)
         : wxToolBarToolBase(tbar, id, label, bmpNormal, bmpDisabled, kind,
                             clientData, shortHelp, longHelp)
     {
@@ -56,7 +56,7 @@ public:
 
     wxButtonToolBarTool(wxButtonToolBar *tbar,
                         wxControl *control,
-                        const wxString& label)
+                        const std::string& label)
         : wxToolBarToolBase(tbar, control, label)
     {
         m_x = m_y = wxDefaultCoord;
@@ -118,7 +118,7 @@ bool wxButtonToolBar::Create(wxWindow *parent,
                        const wxPoint& pos,
                        const wxSize& size,
                        long style,
-                       const wxString& name)
+                       const std::string& name)
 {
     if ( !wxToolBarBase::Create(parent, id, pos, size, style,
                                 wxDefaultValidator, name) )
@@ -209,7 +209,7 @@ void wxButtonToolBar::GetRectLimits(const wxRect& rect,
 }
 
 
-void wxButtonToolBar::SetToolShortHelp(int id, const wxString& help)
+void wxButtonToolBar::SetToolShortHelp(int id, const std::string& help)
 {
     wxToolBarToolBase *tool = FindById(id);
 
@@ -248,20 +248,20 @@ void wxButtonToolBar::DoSetToggle(wxToolBarToolBase *WXUNUSED(tool), bool WXUNUS
 }
 
 wxToolBarToolBase *wxButtonToolBar::CreateTool(int id,
-                                         const wxString& label,
+                                         const std::string& label,
                                          const wxBitmap& bmpNormal,
                                          const wxBitmap& bmpDisabled,
                                          wxItemKind kind,
                                          wxObject *clientData,
-                                         const wxString& shortHelp,
-                                         const wxString& longHelp)
+                                         const std::string& shortHelp,
+                                         const std::string& longHelp)
 {
     return new wxButtonToolBarTool(this, id, label, bmpNormal, bmpDisabled, kind,
                              clientData, shortHelp, longHelp);
 }
 
 wxToolBarToolBase *wxButtonToolBar::CreateTool(wxControl *control,
-                                               const wxString& label)
+                                               const std::string& label)
 {
     return new wxButtonToolBarTool(this, control, label);
 }

@@ -150,19 +150,19 @@ static int IsNumberedAccelKey(const wxString& str,
 
 /* static */
 bool
-wxAcceleratorEntry::ParseAccel(const wxString& text, int *flagsOut, int *keyOut)
+wxAcceleratorEntry::ParseAccel(const std::string& text, int *flagsOut, int *keyOut)
 {
     // the parser won't like trailing spaces
-    wxString label = text;
-    label.Trim(true);
+    std::string label = text;
+    wx::utils::TrimTrailingSpace(label);
 
     // For compatibility with the old wx versions which accepted (and actually
     // even required) a TAB character in the string passed to this function we
     // ignore anything up to the first TAB. Notice however that the correct
     // input consists of just the accelerator itself and nothing else, this is
     // done for compatibility and compatibility only.
-    int posTab = label.Find(wxT('\t'));
-    if ( posTab == wxNOT_FOUND )
+    size_t posTab = label.find('\t');
+    if ( posTab == std::string::npos )
         posTab = 0;
     else
         posTab++;
@@ -293,9 +293,9 @@ wxAcceleratorEntry::ParseAccel(const wxString& text, int *flagsOut, int *keyOut)
 }
 
 /* static */
-std::optional<wxAcceleratorEntry> wxAcceleratorEntry::Create(const wxString& str)
+std::optional<wxAcceleratorEntry> wxAcceleratorEntry::Create(const std::string& str)
 {
-    const wxString accelStr = str.AfterFirst('\t');
+    const std::string accelStr = wx::utils::AfterFirst(str, '\t');
     if ( accelStr.empty() )
     {
         // It's ok to pass strings not containing any accelerators at all to
@@ -312,7 +312,7 @@ std::optional<wxAcceleratorEntry> wxAcceleratorEntry::Create(const wxString& str
     return wxAcceleratorEntry(flags, keyCode);
 }
 
-bool wxAcceleratorEntry::FromString(const wxString& str)
+bool wxAcceleratorEntry::FromString(const std::string& str)
 {
     return ParseAccel(str, &m_flags, &m_keyCode);
 }
@@ -320,14 +320,14 @@ bool wxAcceleratorEntry::FromString(const wxString& str)
 namespace
 {
 
-wxString PossiblyLocalize(const wxString& str, bool localize)
+std::string PossiblyLocalize(const std::string& str, bool localize)
 {
-    return localize ? wxGetTranslation(str) : str;
+    return localize ? wxGetTranslation(str).ToStdString() : str;
 }
 
 }
 
-wxString wxAcceleratorEntry::AsPossiblyLocalizedString(bool localized) const
+std::string wxAcceleratorEntry::AsPossiblyLocalizedString(bool localized) const
 {
     wxString text;
 
@@ -388,7 +388,7 @@ wxString wxAcceleratorEntry::AsPossiblyLocalizedString(bool localized) const
     return text;
 }
 
-std::optional<wxAcceleratorEntry> wxGetAccelFromString(const wxString& label)
+std::optional<wxAcceleratorEntry> wxGetAccelFromString(const std::string& label)
 {
     return wxAcceleratorEntry::Create(label);
 }

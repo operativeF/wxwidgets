@@ -31,6 +31,8 @@
 #include "wx/generic/private/grid.h"
 #include "wx/private/window.h"
 
+#include <charconv>
+
 #include "fmt/core.h"
 
 // ----------------------------------------------------------------------------
@@ -241,10 +243,10 @@ wxSize wxGridCellDateRenderer::GetMaxBestSize(wxGrid& WXUNUSED(grid),
     return size;
 }
 
-void wxGridCellDateRenderer::SetParameters(const wxString& params)
+void wxGridCellDateRenderer::SetParameters(const std::string& params)
 {
     if (!params.empty())
-        m_oformat=params;
+        m_oformat = params;
 }
 
 
@@ -281,13 +283,13 @@ wxSize wxGridCellChoiceRenderer::GetMaxBestSize(wxGrid& WXUNUSED(grid),
 
     for ( size_t n = 0; n < m_choices.size(); ++n )
     {
-        size.IncTo(DoGetBestSize(attr, dc, m_choices[n].ToStdString()));
+        size.IncTo(DoGetBestSize(attr, dc, m_choices[n]));
     }
 
     return size;
 }
 
-void wxGridCellChoiceRenderer::SetParameters(const wxString& params)
+void wxGridCellChoiceRenderer::SetParameters(const std::string& params)
 {
     m_choices.clear();
 
@@ -786,15 +788,17 @@ wxSize wxGridCellNumberRenderer::GetMaxBestSize(wxGrid& WXUNUSED(grid),
     return size;
 }
 
-void wxGridCellNumberRenderer::SetParameters(const wxString& params)
+void wxGridCellNumberRenderer::SetParameters(const std::string& params)
 {
     if ( params.empty() )
         return;
 
-    wxString maxStr;
-    const wxString minStr = params.BeforeFirst(',', &maxStr);
+    auto paramSplit = wx::utils::StrSplit(params, ',');
 
-    if ( !minStr.ToLong(&m_minValue) || !maxStr.ToLong(&m_maxValue) )
+    auto [min_p, min_err] = std::from_chars(paramSplit[0].data(), paramSplit[0].data() + paramSplit[0].size(), m_minValue);
+    auto [max_p, max_err] = std::from_chars(paramSplit[1].data(), paramSplit[1].data() + paramSplit[1].size(), m_maxValue);
+
+    if ( min_err != std::errc() || max_err != std::errc() )
     {
         wxLogDebug("Invalid wxGridCellNumberRenderer parameters \"%s\"", params);
     }
@@ -844,28 +848,28 @@ std::string wxGridCellFloatRenderer::GetString(const wxGrid& grid, int row, int 
 
     if ( hasDouble )
     {
-        if ( !m_format )
+        if ( m_format.empty() )
         {
             if ( m_width == -1 )
             {
                 if ( m_precision == -1 )
                 {
                     // default width/precision
-                    m_format = wxT("%");
+                    m_format = "%";
                 }
                 else
                 {
-                    m_format.Printf(wxT("%%.%d"), m_precision);
+                    m_format = fmt::format("%%.%d", m_precision);
                 }
             }
             else if ( m_precision == -1 )
             {
                 // default precision
-                m_format.Printf(wxT("%%%d."), m_width);
+                m_format = fmt::format("%%%d.", m_width);
             }
             else
             {
-                m_format.Printf(wxT("%%%d.%d"), m_width, m_precision);
+                m_format = fmt::format("%%%d.%d", m_width, m_precision);
             }
 
             bool isUpper = ( ( m_style & wxGRID_FLOAT_FORMAT_UPPER ) == wxGRID_FLOAT_FORMAT_UPPER);
@@ -877,7 +881,7 @@ std::string wxGridCellFloatRenderer::GetString(const wxGrid& grid, int row, int 
                 m_format += wxT('f');
         }
 
-        text.Printf(m_format, val);
+        text = fmt::format(m_format, val);
 
     }
     //else: text already contains the string
@@ -912,9 +916,9 @@ wxSize wxGridCellFloatRenderer::GetBestSize(wxGrid& grid,
     return DoGetBestSize(attr, dc, GetString(grid, row, col));
 }
 
-void wxGridCellFloatRenderer::SetParameters(const wxString& params)
+void wxGridCellFloatRenderer::SetParameters(const std::string& params)
 {
-    if ( !params )
+    if ( params.empty() )
     {
         // reset to defaults
         SetWidth(-1);
@@ -923,69 +927,54 @@ void wxGridCellFloatRenderer::SetParameters(const wxString& params)
     }
     else
     {
-        wxString rest;
-        wxString tmp = params.BeforeFirst(wxT(','), &rest);
-        if ( !tmp.empty() )
+        auto paramSplit = wx::utils::StrSplit(params, ',');
+
+        auto [pWidth, errW] = std::from_chars(paramSplit[0].data(), paramSplit[0].data() + paramSplit[0].size(), m_width);
+        auto [pPrec, errP] = std::from_chars(paramSplit[1].data(), paramSplit[1].data() + paramSplit[1].size(), m_precision);
+
+        if (!paramSplit[0].empty() && errW != std::errc())
         {
-            long width;
-            if ( tmp.ToLong(&width) )
-            {
-                SetWidth((int)width);
-            }
-            else
-            {
-                wxLogDebug(wxT("Invalid wxGridCellFloatRenderer width parameter string '%s ignored"), params.c_str());
-            }
+            wxLogDebug("Invalid wxGridCellFloatRenderer width parameter string '%s ignored", params.c_str());
         }
 
-        tmp = rest.BeforeFirst(wxT(','));
-        if ( !tmp.empty() )
+        if (!paramSplit[1].empty() && errP != std::errc())
         {
-            long precision;
-            if ( tmp.ToLong(&precision) )
-            {
-                SetPrecision((int)precision);
-            }
-            else
-            {
-                wxLogDebug(wxT("Invalid wxGridCellFloatRenderer precision parameter string '%s ignored"), params.c_str());
-            }
+            wxLogDebug("Invalid wxGridCellFloatRenderer precision parameter string '%s ignored", params.c_str());
         }
 
-        tmp = rest.AfterFirst(wxT(','));
-        if ( !tmp.empty() )
+        if (!paramSplit[2].empty())
         {
-            if ( tmp[0] == wxT('f') )
+            if (paramSplit[2] == 'f')
             {
-                SetFormat(wxGRID_FLOAT_FORMAT_FIXED);
+                m_style = wxGRID_FLOAT_FORMAT_FIXED;
             }
-            else if ( tmp[0] == wxT('e') )
+            else if (paramSplit[2] == 'e')
             {
-                SetFormat(wxGRID_FLOAT_FORMAT_SCIENTIFIC);
+                m_style = wxGRID_FLOAT_FORMAT_SCIENTIFIC;
             }
-            else if ( tmp[0] == wxT('g') )
+            else if (paramSplit[2] == 'g')
             {
-                SetFormat(wxGRID_FLOAT_FORMAT_COMPACT);
+                m_style = wxGRID_FLOAT_FORMAT_COMPACT;
             }
-            else if ( tmp[0] == wxT('E') )
+            else if (paramSplit[2] == 'E')
             {
-                SetFormat(wxGRID_FLOAT_FORMAT_SCIENTIFIC |
-                          wxGRID_FLOAT_FORMAT_UPPER);
+                m_style = wxGRID_FLOAT_FORMAT_SCIENTIFIC |
+                    wxGRID_FLOAT_FORMAT_UPPER;
             }
-            else if ( tmp[0] == wxT('F') )
+            else if (paramSplit[2] == 'F')
             {
-                SetFormat(wxGRID_FLOAT_FORMAT_FIXED |
-                          wxGRID_FLOAT_FORMAT_UPPER);
+                m_style = wxGRID_FLOAT_FORMAT_FIXED |
+                    wxGRID_FLOAT_FORMAT_UPPER;
             }
-            else if ( tmp[0] == wxT('G') )
+            else if (paramSplit[2] == 'G')
             {
-                SetFormat(wxGRID_FLOAT_FORMAT_COMPACT |
-                          wxGRID_FLOAT_FORMAT_UPPER);
+                m_style = wxGRID_FLOAT_FORMAT_COMPACT |
+                    wxGRID_FLOAT_FORMAT_UPPER;
             }
             else
             {
                 wxLogDebug("Invalid wxGridCellFloatRenderer format "
-                           "parameter string '%s ignored", params);
+                    "parameter string '%s ignored", params);
             }
         }
     }

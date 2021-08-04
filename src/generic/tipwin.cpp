@@ -23,7 +23,10 @@
 #endif // WX_PRECOMP
 
 #include "wx/display.h"
+
 #include <vector>
+
+#include "gsl/gsl"
 
 // ----------------------------------------------------------------------------
 // constants
@@ -51,12 +54,12 @@ public:
     void OnMouseMove(wxMouseEvent& event);
 
     // calculate the client rect we need to display the text
-    void Adjust(const wxString& text, wxCoord maxLength);
+    void Adjust(std::string_view text, wxCoord maxLength);
 
 private:
     wxTipWindow* m_parent;
 
-    std::vector<wxString> m_textLines;
+    std::vector<std::string> m_textLines;
     wxCoord m_heightLine{0};
 
 
@@ -217,7 +220,7 @@ wxTipWindowView::wxTipWindowView(wxWindow *parent)
     SetBackgroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_INFOBK));
 }
 
-void wxTipWindowView::Adjust(const wxString& text, wxCoord maxLength)
+void wxTipWindowView::Adjust(std::string_view text, wxCoord maxLength)
 {
     wxClientDC dc(this);
     dc.SetFont(GetFont());
@@ -225,13 +228,17 @@ void wxTipWindowView::Adjust(const wxString& text, wxCoord maxLength)
     // calculate the length: we want each line be no longer than maxLength
     // pixels and we only break lines at words boundary
     std::string current;
-    wxCoord height, width,
-            widthMax = 0;
+
+    wxCoord height{0};
+    wxCoord width{0};
+    wxCoord widthMax{0};
 
     bool breakLine = false;
-    for ( const wxChar *p = text.c_str(); ; p++ )
+    for ( std::string_view::iterator p = text.begin(); p != text.end(); ++p )
     {
-        if ( *p == wxT('\n') || *p == wxT('\0') )
+        auto ch = *p;
+
+        if ( ch == '\n' || ch == '\0' )
         {
             dc.GetTextExtent(current, &width, &height);
             if ( width > widthMax )
@@ -242,7 +249,7 @@ void wxTipWindowView::Adjust(const wxString& text, wxCoord maxLength)
 
             m_textLines.push_back(current);
 
-            if ( !*p )
+            if ( p == text.end() )
             {
                 // end of text
                 break;
@@ -251,7 +258,7 @@ void wxTipWindowView::Adjust(const wxString& text, wxCoord maxLength)
             current.clear();
             breakLine = false;
         }
-        else if ( breakLine && (*p == wxT(' ') || *p == wxT('\t')) )
+        else if ( breakLine && (ch == ' ' || ch == '\t') )
         {
             // word boundary - break the line here
             m_textLines.push_back(current);
@@ -260,7 +267,7 @@ void wxTipWindowView::Adjust(const wxString& text, wxCoord maxLength)
         }
         else // line goes on
         {
-            current += *p;
+            current += ch;
             dc.GetTextExtent(current, &width, &height);
             if ( width > maxLength )
                 breakLine = true;
@@ -275,7 +282,7 @@ void wxTipWindowView::Adjust(const wxString& text, wxCoord maxLength)
 
     // take into account the border size and the margins
     width  = 2*(TEXT_MARGIN_X + 1) + widthMax;
-    height = 2*(TEXT_MARGIN_Y + 1) + wx_truncate_cast(wxCoord, m_textLines.size())*m_heightLine;
+    height = 2*(TEXT_MARGIN_Y + 1) + gsl::narrow<wxCoord>(m_textLines.size()) * m_heightLine;
     m_parent->SetClientSize(width, height);
     SetSize(0, 0, width, height);
 }
@@ -305,7 +312,7 @@ void wxTipWindowView::OnPaint(wxPaintEvent& WXUNUSED(event))
     const size_t count = m_textLines.size();
     for ( size_t n = 0; n < count; n++ )
     {
-        dc.DrawText(m_textLines[n].ToStdString(), pt);
+        dc.DrawText(m_textLines[n], pt);
 
         pt.y += m_heightLine;
     }

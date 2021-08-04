@@ -25,12 +25,12 @@ class WXDLLIMPEXP_CORE wxJPEGHandler: public wxImageHandler
 public:
     wxJPEGHandler()
     {
-        m_name = wxT("JPEG file");
-        m_extension = wxT("jpg");
-        m_altExtensions.push_back(wxT("jpeg"));
-        m_altExtensions.push_back(wxT("jpe"));
+        m_name = "JPEG file";
+        m_extension = "jpg";
+        m_altExtensions.push_back("jpeg");
+        m_altExtensions.push_back("jpe");
         m_type = wxBITMAP_TYPE_JPEG;
-        m_mime = wxT("image/jpeg");
+        m_mime = "image/jpeg";
     }
 
     static wxVersionInfo GetLibraryVersionInfo();
