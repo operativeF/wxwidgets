@@ -38,6 +38,6 @@ wxEND_PROPERTIES_TABLE()
 wxEMPTY_HANDLERS_TABLE(wxOwnerDrawnComboBox)
 
 wxCONSTRUCTOR_5( wxOwnerDrawnComboBox , wxWindow* , Parent , wxWindowID , \
-                 Id , wxString , Value , wxPoint , Position , wxSize , Size )
+                 Id , std::string , Value , wxPoint , Position , wxSize , Size )
 
 #endif // wxUSE_ODCOMBOBOX

@@ -67,7 +67,7 @@ gboolean statusbar_query_tooltip(GtkWidget*   WXUNUSED(widget),
     if (!statbar->GetField(n).IsEllipsized())
         return FALSE;   // no, it's not useful
 
-    const wxString& str = statbar->GetStatusText(n);
+    const std::string& str = statbar->GetStatusText(n);
     if (str.empty())
         return FALSE;
 

@@ -94,7 +94,7 @@ public:
     virtual bool CreatePages(long pages, wxRichTextFormattingDialog* dialog);
 
     /// Create a page, given a page identifier
-    virtual wxPanel* CreatePage(int page, wxString& title, wxRichTextFormattingDialog* dialog);
+    virtual wxPanel* CreatePage(int page, std::string& title, wxRichTextFormattingDialog* dialog);
 
     /// Enumerate all available page identifiers
     virtual int GetPageId(int i) const;
@@ -130,7 +130,7 @@ public:
 
     wxRichTextFormattingDialog() = default;
 
-    wxRichTextFormattingDialog(long flags, wxWindow* parent, const wxString& title = wxGetTranslation(wxT("Formatting")), wxWindowID id = wxID_ANY,
+    wxRichTextFormattingDialog(long flags, wxWindow* parent, const std::string& title = wxGetTranslation(wxT("Formatting")), wxWindowID id = wxID_ANY,
         const wxPoint& pos = wxDefaultPosition, const wxSize& sz = wxDefaultSize,
         long style = wxDEFAULT_DIALOG_STYLE)
     {
@@ -139,7 +139,7 @@ public:
 
     ~wxRichTextFormattingDialog() override;
 
-    bool Create(long flags, wxWindow* parent, const wxString& title = wxGetTranslation(wxT("Formatting")), wxWindowID id = wxID_ANY,
+    bool Create(long flags, wxWindow* parent, const std::string& title = wxGetTranslation(wxT("Formatting")), wxWindowID id = wxID_ANY,
         const wxPoint& pos = wxDefaultPosition, const wxSize& sz = wxDefaultSize,
         long style = wxDEFAULT_DIALOG_STYLE);
 
@@ -231,7 +231,7 @@ public:
     static void GetDimensionValue(wxTextAttrDimension& dim, wxTextCtrl* valueCtrl, wxComboBox* unitsCtrl, wxCheckBox* checkBox, std::vector<int>* units = nullptr);
 
     /// Convert from a string to a dimension integer.
-    static bool ConvertFromString(const wxString& str, int& ret, int unit);
+    static bool ConvertFromString(const std::string& str, int& ret, int unit);
 
     /// Map book control page index to our page id
     void AddPageId(int id) { m_pageIds.push_back(id); }
@@ -336,20 +336,20 @@ public:
         const wxSize& size = wxDefaultSize, long style = 0);
 
     /// Creates a suitable HTML fragment for a font
-    wxString CreateHTML(const wxString& facename) const;
+    std::string CreateHTML(const std::string& facename) const;
 
     /// Get font name for index
-    wxString GetFaceName(size_t i) const ;
+    std::string GetFaceName(size_t i) const ;
 
     /// Set selection for string, returning the index.
-    int SetFaceNameSelection(const wxString& name);
+    int SetFaceNameSelection(const std::string& name);
 
     /// Updates the font list
     void UpdateFonts();
 
     /// Does this face name exist?
     // FIXME: Case sensitivity; does it matter here?
-    bool HasFaceName(const wxString& faceName) const
+    bool HasFaceName(const std::string& faceName) const
     {
         return std::find(m_faceNames.cbegin(), m_faceNames.cend(), faceName) != m_faceNames.cend();
     }
@@ -359,7 +359,7 @@ public:
 
 protected:
     /// Returns the HTML for this item
-    wxString OnGetItem(size_t n) const override;
+    std::string OnGetItem(size_t n) const override;
 
 private:
     std::vector<std::string> m_faceNames;

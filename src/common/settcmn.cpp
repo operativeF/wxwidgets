@@ -60,7 +60,7 @@ void wxSystemSettings::SetScreenType( wxSystemScreenType screen )
 
 #if !defined(__WXOSX__)
 
-wxString wxSystemAppearance::GetName() const
+std::string wxSystemAppearance::GetName() const
 {
     return {};
 }

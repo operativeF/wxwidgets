@@ -598,7 +598,7 @@ private:
                     // We need to dismiss the drop-down manually as Escape
                     // could be eaten by something else (e.g. EVT_CHAR_HOOK in
                     // the dialog that this control is found in) otherwise.
-                    ::SendMessage(GetHwndOf(m_win), WM_KEYDOWN, WXK_ESCAPE, 0);
+                    ::SendMessageW(GetHwndOf(m_win), WM_KEYDOWN, WXK_ESCAPE, 0);
 
                     // Do not skip the event in this case, we've already handled it.
                     return;
@@ -700,17 +700,17 @@ void wxTextEntry::Remove(long from, long to)
 
 void wxTextEntry::Copy()
 {
-    ::SendMessage(GetEditHwnd(), WM_COPY, 0, 0);
+    ::SendMessageW(GetEditHwnd(), WM_COPY, 0, 0);
 }
 
 void wxTextEntry::Cut()
 {
-    ::SendMessage(GetEditHwnd(), WM_CUT, 0, 0);
+    ::SendMessageW(GetEditHwnd(), WM_CUT, 0, 0);
 }
 
 void wxTextEntry::Paste()
 {
-    ::SendMessage(GetEditHwnd(), WM_PASTE, 0, 0);
+    ::SendMessageW(GetEditHwnd(), WM_PASTE, 0, 0);
 }
 
 // ----------------------------------------------------------------------------
@@ -719,7 +719,7 @@ void wxTextEntry::Paste()
 
 void wxTextEntry::Undo()
 {
-    ::SendMessage(GetEditHwnd(), EM_UNDO, 0, 0);
+    ::SendMessageW(GetEditHwnd(), EM_UNDO, 0, 0);
 }
 
 void wxTextEntry::Redo()
@@ -731,7 +731,7 @@ void wxTextEntry::Redo()
 
 bool wxTextEntry::CanUndo() const
 {
-    return ::SendMessage(GetEditHwnd(), EM_CANUNDO, 0, 0) != 0;
+    return ::SendMessageW(GetEditHwnd(), EM_CANUNDO, 0, 0) != 0;
 }
 
 bool wxTextEntry::CanRedo() const
@@ -765,7 +765,7 @@ long wxTextEntry::GetInsertionPoint() const
 
 long wxTextEntry::GetLastPosition() const
 {
-    return ::SendMessage(GetEditHwnd(), EM_LINELENGTH, 0, 0);
+    return ::SendMessageW(GetEditHwnd(), EM_LINELENGTH, 0, 0);
 }
 
 void wxTextEntry::DoSetSelection(long from, long to, int WXUNUSED(flags))
@@ -777,13 +777,13 @@ void wxTextEntry::DoSetSelection(long from, long to, int WXUNUSED(flags))
         from = 0;
     }
 
-    ::SendMessage(GetEditHwnd(), EM_SETSEL, from, to);
+    ::SendMessageW(GetEditHwnd(), EM_SETSEL, from, to);
 }
 
 void wxTextEntry::GetSelection(long *from, long *to) const
 {
     DWORD dwStart, dwEnd;
-    ::SendMessage(GetEditHwnd(), EM_GETSEL, (WPARAM)&dwStart, (LPARAM)&dwEnd);
+    ::SendMessageW(GetEditHwnd(), EM_GETSEL, (WPARAM)&dwStart, (LPARAM)&dwEnd);
 
     if ( from )
         *from = dwStart;
@@ -810,14 +810,14 @@ bool wxTextEntry::DoAutoCompleteFileNames(int flags)
         dwFlags |= SHACF_FILESYS_DIRS;
     else
     {
-        wxFAIL_MSG(wxS("No flags for file name auto completion?"));
+        wxFAIL_MSG("No flags for file name auto completion?");
         return false;
     }
 
     HRESULT hr = ::SHAutoComplete(GetEditHwnd(), dwFlags);
     if ( FAILED(hr) )
     {
-        wxLogApiError(wxT("SHAutoComplete()"), hr);
+        wxLogApiError("SHAutoComplete()", hr);
 
         return false;
     }
@@ -837,7 +837,7 @@ bool wxTextEntry::DoAutoCompleteFileNames(int flags)
 
 void wxTextEntry::MSWProcessSpecialKey(wxKeyEvent& WXUNUSED(event))
 {
-    wxFAIL_MSG(wxS("Must be overridden if can be called"));
+    wxFAIL_MSG("Must be overridden if can be called");
 }
 
 bool wxTextEntry::MSWUsesStandardAutoComplete() const
@@ -937,12 +937,12 @@ bool wxTextEntry::DoAutoCompleteCustom(wxTextCompleter *completer)
 
 bool wxTextEntry::IsEditable() const
 {
-    return !(::GetWindowLong(GetEditHwnd(), GWL_STYLE) & ES_READONLY);
+    return !(::GetWindowLongW(GetEditHwnd(), GWL_STYLE) & ES_READONLY);
 }
 
 void wxTextEntry::SetEditable(bool editable)
 {
-    ::SendMessage(GetEditHwnd(), EM_SETREADONLY, !editable, 0);
+    ::SendMessageW(GetEditHwnd(), EM_SETREADONLY, !editable, 0);
 }
 
 // ----------------------------------------------------------------------------
@@ -958,7 +958,7 @@ void wxTextEntry::SetMaxLength(unsigned long len)
         len = 0;
     }
 
-    ::SendMessage(GetEditHwnd(), EM_LIMITTEXT, len, 0);
+    ::SendMessageW(GetEditHwnd(), EM_LIMITTEXT, len, 0);
 }
 
 void wxTextEntry::ForceUpper()
@@ -1028,7 +1028,7 @@ bool wxTextEntry::DoSetMargins(const wxPoint& margins)
         // Set both horizontal margins to the given value, we don't distinguish
         // between left and right margin at wx API level and it seems to be
         // better to change both of them than only left one.
-        ::SendMessage(GetEditHwnd(), EM_SETMARGINS,
+        ::SendMessageW(GetEditHwnd(), EM_SETMARGINS,
                       EC_LEFTMARGIN | EC_RIGHTMARGIN,
                       MAKELONG(margins.x, margins.x));
     }
@@ -1043,7 +1043,7 @@ bool wxTextEntry::DoSetMargins(const wxPoint& margins)
 
 wxPoint wxTextEntry::DoGetMargins() const
 {
-    LRESULT lResult = ::SendMessage(GetEditHwnd(), EM_GETMARGINS,
+    LRESULT lResult = ::SendMessageW(GetEditHwnd(), EM_GETMARGINS,
                                     0, 0);
     int left = LOWORD(lResult);
     int top = -1;

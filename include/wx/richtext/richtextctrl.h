@@ -125,7 +125,7 @@ public:
     /**
         Adds an item.
     */
-    bool AddItem(const wxString& label, wxRichTextObject* obj);
+    bool AddItem(const std::string& label, wxRichTextObject* obj);
 
     /**
         Returns the number of menu items that were added.
@@ -152,7 +152,7 @@ public:
     /**
         Returns the nth label.
     */
-    wxString GetLabel(int n) const { return m_labels[n]; }
+    std::string GetLabel(int n) const { return m_labels[n]; }
 
     /**
         Returns the nth object.
@@ -172,12 +172,12 @@ public:
     /**
         Returns the array of labels.
     */
-    std::vector<wxString>& GetLabels() { return m_labels; }
+    std::vector<std::string>& GetLabels() { return m_labels; }
 
     /**
         Returns the array of labels.
     */
-    const std::vector<wxString>& GetLabels() const { return m_labels; }
+    const std::vector<std::string>& GetLabels() const { return m_labels; }
 
     /**
         Returns the number of items.
@@ -185,7 +185,7 @@ public:
     int GetCount() const { return m_objects.GetCount(); }
 
     wxRichTextObjectPtrArray    m_objects;
-    std::vector<wxString>       m_labels;
+    std::vector<std::string>       m_labels;
 };
 
 /**
@@ -227,13 +227,13 @@ class WXDLLIMPEXP_RICHTEXT wxRichTextCtrl : public wxControl,
 public:
     wxRichTextCtrl( );
 
-    wxRichTextCtrl( wxWindow* parent, wxWindowID id = -1, const wxString& value = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize,
-        long style = wxRE_MULTILINE, const wxValidator& validator = wxDefaultValidator, const wxString& name = wxASCII_STR(wxTextCtrlNameStr));
+    wxRichTextCtrl( wxWindow* parent, wxWindowID id = -1, const std::string& value = {}, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize,
+        long style = wxRE_MULTILINE, const wxValidator& validator = wxDefaultValidator, const std::string& name = wxASCII_STR(wxTextCtrlNameStr));
 
     ~wxRichTextCtrl() override;
 
-    bool Create( wxWindow* parent, wxWindowID id = -1, const wxString& value = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize,
-        long style = wxRE_MULTILINE, const wxValidator& validator = wxDefaultValidator, const wxString& name = wxASCII_STR(wxTextCtrlNameStr) );
+    bool Create( wxWindow* parent, wxWindowID id = -1, const std::string& value = {}, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize,
+        long style = wxRE_MULTILINE, const wxValidator& validator = wxDefaultValidator, const std::string& name = wxASCII_STR(wxTextCtrlNameStr) );
 
 // Accessors
 
@@ -300,12 +300,12 @@ public:
     /**
         Gets the current filename associated with the control.
     */
-    wxString GetFilename() const { return m_filename; }
+    std::string GetFilename() const { return m_filename; }
 
     /**
         Sets the current filename.
     */
-    void SetFilename(const wxString& filename) { m_filename = filename; }
+    void SetFilename(const std::string& filename) { m_filename = filename; }
 
     /**
         Sets the size of the buffer beyond which layout is delayed during resizing.
@@ -534,7 +534,7 @@ public:
 
         This function looks for a suitable wxRichTextFileHandler object.
     */
-    bool LoadFile(const wxString& file,
+    bool LoadFile(const std::string& file,
                   int type = wxRICHTEXT_TYPE_ANY);
 #endif
 
@@ -559,7 +559,7 @@ public:
 
         This function looks for a suitable wxRichTextFileHandler object.
     */
-    bool SaveFile(const wxString& file = wxEmptyString,
+    bool SaveFile(const std::string& file = {},
                   int type = wxRICHTEXT_TYPE_ANY);
 #endif
 
@@ -757,7 +757,7 @@ public:
         @see NumberList(), PromoteList(), ClearListStyle().
     */
     virtual bool SetListStyle(const wxRichTextRange& range, wxRichTextListStyleDefinition* def, int flags = wxRICHTEXT_SETSTYLE_WITH_UNDO, int startFrom = 1, int specifiedLevel = -1);
-    virtual bool SetListStyle(const wxRichTextRange& range, const wxString& defName, int flags = wxRICHTEXT_SETSTYLE_WITH_UNDO, int startFrom = 1, int specifiedLevel = -1);
+    virtual bool SetListStyle(const wxRichTextRange& range, const std::string& defName, int flags = wxRICHTEXT_SETSTYLE_WITH_UNDO, int startFrom = 1, int specifiedLevel = -1);
     //@}
 
     /**
@@ -789,7 +789,7 @@ public:
         @see SetListStyle(), PromoteList(), ClearListStyle().
     */
     virtual bool NumberList(const wxRichTextRange& range, wxRichTextListStyleDefinition* def = nullptr, int flags = wxRICHTEXT_SETSTYLE_WITH_UNDO, int startFrom = 1, int specifiedLevel = -1);
-    virtual bool NumberList(const wxRichTextRange& range, const wxString& defName, int flags = wxRICHTEXT_SETSTYLE_WITH_UNDO, int startFrom = 1, int specifiedLevel = -1);
+    virtual bool NumberList(const wxRichTextRange& range, const std::string& defName, int flags = wxRICHTEXT_SETSTYLE_WITH_UNDO, int startFrom = 1, int specifiedLevel = -1);
     //@}
 
     //@{
@@ -810,7 +810,7 @@ public:
         @see SetListStyle(), @see SetListStyle(), ClearListStyle().
     */
     virtual bool PromoteList(int promoteBy, const wxRichTextRange& range, wxRichTextListStyleDefinition* def = nullptr, int flags = wxRICHTEXT_SETSTYLE_WITH_UNDO, int specifiedLevel = -1);
-    virtual bool PromoteList(int promoteBy, const wxRichTextRange& range, const wxString& defName, int flags = wxRICHTEXT_SETSTYLE_WITH_UNDO, int specifiedLevel = -1);
+    virtual bool PromoteList(int promoteBy, const wxRichTextRange& range, const std::string& defName, int flags = wxRICHTEXT_SETSTYLE_WITH_UNDO, int specifiedLevel = -1);
     //@}
 
     /**
@@ -1008,7 +1008,7 @@ public:
     /**
         Loads an image from a file and writes it at the current insertion point.
     */
-    virtual bool WriteImage(const wxString& filename, wxBitmapType bitmapType,
+    virtual bool WriteImage(const std::string& filename, wxBitmapType bitmapType,
                             const wxRichTextAttr& textAttr = wxRichTextAttr());
 
     /**
@@ -1035,7 +1035,7 @@ public:
 
         @see wxRichTextField, wxRichTextFieldType, wxRichTextFieldTypeStandard
     */
-    virtual wxRichTextField* WriteField(const wxString& fieldType, const wxRichTextProperties& properties,
+    virtual wxRichTextField* WriteField(const std::string& fieldType, const wxRichTextProperties& properties,
                             const wxRichTextAttr& textAttr = wxRichTextAttr());
 
     /**
@@ -1253,7 +1253,7 @@ public:
         See BeginNumberedBullet() for an explanation of how indentation is used
         to render the bulleted paragraph.
     */
-    bool BeginSymbolBullet(const wxString& symbol, int leftIndent, int leftSubIndent, int bulletStyle = wxTEXT_ATTR_BULLET_STYLE_SYMBOL)
+    bool BeginSymbolBullet(const std::string& symbol, int leftIndent, int leftSubIndent, int bulletStyle = wxTEXT_ATTR_BULLET_STYLE_SYMBOL)
     { return GetBuffer().BeginSymbolBullet(symbol, leftIndent, leftSubIndent, bulletStyle); }
 
     /**
@@ -1264,7 +1264,7 @@ public:
     /**
         Begins applying a symbol bullet.
     */
-    bool BeginStandardBullet(const wxString& bulletName, int leftIndent, int leftSubIndent, int bulletStyle = wxTEXT_ATTR_BULLET_STYLE_STANDARD)
+    bool BeginStandardBullet(const std::string& bulletName, int leftIndent, int leftSubIndent, int bulletStyle = wxTEXT_ATTR_BULLET_STYLE_STANDARD)
     { return GetBuffer().BeginStandardBullet(bulletName, leftIndent, leftSubIndent, bulletStyle); }
 
     /**
@@ -1275,7 +1275,7 @@ public:
     /**
         Begins using the named character style.
     */
-    bool BeginCharacterStyle(const wxString& characterStyle) { return GetBuffer().BeginCharacterStyle(characterStyle); }
+    bool BeginCharacterStyle(const std::string& characterStyle) { return GetBuffer().BeginCharacterStyle(characterStyle); }
 
     /**
         Ends application of a named character style.
@@ -1285,7 +1285,7 @@ public:
     /**
         Begins applying the named paragraph style.
     */
-    bool BeginParagraphStyle(const wxString& paragraphStyle) { return GetBuffer().BeginParagraphStyle(paragraphStyle); }
+    bool BeginParagraphStyle(const std::string& paragraphStyle) { return GetBuffer().BeginParagraphStyle(paragraphStyle); }
 
     /**
         Ends application of a named paragraph style.
@@ -1296,7 +1296,7 @@ public:
         Begins using a specified list style.
         Optionally, you can also pass a level and a number.
     */
-    bool BeginListStyle(const wxString& listStyle, int level = 1, int number = 1) { return GetBuffer().BeginListStyle(listStyle, level, number); }
+    bool BeginListStyle(const std::string& listStyle, int level = 1, int number = 1) { return GetBuffer().BeginListStyle(listStyle, level, number); }
 
     /**
         Ends using a specified list style.
@@ -1309,7 +1309,7 @@ public:
         Pass a URL and optionally, a character style to apply, since it is common
         to mark a URL with a familiar style such as blue text with underlining.
     */
-    bool BeginURL(const wxString& url, const wxString& characterStyle = wxEmptyString) { return GetBuffer().BeginURL(url, characterStyle); }
+    bool BeginURL(const std::string& url, const std::string& characterStyle = {}) { return GetBuffer().BeginURL(url, characterStyle); }
 
     /**
         Ends applying a URL.
@@ -1368,7 +1368,7 @@ public:
     /**
         Adds a new paragraph of text to the end of the buffer.
     */
-    virtual wxRichTextRange AddParagraph(const wxString& text);
+    virtual wxRichTextRange AddParagraph(const std::string& text);
 
     /**
         Adds an image to the control's buffer.
@@ -1476,7 +1476,7 @@ public:
     /**
         Starts batching undo history for commands.
     */
-    virtual bool BeginBatchUndo(const wxString& cmdName) { return m_buffer.BeginBatchUndo(cmdName); }
+    virtual bool BeginBatchUndo(const std::string& cmdName) { return m_buffer.BeginBatchUndo(cmdName); }
 
     /**
         Ends batching undo command history.
@@ -1639,7 +1639,7 @@ public:
     /**
         Gets the object's properties menu label.
     */
-    virtual wxString GetPropertiesMenuLabel(wxRichTextObject* obj) { return obj->GetPropertiesMenuLabel(); }
+    virtual std::string GetPropertiesMenuLabel(wxRichTextObject* obj) { return obj->GetPropertiesMenuLabel(); }
 
     /**
         Prepares the content just before insertion (or after buffer reset). Called by the same function in wxRichTextBuffer.
@@ -1924,7 +1924,7 @@ public:
 #endif
 
     // Write text
-    virtual void DoWriteText(const wxString& value, int flags = 0);
+    virtual void DoWriteText(const std::string& value, int flags = 0);
 
     // Should we inherit colours?
     bool ShouldInheritColours() const override { return false; }
@@ -2157,12 +2157,12 @@ public:
     /**
         Returns the content of the entire control as a string.
     */
-    virtual wxString GetValue() const;
+    virtual std::string GetValue() const;
 
     /**
         Replaces existing content with the given text.
     */
-    virtual void SetValue(const wxString& value);
+    virtual void SetValue(const std::string& value);
 
     /**
         Call this function to prevent refresh and allow fast updates, and then Thaw() to

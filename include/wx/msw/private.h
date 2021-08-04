@@ -1063,13 +1063,13 @@ wxUpdateExStyleForLayoutDirection(WXHWND hWnd,
             break;
 
         case wxLayoutDirection::Default:
-            wxFAIL_MSG(wxS("Invalid layout direction"));
+            wxFAIL_MSG("Invalid layout direction");
     }
 
     if ( styleNew == styleOld )
         return false;
 
-    ::SetWindowLongPtr(hWnd, GWL_EXSTYLE, styleNew);
+    ::SetWindowLongPtrW(hWnd, GWL_EXSTYLE, styleNew);
 
     return true;
 }

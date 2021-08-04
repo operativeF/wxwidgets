@@ -57,7 +57,7 @@ public:
     }
 
     /// Default constructor
-    wxRichTextStyleDefinition(const wxString& name = wxEmptyString) { Init(); m_name = name; }
+    wxRichTextStyleDefinition(const std::string& name = {}) { Init(); m_name = name; }
 
     /// Destructor
     ~wxRichTextStyleDefinition() override = default;
@@ -81,16 +81,16 @@ public:
     virtual wxRichTextStyleDefinition* Clone() const = 0;
 
     /// Sets and gets the name of the style
-    void SetName(const wxString& name) { m_name = name; }
-    const wxString& GetName() const { return m_name; }
+    void SetName(const std::string& name) { m_name = name; }
+    const std::string& GetName() const { return m_name; }
 
     /// Sets and gets the style description
-    void SetDescription(const wxString& descr) { m_description = descr; }
-    const wxString& GetDescription() const { return m_description; }
+    void SetDescription(const std::string& descr) { m_description = descr; }
+    const std::string& GetDescription() const { return m_description; }
 
     /// Sets and gets the name of the style that this style is based on
-    void SetBaseStyle(const wxString& name) { m_baseStyle = name; }
-    const wxString& GetBaseStyle() const { return m_baseStyle; }
+    void SetBaseStyle(const std::string& name) { m_baseStyle = name; }
+    const std::string& GetBaseStyle() const { return m_baseStyle; }
 
     /// Sets and gets the style
     void SetStyle(const wxRichTextAttr& style) { m_style = style; }
@@ -116,9 +116,9 @@ public:
     void SetProperties(const wxRichTextProperties& props) { m_properties = props; }
 
 protected:
-    wxString                m_name;
-    wxString                m_baseStyle;
-    wxString                m_description;
+    std::string                m_name;
+    std::string                m_baseStyle;
+    std::string                m_description;
     wxRichTextAttr          m_style;
     wxRichTextProperties    m_properties;
 };
@@ -133,7 +133,7 @@ class WXDLLIMPEXP_RICHTEXT wxRichTextCharacterStyleDefinition: public wxRichText
 public:
 
     /// Default constructor
-    wxRichTextCharacterStyleDefinition(const wxString& name = wxEmptyString):
+    wxRichTextCharacterStyleDefinition(const std::string& name = {}):
         wxRichTextStyleDefinition(name) {}
 
     /// Destructor
@@ -158,15 +158,15 @@ public:
     wxRichTextParagraphStyleDefinition(const wxRichTextParagraphStyleDefinition& def): wxRichTextStyleDefinition(def) { m_nextStyle = def.m_nextStyle; }
 
     /// Default constructor
-    wxRichTextParagraphStyleDefinition(const wxString& name = wxEmptyString):
+    wxRichTextParagraphStyleDefinition(const std::string& name = {}):
         wxRichTextStyleDefinition(name) {}
 
     // Destructor
     ~wxRichTextParagraphStyleDefinition() override = default;
 
     /// Sets and gets the next style
-    void SetNextStyle(const wxString& name) { m_nextStyle = name; }
-    const wxString& GetNextStyle() const { return m_nextStyle; }
+    void SetNextStyle(const std::string& name) { m_nextStyle = name; }
+    const std::string& GetNextStyle() const { return m_nextStyle; }
 
     /// Copies from def
     void Copy(const wxRichTextParagraphStyleDefinition& def);
@@ -183,7 +183,7 @@ public:
 protected:
 
     /// The next style to use when adding a paragraph after this style.
-    wxString    m_nextStyle;
+    std::string    m_nextStyle;
 };
 
 /*!
@@ -199,7 +199,7 @@ public:
     wxRichTextListStyleDefinition(const wxRichTextListStyleDefinition& def): wxRichTextParagraphStyleDefinition(def) { Init(); Copy(def); }
 
     /// Default constructor
-    wxRichTextListStyleDefinition(const wxString& name = wxEmptyString):
+    wxRichTextListStyleDefinition(const std::string& name = {}):
         wxRichTextParagraphStyleDefinition(name) { Init(); }
 
     /// Destructor
@@ -223,7 +223,7 @@ public:
     const wxRichTextAttr* GetLevelAttributes(int i) const;
 
     /// Convenience function for setting the major attributes for a list level specification
-    void SetAttributes(int i, int leftIndent, int leftSubIndent, int bulletStyle, const wxString& bulletSymbol = wxEmptyString);
+    void SetAttributes(int i, int leftIndent, int leftSubIndent, int bulletStyle, const std::string& bulletSymbol = {});
 
     /// Finds the level corresponding to the given indentation
     int FindLevelForIndent(int indent) const;
@@ -265,7 +265,7 @@ public:
     wxRichTextBoxStyleDefinition(const wxRichTextBoxStyleDefinition& def): wxRichTextStyleDefinition(def) { Copy(def); }
 
     /// Default constructor
-    wxRichTextBoxStyleDefinition(const wxString& name = wxEmptyString):
+    wxRichTextBoxStyleDefinition(const std::string& name = {}):
         wxRichTextStyleDefinition(name) {}
 
     // Destructor
@@ -348,19 +348,19 @@ public:
     bool RemoveStyle(wxRichTextStyleDefinition* def, bool deleteStyle = false);
 
     /// Find a character definition by name
-    wxRichTextCharacterStyleDefinition* FindCharacterStyle(const wxString& name, bool recurse = true) const { return (wxRichTextCharacterStyleDefinition*) FindStyle(m_characterStyleDefinitions, name, recurse); }
+    wxRichTextCharacterStyleDefinition* FindCharacterStyle(const std::string& name, bool recurse = true) const { return (wxRichTextCharacterStyleDefinition*) FindStyle(m_characterStyleDefinitions, name, recurse); }
 
     /// Find a paragraph definition by name
-    wxRichTextParagraphStyleDefinition* FindParagraphStyle(const wxString& name, bool recurse = true) const { return (wxRichTextParagraphStyleDefinition*) FindStyle(m_paragraphStyleDefinitions, name, recurse); }
+    wxRichTextParagraphStyleDefinition* FindParagraphStyle(const std::string& name, bool recurse = true) const { return (wxRichTextParagraphStyleDefinition*) FindStyle(m_paragraphStyleDefinitions, name, recurse); }
 
     /// Find a list definition by name
-    wxRichTextListStyleDefinition* FindListStyle(const wxString& name, bool recurse = true) const { return (wxRichTextListStyleDefinition*) FindStyle(m_listStyleDefinitions, name, recurse); }
+    wxRichTextListStyleDefinition* FindListStyle(const std::string& name, bool recurse = true) const { return (wxRichTextListStyleDefinition*) FindStyle(m_listStyleDefinitions, name, recurse); }
 
     /// Find a box definition by name
-    wxRichTextBoxStyleDefinition* FindBoxStyle(const wxString& name, bool recurse = true) const { return (wxRichTextBoxStyleDefinition*) FindStyle(m_boxStyleDefinitions, name, recurse); }
+    wxRichTextBoxStyleDefinition* FindBoxStyle(const std::string& name, bool recurse = true) const { return (wxRichTextBoxStyleDefinition*) FindStyle(m_boxStyleDefinitions, name, recurse); }
 
     /// Find any definition by name
-    wxRichTextStyleDefinition* FindStyle(const wxString& name, bool recurse = true) const;
+    wxRichTextStyleDefinition* FindStyle(const std::string& name, bool recurse = true) const;
 
     /// Return the number of character styles
     size_t GetCharacterStyleCount() const { return m_characterStyleDefinitions.GetCount(); }
@@ -407,12 +407,12 @@ public:
     void SetPreviousSheet(wxRichTextStyleSheet* sheet) { m_previousSheet = sheet; }
 
     /// Sets and gets the name of the style sheet
-    void SetName(const wxString& name) { m_name = name; }
-    const wxString& GetName() const { return m_name; }
+    void SetName(const std::string& name) { m_name = name; }
+    const std::string& GetName() const { return m_name; }
 
     /// Sets and gets the style description
-    void SetDescription(const wxString& descr) { m_description = descr; }
-    const wxString& GetDescription() const { return m_description; }
+    void SetDescription(const std::string& descr) { m_description = descr; }
+    const std::string& GetDescription() const { return m_description; }
 
     /**
         Returns the sheet's properties.
@@ -438,12 +438,12 @@ public:
     bool RemoveStyle(wxList& list, wxRichTextStyleDefinition* def, bool deleteStyle);
 
     /// Find a definition by name
-    wxRichTextStyleDefinition* FindStyle(const wxList& list, const wxString& name, bool recurse = true) const;
+    wxRichTextStyleDefinition* FindStyle(const wxList& list, const std::string& name, bool recurse = true) const;
 
 protected:
 
-    wxString                m_description;
-    wxString                m_name;
+    std::string                m_description;
+    std::string                m_name;
 
     wxList                  m_characterStyleDefinitions;
     wxList                  m_paragraphStyleDefinitions;
@@ -497,7 +497,7 @@ public:
         const wxSize& size = wxDefaultSize, long style = 0);
 
     /// Creates a suitable HTML fragment for a definition
-    wxString CreateHTML(wxRichTextStyleDefinition* def) const;
+    std::string CreateHTML(wxRichTextStyleDefinition* def) const;
 
     /// Associates the control with a style sheet
     void SetStyleSheet(wxRichTextStyleSheet* styleSheet) { m_styleSheet = styleSheet; }
@@ -511,10 +511,10 @@ public:
     wxRichTextStyleDefinition* GetStyle(size_t i) const ;
 
     /// Get index for style name
-    int GetIndexForStyle(const wxString& name) const ;
+    int GetIndexForStyle(const std::string& name) const ;
 
     /// Set selection for string, returning the index.
-    int SetStyleSelection(const wxString& name);
+    int SetStyleSelection(const std::string& name);
 
     /// Updates the list
     void UpdateStyles();
@@ -548,11 +548,11 @@ public:
     wxRichTextStyleType GetStyleType() const { return m_styleType; }
 
     /// Helper for listbox and combo control
-    static wxString GetStyleToShowInIdleTime(wxRichTextCtrl* ctrl, wxRichTextStyleType styleType);
+    static std::string GetStyleToShowInIdleTime(wxRichTextCtrl* ctrl, wxRichTextStyleType styleType);
 
 protected:
     /// Returns the HTML for this item
-    wxString OnGetItem(size_t n) const override;
+    std::string OnGetItem(size_t n) const override;
 
 private:
 

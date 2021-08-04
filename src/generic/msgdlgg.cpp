@@ -53,7 +53,7 @@ public:
     }
 
 protected:
-    wxWindow *OnCreateLine(const wxString& s) override
+    wxWindow *OnCreateLine(const std::string& s) override
     {
         wxWindow * const win = wxTextSizerWrapper::OnCreateLine(s);
 

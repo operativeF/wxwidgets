@@ -51,10 +51,10 @@ class WXDLLIMPEXP_RICHTEXT wxRichTextObjectPropertiesDialog: public wxRichTextFo
 public:
     /// Constructors
     wxRichTextObjectPropertiesDialog();
-    wxRichTextObjectPropertiesDialog( wxRichTextObject* obj, wxWindow* parent, wxWindowID id = SYMBOL_WXRICHTEXTOBJECTPROPERTIESDIALOG_IDNAME, const wxString& caption = SYMBOL_WXRICHTEXTOBJECTPROPERTIESDIALOG_TITLE, const wxPoint& pos = SYMBOL_WXRICHTEXTOBJECTPROPERTIESDIALOG_POSITION, const wxSize& size = SYMBOL_WXRICHTEXTOBJECTPROPERTIESDIALOG_SIZE, long style = SYMBOL_WXRICHTEXTOBJECTPROPERTIESDIALOG_STYLE );
+    wxRichTextObjectPropertiesDialog( wxRichTextObject* obj, wxWindow* parent, wxWindowID id = SYMBOL_WXRICHTEXTOBJECTPROPERTIESDIALOG_IDNAME, const std::string& caption = SYMBOL_WXRICHTEXTOBJECTPROPERTIESDIALOG_TITLE, const wxPoint& pos = SYMBOL_WXRICHTEXTOBJECTPROPERTIESDIALOG_POSITION, const wxSize& size = SYMBOL_WXRICHTEXTOBJECTPROPERTIESDIALOG_SIZE, long style = SYMBOL_WXRICHTEXTOBJECTPROPERTIESDIALOG_STYLE );
 
     /// Creation
-    bool Create( wxRichTextObject* obj, wxWindow* parent, wxWindowID id = SYMBOL_WXRICHTEXTOBJECTPROPERTIESDIALOG_IDNAME, const wxString& caption = SYMBOL_WXRICHTEXTOBJECTPROPERTIESDIALOG_TITLE, const wxPoint& pos = SYMBOL_WXRICHTEXTOBJECTPROPERTIESDIALOG_POSITION, const wxSize& size = SYMBOL_WXRICHTEXTOBJECTPROPERTIESDIALOG_SIZE, long style = SYMBOL_WXRICHTEXTOBJECTPROPERTIESDIALOG_STYLE );
+    bool Create( wxRichTextObject* obj, wxWindow* parent, wxWindowID id = SYMBOL_WXRICHTEXTOBJECTPROPERTIESDIALOG_IDNAME, const std::string& caption = SYMBOL_WXRICHTEXTOBJECTPROPERTIESDIALOG_TITLE, const wxPoint& pos = SYMBOL_WXRICHTEXTOBJECTPROPERTIESDIALOG_POSITION, const wxSize& size = SYMBOL_WXRICHTEXTOBJECTPROPERTIESDIALOG_SIZE, long style = SYMBOL_WXRICHTEXTOBJECTPROPERTIESDIALOG_STYLE );
 
     /// Destructor
     ~wxRichTextObjectPropertiesDialog() override;
@@ -72,10 +72,10 @@ public:
 ////@begin wxRichTextObjectPropertiesDialog member function declarations
 
     /// Retrieves bitmap resources
-    wxBitmap GetBitmapResource( const wxString& name );
+    wxBitmap GetBitmapResource( const std::string& name );
 
     /// Retrieves icon resources
-    wxIcon GetIconResource( const wxString& name );
+    wxIcon GetIconResource( const std::string& name );
 ////@end wxRichTextObjectPropertiesDialog member function declarations
 
     /// Should we show tooltips?

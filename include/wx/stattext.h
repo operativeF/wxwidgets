@@ -62,7 +62,7 @@ protected:      // functions required for wxST_ELLIPSIZE_* support
 
     // Calls Ellipsize() on the real label if necessary. Unlike GetLabelText(),
     // keeps the mnemonics instead of removing them.
-    virtual wxString GetEllipsizedLabel() const;
+    virtual std::string GetEllipsizedLabel() const;
 
     // Replaces parts of the string with ellipsis according to the ellipsize
     // style. Shouldn't be called if we don't have any.

@@ -93,7 +93,7 @@ wxRichTextFormattingDialog::~wxRichTextFormattingDialog()
     delete m_styleDefinition;
 }
 
-bool wxRichTextFormattingDialog::Create(long flags, wxWindow* parent, const wxString& title, wxWindowID id,
+bool wxRichTextFormattingDialog::Create(long flags, wxWindow* parent, const std::string& title, wxWindowID id,
         const wxPoint& pos, const wxSize& sz, long style)
 {
     SetExtraStyle(wxDIALOG_EX_CONTEXTHELP|wxWS_EX_BLOCK_EVENTS);
@@ -286,7 +286,7 @@ bool wxRichTextFormattingDialogFactory::CreatePages(long pages, wxRichTextFormat
         int pageId = GetPageId(i);
         if (pageId != -1 && (pages & pageId))
         {
-            wxString title;
+            std::string title;
             wxPanel* panel = CreatePage(pageId, title, dialog);
             wxASSERT( panel != nullptr );
             if (panel)
@@ -304,7 +304,7 @@ bool wxRichTextFormattingDialogFactory::CreatePages(long pages, wxRichTextFormat
 }
 
 /// Create a page, given a page identifier
-wxPanel* wxRichTextFormattingDialogFactory::CreatePage(int page, wxString& title, wxRichTextFormattingDialog* dialog)
+wxPanel* wxRichTextFormattingDialogFactory::CreatePage(int page, std::string& title, wxRichTextFormattingDialog* dialog)
 {
     wxPanel* panel = nullptr;
 
@@ -588,29 +588,29 @@ void wxRichTextFormattingDialog::SetDimensionValue(wxTextAttrDimension& dim, wxT
         if (dim.GetUnits() == wxTEXT_ATTR_UNITS_PIXELS)
         {
             // By default, the 1st in the list.
-            valueCtrl->SetValue(wxString::Format(wxT("%d"), (int) dim.GetValue()));
+            valueCtrl->SetValue(fmt::format("{:d}", (int) dim.GetValue()));
         }
         else if (dim.GetUnits() == wxTEXT_ATTR_UNITS_TENTHS_MM)
         {
             unitsIdx += 1; // By default, the 2nd in the list.
             double value = dim.GetValue() / 100.0;
-            valueCtrl->SetValue(wxString::Format(wxT("%.2f"), value));
+            valueCtrl->SetValue(fmt::format("{:.2f}", value));
         }
         else if (dim.GetUnits() == wxTEXT_ATTR_UNITS_PERCENTAGE)
         {
             unitsIdx += 2; // By default, the 3rd in the list.
-            valueCtrl->SetValue(wxString::Format(wxT("%d"), (int) dim.GetValue()));
+            valueCtrl->SetValue(fmt::format("{:d}", (int) dim.GetValue()));
         }
         else if (dim.GetUnits() == wxTEXT_ATTR_UNITS_HUNDREDTHS_POINT)
         {
             unitsIdx += 3; // By default, the 4th in the list.
             double value = dim.GetValue() / 100.0;
-            valueCtrl->SetValue(wxString::Format(wxT("%.2f"), value));
+            valueCtrl->SetValue(fmt::format("{:.2f}", value));
         }
         else if (dim.GetUnits() == wxTEXT_ATTR_UNITS_POINTS)
         {
             unitsIdx += 3; // By default, the 4th in the list (we don't have points and hundredths of points in the same list)
-            valueCtrl->SetValue(wxString::Format(wxT("%d"), (int) dim.GetValue()));
+            valueCtrl->SetValue(fmt::format("{:d}", (int) dim.GetValue()));
         }
         
         if (units)
@@ -660,7 +660,7 @@ void wxRichTextFormattingDialog::GetDimensionValue(wxTextAttrDimension& dim, wxT
     }
 }
 
-bool wxRichTextFormattingDialog::ConvertFromString(const wxString& str, int& ret, int unit)
+bool wxRichTextFormattingDialog::ConvertFromString(const std::string& str, int& ret, int unit)
 {
     if (unit == wxTEXT_ATTR_UNITS_PIXELS)
     {
@@ -789,23 +789,22 @@ bool wxRichTextFontListBox::Create(wxWindow* parent, wxWindowID id, const wxPoin
 }
 
 /// Returns the HTML for this item
-wxString wxRichTextFontListBox::OnGetItem(size_t n) const
+std::string wxRichTextFontListBox::OnGetItem(size_t n) const
 {
     if (m_faceNames.size() == 0)
-        return wxEmptyString;
+        return {};
 
-    wxString str = CreateHTML(m_faceNames[n]);
-    return str;
+    return CreateHTML(m_faceNames[n]);
 }
 
 /// Get font name for index
-wxString wxRichTextFontListBox::GetFaceName(size_t i) const
+std::string wxRichTextFontListBox::GetFaceName(size_t i) const
 {
     return m_faceNames[i];
 }
 
 /// Set selection for string, returning the index.
-int wxRichTextFontListBox::SetFaceNameSelection(const wxString& name)
+int wxRichTextFontListBox::SetFaceNameSelection(const std::string& name)
 {
     // FIXME: What if nothing is found?
     // FIXME: Case sensitivity, does it matter here?
@@ -829,9 +828,9 @@ void wxRichTextFontListBox::UpdateFonts()
 
 #if 0
 // Convert a colour to a 6-digit hex string
-static wxString ColourToHexString(const wxColour& col)
+static std::string ColourToHexString(const wxColour& col)
 {
-    wxString hex;
+    std::string hex;
 
     hex += wxDecToHex(col.Red());
     hex += wxDecToHex(col.Green());
@@ -842,32 +841,32 @@ static wxString ColourToHexString(const wxColour& col)
 #endif
 
 /// Creates a suitable HTML fragment for a definition
-wxString wxRichTextFontListBox::CreateHTML(const wxString& facename) const
+std::string wxRichTextFontListBox::CreateHTML(const std::string& facename) const
 {
-    wxString str = wxT("<font");
+    std::string str = "<font";
 
-    str << wxT(" size=\"+2\"");
+    str += " size=\"+2\"";
 
-    if (!facename.IsEmpty() && facename != _("(none)"))
-        str << wxT(" face=\"") << facename << wxT("\"");
+    if (!facename.empty() && facename != _("(none)").ToStdString())
+        str += " face=\"" + facename + "\"";
 /*
     if (def->GetStyle().GetTextColour().IsOk())
         str << wxT(" color=\"#") << ColourToHexString(def->GetStyle().GetTextColour()) << wxT("\"");
 */
 
-    str << wxT(">");
+    str += ">";
 
     bool hasBold = false;
 
     if (hasBold)
-        str << wxT("<b>");
+        str += "<b>";
 
     str += facename;
 
     if (hasBold)
-        str << wxT("</b>");
+        str += "</b>";
 
-    str << wxT("</font>");
+    str += "</font>";
 
     return str;
 }

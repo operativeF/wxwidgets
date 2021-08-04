@@ -222,7 +222,7 @@ public:
     static wxFileName URLToFileName(const wxString& url);
 
     // Returns the file URL for a native path
-    static wxString FileNameToURL(const wxFileName& filename);
+    static std::string FileNameToURL(const wxFileName& filename);
 
 
 protected:

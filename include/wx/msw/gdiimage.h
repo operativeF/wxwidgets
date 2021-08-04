@@ -129,7 +129,7 @@ protected:
     wxGDIRefData *
     CloneGDIRefData(const wxGDIRefData *WXUNUSED(data)) const override
     {
-        wxFAIL_MSG( wxT("must be implemented if used") );
+        wxFAIL_MSG( "must be implemented if used" );
 
         return nullptr;
     }

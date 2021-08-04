@@ -30,21 +30,20 @@ public:
 
     // win is used for getting the font, text is the text to wrap, width is the
     // max line width or -1 to disable wrapping
-    void Wrap(wxWindow *win, const wxString& text, int widthMax);
+    void Wrap(wxWindow *win, const std::string& text, int widthMax);
 
-    // we don't need it, but just to avoid compiler warnings
     virtual ~wxTextWrapper() = default;
 
 protected:
     // line may be empty
-    virtual void OnOutputLine(const wxString& line) = 0;
+    virtual void OnOutputLine(const std::string& line) = 0;
 
     // called at the start of every new line (except the very first one)
-    virtual void OnNewLine() { }
+    virtual void OnNewLine() {};
 
 private:
     // call OnOutputLine() and set m_eol to true
-    void DoOutputLine(const wxString& line)
+    void DoOutputLine(const std::string& line)
     {
         OnOutputLine(line);
 
@@ -88,7 +87,7 @@ public:
         m_win = win;
     }
 
-    wxSizer *CreateSizer(const wxString& text, int widthMax)
+    wxSizer *CreateSizer(const std::string& text, int widthMax)
     {
         m_sizer = new wxBoxSizer(wxVERTICAL);
         Wrap(m_win, text, widthMax);
@@ -98,13 +97,13 @@ public:
     wxWindow *GetParent() const { return m_win; }
 
 protected:
-    virtual wxWindow *OnCreateLine(const wxString& line)
+    virtual wxWindow *OnCreateLine(const std::string& line)
     {
         return new wxStaticText(m_win, wxID_ANY,
                                 wxControl::EscapeMnemonics(line));
     }
 
-    void OnOutputLine(const wxString& line) override
+    void OnOutputLine(const std::string& line) override
     {
         if ( !line.empty() )
         {

@@ -8126,7 +8126,7 @@ wxRichTextAttr wxRichTextParagraphLayoutBox::GetStyleForNewParagraph(wxRichTextB
             if (paraDef)
             {
                 // If we're not at the end of the paragraph, then we apply THIS style, and not the designated next style.
-                if (para->GetRange().GetEnd() == pos && !paraDef->GetNextStyle().IsEmpty())
+                if (para->GetRange().GetEnd() == pos && !paraDef->GetNextStyle().empty())
                 {
                     wxRichTextParagraphStyleDefinition* nextParaDef = buffer->GetStyleSheet()->FindParagraphStyle(paraDef->GetNextStyle());
                     if (nextParaDef)
@@ -13015,7 +13015,7 @@ bool wxRichTextFileHandler::SaveFile(wxRichTextBuffer *buffer, const wxString& f
 #endif // wxUSE_FFILE && wxUSE_STREAMS
 
 /// Can we handle this filename (if using files)? By default, checks the extension.
-bool wxRichTextFileHandler::CanHandle(const wxString& filename) const
+bool wxRichTextFileHandler::CanHandle(const std::string& filename) const
 {
     wxString path, file, ext;
     wxFileName::SplitPath(filename, & path, & file, & ext);

@@ -382,7 +382,7 @@ public:
     const wxString& GetBulletText() const { return m_bulletText; }
     const wxString& GetBulletFont() const { return m_bulletFont; }
     const std::string& GetBulletName() const { return m_bulletName; }
-    const wxString& GetURL() const { return m_urlTarget; }
+    const std::string& GetURL() const { return m_urlTarget; }
     int GetTextEffects() const { return m_textEffects; }
     int GetTextEffectFlags() const { return m_textEffectFlags; }
     int GetOutlineLevel() const { return m_outlineLevel; }
@@ -500,7 +500,7 @@ private:
     wxString            m_bulletText;
     wxString            m_bulletFont;
     std::string         m_bulletName;
-    wxString            m_urlTarget;
+    std::string         m_urlTarget;
     wxFontEncoding      m_fontEncoding{wxFONTENCODING_DEFAULT};
 
     // Character styles

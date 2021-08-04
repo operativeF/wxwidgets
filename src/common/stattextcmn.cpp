@@ -73,28 +73,28 @@ wxEND_FLAGS( wxStaticTextStyle )
 wxIMPLEMENT_DYNAMIC_CLASS_XTI(wxStaticText, wxControl, "wx/stattext.h");
 
 wxBEGIN_PROPERTIES_TABLE(wxStaticText)
-wxPROPERTY( Label,wxString, SetLabel, GetLabel, wxString(), 0 /*flags*/, \
-           wxT("Helpstring"), wxT("group"))
+wxPROPERTY( Label, std::string, SetLabel, GetLabel, "", 0 /*flags*/, \
+           "Helpstring", "group")
 wxPROPERTY_FLAGS( WindowStyle, wxStaticTextStyle, long, SetWindowStyleFlag, \
                  GetWindowStyleFlag, wxEMPTY_PARAMETER_VALUE, 0 /*flags*/, \
-                 wxT("Helpstring"), wxT("group")) // style
+                 "Helpstring", "group") // style
 wxEND_PROPERTIES_TABLE()
 
 wxEMPTY_HANDLERS_TABLE(wxStaticText)
 
 wxCONSTRUCTOR_6( wxStaticText, wxWindow*, Parent, wxWindowID, Id, \
-                wxString, Label, wxPoint, Position, wxSize, Size, long, WindowStyle )
+                 std::string, Label, wxPoint, Position, wxSize, Size, long, WindowStyle )
 
 
 // ----------------------------------------------------------------------------
 // wxTextWrapper
 // ----------------------------------------------------------------------------
 
-void wxTextWrapper::Wrap(wxWindow *win, const wxString& text, int widthMax)
+void wxTextWrapper::Wrap(wxWindow *win, const std::string& text, int widthMax)
 {
     const wxClientDC dc(win);
 
-    const std::vector<wxString> full_text = wxSplit(text, '\n', '\0');
+    const std::vector<std::string> full_text = wx::utils::StrSplit(text, '\n');
     for ( auto tline : full_text )
     {
         std::string line = tline;
@@ -132,7 +132,7 @@ void wxTextWrapper::Wrap(wxWindow *win, const wxString& text, int widthMax)
 
             // Find the last word to chop off.
             const size_t lastSpace = line.rfind(' ', posEnd);
-            if ( lastSpace == wxString::npos )
+            if ( lastSpace == std::string::npos )
             {
                 // No spaces, so can't wrap.
                 DoOutputLine(line);
@@ -164,18 +164,18 @@ public:
     }
 
 protected:
-    void OnOutputLine(const wxString& line) override
+    void OnOutputLine(const std::string& line) override
     {
         m_text += line;
     }
 
     void OnNewLine() override
     {
-        m_text += wxT('\n');
+        m_text += '\n';
     }
 
 private:
-    wxString m_text;
+    std::string m_text;
 };
 
 
@@ -218,7 +218,7 @@ void wxStaticTextBase::UpdateLabel()
     if (!IsEllipsized())
         return;
 
-    const wxString& newlabel = GetEllipsizedLabel();
+    const std::string& newlabel = GetEllipsizedLabel();
 
     // we need to touch the "real" label (i.e. the text set inside the control,
     // using port-specific functions) instead of the string returned by GetLabel().
@@ -231,13 +231,13 @@ void wxStaticTextBase::UpdateLabel()
     WXSetVisibleLabel(newlabel);
 }
 
-wxString wxStaticTextBase::GetEllipsizedLabel() const
+std::string wxStaticTextBase::GetEllipsizedLabel() const
 {
     // this function should be used only by ports which do not support
     // ellipsis in static texts: we first remove markup (which cannot
     // be handled safely by Ellipsize()) and then ellipsize the result.
 
-    wxString ret(m_labelOrig);
+    std::string ret(m_labelOrig);
 
     if (IsEllipsized())
         ret = Ellipsize(ret);

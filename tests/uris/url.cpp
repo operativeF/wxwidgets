@@ -86,12 +86,12 @@ TEST_CASE("URL Tests")
         *puri = url2;
 
         // Assignment of string
-        url1 = wxS("http://www.example2.org/index.html");
+        url1 = "http://www.example2.org/index.html";
         *puri = wxS("http://www.example2.org/index.html");
         CHECK(url1 == url2);
 
         // Assignment
-        url1 = wxS("");
+        url1 = "";
         url2 = url1;
         CHECK(url1 == url2);
 

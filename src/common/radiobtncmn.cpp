@@ -62,20 +62,20 @@ wxIMPLEMENT_DYNAMIC_CLASS_XTI(wxRadioButton, wxControl, "wx/radiobut.h");
 wxBEGIN_PROPERTIES_TABLE(wxRadioButton)
     wxEVENT_PROPERTY( Click, wxEVT_RADIOBUTTON, wxCommandEvent )
     wxPROPERTY( Font, wxFont, SetFont, GetFont , wxEMPTY_PARAMETER_VALUE, 0 /*flags*/, \
-                wxT("Helpstring"), wxT("group"))
-    wxPROPERTY( Label,wxString, SetLabel, GetLabel, wxString(), 0 /*flags*/, \
+                "Helpstring", "group")
+    wxPROPERTY( Label, std::string, SetLabel, GetLabel, "", 0 /*flags*/, \
                 wxT("Helpstring"), wxT("group") )
     wxPROPERTY( Value,bool, SetValue, GetValue, wxEMPTY_PARAMETER_VALUE, 0 /*flags*/, \
-                wxT("Helpstring"), wxT("group") )
+                "Helpstring", "group")
     wxPROPERTY_FLAGS( WindowStyle, wxRadioButtonStyle, long, SetWindowStyleFlag, \
                       GetWindowStyleFlag, wxEMPTY_PARAMETER_VALUE, 0 /*flags*/, \
-                      wxT("Helpstring"), wxT("group")) // style
+                      "Helpstring", "group") // style
 wxEND_PROPERTIES_TABLE()
 
 wxEMPTY_HANDLERS_TABLE(wxRadioButton)
 
 wxCONSTRUCTOR_6( wxRadioButton, wxWindow*, Parent, wxWindowID, Id, \
-                 wxString, Label, wxPoint, Position, wxSize, Size, long, WindowStyle )
+                 std::string, Label, wxPoint, Position, wxSize, Size, long, WindowStyle )
 
 
 // ----------------------------------------------------------------------------

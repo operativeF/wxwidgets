@@ -170,7 +170,7 @@ class WXDLLIMPEXP_CORE wxSystemAppearance
 {
 public:
     // Return the name if available or empty string otherwise.
-    wxString GetName() const;
+    std::string GetName() const;
 
     // Return true if the current system there is explicitly recognized as
     // being a dark theme or if the default window background is dark.

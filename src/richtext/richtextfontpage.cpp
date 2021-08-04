@@ -376,14 +376,14 @@ bool wxRichTextFontPage::TransferDataFromWindow()
 
     if (!m_faceTextCtrl->GetValue().empty())
     {
-        wxString faceName = m_faceTextCtrl->GetValue();
+        std::string faceName = m_faceTextCtrl->GetValue();
         attr->SetFontFaceName(faceName);
     }
     else
         attr->SetFlags(attr->GetFlags() & (~ wxTEXT_ATTR_FONT_FACE));
 
-    wxString strSize = m_sizeTextCtrl->GetValue();
-    if (!strSize.IsEmpty())
+    std::string strSize = m_sizeTextCtrl->GetValue();
+    if (!strSize.empty())
     {
         int sz = wxAtoi(strSize);
         if (sz > 0)
@@ -569,7 +569,7 @@ bool wxRichTextFontPage::TransferDataToWindow()
     else
     {
         m_faceTextCtrl->SetValue("");
-        m_faceListBox->SetFaceNameSelection(wxEmptyString);
+        m_faceListBox->SetFaceNameSelection("");
     }
 
     if (attr->HasFontPointSize())
@@ -792,12 +792,12 @@ void wxRichTextFontPage::UpdatePreview()
 
     if (m_faceListBox->GetSelection() != wxNOT_FOUND)
     {
-        wxString faceName = m_faceListBox->GetFaceName(m_faceListBox->GetSelection());
+        std::string faceName = m_faceListBox->GetFaceName(m_faceListBox->GetSelection());
         attr.SetFontFaceName(faceName);
     }
 
-    wxString strSize = m_sizeTextCtrl->GetValue();
-    if (!strSize.IsEmpty())
+    std::string strSize = m_sizeTextCtrl->GetValue();
+    if (!strSize.empty())
     {
         int sz = wxAtoi(strSize);
         if (sz > 0)
@@ -880,7 +880,7 @@ bool wxRichTextFontPage::ShowToolTips()
  * Get bitmap resources
  */
 
-wxBitmap wxRichTextFontPage::GetBitmapResource( const wxString& name )
+wxBitmap wxRichTextFontPage::GetBitmapResource( const std::string& name )
 {
     // Bitmap retrieval
 ////@begin wxRichTextFontPage bitmap retrieval
@@ -893,7 +893,7 @@ wxBitmap wxRichTextFontPage::GetBitmapResource( const wxString& name )
  * Get icon resources
  */
 
-wxIcon wxRichTextFontPage::GetIconResource( const wxString& name )
+wxIcon wxRichTextFontPage::GetIconResource( const std::string& name )
 {
     // Icon retrieval
 ////@begin wxRichTextFontPage icon retrieval
@@ -1141,9 +1141,9 @@ void wxRichTextFontPage::OnRichtextfontpageSpinbuttonsUp( wxSpinEvent& WXUNUSED(
 
     m_dontUpdate = true;
 
-    wxString text = m_sizeTextCtrl->GetValue();
+    std::string text = m_sizeTextCtrl->GetValue();
     int size = 12;
-    if (!text.IsEmpty())
+    if (!text.empty())
     {
         size = wxAtoi(text);
         size ++;
@@ -1176,9 +1176,9 @@ void wxRichTextFontPage::OnRichtextfontpageSpinbuttonsDown( wxSpinEvent& WXUNUSE
 
     m_dontUpdate = true;
 
-    wxString text = m_sizeTextCtrl->GetValue();
+    std::string text = m_sizeTextCtrl->GetValue();
     int size = 12;
-    if (!text.IsEmpty())
+    if (!text.empty())
     {
         size = wxAtoi(text);
         if (size > 1)

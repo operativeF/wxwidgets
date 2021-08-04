@@ -448,7 +448,7 @@ bool wxRichTextMarginsPage::TransferDataFromWindow()
  * Get bitmap resources
  */
 
-wxBitmap wxRichTextMarginsPage::GetBitmapResource( const wxString& name )
+wxBitmap wxRichTextMarginsPage::GetBitmapResource( const std::string& name )
 {
     // Bitmap retrieval
 ////@begin wxRichTextMarginsPage bitmap retrieval
@@ -461,7 +461,7 @@ wxBitmap wxRichTextMarginsPage::GetBitmapResource( const wxString& name )
  * Get icon resources
  */
 
-wxIcon wxRichTextMarginsPage::GetIconResource( const wxString& name )
+wxIcon wxRichTextMarginsPage::GetIconResource( const std::string& name )
 {
     // Icon retrieval
 ////@begin wxRichTextMarginsPage icon retrieval

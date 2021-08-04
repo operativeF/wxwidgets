@@ -65,7 +65,7 @@ public:
     /**
         Called by the parser to set window's title to given text.
      */
-    virtual void SetHTMLWindowTitle(const wxString& title) = 0;
+    virtual void SetHTMLWindowTitle(const std::string& title) = 0;
 
     /**
         Called when a link is clicked.
@@ -86,8 +86,8 @@ public:
         @return indicator of how to treat the request
      */
     virtual wxHtmlOpeningStatus OnHTMLOpeningURL(wxHtmlURLType type,
-                                                 const wxString& url,
-                                                 wxString *redirect) const = 0;
+                                                 const std::string& url,
+                                                 std::string *redirect) const = 0;
 
     /**
         Converts coordinates @a pos relative to given @a cell to
@@ -109,7 +109,7 @@ public:
     virtual void SetHTMLBackgroundImage(const wxBitmap& bmpBg) = 0;
 
     /// Sets status bar text.
-    virtual void SetHTMLStatusText(const wxString& text) = 0;
+    virtual void SetHTMLStatusText(const std::string& text) = 0;
 
     /// Type of mouse cursor
     enum HTMLCursor
@@ -265,10 +265,10 @@ public:
     // it is NOT address/filename of HTML document. If you want to
     // specify document location, use LoadPage() instead
     // Return value : false if an error occurred, true otherwise
-    virtual bool SetPage(const wxString& source);
+    virtual bool SetPage(const std::string& source);
 
     // Append to current page
-    bool AppendToPage(const wxString& source);
+    bool AppendToPage(const std::string& source);
 
     // Load HTML page from given location. Location can be either
     // a) /usr/wxGTK2/docs/html/wx.htm
@@ -279,21 +279,21 @@ public:
     // After the page is loaded, the method calls SetPage() to display it.
     // Note : you can also use path relative to previously loaded page
     // Return value : same as SetPage
-    virtual bool LoadPage(const wxString& location);
+    virtual bool LoadPage(const std::string& location);
 
     // Loads HTML page from file
     bool LoadFile(const wxFileName& filename);
 
     // Returns full location of opened page
-    wxString GetOpenedPage() const {return m_OpenedPage;}
+    std::string GetOpenedPage() const {return m_OpenedPage;}
     // Returns anchor within opened page
-    wxString GetOpenedAnchor() const {return m_OpenedAnchor;}
+    std::string GetOpenedAnchor() const {return m_OpenedAnchor;}
     // Returns <TITLE> of opened page or empty string otherwise
-    wxString GetOpenedPageTitle() const {return m_OpenedPageTitle;}
+    std::string GetOpenedPageTitle() const {return m_OpenedPageTitle;}
 
     // Sets frame in which page title will  be displayed. Format is format of
     // frame title, e.g. "HtmlHelp : %s". It must contain exactly one %s
-    void SetRelatedFrame(wxFrame* frame, const wxString& format);
+    void SetRelatedFrame(wxFrame* frame, const std::string& format);
     wxFrame* GetRelatedFrame() const {return m_RelatedFrame;}
 
 #if wxUSE_STATUSBAR
@@ -304,14 +304,14 @@ public:
 #endif // wxUSE_STATUSBAR
 
     // Sets fonts to be used when displaying HTML page.
-    void SetFonts(const wxString& normal_face, const wxString& fixed_face,
+    void SetFonts(const std::string& normal_face, const std::string& fixed_face,
                   const int *sizes = nullptr);
 
     // Sets font sizes to be relative to the given size or the system
     // default size; use either specified or default font
     void SetStandardFonts(int size = -1,
-                          const wxString& normal_face = wxEmptyString,
-                          const wxString& fixed_face = wxEmptyString);
+                          const std::string& normal_face = {},
+                          const std::string& fixed_face = {});
 
     // Sets space between text and window borders.
     void SetBorders(int b) {m_Borders = b;}
@@ -324,9 +324,9 @@ public:
     // Saves custom settings into cfg config. it will use the path 'path'
     // if given, otherwise it will save info into currently selected path.
     // saved values : things set by SetFonts, SetBorders.
-    virtual void ReadCustomization(wxConfigBase *cfg, wxString path = wxEmptyString);
+    virtual void ReadCustomization(wxConfigBase *cfg, std::string path = {});
     // ...
-    virtual void WriteCustomization(wxConfigBase *cfg, wxString path = wxEmptyString);
+    virtual void WriteCustomization(wxConfigBase *cfg, std::string path = {});
 #endif // wxUSE_CONFIG
 
     // Goes to previous/next page (in browsing history)
@@ -358,7 +358,7 @@ public:
 
     // Sets the title of the window
     // (depending on the information passed to SetRelatedFrame() method)
-    virtual void OnSetTitle(const wxString& title);
+    virtual void OnSetTitle(const std::string& title);
 
     // Called when user clicked on hypertext link. Default behaviour is to
     // call LoadPage(loc)
@@ -369,8 +369,8 @@ public:
     // OnOpeningURL returns true. If OnOpeningURL returns wxHTML_REDIRECT,
     // it must set *redirect to the new URL
     virtual wxHtmlOpeningStatus OnOpeningURL(wxHtmlURLType WXUNUSED(type),
-                                             const wxString& WXUNUSED(url),
-                                             wxString *WXUNUSED(redirect)) const
+                                             const std::string& WXUNUSED(url),
+                                             std::string *WXUNUSED(redirect)) const
         { return wxHTML_OPEN; }
 
 #if wxUSE_CLIPBOARD
@@ -380,10 +380,10 @@ public:
     void SelectAll();
 
     // Convert selection to text:
-    wxString SelectionToText() { return DoSelectionToText(m_selection); }
+    std::string SelectionToText() { return DoSelectionToText(m_selection); }
 
     // Converts current page to text:
-    wxString ToText();
+    std::string ToText();
 #endif // wxUSE_CLIPBOARD
 
     void OnInternalIdle() override;
@@ -399,7 +399,7 @@ protected:
     // or #features etc. it is part of address sometimes:
     // http://www.ms.mff.cuni.cz/~vsla8348/wxhtml/index.html#news)
     // Return value : true if anchor exists, false otherwise
-    bool ScrollToAnchor(const wxString& anchor);
+    bool ScrollToAnchor(const std::string& anchor);
 
     // Prepares layout (= fill m_PosX, m_PosY for fragments) based on
     // actual size of window. This method also setup scrollbars
@@ -449,26 +449,26 @@ protected:
     void StopAutoScrolling();
 #endif // wxUSE_CLIPBOARD
 
-    wxString DoSelectionToText(wxHtmlSelection *sel);
+    std::string DoSelectionToText(wxHtmlSelection *sel);
 
 public:
     // wxHtmlWindowInterface methods:
-    void SetHTMLWindowTitle(const wxString& title) override;
+    void SetHTMLWindowTitle(const std::string& title) override;
     void OnHTMLLinkClicked(const wxHtmlLinkInfo& link) override;
     wxHtmlOpeningStatus OnHTMLOpeningURL(wxHtmlURLType type,
-                                                 const wxString& url,
-                                                 wxString *redirect) const override;
+                                                 const std::string& url,
+                                                 std::string *redirect) const override;
     wxPoint HTMLCoordsToWindow(wxHtmlCell *cell,
                                        const wxPoint& pos) const override;
     wxWindow* GetHTMLWindow() override;
     wxColour GetHTMLBackgroundColour() const override;
     void SetHTMLBackgroundColour(const wxColour& clr) override;
     void SetHTMLBackgroundImage(const wxBitmap& bmpBg) override;
-    void SetHTMLStatusText(const wxString& text) override;
+    void SetHTMLStatusText(const std::string& text) override;
     wxCursor GetHTMLCursor(HTMLCursor type) const override;
 
     // implementation of SetPage()
-    bool DoSetPage(const wxString& source);
+    bool DoSetPage(const std::string& source);
 
 protected:
     // This is pointer to the first cell in parsed data.  (Note: the first cell
@@ -479,11 +479,11 @@ protected:
     // parser would be problematic (because of reentrancy)
     wxHtmlWinParser *m_Parser;
     // contains name of actually opened page or empty string if no page opened
-    wxString m_OpenedPage;
+    std::string m_OpenedPage;
     // contains name of current anchor within m_OpenedPage
-    wxString m_OpenedAnchor;
+    std::string m_OpenedAnchor;
     // contains title of actually opened page or empty string if no <TITLE> tag
-    wxString m_OpenedPageTitle;
+    std::string m_OpenedPageTitle;
     // class for opening files (file system)
     wxFileSystem* m_FS;
 
@@ -494,7 +494,7 @@ protected:
     int m_RelatedStatusBarIndex;
     wxStatusBar* m_RelatedStatusBar;
 #endif // wxUSE_STATUSBAR
-    wxString m_TitleFormat;
+    std::string m_TitleFormat;
 
     // borders (free space between text and window borders)
     // defaults to 10 pixels.

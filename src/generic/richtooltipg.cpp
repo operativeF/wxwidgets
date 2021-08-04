@@ -50,8 +50,8 @@ class wxRichToolTipPopup :
 {
 public:
     wxRichToolTipPopup(wxWindow* parent,
-                       const wxString& title,
-                       const wxString& message,
+                       const std::string& title,
+                       const std::string& message,
                        const wxIcon& icon,
                        wxTipKind tipKind,
                        const wxFont& titleFont_) :
@@ -68,7 +68,7 @@ public:
         }
         //else: Simply don't show any icon.
 
-        wxStaticText* const labelTitle = new wxStaticText(this, wxID_ANY, wxString());
+        wxStaticText* const labelTitle = new wxStaticText(this, wxID_ANY, "");
         labelTitle->SetLabelText(title);
 
         wxFont titleFont(titleFont_);
@@ -678,7 +678,7 @@ void wxRichToolTipGenericImpl::ShowFor(wxWindow* win, const wxRect* rect)
 
 /* static */
 wxRichToolTipImpl*
-wxRichToolTipImpl::Create(const wxString& title, const wxString& message)
+wxRichToolTipImpl::Create(const std::string& title, const std::string& message)
 {
     return new wxRichToolTipGenericImpl(title, message);
 }

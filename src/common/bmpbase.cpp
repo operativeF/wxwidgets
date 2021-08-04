@@ -176,15 +176,15 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxBitmapBaseModule, wxModule);
 
 wxBitmap::wxBitmap(const char* const* bits)
 {
-    wxCHECK2_MSG(bits != nullptr, return, wxT("invalid bitmap data"));
+    wxCHECK2_MSG(bits != nullptr, return, "invalid bitmap data");
 
 #if wxUSE_IMAGE && wxUSE_XPM
     wxImage image(bits);
-    wxCHECK2_MSG(image.IsOk(), return, wxT("invalid bitmap data"));
+    wxCHECK2_MSG(image.IsOk(), return, "invalid bitmap data");
 
     *this = wxBitmap(image);
 #else
-    wxFAIL_MSG(wxT("creating bitmaps from XPMs not supported"));
+    wxFAIL_MSG("creating bitmaps from XPMs not supported");
 #endif // wxUSE_IMAGE && wxUSE_XPM
 }
 #endif // !(defined(__WXGTK__) || defined(__WXMOTIF__) || defined(__WXX11__))

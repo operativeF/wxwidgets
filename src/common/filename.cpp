@@ -1867,7 +1867,7 @@ wxString wxFileName::GetForbiddenChars(wxPathFormat format)
     switch ( GetFormat(format) )
     {
         default :
-            wxFAIL_MSG( wxT("Unknown path format") );
+            wxFAIL_MSG( "Unknown path format" );
             [[fallthrough]];
 
         case wxPATH_UNIX:

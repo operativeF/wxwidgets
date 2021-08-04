@@ -54,7 +54,7 @@ bool wxRichTextStyleDefinition::Eq(const wxRichTextStyleDefinition& def) const
 /// Gets the style combined with the base style
 wxRichTextAttr wxRichTextStyleDefinition::GetStyleMergedWithBase(const wxRichTextStyleSheet* sheet) const
 {
-    if (m_baseStyle.IsEmpty())
+    if (m_baseStyle.empty())
         return m_style;
 
     bool isParaStyle = IsKindOf(wxCLASSINFO(wxRichTextParagraphStyleDefinition));
@@ -183,7 +183,7 @@ wxRichTextAttr* wxRichTextListStyleDefinition::GetLevelAttributes(int i)
 }
 
 /// Convenience function for setting the major attributes for a list level specification
-void wxRichTextListStyleDefinition::SetAttributes(int i, int leftIndent, int leftSubIndent, int bulletStyle, const wxString& bulletSymbol)
+void wxRichTextListStyleDefinition::SetAttributes(int i, int leftIndent, int leftSubIndent, int bulletStyle, const std::string& bulletSymbol)
 {
     wxASSERT( (i >= 0 && i < 10) );
     if (i >= 0 && i < 10)
@@ -193,7 +193,7 @@ void wxRichTextListStyleDefinition::SetAttributes(int i, int leftIndent, int lef
         attr.SetBulletStyle(bulletStyle);
         attr.SetLeftIndent(leftIndent, leftSubIndent);
 
-        if (!bulletSymbol.IsEmpty())
+        if (!bulletSymbol.empty())
         {
             if (bulletStyle & wxTEXT_ATTR_BULLET_STYLE_SYMBOL)
                 attr.SetBulletText(bulletSymbol);
@@ -349,7 +349,7 @@ bool wxRichTextStyleSheet::RemoveStyle(wxRichTextStyleDefinition* def, bool dele
 }
 
 /// Find a definition by name
-wxRichTextStyleDefinition* wxRichTextStyleSheet::FindStyle(const wxList& list, const wxString& name, bool recurse) const
+wxRichTextStyleDefinition* wxRichTextStyleSheet::FindStyle(const wxList& list, const std::string& name, bool recurse) const
 {
     for (wxList::compatibility_iterator node = list.GetFirst(); node; node = node->GetNext())
     {
@@ -466,7 +466,7 @@ bool wxRichTextStyleSheet::AddStyle(wxRichTextStyleDefinition* def)
 }
 
 /// Find any definition by name
-wxRichTextStyleDefinition* wxRichTextStyleSheet::FindStyle(const wxString& name, bool recurse) const
+wxRichTextStyleDefinition* wxRichTextStyleSheet::FindStyle(const std::string& name, bool recurse) const
 {
     wxRichTextListStyleDefinition* listDef = FindListStyle(name, recurse);
     if (listDef)
@@ -573,16 +573,16 @@ bool wxRichTextStyleListBox::Create(wxWindow* parent, wxWindowID id, const wxPoi
 }
 
 /// Returns the HTML for this item
-wxString wxRichTextStyleListBox::OnGetItem(size_t n) const
+std::string wxRichTextStyleListBox::OnGetItem(size_t n) const
 {
     if (!GetStyleSheet())
-        return wxEmptyString;
+        return {};
 
     wxRichTextStyleDefinition* def = GetStyle(n);
     if (def)
         return CreateHTML(def);
 
-    return wxEmptyString;
+    return {};
 }
 
 // Get style for index
@@ -668,33 +668,33 @@ void wxRichTextStyleListBox::UpdateStyles()
 }
 
 // Get index for style name
-int wxRichTextStyleListBox::GetIndexForStyle(const wxString& name) const
+int wxRichTextStyleListBox::GetIndexForStyle(const std::string& name) const
 {
-    wxString s(name);
+    std::string s{name};
     if (GetStyleType() == wxRICHTEXT_STYLE_PARAGRAPH)
-        s += wxT("|P");
+        s += "|P";
     else if (GetStyleType() == wxRICHTEXT_STYLE_CHARACTER)
-        s += wxT("|C");
+        s += "|C";
     else if (GetStyleType() == wxRICHTEXT_STYLE_LIST)
-        s += wxT("|L");
+        s += "|L";
     else if (GetStyleType() == wxRICHTEXT_STYLE_BOX)
-        s += wxT("|B");
+        s += "|B";
     else
     {
         if (m_styleNames.Index(s + wxT("|P")) != wxNOT_FOUND)
-            s += wxT("|P");
+            s += "|P";
         else if (m_styleNames.Index(s + wxT("|C")) != wxNOT_FOUND)
-            s += wxT("|C");
+            s += "|C";
         else if (m_styleNames.Index(s + wxT("|L")) != wxNOT_FOUND)
-            s += wxT("|L");
+            s += "|L";
         else if (m_styleNames.Index(s + wxT("|B")) != wxNOT_FOUND)
-            s += wxT("|B");
+            s += "|B";
     }
     return m_styleNames.Index(s);
 }
 
 /// Set selection for string
-int wxRichTextStyleListBox::SetStyleSelection(const wxString& name)
+int wxRichTextStyleListBox::SetStyleSelection(const std::string& name)
 {
     int i = GetIndexForStyle(name);
     if (i > -1)
@@ -719,7 +719,7 @@ static wxString ColourToHexString(const wxColour& col)
 }
 
 /// Creates a suitable HTML fragment for a definition
-wxString wxRichTextStyleListBox::CreateHTML(wxRichTextStyleDefinition* def) const
+std::string wxRichTextStyleListBox::CreateHTML(wxRichTextStyleDefinition* def) const
 {
     // TODO: indicate list format for list style types
 
@@ -775,9 +775,9 @@ wxString wxRichTextStyleListBox::CreateHTML(wxRichTextStyleDefinition* def) cons
     for (i = 0; i < GetStyleSheet()->GetParagraphStyleCount(); i++)
     {
         wxRichTextStyleDefinition* d = GetStyleSheet()->GetParagraphStyle(i);
-        wxString name = d->GetName().Lower();
-        if (name.Find(wxT("normal")) != wxNOT_FOUND || name.Find(normalTranslated) != wxNOT_FOUND ||
-            name.Find(wxT("default")) != wxNOT_FOUND || name.Find(defaultTranslated) != wxNOT_FOUND)
+        std::string name{wx::utils::ToLowerCopy(d->GetName())};
+        if (name.find("normal") != std::string::npos || name.find(normalTranslated) != std::string::npos ||
+            name.find("default") != std::string::npos || name.find(defaultTranslated) != std::string::npos)
         {
             wxRichTextAttr attr2(d->GetStyleMergedWithBase(GetStyleSheet()));
             if (attr2.HasFontPointSize())
@@ -919,7 +919,7 @@ void wxRichTextStyleListBox::OnLeftDoubleClick(wxMouseEvent& event)
 }
 
 /// Helper for listbox and combo control
-wxString wxRichTextStyleListBox::GetStyleToShowInIdleTime(wxRichTextCtrl* ctrl, wxRichTextStyleType styleType)
+std::string wxRichTextStyleListBox::GetStyleToShowInIdleTime(wxRichTextCtrl* ctrl, wxRichTextStyleType styleType)
 {
     int adjustedCaretPos = ctrl->GetAdjustedCaretPosition(ctrl->GetCaretPosition());
 

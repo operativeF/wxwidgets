@@ -58,11 +58,11 @@ wxBEGIN_PROPERTIES_TABLE(wxChoice)
 wxEVENT_PROPERTY( Select, wxEVT_CHOICE, wxCommandEvent )
 
 wxPROPERTY( Font, wxFont, SetFont, GetFont , wxEMPTY_PARAMETER_VALUE, \
-           0 /*flags*/, wxT("Helpstring"), wxT("group"))
-wxPROPERTY_COLLECTION( Choices, wxArrayString, wxString, AppendString, \
-                      GetStrings, 0 /*flags*/, wxT("Helpstring"), wxT("group"))
+           0 /*flags*/, "Helpstring", "group")
+wxPROPERTY_COLLECTION( Choices, std::vector<std::string>, std::string, AppendString, \
+                      GetStrings, 0 /*flags*/, "Helpstring", "group")
 wxPROPERTY( Selection,int, SetSelection, GetSelection, wxEMPTY_PARAMETER_VALUE, \
-           0 /*flags*/, wxT("Helpstring"), wxT("group"))
+           0 /*flags*/, "Helpstring", "group")
 
 /*
  TODO PROPERTIES
@@ -73,7 +73,7 @@ wxPROPERTY( Selection,int, SetSelection, GetSelection, wxEMPTY_PARAMETER_VALUE, 
 
 wxPROPERTY_FLAGS( WindowStyle, wxChoiceStyle, long, SetWindowStyleFlag, \
                  GetWindowStyleFlag, wxEMPTY_PARAMETER_VALUE, 0 /*flags*/, \
-                 wxT("Helpstring"), wxT("group")) // style
+                 "Helpstring", "group") // style
 wxEND_PROPERTIES_TABLE()
 
 wxEMPTY_HANDLERS_TABLE(wxChoice)

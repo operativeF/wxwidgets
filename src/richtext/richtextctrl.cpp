@@ -223,12 +223,12 @@ wxRichTextCtrl::wxRichTextCtrl()
 
 wxRichTextCtrl::wxRichTextCtrl(wxWindow* parent,
                                wxWindowID id,
-                               const wxString& value,
+                               const std::string& value,
                                const wxPoint& pos,
                                const wxSize& size,
                                long style,
                                const wxValidator& validator,
-                               const wxString& name)
+                               const std::string& name)
               : wxScrollHelper(this)
 {
     m_caret = nullptr;
@@ -237,8 +237,8 @@ wxRichTextCtrl::wxRichTextCtrl(wxWindow* parent,
 }
 
 /// Creation
-bool wxRichTextCtrl::Create( wxWindow* parent, wxWindowID id, const wxString& value, const wxPoint& pos, const wxSize& size, long style,
-                             const wxValidator& validator, const wxString& name)
+bool wxRichTextCtrl::Create( wxWindow* parent, wxWindowID id, const std::string& value, const wxPoint& pos, const wxSize& size, long style,
+                             const wxValidator& validator, const std::string& name)
 {
     style |= wxVSCROLL;
 
@@ -305,7 +305,7 @@ bool wxRichTextCtrl::Create( wxWindow* parent, wxWindowID id, const wxString& va
 
     SetCursor(m_textCursor);
 
-    if (!value.IsEmpty())
+    if (!value.empty())
         SetValue(value);
 
     GetBuffer().AddEventHandler(this);
@@ -716,8 +716,9 @@ void wxRichTextCtrl::OnLeftUp(wxMouseEvent& event)
                 {
                     if (attr.HasFlag(wxTEXT_ATTR_URL))
                     {
-                        wxString urlTarget = attr.GetURL();
-                        if (!urlTarget.IsEmpty())
+                        std::string urlTarget = attr.GetURL();
+
+                        if (!urlTarget.empty())
                         {
                             wxMouseEvent mouseEvent(event);
 
@@ -808,7 +809,7 @@ void wxRichTextCtrl::OnMoveMouse(wxMouseEvent& event)
             wxRichTextParagraphLayoutBox* oldFocus = GetFocusObject();
 
             wxDataObjectComposite* compositeObject = new wxDataObjectComposite();
-            wxString text = GetFocusObject()->GetTextForRange(range);
+            std::string text = GetFocusObject()->GetTextForRange(range);
 #ifdef __WXMSW__
             text = wxTextFile::Translate(text, wxTextFileType_Dos);
 #endif
@@ -1256,9 +1257,8 @@ void wxRichTextCtrl::OnChar(wxKeyEvent& event)
 
         if (event.ShiftDown())
         {
-            wxString text;
-            text = wxRichTextLineBreakChar;
-            GetFocusObject()->InsertTextWithUndo(& GetBuffer(), newPos + 1, text, this);
+            std::string text{wxRichTextLineBreakChar};
+            GetFocusObject()->InsertTextWithUndo(&GetBuffer(), newPos + 1, text, this);
             m_caretAtLineStart = true;
             PositionCaret();
         }
@@ -2654,9 +2654,9 @@ bool wxRichTextCtrl::PageDown(int noPages, int flags)
     return false;
 }
 
-static bool wxRichTextCtrlIsWhitespace(const wxString& str)
+static bool wxRichTextCtrlIsWhitespace(const std::string& str)
 {
-    return str == wxT(" ") || str == wxT("\t") || (!str.empty() && (str[0] == (wxChar) 160));
+    return str == " " || str == "\t" || (!str.empty() && (str.front() == static_cast<unsigned char>(160)));
 }
 
 // Finds the caret position for the next word
@@ -2672,7 +2672,7 @@ long wxRichTextCtrl::FindNextWordPosition(int direction) const
         while (i < endPos && i > -1)
         {
             // i is in character, not caret positions
-            wxString text = GetFocusObject()->GetTextForRange(wxRichTextRange(i, i));
+            std::string text = GetFocusObject()->GetTextForRange(wxRichTextRange(i, i));
             wxRichTextLine* line = GetFocusObject()->GetLineAtPosition(i, false);
             if (line && (i == line->GetAbsoluteRange().GetEnd()))
             {
@@ -2688,7 +2688,7 @@ long wxRichTextCtrl::FindNextWordPosition(int direction) const
         while (i < endPos && i > -1)
         {
             // i is in character, not caret positions
-            wxString text = GetFocusObject()->GetTextForRange(wxRichTextRange(i, i));
+            std::string text = GetFocusObject()->GetTextForRange(wxRichTextRange(i, i));
             wxRichTextLine* line = GetFocusObject()->GetLineAtPosition(i, false);
             if (line && (i == line->GetAbsoluteRange().GetEnd()))
                 return wxMax(-1, i);
@@ -2715,7 +2715,7 @@ long wxRichTextCtrl::FindNextWordPosition(int direction) const
         while (i < endPos && i > -1)
         {
             // i is in character, not caret positions
-            wxString text = GetFocusObject()->GetTextForRange(wxRichTextRange(i, i));
+            std::string text = GetFocusObject()->GetTextForRange(wxRichTextRange(i, i));
             wxRichTextLine* line = GetFocusObject()->GetLineAtPosition(i, false);
 
             if (text.empty() || (line && (i == line->GetAbsoluteRange().GetStart()))) // End of paragraph, or maybe an image
@@ -2729,7 +2729,7 @@ long wxRichTextCtrl::FindNextWordPosition(int direction) const
         while (i < endPos && i > -1)
         {
             // i is in character, not caret positions
-            wxString text = GetFocusObject()->GetTextForRange(wxRichTextRange(i, i));
+            std::string text = GetFocusObject()->GetTextForRange(wxRichTextRange(i, i));
             wxRichTextLine* line = GetFocusObject()->GetLineAtPosition(i, false);
             if (line && line->GetAbsoluteRange().GetStart() == i)
                 return i-1;
@@ -3072,7 +3072,7 @@ bool wxRichTextCtrl::DoSaveFile(const std::string& filename, int fileType)
 // ----------------------------------------------------------------------------
 
 /// Add a new paragraph of text to the end of the buffer
-wxRichTextRange wxRichTextCtrl::AddParagraph(const wxString& text)
+wxRichTextRange wxRichTextCtrl::AddParagraph(const std::string& text)
 {
     wxRichTextRange range = GetFocusObject()->AddParagraph(text);
     GetBuffer().Invalidate();
@@ -3109,9 +3109,9 @@ void wxRichTextCtrl::SelectNone()
     m_selectionState = wxRichTextCtrlSelectionState_Normal;
 }
 
-static bool wxIsWordDelimiter(const wxString& text)
+static bool wxIsWordDelimiter(const std::string& text)
 {
-    return !text.IsEmpty() && !wxIsalnum(text[0]);
+    return !text.empty() && !wxIsalnum(text.front());
 }
 
 /// Select the word at the given character position
@@ -3132,7 +3132,7 @@ bool wxRichTextCtrl::SelectWord(long position)
 
     for (positionStart = position; positionStart >= para->GetRange().GetStart(); --positionStart)
     {
-        wxString text = GetFocusObject()->GetTextForRange(wxRichTextRange(positionStart, positionStart));
+        std::string text = GetFocusObject()->GetTextForRange(wxRichTextRange(positionStart, positionStart));
         if (wxIsWordDelimiter(text))
         {
             ++positionStart;
@@ -3144,7 +3144,7 @@ bool wxRichTextCtrl::SelectWord(long position)
 
     for (positionEnd = position; positionEnd < para->GetRange().GetEnd(); positionEnd ++)
     {
-        wxString text = GetFocusObject()->GetTextForRange(wxRichTextRange(positionEnd, positionEnd));
+        std::string text = GetFocusObject()->GetTextForRange(wxRichTextRange(positionEnd, positionEnd));
 
         if (wxIsWordDelimiter(text))
         {
@@ -3297,9 +3297,9 @@ void wxRichTextCtrl::WriteText(const std::string& value)
     DoWriteText(value);
 }
 
-void wxRichTextCtrl::DoWriteText(const wxString& value, int flags)
+void wxRichTextCtrl::DoWriteText(const std::string& value, int flags)
 {
-    wxString valueUnix = wxTextFile::Translate(value, wxTextFileType_Unix);
+    std::string valueUnix = wxTextFile::Translate(value, wxTextFileType_Unix);
 
     GetFocusObject()->InsertTextWithUndo(& GetBuffer(), m_caretPosition+1, valueUnix, this, wxRICHTEXT_INSERT_WITH_PREVIOUS_PARAGRAPH_STYLE);
 
@@ -3332,7 +3332,7 @@ bool wxRichTextCtrl::WriteImage(const wxImage& image, wxBitmapType bitmapType, c
     return false;
 }
 
-bool wxRichTextCtrl::WriteImage(const wxString& filename, wxBitmapType bitmapType, const wxRichTextAttr& textAttr)
+bool wxRichTextCtrl::WriteImage(const std::string& filename, wxBitmapType bitmapType, const wxRichTextAttr& textAttr)
 {
     wxRichTextImageBlock imageBlock;
 
@@ -3385,7 +3385,7 @@ wxRichTextBox* wxRichTextCtrl::WriteTextBox(const wxRichTextAttr& textAttr)
     return wxDynamicCast(obj, wxRichTextBox);
 }
 
-wxRichTextField* wxRichTextCtrl::WriteField(const wxString& fieldType, const wxRichTextProperties& properties,
+wxRichTextField* wxRichTextCtrl::WriteField(const std::string& fieldType, const wxRichTextProperties& properties,
                             const wxRichTextAttr& textAttr)
 {
     return GetFocusObject()->InsertFieldWithUndo(& GetBuffer(), m_caretPosition+1, fieldType, properties,
@@ -4689,7 +4689,7 @@ bool wxRichTextCtrl::SetListStyle(const wxRichTextRange& range, wxRichTextListSt
     return GetFocusObject()->SetListStyle(range.ToInternal(), def, flags, startFrom, specifiedLevel);
 }
 
-bool wxRichTextCtrl::SetListStyle(const wxRichTextRange& range, const wxString& defName, int flags, int startFrom, int specifiedLevel)
+bool wxRichTextCtrl::SetListStyle(const wxRichTextRange& range, const std::string& defName, int flags, int startFrom, int specifiedLevel)
 {
     return GetFocusObject()->SetListStyle(range.ToInternal(), defName, flags, startFrom, specifiedLevel);
 }
@@ -4706,7 +4706,7 @@ bool wxRichTextCtrl::NumberList(const wxRichTextRange& range, wxRichTextListStyl
     return GetFocusObject()->NumberList(range.ToInternal(), def, flags, startFrom, specifiedLevel);
 }
 
-bool wxRichTextCtrl::NumberList(const wxRichTextRange& range, const wxString& defName, int flags, int startFrom, int specifiedLevel)
+bool wxRichTextCtrl::NumberList(const wxRichTextRange& range, const std::string& defName, int flags, int startFrom, int specifiedLevel)
 {
     return GetFocusObject()->NumberList(range.ToInternal(), defName, flags, startFrom, specifiedLevel);
 }
@@ -4717,7 +4717,7 @@ bool wxRichTextCtrl::PromoteList(int promoteBy, const wxRichTextRange& range, wx
     return GetFocusObject()->PromoteList(promoteBy, range.ToInternal(), def, flags, specifiedLevel);
 }
 
-bool wxRichTextCtrl::PromoteList(int promoteBy, const wxRichTextRange& range, const wxString& defName, int flags, int specifiedLevel)
+bool wxRichTextCtrl::PromoteList(int promoteBy, const wxRichTextRange& range, const std::string& defName, int flags, int specifiedLevel)
 {
     return GetFocusObject()->PromoteList(promoteBy, range.ToInternal(), defName, flags, specifiedLevel);
 }
@@ -4733,7 +4733,7 @@ wxRichTextRange wxRichTextCtrl::FindRangeForList(long pos, bool& isNumberedList)
         return range;
     else
     {
-        wxString listStyle = para->GetAttributes().GetListStyleName();
+        std::string listStyle = para->GetAttributes().GetListStyleName();
         range = para->GetRange();
 
         isNumberedList = para->GetAttributes().HasBulletNumber();
@@ -5433,7 +5433,7 @@ void wxRichTextCaretTimer::Notify()
     // wxRICHTEXT_USE_OWN_CARET
 
 // Add an item
-bool wxRichTextContextMenuPropertiesInfo::AddItem(const wxString& label, wxRichTextObject* obj)
+bool wxRichTextContextMenuPropertiesInfo::AddItem(const std::string& label, wxRichTextObject* obj)
 {
     if (GetCount() < 3)
     {

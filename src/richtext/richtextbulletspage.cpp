@@ -259,7 +259,7 @@ void wxRichTextBulletsPage::CreateControls()
 
     itemBoxSizer3->Add(5, 5, 0, wxALIGN_CENTER_HORIZONTAL, 5);
 
-    m_previewCtrl = new wxRichTextCtrl( itemRichTextDialogPage1, ID_RICHTEXTBULLETSPAGE_PREVIEW_CTRL, wxEmptyString, wxDefaultPosition, wxSize(350, 100), wxBORDER_THEME|wxVSCROLL|wxTE_READONLY );
+    m_previewCtrl = new wxRichTextCtrl( itemRichTextDialogPage1, ID_RICHTEXTBULLETSPAGE_PREVIEW_CTRL, "", wxDefaultPosition, wxSize(350, 100), wxBORDER_THEME|wxVSCROLL|wxTE_READONLY );
     m_previewCtrl->SetHelpText(_("Shows a preview of the bullet settings."));
     if (wxRichTextBulletsPage::ShowToolTips())
         m_previewCtrl->SetToolTip(_("Shows a preview of the bullet settings."));
@@ -366,7 +366,7 @@ bool wxRichTextBulletsPage::TransferDataFromWindow()
             if (wxRichTextBuffer::GetRenderer() && m_bulletNameCtrl->GetSelection() != wxNOT_FOUND)
             {
                 int sel = m_bulletNameCtrl->GetSelection();
-                wxString selName = m_bulletNameCtrl->GetString(sel);
+                std::string selName = m_bulletNameCtrl->GetString(sel);
 
                 // Try to get the untranslated name using the current selection index of the combobox.
                 // into account.
@@ -585,7 +585,7 @@ bool wxRichTextBulletsPage::ShowToolTips()
  * Get bitmap resources
  */
 
-wxBitmap wxRichTextBulletsPage::GetBitmapResource( const wxString& name )
+wxBitmap wxRichTextBulletsPage::GetBitmapResource( const std::string& name )
 {
     // Bitmap retrieval
 ////@begin wxRichTextBulletsPage bitmap retrieval
@@ -598,7 +598,7 @@ wxBitmap wxRichTextBulletsPage::GetBitmapResource( const wxString& name )
  * Get icon resources
  */
 
-wxIcon wxRichTextBulletsPage::GetIconResource( const wxString& name )
+wxIcon wxRichTextBulletsPage::GetIconResource( const std::string& name )
 {
     // Icon retrieval
 ////@begin wxRichTextBulletsPage icon retrieval
@@ -779,8 +779,8 @@ void wxRichTextBulletsPage::OnChooseSymbolClick( wxCommandEvent& WXUNUSED(event)
     int sel = m_styleListBox->GetSelection();
     if (m_hasBulletStyle && sel == wxRICHTEXT_BULLETINDEX_SYMBOL)
     {
-        wxString symbol = m_symbolCtrl->GetValue();
-        wxString fontName = m_symbolFontCtrl->GetValue();
+        std::string symbol = m_symbolCtrl->GetValue();
+        std::string fontName = m_symbolFontCtrl->GetValue();
         wxSymbolPickerDialog dlg(symbol, fontName, fontName, this);
 
         if (dlg.ShowModal() == wxID_OK)

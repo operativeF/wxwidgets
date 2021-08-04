@@ -139,7 +139,7 @@ wxWindow* wxHtmlHelpController::FindTopLevelWindow()
 
 bool wxHtmlHelpController::AddBook(const wxFileName& book_file, bool show_wait_msg)
 {
-    return AddBook(wxFileSystem::FileNameToURL(book_file).ToStdString(), show_wait_msg);
+    return AddBook(wxFileSystem::FileNameToURL(book_file), show_wait_msg);
 }
 
 bool wxHtmlHelpController::AddBook(const std::string& book, bool show_wait_msg)

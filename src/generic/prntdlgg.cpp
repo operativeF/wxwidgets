@@ -83,8 +83,8 @@ wxPostScriptPrintNativeData::wxPostScriptPrintNativeData()
 #endif
 
 #ifdef __WXMSW__
-    m_printerCommand = wxT("print");
-    m_afmPath = wxT("c:\\windows\\system\\");
+    m_printerCommand = "print";
+    m_afmPath = "c:\\windows\\system\\";
 #endif
 
 #if !defined(__VMS__) && !defined(__WXMSW__)
@@ -668,7 +668,7 @@ void wxGenericPrintSetupDialog::OnPrinter(wxListEvent& event)
 
     if (event.GetIndex() == 0)
     {
-        m_printerCommandText->SetValue( wxT("lpr") );
+        m_printerCommandText->SetValue( "lpr" );
     }
     else
     {
@@ -677,7 +677,7 @@ void wxGenericPrintSetupDialog::OnPrinter(wxListEvent& event)
         li.SetMask( wxLIST_MASK_TEXT );
         li.SetId( event.GetIndex() );
         m_printerListCtrl->GetItem( li );
-        m_printerCommandText->SetValue( wxT("lpr -P") + li.GetText() );
+        m_printerCommandText->SetValue( "lpr -P" + li.GetText() );
     }
 }
 

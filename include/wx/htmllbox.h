@@ -91,10 +91,10 @@ public:
 protected:
     // this method must be implemented in the derived class and should return
     // the body (i.e. without <html>) of the HTML for the given item
-    virtual wxString OnGetItem(size_t n) const = 0;
+    virtual std::string OnGetItem(size_t n) const = 0;
 
     // this function may be overridden to decorate HTML returned by OnGetItem()
-    virtual wxString OnGetItemMarkup(size_t n) const;
+    virtual std::string OnGetItemMarkup(size_t n) const;
 
 
     // this method allows to customize the selection appearance: it may be used
@@ -133,18 +133,18 @@ protected:
 
 private:
     // wxHtmlWindowInterface methods:
-    void SetHTMLWindowTitle(const wxString& title) override;
+    void SetHTMLWindowTitle(const std::string& title) override;
     void OnHTMLLinkClicked(const wxHtmlLinkInfo& link) override;
     wxHtmlOpeningStatus OnHTMLOpeningURL(wxHtmlURLType type,
-                                                 const wxString& url,
-                                                 wxString *redirect) const override;
+                                                 const std::string& url,
+                                                 std::string *redirect) const override;
     wxPoint HTMLCoordsToWindow(wxHtmlCell *cell,
                                        const wxPoint& pos) const override;
     wxWindow* GetHTMLWindow() override;
     wxColour GetHTMLBackgroundColour() const override;
     void SetHTMLBackgroundColour(const wxColour& clr) override;
     void SetHTMLBackgroundImage(const wxBitmap& bmpBg) override;
-    void SetHTMLStatusText(const wxString& text) override;
+    void SetHTMLStatusText(const std::string& text) override;
     wxCursor GetHTMLCursor(HTMLCursor type) const override;
 
     // returns index of item that contains given HTML cell
@@ -287,7 +287,7 @@ protected:
     virtual void SetRowCount(size_t count)
         { wxHtmlListBox::SetRowCount(count); }
 
-    wxString OnGetItem(size_t n) const override
+    std::string OnGetItem(size_t n) const override
         { return m_items[n]; }
 
     void InitEvent(wxCommandEvent& event, int n) override

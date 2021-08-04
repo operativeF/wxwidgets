@@ -126,15 +126,15 @@ void wxHtmlWinAutoScrollTimer::Notify()
 class WXDLLIMPEXP_HTML wxHtmlHistoryItem
 {
 public:
-    wxHtmlHistoryItem(const wxString& p, const wxString& a) : m_Page(p), m_Anchor(a), m_Pos(0) { }
+    wxHtmlHistoryItem(const std::string& p, const std::string& a) : m_Page(p), m_Anchor(a), m_Pos(0) { }
     int GetPos() const {return m_Pos;}
     void SetPos(int p) {m_Pos = p;}
-    const wxString& GetPage() const {return m_Page;}
-    const wxString& GetAnchor() const {return m_Anchor;}
+    const std::string& GetPage() const {return m_Page;}
+    const std::string& GetAnchor() const {return m_Anchor;}
 
 private:
-    wxString m_Page;
-    wxString m_Anchor;
+    std::string m_Page;
+    std::string m_Anchor;
     int m_Pos;
 };
 
@@ -215,7 +215,7 @@ void wxHtmlWindowMouseHelper::HandleIdle(wxHtmlCell *rootCell,
             if (lnk)
                 m_interface->SetHTMLStatusText(lnk->GetHref());
             else
-                m_interface->SetHTMLStatusText(wxEmptyString);
+                m_interface->SetHTMLStatusText("");
 
             m_tmpLastLink = lnk;
         }
@@ -307,7 +307,7 @@ void wxHtmlWindow::Init()
     m_RelatedStatusBarIndex = -1;
 #endif // wxUSE_STATUSBAR
     m_RelatedFrame = nullptr;
-    m_TitleFormat = wxT("%s");
+    m_TitleFormat = "%s";
     m_OpenedPage.clear();
     m_OpenedAnchor.clear();
     m_OpenedPageTitle.clear();
@@ -351,7 +351,7 @@ bool wxHtmlWindow::Create(wxWindow *parent,
     // at all so disable it to avoid executing any user-defined handlers twice
     // (and to avoid processing unnecessary event if no handlers are defined).
     SetBackgroundStyle(wxBG_STYLE_PAINT);
-    SetPage(wxT("<html><body></body></html>"));
+    SetPage("<html><body></body></html>");
 
     SetInitialSize(size);
     if ( !HasFlag(wxHW_SCROLLBAR_NEVER) )
@@ -384,7 +384,7 @@ wxHtmlWindow::~wxHtmlWindow()
 
 
 
-void wxHtmlWindow::SetRelatedFrame(wxFrame* frame, const wxString& format)
+void wxHtmlWindow::SetRelatedFrame(wxFrame* frame, const std::string& format)
 {
     m_RelatedFrame = frame;
     m_TitleFormat = format;
@@ -395,7 +395,7 @@ void wxHtmlWindow::SetRelatedFrame(wxFrame* frame, const wxString& format)
 
     // If you get an assert here, it means that the title doesn't contain
     // exactly one "%s" format specifier, which is an error in the caller.
-    wxString::Format(m_TitleFormat, wxString());
+    fmt::format(m_TitleFormat, "");
 }
 
 
@@ -416,7 +416,7 @@ void wxHtmlWindow::SetRelatedStatusBar(wxStatusBar* statusbar, int index)
 
 
 
-void wxHtmlWindow::SetFonts(const wxString& normal_face, const wxString& fixed_face, const int *sizes)
+void wxHtmlWindow::SetFonts(const std::string& normal_face, const std::string& fixed_face, const int *sizes)
 {
     m_Parser->SetFonts(normal_face, fixed_face, sizes);
 
@@ -425,8 +425,8 @@ void wxHtmlWindow::SetFonts(const wxString& normal_face, const wxString& fixed_f
 }
 
 void wxHtmlWindow::SetStandardFonts(int size,
-                                    const wxString& normal_face,
-                                    const wxString& fixed_face)
+                                    const std::string& normal_face,
+                                    const std::string& fixed_face)
 {
     m_Parser->SetStandardFonts(size, normal_face, fixed_face);
 
@@ -434,7 +434,7 @@ void wxHtmlWindow::SetStandardFonts(int size,
     DoSetPage(*(m_Parser->GetSource()));
 }
 
-bool wxHtmlWindow::SetPage(const wxString& source)
+bool wxHtmlWindow::SetPage(const std::string& source)
 {
     m_OpenedPage.clear();
     m_OpenedAnchor.clear();
@@ -442,9 +442,9 @@ bool wxHtmlWindow::SetPage(const wxString& source)
     return DoSetPage(source);
 }
 
-bool wxHtmlWindow::DoSetPage(const wxString& source)
+bool wxHtmlWindow::DoSetPage(const std::string& source)
 {
-    wxString newsrc(source);
+    std::string newsrc(source);
 
     wxDELETE(m_selection);
 
@@ -519,12 +519,12 @@ bool wxHtmlWindow::DoSetPage(const wxString& source)
     return true;
 }
 
-bool wxHtmlWindow::AppendToPage(const wxString& source)
+bool wxHtmlWindow::AppendToPage(const std::string& source)
 {
     return DoSetPage(*(GetParser()->GetSource()) + source);
 }
 
-bool wxHtmlWindow::LoadPage(const wxString& location)
+bool wxHtmlWindow::LoadPage(const std::string& location)
 {
     wxCHECK_MSG( !location.empty(), false, "location must be non-empty" );
 
@@ -543,21 +543,21 @@ bool wxHtmlWindow::LoadPage(const wxString& location)
     }
 
     // first check if we're moving to an anchor in the same page
-    size_t posLocalAnchor = location.Find('#');
-    if ( posLocalAnchor != wxString::npos && posLocalAnchor != 0 )
+    size_t posLocalAnchor = location.find('#');
+    if ( posLocalAnchor != std::string::npos && posLocalAnchor != 0 )
     {
         // check if the part before the anchor is the same as the (either
         // relative or absolute) URI of the current page
-        const wxString beforeAnchor = location.substr(0, posLocalAnchor);
+        const std::string beforeAnchor = location.substr(0, posLocalAnchor);
         if ( beforeAnchor != m_OpenedPage &&
                 m_FS->GetPath() + beforeAnchor != m_OpenedPage )
         {
             // indicate that we're not moving to a local anchor
-            posLocalAnchor = wxString::npos;
+            posLocalAnchor = std::string::npos;
         }
     }
 
-    if ( posLocalAnchor != wxString::npos )
+    if ( posLocalAnchor != std::string::npos )
     {
         m_tmpCanDrawLocks--;
         rt_val = ScrollToAnchor(location.substr(posLocalAnchor + 1));
@@ -581,7 +581,7 @@ bool wxHtmlWindow::LoadPage(const wxString& location)
         if (f == nullptr)
         {
             wxFileName fn(location);
-            wxString location2 = wxFileSystem::FileNameToURL(fn);
+            std::string location2 = wxFileSystem::FileNameToURL(fn);
             f = m_Parser->OpenURL(wxHTML_URL_PAGE, location2);
         }
 
@@ -589,19 +589,19 @@ bool wxHtmlWindow::LoadPage(const wxString& location)
         {
             wxLogError(_("Unable to open requested HTML document: %s"), location.c_str());
             m_tmpCanDrawLocks--;
-            SetHTMLStatusText(wxEmptyString);
+            SetHTMLStatusText("");
             return false;
         }
 
         else
         {
             wxList::compatibility_iterator node;
-            wxString src;
+            std::string src;
 
 #if wxUSE_STATUSBAR
             if (m_RelatedStatusBarIndex != -1)
             {
-                wxString msg = _("Loading : ") + location;
+                std::string msg = _("Loading : ") + location;
                 SetHTMLStatusText(msg);
                 Refresh(false);
             }
@@ -682,12 +682,12 @@ bool wxHtmlWindow::LoadPage(const wxString& location)
 
 bool wxHtmlWindow::LoadFile(const wxFileName& filename)
 {
-    wxString url = wxFileSystem::FileNameToURL(filename);
+    std::string url = wxFileSystem::FileNameToURL(filename);
     return LoadPage(url);
 }
 
 
-bool wxHtmlWindow::ScrollToAnchor(const wxString& anchor)
+bool wxHtmlWindow::ScrollToAnchor(const std::string& anchor)
 {
     const wxHtmlCell *c = m_Cell->Find(wxHTML_COND_ISANCHOR, &anchor);
     if (!c)
@@ -717,12 +717,11 @@ bool wxHtmlWindow::ScrollToAnchor(const wxString& anchor)
 }
 
 
-void wxHtmlWindow::OnSetTitle(const wxString& title)
+void wxHtmlWindow::OnSetTitle(const std::string& title)
 {
     if (m_RelatedFrame)
     {
-        wxString tit;
-        tit.Printf(m_TitleFormat, title.c_str());
+        std::string tit = fmt::format(m_TitleFormat, title.c_str());
         m_RelatedFrame->SetTitle(tit);
     }
     m_OpenedPageTitle = title;
@@ -770,12 +769,12 @@ void wxHtmlWindow::CreateLayout()
 }
 
 #if wxUSE_CONFIG
-void wxHtmlWindow::ReadCustomization(wxConfigBase *cfg, wxString path)
+void wxHtmlWindow::ReadCustomization(wxConfigBase *cfg, std::string path)
 {
-    wxString oldpath;
-    wxString tmp;
+    std::string oldpath;
+    std::string tmp;
     int p_fontsizes[7];
-    wxString p_fff, p_ffn;
+    std::string p_fff, p_ffn;
 
     if (!path.empty())
     {
@@ -788,7 +787,8 @@ void wxHtmlWindow::ReadCustomization(wxConfigBase *cfg, wxString path)
     p_ffn = cfg->Read(wxT("wxHtmlWindow/FontFaceNormal"), m_Parser->m_FontFaceNormal);
     for (int i = 0; i < 7; i++)
     {
-        tmp.Printf(wxT("wxHtmlWindow/FontsSize%i"), i);
+        tmp = fmt::format("wxHtmlWindow/FontsSize{:i}", i);
+
         p_fontsizes[i] = cfg->Read(tmp, m_Parser->m_FontsSizes[i]);
     }
     SetFonts(p_ffn, p_fff, p_fontsizes);
@@ -799,10 +799,10 @@ void wxHtmlWindow::ReadCustomization(wxConfigBase *cfg, wxString path)
 
 
 
-void wxHtmlWindow::WriteCustomization(wxConfigBase *cfg, wxString path)
+void wxHtmlWindow::WriteCustomization(wxConfigBase *cfg, std::string path)
 {
-    wxString oldpath;
-    wxString tmp;
+    std::string oldpath;
+    std::string tmp;
 
     if (!path.empty())
     {
@@ -815,7 +815,8 @@ void wxHtmlWindow::WriteCustomization(wxConfigBase *cfg, wxString path)
     cfg->Write(wxT("wxHtmlWindow/FontFaceNormal"), m_Parser->m_FontFaceNormal);
     for (int i = 0; i < 7; i++)
     {
-        tmp.Printf(wxT("wxHtmlWindow/FontsSize%i"), i);
+        tmp = fmt::format("wxHtmlWindow/FontsSize{:i}", i);
+
         cfg->Write(tmp, (long) m_Parser->m_FontsSizes[i]);
     }
 
@@ -826,7 +827,7 @@ void wxHtmlWindow::WriteCustomization(wxConfigBase *cfg, wxString path)
 
 bool wxHtmlWindow::HistoryBack()
 {
-    wxString a, l;
+    std::string a, l;
 
     if (m_HistoryPos < 1) return false;
 
@@ -859,7 +860,7 @@ bool wxHtmlWindow::HistoryCanBack()
 
 bool wxHtmlWindow::HistoryForward()
 {
-    wxString a, l;
+    std::string a, l;
 
     if (m_HistoryPos == -1) return false;
     if (m_HistoryPos >= (int)m_History->GetCount() - 1)return false;
@@ -951,13 +952,13 @@ bool wxHtmlWindow::IsSelectionEnabled() const
 
 
 #if wxUSE_CLIPBOARD
-wxString wxHtmlWindow::DoSelectionToText(wxHtmlSelection *sel)
+std::string wxHtmlWindow::DoSelectionToText(wxHtmlSelection *sel)
 {
     if ( !sel )
-        return wxEmptyString;
+        return {};
 
     wxClientDC dc(this);
-    wxString text;
+    std::string text;
 
     wxHtmlTerminalCellsInterator i(sel->GetFromCell(), sel->GetToCell());
     const wxHtmlCell *prev = nullptr;
@@ -971,12 +972,12 @@ wxString wxHtmlWindow::DoSelectionToText(wxHtmlSelection *sel)
         // is to check if the parent container changed -- if it did, we moved
         // to a new paragraph.
         if ( prev && prev->GetParent() != i->GetParent() )
-            text << '\n';
+            text += '\n';
 
         // NB: we don't need to pass the selection to ConvertToText() in the
         //     middle of the selected text; it's only useful when only part of
         //     a cell is selected
-        text << i->ConvertToText(sel);
+        text += i->ConvertToText(sel);
 
         prev = *i;
         ++i;
@@ -984,7 +985,7 @@ wxString wxHtmlWindow::DoSelectionToText(wxHtmlSelection *sel)
     return text;
 }
 
-wxString wxHtmlWindow::ToText()
+std::string wxHtmlWindow::ToText()
 {
     if (m_Cell)
     {
@@ -993,7 +994,7 @@ wxString wxHtmlWindow::ToText()
         return DoSelectionToText(&sel);
     }
     else
-        return wxEmptyString;
+        return {};
 }
 
 #endif // wxUSE_CLIPBOARD
@@ -1016,7 +1017,7 @@ bool wxHtmlWindow::CopySelection(ClipboardType t)
 
         if ( wxTheClipboard->Open() )
         {
-            const wxString txt(SelectionToText());
+            const std::string txt(SelectionToText());
             wxTheClipboard->SetData(new wxTextDataObject(txt));
             wxTheClipboard->Close();
             wxLogTrace(wxT("wxhtmlselection"),
@@ -1792,7 +1793,7 @@ wxEND_EVENT_TABLE()
 // wxHtmlWindowInterface implementation in wxHtmlWindow
 //-----------------------------------------------------------------------------
 
-void wxHtmlWindow::SetHTMLWindowTitle(const wxString& title)
+void wxHtmlWindow::SetHTMLWindowTitle(const std::string& title)
 {
     OnSetTitle(title);
 }
@@ -1803,8 +1804,8 @@ void wxHtmlWindow::OnHTMLLinkClicked(const wxHtmlLinkInfo& link)
 }
 
 wxHtmlOpeningStatus wxHtmlWindow::OnHTMLOpeningURL(wxHtmlURLType type,
-                                                   const wxString& url,
-                                                   wxString *redirect) const
+                                                   const std::string& url,
+                                                   std::string *redirect) const
 {
     return OnOpeningURL(type, url, redirect);
 }
@@ -1835,7 +1836,7 @@ void wxHtmlWindow::SetHTMLBackgroundImage(const wxBitmap& bmpBg)
     SetBackgroundImage(bmpBg);
 }
 
-void wxHtmlWindow::SetHTMLStatusText(const wxString& text)
+void wxHtmlWindow::SetHTMLStatusText(const std::string& text)
 {
 #if wxUSE_STATUSBAR
     if (m_RelatedStatusBarIndex != -1)

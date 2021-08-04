@@ -33,7 +33,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxRichTextHTMLHandler, wxRichTextFileHandler);
 
 int wxRichTextHTMLHandler::sm_fileCounter = 1;
 
-wxRichTextHTMLHandler::wxRichTextHTMLHandler(const wxString& name, const wxString& ext, int type)
+wxRichTextHTMLHandler::wxRichTextHTMLHandler(const std::string& name, const std::string& ext, int type)
     : wxRichTextFileHandler(name, ext, type) 
 {
     m_fontSizeMapping.push_back(8);
@@ -46,7 +46,7 @@ wxRichTextHTMLHandler::wxRichTextHTMLHandler(const wxString& name, const wxStrin
 }
 
 /// Can we handle this filename (if using files)? By default, checks the extension.
-bool wxRichTextHTMLHandler::CanHandle(const wxString& filename) const
+bool wxRichTextHTMLHandler::CanHandle(const std::string& filename) const
 {
     wxString path, file, ext;
     wxFileName::SplitPath(filename, & path, & file, & ext);
@@ -128,13 +128,13 @@ bool wxRichTextHTMLHandler::DoSaveFile(wxRichTextBuffer *buffer, wxOutputStream&
                         wxRichTextAttr charStyle(para->GetCombinedAttributes(obj->GetAttributes()));
                         BeginCharacterFormatting(currentCharStyle, charStyle, paraStyle, str);
 
-                        wxString text = textObj->GetText();
+                        std::string text = textObj->GetText();
 
                         if (charStyle.HasTextEffects() && (charStyle.GetTextEffects() & wxTEXT_ATTR_EFFECT_CAPITALS))
-                            text.MakeUpper();
+                            wx::utils::ToUpper(text);
 
-                        wxString toReplace = wxRichTextLineBreakChar;
-                        text.Replace(toReplace, wxT("<br>"));
+                        std::string toReplace{wxRichTextLineBreakChar};
+                        wx::utils::ReplaceAll(text, toReplace, "<br>");
 
                         str << text;
 
@@ -176,42 +176,42 @@ bool wxRichTextHTMLHandler::DoSaveFile(wxRichTextBuffer *buffer, wxOutputStream&
 
 void wxRichTextHTMLHandler::BeginCharacterFormatting(const wxRichTextAttr& currentStyle, const wxRichTextAttr& thisStyle, const wxRichTextAttr& WXUNUSED(paraStyle), wxTextOutputStream& str)
 {
-    wxString style;
+    std::string style;
 
     // Is there any change in the font properties of the item?
     if (thisStyle.GetFontFaceName() != currentStyle.GetFontFaceName())
     {
-        wxString faceName(thisStyle.GetFontFaceName());
-        style += wxString::Format(wxT(" face=\"%s\""), faceName.c_str());
+        std::string faceName(thisStyle.GetFontFaceName());
+        style += fmt::format(" face=\"{:s}\"", faceName.c_str());
     }
     if (thisStyle.GetFontSize() != currentStyle.GetFontSize())
-        style += wxString::Format(wxT(" size=\"%ld\""), PtToSize(thisStyle.GetFontSize()));
+        style += fmt::format(" size=\"{:ld}\"", PtToSize(thisStyle.GetFontSize()));
 
     bool bTextColourChanged = (thisStyle.GetTextColour() != currentStyle.GetTextColour());
     bool bBackgroundColourChanged = (thisStyle.GetBackgroundColour() != currentStyle.GetBackgroundColour());
     if (bTextColourChanged || bBackgroundColourChanged)
     {
-        style += wxT(" style=\"");
+        style += " style=\"";
 
         if (bTextColourChanged)
         {
-            wxString color(thisStyle.GetTextColour().GetAsString(wxC2S_HTML_SYNTAX));
-            style += wxString::Format(wxT("color: %s"), color.c_str());
+            std::string color(thisStyle.GetTextColour().GetAsString(wxC2S_HTML_SYNTAX));
+            style += fmt::format("color: {:s}", color.c_str());
         }
         if (bTextColourChanged && bBackgroundColourChanged)
-            style += wxT(";");
+            style += ";";
         if (bBackgroundColourChanged)
         {
-            wxString color(thisStyle.GetBackgroundColour().GetAsString(wxC2S_HTML_SYNTAX));
-            style += wxString::Format(wxT("background-color: %s"), color.c_str());
+            std::string color(thisStyle.GetBackgroundColour().GetAsString(wxC2S_HTML_SYNTAX));
+            style += fmt::format("background-color: {:s}", color.c_str());
         }
 
-        style += wxT("\"");
+        style += "\"";
     }
 
     if (style.size())
     {
-        str << wxString::Format(wxT("<font %s >"), style.c_str());
+        str << fmt::format("<font {:s} >", style.c_str());
         m_font = true;
     }
 
@@ -290,7 +290,7 @@ void wxRichTextHTMLHandler::BeginParagraphFormatting(const wxRichTextAttr& WXUNU
             {
                 m_indents.push_back(indent);
 
-                wxString tag;
+                std::string tag;
                 int listType = TypeOfList(thisStyle, tag);
                 m_listTypes.push_back(listType);
 
@@ -307,42 +307,42 @@ void wxRichTextHTMLHandler::BeginParagraphFormatting(const wxRichTextAttr& WXUNU
         {
             CloseLists(-1, str);
 
-            wxString align = GetAlignment(thisStyle);
-            str << wxString::Format(wxT("<p align=\"%s\""), align.c_str());
+            std::string align = GetAlignment(thisStyle);
+            str << fmt::format("<p align=\"{:s}\"", align.c_str());
 
-            wxString styleStr;
+            std::string styleStr;
 
             if ((GetFlags() & wxRICHTEXT_HANDLER_USE_CSS) && thisStyle.HasParagraphSpacingBefore())
             {
                 double spacingBeforeMM = thisStyle.GetParagraphSpacingBefore() / 10.0;
 
-                styleStr += wxString::Format(wxT("margin-top: %.2fmm; "), spacingBeforeMM);
+                styleStr += fmt::format("margin-top: {:.2f}mm; ", spacingBeforeMM);
             }
             if ((GetFlags() & wxRICHTEXT_HANDLER_USE_CSS) && thisStyle.HasParagraphSpacingAfter())
             {
                 double spacingAfterMM = thisStyle.GetParagraphSpacingAfter() / 10.0;
 
-                styleStr += wxString::Format(wxT("margin-bottom: %.2fmm; "), spacingAfterMM);
+                styleStr += fmt::format("margin-bottom: {:.2f}mm; ", spacingAfterMM);
             }
 
             double indentLeftMM = (thisStyle.GetLeftIndent() + thisStyle.GetLeftSubIndent()) / 10.0;
             if ((GetFlags() & wxRICHTEXT_HANDLER_USE_CSS) && (indentLeftMM > 0.0))
             {
-                styleStr += wxString::Format(wxT("margin-left: %.2fmm; "), indentLeftMM);
+                styleStr += fmt::format("margin-left: {:.2f}mm; ", indentLeftMM);
             }
             double indentRightMM = thisStyle.GetRightIndent() / 10.0;
             if ((GetFlags() & wxRICHTEXT_HANDLER_USE_CSS) && thisStyle.HasRightIndent() && (indentRightMM > 0.0))
             {
-                styleStr += wxString::Format(wxT("margin-right: %.2fmm; "), indentRightMM);
+                styleStr += fmt::format("margin-right: {:.2f}mm; ", indentRightMM);
             }
             // First line indentation
             double firstLineIndentMM = - thisStyle.GetLeftSubIndent() / 10.0;
             if ((GetFlags() & wxRICHTEXT_HANDLER_USE_CSS) && (firstLineIndentMM > 0.0))
             {
-                styleStr += wxString::Format(wxT("text-indent: %.2fmm; "), firstLineIndentMM);
+                styleStr += fmt::format("text-indent: {:.2f}mm; ", firstLineIndentMM);
             }
 
-            if (!styleStr.IsEmpty())
+            if (!styleStr.empty())
                 str << wxT(" style=\"") << styleStr << wxT("\"");
 
             str << wxT(">");
@@ -353,7 +353,7 @@ void wxRichTextHTMLHandler::BeginParagraphFormatting(const wxRichTextAttr& WXUNU
             if ((GetFlags() & wxRICHTEXT_HANDLER_USE_CSS) == 0)
             {
                 // Use a table to do indenting if we don't have CSS
-                str << wxString::Format(wxT("<table border=0 cellpadding=0 cellspacing=0><tr><td width=\"%d\"></td><td>"), indentPixels);
+                str << fmt::format("<table border=0 cellpadding=0 cellspacing=0><tr><td width=\"{:d}\"></td><td>", indentPixels);
                 m_inTable = true;
             }
 
@@ -367,25 +367,25 @@ void wxRichTextHTMLHandler::BeginParagraphFormatting(const wxRichTextAttr& WXUNU
     {
         CloseLists(-1, str);
 
-        wxString align = GetAlignment(thisStyle);
-        str << wxString::Format(wxT("<p align=\"%s\""), align.c_str());
+        std::string align = GetAlignment(thisStyle);
+        str << fmt::format("<p align=\"{:s}\"", align.c_str());
 
-        wxString styleStr;
+        std::string styleStr;
 
         if ((GetFlags() & wxRICHTEXT_HANDLER_USE_CSS) && thisStyle.HasParagraphSpacingBefore())
         {
             double spacingBeforeMM = thisStyle.GetParagraphSpacingBefore() / 10.0;
 
-            styleStr += wxString::Format(wxT("margin-top: %.2fmm; "), spacingBeforeMM);
+            styleStr += fmt::format("margin-top: {:.2f}mm; ", spacingBeforeMM);
         }
         if ((GetFlags() & wxRICHTEXT_HANDLER_USE_CSS) && thisStyle.HasParagraphSpacingAfter())
         {
             double spacingAfterMM = thisStyle.GetParagraphSpacingAfter() / 10.0;
 
-            styleStr += wxString::Format(wxT("margin-bottom: %.2fmm; "), spacingAfterMM);
+            styleStr += fmt::format("margin-bottom: {:.2f}mm; ", spacingAfterMM);
         }
 
-        if (!styleStr.IsEmpty())
+        if (!styleStr.empty())
             str << wxT(" style=\"") << styleStr << wxT("\"");
 
         str << wxT(">");
@@ -436,32 +436,32 @@ void wxRichTextHTMLHandler::OutputFont(const wxRichTextAttr& style, wxTextOutput
 {
     if (style.HasFont())
     {
-        stream << wxString::Format(wxT("<font face=\"%s\" size=\"%ld\""), style.GetFontFaceName().c_str(), PtToSize(style.GetFontSize()));
+        stream << fmt::format("<font face=\"{:s}\" size=\"{:ld}\"", style.GetFontFaceName().c_str(), PtToSize(style.GetFontSize()));
         if (style.HasTextColour())
-            stream << wxString::Format(wxT(" color=\"%s\""), style.GetTextColour().GetAsString(wxC2S_HTML_SYNTAX).c_str());
+            stream << fmt::format(" color=\"{:s}\"", style.GetTextColour().GetAsString(wxC2S_HTML_SYNTAX).c_str());
         stream << wxT(" >");
     }
 }
 
-int wxRichTextHTMLHandler::TypeOfList( const wxRichTextAttr& thisStyle, wxString& tag )
+int wxRichTextHTMLHandler::TypeOfList( const wxRichTextAttr& thisStyle, std::string& tag )
 {
     // We can use number attribute of li tag but not all the browsers support it.
     // also wxHtmlWindow doesn't support type attribute.
 
     bool m_is_ul = false;
     if (thisStyle.GetBulletStyle() == (wxTEXT_ATTR_BULLET_STYLE_ARABIC|wxTEXT_ATTR_BULLET_STYLE_PERIOD))
-        tag = wxT("<ol type=\"1\">");
+        tag = "<ol type=\"1\">";
     else if (thisStyle.GetBulletStyle() == wxTEXT_ATTR_BULLET_STYLE_LETTERS_UPPER)
-        tag = wxT("<ol type=\"A\">");
+        tag = "<ol type=\"A\">";
     else if (thisStyle.GetBulletStyle() == wxTEXT_ATTR_BULLET_STYLE_LETTERS_LOWER)
-        tag = wxT("<ol type=\"a\">");
+        tag = "<ol type=\"a\">";
     else if (thisStyle.GetBulletStyle() == wxTEXT_ATTR_BULLET_STYLE_ROMAN_UPPER)
-        tag = wxT("<ol type=\"I\">");
+        tag = "<ol type=\"I\">";
     else if (thisStyle.GetBulletStyle() == wxTEXT_ATTR_BULLET_STYLE_ROMAN_LOWER)
-        tag = wxT("<ol type=\"i\">");
+        tag = "<ol type=\"i\">";
     else
     {
-        tag = wxT("<ul>");
+        tag = "<ul>";
         m_is_ul = true;
     }
 
@@ -471,20 +471,20 @@ int wxRichTextHTMLHandler::TypeOfList( const wxRichTextAttr& thisStyle, wxString
         return 0;
 }
 
-wxString wxRichTextHTMLHandler::GetAlignment( const wxRichTextAttr& thisStyle )
+std::string wxRichTextHTMLHandler::GetAlignment( const wxRichTextAttr& thisStyle )
 {
     switch( thisStyle.GetAlignment() )
     {
     case wxTextAttrAlignment::Left:
-        return  wxT("left");
+        return  "left";
     case wxTextAttrAlignment::Right:
-        return wxT("right");
+        return "right";
     case wxTextAttrAlignment::Center:
-        return wxT("center");
+        return "center";
     case wxTextAttrAlignment::Justified:
-        return wxT("justify");
+        return "justify";
     default:
-        return wxT("left");
+        return "left";
     }
 }
 
@@ -510,8 +510,8 @@ void wxRichTextHTMLHandler::WriteImage(wxRichTextImage* image, wxOutputStream& s
             image->GetImageBlock().Load(img);
             if (img.IsOk())
             {
-                wxString ext(image->GetImageBlock().GetExtension());
-                wxString tempFilename(wxString::Format(wxT("image%d.%s"), sm_fileCounter, ext.c_str()));
+                std::string ext(image->GetImageBlock().GetExtension());
+                std::string tempFilename(fmt::format("image{:d}.{:s}", sm_fileCounter, ext.c_str()));
                 wxMemoryFSHandler::AddFile(tempFilename, img, image->GetImageBlock().GetImageType());
 
                 m_imageLocations.push_back(tempFilename);
@@ -535,17 +535,18 @@ void wxRichTextHTMLHandler::WriteImage(wxRichTextImage* image, wxOutputStream& s
 
         if (image->GetImageBlock().IsOk())
         {
-            wxString tempDir(GetTempDir());
-            if (tempDir.IsEmpty())
+            std::string tempDir(GetTempDir());
+            if (tempDir.empty())
                 tempDir = wxFileName::GetTempDir();
 
-            wxString ext(image->GetImageBlock().GetExtension());
-            wxString tempFilename(wxString::Format(wxT("%s/image%d.%s"), tempDir.c_str(), sm_fileCounter, ext.c_str()));
+            std::string ext(image->GetImageBlock().GetExtension());
+            std::string tempFilename(fmt::format("{:s}/image{:d}.{:s}", tempDir.c_str(), sm_fileCounter, ext.c_str()));
             image->GetImageBlock().Write(tempFilename);
 
             m_imageLocations.push_back(tempFilename);
 
-            str << wxFileSystem::FileNameToURL(tempFilename);
+            // FIXME: stupid
+            str << wxFileSystem::FileNameToURL(wxString(tempFilename));
         }
         else
             str << wxT("file:?");
@@ -584,11 +585,11 @@ long wxRichTextHTMLHandler::PtToSize(long size)
     return 7;
 }
 
-wxString wxRichTextHTMLHandler::SymbolicIndent(long indent)
+std::string wxRichTextHTMLHandler::SymbolicIndent(long indent)
 {
-    wxString in;
+    std::string in;
     for(;indent > 0; indent -= 20)
-        in.Append( wxT("&nbsp;") );
+        in.append("&nbsp;");
     return in;
 }
 
@@ -669,12 +670,12 @@ bool wxRichTextHTMLHandler::DeleteTemporaryImages()
 }
 
 /// Delete the in-memory or temporary files generated by the last operation
-bool wxRichTextHTMLHandler::DeleteTemporaryImages(int flags, const std::vector<wxString>& imageLocations)
+bool wxRichTextHTMLHandler::DeleteTemporaryImages(int flags, const std::vector<std::string>& imageLocations)
 {
     size_t i;
     for (i = 0; i < imageLocations.size(); i++)
     {
-        wxString location = imageLocations[i];
+        std::string location = imageLocations[i];
 
         if (flags & wxRICHTEXT_HANDLER_SAVE_IMAGES_TO_MEMORY)
         {

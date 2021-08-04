@@ -24,7 +24,7 @@ class wxPreferencesEditorImpl
 {
 public:
     // This is implemented in a platform-specific way.
-    static wxPreferencesEditorImpl* Create(const wxString& title);
+    static wxPreferencesEditorImpl* Create(const std::string& title);
 
     // These methods simply mirror the public wxPreferencesEditor ones.
     virtual void AddPage(wxPreferencesPage* page) = 0;

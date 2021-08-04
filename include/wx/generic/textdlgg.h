@@ -59,8 +59,8 @@ public:
                 long style = wxTextEntryDialogStyle,
                 const wxPoint& pos = wxDefaultPosition);
 
-    void SetValue(const wxString& val);
-    wxString GetValue() const { return m_value; }
+    void SetValue(const std::string& val);
+    std::string GetValue() const { return m_value; }
 
     void SetMaxLength(unsigned long len);
 
@@ -80,7 +80,7 @@ public:
 
 protected:
     wxTextCtrl *m_textctrl;
-    wxString    m_value;
+    std::string    m_value;
     long        m_dialogStyle;
 
 private:
@@ -126,7 +126,7 @@ private:
 // function to get a string from user
 // ----------------------------------------------------------------------------
 
-WXDLLIMPEXP_CORE wxString
+WXDLLIMPEXP_CORE std::string
     wxGetTextFromUser(const std::string& message,
                     const std::string& caption = wxGetTextFromUserPromptStr,
                     const std::string& default_value = {},
@@ -135,7 +135,7 @@ WXDLLIMPEXP_CORE wxString
                     wxCoord y = wxDefaultCoord,
                     bool centre = true);
 
-WXDLLIMPEXP_CORE wxString
+WXDLLIMPEXP_CORE std::string
     wxGetPasswordFromUser(const std::string& message,
                         const std::string& caption = wxGetPasswordFromUserPromptStr,
                         const std::string& default_value = {},

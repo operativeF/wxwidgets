@@ -895,7 +895,7 @@ void wxRichTextBordersPage::GetBorderValue(wxTextAttrBorder& border, wxTextCtrl*
  * Get bitmap resources
  */
 
-wxBitmap wxRichTextBordersPage::GetBitmapResource( const wxString& name )
+wxBitmap wxRichTextBordersPage::GetBitmapResource( const std::string& name )
 {
     // Bitmap retrieval
 ////@begin wxRichTextBordersPage bitmap retrieval
@@ -908,7 +908,7 @@ wxBitmap wxRichTextBordersPage::GetBitmapResource( const wxString& name )
  * Get icon resources
  */
 
-wxIcon wxRichTextBordersPage::GetIconResource( const wxString& name )
+wxIcon wxRichTextBordersPage::GetIconResource( const std::string& name )
 {
     // Icon retrieval
 ////@begin wxRichTextBordersPage icon retrieval
@@ -1145,7 +1145,7 @@ void wxRichTextBordersPage::OnRichtextBorderLeftValueTextUpdated( wxCommandEvent
         
     if (m_borderSyncCtrl->GetValue())
     {
-        wxString value = event.GetString();
+        std::string value = event.GetString();
         m_ignoreUpdates = true;
         m_rightBorderWidth->SetValue(value);
         m_topBorderWidth->SetValue(value);
@@ -1265,7 +1265,7 @@ void wxRichTextBordersPage::OnRichtextOutlineLeftTextUpdated( wxCommandEvent& ev
         
     if (m_outlineSyncCtrl->GetValue())
     {
-        wxString value = event.GetString();
+        std::string value = event.GetString();
         m_ignoreUpdates = true;
         m_rightOutlineWidth->SetValue(value);
         m_topOutlineWidth->SetValue(value);

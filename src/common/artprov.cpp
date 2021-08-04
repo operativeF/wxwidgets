@@ -345,7 +345,7 @@ wxArtID wxArtProvider::GetMessageBoxIconId(int flags)
     switch ( flags & wxICON_MASK )
     {
         default:
-            wxFAIL_MSG(wxT("incorrect message box icon flags"));
+            wxFAIL_MSG("incorrect message box icon flags");
             [[fallthrough]];
 
         case wxICON_ERROR:

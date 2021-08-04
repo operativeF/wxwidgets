@@ -59,7 +59,7 @@ wxRichTextObjectPropertiesDialog::wxRichTextObjectPropertiesDialog()
     Init();
 }
 
-wxRichTextObjectPropertiesDialog::wxRichTextObjectPropertiesDialog( wxRichTextObject* obj, wxWindow* parent, wxWindowID id, const wxString& caption, const wxPoint& pos, const wxSize& size, long style )
+wxRichTextObjectPropertiesDialog::wxRichTextObjectPropertiesDialog( wxRichTextObject* obj, wxWindow* parent, wxWindowID id, const std::string& caption, const wxPoint& pos, const wxSize& size, long style )
 {
     Init();
     Create(obj, parent, id, caption, pos, size, style);
@@ -70,7 +70,7 @@ wxRichTextObjectPropertiesDialog::wxRichTextObjectPropertiesDialog( wxRichTextOb
  * wxRichTextImageDlg creator
  */
 
-bool wxRichTextObjectPropertiesDialog::Create( wxRichTextObject* obj, wxWindow* parent, wxWindowID id, const wxString& caption, const wxPoint& pos, const wxSize& size, long style )
+bool wxRichTextObjectPropertiesDialog::Create( wxRichTextObject* obj, wxWindow* parent, wxWindowID id, const std::string& caption, const wxPoint& pos, const wxSize& size, long style )
 {
     SetObject(obj);
     SetExtraStyle(wxDIALOG_EX_CONTEXTHELP);
@@ -127,7 +127,7 @@ bool wxRichTextObjectPropertiesDialog::ShowToolTips()
  * Get bitmap resources
  */
 
-wxBitmap wxRichTextObjectPropertiesDialog::GetBitmapResource( const wxString& name )
+wxBitmap wxRichTextObjectPropertiesDialog::GetBitmapResource( const std::string& name )
 {
     // Bitmap retrieval
 ////@begin wxRichTextObjectPropertiesDialog bitmap retrieval
@@ -140,7 +140,7 @@ wxBitmap wxRichTextObjectPropertiesDialog::GetBitmapResource( const wxString& na
  * Get icon resources
  */
 
-wxIcon wxRichTextObjectPropertiesDialog::GetIconResource( const wxString& name )
+wxIcon wxRichTextObjectPropertiesDialog::GetIconResource( const std::string& name )
 {
     // Icon retrieval
 ////@begin wxRichTextObjectPropertiesDialog icon retrieval

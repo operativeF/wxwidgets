@@ -6702,7 +6702,7 @@ public:
     /**
         Returns @true if we handle this filename (if using files). By default, checks the extension.
     */
-    virtual bool CanHandle(const wxString& filename) const;
+    virtual bool CanHandle(const std::string& filename) const;
 
     /**
         Returns @true if we can save using this handler.

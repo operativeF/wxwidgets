@@ -116,7 +116,7 @@ public:
     wxHtmlHelpHtmlWindow(const wxHtmlHelpHtmlWindow&) = delete;
 	wxHtmlHelpHtmlWindow& operator=(const wxHtmlHelpHtmlWindow&) = delete;
 
-    bool LoadPage(const wxString& location) override
+    bool LoadPage(const std::string& location) override
     {
         if ( !wxHtmlWindow::LoadPage(location) )
             return false;
@@ -1533,7 +1533,7 @@ void wxHtmlHelpWindow::OnToolbar(wxCommandEvent& event)
             {
                 if (m_Printer == nullptr)
                     m_Printer = new wxHtmlEasyPrinting(_("Help Printing"), this);
-                if (!m_HtmlWin->GetOpenedPage())
+                if (m_HtmlWin->GetOpenedPage().empty())
                 {
                     wxLogWarning(_("Cannot print empty page."));
                 }

@@ -380,7 +380,7 @@ wxString wxAcceleratorEntry::AsPossiblyLocalizedString(bool localized) const
             }
             else
             {
-                wxFAIL_MSG( wxT("unknown keyboard accelerator code") );
+                wxFAIL_MSG( "unknown keyboard accelerator code" );
             }
         }
     }

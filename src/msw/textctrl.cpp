@@ -1242,7 +1242,7 @@ void wxTextCtrl::DoSetSelection(long from, long to, int flags)
             {
                 // setting ECO_NOHIDESEL also sets WS_VISIBLE and possibly
                 // others, remember the style so we can reset it later if needed
-                style = ::GetWindowLong(GetHwnd(), GWL_STYLE);
+                style = ::GetWindowLongW(GetHwnd(), GWL_STYLE);
                 ::SendMessageW(GetHwnd(), EM_SETOPTIONS,
                               ECOOP_OR, ECO_NOHIDESEL);
             }
@@ -1258,8 +1258,8 @@ void wxTextCtrl::DoSetSelection(long from, long to, int flags)
         {
             ::SendMessageW(GetHwnd(), EM_SETOPTIONS,
                           ECOOP_AND, ~ECO_NOHIDESEL);
-            if ( style != ::GetWindowLong(GetHwnd(), GWL_STYLE) )
-                ::SetWindowLong(GetHwnd(), GWL_STYLE, style);
+            if ( style != ::GetWindowLongW(GetHwnd(), GWL_STYLE) )
+                ::SetWindowLongW(GetHwnd(), GWL_STYLE, style);
         }
 #endif // wxUSE_RICHEDIT
     }

@@ -32,7 +32,7 @@ namespace
 class wxGenericPrefsDialog : public wxDialog
 {
 public:
-    wxGenericPrefsDialog(wxWindow *parent, const wxString& title)
+    wxGenericPrefsDialog(wxWindow *parent, const std::string& title)
         : wxDialog(parent, wxID_ANY, title,
                    wxDefaultPosition, wxDefaultSize,
                    wxDEFAULT_FRAME_STYLE & ~(wxRESIZE_BORDER | wxMAXIMIZE_BOX | wxMINIMIZE_BOX))
@@ -81,7 +81,7 @@ private:
 class wxGenericPreferencesEditorImplBase : public wxPreferencesEditorImpl
 {
 public:
-    void SetTitle(const wxString& title)
+    void SetTitle(const std::string& title)
     {
         m_title = title;
     }
@@ -99,7 +99,9 @@ protected:
             // Use the default title, which should include the application name
             // under both MSW and GTK (and OSX uses its own native
             // implementation anyhow).
-            m_title.Printf(_("%s Preferences"), wxTheApp->GetAppDisplayName());
+            // TODO: Is this possible with fmt?
+            auto str = _("{:s} Preferences").ToStdString();
+            m_title = (str, wxTheApp->GetAppDisplayName());
         }
 
         wxGenericPrefsDialog *dlg = new wxGenericPrefsDialog(parent, m_title);
@@ -127,7 +129,7 @@ protected:
     Pages m_pages;
 
 private:
-    wxString m_title;
+    std::string m_title;
 };
 
 
@@ -237,7 +239,7 @@ wxGenericPreferencesEditorImplBase* NewGenericImpl()
 } // anonymous namespace
 
 /*static*/
-wxPreferencesEditorImpl* wxPreferencesEditorImpl::Create(const wxString& title)
+wxPreferencesEditorImpl* wxPreferencesEditorImpl::Create(const std::string& title)
 {
     wxGenericPreferencesEditorImplBase* const impl = NewGenericImpl();
 

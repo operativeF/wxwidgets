@@ -33,7 +33,7 @@ bool wxStaticLine::Create( wxWindow *parent,
                            const wxPoint &pos,
                            const wxSize &size,
                            long style,
-                           const wxString &name)
+                           const std::string &name)
 {
     m_statbox = NULL;
 
@@ -45,7 +45,7 @@ bool wxStaticLine::Create( wxWindow *parent,
 
     wxSize sizeReal = AdjustSize(size);
 
-    m_statbox = new wxStaticBox(parent, id, wxEmptyString, pos, sizeReal, style, name);
+    m_statbox = new wxStaticBox(parent, id, "", pos, sizeReal, style, name);
 
     return true;
 }

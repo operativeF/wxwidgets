@@ -154,7 +154,7 @@ void wxTextEntryDialog::SetMaxLength(unsigned long len)
     }
 }
 
-void wxTextEntryDialog::SetValue(const wxString& val)
+void wxTextEntryDialog::SetValue(const std::string& val)
 {
     m_value = val;
 

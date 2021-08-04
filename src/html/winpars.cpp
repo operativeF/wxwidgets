@@ -272,7 +272,7 @@ wxFSFile *wxHtmlWinParser::OpenURL(wxHtmlURLType type,
             }
         }
 
-        wxString redirect;
+        std::string redirect;
         status = m_windowInterface->OnHTMLOpeningURL(type, myfullurl, &redirect);
         if ( status != wxHTML_REDIRECT )
             break;

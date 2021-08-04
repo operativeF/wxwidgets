@@ -39,7 +39,7 @@ class wxTreeListModelNode
 {
 public:
     explicit wxTreeListModelNode(wxTreeListModelNode* parent,
-                        const wxString& text = wxString(),
+                        const std::string& text = {},
                         int imageClosed = wxWithImages::NO_IMAGE,
                         int imageOpened = wxWithImages::NO_IMAGE,
                         wxClientData* data = nullptr)

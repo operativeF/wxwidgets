@@ -271,7 +271,7 @@ wxHtmlListBox::GetSelectedTextBgColour(const wxColour& WXUNUSED(colBg)) const
 // wxHtmlListBox items markup
 // ----------------------------------------------------------------------------
 
-wxString wxHtmlListBox::OnGetItemMarkup(size_t n) const
+std::string wxHtmlListBox::OnGetItemMarkup(size_t n) const
 {
     // we don't even need to wrap the value returned by OnGetItem() inside
     // "<html><body>" and "</body></html>" because wxHTML can parse it even
@@ -430,7 +430,7 @@ wxCoord wxHtmlListBox::OnMeasureItem(size_t n) const
 // wxHtmlListBox implementation of wxHtmlListBoxWinInterface
 // ----------------------------------------------------------------------------
 
-void wxHtmlListBox::SetHTMLWindowTitle(const wxString& WXUNUSED(title))
+void wxHtmlListBox::SetHTMLWindowTitle(const std::string& WXUNUSED(title))
 {
     // nothing to do
 }
@@ -449,8 +449,8 @@ void wxHtmlListBox::OnLinkClicked(size_t WXUNUSED(n),
 
 wxHtmlOpeningStatus
 wxHtmlListBox::OnHTMLOpeningURL(wxHtmlURLType WXUNUSED(type),
-                                const wxString& WXUNUSED(url),
-                                wxString *WXUNUSED(redirect)) const
+                                const std::string& WXUNUSED(url),
+                                std::string *WXUNUSED(redirect)) const
 {
     return wxHTML_OPEN;
 }
@@ -478,7 +478,7 @@ void wxHtmlListBox::SetHTMLBackgroundImage(const wxBitmap& WXUNUSED(bmpBg))
     // nothing to do
 }
 
-void wxHtmlListBox::SetHTMLStatusText(const wxString& WXUNUSED(text))
+void wxHtmlListBox::SetHTMLStatusText(const std::string& WXUNUSED(text))
 {
     // nothing to do
 }
