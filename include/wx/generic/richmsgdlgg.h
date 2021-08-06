@@ -27,6 +27,9 @@ public:
           m_detailsPane(nullptr)
     {}
 
+    wxGenericRichMessageDialog(const wxGenericRichMessageDialog&) = delete;
+    wxGenericRichMessageDialog& operator=(const wxGenericRichMessageDialog&) = delete;
+
     bool IsCheckBoxChecked() const override;
 
 protected:
@@ -41,9 +44,6 @@ private:
     void OnPaneChanged(wxCollapsiblePaneEvent& event);
 
     wxDECLARE_EVENT_TABLE();
-
-    wxGenericRichMessageDialog(const wxGenericRichMessageDialog&) = delete;
-	wxGenericRichMessageDialog& operator=(const wxGenericRichMessageDialog&) = delete;
 };
 
 #endif // _WX_GENERIC_RICHMSGDLGG_H_

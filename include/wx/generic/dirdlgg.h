@@ -31,7 +31,7 @@ class WXDLLIMPEXP_FWD_CORE wxTreeEvent;
 class WXDLLIMPEXP_CORE wxGenericDirDialog : public wxDirDialogBase
 {
 public:
-    wxGenericDirDialog() : wxDirDialogBase() { }
+    wxGenericDirDialog() = default;
 
     wxGenericDirDialog(wxWindow* parent,
                        const std::string& title = wxDirSelectorPromptStr,
@@ -70,8 +70,8 @@ protected:
     void OnGoHome(wxCommandEvent& event);
     void OnShowHidden(wxCommandEvent& event);
 
-    wxGenericDirCtrl* m_dirCtrl;
-    wxTextCtrl*       m_input;
+    wxGenericDirCtrl* m_dirCtrl{nullptr};
+    wxTextCtrl*       m_input{nullptr};
 
     wxDECLARE_EVENT_TABLE();
     wxDECLARE_DYNAMIC_CLASS(wxGenericDirDialog);

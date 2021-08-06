@@ -40,11 +40,8 @@ public:
         is_drive = 0x0008
     };
 
-    wxFileData() { 
-    m_size = 0;
-    m_type = wxFileData::is_file;
-    m_image = wxFileIconsTable::file;
- }
+    wxFileData() = default;
+
     // Full copy constructor
     wxFileData( const wxFileData& fileData ) { Copy(fileData); }
     // Create a filedata from this information
@@ -113,9 +110,11 @@ public:
 protected:
     wxString m_fileName;
     wxString   m_filePath;
-    wxFileOffset m_size{0};
-    wxDateTime m_dateTime;
     wxString m_permissions;
+
+    wxDateTime m_dateTime;
+
+    wxFileOffset m_size{0};
     int      m_type{wxFileData::is_file};
     int      m_image{wxFileIconsTable::file};    
 };

@@ -119,33 +119,6 @@ bool wxSplitterWindow::Create(wxWindow *parent, wxWindowID id,
     return true;
 }
 
-void wxSplitterWindow::Init()
-{
-    m_splitMode = wxSPLIT_VERTICAL;
-    m_permitUnsplitAlways = true;
-    m_windowOne = nullptr;
-    m_windowTwo = nullptr;
-    m_dragMode = wxSPLIT_DRAG_NONE;
-    m_oldX = 0;
-    m_oldY = 0;
-    m_sashStart = 0;
-    m_sashPosition = 0;
-    m_requestedSashPosition = INT_MAX;
-    m_sashGravity = 0.0;
-    m_minimumPaneSize = 0;
-    m_sashCursorWE = wxCursor(wxCURSOR_SIZEWE);
-    m_sashCursorNS = wxCursor(wxCURSOR_SIZENS);
-    m_sashTrackerPen = new wxPen(*wxBLACK, 2, wxPenStyle::Solid);
-
-    m_needUpdating = false;
-    m_isHot = false;
-}
-
-wxSplitterWindow::~wxSplitterWindow()
-{
-    delete m_sashTrackerPen;
-}
-
 // ----------------------------------------------------------------------------
 // entering/leaving sash
 // ----------------------------------------------------------------------------

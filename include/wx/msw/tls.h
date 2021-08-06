@@ -23,8 +23,8 @@ class wxTlsKey
 public:
     // ctor allocates a new key
     wxTlsKey(wxTlsDestructorFunction destructor)
+        : m_destructor(destructor)
     {
-        m_destructor = destructor;
         m_slot = ::TlsAlloc();
     }
 

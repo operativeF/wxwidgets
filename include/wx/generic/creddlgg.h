@@ -20,7 +20,7 @@
 class WXDLLIMPEXP_CORE wxGenericCredentialEntryDialog : public wxDialog
 {
 public:
-    wxGenericCredentialEntryDialog();
+    wxGenericCredentialEntryDialog() = default;
     ~wxGenericCredentialEntryDialog() = default;
 
     wxGenericCredentialEntryDialog(wxWindow* parent,
@@ -43,8 +43,8 @@ public:
     wxWebCredentials GetCredentials() const;
 
 private:
-    wxTextCtrl* m_userTextCtrl;
-    wxTextCtrl* m_passwordTextCtrl;
+    wxTextCtrl* m_userTextCtrl{nullptr};
+    wxTextCtrl* m_passwordTextCtrl{nullptr};
 
     void Init(const std::string& message, const wxWebCredentials& cred);
 };

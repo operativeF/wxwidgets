@@ -18,7 +18,7 @@ class WXDLLIMPEXP_FWD_CORE wxKeyEvent;
 class WXDLLIMPEXP_CORE wxAcceleratorTable : public wxObject
 {
 public:
-    wxAcceleratorTable();
+    wxAcceleratorTable() = default;
     wxAcceleratorTable(int n, const wxAcceleratorEntry entries[]);
     virtual ~wxAcceleratorTable();
 

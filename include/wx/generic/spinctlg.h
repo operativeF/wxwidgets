@@ -45,18 +45,7 @@ class WXDLLIMPEXP_CORE wxSpinCtrlGenericBase
                 : public wxNavigationEnabled<wxCompositeWindow<wxSpinCtrlBase> >
 {
 public:
-    wxSpinCtrlGenericBase() { 
-    m_value         = 0;
-    m_min           = 0;
-    m_max           = 100;
-    m_increment     = 1;
-    m_snap_to_ticks = false;
-
-    m_spin_value    = 0;
-
-    m_textCtrl = nullptr;
-    m_spinButton  = nullptr;
- }
+    wxSpinCtrlGenericBase() = default;
 
     bool Create(wxWindow *parent,
                 wxWindowID id = wxID_ANY,
@@ -161,17 +150,17 @@ protected:
     // Assign validator with current parameters
     virtual void ResetTextValidator() = 0;
 
-    double m_value;
-    double m_min;
-    double m_max;
-    double m_increment;
-    bool   m_snap_to_ticks;
+    double m_value{0.0};
+    double m_min{0.0};
+    double m_max{100.0};
+    double m_increment{1.0};
+    bool   m_snap_to_ticks{false};
 
-    int m_spin_value;
+    int m_spin_value{0};
 
     // the subcontrols
-    wxTextCtrl   *m_textCtrl;
-    wxSpinButton *m_spinButton;
+    wxTextCtrl   *m_textCtrl{nullptr};
+    wxSpinButton *m_spinButton{nullptr};
 
 private:
     // common part of all ctors
@@ -364,10 +353,7 @@ private:
 class WXDLLIMPEXP_CORE wxSpinCtrlDouble : public wxSpinCtrlGenericBase
 {
 public:
-    wxSpinCtrlDouble() { 
-        m_digits = 0;
-        m_format = wxASCII_STR("%0.0f");
-     }
+    wxSpinCtrlDouble() = default;
     wxSpinCtrlDouble(wxWindow *parent,
                      wxWindowID id = wxID_ANY,
                      const std::string& value = {},
@@ -378,11 +364,6 @@ public:
                      double inc = 1,
                      const std::string& name = "wxSpinCtrlDouble")
     {
-        
-        m_digits = 0;
-        m_format = wxASCII_STR("%0.0f");
-    
-
         Create(parent, id, value, pos, size, style,
                min, max, initial, inc, name);
     }
@@ -430,13 +411,10 @@ protected:
     void ResetTextValidator() override;
     void DetermineDigits(double inc);
 
-    unsigned m_digits;
+    unsigned m_digits{0};
 
 private:
-    // Common part of all ctors.
-    
-
-    wxString m_format;
+    wxString m_format{"%0.0f"};
 
     wxDECLARE_DYNAMIC_CLASS(wxSpinCtrlDouble);
 };

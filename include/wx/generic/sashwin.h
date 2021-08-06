@@ -35,15 +35,10 @@ enum wxSashEdgePosition {
  * wxSashEdge represents one of the four edges of a window.
  */
 
-class WXDLLIMPEXP_CORE wxSashEdge
+struct WXDLLIMPEXP_CORE wxSashEdge
 {
-public:
-    wxSashEdge()
-    { m_show = false;
-      m_margin = 0; }
-
-    bool    m_show;     // Is the sash showing?
-    int     m_margin;   // The margin size
+    bool    m_show{false};     // Is the sash showing?
+    int     m_margin{0};   // The margin size
 };
 
 /*
@@ -68,57 +63,31 @@ class WXDLLIMPEXP_CORE wxSashWindow: public wxWindow
 public:
     // Default constructor
     wxSashWindow()
+        : m_sashCursorWE(new wxCursor(wxCURSOR_SIZEWE)),
+          m_sashCursorNS( new wxCursor(wxCURSOR_SIZENS))
     {
-        
-    m_draggingEdge = wxSASH_NONE;
-    m_dragMode = wxSASH_DRAG_NONE;
-    m_oldX = 0;
-    m_oldY = 0;
-    m_firstX = 0;
-    m_firstY = 0;
-    m_borderSize = 3;
-    m_extraBorderSize = 0;
-    m_minimumPaneSizeX = 0;
-    m_minimumPaneSizeY = 0;
-    m_maximumPaneSizeX = 10000;
-    m_maximumPaneSizeY = 10000;
-    m_sashCursorWE = new wxCursor(wxCURSOR_SIZEWE);
-    m_sashCursorNS = new wxCursor(wxCURSOR_SIZENS);
-    m_mouseCaptured = false;
-    m_currentCursor = nullptr;
-
-    // Eventually, we'll respond to colour change messages
-    InitColours();
-
+        // Eventually, we'll respond to colour change messages
+        InitColours();
     }
 
     // Normal constructor
-    wxSashWindow(wxWindow *parent, wxWindowID id = wxID_ANY, const wxPoint& pos = wxDefaultPosition,
-        const wxSize& size = wxDefaultSize, long style = wxSW_3D|wxCLIP_CHILDREN, const std::string& name = "sashWindow")
+    wxSashWindow(wxWindow *parent,
+                 wxWindowID id = wxID_ANY,
+                 const wxPoint& pos = wxDefaultPosition,
+                 const wxSize& size = wxDefaultSize,
+                 long style = wxSW_3D|wxCLIP_CHILDREN,
+                 const std::string& name = "sashWindow")
+        : m_sashCursorWE(new wxCursor(wxCURSOR_SIZEWE)),
+          m_sashCursorNS( new wxCursor(wxCURSOR_SIZENS))
     {
-        
-    m_draggingEdge = wxSASH_NONE;
-    m_dragMode = wxSASH_DRAG_NONE;
-    m_oldX = 0;
-    m_oldY = 0;
-    m_firstX = 0;
-    m_firstY = 0;
-    m_borderSize = 3;
-    m_extraBorderSize = 0;
-    m_minimumPaneSizeX = 0;
-    m_minimumPaneSizeY = 0;
-    m_maximumPaneSizeX = 10000;
-    m_maximumPaneSizeY = 10000;
-    m_sashCursorWE = new wxCursor(wxCURSOR_SIZEWE);
-    m_sashCursorNS = new wxCursor(wxCURSOR_SIZENS);
-    m_mouseCaptured = false;
-    m_currentCursor = nullptr;
-
-    // Eventually, we'll respond to colour change messages
-    InitColours();
+        // Eventually, we'll respond to colour change messages
+        InitColours();
 
         Create(parent, id, pos, size, style, name);
     }
+
+    wxSashWindow(const wxSashWindow&) = delete;
+    wxSashWindow& operator=(const wxSashWindow&) = delete;
 
     ~wxSashWindow() override;
 
@@ -195,36 +164,37 @@ public:
     void InitColours();
 
 private:
-    
-
     wxSashEdge  m_sashes[4];
-    int         m_dragMode;
-    wxSashEdgePosition m_draggingEdge;
-    int         m_oldX;
-    int         m_oldY;
-    int         m_borderSize;
-    int         m_extraBorderSize;
-    int         m_firstX;
-    int         m_firstY;
-    int         m_minimumPaneSizeX;
-    int         m_minimumPaneSizeY;
-    int         m_maximumPaneSizeX;
-    int         m_maximumPaneSizeY;
-    wxCursor*   m_sashCursorWE;
-    wxCursor*   m_sashCursorNS;
+
     wxColour    m_lightShadowColour;
     wxColour    m_mediumShadowColour;
     wxColour    m_darkShadowColour;
     wxColour    m_hilightColour;
     wxColour    m_faceColour;
-    bool        m_mouseCaptured;
-    wxCursor*   m_currentCursor;
+
+    wxCursor*   m_sashCursorWE{nullptr};
+    wxCursor*   m_sashCursorNS{nullptr};
+    wxCursor*   m_currentCursor{nullptr};
+
+    wxSashEdgePosition m_draggingEdge{wxSASH_NONE};
+
+    int         m_dragMode{wxSASH_DRAG_NONE};
+    int         m_oldX{0};
+    int         m_oldY{0};
+    int         m_borderSize{3};
+    int         m_extraBorderSize{0};
+    int         m_firstX{0};
+    int         m_firstY{0};
+    int         m_minimumPaneSizeX{0};
+    int         m_minimumPaneSizeY{0};
+    int         m_maximumPaneSizeX{10000};
+    int         m_maximumPaneSizeY{10000};
+
+    bool        m_mouseCaptured{false};
 
 private:
     wxDECLARE_DYNAMIC_CLASS(wxSashWindow);
     wxDECLARE_EVENT_TABLE();
-    wxSashWindow(const wxSashWindow&) = delete;
-	wxSashWindow& operator=(const wxSashWindow&) = delete;
 };
 
 class WXDLLIMPEXP_FWD_CORE wxSashEvent;
@@ -241,15 +211,14 @@ class WXDLLIMPEXP_CORE wxSashEvent: public wxCommandEvent
 {
 public:
     wxSashEvent(int id = 0, wxSashEdgePosition edge = wxSASH_NONE)
+        : m_edge(edge)
     {
-        m_eventType = (wxEventType) wxEVT_SASH_DRAGGED;
         m_id = id;
-        m_edge = edge;
+        m_eventType = (wxEventType) wxEVT_SASH_DRAGGED;
     }
 
-    wxSashEvent(const wxSashEvent& event)
-        
-          = default;
+    wxSashEvent(const wxSashEvent& event) = default;
+    wxSashEvent& operator=(const wxSashEvent&) = delete;
 
     void SetEdge(wxSashEdgePosition edge) { m_edge = edge; }
     wxSashEdgePosition GetEdge() const { return m_edge; }
@@ -270,9 +239,6 @@ private:
     wxRect              m_dragRect;
     wxSashDragStatus    m_dragStatus;
 
-private:
-    public:
-	wxSashEvent& operator=(const wxSashEvent&) = delete;
 	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();

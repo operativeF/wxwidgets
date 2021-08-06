@@ -19,16 +19,7 @@ class WXDLLIMPEXP_CORE wxGenericHyperlinkCtrl : public wxHyperlinkCtrlBase
 {
 public:
     // Default constructor (for two-step construction).
-    wxGenericHyperlinkCtrl() { 
-    m_rollover = false;
-    m_clicking = false;
-    m_visited = false;
-
-    // colours
-    m_normalColour = *wxBLUE;
-    m_hoverColour = *wxRED;
-    m_visitedColour = wxColour("#551a8b");
- }
+    wxGenericHyperlinkCtrl() = default;
 
     // Constructor.
     wxGenericHyperlinkCtrl(wxWindow *parent,
@@ -40,21 +31,11 @@ public:
                             long style = wxHL_DEFAULT_STYLE,
                             const std::string& name = wxHyperlinkCtrlNameStr)
     {
-        
-    m_rollover = false;
-    m_clicking = false;
-    m_visited = false;
-
-    // colours
-    m_normalColour = *wxBLUE;
-    m_hoverColour = *wxRED;
-    m_visitedColour = wxColour("#551a8b");
-
-        (void) Create(parent, id, label, url, pos, size, style, name);
+        Create(parent, id, label, url, pos, size, style, name);
     }
 
     // Creation function (for two-step construction).
-    bool Create(wxWindow *parent,
+    [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,
                 const std::string& label,
                 const std::string& url,
@@ -146,19 +127,19 @@ private:
     // Foreground colours for various link types.
     // NOTE: wxWindow::m_backgroundColour is used for background,
     //       wxWindow::m_foregroundColour is used to render non-visited links
-    wxColour m_hoverColour;
-    wxColour m_normalColour;
-    wxColour m_visitedColour;
+    wxColour m_hoverColour{*wxRED};
+    wxColour m_normalColour{*wxBLUE};
+    wxColour m_visitedColour{wxColour("#551a8b")};
 
     // True if the mouse cursor is inside the label's bounding box.
-    bool m_rollover;
+    bool m_rollover{false};
 
     // True if the link has been clicked before.
-    bool m_visited;
+    bool m_visited{false};
 
     // True if a click is in progress (left button down) and the click
     // originated inside the label's bounding box.
-    bool m_clicking;
+    bool m_clicking{false};
 };
 
 #endif // _WX_GENERICHYPERLINKCTRL_H_

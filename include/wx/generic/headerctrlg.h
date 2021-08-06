@@ -38,6 +38,9 @@ public:
         Create(parent, id, pos, size, style, name);
     }
 
+    wxHeaderCtrl(const wxHeaderCtrl&) = delete;
+    wxHeaderCtrl& operator=(const wxHeaderCtrl&) = delete;
+    
     bool Create(wxWindow *parent,
                 wxWindowID id = wxID_ANY,
                 const wxPoint& pos = wxDefaultPosition,
@@ -179,8 +182,6 @@ private:
     bool m_wasSeparatorDClick;
 
     wxDECLARE_EVENT_TABLE();
-    wxHeaderCtrl(const wxHeaderCtrl&) = delete;
-	wxHeaderCtrl& operator=(const wxHeaderCtrl&) = delete;
 };
 
 #endif // _WX_GENERIC_HEADERCTRLG_H_

@@ -16,7 +16,7 @@
 class WXDLLIMPEXP_CORE wxPanel : public wxPanelBase
 {
 public:
-    wxPanel() { }
+    wxPanel() = default;
 
     // Constructor
     wxPanel(wxWindow *parent,

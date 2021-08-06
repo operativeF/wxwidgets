@@ -108,7 +108,8 @@ protected:
     int m_gaugePos;
 
 #if wxGAUGE_EMULATE_INDETERMINATE_MODE
-    int m_nDirection;       // can be wxRIGHT or wxLEFT
+    // in case we need to emulate indeterminate mode...
+    int m_nDirection{wxRIGHT};       // can be wxRIGHT or wxLEFT
 #endif
 
     wxAppProgressIndicator *m_appProgressIndicator;

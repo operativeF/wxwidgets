@@ -612,7 +612,12 @@ protected:
     int m_toolPacking{0};
     int m_toolSeparation{0};
 
-    // the size of the toolbar bitmaps
+    // FIXME: Should we still do it like this?
+    // even though modern Windows applications typically use 24*24 (or even
+    // 32*32) size for their bitmaps, the native control itself still uses the
+    // old 16*15 default size (see TB_SETBITMAPSIZE documentation in MSDN), so
+    // default to it so that we don't call SetToolBitmapSize() unnecessarily in
+    // wxToolBarBase::AdjustToolBitmapSize()
     wxCoord m_defaultWidth{16};
     wxCoord m_defaultHeight{15};
 

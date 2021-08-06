@@ -21,6 +21,8 @@ class WXDLLIMPEXP_CORE wxScrollHelper : public wxScrollHelperBase
 public:
     wxScrollHelper(wxWindow *winToScroll);
 
+    wxScrollHelper(const wxScrollHelper&) = delete;
+    wxScrollHelper& operator=(const wxScrollHelper&) = delete;
     
     void AdjustScrollbars() override;
     bool IsScrollbarShown(int orient) const override;
@@ -48,9 +50,6 @@ private:
     wxScrollbarVisibility m_xVisibility{wxSHOW_SB_DEFAULT};
     wxScrollbarVisibility m_yVisibility{wxSHOW_SB_DEFAULT};
     wxRecursionGuardFlag m_adjustScrollFlagReentrancy{0};
-
-    wxScrollHelper(const wxScrollHelper&) = delete;
-	wxScrollHelper& operator=(const wxScrollHelper&) = delete;
 };
 
 #endif // _WX_GENERIC_SCROLLWIN_H_

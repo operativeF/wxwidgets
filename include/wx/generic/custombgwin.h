@@ -20,7 +20,10 @@
 class wxCustomBackgroundWindowGenericBase : public wxCustomBackgroundWindowBase
 {
 public:
-    wxCustomBackgroundWindowGenericBase() { }
+    wxCustomBackgroundWindowGenericBase() = default;
+
+    wxCustomBackgroundWindowGenericBase(const wxCustomBackgroundWindowGenericBase&) = delete;
+    wxCustomBackgroundWindowGenericBase& operator=(const wxCustomBackgroundWindowGenericBase&) = delete;
 
 protected:
     void DoEraseBackground(wxEraseEvent& event, wxWindow* win)
@@ -42,10 +45,6 @@ protected:
 
     // The bitmap used for painting the background if valid.
     wxBitmap m_bitmapBg;
-
-
-    wxCustomBackgroundWindowGenericBase(const wxCustomBackgroundWindowGenericBase&) = delete;
-	wxCustomBackgroundWindowGenericBase& operator=(const wxCustomBackgroundWindowGenericBase&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -59,7 +58,10 @@ class wxCustomBackgroundWindow : public W,
 public:
     typedef W BaseWindowClass;
 
-    wxCustomBackgroundWindow() { }
+    wxCustomBackgroundWindow() = default;
+
+    wxCustomBackgroundWindow(const wxCustomBackgroundWindow<W>&)  = delete;
+    wxCustomBackgroundWindow& operator=(const wxCustomBackgroundWindow<W>&) = delete;
 
 protected:
     void DoSetBackgroundBitmap(const wxBitmap& bmp) override
@@ -91,10 +93,6 @@ private:
     {
         DoEraseBackground(event, this);
     }
-
-
-    wxCustomBackgroundWindow(const wxCustomBackgroundWindow<W>&)  = delete;
-	wxCustomBackgroundWindow& operator=(const wxCustomBackgroundWindow<W>&) = delete;
 };
 
 #endif // _WX_GENERIC_CUSTOMBGWIN_H_

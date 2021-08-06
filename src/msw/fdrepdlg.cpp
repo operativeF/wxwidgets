@@ -77,7 +77,7 @@ private:
     FINDREPLACE m_findReplace;
 
     // true if the user closed us, false otherwise
-    bool m_wasClosedByUser;
+    bool m_wasClosedByUser{false};
 
     // registered Message for Dialog
     inline static UINT ms_msgFindDialog{0};
@@ -110,8 +110,6 @@ wxFindReplaceDialogImpl::wxFindReplaceDialogImpl(wxFindReplaceDialog *dialog,
                     &wxFindReplaceDialogImpl::FindMessageHandler
                   );
     }
-
-    m_wasClosedByUser = false;
 
     wxZeroMemory(m_findReplace);
 

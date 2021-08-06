@@ -22,9 +22,7 @@ class WXDLLIMPEXP_CORE wxColourDialog : public wxDialog
 public:
     wxColourDialog()
     {
-        // reset to zero, otherwise the wx routines won't size the window the
-        // second time the dialog is shown, because they would believe it already
-        // has the requested size/position
+
         s_rectDialog.x = 0;
         s_rectDialog.y = 0;
     }

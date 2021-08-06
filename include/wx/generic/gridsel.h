@@ -29,6 +29,9 @@ public:
     wxGridSelection(wxGrid *grid,
                     wxGrid::wxGridSelectionModes sel = wxGrid::wxGridSelectCells);
 
+    wxGridSelection(const wxGridSelection&) = delete;
+    wxGridSelection& operator=(const wxGridSelection&) = delete;
+
     bool IsSelection();
     bool IsInSelection(int row, int col) const;
     bool IsInSelection(const wxGridCellCoords& coords) const
@@ -149,9 +152,6 @@ private:
 
     wxGrid                              *m_grid;
     wxGrid::wxGridSelectionModes        m_selectionMode;
-
-    wxGridSelection(const wxGridSelection&) = delete;
-	wxGridSelection& operator=(const wxGridSelection&) = delete;
 };
 
 #endif  // wxUSE_GRID

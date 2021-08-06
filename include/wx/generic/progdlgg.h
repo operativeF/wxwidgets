@@ -33,6 +33,9 @@ public:
                             wxWindow *parent = nullptr,
                             int style = wxPD_APP_MODAL | wxPD_AUTO_HIDE);
 
+    wxGenericProgressDialog(const wxGenericProgressDialog&) = delete;
+    wxGenericProgressDialog& operator=(const wxGenericProgressDialog&) = delete;
+
     ~wxGenericProgressDialog() override;
 
     bool Create(const std::string& title,
@@ -224,8 +227,6 @@ private:
 
 
     wxDECLARE_EVENT_TABLE();
-    wxGenericProgressDialog(const wxGenericProgressDialog&) = delete;
-	wxGenericProgressDialog& operator=(const wxGenericProgressDialog&) = delete;
 };
 
 #endif // __PROGDLGH_G__

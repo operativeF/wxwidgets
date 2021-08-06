@@ -14,11 +14,7 @@ class WXDLLIMPEXP_CORE wxGenericCollapsibleHeaderCtrl
     : public wxCollapsibleHeaderCtrlBase
 {
 public:
-    wxGenericCollapsibleHeaderCtrl() { 
-    m_collapsed = true;
-    m_inWindow = false;
-    m_mouseDown = false;
- }
+    wxGenericCollapsibleHeaderCtrl() = default;
 
     wxGenericCollapsibleHeaderCtrl(wxWindow *parent,
         wxWindowID id,
@@ -29,14 +25,11 @@ public:
         const wxValidator& validator = wxDefaultValidator,
         const std::string& name = wxCollapsibleHeaderCtrlNameStr)
     {
-        
-    m_collapsed = true;
-    m_inWindow = false;
-    m_mouseDown = false;
-
-
         Create(parent, id, label, pos, size, style, validator, name);
     }
+
+    wxGenericCollapsibleHeaderCtrl(const wxGenericCollapsibleHeaderCtrl&) = delete;
+    wxGenericCollapsibleHeaderCtrl& operator=(const wxGenericCollapsibleHeaderCtrl&) = delete;
 
     bool Create(wxWindow *parent,
         wxWindowID id,
@@ -57,11 +50,9 @@ protected:
     wxSize DoGetBestClientSize() const override;
 
 private:
-    bool m_collapsed;
-    bool m_inWindow;
-    bool m_mouseDown;
-
-    
+    bool m_collapsed{true};
+    bool m_inWindow{false};
+    bool m_mouseDown{false};
 
     void OnPaint(wxPaintEvent& event);
 
@@ -83,9 +74,6 @@ private:
     void OnChar(wxKeyEvent& event);
 
     void DoSetCollapsed(bool collapsed);
-
-    wxGenericCollapsibleHeaderCtrl(const wxGenericCollapsibleHeaderCtrl&) = delete;
-	wxGenericCollapsibleHeaderCtrl& operator=(const wxGenericCollapsibleHeaderCtrl&) = delete;
 };
 
 

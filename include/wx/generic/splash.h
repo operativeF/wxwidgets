@@ -44,6 +44,10 @@ public:
                    const wxPoint& pos = wxDefaultPosition,
                    const wxSize& size = wxDefaultSize,
                    long style = wxSIMPLE_BORDER|wxFRAME_NO_TASKBAR|wxSTAY_ON_TOP);
+
+    wxSplashScreen(const wxSplashScreen&) = delete;
+    wxSplashScreen& operator=(const wxSplashScreen&) = delete;
+
     ~wxSplashScreen() override;
 
     void OnCloseWindow(wxCloseEvent& event);
@@ -67,8 +71,6 @@ protected:
 
     wxDECLARE_DYNAMIC_CLASS(wxSplashScreen);
     wxDECLARE_EVENT_TABLE();
-    wxSplashScreen(const wxSplashScreen&) = delete;
-	wxSplashScreen& operator=(const wxSplashScreen&) = delete;
 };
 
 /*
@@ -78,7 +80,15 @@ protected:
 class WXDLLIMPEXP_CORE wxSplashScreenWindow: public wxWindow
 {
 public:
-    wxSplashScreenWindow(const wxBitmap& bitmap, wxWindow* parent, wxWindowID id, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxNO_BORDER);
+    wxSplashScreenWindow(const wxBitmap& bitmap,
+                         wxWindow* parent,
+                         wxWindowID id,
+                         const wxPoint& pos = wxDefaultPosition,
+                         const wxSize& size = wxDefaultSize,
+                         long style = wxNO_BORDER);
+    
+    wxSplashScreenWindow(const wxSplashScreenWindow&) = delete;
+    wxSplashScreenWindow& operator=(const wxSplashScreenWindow&) = delete;
 
     void OnPaint(wxPaintEvent& event);
     void OnEraseBackground(wxEraseEvent& event);
@@ -90,8 +100,6 @@ protected:
     wxBitmap    m_bitmap;
 
     wxDECLARE_EVENT_TABLE();
-    wxSplashScreenWindow(const wxSplashScreenWindow&) = delete;
-	wxSplashScreenWindow& operator=(const wxSplashScreenWindow&) = delete;
 };
 
 

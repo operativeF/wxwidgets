@@ -76,13 +76,7 @@ enum wxPropertySheetDialogFlags
 class WXDLLIMPEXP_CORE wxPropertySheetDialog : public wxDialog
 {
 public:
-    wxPropertySheetDialog()  { 
-    m_sheetStyle = wxPROPSHEET_DEFAULT;
-    m_innerSizer = nullptr;
-    m_bookCtrl = nullptr;
-    m_sheetOuterBorder = 2;
-    m_sheetInnerBorder = 5;
- }
+    wxPropertySheetDialog() = default;
 
     wxPropertySheetDialog(wxWindow* parent, wxWindowID id,
                        const std::string& title,
@@ -91,13 +85,6 @@ public:
                        long style = wxDEFAULT_DIALOG_STYLE,
                        const std::string& name = wxDialogNameStr)
     {
-        
-    m_sheetStyle = wxPROPSHEET_DEFAULT;
-    m_innerSizer = nullptr;
-    m_bookCtrl = nullptr;
-    m_sheetOuterBorder = 2;
-    m_sheetInnerBorder = 5;
-
         Create(parent, id, title, pos, sz, style, name);
     }
 
@@ -157,11 +144,11 @@ private:
     
 
 protected:
-    wxBookCtrlBase* m_bookCtrl;
-    wxSizer*        m_innerSizer; // sizer for extra space
-    long            m_sheetStyle;
-    int             m_sheetOuterBorder;
-    int             m_sheetInnerBorder;
+    wxBookCtrlBase* m_bookCtrl{nullptr};
+    wxSizer*        m_innerSizer{nullptr}; // sizer for extra space
+    long            m_sheetStyle{wxPROPSHEET_DEFAULT};
+    int             m_sheetOuterBorder{2};
+    int             m_sheetInnerBorder{5};
     int             m_selectedPage;
 
     wxDECLARE_DYNAMIC_CLASS(wxPropertySheetDialog);

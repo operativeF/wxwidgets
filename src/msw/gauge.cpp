@@ -57,9 +57,6 @@ bool wxGauge::Create(wxWindow *parent,
     if ( !MSWCreateControl(PROGRESS_CLASSA, "", pos, size) )
         return false;
 
-    // in case we need to emulate indeterminate mode...
-    m_nDirection = wxRIGHT;
-
     SetRange(range);
 
     InitProgressIndicatorIfNeeded();

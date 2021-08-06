@@ -30,10 +30,7 @@
 class WXDLLIMPEXP_CORE wxNumberEntryDialog : public wxDialog
 {
 public:
-    wxNumberEntryDialog()
-    {
-        m_value = m_min = m_max = 0;
-    }
+    wxNumberEntryDialog() = default;
 
     wxNumberEntryDialog(wxWindow *parent,
                         const std::string& message,
@@ -44,6 +41,9 @@ public:
     {
         Create(parent, message, prompt, caption, value, min, max, pos);
     }
+
+    wxNumberEntryDialog(const wxNumberEntryDialog&) = delete;
+    wxNumberEntryDialog& operator=(const wxNumberEntryDialog&) = delete;
 
     bool Create(wxWindow *parent,
                 const std::string& message,
@@ -66,13 +66,13 @@ protected:
     wxTextCtrl *m_spinctrl;
 #endif // wxUSE_SPINCTRL
 
-    long m_value, m_min, m_max;
+    long m_value{0};
+    long m_min{0};
+    long m_max{0};
 
 private:
     wxDECLARE_EVENT_TABLE();
     wxDECLARE_DYNAMIC_CLASS(wxNumberEntryDialog);
-    wxNumberEntryDialog(const wxNumberEntryDialog&) = delete;
-	wxNumberEntryDialog& operator=(const wxNumberEntryDialog&) = delete;
 };
 
 // ----------------------------------------------------------------------------

@@ -19,17 +19,7 @@
 class WXDLLIMPEXP_CORE wxToolBar : public wxToolBarBase
 {
 public:
-    wxToolBar() 
-    {
-        // FIXME: Should we still do it like this?
-        // even though modern Windows applications typically use 24*24 (or even
-        // 32*32) size for their bitmaps, the native control itself still uses the
-        // old 16*15 default size (see TB_SETBITMAPSIZE documentation in MSDN), so
-        // default to it so that we don't call SetToolBitmapSize() unnecessarily in
-        // wxToolBarBase::AdjustToolBitmapSize()
-        m_defaultWidth = 16;
-        m_defaultHeight = 15;
-    }
+    wxToolBar() = default;
 
     wxToolBar(wxWindow *parent,
                 wxWindowID id,
@@ -38,9 +28,6 @@ public:
                 long style = wxTB_DEFAULT_STYLE,
                 const std::string& name = wxToolBarNameStr)
     {
-        m_defaultWidth = 16;
-        m_defaultHeight = 15;
-
         Create(parent, id, pos, size, style, name);
     }
 

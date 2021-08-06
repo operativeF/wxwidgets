@@ -34,7 +34,7 @@ class WXDLLIMPEXP_FWD_CORE wxFileCtrlEvent;
 class WXDLLIMPEXP_CORE wxGenericFileDialog: public wxFileDialogBase
 {
 public:
-    wxGenericFileDialog() : wxFileDialogBase() { Init(); }
+    wxGenericFileDialog() { Init(); }
 
     wxGenericFileDialog(wxWindow *parent,
                         const std::string& message = wxFileSelectorPromptStr,

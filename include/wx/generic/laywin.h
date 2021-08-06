@@ -62,12 +62,8 @@ class WXDLLIMPEXP_CORE wxQueryLayoutInfoEvent: public wxEvent
 public:
     wxQueryLayoutInfoEvent(wxWindowID id = 0)
     {
-        SetEventType(wxEVT_QUERY_LAYOUT_INFO);
-        m_requestedLength = 0;
-        m_flags = 0;
         m_id = id;
-        m_alignment = wxLAYOUT_TOP;
-        m_orientation = wxLAYOUT_HORIZONTAL;
+        SetEventType(wxEVT_QUERY_LAYOUT_INFO);
     }
 
     // Read by the app
@@ -90,11 +86,11 @@ public:
     wxEvent *Clone() const override { return new wxQueryLayoutInfoEvent(*this); }
 
 protected:
-    int                     m_flags;
-    int                     m_requestedLength;
+    int                     m_flags{0};
+    int                     m_requestedLength{0};
     wxSize                  m_size;
-    wxLayoutOrientation     m_orientation;
-    wxLayoutAlignment       m_alignment;
+    wxLayoutOrientation     m_orientation{wxLAYOUT_HORIZONTAL};
+    wxLayoutAlignment       m_alignment{wxLAYOUT_TOP};
 
 private:
     public:

@@ -31,6 +31,9 @@ public:
         Create(title, message, parent, flags);
     }
 
+    wxGenericNotificationMessage(const wxGenericNotificationMessage&) = delete;
+    wxGenericNotificationMessage& operator=(const wxGenericNotificationMessage&) = delete;
+
     // generic implementation-specific methods
 
     // get/set the default timeout (used if Timeout_Auto is specified)
@@ -39,9 +42,6 @@ public:
 
 private:
     void Init();
-
-    wxGenericNotificationMessage(const wxGenericNotificationMessage&) = delete;
-	wxGenericNotificationMessage& operator=(const wxGenericNotificationMessage&) = delete;
 };
 
 #endif // _WX_GENERIC_NOTIFMSG_H_

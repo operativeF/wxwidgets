@@ -19,11 +19,14 @@
 class wxControlWithItemsGeneric : public wxControlWithItemsBase
 {
 public:
-    wxControlWithItemsGeneric() { }
+    wxControlWithItemsGeneric() = default;
+
+    wxControlWithItemsGeneric(const wxControlWithItemsGeneric&) = delete;
+    wxControlWithItemsGeneric& operator=(const wxControlWithItemsGeneric&) = delete;
 
     virtual void DoInitItemClientData()
     {
-        m_itemsClientData.resize(GetCount(), NULL);
+        m_itemsClientData.resize(GetCount(), nullptr);
     }
 
     virtual void DoSetItemClientData(unsigned int n, void *clientData)
@@ -114,9 +117,6 @@ private:
 
         return true;
     }
-
-    wxControlWithItemsGeneric(const wxControlWithItemsGeneric&) = delete;
-	wxControlWithItemsGeneric& operator=(const wxControlWithItemsGeneric&) = delete;
 };
 
 #endif // _WX_GENERIC_CTRLSUB_H_

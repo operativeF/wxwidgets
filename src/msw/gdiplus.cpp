@@ -791,10 +791,10 @@ private:
 
 
     // initially -1 meaning unknown, set to false or true by Initialize()
-    static int m_initialized;
+    inline static int m_initialized{-1};
 
     // handle of the GDI+ DLL if we loaded it successfully
-    static wxDllType m_hdll;
+    inline static wxDllType m_hdll{nullptr};
 };
 
 #define wxINIT_GDIPLUS_FUNC(name, params, args) \
@@ -803,9 +803,6 @@ private:
 wxFOR_ALL_FUNCNAMES(wxINIT_GDIPLUS_FUNC)
 
 #undef wxINIT_GDIPLUS_FUNC
-
-int wxGdiPlus::m_initialized = -1;
-wxDllType wxGdiPlus::m_hdll = nullptr;
 
 /* static */
 bool wxGdiPlus::DoInit()

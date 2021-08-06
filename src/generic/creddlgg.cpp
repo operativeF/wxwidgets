@@ -23,8 +23,6 @@
 
 #include "wx/generic/creddlgg.h"
 
-wxGenericCredentialEntryDialog::wxGenericCredentialEntryDialog() = default;
-
 wxGenericCredentialEntryDialog::wxGenericCredentialEntryDialog(
     wxWindow* parent, const std::string& message, const std::string& title,
     const wxWebCredentials& cred) :

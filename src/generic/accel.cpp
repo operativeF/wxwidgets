@@ -69,10 +69,6 @@ public:
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxAcceleratorTable, wxObject);
 
-wxAcceleratorTable::wxAcceleratorTable()
-{
-}
-
 wxAcceleratorTable::wxAcceleratorTable(int n, const wxAcceleratorEntry entries[])
 {
     m_refData = new wxAccelRefData;

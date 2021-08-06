@@ -37,12 +37,9 @@ private:
 
 public:
     wxStackFrame(size_t level, void *address, size_t addrFrame)
-        : wxStackFrameBase(level, address)
+        : wxStackFrameBase(level, address),
+          m_addrFrame(addrFrame)
     {
-        m_hasName =
-        m_hasLocation = false;
-
-        m_addrFrame = addrFrame;
     }
 
     size_t GetParamCount() const override
@@ -71,8 +68,8 @@ protected:
     }
 
 private:
-    bool m_hasName,
-         m_hasLocation;
+    bool m_hasName{false};
+    bool m_hasLocation{false};
 
     size_t m_addrFrame;
 

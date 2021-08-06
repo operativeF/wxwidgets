@@ -27,7 +27,7 @@ class WXDLLIMPEXP_CORE wxBitmapComboBox : public wxOwnerDrawnComboBox,
 public:
 
     
-    wxBitmapComboBox() : wxOwnerDrawnComboBox(), wxBitmapComboBoxBase()
+    wxBitmapComboBox()
     {
         Init();
     }

@@ -122,6 +122,9 @@ public:
 
     ~wxLogWindow() override;
 
+    wxLogWindow(const wxLogWindow&) = delete;
+    wxLogWindow& operator=(const wxLogWindow&) = delete;
+
     // window operations
         // show/hide the log window
     void Show(bool bShow = true);
@@ -143,9 +146,6 @@ protected:
 
 private:
     wxLogFrame *m_pLogFrame{nullptr};      // the log frame
-
-    wxLogWindow(const wxLogWindow&) = delete;
-	wxLogWindow& operator=(const wxLogWindow&) = delete;
 };
 
 #endif // wxUSE_LOGWINDOW

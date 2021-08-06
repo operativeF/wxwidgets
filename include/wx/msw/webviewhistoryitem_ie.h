@@ -17,12 +17,15 @@ class WXDLLIMPEXP_WEBVIEW wxWebViewHistoryItem
 {
 public:
     wxWebViewHistoryItem(const std::string& url, const std::string& title) :
-                     m_url(url), m_title(title) {}
+                     m_url(url), m_title(title)
+    {}
+
     const std::string& GetUrl() { return m_url; }
     const std::string& GetTitle() { return m_title; }
 
 private:
-    std::string m_url, m_title;
+    std::string m_url;
+    std::string m_title;
 };
 
 #endif // wxUSE_WEBVIEW && wxUSE_WEBVIEW_IE && defined(__WXMSW__)

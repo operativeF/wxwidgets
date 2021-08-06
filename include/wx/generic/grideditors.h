@@ -27,6 +27,9 @@ public:
     {
     }
 
+    wxGridCellEditorEvtHandler(const wxGridCellEditorEvtHandler&) = delete;
+    wxGridCellEditorEvtHandler& operator=(const wxGridCellEditorEvtHandler&) = delete;
+
     void DismissEditor();
 
     void OnKillFocus(wxFocusEvent& event);
@@ -45,8 +48,6 @@ private:
 
     wxDECLARE_EVENT_TABLE();
     wxDECLARE_DYNAMIC_CLASS(wxGridCellEditorEvtHandler);
-    wxGridCellEditorEvtHandler(const wxGridCellEditorEvtHandler&) = delete;
-	wxGridCellEditorEvtHandler& operator=(const wxGridCellEditorEvtHandler&) = delete;
 };
 
 
@@ -57,6 +58,9 @@ class WXDLLIMPEXP_CORE wxGridCellTextEditor : public wxGridCellEditor
 {
 public:
     explicit wxGridCellTextEditor(size_t maxChars = 0);
+
+    wxGridCellTextEditor(const wxGridCellTextEditor&) = delete;
+    wxGridCellTextEditor& operator=(const wxGridCellTextEditor&) = delete;
 
     void Create(wxWindow* parent,
                         wxWindowID id,
@@ -99,9 +103,6 @@ private:
     std::unique_ptr<wxValidator> m_validator;
 #endif
     std::string                 m_value;
-
-    wxGridCellTextEditor(const wxGridCellTextEditor&) = delete;
-	wxGridCellTextEditor& operator=(const wxGridCellTextEditor&) = delete;
 };
 
 // the editor for numeric (long) data

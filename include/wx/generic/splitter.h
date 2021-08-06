@@ -57,8 +57,8 @@ public:
 
     // Default constructor
     wxSplitterWindow()
+        : m_sashTrackerPen(std::make_unique<wxPen>(*wxBLACK, 2, wxPenStyle::Solid))
     {
-        Init();
     }
 
     // Normal constructor
@@ -67,12 +67,13 @@ public:
                      const wxSize& size = wxDefaultSize,
                      long style = wxSP_3D,
                      const std::string& name = "splitter")
+        : m_sashTrackerPen(std::make_unique<wxPen>(*wxBLACK, 2, wxPenStyle::Solid))
     {
-        Init();
         Create(parent, id, pos, size, style, name);
     }
 
-    ~wxSplitterWindow() override;
+    wxSplitterWindow(const wxSplitterWindow&) = delete;
+    wxSplitterWindow& operator=(const wxSplitterWindow&) = delete;
 
     bool Create(wxWindow *parent, wxWindowID id = wxID_ANY,
                      const wxPoint& pos = wxDefaultPosition,
@@ -276,35 +277,33 @@ protected:
     // subwindows
     wxSize DoGetBestSize() const override;
 
+    std::unique_ptr<wxPen> m_sashTrackerPen;
 
-    wxSplitMode m_splitMode;
-    wxWindow*   m_windowOne;
-    wxWindow*   m_windowTwo;
-    int         m_dragMode;
-    int         m_oldX;         // current tracker position if not live mode
-    int         m_oldY;         // current tracker position if not live mode
-    int         m_sashPosition; // Number of pixels from left or top
-    double      m_sashGravity;
+    wxSplitMode m_splitMode{wxSPLIT_VERTICAL};
+    wxWindow*   m_windowOne{nullptr};
+    wxWindow*   m_windowTwo{nullptr};
+    int         m_dragMode{wxSPLIT_DRAG_NONE};
+    int         m_oldX{0};         // current tracker position if not live mode
+    int         m_oldY{0};         // current tracker position if not live mode
+    int         m_sashPosition{0}; // Number of pixels from left or top
+    double      m_sashGravity{0.0};
     wxSize      m_lastSize;
-    int         m_requestedSashPosition;
+    int         m_requestedSashPosition{INT_MAX};
     int         m_sashPositionCurrent; // while dragging
     wxPoint     m_ptStart;      // mouse position when dragging started
-    int         m_sashStart;    // sash position when dragging started
-    int         m_minimumPaneSize;
-    wxCursor    m_sashCursorWE;
-    wxCursor    m_sashCursorNS;
-    wxPen      *m_sashTrackerPen;
+    int         m_sashStart{0};    // sash position when dragging started
+    int         m_minimumPaneSize{0};
+    wxCursor    m_sashCursorWE{wxCURSOR_SIZEWE};
+    wxCursor    m_sashCursorNS{wxCURSOR_SIZENS};
 
     // when in live mode, set this to true to resize children in idle
-    bool        m_needUpdating;
-    bool        m_permitUnsplitAlways;
-    bool        m_isHot;
+    bool        m_needUpdating{false};
+    bool        m_permitUnsplitAlways{true};
+    bool        m_isHot{false};
 
 private:
     wxDECLARE_DYNAMIC_CLASS(wxSplitterWindow);
     wxDECLARE_EVENT_TABLE();
-    wxSplitterWindow(const wxSplitterWindow&) = delete;
-	wxSplitterWindow& operator=(const wxSplitterWindow&) = delete;
 };
 
 // ----------------------------------------------------------------------------

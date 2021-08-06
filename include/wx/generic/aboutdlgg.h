@@ -46,8 +46,6 @@ public:
     // ctor which fully initializes the object
     wxGenericAboutDialog(const wxAboutDialogInfo& info, wxWindow* parent = nullptr)
     {
-         m_sizerText = nullptr; 
-
         Create(info, parent);
     }
 

@@ -71,10 +71,7 @@ protected:
 class WXDLLIMPEXP_CORE wxSingleChoiceDialog : public wxAnyChoiceDialog
 {
 public:
-    wxSingleChoiceDialog()
-    {
-        m_selection = -1;
-    }
+    wxSingleChoiceDialog() = default;
 
     wxSingleChoiceDialog(wxWindow *parent,
                          const std::string& message,
@@ -108,7 +105,7 @@ public:
     void OnListBoxDClick(wxCommandEvent& event);
 
 protected:
-    int         m_selection;
+    int            m_selection{-1};
     std::string    m_stringSelection;
 
     void DoChoice();

@@ -56,7 +56,6 @@ constexpr int DEFAULT_FIELD_WIDTH = 25;
 wxStatusBar::wxStatusBar()
 {
     SetParent(nullptr);
-    m_hWnd = nullptr;
     m_windowId = 0;
 }
 
