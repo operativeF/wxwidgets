@@ -19,6 +19,8 @@
     #include "wx/utils.h" // for wxStripMenuCodes()
 #endif
 
+#include "fmt/core.h"
+
 bool wxIsStockID(wxWindowID id)
 {
     switch (id)
@@ -102,9 +104,9 @@ bool wxIsStockID(wxWindowID id)
     }
 }
 
-wxString wxGetStockLabel(wxWindowID id, long flags)
+std::string wxGetStockLabel(wxWindowID id, long flags)
 {
-    wxString stockLabel;
+    std::string stockLabel;
 
 #ifdef __WXMSW__
     // special case: the "Cancel" button shouldn't have a mnemonic under MSW
@@ -216,9 +218,9 @@ wxString wxGetStockLabel(wxWindowID id, long flags)
 
     if ( flags & wxSTOCK_WITHOUT_ELLIPSIS )
     {
-        wxString baseLabel;
-        if ( stockLabel.EndsWith("...", &baseLabel) )
-            stockLabel = baseLabel;
+        std::string baseLabel;
+        if ( wx::utils::EndsWith(stockLabel, "...") )
+            stockLabel = wx::utils::BeforeLast(baseLabel, "...");
 
         // accelerators only make sense for the menu items which should have
         // ellipsis too while wxSTOCK_WITHOUT_ELLIPSIS is mostly useful for
@@ -232,7 +234,7 @@ wxString wxGetStockLabel(wxWindowID id, long flags)
     {
         wxAcceleratorEntry accel = wxGetStockAccelerator(id);
         if (accel.IsOk())
-            stockLabel << wxT('\t') << accel.ToString();
+            stockLabel += fmt::format("\t{}", accel.ToString());
     }
 #endif // wxUSE_ACCEL
 

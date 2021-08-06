@@ -47,8 +47,8 @@ enum wxStockLabelQueryFlag
 // for wxSTOCK_OK); if wxSTOCK_WITH_MNEMONIC is given, the & character
 // is included; if wxSTOCK_WITH_ACCELERATOR is given, the stock accelerator
 // for given ID is concatenated to the label using \t as separator
-WXDLLIMPEXP_CORE wxString wxGetStockLabel(wxWindowID id,
-                                     long flags = wxSTOCK_WITH_MNEMONIC);
+WXDLLIMPEXP_CORE std::string wxGetStockLabel(wxWindowID id,
+                                             long flags = wxSTOCK_WITH_MNEMONIC);
 
 #if wxUSE_ACCEL
 

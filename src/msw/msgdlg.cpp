@@ -432,7 +432,7 @@ int wxMessageDialog::ShowMessageBox()
         {
             // use the strings with mnemonics here as the native message box
             // does
-            SetYesNoLabels(_("&Yes"), _("&No"));
+            SetYesNoLabels(_("&Yes").ToStdString(), _("&No").ToStdString());
         }
 
         // we may or not have the Ok/Cancel buttons but either we do have them
@@ -445,7 +445,7 @@ int wxMessageDialog::ShowMessageBox()
         // Enter/Esc keys can be already used to dismiss the message box
         // using keyboard)
         if ( GetCustomOKLabel().empty() && GetCustomCancelLabel().empty() )
-            SetOKCancelLabels(_("OK"), _("Cancel"));
+            SetOKCancelLabels(_("OK").ToStdString(), _("Cancel").ToStdString());
     }
 #endif // wxUSE_INTL
 
@@ -527,7 +527,7 @@ int wxMessageDialog::ShowMessageBox()
     const int msAns = MessageBoxW
                       (
                         hWnd,
-                        GetFullMessage().t_str(),
+                        boost::nowide::widen(GetFullMessage()).c_str(),
                         boost::nowide::widen(m_caption).c_str(),
                         msStyle
                       );

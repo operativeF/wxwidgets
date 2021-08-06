@@ -60,10 +60,10 @@ wxIMPLEMENT_ABSTRACT_CLASS(wxConfigBase, wxObject);
 
 // Not all args will always be used by derived classes, but including them all
 // in each class ensures compatibility.
-wxConfigBase::wxConfigBase(const wxString& appName,
-                           const wxString& vendorName,
-                           const wxString& WXUNUSED(localFilename),
-                           const wxString& WXUNUSED(globalFilename),
+wxConfigBase::wxConfigBase(const std::string& appName,
+                           const std::string& vendorName,
+                           const std::string& WXUNUSED(localFilename),
+                           const std::string& WXUNUSED(globalFilename),
                            long style)
             : m_appName(appName), m_vendorName(vendorName), m_style(style)
 {

@@ -18,6 +18,8 @@
 #include "wx/dialog.h"
 #include "wx/stockitem.h"
 
+#include "fmt/core.h"
+
 inline constexpr char wxMessageBoxCaptionStr[] = "Message";
 
 // ----------------------------------------------------------------------------
@@ -40,24 +42,12 @@ public:
             wxASSERT_MSG( wxIsStockID(stockId), "invalid stock id" );
         }
 
-        ButtonLabel(const wxString& label)
+        ButtonLabel(const std::string& label)
             : m_label(label), m_stockId(wxID_NONE)
         {
         }
 
-#ifndef wxNO_IMPLICIT_WXSTRING_ENCODING
         ButtonLabel(const char *label)
-            : m_label(label), m_stockId(wxID_NONE)
-        {
-        }
-#endif // wxNO_IMPLICIT_WXSTRING_ENCODING
-
-        ButtonLabel(const wchar_t *label)
-            : m_label(label), m_stockId(wxID_NONE)
-        {
-        }
-
-        ButtonLabel(const wxCStrData& label)
             : m_label(label), m_stockId(wxID_NONE)
         {
         }
@@ -67,7 +57,7 @@ public:
         // get the string label, whether it was originally specified directly
         // or as a stock id -- this is only useful for platforms without native
         // stock items id support
-        wxString GetAsString() const
+        std::string GetAsString() const
         {
             return m_stockId == wxID_NONE
                     ? m_label
@@ -79,7 +69,7 @@ public:
 
     private:
         // the label if explicitly given or empty if this is a stock item
-        const wxString m_label;
+        const std::string m_label;
 
         // the stock item id or wxID_NONE if m_label should be used
         const int m_stockId;
@@ -112,19 +102,19 @@ public:
     std::string GetTitle() const override { return m_caption; }
 
 
-    virtual void SetMessage(const wxString& message)
+    virtual void SetMessage(const std::string& message)
     {
         m_message = message;
     }
 
-    wxString GetMessage() const { return m_message; }
+    const std::string& GetMessage() const { return m_message; }
 
-    void SetExtendedMessage(const wxString& extendedMessage)
+    void SetExtendedMessage(const std::string& extendedMessage)
     {
         m_extendedMessage = extendedMessage;
     }
 
-    wxString GetExtendedMessage() const { return m_extendedMessage; }
+    const std::string& GetExtendedMessage() const { return m_extendedMessage; }
 
     // change the dialog style flag
     void SetMessageDialogStyle(long style)
@@ -206,15 +196,15 @@ public:
     // these functions return the label to be used for the button which is
     // either a custom label explicitly set by the user or the default label,
     // i.e. they always return a valid string
-    wxString GetYesLabel() const
+    std::string GetYesLabel() const
         { return m_yes.empty() ? GetDefaultYesLabel() : m_yes; }
-    wxString GetNoLabel() const
+    std::string GetNoLabel() const
         { return m_no.empty() ? GetDefaultNoLabel() : m_no; }
-    wxString GetOKLabel() const
+    std::string GetOKLabel() const
         { return m_ok.empty() ? GetDefaultOKLabel() : m_ok; }
-    wxString GetCancelLabel() const
+    std::string GetCancelLabel() const
         { return m_cancel.empty() ? GetDefaultCancelLabel() : m_cancel; }
-    wxString GetHelpLabel() const
+    std::string GetHelpLabel() const
         { return m_help.empty() ? GetDefaultHelpLabel() : m_help; }
 
     // based on message dialog style, returns exactly one of: wxICON_NONE,
@@ -241,17 +231,17 @@ public:
 protected:
     // for the platforms not supporting separate main and extended messages
     // this function should be used to combine both of them in a single string
-    wxString GetFullMessage() const
+    std::string GetFullMessage() const
     {
-        wxString msg = m_message;
+        std::string msg = m_message;
         if ( !m_extendedMessage.empty() )
-            msg << wxASCII_STR("\n\n") << m_extendedMessage;
+            msg += fmt::format("\n\n{}", m_extendedMessage);
 
         return msg;
     }
 
-    wxString m_message;
-    wxString m_extendedMessage;
+    std::string m_message;
+    std::string m_extendedMessage;
     std::string m_caption;
 
     long m_dialogStyle{0};
@@ -260,7 +250,7 @@ protected:
     // the value to var with possibly some transformation (e.g. Cocoa version
     // currently uses this to remove any accelerators from the button strings
     // while GTK+ one handles stock items specifically here)
-    virtual void DoSetCustomLabel(wxString& var, const ButtonLabel& label)
+    virtual void DoSetCustomLabel(std::string& var, const ButtonLabel& label)
     {
         var = label.GetAsString();
     }
@@ -270,28 +260,28 @@ protected:
     // these labels (in which case it makes sense to only use a custom label if
     // it was really given and fall back on stock label otherwise), use the
     // Get{Yes,No,OK,Cancel}Label() methods above otherwise
-    const wxString& GetCustomYesLabel() const { return m_yes; }
-    const wxString& GetCustomNoLabel() const { return m_no; }
-    const wxString& GetCustomOKLabel() const { return m_ok; }
-    const wxString& GetCustomHelpLabel() const { return m_help; }
-    const wxString& GetCustomCancelLabel() const { return m_cancel; }
+    const std::string& GetCustomYesLabel() const { return m_yes; }
+    const std::string& GetCustomNoLabel() const { return m_no; }
+    const std::string& GetCustomOKLabel() const { return m_ok; }
+    const std::string& GetCustomHelpLabel() const { return m_help; }
+    const std::string& GetCustomCancelLabel() const { return m_cancel; }
 
 private:
     // these functions may be overridden to provide different defaults for the
     // default button labels (this is used by wxGTK)
-    virtual wxString GetDefaultYesLabel() const { return wxGetTranslation("Yes"); }
-    virtual wxString GetDefaultNoLabel() const { return wxGetTranslation("No"); }
-    virtual wxString GetDefaultOKLabel() const { return wxGetTranslation("OK"); }
-    virtual wxString GetDefaultCancelLabel() const { return wxGetTranslation("Cancel"); }
-    virtual wxString GetDefaultHelpLabel() const { return wxGetTranslation("Help"); }
+    virtual std::string GetDefaultYesLabel() const { return wxGetTranslation("Yes"); }
+    virtual std::string GetDefaultNoLabel() const { return wxGetTranslation("No"); }
+    virtual std::string GetDefaultOKLabel() const { return wxGetTranslation("OK"); }
+    virtual std::string GetDefaultCancelLabel() const { return wxGetTranslation("Cancel"); }
+    virtual std::string GetDefaultHelpLabel() const { return wxGetTranslation("Help"); }
 
     // labels for the buttons, initially empty meaning that the defaults should
     // be used, use GetYes/No/OK/CancelLabel() to access them
-    wxString m_yes,
-             m_no,
-             m_ok,
-             m_cancel,
-             m_help;
+    std::string m_yes;
+    std::string m_no;
+    std::string m_ok;
+    std::string m_cancel;
+    std::string m_help;
 };
 
 #include "wx/generic/msgdlgg.h"

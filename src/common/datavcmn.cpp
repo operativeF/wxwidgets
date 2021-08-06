@@ -1723,8 +1723,8 @@ wxDataViewSpinRenderer::wxDataViewSpinRenderer( int min, int max, wxDataViewCell
 wxWindow* wxDataViewSpinRenderer::CreateEditorCtrl( wxWindow *parent, wxRect labelRect, const wxVariant &value )
 {
     long l = value;
-    wxString str;
-    str.Printf( wxT("%d"), (int) l );
+    std::string str = fmt::format("{:d}", l);
+
     wxSpinCtrl *sc = new wxSpinCtrl( parent, wxID_ANY, str,
                labelRect.GetTopLeft(), labelRect.GetSize(), wxSP_ARROW_KEYS|wxTE_PROCESS_ENTER, m_min, m_max, l );
 #ifdef __WXMAC__
@@ -1746,8 +1746,7 @@ bool wxDataViewSpinRenderer::GetValueFromEditorCtrl( wxWindow* editor, wxVariant
 
 bool wxDataViewSpinRenderer::Render( wxRect rect, wxDC *dc, int state )
 {
-    wxString str;
-    str.Printf(wxT("%d"), (int) m_data );
+    std::string str = fmt::format("{:d}", static_cast<int>(m_data) );
     RenderText( str, 0, rect, dc, state );
     return true;
 }
@@ -1923,7 +1922,7 @@ std::string wxDataViewChoiceByIndexRenderer::GetAccessibleDescription() const
     const auto iter_idx = std::find_if(GetChoices().cbegin(), GetChoices().cend(),
         [strVal](const auto& choice) { return strVal.GetString().IsSameAs(choice); });
 
-    return wxString::Format(wxS("%li"), static_cast<long>(std::distance(std::cbegin(GetChoices()), iter_idx)));
+    return fmt::format("{:li}", static_cast<long>(std::distance(std::cbegin(GetChoices()), iter_idx)));
 }
 #endif // wxUSE_ACCESSIBILITY
 

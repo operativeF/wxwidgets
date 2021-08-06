@@ -187,7 +187,7 @@ void wxGenericMessageDialog::DoCreateMsgdialog()
     // We want to show the main message in a different font to make it stand
     // out if the extended message is used as well. This looks better and is
     // more consistent with the native dialogs under MSW and GTK.
-    wxString lowerMessage;
+    std::string lowerMessage;
     if ( !m_extendedMessage.empty() )
     {
         wxTitleTextWrapper titleWrapper(this);

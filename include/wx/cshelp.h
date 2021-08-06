@@ -142,7 +142,7 @@ public:
     // get the help string (whose interpretation is help provider dependent
     // except that empty string always means that no help is associated with
     // the window) for this window
-    virtual wxString GetHelp(const wxWindowBase *window) = 0;
+    virtual std::string GetHelp(const wxWindowBase *window) = 0;
 
     // do show help for the given window (uses window->GetHelpAtPoint()
     // internally if applicable), return true if it was done or false
@@ -165,12 +165,12 @@ public:
     // associate the text with the given window or id: although all help
     // providers have these functions to allow making wxWindow::SetHelpText()
     // work, not all of them implement them
-    virtual void AddHelp(wxWindowBase *window, const wxString& text);
+    virtual void AddHelp(wxWindowBase *window, const std::string& text);
 
     // this version associates the given text with all window with this id
     // (may be used to set the same help string for all [Cancel] buttons in
     // the application, for example)
-    virtual void AddHelp(wxWindowID id, const wxString& text);
+    virtual void AddHelp(wxWindowID id, const std::string& text);
 
     // removes the association
     virtual void RemoveHelp(wxWindowBase* window);
@@ -188,7 +188,7 @@ protected:
     // helper method used by ShowHelp(): returns the help string to use by
     // using m_helptextAtPoint/m_helptextOrigin if they're set or just GetHelp
     // otherwise
-    wxString GetHelpTextMaybeAtPoint(wxWindowBase *window);
+    std::string GetHelpTextMaybeAtPoint(wxWindowBase *window);
 
 
     // parameters of the last ShowHelpAtPoint() call, used by ShowHelp()
@@ -199,7 +199,7 @@ private:
     inline static wxHelpProvider *ms_helpProvider{nullptr};
 };
 
-WX_DECLARE_EXPORTED_HASH_MAP( wxUIntPtr, wxString, wxIntegerHash,
+WX_DECLARE_EXPORTED_HASH_MAP( wxUIntPtr, std::string, wxIntegerHash,
                               wxIntegerEqual, wxSimpleHelpProviderHashMap );
 
 // wxSimpleHelpProvider is an implementation of wxHelpProvider which supports
@@ -209,13 +209,13 @@ class WXDLLIMPEXP_CORE wxSimpleHelpProvider : public wxHelpProvider
 {
 public:
     // implement wxHelpProvider methods
-    wxString GetHelp(const wxWindowBase *window) override;
+    std::string GetHelp(const wxWindowBase *window) override;
 
     // override ShowHelp() and not ShowHelpAtPoint() as explained above
     bool ShowHelp(wxWindowBase *window) override;
 
-    void AddHelp(wxWindowBase *window, const wxString& text) override;
-    void AddHelp(wxWindowID id, const wxString& text) override;
+    void AddHelp(wxWindowBase *window, const std::string& text) override;
+    void AddHelp(wxWindowID id, const std::string& text) override;
     void RemoveHelp(wxWindowBase* window) override;
 
 protected:
@@ -255,8 +255,8 @@ protected:
     wxHelpControllerBase*   m_helpController;
 };
 
-// Convenience function for turning context id into wxString
-WXDLLIMPEXP_CORE wxString wxContextId(int id);
+// Convenience function for turning context id into std::string
+WXDLLIMPEXP_CORE std::string wxContextId(int id);
 
 #endif // wxUSE_HELP
 

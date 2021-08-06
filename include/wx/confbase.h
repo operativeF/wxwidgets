@@ -111,10 +111,10 @@ public:
       // Not all args will always be used by derived classes, but including
       // them all in each class ensures compatibility. If appName is empty,
       // uses wxApp name
-  wxConfigBase(const wxString& appName = wxEmptyString,
-               const wxString& vendorName = wxEmptyString,
-               const wxString& localFilename = wxEmptyString,
-               const wxString& globalFilename = wxEmptyString,
+  wxConfigBase(const std::string& appName = {},
+               const std::string& vendorName = {},
+               const std::string& localFilename = {},
+               const std::string& globalFilename = {},
                long style = 0);
 
     // empty but ensures that dtor of all derived classes is virtual

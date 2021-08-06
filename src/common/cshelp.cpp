@@ -27,6 +27,10 @@
     #include "wx/utils.h"           // for wxGetMousePosition()
 #endif
 
+#include <charconv>
+
+#include "fmt/core.h"
+
 // ----------------------------------------------------------------------------
 // wxContextHelpEvtHandler private class
 // ----------------------------------------------------------------------------
@@ -217,7 +221,8 @@ bool wxContextHelpEvtHandler::ProcessEvent(wxEvent& event)
 // Dispatch the help event to the relevant window
 bool wxContextHelp::DispatchEvent(wxWindow* win, const wxPoint& pt)
 {
-    wxCHECK_MSG( win, false, wxT("win parameter can't be NULL") );
+    // TODO: If it can't be null, take a reference
+    //wxCHECK_MSG( win, false, "win parameter can't be NULL" );
 
     wxHelpEvent helpEvent(wxEVT_HELP, win->GetId(), pt,
                           wxHelpEvent::Origin_HelpButton);
@@ -283,12 +288,12 @@ void wxContextHelpButton::OnContextHelp(wxCommandEvent& WXUNUSED(event))
 // virtual for convenience
 
 void wxHelpProvider::AddHelp(wxWindowBase * WXUNUSED(window),
-                             const wxString& WXUNUSED(text))
+                             const std::string& WXUNUSED(text))
 {
 }
 
 void wxHelpProvider::AddHelp(wxWindowID WXUNUSED(id),
-                             const wxString& WXUNUSED(text))
+                             const std::string& WXUNUSED(text))
 {
 }
 
@@ -297,12 +302,13 @@ void wxHelpProvider::RemoveHelp(wxWindowBase* WXUNUSED(window))
 {
 }
 
-wxString wxHelpProvider::GetHelpTextMaybeAtPoint(wxWindowBase *window)
+std::string wxHelpProvider::GetHelpTextMaybeAtPoint(wxWindowBase *window)
 {
     if ( m_helptextAtPoint != wxDefaultPosition ||
             m_helptextOrigin != wxHelpEvent::Origin_Unknown )
     {
-        wxCHECK_MSG( window, wxEmptyString, wxT("window must not be NULL") );
+        // TODO: If it can't be null, take a reference
+        //wxCHECK_MSG( window, "", wxT("window must not be NULL") );
 
         const wxPoint pt = m_helptextAtPoint;
         const wxHelpEvent::Origin origin = m_helptextOrigin;
@@ -322,7 +328,7 @@ wxString wxHelpProvider::GetHelpTextMaybeAtPoint(wxWindowBase *window)
 
 #define WINHASH_KEY(w) wxPtrToUInt(w)
 
-wxString wxSimpleHelpProvider::GetHelp(const wxWindowBase *window)
+std::string wxSimpleHelpProvider::GetHelp(const wxWindowBase *window)
 {
     wxSimpleHelpProviderHashMap::iterator it = m_hashWindows.find(WINHASH_KEY(window));
 
@@ -330,19 +336,19 @@ wxString wxSimpleHelpProvider::GetHelp(const wxWindowBase *window)
     {
         it = m_hashIds.find(window->GetId());
         if ( it == m_hashIds.end() )
-            return wxEmptyString;
+            return {};
     }
 
     return it->second;
 }
 
-void wxSimpleHelpProvider::AddHelp(wxWindowBase *window, const wxString& text)
+void wxSimpleHelpProvider::AddHelp(wxWindowBase *window, const std::string& text)
 {
     m_hashWindows.erase(WINHASH_KEY(window));
     m_hashWindows[WINHASH_KEY(window)] = text;
 }
 
-void wxSimpleHelpProvider::AddHelp(wxWindowID id, const wxString& text)
+void wxSimpleHelpProvider::AddHelp(wxWindowID id, const std::string& text)
 {
     wxSimpleHelpProviderHashMap::key_type key = (wxSimpleHelpProviderHashMap::key_type)id;
     m_hashIds.erase(key);
@@ -363,7 +369,7 @@ bool wxSimpleHelpProvider::ShowHelp(wxWindowBase *window)
     const wxPoint posTooltip = m_helptextAtPoint;
 #endif // wxUSE_MS_HTML_HELP
 
-    const wxString text = GetHelpTextMaybeAtPoint(window);
+    const std::string text = GetHelpTextMaybeAtPoint(window);
 
     if ( !text.empty() )
     {
@@ -417,7 +423,7 @@ wxHelpControllerHelpProvider::wxHelpControllerHelpProvider(wxHelpControllerBase*
 
 bool wxHelpControllerHelpProvider::ShowHelp(wxWindowBase *window)
 {
-    const wxString text = GetHelpTextMaybeAtPoint(window);
+    const std::string text = GetHelpTextMaybeAtPoint(window);
 
     if ( text.empty() )
         return false;
@@ -425,8 +431,9 @@ bool wxHelpControllerHelpProvider::ShowHelp(wxWindowBase *window)
     if ( m_helpController )
     {
         // if it's a numeric topic, show it
-        long topic;
-        if ( text.ToLong(&topic) )
+        int32_t topic;
+        auto [p, ec] = std::from_chars(text.data(), text.data() + text.size(), topic);
+        if ( ec == std::errc() )
             return m_helpController->DisplayContextPopup(topic);
 
         // otherwise show the text directly
@@ -439,10 +446,10 @@ bool wxHelpControllerHelpProvider::ShowHelp(wxWindowBase *window)
     return wxSimpleHelpProvider::ShowHelp(window);
 }
 
-// Convenience function for turning context id into wxString
-wxString wxContextId(int id)
+// Convenience function for turning context id into std::string
+std::string wxContextId(int id)
 {
-    return wxString::Format(wxT("%d"), id);
+    return fmt::format("{:d}", id);
 }
 
 // ----------------------------------------------------------------------------
