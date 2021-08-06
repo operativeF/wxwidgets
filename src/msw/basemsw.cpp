@@ -28,13 +28,14 @@
 #include "wx/msw/private.h"
 
 #include "fmt/printf.h"
+#include "boost/nowide/convert.hpp"
 
 // ============================================================================
 // wxAppTraits implementation
 // ============================================================================
 
-bool wxAppTraits::SafeMessageBox(const wxString& text,
-                                 const wxString& title)
+bool wxAppTraits::SafeMessageBox(const std::string& text,
+                                 const std::string& title)
 {
     const HWND hwndParent = GetMainHWND();
     int flags = MB_OK | MB_ICONSTOP;
@@ -57,7 +58,7 @@ bool wxAppTraits::SafeMessageBox(const wxString& text,
     if ( !hwndParent )
         flags |= MB_TASKMODAL;
 
-    ::MessageBox(hwndParent, text.t_str(), title.t_str(), flags);
+    ::MessageBoxW(hwndParent, boost::nowide::widen(text).c_str(), boost::nowide::widen(title).c_str(), flags);
 
     return true;
 }

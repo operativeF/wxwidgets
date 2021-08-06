@@ -625,11 +625,11 @@ wxMSWTaskDialogConfig::wxMSWTaskDialogConfig(const wxMessageDialogBase& dlg)
         // recognized main message be single line to avoid embarrassing false
         // positives).
         const size_t posNL = message.find('\n');
-        if ( posNL != wxString::npos &&
+        if ( posNL != std::string::npos &&
                 posNL < message.length() - 1 &&
                     message[posNL + 1 ] == '\n' )
         {
-            extendedMessage.assign(message, posNL + 2, wxString::npos);
+            extendedMessage.assign(message, posNL + 2, std::string::npos);
             message.erase(posNL);
         }
     }
@@ -759,7 +759,7 @@ void wxMSWTaskDialogConfig::MSWCommonTaskDialogInit(TASKDIALOGCONFIG &tdc)
 void wxMSWTaskDialogConfig::AddTaskDialogButton(TASKDIALOGCONFIG &tdc,
                                                 int btnCustomId,
                                                 int btnCommonId,
-                                                const wxString& customLabel)
+                                                const std::string& customLabel)
 {
     if ( useCustomLabels )
     {
@@ -767,12 +767,13 @@ void wxMSWTaskDialogConfig::AddTaskDialogButton(TASKDIALOGCONFIG &tdc,
         TASKDIALOG_BUTTON &tdBtn = buttons[tdc.cButtons];
 
         tdBtn.nButtonID = btnCustomId;
-        tdBtn.pszButtonText = customLabel.t_str();
+        boost::nowide::wstackstring stackLabel{customLabel.c_str()};
+        tdBtn.pszButtonText = stackLabel.get();
         tdc.cButtons++;
 
         // We should never have more than 4 buttons currently as this is the
         // maximal number of buttons supported by the message dialog.
-        wxASSERT_MSG( tdc.cButtons <= MAX_BUTTONS, wxT("Too many buttons") );
+        wxASSERT_MSG( tdc.cButtons <= MAX_BUTTONS, "Too many buttons" );
     }
     else
     {

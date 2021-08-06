@@ -88,19 +88,19 @@ public:
     bool Ok() const override { return IsOk(); }
     bool IsOk() const override { return true; }
 
-    const wxString& GetPrinterCommand() const { return m_printerCommand; }
-    const wxString& GetPrinterOptions() const { return m_printerOptions; }
-    const wxString& GetPreviewCommand() const { return m_previewCommand; }
-    const wxString& GetFontMetricPath() const { return m_afmPath; }
+    const std::string& GetPrinterCommand() const { return m_printerCommand; }
+    const std::string& GetPrinterOptions() const { return m_printerOptions; }
+    const std::string& GetPreviewCommand() const { return m_previewCommand; }
+    const std::string& GetFontMetricPath() const { return m_afmPath; }
     double GetPrinterScaleX() const { return m_printerScaleX; }
     double GetPrinterScaleY() const { return m_printerScaleY; }
     long GetPrinterTranslateX() const { return m_printerTranslateX; }
     long GetPrinterTranslateY() const { return m_printerTranslateY; }
 
-    void SetPrinterCommand(const wxString& command) { m_printerCommand = command; }
-    void SetPrinterOptions(const wxString& options) { m_printerOptions = options; }
-    void SetPreviewCommand(const wxString& command) { m_previewCommand = command; }
-    void SetFontMetricPath(const wxString& path) { m_afmPath = path; }
+    void SetPrinterCommand(const std::string& command) { m_printerCommand = command; }
+    void SetPrinterOptions(const std::string& options) { m_printerOptions = options; }
+    void SetPreviewCommand(const std::string& command) { m_previewCommand = command; }
+    void SetFontMetricPath(const std::string& path) { m_afmPath = path; }
     void SetPrinterScaleX(double x) { m_printerScaleX = x; }
     void SetPrinterScaleY(double y) { m_printerScaleY = y; }
     void SetPrinterScaling(double x, double y) { m_printerScaleX = x; m_printerScaleY = y; }
@@ -114,10 +114,10 @@ public:
 #endif
 
 private:
-    wxString        m_printerCommand;
-    wxString        m_previewCommand;
-    wxString        m_printerOptions;
-    wxString        m_afmPath;
+    std::string        m_printerCommand;
+    std::string        m_previewCommand;
+    std::string        m_printerOptions;
+    std::string        m_afmPath;
     double          m_printerScaleX;
     double          m_printerScaleY;
     long            m_printerTranslateX;

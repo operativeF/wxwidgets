@@ -918,8 +918,8 @@ void DrawButtonText(HDC hdc,
 
         const std::vector<std::string_view> lines = wx::unsafe::StrViewSplit(text, '\n');
         const int hLine = h / lines.size();
-
-        for ( size_t lineNum{0}; auto line : lines )
+        size_t lineNum{ 0 };
+        for ( auto&& line : lines )
         {
             // Each line must be aligned in horizontal direction individually.
             ::SetRectEmpty(&rc);

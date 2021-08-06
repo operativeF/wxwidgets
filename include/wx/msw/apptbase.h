@@ -62,8 +62,8 @@ public:
     virtual WXHWND GetMainHWND() const = 0;
 
     // implement this base class function for both console and GUI applications
-    bool SafeMessageBox(const wxString& text,
-                                const wxString& title) override;
+    bool SafeMessageBox(const std::string& text,
+                        const std::string& title) override;
 
 protected:
 #if wxUSE_THREADS

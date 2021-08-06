@@ -724,7 +724,8 @@ void wxSVGFileDCImpl::DoDrawRotatedText(std::string_view sText, wxCoord x, wxCoo
     // Draw all text line by line
     const std::vector<std::string_view> lines = wx::unsafe::StrViewSplit(sText, '\n');
 
-    for (size_t lineNum{0}; auto line : lines)
+    size_t lineNum{0};
+    for (auto line : lines)
     {
         const double xRect = x + lineNum * dx;
         const double yRect = y + lineNum * dy;

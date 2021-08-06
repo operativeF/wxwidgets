@@ -95,7 +95,7 @@ public:
     // it's supposed to be always safe to call -- hence the name
     //
     // return true if the message box was shown, false if nothing was done
-    virtual bool SafeMessageBox(const wxString& text, const wxString& title) = 0;
+    virtual bool SafeMessageBox(const std::string& text, const std::string& title) = 0;
 
     // return true if fprintf(stderr) goes somewhere, false otherwise
     virtual bool HasStderr() = 0;
@@ -211,8 +211,8 @@ public:
 
     bool ShowAssertDialog(const wxString& msg) override;
     bool HasStderr() override;
-    bool SafeMessageBox(const wxString& text,
-                        const wxString& title) override;
+    bool SafeMessageBox(const std::string& text,
+                        const std::string& title) override;
 
     // the GetToolkitVersion for console application is always the same
     wxPortId GetToolkitVersion(int *verMaj = nullptr,

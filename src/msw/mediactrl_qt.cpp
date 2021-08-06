@@ -278,7 +278,7 @@ bool wxQuickTimeLibrary::Initialize()
     // errors
     wxLogNull nolog;
 
-    m_ok = m_dll.Load(wxT("qtmlClient.dll"));
+    m_ok = m_dll.Load("qtmlClient.dll");
     if ( !m_ok )
         return false;
 

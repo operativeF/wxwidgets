@@ -142,14 +142,14 @@ wxGridPrivate::TryGetValueAsDate(wxDateTime& result,
 
     wxString::const_iterator end;
 
-    if ( result.ParseFormat(text, params.format, &end) && end == text.end() )
+    if ( result.ParseFormat(wxString{text}, params.format, &end) && end == text.end() )
         return true;
 
     // Check if we can fall back to free-form parsing, which notably allows us
     // to parse strings such as "today" or "tomorrow" which would be never
     // accepted by ParseFormat().
     if ( params.fallbackParseDate &&
-            result.ParseDate(text, &end) && end == text.end() )
+            result.ParseDate(wxString{text}, &end) && end == text.end() )
         return true;
 
     return false;
@@ -179,7 +179,7 @@ wxGridCellRenderer *wxGridCellDateRenderer::Clone() const
 
 std::string wxGridCellDateRenderer::GetString(const wxGrid& grid, int row, int col)
 {
-    wxString text;
+    std::string text;
 
     DateParseParams params;
     GetDateParseParams(params);
@@ -189,7 +189,7 @@ std::string wxGridCellDateRenderer::GetString(const wxGrid& grid, int row, int c
         text = val.Format(m_oformat, m_tz );
 
     // If we failed to parse string just show what we where given?
-    return text.ToStdString();
+    return text;
 }
 
 void
@@ -291,16 +291,13 @@ wxSize wxGridCellChoiceRenderer::GetMaxBestSize(wxGrid& WXUNUSED(grid),
 
 void wxGridCellChoiceRenderer::SetParameters(const std::string& params)
 {
+    // TODO: Is clearing necessary?
     m_choices.clear();
 
     if ( params.empty() )
         return;
 
-    wxStringTokenizer tk(params, wxT(','));
-    while ( tk.HasMoreTokens() )
-    {
-        m_choices.push_back(tk.GetNextToken());
-    }
+    m_choices = wx::utils::StrSplit(params, ',');
 }
 
 // ----------------------------------------------------------------------------
@@ -326,20 +323,17 @@ wxGridCellRenderer *wxGridCellEnumRenderer::Clone() const
 std::string wxGridCellEnumRenderer::GetString(const wxGrid& grid, int row, int col)
 {
     wxGridTableBase *table = grid.GetTable();
-    wxString text;
+
     if ( table->CanGetValueAs(row, col, wxGRID_VALUE_NUMBER) )
     {
-        int choiceno = table->GetValueAsLong(row, col);
-        text.Printf(wxT("%s"), m_choices[ choiceno ].c_str() );
+        const int choiceno = table->GetValueAsLong(row, col);
+        return m_choices[ choiceno ];
     }
     else
     {
-        text = table->GetValue(row, col);
+        // If we faild to parse string just show what we where given?
+        return table->GetValue(row, col);
     }
-
-
-    //If we faild to parse string just show what we where given?
-    return text.ToStdString();
 }
 
 void wxGridCellEnumRenderer::Draw(wxGrid& grid,
@@ -834,7 +828,8 @@ std::string wxGridCellFloatRenderer::GetString(const wxGrid& grid, int row, int 
 
     bool hasDouble;
     double val;
-    wxString text;
+    std::string text;
+    std::from_chars_result fromDoubleResult;
     if ( table->CanGetValueAs(row, col, wxGRID_VALUE_FLOAT) )
     {
         val = table->GetValueAsDouble(row, col);
@@ -843,10 +838,11 @@ std::string wxGridCellFloatRenderer::GetString(const wxGrid& grid, int row, int 
     else
     {
         text = table->GetValue(row, col);
-        hasDouble = text.ToDouble(&val);
+
+        fromDoubleResult = std::from_chars(text.data(), text.data() + text.size(), val);
     }
 
-    if ( hasDouble )
+    if ( fromDoubleResult.ec == std::errc() )
     {
         if ( m_format.empty() )
         {
@@ -886,7 +882,7 @@ std::string wxGridCellFloatRenderer::GetString(const wxGrid& grid, int row, int 
     }
     //else: text already contains the string
 
-    return text.ToStdString();
+    return text;
 }
 
 void wxGridCellFloatRenderer::Draw(wxGrid& grid,
@@ -1036,8 +1032,7 @@ void wxGridCellBoolRenderer::Draw(wxGrid& grid,
     }
     else
     {
-        wxString cellval( grid.GetTable()->GetValue(row, col) );
-        value = wxGridCellBoolEditor::IsTrueValue(cellval);
+        value = wxGridCellBoolEditor::IsTrueValue(grid.GetTable()->GetValue(row, col));
     }
 
     int flags = wxCONTROL_CELL;

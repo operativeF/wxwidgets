@@ -2249,7 +2249,7 @@ bool wxPGArrayEditorDialog::Create( wxWindow *parent,
     }
 
     // Populate the list box
-    std::vector<wxString> arr;
+    std::vector<std::string> arr;
     for ( unsigned int i=0; i<ArrayGetCount(); i++ )
         arr.push_back(ArrayGet(i));
     m_elb->SetStrings(arr);

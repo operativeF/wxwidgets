@@ -47,7 +47,7 @@ void wxTextMeasure::DoGetTextExtent(std::string_view string,
     //else: we already asserted in the ctor, don't do it any more
 }
 
-std::vector<int> wxTextMeasure::DoGetPartialTextExtents(const wxString& text, double scaleX)
+std::vector<int> wxTextMeasure::DoGetPartialTextExtents(std::string_view text, double scaleX)
 {
     return wxTextMeasureBase::DoGetPartialTextExtents(text, scaleX);
 }

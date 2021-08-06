@@ -18,6 +18,7 @@
 
 #include "wx/fontdlg.h"
 
+#include "fmt/core.h"
 
 // ============================================================================
 // implementation
@@ -97,7 +98,7 @@ void wxGenericFontButton::UpdateFont()
 
     if (HasFlag(wxFNTP_FONTDESC_AS_LABEL))
     {
-        SetLabel(wxString::Format(wxT("%s, %d"),
+        SetLabel(fmt::format("{:s}, {:d}",
                  m_selectedFont.GetFaceName().c_str(),
                  m_selectedFont.GetPointSize()));
     }

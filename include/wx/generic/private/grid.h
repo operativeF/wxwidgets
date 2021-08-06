@@ -981,7 +981,7 @@ private:
 
 struct wxGridDataTypeInfo
 {
-    wxGridDataTypeInfo(const wxString& typeName,
+    wxGridDataTypeInfo(const std::string& typeName,
                        wxGridCellRenderer* renderer,
                        wxGridCellEditor* editor)
         : m_typeName(typeName), m_renderer(renderer), m_editor(editor)
@@ -993,7 +993,7 @@ struct wxGridDataTypeInfo
         wxSafeDecRef(m_editor);
     }
 
-    wxString            m_typeName;
+    std::string            m_typeName;
     wxGridCellRenderer* m_renderer;
     wxGridCellEditor*   m_editor;
 
@@ -1062,24 +1062,24 @@ public:
     DateParseParams()  = default;
 
     // Use these functions to really initialize the object.
-    static DateParseParams WithFallback(const wxString& format)
+    static DateParseParams WithFallback(const std::string& format)
     {
         return DateParseParams(format, true);
     }
 
-    static DateParseParams WithoutFallback(const wxString& format)
+    static DateParseParams WithoutFallback(const std::string& format)
     {
         return DateParseParams(format, false);
     }
 
     // The usual format, e.g. "%x" or "%Y-%m-%d".
-    wxString format;
+    std::string format;
 
     // Whether fall back to ParseDate() is allowed.
     bool fallbackParseDate{false};
 
 private:
-    DateParseParams(const wxString& format_, bool fallbackParseDate_)
+    DateParseParams(const std::string& format_, bool fallbackParseDate_)
         : format(format_),
           fallbackParseDate(fallbackParseDate_)
     {

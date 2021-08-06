@@ -66,7 +66,7 @@ public:
     bool Text(const std::string& s);
 
     // Select the item with the given text in the currently focused control.
-    bool Select(const wxString& text);
+    bool Select(std::string_view text);
 
 private:
     // This is the common part of Key{Down,Up}() methods: while we keep them

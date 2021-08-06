@@ -179,7 +179,7 @@ bool wxUIActionSimulator::Text(const std::string& s)
     return true;
 }
 
-bool wxUIActionSimulator::Select(const wxString& text)
+bool wxUIActionSimulator::Select(std::string_view text)
 {
     wxWindow* const focus = wxWindow::FindFocus();
     if ( !focus )

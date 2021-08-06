@@ -29,7 +29,7 @@ protected:
                                wxCoord *descent = NULL,
                                wxCoord *externalLeading = NULL) override;
 
-    virtual std::vector<int> DoGetPartialTextExtents(const std::string& text, double scaleX) override;
+    virtual std::vector<int> DoGetPartialTextExtents(std::string_view text, double scaleX) override;
 
     wxTextMeasure(const wxTextMeasure&) = delete;
 	wxTextMeasure& operator=(const wxTextMeasure&) = delete;

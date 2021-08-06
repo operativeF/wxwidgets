@@ -148,7 +148,7 @@ void wxTextMeasureBase::GetMultiLineTextExtent(std::string_view text,
             }
             else
             {
-                auto textExtents = CallGetTextExtent({lineStart, pc});
+                auto textExtents = CallGetTextExtent(std::string(lineStart, pc));
                 widthLine = textExtents.x;
                 heightLine = textExtents.y;
 

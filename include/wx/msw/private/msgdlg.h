@@ -65,7 +65,7 @@ namespace wxMSWMessageDialog
         void AddTaskDialogButton(TASKDIALOGCONFIG &tdc,
                                  int btnCustomId,
                                  int btnCommonId,
-                                 const wxString& customLabel);
+                                 const std::string& customLabel);
     }; // class wxMSWTaskDialogConfig
 
 
