@@ -13,11 +13,9 @@
 #include "wx/defs.h"
 #include "wx/utils.h"
 
-#include "wx/beforestd.h"
 #include <algorithm>
 #include <iterator>
 #include <list>
-#include "wx/afterstd.h"
 
 template<typename T>
 class wxDList: public std::list<T*>

@@ -51,10 +51,8 @@
 #include "wx/scopeguard.h"
 #include "wx/except.h"
 
-#include "wx/beforestd.h"
 #include <fstream>
 #include <iostream>
-#include "wx/afterstd.h"
 
 // ----------------------------------------------------------------------------
 // wxWidgets macros

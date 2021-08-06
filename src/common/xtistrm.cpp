@@ -27,11 +27,10 @@
 
 // STL headers:
 
-#include "wx/beforestd.h"
 #include <map>
 #include <vector>
 #include <string>
-#include "wx/afterstd.h"
+
 using namespace std;
 
 

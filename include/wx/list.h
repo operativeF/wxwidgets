@@ -33,11 +33,9 @@
 #include "wx/string.h"
 #include <vector>
 
-#include "wx/beforestd.h"
 #include <algorithm>
 #include <iterator>
 #include <list>
-#include "wx/afterstd.h"
 
 // ----------------------------------------------------------------------------
 // types

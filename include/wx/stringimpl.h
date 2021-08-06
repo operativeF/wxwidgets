@@ -52,9 +52,7 @@ extern WXDLLIMPEXP_DATA_BASE(const wxStringCharType*) wxEmptyStringImpl;
 
 // we use STL-based string internally
 
-#include "wx/beforestd.h"
 #include <string>
-#include "wx/afterstd.h"
 
 using wxStdWideString = std::wstring;
 

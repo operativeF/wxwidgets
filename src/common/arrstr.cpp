@@ -20,10 +20,8 @@
 #include "wx/scopedarray.h"
 #include "wx/wxcrt.h"
 
-#include "wx/beforestd.h"
 #include <algorithm>
 #include <functional>
-#include "wx/afterstd.h"
 
 #if defined( __WINDOWS__ )
     #include <shlwapi.h>

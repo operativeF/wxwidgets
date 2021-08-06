@@ -13,9 +13,6 @@
     #include <wx/xpmhand.h>
 */
 
-#include <wx/beforestd.h>
-#include <wx/afterstd.h>
-
 #include <wx/aboutdlg.h>
 #include <wx/accel.h>
 #include <wx/access.h>

@@ -28,11 +28,9 @@
 
 #include <string.h>
 
-#include "wx/beforestd.h"
 #include <map>
 #include <string>
 #include <list>
-#include "wx/afterstd.h"
 
 using namespace std;
 

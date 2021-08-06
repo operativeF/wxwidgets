@@ -24,16 +24,14 @@ class WXDLLIMPEXP_FWD_CORE wxFileDialogBase;
 // Don't include this code when building the library itself
 #ifndef WXBUILDING
 
-#include "wx/beforestd.h"
-#include <algorithm>
-#include <iterator>
-#include <queue>
-#include "wx/afterstd.h"
 #include "wx/cpp.h"
 #include "wx/dialog.h"
 #include "wx/msgdlg.h"
 #include "wx/filedlg.h"
 
+#include <algorithm>
+#include <iterator>
+#include <queue>
 #include <typeinfo>
 
 class wxTestingModalHook;
