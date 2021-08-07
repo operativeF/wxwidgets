@@ -44,12 +44,12 @@ public:
 private:
     static wxString GetAddButtonLabel()
     {
-        return wchar_t(0xFF0B); // FULLWIDTH PLUS SIGN
+        return wchar_t{0xFF0B}; // FULLWIDTH PLUS SIGN
     }
 
     static wxString GetRemoveButtonLabel()
     {
-        return wchar_t(0x2012); // FIGURE DASH
+        return wchar_t{0x2012}; // FIGURE DASH
     }
 
 };

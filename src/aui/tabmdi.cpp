@@ -129,7 +129,7 @@ wxAuiTabArt* wxAuiMDIParentFrame::GetArtProvider()
 
 wxAuiNotebook* wxAuiMDIParentFrame::GetNotebook() const
 {
-    return static_cast<wxAuiNotebook*>(m_pClientWindow);
+    return m_pClientWindow;
 }
 
 

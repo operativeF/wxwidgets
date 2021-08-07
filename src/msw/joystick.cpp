@@ -98,7 +98,7 @@ void* wxJoystickThread::Entry()
     while (!TestDestroy())
     {
         Sleep(m_polling);
-        long ts = GetTickCount();
+        auto ts = ::GetTickCount64();
 
         joyGetPos(m_joystick, &m_joyInfo);
         m_buttons = m_joyInfo.wButtons;
@@ -380,14 +380,13 @@ void wxJoystick::SetMovementThreshold(int threshold)
 int wxJoystick::GetNumberJoysticks()
 {
     JOYINFO joyInfo;
-    int i, maxsticks, actualsticks;
-    maxsticks = joyGetNumDevs();
-    actualsticks = 0;
-    for( i=0; i<maxsticks; i++ )
+    int maxsticks = joyGetNumDevs();
+    int actualsticks{0};
+    for( int i = 0; i < maxsticks; i++ )
     {
-        if( joyGetPos( i, & joyInfo ) == JOYERR_NOERROR )
+        if( joyGetPos( i, &joyInfo ) == JOYERR_NOERROR )
         {
-            actualsticks ++;
+            actualsticks++;
         }
     }
     return actualsticks;

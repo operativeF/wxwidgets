@@ -1680,7 +1680,7 @@ bool wxFileConfigGroup::DeleteSubgroup(wxFileConfigGroup *pGroup)
     wxLogTrace( FILECONF_TRACE_MASK,
                 wxT("  (m_pLine) = prev: %p, this %p, next %p"),
                 m_pLine ? static_cast<void*>(m_pLine->Prev()) : nullptr,
-                static_cast<void*>(m_pLine),
+                m_pLine,
                 m_pLine ? static_cast<void*>(m_pLine->Next()) : nullptr );
     wxLogTrace( FILECONF_TRACE_MASK,
                 wxT("  text: '%s'"),

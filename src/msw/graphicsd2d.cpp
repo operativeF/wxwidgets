@@ -1930,10 +1930,9 @@ void wxD2DPathData::AddPath(const wxGraphicsPathData* path)
     // Close current geometry (leaving the figure as is).
     Flush();
 
-    HRESULT hr;
     ID2D1TransformedGeometry* pTransformedGeometry = nullptr;
     // Add current geometry to the collection transformed geometries.
-    hr = m_direct2dfactory->CreateTransformedGeometry(m_pathGeometry,
+    HRESULT hr = m_direct2dfactory->CreateTransformedGeometry(m_pathGeometry,
                         D2D1::Matrix3x2F::Identity(), &pTransformedGeometry);
     wxCHECK_HRESULT_RET(hr);
     m_pTransformedGeometries.push_back(pTransformedGeometry);

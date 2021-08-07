@@ -428,7 +428,7 @@ class wxHTTPStream : public wxSocketInputStream
 public:
     wxHTTP *m_http;
     size_t m_httpsize{0};
-    unsigned long m_read_bytes{0};
+    size_t m_read_bytes{0};
 
     explicit wxHTTPStream(wxHTTP *http)
         : wxSocketInputStream(*http),

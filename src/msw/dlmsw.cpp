@@ -277,7 +277,7 @@ void* wxDynamicLibrary::GetModuleFromAddress(const void* addr, wxString* path)
     if ( path )
     {
         TCHAR libname[MAX_PATH];
-        if ( !::GetModuleFileName(hmod, libname, MAX_PATH) )
+        if ( !::GetModuleFileNameW(hmod, libname, MAX_PATH) )
         {
             // GetModuleFileName could also return extended-length paths (paths
             // prepended with "//?/", maximum length is 32767 charachters) so,
@@ -294,7 +294,7 @@ void* wxDynamicLibrary::GetModuleFromAddress(const void* addr, wxString* path)
 
     // In Windows HMODULE is actually the base address of the module so we
     // can just cast it to the address.
-    return reinterpret_cast<void *>(hmod);
+    return hmod;
 }
 
 /* static */

@@ -159,10 +159,10 @@ wxCreateDevNames(const wxString& driverName,
 wxWindowsPrintNativeData::~wxWindowsPrintNativeData()
 {
     if ( m_devMode )
-        ::GlobalFree(static_cast<HGLOBAL>(m_devMode));
+        ::GlobalFree(m_devMode);
 
     if ( m_devNames )
-        ::GlobalFree(static_cast<HGLOBAL>(m_devNames));
+        ::GlobalFree(m_devNames);
 }
 
 bool wxWindowsPrintNativeData::IsOk() const
@@ -666,7 +666,7 @@ bool wxWindowsPrintNativeData::TransferFrom( const wxPrintData &data )
 
     if ( m_devNames )
     {
-        ::GlobalFree(static_cast<HGLOBAL>(m_devNames));
+        ::GlobalFree(m_devNames);
     }
 
     // TODO: I hope it's OK to pass some empty strings to DEVNAMES.
@@ -845,7 +845,7 @@ bool wxWindowsPrintDialog::ConvertFromNative( wxPrintDialogData &data )
     {
         if (native_data->GetDevMode())
         {
-            ::GlobalFree(static_cast<HGLOBAL>(native_data->GetDevMode()));
+            ::GlobalFree(native_data->GetDevMode());
         }
         native_data->SetDevMode(pd->hDevMode);
         pd->hDevMode = nullptr;
@@ -856,7 +856,7 @@ bool wxWindowsPrintDialog::ConvertFromNative( wxPrintDialogData &data )
     {
         if (native_data->GetDevNames())
         {
-            ::GlobalFree(static_cast<HGLOBAL>(native_data->GetDevNames()));
+            ::GlobalFree(native_data->GetDevNames());
         }
         native_data->SetDevNames(pd->hDevNames);
         pd->hDevNames = nullptr;

@@ -143,7 +143,7 @@ wxAuiGenericToolBarArt::~wxAuiGenericToolBarArt()
 
 wxAuiToolBarArt* wxAuiGenericToolBarArt::Clone()
 {
-    return static_cast<wxAuiToolBarArt*>(new wxAuiGenericToolBarArt);
+    return new wxAuiGenericToolBarArt;
 }
 
 void wxAuiGenericToolBarArt::UpdateColoursFromSystem()

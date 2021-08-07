@@ -512,7 +512,7 @@ void wxFileListCtrl::UpdateFiles()
 #endif // defined(__WINDOWS__) || defined(__WXMAC__)
     {
         // Real directory...
-        if ( !IsTopMostDir(m_dirName) && !m_dirName.empty() )
+        if ( !m_dirName.empty() )
         {
             wxString p(wxPathOnly(m_dirName));
 #if defined(__UNIX__)

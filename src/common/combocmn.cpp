@@ -465,8 +465,7 @@ bool wxComboPopupWindow::Show( bool show )
 
     m_inShow++;
 
-    wxPopupTransientWindow* const
-        ptw = static_cast<wxPopupTransientWindow*>(this);
+    wxPopupTransientWindow* const ptw = this;
 
     if ( show != ptw->IsShown() )
     {

@@ -2837,7 +2837,7 @@ wxWindowBase::ToDIP(const wxSize& sz, const wxWindowBase* w)
 {
     const wxSize dpi = GetDPIHelper(w);
 
-    const int baseline = wxDisplay::GetStdPPIValue();
+    constexpr int baseline = wxDisplay::GetStdPPIValue();
 
     // Take care to not scale -1 because it has a special meaning of
     // "unspecified" which should be preserved.
@@ -3237,7 +3237,7 @@ bool IsInCaptureStack(wxWindowBase* win)
 
 void wxWindowBase::CaptureMouse()
 {
-    wxLogTrace(wxT("mousecapture"), wxT("CaptureMouse(%p)"), static_cast<void*>(this));
+    wxLogTrace(wxT("mousecapture"), wxT("CaptureMouse(%p)"), this);
 
     wxRecursionGuard guard(wxMouseCapture::changing);
     wxASSERT_MSG( !guard.IsInside(), wxT("recursive CaptureMouse call?") );
@@ -3256,7 +3256,7 @@ void wxWindowBase::CaptureMouse()
 
 void wxWindowBase::ReleaseMouse()
 {
-    wxLogTrace(wxT("mousecapture"), wxT("ReleaseMouse(%p)"), static_cast<void*>(this));
+    wxLogTrace(wxT("mousecapture"), wxT("ReleaseMouse(%p)"), this);
 
     wxRecursionGuard guard(wxMouseCapture::changing);
     wxASSERT_MSG( !guard.IsInside(), wxT("recursive ReleaseMouse call?") );

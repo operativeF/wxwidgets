@@ -134,7 +134,7 @@ private:
 
         // Subsequent dots are rotated by this angle with respect to the
         // previous one.
-        const double angle = wxDegToRad(360. / NUM_DOTS);
+        constexpr double angle = wxDegToRad(360. / NUM_DOTS);
 
         // And the animation effect is achieved just by starting to draw from
         // the next position every time.
