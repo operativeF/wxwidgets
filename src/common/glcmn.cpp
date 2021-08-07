@@ -72,7 +72,7 @@ bool wxGLCanvasBase::SetCurrent(const wxGLContext& context) const
     wxASSERT_MSG( IsShown(), wxT("can't make hidden GL canvas current") );
 
 
-    return context.SetCurrent(*static_cast<const wxGLCanvas *>(this));
+    return context.SetCurrent(*dynamic_cast<const wxGLCanvas *>(this));
 }
 
 bool wxGLCanvasBase::SetColour(const wxString& colour)

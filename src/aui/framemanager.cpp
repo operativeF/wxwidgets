@@ -821,7 +821,7 @@ void wxAuiManager::UpdateHintWindowConfig()
     {
         if (wxDynamicCast(w, wxFrame))
         {
-            wxFrame* f = static_cast<wxFrame*>(w);
+            auto* f = dynamic_cast<wxFrame*>(w);
             can_do_transparent = f->CanSetTransparent();
 
             break;
@@ -1079,7 +1079,7 @@ bool wxAuiManager::AddPane(wxWindow* window, const wxAuiPaneInfo& paneInfo)
             // meshes better with the look and feel of the control than ours,
             // so turn wxAuiManager's gripper off, and the toolbar's on.
 
-            wxAuiToolBar* tb = static_cast<wxAuiToolBar*>(pinfo.window);
+            auto* tb = dynamic_cast<wxAuiToolBar*>(pinfo.window);
             pinfo.SetFlag(wxAuiPaneInfo::optionGripper, false);
             tb->SetGripperVisible(true);
         }

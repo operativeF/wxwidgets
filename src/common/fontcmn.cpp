@@ -246,7 +246,7 @@ int wxFontBase::GetPointSize() const
 wxSize wxFontBase::GetPixelSize() const
 {
     wxScreenDC dc;
-    dc.SetFont(*static_cast<const wxFont*>(this));
+    dc.SetFont(*dynamic_cast<const wxFont*>(this));
     return wxSize(dc.GetCharWidth(), dc.GetCharHeight());
 }
 
@@ -289,7 +289,7 @@ void wxFontBase::SetPixelSize( const wxSize& pixelSize )
     int currentSize = GetPointSize();
     while (currentSize > 0)
     {
-        dc.SetFont(*static_cast<wxFont*>(this));
+        dc.SetFont(*dynamic_cast<wxFont*>(this));
 
         // if currentSize (in points) results in a font that is smaller
         // than required by pixelSize it is considered a good size

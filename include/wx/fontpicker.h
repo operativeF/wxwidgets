@@ -178,7 +178,7 @@ protected:
 
 private:
     wxFontPickerWidget* GetPickerWidget() const
-        { return static_cast<wxFontPickerWidget*>(m_picker); }
+        { return dynamic_cast<wxFontPickerWidget*>(m_picker); }
 
     wxDECLARE_DYNAMIC_CLASS(wxFontPickerCtrl);
 };

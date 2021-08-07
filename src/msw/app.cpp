@@ -265,8 +265,8 @@ WXDWORD wxGUIAppTraits::WaitForThread(WXHANDLE hThread, int flags)
     // MsgWaitForMultipleObjects() keeps returning WAIT_OBJECT_0 + 1.
     if ( flags == wxTHREAD_WAIT_YIELD && wxIsMainThread() )
     {
-        wxMSWEventLoopBase* const
-            evtLoop = static_cast<wxMSWEventLoopBase *>(wxEventLoop::GetActive());
+        auto* const evtLoop = dynamic_cast<wxMSWEventLoopBase *>(wxEventLoop::GetActive());
+
         if ( evtLoop )
             return evtLoop->MSWWaitForThread(hThread);
     }

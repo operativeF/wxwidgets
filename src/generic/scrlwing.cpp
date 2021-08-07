@@ -328,7 +328,7 @@ wxAnyScrollHelperBase::wxAnyScrollHelperBase(wxWindow* win)
 wxScrollHelperBase::wxScrollHelperBase(wxWindow *win)
     : wxAnyScrollHelperBase(win)
 {
-    m_win->SetScrollHelper(static_cast<wxScrollHelper *>(this));
+    m_win->SetScrollHelper(dynamic_cast<wxScrollHelper *>(this));
 
     // by default, the associated window is also the target window
     DoSetTargetWindow(win);

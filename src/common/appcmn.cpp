@@ -176,7 +176,7 @@ wxWindow* wxAppBase::GetTopWindow() const
 /* static */
 wxWindow* wxAppBase::GetMainTopWindow()
 {
-    const wxAppBase* const app = static_cast<wxAppBase*>(GetInstance());
+    const auto* const app = dynamic_cast<wxAppBase*>(GetInstance());
 
     return app ? app->GetTopWindow() : nullptr;
 }

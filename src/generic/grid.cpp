@@ -9987,7 +9987,7 @@ void wxGrid::DoSetColSize( int col, int width )
         // flicker, so take care to call the special method of our header
         // control checking for whether it's being resized interactively
         // instead of the usual UpdateColumn().
-        static_cast<wxGridHeaderCtrl*>(m_colLabelWin)->UpdateIfNotResizing(col);
+        dynamic_cast<wxGridHeaderCtrl*>(m_colLabelWin)->UpdateIfNotResizing(col);
     }
     //else: will be refreshed when the header is redrawn
 

@@ -318,7 +318,7 @@ void wxTopLevelWindowBase::DoCentre(int dir)
 bool wxTopLevelWindowBase::SaveGeometry(const GeometrySerializer& ser) const
 {
     wxTLWGeometry geom;
-    if ( !geom.GetFrom(static_cast<const wxTopLevelWindow*>(this)) )
+    if ( !geom.GetFrom(dynamic_cast<const wxTopLevelWindow*>(this)) )
         return false;
 
     return geom.Save(ser);
@@ -330,7 +330,7 @@ bool wxTopLevelWindowBase::RestoreToGeometry(GeometrySerializer& ser)
     if ( !geom.Restore(ser) )
         return false;
 
-    return geom.ApplyTo(static_cast<wxTopLevelWindow*>(this));
+    return geom.ApplyTo(dynamic_cast<wxTopLevelWindow*>(this));
 }
 
 // ----------------------------------------------------------------------------

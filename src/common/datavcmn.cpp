@@ -1955,7 +1955,7 @@ wxDataViewDateRenderer::CreateEditorCtrl(wxWindow *parent, wxRect labelRect, con
 
 bool wxDataViewDateRenderer::GetValueFromEditorCtrl(wxWindow *editor, wxVariant& value)
 {
-    wxDatePickerCtrl *ctrl = static_cast<wxDatePickerCtrl*>(editor);
+    auto* ctrl = dynamic_cast<wxDatePickerCtrl*>(editor);
     value = ctrl->GetValue();
     return true;
 }

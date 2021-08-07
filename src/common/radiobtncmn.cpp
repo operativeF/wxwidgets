@@ -84,8 +84,8 @@ wxCONSTRUCTOR_6( wxRadioButton, wxWindow*, Parent, wxWindowID, Id, \
 
 wxRadioButton* wxRadioButtonBase::GetFirstInGroup() const
 {
-    wxRadioButton*
-        btn = static_cast<wxRadioButton*>(const_cast<wxRadioButtonBase*>(this));
+    auto* btn = dynamic_cast<wxRadioButton*>(const_cast<wxRadioButtonBase*>(this));
+
     while (true)
     {
         wxRadioButton* prevBtn = btn->GetPreviousInGroup();
@@ -98,8 +98,8 @@ wxRadioButton* wxRadioButtonBase::GetFirstInGroup() const
 
 wxRadioButton* wxRadioButtonBase::GetLastInGroup() const
 {
-    wxRadioButton*
-        btn = static_cast<wxRadioButton*>(const_cast<wxRadioButtonBase*>(this));
+    auto* btn = dynamic_cast<wxRadioButton*>(const_cast<wxRadioButtonBase*>(this));
+
     while (true)
     {
         wxRadioButton* nextBtn = btn->GetNextInGroup();

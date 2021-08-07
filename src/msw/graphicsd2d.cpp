@@ -1271,7 +1271,7 @@ D2D1::Matrix3x2F wxD2DMatrixData::GetMatrix3x2F() const
 
 const wxD2DMatrixData* wxGetD2DMatrixData(const wxGraphicsMatrix& matrix)
 {
-    return static_cast<const wxD2DMatrixData*>(matrix.GetMatrixData());
+    return dynamic_cast<const wxD2DMatrixData*>(matrix.GetMatrixData());
 }
 
 //-----------------------------------------------------------------------------
@@ -2966,7 +2966,7 @@ void wxD2DBrushData::CreateRadialGradientBrush(
 
 wxD2DBrushData* wxGetD2DBrushData(const wxGraphicsBrush& brush)
 {
-    return static_cast<wxD2DBrushData*>(brush.GetGraphicsData());
+    return dynamic_cast<wxD2DBrushData*>(brush.GetGraphicsData());
 }
 
 bool wxIsHatchPenStyle(wxPenStyle penStyle)

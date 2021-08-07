@@ -81,8 +81,7 @@ wxIcon::wxIcon(const wxIconLocation& loc)
 
 wxObjectRefData *wxIcon::CloneRefData(const wxObjectRefData *dataOrig) const
 {
-    const wxIconRefData *
-        data = static_cast<const wxIconRefData *>(dataOrig);
+    const auto* data = dynamic_cast<const wxIconRefData *>(dataOrig);
     if ( !data )
         return nullptr;
 

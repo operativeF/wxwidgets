@@ -402,8 +402,8 @@ inline bool wxMDIParentFrameBase::TryBefore(wxEvent& event)
         {
             // However avoid sending the event back to the child if it's
             // currently being propagated to us from it.
-            wxWindow* const
-                from = static_cast<wxWindow*>(event.GetPropagatedFrom());
+            auto* const
+                from = dynamic_cast<wxWindow*>(event.GetPropagatedFrom());
             if ( !from || !from->IsDescendant(child) )
             {
                 if ( child->ProcessWindowEventLocally(event) )

@@ -450,7 +450,7 @@ wxPen::wxPen(const wxPenInfo& info)
 bool wxPen::operator==(const wxPen& pen) const
 {
     const wxPenRefData *
-        penData = static_cast<const wxPenRefData *>(pen.m_refData);
+        penData = dynamic_cast<const wxPenRefData *>(pen.m_refData);
 
     // an invalid pen is only equal to another invalid pen
     return m_refData ? penData && *M_PENDATA == *penData : !penData;
@@ -483,7 +483,7 @@ wxGDIRefData* wxPen::CreateGDIRefData() const
 
 wxGDIRefData* wxPen::CloneGDIRefData(const wxGDIRefData* data) const
 {
-    return new wxPenRefData(*static_cast<const wxPenRefData*>(data));
+    return new wxPenRefData(*dynamic_cast<const wxPenRefData*>(data));
 }
 
 void wxPen::SetColour(const wxColour& col)

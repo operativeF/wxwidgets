@@ -677,8 +677,7 @@ bool wxThumbBarButton::UpdateParentTaskBarButton()
     if ( !m_taskBarButtonParent )
         return false;
 
-    return static_cast<wxTaskBarButtonImpl*>(
-               m_taskBarButtonParent)->InitOrUpdateThumbBarButtons();
+    return dynamic_cast<wxTaskBarButtonImpl*>(m_taskBarButtonParent)->InitOrUpdateThumbBarButtons();
 }
 
 // ----------------------------------------------------------------------------

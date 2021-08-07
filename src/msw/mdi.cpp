@@ -238,12 +238,12 @@ wxMDIParentFrame::~wxMDIParentFrame()
 
 wxMDIChildFrame *wxMDIParentFrame::GetActiveChild() const
 {
-    HWND hWnd = (HWND)::SendMessage(GetWinHwnd(GetClientWindow()),
+    HWND hWnd = (HWND)::SendMessageW(GetWinHwnd(GetClientWindow()),
                                     WM_MDIGETACTIVE, 0, 0L);
     if ( !hWnd )
         return nullptr;
 
-    return static_cast<wxMDIChildFrame *>(wxFindWinFromHandle(hWnd));
+    return dynamic_cast<wxMDIChildFrame *>(wxFindWinFromHandle(hWnd));
 }
 
 int wxMDIParentFrame::GetChildFramesCount() const

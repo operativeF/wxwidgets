@@ -1842,7 +1842,7 @@ void wxPropertyGrid::FixPosForTextCtrl( wxWindow* ctrl,
 #ifndef wxPG_TEXTCTRLXADJUST
     int textCtrlXAdjust = wxPG_XBEFORETEXT - 1 + wxPG_TEXTCTRLXADJUST2;
 
-    wxTextCtrl* tc = static_cast<wxTextCtrl*>(ctrl);
+    auto* tc = dynamic_cast<wxTextCtrl*>(ctrl);
     tc->SetMargins(0);
 #else
     int textCtrlXAdjust = wxPG_TEXTCTRLXADJUST;

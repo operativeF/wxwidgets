@@ -118,7 +118,7 @@ protected:
         return m_columns[idx];
     }
 
-    wxGrid *GetOwner() const { return static_cast<wxGrid *>(GetParent()); }
+    wxGrid *GetOwner() const { return dynamic_cast<wxGrid *>(GetParent()); }
 
 private:
     wxMouseEvent GetDummyMouseEvent() const

@@ -1452,7 +1452,7 @@ wxString wxURLDataObject::GetURL() const
     }
     else // must be wxTextDataObject
     {
-        url = static_cast<wxTextDataObject *>(m_dataObjectLast)->GetText();
+        url = dynamic_cast<wxTextDataObject *>(m_dataObjectLast)->GetText();
     }
 
     return url;

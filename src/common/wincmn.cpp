@@ -977,7 +977,7 @@ void wxWindowBase::WXSetInitialFittingClientSize(int flags)
         return;
 
     const wxSize
-        size = sizer->ComputeFittingClientSize(static_cast<wxWindow *>(this));
+        size = sizer->ComputeFittingClientSize(dynamic_cast<wxWindow *>(this));
 
     // It is important to set the min client size before changing the size
     // itself as the existing size hints could prevent SetClientSize() from
@@ -2793,7 +2793,7 @@ void wxWindowBase::OnInternalIdle()
 
 wxSize wxWindowBase::GetDPI() const
 {
-    return wxDisplay(static_cast<const wxWindow*>(this)).GetPPI();
+    return wxDisplay(dynamic_cast<const wxWindow*>(this)).GetPPI();
 }
 
 #ifndef wxHAVE_DPI_INDEPENDENT_PIXELS

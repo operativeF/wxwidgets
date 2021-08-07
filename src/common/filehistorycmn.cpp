@@ -310,7 +310,7 @@ void wxFileHistoryBase::RemoveExistingHistory()
           node;
           node = node->GetNext() )
     {
-        wxMenu * const menu = static_cast<wxMenu *>(node->GetData());
+        auto* const menu = dynamic_cast<wxMenu *>(node->GetData());
 
         // Notice that we remove count+1 items from the menu as we also remove
         // the separator preceding them.

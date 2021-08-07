@@ -367,7 +367,7 @@ void wxControlContainer::HandleOnNavigationKey( wxNavigationKeyEvent& event )
             // If we are in a radio button group, start from the first item in the
             // group
             if ( event.IsFromTab() && wxIsKindOf(winFocus, wxRadioButton ) )
-                winFocus = static_cast<wxRadioButton*>(winFocus)->GetFirstInGroup();
+                winFocus = dynamic_cast<wxRadioButton*>(winFocus)->GetFirstInGroup();
 #endif // USE_RADIOBTN_NAV
             // ok, we found the focus - now is it our child?
             start_node = children.Find( winFocus );

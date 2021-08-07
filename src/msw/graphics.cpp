@@ -1649,7 +1649,7 @@ void wxGDIPlusPathData::AddEllipse(double x, double y, double w, double h)
 
 void wxGDIPlusPathData::AddPath( const wxGraphicsPathData* path )
 {
-    const wxGDIPlusPathData* pathData = static_cast<const wxGDIPlusPathData*>(path);
+    const wxGDIPlusPathData* pathData = dynamic_cast<const wxGDIPlusPathData*>(path);
     const GraphicsPath* grPath = static_cast<const GraphicsPath*>(pathData->GetNativePath());
 
     m_path->AddPath(grPath, FALSE);
@@ -2948,7 +2948,7 @@ wxGraphicsBitmap wxGDIPlusRenderer::CreateSubBitmap( const wxGraphicsBitmap &bit
 
     wxCHECK_MSG(!bitmap.IsNull(), wxNullGraphicsBitmap, wxS("Invalid bitmap"));
 
-    Bitmap* image = static_cast<wxGDIPlusBitmapData*>(bitmap.GetRefData())->GetGDIPlusBitmap();
+    Bitmap* image = dynamic_cast<wxGDIPlusBitmapData*>(bitmap.GetRefData())->GetGDIPlusBitmap();
     if ( image )
     {
         wxCHECK_MSG( x >= 0.0 && y >= 0.0 && w > 0.0 && h > 0.0 &&

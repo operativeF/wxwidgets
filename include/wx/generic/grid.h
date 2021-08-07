@@ -274,7 +274,7 @@ public:
     {
         wxASSERT( m_origin == Key );
 
-        return *static_cast<const wxKeyEvent*>(m_event);
+        return *dynamic_cast<const wxKeyEvent*>(m_event);
     }
 
     // Can be called for objects with Mouse origin only.
@@ -282,7 +282,7 @@ public:
     {
         wxASSERT( m_origin == Mouse );
 
-        return *static_cast<const wxMouseEvent*>(m_event);
+        return *dynamic_cast<const wxMouseEvent*>(m_event);
     }
 
 private:

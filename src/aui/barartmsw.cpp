@@ -30,7 +30,7 @@ wxAuiMSWToolBarArt::wxAuiMSWToolBarArt()
         m_themed = true;
 
         // Determine sizes from theme
-        wxWindow* window = static_cast<wxApp*>(wxApp::GetInstance())->GetTopWindow();
+        wxWindow* window = dynamic_cast<wxApp*>(wxApp::GetInstance())->GetTopWindow();
         wxUxThemeHandle hTheme(window, L"Rebar");
 
         SIZE overflowSize;

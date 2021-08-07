@@ -466,7 +466,7 @@ void wxStockGDI::DeleteAll()
 
 const wxBrush* wxStockGDI::GetBrush(Item item)
 {
-    wxBrush* brush = static_cast<wxBrush*>(ms_stockObject[item]);
+    wxBrush* brush = dynamic_cast<wxBrush*>(ms_stockObject[item]);
     if (brush == nullptr)
     {
         switch (item)
@@ -514,7 +514,7 @@ const wxBrush* wxStockGDI::GetBrush(Item item)
 
 const wxColour* wxStockGDI::GetColour(Item item)
 {
-    wxColour* colour = static_cast<wxColour*>(ms_stockObject[item]);
+    wxColour* colour = dynamic_cast<wxColour*>(ms_stockObject[item]);
     if (colour == nullptr)
     {
         switch (item)
@@ -553,7 +553,7 @@ const wxColour* wxStockGDI::GetColour(Item item)
 
 const wxCursor* wxStockGDI::GetCursor(Item item)
 {
-    wxCursor* cursor = static_cast<wxCursor*>(ms_stockObject[item]);
+    wxCursor* cursor = dynamic_cast<wxCursor*>(ms_stockObject[item]);
     if (cursor == nullptr)
     {
         switch (item)
@@ -618,7 +618,7 @@ const wxFont* wxStockGDI::GetFont(Item item)
 
 const wxPen* wxStockGDI::GetPen(Item item)
 {
-    wxPen* pen = static_cast<wxPen*>(ms_stockObject[item]);
+    wxPen* pen = dynamic_cast<wxPen*>(ms_stockObject[item]);
     if (pen == nullptr)
     {
         switch (item)

@@ -238,7 +238,7 @@ LRESULT CALLBACK wxSocket_Internal_WinProc(HWND hWnd,
 void wxSocketMSWManager::Install_Callback(wxSocketImpl *socket_,
                                          wxSocketNotify WXUNUSED(event))
 {
-    wxSocketImplMSW * const socket = static_cast<wxSocketImplMSW *>(socket_);
+    auto* const socket = dynamic_cast<wxSocketImplMSW *>(socket_);
 
     /* We could probably just subscribe to all events regardless
      * of the socket type, but MS recommends to do it this way.
@@ -254,7 +254,7 @@ void wxSocketMSWManager::Install_Callback(wxSocketImpl *socket_,
 void wxSocketMSWManager::Uninstall_Callback(wxSocketImpl *socket_,
                                             wxSocketNotify WXUNUSED(event))
 {
-    wxSocketImplMSW * const socket = static_cast<wxSocketImplMSW *>(socket_);
+    auto* const socket = dynamic_cast<wxSocketImplMSW *>(socket_);
 
     WSAAsyncSelect(socket->m_fd, hWin, socket->m_msgnumber, 0);
 }

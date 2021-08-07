@@ -416,7 +416,7 @@ wxPropertyCategory* wxPropertyGridPageState::GetPropertyCategory( const wxPGProp
         parent = grandparent;
         grandparent = parent->GetParent();
         if ( parent->IsCategory() && grandparent )
-            return const_cast<wxPropertyCategory*>(static_cast<const wxPropertyCategory*>(parent));
+            return const_cast<wxPropertyCategory*>(dynamic_cast<const wxPropertyCategory*>(parent));
     } while ( grandparent );
 
     return nullptr;

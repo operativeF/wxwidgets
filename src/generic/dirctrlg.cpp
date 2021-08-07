@@ -925,13 +925,12 @@ bool wxGenericDirCtrl::CollapsePath(const wxString& path)
 
 wxDirItemData* wxGenericDirCtrl::GetItemData(wxTreeItemId itemId)
 {
-    return static_cast<wxDirItemData*>(m_treeCtrl->GetItemData(itemId));
+    return dynamic_cast<wxDirItemData*>(m_treeCtrl->GetItemData(itemId));
 }
 
 wxString wxGenericDirCtrl::GetPath(wxTreeItemId itemId) const
 {
-    const wxDirItemData*
-        data = static_cast<wxDirItemData*>(m_treeCtrl->GetItemData(itemId));
+    const auto* data = dynamic_cast<wxDirItemData*>(m_treeCtrl->GetItemData(itemId));
 
     return data ? data->m_path : wxString();
 }

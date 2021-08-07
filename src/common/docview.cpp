@@ -224,7 +224,7 @@ wxView *wxDocument::GetFirstView() const
     if ( m_documentViews.empty() )
         return nullptr;
 
-    return static_cast<wxView *>(m_documentViews.GetFirst()->GetData());
+    return dynamic_cast<wxView *>(m_documentViews.GetFirst()->GetData());
 }
 
 void wxDocument::Modify(bool mod)
@@ -854,7 +854,7 @@ wxView *wxDocTemplate::DoCreateView()
     if (!m_viewClassInfo)
         return nullptr;
 
-    return static_cast<wxView *>(m_viewClassInfo->CreateObject());
+    return dynamic_cast<wxView *>(m_viewClassInfo->CreateObject());
 }
 
 // ----------------------------------------------------------------------------
@@ -1302,7 +1302,7 @@ wxView *wxDocManager::GetAnyUsableView() const
         wxList::compatibility_iterator node = m_docs.GetFirst();
         if ( !node->GetNext() )
         {
-            wxDocument *doc = static_cast<wxDocument *>(node->GetData());
+            auto* doc = dynamic_cast<wxDocument *>(node->GetData());
             view = doc->GetFirstView();
         }
         //else: we have more than one document

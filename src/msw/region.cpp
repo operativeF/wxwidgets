@@ -122,7 +122,7 @@ wxGDIRefData *wxRegion::CreateGDIRefData() const
 
 wxGDIRefData *wxRegion::CloneGDIRefData(const wxGDIRefData *data) const
 {
-    return new wxRegionRefData(*static_cast<const wxRegionRefData*>(data));
+    return new wxRegionRefData(*dynamic_cast<const wxRegionRefData*>(data));
 }
 
 // ----------------------------------------------------------------------------

@@ -1054,7 +1054,7 @@ bool wxBitmap::LoadFile(const std::string& filename, wxBitmapType type)
         // create a premultiplied DIB if it really is.
         HBITMAP hdib = CreatePremultipliedDIBIfNeeded(GetHbitmap());
         if ( hdib )
-            static_cast<wxBitmapRefData*>(m_refData)->Set32bppHDIB(hdib);
+            dynamic_cast<wxBitmapRefData*>(m_refData)->Set32bppHDIB(hdib);
 #endif // wxUSE_WXDIB
 
         return true;

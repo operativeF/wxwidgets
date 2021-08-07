@@ -66,7 +66,7 @@ wxAnimation::wxAnimation(const std::string& name, wxAnimationType type)
 
 wxAnimationImpl* wxAnimation::GetImpl() const
 {
-    return static_cast<wxAnimationImpl*>(m_refData);
+    return dynamic_cast<wxAnimationImpl*>(m_refData);
 }
 
 bool wxAnimation::IsOk() const

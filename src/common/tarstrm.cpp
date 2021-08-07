@@ -689,7 +689,7 @@ bool wxTarInputStream::OpenEntry(wxTarEntry& entry)
 
 bool wxTarInputStream::OpenEntry(wxArchiveEntry& entry)
 {
-    auto* tarEntry = static_cast<wxTarEntry*>(&entry);
+    auto* tarEntry = dynamic_cast<wxTarEntry*>(&entry);
     return tarEntry ? OpenEntry(*tarEntry) : false;
 }
 
@@ -1098,7 +1098,7 @@ bool wxTarOutputStream::PutNextDirEntry(const wxString& name,
 
 bool wxTarOutputStream::PutNextEntry(wxArchiveEntry *entry)
 {
-    auto* tarEntry = static_cast<wxTarEntry*>(entry);
+    auto* tarEntry = dynamic_cast<wxTarEntry*>(entry);
     if (!tarEntry)
         delete entry;
     return PutNextEntry(tarEntry);

@@ -800,8 +800,7 @@ void wxAuiMDIClientWindow::PageChanged(int old_selection, int new_selection)
 
 void wxAuiMDIClientWindow::OnPageClose(wxAuiNotebookEvent& evt)
 {
-    wxAuiMDIChildFrame* wnd;
-    wnd = static_cast<wxAuiMDIChildFrame*>(GetPage(evt.GetSelection()));
+    auto* wnd = dynamic_cast<wxAuiMDIChildFrame*>(GetPage(evt.GetSelection()));
 
     wnd->Close();
 

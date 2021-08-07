@@ -1926,7 +1926,7 @@ wxUint32 wxZipInputStream::ReadSignature()
 
 bool wxZipInputStream::OpenEntry(wxArchiveEntry& entry)
 {
-    auto* zipEntry = static_cast<wxZipEntry*>(&entry);
+    auto* zipEntry = dynamic_cast<wxZipEntry*>(&entry);
     return zipEntry ? OpenEntry(*zipEntry) : false;
 }
 
@@ -2211,7 +2211,7 @@ bool wxZipOutputStream::CopyEntry(wxZipEntry *entry,
 
 bool wxZipOutputStream::PutNextEntry(wxArchiveEntry *entry)
 {
-    auto* zipEntry = static_cast<wxZipEntry*>(entry);
+    auto* zipEntry = dynamic_cast<wxZipEntry*>(entry);
     if (!zipEntry)
         delete entry;
     return PutNextEntry(zipEntry);

@@ -1209,8 +1209,7 @@ bool wxSystemColourProperty::OnEvent( wxPropertyGrid* propgrid,
     {
         // Must override index detection since at this point GetIndex()
         // will return old value.
-        wxOwnerDrawnComboBox* cb =
-            static_cast<wxOwnerDrawnComboBox*>(propgrid->GetEditorControl());
+        auto* cb = dynamic_cast<wxOwnerDrawnComboBox*>(propgrid->GetEditorControl());
 
         if ( cb )
         {

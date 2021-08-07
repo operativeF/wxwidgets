@@ -211,7 +211,7 @@ wxObjectRefData* wxImage::CreateRefData() const
 
 wxObjectRefData* wxImage::CloneRefData(const wxObjectRefData* that) const
 {
-    const wxImageRefData* refData = static_cast<const wxImageRefData*>(that);
+    const auto* refData = dynamic_cast<const wxImageRefData*>(that);
     wxCHECK_MSG(refData->m_ok, nullptr, wxT("invalid image") );
 
     wxImageRefData* refData_new = new wxImageRefData;

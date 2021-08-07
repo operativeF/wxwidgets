@@ -1966,7 +1966,7 @@ std::string wxGridCellDateEditor::GetValue() const
 
 wxDatePickerCtrl* wxGridCellDateEditor::DatePicker() const
 {
-    return static_cast<wxDatePickerCtrl*>(m_control);
+    return dynamic_cast<wxDatePickerCtrl*>(m_control);
 }
 
 #endif // wxUSE_DATEPICKCTRL
