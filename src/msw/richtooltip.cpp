@@ -22,6 +22,8 @@
 #include "wx/msw/private.h"
 #include "wx/msw/uxtheme.h"
 
+#include <boost/nowide/stackstring.hpp>
+
 // Provide definitions missing from some compilers SDK headers.
 
 #ifndef TTI_NONE
@@ -152,8 +154,11 @@ public:
             {
                 EDITBALLOONTIP ebt;
                 ebt.cbStruct = sizeof(EDITBALLOONTIP);
-                ebt.pszTitle = boost::nowide::widen(m_title).c_str();
-                ebt.pszText = boost::nowide::widen(m_message).c_str();
+                boost::nowide::wstackstring stackTitle(m_title.c_str());
+                boost::nowide::wstackstring stackMessage(m_message.c_str());
+
+                ebt.pszTitle = stackTitle.get();
+                ebt.pszText = stackMessage.get();
                 ebt.ttiIcon = m_ttiIcon;
                 if ( Edit_ShowBalloonTip(GetHwndOf(text), &ebt) )
                     return;

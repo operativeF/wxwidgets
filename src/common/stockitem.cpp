@@ -19,7 +19,7 @@
     #include "wx/utils.h" // for wxStripMenuCodes()
 #endif
 
-#include "fmt/core.h"
+#include <fmt/core.h>
 
 bool wxIsStockID(wxWindowID id)
 {

@@ -35,6 +35,8 @@
 #include "wx/printdlg.h"
 #include "wx/msw/printdlg.h"
 
+#include <boost/nowide/stackstring.hpp>
+
 // mingw32 defines GDI_ERROR incorrectly
 #if defined(__GNUWIN32__) || !defined(GDI_ERROR)
     #undef GDI_ERROR
@@ -97,14 +99,18 @@ bool wxPrinterDCImpl::StartDoc(const std::string& message)
 {
     DOCINFO docinfo;
     docinfo.cbSize = sizeof(DOCINFO);
-    docinfo.lpszDocName = boost::nowide::widen(message).c_str();
+    boost::nowide::wstackstring stackMessage(message.c_str());
+    docinfo.lpszDocName = stackMessage.get();
 
     std::string filename{m_printData.GetFilename()};
+    boost::nowide::wstackstring stackFilename(filename.c_str());
 
     if (filename.empty())
         docinfo.lpszOutput = nullptr;
     else
-        docinfo.lpszOutput = boost::nowide::widen(filename).c_str();
+    {
+        docinfo.lpszOutput = stackFilename.get();
+    }
 
     docinfo.lpszDatatype = nullptr;
     docinfo.fwType = 0;

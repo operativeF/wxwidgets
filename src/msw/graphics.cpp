@@ -50,8 +50,8 @@
 #endif
 #include <cfloat> // for FLT_MAX, FLT_MIN
 
-#include "boost/nowide/convert.hpp"
-#include "boost/nowide/stackstring.hpp"
+#include <boost/nowide/convert.hpp>
+#include <boost/nowide/stackstring.hpp>
 
 // Define REAL_MAX, REAL_MIN
 // if it isn't done in GDI+ header(s).

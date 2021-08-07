@@ -34,7 +34,7 @@
 #include "wx/msw/ownerdrawnbutton.h"
 #include "wx/msw/private/winstyle.h"
 
-#include "boost/nowide/convert.hpp"
+#include <boost/nowide/convert.hpp>
 
 // ----------------------------------------------------------------------------
 // wxWin macros

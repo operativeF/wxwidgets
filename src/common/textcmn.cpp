@@ -27,7 +27,7 @@
 
 #include "wx/ffile.h"
 
-#include "fmt/core.h"
+#include <fmt/core.h>
 
 // ----------------------------------------------------------------------------
 // macros

@@ -23,7 +23,7 @@
     #include "wx/module.h"
 #endif
 
-#include "fmt/core.h"
+#include <fmt/core.h>
 
 // ===========================================================================
 // implementation

@@ -38,8 +38,8 @@
 #include "wx/stringutils.h"
 #include "wx/msw/uxtheme.h"
 
-#include "boost/nowide/convert.hpp"
-#include "boost/nowide/stackstring.hpp"
+#include <boost/nowide/convert.hpp>
+#include <boost/nowide/stackstring.hpp>
 
 // ---------------------------------------------------------------------------
 // macro

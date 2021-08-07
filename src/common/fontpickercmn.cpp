@@ -23,7 +23,7 @@
 #include "wx/fontenum.h"
 #include "wx/tokenzr.h"
 
-#include "fmt/core.h"
+#include <fmt/core.h>
 
 // ============================================================================
 // implementation

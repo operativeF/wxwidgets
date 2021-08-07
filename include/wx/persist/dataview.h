@@ -16,7 +16,7 @@
 
 #include "wx/dataview.h"
 
-#include "fmt/core.h"
+#include <fmt/core.h>
 
 // ----------------------------------------------------------------------------
 // String constants used by wxPersistentDataViewCtrl.

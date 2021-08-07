@@ -31,7 +31,7 @@
 
 #include <cstring>
 
-#include "boost/nowide/convert.hpp"
+#include <boost/nowide/convert.hpp>
 
 #ifndef NIN_BALLOONTIMEOUT
     #define NIN_BALLOONTIMEOUT      0x0404

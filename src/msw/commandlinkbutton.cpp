@@ -24,7 +24,7 @@
 #include "wx/msw/private/dc.h"
 #include "wx/private/window.h"
 
-#include "boost/nowide/convert.hpp"
+#include <boost/nowide/convert.hpp>
 
 #ifndef BCM_SETNOTE
 constexpr int BCM_SETNOTE = 0x1609;

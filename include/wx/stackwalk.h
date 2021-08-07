@@ -35,13 +35,9 @@ private:
 
 public:
     wxStackFrameBase(size_t level, void *address = nullptr)
+        : m_level(level),
+          m_address(address)
     {
-        m_level = level;
-
-        m_line =
-        m_offset = 0;
-
-        m_address = address;
     }
 
     // get the level of this frame (deepest/innermost one is 0)
@@ -111,10 +107,10 @@ protected:
              m_module,
              m_filename;
 
-    size_t m_line;
+    size_t m_line{0};
 
     void *m_address;
-    size_t m_offset;
+    size_t m_offset{0};
 };
 
 // ----------------------------------------------------------------------------

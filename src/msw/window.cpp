@@ -107,7 +107,7 @@
     #include "wx/msw/uxtheme.h"
 #endif
 
-#include "boost/nowide/convert.hpp"
+#include <boost/nowide/convert.hpp>
 
 #if wxUSE_DYNLIB_CLASS
     #define HAVE_TRACKMOUSEEVENT

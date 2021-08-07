@@ -35,7 +35,7 @@
 #include <propvarutil.h>
 #include <wrl/implements.h>
 
-#include "boost/nowide/convert.hpp"
+#include <boost/nowide/convert.hpp>
 
 using namespace ABI::Windows::UI::Notifications;
 using namespace ABI::Windows::Data::Xml::Dom;

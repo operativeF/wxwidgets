@@ -32,7 +32,7 @@
     #include "wx/access.h"
 #endif // wxUSE_ACCESSIBILITY
 
-#include "fmt/core.h"
+#include <fmt/core.h>
 
 namespace
 {

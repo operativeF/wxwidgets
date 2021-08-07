@@ -46,7 +46,7 @@
 
 #include "wx/valgen.h"
 
-#include "fmt/core.h"
+#include <fmt/core.h>
 
 wxIMPLEMENT_CLASS(wxGenericValidator, wxValidator);
 

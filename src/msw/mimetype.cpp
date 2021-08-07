@@ -46,7 +46,7 @@
     #endif
 #endif // OS
 
-#include "fmt/core.h"
+#include <fmt/core.h>
 
 // Unfortunately the corresponding SDK constants are absent from the headers
 // shipped with some old MinGW versions (e.g. 4.2.1 from Debian) and we can't

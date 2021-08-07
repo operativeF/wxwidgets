@@ -27,8 +27,8 @@
 #include "wx/crt.h"
 #include "wx/msw/private.h"
 
-#include "fmt/printf.h"
-#include "boost/nowide/convert.hpp"
+#include <fmt/printf.h>
+#include <boost/nowide/convert.hpp>
 
 // ============================================================================
 // wxAppTraits implementation

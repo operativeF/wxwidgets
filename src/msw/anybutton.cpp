@@ -37,7 +37,7 @@
 #include "wx/msw/uxtheme.h"
 #include "wx/private/window.h"
 
-#include "boost/nowide/convert.hpp"
+#include <boost/nowide/convert.hpp>
 
 #if wxUSE_MARKUP
     #include "wx/generic/private/markuptext.h"
@@ -919,7 +919,8 @@ void DrawButtonText(HDC hdc,
         const std::vector<std::string_view> lines = wx::unsafe::StrViewSplit(text, '\n');
         const int hLine = h / lines.size();
         size_t lineNum{ 0 };
-        for ( auto&& line : lines )
+
+        for ( auto line : lines )
         {
             // Each line must be aligned in horizontal direction individually.
             ::SetRectEmpty(&rc);
@@ -953,11 +954,12 @@ void DrawButtonText(HDC hdc,
             ::DrawStateW(hdc, nullptr, nullptr, reinterpret_cast<LPARAM>(boost::nowide::widen(line).c_str()),
                         line.length(),
                         rc.left, rc.top, rc.right, rc.bottom, dsFlags);
+            ++lineNum;
         }
     }
     else // Button is enabled or using themes.
     {
-        if ( text.find(wxT('\n')) != wxString::npos )
+        if ( text.find('\n') != std::string::npos )
         {
             // draw multiline label
 

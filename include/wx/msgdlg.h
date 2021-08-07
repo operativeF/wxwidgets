@@ -18,7 +18,7 @@
 #include "wx/dialog.h"
 #include "wx/stockitem.h"
 
-#include "fmt/core.h"
+#include <fmt/core.h>
 
 inline constexpr char wxMessageBoxCaptionStr[] = "Message";
 

@@ -45,7 +45,7 @@
 
 #include <wx/vector.h>
 
-#include "fmt/core.h"
+#include <fmt/core.h>
 
 // Report an OLE error when calling the specified method to the user via wxLog.
 static void

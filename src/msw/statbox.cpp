@@ -36,7 +36,7 @@
 #include "wx/msw/dc.h"
 #include "wx/msw/private/winstyle.h"
 
-#include "boost/nowide/convert.hpp"
+#include <boost/nowide/convert.hpp>
 
 namespace
 {

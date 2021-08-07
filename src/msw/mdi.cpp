@@ -38,8 +38,8 @@
 #include <algorithm>
 #include <cstring>
 
-#include "boost/nowide/convert.hpp"
-#include "boost/nowide/stackstring.hpp"
+#include <boost/nowide/convert.hpp>
+#include <boost/nowide/stackstring.hpp>
 
 // ---------------------------------------------------------------------------
 // global variables

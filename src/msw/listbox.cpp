@@ -33,8 +33,8 @@
 
 #include <windowsx.h>
 
-#include "boost/nowide/convert.hpp"
-#include "boost/nowide/stackstring.hpp"
+#include <boost/nowide/convert.hpp>
+#include <boost/nowide/stackstring.hpp>
 
 #if wxUSE_OWNER_DRAWN
     #include  "wx/ownerdrw.h"

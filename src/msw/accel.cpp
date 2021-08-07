@@ -23,8 +23,8 @@
 #include "wx/msw/private.h"
 #include "wx/msw/private/keyboard.h"
 
-#include "boost/nowide/convert.hpp"
-#include "gsl/gsl"
+#include <boost/nowide/convert.hpp>
+#include <gsl/gsl>
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxAcceleratorTable, wxObject);
 

@@ -27,10 +27,10 @@
 #include <vector>
 #include "wx/msw/private.h"
 
-#include "boost/nowide/convert.hpp"
-#include "boost/nowide/stackstring.hpp"
+#include <boost/nowide/convert.hpp>
+#include <boost/nowide/stackstring.hpp>
 
-#include "fmt/core.h"
+#include <fmt/core.h>
 
 #ifndef TTTOOLINFO_V1_SIZE
     #define TTTOOLINFO_V1_SIZE 0x28

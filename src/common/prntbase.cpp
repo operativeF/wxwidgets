@@ -69,7 +69,7 @@
     #endif
 #endif // __WXMSW__
 
-#include "fmt/core.h"
+#include <fmt/core.h>
 
 // The value traditionally used as the default max page number and meaning
 // "infinitely many". It should probably be documented and exposed, but for now

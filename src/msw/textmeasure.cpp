@@ -22,8 +22,8 @@
 
 #include "wx/msw/dc.h"
 
-#include "boost/nowide/convert.hpp"
-#include "boost/nowide/stackstring.hpp"
+#include <boost/nowide/convert.hpp>
+#include <boost/nowide/stackstring.hpp>
 
 // ============================================================================
 // wxTextMeasure implementation

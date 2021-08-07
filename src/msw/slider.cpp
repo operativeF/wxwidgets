@@ -24,7 +24,7 @@
 
 #include "wx/msw/subwin.h"
 
-#include "boost/nowide/convert.hpp"
+#include <boost/nowide/convert.hpp>
 
 // ----------------------------------------------------------------------------
 // constants

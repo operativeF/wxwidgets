@@ -22,7 +22,7 @@
 
 #include "wx/fdrepdlg.h"
 
-#include "boost/nowide/convert.hpp"
+#include <boost/nowide/convert.hpp>
 
 // ----------------------------------------------------------------------------
 // functions prototypes

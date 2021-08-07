@@ -34,8 +34,8 @@
 
 #include <initguid.h>
 
-#include "boost/nowide/convert.hpp"
-#include "boost/nowide/stackstring.hpp"
+#include <boost/nowide/convert.hpp>
+#include <boost/nowide/stackstring.hpp>
 
 // IFileOpenDialog implementation needs wxDynamicLibrary for
 // run-time linking SHCreateItemFromParsingName(), available

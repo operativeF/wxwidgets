@@ -26,7 +26,7 @@
 
 #include <vector>
 
-#include "gsl/gsl"
+#include <gsl/gsl>
 
 // ----------------------------------------------------------------------------
 // constants

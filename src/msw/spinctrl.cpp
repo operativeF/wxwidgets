@@ -39,7 +39,7 @@
 #include <charconv>
 #include <climits>         // for INT_MIN
 
-#include "boost/nowide/convert.hpp"
+#include <boost/nowide/convert.hpp>
 
 // ----------------------------------------------------------------------------
 // macros

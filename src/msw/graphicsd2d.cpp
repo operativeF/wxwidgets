@@ -74,8 +74,8 @@
 #include "wx/stack.h"
 #include "wx/sharedptr.h"
 
-#include "boost/nowide/convert.hpp"
-#include "fmt/core.h"
+#include <boost/nowide/convert.hpp>
+#include <fmt/core.h>
 
 // This must be the last header included to only affect the DEFINE_GUID()
 // occurrences below but not any GUIDs declared in the standard files included

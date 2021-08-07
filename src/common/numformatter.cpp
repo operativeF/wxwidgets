@@ -16,7 +16,7 @@
 
 #include <clocale> // for setlocale and LC_ALL
 
-#include "fmt/core.h"
+#include <fmt/core.h>
 
 // ----------------------------------------------------------------------------
 // local helpers

@@ -25,8 +25,8 @@
 #include "wx/msw/private/msgdlg.h"
 #include "wx/evtloop.h"
 
-#include "boost/nowide/convert.hpp"
-#include "boost/nowide/stackstring.hpp"
+#include <boost/nowide/convert.hpp>
+#include <boost/nowide/stackstring.hpp>
 
 using namespace wxMSWMessageDialog;
 

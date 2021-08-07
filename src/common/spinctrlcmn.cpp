@@ -18,7 +18,7 @@
 
 #include "wx/private/spinctrl.h"
 
-#include "fmt/core.h"
+#include <fmt/core.h>
 
 wxDEFINE_EVENT(wxEVT_SPINCTRL, wxSpinEvent);
 wxDEFINE_EVENT(wxEVT_SPINCTRLDOUBLE, wxSpinDoubleEvent);

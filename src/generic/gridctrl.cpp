@@ -33,7 +33,7 @@
 
 #include <charconv>
 
-#include "fmt/core.h"
+#include <fmt/core.h>
 
 // ----------------------------------------------------------------------------
 // wxGridCellRenderer
@@ -829,7 +829,7 @@ std::string wxGridCellFloatRenderer::GetString(const wxGrid& grid, int row, int 
     bool hasDouble;
     double val;
     std::string text;
-    std::from_chars_result fromDoubleResult;
+    std::from_chars_result fromDoubleResult{nullptr, std::errc{}};
     if ( table->CanGetValueAs(row, col, wxGRID_VALUE_FLOAT) )
     {
         val = table->GetValueAsDouble(row, col);

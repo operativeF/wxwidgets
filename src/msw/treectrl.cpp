@@ -38,7 +38,7 @@
 #include "wx/msw/dragimag.h"
 #include "wx/msw/uxtheme.h"
 
-#include "boost/nowide/stackstring.hpp"
+#include <boost/nowide/stackstring.hpp>
 
 // macros to hide the cast ugliness
 // --------------------------------

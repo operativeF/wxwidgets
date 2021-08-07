@@ -35,8 +35,8 @@
     #include "wx/dynlib.h"
 #endif // wxUSE_DYNLIB_CLASS
 
-#include "boost/nowide/convert.hpp"
-#include "boost/nowide/stackstring.hpp"
+#include <boost/nowide/convert.hpp>
+#include <boost/nowide/stackstring.hpp>
 
 // ----------------------------------------------------------------------------
 // Redefine the interfaces: ITaskbarList3, IObjectCollection,

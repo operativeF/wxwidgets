@@ -55,7 +55,8 @@ class WXDLLIMPEXP_CORE wxStatusBarPane
 public:
     wxStatusBarPane(int style = wxSB_NORMAL, int width = 0)
         : m_nStyle(style), m_nWidth(width)
-        { m_bEllipsized = false; }
+    {
+    }
 
     int GetWidth() const { return m_nWidth; }
     int GetStyle() const { return m_nStyle; }
@@ -97,7 +98,7 @@ private:
     std::vector<std::string> m_arrStack;
 
     // is the currently shown value shown with ellipsis in the status bar?
-    bool m_bEllipsized;
+    bool m_bEllipsized{false};
 };
 
 WX_DECLARE_EXPORTED_OBJARRAY(wxStatusBarPane, wxStatusBarPaneArray);

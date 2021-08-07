@@ -27,7 +27,7 @@
 #include "wx/msw/subwin.h"
 #include "wx/renderer.h"
 
-#include "boost/nowide/convert.hpp"
+#include <boost/nowide/convert.hpp>
 
 #if wxUSE_TOOLTIPS
     #include "wx/tooltip.h"

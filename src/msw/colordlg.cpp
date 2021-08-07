@@ -34,7 +34,7 @@
 #include <cstdlib>
 #include <cstring>
 
-#include "boost/nowide/convert.hpp"
+#include <boost/nowide/convert.hpp>
 
 // ----------------------------------------------------------------------------
 // wxWin macros

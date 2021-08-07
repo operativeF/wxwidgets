@@ -28,7 +28,7 @@
 
 #include "wx/msw/private.h"
 
-#include "boost/nowide/convert.hpp"
+#include <boost/nowide/convert.hpp>
 
 // ----------------------------------------------------------------------------
 // wxWin macros

@@ -25,7 +25,7 @@
     #include "wx/translation.h"
 #endif
 
-#include "fmt/core.h"
+#include <fmt/core.h>
 
 // Helper class used to dynamically load the required symbols from winhttp.dll
 class wxWinHTTP

@@ -29,7 +29,7 @@
 #include "wx/msw/private/customdraw.h"
 #include "wx/msw/private/winstyle.h"
 
-#include "boost/nowide/stackstring.hpp"
+#include <boost/nowide/stackstring.hpp>
 
 #ifndef HDM_SETBITMAPMARGIN
     #define HDM_SETBITMAPMARGIN 0x1234

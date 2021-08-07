@@ -102,10 +102,10 @@ public:
     // provide virtual dtor in case it's used like this in the user code.
     virtual ~wxTreeListItemComparator() = default;
 
-   wxTreeListItemComparator(const wxTreeListItemComparator&) = delete;
-   wxTreeListItemComparator& operator=(const wxTreeListItemComparator&) = delete;
-   wxTreeListItemComparator(wxTreeListItemComparator&&) = default;
-   wxTreeListItemComparator& operator=(wxTreeListItemComparator&&) = default;
+    wxTreeListItemComparator(const wxTreeListItemComparator&) = delete;
+    wxTreeListItemComparator& operator=(const wxTreeListItemComparator&) = delete;
+    wxTreeListItemComparator(wxTreeListItemComparator&&) = default;
+    wxTreeListItemComparator& operator=(wxTreeListItemComparator&&) = default;
 };
 
 // ----------------------------------------------------------------------------

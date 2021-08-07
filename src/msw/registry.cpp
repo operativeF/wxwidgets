@@ -42,7 +42,7 @@
 #define   HKEY_DEFINED    // already defined in windows.h
 #include  "wx/msw/registry.h"
 
-#include "fmt/core.h"
+#include <fmt/core.h>
 
 // some registry functions don't like signed chars
 using RegString = unsigned char *;

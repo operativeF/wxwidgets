@@ -29,7 +29,7 @@
 #include "wx/calctrl.h"
 #include "wx/generic/calctrlg.h"
 
-#include "fmt/core.h"
+#include <fmt/core.h>
 
 #define DEBUG_PAINT 0
 

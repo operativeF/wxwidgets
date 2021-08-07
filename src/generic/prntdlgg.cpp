@@ -49,7 +49,7 @@
 #include <cstdlib>
 #include <cstring>
 
-#include "fmt/core.h"
+#include <fmt/core.h>
 
 #ifndef __WXUNIVERSAL__
 

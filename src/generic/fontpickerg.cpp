@@ -18,7 +18,7 @@
 
 #include "wx/fontdlg.h"
 
-#include "fmt/core.h"
+#include <fmt/core.h>
 
 // ============================================================================
 // implementation

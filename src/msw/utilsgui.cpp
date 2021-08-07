@@ -23,8 +23,8 @@
 #include "wx/msw/wrapwin.h"
 #include <shlwapi.h>
 
-#include "boost/nowide/convert.hpp"
-#include "boost/nowide/stackstring.hpp"
+#include <boost/nowide/convert.hpp>
+#include <boost/nowide/stackstring.hpp>
 
 // ============================================================================
 // implementation

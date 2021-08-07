@@ -30,7 +30,7 @@
 #include "wx/msw/private.h"
 #include "wx/msw/missing.h" // IDC_HAND
 
-#include "boost/nowide/convert.hpp"
+#include <boost/nowide/convert.hpp>
 
 // ----------------------------------------------------------------------------
 // private classes

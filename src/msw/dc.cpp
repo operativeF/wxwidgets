@@ -40,7 +40,7 @@
 #include "wx/msw/private/dc.h"
 #include "wx/private/textmeasure.h"
 
-#include "boost/nowide/convert.hpp"
+#include <boost/nowide/convert.hpp>
 
 #ifdef _MSC_VER
     // In the previous versions of wxWidgets, AlphaBlend() was dynamically

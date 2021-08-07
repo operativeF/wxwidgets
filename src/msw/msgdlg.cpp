@@ -33,8 +33,8 @@
 #include "wx/textbuf.h"
 #include "wx/display.h"
 
-#include "boost/nowide/convert.hpp"
-#include "boost/nowide/stackstring.hpp"
+#include <boost/nowide/convert.hpp>
+#include <boost/nowide/stackstring.hpp>
 
 // Interestingly, this symbol currently seems to be absent from Platform SDK
 // headers but it is documented at MSDN.
@@ -672,14 +672,17 @@ void wxMSWTaskDialogConfig::MSWCommonTaskDialogInit(TASKDIALOGCONFIG &tdc)
     // nothing for it to contrast with. Finally, notice that the extended
     // message we use here might be automatically extracted from the main
     // message in our ctor, see comment there.
+    boost::nowide::wstackstring stackMessage(message.c_str());
+    boost::nowide::wstackstring stackExtMessage(extendedMessage.c_str());
+
     if ( !extendedMessage.empty() )
     {
-        tdc.pszMainInstruction = boost::nowide::widen(message).c_str();
-        tdc.pszContent = boost::nowide::widen(extendedMessage).c_str();
+        tdc.pszMainInstruction = stackMessage.get();
+        tdc.pszContent = stackExtMessage.get();
     }
     else
     {
-        tdc.pszContent = boost::nowide::widen(message).c_str();
+        tdc.pszContent = stackMessage.get();
     }
 
     // set an icon to be used, if possible

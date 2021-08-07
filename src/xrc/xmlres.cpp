@@ -47,7 +47,7 @@
 #include <climits>
 #include <clocale>
 
-#include "boost/nowide/convert.hpp"
+#include <boost/nowide/convert.hpp>
 
 namespace
 {

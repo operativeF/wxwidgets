@@ -21,7 +21,7 @@
 #include "wx/tokenzr.h"
 #include "wx/html/styleparams.h"
 
-#include "boost/nowide/convert.hpp"
+#include <boost/nowide/convert.hpp>
 
 FORCE_LINK_ME(m_fonts)
 

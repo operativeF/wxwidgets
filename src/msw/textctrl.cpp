@@ -77,7 +77,7 @@
 
 #include "wx/msw/missing.h"
 
-#include "boost/nowide/convert.hpp"
+#include <boost/nowide/convert.hpp>
 
 #ifndef CFM_BACKCOLOR
     #define CFM_BACKCOLOR 0x04000000

@@ -52,7 +52,7 @@
 #include "wx/msw/uxtheme.h"
 #endif
 
-#include "boost/nowide/convert.hpp"
+#include <boost/nowide/convert.hpp>
 
 // ----------------------------------------------------------------------------
 // constants

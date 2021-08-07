@@ -27,6 +27,8 @@
 #include "wx/msw/private.h"
 #include "wx/msw/htmlhelp.h"
 
+#include <boost/nowide/stackstring.hpp>
+
 // ----------------------------------------------------------------------------
 // utility functions to manage the loading/unloading
 // of hhctrl.ocx
@@ -153,7 +155,9 @@ wxCHMHelpController::DoDisplayTextPopup(const std::string& text,
     popup.cbStruct = sizeof(popup);
     popup.hinst = (HINSTANCE) wxGetInstance();
     popup.idString = contextId;
-    popup.pszText = boost::nowide::widen(text).c_str();
+
+    boost::nowide::wstackstring stackText(text.c_str());
+    popup.pszText = stackText.get();
     popup.pt.x = pos.x;
     popup.pt.y = pos.y;
     popup.clrForeground = ::GetSysColor(COLOR_INFOTEXT);
@@ -217,7 +221,9 @@ bool wxCHMHelpController::KeywordSearch(const std::string& k,
         HH_AKLINK link;
         link.cbStruct =     sizeof(HH_AKLINK);
         link.fReserved =    FALSE;
-        link.pszKeywords =  boost::nowide::widen(k).c_str();
+
+        boost::nowide::wstackstring stackK(k.c_str());
+        link.pszKeywords =  stackK.get();
         link.pszUrl =       nullptr;
         link.pszMsgText =   nullptr;
         link.pszMsgTitle =  nullptr;

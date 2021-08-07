@@ -43,7 +43,7 @@
     #include "wx/msw/private.h" // includes windows.h
 #endif
 
-#include "fmt/core.h"
+#include <fmt/core.h>
 
 #undef wxLOG_COMPONENT
 const char *wxLOG_COMPONENT = "";

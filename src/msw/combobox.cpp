@@ -39,7 +39,7 @@
     #include "wx/tooltip.h"
 #endif // wxUSE_TOOLTIPS
 
-#include "boost/nowide/convert.hpp"
+#include <boost/nowide/convert.hpp>
 
 // ----------------------------------------------------------------------------
 // wxWin macros

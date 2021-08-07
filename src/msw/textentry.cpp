@@ -35,7 +35,7 @@
 #include "wx/msw/wrapwin.h"
 #include <shlwapi.h>
 
-#include "boost/nowide/convert.hpp"
+#include <boost/nowide/convert.hpp>
 
 #define GetEditHwnd() ((HWND)(GetEditHWND()))
 

@@ -22,7 +22,7 @@
     #include "wx/msw/missing.h"
 #endif
 
-#include "fmt/core.h"
+#include <fmt/core.h>
 
 // ----------------------------------------------------------------------------
 // Definitions

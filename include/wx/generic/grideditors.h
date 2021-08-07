@@ -15,7 +15,7 @@
 
 #if wxUSE_GRID
 
-#include "fmt/core.h"
+#include <fmt/core.h>
 
 class wxGridCellEditorEvtHandler : public wxEvtHandler
 {
