@@ -2758,7 +2758,7 @@ public:
 protected:
     void DoAcquireResource() override
     {
-        wxCOMPtr<wxHatchBitmapSource> hatchBitmapSource(new wxHatchBitmapSource(m_sourceBrush.GetStyle(), m_sourceBrush.GetColour()));
+        wxCOMPtr<wxHatchBitmapSource> hatchBitmapSource{new wxHatchBitmapSource(m_sourceBrush.GetStyle(), m_sourceBrush.GetColour())};
 
         wxCOMPtr<ID2D1Bitmap> bitmap;
 

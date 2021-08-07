@@ -1742,7 +1742,7 @@ wxDocTemplate *wxDocManager::SelectDocumentType(wxDocTemplate **templates,
 {
     std::vector<std::string> strings;
 
-    auto data = std::make_unique<wxDocTemplate*[]>(noTemplates);
+    auto data{std::make_unique<wxDocTemplate*[]>(noTemplates)};
 
     int n = 0;
 

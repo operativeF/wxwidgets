@@ -845,7 +845,7 @@ wxEnumSymbolsCallback(PSYMBOL_INFO pSymInfo, ULONG SymbolSize, PVOID UserContext
     //
     // Note that there is no +1 here because sizeof(SYMBOL_INFOW) already
     // includes 1 byte of the name.
-    auto symbolBuffer = std::make_unique<BYTE[]>(sizeof(SYMBOL_INFOW) + len*sizeof(WCHAR));
+    auto symbolBuffer{std::make_unique<BYTE[]>(sizeof(SYMBOL_INFOW) + len*sizeof(WCHAR))};
 
     SYMBOL_INFOW* const infoW = (SYMBOL_INFOW*)symbolBuffer.get();
 
