@@ -476,7 +476,7 @@ void wxDropTarget::Revoke(WXHWND hwnd)
         wxLogApiError(wxT("RevokeDragDrop"), hr);
     }
 
-    ::CoLockObjectExternal(m_pIDropTarget, FALSE, TRUE);
+    std::ignore = ::CoLockObjectExternal(m_pIDropTarget, FALSE, TRUE);
 
     MSWEndDragImageSupport();
 
@@ -619,7 +619,7 @@ void
 wxDropTarget::MSWInitDragImageSupport()
 {
     // Use the default drop target helper to show shell drag images
-    CoCreateInstance(wxCLSID_DragDropHelper, nullptr, CLSCTX_INPROC_SERVER,
+    std::ignore = CoCreateInstance(wxCLSID_DragDropHelper, nullptr, CLSCTX_INPROC_SERVER,
                      wxIID_IDropTargetHelper, (LPVOID*)&m_dropTargetHelper);
 }
 

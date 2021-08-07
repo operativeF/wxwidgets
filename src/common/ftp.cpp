@@ -64,7 +64,7 @@ wxFTP::~wxFTP()
     {
         // if we are streaming, this will issue
         // an FTP ABORT command, to tell the server we are aborting
-        (void)Abort();
+        std::ignore = Abort();
     }
 
     // now this issues a "QUIT" command to tell the server we are

@@ -254,7 +254,7 @@ wxLogGui::DoShowMultipleLogMessages(const std::vector<wxString>& messages,
     // shown some new messages may appear
     Clear();
 
-    (void)dlg.ShowModal();
+    std::ignore = dlg.ShowModal();
 #else // !wxUSE_LOG_DIALOG
     // start from the most recent message
     wxString message;

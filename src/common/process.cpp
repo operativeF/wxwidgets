@@ -140,7 +140,7 @@ bool wxProcess::IsErrorAvailable() const
 wxKillError wxProcess::Kill(int pid, wxSignal sig, int flags)
 {
     wxKillError rc;
-    (void)wxKill(pid, sig, &rc, flags);
+    std::ignore = wxKill(pid, sig, &rc, flags);
 
     return rc;
 }

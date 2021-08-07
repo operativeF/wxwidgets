@@ -3839,7 +3839,8 @@ wxAccStatus wxWindowAccessible::GetDescription(int WXUNUSED(childId), std::strin
 {
     wxCHECK( GetWindow() != nullptr, wxACC_FAIL );
 
-    (void) description;
+    // FIXME: Make this more optional.
+    std::ignore = description;
 #if wxUSE_HELP
     std::string ht(GetWindow()->GetHelpTextAtPoint(wxDefaultPosition, wxHelpEvent::Origin_Keyboard));
     if (!ht.empty())
@@ -3853,11 +3854,12 @@ wxAccStatus wxWindowAccessible::GetDescription(int WXUNUSED(childId), std::strin
 }
 
 // Returns help text for this object or a child, similar to tooltip text.
+// FIXME: Change this to be more optional.
 wxAccStatus wxWindowAccessible::GetHelpText(int WXUNUSED(childId), std::string* helpText)
 {
     wxCHECK( GetWindow() != nullptr, wxACC_FAIL );
 
-    (void) helpText;
+    std::ignore = helpText;
 #if wxUSE_HELP
     std::string ht(GetWindow()->GetHelpTextAtPoint(wxDefaultPosition, wxHelpEvent::Origin_Keyboard));
     if (!ht.empty())

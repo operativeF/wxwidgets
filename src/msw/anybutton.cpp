@@ -619,7 +619,7 @@ WXLRESULT wxAnyButton::MSWWindowProc(WXUINT nMsg, WXWPARAM wParam, WXLPARAM lPar
     {
         // emulate a click event to force an owner-drawn button to change its
         // appearance - without this, it won't do it
-        (void)wxControl::MSWWindowProc(WM_LBUTTONDOWN, wParam, lParam);
+        std::ignore = wxControl::MSWWindowProc(WM_LBUTTONDOWN, wParam, lParam);
 
         // and continue with processing the message normally as well
     }

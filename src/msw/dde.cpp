@@ -602,9 +602,9 @@ const void *wxDDEConnection::Request(const wxString& item, size_t *size, wxIPCFo
     void *data = GetBufferAtLeast(len);
     wxASSERT_MSG(data != nullptr,
                  wxT("Buffer too small in wxDDEConnection::Request") );
-    (void) DdeGetData(returned_data, (LPBYTE)data, len, 0);
+    std::ignore = DdeGetData(returned_data, (LPBYTE)data, len, 0);
 
-    (void) DdeFreeDataHandle(returned_data);
+    std::ignore = DdeFreeDataHandle(returned_data);
 
     if (size)
         *size = (size_t)len;
@@ -1070,7 +1070,7 @@ static wxString DDEStringFromAtom(HSZ hsz)
     static constexpr size_t len = 256;
 
     wxString s;
-    (void)DdeQueryString(DDEIdInst, hsz, wxStringBuffer(s, len), len, DDE_CP);
+    std::ignore = DdeQueryString(DDEIdInst, hsz, wxStringBuffer(s, len), len, DDE_CP);
 
     return s;
 }

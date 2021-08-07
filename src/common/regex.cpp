@@ -214,7 +214,7 @@ wxString wxRegExImpl::GetErrorMsg(int errorcode, bool badconv) const
     }
 #else
     // 'use' badconv to avoid a compiler warning
-    (void)badconv;
+    std::ignore = badconv;
 #endif
 
     wxString szError;
@@ -225,7 +225,7 @@ wxString wxRegExImpl::GetErrorMsg(int errorcode, bool badconv) const
     {
         char* szcmbError = new char[++len];
 
-        (void)wx_regerror(errorcode, &m_RegEx, szcmbError, len);
+        std::ignore = wx_regerror(errorcode, &m_RegEx, szcmbError, len);
 
         szError = wxConvLibc.cMB2WX(szcmbError);
         delete [] szcmbError;

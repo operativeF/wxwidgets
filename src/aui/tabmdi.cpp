@@ -64,7 +64,7 @@ wxAuiMDIParentFrame::wxAuiMDIParentFrame(wxWindow *parent,
                                          const std::string& name)
 {
     Init();
-    (void)Create(parent, id, title, pos, size, style, name);
+    Create(parent, id, title, pos, size, style, name);
 }
 
 wxAuiMDIParentFrame::~wxAuiMDIParentFrame()

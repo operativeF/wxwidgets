@@ -33,7 +33,7 @@
 
 wxFFile::wxFFile(const wxString& filename, const wxString& mode)
 {
-    (void)Open(filename, mode);
+    std::ignore = Open(filename, mode);
 }
 
 bool wxFFile::Open(const wxString& filename, const wxString& mode)
@@ -255,7 +255,7 @@ wxFileOffset wxFFile::Length() const
         {
             const wxFileOffset len = Tell();
 
-            (void)self.Seek(posOld);
+            std::ignore = self.Seek(posOld);
 
             return len;
         }

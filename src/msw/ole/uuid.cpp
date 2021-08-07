@@ -38,7 +38,7 @@ Uuid::Uuid(const Uuid& uuid)
   // force the string to be allocated by RPC
   // (we free it later with RpcStringFree)
 #ifdef _UNICODE
-  UuidToString(&m_uuid, (unsigned short **)&m_pszUuid);
+  std::ignore = UuidToString(&m_uuid, (unsigned short **)&m_pszUuid);
 #else
   UuidToString(&m_uuid, &m_pszUuid);
 #endif
@@ -55,7 +55,7 @@ Uuid& Uuid::operator=(const Uuid& uuid)
   // force the string to be allocated by RPC
   // (we free it later with RpcStringFree)
 #ifdef _UNICODE
-  UuidToString(&m_uuid, (unsigned short **)&m_pszUuid);
+  std::ignore = UuidToString(&m_uuid, (unsigned short **)&m_pszUuid);
 #else
   UuidToString(&m_uuid, &m_pszUuid);
 #endif
@@ -102,7 +102,7 @@ void Uuid::Set(const UUID &uuid)
 
   // get string representation
 #ifdef _UNICODE
-  UuidToString(&m_uuid, (unsigned short **)&m_pszUuid);
+  std::ignore = UuidToString(&m_uuid, (unsigned short **)&m_pszUuid);
 #else
   UuidToString(&m_uuid, &m_pszUuid);
 #endif
@@ -117,7 +117,7 @@ void Uuid::Create()
   UUID uuid;
 
   // can't fail
-  UuidCreate(&uuid);
+  std::ignore = UuidCreate(&uuid);
 
   Set(uuid);
 }
@@ -136,7 +136,7 @@ bool Uuid::Set(const wxChar *pc)
 
   // transform it back to string to normalize it
 #ifdef _UNICODE
-  UuidToString(&m_uuid, (unsigned short **)&m_pszUuid);
+  std::ignore = UuidToString(&m_uuid, (unsigned short **)&m_pszUuid);
 #else
   UuidToString(&m_uuid, &m_pszUuid);
 #endif

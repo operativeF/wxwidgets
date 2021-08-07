@@ -779,7 +779,7 @@ int SaveTGA(const wxImage& image, wxOutputStream *stream)
 
     // Compose and write the TGA header
     unsigned char hdr[HDR_SIZE];
-    (void) memset(&hdr, 0, HDR_SIZE);
+    std::ignore = memset(&hdr, 0, HDR_SIZE);
 
     hdr[HDR_COLORTYPE] = wxTGA_UNMAPPED;
     hdr[HDR_IMAGETYPE] = 2 /* Uncompressed truecolour */;

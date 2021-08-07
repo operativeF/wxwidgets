@@ -3604,7 +3604,7 @@ bool wxRichTextParagraphLayoutBox::SetStyle(const wxRichTextRange& range, const 
                     else
                         // lastObject is set as a side-effect of splitting. It's
                         // returned as the object before the new object.
-                        (void) newPara->SplitAt(splitPoint, & lastObject);
+                        std::ignore = newPara->SplitAt(splitPoint, & lastObject);
 
                     wxASSERT(firstObject != nullptr);
                     wxASSERT(lastObject != nullptr);
@@ -4049,7 +4049,7 @@ bool wxRichTextParagraphLayoutBox::SetProperties(const wxRichTextRange& range, c
                     else
                         // lastObject is set as a side-effect of splitting. It's
                         // returned as the object before the new object.
-                        (void) newPara->SplitAt(splitPoint, & lastObject);
+                        std::ignore = newPara->SplitAt(splitPoint, & lastObject);
 
                     wxASSERT(firstObject != nullptr);
                     wxASSERT(lastObject != nullptr);

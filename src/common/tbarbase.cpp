@@ -510,7 +510,7 @@ void wxToolBarBase::SetToolShortHelp(int toolid, const std::string& help)
     wxToolBarToolBase *tool = FindById(toolid);
     if ( tool )
     {
-        (void)tool->SetShortHelp(help);
+        std::ignore = tool->SetShortHelp(help);
     }
 }
 
@@ -519,7 +519,7 @@ void wxToolBarBase::SetToolLongHelp(int toolid, const std::string& help)
     wxToolBarToolBase *tool = FindById(toolid);
     if ( tool )
     {
-        (void)tool->SetLongHelp(help);
+        std::ignore = tool->SetLongHelp(help);
     }
 }
 

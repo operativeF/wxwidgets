@@ -801,7 +801,7 @@ wxString wxDateTime::GetWeekDayName(wxDateTime::WeekDay wday,
     tm.tm_mday += wday;
 
     // call mktime() to normalize it...
-    (void)mktime(&tm);
+    std::ignore = mktime(&tm);
 
     // ... and call strftime()
     return wxCallStrftime(flags == Name_Abbr ? wxS("%a") : wxS("%A"), &tm);

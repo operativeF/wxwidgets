@@ -55,7 +55,7 @@ public:
         if ( pidl )
         {
             LPMALLOC pMalloc;
-            SHGetMalloc(&pMalloc);
+            std::ignore = SHGetMalloc(&pMalloc);
             if ( pMalloc )
             {
                 pMalloc->Free(pidl);

@@ -409,7 +409,7 @@ wxGenericProgressDialog::Update(int value, const std::string& newmsg, bool *skip
             // NOTE: this call results in a new event loop being created
             //       and to a call to ProcessPendingEvents() (which may generate
             //       unwanted re-entrancies).
-            (void)ShowModal();
+            std::ignore = ShowModal();
         }
         else // auto hide
         {

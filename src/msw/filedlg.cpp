@@ -126,7 +126,7 @@ void RestoreExceptionPolicy()
     if (gs_changedPolicy)
     {
         gs_changedPolicy = false;
-        (void) gs_pfnSetProcessUserModeExceptionPolicy(gs_oldExceptionPolicyFlags);
+        std::ignore = gs_pfnSetProcessUserModeExceptionPolicy(gs_oldExceptionPolicyFlags);
     }
 #endif // wxUSE_DYNLIB_CLASS
 }

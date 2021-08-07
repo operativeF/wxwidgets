@@ -868,7 +868,7 @@ wxGIFErrorCode wxGIFDecoder::LoadGIF(wxInputStream& stream)
         {
             case GIF_MARKER_EXT:
                 // extension type
-                (void) stream.GetC();
+                std::ignore = stream.GetC();
 
                 // skip all data
                 while ((i = stream.GetC()) != 0)
@@ -905,7 +905,7 @@ wxGIFErrorCode wxGIFDecoder::LoadGIF(wxInputStream& stream)
                 }
 
                 // initial code size
-                (void) stream.GetC();
+                std::ignore = stream.GetC();
                 if (stream.Eof() || (stream.LastRead() == 0))
                 {
                     Destroy();

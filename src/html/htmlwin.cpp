@@ -1343,7 +1343,7 @@ void wxHtmlWindow::OnMouseDown(wxMouseEvent& event)
         {
             SelectLine(CalcUnscrolledPosition(event.GetPosition()));
 
-            (void) CopySelection();
+            std::ignore = CopySelection();
         }
         else
         {
@@ -1638,12 +1638,12 @@ void wxHtmlWindow::OnKeyUp(wxKeyEvent& event)
 
 void wxHtmlWindow::OnCopy(wxCommandEvent& WXUNUSED(event))
 {
-    (void) CopySelection();
+    std::ignore = CopySelection();
 }
 
 void wxHtmlWindow::OnClipboardEvent(wxClipboardTextEvent& WXUNUSED(event))
 {
-    (void) CopySelection();
+    std::ignore = CopySelection();
 }
 
 void wxHtmlWindow::OnDoubleClick(wxMouseEvent& event)
@@ -1653,7 +1653,7 @@ void wxHtmlWindow::OnDoubleClick(wxMouseEvent& event)
     {
         SelectWord(CalcUnscrolledPosition(event.GetPosition()));
 
-        (void) CopySelection(Primary);
+        std::ignore = CopySelection(Primary);
 
         m_lastDoubleClick = wxGetLocalTimeMillis();
     }

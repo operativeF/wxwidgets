@@ -911,7 +911,7 @@ bool wxFileConfig::DoWriteString(const wxString& key, const wxString& szValue)
 
         // this will add a line for this group if it didn't have it before (or
         // do nothing for the root but it's ok as it always exists anyhow)
-        (void)m_pCurrentGroup->GetGroupLine();
+        std::ignore = m_pCurrentGroup->GetGroupLine();
     }
     else
     {

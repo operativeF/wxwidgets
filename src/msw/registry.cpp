@@ -638,7 +638,7 @@ bool wxRegKey::Copy(const wxString& szNewName)
 
         // we created the dest key but copying to it failed - delete it
         if ( !ok ) {
-            (void)keyDst.DeleteSelf();
+            std::ignore = keyDst.DeleteSelf();
         }
     }
 

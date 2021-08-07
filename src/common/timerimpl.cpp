@@ -37,7 +37,7 @@ void wxTimerImpl::SetOwner(wxEvtHandler *owner, int timerid)
 void wxTimerImpl::SendEvent()
 {
     wxTimerEvent event(*m_timer);
-    (void)m_owner->SafelyProcessEvent(event);
+    std::ignore = m_owner->SafelyProcessEvent(event);
 }
 
 bool wxTimerImpl::Start(int milliseconds, bool oneShot)

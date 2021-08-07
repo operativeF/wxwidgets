@@ -64,7 +64,7 @@ wxFSWatcherImplMSW::~wxFSWatcherImplMSW()
     }
 
     // remove all watches
-    (void) RemoveAll();
+    std::ignore = RemoveAll();
 }
 
 bool wxFSWatcherImplMSW::Init()
@@ -263,7 +263,7 @@ bool wxIOCPThread::ReadEvents()
 
         // overflow is not a fatal error, we still want to get future events
         // reissue the watch
-        (void) m_service->SetUpWatch(*watch);
+        std::ignore = m_service->SetUpWatch(*watch);
         return true;
     }
 
@@ -299,7 +299,7 @@ bool wxIOCPThread::ReadEvents()
     ProcessNativeEvents(events);
 
     // reissue the watch. ignore possible errors, we will return true anyway
-    (void) m_service->SetUpWatch(*watch);
+    std::ignore = m_service->SetUpWatch(*watch);
 
     return true;
 }
@@ -426,7 +426,7 @@ wxFileName wxIOCPThread::GetEventPath(const wxFSWatchEntryMSW& watch,
 wxMSWFileSystemWatcher::wxMSWFileSystemWatcher() 
     
 {
-    (void) Init();
+    std::ignore = Init();
 }
 
 wxMSWFileSystemWatcher::wxMSWFileSystemWatcher(const wxFileName& path,

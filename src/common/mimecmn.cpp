@@ -697,7 +697,8 @@ void wxMimeTypesManager::Initialize(int mcapStyle,
 
     m_impl->Initialize(mcapStyle, sExtraDir);
 #else
-    (void)mcapStyle;
+    // FIXME: ??
+    std::ignore = mcapStyle;
     (void)sExtraDir;
 #endif // Unix
 }

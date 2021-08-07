@@ -1089,7 +1089,7 @@ wxThread::ExitCode wxThread::Wait(wxThreadWait waitMode)
     wxCHECK_MSG( !IsDetached(), rc,
                  wxT("wxThread::Wait(): can't wait for detached thread") );
 
-    (void)m_internal->WaitForTerminate(m_critsect, &rc, waitMode);
+    std::ignore = m_internal->WaitForTerminate(m_critsect, &rc, waitMode);
 
     return rc;
 }

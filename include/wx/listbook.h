@@ -48,7 +48,7 @@ public:
                long style = 0,
                const std::string& name = {})
     {
-        (void)Create(parent, id, pos, size, style, name);
+        Create(parent, id, pos, size, style, name);
     }
 
     wxListbook(const wxListbook&) = delete;

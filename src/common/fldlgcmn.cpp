@@ -216,7 +216,7 @@ void wxFileDialogBase::SetFilterIndexFromExt(const wxString& ext)
 
         wxArrayString descriptions, filters;
         // don't care about errors, handled already by wxFileDialog
-        (void)wxParseCommonDialogsFilter(m_wildCard, descriptions, filters);
+        std::ignore = wxParseCommonDialogsFilter(m_wildCard, descriptions, filters);
         
         for (size_t n=0; n<filters.GetCount(); n++)
         {

@@ -732,7 +732,7 @@ wxSockAddress::wxSockAddress()
     if ( wxIsMainThread() && !wxSocketBase::IsInitialized() )
     {
         // we must do it before using any socket functions
-        (void)wxSocketBase::Initialize();
+        std::ignore = wxSocketBase::Initialize();
     }
 
     m_impl = new wxSockAddressImpl();
@@ -743,7 +743,7 @@ wxSockAddress::wxSockAddress(const wxSockAddress& other)
     if ( wxIsMainThread() && !wxSocketBase::IsInitialized() )
     {
         // we must do it before using any socket functions
-        (void)wxSocketBase::Initialize();
+        std::ignore = wxSocketBase::Initialize();
     }
 
     m_impl = new wxSockAddressImpl(*other.m_impl);

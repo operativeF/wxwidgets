@@ -229,7 +229,7 @@ bool wxMSWHeaderCtrl::Create(wxWindow *parent,
     // use 0 here but this starts to look ugly)
     if ( wxApp::GetComCtl32Version() >= 600 )
     {
-        (void)Header_SetBitmapMargin(GetHwnd(), wxGetSystemMetrics(SM_CXEDGE, parent));
+        std::ignore = Header_SetBitmapMargin(GetHwnd(), wxGetSystemMetrics(SM_CXEDGE, parent));
     }
 
     return true;
@@ -438,8 +438,8 @@ void wxMSWHeaderCtrl::DoInsertItem(const wxHeaderColumn& col, unsigned int idx)
         if ( !m_imageList )
         {
             m_imageList = new wxImageList(bmpWidth, bmpHeight);
-            (void) // suppress mingw32 warning about unused computed value
-            Header_SetImageList(GetHwnd(), GetHimagelistOf(m_imageList));
+            // suppress mingw32 warning about unused computed value
+            std::ignore = Header_SetImageList(GetHwnd(), GetHimagelistOf(m_imageList));
         }
         else // already have an image list
         {

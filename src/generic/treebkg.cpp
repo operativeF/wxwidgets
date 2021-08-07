@@ -232,7 +232,7 @@ bool wxTreebook::DoInsertSubPage(size_t pagePos,
 
     if ( !newId.IsOk() )
     {
-        (void)wxBookCtrlBase::DoRemovePage(newPos);
+        std::ignore = wxBookCtrlBase::DoRemovePage(newPos);
 
         wxFAIL_MSG( wxT("Failed to insert treebook page") );
         return false;

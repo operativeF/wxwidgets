@@ -331,7 +331,7 @@ bool wxDirData::Read(wxString *filename)
 
 wxDir::wxDir(const wxString& dirname)
 {
-    (void)Open(dirname);
+    std::ignore = Open(dirname);
 }
 
 bool wxDir::Open(const wxString& dirname)

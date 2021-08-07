@@ -312,10 +312,10 @@ bool wxTIFFHandler::LoadFile( wxImage *image, wxInputStream& stream, bool verbos
     TIFFGetField( tif, TIFFTAG_IMAGELENGTH, &h );
 
     uint16 samplesPerPixel = 0;
-    (void) TIFFGetFieldDefaulted(tif, TIFFTAG_SAMPLESPERPIXEL, &samplesPerPixel);
+    std::ignore = TIFFGetFieldDefaulted(tif, TIFFTAG_SAMPLESPERPIXEL, &samplesPerPixel);
 
     uint16 bitsPerSample = 0;
-    (void) TIFFGetFieldDefaulted(tif, TIFFTAG_BITSPERSAMPLE, &bitsPerSample);
+    std::ignore = TIFFGetFieldDefaulted(tif, TIFFTAG_BITSPERSAMPLE, &bitsPerSample);
 
     uint16 extraSamples;
     uint16* samplesInfo;
@@ -381,7 +381,7 @@ bool wxTIFFHandler::LoadFile( wxImage *image, wxInputStream& stream, bool verbos
         image->SetAlpha();
 
     uint16 planarConfig = PLANARCONFIG_CONTIG;
-    (void) TIFFGetField(tif, TIFFTAG_PLANARCONFIG, &planarConfig);
+    std::ignore = TIFFGetField(tif, TIFFTAG_PLANARCONFIG, &planarConfig);
 
     bool ok = true;
     char msg[1024] = "";

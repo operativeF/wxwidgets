@@ -1036,7 +1036,7 @@ void wxActiveXContainer::CreateActiveX(REFIID iid, IUnknown* pUnk)
 //    hret = m_viewObject->SetAdvise(DVASPECT_CONTENT, 0, adviseSink);
     m_oleObject->SetHostNames(L"wxActiveXContainer", nullptr);
     OleSetContainedObject(m_oleObject, TRUE);
-    OleRun(m_oleObject);
+    std::ignore = OleRun(m_oleObject);
 
 
     // Get IOleInPlaceObject interface

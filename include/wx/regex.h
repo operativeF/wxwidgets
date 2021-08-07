@@ -83,7 +83,7 @@ public:
         
     m_impl = nullptr;
 
-        (void)Compile(expr, flags);
+        std::ignore = Compile(expr, flags);
     }
 
     // return true if this is a valid compiled regular expression

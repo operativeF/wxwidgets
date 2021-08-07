@@ -475,7 +475,7 @@ bool wxGetEnv(const wxString& var,
 
     if ( value )
     {
-        (void)::GetEnvironmentVariable(var.t_str(),
+        std::ignore = ::GetEnvironmentVariable(var.t_str(),
                                        wxStringBuffer(*value, dwRet),
                                        dwRet);
     }
@@ -549,7 +549,7 @@ struct wxFindByPidParams
 BOOL CALLBACK wxEnumFindByPidProc(HWND hwnd, LPARAM lParam)
 {
     DWORD pid;
-    (void)::GetWindowThreadProcessId(hwnd, &pid);
+    std::ignore = ::GetWindowThreadProcessId(hwnd, &pid);
 
     wxFindByPidParams *params = (wxFindByPidParams *)lParam;
     if ( pid == params->pid )

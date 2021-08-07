@@ -335,7 +335,7 @@ wxPNGImageData::DoLoadPNGFile(wxImage* image, wxPNGInfoStruct& wxinfo)
         png_colorp palette = nullptr;
         int numPalette = 0;
 
-        (void) png_get_PLTE(png_ptr, info_ptr, &palette, &numPalette);
+        std::ignore = png_get_PLTE(png_ptr, info_ptr, &palette, &numPalette);
 
         unsigned char* r = new unsigned char[numPalette];
         unsigned char* g = new unsigned char[numPalette];

@@ -311,7 +311,7 @@ void wxFrameBase::OnMenuHighlight(wxMenuEvent& event)
 {
     event.Skip();
 
-    (void)ShowMenuHelp(event.GetMenuId());
+    std::ignore = ShowMenuHelp(event.GetMenuId());
 }
 
 void wxFrameBase::OnMenuClose(wxMenuEvent& event)

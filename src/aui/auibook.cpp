@@ -3658,7 +3658,7 @@ int wxAuiNotebook::DoModifySelection(size_t n, bool events)
             if(events)
             {
                 evt.SetEventType(wxEVT_AUINOTEBOOK_PAGE_CHANGED);
-                (void)GetEventHandler()->ProcessEvent(evt);
+                std::ignore = GetEventHandler()->ProcessEvent(evt);
             }
 
             return old_curpage;

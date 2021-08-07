@@ -578,7 +578,7 @@ bool wxWizard::ShowPage(wxWizardPage *page, bool goingForward)
     m_page = page;
 
     // position and show the new page
-    (void)m_page->TransferDataToWindow();
+    std::ignore = m_page->TransferDataToWindow();
 
     if ( m_usingSizer )
     {
@@ -807,7 +807,7 @@ void wxWizard::OnBackOrNext(wxCommandEvent& event)
     }
 
     // just pass to the new page (or maybe not - but we don't care here)
-    (void)ShowPage(page, forward);
+    std::ignore = ShowPage(page, forward);
 }
 
 void wxWizard::OnHelp(wxCommandEvent& WXUNUSED(event))

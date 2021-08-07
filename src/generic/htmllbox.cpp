@@ -225,7 +225,7 @@ wxHtmlListBox::wxHtmlListBox(wxWindow *parent,
       m_htmlRendStyle(new wxHtmlListBoxStyle(*this)),
       m_cache(new wxHtmlListBoxCache)
 {
-    (void)Create(parent, id, pos, size, style, name);
+    Create(parent, id, pos, size, style, name);
 }
 
 bool wxHtmlListBox::Create(wxWindow *parent,

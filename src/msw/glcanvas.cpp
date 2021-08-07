@@ -656,7 +656,7 @@ wxGLCanvas::wxGLCanvas(wxWindow *parent,
                        const std::string& name,
                        const wxPalette& palette)
 {
-    (void)Create(parent, dispAttrs, id, pos, size, style, name, palette);
+    Create(parent, dispAttrs, id, pos, size, style, name, palette);
 }
 
 wxGLCanvas::wxGLCanvas(wxWindow *parent,
@@ -668,7 +668,7 @@ wxGLCanvas::wxGLCanvas(wxWindow *parent,
                        const std::string& name,
                        const wxPalette& palette)
 {
-    (void)Create(parent, id, pos, size, style, name, attribList, palette);
+    Create(parent, id, pos, size, style, name, attribList, palette);
 }
 
 wxGLCanvas::~wxGLCanvas()

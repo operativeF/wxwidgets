@@ -869,7 +869,7 @@ void wxSymbolListCtrl::SendSelectedEvent()
     event.SetEventObject(this);
     event.SetInt(m_current);
 
-    (void)GetEventHandler()->ProcessEvent(event);
+    std::ignore = GetEventHandler()->ProcessEvent(event);
 }
 
 void wxSymbolListCtrl::SetSelection(int selection)
@@ -1187,7 +1187,7 @@ void wxSymbolListCtrl::OnLeftDClick(wxMouseEvent& eventMouse)
             event.SetEventObject(this);
             event.SetInt(item);
 
-            (void)GetEventHandler()->ProcessEvent(event);
+            std::ignore = GetEventHandler()->ProcessEvent(event);
         }
         else
         {

@@ -41,7 +41,7 @@ public:
 
     virtual ~wxFSWatcherImpl()
     {
-        (void) RemoveAll();
+        std::ignore = RemoveAll();
     }
 
     virtual bool Init() = 0;

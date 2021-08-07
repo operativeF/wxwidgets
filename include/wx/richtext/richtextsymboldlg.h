@@ -202,14 +202,14 @@ public:
     {
         Init();
 
-        (void)Create(parent, id, pos, size, style, name);
+        Create(parent, id, pos, size, style, name);
     }
 
     // really creates the control and sets the initial number of items in it
     // (which may be changed later with SetItemCount())
     //
     // returns true on success or false if the control couldn't be created
-    bool Create(wxWindow *parent,
+    [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id = wxID_ANY,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
