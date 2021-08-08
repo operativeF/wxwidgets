@@ -483,7 +483,6 @@ set(BASE_AND_GUI_CMN_SRC
 )
 
 set(BASE_CMN_HDR
-    wx/afterstd.h
     wx/any.h
     wx/anystr.h
     wx/app.h
@@ -493,7 +492,6 @@ set(BASE_CMN_HDR
     wx/arrstr.h
     wx/atomic.h
     wx/base64.h
-    wx/beforestd.h
     wx/buffer.h
     wx/build.h
     wx/chartype.h
