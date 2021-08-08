@@ -38,13 +38,6 @@ wxBEGIN_EVENT_TABLE(wxSplashScreen, wxFrame)
     EVT_CLOSE(wxSplashScreen::OnCloseWindow)
 wxEND_EVENT_TABLE()
 
-void wxSplashScreen::Init()
-{
-    m_window = nullptr;
-
-    wxEvtHandler::AddFilter(this);
-}
-
 /* Note that unless we pass a non-default size to the frame, SetClientSize
  * won't work properly under Windows, and the splash screen frame is sized
  * slightly too small.
@@ -59,7 +52,7 @@ wxSplashScreen::wxSplashScreen(const wxBitmap& bitmap, long splashStyle, int mil
       m_milliseconds(milliseconds),
       m_window(new wxSplashScreenWindow(bitmap, this, wxID_ANY, pos, size, wxNO_BORDER))
 {
-    Init();
+    wxEvtHandler::AddFilter(this);
 
     // splash screen must not be used as parent by the other windows because it
     // is going to disappear soon, indicate it by giving it this special style

@@ -966,8 +966,8 @@ protected:
 
     // parameters describing whether the growable cells should be resized in
     // both directions or only one
-    int m_flexDirection;
-    wxFlexSizerGrowMode m_growMode;
+    int m_flexDirection{wxBOTH};
+    wxFlexSizerGrowMode m_growMode{wxFlexSizerGrowMode::Specified};
 
 private:
     wxDECLARE_CLASS(wxFlexGridSizer);

@@ -56,14 +56,6 @@ bool wxSashWindow::Create(wxWindow *parent,
     return wxWindow::Create(parent, id, pos, size, style, name);
 }
 
-wxSashWindow::~wxSashWindow()
-{
-    delete m_sashCursorWE;
-    delete m_sashCursorNS;
-}
-
-
-
 void wxSashWindow::OnPaint(wxPaintEvent& WXUNUSED(event))
 {
     wxPaintDC dc(this);
@@ -109,19 +101,19 @@ void wxSashWindow::OnMouseEvent(wxMouseEvent& event)
 
             if ( (sashHit == wxSASH_LEFT) || (sashHit == wxSASH_RIGHT) )
             {
-                if (m_currentCursor != m_sashCursorWE)
+                if (m_currentCursor != m_sashCursorWE.get())
                 {
                     SetCursor(*m_sashCursorWE);
                 }
-                m_currentCursor = m_sashCursorWE;
+                m_currentCursor = m_sashCursorWE.get();
             }
             else
             {
-                if (m_currentCursor != m_sashCursorNS)
+                if (m_currentCursor != m_sashCursorNS.get())
                 {
                     SetCursor(*m_sashCursorNS);
                 }
-                m_currentCursor = m_sashCursorNS;
+                m_currentCursor = m_sashCursorNS.get();
             }
         }
     }
@@ -273,19 +265,19 @@ void wxSashWindow::OnMouseEvent(wxMouseEvent& event)
         {
             if ( (sashHit == wxSASH_LEFT) || (sashHit == wxSASH_RIGHT) )
             {
-                if (m_currentCursor != m_sashCursorWE)
+                if (m_currentCursor != m_sashCursorWE.get())
                 {
                     SetCursor(*m_sashCursorWE);
                 }
-                m_currentCursor = m_sashCursorWE;
+                m_currentCursor = m_sashCursorWE.get();
             }
             else
             {
-                if (m_currentCursor != m_sashCursorNS)
+                if (m_currentCursor != m_sashCursorNS.get())
                 {
                     SetCursor(*m_sashCursorNS);
                 }
-                m_currentCursor = m_sashCursorNS;
+                m_currentCursor = m_sashCursorNS.get();
             }
         }
         else
@@ -300,19 +292,19 @@ void wxSashWindow::OnMouseEvent(wxMouseEvent& event)
     {
         if ( (m_draggingEdge == wxSASH_LEFT) || (m_draggingEdge == wxSASH_RIGHT) )
         {
-            if (m_currentCursor != m_sashCursorWE)
+            if (m_currentCursor != m_sashCursorWE.get())
             {
                 SetCursor(*m_sashCursorWE);
             }
-            m_currentCursor = m_sashCursorWE;
+            m_currentCursor = m_sashCursorWE.get();
         }
         else
         {
-            if (m_currentCursor != m_sashCursorNS)
+            if (m_currentCursor != m_sashCursorNS.get())
             {
                 SetCursor(*m_sashCursorNS);
             }
-            m_currentCursor = m_sashCursorNS;
+            m_currentCursor = m_sashCursorNS.get();
         }
 
         if (m_dragMode == wxSASH_DRAG_LEFT_DOWN)

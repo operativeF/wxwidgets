@@ -283,7 +283,7 @@ protected:
 class WXDLLIMPEXP_CORE wxSpinCtrl : public wxSpinCtrlGenericBase
 {
 public:
-    wxSpinCtrl() { Init(); }
+    wxSpinCtrl() = default;
     wxSpinCtrl(wxWindow *parent,
                wxWindowID id = wxID_ANY,
                const std::string& value = {},
@@ -293,8 +293,6 @@ public:
                int min = 0, int max = 100, int initial = 0,
                const std::string& name = wxT("wxSpinCtrl"))
     {
-        Init();
-
         Create(parent, id, value, pos, size, style, min, max, initial, name);
     }
 
@@ -333,13 +331,7 @@ protected:
     void ResetTextValidator() override;
 
 private:
-    // Common part of all ctors.
-    void Init()
-    {
-        m_base = 10;
-    }
-
-    int m_base;
+    int m_base{10};
 
     wxDECLARE_DYNAMIC_CLASS(wxSpinCtrl);
 };

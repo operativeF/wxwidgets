@@ -63,7 +63,7 @@ private:
     wxMSGArray m_arrMSG;
 
     // critical window or NULL
-    static wxWindowMSW *ms_winCritical;
+    inline static wxWindowMSW* ms_winCritical{nullptr};
 };
 
 #endif // _WX_MSW_EVTLOOP_H_

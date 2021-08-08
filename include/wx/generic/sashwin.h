@@ -63,8 +63,6 @@ class WXDLLIMPEXP_CORE wxSashWindow: public wxWindow
 public:
     // Default constructor
     wxSashWindow()
-        : m_sashCursorWE(new wxCursor(wxCURSOR_SIZEWE)),
-          m_sashCursorNS( new wxCursor(wxCURSOR_SIZENS))
     {
         // Eventually, we'll respond to colour change messages
         InitColours();
@@ -77,8 +75,6 @@ public:
                  const wxSize& size = wxDefaultSize,
                  long style = wxSW_3D|wxCLIP_CHILDREN,
                  const std::string& name = "sashWindow")
-        : m_sashCursorWE(new wxCursor(wxCURSOR_SIZEWE)),
-          m_sashCursorNS( new wxCursor(wxCURSOR_SIZENS))
     {
         // Eventually, we'll respond to colour change messages
         InitColours();
@@ -172,8 +168,8 @@ private:
     wxColour    m_hilightColour;
     wxColour    m_faceColour;
 
-    wxCursor*   m_sashCursorWE{nullptr};
-    wxCursor*   m_sashCursorNS{nullptr};
+    std::unique_ptr<wxCursor>   m_sashCursorWE{std::make_unique<wxCursor>(wxCURSOR_SIZEWE)};
+    std::unique_ptr<wxCursor>   m_sashCursorNS{std::make_unique<wxCursor>(wxCURSOR_SIZEWE)};
     wxCursor*   m_currentCursor{nullptr};
 
     wxSashEdgePosition m_draggingEdge{wxSASH_NONE};

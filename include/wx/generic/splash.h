@@ -38,7 +38,7 @@ class WXDLLIMPEXP_CORE wxSplashScreen: public wxFrame,
 {
 public:
     // for RTTI macros only
-    wxSplashScreen() { Init(); }
+    wxSplashScreen() { wxEvtHandler::AddFilter(this); }
     wxSplashScreen(const wxBitmap& bitmap, long splashStyle, int milliseconds,
                    wxWindow* parent, wxWindowID id,
                    const wxPoint& pos = wxDefaultPosition,
@@ -64,9 +64,9 @@ protected:
     // Common part of all ctors.
     void Init();
 
-    wxSplashScreenWindow*   m_window;
-    long                    m_splashStyle;
-    int                     m_milliseconds;
+    wxSplashScreenWindow*   m_window{nullptr};
+    long                    m_splashStyle{wxSPLASH_NO_TIMEOUT}; // TODO: Correct default style?
+    int                     m_milliseconds{0};
     wxTimer                 m_timer;
 
     wxDECLARE_DYNAMIC_CLASS(wxSplashScreen);

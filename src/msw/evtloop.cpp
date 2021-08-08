@@ -38,8 +38,6 @@
 // GUI wxEventLoop implementation
 // ============================================================================
 
-wxWindowMSW *wxGUIEventLoop::ms_winCritical = nullptr;
-
 bool wxGUIEventLoop::IsChildOfCriticalWindow(wxWindowMSW *win)
 {
     while ( win )
