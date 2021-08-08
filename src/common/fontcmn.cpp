@@ -1081,10 +1081,9 @@ bool wxNativeFontInfo::FromUserString(const wxString& s)
     // ToUserString() will quote the facename if it contains spaces, commas
     // or semicolons: we must be able to understand that quoted text is
     // a single token:
-    wxString toparse(s);
 
     // parse a more or less free form string
-    wxStringTokenizer tokenizer(toparse, wxT(";, "), wxTOKEN_STRTOK);
+    wxStringTokenizer tokenizer(s, wxT(";, "), wxTOKEN_STRTOK);
 
     wxString face;
     unsigned long size;

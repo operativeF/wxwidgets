@@ -161,11 +161,9 @@ static bool MapUnshifted(char& ch)
     return true;
 }
 
-bool wxUIActionSimulator::Text(const std::string& s)
+bool wxUIActionSimulator::Text(const std::string& str)
 {
-    std::string tmp{s};
-
-    for( auto& ch : tmp )
+    for( auto ch : str )
     {
         int modifiers{0};
 

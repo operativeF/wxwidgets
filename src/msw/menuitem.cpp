@@ -592,14 +592,12 @@ void wxMenuItem::Check(bool check)
 
 void wxMenuItem::SetItemLabel(const std::string& txt)
 {
-    std::string text = txt;
-
     // don't do anything if label didn't change
     if ( m_text == txt )
         return;
 
     // wxMenuItemBase will do stock ID checks
-    wxMenuItemBase::SetItemLabel(text);
+    wxMenuItemBase::SetItemLabel(txt);
 
     // the item can be not attached to any menu yet and SetItemLabel() is still
     // valid to call in this case and should do nothing else

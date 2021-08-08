@@ -359,13 +359,12 @@ void wxURL::SetDefaultProxy(const std::string& url_proxy)
     }
     else
     {
-        std::string tmp_str = url_proxy;
-        int pos = tmp_str.find(':');
+        int pos = url_proxy.find(':');
         if (pos == std::string::npos)
             return;
 
-        std::string hostname = tmp_str.substr(0, pos),
-        port = tmp_str.substr(pos+1, tmp_str.length() - pos);
+        std::string hostname = url_proxy.substr(0, pos),
+        port = url_proxy.substr(pos+1, url_proxy.length() - pos);
         wxIPV4address addr;
 
         if (!addr.Hostname(hostname))
@@ -398,14 +397,13 @@ void wxURL::SetProxy(const std::string& url_proxy)
     {
         wxIPV4address addr;
 
-        std::string tmp_str = url_proxy;
-        int pos = tmp_str.find(':');
+        int pos = url_proxy.find(':');
         // This is an invalid proxy name.
         if (pos == std::string::npos)
             return;
 
-        std::string hostname = tmp_str.substr(0, pos);
-        std::string port = tmp_str.substr(pos+1, tmp_str.length()-pos);
+        std::string hostname = url_proxy.substr(0, pos);
+        std::string port = url_proxy.substr(pos+1, url_proxy.length()-pos);
 
         addr.Hostname(hostname);
         addr.Service(port);

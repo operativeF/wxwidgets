@@ -535,7 +535,7 @@ bool wxRegConfig::HasGroup(const wxString& key) const
 {
     wxConfigPathChanger path(this, key);
 
-    wxString strName(path.Name());
+    const auto& strName{path.Name()};
 
     return (m_keyLocal.Exists() && LocalKey().HasSubKey(strName)) ||
            m_keyGlobal.HasSubKey(strName);
@@ -545,7 +545,7 @@ bool wxRegConfig::HasEntry(const wxString& key) const
 {
     wxConfigPathChanger path(this, key);
 
-    wxString strName(path.Name());
+    const auto& strName{path.Name()};
 
     return (m_keyLocal.Exists() && LocalKey().HasValue(strName)) ||
            m_keyGlobal.HasValue(strName);

@@ -353,9 +353,7 @@ struct ForceUpperFunctor
 void wxTextEntryBase::ConvertToUpperCase()
 {
     std::string valueOld = GetValue();
-    std::string valueNew{valueOld};
-
-    wx::utils::ToUpper(valueNew);
+    std::string valueNew{wx::utils::ToUpperCopy(valueOld)};
 
     if ( valueNew != valueOld )
     {
