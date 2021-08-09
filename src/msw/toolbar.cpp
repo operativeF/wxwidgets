@@ -275,7 +275,7 @@ static RECT wxGetTBItemRect(HWND hwnd, int index, int id = wxID_NONE)
 
     // note that we use TB_GETITEMRECT and not TB_GETRECT because the latter
     // only appeared in v4.70 of comctl32.dll
-    if ( !::SendMessage(hwnd, TB_GETITEMRECT, index, (LPARAM)&r) )
+    if ( !::SendMessageW(hwnd, TB_GETITEMRECT, index, (LPARAM)&r) )
     {
         // This call can return false status even when there is no real error,
         // e.g. for a hidden button, so check for this to avoid spurious logs.
@@ -286,7 +286,7 @@ static RECT wxGetTBItemRect(HWND hwnd, int index, int id = wxID_NONE)
 
             if ( id != wxID_NONE )
             {
-                const LRESULT state = ::SendMessage(hwnd, TB_GETSTATE, id, 0);
+                const LRESULT state = ::SendMessageW(hwnd, TB_GETSTATE, id, 0);
                 if ( state != -1 && (state & TBSTATE_HIDDEN) )
                 {
                     // There is no real error to report after all.
@@ -387,11 +387,11 @@ bool wxToolBar::Create(wxWindow *parent,
 
 void wxToolBar::MSWSetPadding(WXWORD padding)
 {
-    DWORD curPadding = ::SendMessage(GetHwnd(), TB_GETPADDING, 0, 0);
+    const auto curPadding = ::SendMessageW(GetHwnd(), TB_GETPADDING, 0, 0);
     // Preserve orthogonal padding
     DWORD newPadding = IsVertical() ? MAKELPARAM(LOWORD(curPadding), padding)
                                     : MAKELPARAM(padding, HIWORD(curPadding));
-    ::SendMessage(GetHwnd(), TB_SETPADDING, 0, newPadding);
+    ::SendMessageW(GetHwnd(), TB_SETPADDING, 0, newPadding);
 }
 
 bool wxToolBar::MSWCreateToolbar(const wxPoint& pos, const wxSize& size)
@@ -400,17 +400,17 @@ bool wxToolBar::MSWCreateToolbar(const wxPoint& pos, const wxSize& size)
         return false;
 
     // toolbar-specific post initialisation
-    ::SendMessage(GetHwnd(), TB_BUTTONSTRUCTSIZE, sizeof(TBBUTTON), 0);
+    ::SendMessageW(GetHwnd(), TB_BUTTONSTRUCTSIZE, sizeof(TBBUTTON), 0);
 
 #ifdef TB_SETEXTENDEDSTYLE
-    ::SendMessage(GetHwnd(), TB_SETEXTENDEDSTYLE, 0, TBSTYLE_EX_DRAWDDARROWS);
+    ::SendMessageW(GetHwnd(), TB_SETEXTENDEDSTYLE, 0, TBSTYLE_EX_DRAWDDARROWS);
 #endif
 
     // Retrieve or apply/restore tool packing value.
     if ( m_toolPacking <= 0 )
     {
         // Retrieve packing value if it hasn't been yet set with SetToolPacking.
-        DWORD padding = ::SendMessage(GetHwnd(), TB_GETPADDING, 0, 0);
+        const auto padding = ::SendMessageW(GetHwnd(), TB_GETPADDING, 0, 0);
         m_toolPacking = IsVertical() ? HIWORD(padding) : LOWORD(padding);
     }
     else
@@ -424,12 +424,12 @@ bool wxToolBar::MSWCreateToolbar(const wxPoint& pos, const wxSize& size)
     // (officially in order to allow using the same string as the menu item and
     // a toolbar item tip), but we don't want this, so force TTS_NOPREFIX to be
     // on to preserve all ampersands.
-    HWND hwndTTip = (HWND)::SendMessage(GetHwnd(), TB_GETTOOLTIPS, 0, 0);
+    HWND hwndTTip = (HWND)::SendMessageW(GetHwnd(), TB_GETTOOLTIPS, 0, 0);
     if ( hwndTTip )
     {
-        long styleTTip = ::GetWindowLong(hwndTTip, GWL_STYLE);
+        long styleTTip = ::GetWindowLongW(hwndTTip, GWL_STYLE);
         styleTTip |= TTS_NOPREFIX;
-        ::SetWindowLong(hwndTTip, GWL_STYLE, styleTTip);
+        ::SetWindowLongW(hwndTTip, GWL_STYLE, styleTTip);
     }
 #endif // wxUSE_TOOLTIPS
 
@@ -702,13 +702,13 @@ bool wxToolBar::DoDeleteTool(size_t pos, wxToolBarToolBase *tool)
     // get the size of the button we're going to delete
     const RECT r = wxGetTBItemRect(GetHwnd(), pos);
 
-    int delta = IsVertical() ? r.bottom - r.top : r.right - r.left;
+    const auto delta = IsVertical() ? r.bottom - r.top : r.right - r.left;
 
     m_totalFixedSize -= delta;
 
     // do delete the button
     m_nButtons--;
-    if ( !::SendMessage(GetHwnd(), TB_DELETEBUTTON, pos, 0) )
+    if ( !::SendMessageW(GetHwnd(), TB_DELETEBUTTON, pos, 0) )
     {
         wxLogLastError(wxT("TB_DELETEBUTTON"));
 
@@ -802,7 +802,7 @@ bool wxToolBar::Realize()
     // delete all old buttons, if any
     for ( size_t pos = 0; pos < m_nButtons; pos++ )
     {
-        if ( !::SendMessage(GetHwnd(), TB_DELETEBUTTON, 0, 0) )
+        if ( !::SendMessageW(GetHwnd(), TB_DELETEBUTTON, 0, 0) )
         {
             wxLogDebug(wxT("TB_DELETEBUTTON failed"));
         }
@@ -902,8 +902,8 @@ bool wxToolBar::Realize()
 
                 if ( bmp.IsOk() )
                 {
-                    int xOffset = wxMax(0, (m_defaultWidth - w)/2);
-                    int yOffset = wxMax(0, (m_defaultHeight - h)/2);
+                    const int xOffset = wxMax(0, (m_defaultWidth - w)/2);
+                    const int yOffset = wxMax(0, (m_defaultHeight - h)/2);
 
 #if wxUSE_IMAGE
                     // If a mix of icons with alpha and without is used,
@@ -1018,7 +1018,7 @@ bool wxToolBar::Realize()
             replaceBitmap.nIDOld = (UINT_PTR)oldToolBarBitmap;
             replaceBitmap.nIDNew = (UINT_PTR)hBitmap;
             replaceBitmap.nButtons = nButtons;
-            if ( !::SendMessage(GetHwnd(), TB_REPLACEBITMAP,
+            if ( !::SendMessageW(GetHwnd(), TB_REPLACEBITMAP,
                                 0, (LPARAM) &replaceBitmap) )
             {
                 wxFAIL_MSG(wxT("Could not replace the old bitmap"));
@@ -1043,7 +1043,7 @@ bool wxToolBar::Realize()
             TBADDBITMAP tbAddBitmap;
             tbAddBitmap.hInst = nullptr;
             tbAddBitmap.nID = (UINT_PTR)hBitmap;
-            if ( ::SendMessage(GetHwnd(), TB_ADDBITMAP,
+            if ( ::SendMessageW(GetHwnd(), TB_ADDBITMAP,
                                (WPARAM) nButtons, (LPARAM)&tbAddBitmap) == -1 )
             {
                 wxFAIL_MSG(wxT("Could not add bitmap to toolbar"));
@@ -1057,7 +1057,7 @@ bool wxToolBar::Realize()
         // notice that we set the image list even if don't have one right
         // now as we could have it before and need to reset it in this case
         HIMAGELIST oldImageList = (HIMAGELIST)
-          ::SendMessage(GetHwnd(), TB_SETDISABLEDIMAGELIST, 0, (LPARAM)hil);
+          ::SendMessageW(GetHwnd(), TB_SETDISABLEDIMAGELIST, 0, (LPARAM)hil);
 
         // delete previous image list if any
         if ( oldImageList )
@@ -1219,7 +1219,7 @@ bool wxToolBar::Realize()
         i++;
     }
 
-    if ( !::SendMessage(GetHwnd(), TB_ADDBUTTONS, i, (LPARAM)buttons.get()) )
+    if ( !::SendMessageW(GetHwnd(), TB_ADDBUTTONS, i, (LPARAM)buttons.get()) )
     {
         wxLogLastError(wxT("TB_ADDBUTTONS"));
     }
@@ -1432,7 +1432,7 @@ void wxToolBar::UpdateStretchableSpacersSize()
                 WinStruct<TBBUTTONINFO> tbbi;
                 tbbi.dwMask = TBIF_BYINDEX | TBIF_SIZE;
                 tbbi.cx = newSize;
-                if ( !::SendMessage(GetHwnd(), TB_SETBUTTONINFO,
+                if ( !::SendMessageW(GetHwnd(), TB_SETBUTTONINFO,
                                     toolIndex, (LPARAM)&tbbi) )
                 {
                     wxLogLastError(wxT("TB_SETBUTTONINFO (separator)"));
@@ -1440,7 +1440,7 @@ void wxToolBar::UpdateStretchableSpacersSize()
             }
             else // Vertical case, use the workaround.
             {
-                if ( !::SendMessage(GetHwnd(), TB_DELETEBUTTON, toolIndex, 0) )
+                if ( !::SendMessageW(GetHwnd(), TB_DELETEBUTTON, toolIndex, 0) )
                 {
                     wxLogLastError(wxT("TB_DELETEBUTTON (separator)"));
                 }
@@ -1453,7 +1453,7 @@ void wxToolBar::UpdateStretchableSpacersSize()
                     button.iBitmap = newSize; // set separator height
                     button.fsState = TBSTATE_ENABLED | TBSTATE_WRAP;
                     button.fsStyle = TBSTYLE_SEP;
-                    if ( !::SendMessage(GetHwnd(), TB_INSERTBUTTON,
+                    if ( !::SendMessageW(GetHwnd(), TB_INSERTBUTTON,
                                         toolIndex, (LPARAM)&button) )
                     {
                         wxLogLastError(wxT("TB_INSERTBUTTON (separator)"));
@@ -1488,7 +1488,7 @@ bool wxToolBar::MSWCommand(WXUINT WXUNUSED(cmd), WXWORD id_)
 
     bool toggled = false; // just to suppress warnings
 
-    LRESULT state = ::SendMessage(GetHwnd(), TB_GETSTATE, id, 0);
+    LRESULT state = ::SendMessageW(GetHwnd(), TB_GETSTATE, id, 0);
 
     if ( tool->CanBeToggled() )
     {
@@ -1515,7 +1515,7 @@ bool wxToolBar::MSWCommand(WXUINT WXUNUSED(cmd), WXWORD id_)
     // provides the user with useful visual clue that the app is busy reacting
     // to the event. So we manually put the tool into pressed state, handle the
     // event and then finally restore tool's original state.
-    ::SendMessage(GetHwnd(), TB_SETSTATE, id, MAKELONG(state | TBSTATE_PRESSED, 0));
+    ::SendMessageW(GetHwnd(), TB_SETSTATE, id, MAKELONG(state | TBSTATE_PRESSED, 0));
     Update();
 
     // Before calling the event handler, store a pointer to this toolbar in the
@@ -1556,7 +1556,7 @@ bool wxToolBar::MSWCommand(WXUINT WXUNUSED(cmd), WXWORD id_)
         state |= TBSTATE_CHECKED;
     else
         state &= ~TBSTATE_CHECKED;
-    ::SendMessage(GetHwnd(), TB_SETSTATE, id, MAKELONG(state, 0));
+    ::SendMessageW(GetHwnd(), TB_SETSTATE, id, MAKELONG(state, 0));
 
     // OnLeftClick() can veto the button state change - for buttons which
     // may be toggled only, of course.
@@ -1565,7 +1565,7 @@ bool wxToolBar::MSWCommand(WXUINT WXUNUSED(cmd), WXWORD id_)
         // revert back
         tool->Toggle(!toggled);
 
-        ::SendMessage(GetHwnd(), TB_CHECKBUTTON, id,
+        ::SendMessageW(GetHwnd(), TB_CHECKBUTTON, id,
                       MAKELONG(MSWShouldBeChecked(tool), 0));
     }
 
@@ -1615,7 +1615,7 @@ bool wxToolBar::MSWOnNotify(int WXUNUSED(idCtrl),
         if ( (code != (UINT) TTN_NEEDTEXTA) && (code != (UINT) TTN_NEEDTEXTW) )
             return false;
 
-        HWND toolTipWnd = (HWND)::SendMessage(GetHwnd(), TB_GETTOOLTIPS, 0, 0);
+        HWND toolTipWnd = (HWND)::SendMessageW(GetHwnd(), TB_GETTOOLTIPS, 0, 0);
         if ( toolTipWnd != hdr->hwndFrom )
             return false;
 
@@ -1641,7 +1641,7 @@ void wxToolBar::SetToolBitmapSize(const wxSize& size)
 {
     wxToolBarBase::SetToolBitmapSize(size);
 
-    ::SendMessage(GetHwnd(), TB_SETBITMAPSIZE, 0, MAKELONG(size.x, size.y));
+    ::SendMessageW(GetHwnd(), TB_SETBITMAPSIZE, 0, MAKELONG(size.x, size.y));
 }
 
 void wxToolBar::SetRows(int nRows)
@@ -1655,7 +1655,7 @@ void wxToolBar::SetRows(int nRows)
     // TRUE in wParam means to create at least as many rows, FALSE -
     // at most as many
     RECT rect;
-    ::SendMessage(GetHwnd(), TB_SETROWS,
+    ::SendMessageW(GetHwnd(), TB_SETROWS,
                   MAKEWPARAM(nRows, !(GetWindowStyle() & wxTB_VERTICAL)),
                   (LPARAM) &rect);
 
@@ -1684,7 +1684,7 @@ void wxToolBar::SetRows(int nRows)
         wxToolBarTool * const tool = (wxToolBarTool*)node->GetData();
         if ( tool->IsStretchableSpace() )
         {
-            if ( !::SendMessage(GetHwnd(), TB_SETSTATE,
+            if ( !::SendMessageW(GetHwnd(), TB_SETSTATE,
                                 tool->GetId(), MAKELONG(state, 0)) )
             {
                 wxLogLastError(wxT("TB_SETSTATE (stretchable spacer)"));
@@ -1698,7 +1698,7 @@ void wxToolBar::SetRows(int nRows)
 // The button size is bigger than the bitmap size
 wxSize wxToolBar::GetToolSize() const
 {
-    DWORD dw = ::SendMessage(GetHwnd(), TB_GETBUTTONSIZE, 0, 0);
+    const auto dw = ::SendMessageW(GetHwnd(), TB_GETBUTTONSIZE, 0, 0);
 
     return wxSize(LOWORD(dw), HIWORD(dw));
 }
@@ -1708,7 +1708,7 @@ wxToolBarToolBase *wxToolBar::FindToolForPosition(wxCoord x, wxCoord y) const
     POINT pt;
     pt.x = x;
     pt.y = y;
-    int index = (int)::SendMessage(GetHwnd(), TB_HITTEST, 0, (LPARAM)&pt);
+    int index = (int)::SendMessageW(GetHwnd(), TB_HITTEST, 0, (LPARAM)&pt);
 
     // MBN: when the point ( x, y ) is close to the toolbar border
     //      TB_HITTEST returns m_nButtons ( not -1 )
@@ -1744,7 +1744,7 @@ void wxToolBar::UpdateSize()
 // get the TBSTYLE of the given toolbar window
 long wxToolBar::GetMSWToolbarStyle() const
 {
-    return ::SendMessage(GetHwnd(), TB_GETSTYLE, 0, 0L);
+    return ::SendMessageW(GetHwnd(), TB_GETSTYLE, 0, 0L);
 }
 
 void wxToolBar::SetWindowStyleFlag(long style)
@@ -1777,7 +1777,7 @@ void wxToolBar::DoEnableTool(wxToolBarToolBase *tool, bool enable)
 {
     if ( tool->IsButton() )
     {
-        ::SendMessage(GetHwnd(), TB_ENABLEBUTTON,
+        ::SendMessageW(GetHwnd(), TB_ENABLEBUTTON,
                       (WPARAM)tool->GetId(), (LPARAM)MAKELONG(enable, 0));
 
         // Adjust displayed checked state -- it could have changed if the tool is
@@ -1800,7 +1800,7 @@ void wxToolBar::DoToggleTool(wxToolBarToolBase *tool,
 {
     wxASSERT_MSG( tool->IsToggled() == toggle, wxT("Inconsistent tool state") );
 
-    ::SendMessage(GetHwnd(), TB_CHECKBUTTON,
+    ::SendMessageW(GetHwnd(), TB_CHECKBUTTON,
                   (WPARAM)tool->GetId(),
                   (LPARAM)MAKELONG(MSWShouldBeChecked(tool), 0));
 }

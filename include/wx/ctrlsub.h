@@ -41,8 +41,8 @@ public:
     // accessing strings
     // -----------------
 
-    virtual unsigned int GetCount() const = 0;
-    bool IsEmpty() const { return GetCount() == 0; }
+    virtual size_t GetCount() const = 0;
+    bool IsEmpty() const noexcept { return GetCount() == 0; }
 
     virtual std::string GetString(unsigned int n) const = 0;
     std::vector<std::string> GetStrings() const;

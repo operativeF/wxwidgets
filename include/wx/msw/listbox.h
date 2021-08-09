@@ -55,7 +55,7 @@ public:
     wxListBox(wxListBox&&) = default;
     wxListBox& operator=(wxListBox&&) = default;
 
-    unsigned int GetCount() const override;
+    size_t GetCount() const override;
     std::string GetString(unsigned int n) const override;
     void SetString(unsigned int n, const std::string& s) override;
     int FindString(std::string_view s, bool bCase = false) const override;
@@ -176,7 +176,7 @@ protected:
     // free memory (common part of Clear() and dtor)
     void Free();
 
-    unsigned int m_noItems{0};
+    size_t m_noItems{0};
 
 #if wxUSE_OWNER_DRAWN
     // control items

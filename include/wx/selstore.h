@@ -90,7 +90,7 @@ public:
     // return the total number of selected items
     unsigned GetSelectedCount() const
     {
-        return m_defaultState ? m_count - m_itemsSel.GetCount()
+        return m_defaultState ? static_cast<size_t>(m_count) - m_itemsSel.GetCount()
                               : m_itemsSel.GetCount();
     }
 

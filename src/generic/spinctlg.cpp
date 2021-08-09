@@ -569,7 +569,7 @@ double wxSpinCtrlGenericBase::AdjustToFitInRange(double value) const
 void wxSpinCtrlGenericBase::DoSetRange(double min, double max)
 {
     // Negative values in the range are allowed only if base == 10
-    if ( !wxSpinCtrlImpl::IsBaseCompatibleWithRange(min, max, GetBase()) )
+    if ( !wxSpinCtrlImpl::IsBaseCompatibleWithRange(std::lround(min), std::lround(max), GetBase()) )
     {
         return;
     }

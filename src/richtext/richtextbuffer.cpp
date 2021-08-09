@@ -12488,7 +12488,7 @@ bool wxRichTextImage::LoadImageCache(wxDC& dc, wxRichTextDrawingContext& context
     // Don't repeat unless absolutely necessary
     if (m_imageCache.IsOk() && !resetCache && !context.GetLayingOut())
     {
-        retImageSize = wxSize(m_imageCache.GetScaledWidth(), m_imageCache.GetScaledHeight());
+        retImageSize = wxSize(std::lround(m_imageCache.GetScaledWidth()), std::lround(m_imageCache.GetScaledHeight()));
         return true;
     }
 
@@ -12503,7 +12503,7 @@ bool wxRichTextImage::LoadImageCache(wxDC& dc, wxRichTextDrawingContext& context
             m_imageCache = bitmap;
             m_imageState = ImageState_Loaded;
         }
-        retImageSize = wxSize(m_imageCache.GetScaledWidth(), m_imageCache.GetScaledHeight());
+        retImageSize = wxSize(std::lround(m_imageCache.GetScaledWidth()), std::lround(m_imageCache.GetScaledHeight()));
         return true;
     }
 
@@ -12521,7 +12521,7 @@ bool wxRichTextImage::LoadImageCache(wxDC& dc, wxRichTextDrawingContext& context
         {
             wxBitmap bitmap(image_placeholder24x24_xpm);
             m_imageCache = bitmap;
-            m_originalImageSize = wxSize(bitmap.GetScaledWidth(), bitmap.GetScaledHeight());
+            m_originalImageSize = wxSize(std::lround(bitmap.GetScaledWidth()), std::lround(bitmap.GetScaledHeight()));
             m_imageState = ImageState_Bad;
             retImageSize = m_originalImageSize;
             return false;
@@ -12650,8 +12650,8 @@ bool wxRichTextImage::LoadImageCache(wxDC& dc, wxRichTextDrawingContext& context
 // Do the loading and scaling
 bool wxRichTextImage::LoadAndScaleImageCache(wxImage& image, const wxSize& sz, wxRichTextDrawingContext& context, bool& changed)
 {
-    int width = sz.x;
-    int height = sz.y;
+    const int width = sz.x;
+    const int height = sz.y;
 
     if (m_imageCache.IsOk() && m_imageCache.GetScaledWidth() == width && m_imageCache.GetScaledHeight() == height)
     {
@@ -12695,15 +12695,15 @@ bool wxRichTextImage::LoadAndScaleImageCache(wxImage& image, const wxSize& sz, w
             // If the original width and height is small, e.g. 400 or below,
             // scale up and then down to improve image quality. This can make
             // a big difference, with not much performance hit.
-            int upscaleThreshold = 400;
+            const int upscaleThreshold{400};
             wxImage img;
             if (image.GetWidth() <= upscaleThreshold || image.GetHeight() <= upscaleThreshold)
             {
                 img = image.Scale(image.GetWidth()*2, image.GetHeight()*2);
-                img.Rescale(width*scaleFactor, height*scaleFactor, wxImageResizeQuality::High);
+                img.Rescale(std::lround(width * scaleFactor), std::lround(height * scaleFactor), wxImageResizeQuality::High);
             }
             else
-                img = image.Scale(width*scaleFactor, height*scaleFactor, wxImageResizeQuality::High);
+                img = image.Scale(std::lround(width * scaleFactor), std::lround(height * scaleFactor), wxImageResizeQuality::High);
 
             // On Mac, this will create a bitmap that is twice as big as the required dimensions,
             // with a scale factor that indicates that the extra detail should be used on HiDPI displays.

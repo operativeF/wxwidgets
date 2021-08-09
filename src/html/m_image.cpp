@@ -457,13 +457,13 @@ void wxHtmlImageCell::SetImage(const wxImage& img, double scaleHDPI)
     {
         delete m_bitmap;
 
-        int ww = img.GetWidth();
-        int hh = img.GetHeight();
+        const int ww = img.GetWidth();
+        const int hh = img.GetHeight();
 
         if ( m_bmpW == wxDefaultCoord)
-            m_bmpW = ww / scaleHDPI;
+            m_bmpW = std::lround(ww / scaleHDPI);
         if ( m_bmpH == wxDefaultCoord)
-            m_bmpH = hh / scaleHDPI;
+            m_bmpH = std::lround(hh / scaleHDPI);
 
         // On a Mac retina screen, we might have found a @2x version of the image,
         // so specify this scale factor.

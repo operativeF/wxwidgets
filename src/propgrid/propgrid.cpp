@@ -4552,8 +4552,8 @@ void wxPropertyGrid::OnResize( wxSizeEvent& event )
         }
         else
         {
-            int w = m_doubleBuffer->GetScaledWidth();
-            int h = m_doubleBuffer->GetScaledHeight();
+            int w = std::lround(m_doubleBuffer->GetScaledWidth());
+            int h = std::lround(m_doubleBuffer->GetScaledHeight());
 
             // Double buffer must be large enough
             if ( w < client_size.x || h < (client_size.y + dblh) )

@@ -406,20 +406,20 @@ void wxAuiGenericToolBarArt::DrawDropDownButton(
 
     dropBmpX = dropDownRect.x +
                 (dropDownRect.width/2) -
-                (m_buttonDropDownBmp.GetScaledWidth()/2);
+                std::lround(m_buttonDropDownBmp.GetScaledWidth()/2);
     dropBmpY = dropDownRect.y +
-                (dropDownRect.height/2) -
-                (m_buttonDropDownBmp.GetScaledHeight()/2);
+                std::lround(dropDownRect.height/2) -
+                std::lround(m_buttonDropDownBmp.GetScaledHeight()/2);
 
 
     if (m_textOrientation == wxAUI_TBTOOL_TEXT_BOTTOM)
     {
         bmpX = buttonRect.x +
                 (buttonRect.width/2) -
-                (item.GetBitmap().GetScaledWidth()/2);
+                std::lround(item.GetBitmap().GetScaledWidth()/2);
         bmpY = buttonRect.y +
                 ((buttonRect.height-textHeight)/2) -
-                (item.GetBitmap().GetScaledHeight()/2);
+                std::lround(item.GetBitmap().GetScaledHeight()/2);
 
         textX = rect.x + (rect.width/2) - (textWidth/2) + 1;
         textY = rect.y + rect.height - textHeight - 1;
@@ -430,9 +430,9 @@ void wxAuiGenericToolBarArt::DrawDropDownButton(
 
         bmpY = rect.y +
                 (rect.height/2) -
-                (item.GetBitmap().GetScaledHeight()/2);
+                std::lround(item.GetBitmap().GetScaledHeight()/2);
 
-        textX = bmpX + wnd->FromDIP(3) + item.GetBitmap().GetScaledWidth();
+        textX = bmpX + wnd->FromDIP(3) + std::lround(item.GetBitmap().GetScaledWidth());
         textY = rect.y +
                  (rect.height/2) -
                  (textHeight/2);

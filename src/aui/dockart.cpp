@@ -130,7 +130,7 @@ void wxAuiScaleBitmap(wxBitmap& bmp, double scale)
     if (scale > 1.0 && !(bmp.GetScaleFactor() > 1.0))
     {
         wxImage img = bmp.ConvertToImage();
-        img.Rescale(bmp.GetWidth()*scale, bmp.GetHeight()*scale,
+        img.Rescale(std::lround(bmp.GetWidth() * scale), std::lround(bmp.GetHeight() * scale),
             wxImageResizeQuality::BoxAverage);
         bmp = wxBitmap(img);
     }
@@ -549,11 +549,11 @@ void wxAuiDefaultDockArt::DrawBorder(wxDC& dc, wxWindow* window, const wxRect& _
     dc.SetBrush(*wxTRANSPARENT_BRUSH);
 
     wxRect rect = _rect;
-    int i, border_width = GetMetric(wxAUI_DOCKART_PANE_BORDER_SIZE);
+    int border_width = GetMetric(wxAUI_DOCKART_PANE_BORDER_SIZE);
 
     if (pane.IsToolbar())
     {
-        for (i = 0; i < border_width; ++i)
+        for (int i = 0; i < border_width; ++i)
         {
             dc.SetPen(wxPen(wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOW)));
             dc.DrawLine(rect.x, rect.y, rect.x+rect.width, rect.y);
@@ -578,7 +578,7 @@ void wxAuiDefaultDockArt::DrawBorder(wxDC& dc, wxWindow* window, const wxRect& _
             art->DrawBorder(dc, window, rect);
         else
         {
-            for (i = 0; i < border_width; ++i)
+            for (int i = 0; i < border_width; ++i)
             {
                 dc.DrawRectangle(rect.x, rect.y, rect.width, rect.height);
                 rect.Deflate(1);
@@ -654,7 +654,7 @@ void wxAuiDefaultDockArt::DrawCaption(wxDC& dc,
     {
         DrawIcon(dc, window, rect, pane);
 
-        caption_offset += pane.icon.GetScaledWidth() + window->FromDIP(3);
+        caption_offset += std::lround(pane.icon.GetScaledWidth()) + window->FromDIP(3);
     }
 
     if (pane.state & wxAuiPaneInfo::optionActive)
@@ -790,7 +790,7 @@ void wxAuiDefaultDockArt::DrawPaneButton(wxDC& dc,
 
     wxRect rect = _rect;
 
-    rect.y = rect.y + (rect.height/2) - (bmp.GetScaledHeight()/2);
+    rect.y = rect.y + (rect.height/2) - std::lround(bmp.GetScaledHeight()/2);
 
     if (button_state == wxAUI_BUTTON_STATE_PRESSED)
     {
@@ -814,8 +814,8 @@ void wxAuiDefaultDockArt::DrawPaneButton(wxDC& dc,
 
         // draw the background behind the button
         dc.DrawRectangle(rect.x, rect.y,
-            bmp.GetScaledWidth() - window->FromDIP(1),
-            bmp.GetScaledHeight() - window->FromDIP(1));
+            std::lround(bmp.GetScaledWidth()) - window->FromDIP(1),
+            std::lround(bmp.GetScaledHeight()) - window->FromDIP(1));
     }
 
     // draw the button itself

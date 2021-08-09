@@ -1473,10 +1473,11 @@ void wxRibbonMSWArtProvider::DrawTab(
             int x = tab.rect.x + 3;
             if(m_flags & wxRIBBON_BAR_SHOW_PAGE_ICONS)
             {
-                x += 3 + tab.page->GetIcon().GetScaledWidth();
-                width -= 3 + tab.page->GetIcon().GetScaledWidth();
+                x += 3 + std::lround(tab.page->GetIcon().GetScaledWidth());
+                width -= 3 + std::lround(tab.page->GetIcon().GetScaledWidth());
             }
-            int y = tab.rect.y + (tab.rect.height - text_height) / 2;
+
+            const int y = tab.rect.y + (tab.rect.height - text_height) / 2;
 
             if(width <= text_width)
             {
@@ -2321,8 +2322,8 @@ void wxRibbonMSWArtProvider::DrawMinimisedPanel(
 
     if(bitmap.IsOk())
     {
-        dc.DrawBitmap(bitmap, preview.x + (preview.width - bitmap.GetScaledWidth()) / 2,
-            preview.y + (preview.height - 7 - bitmap.GetScaledHeight()) / 2, true);
+        dc.DrawBitmap(bitmap, preview.x + (preview.width - std::lround(bitmap.GetScaledWidth())) / 2,
+            preview.y + (preview.height - 7 - std::lround(bitmap.GetScaledHeight())) / 2, true);
     }
 
     if (!wnd->IsHovered())
@@ -2501,7 +2502,7 @@ void wxRibbonMSWArtProvider::DrawButtonBarButton(
             {
             case wxRIBBON_BUTTONBAR_BUTTON_LARGE:
                 {
-                    int iYBorder = rect.y + bitmap_large.GetScaledHeight() + 4;
+                    int iYBorder = rect.y + std::lround(bitmap_large.GetScaledHeight()) + 4;
                     wxRect partial_bg(rect);
                     if(state & wxRIBBON_BUTTONBAR_BUTTON_NORMAL_HOVERED)
                     {
@@ -2607,9 +2608,9 @@ void wxRibbonMSWArtProvider::DrawButtonBarButtonForeground(
         {
             const int padding = 2;
             dc.DrawBitmap(bitmap_large,
-                rect.x + (rect.width - bitmap_large.GetScaledWidth()) / 2,
+                rect.x + (rect.width - std::lround(bitmap_large.GetScaledWidth())) / 2,
                 rect.y + padding, true);
-            int ypos = rect.y + padding + bitmap_large.GetScaledHeight() + padding;
+            int ypos = rect.y + padding + std::lround(bitmap_large.GetScaledHeight()) + padding;
             int arrow_width = kind == wxRIBBON_BUTTON_NORMAL ? 0 : 8;
             wxCoord label_w, label_h;
             dc.GetTextExtent(label, &label_w, &label_h);
@@ -2661,8 +2662,8 @@ void wxRibbonMSWArtProvider::DrawButtonBarButtonForeground(
         {
             int x_cursor = rect.x + 2;
             dc.DrawBitmap(bitmap_small, x_cursor,
-                    rect.y + (rect.height - bitmap_small.GetScaledHeight())/2, true);
-            x_cursor += bitmap_small.GetScaledWidth() + 2;
+                    rect.y + (rect.height - std::lround(bitmap_small.GetScaledHeight()))/2, true);
+            x_cursor += std::lround(bitmap_small.GetScaledWidth()) + 2;
             // TODO: Return value.
             wxCoord label_w, label_h;
             dc.GetTextExtent(label, &label_w, &label_h);

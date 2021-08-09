@@ -62,7 +62,7 @@ wxSplashScreen::wxSplashScreen(const wxBitmap& bitmap, long splashStyle, int mil
     gtk_window_set_type_hint(GTK_WINDOW(m_widget),
                              GDK_WINDOW_TYPE_HINT_SPLASHSCREEN);
 #endif
-    SetClientSize(bitmap.GetScaledWidth(), bitmap.GetScaledHeight());
+    SetClientSize(std::lround(bitmap.GetScaledWidth()), std::lround(bitmap.GetScaledHeight()));
 
     if (m_splashStyle & wxSPLASH_CENTRE_ON_PARENT)
         CentreOnParent();
@@ -163,7 +163,7 @@ static void wxDrawSplashBitmap(wxDC& dc, const wxBitmap& bitmap, int WXUNUSED(x)
 #endif // USE_PALETTE_IN_SPLASH
 
     dcMem.SelectObjectAsSource(bitmap);
-    dc.Blit(0, 0, bitmap.GetScaledWidth(), bitmap.GetScaledHeight(), &dcMem, 0, 0, wxRasterOperationMode::Copy,
+    dc.Blit(0, 0, std::lround(bitmap.GetScaledWidth()), std::lround(bitmap.GetScaledHeight()), &dcMem, 0, 0, wxRasterOperationMode::Copy,
             true /* use mask */);
     dcMem.SelectObject(wxNullBitmap);
 

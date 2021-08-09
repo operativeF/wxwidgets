@@ -358,8 +358,7 @@ int wxRibbonAUIArtProvider::GetTabCtrlHeight(
     }
     if(m_flags & wxRIBBON_BAR_SHOW_PAGE_ICONS)
     {
-        size_t numpages = pages.GetCount();
-        for(size_t i = 0; i < numpages; ++i)
+        for(size_t i = 0; i < pages.GetCount(); ++i)
         {
             const wxRibbonPageTabInfo& info = pages.Item(i);
             if(info.page->GetIcon().IsOk())
@@ -451,9 +450,9 @@ void wxRibbonAUIArtProvider::DrawTab(wxDC& dc,
         {
             if(icon.IsOk())
             {
-            int x = tab.rect.x + (tab.rect.width - icon.GetScaledWidth()) / 2;
-            dc.DrawBitmap(icon, x, tab.rect.y + 1 + (tab.rect.height - 1 -
-                icon.GetScaledHeight()) / 2, true);
+                const int x = tab.rect.x + (tab.rect.width - std::lround(icon.GetScaledWidth())) / 2;
+                dc.DrawBitmap(icon, x, tab.rect.y + 1 + (tab.rect.height - 1 -
+                    std::lround(icon.GetScaledHeight())) / 2, true);
             }
         }
     }
@@ -490,9 +489,9 @@ void wxRibbonAUIArtProvider::DrawTab(wxDC& dc,
                 x = 8;
             else if(x < 1)
                 x = 1;
-            int width = tab.rect.width - x - 2;
+            const int width = tab.rect.width - x - 2;
             x += tab.rect.x + offset;
-            int y = tab.rect.y + (tab.rect.height - text_height) / 2;
+            const int y = tab.rect.y + (tab.rect.height - text_height) / 2;
             if(icon.IsOk())
             {
                 dc.DrawBitmap(icon, x - offset, tab.rect.y + (tab.rect.height -
@@ -675,8 +674,8 @@ wxSize wxRibbonAUIArtProvider::GetPanelSize(
                         wxPoint* client_offset)
 {
     dc.SetFont(m_panel_label_font);
-    wxSize label_size = dc.GetTextExtent(wnd->GetLabel());
-    int label_height = label_size.y + 5;
+    const wxSize label_size = dc.GetTextExtent(wnd->GetLabel());
+    const int label_height = label_size.y + 5;
     if(m_flags & wxRIBBON_BAR_FLOW_VERTICAL)
     {
         client_size.IncBy(4, label_height + 6);
@@ -699,8 +698,8 @@ wxSize wxRibbonAUIArtProvider::GetPanelClientSize(
                         wxPoint* client_offset)
 {
     dc.SetFont(m_panel_label_font);
-    wxSize label_size = dc.GetTextExtent(wnd->GetLabel());
-    int label_height = label_size.y + 5;
+    const wxSize label_size = dc.GetTextExtent(wnd->GetLabel());
+    const int label_height = label_size.y + 5;
     if(m_flags & wxRIBBON_BAR_FLOW_VERTICAL)
     {
         size.DecBy(4, label_height + 6);
@@ -730,8 +729,8 @@ wxRect wxRibbonAUIArtProvider::GetPanelExtButtonArea(wxDC& dc,
     true_rect.y++;
 
     dc.SetFont(m_panel_label_font);
-    wxSize label_size = dc.GetTextExtent(wnd->GetLabel());
-    int label_height = label_size.y + 5;
+    const wxSize label_size = dc.GetTextExtent(wnd->GetLabel());
+    const int label_height = label_size.y + 5;
     wxRect label_rect(true_rect);
     label_rect.height = label_height - 1;
 
@@ -760,8 +759,8 @@ void wxRibbonAUIArtProvider::DrawPanelBackground(
     true_rect.y++;
 
     dc.SetFont(m_panel_label_font);
-    wxSize label_size = dc.GetTextExtent(wnd->GetLabel());
-    int label_height = label_size.y + 5;
+    const wxSize label_size = dc.GetTextExtent(wnd->GetLabel());
+    const int label_height = label_size.y + 5;
     wxRect label_rect(true_rect);
     label_rect.height = label_height - 1;
     dc.DrawLine(label_rect.x, label_rect.y + label_rect.height,
@@ -1090,7 +1089,7 @@ void wxRibbonAUIArtProvider::DrawButtonBarButton(
             {
             case wxRIBBON_BUTTONBAR_BUTTON_LARGE:
                 {
-                    int iYBorder = rect.y + bitmap_large.GetScaledHeight() + 4;
+                    int iYBorder = rect.y + std::lround(bitmap_large.GetScaledHeight()) + 4;
                     wxRect partial_bg(rect);
                     if(state & wxRIBBON_BUTTONBAR_BUTTON_NORMAL_HOVERED)
                     {
@@ -1189,9 +1188,9 @@ void wxRibbonAUIArtProvider::DrawTool(
     bg_rect.Deflate(1);
     if((state & wxRIBBON_TOOLBAR_TOOL_LAST) == 0)
         bg_rect.width++;
-    bool is_custom_bg = (state & (wxRIBBON_TOOLBAR_TOOL_HOVER_MASK |
+    const bool is_custom_bg = (state & (wxRIBBON_TOOLBAR_TOOL_HOVER_MASK |
         wxRIBBON_TOOLBAR_TOOL_ACTIVE_MASK)) != 0;
-    bool is_split_hybrid = kind == wxRIBBON_BUTTON_HYBRID && is_custom_bg;
+    const bool is_split_hybrid = kind == wxRIBBON_BUTTON_HYBRID && is_custom_bg;
 
     // Background
     if(is_custom_bg)

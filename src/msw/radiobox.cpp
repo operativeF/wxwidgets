@@ -343,9 +343,9 @@ void wxRadioBox::SendNotificationEvent()
 // simple accessors
 // ----------------------------------------------------------------------------
 
-unsigned int wxRadioBox::GetCount() const
+size_t wxRadioBox::GetCount() const
 {
-    return m_radioButtons ? m_radioButtons->GetCount() : 0u;
+    return m_radioButtons ? m_radioButtons->GetCount() : 0;
 }
 
 void wxRadioBox::SetString(unsigned int item, const std::string& label)
@@ -760,7 +760,7 @@ wxRadioBtnWndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
             // want to process arrows ourselves because neither of them is
             // smart enough to handle arrows properly for us
             {
-                long lDlgCode = ::CallWindowProc(CASTWNDPROC s_wndprocRadioBtn, hwnd,
+                const auto lDlgCode = ::CallWindowProcW(CASTWNDPROC s_wndprocRadioBtn, hwnd,
                                                  message, wParam, lParam);
 
                 return lDlgCode | DLGC_WANTARROWS;

@@ -1673,7 +1673,7 @@ inline void DrawScaledBmp(wxBitmap& bmp, float scale, wxGraphicsRenderer* render
     if ( !renderer )
         return;
 
-    wxBitmap canvas(bmp.GetWidth() * scale, bmp.GetHeight() * scale, 24);
+    wxBitmap canvas{std::lround(bmp.GetWidth() * scale), std::lround(bmp.GetHeight() * scale), 24};
     {
         wxMemoryDC mdc(canvas);
         mdc.SetBackground(*wxBLACK_BRUSH);

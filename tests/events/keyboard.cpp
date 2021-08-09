@@ -47,9 +47,9 @@ public:
     KeyboardTestWindow(const KeyboardTestWindow&) = delete;
     KeyboardTestWindow& operator=(const KeyboardTestWindow&) = delete;
 
-    unsigned GetKeyDownCount() const { return m_keyDownEvents.size(); }
-    unsigned GetCharCount() const { return m_charEvents.size(); }
-    unsigned GetKeyUpCount() const { return m_keyUpEvents.size(); }
+    size_t GetKeyDownCount() const { return m_keyDownEvents.size(); }
+    size_t GetCharCount() const { return m_charEvents.size(); }
+    size_t GetKeyUpCount() const { return m_keyUpEvents.size(); }
 
     const wxKeyEvent& GetKeyDownEvent(unsigned n = 0) const
     {

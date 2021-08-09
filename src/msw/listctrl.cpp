@@ -3135,7 +3135,7 @@ WXLPARAM wxListCtrl::OnCustomDraw(WXLPARAM lParam)
             return CDRF_NOTIFYITEMDRAW;
 
         case CDDS_SUBITEM | CDDS_ITEMPREPAINT:
-            const int item = nmcd.dwItemSpec;
+            const auto item = nmcd.dwItemSpec;
             const int column = pLVCD->iSubItem;
 
             // we get this message with item == 0 for an empty control, we

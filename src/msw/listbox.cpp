@@ -36,6 +36,8 @@
 #include <boost/nowide/convert.hpp>
 #include <boost/nowide/stackstring.hpp>
 
+#include <gsl/gsl>
+
 #if wxUSE_OWNER_DRAWN
     #include  "wx/ownerdrw.h"
 
@@ -203,7 +205,7 @@ void wxListBox::EnsureVisible(int n)
                  wxT("invalid index in wxListBox::EnsureVisible") );
 
     // when item is before the first visible item, make the item the first visible item
-    const int firstItem = SendMessage(GetHwnd(), LB_GETTOPINDEX, 0, 0);
+    const auto firstItem = ::SendMessageW(GetHwnd(), LB_GETTOPINDEX, 0, 0);
     if ( n <= firstItem )
     {
         DoSetFirstItem(n);
@@ -211,7 +213,7 @@ void wxListBox::EnsureVisible(int n)
     }
 
     // retrieve item height in order to compute last visible item and scroll amount
-    const int itemHeight = SendMessage(GetHwnd(), LB_GETITEMHEIGHT, 0, 0);
+    const auto itemHeight = ::SendMessageW(GetHwnd(), LB_GETITEMHEIGHT, 0, 0);
     if ( itemHeight == LB_ERR || itemHeight == 0)
         return;
 
@@ -221,7 +223,7 @@ void wxListBox::EnsureVisible(int n)
         countVisible = 1;
 
     // when item is before the last fully visible item, it is already visible
-    const int lastItem = firstItem + countVisible - 1;
+    const auto lastItem = firstItem + countVisible - 1;
     if ( n <= lastItem )
         return;
 
@@ -231,12 +233,12 @@ void wxListBox::EnsureVisible(int n)
 
 int wxListBox::GetTopItem() const
 {
-    return SendMessage(GetHwnd(), LB_GETTOPINDEX, 0, 0);
+    return ::SendMessageW(GetHwnd(), LB_GETTOPINDEX, 0, 0);
 }
 
 int wxListBox::GetCountPerPage() const
 {
-    const LRESULT lineHeight = SendMessage(GetHwnd(), LB_GETITEMHEIGHT, 0, 0);
+    const auto lineHeight = ::SendMessageW(GetHwnd(), LB_GETITEMHEIGHT, 0, 0);
     if ( lineHeight == LB_ERR || lineHeight == 0 )
         return -1;
 
@@ -250,7 +252,7 @@ void wxListBox::DoSetFirstItem(int N)
     wxCHECK_RET( IsValid(N),
                  wxT("invalid index in wxListBox::SetFirstItem") );
 
-    SendMessage(GetHwnd(), LB_SETTOPINDEX, (WPARAM)N, (LPARAM)0);
+    ::SendMessageW(GetHwnd(), LB_SETTOPINDEX, (WPARAM)N, (LPARAM)0);
 }
 
 void wxListBox::DoDeleteOneItem(unsigned int n)
@@ -266,7 +268,7 @@ void wxListBox::DoDeleteOneItem(unsigned int n)
     }
 #endif // wxUSE_OWNER_DRAWN
 
-    SendMessageW(GetHwnd(), LB_DELETESTRING, n, 0);
+    ::SendMessageW(GetHwnd(), LB_DELETESTRING, n, 0);
     m_noItems--;
 
     MSWOnItemsChanged();
@@ -313,13 +315,13 @@ void wxListBox::DoSetSelection(int N, bool select)
     {
         // Setting selection to -1 should deselect everything.
         const bool deselectAll = N == wxNOT_FOUND;
-        SendMessage(GetHwnd(), LB_SETSEL,
+        ::SendMessageW(GetHwnd(), LB_SETSEL,
                     deselectAll ? FALSE : select,
                     deselectAll ? -1 : N);
     }
     else
     {
-        SendMessage(GetHwnd(), LB_SETCURSEL, select ? N : -1, 0);
+        ::SendMessageW(GetHwnd(), LB_SETCURSEL, select ? N : -1, 0);
     }
 
     UpdateOldSelections();
@@ -330,7 +332,7 @@ bool wxListBox::IsSelected(int N) const
     wxCHECK_MSG( IsValid(N), false,
                  wxT("invalid index in wxListBox::Selected") );
 
-    return SendMessage(GetHwnd(), LB_GETSEL, N, 0) != 0;
+    return ::SendMessageW(GetHwnd(), LB_GETSEL, N, 0) != 0;
 }
 
 void *wxListBox::DoGetItemClientData(unsigned int n) const
@@ -339,7 +341,7 @@ void *wxListBox::DoGetItemClientData(unsigned int n) const
     // same name.
     SetLastError(ERROR_SUCCESS);
 
-    LPARAM rc = SendMessage(GetHwnd(), LB_GETITEMDATA, n, 0);
+    auto rc = ::SendMessageW(GetHwnd(), LB_GETITEMDATA, n, 0);
     if ( rc == LB_ERR && GetLastError() != ERROR_SUCCESS )
     {
         wxLogLastError(wxT("LB_GETITEMDATA"));
@@ -372,7 +374,7 @@ int wxListBox::GetSelections(std::vector<int>& aSelections) const
         }
         else if ( countSel != 0 )
         {
-            auto selections = std::make_unique<int[]>(countSel);
+            auto selections{std::make_unique<int[]>(countSel)};
 
             if ( ListBox_GetSelItems(GetHwnd(),
                                      countSel, selections.get()) == LB_ERR )
@@ -415,7 +417,7 @@ std::string wxListBox::GetString(unsigned int n) const
     wxCHECK_MSG( IsValid(n), "",
                  wxT("invalid index in wxListBox::GetString") );
 
-    int len = ListBox_GetTextLen(GetHwnd(), n);
+    const auto len = ListBox_GetTextLen(GetHwnd(), n);
 
     // +1 for terminating NUL
     std::wstring result;
@@ -477,7 +479,7 @@ int wxListBox::DoInsertItems(const std::vector<std::string>& items,
 
 int wxListBox::DoHitTestList(const wxPoint& point) const
 {
-    LRESULT lRes = ::SendMessage(GetHwnd(), LB_ITEMFROMPOINT,
+    const auto lRes = ::SendMessageW(GetHwnd(), LB_ITEMFROMPOINT,
                                  0, MAKELPARAM(point.x, point.y));
 
     // non zero high-order word means that this item is outside of the client
@@ -491,7 +493,7 @@ void wxListBox::SetString(unsigned int n, const std::string& s)
                  wxT("invalid index in wxListBox::SetString") );
 
     // remember the state of the item
-    bool wasSelected = IsSelected(n);
+    const bool wasSelected = IsSelected(n);
 
     void *oldData = nullptr;
     wxClientData *oldObjData = nullptr;
@@ -501,7 +503,7 @@ void wxListBox::SetString(unsigned int n, const std::string& s)
         oldObjData = GetClientObject(n);
 
     // delete and recreate it
-    SendMessage(GetHwnd(), LB_DELETESTRING, n, 0);
+    ::SendMessageW(GetHwnd(), LB_DELETESTRING, n, 0);
 
     int newN = n;
     if ( n == (m_noItems - 1) )
@@ -522,7 +524,7 @@ void wxListBox::SetString(unsigned int n, const std::string& s)
     MSWOnItemsChanged();
 }
 
-unsigned int wxListBox::GetCount() const
+size_t wxListBox::GetCount() const
 {
     return m_noItems;
 }
@@ -541,7 +543,7 @@ void wxListBox::SetHorizontalExtent(const std::string& s)
     ::GetTextMetricsW(dc, &lpTextMetric);
 
     int largestExtent = 0;
-    SIZE extentXY;
+    SIZE extentXY{};
 
     if ( s.empty() )
     {
@@ -572,14 +574,14 @@ void wxListBox::SetHorizontalExtent(const std::string& s)
     if ( largestExtent )
     {
         largestExtent = MSWGetFullItemSize(largestExtent, 0 /* height */).x;
-        SendMessage(GetHwnd(), LB_SETHORIZONTALEXTENT, LOWORD(largestExtent), 0L);
+        ::SendMessageW(GetHwnd(), LB_SETHORIZONTALEXTENT, LOWORD(largestExtent), 0L);
     }
     //else: it shouldn't change
 }
 
 bool wxListBox::MSWSetTabStops(const std::vector<int>& tabStops)
 {
-    return SendMessage(GetHwnd(), LB_SETTABSTOPS, (WPARAM)tabStops.size(),
+    return ::SendMessageW(GetHwnd(), LB_SETTABSTOPS, (WPARAM)tabStops.size(),
                        (LPARAM)(tabStops.empty() ? nullptr : &tabStops[0])) == TRUE;
 }
 
@@ -608,15 +610,15 @@ wxSize wxListBox::DoGetBestClientSize() const
 
     // don't make the listbox too tall (limit height to 10 items) but don't
     // make it too small neither
-    int hListbox = SendMessage(GetHwnd(), LB_GETITEMHEIGHT, 0, 0)*
+    auto hListbox = ::SendMessageW(GetHwnd(), LB_GETITEMHEIGHT, 0, 0)*
                     wxMin(wxMax(m_noItems, 3), 10);
 
-    return {wListbox, hListbox};
+    return {wListbox, gsl::narrow_cast<int>(hListbox)};
 }
 
 bool wxListBox::MSWCommand(WXUINT param, WXWORD WXUNUSED(id))
 {
-    wxEventType evtType;
+    wxEventType evtType{};
     if ( param == LBN_SELCHANGE )
     {
         if ( HasMultipleSelection() )
@@ -675,7 +677,7 @@ bool wxListBox::SetFont(const wxFont &font)
         // we need to do it manually in the owner drawn case.
         wxClientDC dc(this);
         dc.SetFont(m_font);
-        SendMessage(GetHwnd(), LB_SETITEMHEIGHT, 0,
+        ::SendMessageW(GetHwnd(), LB_SETITEMHEIGHT, 0,
                     dc.GetCharHeight() + 2 * LISTBOX_EXTRA_SPACE);
     }
 

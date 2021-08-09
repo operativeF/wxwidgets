@@ -63,7 +63,7 @@ public:
 
         This is only used for testing and debugging.
      */
-    unsigned int GetSize() const { return m_ranges.size(); }
+    std::size_t GetSize() const { return m_ranges.size(); }
 
 private:
     std::vector<RowRange> m_ranges;

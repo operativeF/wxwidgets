@@ -1011,7 +1011,7 @@ void wxOwnerDrawnComboBox::DoDeleteOneItem(unsigned int n)
 }
 
 // TODO: Type mismatch
-unsigned int wxOwnerDrawnComboBox::GetCount() const
+size_t wxOwnerDrawnComboBox::GetCount() const
 {
     if ( !m_popupInterface )
         return m_initChs.size();

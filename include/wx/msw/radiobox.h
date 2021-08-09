@@ -60,7 +60,7 @@ public:
     // implement the radiobox interface
     void SetSelection(int n) override;
     int GetSelection() const override { return m_selectedButton; }
-    unsigned int GetCount() const override;
+    size_t GetCount() const override;
     std::string GetString(unsigned int n) const override;
     void SetString(unsigned int n, const std::string& label) override;
     bool Enable(unsigned int n, bool enable = true) override;

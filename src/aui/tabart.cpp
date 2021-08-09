@@ -108,7 +108,7 @@ static void DrawButtons(wxDC& dc,
         dc.SetPen(wxPen(bkcolour.ChangeLightness(75)));
 
         // draw the background behind the button
-        dc.DrawRectangle(rect.x, rect.y, bmp.GetScaledWidth()-offset.x, bmp.GetScaledHeight()-offset.y);
+        dc.DrawRectangle(rect.x, rect.y, std::lround(bmp.GetScaledWidth()) - offset.x, std::lround(bmp.GetScaledHeight()) - offset.y);
     }
 
     // draw the button itself
@@ -231,9 +231,9 @@ void wxAuiGenericTabArt::SetSizingInfo(const wxSize& tab_ctrl_size,
     int tot_width = (int)tab_ctrl_size.x - GetIndentSize() - wxWindow::FromDIP(4, nullptr);
 
     if (m_flags & wxAUI_NB_CLOSE_BUTTON)
-        tot_width -= m_activeCloseBmp.GetScaledWidth();
+        tot_width -= std::lround(m_activeCloseBmp.GetScaledWidth());
     if (m_flags & wxAUI_NB_WINDOWLIST_BUTTON)
-        tot_width -= m_activeWindowListBmp.GetScaledWidth();
+        tot_width -= std::lround(m_activeWindowListBmp.GetScaledWidth());
 
     if (tab_count > 0)
     {
@@ -544,10 +544,10 @@ void wxAuiGenericTabArt::DrawTab(wxDC& dc,
         // draw bitmap
         dc.DrawBitmap(page.bitmap,
                       bitmap_offset,
-                      drawn_tab_yoff + (drawn_tab_height/2) - (page.bitmap.GetScaledHeight()/2),
+                      drawn_tab_yoff + (drawn_tab_height/2) - std::lround(page.bitmap.GetScaledHeight()/2),
                       true);
 
-        text_offset = bitmap_offset + page.bitmap.GetScaledWidth();
+        text_offset = bitmap_offset + std::lround(page.bitmap.GetScaledWidth());
         text_offset += wnd->FromDIP(3); // bitmap padding
     }
     else
@@ -573,16 +573,16 @@ void wxAuiGenericTabArt::DrawTab(wxDC& dc,
         if (m_flags & wxAUI_NB_BOTTOM)
             offsetY = 1;
 
-        wxRect rect(tab_x + tab_width - bmp.GetScaledWidth() - wnd->FromDIP(1),
-                    offsetY + (tab_height/2) - (bmp.GetScaledHeight()/2),
-                    bmp.GetScaledWidth(),
+        wxRect rect(tab_x + tab_width - std::lround(bmp.GetScaledWidth()) - wnd->FromDIP(1),
+                    offsetY + (tab_height/2) - std::lround(bmp.GetScaledHeight()/2),
+                    std::lround(bmp.GetScaledWidth()),
                     tab_height);
 
         IndentPressedBitmap(wnd->FromDIP(wxSize(1, 1)), &rect, close_button_state);
         dc.DrawBitmap(bmp, rect.x, rect.y, true);
 
         *out_button_rect = rect;
-        close_button_width = bmp.GetScaledWidth();
+        close_button_width = std::lround(bmp.GetScaledWidth());
     }
 
     std::string draw_text = wxAuiChopText(dc,
@@ -609,8 +609,8 @@ void wxAuiGenericTabArt::DrawTab(wxDC& dc,
         wxRect focusRectBitmap;
 
         if (page.bitmap.IsOk())
-            focusRectBitmap = wxRect(bitmap_offset, drawn_tab_yoff + (drawn_tab_height/2) - (page.bitmap.GetScaledHeight()/2),
-                                            page.bitmap.GetScaledWidth(), page.bitmap.GetScaledHeight());
+            focusRectBitmap = wxRect(bitmap_offset, drawn_tab_yoff + (drawn_tab_height/2) - std::lround(page.bitmap.GetScaledHeight()/2),
+                                            std::lround(page.bitmap.GetScaledWidth()), std::lround(page.bitmap.GetScaledHeight()));
 
         if (page.bitmap.IsOk() && draw_text.empty())
             focusRect = focusRectBitmap;
@@ -674,15 +674,15 @@ wxSize wxAuiGenericTabArt::GetTabSize(wxDC& dc,
     if (close_button_state != wxAUI_BUTTON_STATE_HIDDEN)
     {
         // increase by button size plus the padding
-        tab_width += m_activeCloseBmp.GetScaledWidth() + wnd->FromDIP(3);
+        tab_width += std::lround(m_activeCloseBmp.GetScaledWidth()) + wnd->FromDIP(3);
     }
 
     // if there's a bitmap, add space for it
     if (bitmap.IsOk())
     {
         // increase by bitmap plus right side bitmap padding
-        tab_width += bitmap.GetScaledWidth() + wnd->FromDIP(3);
-        tab_height = wxMax(tab_height, bitmap.GetScaledHeight());
+        tab_width += std::lround(bitmap.GetScaledWidth()) + wnd->FromDIP(3);
+        tab_height = wxMax(tab_height, std::lround(bitmap.GetScaledHeight()));
     }
 
     // add padding
@@ -751,15 +751,15 @@ void wxAuiGenericTabArt::DrawButton(wxDC& dc,
     if (orientation == wxLEFT)
     {
         rect.SetX(in_rect.x);
-        rect.SetY(((in_rect.y + in_rect.height)/2) - (bmp.GetScaledHeight()/2));
-        rect.SetWidth(bmp.GetScaledWidth());
-        rect.SetHeight(bmp.GetScaledHeight());
+        rect.SetY(((in_rect.y + in_rect.height)/2) - std::lround(bmp.GetScaledHeight()/2));
+        rect.SetWidth(std::lround(bmp.GetScaledWidth()));
+        rect.SetHeight(std::lround(bmp.GetScaledHeight()));
     }
     else
     {
-        rect = wxRect(in_rect.x + in_rect.width - bmp.GetScaledWidth(),
-                      ((in_rect.y + in_rect.height)/2) - (bmp.GetScaledHeight()/2),
-                      bmp.GetScaledWidth(), bmp.GetScaledHeight());
+        rect = wxRect(in_rect.x + in_rect.width - std::lround(bmp.GetScaledWidth()),
+                      ((in_rect.y + in_rect.height)/2) - std::lround(bmp.GetScaledHeight()/2),
+                      std::lround(bmp.GetScaledWidth()), std::lround(bmp.GetScaledHeight()));
     }
 
     IndentPressedBitmap(wnd->FromDIP(wxSize(1, 1)), &rect, button_state);
@@ -943,9 +943,9 @@ void wxAuiSimpleTabArt::SetSizingInfo(const wxSize& tab_ctrl_size,
     int tot_width = (int)tab_ctrl_size.x - GetIndentSize() - wxWindow::FromDIP(4, nullptr);
 
     if (m_flags & wxAUI_NB_CLOSE_BUTTON)
-        tot_width -= m_activeCloseBmp.GetScaledWidth();
+        tot_width -= std::lround(m_activeCloseBmp.GetScaledWidth());
     if (m_flags & wxAUI_NB_WINDOWLIST_BUTTON)
-        tot_width -= m_activeWindowListBmp.GetScaledWidth();
+        tot_width -= std::lround(m_activeWindowListBmp.GetScaledWidth());
 
     if (tab_count > 0)
     {
@@ -1112,14 +1112,14 @@ void wxAuiSimpleTabArt::DrawTab(wxDC& dc,
 
         wxAuiScaleBitmap(bmp, wnd->GetDPIScaleFactor());
 
-        wxRect rect(tab_x + tab_width - bmp.GetScaledWidth() - 1,
-                    tab_y + (tab_height/2) - (bmp.GetScaledHeight()/2) + 1,
-                    bmp.GetScaledWidth(),
+        wxRect rect(tab_x + tab_width - std::lround(bmp.GetScaledWidth()) - 1,
+                    tab_y + (tab_height/2) - std::lround(bmp.GetScaledHeight()/2) + 1,
+                    std::lround(bmp.GetScaledWidth()),
                     tab_height - 1);
         DrawButtons(dc, wnd->FromDIP(wxSize(1, 1)), rect, bmp, *wxWHITE, close_button_state);
 
         *out_button_rect = rect;
-        close_button_width = bmp.GetScaledWidth();
+        close_button_width = std::lround(bmp.GetScaledWidth());
     }
 
     text_offset = tab_x + (tab_height/2) + ((tab_width-close_button_width)/2) - (textx/2);
@@ -1202,7 +1202,7 @@ wxSize wxAuiSimpleTabArt::GetTabSize(wxDC& dc,
     if (close_button_state != wxAUI_BUTTON_STATE_HIDDEN)
     {
         // increase by button size plus the padding
-        tab_width += m_activeCloseBmp.GetScaledWidth() + wnd->FromDIP(3);
+        tab_width += std::lround(m_activeCloseBmp.GetScaledWidth()) + wnd->FromDIP(3);
     }
 
     if (m_flags & wxAUI_NB_TAB_FIXED_WIDTH)
@@ -1265,15 +1265,15 @@ void wxAuiSimpleTabArt::DrawButton(wxDC& dc,
     if (orientation == wxLEFT)
     {
         rect.SetX(in_rect.x);
-        rect.SetY(((in_rect.y + in_rect.height)/2) - (bmp.GetScaledHeight()/2));
-        rect.SetWidth(bmp.GetScaledWidth());
-        rect.SetHeight(bmp.GetScaledHeight());
+        rect.SetY(((in_rect.y + in_rect.height)/2) - std::lround(bmp.GetScaledHeight()/2));
+        rect.SetWidth(std::lround(bmp.GetScaledWidth()));
+        rect.SetHeight(std::lround(bmp.GetScaledHeight()));
     }
     else
     {
-        rect = wxRect(in_rect.x + in_rect.width - bmp.GetScaledWidth(),
-                      ((in_rect.y + in_rect.height)/2) - (bmp.GetScaledHeight()/2),
-                      bmp.GetScaledWidth(), bmp.GetScaledHeight());
+        rect = wxRect(in_rect.x + in_rect.width - std::lround(bmp.GetScaledWidth()),
+                      ((in_rect.y + in_rect.height)/2) - std::lround(bmp.GetScaledHeight()/2),
+                      std::lround(bmp.GetScaledWidth()), std::lround(bmp.GetScaledHeight()));
     }
 
 

@@ -361,24 +361,24 @@ void wxWebViewIE::SetZoomFactor(float zoom)
 
     if (m_impl->m_zoomType == wxWEBVIEW_ZOOM_TYPE_LAYOUT)
     {
-        SetIEOpticalZoomFactor(zoom * 100);
+        SetIEOpticalZoomFactor(zoom * 100.0F);
     }
     else if (m_impl->m_zoomType == wxWEBVIEW_ZOOM_TYPE_TEXT)
     {
         //We make a somewhat arbitray map here, taken from values used by webkit
-        if (zoom <= 65)
+        if (zoom <= 65.0F)
         {
             level = wxWEBVIEW_ZOOM_TINY;
         }
-        else if (zoom > 65 && zoom <= 90)
+        else if (zoom > 65.0F && zoom <= 90.0F)
         {
             level = wxWEBVIEW_ZOOM_SMALL;
         }
-        else if (zoom > 90 && zoom <= 115)
+        else if (zoom > 90.0F && zoom <= 115.0F)
         {
             level = wxWEBVIEW_ZOOM_MEDIUM;
         }
-        else if (zoom > 115 && zoom <= 145)
+        else if (zoom > 115.0F && zoom <= 145.0F)
         {
             level = wxWEBVIEW_ZOOM_LARGE;
         }

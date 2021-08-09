@@ -367,7 +367,7 @@ bool wxBitmapComboBox::OnAddBitmap(const wxBitmap& bitmap)
     if ( wxBitmapComboBoxBase::OnAddBitmap(bitmap) || !GetCount() )
     {
         // Need to recreate control for a new measureitem call?
-        int prevItemHeight = ::SendMessage(GetHwnd(), CB_GETITEMHEIGHT, 0, 0);
+        const auto prevItemHeight = ::SendMessage(GetHwnd(), CB_GETITEMHEIGHT, 0, 0);
 
         if ( prevItemHeight != MeasureItem(0) )
             RecreateControl();

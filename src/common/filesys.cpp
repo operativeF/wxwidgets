@@ -164,7 +164,7 @@ wxString wxFileSystemHandler::GetProtocol(const wxString& location)
 wxString wxFileSystemHandler::GetLeftLocation(const wxString& location)
 {
     bool fnd = false;
-
+    // FIXME: Overflow possible here if location.length() == 0.
     for (int i = location.length()-1; i >= 0; i--) {
         if ((location[i] == wxT(':')) && (i != 1 /*win: C:\path*/))
         {

@@ -148,8 +148,7 @@ static unsigned GetBasicFlags(const wxChar* filename)
     // this information.
     //-----------------------------------------------------------------------
     SHFILEINFO fi;
-    long rc = SHGetFileInfo(filename, 0, &fi, sizeof(fi), SHGFI_ATTRIBUTES);
-    if (!rc)
+    if (!::SHGetFileInfoW(filename, 0, &fi, sizeof(fi), SHGFI_ATTRIBUTES))
     {
         // this error is not fatal, so don't show a message to the user about
         // it, otherwise it would appear every time a generic directory picker
@@ -483,7 +482,7 @@ bool wxFSVolumeBase::Create(const wxString& name)
 
     // Display name.
     SHFILEINFO fi;
-    const long rc = SHGetFileInfo(m_volName.t_str(), 0, &fi, sizeof(fi), SHGFI_DISPLAYNAME);
+    const auto rc = ::SHGetFileInfoW(m_volName.t_str(), 0, &fi, sizeof(fi), SHGFI_DISPLAYNAME);
     if (!rc)
     {
         wxLogError(_("Cannot read typename from '%s'!"), m_volName.c_str());

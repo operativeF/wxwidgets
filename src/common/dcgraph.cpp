@@ -229,8 +229,8 @@ void wxGCDCImpl::DoDrawBitmap( const wxBitmap &bmp, wxCoord x, wxCoord y,
     wxCHECK_RET( IsOk(), wxT("wxGCDC(cg)::DoDrawBitmap - invalid DC") );
     wxCHECK_RET( bmp.IsOk(), wxT("wxGCDC(cg)::DoDrawBitmap - invalid bitmap") );
 
-    int w = bmp.GetScaledWidth();
-    int h = bmp.GetScaledHeight();
+    int w = std::lround(bmp.GetScaledWidth());
+    int h = std::lround(bmp.GetScaledHeight());
     if ( bmp.GetDepth() == 1 )
     {
         m_graphicContext->SetPen(*wxTRANSPARENT_PEN);
@@ -723,8 +723,8 @@ void wxGCDCImpl::DoDrawEllipticArc( wxCoord x, wxCoord y, wxCoord w, wxCoord h,
     if ( !m_logicalFunctionSupported )
         return;
 
-    const wxCoord dx = x + w / 2.0;
-    const wxCoord dy = y + h / 2.0;
+    const wxCoord dx = x + std::lround(w / 2.0);
+    const wxCoord dy = y + std::lround(h / 2.0);
     const double factor = ((double) w) / h;
     m_graphicContext->PushState();
     m_graphicContext->Translate(dx, dy);
@@ -1427,7 +1427,7 @@ wxRect wxGCDCImpl::MSWApplyGDIPlusTransform(const wxRect& r) const
     m_graphicContext->GetTransform().TransformPoint(&x, &y);
 
     wxRect rect(r);
-    rect.Offset(x, y);
+    rect.Offset(std::lround(x), std::lround(y));
 
     return rect;
 }

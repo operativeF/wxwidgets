@@ -250,21 +250,21 @@ int wxChoice::GetSelection() const
 
 int wxChoice::GetCurrentSelection() const
 {
-    return (int)SendMessage(GetHwnd(), CB_GETCURSEL, 0, 0);
+    return (int)::SendMessageW(GetHwnd(), CB_GETCURSEL, 0, 0);
 }
 
 void wxChoice::SetSelection(int n)
 {
-    SendMessage(GetHwnd(), CB_SETCURSEL, n, 0);
+    ::SendMessageW(GetHwnd(), CB_SETCURSEL, n, 0);
 }
 
 // ----------------------------------------------------------------------------
 // string list functions
 // ----------------------------------------------------------------------------
 
-unsigned int wxChoice::GetCount() const
+size_t wxChoice::GetCount() const
 {
-    return (unsigned int)SendMessage(GetHwnd(), CB_GETCOUNT, 0, 0);
+    return ::SendMessageW(GetHwnd(), CB_GETCOUNT, 0, 0);
 }
 
 int wxChoice::FindString(std::string_view s, bool bCase) const
@@ -367,7 +367,7 @@ std::string wxChoice::GetString(unsigned int n) const
 
 void wxChoice::DoSetItemClientData(unsigned int n, void* clientData)
 {
-    if ( ::SendMessage(GetHwnd(), CB_SETITEMDATA,
+    if ( ::SendMessageW(GetHwnd(), CB_SETITEMDATA,
                        n, (LPARAM)clientData) == CB_ERR )
     {
         wxLogLastError(wxT("CB_SETITEMDATA"));
@@ -381,7 +381,7 @@ void* wxChoice::DoGetItemClientData(unsigned int n) const
     // in case of success, it only sets it if an error occurs.
     SetLastError(ERROR_SUCCESS);
 
-    LPARAM rc = SendMessage(GetHwnd(), CB_GETITEMDATA, n, 0);
+    LPARAM rc = SendMessageW(GetHwnd(), CB_GETITEMDATA, n, 0);
 
     // Notice that we must call GetLastError() to distinguish between a real
     // error and successfully retrieving a previously stored client data value
@@ -416,7 +416,7 @@ void wxChoice::MSWUpdateVisibleHeight()
 {
     if ( m_heightOwn != wxDefaultCoord )
     {
-        ::SendMessage(GetHwnd(), CB_SETITEMHEIGHT,
+        ::SendMessageW(GetHwnd(), CB_SETITEMHEIGHT,
                       (WPARAM)-1, m_heightOwn - COMBO_HEIGHT_ADJ);
     }
 }
@@ -485,7 +485,7 @@ void wxChoice::DoMoveWindow(int x, int y, int width, int height)
         // The extra item (" + 1") is required to prevent a vertical
         // scrollbar from appearing with comctl32.dll versions earlier
         // than 6.0 (such as found in Win2k).
-        const int hItem = SendMessage(GetHwnd(), CB_GETITEMHEIGHT, 0, 0);
+        const auto hItem = ::SendMessageW(GetHwnd(), CB_GETITEMHEIGHT, 0, 0);
         heightWithItems = height + hItem*(nItems + 1);
     }
     else
@@ -572,7 +572,7 @@ wxSize wxChoice::DoGetBestSize() const
 int wxChoice::SetHeightSimpleComboBox(int nItems) const
 {
     wxSize ch_size = wxGetCharSize( GetHWND(), GetFont() );
-    int hItem = SendMessage(GetHwnd(), CB_GETITEMHEIGHT, (WPARAM)-1, 0);
+    auto hItem = ::SendMessageW(GetHwnd(), CB_GETITEMHEIGHT, (WPARAM)-1, 0);
     return EDIT_HEIGHT_FROM_CHAR_HEIGHT( ch_size.y ) * wxMin( wxMax( nItems, 3 ), 6 ) + hItem - 1;
 }
 
@@ -625,7 +625,7 @@ void wxChoice::MSWDoPopupOrDismiss(bool show)
     // this can be seen in the combo page of the widgets sample under Windows 7
     SetFocus();
 
-    ::SendMessage(GetHwnd(), CB_SHOWDROPDOWN, show, 0);
+    ::SendMessageW(GetHwnd(), CB_SHOWDROPDOWN, show, 0);
 }
 
 bool wxChoice::Show(bool show)
@@ -635,7 +635,7 @@ bool wxChoice::Show(bool show)
 
     // When hiding the combobox, we also need to hide its popup part as it
     // doesn't happen automatically.
-    if ( !show && ::SendMessage(GetHwnd(), CB_GETDROPPEDSTATE, 0, 0) )
+    if ( !show && ::SendMessageW(GetHwnd(), CB_GETDROPPEDSTATE, 0, 0) )
         MSWDoPopupOrDismiss(false);
 
     return true;

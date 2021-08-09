@@ -262,7 +262,7 @@ inline void ToLower(std::string& str)
     return CmpNoCase(strViewA, strViewB) == 0;
 }
 
-[[nodiscard]] inline CONSTEXPR_CONTAINER std::string BeforeFirst(std::string_view strView, std::string_view strFirst, size_t pos = 0) noexcept
+[[nodiscard]] inline CONSTEXPR_CONTAINER std::string BeforeFirst(std::string_view strView, std::string_view strFirst, size_t pos = 0)
 {
     const auto n = strView.find(strFirst, pos);
 
@@ -272,7 +272,7 @@ inline void ToLower(std::string& str)
     return std::string(strView);
 }
 
-[[nodiscard]] inline CONSTEXPR_CONTAINER std::string BeforeFirst(std::string_view strView, const char ch, size_t pos = 0) noexcept
+[[nodiscard]] inline CONSTEXPR_CONTAINER std::string BeforeFirst(std::string_view strView, const char ch, size_t pos = 0)
 {
     const auto n = strView.find(ch, pos);
 
@@ -287,7 +287,7 @@ inline void ToLower(std::string& str)
     return BeforeFirst(strView, std::string_view(chs), pos);
 }
 
-[[nodiscard]] inline CONSTEXPR_CONTAINER std::string AfterFirst(std::string_view strView, std::string_view strAfter, size_t pos = 0) noexcept
+[[nodiscard]] inline CONSTEXPR_CONTAINER std::string AfterFirst(std::string_view strView, std::string_view strAfter, size_t pos = 0)
 {
     const auto n = strView.find(strAfter, pos);
 
@@ -297,7 +297,7 @@ inline void ToLower(std::string& str)
     return {};
 }
 
-[[nodiscard]] inline CONSTEXPR_CONTAINER std::string AfterFirst(std::string_view strView, const char ch, size_t pos = 0) noexcept
+[[nodiscard]] inline CONSTEXPR_CONTAINER std::string AfterFirst(std::string_view strView, const char ch, size_t pos = 0)
 {
     const auto n = strView.find(ch, pos);
 
@@ -312,7 +312,7 @@ inline void ToLower(std::string& str)
     return AfterFirst(strView, std::string_view(chs), pos);
 }
 
-[[nodiscard]] inline CONSTEXPR_CONTAINER std::string BeforeLast(std::string_view strView, std::string_view strBefore, size_t pos = std::string_view::npos) noexcept
+[[nodiscard]] inline CONSTEXPR_CONTAINER std::string BeforeLast(std::string_view strView, std::string_view strBefore, size_t pos = std::string_view::npos)
 {
     const auto n = strView.rfind(strBefore, pos);
 
@@ -322,7 +322,7 @@ inline void ToLower(std::string& str)
     return {};
 }
 
-[[nodiscard]] inline CONSTEXPR_CONTAINER std::string BeforeLast(std::string_view strView, const char ch, size_t pos = std::string_view::npos) noexcept
+[[nodiscard]] inline CONSTEXPR_CONTAINER std::string BeforeLast(std::string_view strView, const char ch, size_t pos = std::string_view::npos)
 {
     const auto n = strView.rfind(ch, pos);
 
@@ -339,7 +339,7 @@ inline void ToLower(std::string& str)
 
 
 // TODO: Do we really want to return the whole input string if it fails to find anything?
-[[nodiscard]] inline CONSTEXPR_CONTAINER std::string AfterLast(std::string_view strView, std::string_view strLast, size_t pos = std::string_view::npos) noexcept
+[[nodiscard]] inline CONSTEXPR_CONTAINER std::string AfterLast(std::string_view strView, std::string_view strLast, size_t pos = std::string_view::npos)
 {
     const auto n = strView.rfind(strLast, pos);
 
@@ -349,7 +349,7 @@ inline void ToLower(std::string& str)
     return std::string(strView);
 }
 
-[[nodiscard]] inline CONSTEXPR_CONTAINER std::string AfterLast(std::string_view strView, const char ch, size_t pos = std::string_view::npos) noexcept
+[[nodiscard]] inline CONSTEXPR_CONTAINER std::string AfterLast(std::string_view strView, const char ch, size_t pos = std::string_view::npos)
 {
     const auto n = strView.rfind(ch, pos);
 
@@ -370,7 +370,7 @@ inline void ToLower(std::string& str)
 }
 
 // FIXME: Not valid for unicode strings
-[[nodiscard]] inline bool ContainsNoCase(std::string_view strView, std::string_view strToFind) noexcept
+[[nodiscard]] inline bool ContainsNoCase(std::string_view strView, std::string_view strToFind)
 {
     std::string str(strView);
     std::string substrToFind(strToFind);

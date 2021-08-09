@@ -56,7 +56,7 @@ public:
 
     void SetLabel(const std::string& label) override;
 
-    unsigned int GetCount() const override;
+    size_t GetCount() const override;
     int GetSelection() const override;
     int GetCurrentSelection() const override;
     void SetSelection(int n) override;

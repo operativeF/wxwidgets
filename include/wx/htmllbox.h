@@ -247,8 +247,7 @@ public:
     // accessing strings
     // -----------------
 
-    // TODO: Type mismatch
-    unsigned int GetCount() const override
+    size_t GetCount() const override
         { return m_items.size(); }
 
     std::string GetString(unsigned int n) const override;
