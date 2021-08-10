@@ -35,6 +35,7 @@
 #include "wx/tokenzr.h"
 #include "wx/thread.h"
 #include "wx/stdpaths.h"
+#include "wx/stringutils.h"
 
 #if wxUSE_EXCEPTIONS
     // Any conforming C++11 compiler should have it, but g++ implementation
@@ -177,7 +178,7 @@ bool wxAppConsoleBase::Initialize(int& WXUNUSED(argc), wxChar **WXUNUSED(argv))
     return true;
 }
 
-wxString wxAppConsoleBase::GetAppName() const
+std::string wxAppConsoleBase::GetAppName() const
 {
     wxString name = m_appName;
     if ( name.empty() )
@@ -201,7 +202,7 @@ wxString wxAppConsoleBase::GetAppName() const
     return name;
 }
 
-wxString wxAppConsoleBase::GetAppDisplayName() const
+std::string wxAppConsoleBase::GetAppDisplayName() const
 {
     // use the explicitly provided display name, if any
     if ( !m_appDisplayName.empty() )
@@ -214,7 +215,7 @@ wxString wxAppConsoleBase::GetAppDisplayName() const
 
     // if neither is set, use the capitalized version of the program file as
     // it's the most reasonable default
-    return GetAppName().Capitalize();
+    return wx::utils::ToUpperCopy(GetAppName());
 }
 
 wxEventLoopBase *wxAppConsoleBase::CreateMainLoop()

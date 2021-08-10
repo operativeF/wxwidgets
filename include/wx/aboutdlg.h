@@ -32,8 +32,8 @@ public:
     // -----------------------------------
 
     // name of the program, if not used defaults to wxApp::GetAppDisplayName()
-    void SetName(const wxString& name) { m_name = name; }
-    wxString GetName() const
+    void SetName(const std::string& name) { m_name = name; }
+    std::string GetName() const
         { return m_name.empty() ? wxTheApp->GetAppDisplayName() : m_name; }
 
     // version should contain program version without "version" word (e.g.,
@@ -143,8 +143,8 @@ public:
     wxString GetCopyrightToDisplay() const;
 
 private:
-    wxString m_name,
-             m_version,
+    std::string m_name;
+    wxString m_version,
              m_longVersion,
              m_description,
              m_copyright,

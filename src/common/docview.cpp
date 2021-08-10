@@ -421,7 +421,7 @@ bool wxDocument::Revert()
     if ( wxMessageBox
          (
             _("Discard changes and reload the last saved version?").ToStdString(),
-            wxTheApp->GetAppDisplayName().ToStdString(),
+            wxTheApp->GetAppDisplayName(),
             wxYES_NO | wxCANCEL | wxICON_QUESTION,
             GetDocumentWindow()
           ) != wxYES )
@@ -474,9 +474,8 @@ bool wxDocument::OnSaveModified()
                     wxString::Format
                     (
                      _("Do you want to save changes to %s?"),
-                     GetUserReadableName()
-                    ).ToStdString(),
-                    wxTheApp->GetAppDisplayName().ToStdString(),
+                     GetUserReadableName()),
+                    wxTheApp->GetAppDisplayName(),
                     wxYES_NO | wxCANCEL | wxICON_QUESTION | wxCENTRE,
                     GetDocumentWindow()
                  ) )
@@ -1534,7 +1533,7 @@ wxString wxDocManager::MakeNewDocumentName()
 // If docName is empty, a document is not currently active.
 std::string wxDocManager::MakeFrameTitle(wxDocument* doc)
 {
-    std::string appName = wxTheApp->GetAppDisplayName().ToStdString();
+    std::string appName = wxTheApp->GetAppDisplayName();
     std::string title;
     if (!doc)
         title = appName;

@@ -43,6 +43,7 @@
 #define   HKEY_DEFINED    // already defined in windows.h
 #include  "wx/msw/registry.h"
 
+#include <boost/nowide/stackstring.hpp>
 #include <fmt/core.h>
 
 // some registry functions don't like signed chars
@@ -1014,8 +1015,6 @@ bool wxRegKey::QueryValue(const std::string& szValue, wxMemoryBuffer& buffer) co
   return false;
 }
 
-
-
 bool wxRegKey::QueryValue(const std::string& szValue,
                           std::string& strValue,
                           bool raw) const
@@ -1046,17 +1045,18 @@ bool wxRegKey::QueryValue(const std::string& szValue,
                 // being called with 0 size
                 strValue.clear();
             }
+            /*
             else
             {
                 // extra scope for wxStringBufferLength
                 {
-                    wxStringBufferLength strBuf(wxString(strValue), chars);
+                    boost::nowide::wstackstring stackStr(strValue.c_str());
                     m_dwLastError = ::RegQueryValueExW((HKEY) m_hKey,
                                                     RegValueStr(szValue), //  subkey
                                                     wxRESERVED_PARAM,
                                                     &dwType,
-                                                    (RegString)(wxChar*)strBuf,
-                                                    &dwSize);
+                                                    stackStr.get(),
+                                                 &dwSize);
 
                     // The returned string may or not be NUL-terminated,
                     // exclude the trailing NUL if it's there (which is
@@ -1065,6 +1065,8 @@ bool wxRegKey::QueryValue(const std::string& szValue,
                         chars--;
 
                     strBuf.SetLength(chars);
+
+                    strValue = boost::nowide::narrow(stackStr);
                 }
 
                 // expand the var expansions in the string unless disabled
@@ -1089,6 +1091,7 @@ bool wxRegKey::QueryValue(const std::string& szValue,
                     }
                 }
             }
+            */
 
             if ( m_dwLastError == ERROR_SUCCESS )
               return true;

@@ -227,7 +227,7 @@ wxString wxLogGui::GetTitle() const
             titleFormat = _("%s Information");
     }
 
-    return wxString::Format(titleFormat, wxTheApp ? wxTheApp->GetAppDisplayName() : _("Application"));
+    return wxString::Format(titleFormat, wxTheApp ? wxTheApp->GetAppDisplayName() : _("Application").ToStdString());
 }
 
 void
