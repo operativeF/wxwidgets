@@ -13,6 +13,12 @@
 
 #include "wx/defs.h"
 
+#include <iostream>
+#include <stdexcept>
+
+#include <boost/nowide/stackstring.hpp>
+#include <fmt/core.h>
+
 #if wxUSE_REGKEY
 
 class WXDLLIMPEXP_FWD_BASE wxOutputStream;
@@ -86,30 +92,30 @@ public:
     // number of standard keys
   static const size_t nStdKeys;
     // get the name of a standard key
-  static const wxChar *GetStdKeyName(size_t key);
+  static const std::string& GetStdKeyName(size_t key);
     // get the short name of a standard key
-  static const wxChar *GetStdKeyShortName(size_t key);
+  static const std::string& GetStdKeyShortName(size_t key);
     // get StdKey from root HKEY
   static StdKey GetStdKeyFromHkey(WXHKEY hkey);
 
   // extracts the std key prefix from the string (return value) and
   // leaves only the part after it (i.e. modifies the string passed!)
-  static StdKey ExtractKeyName(wxString& str);
+  static StdKey ExtractKeyName(std::string& str);
 
     // root key is set to HKCR (the only root key under Win16)
     wxRegKey(WOW64ViewMode viewMode = WOW64ViewMode_Default);
 
     // strKey is the full name of the key (i.e. starting with HKEY_xxx...)
-    wxRegKey(const wxString& strKey,
+    wxRegKey(const std::string& strKey,
         WOW64ViewMode viewMode = WOW64ViewMode_Default);
 
     // strKey is the name of key under (standard key) keyParent
     wxRegKey(StdKey keyParent,
-        const wxString& strKey,
+        const std::string& strKey,
         WOW64ViewMode viewMode = WOW64ViewMode_Default);
 
     // strKey is the name of key under (previously created) keyParent
-  wxRegKey(const wxRegKey& keyParent, const wxString& strKey);
+  wxRegKey(const wxRegKey& keyParent, const std::string& strKey);
     // dtor closes the key
   ~wxRegKey();
 
@@ -120,17 +126,17 @@ public:
 
   // change key (closes the previously opened key if any)
     // the name is absolute, i.e. should start with HKEY_xxx
-  void  SetName(const wxString& strKey);
+  void  SetName(const std::string& strKey);
     // the name is relative to the parent key
-  void  SetName(StdKey keyParent, const wxString& strKey);
+  void  SetName(StdKey keyParent, const std::string& strKey);
     // the name is relative to the parent key
-  void  SetName(const wxRegKey& keyParent, const wxString& strKey);
+  void  SetName(const wxRegKey& keyParent, const std::string& strKey);
     // hKey should be opened and will be closed in wxRegKey dtor
   void  SetHkey(WXHKEY hKey);
 
   // get information about the key
     // get the (full) key name. Abbreviate std root keys if bShortPrefix.
-  wxString GetName(bool bShortPrefix = true) const;
+  std::string GetName(bool bShortPrefix = true) const;
     // Retrieves the registry view used by this key.
     WOW64ViewMode GetView() const { return m_viewMode; }
     // return true if the key exists
@@ -152,16 +158,16 @@ public:
     // create the key: will fail if the key already exists and !bOkIfExists
   bool  Create(bool bOkIfExists = true);
     // rename a value from old name to new one
-  bool  RenameValue(const wxString& szValueOld, const wxString& szValueNew);
+  bool  RenameValue(const std::string& szValueOld, const std::string& szValueNew);
     // rename the key
-  bool  Rename(const wxString& szNewName);
+  bool  Rename(const std::string& szNewName);
     // copy value to another key possibly changing its name (by default it will
     // remain the same)
-  bool  CopyValue(const wxString& szValue, wxRegKey& keyDst,
-                  const wxString& szNewName = wxEmptyString);
+  bool  CopyValue(const std::string& szValue, wxRegKey& keyDst,
+                  const std::string& szNewName = {});
 
     // copy the entire contents of the key recursively to another location
-  bool  Copy(const wxString& szNewName);
+  bool  Copy(const std::string& szNewName);
     // same as Copy() but using a key and not the name
   bool  Copy(wxRegKey& keyDst);
     // close the key (will be automatically done in dtor)
@@ -171,55 +177,55 @@ public:
     // deletes this key and all of it's subkeys/values
   bool  DeleteSelf();
     // deletes the subkey with all of it's subkeys/values recursively
-  bool  DeleteKey(const wxString& szKey);
+  bool  DeleteKey(const std::string& szKey);
     // deletes the named value (may be empty string to remove the default value)
-  bool DeleteValue(const wxString& szValue);
+  bool DeleteValue(const std::string& szValue);
 
   // access to values and subkeys
     // get value type
-  ValueType GetValueType(const wxString& szValue) const;
+  ValueType GetValueType(const std::string& szValue) const;
     // returns true if the value contains a number (else it's some string)
-  bool IsNumericValue(const wxString& szValue) const;
+  bool IsNumericValue(const std::string& szValue) const;
 
     // assignment operators set the default value of the key
-  wxRegKey& operator=(const wxString& strValue)
-    { SetValue(wxEmptyString, strValue); return *this; }
+  wxRegKey& operator=(const std::string& strValue)
+    { SetValue("", strValue); return *this; }
 
     // query the default value of the key: implicitly or explicitly
-  wxString QueryDefaultValue() const;
-  operator wxString() const { return QueryDefaultValue(); }
+  std::string QueryDefaultValue() const;
+  operator std::string() const { return QueryDefaultValue(); }
 
     // named values
 
     // set the string value
-  bool  SetValue(const wxString& szValue, const wxString& strValue);
+  bool  SetValue(const std::string& szValue, const std::string& strValue);
     // retrieve the string value
-  bool  QueryValue(const wxString& szValue, wxString& strValue) const
+  bool  QueryValue(const std::string& szValue, std::string& strValue) const
     { return QueryValue(szValue, strValue, false); }
     // retrieve raw string value
-  bool  QueryRawValue(const wxString& szValue, wxString& strValue) const
+  bool  QueryRawValue(const std::string& szValue, std::string& strValue) const
     { return QueryValue(szValue, strValue, true); }
     // retrieve either raw or expanded string value
-  bool  QueryValue(const wxString& szValue, wxString& strValue, bool raw) const;
+  bool  QueryValue(const std::string& szValue, std::string& strValue, bool raw) const;
 
     // set the 32-bit numeric value
-  bool  SetValue(const wxString& szValue, long lValue);
+  bool  SetValue(const std::string& szValue, long lValue);
     // return the 32-bit numeric value
-  bool  QueryValue(const wxString& szValue, long *plValue) const;
+  bool  QueryValue(const std::string& szValue, long *plValue) const;
     // set the 64-bit numeric value
-  bool  SetValue64(const wxString& szValue, wxLongLong_t llValue);
+  bool  SetValue64(const std::string& szValue, wxLongLong_t llValue);
     // return the 64-bit numeric value
-  bool  QueryValue64(const wxString& szValue, wxLongLong_t *pllValue) const;
+  bool  QueryValue64(const std::string& szValue, wxLongLong_t *pllValue) const;
     // set the binary value
-  bool  SetValue(const wxString& szValue, const wxMemoryBuffer& buf);
+  bool  SetValue(const std::string& szValue, const wxMemoryBuffer& buf);
     // return the binary value
-  bool  QueryValue(const wxString& szValue, wxMemoryBuffer& buf) const;
+  bool  QueryValue(const std::string& szValue, wxMemoryBuffer& buf) const;
 
   // query existence of a key/value
     // return true if value exists
-  bool HasValue(const wxString& szKey) const;
+  bool HasValue(const std::string& szKey) const;
     // return true if given subkey exists
-  bool HasSubKey(const wxString& szKey) const;
+  bool HasSubKey(const std::string& szKey) const;
     // return true if any subkeys exist
   bool HasSubkeys() const;
     // return true if any values exist
@@ -228,18 +234,18 @@ public:
   bool IsEmpty() const { return !HasSubkeys() && !HasValues(); }
 
   // enumerate values and subkeys
-  bool  GetFirstValue(wxString& strValueName, long& lIndex);
-  bool  GetNextValue (wxString& strValueName, long& lIndex) const;
+  bool  GetFirstValue(std::string& strValueName, long& lIndex);
+  bool  GetNextValue (std::string& strValueName, long& lIndex) const;
 
-  bool  GetFirstKey  (wxString& strKeyName  , long& lIndex);
-  bool  GetNextKey   (wxString& strKeyName  , long& lIndex) const;
+  bool  GetFirstKey  (std::string& strKeyName  , long& lIndex);
+  bool  GetNextKey   (std::string& strKeyName  , long& lIndex) const;
 
   // export the contents of this key and all its subkeys to the given file
   // (which won't be overwritten, it's an error if it already exists)
   //
   // note that we export the key in REGEDIT4 format, not RegSaveKey() binary
   // format nor newer REGEDIT5 one
-  bool Export(const wxString& filename) const;
+  bool Export(const std::string& filename) const;
 
   // same as above but write to the given (opened) stream
   bool Export(wxOutputStream& ostr) const;
@@ -253,16 +259,16 @@ private:
   bool DoExport(wxOutputStream& ostr) const;
 
   // export a single value
-  bool DoExportValue(wxOutputStream& ostr, const wxString& name) const;
+  bool DoExportValue(wxOutputStream& ostr, const std::string& name) const;
 
   // return the text representation (in REGEDIT4 format) of the value with the
   // given name
-  wxString FormatValue(const wxString& name) const;
+  std::string FormatValue(const std::string& name) const;
 
 
   WXHKEY        m_hKey{nullptr};    // our handle
   WXHKEY        m_hRootKey;         // handle of the top key (i.e. StdKey)
-  wxString      m_strKey;           // key name (relative to m_hRootKey)
+  std::string      m_strKey;           // key name (relative to m_hRootKey)
   WOW64ViewMode m_viewMode;         // which view to select under WOW64
   AccessMode    m_mode;             // FIXME: Default value? valid only if key is opened
   mutable long  m_dwLastError{0};   // last error (0 if none)

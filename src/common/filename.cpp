@@ -1351,7 +1351,7 @@ bool wxFileName::Rmdir(const wxString& dir, int flags)
         if ( !d.IsOpened() )
             return false;
 
-        wxString filename;
+        std::string filename;
 
         // First delete all subdirectories: notice that we don't follow
         // symbolic links, potentially leading outside this directory, to avoid
@@ -1560,11 +1560,8 @@ bool wxFileName::ReplaceEnvVariable(const wxString& envname,
                                     wxPathFormat format)
 {
     // look into stringForm for the contents of the given environment variable
-    wxString val;
-    if (envname.empty() ||
-        !wxGetEnv(envname, &val))
-        return false;
-    if (val.empty())
+    std::string val{ wxGetEnv(envname) };
+    if (envname.empty() || val.empty())
         return false;
 
     wxString stringForm = GetPath(wxPATH_GET_VOLUME, format);
@@ -2030,12 +2027,12 @@ void wxFileName::SetFullName(const wxString& fullname)
                         &m_name, &m_ext, &m_hasExt);
 }
 
-wxString wxFileName::GetFullName() const
+std::string wxFileName::GetFullName() const
 {
-    wxString fullname = m_name;
+    std::string fullname = m_name;
     if ( m_hasExt )
     {
-        fullname << wxFILE_SEP_EXT << m_ext;
+        fullname += wxFILE_SEP_EXT + m_ext;
     }
 
     return fullname;
@@ -2145,10 +2142,10 @@ wxString wxFileName::GetPath( int flags, wxPathFormat format ) const
     return fullpath;
 }
 
-wxString wxFileName::GetFullPath( wxPathFormat format ) const
+std::string wxFileName::GetFullPath( wxPathFormat format ) const
 {
     // we already have a function to get the path
-    wxString fullpath = GetPath(wxPATH_GET_VOLUME | wxPATH_GET_SEPARATOR,
+    std::string fullpath = GetPath(wxPATH_GET_VOLUME | wxPATH_GET_SEPARATOR,
                                 format);
 
     // now just add the file name and extension to it
@@ -2738,7 +2735,7 @@ bool wxFileName::GetTimes(wxDateTime *dtAccess,
     if ( IsDir() )
     {
         // implemented in msw/dir.cpp
-        extern bool wxGetDirectoryTimes(const wxString& dirname,
+        extern bool wxGetDirectoryTimes(const std::string& dirname,
                                         FILETIME *, FILETIME *, FILETIME *);
 
         // we should pass the path without the trailing separator to

@@ -86,7 +86,7 @@ public:
             wxCHECK_MSG( !HasFlag(wxFD_MULTIPLE), wxString(), "When using wxFD_MULTIPLE, must call GetFilenames() instead" );
             return m_filectrl->GetFilename();
         }
-    void GetFilenames(wxArrayString& files) const override
+    void GetFilenames(std::vector<std::string>& files) const override
         { m_filectrl->GetFilenames(files); }
     wxString GetWildcard() const override
         { return m_filectrl->GetWildcard(); }

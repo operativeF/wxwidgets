@@ -16,6 +16,8 @@
 #include "wx/fswatcher.h"
 #include "wx/private/fswatcher.h"
 
+#include <fmt/core.h>
+
 // ============================================================================
 // helpers
 // ============================================================================
@@ -25,7 +27,7 @@ wxDEFINE_EVENT(wxEVT_FSWATCHER, wxFileSystemWatcherEvent);
 namespace
 {
 
-wxString GetFSWEventChangeTypeName(int type)
+std::string GetFSWEventChangeTypeName(int type)
 {
     switch (type)
     {
@@ -60,14 +62,14 @@ wxString GetFSWEventChangeTypeName(int type)
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxFileSystemWatcherEvent, wxEvent);
 
-wxString wxFileSystemWatcherEvent::ToString() const
+std::string wxFileSystemWatcherEvent::ToString() const
 {
     if (IsError())
     {
-        return wxString::Format("FSW_EVT type=%d (%s) message='%s'", m_changeType,
+        return fmt::format("FSW_EVT type=%d (%s) message='%s'", m_changeType,
             GetFSWEventChangeTypeName(m_changeType), GetErrorDescription());
     }
-    return wxString::Format("FSW_EVT type=%d (%s) path='%s'", m_changeType,
+    return fmt::format("FSW_EVT type=%d (%s) path='%s'", m_changeType,
             GetFSWEventChangeTypeName(m_changeType), GetPath().GetFullPath());
 }
 
@@ -115,10 +117,10 @@ bool
 wxFileSystemWatcherBase::AddAny(const wxFileName& path,
                                 int events,
                                 wxFSWPathType type,
-                                const wxString& filespec)
+                                const std::string& filespec)
 {
-    wxString canonical = GetCanonicalPath(path);
-    if (canonical.IsEmpty())
+    std::string canonical = GetCanonicalPath(path);
+    if (canonical.empty())
         return false;
 
     // Check if the patch isn't already being watched.
@@ -149,8 +151,8 @@ wxFileSystemWatcherBase::AddAny(const wxFileName& path,
 bool wxFileSystemWatcherBase::Remove(const wxFileName& path)
 {
     // args validation & consistency checks
-    wxString canonical = GetCanonicalPath(path);
-    if (canonical.IsEmpty())
+    std::string canonical = GetCanonicalPath(path);
+    if (canonical.empty())
         return false;
 
     wxFSWatchInfoMap::iterator it = m_watches.find(canonical);
@@ -171,7 +173,7 @@ bool wxFileSystemWatcherBase::Remove(const wxFileName& path)
 }
 
 bool wxFileSystemWatcherBase::AddTree(const wxFileName& path, int events,
-                                      const wxString& filespec)
+                                      const std::string& filespec)
 {
     if (!path.DirExists())
         return false;
@@ -182,19 +184,19 @@ bool wxFileSystemWatcherBase::AddTree(const wxFileName& path, int events,
     {
     public:
         AddTraverser(wxFileSystemWatcherBase* watcher, int events,
-                     const wxString& filespec) :
+                     const std::string& filespec) :
             m_watcher(watcher), m_events(events), m_filespec(filespec)
         {
         }
 
-        wxDirTraverseResult OnFile(const wxString& WXUNUSED(filename)) override
+        wxDirTraverseResult OnFile(const std::string& WXUNUSED(filename)) override
         {
             // There is no need to watch individual files as we watch the
             // parent directory which will notify us about any changes in them.
             return wxDIR_CONTINUE;
         }
 
-        wxDirTraverseResult OnDir(const wxString& dirname) override
+        wxDirTraverseResult OnDir(const std::string& dirname) override
         {
             if ( m_watcher->AddAny(wxFileName::DirName(dirname),
                                    m_events, wxFSWPathType::Tree, m_filespec) )
@@ -208,7 +210,7 @@ bool wxFileSystemWatcherBase::AddTree(const wxFileName& path, int events,
     private:
         wxFileSystemWatcherBase* m_watcher;
         int m_events;
-        wxString m_filespec;
+        std::string m_filespec;
     };
 
     wxDir dir(path.GetFullPath());
@@ -238,19 +240,19 @@ bool wxFileSystemWatcherBase::RemoveTree(const wxFileName& path)
     {
     public:
         RemoveTraverser(wxFileSystemWatcherBase* watcher,
-                        const wxString& filespec) :
+                        const std::string& filespec) :
             m_watcher(watcher), m_filespec(filespec)
         {
         }
 
-        wxDirTraverseResult OnFile(const wxString& WXUNUSED(filename)) override
+        wxDirTraverseResult OnFile(const std::string& WXUNUSED(filename)) override
         {
             // We never watch the individual files when watching the tree, so
             // nothing to do here.
             return wxDIR_CONTINUE;
         }
 
-        wxDirTraverseResult OnDir(const wxString& dirname) override
+        wxDirTraverseResult OnDir(const std::string& dirname) override
         {
             m_watcher->Remove(wxFileName::DirName(dirname));
             return wxDIR_CONTINUE;
@@ -258,16 +260,16 @@ bool wxFileSystemWatcherBase::RemoveTree(const wxFileName& path)
 
     private:
         wxFileSystemWatcherBase* m_watcher;
-        wxString m_filespec;
+        std::string m_filespec;
     };
 
     // If AddTree() used a filespec, we must use the same one
-    wxString canonical = GetCanonicalPath(path);
+    std::string canonical = GetCanonicalPath(path);
     wxFSWatchInfoMap::iterator it = m_watches.find(canonical);
     wxCHECK_MSG( it != m_watches.end(), false,
-                 wxString::Format("Path '%s' is not watched", canonical) );
+                 fmt::format("Path '%s' is not watched", canonical) );
     wxFSWatchInfo watch = it->second;
-    const wxString filespec = watch.GetFilespec();
+    const std::string filespec = watch.GetFilespec();
 
 #if defined(__WINDOWS__)
     // When there's no filespec, the wxMSW AddTree() would have set a watch
@@ -311,7 +313,7 @@ int wxFileSystemWatcherBase::GetWatchedPathsCount() const
 }
 
 // TODO: Return a std::vector
-int wxFileSystemWatcherBase::GetWatchedPaths(std::vector<wxString>* paths) const
+int wxFileSystemWatcherBase::GetWatchedPaths(std::vector<std::string>* paths) const
 {
     wxCHECK_MSG( paths != nullptr, -1, "Null array passed to retrieve paths");
 

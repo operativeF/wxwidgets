@@ -540,7 +540,7 @@ iaculis malesuada. Donec bibendum ipsum ut ante porta fringilla.\n";
 
     wxRichTextAttr normalParaAttr;
     normalParaAttr.SetFont(font);
-    normalParaAttr.SetTextColour(wxColour(wxT("LIGHT GREY")));
+    normalParaAttr.SetTextColour(wxColour("LIGHT GREY"));
 
     m_previewCtrl->Freeze();
     m_previewCtrl->Clear();

@@ -33,6 +33,7 @@
 #include  "wx/config.h"
 #include  "wx/fileconf.h"
 #include  "wx/filefn.h"
+#include  "wx/stringutils.h"
 
 #include "wx/base64.h"
 
@@ -44,6 +45,9 @@
 
 #include  <cctype>
 #include  <cstdlib>
+#include <charconv>
+
+#include <fmt/core.h>
 
 // ----------------------------------------------------------------------------
 // constants
@@ -60,11 +64,11 @@ static int CompareEntries(wxFileConfigEntry *p1, wxFileConfigEntry *p2);
 static int CompareGroups(wxFileConfigGroup *p1, wxFileConfigGroup *p2);
 
 // filter strings
-static wxString FilterInValue(const wxString& str);
-static wxString FilterOutValue(const wxString& str);
+static std::string FilterInValue(const std::string& str);
+static std::string FilterOutValue(const std::string& str);
 
-static wxString FilterInEntryName(const wxString& str);
-static wxString FilterOutEntryName(const wxString& str);
+static std::string FilterInEntryName(const std::string& str);
+static std::string FilterOutEntryName(const std::string& str);
 
 // ============================================================================
 // private classes
@@ -95,7 +99,7 @@ public:
   void SetNext(wxFileConfigLineList *pNext)  { m_pNext = pNext; }
   void SetPrev(wxFileConfigLineList *pPrev)  { m_pPrev = pPrev; }
 
-  explicit wxFileConfigLineList(const wxString& str,
+  explicit wxFileConfigLineList(const std::string& str,
                        wxFileConfigLineList *pNext = nullptr) : m_strLine(str)
     { SetNext(pNext); SetPrev(nullptr); }
 
@@ -107,11 +111,11 @@ public:
   wxFileConfigLineList *Prev() const { return m_pPrev;  }
 
   // get/change lines text
-  void SetText(const wxString& str) { m_strLine = str;  }
-  const wxString& Text() const { return m_strLine; }
+  void SetText(const std::string& str) { m_strLine = str;  }
+  const std::string& Text() const { return m_strLine; }
 
 private:
-  wxString  m_strLine;                  // line contents
+  std::string  m_strLine;                  // line contents
   wxFileConfigLineList *m_pNext,        // next node
                        *m_pPrev;        // previous one
 };
@@ -125,7 +129,7 @@ class wxFileConfigEntry
 private:
   wxFileConfigGroup *m_pParent; // group that contains us
 
-  wxString      m_strName,      // entry name
+  std::string      m_strName,      // entry name
                 m_strValue;     //       value
   bool          m_bImmutable; // can be overridden locally?
   bool          m_bHasValue;  // set after first call to SetValue()
@@ -138,11 +142,11 @@ private:
 
 public:
   wxFileConfigEntry(wxFileConfigGroup *pParent,
-                    const wxString& strName, int nLine);
+                    const std::string& strName, int nLine);
 
   // simple accessors
-  const wxString& Name()        const { return m_strName;    }
-  const wxString& Value()       const { return m_strValue;   }
+  const std::string& Name()        const { return m_strName;    }
+  const std::string& Value()       const { return m_strValue;   }
   wxFileConfigGroup *Group()    const { return m_pParent;    }
   bool            IsImmutable() const { return m_bImmutable; }
   bool            IsLocal()     const { return m_pLine != nullptr; }
@@ -151,7 +155,7 @@ public:
                   GetLine()     const { return m_pLine;      }
 
   // modify entry attributes
-  void SetValue(const wxString& strValue, bool bUser = true);
+  void SetValue(const std::string& strValue, bool bUser = true);
   void SetLine(wxFileConfigLineList *pLine);
 
     wxFileConfigEntry(const wxFileConfigEntry&) = delete;
@@ -169,7 +173,7 @@ private:
   wxFileConfigGroup  *m_pParent;    // parent group (NULL for root group)
   ArrayEntries  m_aEntries;         // entries in this group
   ArrayGroups   m_aSubgroups;       // subgroups
-  wxString      m_strName;          // group's name
+  std::string      m_strName;          // group's name
   wxFileConfigLineList *m_pLine{nullptr};    // pointer to our line in the linked list
   wxFileConfigEntry *m_pLastEntry{nullptr};  // last entry/subgroup of this group in the
   wxFileConfigGroup *m_pLastGroup{nullptr};  // local file (we insert new ones after it)
@@ -182,13 +186,13 @@ private:
 
 public:
   // ctor
-  wxFileConfigGroup(wxFileConfigGroup *pParent, const wxString& strName, wxFileConfig *);
+  wxFileConfigGroup(wxFileConfigGroup *pParent, const std::string& strName, wxFileConfig *);
 
   // dtor deletes all entries and subgroups also
   ~wxFileConfigGroup();
 
   // simple accessors
-  const wxString& Name()    const { return m_strName; }
+  const std::string& Name()    const { return m_strName; }
   wxFileConfigGroup    *Parent()  const { return m_pParent; }
   wxFileConfig   *Config()  const { return m_pConfig; }
 
@@ -197,24 +201,24 @@ public:
   bool  IsEmpty() const { return Entries().IsEmpty() && Groups().IsEmpty(); }
 
   // find entry/subgroup (NULL if not found)
-  wxFileConfigGroup *FindSubgroup(const wxString& name) const;
-  wxFileConfigEntry *FindEntry   (const wxString& name) const;
+  wxFileConfigGroup *FindSubgroup(const std::string& name) const;
+  wxFileConfigEntry *FindEntry   (const std::string& name) const;
 
   // delete entry/subgroup, return false if doesn't exist
-  bool DeleteSubgroupByName(const wxString& name);
-  bool DeleteEntry(const wxString& name);
+  bool DeleteSubgroupByName(const std::string& name);
+  bool DeleteEntry(const std::string& name);
 
   // create new entry/subgroup returning pointer to newly created element
-  wxFileConfigGroup *AddSubgroup(const wxString& strName);
-  wxFileConfigEntry *AddEntry   (const wxString& strName, int nLine = wxNOT_FOUND);
+  wxFileConfigGroup *AddSubgroup(const std::string& strName);
+  wxFileConfigEntry *AddEntry   (const std::string& strName, int nLine = wxNOT_FOUND);
 
   void SetLine(wxFileConfigLineList *pLine);
 
   // rename: no checks are done to ensure that the name is unique!
-  void Rename(const wxString& newName);
+  void Rename(const std::string& newName);
 
   //
-  wxString GetFullName() const;
+  std::string GetFullName() const;
 
   // get the last line belonging to an entry/subgroup of this group
   wxFileConfigLineList *GetGroupLine();     // line which contains [group]
@@ -239,12 +243,12 @@ public:
 // static functions
 // ----------------------------------------------------------------------------
 
-wxString wxFileConfig::GetGlobalDir()
+std::string wxFileConfig::GetGlobalDir()
 {
     return wxStandardPaths::Get().GetConfigDir();
 }
 
-wxString wxFileConfig::GetLocalDir(int style)
+std::string wxFileConfig::GetLocalDir(int style)
 {
     wxUnusedVar(style);
 
@@ -256,14 +260,14 @@ wxString wxFileConfig::GetLocalDir(int style)
                                        : stdp.GetUserConfigDir();
 }
 
-wxFileName wxFileConfig::GetGlobalFile(const wxString& szFile)
+wxFileName wxFileConfig::GetGlobalFile(const std::string& szFile)
 {
     const wxStandardPathsBase& stdp = wxStandardPaths::Get();
 
     return {GetGlobalDir(), stdp.MakeConfigFileName(szFile)};
 }
 
-wxFileName wxFileConfig::GetLocalFile(const wxString& szFile, int style)
+wxFileName wxFileConfig::GetLocalFile(const std::string& szFile, int style)
 {
     const wxStandardPathsBase& stdp = wxStandardPaths::Get();
 
@@ -290,11 +294,11 @@ wxIMPLEMENT_ABSTRACT_CLASS(wxFileConfig, wxConfigBase);
 
 
 // constructor supports creation of wxFileConfig objects of any type
-wxFileConfig::wxFileConfig(const wxString& appName, const wxString& vendorName,
-                           const wxString& strLocal, const wxString& strGlobal,
+wxFileConfig::wxFileConfig(const std::string& appName, const std::string& vendorName,
+                           const std::string& strLocal, const std::string& strGlobal,
                            long style,
                            const wxMBConv& conv)
-            : wxConfigBase(( !appName && wxTheApp ) ? wxTheApp->GetAppName() : appName,
+            : wxConfigBase(( appName.empty() && wxTheApp ) ? wxTheApp->GetAppName() : appName,
                            vendorName,
                            strLocal, strGlobal,
                            style),
@@ -332,7 +336,7 @@ wxFileConfig::wxFileConfig(const wxString& appName, const wxString& vendorName,
 
     
     m_pCurrentGroup =
-    m_pRootGroup    = new wxFileConfigGroup(nullptr, wxEmptyString, this);
+    m_pRootGroup    = new wxFileConfigGroup(nullptr, "", this);
 
     m_linesHead =
     m_linesTail = nullptr;
@@ -366,7 +370,7 @@ wxFileConfig::wxFileConfig(const wxString& appName, const wxString& vendorName,
         }
         else
         {
-            const wxString path = m_fnLocalFile.GetFullPath();
+            const std::string path = m_fnLocalFile.GetFullPath();
             wxLogWarning(_("can't open user configuration file '%s'."),
                          path.c_str());
 
@@ -393,7 +397,7 @@ wxFileConfig::wxFileConfig(wxInputStream &inStream, const wxMBConv& conv)
     SetStyle(GetStyle() | wxCONFIG_USE_LOCAL_FILE);
 
     m_pCurrentGroup =
-    m_pRootGroup    = new wxFileConfigGroup(nullptr, wxEmptyString, this);
+    m_pRootGroup    = new wxFileConfigGroup(nullptr, "", this);
 
     m_linesHead =
     m_linesTail = nullptr;
@@ -644,14 +648,14 @@ void wxFileConfig::Parse(const wxTextBuffer& buffer, bool bLocal)
 
 void wxFileConfig::SetRootPath()
 {
-    m_strPath.Empty();
+    m_strPath.clear();
     m_pCurrentGroup = m_pRootGroup;
 }
 
 bool
-wxFileConfig::DoSetPath(const wxString& strPath, bool createMissingComponents)
+wxFileConfig::DoSetPath(const std::string& strPath, bool createMissingComponents)
 {
-    std::vector<wxString> aParts;
+    std::vector<std::string> aParts;
 
     if ( strPath.empty() ) {
         SetRootPath();
@@ -686,20 +690,20 @@ wxFileConfig::DoSetPath(const wxString& strPath, bool createMissingComponents)
     }
 
     // recombine path parts in one variable
-    m_strPath.Empty();
+    m_strPath.clear();
     for ( size_t n = 0; n < aParts.size(); n++ ) {
-        m_strPath << wxCONFIG_PATH_SEPARATOR << aParts[n];
+        m_strPath += wxCONFIG_PATH_SEPARATOR + aParts[n];
     }
 
     return true;
 }
 
-void wxFileConfig::SetPath(const wxString& strPath)
+void wxFileConfig::SetPath(const std::string& strPath)
 {
     DoSetPath(strPath, true /* create missing path components */);
 }
 
-const wxString& wxFileConfig::GetPath() const
+const std::string& wxFileConfig::GetPath() const
 {
     return m_strPath;
 }
@@ -708,13 +712,13 @@ const wxString& wxFileConfig::GetPath() const
 // enumeration
 // ----------------------------------------------------------------------------
 
-bool wxFileConfig::GetFirstGroup(wxString& str, long& lIndex) const
+bool wxFileConfig::GetFirstGroup(std::string& str, long& lIndex) const
 {
     lIndex = 0;
     return GetNextGroup(str, lIndex);
 }
 
-bool wxFileConfig::GetNextGroup (wxString& str, long& lIndex) const
+bool wxFileConfig::GetNextGroup (std::string& str, long& lIndex) const
 {
     if ( size_t(lIndex) < m_pCurrentGroup->Groups().GetCount() ) {
         str = m_pCurrentGroup->Groups()[(size_t)lIndex++]->Name();
@@ -724,13 +728,13 @@ bool wxFileConfig::GetNextGroup (wxString& str, long& lIndex) const
         return false;
 }
 
-bool wxFileConfig::GetFirstEntry(wxString& str, long& lIndex) const
+bool wxFileConfig::GetFirstEntry(std::string& str, long& lIndex) const
 {
     lIndex = 0;
     return GetNextEntry(str, lIndex);
 }
 
-bool wxFileConfig::GetNextEntry (wxString& str, long& lIndex) const
+bool wxFileConfig::GetNextEntry (std::string& str, long& lIndex) const
 {
     if ( size_t(lIndex) < m_pCurrentGroup->Entries().GetCount() ) {
         str = m_pCurrentGroup->Entries()[(size_t)lIndex++]->Name();
@@ -780,14 +784,14 @@ size_t wxFileConfig::GetNumberOfGroups(bool bRecursive) const
 // tests for existence
 // ----------------------------------------------------------------------------
 
-bool wxFileConfig::HasGroup(const wxString& strName) const
+bool wxFileConfig::HasGroup(const std::string& strName) const
 {
     // special case: DoSetPath("") does work as it's equivalent to DoSetPath("/")
     // but there is no group with empty name so treat this separately
     if ( strName.empty() )
         return false;
 
-    const wxString pathOld = GetPath();
+    const std::string pathOld = GetPath();
 
     wxFileConfig *self = const_cast<wxFileConfig *>(this);
     const bool
@@ -798,10 +802,10 @@ bool wxFileConfig::HasGroup(const wxString& strName) const
     return rc;
 }
 
-bool wxFileConfig::HasEntry(const wxString& entry) const
+bool wxFileConfig::HasEntry(const std::string& entry) const
 {
     // path is the part before the last "/"
-    wxString path = entry.BeforeLast(wxCONFIG_PATH_SEPARATOR);
+    std::string path = wx::utils::BeforeLast(entry, wxCONFIG_PATH_SEPARATOR);
 
     // except in the special case of "/keyname" when there is nothing before "/"
     if ( path.empty() && *entry.c_str() == wxCONFIG_PATH_SEPARATOR )
@@ -811,7 +815,7 @@ bool wxFileConfig::HasEntry(const wxString& entry) const
 
     // change to the path of the entry if necessary and remember the old path
     // to restore it later
-    wxString pathOld;
+    std::string pathOld;
     wxFileConfig * const self = const_cast<wxFileConfig *>(this);
     if ( !path.empty() )
     {
@@ -827,7 +831,7 @@ bool wxFileConfig::HasEntry(const wxString& entry) const
 
     // check if the entry exists in this group
     const bool exists = m_pCurrentGroup->FindEntry(
-                            entry.AfterLast(wxCONFIG_PATH_SEPARATOR)) != nullptr;
+                            wx::utils::AfterLast(entry, wxCONFIG_PATH_SEPARATOR)) != nullptr;
 
     // restore the old path if we changed it above
     if ( !pathOld.empty() )
@@ -842,7 +846,7 @@ bool wxFileConfig::HasEntry(const wxString& entry) const
 // read/write values
 // ----------------------------------------------------------------------------
 
-bool wxFileConfig::DoReadString(const wxString& key, wxString* pStr) const
+bool wxFileConfig::DoReadString(const std::string& key, std::string* pStr) const
 {
     wxConfigPathChanger path(this, key);
 
@@ -856,25 +860,27 @@ bool wxFileConfig::DoReadString(const wxString& key, wxString* pStr) const
     return true;
 }
 
-bool wxFileConfig::DoReadLong(const wxString& key, long *pl) const
+bool wxFileConfig::DoReadLong(const std::string& key, long *pl) const
 {
-    wxString str;
+    std::string str;
     if ( !Read(key, &str) )
         return false;
 
     // extra spaces shouldn't prevent us from reading numeric values
-    str.Trim();
+    wx::utils::TrimAllSpace(str);
 
-    return str.ToLong(pl);
+    auto [p, ec] = std::from_chars(str.data(), str.data() + str.size(), *pl);
+
+    return ec == std::errc();
 }
 
 #if wxUSE_BASE64
 
-bool wxFileConfig::DoReadBinary(const wxString& key, wxMemoryBuffer* buf) const
+bool wxFileConfig::DoReadBinary(const std::string& key, wxMemoryBuffer* buf) const
 {
     wxCHECK_MSG( buf, false, wxT("NULL buffer") );
 
-    wxString str;
+    std::string str;
     if ( !Read(key, &str) )
         return false;
 
@@ -884,10 +890,10 @@ bool wxFileConfig::DoReadBinary(const wxString& key, wxMemoryBuffer* buf) const
 
 #endif // wxUSE_BASE64
 
-bool wxFileConfig::DoWriteString(const wxString& key, const wxString& szValue)
+bool wxFileConfig::DoWriteString(const std::string& key, const std::string& szValue)
 {
     wxConfigPathChanger     path(this, key);
-    wxString                strName = path.Name();
+    std::string                strName = path.Name();
 
     wxLogTrace( FILECONF_TRACE_MASK,
                 wxT("  Writing String '%s' = '%s' to Group '%s'"),
@@ -944,23 +950,23 @@ bool wxFileConfig::DoWriteString(const wxString& key, const wxString& szValue)
     return true;
 }
 
-bool wxFileConfig::DoWriteLong(const wxString& key, long lValue)
+bool wxFileConfig::DoWriteLong(const std::string& key, long lValue)
 {
-  return Write(key, wxString::Format(wxT("%ld"), lValue));
+  return Write(key, fmt::format("%ld", lValue));
 }
 
 #if wxUSE_BASE64
 
-bool wxFileConfig::DoWriteBinary(const wxString& key, const wxMemoryBuffer& buf)
+bool wxFileConfig::DoWriteBinary(const std::string& key, const wxMemoryBuffer& buf)
 {
-  return Write(key, wxBase64Encode(buf));
+  return Write(key, wxBase64Encode(buf).ToStdString());
 }
 
 #endif // wxUSE_BASE64
 
 bool wxFileConfig::Flush(bool /* bCurrentOnly */)
 {
-  if ( !IsDirty() || !m_fnLocalFile.GetFullPath() )
+  if ( !IsDirty() || m_fnLocalFile.GetFullPath().empty() )
     return true;
 
   // set the umask if needed
@@ -975,11 +981,11 @@ bool wxFileConfig::Flush(bool /* bCurrentOnly */)
   }
 
   // write all strings to file
-  wxString filetext;
+  std::string filetext;
   filetext.reserve(4096);
   for ( wxFileConfigLineList *p = m_linesHead; p != nullptr; p = p->Next() )
   {
-    filetext << p->Text() << wxTextFile::GetEOL();
+    filetext += p->Text() + wxTextFile::GetEOL();
   }
 
   if ( !file.Write(filetext, *m_conv) )
@@ -1010,8 +1016,8 @@ bool wxFileConfig::Save(wxOutputStream& os, const wxMBConv& conv)
         wxString line = p->Text();
         line += wxTextFile::GetEOL();
 
-        wxCharBuffer buf(line.mb_str(conv));
-        if ( !os.Write(buf, strlen(buf)) )
+        // FIXME: stupid.
+        if ( !os.Write(line.data(), line.size()) )
         {
             wxLogError(_("Error saving user configuration data."));
 
@@ -1030,10 +1036,10 @@ bool wxFileConfig::Save(wxOutputStream& os, const wxMBConv& conv)
 // renaming groups/entries
 // ----------------------------------------------------------------------------
 
-bool wxFileConfig::RenameEntry(const wxString& oldName,
-                               const wxString& newName)
+bool wxFileConfig::RenameEntry(const std::string& oldName,
+                               const std::string& newName)
 {
-    wxASSERT_MSG( oldName.find(wxCONFIG_PATH_SEPARATOR) == wxString::npos,
+    wxASSERT_MSG( oldName.find(wxCONFIG_PATH_SEPARATOR) == std::string::npos,
                    wxT("RenameEntry(): paths are not supported") );
 
     // check that the entry exists
@@ -1046,7 +1052,7 @@ bool wxFileConfig::RenameEntry(const wxString& oldName,
         return false;
 
     // delete the old entry, create the new one
-    wxString value = oldEntry->Value();
+    std::string value = oldEntry->Value();
     if ( !m_pCurrentGroup->DeleteEntry(oldName) )
         return false;
 
@@ -1058,8 +1064,8 @@ bool wxFileConfig::RenameEntry(const wxString& oldName,
     return true;
 }
 
-bool wxFileConfig::RenameGroup(const wxString& oldName,
-                               const wxString& newName)
+bool wxFileConfig::RenameGroup(const std::string& oldName,
+                               const std::string& newName)
 {
     // check that the group exists
     wxFileConfigGroup *group = m_pCurrentGroup->FindSubgroup(oldName);
@@ -1081,7 +1087,7 @@ bool wxFileConfig::RenameGroup(const wxString& oldName,
 // delete groups/entries
 // ----------------------------------------------------------------------------
 
-bool wxFileConfig::DeleteEntry(const wxString& key, bool bGroupIfEmptyAlso)
+bool wxFileConfig::DeleteEntry(const std::string& key, bool bGroupIfEmptyAlso)
 {
   wxConfigPathChanger path(this, key);
 
@@ -1093,7 +1099,7 @@ bool wxFileConfig::DeleteEntry(const wxString& key, bool bGroupIfEmptyAlso)
   if ( bGroupIfEmptyAlso && m_pCurrentGroup->IsEmpty() ) {
     if ( m_pCurrentGroup != m_pRootGroup ) {
       wxFileConfigGroup *pGroup = m_pCurrentGroup;
-      SetPath(wxT(".."));  // changes m_pCurrentGroup!
+      SetPath("..");  // changes m_pCurrentGroup!
       m_pCurrentGroup->DeleteSubgroupByName(pGroup->Name());
     }
     //else: never delete the root group
@@ -1102,7 +1108,7 @@ bool wxFileConfig::DeleteEntry(const wxString& key, bool bGroupIfEmptyAlso)
   return true;
 }
 
-bool wxFileConfig::DeleteGroup(const wxString& key)
+bool wxFileConfig::DeleteGroup(const std::string& key)
 {
   wxConfigPathChanger path(this, RemoveTrailingSeparator(key));
 
@@ -1167,7 +1173,7 @@ bool wxFileConfig::DeleteAll()
         }
         else
         {
-            const wxString path = m_fnLocalFile.GetFullPath();
+            const std::string path = m_fnLocalFile.GetFullPath();
             wxLogWarning(_("can't open user configuration file '%s'."),
                          path.c_str());
 
@@ -1193,7 +1199,7 @@ bool wxFileConfig::DeleteAll()
 
     // append a new line to the end of the list
 
-wxFileConfigLineList *wxFileConfig::LineListAppend(const wxString& str)
+wxFileConfigLineList *wxFileConfig::LineListAppend(const std::string& str)
 {
     wxLogTrace( FILECONF_TRACE_MASK,
                 wxT("    ** Adding Line '%s'"),
@@ -1236,7 +1242,7 @@ wxFileConfigLineList *wxFileConfig::LineListAppend(const wxString& str)
 }
 
 // insert a new line after the given one or in the very beginning if !pLine
-wxFileConfigLineList *wxFileConfig::LineListInsert(const wxString& str,
+wxFileConfigLineList *wxFileConfig::LineListInsert(const std::string& str,
                                                    wxFileConfigLineList *pLine)
 {
     wxLogTrace( FILECONF_TRACE_MASK,
@@ -1344,7 +1350,7 @@ bool wxFileConfig::LineListIsEmpty()
 
 // ctor
 wxFileConfigGroup::wxFileConfigGroup(wxFileConfigGroup *pParent,
-                                       const wxString& strName,
+                                       const std::string& strName,
                                        wxFileConfig *pConfig)
                          : m_aEntries(CompareEntries),
                            m_aSubgroups(CompareGroups),
@@ -1434,12 +1440,10 @@ wxFileConfigLineList *wxFileConfigGroup::GetGroupLine()
                         wxT("    checking parent '%s'"),
                         pParent->Name().c_str() );
 
-            wxString    strFullName;
+            std::string    strFullName;
 
             // add 1 to the name because we don't want to start with '/'
-            strFullName << wxT("[")
-                        << FilterOutEntryName(GetFullName().c_str() + 1)
-                        << wxT("]");
+            strFullName += fmt::format("[{}]", FilterOutEntryName(GetFullName().substr(1)));
             m_pLine = m_pConfig->LineListInsert(strFullName,
                                                 pParent->GetLastGroupLine());
             pParent->SetLastGroup(this);  // we're surely after all the others
@@ -1531,7 +1535,7 @@ void wxFileConfigGroup::UpdateGroupAndSubgroupsLines()
     }
 }
 
-void wxFileConfigGroup::Rename(const wxString& newName)
+void wxFileConfigGroup::Rename(const std::string& newName)
 {
     wxCHECK_RET( m_pParent, wxT("the root group can't be renamed") );
 
@@ -1550,9 +1554,9 @@ void wxFileConfigGroup::Rename(const wxString& newName)
     UpdateGroupAndSubgroupsLines();
 }
 
-wxString wxFileConfigGroup::GetFullName() const
+std::string wxFileConfigGroup::GetFullName() const
 {
-    wxString fullname;
+    std::string fullname;
     if ( Parent() )
         fullname = Parent()->GetFullName() + wxCONFIG_PATH_SEPARATOR + Name();
 
@@ -1565,7 +1569,7 @@ wxString wxFileConfigGroup::GetFullName() const
 
 // use binary search because the array is sorted
 wxFileConfigEntry *
-wxFileConfigGroup::FindEntry(const wxString& name) const
+wxFileConfigGroup::FindEntry(const std::string& name) const
 {
   size_t
        lo = 0,
@@ -1579,7 +1583,7 @@ wxFileConfigGroup::FindEntry(const wxString& name) const
     #if wxCONFIG_CASE_SENSITIVE
       int res = pEntry->Name().compare(name);
     #else
-      int res = pEntry->Name().CmpNoCase(name);
+      int res = wx::utils::CmpNoCase(pEntry->Name(), name);
     #endif
 
     if ( res > 0 )
@@ -1594,7 +1598,7 @@ wxFileConfigGroup::FindEntry(const wxString& name) const
 }
 
 wxFileConfigGroup *
-wxFileConfigGroup::FindSubgroup(const wxString& name) const
+wxFileConfigGroup::FindSubgroup(const std::string& name) const
 {
   size_t
        lo = 0,
@@ -1608,7 +1612,7 @@ wxFileConfigGroup::FindSubgroup(const wxString& name) const
     #if wxCONFIG_CASE_SENSITIVE
     int res = pGroup->Name().compare(name);
     #else
-    int res = pGroup->Name().CmpNoCase(name);
+    int res = wx::utils::CmpNoCase(pGroup->Name(), name);
     #endif
 
     if ( res > 0 )
@@ -1627,7 +1631,7 @@ wxFileConfigGroup::FindSubgroup(const wxString& name) const
 // ----------------------------------------------------------------------------
 
 // create a new entry and add it to the current group
-wxFileConfigEntry *wxFileConfigGroup::AddEntry(const wxString& strName, int nLine)
+wxFileConfigEntry *wxFileConfigGroup::AddEntry(const std::string& strName, int nLine)
 {
     wxASSERT( FindEntry(strName) == nullptr );
 
@@ -1638,7 +1642,7 @@ wxFileConfigEntry *wxFileConfigGroup::AddEntry(const wxString& strName, int nLin
 }
 
 // create a new group and add it to the current group
-wxFileConfigGroup *wxFileConfigGroup::AddSubgroup(const wxString& strName)
+wxFileConfigGroup *wxFileConfigGroup::AddSubgroup(const std::string& strName)
 {
     wxASSERT( FindSubgroup(strName) == nullptr );
 
@@ -1659,7 +1663,7 @@ wxFileConfigGroup *wxFileConfigGroup::AddSubgroup(const wxString& strName)
   delete several of them.
  */
 
-bool wxFileConfigGroup::DeleteSubgroupByName(const wxString& name)
+bool wxFileConfigGroup::DeleteSubgroupByName(const std::string& name)
 {
     wxFileConfigGroup * const pGroup = FindSubgroup(name);
 
@@ -1780,7 +1784,7 @@ bool wxFileConfigGroup::DeleteSubgroup(wxFileConfigGroup *pGroup)
     return true;
 }
 
-bool wxFileConfigGroup::DeleteEntry(const wxString& name)
+bool wxFileConfigGroup::DeleteEntry(const std::string& name)
 {
   wxFileConfigEntry *pEntry = FindEntry(name);
   if ( !pEntry )
@@ -1836,7 +1840,7 @@ bool wxFileConfigGroup::DeleteEntry(const wxString& name)
 // ctor
 // ----------------------------------------------------------------------------
 wxFileConfigEntry::wxFileConfigEntry(wxFileConfigGroup *pParent,
-                                       const wxString& strName,
+                                       const std::string& strName,
                                        int nLine)
                          : m_strName(strName)
 {
@@ -1870,7 +1874,7 @@ void wxFileConfigEntry::SetLine(wxFileConfigLineList *pLine)
 
 // second parameter is false if we read the value from file and prevents the
 // entry from being marked as 'dirty'
-void wxFileConfigEntry::SetValue(const wxString& strValue, bool bUser)
+void wxFileConfigEntry::SetValue(const std::string& strValue, bool bUser)
 {
     if ( bUser && IsImmutable() )
     {
@@ -1889,7 +1893,7 @@ void wxFileConfigEntry::SetValue(const wxString& strValue, bool bUser)
 
     if ( bUser )
     {
-        wxString strValFiltered;
+        std::string strValFiltered;
 
         if ( Group()->Config()->GetStyle() & wxCONFIG_USE_NO_ESCAPE_CHARACTERS )
         {
@@ -1899,8 +1903,7 @@ void wxFileConfigEntry::SetValue(const wxString& strValue, bool bUser)
             strValFiltered = FilterOutValue(strValue);
         }
 
-        wxString    strLine;
-        strLine << FilterOutEntryName(m_strName) << wxT('=') << strValFiltered;
+        std::string strLine = FilterOutEntryName(m_strName) + '=' + strValFiltered;
 
         if ( m_pLine )
         {
@@ -1934,7 +1937,7 @@ int CompareEntries(wxFileConfigEntry *p1, wxFileConfigEntry *p2)
 #if wxCONFIG_CASE_SENSITIVE
     return p1->Name().compare(p2->Name());
 #else
-    return p1->Name().CmpNoCase(p2->Name());
+    return wx::utils::CmpNoCase(p1->Name(), p2->Name());
 #endif
 }
 
@@ -1943,7 +1946,7 @@ int CompareGroups(wxFileConfigGroup *p1, wxFileConfigGroup *p2)
 #if wxCONFIG_CASE_SENSITIVE
     return p1->Name().compare(p2->Name());
 #else
-    return p1->Name().CmpNoCase(p2->Name());
+    return wx::utils::CmpNoCase(p1->Name(), p2->Name());
 #endif
 }
 
@@ -1952,22 +1955,22 @@ int CompareGroups(wxFileConfigGroup *p1, wxFileConfigGroup *p2)
 // ----------------------------------------------------------------------------
 
 // undo FilterOutValue
-static wxString FilterInValue(const wxString& str)
+static std::string FilterInValue(const std::string& str)
 {
-    wxString strResult;
+    std::string strResult;
     if ( str.empty() )
         return strResult;
 
     strResult.reserve(str.length());
 
-    wxString::const_iterator i = str.begin();
+    std::string::const_iterator i = str.begin();
     const bool bQuoted = *i == '"';
     if ( bQuoted )
         ++i;
 
-    for ( const wxString::const_iterator end = str.end(); i != end; ++i )
+    for ( const std::string::const_iterator end = str.end(); i != end; ++i )
     {
-        if ( *i == wxT('\\') )
+        if ( *i == '\\' )
         {
             if ( ++i == end )
             {
@@ -1975,32 +1978,32 @@ static wxString FilterInValue(const wxString& str)
                 break;
             }
 
-            switch ( (*i).GetValue() )
+            switch ( *i )
             {
-                case wxT('n'):
-                    strResult += wxT('\n');
+                case 'n':
+                    strResult += '\n';
                     break;
 
-                case wxT('r'):
-                    strResult += wxT('\r');
+                case 'r':
+                    strResult += '\r';
                     break;
 
-                case wxT('t'):
-                    strResult += wxT('\t');
+                case 't':
+                    strResult += '\t';
                     break;
 
-                case wxT('\\'):
-                    strResult += wxT('\\');
+                case '\\':
+                    strResult += '\\';
                     break;
 
-                case wxT('"'):
-                    strResult += wxT('"');
+                case '"':
+                    strResult += '"';
                     break;
             }
         }
         else // not a backslash
         {
-            if ( *i != wxT('"') || !bQuoted )
+            if ( *i != '"' || !bQuoted )
             {
                 strResult += *i;
             }
@@ -2017,42 +2020,42 @@ static wxString FilterInValue(const wxString& str)
 }
 
 // quote the string before writing it to file
-static wxString FilterOutValue(const wxString& str)
+static std::string FilterOutValue(const std::string& str)
 {
-   if ( !str )
-      return str;
+   if ( str.empty() )
+       return {};
 
-  wxString strResult;
-  strResult.Alloc(str.Len());
+  std::string strResult;
+  strResult.resize(str.length());
 
   // quoting is necessary to preserve spaces in the beginning of the string
-  const bool bQuote = wxIsspace(str[0]) || str[0] == wxT('"');
+  const bool bQuote = wxIsspace(str[0]) || str[0] == '"';
 
   if ( bQuote )
     strResult += wxT('"');
 
-  wxChar c;
-  for ( size_t n = 0; n < str.Len(); n++ ) {
-    switch ( str[n].GetValue() ) {
-      case wxT('\n'):
-        c = wxT('n');
+  char c;
+  for ( size_t n = 0; n < str.length(); n++ ) {
+    switch ( str[n] ) {
+      case '\n':
+        c = 'n';
         break;
 
-      case wxT('\r'):
-        c = wxT('r');
+      case '\r':
+        c = 'r';
         break;
 
-      case wxT('\t'):
-        c = wxT('t');
+      case '\t':
+        c = 't';
         break;
 
-      case wxT('\\'):
-        c = wxT('\\');
+      case '\\':
+        c = '\\';
         break;
 
-      case wxT('"'):
+      case '"':
         if ( bQuote ) {
-          c = wxT('"');
+          c = '"';
           break;
         }
         [[fallthrough]];
@@ -2063,22 +2066,22 @@ static wxString FilterOutValue(const wxString& str)
     }
 
     // we get here only for special characters
-    strResult << wxT('\\') << c;
+    strResult += '\\' + c;
   }
 
   if ( bQuote )
-    strResult += wxT('"');
+    strResult += '"';
 
   return strResult;
 }
 
 // undo FilterOutEntryName
-static wxString FilterInEntryName(const wxString& str)
+static std::string FilterInEntryName(const std::string& str)
 {
-  wxString strResult;
-  strResult.Alloc(str.Len());
+  std::string strResult;
+  strResult.resize(str.length());
 
-  for ( const wxChar *pc = str.c_str(); *pc != '\0'; pc++ ) {
+  for ( const char *pc = str.c_str(); *pc != '\0'; pc++ ) {
     if ( *pc == wxT('\\') ) {
       // we need to test it here or we'd skip past the NUL in the loop line
       if ( *++pc == wxT('\0') )
@@ -2092,12 +2095,12 @@ static wxString FilterInEntryName(const wxString& str)
 }
 
 // sanitize entry or group name: insert '\\' before any special characters
-static wxString FilterOutEntryName(const wxString& str)
+static std::string FilterOutEntryName(const std::string& str)
 {
-  wxString strResult;
-  strResult.Alloc(str.Len());
+  std::string strResult;
+  strResult.resize(str.length());
 
-  for ( const wxChar *pc = str.c_str(); *pc != wxT('\0'); pc++ ) {
+  for ( const char *pc = str.c_str(); *pc != wxT('\0'); pc++ ) {
     const wxChar c = *pc;
 
     // we explicitly allow some of "safe" chars and 8bit ASCII characters
@@ -2108,7 +2111,7 @@ static wxString FilterOutEntryName(const wxString& str)
     //     should *not* be quoted
     if ( !wxIsalnum(c) && !wxStrchr(wxT("@_/-!.*%()"), c) )
     {
-      strResult += wxT('\\');
+      strResult += '\\';
     }
 
     strResult += c;

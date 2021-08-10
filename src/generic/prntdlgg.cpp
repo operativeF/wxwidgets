@@ -502,13 +502,13 @@ void wxGenericPrintSetupDialog::Init(wxPrintData* data)
 
     item.SetId( 1+ item.GetId() );
 
-    wxArrayString errors;
-    wxArrayString output;
+    std::vector<wxString> errors;
+    std::vector<wxString> output;
     long res = wxExecute( wxT("lpstat -v"), output, errors, wxEXEC_NODISABLE );
     if (res >= 0 && errors.GetCount() == 0)
     {
         size_t i;
-        for (i = 0; i < output.GetCount(); i++)
+        for (i = 0; i < output.size(); i++)
         {
             wxStringTokenizer tok( output[i], wxT(" ") );
             wxString tmp = tok.GetNextToken(); // "device"
@@ -540,8 +540,9 @@ void wxGenericPrintSetupDialog::Init(wxPrintData* data)
 
             wxString command = wxT("lpstat -p ");
             command += name;
-            wxArrayString errors2;
-            wxArrayString output2;
+
+            std::vector<wxString> errors2;
+            std::vector<wxString> output2;
             res = wxExecute( command, output2, errors2, wxEXEC_NODISABLE );
             if (res >= 0 && errors2.GetCount() == 0 && output2.GetCount() > 0)
             {

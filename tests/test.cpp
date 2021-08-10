@@ -26,6 +26,8 @@ std::string wxTheCurrentTestClass, wxTheCurrentTestMethod;
 
 #include "wx/apptrait.h"
 #include "wx/cmdline.h"
+#include "wx/stringutils.h"
+
 #include <exception>
 #include <iostream>
 
@@ -335,9 +337,9 @@ extern bool IsNetworkAvailable()
     // Somehow even though network is available on Travis CI build machines,
     // attempts to open remote URIs sporadically fail, so don't run these tests
     // under Travis to avoid false positives.
-    static int s_isTravis = -1;
-    if ( s_isTravis == -1 )
-        s_isTravis = wxGetEnv(wxASCII_STR("TRAVIS"), nullptr);
+    static bool s_isTravis{false};
+    if ( s_isTravis == false )
+        s_isTravis = !wxGetEnv("TRAVIS").empty();
 
     if ( s_isTravis )
         return false;
@@ -370,20 +372,20 @@ extern bool IsAutomaticTest()
     {
         // Allow setting an environment variable to emulate buildslave user for
         // testing.
-        wxString username;
-        if ( !wxGetEnv(wxASCII_STR("WX_TEST_USER"), &username) )
+        std::string username{ wxGetEnv("WX_TEST_USER") };
+        if ( username.empty() )
             username = wxGetUserId();
 
-        username.MakeLower();
-        s_isAutomatic = username == wxASCII_STR("buildbot") ||
-                            username.Matches(wxASCII_STR("sandbox*"));
+        wx::utils::ToLower(username);
+        s_isAutomatic = username == "buildbot" ||
+                            wx::utils::Matches(username, "sandbox*");
 
         // Also recognize various CI environments.
         if ( !s_isAutomatic )
         {
-            s_isAutomatic = wxGetEnv(wxASCII_STR("TRAVIS"), nullptr) ||
-                              wxGetEnv(wxASCII_STR("GITHUB_ACTIONS"), nullptr) ||
-                                wxGetEnv(wxASCII_STR("APPVEYOR"), nullptr);
+            s_isAutomatic = !wxGetEnv("TRAVIS").empty() ||
+                              !wxGetEnv("GITHUB_ACTIONS").empty() ||
+                                !wxGetEnv("APPVEYOR").empty();
         }
     }
 
@@ -395,8 +397,8 @@ extern bool IsRunningUnderXVFB()
     static int s_isRunningUnderXVFB = -1;
     if ( s_isRunningUnderXVFB == -1 )
     {
-        wxString value;
-        s_isRunningUnderXVFB = wxGetEnv(wxASCII_STR("wxUSE_XVFB"), &value) && value == wxASCII_STR("1");
+        std::string value{ wxGetEnv("wxUSE_XVFB") };
+        s_isRunningUnderXVFB =  (value == "1");
     }
 
     return s_isRunningUnderXVFB == 1;
@@ -425,8 +427,8 @@ bool EnableUITests()
     {
         // Allow explicitly configuring this via an environment variable under
         // all platforms.
-        wxString enabled;
-        if ( wxGetEnv(wxASCII_STR("WX_UI_TESTS"), &enabled) )
+        std::string enabled{ wxGetEnv("WX_UI_TESTS") };
+        if ( !enabled.empty() )
         {
             if ( enabled == wxASCII_STR("1") )
                 s_enabled = 1;
@@ -596,7 +598,7 @@ int TestApp::RunTests()
     // Switch off logging to avoid interfering with the tests output unless
     // WXTRACE is set, as otherwise setting it would have no effect while
     // running the tests.
-    if ( !wxGetEnv(wxASCII_STR("WXTRACE"), nullptr) )
+    if ( wxGetEnv("WXTRACE").empty() )
         wxLog::EnableLogging(false);
     else
         wxLog::SetTimestamp("%Y-%m-%d %H:%M:%S.%l");

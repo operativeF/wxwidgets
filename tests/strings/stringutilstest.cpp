@@ -151,4 +151,48 @@ TEST_SUITE("Test auxilliary functions that work with strings")
 
         CHECK_EQ(StrSplitEscape(csvPuppy, ',', '\\'), puppyWithEscape);
     }
+
+    TEST_CASE("Matches: A function that matches a string that includes wildcards * and ?.")
+    {
+        static const std::string puppy{"Puppy"};
+
+        SUBCASE("Successful tests.")
+        {
+            static const std::string starPuppy{"P*ppy"};
+            static const std::string starEndPuppy{"Pup*"};
+            static const std::string questPuppy{"P?ppy"};
+            static const std::string multiQuestPuppy{"P??py"};
+            static const std::string mixedPuppy{"Pu?p*"};
+            static const std::string multiStarPuppy{"P*p*y"};
+            static const std::string allQuest{"?????"};
+            static const std::string onlyStar{"*"};
+
+            CHECK(Matches(puppy, starPuppy));
+            CHECK(Matches(puppy, starEndPuppy));
+            CHECK(Matches(puppy, questPuppy));
+            CHECK(Matches(puppy, multiQuestPuppy));
+            CHECK(Matches(puppy, mixedPuppy));
+            CHECK(Matches(puppy, multiStarPuppy));
+            CHECK(Matches(puppy, allQuest));
+            CHECK(Matches(puppy, onlyStar));
+        }
+
+        SUBCASE("Failure tests")
+        {
+            static const std::string kitty{"kitty"};
+            static const std::string starKitty("kit*y");
+            static const std::string questKitty("ki?ty");
+
+            static const std::string moreQuestThanPuppy{"Pu????y"};
+            static const std::string moreBeginQuestThanPuppy{"??????y"};
+            static const std::string moreEndQuestThanPuppy{"?????y"};
+
+            CHECK_FALSE(Matches(kitty, puppy));
+            CHECK_FALSE(Matches(starKitty, puppy));
+            CHECK_FALSE(Matches(questKitty, puppy));
+            CHECK_FALSE(Matches(moreQuestThanPuppy, puppy));
+            CHECK_FALSE(Matches(moreBeginQuestThanPuppy, puppy));
+            CHECK_FALSE(Matches(moreEndQuestThanPuppy, puppy));
+        }
+    }
 }

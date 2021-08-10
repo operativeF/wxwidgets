@@ -550,31 +550,28 @@ int wxFileDialog::ShowModal()
     of.lpfnHook          = wxFileDialogHookFunction;
     of.lCustData         = (LPARAM)this;
 
-    std::vector<wxString> wildDescriptions;
-    std::vector<wxString> wildFilters;
+    std::vector<std::string> wildDescriptions;
+    std::vector<std::string> wildFilters;
 
     size_t items = wxParseCommonDialogsFilter(m_wildCard, wildDescriptions, wildFilters);
 
     wxASSERT_MSG( items > 0 , wxT("empty wildcard list") );
 
-    wxString filterBuffer;
+    std::string filterBuffer;
 
     for (size_t i = 0; i < items ; i++)
     {
-        filterBuffer += wildDescriptions[i];
-        filterBuffer += wxT("|");
-        filterBuffer += wildFilters[i];
-        filterBuffer += wxT("|");
+        filterBuffer += fmt::format("{}|{}|", wildDescriptions[i], wildFilters[i]);
     }
 
     // Replace | with \0
     for (size_t i = 0; i < filterBuffer.length(); i++ ) {
-        if ( filterBuffer.GetChar(i) == wxT('|') ) {
-            filterBuffer[i] = wxT('\0');
+        if ( filterBuffer[i] == '|' ) {
+            filterBuffer[i] = '\0';
         }
     }
 
-    of.lpstrFilter  = filterBuffer.t_str();
+    of.lpstrFilter  = boost::nowide::widen(filterBuffer).c_str();
     of.nFilterIndex = m_filterIndex + 1;
     m_currentlySelectedFilterIndex = m_filterIndex;
 
@@ -592,7 +589,7 @@ int wxFileDialog::ShowModal()
     wxString defextBuffer; // we need it to be alive until GetSaveFileName()!
     if (HasFdFlag(wxFD_SAVE))
     {
-        const wxChar* extension = filterBuffer.t_str();
+        const char* extension = filterBuffer.c_str();
         int maxFilter = (int)(of.nFilterIndex*2L) - 1;
 
         for( int j = 0; j < maxFilter; j++ )           // get extension
@@ -665,7 +662,7 @@ int wxFileDialog::ShowModal()
         if ( !of.nFileExtension || fileNameBuffer[of.nFileExtension] == wxT('\0') )
         {
             // User has typed a filename without an extension:
-            const wxChar* extension = filterBuffer.t_str();
+            const char* extension = filterBuffer.c_str();
             int   maxFilter = (int)(of.nFilterIndex*2L) - 1;
 
             for( int j = 0; j < maxFilter; j++ )           // get extension

@@ -14,28 +14,23 @@
 
 TEST_CASE("GetSet")
 {
-    const wxChar *var = wxT("wxTestVar");
-    wxString contents;
+    const std::string var = "wxTestVar";
 
-    CHECK(!wxGetEnv(var, &contents));
-    CHECK(contents.empty());
+    CHECK(!wxGetEnv(var).empty());
 
-    wxSetEnv(var, wxT("value for wxTestVar"));
-    CHECK(wxGetEnv(var, &contents));
-    CHECK(contents == wxT("value for wxTestVar"));
+    wxSetEnv(var, "value for wxTestVar");
+    CHECK(!wxGetEnv(var).empty());
+    CHECK(wxGetEnv(var) == "value for wxTestVar");
 
-    wxSetEnv(var, wxT("another value"));
-    CHECK(wxGetEnv(var, &contents));
-    CHECK(contents == wxT("another value"));
+    wxSetEnv(var, "another value");
+    CHECK(!wxGetEnv(var).empty());
+    CHECK(wxGetEnv(var) == "another value");
 
     wxUnsetEnv(var);
-    CHECK(!wxGetEnv(var, &contents));
+    CHECK(!wxGetEnv(var).empty());
 }
 
 TEST_CASE("Path")
 {
-    wxString contents;
-
-    CHECK(wxGetEnv(wxT("PATH"), &contents));
-    CHECK(!contents.empty());
+    CHECK(!wxGetEnv("PATH").empty());
 }

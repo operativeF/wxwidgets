@@ -102,7 +102,7 @@ public:
         { InitRGBA(red, green, blue, alpha); }
 
     // implemented in colourcmn.cpp
-    bool Set(const wxString &str)
+    bool Set(const wxString& str)
         { return FromString(str); }
 
     void Set(unsigned long colRGB)

@@ -704,7 +704,7 @@ void wxSimpleHtmlListBox::UpdateCount()
 
     // very small optimization: if you need to add lot of items to
     // a wxSimpleHtmlListBox be sure to use the
-    // wxSimpleHtmlListBox::Append(const wxArrayString&) method instead!
+    // wxSimpleHtmlListBox::Append(const std::vector<std::string>&) method instead!
     if (!this->IsFrozen())
         RefreshAll();
 }

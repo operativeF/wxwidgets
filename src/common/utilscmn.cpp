@@ -167,17 +167,17 @@ wxString wxNow()
     return wxString::FromAscii(date);
 }
 
-wxString wxGetInstallPrefix()
+std::string wxGetInstallPrefix()
 {
-    wxString prefix;
+    std::string prefix{ wxGetEnv("WXPREFIX") };
 
-    if ( wxGetEnv(wxT("WXPREFIX"), &prefix) )
+    if ( !prefix.empty() )
         return prefix;
 
 #ifdef wxINSTALL_PREFIX
     return wxT(wxINSTALL_PREFIX);
 #else
-    return wxEmptyString;
+    return {};
 #endif
 }
 

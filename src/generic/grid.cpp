@@ -1750,8 +1750,6 @@ wxGridTableMessage::wxGridTableMessage( wxGridTableBase *table, int id,
 // created by wxGrid if you don't specify an alternative table class.
 //
 
-WX_DEFINE_OBJARRAY(wxGridStringArray)
-
 wxIMPLEMENT_DYNAMIC_CLASS(wxGridStringTable, wxGridTableBase);
 
 wxGridStringTable::wxGridStringTable()

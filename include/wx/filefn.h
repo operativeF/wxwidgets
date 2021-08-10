@@ -546,14 +546,14 @@ inline bool wxIsPathSeparator(wxChar c)
 }
 
 // does the string ends with path separator?
-WXDLLIMPEXP_BASE bool wxEndsWithPathSeparator(const wxString& filename);
+WXDLLIMPEXP_BASE bool wxEndsWithPathSeparator(const std::string& filename);
 
 // find a file in a list of directories, returns false if not found
 WXDLLIMPEXP_BASE bool wxFindFileInPath(wxString *pStr, const wxString& szPath, const wxString& szFile);
 
 // Get the OS directory if appropriate (such as the Windows directory).
 // On non-Windows platform, probably just return the empty string.
-WXDLLIMPEXP_BASE wxString wxGetOSDirectory();
+WXDLLIMPEXP_BASE std::string wxGetOSDirectory();
 
 #if wxUSE_DATETIME
 
@@ -567,7 +567,7 @@ WXDLLIMPEXP_BASE time_t wxFileModificationTime(const wxString& filename);
 // The arrays will contain an equal number of items found before the error.
 // wildCard is in the form:
 // "All files (*)|*|Image Files (*.jpeg *.png)|*.jpg;*.png"
-WXDLLIMPEXP_BASE int wxParseCommonDialogsFilter(const wxString& wildCard, std::vector<wxString>& descriptions, std::vector<wxString>& filters);
+WXDLLIMPEXP_BASE int wxParseCommonDialogsFilter(const std::string& wildCard, std::vector<std::string>& descriptions, std::vector<std::string>& filters);
 
 // ----------------------------------------------------------------------------
 // classes

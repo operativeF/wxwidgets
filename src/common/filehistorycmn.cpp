@@ -246,7 +246,7 @@ void wxFileHistoryBase::Load(const wxConfigBase& config)
     wxString buf;
     buf.Printf(wxT("file%d"), 1);
 
-    wxString historyFile;
+    std::string historyFile;
     while ((m_fileHistory.size() < m_fileMaxFiles) &&
            config.Read(buf, &historyFile) && !historyFile.empty())
     {
@@ -266,9 +266,9 @@ void wxFileHistoryBase::Save(wxConfigBase& config)
         wxString buf;
         buf.Printf(wxT("file%d"), (int)i+1);
         if (i < m_fileHistory.size())
-            config.Write(buf, wxString(m_fileHistory[i]));
+            config.Write(buf.ToStdString(), m_fileHistory[i].ToStdString());
         else
-            config.Write(buf, wxEmptyString);
+            config.Write(buf.ToStdString(), "");
     }
 }
 #endif // wxUSE_CONFIG

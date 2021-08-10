@@ -966,8 +966,8 @@ public:
         SetPropertyValueString( id, value );
     }
 
-    // Sets value (wxArrayString) of a property.
-    void SetPropertyValue( wxPGPropArg id, const wxArrayString& value )
+    // Sets value (std::vector<std::string>) of a property.
+    void SetPropertyValue( wxPGPropArg id, const std::vector<std::string>& value )
     {
         wxVariant v(value);
         SetPropVal( id, v );

@@ -210,7 +210,7 @@ wxDebugReport::~wxDebugReport()
     {
         // remove all files in this directory
         wxDir dir(m_dir);
-        wxString file;
+        std::string file;
         for ( bool cont = dir.GetFirst(&file); cont; cont = dir.GetNext(&file) )
         {
             if ( wxRemove(wxFileName(m_dir, file).GetFullPath()) != 0 )

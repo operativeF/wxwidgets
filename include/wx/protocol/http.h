@@ -27,31 +27,28 @@ public:
     wxHTTP(const wxHTTP&) = delete;
 	wxHTTP& operator=(const wxHTTP&) = delete;
 
-    virtual bool Connect(const wxString& host, unsigned short port);
-    bool Connect(const wxString& host) override { return Connect(host, 0); }
+    virtual bool Connect(const std::string& host, unsigned short port);
+    bool Connect(const std::string& host) override { return Connect(host, 0); }
     bool Connect(const wxSockAddress& addr, bool wait = true) override;
     bool Abort() override;
 
-    wxInputStream *GetInputStream(const wxString& path) override;
+    wxInputStream *GetInputStream(const std::string& path) override;
 
-    wxString GetContentType() const override;
-    wxString GetHeader(const wxString& header) const;
+    std::string GetContentType() const override;
+    std::string GetHeader(const std::string& header) const;
     int GetResponse() const { return m_http_response; }
 
-    void SetMethod(const wxString& method) { m_method = method; }
-    void SetHeader(const wxString& header, const wxString& h_data);
-    bool SetPostText(const wxString& contentType,
-                     const wxString& data,
+    void SetMethod(const std::string& method) { m_method = method; }
+    void SetHeader(const std::string& header, const std::string& h_data);
+    bool SetPostText(const std::string& contentType,
+                     const std::string& data,
                      const wxMBConv& conv = wxConvUTF8);
-    bool SetPostBuffer(const wxString& contentType, const wxMemoryBuffer& data);
+    bool SetPostBuffer(const std::string& contentType, const wxMemoryBuffer& data);
     void SetProxyMode(bool on);
 
     /* Cookies */
-    wxString GetCookie(const wxString& cookie) const;
+    std::string GetCookie(const std::string& cookie) const;
     bool HasCookies() const { return m_cookies.size() > 0; }
-
-    // Use the other SetPostBuffer() overload or SetPostText() instead.
-    wxDEPRECATED(void SetPostBuffer(const wxString& post_buf));
 
 protected:
     using wxHeaderIterator = wxStringToStringHashMap::iterator;
@@ -59,17 +56,17 @@ protected:
     using wxCookieIterator = wxStringToStringHashMap::iterator;
     using wxCookieConstIterator = wxStringToStringHashMap::const_iterator;
 
-    bool BuildRequest(const wxString& path, const wxString& method);
+    bool BuildRequest(const std::string& path, const std::string& method);
     void SendHeaders();
     bool ParseHeaders();
 
-    wxString GenerateAuthString(const wxString& user, const wxString& pass) const;
+    std::string GenerateAuthString(const std::string& user, const std::string& pass) const;
 
     // find the header in m_headers
-    wxHeaderIterator FindHeader(const wxString& header);
-    wxHeaderConstIterator FindHeader(const wxString& header) const;
-    wxCookieIterator FindCookie(const wxString& cookie);
-    wxCookieConstIterator FindCookie(const wxString& cookie) const;
+    wxHeaderIterator FindHeader(const std::string& header);
+    wxHeaderConstIterator FindHeader(const std::string& header) const;
+    wxCookieIterator FindCookie(const std::string& cookie);
+    wxCookieConstIterator FindCookie(const std::string& cookie) const;
 
     // deletes the header value strings
     void ClearHeaders();
@@ -77,7 +74,9 @@ protected:
 
     // internal variables:
 
-    wxString m_method;
+    std::string m_method;
+    std::string m_contentType;
+
     wxStringToStringHashMap m_cookies;
 
     wxStringToStringHashMap m_headers;
@@ -85,7 +84,6 @@ protected:
     bool m_proxy_mode{false};
     wxSockAddress *m_addr{nullptr};
     wxMemoryBuffer m_postBuffer;
-    wxString       m_contentType;
     int m_http_response{0};
 
     wxDECLARE_DYNAMIC_CLASS(wxHTTP);

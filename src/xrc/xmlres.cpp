@@ -353,13 +353,13 @@ bool wxXmlResource::LoadFile(const wxFileName& file)
 bool wxXmlResource::LoadAllFiles(const wxString& dirname)
 {
     bool ok = true;
-    wxArrayString files;
+    std::vector<std::string> files;
 
     wxDir::GetAllFiles(dirname, &files, "*.xrc");
 
-    for ( wxArrayString::const_iterator i = files.begin(); i != files.end(); ++i )
+    for ( std::vector<std::string>::const_iterator i = files.begin(); i != files.end(); ++i )
     {
-        if ( !LoadFile(*i) )
+        if ( !LoadFile(wxFileName(*i)) )
             ok = false;
     }
 

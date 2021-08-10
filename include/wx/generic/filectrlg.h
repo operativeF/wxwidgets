@@ -217,27 +217,27 @@ public:
                  const wxSize& size = wxDefaultSize,
                  const std::string& name = wxFileCtrlNameStr);
 
-    void SetWildcard( const wxString& wildCard ) override;
+    void SetWildcard( const std::string& wildCard ) override;
     void SetFilterIndex( int filterindex ) override;
-    bool SetDirectory( const wxString& dir ) override;
+    bool SetDirectory( const std::string& dir ) override;
 
     // Selects a certain file.
     // In case the filename specified isn't found/couldn't be shown with
     // currently selected filter, false is returned and nothing happens
-    bool SetFilename( const wxString& name ) override;
+    bool SetFilename( const std::string& name ) override;
 
     // Changes to a certain directory and selects a certain file.
     // In case the filename specified isn't found/couldn't be shown with
     // currently selected filter, false is returned and if directory exists
     // it's chdir'ed to
-    bool SetPath( const wxString& path ) override;
+    bool SetPath( const std::string& path ) override;
 
-    wxString GetFilename() const override;
-    wxString GetDirectory() const override;
-    wxString GetWildcard() const override { return this->m_wildCard; }
-    wxString GetPath() const override;
-    std::vector<wxString> GetPaths() const override;
-    std::vector<wxString> GetFilenames() const override;
+    std::string GetFilename() const override;
+    std::string GetDirectory() const override;
+    std::string GetWildcard() const override { return this->m_wildCard; }
+    std::string GetPath() const override;
+    std::vector<std::string> GetPaths() const override;
+    std::vector<std::string> GetFilenames() const override;
     int GetFilterIndex() const override { return m_filterIndex; }
 
     bool HasMultipleFileSelection() const override
@@ -251,7 +251,7 @@ public:
     // from GetDirectory() if the user entered a full path (with a path other
     // than the one currently shown in the control) in the text control
     // manually
-    wxString GetShownDirectory() const { return m_list->GetDir(); }
+    std::string GetShownDirectory() const { return m_list->GetDir(); }
 
     wxFileListCtrl *GetFileList() { return m_list; }
 
@@ -274,20 +274,20 @@ private:
     // the first of these methods can only be used for the controls with single
     // selection (i.e. without wxFC_MULTIPLE style), the second one in any case
     wxFileName DoGetFileName() const;
-    std::vector<wxString> DoGetFilenames(bool fullPath ) const;
+    std::vector<std::string> DoGetFilenames(bool fullPath ) const;
 
     int m_style;
 
-    wxString         m_filterExtension;
+    std::string      m_filterExtension;
     wxChoice        *m_choice;
     wxTextCtrl      *m_text;
     wxFileListCtrl  *m_list;
     wxCheckBox      *m_check;
     wxStaticText    *m_static;
 
-    wxString        m_dir;
-    wxString        m_fileName;
-    wxString        m_wildCard; // wild card in one string as we got it
+    std::string        m_dir;
+    std::string        m_fileName;
+    std::string        m_wildCard; // wild card in one string as we got it
 
     int     m_filterIndex;
     bool    m_inSelected;

@@ -1325,17 +1325,6 @@ private:
 	wxGridTableMessage& operator=(const wxGridTableMessage&) = delete;
 };
 
-
-
-// ------ wxGridStringArray
-// A 2-dimensional array of strings for data values
-//
-
-WX_DECLARE_OBJARRAY_WITH_DECL(wxArrayString, wxGridStringArray,
-                              class WXDLLIMPEXP_CORE);
-
-
-
 // ------ wxGridStringTable
 //
 // Simplest type of data table for a grid for small tables of strings

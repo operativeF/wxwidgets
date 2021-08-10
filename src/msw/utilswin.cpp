@@ -71,20 +71,20 @@ bool wxDoLaunchDefaultBrowser(const wxLaunchBrowserParams& params)
         if ( !key.Exists() )
         {
             // try the default browser, it must be registered at least for http URLs
-            key.SetName(wxRegKey::HKCR, wxT("http\\shell\\open"));
+            key.SetName(wxRegKey::HKCR, "http\\shell\\open");
         }
 
         if ( key.Exists() )
         {
-            wxRegKey keyDDE(key, wxT("DDEExec"));
+            wxRegKey keyDDE(key, "DDEExec");
             if ( keyDDE.Exists() )
             {
                 // we only know the syntax of WWW_OpenURL DDE request for IE,
                 // optimistically assume that all other browsers are compatible
                 // with it
-                static constexpr wxChar TOPIC_OPEN_URL[] = wxT("WWW_OpenURL");
+                static constexpr char TOPIC_OPEN_URL[] = "WWW_OpenURL";
                 wxString ddeCmd;
-                wxRegKey keyTopic(keyDDE, wxT("topic"));
+                wxRegKey keyTopic(keyDDE, "topic");
                 bool ok = keyTopic.Exists() &&
                             keyTopic.QueryDefaultValue() == TOPIC_OPEN_URL;
                 if ( ok )
@@ -115,7 +115,7 @@ bool wxDoLaunchDefaultBrowser(const wxLaunchBrowserParams& params)
                     // try to send it the DDE request now but ignore the errors
                     wxLogNull noLog;
 
-                    const wxString ddeServer = wxRegKey(keyDDE, wxT("application"));
+                    const std::string ddeServer = wxRegKey(keyDDE, "application");
                     if ( wxExecuteDDE(ddeServer, TOPIC_OPEN_URL, ddeCmd) )
                         return true;
 

@@ -36,27 +36,27 @@ class WXDLLIMPEXP_CORE wxFileCtrlBase
 public:
     virtual ~wxFileCtrlBase() = default;
 
-    virtual void SetWildcard( const wxString& wildCard ) = 0;
+    virtual void SetWildcard( const std::string& wildCard ) = 0;
     virtual void SetFilterIndex( int filterindex ) = 0;
-    virtual bool SetDirectory( const wxString& dir ) = 0;
+    virtual bool SetDirectory( const std::string& dir ) = 0;
 
     // Selects a certain file.
     // In case the filename specified isn't found/couldn't be shown with
     // currently selected filter, false is returned and nothing happens
-    virtual bool SetFilename( const wxString& name ) = 0;
+    virtual bool SetFilename( const std::string& name ) = 0;
 
     // chdirs to a certain directory and selects a certain file.
     // In case the filename specified isn't found/couldn't be shown with
     // currently selected filter, false is returned and if directory exists
     // it's chdir'ed to
-    virtual bool SetPath( const wxString& path ) = 0;
+    virtual bool SetPath( const std::string& path ) = 0;
 
-    virtual wxString GetFilename() const = 0;
-    virtual wxString GetDirectory() const = 0;
-    virtual wxString GetWildcard() const = 0;
-    virtual wxString GetPath() const = 0;
-    virtual std::vector<wxString> GetPaths() const = 0;
-    virtual std::vector<wxString> GetFilenames() const = 0;
+    virtual std::string GetFilename() const = 0;
+    virtual std::string GetDirectory() const = 0;
+    virtual std::string GetWildcard() const = 0;
+    virtual std::string GetPath() const = 0;
+    virtual std::vector<std::string> GetPaths() const = 0;
+    virtual std::vector<std::string> GetFilenames() const = 0;
     virtual int GetFilterIndex() const = 0;
 
     virtual bool HasMultipleFileSelection() const = 0;
@@ -66,7 +66,7 @@ public:
 void wxGenerateFilterChangedEvent( wxFileCtrlBase *fileCtrl, wxWindow *wnd );
 void wxGenerateFolderChangedEvent( wxFileCtrlBase *fileCtrl, wxWindow *wnd );
 void wxGenerateSelectionChangedEvent( wxFileCtrlBase *fileCtrl, wxWindow *wnd );
-void wxGenerateFileActivatedEvent( wxFileCtrlBase *fileCtrl, wxWindow *wnd, const wxString& filename = wxEmptyString );
+void wxGenerateFileActivatedEvent( wxFileCtrlBase *fileCtrl, wxWindow *wnd, const std::string& filename = {} );
 
 #if defined(__WXGTK20__) && !defined(__WXUNIVERSAL__)
     #define wxFileCtrl wxGtkFileCtrl
@@ -103,20 +103,20 @@ public:
     // no need for the copy constructor as the default one will be fine.
     wxEvent *Clone() const override { return new wxFileCtrlEvent( *this ); }
 
-    void SetFiles( const std::vector<wxString>& files ) { m_files = files; }
-    void SetDirectory( const wxString &directory ) { m_directory = directory; }
+    void SetFiles( const std::vector<std::string>& files ) { m_files = files; }
+    void SetDirectory( const std::string &directory ) { m_directory = directory; }
     void SetFilterIndex( int filterIndex ) { m_filterIndex = filterIndex; }
 
-    std::vector<wxString> GetFiles() const { return m_files; }
-    wxString GetDirectory() const { return m_directory; }
+    std::vector<std::string> GetFiles() const { return m_files; }
+    std::string GetDirectory() const { return m_directory; }
     int GetFilterIndex() const { return m_filterIndex; }
 
-    wxString GetFile() const;
+    std::string GetFile() const;
 
 protected:
     int m_filterIndex;
-    wxString m_directory;
-    std::vector<wxString> m_files;
+    std::string m_directory;
+    std::vector<std::string> m_files;
 
 public:
 	wxClassInfo *GetClassInfo() const override ;

@@ -31,21 +31,18 @@ static const wxString strWX("hello, world");
 
 TEST_CASE("CRT::SetGetEnv")
 {
-#define TESTVAR_NAME wxT("WXTESTVAR")
+    static constexpr char TESTVAR_NAME[] = "WXTESTVAR";
 
-    wxString val;
-    wxSetEnv(TESTVAR_NAME, wxT("value"));
-    CHECK( wxGetEnv(TESTVAR_NAME, &val) );
-    CHECK( val == "value" );
-    CHECK( wxString(wxGetenv(TESTVAR_NAME)) == "value" );
+    wxSetEnv(TESTVAR_NAME, "value");
+    CHECK( !wxGetEnv(TESTVAR_NAME).empty() );
+    CHECK( wxGetEnv(TESTVAR_NAME) == "value" );
 
-    wxSetEnv(TESTVAR_NAME, wxT("something else"));
-    CHECK( wxGetEnv(TESTVAR_NAME, &val) );
-    CHECK( val == "something else" );
-    CHECK( wxString(wxGetenv(TESTVAR_NAME)) == "something else" );
+    wxSetEnv(TESTVAR_NAME, "something else");
+    CHECK( !wxGetEnv(TESTVAR_NAME).empty() );
+    CHECK( wxGetEnv(TESTVAR_NAME) == "something else" );
 
     CHECK( wxUnsetEnv(TESTVAR_NAME) );
-    CHECK( !wxGetEnv(TESTVAR_NAME, NULL) );
+    CHECK( wxGetEnv(TESTVAR_NAME).empty() );
     CHECK( !wxGetenv(TESTVAR_NAME) );
 
 #undef TESTVAR_NAME

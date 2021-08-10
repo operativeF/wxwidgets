@@ -131,11 +131,11 @@ public:
     // Get selected filename path only (else empty string).
     // I.e. don't count a directory as a selection
     virtual wxString GetFilePath() const;
-    virtual void GetFilePaths(wxArrayString& paths) const;
+    virtual void GetFilePaths(std::vector<wxString>& paths) const;
     virtual void SetPath(const wxString& path);
 
     virtual void SelectPath(const wxString& path, bool select = true);
-    virtual void SelectPaths(const wxArrayString& paths);
+    virtual void SelectPaths(const std::vector<wxString>& paths);
 
     virtual void ShowHidden( bool show );
     virtual bool GetShowHidden() { return m_showHidden; }
@@ -185,11 +185,11 @@ protected:
                 const wxString & text,
                 int image = -1, int selectedImage = -1,
                 wxTreeItemData * data = nullptr);
-    //void FindChildFiles(wxTreeItemId id, int dirFlags, wxArrayString& filenames);
+    //void FindChildFiles(wxTreeItemId id, int dirFlags, std::vector<wxString>& filenames);
     virtual wxTreeCtrl* CreateTreeCtrl(wxWindow *parent, wxWindowID id, const wxPoint& pos, const wxSize& size, long treeStyle);
 
     // Extract description and actual filter from overall filter string
-    bool ExtractWildcard(const wxString& filterStr, int n, wxString& filter, wxString& description);
+    bool ExtractWildcard(const std::string& filterStr, int n, std::string& filter, std::string& description);
 
 private:
     void PopulateNode(wxTreeItemId node);

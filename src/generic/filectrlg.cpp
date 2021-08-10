@@ -126,7 +126,7 @@ int wxCALLBACK wxFileDataTimeCompare(wxIntPtr data1, wxIntPtr data2, wxIntPtr so
 }
 
 // defined in src/generic/dirctrlg.cpp
-extern size_t wxGetAvailableDrives(wxArrayString &paths, wxArrayString &names, std::vector<int> &icon_ids);
+extern size_t wxGetAvailableDrives(std::vector<wxString>& paths, std::vector<wxString>& names, std::vector<int> &icon_ids);
 
 //-----------------------------------------------------------------------------
 //  wxFileData
@@ -483,7 +483,9 @@ void wxFileListCtrl::UpdateFiles()
 #if defined(__WINDOWS__) || defined(__WXMAC__)
     if ( IsTopMostDir(m_dirName) )
     {
-        wxArrayString names, paths;
+        std::vector<wxString> names;
+        std::vector<wxString> paths;
+        
         std::vector<int> icons;
         const size_t count = wxGetAvailableDrives(paths, names, icons);
 
@@ -546,10 +548,10 @@ void wxFileListCtrl::UpdateFiles()
             int hiddenFlag = m_showHidden ? wxDIR_HIDDEN : 0;
 
             bool cont;
-            wxString f;
+            std::string f;
 
             // Get the directories first (not matched against wildcards):
-            cont = dir.GetFirst(&f, wxEmptyString, wxDIR_DIRS | hiddenFlag);
+            cont = dir.GetFirst(&f, "", wxDIR_DIRS | hiddenFlag);
             while (cont)
             {
                 wxFileData *fd = new wxFileData(dirPrefix + f, f, wxFileData::is_dir, wxFileIconsTable::folder);
@@ -906,7 +908,7 @@ bool wxGenericFileCtrl::Create( wxWindow *parent,
 
     const size_t len = m_dir.length();
     if ( ( len > 1 ) && ( wxEndsWithPathSeparator( m_dir ) ) )
-        m_dir.Remove( len - 1, 1 );
+        m_dir.erase( len - 1, 1 );
 
     m_filterExtension.clear();
 
@@ -993,21 +995,21 @@ bool wxGenericFileCtrl::Create( wxWindow *parent,
 // NB: there is an unfortunate mismatch between wxFileName and wxFileDialog
 //     method names but our GetDirectory() does correspond to wxFileName::
 //     GetPath() while our GetPath() is wxFileName::GetFullPath()
-wxString wxGenericFileCtrl::GetPath() const
+std::string wxGenericFileCtrl::GetPath() const
 {
     wxASSERT_MSG ( !(m_style & wxFC_MULTIPLE), "use GetPaths() instead" );
 
     return DoGetFileName().GetFullPath();
 }
 
-wxString wxGenericFileCtrl::GetFilename() const
+std::string wxGenericFileCtrl::GetFilename() const
 {
     wxASSERT_MSG ( !(m_style & wxFC_MULTIPLE), "use GetFilenames() instead" );
 
     return DoGetFileName().GetFullName();
 }
 
-wxString wxGenericFileCtrl::GetDirectory() const
+std::string wxGenericFileCtrl::GetDirectory() const
 {
     // don't check for wxFC_MULTIPLE here, this one is probably safe to call in
     // any case as it can be always taken to mean "current directory"
@@ -1045,13 +1047,13 @@ wxFileName wxGenericFileCtrl::DoGetFileName() const
     return fn;
 }
 
-std::vector<wxString> wxGenericFileCtrl::DoGetFilenames(bool fullPath) const
+std::vector<std::string> wxGenericFileCtrl::DoGetFilenames(bool fullPath) const
 {
-    std::vector<wxString> filenames;
+    std::vector<std::string> filenames;
 
-    const wxString dir = m_list->GetDir();
+    const std::string dir = m_list->GetDir();
 
-    const wxString value = m_text->GetValue();
+    const std::string value = m_text->GetValue();
     
     if ( !value.empty() )
     {
@@ -1090,7 +1092,7 @@ std::vector<wxString> wxGenericFileCtrl::DoGetFilenames(bool fullPath) const
     return filenames;
 }
 
-bool wxGenericFileCtrl::SetDirectory( const wxString& dir )
+bool wxGenericFileCtrl::SetDirectory( const std::string& dir )
 {
     m_ignoreChanges = true;
     m_list->GoToDir( dir );
@@ -1100,7 +1102,7 @@ bool wxGenericFileCtrl::SetDirectory( const wxString& dir )
     return wxFileName( dir ).SameAs( m_list->GetDir() );
 }
 
-bool wxGenericFileCtrl::SetFilename( const wxString& name )
+bool wxGenericFileCtrl::SetFilename( const std::string& name )
 {
     wxString dir, fn, ext;
     wxFileName::SplitPath(name, &dir, &fn, &ext);
@@ -1167,10 +1169,11 @@ void wxGenericFileCtrl::DoSetFilterIndex( int filterindex )
     wxGenerateFilterChangedEvent( this, this );
 }
 
-void wxGenericFileCtrl::SetWildcard( const wxString& wildCard )
+void wxGenericFileCtrl::SetWildcard( const std::string& wildCard )
 {
     if ( wildCard.empty() || wildCard == wxFileSelectorDefaultWildcardStr )
     {
+        // TODO: Needs translation string
         m_wildCard = wxString::Format( _( "All files (%s)|%s" ),
                                        wxFileSelectorDefaultWildcardStr,
                                        wxFileSelectorDefaultWildcardStr );
@@ -1178,7 +1181,8 @@ void wxGenericFileCtrl::SetWildcard( const wxString& wildCard )
     else
         m_wildCard = wildCard;
 
-    wxArrayString wildDescriptions, wildFilters;
+    std::vector<std::string> wildDescriptions;
+    std::vector<std::string> wildFilters;
     const size_t count = wxParseCommonDialogsFilter( m_wildCard,
                          wildDescriptions,
                          wildFilters );
@@ -1393,7 +1397,7 @@ void wxGenericFileCtrl::HandleAction( const wxString &fn )
     wxGenerateFileActivatedEvent( this, this );
 }
 
-bool wxGenericFileCtrl::SetPath( const wxString& path )
+bool wxGenericFileCtrl::SetPath( const std::string& path )
 {
     wxString dir, fn, ext;
     wxFileName::SplitPath(path, &dir, &fn, &ext);
@@ -1403,9 +1407,9 @@ bool wxGenericFileCtrl::SetPath( const wxString& path )
 
     m_dir = dir;
     m_fileName = fn;
-    if ( !ext.empty() || path.Last() == '.' )
+    if ( !ext.empty() || path.back() == '.' )
     {
-        m_fileName += wxT( "." );
+        m_fileName += ".";
         m_fileName += ext;
     }
 
@@ -1415,12 +1419,12 @@ bool wxGenericFileCtrl::SetPath( const wxString& path )
     return true;
 }
 
-std::vector<wxString> wxGenericFileCtrl::GetPaths() const
+std::vector<std::string> wxGenericFileCtrl::GetPaths() const
 {
     return DoGetFilenames(true);
 }
 
-std::vector<wxString> wxGenericFileCtrl::GetFilenames() const
+std::vector<std::string> wxGenericFileCtrl::GetFilenames() const
 {
     return DoGetFilenames( false );
 }

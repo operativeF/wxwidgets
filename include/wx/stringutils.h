@@ -191,6 +191,51 @@ inline void ToLower(std::string& str)
 
 // Non-modifying string functions
 
+// * matches 0 or more instances of any characters
+// ? matches with any single character
+inline constexpr bool Matches(std::string_view wildStr, std::string_view regStr)
+{
+    if (wildStr.empty() || regStr.empty())
+        return false;
+
+    for (auto wildIt = wildStr.begin(), regIt = regStr.begin(); wildIt != wildStr.end(); ++wildIt)
+    {
+        auto wildCh{ *wildIt };
+
+        if (wildCh == *regIt || wildCh == '?')
+        {
+            ++regIt;
+        }
+        else if (wildCh == '*')
+        {
+            ++wildIt;
+
+            // If it's on the end, it doesn't matter what comes next.
+            if (wildIt == wildStr.end())
+                return true;
+
+            wildCh = *wildIt;
+
+            // Skip characters until we find a match (or none if end).
+            while (wildCh != *regIt)
+            {
+                ++regIt;
+                // We've reached the end with no match for remaining wildStr chars.
+                if (regIt == regStr.end())
+                    return false;
+            }
+
+            ++regIt;
+        }
+        else if (wildCh != *regIt)
+        {
+            return false;
+        }
+    }
+
+    return true;
+}
+
 [[nodiscard]] inline constexpr bool StartsWith(std::string_view strView, std::string_view prefix) noexcept
 {
     const auto prefixSize = prefix.size();

@@ -146,7 +146,7 @@ WXDLLIMPEXP_BASE wxLinuxDistributionInfo wxGetLinuxDistributionInfo();
 WXDLLIMPEXP_BASE wxString wxNow();
 
 // Return path where wxWidgets is installed (mostly useful in Unices)
-WXDLLIMPEXP_BASE wxString wxGetInstallPrefix();
+WXDLLIMPEXP_BASE std::string wxGetInstallPrefix();
 // Return path to wxWin data (/usr/share/wx/%{version}) (Unices)
 WXDLLIMPEXP_BASE wxString wxGetDataDir();
 
@@ -494,7 +494,7 @@ WXDLLIMPEXP_BASE bool wxHandleFatalExceptions(bool doit = true);
 
 // returns true if variable exists (value may be NULL if you just want to check
 // for this)
-WXDLLIMPEXP_BASE bool wxGetEnv(const wxString& var, wxString *value);
+WXDLLIMPEXP_BASE std::string wxGetEnv(const std::string& var);
 
 // set the env var name to the given value, return true on success
 WXDLLIMPEXP_BASE bool wxSetEnv(const wxString& var, const wxString& value);

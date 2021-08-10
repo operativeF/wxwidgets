@@ -21,6 +21,8 @@
 #include "wx/dir.h"
 #include "wx/hashmap.h"
 
+#include <fmt/core.h>
+
 inline constexpr char wxTRACE_FSWATCHER[] = "fswatcher";
 
 // ----------------------------------------------------------------------------
@@ -95,7 +97,7 @@ public:
     // Constructor for the error or warning events.
     wxFileSystemWatcherEvent(int changeType,
                              wxFSWWarningType warningType,
-                             const wxString& errorMsg = wxString(),
+                             const std::string& errorMsg = {},
                              int watchid = wxID_ANY) :
         wxEvent(watchid, wxEVT_FSWATCHER),
         m_changeType(changeType),
@@ -164,9 +166,9 @@ public:
     wxEvent* Clone() const override
     {
         wxFileSystemWatcherEvent* evt = new wxFileSystemWatcherEvent(*this);
-        evt->m_errorMsg = m_errorMsg.Clone();
-        evt->m_path = wxFileName(m_path.GetFullPath().Clone());
-        evt->m_newPath = wxFileName(m_newPath.GetFullPath().Clone());
+        evt->m_errorMsg = m_errorMsg;
+        evt->m_path = wxFileName(m_path.GetFullPath());
+        evt->m_newPath = wxFileName(m_newPath.GetFullPath());
         evt->m_warningType = m_warningType;
         return evt;
     }
@@ -185,7 +187,7 @@ public:
         return (m_changeType & (wxFSW_EVENT_ERROR | wxFSW_EVENT_WARNING)) != 0;
     }
 
-    wxString GetErrorDescription() const
+    const std::string& GetErrorDescription() const
     {
         return m_errorMsg;
     }
@@ -198,14 +200,14 @@ public:
     /**
      * Returns a wxString describing an event useful for debugging or testing
      */
-    wxString ToString() const;
+    std::string ToString() const;
 
 protected:
     int m_changeType;
     wxFSWWarningType m_warningType{wxFSWWarningType::None};
     wxFileName m_path;
     wxFileName m_newPath;
-    wxString m_errorMsg;
+    std::string m_errorMsg;
 
 public:
 	wxClassInfo *GetClassInfo() const override ;
@@ -316,7 +318,7 @@ public:
      * of particular type.
      */
     virtual bool AddTree(const wxFileName& path, int events = wxFSW_EVENT_ALL,
-                         const wxString& filespec = wxEmptyString);
+                         const std::string& filespec = {});
 
     /**
      * Removes path from the list of watched paths.
@@ -346,7 +348,7 @@ public:
      * TODO think about API here: we need to return more information (like is
      * the path watched recursively)
      */
-    int GetWatchedPaths(std::vector<wxString>* paths) const;
+    int GetWatchedPaths(std::vector<std::string>* paths) const;
 
     wxEvtHandler* GetOwner() const
     {
@@ -367,18 +369,18 @@ public:
     // Delegates the real work of adding the path to wxFSWatcherImpl::Add() and
     // updates m_watches if the new path was successfully added.
     bool AddAny(const wxFileName& path, int events, wxFSWPathType type,
-                const wxString& filespec = wxString());
+                const std::string& filespec = {});
 
 protected:
 
-    static wxString GetCanonicalPath(const wxFileName& path)
+    static std::string GetCanonicalPath(const wxFileName& path)
     {
         wxFileName path_copy = wxFileName(path);
         if ( !path_copy.Normalize() )
         {
-            wxFAIL_MSG(wxString::Format(wxASCII_STR("Unable to normalize path '%s'"),
+            wxFAIL_MSG(fmt::format("Unable to normalize path '%s'",
                                          path.GetFullPath()));
-            return wxEmptyString;
+            return {};
         }
 
         return path_copy.GetFullPath();

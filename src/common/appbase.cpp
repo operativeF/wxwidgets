@@ -1240,8 +1240,8 @@ void wxOnAssert(const char *file,
 static void SetTraceMasks()
 {
 #if wxUSE_LOG
-    wxString mask;
-    if ( wxGetEnv(wxT("WXTRACE"), &mask) )
+    std::string mask{ wxGetEnv("WXTRACE") };
+    if ( !mask.empty() )
     {
         wxStringTokenizer tkn(mask, wxT(",;:"));
         while ( tkn.HasMoreTokens() )

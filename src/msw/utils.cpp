@@ -33,6 +33,9 @@
 #include "wx/msw/private/hiddenwin.h"
 #include "wx/msw/missing.h"     // for CHARSET_HANGUL
 
+#include <boost/nowide/convert.hpp>
+#include <boost/nowide/stackstring.hpp>
+
 #if defined(__CYGWIN__)
     //CYGWIN gives annoying warning about runtime stuff if we don't do this
 #   define USE_SYS_TYPES_FD_SET
@@ -93,11 +96,11 @@
 
 // In the WIN.INI file
 #if !defined(USE_NET_API)
-constexpr wxChar WX_SECTION[] = wxT("wxWindows");
+constexpr char WX_SECTION[] = "wxWindows";
 #endif
 
 #if !defined(USE_NET_API)
-constexpr wxChar eUSERNAME[]  = wxT("UserName");
+constexpr char eUSERNAME[]  = "UserName";
 #endif
 
 WXDLLIMPEXP_DATA_BASE(const wxChar *) wxUserResourceStr = wxT("TEXT");
@@ -301,7 +304,11 @@ error:
 #else  // !USE_NET_API
     // Could use NIS, MS-Mail or other site specific programs
     // Use wxWidgets configuration data
-    bool ok = GetProfileString(WX_SECTION, eUSERNAME, wxEmptyString, buf, maxSize - 1) != 0;
+    bool ok = ::GetProfileStringW(boost::nowide::widen(WX_SECTION).c_str(),
+                                  boost::nowide::widen(eUSERNAME).c_str(),
+                                  L"",
+                                  buf,
+                                  maxSize - 1) != 0;
     if ( !ok )
     {
         ok = wxGetUserId(buf, maxSize);
@@ -462,25 +469,24 @@ bool wxGetDiskSpace(const wxString& path,
 // env vars
 // ----------------------------------------------------------------------------
 
-bool wxGetEnv(const wxString& var,
-              wxString *value)
+std::string wxGetEnv(const std::string& var)
 {
     // first get the size of the buffer
-    DWORD dwRet = ::GetEnvironmentVariable(var.t_str(), nullptr, 0);
+    DWORD dwRet = ::GetEnvironmentVariableW(boost::nowide::widen(var).c_str(), nullptr, 0);
     if ( !dwRet )
     {
         // this means that there is no such variable
-        return false;
+        return {};
     }
 
-    if ( value )
-    {
-        std::ignore = ::GetEnvironmentVariable(var.t_str(),
-                                       wxStringBuffer(*value, dwRet),
-                                       dwRet);
-    }
+    std::wstring value;
+    value.resize(dwRet);
 
-    return true;
+    std::ignore = ::GetEnvironmentVariableW(boost::nowide::widen(var).c_str(),
+                                            &value[0],
+                                            dwRet);
+
+    return boost::nowide::narrow(value);
 }
 
 bool wxDoSetEnv(const wxString& var, const wxChar *value)

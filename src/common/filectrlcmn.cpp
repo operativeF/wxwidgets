@@ -50,18 +50,18 @@ void wxGenerateSelectionChangedEvent( wxFileCtrlBase *fileCtrl, wxWindow *wnd)
     wxFileCtrlEvent event( wxEVT_FILECTRL_SELECTIONCHANGED, wnd, wnd->GetId() );
     event.SetDirectory( fileCtrl->GetDirectory() );
 
-    std::vector<wxString> filenames = fileCtrl->GetFilenames();
+    std::vector<std::string> filenames = fileCtrl->GetFilenames();
     event.SetFiles( filenames );
 
     wnd->GetEventHandler()->ProcessEvent( event );
 }
 
-void wxGenerateFileActivatedEvent( wxFileCtrlBase *fileCtrl, wxWindow *wnd, const wxString& filename )
+void wxGenerateFileActivatedEvent( wxFileCtrlBase *fileCtrl, wxWindow *wnd, const std::string& filename )
 {
     wxFileCtrlEvent event( wxEVT_FILECTRL_FILEACTIVATED, wnd, wnd->GetId() );
     event.SetDirectory( fileCtrl->GetDirectory() );
 
-    std::vector<wxString> filenames;
+    std::vector<std::string> filenames;
 
     if ( filename.empty() )
     {
@@ -81,12 +81,12 @@ void wxGenerateFileActivatedEvent( wxFileCtrlBase *fileCtrl, wxWindow *wnd, cons
 // wxFileCtrlEvent implementation
 ///////////////////////////////////////////////////////////////////////////////
 
-wxString wxFileCtrlEvent::GetFile() const
+std::string wxFileCtrlEvent::GetFile() const
 {
     wxASSERT_MSG( !wxDynamicCast( GetEventObject(), wxFileCtrl )->HasMultipleFileSelection(),
                   wxT( "Please use GetFiles() to get all files instead of this function" ) );
 
-    wxString string;
+    std::string string;
     if (!m_files.empty())
         string = m_files[0];
     return string;

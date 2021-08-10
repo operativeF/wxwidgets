@@ -1894,7 +1894,7 @@ std::vector<wxString> wxFileTranslationsLoader::GetAvailableTranslations(const w
         if ( !dir.Open(i) )
             continue;
 
-        wxString lang;
+        std::string lang;
         for ( bool ok = dir.GetFirst(&lang, wxString(), wxDIR_DIRS);
               ok;
               ok = dir.GetNext(&lang) )

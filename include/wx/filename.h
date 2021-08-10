@@ -497,7 +497,7 @@ public:
 
     // full name is the file name + extension (but without the path)
     void SetFullName(const wxString& fullname);
-    wxString GetFullName() const;
+    std::string GetFullName() const;
 
     const std::vector<wxString>& GetDirs() const        { return m_dirs; }
 
@@ -509,7 +509,7 @@ public:
     void SetPath( const wxString &path, wxPathFormat format = wxPATH_NATIVE );
 
     // Construct full path with name and ext
-    wxString GetFullPath( wxPathFormat format = wxPATH_NATIVE ) const;
+    std::string GetFullPath( wxPathFormat format = wxPATH_NATIVE ) const;
 
     // Return the short form of the path (returns identity on non-Windows platforms)
     wxString GetShortPath() const;

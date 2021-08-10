@@ -418,7 +418,7 @@ bool wxHtmlHelpWindow::Create(wxWindow* parent, wxWindowID id,
                                          wxDefaultPosition, wxDefaultSize,
                                          {}, comboStyle);
             m_Bookmarks->Append(_("(bookmarks)"));
-            for (unsigned i = 0; i < m_BookmarksNames.GetCount(); i++)
+            for (unsigned i = 0; i < m_BookmarksNames.size(); i++)
                 m_Bookmarks->Append(m_BookmarksNames[i]);
             m_Bookmarks->SetSelection(0);
 
@@ -1081,27 +1081,28 @@ void wxHtmlHelpWindow::ReadCustomization(wxConfigBase *cfg, const wxString& path
         cfg->SetPath(wxT("/") + path);
     }
 
-    m_Cfg.navig_on = cfg->Read(wxT("hcNavigPanel"), m_Cfg.navig_on) != 0;
-    m_Cfg.sashpos = cfg->Read(wxT("hcSashPos"), m_Cfg.sashpos);
-    m_Cfg.x = cfg->Read(wxT("hcX"), m_Cfg.x);
-    m_Cfg.y = cfg->Read(wxT("hcY"), m_Cfg.y);
-    m_Cfg.w = cfg->Read(wxT("hcW"), m_Cfg.w);
-    m_Cfg.h = cfg->Read(wxT("hcH"), m_Cfg.h);
+    m_Cfg.navig_on = cfg->Read("hcNavigPanel", m_Cfg.navig_on) != 0;
+    m_Cfg.sashpos = cfg->Read("hcSashPos", m_Cfg.sashpos);
+    m_Cfg.x = cfg->Read("hcX", m_Cfg.x);
+    m_Cfg.y = cfg->Read("hcY", m_Cfg.y);
+    m_Cfg.w = cfg->Read("hcW", m_Cfg.w);
+    m_Cfg.h = cfg->Read("hcH", m_Cfg.h);
 
-    m_FixedFace = cfg->Read(wxT("hcFixedFace"), m_FixedFace);
-    m_NormalFace = cfg->Read(wxT("hcNormalFace"), m_NormalFace);
-    m_FontSize = cfg->Read(wxT("hcBaseFontSize"), m_FontSize);
+    m_FixedFace = cfg->Read("hcFixedFace", m_FixedFace);
+    m_NormalFace = cfg->Read("hcNormalFace", m_NormalFace);
+    m_FontSize = cfg->Read("hcBaseFontSize", m_FontSize);
 
     {
         int cnt;
         wxString val, s;
 
-        cnt = cfg->Read(wxT("hcBookmarksCnt"), 0L);
+        cnt = cfg->Read("hcBookmarksCnt", 0L);
         if (cnt != 0)
         {
             int i;
-            m_BookmarksNames.Clear();
-            m_BookmarksPages.Clear();
+            m_BookmarksNames.clear();
+            m_BookmarksPages.clear();
+
             if (m_Bookmarks)
             {
                 m_Bookmarks->Clear();
@@ -1112,11 +1113,11 @@ void wxHtmlHelpWindow::ReadCustomization(wxConfigBase *cfg, const wxString& path
             {
                 val.Printf(wxT("hcBookmark_%i"), i);
                 s = cfg->Read(val);
-                m_BookmarksNames.Add(s);
+                m_BookmarksNames.push_back(s);
                 if (m_Bookmarks) m_Bookmarks->Append(s);
                 val.Printf(wxT("hcBookmark_%i_url"), i);
                 s = cfg->Read(val);
-                m_BookmarksPages.Add(s);
+                m_BookmarksPages.push_back(s);
             }
         }
     }
@@ -1128,10 +1129,10 @@ void wxHtmlHelpWindow::ReadCustomization(wxConfigBase *cfg, const wxString& path
         cfg->SetPath(oldpath);
 }
 
-void wxHtmlHelpWindow::WriteCustomization(wxConfigBase *cfg, const wxString& path)
+void wxHtmlHelpWindow::WriteCustomization(wxConfigBase *cfg, const std::string& path)
 {
-    wxString oldpath;
-    wxString tmp;
+    std::string oldpath;
+    std::string tmp;
 
     if (!path.empty())
     {
@@ -1139,33 +1140,33 @@ void wxHtmlHelpWindow::WriteCustomization(wxConfigBase *cfg, const wxString& pat
         cfg->SetPath(wxT("/") + path);
     }
 
-    cfg->Write(wxT("hcNavigPanel"), m_Cfg.navig_on);
-    cfg->Write(wxT("hcSashPos"), (long)m_Cfg.sashpos);
+    cfg->Write("hcNavigPanel", m_Cfg.navig_on);
+    cfg->Write("hcSashPos", (long)m_Cfg.sashpos);
 
     //  Don't write if iconized as this would make the window
     //  disappear next time it is shown!
-    cfg->Write(wxT("hcX"), (long)m_Cfg.x);
-    cfg->Write(wxT("hcY"), (long)m_Cfg.y);
-    cfg->Write(wxT("hcW"), (long)m_Cfg.w);
-    cfg->Write(wxT("hcH"), (long)m_Cfg.h);
+    cfg->Write("hcX", (long)m_Cfg.x);
+    cfg->Write("hcY", (long)m_Cfg.y);
+    cfg->Write("hcW", (long)m_Cfg.w);
+    cfg->Write("hcH", (long)m_Cfg.h);
 
-    cfg->Write(wxT("hcFixedFace"), m_FixedFace);
-    cfg->Write(wxT("hcNormalFace"), m_NormalFace);
-    cfg->Write(wxT("hcBaseFontSize"), (long)m_FontSize);
+    cfg->Write("hcFixedFace", m_FixedFace);
+    cfg->Write("hcNormalFace", m_NormalFace);
+    cfg->Write("hcBaseFontSize", (long)m_FontSize);
 
     if (m_Bookmarks)
     {
         int i;
-        int cnt = m_BookmarksNames.GetCount();
+        int cnt = m_BookmarksNames.size();
         wxString val;
 
-        cfg->Write(wxT("hcBookmarksCnt"), (long)cnt);
+        cfg->Write("hcBookmarksCnt", (long)cnt);
         for (i = 0; i < cnt; i++)
         {
             val.Printf(wxT("hcBookmark_%i"), i);
-            cfg->Write(val, m_BookmarksNames[i]);
+            cfg->Write(val, m_BookmarksNames[i].ToStdString());
             val.Printf(wxT("hcBookmark_%i_url"), i);
-            cfg->Write(val, m_BookmarksPages[i]);
+            cfg->Write(val, m_BookmarksPages[i].ToStdString());
         }
     }
 
@@ -1501,11 +1502,14 @@ void wxHtmlHelpWindow::OnToolbar(wxCommandEvent& event)
                 url = m_HtmlWin->GetOpenedPage();
                 if (item.empty())
                     item = url.AfterLast(wxT('/'));
-                if (m_BookmarksPages.Index(url) == wxNOT_FOUND)
+
+                auto findUrl = std::find(m_BookmarksPages.begin(), m_BookmarksPages.end(), url);
+
+                if (findUrl == m_BookmarksPages.end())
                 {
                     m_Bookmarks->Append(item);
-                    m_BookmarksNames.Add(item);
-                    m_BookmarksPages.Add(url);
+                    m_BookmarksNames.push_back(item);
+                    m_BookmarksPages.push_back(url);
                 }
             }
             break;
@@ -1513,17 +1517,16 @@ void wxHtmlHelpWindow::OnToolbar(wxCommandEvent& event)
         case wxID_HTML_BOOKMARKSREMOVE :
             {
                 wxString item;
-                int pos;
-
                 item = m_Bookmarks->GetStringSelection();
-                pos = m_BookmarksNames.Index(item);
-                if (pos != wxNOT_FOUND)
+
+                auto pos = std::find(m_BookmarksNames.begin(), m_BookmarksNames.end(), item); 
+                if (pos != m_BookmarksNames.end())
                 {
-                    m_BookmarksNames.RemoveAt(pos);
-                    m_BookmarksPages.RemoveAt(pos);
-                    pos = m_Bookmarks->GetSelection();
-                    wxASSERT_MSG( pos != wxNOT_FOUND , wxT("Unknown bookmark position") ) ;
-                    m_Bookmarks->Delete((unsigned int)pos);
+                    m_BookmarksNames.erase(pos);
+                    m_BookmarksPages.erase(pos);
+                    int selPos = m_Bookmarks->GetSelection();
+                    wxASSERT_MSG(selPos != wxNOT_FOUND , wxT("Unknown bookmark position") ) ;
+                    m_Bookmarks->Delete((unsigned int)selPos);
                 }
             }
             break;
@@ -1742,10 +1745,11 @@ void wxHtmlHelpWindow::OnSearch(wxCommandEvent& WXUNUSED(event))
 void wxHtmlHelpWindow::OnBookmarksSel(wxCommandEvent& WXUNUSED(event))
 {
     wxString str = m_Bookmarks->GetStringSelection();
-    int idx = m_BookmarksNames.Index(str);
-    if (!str.empty() && str != _("(bookmarks)") && idx != wxNOT_FOUND)
+    auto bookmarkNameIter = std::find(m_BookmarksNames.begin(), m_BookmarksNames.end(), str);
+
+    if (!str.empty() && str != _("(bookmarks)") && bookmarkNameIter != m_BookmarksNames.end())
     {
-       m_HtmlWin->LoadPage(m_BookmarksPages[(size_t)idx]);
+       m_HtmlWin->LoadPage(*bookmarkNameIter);
     }
 }
 

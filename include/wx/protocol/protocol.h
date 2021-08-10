@@ -63,28 +63,28 @@ public:
 
 #if wxUSE_SOCKETS
     bool Reconnect();
-    virtual bool Connect( const wxString& WXUNUSED(host) ) { return false; }
+    virtual bool Connect( const std::string& WXUNUSED(host) ) { return false; }
     bool Connect( const wxSockAddress& addr, bool WXUNUSED(wait) = true) override
         { return wxSocketClient::Connect(addr); }
 
     // read a '\r\n' terminated line from the given socket and put it in
     // result (without the terminators)
-    static wxProtocolError ReadLine(wxSocketBase *socket, wxString& result);
+    static wxProtocolError ReadLine(wxSocketBase *socket, std::string& result);
 
     // read a line from this socket - this one can be overridden in the
     // derived classes if different line termination convention is to be used
-    virtual wxProtocolError ReadLine(wxString& result);
+    virtual wxProtocolError ReadLine(std::string& result);
 #endif // wxUSE_SOCKETS
 
     virtual bool Abort() = 0;
-    virtual wxInputStream *GetInputStream(const wxString& path) = 0;
-    virtual wxString GetContentType() const = 0;
+    virtual wxInputStream *GetInputStream(const std::string& path) = 0;
+    virtual std::string GetContentType() const = 0;
 
     // the error code
     virtual wxProtocolError GetError() const { return m_lastError; }
 
-    void SetUser(const wxString& user) { m_username = user; }
-    void SetPassword(const wxString& passwd) { m_password = passwd; }
+    void SetUser(const std::string& user) { m_username = user; }
+    void SetPassword(const std::string& passwd) { m_password = passwd; }
 
     virtual void SetDefaultTimeout(wxUint32 Value);
 
@@ -115,15 +115,15 @@ public:
 
     // these functions forward to the same functions with the same names in
     // wxProtocolLog if we have a valid logger and do nothing otherwise
-    void LogRequest(const wxString& str);
-    void LogResponse(const wxString& str);
+    void LogRequest(const std::string& str);
+    void LogResponse(const std::string& str);
 
 protected:
     // the timeout associated with the protocol:
     wxUint32        m_uiDefaultTimeout;
 
-    wxString        m_username;
-    wxString        m_password;
+    std::string        m_username;
+    std::string        m_password;
 
     // this must be always updated by the derived classes!
     wxProtocolError m_lastError{wxPROTO_NOERR};
@@ -159,16 +159,18 @@ bool wxProtocolUse##class = true;
 class WXDLLIMPEXP_NET wxProtoInfo : public wxObject
 {
 public:
-    wxProtoInfo(const wxChar *name,
-                const wxChar *serv_name,
+    wxProtoInfo(const std::string& name,
+                const std::string& serv_name,
                 const bool need_host1,
                 wxClassInfo *info);
 
 protected:
     wxProtoInfo *next;
-    wxString m_protoname;
-    wxString prefix;
-    wxString m_servname;
+
+    std::string m_protoname;
+    std::string prefix;
+    std::string m_servname;
+
     wxClassInfo *m_cinfo;
     bool m_needhost;
 

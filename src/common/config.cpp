@@ -29,11 +29,15 @@
 
 #include "wx/apptrait.h"
 #include "wx/file.h"
+#include "wx/stringutils.h"
 
 #include <cctype>
 #include <cfloat>      // for FLT_MAX
 #include <climits>     // for INT_MAX
 #include <cstdlib>
+#include <charconv>
+
+#include <fmt/core.h>
 
 // ============================================================================
 // implementation
@@ -99,7 +103,7 @@ wxConfigBase *wxConfigBase::Create()
 
 // implement both Read() overloads for the given type in terms of DoRead()
 #define IMPLEMENT_READ_FOR_TYPE(name, type, deftype, extra)                 \
-    bool wxConfigBase::Read(const wxString& key, type *val) const           \
+    bool wxConfigBase::Read(const std::string& key, type *val) const           \
     {                                                                       \
         wxCHECK_MSG( val, false, wxT("wxConfig::Read(): NULL parameter") );  \
                                                                             \
@@ -111,7 +115,7 @@ wxConfigBase *wxConfigBase::Create()
         return true;                                                        \
     }                                                                       \
                                                                             \
-    bool wxConfigBase::Read(const wxString& key,                            \
+    bool wxConfigBase::Read(const std::string& key,                            \
                             type *val,                                      \
                             deftype defVal) const                           \
     {                                                                       \
@@ -134,7 +138,7 @@ wxConfigBase *wxConfigBase::Create()
     }
 
 
-IMPLEMENT_READ_FOR_TYPE(String, wxString, const wxString&, ExpandEnvVars)
+IMPLEMENT_READ_FOR_TYPE(String, std::string, const std::string&, ExpandEnvVars)
 IMPLEMENT_READ_FOR_TYPE(Long, long, long, long)
 #ifdef wxHAS_LONG_LONG_T_DIFFERENT_FROM_LONG
 IMPLEMENT_READ_FOR_TYPE(LongLong, wxLongLong_t, wxLongLong_t, wxLongLong_t)
@@ -145,7 +149,7 @@ IMPLEMENT_READ_FOR_TYPE(Bool, bool, bool, bool)
 #undef IMPLEMENT_READ_FOR_TYPE
 
 // int is stored as long
-bool wxConfigBase::Read(const wxString& key, int *pi) const
+bool wxConfigBase::Read(const std::string& key, int *pi) const
 {
     long l = *pi;
     const bool r = Read(key, &l);
@@ -154,7 +158,7 @@ bool wxConfigBase::Read(const wxString& key, int *pi) const
     return r;
 }
 
-bool wxConfigBase::Read(const wxString& key, int *pi, int defVal) const
+bool wxConfigBase::Read(const std::string& key, int *pi, int defVal) const
 {
     long l = *pi;
     const bool r = Read(key, &l, defVal);
@@ -172,7 +176,7 @@ bool wxConfigBase::Read(const wxString& key, int *pi, int defVal) const
     #error Unexpected sizeof(size_t)
 #endif
 
-bool wxConfigBase::Read(const wxString& key, size_t* val) const
+bool wxConfigBase::Read(const std::string& key, size_t* val) const
 {
     wxCHECK_MSG( val, false, wxT("wxConfig::Read(): NULL parameter") );
 
@@ -181,11 +185,11 @@ bool wxConfigBase::Read(const wxString& key, size_t* val) const
     if ( !Read(key, &tmp) )
         return false;
 
-    *val = static_cast<size_t>(tmp);
+    *val = tmp;
     return true;
 }
 
-bool wxConfigBase::Read(const wxString& key, size_t* val, size_t defVal) const
+bool wxConfigBase::Read(const std::string& key, size_t* val, size_t defVal) const
 {
     wxCHECK_MSG( val, false, wxT("wxConfig::Read(): NULL parameter") );
 
@@ -199,7 +203,7 @@ bool wxConfigBase::Read(const wxString& key, size_t* val, size_t defVal) const
 }
 
 // Read floats as doubles then just type cast it down.
-bool wxConfigBase::Read(const wxString& key, float* val) const
+bool wxConfigBase::Read(const std::string& key, float* val) const
 {
     wxCHECK_MSG( val, false, wxT("wxConfig::Read(): NULL parameter") );
 
@@ -218,7 +222,7 @@ bool wxConfigBase::Read(const wxString& key, float* val) const
     return true;
 }
 
-bool wxConfigBase::Read(const wxString& key, float* val, float defVal) const
+bool wxConfigBase::Read(const std::string& key, float* val, float defVal) const
 {
     wxCHECK_MSG( val, false, wxT("wxConfig::Read(): NULL parameter") );
 
@@ -231,7 +235,7 @@ bool wxConfigBase::Read(const wxString& key, float* val, float defVal) const
 
 // the DoReadXXX() for the other types have implementation in the base class
 // but can be overridden in the derived ones
-bool wxConfigBase::DoReadBool(const wxString& key, bool* val) const
+bool wxConfigBase::DoReadBool(const std::string& key, bool* val) const
 {
     wxCHECK_MSG( val, false, wxT("wxConfig::Read(): NULL parameter") );
 
@@ -256,31 +260,29 @@ bool wxConfigBase::DoReadBool(const wxString& key, bool* val) const
 
 #ifdef wxHAS_LONG_LONG_T_DIFFERENT_FROM_LONG
 
-bool wxConfigBase::DoReadLongLong(const wxString& key, wxLongLong_t *pll) const
+bool wxConfigBase::DoReadLongLong(const std::string& key, wxLongLong_t *pll) const
 {
-    wxString str;
+    std::string str;
     if ( !Read(key, &str) )
         return false;
 
-    str.Trim();
+    wx::utils::TrimAllSpace(str);
 
-    return str.ToLongLong(pll);
+    auto [p, ec] = std::from_chars(str.data(), str.data() + str.size(), *pll);
+
+    return ec == std::errc();
 }
 
 #endif // wxHAS_LONG_LONG_T_DIFFERENT_FROM_LONG
 
-bool wxConfigBase::DoReadDouble(const wxString& key, double* val) const
+bool wxConfigBase::DoReadDouble(const std::string& key, double* val) const
 {
-    wxString str;
+    std::string str;
     if ( Read(key, &str) )
     {
-        if ( str.ToCDouble(val) )
-            return true;
+        auto [p, ec] = std::from_chars(str.data(), str.data() + str.size(), *val);
 
-        // Previous versions of wxFileConfig wrote the numbers out using the
-        // current locale and not the C one as now, so attempt to parse the
-        // string as a number in the current locale too, for compatibility.
-        if ( str.ToDouble(val) )
+        if ( ec == std::errc() )
             return true;
     }
 
@@ -288,9 +290,9 @@ bool wxConfigBase::DoReadDouble(const wxString& key, double* val) const
 }
 
 // string reading helper
-wxString wxConfigBase::ExpandEnvVars(const wxString& str) const
+std::string wxConfigBase::ExpandEnvVars(const std::string& str) const
 {
-    wxString tmp; // Required for BC++
+    std::string tmp; // Required for BC++
     if (IsExpandingEnvVars())
         tmp = wxExpandEnvVars(str);
     else
@@ -304,22 +306,22 @@ wxString wxConfigBase::ExpandEnvVars(const wxString& str) const
 
 #ifdef wxHAS_LONG_LONG_T_DIFFERENT_FROM_LONG
 
-bool wxConfigBase::DoWriteLongLong(const wxString& key, wxLongLong_t llValue)
+bool wxConfigBase::DoWriteLongLong(const std::string& key, wxLongLong_t llValue)
 {
-  return Write(key, wxString::Format("%" wxLongLongFmtSpec "d", llValue));
+    return Write(key, fmt::format("{}", llValue));
 }
 
 #endif // wxHAS_LONG_LONG_T_DIFFERENT_FROM_LONG
 
-bool wxConfigBase::DoWriteDouble(const wxString& key, double val)
+bool wxConfigBase::DoWriteDouble(const std::string& key, double val)
 {
     // Notice that we always write out the numbers in C locale and not the
     // current one. This makes the config files portable between machines using
     // different locales.
-    return DoWriteString(key, wxString::FromCDouble(val));
+    return DoWriteString(key, fmt::format("{}", val));
 }
 
-bool wxConfigBase::DoWriteBool(const wxString& key, bool value)
+bool wxConfigBase::DoWriteBool(const std::string& key, bool value)
 {
     return DoWriteLong(key, value ? 1l : 0l);
 }
@@ -329,14 +331,15 @@ bool wxConfigBase::DoWriteBool(const wxString& key, bool value)
 // ----------------------------------------------------------------------------
 
 wxConfigPathChanger::wxConfigPathChanger(const wxConfigBase *pContainer,
-                                         const wxString& strEntry)
+                                         const std::string& strEntry)
 {
   // FIXME: const_cast
   m_pContainer = const_cast<wxConfigBase *>(pContainer);
 
   // the path is everything which precedes the last slash and the name is
   // everything after it -- and this works correctly if there is no slash too
-  wxString strPath = strEntry.BeforeLast(wxCONFIG_PATH_SEPARATOR, &m_strName);
+  std::string strPath = wx::utils::BeforeLast(strEntry, wxCONFIG_PATH_SEPARATOR);
+  m_strName = wx::utils::AfterLast(strEntry, wxCONFIG_PATH_SEPARATOR);
 
   // except in the special case of "/keyname" when there is nothing before "/"
   if ( strPath.empty() &&
@@ -363,7 +366,7 @@ wxConfigPathChanger::wxConfigPathChanger(const wxConfigBase *pContainer,
            int value;
            pConfig->Read(wxT("MainWindowX"), & value);
         */
-        m_strOldPath = m_pContainer->GetPath().wc_str();
+        m_strOldPath = m_pContainer->GetPath();
         if ( *m_strOldPath.c_str() != wxCONFIG_PATH_SEPARATOR )
           m_strOldPath += wxCONFIG_PATH_SEPARATOR;
         m_pContainer->SetPath(strPath);
@@ -380,7 +383,7 @@ void wxConfigPathChanger::UpdateIfDeleted()
     // find the deepest still existing parent path of the original path
     while ( !m_pContainer->HasGroup(m_strOldPath) )
     {
-        m_strOldPath = m_strOldPath.BeforeLast(wxCONFIG_PATH_SEPARATOR);
+        m_strOldPath = wx::utils::BeforeLast(m_strOldPath, wxCONFIG_PATH_SEPARATOR);
         if ( m_strOldPath.empty() )
             m_strOldPath = wxCONFIG_PATH_SEPARATOR;
     }
@@ -396,9 +399,9 @@ wxConfigPathChanger::~wxConfigPathChanger()
 
 // this is a wxConfig method but it's mainly used with wxConfigPathChanger
 /* static */
-wxString wxConfigBase::RemoveTrailingSeparator(const wxString& key)
+std::string wxConfigBase::RemoveTrailingSeparator(const std::string& key)
 {
-    wxString path(key);
+    std::string path(key);
 
     // don't remove the only separator from a root group path!
     while ( path.length() > 1 )
@@ -435,22 +438,22 @@ enum Bracket
   Bracket_Max
 };
 
-wxString wxExpandEnvVars(const wxString& str)
+std::string wxExpandEnvVars(const std::string& str)
 {
-  wxString strResult;
-  strResult.Alloc(str.length());
+  std::string strResult;
+  strResult.resize(str.length());
 
   size_t m;
   for ( size_t n = 0; n < str.length(); n++ ) {
-    switch ( str[n].GetValue() ) {
+    switch ( str[n] ) {
 #ifdef __WINDOWS__
-      case wxT('%'):
+      case '%':
 #endif // __WINDOWS__
-      case wxT('$'):
+      case '$':
         {
           Bracket bracket;
           #ifdef __WINDOWS__
-            if ( str[n] == wxT('%') )
+            if ( str[n] == '%' )
               bracket = Bracket_Windows;
             else
           #endif // __WINDOWS__
@@ -458,13 +461,13 @@ wxString wxExpandEnvVars(const wxString& str)
             bracket = Bracket_None;
           }
           else {
-            switch ( str[n + 1].GetValue() ) {
-              case wxT('('):
+            switch ( str[n + 1] ) {
+              case '(':
                 bracket = Bracket_Normal;
                 n++;                   // skip the bracket
                 break;
 
-              case wxT('{'):
+              case '{':
                 bracket = Bracket_Curly;
                 n++;                   // skip the bracket
                 break;
@@ -479,13 +482,13 @@ wxString wxExpandEnvVars(const wxString& str)
           while ( m < str.length() && (wxIsalnum(str[m]) || str[m] == wxT('_')) )
             m++;
 
-          wxString strVarName(str.c_str() + n + 1, m - n - 1);
+          std::string strVarName(str.c_str() + n + 1, m - n - 1);
 
           // NB: use wxGetEnv instead of wxGetenv as otherwise variables
           //     set through wxSetEnv may not be read correctly!
           bool expanded = false;
-          wxString tmp;
-          if (wxGetEnv(strVarName, &tmp))
+          std::string tmp{ wxGetEnv(strVarName) };
+          if (!tmp.empty())
           {
               strResult += tmp;
               expanded = true;
@@ -497,8 +500,8 @@ wxString wxExpandEnvVars(const wxString& str)
               if ( bracket != Bracket_Windows )
             #endif
                 if ( bracket != Bracket_None )
-                  strResult << str[n - 1];
-            strResult << str[n] << strVarName;
+                  strResult += str[n - 1];
+            strResult += str[n] + strVarName;
           }
 
           // check the closing bracket
@@ -518,7 +521,7 @@ wxString wxExpandEnvVars(const wxString& str)
             else {
               // skip closing bracket unless the variables wasn't expanded
               if ( !expanded )
-                strResult << (wxChar)bracket;
+                strResult += bracket;
               m++;
             }
           }
@@ -527,10 +530,10 @@ wxString wxExpandEnvVars(const wxString& str)
         }
         break;
 
-      case wxT('\\'):
+      case '\\':
         // backslash can be used to suppress special meaning of % and $
         if ( n != str.length() - 1 &&
-                (str[n + 1] == wxT('%') || str[n + 1] == wxT('$')) ) {
+                (str[n + 1] == '%' || str[n + 1] == '$') ) {
           strResult += str[++n];
 
           break;
@@ -547,12 +550,12 @@ wxString wxExpandEnvVars(const wxString& str)
 
 // TODO: Return std::vector instead.
 // this function is used to properly interpret '..' in path
-std::vector<wxString> wxSplitPath(const wxString& path)
+std::vector<std::string> wxSplitPath(const std::string& path)
 {
-  std::vector<wxString> aParts;
+  std::vector<std::string> aParts;
 
-  wxString strCurrent;
-  wxString::const_iterator pc = path.begin();
+  std::string strCurrent;
+  std::string::const_iterator pc = path.begin();
   for ( ;; ) {
     if ( pc == path.end() || *pc == wxCONFIG_PATH_SEPARATOR ) {
       if ( strCurrent == wxT(".") ) {
@@ -569,11 +572,11 @@ std::vector<wxString> wxSplitPath(const wxString& path)
           aParts.erase(aParts.end() - 1);
         }
 
-        strCurrent.Empty();
+        strCurrent.clear();
       }
       else if ( !strCurrent.empty() ) {
         aParts.push_back(strCurrent);
-        strCurrent.Empty();
+        strCurrent.clear();
       }
       //else:
         // could log an error here, but we prefer to ignore extra '/'

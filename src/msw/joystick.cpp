@@ -423,7 +423,7 @@ int wxJoystick::GetProductId() const
 
 wxString wxJoystick::GetProductName() const
 {
-    wxString str;
+    std::string str;
 #ifndef __WINE__
     JOYCAPS joyCaps;
     if (joyGetDevCaps(m_joystick, &joyCaps, sizeof(joyCaps)) != JOYERR_NOERROR)
@@ -445,7 +445,7 @@ wxString wxJoystick::GetProductName() const
                                        REGSTR_PATH_JOYOEM, str.c_str()));
         if ( key2.Exists() )
         {
-            key2.QueryValue(REGSTR_VAL_JOYOEMNAME, str);
+            key2.QueryValue("OEMName", str);
         }
     }
 #endif

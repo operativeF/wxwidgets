@@ -214,7 +214,8 @@ private:
             // Note : this table covers all possible combinations of fonts, but not
             // all of them are used, so many items in table are usually NULL.
     int m_FontsSizes[7];
-    wxString m_FontFaceFixed, m_FontFaceNormal;
+    std::string m_FontFaceFixed;
+    std::string m_FontFaceNormal;
             // html font sizes and faces of fixed and proportional fonts
 
     // current whitespace handling mode

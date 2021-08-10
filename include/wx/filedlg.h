@@ -172,7 +172,7 @@ public:
     // This is always valid to call, even if the extension is empty or the
     // filter list doesn't contain it, the function will just do nothing in
     // these cases.
-    void SetFilterIndexFromExt(const wxString& ext);
+    void SetFilterIndexFromExt(const std::string& ext);
 
 protected:
     wxString      m_message;
