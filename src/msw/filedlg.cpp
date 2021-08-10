@@ -39,6 +39,8 @@
 #include "wx/modalhook.h"
 #include "wx/msw/private/dpiaware.h"
 
+#include <boost/nowide/stackstring.hpp>
+
 // ----------------------------------------------------------------------------
 // constants
 // ----------------------------------------------------------------------------
@@ -571,7 +573,8 @@ int wxFileDialog::ShowModal()
         }
     }
 
-    of.lpstrFilter  = boost::nowide::widen(filterBuffer).c_str();
+    boost::nowide::wstackstring stackFilterBuffer(filterBuffer.c_str());
+    of.lpstrFilter  = stackFilterBuffer.get();
     of.nFilterIndex = m_filterIndex + 1;
     m_currentlySelectedFilterIndex = m_filterIndex;
 

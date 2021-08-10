@@ -74,13 +74,6 @@ bool SetKeyValue(wxRegKey& key, const std::string& name, wxLongLong_t value)
     return key.SetValue64(name, value);
 }
 
-// ============================================================================
-// implementation
-// ============================================================================
-
-// ----------------------------------------------------------------------------
-// ctor/dtor
-// ----------------------------------------------------------------------------
 wxIMPLEMENT_ABSTRACT_CLASS(wxRegConfig, wxConfigBase);
 
 // create the config object which stores its data under HKCU\vendor\app and, if

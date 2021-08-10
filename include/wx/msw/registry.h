@@ -92,9 +92,9 @@ public:
     // number of standard keys
   static const size_t nStdKeys;
     // get the name of a standard key
-  static const std::string& GetStdKeyName(size_t key);
+  static std::string GetStdKeyName(size_t key);
     // get the short name of a standard key
-  static const std::string& GetStdKeyShortName(size_t key);
+  static std::string GetStdKeyShortName(size_t key);
     // get StdKey from root HKEY
   static StdKey GetStdKeyFromHkey(WXHKEY hkey);
 

@@ -155,7 +155,7 @@ const size_t wxRegKey::nStdKeys = WXSIZEOF(aStdKeys);
 
 // @@ should take a `StdKey key', but as it's often going to be used in loops
 //    it would require casts in user code.
-const std::string& wxRegKey::GetStdKeyName(size_t key)
+std::string wxRegKey::GetStdKeyName(size_t key)
 {
   // return empty string if key is invalid
   wxCHECK_MSG( key < nStdKeys, "", wxT("invalid key in wxRegKey::GetStdKeyName") );
@@ -163,7 +163,7 @@ const std::string& wxRegKey::GetStdKeyName(size_t key)
   return aStdKeys[key].szName;
 }
 
-const std::string& wxRegKey::GetStdKeyShortName(size_t key)
+std::string wxRegKey::GetStdKeyShortName(size_t key)
 {
   // return empty string if key is invalid
   wxCHECK( key < nStdKeys, "" );

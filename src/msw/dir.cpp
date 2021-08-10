@@ -56,10 +56,10 @@ inline void FreeFindData(FIND_DATA fd)
     }
 }
 
-const char* GetNameFromFindData(const FIND_STRUCT *finddata)
+std::string GetNameFromFindData(const FIND_STRUCT *finddata)
 {
     // FIXME: isn't this going to dangle?
-    return boost::nowide::narrow(finddata->cFileName).c_str();
+    return boost::nowide::narrow(finddata->cFileName);
 }
 
 // Helper function checking that the contents of the given FIND_STRUCT really
@@ -264,7 +264,7 @@ bool wxDirData::Read(std::string *filename)
         return false;
     }
 
-    const char* name;
+    std::string name;
     FIND_ATTR attr;
 
     for ( ;; )
@@ -293,9 +293,9 @@ bool wxDirData::Read(std::string *filename)
         attr = GetAttrFromFindData(PTR_TO_FINDDATA);
 
         // don't return "." and ".." unless asked for
-        if ( name[0] == wxT('.') &&
-             ((name[1] == wxT('.') && name[2] == wxT('\0')) ||
-              (name[1] == wxT('\0'))) )
+        if ( name[0] == '.' &&
+             ((name[1] == '.' && name[2] == '\0') ||
+              (name[1] == '\0')) )
         {
             if ( !(m_flags & wxDIR_DOTDOT) )
                 continue;
