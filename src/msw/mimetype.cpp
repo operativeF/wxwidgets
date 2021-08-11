@@ -46,6 +46,7 @@
     #endif
 #endif // OS
 
+#include <winreg/WinReg.hpp>
 #include <fmt/core.h>
 
 // Unfortunately the corresponding SDK constants are absent from the headers
@@ -90,7 +91,7 @@ class WXDLLIMPEXP_FWD_CORE wxIcon;
 // permissions. So the right thing to do is to use HKCR when reading, to
 // respect both per-user and machine-global associations, but only write under
 // HKCU.
-static const wxStringCharType *CLASSES_ROOT_KEY = wxS("Software\\Classes\\");
+constexpr char CLASSES_ROOT_KEY[] = "Software\\Classes\\";
 
 // although I don't know of any official documentation which mentions this
 // location, uses it, so it isn't likely to change
@@ -153,8 +154,7 @@ void wxFileTypeImpl::Init(const std::string& strFileType, const std::string& ext
 
 std::string wxFileTypeImpl::GetVerbPath(const std::string& verb) const
 {
-    std::string path = m_strFileType + "\\shell\\" + verb + "\\command";
-    return path;
+    return m_strFileType + "\\shell\\" + verb + "\\command";
 }
 
 size_t wxFileTypeImpl::GetAllCommands(std::vector<std::string> *verbs,
@@ -167,7 +167,8 @@ size_t wxFileTypeImpl::GetAllCommands(std::vector<std::string> *verbs,
     {
         // get it from the registry
         wxFileTypeImpl *self = const_cast<wxFileTypeImpl *>(this);
-        wxRegKey rkey(wxRegKey::HKCR, m_ext);
+        winreg::RegKey rkey{ HKEY_CURRENT_USER, boost::nowide::widen(m_ext) };
+
         if ( !rkey.Exists() || !rkey.QueryValue("", self->m_strFileType) )
         {
             wxLogDebug(wxT("Can't get the filetype for extension '%s'."),
@@ -178,38 +179,11 @@ size_t wxFileTypeImpl::GetAllCommands(std::vector<std::string> *verbs,
     }
 
     // enum all subkeys of HKCR\filetype\shell
-    size_t count = 0;
-    wxRegKey rkey(wxRegKey::HKCR, m_strFileType  + "\\shell");
-    long dummy;
-    std::string verb;
-    bool ok = rkey.GetFirstKey(verb, dummy);
-    while ( ok )
-    {
-        std::string command = wxFileType::ExpandCommand(GetCommand(verb), params);
+    winreg::RegKey rkey{ HKEY_CURRENT_USER, boost::nowide::widen(m_strFileType + "\\shell") };
 
-        // we want the open bverb to eb always the first
+    auto enumeratedKeys = rkey.EnumSubKeys();
 
-        if ( wx::utils::CmpNoCase(verb, "open") == 0 )
-        {
-            if ( verbs )
-                verbs->insert(std::begin(*verbs), verb);
-            if ( commands )
-                commands->insert(std::begin(*commands), command);
-        }
-        else // anything else than "open"
-        {
-            if ( verbs )
-                verbs->push_back(verb);
-            if ( commands )
-                commands->push_back(command);
-        }
-
-        count++;
-
-        ok = rkey.GetNextKey(verb, dummy);
-    }
-
-    return count;
+    return enumeratedKeys.size();
 }
 
 void wxFileTypeImpl::MSWNotifyShell()
@@ -374,8 +348,6 @@ bool wxFileTypeImpl::GetExtensions(std::vector<std::string>& extensions)
 
 bool wxFileTypeImpl::GetMimeType(std::string *mimeType) const
 {
-    // suppress possible error messages
-    wxLogNull nolog;
     wxRegKey key(wxRegKey::HKCR, m_ext);
 
     return key.Open(wxRegKey::Read) &&
@@ -435,15 +407,14 @@ bool wxFileTypeImpl::GetIcon(wxIconLocation *iconLoc) const
 
 bool wxFileTypeImpl::GetDescription(std::string *desc) const
 {
-    // suppress possible error messages
-    wxLogNull nolog;
-    wxRegKey key(wxRegKey::HKCR, m_strFileType);
+    winreg::RegKey key{ HKEY_CLASSES_ROOT, boost::nowide::widen(m_strFileType) };
 
-    if ( key.Open(wxRegKey::Read) ) {
-        // it's the default value of the key
-        if ( key.QueryValue("", *desc) ) {
-            return true;
-        }
+    auto possibleValue = key.TryGetStringValue(L"");
+
+    if(possibleValue)
+    {
+        *desc = boost::nowide::narrow(possibleValue.value());
+        return true;
     }
 
     return false;
@@ -469,13 +440,11 @@ wxMimeTypesManagerImpl::GetFileTypeFromExtension(const std::string& ext)
     }
     str += ext;
 
-    // suppress possible error messages
-    wxLogNull nolog;
-
     bool knownExtension = false;
 
     std::string strFileType;
-    wxRegKey key(wxRegKey::HKCR, str);
+    winreg::RegKey key{ HKEY_CLASSES_ROOT, boost::nowide::widen(str),  };
+
     if ( key.Open(wxRegKey::Read) ) {
         // it's the default value of the key
         if ( key.QueryValue("", strFileType) ) {
@@ -524,17 +493,12 @@ wxMimeTypesManagerImpl::GetFileTypeFromMimeType(const std::string& mimeType)
 size_t wxMimeTypesManagerImpl::EnumAllFileTypes(std::vector<std::string>& mimetypes)
 {
     // enumerate all keys under MIME_DATABASE_KEY
-    wxRegKey key(wxRegKey::HKCR, MIME_DATABASE_KEY);
+    winreg::RegKey key{ HKEY_CLASSES_ROOT, MIME_DATABASE_KEY };
 
-    std::string type;
-    long cookie;
-    bool cont = key.GetFirstKey(type, cookie);
-    while ( cont )
-    {
-        mimetypes.push_back(type);
+    auto wideTypes = key.EnumSubKeys();
 
-        cont = key.GetNextKey(type, cookie);
-    }
+    std::transform(wideTypes.begin(), wideTypes.end(), std::back_inserter(mimetypes),
+        [](auto&& wstr){ return boost::nowide::narrow(wstr); });
 
     return mimetypes.size();
 }
@@ -752,23 +716,16 @@ bool wxFileTypeImpl::SetDescription (const std::string& desc)
 // remove file association
 // ----------------------------------------------------------------------------
 
-bool wxFileTypeImpl::Unassociate()
+void wxFileTypeImpl::Unassociate()
 {
     MSWSuppressNotifications(true);
-    bool result = true;
-    if ( !RemoveOpenCommand() )
-        result = false;
-    if ( !RemoveDefaultIcon() )
-        result = false;
-    if ( !RemoveMimeType() )
-        result = false;
-    if ( !RemoveDescription() )
-        result = false;
+    RemoveOpenCommand();
+    RemoveDefaultIcon();
+    RemoveMimeType();
+    RemoveDescription();
 
     MSWSuppressNotifications(false);
     MSWNotifyShell();
-
-    return result;
 }
 
 bool wxFileTypeImpl::RemoveOpenCommand()
@@ -792,36 +749,47 @@ bool wxFileTypeImpl::RemoveCommand(const std::string& verb)
     return result;
 }
 
-bool wxFileTypeImpl::RemoveMimeType()
+void wxFileTypeImpl::RemoveMimeType()
 {
-    wxCHECK_MSG( !m_ext.empty(), false, wxT("RemoveMimeType() needs extension") );
+    winreg::RegKey rkey{ HKEY_CURRENT_USER, boost::nowide::widen(CLASSES_ROOT_KEY + m_ext) };
 
-    wxRegKey rkey(wxRegKey::HKCU, CLASSES_ROOT_KEY + m_ext);
-    return !rkey.Exists() || rkey.DeleteSelf();
+    try
+    {
+        rkey.DeleteTree(L"");
+    }
+    catch (winreg::RegException& e)
+    {
+        e.what();
+    }
 }
 
-bool wxFileTypeImpl::RemoveDefaultIcon()
+void wxFileTypeImpl::RemoveDefaultIcon()
 {
-    wxCHECK_MSG( !m_ext.empty(), false,
-                 wxT("RemoveDefaultIcon() needs extension") );
+    winreg::RegKey rkey{ HKEY_CURRENT_USER, boost::nowide::widen(CLASSES_ROOT_KEY + m_strFileType + "\\DefaultIcon") };
 
-    wxRegKey rkey (wxRegKey::HKCU,
-                   CLASSES_ROOT_KEY + m_strFileType  + wxT("\\DefaultIcon"));
-    const bool result = !rkey.Exists() || rkey.DeleteSelf();
-
-    if ( result )
+    try
+    {
+        rkey.DeleteTree(L"");
         MSWNotifyShell();
-
-    return result;
+    }
+    catch(winreg::RegException& e)
+    {
+        e.what();
+    }
 }
 
-bool wxFileTypeImpl::RemoveDescription()
+void wxFileTypeImpl::RemoveDescription()
 {
-    wxCHECK_MSG( !m_ext.empty(), false,
-                 wxT("RemoveDescription() needs extension") );
+    winreg::RegKey rkey{ HKEY_CURRENT_USER, boost::nowide::widen(CLASSES_ROOT_KEY + m_strFileType) };
 
-    wxRegKey rkey (wxRegKey::HKCU, CLASSES_ROOT_KEY + m_strFileType );
-    return !rkey.Exists() || rkey.DeleteSelf();
+    try
+    {
+        rkey.DeleteTree(L"");
+    }
+    catch (winreg::RegException& e)
+    {
+        e.what();
+    }
 }
 
 #endif // wxUSE_MIMETYPE

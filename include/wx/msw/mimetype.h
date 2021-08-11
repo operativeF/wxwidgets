@@ -58,7 +58,7 @@ public:
     size_t GetAllCommands(std::vector<std::string>* verbs, std::vector<std::string>* commands,
                           const wxFileType::MessageParameters& params) const;
 
-    bool Unassociate();
+    void Unassociate();
 
     // set an arbitrary command, ask confirmation if it already exists and
     // overwriteprompt is true
@@ -109,9 +109,9 @@ private:
 
     bool RemoveOpenCommand();
     bool RemoveCommand(const std::string& verb);
-    bool RemoveMimeType();
-    bool RemoveDefaultIcon();
-    bool RemoveDescription();
+    void RemoveMimeType();
+    void RemoveDefaultIcon();
+    void RemoveDescription();
 };
 
 class WXDLLIMPEXP_BASE wxMimeTypesManagerImpl
