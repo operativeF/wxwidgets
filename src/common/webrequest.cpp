@@ -918,12 +918,10 @@ wxWebSession wxWebSession::New(const wxString& backendOrig)
     if ( gs_factoryMap.empty() )
         InitFactoryMap();
 
-    std::string backend = backendOrig;
-
+    wxString backend = backendOrig;
     if ( backend.empty() )
     {
-        backend = wxGetEnv("WXWEBREQUEST_BACKEND");
-        if ( backend.empty() )
+        if ( !wxGetEnv("WXWEBREQUEST_BACKEND", &backend) )
         {
 #if wxUSE_WEBREQUEST_WINHTTP
             backend = wxWebSessionBackendWinHTTP;

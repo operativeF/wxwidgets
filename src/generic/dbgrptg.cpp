@@ -272,7 +272,7 @@ private:
 #endif
     wxTextCtrl *m_notes;
 
-    std::vector<wxString> m_files;
+    wxArrayString m_files;
 
     wxDECLARE_EVENT_TABLE();
 };
@@ -396,7 +396,7 @@ bool wxDebugReportDialog::TransferDataToWindow()
             m_checklst->Check(n);
 #endif
 
-            m_files.push_back(name);
+            m_files.Add(name);
         }
     }
 
@@ -481,11 +481,11 @@ void wxDebugReportDialog::OnOpen(wxCommandEvent& )
             // get the command chosen by the user and append file name to it
 
             // if we don't have place marker for file name in the command...
-            std::string cmd = dlg.GetCommand();
+            wxString cmd = dlg.GetCommand();
             if ( !cmd.empty() )
             {
 #if wxUSE_MIMETYPE
-                if ( cmd.find('%') != std::string::npos )
+                if ( cmd.find(wxT('%')) != wxString::npos )
                 {
                     command = wxFileType::ExpandCommand(cmd, fn.GetFullPath());
                 }

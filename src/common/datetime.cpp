@@ -555,7 +555,7 @@ bool wxDateTime::IsLeapYear(int year, wxDateTime::Calendar cal)
 wxDateTime::WeekDay wxDateTime::GetFirstWeekDay()
 {
     wxRegKey key(wxRegKey::HKCU, "Control Panel\\International");
-    std::string val;
+    wxString val;
 
     if ( key.Exists() && key.HasValue("iFirstDayOfWeek") )
     {

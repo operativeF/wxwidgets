@@ -27,36 +27,34 @@
 #include "wx/msw/registry.h"
 #include "wx/msw/regconf.h"
 
-#include "wx/stringutils.h"
-
 // ----------------------------------------------------------------------------
 // constants
 // ----------------------------------------------------------------------------
 
 // we put our data in HKLM\SOFTWARE_KEY\appname
-constexpr char SOFTWARE_KEY[] = "Software\\";
+#define SOFTWARE_KEY    wxString(wxT("Software\\"))
 
 // ----------------------------------------------------------------------------
 // global functions
 // ----------------------------------------------------------------------------
 
 // get the value if the key is opened and it exists
-bool TryGetValue(const wxRegKey& key, const std::string& str, std::string* strVal)
+bool TryGetValue(const wxRegKey& key, const wxString& str, wxString* strVal)
 {
   return key.IsOpened() && key.HasValue(str) && key.QueryValue(str, *strVal);
 }
 
-bool TryGetValue(const wxRegKey& key, const std::string& str, long *plVal)
+bool TryGetValue(const wxRegKey& key, const wxString& str, long *plVal)
 {
   return key.IsOpened() && key.HasValue(str) && key.QueryValue(str, plVal);
 }
 
-bool TryGetValue(const wxRegKey& key, const std::string& str, wxLongLong_t *pll)
+bool TryGetValue(const wxRegKey& key, const wxString& str, wxLongLong_t *pll)
 {
   return key.IsOpened() && key.HasValue(str) && key.QueryValue64(str, pll);
 }
 
-bool TryGetValue(const wxRegKey& key, const std::string& str, wxMemoryBuffer* pBuf)
+bool TryGetValue(const wxRegKey& key, const wxString& str, wxMemoryBuffer* pBuf)
 {
   return key.IsOpened() && key.HasValue(str) && key.QueryValue(str, *pBuf);
 }
@@ -64,28 +62,35 @@ bool TryGetValue(const wxRegKey& key, const std::string& str, wxMemoryBuffer* pB
 // set value of the key in a homogeneous way to hide the differences between
 // wxRegKey::SetValue() and SetValue64()
 template <typename T>
-bool SetKeyValue(wxRegKey& key, const std::string& name, const T& value)
+bool SetKeyValue(wxRegKey& key, const wxString& name, const T& value)
 {
     return key.SetValue(name, value);
 }
 
-bool SetKeyValue(wxRegKey& key, const std::string& name, wxLongLong_t value)
+bool SetKeyValue(wxRegKey& key, const wxString& name, wxLongLong_t value)
 {
     return key.SetValue64(name, value);
 }
 
+// ============================================================================
+// implementation
+// ============================================================================
+
+// ----------------------------------------------------------------------------
+// ctor/dtor
+// ----------------------------------------------------------------------------
 wxIMPLEMENT_ABSTRACT_CLASS(wxRegConfig, wxConfigBase);
 
 // create the config object which stores its data under HKCU\vendor\app and, if
 // style & wxCONFIG_USE_GLOBAL_FILE, under HKLM\vendor\app
-wxRegConfig::wxRegConfig(const std::string& appName,
-                         const std::string& vendorName,
-                         const std::string& strLocal,
-                         const std::string& strGlobal,
+wxRegConfig::wxRegConfig(const wxString& appName,
+                         const wxString& vendorName,
+                         const wxString& strLocal,
+                         const wxString& strGlobal,
                          long style)
            : wxConfigBase(appName, vendorName, strLocal, strGlobal, style)
 {
-  std::string strRoot;
+  wxString strRoot;
 
   bool bDoUseGlobal = (style & wxCONFIG_USE_GLOBAL_FILE) != 0;
 
@@ -113,16 +118,16 @@ wxRegConfig::wxRegConfig(const std::string& appName,
     if ( appName.empty() )
     {
       wxCHECK_RET( wxTheApp, wxT("No application name in wxRegConfig ctor!") );
-      strRoot += wxTheApp->GetAppName();
+      strRoot << wxTheApp->GetAppName();
     }
     else
     {
-      strRoot += appName;
+      strRoot << appName;
     }
   }
   //else: we don't need to do all the complicated stuff above
   // FIXME: Convert to string
-  std::string str = strLocal.empty() ? strRoot : strLocal;
+  std::string str = strLocal.empty() ? strRoot.ToStdString() : strLocal.ToStdString();
 
   // as we're going to change the name of these keys fairly often and as
   // there are only few of wxRegConfig objects (usually 1), we can allow
@@ -138,13 +143,14 @@ wxRegConfig::wxRegConfig(const std::string& appName,
 
   if ( bDoUseGlobal )
   {
-    str = strGlobal.empty() ? strRoot : strGlobal;
+    // FIXME: use string
+    str = strGlobal.empty() ? strRoot.ToStdString() : strGlobal.ToStdString();
 
     m_keyGlobalRoot.ReserveMemoryForName(MEMORY_PREALLOC);
     m_keyGlobal.ReserveMemoryForName(MEMORY_PREALLOC);
 
     m_keyGlobalRoot.SetName(wxRegKey::HKLM, SOFTWARE_KEY + str);
-    m_keyGlobal.SetName(m_keyGlobalRoot, "");
+    m_keyGlobal.SetName(m_keyGlobalRoot, wxEmptyString);
   }
 
   // Create() will Open() if key already exists
@@ -174,16 +180,16 @@ wxRegConfig::wxRegConfig(const std::string& appName,
 //
 // I still kept the old version to be able to check that the optimized code has
 // the same output as the non optimized version.
-void wxRegConfig::SetPath(const std::string& strPath)
+void wxRegConfig::SetPath(const wxString& strPath)
 {
     // remember the old path
-    std::string strOldPath = m_strPath;
+    wxString strOldPath = m_strPath;
 
 #ifdef WX_DEBUG_SET_PATH // non optimized version kept here for testing
-    std::string m_strPathAlt;
+    wxString m_strPathAlt;
 
     {
-        std::vector<std::string> aParts;
+        std::vector<wxString> aParts;
 
         // because GetPath() returns "" when we're at root, we must understand
         // empty string as "/"
@@ -193,13 +199,13 @@ void wxRegConfig::SetPath(const std::string& strPath)
         }
         else {
             // relative path, combine with current one
-            std::string strFullPath = GetPath();
+            wxString strFullPath = GetPath();
             strFullPath << wxCONFIG_PATH_SEPARATOR << strPath;
             aParts = wxSplitPath(strFullPath);
         }
 
         // recombine path parts in one variable
-        std::string strRegPath;
+        wxString strRegPath;
         m_strPathAlt.Empty();
         for ( size_t n = 0; n < aParts.size(); n++ ) {
             strRegPath << '\\' << aParts[n];
@@ -216,8 +222,8 @@ void wxRegConfig::SetPath(const std::string& strPath)
     else // not root
     {
         // construct the full path
-        std::string strFullPath;
-        if ( strPath.front() == wxCONFIG_PATH_SEPARATOR )
+        wxString strFullPath;
+        if ( strPath[0u] == wxCONFIG_PATH_SEPARATOR )
         {
             // absolute path
             strFullPath = strPath;
@@ -226,11 +232,11 @@ void wxRegConfig::SetPath(const std::string& strPath)
         {
             strFullPath.reserve(2*m_strPath.length());
 
-            strFullPath += m_strPath;
-            if ( strFullPath.empty() ||
-                 strFullPath.back() != wxCONFIG_PATH_SEPARATOR )
-                strFullPath += wxCONFIG_PATH_SEPARATOR;
-            strFullPath += strPath;
+            strFullPath << m_strPath;
+            if ( strFullPath.Len() == 0 ||
+                 strFullPath.Last() != wxCONFIG_PATH_SEPARATOR )
+                strFullPath << wxCONFIG_PATH_SEPARATOR;
+            strFullPath << strPath;
         }
 
         // simplify it: we need to handle ".." here
@@ -246,15 +252,13 @@ void wxRegConfig::SetPath(const std::string& strPath)
         // much more rare, so it is probably ok
         int posLastSlash = -1;
 
-        const char* src = strFullPath.c_str();
+        const wxChar *src = strFullPath.c_str();
         size_t len = strFullPath.length();
-        const char* end = src + len;
+        const wxChar *end = src + len;
 
-        std::string buf{m_strPath};
-        buf.resize(len);
-
-        char *dst = buf.data();
-        char *start = dst;
+        wxStringBufferLength buf(m_strPath, len);
+        wxChar *dst = buf;
+        wxChar *start = dst;
 
         for ( ; src < end; src++, dst++ )
         {
@@ -264,7 +268,7 @@ void wxRegConfig::SetPath(const std::string& strPath)
 
                 // note that we don't have to check for src < end here as
                 // *end == 0 so can't be '.'
-                if ( src[1] == '.' && src[2] == '.' &&
+                if ( src[1] == wxT('.') && src[2] == wxT('.') &&
                      (src + 3 == end || src[3] == wxCONFIG_PATH_SEPARATOR) )
                 {
                     if ( !totalSlashes )
@@ -344,8 +348,8 @@ void wxRegConfig::SetPath(const std::string& strPath)
             dst--;
         }
 
-        *dst = '\0';
-        buf.resize(dst - start);
+        *dst = wxT('\0');
+        buf.SetLength(dst - start);
     }
 
 #ifdef WX_DEBUG_SET_PATH
@@ -356,28 +360,40 @@ void wxRegConfig::SetPath(const std::string& strPath)
         return;
 
     // registry APIs want backslashes instead of slashes
-    std::string strRegPath;
+    wxString strRegPath;
     if ( !m_strPath.empty() )
     {
         const size_t len = m_strPath.length();
 
-        const char* src = m_strPath.c_str();
-        std::string buf{strRegPath};
-        buf.resize(len);
+        const wxChar *src = m_strPath.c_str();
+        wxStringBufferLength buf(strRegPath, len);
+        wxChar *dst = buf;
 
-        char* dst = buf.data();
-        const char* end = src + len;
-
+        const wxChar *end = src + len;
         for ( ; src < end; src++, dst++ )
         {
             if ( *src == wxCONFIG_PATH_SEPARATOR )
-                *dst = '\\';
+                *dst = wxT('\\');
             else
                 *dst = *src;
         }
 
-        buf.resize(len);
+        buf.SetLength(len);
     }
+
+    // this is not needed any longer as we don't create keys unnecessarily any
+    // more (now it is done on demand, i.e. only when they're going to contain
+    // something)
+#if 0
+    // as we create the registry key when SetPath(key) is done, we can be left
+    // with plenty of empty keys if this was only done to try to read some
+    // value which, in fact, doesn't exist - to prevent this from happening we
+    // automatically delete the old key if it was empty
+    if ( m_keyLocal.Exists() && LocalKey().IsEmpty() )
+    {
+        m_keyLocal.DeleteSelf();
+    }
+#endif // 0
 
     // change current key(s)
     m_keyLocal.SetName(m_keyLocalRoot, strRegPath);
@@ -407,13 +423,13 @@ void wxRegConfig::SetPath(const std::string& strPath)
 #define LOCAL_MASK        0x8000
 #define IS_LOCAL_INDEX(l) (((l) & LOCAL_MASK) != 0)
 
-bool wxRegConfig::GetFirstGroup(std::string& str, long& lIndex) const
+bool wxRegConfig::GetFirstGroup(wxString& str, long& lIndex) const
 {
   lIndex = 0;
   return GetNextGroup(str, lIndex);
 }
 
-bool wxRegConfig::GetNextGroup(std::string& str, long& lIndex) const
+bool wxRegConfig::GetNextGroup(wxString& str, long& lIndex) const
 {
   // are we already enumerating local entries?
   if ( m_keyGlobal.IsOpened() && !IS_LOCAL_INDEX(lIndex) ) {
@@ -442,13 +458,13 @@ bool wxRegConfig::GetNextGroup(std::string& str, long& lIndex) const
   return bOk;
 }
 
-bool wxRegConfig::GetFirstEntry(std::string& str, long& lIndex) const
+bool wxRegConfig::GetFirstEntry(wxString& str, long& lIndex) const
 {
   lIndex = 0;
   return GetNextEntry(str, lIndex);
 }
 
-bool wxRegConfig::GetNextEntry(std::string& str, long& lIndex) const
+bool wxRegConfig::GetNextEntry(wxString& str, long& lIndex) const
 {
   // are we already enumerating local entries?
   if ( m_keyGlobal.IsOpened() && !IS_LOCAL_INDEX(lIndex) ) {
@@ -482,7 +498,7 @@ size_t wxRegConfig::GetNumberOfEntries(bool WXUNUSED(bRecursive)) const
   size_t nEntries = 0;
 
   // dummy vars
-  std::string str;
+  wxString str;
   long l;
   bool bCont = GetFirstEntry(str, l);
   while ( bCont ) {
@@ -499,7 +515,7 @@ size_t wxRegConfig::GetNumberOfGroups(bool WXUNUSED(bRecursive)) const
   size_t nGroups = 0;
 
   // dummy vars
-  std::string str;
+  wxString str;
   long l;
   bool bCont = GetFirstGroup(str, l);
   while ( bCont ) {
@@ -515,7 +531,7 @@ size_t wxRegConfig::GetNumberOfGroups(bool WXUNUSED(bRecursive)) const
 // tests for existence
 // ----------------------------------------------------------------------------
 
-bool wxRegConfig::HasGroup(const std::string& key) const
+bool wxRegConfig::HasGroup(const wxString& key) const
 {
     wxConfigPathChanger path(this, key);
 
@@ -525,7 +541,7 @@ bool wxRegConfig::HasGroup(const std::string& key) const
            m_keyGlobal.HasSubKey(strName);
 }
 
-bool wxRegConfig::HasEntry(const std::string& key) const
+bool wxRegConfig::HasEntry(const wxString& key) const
 {
     wxConfigPathChanger path(this, key);
 
@@ -535,11 +551,11 @@ bool wxRegConfig::HasEntry(const std::string& key) const
            m_keyGlobal.HasValue(strName);
 }
 
-wxConfigBase::EntryType wxRegConfig::GetEntryType(const std::string& key) const
+wxConfigBase::EntryType wxRegConfig::GetEntryType(const wxString& key) const
 {
     wxConfigPathChanger path(this, key);
 
-    std::string strName(path.Name());
+    wxString strName(path.Name());
 
     bool isNumeric;
     if ( m_keyLocal.Exists() && LocalKey().HasValue(strName) )
@@ -557,7 +573,7 @@ wxConfigBase::EntryType wxRegConfig::GetEntryType(const std::string& key) const
 // ----------------------------------------------------------------------------
 
 template <typename T>
-bool wxRegConfig::DoReadValue(const std::string& key, T* pValue) const
+bool wxRegConfig::DoReadValue(const wxString& key, T* pValue) const
 {
     wxCHECK_MSG( pValue, false, wxT("wxRegConfig::Read(): NULL param") );
 
@@ -587,30 +603,30 @@ bool wxRegConfig::DoReadValue(const std::string& key, T* pValue) const
        (bQueryGlobal && TryGetValue(m_keyGlobal, path.Name(), pValue)));
 }
 
-bool wxRegConfig::DoReadString(const std::string& key, std::string *pStr) const
+bool wxRegConfig::DoReadString(const wxString& key, wxString *pStr) const
 {
   return DoReadValue(key, pStr);
 }
 
-bool wxRegConfig::DoReadLong(const std::string& key, long *plResult) const
+bool wxRegConfig::DoReadLong(const wxString& key, long *plResult) const
 {
   return DoReadValue(key, plResult);
 }
 
-bool wxRegConfig::DoReadLongLong(const std::string& key, wxLongLong_t *pll) const
+bool wxRegConfig::DoReadLongLong(const wxString& key, wxLongLong_t *pll) const
 {
   return DoReadValue(key, pll);
 }
 
 #if wxUSE_BASE64
-bool wxRegConfig::DoReadBinary(const std::string& key, wxMemoryBuffer *buf) const
+bool wxRegConfig::DoReadBinary(const wxString& key, wxMemoryBuffer *buf) const
 {
   return DoReadValue(key, buf);
 }
 #endif // wxUSE_BASE64
 
 template <typename T>
-bool wxRegConfig::DoWriteValue(const std::string& key, const T& value)
+bool wxRegConfig::DoWriteValue(const wxString& key, const T& value)
 {
   wxConfigPathChanger path(this, key);
 
@@ -622,23 +638,23 @@ bool wxRegConfig::DoWriteValue(const std::string& key, const T& value)
   return SetKeyValue(LocalKey(), path.Name(), value);
 }
 
-bool wxRegConfig::DoWriteString(const std::string& key, const std::string& szValue)
+bool wxRegConfig::DoWriteString(const wxString& key, const wxString& szValue)
 {
   return DoWriteValue(key, szValue);
 }
 
-bool wxRegConfig::DoWriteLong(const std::string& key, long lValue)
+bool wxRegConfig::DoWriteLong(const wxString& key, long lValue)
 {
   return DoWriteValue(key, lValue);
 }
 
-bool wxRegConfig::DoWriteLongLong(const std::string& key, wxLongLong_t llValue)
+bool wxRegConfig::DoWriteLongLong(const wxString& key, wxLongLong_t llValue)
 {
   return DoWriteValue(key, llValue);
 }
 
 #if wxUSE_BASE64
-bool wxRegConfig::DoWriteBinary(const std::string& key, const wxMemoryBuffer& buf)
+bool wxRegConfig::DoWriteBinary(const wxString& key, const wxMemoryBuffer& buf)
 {
   return DoWriteValue(key, buf);
 }
@@ -648,7 +664,7 @@ bool wxRegConfig::DoWriteBinary(const std::string& key, const wxMemoryBuffer& bu
 // renaming
 // ----------------------------------------------------------------------------
 
-bool wxRegConfig::RenameEntry(const std::string& oldName, const std::string& newName)
+bool wxRegConfig::RenameEntry(const wxString& oldName, const wxString& newName)
 {
     // check that the old entry exists...
     if ( !HasEntry(oldName) )
@@ -661,7 +677,7 @@ bool wxRegConfig::RenameEntry(const std::string& oldName, const std::string& new
     return m_keyLocal.RenameValue(oldName, newName);
 }
 
-bool wxRegConfig::RenameGroup(const std::string& oldName, const std::string& newName)
+bool wxRegConfig::RenameGroup(const wxString& oldName, const wxString& newName)
 {
     // check that the old group exists...
     if ( !HasGroup(oldName) )
@@ -678,7 +694,7 @@ bool wxRegConfig::RenameGroup(const std::string& oldName, const std::string& new
 // deleting
 // ----------------------------------------------------------------------------
 
-bool wxRegConfig::DeleteEntry(const std::string& value, bool bGroupIfEmptyAlso)
+bool wxRegConfig::DeleteEntry(const wxString& value, bool bGroupIfEmptyAlso)
 {
   wxConfigPathChanger path(this, value);
 
@@ -687,8 +703,8 @@ bool wxRegConfig::DeleteEntry(const std::string& value, bool bGroupIfEmptyAlso)
       return false;
 
     if ( bGroupIfEmptyAlso && m_keyLocal.IsEmpty() ) {
-      std::string strKey = wx::utils::AfterLast(GetPath(), wxCONFIG_PATH_SEPARATOR);
-      SetPath("..");  // changes m_keyLocal
+      wxString strKey = GetPath().AfterLast(wxCONFIG_PATH_SEPARATOR);
+      SetPath(wxT(".."));  // changes m_keyLocal
       return LocalKey().DeleteKey(strKey);
     }
   }
@@ -696,7 +712,7 @@ bool wxRegConfig::DeleteEntry(const std::string& value, bool bGroupIfEmptyAlso)
   return true;
 }
 
-bool wxRegConfig::DeleteGroup(const std::string& key)
+bool wxRegConfig::DeleteGroup(const wxString& key)
 {
   wxConfigPathChanger path(this, RemoveTrailingSeparator(key));
 

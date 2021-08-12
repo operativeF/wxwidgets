@@ -50,9 +50,8 @@ const wxString& wxFSFile::GetMimeType() const
 /* static */
 wxString wxFileSystemHandler::GetMimeTypeFromExt(const wxString& location)
 {
-    std::string ext;
-    std::string mime;
-    std::string loc = GetRightLocation(location);
+    wxString ext, mime;
+    wxString loc = GetRightLocation(location);
     int l = loc.length();
     int l2 = l;
 
@@ -64,11 +63,11 @@ wxString wxFileSystemHandler::GetMimeTypeFromExt(const wxString& location)
             l2 = i + 1;
         if ( c == wxT('.') )
         {
-            ext = loc.substr(l2-i-1, loc.length());
+            ext = loc.Right(l2-i-1);
             break;
         }
         if ( (c == wxT('/')) || (c == wxT('\\')) || (c == wxT(':')) )
-            return {};
+            return wxEmptyString;
     }
 
 #if wxUSE_MIMETYPE
@@ -84,31 +83,31 @@ wxString wxFileSystemHandler::GetMimeTypeFromExt(const wxString& location)
         {
             static const wxFileTypeInfo fallbacks[] =
             {
-                wxFileTypeInfo("image/jpeg",
-                    {},
-                    {},
-                    "JPEG image (from fallback)",
-                    {"jpg", "jpeg", "JPG", "JPEG"}),
-                wxFileTypeInfo("image/gif",
-                    {},
-                    {},
-                    "GIF image (from fallback)",
-                    {"gif", "GIF"}),
-                wxFileTypeInfo("image/png",
-                    {},
-                    {},
-                    "PNG image (from fallback)",
-                    {"png", "PNG"}),
-                wxFileTypeInfo("image/bmp",
-                    {},
-                    {},
-                    "windows bitmap image (from fallback)",
-                    {"bmp", "BMP"}),
-                wxFileTypeInfo("text/html",
-                    {},
-                    {},
-                    "HTML document (from fallback)",
-                    {"htm", "html", "HTM", "HTML"}),
+                wxFileTypeInfo(wxT("image/jpeg"),
+                    wxEmptyString,
+                    wxEmptyString,
+                    wxT("JPEG image (from fallback)"),
+                    wxT("jpg"), wxT("jpeg"), wxT("JPG"), wxT("JPEG"), wxNullPtr),
+                wxFileTypeInfo(wxT("image/gif"),
+                    wxEmptyString,
+                    wxEmptyString,
+                    wxT("GIF image (from fallback)"),
+                    wxT("gif"), wxT("GIF"), wxNullPtr),
+                wxFileTypeInfo(wxT("image/png"),
+                    wxEmptyString,
+                    wxEmptyString,
+                    wxT("PNG image (from fallback)"),
+                    wxT("png"), wxT("PNG"), wxNullPtr),
+                wxFileTypeInfo(wxT("image/bmp"),
+                    wxEmptyString,
+                    wxEmptyString,
+                    wxT("windows bitmap image (from fallback)"),
+                    wxT("bmp"), wxT("BMP"), wxNullPtr),
+                wxFileTypeInfo(wxT("text/html"),
+                    wxEmptyString,
+                    wxEmptyString,
+                    wxT("HTML document (from fallback)"),
+                    wxT("htm"), wxT("html"), wxT("HTM"), wxT("HTML"), wxNullPtr),
                 // must terminate the table with this!
                 wxFileTypeInfo()
             };
@@ -129,16 +128,16 @@ wxString wxFileSystemHandler::GetMimeTypeFromExt(const wxString& location)
 #endif // wxUSE_MIMETYPE
 
     // Without wxUSE_MIMETYPE, recognize just a few hardcoded special cases.
-    if ( wx::utils::IsSameAsNoCase(ext, "htm") || wx::utils::IsSameAsNoCase(ext, "html") )
-        return "text/html";
-    if ( wx::utils::IsSameAsNoCase(ext, "jpg") || wx::utils::IsSameAsNoCase(ext, "jpeg") )
-        return "image/jpeg";
-    if ( wx::utils::IsSameAsNoCase(ext, "gif") )
-        return "image/gif";
-    if ( wx::utils::IsSameAsNoCase(ext, "png") )
-        return "image/png";
-    if ( wx::utils::IsSameAsNoCase(ext, "bmp") )
-        return "image/bmp";
+    if ( ext.IsSameAs(wxT("htm"), false) || ext.IsSameAs(wxT("html"), false) )
+        return wxT("text/html");
+    if ( ext.IsSameAs(wxT("jpg"), false) || ext.IsSameAs(wxT("jpeg"), false) )
+        return wxT("image/jpeg");
+    if ( ext.IsSameAs(wxT("gif"), false) )
+        return wxT("image/gif");
+    if ( ext.IsSameAs(wxT("png"), false) )
+        return wxT("image/png");
+    if ( ext.IsSameAs(wxT("bmp"), false) )
+        return wxT("image/bmp");
 
     return {};
 }
@@ -149,14 +148,13 @@ wxString wxFileSystemHandler::GetMimeTypeFromExt(const wxString& location)
 wxString wxFileSystemHandler::GetProtocol(const wxString& location)
 {
     wxString s;
-    int i;
-    int l = location.length();
+    int i, l = location.length();
     bool fnd = false;
 
     for (i = l-1; (i >= 0) && ((location[i] != wxT('#')) || (!fnd)); i--) {
         if ((location[i] == wxT(':')) && (i != 1 /*win: C:\path*/)) fnd = true;
     }
-    if (!fnd) return "file";
+    if (!fnd) return wxT("file");
     for (++i; (i < l) && (location[i] != wxT(':')); i++) s << location[i];
     return s;
 }
@@ -267,7 +265,7 @@ wxString wxFileSystemHandler::FindNext()
 
 bool wxLocalFSHandler::CanOpen(const wxString& location)
 {
-    return GetProtocol(location) == "file";
+    return GetProtocol(location) == wxT("file");
 }
 
 wxFSFile* wxLocalFSHandler::OpenFile(wxFileSystem& WXUNUSED(fs), const wxString& location)

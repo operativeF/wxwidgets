@@ -26,11 +26,12 @@
 // otherwise anonymous FTP is used.
 TEST_CASE("FTP")
 {
-    std::string hostname{ wxGetEnv("WX_FTP_TEST_HOST") };
-    std::string directory{ wxGetEnv("WX_FTP_TEST_DIR") };
-    std::string valid_filename{ wxGetEnv("WX_FTP_TEST_FILE") };
-
-    if ( hostname.empty() || directory.empty() || valid_filename.empty() )
+    wxString hostname,
+             directory,
+             valid_filename;
+    if ( !wxGetEnv("WX_FTP_TEST_HOST", &hostname) ||
+            !wxGetEnv("WX_FTP_TEST_DIR", &directory) ||
+                !wxGetEnv("WX_FTP_TEST_FILE", &valid_filename) )
     {
         WARN("Skipping FTPTestCase because required WX_FTP_TEST_XXX "
              "environment variables are not defined.");
@@ -65,11 +66,11 @@ TEST_CASE("FTP")
         CHECK( ftp.ChDir(directory) );
 
         // test NLIST and LIST
-        std::vector<std::string> files;
+        std::vector<wxString> files;
         CHECK( ftp.GetFilesList(files) );
         CHECK( ftp.GetDirList(files) );
 
-        CHECK( ftp.ChDir("..") );
+        CHECK( ftp.ChDir(wxT("..")) );
     }
 
     SUBCASE("Download")
@@ -112,8 +113,8 @@ TEST_CASE("FTP")
 
     SUBCASE("Misc")
     {
-        CHECK( ftp.SendCommand("STAT") == '2' );
-        CHECK( ftp.SendCommand("HELP SITE") == '2' );
+        CHECK( ftp.SendCommand(wxT("STAT")) == '2' );
+        CHECK( ftp.SendCommand(wxT("HELP SITE")) == '2' );
     }
 
     SUBCASE("Upload")
@@ -125,14 +126,14 @@ TEST_CASE("FTP")
         }
 
         // upload a file
-        static const std::string file1 = "test1";
+        static constexpr wxChar file1[] = wxT("test1");
         wxOutputStream *out = ftp.GetOutputStream(file1);
-        CHECK( out != nullptr );
+        CHECK( out != NULL );
         CHECK( out->Write("First hello", 11).GetLastError() == wxSTREAM_NO_ERROR );
         delete out;
 
         // send a command to check the remote file
-        CHECK( ftp.SendCommand("STAT " + file1) == '2' );
+        CHECK( ftp.SendCommand(wxString(wxT("STAT ")) + file1) == '2' );
         CHECK( ftp.GetLastResult() == "11" );
     }
 }

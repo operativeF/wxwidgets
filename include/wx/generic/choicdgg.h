@@ -195,7 +195,7 @@ WXDLLIMPEXP_CORE std::string wxGetSingleChoice(const std::string& message,
 
 WXDLLIMPEXP_CORE std::string wxGetSingleChoice(const std::string& message,
                                             const std::string& caption,
-                                            const std::vector<std::string>& choices,
+                                            const wxArrayString& choices,
                                             int initialSelection,
                                             wxWindow *parent = nullptr);
 

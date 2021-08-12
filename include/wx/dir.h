@@ -61,12 +61,12 @@ public:
     //
     // return wxDIR_STOP or wxDIR_CONTINUE from here (wxDIR_IGNORE doesn't
     // make sense)
-    virtual wxDirTraverseResult OnFile(const std::string& filename) = 0;
+    virtual wxDirTraverseResult OnFile(const wxString& filename) = 0;
 
     // called for each directory found by wxDir::Traverse()
     //
     // return one of the enum elements defined above
-    virtual wxDirTraverseResult OnDir(const std::string& dirname) = 0;
+    virtual wxDirTraverseResult OnDir(const wxString& dirname) = 0;
 
     // called for each directory which we couldn't open during our traversal
     // of the directory tree
@@ -77,7 +77,7 @@ public:
     // returned unconditionally, be careful with this!
     //
     // the base class version always returns wxDIR_IGNORE
-    virtual wxDirTraverseResult OnOpenError(const std::string& dirname);
+    virtual wxDirTraverseResult OnOpenError(const wxString& dirname);
 };
 
 // ----------------------------------------------------------------------------
@@ -93,7 +93,7 @@ public:
     wxDir() { m_data = nullptr; }
 
     // opens the directory for enumeration, use IsOpened() to test success
-    wxDir(const std::string& dir);
+    wxDir(const wxString& dir);
 
     // dtor calls Close() automatically
     ~wxDir() { Close(); }
@@ -104,7 +104,7 @@ public:
     wxDir& operator=(wxDir&&) = default;
 
     // open the directory for enumerating
-    bool Open(const std::string& dir);
+    bool Open(const wxString& dir);
 
     // close the directory, Open() can be called again later
     void Close();
@@ -113,11 +113,11 @@ public:
     bool IsOpened() const;
 
     // get the full name of the directory (without '/' at the end)
-    std::string GetName() const;
+    wxString GetName() const;
 
     // Same as GetName() but does include the trailing separator, unless the
     // string is empty (only for invalid directories).
-    std::string GetNameWithSep() const;
+    wxString GetNameWithSep() const;
 
 
     // file enumeration routines
@@ -125,43 +125,43 @@ public:
 
     // start enumerating all files matching filespec (or all files if it is
     // empty) and flags, return true on success
-    bool GetFirst(std::string *filename,
-                  const std::string& filespec = {},
+    bool GetFirst(wxString *filename,
+                  const wxString& filespec = wxEmptyString,
                   int flags = wxDIR_DEFAULT) const;
 
     // get next file in the enumeration started with GetFirst()
-    bool GetNext(std::string *filename) const;
+    bool GetNext(wxString *filename) const;
 
     // return true if this directory has any files in it
-    bool HasFiles(const std::string& spec = {}) const;
+    bool HasFiles(const wxString& spec = wxEmptyString) const;
 
     // return true if this directory has any subdirectories
-    bool HasSubDirs(const std::string& spec = {}) const;
+    bool HasSubDirs(const wxString& spec = wxEmptyString) const;
 
     // enumerate all files in this directory and its subdirectories
     //
     // return the number of files found
     size_t Traverse(wxDirTraverser& sink,
-                    const std::string& filespec = {},
+                    const wxString& filespec = wxEmptyString,
                     int flags = wxDIR_DEFAULT) const;
 
     // simplest version of Traverse(): get the names of all files under this
     // directory into filenames array, return the number of files
-    static size_t GetAllFiles(const std::string& dirname,
-                              std::vector<std::string>* files,
-                              const std::string& filespec = {},
+    static size_t GetAllFiles(const wxString& dirname,
+                              std::vector<wxString>* files,
+                              const wxString& filespec = wxEmptyString,
                               int flags = wxDIR_DEFAULT);
 
     // check if there any files matching the given filespec under the given
     // directory (i.e. searches recursively), return the file path if found or
     // empty string otherwise
-    static std::string FindFirst(const std::string& dirname,
-                              const std::string& filespec,
+    static wxString FindFirst(const wxString& dirname,
+                              const wxString& filespec,
                               int flags = wxDIR_DEFAULT);
 
 #if wxUSE_LONGLONG
     // returns the size of all directories recursively found in given path
-    static wxULongLong GetTotalSize(const std::string &dir, std::vector<std::string>* filesSkipped = nullptr);
+    static wxULongLong GetTotalSize(const wxString &dir, std::vector<wxString>* filesSkipped = nullptr);
 #endif // wxUSE_LONGLONG
 
 
@@ -170,12 +170,12 @@ public:
     // -----------------------------------------
 
     // test for existence of a directory with the given name
-    static bool Exists(const std::string& dir);
+    static bool Exists(const wxString& dir);
 
-    static bool Make(const std::string &dir, int perm = wxS_DIR_DEFAULT,
+    static bool Make(const wxString &dir, int perm = wxS_DIR_DEFAULT,
                      int flags = 0);
 
-    static bool Remove(const std::string &dir, int flags = 0);
+    static bool Remove(const wxString &dir, int flags = 0);
 
 
 private:

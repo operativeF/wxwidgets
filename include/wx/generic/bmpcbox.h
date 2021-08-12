@@ -56,7 +56,7 @@ public:
                      const std::string& value,
                      const wxPoint& pos,
                      const wxSize& size,
-                     const std::vector<std::string>& choices,
+                     const wxArrayString& choices,
                      long style,
                      const wxValidator& validator = wxDefaultValidator,
                      const std::string& name = wxBitmapComboBoxNameStr);
@@ -77,10 +77,10 @@ public:
                 const std::string& value,
                 const wxPoint& pos,
                 const wxSize& size,
-                const std::vector<std::string>& choices,
+                const wxArrayString& choices,
                 long style = 0,
                 const wxValidator& validator = wxDefaultValidator,
-                const std::string& name = wxBitmapComboBoxNameStr);
+                const std::string& name = wxASCII_STR(wxBitmapComboBoxNameStr));
 
     virtual ~wxBitmapComboBox();
 

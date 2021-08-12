@@ -29,13 +29,13 @@
 
 /// separates group and entry names (probably shouldn't be changed)
 #ifndef wxCONFIG_PATH_SEPARATOR
-  inline constexpr char wxCONFIG_PATH_SEPARATOR = '/';
+  inline constexpr wxChar wxCONFIG_PATH_SEPARATOR = wxT('/');
 #endif
 
 /// introduces immutable entries
 // (i.e. the ones which can't be changed from the local config file)
 #ifndef wxCONFIG_IMMUTABLE_PREFIX
-  inline constexpr char wxCONFIG_IMMUTABLE_PREFIX = '!';
+  inline constexpr wxChar wxCONFIG_IMMUTABLE_PREFIX = wxT('!');
 #endif
 
 #if wxUSE_CONFIG
@@ -75,14 +75,6 @@ enum
 // Keys are pairs "key_name = value" where value may be of string or integer
 // (long) type (TODO doubles and other types such as wxDate coming soon).
 // ----------------------------------------------------------------------------
-
-template<typename T>
-class wxConfigBaseT
-{
-  using type = T;
-
-  bool Read(const std::string& key);
-};
 
 class WXDLLIMPEXP_BASE wxConfigBase : public wxObject
 {
@@ -132,18 +124,18 @@ public:
     // set current path: if the first character is '/', it's the absolute path,
     // otherwise it's a relative path. '..' is supported. If the strPath
     // doesn't exist it is created.
-  virtual void SetPath(const std::string& strPath) = 0;
+  virtual void SetPath(const wxString& strPath) = 0;
     // retrieve the current path (always as absolute path)
-  virtual const std::string& GetPath() const = 0;
+  virtual const wxString& GetPath() const = 0;
 
   // enumeration: all functions here return false when there are no more items.
   // you must pass the same lIndex to GetNext and GetFirst (don't modify it)
     // enumerate subgroups
-  virtual bool GetFirstGroup(std::string& str, long& lIndex) const = 0;
-  virtual bool GetNextGroup (std::string& str, long& lIndex) const = 0;
+  virtual bool GetFirstGroup(wxString& str, long& lIndex) const = 0;
+  virtual bool GetNextGroup (wxString& str, long& lIndex) const = 0;
     // enumerate entries
-  virtual bool GetFirstEntry(std::string& str, long& lIndex) const = 0;
-  virtual bool GetNextEntry (std::string& str, long& lIndex) const = 0;
+  virtual bool GetFirstEntry(wxString& str, long& lIndex) const = 0;
+  virtual bool GetNextEntry (wxString& str, long& lIndex) const = 0;
     // get number of entries/subgroups in the current group, with or without
     // it's subgroups
   virtual size_t GetNumberOfEntries(bool bRecursive = false) const = 0;
@@ -151,15 +143,15 @@ public:
 
   // tests of existence
     // returns true if the group by this name exists
-  virtual bool HasGroup(const std::string& strName) const = 0;
+  virtual bool HasGroup(const wxString& strName) const = 0;
     // same as above, but for an entry
-  virtual bool HasEntry(const std::string& strName) const = 0;
+  virtual bool HasEntry(const wxString& strName) const = 0;
     // returns true if either a group or an entry with a given name exist
-  bool Exists(const std::string& strName) const
+  bool Exists(const wxString& strName) const
     { return HasGroup(strName) || HasEntry(strName); }
 
     // get the entry type
-  virtual EntryType GetEntryType(const std::string& name) const
+  virtual EntryType GetEntryType(const wxString& name) const
   {
     // by default all entries are strings
     return HasEntry(name) ? Type_String : Type_Unknown;
@@ -169,41 +161,41 @@ public:
   // (and if the key is not found the default value is returned.)
 
     // read a string from the key
-  bool Read(const std::string& key, std::string *pStr) const;
-  bool Read(const std::string& key, std::string *pStr, const std::string& defVal) const;
+  bool Read(const wxString& key, wxString *pStr) const;
+  bool Read(const wxString& key, wxString *pStr, const wxString& defVal) const;
 
     // read a number (long)
-  bool Read(const std::string& key, long *pl) const;
-  bool Read(const std::string& key, long *pl, long defVal) const;
+  bool Read(const wxString& key, long *pl) const;
+  bool Read(const wxString& key, long *pl, long defVal) const;
 
     // read an int (wrapper around `long' version)
-  bool Read(const std::string& key, int *pi) const;
-  bool Read(const std::string& key, int *pi, int defVal) const;
+  bool Read(const wxString& key, int *pi) const;
+  bool Read(const wxString& key, int *pi, int defVal) const;
 
     // read a double
-  bool Read(const std::string& key, double* val) const;
-  bool Read(const std::string& key, double* val, double defVal) const;
+  bool Read(const wxString& key, double* val) const;
+  bool Read(const wxString& key, double* val, double defVal) const;
 
     // read a float
-  bool Read(const std::string& key, float* val) const;
-  bool Read(const std::string& key, float* val, float defVal) const;
+  bool Read(const wxString& key, float* val) const;
+  bool Read(const wxString& key, float* val, float defVal) const;
 
     // read a bool
-  bool Read(const std::string& key, bool* val) const;
-  bool Read(const std::string& key, bool* val, bool defVal) const;
+  bool Read(const wxString& key, bool* val) const;
+  bool Read(const wxString& key, bool* val, bool defVal) const;
 
     // read a 64-bit number when long is 32 bits
 #ifdef wxHAS_LONG_LONG_T_DIFFERENT_FROM_LONG
-  bool Read(const std::string& key, wxLongLong_t *pl) const;
-  bool Read(const std::string& key, wxLongLong_t *pl, wxLongLong_t defVal) const;
+  bool Read(const wxString& key, wxLongLong_t *pl) const;
+  bool Read(const wxString& key, wxLongLong_t *pl, wxLongLong_t defVal) const;
 #endif // wxHAS_LONG_LONG_T_DIFFERENT_FROM_LONG
 
-  bool Read(const std::string& key, size_t* val) const;
-  bool Read(const std::string& key, size_t* val, size_t defVal) const;
+  bool Read(const wxString& key, size_t* val) const;
+  bool Read(const wxString& key, size_t* val, size_t defVal) const;
 
 #if wxUSE_BASE64
     // read a binary data block
-  bool Read(const std::string& key, wxMemoryBuffer* data) const
+  bool Read(const wxString& key, wxMemoryBuffer* data) const
     { return DoReadBinary(key, data); }
    // no default version since it does not make sense for binary data
 #endif // wxUSE_BASE64
@@ -211,16 +203,16 @@ public:
 #ifdef wxHAS_CONFIG_TEMPLATE_RW
   // read other types, for which wxFromString is defined
   template <typename T>
-  bool Read(const std::string& key, T* value) const
+  bool Read(const wxString& key, T* value) const
   {
-      std::string s;
+      wxString s;
       if ( !Read(key, &s) )
           return false;
       return wxFromString(s, value);
   }
 
   template <typename T>
-  bool Read(const std::string& key, T* value, const T& defVal) const
+  bool Read(const wxString& key, T* value, const T& defVal) const
   {
       const bool found = Read(key, value);
       if ( !found )
@@ -234,103 +226,110 @@ public:
 #endif // wxHAS_CONFIG_TEMPLATE_RW
 
   // convenience functions returning directly the value
-  std::string Read(const std::string& key,
-                const std::string& defVal = {}) const
-    { std::string s; Read(key, &s, defVal); return s; }
+  wxString Read(const wxString& key,
+                const wxString& defVal = wxEmptyString) const
+    { wxString s; Read(key, &s, defVal); return s; }
 
   // we have to provide a separate version for C strings as otherwise the
   // template Read() would be used
 #ifndef wxNO_IMPLICIT_WXSTRING_ENCODING
-  [[maybe_unused]] std::string Read(const std::string& key, const char* defVal) const
-    { return Read(key, std::string(defVal)); }
+  [[maybe_unused]] wxString Read(const wxString& key, const char* defVal) const
+    { return Read(key, wxString(defVal)); }
 #endif
+  [[maybe_unused]] wxString Read(const wxString& key, const wchar_t* defVal) const
+    { return Read(key, wxString(defVal)); }
 
-  long ReadLong(const std::string& key, long defVal) const
+  long ReadLong(const wxString& key, long defVal) const
     { long l; Read(key, &l, defVal); return l; }
 
-  wxLongLong_t ReadLongLong(const std::string& key, wxLongLong_t defVal) const
+  wxLongLong_t ReadLongLong(const wxString& key, wxLongLong_t defVal) const
     { wxLongLong_t ll; Read(key, &ll, defVal); return ll; }
 
-  double ReadDouble(const std::string& key, double defVal) const
+  double ReadDouble(const wxString& key, double defVal) const
     { double d; Read(key, &d, defVal); return d; }
 
-  bool ReadBool(const std::string& key, bool defVal) const
+  bool ReadBool(const wxString& key, bool defVal) const
     { bool b; Read(key, &b, defVal); return b; }
 
   template <typename T>
-  T ReadObject(const std::string& key, T const& defVal) const
+  T ReadObject(const wxString& key, T const& defVal) const
     { T t; Read(key, &t, defVal); return t; }
 
   // for compatibility with wx 2.8
-  long Read(const std::string& key, long defVal) const
+  long Read(const wxString& key, long defVal) const
     { return ReadLong(key, defVal); }
 
 
   // write the value (return true on success)
-  bool Write(const std::string& key, const std::string& value)
+  bool Write(const wxString& key, const wxString& value)
     { return DoWriteString(key, value); }
 
-  bool Write(const std::string& key, long value)
+  bool Write(const wxString& key, long value)
     { return DoWriteLong(key, value); }
 
-  bool Write(const std::string& key, double value)
+  bool Write(const wxString& key, double value)
     { return DoWriteDouble(key, value); }
 
-  bool Write(const std::string& key, bool value)
+  bool Write(const wxString& key, bool value)
     { return DoWriteBool(key, value); }
 
 #if wxUSE_BASE64
-  bool Write(const std::string& key, const wxMemoryBuffer& buf)
+  bool Write(const wxString& key, const wxMemoryBuffer& buf)
     { return DoWriteBinary(key, buf); }
 #endif // wxUSE_BASE64
 
   // we have to provide a separate version for C strings as otherwise they
-  // would be converted to bool and not to std::string as expected!
+  // would be converted to bool and not to wxString as expected!
 #ifndef wxNO_IMPLICIT_WXSTRING_ENCODING
-  bool Write(const std::string& key, const char *value)
-    { return Write(key, std::string(value)); }
+  bool Write(const wxString& key, const char *value)
+    { return Write(key, wxString(value)); }
+  bool Write(const wxString& key, const unsigned char *value)
+    { return Write(key, wxString(value)); }
 #endif
+  bool Write(const wxString& key, const wchar_t *value)
+    { return Write(key, wxString(value)); }
+
 
   // we also have to provide specializations for other types which we want to
   // handle using the specialized DoWriteXXX() instead of the generic template
   // version below
-  bool Write(const std::string& key, char value)
+  bool Write(const wxString& key, char value)
     { return DoWriteLong(key, value); }
 
-  bool Write(const std::string& key, unsigned char value)
+  bool Write(const wxString& key, unsigned char value)
     { return DoWriteLong(key, value); }
 
-  bool Write(const std::string& key, short value)
+  bool Write(const wxString& key, short value)
     { return DoWriteLong(key, value); }
 
-  bool Write(const std::string& key, unsigned short value)
+  bool Write(const wxString& key, unsigned short value)
     { return DoWriteLong(key, value); }
 
-  bool Write(const std::string& key, unsigned int value)
+  bool Write(const wxString& key, unsigned int value)
     { return DoWriteLong(key, value); }
 
-  bool Write(const std::string& key, int value)
+  bool Write(const wxString& key, int value)
     { return DoWriteLong(key, value); }
 
-  bool Write(const std::string& key, unsigned long value)
+  bool Write(const wxString& key, unsigned long value)
     { return DoWriteLong(key, value); }
 
 #ifdef wxHAS_LONG_LONG_T_DIFFERENT_FROM_LONG
-  bool Write(const std::string& key, wxLongLong_t value)
+  bool Write(const wxString& key, wxLongLong_t value)
     { return DoWriteLongLong(key, value); }
 
-  bool Write(const std::string& key, wxULongLong_t value)
+  bool Write(const wxString& key, wxULongLong_t value)
     { return DoWriteLongLong(key, value); }
 #endif // wxHAS_LONG_LONG_T_DIFFERENT_FROM_LONG
 
-  bool Write(const std::string& key, float value)
+  bool Write(const wxString& key, float value)
     { return DoWriteDouble(key, double(value)); }
 
   // Causes ambiguities in under OpenVMS
 #if !defined( __VMS )
   // for other types, use wxToString()
   template <typename T>
-  bool Write(const std::string& key, T const& value)
+  bool Write(const wxString& key, T const& value)
     { return Write(key, wxToString(value)); }
 #endif
 
@@ -340,19 +339,19 @@ public:
   // renaming, all functions return false on failure (probably because the new
   // name is already taken by an existing entry)
     // rename an entry
-  virtual bool RenameEntry(const std::string& oldName,
-                           const std::string& newName) = 0;
+  virtual bool RenameEntry(const wxString& oldName,
+                           const wxString& newName) = 0;
     // rename a group
-  virtual bool RenameGroup(const std::string& oldName,
-                           const std::string& newName) = 0;
+  virtual bool RenameGroup(const wxString& oldName,
+                           const wxString& newName) = 0;
 
   // delete entries/groups
     // deletes the specified entry and the group it belongs to if
     // it was the last key in it and the second parameter is true
-  virtual bool DeleteEntry(const std::string& key,
+  virtual bool DeleteEntry(const wxString& key,
                            bool bDeleteGroupIfEmpty = true) = 0;
     // delete the group (with all subgroups)
-  virtual bool DeleteGroup(const std::string& key) = 0;
+  virtual bool DeleteGroup(const wxString& key) = 0;
     // delete the whole underlying object (disk file, registry key, ...)
     // primarily for use by uninstallation routine.
   virtual bool DeleteAll() = 0;
@@ -366,51 +365,51 @@ public:
   void SetRecordDefaults(bool bDoIt = true) { m_bRecordDefaults = bDoIt; }
   bool IsRecordingDefaults() const { return m_bRecordDefaults; }
   // does expansion only if needed
-  std::string ExpandEnvVars(const std::string& str) const;
+  wxString ExpandEnvVars(const wxString& str) const;
 
     // misc accessors
-  const std::string& GetAppName() const { return m_appName; }
-  const std::string& GetVendorName() const { return m_vendorName; }
+  wxString GetAppName() const { return m_appName; }
+  wxString GetVendorName() const { return m_vendorName; }
 
   // Used wxIniConfig to set members in constructor
-  void SetAppName(const std::string& appName) { m_appName = appName; }
-  void SetVendorName(const std::string& vendorName) { m_vendorName = vendorName; }
+  void SetAppName(const wxString& appName) { m_appName = appName; }
+  void SetVendorName(const wxString& vendorName) { m_vendorName = vendorName; }
 
   void SetStyle(long style) { m_style = style; }
   long GetStyle() const { return m_style; }
 
 protected:
-  static bool IsImmutable(const std::string& key)
-    { return !key.empty() && key[0] == wxCONFIG_IMMUTABLE_PREFIX; }
+  static bool IsImmutable(const wxString& key)
+    { return !key.IsEmpty() && key[0] == wxCONFIG_IMMUTABLE_PREFIX; }
 
   // return the path without trailing separator, if any: this should be called
   // to sanitize paths referring to the group names before passing them to
   // wxConfigPathChanger as "/foo/bar/" should be the same as "/foo/bar" and it
   // isn't interpreted in the same way by it (and this can't be changed there
   // as it's not the same for the entries names)
-  static std::string RemoveTrailingSeparator(const std::string& key);
+  static wxString RemoveTrailingSeparator(const wxString& key);
 
   // do read/write the values of different types
-  virtual bool DoReadString(const std::string& key, std::string *pStr) const = 0;
-  virtual bool DoReadLong(const std::string& key, long *pl) const = 0;
+  virtual bool DoReadString(const wxString& key, wxString *pStr) const = 0;
+  virtual bool DoReadLong(const wxString& key, long *pl) const = 0;
 #ifdef wxHAS_LONG_LONG_T_DIFFERENT_FROM_LONG
-  virtual bool DoReadLongLong(const std::string& key, wxLongLong_t *pll) const;
+  virtual bool DoReadLongLong(const wxString& key, wxLongLong_t *pll) const;
 #endif // wxHAS_LONG_LONG_T_DIFFERENT_FROM_LONG
-  virtual bool DoReadDouble(const std::string& key, double* val) const;
-  virtual bool DoReadBool(const std::string& key, bool* val) const;
+  virtual bool DoReadDouble(const wxString& key, double* val) const;
+  virtual bool DoReadBool(const wxString& key, bool* val) const;
 #if wxUSE_BASE64
-  virtual bool DoReadBinary(const std::string& key, wxMemoryBuffer* buf) const = 0;
+  virtual bool DoReadBinary(const wxString& key, wxMemoryBuffer* buf) const = 0;
 #endif // wxUSE_BASE64
 
-  virtual bool DoWriteString(const std::string& key, const std::string& value) = 0;
-  virtual bool DoWriteLong(const std::string& key, long value) = 0;
+  virtual bool DoWriteString(const wxString& key, const wxString& value) = 0;
+  virtual bool DoWriteLong(const wxString& key, long value) = 0;
 #ifdef wxHAS_LONG_LONG_T_DIFFERENT_FROM_LONG
-  virtual bool DoWriteLongLong(const std::string& key, wxLongLong_t value);
+  virtual bool DoWriteLongLong(const wxString& key, wxLongLong_t value);
 #endif // wxHAS_LONG_LONG_T_DIFFERENT_FROM_LONG
-  virtual bool DoWriteDouble(const std::string& key, double value);
-  virtual bool DoWriteBool(const std::string& key, bool value);
+  virtual bool DoWriteDouble(const wxString& key, double value);
+  virtual bool DoWriteBool(const wxString& key, bool value);
 #if wxUSE_BASE64
-  virtual bool DoWriteBinary(const std::string& key, const wxMemoryBuffer& buf) = 0;
+  virtual bool DoWriteBinary(const wxString& key, const wxMemoryBuffer& buf) = 0;
 #endif // wxUSE_BASE64
 
 private:
@@ -424,8 +423,8 @@ private:
   inline static bool          ms_bAutoCreate{true};
 
   // Application name and organisation name
-  std::string          m_appName;
-  std::string          m_vendorName;
+  wxString          m_appName;
+  wxString          m_vendorName;
 
   // Style flag
   long              m_style;
@@ -442,7 +441,7 @@ class WXDLLIMPEXP_BASE wxConfigPathChanger
 {
 public:
   // ctor/dtor do path changing/restoring of the path
-  wxConfigPathChanger(const wxConfigBase *pContainer, const std::string& strEntry);
+  wxConfigPathChanger(const wxConfigBase *pContainer, const wxString& strEntry);
   ~wxConfigPathChanger();
 
   wxConfigPathChanger(const wxConfigPathChanger&) = delete;
@@ -451,7 +450,7 @@ public:
   wxConfigPathChanger& operator=(wxConfigPathChanger&&) = default;
 
   // get the key name
-  const std::string& Name() const { return m_strName; }
+  const wxString& Name() const { return m_strName; }
 
   // this method must be called if the original path (i.e. the current path at
   // the moment of creation of this object) could have been deleted to prevent
@@ -463,7 +462,7 @@ public:
 
 private:
   wxConfigBase *m_pContainer;   // object we live in
-  std::string      m_strName,      // name of entry (i.e. name only)
+  wxString      m_strName,      // name of entry (i.e. name only)
                 m_strOldPath;   // saved path
   bool          m_bChanged{false};     // was the path changed?
 };
@@ -477,12 +476,12 @@ private:
   '_' only. '$' must be escaped ('\$') in order to be taken literally.
 */
 
-WXDLLIMPEXP_BASE std::string wxExpandEnvVars(const std::string &sz);
+WXDLLIMPEXP_BASE wxString wxExpandEnvVars(const wxString &sz);
 
 /*
   Split path into parts removing '..' in progress
  */
-WXDLLIMPEXP_BASE std::vector<std::string> wxSplitPath(const std::string& path);
+WXDLLIMPEXP_BASE std::vector<wxString> wxSplitPath(const wxString& path);
 
 #endif // _WX_CONFBASE_H_
 

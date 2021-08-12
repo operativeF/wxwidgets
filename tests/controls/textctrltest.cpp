@@ -906,7 +906,7 @@ TEST_CASE_FIXTURE(TextCtrlTest, "Text control test")
         SUBCASE("Url")
         {
             // FIXME: There's probably a good reason this fails on MSVC. Find it.
-            if (!wxGetEnv("APPVEYOR").empty())
+            if (wxGetEnv("APPVEYOR", nullptr))
                 return;
 
             m_entry = CreateText(wxTE_RICH | wxTE_AUTO_URL);

@@ -67,8 +67,8 @@ TEST_CASE("URLDataObject")
 
 TEST_CASE("ParseFileDialogFilter")
 {
-    std::vector<std::string> descs;
-    std::vector<std::string> filters;
+    std::vector<wxString> descs;
+    std::vector<wxString> filters;
 
     CHECK_EQ
     (

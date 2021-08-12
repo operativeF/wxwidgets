@@ -33,43 +33,43 @@ public:
 
         // initialize us with our file type name and extension - in this case
         // we will read all other data from the registry
-    void Init(const std::string& strFileType, const std::string& ext);
+    void Init(const wxString& strFileType, const wxString& ext);
 
     // implement accessor functions
-    bool GetExtensions(std::vector<std::string>& extensions);
-    bool GetMimeType(std::string *mimeType) const;
-    bool GetMimeTypes(std::vector<std::string>& mimeTypes) const;
+    bool GetExtensions(std::vector<wxString>& extensions);
+    bool GetMimeType(wxString *mimeType) const;
+    bool GetMimeTypes(std::vector<wxString>& mimeTypes) const;
     bool GetIcon(wxIconLocation *iconLoc) const;
-    bool GetDescription(std::string *desc) const;
-    bool GetOpenCommand(std::string *openCmd,
+    bool GetDescription(wxString *desc) const;
+    bool GetOpenCommand(wxString *openCmd,
                         const wxFileType::MessageParameters& params) const
     {
-        *openCmd = GetExpandedCommand("open", params);
+        *openCmd = GetExpandedCommand(wxS("open"), params);
         return !openCmd->empty();
     }
 
-    bool GetPrintCommand(std::string *printCmd,
+    bool GetPrintCommand(wxString *printCmd,
                          const wxFileType::MessageParameters& params) const
     {
-        *printCmd = GetExpandedCommand("print", params);
+        *printCmd = GetExpandedCommand(wxS("print"), params);
         return !printCmd->empty();
     }
 
-    size_t GetAllCommands(std::vector<std::string>* verbs, std::vector<std::string>* commands,
+    size_t GetAllCommands(std::vector<wxString>* verbs, std::vector<wxString>* commands,
                           const wxFileType::MessageParameters& params) const;
 
-    void Unassociate();
+    bool Unassociate();
 
     // set an arbitrary command, ask confirmation if it already exists and
     // overwriteprompt is true
-    bool SetCommand(const std::string& cmd,
-                    const std::string& verb,
+    bool SetCommand(const wxString& cmd,
+                    const wxString& verb,
                     bool overwriteprompt = true);
 
-    bool SetDefaultIcon(const std::string& cmd = {}, int index = 0);
+    bool SetDefaultIcon(const wxString& cmd = wxEmptyString, int index = 0);
 
     // this is called  by Associate
-    bool SetDescription (const std::string& desc);
+    bool SetDescription (const wxString& desc);
 
     // This is called by all our own methods modifying the registry to let the
     // Windows Shell know about the changes.
@@ -85,22 +85,22 @@ public:
     // explicitly.
     void MSWSuppressNotifications(bool suppress);
 
-    std::string
-    GetExpandedCommand(const std::string& verb,
+    wxString
+    GetExpandedCommand(const wxString& verb,
                        const wxFileType::MessageParameters& params) const;
 private:
     // helper function: reads the command corresponding to the specified verb
     // from the registry (returns an empty string if not found)
-    std::string GetCommand(const std::string& verb) const;
+    wxString GetCommand(const wxString& verb) const;
 
     // get the registry path for the given verb
-    std::string GetVerbPath(const std::string& verb) const;
+    wxString GetVerbPath(const wxString& verb) const;
 
     // check that the registry key for our extension exists, create it if it
     // doesn't, return false if this failed
     bool EnsureExtKeyExists();
 
-    std::string m_strFileType,         // may be empty
+    wxString m_strFileType,         // may be empty
              m_ext;
     bool m_suppressNotify;
 
@@ -108,10 +108,10 @@ private:
     // doesn't know about them), and should only be called by Unassociate
 
     bool RemoveOpenCommand();
-    bool RemoveCommand(const std::string& verb);
-    void RemoveMimeType();
-    void RemoveDefaultIcon();
-    void RemoveDescription();
+    bool RemoveCommand(const wxString& verb);
+    bool RemoveMimeType();
+    bool RemoveDefaultIcon();
+    bool RemoveDescription();
 };
 
 class WXDLLIMPEXP_BASE wxMimeTypesManagerImpl
@@ -122,17 +122,17 @@ public:
     wxMimeTypesManagerImpl() = default;
 
     // implement containing class functions
-    wxFileType *GetFileTypeFromExtension(const std::string& ext);
-    wxFileType *GetOrAllocateFileTypeFromExtension(const std::string& ext);
-    wxFileType *GetFileTypeFromMimeType(const std::string& mimeType);
+    wxFileType *GetFileTypeFromExtension(const wxString& ext);
+    wxFileType *GetOrAllocateFileTypeFromExtension(const wxString& ext);
+    wxFileType *GetFileTypeFromMimeType(const wxString& mimeType);
 
-    size_t EnumAllFileTypes(std::vector<std::string>& mimetypes);
+    size_t EnumAllFileTypes(std::vector<wxString>& mimetypes);
 
     // create a new filetype association
     wxFileType *Associate(const wxFileTypeInfo& ftInfo);
 
     // create a new filetype with the given name and extension
-    wxFileType *CreateFileType(const std::string& filetype, const std::string& ext);
+    wxFileType *CreateFileType(const wxString& filetype, const wxString& ext);
 };
 
 #endif // wxUSE_MIMETYPE

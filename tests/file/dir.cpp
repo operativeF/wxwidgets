@@ -13,21 +13,15 @@
 #include "wx/dir.h"
 #include "wx/filename.h"
 #include "wx/stdpaths.h"
-#include "wx/stringutils.h"
 
-#include <filesystem>
-
-#include <boost/nowide/convert.hpp>
-#include <fmt/core.h>
-
-static const std::string DIRTEST_FOLDER = "dirTest_folder";
-static const std::string SEP = "\\"; // FIXME: Change for all systems
+#define DIRTEST_FOLDER      wxString("dirTest_folder")
+#define SEP                 wxFileName::GetPathSeparator()
 
 // ----------------------------------------------------------------------------
 // tests implementation
 // ----------------------------------------------------------------------------
 
-static void CreateTempFile(const std::string& path)
+static void CreateTempFile(const wxString& path)
 {
     wxFile f(path, wxFile::write);
     f.Write("dummy test file");
@@ -57,14 +51,14 @@ static void tearDown()
     wxDir::Remove(DIRTEST_FOLDER, wxPATH_RMDIR_RECURSIVE);
 }
 
-static std::vector<std::string> DirEnumHelper(wxDir& dir,
+static std::vector<wxString> DirEnumHelper(wxDir& dir,
                                            int flags = wxDIR_DEFAULT,
-                                           const std::string& filespec = {})
+                                           const wxString& filespec = wxEmptyString)
 {
-    std::vector<std::string> ret;
+    std::vector<wxString> ret;
     CHECK( dir.IsOpened() );
 
-    std::string filename;
+    wxString filename;
     bool cont = dir.GetFirst(&filename, filespec, flags);
     while ( cont )
     {
@@ -109,14 +103,14 @@ TEST_CASE("Directory Tests")
     class TestDirTraverser : public wxDirTraverser
     {
     public:
-        std::vector<std::string> dirs;
+        std::vector<wxString> dirs;
 
-        wxDirTraverseResult OnFile(const std::string& WXUNUSED(filename)) override
+        wxDirTraverseResult OnFile(const wxString& WXUNUSED(filename)) override
         {
             return wxDIR_CONTINUE;
         }
 
-        wxDirTraverseResult OnDir(const std::string& dirname) override
+        wxDirTraverseResult OnDir(const wxString& dirname) override
         {
             dirs.push_back(dirname);
             return wxDIR_CONTINUE;
@@ -126,7 +120,7 @@ TEST_CASE("Directory Tests")
     SUBCASE("Traverse")
     {
         // enum all files
-        std::vector<std::string> files;
+        std::vector<wxString> files;
         CHECK_EQ(4, wxDir::GetAllFiles(DIRTEST_FOLDER, &files));
 
         // enum all files according to the filter
@@ -135,7 +129,7 @@ TEST_CASE("Directory Tests")
         // enum again with custom traverser
         wxDir dir(DIRTEST_FOLDER);
         TestDirTraverser traverser;
-        dir.Traverse(traverser, "", wxDIR_DIRS | wxDIR_HIDDEN);
+        dir.Traverse(traverser, wxEmptyString, wxDIR_DIRS | wxDIR_HIDDEN);
         CHECK_EQ(6, traverser.dirs.size());
     }
 
@@ -175,21 +169,21 @@ TEST_CASE("Directory Tests")
         };
 
     #ifdef __WINDOWS__
-        std::string homedrive = wxGetenv("HOMEDRIVE");
+        wxString homedrive = wxGetenv("HOMEDRIVE");
         if ( homedrive.empty() )
             homedrive = "c:";
     #endif // __WINDOWS__
 
         for ( size_t n = 0; n < WXSIZEOF(testData); n++ )
         {
-            std::string dirname = testData[n].dirname;
-            wx::utils::ReplaceAll(dirname, "$USER_DOCS_DIR", wxStandardPaths::Get().GetDocumentsDir().ToStdString());
+            wxString dirname = testData[n].dirname;
+            dirname.Replace("$USER_DOCS_DIR", wxStandardPaths::Get().GetDocumentsDir());
 
     #ifdef __WINDOWS__
-            wx::utils::ReplaceAll(dirname, "$MSW_DRIVE", homedrive);
+            dirname.Replace("$MSW_DRIVE", homedrive);
     #endif // __WINDOWS__
 
-            std::string errDesc = fmt::format("failed on directory '%s'", dirname);
+            std::string errDesc = wxString::Format("failed on directory '%s'", dirname).ToStdString();
             CHECK_MESSAGE(testData[n].shouldExist == wxDir::Exists(dirname), errDesc);
 
             wxDir d(dirname);
@@ -204,8 +198,8 @@ TEST_CASE("Directory Tests")
         wxDir d;
 
         CHECK( d.Open(".") );
-        CHECK( d.GetName().back() != wxFILE_SEP_PATH );
-        CHECK( d.GetNameWithSep().back() == wxFILE_SEP_PATH );
+        CHECK( d.GetName().Last() != wxFILE_SEP_PATH );
+        CHECK( d.GetNameWithSep().Last() == wxFILE_SEP_PATH );
         CHECK_EQ( d.GetName() + wxFILE_SEP_PATH,
                               d.GetNameWithSep() );
 

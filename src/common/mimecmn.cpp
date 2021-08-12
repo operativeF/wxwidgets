@@ -42,19 +42,17 @@
     #include "wx/unix/mimetype.h"
 #endif
 
-#include <fmt/core.h>
-
 // ----------------------------------------------------------------------------
 // wxMimeTypeCommands
 // ----------------------------------------------------------------------------
 
 void
-wxMimeTypeCommands::AddOrReplaceVerb(const std::string& verb, const std::string& cmd)
+wxMimeTypeCommands::AddOrReplaceVerb(const wxString& verb, const wxString& cmd)
 {
     const auto& verb_iter = std::find_if(m_verbs.cbegin(), m_verbs.cend(),
     [verb](const auto& m_verb)
     {
-        return wx::utils::IsSameAsNoCase(verb, m_verb);
+        return verb.IsSameAs(m_verb, false);
     });
 
     if ( verb_iter == m_verbs.cend() )
@@ -69,15 +67,15 @@ wxMimeTypeCommands::AddOrReplaceVerb(const std::string& verb, const std::string&
     }
 }
 
-std::string
-wxMimeTypeCommands::GetCommandForVerb(const std::string& verb, size_t *idx) const
+wxString
+wxMimeTypeCommands::GetCommandForVerb(const wxString& verb, size_t *idx) const
 {
-    std::string s;
+    wxString s;
 
     const auto& verb_iter = std::find_if(m_verbs.cbegin(), m_verbs.cend(),
         [verb](const auto& m_verb)
         {
-            return wx::utils::IsSameAsNoCase(verb, m_verb);
+            return verb.IsSameAs(m_verb, false);
         });
 
     if ( verb_iter != m_verbs.cend() )
@@ -97,7 +95,7 @@ wxMimeTypeCommands::GetCommandForVerb(const std::string& verb, size_t *idx) cons
     return s;
 }
 
-std::string wxMimeTypeCommands::GetVerbCmd(size_t n) const
+wxString wxMimeTypeCommands::GetVerbCmd(size_t n) const
 {
     return m_verbs[n] + wxT('=') + m_commands[n];
 }
@@ -106,7 +104,56 @@ std::string wxMimeTypeCommands::GetVerbCmd(size_t n) const
 // wxFileTypeInfo
 // ----------------------------------------------------------------------------
 
-wxFileTypeInfo::wxFileTypeInfo(const std::vector<std::string>& sArray)
+void wxFileTypeInfo::DoVarArgInit(const wxString& mimeType,
+                                  const wxString& openCmd,
+                                  const wxString& printCmd,
+                                  const wxString& desc,
+                                  va_list argptr)
+{
+    m_mimeType = mimeType;
+    m_openCmd = openCmd;
+    m_printCmd = printCmd;
+    m_desc = desc;
+
+    for ( ;; )
+    {
+        // icc gives this warning in its own va_arg() macro, argh
+#ifdef __INTELC__
+    #pragma warning(push)
+    #pragma warning(disable: 1684)
+#endif
+
+        const wxArgNormalizedString ext(WX_VA_ARG_STRING(argptr));
+
+#ifdef __INTELC__
+    #pragma warning(pop)
+#endif
+        if ( !ext )
+        {
+            // NULL terminates the list
+            break;
+        }
+
+        m_exts.push_back(ext.GetString());
+    }
+}
+
+void wxFileTypeInfo::VarArgInit(const wxString *mimeType,
+                                const wxString *openCmd,
+                                const wxString *printCmd,
+                                const wxString *desc,
+                                ...)
+{
+    va_list argptr;
+    va_start(argptr, desc);
+
+    DoVarArgInit(*mimeType, *openCmd, *printCmd, *desc, argptr);
+
+    va_end(argptr);
+}
+
+
+wxFileTypeInfo::wxFileTypeInfo(const std::vector<wxString>& sArray)
     : m_mimeType(sArray[0u])
     , m_openCmd( sArray[1u])
     , m_printCmd(sArray[2u])
@@ -116,7 +163,7 @@ wxFileTypeInfo::wxFileTypeInfo(const std::vector<std::string>& sArray)
 }
 
 /* static */
-std::string wxFileType::ExpandCommand(const std::string& command,
+wxString wxFileType::ExpandCommand(const wxString& command,
                                    const wxFileType::MessageParameters& params)
 {
     bool hasFilename = false;
@@ -126,13 +173,13 @@ std::string wxFileType::ExpandCommand(const std::string& command,
     // under all platforms while handling the file names with quotes in them,
     // for example, needs to be done differently.
     const bool needToQuoteFilename = params.GetFileName().find_first_of(" \t")
-                                        != std::string::npos;
+                                        != wxString::npos;
 
-    std::string str;
-    for ( const char* pc = command.c_str(); *pc != '\0'; pc++ ) {
-        if ( *pc == '%' ) {
+    wxString str;
+    for ( const wxChar *pc = command.c_str(); *pc != wxT('\0'); pc++ ) {
+        if ( *pc == wxT('%') ) {
             switch ( *++pc ) {
-                case 's':
+                case wxT('s'):
                     // don't quote the file name if it's already quoted: notice
                     // that we check for a quote following it and not preceding
                     // it as at least under Windows we can have commands
@@ -140,37 +187,37 @@ std::string wxFileType::ExpandCommand(const std::string& command,
                     // argument may be quoted even if there is no quote
                     // directly before "%s" itself
                     if ( needToQuoteFilename && pc[1] != '"' )
-                        str += fmt::format("\"{}\"", params.GetFileName());
+                        str << wxT('"') << params.GetFileName() << wxT('"');
                     else
-                        str += params.GetFileName();
+                        str << params.GetFileName();
                     hasFilename = true;
                     break;
 
-                case 't':
+                case wxT('t'):
                     // '%t' expands into MIME type (quote it too just to be
                     // consistent)
-                    str += fmt::format("\'{}\'", params.GetMimeType());
+                    str << wxT('\'') << params.GetMimeType() << wxT('\'');
                     break;
 
-                case '{':
+                case wxT('{'):
                     {
-                        const char* pEnd = wxStrchr(pc, '}');
+                        const wxChar *pEnd = wxStrchr(pc, wxT('}'));
                         if ( pEnd == nullptr ) {
-                            std::string mimetype;
+                            wxString mimetype;
                             wxLogWarning(_("Unmatched '{' in an entry for mime type %s."),
                                          params.GetMimeType().c_str());
-                            str += "%{";
+                            str << wxT("%{");
                         }
                         else {
-                            std::string param(pc + 1, pEnd - pc - 1);
-                            str += fmt::format("\'{}\'", params.GetParamValue(param));
+                            wxString param(pc + 1, pEnd - pc - 1);
+                            str << wxT('\'') << params.GetParamValue(param) << wxT('\'');
                             pc = pEnd;
                         }
                     }
                     break;
 
-                case 'n':
-                case 'F':
+                case wxT('n'):
+                case wxT('F'):
                     // TODO %n is the number of parts, %F is an array containing
                     //      the names of temp files these parts were written to
                     //      and their mime types.
@@ -179,11 +226,11 @@ std::string wxFileType::ExpandCommand(const std::string& command,
                 default:
                     wxLogDebug(wxT("Unknown field %%%c in command '%s'."),
                                *pc, command.c_str());
-                    str += *pc;
+                    str << *pc;
             }
         }
         else {
-            str += *pc;
+            str << *pc;
         }
     }
 
@@ -201,12 +248,12 @@ std::string wxFileType::ExpandCommand(const std::string& command,
 #endif // Unix
        )
     {
-        str += " < ";
+        str << wxT(" < ");
         if ( needToQuoteFilename )
-            str += '"';
-        str += params.GetFileName();
+            str << '"';
+        str << params.GetFileName();
         if ( needToQuoteFilename )
-            str += '"';
+            str << '"';
     }
 
     return str;
@@ -227,7 +274,7 @@ wxFileType::~wxFileType()
     delete m_impl;
 }
 
-bool wxFileType::GetExtensions(std::vector<std::string>& extensions)
+bool wxFileType::GetExtensions(std::vector<wxString>& extensions)
 {
     if ( m_info )
     {
@@ -238,7 +285,7 @@ bool wxFileType::GetExtensions(std::vector<std::string>& extensions)
     return m_impl->GetExtensions(extensions);
 }
 
-bool wxFileType::GetMimeType(std::string* mimeType) const
+bool wxFileType::GetMimeType(wxString *mimeType) const
 {
     wxCHECK_MSG( mimeType, false, wxT("invalid parameter in GetMimeType") );
 
@@ -252,7 +299,7 @@ bool wxFileType::GetMimeType(std::string* mimeType) const
     return m_impl->GetMimeType(mimeType);
 }
 
-bool wxFileType::GetMimeTypes(std::vector<std::string>& mimeTypes) const
+bool wxFileType::GetMimeTypes(std::vector<wxString>& mimeTypes) const
 {
     if ( m_info )
     {
@@ -271,7 +318,7 @@ bool wxFileType::GetIcon(wxIconLocation *iconLoc) const
     {
         if ( iconLoc )
         {
-            iconLoc->SetFileName(m_info->GetIconFile());
+            iconLoc->SetFileName(m_info->GetIconFile().ToStdString());
 #ifdef __WINDOWS__
             iconLoc->SetIndex(m_info->GetIconIndex());
 #endif // __WINDOWS__
@@ -297,13 +344,13 @@ wxFileType::GetIcon(wxIconLocation *iconloc,
     // expand this
     if ( iconloc )
     {
-        iconloc->SetFileName(ExpandCommand(iconloc->GetFileName(), params));
+        iconloc->SetFileName(ExpandCommand(iconloc->GetFileName(), params).ToStdString());
     }
 
     return true;
 }
 
-bool wxFileType::GetDescription(std::string* desc) const
+bool wxFileType::GetDescription(wxString *desc) const
 {
     wxCHECK_MSG( desc, false, wxT("invalid parameter in GetDescription") );
 
@@ -318,7 +365,7 @@ bool wxFileType::GetDescription(std::string* desc) const
 }
 
 bool
-wxFileType::GetOpenCommand(std::string* openCmd,
+wxFileType::GetOpenCommand(wxString *openCmd,
                            const wxFileType::MessageParameters& params) const
 {
     wxCHECK_MSG( openCmd, false, wxT("invalid parameter in GetOpenCommand") );
@@ -333,9 +380,9 @@ wxFileType::GetOpenCommand(std::string* openCmd,
     return m_impl->GetOpenCommand(openCmd, params);
 }
 
-std::string wxFileType::GetOpenCommand(const std::string& filename) const
+wxString wxFileType::GetOpenCommand(const wxString& filename) const
 {
-    std::string cmd;
+    wxString cmd;
     if ( !GetOpenCommand(&cmd, filename) )
     {
         // return empty string to indicate an error
@@ -346,7 +393,7 @@ std::string wxFileType::GetOpenCommand(const std::string& filename) const
 }
 
 bool
-wxFileType::GetPrintCommand(std::string* printCmd,
+wxFileType::GetPrintCommand(wxString *printCmd,
                             const wxFileType::MessageParameters& params) const
 {
     wxCHECK_MSG( printCmd, false, wxT("invalid parameter in GetPrintCommand") );
@@ -361,16 +408,16 @@ wxFileType::GetPrintCommand(std::string* printCmd,
     return m_impl->GetPrintCommand(printCmd, params);
 }
 
-std::string
-wxFileType::GetExpandedCommand(const std::string& verb,
+wxString
+wxFileType::GetExpandedCommand(const wxString& verb,
                                const wxFileType::MessageParameters& params) const
 {
     return m_impl->GetExpandedCommand(verb, params);
 }
 
 
-size_t wxFileType::GetAllCommands(std::vector<std::string> *verbs,
-                                  std::vector<std::string> *commands,
+size_t wxFileType::GetAllCommands(std::vector<wxString> *verbs,
+                                  std::vector<wxString> *commands,
                                   const wxFileType::MessageParameters& params) const
 {
     if ( verbs )
@@ -384,7 +431,7 @@ size_t wxFileType::GetAllCommands(std::vector<std::string> *verbs,
     // we don't know how to retrieve all commands, so just try the 2 we know
     // about
     size_t count = 0;
-    std::string cmd;
+    wxString cmd;
     if ( GetOpenCommand(&cmd, params) )
     {
         if ( verbs )
@@ -420,8 +467,8 @@ bool wxFileType::Unassociate()
 #endif
 }
 
-bool wxFileType::SetCommand(const std::string& cmd,
-                            const std::string& verb,
+bool wxFileType::SetCommand(const wxString& cmd,
+                            const wxString& verb,
                             bool overwriteprompt)
 {
 #if defined (__WINDOWS__)  || defined(__UNIX__)
@@ -435,14 +482,14 @@ bool wxFileType::SetCommand(const std::string& cmd,
 #endif
 }
 
-bool wxFileType::SetDefaultIcon(const std::string& cmd, int index)
+bool wxFileType::SetDefaultIcon(const wxString& cmd, int index)
 {
-    std::string sTmp = cmd;
+    wxString sTmp = cmd;
 #ifdef __WINDOWS__
     // VZ: should we do this?
     // chris elliott : only makes sense in MS windows
     if ( sTmp.empty() )
-        GetOpenCommand(&sTmp, wxFileType::MessageParameters("", ""));
+        GetOpenCommand(&sTmp, wxFileType::MessageParameters(wxEmptyString, wxEmptyString));
 #endif
     wxCHECK_MSG( !sTmp.empty(), false, wxT("need the icon file") );
 
@@ -493,19 +540,20 @@ void wxMimeTypesManager::EnsureImpl()
         m_impl = wxMimeTypesManagerFactory::Get()->CreateMimeTypesManagerImpl();
 }
 
-bool wxMimeTypesManager::IsOfType(const std::string& mimeType,
-                                  const std::string& wildcard)
+bool wxMimeTypesManager::IsOfType(const wxString& mimeType,
+                                  const wxString& wildcard)
 {
-    wxASSERT_MSG( mimeType.find('*') == std::string::npos,
+    wxASSERT_MSG( mimeType.Find(wxT('*')) == wxNOT_FOUND,
                   wxT("first MIME type can't contain wildcards") );
 
-    if ( wx::utils::IsSameAsNoCase(wx::utils::BeforeFirst(wildcard, '/'), 
-                                   wx::utils::BeforeFirst(mimeType, '/')) )
+    // all comparaisons are case insensitive (2nd arg of IsSameAs() is false)
+    if ( wildcard.BeforeFirst(wxT('/')).
+            IsSameAs(mimeType.BeforeFirst(wxT('/')), false) )
     {
-        std::string strSubtype = wx::utils::AfterFirst(wildcard, '/');
+        wxString strSubtype = wildcard.AfterFirst(wxT('/'));
 
-        if ( strSubtype == "*" ||
-             wx::utils::IsSameAsNoCase(strSubtype, wx::utils::AfterFirst(mimeType, '/')) )
+        if ( strSubtype == wxT("*") ||
+             strSubtype.IsSameAs(mimeType.AfterFirst(wxT('/')), false) )
         {
             // matches (either exactly or it's a wildcard)
             return true;
@@ -547,13 +595,13 @@ wxMimeTypesManager::Associate(const wxFileTypeInfo& ftInfo)
 }
 
 wxFileType *
-wxMimeTypesManager::GetFileTypeFromExtension(const std::string& ext)
+wxMimeTypesManager::GetFileTypeFromExtension(const wxString& ext)
 {
     EnsureImpl();
 
-    std::string::const_iterator i = ext.begin();
-    const std::string::const_iterator end = ext.end();
-    std::string extWithoutDot;
+    wxString::const_iterator i = ext.begin();
+    const wxString::const_iterator end = ext.end();
+    wxString extWithoutDot;
     if ( i != end && *i == '.' )
         extWithoutDot.assign(++i, ext.end());
     else
@@ -572,7 +620,7 @@ wxMimeTypesManager::GetFileTypeFromExtension(const std::string& ext)
             const auto iter_idx = std::find_if(fallback.GetExtensions().cbegin(), fallback.GetExtensions().cend(),
                 [ext](const auto& anExt)
                 {
-                    return wx::utils::IsSameAsNoCase(ext, anExt);
+                    return ext.IsSameAs(anExt);
                 });
             if ( iter_idx != std::cend(fallback.GetExtensions())) {
                 ft = new wxFileType(fallback);
@@ -586,7 +634,7 @@ wxMimeTypesManager::GetFileTypeFromExtension(const std::string& ext)
 }
 
 wxFileType *
-wxMimeTypesManager::GetFileTypeFromMimeType(const std::string& mimeType)
+wxMimeTypesManager::GetFileTypeFromMimeType(const wxString& mimeType)
 {
     EnsureImpl();
     wxFileType *ft = m_impl->GetFileTypeFromMimeType(mimeType);
@@ -619,7 +667,7 @@ void wxMimeTypesManager::AddFallbacks(const wxFileTypeInfo *filetypes)
 }
 
 // TODO: Return vector
-size_t wxMimeTypesManager::EnumAllFileTypes(std::vector<std::string>& mimetypes)
+size_t wxMimeTypesManager::EnumAllFileTypes(std::vector<wxString>& mimetypes)
 {
     EnsureImpl();
     size_t countAll = m_impl->EnumAllFileTypes(mimetypes);
@@ -630,7 +678,7 @@ size_t wxMimeTypesManager::EnumAllFileTypes(std::vector<std::string>& mimetypes)
         const auto iter_idx = std::find_if(mimetypes.cbegin(), mimetypes.cend(),
             [fallMime](const auto& aType)
             {
-                return wx::utils::IsSameAsNoCase(aType, fallMime);
+                return fallMime.IsSameAs(aType);
             });
         if ( iter_idx == std::cend(mimetypes) ) {
             mimetypes.push_back(fallback.GetMimeType());
@@ -642,7 +690,7 @@ size_t wxMimeTypesManager::EnumAllFileTypes(std::vector<std::string>& mimetypes)
 }
 
 void wxMimeTypesManager::Initialize(int mcapStyle,
-                                    const std::string& sExtraDir)
+                                    const wxString& sExtraDir)
 {
 #if defined(__UNIX__) && !defined(__CYGWIN__) && !defined(__WINE__)
     EnsureImpl();

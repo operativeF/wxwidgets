@@ -38,8 +38,8 @@ public:
 
     // Connecting and disconnecting
     bool Connect(const wxSockAddress& addr, bool wait = true) override;
-    bool Connect(const std::string& host) override { return Connect(host, 0); }
-    virtual bool Connect(const std::string& host, unsigned short port);
+    bool Connect(const wxString& host) override { return Connect(host, 0); }
+    virtual bool Connect(const wxString& host, unsigned short port);
 
     // disconnect
     bool Close() override;
@@ -55,74 +55,74 @@ public:
     // Generic FTP interface
 
     // FTP doesn't know the MIME type of the last downloaded/uploaded file
-    std::string GetContentType() const override { return {}; }
+    wxString GetContentType() const override { return wxEmptyString; }
 
     // the last FTP server reply
-    const std::string& GetLastResult() const { return m_lastResult; }
+    const wxString& GetLastResult() const { return m_lastResult; }
 
     // send any FTP command (should be full FTP command line but without
     // trailing "\r\n") and return its return code
-    char SendCommand(const std::string& command);
+    char SendCommand(const wxString& command);
 
     // check that the command returned the given code
-    bool CheckCommand(const std::string& command, char expectedReturn)
+    bool CheckCommand(const wxString& command, char expectedReturn)
     {
         // SendCommand() does updates m_lastError
         return SendCommand(command) == expectedReturn;
     }
 
     // Filesystem commands
-    bool ChDir(const std::string& dir);
-    bool MkDir(const std::string& dir);
-    bool RmDir(const std::string& dir);
-    std::string Pwd();
-    bool Rename(const std::string& src, const std::string& dst);
-    bool RmFile(const std::string& path);
+    bool ChDir(const wxString& dir);
+    bool MkDir(const wxString& dir);
+    bool RmDir(const wxString& dir);
+    wxString Pwd();
+    bool Rename(const wxString& src, const wxString& dst);
+    bool RmFile(const wxString& path);
 
     // Get the size of a file in the current dir.
     // this function tries its best to deliver the size in bytes using BINARY
     // (the SIZE command reports different sizes depending on whether
     // type is set to ASCII or BINARY)
     // returns -1 if file is non-existent or size could not be found
-    int GetFileSize(const std::string& fileName);
+    int GetFileSize(const wxString& fileName);
 
        // Check to see if a file exists in the current dir
-    bool FileExists(const std::string& fileName);
+    bool FileExists(const wxString& fileName);
 
     // Download methods
     bool Abort() override;
 
-    wxInputStream *GetInputStream(const std::string& path) override;
-    virtual wxOutputStream *GetOutputStream(const std::string& path);
+    wxInputStream *GetInputStream(const wxString& path) override;
+    virtual wxOutputStream *GetOutputStream(const wxString& path);
 
     // Directory listing
 
     // get the list of full filenames, the format is fixed: one file name per
     // line
-    bool GetFilesList(std::vector<std::string>& files,
-                      const std::string& wildcard = {})
+    bool GetFilesList(std::vector<wxString>& files,
+                      const wxString& wildcard = wxEmptyString)
     {
         return GetList(files, wildcard, false);
     }
 
     // get a directory list in server dependent format - this can be shown
     // directly to the user
-    bool GetDirList(std::vector<std::string>& files,
-                    const std::string& wildcard = {})
+    bool GetDirList(std::vector<wxString>& files,
+                    const wxString& wildcard = wxEmptyString)
     {
         return GetList(files, wildcard, true);
     }
 
     // equivalent to either GetFilesList() (default) or GetDirList()
-    bool GetList(std::vector<std::string>& files,
-                 const std::string& wildcard = {},
+    bool GetList(std::vector<wxString>& files,
+                 const wxString& wildcard = wxEmptyString,
                  bool details = false);
 
 protected:
     // this executes a simple ftp command with the given argument and returns
     // true if it its return code starts with '2'
-    bool DoSimpleCommand(const char* command,
-                         const std::string& arg = {});
+    bool DoSimpleCommand(const wxChar *command,
+                         const wxString& arg = wxEmptyString);
 
     // get the server reply, return the first character of the reply code,
     // '1'..'5' for normal FTP replies, 0 (*not* '0') if an error occurred
@@ -138,7 +138,7 @@ protected:
     wxSocketBase *GetActivePort();
 
     // helper for GetPort()
-    std::string GetPortCmdArgument(const wxIPV4address& Local, const wxIPV4address& New);
+    wxString GetPortCmdArgument(const wxIPV4address& Local, const wxIPV4address& New);
 
     // accept connection from server in active mode, returns the same socket as
     // passed in passive mode
@@ -147,7 +147,7 @@ protected:
 
     // internal variables:
 
-    std::string        m_lastResult;
+    wxString        m_lastResult;
 
     // true if there is an FTP transfer going on
     bool            m_streaming{false};

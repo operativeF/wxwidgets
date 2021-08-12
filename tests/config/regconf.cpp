@@ -25,8 +25,8 @@
 
 TEST_CASE("wxRegConfig::ReadWrite")
 {
-    std::string app = "wxRegConfigTestCase";
-    std::string vendor = "wxWidgets";
+    wxString app = "wxRegConfigTestCase";
+    wxString vendor = "wxWidgets";
 
     // NOTE: we use wxCONFIG_USE_LOCAL_FILE explicitly to test wxRegConfig
     //       with something different from the default value wxCONFIG_USE_GLOBAL_FILE
@@ -48,7 +48,7 @@ TEST_CASE("wxRegConfig::ReadWrite")
     CHECK( config->Write("int64", val64) );
 
     // test reading
-    std::string str;
+    wxString str;
     long dummy;
 
     config->SetPath("/");

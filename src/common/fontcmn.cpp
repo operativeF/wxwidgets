@@ -1354,10 +1354,10 @@ void wxNativeFontInfo::SetWeight(wxFontWeight weight)
 wxString wxToString(const wxFontBase& font)
 {
     return font.IsOk() ? font.GetNativeFontInfoDesc()
-                       : "";
+                       : wxString();
 }
 
-bool wxFromString(const std::string& str, wxFontBase *font)
+bool wxFromString(const wxString& str, wxFontBase *font)
 {
     wxCHECK_MSG( font, false, wxT("NULL output parameter") );
 

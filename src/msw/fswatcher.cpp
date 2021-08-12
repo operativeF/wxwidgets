@@ -453,7 +453,7 @@ bool wxMSWFileSystemWatcher::Init()
 bool
 wxMSWFileSystemWatcher::AddTree(const wxFileName& path,
                                 int events,
-                                const std::string& filter)
+                                const wxString& filter)
 {
     if ( !filter.empty() )
     {

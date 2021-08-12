@@ -127,18 +127,18 @@ public:
     // persistent managers)
 #define wxPERSIST_DECLARE_SAVE_RESTORE_FOR(Type)                              \
     virtual bool SaveValue(const wxPersistentObject& who,                     \
-                           const std::string& name,                              \
+                           const wxString& name,                              \
                            Type value);                                       \
                                                                               \
     virtual bool                                                              \
     RestoreValue(const wxPersistentObject& who,                               \
-                 const std::string& name,                                        \
+                 const wxString& name,                                        \
                  Type *value)
 
     wxPERSIST_DECLARE_SAVE_RESTORE_FOR(bool);
     wxPERSIST_DECLARE_SAVE_RESTORE_FOR(int);
     wxPERSIST_DECLARE_SAVE_RESTORE_FOR(long);
-    wxPERSIST_DECLARE_SAVE_RESTORE_FOR(std::string);
+    wxPERSIST_DECLARE_SAVE_RESTORE_FOR(wxString);
 
 #undef wxPERSIST_DECLARE_SAVE_RESTORE_FOR
 
@@ -154,8 +154,8 @@ protected:
     // Return the path to use for saving the setting with the given name for
     // the specified object (notice that the name is the name of the setting,
     // not the name of the object itself which can be retrieved with GetName()).
-    virtual std::string GetKey(const wxPersistentObject& who,
-                            const std::string& name) const;
+    virtual wxString GetKey(const wxPersistentObject& who,
+                            const wxString& name) const;
 
 
 private:
@@ -214,13 +214,13 @@ protected:
     // wrappers for wxPersistenceManager methods which don't require passing
     // "this" as the first parameter all the time
     template <typename T>
-    bool SaveValue(const std::string& name, T value) const
+    bool SaveValue(const wxString& name, T value) const
     {
         return wxPersistenceManager::Get().SaveValue(*this, name, value);
     }
 
     template <typename T>
-    bool RestoreValue(const std::string& name, T *value)
+    bool RestoreValue(const wxString& name, T *value)
     {
         return wxPersistenceManager::Get().RestoreValue(*this, name, value);
     }
@@ -243,7 +243,7 @@ inline bool wxPersistentRegisterAndRestore(T *obj)
 // A helper function which also sets the name for the (wxWindow-derived) object
 // before registering and restoring it.
 template <typename T>
-inline bool wxPersistentRegisterAndRestore(T *obj, const std::string& name)
+inline bool wxPersistentRegisterAndRestore(T *obj, const wxString& name)
 {
     obj->SetName(name);
 

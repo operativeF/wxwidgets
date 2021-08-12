@@ -122,15 +122,15 @@ public:
 
         // Restore the sort key and order if there is a valid model and sort
         // criteria.
-        std::string sortColumn;
+        wxString sortColumn;
         if ( control->GetModel() &&
-             RestoreValue(wxPERSIST_DVC_SORT_KEY, &sortColumn) &&
+             RestoreValue(wxASCII_STR(wxPERSIST_DVC_SORT_KEY), &sortColumn) &&
              !sortColumn.empty() )
         {
             bool sortAsc = true;
             if ( wxDataViewColumn* column = GetColumnByTitle(control, sortColumn) )
             {
-                RestoreValue(wxPERSIST_DVC_SORT_ASC, &sortAsc);
+                RestoreValue(wxASCII_STR(wxPERSIST_DVC_SORT_ASC), &sortAsc);
                 column->SetSortOrder(sortAsc);
 
                 // Resort the control based on the new sort criteria.

@@ -35,7 +35,6 @@
 #include "wx/tokenzr.h"
 #include "wx/thread.h"
 #include "wx/stdpaths.h"
-#include "wx/stringutils.h"
 
 #if wxUSE_EXCEPTIONS
     // Any conforming C++11 compiler should have it, but g++ implementation
@@ -178,7 +177,7 @@ bool wxAppConsoleBase::Initialize(int& WXUNUSED(argc), wxChar **WXUNUSED(argv))
     return true;
 }
 
-std::string wxAppConsoleBase::GetAppName() const
+wxString wxAppConsoleBase::GetAppName() const
 {
     wxString name = m_appName;
     if ( name.empty() )
@@ -202,7 +201,7 @@ std::string wxAppConsoleBase::GetAppName() const
     return name;
 }
 
-std::string wxAppConsoleBase::GetAppDisplayName() const
+wxString wxAppConsoleBase::GetAppDisplayName() const
 {
     // use the explicitly provided display name, if any
     if ( !m_appDisplayName.empty() )
@@ -215,7 +214,7 @@ std::string wxAppConsoleBase::GetAppDisplayName() const
 
     // if neither is set, use the capitalized version of the program file as
     // it's the most reasonable default
-    return wx::utils::ToUpperCopy(GetAppName());
+    return GetAppName().Capitalize();
 }
 
 wxEventLoopBase *wxAppConsoleBase::CreateMainLoop()
@@ -1241,8 +1240,8 @@ void wxOnAssert(const char *file,
 static void SetTraceMasks()
 {
 #if wxUSE_LOG
-    std::string mask{ wxGetEnv("WXTRACE") };
-    if ( !mask.empty() )
+    wxString mask;
+    if ( wxGetEnv(wxT("WXTRACE"), &mask) )
     {
         wxStringTokenizer tkn(mask, wxT(",;:"));
         while ( tkn.HasMoreTokens() )

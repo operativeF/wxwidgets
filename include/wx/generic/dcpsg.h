@@ -146,8 +146,6 @@ protected:
     // Set PostScript color
     void SetPSColour(const wxColour& col);
 
-    std::vector<std::string>     m_definedPSFonts;
-
     FILE*             m_pstream;    // PostScript output stream
     unsigned char     m_currentRed;
     unsigned char     m_currentGreen;
@@ -158,6 +156,7 @@ protected:
     mutable double    m_underlineThickness;
     wxPrintData       m_printData;
     double            m_pageHeight{842 * PS2DEV};
+    wxArrayString     m_definedPSFonts;
     bool              m_isFontChanged;
 
 private:

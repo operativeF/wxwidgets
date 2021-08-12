@@ -25,11 +25,9 @@
 #include "wx/dcbuffer.h"
 #include "wx/combo.h"
 
+#include "wx/msw/registry.h"
 #include "wx/msw/uxtheme.h"
 #include "wx/msw/dc.h"
-#include "wx/msw/registry.h"
-
-#include <winreg/WinReg.hpp>
 
 constexpr int NATIVE_TEXT_INDENT_XP = 4;
 constexpr int NATIVE_TEXT_INDENT_CLASSIC = 2;
@@ -556,6 +554,51 @@ void wxComboCtrl::OnMouseEvent( wxMouseEvent& event )
 }
 
 #if wxUSE_COMBOCTRL_POPUP_ANIMATION
+namespace 
+{
+
+wxUint32 GetUserPreferencesMask()
+{
+    static wxUint32 userPreferencesMask = 0;
+    static bool valueSet = false;
+
+    if ( valueSet )
+        return userPreferencesMask;
+
+    wxRegKey* pKey = nullptr;
+    wxRegKey key1(wxRegKey::HKCU, wxT("Software\\Policies\\Microsoft\\Control Panel"));
+    wxRegKey key2(wxRegKey::HKCU, wxT("Software\\Policies\\Microsoft\\Windows\\Control Panel"));
+    wxRegKey key3(wxRegKey::HKCU, wxT("Control Panel\\Desktop"));
+
+    if ( key1.Exists() )
+        pKey = &key1;
+    else if ( key2.Exists() )
+        pKey = &key2;
+    else if ( key3.Exists() )
+        pKey = &key3;
+
+    if ( pKey && pKey->Open(wxRegKey::Read) )
+    {
+        wxMemoryBuffer buf;
+        if ( pKey->HasValue(wxT("UserPreferencesMask")) &&
+             pKey->QueryValue(wxT("UserPreferencesMask"), buf) )
+        {
+            if ( buf.GetDataLen() >= 4 )
+            {
+                wxUint32* p = (wxUint32*) buf.GetData();
+                userPreferencesMask = *p;
+            }
+        }
+    }
+
+    valueSet = true;
+
+    return userPreferencesMask;
+}
+} // namespace anonymous
+#endif
+
+#if wxUSE_COMBOCTRL_POPUP_ANIMATION
 void wxComboCtrl::DoTimerEvent()
 {
     bool stopTimer = false;
@@ -621,10 +664,7 @@ void wxComboCtrl::DoTimerEvent()
 #if wxUSE_COMBOCTRL_POPUP_ANIMATION
 bool wxComboCtrl::AnimateShow( const wxRect& rect, int flags )
 {
-    BOOL isAnimated{FALSE};
-    ::SystemParametersInfoW(SPI_GETCLIENTAREAANIMATION, 0, &isAnimated, 0);
-
-    if ( isAnimated )
+    if ( GetUserPreferencesMask() & wxMSW_DESKTOP_USERPREFERENCESMASK_COMBOBOXANIM )
     {
         m_animStart = ::wxGetLocalTimeMillis();
         m_animRect = rect;

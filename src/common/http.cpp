@@ -27,10 +27,7 @@
 #include "wx/url.h"
 #include "wx/protocol/http.h"
 #include "wx/sckstrm.h"
-#include "wx/stringutils.h"
 #include "wx/thread.h"
-
-#include <fmt/core.h>
 
 
 // ----------------------------------------------------------------------------
@@ -38,7 +35,7 @@
 // ----------------------------------------------------------------------------
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxHTTP, wxProtocol);
-IMPLEMENT_PROTOCOL(wxHTTP, "http", "80", true)
+IMPLEMENT_PROTOCOL(wxHTTP, wxT("http"), wxT("80"), true)
 
 wxHTTP::~wxHTTP()
 {
@@ -57,9 +54,9 @@ void wxHTTP::ClearCookies()
     m_cookies.clear();
 }
 
-std::string wxHTTP::GetContentType() const
+wxString wxHTTP::GetContentType() const
 {
-    return GetHeader("Content-Type");
+    return GetHeader(wxT("Content-Type"));
 }
 
 void wxHTTP::SetProxyMode(bool on)
@@ -67,55 +64,55 @@ void wxHTTP::SetProxyMode(bool on)
     m_proxy_mode = on;
 }
 
-wxHTTP::wxHeaderIterator wxHTTP::FindHeader(const std::string& header)
+wxHTTP::wxHeaderIterator wxHTTP::FindHeader(const wxString& header)
 {
     wxHeaderIterator it = m_headers.begin();
     for ( wxHeaderIterator en = m_headers.end(); it != en; ++it )
     {
-        if ( wx::utils::CmpNoCase(header, it->first.ToStdString()) == 0 )
+        if ( header.CmpNoCase(it->first) == 0 )
             break;
     }
 
     return it;
 }
 
-wxHTTP::wxHeaderConstIterator wxHTTP::FindHeader(const std::string& header) const
+wxHTTP::wxHeaderConstIterator wxHTTP::FindHeader(const wxString& header) const
 {
     wxHeaderConstIterator it = m_headers.begin();
     for ( wxHeaderConstIterator en = m_headers.end(); it != en; ++it )
     {
-        if ( wx::utils::CmpNoCase(header, it->first.ToStdString()) == 0 )
+        if ( header.CmpNoCase(it->first) == 0 )
             break;
     }
 
     return it;
 }
 
-wxHTTP::wxCookieIterator wxHTTP::FindCookie(const std::string& cookie)
+wxHTTP::wxCookieIterator wxHTTP::FindCookie(const wxString& cookie)
 {
     wxCookieIterator it = m_cookies.begin();
     for ( wxCookieIterator en = m_cookies.end(); it != en; ++it )
     {
-        if ( wx::utils::CmpNoCase(cookie, it->first.ToStdString()) == 0 )
+        if ( cookie.CmpNoCase(it->first) == 0 )
             break;
     }
 
     return it;
 }
 
-wxHTTP::wxCookieConstIterator wxHTTP::FindCookie(const std::string& cookie) const
+wxHTTP::wxCookieConstIterator wxHTTP::FindCookie(const wxString& cookie) const
 {
     wxCookieConstIterator it = m_cookies.begin();
     for ( wxCookieConstIterator en = m_cookies.end(); it != en; ++it )
     {
-        if ( wx::utils::CmpNoCase(cookie, it->first.ToStdString()) == 0 )
+        if ( cookie.CmpNoCase(it->first) == 0 )
             break;
     }
 
     return it;
 }
 
-void wxHTTP::SetHeader(const std::string& header, const std::string& h_data)
+void wxHTTP::SetHeader(const wxString& header, const wxString& h_data)
 {
     if (m_read) {
         ClearHeaders();
@@ -129,21 +126,21 @@ void wxHTTP::SetHeader(const std::string& header, const std::string& h_data)
         m_headers[header] = h_data;
 }
 
-std::string wxHTTP::GetHeader(const std::string& header) const
+wxString wxHTTP::GetHeader(const wxString& header) const
 {
     wxHeaderConstIterator it = FindHeader(header);
 
-    return it == m_headers.end() ? "" : it->second.ToStdString();
+    return it == m_headers.end() ? wxGetEmptyString() : it->second;
 }
 
-std::string wxHTTP::GetCookie(const std::string& cookie) const
+wxString wxHTTP::GetCookie(const wxString& cookie) const
 {
     wxCookieConstIterator it = FindCookie(cookie);
 
-    return it == m_cookies.end() ? "" : it->second.ToStdString();
+    return it == m_cookies.end() ? wxGetEmptyString() : it->second;
 }
 
-std::string wxHTTP::GenerateAuthString(const std::string& user, const std::string& pass) const
+wxString wxHTTP::GenerateAuthString(const wxString& user, const wxString& pass) const
 {
     // TODO: Use wxBase64Encode() now that we have it instead of reproducing it
 
@@ -177,8 +174,21 @@ std::string wxHTTP::GenerateAuthString(const std::string& user, const std::strin
     return buf;
 }
 
+void wxHTTP::SetPostBuffer(const wxString& post_buf)
+{
+    // Use To8BitData() for backwards compatibility in this deprecated method.
+    // The new code should use the other overload or SetPostText() and specify
+    // the encoding to use for the text explicitly.
+    wxScopedCharBuffer scb = post_buf.To8BitData();
+    if ( scb.length() )
+    {
+        m_postBuffer.Clear();
+        m_postBuffer.AppendData(scb.data(), scb.length());
+    }
+}
+
 bool
-wxHTTP::SetPostBuffer(const std::string& contentType,
+wxHTTP::SetPostBuffer(const wxString& contentType,
                       const wxMemoryBuffer& data)
 {
     m_postBuffer = data;
@@ -188,12 +198,13 @@ wxHTTP::SetPostBuffer(const std::string& contentType,
 }
 
 bool
-wxHTTP::SetPostText(const std::string& contentType,
-                    const std::string& data,
+wxHTTP::SetPostText(const wxString& contentType,
+                    const wxString& data,
                     const wxMBConv& conv)
 {
-    const size_t len = data.length();
-    const char* const buf = data.data();
+    wxScopedCharBuffer scb = data.mb_str(conv);
+    const size_t len = scb.length();
+    const char* const buf = scb.data();
 
     if ( !len )
         return false;
@@ -221,7 +232,7 @@ void wxHTTP::SendHeaders()
 
 bool wxHTTP::ParseHeaders()
 {
-    std::string line;
+    wxString line;
     wxStringTokenizer tokenzr;
 
     ClearHeaders();
@@ -237,34 +248,25 @@ bool wxHTTP::ParseHeaders()
         if ( line.empty() )
             break;
 
-        std::string left_str = wx::utils::BeforeFirst(line, ':');
-        if(!wx::utils::CmpNoCase(left_str, "Set-Cookie"))
+        wxString left_str = line.BeforeFirst(':');
+        if(!left_str.CmpNoCase("Set-Cookie"))
         {
-            std::string afterCN = wx::utils::AfterFirst(line, ':');
-            wx::utils::TrimAllSpace(afterCN);
-            std::string cookieName = wx::utils::BeforeFirst(afterCN, '=');
-
-            std::string afterVal = wx::utils::AfterFirst(line, ':');
-            wx::utils::TrimAllSpace(afterVal);
-            std::string cookieValue = wx::utils::BeforeFirst(wx::utils::AfterFirst(wx::utils::AfterFirst(line, ':'), '='), ';');
+            wxString cookieName = line.AfterFirst(':').Strip(wxString::both).BeforeFirst('=');
+            wxString cookieValue = line.AfterFirst(':').Strip(wxString::both).AfterFirst('=').BeforeFirst(';');
             m_cookies[cookieName] = cookieValue;
 
             // For compatibility
-            std::string leftStr = wx::utils::AfterFirst(line, ':');
-            wx::utils::TrimAllSpace(leftStr);
-            m_headers[left_str] = leftStr;
+            m_headers[left_str] = line.AfterFirst(':').Strip(wxString::both);
         }
         else
         {
-            std::string leftStr = wx::utils::AfterFirst(line, ':');
-            wx::utils::TrimAllSpace(leftStr);
-            m_headers[left_str] = leftStr;
+            m_headers[left_str] = line.AfterFirst(':').Strip(wxString::both);
         }
     }
     return true;
 }
 
-bool wxHTTP::Connect(const std::string& host, unsigned short port)
+bool wxHTTP::Connect(const wxString& host, unsigned short port)
 {
     wxIPV4address *addr;
 
@@ -289,7 +291,7 @@ bool wxHTTP::Connect(const std::string& host, unsigned short port)
     wxString hostHdr = host;
     if ( port && port != 80 )
         hostHdr << wxT(":") << port;
-    SetHeader("Host", hostHdr);
+    SetHeader(wxT("Host"), hostHdr);
 
     m_lastError = wxPROTO_NOERR;
     return true;
@@ -312,40 +314,41 @@ bool wxHTTP::Connect(const wxSockAddress& addr, bool WXUNUSED(wait))
         unsigned short port = ipv4addr->Service();
         if ( port && port != 80 )
             hostHdr << wxT(":") << port;
-        SetHeader("Host", hostHdr);
+        SetHeader(wxT("Host"), hostHdr);
     }
 
     m_lastError = wxPROTO_NOERR;
     return true;
 }
 
-bool wxHTTP::BuildRequest(const std::string& path, const std::string& method)
+bool wxHTTP::BuildRequest(const wxString& path, const wxString& method)
 {
     // Use the data in the post buffer, if any.
     if ( !m_postBuffer.IsEmpty() )
     {
-        std::string len = fmt::format("{}", m_postBuffer.GetDataLen());
+        wxString len;
+        len << m_postBuffer.GetDataLen();
 
         // Content length must be correct, so always set, possibly
         // overriding the value set explicitly by a previous call to
         // SetHeader("Content-Length").
-        SetHeader("Content-Length", len);
+        SetHeader(wxS("Content-Length"), len);
 
         // However if the user had explicitly set the content type, don't
         // override it with the content type passed to SetPostText().
         if ( !m_contentType.empty() && GetContentType().empty() )
-            SetHeader("Content-Type", m_contentType);
+            SetHeader(wxS("Content-Type"), m_contentType);
     }
 
     m_http_response = 0;
 
     // If there is no User-Agent defined, define it.
-    if ( GetHeader("User-Agent").empty() )
-        SetHeader("User-Agent", wxVERSION_STRING);
+    if ( GetHeader(wxT("User-Agent")).empty() )
+        SetHeader(wxT("User-Agent"), wxVERSION_STRING);
 
     // Send authentication information
     if (!m_username.empty() || !m_password.empty()) {
-        SetHeader("Authorization", GenerateAuthString(m_username, m_password));
+        SetHeader(wxT("Authorization"), GenerateAuthString(m_username, m_password));
     }
 
     wxString buf;
@@ -361,17 +364,17 @@ bool wxHTTP::BuildRequest(const std::string& path, const std::string& method)
         m_postBuffer.Clear();
     }
 
-    std::string tmp_str;
+    wxString tmp_str;
     m_lastError = ReadLine(this, tmp_str);
     if (m_lastError != wxPROTO_NOERR)
         return false;
 
-    if (!wx::utils::Contains(tmp_str, "HTTP/")) {
+    if (!tmp_str.Contains(wxT("HTTP/"))) {
         // TODO: support HTTP v0.9 which can have no header.
         // FIXME: tmp_str is not put back in the in-queue of the socket.
         m_lastError = wxPROTO_NOERR;
-        SetHeader("Content-Length", "-1");
-        SetHeader("Content-Type", "none/none");
+        SetHeader(wxT("Content-Length"), wxT("-1"));
+        SetHeader(wxT("Content-Type"), wxT("none/none"));
         RestoreState();
         return true;
     }
@@ -466,7 +469,7 @@ size_t wxHTTPStream::OnSysRead(void *buffer, size_t bufsize)
     return ret;
 }
 
-wxInputStream *wxHTTP::GetInputStream(const std::string& path)
+wxInputStream *wxHTTP::GetInputStream(const wxString& path)
 {
     wxHTTPStream *inp_stream;
 
@@ -499,8 +502,8 @@ wxInputStream *wxHTTP::GetInputStream(const std::string& path)
 
     inp_stream = new wxHTTPStream(this);
 
-    if (!GetHeader("Content-Length").empty())
-        inp_stream->m_httpsize = wxAtoi(GetHeader("Content-Length"));
+    if (!GetHeader(wxT("Content-Length")).empty())
+        inp_stream->m_httpsize = wxAtoi(GetHeader(wxT("Content-Length")));
     else
         inp_stream->m_httpsize = (size_t)-1;
 

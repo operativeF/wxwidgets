@@ -18,10 +18,6 @@
 #endif // PCH
 
 #include "wx/dir.h"
-#include "wx/stringutils.h"
-
-#include <boost/nowide/convert.hpp>
-#include <boost/nowide/stackstring.hpp>
 
 #ifdef __WINDOWS__
     #include "wx/msw/private.h"
@@ -56,10 +52,9 @@ inline void FreeFindData(FIND_DATA fd)
     }
 }
 
-std::string GetNameFromFindData(const FIND_STRUCT *finddata)
+const wxChar *GetNameFromFindData(const FIND_STRUCT *finddata)
 {
-    // FIXME: isn't this going to dangle?
-    return boost::nowide::narrow(finddata->cFileName);
+    return finddata->cFileName;
 }
 
 // Helper function checking that the contents of the given FIND_STRUCT really
@@ -68,7 +63,7 @@ std::string GetNameFromFindData(const FIND_STRUCT *finddata)
 // something like "*.bar" matches "foo.bar.baz" too and not only "foo.bar", so
 // we have to double check that we have a real match.
 inline bool
-CheckFoundMatch(const FIND_STRUCT* finddata, const std::string& filter)
+CheckFoundMatch(const FIND_STRUCT* finddata, const wxString& filter)
 {
     // If there is no filter, the found file must be the one we really are
     // looking for.
@@ -78,22 +73,22 @@ CheckFoundMatch(const FIND_STRUCT* finddata, const std::string& filter)
     // Otherwise do check the match validity. Notice that we must do it
     // case-insensitively because the case of the file names is not supposed to
     // matter under Windows.
-    std::string fn(GetNameFromFindData(finddata));
+    wxString fn(GetNameFromFindData(finddata));
 
     // However if the filter contains only special characters (which is a
     // common case), we can skip the case conversion.
-    if ( filter.find_first_not_of("*?.") == std::string::npos )
-        return wx::utils::Matches(fn, filter);
+    if ( filter.find_first_not_of(wxS("*?.")) == wxString::npos )
+        return fn.Matches(filter);
 
-    return wx::utils::Matches(wx::utils::ToUpperCopy(fn), wx::utils::ToUpperCopy(filter));
+    return fn.MakeUpper().Matches(filter.Upper());
 }
 
 inline bool
-FindNext(FIND_DATA fd, const std::string& filter, FIND_STRUCT *finddata)
+FindNext(FIND_DATA fd, const wxString& filter, FIND_STRUCT *finddata)
 {
     for ( ;; )
     {
-        if ( !::FindNextFileW(fd, finddata) )
+        if ( !::FindNextFile(fd, finddata) )
             return false;
 
         // If we did find something, check that it really matches.
@@ -103,12 +98,11 @@ FindNext(FIND_DATA fd, const std::string& filter, FIND_STRUCT *finddata)
 }
 
 inline FIND_DATA
-FindFirst(const std::string& spec,
-          const std::string& filter,
+FindFirst(const wxString& spec,
+          const wxString& filter,
           FIND_STRUCT *finddata)
 {
-    std::wstring stackSpec = boost::nowide::widen(spec.c_str());
-    FIND_DATA fd = ::FindFirstFileW(&stackSpec[0], finddata);
+    FIND_DATA fd = ::FindFirstFile(spec.t_str(), finddata);
 
     // As in FindNext() above, we need to check that the file name we found
     // really matches our filter and look for the next match if it doesn't.
@@ -167,26 +161,26 @@ inline bool IsHidden(FIND_ATTR attr)
 class wxDirData
 {
 public:
-    explicit wxDirData(const std::string& dirname);
+    explicit wxDirData(const wxString& dirname);
     ~wxDirData();
 
     wxDirData(const wxDirData&) = delete;
 	wxDirData& operator=(const wxDirData&) = delete;
 
-    void SetFileSpec(const std::string& filespec) { m_filespec = filespec; }
+    void SetFileSpec(const wxString& filespec) { m_filespec = filespec; }
     void SetFlags(int flags) { m_flags = flags; }
 
     void Close();
     void Rewind();
-    bool Read(std::string *filename);
+    bool Read(wxString *filename);
 
-    const std::string& GetName() const { return m_dirname; }
+    const wxString& GetName() const { return m_dirname; }
 
 private:
     FIND_DATA m_finddata;
 
-    std::string m_dirname;
-    std::string m_filespec;
+    wxString m_dirname;
+    wxString m_filespec;
 
     int      m_flags{0};
 };
@@ -199,7 +193,7 @@ private:
 // wxDirData
 // ----------------------------------------------------------------------------
 
-wxDirData::wxDirData(const std::string& dirname)
+wxDirData::wxDirData(const wxString& dirname)
     : m_finddata(InitFindData())
     , m_dirname(dirname)
 {
@@ -225,7 +219,7 @@ void wxDirData::Rewind()
     Close();
 }
 
-bool wxDirData::Read(std::string *filename)
+bool wxDirData::Read(wxString *filename)
 {
     bool first = false;
 
@@ -235,13 +229,13 @@ bool wxDirData::Read(std::string *filename)
     if ( !IsFindDataOk(m_finddata) )
     {
         // open first
-        std::string filespec = m_dirname;
+        wxString filespec = m_dirname;
         if ( !wxEndsWithPathSeparator(filespec) )
         {
-            filespec += '\\';
+            filespec += wxT('\\');
         }
         if ( m_filespec.empty() )
-            filespec += "*.*";
+            filespec += wxT("*.*");
         else
             filespec += m_filespec;
 
@@ -264,7 +258,7 @@ bool wxDirData::Read(std::string *filename)
         return false;
     }
 
-    std::string name;
+    const wxChar *name;
     FIND_ATTR attr;
 
     for ( ;; )
@@ -293,9 +287,9 @@ bool wxDirData::Read(std::string *filename)
         attr = GetAttrFromFindData(PTR_TO_FINDDATA);
 
         // don't return "." and ".." unless asked for
-        if ( name[0] == '.' &&
-             ((name[1] == '.' && name[2] == '\0') ||
-              (name[1] == '\0')) )
+        if ( name[0] == wxT('.') &&
+             ((name[1] == wxT('.') && name[2] == wxT('\0')) ||
+              (name[1] == wxT('\0'))) )
         {
             if ( !(m_flags & wxDIR_DOTDOT) )
                 continue;
@@ -335,12 +329,12 @@ bool wxDirData::Read(std::string *filename)
 // wxDir construction/destruction
 // ----------------------------------------------------------------------------
 
-wxDir::wxDir(const std::string& dirname)
+wxDir::wxDir(const wxString& dirname)
 {
     std::ignore = Open(dirname);
 }
 
-bool wxDir::Open(const std::string& dirname)
+bool wxDir::Open(const wxString& dirname)
 {
     delete M_DIR;
 
@@ -364,22 +358,21 @@ bool wxDir::IsOpened() const
     return m_data != nullptr;
 }
 
-std::string wxDir::GetName() const
+wxString wxDir::GetName() const
 {
-    std::string name;
+    wxString name;
     if ( m_data )
     {
         name = M_DIR->GetName();
         if ( !name.empty() )
         {
             // bring to canonical Windows form
-            wx::utils::ReplaceAll(name, "/", "\\");
+            name.Replace(wxT("/"), wxT("\\"));
 
-            if ( name.back() == '\\' )
+            if ( name.Last() == wxT('\\') )
             {
                 // chop off the last (back)slash
-                // TODO: Is this correct?
-                name.resize(name.length() - 1);
+                name.Truncate(name.length() - 1);
             }
         }
     }
@@ -400,8 +393,8 @@ void wxDir::Close()
 // wxDir enumerating
 // ----------------------------------------------------------------------------
 
-bool wxDir::GetFirst(std::string *filename,
-                     const std::string& filespec,
+bool wxDir::GetFirst(wxString *filename,
+                     const wxString& filespec,
                      int flags) const
 {
     wxCHECK_MSG( IsOpened(), false, wxT("must wxDir::Open() first") );
@@ -414,7 +407,7 @@ bool wxDir::GetFirst(std::string *filename,
     return GetNext(filename);
 }
 
-bool wxDir::GetNext(std::string *filename) const
+bool wxDir::GetNext(wxString *filename) const
 {
     wxCHECK_MSG( IsOpened(), false, wxT("must wxDir::Open() first") );
 
@@ -428,15 +421,15 @@ bool wxDir::GetNext(std::string *filename) const
 // ----------------------------------------------------------------------------
 
 extern bool
-wxGetDirectoryTimes(const std::string& dirname,
+wxGetDirectoryTimes(const wxString& dirname,
                     FILETIME *ftAccess, FILETIME *ftCreate, FILETIME *ftMod)
 {
     // FindFirst() is going to fail
-    wxASSERT_MSG( !dirname.empty() && dirname.back() != '\\',
+    wxASSERT_MSG( !dirname.empty() && dirname.Last() != wxT('\\'),
                   wxT("incorrect directory name format in wxGetDirectoryTimes") );
 
     FIND_STRUCT fs;
-    FIND_DATA fd = FindFirst(dirname, "", &fs);
+    FIND_DATA fd = FindFirst(dirname, wxEmptyString, &fs);
     if ( !IsFindDataOk(fd) )
     {
         return false;

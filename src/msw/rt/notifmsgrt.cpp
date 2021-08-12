@@ -296,7 +296,7 @@ public:
         if ( filename.Exists() )
         {
             // Check existing shortcut for application id
-            if ( SUCCEEDED(persistFile->Load(boost::nowide::widen(filename.GetFullPath()).c_str(), 0)) )
+            if ( SUCCEEDED(persistFile->Load(filename.GetFullPath().wc_str(), 0)) )
             {
                 PROPVARIANT appIdPropVar;
                 if ( SUCCEEDED(propertyStore->GetValue(PKEY_AppUserModel_ID, &appIdPropVar)) )
@@ -343,7 +343,7 @@ public:
                 return false;
             if ( FAILED(propertyStore->Commit()) )
                 return false;
-            if ( FAILED(persistFile->Save(boost::nowide::widen(filename.GetFullPath()).c_str(), TRUE)) )
+            if ( FAILED(persistFile->Save(filename.GetFullPath().wc_str(), TRUE)) )
                 return false;
         }
 

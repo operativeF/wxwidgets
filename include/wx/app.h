@@ -139,7 +139,7 @@ public:
     //     be argv[0]
 
         // set/get the application name
-    std::string GetAppName() const;
+    wxString GetAppName() const;
     void SetAppName(const wxString& name) { m_appName = name; }
 
         // set/get the application display name: the display name is the name
@@ -149,7 +149,7 @@ public:
         // by default the display name is the same as app name or a capitalized
         // version of the program if app name was not set neither but it's
         // usually better to set it explicitly to something nicer
-    std::string GetAppDisplayName() const;
+    wxString GetAppDisplayName() const;
 
     void SetAppDisplayName(const wxString& name) { m_appDisplayName = name; }
 
@@ -481,10 +481,10 @@ protected:
 
     // application info (must be set from the user code)
     wxString m_vendorName,        // vendor name ("acme")
-             m_vendorDisplayName; // vendor display name (e.g. "ACME Inc")
-    std::string m_appName;           // app name ("myapp")
-    std::string m_appDisplayName;    // app display name ("My Application")
-    wxString m_className;         // class name
+             m_vendorDisplayName, // vendor display name (e.g. "ACME Inc")
+             m_appName,           // app name ("myapp")
+             m_appDisplayName,    // app display name ("My Application")
+             m_className;         // class name
 
     // the class defining the application behaviour, NULL initially and created
     // by GetTraits() when first needed

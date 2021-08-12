@@ -133,7 +133,7 @@ TEST_CASE_FIXTURE(PersistenceTests, "wxPersistDVC")
 
         // Test that the relevant keys have been stored correctly.
         int val = -1;
-        std::string text;
+        wxString text;
 
         CHECK(GetConfig().Read(DVC_COL_PREFIX "1/Width", &val));
         CHECK(150 == val);

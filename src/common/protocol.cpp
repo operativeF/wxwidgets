@@ -33,7 +33,7 @@
 
 wxIMPLEMENT_CLASS(wxProtoInfo, wxObject);
 
-wxProtoInfo::wxProtoInfo(const std::string& name, const std::string& serv,
+wxProtoInfo::wxProtoInfo(const wxChar *name, const wxChar *serv,
                          const bool need_host1, wxClassInfo *info)
            : m_protoname(name),
              m_servname(serv),
@@ -106,7 +106,7 @@ bool wxProtocol::Reconnect()
 // ----------------------------------------------------------------------------
 
 /* static */
-wxProtocolError wxProtocol::ReadLine(wxSocketBase *sock, std::string& result)
+wxProtocolError wxProtocol::ReadLine(wxSocketBase *sock, wxString& result)
 {
     static constexpr int LINE_BUF = 4095;
 
@@ -140,7 +140,7 @@ wxProtocolError wxProtocol::ReadLine(wxSocketBase *sock, std::string& result)
             if ( eol == pBuf )
             {
                 // check for case of "\r\n" being split
-                if ( result.empty() || result.back() != '\r' )
+                if ( result.empty() || result.Last() != wxT('\r') )
                 {
                     // ignore the stray '\n'
                     eol = nullptr;
@@ -168,12 +168,12 @@ wxProtocolError wxProtocol::ReadLine(wxSocketBase *sock, std::string& result)
             return wxPROTO_NETERR;
 
         pBuf[nRead] = '\0';
-        result += pBuf;
+        result += conv.cMB2WX(pBuf);
 
         if ( eol )
         {
             // remove trailing "\r\n"
-            result.erase(result.length() - 2);
+            result.RemoveLast(2);
 
             return wxPROTO_NOERR;
         }
@@ -182,7 +182,7 @@ wxProtocolError wxProtocol::ReadLine(wxSocketBase *sock, std::string& result)
     return wxPROTO_NETERR;
 }
 
-wxProtocolError wxProtocol::ReadLine(std::string& result)
+wxProtocolError wxProtocol::ReadLine(wxString& result)
 {
     return ReadLine(this, result);
 }
@@ -199,13 +199,13 @@ void wxProtocol::SetLog(wxProtocolLog *log)
     m_log = log;
 }
 
-void wxProtocol::LogRequest(const std::string& str)
+void wxProtocol::LogRequest(const wxString& str)
 {
     if ( m_log )
         m_log->LogRequest(str);
 }
 
-void wxProtocol::LogResponse(const std::string& str)
+void wxProtocol::LogResponse(const wxString& str)
 {
     if ( m_log )
         m_log->LogResponse(str);

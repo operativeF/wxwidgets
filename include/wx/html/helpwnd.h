@@ -146,7 +146,7 @@ public:
     // if given, otherwise it will save info into currently selected path.
     // saved values : things set by SetFonts, SetBorders.
     void ReadCustomization(wxConfigBase *cfg, const wxString& path = wxEmptyString);
-    void WriteCustomization(wxConfigBase *cfg, const std::string& path = {});
+    void WriteCustomization(wxConfigBase *cfg, const wxString& path = wxEmptyString);
 #endif // wxUSE_CONFIG
 
     // call this to let wxHtmlHelpWindow know page changed
@@ -233,8 +233,7 @@ protected:
     wxToolBar*  m_toolBar;
 
     wxComboBox *m_Bookmarks;
-    std::vector<wxString> m_BookmarksNames;
-    std::vector<wxString> m_BookmarksPages;
+    wxArrayString m_BookmarksNames, m_BookmarksPages;
 
     wxHtmlHelpFrameCfg m_Cfg;
 
@@ -253,8 +252,7 @@ protected:
     std::vector<std::string>* m_FixedFonts;
 
     int m_FontSize; // 0,1,2 = small,medium,big
-    std::string m_NormalFace;
-    std::string m_FixedFace;
+    wxString m_NormalFace, m_FixedFace;
 
     bool m_UpdateContents;
 

@@ -107,7 +107,7 @@ CheckGroupEntries(const wxFileConfig& fc,
     va_start(ap, nEntries);
 
     long cookie;
-    std::string name;
+    wxString name;
     for ( bool cont = fc.GetFirstEntry(name, cookie);
           cont;
           cont = fc.GetNextEntry(name, cookie), nEntries-- )
@@ -116,6 +116,33 @@ CheckGroupEntries(const wxFileConfig& fc,
     }
 
     CHECK( nEntries == 0 );
+
+    va_end(ap);
+}
+
+void
+CheckGroupSubgroups(const wxFileConfig& fc,
+                    const char *path,
+                    size_t nGroups,
+                    ...)
+{
+    wxConfigPathChanger change(&fc, wxString(path) + "/");
+
+    CHECK( fc.GetNumberOfGroups() == nGroups );
+
+    va_list ap;
+    va_start(ap, nGroups);
+
+    long cookie;
+    wxString name;
+    for ( bool cont = fc.GetFirstGroup(name, cookie);
+          cont;
+          cont = fc.GetNextGroup(name, cookie), nGroups-- )
+    {
+        CHECK( name == va_arg(ap, char *) );
+    }
+
+    CHECK( nGroups == 0 );
 
     va_end(ap);
 }
@@ -132,6 +159,17 @@ TEST_CASE("wxFileConfig::GetEntries")
     CheckGroupEntries(fc, "/root/group1", 0);
     CheckGroupEntries(fc, "/root/group1/subgroup",
                         2, "subentry", "subentry2");
+}
+
+TEST_CASE("wxFileConfig::GetGroups")
+{
+    wxStringInputStream sis(testconfig);
+    wxFileConfig fc(sis);
+
+    CheckGroupSubgroups(fc, "", 1, "root");
+    CheckGroupSubgroups(fc, "/root", 2, "group1", "group2");
+    CheckGroupSubgroups(fc, "/root/group1", 1, "subgroup");
+    CheckGroupSubgroups(fc, "/root/group2", 0);
 }
 
 TEST_CASE("wxFileConfig::HasEntry")
@@ -555,7 +593,7 @@ TEST_CASE("wxFileConfig::ReadNonExistent")
     wxStringInputStream sis(confTest);
     wxFileConfig fc(sis);
 
-    std::string url;
+    wxString url;
     CHECK( !fc.Read("URL", &url) );
 }
 

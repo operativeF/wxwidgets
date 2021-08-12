@@ -782,9 +782,9 @@ void wxHtmlWindow::ReadCustomization(wxConfigBase *cfg, std::string path)
         cfg->SetPath(path);
     }
 
-    m_Borders = cfg->Read("wxHtmlWindow/Borders", m_Borders);
-    p_fff = cfg->Read("wxHtmlWindow/FontFaceFixed", m_Parser->m_FontFaceFixed);
-    p_ffn = cfg->Read("wxHtmlWindow/FontFaceNormal", m_Parser->m_FontFaceNormal);
+    m_Borders = cfg->Read(wxT("wxHtmlWindow/Borders"), m_Borders);
+    p_fff = cfg->Read(wxT("wxHtmlWindow/FontFaceFixed"), m_Parser->m_FontFaceFixed);
+    p_ffn = cfg->Read(wxT("wxHtmlWindow/FontFaceNormal"), m_Parser->m_FontFaceNormal);
     for (int i = 0; i < 7; i++)
     {
         tmp = fmt::format("wxHtmlWindow/FontsSize{:i}", i);
@@ -810,9 +810,9 @@ void wxHtmlWindow::WriteCustomization(wxConfigBase *cfg, std::string path)
         cfg->SetPath(path);
     }
 
-    cfg->Write("wxHtmlWindow/Borders", (long) m_Borders);
-    cfg->Write("wxHtmlWindow/FontFaceFixed", m_Parser->m_FontFaceFixed);
-    cfg->Write("wxHtmlWindow/FontFaceNormal", m_Parser->m_FontFaceNormal);
+    cfg->Write(wxT("wxHtmlWindow/Borders"), (long) m_Borders);
+    cfg->Write(wxT("wxHtmlWindow/FontFaceFixed"), m_Parser->m_FontFaceFixed);
+    cfg->Write(wxT("wxHtmlWindow/FontFaceNormal"), m_Parser->m_FontFaceNormal);
     for (int i = 0; i < 7; i++)
     {
         tmp = fmt::format("wxHtmlWindow/FontsSize{:i}", i);

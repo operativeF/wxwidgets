@@ -56,7 +56,7 @@ enum //Internal find flags
 wxVersionInfo wxWebViewFactoryIE::GetVersionInfo()
 {
     wxRegKey key(wxRegKey::HKLM, "Software\\Microsoft\\Internet Explorer");
-    std::string value;
+    wxString value;
     key.QueryValue("Version", value);
     long major = 0,
          minor = 0,
@@ -535,10 +535,10 @@ bool wxWebViewIE::CanSetZoomType(wxWebViewZoomType type) const
     //IE 6 and below only support text zoom, so check the registry to see what
     //version we actually have
     wxRegKey key(wxRegKey::HKLM, "Software\\Microsoft\\Internet Explorer");
-    std::string value;
+    wxString value;
     key.QueryValue("Version", value);
 
-    long version = wxAtoi(value.substr(0, 1));
+    long version = wxAtoi(value.Left(1));
     return !(version <= 6 && type == wxWEBVIEW_ZOOM_TYPE_LAYOUT);
 }
 
@@ -985,9 +985,9 @@ wxString wxWebViewIE::GetPageText() const
 bool wxWebViewIE::MSWSetEmulationLevel(wxWebViewIE_EmulationLevel level)
 {
     // Registry key where emulation level for programs are set
-    static constexpr char IE_EMULATION_KEY[] =
-        "SOFTWARE\\Microsoft\\Internet Explorer\\Main"
-        "\\FeatureControl\\FEATURE_BROWSER_EMULATION";
+    static constexpr wxChar IE_EMULATION_KEY[] =
+        wxT("SOFTWARE\\Microsoft\\Internet Explorer\\Main")
+        wxT("\\FeatureControl\\FEATURE_BROWSER_EMULATION");
 
     wxRegKey key(wxRegKey::HKCU, IE_EMULATION_KEY);
     if ( !key.Exists() )

@@ -39,8 +39,6 @@
 #include "wx/modalhook.h"
 #include "wx/msw/private/dpiaware.h"
 
-#include <boost/nowide/stackstring.hpp>
-
 // ----------------------------------------------------------------------------
 // constants
 // ----------------------------------------------------------------------------
@@ -552,29 +550,31 @@ int wxFileDialog::ShowModal()
     of.lpfnHook          = wxFileDialogHookFunction;
     of.lCustData         = (LPARAM)this;
 
-    std::vector<std::string> wildDescriptions;
-    std::vector<std::string> wildFilters;
+    std::vector<wxString> wildDescriptions;
+    std::vector<wxString> wildFilters;
 
     size_t items = wxParseCommonDialogsFilter(m_wildCard, wildDescriptions, wildFilters);
 
     wxASSERT_MSG( items > 0 , wxT("empty wildcard list") );
 
-    std::string filterBuffer;
+    wxString filterBuffer;
 
     for (size_t i = 0; i < items ; i++)
     {
-        filterBuffer += fmt::format("{}|{}|", wildDescriptions[i], wildFilters[i]);
+        filterBuffer += wildDescriptions[i];
+        filterBuffer += wxT("|");
+        filterBuffer += wildFilters[i];
+        filterBuffer += wxT("|");
     }
 
     // Replace | with \0
     for (size_t i = 0; i < filterBuffer.length(); i++ ) {
-        if ( filterBuffer[i] == '|' ) {
-            filterBuffer[i] = '\0';
+        if ( filterBuffer.GetChar(i) == wxT('|') ) {
+            filterBuffer[i] = wxT('\0');
         }
     }
 
-    boost::nowide::wstackstring stackFilterBuffer(filterBuffer.c_str());
-    of.lpstrFilter  = stackFilterBuffer.get();
+    of.lpstrFilter  = filterBuffer.t_str();
     of.nFilterIndex = m_filterIndex + 1;
     m_currentlySelectedFilterIndex = m_filterIndex;
 
@@ -592,7 +592,7 @@ int wxFileDialog::ShowModal()
     wxString defextBuffer; // we need it to be alive until GetSaveFileName()!
     if (HasFdFlag(wxFD_SAVE))
     {
-        const char* extension = filterBuffer.c_str();
+        const wxChar* extension = filterBuffer.t_str();
         int maxFilter = (int)(of.nFilterIndex*2L) - 1;
 
         for( int j = 0; j < maxFilter; j++ )           // get extension
@@ -665,7 +665,7 @@ int wxFileDialog::ShowModal()
         if ( !of.nFileExtension || fileNameBuffer[of.nFileExtension] == wxT('\0') )
         {
             // User has typed a filename without an extension:
-            const char* extension = filterBuffer.c_str();
+            const wxChar* extension = filterBuffer.t_str();
             int   maxFilter = (int)(of.nFilterIndex*2L) - 1;
 
             for( int j = 0; j < maxFilter; j++ )           // get extension

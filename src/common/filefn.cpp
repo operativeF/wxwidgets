@@ -34,15 +34,11 @@
     #pragma warning(disable:4706)   // assignment within conditional expression
 #endif // VC++
 
-#include <array>
 #include <cctype>
 #include <cerrno>
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
-
-#include <boost/nowide/convert.hpp>
-#include <fmt/core.h>
 
 #if defined(__WXMAC__)
     #include  "wx/osx/private.h"  // includes mac headers
@@ -136,8 +132,8 @@ void wxPathList::AddEnvList (const wxString& envVariable)
         wxT(":;");
 #endif
 
-    std::string val{ wxGetEnv(envVariable) };
-    if ( !val.empty() )
+    wxString val;
+    if ( wxGetEnv(envVariable, &val) )
     {
         // split into an array of string the value of the env var
         const std::vector<wxString> arr = wxStringTokenize(val, PATH_TOKS);
@@ -684,7 +680,7 @@ wxString wxFindFirstFile(const wxString& spec, int flags)
         default:     dirFlags = wxDIR_DIRS | wxDIR_FILES; break;
     }
 
-    std::string result;
+    wxString result;
     gs_dir->GetFirst(&result, wxFileNameFromPath(spec), dirFlags);
     if ( result.empty() )
         return result;
@@ -696,7 +692,7 @@ wxString wxFindNextFile()
 {
     wxCHECK_MSG( gs_dir, "", "You must call wxFindFirstFile before!" );
 
-    std::string result;
+    wxString result;
     if ( !gs_dir->GetNext(&result) || result.empty() )
         return result;
 
@@ -802,26 +798,24 @@ bool wxSetWorkingDirectory(const wxString& d)
 
 // Get the OS directory if appropriate (such as the Windows directory).
 // On non-Windows platform, probably just return the empty string.
-std::string wxGetOSDirectory()
+wxString wxGetOSDirectory()
 {
 #if defined(__WINDOWS__)
-    std::wstring buf;
-    buf.resize(MAX_PATH);
-
-    if ( !::GetWindowsDirectoryW(&buf[0], MAX_PATH) )
+    wxChar buf[MAX_PATH];
+    if ( !GetWindowsDirectory(buf, MAX_PATH) )
     {
         wxLogLastError(wxS("GetWindowsDirectory"));
     }
 
-    return boost::nowide::narrow(buf);
+    return {buf};
 #else
     return {};
 #endif
 }
 
-bool wxEndsWithPathSeparator(const std::string& filename)
+bool wxEndsWithPathSeparator(const wxString& filename)
 {
-    return !filename.empty() && wxIsPathSeparator(filename.back());
+    return !filename.empty() && wxIsPathSeparator(filename.Last());
 }
 
 // find a file in a list of directories, returns false if not found
@@ -875,28 +869,27 @@ time_t WXDLLIMPEXP_BASE wxFileModificationTime(const wxString& filename)
 // Returns 0 if none or if there's a problem.
 // filterStr is in the form: "All files (*.*)|*.*|JPEG Files (*.jpeg)|*.jpeg"
 // TODO: string_view
-int WXDLLIMPEXP_BASE wxParseCommonDialogsFilter(const std::string& filterStr,
-                                           std::vector<std::string>& descriptions,
-                                           std::vector<std::string>& filters)
+int WXDLLIMPEXP_BASE wxParseCommonDialogsFilter(const wxString& filterStr,
+                                           std::vector<wxString>& descriptions,
+                                           std::vector<wxString>& filters)
 {
     descriptions.clear();
     filters.clear();
 
-    std::string str{filterStr};
-    std::string description;
-    std::string filter;
+    wxString str(filterStr);
 
+    wxString description, filter;
     int pos = 0;
-    while( pos != std::string::npos )
+    while( pos != wxNOT_FOUND )
     {
-        pos = str.find(wxT('|'));
-        if ( pos == std::string::npos )
+        pos = str.Find(wxT('|'));
+        if ( pos == wxNOT_FOUND )
         {
             // if there are no '|'s at all in the string just take the entire
             // string as filter and make description empty for later autocompletion
             if ( filters.empty() )
             {
-                descriptions.push_back("");
+                descriptions.push_back(wxEmptyString);
                 filters.push_back(filterStr);
             }
             else
@@ -907,17 +900,17 @@ int WXDLLIMPEXP_BASE wxParseCommonDialogsFilter(const std::string& filterStr,
             break;
         }
 
-        description = str.substr(0, pos);
-        str = str.substr(pos + 1);
-        pos = str.find('|');
-        if ( pos == std::string::npos )
+        description = str.Left(pos);
+        str = str.Mid(pos + 1);
+        pos = str.Find(wxT('|'));
+        if ( pos == wxNOT_FOUND )
         {
             filter = str;
         }
         else
         {
-            filter = str.substr(0, pos);
-            str = str.substr(pos + 1);
+            filter = str.Left(pos);
+            str = str.Mid(pos + 1);
         }
 
         descriptions.push_back(description);
@@ -976,8 +969,7 @@ int WXDLLIMPEXP_BASE wxParseCommonDialogsFilter(const std::string& filterStr,
     {
         if ( descriptions[j].empty() && !filters[j].empty() )
         {
-            // FIXME: Translation not availble for fmt yet.
-            descriptions[j] = fmt::format("Files (%s)", filters[j].c_str());
+            descriptions[j].Printf(_("Files (%s)"), filters[j].c_str());
         }
     }
 
@@ -996,7 +988,7 @@ static bool wxCheckWin32Permission(const wxString& path, DWORD access)
         return false;
     }
 
-    const HANDLE h = ::CreateFileW
+    const HANDLE h = ::CreateFile
                  (
                     path.t_str(),
                     access,
