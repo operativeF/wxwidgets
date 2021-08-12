@@ -9,6 +9,9 @@
 #include <string>
 #include <vector>
 
+namespace wx::cfg
+{
+
 enum class ReadValue
 {
     Boolean,
@@ -111,5 +114,7 @@ public:
 private:
     Containment m_cont;
 };
+
+} // namespace wx::config
 
 #endif // _CONFTYPE_H_
