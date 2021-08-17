@@ -19,14 +19,17 @@
 // define the native wxConfigBase implementation
 // ----------------------------------------------------------------------------
 
-// under Windows we prefer to use the native implementation but can be forced
-// to use the file-based one
-#if defined(__WINDOWS__) && wxUSE_CONFIG_NATIVE
+// Prefer using a file based configuration scheme, even under Windows.
+// Registry usage is something that should be used as a last resort,
+// and should be discouraged as it's not portable, not easily manipulated,
+// and things like AppData folders can have data roam between systems.
+
+#include "wx/fileconf.h"
+#define wxConfig wxFileConfig
+
+#if defined(__WINDOWS__) && wxUSE_CONFIG_NATIVE && wxUSE_REGISTRY
     #include "wx/msw/regconf.h"
     #define wxConfig  wxRegConfig
-#else // either we're under Unix or wish to always use config files
-    #include "wx/fileconf.h"
-    #define wxConfig wxFileConfig
 #endif
 
 #endif // wxUSE_CONFIG

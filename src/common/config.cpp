@@ -45,12 +45,7 @@
 
 wxConfigBase *wxAppTraitsBase::CreateConfig()
 {
-    return new
-    #if defined(__WINDOWS__) && wxUSE_CONFIG_NATIVE
-        wxRegConfig(wxTheApp->GetAppName(), wxTheApp->GetVendorName());
-    #else // either we're under Unix or wish to use files even under Windows
-        wxFileConfig(wxTheApp->GetAppName());
-    #endif
+    return new wxFileConfig(wxTheApp->GetAppName());
 }
 
 // ----------------------------------------------------------------------------

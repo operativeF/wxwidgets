@@ -1,0 +1,42 @@
+{
+    "appName": "TestApp",
+    "vendor": "TheVendor",
+    "settings": {
+        "name": "Something",
+        "date": "August 16, 2021"
+    },
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                "${workspaceFolder}/**"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ],
+            "compilerPath": "C:/dev/LLVM/bin",
+            "cppStandard": "c++20",
+            "experimental": false
+        },
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**"
+            ],
+            "defines": [
+                "_DEBUG"
+            ],
+            "compilerPath": "/dev/LLVM/bin",
+            "cppStandard": "c++20",
+            "experimental": true
+        }
+    ],
+    "version": 1,
+    "scaleFactor": 1.25,
+    "screenPosition": [
+        100,
+        100
+    ]
+}

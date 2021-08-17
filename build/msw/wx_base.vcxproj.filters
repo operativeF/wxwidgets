@@ -931,6 +931,10 @@
     <ClInclude Include="..\..\include\wx\zstream.h">
       <Filter>Common Headers</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\wx\stringutils.h" />
+    <ClInclude Include="..\..\include\wx\fileconf_json.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="..\..\include\wx\msw\setup.h">

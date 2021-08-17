@@ -128,6 +128,7 @@
 #include <wx/features.h>
 #include <wx/ffile.h>
 #include <wx/fileconf.h>
+#include <wx/fileconf_json.h>
 #include <wx/filectrl.h>
 #include <wx/filedlg.h>
 #include <wx/filefn.h>
