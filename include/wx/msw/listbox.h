@@ -22,6 +22,7 @@
   using wxListBoxItemsArray = std::vector<wxOwnerDrawn*>;
 #endif // wxUSE_OWNER_DRAWN
 
+#include <utility>
 #include <vector>
 
 class WXDLLIMPEXP_CORE wxListBox : public wxListBoxBase
@@ -93,7 +94,7 @@ public:
     {
         const auto index = std::distance(m_aItems.begin(), std::find(m_aItems.begin(), m_aItems.end(), item));
 
-        if(index == m_aItems.size())
+        if(std::cmp_equal(index, m_aItems.size()))
         {
             return -1;
         }

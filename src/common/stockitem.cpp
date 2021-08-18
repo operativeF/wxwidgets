@@ -219,7 +219,7 @@ std::string wxGetStockLabel(wxWindowID id, long flags)
     if ( flags & wxSTOCK_WITHOUT_ELLIPSIS )
     {
         std::string baseLabel;
-        if ( wx::utils::EndsWith(stockLabel, "...") )
+        if ( stockLabel.ends_with("...") )
             stockLabel = wx::utils::BeforeLast(baseLabel, "...");
 
         // accelerators only make sense for the menu items which should have

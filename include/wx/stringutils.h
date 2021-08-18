@@ -10,15 +10,9 @@
 namespace wx::utils
 {
 
-#if __cplusplus >= 201907L
-#define CONSTEXPR_CONTAINER constexpr
-#else
-#define CONSTEXPR_CONTAINER
-#endif
-
 // Modifying string functions
 
-[[maybe_unused]] inline CONSTEXPR_CONTAINER std::size_t ReplaceAll(std::string& instr, std::string_view candidate, std::string_view replacement)
+[[maybe_unused]] inline constexpr std::size_t ReplaceAll(std::string& instr, std::string_view candidate, std::string_view replacement)
 {
     std::size_t count{ 0 };
     for (std::string::size_type pos{};
@@ -46,13 +40,13 @@ namespace detail
 }
 
 // FIXME: Not valid for unicode strings.
-inline CONSTEXPR_CONTAINER void TrimAllSpace(std::string& str)
+inline constexpr void TrimAllSpace(std::string& str)
 {
-    str.erase(std::remove_if(str.begin(), str.end(), detail::isWhitespace),  str.end());
+    std::erase_if(str, detail::isWhitespace);
 }
 
 // FIXME: Not valid for unicode strings.
-inline CONSTEXPR_CONTAINER void TrimLeadingSpace(std::string& str)
+inline constexpr void TrimLeadingSpace(std::string& str)
 {
     auto it = std::find_if_not(str.begin(), str.end(), detail::isWhitespace);
 
@@ -60,7 +54,7 @@ inline CONSTEXPR_CONTAINER void TrimLeadingSpace(std::string& str)
 }
 
 // FIXME: Not valid for unicode strings.
-inline CONSTEXPR_CONTAINER void TrimTrailingSpace(std::string& str)
+inline constexpr void TrimTrailingSpace(std::string& str)
 {
     auto it = std::find_if_not(str.rbegin(), str.rend(), detail::isWhitespace);
 
@@ -124,7 +118,7 @@ inline void ToLower(std::string& str)
 }
 
 // FIXME: could be improved, but is sufficient for string conversion.
-[[nodiscard]] inline CONSTEXPR_CONTAINER std::vector<std::string> StrSplitEscape(std::string_view strView, char delim, char escape)
+[[nodiscard]] inline constexpr std::vector<std::string> StrSplitEscape(std::string_view strView, char delim, char escape)
 {
     std::vector<std::string> output;
 
@@ -170,46 +164,6 @@ inline void ToLower(std::string& str)
 
 // Non-modifying string functions
 
-[[nodiscard]] inline constexpr bool StartsWith(std::string_view strView, std::string_view prefix) noexcept
-{
-    const auto prefixSize = prefix.size();
-
-    if(strView.size() < prefixSize)
-        return false;
-
-    return strView.compare(0, prefix.size(), prefix) == 0;
-}
-
-[[nodiscard]] inline constexpr bool StartsWith(std::string_view strView, const char* const prefix)
-{
-    return StartsWith(strView, std::string_view(prefix));
-}
-
-[[nodiscard]] inline constexpr bool StartsWith(std::string_view strView, const char prefix) noexcept
-{
-    return !strView.empty() && strView.front() == prefix;
-}
-
-[[nodiscard]] inline constexpr bool EndsWith(std::string_view strView, std::string_view suffix) noexcept
-{
-    const auto suffixSize = suffix.size();
-
-    if(strView.size() < suffixSize)
-        return false;
-
-    return strView.compare(strView.size() - suffixSize, suffixSize, suffix) == 0;
-}
-
-[[nodiscard]] inline constexpr bool EndsWith(std::string_view strView, const char* const suffix)
-{
-    return EndsWith(strView, std::string_view(suffix));
-}
-
-[[nodiscard]] inline constexpr bool EndsWith(std::string_view strView, const char suffix) noexcept
-{
-    return !strView.empty() && strView.back() == suffix;
-}
-
 // FIXME: Wrong (for Unicode), and temporary implementation of a case insensitive string comparison
 [[nodiscard]] inline int CmpNoCase(std::string_view strViewA, std::string_view strViewB)
 {
@@ -241,7 +195,7 @@ inline void ToLower(std::string& str)
     return CmpNoCase(strViewA, strViewB) == 0;
 }
 
-[[nodiscard]] inline CONSTEXPR_CONTAINER std::string BeforeFirst(std::string_view strView, std::string_view strFirst, size_t pos = 0)
+[[nodiscard]] inline constexpr std::string BeforeFirst(std::string_view strView, std::string_view strFirst, size_t pos = 0)
 {
     const auto n = strView.find(strFirst, pos);
 
@@ -251,7 +205,7 @@ inline void ToLower(std::string& str)
     return std::string(strView);
 }
 
-[[nodiscard]] inline CONSTEXPR_CONTAINER std::string BeforeFirst(std::string_view strView, const char ch, size_t pos = 0)
+[[nodiscard]] inline constexpr std::string BeforeFirst(std::string_view strView, const char ch, size_t pos = 0)
 {
     const auto n = strView.find(ch, pos);
 
@@ -261,12 +215,12 @@ inline void ToLower(std::string& str)
     return std::string(strView);
 }
 
-[[nodiscard]] inline CONSTEXPR_CONTAINER std::string BeforeFirst(std::string_view strView, const char* const chs, size_t pos = 0)
+[[nodiscard]] inline constexpr std::string BeforeFirst(std::string_view strView, const char* const chs, size_t pos = 0)
 {
     return BeforeFirst(strView, std::string_view(chs), pos);
 }
 
-[[nodiscard]] inline CONSTEXPR_CONTAINER std::string AfterFirst(std::string_view strView, std::string_view strAfter, size_t pos = 0)
+[[nodiscard]] inline constexpr std::string AfterFirst(std::string_view strView, std::string_view strAfter, size_t pos = 0)
 {
     const auto n = strView.find(strAfter, pos);
 
@@ -276,7 +230,7 @@ inline void ToLower(std::string& str)
     return {};
 }
 
-[[nodiscard]] inline CONSTEXPR_CONTAINER std::string AfterFirst(std::string_view strView, const char ch, size_t pos = 0)
+[[nodiscard]] inline constexpr std::string AfterFirst(std::string_view strView, const char ch, size_t pos = 0)
 {
     const auto n = strView.find(ch, pos);
 
@@ -286,12 +240,12 @@ inline void ToLower(std::string& str)
     return {};
 }
 
-[[nodiscard]] inline CONSTEXPR_CONTAINER std::string AfterFirst(std::string_view strView, const char* const chs, size_t pos = 0)
+[[nodiscard]] inline constexpr std::string AfterFirst(std::string_view strView, const char* const chs, size_t pos = 0)
 {
     return AfterFirst(strView, std::string_view(chs), pos);
 }
 
-[[nodiscard]] inline CONSTEXPR_CONTAINER std::string BeforeLast(std::string_view strView, std::string_view strBefore, size_t pos = std::string_view::npos)
+[[nodiscard]] inline constexpr std::string BeforeLast(std::string_view strView, std::string_view strBefore, size_t pos = std::string_view::npos)
 {
     const auto n = strView.rfind(strBefore, pos);
 
@@ -301,7 +255,7 @@ inline void ToLower(std::string& str)
     return {};
 }
 
-[[nodiscard]] inline CONSTEXPR_CONTAINER std::string BeforeLast(std::string_view strView, const char ch, size_t pos = std::string_view::npos)
+[[nodiscard]] inline constexpr std::string BeforeLast(std::string_view strView, const char ch, size_t pos = std::string_view::npos)
 {
     const auto n = strView.rfind(ch, pos);
 
@@ -311,36 +265,36 @@ inline void ToLower(std::string& str)
     return {};
 }
 
-[[nodiscard]] inline CONSTEXPR_CONTAINER std::string BeforeLast(std::string_view strView, const char* const chs, size_t pos = std::string_view::npos)
+[[nodiscard]] inline constexpr std::string BeforeLast(std::string_view strView, const char* const chs, size_t pos = std::string_view::npos)
 {
     return BeforeLast(strView, std::string_view(chs), pos);
 }
 
 
 // TODO: Do we really want to return the whole input string if it fails to find anything?
-[[nodiscard]] inline CONSTEXPR_CONTAINER std::string AfterLast(std::string_view strView, std::string_view strLast, size_t pos = std::string_view::npos)
+[[nodiscard]] inline constexpr std::string AfterLast(std::string_view strView, std::string_view strLast, size_t pos = std::string_view::npos)
 {
     const auto n = strView.rfind(strLast, pos);
 
     if(n != std::string_view::npos)
-        return std::string(strView.substr(n + 1, strView.size()));
+        return std::string{strView.substr(n + 1, strView.size())};
 
-    return std::string(strView);
+    return std::string{strView};
 }
 
-[[nodiscard]] inline CONSTEXPR_CONTAINER std::string AfterLast(std::string_view strView, const char ch, size_t pos = std::string_view::npos)
+[[nodiscard]] inline constexpr std::string AfterLast(std::string_view strView, const char ch, size_t pos = std::string_view::npos)
 {
     const auto n = strView.rfind(ch, pos);
 
     if(n != std::string_view::npos)
-        return std::string(strView.substr(n + 1, strView.size()));
+        return std::string{strView.substr(n + 1, strView.size())};
 
-    return std::string(strView);
+    return std::string{strView};
 }
 
-[[nodiscard]] inline CONSTEXPR_CONTAINER std::string AfterLast(std::string_view strView, const char* const chs, size_t pos = std::string_view::npos)
+[[nodiscard]] inline constexpr std::string AfterLast(std::string_view strView, const char* const chs, size_t pos = std::string_view::npos)
 {
-    return AfterLast(strView, std::string_view(chs), pos);
+    return AfterLast(strView, std::string_view{chs}, pos);
 }
 
 [[nodiscard]] inline constexpr bool Contains(std::string_view strView, std::string_view strToFind) noexcept
@@ -351,8 +305,8 @@ inline void ToLower(std::string& str)
 // FIXME: Not valid for unicode strings
 [[nodiscard]] inline bool ContainsNoCase(std::string_view strView, std::string_view strToFind)
 {
-    std::string str(strView);
-    std::string substrToFind(strToFind);
+    std::string str{strView};
+    std::string substrToFind{strToFind};
 
     ToLower(str);
     ToLower(substrToFind);
@@ -369,11 +323,11 @@ namespace wx::unsafe
 
 // From an input string_view, split the view on each delimiter and store each split in a vector.
 // Delimiter not included.
-inline CONSTEXPR_CONTAINER std::vector<std::string_view> StrViewSplit(std::string_view strView, char delim)
+inline constexpr std::vector<std::string_view> StrViewSplit(std::string_view strView, char delim)
 {
     std::vector<std::string_view> output;
 
-    size_t first = 0;
+    size_t first{0};
 
     while (first < strView.size())
     {

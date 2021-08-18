@@ -21,7 +21,9 @@
 #include "wx/rearrangectrl.h"
 #include "wx/renderer.h"
 
+#include <algorithm>
 #include <numeric>
+#include <utility>
 
 namespace
 {
@@ -152,7 +154,7 @@ void wxHeaderCtrlBase::SetColumnsOrder(const std::vector<int>& order)
     wxCHECK_RET( order.size() == count, "wrong number of columns" );
 
     // check the array validity
-    wxCHECK_RET( *std::max_element(order.cbegin(), order.cend()) < count, "invalid column index" );
+    wxCHECK_RET( std::cmp_greater(*std::max_element(order.cbegin(), order.cend()), count), "invalid column index" );
     wxCHECK_RET( std::adjacent_find(order.cbegin(), order.cend()) == order.cend(), "duplicate column index" );
 
     DoSetColumnsOrder(order);
@@ -227,8 +229,7 @@ wxHeaderCtrlBase::DoResizeColumnIndices(std::vector<int>& colIndices, size_t cou
         // order of the remaining ones
         // FIXME: Verify this is an off-by-one problem if greater than is used instead
         // of greater-than-or-equal-to.
-        colIndices.erase(std::remove_if(colIndices.begin(), colIndices.end(),
-            [&](const auto idx){ return idx >= count; }), colIndices.end());
+        std::erase_if(colIndices, [&](const auto idx){ return idx >= count; });
     }
     //else: count didn't really change, nothing to do
 

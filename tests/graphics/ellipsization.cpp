@@ -144,12 +144,12 @@ TEST_CASE("Ellipsization::HasThreeDots")
     std::string testString("some longer text");
     const int width = dc.GetTextExtent(testString).GetWidth() - 5;
 
-    CHECK( wx::utils::StartsWith(wxControl::Ellipsize(testString, dc, wxELLIPSIZE_START, width), "..."));
-    CHECK_FALSE( wx::utils::EndsWith(wxControl::Ellipsize(testString, dc, wxELLIPSIZE_START, width), "..."));
+    CHECK( wxControl::Ellipsize(testString, dc, wxELLIPSIZE_START, width).starts_with("..."));
+    CHECK_FALSE( wxControl::Ellipsize(testString, dc, wxELLIPSIZE_START, width).ends_with("..."));
 
-    CHECK( wx::utils::EndsWith(wxControl::Ellipsize(testString, dc, wxELLIPSIZE_END, width), "...") );
+    CHECK( wxControl::Ellipsize(testString, dc, wxELLIPSIZE_END, width).ends_with("...") );
 
     CHECK( wx::utils::Contains(wxControl::Ellipsize(testString, dc, wxELLIPSIZE_MIDDLE, width), "...") );
-    CHECK_FALSE( wx::utils::StartsWith(wxControl::Ellipsize(testString, dc, wxELLIPSIZE_MIDDLE, width), "...") );
-    CHECK_FALSE( wx::utils::EndsWith(wxControl::Ellipsize(testString, dc, wxELLIPSIZE_MIDDLE, width), "...") );
+    CHECK_FALSE( wxControl::Ellipsize(testString, dc, wxELLIPSIZE_MIDDLE, width).starts_with("...") );
+    CHECK_FALSE( wxControl::Ellipsize(testString, dc, wxELLIPSIZE_MIDDLE, width).ends_with("...") );
 }
