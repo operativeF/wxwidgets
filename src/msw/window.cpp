@@ -97,6 +97,7 @@
 #include "wx/display.h"
 
 #include <cstring>
+#include <numbers>
 
 #include <shellapi.h>
 #include <mmsystem.h>
@@ -6169,7 +6170,7 @@ bool wxWindowMSW::HandleRotateGesture(const wxPoint& pt,
         // corresponding positive value in a clockwise sense.
         if ( angle < 0 )
         {
-            angle += 2 * M_PI;
+            angle += 2 * std::numbers::pi;
         }
 
         // Set the angle

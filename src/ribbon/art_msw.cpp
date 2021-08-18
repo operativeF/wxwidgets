@@ -329,12 +329,12 @@ void wxRibbonMSWArtProvider::SetColourScheme(
         primary_is_gray = true;
     else
     {
-        primary_hsl.saturation = std::cos(primary_hsl.saturation * float(M_PI))
+        primary_hsl.saturation = std::cos(primary_hsl.saturation * std::numbers::pi_v<float>)
             * -0.25f + 0.5f;
     }
 
     // Map primary luminance from [0, 1] to [.23, .83]
-    primary_hsl.luminance = std::cos(primary_hsl.luminance * float(M_PI)) * -0.3f + 0.53f;
+    primary_hsl.luminance = std::cos(primary_hsl.luminance * std::numbers::pi_v<float>) * -0.3f + 0.53f;
 
     // Map secondary saturation from [0, 1] to [0.16, 0.84]
     bool secondary_is_gray = false;
@@ -342,12 +342,12 @@ void wxRibbonMSWArtProvider::SetColourScheme(
         secondary_is_gray = true;
     else
     {
-        secondary_hsl.saturation = std::cos(secondary_hsl.saturation * float(M_PI))
+        secondary_hsl.saturation = std::cos(secondary_hsl.saturation * std::numbers::pi_v<float>)
             * -0.34f + 0.5f;
     }
 
     // Map secondary luminance from [0, 1] to [0.1, 0.9]
-    secondary_hsl.luminance = std::cos(secondary_hsl.luminance * float(M_PI)) * -0.4f + 0.5f;
+    secondary_hsl.luminance = std::cos(secondary_hsl.luminance * std::numbers::pi_v<float>) * -0.4f + 0.5f;
 
 #define LikePrimary(h, s, l) \
     primary_hsl.ShiftHue(h ## f).Saturated(primary_is_gray ? 0 : s ## f) \

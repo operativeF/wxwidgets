@@ -1733,7 +1733,7 @@ void wxD2DPathData::AddArc(double x, double y, double r, double startAngle, doub
         {
             while ( endAngle <= startAngle )
             {
-                endAngle += 2.0*M_PI;
+                endAngle += 2.0 * std::numbers::pi;
             }
         }
 
@@ -1747,7 +1747,7 @@ void wxD2DPathData::AddArc(double x, double y, double r, double startAngle, doub
         {
             while ( endAngle >= startAngle )
             {
-                endAngle -= 2.0*M_PI;
+                endAngle -= 2.0 * std::numbers::pi;
             }
         }
 
@@ -1779,7 +1779,7 @@ void wxD2DPathData::AddArc(double x, double y, double r, double startAngle, doub
        D2D1_SWEEP_DIRECTION_CLOCKWISE : D2D1_SWEEP_DIRECTION_COUNTER_CLOCKWISE;
     D2D1_SIZE_F size = D2D1::SizeF((FLOAT)r, (FLOAT)r);
 
-    if ( angle >= 2.0*M_PI )
+    if ( angle >= 2.0 * std::numbers::pi)
     {
         // In addition to arc we need to draw full circle(s).
         // Remarks:
@@ -1808,7 +1808,7 @@ void wxD2DPathData::AddArc(double x, double y, double r, double startAngle, doub
             D2D1_ARC_SIZE_SMALL       // arc size
         };
 
-        int numCircles = (int)(angle / (2.0*M_PI));
+        int numCircles = (int)(angle / (2.0 * std::numbers::pi));
         numCircles = (numCircles - 1) % 2 + 1;
         for( int i = 0; i < numCircles; i++ )
         {
@@ -1817,10 +1817,10 @@ void wxD2DPathData::AddArc(double x, double y, double r, double startAngle, doub
         }
 
         // Reduce the angle to [0..2*M_PI) range.
-        angle = fmod(angle, 2.0*M_PI);
+        angle = fmod(angle, 2.0 * std::numbers::pi);
     }
 
-    D2D1_ARC_SIZE arcSize = angle > M_PI ?
+    D2D1_ARC_SIZE arcSize = angle > std::numbers::pi ?
        D2D1_ARC_SIZE_LARGE : D2D1_ARC_SIZE_SMALL;
     D2D1_POINT_2F endPoint =
        D2D1::Point2((FLOAT)(end.m_x + x), (FLOAT)(end.m_y + y));

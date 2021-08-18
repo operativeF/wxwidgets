@@ -24,6 +24,8 @@
     #include "wx/geometry.h"
 #endif
 
+#include <numbers>
+
 //-----------------------------------------------------------------------------
 // Local functions
 //-----------------------------------------------------------------------------
@@ -681,7 +683,7 @@ void wxGCDCImpl::DoDrawArc( wxCoord x1, wxCoord y1,
     if (x1 == x2 && y1 == y2)
     {
         sa = 0.0;
-        ea = 2.0 * M_PI;
+        ea = 2.0 * std::numbers::pi;
     }
     else if (radius == 0.0)
     {
@@ -690,10 +692,10 @@ void wxGCDCImpl::DoDrawArc( wxCoord x1, wxCoord y1,
     else
     {
         sa = (x1 - xc == 0) ?
-     (y1 - yc < 0) ? M_PI / 2.0 : -M_PI / 2.0 :
+     (y1 - yc < 0) ? std::numbers::pi / 2.0 : -std::numbers::pi / 2.0 :
              -atan2(double(y1 - yc), double(x1 - xc));
         ea = (x2 - xc == 0) ?
-     (y2 - yc < 0) ? M_PI / 2.0 : -M_PI / 2.0 :
+     (y2 - yc < 0) ? std::numbers::pi / 2.0 : -std::numbers::pi / 2.0 :
              -atan2(double(y2 - yc), double(x2 - xc));
     }
 

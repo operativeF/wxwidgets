@@ -12,8 +12,8 @@
 #define _WX_MATH_H_
 
 #define _USE_MATH_DEFINES
-#include <math.h>
 #include <cmath>
+#include <numbers>
 
 #include "wx/defs.h"
 
@@ -52,8 +52,8 @@ inline int wxRound(float x)
 inline int wxRound(long double x) { return wxRound(double(x)); }
 
 // Convert between degrees and radians.
-static constexpr double wxDegToRad(double deg) { return (deg * M_PI) / 180.0; }
-static constexpr double wxRadToDeg(double rad) { return (rad * 180.0) / M_PI; }
+static constexpr double wxDegToRad(double deg) { return (deg * std::numbers::pi) / 180.0; }
+static constexpr double wxRadToDeg(double rad) { return (rad * 180.0) / std::numbers::pi; }
 
 // Count trailing zeros.
 WXDLLIMPEXP_BASE unsigned int wxCTZ(wxUint32 x);

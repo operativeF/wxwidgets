@@ -81,7 +81,7 @@ wxAcceleratorTable::wxAcceleratorTable(const std::string& resource)
 }
 
 // Create from an array
-wxAcceleratorTable::wxAcceleratorTable(gsl::span<wxAcceleratorEntry> entries)
+wxAcceleratorTable::wxAcceleratorTable(std::span<wxAcceleratorEntry> entries)
 {
     m_refData = new wxAcceleratorRefData;
 

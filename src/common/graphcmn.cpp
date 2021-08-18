@@ -405,7 +405,7 @@ void wxGraphicsPathData::AddRectangle( double x, double y, double w, double h )
 void wxGraphicsPathData::AddCircle( double x, double y, double r )
 {
     MoveToPoint(x+r,y);
-    AddArc( x,y,r,0,2*M_PI,false);
+    AddArc( x,y,r,0, 2.0 * std::numbers::pi, false);
     CloseSubpath();
 }
 
@@ -434,10 +434,10 @@ void wxGraphicsPathData::AddRoundedRectangle( double x, double y, double w, doub
     else
     {
         MoveToPoint(x+w, y+h/2);
-        AddArc(x+w-radius, y+h-radius, radius, 0.0, M_PI/2.0, true);
-        AddArc(x+radius, y+h-radius, radius, M_PI/2.0, M_PI, true);
-        AddArc(x+radius, y+radius, radius, M_PI, 3.0*M_PI/2.0, true);
-        AddArc(x+w-radius, y+radius, radius, 3.0*M_PI/2.0, 2.0*M_PI, true);
+        AddArc(x+w-radius, y+h-radius, radius, 0.0, std::numbers::pi / 2.0, true);
+        AddArc(x+radius, y+h-radius, radius, std::numbers::pi / 2.0, std::numbers::pi, true);
+        AddArc(x+radius, y+radius, radius, std::numbers::pi, 3.0 * std::numbers::pi /2.0, true);
+        AddArc(x+w-radius, y+radius, radius, 3.0 * std::numbers::pi /2.0, 2.0 * std::numbers::pi, true);
         CloseSubpath();
     }
 }

@@ -1554,7 +1554,7 @@ void wxGDIPlusPathData::AddArc( double x, double y, double r, double startAngle,
         {
             while ( endAngle <= startAngle )
             {
-                endAngle += 2.0*M_PI;
+                endAngle += 2.0 * std::numbers::pi;
             }
         }
 
@@ -1568,7 +1568,7 @@ void wxGDIPlusPathData::AddArc( double x, double y, double r, double startAngle,
         {
             while ( endAngle >= startAngle )
             {
-                endAngle -= 2.0*M_PI;
+                endAngle -= 2.0 * std::numbers::pi;
             }
         }
 
@@ -1592,7 +1592,7 @@ void wxGDIPlusPathData::AddArc( double x, double y, double r, double startAngle,
     const REAL x0 = (REAL)(x-r);
     const REAL y0 = (REAL)(y-r);
     const REAL dim = (REAL)(2*r);
-    if ( angle >= 2.0*M_PI )
+    if ( angle >= 2.0 * std::numbers::pi)
     {
         // In addition to arc we need to draw full circle(s).
         // Remarks:
@@ -1604,17 +1604,17 @@ void wxGDIPlusPathData::AddArc( double x, double y, double r, double startAngle,
         // 2. With GraphicsPath.AddEllipse() we cannot
         // control the start point of the drawn circle
         // so we need to construct it from two arcs (halves).
-        int numCircles = (int)(angle / (2.0*M_PI));
+        int numCircles = (int)(angle / (2.0 * std::numbers::pi));
         numCircles = (numCircles - 1) % 2 + 1;
         for( int i = 0; i < numCircles; i++ )
         {
             m_path->AddArc(x0, y0, dim, dim,
                            wxRadToDeg(startAngle), clockwise ? 180 : -180);
             m_path->AddArc(x0, y0, dim, dim,
-                           wxRadToDeg(startAngle+M_PI), clockwise ? 180 : -180);
+                           wxRadToDeg(startAngle + std::numbers::pi), clockwise ? 180 : -180);
         }
         // We need to reduce the angle to [0..2*M_PI) range
-        angle = fmod(angle, 2.0*M_PI);
+        angle = fmod(angle, 2.0 * std::numbers::pi);
     }
 
     m_path->AddArc(x0, y0, dim, dim, wxRadToDeg(startAngle),

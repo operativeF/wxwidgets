@@ -31,6 +31,8 @@
     #include "wx/private/markupparser.h"
 #endif
 
+#include <numbers>
+
 // ----------------------------------------------------------
 // Global utilities
 // ----------------------------------------------------------
@@ -907,15 +909,15 @@ void wxSVGFileDCImpl::DoDrawArc(wxCoord x1, wxCoord y1, wxCoord x2, wxCoord y2, 
 
     double theta1 = atan2((double)(yc - y1), (double)(x1 - xc));
     if (theta1 < 0)
-        theta1 = theta1 + M_PI * 2;
+        theta1 = theta1 + std::numbers::pi * 2.0;
 
     double theta2 = atan2((double)(yc - y2), (double)(x2 - xc));
     if (theta2 < 0)
-        theta2 = theta2 + M_PI * 2;
-    if (theta2 < theta1) theta2 = theta2 + M_PI * 2;
+        theta2 = theta2 + std::numbers::pi * 2.0;
+    if (theta2 < theta1) theta2 = theta2 + std::numbers::pi * 2;
 
     int fArc;                  // flag for large or small arc 0 means less than 180 degrees
-    if (fabs(theta2 - theta1) > M_PI)
+    if (fabs(theta2 - theta1) > std::numbers::pi)
         fArc = 1; else fArc = 0;
 
     int fSweep = 0;             // flag for sweep always 0
