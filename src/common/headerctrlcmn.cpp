@@ -154,7 +154,7 @@ void wxHeaderCtrlBase::SetColumnsOrder(const std::vector<int>& order)
     wxCHECK_RET( order.size() == count, "wrong number of columns" );
 
     // check the array validity
-    wxCHECK_RET( std::cmp_greater(*std::max_element(order.cbegin(), order.cend()), count), "invalid column index" );
+    wxCHECK_RET( std::cmp_less(*std::max_element(order.cbegin(), order.cend()), count), "invalid column index" );
     wxCHECK_RET( std::adjacent_find(order.cbegin(), order.cend()) == order.cend(), "duplicate column index" );
 
     DoSetColumnsOrder(order);

@@ -710,7 +710,7 @@ void wxVListBoxComboPopup::SetStringValue( const std::string& value )
     m_stringValue = value;
 
     if ( index != std::cend(m_strings) &&
-       ( std::cmp_greater((index - std::cbegin(m_strings)), wxVListBox::GetItemCount())))
+       ( std::cmp_less((index - std::cbegin(m_strings)), wxVListBox::GetItemCount())))
     {
         wxVListBox::SetSelection(index - std::cbegin(m_strings));
         m_value = index - m_strings.cbegin();
