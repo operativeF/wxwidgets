@@ -668,7 +668,7 @@ const std::string& wxApp::GetRegisteredClassName(const std::string& name,
         {
             wxLogLastError(fmt::format("RegisterClass(%s)",
                            regClass.regname));
-            return nullptr;
+            return {};
         }
     }
 
@@ -682,7 +682,7 @@ const std::string& wxApp::GetRegisteredClassName(const std::string& name,
                        regClass.regname));
         boost::nowide::wstackstring stackRegname(regClass.regname.c_str());
         ::UnregisterClassW(stackRegname.get(), wxGetInstance());
-        return nullptr;
+        return {};
     }
 
     gs_regClassesInfo.push_back(regClass);

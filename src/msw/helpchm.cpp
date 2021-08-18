@@ -168,12 +168,12 @@ wxCHMHelpController::DoDisplayTextPopup(const std::string& text,
     popup.rcMargins.bottom = -1;
     popup.pszFont = nullptr;
 
-    return CallHtmlHelp(window, nullptr, HH_DISPLAY_TEXT_POPUP, &popup);
+    return CallHtmlHelp(window, "", HH_DISPLAY_TEXT_POPUP, &popup);
 }
 
 bool wxCHMHelpController::DisplayContextPopup(int contextId)
 {
-    return DoDisplayTextPopup(nullptr, wxGetMousePosition(), contextId,
+    return DoDisplayTextPopup("", wxGetMousePosition(), contextId,
                               GetParentWindow());
 }
 
@@ -236,7 +236,7 @@ bool wxCHMHelpController::KeywordSearch(const std::string& k,
 
 bool wxCHMHelpController::Quit()
 {
-    return CallHtmlHelp(nullptr, nullptr, HH_CLOSE_ALL);
+    return CallHtmlHelp(nullptr, "", HH_CLOSE_ALL);
 }
 
 std::string wxCHMHelpController::GetValidFilename() const
