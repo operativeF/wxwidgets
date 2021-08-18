@@ -712,7 +712,7 @@ static void RotatedWithMatrix(wxDC* dc)
     if ( dc->CanUseTransformMatrix() )
     {
         wxAffineMatrix2D m = dc->GetTransformMatrix();
-        m.Rotate(6 * M_PI / 180.0);
+        m.Rotate(6.0 * std::numbers::pi / 180.0);
         m.Translate(10, 15);
         m.Scale(2.0, 3.0);
         dc->SetTransformMatrix(m);
@@ -762,7 +762,7 @@ static void RotatedWithMatrixEx(wxDC * dc)
     if ( dc->CanUseTransformMatrix() )
     {
         wxAffineMatrix2D m = dc->GetTransformMatrix();
-        m.Rotate(6 * M_PI / 180.0);
+        m.Rotate(6.0 * std::numbers::pi / 180.0);
         m.Translate(10, 15);
         m.Scale(2.0, 3.0);
         dc->SetTransformMatrix(m);
