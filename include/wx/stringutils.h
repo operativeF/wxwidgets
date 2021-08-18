@@ -31,27 +31,6 @@ namespace wx::utils
     return count;
 }
 
-[[maybe_unused]] inline CONSTEXPR_CONTAINER size_t Erase(std::string& str, char value)
-{
-    auto it = std::remove(str.begin(), str.end(), value);
-    const auto elems_erased = std::distance(it, str.end());
-
-    str.erase(it, str.end());
-
-    return elems_erased;
-}
-
-template<typename Pred>
-[[maybe_unused]] inline CONSTEXPR_CONTAINER size_t EraseIf(std::string& str, Pred&& pred)
-{
-    auto it = std::remove_if(str.begin(), str.end(), pred);
-    auto elems_erased = std::distance(it, str.end());
-
-    str.erase(it, str.end());
-
-    return elems_erased;
-}
-
 namespace detail
 {
     // FIXME: Not valid for unicode strings.
