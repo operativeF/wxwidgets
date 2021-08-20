@@ -166,7 +166,7 @@ bool wxRadioBox::Create(wxWindow *parent,
     // buttons to include the dummy button
     m_radioButtons = new wxSubwindows(choices.size());
 
-    for ( int i = 0; i < choices.size(); i++ )
+    for ( std::size_t i{0}; const auto& choice : choices )
     {
         long styleBtn = BS_AUTORADIOBUTTON | WS_TABSTOP | WS_CHILD | WS_VISIBLE;
         if ( i == 0 )
@@ -175,7 +175,7 @@ bool wxRadioBox::Create(wxWindow *parent,
         wxWindowIDRef subid = NewControlId();
 
         HWND hwndBtn = ::CreateWindow(L"BUTTON",
-                                      boost::nowide::widen(choices[i]).c_str(),
+                                      boost::nowide::widen(choice).c_str(),
                                       styleBtn,
                                       0, 0, 0, 0,   // will be set in SetSize()
                                       GetHwndOf(parent),
@@ -197,6 +197,8 @@ bool wxRadioBox::Create(wxWindow *parent,
 
         // Also, make it a subcontrol of this control
         m_subControls.push_back(subid);
+
+        ++i;
     }
 
     // Create a dummy radio control to end the group.
@@ -293,7 +295,7 @@ bool wxRadioBox::MSWCommand(WXUINT cmd, WXWORD id_)
                 // we can get BN_CLICKED for a button which just became focused
                 // but it may not be checked, in which case we shouldn't
                 // generate a radiobox selection changed event for it
-                if ( ::SendMessage(hwndBtn, BM_GETCHECK, 0, 0) == BST_CHECKED )
+                if ( ::SendMessageW(hwndBtn, BM_GETCHECK, 0, 0) == BST_CHECKED )
                     selectedButton = i;
 
                 break;

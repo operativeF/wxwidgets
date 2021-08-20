@@ -694,8 +694,8 @@ void wxMenu::SetTitle(const std::string& label)
         if ( label.empty() )
         {
             // remove the title and the separator after it
-            if ( !RemoveMenu(hMenu, 0, MF_BYPOSITION) ||
-                 !RemoveMenu(hMenu, 0, MF_BYPOSITION) )
+            if ( !::RemoveMenu(hMenu, 0, MF_BYPOSITION) ||
+                 !::RemoveMenu(hMenu, 0, MF_BYPOSITION) )
             {
                 wxLogLastError(wxT("RemoveMenu"));
             }
@@ -703,7 +703,7 @@ void wxMenu::SetTitle(const std::string& label)
         else
         {
             // modify the title
-            if ( !ModifyMenuW(hMenu, 0u,
+            if ( !::ModifyMenuW(hMenu, 0u,
                              MF_BYPOSITION | MF_STRING,
                              (UINT_PTR)idMenuTitle, boost::nowide::widen(m_title).c_str()) )
             {
@@ -806,6 +806,7 @@ wxMenuBar::wxMenuBar(size_t count, wxMenu *menus[], const std::string titles[], 
 {
     m_eventHandler = this;
 
+    // FIXME: Indexing into two separate arrays
     for ( size_t i = 0; i < count; i++ )
     {
         // We just want to store the menu title in the menu itself, not to

@@ -34,6 +34,8 @@
     #include "wx/msw/uxtheme.h"
 #endif
 
+#include <numeric>
+
 #include <boost/nowide/convert.hpp>
 
 // ----------------------------------------------------------------------------
@@ -206,14 +208,10 @@ void wxStatusBar::MSWUpdateFieldsWidths()
 
     std::vector<int> pWidths(count);
 
-    int nCurPos = 0;
-
-    // FIXME: Algorithm
-    for ( int i = 0; i < count; i++ )
-    {
-        nCurPos += widthsAbs[i] + extraWidth;
-        pWidths[i] = nCurPos;
-    }
+    std::inclusive_scan(widthsAbs.begin(), widthsAbs.end(), pWidths.begin(), 
+        [extraWidth](const auto& totalWidth, const auto& absWidth){
+            return totalWidth + absWidth + extraWidth;
+        });
 
     // The total width of the panes passed to Windows must be equal to the
     // total width available, including the grip. Otherwise we get an extra
@@ -585,7 +583,7 @@ wxStatusBar::MSWWindowProc(WXUINT nMsg, WXWPARAM wParam, WXLPARAM lParam)
             {
                 if ( win->IsTopLevel() )
                 {
-                    SendMessage(GetHwndOf(win), WM_NCLBUTTONDOWN,
+                    ::SendMessageW(GetHwndOf(win), WM_NCLBUTTONDOWN,
                                 wParam, lParam);
 
                     return 0;
