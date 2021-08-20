@@ -102,9 +102,8 @@ size_t wxGetAvailableDrives(wxArrayString &paths, wxArrayString &names, std::vec
     //       but unfortunately wxFSVolumeBase is not implemented everywhere
     const std::vector<wxString> as = wxFSVolumeBase::GetVolumes();
 
-    for (size_t i = 0; i < as.size(); i++)
+    for (const auto& path : as)
     {
-        wxString path = as[i];
         wxFSVolume vol(path);
         int imageId;
         switch (vol.GetKind())

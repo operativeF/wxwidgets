@@ -38,6 +38,8 @@
 
 #include "wx/renderer.h"
 
+#include <numeric>
+
 #ifdef __WXMAC__
     #include "wx/osx/private.h"
 #endif
@@ -615,17 +617,14 @@ void wxGenericTreeItem::DeleteChildren(wxGenericTreeCtrl *tree)
 
 size_t wxGenericTreeItem::GetChildrenCount(bool recursively) const
 {
-    size_t count = m_children.size();
+    size_t initialCount = m_children.size();
     if ( !recursively )
-        return count;
+        return initialCount;
 
-    size_t total = count;
-    for (size_t n = 0; n < count; ++n)
-    {
-        total += m_children[n]->GetChildrenCount();
-    }
-
-    return total;
+    return std::reduce(m_children.begin(), m_children.end(), initialCount,
+        [](const auto& cnt, const auto& child){
+            return cnt + child->GetChildrenCount();
+        });
 }
 
 void wxGenericTreeItem::GetSize( int &x, int &y,
@@ -863,9 +862,10 @@ void wxGenericTreeItem::RecursiveResetSize()
 {
     m_width = 0;
 
-    const size_t count = m_children.size();
-    for (size_t i = 0; i < count; i++ )
-        m_children[i]->RecursiveResetSize();
+    std::for_each(m_children.begin(), m_children.end(),
+        [](auto& child){
+            child->RecursiveResetSize();
+        });
 }
 
 void wxGenericTreeItem::RecursiveResetTextSize()
@@ -873,9 +873,10 @@ void wxGenericTreeItem::RecursiveResetTextSize()
     m_width = 0;
     m_widthText = -1;
 
-    const size_t count = m_children.size();
-    for (size_t i = 0; i < count; i++ )
-        m_children[i]->RecursiveResetTextSize();
+    std::for_each(m_children.begin(), m_children.end(),
+        [](auto& child){
+            child->RecursiveResetTextSize();
+        });
 }
 
 // -----------------------------------------------------------------------------

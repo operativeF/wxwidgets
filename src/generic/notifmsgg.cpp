@@ -309,16 +309,8 @@ void wxNotificationMessageWindow::OnActionButtonClicked(wxCommandEvent& event)
 
 void wxNotificationMessageWindow::AddVisibleNotification(wxNotificationMessageWindow* notif)
 {
-    bool found = false;
-    for ( std::vector<wxNotificationMessageWindow*>::iterator it = ms_visibleNotifications.begin();
-        it != ms_visibleNotifications.end(); ++it )
-    {
-        if ( *it == notif )
-        {
-            found = true;
-            break;
-        }
-    }
+    bool found = std::any_of(ms_visibleNotifications.begin(), ms_visibleNotifications.end(),
+                             [notif](auto* it){ return it == notif; });
 
     if ( !found )
         ms_visibleNotifications.push_back(notif);
@@ -328,15 +320,8 @@ void wxNotificationMessageWindow::AddVisibleNotification(wxNotificationMessageWi
 
 void wxNotificationMessageWindow::RemoveVisibleNotification(wxNotificationMessageWindow* notif)
 {
-    for ( std::vector<wxNotificationMessageWindow*>::iterator it = ms_visibleNotifications.begin();
-        it != ms_visibleNotifications.end(); ++it )
-    {
-        if ( *it == notif )
-        {
-            ms_visibleNotifications.erase(it);
-            break;
-        }
-    }
+    std::erase_if(ms_visibleNotifications, [notif](const auto& otherNotif){ return otherNotif == notif; });
+
     ResizeAndFitVisibleNotifications();
 }
 

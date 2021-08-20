@@ -27,6 +27,8 @@
     #include "wx/gtk/private.h"
 #endif
 
+#include <numeric>
+
 // we only have to do it here when we use wxStatusBarGeneric in addition to the
 // standard wxStatusBar class, if wxStatusBarGeneric is the same as
 // wxStatusBar, then the corresponding wxIMPLEMENT_DYNAMIC_CLASS is already in
@@ -329,9 +331,8 @@ bool wxStatusBarGeneric::GetFieldRect(int n, wxRect& rect) const
     if (m_widthsAbs.empty())
         return false;
 
-    rect.x = 0;
-    for ( int i = 0; i < n; i++ )
-        rect.x += m_widthsAbs[i];
+    rect.x = std::reduce(m_widthsAbs.begin(), m_widthsAbs.end());
+
     rect.x += m_borderX;
 
     rect.y = m_borderY;

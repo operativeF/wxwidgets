@@ -937,10 +937,10 @@ void wxNotebook::OnSize(wxSizeEvent& event)
     int width = rc.right - rc.left;
     int height = rc.bottom - rc.top;
 
-    for ( size_t nPage = 0; nPage < m_pages.size(); nPage++ ) {
-        wxNotebookPage *pPage = m_pages[nPage];
-        pPage->SetSize(rc.left, rc.top, width, height);
-    }
+    std::for_each(m_pages.begin(), m_pages.end(),
+        [width, height, rc](auto* page){
+            page->SetSize(rc.left, rc.top, width, height);
+        });
 
 
     // unless we had already repainted everything, we now need to refresh

@@ -117,7 +117,7 @@ private:
     wxPenQuality  m_quality;
     wxBitmap      m_stipple;
     int           m_nbDash;
-    wxDash *      m_dash;
+    wxDash *      m_dash; // FIXME: Use array
     wxColour      m_colour;
     HPEN          m_hPen;
 };

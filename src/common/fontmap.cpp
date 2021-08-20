@@ -190,9 +190,11 @@ wxFontMapper::CharsetToEncoding(const std::string& charset, bool interactive)
 
         std::vector<std::string> encodingNamesTranslated(count);
 
-        for ( size_t i = 0; i < count; i++ )
+        // FIXME: iteration over two separate containers.
+        for (size_t i{0}; auto& encodingNameTranslated : encodingNamesTranslated)
         {
-            encodingNamesTranslated[i] = GetEncodingDescription(GetEncoding(i));
+            encodingNameTranslated = GetEncodingDescription(GetEncoding(i));
+            ++i;
         }
 
         // the parent window

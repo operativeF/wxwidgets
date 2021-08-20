@@ -593,6 +593,7 @@ wxDisplayImpl *wxDisplayFactoryMSW::CreateDisplay(unsigned n)
 }
 
 // helper for GetFromPoint() and GetFromWindow()
+// FIXME: use iterators.
 int wxDisplayFactoryMSW::FindDisplayFromHMONITOR(HMONITOR hmon) const
 {
     if ( hmon )

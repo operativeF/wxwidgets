@@ -45,6 +45,7 @@ wxPaletteRefData::wxPaletteRefData(const wxPaletteRefData& palette)
 {
     m_count = palette.m_count;
     m_entries = new wxPaletteEntry[m_count];
+
     for ( int i = 0; i < m_count; i++ )
         m_entries[i] = palette.m_entries[i];
 }

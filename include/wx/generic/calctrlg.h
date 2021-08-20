@@ -30,13 +30,13 @@ public:
     // FIXME: This is just the other constructor without creation. Necessary?
     wxGenericCalendarCtrl()
     { 
-
         wxDateTime::WeekDay wd;
         for ( wd = wxDateTime::Sun; wd < wxDateTime::Inv_WeekDay; wxNextWDay(wd) )
         {
             m_weekdays[wd] = wxDateTime::GetWeekDayName(wd, wxDateTime::Name_Abbr);
         }
 
+        // FIXME: unique_ptr
         for ( auto* attr : m_attrs )
         {
             attr = nullptr;

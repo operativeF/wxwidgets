@@ -27,6 +27,8 @@
 #include "wx/html/forcelnk.h"
 FORCE_WXHTML_MODULES()
 
+#include <algorithm>
+#include <array>
 #include <charconv>
 
 // ----------------------------------------------------------------------------
@@ -62,18 +64,12 @@ private:
 public:
     wxHtmlListBoxCache()
     {
-        for ( size_t n = 0; n < SIZE; n++ )
-        {
-            m_items[n] = (size_t)-1;
-            m_cells[n] = nullptr;
-        }
-
-        m_next = 0;
+        std::fill(m_items.begin(), m_items.end(), static_cast<size_t>(-1));
     }
 
     ~wxHtmlListBoxCache()
     {
-        for ( size_t n = 0; n < SIZE; n++ )
+        for ( size_t n = 0; n < m_cachemax; n++ )
         {
             delete m_cells[n];
         }
@@ -82,7 +78,7 @@ public:
     // completely invalidate the cache
     void Clear()
     {
-        for ( size_t n = 0; n < SIZE; n++ )
+        for ( size_t n = 0; n < m_cachemax; n++ )
         {
             InvalidateItem(n);
         }
@@ -91,7 +87,7 @@ public:
     // return the cached cell for this index or NULL if none
     wxHtmlCell *Get(size_t item) const
     {
-        for ( size_t n = 0; n < SIZE; n++ )
+        for ( size_t n = 0; n < m_cachemax; n++ )
         {
             if ( m_items[n] == item )
                 return m_cells[n];
@@ -111,14 +107,14 @@ public:
         m_items[m_next] = item;
 
         // advance to the next item wrapping around if there are no more
-        if ( ++m_next == SIZE )
+        if ( ++m_next == m_cachemax )
             m_next = 0;
     }
 
     // forget the cached value of the item(s) between the given ones (inclusive)
     void InvalidateRange(size_t from, size_t to)
     {
-        for ( size_t n = 0; n < SIZE; n++ )
+        for ( size_t n = 0; n < m_cachemax; n++ )
         {
             if ( m_items[n] >= from && m_items[n] <= to )
             {
@@ -129,16 +125,16 @@ public:
 
 private:
     // the max number of the items we cache
-    enum { SIZE = 50 };
+    static constexpr size_t m_cachemax{50};
 
     // the index of the LRU (oldest) cell
-    size_t m_next;
+    size_t m_next{0};
 
     // the parsed representation of the cached item or NULL
-    wxHtmlCell *m_cells[SIZE];
+    wxHtmlCell *m_cells[m_cachemax]{};
 
     // the index of the currently cached item (only valid if m_cells != NULL)
-    size_t m_items[SIZE];
+    std::array<size_t, m_cachemax> m_items;
 };
 
 // ----------------------------------------------------------------------------

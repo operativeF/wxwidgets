@@ -234,10 +234,8 @@ void wxTipWindowView::Adjust(std::string_view text, wxCoord maxLength)
     wxCoord widthMax{0};
 
     bool breakLine = false;
-    for ( std::string_view::iterator p = text.begin(); p != text.end(); ++p )
+    for ( const auto& ch : text )
     {
-        auto ch = *p;
-
         if ( ch == '\n' || ch == '\0' )
         {
             dc.GetTextExtent(current, &width, &height);
@@ -248,12 +246,6 @@ void wxTipWindowView::Adjust(std::string_view text, wxCoord maxLength)
                 m_heightLine = height;
 
             m_textLines.push_back(current);
-
-            if ( p == text.end() )
-            {
-                // end of text
-                break;
-            }
 
             current.clear();
             breakLine = false;
@@ -310,9 +302,9 @@ void wxTipWindowView::OnPaint(wxPaintEvent& WXUNUSED(event))
     pt.x = TEXT_MARGIN_X;
     pt.y = TEXT_MARGIN_Y;
     const size_t count = m_textLines.size();
-    for ( size_t n = 0; n < count; n++ )
+    for ( const std::string_view& line : m_textLines )
     {
-        dc.DrawText(m_textLines[n], pt);
+        dc.DrawText(line, pt);
 
         pt.y += m_heightLine;
     }

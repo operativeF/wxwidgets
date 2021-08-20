@@ -2591,7 +2591,7 @@ void wxGDIPlusRenderer::Load()
         if ( !privateFonts.empty() )
         {
             gs_privateFonts = new Gdiplus::PrivateFontCollection();
-            
+
             for ( const auto& fname : privateFonts )
             {
                 gs_privateFonts->AddFontFile(boost::nowide::widen(fname).c_str());
