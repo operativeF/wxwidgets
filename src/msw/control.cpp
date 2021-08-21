@@ -653,41 +653,4 @@ int wxControlWithItems::MSWInsertOrAppendItem(unsigned pos,
     return n;
 }
 
-// ---------------------------------------------------------------------------
-// global functions
-// ---------------------------------------------------------------------------
-
-// this is used in radiobox.cpp and slider95.cpp and should be removed as soon
-// as it is not needed there any more!
-//
-// Call this repeatedly for several wnds to find the overall size
-// of the widget.
-// Call it initially with wxDefaultCoord for all values in rect.
-// Keep calling for other widgets, and rect will be modified
-// to calculate largest bounding rectangle.
-void wxFindMaxSize(WXHWND wnd, RECT *rect)
-{
-    int left = rect->left;
-    int right = rect->right;
-    int top = rect->top;
-    int bottom = rect->bottom;
-
-    GetWindowRect((HWND) wnd, rect);
-
-    if (left < 0)
-        return;
-
-    if (left < rect->left)
-        rect->left = left;
-
-    if (right > rect->right)
-        rect->right = right;
-
-    if (top < rect->top)
-        rect->top = top;
-
-    if (bottom > rect->bottom)
-        rect->bottom = bottom;
-}
-
 #endif // wxUSE_CONTROLS

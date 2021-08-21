@@ -1006,9 +1006,6 @@ inline void wxSetWindowFont(HWND hwnd, const wxFont& font)
 WXDLLIMPEXP_CORE void wxSliderEvent(WXHWND control, WXWORD wParam, WXWORD pos);
 WXDLLIMPEXP_CORE void wxScrollBarEvent(WXHWND hbar, WXWORD wParam, WXWORD pos);
 
-// Find maximum size of window/rectangle
-extern WXDLLIMPEXP_CORE void wxFindMaxSize(WXHWND hwnd, RECT *rect);
-
 // Safely get the window text (i.e. without using fixed size buffer)
 extern WXDLLIMPEXP_CORE std::string wxGetWindowText(WXHWND hWnd);
 

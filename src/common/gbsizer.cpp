@@ -16,6 +16,8 @@
 
 #include "wx/gbsizer.h"
 
+#include <numeric>
+
 //---------------------------------------------------------------------------
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxGBSizerItem, wxSizerItem);
@@ -459,16 +461,18 @@ wxSize wxGridBagSizer::CalcMin()
     AdjustForOverflow();
     AdjustForFlexDirection();
 
-    // Now traverse the heights and widths arrays calcing the totals, including gaps
-    int width = 0;
-    m_cols = m_colWidths.size();
-    for (idx=0; idx < m_cols; idx++)
-        width += m_colWidths[idx] + ( idx == m_cols-1 ? 0 : m_hgap );
+    const auto gapSizing = []<typename T>(const std::vector<T>& cellExtents, T gap) -> T
+    {
+        auto totalCellExt = std::reduce(cellExtents.begin(), cellExtents.end(), T{},
+            [gap](const auto& rollingExt, const auto& cellExtent) -> T {
+                return rollingExt + cellExtent + gap;
+            });
 
-    int height = 0;
-    m_rows = m_rowHeights.size();
-    for (idx=0; idx < m_rows; idx++)
-        height += m_rowHeights[idx] + ( idx == m_rows-1 ? 0 : m_vgap );
+        return totalCellExt - gap; // Remove excess gap from the end.
+    };
+
+    auto width = gapSizing(m_colWidths, m_hgap);
+    auto height = gapSizing(m_rowHeights, m_vgap);
 
     return wxSize(width, height);
 }
