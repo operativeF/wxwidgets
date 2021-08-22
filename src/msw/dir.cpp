@@ -88,7 +88,7 @@ FindNext(FIND_DATA fd, const wxString& filter, FIND_STRUCT *finddata)
 {
     for ( ;; )
     {
-        if ( !::FindNextFile(fd, finddata) )
+        if ( !::FindNextFileW(fd, finddata) )
             return false;
 
         // If we did find something, check that it really matches.

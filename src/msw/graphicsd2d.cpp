@@ -54,7 +54,8 @@
     #pragma warning(pop)
 #endif
 
-#include <cfloat> // for FLT_MAX, FLT_MIN
+#include <algorithm>
+#include <limits>
 
 #ifndef WX_PRECOMP
     #include "wx/dc.h"
@@ -1310,7 +1311,7 @@ public :
     // This closes the geometry sink, ensuring all the figures are stored inside
     // the ID2D1PathGeometry. Calling this method is required before any draw operation
     // involving a path.
-    void Flush();
+    void Flush() noexcept;
 
     wxGraphicsObjectRefData* Clone() const override;
 
@@ -1428,10 +1429,10 @@ wxD2DPathData::wxD2DPathData(wxGraphicsRenderer* renderer, ID2D1Factory* d2dFact
 wxD2DPathData::~wxD2DPathData()
 {
     Flush();
-    for( size_t i = 0; i < m_pTransformedGeometries.size(); i++ )
-    {
-        m_pTransformedGeometries[i]->Release();
-    }
+
+    std::for_each(m_pTransformedGeometries.begin(),
+                  m_pTransformedGeometries.end(),
+                  [](auto& transformedGeometry){ transformedGeometry->Release(); });
 }
 
 ID2D1PathGeometry* wxD2DPathData::GetPathGeometry()
@@ -1479,7 +1480,7 @@ wxD2DPathData::wxGraphicsObjectRefData* wxD2DPathData::Clone() const
     return newPathData;
 }
 
-void wxD2DPathData::Flush()
+void wxD2DPathData::Flush() noexcept
 {
     if (m_geometrySink != nullptr)
     {
@@ -3327,8 +3328,8 @@ wxD2DFontData::wxD2DFontData(wxGraphicsRenderer* renderer, const wxFont& font, c
 
 wxCOMPtr<IDWriteTextLayout> wxD2DFontData::CreateTextLayout(std::string_view text) const
 {
-    static constexpr FLOAT MAX_WIDTH = FLT_MAX;
-    static constexpr FLOAT MAX_HEIGHT = FLT_MAX;
+    static constexpr FLOAT MAX_WIDTH = std::numeric_limits<float>::max();
+    static constexpr FLOAT MAX_HEIGHT = std::numeric_limits<float>::max();
 
     HRESULT hr;
 
@@ -4259,7 +4260,7 @@ void wxD2DContext::GetClipBox(double* x, double* y, double* w, double* h)
                 D2D1_GEOMETRY_RELATION geomRel;
                 hr = clipGeometry->CompareWithGeometry(ld.geometry, ld.transformMatrix, &geomRel);
                 wxCHECK_HRESULT_RET(hr);
-                if ( area <= FLT_MIN || geomRel == D2D1_GEOMETRY_RELATION_DISJOINT )
+                if ( area <= std::numeric_limits<float>::min() || geomRel == D2D1_GEOMETRY_RELATION_DISJOINT )
                 {
                     wxCOMPtr<ID2D1RectangleGeometry> nullGeometry;
                     hr = m_direct2dFactory->CreateRectangleGeometry(
@@ -4301,7 +4302,7 @@ void wxD2DContext::GetClipBox(double* x, double* y, double* w, double* h)
         FLOAT clipArea;
         hr = clipGeometry->ComputeArea(currTransform, &clipArea);
         wxCHECK_HRESULT_RET(hr);
-        if ( clipArea <= FLT_MIN )
+        if ( clipArea <= std::numeric_limits<float>::min() )
         {
             bounds.left = bounds.top = bounds.right = bounds.bottom = 0.0F;
         }

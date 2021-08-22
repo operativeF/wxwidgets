@@ -66,36 +66,36 @@ void wxAppProgressIndicator::SetValue(int value)
 {
     wxASSERT_MSG( value <= m_maxValue, wxT("invalid progress value") );
 
-    for ( auto* button : m_taskBarButtons )
-    {
-        button->SetProgressValue(value);
-    }
+    std::for_each(m_taskBarButtons.begin(), m_taskBarButtons.end(),
+            [value](auto& button){
+                button->SetProgressValue(value);
+            });
 }
 
 void wxAppProgressIndicator::SetRange(int range)
 {
     m_maxValue = range;
 
-    for ( auto* button : m_taskBarButtons )
-    {
-        button->SetProgressRange(range);
-    }
+    std::for_each(m_taskBarButtons.begin(), m_taskBarButtons.end(),
+            [range](auto& button){
+                button->SetProgressRange(range);
+            });
 }
 
 void wxAppProgressIndicator::Pulse()
 {
-    for ( auto* button : m_taskBarButtons )
-    {
-        button->PulseProgress();
-    }
+    std::for_each(m_taskBarButtons.begin(), m_taskBarButtons.end(),
+        [](auto& button){
+            button->PulseProgress();
+        });
 }
 
 void wxAppProgressIndicator::Reset()
 {
-    for ( auto* button : m_taskBarButtons )
-    {
-        button->SetProgressState(wxTaskBarButtonState::NoProgress);
-    }
+    std::for_each(m_taskBarButtons.begin(), m_taskBarButtons.end(),
+        [](auto& button){
+            button->SetProgressState(wxTaskBarButtonState::NoProgress);
+        });
 }
 
 #endif // wxUSE_TASKBARBUTTON

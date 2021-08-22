@@ -1497,7 +1497,7 @@ public:
             // reset it to the size of the buffer before each call.
             m_mii.cch = WXSIZEOF(m_buf);
 
-            if ( !::GetMenuItemInfo(m_hmenu, m_pos, TRUE, &m_mii) )
+            if ( !::GetMenuItemInfoW(m_hmenu, m_pos, TRUE, &m_mii) )
             {
                 wxLogLastError(wxString::Format("GetMenuItemInfo(%d)", m_pos));
                 continue;

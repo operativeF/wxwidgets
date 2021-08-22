@@ -18,6 +18,8 @@
 
 #include "wx/bookctrl.h"
 
+#include <numeric>
+
 // ============================================================================
 // implementation
 // ============================================================================
@@ -113,12 +115,14 @@ wxSize wxBookCtrlBase::DoGetBestSize() const
     }
     else
     {
-        // iterate over all pages, get the largest width and height
-        for ( const auto* pPage : m_pages )
-        {
-            if ( pPage )
-                bestSize.IncTo(pPage->GetBestSize());
-        }
+        auto largestPage = std::transform_reduce(m_pages.begin(), m_pages.end(), wxSize{},
+            [](auto&& szA, auto&& szB) -> wxSize
+            {
+                return { std::max(szA.x, szB.x), std::max(szA.y, szB.y) };
+            },
+            [](const auto& page) { return page->GetBestSize(); });
+
+        bestSize = largestPage;
     }
 
     // convert display area to window area, adding the size necessary for the
