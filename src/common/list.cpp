@@ -19,11 +19,6 @@
 // For compilers that support precompilation, includes "wx.h".
 #include "wx/wxprec.h"
 
-
-#include <cstdarg>
-#include <cstdlib>
-#include <cstring>
-
 #ifndef WX_PRECOMP
     #include "wx/list.h"
     #include "wx/crt.h"

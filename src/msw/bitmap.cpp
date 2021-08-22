@@ -15,8 +15,6 @@
 #include "wx/bitmap.h"
 
 #ifndef WX_PRECOMP
-    #include <cstdio>
-
     #include "wx/list.h"
     #include "wx/utils.h"
     #include "wx/app.h"
@@ -25,6 +23,9 @@
     #include "wx/icon.h"
     #include "wx/log.h"
     #include "wx/image.h"
+
+    #include <memory>
+    #include <string>
 #endif
 
 

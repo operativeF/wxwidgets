@@ -26,8 +26,6 @@
 
 #include "wx/apptrait.h"
 #include "wx/msgout.h"
-#include <cstdarg>
-#include <cstdio>
 
 #if defined(__WINDOWS__)
     #include "wx/msw/private.h"

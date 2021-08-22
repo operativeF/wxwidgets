@@ -41,6 +41,8 @@
 
 #include <array>
 #include <cwctype>
+#include <string>
+#include <string_view>
 
 // ----------------------------------------------------------------------------
 // constants

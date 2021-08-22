@@ -69,11 +69,10 @@
 #include "wx/math.h"
 
 #include <algorithm>
-#include <cctype>
-#include <cerrno>
-#include <cstdio>
-#include <cstdlib>
-#include <cstring>
+#include <ctime>
+#include <string>
+#include <utility>
+#include <vector>
 
 #include "wx/vector.h"
 
@@ -84,8 +83,6 @@
     #include "wx/statusbr.h"
     #include "wx/private/launchbrowser.h"
 #endif // wxUSE_GUI
-
-#include <ctime>
 
 #ifdef __WXMAC__
     #include "wx/osx/private.h"

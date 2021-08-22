@@ -30,9 +30,9 @@
 #include "wx/apptrait.h"
 #include "wx/file.h"
 
-#include <cctype>
-#include <cstdlib>
 #include <limits>
+#include <string>
+#include <vector>
 
 // ============================================================================
 // implementation

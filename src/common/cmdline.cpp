@@ -24,8 +24,8 @@
 
 #if wxUSE_CMDLINE_PARSER
 
-#include <cctype>
 #include <clocale>             // for LC_ALL
+#include <vector>
 
 #include "wx/datetime.h"
 #include "wx/msgout.h"

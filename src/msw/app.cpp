@@ -55,8 +55,7 @@
     #include <ole2.h>
 #endif
 
-#include <cctype>
-#include <cstring>
+#include <string>
 
 #include "wx/msw/missing.h"
 

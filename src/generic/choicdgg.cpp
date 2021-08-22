@@ -24,12 +24,14 @@
     #include "wx/sizer.h"
     #include "wx/stattext.h"
     #include "wx/utils.h"
-    #include <cstdio>
 #endif
 
 #include "wx/statline.h"
 #include "wx/settings.h"
 #include "wx/generic/choicdgg.h"
+
+#include <string>
+#include <vector>
 
 // ----------------------------------------------------------------------------
 // constants

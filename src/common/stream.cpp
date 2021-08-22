@@ -24,7 +24,8 @@
 #include "wx/datstrm.h"
 #include "wx/scopeguard.h"
 #include "wx/textfile.h"
-#include <cctype>
+
+#include <string>
 
 // ----------------------------------------------------------------------------
 // constants

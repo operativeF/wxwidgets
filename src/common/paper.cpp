@@ -26,8 +26,6 @@
 
 #include "wx/paper.h"
 
-#include <cstdlib>
-
 #ifdef __WXMSW__
     #ifndef __WIN32__
         #include <print.h>

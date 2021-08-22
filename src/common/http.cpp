@@ -14,9 +14,6 @@
 
 #if wxUSE_PROTOCOL_HTTP
 
-#include <cstdio>
-#include <cstdlib>
-
 #ifndef WX_PRECOMP
     #include "wx/string.h"
 #endif

@@ -24,8 +24,8 @@
 
 #include "png.h"
 
-// For memcpy
-#include <cstring>
+#include <cstring> // For memcpy
+#include <tuple>
 
 // ----------------------------------------------------------------------------
 // local functions

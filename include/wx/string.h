@@ -27,11 +27,6 @@
     #include <ctype.h>
 #endif
 
-#include <cstdarg>
-#include <cstdio>
-#include <cstdlib>
-#include <cstring>
-
 #include "wx/wxcrtbase.h"   // for wxChar, wxStrlen() etc.
 #include "wx/strvararg.h"
 #include "wx/buffer.h"      // for wxCharBuffer
@@ -39,6 +34,10 @@
 #include "wx/stringimpl.h"
 #include "wx/stringops.h"
 #include "wx/unichar.h"
+
+#include <iterator>
+#include <string>
+#include <utility>
 
 // by default we cache the mapping of the positions in UTF-8 string to the byte
 // offset as this results in noticeable performance improvements for loops over

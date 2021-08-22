@@ -29,10 +29,8 @@
 
 #include "wx/tokenzr.h"
 
-#include <cctype>
-#include <cerrno>
-#include <cstdio>
-#include <cstdlib>
+#include <algorithm>
+#include <vector>
 
 #if defined(__WXMAC__)
     #include  "wx/osx/private.h"  // includes mac headers

@@ -27,12 +27,8 @@
 #include "wx/thread.h"
 #include "wx/apptrait.h"
 #include "wx/evtloop.h"
-#include <vector>
-
 
 #include "wx/msw/private.h"
-
-#include <cctype>
 
 #if !defined(__GNUWIN32__)
     #include <direct.h>
@@ -51,18 +47,14 @@
     #include <shellapi.h>
 #endif
 
-#include <cerrno>
-#include <cstdarg>
-#include <cstdio>
-#include <cstdlib>
-#include <cstring>
-
 #if wxUSE_IPC
     #include "wx/dde.h"         // for WX_DDE hack in wxExecute
 #endif // wxUSE_IPC
 
 #include "wx/msw/private/hiddenwin.h"
 #include "wx/msw/private/event.h"
+
+#include <vector>
 
 // ----------------------------------------------------------------------------
 // constants

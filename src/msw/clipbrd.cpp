@@ -33,9 +33,6 @@
     #include "wx/metafile.h"
 #endif
 
-
-#include <cstring>
-
 #include "wx/msw/private.h"
 #include "wx/msw/ole/oleutils.h"
 

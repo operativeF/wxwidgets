@@ -23,12 +23,6 @@
 
 #include "wx/strconv.h"
 
-#include <cerrno>
-
-#include <cctype>
-#include <cstdlib>
-#include <cstring>
-
 #if defined(__WIN32__)
     #include "wx/msw/private.h"
     #include "wx/msw/missing.h"
@@ -48,6 +42,7 @@
 #include "wx/osx/core/private/strconv_cf.h"
 #endif //def __DARWIN__
 
+#include <unordered_map>
 
 constexpr wxChar TRACE_STRCONV[] = wxT("strconv");
 

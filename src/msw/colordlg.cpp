@@ -23,7 +23,6 @@
     #include "wx/math.h"
     #include "wx/msw/wrapcdlg.h"
     #include "wx/utils.h"
-    #include <cstdio>
 #endif
 
 #include "wx/scopeguard.h"
@@ -31,7 +30,7 @@
 #include "wx/msw/private.h"
 #include "wx/msw/private/dpiaware.h"
 
-#include <cstdlib>
+#include <string>
 
 #include <boost/nowide/convert.hpp>
 

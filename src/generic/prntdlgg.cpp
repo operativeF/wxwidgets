@@ -46,7 +46,9 @@
 #include "wx/tokenzr.h"
 #include "wx/imaglist.h"
 
-#include <cstdlib>
+#include <array>
+#include <string>
+#include <vector>
 
 #include <fmt/core.h>
 

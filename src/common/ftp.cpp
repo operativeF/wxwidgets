@@ -26,7 +26,6 @@
     #include "wx/string.h"
     #include "wx/utils.h"
     #include "wx/wxcrtvararg.h"
-    #include <cstdlib>
 #endif // WX_PRECOMP
 
 #include "wx/sckaddr.h"

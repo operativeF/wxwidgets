@@ -35,8 +35,6 @@
 
 #include "wx/thread.h"
 
-#include <cctype>
-
 #ifdef __WINDOWS__
     #include <clocale>
     #include <winnls.h>

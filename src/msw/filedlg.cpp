@@ -28,8 +28,6 @@
     #include "wx/math.h"
 #endif
 
-#include <cstdlib>
-
 #include "wx/dynlib.h"
 #include "wx/filename.h"
 
@@ -37,6 +35,11 @@
 #include "wx/tokenzr.h"
 #include "wx/modalhook.h"
 #include "wx/msw/private/dpiaware.h"
+
+#include <memory>
+#include <string>
+#include <tuple>
+#include <vector>
 
 // ----------------------------------------------------------------------------
 // constants

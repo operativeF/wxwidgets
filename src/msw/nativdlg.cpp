@@ -13,9 +13,9 @@
 
 
 #ifndef WX_PRECOMP
-    #include <cstdio>
-
     #include "wx/wx.h"
+
+    #include <string>
 #endif
 
 #include "wx/spinbutt.h"

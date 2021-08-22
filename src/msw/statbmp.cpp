@@ -29,7 +29,7 @@
 
 #include "wx/sysopt.h"
 
-#include <cstdio>
+#include <string>
 
 // ---------------------------------------------------------------------------
 // macros

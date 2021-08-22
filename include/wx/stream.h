@@ -18,7 +18,6 @@
 #include "wx/filefn.h"  // for wxFileOffset, wxInvalidOffset and wxSeekMode
 #include "wx/object.h"
 #include "wx/string.h"
-#include <cstdio>
 
 class WXDLLIMPEXP_FWD_BASE wxStreamBase;
 class WXDLLIMPEXP_FWD_BASE wxInputStream;

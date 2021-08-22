@@ -28,8 +28,6 @@
 #include "wx/fontutil.h"
 #include "wx/msw/private/dpiaware.h"
 
-#include <cstdlib>
-
 #include <boost/nowide/convert.hpp>
 
 // ----------------------------------------------------------------------------

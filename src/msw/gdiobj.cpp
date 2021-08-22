@@ -18,7 +18,6 @@
     #include "wx/app.h"
     #include "wx/list.h"
     #include "wx/utils.h"
-    #include <cstdio>
 #endif
 
 #include "wx/msw/private.h"

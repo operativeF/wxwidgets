@@ -66,8 +66,6 @@
 #include "wx/time.h"
 #include "wx/tokenzr.h"
 
-#include <cctype>
-
 #ifdef __WINDOWS__
     #include <clocale>
     #include <winnls.h>

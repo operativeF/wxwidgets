@@ -29,10 +29,6 @@
     #include "wx/module.h"
 #endif // WX_PRECOMP
 
-// standard headers
-#include <cctype>
-#include <cstdlib>
-
 #include "wx/dir.h"
 #include "wx/file.h"
 #include "wx/filename.h"
@@ -54,6 +50,10 @@
     #include <CoreFoundation/CFBundle.h>
     #include <CoreFoundation/CFLocale.h>
 #endif
+
+#include <algorithm>
+#include <memory>
+#include <vector>
 
 // ----------------------------------------------------------------------------
 // simple types

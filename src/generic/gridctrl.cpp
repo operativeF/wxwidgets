@@ -32,7 +32,6 @@
 #include "wx/private/window.h"
 
 #include <charconv>
-
 #include <fmt/core.h>
 
 // ----------------------------------------------------------------------------

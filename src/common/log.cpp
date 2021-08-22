@@ -32,10 +32,7 @@
 #include "wx/private/threadinfo.h"
 #include "wx/crt.h"
 
-// other standard headers
-#include <cerrno>
-#include <cstring>
-#include <cstdlib>
+#include <algorithm>
 #include <iostream>
 #include <vector>
 

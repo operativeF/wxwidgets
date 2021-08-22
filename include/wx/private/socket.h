@@ -43,8 +43,6 @@
 #include "wx/socket.h"
 #include "wx/private/sckaddr.h"
 
-#include <cstddef>
-
 /*
    Including sys/types.h under Cygwin results in the warnings about "fd_set
    having been defined in sys/types.h" when winsock.h is included later and

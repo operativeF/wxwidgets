@@ -32,9 +32,6 @@
 #include "wx/quantize.h"
 #include "wx/scopedarray.h"
 
-#include <cstdio>
-#include <cstdlib>
-
 #include <memory.h>
 
 #include "wx/msw/dib.h"

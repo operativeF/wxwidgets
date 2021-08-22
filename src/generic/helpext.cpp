@@ -21,14 +21,15 @@
     #include "wx/msgdlg.h"
     #include "wx/choicdlg.h"
     #include "wx/log.h"
+
+    #include <string>
+    #include <vector>
 #endif
 
 #include "wx/filename.h"
 #include "wx/textfile.h"
 #include "wx/generic/helpext.h"
 
-#include <cctype>
-#include <cstdio>
 #include <sys/stat.h>
 
 #if !defined(__WINDOWS__)

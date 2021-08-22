@@ -46,8 +46,6 @@
 #include "wx/msw/private.h"
 #include "wx/msw/winundef.h"
 
-#include <cstdlib>
-
 #include <sys/types.h>
 
 #if wxUSE_RICHEDIT
@@ -77,6 +75,8 @@
 #include "wx/msw/missing.h"
 
 #include <boost/nowide/convert.hpp>
+
+#include <string>
 
 #ifndef CFM_BACKCOLOR
     #define CFM_BACKCOLOR 0x04000000

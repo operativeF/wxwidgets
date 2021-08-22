@@ -23,8 +23,9 @@
 #include "wx/scopedarray.h"
 #include "wx/scopedptr.h"
 #include "wx/scopeguard.h"
-#include <cstdlib>
-#include <cstring>
+
+#include <tuple>
+#include <vector>
 
 enum
 {

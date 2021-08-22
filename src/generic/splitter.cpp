@@ -37,7 +37,8 @@
 
 #include "wx/renderer.h"
 
-#include <cstdlib>
+#include <limits>
+#include <string>
 
 wxDEFINE_EVENT( wxEVT_SPLITTER_SASH_POS_CHANGED, wxSplitterEvent );
 wxDEFINE_EVENT( wxEVT_SPLITTER_SASH_POS_CHANGING, wxSplitterEvent );

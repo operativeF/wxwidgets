@@ -25,7 +25,6 @@
     #include "wx/log.h"
     #include "wx/string.h"
     #include "wx/utils.h"
-    #include <cstdio>
 #endif
 
 #include "wx/prntbase.h"

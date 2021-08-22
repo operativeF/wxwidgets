@@ -25,7 +25,8 @@
     #include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
     #include "wx/settings.h"
     #include "wx/window.h"
-    #include <cstdio>
+
+    #include <string>
 #endif
 
 #include "wx/msw/private.h"

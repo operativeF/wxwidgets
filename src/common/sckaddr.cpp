@@ -21,9 +21,7 @@
     #include "wx/intl.h"
     #include "wx/thread.h"
 
-    #include <cctype>
-    #include <cstdio>
-    #include <cstdlib>
+    #include <tuple>
 
     #include <memory.h>
 #endif // !WX_PRECOMP
@@ -32,8 +30,6 @@
 #include "wx/sckaddr.h"
 #include "wx/private/socket.h"
 #include "wx/private/sckaddr.h"
-
-#include <cerrno>
 
 #if defined(__UNIX__) && !defined(__WINDOWS__)
     #include <netdb.h>

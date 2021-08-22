@@ -27,7 +27,7 @@
     #include "wx/settings.h"
 #endif
 
-#include <cstdio>
+#include <string>
 
 #define __WX_COMPILING_MSGDLGG_CPP__ 1
 #include "wx/msgdlg.h"

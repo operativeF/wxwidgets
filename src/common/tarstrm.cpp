@@ -26,8 +26,6 @@
 #include "wx/filename.h"
 #include "wx/thread.h"
 
-#include <cctype>
-
 #ifdef __UNIX__
 #include <pwd.h>
 #include <grp.h>

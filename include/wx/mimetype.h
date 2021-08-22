@@ -22,10 +22,8 @@
 
 // the things we really need
 #include "wx/string.h"
-#include "wx/dynarray.h"
-#include "wx/arrstr.h"
 
-#include <cstdarg>
+#include <vector>
 
 // fwd decls
 class WXDLLIMPEXP_FWD_BASE wxIconLocation;

@@ -30,8 +30,6 @@
 #include "wx/progdlg.h"
 #include "wx/paper.h"
 
-#include <cstdlib>
-
 wxIMPLEMENT_DYNAMIC_CLASS(wxPostScriptPrinter, wxPrinterBase);
 wxIMPLEMENT_CLASS(wxPostScriptPrintPreview, wxPrintPreviewBase);
 

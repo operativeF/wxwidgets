@@ -55,8 +55,9 @@
 #include "wx/generic/grideditors.h"
 #include "wx/generic/private/grid.h"
 
-// Required for wxIs... functions
-#include <cctype>
+#include <algorithm>
+#include <string>
+#include <vector>
 
 WX_DECLARE_HASH_SET_WITH_DECL_PTR(int, wxIntegerHash, wxIntegerEqual,
                                   wxGridFixedIndicesSet, class WXDLLIMPEXP_CORE);

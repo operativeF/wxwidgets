@@ -40,7 +40,7 @@
     #include <unistd.h>
 #endif
 
-#include <cstdio>
+#include <string>
 
 // ----------------------------------------------------------------------------
 // Forward declaration

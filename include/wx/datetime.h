@@ -16,8 +16,6 @@
 
 #if wxUSE_DATETIME
 
-#include <ctime>
-
 #include "wx/longlong.h"
 #include "wx/anystr.h"
 
@@ -29,6 +27,9 @@ struct _SYSTEMTIME;
 #endif
 
 #include "wx/dynarray.h"
+
+#include <ctime>
+#include <vector>
 
 // not all c-runtimes are based on 1/1/1970 being (time_t) 0
 // set this to the corresponding value in seconds 1/1/1970 has on your

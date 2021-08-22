@@ -30,9 +30,6 @@
 #include "wx/iconloc.h"
 #include "wx/confbase.h"
 
-// other standard headers
-#include <cctype>
-
 // implementation classes:
 #if defined(__WINDOWS__)
     #include "wx/msw/mimetype.h"

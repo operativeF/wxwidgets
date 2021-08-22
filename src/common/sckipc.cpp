@@ -36,10 +36,6 @@
     #include "wx/module.h"
 #endif
 
-#include <cerrno>
-#include <cstdio>
-#include <cstdlib>
-
 #include "wx/socket.h"
 
 // --------------------------------------------------------------------------

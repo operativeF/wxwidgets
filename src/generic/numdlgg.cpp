@@ -15,8 +15,6 @@
 #if wxUSE_NUMBERDLG
 
 #ifndef WX_PRECOMP
-    #include <cstdio>
-
     #include "wx/utils.h"
     #include "wx/dialog.h"
     #include "wx/button.h"
@@ -25,6 +23,8 @@
     #include "wx/intl.h"
     #include "wx/sizer.h"
     #include "wx/wxcrtvararg.h"
+
+    #include <string>
 #endif
 
 #if wxUSE_STATLINE
