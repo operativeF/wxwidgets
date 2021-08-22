@@ -317,7 +317,7 @@ wxSemaphoreInternal::wxSemaphoreInternal(int initialcount, int maxcount)
     if ( maxcount == 0 )
     {
         // make it practically infinite
-        maxcount = INT_MAX;
+        maxcount = std::numeric_limits<int>::max();
     }
 
     m_semaphore = ::CreateSemaphore

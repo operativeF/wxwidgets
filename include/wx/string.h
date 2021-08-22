@@ -27,7 +27,6 @@
     #include <ctype.h>
 #endif
 
-#include <climits>
 #include <cstdarg>
 #include <cstdio>
 #include <cstdlib>

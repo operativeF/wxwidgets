@@ -29,16 +29,10 @@
 
 #include "wx/tokenzr.h"
 
-// there are just too many of those...
-#ifdef __VISUALC__
-    #pragma warning(disable:4706)   // assignment within conditional expression
-#endif // VC++
-
 #include <cctype>
 #include <cerrno>
 #include <cstdio>
 #include <cstdlib>
-#include <cstring>
 
 #if defined(__WXMAC__)
     #include  "wx/osx/private.h"  // includes mac headers

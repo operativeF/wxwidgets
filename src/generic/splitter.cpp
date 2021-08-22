@@ -365,7 +365,7 @@ void wxSplitterWindow::OnMouseEvent(wxMouseEvent& event)
             DoSetSashPosition(posSashNew);
 
             // in live mode, the new position is the actual sash position, clear requested position!
-            m_requestedSashPosition = INT_MAX;
+            m_requestedSashPosition = std::numeric_limits<int>::max();
             m_needUpdating = true;
         }
     }
@@ -431,7 +431,7 @@ void wxSplitterWindow::OnSize(wxSizeEvent& event)
     // Notice that we shouldn't do this if the sash position requested by user
     // couldn't be set yet as it would never be taken into account at all if we
     // modified it before this happens.
-    if ( m_windowTwo && m_requestedSashPosition == INT_MAX )
+    if ( m_windowTwo && m_requestedSashPosition == std::numeric_limits<int>::max() )
     {
         int size = m_splitMode == wxSPLIT_VERTICAL ? curSize.x : curSize.y;
 
@@ -633,7 +633,7 @@ void wxSplitterWindow::SetSashPositionAndNotify(int sashPos)
     // old position if the user attempted to move the sash after invalid
     // (e.g. smaller than minsize) sash position was requested using
     // SetSashPosition():
-    m_requestedSashPosition = INT_MAX;
+    m_requestedSashPosition = std::numeric_limits<int>::max();
 
     // note that we must send the event in any case, i.e. even if the sash
     // position hasn't changed and DoSetSashPosition() returns false because we
@@ -652,7 +652,7 @@ void wxSplitterWindow::SetSashPositionAndNotify(int sashPos)
 void wxSplitterWindow::SizeWindows()
 {
     // check if we have delayed setting the real sash position
-    if ( m_requestedSashPosition != INT_MAX )
+    if ( m_requestedSashPosition != std::numeric_limits<int>::max() )
     {
         int newSashPosition = ConvertSashPosition(m_requestedSashPosition);
         if ( newSashPosition != m_sashPosition )
@@ -664,7 +664,7 @@ void wxSplitterWindow::SizeWindows()
             && newSashPosition >= m_sashPosition - GetBorderSize() )
         {
             // don't update it any more
-            m_requestedSashPosition = INT_MAX;
+            m_requestedSashPosition = std::numeric_limits<int>::max();
         }
     }
 
@@ -843,7 +843,7 @@ bool wxSplitterWindow::ReplaceWindow(wxWindow *winOld, wxWindow *winNew)
 void wxSplitterWindow::SetMinimumPaneSize(int min)
 {
     m_minimumPaneSize = min;
-    int pos = m_requestedSashPosition != INT_MAX ? m_requestedSashPosition : m_sashPosition;
+    int pos = m_requestedSashPosition != std::numeric_limits<int>::max() ? m_requestedSashPosition : m_sashPosition;
     SetSashPosition(pos); // re-check limits
 }
 

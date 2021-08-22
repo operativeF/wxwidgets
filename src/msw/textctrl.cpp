@@ -47,7 +47,6 @@
 #include "wx/msw/winundef.h"
 
 #include <cstdlib>
-#include <cstring>
 
 #include <sys/types.h>
 

@@ -3665,7 +3665,7 @@ wxRect wxDataViewMainWindow::GetLinesRect( unsigned int rowFrom, unsigned int ro
     // Don't calculate exact width of the row, because GetEndOfLastCol() is
     // expensive to call, and controls with rows not spanning entire width rare.
     // It is more efficient to e.g. repaint empty parts of the window needlessly.
-    rect.width = INT_MAX;
+    rect.width = std::numeric_limits<int>::max();
     if (rowFrom == rowTo)
         rect.height = GetLineHeight(rowFrom);
     else

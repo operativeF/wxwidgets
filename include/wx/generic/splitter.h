@@ -288,7 +288,7 @@ protected:
     int         m_sashPosition{0}; // Number of pixels from left or top
     double      m_sashGravity{0.0};
     wxSize      m_lastSize;
-    int         m_requestedSashPosition{INT_MAX};
+    int         m_requestedSashPosition{std::numeric_limits<int>::max()};
     int         m_sashPositionCurrent; // while dragging
     wxPoint     m_ptStart;      // mouse position when dragging started
     int         m_sashStart{0};    // sash position when dragging started

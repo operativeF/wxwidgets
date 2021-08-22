@@ -1555,7 +1555,7 @@ void wxGenericCalendarCtrl::OnMonthChange(wxCommandEvent& event)
 void wxGenericCalendarCtrl::HandleYearChange(wxCommandEvent& event)
 {
     const int year = (int)event.GetInt();
-    if ( year == INT_MIN )
+    if ( year == std::numeric_limits<int>::min() )
     {
         // invalid year in the spin control, ignore it
         return;

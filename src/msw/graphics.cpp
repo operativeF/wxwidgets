@@ -48,7 +48,6 @@
 #if wxUSE_COMMON_DIALOGS
 #include <commdlg.h>
 #endif
-#include <cfloat> // for FLT_MAX, FLT_MIN
 
 #include <boost/nowide/convert.hpp>
 #include <boost/nowide/stackstring.hpp>
@@ -56,10 +55,10 @@
 // Define REAL_MAX, REAL_MIN
 // if it isn't done in GDI+ header(s).
 #ifndef REAL_MAX
-    #define REAL_MAX    FLT_MAX
+    #define REAL_MAX    std::numeric_limits<float>::max()
 #endif // REAL_MAX
 #ifndef REAL_MIN
-    #define REAL_MIN    FLT_MIN
+    #define REAL_MIN    std::numeric_limits<float>::min()
 #endif // REAL_MIN
 
 // Define colour componenets positions in ARGB structure

@@ -21,7 +21,7 @@ namespace
 // helper local classes
 // ----------------------------------------------------------------------------
 
-// This object changes the item proportion to INT_MAX in its ctor and restores
+// This object changes the item proportion to std::numeric_limits<int>::max() in its ctor and restores
 // it back in the dtor.
 class wxPropChanger : public wxObject
 {
@@ -32,7 +32,7 @@ public:
           m_propOld(item.GetProportion())
     {
         // ensure that this item expands more than all the other ones
-        item.SetProportion(INT_MAX);
+        item.SetProportion(std::numeric_limits<int>::max());
     }
 
     ~wxPropChanger() override
@@ -209,7 +209,7 @@ void wxWrapSizer::CalcMinFittingSize(const wxSize& szBoundary)
     {
         // Try making it a bit more narrow
         bool done = false;
-        if ( m_minItemMajor != INT_MAX && m_maxSizeMajor > 0 )
+        if ( m_minItemMajor != std::numeric_limits<int>::max() && m_maxSizeMajor > 0 )
         {
             // We try to present a lower min value by removing an item in
             // the major direction (and preserving current minor min size).
@@ -485,7 +485,7 @@ void wxWrapSizer::RepositionChildren(const wxSize& WXUNUSED(minSize))
     int maxRowMinor = 0;
 
     m_minSizeMinor = 0;
-    m_minItemMajor = INT_MAX;
+    m_minItemMajor = std::numeric_limits<int>::max();
     m_maxSizeMajor = 0;
 
     // We need at least one row

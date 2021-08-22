@@ -390,7 +390,7 @@ void wxHtmlListBox::OnDrawItem(wxDC& dc, const wxRect& rect, size_t n) const
              GetSelectedTextBgColour(*wxWHITE).IsOk()) )
     {
         wxHtmlSelection htmlSel;
-        htmlSel.Set(wxPoint(0,0), cell, wxPoint(INT_MAX, INT_MAX), cell);
+        htmlSel.Set(wxPoint(0,0), cell, wxPoint(std::numeric_limits<int>::max(), std::numeric_limits<int>::max()), cell);
         htmlRendInfo.SetSelection(&htmlSel);
         htmlRendInfo.SetStyle(m_htmlRendStyle);
         htmlRendInfo.GetState().SetSelectionState(wxHTML_SEL_IN);
@@ -403,7 +403,7 @@ void wxHtmlListBox::OnDrawItem(wxDC& dc, const wxRect& rect, size_t n) const
     // entire cell
     cell->Draw(dc,
                rect.x + CELL_BORDER, rect.y + CELL_BORDER,
-               0, INT_MAX, htmlRendInfo);
+               0, std::numeric_limits<int>::max(), htmlRendInfo);
 }
 
 wxCoord wxHtmlListBox::OnMeasureItem(size_t n) const

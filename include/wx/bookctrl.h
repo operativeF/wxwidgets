@@ -85,6 +85,10 @@ public:
                 long style = 0,
                 const std::string& name = {});
 
+    virtual const std::vector<wxWindow*>& GetPages() const
+    {
+        return m_pages;
+    }
 
     // get number of pages in the dialog
     virtual size_t GetPageCount() const { return m_pages.size(); }

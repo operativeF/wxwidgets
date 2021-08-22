@@ -152,7 +152,7 @@ protected:
 
     // the value of the control before the latest change (which might not have
     // changed anything in fact -- this is why we need this field)
-    int m_oldValue{INT_MIN};
+    int m_oldValue{std::numeric_limits<int>::min()};
 
     // the data for the "buddy" text ctrl
     WXHWND     m_hwndBuddy{nullptr};

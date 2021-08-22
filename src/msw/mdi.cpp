@@ -36,7 +36,6 @@
 #include "wx/msw/private/winstyle.h"
 
 #include <algorithm>
-#include <cstring>
 
 #include <boost/nowide/convert.hpp>
 #include <boost/nowide/stackstring.hpp>

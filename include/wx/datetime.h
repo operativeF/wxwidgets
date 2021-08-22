@@ -18,8 +18,6 @@
 
 #include <ctime>
 
-#include <climits>             // for INT_MIN
-
 #include "wx/longlong.h"
 #include "wx/anystr.h"
 

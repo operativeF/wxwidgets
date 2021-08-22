@@ -2005,11 +2005,11 @@ void wxPostScriptDCImpl::DoGetTextExtent(const wxString& string,
     /  updated: 14.05.95 */
 
     /* these static vars are for storing the state between calls */
-    static int lastFamily= INT_MIN;
-    static int lastSize= INT_MIN;
-    static int lastStyle= INT_MIN;
-    static int lastWeight= INT_MIN;
-    static int lastDescender = INT_MIN;
+    static int lastFamily= std::numeric_limits<int>::min();
+    static int lastSize= std::numeric_limits<int>::min();
+    static int lastStyle= std::numeric_limits<int>::min();
+    static int lastWeight= std::numeric_limits<int>::min();
+    static int lastDescender = std::numeric_limits<int>::min();
     static int lastWidths[256]; /* widths of the characters */
 
     double UnderlinePosition = 0.0;
@@ -2131,7 +2131,7 @@ void wxPostScriptDCImpl::DoGetTextExtent(const wxString& string,
         else
         {
             /* init the widths array */
-            for(int i=0; i<256; i++) lastWidths[i] = INT_MIN;
+            for(int i=0; i<256; i++) lastWidths[i] = std::numeric_limits<int>::min();
             /* some variables for holding parts of a line */
             char cString[10], semiString[10], WXString[10];
             char descString[20];
@@ -2251,7 +2251,7 @@ void wxPostScriptDCImpl::DoGetTextExtent(const wxString& string,
     }
     for(; *p; p++)
     {
-        if(lastWidths[*p]== INT_MIN)
+        if(lastWidths[*p]== std::numeric_limits<int>::min())
         {
             wxLogDebug(wxT("GetTextExtent: undefined width for character '%c' (%d)"), *p,*p);
             sum += lastWidths[(unsigned char)' ']; /* assume space */
@@ -2263,7 +2263,7 @@ void wxPostScriptDCImpl::DoGetTextExtent(const wxString& string,
     }
 
     /* add descender to height (it is usually a negative value) */
-    //if (lastDescender != INT_MIN)
+    //if (lastDescender != std::numeric_limits<int>::min())
     //{
     //    height += (wxCoord)(((-lastDescender)/1000.0F) * Size); /* MATTHEW: forgot scale */
     //}
@@ -2279,7 +2279,7 @@ void wxPostScriptDCImpl::DoGetTextExtent(const wxString& string,
     /* return other parameters */
     if (descent)
     {
-        if(lastDescender!=INT_MIN)
+        if(lastDescender != std::numeric_limits<int>::min())
         {
             *descent = (wxCoord)(((-lastDescender)/1000.0F) * fontSize); /* MATTHEW: forgot scale */
         }

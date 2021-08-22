@@ -561,7 +561,7 @@ void wxGridBagSizer::AdjustForOverflow()
 
     for (row=0; row<(int)m_rowHeights.size(); row++)
     {
-        int rowExtra=INT_MAX;
+        int rowExtra = std::numeric_limits<int>::max();
         const int rowHeight = m_rowHeights[row];
         for (col=0; col<(int)m_colWidths.size(); col++)
         {
@@ -597,14 +597,14 @@ void wxGridBagSizer::AdjustForOverflow()
                 rowExtra = wxMin(rowExtra, rowHeight - itemHeight);
             }
         }
-        if ( rowExtra && rowExtra != INT_MAX )
+        if ( rowExtra && rowExtra != std::numeric_limits<int>::max() )
             m_rowHeights[row] -= rowExtra;
     }
 
     // Now do the same thing for columns
     for (col=0; col<(int)m_colWidths.size(); col++)
     {
-        int colExtra=INT_MAX;
+        int colExtra = std::numeric_limits<int>::max();
         const int colWidth = m_colWidths[col];
         for (row=0; row<(int)m_rowHeights.size(); row++)
         {
@@ -635,7 +635,7 @@ void wxGridBagSizer::AdjustForOverflow()
                 colExtra = wxMin(colExtra, colWidth - itemWidth);
             }
         }
-        if ( colExtra && colExtra != INT_MAX )
+        if ( colExtra && colExtra != std::numeric_limits<int>::max() )
             m_colWidths[col] -= colExtra;
     }
 

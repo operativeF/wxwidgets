@@ -27,7 +27,6 @@
 #include "wx/paper.h"
 
 #include <cstdlib>
-#include <cstring>
 
 #ifdef __WXMSW__
     #ifndef __WIN32__

@@ -28,7 +28,6 @@
 #endif
 
 #include <cstdio>
-#include <cstring>
 
 #define __WX_COMPILING_MSGDLGG_CPP__ 1
 #include "wx/msgdlg.h"

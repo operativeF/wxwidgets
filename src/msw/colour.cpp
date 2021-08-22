@@ -20,8 +20,6 @@
 
 #include "wx/msw/private.h"
 
-#include <cstring>
-
 // Colour
 
 void wxColour::Init()

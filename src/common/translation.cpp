@@ -1335,7 +1335,7 @@ wxMsgCatalog *wxMsgCatalog::CreateFromData(const wxScopedCharBuffer& data,
 const wxString *wxMsgCatalog::GetString(const wxString& str, unsigned n, const wxString& context) const
 {
     int index = 0;
-    if (n != UINT_MAX)
+    if (n != std::numeric_limits<unsigned int>::max())
     {
         index = m_pluralFormsCalculator->evaluate(n);
     }
@@ -1608,7 +1608,7 @@ const wxString *wxTranslations::GetTranslatedString(const wxString& origString,
                                                     const wxString& domain,
                                                     const wxString& context) const
 {
-    return GetTranslatedString(origString, UINT_MAX, domain, context);
+    return GetTranslatedString(origString, std::numeric_limits<unsigned int>::max(), domain, context);
 }
 
 const wxString *wxTranslations::GetTranslatedString(const wxString& origString,
@@ -1647,7 +1647,7 @@ const wxString *wxTranslations::GetTranslatedString(const wxString& origString,
             TRACE_I18N,
             "string \"%s\"%s not found in %s%slocale '%s'.",
             origString,
-            (n != UINT_MAX ? wxString::Format("[%ld]", (long)n) : wxString()),
+            (n != std::numeric_limits<unsigned int>::max() ? wxString::Format("[%ld]", (long)n) : wxString()),
             (!domain.empty() ? wxString::Format("domain '%s' ", domain) : wxString()),
             (!context.empty() ? wxString::Format("context '%s' ", context) : wxString()),
             m_lang
@@ -1673,14 +1673,14 @@ wxString wxTranslations::GetHeaderValue(const wxString& header,
         if ( pMsgCat == nullptr )
             return wxEmptyString;
 
-        trans = pMsgCat->GetString(wxEmptyString, UINT_MAX);
+        trans = pMsgCat->GetString(wxEmptyString, std::numeric_limits<unsigned int>::max());
     }
     else
     {
         // search in all domains
         for ( wxMsgCatalog* pMsgCat = m_pMsgCat; pMsgCat != nullptr; pMsgCat = pMsgCat->m_pNext )
         {
-            trans = pMsgCat->GetString(wxEmptyString, UINT_MAX);
+            trans = pMsgCat->GetString(wxEmptyString, std::numeric_limits<unsigned int>::max());
             if ( trans != nullptr )   // take the first found
                 break;
         }

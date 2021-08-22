@@ -31,9 +31,8 @@
 #include "wx/file.h"
 
 #include <cctype>
-#include <cfloat>      // for FLT_MAX
-#include <climits>     // for INT_MAX
 #include <cstdlib>
+#include <limits>
 
 // ============================================================================
 // implementation
@@ -144,7 +143,7 @@ bool wxConfigBase::Read(const wxString& key, int *pi) const
 {
     long l = *pi;
     const bool r = Read(key, &l);
-    wxASSERT_MSG( l < INT_MAX, wxT("int overflow in wxConfig::Read") );
+    wxASSERT_MSG( l < std::numeric_limits<int>::max(), wxT("int overflow in wxConfig::Read") );
     *pi = (int)l;
     return r;
 }
@@ -153,7 +152,7 @@ bool wxConfigBase::Read(const wxString& key, int *pi, int defVal) const
 {
     long l = *pi;
     const bool r = Read(key, &l, defVal);
-    wxASSERT_MSG( l < INT_MAX, wxT("int overflow in wxConfig::Read") );
+    wxASSERT_MSG( l < std::numeric_limits<int>::max(), wxT("int overflow in wxConfig::Read") );
     *pi = (int)l;
     return r;
 }

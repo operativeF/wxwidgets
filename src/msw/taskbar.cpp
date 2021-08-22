@@ -29,8 +29,6 @@
 #include "wx/platinfo.h"
 #include "wx/taskbar.h"
 
-#include <cstring>
-
 #include <boost/nowide/convert.hpp>
 
 #ifndef NIN_BALLOONTIMEOUT

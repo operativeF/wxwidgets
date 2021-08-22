@@ -96,7 +96,6 @@
 #include "wx/dynlib.h"
 #include "wx/display.h"
 
-#include <cstring>
 #include <numbers>
 
 #include <shellapi.h>

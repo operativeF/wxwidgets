@@ -24,7 +24,6 @@
 #endif
 
 #include <cctype>
-#include <cstring>
 
 wxIMPLEMENT_CLASS(wxURL, wxURI);
 

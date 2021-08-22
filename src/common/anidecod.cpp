@@ -19,7 +19,6 @@
 #endif
 
 #include <cstdlib>
-#include <cstring>
 
 //---------------------------------------------------------------------------
 // wxANIFrameInfo

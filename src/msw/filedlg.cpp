@@ -29,7 +29,6 @@
 #endif
 
 #include <cstdlib>
-#include <cstring>
 
 #include "wx/dynlib.h"
 #include "wx/filename.h"

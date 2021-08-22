@@ -236,7 +236,7 @@ protected:
     {
         double n;
         if ( (wxSscanf(wxTextCtrl::GetValue(), wxT("%lf"), &n) != 1) )
-            n = INT_MIN;
+            n = std::numeric_limits<int>::min();
 
         return n;
     }

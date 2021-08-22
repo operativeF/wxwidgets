@@ -39,8 +39,8 @@
 #include "wx/filefn.h"
 #include "wx/wfstream.h"
 
-// For memcpy
-#include <cstring>
+#include <cstring> // For memcpy
+
 // For JPEG library error handling
 #include <csetjmp>
 

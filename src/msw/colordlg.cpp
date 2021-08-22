@@ -32,7 +32,6 @@
 #include "wx/msw/private/dpiaware.h"
 
 #include <cstdlib>
-#include <cstring>
 
 #include <boost/nowide/convert.hpp>
 

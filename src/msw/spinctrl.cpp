@@ -37,7 +37,7 @@
 
 #include <algorithm>
 #include <charconv>
-#include <climits>         // for INT_MIN
+#include <limits>
 
 #include <boost/nowide/convert.hpp>
 
@@ -490,7 +490,7 @@ int wxSpinCtrl::GetValue() const
 
     auto [p, ec] = std::from_chars(val.data(), val.data() + val.size(), n);
     if ( ec != std::errc() )
-        n = INT_MIN;
+        n = std::numeric_limits<int>::min();
 
     return std::clamp(n, m_min, m_max);
 }

@@ -47,7 +47,6 @@
 #include "wx/imaglist.h"
 
 #include <cstdlib>
-#include <cstring>
 
 #include <fmt/core.h>
 

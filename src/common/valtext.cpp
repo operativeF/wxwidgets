@@ -28,7 +28,6 @@
 
 #include <cctype>
 #include <cstdlib>
-#include <cstring>
 
 #include "wx/combo.h"
 

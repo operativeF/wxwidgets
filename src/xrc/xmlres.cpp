@@ -44,7 +44,6 @@
 #include "wx/config.h"
 #include "wx/platinfo.h"
 
-#include <climits>
 #include <clocale>
 
 #include <boost/nowide/convert.hpp>

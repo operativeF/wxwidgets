@@ -22,8 +22,6 @@
 #include "wx/printdlg.h"
 #include <vector>
 
-#include <climits> // INT_MAX
-
 //--------------------------------------------------------------------------------
 // wxHtmlDCRenderer
 //                  This class is capable of rendering HTML into specified

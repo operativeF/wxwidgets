@@ -26,8 +26,6 @@
 #include "wx/msw/private.h"
 #endif
 
-#include <cstring>
-
 static HWND GetSuitableHWND(wxWinHelpController* controller)
 {
     if (controller->GetParentWindow())

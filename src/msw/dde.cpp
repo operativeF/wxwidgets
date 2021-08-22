@@ -28,7 +28,6 @@
 
 #include "wx/msw/private.h"
 
-#include <cstring>
 #include <ddeml.h>
 
 // ----------------------------------------------------------------------------

@@ -35,8 +35,6 @@
     #include "wx/rawbmp.h"
 #endif
 
-#include <cstring>
-
 #include "wx/msw/private/dc.h"
 #include "wx/private/textmeasure.h"
 

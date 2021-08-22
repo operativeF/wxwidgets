@@ -35,8 +35,7 @@
 #include "wx/anidecod.h"
 #include "wx/private/icondir.h"
 
-// For memcpy
-#include <cstring>
+#include <cstring> // For memcpy
 
 // ----------------------------------------------------------------------------
 // private functions

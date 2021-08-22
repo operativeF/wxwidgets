@@ -33,9 +33,6 @@
 #include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
 #include "wx/private/menuradio.h" // for wxMenuRadioItemsData
 
-// other standard headers
-#include <cstring>
-
 #include "wx/stringutils.h"
 
 #include "wx/dynlib.h"

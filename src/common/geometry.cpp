@@ -20,8 +20,6 @@
     #include "wx/log.h"
 #endif
 
-#include <cstring>
-
 #include "wx/datstrm.h"
 
 //

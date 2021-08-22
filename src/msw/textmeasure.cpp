@@ -152,7 +152,7 @@ std::vector<int> wxTextMeasure::DoGetPartialTextExtents(std::string_view text, d
     if ( !::GetTextExtentExPointW(m_hdc,
                                  boost::nowide::widen(text).c_str(), // string to check
                                  text.length(),
-                                 INT_MAX,      // max allowable width
+                                 std::numeric_limits<int>::max(),      // max allowable width
                                  &fit,         // [out] count of chars
                                                // that will fit
                                  &widths[0],   // array to fill

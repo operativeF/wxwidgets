@@ -333,7 +333,7 @@ int wxCRT_VprintfW( const wchar_t *format, va_list argptr )
 int wxCRT_VsprintfW( wchar_t *str, const wchar_t *format, va_list argptr )
 {
     // same as for wxSprintf()
-    return vswprintf(str, INT_MAX / 4, format, argptr);
+    return vswprintf(str, std::numeric_limits<int>::max() / 4, format, argptr);
 }
 #endif
 
