@@ -106,7 +106,7 @@ static toff_t wxFileOffsetToTIFF(wxFileOffset ofs)
     if ( ofs == wxInvalidOffset )
         return (toff_t)-1;
 
-    toff_t tofs = wx_truncate_cast(toff_t, ofs);
+    toff_t tofs = static_cast<toff_t>(ofs);
     wxCHECK_MSG( (wxFileOffset)tofs == ofs, (toff_t)-1,
                     wxT("TIFF library doesn't support large files") );
 

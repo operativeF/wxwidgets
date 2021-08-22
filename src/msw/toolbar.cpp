@@ -53,6 +53,7 @@
 #endif
 
 #include <boost/nowide/convert.hpp>
+#include <gsl/gsl>
 
 // ----------------------------------------------------------------------------
 // constants
@@ -820,8 +821,7 @@ bool wxToolBar::Realize()
         // otherwise we'll install a new one
         HBITMAP oldToolBarBitmap = (HBITMAP)m_hBitmap;
 
-        const wxCoord totalBitmapWidth  = m_defaultWidth *
-                                          wx_truncate_cast(wxCoord, nTools),
+        const wxCoord totalBitmapWidth  = m_defaultWidth * gsl::narrow_cast<wxCoord>(nTools),
                       totalBitmapHeight = m_defaultHeight;
 
         // Create a bitmap and copy all the tool bitmaps into it
