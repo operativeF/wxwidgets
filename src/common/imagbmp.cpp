@@ -444,10 +444,10 @@ bool wxBMPHandler::SaveDib(wxImage *image,
 
 #if wxUSE_PALETTE
                 buffer[x/8] = (std::uint8_t)(
-                                           ((std::uint8_t)palette->GetPixel(data[pixel], data[pixel+1], data[pixel+2]) << 7) |
-                    (((x+1) >= width) ? 0 : ((std::uint8_t)palette->GetPixel(data[pixel+3], data[pixel+4], data[pixel+5]) << 6)) |
-                    (((x+2) >= width) ? 0 : ((std::uint8_t)palette->GetPixel(data[pixel+6], data[pixel+7], data[pixel+8]) << 5)) |
-                    (((x+3) >= width) ? 0 : ((std::uint8_t)palette->GetPixel(data[pixel+9], data[pixel+10], data[pixel+11]) << 4)) |
+                                            ((std::uint8_t)palette->GetPixel(data[pixel],    data[pixel+1],  data[pixel+2]) << 7) |
+                    (((x+1) >= width) ? 0 : ((std::uint8_t)palette->GetPixel(data[pixel+3],  data[pixel+4],  data[pixel+5]) << 6)) |
+                    (((x+2) >= width) ? 0 : ((std::uint8_t)palette->GetPixel(data[pixel+6],  data[pixel+7],  data[pixel+8]) << 5)) |
+                    (((x+3) >= width) ? 0 : ((std::uint8_t)palette->GetPixel(data[pixel+9],  data[pixel+10], data[pixel+11]) << 4)) |
                     (((x+4) >= width) ? 0 : ((std::uint8_t)palette->GetPixel(data[pixel+12], data[pixel+13], data[pixel+14]) << 3)) |
                     (((x+5) >= width) ? 0 : ((std::uint8_t)palette->GetPixel(data[pixel+15], data[pixel+16], data[pixel+17]) << 2)) |
                     (((x+6) >= width) ? 0 : ((std::uint8_t)palette->GetPixel(data[pixel+18], data[pixel+19], data[pixel+20]) << 1)) |
@@ -465,7 +465,7 @@ bool wxBMPHandler::SaveDib(wxImage *image,
                 pixel = 3*(y*width + x);
 
                 buffer[x/8] = (std::uint8_t)(
-                                          (((std::uint8_t)(data[pixel]   /128.)) << 7) |
+                                           (((std::uint8_t)(data[pixel]   /128.)) << 7) |
                    (((x+1) >= width) ? 0 : (((std::uint8_t)(data[pixel+3] /128.)) << 6)) |
                    (((x+2) >= width) ? 0 : (((std::uint8_t)(data[pixel+6] /128.)) << 5)) |
                    (((x+3) >= width) ? 0 : (((std::uint8_t)(data[pixel+9] /128.)) << 4)) |
@@ -1307,10 +1307,9 @@ bool wxICOHandler::SaveFile(wxImage *image,
             if ( (r != 0) || (g != 0) || (b != 0) )
             {
                 // Go round and apply black to the masked bits:
-                int i, j;
-                for (i = 0; i < mask.GetWidth(); i++)
+                for (int i = 0; i < mask.GetWidth(); i++)
                 {
-                    for (j = 0; j < mask.GetHeight(); j++)
+                    for (int j = 0; j < mask.GetHeight(); j++)
                     {
                         if ((r == mask.GetRed(i, j)) &&
                             (g == mask.GetGreen(i, j))&&
@@ -1324,9 +1323,9 @@ bool wxICOHandler::SaveFile(wxImage *image,
         {
             // just make a black mask all over:
             mask = image->Copy();
-            int i, j;
-            for (i = 0; i < mask.GetWidth(); i++)
-                for (j = 0; j < mask.GetHeight(); j++)
+
+            for (int i = 0; i < mask.GetWidth(); i++)
+                for (int j = 0; j < mask.GetHeight(); j++)
                     mask.SetRGB(i, j, 0, 0, 0 );
         }
         // Set the formats for image and mask
