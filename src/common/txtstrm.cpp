@@ -182,7 +182,7 @@ bool wxTextInputStream::EatEOL(const wxChar &c)
     return false;
 }
 
-wxUint64 wxTextInputStream::Read64(int base)
+std::uint64_t wxTextInputStream::Read64(int base)
 {
     wxASSERT_MSG( !base || (base > 1 && base <= 36), wxT("invalid base") );
     if(!m_input) return 0;
@@ -191,13 +191,13 @@ wxUint64 wxTextInputStream::Read64(int base)
     if(word.empty())
         return 0;
 
-    wxUint64 res;
+    std::uint64_t res;
     if(!word.ToULongLong(&res, base))
         return 0;
     return res;
 }
 
-wxUint32 wxTextInputStream::Read32(int base)
+std::uint32_t wxTextInputStream::Read32(int base)
 {
     wxASSERT_MSG( !base || (base > 1 && base <= 36), wxT("invalid base") );
     if(!m_input) return 0;
@@ -208,17 +208,17 @@ wxUint32 wxTextInputStream::Read32(int base)
     return wxStrtoul(word.c_str(), 0, base);
 }
 
-wxUint16 wxTextInputStream::Read16(int base)
+std::uint16_t wxTextInputStream::Read16(int base)
 {
-    return (wxUint16)Read32(base);
+    return (std::uint16_t)Read32(base);
 }
 
-wxUint8 wxTextInputStream::Read8(int base)
+std::uint8_t wxTextInputStream::Read8(int base)
 {
-    return (wxUint8)Read32(base);
+    return (std::uint8_t)Read32(base);
 }
 
-wxInt64 wxTextInputStream::Read64S(int base)
+std::int64_t wxTextInputStream::Read64S(int base)
 {
     wxASSERT_MSG( !base || (base > 1 && base <= 36), wxT("invalid base") );
     if(!m_input) return 0;
@@ -227,13 +227,13 @@ wxInt64 wxTextInputStream::Read64S(int base)
     if(word.empty())
         return 0;
 
-    wxInt64 res;
+    std::int64_t res;
     if(!word.ToLongLong(&res, base))
         return 0;
     return res;
 }
 
-wxInt32 wxTextInputStream::Read32S(int base)
+std::int32_t wxTextInputStream::Read32S(int base)
 {
     wxASSERT_MSG( !base || (base > 1 && base <= 36), wxT("invalid base") );
     if(!m_input) return 0;
@@ -244,14 +244,14 @@ wxInt32 wxTextInputStream::Read32S(int base)
     return wxStrtol(word.c_str(), 0, base);
 }
 
-wxInt16 wxTextInputStream::Read16S(int base)
+std::int16_t wxTextInputStream::Read16S(int base)
 {
-    return (wxInt16)Read32S(base);
+    return (std::int16_t)Read32S(base);
 }
 
-wxInt8 wxTextInputStream::Read8S(int base)
+std::int8_t wxTextInputStream::Read8S(int base)
 {
-    return (wxInt8)Read32S(base);
+    return (std::int8_t)Read32S(base);
 }
 
 double wxTextInputStream::ReadDouble()
@@ -353,37 +353,37 @@ wxTextInputStream& wxTextInputStream::operator>>(wchar_t& wc)
 
 #endif // wxWCHAR_T_IS_REAL_TYPE
 
-wxTextInputStream& wxTextInputStream::operator>>(wxInt16& i)
+wxTextInputStream& wxTextInputStream::operator>>(std::int16_t& i)
 {
     i = Read16S();
     return *this;
 }
 
-wxTextInputStream& wxTextInputStream::operator>>(wxInt32& i)
+wxTextInputStream& wxTextInputStream::operator>>(std::int32_t& i)
 {
     i = Read32S();
     return *this;
 }
 
-wxTextInputStream& wxTextInputStream::operator>>(wxInt64& i)
+wxTextInputStream& wxTextInputStream::operator>>(std::int64_t& i)
 {
     i = Read64S();
     return *this;
 }
 
-wxTextInputStream& wxTextInputStream::operator>>(wxUint16& i)
+wxTextInputStream& wxTextInputStream::operator>>(std::uint16_t& i)
 {
     i = Read16();
     return *this;
 }
 
-wxTextInputStream& wxTextInputStream::operator>>(wxUint32& i)
+wxTextInputStream& wxTextInputStream::operator>>(std::uint32_t& i)
 {
     i = Read32();
     return *this;
 }
 
-wxTextInputStream& wxTextInputStream::operator>>(wxUint64& i)
+wxTextInputStream& wxTextInputStream::operator>>(std::uint64_t& i)
 {
     i = Read64();
     return *this;
@@ -441,12 +441,12 @@ void wxTextOutputStream::SetMode(wxEOL mode)
     }
 }
 
-void wxTextOutputStream::Write64(wxUint64 i)
+void wxTextOutputStream::Write64(std::uint64_t i)
 {
     WriteString(wxString::Format("%" wxLongLongFmtSpec "u", i));
 }
 
-void wxTextOutputStream::Write32(wxUint32 i)
+void wxTextOutputStream::Write32(std::uint32_t i)
 {
     wxString str;
     str.Printf(wxT("%u"), i);
@@ -454,7 +454,7 @@ void wxTextOutputStream::Write32(wxUint32 i)
     WriteString(str);
 }
 
-void wxTextOutputStream::Write16(wxUint16 i)
+void wxTextOutputStream::Write16(std::uint16_t i)
 {
     wxString str;
     str.Printf(wxT("%u"), (unsigned)i);
@@ -462,7 +462,7 @@ void wxTextOutputStream::Write16(wxUint16 i)
     WriteString(str);
 }
 
-void wxTextOutputStream::Write8(wxUint8 i)
+void wxTextOutputStream::Write8(std::uint8_t i)
 {
     wxString str;
     str.Printf(wxT("%u"), (unsigned)i);
@@ -618,42 +618,42 @@ wxTextOutputStream& wxTextOutputStream::operator<<(wchar_t wc)
 
 #endif // wxWCHAR_T_IS_REAL_TYPE
 
-wxTextOutputStream& wxTextOutputStream::operator<<(wxInt16 c)
+wxTextOutputStream& wxTextOutputStream::operator<<(std::int16_t c)
 {
     Write(c);
 
     return *this;
 }
 
-wxTextOutputStream& wxTextOutputStream::operator<<(wxInt32 c)
+wxTextOutputStream& wxTextOutputStream::operator<<(std::int32_t c)
 {
     Write(c);
 
     return *this;
 }
 
-wxTextOutputStream& wxTextOutputStream::operator<<(wxInt64 c)
+wxTextOutputStream& wxTextOutputStream::operator<<(std::int64_t c)
 {
     Write(c);
 
     return *this;
 }
 
-wxTextOutputStream& wxTextOutputStream::operator<<(wxUint16 c)
+wxTextOutputStream& wxTextOutputStream::operator<<(std::uint16_t c)
 {
     Write(c);
 
     return *this;
 }
 
-wxTextOutputStream& wxTextOutputStream::operator<<(wxUint32 c)
+wxTextOutputStream& wxTextOutputStream::operator<<(std::uint32_t c)
 {
     Write(c);
 
     return *this;
 }
 
-wxTextOutputStream& wxTextOutputStream::operator<<(wxUint64 c)
+wxTextOutputStream& wxTextOutputStream::operator<<(std::uint64_t c)
 {
     Write(c);
 

@@ -304,15 +304,15 @@ bool wxHtmlHelpData::LoadMSProject(wxHtmlBookRecord *book, wxFileSystem& fsys,
     return true;
 }
 
-inline static void CacheWriteInt32(wxOutputStream *f, wxInt32 value)
+inline static void CacheWriteInt32(wxOutputStream *f, std::int32_t value)
 {
-    wxInt32 x = wxINT32_SWAP_ON_BE(value);
+    std::int32_t x = wxINT32_SWAP_ON_BE(value);
     f->Write(&x, sizeof(x));
 }
 
-inline static wxInt32 CacheReadInt32(wxInputStream *f)
+inline static std::int32_t CacheReadInt32(wxInputStream *f)
 {
-    wxInt32 x;
+    std::int32_t x;
     f->Read(&x, sizeof(x));
     return wxINT32_SWAP_ON_BE(x);
 }
@@ -343,7 +343,7 @@ inline static wxString CacheReadString(wxInputStream *f)
 bool wxHtmlHelpData::LoadCachedBook(wxHtmlBookRecord *book, wxInputStream *f)
 {
     int i, st, newsize;
-    wxInt32 version;
+    std::int32_t version;
 
     /* load header - version info : */
     version = CacheReadInt32(f);
@@ -398,7 +398,7 @@ bool wxHtmlHelpData::LoadCachedBook(wxHtmlBookRecord *book, wxInputStream *f)
 bool wxHtmlHelpData::SaveCachedBook(wxHtmlBookRecord *book, wxOutputStream *f)
 {
     int i;
-    wxInt32 cnt;
+    std::int32_t cnt;
 
     /* save header - version info : */
     CacheWriteInt32(f, CURRENT_CACHED_BOOK_VERSION);

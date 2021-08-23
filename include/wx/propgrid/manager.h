@@ -207,7 +207,7 @@ public:
 
     // Forces updating the value of property from the editor control.
     // Returns true if DoPropertyChanged was actually called.
-    bool CommitChangesFromEditor( wxUint32 flags = 0 )
+    bool CommitChangesFromEditor( std::uint32_t flags = 0 )
     {
         return m_pPropGrid->CommitChangesFromEditor(flags);
     }

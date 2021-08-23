@@ -131,7 +131,7 @@ static wxString wxGetANSICodePageForLocale(LCID lcid)
     return cp;
 }
 
-wxUint32 wxLanguageInfo::GetLCID() const
+std::uint32_t wxLanguageInfo::GetLCID() const
 {
     return MAKELCID(MAKELANGID(WinLang, WinSublang), SORT_DEFAULT);
 }
@@ -562,7 +562,7 @@ bool wxLocale::Init(int lang, int flags)
     }
     else // language supported by Windows
     {
-        const wxUint32 lcid = info->GetLCID();
+        const std::uint32_t lcid = info->GetLCID();
 
         // change locale used by Windows functions
         ::SetThreadLocale(lcid);
@@ -786,8 +786,8 @@ inline bool wxGetNonEmptyEnvVar(const wxString& name, wxString* value)
     const LANGID langid = ::GetUserDefaultUILanguage();
     if ( langid != LOCALE_CUSTOM_UI_DEFAULT )
     {
-        const wxUint32 lang = PRIMARYLANGID(langid);
-        const wxUint32 sublang = SUBLANGID(langid);
+        const std::uint32_t lang = PRIMARYLANGID(langid);
+        const std::uint32_t sublang = SUBLANGID(langid);
 
         for ( i = 0; i < count; i++ )
         {

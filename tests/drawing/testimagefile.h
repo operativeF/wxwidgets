@@ -20,7 +20,7 @@ bool AreFilesContentsEqual(const wxString &filename, const wxString &refFilename
     if (refLength != input.GetLength())
         return false;
 
-    wxUint8 buffer[1024], refBuffer[sizeof(buffer)];
+    std::uint8_t buffer[1024], refBuffer[sizeof(buffer)];
 
     wxFileOffset remainingLength = refLength;
     while (remainingLength != 0)

@@ -943,7 +943,7 @@ void wxSocketBase::ShutdownOutput()
         m_impl->Shutdown();
 }
 
-wxSocketBase& wxSocketBase::Read(void* buffer, wxUint32 nbytes)
+wxSocketBase& wxSocketBase::Read(void* buffer, std::uint32_t nbytes)
 {
     wxSocketReadGuard read(this);
 
@@ -953,7 +953,7 @@ wxSocketBase& wxSocketBase::Read(void* buffer, wxUint32 nbytes)
     return *this;
 }
 
-wxUint32 wxSocketBase::DoRead(void* buffer_, wxUint32 nbytes)
+std::uint32_t wxSocketBase::DoRead(void* buffer_, std::uint32_t nbytes)
 {
     wxCHECK_MSG( m_impl, 0, "socket must be valid" );
 
@@ -964,7 +964,7 @@ wxUint32 wxSocketBase::DoRead(void* buffer_, wxUint32 nbytes)
     // Try the push back buffer first, even before checking whether the socket
     // is valid to allow reading previously pushed back data from an already
     // closed socket.
-    wxUint32 total = GetPushback(buffer, nbytes, false);
+    std::uint32_t total = GetPushback(buffer, nbytes, false);
     nbytes -= total;
     buffer += total;
 
@@ -1039,7 +1039,7 @@ wxUint32 wxSocketBase::DoRead(void* buffer_, wxUint32 nbytes)
     return total;
 }
 
-wxSocketBase& wxSocketBase::ReadMsg(void* buffer, wxUint32 nbytes)
+wxSocketBase& wxSocketBase::ReadMsg(void* buffer, std::uint32_t nbytes)
 {
     struct
     {
@@ -1054,19 +1054,19 @@ wxSocketBase& wxSocketBase::ReadMsg(void* buffer, wxUint32 nbytes)
     bool ok = false;
     if ( DoRead(&msg, sizeof(msg)) == sizeof(msg) )
     {
-        wxUint32 sig = (wxUint32)msg.sig[0];
-        sig |= (wxUint32)(msg.sig[1] << 8);
-        sig |= (wxUint32)(msg.sig[2] << 16);
-        sig |= (wxUint32)(msg.sig[3] << 24);
+        std::uint32_t sig = (std::uint32_t)msg.sig[0];
+        sig |= (std::uint32_t)(msg.sig[1] << 8);
+        sig |= (std::uint32_t)(msg.sig[2] << 16);
+        sig |= (std::uint32_t)(msg.sig[3] << 24);
 
         if ( sig == 0xfeeddead )
         {
-            wxUint32 len = (wxUint32)msg.len[0];
-            len |= (wxUint32)(msg.len[1] << 8);
-            len |= (wxUint32)(msg.len[2] << 16);
-            len |= (wxUint32)(msg.len[3] << 24);
+            std::uint32_t len = (std::uint32_t)msg.len[0];
+            len |= (std::uint32_t)(msg.len[1] << 8);
+            len |= (std::uint32_t)(msg.len[2] << 16);
+            len |= (std::uint32_t)(msg.len[3] << 24);
 
-            wxUint32 len2;
+            std::uint32_t len2;
             if (len > nbytes)
             {
                 len2 = len - nbytes;
@@ -1090,18 +1090,18 @@ wxSocketBase& wxSocketBase::ReadMsg(void* buffer, wxUint32 nbytes)
                     discard_len = len2 > MAX_DISCARD_SIZE
                                     ? MAX_DISCARD_SIZE
                                     : len2;
-                    discard_len = DoRead(discard_buffer, (wxUint32)discard_len);
-                    len2 -= (wxUint32)discard_len;
+                    discard_len = DoRead(discard_buffer, (std::uint32_t)discard_len);
+                    len2 -= (std::uint32_t)discard_len;
                 }
                 while ((discard_len > 0) && len2);
             }
 
             if ( !len2 && DoRead(&msg, sizeof(msg)) == sizeof(msg) )
             {
-                sig = (wxUint32)msg.sig[0];
-                sig |= (wxUint32)(msg.sig[1] << 8);
-                sig |= (wxUint32)(msg.sig[2] << 16);
-                sig |= (wxUint32)(msg.sig[3] << 24);
+                sig = (std::uint32_t)msg.sig[0];
+                sig |= (std::uint32_t)(msg.sig[1] << 8);
+                sig |= (std::uint32_t)(msg.sig[2] << 16);
+                sig |= (std::uint32_t)(msg.sig[3] << 24);
 
                 if ( sig == 0xdeadfeed )
                     ok = true;
@@ -1115,7 +1115,7 @@ wxSocketBase& wxSocketBase::ReadMsg(void* buffer, wxUint32 nbytes)
     return *this;
 }
 
-wxSocketBase& wxSocketBase::Peek(void* buffer, wxUint32 nbytes)
+wxSocketBase& wxSocketBase::Peek(void* buffer, std::uint32_t nbytes)
 {
     wxSocketReadGuard read(this);
 
@@ -1129,7 +1129,7 @@ wxSocketBase& wxSocketBase::Peek(void* buffer, wxUint32 nbytes)
     return *this;
 }
 
-wxSocketBase& wxSocketBase::Write(const void *buffer, wxUint32 nbytes)
+wxSocketBase& wxSocketBase::Write(const void *buffer, std::uint32_t nbytes)
 {
     wxSocketWriteGuard write(this);
 
@@ -1142,14 +1142,14 @@ wxSocketBase& wxSocketBase::Write(const void *buffer, wxUint32 nbytes)
 // This function is a mirror image of DoRead() except that it doesn't use the
 // push back buffer and doesn't treat 0 return value specially (normally this
 // shouldn't happen at all here), so please see comments there for explanations
-wxUint32 wxSocketBase::DoWrite(const void *buffer_, wxUint32 nbytes)
+std::uint32_t wxSocketBase::DoWrite(const void *buffer_, std::uint32_t nbytes)
 {
     wxCHECK_MSG( m_impl, 0, "socket must be valid" );
 
     const char *buffer = static_cast<const char *>(buffer_);
     wxCHECK_MSG( buffer, 0, "NULL buffer" );
 
-    wxUint32 total = 0;
+    std::uint32_t total = 0;
     while ( nbytes )
     {
         if ( m_impl->m_stream && !m_connected )
@@ -1194,7 +1194,7 @@ wxUint32 wxSocketBase::DoWrite(const void *buffer_, wxUint32 nbytes)
     return total;
 }
 
-wxSocketBase& wxSocketBase::WriteMsg(const void *buffer, wxUint32 nbytes)
+wxSocketBase& wxSocketBase::WriteMsg(const void *buffer, std::uint32_t nbytes)
 {
     struct
     {
@@ -1243,7 +1243,7 @@ wxSocketBase& wxSocketBase::WriteMsg(const void *buffer, wxUint32 nbytes)
     return *this;
 }
 
-wxSocketBase& wxSocketBase::Unread(const void *buffer, wxUint32 nbytes)
+wxSocketBase& wxSocketBase::Unread(const void *buffer, std::uint32_t nbytes)
 {
     if (nbytes != 0)
         Pushback(buffer, nbytes);
@@ -1257,8 +1257,8 @@ wxSocketBase& wxSocketBase::Unread(const void *buffer, wxUint32 nbytes)
 wxSocketBase& wxSocketBase::Discard()
 {
     char *buffer = new char[MAX_DISCARD_SIZE];
-    wxUint32 ret{0};
-    wxUint32 total = 0;
+    std::uint32_t ret{0};
+    std::uint32_t total = 0;
 
     wxSocketReadGuard read(this);
 
@@ -1756,7 +1756,7 @@ void wxSocketBase::SetEventHandler(wxEvtHandler& handler, int id)
 // Pushback buffer
 // --------------------------------------------------------------------------
 
-void wxSocketBase::Pushback(const void *buffer, wxUint32 size)
+void wxSocketBase::Pushback(const void *buffer, std::uint32_t size)
 {
     if (!size) return;
 
@@ -1776,7 +1776,7 @@ void wxSocketBase::Pushback(const void *buffer, wxUint32 size)
     memcpy(m_unread, buffer, size);
 }
 
-wxUint32 wxSocketBase::GetPushback(void *buffer, wxUint32 size, bool peek)
+std::uint32_t wxSocketBase::GetPushback(void *buffer, std::uint32_t size, bool peek)
 {
     wxCHECK_MSG( buffer, 0, "NULL buffer" );
 
@@ -2114,7 +2114,7 @@ wxDatagramSocket::wxDatagramSocket( const wxSockAddress& addr,
 
 wxDatagramSocket& wxDatagramSocket::RecvFrom( wxSockAddress& addr,
                                               void* buf,
-                                              wxUint32 nBytes )
+                                              std::uint32_t nBytes )
 {
     Read(buf, nBytes);
     GetPeer(addr);
@@ -2123,7 +2123,7 @@ wxDatagramSocket& wxDatagramSocket::RecvFrom( wxSockAddress& addr,
 
 wxDatagramSocket& wxDatagramSocket::SendTo( const wxSockAddress& addr,
                                             const void* buf,
-                                            wxUint32 nBytes )
+                                            std::uint32_t nBytes )
 {
     wxASSERT_MSG( m_impl, wxT("Socket not initialised") );
 

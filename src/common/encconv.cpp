@@ -25,11 +25,11 @@
     #include <CoreFoundation/CFString.h>
     #include <CoreFoundation/CFStringEncodingExt.h>
 
-    wxUint16 gMacEncodings[wxFONTENCODING_MACMAX-wxFONTENCODING_MACMIN+1][128] ;
+    std::uint16_t gMacEncodings[wxFONTENCODING_MACMAX-wxFONTENCODING_MACMIN+1][128] ;
     bool gMacEncodingsInited[wxFONTENCODING_MACMAX-wxFONTENCODING_MACMIN+1] ;
 #endif
 
-static const wxUint16* GetEncTable(wxFontEncoding enc)
+static const std::uint16_t* GetEncTable(wxFontEncoding enc)
 {
 #ifdef __WXMAC__
     if( enc >= wxFONTENCODING_MACMIN && enc <= wxFONTENCODING_MACMAX )
@@ -66,8 +66,8 @@ static const wxUint16* GetEncTable(wxFontEncoding enc)
 }
 
 typedef struct {
-    wxUint16 u;
-    wxUint8  c;
+    std::uint16_t u;
+    std::uint8_t  c;
 } CharsetItem;
 
 extern "C"
@@ -79,12 +79,12 @@ CompareCharsetItems(const void *i1, const void *i2)
 }
 }
 
-static CharsetItem* BuildReverseTable(const wxUint16 *tbl)
+static CharsetItem* BuildReverseTable(const std::uint16_t *tbl)
 {
     CharsetItem *rev = new CharsetItem[128];
 
     for (int i = 0; i < 128; i++)
-        rev[i].c = wxUint8(128 + i), rev[i].u = tbl[i];
+        rev[i].c = std::uint8_t(128 + i), rev[i].u = tbl[i];
 
     qsort(rev, 128, sizeof(CharsetItem), CompareCharsetItems);
 
@@ -93,8 +93,8 @@ static CharsetItem* BuildReverseTable(const wxUint16 *tbl)
 
 bool wxEncodingConverter::Init(wxFontEncoding input_enc, wxFontEncoding output_enc, int method)
 {
-    const wxUint16 *in_tbl;
-    const wxUint16 *out_tbl = nullptr;
+    const std::uint16_t *in_tbl;
+    const std::uint16_t *out_tbl = nullptr;
 
     wxDELETEA(m_Table);
 
@@ -200,7 +200,7 @@ bool wxEncodingConverter::Convert(const char* input, char* output) const
     char *o;
 
     for (i = input, o = output; *i != 0;)
-        *(o++) = (char)(GetTableValue(m_Table, (wxUint8)*(i++), replaced));
+        *(o++) = (char)(GetTableValue(m_Table, (std::uint8_t)*(i++), replaced));
     *o = 0;
 
     return !replaced;
@@ -229,7 +229,7 @@ bool wxEncodingConverter::Convert(const char* input, wchar_t* output) const
     bool replaced = false;
 
     for (i = input, o = output; *i != 0;)
-        *(o++) = (wchar_t)(GetTableValue(m_Table, (wxUint8)*(i++), replaced));
+        *(o++) = (wchar_t)(GetTableValue(m_Table, (std::uint8_t)*(i++), replaced));
     *o = 0;
 
     return !replaced;
@@ -259,7 +259,7 @@ bool wxEncodingConverter::Convert(const wchar_t* input, char* output) const
     bool replaced = false;
 
     for (i = input, o = output; *i != 0;)
-        *(o++) = (char)(GetTableValue(m_Table, (wxUint16)*(i++), replaced));
+        *(o++) = (char)(GetTableValue(m_Table, (std::uint16_t)*(i++), replaced));
     *o = 0;
 
     return !replaced;
@@ -290,7 +290,7 @@ bool wxEncodingConverter::Convert(const wchar_t* input, wchar_t* output) const
     bool replaced = false;
 
     for (i = input, o = output; *i != 0;)
-        *(o++) = (wchar_t)(GetTableValue(m_Table, (wxUint8)*(i++), replaced));
+        *(o++) = (wchar_t)(GetTableValue(m_Table, (std::uint8_t)*(i++), replaced));
     *o = 0;
 
     return !replaced;
@@ -309,12 +309,12 @@ wxString wxEncodingConverter::Convert(const wxString& input) const
     if (m_UnicodeInput)
     {
         for (const wxChar* i = input.c_str(); *i != 0; i++)
-            s << (wxChar)(m_Table[(wxUint16)*i]);
+            s << (wxChar)(m_Table[(std::uint16_t)*i]);
     }
     else
     {
         for (const wxChar* i = input.c_str(); *i != 0; i++)
-            s << (wxChar)(m_Table[(wxUint8)*i]);
+            s << (wxChar)(m_Table[(std::uint8_t)*i]);
     }
 
     return s;

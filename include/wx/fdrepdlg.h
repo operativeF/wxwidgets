@@ -63,7 +63,7 @@ class WXDLLIMPEXP_CORE wxFindReplaceData
 {
 public:
     wxFindReplaceData() = default;
-    wxFindReplaceData(wxUint32 flags) { SetFlags(flags); }
+    wxFindReplaceData(std::uint32_t flags) { SetFlags(flags); }
 
     const std::string& GetFindString() const { return m_FindWhat; }
     const std::string& GetReplaceString() const { return m_ReplaceWith; }
@@ -72,13 +72,13 @@ public:
 
     // setters: may only be called before showing the dialog, no effect later
     // FIXME: Then get rid of this and put it in the constructor.
-    void SetFlags(wxUint32 flags) { m_Flags = flags; }
+    void SetFlags(std::uint32_t flags) { m_Flags = flags; }
 
     void SetFindString(const std::string& str) { m_FindWhat = str; }
     void SetReplaceString(const std::string& str) { m_ReplaceWith = str; }
 
 private:
-    wxUint32 m_Flags {0};
+    std::uint32_t m_Flags {0};
     std::string m_FindWhat;
     std::string m_ReplaceWith;
 

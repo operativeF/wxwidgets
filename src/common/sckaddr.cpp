@@ -527,7 +527,7 @@ bool wxSockAddressImpl::SetHostName4(const wxString& name)
     return true;
 }
 
-bool wxSockAddressImpl::GetHostAddress(wxUint32 *address) const
+bool wxSockAddressImpl::GetHostAddress(std::uint32_t *address) const
 {
     sockaddr_in * const addr = Get<sockaddr_in>();
     if ( !addr )
@@ -538,7 +538,7 @@ bool wxSockAddressImpl::GetHostAddress(wxUint32 *address) const
     return true;
 }
 
-bool wxSockAddressImpl::SetHostAddress(wxUint32 address)
+bool wxSockAddressImpl::SetHostAddress(std::uint32_t address)
 {
     sockaddr_in * const addr = Get<sockaddr_in>();
     if ( !addr )
@@ -549,7 +549,7 @@ bool wxSockAddressImpl::SetHostAddress(wxUint32 address)
     return true;
 }
 
-wxUint16 wxSockAddressImpl::GetPort4() const
+std::uint16_t wxSockAddressImpl::GetPort4() const
 {
     sockaddr_in * const addr = Get<sockaddr_in>();
     if ( !addr )
@@ -558,7 +558,7 @@ wxUint16 wxSockAddressImpl::GetPort4() const
     return ntohs(addr->sin_port);
 }
 
-bool wxSockAddressImpl::SetPort4(wxUint16 port)
+bool wxSockAddressImpl::SetPort4(std::uint16_t port)
 {
     sockaddr_in * const addr = Get<sockaddr_in>();
     if ( !addr )
@@ -634,7 +634,7 @@ bool wxSockAddressImpl::SetHostAddress(const in6_addr& address)
     return true;
 }
 
-wxUint16 wxSockAddressImpl::GetPort6() const
+std::uint16_t wxSockAddressImpl::GetPort6() const
 {
     sockaddr_in6 * const addr = Get<sockaddr_in6>();
     if ( !addr )
@@ -643,7 +643,7 @@ wxUint16 wxSockAddressImpl::GetPort6() const
     return ntohs(addr->sin6_port);
 }
 
-bool wxSockAddressImpl::SetPort6(wxUint16 port)
+bool wxSockAddressImpl::SetPort6(std::uint16_t port)
 {
     sockaddr_in6 * const addr = Get<sockaddr_in6>();
     if ( !addr )
@@ -856,7 +856,7 @@ bool wxIPV4address::IsLocalHost() const
 
 wxString wxIPV4address::IPAddress() const
 {
-    wxUint32 addr{0};
+    std::uint32_t addr{0};
     if ( !GetImpl().GetHostAddress(&addr) )
         return {};
 
@@ -922,15 +922,15 @@ wxString wxIPV6address::IPAddress() const
     union
     {
         in6_addr addr6;
-        wxUint8 bytes[16];
+        std::uint8_t bytes[16];
     } u;
 
     if ( !GetImpl().GetHostAddress(&u.addr6) )
         return {};
 
-    const wxUint8 * const addr = u.bytes;
+    const std::uint8_t * const addr = u.bytes;
 
-    wxUint16 words[8];
+    std::uint16_t words[8];
     int prefix_zero_count = 0;
     
     for ( int i = 0; i < 8; ++i )

@@ -6232,8 +6232,8 @@ MSWInitAnyKeyEvent(wxKeyEvent& event,
     event.m_controlDown = wxIsCtrlDown();
     event.m_altDown = (HIWORD(lParam) & KF_ALTDOWN) == KF_ALTDOWN;
 
-    event.m_rawCode = (wxUint32) wParam;
-    event.m_rawFlags = (wxUint32) lParam;
+    event.m_rawCode = (std::uint32_t) wParam;
+    event.m_rawFlags = (std::uint32_t) lParam;
     event.SetTimestamp(::GetMessageTime());
 }
 

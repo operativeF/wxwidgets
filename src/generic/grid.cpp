@@ -761,7 +761,7 @@ wxGridCoordsToAttrMap::key_type CoordsToKey(int row, int col)
 {
     // Treat both row and col as unsigned to not cause havoc with (unsupported)
     // negative coords.
-    return (static_cast<wxULongLong_t>(row) << 32) + static_cast<wxUint32>(col);
+    return (static_cast<wxULongLong_t>(row) << 32) + static_cast<std::uint32_t>(col);
 }
 
 void KeyToCoords(wxGridCoordsToAttrMap::key_type key, int *pRow, int *pCol)

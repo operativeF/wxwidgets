@@ -111,7 +111,7 @@
 
 template <class Channel,
           size_t Bpp, int R, int G, int B, int A = -1,
-          class Pixel = wxUint32>
+          class Pixel = std::uint32_t>
 
 struct wxPixelFormat
 {
@@ -724,7 +724,7 @@ struct wxPixelDataOut<wxBitmap>
                 }
 
                 wxByte* m_ptr;
-                wxInt8 m_bit;
+                std::int8_t m_bit;
                 friend class Iterator;
             };
 
@@ -844,7 +844,7 @@ struct wxPixelDataOut<wxBitmap>
 
                 // I don't see a way to bit-twiddle without two fields
                 wxByte* m_ptr;
-                wxInt8 m_bit;
+                std::int8_t m_bit;
             };
 
             // ctor associates this pointer with a bitmap and locks the bitmap for

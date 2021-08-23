@@ -165,11 +165,11 @@ public:
     wxString     GetInternalName() const override        { return m_Name; }
     int          GetMethod() const              { return m_Method; }
     int          GetFlags() const               { return m_Flags; }
-    wxUint32     GetCrc() const                 { return m_Crc; }
+    std::uint32_t     GetCrc() const                 { return m_Crc; }
     wxFileOffset GetCompressedSize() const      { return m_CompressedSize; }
     int          GetSystemMadeBy() const        { return m_SystemMadeBy; }
     wxString     GetComment() const             { return m_Comment; }
-    wxUint32     GetExternalAttributes() const  { return m_ExternalAttributes; }
+    std::uint32_t     GetExternalAttributes() const  { return m_ExternalAttributes; }
     wxPathFormat GetInternalFormat() const override      { return wxPATH_UNIX; }
     int          GetMode() const;
     const char  *GetLocalExtra() const;
@@ -187,9 +187,9 @@ public:
     // set accessors
     void SetDateTime(const wxDateTime& dt) override      { m_DateTime = dt; }
     void SetSize(wxFileOffset size) override             { m_Size = size; }
-    void SetMethod(int method)                  { m_Method = (wxUint16)method; }
+    void SetMethod(int method)                  { m_Method = (std::uint16_t)method; }
     void SetComment(const wxString& comment)    { m_Comment = comment; }
-    void SetExternalAttributes(wxUint32 attr )  { m_ExternalAttributes = attr; }
+    void SetExternalAttributes(std::uint32_t attr )  { m_ExternalAttributes = attr; }
     void SetSystemMadeBy(int system);
     void SetMode(int mode);
     void SetExtra(const char *extra, size_t len);
@@ -223,15 +223,15 @@ protected:
     int GetDiskStart() const                    { return m_DiskStart; }
     int GetInternalAttributes() const           { return m_InternalAttributes; }
 
-    void SetVersionNeeded(int version)          { m_VersionNeeded = (wxUint16)version; }
+    void SetVersionNeeded(int version)          { m_VersionNeeded = (std::uint16_t)version; }
     void SetOffset(wxFileOffset offset) override         { m_Offset = offset; }
-    void SetFlags(int flags)                    { m_Flags = (wxUint16)flags; }
-    void SetVersionMadeBy(int version)          { m_VersionMadeBy = (wxUint8)version; }
-    void SetCrc(wxUint32 crc)                   { m_Crc = crc; }
+    void SetFlags(int flags)                    { m_Flags = (std::uint16_t)flags; }
+    void SetVersionMadeBy(int version)          { m_VersionMadeBy = (std::uint8_t)version; }
+    void SetCrc(std::uint32_t crc)                   { m_Crc = crc; }
     void SetCompressedSize(wxFileOffset size)   { m_CompressedSize = size; }
     void SetKey(wxFileOffset offset)            { m_Key = offset; }
-    void SetDiskStart(int start)                { m_DiskStart = (wxUint16)start; }
-    void SetInternalAttributes(int attr)        { m_InternalAttributes = (wxUint16)attr; }
+    void SetDiskStart(int start)                { m_DiskStart = (std::uint16_t)start; }
+    void SetInternalAttributes(int attr)        { m_InternalAttributes = (std::uint16_t)attr; }
 
     virtual wxZipEntry *ZipClone() const        { return new wxZipEntry(*this); }
 
@@ -247,24 +247,24 @@ private:
     size_t WriteCentral(wxOutputStream& stream, wxMBConv& conv) const;
 
     size_t ReadDescriptor(wxInputStream& stream);
-    size_t WriteDescriptor(wxOutputStream& stream, wxUint32 crc,
+    size_t WriteDescriptor(wxOutputStream& stream, std::uint32_t crc,
                            wxFileOffset compressedSize, wxFileOffset size);
 
     void WriteLocalFileSizes(wxDataOutputStream& ds) const;
     void WriteLocalZip64ExtraInfo(wxOutputStream& stream) const;
 
-    bool LoadExtraInfo(const char* extraData, wxUint16 extraLen, bool localInfo);
+    bool LoadExtraInfo(const char* extraData, std::uint16_t extraLen, bool localInfo);
 
-    wxUint16 GetInternalFlags(bool checkForUTF8) const;
+    std::uint16_t GetInternalFlags(bool checkForUTF8) const;
 
-    wxUint8      m_SystemMadeBy{wxZIP_SYSTEM_MSDOS};       // one of enum wxZipSystem
-    wxUint8      m_VersionMadeBy;      // major * 10 + minor
+    std::uint8_t      m_SystemMadeBy{wxZIP_SYSTEM_MSDOS};       // one of enum wxZipSystem
+    std::uint8_t      m_VersionMadeBy;      // major * 10 + minor
 
-    wxUint16     m_VersionNeeded{VERSION_NEEDED_TO_EXTRACT};      // ver needed to extract (20 i.e. v2.0)
-    wxUint16     m_Flags{0};
-    wxUint16     m_Method{wxZIP_METHOD_DEFAULT};             // compression method (one of wxZipMethod)
+    std::uint16_t     m_VersionNeeded{VERSION_NEEDED_TO_EXTRACT};      // ver needed to extract (20 i.e. v2.0)
+    std::uint16_t     m_Flags{0};
+    std::uint16_t     m_Method{wxZIP_METHOD_DEFAULT};             // compression method (one of wxZipMethod)
     wxDateTime   m_DateTime;
-    wxUint32     m_Crc{0};
+    std::uint32_t     m_Crc{0};
     wxFileOffset m_CompressedSize;
     wxFileOffset m_Size;
     wxString     m_Name;               // in internal format
@@ -272,10 +272,10 @@ private:
     wxFileOffset m_Offset;             // file offset of the entry
 
     wxString     m_Comment;
-    wxUint16     m_DiskStart{0};          // for multidisk archives, not unsupported
-    wxUint16     m_InternalAttributes{0}; // bit 0 set for text files
-    wxUint32     m_ExternalAttributes{0}; // system specific depends on SystemMadeBy
-    wxUint16     m_z64infoOffset{0};      // Offset of ZIP64 local extra data for file sizes
+    std::uint16_t     m_DiskStart{0};          // for multidisk archives, not unsupported
+    std::uint16_t     m_InternalAttributes{0}; // bit 0 set for text files
+    std::uint32_t     m_ExternalAttributes{0}; // system specific depends on SystemMadeBy
+    std::uint16_t     m_z64infoOffset{0};      // Offset of ZIP64 local extra data for file sizes
 
     class wxZipMemory *m_Extra{nullptr};
     class wxZipMemory *m_LocalExtra{nullptr};
@@ -371,7 +371,7 @@ private:
     wxFileOffset m_headerOffset{0};
     size_t m_headerSize{0};
     wxFileOffset m_entrySize{0};
-    wxUint32 m_crcAccumulator;
+    std::uint32_t m_crcAccumulator;
     wxOutputStream *m_comp{nullptr};
     int m_level;
     wxFileOffset m_offsetAdjustment{wxInvalidOffset};
@@ -428,7 +428,7 @@ private:
     wxStreamError ReadLocal(bool readEndRec = false);
     wxStreamError ReadCentral();
 
-    wxUint32 ReadSignature();
+    std::uint32_t ReadSignature();
     bool FindEndRecord();
     bool LoadEndRecord();
 
@@ -447,14 +447,14 @@ private:
     wxZipEntry m_entry;
     bool m_raw;
     size_t m_headerSize;
-    wxUint32 m_crcAccumulator;
+    std::uint32_t m_crcAccumulator;
     wxInputStream *m_decomp;
     bool m_parentSeekable;
     class wxZipWeakLinks *m_weaklinks;
     class wxZipStreamLink *m_streamlink;
     wxFileOffset m_offsetAdjustment;
     wxFileOffset m_position;
-    wxUint32 m_signature;
+    std::uint32_t m_signature;
     size_t m_TotalEntries;
     wxString m_Comment;
 

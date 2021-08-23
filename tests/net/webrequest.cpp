@@ -173,8 +173,8 @@ public:
     wxWebRequest::State stateFromEvent;
     int statusFromEvent;
     wxString responseStringFromEvent;
-    wxInt64 expectedFileSize;
-    wxInt64 dataSize;
+    std::int64_t expectedFileSize;
+    std::int64_t dataSize;
     wxString errorDescription;
 };
 

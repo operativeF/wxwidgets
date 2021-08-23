@@ -77,7 +77,7 @@ struct WXDLLIMPEXP_BASE wxCrashContext
     struct
     {
 #ifdef __INTEL__
-        wxInt32 eax, ebx, ecx, edx, esi, edi,
+        std::int32_t eax, ebx, ecx, edx, esi, edi,
                 ebp, esp, eip,
                 cs, ds, es, fs, gs, ss,
                 flags;

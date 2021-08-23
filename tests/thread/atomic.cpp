@@ -24,9 +24,9 @@ WX_DEFINE_ARRAY_PTR(wxThread *, wxArrayThread);
 // number of times to run the loops: the code takes too long to run if we use
 // the bigger value with generic atomic operations implementation
 #ifdef wxHAS_ATOMIC_OPS
-    static const wxInt32 ITERATIONS_NUM = 10000000;
+    static const std::int32_t ITERATIONS_NUM = 10000000;
 #else
-    static const wxInt32 ITERATIONS_NUM = 1000;
+    static const std::int32_t ITERATIONS_NUM = 1000;
 #endif
 
 // ----------------------------------------------------------------------------
@@ -105,7 +105,7 @@ TEST_CASE("TestNoThread")
     wxAtomicInt int1 = 0,
                 int2 = 0;
 
-    for ( wxInt32 i = 0; i < ITERATIONS_NUM; ++i )
+    for ( std::int32_t i = 0; i < ITERATIONS_NUM; ++i )
     {
         wxAtomicInc(int1);
         wxAtomicDec(int2);
@@ -148,9 +148,9 @@ TEST_CASE("TestTwoThreadsSeparate")
 
 void* AtomicThread::Entry()
 {
-    wxInt32 negativeValuesSeen = 0;
+    std::int32_t negativeValuesSeen = 0;
 
-    for ( wxInt32 i = 0; i < ITERATIONS_NUM; ++i )
+    for ( std::int32_t i = 0; i < ITERATIONS_NUM; ++i )
     {
         switch ( m_testType )
         {

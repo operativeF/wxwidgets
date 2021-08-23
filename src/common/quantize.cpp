@@ -214,7 +214,7 @@ struct jpeg_color_quantizer {
 #define C2_SHIFT  (BITS_IN_JSAMPLE-HIST_C2_BITS)
 
 
-using histcell = wxUint16;    /* histogram cell; prefer an unsigned type */
+using histcell = std::uint16_t;    /* histogram cell; prefer an unsigned type */
 
 using histptr = histcell*;    /* for pointers to histogram cells */
 
@@ -248,11 +248,11 @@ using hist3d = hist2d*;    /* type for top-level pointer */
  */
 
 #if BITS_IN_JSAMPLE == 8
-using FSERROR = wxInt16;      /* 16 bits should be enough */
+using FSERROR = std::int16_t;      /* 16 bits should be enough */
 using LOCFSERROR = int;     /* use 'int' for calculation temps */
 #else
-using FSERROR = wxInt32;      /* may need more than 16 bits */
-using LOCFSERROR = wxInt32;   /* be sure calculation temps are big enough */
+using FSERROR = std::int32_t;      /* may need more than 16 bits */
+using LOCFSERROR = std::int32_t;   /* be sure calculation temps are big enough */
 #endif
 
 using FSERRPTR = FSERROR*; /* pointer to error array (in  storage!) */
@@ -340,7 +340,7 @@ typedef struct {
   int c1min, c1max;
   int c2min, c2max;
   /* The volume (actually 2-norm) of the box */
-  wxInt32 volume;
+  std::int32_t volume;
   /* The number of nonzero histogram cells within this box */
   long colorcount;
 } box;
@@ -375,7 +375,7 @@ find_biggest_volume (boxptr boxlist, int numboxes)
 {
   boxptr boxp;
   int i;
-  wxInt32 maxv = 0;
+  std::int32_t maxv = 0;
   boxptr which = nullptr;
 
   for (i = 0, boxp = boxlist; i < numboxes; i++, boxp++) {
@@ -398,7 +398,7 @@ update_box (j_decompress_ptr cinfo, boxptr boxp)
   histptr histp;
   int c0,c1,c2;
   int c0min,c0max,c1min,c1max,c2min,c2max;
-  wxInt32 dist0,dist1,dist2;
+  std::int32_t dist0,dist1,dist2;
   long ccount;
 
   c0min = boxp->c0min;  c0max = boxp->c0max;
@@ -737,8 +737,8 @@ find_nearby_colors (j_decompress_ptr cinfo, int minc0, int minc1, int minc2,
   int maxc0, maxc1, maxc2;
   int centerc0, centerc1, centerc2;
   int i, x, ncolors;
-  wxInt32 minmaxdist, min_dist, max_dist, tdist;
-  wxInt32 mindist[MAXNUMCOLORS];  /* min distance to colormap entry i */
+  std::int32_t minmaxdist, min_dist, max_dist, tdist;
+  std::int32_t mindist[MAXNUMCOLORS];  /* min distance to colormap entry i */
 
   /* Compute true coordinates of update box's upper corner and center.
    * Actually we compute the coordinates of the center of the upper-corner
@@ -862,15 +862,15 @@ find_best_colors (j_decompress_ptr cinfo, int minc0, int minc1, int minc2,
 {
   int ic0, ic1, ic2;
   int i, icolor;
-  wxInt32 * bptr;    /* pointer into bestdist[] array */
+  std::int32_t * bptr;    /* pointer into bestdist[] array */
   JSAMPLE * cptr;       /* pointer into bestcolor[] array */
-  wxInt32 dist0, dist1;       /* initial distance values */
-  wxInt32 dist2;     /* current distance in inner loop */
-  wxInt32 xx0, xx1;       /* distance increments */
-  wxInt32 xx2;
-  wxInt32 inc0, inc1, inc2;   /* initial values for increments */
+  std::int32_t dist0, dist1;       /* initial distance values */
+  std::int32_t dist2;     /* current distance in inner loop */
+  std::int32_t xx0, xx1;       /* distance increments */
+  std::int32_t xx2;
+  std::int32_t inc0, inc1, inc2;   /* initial values for increments */
   /* This array holds the distance to the nearest-so-far color for each cell */
-  wxInt32 bestdist[BOX_C0_ELEMS * BOX_C1_ELEMS * BOX_C2_ELEMS];
+  std::int32_t bestdist[BOX_C0_ELEMS * BOX_C1_ELEMS * BOX_C2_ELEMS];
 
   /* Initialize best-distance for each cell of the update box */
   bptr = bestdist;
@@ -1283,7 +1283,7 @@ start_pass_2_quant (j_decompress_ptr cinfo, bool is_pre_scan)
                    (3 * sizeof(FSERROR)));
       /* Allocate Floyd-Steinberg workspace if we didn't already. */
       if (cquantize->fserrors == nullptr)
-          cquantize->fserrors = (wxInt16*) malloc(arraysize);
+          cquantize->fserrors = (std::int16_t*) malloc(arraysize);
       /* Initialize the propagated errors to zero. */
       memset((void  *) cquantize->fserrors, 0, arraysize);
       /* Make the error-limit table if we didn't already. */

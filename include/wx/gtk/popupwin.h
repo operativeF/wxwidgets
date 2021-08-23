@@ -32,7 +32,7 @@ public:
     // --------------
 
     // GTK time when connecting to button_press signal
-    wxUint32  m_time;
+    std::uint32_t  m_time;
 
 protected:
     virtual void DoSetSize(int x, int y,

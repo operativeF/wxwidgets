@@ -86,7 +86,7 @@ public:
     void SetUser(const wxString& user) { m_username = user; }
     void SetPassword(const wxString& passwd) { m_password = passwd; }
 
-    virtual void SetDefaultTimeout(wxUint32 Value);
+    virtual void SetDefaultTimeout(std::uint32_t Value);
 
     // override wxSocketBase::SetTimeout function to avoid that the internal
     // m_uiDefaultTimeout goes out-of-sync:
@@ -120,7 +120,7 @@ public:
 
 protected:
     // the timeout associated with the protocol:
-    wxUint32        m_uiDefaultTimeout;
+    std::uint32_t        m_uiDefaultTimeout;
 
     wxString        m_username;
     wxString        m_password;

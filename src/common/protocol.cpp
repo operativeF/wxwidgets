@@ -68,7 +68,7 @@ wxProtocol::wxProtocol()
     SetDefaultTimeout(60);      // default timeout is 60 seconds
 }
 
-void wxProtocol::SetDefaultTimeout(wxUint32 Value)
+void wxProtocol::SetDefaultTimeout(std::uint32_t Value)
 {
     m_uiDefaultTimeout = Value;
 #if wxUSE_SOCKETS

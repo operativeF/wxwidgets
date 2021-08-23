@@ -218,7 +218,7 @@ class WXDLLIMPEXP_FWD_PROPGRID wxPGValidationInfo;
 #define wxPG_COLOUR_BLACK       (*wxBLACK)
 
 // Convert Red, Green and Blue to a single 32-bit value.
-#define wxPG_COLOUR(R,G,B) ((wxUint32)((R)+((G)<<8)+((B)<<16)))
+#define wxPG_COLOUR(R,G,B) ((std::uint32_t)((R)+((G)<<8)+((B)<<16)))
 
 
 // If property is supposed to have custom-painted image, then returning
@@ -263,7 +263,7 @@ WX_DECLARE_STRING_HASH_MAP_WITH_DECL(wxString,
 
 using wxPGHashMapP2P = std::unordered_map< void*, void*, wxPointerHash, wxPointerEqual >;
 
-using wxPGHashMapI2I = std::unordered_map< wxInt32, wxInt32, wxIntegerHash, wxIntegerEqual >;
+using wxPGHashMapI2I = std::unordered_map< std::int32_t, std::int32_t, wxIntegerHash, wxIntegerEqual >;
 
 class wxPGHashSetInt : public std::unordered_set<int, wxIntegerHash, wxIntegerEqual> {
 public:

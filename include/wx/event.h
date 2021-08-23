@@ -2226,10 +2226,10 @@ public:
     wxChar GetUnicodeKey() const { return m_uniChar; }
 
     // get the raw key code (platform-dependent)
-    wxUint32 GetRawKeyCode() const { return m_rawCode; }
+    std::uint32_t GetRawKeyCode() const { return m_rawCode; }
 
     // get the raw key flags (platform-dependent)
-    wxUint32 GetRawKeyFlags() const { return m_rawFlags; }
+    std::uint32_t GetRawKeyFlags() const { return m_rawFlags; }
 
     // Find the position of the event
     wxPoint GetPosition() const
@@ -2270,8 +2270,8 @@ public:
 
     // these fields contain the platform-specific information about
     // key that was pressed
-    wxUint32      m_rawCode;
-    wxUint32      m_rawFlags;
+    std::uint32_t      m_rawCode;
+    std::uint32_t      m_rawFlags;
 
 private:
     // Set the event to propagate if necessary, i.e. if it's of wxEVT_CHAR_HOOK

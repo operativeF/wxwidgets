@@ -461,7 +461,7 @@ int wxObjectXmlReader::ReadComponent(wxXmlNode *node, wxObjectReaderCallback *ca
                     if ( prop )
                     {
                         wxString resstring = prop->GetContent();
-                        wxInt32 pos = resstring.Find('.');
+                        std::int32_t pos = resstring.Find('.');
                         if ( pos != wxNOT_FOUND )
                         {
                             int sinkOid = atol(resstring.Left(pos).ToAscii());

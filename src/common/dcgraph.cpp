@@ -1383,7 +1383,7 @@ void wxGCDCImpl::DoGradientFillConcentric(const wxRect& rect,
                                       const wxPoint& circleCenter)
 {
     //Radius
-    const wxInt32 nRadius = [rect]()
+    const std::int32_t nRadius = [rect]()
     {
         if ((rect.GetWidth() / 2) < (rect.GetHeight() / 2))
         {

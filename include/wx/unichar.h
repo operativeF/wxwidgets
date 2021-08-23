@@ -32,7 +32,7 @@ public:
     // NB: this is not wchar_t on purpose, it needs to represent the entire
     //     Unicode code points range and wchar_t may be too small for that
     //     (e.g. on Win32 where wchar_t* is encoded in UTF-16)
-    using value_type = wxUint32;
+    using value_type = std::uint32_t;
 
     wxUniChar()  = default;
 
@@ -87,23 +87,23 @@ public:
     }
 
     // Returns true if the character is a BMP character:
-    static bool IsBMP(wxUint32 value) { return value < 0x10000; }
+    static bool IsBMP(std::uint32_t value) { return value < 0x10000; }
 
     // Returns true if the character is a supplementary character:
-    static bool IsSupplementary(wxUint32 value) { return 0x10000 <= value && value < 0x110000; }
+    static bool IsSupplementary(std::uint32_t value) { return 0x10000 <= value && value < 0x110000; }
 
     // Returns the high surrogate code unit for the supplementary character
-    static wxUint16 HighSurrogate(wxUint32 value)
+    static std::uint16_t HighSurrogate(std::uint32_t value)
     {
         wxASSERT_MSG(IsSupplementary(value), "wxUniChar::HighSurrogate() must be called on a supplementary character");
-        return static_cast<wxUint16>(0xD800 | ((value - 0x10000) >> 10));
+        return static_cast<std::uint16_t>(0xD800 | ((value - 0x10000) >> 10));
     }
 
     // Returns the low surrogate code unit for the supplementary character
-    static wxUint16 LowSurrogate(wxUint32 value)
+    static std::uint16_t LowSurrogate(std::uint32_t value)
     {
         wxASSERT_MSG(IsSupplementary(value), "wxUniChar::LowSurrogate() must be called on a supplementary character");
-        return static_cast<wxUint16>(0xDC00 | ((value - 0x10000) & 0x03FF));
+        return static_cast<std::uint16_t>(0xDC00 | ((value - 0x10000) & 0x03FF));
     }
 
     // Returns true if the character is a BMP character:
@@ -113,10 +113,10 @@ public:
     bool IsSupplementary() const { return IsSupplementary(m_value); }
 
     // Returns the high surrogate code unit for the supplementary character
-    wxUint16 HighSurrogate() const { return HighSurrogate(m_value); }
+    std::uint16_t HighSurrogate() const { return HighSurrogate(m_value); }
 
     // Returns the low surrogate code unit for the supplementary character
-    wxUint16 LowSurrogate() const { return LowSurrogate(m_value); }
+    std::uint16_t LowSurrogate() const { return LowSurrogate(m_value); }
 
     // Conversions to char and wchar_t types: all of those are needed to be
     // able to pass wxUniChars to various standard narrow and wide character
@@ -244,8 +244,8 @@ public:
 
     bool IsBMP() const { return UniChar().IsBMP(); }
     bool IsSupplementary() const { return UniChar().IsSupplementary(); }
-    wxUint16 HighSurrogate() const { return UniChar().HighSurrogate(); }
-    wxUint16 LowSurrogate() const { return UniChar().LowSurrogate(); }
+    std::uint16_t HighSurrogate() const { return UniChar().HighSurrogate(); }
+    std::uint16_t LowSurrogate() const { return UniChar().LowSurrogate(); }
 
     // Assignment operators:
 #if wxUSE_UNICODE_UTF8

@@ -253,10 +253,10 @@ wxImage wxXPMDecoder::ReadFile(wxInputStream& stream)
 typedef struct
 {
     const char *name;
-    wxUint32 rgb;
+    std::uint32_t rgb;
 } rgbRecord;
 
-#define myRGB(r,g,b)   ((wxUint32)r<<16|(wxUint32)g<<8|(wxUint32)b)
+#define myRGB(r,g,b)   ((std::uint32_t)r<<16|(std::uint32_t)g<<8|(std::uint32_t)b)
 
 constexpr rgbRecord theRGBRecords[] =
 {
@@ -587,7 +587,7 @@ static bool GetRGBFromName(const char *inname, bool *isNone,
             cmp = strcmp(name, theRGBRecords[middle].name);
             if ( cmp == 0 )
             {
-                wxUint32 rgbVal;
+                std::uint32_t rgbVal;
                 rgbVal = theRGBRecords[middle].rgb;
                 *r = (unsigned char)((rgbVal >> 16) & 0xFF);
                 *g = (unsigned char)((rgbVal >> 8) & 0xFF);

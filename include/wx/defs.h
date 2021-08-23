@@ -868,7 +868,7 @@ inline void *wxUIntToPtr(wxUIntPtr p)
     (((wxUint16) (val) & (wxUint16) 0xff00U) >> 8)))
 
 #define wxINT16_SWAP_ALWAYS(val) \
-   ((wxInt16) ( \
+   ((std::int16_t) ( \
     (((wxUint16) (val) & (wxUint16) 0x00ffU) << 8) | \
     (((wxUint16) (val) & (wxUint16) 0xff00U) >> 8)))
 

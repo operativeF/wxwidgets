@@ -126,14 +126,14 @@ public:
     // implemented in colourcmn.cpp
     virtual wxString GetAsString(long flags = wxC2S_NAME | wxC2S_CSS_SYNTAX) const;
 
-    void SetRGB(wxUint32 colRGB)
+    void SetRGB(std::uint32_t colRGB)
     {
         Set((ChannelType)(0xFF & colRGB),
             (ChannelType)(0xFF & (colRGB >> 8)),
             (ChannelType)(0xFF & (colRGB >> 16)));
     }
 
-    void SetRGBA(wxUint32 colRGBA)
+    void SetRGBA(std::uint32_t colRGBA)
     {
         Set((ChannelType)(0xFF & colRGBA),
             (ChannelType)(0xFF & (colRGBA >> 8)),
@@ -141,10 +141,10 @@ public:
             (ChannelType)(0xFF & (colRGBA >> 24)));
     }
 
-    wxUint32 GetRGB() const
+    std::uint32_t GetRGB() const
         { return Red() | (Green() << 8) | (Blue() << 16); }
 
-    wxUint32 GetRGBA() const
+    std::uint32_t GetRGBA() const
         { return Red() | (Green() << 8) | (Blue() << 16) | (Alpha() << 24); }
 
 #if !wxCOLOUR_IS_GDIOBJECT

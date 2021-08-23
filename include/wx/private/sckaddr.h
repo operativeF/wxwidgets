@@ -212,8 +212,8 @@ public:
         return CALL_IPV4_OR_6(SetHostName, (name));
     }
 
-    wxUint16 GetPort() const { return CALL_IPV4_OR_6_VOID(GetPort); }
-    bool SetPort(wxUint16 port) { return CALL_IPV4_OR_6(SetPort, (port)); }
+    std::uint16_t GetPort() const { return CALL_IPV4_OR_6_VOID(GetPort); }
+    bool SetPort(std::uint16_t port) { return CALL_IPV4_OR_6(SetPort, (port)); }
     bool SetPortName(const wxString& name, const char *protocol);
 
     bool SetToAnyAddress() { return CALL_IPV4_OR_6_VOID(SetToAnyAddress); }
@@ -221,8 +221,8 @@ public:
 #undef CALL_IPV4_OR_6
 
     // accessors for INET addresses only
-    bool GetHostAddress(wxUint32 *address) const;
-    bool SetHostAddress(wxUint32 address);
+    bool GetHostAddress(std::uint32_t *address) const;
+    bool SetHostAddress(std::uint32_t address);
 
     bool SetToBroadcastAddress() { return SetHostAddress(INADDR_BROADCAST); }
 
@@ -294,16 +294,16 @@ private:
     // IPv4/6 implementations of public functions
     bool SetHostName4(const wxString& name);
 
-    bool SetPort4(wxUint16 port);
-    wxUint16 GetPort4() const;
+    bool SetPort4(std::uint16_t port);
+    std::uint16_t GetPort4() const;
 
     bool SetToAnyAddress4() { return SetHostAddress(INADDR_ANY); }
 
 #if wxUSE_IPV6
     bool SetHostName6(const wxString& name);
 
-    bool SetPort6(wxUint16 port);
-    wxUint16 GetPort6() const;
+    bool SetPort6(std::uint16_t port);
+    std::uint16_t GetPort6() const;
 
     bool SetToAnyAddress6();
 #endif // wxUSE_IPV6

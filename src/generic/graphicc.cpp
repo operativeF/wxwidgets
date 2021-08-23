@@ -1608,7 +1608,7 @@ wxCairoBitmapData::wxCairoBitmapData( wxGraphicsRenderer* renderer, const wxBitm
     int stride = InitBuffer(bmp.GetWidth(), bmp.GetHeight(), bufferFormat);
 
     wxBitmap bmpSource = bmp;  // we need a non-const instance
-    wxUint32* data = (wxUint32*)m_buffer;
+    std::uint32_t* data = (std::uint32_t*)m_buffer;
 
     if ( isSrcBpp32 )
     {
@@ -1621,7 +1621,7 @@ wxCairoBitmapData::wxCairoBitmapData( wxGraphicsRenderer* renderer, const wxBitm
             for (int y=0; y < pixData.GetHeight(); y++)
             {
                 wxAlphaPixelData::Iterator rowStart = p;
-                wxUint32* const rowStartDst = data;
+                std::uint32_t* const rowStartDst = data;
                 for (int x=0; x < pixData.GetWidth(); x++)
                 {
                     // Each pixel in CAIRO_FORMAT_ARGB32 is a 32-bit quantity,
@@ -1670,7 +1670,7 @@ wxCairoBitmapData::wxCairoBitmapData( wxGraphicsRenderer* renderer, const wxBitm
         for (int y=0; y < pixData.GetHeight(); y++)
         {
             wxNativePixelData::Iterator rowStart = p;
-            wxUint32* const rowStartDst = data;
+            std::uint32_t* const rowStartDst = data;
             for (int x=0; x < pixData.GetWidth(); x++)
             {
                 // Each pixel in CAIRO_FORMAT_RGB24 is a 32-bit quantity, with
@@ -1693,7 +1693,7 @@ wxCairoBitmapData::wxCairoBitmapData( wxGraphicsRenderer* renderer, const wxBitm
     if (bmp.GetMask() != NULL)
     {
         wxBitmap bmpMask = bmp.GetMask()->GetBitmap();
-        data = (wxUint32*)m_buffer;
+        data = (std::uint32_t*)m_buffer;
         wxNativePixelData pixData(bmpMask);
         wxCHECK_RET( pixData, wxT("Failed to gain raw access to mask data."));
 
@@ -1701,7 +1701,7 @@ wxCairoBitmapData::wxCairoBitmapData( wxGraphicsRenderer* renderer, const wxBitm
         for (int y=0; y < pixData.GetHeight(); y++)
         {
             wxNativePixelData::Iterator rowStart = p;
-            wxUint32* const rowStartDst = data;
+            std::uint32_t* const rowStartDst = data;
             for (int x=0; x < pixData.GetWidth(); x++)
             {
                 if (p.Red()+p.Green()+p.Blue() == 0)
@@ -1733,10 +1733,10 @@ wxCairoBitmapData::wxCairoBitmapData(wxGraphicsRenderer* renderer,
 
     int stride = InitBuffer(image.GetWidth(), image.GetHeight(), bufferFormat);
 
-    // Copy wxImage data into the buffer. Notice that we work with wxUint32
+    // Copy wxImage data into the buffer. Notice that we work with std::uint32_t
     // values and not bytes becase Cairo always works with buffers in native
     // endianness.
-    wxUint32* dst = reinterpret_cast<wxUint32*>(m_buffer);
+    std::uint32_t* dst = reinterpret_cast<std::uint32_t*>(m_buffer);
     const unsigned char* src = image.GetData();
 
     if ( bufferFormat == CAIRO_FORMAT_ARGB32 )
@@ -1745,7 +1745,7 @@ wxCairoBitmapData::wxCairoBitmapData(wxGraphicsRenderer* renderer,
 
         for ( int y = 0; y < m_height; y++ )
         {
-            wxUint32* const rowStartDst = dst;
+            std::uint32_t* const rowStartDst = dst;
 
             for ( int x = 0; x < m_width; x++ )
             {
@@ -1768,7 +1768,7 @@ wxCairoBitmapData::wxCairoBitmapData(wxGraphicsRenderer* renderer,
     {
         for ( int y = 0; y < m_height; y++ )
         {
-            wxUint32* const rowStartDst = dst;
+            std::uint32_t* const rowStartDst = dst;
 
             for ( int x = 0; x < m_width; x++ )
             {
@@ -1790,14 +1790,14 @@ wxCairoBitmapData::wxCairoBitmapData(wxGraphicsRenderer* renderer,
         unsigned char mg = image.GetMaskGreen();
         unsigned char mb = image.GetMaskBlue();
 
-        dst = reinterpret_cast<wxUint32*>(m_buffer);
+        dst = reinterpret_cast<std::uint32_t*>(m_buffer);
         src = image.GetData();
 
         if ( bufferFormat == CAIRO_FORMAT_ARGB32 )
         {
             for ( int y = 0; y < m_height; y++ )
             {
-                wxUint32* const rowStartDst = dst;
+                std::uint32_t* const rowStartDst = dst;
 
                 for ( int x = 0; x < m_width; x++ )
                 {
@@ -1847,18 +1847,18 @@ wxImage wxCairoBitmapData::ConvertToImage() const
 
     // Prepare for copying data.
     cairo_surface_flush(m_surface);
-    const wxUint32* src = (wxUint32*)cairo_image_surface_get_data(m_surface);
+    const std::uint32_t* src = (std::uint32_t*)cairo_image_surface_get_data(m_surface);
     wxCHECK_MSG( src, wxNullImage, wxS("Failed to get Cairo surface data.") );
 
     int stride = cairo_image_surface_get_stride(m_surface);
     wxCHECK_MSG( stride > 0, wxNullImage,
                  wxS("Failed to get Cairo surface stride.") );
 
-    // As we work with wxUint32 pointers and not char ones, we need to adjust
+    // As we work with std::uint32_t pointers and not char ones, we need to adjust
     // the stride accordingly. This should be lossless as the stride must be a
     // multiple of pixel size.
-    wxASSERT_MSG( !(stride % sizeof(wxUint32)), wxS("Unexpected stride.") );
-    stride /= sizeof(wxUint32);
+    wxASSERT_MSG( !(stride % sizeof(std::uint32_t)), wxS("Unexpected stride.") );
+    stride /= sizeof(std::uint32_t);
 
     unsigned char* dst = image.GetData();
     unsigned char *alpha = image.GetAlpha();
@@ -1868,10 +1868,10 @@ wxImage wxCairoBitmapData::ConvertToImage() const
         // stores pre-multiplied values in this format while wxImage does not.
         for ( int y = 0; y < m_height; y++ )
         {
-            const wxUint32* const rowStart = src;
+            const std::uint32_t* const rowStart = src;
             for ( int x = 0; x < m_width; x++ )
             {
-                const wxUint32 argb = *src++;
+                const std::uint32_t argb = *src++;
 
                 const unsigned char a = argb >> 24;
                 *alpha++ = a;
@@ -1890,10 +1890,10 @@ wxImage wxCairoBitmapData::ConvertToImage() const
         // Things are pretty simple in this case, just copy RGB bytes.
         for ( int y = 0; y < m_height; y++ )
         {
-            const wxUint32* const rowStart = src;
+            const std::uint32_t* const rowStart = src;
             for ( int x = 0; x < m_width; x++ )
             {
-                const wxUint32 argb = *src++;
+                const std::uint32_t argb = *src++;
 
                 *dst++ = (argb & 0x00ff0000) >> 16;
                 *dst++ = (argb & 0x0000ff00) >>  8;

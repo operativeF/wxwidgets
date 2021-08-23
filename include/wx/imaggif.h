@@ -66,7 +66,7 @@ protected:
     unsigned long m_crntShiftDWord;   /* For bytes decomposition into codes. */
     int m_pixelCount;
     struct GifHashTableType *m_hashTable;
-    wxInt16
+    std::int16_t
       m_EOFCode,     /* The EOF LZ code. */
       m_clearCode,   /* The CLEAR LZ code. */
       m_runningCode, /* The next code algorithm can generate. */
@@ -74,7 +74,7 @@ protected:
       m_maxCode1,    /* 1 bigger than max. possible code, in RunningBits bits. */
       m_crntCode,    /* Current algorithm code. */
       m_crntShiftState;    /* Number of bits in CrntShiftDWord. */
-    wxUint8 m_LZBuf[256];   /* Compressed input is buffered here. */
+    std::uint8_t m_LZBuf[256];   /* Compressed input is buffered here. */
 
     bool InitHashTable();
     void ClearHashTable();
@@ -84,7 +84,7 @@ protected:
 #if wxUSE_STREAMS
     bool CompressOutput(wxOutputStream *, int code);
     bool SetupCompress(wxOutputStream *, int bpp);
-    bool CompressLine(wxOutputStream *, const wxUint8 *line, int lineLen);
+    bool CompressLine(wxOutputStream *, const std::uint8_t *line, int lineLen);
 #endif
 
 private:

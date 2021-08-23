@@ -41,7 +41,7 @@ WX_PG_DECLARE_EDITOR_WITH_DECL(DatePickerCtrl,WXDLLIMPEXP_PROPGRID)
 
 // Web colour is currently unsupported
 #define wxPG_COLOUR_WEB_BASE        0x10000
-//#define wxPG_TO_WEB_COLOUR(A)   ((wxUint32)(A+wxPG_COLOUR_WEB_BASE))
+//#define wxPG_TO_WEB_COLOUR(A)   ((std::uint32_t)(A+wxPG_COLOUR_WEB_BASE))
 
 
 #define wxPG_COLOUR_CUSTOM      0xFFFFFF
@@ -64,7 +64,7 @@ public:
     // index or wxPG_COLOUR_CUSTOM
     // For custom colour properties with values array specified:
     // m_arrValues[index] or wxPG_COLOUR_CUSTOM
-    wxUint32    m_type;
+    std::uint32_t    m_type;
 
     // Resulting colour. Should be correct regardless of type.
     wxColour    m_colour;
@@ -85,7 +85,7 @@ public:
         m_type = v.m_type;
     }
 
-    void Init( wxUint32 type, const wxColour& colour )
+    void Init( std::uint32_t type, const wxColour& colour )
     {
         m_type = type;
         m_colour = colour;
@@ -98,13 +98,13 @@ public:
         m_type = wxPG_COLOUR_CUSTOM;
     }
 
-    wxColourPropertyValue( wxUint32 type )
+    wxColourPropertyValue( std::uint32_t type )
          
     {
         m_type = type;
     }
 
-    wxColourPropertyValue( wxUint32 type, const wxColour& colour )
+    wxColourPropertyValue( std::uint32_t type, const wxColour& colour )
          
     {
         Init( type, colour );

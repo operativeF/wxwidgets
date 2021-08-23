@@ -260,7 +260,7 @@ struct wxStringFragment
 
     Type     type{Empty};
     wxString text;
-    wxUint64 value{0}; // used only for Digit type
+    std::uint64_t value{0}; // used only for Digit type
 };
 
 
@@ -270,7 +270,7 @@ wxStringFragment GetFragment(wxString& text)
         return {};
 
     // the maximum length of a sequence of digits that
-    // can fit into wxUint64 when converted to a number
+    // can fit into std::uint64_t when converted to a number
     static constexpr ptrdiff_t maxDigitSequenceLength = 19;
 
     wxStringFragment         fragment;

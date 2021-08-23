@@ -702,7 +702,7 @@ public:
     // Note that wxEVT_PG_CHANGING and wxEVT_PG_CHANGED are dispatched using
     // ProcessEvent, meaning your event handlers will be called immediately.
     // Returns true if anything was changed.
-    virtual bool CommitChangesFromEditor( wxUint32 flags = 0 );
+    virtual bool CommitChangesFromEditor( std::uint32_t flags = 0 );
 
     // Two step creation.
     // Whenever the control is created without any parameters, use Create to
@@ -1563,7 +1563,7 @@ protected:
     wxRecursionGuardFlag    m_validatingEditor;
 
     // Internal flags - see wxPG_FL_XXX constants.
-    wxUint32            m_iFlags;
+    std::uint32_t            m_iFlags;
 
     // Mouse is hovering over this column (index), -1 for margin
     int                 m_colHover;

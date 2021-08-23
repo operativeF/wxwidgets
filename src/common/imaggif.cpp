@@ -56,14 +56,14 @@ enum
 
 struct wxRGB
 {
-    wxUint8 red;
-    wxUint8 green;
-    wxUint8 blue;
+    std::uint8_t red;
+    std::uint8_t green;
+    std::uint8_t blue;
 };
 
 struct GifHashTableType
 {
-    wxUint32 HTable[HT_SIZE];
+    std::uint32_t HTable[HT_SIZE];
 };
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxGIFHandler,wxImageHandler);
@@ -86,8 +86,8 @@ static
 int wxGIFHandler_PaletteFind(const wxRGB& clr, const wxRGB *array, int count);
 
 static bool wxGIFHandler_Write(wxOutputStream *, const void *buf, size_t len);
-static bool wxGIFHandler_WriteByte(wxOutputStream *, wxUint8);
-static bool wxGIFHandler_WriteWord(wxOutputStream *, wxUint16);
+static bool wxGIFHandler_WriteByte(wxOutputStream *, std::uint8_t);
+static bool wxGIFHandler_WriteWord(wxOutputStream *, std::uint16_t);
 static bool wxGIFHandler_WriteHeader(wxOutputStream *, int width, int height,
     bool loop, const wxRGB *pal, int palCount);
 static bool wxGIFHandler_WriteRect(wxOutputStream *, int width, int height);
@@ -102,7 +102,7 @@ static bool wxGIFHandler_WriteControl(wxOutputStream *,
 static bool wxGIFHandler_WriteComment(wxOutputStream *, const wxString&);
 static bool wxGIFHandler_WriteLoop(wxOutputStream *);
 
-static bool wxGIFHandler_BufferedOutput(wxOutputStream *, wxUint8 *buf, int c);
+static bool wxGIFHandler_BufferedOutput(wxOutputStream *, std::uint8_t *buf, int c);
 #endif // wxUSE_STREAMS
 
 //-----------------------------------------------------------------------------
@@ -220,7 +220,7 @@ bool wxGIFHandler::DoSaveFile(const wxImage& image, wxOutputStream *stream,
     else
     {
         const int bpp = wxGIFHandler_BitSize(palCount);
-        wxUint8 b;
+        std::uint8_t b;
 
         b = 0x80;
         b |=(bpp - 1) << 5;
@@ -242,8 +242,8 @@ bool wxGIFHandler::DoSaveFile(const wxImage& image, wxOutputStream *stream,
         return false;
     }
 
-    const wxUint8 *src = image.GetData();
-    auto eightBitData = std::make_unique<wxUint8[]>(width);
+    const std::uint8_t *src = image.GetData();
+    auto eightBitData = std::make_unique<std::uint8_t[]>(width);
 
     SetupCompress(stream, 8);
 
@@ -259,7 +259,7 @@ bool wxGIFHandler::DoSaveFile(const wxImage& image, wxOutputStream *stream,
             rgb.blue  = src[2];
             int index = wxGIFHandler_PaletteFind(rgb, pal, palCount);
             wxASSERT(index != wxNOT_FOUND);
-            eightBitData[x] = (wxUint8)index;
+            eightBitData[x] = (std::uint8_t)index;
             src+=3;
         }
 
@@ -384,12 +384,12 @@ bool wxGIFHandler::SetupCompress(wxOutputStream *stream, int bpp)
     // Clear hash table and send Clear to make sure the decoder does the same.
     ClearHashTable();
 
-    return wxGIFHandler_WriteByte(stream, (wxUint8)bpp)
+    return wxGIFHandler_WriteByte(stream, (std::uint8_t)bpp)
         && CompressOutput(stream, m_clearCode);
 }
 
 bool wxGIFHandler::CompressLine(wxOutputStream *stream,
-    const wxUint8 *line, int lineLen)
+    const std::uint8_t *line, int lineLen)
 {
     int i = 0, crntCode;
     if (m_crntCode == FIRST_CODE)                  // It's first time!
@@ -400,7 +400,7 @@ bool wxGIFHandler::CompressLine(wxOutputStream *stream,
     while (i < lineLen)
     {
         // Decode lineLen items.
-        wxUint8 pixel;
+        std::uint8_t pixel;
         pixel = line[i++];                    // Get next pixel from stream.
         // Form a new unique key to search hash table for the code combines
         // crntCode as Prefix string with Pixel as postfix char.
@@ -484,7 +484,7 @@ bool wxGIFHandler::InitHashTable()
 void wxGIFHandler::ClearHashTable()
 {
     int index = HT_SIZE;
-    wxUint32 *HTable = m_hashTable->HTable;
+    std::uint32_t *HTable = m_hashTable->HTable;
 
     while (--index>=0)
     {
@@ -495,7 +495,7 @@ void wxGIFHandler::ClearHashTable()
 void wxGIFHandler::InsertHashTable(unsigned long key, int code)
 {
     int hKey = wxGIFHandler_KeyItem(key);
-    wxUint32 *HTable = m_hashTable->HTable;
+    std::uint32_t *HTable = m_hashTable->HTable;
 
     while (HT_GET_KEY(HTable[hKey]) != 0xFFFFFL)
     {
@@ -508,7 +508,7 @@ void wxGIFHandler::InsertHashTable(unsigned long key, int code)
 int wxGIFHandler::ExistsHashTable(unsigned long key)
 {
     int hKey = wxGIFHandler_KeyItem(key);
-    wxUint32 *HTable = m_hashTable->HTable, HTKey;
+    std::uint32_t *HTable = m_hashTable->HTable, HTKey;
 
     while ((HTKey = HT_GET_KEY(HTable[hKey])) != 0xFFFFFL)
     {
@@ -608,14 +608,14 @@ bool wxGIFHandler_Write(wxOutputStream *stream, const void *buf, size_t len)
     return (len == stream->Write(buf, len).LastWrite());
 }
 
-bool wxGIFHandler_WriteByte(wxOutputStream *stream, wxUint8 byte)
+bool wxGIFHandler_WriteByte(wxOutputStream *stream, std::uint8_t byte)
 {
     return wxGIFHandler_Write(stream, &byte, sizeof(byte));
 }
 
-bool wxGIFHandler_WriteWord(wxOutputStream *stream, wxUint16 word)
+bool wxGIFHandler_WriteWord(wxOutputStream *stream, std::uint16_t word)
 {
-    wxUint8 buf[2];
+    std::uint8_t buf[2];
 
     buf[0] = word & 0xff;
     buf[1] = (word >> 8) & 0xff;
@@ -626,11 +626,11 @@ bool wxGIFHandler_WriteHeader(wxOutputStream *stream, int width, int height,
     bool loop, const wxRGB *pal, int palCount)
 {
     const int bpp = wxGIFHandler_BitSize(palCount);
-    wxUint8 buf[3];
+    std::uint8_t buf[3];
 
     bool ok = wxGIFHandler_Write(stream, GIF89_HDR, sizeof(GIF89_HDR)-1)
-        && wxGIFHandler_WriteWord(stream, (wxUint16) width)
-        && wxGIFHandler_WriteWord(stream, (wxUint16) height);
+        && wxGIFHandler_WriteWord(stream, (std::uint16_t) width)
+        && wxGIFHandler_WriteWord(stream, (std::uint16_t) height);
 
     buf[0] = 0x80;
     buf[0] |=(bpp - 1) << 5;
@@ -652,8 +652,8 @@ bool wxGIFHandler_WriteRect(wxOutputStream *stream, int width, int height)
 {
     return wxGIFHandler_WriteWord(stream, 0) // left
         && wxGIFHandler_WriteWord(stream, 0) // top
-        && wxGIFHandler_WriteWord(stream, (wxUint16) width)
-        && wxGIFHandler_WriteWord(stream, (wxUint16) height);
+        && wxGIFHandler_WriteWord(stream, (std::uint16_t) width)
+        && wxGIFHandler_WriteWord(stream, (std::uint16_t) height);
 }
 
 #if wxUSE_PALETTE
@@ -671,7 +671,7 @@ bool wxGIFHandler_WriteZero(wxOutputStream *stream)
 bool wxGIFHandler_WritePalette(wxOutputStream *stream,
     const wxRGB *array, size_t count, int bpp)
 {
-    wxUint8 buf[3];
+    std::uint8_t buf[3];
     for (int i = 0; (i < (1 << bpp)); i++)
     {
         if (i < (int)count)
@@ -697,8 +697,8 @@ bool wxGIFHandler_WritePalette(wxOutputStream *stream,
 bool wxGIFHandler_WriteControl(wxOutputStream *stream,
     int maskIndex, int delayMilliSecs)
 {
-    wxUint8 buf[8];
-    const wxUint16 delay = delayMilliSecs / 10;
+    std::uint8_t buf[8];
+    const std::uint16_t delay = delayMilliSecs / 10;
 
     buf[0] = GIF_MARKER_EXT;    // extension marker
     buf[1] = GIF_MARKER_EXT_GRAPHICS_CONTROL;
@@ -706,7 +706,7 @@ bool wxGIFHandler_WriteControl(wxOutputStream *stream,
     buf[3] = (maskIndex != wxNOT_FOUND) ? 1 : 0;   // has transparency
     buf[4] = delay & 0xff;  // delay time
     buf[5] = (delay >> 8) & 0xff;   // delay time second byte
-    buf[6] = (maskIndex != wxNOT_FOUND) ? (wxUint8) maskIndex : 0;
+    buf[6] = (maskIndex != wxNOT_FOUND) ? (std::uint8_t) maskIndex : 0;
     buf[7] = 0;
     return wxGIFHandler_Write(stream, buf, sizeof(buf));
 }
@@ -719,7 +719,7 @@ bool wxGIFHandler_WriteComment(wxOutputStream *stream, const wxString& comment)
     }
 
     // Write comment header.
-    wxUint8 buf[2];
+    std::uint8_t buf[2];
     buf[0] = GIF_MARKER_EXT;
     buf[1] = GIF_MARKER_EXT_COMMENT;
     if ( !wxGIFHandler_Write(stream, buf, sizeof(buf)) )
@@ -739,7 +739,7 @@ bool wxGIFHandler_WriteComment(wxOutputStream *stream, const wxString& comment)
     {
         size_t blockLength = wxMin(fullLength - pos, 255);
 
-        if ( !wxGIFHandler_WriteByte(stream, (wxUint8) blockLength)
+        if ( !wxGIFHandler_WriteByte(stream, (std::uint8_t) blockLength)
             || !wxGIFHandler_Write(stream, &text.data()[pos], blockLength) )
         {
             return false;
@@ -755,7 +755,7 @@ bool wxGIFHandler_WriteComment(wxOutputStream *stream, const wxString& comment)
 
 bool wxGIFHandler_WriteLoop(wxOutputStream *stream)
 {
-    wxUint8 buf[4];
+    std::uint8_t buf[4];
     static constexpr int loopcount = 0; // infinite
 
     buf[0] = GIF_MARKER_EXT;
@@ -773,7 +773,7 @@ bool wxGIFHandler_WriteLoop(wxOutputStream *stream)
         && wxGIFHandler_WriteZero(stream);
 }
 
-bool wxGIFHandler_BufferedOutput(wxOutputStream *stream, wxUint8 *buf, int c)
+bool wxGIFHandler_BufferedOutput(wxOutputStream *stream, std::uint8_t *buf, int c)
 {
     bool ok = true;
 

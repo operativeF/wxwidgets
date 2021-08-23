@@ -557,9 +557,9 @@ void wxComboCtrl::OnMouseEvent( wxMouseEvent& event )
 namespace 
 {
 
-wxUint32 GetUserPreferencesMask()
+std::uint32_t GetUserPreferencesMask()
 {
-    static wxUint32 userPreferencesMask = 0;
+    static std::uint32_t userPreferencesMask = 0;
     static bool valueSet = false;
 
     if ( valueSet )
@@ -585,7 +585,7 @@ wxUint32 GetUserPreferencesMask()
         {
             if ( buf.GetDataLen() >= 4 )
             {
-                wxUint32* p = (wxUint32*) buf.GetData();
+                std::uint32_t* p = (std::uint32_t*) buf.GetData();
                 userPreferencesMask = *p;
             }
         }

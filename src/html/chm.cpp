@@ -584,8 +584,8 @@ wxChmInputStream::CreateHHPStream()
         tmp = "[OPTIONS]\r\n";
         out->Write((const void *) tmp, strlen(tmp));
 
-        wxUint16 code;
-        wxUint16 len;
+        std::uint16_t code;
+        std::uint16_t len;
         void *buf;
 
         // use the actual stream for reading
@@ -640,8 +640,8 @@ wxChmInputStream::CreateHHPStream()
                     {
                         char *structptr = (char*) buf ;
                         // LCID at position 0
-                        wxUint32 dummy = *((wxUint32 *)(structptr+0)) ;
-                        wxUint32 lcid = wxUINT32_SWAP_ON_BE( dummy ) ;
+                        std::uint32_t dummy = *((std::uint32_t *)(structptr+0)) ;
+                        std::uint32_t lcid = wxUINT32_SWAP_ON_BE( dummy ) ;
                         char msg[64];
                         int len = sprintf(msg, "Language=0x%X\r\n", lcid) ;
                         if (len > 0)

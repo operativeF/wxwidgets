@@ -882,7 +882,7 @@ inline void wxSize::DecBy(const wxPoint& pt) { DecBy(pt.x, pt.y); }
 // Management of pens, brushes and fonts
 // ---------------------------------------------------------------------------
 
-using wxDash = wxInt8;
+using wxDash = std::int8_t;
 
 class WXDLLIMPEXP_CORE wxGDIObjListBase {
 public:

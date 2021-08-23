@@ -913,19 +913,19 @@ void wxDCImpl::DoGradientFillLinear(const wxRect& rect,
     wxPen oldPen = m_pen;
     wxBrush oldBrush = m_brush;
 
-    wxUint8 nR1 = initialColour.Red();
-    wxUint8 nG1 = initialColour.Green();
-    wxUint8 nB1 = initialColour.Blue();
-    wxUint8 nR2 = destColour.Red();
-    wxUint8 nG2 = destColour.Green();
-    wxUint8 nB2 = destColour.Blue();
-    wxUint8 nR, nG, nB;
+    std::uint8_t nR1 = initialColour.Red();
+    std::uint8_t nG1 = initialColour.Green();
+    std::uint8_t nB1 = initialColour.Blue();
+    std::uint8_t nR2 = destColour.Red();
+    std::uint8_t nG2 = destColour.Green();
+    std::uint8_t nB2 = destColour.Blue();
+    std::uint8_t nR, nG, nB;
 
     if ( nDirection == wxEAST || nDirection == wxWEST )
     {
-        wxInt32 x = rect.GetWidth();
-        wxInt32 w = x;              // width of area to shade
-        wxInt32 xDelta = w/256;     // height of one shade bend
+        std::int32_t x = rect.GetWidth();
+        std::int32_t w = x;              // width of area to shade
+        std::int32_t xDelta = w/256;     // height of one shade bend
         if (xDelta < 1)
             xDelta = 1;
 
@@ -960,9 +960,9 @@ void wxDCImpl::DoGradientFillLinear(const wxRect& rect,
     }
     else  // nDirection == wxNORTH || nDirection == wxSOUTH
     {
-        wxInt32 y = rect.GetHeight();
-        wxInt32 w = y;              // height of area to shade
-        wxInt32 yDelta = w/255;     // height of one shade bend
+        std::int32_t y = rect.GetHeight();
+        std::int32_t w = y;              // height of area to shade
+        std::int32_t yDelta = w/255;     // height of one shade bend
         if (yDelta < 1)
             yDelta = 1;
 
@@ -1009,12 +1009,12 @@ void wxDCImpl::DoGradientFillConcentric(const wxRect& rect,
     const wxPen penOrig = m_pen;
     wxON_BLOCK_EXIT_SET(m_pen, penOrig);
 
-    const wxUint8 nR1 = destColour.Red();
-    const wxUint8 nG1 = destColour.Green();
-    const wxUint8 nB1 = destColour.Blue();
-    const wxUint8 nR2 = initialColour.Red();
-    const wxUint8 nG2 = initialColour.Green();
-    const wxUint8 nB2 = initialColour.Blue();
+    const std::uint8_t nR1 = destColour.Red();
+    const std::uint8_t nG1 = destColour.Green();
+    const std::uint8_t nB1 = destColour.Blue();
+    const std::uint8_t nR2 = initialColour.Red();
+    const std::uint8_t nG2 = initialColour.Green();
+    const std::uint8_t nB2 = initialColour.Blue();
 
     //Radius
     double cx = rect.GetWidth() / 2;
@@ -1032,9 +1032,9 @@ void wxDCImpl::DoGradientFillConcentric(const wxRect& rect,
     const double nCircleOffX = ptX - cx;
     const double nCircleOffY = ptY - cy;
 
-    for ( wxInt32 x = 0; x < rect.GetWidth(); x++ )
+    for ( std::int32_t x = 0; x < rect.GetWidth(); x++ )
     {
-        for ( wxInt32 y = 0; y < rect.GetHeight(); y++ )
+        for ( std::int32_t y = 0; y < rect.GetHeight(); y++ )
         {
             //get color difference
             const double dx = x;
@@ -1051,9 +1051,9 @@ void wxDCImpl::DoGradientFillConcentric(const wxRect& rect,
                 dGradient = 0.0;
 
             //get dest colors
-            const wxUint8 nR = (wxUint8)(nR1 + ((nR2 - nR1) * dGradient / 100));
-            const wxUint8 nG = (wxUint8)(nG1 + ((nG2 - nG1) * dGradient / 100));
-            const wxUint8 nB = (wxUint8)(nB1 + ((nB2 - nB1) * dGradient / 100));
+            const std::uint8_t nR = (std::uint8_t)(nR1 + ((nR2 - nR1) * dGradient / 100));
+            const std::uint8_t nG = (std::uint8_t)(nG1 + ((nG2 - nG1) * dGradient / 100));
+            const std::uint8_t nB = (std::uint8_t)(nB1 + ((nB2 - nB1) * dGradient / 100));
 
             //set the pixel
             SetPen(wxColour(nR,nG,nB));

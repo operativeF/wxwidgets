@@ -38,7 +38,7 @@ protected:
     ~wxLZMAData();
 
     wxLZMAStream* m_stream;
-    wxUint8* m_streamBuf;
+    std::uint8_t* m_streamBuf;
     wxFileOffset m_pos;
 };
 

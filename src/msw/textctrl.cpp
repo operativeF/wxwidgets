@@ -1099,7 +1099,7 @@ bool wxTextCtrl::EmulateKeyPress(const wxKeyEvent& event)
 
     size_t lenOld = GetValue().length();
 
-    wxUint32 code = event.GetRawKeyCode();
+    std::uint32_t code = event.GetRawKeyCode();
     ::keybd_event((BYTE)code, 0, 0 /* key press */, 0);
     ::keybd_event((BYTE)code, 0, KEYEVENTF_KEYUP, 0);
 

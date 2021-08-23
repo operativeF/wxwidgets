@@ -27,13 +27,13 @@ namespace
 union Float32Data
 {
     float f;
-    wxUint32 i;
+    std::uint32_t i;
 };
 
 union Float64Data
 {
     double f;
-    wxUint32 i[2];
+    std::uint32_t i[2];
 };
 
 } // anonymous namespace
@@ -72,19 +72,19 @@ wxDataInputStream::wxDataInputStream(wxInputStream& s, const wxMBConv& conv)
 }
 
 #if wxHAS_INT64
-wxUint64 wxDataInputStream::Read64()
+std::uint64_t wxDataInputStream::Read64()
 {
   // TODO: Return value
-  wxUint64 tmp;
+  std::uint64_t tmp;
   Read64(&tmp, 1);
   return tmp;
 }
 #endif // wxHAS_INT64
 
-wxUint32 wxDataInputStream::Read32()
+std::uint32_t wxDataInputStream::Read32()
 {
   // TODO: Return value
-  wxUint32 i32;
+  std::uint32_t i32;
 
   m_input->Read(&i32, 4);
 
@@ -94,10 +94,10 @@ wxUint32 wxDataInputStream::Read32()
     return wxUINT32_SWAP_ON_BE(i32);
 }
 
-wxUint16 wxDataInputStream::Read16()
+std::uint16_t wxDataInputStream::Read16()
 {
   // TODO: Return value.
-  wxUint16 i16;
+  std::uint16_t i16;
 
   m_input->Read(&i16, 2);
 
@@ -107,12 +107,12 @@ wxUint16 wxDataInputStream::Read16()
     return wxUINT16_SWAP_ON_BE(i16);
 }
 
-wxUint8 wxDataInputStream::Read8()
+std::uint8_t wxDataInputStream::Read8()
 {
-  wxUint8 buf;
+  std::uint8_t buf;
 
   m_input->Read(&buf, 1);
-  return (wxUint8)buf;
+  return (std::uint8_t)buf;
 }
 
 double wxDataInputStream::ReadDouble()
@@ -254,7 +254,7 @@ void DoReadI64(T *buffer, size_t size, wxInputStream *input, bool be_order)
     input->Read(pchBuffer, size * 8);
     if ( be_order )
     {
-        for ( wxUint32 i = 0; i < size; i++ )
+        for ( std::uint32_t i = 0; i < size; i++ )
         {
             DataType v = wxUINT64_SWAP_ON_LE(*buffer);
             *(buffer++) = v;
@@ -262,7 +262,7 @@ void DoReadI64(T *buffer, size_t size, wxInputStream *input, bool be_order)
     }
     else // little endian
     {
-        for ( wxUint32 i=0; i<size; i++ )
+        for ( std::uint32_t i=0; i<size; i++ )
         {
             DataType v = wxUINT64_SWAP_ON_BE(*buffer);
             *(buffer++) = v;
@@ -299,7 +299,7 @@ void DoWriteI64(const T *buffer, size_t size, wxOutputStream *output, bool be_or
 
 
 #if wxHAS_INT64
-void wxDataInputStream::Read64(wxUint64 *buffer, size_t size)
+void wxDataInputStream::Read64(std::uint64_t *buffer, size_t size)
 {
 #ifndef wxLongLong_t
     DoReadLL(buffer, size, m_input, m_be_order);
@@ -308,7 +308,7 @@ void wxDataInputStream::Read64(wxUint64 *buffer, size_t size)
 #endif
 }
 
-void wxDataInputStream::Read64(wxInt64 *buffer, size_t size)
+void wxDataInputStream::Read64(std::int64_t *buffer, size_t size)
 {
 #ifndef wxLongLong_t
     DoReadLL(buffer, size, m_input, m_be_order);
@@ -349,58 +349,58 @@ wxLongLong wxDataInputStream::ReadLL()
 }
 #endif // wxUSE_LONGLONG
 
-void wxDataInputStream::Read32(wxUint32 *buffer, size_t size)
+void wxDataInputStream::Read32(std::uint32_t *buffer, size_t size)
 {
     m_input->Read(buffer, size * 4);
 
     if (m_be_order)
     {
-        for (wxUint32 i=0; i<size; i++)
+        for (std::uint32_t i=0; i<size; i++)
         {
-            wxUint32 v = wxUINT32_SWAP_ON_LE(*buffer);
+            std::uint32_t v = wxUINT32_SWAP_ON_LE(*buffer);
             *(buffer++) = v;
         }
     }
     else
     {
-        for (wxUint32 i=0; i<size; i++)
+        for (std::uint32_t i=0; i<size; i++)
         {
-            wxUint32 v = wxUINT32_SWAP_ON_BE(*buffer);
+            std::uint32_t v = wxUINT32_SWAP_ON_BE(*buffer);
             *(buffer++) = v;
         }
     }
 }
 
-void wxDataInputStream::Read16(wxUint16 *buffer, size_t size)
+void wxDataInputStream::Read16(std::uint16_t *buffer, size_t size)
 {
   m_input->Read(buffer, size * 2);
 
   if (m_be_order)
   {
-    for (wxUint32 i=0; i<size; i++)
+    for (std::uint32_t i=0; i<size; i++)
     {
-      wxUint16 v = wxUINT16_SWAP_ON_LE(*buffer);
+      std::uint16_t v = wxUINT16_SWAP_ON_LE(*buffer);
       *(buffer++) = v;
     }
   }
   else
   {
-    for (wxUint32 i=0; i<size; i++)
+    for (std::uint32_t i=0; i<size; i++)
     {
-      wxUint16 v = wxUINT16_SWAP_ON_BE(*buffer);
+      std::uint16_t v = wxUINT16_SWAP_ON_BE(*buffer);
       *(buffer++) = v;
     }
   }
 }
 
-void wxDataInputStream::Read8(wxUint8 *buffer, size_t size)
+void wxDataInputStream::Read8(std::uint8_t *buffer, size_t size)
 {
   m_input->Read(buffer, size);
 }
 
 void wxDataInputStream::ReadDouble(double *buffer, size_t size)
 {
-  for (wxUint32 i=0; i<size; i++)
+  for (std::uint32_t i=0; i<size; i++)
   {
     *(buffer++) = ReadDouble();
   }
@@ -408,7 +408,7 @@ void wxDataInputStream::ReadDouble(double *buffer, size_t size)
 
 void wxDataInputStream::ReadFloat(float *buffer, size_t size)
 {
-  for (wxUint32 i=0; i<size; i++)
+  for (std::uint32_t i=0; i<size; i++)
   {
     *(buffer++) = ReadFloat();
   }
@@ -420,50 +420,50 @@ wxDataInputStream& wxDataInputStream::operator>>(wxString& s)
   return *this;
 }
 
-wxDataInputStream& wxDataInputStream::operator>>(wxInt8& c)
+wxDataInputStream& wxDataInputStream::operator>>(std::int8_t& c)
 {
-  c = (wxInt8)Read8();
+  c = (std::int8_t)Read8();
   return *this;
 }
 
-wxDataInputStream& wxDataInputStream::operator>>(wxInt16& i)
+wxDataInputStream& wxDataInputStream::operator>>(std::int16_t& i)
 {
-  i = (wxInt16)Read16();
+  i = (std::int16_t)Read16();
   return *this;
 }
 
-wxDataInputStream& wxDataInputStream::operator>>(wxInt32& i)
+wxDataInputStream& wxDataInputStream::operator>>(std::int32_t& i)
 {
-  i = (wxInt32)Read32();
+  i = (std::int32_t)Read32();
   return *this;
 }
 
-wxDataInputStream& wxDataInputStream::operator>>(wxUint8& c)
+wxDataInputStream& wxDataInputStream::operator>>(std::uint8_t& c)
 {
   c = Read8();
   return *this;
 }
 
-wxDataInputStream& wxDataInputStream::operator>>(wxUint16& i)
+wxDataInputStream& wxDataInputStream::operator>>(std::uint16_t& i)
 {
   i = Read16();
   return *this;
 }
 
-wxDataInputStream& wxDataInputStream::operator>>(wxUint32& i)
+wxDataInputStream& wxDataInputStream::operator>>(std::uint32_t& i)
 {
   i = Read32();
   return *this;
 }
 
 #if wxHAS_INT64
-wxDataInputStream& wxDataInputStream::operator>>(wxUint64& i)
+wxDataInputStream& wxDataInputStream::operator>>(std::uint64_t& i)
 {
   i = Read64();
   return *this;
 }
 
-wxDataInputStream& wxDataInputStream::operator>>(wxInt64& i)
+wxDataInputStream& wxDataInputStream::operator>>(std::int64_t& i)
 {
   i = Read64();
   return *this;
@@ -507,20 +507,20 @@ wxDataOutputStream::wxDataOutputStream(wxOutputStream& s, const wxMBConv& conv)
 }
 
 #if wxHAS_INT64
-void wxDataOutputStream::Write64(wxUint64 i)
+void wxDataOutputStream::Write64(std::uint64_t i)
 {
   Write64(&i, 1);
 }
 
-void wxDataOutputStream::Write64(wxInt64 i)
+void wxDataOutputStream::Write64(std::int64_t i)
 {
   Write64(&i, 1);
 }
 #endif // wxHAS_INT64
 
-void wxDataOutputStream::Write32(wxUint32 i)
+void wxDataOutputStream::Write32(std::uint32_t i)
 {
-  wxUint32 i32;
+  std::uint32_t i32;
 
   if (m_be_order)
     i32 = wxUINT32_SWAP_ON_LE(i);
@@ -529,9 +529,9 @@ void wxDataOutputStream::Write32(wxUint32 i)
   m_output->Write(&i32, 4);
 }
 
-void wxDataOutputStream::Write16(wxUint16 i)
+void wxDataOutputStream::Write16(std::uint16_t i)
 {
-  wxUint16 i16;
+  std::uint16_t i16;
 
   if (m_be_order)
     i16 = wxUINT16_SWAP_ON_LE(i);
@@ -541,7 +541,7 @@ void wxDataOutputStream::Write16(wxUint16 i)
   m_output->Write(&i16, 2);
 }
 
-void wxDataOutputStream::Write8(wxUint8 i)
+void wxDataOutputStream::Write8(std::uint8_t i)
 {
   m_output->Write(&i, 1);
 }
@@ -584,7 +584,7 @@ void wxDataOutputStream::WriteFloat(float f)
 }
 
 #if wxHAS_INT64
-void wxDataOutputStream::Write64(const wxUint64 *buffer, size_t size)
+void wxDataOutputStream::Write64(const std::uint64_t *buffer, size_t size)
 {
 #ifndef wxLongLong_t
     DoWriteLL(buffer, size, m_output, m_be_order);
@@ -593,7 +593,7 @@ void wxDataOutputStream::Write64(const wxUint64 *buffer, size_t size)
 #endif
 }
 
-void wxDataOutputStream::Write64(const wxInt64 *buffer, size_t size)
+void wxDataOutputStream::Write64(const std::int64_t *buffer, size_t size)
 {
 #ifndef wxLongLong_t
     DoWriteLL(buffer, size, m_output, m_be_order);
@@ -637,58 +637,58 @@ void wxDataOutputStream::WriteLL(const wxULongLong &ll)
 }
 #endif // wxUSE_LONGLONG
 
-void wxDataOutputStream::Write32(const wxUint32 *buffer, size_t size)
+void wxDataOutputStream::Write32(const std::uint32_t *buffer, size_t size)
 {
   if (m_be_order)
   {
-    for (wxUint32 i=0; i<size ;i++)
+    for (std::uint32_t i=0; i<size ;i++)
     {
-      const wxUint32 i32 = wxUINT32_SWAP_ON_LE(*buffer);
+      const std::uint32_t i32 = wxUINT32_SWAP_ON_LE(*buffer);
       buffer++;
       m_output->Write(&i32, 4);
     }
   }
   else
   {
-    for (wxUint32 i=0; i<size ;i++)
+    for (std::uint32_t i=0; i<size ;i++)
     {
-      const wxUint32 i32 = wxUINT32_SWAP_ON_BE(*buffer);
+      const std::uint32_t i32 = wxUINT32_SWAP_ON_BE(*buffer);
       buffer++;
       m_output->Write(&i32, 4);
     }
   }
 }
 
-void wxDataOutputStream::Write16(const wxUint16 *buffer, size_t size)
+void wxDataOutputStream::Write16(const std::uint16_t *buffer, size_t size)
 {
   if (m_be_order)
   {
-    for (wxUint32 i=0; i<size ;i++)
+    for (std::uint32_t i=0; i<size ;i++)
     {
-      const wxUint16 i16 = wxUINT16_SWAP_ON_LE(*buffer);
+      const std::uint16_t i16 = wxUINT16_SWAP_ON_LE(*buffer);
       buffer++;
       m_output->Write(&i16, 2);
     }
   }
   else
   {
-    for (wxUint32 i=0; i<size ;i++)
+    for (std::uint32_t i=0; i<size ;i++)
     {
-      const wxUint16 i16 = wxUINT16_SWAP_ON_BE(*buffer);
+      const std::uint16_t i16 = wxUINT16_SWAP_ON_BE(*buffer);
       buffer++;
       m_output->Write(&i16, 2);
     }
   }
 }
 
-void wxDataOutputStream::Write8(const wxUint8 *buffer, size_t size)
+void wxDataOutputStream::Write8(const std::uint8_t *buffer, size_t size)
 {
   m_output->Write(buffer, size);
 }
 
 void wxDataOutputStream::WriteDouble(const double *buffer, size_t size)
 {
-  for (wxUint32 i=0; i<size; i++)
+  for (std::uint32_t i=0; i<size; i++)
   {
     WriteDouble(*(buffer++));
   }
@@ -696,7 +696,7 @@ void wxDataOutputStream::WriteDouble(const double *buffer, size_t size)
 
 void wxDataOutputStream::WriteFloat(const float *buffer, size_t size)
 {
-  for (wxUint32 i=0; i<size; i++)
+  for (std::uint32_t i=0; i<size; i++)
   {
     WriteFloat(*(buffer++));
   }
@@ -708,50 +708,50 @@ wxDataOutputStream& wxDataOutputStream::operator<<(const wxString& string)
   return *this;
 }
 
-wxDataOutputStream& wxDataOutputStream::operator<<(wxInt8 c)
+wxDataOutputStream& wxDataOutputStream::operator<<(std::int8_t c)
 {
-  Write8((wxUint8)c);
+  Write8((std::uint8_t)c);
   return *this;
 }
 
-wxDataOutputStream& wxDataOutputStream::operator<<(wxInt16 i)
+wxDataOutputStream& wxDataOutputStream::operator<<(std::int16_t i)
 {
-  Write16((wxUint16)i);
+  Write16((std::uint16_t)i);
   return *this;
 }
 
-wxDataOutputStream& wxDataOutputStream::operator<<(wxInt32 i)
+wxDataOutputStream& wxDataOutputStream::operator<<(std::int32_t i)
 {
-  Write32((wxUint32)i);
+  Write32((std::uint32_t)i);
   return *this;
 }
 
-wxDataOutputStream& wxDataOutputStream::operator<<(wxUint8 c)
+wxDataOutputStream& wxDataOutputStream::operator<<(std::uint8_t c)
 {
   Write8(c);
   return *this;
 }
 
-wxDataOutputStream& wxDataOutputStream::operator<<(wxUint16 i)
+wxDataOutputStream& wxDataOutputStream::operator<<(std::uint16_t i)
 {
   Write16(i);
   return *this;
 }
 
-wxDataOutputStream& wxDataOutputStream::operator<<(wxUint32 i)
+wxDataOutputStream& wxDataOutputStream::operator<<(std::uint32_t i)
 {
   Write32(i);
   return *this;
 }
 
 #if wxHAS_INT64
-wxDataOutputStream& wxDataOutputStream::operator<<(wxUint64 i)
+wxDataOutputStream& wxDataOutputStream::operator<<(std::uint64_t i)
 {
   Write64(i);
   return *this;
 }
 
-wxDataOutputStream& wxDataOutputStream::operator<<(wxInt64 i)
+wxDataOutputStream& wxDataOutputStream::operator<<(std::int64_t i)
 {
   Write64(i);
   return *this;

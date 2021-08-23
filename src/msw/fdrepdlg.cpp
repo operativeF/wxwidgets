@@ -227,7 +227,7 @@ wxFindReplaceDialogImpl::FindMessageHandler(wxWindow * WXUNUSED(win),
         return false;
     }
 
-    wxUint32 flags = 0;
+    std::uint32_t flags = 0;
     if ( pFR->Flags & FR_DOWN )
         flags |= wxFR_DOWN;
     if ( pFR->Flags & FR_WHOLEWORD )

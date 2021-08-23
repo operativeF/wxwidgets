@@ -195,24 +195,24 @@ TEST_CASE("LongLongRW")
 #if wxHAS_INT64
 TEST_CASE("Int64RW")
 {
-    TestMultiRW<wxInt64>::ValueArray ValuesI64;
-    TestMultiRW<wxUint64>::ValueArray ValuesUI64;
+    TestMultiRW<std::int64_t>::ValueArray ValuesI64;
+    TestMultiRW<std::uint64_t>::ValueArray ValuesUI64;
 
-    ValuesI64.push_back(wxInt64(0l));
-    ValuesI64.push_back(wxInt64(1l));
-    ValuesI64.push_back(wxInt64(-1l));
-    ValuesI64.push_back(wxInt64(0x12345678l));
-    ValuesI64.push_back((wxInt64(0x12345678l) << 32) + wxInt64(0xabcdef01l));
+    ValuesI64.push_back(std::int64_t(0l));
+    ValuesI64.push_back(std::int64_t(1l));
+    ValuesI64.push_back(std::int64_t(-1l));
+    ValuesI64.push_back(std::int64_t(0x12345678l));
+    ValuesI64.push_back((std::int64_t(0x12345678l) << 32) + std::int64_t(0xabcdef01l));
 
-    ValuesUI64.push_back(wxUint64(0l));
-    ValuesUI64.push_back(wxUint64(1l));
-    ValuesUI64.push_back(wxUint64(0x12345678l));
-    ValuesUI64.push_back((wxUint64(0x12345678l) << 32) + wxUint64(0xabcdef01l));
+    ValuesUI64.push_back(std::uint64_t(0l));
+    ValuesUI64.push_back(std::uint64_t(1l));
+    ValuesUI64.push_back(std::uint64_t(0x12345678l));
+    ValuesUI64.push_back((std::uint64_t(0x12345678l) << 32) + std::uint64_t(0xabcdef01l));
 
-    CHECK( TestRW(wxUint64(0x12345678l)) == wxUint64(0x12345678l) );
-    CHECK( TestRW((wxUint64(0x12345678l) << 32) + wxUint64(0xabcdef01l)) == (wxUint64(0x12345678l) << 32) + wxUint64(0xabcdef01l) );
-    CHECK( TestMultiRW<wxInt64>(ValuesI64, &wxDataOutputStream::Write64, &wxDataInputStream::Read64).IsOk() );
-    CHECK( TestMultiRW<wxUint64>(ValuesUI64, &wxDataOutputStream::Write64, &wxDataInputStream::Read64).IsOk() );
+    CHECK( TestRW(std::uint64_t(0x12345678l)) == std::uint64_t(0x12345678l) );
+    CHECK( TestRW((std::uint64_t(0x12345678l) << 32) + std::uint64_t(0xabcdef01l)) == (std::uint64_t(0x12345678l) << 32) + std::uint64_t(0xabcdef01l) );
+    CHECK( TestMultiRW<std::int64_t>(ValuesI64, &wxDataOutputStream::Write64, &wxDataInputStream::Read64).IsOk() );
+    CHECK( TestMultiRW<std::uint64_t>(ValuesUI64, &wxDataOutputStream::Write64, &wxDataInputStream::Read64).IsOk() );
 }
 #endif
 

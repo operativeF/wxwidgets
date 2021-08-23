@@ -56,7 +56,7 @@ static constexpr double wxDegToRad(double deg) { return (deg * std::numbers::pi)
 static constexpr double wxRadToDeg(double rad) { return (rad * 180.0) / std::numbers::pi; }
 
 // Count trailing zeros.
-WXDLLIMPEXP_BASE unsigned int wxCTZ(wxUint32 x);
+WXDLLIMPEXP_BASE unsigned int wxCTZ(std::uint32_t x);
 
 #if defined(__WINDOWS__)
     #define wxMulDivInt32( a , b , c ) ::MulDiv( a , b , c )

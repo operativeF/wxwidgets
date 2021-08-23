@@ -275,7 +275,7 @@ private:
 
     bool m_pax;
     int m_BlockingFactor;
-    wxUint32 m_chksum;
+    std::uint32_t m_chksum;
     bool m_large;
     class wxTarHeaderBlock *m_hdr;
     class wxTarHeaderBlock *m_hdr2;

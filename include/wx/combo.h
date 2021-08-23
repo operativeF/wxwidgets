@@ -437,7 +437,7 @@ public:
     void SetTextCtrlStyle( int style );
 
     // Return internal flags
-    wxUint32 GetInternalFlags() const { return m_iFlags; }
+    std::uint32_t GetInternalFlags() const { return m_iFlags; }
 
     // Return true if Create has finished
     bool IsCreated() const { return (m_iFlags & wxCC_IFLAG_CREATED) != 0; }
@@ -573,7 +573,7 @@ protected:
     void OnCharEvent(wxKeyEvent& event);
 
     // Set customization flags (directs how wxComboCtrlBase helpers behave)
-    void Customize( wxUint32 flags ) { m_iFlags |= flags; }
+    void Customize( std::uint32_t flags ) { m_iFlags |= flags; }
 
     // Dispatches size event and refreshes
     void RecalcAndRefresh();
@@ -702,7 +702,7 @@ protected:
     wxSize                  m_btnSize;
 
     // platform-dependent customization and other flags
-    wxUint32                m_iFlags{0};
+    std::uint32_t                m_iFlags{0};
 
     // custom style for m_text
     int                     m_textCtrlStyle{0};
@@ -846,7 +846,7 @@ public:
 
 protected:
     wxComboCtrlBase* m_combo{nullptr};
-    wxUint32            m_iFlags{0};
+    std::uint32_t            m_iFlags{0};
 
 private:
     // Called in wxComboCtrlBase::SetPopupControl

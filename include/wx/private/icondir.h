@@ -25,26 +25,26 @@
 // icon entry in .ICO files
 struct ICONDIRENTRY
 {
-    wxUint8         bWidth;               // Width of the image
-    wxUint8         bHeight;              // Height of the image (times 2)
-    wxUint8         bColorCount;          // Number of colors in image (0 if >=8bpp)
-    wxUint8         bReserved;            // Reserved
+    std::uint8_t         bWidth;               // Width of the image
+    std::uint8_t         bHeight;              // Height of the image (times 2)
+    std::uint8_t         bColorCount;          // Number of colors in image (0 if >=8bpp)
+    std::uint8_t         bReserved;            // Reserved
 
     // these two are different in icons and cursors:
                                           // icon           or  cursor
-    wxUint16        wPlanes;              // Color Planes   or  XHotSpot
-    wxUint16        wBitCount;            // Bits per pixel or  YHotSpot
+    std::uint16_t        wPlanes;              // Color Planes   or  XHotSpot
+    std::uint16_t        wBitCount;            // Bits per pixel or  YHotSpot
 
-    wxUint32        dwBytesInRes;         // how many bytes in this resource?
-    wxUint32        dwImageOffset;        // where in the file is this image
+    std::uint32_t        dwBytesInRes;         // how many bytes in this resource?
+    std::uint32_t        dwImageOffset;        // where in the file is this image
 };
 
 // icon directory in .ICO files
 struct ICONDIR
 {
-    wxUint16     idReserved;   // Reserved
-    wxUint16     idType;       // resource type (1 for icons, 2 for cursors)
-    wxUint16     idCount;      // how many images?
+    std::uint16_t     idReserved;   // Reserved
+    std::uint16_t     idType;       // resource type (1 for icons, 2 for cursors)
+    std::uint16_t     idCount;      // how many images?
 };
 
 #endif // wxUSE_STREAMS
@@ -58,27 +58,27 @@ struct ICONDIR
 // icon entry in MS Windows resources
 struct GRPICONDIRENTRY
 {
-    wxUint8         bWidth;               // Width of the image
-    wxUint8         bHeight;              // Height of the image (times 2)
-    wxUint8         bColorCount;          // Number of colors in image (0 if >=8bpp)
-    wxUint8         bReserved;            // Reserved
+    std::uint8_t         bWidth;               // Width of the image
+    std::uint8_t         bHeight;              // Height of the image (times 2)
+    std::uint8_t         bColorCount;          // Number of colors in image (0 if >=8bpp)
+    std::uint8_t         bReserved;            // Reserved
 
     // these two are different in icons and cursors:
                                           // icon           or  cursor
-    wxUint16        wPlanes;              // Color Planes   or  XHotSpot
-    wxUint16        wBitCount;            // Bits per pixel or  YHotSpot
+    std::uint16_t        wPlanes;              // Color Planes   or  XHotSpot
+    std::uint16_t        wBitCount;            // Bits per pixel or  YHotSpot
 
-    wxUint32        dwBytesInRes;         // how many bytes in this resource?
+    std::uint32_t        dwBytesInRes;         // how many bytes in this resource?
 
-    wxUint16        nID;                  // actual icon resource ID
+    std::uint16_t        nID;                  // actual icon resource ID
 };
 
 // icon directory in MS Windows resources
 struct GRPICONDIR
 {
-    wxUint16        idReserved;   // Reserved
-    wxUint16        idType;       // resource type (1 for icons, 2 for cursors)
-    wxUint16        idCount;      // how many images?
+    std::uint16_t        idReserved;   // Reserved
+    std::uint16_t        idType;       // resource type (1 for icons, 2 for cursors)
+    std::uint16_t        idCount;      // how many images?
     GRPICONDIRENTRY idEntries[1]; // The entries for each image
 };
 

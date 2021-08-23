@@ -43,8 +43,8 @@ void Skip_Comment(wxInputStream &stream)
 
 bool wxPNMHandler::LoadFile( wxImage *image, wxInputStream& stream, bool verbose, int WXUNUSED(index) )
 {
-    wxUint32  width, height;
-    wxUint16  maxval;
+    std::uint32_t  width, height;
+    std::uint16_t  maxval;
     char      c(0);
 
     image->Destroy();
@@ -94,10 +94,10 @@ bool wxPNMHandler::LoadFile( wxImage *image, wxInputStream& stream, bool verbose
 
     if (c=='2') // Ascii GREY
     {
-        wxUint32 size=width*height;
-        for (wxUint32 i=0; i<size; ++i)
+        std::uint32_t size=width*height;
+        for (std::uint32_t i=0; i<size; ++i)
         {
-            wxUint32 value;
+            std::uint32_t value;
             value=text_stream.Read32();
             if ( maxval != 255 )
                 value = (255 * value)/maxval;
@@ -116,12 +116,12 @@ bool wxPNMHandler::LoadFile( wxImage *image, wxInputStream& stream, bool verbose
     }
     if (c=='3') // Ascii RBG
     {
-        wxUint32 size=3*width*height;
-        for (wxUint32 i=0; i<size; ++i)
+        std::uint32_t size=3*width*height;
+        for (std::uint32_t i=0; i<size; ++i)
           {
             //this is very slow !!!
             //I wonder how we can make any better ?
-            wxUint32 value;
+            std::uint32_t value;
             value=text_stream.Read32();
             if ( maxval != 255 )
                 value = (255 * value)/maxval;
@@ -139,8 +139,8 @@ bool wxPNMHandler::LoadFile( wxImage *image, wxInputStream& stream, bool verbose
     }
     if (c=='5') // Raw GREY
     {
-        wxUint32 size=width*height;
-        for (wxUint32 i=0; i<size; ++i)
+        std::uint32_t size=width*height;
+        for (std::uint32_t i=0; i<size; ++i)
         {
             unsigned char value;
             buf_stream.Read(&value,1);

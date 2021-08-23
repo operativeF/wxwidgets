@@ -46,14 +46,14 @@ public:
     const wxInputStream& GetInputStream() const { return m_input; }
 
     // base may be between 2 and 36, inclusive, or the special 0 (= C format)
-    wxUint64 Read64(int base = 10);
-    wxUint32 Read32(int base = 10);
-    wxUint16 Read16(int base = 10);
-    wxUint8  Read8(int base = 10);
-    wxInt64  Read64S(int base = 10);
-    wxInt32  Read32S(int base = 10);
-    wxInt16  Read16S(int base = 10);
-    wxInt8   Read8S(int base = 10);
+    std::uint64_t Read64(int base = 10);
+    std::uint32_t Read32(int base = 10);
+    std::uint16_t Read16(int base = 10);
+    std::uint8_t  Read8(int base = 10);
+    std::int64_t  Read64S(int base = 10);
+    std::int32_t  Read32S(int base = 10);
+    std::int16_t  Read16S(int base = 10);
+    std::int8_t   Read8S(int base = 10);
     double   ReadDouble();
     wxString ReadLine();
     wxString ReadWord();
@@ -68,12 +68,12 @@ public:
 #if wxWCHAR_T_IS_REAL_TYPE
     wxTextInputStream& operator>>(wchar_t& wc);
 #endif // wxWCHAR_T_IS_REAL_TYPE
-    wxTextInputStream& operator>>(wxInt16& i);
-    wxTextInputStream& operator>>(wxInt32& i);
-    wxTextInputStream& operator>>(wxInt64& i);
-    wxTextInputStream& operator>>(wxUint16& i);
-    wxTextInputStream& operator>>(wxUint32& i);
-    wxTextInputStream& operator>>(wxUint64& i);
+    wxTextInputStream& operator>>(std::int16_t& i);
+    wxTextInputStream& operator>>(std::int32_t& i);
+    wxTextInputStream& operator>>(std::int64_t& i);
+    wxTextInputStream& operator>>(std::uint16_t& i);
+    wxTextInputStream& operator>>(std::uint32_t& i);
+    wxTextInputStream& operator>>(std::uint64_t& i);
     wxTextInputStream& operator>>(double& i);
     wxTextInputStream& operator>>(float& f);
 
@@ -151,10 +151,10 @@ public:
         WriteString(str);
     }
 
-    void Write64(wxUint64 i);
-    void Write32(wxUint32 i);
-    void Write16(wxUint16 i);
-    void Write8(wxUint8 i);
+    void Write64(std::uint64_t i);
+    void Write32(std::uint32_t i);
+    void Write16(std::uint16_t i);
+    void Write8(std::uint8_t i);
     virtual void WriteDouble(double d);
     virtual void WriteString(const wxString& string);
 
@@ -167,12 +167,12 @@ public:
 #if wxWCHAR_T_IS_REAL_TYPE
     wxTextOutputStream& operator<<(wchar_t wc);
 #endif // wxWCHAR_T_IS_REAL_TYPE
-    wxTextOutputStream& operator<<(wxInt16 c);
-    wxTextOutputStream& operator<<(wxInt32 c);
-    wxTextOutputStream& operator<<(wxInt64 c);
-    wxTextOutputStream& operator<<(wxUint16 c);
-    wxTextOutputStream& operator<<(wxUint32 c);
-    wxTextOutputStream& operator<<(wxUint64 c);
+    wxTextOutputStream& operator<<(std::int16_t c);
+    wxTextOutputStream& operator<<(std::int32_t c);
+    wxTextOutputStream& operator<<(std::int64_t c);
+    wxTextOutputStream& operator<<(std::uint16_t c);
+    wxTextOutputStream& operator<<(std::uint32_t c);
+    wxTextOutputStream& operator<<(std::uint64_t c);
     wxTextOutputStream& operator<<(double f);
     wxTextOutputStream& operator<<(float f);
 

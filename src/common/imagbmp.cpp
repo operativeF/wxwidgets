@@ -43,7 +43,7 @@
 
 #if wxUSE_ICO_CUR
 
-static bool CanReadICOOrCUR(wxInputStream *stream, wxUint16 resourceType);
+static bool CanReadICOOrCUR(wxInputStream *stream, std::uint16_t resourceType);
 
 #endif // wxUSE_ICO_CUR
 
@@ -107,7 +107,7 @@ bool wxBMPHandler::SaveDib(wxImage *image,
     if ( image->HasOption(wxIMAGE_OPTION_BMP_FORMAT) && !saveAlpha )
         format = image->GetOptionInt(wxIMAGE_OPTION_BMP_FORMAT);
 
-    wxUint16 bpp;     // # of bits per pixel
+    std::uint16_t bpp;     // # of bits per pixel
     int palette_size; // # of color map entries, ie. 2^bpp colors
 
     // set the bpp and appropriate palette_size, and do additional checks
@@ -154,24 +154,24 @@ bool wxBMPHandler::SaveDib(wxImage *image,
     struct
     {
         // BitmapHeader:
-        wxUint16  magic;          // format magic, always 'BM'
-        wxUint32  filesize;       // total file size, inc. headers
-        wxUint32  reserved;       // for future use
-        wxUint32  data_offset;    // image data offset in the file
+        std::uint16_t  magic;          // format magic, always 'BM'
+        std::uint32_t  filesize;       // total file size, inc. headers
+        std::uint32_t  reserved;       // for future use
+        std::uint32_t  data_offset;    // image data offset in the file
 
         // BitmapInfoHeader:
-        wxUint32  bih_size;       // 2nd part's size
-        wxUint32  width, height;  // bitmap's dimensions
-        wxUint16  planes;         // num of planes
-        wxUint16  bpp;            // bits per pixel
-        wxUint32  compression;    // compression method
-        wxUint32  size_of_bmp;    // size of the bitmap
-        wxUint32  h_res, v_res;   // image resolution in pixels-per-meter
-        wxUint32  num_clrs;       // number of colors used
-        wxUint32  num_signif_clrs;// number of significant colors
+        std::uint32_t  bih_size;       // 2nd part's size
+        std::uint32_t  width, height;  // bitmap's dimensions
+        std::uint16_t  planes;         // num of planes
+        std::uint16_t  bpp;            // bits per pixel
+        std::uint32_t  compression;    // compression method
+        std::uint32_t  size_of_bmp;    // size of the bitmap
+        std::uint32_t  h_res, v_res;   // image resolution in pixels-per-meter
+        std::uint32_t  num_clrs;       // number of colors used
+        std::uint32_t  num_signif_clrs;// number of significant colors
     } hdr;
 
-    wxUint32 hdr_size = 14/*BitmapHeader*/ + 40/*BitmapInfoHeader*/;
+    std::uint32_t hdr_size = 14/*BitmapHeader*/ + 40/*BitmapInfoHeader*/;
 
     hdr.magic = wxUINT16_SWAP_ON_BE(0x4D42/*'BM'*/);
     hdr.filesize = wxUINT32_SWAP_ON_BE( hdr_size + palette_size*4 +
@@ -271,7 +271,7 @@ bool wxBMPHandler::SaveDib(wxImage *image,
 #if wxUSE_PALETTE
     std::unique_ptr<wxPalette> palette; // entries for quantized images
 #endif // wxUSE_PALETTE
-    std::unique_ptr<wxUint8[]> rgbquad; // for the RGBQUAD bytes for the colormap
+    std::unique_ptr<std::uint8_t[]> rgbquad; // for the RGBQUAD bytes for the colormap
     std::unique_ptr<wxImage> q_image;   // destination for quantized image
 
     // if <24bpp use quantization to reduce colors for *some* of the formats
@@ -304,7 +304,7 @@ bool wxBMPHandler::SaveDib(wxImage *image,
         }
 
         unsigned char r, g, b;
-        auto rgbquadTmp = std::make_unique<wxUint8[]>(palette_size * 4);
+        auto rgbquadTmp = std::make_unique<std::uint8_t[]>(palette_size * 4);
         rgbquad.swap(rgbquadTmp);
 
         for (int i = 0; i < palette_size; i++)
@@ -324,13 +324,13 @@ bool wxBMPHandler::SaveDib(wxImage *image,
     else if ( (format == wxBMP_8BPP_GREY) || (format == wxBMP_8BPP_RED) ||
               (format == wxBMP_1BPP_BW) )
     {
-        auto rgbquadTmp = std::make_unique<wxUint8[]>(palette_size*4);
+        auto rgbquadTmp = std::make_unique<std::uint8_t[]>(palette_size*4);
         rgbquad.swap(rgbquadTmp);
 
         for ( int i = 0; i < palette_size; i++ )
         {
             // if 1BPP_BW then the value should be either 0 or 255
-            wxUint8 c = (wxUint8)((i > 0) && (format == wxBMP_1BPP_BW) ? 255 : i);
+            std::uint8_t c = (std::uint8_t)((i > 0) && (format == wxBMP_1BPP_BW) ? 255 : i);
 
             rgbquad[i*4] =
             rgbquad[i*4+1] =
@@ -361,7 +361,7 @@ bool wxBMPHandler::SaveDib(wxImage *image,
                                         : image->GetData();
     const unsigned char* const alpha = saveAlpha ? image->GetAlpha() : nullptr;
 
-    auto buffer = std::make_unique<wxUint8[]>(row_width);
+    auto buffer = std::make_unique<std::uint8_t[]>(row_width);
     memset(buffer.get(), 0, row_width);
 
     long int pixel;
@@ -389,7 +389,7 @@ bool wxBMPHandler::SaveDib(wxImage *image,
             {
                 pixel = 3*(y*width + x);
 #if wxUSE_PALETTE
-                buffer[x] = (wxUint8)palette->GetPixel( data[pixel],
+                buffer[x] = (std::uint8_t)palette->GetPixel( data[pixel],
                                                         data[pixel+1],
                                                         data[pixel+2] );
 #else
@@ -403,7 +403,7 @@ bool wxBMPHandler::SaveDib(wxImage *image,
             for (unsigned int x = 0; x < width; x++)
             {
                 pixel = 3*(y*width + x);
-                buffer[x] = (wxUint8)(.299*data[pixel] +
+                buffer[x] = (std::uint8_t)(.299*data[pixel] +
                                       .587*data[pixel+1] +
                                       .114*data[pixel+2]);
             }
@@ -412,7 +412,7 @@ bool wxBMPHandler::SaveDib(wxImage *image,
         {
             for (unsigned int x = 0; x < width; x++)
             {
-                buffer[x] = (wxUint8)data[3*(y*width + x)];
+                buffer[x] = (std::uint8_t)data[3*(y*width + x)];
             }
         }
         else if ( format == wxBMP_4BPP ) // 4 bpp in color
@@ -423,13 +423,13 @@ bool wxBMPHandler::SaveDib(wxImage *image,
 
                 // fill buffer, ignore if > width
 #if wxUSE_PALETTE
-                buffer[x/2] = (wxUint8)(
-                    ((wxUint8)palette->GetPixel(data[pixel],
+                buffer[x/2] = (std::uint8_t)(
+                    ((std::uint8_t)palette->GetPixel(data[pixel],
                                                 data[pixel+1],
                                                 data[pixel+2]) << 4) |
                     (((x+1) >= width)
                      ? 0
-                     : ((wxUint8)palette->GetPixel(data[pixel+3],
+                     : ((std::uint8_t)palette->GetPixel(data[pixel+3],
                                                    data[pixel+4],
                                                    data[pixel+5]) ))    );
 #else
@@ -445,15 +445,15 @@ bool wxBMPHandler::SaveDib(wxImage *image,
                 pixel = 3*(y*width + x);
 
 #if wxUSE_PALETTE
-                buffer[x/8] = (wxUint8)(
-                                           ((wxUint8)palette->GetPixel(data[pixel], data[pixel+1], data[pixel+2]) << 7) |
-                    (((x+1) >= width) ? 0 : ((wxUint8)palette->GetPixel(data[pixel+3], data[pixel+4], data[pixel+5]) << 6)) |
-                    (((x+2) >= width) ? 0 : ((wxUint8)palette->GetPixel(data[pixel+6], data[pixel+7], data[pixel+8]) << 5)) |
-                    (((x+3) >= width) ? 0 : ((wxUint8)palette->GetPixel(data[pixel+9], data[pixel+10], data[pixel+11]) << 4)) |
-                    (((x+4) >= width) ? 0 : ((wxUint8)palette->GetPixel(data[pixel+12], data[pixel+13], data[pixel+14]) << 3)) |
-                    (((x+5) >= width) ? 0 : ((wxUint8)palette->GetPixel(data[pixel+15], data[pixel+16], data[pixel+17]) << 2)) |
-                    (((x+6) >= width) ? 0 : ((wxUint8)palette->GetPixel(data[pixel+18], data[pixel+19], data[pixel+20]) << 1)) |
-                    (((x+7) >= width) ? 0 : ((wxUint8)palette->GetPixel(data[pixel+21], data[pixel+22], data[pixel+23])     ))    );
+                buffer[x/8] = (std::uint8_t)(
+                                           ((std::uint8_t)palette->GetPixel(data[pixel], data[pixel+1], data[pixel+2]) << 7) |
+                    (((x+1) >= width) ? 0 : ((std::uint8_t)palette->GetPixel(data[pixel+3], data[pixel+4], data[pixel+5]) << 6)) |
+                    (((x+2) >= width) ? 0 : ((std::uint8_t)palette->GetPixel(data[pixel+6], data[pixel+7], data[pixel+8]) << 5)) |
+                    (((x+3) >= width) ? 0 : ((std::uint8_t)palette->GetPixel(data[pixel+9], data[pixel+10], data[pixel+11]) << 4)) |
+                    (((x+4) >= width) ? 0 : ((std::uint8_t)palette->GetPixel(data[pixel+12], data[pixel+13], data[pixel+14]) << 3)) |
+                    (((x+5) >= width) ? 0 : ((std::uint8_t)palette->GetPixel(data[pixel+15], data[pixel+16], data[pixel+17]) << 2)) |
+                    (((x+6) >= width) ? 0 : ((std::uint8_t)palette->GetPixel(data[pixel+18], data[pixel+19], data[pixel+20]) << 1)) |
+                    (((x+7) >= width) ? 0 : ((std::uint8_t)palette->GetPixel(data[pixel+21], data[pixel+22], data[pixel+23])     ))    );
 #else
                 // FIXME: what should this be? use some std palette maybe?
                 buffer[x/8] = 0;
@@ -466,15 +466,15 @@ bool wxBMPHandler::SaveDib(wxImage *image,
             {
                 pixel = 3*(y*width + x);
 
-                buffer[x/8] = (wxUint8)(
-                                          (((wxUint8)(data[pixel]   /128.)) << 7) |
-                   (((x+1) >= width) ? 0 : (((wxUint8)(data[pixel+3] /128.)) << 6)) |
-                   (((x+2) >= width) ? 0 : (((wxUint8)(data[pixel+6] /128.)) << 5)) |
-                   (((x+3) >= width) ? 0 : (((wxUint8)(data[pixel+9] /128.)) << 4)) |
-                   (((x+4) >= width) ? 0 : (((wxUint8)(data[pixel+12]/128.)) << 3)) |
-                   (((x+5) >= width) ? 0 : (((wxUint8)(data[pixel+15]/128.)) << 2)) |
-                   (((x+6) >= width) ? 0 : (((wxUint8)(data[pixel+18]/128.)) << 1)) |
-                   (((x+7) >= width) ? 0 : (((wxUint8)(data[pixel+21]/128.))     ))    );
+                buffer[x/8] = (std::uint8_t)(
+                                          (((std::uint8_t)(data[pixel]   /128.)) << 7) |
+                   (((x+1) >= width) ? 0 : (((std::uint8_t)(data[pixel+3] /128.)) << 6)) |
+                   (((x+2) >= width) ? 0 : (((std::uint8_t)(data[pixel+6] /128.)) << 5)) |
+                   (((x+3) >= width) ? 0 : (((std::uint8_t)(data[pixel+9] /128.)) << 4)) |
+                   (((x+4) >= width) ? 0 : (((std::uint8_t)(data[pixel+12]/128.)) << 3)) |
+                   (((x+5) >= width) ? 0 : (((std::uint8_t)(data[pixel+15]/128.)) << 2)) |
+                   (((x+6) >= width) ? 0 : (((std::uint8_t)(data[pixel+18]/128.)) << 1)) |
+                   (((x+7) >= width) ? 0 : (((std::uint8_t)(data[pixel+21]/128.))     ))    );
             }
         }
 
@@ -505,13 +505,13 @@ bool wxBMPHandler::DoLoadDib(wxImage * image, int width, int height,
                              bool verbose, bool IsBmp, bool hasPalette,
                              int colEntrySize)
 {
-    wxInt32         aDword, rmask = 0, gmask = 0, bmask = 0, amask = 0;
+    std::int32_t         aDword, rmask = 0, gmask = 0, bmask = 0, amask = 0;
     int             rshift = 0, gshift = 0, bshift = 0, ashift = 0;
     int             rbits = 0, gbits = 0, bbits = 0;
-    wxInt32         dbuf[4];
-    wxInt8          bbuf[4];
-    wxUint8         aByte;
-    wxUint16        aWord;
+    std::int32_t         dbuf[4];
+    std::int8_t          bbuf[4];
+    std::uint8_t         aByte;
+    std::uint16_t        aWord;
 
     // allocate space for palette if needed:
     BMPPalette *cmap;
@@ -745,7 +745,7 @@ bool wxBMPHandler::DoLoadDib(wxImage * image, int width, int height,
                 {
                     if ( comp == BI_RLE4 )
                     {
-                        wxUint8 first;
+                        std::uint8_t first;
                         first = aByte;
                         aByte = stream.GetC();
                         if ( !stream.IsOk() )
@@ -781,7 +781,7 @@ bool wxBMPHandler::DoLoadDib(wxImage * image, int width, int height,
                             else
                             {
                                 int absolute = aByte;
-                                wxUint8 nibble[2] ;
+                                std::uint8_t nibble[2] ;
                                 int readBytes = 0 ;
                                 for (int k = 0; k < absolute; k++)
                                 {
@@ -791,8 +791,8 @@ bool wxBMPHandler::DoLoadDib(wxImage * image, int width, int height,
                                         aByte = stream.GetC();
                                         if ( !stream.IsOk() )
                                             return false;
-                                        nibble[0] = (wxUint8)( (aByte & 0xF0) >> 4 ) ;
-                                        nibble[1] = (wxUint8)( aByte & 0x0F ) ;
+                                        nibble[0] = (std::uint8_t)( (aByte & 0xF0) >> 4 ) ;
+                                        nibble[1] = (std::uint8_t)( aByte & 0x0F ) ;
                                     }
                                     ptr[poffset    ] = cmap[nibble[k%2]].r;
                                     ptr[poffset + 1] = cmap[nibble[k%2]].g;
@@ -811,9 +811,9 @@ bool wxBMPHandler::DoLoadDib(wxImage * image, int width, int height,
                         }
                         else
                         {
-                            wxUint8 nibble[2] ;
-                            nibble[0] = (wxUint8)( (aByte & 0xF0) >> 4 ) ;
-                            nibble[1] = (wxUint8)( aByte & 0x0F ) ;
+                            std::uint8_t nibble[2] ;
+                            nibble[0] = (std::uint8_t)( (aByte & 0xF0) >> 4 ) ;
+                            nibble[1] = (std::uint8_t)( aByte & 0x0F ) ;
 
                             for ( int l = 0; l < first && column < width; l++ )
                             {
@@ -999,23 +999,23 @@ bool wxBMPHandler::DoLoadDib(wxImage * image, int width, int height,
 bool wxBMPHandler::LoadDib(wxImage *image, wxInputStream& stream,
                            bool verbose, bool IsBmp)
 {
-    wxUint16        aWord;
-    wxInt32         dbuf[4];
+    std::uint16_t        aWord;
+    std::int32_t         dbuf[4];
 
     // offset to bitmap data
     wxFileOffset offset;
     // DIB header size (used to distinguish different versions of DIB header)
-    wxInt32 hdrSize;
+    std::int32_t hdrSize;
     if ( IsBmp )
     {
-        wxInt8 bbuf[4];
+        std::int8_t bbuf[4];
         // read the header off the .BMP format file
         if ( !stream.ReadAll(bbuf, 2) ||
              !stream.ReadAll(dbuf, 16) )
             return false;
 
         #if 0 // unused
-            wxInt32 size = wxINT32_SWAP_ON_BE(dbuf[0]);
+            std::int32_t size = wxINT32_SWAP_ON_BE(dbuf[0]);
         #endif
         offset = wxINT32_SWAP_ON_BE(dbuf[2]);
         hdrSize = wxINT32_SWAP_ON_BE(dbuf[3]);
@@ -1039,7 +1039,7 @@ bool wxBMPHandler::LoadDib(wxImage *image, wxInputStream& stream,
     int height;
     if ( usesV1 )
     {
-        wxInt16 buf[2];
+        std::int16_t buf[2];
         if ( !stream.ReadAll(buf, sizeof(buf)) )
             return false;
 
@@ -1149,7 +1149,7 @@ bool wxBMPHandler::LoadDib(wxImage *image, wxInputStream& stream,
         //
         // Note: hardcode its size as struct BITMAPINFOHEADER is not defined on
         // non-MSW platforms.
-        static constexpr wxInt32 sizeBITMAPINFOHEADER = 40;
+        static constexpr std::int32_t sizeBITMAPINFOHEADER = 40;
         if ( hdrSize > sizeBITMAPINFOHEADER )
         {
             if ( stream.SeekI(hdrSize - sizeBITMAPINFOHEADER, wxSeekMode::FromCurrent) == wxInvalidOffset )
@@ -1274,12 +1274,12 @@ bool wxICOHandler::SaveFile(wxImage *image,
 
     // write a header, (ICONDIR)
     // Calculate the header size
-    wxUint32 offset = 3 * sizeof(wxUint16);
+    std::uint32_t offset = 3 * sizeof(std::uint16_t);
 
     ICONDIR IconDir;
     IconDir.idReserved = 0;
-    IconDir.idType = wxUINT16_SWAP_ON_BE((wxUint16)type);
-    IconDir.idCount = wxUINT16_SWAP_ON_BE((wxUint16)images);
+    IconDir.idType = wxUINT16_SWAP_ON_BE((std::uint16_t)type);
+    IconDir.idCount = wxUINT16_SWAP_ON_BE((std::uint16_t)images);
     if ( !stream.WriteAll(&IconDir.idReserved, sizeof(IconDir.idReserved)) ||
          !stream.WriteAll(&IconDir.idType, sizeof(IconDir.idType)) ||
          !stream.WriteAll(&IconDir.idCount, sizeof(IconDir.idCount)) )
@@ -1417,7 +1417,7 @@ bool wxICOHandler::SaveFile(wxImage *image,
                 return false;
             }
         }
-        wxUint32 Size = cStream.GetSize();
+        std::uint32_t Size = cStream.GetSize();
 
         // wxCountingOutputStream::IsOk() always returns true for now and this
         // "if" provokes VC++ warnings in optimized build
@@ -1437,8 +1437,8 @@ bool wxICOHandler::SaveFile(wxImage *image,
         // Notice that the casts work correctly for width/height of 256 as it's
         // represented by 0 in ICO file format -- and larger values are not
         // allowed at all.
-        icondirentry.bWidth = (wxUint8)image->GetWidth();
-        icondirentry.bHeight = (wxUint8)image->GetHeight();
+        icondirentry.bWidth = (std::uint8_t)image->GetWidth();
+        icondirentry.bHeight = (std::uint8_t)image->GetHeight();
         icondirentry.bColorCount = 0;
         icondirentry.bReserved = 0;
         icondirentry.wPlanes = wxUINT16_SWAP_ON_BE(1);
@@ -1453,8 +1453,8 @@ bool wxICOHandler::SaveFile(wxImage *image,
                          image->GetHeight() / 2;
 
             // actually write the values of the hot spot here:
-            icondirentry.wPlanes = wxUINT16_SWAP_ON_BE((wxUint16)hx);
-            icondirentry.wBitCount = wxUINT16_SWAP_ON_BE((wxUint16)hy);
+            icondirentry.wPlanes = wxUINT16_SWAP_ON_BE((std::uint16_t)hx);
+            icondirentry.wBitCount = wxUINT16_SWAP_ON_BE((std::uint16_t)hy);
         }
         icondirentry.dwBytesInRes = wxUINT32_SWAP_ON_BE(Size);
         icondirentry.dwImageOffset = wxUINT32_SWAP_ON_BE(offset);
@@ -1546,10 +1546,10 @@ bool wxICOHandler::DoLoadFile(wxImage *image, wxInputStream& stream,
     if ( !stream.ReadAll(&IconDir, sizeof(IconDir)) )
         return false;
 
-    wxUint16 nIcons = wxUINT16_SWAP_ON_BE(IconDir.idCount);
+    std::uint16_t nIcons = wxUINT16_SWAP_ON_BE(IconDir.idCount);
 
     // nType is 1 for Icons, 2 for Cursors:
-    wxUint16 nType = wxUINT16_SWAP_ON_BE(IconDir.idType);
+    std::uint16_t nType = wxUINT16_SWAP_ON_BE(IconDir.idType);
 
     // loop round the icons and choose the best one:
     auto pIconDirEntry = std::make_unique<ICONDIRENTRY[]>(nIcons);
@@ -1570,10 +1570,10 @@ bool wxICOHandler::DoLoadFile(wxImage *image, wxInputStream& stream,
 
         // ICO file format uses only a single byte for width and if it is 0, it
         // means that the width is actually 256 pixels.
-        const wxUint16
+        const std::uint16_t
             widthReal = pCurrentEntry->bWidth ? pCurrentEntry->bWidth : 256;
 
-        // bHeight and bColorCount are wxUint8
+        // bHeight and bColorCount are std::uint8_t
         if ( widthReal >= wMax )
         {
             // see if we have more colors, ==0 indicates > 8bpp:
@@ -1746,7 +1746,7 @@ int wxANIHandler::DoGetImageCount(wxInputStream& stream)
     return decoder.GetFrameCount();
 }
 
-static bool CanReadICOOrCUR(wxInputStream *stream, wxUint16 resourceType)
+static bool CanReadICOOrCUR(wxInputStream *stream, std::uint16_t resourceType)
 {
     // It's ok to modify the stream position in this function.
 

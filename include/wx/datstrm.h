@@ -64,21 +64,21 @@ public:
     bool IsOk() { return m_input->IsOk(); }
 
 #if wxHAS_INT64
-    wxUint64 Read64();
+    std::uint64_t Read64();
 #endif
 #if wxUSE_LONGLONG
     wxLongLong ReadLL();
 #endif
-    wxUint32 Read32();
-    wxUint16 Read16();
-    wxUint8 Read8();
+    std::uint32_t Read32();
+    std::uint16_t Read16();
+    std::uint8_t Read8();
     double ReadDouble();
     float ReadFloat();
     wxString ReadString();
 
 #if wxHAS_INT64
-    void Read64(wxUint64 *buffer, size_t size);
-    void Read64(wxInt64 *buffer, size_t size);
+    void Read64(std::uint64_t *buffer, size_t size);
+    void Read64(std::int64_t *buffer, size_t size);
 #endif
 #if defined(wxLongLong_t) && wxUSE_LONGLONG
     void Read64(wxULongLong *buffer, size_t size);
@@ -88,22 +88,22 @@ public:
     void ReadLL(wxULongLong *buffer, size_t size);
     void ReadLL(wxLongLong *buffer, size_t size);
 #endif
-    void Read32(wxUint32 *buffer, size_t size);
-    void Read16(wxUint16 *buffer, size_t size);
-    void Read8(wxUint8 *buffer, size_t size);
+    void Read32(std::uint32_t *buffer, size_t size);
+    void Read16(std::uint16_t *buffer, size_t size);
+    void Read8(std::uint8_t *buffer, size_t size);
     void ReadDouble(double *buffer, size_t size);
     void ReadFloat(float *buffer, size_t size);
 
     wxDataInputStream& operator>>(wxString& s);
-    wxDataInputStream& operator>>(wxInt8& c);
-    wxDataInputStream& operator>>(wxInt16& i);
-    wxDataInputStream& operator>>(wxInt32& i);
-    wxDataInputStream& operator>>(wxUint8& c);
-    wxDataInputStream& operator>>(wxUint16& i);
-    wxDataInputStream& operator>>(wxUint32& i);
+    wxDataInputStream& operator>>(std::int8_t& c);
+    wxDataInputStream& operator>>(std::int16_t& i);
+    wxDataInputStream& operator>>(std::int32_t& i);
+    wxDataInputStream& operator>>(std::uint8_t& c);
+    wxDataInputStream& operator>>(std::uint16_t& i);
+    wxDataInputStream& operator>>(std::uint32_t& i);
 #if wxHAS_INT64
-    wxDataInputStream& operator>>(wxUint64& i);
-    wxDataInputStream& operator>>(wxInt64& i);
+    wxDataInputStream& operator>>(std::uint64_t& i);
+    wxDataInputStream& operator>>(std::int64_t& i);
 #endif
 #if defined(wxLongLong_t) && wxUSE_LONGLONG
     wxDataInputStream& operator>>(wxULongLong& i);
@@ -129,23 +129,23 @@ public:
     bool IsOk() { return m_output->IsOk(); }
 
 #if wxHAS_INT64
-    void Write64(wxUint64 i);
-    void Write64(wxInt64 i);
+    void Write64(std::uint64_t i);
+    void Write64(std::int64_t i);
 #endif
 #if wxUSE_LONGLONG
     void WriteLL(const wxLongLong &ll);
     void WriteLL(const wxULongLong &ll);
 #endif
-    void Write32(wxUint32 i);
-    void Write16(wxUint16 i);
-    void Write8(wxUint8 i);
+    void Write32(std::uint32_t i);
+    void Write16(std::uint16_t i);
+    void Write8(std::uint8_t i);
     void WriteDouble(double d);
     void WriteFloat(float f);
     void WriteString(const wxString& string);
 
 #if wxHAS_INT64
-    void Write64(const wxUint64 *buffer, size_t size);
-    void Write64(const wxInt64 *buffer, size_t size);
+    void Write64(const std::uint64_t *buffer, size_t size);
+    void Write64(const std::int64_t *buffer, size_t size);
 #endif
 #if defined(wxLongLong_t) && wxUSE_LONGLONG
     void Write64(const wxULongLong *buffer, size_t size);
@@ -155,22 +155,22 @@ public:
     void WriteLL(const wxULongLong *buffer, size_t size);
     void WriteLL(const wxLongLong *buffer, size_t size);
 #endif
-    void Write32(const wxUint32 *buffer, size_t size);
-    void Write16(const wxUint16 *buffer, size_t size);
-    void Write8(const wxUint8 *buffer, size_t size);
+    void Write32(const std::uint32_t *buffer, size_t size);
+    void Write16(const std::uint16_t *buffer, size_t size);
+    void Write8(const std::uint8_t *buffer, size_t size);
     void WriteDouble(const double *buffer, size_t size);
     void WriteFloat(const float *buffer, size_t size);
 
     wxDataOutputStream& operator<<(const wxString& string);
-    wxDataOutputStream& operator<<(wxInt8 c);
-    wxDataOutputStream& operator<<(wxInt16 i);
-    wxDataOutputStream& operator<<(wxInt32 i);
-    wxDataOutputStream& operator<<(wxUint8 c);
-    wxDataOutputStream& operator<<(wxUint16 i);
-    wxDataOutputStream& operator<<(wxUint32 i);
+    wxDataOutputStream& operator<<(std::int8_t c);
+    wxDataOutputStream& operator<<(std::int16_t i);
+    wxDataOutputStream& operator<<(std::int32_t i);
+    wxDataOutputStream& operator<<(std::uint8_t c);
+    wxDataOutputStream& operator<<(std::uint16_t i);
+    wxDataOutputStream& operator<<(std::uint32_t i);
 #if wxHAS_INT64
-    wxDataOutputStream& operator<<(wxUint64 i);
-    wxDataOutputStream& operator<<(wxInt64 i);
+    wxDataOutputStream& operator<<(std::uint64_t i);
+    wxDataOutputStream& operator<<(std::int64_t i);
 #endif
 #if defined(wxLongLong_t) && wxUSE_LONGLONG
     wxDataOutputStream& operator<<(const wxULongLong &i);

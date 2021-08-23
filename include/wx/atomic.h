@@ -31,12 +31,12 @@
 //     http://bugs.mysql.com/bug.php?id=28456
 //     http://golubenco.org/blog/atomic-operations/
 
-inline void wxAtomicInc (wxUint32 &value)
+inline void wxAtomicInc (std::uint32_t &value)
 {
     __sync_fetch_and_add(&value, 1);
 }
 
-inline wxUint32 wxAtomicDec (wxUint32 &value)
+inline std::uint32_t wxAtomicDec (std::uint32_t &value)
 {
     return __sync_sub_and_fetch(&value, 1);
 }
@@ -47,12 +47,12 @@ inline wxUint32 wxAtomicDec (wxUint32 &value)
 // include standard Windows headers
 #include "wx/msw/wrapwin.h"
 
-inline void wxAtomicInc (wxUint32 &value)
+inline void wxAtomicInc (std::uint32_t &value)
 {
     InterlockedIncrement ((LONG*)&value);
 }
 
-inline wxUint32 wxAtomicDec (wxUint32 &value)
+inline std::uint32_t wxAtomicDec (std::uint32_t &value)
 {
     return InterlockedDecrement ((LONG*)&value);
 }
@@ -60,12 +60,12 @@ inline wxUint32 wxAtomicDec (wxUint32 &value)
 #elif defined(__DARWIN__)
 
 #include "libkern/OSAtomic.h"
-inline void wxAtomicInc (wxUint32 &value)
+inline void wxAtomicInc (std::uint32_t &value)
 {
     OSAtomicIncrement32 ((int32_t*)&value);
 }
 
-inline wxUint32 wxAtomicDec (wxUint32 &value)
+inline std::uint32_t wxAtomicDec (std::uint32_t &value)
 {
     return OSAtomicDecrement32 ((int32_t*)&value);
 }
@@ -74,12 +74,12 @@ inline wxUint32 wxAtomicDec (wxUint32 &value)
 
 #include <atomic.h>
 
-inline void wxAtomicInc (wxUint32 &value)
+inline void wxAtomicInc (std::uint32_t &value)
 {
     atomic_add_32 ((uint32_t*)&value, 1);
 }
 
-inline wxUint32 wxAtomicDec (wxUint32 &value)
+inline std::uint32_t wxAtomicDec (std::uint32_t &value)
 {
     return atomic_add_32_nv ((uint32_t*)&value, (uint32_t)-1);
 }
@@ -94,8 +94,8 @@ inline wxUint32 wxAtomicDec (wxUint32 &value)
 #else // else of wxUSE_THREADS
 // if no threads are used we can safely use simple ++/--
 
-inline void wxAtomicInc (wxUint32 &value) { ++value; }
-inline wxUint32 wxAtomicDec (wxUint32 &value) { return --value; }
+inline void wxAtomicInc (std::uint32_t &value) { ++value; }
+inline std::uint32_t wxAtomicDec (std::uint32_t &value) { return --value; }
 
 #endif // !wxUSE_THREADS
 
@@ -112,13 +112,13 @@ class wxAtomicInt32
 {
 public:
     wxAtomicInt32() { } // non initialized for consistency with basic int type
-    wxAtomicInt32(wxInt32 v) : m_value(v) { }
+    wxAtomicInt32(std::int32_t v) : m_value(v) { }
     wxAtomicInt32(const wxAtomicInt32& a) : m_value(a.m_value) {}
 
-    operator wxInt32() const { return m_value; }
-    operator volatile wxInt32&() { return m_value; }
+    operator std::int32_t() const { return m_value; }
+    operator volatile std::int32_t&() { return m_value; }
 
-    wxAtomicInt32& operator=(wxInt32 v) { m_value = v; return *this; }
+    wxAtomicInt32& operator=(std::int32_t v) { m_value = v; return *this; }
 
     void Inc()
     {
@@ -126,28 +126,28 @@ public:
         ++m_value;
     }
 
-    wxInt32 Dec()
+    std::int32_t Dec()
     {
         wxCriticalSectionLocker lock(m_locker);
         return --m_value;
     }
 
 private:
-    volatile wxInt32  m_value;
+    volatile std::int32_t  m_value;
     wxCriticalSection m_locker;
 };
 
 inline void wxAtomicInc(wxAtomicInt32 &value) { value.Inc(); }
-inline wxInt32 wxAtomicDec(wxAtomicInt32 &value) { return value.Dec(); }
+inline std::int32_t wxAtomicDec(wxAtomicInt32 &value) { return value.Dec(); }
 
 #else // !wxNEEDS_GENERIC_ATOMIC_OPS
 
 #define wxHAS_ATOMIC_OPS
 
-inline void wxAtomicInc(wxInt32 &value) { wxAtomicInc((wxUint32&)value); }
-inline wxInt32 wxAtomicDec(wxInt32 &value) { return wxAtomicDec((wxUint32&)value); }
+inline void wxAtomicInc(std::int32_t &value) { wxAtomicInc((std::uint32_t&)value); }
+inline std::int32_t wxAtomicDec(std::int32_t &value) { return wxAtomicDec((std::uint32_t&)value); }
 
-using wxAtomicInt32 = wxInt32;
+using wxAtomicInt32 = std::int32_t;
 
 #endif // wxNEEDS_GENERIC_ATOMIC_OPS
 

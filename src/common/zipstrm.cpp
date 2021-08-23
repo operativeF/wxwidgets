@@ -75,7 +75,7 @@ enum {
 
 // read a string of a given length
 //
-static wxString ReadString(wxInputStream& stream, wxUint16 len, wxMBConv& conv)
+static wxString ReadString(wxInputStream& stream, std::uint16_t len, wxMBConv& conv)
 {
     if (len == 0)
         return wxEmptyString;
@@ -87,48 +87,48 @@ static wxString ReadString(wxInputStream& stream, wxUint16 len, wxMBConv& conv)
     return str;
 }
 
-static inline wxUint16 LimitUint16(wxUint64 value)
+static inline std::uint16_t LimitUint16(std::uint64_t value)
 {
     if (value > 0xffff)
         return 0xffff;
     else
-        return wx_truncate_cast(wxUint16, value);
+        return wx_truncate_cast(std::uint16_t, value);
 }
 
-static inline wxUint32 LimitUint32(wxUint64 value)
+static inline std::uint32_t LimitUint32(std::uint64_t value)
 {
     if (value > 0xffffffff)
         return 0xffffffff;
     else
-        return wx_truncate_cast(wxUint32,value);
+        return wx_truncate_cast(std::uint32_t,value);
 }
 
-// Decode a little endian wxUint64 number from a character array
+// Decode a little endian std::uint64_t number from a character array
 //
-static inline wxUint64 CrackUint64(const char *m)
+static inline std::uint64_t CrackUint64(const char *m)
 {
     const unsigned char *n = (const unsigned char*)m;
-    return (static_cast<wxUint64>(n[7]) << 56) |
-        (static_cast<wxUint64>(n[6]) << 48) |
-        (static_cast<wxUint64>(n[5]) << 40) |
-        (static_cast<wxUint64>(n[4]) << 32) |
-        (static_cast<wxUint64>(n[3]) << 24) |
-        (static_cast<wxUint64>(n[2]) << 16) |
-        (static_cast<wxUint64>(n[1]) << 8)  |
+    return (static_cast<std::uint64_t>(n[7]) << 56) |
+        (static_cast<std::uint64_t>(n[6]) << 48) |
+        (static_cast<std::uint64_t>(n[5]) << 40) |
+        (static_cast<std::uint64_t>(n[4]) << 32) |
+        (static_cast<std::uint64_t>(n[3]) << 24) |
+        (static_cast<std::uint64_t>(n[2]) << 16) |
+        (static_cast<std::uint64_t>(n[1]) << 8)  |
         n[0];
 }
 
-// Decode a little endian wxUint32 number from a character array
+// Decode a little endian std::uint32_t number from a character array
 //
-static inline wxUint32 CrackUint32(const char *m)
+static inline std::uint32_t CrackUint32(const char *m)
 {
     const unsigned char *n = (const unsigned char*)m;
     return (n[3] << 24) | (n[2] << 16) | (n[1] << 8) | n[0];
 }
 
-// Decode a little endian wxUint16 number from a character array
+// Decode a little endian std::uint16_t number from a character array
 //
-static inline wxUint16 CrackUint16(const char *m)
+static inline std::uint16_t CrackUint16(const char *m)
 {
     const unsigned char *n = (const unsigned char*)m;
     return (n[1] << 8) | n[0];
@@ -188,10 +188,10 @@ public:
     wxZipHeader(wxInputStream& stream, size_t size);
     wxZipHeader(const char* data, size_t size);
 
-    inline wxUint8 Read8();
-    inline wxUint16 Read16();
-    inline wxUint32 Read32();
-    inline wxUint64 Read64();
+    inline std::uint8_t Read8();
+    inline std::uint16_t Read16();
+    inline std::uint32_t Read32();
+    inline std::uint64_t Read64();
 
     const char *GetData() const             { return m_data; }
     size_t GetSize() const                  { return m_size; }
@@ -200,10 +200,10 @@ public:
     size_t Seek(size_t pos)                 { m_pos = pos; return m_pos; }
     size_t Skip(size_t size)                { m_pos += size; return m_pos; }
 
-    wxZipHeader& operator>>(wxUint8& n)     { n = Read8();  return *this; }
-    wxZipHeader& operator>>(wxUint16& n)    { n = Read16(); return *this; }
-    wxZipHeader& operator>>(wxUint32& n)    { n = Read32(); return *this; }
-    wxZipHeader& operator>>(wxUint64& n)    { n = Read64(); return *this; }
+    wxZipHeader& operator>>(std::uint8_t& n)     { n = Read8();  return *this; }
+    wxZipHeader& operator>>(std::uint16_t& n)    { n = Read16(); return *this; }
+    wxZipHeader& operator>>(std::uint32_t& n)    { n = Read32(); return *this; }
+    wxZipHeader& operator>>(std::uint64_t& n)    { n = Read64(); return *this; }
 
 private:
     char m_data[64];
@@ -231,28 +231,28 @@ wxZipHeader::wxZipHeader(const char* data, size_t size)
     memcpy(m_data, data, size);
 }
 
-inline wxUint8 wxZipHeader::Read8()
+inline std::uint8_t wxZipHeader::Read8()
 {
     return m_data[m_pos++];
 }
 
-inline wxUint16 wxZipHeader::Read16()
+inline std::uint16_t wxZipHeader::Read16()
 {
-    wxUint16 n = CrackUint16(m_data + m_pos);
+    std::uint16_t n = CrackUint16(m_data + m_pos);
     m_pos += 2;
     return n;
 }
 
-inline wxUint32 wxZipHeader::Read32()
+inline std::uint32_t wxZipHeader::Read32()
 {
-    wxUint32 n = CrackUint32(m_data + m_pos);
+    std::uint32_t n = CrackUint32(m_data + m_pos);
     m_pos += 4;
     return n;
 }
 
-inline wxUint64 wxZipHeader::Read64()
+inline std::uint64_t wxZipHeader::Read64()
 {
-    wxUint64 n = CrackUint64(m_data + m_pos);
+    std::uint64_t n = CrackUint64(m_data + m_pos);
     m_pos += 8;
     return n;
 }
@@ -883,7 +883,7 @@ void wxZipEntry::SetSystemMadeBy(int system)
     int mode = GetMode();
     bool wasUnix = IsMadeByUnix();
 
-    m_SystemMadeBy = (wxUint8)system;
+    m_SystemMadeBy = (std::uint8_t)system;
 
     if (!wasUnix && IsMadeByUnix()) {
         SetIsDir(IsDir());
@@ -999,7 +999,7 @@ void wxZipEntry::UnsetNotifier()
     m_zipnotifier = nullptr;
 }
 
-bool wxZipEntry::LoadExtraInfo(const char* extraData, wxUint16 extraLen, bool localInfo)
+bool wxZipEntry::LoadExtraInfo(const char* extraData, std::uint16_t extraLen, bool localInfo)
 {
     // We need to iterate over all headers
     // seeking for the field with Header ID = 1.
@@ -1010,8 +1010,8 @@ bool wxZipEntry::LoadExtraInfo(const char* extraData, wxUint16 extraLen, bool lo
     {
         // Parse extra header
         wxZipHeader hds(extraData, 4);
-        wxUint16 fieldID = hds.Read16();
-        wxUint16 fieldLen = hds.Read16();
+        std::uint16_t fieldID = hds.Read16();
+        std::uint16_t fieldLen = hds.Read16();
         if ( fieldID == 1 )
         {
             // Check that we don't overflow the input buffer.
@@ -1038,7 +1038,7 @@ bool wxZipEntry::LoadExtraInfo(const char* extraData, wxUint16 extraLen, bool lo
         }
 
         // Avoid "optimizing" the lines below by doing "fieldLen += 4" as this
-        // could overflow wxUint16 range and, at worst, make fieldLen equal to
+        // could overflow std::uint16_t range and, at worst, make fieldLen equal to
         // 0 resulting in an infinite loop. Written as it is now, everything is
         // promoted to int, which has range large enough to deal with any value
         // of the field length.
@@ -1051,8 +1051,8 @@ bool wxZipEntry::LoadExtraInfo(const char* extraData, wxUint16 extraLen, bool lo
 
 size_t wxZipEntry::ReadLocal(wxInputStream& stream, wxMBConv& conv)
 {
-    wxUint16 nameLen, extraLen;
-    wxUint32 compressedSize, size, crc;
+    std::uint16_t nameLen, extraLen;
+    std::uint32_t compressedSize, size, crc;
 
     wxZipHeader ds(stream, LOCAL_SIZE - 4);
     if (!ds)
@@ -1104,12 +1104,12 @@ size_t wxZipEntry::WriteLocal(wxOutputStream& stream, wxMBConv& conv, wxZipArchi
     const wxWX2MBbuf name_buf = unixName.mb_str(conv);
     const char *name = name_buf;
     if (!name) name = "";
-    const wxUint16 nameLen = wx_truncate_cast(wxUint16, strlen(name));
+    const std::uint16_t nameLen = wx_truncate_cast(std::uint16_t, strlen(name));
 
     if ( (zipFormat == wxZIP_FORMAT_ZIP64) ||
         m_CompressedSize >= 0xffffffff || m_Size >= 0xffffffff )
         m_z64infoOffset = LOCAL_SIZE + nameLen;
-    const wxUint16 versionNeeded =
+    const std::uint16_t versionNeeded =
         (m_z64infoOffset > 0) ? Z64_VERSION_NEEDED_TO_EXTRACT : int(m_VersionNeeded);
 
     wxDataOutputStream ds(stream);
@@ -1121,7 +1121,7 @@ size_t wxZipEntry::WriteLocal(wxOutputStream& stream, wxMBConv& conv, wxZipArchi
     WriteLocalFileSizes(ds);
 
     ds << nameLen;
-    wxUint16 extraLen = wx_truncate_cast(wxUint16, GetLocalExtraLen());
+    std::uint16_t extraLen = wx_truncate_cast(std::uint16_t, GetLocalExtraLen());
     if (m_z64infoOffset)
         extraLen += 20; // tag and 2x64bit file sizes
     ds.Write16(extraLen);
@@ -1137,7 +1137,7 @@ size_t wxZipEntry::WriteLocal(wxOutputStream& stream, wxMBConv& conv, wxZipArchi
 
 size_t wxZipEntry::ReadCentral(wxInputStream& stream, wxMBConv& conv)
 {
-    wxUint16 nameLen, extraLen, commentLen;
+    std::uint16_t nameLen, extraLen, commentLen;
 
     wxZipHeader ds(stream, CENTRAL_SIZE - 4);
     if (!ds)
@@ -1197,15 +1197,15 @@ size_t wxZipEntry::WriteCentral(wxOutputStream& stream, wxMBConv& conv) const
     const wxWX2MBbuf name_buf = unixName.mb_str(conv);
     const char *name = name_buf;
     if (!name) name = "";
-    wxUint16 nameLen = wx_truncate_cast(wxUint16, strlen(name));
+    std::uint16_t nameLen = wx_truncate_cast(std::uint16_t, strlen(name));
 
     const wxWX2MBbuf comment_buf = m_Comment.mb_str(conv);
     const char *comment = comment_buf;
     if (!comment) comment = "";
-    wxUint16 commentLen = wx_truncate_cast(wxUint16, strlen(comment));
+    std::uint16_t commentLen = wx_truncate_cast(std::uint16_t, strlen(comment));
 
-    wxUint16 extraLen = wx_truncate_cast(wxUint16, GetExtraLen());
-    wxUint16 z64InfoLen = 0;
+    std::uint16_t extraLen = wx_truncate_cast(std::uint16_t, GetExtraLen());
+    std::uint16_t z64InfoLen = 0;
 
     bool z64Required = false;
     if ( m_CompressedSize > 0xffffffff )
@@ -1228,7 +1228,7 @@ size_t wxZipEntry::WriteCentral(wxOutputStream& stream, wxMBConv& conv) const
         extraLen += 4 + z64InfoLen;
     }
 
-    wxUint16 versionNeeded =
+    std::uint16_t versionNeeded =
         (z64Required || m_z64infoOffset) ? Z64_VERSION_NEEDED_TO_EXTRACT : GetVersionNeeded();
 
     wxDataOutputStream ds(stream);
@@ -1236,8 +1236,8 @@ size_t wxZipEntry::WriteCentral(wxOutputStream& stream, wxMBConv& conv) const
     ds << CENTRAL_MAGIC << m_VersionMadeBy << m_SystemMadeBy;
 
     ds.Write16(versionNeeded);
-    ds.Write16(wx_truncate_cast(wxUint16, GetInternalFlags(conv.IsUTF8())));
-    ds.Write16(wx_truncate_cast(wxUint16, GetMethod()));
+    ds.Write16(wx_truncate_cast(std::uint16_t, GetInternalFlags(conv.IsUTF8())));
+    ds.Write16(wx_truncate_cast(std::uint16_t, GetMethod()));
     ds.Write32(GetDateTime().GetAsDOS());
     ds.Write32(GetCrc());
     ds.Write32(LimitUint32(GetCompressedSize()));
@@ -1254,11 +1254,11 @@ size_t wxZipEntry::WriteCentral(wxOutputStream& stream, wxMBConv& conv) const
         ds.Write16(1); // tag
         ds.Write16(z64InfoLen); // record size
         if (m_Size > 0xffffffff)
-            ds.Write64(static_cast<wxInt64>(m_Size));
+            ds.Write64(static_cast<std::int64_t>(m_Size));
         if (m_CompressedSize > 0xffffffff)
-            ds.Write64(static_cast<wxInt64>(m_CompressedSize));
+            ds.Write64(static_cast<std::int64_t>(m_CompressedSize));
         if (m_Offset > 0xffffffff)
-            ds.Write64(static_cast<wxInt64>(m_Offset));
+            ds.Write64(static_cast<std::int64_t>(m_Offset));
     }
     if (GetExtraLen())
         stream.Write(GetExtra(), GetExtraLen());
@@ -1286,8 +1286,8 @@ size_t wxZipEntry::ReadDescriptor(wxInputStream& stream)
     if (m_Crc == SUMS_MAGIC)
     {
         wxZipHeader buf(stream, 8);
-        const wxUint32 u1 = buf.GetSize() >= 4 ? buf.Read32() : (wxUint32)LOCAL_MAGIC;
-        const wxUint32 u2 = buf.GetSize() == 8 ? buf.Read32() : 0;
+        const std::uint32_t u1 = buf.GetSize() >= 4 ? buf.Read32() : (std::uint32_t)LOCAL_MAGIC;
+        const std::uint32_t u2 = buf.GetSize() == 8 ? buf.Read32() : 0;
 
         // look for the signature of the following record to decide which
         if ((u1 == LOCAL_MAGIC || u1 == CENTRAL_MAGIC) &&
@@ -1302,7 +1302,7 @@ size_t wxZipEntry::ReadDescriptor(wxInputStream& stream)
             // it's an info-zip record as expected
             if (buf.GetSize() > 4)
                 stream.Ungetch(buf.GetData() + 4, buf.GetSize() - 4);
-            m_Crc = wx_truncate_cast(wxUint32, m_CompressedSize);
+            m_Crc = wx_truncate_cast(std::uint32_t, m_CompressedSize);
             m_CompressedSize = m_Size;
             m_Size = u1;
             return SUMS_SIZE + 4;
@@ -1312,7 +1312,7 @@ size_t wxZipEntry::ReadDescriptor(wxInputStream& stream)
     return SUMS_SIZE;
 }
 
-size_t wxZipEntry::WriteDescriptor(wxOutputStream& stream, wxUint32 crc,
+size_t wxZipEntry::WriteDescriptor(wxOutputStream& stream, std::uint32_t crc,
                                    wxFileOffset compressedSize, wxFileOffset size)
 {
     m_Crc = crc;
@@ -1329,8 +1329,8 @@ size_t wxZipEntry::WriteDescriptor(wxOutputStream& stream, wxUint32 crc,
 
 void wxZipEntry::WriteLocalFileSizes(wxDataOutputStream& ds) const
 {
-    wxUint32 compressedSize;
-    wxUint32 size;
+    std::uint32_t compressedSize;
+    std::uint32_t size;
     if (m_z64infoOffset > 0)
     {
         compressedSize = 0xffffffff;
@@ -1339,9 +1339,9 @@ void wxZipEntry::WriteLocalFileSizes(wxDataOutputStream& ds) const
     else
     {
         compressedSize = m_CompressedSize != wxInvalidOffset ?
-             wx_truncate_cast(wxUint32, m_CompressedSize) : 0;
+             wx_truncate_cast(std::uint32_t, m_CompressedSize) : 0;
         size = m_Size != wxInvalidOffset ?
-            wx_truncate_cast(wxUint32, m_Size) : 0;
+            wx_truncate_cast(std::uint32_t, m_Size) : 0;
     }
     ds.Write32(compressedSize);
     ds.Write32(size);
@@ -1352,15 +1352,15 @@ void  wxZipEntry::WriteLocalZip64ExtraInfo(wxOutputStream& stream) const
     wxDataOutputStream ds(stream);
     ds.Write16(1);  // id
     ds.Write16(16); // record size
-    ds.Write64(static_cast<wxUint64>(m_Size));
-    ds.Write64(static_cast<wxUint64>(m_CompressedSize));
+    ds.Write64(static_cast<std::uint64_t>(m_Size));
+    ds.Write64(static_cast<std::uint64_t>(m_CompressedSize));
 }
 
 // Returns the flags as specified or including the UTF-8 flag if filename
 // contains non ASCII characters
-wxUint16 wxZipEntry::GetInternalFlags(bool checkForUTF8) const
+std::uint16_t wxZipEntry::GetInternalFlags(bool checkForUTF8) const
 {
-    wxUint16 flags = m_Flags;
+    std::uint16_t flags = m_Flags;
     if (checkForUTF8 && (!m_Name.IsAscii() || !m_Comment.IsAscii()))
         flags |= wxZIP_LANG_ENC_UTF8;
 
@@ -1382,17 +1382,17 @@ public:
     wxString GetComment() const                 { return m_Comment; }
 
     void SetDiskNumber(int num)
-        { m_DiskNumber = wx_truncate_cast(wxUint32, num); }
+        { m_DiskNumber = wx_truncate_cast(std::uint32_t, num); }
     void SetStartDisk(int num)
-        { m_StartDisk = wx_truncate_cast(wxUint32, num); }
+        { m_StartDisk = wx_truncate_cast(std::uint32_t, num); }
     void SetEntriesHere(int num)
-        { m_EntriesHere = wx_truncate_cast(wxUint32, num); }
+        { m_EntriesHere = wx_truncate_cast(std::uint32_t, num); }
     void SetTotalEntries(int num)
-        { m_TotalEntries = wx_truncate_cast(wxUint32, num); }
+        { m_TotalEntries = wx_truncate_cast(std::uint32_t, num); }
     void SetSize(wxFileOffset size)
-        { m_Size = wx_truncate_cast(wxUint64, size); }
+        { m_Size = wx_truncate_cast(std::uint64_t, size); }
     void SetOffset(wxFileOffset offset)
-        { m_Offset = wx_truncate_cast(wxUint64, offset); }
+        { m_Offset = wx_truncate_cast(std::uint64_t, offset); }
     void SetComment(const wxString& comment)
         { m_Comment = comment; }
 
@@ -1400,12 +1400,12 @@ public:
     bool Write(wxOutputStream& stream, wxMBConv& conv) const;
 
 private:
-    wxUint32 m_DiskNumber{0};
-    wxUint32 m_StartDisk{0};
-    wxUint64 m_EntriesHere{0};
-    wxUint64 m_TotalEntries{0};
-    wxUint64 m_Size{0};
-    wxUint64 m_Offset{0};
+    std::uint32_t m_DiskNumber{0};
+    std::uint32_t m_StartDisk{0};
+    std::uint64_t m_EntriesHere{0};
+    std::uint64_t m_TotalEntries{0};
+    std::uint64_t m_Size{0};
+    std::uint64_t m_Offset{0};
     wxString m_Comment;
 };
 
@@ -1414,7 +1414,7 @@ bool wxZipEndRec::Write(wxOutputStream& stream, wxMBConv& conv) const
     const wxWX2MBbuf comment_buf = m_Comment.mb_str(conv);
     const char *comment = comment_buf;
     if (!comment) comment = "";
-    wxUint16 commentLen = (wxUint16)strlen(comment);
+    std::uint16_t commentLen = (std::uint16_t)strlen(comment);
 
     wxDataOutputStream ds(stream);
 
@@ -1426,7 +1426,7 @@ bool wxZipEndRec::Write(wxOutputStream& stream, wxMBConv& conv) const
         // Write zip64 end of central directory record
         wxFileOffset z64endOffset = stream.TellO();
         ds.Write32(Z64_END_MAGIC);
-        ds.Write64(static_cast<wxUint64>(Z64_END_SIZE - 12)); // size of zip64 end record
+        ds.Write64(static_cast<std::uint64_t>(Z64_END_SIZE - 12)); // size of zip64 end record
         ds.Write16(Z64_VERSION_NEEDED_TO_EXTRACT);
         ds.Write16(Z64_VERSION_NEEDED_TO_EXTRACT);
         ds.Write32(m_DiskNumber);
@@ -1439,7 +1439,7 @@ bool wxZipEndRec::Write(wxOutputStream& stream, wxMBConv& conv) const
         // Write zip64 end of central directory locator
         ds.Write32(Z64_LOC_MAGIC);
         ds.Write32(m_StartDisk);
-        ds.Write64(static_cast<wxInt64>(z64endOffset));
+        ds.Write64(static_cast<std::int64_t>(z64endOffset));
         ds.Write32(1); // total number of disks
     }
 
@@ -1465,7 +1465,7 @@ bool wxZipEndRec::Read(wxInputStream& stream, wxMBConv& conv)
     if (!ds)
         return false;
 
-    wxUint16 commentLen;
+    std::uint16_t commentLen;
 
     m_DiskNumber = ds.Read16();
     m_StartDisk = ds.Read16();
@@ -1494,7 +1494,7 @@ bool wxZipEndRec::Read(wxInputStream& stream, wxMBConv& conv)
     {
         // Found zip64 locator, read z64 directory
         dsLoc.Read32(); // skip: disk with the start of the zip64
-        const wxUint64 z64EndOffset = dsLoc.Read64();
+        const std::uint64_t z64EndOffset = dsLoc.Read64();
 
         // Read zip64 end of central directory record
         if (stream.SeekI(z64EndOffset) == wxInvalidOffset)
@@ -1695,7 +1695,7 @@ bool wxZipInputStream::LoadEndRecord()
     m_TotalEntries = endrec.GetTotalEntries();
     m_Comment = endrec.GetComment();
 
-    wxUint32 magic = m_TotalEntries ? CENTRAL_MAGIC : END_MAGIC;
+    std::uint32_t magic = m_TotalEntries ? CENTRAL_MAGIC : END_MAGIC;
 
     // Now find the central-directory. we have the file offset of
     // the CD, so look there first.
@@ -1710,7 +1710,7 @@ bool wxZipInputStream::LoadEndRecord()
     // If it's not there, then it could be that the zip has been appended
     // to a self extractor, so take the CD size (also in endrec), subtract
     // it from the file offset of the end-central-directory and look there.
-    const wxUint64 recSize = endrec.GetSize();
+    const std::uint64_t recSize = endrec.GetSize();
     if (recSize <= endPos &&
             m_parent_i_stream->SeekI(endPos - recSize) != wxInvalidOffset &&
                 ReadSignature() == magic) {
@@ -1832,7 +1832,7 @@ wxStreamError wxZipInputStream::ReadCentral()
         // Offset read from the stream is 4 bytes independently of the
         // platform, but it's not clear if it can become greater than max
         // 32-bit value after adjustment. For now consider that it can't.
-        wxFileOffset ofs = wxUint32(m_entry.GetOffset());
+        wxFileOffset ofs = std::uint32_t(m_entry.GetOffset());
         ofs += m_offsetAdjustment;
         if (ofs > wxUINT32_MAX) {
             m_signature = 0;
@@ -1920,7 +1920,7 @@ wxStreamError wxZipInputStream::ReadLocal(bool readEndRec /*=false*/)
     return wxSTREAM_READ_ERROR;
 }
 
-wxUint32 wxZipInputStream::ReadSignature()
+std::uint32_t wxZipInputStream::ReadSignature()
 {
     char magic[4];
     m_parent_i_stream->Read(magic, 4);

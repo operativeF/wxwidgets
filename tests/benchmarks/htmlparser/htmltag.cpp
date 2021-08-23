@@ -103,7 +103,7 @@ wx28HtmlTagsCache::wx28HtmlTagsCache(const wxString& source)
                 {
                     // store the orig pos in case we are missing the closing
                     // tag (see below)
-                    wxInt32 old_pos = pos;
+                    std::int32_t old_pos = pos;
                     bool foundCloseTag = false;
 
                     // find next matching tag

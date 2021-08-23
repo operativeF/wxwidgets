@@ -126,8 +126,8 @@ public:
     inline bool WriteField(wxOutputStream& out, int id);
 
     bool IsAllZeros() const;
-    wxUint32 Sum(bool SignedSum = false);
-    wxUint32 SumField(int id);
+    std::uint32_t Sum(bool SignedSum = false);
+    std::uint32_t SumField(int id);
 
     char *Get(int id) { return data + fields[id].pos + id; }
     static size_t Len(int id) { return fields[id + 1].pos - fields[id].pos; }
@@ -186,12 +186,12 @@ bool wxTarHeaderBlock::IsAllZeros() const
     return true;
 }
 
-wxUint32 wxTarHeaderBlock::Sum(bool SignedSum /*=false*/)
+std::uint32_t wxTarHeaderBlock::Sum(bool SignedSum /*=false*/)
 {
     // the chksum field itself should be blanks during the calculation
     memset(Get(TAR_CHKSUM), ' ', Len(TAR_CHKSUM));
     const char *p = data;
-    wxUint32 n = 0;
+    std::uint32_t n = 0;
 
     if (SignedSum)
         for (size_t i = 0; i < sizeof(data); i++)
@@ -203,11 +203,11 @@ wxUint32 wxTarHeaderBlock::Sum(bool SignedSum /*=false*/)
     return n;
 }
 
-wxUint32 wxTarHeaderBlock::SumField(int id)
+std::uint32_t wxTarHeaderBlock::SumField(int id)
 {
     unsigned char *p = (unsigned char*)Get(id);
     unsigned char *q = p + Len(id);
-    wxUint32 n = 0;
+    std::uint32_t n = 0;
 
     while (p < q)
         n += *p++;
@@ -748,7 +748,7 @@ wxStreamError wxTarInputStream::ReadHeaders()
         // the checksum is supposed to be the unsigned sum of the header bytes,
         // but there have been versions of tar that used the signed sum, so
         // accept that too, but only if used throughout.
-        wxUint32 chksum = m_hdr->GetOctal(TAR_CHKSUM);
+        std::uint32_t chksum = m_hdr->GetOctal(TAR_CHKSUM);
         bool ok = false;
 
         if (m_sumType != SUM_SIGNED) {

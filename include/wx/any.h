@@ -32,7 +32,7 @@ union wxAnyValueBuffer
     union Alignment
     {
     #if wxHAS_INT64
-        wxInt64 m_int64;
+        std::int64_t m_int64;
     #endif
         long double m_longDouble;
         void ( *m_funcPtr )();

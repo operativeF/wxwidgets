@@ -25,10 +25,10 @@
 // exhaust the entire range, we wrap around and reuse the ids freed in the
 // meanwhile
 // FIXME: Enum?
-constexpr wxUint8 ID_FREE = 0;
-constexpr wxUint8 ID_STARTCOUNT = 1;
-constexpr wxUint8 ID_COUNTTOOLARGE = 254;
-constexpr wxUint8 ID_RESERVED = 255;
+constexpr std::uint8_t ID_FREE = 0;
+constexpr std::uint8_t ID_STARTCOUNT = 1;
+constexpr std::uint8_t ID_COUNTTOOLARGE = 254;
+constexpr std::uint8_t ID_RESERVED = 255;
 
 namespace
 {
@@ -39,7 +39,7 @@ namespace
 // thus we store their count directly in this array, however when the same ID
 // is reused a great number of times (more than or equal to ID_COUNTTOOLARGE),
 // the hash map stores the actual count
-wxUint8 gs_autoIdsRefCount[wxID_AUTO_HIGHEST - wxID_AUTO_LOWEST + 1] = { 0 };
+std::uint8_t gs_autoIdsRefCount[wxID_AUTO_HIGHEST - wxID_AUTO_LOWEST + 1] = { 0 };
 
 // NB: this variable is allocated (again) only when an ID gets at least
 // ID_COUNTTOOLARGE refs, and is freed when the latest entry in the map gets

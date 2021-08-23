@@ -980,7 +980,7 @@ class WXDLLIMPEXP_PROPGRID wxPGProperty : public wxObject
 
     wxDECLARE_ABSTRACT_CLASS(wxPGProperty);
 public:
-    using FlagType = wxUint32;
+    using FlagType = std::uint32_t;
 
     // Virtual destructor.
     // It is customary for derived properties to implement this.

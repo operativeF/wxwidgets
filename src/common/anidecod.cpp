@@ -99,16 +99,16 @@ wxColour wxANIDecoder::GetTransparentColour(unsigned int frame) const
 
 bool wxANIDecoder::DoCanRead(wxInputStream& stream) const
 {
-    wxInt32 FCC1, FCC2;
-    wxUint32 datalen;
+    std::int32_t FCC1, FCC2;
+    std::uint32_t datalen;
 
-    wxInt32 riff32;
+    std::int32_t riff32;
     memcpy( &riff32, "RIFF", 4 );
-    wxInt32 list32;
+    std::int32_t list32;
     memcpy( &list32, "LIST", 4 );
-    wxInt32 ico32;
+    std::int32_t ico32;
     memcpy( &ico32, "icon", 4 );
-    wxInt32 anih32;
+    std::int32_t anih32;
     memcpy( &anih32, "anih", 4 );
 
     if ( stream.IsSeekable() && stream.SeekI(0) == wxInvalidOffset )
@@ -160,27 +160,27 @@ bool wxANIDecoder::DoCanRead(wxInputStream& stream) const
 // the "anih" RIFF chunk
 struct wxANIHeader
 {
-    wxInt32 cbSizeOf;     // Num bytes in AniHeader (36 bytes)
-    wxInt32 cFrames;      // Number of unique Icons in this cursor
-    wxInt32 cSteps;       // Number of Blits before the animation cycles
-    wxInt32 cx;           // width of the frames
-    wxInt32 cy;           // height of the frames
-    wxInt32 cBitCount;    // bit depth
-    wxInt32 cPlanes;      // 1
-    wxInt32 JifRate;      // Default Jiffies (1/60th of a second) if rate chunk not present.
-    wxInt32 flags;        // Animation Flag (see AF_ constants)
+    std::int32_t cbSizeOf;     // Num bytes in AniHeader (36 bytes)
+    std::int32_t cFrames;      // Number of unique Icons in this cursor
+    std::int32_t cSteps;       // Number of Blits before the animation cycles
+    std::int32_t cx;           // width of the frames
+    std::int32_t cy;           // height of the frames
+    std::int32_t cBitCount;    // bit depth
+    std::int32_t cPlanes;      // 1
+    std::int32_t JifRate;      // Default Jiffies (1/60th of a second) if rate chunk not present.
+    std::int32_t flags;        // Animation Flag (see AF_ constants)
 
     // ANI files are always little endian so we need to swap bytes on big
     // endian architectures
 #ifdef WORDS_BIGENDIAN
     void AdjustEndianness()
     {
-        // this works because all our fields are wxInt32 and they must be
+        // this works because all our fields are std::int32_t and they must be
         // packed without holes between them (if they're not, they wouldn't map
         // to the file header!)
-        wxInt32 * const start = (wxInt32 *)this;
-        wxInt32 * const end = start + sizeof(wxANIHeader)/sizeof(wxInt32);
-        for ( wxInt32 *p = start; p != end; p++ )
+        std::int32_t * const start = (std::int32_t *)this;
+        std::int32_t * const end = start + sizeof(wxANIHeader)/sizeof(std::int32_t);
+        for ( std::int32_t *p = start; p != end; p++ )
         {
             *p = wxINT32_SWAP_ALWAYS(*p);
         }
@@ -192,21 +192,21 @@ struct wxANIHeader
 
 bool wxANIDecoder::Load( wxInputStream& stream )
 {
-    wxInt32 FCC1, FCC2;
-    wxUint32 datalen;
+    std::int32_t FCC1, FCC2;
+    std::uint32_t datalen;
     unsigned int globaldelay=0;
 
-    wxInt32 riff32;
+    std::int32_t riff32;
     memcpy( &riff32, "RIFF", 4 );
-    wxInt32 list32;
+    std::int32_t list32;
     memcpy( &list32, "LIST", 4 );
-    wxInt32 ico32;
+    std::int32_t ico32;
     memcpy( &ico32, "icon", 4 );
-    wxInt32 anih32;
+    std::int32_t anih32;
     memcpy( &anih32, "anih", 4 );
-    wxInt32 rate32;
+    std::int32_t rate32;
     memcpy( &rate32, "rate", 4 );
-    wxInt32 seq32;
+    std::int32_t seq32;
     memcpy( &seq32, "seq ", 4 );
 
     if ( stream.IsSeekable() && stream.SeekI(0) == wxInvalidOffset )

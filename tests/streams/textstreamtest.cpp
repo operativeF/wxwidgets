@@ -281,7 +281,7 @@ TEST_CASE("wxTextInputStream::GetChar", "[text][input][stream][char]")
     // wxTextInputStream::GetChar().
     SECTION("starts-with-nul")
     {
-        const wxUint8 buf[] = { 0x00, 0x01, };
+        const std::uint8_t buf[] = { 0x00, 0x01, };
         wxMemoryInputStream mis(buf, sizeof(buf));
         wxTextInputStream tis(mis);
 
@@ -297,7 +297,7 @@ TEST_CASE("wxTextInputStream::GetChar", "[text][input][stream][char]")
     // should decode the buffer as Latin-1 once it gets there.
     SECTION("almost-UTF-32-BOM")
     {
-        const wxUint8 buf[] = { 0x00, 0x00, 0xFE, 0xFE, 0x01 };
+        const std::uint8_t buf[] = { 0x00, 0x00, 0xFE, 0xFE, 0x01 };
         wxMemoryInputStream mis(buf, sizeof(buf));
         wxTextInputStream tis(mis);
 
@@ -315,7 +315,7 @@ TEST_CASE("wxTextInputStream::GetChar", "[text][input][stream][char]")
     // Needs wxConvAuto to not switch to fallback on <6 bytes.
     SECTION("UTF8-with-nulls")
     {
-        const wxUint8 buf[] = { 0x00, 0x00, 0xf0, 0x90, 0x8c, 0x98 };
+        const std::uint8_t buf[] = { 0x00, 0x00, 0xf0, 0x90, 0x8c, 0x98 };
         wxMemoryInputStream mis(buf, sizeof(buf));
         wxTextInputStream tis(mis);
 
@@ -335,7 +335,7 @@ TEST_CASE("wxTextInputStream::GetChar", "[text][input][stream][char]")
     // Needs 6 character output buffer in GetChar().
     SECTION("almost-UTF8-with-nulls")
     {
-        const wxUint8 buf[] = { 0x00, 0x00, 0xf0, 0x90, 0x8c, 0xe0 };
+        const std::uint8_t buf[] = { 0x00, 0x00, 0xf0, 0x90, 0x8c, 0xe0 };
         wxMemoryInputStream mis(buf, sizeof(buf));
         wxTextInputStream tis(mis);
 

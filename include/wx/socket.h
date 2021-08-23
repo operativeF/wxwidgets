@@ -141,9 +141,9 @@ public:
     bool IsConnected() const { return m_connected; }
     bool IsData() { return WaitForRead(0, 0); }
     bool IsDisconnected() const { return !IsConnected(); }
-    wxUint32 LastCount() const { return m_lcount; }
-    wxUint32 LastReadCount() const { return m_lcount_read; }
-    wxUint32 LastWriteCount() const { return m_lcount_write; }
+    std::uint32_t LastCount() const { return m_lcount; }
+    std::uint32_t LastReadCount() const { return m_lcount_read; }
+    std::uint32_t LastWriteCount() const { return m_lcount_write; }
     wxSocketError LastError() const;
     void SaveState();
     void RestoreState();
@@ -157,12 +157,12 @@ public:
     virtual bool  Close();
     void ShutdownOutput();
     wxSocketBase& Discard();
-    wxSocketBase& Peek(void* buffer, wxUint32 nbytes);
-    wxSocketBase& Read(void* buffer, wxUint32 nbytes);
-    wxSocketBase& ReadMsg(void *buffer, wxUint32 nbytes);
-    wxSocketBase& Unread(const void *buffer, wxUint32 nbytes);
-    wxSocketBase& Write(const void *buffer, wxUint32 nbytes);
-    wxSocketBase& WriteMsg(const void *buffer, wxUint32 nbytes);
+    wxSocketBase& Peek(void* buffer, std::uint32_t nbytes);
+    wxSocketBase& Read(void* buffer, std::uint32_t nbytes);
+    wxSocketBase& ReadMsg(void *buffer, std::uint32_t nbytes);
+    wxSocketBase& Unread(const void *buffer, std::uint32_t nbytes);
+    wxSocketBase& Write(const void *buffer, std::uint32_t nbytes);
+    wxSocketBase& WriteMsg(const void *buffer, std::uint32_t nbytes);
 
     // all Wait() functions wait until their condition is satisfied or the
     // timeout expires; if seconds == -1 (default) then m_timeout value is used
@@ -191,9 +191,9 @@ public:
 
     bool GetOption(int level, int optname, void *optval, int *optlen);
     bool SetOption(int level, int optname, const void *optval, int optlen);
-    wxUint32 GetLastIOSize() const { return m_lcount; }
-    wxUint32 GetLastIOReadSize() const { return m_lcount_read; }
-    wxUint32 GetLastIOWriteSize() const { return m_lcount_write; }
+    std::uint32_t GetLastIOSize() const { return m_lcount; }
+    std::uint32_t GetLastIOReadSize() const { return m_lcount_read; }
+    std::uint32_t GetLastIOWriteSize() const { return m_lcount_write; }
 
     // event handling
     void *GetClientData() const { return m_clientData; }
@@ -247,8 +247,8 @@ private:
     friend class wxDatagramSocket;
 
     // low level IO
-    wxUint32 DoRead(void* buffer, wxUint32 nbytes);
-    wxUint32 DoWrite(const void *buffer, wxUint32 nbytes);
+    std::uint32_t DoRead(void* buffer, std::uint32_t nbytes);
+    std::uint32_t DoWrite(const void *buffer, std::uint32_t nbytes);
 
     // wait until the given flags are set for this socket or the given timeout
     // (or m_timeout) expires
@@ -271,8 +271,8 @@ private:
     }
 
     // pushback buffer
-    void     Pushback(const void *buffer, wxUint32 size);
-    wxUint32 GetPushback(void *buffer, wxUint32 size, bool peek);
+    void     Pushback(const void *buffer, std::uint32_t size);
+    std::uint32_t GetPushback(void *buffer, std::uint32_t size, bool peek);
 
     // store the given error as the LastError()
     void SetError(wxSocketError error);
@@ -289,9 +289,9 @@ private:
     bool          m_reading;          // busy reading?
     bool          m_writing;          // busy writing?
     bool          m_closed;           // was the other end closed?
-    wxUint32      m_lcount;           // last IO transaction size
-    wxUint32      m_lcount_read;      // last IO transaction size of Read() direction.
-    wxUint32      m_lcount_write;     // last IO transaction size of Write() direction.
+    std::uint32_t      m_lcount;           // last IO transaction size
+    std::uint32_t      m_lcount_read;      // last IO transaction size of Read() direction.
+    std::uint32_t      m_lcount_write;     // last IO transaction size of Write() direction.
     unsigned long m_timeout;          // IO timeout value in seconds
                                       // (TODO: remove, wxSocketImpl has it too)
     wxList        m_states;           // stack of states (TODO: remove!)
@@ -301,8 +301,8 @@ private:
 
     // pushback buffer
     void         *m_unread;           // pushback buffer
-    wxUint32      m_unrd_size;        // pushback buffer size
-    wxUint32      m_unrd_cur;         // pushback pointer (index into buffer)
+    std::uint32_t      m_unrd_size;        // pushback buffer size
+    std::uint32_t      m_unrd_cur;         // pushback pointer (index into buffer)
 
     // events
     int           m_id;               // socket id
@@ -406,10 +406,10 @@ public:
 
     wxDatagramSocket& RecvFrom(wxSockAddress& addr,
                                void *buf,
-                               wxUint32 nBytes);
+                               std::uint32_t nBytes);
     wxDatagramSocket& SendTo(const wxSockAddress& addr,
                              const void* buf,
-                             wxUint32 nBytes);
+                             std::uint32_t nBytes);
 
     /* TODO:
        bool Connect(wxSockAddress& addr);

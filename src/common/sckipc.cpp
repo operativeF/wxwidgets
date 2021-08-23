@@ -210,13 +210,13 @@ public:
 
     // simple wrappers around the functions with the same name in
     // wxDataInputStream
-    wxUint8 Read8()
+    std::uint8_t Read8()
     {
         Flush();
         return m_dataIn.Read8();
     }
 
-    wxUint32 Read32()
+    std::uint32_t Read32()
     {
         Flush();
         return m_dataIn.Read32();
@@ -309,7 +309,7 @@ public:
 	IPCOutput& operator=(const IPCOutput&) = delete;
 
     // write a byte
-    void Write8(wxUint8 i)
+    void Write8(std::uint8_t i)
     {
         m_streams.GetDataOut().Write8(i);
     }

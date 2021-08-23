@@ -993,7 +993,7 @@ unsigned int wxGCD(unsigned int u, unsigned int v)
 // wxCTZ
 // Count trailing zeros. Use optimised builtin where available.
 // ----------------------------------------------------------------------------
-unsigned int wxCTZ(wxUint32 x)
+unsigned int wxCTZ(std::uint32_t x)
 {
     wxCHECK_MSG(x > 0, 0, "Undefined for x == 0.");
     // FIXME: Check for header on other compilers.

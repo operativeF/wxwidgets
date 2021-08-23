@@ -86,10 +86,10 @@ private:
     wxDateTime m_date;
 
     // bit field containing the state (marked or not) of all days in the month
-    wxUint32 m_marks {0};
+    std::uint32_t m_marks {0};
 
     // the same but indicating whether a day is a holiday or not
-    wxUint32 m_holidays {0};
+    std::uint32_t m_holidays {0};
 
 
     wxDECLARE_DYNAMIC_CLASS(wxCalendarCtrl);

@@ -77,8 +77,8 @@ wxWndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 //  QT Types
 //---------------------------------------------------------------------------
 typedef struct MovieRecord* Movie;
-using OSErr = wxInt16;
-using OSStatus = wxInt32;
+using OSErr = std::int16_t;
+using OSStatus = std::int32_t;
 #define noErr 0
 #define fsRdPerm 1
 typedef unsigned char                   Str255[256];
@@ -121,8 +121,8 @@ struct Rect
 
 struct wide
 {
-    wxInt32    hi;
-    wxUint32   lo;
+    std::int32_t    hi;
+    std::uint32_t   lo;
 };
 
 struct TimeRecord
@@ -140,11 +140,11 @@ struct Point
 
 struct EventRecord
 {
-    wxUint16                       what;
-    wxUint32                          message;
-    wxUint32                          when;
+    std::uint16_t                       what;
+    std::uint32_t                          message;
+    std::uint32_t                          when;
     Point                           where;
-    wxUint16                  modifiers;
+    std::uint16_t                  modifiers;
 };
 
 enum
@@ -197,7 +197,7 @@ public:
                         (inName, outFile, flags), -1)
 
     wxDL_METHOD_DEFINE( OSErr, OpenMovieFile,
-                        (const FSSpec * fileSpec, short * resRefNum, wxInt8 permission),
+                        (const FSSpec * fileSpec, short * resRefNum, std::int8_t permission),
                         (fileSpec, resRefNum, permission), -1 )
 
     wxDL_METHOD_DEFINE( OSErr, CloseMovieFile,

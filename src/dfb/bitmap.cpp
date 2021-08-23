@@ -245,7 +245,7 @@ DFBSurfacePixelFormat DepthToFormat(int depth)
 // ----------------------------------------------------------------------------
 
 // this function works with destination buffer of type T and not char (where T
-// is typically wxUint32 for RGB32, wxUint16 for RGB16 &c) as we don't need
+// is typically std::uint32_t for RGB32, std::uint16_t for RGB16 &c) as we don't need
 // access to the individual pixel components -- and so it's not suitable for
 // the pixel formats with pixel size not equal to 8, 16 or 32
 template <typename T, int White, int Black>
@@ -309,15 +309,15 @@ CopyBitsToSurface(const unsigned char *bits,
             // we suppose that these indices correspond to the palette entries
             // for white and black, respectively, but a better idea would be to
             // use IDirectFBPalette::FindBestMatch() to determine them
-            CopyBits<wxUint8, 0xff, 0>(width, height, bits, locked);
+            CopyBits<std::uint8_t, 0xff, 0>(width, height, bits, locked);
             break;
 
         case DSPF_RGB16:
-            CopyBits<wxUint16, 0xffff, 0>(width, height, bits, locked);
+            CopyBits<std::uint16_t, 0xffff, 0>(width, height, bits, locked);
             break;
 
         case DSPF_RGB32:
-            CopyBits<wxUint32, 0xffffffff, 0>(width, height, bits, locked);
+            CopyBits<std::uint32_t, 0xffffffff, 0>(width, height, bits, locked);
             break;
 
         default:
