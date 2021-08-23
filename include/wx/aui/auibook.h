@@ -93,25 +93,23 @@ public:
 class WXDLLIMPEXP_AUI wxAuiNotebookPage
 {
 public:
-    wxWindow* window;     // page's associated window
-    std::string caption;  // caption displayed on the tab
-    wxString tooltip;     // tooltip displayed when hovering over tab title
-    wxBitmap bitmap;      // tab's bitmap
-    wxRect rect;          // tab's hit rectangle
-    bool active;          // true if the page is currently active
-    bool hover;           // true if mouse hovering over tab
+    std::string caption;           // caption displayed on the tab
+    wxString tooltip;              // tooltip displayed when hovering over tab title
+    wxBitmap bitmap;               // tab's bitmap
+    wxRect rect;                   // tab's hit rectangle
+    wxWindow* window{nullptr};     // page's associated window
+    bool active{false};            // true if the page is currently active
+    bool hover{false};             // true if mouse hovering over tab
 };
 
-class WXDLLIMPEXP_AUI wxAuiTabContainerButton
+struct WXDLLIMPEXP_AUI wxAuiTabContainerButton
 {
-public:
-
-    int id;               // button's id
-    int curState;        // current state (normal, hover, pressed, etc.)
-    int location;         // buttons location (wxLEFT, wxRIGHT, or wxCENTER)
-    wxBitmap bitmap;      // button's hover bitmap
+    wxBitmap bitmap;     // button's hover bitmap
     wxBitmap disBitmap;  // button's disabled bitmap
-    wxRect rect;          // button's hit rectangle
+    wxRect rect;         // button's hit rectangle
+    int id{};            // button's id
+    int curState{};      // current state (normal, hover, pressed, etc.)
+    int location{};      // buttons location (wxLEFT, wxRIGHT, or wxCENTER)
 };
 
 

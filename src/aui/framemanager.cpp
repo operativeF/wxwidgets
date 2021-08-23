@@ -597,21 +597,9 @@ wxEND_EVENT_TABLE()
 
 
 wxAuiManager::wxAuiManager(wxWindow* managed_wnd, unsigned int flags)
+    : m_art(new wxAuiDefaultDockArt),
+      m_flags(flags)
 {
-    m_action = actionNone;
-    m_actionWindow = nullptr;
-    m_hoverButton = nullptr;
-    m_art = new wxAuiDefaultDockArt;
-    m_hintWnd = nullptr;
-    m_flags = flags;
-    m_skipping = false;
-    m_hasMaximized = false;
-    m_frame = nullptr;
-    m_dockConstraintX = 0.3;
-    m_dockConstraintY = 0.3;
-    m_reserved = nullptr;
-    m_currentDragItem = -1;
-
     if (managed_wnd)
     {
         SetManagedWindow(managed_wnd);

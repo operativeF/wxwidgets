@@ -547,7 +547,6 @@ protected:
     void SetActivePane(wxWindow* active_pane);
 
 public:
-
     // public events (which can be invoked externally)
     void OnRender(wxAuiManagerEvent& evt);
     void OnPaneButton(wxAuiManagerEvent& evt);
@@ -570,8 +569,6 @@ protected:
     void OnFindManager(wxAuiManagerEvent& evt);
     void OnSysColourChanged(wxSysColourChangedEvent& event);
 
-protected:
-
     enum
     {
         actionNone = 0,
@@ -582,9 +579,7 @@ protected:
         actionDragFloatingPane
     };
 
-protected:
-
-    wxWindow* m_frame;           // the window being managed
+    wxWindow* m_frame{nullptr};           // the window being managed
     wxAuiDockArt* m_art;            // dock art object which does all drawing
     unsigned int m_flags;        // manager flags wxAUI_MGR_*
 
@@ -592,29 +587,29 @@ protected:
     wxAuiDockInfoArray m_docks;     // array of docks structures
     wxAuiDockUIPartArray m_uiParts; // array of UI parts (captions, buttons, etc)
 
-    int m_action;                // current mouse action
+    int m_action{actionNone};                // current mouse action
     wxPoint m_actionStart;      // position where the action click started
     wxPoint m_actionOffset;     // offset from upper left of the item clicked
     wxAuiDockUIPart* m_actionPart; // ptr to the part the action happened to
-    wxWindow* m_actionWindow;   // action frame or window (NULL if none)
+    wxWindow* m_actionWindow{nullptr};   // action frame or window (NULL if none)
     wxRect m_actionHintRect;    // hint rectangle for the action
     wxRect m_lastRect;
-    wxAuiDockUIPart* m_hoverButton;// button uipart being hovered over
+    wxAuiDockUIPart* m_hoverButton{nullptr};// button uipart being hovered over
     wxRect m_lastHint;          // last hint rectangle
     wxPoint m_lastMouseMove;   // last mouse move position (see OnMotion)
-    int  m_currentDragItem;
-    bool m_skipping;
-    bool m_hasMaximized;
+    int  m_currentDragItem{-1};
+    bool m_skipping{false};
+    bool m_hasMaximized{false};
 
-    double m_dockConstraintX;  // 0.0 .. 1.0; max pct of window width a dock can consume
-    double m_dockConstraintY;  // 0.0 .. 1.0; max pct of window height a dock can consume
+    double m_dockConstraintX{0.3};  // 0.0 .. 1.0; max pct of window width a dock can consume
+    double m_dockConstraintY{0.3};  // 0.0 .. 1.0; max pct of window height a dock can consume
 
-    wxFrame* m_hintWnd;         // transparent hint window, if supported by platform
+    wxFrame* m_hintWnd{nullptr};         // transparent hint window, if supported by platform
     wxTimer m_hintFadeTimer;    // transparent fade timer
     wxByte m_hintFadeAmt;       // transparent fade amount
     wxByte m_hintFadeMax;       // maximum value of hint fade
 
-    void* m_reserved;
+    void* m_reserved{nullptr};
 
 #ifndef SWIG
     wxDECLARE_EVENT_TABLE();
@@ -729,14 +724,14 @@ public:
         typePaneButton
     };
 
-    int type;                // ui part type (see enum above)
-    int orientation;         // orientation (either wxHORIZONTAL or wxVERTICAL)
-    wxAuiDockInfo* dock;        // which dock the item is associated with
-    wxAuiPaneInfo* pane;        // which pane the item is associated with
-    int button;              // which pane button the item is associated with
-    wxSizer* cont_sizer;     // the part's containing sizer
-    wxSizerItem* sizer_item; // the sizer item of the part
-    wxRect rect;             // client coord rectangle of the part itself
+    int type{};                       // ui part type (see enum above)
+    int orientation{};                // orientation (either wxHORIZONTAL or wxVERTICAL)
+    wxAuiDockInfo* dock{nullptr};     // which dock the item is associated with
+    wxAuiPaneInfo* pane{nullptr};     // which pane the item is associated with
+    int button{};                     // which pane button the item is associated with
+    wxSizer* cont_sizer{nullptr};     // the part's containing sizer
+    wxSizerItem* sizer_item{nullptr}; // the sizer item of the part
+    wxRect rect;                      // client coord rectangle of the part itself
 };
 
 

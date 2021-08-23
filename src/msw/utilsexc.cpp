@@ -97,17 +97,17 @@ struct wxExecuteData
         }
     }
 
-    HWND       hWnd;          // window to send wxWM_PROC_TERMINATED to
-    HANDLE     hProcess;      // handle of the process
+    HWND       hWnd{};          // window to send wxWM_PROC_TERMINATED to
+    HANDLE     hProcess{};      // handle of the process
     
     // The rest is initialized in the code creating the objects of this
     // class, but the thread handle can't be set until later, so initialize
     // it here to ensure we never use an uninitialized value in our dtor.
     HANDLE     hThread{nullptr};       // handle of the thread monitoring its termination
-    DWORD      dwProcessId;   // pid of the process
-    wxProcess *handler;
-    DWORD      dwExitCode;    // the exit code of the process
-    bool       state;         // set to false when the process finishes
+    DWORD      dwProcessId{};   // pid of the process
+    wxProcess *handler{nullptr};
+    DWORD      dwExitCode{};    // the exit code of the process
+    bool       state{};         // set to false when the process finishes
 };
 
 class wxExecuteModule : public wxModule
