@@ -24,7 +24,6 @@
 
 #include "png.h"
 
-#include <cstring> // For memcpy
 #include <tuple>
 
 // ----------------------------------------------------------------------------

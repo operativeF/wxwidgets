@@ -151,10 +151,6 @@ int wxColourDialog::ShowModal()
     wxWindow* const parent = GetParentForModalDialog(m_parent, GetWindowStyle());
     WXHWND hWndParent = parent ? GetHwndOf(parent) : nullptr;
 
-    // initialize the struct used by Windows
-    CHOOSECOLOR chooseColorStruct;
-    memset(&chooseColorStruct, 0, sizeof(CHOOSECOLOR));
-
     // and transfer data from m_colourData to it
     COLORREF custColours[16];
     for ( size_t i = 0; i < WXSIZEOF(custColours); i++ )
@@ -167,14 +163,19 @@ int wxColourDialog::ShowModal()
 
     m_currentCol = wxColourToRGB(m_colourData.GetColour());
 
-    chooseColorStruct.lStructSize = sizeof(CHOOSECOLOR);
-    chooseColorStruct.hwndOwner = hWndParent;
-    chooseColorStruct.rgbResult = m_currentCol;
-    chooseColorStruct.lpCustColors = custColours;
-
-    chooseColorStruct.Flags = CC_RGBINIT | CC_ENABLEHOOK;
-    chooseColorStruct.lCustData = (LPARAM)this;
-    chooseColorStruct.lpfnHook = wxColourDialogHookProc;
+    // initialize the struct used by Windows
+    CHOOSECOLORW chooseColorStruct =
+    {
+        .lStructSize = sizeof(CHOOSECOLORW),
+        .hwndOwner = hWndParent,
+        .hInstance = {}, // Ignored
+        .rgbResult = m_currentCol,
+        .lpCustColors = custColours,
+        .Flags = CC_RGBINIT | CC_ENABLEHOOK,
+        .lCustData = (LPARAM)this,
+        .lpfnHook = wxColourDialogHookProc,
+        .lpTemplateName = {} // Ignored
+    };
 
     if ( m_colourData.GetChooseFull() )
         chooseColorStruct.Flags |= CC_FULLOPEN;
@@ -186,7 +187,7 @@ int wxColourDialog::ShowModal()
     wxMSWImpl::AutoSystemDpiAware dpiAwareness;
 
     // do show the modal dialog
-    if ( !::ChooseColor(&chooseColorStruct) )
+    if ( !::ChooseColorW(&chooseColorStruct) )
     {
         // 0 error means the dialog was simply cancelled, i.e. no real error
         // occurred

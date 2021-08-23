@@ -20,6 +20,8 @@
     #include "wx/log.h"
 #endif
 
+#include <algorithm>
+
 constexpr wxChar TRACE_MODULE[] = wxT("module");
 
 wxIMPLEMENT_ABSTRACT_CLASS(wxModule, wxObject)
@@ -32,16 +34,7 @@ void wxModule::RegisterModule(wxModule* module)
 
 void wxModule::UnregisterModule(wxModule* module)
 {
-    for ( wxModuleList::iterator it = ms_modules.begin();
-          it != ms_modules.end();
-          ++it )
-    {
-        if ( *it == module )
-        {
-            ms_modules.erase(it);
-            break;
-        }
-    }
+    std::erase(ms_modules, module);
 
     delete module;
 }
