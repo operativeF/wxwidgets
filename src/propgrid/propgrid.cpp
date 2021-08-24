@@ -1125,8 +1125,8 @@ wxSize wxPropertyGrid::DoGetBestSize() const
     // make it too small neither
     int numLines = std::min
                    (
-                    std::max(m_pState->DoGetRoot()->GetChildCount(), 3),
-                    10
+                    std::max(m_pState->DoGetRoot()->GetChildCount(), 3U),
+                    10U
                    );
 
     wxClientDC dc(const_cast<wxPropertyGrid *>(this));

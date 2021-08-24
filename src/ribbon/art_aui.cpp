@@ -363,7 +363,7 @@ int wxRibbonAUIArtProvider::GetTabCtrlHeight(
             const wxRibbonPageTabInfo& info = pages.Item(i);
             if(info.page->GetIcon().IsOk())
             {
-                icon_height = std::max(icon_height, info.page->GetIcon().GetScaledHeight());
+                icon_height = std::max(icon_height, static_cast<int>(std::lround(info.page->GetIcon().GetScaledHeight())));
             }
         }
     }
