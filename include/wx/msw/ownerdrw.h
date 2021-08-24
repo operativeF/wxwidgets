@@ -13,9 +13,8 @@
 
 #if wxUSE_OWNER_DRAWN
 
-class WXDLLIMPEXP_CORE wxOwnerDrawn : public wxOwnerDrawnBase
+struct WXDLLIMPEXP_CORE wxOwnerDrawn : public wxOwnerDrawnBase
 {
-public:
     wxOwnerDrawn() = default;
     ~wxOwnerDrawn() override = default;
 

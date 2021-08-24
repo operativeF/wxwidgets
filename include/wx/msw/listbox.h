@@ -14,7 +14,7 @@
 #if wxUSE_LISTBOX
 
 #if wxUSE_OWNER_DRAWN
-  class WXDLLIMPEXP_FWD_CORE wxOwnerDrawn;
+  struct WXDLLIMPEXP_FWD_CORE wxOwnerDrawn;
 
   // define the array of list box items
   #include  "wx/dynarray.h"

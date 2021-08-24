@@ -190,7 +190,6 @@ public:
     // Blend mask with alpha channel and remove the mask
     void MSWBlendMaskWithAlpha();
 
-public:
     WXHBITMAP GetHBITMAP() const { return (WXHBITMAP)GetHandle(); }
     bool InitFromHBITMAP(WXHBITMAP bmp, int width, int height, int depth);
     void ResetHBITMAP() { InitFromHBITMAP(nullptr, 0, 0, 0); }
@@ -276,9 +275,8 @@ protected:
 // NOTE: for wxMSW we don't use the wxBitmapHandler class declared in bitmap.h!
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxBitmapHandler : public wxGDIImageHandler
+struct WXDLLIMPEXP_CORE wxBitmapHandler : public wxGDIImageHandler
 {
-public:
     wxBitmapHandler() = default;
     wxBitmapHandler(const std::string& name, const std::string& ext, wxBitmapType type)
         : wxGDIImageHandler(name, ext, type) { }

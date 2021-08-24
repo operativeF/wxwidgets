@@ -40,7 +40,6 @@ public:
 
     WXCOLORREF GetPixel() const { return m_pixel; }
 
-public:
     WXCOLORREF m_pixel;
 
 protected:
@@ -57,7 +56,6 @@ private:
     std::uint8_t  m_green;
     std::uint8_t  m_alpha;
 
-private:
     wxDECLARE_DYNAMIC_CLASS(wxColour);
 };
 

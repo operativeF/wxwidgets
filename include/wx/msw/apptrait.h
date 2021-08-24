@@ -15,9 +15,8 @@
 // wxGUI/ConsoleAppTraits: must derive from wxAppTraits, not wxAppTraitsBase
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxConsoleAppTraits : public wxConsoleAppTraitsBase
+struct WXDLLIMPEXP_BASE wxConsoleAppTraits : public wxConsoleAppTraitsBase
 {
-public:
     wxEventLoopBase *CreateEventLoop() override;
     void *BeforeChildWaitLoop() override;
     void AfterChildWaitLoop(void *data) override;
@@ -37,9 +36,8 @@ public:
 
 #if defined(__WXMSW__)
 
-class WXDLLIMPEXP_CORE wxGUIAppTraits : public wxGUIAppTraitsBase
+struct WXDLLIMPEXP_CORE wxGUIAppTraits : public wxGUIAppTraitsBase
 {
-public:
     wxEventLoopBase *CreateEventLoop() override;
     void *BeforeChildWaitLoop() override;
     void AfterChildWaitLoop(void *data) override;
@@ -61,9 +59,8 @@ public:
 
 #elif defined(__WXGTK__)
 
-class WXDLLIMPEXP_CORE wxGUIAppTraits : public wxGUIAppTraitsBase
+struct WXDLLIMPEXP_CORE wxGUIAppTraits : public wxGUIAppTraitsBase
 {
-public:
     virtual wxEventLoopBase *CreateEventLoop();
     virtual void *BeforeChildWaitLoop() { return NULL; }
     virtual void AfterChildWaitLoop(void *WXUNUSED(data)) { }
@@ -92,9 +89,8 @@ public:
 
 #elif defined(__WXQT__)
 
-class WXDLLIMPEXP_CORE wxGUIAppTraits : public wxGUIAppTraitsBase
+struct WXDLLIMPEXP_CORE wxGUIAppTraits : public wxGUIAppTraitsBase
 {
-public:
     virtual wxEventLoopBase *CreateEventLoop();
     virtual void *BeforeChildWaitLoop() { return NULL; }
     virtual void AfterChildWaitLoop(void*) { }

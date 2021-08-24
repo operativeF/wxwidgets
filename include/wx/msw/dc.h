@@ -21,9 +21,8 @@
  * instead of constant creation/deletion
  */
 
-class wxDCCacheEntry: public wxObject
+struct wxDCCacheEntry: public wxObject
 {
-public:
     wxDCCacheEntry(WXHBITMAP hBitmap, int w, int h, int depth);
     wxDCCacheEntry(WXHDC hDC, int depth);
     ~wxDCCacheEntry() override;
@@ -32,7 +31,7 @@ public:
     WXHDC       m_dc{nullptr};
     int         m_width{0};
     int         m_height{0};
-    int         m_depth;
+    int         m_depth{0};
 };
 #endif
 
@@ -347,9 +346,8 @@ private:
     const wxSize m_size;
 };
 
-class WXDLLIMPEXP_CORE wxDCTemp : public wxDC
+struct WXDLLIMPEXP_CORE wxDCTemp : public wxDC
 {
-public:
     wxDCTemp(WXHDC hdc, const wxSize& size = wxDefaultSize)
         : wxDC(new wxDCTempImpl(this, hdc, size))
     {

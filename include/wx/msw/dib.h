@@ -197,10 +197,7 @@ public:
         return ((width*depth + 31) & ~31) >> 3;
     }
 
-private:
-    // common part of all ctors
-    
-
+private:    
     // free resources
     void Free();
 

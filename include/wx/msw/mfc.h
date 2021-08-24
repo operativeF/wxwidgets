@@ -23,9 +23,8 @@
 // MFC window class wrapping a window created by wxWidgets
 // ----------------------------------------------------------------------------
 
-class wxMFCWnd : public CWnd
+struct wxMFCWnd : public CWnd
 {
-public:
     wxMFCWnd() = default;
 
     // Combines default ctor and Attach().

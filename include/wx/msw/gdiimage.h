@@ -29,9 +29,8 @@ WX_DECLARE_EXPORTED_LIST(wxGDIImageHandler, wxGDIImageHandlerList);
 // wxGDIImageRefData: common data fields for all derived classes
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxGDIImageRefData : public wxGDIRefData
+struct WXDLLIMPEXP_CORE wxGDIImageRefData : public wxGDIRefData
 {
-public:
     wxGDIImageRefData()
     {
         m_handle = nullptr;

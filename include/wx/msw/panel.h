@@ -16,9 +16,8 @@ class WXDLLIMPEXP_FWD_CORE wxBrush;
 // wxPanel
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxPanel : public wxPanelBase
+struct WXDLLIMPEXP_CORE wxPanel : public wxPanelBase
 {
-public:
     wxPanel() = default;
 
     wxPanel(wxWindow *parent,

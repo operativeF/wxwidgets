@@ -14,9 +14,8 @@
 #include "wx/dcscreen.h"
 #include "wx/msw/dc.h"
 
-class WXDLLIMPEXP_CORE wxScreenDCImpl : public wxMSWDCImpl
+struct WXDLLIMPEXP_CORE wxScreenDCImpl : public wxMSWDCImpl
 {
-public:
     // Create a DC representing the whole virtual screen (all monitors)
     wxScreenDCImpl( wxScreenDC *owner );
 

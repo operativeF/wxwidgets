@@ -23,9 +23,8 @@
 
 // notice that although wxIconRefData inherits from wxBitmapRefData, it is not
 // a valid wxBitmapRefData
-class WXDLLIMPEXP_CORE wxIconRefData : public wxGDIImageRefData
+struct WXDLLIMPEXP_CORE wxIconRefData : public wxGDIImageRefData
 {
-public:
     wxIconRefData() = default;
     ~wxIconRefData() override { Free(); }
 

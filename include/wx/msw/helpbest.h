@@ -114,7 +114,6 @@ protected:
     // Append/change extension if necessary.
     std::string GetValidFilename(const std::string& file) const;
 
-protected:
     enum HelpControllerType { wxUseNone, wxUseHtmlHelp, wxUseChmHelp };
 
     HelpControllerType m_helpControllerType{wxUseNone};

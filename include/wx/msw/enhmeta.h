@@ -89,9 +89,8 @@ private:
 // wxEnhMetaFileDC: allows to create a wxEnhMetaFile
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxEnhMetaFileDC : public wxDC
+struct WXDLLIMPEXP_CORE wxEnhMetaFileDC : public wxDC
 {
-public:
     // the ctor parameters specify the filename (empty for memory metafiles),
     // the metafile picture size and the optional description/comment
     wxEnhMetaFileDC(const std::string& filename = {},
@@ -106,10 +105,10 @@ public:
                     int width = 0, int height = 0,
                     const std::string& description = {});
 
-wxEnhMetaFileDC(const wxEnhMetaFileDC&) = delete;
-   wxEnhMetaFileDC& operator=(const wxEnhMetaFileDC&) = delete;
-   wxEnhMetaFileDC(wxEnhMetaFileDC&&) = default;
-   wxEnhMetaFileDC& operator=(wxEnhMetaFileDC&&) = default;
+    wxEnhMetaFileDC(const wxEnhMetaFileDC&) = delete;
+    wxEnhMetaFileDC& operator=(const wxEnhMetaFileDC&) = delete;
+    wxEnhMetaFileDC(wxEnhMetaFileDC&&) = default;
+    wxEnhMetaFileDC& operator=(wxEnhMetaFileDC&&) = default;
 
     // obtain a pointer to the new metafile (caller should delete it)
     wxEnhMetaFile *Close();
@@ -135,6 +134,9 @@ public:
     wxEnhMetaFileDataObject(const wxEnhMetaFile& metafile)
         : m_metafile(metafile) { }
 
+    wxEnhMetaFileDataObject(const wxEnhMetaFileDataObject&) = delete;
+    wxEnhMetaFileDataObject& operator=(const wxEnhMetaFileDataObject&) = delete;
+
     // functions which you may override if you want to provide data on
     // demand only - otherwise, the trivial default versions will be used
     virtual void SetMetafile(const wxEnhMetaFile& metafile)
@@ -153,9 +155,6 @@ public:
 
 protected:
     wxEnhMetaFile m_metafile;
-
-    wxEnhMetaFileDataObject(const wxEnhMetaFileDataObject&) = delete;
-	wxEnhMetaFileDataObject& operator=(const wxEnhMetaFileDataObject&) = delete;
 };
 
 
@@ -173,6 +172,9 @@ public:
     wxEnhMetaFileSimpleDataObject() : wxDataObjectSimple(wxDF_ENHMETAFILE) { }
     wxEnhMetaFileSimpleDataObject(const wxEnhMetaFile& metafile)
         : wxDataObjectSimple(wxDF_ENHMETAFILE), m_metafile(metafile) { }
+    
+    wxEnhMetaFileSimpleDataObject(const wxEnhMetaFileSimpleDataObject&) = delete;
+    wxEnhMetaFileSimpleDataObject& operator=(const wxEnhMetaFileSimpleDataObject&) = delete;
 
     // functions which you may override if you want to provide data on
     // demand only - otherwise, the trivial default versions will be used
@@ -197,9 +199,6 @@ public:
 
 protected:
     wxEnhMetaFile m_metafile;
-
-    wxEnhMetaFileSimpleDataObject(const wxEnhMetaFileSimpleDataObject&) = delete;
-	wxEnhMetaFileSimpleDataObject& operator=(const wxEnhMetaFileSimpleDataObject&) = delete;
 };
 
 #endif // wxUSE_DATAOBJ

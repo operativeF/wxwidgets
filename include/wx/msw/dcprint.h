@@ -67,9 +67,8 @@ WXHDC WXDLLIMPEXP_CORE wxGetPrinterDC(const wxPrintData& data);
 //    wxPrinterDCromHDC
 //
 
-class WXDLLIMPEXP_CORE wxPrinterDCFromHDC: public wxPrinterDC
+struct WXDLLIMPEXP_CORE wxPrinterDCFromHDC: public wxPrinterDC
 {
-public:
     wxPrinterDCFromHDC( WXHDC theDC )
         : wxPrinterDC(new wxPrinterDCImpl(this, theDC))
     {

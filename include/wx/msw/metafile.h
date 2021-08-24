@@ -20,15 +20,13 @@
 
 class WXDLLIMPEXP_FWD_CORE wxMetafile;
 
-class WXDLLIMPEXP_CORE wxMetafileRefData: public wxGDIRefData
+struct WXDLLIMPEXP_CORE wxMetafileRefData: public wxGDIRefData
 {
-public:
     wxMetafileRefData();
     virtual ~wxMetafileRefData();
 
     bool IsOk() const override { return m_metafile != 0; }
 
-public:
     WXHANDLE m_metafile{nullptr};
     int m_windowsMappingMode{MM_ANISOTROPIC};
     int m_width{0};
