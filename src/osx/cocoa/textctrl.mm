@@ -889,11 +889,11 @@ void wxNSTextViewControl::SetSelection( long from , long to )
     }
     else
     {
-        from = wxMin(textLength,wxMax(from,0)) ;
+        from = std::min(textLength,wxMax(from,0)) ;
         if ( to == -1 )
             to = textLength;
         else
-            to = wxMax(0,wxMin(textLength,to)) ;
+            to = wxMax(0,std::min(textLength,to)) ;
     }
 
     NSRange selrange = NSMakeRange(from, to-from);
@@ -1427,11 +1427,11 @@ void wxNSTextFieldControl::SetSelection( long from , long to )
     }
     else
     {
-        from = wxMin(textLength,wxMax(from,0)) ;
+        from = std::min(textLength,wxMax(from,0)) ;
         if ( to == -1 )
             to = textLength;
         else
-            to = wxMax(0,wxMin(textLength,to)) ;
+            to = wxMax(0,std::min(textLength,to)) ;
     }
 
     NSText* editor = [m_textField currentEditor];

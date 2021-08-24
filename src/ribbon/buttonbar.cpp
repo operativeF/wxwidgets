@@ -1053,7 +1053,7 @@ void wxRibbonButtonBar::MakeLayouts()
     {
         wxRibbonButtonBarButtonBase* button = m_buttons.Item(btn_i);
         wxRibbonButtonBarButtonState size_class = button->GetLargestSize();
-        available_height = wxMax(available_height,
+        available_height = std::max(available_height,
                                  button->sizes[size_class].size.y);
         if(size_class == wxRIBBON_BUTTONBAR_BUTTON_LARGE)
             large_button_found = true;
@@ -1079,7 +1079,7 @@ void wxRibbonButtonBar::MakeLayouts()
 
             if(instance.size < wxRIBBON_BUTTONBAR_BUTTON_LARGE)
             {
-                stacked_width = wxMax(stacked_width, size.x);
+                stacked_width = std::max(stacked_width, size.x);
                 if(cursor.y + size.y >= available_height)
                 {
                     cursor.y = 0;
@@ -1154,7 +1154,7 @@ void wxRibbonButtonBar::TryCollapseLayout(wxRibbonButtonBarLayout* original,
         wxSize large_size = button->sizes[large_size_class].size;
         int t_available_width = available_width;
 
-        original_column_width = wxMax(original_column_width,
+        original_column_width = std::max(original_column_width,
                                       large_size.x);
 
         // Top button in column: add column width to available width
@@ -1177,7 +1177,7 @@ void wxRibbonButtonBar::TryCollapseLayout(wxRibbonButtonBarLayout* original,
         }
         wxSize small_size = button->sizes[small_size_class].size;
         int t_used_height = used_height + small_size.y;
-        int t_used_width = wxMax(used_width, small_size.x);
+        int t_used_width = std::max(used_width, small_size.x);
 
         // Height is full: stop search
         if(t_used_height > available_height)

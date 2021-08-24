@@ -2767,7 +2767,7 @@ bool wxPGProperty::SetMaxLength(int maxLen)
          editorClass != wxPGEditor_TextCtrlAndButton )
         return false;
 
-    m_maxLen = wxMax(maxLen, 0); // shouldn't be a nagative value
+    m_maxLen = std::max(maxLen, 0); // shouldn't be a nagative value
     return true;
 }
 

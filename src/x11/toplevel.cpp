@@ -548,12 +548,12 @@ void wxTopLevelWindowX11::DoSetSize(int x, int y, int width, int height, int siz
     }
     if (width != wxDefaultCoord)
     {
-        windowChanges.width = wxMax(1, width);
+        windowChanges.width = std::max(1, width);
         valueMask |= CWWidth;
     }
     if (height != wxDefaultCoord)
     {
-        windowChanges.height = wxMax(1, height);
+        windowChanges.height = std::max(1, height);
         valueMask |= CWHeight;
     }
 

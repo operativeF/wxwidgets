@@ -146,7 +146,7 @@ int wxCheckListBox::FindString(const wxString& s, bool bCase) const
 {
     int n1 = wxListBox::FindString(Prefix(false) + s, bCase);
     int n2 = wxListBox::FindString(Prefix(true) + s, bCase);
-    int min = wxMin(n1, n2), max = wxMax(n1, n2);
+    int min = std::min(n1, n2), max = std::max(n1, n2);
 
     // why this works:
     // n1 == -1, n2 == -1 => return -1 OK

@@ -70,7 +70,7 @@ void wxScrollBar::SetScrollbar( int position,
     m_viewSize = thumbSize;
     m_objectSize = range;
 
-   int range1 = wxMax( (m_objectSize - m_viewSize), 0 );
+   int range1 = std::max( (m_objectSize - m_viewSize), 0 );
 
    GetPeer()->SetMaximum( range1 );
    GetPeer()->SetScrollThumb( position, m_viewSize );

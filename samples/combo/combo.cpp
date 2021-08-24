@@ -397,7 +397,7 @@ public:
                                     int WXUNUSED(prefHeight),
                                     int maxHeight ) override
     {
-        return wxSize(wxMax(300,minWidth),wxMin(250,maxHeight));
+        return wxSize(std::max(300,minWidth),std::min(250,maxHeight));
     }
 
     wxWindow *GetControl() override { return this; }

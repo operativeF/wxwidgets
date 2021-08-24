@@ -280,8 +280,8 @@ bool wxBitmapRefData::Create(CGContextRef context)
 
 bool wxBitmapRefData::Create(int w, int h, int WXUNUSED(d), double logicalscale)
 {
-    size_t width = wxMax(1, w);
-    size_t height = wxMax(1, h);
+    size_t width = std::max(1, w);
+    size_t height = std::max(1, h);
 
     m_scaleFactor = logicalscale;
     m_hBitmap = NULL;
@@ -439,7 +439,7 @@ bool wxBitmapRefData::HasNativeSize()
 {
     int w = GetWidth() ;
     int h = GetHeight() ;
-    int sz = wxMax( w , h ) ;
+    int sz = std::max( w , h ) ;
 
     return ( sz == 128 || sz == 48 || sz == 32 || sz == 16 );
 }
@@ -455,7 +455,7 @@ IconRef wxBitmapRefData::GetIconRef() const
 
         int w = GetWidth() ;
         int h = GetHeight() ;
-        int sz = wxMax( w , h ) ;
+        int sz = std::max( w , h ) ;
 
         OSType dataType = 0 ;
         OSType maskType = 0 ;

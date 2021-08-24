@@ -2383,8 +2383,8 @@ bool wxRichTextCtrl::ExtendCellSelection(wxRichTextTable* table, int noRowSteps,
 
     if (thisRow != -1)
     {
-        int newRow = wxMax(0, wxMin((thisRow + noRowSteps), table->GetRowCount()-1));
-        int newCol = wxMax(0, wxMin((thisCol + noColSteps), table->GetColumnCount()-1));
+        int newRow = std::max(0, std::min((thisRow + noRowSteps), table->GetRowCount()-1));
+        int newCol = std::max(0, std::min((thisCol + noColSteps), table->GetColumnCount()-1));
 
         if (newRow != thisRow || newCol != thisCol)
         {
@@ -2691,16 +2691,16 @@ long wxRichTextCtrl::FindNextWordPosition(int direction) const
             std::string text = GetFocusObject()->GetTextForRange(wxRichTextRange(i, i));
             wxRichTextLine* line = GetFocusObject()->GetLineAtPosition(i, false);
             if (line && (i == line->GetAbsoluteRange().GetEnd()))
-                return wxMax(-1, i);
+                return std::max(-1L, i);
 
             if (text.empty()) // End of paragraph, or maybe an image
-                return wxMax(-1, i - 1);
+                return std::max(-1L, i - 1);
             else if (wxRichTextCtrlIsWhitespace(text))
                 i += direction;
             else
             {
                 // Convert to caret position
-                return wxMax(-1, i - 1);
+                return std::max(-1L, i - 1);
             }
         }
         if (i >= endPos)
@@ -2921,10 +2921,10 @@ void wxRichTextCtrl::SetupScrollbars(bool atTop, bool fromOnPaint)
         GetViewStart(& startX, & startY);
 
     int maxPositionX = 0;
-    int maxPositionY = (wxMax(unitsY * pixelsPerUnit - clientSize.y, 0) + pixelsPerUnit - 1) / pixelsPerUnit;
+    int maxPositionY = (std::max(unitsY * pixelsPerUnit - clientSize.y, 0) + pixelsPerUnit - 1) / pixelsPerUnit;
 
-    int newStartX = wxMin(maxPositionX, startX);
-    int newStartY = wxMin(maxPositionY, startY);
+    int newStartX = std::min(maxPositionX, startX);
+    int newStartY = std::min(maxPositionY, startY);
 
     int oldPPUX, oldPPUY;
     int oldStartX, oldStartY;
@@ -3608,7 +3608,7 @@ void wxRichTextCtrl::SetSelection(long from, long to)
         m_selectionAnchorObject = nullptr;
         m_selection.Set(wxRichTextRange(from, to-1), GetFocusObject());
 
-        m_caretPosition = wxMax(-1, to-1);
+        m_caretPosition = std::max(-1L, to-1);
 
         RefreshForSelectionChange(oldSelection, m_selection);
         PositionCaret();
@@ -4853,8 +4853,8 @@ bool wxRichTextCtrl::RefreshForSelectionChange(const wxRichTextSelection& oldSel
     }
     else
     {
-        firstPos = wxMin(oldRange.GetStart(), newRange.GetStart());
-        lastPos = wxMax(oldRange.GetEnd(), newRange.GetEnd());
+        firstPos = std::min(oldRange.GetStart(), newRange.GetStart());
+        lastPos = std::max(oldRange.GetEnd(), newRange.GetEnd());
     }
 
     wxRichTextLine* firstLine = GetFocusObject()->GetLineAtPosition(firstPos);
@@ -4867,9 +4867,9 @@ bool wxRichTextCtrl::RefreshForSelectionChange(const wxRichTextSelection& oldSel
         wxPoint pt2 = GetPhysicalPoint(GetScaledPoint(lastLine->GetAbsolutePosition())) + wxPoint(0, (int) (0.5 + lastLine->GetSize().y * GetScale()));
 
         pt1.x = 0;
-        pt1.y = wxMax(0, pt1.y);
+        pt1.y = std::max(0, pt1.y);
         pt2.x = 0;
-        pt2.y = wxMin(clientSize.y, pt2.y);
+        pt2.y = std::min(clientSize.y, pt2.y);
 
         // Take into account any floating objects within the selection
         if (wxRichTextBuffer::GetFloatingLayoutMode() && GetFocusObject()->GetFloatingObjectCount() > 0)
@@ -4884,8 +4884,8 @@ bool wxRichTextCtrl::RefreshForSelectionChange(const wxRichTextSelection& oldSel
                 {
                     wxPoint pt1Obj = GetPhysicalPoint(GetScaledPoint(obj->GetPosition()));
                     wxPoint pt2Obj = GetPhysicalPoint(GetScaledPoint(obj->GetPosition())) + wxPoint(0, (int) (0.5 + obj->GetCachedSize().y * GetScale()));
-                    pt1.y = wxMin(pt1.y, pt1Obj.y);
-                    pt2.y = wxMax(pt2.y, pt2Obj.y);
+                    pt1.y = std::min(pt1.y, pt1Obj.y);
+                    pt2.y = std::max(pt2.y, pt2Obj.y);
                 }
                 node = node->GetNext();
             }

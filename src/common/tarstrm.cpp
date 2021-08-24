@@ -337,7 +337,7 @@ static wxString wxTarUserName(int uid)
 #ifdef HAVE_GETPWUID_R
 #if defined HAVE_SYSCONF && defined _SC_GETPW_R_SIZE_MAX
     long pwsize = sysconf(_SC_GETPW_R_SIZE_MAX);
-    size_t bufsize(wxMin(wxMax(1024l, pwsize), 32768l));
+    size_t bufsize(std::min(std::max(1024l, pwsize), 32768l));
 #else
     size_t bufsize = 1024;
 #endif
@@ -360,7 +360,7 @@ static wxString wxTarGroupName(int gid)
 #ifdef HAVE_GETGRGID_R
 #if defined HAVE_SYSCONF && defined _SC_GETGR_R_SIZE_MAX
     long grsize = sysconf(_SC_GETGR_R_SIZE_MAX);
-    size_t bufsize(wxMin(wxMax(1024l, grsize), 32768l));
+    size_t bufsize(std::min(std::max(1024l, grsize), 32768l));
 #else
     size_t bufsize = 1024;
 #endif
@@ -709,12 +709,12 @@ bool wxTarInputStream::CloseEntry()
     }
 
     if (remainder) {
-        static constexpr int BUFSIZE = 8192;
+        static constexpr wxFileOffset BUFSIZE = 8192;
         wxCharBuffer buf(BUFSIZE);
 
         while (remainder > 0 && m_parent_i_stream->IsOk())
             remainder -= m_parent_i_stream->Read(
-                    buf.data(), wxMin(BUFSIZE, remainder)).LastRead();
+                    buf.data(), std::min(BUFSIZE, remainder)).LastRead();
     }
 
     m_pos = wxInvalidOffset;

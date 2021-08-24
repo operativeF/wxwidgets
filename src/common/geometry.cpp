@@ -37,20 +37,20 @@
 
 bool wxRect2DDouble::Intersects( const wxRect2DDouble &rect ) const
 {
-    const double left = wxMax ( m_x , rect.m_x );
-    const double right = wxMin ( m_x+m_width, rect.m_x + rect.m_width );
-    const double top = wxMax ( m_y , rect.m_y );
-    const double bottom = wxMin ( m_y+m_height, rect.m_y + rect.m_height );
+    const double left = std::max( m_x , rect.m_x );
+    const double right = std::min( m_x+m_width, rect.m_x + rect.m_width );
+    const double top = std::max( m_y , rect.m_y );
+    const double bottom = std::min( m_y+m_height, rect.m_y + rect.m_height );
 
     return left < right && top < bottom;
 }
 
 void wxRect2DDouble::Intersect( const wxRect2DDouble &src1 , const wxRect2DDouble &src2 , wxRect2DDouble *dest )
 {
-    const double left = wxMax ( src1.m_x , src2.m_x );
-    const double right = wxMin ( src1.m_x+src1.m_width, src2.m_x + src2.m_width );
-    const double top = wxMax ( src1.m_y , src2.m_y );
-    const double bottom = wxMin ( src1.m_y+src1.m_height, src2.m_y + src2.m_height );
+    const double left = std::max( src1.m_x , src2.m_x );
+    const double right = std::min( src1.m_x+src1.m_width, src2.m_x + src2.m_width );
+    const double top = std::max( src1.m_y , src2.m_y );
+    const double bottom = std::min( src1.m_y+src1.m_height, src2.m_y + src2.m_height );
 
     if ( left < right && top < bottom )
     {
@@ -67,10 +67,10 @@ void wxRect2DDouble::Intersect( const wxRect2DDouble &src1 , const wxRect2DDoubl
 
 void wxRect2DDouble::Union( const wxRect2DDouble &src1 , const wxRect2DDouble &src2 , wxRect2DDouble *dest )
 {
-    const double left = wxMin ( src1.m_x , src2.m_x );
-    const double right = wxMax ( src1.m_x+src1.m_width, src2.m_x + src2.m_width );
-    const double top = wxMin ( src1.m_y , src2.m_y );
-    const double bottom = wxMax ( src1.m_y+src1.m_height, src2.m_y + src2.m_height );
+    const double left = std::min( src1.m_x , src2.m_x );
+    const double right = std::max( src1.m_x+src1.m_width, src2.m_x + src2.m_width );
+    const double top = std::min( src1.m_y , src2.m_y );
+    const double bottom = std::max( src1.m_y+src1.m_height, src2.m_y + src2.m_height );
 
     dest->m_x = left;
     dest->m_y = top;
@@ -214,20 +214,20 @@ void wxPoint2DDouble::SetVectorAngle( double degrees )
 
 bool wxRect2DInt::Intersects( const wxRect2DInt &rect ) const
 {
-    const std::int32_t left = wxMax ( m_x , rect.m_x );
-    const std::int32_t right = wxMin ( m_x+m_width, rect.m_x + rect.m_width );
-    const std::int32_t top = wxMax ( m_y , rect.m_y );
-    const std::int32_t bottom = wxMin ( m_y+m_height, rect.m_y + rect.m_height );
+    const std::int32_t left = std::max( m_x , rect.m_x );
+    const std::int32_t right = std::min( m_x+m_width, rect.m_x + rect.m_width );
+    const std::int32_t top = std::max( m_y , rect.m_y );
+    const std::int32_t bottom = std::min( m_y+m_height, rect.m_y + rect.m_height );
 
     return left < right && top < bottom;
 }
 
 void wxRect2DInt::Intersect( const wxRect2DInt &src1 , const wxRect2DInt &src2 , wxRect2DInt *dest )
 {
-    const std::int32_t left = wxMax ( src1.m_x , src2.m_x );
-    const std::int32_t right = wxMin ( src1.m_x+src1.m_width, src2.m_x + src2.m_width );
-    const std::int32_t top = wxMax ( src1.m_y , src2.m_y );
-    const std::int32_t bottom = wxMin ( src1.m_y+src1.m_height, src2.m_y + src2.m_height );
+    const std::int32_t left = std::max( src1.m_x , src2.m_x );
+    const std::int32_t right = std::min( src1.m_x+src1.m_width, src2.m_x + src2.m_width );
+    const std::int32_t top = std::max( src1.m_y , src2.m_y );
+    const std::int32_t bottom = std::min( src1.m_y+src1.m_height, src2.m_y + src2.m_height );
 
     if ( left < right && top < bottom )
     {
@@ -244,10 +244,10 @@ void wxRect2DInt::Intersect( const wxRect2DInt &src1 , const wxRect2DInt &src2 ,
 
 void wxRect2DInt::Union( const wxRect2DInt &src1 , const wxRect2DInt &src2 , wxRect2DInt *dest )
 {
-    const std::int32_t left = wxMin ( src1.m_x , src2.m_x );
-    const std::int32_t right = wxMax ( src1.m_x+src1.m_width, src2.m_x + src2.m_width );
-    const std::int32_t top = wxMin ( src1.m_y , src2.m_y );
-    const std::int32_t bottom = wxMax ( src1.m_y+src1.m_height, src2.m_y + src2.m_height );
+    const std::int32_t left = std::min( src1.m_x , src2.m_x );
+    const std::int32_t right = std::max( src1.m_x+src1.m_width, src2.m_x + src2.m_width );
+    const std::int32_t top = std::min( src1.m_y , src2.m_y );
+    const std::int32_t bottom = std::max( src1.m_y+src1.m_height, src2.m_y + src2.m_height );
 
     dest->m_x = left;
     dest->m_y = top;

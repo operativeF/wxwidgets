@@ -496,8 +496,8 @@ wxSize wxChoice::GetItemsSize() const
     for (size_t i=0; i<m_stringArray.GetCount(); i++)
     {
         GetTextExtent( m_stringArray[i], &x, &y );
-        mx = wxMax( mx, x );
-        my = wxMax( my, y );
+        mx = std::max( mx, x );
+        my = std::max( my, y );
     }
 
     return wxSize( mx, my );

@@ -177,7 +177,7 @@ wxSize wxCollapsiblePane::DoGetBestSize() const
     if ( IsExpanded() )
     {
         const wxSize panesz = m_pPane->GetBestSize();
-        sz.x = wxMax(sz.x, panesz.x);
+        sz.x = std::max(sz.x, panesz.x);
         sz.y += gtk_expander_get_spacing(GTK_EXPANDER(m_widget)) + panesz.y;
     }
 

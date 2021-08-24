@@ -678,8 +678,8 @@ wxSize wxComboBox::DoGetSizeFromTextSize(int xlen, int ylen) const
     {
         // Add the margins we have previously set
         wxPoint marg( GetMargins() );
-        marg.x = wxMax(0, marg.x);
-        marg.y = wxMax(0, marg.y);
+        marg.x = std::max(0, marg.x);
+        marg.y = std::max(0, marg.y);
         tsize.IncBy( marg );
     }
 

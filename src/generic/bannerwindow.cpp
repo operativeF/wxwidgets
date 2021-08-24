@@ -109,7 +109,7 @@ wxSize wxBannerWindow::DoGetBestClientSize() const
 
         const wxSize sizeTitle = dc.GetTextExtent(m_title);
 
-        wxSize sizeWin(wxMax(sizeTitle.x, sizeText.x), sizeTitle.y + sizeText.y);
+        wxSize sizeWin(std::max(sizeTitle.x, sizeText.x), sizeTitle.y + sizeText.y);
 
         // If we draw the text vertically width and height are swapped.
         if ( m_direction == wxLEFT || m_direction == wxRIGHT )

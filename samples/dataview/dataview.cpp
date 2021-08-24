@@ -1152,7 +1152,7 @@ void MyFrame::OnIncIndent(wxCommandEvent& WXUNUSED(event))
 void MyFrame::OnDecIndent(wxCommandEvent& WXUNUSED(event))
 {
     wxDataViewCtrl * const dvc = m_ctrl[m_notebook->GetSelection()];
-    dvc->SetIndent(wxMax(dvc->GetIndent() - 5, 0));
+    dvc->SetIndent(std::max(dvc->GetIndent() - 5, 0));
     wxLogMessage("Indent is now %d", dvc->GetIndent());
 }
 

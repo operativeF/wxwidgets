@@ -1299,7 +1299,7 @@ wxImage wxImage::Rotate90( bool clockwise ) const
     //  our vertical strips will still generally straddle 64-byte cachelines)
     for (long ii = 0; ii < width; )
     {
-        const long next_ii = wxMin(ii + 21, width);
+        const long next_ii = std::min(ii + 21, width);
 
         for (long j = 0; j < height; j++)
         {
@@ -1332,7 +1332,7 @@ wxImage wxImage::Rotate90( bool clockwise ) const
 
         for (long ii = 0; ii < width; )
         {
-            const long next_ii = wxMin(ii + 64, width);
+            const long next_ii = std::min(ii + 64, width);
 
             for (long j = 0; j < height; j++)
             {
@@ -3695,10 +3695,10 @@ wxImage wxImage::Rotate(double angle,
     wxRealPoint p3 = wxRotatePoint (w, 0, cos_angle, sin_angle, p0);
     wxRealPoint p4 = wxRotatePoint (w, h, cos_angle, sin_angle, p0);
 
-    int x1a = (int) floor (wxMin (wxMin(p1.x, p2.x), wxMin(p3.x, p4.x)));
-    int y1a = (int) floor (wxMin (wxMin(p1.y, p2.y), wxMin(p3.y, p4.y)));
-    int x2a = (int) ceil (wxMax (wxMax(p1.x, p2.x), wxMax(p3.x, p4.x)));
-    int y2a = (int) ceil (wxMax (wxMax(p1.y, p2.y), wxMax(p3.y, p4.y)));
+    int x1a = (int) floor (std::min (std::min(p1.x, p2.x), std::min(p3.x, p4.x)));
+    int y1a = (int) floor (std::min (std::min(p1.y, p2.y), std::min(p3.y, p4.y)));
+    int x2a = (int) ceil (std::max (std::max(p1.x, p2.x), std::max(p3.x, p4.x)));
+    int y2a = (int) ceil (std::max (std::max(p1.y, p2.y), std::max(p3.y, p4.y)));
 
     // Create rotated image
     wxImage rotated (x2a - x1a + 1, y2a - y1a + 1, false);

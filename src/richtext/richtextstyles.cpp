@@ -751,7 +751,7 @@ std::string wxRichTextStyleListBox::CreateHTML(wxRichTextStyleDefinition* def) c
     {
         wxClientDC dc(const_cast<wxRichTextStyleListBox*>(this));
 
-        str << wxT("<td width=") << wxMin(50, (ConvertTenthsMMToPixels(dc, attr.GetLeftIndent())/2)) << wxT("></td>");
+        str << wxT("<td width=") << std::min(50, (ConvertTenthsMMToPixels(dc, attr.GetLeftIndent())/2)) << wxT("></td>");
     }
 
     if (isCentred)

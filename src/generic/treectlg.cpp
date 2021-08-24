@@ -844,8 +844,8 @@ wxGenericTreeItem::DoCalculateSize(wxGenericTreeCtrl* control,
             state_w += MARGIN_BETWEEN_IMAGE_AND_TEXT;
     }
 
-    int img_h = wxMax(state_h, image_h);
-    m_height = wxMax(img_h, text_h);
+    int img_h = std::max(state_h, image_h);
+    m_height = std::max(img_h, text_h);
 
     if (m_height < 30)
         m_height += 2;            // at least 2 pixels

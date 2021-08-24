@@ -444,8 +444,8 @@ static void FindDocks(wxAuiDockInfoArray& docks,
     // discover the maximum dock layer and the max row
     for (i = 0; i < dock_count; ++i)
     {
-        max_row = wxMax(max_row, docks.Item(i).dock_row);
-        max_layer = wxMax(max_layer, docks.Item(i).dock_layer);
+        max_row = std::max(max_row, docks.Item(i).dock_row);
+        max_layer = std::max(max_layer, docks.Item(i).dock_layer);
     }
 
     // if no dock layer was specified, search all dock layers
@@ -2158,9 +2158,9 @@ wxSizer* wxAuiManager::LayoutAll(wxAuiPaneInfoArray& panes,
                     pane_size = pane.window->GetSize();
 
                 if (dock.IsHorizontal())
-                    size = wxMax(pane_size.y, size);
+                    size = std::max(pane_size.y, size);
                 else
-                    size = wxMax(pane_size.x, size);
+                    size = std::max(pane_size.x, size);
             }
 
             // add space for the border (two times), but only
@@ -2196,12 +2196,12 @@ wxSizer* wxAuiManager::LayoutAll(wxAuiPaneInfoArray& panes,
             int max_dock_y_size = (int)(m_dockConstraintY * ((double)cli_size.y));
 
             if (dock.IsHorizontal())
-                size = wxMin(size, max_dock_y_size);
+                size = std::min(size, max_dock_y_size);
             else
-                size = wxMin(size, max_dock_x_size);
+                size = std::min(size, max_dock_x_size);
 
             // absolute minimum size for a dock is 10 pixels
-            size = wxMax(size, m_frame->FromDIP(10));
+            size = std::max(size, m_frame->FromDIP(10));
 
             dock.size = size;
         }
@@ -2309,7 +2309,7 @@ wxSizer* wxAuiManager::LayoutAll(wxAuiPaneInfoArray& panes,
     // discover the maximum dock layer
     int max_layer = 0;
     for (size_t i = 0; i < docks.GetCount(); ++i)
-        max_layer = wxMax(max_layer, docks.Item(i).dock_layer);
+        max_layer = std::max(max_layer, docks.Item(i).dock_layer);
 
 
     // clear out uiparts
@@ -2444,8 +2444,8 @@ wxSizer* wxAuiManager::LayoutAll(wxAuiPaneInfoArray& panes,
 
 void wxAuiManager::SetDockSizeConstraint(double width_pct, double height_pct)
 {
-    m_dockConstraintX = wxMax(0.0, wxMin(1.0, width_pct));
-    m_dockConstraintY = wxMax(0.0, wxMin(1.0, height_pct));
+    m_dockConstraintX = std::max(0.0, std::min(1.0, width_pct));
+    m_dockConstraintY = std::max(0.0, std::min(1.0, height_pct));
 }
 
 void wxAuiManager::GetDockSizeConstraint(double* width_pct, double* height_pct) const
@@ -2877,7 +2877,7 @@ bool wxAuiManager::DoDrop(wxAuiDockInfoArray& docks,
         pt.y > 0 &&
         pt.y < cli_size.y)
     {
-        int new_layer = wxMax(wxMax(GetMaxLayer(docks, wxAUI_DOCK_LEFT),
+        int new_layer = std::max(std::max(GetMaxLayer(docks, wxAUI_DOCK_LEFT),
                                 GetMaxLayer(docks, wxAUI_DOCK_BOTTOM)),
                                 GetMaxLayer(docks, wxAUI_DOCK_TOP)) + 1;
 
@@ -2895,7 +2895,7 @@ bool wxAuiManager::DoDrop(wxAuiDockInfoArray& docks,
              pt.x > 0 &&
              pt.x < cli_size.x)
     {
-        int new_layer = wxMax(wxMax(GetMaxLayer(docks, wxAUI_DOCK_TOP),
+        int new_layer = std::max(std::max(GetMaxLayer(docks, wxAUI_DOCK_TOP),
                                 GetMaxLayer(docks, wxAUI_DOCK_LEFT)),
                                 GetMaxLayer(docks, wxAUI_DOCK_RIGHT)) + 1;
 
@@ -2913,7 +2913,7 @@ bool wxAuiManager::DoDrop(wxAuiDockInfoArray& docks,
              pt.y > 0 &&
              pt.y < cli_size.y)
     {
-        int new_layer = wxMax(wxMax(GetMaxLayer(docks, wxAUI_DOCK_RIGHT),
+        int new_layer = std::max(std::max(GetMaxLayer(docks, wxAUI_DOCK_RIGHT),
                                 GetMaxLayer(docks, wxAUI_DOCK_TOP)),
                                 GetMaxLayer(docks, wxAUI_DOCK_BOTTOM)) + 1;
 
@@ -2931,7 +2931,7 @@ bool wxAuiManager::DoDrop(wxAuiDockInfoArray& docks,
              pt.x > 0 &&
              pt.x < cli_size.x)
     {
-        int new_layer = wxMax( wxMax( GetMaxLayer(docks, wxAUI_DOCK_BOTTOM),
+        int new_layer = std::max( std::max( GetMaxLayer(docks, wxAUI_DOCK_BOTTOM),
                                       GetMaxLayer(docks, wxAUI_DOCK_LEFT)),
                                       GetMaxLayer(docks, wxAUI_DOCK_RIGHT)) + 1;
 
@@ -3087,22 +3087,22 @@ bool wxAuiManager::DoDrop(wxAuiDockInfoArray& docks,
             switch (part->dock->dock_direction)
             {
                 case wxAUI_DOCK_LEFT:
-                    layer = wxMax(wxMax(GetMaxLayer(docks, wxAUI_DOCK_LEFT),
+                    layer = std::max(std::max(GetMaxLayer(docks, wxAUI_DOCK_LEFT),
                                       GetMaxLayer(docks, wxAUI_DOCK_BOTTOM)),
                                       GetMaxLayer(docks, wxAUI_DOCK_TOP));
                     break;
                 case wxAUI_DOCK_TOP:
-                    layer = wxMax(wxMax(GetMaxLayer(docks, wxAUI_DOCK_TOP),
+                    layer = std::max(std::max(GetMaxLayer(docks, wxAUI_DOCK_TOP),
                                       GetMaxLayer(docks, wxAUI_DOCK_LEFT)),
                                       GetMaxLayer(docks, wxAUI_DOCK_RIGHT));
                     break;
                 case wxAUI_DOCK_RIGHT:
-                    layer = wxMax(wxMax(GetMaxLayer(docks, wxAUI_DOCK_RIGHT),
+                    layer = std::max(std::max(GetMaxLayer(docks, wxAUI_DOCK_RIGHT),
                                       GetMaxLayer(docks, wxAUI_DOCK_TOP)),
                                       GetMaxLayer(docks, wxAUI_DOCK_BOTTOM));
                     break;
                 case wxAUI_DOCK_BOTTOM:
-                    layer = wxMax(wxMax(GetMaxLayer(docks, wxAUI_DOCK_BOTTOM),
+                    layer = std::max(std::max(GetMaxLayer(docks, wxAUI_DOCK_BOTTOM),
                                       GetMaxLayer(docks, wxAUI_DOCK_LEFT)),
                                       GetMaxLayer(docks, wxAUI_DOCK_RIGHT));
                     break;
@@ -4531,9 +4531,9 @@ void wxAuiManager::OnMotion(wxMouseEvent& event)
         {
             wxPoint pos = m_actionPart->rect.GetPosition();
             if (m_actionPart->orientation == wxHORIZONTAL)
-                pos.y = wxMax(0, event.m_y - m_actionOffset.y);
+                pos.y = std::max(0, event.m_y - m_actionOffset.y);
             else
-                pos.x = wxMax(0, event.m_x - m_actionOffset.x);
+                pos.x = std::max(0, event.m_x - m_actionOffset.x);
 
             if (HasLiveResize())
             {

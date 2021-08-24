@@ -1006,7 +1006,7 @@ void wxWindowX11::DoMoveWindow(int x, int y, int width, int height)
             width -= size.x;
         }
 
-        XMoveResizeWindow( wxGlobalDisplay(), xwindow, x, y, wxMax(1, width), wxMax(1, height) );
+        XMoveResizeWindow( wxGlobalDisplay(), xwindow, x, y, std::max(1, width), std::max(1, height) );
     }
 
 #else

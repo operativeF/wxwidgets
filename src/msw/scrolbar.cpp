@@ -167,7 +167,7 @@ void wxScrollBar::SetScrollbar(int position, int thumbSize, int range, int pageS
 
     // The range (number of scroll steps) is the
     // object length minus the page size.
-    int range1 = wxMax((m_objectSize - m_pageSize), 0) ;
+    int range1 = std::max((m_objectSize - m_pageSize), 0) ;
 
     // Try to adjust the range to cope with page size > 1
     // (see comment for SetPageLength)

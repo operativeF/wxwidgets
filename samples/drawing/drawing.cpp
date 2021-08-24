@@ -2515,7 +2515,7 @@ void MyFrame::OnSave(wxCommandEvent& WXUNUSED(event))
             // Change the scale temporarily to fit the drawing into the page.
             int w, h;
             psdc.GetSize(&w, &h);
-            double sc = wxMin((double)w / width, (double)h / height);
+            double sc = std::min((double)w / width, (double)h / height);
             m_xUserScale *= sc;
             m_yUserScale *= sc;
             psdc.StartDoc("Drawing sample");

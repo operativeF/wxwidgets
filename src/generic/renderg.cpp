@@ -406,7 +406,7 @@ wxRendererGeneric::DrawHeaderButtonContents(wxWindow *win,
         labelWidth += bmpWidth;
 
         int x = rect.x + margin;
-        const int y = rect.y + wxMax(1, (rect.height - h) / 2);
+        const int y = rect.y + std::max(1, (rect.height - h) / 2);
 
         const int extraSpace = rect.width - labelWidth;
         if ( params->m_labelText.empty() && extraSpace > 0 )
@@ -453,7 +453,7 @@ wxRendererGeneric::DrawHeaderButtonContents(wxWindow *win,
         auto textSize = dc.GetTextExtent( label, &td);
 
         int x = rect.x + bmpWidth + margin;
-        const int y = rect.y + wxMax(0, (rect.height - (textSize.y + td)) / 2);
+        const int y = rect.y + std::max(0, (rect.height - (textSize.y + td)) / 2);
 
         // truncate and add an ellipsis (...) if the text is too wide.
         const int availWidth = rect.width - labelWidth;

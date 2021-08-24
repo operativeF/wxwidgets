@@ -15,7 +15,7 @@
 
 #ifndef WX_PRECOMP
     #include "wx/textctrl.h"
-    #include "wx/utils.h"           // wxMax()
+    #include "wx/utils.h"           // std::max()
 #endif // WX_PRECOMP
 
 #include "wx/timectrl.h"
@@ -639,7 +639,7 @@ void wxTimePickerCtrlGeneric::DoMoveWindow(int x, int y, int width, int height)
         return;
 
     const int widthBtn = m_impl->m_btn->GetSize().x;
-    const int widthText = wxMax(width - widthBtn - HMARGIN_TEXT_SPIN, 0);
+    const int widthText = std::max(width - widthBtn - HMARGIN_TEXT_SPIN, 0);
 
     m_impl->m_text->SetSize(0, 0, widthText, height);
     m_impl->m_btn->SetSize(widthText + HMARGIN_TEXT_SPIN, 0, widthBtn, height);
@@ -656,7 +656,7 @@ wxSize wxTimePickerCtrlGeneric::DoGetBestSize() const
     wxSize size(text->GetSizeFromTextSize(w + 1));
 
     const wxSize sizeBtn(m_impl->m_btn->GetBestSize());
-    size.y = wxMax(size.y, sizeBtn.y);
+    size.y = std::max(size.y, sizeBtn.y);
     size.x += sizeBtn.x + HMARGIN_TEXT_SPIN;
 
     return size;

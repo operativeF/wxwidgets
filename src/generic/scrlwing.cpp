@@ -1436,8 +1436,8 @@ void wxScrollHelper::DoScroll( int x_pos, int y_pos )
 
         // Correct position if greater than extent of canvas minus
         // the visible portion of it or if below zero
-        new_x = wxMin( m_xScrollLines-noPagePositions, new_x );
-        new_x = wxMax( 0, new_x );
+        new_x = std::min( m_xScrollLines-noPagePositions, new_x );
+        new_x = std::max( 0, new_x );
     }
     if ((y_pos != -1) && (m_yScrollPixelsPerLine))
     {
@@ -1450,8 +1450,8 @@ void wxScrollHelper::DoScroll( int x_pos, int y_pos )
 
         // Correct position if greater than extent of canvas minus
         // the visible portion of it or if below zero
-        new_y = wxMin( m_yScrollLines-noPagePositions, new_y );
-        new_y = wxMax( 0, new_y );
+        new_y = std::min( m_yScrollLines-noPagePositions, new_y );
+        new_y = std::max( 0, new_y );
     }
 
     if ( new_x == m_xScrollPosition && new_y == m_yScrollPosition )

@@ -875,7 +875,7 @@ bool wxTextCtrl::ReplaceLine(wxTextCoord line,
             // by LayoutLines() which we bypassed by calling LayoutLine()
             // directly
             wxTextCoord rowFirst = lineData.GetFirstRow(),
-                        rowCount = wxMax(rowsOld, rowsNew);
+                        rowCount = std::max(rowsOld, rowsNew);
             RefreshLineWrapMarks(rowFirst, rowFirst + rowCount);
 
             // next, if this is not the last line, as the number of rows in it
@@ -2375,7 +2375,7 @@ wxSize wxTextCtrl::DoGetBestClientSize() const
     int wChar = GetAverageWidth(),
         hChar = GetLineHeight();
 
-    int widthMin = wxMax(10*wChar, 100);
+    int widthMin = std::max(10*wChar, 100);
     if ( w < widthMin )
         w = widthMin;
     if ( h < hChar )
@@ -4122,7 +4122,7 @@ void wxTextCtrl::DoDrawTextInRect(wxDC& dc, const wxRect& rectUpdate)
         {
             // and if this part is (at least partly) in the current row
             if ( (selStart <= colEnd) &&
-                    (selEnd >= wxMax(colStart, colRowStart)) )
+                    (selEnd >= std::max(colStart, colRowStart)) )
             {
                 // these values are relative to the start of the line while the
                 // string passed to DrawTextLine() is only part of it, so

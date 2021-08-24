@@ -363,8 +363,8 @@ wxSize wxSlider::CalcLabelSize() const
     GetTextExtent(FormatValue(m_min), &w1, &h1);
     GetTextExtent(FormatValue(m_max), &w2, &h2);
 
-    size.x = wxMax(w1, w2);
-    size.y = wxMax(h1, h2);
+    size.x = std::max(w1, w2);
+    size.y = std::max(h1, h2);
 
     return size;
 }
@@ -552,13 +552,13 @@ void wxSlider::CalcGeometry()
     // slider is never smaller than thumb size unless rectTotal
     if ( IsVert() )
     {
-        wxCoord width = wxMin ( rectTotal.width, sizeThumb.x );
-        m_rectSlider.width = wxMax ( m_rectSlider.width, width );
+        wxCoord width = std::min ( rectTotal.width, sizeThumb.x );
+        m_rectSlider.width = std::max ( m_rectSlider.width, width );
     }
     else
     {
-        wxCoord height = wxMin ( rectTotal.height, sizeThumb.y );
-        m_rectSlider.height = wxMax ( m_rectSlider.height, height );
+        wxCoord height = std::min ( rectTotal.height, sizeThumb.y );
+        m_rectSlider.height = std::max ( m_rectSlider.height, height );
     }
 }
 

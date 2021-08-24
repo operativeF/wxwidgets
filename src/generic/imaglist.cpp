@@ -49,7 +49,7 @@ int wxGenericImageList::GetImageCount() const
 bool wxGenericImageList::Create( int width, int height, bool mask, int WXUNUSED(initialCount) )
 {
     // Prevent from storing negative dimensions
-    m_size = wxSize(wxMax(width, 0), wxMax(height, 0));
+    m_size = wxSize(std::max(width, 0), std::max(height, 0));
     m_useMask = mask;
     m_scaleFactor = 1.0;
 

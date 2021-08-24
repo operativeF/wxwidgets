@@ -207,7 +207,7 @@ wxString wxFileSystemHandler::GetRightLocation(const wxString& location)
 
     const int s = ++i; // Start position
     // Check if there are three '/'s after "file:"
-    const int end = wxMin(len, s + 3);
+    const int end = std::min(len, s + 3);
     while (i < end && location[i] == wxT('/'))
         i++;
     if (i == s + 2) // Host is specified, e.g. "file://host/path"

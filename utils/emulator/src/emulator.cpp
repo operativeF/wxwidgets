@@ -344,8 +344,8 @@ void wxEmulatorContainer::DoResize()
         int deviceWidth = wxGetApp().m_emulatorInfo.m_emulatorDeviceSize.x;
         int deviceHeight = wxGetApp().m_emulatorInfo.m_emulatorDeviceSize.y;
 
-        int x = wxMax(0, (int) ((sz.x - deviceWidth)/2.0));
-        int y = wxMax(0, (int) ((sz.y - deviceHeight)/2.0));
+        int x = std::max(0, (int) ((sz.x - deviceWidth)/2.0));
+        int y = std::max(0, (int) ((sz.y - deviceHeight)/2.0));
 
         x += wxGetApp().m_emulatorInfo.m_emulatorScreenPosition.x;
         y += wxGetApp().m_emulatorInfo.m_emulatorScreenPosition.y;
@@ -365,8 +365,8 @@ void wxEmulatorContainer::OnPaint(wxPaintEvent& WXUNUSED(event))
         int deviceWidth = wxGetApp().m_emulatorInfo.m_emulatorDeviceSize.x;
         int deviceHeight = wxGetApp().m_emulatorInfo.m_emulatorDeviceSize.y;
 
-        int x = wxMax(0, (int) ((sz.x - deviceWidth)/2.0));
-        int y = wxMax(0, (int) ((sz.y - deviceHeight)/2.0));
+        int x = std::max(0, (int) ((sz.x - deviceWidth)/2.0));
+        int y = std::max(0, (int) ((sz.y - deviceHeight)/2.0));
 
         dc.DrawBitmap(wxGetApp().m_emulatorInfo.m_emulatorBackgroundBitmap, x, y);
     }

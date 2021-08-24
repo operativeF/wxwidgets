@@ -609,7 +609,7 @@ wxSize wxListBox::DoGetBestClientSize() const
     // don't make the listbox too tall (limit height to 10 items) but don't
     // make it too small neither
     auto hListbox = ::SendMessageW(GetHwnd(), LB_GETITEMHEIGHT, 0, 0)*
-                    wxMin(wxMax(m_noItems, 3), 10);
+                    std::min(std::max(m_noItems, std::size_t(3)), std::size_t(10));
 
     return {wListbox, gsl::narrow_cast<int>(hListbox)};
 }

@@ -1225,8 +1225,8 @@ void wxRibbonBar::RecalculateMinSize()
                 continue;
             wxSize page_min = info.page->GetMinSize();
 
-            min_size.x = wxMax(min_size.x, page_min.x);
-            min_size.y = wxMax(min_size.y, page_min.y);
+            min_size.x = std::max(min_size.x, page_min.x);
+            min_size.y = std::max(min_size.y, page_min.y);
         }
     }
     if(min_size.y != wxDefaultCoord)

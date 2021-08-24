@@ -771,8 +771,8 @@ miIntersectO (
 
     while ((r1 != r1End) && (r2 != r2End))
     {
-        x1 = wxMax(r1->x1,r2->x1);
-        x2 = wxMin(r1->x2,r2->x2);
+        x1 = std::max(r1->x1,r2->x1);
+        x2 = std::min(r1->x2,r2->x2);
 
         /*
          * If there's any overlap between the two rectangles, add that
@@ -1124,7 +1124,7 @@ miRegionOp(
      * have to worry about using too much memory. I hope to be able to
      * nuke the realloc() at the end of this function eventually.
      */
-    newReg->size = wxMax(reg1->numRects,reg2->numRects) * 2;
+    newReg->size = std::max(reg1->numRects,reg2->numRects) * 2;
 
     newReg->rects = (BoxPtr)malloc((unsigned) (sizeof(BoxRec) * newReg->size));
 
@@ -1196,8 +1196,8 @@ miRegionOp(
          */
         if (r1->y1 < r2->y1)
         {
-            top = wxMax(r1->y1,ybot);
-            bot = wxMin(r1->y2,r2->y1);
+            top = std::max(r1->y1,ybot);
+            bot = std::min(r1->y2,r2->y1);
 
             if ((top != bot) && (nonOverlap1Func != NULL))
             {
@@ -1208,8 +1208,8 @@ miRegionOp(
         }
         else if (r2->y1 < r1->y1)
         {
-            top = wxMax(r2->y1,ybot);
-            bot = wxMin(r2->y2,r1->y1);
+            top = std::max(r2->y1,ybot);
+            bot = std::min(r2->y2,r1->y1);
 
             if ((top != bot) && (nonOverlap2Func != NULL))
             {
@@ -1238,7 +1238,7 @@ miRegionOp(
          * Now see if we've hit an intersecting band. The two bands only
          * intersect if ybot > ytop
          */
-        ybot = wxMin(r1->y2, r2->y2);
+        ybot = std::min(r1->y2, r2->y2);
         curBand = newReg->numRects;
         if (ybot > ytop)
         {
@@ -1281,7 +1281,7 @@ miRegionOp(
                     r1BandEnd++;
                 }
                 (* nonOverlap1Func) (newReg, r1, r1BandEnd,
-                                     wxMax(r1->y1,ybot), r1->y2);
+                                     std::max(r1->y1,ybot), r1->y2);
                 r1 = r1BandEnd;
             } while (r1 != r1End);
         }
@@ -1296,7 +1296,7 @@ miRegionOp(
                  r2BandEnd++;
             }
             (* nonOverlap2Func) (newReg, r2, r2BandEnd,
-                                wxMax(r2->y1,ybot), r2->y2);
+                                std::max(r2->y1,ybot), r2->y2);
             r2 = r2BandEnd;
         } while (r2 != r2End);
     }
@@ -1535,10 +1535,10 @@ XUnionRegion(
     miRegionOp (newReg, reg1, reg2, miUnionO,
                     miUnionNonO, miUnionNonO);
 
-    newReg->extents.x1 = wxMin(reg1->extents.x1, reg2->extents.x1);
-    newReg->extents.y1 = wxMin(reg1->extents.y1, reg2->extents.y1);
-    newReg->extents.x2 = wxMax(reg1->extents.x2, reg2->extents.x2);
-    newReg->extents.y2 = wxMax(reg1->extents.y2, reg2->extents.y2);
+    newReg->extents.x1 = std::min(reg1->extents.x1, reg2->extents.x1);
+    newReg->extents.y1 = std::min(reg1->extents.y1, reg2->extents.y1);
+    newReg->extents.x2 = std::max(reg1->extents.x2, reg2->extents.x2);
+    newReg->extents.y2 = std::max(reg1->extents.y2, reg2->extents.y2);
 
     return 1;
 }

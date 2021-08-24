@@ -504,8 +504,8 @@ void wxRichTextFontPreviewCtrl::OnPaint(wxPaintEvent& WXUNUSED(event))
             wx::utils::ToUpper(text);
 
         dc.GetTextExtent( text, &w, &h);
-        int cx = wxMax(2, (size.x/2) - (w/2));
-        int cy = wxMax(2, (size.y/2) - (h/2));
+        int cx = std::max(2, (size.x/2) - (w/2));
+        int cy = std::max(2, (size.y/2) - (h/2));
 
         if ( GetTextEffects() & wxTEXT_ATTR_EFFECT_SUPERSCRIPT )
             cy -= h/2;

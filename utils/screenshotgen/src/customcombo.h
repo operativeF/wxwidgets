@@ -155,7 +155,7 @@ public:
                                     int WXUNUSED(prefHeight),
                                     int maxHeight )
     {
-        return wxSize(minWidth, wxMin(80, maxHeight));
+        return wxSize(minWidth, std::min(80, maxHeight));
     }
 
     virtual wxWindow *GetControl()

@@ -1612,7 +1612,7 @@ TEST_CASE_FIXTURE(GridTestCase, "Grid::AutoSizeColumn")
 
         // We can't be sure which size will be greater because of different fonts
         // so just calculate the maximum width.
-        CheckFirstColAutoSize( wxMax(labelWidth, cellWidth) );
+        CheckFirstColAutoSize( std::max(labelWidth, cellWidth) );
     }
 
     SUBCASE("Column with auto wrapping contents taller than row")
@@ -1949,7 +1949,7 @@ TEST_CASE_FIXTURE(GridTestCase,
         WHEN("deleting multiple columns, just before main")
         {
             deletions = 2; // Must be at least 2 to affect main.
-            DeleteCols(multi.col - 1, wxMax(2, deletions));
+            DeleteCols(multi.col - 1, std::max(2, deletions));
 
             THEN("the multicell is deleted")
             {
@@ -1971,7 +1971,7 @@ TEST_CASE_FIXTURE(GridTestCase,
         WHEN("deleting one column within multicell, after main")
         {
             offset = 1;
-            offset = wxClip(offset, 1, multi.cols - 1);
+            offset = std::clamp(offset, 1, multi.cols - 1);
             DeleteCols(multi.col + offset, 1);
 
             THEN("the size changes but not the position")
@@ -2368,8 +2368,8 @@ GridAttrMatcher::GridAttrMatcher(const TestableGrid& grid) : m_grid(&grid)
 
 bool GridAttrMatcher::match(const TestableGrid& other) const
 {
-    const int rows = wxMax(m_grid->GetNumberRows(), other.GetNumberRows());
-    const int cols = wxMax(m_grid->GetNumberCols(), other.GetNumberCols());
+    const int rows = std::max(m_grid->GetNumberRows(), other.GetNumberRows());
+    const int cols = std::max(m_grid->GetNumberCols(), other.GetNumberCols());
 
     for ( int row = 0; row < rows; ++row )
     {

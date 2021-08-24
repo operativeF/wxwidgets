@@ -296,8 +296,8 @@ bool wxToolbook::InsertPage(size_t n,
     bitmap.CopyFromIcon(icon);
 #endif
 
-    m_maxBitmapSize.x = wxMax(bitmap.GetWidth(), m_maxBitmapSize.x);
-    m_maxBitmapSize.y = wxMax(bitmap.GetHeight(), m_maxBitmapSize.y);
+    m_maxBitmapSize.x = std::max(bitmap.GetWidth(), m_maxBitmapSize.x);
+    m_maxBitmapSize.y = std::max(bitmap.GetHeight(), m_maxBitmapSize.y);
 
     int toolId = page->GetId();
     GetToolBar()->SetToolBitmapSize(m_maxBitmapSize);

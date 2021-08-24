@@ -944,7 +944,7 @@ MyStatusBar::MyStatusBar(wxWindow *parent, long style)
     m_timer.Start(1000);
 #endif
 
-    SetMinHeight(wxMax(m_statbmp->GetBestSize().GetHeight(),
+    SetMinHeight(std::max(m_statbmp->GetBestSize().GetHeight(),
                        m_checkbox->GetBestSize().GetHeight()));
 
     UpdateClock();

@@ -225,8 +225,8 @@ wxSize wxButtonBase::GetDefaultSize(wxWindow* WXUNUSED(win))
                              "child-min-height", &minheight,
                              NULL);
 
-        size.x = wxMax(minwidth, req.width);
-        size.y = wxMax(minheight, req.height);
+        size.x = std::max(minwidth, req.width);
+        size.y = std::max(minheight, req.height);
 
         gtk_widget_destroy(wnd);
     }

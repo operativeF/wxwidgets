@@ -586,9 +586,9 @@ wxGridCellAutoWrapStringRenderer::GetBestWidth(wxGrid& grid,
     auto cellVal = grid.GetCellValue(row, col);
     auto nline_ct = std::count(cellVal.begin(), cellVal.end(), '\n');
 
-    const size_t maxLines = wxMax(
+    const size_t maxLines = std::max(
                               (height - AUTOWRAP_Y_MARGIN) / lineHeight,
-                              1 + nline_ct);
+                              static_cast<int>(1 + nline_ct));
 
     // Increase width until all the text fits.
     //

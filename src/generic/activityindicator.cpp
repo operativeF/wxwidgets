@@ -126,7 +126,7 @@ private:
         // perhaps more natural 1/8th.
         static constexpr double RADIUS_FACTOR = 10;
 
-        const double r = wxMin(size.x, size.y) / RADIUS_FACTOR;
+        const double r = std::min(size.x, size.y) / RADIUS_FACTOR;
 
         // The initial dot touches the top border.
         wxGraphicsPath path = gc->CreatePath();

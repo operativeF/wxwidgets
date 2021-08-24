@@ -641,7 +641,7 @@ void wxSpinCtrlDouble::GtkSetEntryWidth()
     const int lenMin = wxString::Format("%.*f", digits, GetMin()).length();
     const int lenMax = wxString::Format("%.*f", digits, GetMax()).length();
 
-    gtk_entry_set_width_chars(GTK_ENTRY(m_widget), wxMax(lenMin, lenMax));
+    gtk_entry_set_width_chars(GTK_ENTRY(m_widget), std::max(lenMin, lenMax));
 }
 
 unsigned wxSpinCtrlDouble::GetDigits() const

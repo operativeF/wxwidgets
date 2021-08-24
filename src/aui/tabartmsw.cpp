@@ -293,21 +293,21 @@ wxSize wxAuiMSWTabArt::GetTabSize(wxDC& dc,
     dc.GetTextExtent(caption, &textWidth, &tmp);
     dc.GetTextExtent("ABCDEFXj", &tmp, &textHeight);
 
-    wxCoord tabWidth = wxMax(m_tabSize.x, textWidth);
-    wxCoord tabHeight = wxMax(m_tabSize.y, textHeight);
+    wxCoord tabWidth = std::max(m_tabSize.x, textWidth);
+    wxCoord tabHeight = std::max(m_tabSize.y, textHeight);
 
     // if the close button is showing, add space for it
     if ( close_button_state != wxAUI_BUTTON_STATE_HIDDEN )
     {
         tabWidth += m_closeBtnSize.x;
-        tabHeight = wxMax(tabHeight, m_closeBtnSize.y);
+        tabHeight = std::max(tabHeight, m_closeBtnSize.y);
     }
 
     // if there's a bitmap, add space for it
     if ( bitmap.IsOk() )
     {
         tabWidth += bitmap.GetWidth() + wnd->FromDIP(3); // bitmap padding
-        tabHeight = wxMax(tabHeight, bitmap.GetHeight() + wnd->FromDIP(2));
+        tabHeight = std::max(tabHeight, bitmap.GetHeight() + wnd->FromDIP(2));
     }
 
     // add padding

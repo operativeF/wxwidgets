@@ -1383,8 +1383,8 @@ wxSize wxComboCtrlBase::DoGetSizeFromTextSize(int xlen, int ylen) const
 
     // Add the margins we have previously set
     wxPoint marg( GetMargins() );
-    fwid += wxMax(0, marg.x);
-    fhei += wxMax(0, marg.y);
+    fwid += std::max(0, marg.x);
+    fhei += std::max(0, marg.y);
 
     if ( ylen > 0 )
         fhei += ylen - GetCharHeight();

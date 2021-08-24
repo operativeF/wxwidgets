@@ -1586,12 +1586,12 @@ void wxWindow::DoPaint()
 
       // Copy whichever is samller, the amount of pixmap we have to copy,
       // or the size of the client area.
-      toBlitX = wxMin(toBlitX, clientArea.x);
-      toBlitY = wxMin(toBlitY, clientArea.y);
+      toBlitX = std::min(toBlitX, clientArea.x);
+      toBlitY = std::min(toBlitY, clientArea.y);
 
       // Make sure we're not negative
-      toBlitX = wxMax(0, toBlitX);
-      toBlitY = wxMax(0, toBlitY);
+      toBlitX = std::max(0, toBlitX);
+      toBlitY = std::max(0, toBlitY);
 
       XCopyArea
       (

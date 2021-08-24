@@ -2881,7 +2881,7 @@ void wxRibbonMSWArtProvider::GetBarTabWidth(
     {
         dc.SetFont(m_tab_label_font);
         width += dc.GetTextExtent(label).x;
-        min += wxMin(25, width); // enough for a few chars
+        min += std::min(25, width); // enough for a few chars
         if(bitmap.IsOk())
         {
             // gap between label and bitmap
@@ -2941,12 +2941,12 @@ int wxRibbonMSWArtProvider::GetTabCtrlHeight(
             const wxRibbonPageTabInfo& info = pages.Item(i);
             if(info.page->GetIcon().IsOk())
             {
-                icon_height = wxMax(icon_height, info.page->GetIcon().GetScaledHeight() + 4);
+                icon_height = std::max(icon_height, info.page->GetIcon().GetScaledHeight() + 4);
             }
         }
     }
 
-    return wxMax(text_height, icon_height);
+    return std::max(text_height, icon_height);
 }
 
 wxSize wxRibbonMSWArtProvider::GetScrollButtonMinimumSize(
@@ -3216,7 +3216,7 @@ bool wxRibbonMSWArtProvider::GetButtonBarButtonSize(
             {
                 if(wxRibbonCanLabelBreakAtPosition(label, i))
                 {
-                    int width = wxMax(
+                    int width = std::max(
                         dc.GetTextExtent(label.substr(0, i)).x,
                         dc.GetTextExtent(label.substr(i + 1)).x + last_line_extra_width);
                     if(best_width < text_min_width)
@@ -3229,7 +3229,7 @@ bool wxRibbonMSWArtProvider::GetButtonBarButtonSize(
             }
             label_height *= 2; // Assume two lines even when only one is used
                                // (to give all buttons a consistent height)
-            icon_size.x = wxMax(icon_size.x, best_width) + 6;
+            icon_size.x = std::max(icon_size.x, best_width) + 6;
             icon_size.y = icon_size.y + label_height;
             *button_size = icon_size;
             switch(kind)
@@ -3278,7 +3278,7 @@ wxCoord wxRibbonMSWArtProvider::GetButtonBarButtonTextWidth(
         {
             if(wxRibbonCanLabelBreakAtPosition(label, i))
             {
-                int width = wxMax(
+                int width = std::max(
                     dc.GetTextExtent(label.substr(0, i)).x,
                     dc.GetTextExtent(label.substr(i + 1)).x + last_line_extra_width);
                 if(width < best_width)
@@ -3326,12 +3326,12 @@ wxSize wxRibbonMSWArtProvider::GetMinimisedPanelMinimumSize(
     {
         // Label alongside icon
         return {base_size.x + label_size.x,
-                wxMax(base_size.y, label_size.y)};
+                std::max(base_size.y, label_size.y)};
     }
     else
     {
         // Label beneath icon
-        return {wxMax(base_size.x, label_size.x),
+        return {std::max(base_size.x, label_size.x),
                 base_size.y + label_size.y};
     }
 }

@@ -852,7 +852,7 @@ wxSize wxStdRenderer::GetStatusBarBorders() const
                   wxT("this code expects uniform borders, you must override GetStatusBarBorders") );
 
     // take the larger of flat/raised values:
-    wxSize border(wxMax(raised.x, flat.x), wxMax(raised.y, flat.y));
+    wxSize border(std::max(raised.x, flat.x), std::max(raised.y, flat.y));
 
     return border;
 }

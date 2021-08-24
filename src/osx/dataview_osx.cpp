@@ -252,7 +252,7 @@ void wxOSXDataViewModelNotifier::AdjustRowHeight(wxDataViewItem const& item)
                 wxVariant value;
                 model->GetValue( value, item, column->GetModelColumn() );
                 renderer->SetValue( value );
-                height = wxMax( height, renderer->GetSize().y );
+                height = std::max( height, renderer->GetSize().y );
             }
           }
       }
@@ -287,7 +287,7 @@ void wxOSXDataViewModelNotifier::AdjustRowHeights(wxDataViewItemArray const& ite
                   wxVariant value;
                   model->GetValue( value, items[itemIndex], column->GetModelColumn() );
                   renderer->SetValue( value );
-                  height = wxMax( height, renderer->GetSize().y );
+                  height = std::max( height, renderer->GetSize().y );
               }
             }
         }

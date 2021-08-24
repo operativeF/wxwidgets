@@ -156,7 +156,7 @@ static char g_buf[BUFSIZE];
 void wxStackWalker::SaveStack(size_t maxDepth)
 {
     // read all frames required
-    maxDepth = wxMin(WXSIZEOF(ms_addresses)/sizeof(void*), maxDepth);
+    maxDepth = std::min(WXSIZEOF(ms_addresses)/sizeof(void*), maxDepth);
     m_depth = backtrace(ms_addresses, maxDepth*sizeof(void*));
     if ( !m_depth )
         return;

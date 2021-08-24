@@ -414,7 +414,7 @@ void wxButtonToolBar::DoLayout()
                     }
                 }
 
-                maxHeight = wxMax(maxHeight, sz.y);
+                maxHeight = std::max(maxHeight, sz.y);
 
                 tool->m_width = sz.x;
                 tool->m_height = sz.y;
@@ -437,7 +437,7 @@ void wxButtonToolBar::DoLayout()
 
             *pCur += tool->m_width;
 
-            maxHeight = wxMax(maxHeight, size.y);
+            maxHeight = std::max(maxHeight, size.y);
         }
         *pCur += margin;
     }

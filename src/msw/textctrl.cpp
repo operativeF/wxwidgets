@@ -2449,7 +2449,7 @@ wxSize wxTextCtrl::DoGetSizeFromTextSize(int xlen, int ylen) const
 
         if ( ylen <= 0 )
         {
-            hText *= wxMax(wxMin(GetNumberOfLines(), 10), 2);
+            hText *= std::max(std::min(GetNumberOfLines(), 10), 2);
             // add space for horizontal scrollbar
             if ( m_windowStyle & wxHSCROLL )
                 hText += wxGetSystemMetrics(SM_CYHSCROLL, m_parent);
@@ -2460,8 +2460,8 @@ wxSize wxTextCtrl::DoGetSizeFromTextSize(int xlen, int ylen) const
     {
         // Add the margins we have previously set
         wxPoint marg( GetMargins() );
-        wText += wxMax(0, marg.x);
-        hText += wxMax(0, marg.y);
+        wText += std::max(0, marg.x);
+        hText += std::max(0, marg.y);
     }
 
     // Text controls without border are special and have the same height as
@@ -3094,7 +3094,7 @@ bool wxTextCtrl::MSWSetParaFormat(const wxTextAttr& style, long start, long end)
 
         const std::vector<int>& tabs = style.GetTabs();
 
-        pf.cTabCount = (SHORT)wxMin(tabs.size(), MAX_TAB_STOPS);
+        pf.cTabCount = (SHORT)std::min(tabs.size(), std::size_t(MAX_TAB_STOPS));
         for (size_t i = 0; i < (size_t) pf.cTabCount; i++)
         {
             // Convert from 1/10 mm to TWIPS

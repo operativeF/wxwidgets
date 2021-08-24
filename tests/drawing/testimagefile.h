@@ -25,8 +25,8 @@ bool AreFilesContentsEqual(const wxString &filename, const wxString &refFilename
     wxFileOffset remainingLength = refLength;
     while (remainingLength != 0)
     {
-        input.Read (buffer, wxMin(remainingLength, sizeof(buffer)));
-        refInput.Read(refBuffer, wxMin(remainingLength, sizeof(refBuffer)));
+        input.Read (buffer, std::min(remainingLength, sizeof(buffer)));
+        refInput.Read(refBuffer, std::min(remainingLength, sizeof(refBuffer)));
 
         size_t refLastRead = refInput.LastRead();
         if (input.LastRead() != refLastRead)

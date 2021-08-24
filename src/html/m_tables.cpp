@@ -400,7 +400,7 @@ void wxHtmlTableCell::ComputeMinMaxWidths()
         }
         // Calculate maximum table width, required for nested tables
         if (m_ColsInfo[c].units == wxHTML_UNITS_PIXELS)
-            m_MaxTotalWidth += wxMax(m_ColsInfo[c].width, m_ColsInfo[c].minWidth);
+            m_MaxTotalWidth += std::max(m_ColsInfo[c].width, m_ColsInfo[c].minWidth);
         else if ((m_ColsInfo[c].units == wxHTML_UNITS_PERCENT) && (m_ColsInfo[c].width != 0))
             percentage += m_ColsInfo[c].width;
         else
@@ -471,7 +471,7 @@ void wxHtmlTableCell::Layout(int w)
         for (i = 0; i < m_NumCols; i++)
             if (m_ColsInfo[i].units == wxHTML_UNITS_PIXELS)
             {
-                m_ColsInfo[i].pixwidth = wxMax(m_ColsInfo[i].width,
+                m_ColsInfo[i].pixwidth = std::max(m_ColsInfo[i].width,
                                                m_ColsInfo[i].minWidth);
                 wpix -= m_ColsInfo[i].pixwidth;
             }
@@ -503,7 +503,7 @@ void wxHtmlTableCell::Layout(int w)
             else
                 newWidth = newWidth * 100 / (100 - percentage);
 
-            newWidth = wxMin(newWidth, w - (m_NumCols + 1) * m_Spacing - 2 * m_Border);
+            newWidth = std::min(newWidth, w - (m_NumCols + 1) * m_Spacing - 2 * m_Border);
             wpix -= m_Width - newWidth;
             m_Width = newWidth;
         }
@@ -514,7 +514,7 @@ void wxHtmlTableCell::Layout(int w)
         for (i = 0; i < m_NumCols; i++)
             if ((m_ColsInfo[i].units == wxHTML_UNITS_PERCENT) && (m_ColsInfo[i].width != 0))
             {
-                m_ColsInfo[i].pixwidth = wxMin(m_ColsInfo[i].width, 100) * wpix / 100;
+                m_ColsInfo[i].pixwidth = std::min(m_ColsInfo[i].width, 100) * wpix / 100;
 
                 // Make sure to leave enough space for the other columns
                 int minRequired = m_Border;
@@ -524,7 +524,7 @@ void wxHtmlTableCell::Layout(int w)
                         !m_ColsInfo[j].width)
                         minRequired += m_ColsInfo[j].minWidth;
                 }
-                m_ColsInfo[i].pixwidth = wxMax(wxMin(wtemp - minRequired, m_ColsInfo[i].pixwidth), m_ColsInfo[i].minWidth);
+                m_ColsInfo[i].pixwidth = std::max(std::min(wtemp - minRequired, m_ColsInfo[i].pixwidth), m_ColsInfo[i].minWidth);
 
                 wtemp -= m_ColsInfo[i].pixwidth;
             }
@@ -562,7 +562,7 @@ void wxHtmlTableCell::Layout(int w)
                 }
                 
                 const int pixwidthPrev = m_ColsInfo[i].pixwidth;
-                m_ColsInfo[i].pixwidth = wxMax(wxMin(wpix - minRequired, m_ColsInfo[i].pixwidth), m_ColsInfo[i].minWidth);
+                m_ColsInfo[i].pixwidth = std::max(std::min(wpix - minRequired, m_ColsInfo[i].pixwidth), m_ColsInfo[i].minWidth);
 
                 if (maxWidth)
                 {

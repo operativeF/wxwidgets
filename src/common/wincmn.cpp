@@ -745,8 +745,8 @@ wxSize wxWindowBase::DoGetBestSize() const
 
     // Add any difference between size and client size
     wxSize diff = GetSize() - GetClientSize();
-    best.x += wxMax(0, diff.x);
-    best.y += wxMax(0, diff.y);
+    best.x += std::max(0, diff.x);
+    best.y += std::max(0, diff.y);
 
     return best;
 }
@@ -816,9 +816,9 @@ wxSize wxWindowBase::GetWindowBorderSize() const
 
         case wxBORDER_SUNKEN:
         case wxBORDER_RAISED:
-            size.x = wxMax(wxGetMetricOrDefault(wxSYS_EDGE_X, this),
+            size.x = std::max(wxGetMetricOrDefault(wxSYS_EDGE_X, this),
                            wxGetMetricOrDefault(wxSYS_BORDER_X, this));
-            size.y = wxMax(wxGetMetricOrDefault(wxSYS_EDGE_Y, this),
+            size.y = std::max(wxGetMetricOrDefault(wxSYS_EDGE_Y, this),
                            wxGetMetricOrDefault(wxSYS_BORDER_Y, this));
             break;
 

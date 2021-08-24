@@ -444,8 +444,8 @@ bool wxToolBar::Realize()
                         currentY += height + packing;
                     else
                         currentX += width + packing;
-                    buttonHeight = wxMax(buttonHeight, height);
-                    buttonWidth = wxMax(buttonWidth, width);
+                    buttonHeight = std::max(buttonHeight, height);
+                    buttonWidth = std::max(buttonWidth, width);
                 }
 
                 XtAddEventHandler (button, EnterWindowMask | LeaveWindowMask,

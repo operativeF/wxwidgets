@@ -1094,7 +1094,7 @@ public:
             const wxGraphicsMatrix matrix(m_context->GetTransform());
             double x = m_context->GetContentScaleFactor(), y = x;
             matrix.TransformDistance(&x, &y);
-            m_offset = 0.5 / wxMin(fabs(x), fabs(y));
+            m_offset = 0.5 / std::min(fabs(x), fabs(y));
             m_context->Translate(m_offset, m_offset);
         }
     }
@@ -3136,7 +3136,7 @@ void wxD2DPenData::SetWidth(const wxGraphicsContext* context)
         const wxGraphicsMatrix matrix(context->GetTransform());
         double x = context->GetContentScaleFactor(), y = x;
         matrix.TransformDistance(&x, &y);
-        m_width = 1 / wxMin(fabs(x), fabs(y));
+        m_width = 1 / std::min(fabs(x), fabs(y));
     }
 }
 
@@ -3858,7 +3858,7 @@ public:
         FLOAT ratio = fontData->GetTextFormat()->GetFontSize() / (FLOAT)fontMetrics.designUnitsPerEm;
 
         if (descent != nullptr) *descent = fontMetrics.descent * ratio;
-        if (externalLeading != nullptr) *externalLeading = wxMax(0.0f, (fontMetrics.ascent + fontMetrics.descent) * ratio - textMetrics.height);
+        if (externalLeading != nullptr) *externalLeading = std::max(0.0f, (fontMetrics.ascent + fontMetrics.descent) * ratio - textMetrics.height);
 
         return { textMetrics.widthIncludingTrailingWhitespace, textMetrics.height };
     }
@@ -4722,7 +4722,7 @@ bool wxD2DContext::ShouldOffset() const
     double x = GetContentScaleFactor(), y = x;
     matrix.TransformDistance(&x, &y);
     // FIXME: Double equality
-    if (!(fmod(wxMin(fabs(x), fabs(y)), 2.0) == 1.0))
+    if (!(fmod(std::min(fabs(x), fabs(y)), 2.0) == 1.0))
         return false;
 
     // offset if pen width is odd integer

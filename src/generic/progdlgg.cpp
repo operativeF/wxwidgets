@@ -157,7 +157,7 @@ bool wxGenericProgressDialog::Create( const std::string& title,
                     maximum,
                     wxDefaultPosition,
                     // make the progress bar sufficiently long
-                    wxSize(wxMin(wxGetClientDisplayRect().width/3, 300), -1),
+                    wxSize(std::min(wxGetClientDisplayRect().width/3, 300), -1),
                     gauge_style
                   );
 

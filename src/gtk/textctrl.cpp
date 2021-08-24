@@ -2106,7 +2106,7 @@ wxSize wxTextCtrl::DoGetSizeFromTextSize(int xlen, int ylen) const
         tsize.y = cHeight;
         if ( ylen <= 0 )
         {
-            tsize.y = 1 + cHeight * wxMax(wxMin(GetNumberOfLines(), 10), 2);
+            tsize.y = 1 + cHeight * std::max(std::min(GetNumberOfLines(), 10), 2);
             // add space for horizontal scrollbar
             if ( m_scrollBar[0] && (m_windowStyle & wxHSCROLL) )
                 tsize.IncBy(0, GTKGetPreferredSize(GTK_WIDGET(m_scrollBar[0])).y + 3);

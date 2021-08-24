@@ -104,14 +104,14 @@ void wxPickerBase::PostCreation()
     const wxSize pickerBestSize(m_picker->GetBestSize());
     const wxSize textBestSize( HasTextCtrl() ? m_text->GetBestSize() : wxSize());
     wxSize pickerMinSize;
-    pickerMinSize.y = wxMax(pickerBestSize.y, textBestSize.y);
+    pickerMinSize.y = std::max(pickerBestSize.y, textBestSize.y);
     if ( HasFlag(wxPB_SMALL) )
     {
         pickerMinSize.x = pickerBestSize.x;
     }
     else
     {
-        pickerMinSize.x = wxMax(pickerBestSize.x, pickerMinSize.y);
+        pickerMinSize.x = std::max(pickerBestSize.x, pickerMinSize.y);
     }
     if ( pickerMinSize != pickerBestSize )
         m_picker->SetMinSize(pickerMinSize);

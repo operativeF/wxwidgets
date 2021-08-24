@@ -588,7 +588,7 @@ wxSize wxAuiGenericToolBarArt::GetToolSize(
             if ( !item.GetLabel().empty() )
             {
                 dc.GetTextExtent(item.GetLabel(), &tx, &ty);
-                width = wxMax(width, tx+wnd->FromDIP(6));
+                width = std::max(width, tx+wnd->FromDIP(6));
             }
         }
         else if ( m_textOrientation == wxAUI_TBTOOL_TEXT_RIGHT &&
@@ -601,7 +601,7 @@ wxSize wxAuiGenericToolBarArt::GetToolSize(
             {
                 dc.GetTextExtent(item.GetLabel(), &tx, &ty);
                 width += tx;
-                height = wxMax(height, ty);
+                height = std::max(height, ty);
             }
         }
     }

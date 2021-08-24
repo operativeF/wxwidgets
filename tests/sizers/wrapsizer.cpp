@@ -46,7 +46,7 @@ TEST_CASE("wxWrapSizer::CalcMin")
     // the maximum of their minimal vertical dimensions.
     const wxSize sizeChild2 = wxSize(100, 80);
     sizeMinExpected.x += sizeChild2.x;
-    sizeMinExpected.y = wxMax(sizeChild1.y, sizeChild2.y);
+    sizeMinExpected.y = std::max(sizeChild1.y, sizeChild2.y);
 
     wxWindow * const
         child2 = new wxWindow(win.get(), wxID_ANY, wxDefaultPosition, sizeChild2);

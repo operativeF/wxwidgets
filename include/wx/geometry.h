@@ -717,8 +717,8 @@ public:
 
 inline wxRect2DInt::wxRect2DInt( const wxPoint2DInt &a , const wxPoint2DInt &b)
 {
-    m_x = wxMin( a.m_x , b.m_x );
-    m_y = wxMin( a.m_y , b.m_y );
+    m_x = std::min( a.m_x , b.m_x );
+    m_y = std::min( a.m_y , b.m_y );
     m_width = abs( a.m_x - b.m_x );
     m_height = abs( a.m_y - b.m_y );
 }

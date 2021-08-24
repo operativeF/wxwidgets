@@ -1983,8 +1983,8 @@ wxWin32Renderer::GetSliderThumbSize(const wxRect& WXUNUSED(rect),
                                     wxOrientation orient) const
 {
     wxSize size;
-    wxCoord width  = wxMax (lenThumb, SLIDER_THUMB_LENGTH) / 2;
-    wxCoord height = wxMax (lenThumb, SLIDER_THUMB_LENGTH);
+    wxCoord width  = std::max (lenThumb, SLIDER_THUMB_LENGTH) / 2;
+    wxCoord height = std::max (lenThumb, SLIDER_THUMB_LENGTH);
 
     if (orient == wxHORIZONTAL)
     {
@@ -2017,11 +2017,11 @@ wxRect wxWin32Renderer::GetSliderShaftRect(const wxRect& rectOrig,
         rect.x += SLIDER_MARGIN;
         if (left && right)
         {
-            rect.y += wxMax ((rect.height - 2*BORDER_THICKNESS) / 2, sizeThumb.y/2);
+            rect.y += std::max ((rect.height - 2*BORDER_THICKNESS) / 2, sizeThumb.y/2);
         }
         else if (left)
         {
-            rect.y += wxMax ((rect.height - 2*BORDER_THICKNESS - sizeThumb.y/2), sizeThumb.y/2);
+            rect.y += std::max ((rect.height - 2*BORDER_THICKNESS - sizeThumb.y/2), sizeThumb.y/2);
         }
         else
         {
@@ -2035,11 +2035,11 @@ wxRect wxWin32Renderer::GetSliderShaftRect(const wxRect& rectOrig,
         rect.y += SLIDER_MARGIN;
         if (left && right)
         {
-            rect.x += wxMax ((rect.width - 2*BORDER_THICKNESS) / 2, sizeThumb.x/2);
+            rect.x += std::max ((rect.width - 2*BORDER_THICKNESS) / 2, sizeThumb.x/2);
         }
         else if (left)
         {
-            rect.x += wxMax ((rect.width - 2*BORDER_THICKNESS - sizeThumb.x/2), sizeThumb.x/2);
+            rect.x += std::max ((rect.width - 2*BORDER_THICKNESS - sizeThumb.x/2), sizeThumb.x/2);
         }
         else
         {

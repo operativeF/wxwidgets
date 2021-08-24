@@ -153,10 +153,10 @@ bool wxColourBase::FromString(const wxString& str)
                 return false;
         }
 
-        Set((unsigned char)wxClip(red, 0, 255),
-            (unsigned char)wxClip(green, 0, 255),
-            (unsigned char)wxClip(blue, 0, 255),
-            (unsigned char)wxClip(alpha, 0, 255));
+        Set((unsigned char)std::clamp(red, 0, 255),
+            (unsigned char)std::clamp(green, 0, 255),
+            (unsigned char)std::clamp(blue, 0, 255),
+            (unsigned char)std::clamp(alpha, 0, 255));
     }
     else if ( str[0] == wxT('#') )
     {
@@ -340,9 +340,8 @@ unsigned char wxColourBase::AlphaBlend(unsigned char fg, unsigned char bg,
                                        double alpha)
 {
     double result = bg + (alpha * (fg - bg));
-    result = wxMax(result,   0.0);
-    result = wxMin(result, 255.0);
-    return (unsigned char)result;
+
+    return (unsigned char)std::clamp(result, 0.0, 255.0);
 }
 
 // ChangeLightness() is a utility function that simply darkens
@@ -359,8 +358,8 @@ void wxColourBase::ChangeLightness(unsigned char* r, unsigned char* g, unsigned 
     // ialpha is 0..200 where 0 is completely black
     // and 200 is completely white and 100 is the same
     // convert that to normal alpha 0.0 - 1.0
-    ialpha = wxMax(ialpha,   0);
-    ialpha = wxMin(ialpha, 200);
+    ialpha = std::clamp(ialpha, 0, 200);
+
     double alpha = ((double)(ialpha - 100.0))/100.0;
 
     unsigned char bg;

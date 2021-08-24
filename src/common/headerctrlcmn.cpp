@@ -429,7 +429,7 @@ wxHeaderCtrlSimple::UpdateColumnWidthToFit(unsigned int idx, int widthTitle)
     if ( widthContents == -1 )
         return false;
 
-    m_cols[idx].SetWidth(wxMax(widthContents, widthTitle));
+    m_cols[idx].SetWidth(std::max(widthContents, widthTitle));
 
     return true;
 }

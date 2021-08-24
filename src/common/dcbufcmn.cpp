@@ -76,7 +76,7 @@ private:
 
         // we must always return a valid bitmap but creating a bitmap of
         // size 0 would fail, so create a 1*1 bitmap in this case
-        buffer->CreateScaled(wxMax(w, 1), wxMax(h, 1), -1, scale);
+        buffer->CreateScaled(std::max(w, 1), std::max(h, 1), -1, scale);
 
         return buffer;
     }
@@ -148,8 +148,8 @@ void wxBufferedDC::UnMask()
     if (!(m_style & wxBUFFER_VIRTUAL_AREA))
     {
         wxSize dcSize = m_dc->GetSize();
-        width = wxMin(width, dcSize.x);
-        height = wxMin(height, dcSize.y);
+        width = std::min(width, dcSize.x);
+        height = std::min(height, dcSize.y);
     }
 
     const wxPoint origin = GetLogicalOrigin();

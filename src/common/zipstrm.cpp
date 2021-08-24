@@ -294,7 +294,7 @@ wxStoredInputStream::wxStoredInputStream(wxInputStream& stream)
 size_t wxStoredInputStream::OnSysRead(void *buffer, size_t size)
 {
     size_t count = wx_truncate_cast(size_t,
-                wxMin(size + wxFileOffset(0), m_len - m_pos + size_t(0)));
+                std::min(size + wxFileOffset(0), m_len - m_pos + size_t(0)));
     count = m_parent_i_stream->Read(buffer, count).LastRead();
     m_pos += count;
 
@@ -1024,7 +1024,7 @@ bool wxZipEntry::LoadExtraInfo(const char* extraData, std::uint16_t extraLen, bo
 
             // Data block for extra field with Header ID = 1 (ZIP64)
             // can have length up to 28 bytes.
-            wxZipHeader ds(extraData+4, wxMin(fieldLen, 28));
+            wxZipHeader ds(extraData+4, std::min(fieldLen, std::uint16_t(28)));
             // A file may contain larger size, compressed size or offset
             // in a zip64 extra data block. Use the 64 bit values if available
             if ( m_Size == 0xffffffff )
@@ -1758,11 +1758,11 @@ bool wxZipInputStream::FindEndRecord()
     wxCharBuffer buf(BUFSIZE);
 
     memcpy(buf.data(), magic, 3);
-    wxFileOffset minpos = wxMax(pos - 65535L, 0);
+    wxFileOffset minpos = std::max(pos - 65535LL, 0LL);
 
     while (pos > minpos) {
         size_t len = wx_truncate_cast(size_t,
-                        pos - wxMax(pos - (BUFSIZE - 3), minpos));
+                        pos - std::max(pos - (BUFSIZE - 3), minpos));
         if ( len < 3 )
             break;
 

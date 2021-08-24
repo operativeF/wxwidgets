@@ -902,8 +902,8 @@ bool wxToolBar::Realize()
 
                 if ( bmp.IsOk() )
                 {
-                    const int xOffset = wxMax(0, (m_defaultWidth - w)/2);
-                    const int yOffset = wxMax(0, (m_defaultHeight - h)/2);
+                    const int xOffset = std::max(0, (m_defaultWidth - w)/2);
+                    const int yOffset = std::max(0, (m_defaultHeight - h)/2);
 
 #if wxUSE_IMAGE
                     // If a mix of icons with alpha and without is used,

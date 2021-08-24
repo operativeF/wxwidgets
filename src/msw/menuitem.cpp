@@ -815,7 +815,7 @@ bool wxMenuItem::OnMeasureItem(size_t *width, size_t *height)
         // if bitmap is set, then the width is set to the width of the widest
         // bitmap in menu (GetMarginWidth()) unless std check mark is wider,
         // then it's is set to std mark's width
-        int imgWidth = wxMax(GetMarginWidth(), data->CheckSize.cx)
+        int imgWidth = std::max(GetMarginWidth(), static_cast<int>(data->CheckSize.cx))
                      + data->CheckMargin.GetTotalX();
 
         *width += imgWidth + data->CheckBgMargin.GetTotalX();
@@ -825,8 +825,8 @@ bool wxMenuItem::OnMeasureItem(size_t *width, size_t *height)
     {
         // get size of bitmap always return valid value (0 for invalid bitmap),
         // so we don't needed check if bitmap is valid ;)
-        size_t heightBmp = wxMax(m_bmpChecked.GetHeight(), m_bmpUnchecked.GetHeight());
-        size_t widthBmp = wxMax(m_bmpChecked.GetWidth(),  m_bmpUnchecked.GetWidth());
+        size_t heightBmp = std::max(m_bmpChecked.GetHeight(), m_bmpUnchecked.GetHeight());
+        size_t widthBmp = std::max(m_bmpChecked.GetWidth(),  m_bmpUnchecked.GetWidth());
 
         if ( IsOwnerDrawn() )
         {
@@ -863,7 +863,7 @@ bool wxMenuItem::OnDrawItem(wxDC& dc, const wxRect& rc,
     RECT rect;
     wxCopyRectToRECT(rc, rect);
 
-    int imgWidth = wxMax(GetMarginWidth(), data->CheckSize.cx);
+    int imgWidth = std::max(GetMarginWidth(), static_cast<int>(data->CheckSize.cx));
 
     if ( IsOwnerDrawn() )
     {

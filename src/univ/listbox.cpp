@@ -516,7 +516,7 @@ void wxListBox::RefreshItems(int from, int count)
             }
             else // m_updateFrom >= from
             {
-                int updateLast = wxMax(m_updateFrom + m_updateCount,
+                int updateLast = std::max(m_updateFrom + m_updateCount,
                                        from + count);
                 m_updateFrom = from;
                 m_updateCount = updateLast - m_updateFrom;
@@ -851,7 +851,7 @@ wxSize wxListBox::DoGetBestClientSize() const
         height = GetCharHeight();
 
     // we need the height of the entire listbox, not just of one line
-    height *= wxMax(count, 7);
+    height *= std::max(count, 7);
 
     return wxSize(width, height);
 }

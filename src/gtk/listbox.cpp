@@ -930,7 +930,7 @@ wxSize wxListBox::DoGetBestSize() const
     lbWidth += wxSystemSettings::GetMetric(wxSYS_VSCROLL_X);
 
     // Don't make the listbox too tall but don't make it too small neither
-    lbHeight = (cy+4) * wxMin(wxMax(count, 3), 10);
+    lbHeight = (cy+4) * std::min(std::max(count, 3), 10);
 
     return wxSize(lbWidth, lbHeight);
 }

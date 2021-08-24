@@ -246,7 +246,7 @@ wxSize wxDateTimePickerCtrl::DoGetBestSize() const
     }
 
     int scrollY = wxSystemSettings::GetMetric(wxSYS_HSCROLL_ARROW_Y, m_parent);
-    size.y = wxMax(size.y, scrollY);
+    size.y = std::max(size.y, scrollY);
 
     // In any case, adjust the height to be the same as for the text controls.
     size.y = EDIT_HEIGHT_FROM_CHAR_HEIGHT(size.y);

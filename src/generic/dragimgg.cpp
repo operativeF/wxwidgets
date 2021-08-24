@@ -417,8 +417,8 @@ bool wxGenericDragImage::RedrawImage(const wxPoint& oldPos,
         int newRight = newRect.GetRight();
         int newBottom = newRect.GetBottom();
 
-        wxPoint topLeft = wxPoint(wxMin(oldPos.x, newPos.x), wxMin(oldPos.y, newPos.y));
-        wxPoint bottomRight = wxPoint(wxMax(oldRight, newRight), wxMax(oldBottom, newBottom));
+        wxPoint topLeft = wxPoint(std::min(oldPos.x, newPos.x), std::min(oldPos.y, newPos.y));
+        wxPoint bottomRight = wxPoint(std::max(oldRight, newRight), std::max(oldBottom, newBottom));
 
         fullRect.x = topLeft.x; fullRect.y = topLeft.y;
         fullRect.SetRight(bottomRight.x);

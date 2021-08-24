@@ -32,7 +32,7 @@ public:
 
     void UpdateWithWidth(int width)
     {
-        m_width = wxMax(m_width, width);
+        m_width = std::max(m_width, width);
     }
 
     // Update the max with for the expected row
@@ -65,7 +65,7 @@ public:
         wxStopWatch timer;
 #else
         // use some hard-coded limit, that's the best we can do without timer
-        size_t top_part_end = wxMin(500, count);
+        size_t top_part_end = std::min(500, count);
 #endif // wxUSE_STOPWATCH/!wxUSE_STOPWATCH
 
         size_t row = 0;
@@ -86,15 +86,15 @@ public:
             top_part_end = row;
 
             // add bottom N/2 items now:
-            const size_t bottom_part_start = wxMax(row, count - row);
+            const size_t bottom_part_start = std::max(row, count - row);
             for ( row = bottom_part_start; row < count; row++ )
             {
                 UpdateWithRow(row);
             }
 
             // finally, include currently visible items in the calculation:
-            first_visible = wxMax(first_visible, top_part_end);
-            last_visible = wxMin(bottom_part_start, last_visible);
+            first_visible = std::max(first_visible, top_part_end);
+            last_visible = std::min(bottom_part_start, last_visible);
 
             for ( row = first_visible; row < last_visible; row++ )
             {

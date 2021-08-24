@@ -1474,12 +1474,12 @@ wxSize wxGTKRenderer::GetSliderThumbSize(const wxRect& rect,
     wxRect rectShaft = GetSliderShaftRect(rect, lenThumb, orient);
     if ( orient == wxHORIZONTAL )
     {
-        size.x = wxMin(SLIDER_THUMB_LENGTH, rectShaft.width);
+        size.x = std::min(SLIDER_THUMB_LENGTH, rectShaft.width);
         size.y = rectShaft.height;
     }
     else // vertical
     {
-        size.y = wxMin(SLIDER_THUMB_LENGTH, rectShaft.height);
+        size.y = std::min(SLIDER_THUMB_LENGTH, rectShaft.height);
         size.x = rectShaft.width;
     }
 

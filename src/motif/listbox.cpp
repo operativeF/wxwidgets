@@ -580,7 +580,7 @@ wxSize wxDoGetListBoxBestSize( Widget listWidget, const wxWindow* window )
     for( size_t i = 0; i < (size_t)max; ++i )
     {
         window->GetTextExtent( wxDoGetStringInList( listWidget, i ), &x, &y );
-        width = wxMax( width, x );
+        width = std::max( width, x );
     }
 
     // use some arbitrary value if there are no strings
@@ -595,7 +595,7 @@ wxSize wxDoGetListBoxBestSize( Widget listWidget, const wxWindow* window )
         + 2 * highlight + LIST_SCROLL_SPACING + 2 * xmargin + 2 * shadow;
 
     // at least 3 items, at most 10
-    int height = wxMax( 3, wxMin( 10, max ) ) *
+    int height = std::max( 3, std::min( 10, max ) ) *
         ( y + spacing + 2 * highlight ) + 2 * ymargin + 2 * shadow;
 
     return wxSize( width, height );

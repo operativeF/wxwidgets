@@ -883,7 +883,7 @@ void UpdateCellAttrRowsOrCols(wxGridCoordsToAttrMap& attrs, int editPos,
                         // at this point, then with the below code a multicell
                         // with size 7 is at most reduced by:
                         // cellPos + 7 - (cellPos + 1) = 7 - 1 = 6.
-                        mainSize -= wxMin(-editCount,
+                        mainSize -= std::min(-editCount,
                                           cellPos + mainSize - editPos);
                         /*
                         The above was derived from:
@@ -1350,8 +1350,8 @@ wxGridBlockCoords::Difference(const wxGridBlockCoords& other,
                 wxGridBlockCoords(other.m_bottomRow + 1, m_leftCol,
                                   m_bottomRow, m_rightCol);
 
-        const int maxTopRow = wxMax(m_topRow, other.m_topRow);
-        const int minBottomRow = wxMin(m_bottomRow, other.m_bottomRow);
+        const int maxTopRow = std::max(m_topRow, other.m_topRow);
+        const int minBottomRow = std::min(m_bottomRow, other.m_bottomRow);
 
         // Part[2].
         if ( m_leftCol < other.m_leftCol )
@@ -1379,8 +1379,8 @@ wxGridBlockCoords::Difference(const wxGridBlockCoords& other,
                 wxGridBlockCoords(m_topRow, other.m_rightCol + 1,
                                   m_bottomRow, m_rightCol);
 
-        const int maxLeftCol = wxMax(m_leftCol, other.m_leftCol);
-        const int minRightCol = wxMin(m_rightCol, other.m_rightCol);
+        const int maxLeftCol = std::max(m_leftCol, other.m_leftCol);
+        const int minRightCol = std::min(m_rightCol, other.m_rightCol);
 
         // Part[2].
         if ( m_topRow < other.m_topRow )
@@ -1471,10 +1471,10 @@ wxGridBlockCoords::SymDifference(const wxGridBlockCoords& other) const
     if ( m_leftCol != other.m_leftCol )
     {
         result.m_parts[2] = wxGridBlockCoords(maxUpperRow,
-                                           wxMin(m_leftCol,
+                                           std::min(m_leftCol,
                                                  other.m_leftCol),
                                            minLowerRow,
-                                           wxMax(m_leftCol,
+                                           std::max(m_leftCol,
                                                  other.m_leftCol) - 1);
     }
 
@@ -1482,10 +1482,10 @@ wxGridBlockCoords::SymDifference(const wxGridBlockCoords& other) const
     if ( m_rightCol != other.m_rightCol )
     {
         result.m_parts[3] = wxGridBlockCoords(maxUpperRow,
-                                           wxMin(m_rightCol,
+                                           std::min(m_rightCol,
                                                  other.m_rightCol) + 1,
                                            minLowerRow,
-                                           wxMax(m_rightCol,
+                                           std::max(m_rightCol,
                                                  other.m_rightCol));
     }
 
@@ -1997,7 +1997,7 @@ bool wxGridStringTable::DeleteCols( size_t pos, size_t numCols )
         // element and not numCols, so account for it
         int numRemaining = m_colLabels.size() - colID;
         if (numRemaining > 0)
-            m_colLabels.erase(std::begin(m_colLabels) + colID, std::begin(m_colLabels) + colID + wxMin(numCols, numRemaining) );
+            m_colLabels.erase(std::begin(m_colLabels) + colID, std::begin(m_colLabels) + colID + std::min(numCols, std::size_t(numRemaining)) );
     }
 
     if ( numCols >= curNumCols )
@@ -2439,7 +2439,7 @@ wxGrid::SetRenderScale(wxDC& dc,
     double scaleX = (double)( (double) sizeTemp.x / (double) sizeGrid.x );
     double scaleY = (double)( (double) sizeTemp.y / (double) sizeGrid.y );
 
-    dc.SetUserScale(wxMin(scaleX, scaleY));
+    dc.SetUserScale(std::min(scaleX, scaleY));
 }
 
 // get grid rendered size, origin offset and fill cell arrays
@@ -3169,9 +3169,9 @@ void wxGrid::CalcDimensions()
 
     // ensure the position is valid for the new scroll ranges
     if ( x >= w )
-        x = wxMax( w - 1, 0 );
+        x = std::max( w - 1, 0 );
     if ( y >= h )
-        y = wxMax( h - 1, 0 );
+        y = std::max( h - 1, 0 );
 
     // update the virtual size and refresh the scrollbars to reflect it
     m_gridWin->SetVirtualSize(w, h);
@@ -3594,7 +3594,7 @@ std::vector<int> wxGrid::CalcRowLabelsExposed( const wxRegion& reg, wxGridWindow
         m_gridWin->GetClientSize( &cw, &ch );
         if ( r.GetTop() > ch )
             r.SetTop( 0 );
-        r.SetBottom( wxMin( r.GetBottom(), ch ) );
+        r.SetBottom( std::min( r.GetBottom(), ch ) );
 #endif
 
         // logical bounds of update region
@@ -3645,7 +3645,7 @@ std::vector<int> wxGrid::CalcColLabelsExposed( const wxRegion& reg, wxGridWindow
         m_gridWin->GetClientSize( &cw, &ch );
         if ( r.GetLeft() > cw )
             r.SetLeft( 0 );
-        r.SetRight( wxMin( r.GetRight(), cw ) );
+        r.SetRight( std::min( r.GetRight(), cw ) );
 #endif
 
         // logical bounds of update region
@@ -3707,8 +3707,8 @@ wxGridCellCoordsArray wxGrid::CalcCellsExposed( const wxRegion& reg,
             gridWindow->GetClientSize( &cw, &ch );
             if ( r.GetTop() > ch ) r.SetTop( 0 );
             if ( r.GetLeft() > cw ) r.SetLeft( 0 );
-            r.SetRight( wxMin( r.GetRight(), cw ) );
-            r.SetBottom( wxMin( r.GetBottom(), ch ) );
+            r.SetRight( std::min( r.GetRight(), cw ) );
+            r.SetBottom( std::min( r.GetBottom(), ch ) );
         }
 #endif
 
@@ -5021,7 +5021,7 @@ void wxGrid::DoGridDragResize(const wxPoint& position,
 
     const int lineStart = oper.GetLineStartPos(this, m_dragRowOrCol);
     oper.SetLineSize(this, m_dragRowOrCol,
-                     wxMax(linePos - lineStart,
+                     std::max(linePos - lineStart,
                            oper.GetMinimalLineSize(this, m_dragRowOrCol)));
 
     // TODO: generate RESIZING event, see #10754, if the size has changed.
@@ -5665,8 +5665,8 @@ void wxGrid::RefreshBlock(int topRow, int leftCol,
     // corner grid
     if ( topRow < m_numFrozenRows && GetColPos(leftCol) < m_numFrozenCols && m_frozenCornerGridWin )
     {
-        row = wxMin(bottomRow, m_numFrozenRows - 1);
-        col = wxMin(rightCol, m_numFrozenCols - 1);
+        row = std::min(bottomRow, m_numFrozenRows - 1);
+        col = std::min(rightCol, m_numFrozenCols - 1);
 
         wxRect rect = BlockToDeviceRect(wxGridCellCoords(topRow, leftCol),
                                         wxGridCellCoords(row, col),
@@ -5678,7 +5678,7 @@ void wxGrid::RefreshBlock(int topRow, int leftCol,
     // frozen cols grid
     if ( GetColPos(leftCol) < m_numFrozenCols && bottomRow >= m_numFrozenRows && m_frozenColGridWin )
     {
-        col = wxMin(rightCol, m_numFrozenCols - 1);
+        col = std::min(rightCol, m_numFrozenCols - 1);
 
         wxRect rect = BlockToDeviceRect(wxGridCellCoords(row, leftCol),
                                         wxGridCellCoords(bottomRow, col),
@@ -5690,7 +5690,7 @@ void wxGrid::RefreshBlock(int topRow, int leftCol,
     // frozen rows grid
     if ( topRow < m_numFrozenRows && GetColPos(rightCol) >= m_numFrozenCols && m_frozenRowGridWin )
     {
-        row = wxMin(bottomRow, m_numFrozenRows - 1);
+        row = std::min(bottomRow, m_numFrozenRows - 1);
 
         wxRect rect = BlockToDeviceRect(wxGridCellCoords(topRow, col),
                                         wxGridCellCoords(row, rightCol),
@@ -6603,7 +6603,7 @@ void wxGrid::DrawFrozenBorder(wxDC& dc, wxGridWindow *gridWindow)
 
         if ( gridWindow->GetType() & wxGridWindow::wxGridWindowFrozenRow )
         {
-            right = wxMin(right, GetColRight(m_numCols - 1));
+            right = std::min(right, GetColRight(m_numCols - 1));
 
             dc.SetPen(wxPen(m_gridFrozenBorderColour,
                             m_gridFrozenBorderPenWidth));
@@ -6612,7 +6612,7 @@ void wxGrid::DrawFrozenBorder(wxDC& dc, wxGridWindow *gridWindow)
 
         if ( gridWindow->GetType() & wxGridWindow::wxGridWindowFrozenCol )
         {
-            bottom = wxMin(bottom, GetRowBottom(m_numRows - 1));
+            bottom = std::min(bottom, GetRowBottom(m_numRows - 1));
 
             dc.SetPen(wxPen(m_gridFrozenBorderColour,
                             m_gridFrozenBorderPenWidth));
@@ -7082,8 +7082,8 @@ void wxGrid::DrawTextRectangle(wxDC& dc,
 
     wxDCClipper clip(dc, rect);
 
-    long textWidth,
-         textHeight;
+    int textWidth{};
+    int textHeight{};
 
     if ( textOrientation == wxHORIZONTAL )
         GetTextBoxSize( dc, lines, &textWidth, &textHeight );
@@ -7229,7 +7229,7 @@ void wxGrid::StringToLines( const std::string& value, std::vector<std::string>& 
 
 void wxGrid::GetTextBoxSize( const wxDC& dc,
                              const std::vector<std::string>& lines,
-                             long *width, long *height ) const
+                             int* width, int* height ) const
 {
     wxCoord w = 0;
     wxCoord h = 0;
@@ -7245,7 +7245,7 @@ void wxGrid::GetTextBoxSize( const wxDC& dc,
         else
         {
             auto lineSize = dc.GetTextExtent( line );
-            w = wxMax( w, lineSize.x );
+            w = std::max( w, lineSize.x );
             h += lineSize.y;
         }
     }
@@ -9692,7 +9692,7 @@ void wxGrid::EnableDragCell( bool enable )
 
 void wxGrid::SetDefaultRowSize( int height, bool resizeExistingRows )
 {
-    m_defaultRowHeight = wxMax( height, m_minAcceptableRowHeight );
+    m_defaultRowHeight = std::max( height, m_minAcceptableRowHeight );
 
     if ( resizeExistingRows )
     {
@@ -9774,7 +9774,7 @@ void wxGrid::SetRowSize( int row, int height )
     // As with the columns, ignore attempts to auto-size the hidden rows.
     if ( height == -1 && GetRowHeight(row) != 0 )
     {
-        long w, h;
+        int w, h;
         std::vector<std::string> lines;
         wxClientDC dc(m_rowLabelWin);
         dc.SetFont(GetLabelFont());
@@ -9782,7 +9782,7 @@ void wxGrid::SetRowSize( int row, int height )
         GetTextBoxSize( dc, lines, &w, &h );
 
         // As with the columns, don't make the row smaller than minimal height.
-        height = wxMax(h, GetRowMinimalHeight(row));
+        height = std::max(h, GetRowMinimalHeight(row));
     }
 
     DoSetRowSize(row, height);
@@ -9902,7 +9902,7 @@ void wxGrid::DoSetRowSize( int row, int height )
 void wxGrid::SetDefaultColSize( int width, bool resizeExistingCols )
 {
     // we dont allow zero default column width
-    m_defaultColWidth = wxMax( wxMax( width, m_minAcceptableColWidth ), 1 );
+    m_defaultColWidth = std::max( std::max( width, m_minAcceptableColWidth ), 1 );
 
     if ( resizeExistingCols )
     {
@@ -9941,7 +9941,7 @@ void wxGrid::SetColSize( int col, int width )
         }
         else
         {
-            long w, h;
+            int w, h;
             std::vector<std::string> lines;
             wxClientDC dc(m_colLabelWin);
             dc.SetFont(GetLabelFont());
@@ -9959,7 +9959,7 @@ void wxGrid::SetColSize( int col, int width )
         // the column could be resized to be too small by double clicking its
         // divider line (which ends up in a call to this function) even though
         // it couldn't be resized to this size by dragging it.
-        width = wxMax(width, GetColMinimalWidth(col));
+        width = std::max(width, GetColMinimalWidth(col));
     }
 
     DoSetColSize(col, width);
@@ -10363,7 +10363,7 @@ wxGrid::AutoSizeColOrRow(int colOrRow, bool setAsMin, wxGridDirection direction)
         // comment in SetColSize() for explanation of why this isn't done
         // in SetColSize().
         if ( !setAsMin )
-            extentMax = wxMax(extentMax, GetColMinimalWidth(colOrRow));
+            extentMax = std::max(extentMax, GetColMinimalWidth(colOrRow));
 
         SetColSize( colOrRow, extentMax );
         if ( ShouldRefresh() )
@@ -10392,7 +10392,7 @@ wxGrid::AutoSizeColOrRow(int colOrRow, bool setAsMin, wxGridDirection direction)
         // comment in SetColSize() for explanation of why this isn't done
         // in SetRowSize().
         if ( !setAsMin )
-            extentMax = wxMax(extentMax, GetRowMinimalHeight(colOrRow));
+            extentMax = std::max(extentMax, GetRowMinimalHeight(colOrRow));
 
         SetRowSize(colOrRow, extentMax);
         if ( ShouldRefresh() )
@@ -10446,7 +10446,7 @@ wxCoord wxGrid::CalcColOrRowLabelAreaMinSize(wxGridDirection direction)
                                   : GetColLabelValue(rowOrCol);
         StringToLines(label, lines);
 
-        long w, h;
+        int w, h;
         GetTextBoxSize(dc, lines, &w, &h);
 
         const wxCoord extent = useWidth ? w : h;
@@ -10980,10 +10980,10 @@ wxRect wxGrid::BlockToDeviceRect( const wxGridCellCoords& topLeft,
         // that is shown on screen. Therefore, we compare the Top-Left block values
         // to the Top-Left screen values, and the Bottom-Right block values to the
         // Bottom-Right screen values, choosing appropriately.
-        const int visibleTopRow = wxMax(topRow, onScreenUppermostRow);
-        const int visibleBottomRow = wxMin(bottomRow, onScreenBottommostRow);
-        const int visibleLeftCol = wxMax(leftCol, onScreenLeftmostCol);
-        const int visibleRightCol = wxMin(rightCol, onScreenRightmostCol);
+        const int visibleTopRow = std::max(topRow, onScreenUppermostRow);
+        const int visibleBottomRow = std::min(bottomRow, onScreenBottommostRow);
+        const int visibleLeftCol = std::max(leftCol, onScreenLeftmostCol);
+        const int visibleRightCol = std::min(rightCol, onScreenRightmostCol);
 
         for ( int j = visibleTopRow; j <= visibleBottomRow; j++ )
         {
@@ -11018,10 +11018,10 @@ wxRect wxGrid::BlockToDeviceRect( const wxGridCellCoords& topLeft,
     if ( right < 0 || bottom < 0 || left > client_size.x || top > client_size.y )
         return wxRect(0,0,0,0);
 
-    resultRect.SetLeft( wxMax(0, left) );
-    resultRect.SetTop( wxMax(0, top) );
-    resultRect.SetRight( wxMin(client_size.x, right) );
-    resultRect.SetBottom( wxMin(client_size.y, bottom) );
+    resultRect.SetLeft( std::max(0, left) );
+    resultRect.SetTop( std::max(0, top) );
+    resultRect.SetRight( std::min(client_size.x, right) );
+    resultRect.SetBottom( std::min(client_size.y, bottom) );
 
     return resultRect;
 }
@@ -11326,11 +11326,11 @@ wxGetContentRect(wxSize contentSize,
 {
     // Keep square aspect ratio for the checkbox, but ensure that it fits into
     // the available space, even if it's smaller than the standard size.
-    const wxCoord minSize = wxMin(cellRect.width, cellRect.height);
+    const wxCoord minSize = std::min(cellRect.width, cellRect.height);
     if ( contentSize.x >= minSize || contentSize.y >= minSize )
     {
         // It must still have positive size, however.
-        const int fittingSize = wxMax(1, minSize - 2*GRID_CELL_CHECKBOX_MARGIN);
+        const int fittingSize = std::max(1, minSize - 2*GRID_CELL_CHECKBOX_MARGIN);
 
         contentSize.x =
         contentSize.y = fittingSize;

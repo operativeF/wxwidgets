@@ -173,7 +173,7 @@ wxSize wxStaticBox::DoGetBestSize() const
         wxSize cm(GetSizer()->CalcMin());
         best = ClientToWindowSize(cm);
         // adjust for a long label if needed
-        best.x = wxMax(best.x, wBox);
+        best.x = std::max(best.x, wBox);
     }
     // otherwise the best size falls back to the label size
     else

@@ -528,7 +528,7 @@ bool wxMSWOwnerDrawnButtonBase::MSWDrawButton(WXDRAWITEMSTRUCT *item)
     const int spacing = m_win->FromDIP(3);
     const wxSize cbSize = wxRendererNative::Get().GetCheckBoxSize(m_win, flags);
 
-    const int buttonSize = wxMin(cbSize.y, m_win->GetSize().y);
+    const int buttonSize = std::min(cbSize.y, m_win->GetSize().y);
     rectButton.top = rect.top + (rect.bottom - rect.top - buttonSize) / 2;
     rectButton.bottom = rectButton.top + buttonSize;
 

@@ -275,7 +275,7 @@ void wxScrollBar::SetScrollbar( int position, int thumbSize, int range, int page
     m_adjust->upper = frange;
     m_adjust->value = fpos;
     m_adjust->step_increment = 1.0;
-    m_adjust->page_increment = (float)(wxMax(fpage,0));
+    m_adjust->page_increment = (float)(std::max(fpage,0));
     m_adjust->page_size = fthumb;
 
     gtk_signal_emit_by_name( GTK_OBJECT(m_adjust), "changed" );

@@ -228,8 +228,8 @@ void wxSashWindow::OnMouseEvent(wxMouseEvent& event)
         else
         {
             // make sure it's in m_minimumPaneSizeY..m_maximumPaneSizeY range
-            newHeight = wxMax(newHeight, m_minimumPaneSizeY);
-            newHeight = wxMin(newHeight, m_maximumPaneSizeY);
+            newHeight = std::max(newHeight, m_minimumPaneSizeY);
+            newHeight = std::min(newHeight, m_maximumPaneSizeY);
         }
 
         if ( newWidth == wxDefaultCoord )
@@ -240,8 +240,8 @@ void wxSashWindow::OnMouseEvent(wxMouseEvent& event)
         else
         {
             // make sure it's in m_minimumPaneSizeY..m_maximumPaneSizeY range
-            newWidth = wxMax(newWidth, m_minimumPaneSizeX);
-            newWidth = wxMin(newWidth, m_maximumPaneSizeX);
+            newWidth = std::max(newWidth, m_minimumPaneSizeX);
+            newWidth = std::min(newWidth, m_maximumPaneSizeX);
         }
 
         dragRect = wxRect(pos.x, pos.y, newWidth, newHeight);

@@ -1738,7 +1738,7 @@ wxCoord wxListMainWindow::GetLineHeight() const
         {
             int iw = 0, ih = 0;
             m_small_image_list->GetSize(0, iw, ih);
-            y = wxMax(y, ih);
+            y = std::max(y, ih);
         }
 
         y += EXTRA_HEIGHT;
@@ -2080,7 +2080,7 @@ void wxListMainWindow::OnPaint( wxPaintEvent &WXUNUSED(event) )
         if ( m_extendRulesAndAlternateColour )
         {
             colAlt = GetListCtrl()->GetAlternateRowColour();
-            visibleEnd = wxMax(linesPerPage, visibleTo);
+            visibleEnd = std::max(linesPerPage, visibleTo);
         }
         else
         {

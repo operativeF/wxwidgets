@@ -845,7 +845,7 @@ wxPoint wxSpinCtrl::DoGetPosition() const
     const_cast<wxSpinCtrl *>(this)->m_hWnd = hWnd;
     wxPoint xText = wxSpinButton::DoGetPosition();
 
-    return {wxMin(xBuddy.x, xText.x), xText.y};
+    return {std::min(xBuddy.x, xText.x), xText.y};
 }
 
 void wxSpinCtrl::DoScreenToClient(int *x, int *y) const

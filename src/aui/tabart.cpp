@@ -241,12 +241,12 @@ void wxAuiGenericTabArt::SetSizingInfo(const wxSize& tab_ctrl_size,
     }
 
 
-    m_fixedTabWidth = wxMax(m_fixedTabWidth, wxWindow::FromDIP(100, nullptr));
+    m_fixedTabWidth = std::max(m_fixedTabWidth, wxWindow::FromDIP(100, nullptr));
 
     if (m_fixedTabWidth > tot_width/2)
         m_fixedTabWidth = tot_width/2;
 
-    m_fixedTabWidth = wxMin(m_fixedTabWidth, wxWindow::FromDIP(220, nullptr));
+    m_fixedTabWidth = std::min(m_fixedTabWidth, wxWindow::FromDIP(220, nullptr));
 
     m_tabCtrlHeight = tab_ctrl_size.y;
 }
@@ -682,7 +682,7 @@ wxSize wxAuiGenericTabArt::GetTabSize(wxDC& dc,
     {
         // increase by bitmap plus right side bitmap padding
         tab_width += std::lround(bitmap.GetScaledWidth()) + wnd->FromDIP(3);
-        tab_height = wxMax(tab_height, std::lround(bitmap.GetScaledHeight()));
+        tab_height = std::max(static_cast<long>(tab_height), std::lround(bitmap.GetScaledHeight()));
     }
 
     // add padding
@@ -857,7 +857,7 @@ int wxAuiGenericTabArt::GetBestTabCtrlSize(wxWindow* wnd,
                               wxAUI_BUTTON_STATE_HIDDEN,
                               &x_ext);
 
-        max_y = wxMax(max_y, s.y);
+        max_y = std::max(max_y, s.y);
     }
 
     return max_y+2;
@@ -953,12 +953,12 @@ void wxAuiSimpleTabArt::SetSizingInfo(const wxSize& tab_ctrl_size,
     }
 
 
-    m_fixedTabWidth = wxMax(m_fixedTabWidth, wxWindow::FromDIP(100, nullptr));
+    m_fixedTabWidth = std::max(m_fixedTabWidth, wxWindow::FromDIP(100, nullptr));
 
     if (m_fixedTabWidth > tot_width/2)
         m_fixedTabWidth = tot_width/2;
 
-    m_fixedTabWidth = wxMin(m_fixedTabWidth, wxWindow::FromDIP(220, nullptr));
+    m_fixedTabWidth = std::min(m_fixedTabWidth, wxWindow::FromDIP(220, nullptr));
 }
 
 void wxAuiSimpleTabArt::SetColour(const wxColour& colour)

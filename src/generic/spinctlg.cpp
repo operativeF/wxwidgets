@@ -112,7 +112,7 @@ public:
         wxSize minValSize = GetSizeFromText(minVal);
         wxSize maxValSize = GetSizeFromText(maxVal);
 
-        return wxSize(wxMax(minValSize.x, maxValSize.x), wxMax(minValSize.y, maxValSize.y));
+        return wxSize(std::max(minValSize.x, maxValSize.x), std::max(minValSize.y, maxValSize.y));
     }
 
     wxSpinCtrlGenericBase* m_spin;
@@ -756,7 +756,7 @@ void wxSpinCtrlDouble::DetermineDigits(double inc)
     inc = fabs(inc);
     if ( inc > 0.0 && inc < 1.0 )
     {
-        m_digits = wxMin(SPINCTRLDBL_MAX_DIGITS, -static_cast<int>(floor(log10(inc))));
+        m_digits = std::min(SPINCTRLDBL_MAX_DIGITS, -static_cast<int>(floor(log10(inc))));
         m_format.Printf("%%0.%ulf", m_digits);
     }
 }

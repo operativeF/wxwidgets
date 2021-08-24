@@ -52,9 +52,9 @@ inline void wxGetAsIs(wxWindowBase* win, int* w, int* h)
     win->GetSize(&sw, &sh);
     win->GetBestSize(&bw, &bh);
     if (w)
-        *w = wxMax(sw, bw);
+        *w = std::max(sw, bw);
     if (h)
-        *h = wxMax(sh, bh);
+        *h = std::max(sh, bh);
 #endif
 }
 

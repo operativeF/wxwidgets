@@ -428,26 +428,23 @@ void wxWindowsPrintNativeData::InitializeDevMode(const wxString& printerName, Wi
     if ( !m_devMode )
     {
         // Use PRINTDLG as a way of creating a DEVMODE object
-        PRINTDLG pd;
-
-        memset(&pd, 0, sizeof(PRINTDLG));
-        pd.lStructSize    = sizeof(PRINTDLG);
-
-        pd.hwndOwner      = nullptr;
-        pd.hDevMode       = nullptr; // Will be created by PrintDlg
-        pd.hDevNames      = nullptr; // Ditto
-
-        pd.Flags          = PD_RETURNDEFAULT;
-        pd.nCopies        = 1;
+        PRINTDLG pd = {
+            .lStructSize = sizeof(PRINTDLG),
+            .hwndOwner   = nullptr,
+            .hDevMode    = nullptr,
+            .hDevNames   = nullptr, // Will be created by PrintDlg
+            .Flags       = PD_RETURNDEFAULT,
+            .nCopies     = 1
+        };
 
         // Fill out the DEVMODE structure
         // so we can use it as input in the 'real' PrintDlg
-        if (!PrintDlg(&pd))
+        if (!::PrintDlgW(&pd))
         {
             if ( pd.hDevMode )
-                GlobalFree(pd.hDevMode);
+                ::GlobalFree(pd.hDevMode);
             if ( pd.hDevNames )
-                GlobalFree(pd.hDevNames);
+                ::GlobalFree(pd.hDevNames);
             pd.hDevMode = nullptr;
             pd.hDevNames = nullptr;
 
@@ -462,7 +459,7 @@ void wxWindowsPrintNativeData::InitializeDevMode(const wxString& printerName, Wi
 
             // We'll create a new DEVNAMEs structure below.
             if ( pd.hDevNames )
-                GlobalFree(pd.hDevNames);
+                ::GlobalFree(pd.hDevNames);
             pd.hDevNames = nullptr;
 
             // hDevNames = pd->hDevNames;

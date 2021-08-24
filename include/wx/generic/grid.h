@@ -1636,7 +1636,7 @@ public:
 
     void GetTextBoxSize( const wxDC& dc,
                          const std::vector<std::string>& lines,
-                         long *width, long *height ) const;
+                         int* width, int* height ) const;
 
     // If bottomRight is invalid, i.e. == wxGridNoCellCoords, it defaults to
     // topLeft. If topLeft itself is invalid, the function simply returns.

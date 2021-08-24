@@ -352,8 +352,8 @@ bool wxGenericAnimationCtrl::RebuildBackingStoreUpToFrame(unsigned int frame)
     // small, then recreate it
     wxSize sz = m_animation.GetSize(),
            winsz = GetClientSize();
-    int w = wxMin(sz.x, winsz.x);
-    int h = wxMin(sz.y, winsz.y);
+    int w = std::min(sz.x, winsz.x);
+    int h = std::min(sz.y, winsz.y);
 
     if ( !m_backingStore.IsOk() ||
             m_backingStore.GetWidth() < w || m_backingStore.GetHeight() < h )

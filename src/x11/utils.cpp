@@ -345,7 +345,7 @@ wxString wxGetXEventName(XEvent& event)
         "SelectionRequest", "SelectionNotify", "ColormapNotify",  // 30-32
         "ClientMessage", "MappingNotify",                         // 33-34
         "unknown(+)"};                                            // 35
-        type = wxMin(35, type); type = wxMax(1, type);
+        type = std::min(35, type); type = std::max(1, type);
         return wxString::FromAscii(event_name[type]);
 #endif
 }

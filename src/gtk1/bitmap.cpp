@@ -427,10 +427,10 @@ wxBitmap wxBitmap::Rescale( int clipx, int clipy, int clipwidth, int clipheight,
     if (newy==M_BMPDATA->m_width && newy==M_BMPDATA->m_height)
         return *this;
 
-    int width = wxMax(newx, 1);
-    int height = wxMax(newy, 1);
-    width = wxMin(width, clipwidth);
-    height = wxMin(height, clipheight);
+    int width = std::max(newx, 1);
+    int height = std::max(newy, 1);
+    width = std::min(width, clipwidth);
+    height = std::min(height, clipheight);
 
     wxBitmap bmp;
 

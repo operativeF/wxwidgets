@@ -673,7 +673,7 @@ wxSize wxGenericCalendarCtrl::DoGetBestSize() const
     {
         const wxSize bestSizeCombo = m_comboMonth->GetBestSize();
 
-        height += wxMax(bestSizeCombo.y, m_spinYear->GetBestSize().y)
+        height += std::max(bestSizeCombo.y, m_spinYear->GetBestSize().y)
                     + VERT_MARGIN;
 
         wxCoord w2 = bestSizeCombo.x + HORZ_MARGIN + GetCharWidth()*8;
@@ -700,7 +700,7 @@ void wxGenericCalendarCtrl::DoMoveWindow(int x, int y, int width, int height)
         wxSize sizeStatic = m_staticMonth->GetSize();
         wxSize sizeSpin = m_spinYear->GetSize();
 
-        int maxHeight = wxMax(sizeSpin.y, sizeCombo.y);
+        int maxHeight = std::max(sizeSpin.y, sizeCombo.y);
         int dy = (maxHeight - sizeStatic.y) / 2;
         m_comboMonth->Move(x, y + (maxHeight - sizeCombo.y)/2);
         m_staticMonth->SetSize(x, y + dy, sizeCombo.x, -1);

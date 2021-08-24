@@ -1826,7 +1826,7 @@ public :
             const float f = float(scaleFactor);
             PointF pt(f, f);
             matrix.TransformVectors(&pt);
-            m_offset = 0.5f / wxMin(std::abs(pt.X), std::abs(pt.Y));
+            m_offset = 0.5f / std::min(std::abs(pt.X), std::abs(pt.Y));
             m_gr->TranslateTransform(m_offset, m_offset);
         }
     }
@@ -2403,7 +2403,7 @@ std::vector<double> wxGDIPlusContext::GetPartialTextExtents(std::string_view tex
 
     while( remainder > 0 )
     {
-        size_t span = wxMin( maxSpan, remainder );
+        size_t span = std::min( maxSpan, remainder );
 
         for( size_t i = 0 ; i < span ; ++i)
         {
@@ -2445,7 +2445,7 @@ bool wxGDIPlusContext::ShouldOffset() const
     double x = GetContentScaleFactor(), y = x;
     matrix.TransformDistance(&x, &y);
     // FIXME: Double equality
-    if (!(fmod(wxMin(fabs(x), fabs(y)), 2.0) == 1.0))
+    if (!(fmod(std::min(fabs(x), fabs(y)), 2.0) == 1.0))
         return false;
 
     // offset if pen width is odd integer

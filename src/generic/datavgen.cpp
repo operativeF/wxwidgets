@@ -167,7 +167,7 @@ wxTextCtrl *CreateEditorTextCtrl(wxWindow *parent, const wxRect& labelRect, cons
     // Adjust size so that it fits all content. Don't change anything if the
     // allocated space is already larger than needed and don't extend wxDVC's
     // boundaries.
-    int width = wxMin(wxMax(current, fitting), maxwidth);
+    int width = std::min(std::max(current, fitting), maxwidth);
 
     if ( width != current )
         ctrl->SetSize(wxSize(width, -1));
@@ -353,7 +353,7 @@ protected:
         wxDataViewCtrl * const owner = GetOwner();
 
         int widthContents = owner->GetBestColumnWidth(idx);
-        owner->GetColumn(idx)->SetWidth(wxMax(widthTitle, widthContents));
+        owner->GetColumn(idx)->SetWidth(std::max(widthTitle, widthContents));
         owner->OnColumnChange(idx);
 
         return true;
@@ -2110,10 +2110,10 @@ int wxDataViewMainWindow::GetDefaultRowHeight() const
     // We would like to use the same line height that Explorer uses. This is
     // different from standard ListView control since Vista.
     if ( wxGetWinVersion() >= wxWinVersion_Vista )
-        return wxMax(16, GetCharHeight()) + 6; // 16 = mini icon height
+        return std::max(16, GetCharHeight()) + 6; // 16 = mini icon height
     else
 #endif // __WXMSW__
-        return wxMax(16, GetCharHeight()) + 1; // 16 = mini icon height
+        return std::max(16, GetCharHeight()) + 1; // 16 = mini icon height
 }
 
 
@@ -2497,9 +2497,9 @@ void wxDataViewMainWindow::OnPaint( wxPaintEvent &WXUNUSED(event) )
     m_owner->CalcUnscrolledPosition( update.x, update.y, &update.x, &update.y );
 
     // compute which items needs to be redrawn
-    unsigned int item_start = GetLineAt( wxMax(0,update.y) );
+    unsigned int item_start = GetLineAt( std::max(0,update.y) );
     unsigned int item_count =
-        wxMin( (int)(  GetLineAt( wxMax(0,update.y+update.height) ) - item_start + 1),
+        std::min( (int)(  GetLineAt( std::max(0,update.y+update.height) ) - item_start + 1),
             (int)(GetRowCount( ) - item_start));
     unsigned int item_last = item_start + item_count;
 
@@ -3507,7 +3507,7 @@ unsigned int wxDataViewMainWindow::GetLastVisibleRow()
                                     &client_size.x, &client_size.y );
     unsigned int row = GetLineAt(client_size.y);
 
-    return wxMin( GetRowCount()-1, row );
+    return std::min( GetRowCount()-1, row );
 }
 
 unsigned int wxDataViewMainWindow::GetLastFullyVisibleRow()
@@ -3518,7 +3518,7 @@ unsigned int wxDataViewMainWindow::GetLastFullyVisibleRow()
     m_owner->CalcScrolledPosition(-1, bottom, nullptr, &bottom);
 
     if ( bottom > GetClientSize().y )
-        return wxMax(0, row - 1);
+        return std::max(row - 1, 0U);
     else
         return row;
 }
@@ -3791,7 +3791,7 @@ int wxDataViewMainWindow::QueryAndCacheLineHeight(unsigned int row, wxDataViewIt
             const_cast<wxDataViewRenderer*>(column->GetRenderer());
         renderer->PrepareForItem(model, item, column->GetModelColumn());
 
-        height = wxMax(height, renderer->GetSize().y);
+        height = std::max(height, renderer->GetSize().y);
     }
 
     // ... and store the height in the cache
@@ -5474,7 +5474,7 @@ void wxDataViewMainWindow::UpdateColumnSizes()
         // was explicitly given nor its minimum width (however we do need to
         // reduce it until this size if it's currently wider, so this
         // comparison needs to be strict).
-        if ( availableWidth < wxMax(lastCol->GetMinWidth(),
+        if ( availableWidth < std::max(lastCol->GetMinWidth(),
                                     lastCol->WXGetSpecifiedWidth()) )
         {
             return;

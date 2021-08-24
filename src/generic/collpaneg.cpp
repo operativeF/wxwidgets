@@ -105,7 +105,7 @@ wxSize wxGenericCollapsiblePane::DoGetBestClientSize() const
     // when expanded, we need more vertical space
     if ( IsExpanded() )
     {
-        sz.x = wxMax( sz.x, m_pPane->GetBestSize().x );
+        sz.x = std::max( sz.x, m_pPane->GetBestSize().x );
         sz.y = sz.y + GetBorder() + m_pPane->GetBestSize().y;
     }
 

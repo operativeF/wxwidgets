@@ -127,7 +127,7 @@ void wxTabControl::OnDraw(wxDC& dc, bool lastInRow)
     int rightOfView = m_view->GetViewRect().x + m_view->GetViewRect().width + 1;
 
     // Draw the horizontal bit to connect to the view rectangle
-    dc.DrawLine((wxMax((tabX + GetWidth() - m_view->GetHorizontalTabOffset()), rightOfView)), (bottomY-1),
+    dc.DrawLine((std::max((tabX + GetWidth() - m_view->GetHorizontalTabOffset()), rightOfView)), (bottomY-1),
       (tabX + GetWidth()), (bottomY-1));
 
     // Draw black line to emphasize shadow
@@ -136,7 +136,7 @@ void wxTabControl::OnDraw(wxDC& dc, bool lastInRow)
       (tabX + GetWidth() + 1), bottomY);
 
     // Draw the horizontal bit to connect to the view rectangle
-    dc.DrawLine((wxMax((tabX + GetWidth() - m_view->GetHorizontalTabOffset()), rightOfView)), (bottomY),
+    dc.DrawLine((std::max((tabX + GetWidth() - m_view->GetHorizontalTabOffset()), rightOfView)), (bottomY),
       (tabX + GetWidth() + 1), (bottomY));
   }
   else

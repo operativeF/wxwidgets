@@ -1119,13 +1119,13 @@ void wxPropertyGrid::SetExtraStyle( long exStyle )
 // returns the best acceptable minimal size
 wxSize wxPropertyGrid::DoGetBestSize() const
 {
-    int lineHeight = wxMax(FromDIP(15), m_lineHeight);
+    int lineHeight = std::max(FromDIP(15), m_lineHeight);
 
     // don't make the grid too tall (limit height to 10 items) but don't
     // make it too small neither
-    int numLines = wxMin
+    int numLines = std::min
                    (
-                    wxMax(m_pState->DoGetRoot()->GetChildCount(), 3),
+                    std::max(m_pState->DoGetRoot()->GetChildCount(), 3),
                     10
                    );
 
@@ -4545,8 +4545,8 @@ void wxPropertyGrid::OnResize( wxSizeEvent& event )
         if ( !m_doubleBuffer )
         {
             // Create double buffer bitmap to draw on, if none
-            int w = wxMax(client_size.x, 250);
-            int h = wxMax(client_size.y + dblh, 400);
+            int w = std::max(client_size.x, 250);
+            int h = std::max(client_size.y + dblh, 400);
             m_doubleBuffer = new wxBitmap;
             m_doubleBuffer->CreateScaled( w, h, wxBITMAP_SCREEN_DEPTH, scaleFactor );
         }

@@ -916,7 +916,7 @@ void wxMacCoreGraphicsPenData::Apply( wxGraphicsContext* context )
         const double f = 1 / context->GetContentScaleFactor();
         CGSize s = { f, f };
         s = CGContextConvertSizeToUserSpace(cg, s);
-        width = wxMax(fabs(s.width), fabs(s.height));
+        width = std::max(fabs(s.width), fabs(s.height));
     }
     CGContextSetLineWidth( cg, width );
     CGContextSetLineJoin( cg , m_join );
@@ -1493,7 +1493,7 @@ public:
         const wxGraphicsMatrix matrix(GetTransform());
         double x = GetContentScaleFactor(), y = x;
         matrix.TransformDistance(&x, &y);
-        if (!wxIsSameDouble(fmod(wxMin(fabs(x), fabs(y)), 2.0), 1.0))
+        if (!wxIsSameDouble(fmod(std::min(fabs(x), fabs(y)), 2.0), 1.0))
             return false;
 
         // offset if pen width is odd integer

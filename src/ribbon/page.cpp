@@ -1123,8 +1123,8 @@ wxSize wxRibbonPage::GetMinSize() const
         wxWindow* child = node->GetData();
         wxSize child_min(child->GetMinSize());
 
-        min.x = wxMax(min.x, child_min.x);
-        min.y = wxMax(min.y, child_min.y);
+        min.x = std::max(min.x, child_min.x);
+        min.y = std::max(min.y, child_min.y);
     }
 
     if(GetMajorAxis() == wxHORIZONTAL)
@@ -1167,7 +1167,7 @@ wxSize wxRibbonPage::DoGetBestSize() const
             {
                 best.IncBy(child_best.x, 0);
             }
-            best.y = wxMax(best.y, child_best.y);
+            best.y = std::max(best.y, child_best.y);
 
             ++count;
         }
@@ -1188,7 +1188,7 @@ wxSize wxRibbonPage::DoGetBestSize() const
             wxWindow* child = node->GetData();
             wxSize child_best(child->GetBestSize());
 
-            best.x = wxMax(best.x, child_best.x);
+            best.x = std::max(best.x, child_best.x);
             if(child_best.y != wxDefaultCoord)
             {
                 best.IncBy(0, child_best.y);

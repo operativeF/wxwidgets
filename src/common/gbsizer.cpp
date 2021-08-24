@@ -451,9 +451,9 @@ wxSize wxGridBagSizer::CalcMin()
             // See if this item increases the size of its row(s) or col(s)
             const wxSize size(item->CalcMin());
             for (idx=pos.GetRow(); idx <= endrow; idx++)
-                m_rowHeights[idx] = wxMax(m_rowHeights[idx], size.y / (endrow-pos.GetRow()+1));
+                m_rowHeights[idx] = std::max(m_rowHeights[idx], size.y / (endrow-pos.GetRow()+1));
             for (idx=pos.GetCol(); idx <= endcol; idx++)
-                m_colWidths[idx] = wxMax(m_colWidths[idx], size.x / (endcol-pos.GetCol()+1));
+                m_colWidths[idx] = std::max(m_colWidths[idx], size.x / (endcol-pos.GetCol()+1));
         }
         node = node->GetNext();
     }
@@ -578,7 +578,7 @@ void wxGridBagSizer::AdjustForOverflow()
             if ( item->GetPos() == pos && endrow == row )
             {
                 const int itemHeight = item->CalcMin().y;
-                rowExtra = wxMin(rowExtra, rowHeight - itemHeight);
+                rowExtra = std::min(rowExtra, rowHeight - itemHeight);
                 continue;
             }
 
@@ -594,7 +594,7 @@ void wxGridBagSizer::AdjustForOverflow()
                     itemHeight = 0;
 
                 // and check how much is left
-                rowExtra = wxMin(rowExtra, rowHeight - itemHeight);
+                rowExtra = std::min(rowExtra, rowHeight - itemHeight);
             }
         }
         if ( rowExtra && rowExtra != std::numeric_limits<int>::max() )
@@ -619,7 +619,7 @@ void wxGridBagSizer::AdjustForOverflow()
             if ( item->GetPos() == pos && endcol == col )
             {
                 const int itemWidth = item->CalcMin().x;
-                colExtra = wxMin(colExtra, colWidth - itemWidth);
+                colExtra = std::min(colExtra, colWidth - itemWidth);
                 continue;
             }
 
@@ -632,7 +632,7 @@ void wxGridBagSizer::AdjustForOverflow()
                 if ( itemWidth < 0 )
                     itemWidth = 0;
 
-                colExtra = wxMin(colExtra, colWidth - itemWidth);
+                colExtra = std::min(colExtra, colWidth - itemWidth);
             }
         }
         if ( colExtra && colExtra != std::numeric_limits<int>::max() )

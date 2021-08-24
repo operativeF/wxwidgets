@@ -489,8 +489,8 @@ void wxGridCellTextEditor::SetSize(const wxRect& rectOrig)
         extra_y *= 2;
     #endif
 
-    rect.SetLeft( wxMax(0, rect.x - extra_x) );
-    rect.SetTop( wxMax(0, rect.y - extra_y) );
+    rect.SetLeft( std::max(0, rect.x - extra_x) );
+    rect.SetTop( std::max(0, rect.y - extra_y) );
     rect.SetRight( rect.GetRight() + 2 * extra_x );
     rect.SetBottom( rect.GetBottom() + 2 * extra_y );
 #endif

@@ -1657,7 +1657,7 @@ void MyFrame::OnIndentLess(wxCommandEvent& WXUNUSED(event))
 
         if (attr.GetLeftIndent() > 0)
         {
-            attr.SetLeftIndent(wxMax(0, attr.GetLeftIndent() - 100));
+            attr.SetLeftIndent(std::max(0, attr.GetLeftIndent() - 100));
 
             m_richTextCtrl->SetStyle(range, attr);
         }

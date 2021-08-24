@@ -136,13 +136,13 @@ bool wxMacPageMarginsDialog::TransferToWindow()
   wxPoint bottomRight = m_pageSetupDialogData->GetMarginBottomRight();
   wxPoint minTopLeft = m_pageSetupDialogData->GetMinMarginTopLeft();
   wxPoint minBottomRight = m_pageSetupDialogData->GetMinMarginBottomRight();
-  m_LeftMargin->SetValue(wxString::Format(wxT("%d"), wxMax(topLeft.x, minTopLeft.x)));
+  m_LeftMargin->SetValue(wxString::Format(wxT("%d"), std::max(topLeft.x, minTopLeft.x)));
   m_LeftMargin->SetSelection(-1, -1);
-  m_TopMargin->SetValue(wxString::Format(wxT("%d"), wxMax(topLeft.y, minTopLeft.y)));
+  m_TopMargin->SetValue(wxString::Format(wxT("%d"), std::max(topLeft.y, minTopLeft.y)));
   m_TopMargin->SetSelection(-1, -1);
-  m_RightMargin->SetValue(wxString::Format(wxT("%d"), wxMax(bottomRight.x, minBottomRight.x)));
+  m_RightMargin->SetValue(wxString::Format(wxT("%d"), std::max(bottomRight.x, minBottomRight.x)));
   m_RightMargin->SetSelection(-1, -1);
-  m_BottomMargin->SetValue(wxString::Format(wxT("%d"), wxMax(bottomRight.y, minBottomRight.y)));
+  m_BottomMargin->SetValue(wxString::Format(wxT("%d"), std::max(bottomRight.y, minBottomRight.y)));
   m_BottomMargin->SetSelection(-1, -1);
   m_LeftMargin->SetFocus();
   return true;

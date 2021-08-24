@@ -614,8 +614,8 @@ wxRect AppFrame::DeterminePrintSize () {
     wxRect rect = GetRect();
     rect.x += 16;
     rect.y += 16;
-    rect.width = wxMin (rect.width, (scr.x - rect.x));
-    rect.height = wxMin (rect.height, (scr.x - rect.y));
+    rect.width = std::min (rect.width, (scr.x - rect.x));
+    rect.height = std::min (rect.height, (scr.x - rect.y));
 
     return rect;
 }

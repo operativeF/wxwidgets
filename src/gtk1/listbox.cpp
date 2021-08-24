@@ -1087,7 +1087,7 @@ wxSize wxListBox::DoGetBestSize() const
     for(unsigned int i = 0; i < GetCount(); i++) {
         wxString str(GetString(i));
         GetTextExtent(str, &wLine, NULL);
-        lbWidth = wxMax(lbWidth, wLine);
+        lbWidth = std::max(lbWidth, wLine);
     }
 
     // Add room for the scrollbar
@@ -1100,7 +1100,7 @@ wxSize wxListBox::DoGetBestSize() const
 
     // don't make the listbox too tall (limit height to around 10 items) but don't
     // make it too small neither
-    lbHeight = (cy+4) * wxMin(wxMax(GetCount(), 3), 10);
+    lbHeight = (cy+4) * std::min(std::max(GetCount(), 3), 10);
 
     return wxSize(lbWidth, lbHeight);
 }

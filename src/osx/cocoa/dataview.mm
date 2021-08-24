@@ -2329,7 +2329,7 @@ void wxCocoaDataViewControl::FitColumnWidthToContent(unsigned int pos)
     wxStopWatch timer;
 #else
     // use some hard-coded limit, that's the best we can do without timer
-    int top_part_end = wxMin(500, count);
+    int top_part_end = std::min(500, count);
 #endif // wxUSE_STOPWATCH/!wxUSE_STOPWATCH
 
     int row = 0;
@@ -2358,7 +2358,7 @@ void wxCocoaDataViewControl::FitColumnWidthToContent(unsigned int pos)
         // finally, include currently visible items in the calculation:
         const NSRange visible = [m_OutlineView rowsInRect:[m_OutlineView visibleRect]];
         const int first_visible = wxMax(visible.location, top_part_end);
-        const int last_visible = wxMin(first_visible + visible.length, bottom_part_start);
+        const int last_visible = std::min(first_visible + visible.length, bottom_part_start);
 
         for ( row = first_visible; row < last_visible; row++ )
             calculator.UpdateWithRow(row);

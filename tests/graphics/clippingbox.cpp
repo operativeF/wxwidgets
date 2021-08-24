@@ -46,12 +46,12 @@ static bool CompareImageFuzzy(const wxImage& img1, const wxImage& img2, int posT
     const int h = img1.GetHeight();
     for ( int y1 = 0; y1 < h; y1++ )
     {
-        int y2min = wxMax(y1 - posTolerance, 0);
-        int y2max = wxMin(y1 + posTolerance, h);
+        int y2min = std::max(y1 - posTolerance, 0);
+        int y2max = std::min(y1 + posTolerance, h);
         for( int x1 = 0; x1 < w; x1++ )
         {
-            int x2min = wxMax(x1 - posTolerance, 0);
-            int x2max = wxMin(x1 + posTolerance, w);
+            int x2min = std::max(x1 - posTolerance, 0);
+            int x2max = std::min(x1 + posTolerance, w);
 
             unsigned char r1 = img1.GetRed(x1, y1);
             unsigned char g1 = img1.GetGreen(x1, y1);
@@ -620,10 +620,10 @@ void ClippingBoxTestCaseBase::CheckClipRect(int x, int y, int width, int height)
         int xmin = corners[c].x-1;
         int ymax = corners[c].y+1;
         int xmax = corners[c].x+1;
-        ymin = wxMin(wxMax(ymin, 0), s_dcSize.GetHeight()-1);
-        xmin = wxMin(wxMax(xmin, 0), s_dcSize.GetWidth()-1);
-        ymax = wxMin(wxMax(ymax, 0), s_dcSize.GetHeight()-1);
-        xmax = wxMin(wxMax(xmax, 0), s_dcSize.GetWidth()-1);
+        ymin = std::min(std::max(ymin, 0), s_dcSize.GetHeight()-1);
+        xmin = std::min(std::max(xmin, 0), s_dcSize.GetWidth()-1);
+        ymax = std::min(std::max(ymax, 0), s_dcSize.GetHeight()-1);
+        xmax = std::min(std::max(xmax, 0), s_dcSize.GetWidth()-1);
 
         for( int py = ymin; py <= ymax; py++ )
             for( int px = xmin; px <= xmax; px++ )
@@ -800,26 +800,26 @@ void ClippingBoxTestCaseDCBase::InitialStateWithRotatedDC()
         x = s_dcSize.GetWidth();
         y = 0.0;
         m.TransformPoint(&x, &y);
-        x1 = wxMin(x1, x);
-        y1 = wxMin(y1, y);
-        x2 = wxMax(x2, x);
-        y2 = wxMax(y2, y);
+        x1 = std::min(x1, x);
+        y1 = std::min(y1, y);
+        x2 = std::max(x2, x);
+        y2 = std::max(y2, y);
         // Bottom-right corner
         x = s_dcSize.GetWidth();
         y = s_dcSize.GetHeight();
         m.TransformPoint(&x, &y);
-        x1 = wxMin(x1, x);
-        y1 = wxMin(y1, y);
-        x2 = wxMax(x2, x);
-        y2 = wxMax(y2, y);
+        x1 = std::min(x1, x);
+        y1 = std::min(y1, y);
+        x2 = std::max(x2, x);
+        y2 = std::max(y2, y);
         // Bottom-left corner
         x = 0.0;
         y = s_dcSize.GetHeight();
         m.TransformPoint(&x, &y);
-        x1 = wxMin(x1, x);
-        y1 = wxMin(y1, y);
-        x2 = wxMax(x2, x);
-        y2 = wxMax(y2, y);
+        x1 = std::min(x1, x);
+        y1 = std::min(y1, y);
+        x2 = std::max(x2, x);
+        y2 = std::max(y2, y);
 
         clipX = wxRound(x1);
         clipY = wxRound(y1);
@@ -1462,26 +1462,26 @@ void ClippingBoxTestCaseGCDC::InitialStateWithRotatedGCForDC()
     x = s_dcSize.GetWidth();
     y = 0.0;
     m.TransformPoint(&x, &y);
-    x1 = wxMin(x1, x);
-    y1 = wxMin(y1, y);
-    x2 = wxMax(x2, x);
-    y2 = wxMax(y2, y);
+    x1 = std::min(x1, x);
+    y1 = std::min(y1, y);
+    x2 = std::max(x2, x);
+    y2 = std::max(y2, y);
     // Bottom-right corner
     x = s_dcSize.GetWidth();
     y = s_dcSize.GetHeight();
     m.TransformPoint(&x, &y);
-    x1 = wxMin(x1, x);
-    y1 = wxMin(y1, y);
-    x2 = wxMax(x2, x);
-    y2 = wxMax(y2, y);
+    x1 = std::min(x1, x);
+    y1 = std::min(y1, y);
+    x2 = std::max(x2, x);
+    y2 = std::max(y2, y);
     // Bottom-left corner
     x = 0.0;
     y = s_dcSize.GetHeight();
     m.TransformPoint(&x, &y);
-    x1 = wxMin(x1, x);
-    y1 = wxMin(y1, y);
-    x2 = wxMax(x2, x);
-    y2 = wxMax(y2, y);
+    x1 = std::min(x1, x);
+    y1 = std::min(y1, y);
+    x2 = std::max(x2, x);
+    y2 = std::max(y2, y);
 
     clipX = wxRound(x1);
     clipY = wxRound(y1);

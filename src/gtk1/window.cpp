@@ -3974,7 +3974,7 @@ void wxWindowGTK::SetScrollbar( int orient, int pos, int thumbVisible,
         m_hAdjust->upper = frange;
         m_hAdjust->value = fpos;
         m_hAdjust->step_increment = 1.0;
-        m_hAdjust->page_increment = (float)(wxMax(fthumb,0));
+        m_hAdjust->page_increment = (float)(std::max(fthumb,0));
         m_hAdjust->page_size = fthumb;
     }
     else
@@ -3998,7 +3998,7 @@ void wxWindowGTK::SetScrollbar( int orient, int pos, int thumbVisible,
         m_vAdjust->upper = frange;
         m_vAdjust->value = fpos;
         m_vAdjust->step_increment = 1.0;
-        m_vAdjust->page_increment = (float)(wxMax(fthumb,0));
+        m_vAdjust->page_increment = (float)(std::max(fthumb,0));
         m_vAdjust->page_size = fthumb;
     }
 

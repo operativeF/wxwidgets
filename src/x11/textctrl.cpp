@@ -1712,7 +1712,7 @@ void wxTextCtrl::OnPaint( wxPaintEvent &event )
 
     dc.SetPen( *wxTRANSPARENT_PEN );
     dc.SetBrush( wxBrush( wxTHEME_COLOUR(HIGHLIGHT), wxBrushStyle::Solid ) );
-    int upper = wxMin( (int)m_lines.GetCount(), scroll_y+(size_y/m_lineHeight)+2 );
+    int upper = std::min( (int)m_lines.GetCount(), scroll_y+(size_y/m_lineHeight)+2 );
     for (int i = scroll_y; i < upper; i++)
     {
         int x = 0+2;
@@ -1775,8 +1775,8 @@ void wxTextCtrl::OnMouse( wxMouseEvent &event )
         // x /= m_charWidth;
         x = PixelToPos( y, x );
         MoveCursor(
-            wxMin( 1000, wxMax( 0, x ) ),
-            wxMin( (int)m_lines.GetCount()-1, wxMax( 0, y ) ),
+            std::min( 1000, std::max( 0, x ) ),
+            std::min( (int)m_lines.GetCount()-1, std::max( 0, y ) ),
             event.ShiftDown() || !event.LeftDown() );
     }
 }
@@ -1869,14 +1869,14 @@ void wxTextCtrl::OnChar( wxKeyEvent &event )
         case WXK_NEXT:
         {
             if (m_ignoreInput) return;
-            MoveCursor( m_cursorX, wxMin( (int)(m_lines.GetCount()-1), m_cursorY+size_y ), event.ShiftDown() );
+            MoveCursor( m_cursorX, std::min( (int)(m_lines.GetCount()-1), m_cursorY+size_y ), event.ShiftDown() );
             m_ignoreInput = true;
             return;
         }
         case WXK_PAGEUP:
         {
             if (m_ignoreInput) return;
-            MoveCursor( m_cursorX, wxMax( 0, m_cursorY-size_y ), event.ShiftDown() );
+            MoveCursor( m_cursorX, std::max( 0, m_cursorY-size_y ), event.ShiftDown() );
             m_ignoreInput = true;
             return;
         }

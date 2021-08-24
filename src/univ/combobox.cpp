@@ -181,8 +181,8 @@ wxSize wxComboListBox::GetAdjustedSize(int minWidth,
                                        int maxHeight)
 {
     wxSize bestSize = wxListBox::GetBestSize();
-    return wxSize(wxMax(bestSize.x,minWidth),
-                  wxMin(bestSize.y,maxHeight));
+    return wxSize(std::max(bestSize.x,minWidth),
+                  std::min(bestSize.y,maxHeight));
 }
 
 // ----------------------------------------------------------------------------

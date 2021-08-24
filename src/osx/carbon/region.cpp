@@ -610,7 +610,7 @@ miCreateETandAET(int count, const wxPoint * pts, EdgeTable *ET, EdgeTableEntry *
             }
             
             ET->ymax = wxMax(ET->ymax, PrevPt->y);
-            ET->ymin = wxMin(ET->ymin, PrevPt->y);
+            ET->ymin = std::min(ET->ymin, PrevPt->y);
             pETEs++;
         }
         

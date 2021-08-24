@@ -935,7 +935,7 @@ bool wxWizard::ResizeBitmap(wxBitmap& bmp)
         wxSize pageSize = m_sizerPage->GetSize();
         if (pageSize == wxSize(0,0))
             pageSize = GetPageSize();
-        int bitmapWidth = wxMax(std::lround(bmp.GetScaledWidth()), GetMinimumBitmapWidth());
+        int bitmapWidth = std::max(static_cast<int>(std::lround(bmp.GetScaledWidth())), GetMinimumBitmapWidth());
         int bitmapHeight = pageSize.y;
 
         if (!m_statbmp->GetBitmap().IsOk() || m_statbmp->GetBitmap().GetScaledHeight() != bitmapHeight)

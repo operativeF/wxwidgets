@@ -1157,7 +1157,7 @@ wxRect wxListCtrl::GetViewRect() const
         const long count = GetItemCount();
         if ( count )
         {
-            GetItemRect(wxMin(GetTopItem() + GetCountPerPage(), count - 1), rect);
+            GetItemRect(std::min(GetTopItem() + GetCountPerPage(), count - 1), rect);
 
             // extend the rectangle to start at the top (we include the column
             // headers, if any, for compatibility with the generic version)
@@ -3155,7 +3155,7 @@ WXLPARAM wxListCtrl::OnCustomDraw(WXLPARAM lParam)
 // Necessary for drawing hrules and vrules, if specified
 void wxListCtrl::OnPaint(wxPaintEvent& event)
 {
-    const int itemCount = GetItemCount();
+    const long itemCount = GetItemCount();
     const bool drawHRules = HasFlag(wxLC_HRULES);
     const bool drawVRules = HasFlag(wxLC_VRULES);
 
@@ -3186,7 +3186,7 @@ void wxListCtrl::OnPaint(wxPaintEvent& event)
     }
 
     const long top = GetTopItem();
-    const long bottom = wxMin(top + countPerPage, itemCount - 1);
+    const long bottom = std::min(top + countPerPage, itemCount - 1);
 
     if (drawHRules)
     {

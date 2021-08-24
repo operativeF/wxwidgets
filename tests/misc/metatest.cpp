@@ -50,14 +50,14 @@ TEST_CASE("ImplicitConversion")
 
 TEST_CASE("MinMax")
 {
-    // test that wxMax(1.1,1) returns float, not long int
-    float f = wxMax(1.1f, 1l);
+    // test that std::max(1.1,1) returns float, not long int
+    float f = std::max(1.1f, 1l);
     CHECK_EQ( 1.1f, f);
 
     // test that comparing signed and unsigned correctly returns unsigned: this
     // may seem counterintuitive in this case but this is consistent with the
     // standard C conversions
-    CHECK_EQ( 1, wxMin(-1, 1u) );
+    CHECK_EQ( 1, std::min(-1, 1u) );
 
     CHECK_EQ( -1., wxClip(-1.5, -1, 1) );
     CHECK_EQ( 0, wxClip(0, -1, 1) );

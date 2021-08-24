@@ -191,7 +191,7 @@ wxStreamError wxBackingFileImpl::ReadAt(wxFileOffset pos,
 
             // copy to the user's buffer
             const size_t start = size_t(pos - m_filelen);
-            size_t len = wxMin(m_buflen - start, reqestedSize - *size);
+            size_t len = std::min(m_buflen - start, reqestedSize - *size);
 
             memcpy((char*)buffer + *size, m_buf + start, len);
             *size += len;

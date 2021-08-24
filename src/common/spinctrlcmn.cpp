@@ -118,7 +118,7 @@ int wxSpinCtrlImpl::GetMaxValueLength(int minVal, int maxVal, int base)
     const int lenMax = (base == 16 ?
                        FormatAsHex(maxVal, maxVal).ToStdString() :
                        fmt::format("{:d}", maxVal)).length();
-    return wxMax(lenMin, lenMax);
+    return std::max(lenMin, lenMax);
 }
 
 wxSize wxSpinCtrlImpl::GetBestSize(const wxControl* spin,

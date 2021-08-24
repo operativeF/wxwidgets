@@ -77,9 +77,9 @@ bool DoRegionUnion(wxRegionBase& region,
                    unsigned char loB,
                    int tolerance)
 {
-    unsigned char hiR = (unsigned char)wxMin(0xFF, loR + tolerance);
-    unsigned char hiG = (unsigned char)wxMin(0xFF, loG + tolerance);
-    unsigned char hiB = (unsigned char)wxMin(0xFF, loB + tolerance);
+    unsigned char hiR = (unsigned char)std::min(0xFF, loR + tolerance);
+    unsigned char hiG = (unsigned char)std::min(0xFF, loG + tolerance);
+    unsigned char hiB = (unsigned char)std::min(0xFF, loB + tolerance);
 
     // Loop through the image row by row, pixel by pixel, building up
     // rectangles to add to the region.

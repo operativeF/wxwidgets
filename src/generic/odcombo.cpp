@@ -500,7 +500,7 @@ void wxVListBoxComboPopup::Insert( const wxString& item, int pos )
     // Need to change selection?
     if ( m_combo->GetValue() == item )
     {
-        m_value = wxMin(m_value, pos);
+        m_value = std::min(m_value, pos);
     }
     else if ( pos <= m_value )
     {

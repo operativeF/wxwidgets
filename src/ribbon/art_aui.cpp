@@ -363,12 +363,12 @@ int wxRibbonAUIArtProvider::GetTabCtrlHeight(
             const wxRibbonPageTabInfo& info = pages.Item(i);
             if(info.page->GetIcon().IsOk())
             {
-                icon_height = wxMax(icon_height, info.page->GetIcon().GetScaledHeight());
+                icon_height = std::max(icon_height, info.page->GetIcon().GetScaledHeight());
             }
         }
     }
 
-    return wxMax(text_height, icon_height) + 10;
+    return std::max(text_height, icon_height) + 10;
 }
 
 void wxRibbonAUIArtProvider::DrawTab(wxDC& dc,
@@ -532,7 +532,7 @@ void wxRibbonAUIArtProvider::GetBarTabWidth(
     {
         dc.SetFont(m_tab_active_label_font);
         width += dc.GetTextExtent(label).x;
-        min += wxMin(30, width); // enough for a few chars
+        min += std::min(30, width); // enough for a few chars
         if(bitmap.IsOk())
         {
             // gap between label and bitmap

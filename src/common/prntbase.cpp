@@ -629,7 +629,7 @@ void wxPrintout::FitThisSizeToPaper(const wxSize& imageSize)
     double scaleX = (double(paperRect.width)  * printout_size.x) / (double(pw) * imageSize.x);
     double scaleY = (double(paperRect.height) * printout_size.y) / (double(ph) * imageSize.y);
 
-    double actualScale = wxMin(scaleX, scaleY);
+    double actualScale = std::min(scaleX, scaleY);
 
     m_printoutDC->SetUserScale(actualScale);
     m_printoutDC->SetDeviceOrigin({0, 0});
@@ -650,7 +650,7 @@ void wxPrintout::FitThisSizeToPage(const wxSize& imageSize)
     double scaleX = double(printout_size.x) / imageSize.x;
     double scaleY = double(printout_size.y) / imageSize.y;
 
-    double actualScale = wxMin(scaleX, scaleY);
+    double actualScale = std::min(scaleX, scaleY);
 
     m_printoutDC->SetUserScale(actualScale);
     m_printoutDC->SetDeviceOrigin({0, 0});
@@ -683,7 +683,7 @@ void wxPrintout::FitThisSizeToPageMargins(const wxSize& imageSize, const wxPageS
     double scaleX = (double(pageMarginsRect.width)  * printout_size.x) / (double(pw) * imageSize.x);
     double scaleY = (double(pageMarginsRect.height) * printout_size.y) / (double(ph) * imageSize.y);
 
-    double actualScale = wxMin(scaleX, scaleY);
+    double actualScale = std::min(scaleX, scaleY);
 
     m_printoutDC->SetUserScale(actualScale);
     m_printoutDC->SetDeviceOrigin({0, 0});

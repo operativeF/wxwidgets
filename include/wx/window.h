@@ -492,7 +492,7 @@ public:
         const wxSize  client( GetClientSize() );
         const wxSize  best( GetBestSize() );
 
-        return wxSize( wxMax( client.x, best.x ), wxMax( client.y, best.y ) );
+        return wxSize( std::max( client.x, best.x ), std::max( client.y, best.y ) );
     }
 
     // Return the magnification of the content of this window for the platforms

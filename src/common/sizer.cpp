@@ -1518,8 +1518,8 @@ wxSize wxGridSizer::CalcMin()
         wxSizerItem     *item = node->GetData();
         wxSize           sz( item->CalcMin() );
 
-        w = wxMax( w, sz.x );
-        h = wxMax( h, sz.y );
+        w = std::max( w, sz.x );
+        h = std::max( h, sz.y );
 
         node = node->GetNext();
     }
@@ -1546,8 +1546,8 @@ wxSize wxGridSizer::CalcMin()
             wxSizerItem     *item = node->GetData();
             wxSize           sz( item->GetMinSizeWithBorder() );
 
-            w = wxMax( w, sz.x );
-            h = wxMax( h, sz.y );
+            w = std::max( w, sz.x );
+            h = std::max( h, sz.y );
 
             node = node->GetNext();
         }

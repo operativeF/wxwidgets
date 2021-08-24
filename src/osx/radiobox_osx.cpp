@@ -400,7 +400,7 @@ void wxRadioBox::DoSetSize(int x, int y, int width, int height, int sizeFlags)
     {
         GetTextExtent(GetString(i), &eachWidth[i], &eachHeight[i] );
         eachWidth[i] = eachWidth[i] + RADIO_SIZE;
-        eachHeight[i] = wxMax( eachHeight[i], bestSizeRadio.y );
+        eachHeight[i] = std::max( eachHeight[i], bestSizeRadio.y );
 
         if (maxWidth < eachWidth[i])
             maxWidth = eachWidth[i];
@@ -511,7 +511,7 @@ wxSize wxRadioBox::DoGetBestSize() const
     {
         GetTextExtent(GetString(i), &eachWidth, &eachHeight, NULL, NULL, &font );
         eachWidth  = (eachWidth + RADIO_SIZE);
-        eachHeight = wxMax(eachHeight, bestSizeRadio.y );
+        eachHeight = std::max(eachHeight, bestSizeRadio.y );
         if (maxWidth < eachWidth)
             maxWidth = eachWidth;
         if (maxHeight < eachHeight)

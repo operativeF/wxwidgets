@@ -701,7 +701,7 @@ int wxPrintfConvSpec<CharType>::Process(CharType *buf, size_t lenMax, wxPrintfAr
 
                 // at this point we are sure that m_nMaxWidth is positive or
                 // null (see top of wxPrintfConvSpec::LoadArg)
-                int len = wxMin((unsigned int)m_nMaxWidth, wxStrlen(strbuf));
+                int len = std::min((unsigned int)m_nMaxWidth, wxStrlen(strbuf));
 
                 int i;
 
@@ -711,7 +711,7 @@ int wxPrintfConvSpec<CharType>::Process(CharType *buf, size_t lenMax, wxPrintfAr
                         APPEND_CH(wxT(' '));
                 }
 
-                len = wxMin((unsigned int)len, lenMax-lenCur);
+                len = std::min((unsigned int)len, lenMax-lenCur);
                 wxStrncpy(buf+lenCur, strbuf, len);
                 lenCur += len;
 

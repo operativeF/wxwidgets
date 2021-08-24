@@ -1809,15 +1809,15 @@ bool wxRichTextCompositeObject::GetRangeSize(const wxRichTextRange& range, wxSiz
                     childDescent = child->GetDescent();
                     childSize = child->GetCachedSize();
 
-                    sz.y = wxMax(sz.y, childSize.y);
+                    sz.y = std::max(sz.y, childSize.y);
                     sz.x += childSize.x;
-                    descent = wxMax(descent, childDescent);
+                    descent = std::max(descent, childDescent);
                 }
                 else if (child->GetRangeSize(rangeToUse, childSize, childDescent, dc, context, flags, wxPoint(position.x + sz.x, position.y), parentSize, p))
                 {
-                    sz.y = wxMax(sz.y, childSize.y);
+                    sz.y = std::max(sz.y, childSize.y);
                     sz.x += childSize.x;
-                    descent = wxMax(descent, childDescent);
+                    descent = std::max(descent, childDescent);
 
                     if ((flags & wxRICHTEXT_CACHE_SIZE) && (rangeToUse == child->GetRange() || child->IsTopLevel()))
                     {
@@ -2247,9 +2247,9 @@ bool wxRichTextParagraphLayoutBox::Layout(wxDC& dc, wxRichTextDrawingContext& co
         wxRichTextParagraph* child = wxDynamicCast(n->GetData(), wxRichTextParagraph);
         if (child)
         {
-            maxWidth = wxMax(maxWidth, child->GetCachedSize().x);
-            maxMinWidth = wxMax(maxMinWidth, child->GetMinSize().x);
-            maxMaxWidth = wxMax(maxMaxWidth, child->GetMaxSize().x);
+            maxWidth = std::max(maxWidth, child->GetCachedSize().x);
+            maxMinWidth = std::max(maxMinWidth, child->GetMinSize().x);
+            maxMaxWidth = std::max(maxMaxWidth, child->GetMaxSize().x);
         }
         n = n->GetNext();
     }
@@ -2277,9 +2277,9 @@ bool wxRichTextParagraphLayoutBox::Layout(wxDC& dc, wxRichTextDrawingContext& co
 
                 // Layout must set the cached size
                 availableSpace.y += child->GetCachedSize().y;
-                maxWidth = wxMax(maxWidth, child->GetCachedSize().x);
-                maxMinWidth = wxMax(maxMinWidth, child->GetMinSize().x);
-                maxMaxWidth = wxMax(maxMaxWidth, child->GetMaxSize().x);
+                maxWidth = std::max(maxWidth, child->GetCachedSize().x);
+                maxMinWidth = std::max(maxMinWidth, child->GetMinSize().x);
+                maxMaxWidth = std::max(maxMaxWidth, child->GetMaxSize().x);
 
                 // If we're just formatting the visible part of the buffer,
                 // and we're now past the bottom of the window, start quick layout.
@@ -2310,9 +2310,9 @@ bool wxRichTextParagraphLayoutBox::Layout(wxDC& dc, wxRichTextDrawingContext& co
                                 attr, child->GetAttributes(), availableSpace, rect, style&~wxRICHTEXT_LAYOUT_SPECIFIED_RECT);
 
                             availableSpace.y += child->GetCachedSize().y;
-                            maxWidth = wxMax(maxWidth, child->GetCachedSize().x);
-                            maxMinWidth = wxMax(maxMinWidth, child->GetMinSize().x);
-                            maxMaxWidth = wxMax(maxMaxWidth, child->GetMaxSize().x);
+                            maxWidth = std::max(maxWidth, child->GetCachedSize().x);
+                            maxMinWidth = std::max(maxMinWidth, child->GetMinSize().x);
+                            maxMaxWidth = std::max(maxMaxWidth, child->GetMaxSize().x);
 
                             int newImpactedByFloats = child->GetImpactedByFloatingObjects();
 
@@ -2357,9 +2357,9 @@ bool wxRichTextParagraphLayoutBox::Layout(wxDC& dc, wxRichTextDrawingContext& co
                         }
 
                         availableSpace.y += nodeChild->GetCachedSize().y;
-                        maxWidth = wxMax(maxWidth, nodeChild->GetCachedSize().x);
-                        maxMinWidth = wxMax(maxMinWidth, nodeChild->GetMinSize().x);
-                        maxMaxWidth = wxMax(maxMaxWidth, nodeChild->GetMaxSize().x);
+                        maxWidth = std::max(maxWidth, nodeChild->GetCachedSize().x);
+                        maxMinWidth = std::max(maxMinWidth, nodeChild->GetMinSize().x);
+                        maxMaxWidth = std::max(maxMaxWidth, nodeChild->GetMaxSize().x);
                     }
 
                     node = node->GetNext();
@@ -2399,8 +2399,8 @@ bool wxRichTextParagraphLayoutBox::Layout(wxDC& dc, wxRichTextDrawingContext& co
 
         // Convert external to content rect
         w = w - leftMargin - rightMargin;
-        maxWidth = wxMax(maxWidth, w);
-        maxMaxWidth = wxMax(maxMaxWidth, w);
+        maxWidth = std::max(maxWidth, w);
+        maxMaxWidth = std::max(maxMaxWidth, w);
     }
     else
     {
@@ -2416,7 +2416,7 @@ bool wxRichTextParagraphLayoutBox::Layout(wxDC& dc, wxRichTextDrawingContext& co
 
         // Convert external to content rect
         h = h - topMargin - bottomMargin;
-        maxHeight = wxMax(maxHeight, h);
+        maxHeight = std::max(maxHeight, h);
     }
 
     // We need to add back the margins etc.
@@ -2543,9 +2543,9 @@ bool wxRichTextParagraphLayoutBox::GetRangeSize(const wxRichTextRange& range, wx
         int childDescent = 0;
         child->GetRangeSize(rangeToFind, childSize, childDescent, dc, context, flags, position, parentSize);
 
-        descent = wxMax(childDescent, descent);
+        descent = std::max(childDescent, descent);
 
-        sz.x = wxMax(sz.x, childSize.x);
+        sz.x = std::max(sz.x, childSize.x);
         sz.y += childSize.y;
 
         if (node == endPara)
@@ -5192,23 +5192,23 @@ bool wxRichTextParagraph::Layout(wxDC& dc, wxRichTextDrawingContext& context, co
             // space is until we know the exact line height.
             if (childDescent == 0)
             {
-                lineHeight = wxMax(lineHeight, childSize.y);
+                lineHeight = std::max(lineHeight, childSize.y);
                 lineDescent = maxDescent;
                 lineAscent = maxAscent;
             }
             else
             {
-                lineDescent = wxMax(childDescent, maxDescent);
-                lineAscent = wxMax(childSize.y-childDescent, maxAscent);
+                lineDescent = std::max(childDescent, maxDescent);
+                lineAscent = std::max(childSize.y-childDescent, maxAscent);
             }
-            lineHeight = wxMax(lineHeight, (lineDescent + lineAscent));
+            lineHeight = std::max(lineHeight, (lineDescent + lineAscent));
 
             if (wxRichTextBuffer::GetFloatingLayoutMode() && collector)
             {
                 // Adjust availableRect to the space that is available when taking floating objects into account.
                 wxRect floatAvailableRect = collector->GetAvailableRect(rect.y + currentPosition.y, rect.y + currentPosition.y + lineHeight);
-                int x1 = wxMax(availableRect.x, (floatAvailableRect.x + startOffset));
-                int x2 = wxMin(availableRect.GetRight(), (floatAvailableRect.GetRight() - rightIndent));
+                int x1 = std::max(availableRect.x, (floatAvailableRect.x + startOffset));
+                int x2 = std::min(availableRect.GetRight(), (floatAvailableRect.GetRight() - rightIndent));
                 oldAvailableRect = availableRect;
                 availableRect.x = x1;
                 availableRect.width = x2 - x1 + 1;
@@ -5289,11 +5289,11 @@ bool wxRichTextParagraph::Layout(wxDC& dc, wxRichTextDrawingContext& context, co
 
             // FindWrapPosition can still return a value that will put us in an endless wrapping loop
             if (wrapPosition <= lastCompletedEndPos)
-                wrapPosition = wxMax(lastCompletedEndPos+1,child->GetRange().GetEnd());
+                wrapPosition = std::max(lastCompletedEndPos+1,child->GetRange().GetEnd());
 
             // Line end position shouldn't be the same as the end, or greater.
             if (wrapPosition >= GetRange().GetEnd())
-                wrapPosition = wxMax(0, GetRange().GetEnd()-1);
+                wrapPosition = std::max(0L, GetRange().GetEnd()-1);
 
             // wxLogDebug(wxT("Split at %ld"), wrapPosition);
 
@@ -5352,7 +5352,7 @@ bool wxRichTextParagraph::Layout(wxDC& dc, wxRichTextDrawingContext& context, co
             currentPosition.y += lineSpacing;
             maxDescent = 0;
             maxAscent = 0;
-            maxWidth = wxMax(maxWidth, currentWidth+currentPosition.x);
+            maxWidth = std::max(maxWidth, currentWidth+currentPosition.x);
             currentWidth = 0;
 
             lineCount ++;
@@ -5389,17 +5389,17 @@ bool wxRichTextParagraph::Layout(wxDC& dc, wxRichTextDrawingContext& context, co
             {
                 // An object with a zero descend value wants to take up the whole
                 // height regardless of baseline
-                lineHeight = wxMax(lineHeight, childSize.y);
+                lineHeight = std::max(lineHeight, childSize.y);
             }
             else
             {
-                maxDescent = wxMax(childDescent, maxDescent);
-                maxAscent = wxMax(childSize.y-childDescent, maxAscent);
+                maxDescent = std::max(childDescent, maxDescent);
+                maxAscent = std::max(childSize.y-childDescent, maxAscent);
             }
 
-            lineHeight = wxMax(lineHeight, (maxDescent + maxAscent));
+            lineHeight = std::max(lineHeight, (maxDescent + maxAscent));
 
-            maxWidth = wxMax(maxWidth, currentWidth+currentPosition.x);
+            maxWidth = std::max(maxWidth, currentWidth+currentPosition.x);
             lastEndPos = child->GetRange().GetEnd();
 
             node = node->GetNext();
@@ -5421,8 +5421,8 @@ bool wxRichTextParagraph::Layout(wxDC& dc, wxRichTextDrawingContext& context, co
         {
             // Adjust availableRect to the space that is available when taking floating objects into account.
             wxRect floatAvailableRect = collector->GetAvailableRect(rect.y + currentPosition.y, rect.y + currentPosition.y + lineHeight);
-            int x1 = wxMax(availableRect.x, (floatAvailableRect.x + startOffset));
-            int x2 = wxMin(availableRect.GetRight(), (floatAvailableRect.GetRight() - rightIndent));
+            int x1 = std::max(availableRect.x, (floatAvailableRect.x + startOffset));
+            int x2 = std::min(availableRect.GetRight(), (floatAvailableRect.GetRight() - rightIndent));
             availableRect.x = x1;
             availableRect.width = x2 - x1 + 1;
         }
@@ -5477,9 +5477,9 @@ bool wxRichTextParagraph::Layout(wxDC& dc, wxRichTextDrawingContext& context, co
     // this size. TODO: take into account line breaks.
     {
         wxRect marginRect, borderRect, contentRect, paddingRect, outlineRect;
-        contentRect = wxRect(wxPoint(0, 0), wxSize(paraSize.x + wxMax(leftIndent, leftIndent + leftSubIndent) + rightIndent, currentPosition.y + spaceAfterPara));
+        contentRect = wxRect(wxPoint(0, 0), wxSize(paraSize.x + std::max(leftIndent, leftIndent + leftSubIndent) + rightIndent, currentPosition.y + spaceAfterPara));
         GetBoxRects(dc, buffer, attr, marginRect, borderRect, contentRect, paddingRect, outlineRect);
-        SetMaxSize(wxSize(wxMax(GetCachedSize().x, marginRect.GetSize().x), wxMax(GetCachedSize().y, marginRect.y)));
+        SetMaxSize(wxSize(std::max(GetCachedSize().x, marginRect.GetSize().x), std::max(GetCachedSize().y, marginRect.y)));
     }
 
     // Find the greatest minimum size. Currently we only look at non-text objects,
@@ -5508,7 +5508,7 @@ bool wxRichTextParagraph::Layout(wxDC& dc, wxRichTextDrawingContext& context, co
             wxFont font(buffer->GetFontTable().FindFont(attr));
             wxCheckSetFont(dc, font);
             int charWidth = dc.GetCharWidth();
-            minWidth = wxMax(charWidth, minWidth);
+            minWidth = std::max(charWidth, minWidth);
         }
 
         wxRect marginRect, borderRect, contentRect, paddingRect, outlineRect;
@@ -5744,17 +5744,17 @@ bool wxRichTextParagraph::GetRangeSize(const wxRichTextRange& range, wxSize& siz
 
                         if (childDescent == 0)
                         {
-                            maxLineHeight = wxMax(maxLineHeight, childSize.y);
+                            maxLineHeight = std::max(maxLineHeight, childSize.y);
                         }
                         else
                         {
-                            maxDescent = wxMax(maxDescent, childDescent);
-                            maxAscent = wxMax(maxAscent, (childSize.y - childDescent));
+                            maxDescent = std::max(maxDescent, childDescent);
+                            maxAscent = std::max(maxAscent, (childSize.y - childDescent));
                         }
 
-                        maxLineHeight = wxMax(maxLineHeight, (maxAscent + maxDescent));
+                        maxLineHeight = std::max(maxLineHeight, (maxAscent + maxDescent));
 
-                        sz.y = wxMax(sz.y, maxLineHeight);
+                        sz.y = std::max(sz.y, maxLineHeight);
                         sz.x += childSize.x;
                         descent = maxDescent;
                     }
@@ -5765,17 +5765,17 @@ bool wxRichTextParagraph::GetRangeSize(const wxRichTextRange& range, wxSize& siz
 
                         if (childDescent == 0)
                         {
-                            maxLineHeight = wxMax(maxLineHeight, childSize.y);
+                            maxLineHeight = std::max(maxLineHeight, childSize.y);
                         }
                         else
                         {
-                            maxDescent = wxMax(maxDescent, childDescent);
-                            maxAscent = wxMax(maxAscent, (childSize.y - childDescent));
+                            maxDescent = std::max(maxDescent, childDescent);
+                            maxAscent = std::max(maxAscent, (childSize.y - childDescent));
                         }
 
-                        maxLineHeight = wxMax(maxLineHeight, (maxAscent + maxDescent));
+                        maxLineHeight = std::max(maxLineHeight, (maxAscent + maxDescent));
 
-                        sz.y = wxMax(sz.y, maxLineHeight);
+                        sz.y = std::max(sz.y, maxLineHeight);
                         sz.x += childSize.x;
                         descent = maxDescent;
 
@@ -5804,17 +5804,17 @@ bool wxRichTextParagraph::GetRangeSize(const wxRichTextRange& range, wxSize& siz
                     {
                         if (childDescent == 0)
                         {
-                            maxLineHeight = wxMax(maxLineHeight, childSize.y);
+                            maxLineHeight = std::max(maxLineHeight, childSize.y);
                         }
                         else
                         {
-                            maxDescent = wxMax(maxDescent, childDescent);
-                            maxAscent = wxMax(maxAscent, (childSize.y - childDescent));
+                            maxDescent = std::max(maxDescent, childDescent);
+                            maxAscent = std::max(maxAscent, (childSize.y - childDescent));
                         }
 
-                        maxLineHeight = wxMax(maxLineHeight, (maxAscent + maxDescent));
+                        maxLineHeight = std::max(maxLineHeight, (maxAscent + maxDescent));
 
-                        sz.y = wxMax(sz.y, maxLineHeight);
+                        sz.y = std::max(sz.y, maxLineHeight);
                         sz.x += childSize.x;
                         descent = maxDescent;
 
@@ -5894,14 +5894,14 @@ bool wxRichTextParagraph::GetRangeSize(const wxRichTextRange& range, wxSize& siz
                                 // Assume that if descent is zero, this child can occupy the full line height
                                 // and does not need space for the line's maximum descent. So we influence
                                 // the overall max line height only.
-                                maxLineHeight = wxMax(maxLineHeight, childSize.y);
+                                maxLineHeight = std::max(maxLineHeight, childSize.y);
                             }
                             else
                             {
-                                maxAscent = wxMax(maxAscent, (childSize.y - childDescent));
-                                maxDescent = wxMax(maxAscent, childDescent);
+                                maxAscent = std::max(maxAscent, (childSize.y - childDescent));
+                                maxDescent = std::max(maxAscent, childDescent);
                             }
-                            maxLineHeight = wxMax(maxLineHeight, (maxAscent + maxDescent));
+                            maxLineHeight = std::max(maxLineHeight, (maxAscent + maxDescent));
                             maxLineWidth += childSize.x;
                         }
                     }
@@ -5909,11 +5909,11 @@ bool wxRichTextParagraph::GetRangeSize(const wxRichTextRange& range, wxSize& siz
                     node2 = node2->GetNext();
                 }
 
-                descent = wxMax(descent, maxDescent);
+                descent = std::max(descent, maxDescent);
 
                 // Increase size by a line (TODO: paragraph spacing)
                 sz.y += maxLineHeight;
-                sz.x = wxMax(sz.x, maxLineWidth);
+                sz.x = std::max(sz.x, maxLineWidth);
             }
             node = node->GetNext();
         }
@@ -6424,13 +6424,13 @@ bool wxRichTextParagraph::FindWrapPosition(const wxRichTextRange& range, wxDC& d
         int newLinePos = plainText.Find(wxRichTextLineBreakChar);
         if (newLinePos != wxNOT_FOUND)
         {
-            breakPosition = wxMax(0, range.GetStart() + newLinePos);
+            breakPosition = std::max(0L, range.GetStart() + newLinePos);
         }
         else
         {
             int spacePos = plainText.Find(wxT(' '), true);
             int tabPos = plainText.Find(wxT('\t'), true);
-            int pos = wxMax(spacePos, tabPos);
+            int pos = std::max(spacePos, tabPos);
             if (pos != wxNOT_FOUND)
             {
                 int positionsFromEndOfString = plainText.length() - pos - 1;
@@ -6936,8 +6936,8 @@ bool wxRichTextPlainText::Draw(wxDC& dc, wxRichTextDrawingContext& context, cons
         // 2. Selected chunk, if any.
         if (selectionRange.GetEnd() >= range.GetStart())
         {
-            int s1 = wxMax(selectionRange.GetStart(), range.GetStart());
-            int s2 = wxMin(selectionRange.GetEnd(), range.GetEnd());
+            int s1 = std::max(selectionRange.GetStart(), range.GetStart());
+            int s2 = std::min(selectionRange.GetEnd(), range.GetEnd());
 
             int fragmentLen = s2 - s1 + 1;
             if (fragmentLen < 0)
@@ -6970,7 +6970,7 @@ bool wxRichTextPlainText::Draw(wxDC& dc, wxRichTextDrawingContext& context, cons
         // 3. Remaining unselected chunk, if any
         if (selectionRange.GetEnd() < range.GetEnd())
         {
-            int s2 = wxMin(selectionRange.GetEnd()+1, range.GetEnd());
+            int s2 = std::min(selectionRange.GetEnd()+1, range.GetEnd());
             int r2 = range.GetEnd();
 
             int fragmentLen = r2 - s2 + 1;
@@ -9557,7 +9557,7 @@ bool wxRichTextFieldTypeStandard::Draw(wxRichTextField* obj, wxDC& dc, wxRichTex
             borderSize = 0;
 
         // objectRect is the area where the content is drawn, after margins around it have been taken into account
-        wxRect objectRect = wxRect(wxPoint(rect.x + m_horizontalMargin, rect.y + wxMax(0, rect.height - descent - obj->GetCachedSize().y)),
+        wxRect objectRect = wxRect(wxPoint(rect.x + m_horizontalMargin, rect.y + std::max(0, rect.height - descent - obj->GetCachedSize().y)),
             wxSize(obj->GetCachedSize().x - 2*m_horizontalMargin - borderSize, obj->GetCachedSize().y));
 
         // clientArea is where the text is actually written
@@ -10151,7 +10151,7 @@ void ExpandCellsWithRowspan(const wxRichTextTable* table, int paddingY, int& bot
                 int span = cell->GetRowSpan();
                 if (span > 1)
                 {
-                    span = wxMin(span, rowCount-row); // Don't try to span below the table!
+                    span = std::min(span, rowCount-row); // Don't try to span below the table!
                     if (span < 2)
                         continue;
 
@@ -10344,7 +10344,7 @@ void wxRichTextTable::getInitialLayoutAndWidths(
                             absoluteCellWidth = cell->GetMinSize().x;
                     }
                     else
-                        maxUnspecifiedColumnWidths[i] = wxMax(cell->GetMaxSize().x, maxUnspecifiedColumnWidths[i]);
+                        maxUnspecifiedColumnWidths[i] = std::max(cell->GetMaxSize().x, maxUnspecifiedColumnWidths[i]);
 
                     if (absoluteCellWidth != -1)
                     {
@@ -10410,14 +10410,14 @@ void wxRichTextTable::adjustColumns(const std::vector<int>& minColWidths,
         {
             if (widthLeft < 0 || stretchToFitTableWidth)
             {
-                int minColWidth = wxMax(minColWidths[i], minColWidthsNoWrap[i]);
+                int minColWidth = std::max(minColWidths[i], minColWidthsNoWrap[i]);
 
                 // Don't use a value for unspecified widths if we have insufficient space,
                 // unless it's a nowrap cell which is likely to be small.
                 // Actually this code is useless because if minColWidthsNoWrap exists,
                 // it'll be the same value as maxUnspecifiedColumnWidths.
                 if (!relaxConstraints)
-                    minColWidth = wxMax(minColWidth, maxUnspecifiedColumnWidths[i]);
+                    minColWidth = std::max(minColWidth, maxUnspecifiedColumnWidths[i]);
 
                 if (minColWidth > 0 && !shareEqually)
                     colWidths[i] = minColWidth;
@@ -10435,8 +10435,8 @@ void wxRichTextTable::adjustColumns(const std::vector<int>& minColWidths,
             {
                 // We're not stretching or shrinking, so calculate the column width
                 // consistent with how we calculated the remaining table width previously.
-                int minColWidth = wxMax(minColWidths[i], minColWidthsNoWrap[i]);
-                minColWidth = wxMax(minColWidth, maxUnspecifiedColumnWidths[i]);
+                int minColWidth = std::max(minColWidths[i], minColWidthsNoWrap[i]);
+                minColWidth = std::max(minColWidth, maxUnspecifiedColumnWidths[i]);
                 colWidths[i] = minColWidth;
             }
         }
@@ -10461,7 +10461,7 @@ void wxRichTextTable::completeSpanningWidth(
             int stretchColCount = 0;
             for (int k = i; k < (i + spans); k++)
             {
-                int minColWidth = wxMax(minColWidths[k], minColWidthsNoWrap[k]);
+                int minColWidth = std::max(minColWidths[k], minColWidthsNoWrap[k]);
 
                 if (colWidths[k] > 0) // absolute or proportional width has been specified
                     spanningWidthLeft -= colWidths[k];
@@ -10487,7 +10487,7 @@ void wxRichTextTable::completeSpanningWidth(
             {
                 for (int k = i; k < (i + spans); k++)
                 {
-                    int minColWidth = wxMax(minColWidths[k], minColWidthsNoWrap[k]);
+                    int minColWidth = std::max(minColWidths[k], minColWidthsNoWrap[k]);
                     if (colWidths[k] <= 0) // absolute or proportional width has not been specified
                     {
                         int newWidth = colShare;
@@ -10541,7 +10541,7 @@ bool wxRichTextTable::Layout(wxDC& dc, wxRichTextDrawingContext& context, const 
         stretchToFitTableWidth = true;
 
         // Shouldn't be able to exceed the size passed to this function
-        tableWidth = wxMin(rect.width, tableWidth);
+        tableWidth = std::min(rect.width, tableWidth);
     }
 
     // Get internal padding
@@ -10673,7 +10673,7 @@ bool wxRichTextTable::Layout(wxDC& dc, wxRichTextDrawingContext& context, const 
                 int colSpan = cell->GetColSpan();
                 if (colSpan > 1)
                 {
-                    int spans = wxMin(colSpan, m_colCount - i);
+                    int spans = std::min(colSpan, m_colCount - i);
                     int cellWidth = 0;
                     if (spans > 0)
                     {
@@ -10735,13 +10735,13 @@ bool wxRichTextTable::Layout(wxDC& dc, wxRichTextDrawingContext& context, const 
                 widthLeft -= colWidths[i];
             else
             {
-                int minColWidth = wxMax(minColWidths[i], minColWidthsNoWrap[i]);
+                int minColWidth = std::max(minColWidths[i], minColWidthsNoWrap[i]);
 
                 // If we're at phase 2, it means we had insufficient space, so
                 // this time, don't take maxUnspecifiedColumnWidths into account
                 // since we will simply apportion the remaining space.
                 if (phase == 0)
-                    minColWidth = wxMax(minColWidth, maxUnspecifiedColumnWidths[i]);
+                    minColWidth = std::max(minColWidth, maxUnspecifiedColumnWidths[i]);
                 if (minColWidth > 0)
                     widthLeft -= minColWidth;
 
@@ -10776,7 +10776,7 @@ bool wxRichTextTable::Layout(wxDC& dc, wxRichTextDrawingContext& context, const 
         {
             int w = colWidths[i];
             if (w == 0)
-                w = wxMax(minColWidths[i], minColWidthsNoWrap[i]);
+                w = std::max(minColWidths[i], minColWidthsNoWrap[i]);
             if ((w + colShare) < minColWidths[i])
             {
                 stretchColCount = 0;
@@ -10860,7 +10860,7 @@ bool wxRichTextTable::Layout(wxDC& dc, wxRichTextDrawingContext& context, const 
                     {
                         // Calculate the size of this spanning cell from its constituent columns
                         int xx = 0;
-                        int spans = wxMin(colSpan, m_colCount - i);
+                        int spans = std::min(colSpan, m_colCount - i);
                         for (int k = i; k < (i+spans); k++)
                         {
                             if (k != i)
@@ -10892,7 +10892,7 @@ bool wxRichTextTable::Layout(wxDC& dc, wxRichTextDrawingContext& context, const 
             }
         }
 
-        maxCellHeight = wxMax(maxCellHeight, maxSpecifiedCellHeight);
+        maxCellHeight = std::max(maxCellHeight, maxSpecifiedCellHeight);
 
         for (int i = 0; i < m_colCount; i++)
         {
@@ -10904,7 +10904,7 @@ bool wxRichTextTable::Layout(wxDC& dc, wxRichTextDrawingContext& context, const 
                 cell->Invalidate(wxRICHTEXT_ALL);
                 cell->Layout(dc, context, availableCellSpace, availableSpace, style|wxRICHTEXT_FIXED_HEIGHT|wxRICHTEXT_FIXED_WIDTH);
 
-                maxRight = wxMax(maxRight, cell->GetPosition().x + cell->GetCachedSize().x);
+                maxRight = std::max(maxRight, cell->GetPosition().x + cell->GetCachedSize().x);
             }
         }
 
@@ -11874,7 +11874,7 @@ bool wxRichTextAction::Do()
 
             // InvalidateHierarchy goes up the hierarchy as well as down, otherwise with a nested object,
             // Layout() would stop prematurely at the top level.
-            container->InvalidateHierarchy(wxRichTextRange(wxMax(0, GetRange().GetStart()-1), GetRange().GetEnd()));
+            container->InvalidateHierarchy(wxRichTextRange(std::max(0L, GetRange().GetStart()-1), GetRange().GetEnd()));
 
             long newCaretPosition = GetPosition() + m_newParagraphs.GetOwnRange().GetLength();
 
@@ -11892,7 +11892,7 @@ bool wxRichTextAction::Do()
                         newCaretPosition --;
                 }
 
-            newCaretPosition = wxMin(newCaretPosition, (container->GetOwnRange().GetEnd()-1));
+            newCaretPosition = std::min(newCaretPosition, (container->GetOwnRange().GetEnd()-1));
 
             UpdateAppearance(newCaretPosition, true /* send update event */, oldFloatRect, & optimizationLineCharPositions, & optimizationLineYPositions, true /* do */);
 
@@ -12337,14 +12337,14 @@ void wxRichTextAction::UpdateAppearance(long caretPosition, bool sendUpdateEvent
                         node = node->GetNext();
                 }
 
-                firstY = wxMax(firstVisiblePt.y, firstY);
+                firstY = std::max(firstVisiblePt.y, firstY);
                 if (!foundEnd)
                     lastY = firstVisiblePt.y + clientSize.y;
 
                 if (wxRichTextBuffer::GetFloatingLayoutMode())
                 {
                     if (oldFloatRect.GetBottom() > 0)
-                        lastY = wxMax(lastY, oldFloatRect.GetBottom());
+                        lastY = std::max(lastY, oldFloatRect.GetBottom());
 
                     // Now find the first paragraph that isn't affected by any floating objects,
                     // which means the reformatting stopped at this point.
@@ -12358,7 +12358,7 @@ void wxRichTextAction::UpdateAppearance(long caretPosition, bool sendUpdateEvent
                             {
                                 wxRect childRect = child->GetRect();
                                 if (childRect.GetBottom() > lastY)
-                                    lastY = wxMin(childRect.GetBottom(), lastPossibleY);
+                                    lastY = std::min(childRect.GetBottom(), lastPossibleY);
                                 break;
                             }
 
@@ -12571,8 +12571,8 @@ bool wxRichTextImage::LoadImageCache(wxDC& dc, wxRichTextDrawingContext& context
             }
 
             // Use a minimum size to stop images becoming very small
-            parentWidth = wxMax(100, sz.x);
-            parentHeight = wxMax(100, sz.y);
+            parentWidth = std::max(100, sz.x);
+            parentHeight = std::max(100, sz.y);
 
             // Start with a maximum width of the control size, even if not specified by the content,
             // to minimize the amount of picture overlapping the right-hand side
@@ -12638,8 +12638,8 @@ bool wxRichTextImage::LoadImageCache(wxDC& dc, wxRichTextDrawingContext& context
     }
 
     // Prevent the use of zero size
-    width = wxMax(1, width);
-    height = wxMax(1, height);
+    width = std::max(1, width);
+    height = std::max(1, height);
 
     retImageSize = wxSize(width, height);
 

@@ -124,12 +124,12 @@ void wxSlider::DoSetSize(int x, int y, int width, int height, int sizeFlags)
 
     if (((m_windowStyle & wxHORIZONTAL) == wxHORIZONTAL) && (width > -1))
     {
-        XtVaSetValues (widget, XmNscaleWidth, wxMax (width, 10), NULL);
+        XtVaSetValues (widget, XmNscaleWidth, std::max (width, 10), NULL);
     }
 
     if (((m_windowStyle & wxVERTICAL) == wxVERTICAL) && (height > -1))
     {
-        XtVaSetValues (widget, XmNscaleHeight, wxMax (height, 10), NULL);
+        XtVaSetValues (widget, XmNscaleHeight, std::max (height, 10), NULL);
     }
 
     int xx = x; int yy = y;

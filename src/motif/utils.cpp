@@ -412,7 +412,7 @@ wxString wxGetXEventName(XEvent& event)
         wxMOTIF_STR("SelectionRequest"), wxMOTIF_STR("SelectionNotify"), wxMOTIF_STR("ColormapNotify"),  // 30-32
         wxMOTIF_STR("ClientMessage"), wxMOTIF_STR("MappingNotify"),                         // 33-34
         wxMOTIF_STR("unknown(+)")};                                            // 35
-    type = wxMin(35, type); type = wxMax(1, type);
+    type = std::min(35, type); type = std::max(1, type);
     wxString str(event_name[type]);
     return str;
 #endif
@@ -493,7 +493,7 @@ char* wxFindAccelerator( const char *s )
         }
 
         // OK: npos is big and positive
-        size_t sep = wxMin( plus, minus );
+        size_t sep = std::min( plus, minus );
         wxString mod = tmp.substr( index, sep - index );
 
         // Ctrl  -> Ctrl

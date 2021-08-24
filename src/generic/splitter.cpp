@@ -548,13 +548,13 @@ void wxSplitterWindow::DrawSashTracker(int x, int y)
 
     if ( m_splitMode == wxSPLIT_VERTICAL )
     {
-        x1 = x2 = wxClip(x, 0, client_size.x) + m_sashTrackerPen->GetWidth()/2;
+        x1 = x2 = std::clamp(x, 0, client_size.x) + m_sashTrackerPen->GetWidth()/2;
         y1 = 2;
         y2 = client_size.y - 2;
     }
     else
     {
-        y1 = y2 = wxClip(y, 0, client_size.y) + m_sashTrackerPen->GetWidth()/2;
+        y1 = y2 = std::clamp(y, 0, client_size.y) + m_sashTrackerPen->GetWidth()/2;
         x1 = 2;
         x2 = client_size.x-2;
     }
@@ -891,17 +891,17 @@ wxSize wxSplitterWindow::DoGetBestSize() const
     wxSize sizeBest;
     if ( m_splitMode == wxSPLIT_VERTICAL )
     {
-        sizeBest.y = wxMax(size1.y, size2.y);
-        sizeBest.x = wxMax(size1.x, m_minimumPaneSize) +
-                        wxMax(size2.x, m_minimumPaneSize);
+        sizeBest.y = std::max(size1.y, size2.y);
+        sizeBest.x = std::max(size1.x, m_minimumPaneSize) +
+                        std::max(size2.x, m_minimumPaneSize);
 
         pSash = &sizeBest.x;
     }
     else // wxSPLIT_HORIZONTAL
     {
-        sizeBest.x = wxMax(size1.x, size2.x);
-        sizeBest.y = wxMax(size1.y, m_minimumPaneSize) +
-                        wxMax(size2.y, m_minimumPaneSize);
+        sizeBest.x = std::max(size1.x, size2.x);
+        sizeBest.y = std::max(size1.y, m_minimumPaneSize) +
+                        std::max(size2.y, m_minimumPaneSize);
 
         pSash = &sizeBest.y;
     }

@@ -465,7 +465,7 @@ int wxAuiGtkTabArt::GetBestTabCtrlSize(wxWindow* wnd,
 
 int wxAuiGtkTabArt::GetBorderWidth(wxWindow* wnd)
 {
-    return wxAuiGenericTabArt::GetBorderWidth(wnd) + wxMax(GTK_NOTEBOOK (wxGTKPrivate::GetNotebookWidget())->tab_hborder,
+    return wxAuiGenericTabArt::GetBorderWidth(wnd) + std::max(GTK_NOTEBOOK (wxGTKPrivate::GetNotebookWidget())->tab_hborder,
                                                            GTK_NOTEBOOK (wxGTKPrivate::GetNotebookWidget())->tab_vborder);
 }
 

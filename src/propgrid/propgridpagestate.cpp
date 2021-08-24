@@ -955,7 +955,7 @@ void wxPropertyGridPageState::CheckColumnWidths( int widthChange )
                 // Reduce column, if possible.
                 if ( m_colWidths[reduceCol] > GetColumnMinWidth(reduceCol) )
                 {
-                    int d = wxMin(m_colWidths[reduceCol] - GetColumnMinWidth(reduceCol), widthHigher);
+                    int d = std::min(m_colWidths[reduceCol] - GetColumnMinWidth(reduceCol), widthHigher);
                     wxLogTrace("propgrid", wxS("  Reduce column %i (by %i)"), reduceCol, d);
 
                     m_colWidths[reduceCol] -= d;

@@ -145,7 +145,7 @@ bool wxSlider::Create(wxWindow *parent,
     // and initialize everything
     SetRange(minValue, maxValue);
     SetValue(value);
-    SetPageSize( wxMax(1, (maxValue - minValue)/10) );
+    SetPageSize( std::max(1, (maxValue - minValue)/10) );
 
     // we need to position the labels correctly if we have them and if
     // SetSize() hadn't been called before (when best size was determined by
@@ -377,7 +377,7 @@ void wxSlider::DoMoveWindow(int x, int y, int width, int height)
     int minLabelWidth,
         maxLabelWidth;
     const int labelHeight = GetLabelsSize(&minLabelWidth, &maxLabelWidth);
-    const int longestLabelWidth = wxMax(minLabelWidth, maxLabelWidth);
+    const int longestLabelWidth = std::max(minLabelWidth, maxLabelWidth);
     if ( !HasFlag(wxSL_MIN_MAX_LABELS) )
     {
         minLabelWidth =
@@ -540,7 +540,7 @@ wxSize wxSlider::DoGetBestSize() const
             int widthMin,
                 widthMax;
             int hLabel = GetLabelsSize(&widthMin, &widthMax);
-            const int longestLabelWidth = wxMax(widthMin, widthMax);
+            const int longestLabelWidth = std::max(widthMin, widthMax);
 
             // account for the labels
             if ( HasFlag(wxSL_VALUE_LABEL) )
@@ -548,7 +548,7 @@ wxSize wxSlider::DoGetBestSize() const
 
             if ( HasFlag(wxSL_MIN_MAX_LABELS) )
             {
-                size.x = wxMax(size.x, longestLabelWidth);
+                size.x = std::max(size.x, longestLabelWidth);
                 size.y += hLabel * 2;
             }
         }

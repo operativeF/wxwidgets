@@ -120,10 +120,10 @@ wxRect& wxRect::Union(const wxRect& rect)
     }
     else if ( rect.width && rect.height )
     {
-        const int x1 = wxMin(x, rect.x);
-        const int y1 = wxMin(y, rect.y);
-        const int y2 = wxMax(y + height, rect.height + rect.y);
-        const int x2 = wxMax(x + width, rect.width + rect.x);
+        const int x1 = std::min(x, rect.x);
+        const int y1 = std::min(y, rect.y);
+        const int y2 = std::max(y + height, rect.height + rect.y);
+        const int x2 = std::max(x + width, rect.width + rect.x);
 
         x = x1;
         y = y1;
@@ -231,19 +231,19 @@ wxRect& wxRect::operator*=(const wxRect& rect)
 
 wxRect operator+(const wxRect& r1, const wxRect& r2)
 {
-    const int x1 = wxMin(r1.x, r2.x);
-    const int y1 = wxMin(r1.y, r2.y);
-    const int y2 = wxMax(r1.y+r1.height, r2.height+r2.y);
-    const int x2 = wxMax(r1.x+r1.width, r2.width+r2.x);
+    const int x1 = std::min(r1.x, r2.x);
+    const int y1 = std::min(r1.y, r2.y);
+    const int y2 = std::max(r1.y+r1.height, r2.height+r2.y);
+    const int x2 = std::max(r1.x+r1.width, r2.width+r2.x);
     return wxRect(x1, y1, x2-x1, y2-y1);
 }
 
 wxRect operator*(const wxRect& r1, const wxRect& r2)
 {
-    const int x1 = wxMax(r1.x, r2.x);
-    const int y1 = wxMax(r1.y, r2.y);
-    const int y2 = wxMin(r1.y+r1.height, r2.height+r2.y);
-    const int x2 = wxMin(r1.x+r1.width, r2.width+r2.x);
+    const int x1 = std::max(r1.x, r2.x);
+    const int y1 = std::max(r1.y, r2.y);
+    const int y2 = std::min(r1.y+r1.height, r2.height+r2.y);
+    const int x2 = std::min(r1.x+r1.width, r2.width+r2.x);
     return wxRect(x1, y1, x2-x1, y2-y1);
 }
 

@@ -454,7 +454,7 @@ void wxGridSelection::UpdateRows( size_t pos, int numRows )
                     // ...either decrement row counter (if row still exists)...
                     block.SetBottomRow( row2 + numRows );
                     if ((size_t)row1 >= pos)
-                        block.SetTopRow( wxMax(row1 + numRows, (int)pos) );
+                        block.SetTopRow( std::max(row1 + numRows, (int)pos) );
 
                 }
                 else
@@ -503,7 +503,7 @@ void wxGridSelection::UpdateCols( size_t pos, int numCols )
                     // ...either decrement col counter (if col still exists)...
                     block.SetRightCol(col2 + numCols);
                     if ( (size_t) col1 >= pos)
-                        block.SetLeftCol( wxMax(col1 + numCols, (int)pos) );
+                        block.SetLeftCol( std::max(col1 + numCols, (int)pos) );
 
                 }
                 else

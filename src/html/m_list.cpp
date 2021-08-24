@@ -125,7 +125,7 @@ void wxHtmlListCell::Layout(int w)
     wxHtmlCell::Layout(w);
 
     ComputeMinMaxWidths();
-    m_Width = wxMax(m_Width, wxMin(w, GetMaxTotalWidth()));
+    m_Width = std::max(m_Width, std::min(w, GetMaxTotalWidth()));
 
     int s_width = m_Width - m_IndentLeft;
 
@@ -138,13 +138,13 @@ void wxHtmlListCell::Layout(int w)
 
         const int base_mark = ComputeMaxBase( m_RowInfo[r].mark );
         const int base_cont = ComputeMaxBase( m_RowInfo[r].cont );
-        const int adjust_mark = vpos + wxMax(base_cont-base_mark,0);
-        const int adjust_cont = vpos + wxMax(base_mark-base_cont,0);
+        const int adjust_mark = vpos + std::max(base_cont-base_mark,0);
+        const int adjust_cont = vpos + std::max(base_mark-base_cont,0);
 
         m_RowInfo[r].mark->SetPos(m_IndentLeft, adjust_mark);
         m_RowInfo[r].cont->SetPos(m_IndentLeft + m_ListmarkWidth, adjust_cont);
 
-        vpos = wxMax(adjust_mark + m_RowInfo[r].mark->GetHeight(),
+        vpos = std::max(adjust_mark + m_RowInfo[r].mark->GetHeight(),
                      adjust_cont + m_RowInfo[r].cont->GetHeight());
     }
     m_Height = vpos;

@@ -115,8 +115,8 @@ wxRibbonHSLColour::wxRibbonHSLColour(const wxColour& col)
     float red = col.Red() / 255.0f;
     float green = col.Green() / 255.0f;
     float blue = col.Blue() / 255.0f;
-    float Min = wxMin(red, wxMin(green, blue));
-    float Max = wxMax(red, wxMax(green, blue));
+    float Min = std::min(red, std::min(green, blue));
+    float Max = std::max(red, std::max(green, blue));
     luminance = 0.5f * (Max + Min);
     if (Min == Max)
     {

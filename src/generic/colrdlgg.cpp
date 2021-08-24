@@ -710,10 +710,10 @@ void wxGenericColourDialog::DoPreviewBitmap(wxBitmap& bmp, const wxColour& colou
 
         // Calculate field size: 4 fields per row/column,
         // with size in range [2..10]
-        int dx = wxMax(wxMin(w / 4, 10), 2);
-        int dy = wxMax(wxMin(h / 4, 10), 2);
+        int dx = std::max(std::min(w / 4, 10), 2);
+        int dy = std::max(std::min(h / 4, 10), 2);
         // We want a square field
-        dx = wxMax(dx, dy);
+        dx = std::max(dx, dy);
         dy = dx;
 
         // Prepare opaque colour
