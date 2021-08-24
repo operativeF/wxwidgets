@@ -568,7 +568,7 @@ void wxStaticBox::PaintForeground(wxDC& dc, const RECT&)
         static const bool isXPorLater = wxGetWinVersion() >= wxWinVersion_XP;
         if ( isXPorLater )
         {
-            if ( ::SendMessage(GetHwnd(), WM_QUERYUISTATE, 0, 0) &
+            if ( ::SendMessageW(GetHwnd(), WM_QUERYUISTATE, 0, 0) &
                     UISF_HIDEACCEL )
             {
                 drawTextFlags |= DT_HIDEPREFIX;

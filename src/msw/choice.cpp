@@ -101,7 +101,7 @@ bool wxChoice::MSWShouldPreProcessMessage(WXMSG *pMsg)
     if ( msg->message == WM_KEYDOWN
         && (msg->wParam == VK_ESCAPE || msg->wParam == VK_RETURN) )
     {
-        if (::SendMessage(GetHwndOf(this), CB_GETDROPPEDSTATE, 0, 0))
+        if (::SendMessageW(GetHwndOf(this), CB_GETDROPPEDSTATE, 0, 0))
         {
             return false;
         }
@@ -215,7 +215,7 @@ void wxChoice::DoDeleteOneItem(unsigned int n)
 {
     wxCHECK_RET( IsValid(n), wxT("invalid item index in wxChoice::Delete") );
 
-    SendMessage(GetHwnd(), CB_DELETESTRING, n, 0);
+    ::SendMessageW(GetHwnd(), CB_DELETESTRING, n, 0);
 
     if ( !IsFrozen() )
         MSWUpdateDropDownHeight();
@@ -225,7 +225,7 @@ void wxChoice::DoDeleteOneItem(unsigned int n)
 
 void wxChoice::DoClear()
 {
-    SendMessage(GetHwnd(), CB_RESETCONTENT, 0, 0);
+    ::SendMessageW(GetHwnd(), CB_RESETCONTENT, 0, 0);
 
     if ( !IsFrozen() )
         MSWUpdateDropDownHeight();

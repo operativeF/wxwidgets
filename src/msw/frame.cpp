@@ -229,7 +229,7 @@ void wxFrame::SendSizeEvent(int flags)
         }
         else // send it
         {
-            ::SendMessage(GetHwnd(), WM_SIZE,
+            ::SendMessageW(GetHwnd(), WM_SIZE,
                           IsMaximized() ? SIZE_MAXIMIZED : SIZE_RESTORED,
                           MAKELPARAM(r.right - r.left, r.bottom - r.top));
         }

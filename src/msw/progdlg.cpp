@@ -261,7 +261,7 @@ void PerformNotificationUpdates(HWND hwnd,
                        TDM_SET_MARQUEE_PROGRESS_BAR,
                        val,
                        0 );
-        ::SendMessage( hwnd,
+        ::SendMessageW( hwnd,
                        TDM_SET_PROGRESS_BAR_MARQUEE,
                        val,
                        0 );
@@ -335,13 +335,13 @@ void PerformNotificationUpdates(HWND hwnd,
     }
 
     if ( sharedData->m_notifications & wxSPDD_ENABLE_SKIP )
-        ::SendMessage( hwnd, TDM_ENABLE_BUTTON, Id_SkipBtn, TRUE );
+        ::SendMessageW( hwnd, TDM_ENABLE_BUTTON, Id_SkipBtn, TRUE );
 
     if ( sharedData->m_notifications & wxSPDD_ENABLE_ABORT )
         EnableCloseButtons(hwnd, true);
 
     if ( sharedData->m_notifications & wxSPDD_DISABLE_SKIP )
-        ::SendMessage( hwnd, TDM_ENABLE_BUTTON, Id_SkipBtn, FALSE );
+        ::SendMessageW( hwnd, TDM_ENABLE_BUTTON, Id_SkipBtn, FALSE );
 
     // Is the progress finished?
     if ( sharedData->m_notifications & wxSPDD_FINISHED )
@@ -1112,7 +1112,7 @@ wxProgressDialogTaskRunner::TaskDialogCallbackProc
             wxWakeUpIdle();
 
             // Set the maximum value and disable Close button.
-            ::SendMessage( hwnd,
+            ::SendMessageW( hwnd,
                            TDM_SET_PROGRESS_BAR_RANGE,
                            0,
                            MAKELPARAM(0, sharedData->m_range) );
@@ -1127,7 +1127,7 @@ wxProgressDialogTaskRunner::TaskDialogCallbackProc
             switch ( wParam )
             {
                 case Id_SkipBtn:
-                    ::SendMessage(hwnd, TDM_ENABLE_BUTTON, Id_SkipBtn, FALSE);
+                    ::SendMessageW(hwnd, TDM_ENABLE_BUTTON, Id_SkipBtn, FALSE);
                     sharedData->m_skipped = true;
                     return S_FALSE;
 
@@ -1157,7 +1157,7 @@ wxProgressDialogTaskRunner::TaskDialogCallbackProc
                                 break;
 
                             case wxProgressDialog::Continue:
-                                ::SendMessage(hwnd, TDM_ENABLE_BUTTON, Id_SkipBtn, FALSE);
+                                ::SendMessageW(hwnd, TDM_ENABLE_BUTTON, Id_SkipBtn, FALSE);
                                 EnableCloseButtons(hwnd, false);
 
                                 sharedData->m_timeStop = wxGetCurrentTime();

@@ -202,7 +202,7 @@ void wxPopupTransientWindow::DismissOnDeactivate()
     {
         if ( ::GetActiveWindow() != GetHwndOf(owner) )
         {
-            ::SendMessage(GetHwndOf(owner), WM_NCACTIVATE, FALSE, 0);
+            ::SendMessageW(GetHwndOf(owner), WM_NCACTIVATE, FALSE, 0);
         }
     }
 }

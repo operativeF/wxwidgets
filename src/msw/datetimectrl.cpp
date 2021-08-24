@@ -203,7 +203,7 @@ wxSize wxDateTimePickerCtrl::DoGetBestSize() const
         // checking for the return value: even if all "real" MSW systems do support
         // this message, Wine does not, even when it's configured to return Vista
         // or later version to the application, and returns FALSE for it.
-        if ( ::SendMessage(hwnd, DTM_GETIDEALSIZE, 0, (LPARAM)&idealSize) )
+        if ( ::SendMessageW(hwnd, DTM_GETIDEALSIZE, 0, (LPARAM)&idealSize) )
         {
             size.x = idealSize.cx;
             size.y = GetCharHeight();

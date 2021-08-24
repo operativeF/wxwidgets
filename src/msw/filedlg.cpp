@@ -331,7 +331,7 @@ void wxFileDialog::MSWOnInitDone(WXHWND hDlg)
 void wxFileDialog::MSWOnSelChange(WXHWND hDlg)
 {
     TCHAR buf[MAX_PATH];
-    LRESULT len = SendMessage(::GetParent(hDlg), CDM_GETFILEPATH,
+    LRESULT len = ::SendMessageW(::GetParent(hDlg), CDM_GETFILEPATH,
                               MAX_PATH, reinterpret_cast<LPARAM>(buf));
 
     if ( len > 0 )

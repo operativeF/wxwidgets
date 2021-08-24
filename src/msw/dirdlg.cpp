@@ -481,7 +481,7 @@ BrowseCallbackProc(HWND hwnd, UINT uMsg, LPARAM lp, LPARAM pData)
             // initial selection here
             //
             // wParam = TRUE => lParam is a string and not a PIDL
-            ::SendMessage(hwnd, BFFM_SETSELECTION, TRUE, pData);
+            ::SendMessageW(hwnd, BFFM_SETSELECTION, TRUE, pData);
             break;
 
         case BFFM_SELCHANGED:
@@ -507,7 +507,7 @@ BrowseCallbackProc(HWND hwnd, UINT uMsg, LPARAM lp, LPARAM pData)
                         strDir = wxString(wxT("...")) + strDir;
                     }
 
-                    SendMessage(hwnd, BFFM_SETSTATUSTEXT,
+                    ::SendMessageW(hwnd, BFFM_SETSTATUSTEXT,
                                 0, wxMSW_CONV_LPARAM(strDir));
                 }
             }

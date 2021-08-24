@@ -159,7 +159,7 @@ wxTreeView_GetItemRect(HWND hwnd,
                        BOOL fItemRect)
 {
     param.hItem = hItem;
-    return ::SendMessage(hwnd, TVM_GETITEMRECT, fItemRect,
+    return ::SendMessageW(hwnd, TVM_GETITEMRECT, fItemRect,
                         (LPARAM)&param) == TRUE;
 }
 
@@ -766,7 +766,7 @@ bool wxTreeCtrl::IsDoubleBuffered() const
     // Notice that TVM_GETEXTENDEDSTYLE is supported since XP, so we can always
     // send this message, no need for comctl32.dll version check here.
     const LRESULT
-        exTreeStyle = ::SendMessage(GetHwnd(), TVM_GETEXTENDEDSTYLE, 0, 0);
+        exTreeStyle = ::SendMessageW(GetHwnd(), TVM_GETEXTENDEDSTYLE, 0, 0);
 
     return (exTreeStyle & TVS_EX_DOUBLEBUFFER) != 0;
 }
@@ -780,7 +780,7 @@ void wxTreeCtrl::SetDoubleBuffered(bool on)
     // under XP, who knows what could this do.
     if ( wxApp::GetComCtl32Version() >= 610 )
     {
-        const HRESULT hr = ::SendMessage(GetHwnd(),
+        const HRESULT hr = ::SendMessageW(GetHwnd(),
                                          TVM_SETEXTENDEDSTYLE,
                                          TVS_EX_DOUBLEBUFFER,
                                          on ? TVS_EX_DOUBLEBUFFER : 0);
@@ -918,7 +918,7 @@ bool wxTreeCtrl::SetBackgroundColour(const wxColour &colour)
     if ( !wxWindowBase::SetBackgroundColour(colour) )
         return false;
 
-    ::SendMessage(GetHwnd(), TVM_SETBKCOLOR, 0, colour.GetPixel());
+    ::SendMessageW(GetHwnd(), TVM_SETBKCOLOR, 0, colour.GetPixel());
 
     return true;
 }
@@ -928,7 +928,7 @@ bool wxTreeCtrl::SetForegroundColour(const wxColour &colour)
     if ( !wxWindowBase::SetForegroundColour(colour) )
         return false;
 
-    ::SendMessage(GetHwnd(), TVM_SETTEXTCOLOR, 0, colour.GetPixel());
+    ::SendMessageW(GetHwnd(), TVM_SETTEXTCOLOR, 0, colour.GetPixel());
 
     return true;
 }
@@ -3023,12 +3023,12 @@ wxTreeCtrl::MSWWindowProc(WXUINT nMsg, WXWPARAM wParam, WXLPARAM lParam)
                             tv.ptDrag.x = x;
                             tv.ptDrag.y = y;
 
-                            // do it before SendMessage() call below to avoid
+                            // do it before ::SendMessageW() call below to avoid
                             // reentrancies here if there is another WM_MOUSEMOVE
                             // in the queue already
                             m_htClickedItem.Unset();
 
-                            ::SendMessage(GetHwndOf(GetParent()), WM_NOTIFY,
+                            ::SendMessageW(GetHwndOf(GetParent()), WM_NOTIFY,
                                           tv.hdr.idFrom, (LPARAM)&tv );
 
                             // don't pass it to the default window proc, it would
@@ -3132,7 +3132,7 @@ wxTreeCtrl::MSWWindowProc(WXUINT nMsg, WXWPARAM wParam, WXLPARAM lParam)
                     nmhdr.hwndFrom = GetHwnd();
                     nmhdr.idFrom = ::GetWindowLong(GetHwnd(), GWL_ID);
                     nmhdr.code = NM_RCLICK;
-                    ::SendMessage(::GetParent(GetHwnd()), WM_NOTIFY,
+                    ::SendMessageW(::GetParent(GetHwnd()), WM_NOTIFY,
                                   nmhdr.idFrom, (LPARAM)&nmhdr);
                     processed = true;
                 }
@@ -3707,7 +3707,7 @@ bool wxTreeCtrl::MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result)
             *result =
             processed = true;
 
-            ::SendMessage(GetHwnd(), WM_CONTEXTMENU,
+            ::SendMessageW(GetHwnd(), WM_CONTEXTMENU,
                           (WPARAM)GetHwnd(), ::GetMessagePos());
             break;
 

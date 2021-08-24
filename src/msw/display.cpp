@@ -437,7 +437,7 @@ bool wxDisplayMSW::ChangeMode(const wxVideoMode& mode)
 
 
     // do change the mode
-    switch ( ::ChangeDisplaySettingsEx
+    switch ( ::ChangeDisplaySettingsExW
              (
                 GetName().t_str(),  // display name
                 pDevMode,           // dev mode or NULL to reset
@@ -489,7 +489,7 @@ wxDisplayWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
         return 0;
     }
 
-    return ::DefWindowProc(hwnd, msg, wParam, lParam);
+    return ::DefWindowProcW(hwnd, msg, wParam, lParam);
 }
 
 wxDisplayFactoryMSW::wxDisplayFactoryMSW()
@@ -518,7 +518,7 @@ wxDisplayFactoryMSW::~wxDisplayFactoryMSW()
 
         if ( m_hiddenClass )
         {
-            if ( !::UnregisterClass(m_hiddenClass, wxGetInstance()) )
+            if ( !::UnregisterClassW(m_hiddenClass, wxGetInstance()) )
             {
                 wxLogLastError(wxT("UnregisterClass(wxDisplayHiddenWindow)"));
             }
@@ -570,7 +570,7 @@ wxDisplayFactoryMSW::MultimonEnumProc(
     wxDisplayFactoryMSW *const self = (wxDisplayFactoryMSW *)dwData;
 
     WinStruct<MONITORINFOEX> monInfo;
-    if ( !::GetMonitorInfo(hMonitor, &monInfo) )
+    if ( !::GetMonitorInfoW(hMonitor, &monInfo) )
     {
         wxLogLastError(wxT("GetMonitorInfo"));
     }

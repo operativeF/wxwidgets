@@ -401,7 +401,7 @@ bool wxEnhMetaFileDataObject::GetDataHere(const wxDataFormat& format, void *buf)
 
     if ( format == wxDF_ENHMETAFILE )
     {
-        HENHMETAFILE hEMFCopy = ::CopyEnhMetaFile(hEMF, nullptr);
+        HENHMETAFILE hEMFCopy = ::CopyEnhMetaFileW(hEMF, nullptr);
         if ( !hEMFCopy )
         {
             wxLogLastError(wxT("CopyEnhMetaFile"));
@@ -524,7 +524,7 @@ bool wxEnhMetaFileSimpleDataObject::GetDataHere(void *buf) const
 
     HENHMETAFILE hEMF = (HENHMETAFILE)m_metafile.GetHENHMETAFILE();
 
-    HENHMETAFILE hEMFCopy = ::CopyEnhMetaFile(hEMF, nullptr);
+    HENHMETAFILE hEMFCopy = ::CopyEnhMetaFileW(hEMF, nullptr);
     if ( !hEMFCopy )
     {
         wxLogLastError(wxT("CopyEnhMetaFile"));

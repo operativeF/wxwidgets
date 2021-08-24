@@ -172,7 +172,7 @@ wxDllType
 wxDynamicLibrary::RawLoad(const wxString& libname, int flags)
 {
     if (flags & wxDL_GET_LOADED)
-        return ::GetModuleHandle(libname.t_str());
+        return ::GetModuleHandleW(libname.t_str());
 
     return ::LoadLibrary(libname.t_str());
 }
@@ -306,7 +306,7 @@ WXHMODULE wxDynamicLibrary::MSWGetModuleHandle(const wxString& name, void *addr)
     // GetModuleHandleEx() is only available under XP and later, coincidence?)
     HMODULE hmod = CallGetModuleHandleEx(addr);
 
-    return hmod ? hmod : ::GetModuleHandle(name.t_str());
+    return hmod ? hmod : ::GetModuleHandleW(name.t_str());
 }
 
 #endif // wxUSE_DYNLIB_CLASS

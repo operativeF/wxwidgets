@@ -184,7 +184,7 @@ wxTaskBarIcon::DoSetIcon(const wxIcon& icon,
     switch ( operation )
     {
         case Operation_Add:
-            if ( !Shell_NotifyIconW(NIM_ADD, &notifyData) )
+            if ( !::Shell_NotifyIconW(NIM_ADD, &notifyData) )
             {
                 wxLogLastError("Shell_NotifyIcon(NIM_ADD)");
                 return false;
@@ -192,7 +192,7 @@ wxTaskBarIcon::DoSetIcon(const wxIcon& icon,
             break;
 
         case Operation_Modify:
-            if ( !Shell_NotifyIconW(NIM_MODIFY, &notifyData) )
+            if ( !::Shell_NotifyIconW(NIM_MODIFY, &notifyData) )
             {
                 wxLogLastError("Shell_NotifyIcon(NIM_MODIFY)");
                 return false;
@@ -200,8 +200,8 @@ wxTaskBarIcon::DoSetIcon(const wxIcon& icon,
             break;
 
         case Operation_TryBoth:
-            if ( !Shell_NotifyIconW(NIM_ADD, &notifyData) &&
-                    !Shell_NotifyIconW(NIM_MODIFY, &notifyData) )
+            if ( !::Shell_NotifyIconW(NIM_ADD, &notifyData) &&
+                    !::Shell_NotifyIconW(NIM_MODIFY, &notifyData) )
             {
                 wxLogLastError("Shell_NotifyIcon(NIM_ADD/NIM_MODIFY)");
                 return false;
@@ -232,7 +232,7 @@ wxTaskBarIcon::ShowBalloon(const std::string& title,
     notifyData.uFlags = 0;
     notifyData.uVersion = 3 /* NOTIFYICON_VERSION for Windows 2000/XP */;
 
-    if ( !Shell_NotifyIconW(NIM_SETVERSION, &notifyData) )
+    if ( !::Shell_NotifyIconW(NIM_SETVERSION, &notifyData) )
     {
         wxLogLastError(wxT("Shell_NotifyIcon(NIM_SETVERSION)"));
     }
@@ -263,7 +263,7 @@ wxTaskBarIcon::ShowBalloon(const std::string& title,
     else if ( flags & wxICON_ERROR )
         notifyData.dwInfoFlags |= NIIF_ERROR;
 
-    bool ok = Shell_NotifyIconW(NIM_MODIFY, &notifyData) != 0;
+    bool ok = ::Shell_NotifyIconW(NIM_MODIFY, &notifyData) != 0;
     if ( !ok )
     {
         wxLogLastError(wxT("Shell_NotifyIcon(NIM_MODIFY)"));
@@ -283,7 +283,7 @@ bool wxTaskBarIcon::RemoveIcon()
 
     NotifyIconData notifyData(GetHwndOf(m_win));
 
-    bool ok = Shell_NotifyIconW(NIM_DELETE, &notifyData) != 0;
+    bool ok = ::Shell_NotifyIconW(NIM_DELETE, &notifyData) != 0;
     if ( !ok )
     {
         wxLogLastError(wxT("Shell_NotifyIcon(NIM_DELETE)"));

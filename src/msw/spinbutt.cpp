@@ -152,10 +152,10 @@ int wxSpinButton::GetValue() const
 {
 #ifdef UDM_GETPOS32
     // use the full 32 bit range if available
-    auto n = ::SendMessage(GetHwnd(), UDM_GETPOS32, 0, 0);
+    auto n = ::SendMessageW(GetHwnd(), UDM_GETPOS32, 0, 0);
 #else
     // we're limited to 16 bit
-    auto n = (short)LOWORD(::SendMessage(GetHwnd(), UDM_GETPOS, 0, 0));
+    auto n = (short)LOWORD(::SendMessageW(GetHwnd(), UDM_GETPOS, 0, 0));
 #endif // UDM_GETPOS32
 
     if (n < m_min) n = m_min;
@@ -170,9 +170,9 @@ void wxSpinButton::SetValue(int val)
 
 #ifdef UDM_SETPOS32
     // use the full 32 bit range if available
-    ::SendMessage(GetHwnd(), UDM_SETPOS32, 0, val);
+    ::SendMessageW(GetHwnd(), UDM_SETPOS32, 0, val);
 #else
-    ::SendMessage(GetHwnd(), UDM_SETPOS, 0, MAKELONG((short) val, 0));
+    ::SendMessageW(GetHwnd(), UDM_SETPOS, 0, MAKELONG((short) val, 0));
 #endif // UDM_SETPOS32
 }
 
@@ -189,10 +189,10 @@ void wxSpinButton::SetRange(int minVal, int maxVal)
 
 #ifdef UDM_SETRANGE32
     // use the full 32 bit range if available
-    ::SendMessage(GetHwnd(), UDM_SETRANGE32, minVal, maxVal);
+    ::SendMessageW(GetHwnd(), UDM_SETRANGE32, minVal, maxVal);
 #else
     // we're limited to 16 bit
-    ::SendMessage(GetHwnd(), UDM_SETRANGE, 0,
+    ::SendMessageW(GetHwnd(), UDM_SETRANGE, 0,
                   (LPARAM) MAKELONG((short)maxVal, (short)minVal));
 #endif // UDM_SETRANGE32
 

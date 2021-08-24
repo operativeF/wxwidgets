@@ -46,7 +46,7 @@ struct EDITBALLOONTIP
 };
 
 #define Edit_ShowBalloonTip(hwnd, pebt) \
-    (BOOL)::SendMessage((hwnd), 0x1503 /* EM_SHOWBALLOONTIP */, 0, (LPARAM)(pebt))
+    (BOOL)::SendMessageW((hwnd), 0x1503 /* EM_SHOWBALLOONTIP */, 0, (LPARAM)(pebt))
 
 #endif // !defined(Edit_ShowBalloonTip)
 

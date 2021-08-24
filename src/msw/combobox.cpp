@@ -213,7 +213,7 @@ bool wxComboBox::MSWProcessEditSpecialKey(WXWPARAM vkey)
     {
         case VK_RETURN:
             {
-                if (SendMessage(GetHwnd(), CB_GETDROPPEDSTATE, 0, 0))
+                if (::SendMessageW(GetHwnd(), CB_GETDROPPEDSTATE, 0, 0))
                     break;
 
                 wxCommandEvent event(wxEVT_TEXT_ENTER, m_windowId);

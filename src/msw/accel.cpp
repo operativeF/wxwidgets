@@ -62,7 +62,7 @@ wxAcceleratorRefData::~wxAcceleratorRefData()
 {
     if (m_hAccel)
     {
-        DestroyAcceleratorTable((HACCEL) m_hAccel);
+        ::DestroyAcceleratorTable((HACCEL) m_hAccel);
     }
 }
 

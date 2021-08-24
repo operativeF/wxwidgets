@@ -249,7 +249,7 @@ void wxStaticBitmap::SetImage( const wxGDIImage* image )
 
 void wxStaticBitmap::MSWReplaceImageHandle(WXLPARAM handle)
 {
-    HGDIOBJ oldHandle = (HGDIOBJ)::SendMessage(GetHwnd(), STM_SETIMAGE,
+    HGDIOBJ oldHandle = (HGDIOBJ)::SendMessageW(GetHwnd(), STM_SETIMAGE,
                   m_isIcon ? IMAGE_ICON : IMAGE_BITMAP, (LPARAM)handle);
     // detect if this is still the handle we passed before or
     // if the static-control made a copy of the bitmap!

@@ -396,7 +396,7 @@ void wxGUIEventLoop::DoYieldFor(long eventsToProcess)
     DWORD id = GetCurrentThreadId();
     for (size_t i=0; i<m_arrMSG.GetCount(); i++)
     {
-        PostThreadMessage(id, m_arrMSG[i].message,
+        ::PostThreadMessageW(id, m_arrMSG[i].message,
                           m_arrMSG[i].wParam, m_arrMSG[i].lParam);
     }
 

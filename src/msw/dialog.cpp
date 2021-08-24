@@ -148,7 +148,7 @@ bool wxDialog::Show(bool show)
         // NB: normally we should call it just the first time but doing it
         //     every time is simpler than keeping a flag
         const wxSize size = GetClientSize();
-        ::SendMessage(GetHwnd(), WM_SIZE,
+        ::SendMessageW(GetHwnd(), WM_SIZE,
                       SIZE_RESTORED, MAKELPARAM(size.x, size.y));
     }
 

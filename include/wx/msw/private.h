@@ -999,7 +999,7 @@ WXDLLIMPEXP_CORE wxFontEncoding wxGetFontEncFromCharSet(int charset);
 
 inline void wxSetWindowFont(HWND hwnd, const wxFont& font)
 {
-    ::SendMessage(hwnd, WM_SETFONT,
+    ::SendMessageW(hwnd, WM_SETFONT,
                   (WPARAM)GetHfontOf(font), MAKELPARAM(TRUE, 0));
 }
 

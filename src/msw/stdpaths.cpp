@@ -305,7 +305,7 @@ wxString wxStandardPathsWin16::GetConfigDir() const
     // this is for compatibility with earlier wxFileConfig versions
     // which used the Windows directory for the global files
     wxString dir;
-    if ( !::GetWindowsDirectory(wxStringBuffer(dir, MAX_PATH), MAX_PATH) )
+    if ( !::GetWindowsDirectoryW(wxStringBuffer(dir, MAX_PATH), MAX_PATH) )
     {
         wxLogLastError(wxT("GetWindowsDirectory"));
     }

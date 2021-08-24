@@ -516,7 +516,7 @@ WXHICON wxMDIParentFrame::GetDefaultIcon() const
 
 void wxMDIParentFrame::Cascade()
 {
-    ::SendMessage(GetWinHwnd(GetClientWindow()), WM_MDICASCADE, 0, 0);
+    ::SendMessageW(GetWinHwnd(GetClientWindow()), WM_MDICASCADE, 0, 0);
 }
 
 void wxMDIParentFrame::Tile(wxOrientation orient)
@@ -524,24 +524,24 @@ void wxMDIParentFrame::Tile(wxOrientation orient)
     wxASSERT_MSG( orient == wxHORIZONTAL || orient == wxVERTICAL,
                   wxT("invalid orientation value") );
 
-    ::SendMessage(GetWinHwnd(GetClientWindow()), WM_MDITILE,
+    ::SendMessageW(GetWinHwnd(GetClientWindow()), WM_MDITILE,
                   orient == wxHORIZONTAL ? MDITILE_HORIZONTAL
                                          : MDITILE_VERTICAL, 0);
 }
 
 void wxMDIParentFrame::ArrangeIcons()
 {
-    ::SendMessage(GetWinHwnd(GetClientWindow()), WM_MDIICONARRANGE, 0, 0);
+    ::SendMessageW(GetWinHwnd(GetClientWindow()), WM_MDIICONARRANGE, 0, 0);
 }
 
 void wxMDIParentFrame::ActivateNext()
 {
-    ::SendMessage(GetWinHwnd(GetClientWindow()), WM_MDINEXT, 0, 0);
+    ::SendMessageW(GetWinHwnd(GetClientWindow()), WM_MDINEXT, 0, 0);
 }
 
 void wxMDIParentFrame::ActivatePrevious()
 {
-    ::SendMessage(GetWinHwnd(GetClientWindow()), WM_MDINEXT, 0, 1);
+    ::SendMessageW(GetWinHwnd(GetClientWindow()), WM_MDINEXT, 0, 1);
 }
 
 // ---------------------------------------------------------------------------
@@ -1458,7 +1458,7 @@ void MDISetMenu(wxWindow *win, HMENU hmenuFrame, HMENU hmenuWindow)
             const DWORD err = ::GetLastError();
             if ( err != ERROR_SUCCESS )
             {
-                wxLogApiError(wxT("SendMessage(WM_MDISETMENU)"), err);
+                wxLogApiError(wxT("SendMessageW(WM_MDISETMENU)"), err);
             }
         }
     }

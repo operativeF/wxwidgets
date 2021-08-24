@@ -403,7 +403,7 @@ void wxSpinCtrl::Refresh(bool eraseBackground, const wxRect *rect)
 
 int wxSpinCtrl::GetBase() const
 {
-    return ::SendMessage(GetHwnd(), UDM_GETBASE, 0, 0);
+    return ::SendMessageW(GetHwnd(), UDM_GETBASE, 0, 0);
 }
 
 bool wxSpinCtrl::SetBase(int base)
@@ -412,7 +412,7 @@ bool wxSpinCtrl::SetBase(int base)
     if ( !wxSpinCtrlImpl::IsBaseCompatibleWithRange(m_min, m_max, base) )
         return false;
 
-    if ( !::SendMessage(GetHwnd(), UDM_SETBASE, base, 0) )
+    if ( !::SendMessageW(GetHwnd(), UDM_SETBASE, base, 0) )
         return false;
 
     // DoGetBestSize uses the base.

@@ -106,10 +106,10 @@ void wxGauge::SetRange(int r)
     wxGaugeBase::SetRange(r);
 
 #ifdef PBM_SETRANGE32
-    ::SendMessage(GetHwnd(), PBM_SETRANGE32, 0, r);
+    ::SendMessageW(GetHwnd(), PBM_SETRANGE32, 0, r);
 #else // !PBM_SETRANGE32
     // fall back to PBM_SETRANGE (limited to 16 bits)
-    ::SendMessage(GetHwnd(), PBM_SETRANGE, 0, MAKELPARAM(0, r));
+    ::SendMessageW(GetHwnd(), PBM_SETRANGE, 0, MAKELPARAM(0, r));
 #endif // PBM_SETRANGE32/!PBM_SETRANGE32
 }
 
@@ -123,7 +123,7 @@ void wxGauge::SetValue(int pos)
     {
         wxGaugeBase::SetValue(pos);
 
-        ::SendMessage(GetHwnd(), PBM_SETPOS, pos, 0);
+        ::SendMessageW(GetHwnd(), PBM_SETPOS, pos, 0);
     }
 }
 
@@ -132,7 +132,7 @@ bool wxGauge::SetForegroundColour(const wxColour& col)
     if ( !wxControl::SetForegroundColour(col) )
         return false;
 
-    ::SendMessage(GetHwnd(), PBM_SETBARCOLOR, 0, (LPARAM)wxColourToRGB(col));
+    ::SendMessageW(GetHwnd(), PBM_SETBARCOLOR, 0, (LPARAM)wxColourToRGB(col));
 
     return true;
 }
@@ -142,7 +142,7 @@ bool wxGauge::SetBackgroundColour(const wxColour& col)
     if ( !wxControl::SetBackgroundColour(col) )
         return false;
 
-    ::SendMessage(GetHwnd(), PBM_SETBKCOLOR, 0, (LPARAM)wxColourToRGB(col));
+    ::SendMessageW(GetHwnd(), PBM_SETBKCOLOR, 0, (LPARAM)wxColourToRGB(col));
 
     return true;
 }
@@ -158,7 +158,7 @@ void wxGauge::SetIndeterminateMode()
     if ( !IsInIndeterminateMode() )
     {
         wxMSWWinStyleUpdater(GetHwnd()).TurnOn(PBS_MARQUEE);
-        ::SendMessage(GetHwnd(), PBM_SETMARQUEE, TRUE, 0);
+        ::SendMessageW(GetHwnd(), PBM_SETMARQUEE, TRUE, 0);
     }
 }
 
@@ -166,7 +166,7 @@ void wxGauge::SetDeterminateMode()
 {
     if ( IsInIndeterminateMode() )
     {
-        ::SendMessage(GetHwnd(), PBM_SETMARQUEE, FALSE, 0);
+        ::SendMessageW(GetHwnd(), PBM_SETMARQUEE, FALSE, 0);
         wxMSWWinStyleUpdater(GetHwnd()).TurnOff(PBS_MARQUEE);
     }
 }
@@ -178,7 +178,7 @@ void wxGauge::Pulse()
         // switch to indeterminate mode if required
         SetIndeterminateMode();
 
-        SendMessage(GetHwnd(), PBM_STEPIT, 0, 0);
+        ::SendMessageW(GetHwnd(), PBM_STEPIT, 0, 0);
 
         if ( m_appProgressIndicator )
             m_appProgressIndicator->Pulse();

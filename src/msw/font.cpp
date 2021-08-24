@@ -268,7 +268,7 @@ protected:
         ScreenHDC hdc;
         SelectInHDC selectFont(hdc, (HFONT)GetHFONT());
 
-        UINT otmSize = GetOutlineTextMetrics(hdc, 0, nullptr);
+        UINT otmSize = ::GetOutlineTextMetricsW(hdc, 0, nullptr);
         if ( !otmSize )
         {
             wxLogLastError("GetOutlineTextMetrics(NULL)");
@@ -280,7 +280,7 @@ protected:
         wxON_BLOCK_EXIT1( free, otm );
 
         otm->otmSize = otmSize;
-        if ( !GetOutlineTextMetrics(hdc, otmSize, otm) )
+        if ( !::GetOutlineTextMetricsW(hdc, otmSize, otm) )
         {
             wxLogLastError("GetOutlineTextMetrics()");
             return {};
@@ -363,7 +363,7 @@ wxFontRefData::~wxFontRefData()
 
 bool wxFontRefData::Alloc()
 {
-    m_hFont = ::CreateFontIndirect(&m_nativeFontInfo.lf);
+    m_hFont = ::CreateFontIndirectW(&m_nativeFontInfo.lf);
     if ( !m_hFont )
     {
         wxLogLastError(wxT("CreateFont"));
@@ -1106,7 +1106,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxPrivateFontsListModule, wxModule);
 
 bool wxFontBase::AddPrivateFont(const wxString& filename)
 {
-    if ( !AddFontResourceEx(filename.t_str(), FR_PRIVATE, nullptr) )
+    if ( !::AddFontResourceExW(filename.t_str(), FR_PRIVATE, nullptr) )
     {
         wxLogSysError(_("Font file \"%s\" couldn't be loaded"), filename);
         return false;

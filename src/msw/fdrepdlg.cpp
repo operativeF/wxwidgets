@@ -375,7 +375,7 @@ bool wxFindReplaceDialog::Show(bool show)
     FINDREPLACE *pFR = m_impl->GetPtrFindReplace();
     HWND hwnd;
     if ( replace )
-        hwnd = ::ReplaceText(pFR);
+        hwnd = ::ReplaceTextW(pFR);
     else
         hwnd = ::FindText(pFR);
 

@@ -320,7 +320,7 @@ public:
 private:
     void UpdateImageInfo()
     {
-        if ( !::SendMessage(m_hwndBtn, BCM_SETIMAGELIST, 0, (LPARAM)&m_data) )
+        if ( !::SendMessageW(m_hwndBtn, BCM_SETIMAGELIST, 0, (LPARAM)&m_data) )
         {
             wxLogDebug("SendMessage(BCM_SETIMAGELIST) failed");
         }
@@ -1265,7 +1265,7 @@ bool wxAnyButton::SetForegroundColour(const wxColour &colour)
 
 bool wxAnyButton::MSWIsPushed() const
 {
-    return (SendMessage(GetHwnd(), BM_GETSTATE, 0, 0) & BST_PUSHED) != 0;
+    return (::SendMessageW(GetHwnd(), BM_GETSTATE, 0, 0) & BST_PUSHED) != 0;
 }
 
 #ifdef __WXDEBUG__

@@ -33,7 +33,7 @@ static HWND GetSuitableHWND(wxWinHelpController* controller)
     else if (wxTheApp->GetTopWindow())
         return (HWND) wxTheApp->GetTopWindow()->GetHWND();
     else
-        return GetDesktopWindow();
+        return ::GetDesktopWindow();
 }
 
 bool wxWinHelpController::Initialize(const std::string& filename)
@@ -55,7 +55,7 @@ bool wxWinHelpController::DisplayContents()
 
     std::string str = GetValidFilename(m_helpFile);
 
-    return (WinHelpW(GetSuitableHWND(this), boost::nowide::widen(str).c_str(), HELP_FINDER, 0L) != 0);
+    return (::WinHelpW(::GetSuitableHWND(this), boost::nowide::widen(str).c_str(), HELP_FINDER, 0L) != 0);
 }
 
 bool wxWinHelpController::DisplaySection(int section)
@@ -65,7 +65,7 @@ bool wxWinHelpController::DisplaySection(int section)
 
     std::string str = GetValidFilename(m_helpFile);
 
-    return (WinHelpW(GetSuitableHWND(this), boost::nowide::widen(str).c_str(), HELP_CONTEXT, (DWORD)section) != 0);
+    return (::WinHelpW(::GetSuitableHWND(this), boost::nowide::widen(str).c_str(), HELP_CONTEXT, (DWORD)section) != 0);
 }
 
 bool wxWinHelpController::DisplayContextPopup(int contextId)
@@ -74,7 +74,7 @@ bool wxWinHelpController::DisplayContextPopup(int contextId)
 
     std::string str = GetValidFilename(m_helpFile);
 
-    return (WinHelpW(GetSuitableHWND(this), boost::nowide::widen(str).c_str(), HELP_CONTEXTPOPUP, (DWORD) contextId) != 0);
+    return (::WinHelpW(::GetSuitableHWND(this), boost::nowide::widen(str).c_str(), HELP_CONTEXTPOPUP, (DWORD) contextId) != 0);
 }
 
 bool wxWinHelpController::DisplayBlock(long block)
@@ -90,14 +90,14 @@ bool wxWinHelpController::KeywordSearch(const std::string& k,
 
     std::string str = GetValidFilename(m_helpFile);
 
-    return WinHelpW(GetSuitableHWND(this), boost::nowide::widen(str).c_str(), HELP_PARTIALKEY,
+    return ::WinHelpW(::GetSuitableHWND(this), boost::nowide::widen(str).c_str(), HELP_PARTIALKEY,
                    (ULONG_PTR)boost::nowide::widen(k).c_str()) != 0;
 }
 
 // Can't close the help window explicitly in WinHelp
 bool wxWinHelpController::Quit()
 {
-    return WinHelpW(GetSuitableHWND(this), nullptr, HELP_QUIT, 0) != 0;
+    return ::WinHelpW(::GetSuitableHWND(this), nullptr, HELP_QUIT, 0) != 0;
 }
 
 // Append extension if necessary.

@@ -1177,7 +1177,7 @@ static bool ScrollVertically(HWND hwnd, int kind, int count)
     int pos = posStart;
     for ( int n = 0; n < count; n++ )
     {
-        ::SendMessage(hwnd, WM_VSCROLL, kind, 0);
+        ::SendMessageW(hwnd, WM_VSCROLL, kind, 0);
 
         int posNew = GetScrollPosition(hwnd, SB_VERT);
         if ( posNew == pos )
@@ -2460,7 +2460,7 @@ bool wxWindowMSW::MSWProcessMessage(WXMSG* pMsg)
             // WM_GETDLGCODE: ask the control if it wants the key for itself,
             // don't process it if it's the case (except for Ctrl-Tab/Enter
             // combinations which are always processed)
-            LONG lDlgCode = ::SendMessage(msg->hwnd, WM_GETDLGCODE, 0, 0);
+            LONG lDlgCode = ::SendMessageW(msg->hwnd, WM_GETDLGCODE, 0, 0);
 
             // surprisingly, DLGC_WANTALLKEYS bit mask doesn't contain the
             // DLGC_WANTTAB nor DLGC_WANTARROWS bits although, logically,
@@ -5032,7 +5032,7 @@ bool wxWindowMSW::HandleSettingChange(WXWPARAM wParam, WXLPARAM lParam)
         wxWindow *win = node->GetData();
         if ( !win->IsTopLevel() )
         {
-            ::SendMessage(GetHwndOf(win), WM_SETTINGCHANGE, wParam, lParam);
+            ::SendMessageW(GetHwndOf(win), WM_SETTINGCHANGE, wParam, lParam);
         }
 
         node = node->GetNext();
@@ -5095,7 +5095,7 @@ void wxWindowMSW::OnSysColourChanged(wxSysColourChangedEvent& WXUNUSED(event))
             // we need to send the real WM_SYSCOLORCHANGE and not just trigger
             // EVT_SYS_COLOUR_CHANGED call because the latter wouldn't work for
             // the standard controls
-            ::SendMessage(GetHwndOf(win), WM_SYSCOLORCHANGE, 0, 0);
+            ::SendMessageW(GetHwndOf(win), WM_SYSCOLORCHANGE, 0, 0);
         }
 
         node = node->GetNext();
@@ -7017,7 +7017,7 @@ extern wxWindow *wxGetWindowFromHWND(WXHWND hWnd)
             // native radiobuttons return DLGC_RADIOBUTTON here and for any
             // wxWindow class which overrides WM_GETDLGCODE processing to
             // do it as well, win would be already non NULL
-            if ( ::SendMessage(hwnd, WM_GETDLGCODE, 0, 0) & DLGC_RADIOBUTTON )
+            if ( ::SendMessageW(hwnd, WM_GETDLGCODE, 0, 0) & DLGC_RADIOBUTTON )
             {
                 win = wxRadioBox::GetFromRadioButtonHWND(hwnd);
             }

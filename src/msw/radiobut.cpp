@@ -73,7 +73,7 @@ void wxRadioButton::SetValue(bool value)
     m_isChecked = value;
 
     if ( !IsOwnerDrawn() )
-        ::SendMessage(GetHwnd(), BM_SETCHECK,
+        ::SendMessageW(GetHwnd(), BM_SETCHECK,
                       value ? BST_CHECKED : BST_UNCHECKED, 0);
     else // owner drawn buttons don't react to this message
         Refresh();
@@ -198,7 +198,7 @@ bool wxRadioButton::GetValue() const
     if ( !IsOwnerDrawn() )
     {
         wxASSERT_MSG( m_isChecked ==
-                        (::SendMessage(GetHwnd(), BM_GETCHECK, 0, 0L) != 0),
+                        (::SendMessageW(GetHwnd(), BM_GETCHECK, 0, 0L) != 0),
                       wxT("wxRadioButton::m_isChecked is out of sync?") );
     }
 
@@ -309,7 +309,7 @@ int wxRadioButton::MSWGetButtonStyle() const
 void wxRadioButton::MSWOnButtonResetOwnerDrawn()
 {
     // ensure that controls state is consistent with internal state
-    ::SendMessage(GetHwnd(), BM_SETCHECK,
+    ::SendMessageW(GetHwnd(), BM_SETCHECK,
                   m_isChecked ? BST_CHECKED : BST_UNCHECKED, 0);
 }
 

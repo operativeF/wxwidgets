@@ -631,7 +631,7 @@ void wxControlWithItems::MSWAllocStorage(const std::vector<std::string>& items,
         totalTextLength += items[i].length();
     }
 
-    if ( SendMessage((HWND)MSWGetItemsHWND(), wm, numItems,
+    if ( ::SendMessageW((HWND)MSWGetItemsHWND(), wm, numItems,
                      (LPARAM)totalTextLength*sizeof(wxChar)) == LB_ERRSPACE )
     {
         wxLogLastError(wxT("SendMessage(XX_INITSTORAGE)"));

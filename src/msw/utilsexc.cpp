@@ -284,7 +284,7 @@ static DWORD __stdcall wxExecuteThread(void *arg)
                           wxT("process should have terminated") );
 
             // send a message indicating process termination to the window
-            ::SendMessage(data->hWnd, wxWM_PROC_TERMINATED, 0, (LPARAM)data);
+            ::SendMessageW(data->hWnd, wxWM_PROC_TERMINATED, 0, (LPARAM)data);
             break;
 
         case WAIT_OBJECT_0 + 1:

@@ -28,7 +28,7 @@
 // ----------------------------------------------------------------------------
 
 wxMSWEventLoopBase::wxMSWEventLoopBase()
-    : m_heventWake(::CreateEvent(nullptr, FALSE, FALSE, nullptr))
+    : m_heventWake(::CreateEventW(nullptr, FALSE, FALSE, nullptr))
 {
     // Create initially not signalled auto-reset event object.
     if ( !m_heventWake )
@@ -48,7 +48,7 @@ wxMSWEventLoopBase::~wxMSWEventLoopBase()
 bool wxMSWEventLoopBase::Pending() const
 {
     MSG msg;
-    return ::PeekMessage(&msg, nullptr, 0, 0, PM_NOREMOVE) != 0;
+    return ::PeekMessageW(&msg, nullptr, 0, 0, PM_NOREMOVE) != 0;
 }
 
 void wxMSWEventLoopBase::WakeUp()
@@ -93,7 +93,7 @@ int wxMSWEventLoopBase::GetNextMessageTimeout(WXMSG *msg, unsigned long timeout)
     // MsgWaitForMultipleObjects() won't notice any input which was already
     // examined (e.g. using PeekMessage()) but not yet removed from the queue
     // so we need to remove any immediately messages manually
-    while ( !::PeekMessage(msg, nullptr, 0, 0, PM_REMOVE) )
+    while ( !::PeekMessageW(msg, nullptr, 0, 0, PM_REMOVE) )
     {
         const DWORD rc = ::MsgWaitForMultipleObjects
                      (
@@ -140,7 +140,7 @@ int wxMSWEventLoopBase::GetNextMessageTimeout(WXMSG *msg, unsigned long timeout)
 
 void wxConsoleEventLoop::ProcessMessage(WXMSG *msg)
 {
-    ::DispatchMessage(msg);
+    ::DispatchMessageW(msg);
 }
 
 bool wxConsoleEventLoop::Dispatch()

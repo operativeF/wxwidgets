@@ -375,8 +375,8 @@ bool wxDragImage::Move(const wxPoint& pt)
         RECT rect;
         rect.left = 0; rect.top = 0;
         rect.right = 0; rect.bottom = 0;
-        DWORD style = ::GetWindowLong((HWND) m_window->GetHWND(), GWL_STYLE);
-        DWORD exStyle = ::GetWindowLong((HWND) m_window->GetHWND(), GWL_EXSTYLE);
+        DWORD style = ::GetWindowLongW((HWND) m_window->GetHWND(), GWL_STYLE);
+        DWORD exStyle = ::GetWindowLongW((HWND) m_window->GetHWND(), GWL_EXSTYLE);
         ::AdjustWindowRectEx(& rect, style, FALSE, exStyle);
         // Subtract the (negative) values, i.e. add a small increment
         pt2.x -= rect.left; pt2.y -= rect.top;

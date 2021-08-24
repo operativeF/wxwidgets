@@ -37,7 +37,7 @@
 
 #ifndef Header_SetBitmapMargin
     #define Header_SetBitmapMargin(hwnd, margin) \
-            ::SendMessage((hwnd), HDM_SETBITMAPMARGIN, (WPARAM)(margin), 0)
+            ::SendMessageW((hwnd), HDM_SETBITMAPMARGIN, (WPARAM)(margin), 0)
 #endif
 
 // from src/msw/listctrl.cpp
@@ -493,7 +493,7 @@ void wxMSWHeaderCtrl::DoInsertItem(const wxHeaderColumn& col, unsigned int idx)
     // FIXME: This needs to be checked for accuracy.
     hdi.iOrder = MSWToNativeOrder(std::distance(std::begin(m_colIndices), std::find(m_colIndices.begin(), m_colIndices.end(), idx)));
 
-    if ( ::SendMessage(GetHwnd(), HDM_INSERTITEM,
+    if ( ::SendMessageW(GetHwnd(), HDM_INSERTITEM,
                        MSWToNativeIdx(idx), (LPARAM)&hdi) == -1)
     {
         wxLogLastError(wxT("Header_InsertItem()"));

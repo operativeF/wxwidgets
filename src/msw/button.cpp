@@ -335,7 +335,7 @@ wxButton::SetDefaultStyle(wxButton *btn, bool on)
         wxWindow * const tlw = wxGetTopLevelParent(btn);
         wxCHECK_RET( tlw, wxT("button without top level window?") );
 
-        ::SendMessage(GetHwndOf(tlw), DM_SETDEFID, btn->GetId(), 0L);
+        ::SendMessageW(GetHwndOf(tlw), DM_SETDEFID, btn->GetId(), 0L);
 
         // sending DM_SETDEFID also changes the button style to
         // BS_DEFPUSHBUTTON so there is nothing more to do
@@ -460,7 +460,7 @@ void wxButton::DoSetAuthNeeded(bool show)
     if ( wxGetWinVersion() >= wxWinVersion_6 )
     {
         m_authNeeded = show;
-        ::SendMessage(GetHwnd(), BCM_SETSHIELD, 0, show);
+        ::SendMessageW(GetHwnd(), BCM_SETSHIELD, 0, show);
         InvalidateBestSize();
     }
 }

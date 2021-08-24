@@ -159,7 +159,7 @@ void wxBitmapComboBox::RecreateControl()
         SetBackgroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOW));
     }
 
-    ::SendMessage(GetHwnd(), CB_SETITEMHEIGHT, 0, MeasureItem(0));
+    ::SendMessageW(GetHwnd(), CB_SETITEMHEIGHT, 0, MeasureItem(0));
 
     // Revert the old string value
     if ( !HasFlag(wxCB_READONLY) )
@@ -367,7 +367,7 @@ bool wxBitmapComboBox::OnAddBitmap(const wxBitmap& bitmap)
     if ( wxBitmapComboBoxBase::OnAddBitmap(bitmap) || !GetCount() )
     {
         // Need to recreate control for a new measureitem call?
-        const auto prevItemHeight = ::SendMessage(GetHwnd(), CB_GETITEMHEIGHT, 0, 0);
+        const auto prevItemHeight = ::SendMessageW(GetHwnd(), CB_GETITEMHEIGHT, 0, 0);
 
         if ( prevItemHeight != MeasureItem(0) )
             RecreateControl();

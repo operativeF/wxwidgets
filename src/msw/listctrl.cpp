@@ -94,7 +94,7 @@ wxGetListCtrlSubItemRect(HWND hwnd, int item, int subitem, int flags, RECT& rect
 {
     rect.top = subitem;
     rect.left = flags;
-    return ::SendMessage(hwnd, LVM_GETSUBITEMRECT, item, (LPARAM)&rect) != 0;
+    return ::SendMessageW(hwnd, LVM_GETSUBITEMRECT, item, (LPARAM)&rect) != 0;
 }
 
 inline bool
@@ -302,7 +302,7 @@ void wxListCtrl::MSWSetExListStyles()
         SetBackgroundStyle(wxBG_STYLE_PAINT);
     }
 
-    ::SendMessage(GetHwnd(), LVM_SETEXTENDEDLISTVIEWSTYLE, 0, exStyle);
+    ::SendMessageW(GetHwnd(), LVM_SETEXTENDEDLISTVIEWSTYLE, 0, exStyle);
 }
 
 WXDWORD wxListCtrl::MSWGetStyle(long style, WXDWORD *exstyle) const
@@ -860,7 +860,7 @@ bool wxListCtrl::GetItem(wxListItem& info) const
 // Check if the item is visible
 bool wxListCtrl::IsVisible(long item) const
 {
-    bool result = ::SendMessage( GetHwnd(), LVM_ISITEMVISIBLE, (WPARAM) item, 0 ) != 0;
+    bool result = ::SendMessageW( GetHwnd(), LVM_ISITEMVISIBLE, (WPARAM) item, 0 ) != 0;
     if ( result )
     {
         HWND hwndHdr = ListView_GetHeader(GetHwnd());
@@ -1018,7 +1018,7 @@ bool wxListCtrl::SetItemState(long item, long state, long stateMask)
         focusOld = -1;
     }
 
-    if ( !::SendMessage(GetHwnd(), LVM_SETITEMSTATE,
+    if ( !::SendMessageW(GetHwnd(), LVM_SETITEMSTATE,
                         (WPARAM)item, (LPARAM)&lvItem) )
     {
         wxLogLastError(wxT("ListView_SetItemState"));
@@ -1691,7 +1691,7 @@ bool wxListCtrl::EndEditLabel(bool cancel)
     // We shouldn't destroy the control ourselves according to MSDN, which
     // proposes WM_CANCELMODE to do this, but it doesn't seem to work so
     // emulate the corresponding user action instead.
-    ::SendMessage(hwnd, WM_KEYDOWN, cancel ? VK_ESCAPE : VK_RETURN, 0);
+    ::SendMessageW(hwnd, WM_KEYDOWN, cancel ? VK_ESCAPE : VK_RETURN, 0);
 
     return true;
 }
@@ -3327,7 +3327,7 @@ void wxListCtrl::SetItemCount(long count)
 {
     wxASSERT_MSG( IsVirtual(), wxT("this is for virtual controls only") );
 
-    if ( !::SendMessage(GetHwnd(), LVM_SETITEMCOUNT, (WPARAM)count,
+    if ( !::SendMessageW(GetHwnd(), LVM_SETITEMCOUNT, (WPARAM)count,
                         LVSICF_NOSCROLL | LVSICF_NOINVALIDATEALL) )
     {
         wxLogLastError(wxT("ListView_SetItemCount"));
@@ -3377,7 +3377,7 @@ static void wxConvertFromMSWListItem(HWND hwndListCtrl,
             lvItem.cchTextMax = 512;
         }
         lvItem.mask |= LVIF_TEXT | LVIF_IMAGE | LVIF_PARAM;
-        ::SendMessage(hwndListCtrl, LVM_GETITEM, 0, (LPARAM)& lvItem);
+        ::SendMessageW(hwndListCtrl, LVM_GETITEM, 0, (LPARAM)& lvItem);
     }
 
     if ( lvItem.mask & LVIF_STATE )

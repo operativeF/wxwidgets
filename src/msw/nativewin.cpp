@@ -59,7 +59,7 @@ wxNativeWindow::Create(wxWindow* parent,
     {
         // For the same reason as above, check that it's the same as the one
         // used by the native HWND.
-        wxASSERT_MSG( ::GetWindowLong(hwnd, GWL_ID) == winid,
+        wxASSERT_MSG( ::GetWindowLongW(hwnd, GWL_ID) == winid,
                       wxS("Mismatch between wx and native IDs") );
     }
 
@@ -108,7 +108,7 @@ bool wxNativeContainerWindow::Create(wxNativeContainerWindowHandle hwnd)
 
 bool wxNativeContainerWindow::IsShown() const
 {
-    return (IsWindowVisible(static_cast<HWND>(m_hWnd)) != 0);
+    return (::IsWindowVisible(static_cast<HWND>(m_hWnd)) != 0);
 }
 
 void wxNativeContainerWindow::OnNativeDestroyed()

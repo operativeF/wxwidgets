@@ -445,14 +445,14 @@ wxDataFormat wxEnumClipboardFormats(wxDataFormat dataFormat)
 
 int wxRegisterClipboardFormat(wxChar *formatName)
 {
-  return ::RegisterClipboardFormat(formatName);
+  return ::RegisterClipboardFormatW(formatName);
 }
 
 bool wxGetClipboardFormatName(wxDataFormat dataFormat,
                               wxChar *formatName,
                               int maxCount)
 {
-  return ::GetClipboardFormatName((int)dataFormat, formatName, maxCount) > 0;
+  return ::GetClipboardFormatNameW((int)dataFormat, formatName, maxCount) > 0;
 }
 
 // ---------------------------------------------------------------------------
@@ -522,9 +522,9 @@ bool wxClipboard::Open()
 {
     // Get clipboard id for HTML and PNG formats...
     if(!gs_htmlcfid)
-        gs_htmlcfid = RegisterClipboardFormat(wxT("HTML Format"));
+        gs_htmlcfid = RegisterClipboardFormatW(wxT("HTML Format"));
     if ( !gs_pngcfid )
-        gs_pngcfid = ::RegisterClipboardFormat(wxT("PNG"));
+        gs_pngcfid = ::RegisterClipboardFormatW(wxT("PNG"));
 
     // OLE opens clipboard for us
     m_isOpened = true;
