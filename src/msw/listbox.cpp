@@ -558,7 +558,7 @@ void wxListBox::SetHorizontalExtent(const std::string& s)
     }
     else // just increase the extent to the length of this string
     {
-        int existingExtent = (int)SendMessageW(GetHwnd(),
+        int existingExtent = (int)::SendMessageW(GetHwnd(),
                                               LB_GETHORIZONTALEXTENT, 0, 0L);
 
         boost::nowide::wstackstring stackText(s.c_str());

@@ -28,6 +28,7 @@
 #include "wx/msw/htmlhelp.h"
 
 #include <boost/nowide/stackstring.hpp>
+#include <gsl/gsl>
 
 // ----------------------------------------------------------------------------
 // utility functions to manage the loading/unloading
@@ -151,22 +152,19 @@ wxCHMHelpController::DoDisplayTextPopup(const std::string& text,
                                         int contextId,
                                         wxWindow *window)
 {
-    HH_POPUP popup;
-    popup.cbStruct = sizeof(popup);
-    popup.hinst = (HINSTANCE) wxGetInstance();
-    popup.idString = contextId;
-
     boost::nowide::wstackstring stackText(text.c_str());
-    popup.pszText = stackText.get();
-    popup.pt.x = pos.x;
-    popup.pt.y = pos.y;
-    popup.clrForeground = ::GetSysColor(COLOR_INFOTEXT);
-    popup.clrBackground = ::GetSysColor(COLOR_INFOBK);
-    popup.rcMargins.top =
-    popup.rcMargins.left =
-    popup.rcMargins.right =
-    popup.rcMargins.bottom = -1;
-    popup.pszFont = nullptr;
+
+    HH_POPUP popup = {
+        .cbStruct{sizeof(popup)},
+        .hinst{(HINSTANCE) wxGetInstance()},
+        .idString{gsl::narrow_cast<UINT>(contextId)},
+        .pszText{stackText.get()},
+        .pt{pos.x, pos.y},
+        .clrForeground{::GetSysColor(COLOR_INFOTEXT)},
+        .clrBackground{::GetSysColor(COLOR_INFOBK)},
+        .rcMargins{-1, -1, -1, -1},
+        .pszFont{nullptr}
+    };
 
     return CallHtmlHelp(window, "", HH_DISPLAY_TEXT_POPUP, &popup);
 }
@@ -204,31 +202,33 @@ bool wxCHMHelpController::KeywordSearch(const std::string& k,
 
     if (k.empty())
     {
-        HH_FTS_QUERY oQuery;
-        oQuery.cbStruct = sizeof(HH_FTS_QUERY);
-        oQuery.fStemmedSearch = 0;
-        oQuery.fTitleOnly = 0;
-        oQuery.fUniCodeStrings = 0;
-        oQuery.iProximity = 0;
-        oQuery.pszSearchQuery = TEXT("");
-        oQuery.pszWindow = TEXT("");
-        oQuery.fExecute = 1;
+        HH_FTS_QUERY oQuery = {
+            .cbStruct{sizeof(HH_FTS_QUERY)},
+            .fUniCodeStrings{0},
+            .pszSearchQuery{TEXT("")},
+            .iProximity{0},
+            .fStemmedSearch{0},
+            .fTitleOnly{0},
+            .fExecute{1},
+            .pszWindow{TEXT("")}
+        };
 
         return CallHtmlHelp(HH_DISPLAY_SEARCH, &oQuery);
     }
     else
     {
-        HH_AKLINK link;
-        link.cbStruct =     sizeof(HH_AKLINK);
-        link.fReserved =    FALSE;
-
         boost::nowide::wstackstring stackK(k.c_str());
-        link.pszKeywords =  stackK.get();
-        link.pszUrl =       nullptr;
-        link.pszMsgText =   nullptr;
-        link.pszMsgTitle =  nullptr;
-        link.pszWindow =    nullptr;
-        link.fIndexOnFail = TRUE;
+
+        HH_AKLINK link = {
+            .cbStruct{sizeof(HH_AKLINK)},
+            .fReserved{FALSE},
+            .pszKeywords{stackK.get()},
+            .pszUrl{nullptr},
+            .pszMsgText{nullptr},
+            .pszMsgTitle{nullptr},
+            .pszWindow{nullptr},
+            .fIndexOnFail{TRUE}
+        };
 
         return CallHtmlHelp(HH_KEYWORD_LOOKUP, &link);
     }

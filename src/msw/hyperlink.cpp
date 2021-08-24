@@ -156,7 +156,7 @@ wxSize wxHyperlinkCtrl::DoGetBestClientSize() const
         return wxGenericHyperlinkCtrl::DoGetBestClientSize();
 
     SIZE idealSize;
-    ::SendMessage(m_hWnd, LM_GETIDEALSIZE, 0, (LPARAM)&idealSize);
+    ::SendMessageW(m_hWnd, LM_GETIDEALSIZE, 0, (LPARAM)&idealSize);
 
     return wxSize(idealSize.cx, idealSize.cy);
 }

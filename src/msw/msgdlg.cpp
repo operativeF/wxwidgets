@@ -169,9 +169,9 @@ void wxMessageDialog::ReplaceStaticWithEdit()
     // find the static control to replace: normally there are two of them, the
     // icon and the text itself so search for all of them and ignore the icon
     // ones
-    HWND hwndStatic = ::FindWindowEx(GetHwnd(), nullptr, wxT("STATIC"), nullptr);
+    HWND hwndStatic = ::FindWindowExW(GetHwnd(), nullptr, wxT("STATIC"), nullptr);
     if ( ::GetWindowLong(hwndStatic, GWL_STYLE) & SS_ICON )
-        hwndStatic = ::FindWindowEx(GetHwnd(), hwndStatic, wxT("STATIC"), nullptr);
+        hwndStatic = ::FindWindowExW(GetHwnd(), hwndStatic, wxT("STATIC"), nullptr);
 
     if ( !hwndStatic )
     {
@@ -263,7 +263,7 @@ void wxMessageDialog::ReplaceStaticWithEdit()
     rcBox.bottom = rcBox.top + hMsgBox + (rectDisplay.height - hMsgBox)%2;
     rcBox.left -= dw/2;
     rcBox.right += dw - dw/2;
-    SetWindowRect(GetHwnd(), rcBox);
+    ::SetWindowRect(GetHwnd(), rcBox);
 
     // and adjust all the buttons positions
     for ( const auto& button : ms_buttons )

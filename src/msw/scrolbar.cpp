@@ -23,6 +23,8 @@
 
 #include "wx/msw/private.h"
 
+#include <gsl/gsl>
+
 // Scrollbar
 bool wxScrollBar::Create(wxWindow *parent, wxWindowID id,
            const wxPoint& pos,
@@ -167,7 +169,7 @@ void wxScrollBar::SetScrollbar(int position, int thumbSize, int range, int pageS
 
     // The range (number of scroll steps) is the
     // object length minus the page size.
-    int range1 = std::max((m_objectSize - m_pageSize), 0) ;
+    int range1 = std::max((m_objectSize - m_pageSize), 0);
 
     // Try to adjust the range to cope with page size > 1
     // (see comment for SetPageLength)
@@ -176,14 +178,14 @@ void wxScrollBar::SetScrollbar(int position, int thumbSize, int range, int pageS
         range1 += (m_pageSize - 1);
     }
 
-    SCROLLINFO info;
-    info.cbSize = sizeof(SCROLLINFO);
-    info.nPage = m_pageSize;
-    info.nMin = 0;
-    info.nMax = range1;
-    info.nPos = position;
-
-    info.fMask = SIF_PAGE | SIF_RANGE | SIF_POS;
+    SCROLLINFO info = {
+        .cbSize = sizeof(SCROLLINFO),
+        .fMask = SIF_PAGE | SIF_RANGE | SIF_POS,
+        .nMin = 0,
+        .nMax = range1,
+        .nPage = gsl::narrow_cast<UINT>(m_pageSize),
+        .nPos = position
+    };
 
     ::SetScrollInfo((HWND) GetHWND(), SB_CTL, &info, refresh);
 }

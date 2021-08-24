@@ -371,7 +371,7 @@ bool wxRegKey::GetKeyInfo(size_t *pnSubKeys,
 #endif
 
 
-  m_dwLastError = ::RegQueryInfoKey
+  m_dwLastError = ::RegQueryInfoKeyW
                   (
                     (HKEY) m_hKey,
                     nullptr,                   // class name
@@ -426,7 +426,7 @@ bool wxRegKey::Open(AccessMode mode)
     }
 
     HKEY tmpKey;
-    m_dwLastError = ::RegOpenKeyEx
+    m_dwLastError = ::RegOpenKeyExW
                     (
                         (HKEY) m_hRootKey,
                         m_strKey.t_str(),
@@ -460,7 +460,7 @@ bool wxRegKey::Create(bool bOkIfExists)
 
   HKEY tmpKey;
   DWORD disposition;
-  m_dwLastError = RegCreateKeyEx((HKEY) m_hRootKey, m_strKey.t_str(),
+  m_dwLastError = ::RegCreateKeyExW((HKEY) m_hRootKey, m_strKey.t_str(),
       wxRESERVED_PARAM,
       nullptr, // The user-defined class type of this key.
       REG_OPTION_NON_VOLATILE, // supports other values as well; see MS docs
@@ -781,7 +781,7 @@ bool wxRegKey::DeleteValue(const wxString& szValue)
     if ( !Open() )
         return false;
 
-    m_dwLastError = RegDeleteValue((HKEY) m_hKey, RegValueStr(szValue));
+    m_dwLastError = ::RegDeleteValueW((HKEY) m_hKey, RegValueStr(szValue));
 
     // deleting a value which doesn't exist is not considered an error
     if ( (m_dwLastError != ERROR_SUCCESS) &&
@@ -808,7 +808,7 @@ bool wxRegKey::HasValue(const wxString& szValue) const
     if ( !CONST_CAST Open(Read) )
         return false;
 
-    const LONG dwRet = ::RegQueryValueEx((HKEY) m_hKey,
+    const LONG dwRet = ::RegQueryValueExW((HKEY) m_hKey,
                                    RegValueStr(szValue),
                                    wxRESERVED_PARAM,
                                    nullptr, nullptr, nullptr);
@@ -857,7 +857,7 @@ wxRegKey::ValueType wxRegKey::GetValueType(const wxString& szValue) const
       return Type_None;
 
     DWORD dwType;
-    m_dwLastError = RegQueryValueEx((HKEY) m_hKey, RegValueStr(szValue), wxRESERVED_PARAM,
+    m_dwLastError = ::RegQueryValueExW((HKEY) m_hKey, RegValueStr(szValue), wxRESERVED_PARAM,
                                     &dwType, nullptr, nullptr);
     if ( m_dwLastError != ERROR_SUCCESS ) {
       wxLogSysError(m_dwLastError, _("Can't read value of key '%s'"),
@@ -871,7 +871,7 @@ wxRegKey::ValueType wxRegKey::GetValueType(const wxString& szValue) const
 bool wxRegKey::SetValue(const wxString& szValue, long lValue)
 {
   if ( CONST_CAST Open() ) {
-    m_dwLastError = RegSetValueEx((HKEY) m_hKey, RegValueStr(szValue),
+    m_dwLastError = ::RegSetValueExW((HKEY) m_hKey, RegValueStr(szValue),
                                   wxRESERVED_PARAM, REG_DWORD,
                                   (RegString)&lValue, sizeof(lValue));
     if ( m_dwLastError == ERROR_SUCCESS )
@@ -888,7 +888,7 @@ bool wxRegKey::QueryValue(const wxString& szValue, long *plValue) const
   if ( CONST_CAST Open(Read) ) {
     DWORD dwType, dwSize = sizeof(DWORD);
     RegString pBuf = (RegString)plValue;
-    m_dwLastError = RegQueryValueEx((HKEY) m_hKey, RegValueStr(szValue),
+    m_dwLastError = ::RegQueryValueExW((HKEY) m_hKey, RegValueStr(szValue),
                                     wxRESERVED_PARAM,
                                     &dwType, pBuf, &dwSize);
     if ( m_dwLastError != ERROR_SUCCESS ) {
@@ -913,7 +913,7 @@ bool wxRegKey::QueryValue(const wxString& szValue, long *plValue) const
 bool wxRegKey::SetValue64(const wxString& szValue, wxLongLong_t llValue)
 {
   if ( CONST_CAST Open() ) {
-    m_dwLastError = RegSetValueEx((HKEY) m_hKey, RegValueStr(szValue),
+    m_dwLastError = ::RegSetValueExW((HKEY) m_hKey, RegValueStr(szValue),
                                   wxRESERVED_PARAM, REG_QWORD,
                                   (RegString)&llValue, sizeof(llValue));
     if ( m_dwLastError == ERROR_SUCCESS )
@@ -930,7 +930,7 @@ bool wxRegKey::QueryValue64(const wxString& szValue, wxLongLong_t *pllValue) con
   if ( CONST_CAST Open(Read) ) {
     DWORD dwType, dwSize = sizeof(wxLongLong_t); // QWORD doesn't exist.
     RegString pBuf = (RegString)pllValue;
-    m_dwLastError = RegQueryValueEx((HKEY) m_hKey, RegValueStr(szValue),
+    m_dwLastError = ::RegQueryValueExW((HKEY) m_hKey, RegValueStr(szValue),
                                     wxRESERVED_PARAM,
                                     &dwType, pBuf, &dwSize);
     if ( m_dwLastError != ERROR_SUCCESS ) {
@@ -961,7 +961,7 @@ bool wxRegKey::QueryValue64(const wxString& szValue, wxLongLong_t *pllValue) con
 bool wxRegKey::SetValue(const wxString& szValue, const wxMemoryBuffer& buffer)
 {
   if ( CONST_CAST Open() ) {
-    m_dwLastError = RegSetValueEx((HKEY) m_hKey, RegValueStr(szValue),
+    m_dwLastError = ::RegSetValueExW((HKEY) m_hKey, RegValueStr(szValue),
                                   wxRESERVED_PARAM, REG_BINARY,
                                   (RegBinary)buffer.GetData(),buffer.GetDataLen());
     if ( m_dwLastError == ERROR_SUCCESS )
@@ -978,7 +978,7 @@ bool wxRegKey::QueryValue(const wxString& szValue, wxMemoryBuffer& buffer) const
   if ( CONST_CAST Open(Read) ) {
     // first get the type and size of the data
     DWORD dwType, dwSize;
-    m_dwLastError = RegQueryValueEx((HKEY) m_hKey, RegValueStr(szValue),
+    m_dwLastError = ::RegQueryValueExW((HKEY) m_hKey, RegValueStr(szValue),
                                     wxRESERVED_PARAM,
                                     &dwType, nullptr, &dwSize);
 
@@ -991,7 +991,7 @@ bool wxRegKey::QueryValue(const wxString& szValue, wxMemoryBuffer& buffer) const
 
         if ( dwSize ) {
             const RegBinary pBuf = (RegBinary)buffer.GetWriteBuf(dwSize);
-            m_dwLastError = RegQueryValueEx((HKEY) m_hKey,
+            m_dwLastError = ::RegQueryValueExW((HKEY) m_hKey,
                                             RegValueStr(szValue),
                                             wxRESERVED_PARAM,
                                             &dwType,
@@ -1025,7 +1025,7 @@ bool wxRegKey::QueryValue(const wxString& szValue,
 
         // first get the type and size of the data
         DWORD dwType=REG_NONE, dwSize=0;
-        m_dwLastError = RegQueryValueEx((HKEY) m_hKey,
+        m_dwLastError = ::RegQueryValueExW((HKEY) m_hKey,
                                         RegValueStr(szValue),
                                         wxRESERVED_PARAM,
                                         &dwType, nullptr, &dwSize);
@@ -1051,7 +1051,7 @@ bool wxRegKey::QueryValue(const wxString& szValue,
                 // extra scope for wxStringBufferLength
                 {
                     wxStringBufferLength strBuf(strValue, chars);
-                    m_dwLastError = RegQueryValueEx((HKEY) m_hKey,
+                    m_dwLastError = ::RegQueryValueExW((HKEY) m_hKey,
                                                     RegValueStr(szValue),
                                                     wxRESERVED_PARAM,
                                                     &dwType,
@@ -1070,12 +1070,12 @@ bool wxRegKey::QueryValue(const wxString& szValue,
                 // expand the var expansions in the string unless disabled
                 if ( (dwType == REG_EXPAND_SZ) && !raw )
                 {
-                    const DWORD dwExpSize = ::ExpandEnvironmentStrings(strValue.t_str(), nullptr, 0);
+                    const DWORD dwExpSize = ::ExpandEnvironmentStringsW(strValue.t_str(), nullptr, 0);
                     bool ok = dwExpSize != 0;
                     if ( ok )
                     {
                         wxString strExpValue;
-                        ok = ::ExpandEnvironmentStrings(strValue.t_str(),
+                        ok = ::ExpandEnvironmentStringsW(strValue.t_str(),
                                                         wxStringBuffer(strExpValue, dwExpSize),
                                                         dwExpSize
                                                         ) != 0;
@@ -1102,7 +1102,7 @@ bool wxRegKey::QueryValue(const wxString& szValue,
 bool wxRegKey::SetValue(const wxString& szValue, const wxString& strValue)
 {
   if ( CONST_CAST Open() ) {
-      m_dwLastError = RegSetValueEx((HKEY) m_hKey,
+      m_dwLastError = ::RegSetValueExW((HKEY) m_hKey,
                                     RegValueStr(szValue),
                                     wxRESERVED_PARAM, REG_SZ,
                                     reinterpret_cast<const BYTE*>(wxMSW_CONV_LPCTSTR(strValue)),
@@ -1149,7 +1149,7 @@ bool wxRegKey::GetNextValue(wxString& strValueName, long& lIndex) const
     wxChar  szValueName[1024];                  // @@ use RegQueryInfoKey...
     DWORD dwValueLen = WXSIZEOF(szValueName);
 
-    m_dwLastError = RegEnumValue((HKEY) m_hKey, lIndex++,
+    m_dwLastError = ::RegEnumValueW((HKEY) m_hKey, lIndex++,
                                  szValueName, &dwValueLen,
                                  wxRESERVED_PARAM,
                                  nullptr,            // [out] type
@@ -1193,7 +1193,7 @@ bool wxRegKey::GetNextKey(wxString& strKeyName, long& lIndex) const
 
   wxChar szKeyName[_MAX_PATH + 1];
 
-  m_dwLastError = RegEnumKey((HKEY) m_hKey, lIndex++, szKeyName, WXSIZEOF(szKeyName));
+  m_dwLastError = ::RegEnumKeyW((HKEY) m_hKey, lIndex++, szKeyName, WXSIZEOF(szKeyName));
 
   if ( m_dwLastError != ERROR_SUCCESS ) {
     if ( m_dwLastError == ERROR_NO_MORE_ITEMS ) {
@@ -1518,7 +1518,7 @@ bool KeyExists(WXHKEY hRootKey,
         return true;
 
     HKEY hkeyDummy;
-    if ( ::RegOpenKeyEx
+    if ( ::RegOpenKeyExW
          (
             (HKEY)hRootKey,
             szKey.t_str(),

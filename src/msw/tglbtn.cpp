@@ -136,7 +136,7 @@ void wxToggleButton::SetValue(bool val)
     }
     else
     {
-        ::SendMessage(GetHwnd(), BM_SETCHECK, val ? BST_CHECKED : BST_UNCHECKED, 0);
+        ::SendMessageW(GetHwnd(), BM_SETCHECK, val ? BST_CHECKED : BST_UNCHECKED, 0);
     }
 }
 
@@ -148,7 +148,7 @@ bool wxToggleButton::GetValue() const
     }
     else
     {
-        return ::SendMessage(GetHwnd(), BM_GETCHECK, 0, 0) == BST_CHECKED;
+        return ::SendMessageW(GetHwnd(), BM_GETCHECK, 0, 0) == BST_CHECKED;
     }
 }
 

@@ -1012,12 +1012,15 @@ bool wxToolBar::Realize()
         if ( oldToolBarBitmap )
         {
 #ifdef TB_REPLACEBITMAP
-            TBREPLACEBITMAP replaceBitmap;
-            replaceBitmap.hInstOld = nullptr;
-            replaceBitmap.hInstNew = nullptr;
-            replaceBitmap.nIDOld = (UINT_PTR)oldToolBarBitmap;
-            replaceBitmap.nIDNew = (UINT_PTR)hBitmap;
-            replaceBitmap.nButtons = nButtons;
+            TBREPLACEBITMAP replaceBitmap =
+            {
+                .hInstOld = nullptr,
+                .nIDOld = (UINT_PTR)oldToolBarBitmap,
+                .hInstNew = nullptr,
+                .nIDNew = (UINT_PTR)hBitmap,
+                .nButtons = nButtons
+            };
+
             if ( !::SendMessageW(GetHwnd(), TB_REPLACEBITMAP,
                                 0, (LPARAM) &replaceBitmap) )
             {
@@ -1040,9 +1043,11 @@ bool wxToolBar::Realize()
 
         if ( addBitmap ) // no old bitmap or we can't replace it
         {
-            TBADDBITMAP tbAddBitmap;
-            tbAddBitmap.hInst = nullptr;
-            tbAddBitmap.nID = (UINT_PTR)hBitmap;
+            TBADDBITMAP tbAddBitmap = {
+                .hInst = nullptr,
+                .nID = (UINT_PTR)hBitmap
+            };
+
             if ( ::SendMessageW(GetHwnd(), TB_ADDBITMAP,
                                (WPARAM) nButtons, (LPARAM)&tbAddBitmap) == -1 )
             {
@@ -1705,9 +1710,7 @@ wxSize wxToolBar::GetToolSize() const
 
 wxToolBarToolBase *wxToolBar::FindToolForPosition(wxCoord x, wxCoord y) const
 {
-    POINT pt;
-    pt.x = x;
-    pt.y = y;
+    POINT pt{x, y};
     int index = (int)::SendMessageW(GetHwnd(), TB_HITTEST, 0, (LPARAM)&pt);
 
     // MBN: when the point ( x, y ) is close to the toolbar border
@@ -2214,9 +2217,9 @@ WXHBITMAP wxToolBar::MapBitmap(WXHBITMAP bitmap, int width, int height)
             for ( size_t k = 0; k < wxSTD_COL_MAX; k++ )
             {
                 COLORREF col = cmap[k].from;
-                if ( abs(GetRValue(pixel) - GetRValue(col)) < 10 &&
-                     abs(GetGValue(pixel) - GetGValue(col)) < 10 &&
-                     abs(GetBValue(pixel) - GetBValue(col)) < 10 )
+                if ( std::abs(GetRValue(pixel) - GetRValue(col)) < 10 &&
+                     std::abs(GetGValue(pixel) - GetGValue(col)) < 10 &&
+                     std::abs(GetBValue(pixel) - GetBValue(col)) < 10 )
                 {
                     if ( cmap[k].to != pixel )
                         ::SetPixel(hdcMem, i, j, cmap[k].to);

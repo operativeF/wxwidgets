@@ -415,9 +415,10 @@ bool wxNotebook::SetPageImage(size_t nPage, int nImage)
 {
     wxCHECK_MSG( IS_VALID_PAGE(nPage), false, wxT("notebook page out of range") );
 
-    TC_ITEM tcItem;
-    tcItem.mask = TCIF_IMAGE;
-    tcItem.iImage = nImage;
+    TC_ITEMW tcItem = {
+        .mask = TCIF_IMAGE,
+        .iImage = nImage
+    };
 
     return TabCtrl_SetItem(GetHwnd(), nPage, &tcItem) != 0;
 }
@@ -462,11 +463,12 @@ wxRect wxNotebook::GetPageSize() const
 void wxNotebook::SetPageSize(const wxSize& size)
 {
     // transform the page size into the notebook size
-    RECT rc;
-    rc.left =
-    rc.top = 0;
-    rc.right = size.x;
-    rc.bottom = size.y;
+    RECT rc = {
+        .left{0},
+        .top{0},
+        .right{size.x},
+        .bottom{size.y}
+    };
 
     (void)TabCtrl_AdjustRect(GetHwnd(), true, &rc);
 
@@ -483,7 +485,7 @@ void wxNotebook::SetPadding(const wxSize& padding)
 // style.
 void wxNotebook::SetTabSize(const wxSize& sz)
 {
-    ::SendMessage(GetHwnd(), TCM_SETITEMSIZE, 0, MAKELPARAM(sz.x, sz.y));
+    ::SendMessageW(GetHwnd(), TCM_SETITEMSIZE, 0, MAKELPARAM(sz.x, sz.y));
 }
 
 wxSize wxNotebook::CalcSizeFromPage(const wxSize& sizePage) const

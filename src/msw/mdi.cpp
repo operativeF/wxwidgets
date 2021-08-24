@@ -725,7 +725,7 @@ void wxMDIParentFrame::OnMDICommand(wxCommandEvent& event)
             return;
     }
 
-    ::SendMessage(GetWinHwnd(GetClientWindow()), msg, wParam, lParam);
+    ::SendMessageW(GetWinHwnd(GetClientWindow()), msg, wParam, lParam);
 }
 
 #endif // wxUSE_MENUS
@@ -740,7 +740,7 @@ WXLRESULT wxMDIParentFrame::MSWDefWindowProc(WXUINT message,
     else
         clientWnd = nullptr;
 
-    return DefFrameProc(GetHwnd(), (HWND)clientWnd, message, wParam, lParam);
+    return ::DefFrameProcW(GetHwnd(), (HWND)clientWnd, message, wParam, lParam);
 }
 
 bool wxMDIParentFrame::MSWTranslateMessage(WXMSG* msg)
@@ -865,7 +865,7 @@ bool wxMDIChildFrame::Create(wxMDIParentFrame *parent,
 
   wxWindowCreationHook hook(this);
 
-  m_hWnd = (WXHWND)::SendMessage(GetWinHwnd(parent->GetClientWindow()),
+  m_hWnd = (WXHWND)::SendMessageW(GetWinHwnd(parent->GetClientWindow()),
                                  WM_MDICREATE, 0, (LPARAM)&mcs);
 
   if ( !m_hWnd )
@@ -999,7 +999,7 @@ wxPoint wxMDIChildFrame::DoGetScreenPosition() const
 wxPoint wxMDIChildFrame::DoGetPosition() const
 {
   RECT rect;
-  GetWindowRect(GetHwnd(), &rect);
+  ::GetWindowRect(GetHwnd(), &rect);
   POINT point;
   point.x = rect.left;
   point.y = rect.top;
@@ -1049,11 +1049,11 @@ void wxMDIChildFrame::Maximize(bool maximize)
             // Turn off redrawing in the MDI client window because otherwise
             // maximizing it would also show it and we don't want this for
             // hidden windows.
-            ::SendMessage(GetWinHwnd(parent->GetClientWindow()), WM_SETREDRAW,
+            ::SendMessageW(GetWinHwnd(parent->GetClientWindow()), WM_SETREDRAW,
                           FALSE, 0L);
         }
 
-        ::SendMessage(GetWinHwnd(parent->GetClientWindow()),
+        ::SendMessageW(GetWinHwnd(parent->GetClientWindow()),
                       maximize ? WM_MDIMAXIMIZE : WM_MDIRESTORE,
                       (WPARAM)GetHwnd(), 0);
 
@@ -1063,7 +1063,7 @@ void wxMDIChildFrame::Maximize(bool maximize)
             ::ShowWindow(GetHwnd(), SW_HIDE);
 
             // Turn redrawing in the MDI client back on.
-            ::SendMessage(GetWinHwnd(parent->GetClientWindow()), WM_SETREDRAW,
+            ::SendMessageW(GetWinHwnd(parent->GetClientWindow()), WM_SETREDRAW,
                           TRUE, 0L);
         }
     }
@@ -1074,7 +1074,7 @@ void wxMDIChildFrame::Restore()
     wxMDIParentFrame * const parent = GetMDIParent();
     if ( parent && parent->GetClientWindow() )
     {
-        ::SendMessage(GetWinHwnd(parent->GetClientWindow()), WM_MDIRESTORE,
+        ::SendMessageW(GetWinHwnd(parent->GetClientWindow()), WM_MDIRESTORE,
                       (WPARAM) GetHwnd(), 0);
     }
 }
@@ -1089,7 +1089,7 @@ void wxMDIChildFrame::Activate()
         if ( IsIconized() )
             Restore();
 
-        ::SendMessage(GetWinHwnd(parent->GetClientWindow()), WM_MDIACTIVATE,
+        ::SendMessageW(GetWinHwnd(parent->GetClientWindow()), WM_MDIACTIVATE,
                       (WPARAM) GetHwnd(), 0);
     }
 }
@@ -1205,8 +1205,8 @@ bool wxMDIChildFrame::HandleWindowPosChanging(void *pos)
     if (!(lpPos->flags & SWP_NOSIZE))
     {
         RECT rectClient;
-        DWORD dwExStyle = ::GetWindowLong(GetHwnd(), GWL_EXSTYLE);
-        DWORD dwStyle = ::GetWindowLong(GetHwnd(), GWL_STYLE);
+        DWORD dwExStyle = ::GetWindowLongW(GetHwnd(), GWL_EXSTYLE);
+        DWORD dwStyle = ::GetWindowLongW(GetHwnd(), GWL_STYLE);
         if (ResetWindowStyle((void *) & rectClient) && (dwStyle & WS_MAXIMIZE))
         {
             ::AdjustWindowRectEx(&rectClient, dwStyle, false, dwExStyle);
@@ -1237,7 +1237,7 @@ bool wxMDIChildFrame::HandleGetMinMaxInfo(void *mmInfo)
 
 WXLRESULT wxMDIChildFrame::MSWDefWindowProc(WXUINT message, WXWPARAM wParam, WXLPARAM lParam)
 {
-    return DefMDIChildProc(GetHwnd(),
+    return ::DefMDIChildProcW(GetHwnd(),
                            (UINT)message, (WPARAM)wParam, (LPARAM)lParam);
 }
 
@@ -1261,7 +1261,7 @@ void wxMDIChildFrame::MSWDestroyWindow()
     // the wxFrame is destroyed.
 
     HWND oldHandle = (HWND)GetHWND();
-    SendMessage(GetWinHwnd(parent->GetClientWindow()), WM_MDIDESTROY,
+    ::SendMessageW(GetWinHwnd(parent->GetClientWindow()), WM_MDIDESTROY,
                 (WPARAM)oldHandle, 0);
 
     if (parent->GetActiveChild() == nullptr)
@@ -1293,7 +1293,7 @@ bool wxMDIChildFrame::ResetWindowStyle(void *vrect)
         // we want to test whether there is a maximized child, so just set
         // dwThisStyle to 0 if there is no child at all
         DWORD dwThisStyle = pChild
-            ? ::GetWindowLong(GetWinHwnd(pChild), GWL_STYLE) : 0;
+            ? ::GetWindowLongW(GetWinHwnd(pChild), GWL_STYLE) : 0;
         updateStyle.TurnOnOrOff(!(dwThisStyle & WS_MAXIMIZE), WS_EX_CLIENTEDGE);
 
         if ( updateStyle.Apply() )
@@ -1450,7 +1450,7 @@ void MDISetMenu(wxWindow *win, HMENU hmenuFrame, HMENU hmenuWindow)
         // initially.
         ::SetLastError(ERROR_SUCCESS);
 
-        if ( !::SendMessage(GetWinHwnd(win),
+        if ( !::SendMessageW(GetWinHwnd(win),
                             WM_MDISETMENU,
                             (WPARAM)hmenuFrame,
                             (LPARAM)hmenuWindow) )
@@ -1467,7 +1467,7 @@ void MDISetMenu(wxWindow *win, HMENU hmenuFrame, HMENU hmenuWindow)
     wxWindow *parent = win->GetParent();
     wxCHECK_RET( parent, wxT("MDI client without parent frame? weird...") );
 
-    ::SendMessage(GetWinHwnd(win), WM_MDIREFRESHMENU, 0, 0L);
+    ::SendMessageW(GetWinHwnd(win), WM_MDIREFRESHMENU, 0, 0L);
 
     ::DrawMenuBar(GetWinHwnd(parent));
 }
@@ -1542,7 +1542,7 @@ void MDIInsertWindowMenu(wxWindow *win, WXHMENU hMenu, HMENU menuWin, const wxSt
             if ( label == wxGetStockLabel(wxID_HELP, wxSTOCK_NOFLAGS) )
             {
                 inserted = true;
-                ::InsertMenu(hmenu, it.GetPos(),
+                ::InsertMenuW(hmenu, it.GetPos(),
                              MF_BYPOSITION | MF_POPUP | MF_STRING,
                              (UINT_PTR)menuWin,
                              windowMenuLabelTranslated.t_str());
@@ -1552,7 +1552,7 @@ void MDIInsertWindowMenu(wxWindow *win, WXHMENU hMenu, HMENU menuWin, const wxSt
 
         if ( !inserted )
         {
-            ::AppendMenu(hmenu, MF_POPUP,
+            ::AppendMenuW(hmenu, MF_POPUP,
                          (UINT_PTR)menuWin,
                          windowMenuLabelTranslated.t_str());
         }

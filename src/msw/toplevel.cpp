@@ -772,8 +772,11 @@ wxPoint wxTopLevelWindowMSW::DoGetPosition() const
 {
     if ( IsIconized() )
     {
-        WINDOWPLACEMENT wp;
-        wp.length = sizeof(WINDOWPLACEMENT);
+        WINDOWPLACEMENT wp =
+        {
+            .length = sizeof(WINDOWPLACEMENT)
+        };
+
         if ( ::GetWindowPlacement(GetHwnd(), &wp) )
         {
             RECT& rc = wp.rcNormalPosition;
@@ -806,8 +809,11 @@ wxSize wxTopLevelWindowMSW::DoGetSize() const
 {
     if ( IsIconized() )
     {
-        WINDOWPLACEMENT wp;
-        wp.length = sizeof(WINDOWPLACEMENT);
+        WINDOWPLACEMENT wp
+        {
+            .length = sizeof(WINDOWPLACEMENT)
+        };
+
         if ( ::GetWindowPlacement(GetHwnd(), &wp) )
         {
             const RECT& rc = wp.rcNormalPosition;
@@ -965,8 +971,8 @@ bool wxTopLevelWindowMSW::ShowFullScreen(bool show, long style)
     else // stop showing full screen
     {
         Maximize(m_fsIsMaximized);
-        SetWindowLong(GetHwnd(),GWL_STYLE, m_fsOldWindowStyle);
-        SetWindowPos(GetHwnd(),HWND_TOP,m_fsOldSize.x, m_fsOldSize.y,
+        ::SetWindowLongW(GetHwnd(),GWL_STYLE, m_fsOldWindowStyle);
+        ::SetWindowPos(GetHwnd(),HWND_TOP,m_fsOldSize.x, m_fsOldSize.y,
             m_fsOldSize.width, m_fsOldSize.height, SWP_FRAMECHANGED);
     }
 
@@ -999,7 +1005,7 @@ bool wxTopLevelWindowMSW::DoSelectAndSetIcon(const wxIconBundle& icons,
     if ( !icon.IsOk() )
         return false;
 
-    ::SendMessage(GetHwnd(), WM_SETICON, i, (LPARAM)GetHiconOf(icon));
+    ::SendMessageW(GetHwnd(), WM_SETICON, i, (LPARAM)GetHiconOf(icon));
     return true;
 }
 
@@ -1344,7 +1350,7 @@ HWND wxTLWHiddenParentModule::GetHWND()
             WNDCLASS wndclass;
             wxZeroMemory(wndclass);
 
-            wndclass.lpfnWndProc   = DefWindowProc;
+            wndclass.lpfnWndProc   = DefWindowProcW;
             wndclass.hInstance     = wxGetInstance();
             wndclass.lpszClassName = HIDDEN_PARENT_CLASS;
 

@@ -170,7 +170,7 @@ wxTimerWndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         //      before being removed from the timers map by Stop().
     }
 
-    return ::DefWindowProc(hWnd, message, wParam, lParam);
+    return ::DefWindowProcW(hWnd, message, wParam, lParam);
 }
 
 // ----------------------------------------------------------------------------
@@ -204,7 +204,7 @@ void wxTimerHiddenWindowModule::OnExit()
 
     if ( ms_className )
     {
-        if ( !::UnregisterClass(ms_className, wxGetInstance()) )
+        if ( !::UnregisterClassW(ms_className, wxGetInstance()) )
         {
             wxLogLastError(wxT("UnregisterClass(\"wxTimerHiddenWindow\")"));
         }

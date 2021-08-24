@@ -264,7 +264,7 @@ wxString wxAssocQueryString(ASSOCSTR assoc,
     if ( ext.empty() || ext[0] != '.' )
         ext.Prepend('.');
 
-    HRESULT hr = ::AssocQueryString
+    HRESULT hr = ::AssocQueryStringW
                  (
                     wxASSOCF_NOTRUNCATE,// Fail if buffer is too small.
                     assoc,              // The association to retrieve.

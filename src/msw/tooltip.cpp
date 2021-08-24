@@ -159,7 +159,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxToolTipModule, wxModule);
 // NB: wParam is always 0 for the TTM_XXX messages we use
 static inline LRESULT SendTooltipMessage(WXHWND hwnd, UINT msg, void *lParam)
 {
-    return hwnd ? ::SendMessage((HWND)hwnd, msg, 0, (LPARAM)lParam) : 0;
+    return hwnd ? ::SendMessageW((HWND)hwnd, msg, 0, (LPARAM)lParam) : 0;
 }
 
 // send a message to all existing tooltip controls
@@ -167,7 +167,7 @@ static inline void
 SendTooltipMessageToAll(WXHWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
     if ( hwnd )
-        ::SendMessage((HWND)hwnd, msg, wParam, lParam);
+        ::SendMessageW((HWND)hwnd, msg, wParam, lParam);
 }
 
 // ============================================================================
@@ -304,7 +304,7 @@ WXHWND wxToolTip::GetToolTipCtrl()
        if ( ms_hwndTT )
        {
            HWND hwnd = (HWND)ms_hwndTT;
-           SetWindowPos(hwnd, HWND_TOPMOST, 0, 0, 0, 0,
+           ::SetWindowPos(hwnd, HWND_TOPMOST, 0, 0, 0, 0,
                         SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
 
 #if wxUSE_TTM_WINDOWFROMPOINT
