@@ -170,8 +170,8 @@ static bool IsPerMonitorDPIAware(HWND hwnd)
     // applications manifest.
 #if wxUSE_DYNLIB_CLASS
     #define WXDPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2 ((WXDPI_AWARENESS_CONTEXT)-4)
-    typedef WXDPI_AWARENESS_CONTEXT(WINAPI * GetWindowDpiAwarenessContext_t)(HWND hwnd);
-    typedef BOOL(WINAPI * AreDpiAwarenessContextsEqual_t)(WXDPI_AWARENESS_CONTEXT dpiContextA, WXDPI_AWARENESS_CONTEXT dpiContextB);
+    using GetWindowDpiAwarenessContext_t = WXDPI_AWARENESS_CONTEXT(WINAPI*)(HWND hwnd);
+    using AreDpiAwarenessContextsEqual_t = BOOL(WINAPI*)(WXDPI_AWARENESS_CONTEXT dpiContextA, WXDPI_AWARENESS_CONTEXT dpiContextB);
     static GetWindowDpiAwarenessContext_t s_pfnGetWindowDpiAwarenessContext = nullptr;
     static AreDpiAwarenessContextsEqual_t s_pfnAreDpiAwarenessContextsEqual = nullptr;
     static bool s_initDone = false;

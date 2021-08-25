@@ -1853,8 +1853,8 @@ wxWindow *wxWindowBase::FindWindow(const wxString& name) const
 // to avoid duplicating code we reuse the same helper function but with
 // different comparators
 
-typedef bool (*wxFindWindowCmp)(const wxWindow *win,
-                                const wxString& label, long id);
+using wxFindWindowCmp = bool (*)(const wxWindow *win,
+                                 const wxString& label, long id);
 
 static
 bool wxFindWindowCmpLabels(const wxWindow *win, const wxString& label,

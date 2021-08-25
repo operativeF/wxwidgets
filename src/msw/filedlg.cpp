@@ -70,8 +70,8 @@ namespace
 
 #if wxUSE_DYNLIB_CLASS
 
-typedef BOOL (WINAPI *GetProcessUserModeExceptionPolicy_t)(LPDWORD);
-typedef BOOL (WINAPI *SetProcessUserModeExceptionPolicy_t)(DWORD);
+using GetProcessUserModeExceptionPolicy_t = BOOL (WINAPI*)(LPDWORD);
+using SetProcessUserModeExceptionPolicy_t = BOOL (WINAPI*)(DWORD);
 
 GetProcessUserModeExceptionPolicy_t gs_pfnGetProcessUserModeExceptionPolicy =
     (GetProcessUserModeExceptionPolicy_t) -1;

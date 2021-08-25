@@ -98,7 +98,7 @@ bool wxFrame::Create(wxWindow *parent,
         // TaskbarButtonCreated and WM_COMMAND messages through.
 #if wxUSE_DYNLIB_CLASS
         // FIXME: Change to use ChangeWindowMessageFilterEx instead.
-        typedef BOOL (WINAPI *ChangeWindowMessageFilter_t)(UINT message,
+        using ChangeWindowMessageFilter_t = BOOL (WINAPI*)(UINT message,
                                                            DWORD dwFlag);
         wxDynamicLibrary dllUser32(wxT("user32.dll"));
 

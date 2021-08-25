@@ -217,22 +217,21 @@ public:
                     ms_pfnSetGestureConfig;
     }
 
-    typedef BOOL (WINAPI *GetGestureInfo_t)(HGESTUREINFO, PGESTUREINFO);
+    using GetGestureInfo_t = BOOL (WINAPI*)(HGESTUREINFO, PGESTUREINFO);
 
     static GetGestureInfo_t GetGestureInfo()
     {
         return ms_pfnGetGestureInfo;
     }
 
-    typedef BOOL (WINAPI *CloseGestureInfoHandle_t)(HGESTUREINFO);
+    using CloseGestureInfoHandle_t = BOOL (WINAPI*)(HGESTUREINFO);
 
     static CloseGestureInfoHandle_t CloseGestureInfoHandle()
     {
         return ms_pfnCloseGestureInfoHandle;
     }
 
-    typedef BOOL
-        (WINAPI *SetGestureConfig_t)(HWND, DWORD, UINT, PGESTURECONFIG, UINT);
+    using SetGestureConfig_t = BOOL (WINAPI*)(HWND, DWORD, UINT, PGESTURECONFIG, UINT);
 
     static SetGestureConfig_t SetGestureConfig()
     {
@@ -4681,7 +4680,8 @@ namespace
 static wxSize GetWindowDPI(HWND hwnd)
 {
 #if wxUSE_DYNLIB_CLASS
-    typedef UINT (WINAPI *GetDpiForWindow_t)(HWND hwnd);
+    using GetDpiForWindow_t = UINT (WINAPI*)(HWND hwnd);
+
     static GetDpiForWindow_t s_pfnGetDpiForWindow = nullptr;
     static bool s_initDone = false;
 
@@ -4713,7 +4713,8 @@ int wxGetSystemMetrics(int nIndex, const wxWindow* window)
 
     if ( window )
     {
-        typedef int (WINAPI * GetSystemMetricsForDpi_t)(int nIndex, UINT dpi);
+        using GetSystemMetricsForDpi_t = int (WINAPI*)(int nIndex, UINT dpi);
+
         static GetSystemMetricsForDpi_t s_pfnGetSystemMetricsForDpi = nullptr;
         static bool s_initDone = false;
 
@@ -4751,7 +4752,7 @@ bool wxSystemParametersInfo(UINT uiAction, UINT uiParam, PVOID pvParam, UINT fWi
 
     if ( window )
     {
-        typedef int (WINAPI * SystemParametersInfoForDpi_t)(UINT uiAction, UINT uiParam, PVOID pvParam, UINT fWinIni, UINT dpi);
+        using SystemParametersInfoForDpi_t = int (WINAPI*)(UINT uiAction, UINT uiParam, PVOID pvParam, UINT fWinIni, UINT dpi);
         static SystemParametersInfoForDpi_t s_pfnSystemParametersInfoForDpi = nullptr;
         static bool s_initDone = false;
 
@@ -5898,7 +5899,8 @@ bool wxWindowMSW::HandleMouseMove(int x, int y, WXUINT flags)
             m_mouseInWindow = true;
 
 #ifdef HAVE_TRACKMOUSEEVENT
-            typedef BOOL (WINAPI *_TrackMouseEvent_t)(LPTRACKMOUSEEVENT);
+            using _TrackMouseEvent_t = BOOL (WINAPI*)(LPTRACKMOUSEEVENT);
+
             static _TrackMouseEvent_t s_pfn_TrackMouseEvent;
             static bool s_initDone = false;
             if ( !s_initDone )

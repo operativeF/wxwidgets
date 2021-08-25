@@ -25,19 +25,19 @@
 #include "wx/module.h"
 
 // Core function typedefs
-typedef HRESULT (__stdcall *PFNWXROINITIALIZE)(RO_INIT_TYPE initType);
-typedef void (__stdcall *PFNWXROUNINITIALIZE)();
-typedef HRESULT (__stdcall *PFNWXROGETACTIVATIONFACTORY)(
+using PFNWXROINITIALIZE = HRESULT (__stdcall*)(RO_INIT_TYPE initType);
+using PFNWXROUNINITIALIZE = void (__stdcall*)();
+using PFNWXROGETACTIVATIONFACTORY = HRESULT (__stdcall*)(
     HSTRING activatableClassId, REFIID iid, void ** factory);
 
 // String function typedefs
-typedef HRESULT (__stdcall *PFNWXWINDOWSCREATESTRINGREFERENCE)(
+using PFNWXWINDOWSCREATESTRINGREFERENCE = HRESULT (__stdcall*)(
     PCWSTR sourceString,
     UINT32 length,
     HSTRING_HEADER * hstringHeader,
     HSTRING * string
 );
-typedef HRESULT (__stdcall *PFNWXWINDOWSDELETESTRING)(HSTRING string);
+using PFNWXWINDOWSDELETESTRING = HRESULT (__stdcall*)(HSTRING string);
 
 namespace wxWinRT
 {

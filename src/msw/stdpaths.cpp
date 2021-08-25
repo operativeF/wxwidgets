@@ -32,7 +32,7 @@
 // types
 // ----------------------------------------------------------------------------
 
-typedef HRESULT (WINAPI *SHGetKnownFolderPath_t)(const GUID&, DWORD, HANDLE, PWSTR *);
+using SHGetKnownFolderPath_t = HRESULT (WINAPI*)(const GUID&, DWORD, HANDLE, PWSTR *);
 
 // ----------------------------------------------------------------------------
 // constants

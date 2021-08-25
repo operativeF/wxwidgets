@@ -63,35 +63,35 @@ public:
         return result;
     }
 
-    typedef BOOL(WINAPI* WinHttpQueryOption_t)(HINTERNET, DWORD, LPVOID, LPDWORD);
+    using WinHttpQueryOption_t = BOOL(WINAPI*)(HINTERNET, DWORD, LPVOID, LPDWORD);
     static WinHttpQueryOption_t WinHttpQueryOption;
-    typedef BOOL(WINAPI* WinHttpQueryHeaders_t)(HINTERNET, DWORD, LPCWSTR, LPVOID, LPDWORD, LPDWORD);
+    using WinHttpQueryHeaders_t = BOOL(WINAPI*)(HINTERNET, DWORD, LPCWSTR, LPVOID, LPDWORD, LPDWORD);
     static WinHttpQueryHeaders_t WinHttpQueryHeaders;
-    typedef BOOL(WINAPI* WinHttpSetOption_t)(HINTERNET, DWORD, LPVOID, DWORD);
+    using WinHttpSetOption_t = BOOL(WINAPI*)(HINTERNET, DWORD, LPVOID, DWORD);
     static WinHttpSetOption_t WinHttpSetOption;
-    typedef BOOL(WINAPI* WinHttpWriteData_t)(HINTERNET, LPCVOID, DWORD, LPDWORD);
+    using WinHttpWriteData_t =  BOOL(WINAPI*)(HINTERNET, LPCVOID, DWORD, LPDWORD);
     static WinHttpWriteData_t WinHttpWriteData;
-    typedef BOOL(WINAPI* WinHttpCloseHandle_t)(HINTERNET);
+    using WinHttpCloseHandle_t = BOOL(WINAPI*)(HINTERNET);
     static WinHttpCloseHandle_t WinHttpCloseHandle;
-    typedef BOOL(WINAPI* WinHttpReceiveResponse_t)(HINTERNET, LPVOID);
+    using WinHttpReceiveResponse_t = BOOL(WINAPI*)(HINTERNET, LPVOID);
     static WinHttpReceiveResponse_t WinHttpReceiveResponse;
-    typedef BOOL(WINAPI* WinHttpCrackUrl_t)(LPCWSTR, DWORD, DWORD, LPURL_COMPONENTS);
+    using WinHttpCrackUrl_t = BOOL(WINAPI*)(LPCWSTR, DWORD, DWORD, LPURL_COMPONENTS);
     static WinHttpCrackUrl_t WinHttpCrackUrl;
-    typedef HINTERNET(WINAPI* WinHttpConnect_t)(HINTERNET, LPCWSTR, INTERNET_PORT, DWORD);
+    using WinHttpConnect_t = HINTERNET(WINAPI*)(HINTERNET, LPCWSTR, INTERNET_PORT, DWORD);
     static WinHttpConnect_t WinHttpConnect;
-    typedef HINTERNET(WINAPI* WinHttpOpenRequest_t)(HINTERNET, LPCWSTR, LPCWSTR, LPCWSTR, LPCWSTR, LPCWSTR*, DWORD);
+    using WinHttpOpenRequest_t = HINTERNET(WINAPI*)(HINTERNET, LPCWSTR, LPCWSTR, LPCWSTR, LPCWSTR, LPCWSTR*, DWORD);
     static WinHttpOpenRequest_t WinHttpOpenRequest;
-    typedef WINHTTP_STATUS_CALLBACK(WINAPI* WinHttpSetStatusCallback_t)(HINTERNET, WINHTTP_STATUS_CALLBACK, DWORD, DWORD_PTR);
+    using WinHttpSetStatusCallback_t = WINHTTP_STATUS_CALLBACK(WINAPI*)(HINTERNET, WINHTTP_STATUS_CALLBACK, DWORD, DWORD_PTR);
     static WinHttpSetStatusCallback_t WinHttpSetStatusCallback;
-    typedef BOOL(WINAPI* WinHttpSendRequest_t)(HINTERNET, LPCWSTR, DWORD, LPVOID, DWORD, DWORD, DWORD_PTR);
+    using WinHttpSendRequest_t = BOOL(WINAPI*)(HINTERNET, LPCWSTR, DWORD, LPVOID, DWORD, DWORD, DWORD_PTR);
     static WinHttpSendRequest_t WinHttpSendRequest;
-    typedef BOOL(WINAPI* WinHttpReadData_t)(HINTERNET, LPVOID, DWORD, LPDWORD);
+    using WinHttpReadData_t = BOOL(WINAPI*)(HINTERNET, LPVOID, DWORD, LPDWORD);
     static WinHttpReadData_t WinHttpReadData;
-    typedef BOOL(WINAPI* WinHttpQueryAuthSchemes_t)(HINTERNET, LPDWORD, LPDWORD, LPDWORD);
+    using WinHttpQueryAuthSchemes_t = BOOL(WINAPI*)(HINTERNET, LPDWORD, LPDWORD, LPDWORD);
     static WinHttpQueryAuthSchemes_t WinHttpQueryAuthSchemes;
-    typedef BOOL(WINAPI* WinHttpSetCredentials_t)(HINTERNET, DWORD, DWORD, LPCWSTR, LPCWSTR, LPVOID);
+    using WinHttpSetCredentials_t = BOOL(WINAPI*)(HINTERNET, DWORD, DWORD, LPCWSTR, LPCWSTR, LPVOID);
     static WinHttpSetCredentials_t WinHttpSetCredentials;
-    typedef HINTERNET(WINAPI* WinHttpOpen_t)(LPCWSTR, DWORD, LPCWSTR, LPCWSTR, DWORD);
+    using WinHttpOpen_t = HINTERNET(WINAPI*)(LPCWSTR, DWORD, LPCWSTR, LPCWSTR, DWORD);
     static WinHttpOpen_t WinHttpOpen;
 
 private:

@@ -187,26 +187,26 @@ private:
     }
 
 public:
-    typedef HRESULT (WINAPI *D2D1CreateFactory_t)(D2D1_FACTORY_TYPE, REFIID, CONST D2D1_FACTORY_OPTIONS*, void**);
+    using D2D1CreateFactory_t = HRESULT (WINAPI*)(D2D1_FACTORY_TYPE, REFIID, CONST D2D1_FACTORY_OPTIONS*, void**);
     static D2D1CreateFactory_t D2D1CreateFactory;
 
-    typedef void (WINAPI *D2D1MakeRotateMatrix_t)(FLOAT, D2D1_POINT_2F, D2D1_MATRIX_3X2_F*);
+    using D2D1MakeRotateMatrix_t = void (WINAPI*)(FLOAT, D2D1_POINT_2F, D2D1_MATRIX_3X2_F*);
     static D2D1MakeRotateMatrix_t D2D1MakeRotateMatrix;
 
-    typedef void (WINAPI *D2D1MakeSkewMatrix_t)(FLOAT, FLOAT, D2D1_POINT_2F, D2D1_MATRIX_3X2_F*);
+    using D2D1MakeSkewMatrix_t = void (WINAPI*)(FLOAT, FLOAT, D2D1_POINT_2F, D2D1_MATRIX_3X2_F*);
     static D2D1MakeSkewMatrix_t D2D1MakeSkewMatrix;
 
-    typedef BOOL (WINAPI *D2D1IsMatrixInvertible_t)(const D2D1_MATRIX_3X2_F*);
+    using D2D1IsMatrixInvertible_t = BOOL (WINAPI*)(const D2D1_MATRIX_3X2_F*);
     static D2D1IsMatrixInvertible_t D2D1IsMatrixInvertible;
 
-    typedef BOOL (WINAPI *D2D1InvertMatrix_t)(D2D1_MATRIX_3X2_F*);
+    using D2D1InvertMatrix_t = BOOL (WINAPI*)(D2D1_MATRIX_3X2_F*);
     static D2D1InvertMatrix_t D2D1InvertMatrix;
 
-    typedef HRESULT (WINAPI *DWriteCreateFactory_t)(DWRITE_FACTORY_TYPE, REFIID, IUnknown**);
+    using DWriteCreateFactory_t = HRESULT (WINAPI*)(DWRITE_FACTORY_TYPE, REFIID, IUnknown**);
     static DWriteCreateFactory_t DWriteCreateFactory;
 
 #if wxD2D_DEVICE_CONTEXT_SUPPORTED
-    typedef HRESULT (WINAPI *D3D11CreateDevice_t)(IDXGIAdapter*, D3D_DRIVER_TYPE, HMODULE, UINT, CONST D3D_FEATURE_LEVEL*, UINT, UINT, ID3D11Device**, D3D_FEATURE_LEVEL*, ID3D11DeviceContext**);
+    using D3D11CreateDevice_t = HRESULT (WINAPI*)(IDXGIAdapter*, D3D_DRIVER_TYPE, HMODULE, UINT, CONST D3D_FEATURE_LEVEL*, UINT, UINT, ID3D11Device**, D3D_FEATURE_LEVEL*, ID3D11DeviceContext**);
     static D3D11CreateDevice_t D3D11CreateDevice;
 #endif
 

@@ -743,7 +743,7 @@ bool wxRegKey::DeleteSelf()
 #if wxUSE_DYNLIB_CLASS
   wxDynamicLibrary dllAdvapi32(wxT("advapi32"));
   // Minimum supported OS for RegDeleteKeyEx: Vista, XP Pro x64, Win Server 2008, Win Server 2003 SP1
-  typedef LONG (WINAPI *RegDeleteKeyEx_t)(HKEY, LPCTSTR, REGSAM, DWORD);
+  using RegDeleteKeyEx_t = LONG (WINAPI*)(HKEY, LPCTSTR, REGSAM, DWORD);
   RegDeleteKeyEx_t wxDL_INIT_FUNC_AW(pfn, RegDeleteKeyEx, dllAdvapi32);
   if (pfnRegDeleteKeyEx)
   {

@@ -138,11 +138,11 @@ bool wxGetFullHostName(wxChar *buf, int maxSize)
     wxDynamicLibrary dllWinsock(wxT("ws2_32.dll"), wxDL_VERBATIM);
     if ( dllWinsock.IsLoaded() )
     {
-        typedef int (PASCAL *WSAStartup_t)(WORD, WSADATA *);
-        typedef int (PASCAL *gethostname_t)(char *, int);
-        typedef hostent* (PASCAL *gethostbyname_t)(const char *);
-        typedef hostent* (PASCAL *gethostbyaddr_t)(const char *, int , int);
-        typedef int (PASCAL *WSACleanup_t)(void);
+        using WSAStartup_t = int (PASCAL*)(WORD, WSADATA *);
+        using gethostname_t = int (PASCAL*)(char *, int);
+        using gethostbyname_t = hostent* (PASCAL*)(const char *);
+        using gethostbyaddr_t = hostent* (PASCAL*)(const char *, int , int);
+        using WSACleanup_t = int (PASCAL*)(void);
 
         #define LOAD_WINSOCK_FUNC(func)                                       \
             func ## _t                                                        \
@@ -992,7 +992,7 @@ OSVERSIONINFOEXW wxGetWindowsVersionInfo()
     wxDynamicLibrary dllNtDll;
     if ( dllNtDll.Load(wxS("ntdll.dll"), wxDL_VERBATIM | wxDL_QUIET) )
     {
-        typedef LONG /* NTSTATUS */ (WINAPI *RtlGetVersion_t)(OSVERSIONINFOEXW*);
+        using RtlGetVersion_t = LONG /* NTSTATUS */ (WINAPI*)(OSVERSIONINFOEXW*);
 
         RtlGetVersion_t wxDL_INIT_FUNC(pfn, RtlGetVersion, dllNtDll);
         if ( pfnRtlGetVersion &&

@@ -36,10 +36,10 @@
 // ----------------------------------------------------------------------------
 
 #ifndef UNICODE
-    typedef HWND ( WINAPI * HTMLHELP )( HWND, LPCSTR, UINT, ULONG_PTR );
+    using HTMLHELP = HWND ( WINAPI*)( HWND, LPCSTR, UINT, ULONG_PTR );
     constexpr wxChar HTMLHELP_NAME[] = wxT("HtmlHelpA");
 #else // ANSI
-    typedef HWND ( WINAPI * HTMLHELP )( HWND, LPCWSTR, UINT, ULONG_PTR );
+    using HTMLHELP = HWND ( WINAPI*)( HWND, LPCWSTR, UINT, ULONG_PTR );
     constexpr wxChar HTMLHELP_NAME[] = wxT("HtmlHelpW");
 #endif
 

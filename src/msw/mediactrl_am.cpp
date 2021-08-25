@@ -807,7 +807,7 @@ struct IBaseFilter : public IMediaFilter
 //
 //---------------------------------------------------------------------------
 
-typedef BOOL (WINAPI* LPAMGETERRORTEXT)(HRESULT, wxChar *, DWORD);
+using LPAMGETERRORTEXT = BOOL (WINAPI*)(HRESULT, wxChar *, DWORD);
 
 class WXDLLIMPEXP_MEDIA wxAMMediaBackend : public wxMediaBackendCommonBase
 {

@@ -744,11 +744,11 @@ Thanks,
 constexpr int MAX_THRESH = 4;
 
 /* Stack node declarations used to store unfulfilled partition obligations. */
-typedef struct
-  {
+struct stack_node
+{
     char *lo;
     char *hi;
-  } stack_node;
+};
 
 /* The next 4 #defines implement a very fast in-line stack abstraction. */
 constexpr int STACK_SIZE = (8 * sizeof(unsigned long int));

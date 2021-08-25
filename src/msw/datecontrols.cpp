@@ -55,7 +55,7 @@ bool wxMSWDateControls::CheckInitialization()
         {
             wxLogNull noLog;
 
-            typedef BOOL (WINAPI *ICCEx_t)(INITCOMMONCONTROLSEX *);
+            using ICCEx_t = BOOL (WINAPI*)(INITCOMMONCONTROLSEX *);
             wxDYNLIB_FUNCTION( ICCEx_t, InitCommonControlsEx, dllComCtl32 );
 
             if ( pfnInitCommonControlsEx )

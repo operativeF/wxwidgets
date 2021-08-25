@@ -31,9 +31,10 @@
 #include "wx/dynlib.h"
 
 // These Vista+ only types used by DrawThemeTextEx may not be available in older SDK headers
-typedef int(__stdcall *WXDTT_CALLBACK_PROC)(HDC hdc, const wchar_t * pszText,
+using WXDTT_CALLBACK_PROC = int(__stdcall*)(HDC hdc, const wchar_t * pszText,
     int cchText, RECT * prc, unsigned int dwFlags, WXLPARAM lParam);
 
+// FIXME: Figure out what is redundant with new SDKs.
 typedef struct _WXDTTOPTS
 {
     DWORD             dwSize;
@@ -1038,7 +1039,7 @@ void wxRendererXP::DrawItemText(wxWindow* win,
 
     const int itemState = GetListItemState(flags);
 
-    typedef HRESULT(__stdcall *DrawThemeTextEx_t)(HTHEME, HDC, int, int, const wchar_t *, int, DWORD, RECT *, const WXDTTOPTS *);
+    using DrawThemeTextEx_t = HRESULT(__stdcall*)(HTHEME, HDC, int, int, const wchar_t *, int, DWORD, RECT *, const WXDTTOPTS *);
     static DrawThemeTextEx_t s_DrawThemeTextEx = nullptr;
     static bool s_initDone = false;
 

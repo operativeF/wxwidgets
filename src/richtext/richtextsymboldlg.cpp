@@ -34,7 +34,7 @@
 /* Microsoft Unicode subset numbering
  */
 
-typedef enum
+enum wxUnicodeSubsetCodes
 {
   U_BASIC_LATIN = 0,
   U_LATIN_1_SUPPLEMENT = 1,
@@ -107,7 +107,7 @@ typedef enum
   U_SPECIALS = 69,
   U_HALFWIDTH_AND_FULLWIDTH_FORMS = 68,
   U_LAST_PLUS_ONE
-} wxUnicodeSubsetCodes;
+};
 
 /* Unicode subsets */
 #ifdef __UNICODE__

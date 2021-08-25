@@ -158,7 +158,7 @@ wxWebViewIEImpl::~wxWebViewIEImpl()
     wxDynamicLibrary urlMon(wxT("urlmon.dll"));
     if(urlMon.HasSymbol(wxT("CoInternetGetSession")))
     {
-        typedef HRESULT (WINAPI *CoInternetGetSession_t)(DWORD,
+        using CoInternetGetSession_t = HRESULT (WINAPI*)(DWORD,
                                                          wxIInternetSession**,
                                                          DWORD);
         wxDYNLIB_FUNCTION(CoInternetGetSession_t, CoInternetGetSession, urlMon);

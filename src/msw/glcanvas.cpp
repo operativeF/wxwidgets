@@ -572,7 +572,7 @@ wxGLContext::wxGLContext(wxGLCanvas *win,
 
     wglMakeCurrent(win->GetHDC(), tempContext);
 
-    typedef HGLRC(WINAPI * wglCreateContextAttribsARB_t)
+    using wglCreateContextAttribsARB_t = HGLRC(WINAPI*)
         (HDC hDC, HGLRC hShareContext, const int *attribList);
 
     wxDEFINE_WGL_FUNC(wglCreateContextAttribsARB);
@@ -794,7 +794,7 @@ bool wxGLCanvasBase::IsExtensionSupported(const char *extension)
     static const char *s_extensionsList = (char *)wxUIntPtr(-1);
     if ( s_extensionsList == (char *)wxUIntPtr(-1) )
     {
-        typedef const char * (WINAPI *wglGetExtensionsStringARB_t)(HDC hdc);
+        using wglGetExtensionsStringARB_t = const char* (WINAPI*)(HDC hdc);
 
         wxDEFINE_WGL_FUNC(wglGetExtensionsStringARB);
         if ( wglGetExtensionsStringARB )
@@ -803,7 +803,7 @@ bool wxGLCanvasBase::IsExtensionSupported(const char *extension)
         }
         else
         {
-            typedef const char * (WINAPI * wglGetExtensionsStringEXT_t)();
+            using wglGetExtensionsStringEXT_t = const char* (WINAPI*)();
 
             wxDEFINE_WGL_FUNC(wglGetExtensionsStringEXT);
             if ( wglGetExtensionsStringEXT )
@@ -1053,7 +1053,7 @@ int wxGLCanvas::FindMatchingPixelFormat(const wxGLAttributes& dispAttrs,
 
     ::wglMakeCurrent(dummyHDC, dumctx);
 
-    typedef BOOL (WINAPI * wglChoosePixelFormatARB_t)
+    using wglChoosePixelFormatARB_t = BOOL (WINAPI*)
                  (HDC hdc,
                   const int *piAttribIList,
                   const FLOAT *pfAttribFList,

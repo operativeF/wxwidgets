@@ -74,12 +74,13 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxJPEGHandler,wxImageHandler);
 
 #define JPEG_IO_BUFFER_SIZE   2048
 
-typedef struct {
+struct wx_source_mgr
+{
     struct jpeg_source_mgr pub;   /* public fields */
 
     JOCTET* buffer;               /* start of buffer */
     wxInputStream *stream;
-} wx_source_mgr;
+};
 
 using wx_src_ptr = wx_source_mgr*;
 
@@ -346,12 +347,13 @@ bool wxJPEGHandler::LoadFile( wxImage *image, wxInputStream& stream, bool verbos
     return true;
 }
 
-typedef struct {
+struct wx_destination_mgr
+{
     struct jpeg_destination_mgr pub;
 
     wxOutputStream *stream;
     JOCTET * buffer;
-} wx_destination_mgr;
+};
 
 using wx_dest_ptr = wx_destination_mgr*;
 

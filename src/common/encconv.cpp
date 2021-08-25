@@ -65,10 +65,11 @@ static const std::uint16_t* GetEncTable(wxFontEncoding enc)
     return nullptr;
 }
 
-typedef struct {
+struct CharsetItem
+{
     std::uint16_t u;
     std::uint8_t  c;
-} CharsetItem;
+};
 
 extern "C"
 {

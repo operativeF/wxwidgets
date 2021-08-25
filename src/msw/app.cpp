@@ -80,7 +80,7 @@
         DWORD dwPlatformID;                     // DLLVER_PLATFORM_*
     };
 
-    typedef HRESULT (CALLBACK* DLLGETVERSIONPROC)(DLLVERSIONINFO *);
+    using DLLGETVERSIONPROC = HRESULT (CALLBACK*)(DLLVERSIONINFO *);
 #endif // defined(DLLVERSIONINFO)
 
 // ---------------------------------------------------------------------------
@@ -389,10 +389,10 @@ private:
     int m_dataLen{0};              // length data buffer
     int m_dataLine{0};             // line offset
 
-    typedef DWORD (WINAPI *GetConsoleCommandHistory_t)(LPTSTR sCommands,
+    using GetConsoleCommandHistory_t = DWORD (WINAPI*)(LPTSTR sCommands,
                                                        DWORD nBufferLength,
                                                        LPCTSTR sExeName);
-    typedef DWORD (WINAPI *GetConsoleCommandHistoryLength_t)(LPCTSTR sExeName);
+    using GetConsoleCommandHistoryLength_t = DWORD (WINAPI*)(LPCTSTR sExeName);
 
     GetConsoleCommandHistory_t m_pfnGetConsoleCommandHistory;
     GetConsoleCommandHistoryLength_t m_pfnGetConsoleCommandHistoryLength;

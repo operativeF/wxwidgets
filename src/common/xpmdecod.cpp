@@ -250,11 +250,11 @@ wxImage wxXPMDecoder::ReadFile(wxInputStream& stream)
 \*****************************************************************************/
 
 
-typedef struct
+struct rgbRecord
 {
     const char *name;
     std::uint32_t rgb;
-} rgbRecord;
+};
 
 #define myRGB(r,g,b)   ((std::uint32_t)r<<16|(std::uint32_t)g<<8|(std::uint32_t)b)
 
