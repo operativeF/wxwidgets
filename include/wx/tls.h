@@ -80,7 +80,7 @@
     class wxTlsValue
     {
     public:
-        typedef T ValueType;
+        using ValueType = T;
 
         // ctor doesn't do anything, the object is created on first access
         wxTlsValue() : m_key(free) {}

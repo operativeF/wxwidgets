@@ -542,7 +542,7 @@ private:
     wxDateTime    m_date;
 };
 #else // !wxUSE_DATEPICKCTRL
-typedef wxDataViewTextRenderer wxDataViewDateRenderer;
+using wxDataViewDateRenderer = wxDataViewTextRenderer;
 #endif
 
 #endif // generic or GTK+ versions

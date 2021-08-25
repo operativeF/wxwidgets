@@ -112,8 +112,8 @@ template<class T, class E = wxExpectModal<T> >
 class wxExpectModalBase : public wxModalExpectation
 {
 public:
-    typedef T DialogType;
-    typedef E ExpectationType;
+    using DialogType = T;
+    using ExpectationType = E;
 
 
     // A note about these "modifier" methods: they return copies of this object

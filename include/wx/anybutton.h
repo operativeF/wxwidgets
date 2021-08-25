@@ -192,7 +192,7 @@ protected:
 #elif defined(__WXQT__)
     #include "wx/qt/anybutton.h"
 #else
-    typedef wxAnyButtonBase wxAnyButton;
+    using wxAnyButton = wxAnyButtonBase;
 #endif
 
 #endif // wxHAS_ANY_BUTTON

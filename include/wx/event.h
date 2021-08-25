@@ -1395,7 +1395,7 @@ template <typename T>
 class wxAsyncMethodCallEvent0 : public wxAsyncMethodCallEvent
 {
 public:
-    typedef T ObjectType;
+    using ObjectType = T;
     typedef void (ObjectType::*MethodType)();
 
     wxAsyncMethodCallEvent0(ObjectType* object,
@@ -1433,7 +1433,7 @@ template <typename T, typename T1>
 class wxAsyncMethodCallEvent1 : public wxAsyncMethodCallEvent
 {
 public:
-    typedef T ObjectType;
+    using ObjectType = T;
     typedef void (ObjectType::*MethodType)(T1 x1);
     typedef typename wxRemoveRef<T1>::type ParamType1;
 
@@ -1476,7 +1476,7 @@ template <typename T, typename T1, typename T2>
 class wxAsyncMethodCallEvent2 : public wxAsyncMethodCallEvent
 {
 public:
-    typedef T ObjectType;
+    using ObjectType = T;
     typedef void (ObjectType::*MethodType)(T1 x1, T2 x2);
     typedef typename wxRemoveRef<T1>::type ParamType1;
     typedef typename wxRemoveRef<T2>::type ParamType2;

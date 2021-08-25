@@ -174,21 +174,21 @@ using wxImagePixelFormat = wxPixelFormat<unsigned char, 24, 0, 1, 2>;
 #elif defined(__WXMAC__)
     // under Mac, first component is unused but still present, hence we use
     // 32bpp, not 24
-    typedef wxPixelFormat<unsigned char, 32, 1, 2, 3> wxNativePixelFormat;
+    using wxNativePixelFormat = wxPixelFormat<unsigned char, 32, 1, 2, 3>;
 
     #define wxPIXEL_FORMAT_ALPHA 0
 #elif defined(__WXGTK__)
     // Under GTK+ 2.X we use GdkPixbuf, which is standard RGB or RGBA
-    typedef wxPixelFormat<unsigned char, 24, 0, 1, 2> wxNativePixelFormat;
+    using wxNativePixelFormat = wxPixelFormat<unsigned char, 24, 0, 1, 2>;
 
     #define wxPIXEL_FORMAT_ALPHA 3
 #elif defined(__WXDFB__)
     // Under DirectFB, RGB components are reversed, they're in BGR order
-    typedef wxPixelFormat<unsigned char, 24, 2, 1, 0> wxNativePixelFormat;
+    using wxNativePixelFormat = wxPixelFormat<unsigned char, 24, 2, 1, 0>;
 
     #define wxPIXEL_FORMAT_ALPHA 3
 #elif defined(__WXQT__)
-    typedef wxPixelFormat<unsigned char, 24, 0, 1, 2> wxNativePixelFormat;
+    using wxNativePixelFormat = wxPixelFormat<unsigned char, 24, 0, 1, 2>;
 
     #define wxPIXEL_FORMAT_ALPHA 3
 #endif

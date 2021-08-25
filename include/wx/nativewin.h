@@ -40,14 +40,14 @@
 #elif defined(__WXGTK__)
     // GdkNativeWindow is guint32 under GDK/X11 and gpointer under GDK/WIN32
     #ifdef __UNIX__
-        typedef unsigned long wxNativeContainerWindowId;
+        using wxNativeContainerWindowId = unsigned long;
     #else
-        typedef void *wxNativeContainerWindowId;
+        using wxNativeContainerWindowId = void*;
     #endif
-    typedef GdkWindow *wxNativeContainerWindowHandle;
-    typedef GtkWidget *wxNativeWindowHandle;
+    using wxNativeContainerWindowHandle = GdkWindow*;
+    using wxNativeWindowHandle = GtkWidget*;
 #elif defined(__WXOSX_COCOA__)
-    typedef NSView *wxNativeWindowHandle;
+    using wxNativeWindowHandle = NSView*;
 
     // no support for using native TLWs yet
     #undef wxHAS_NATIVE_CONTAINER_WINDOW

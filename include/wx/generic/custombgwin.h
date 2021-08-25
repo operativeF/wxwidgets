@@ -56,7 +56,7 @@ class wxCustomBackgroundWindow : public W,
                                  public wxCustomBackgroundWindowGenericBase
 {
 public:
-    typedef W BaseWindowClass;
+    using BaseWindowClass = W;
 
     wxCustomBackgroundWindow() = default;
 

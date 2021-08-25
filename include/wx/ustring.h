@@ -18,13 +18,13 @@
 using wxU16CharBuffer = wxWCharBuffer;
 using wxScopedU16CharBuffer = wxScopedWCharBuffer;
 #else
-typedef wxCharTypeBuffer<wxChar16> wxU16CharBuffer;
-typedef wxScopedCharTypeBuffer<wxChar16> wxScopedU16CharBuffer;
+using wxU16CharBuffer = wxCharTypeBuffer<wxChar16>;
+using wxScopedU16CharBuffer = wxScopedCharTypeBuffer<wxChar16>;
 #endif
 
 #if SIZEOF_WCHAR_T == 4
-typedef wxWCharBuffer wxU32CharBuffer;
-typedef wxScopedWCharBuffer wxScopedU32CharBuffer;
+using wxU32CharBuffer = wxWCharBuffer;
+using wxScopedU32CharBuffer = wxScopedWCharBuffer;
 #else
 using wxU32CharBuffer = wxCharTypeBuffer<wxChar32>;
 using wxScopedU32CharBuffer = wxScopedCharTypeBuffer<wxChar32>;

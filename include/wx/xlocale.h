@@ -37,7 +37,7 @@
 // If wxXLocale_t is not defined, then only "C" locale support is provided
 #ifdef wxHAS_XLOCALE_SUPPORT
     #if wxCHECK_VISUALC_VERSION(8)
-        typedef _locale_t wxXLocale_t;
+        using wxXLocale_t = _locale_t;
         #define wxXLOCALE_IDENT(name) _ ## name
     #elif defined(HAVE_LOCALE_T)
         // Some systems (notably macOS) require including a separate header for
@@ -52,7 +52,7 @@
         #include <wctype.h>
 
         // Locale type and identifier name
-        typedef locale_t wxXLocale_t;
+        using wxXLocale_t = locale_t;
 
         #define wxXLOCALE_IDENT(name) name
     #else

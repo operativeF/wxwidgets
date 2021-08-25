@@ -63,7 +63,7 @@ static WNetCloseEnumPtr s_pWNetCloseEnum;
     // (unlike all the other MSW compilers) and long is 64 bits, while
     // InterlockedExchange(), with which this variable is used, requires a 32
     // bit-sized value, so use Cygwin-specific type with the right size.
-    typedef __LONG32 wxInterlockedArg_t;
+    using wxInterlockedArg_t = __LONG32;
 #else
     using wxInterlockedArg_t = long;
 #endif

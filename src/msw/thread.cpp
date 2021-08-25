@@ -61,7 +61,7 @@
     #define THREAD_CALLCONV __stdcall
 #else
     // the settings for CreateThread()
-    typedef DWORD THREAD_RETVAL;
+    using THREAD_RETVAL = DWORD;
     #define THREAD_CALLCONV WINAPI
 #endif
 

@@ -35,7 +35,7 @@ class wxSocketImpl;
     // the socket type is 64 bit there.
     using wxSOCKET_T = wxUIntPtr;
 #else
-    typedef int wxSOCKET_T;
+    using wxSOCKET_T = int;
 #endif
 
 

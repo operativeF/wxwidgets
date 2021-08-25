@@ -331,11 +331,10 @@ bool InitIFileOpenDialog(const wxString& message, const wxString& defaultPath,
     {
         // We need to link SHCreateItemFromParsingName() dynamically as it's
         // not available on pre-Vista systems.
-        typedef HRESULT
-        (WINAPI *SHCreateItemFromParsingName_t)(PCWSTR,
-                                                IBindCtx*,
-                                                REFIID,
-                                                void**);
+        using SHCreateItemFromParsingName_t = HRESULT (WINAPI*)(PCWSTR,
+                                                                IBindCtx*,
+                                                                REFIID,
+                                                                void**);
 
         SHCreateItemFromParsingName_t pfnSHCreateItemFromParsingName = nullptr;
         wxDynamicLibrary dllShell32;

@@ -916,17 +916,17 @@ inline double wxStrtod(const wxScopedCharTypeBuffer<T>& nptr, T **endptr)
 template<typename T> struct wxStrtoxCharType {};
 template<> struct wxStrtoxCharType<char**>
 {
-    typedef const char* Type;
+    using Type = const char*;
     static char** AsPointer(char **p) { return p; }
 };
 template<> struct wxStrtoxCharType<wchar_t**>
 {
-    typedef const wchar_t* Type;
+    using Type = const wchar_t*;
     static wchar_t** AsPointer(wchar_t **p) { return p; }
 };
 template<> struct wxStrtoxCharType<int>
 {
-    typedef const char* Type; /* this one is never used */
+    using Type = const char*; /* this one is never used */
     static char** AsPointer(int WXUNUSED_UNLESS_DEBUG(p))
     {
         wxASSERT_MSG( p == 0, "passing non-NULL int is invalid" );
@@ -948,7 +948,7 @@ inline double wxStrtod(const wxString& nptr, T endptr)
     // note that it is important to use c_str() here and not mb_str() or
     // wc_str(), because we store the pointer into (possibly converted)
     // buffer in endptr and so it must be valid even when wxStrtod() returns
-    typedef typename wxStrtoxCharType<T>::Type CharType;
+    using CharType = typename wxStrtoxCharType<T>::Type;
     return wxStrtod((CharType)nptr.c_str(),
                     wxStrtoxCharType<T>::AsPointer(endptr));
 }

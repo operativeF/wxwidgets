@@ -15,7 +15,7 @@
 
 #include "wx/fs_arc.h"
 
-typedef wxArchiveFSHandler wxZipFSHandler;
+using wxZipFSHandler = wxArchiveFSHandler;
 
 #endif // wxUSE_FS_ZIP
 

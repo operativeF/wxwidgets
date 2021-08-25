@@ -33,7 +33,7 @@ template<typename T>
 class wxWindowPtr : public std::shared_ptr<T>
 {
 public:
-    typedef T element_type;
+    using element_type = T;
 
     explicit wxWindowPtr(element_type* win)
         : std::shared_ptr<T>(win, wxPrivate::wxWindowDeleter())

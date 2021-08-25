@@ -26,7 +26,7 @@ class WXDLLIMPEXP_FWD_CORE wxRadioButton;
 #ifdef __WXUNIVERSAL__
     #include "wx/checkbox.h"
 
-    typedef wxCheckBox wxRadioButtonBaseBase;
+    using wxRadioButtonBaseBase = wxCheckBox;
 #else
     using wxRadioButtonBaseBase = wxControl;
 #endif

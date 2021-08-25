@@ -13,13 +13,13 @@
 #include "wx/containr.h"
 #include "wx/compositewin.h"
 
-typedef wxTimePickerCtrlCommonBase<wxDateTimePickerCtrlBase> wxTimePickerCtrlGenericBase;
+using wxTimePickerCtrlGenericBase = wxTimePickerCtrlCommonBase<wxDateTimePickerCtrlBase>;
 
 class WXDLLIMPEXP_CORE wxTimePickerCtrlGeneric
     : public wxCompositeWindow< wxNavigationEnabled<wxTimePickerCtrlGenericBase> >
 {
 public:
-    typedef wxCompositeWindow< wxNavigationEnabled<wxTimePickerCtrlGenericBase> > Base;
+    using Base = wxCompositeWindow< wxNavigationEnabled<wxTimePickerCtrlGenericBase> >;
 
     // Creating the control.
     wxTimePickerCtrlGeneric() { Init(); }

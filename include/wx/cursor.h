@@ -19,7 +19,7 @@
 #ifdef __WXMSW__
     #include "wx/msw/gdiimage.h"
 #else
-    typedef wxGDIObject wxGDIImage;
+    using wxGDIImage = wxGDIObject;
 #endif
 
 class WXDLLIMPEXP_CORE wxCursorBase : public wxGDIImage

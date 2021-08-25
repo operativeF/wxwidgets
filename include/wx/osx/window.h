@@ -16,7 +16,7 @@
 
 class WXDLLIMPEXP_FWD_CORE wxButton;
 class WXDLLIMPEXP_FWD_CORE wxScrollBar;
-class WXDLLIMPEXP_FWD_CORE wxPanel;
+struct WXDLLIMPEXP_FWD_CORE wxPanel;
 class WXDLLIMPEXP_FWD_CORE wxNonOwnedWindow;
 
 #if wxOSX_USE_COCOA_OR_IPHONE

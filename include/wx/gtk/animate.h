@@ -92,7 +92,7 @@ protected:      // internal vars
     bool m_bPlaying;
 
 private:
-    typedef wxAnimationCtrlBase base_type;
+    using base_type = wxAnimationCtrlBase;
 
     void Init();
 

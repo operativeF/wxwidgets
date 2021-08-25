@@ -310,14 +310,14 @@ private:
 
 #if wxUSE_UNICODE_UTF8
   // even char* -> char* needs conversion, from locale charset to UTF-8
-  typedef SubstrBufFromType<wxScopedCharBuffer>    SubstrBufFromWC;
-  typedef SubstrBufFromType<wxScopedCharBuffer>    SubstrBufFromMB;
+  using SubstrBufFromWC = SubstrBufFromType<wxScopedCharBuffer>;
+  using SubstrBufFromMB = SubstrBufFromType<wxScopedCharBuffer>;
 #elif wxUSE_UNICODE_WCHAR
   using SubstrBufFromWC = SubstrBufFromType<const wchar_t *>;
   using SubstrBufFromMB = SubstrBufFromType<wxScopedWCharBuffer>;
 #else
-  typedef SubstrBufFromType<const char*>           SubstrBufFromMB;
-  typedef SubstrBufFromType<wxScopedCharBuffer>    SubstrBufFromWC;
+  using SubstrBufFromMB = SubstrBufFromType<const char*>;
+  using SubstrBufFromWC = SubstrBufFromType<wxScopedCharBuffer>;
 #endif
 
 
@@ -3745,8 +3745,8 @@ using wxStringBuffer = wxStringTypeBuffer<wxChar>;
 using wxStringBufferLength = wxStringTypeBufferLength<wxChar>;
 
 #if wxUSE_UNICODE_UTF8
-typedef wxStringInternalBuffer                wxUTF8StringBuffer;
-typedef wxStringInternalBufferLength          wxUTF8StringBufferLength;
+using wxUTF8StringBuffer = wxStringInternalBuffer;
+using wxUTF8StringBufferLength = wxStringInternalBufferLength;
 #elif wxUSE_UNICODE_WCHAR
 
 // Note about inlined dtors in the classes below: this is done not for

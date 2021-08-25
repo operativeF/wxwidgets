@@ -13,9 +13,8 @@
 
 #include "wx/bitmap.h"
 
-class WXDLLIMPEXP_CORE wxPanel : public wxPanelBase
+struct WXDLLIMPEXP_CORE wxPanel : public wxPanelBase
 {
-public:
     wxPanel() = default;
 
     // Constructor
@@ -32,7 +31,6 @@ public:
     wxPanel(const wxPanel&) = delete;
 	wxPanel& operator=(const wxPanel&) = delete;
 
-public:
 	wxClassInfo *GetClassInfo() const;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();

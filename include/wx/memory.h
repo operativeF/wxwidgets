@@ -118,7 +118,7 @@ inline void operator delete[](void* pData, wxChar* /* fileName */, int /* lineNu
 
 //**********************************************************************************
 
-typedef unsigned int wxMarkerType;
+using wxMarkerType = unsigned int;
 
 /*
   Define the struct which will be placed at the start of all dynamically

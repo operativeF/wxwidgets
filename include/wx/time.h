@@ -25,7 +25,7 @@ extern long WXDLLIMPEXP_BASE wxGetUTCTime();
     using wxMilliClock_t = wxLongLong;
     inline long wxMilliClockToLong(wxLongLong ll) { return ll.ToLong(); }
 #else
-    typedef double wxMilliClock_t;
+    using wxMilliClock_t = double;
     inline long wxMilliClockToLong(double d) { return wx_truncate_cast(long, d); }
 #endif // wxUSE_LONGLONG
 

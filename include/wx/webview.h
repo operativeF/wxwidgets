@@ -324,8 +324,7 @@ wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_WEBVIEW, wxEVT_WEBVIEW_TITLE_CHANGED, wxWe
 wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_WEBVIEW, wxEVT_WEBVIEW_FULLSCREEN_CHANGED, wxWebViewEvent);
 wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_WEBVIEW, wxEVT_WEBVIEW_SCRIPT_MESSAGE_RECEIVED, wxWebViewEvent);
 
-typedef void (wxEvtHandler::*wxWebViewEventFunction)
-             (wxWebViewEvent&);
+using wxWebViewEventFunction = void (wxEvtHandler::*)(wxWebViewEvent&);
 
 #define wxWebViewEventHandler(func) \
     wxEVENT_HANDLER_CAST(wxWebViewEventFunction, func)

@@ -16,7 +16,7 @@
 #include "wx/palette.h"
 
 class WXDLLIMPEXP_FWD_CORE wxBitmap;
-class WXDLLIMPEXP_FWD_CORE wxBitmapHandler;
+struct WXDLLIMPEXP_FWD_CORE wxBitmapHandler; // FIXME: uses in class in non-MSW
 class WXDLLIMPEXP_FWD_CORE wxBitmapRefData;
 class WXDLLIMPEXP_FWD_CORE wxControl;
 class WXDLLIMPEXP_FWD_CORE wxCursor;

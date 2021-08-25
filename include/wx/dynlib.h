@@ -25,13 +25,13 @@ class WXDLLIMPEXP_FWD_BASE wxDynamicLibraryDetailsCreator;
 // ----------------------------------------------------------------------------
 
 #if defined(__WINDOWS__)
-    typedef WXHMODULE           wxDllType;
+    using wxDllType = WXHMODULE;
 #elif defined(HAVE_DLOPEN)
     #include <dlfcn.h>
-    typedef void               *wxDllType;
+    using wxDllType = void*;
 #elif defined(__WXMAC__)
     #include <CodeFragments.h>
-    typedef CFragConnectionID   wxDllType;
+    using wxDllType = CFragConnectionID;
 #else
     #error "Dynamic Loading classes can't be compiled on this platform, sorry."
 #endif

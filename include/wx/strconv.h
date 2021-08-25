@@ -658,8 +658,8 @@ extern WXDLLIMPEXP_DATA_BASE(wxMBConv *) wxConvUI;
 // ----------------------------------------------------------------------------
 
 #ifdef WORDS_BIGENDIAN
-    typedef wxMBConvUTF16BE wxMBConvUTF16;
-    typedef wxMBConvUTF32BE wxMBConvUTF32;
+    using wxMBConvUTF16 = wxMBConvUTF16BE;
+    using wxMBConvUTF32 = wxMBConvUTF32BE;
 #else
     using wxMBConvUTF16 = wxMBConvUTF16LE;
     using wxMBConvUTF32 = wxMBConvUTF32LE;

@@ -295,8 +295,8 @@ protected:
     using LongestValueType = long long;
     using ULongestValueType = unsigned long long;
 #else
-    typedef long LongestValueType;
-    typedef unsigned long ULongestValueType;
+    using LongestValueType = long;
+    using ULongestValueType = unsigned long;
 #endif
 
     wxIntegerValidatorBase(int style)

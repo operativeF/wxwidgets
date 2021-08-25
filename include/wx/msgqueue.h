@@ -45,7 +45,7 @@ class wxMessageQueue
 {
 public:
     // The type of the messages transported by this queue
-    typedef T Message;
+    using Message = T;
 
     // Default ctor creates an initially empty queue
     wxMessageQueue()

@@ -33,7 +33,7 @@
 // TODO: it seems that wxMiniFrame could be just defined here generically
 //       instead of having all the above port-specific headers
 #include "wx/frame.h"
-typedef wxFrame wxMiniFrame;
+using wxMiniFrame = wxFrame;
 #endif
 
 #endif // wxUSE_MINIFRAME

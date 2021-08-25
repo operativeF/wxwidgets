@@ -183,7 +183,7 @@ enum wxPosixPermissions
         using wxFileOffset = long long;
         #define wxFileOffsetFmtSpec wxLongLongFmtSpec
     #else
-        typedef off_t wxFileOffset;
+        using wxFileOffset = off_t;
     #endif
 
 
@@ -327,7 +327,7 @@ enum wxPosixPermissions
     #undef wxHAS_HUGE_FILES
     #undef wxHAS_HUGE_STDIO_FILES
 #else // Unix or Windows using unknown compiler, assume POSIX supported
-    typedef off_t wxFileOffset;
+    using wxFileOffset = off_t;
     #ifdef HAVE_LARGEFILE_SUPPORT
         #define wxFileOffsetFmtSpec wxLongLongFmtSpec
         wxCOMPILE_TIME_ASSERT( sizeof(off_t) == sizeof(wxLongLong_t),

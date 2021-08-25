@@ -61,7 +61,7 @@ class WXDLLIMPEXP_FWD_CORE wxEventLoop;
 #if wxUSE_LONGLONG
     using wxMemorySize = wxLongLong;
 #else
-    typedef long wxMemorySize;
+    using wxMemorySize = long;
 #endif
 
 // ----------------------------------------------------------------------------
@@ -505,7 +505,7 @@ WXDLLIMPEXP_BASE wxString wxGetUserHome(const wxString& user = wxEmptyString);
 #if wxUSE_LONGLONG
     using wxDiskspaceSize_t = wxLongLong;
 #else
-    typedef long wxDiskspaceSize_t;
+    using wxDiskspaceSize_t = long;
 #endif
 
 // get number of total/free bytes on the disk where path belongs

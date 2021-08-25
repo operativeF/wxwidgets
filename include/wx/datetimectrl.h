@@ -46,7 +46,7 @@ public:
 #elif defined(__WXOSX_COCOA__) && !defined(__WXUNIVERSAL__)
     #include "wx/osx/datetimectrl.h"
 #else
-    typedef wxDateTimePickerCtrlBase wxDateTimePickerCtrl;
+    using wxDateTimePickerCtrl = wxDateTimePickerCtrlBase;
 #endif
 
 #endif // wxUSE_DATEPICKCTRL || wxUSE_TIMEPICKCTRL

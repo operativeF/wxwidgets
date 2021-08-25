@@ -396,8 +396,8 @@ _WX_ANY_DEFINE_SUB_TYPE(T, CLSTYPE)\
     using wxAnyBaseIntType = long long;
     using wxAnyBaseUintType = unsigned long long;
 #else
-    typedef long wxAnyBaseIntType;
-    typedef unsigned long wxAnyBaseUintType;
+    using wxAnyBaseIntType = long;
+    using wxAnyBaseUintType = unsigned long;
 #endif
 
 

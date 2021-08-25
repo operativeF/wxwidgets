@@ -45,7 +45,7 @@ class WXDLLIMPEXP_FWD_BASE wxMessageOutput;
 // ----------------------------------------------------------------------------
 
 // the type of the function used to create a wxApp object on program start up
-typedef wxAppConsole* (*wxAppInitializerFunction)();
+using wxAppInitializerFunction = wxAppConsole*(*)();
 
 // ----------------------------------------------------------------------------
 // constants

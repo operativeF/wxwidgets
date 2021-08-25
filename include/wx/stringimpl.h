@@ -59,7 +59,7 @@ using wxStdWideString = std::wstring;
 #if wxUSE_UNICODE_WCHAR
     using wxStdString = wxStdWideString;
 #else
-    typedef std::string wxStdString;
+    using wxStdString = std::string;
 #endif
 
 using wxStringImpl = wxStdString;

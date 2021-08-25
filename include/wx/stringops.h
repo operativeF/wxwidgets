@@ -167,7 +167,7 @@ struct WXDLLIMPEXP_BASE wxStringOperationsUtf8
         { return ch.IsAscii(); }
 
     // encodes the character as UTF-8:
-    typedef wxUniChar::Utf8CharBuffer Utf8CharBuffer;
+    using Utf8CharBuffer = wxUniChar::Utf8CharBuffer;
     static Utf8CharBuffer EncodeChar(const wxUniChar& ch)
         { return ch.AsUTF8(); }
 
@@ -196,7 +196,7 @@ private:
 
 
 #if wxUSE_UNICODE_UTF8
-typedef wxStringOperationsUtf8 wxStringOperations;
+using wxStringOperations = wxStringOperationsUtf8;
 #else
 using wxStringOperations = wxStringOperationsWchar;
 #endif

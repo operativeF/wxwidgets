@@ -237,7 +237,8 @@ namespace
 // normally) or if the function itself failed.
 HMODULE CallGetModuleHandleEx(const void* addr)
 {
-    typedef BOOL (WINAPI *GetModuleHandleEx_t)(DWORD, LPCTSTR, HMODULE *);
+    using GetModuleHandleEx_t = BOOL (WINAPI*)(DWORD, LPCTSTR, HMODULE *);
+
     static const GetModuleHandleEx_t INVALID_FUNC_PTR = (GetModuleHandleEx_t)-1;
 
     static GetModuleHandleEx_t s_pfnGetModuleHandleEx = INVALID_FUNC_PTR;

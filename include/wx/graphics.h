@@ -82,7 +82,7 @@ class WXDLLIMPEXP_FWD_CORE wxPrinterDC;
 #endif
 #ifdef __WXMSW__
 #if wxUSE_ENH_METAFILE
-class WXDLLIMPEXP_FWD_CORE wxEnhMetaFileDC;
+struct WXDLLIMPEXP_FWD_CORE wxEnhMetaFileDC;
 #endif
 #endif
 class WXDLLIMPEXP_FWD_CORE wxGraphicsContext;
