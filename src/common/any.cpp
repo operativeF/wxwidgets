@@ -21,11 +21,12 @@
     #include "wx/crt.h"
 #endif
 
-#include <vector>
 #include "wx/module.h"
 #include "wx/hashmap.h"
 #include "wx/hashset.h"
 
+#include <memory>
+#include <vector>
 
 using namespace wxPrivate;
 

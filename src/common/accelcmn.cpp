@@ -21,6 +21,8 @@
     #include "wx/crt.h"
 #endif //WX_PRECOMP
 
+#include <optional>
+
 wxAcceleratorTable wxNullAcceleratorTable;
 
 // ============================================================================

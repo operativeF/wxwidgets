@@ -14,6 +14,8 @@
 #include "wx/window.h"                      // base class declaration
 #include "wx/containr.h"                    // wxControlContainer
 
+#include <memory>
+
 class WXDLLIMPEXP_FWD_CORE wxSplitterEvent;
 
 // ---------------------------------------------------------------------------

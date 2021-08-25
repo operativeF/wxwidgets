@@ -20,7 +20,7 @@
 #include "wx/apptrait.h"
 #include "wx/renderer.h"
 
-
+#include <memory>
 
 #if wxUSE_DYNLIB_CLASS
     #include "wx/dynlib.h"

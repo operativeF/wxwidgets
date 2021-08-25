@@ -18,6 +18,8 @@
 #include "wx/tls.h"
 #include "wx/thread.h"
 #include "wx/sharedptr.h"
+
+#include <memory>
 #include <vector>
 
 namespace

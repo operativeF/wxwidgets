@@ -14,6 +14,8 @@
 #include "wx/event.h"
 #include "wx/icon.h"
 
+#include <string_view>
+
 class WXDLLIMPEXP_FWD_CORE wxFrame;
 class WXDLLIMPEXP_FWD_CORE wxWindow;
 class WXDLLIMPEXP_FWD_CORE wxApp;

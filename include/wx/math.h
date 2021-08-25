@@ -12,7 +12,9 @@
 #define _WX_MATH_H_
 
 #define _USE_MATH_DEFINES
+
 #include <cmath>
+#include <cstdlib>
 #include <numbers>
 
 #include "wx/defs.h"

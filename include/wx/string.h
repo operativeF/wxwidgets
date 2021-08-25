@@ -1522,7 +1522,7 @@ public:
 
     // explicit conversion to C string in internal representation (char*,
     // wchar_t*, UTF-8-encoded char*, depending on the build):
-    const wxStringCharType *wx_str() const { return m_impl.c_str(); }
+    const wxStringCharType *wx_str() const noexcept { return m_impl.c_str(); }
 
     // conversion to *non-const* multibyte or widestring buffer; modifying
     // returned buffer won't affect the string, these methods are only useful

@@ -301,8 +301,8 @@ void wxTipWindowView::OnPaint(wxPaintEvent& WXUNUSED(event))
     wxPoint pt;
     pt.x = TEXT_MARGIN_X;
     pt.y = TEXT_MARGIN_Y;
-    const size_t count = m_textLines.size();
-    for ( const std::string_view& line : m_textLines )
+
+    for ( std::string_view line : m_textLines )
     {
         dc.DrawText(line, pt);
 

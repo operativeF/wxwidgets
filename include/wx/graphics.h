@@ -22,6 +22,8 @@
 #include "wx/font.h"
 #include "wx/image.h"
 #include "wx/peninfobase.h"
+
+#include <string_view>
 #include <vector>
 
 enum wxAntialiasMode

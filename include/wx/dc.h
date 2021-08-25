@@ -30,6 +30,8 @@
 #include "wx/region.h"
 #include "wx/affinematrix2d.h"
 
+#include <string_view>
+
 #define wxUSE_NEW_DC 1
 
 class WXDLLIMPEXP_FWD_CORE wxDC;

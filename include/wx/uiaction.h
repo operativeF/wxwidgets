@@ -18,6 +18,8 @@
 
 #include "wx/mousestate.h"  // for wxMOUSE_BTN_XXX constants
 
+#include <string_view>
+
 class WXDLLIMPEXP_CORE wxUIActionSimulator
 {
 public:

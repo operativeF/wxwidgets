@@ -19,6 +19,8 @@
 #include "wx/window.h"
 #include "wx/string.h"
 
+#include <memory>
+
 #define wxSASH_DRAG_NONE       0
 #define wxSASH_DRAG_DRAGGING   1
 #define wxSASH_DRAG_LEFT_DOWN  2
