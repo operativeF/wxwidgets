@@ -15437,7 +15437,7 @@ bool wxRichTextDrawingContext::HasVirtualAttributes(wxRichTextObject* obj) const
     if (!GetVirtualAttributesEnabled())
         return false;
 
-    wxList::compatibility_iterator node = m_buffer->GetDrawingHandlers().GetFirst();
+    wxList::compatibility_iterator node = wxRichTextBuffer::GetDrawingHandlers().GetFirst();
     while (node)
     {
         wxRichTextDrawingHandler *handler = (wxRichTextDrawingHandler*)node->GetData();
@@ -15456,7 +15456,7 @@ wxRichTextAttr wxRichTextDrawingContext::GetVirtualAttributes(wxRichTextObject* 
         return attr;
 
     // We apply all handlers, so we can may combine several different attributes
-    wxList::compatibility_iterator node = m_buffer->GetDrawingHandlers().GetFirst();
+    wxList::compatibility_iterator node = wxRichTextBuffer::GetDrawingHandlers().GetFirst();
     while (node)
     {
         wxRichTextDrawingHandler *handler = (wxRichTextDrawingHandler*)node->GetData();
@@ -15492,7 +15492,7 @@ int wxRichTextDrawingContext::GetVirtualSubobjectAttributesCount(wxRichTextObjec
     if (!GetVirtualAttributesEnabled())
         return 0;
 
-    wxList::compatibility_iterator node = m_buffer->GetDrawingHandlers().GetFirst();
+    wxList::compatibility_iterator node = wxRichTextBuffer::GetDrawingHandlers().GetFirst();
     while (node)
     {
         wxRichTextDrawingHandler *handler = (wxRichTextDrawingHandler*)node->GetData();
@@ -15510,7 +15510,7 @@ int wxRichTextDrawingContext::GetVirtualSubobjectAttributes(wxRichTextObject* ob
     if (!GetVirtualAttributesEnabled())
         return 0;
 
-    wxList::compatibility_iterator node = m_buffer->GetDrawingHandlers().GetFirst();
+    wxList::compatibility_iterator node = wxRichTextBuffer::GetDrawingHandlers().GetFirst();
     while (node)
     {
         wxRichTextDrawingHandler *handler = (wxRichTextDrawingHandler*)node->GetData();
@@ -15527,7 +15527,7 @@ bool wxRichTextDrawingContext::HasVirtualText(const wxRichTextPlainText* obj) co
     if (!GetVirtualAttributesEnabled())
         return false;
 
-    wxList::compatibility_iterator node = m_buffer->GetDrawingHandlers().GetFirst();
+    wxList::compatibility_iterator node = wxRichTextBuffer::GetDrawingHandlers().GetFirst();
     while (node)
     {
         wxRichTextDrawingHandler *handler = (wxRichTextDrawingHandler*)node->GetData();
@@ -15544,7 +15544,7 @@ bool wxRichTextDrawingContext::GetVirtualText(const wxRichTextPlainText* obj, wx
     if (!GetVirtualAttributesEnabled())
         return false;
 
-    wxList::compatibility_iterator node = m_buffer->GetDrawingHandlers().GetFirst();
+    wxList::compatibility_iterator node = wxRichTextBuffer::GetDrawingHandlers().GetFirst();
     while (node)
     {
         wxRichTextDrawingHandler *handler = (wxRichTextDrawingHandler*)node->GetData();

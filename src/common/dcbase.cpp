@@ -75,6 +75,9 @@
     #include "wx/qt/dcmemory.h"
     #include "wx/qt/dcscreen.h"
 #endif
+
+#include <array>
+
 //----------------------------------------------------------------------------
 // wxDCFactory
 //----------------------------------------------------------------------------
@@ -709,12 +712,14 @@ wxDCImpl::DoDrawPolyPolygon(int n,
 
 #if wxUSE_SPLINES
 
+// TODO: Use wxPoint.
 void wxDCImpl::DrawSpline(wxCoord x1, wxCoord y1,
                           wxCoord x2, wxCoord y2,
                           wxCoord x3, wxCoord y3)
 {
-    wxPoint points[] = { wxPoint(x1, y1), wxPoint(x2, y2), wxPoint(x3, y3) };
-    DrawSpline(WXSIZEOF(points), points);
+    std::array<wxPoint, 3> points = { wxPoint{x1, y1}, wxPoint{x2, y2}, wxPoint{x3, y3} };
+    // TODO: Use span
+    DrawSpline(points.size(), points.data());
 }
 
 void wxDCImpl::DrawSpline(int n, const wxPoint points[])

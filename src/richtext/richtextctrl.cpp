@@ -5238,7 +5238,7 @@ bool wxRichTextCtrl::ProcessDelayedImageLoading(const wxRect& screenRect, wxRich
                                 wxClientDC dc(this);
                                 wxRichTextAttr attr(imageObj->GetAttributes());
                                 imageObj->AdjustAttributes(attr, context);
-                                imageObj->GetBoxRects(dc, & GetBuffer(), attr, marginRect, borderRect, contentRect, paddingRect, outlineRect);
+                                wxRichTextObject::GetBoxRects(dc, & GetBuffer(), attr, marginRect, borderRect, contentRect, paddingRect, outlineRect);
 
                                 wxImage image;
                                 bool changed = false;

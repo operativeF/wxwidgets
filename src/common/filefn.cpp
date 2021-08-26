@@ -30,6 +30,7 @@
 #include "wx/tokenzr.h"
 
 #include <algorithm>
+#include <array>
 #include <vector>
 
 #if defined(__WXMAC__)
@@ -367,16 +368,17 @@ wxConcatFiles (const wxString& file1, const wxString& file2, const wxString& fil
     if ( !in1.IsOpened() || !in2.IsOpened() || !out.IsOpened() )
         return false;
 
-    ssize_t ofs;
-    unsigned char buf[1024];
+    std::size_t ofs{};
+    std::array<unsigned char, 1024> buf;
 
     for( int i=0; i<2; i++)
     {
         wxFile *in = i==0 ? &in1 : &in2;
-        do{
-            if ( (ofs = in->Read(buf,WXSIZEOF(buf))) == wxInvalidOffset ) return false;
-            if ( ofs > 0 )
-                if ( !out.Write(buf,ofs) )
+        do {
+            // FIXME: Use span
+            if ( (ofs = in->Read(buf.data(), buf.size())) == wxInvalidOffset ) return false;
+            if ( ofs > 0 ) // FIXME: Use span
+                if ( !out.Write(buf.data(), ofs) )
                     return false;
         } while ( ofs == (ssize_t)WXSIZEOF(buf) );
     }

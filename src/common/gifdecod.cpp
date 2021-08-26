@@ -24,6 +24,7 @@
 #include "wx/scopedptr.h"
 #include "wx/scopeguard.h"
 
+#include <array>
 #include <tuple>
 #include <vector>
 
@@ -566,12 +567,14 @@ as an End of Information itself)
 //
 bool wxGIFDecoder::DoCanRead(wxInputStream &stream) const
 {
-    unsigned char buf[3];
+    std::array<unsigned char, 3> buf;
 
-    if ( !stream.Read(buf, WXSIZEOF(buf)) )
+    // FIXME: Use span
+    if ( !stream.Read(buf.data(), buf.size()) )
         return false;
 
-    return memcmp(buf, "GIF", WXSIZEOF(buf)) == 0;
+    // FIXME: Change to better comparison.
+    return memcmp(buf.data(), "GIF", buf.size()) == 0;
 }
 
 

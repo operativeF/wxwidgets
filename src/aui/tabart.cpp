@@ -30,6 +30,7 @@
 #include "wx/osx/private.h"
 #endif
 
+#include <array>
 
 // -- GUI helper classes and functions --
 
@@ -409,7 +410,7 @@ void wxAuiGenericTabArt::DrawTab(wxDC& dc,
     dc.SetClippingRegion(tab_x, tab_y, clip_width+1, tab_height-3);
 
 
-    wxPoint border_points[6];
+    std::array<wxPoint, 6> border_points;
     if (m_flags &wxAUI_NB_BOTTOM)
     {
         border_points[0] = wxPoint(tab_x,             tab_y);
@@ -516,7 +517,7 @@ void wxAuiGenericTabArt::DrawTab(wxDC& dc,
     // draw tab outline
     dc.SetPen(m_borderPen);
     dc.SetBrush(*wxTRANSPARENT_BRUSH);
-    dc.DrawPolygon(WXSIZEOF(border_points), border_points);
+    dc.DrawPolygon(border_points.size(), border_points.data());
 
     // there are two horizontal grey lines at the bottom of the tab control,
     // this gets rid of the top one of those lines in the tab control
@@ -1072,7 +1073,7 @@ void wxAuiSimpleTabArt::DrawTab(wxDC& dc,
 
     // -- draw line --
 
-    wxPoint points[7];
+    std::array<wxPoint, 7> points;
     points[0].x = tab_x;
     points[0].y = tab_y + tab_height - 1;
     points[1].x = tab_x + tab_height - 3;
@@ -1089,12 +1090,14 @@ void wxAuiSimpleTabArt::DrawTab(wxDC& dc,
 
     dc.SetClippingRegion(in_rect);
 
-    dc.DrawPolygon(WXSIZEOF(points) - 1, points);
+    // TODO: Use span
+    dc.DrawPolygon(points.size() - 1, points.data());
 
     dc.SetPen(*wxGREY_PEN);
 
+    // TODO: Use span
     //dc.DrawLines(active ? WXSIZEOF(points) - 1 : WXSIZEOF(points), points);
-    dc.DrawLines(WXSIZEOF(points), points);
+    dc.DrawLines(points.size(), points.data());
 
 
     int text_offset;

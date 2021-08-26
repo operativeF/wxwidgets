@@ -464,7 +464,7 @@ size_t wxStreamBuffer::Write(const void *buffer, size_t size)
         m_stream->Reset();
     }
 
-    size_t ret;
+    std::size_t ret;
 
     if ( !HasBuffer() && m_fixed )
     {
@@ -477,11 +477,11 @@ size_t wxStreamBuffer::Write(const void *buffer, size_t size)
     }
     else // we [may] have a buffer, use it
     {
-        const size_t orig_size = size;
+        const std::size_t orig_size = size;
 
         while ( size > 0 )
         {
-            size_t left = GetBytesLeft();
+            std::size_t left = GetBytesLeft();
 
             // if the buffer is too large to fit in the stream buffer, split
             // it in smaller parts

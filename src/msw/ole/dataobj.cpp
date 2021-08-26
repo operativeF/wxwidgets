@@ -68,7 +68,7 @@ wxDataFormat NonStandardFormatsFixup(wxDataFormat format)
     if ( !format.IsStandard() )
     {
         wxChar szBuf[256];
-        if ( ::GetClipboardFormatName(format, szBuf, WXSIZEOF(szBuf)) )
+        if ( ::GetClipboardFormatNameW(format, szBuf, WXSIZEOF(szBuf)) )
         {
             if ( wxStrcmp(szBuf, wxT("HTML Format")) == 0 )
                 format = wxDF_HTML;

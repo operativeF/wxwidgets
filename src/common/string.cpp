@@ -655,7 +655,7 @@ int wxString::compare(size_t nStart, size_t nLen,
     PosLenToImpl(nStart, nLen, &pos, &len);
 
     size_t pos2, len2;
-    str.PosLenToImpl(nStart2, nLen2, &pos2, &len2);
+    PosLenToImpl(nStart2, nLen2, &pos2, &len2);
 
     return m_impl.compare(pos, len, str.m_impl, pos2, len2);
 }

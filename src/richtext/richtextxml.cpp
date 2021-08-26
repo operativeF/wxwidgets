@@ -253,7 +253,7 @@ bool wxRichTextXMLHandler::DoSaveFile(wxRichTextBuffer *buffer, wxOutputStream& 
 
     if (buffer->GetStyleSheet() && (GetFlags() & wxRICHTEXT_HANDLER_INCLUDE_STYLESHEET))
     {
-        m_helper.OutputIndentation(stream, level);
+        wxRichTextXMLHelper::OutputIndentation(stream, level);
         wxString nameAndDescr;
         if (!buffer->GetStyleSheet()->GetName().empty())
             nameAndDescr << wxT(" name=\"") << buffer->GetStyleSheet()->GetName() << wxT("\"");
@@ -289,7 +289,7 @@ bool wxRichTextXMLHandler::DoSaveFile(wxRichTextBuffer *buffer, wxOutputStream& 
 
         m_helper.WriteProperties(stream, buffer->GetStyleSheet()->GetProperties(), level);
 
-        m_helper.OutputIndentation(stream, level);
+        wxRichTextXMLHelper::OutputIndentation(stream, level);
         m_helper.OutputString(stream, wxT("</stylesheet>"));
     }
 

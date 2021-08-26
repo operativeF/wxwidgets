@@ -29,6 +29,8 @@
     #include "wx/palette.h"
 #endif // wxUSE_PALETTE
 
+#include <array>
+
 // --------------------------------------------------------------------------
 // Constants
 // --------------------------------------------------------------------------
@@ -215,12 +217,14 @@ int wxIFFDecoder::GetTransparentColour() const { return m_image->transparent; }
 //
 bool wxIFFDecoder::CanRead()
 {
-    unsigned char buf[12];
+    std::array<unsigned char, 12> buf;
 
-    if ( !m_f->Read(buf, WXSIZEOF(buf)) )
+    // TODO: Use span
+    if ( !m_f->Read(buf, buf.size()) )
         return false;
 
-    return (memcmp(buf, "FORM", 4) == 0) && (memcmp(buf+8, "ILBM", 4) == 0);
+    // TODO: Change this.
+    return (memcmp(buf.data(), "FORM", 4) == 0) && (memcmp(buf.data() + 8, "ILBM", 4) == 0);
 }
 
 

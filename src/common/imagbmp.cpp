@@ -35,6 +35,7 @@
 #include "wx/anidecod.h"
 #include "wx/private/icondir.h"
 
+#include <array>
 #include <memory>
 
 // ----------------------------------------------------------------------------
@@ -1220,9 +1221,10 @@ bool wxBMPHandler::LoadFile(wxImage *image, wxInputStream& stream,
 
 bool wxBMPHandler::DoCanRead(wxInputStream& stream)
 {
-    unsigned char hdr[2];
+    std::array<unsigned char, 2> hdr;
 
-    if ( !stream.ReadAll(hdr, WXSIZEOF(hdr)) )     // it's ok to modify the stream position here
+    // TODO: Use span
+    if ( !stream.ReadAll(hdr.data(), hdr.size()) )     // it's ok to modify the stream position here
         return false;
 
     // do we have the BMP file signature?

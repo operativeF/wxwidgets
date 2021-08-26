@@ -757,15 +757,15 @@ wxFontMapperBase::NonInteractiveCharsetToEncoding(const std::string& charset)
 }
 
 /* static */
-size_t wxFontMapperBase::GetSupportedEncodingsCount()
+std::size_t wxFontMapperBase::GetSupportedEncodingsCount()
 {
-    return WXSIZEOF(gs_encodings);
+    return gs_encodings.size();
 }
 
 /* static */
 wxFontEncoding wxFontMapperBase::GetEncoding(size_t n)
 {
-    wxCHECK_MSG( n < WXSIZEOF(gs_encodings), wxFONTENCODING_SYSTEM,
+    wxCHECK_MSG( n < gs_encodings.size(), wxFONTENCODING_SYSTEM,
                     wxT("wxFontMapper::GetEncoding(): invalid index") );
 
     return gs_encodings[n];
@@ -779,7 +779,7 @@ std::string wxFontMapperBase::GetEncodingDescription(wxFontEncoding encoding)
         return _("Default encoding").ToStdString();
     }
 
-    for ( size_t i = 0; i < WXSIZEOF(gs_encodingDescs); i++ )
+    for ( size_t i = 0; i != gs_encodingDescs.size(); i++ )
     {
         if ( gs_encodings[i] == encoding )
         {
