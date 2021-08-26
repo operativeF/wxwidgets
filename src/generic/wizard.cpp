@@ -19,7 +19,6 @@
 #if wxUSE_WIZARDDLG
 
 #ifndef WX_PRECOMP
-    #include "wx/dynarray.h"
     #include "wx/intl.h"
     #include "wx/statbmp.h"
     #include "wx/button.h"

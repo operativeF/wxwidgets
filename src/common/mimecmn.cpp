@@ -18,7 +18,6 @@
 #include "wx/mimetype.h"
 
 #ifndef WX_PRECOMP
-    #include "wx/dynarray.h"
     #include "wx/string.h"
     #include "wx/intl.h"
     #include "wx/log.h"

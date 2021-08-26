@@ -38,7 +38,6 @@
 #include "wx/statline.h"
 #include "wx/artprov.h"
 #include "wx/collpane.h"
-#include "wx/arrstr.h"
 #include "wx/msgout.h"
 #include "wx/scopeguard.h"
 

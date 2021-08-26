@@ -16,8 +16,6 @@
 #if wxUSE_STATUSBAR
 
 #include "wx/pen.h"
-#include "wx/arrstr.h"
-
 
 // ----------------------------------------------------------------------------
 // wxStatusBarGeneric

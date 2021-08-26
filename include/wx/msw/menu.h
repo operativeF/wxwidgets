@@ -15,8 +15,8 @@
 
 #if wxUSE_ACCEL
     #include "wx/accel.h"
-    #include "wx/dynarray.h"
 
+    #include <vector>
     using wxAcceleratorArray = std::vector<wxAcceleratorEntry>;
 #endif // wxUSE_ACCEL
 

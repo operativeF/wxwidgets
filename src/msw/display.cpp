@@ -72,7 +72,6 @@ protected:
 #if wxUSE_DISPLAY
 
 #ifndef WX_PRECOMP
-    #include "wx/dynarray.h"
     #include "wx/app.h"
     #include "wx/frame.h"
 #endif

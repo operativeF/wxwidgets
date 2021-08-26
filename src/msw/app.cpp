@@ -14,7 +14,6 @@
 
 #ifndef WX_PRECOMP
     #include "wx/msw/wrapcctl.h"
-    #include "wx/dynarray.h"
     #include "wx/frame.h"
     #include "wx/app.h"
     #include "wx/utils.h"

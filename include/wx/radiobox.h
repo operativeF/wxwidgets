@@ -19,7 +19,7 @@
 
 #if wxUSE_TOOLTIPS
 
-#include "wx/dynarray.h"
+#include <vector>
 
 class WXDLLIMPEXP_FWD_CORE wxToolTip;
 

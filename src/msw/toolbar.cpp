@@ -18,7 +18,6 @@
 
 #ifndef WX_PRECOMP
     #include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
-    #include "wx/dynarray.h"
     #include "wx/frame.h"
     #include "wx/log.h"
     #include "wx/intl.h"

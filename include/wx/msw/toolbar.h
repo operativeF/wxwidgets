@@ -13,8 +13,9 @@
 
 #if wxUSE_TOOLBAR
 
-#include "wx/dynarray.h"
 #include "wx/imaglist.h"
+
+#include <string>
 
 class WXDLLIMPEXP_CORE wxToolBar : public wxToolBarBase
 {

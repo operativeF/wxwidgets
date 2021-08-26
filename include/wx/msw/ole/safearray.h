@@ -10,6 +10,7 @@
 #ifndef _MSW_OLE_SAFEARRAY_H_
 #define _MSW_OLE_SAFEARRAY_H_
 
+#include "wx/arrstr.h"
 #include "wx/msw/ole/oleutils.h"
 
 #if wxUSE_OLE && wxUSE_VARIANT

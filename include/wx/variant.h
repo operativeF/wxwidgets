@@ -17,7 +17,6 @@
 
 #include "wx/object.h"
 #include "wx/string.h"
-#include "wx/arrstr.h"
 #include "wx/list.h"
 #include "wx/cpp.h"
 #include "wx/longlong.h"

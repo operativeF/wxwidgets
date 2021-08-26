@@ -15,6 +15,7 @@
 
 #if wxUSE_CONTROLS
 
+#include "wx/arrstr.h"
 #include "wx/control.h"      // base class
 #include "wx/stringutils.h"
 

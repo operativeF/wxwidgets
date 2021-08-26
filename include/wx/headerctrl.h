@@ -14,7 +14,6 @@
 
 #if wxUSE_HEADERCTRL
 
-#include "wx/dynarray.h"
 #include <vector>
 
 #include "wx/headercol.h"

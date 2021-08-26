@@ -15,8 +15,8 @@
 
 #if wxUSE_GRID
 
+#include "wx/arrstr.h"
 #include "wx/hashmap.h"
-
 #include "wx/scrolwin.h"
 
 #include <iterator>

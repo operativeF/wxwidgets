@@ -16,9 +16,6 @@
 #if wxUSE_OWNER_DRAWN
   struct WXDLLIMPEXP_FWD_CORE wxOwnerDrawn;
 
-  // define the array of list box items
-  #include  "wx/dynarray.h"
-
   using wxListBoxItemsArray = std::vector<wxOwnerDrawn*>;
 #endif // wxUSE_OWNER_DRAWN
 

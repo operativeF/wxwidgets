@@ -16,7 +16,6 @@
 
 #ifndef   WX_PRECOMP
     #include "wx/msw/wrapwin.h"
-    #include "wx/dynarray.h"
     #include "wx/string.h"
     #include "wx/intl.h"
     #include "wx/event.h"

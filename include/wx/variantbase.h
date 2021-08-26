@@ -16,8 +16,8 @@
 #if wxUSE_VARIANT
 
 #include "wx/string.h"
-#include "wx/arrstr.h"
 #include "wx/cpp.h"
+
 #include <typeinfo>
 
 #if wxUSE_DATETIME

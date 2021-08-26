@@ -58,6 +58,7 @@
 
 #if wxUSE_RICHTEXT
 
+#include "wx/arrstr.h"
 #include "wx/list.h"
 #include "wx/textctrl.h"
 #include "wx/bitmap.h"

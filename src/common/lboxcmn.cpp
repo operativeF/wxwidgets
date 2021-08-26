@@ -17,7 +17,6 @@
 #include "wx/listbox.h"
 
 #ifndef WX_PRECOMP
-    #include "wx/dynarray.h"
     #include "wx/arrstr.h"
     #include "wx/log.h"
     #include "wx/dcclient.h"

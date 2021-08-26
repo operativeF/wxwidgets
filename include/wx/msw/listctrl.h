@@ -12,7 +12,7 @@
 #define _WX_LISTCTRL_H_
 
 #include "wx/textctrl.h"
-#include "wx/dynarray.h"
+
 #include <vector>
 
 struct wxMSWListItemData;

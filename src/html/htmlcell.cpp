@@ -12,7 +12,6 @@
 #if wxUSE_HTML && wxUSE_STREAMS
 
 #ifndef WX_PRECOMP
-    #include "wx/dynarray.h"
     #include "wx/brush.h"
     #include "wx/colour.h"
     #include "wx/dc.h"

@@ -17,7 +17,6 @@
 
 #ifndef WX_PRECOMP
     #include "wx/object.h"
-    #include "wx/dynarray.h"
     #include "wx/intl.h"
     #include "wx/log.h"
     #if wxUSE_STREAMS

@@ -15,7 +15,7 @@
 
 #if wxUSE_SPINCTRL
 
-#include "wx/dynarray.h"
+#include <vector>
 
 class WXDLLIMPEXP_FWD_CORE wxSpinCtrl;
 

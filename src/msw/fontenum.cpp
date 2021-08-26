@@ -19,7 +19,6 @@
 #ifndef WX_PRECOMP
     #include "wx/gdicmn.h"
     #include "wx/font.h"
-    #include "wx/dynarray.h"
     #include "wx/msw/private.h"
 #endif
 

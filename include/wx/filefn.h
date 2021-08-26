@@ -12,7 +12,6 @@
 #define   _FILEFN_H_
 
 #include "wx/list.h"
-#include "wx/arrstr.h"
 
 #include <ctime>
 
