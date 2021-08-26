@@ -15,7 +15,6 @@
 #include "wx/msw/dcscreen.h"
 
 #ifndef WX_PRECOMP
-   #include "wx/string.h"
    #include "wx/window.h"
 #endif
 

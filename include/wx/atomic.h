@@ -17,6 +17,8 @@
 // get the value of wxUSE_THREADS configuration flag
 #include "wx/defs.h"
 
+#include <cstdint>
+
 // constraints on the various functions:
 //  - wxAtomicDec must return a zero value if the value is zero once
 //  decremented else it must return any non-zero value (the true value is OK

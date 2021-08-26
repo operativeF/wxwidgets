@@ -13,7 +13,6 @@
 
 
 #ifndef WX_PRECOMP
-    #include "wx/string.h"
     #include "wx/log.h"
     #include "wx/app.h"
     #include "wx/bitmap.h"
@@ -43,6 +42,8 @@
 
 #include "wx/listimpl.cpp"
 WX_DEFINE_LIST(wxGDIImageHandlerList)
+
+#include <string>
 
 #include <boost/nowide/convert.hpp>
 

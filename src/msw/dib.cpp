@@ -21,7 +21,6 @@
 #if wxUSE_WXDIB
 
 #ifndef WX_PRECOMP
-    #include "wx/string.h"
     #include "wx/log.h"
     #include "wx/intl.h"
     #include "wx/bitmap.h"
@@ -32,9 +31,10 @@
 #include "wx/quantize.h"
 #include "wx/scopedarray.h"
 
-#include <memory.h>
-
 #include "wx/msw/dib.h"
+
+#include <memory>
+#include <string>
 
 // ----------------------------------------------------------------------------
 // private functions

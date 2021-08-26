@@ -17,6 +17,8 @@
 
 #include "wx/button.h"
 
+#include <string>
+
 // FIXME: right now only wxMSW, wxGTK and wxOSX implement bitmap support in wxButton
 //        itself, this shouldn't be used for the other platforms neither
 //        when all of them do it

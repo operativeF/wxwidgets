@@ -18,7 +18,6 @@
 
 #ifndef WX_PRECOMP
     #include "wx/list.h"
-    #include "wx/string.h"
     #include "wx/utils.h"
     #include "wx/module.h"
 #endif

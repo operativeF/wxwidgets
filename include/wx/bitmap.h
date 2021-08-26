@@ -15,10 +15,11 @@
 // headers
 // ----------------------------------------------------------------------------
 
-#include "wx/string.h"
 #include "wx/gdicmn.h"  // for wxBitmapType
 #include "wx/colour.h"
 #include "wx/image.h"
+
+#include <string>
 
 class WXDLLIMPEXP_FWD_CORE wxBitmap;
 struct WXDLLIMPEXP_FWD_CORE wxBitmapHandler;

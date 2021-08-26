@@ -15,7 +15,6 @@
 #include "wx/renderer.h"
 
 #ifndef WX_PRECOMP
-    #include "wx/string.h"
     #include "wx/dc.h"
     #include "wx/settings.h"
     #include "wx/gdicmn.h"

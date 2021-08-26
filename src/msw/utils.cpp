@@ -1528,7 +1528,7 @@ extern long wxCharsetToCodepage(const char *name)
 #endif // wxUSE_FONTMAP/!wxUSE_FONTMAP
 
 extern "C" WXDLLIMPEXP_BASE HWND
-wxCreateHiddenWindow(LPCTSTR *pclassname, LPCTSTR classname, WNDPROC wndproc)
+wxCreateHiddenWindow(LPCWSTR *pclassname, LPCWSTR classname, WNDPROC wndproc)
 {
     wxCHECK_MSG( classname && pclassname && wndproc, nullptr,
                     wxT("NULL parameter in wxCreateHiddenWindow") );
@@ -1543,7 +1543,7 @@ wxCreateHiddenWindow(LPCTSTR *pclassname, LPCTSTR classname, WNDPROC wndproc)
         wndclass.hInstance     = wxGetInstance();
         wndclass.lpszClassName = classname;
 
-        if ( !::RegisterClass(&wndclass) )
+        if ( !::RegisterClassW(&wndclass) )
         {
             wxLogLastError(wxT("RegisterClass() in wxCreateHiddenWindow"));
 

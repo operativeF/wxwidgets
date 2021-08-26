@@ -37,7 +37,13 @@
 
 #include "wx/msw/private/hiddenwin.h"
 
-constexpr wxChar CLASSNAME[] = TEXT("_wxSocket_Internal_Window_Class");
+#include <boost/nowide/convert.hpp>
+#include <boost/nowide/stackstring.hpp>
+
+#include <array>
+#include <string_view>
+
+constexpr std::string_view CLASSNAME = "_wxSocket_Internal_Window_Class";
 
 /* Maximum number of different wxSocket objects at a given time.
  * This value can be modified at will, but it CANNOT be greater
@@ -55,7 +61,7 @@ LRESULT CALLBACK wxSocket_Internal_WinProc(HWND, UINT, WPARAM, LPARAM);
 
 static HWND hWin;
 wxCRIT_SECT_DECLARE_MEMBER(gs_critical);
-static wxSocketImplMSW *socketList[MAXSOCKETS];
+static std::array<wxSocketImplMSW*, MAXSOCKETS> socketList{};
 static int firstAvailable;
 
 // ----------------------------------------------------------------------------
@@ -81,18 +87,12 @@ public:
 
 bool wxSocketMSWManager::OnInit()
 {
-  LPCTSTR pclassname = nullptr;
+  LPCWSTR pclassname = nullptr;
 
   /* Create internal window for event notifications */
-  hWin = wxCreateHiddenWindow(&pclassname, CLASSNAME, wxSocket_Internal_WinProc);
+  hWin = wxCreateHiddenWindow(&pclassname, boost::nowide::widen(CLASSNAME).c_str(), wxSocket_Internal_WinProc);
   if (!hWin)
       return false;
-
-  /* Initialize socket list */
-  for (int i = 0; i < MAXSOCKETS; i++)
-  {
-    socketList[i] = nullptr;
-  }
   
   firstAvailable = 0;
 
@@ -105,7 +105,7 @@ void wxSocketMSWManager::OnExit()
 {
   /* Destroy internal window */
   DestroyWindow(hWin);
-  UnregisterClass(CLASSNAME, wxGetInstance());
+  ::UnregisterClassW(boost::nowide::widen(CLASSNAME).c_str(), wxGetInstance());
 
   WSACleanup();
 }
@@ -145,7 +145,7 @@ wxSocketImplMSW::~wxSocketImplMSW()
       // them sent to a new socket which could reuse the same message number as
       // soon as we destroy this one
       MSG msg;
-      while ( ::PeekMessage(&msg, hWin, m_msgnumber, m_msgnumber, PM_REMOVE) )
+      while ( ::PeekMessageW(&msg, hWin, m_msgnumber, m_msgnumber, PM_REMOVE) )
           ;
 
       socketList[m_msgnumber - WM_USER] = nullptr;

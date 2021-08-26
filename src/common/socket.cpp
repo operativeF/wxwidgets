@@ -23,7 +23,6 @@
 
 #ifndef WX_PRECOMP
     #include "wx/object.h"
-    #include "wx/string.h"
     #include "wx/intl.h"
     #include "wx/log.h"
     #include "wx/event.h"
@@ -48,6 +47,8 @@
 #ifdef __UNIX__
     #include <errno.h>
 #endif
+
+#include <string>
 
 // we use MSG_NOSIGNAL to avoid getting SIGPIPE when sending data to a remote
 // host which closed the connection if it is available, otherwise we rely on

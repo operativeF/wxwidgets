@@ -14,7 +14,6 @@
 #ifndef WX_PRECOMP
     #include "wx/app.h"
     #include "wx/module.h"
-    #include "wx/string.h"
 #endif // WX_PRECOMP
 
 #include "wx/msw/rt/private/notifmsg.h"
@@ -34,6 +33,8 @@
 #include <functiondiscoverykeys.h>
 #include <propvarutil.h>
 #include <wrl/implements.h>
+
+#include <string>
 
 #include <boost/nowide/convert.hpp>
 

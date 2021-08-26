@@ -16,6 +16,8 @@
 
 #include "wx/control.h"
 
+#include <string>
+
 // class name
 inline constexpr char wxCollapsibleHeaderCtrlNameStr[] = "collapsibleHeader";
 

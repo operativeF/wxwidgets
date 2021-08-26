@@ -16,6 +16,8 @@
 #include "wx/colour.h"
 #include "wx/icon.h"
 
+#include <string>
+
 class WXDLLIMPEXP_FWD_CORE wxWindow;
 
 // This class is used to pass all the various parameters to wxBusyInfo ctor.

@@ -22,6 +22,7 @@
 #include "wx/window.h"      // base class
 #include "wx/gdicmn.h"      // wxEllipsize...
 
+#include <string>
 #include <string_view>
 
 inline constexpr char wxControlNameStr[] = "control";

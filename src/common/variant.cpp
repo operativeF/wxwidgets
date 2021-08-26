@@ -31,7 +31,6 @@
     #include "wx/txtstrm.h"
 #endif
 
-#include "wx/string.h"
 #include "wx/tokenzr.h"
 
 wxVariant WXDLLIMPEXP_BASE wxNullVariant;

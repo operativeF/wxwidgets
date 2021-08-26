@@ -19,6 +19,7 @@
 #include "wx/event.h"
 #include "wx/chartype.h"
 #include "wx/dataobj.h"     // for wxDataFormat
+
 #include <vector>
 
 class WXDLLIMPEXP_FWD_CORE wxClipboard;

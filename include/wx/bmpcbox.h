@@ -17,7 +17,9 @@
 #if wxUSE_BITMAPCOMBOBOX
 
 #include "wx/bitmap.h"
-#include "wx/dynarray.h"
+
+#include <string>
+#include <vector>
 
 class WXDLLIMPEXP_FWD_CORE wxWindow;
 class WXDLLIMPEXP_FWD_CORE wxItemContainer;

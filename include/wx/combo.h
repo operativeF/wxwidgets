@@ -47,6 +47,9 @@
 #include "wx/textentry.h"
 #include "wx/time.h" // needed for wxMilliClock_t
 
+#include <cstdint>
+#include <string>
+
 class WXDLLIMPEXP_FWD_CORE wxTextCtrl;
 class WXDLLIMPEXP_FWD_CORE wxComboPopup;
 

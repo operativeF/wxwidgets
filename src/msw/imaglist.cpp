@@ -21,9 +21,7 @@
     #include "wx/intl.h"
     #include "wx/log.h"
     #include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
-    #include "wx/string.h"
     #include "wx/window.h"
-    #include <cstdio>
 #endif
 
 #include "wx/imaglist.h"
@@ -31,6 +29,8 @@
 #include "wx/msw/dc.h"
 #include "wx/msw/dib.h"
 #include "wx/msw/private.h"
+
+#include <algorithm>
 
 #define GetHImageList()     ((HIMAGELIST)m_hImageList)
 

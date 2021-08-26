@@ -15,7 +15,6 @@
 #if wxUSE_ENH_METAFILE
 
 #ifndef WX_PRECOMP
-    #include "wx/string.h"
     #include "wx/log.h"
     #include "wx/intl.h"
 #endif //WX_PRECOMP
@@ -27,6 +26,8 @@
 #include "wx/clipbrd.h"
 
 #include "wx/msw/private.h"
+
+#include <string>
 
 #include <boost/nowide/convert.hpp>
 

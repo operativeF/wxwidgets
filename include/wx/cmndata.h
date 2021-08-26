@@ -21,6 +21,8 @@
 #include "wx/stream.h"
 #endif
 
+#include <string>
+
 class WXDLLIMPEXP_FWD_CORE wxPrintNativeDataBase;
 
 inline constexpr int wxPRINTMEDIA_DEFAULT = 0;

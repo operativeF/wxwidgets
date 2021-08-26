@@ -24,7 +24,6 @@
     #include "wx/settings.h"
     #include "wx/window.h"
     #include "wx/accel.h"
-    #include "wx/string.h"
     #include "wx/log.h"
     #include "wx/menu.h"
 #endif
@@ -37,6 +36,8 @@
 #include "wx/msw/dc.h"
 #include "wx/stringutils.h"
 #include "wx/msw/uxtheme.h"
+
+#include <string>
 
 #include <boost/nowide/convert.hpp>
 #include <boost/nowide/stackstring.hpp>

@@ -141,7 +141,7 @@ wxString wxHTTP::GenerateAuthString(const wxString& user, const wxString& pass) 
 {
     // TODO: Use wxBase64Encode() now that we have it instead of reproducing it
 
-    static constexpr char base64[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+    static constexpr std::string_view base64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 
     wxString buf;
     wxString toencode;

@@ -14,13 +14,15 @@
 #if wxUSE_IMAGE
 
 #include "wx/object.h"
-#include "wx/string.h"
 #include "wx/gdicmn.h"
 #include "wx/hashmap.h"
 
 #if wxUSE_STREAMS
 #  include "wx/stream.h"
 #endif
+
+#include <string>
+#include <vector>
 
 inline constexpr char wxIMAGE_OPTION_QUALITY[] =         "quality";
 inline constexpr char wxIMAGE_OPTION_FILENAME[] =        "FileName";

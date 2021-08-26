@@ -17,7 +17,6 @@
 #include "wx/splitter.h"
 
 #ifndef WX_PRECOMP
-    #include "wx/string.h"
     #include "wx/utils.h"
     #include "wx/log.h"
 

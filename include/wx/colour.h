@@ -14,6 +14,8 @@
 #include "wx/defs.h"
 #include "wx/gdiobj.h"
 
+#include <cstdint>
+
 class WXDLLIMPEXP_FWD_CORE wxColour;
 
 // A macro to define the standard wxColour constructors:

@@ -16,9 +16,10 @@
 #if wxUSE_HELP
 
 #include "wx/object.h"
-#include "wx/string.h"
 #include "wx/gdicmn.h"
 #include "wx/frame.h"
+
+#include <string>
 
 // Flags for SetViewer
 inline constexpr int wxHELP_NETSCAPE = 1;

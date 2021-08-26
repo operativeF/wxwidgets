@@ -16,7 +16,8 @@
 #if wxUSE_TASKBARBUTTON
 
 #include "wx/icon.h"
-#include "wx/string.h"
+
+#include <string>
 
 class WXDLLIMPEXP_FWD_CORE wxTaskBarButton;
 class WXDLLIMPEXP_FWD_CORE wxTaskBarJumpListCategory;

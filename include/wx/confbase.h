@@ -14,10 +14,10 @@
 #define _WX_CONFBASE_H_
 
 #include "wx/defs.h"
-#include "wx/string.h"
 #include "wx/object.h"
 #include "wx/base64.h"
 
+#include <string>
 #include <vector>
 
 // ----------------------------------------------------------------------------

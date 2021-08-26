@@ -13,6 +13,8 @@
 #include "wx/window.h"
 #include "wx/containr.h"
 
+#include <string>
+
 class WXDLLIMPEXP_FWD_CORE wxToolTip;
 
 // NB: This is an experimental and, as for now, undocumented class used only by

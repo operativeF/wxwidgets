@@ -96,6 +96,7 @@
 #include "wx/dynlib.h"
 #include "wx/display.h"
 
+#include <array>
 #include <numbers>
 
 #include <shellapi.h>
@@ -5105,8 +5106,8 @@ void wxWindowMSW::OnSysColourChanged(wxSysColourChangedEvent& WXUNUSED(event))
 
 extern wxCOLORMAP *wxGetStdColourMap()
 {
-    static COLORREF s_stdColours[wxSTD_COL_MAX];
-    static wxCOLORMAP s_cmap[wxSTD_COL_MAX];
+    static std::array<COLORREF, wxSTD_COL_MAX> s_stdColours;
+    static std::array<wxCOLORMAP, wxSTD_COL_MAX> s_cmap;
 
     if ( !gs_hasStdCmap )
     {
@@ -5166,8 +5167,8 @@ extern wxCOLORMAP *wxGetStdColourMap()
 
 #undef INIT_CMAP_ENTRY
     }
-
-    return s_cmap;
+    // FIXME: just return the array?
+    return s_cmap.data();
 }
 
 #if wxUSE_UXTHEME && !defined(TMT_FILLCOLOR)

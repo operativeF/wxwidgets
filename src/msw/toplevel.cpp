@@ -17,7 +17,6 @@
 #ifndef WX_PRECOMP
     #include "wx/app.h"
     #include "wx/dialog.h"
-    #include "wx/string.h"
     #include "wx/log.h"
     #include "wx/intl.h"
     #include "wx/frame.h"
@@ -36,6 +35,8 @@
 #include "wx/msw/missing.h"
 
 #include "wx/display.h"
+
+#include <string>
 
 #include <boost/nowide/convert.hpp>
 

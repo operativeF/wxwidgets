@@ -17,7 +17,6 @@
 #include "wx/private/flagscheck.h"
 
 #ifndef WX_PRECOMP
-    #include "wx/string.h"
     #include "wx/intl.h"
     #include "wx/math.h"
     #include "wx/utils.h"
@@ -29,11 +28,12 @@
 #endif // WX_PRECOMP
 
 #include "wx/display.h"
-#include <vector>
 #include "wx/listimpl.cpp"
 #include "wx/private/window.h"
 
-
+#include <memory>
+#include <string>
+#include <vector>
 
 //---------------------------------------------------------------------------
 

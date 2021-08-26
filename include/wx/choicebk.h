@@ -19,6 +19,8 @@
 #include "wx/choice.h"
 #include "wx/containr.h"
 
+#include <string>
+
 class WXDLLIMPEXP_FWD_CORE wxChoice;
 
 wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_CHOICEBOOK_PAGE_CHANGED,  wxBookCtrlEvent );

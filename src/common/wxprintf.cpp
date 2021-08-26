@@ -17,7 +17,6 @@
 
 
 #ifndef WX_PRECOMP
-    #include "wx/string.h"
     #include "wx/hash.h"
     #include "wx/log.h"
 #endif

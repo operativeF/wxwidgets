@@ -21,7 +21,6 @@
 #ifndef WX_PRECOMP
     #include "wx/toplevel.h"
     #include "wx/app.h"
-    #include "wx/string.h"
     #include  "wx/app.h"
 #endif // WX_PRECOMP
 
@@ -29,6 +28,8 @@
 #include "wx/msw/rt/private/notifmsg.h"
 
 #include "wx/taskbar.h"
+
+#include <string>
 
 // ----------------------------------------------------------------------------
 // different implementations used by wxNotificationMessage
