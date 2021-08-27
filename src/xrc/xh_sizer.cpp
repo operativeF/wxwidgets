@@ -33,6 +33,8 @@
 
 #include "wx/xml/xml.h"
 
+#include <gsl/gsl>
+
 //-----------------------------------------------------------------------------
 // wxSizerXmlHandler
 //-----------------------------------------------------------------------------
@@ -529,7 +531,7 @@ void wxSizerXmlHandler::SetGrowables(wxFlexGridSizer* sizer,
             }
         }
 
-        const int n = static_cast<int>(li);
+        const int n = gsl::narrow_cast<int>(li);
         if ( n >= nslots )
         {
             ReportParamError
@@ -549,9 +551,9 @@ void wxSizerXmlHandler::SetGrowables(wxFlexGridSizer* sizer,
         }
 
         if (rows)
-            sizer->AddGrowableRow(n, static_cast<int>(lp));
+            sizer->AddGrowableRow(n, gsl::narrow_cast<int>(lp));
         else
-            sizer->AddGrowableCol(n, static_cast<int>(lp));
+            sizer->AddGrowableCol(n, gsl::narrow_cast<int>(lp));
     }
 }
 

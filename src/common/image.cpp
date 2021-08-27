@@ -31,6 +31,8 @@
 #include <algorithm>
 #include <cstring> // For memcpy
 
+#include <gsl/gsl>
+
 // make the code compile with either wxFile*Stream or wxFFile*Stream:
 #define HAS_FILE_STREAMS (wxUSE_STREAMS && (wxUSE_FILE || wxUSE_FFILE))
 
@@ -3574,7 +3576,7 @@ unsigned long wxImage::CountColours( unsigned long stopafter ) const
     unsigned long size, nentries;
 
     p = GetData();
-    size = static_cast<unsigned long>(GetWidth()) * GetHeight();
+    size = gsl::narrow_cast<unsigned long>(GetWidth()) * GetHeight();
     nentries = 0;
 
     for (unsigned long j = 0; (j < size) && (nentries <= stopafter) ; j++)
@@ -3604,7 +3606,7 @@ unsigned long wxImage::ComputeHistogram( wxImageHistogram &h ) const
 
     h.clear();
 
-    const unsigned long size = static_cast<unsigned long>(GetWidth()) * GetHeight();
+    const unsigned long size = gsl::narrow_cast<unsigned long>(GetWidth()) * GetHeight();
 
     for ( unsigned long n = 0; n < size; n++ )
     {

@@ -34,6 +34,8 @@
 #include <string>
 #include <vector>
 
+#include <gsl/gsl>
+
 // ============================================================================
 // implementation
 // ============================================================================
@@ -175,7 +177,7 @@ bool wxConfigBase::Read(const wxString& key, size_t* val) const
     if ( !Read(key, &tmp) )
         return false;
 
-    *val = static_cast<size_t>(tmp);
+    *val = gsl::narrow_cast<size_t>(tmp);
     return true;
 }
 

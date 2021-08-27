@@ -19,6 +19,8 @@
 #include "wx/control.h"      // base class
 #include "wx/stringutils.h"
 
+#include <gsl/gsl>
+
 #include <string>
 #include <vector>
 
@@ -55,22 +57,22 @@ public:
     // FIXME: Remove this and split into two functions.
     virtual int FindString(std::string_view s, bool bCase = false) const
     {
-        const unsigned int count = GetCount();
+        const std::size_t count = GetCount();
 
         if(!bCase)
         {
-            for (unsigned int i = 0; i < count; ++i)
+            for (std::size_t i = 0; i < count; ++i)
             {
                 if (wx::utils::IsSameAsNoCase(s, GetString(i)))
-                    return (int)i;
+                    return gsl::narrow_cast<int>(i);
             }
         }
         else
         {
-            for (unsigned int i = 0; i < count; ++i)
+            for (std::size_t i = 0; i < count; ++i)
             {
                 if (wx::utils::IsSameAsCase(s, GetString(i)))
-                    return (int)i;
+                    return gsl::narrow_cast<int>(i);
             }
         }
 

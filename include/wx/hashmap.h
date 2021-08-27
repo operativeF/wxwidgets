@@ -15,6 +15,9 @@
 #include "wx/wxcrt.h"
 
 #include <unordered_map>
+
+#include <gsl/gsl>
+
 #define WX_HASH_MAP_NAMESPACE std
 
 #define _WX_DECLARE_HASH_MAP( KEY_T, VALUE_T, HASH_T, KEY_EQ_T, CLASSNAME, CLASSEXP ) \
@@ -43,8 +46,8 @@ private:
         || (defined SIZEOF_LONG_LONG && SIZEOF_LONG_LONG == SIZEOF_LONG * 2)
     size_t longlongHash( wxLongLong_t x ) const
     {
-        return longHash( wx_truncate_cast(long, x) ) ^
-               longHash( wx_truncate_cast(long, x >> (sizeof(long) * 8)) );
+        return longHash( gsl::narrow_cast<long>(x) ) ^
+               longHash( gsl::narrow_cast<long>(x >> (sizeof(long) * 8)) );
     }
     #elif defined SIZEOF_LONG_LONG && SIZEOF_LONG_LONG == SIZEOF_LONG
     WX_HASH_MAP_NAMESPACE::hash<long> longlongHash;

@@ -737,7 +737,7 @@ bool wxGIFHandler_WriteComment(wxOutputStream *stream, const wxString& comment)
 
     do
     {
-        size_t blockLength = std::min(fullLength - pos, std::size_t(255));
+        size_t blockLength = std::min(fullLength - pos, std::size_t{255});
 
         if ( !wxGIFHandler_WriteByte(stream, (std::uint8_t) blockLength)
             || !wxGIFHandler_Write(stream, &text.data()[pos], blockLength) )

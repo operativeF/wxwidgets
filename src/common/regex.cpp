@@ -31,6 +31,8 @@
 
 #include <regex.h>
 
+#include <gsl/gsl>
+
 // WXREGEX_USING_BUILTIN    defined when using the built-in regex lib
 // WXREGEX_USING_RE_SEARCH  defined when using re_search in the GNU regex lib
 // WXREGEX_IF_NEED_LEN()    wrap the len parameter only used with the built-in
@@ -77,12 +79,12 @@ public:
     // absolutely impractical anyhow
     size_t Start(size_t n) const
     {
-        return wx_truncate_cast(size_t, m_matches[n].rm_so);
+        return gsl::narrow_cast<size_t>(m_matches[n].rm_so);
     }
 
     size_t End(size_t n) const
     {
-        return wx_truncate_cast(size_t, m_matches[n].rm_eo);
+        return gsl::narrow_cast<size_t>(m_matches[n].rm_eo);
     }
 
     regmatch_t *get() const         { return m_matches; }

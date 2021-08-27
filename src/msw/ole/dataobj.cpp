@@ -35,6 +35,8 @@
 #include "wx/msw/ole/oleutils.h"
 #endif // wxUSE_OLE
 
+#include <gsl/gsl>
+
 #ifndef CFSTR_SHELLURL
 #define CFSTR_SHELLURL wxT("UniformResourceLocator")
 #endif
@@ -880,7 +882,7 @@ STDMETHODIMP wxIDataObject::EnumFormatEtc(DWORD dwDir,
     const size_t sysFormatCount = m_systemData.size();
 
     const ULONG
-        nFormatCount = wx_truncate_cast(ULONG, ourFormatCount + sysFormatCount);
+        nFormatCount = gsl::narrow_cast<ULONG>(ourFormatCount + sysFormatCount);
 
     // fill format array with formats ...
     wxScopedArray<wxDataFormat> formats(nFormatCount);

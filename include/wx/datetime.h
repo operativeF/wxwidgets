@@ -31,6 +31,8 @@ struct _SYSTEMTIME;
 #include <ctime>
 #include <vector>
 
+#include <gsl/gsl>
+
 // not all c-runtimes are based on 1/1/1970 being (time_t) 0
 // set this to the corresponding value in seconds 1/1/1970 has on your
 // systems c-runtime
@@ -1977,7 +1979,7 @@ inline int wxTimeSpan::GetMinutes() const
 {
     // For compatibility, this method (and the other accessors) return int,
     // even though GetLo() actually returns unsigned long with greater range.
-    return static_cast<int>((GetSeconds() / 60l).GetLo());
+    return gsl::narrow_cast<int>((GetSeconds() / 60l).GetLo());
 }
 
 inline int wxTimeSpan::GetHours() const

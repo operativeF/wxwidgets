@@ -33,6 +33,7 @@
 #endif // wxUSE_ACCESSIBILITY
 
 #include <fmt/core.h>
+#include <gsl/gsl>
 
 namespace
 {
@@ -1889,7 +1890,7 @@ bool wxDataViewChoiceByIndexRenderer::GetValueFromEditorCtrl( wxWindow* editor, 
     const auto iter_idx = std::find_if(GetChoices().cbegin(), GetChoices().cend(),
         [string_value](const auto& choice) { return string_value.GetString().IsSameAs(choice); });
 
-    value = static_cast<long>(std::distance(std::cbegin(GetChoices()), iter_idx));
+    value = gsl::narrow_cast<long>(std::distance(std::cbegin(GetChoices()), iter_idx));
     return true;
 }
 
@@ -1909,7 +1910,7 @@ bool wxDataViewChoiceByIndexRenderer::GetValue( wxVariant &value ) const
     const auto iter_idx = std::find_if(GetChoices().cbegin(), GetChoices().cend(),
         [string_value](const auto& choice) { return string_value.GetString().IsSameAs(choice); });
     // TODO: Verify this.
-    value = static_cast<long>(std::distance(std::cbegin(GetChoices()), iter_idx));
+    value = gsl::narrow_cast<long>(std::distance(std::cbegin(GetChoices()), iter_idx));
     return true;
 }
 

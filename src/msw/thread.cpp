@@ -34,6 +34,8 @@
 
 #include "wx/except.h"
 
+#include <gsl/gsl>
+
 // must have this symbol defined to get _beginthread/_endthread declarations
 #ifndef _MT
     #define _MT
@@ -860,7 +862,7 @@ bool wxThreadInternal::Suspend()
     if ( nSuspendCount == (DWORD)-1 )
     {
         wxLogSysError(_("Cannot suspend thread %lx"),
-                      static_cast<unsigned long>(wxPtrToUInt(m_hThread)));
+                      gsl::narrow_cast<unsigned long>(wxPtrToUInt(m_hThread)));
 
         return false;
     }
@@ -890,7 +892,7 @@ bool wxThreadInternal::Resume()
     if ( nSuspendCount == (DWORD)-1 )
     {
         wxLogSysError(_("Cannot resume thread %lx"),
-                      static_cast<unsigned long>(wxPtrToUInt(m_hThread)));
+                      gsl::narrow_cast<unsigned long>(wxPtrToUInt(m_hThread)));
 
         return false;
     }

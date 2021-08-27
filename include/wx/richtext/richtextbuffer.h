@@ -72,6 +72,8 @@
 #include "wx/dataobj.h"
 #endif
 
+#include <gsl/gsl>
+
 // Compatibility
 //#define wxRichTextAttr wxTextAttr
 #define wxTextAttrEx wxTextAttr
@@ -3445,7 +3447,7 @@ public:
     /**
         Returns the number of paragraphs.
     */
-    virtual int GetParagraphCount() const { return static_cast<int>(GetChildCount()); }
+    virtual int GetParagraphCount() const { return gsl::narrow_cast<int>(GetChildCount()); }
 
     /**
         Returns the number of visible lines.

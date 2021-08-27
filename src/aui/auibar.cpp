@@ -31,6 +31,8 @@
 #include "wx/arrimpl.cpp"
 WX_DEFINE_OBJARRAY(wxAuiToolBarItemArray)
 
+#include <gsl/gsl>
+
 wxDEFINE_EVENT( wxEVT_AUITOOLBAR_TOOL_DROPDOWN, wxAuiToolBarEvent );
 wxDEFINE_EVENT( wxEVT_AUITOOLBAR_OVERFLOW_CLICK, wxAuiToolBarEvent );
 wxDEFINE_EVENT( wxEVT_AUITOOLBAR_RIGHT_CLICK, wxAuiToolBarEvent );
@@ -1116,7 +1118,7 @@ bool wxAuiToolBar::DestroyTool(int tool_id)
 
 bool wxAuiToolBar::DestroyToolByIndex(int idx)
 {
-    if ( idx < 0 || static_cast<unsigned>(idx) >= m_items.GetCount() )
+    if ( idx < 0 || gsl::narrow_cast<unsigned>(idx) >= m_items.GetCount() )
         return false;
 
     if ( wxWindow* window = m_items[idx].GetWindow() )

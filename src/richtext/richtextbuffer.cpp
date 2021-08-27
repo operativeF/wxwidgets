@@ -6823,7 +6823,8 @@ bool wxRichTextPlainText::Draw(wxDC& dc, wxRichTextDrawingContext& context, cons
     wxCheckSetFont(dc, textFont);
     int charHeight = dc.GetCharHeight();
 
-    int x, y;
+    int x{};
+    int y{};
     if ( textFont.IsOk() )
     {
         if (textAttr.HasTextEffects() && (textAttr.GetTextEffects() & wxTEXT_ATTR_EFFECT_SMALL_CAPITALS))
@@ -15519,6 +15520,7 @@ int wxRichTextDrawingContext::GetVirtualSubobjectAttributes(wxRichTextObject* ob
 
         node = node->GetNext();
     }
+
     return 0;
 }
 

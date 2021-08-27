@@ -28,7 +28,6 @@
     #include "wx/wxcrtvararg.h"
 #endif
 
-#include <vector>
 #include "wx/wfstream.h"
 #include "wx/filesys.h"
 #include "wx/filename.h"
@@ -45,8 +44,10 @@
 #include "wx/platinfo.h"
 
 #include <clocale>
+#include <vector>
 
 #include <boost/nowide/convert.hpp>
+#include <gsl/gsl>
 
 namespace
 {
@@ -1700,7 +1701,7 @@ float wxXmlResourceHandlerImpl::GetFloat(const wxString& param, float defaultv)
         }
     }
 
-    return wx_truncate_cast(float, value);
+    return gsl::narrow_cast<float>(value);
 }
 
 
@@ -2144,7 +2145,7 @@ bool XRCConvertFromAbsValue(const wxString& s, int& value)
     if ( l > INT_MAX )
         return false;
 
-    value = static_cast<int>(l);
+    value = gsl::narrow_cast<int>(l);
     return true;
 }
 

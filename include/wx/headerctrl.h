@@ -14,9 +14,12 @@
 
 #if wxUSE_HEADERCTRL
 
+#include "wx/headercol.h"
+
 #include <vector>
 
-#include "wx/headercol.h"
+#include <gsl/gsl>
+
 
 // notice that the classes in this header are defined in the core library even
 // although currently they're only used by wxGrid which is in wxAdv because we
@@ -260,7 +263,8 @@ private:
 // constants
 // ----------------------------------------------------------------------------
 
-constexpr unsigned int wxNO_COLUMN = static_cast<unsigned>(-1);
+// FIXME: use max?
+constexpr unsigned int wxNO_COLUMN = gsl::narrow_cast<unsigned>(-1);
 constexpr unsigned int wxID_COLUMNS_BASE = 1;
 
 // ----------------------------------------------------------------------------
@@ -381,7 +385,7 @@ private:
     // bring the column count in sync with the number of columns we store
     void UpdateColumnCount()
     {
-        SetColumnCount(static_cast<int>(m_cols.size()));
+        SetColumnCount(gsl::narrow_cast<int>(m_cols.size()));
     }
 
 
@@ -404,8 +408,8 @@ class WXDLLIMPEXP_CORE wxHeaderCtrlEvent : public wxNotifyEvent
 public:
     wxHeaderCtrlEvent(wxEventType commandType = wxEVT_NULL, int winid = 0)
         : wxNotifyEvent(commandType, winid),
-          
-          m_order(static_cast<unsigned int>(-1))
+          // FIXME: use max?
+          m_order(gsl::narrow_cast<unsigned int>(-1))
     {
     }
 

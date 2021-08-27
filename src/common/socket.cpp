@@ -50,6 +50,8 @@
 
 #include <string>
 
+#include <gsl/gsl>
+
 // we use MSG_NOSIGNAL to avoid getting SIGPIPE when sending data to a remote
 // host which closed the connection if it is available, otherwise we rely on
 // SO_NOSIGPIPE existency
@@ -1853,7 +1855,7 @@ wxSocketServer::wxSocketServer(const wxSockAddress& addr,
     // the cast is safe because a wxSOCKET_T is a handle and so limited to 32
     // (or, actually, even 24) bit values anyhow.
     wxLogTrace( wxTRACE_Socket, wxT("wxSocketServer on fd %u"),
-                static_cast<unsigned>(m_impl->m_fd) );
+                gsl::narrow<unsigned>(m_impl->m_fd) );
 }
 
 // --------------------------------------------------------------------------

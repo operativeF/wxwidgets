@@ -20,6 +20,8 @@
 
 #include <type_traits>
 
+#include <gsl/gsl>
+
 class WXDLLIMPEXP_FWD_BASE wxCStrData;
 class WXDLLIMPEXP_FWD_BASE wxString;
 
@@ -793,7 +795,7 @@ struct wxArgNormalizer<const wxUniChar&> : public wxArgNormalizer<wchar_t>
 {
     wxArgNormalizer(const wxUniChar& s,
                     const wxFormatString *fmt, unsigned index)
-        : wxArgNormalizer<wchar_t>(wx_truncate_cast(wchar_t, s.GetValue()), fmt, index) {}
+        : wxArgNormalizer<wchar_t>(gsl::narrow_cast<wchar_t>(s.GetValue()), fmt, index) {}
 };
 
 // for wchar_t, default handler does the right thing
@@ -815,7 +817,7 @@ struct wxArgNormalizerNarrowChar
         // FIXME-UTF8: which one is better default in absence of fmt string
         //             (i.e. when used like e.g. Foo("foo", "bar", 'c', NULL)?
         if ( !fmt || fmt->GetArgumentType(index) == wxFormatString::Arg_Char )
-            m_value = wx_truncate_cast(T, wxUniChar(value).GetValue());
+            m_value = gsl::narrow_cast<T>(wxUniChar(value).GetValue());
         else
             m_value = value;
     }

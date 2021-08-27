@@ -24,6 +24,8 @@
     #include "wx/wxcrtvararg.h"
 #endif
 
+#include <gsl/gsl>
+
 extern "C"
 {
     #include "tiff.h"
@@ -106,7 +108,7 @@ static toff_t wxFileOffsetToTIFF(wxFileOffset ofs)
     if ( ofs == wxInvalidOffset )
         return (toff_t)-1;
 
-    toff_t tofs = static_cast<toff_t>(ofs);
+    toff_t tofs = gsl::narrow_cast<toff_t>(ofs);
     wxCHECK_MSG( (wxFileOffset)tofs == ofs, (toff_t)-1,
                     wxT("TIFF library doesn't support large files") );
 
@@ -148,7 +150,7 @@ wxTIFFReadProc(thandle_t handle, tdata_t buf, tsize_t size)
 {
     wxInputStream *stream = (wxInputStream*) handle;
     stream->Read( (void*) buf, (size_t) size );
-    return wx_truncate_cast(tsize_t, stream->LastRead());
+    return gsl::narrow_cast<tsize_t>(stream->LastRead());
 }
 
 static tsize_t TIFFLINKAGEMODE
@@ -156,7 +158,7 @@ wxTIFFWriteProc(thandle_t handle, tdata_t buf, tsize_t size)
 {
     wxOutputStream *stream = (wxOutputStream*) handle;
     stream->Write( (void*) buf, (size_t) size );
-    return wx_truncate_cast(tsize_t, stream->LastWrite());
+    return gsl::narrow_cast<tsize_t>(stream->LastWrite());
 }
 
 static toff_t TIFFLINKAGEMODE

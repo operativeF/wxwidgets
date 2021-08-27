@@ -67,6 +67,7 @@
 #endif // __WXMSW__
 
 #include <fmt/core.h>
+#include <gsl/gsl>
 
 // The value traditionally used as the default max page number and meaning
 // "infinitely many". It should probably be documented and exposed, but for now
@@ -1164,7 +1165,7 @@ public:
             return 0;
 
         // Cast is safe because the value is less than (int) m_maxPage.
-        return static_cast<int>(value);
+        return gsl::narrow_cast<int>(value);
     }
 
 private:

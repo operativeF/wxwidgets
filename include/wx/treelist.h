@@ -19,9 +19,12 @@
 #include "wx/containr.h"
 #include "wx/headercol.h"
 #include "wx/itemid.h"
-#include <vector>
 #include "wx/window.h"
 #include "wx/withimages.h"
+
+#include <vector>
+
+#include <gsl/gsl>
 
 class WXDLLIMPEXP_FWD_CORE wxDataViewCtrl;
 class WXDLLIMPEXP_FWD_CORE wxDataViewEvent;
@@ -464,7 +467,7 @@ class WXDLLIMPEXP_CORE wxTreeListEvent : public wxNotifyEvent
 public:
     // Default ctor is provided for wxRTTI needs only but should never be used.
     wxTreeListEvent() { 
-        m_column = static_cast<unsigned>(-1);
+        m_column = gsl::narrow_cast<unsigned>(-1);
 
         m_oldCheckedState = wxCHK_UNDETERMINED;
      }
@@ -496,7 +499,7 @@ private:
         SetEventObject(treelist);
 
         
-        m_column = static_cast<unsigned>(-1);
+        m_column = gsl::narrow_cast<unsigned>(-1);
 
         m_oldCheckedState = wxCHK_UNDETERMINED;
     

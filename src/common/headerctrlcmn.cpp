@@ -25,6 +25,8 @@
 #include <numeric>
 #include <utility>
 
+#include <gsl/gsl>
+
 namespace
 {
 
@@ -277,7 +279,7 @@ bool wxHeaderCtrlBase::ShowColumnsMenu(const wxPoint& pt, const std::string& tit
     if ( rc == wxID_NONE )
         return false;
 
-    if ( static_cast<unsigned>(rc) == idCustomize )
+    if ( gsl::narrow_cast<unsigned>(rc) == idCustomize )
     {
         return ShowCustomizeDialog();
     }

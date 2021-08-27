@@ -26,6 +26,8 @@ class WXDLLIMPEXP_FWD_PROPGRID wxPGArrayEditorDialog;
 #include "wx/textctrl.h"
 #include "wx/valtext.h"
 
+#include <gsl/gsl>
+
 enum
 {
     wxPG_UINT_HEX_LOWER,
@@ -534,7 +536,7 @@ public:
     // helpers
     size_t GetItemCount() const { return m_choices.GetCount(); }
     const wxString& GetLabel( size_t ind ) const
-        { return m_choices.GetLabel(static_cast<unsigned int>(ind)); }
+        { return m_choices.GetLabel(gsl::narrow_cast<unsigned int>(ind)); }
 
 protected:
     // Used to detect if choices have been changed

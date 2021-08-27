@@ -59,6 +59,8 @@
 #include <string>
 #include <vector>
 
+#include <gsl/gsl>
+
 WX_DECLARE_HASH_SET_WITH_DECL_PTR(int, wxIntegerHash, wxIntegerEqual,
                                   wxGridFixedIndicesSet, class WXDLLIMPEXP_CORE);
 
@@ -761,7 +763,7 @@ wxGridCoordsToAttrMap::key_type CoordsToKey(int row, int col)
 {
     // Treat both row and col as unsigned to not cause havoc with (unsupported)
     // negative coords.
-    return (static_cast<wxULongLong_t>(row) << 32) + static_cast<std::uint32_t>(col);
+    return (static_cast<wxULongLong_t>(row) << 32) + gsl::narrow_cast<std::uint32_t>(col);
 }
 
 void KeyToCoords(wxGridCoordsToAttrMap::key_type key, int *pRow, int *pCol)
@@ -1011,12 +1013,12 @@ void UpdateCellAttrRowsOrCols(wxGridCoordsToAttrMap& attrs, int editPos,
 
 void wxGridCellAttrData::UpdateAttrRows( size_t pos, int numRows )
 {
-    UpdateCellAttrRowsOrCols(m_attrs, static_cast<int>(pos), numRows, 0);
+    UpdateCellAttrRowsOrCols(m_attrs, gsl::narrow_cast<int>(pos), numRows, 0);
 }
 
 void wxGridCellAttrData::UpdateAttrCols( size_t pos, int numCols )
 {
-    UpdateCellAttrRowsOrCols(m_attrs, static_cast<int>(pos), 0, numCols);
+    UpdateCellAttrRowsOrCols(m_attrs, gsl::narrow_cast<int>(pos), 0, numCols);
 }
 
 wxGridCoordsToAttrMap::iterator
@@ -2129,7 +2131,8 @@ void wxGridRowLabelWindow::OnPaint( wxPaintEvent& WXUNUSED(event) )
     //
     // m_owner->PrepareDC( dc );
 
-    int x, y;
+    int x{};
+    int y{};
     wxGridWindow *gridWindow = IsFrozen() ? m_owner->m_frozenRowGridWin :
                                             m_owner->m_gridWin;
     m_owner->GetGridWindowOffset(gridWindow, x, y);
@@ -2178,7 +2181,8 @@ void wxGridColLabelWindow::OnPaint( wxPaintEvent& WXUNUSED(event) )
     if ( m_owner->GetNumberCols() == 0 )
         return;
 
-    int x, y;
+    int x{};
+    int y{};
     wxGridWindow *gridWindow = IsFrozen() ? m_owner->m_frozenColGridWin :
                                             m_owner->m_gridWin;
     m_owner->GetGridWindowOffset(gridWindow, x, y);
@@ -5883,7 +5887,7 @@ void wxGrid::OnKeyDown( wxKeyEvent& event )
 
                     // Find the first or last visible row if we need to go to it
                     // (without Control, we keep the current row).
-                    int row;
+                    int row{};
                     if ( event.ControlDown() )
                     {
                         if ( goToBeginning )

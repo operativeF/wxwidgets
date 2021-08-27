@@ -18,9 +18,6 @@
 #include "wx/dcbuffer.h"
 #include "wx/app.h"
 
-#include <algorithm>
-#include <vector>
-
 #ifndef WX_PRECOMP
 #endif
 
@@ -32,6 +29,11 @@
 #include "wx/imaglist.h"
 
 WX_DEFINE_USER_EXPORTED_OBJARRAY(wxRibbonPageTabInfoArray)
+
+#include <algorithm>
+#include <vector>
+
+#include <gsl/gsl>
 
 wxDEFINE_EVENT(wxEVT_RIBBONBAR_PAGE_CHANGED, wxRibbonBarEvent);
 wxDEFINE_EVENT(wxEVT_RIBBONBAR_PAGE_CHANGING, wxRibbonBarEvent);
@@ -373,7 +375,7 @@ void wxRibbonBar::DeletePage(size_t n)
 
         m_pages.RemoveAt(n);
 
-        if(m_current_page == static_cast<int>(n))
+        if(m_current_page == gsl::narrow_cast<int>(n))
         {
             m_current_page = -1;
 
@@ -389,7 +391,7 @@ void wxRibbonBar::DeletePage(size_t n)
                 }
             }
         }
-        else if(m_current_page > static_cast<int>(n))
+        else if(m_current_page > gsl::narrow_cast<int>(n))
         {
             m_current_page--;
         }

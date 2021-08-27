@@ -73,8 +73,8 @@ wxBackingFileImpl::wxBackingFileImpl(wxInputStream *stream,
 {
     const wxFileOffset len = m_stream->GetLength();
 
-    if (len >= 0 && len + size_t(1) < m_bufsize)
-        m_bufsize = size_t(len + 1);
+    if (len >= 0 && len + size_t{1} < m_bufsize)
+        m_bufsize = gsl::narrow_cast<size_t>(len + 1);
 
     if (m_bufsize)
         m_buf = new char[m_bufsize];
@@ -101,7 +101,7 @@ wxStreamError wxBackingFileImpl::ReadAt(wxFileOffset pos,
     // from the buffer or read from the parent stream.
     size_t size1, size2;
 
-    if (pos + reqestedSize <= m_filelen + size_t(0)) {
+    if (pos + reqestedSize <= m_filelen + size_t{0}) {
         size1 = reqestedSize;
         size2 = 0;
     } else if (pos < m_filelen) {
@@ -137,7 +137,7 @@ wxStreamError wxBackingFileImpl::ReadAt(wxFileOffset pos,
         {
             // if pos is further ahead than the parent has been read so far,
             // then read forward in the parent stream
-            while (pos - m_filelen + size_t(0) >= m_buflen)
+            while (pos - m_filelen + size_t{0} >= m_buflen)
             {
                 // if the parent is small enough, don't use a backing file
                 // just the buffer memory

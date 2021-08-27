@@ -234,7 +234,8 @@ WXDLLIMPEXP_BASE int wxHexToDec(const wxString& buf);
 // Convert 2-digit hex number to decimal
 inline int wxHexToDec(const char* buf)
 {
-    int firstDigit, secondDigit;
+    int firstDigit{};
+    int secondDigit{};
 
     if (buf[0] >= 'A')
         firstDigit = buf[0] - 'A' + 10;

@@ -1353,7 +1353,7 @@ public:
 
     // these are pure virtual in wxGridTableBase
     //
-    int GetNumberRows() override { return static_cast<int>(m_data.size()); }
+    int GetNumberRows() override { return gsl::narrow_cast<int>(m_data.size()); }
     int GetNumberCols() override { return m_numCols; }
     std::string GetValue( int row, int col ) override;
     void SetValue( int row, int col, const std::string& s ) override;
@@ -2372,8 +2372,8 @@ protected:
     wxGridTableBase          *m_table;
     bool                      m_ownTable;
 
-    int m_numRows;
-    int m_numCols;
+    std::size_t m_numRows;
+    std::size_t m_numCols;
 
     // Number of frozen rows/columns in the beginning of the grid, 0 if none.
     int m_numFrozenRows;

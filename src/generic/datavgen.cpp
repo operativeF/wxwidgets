@@ -57,6 +57,7 @@
 #endif // wxUSE_ACCESSIBILITY
 
 #include <fmt/core.h>
+#include <gsl/gsl>
 
 //-----------------------------------------------------------------------------
 // classes
@@ -910,7 +911,7 @@ public:
         int                 m_indentLevel{-1};
 
         DropItemInfo()
-        :   m_row(static_cast<unsigned int>(-1))
+        :   m_row(gsl::narrow_cast<unsigned int>(-1))
         ,   
            m_item(nullptr)
            
@@ -3722,7 +3723,7 @@ int wxDataViewMainWindow::GetLineAt( unsigned int y ) const
     unsigned int rowCount = GetRowCount();
     if (rowCount == 0 ||
         (m_rowHeightCache->GetLineInfo(rowCount - 1, start, height) &&
-         y >= static_cast<unsigned int>(start + height)))
+         y >= gsl::narrow_cast<unsigned int>(start + height)))
     {
         return rowCount;
     }
@@ -3860,7 +3861,7 @@ wxDataViewTreeNode * wxDataViewMainWindow::GetTreeNodeByRow(unsigned int row) co
     if ( row == (unsigned)-1 )
         return nullptr;
 
-    RowToTreeNodeJob job(static_cast<int>(row));
+    RowToTreeNodeJob job(gsl::narrow_cast<int>(row));
     Walker( m_root , job );
     return job.GetResult();
 }

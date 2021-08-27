@@ -296,7 +296,7 @@ private:
     static
     std::string GetStringValue(bool value) { return ms_stringValues[value]; }
 
-    bool m_value;
+    bool m_value{};
 
     static std::string ms_stringValues[2];
 

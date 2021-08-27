@@ -26,6 +26,8 @@
     #include "wx/cshelp.h"
 #endif
 
+#include <gsl/gsl>
+
 // ============================================================================
 // implementation
 // ============================================================================
@@ -345,7 +347,7 @@ std::string wxRadioBoxBase::DoGetHelpTextAtPoint(const wxWindow *derived,
 
     if ( item != wxNOT_FOUND )
     {
-        std::string text = GetItemHelpText(static_cast<unsigned int>(item));
+        std::string text = GetItemHelpText(gsl::narrow_cast<unsigned int>(item));
         if( !text.empty() )
             return text;
     }

@@ -20,6 +20,8 @@
 #include "wx/log.h"
 #include "wx/scopedarray.h"
 
+#include <gsl/gsl>
+
 // ----------------------------------------------------------------------------
 // constants
 // ----------------------------------------------------------------------------
@@ -249,7 +251,7 @@ int ReadTGA(wxImage* image, wxInputStream& stream)
 
     const short pixelSize = bpp / 8;
 
-    const unsigned long imageSize = static_cast<unsigned long>(width) * height * pixelSize;
+    const unsigned long imageSize = gsl::narrow_cast<unsigned long>(width) * height * pixelSize;
 
     auto imageData = std::make_unique<unsigned char[]>(imageSize);
 

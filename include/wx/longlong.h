@@ -20,6 +20,8 @@
 
 #include <climits>     // for LONG_MAX
 
+#include <gsl/gsl>
+
 // define this to compile wxLongLongWx in "test" mode: the results of all
 // calculations will be compared with the real results taken from
 // wxLongLongNative -- this is extremely useful to find the bugs in
@@ -154,10 +156,10 @@ public:
 
         // get high part
     wxInt32 GetHi() const
-        { return wx_truncate_cast(wxInt32, m_ll >> 32); }
+        { return gsl::narrow_cast<wxInt32>(m_ll >> 32); }
         // get low part
     wxUint32 GetLo() const
-        { return wx_truncate_cast(wxUint32, m_ll); }
+        { return gsl::narrow_cast<wxUint32>(m_ll); }
 
         // get absolute value
     wxLongLongNative Abs() const { return wxLongLongNative(*this).Abs(); }
@@ -176,11 +178,11 @@ public:
                       wxT("wxLongLong to long conversion loss of precision") );
 #endif
 
-        return wx_truncate_cast(long, m_ll);
+        return gsl::narrow_cast<long>(m_ll);
     }
 
         // convert to double
-    double ToDouble() const { return wx_truncate_cast(double, m_ll); }
+    double ToDouble() const { return gsl::narrow_cast<double>(m_ll); }
 
     // don't provide implicit conversion to wxLongLong_t or we will have an
     // ambiguity for all arithmetic operations
@@ -385,10 +387,10 @@ public:
 
         // get high part
     wxUint32 GetHi() const
-        { return wx_truncate_cast(wxUint32, m_ll >> 32); }
+        { return gsl::narrow_cast<wxUint32>(m_ll >> 32); }
         // get low part
     wxUint32 GetLo() const
-        { return wx_truncate_cast(wxUint32, m_ll); }
+        { return gsl::narrow_cast<wxUint32>(m_ll); }
 
         // convert to native ulong long
     wxULongLong_t GetValue() const { return m_ll; }
@@ -399,11 +401,11 @@ public:
         wxASSERT_MSG( m_ll <= ULONG_MAX,
                       wxT("wxULongLong to long conversion loss of precision") );
 
-        return wx_truncate_cast(unsigned long, m_ll);
+        return gsl::narrow_cast<unsigned long>(m_ll);
     }
 
         // convert to double
-    double ToDouble() const { return wx_truncate_cast(double, m_ll); }
+    double ToDouble() const { return gsl::narrow_cast<double>(m_ll); }
 
     // operations
         // addition

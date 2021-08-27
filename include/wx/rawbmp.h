@@ -18,6 +18,8 @@
 #include "wx/image.h"
 #include "wx/bitmap.h"
 
+#include <gsl/gsl>
+
 // ----------------------------------------------------------------------------
 // Abstract Pixel API
 //
@@ -705,14 +707,14 @@ struct wxPixelDataOut<wxBitmap>
             public:
                 Reference& operator=(bool b)
                 {
-                    wxByte mask = static_cast<wxByte>(1 << m_bit);
-                    wxByte value = static_cast<wxByte>(b << m_bit);
+                    wxByte mask = gsl::narrow_cast<wxByte>(1 << m_bit);
+                    wxByte value = gsl::narrow_cast<wxByte>(b << m_bit);
                     (*m_ptr &= ~mask) |= value;
                     return *this;
                 }
                 operator bool() const
                 {
-                    wxByte mask = static_cast<wxByte>(1 << m_bit);
+                    wxByte mask = gsl::narrow_cast<wxByte>(1 << m_bit);
                     return (*m_ptr & mask) != 0;
                 }
 

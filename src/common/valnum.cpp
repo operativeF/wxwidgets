@@ -23,6 +23,8 @@
 
 #include <cmath>
 
+#include <gsl/gsl>
+
 // ============================================================================
 // wxNumValidatorBase implementation
 // ============================================================================
@@ -220,7 +222,7 @@ wxString wxIntegerValidatorBase::ToString(LongestValueType value) const
     }
     else
     {
-        ULongestValueType uvalue = static_cast<ULongestValueType>(value);
+        ULongestValueType uvalue = gsl::narrow_cast<ULongestValueType>(value);
         return wxNumberFormatter::ToString(uvalue, GetFormatFlags());
     }
 }
@@ -241,7 +243,7 @@ wxIntegerValidatorBase::FromString(const wxString& s,
             return false;
 
         // This cast is lossless.
-        *value = static_cast<LongestValueType>(uvalue);
+        *value = gsl::narrow_cast<LongestValueType>(uvalue);
 
         return true;
     }

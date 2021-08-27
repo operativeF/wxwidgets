@@ -54,6 +54,8 @@
 #include <fstream>
 #include <iostream>
 
+#include <gsl/gsl>
+
 // ----------------------------------------------------------------------------
 // wxWidgets macros
 // ----------------------------------------------------------------------------
@@ -1075,7 +1077,7 @@ void wxDocManager::OnMRUFile(wxCommandEvent& event)
         // Check if the id is in the range assigned to MRU list entries.
         const int id = event.GetId();
         if ( id >= wxID_FILE1 &&
-                id < wxID_FILE1 + static_cast<int>(m_fileHistory->GetCount()) )
+                id < wxID_FILE1 + gsl::narrow_cast<int>(m_fileHistory->GetCount()) )
         {
             DoOpenMRUFile(id - wxID_FILE1);
 

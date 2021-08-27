@@ -27,6 +27,8 @@
 
 #include <string>
 
+#include <gsl/gsl>
+
 // ----------------------------------------------------------------------------
 // constants
 // ----------------------------------------------------------------------------
@@ -590,7 +592,7 @@ wxFileOffset wxStreamBuffer::Seek(wxFileOffset pos, wxSeekMode mode)
         }
         if (diff < 0 || diff > last_access)
             return wxInvalidOffset;
-        const size_t int_diff = static_cast<size_t>(diff);
+        const size_t int_diff = gsl::narrow_cast<size_t>(diff);
         wxCHECK_MSG( (wxFileOffset)int_diff == diff, wxInvalidOffset, wxT("huge file not supported") );
         SetIntPosition(int_diff);
         return diff;
@@ -617,7 +619,7 @@ wxFileOffset wxStreamBuffer::Seek(wxFileOffset pos, wxSeekMode mode)
             }
             else
             {
-                auto int_diff = static_cast<size_t>(diff);
+                auto int_diff = gsl::narrow_cast<size_t>(diff);
                 wxCHECK_MSG( (wxFileOffset)int_diff == diff, wxInvalidOffset, wxT("huge file not supported") );
                 SetIntPosition(int_diff);
                 return diff;
@@ -667,7 +669,7 @@ size_t wxStreamBase::GetSize() const
     if ( length == (wxFileOffset)wxInvalidOffset )
         return 0;
 
-    const size_t len = wx_truncate_cast(size_t, length);
+    const auto len = gsl::narrow_cast<size_t>(length);
     wxASSERT_MSG( len == length + size_t(0), wxT("large files not supported") );
 
     return len;
@@ -1102,7 +1104,7 @@ size_t wxCountingOutputStream::OnSysWrite(const void *WXUNUSED(buffer),
 
 wxFileOffset wxCountingOutputStream::OnSysSeek(wxFileOffset pos, wxSeekMode mode)
 {
-    ssize_t new_pos = wx_truncate_cast(ssize_t, pos);
+    auto new_pos = gsl::narrow_cast<ssize_t>(pos);
 
     switch ( mode )
     {

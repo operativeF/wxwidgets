@@ -305,7 +305,7 @@ template <class KeyT, class ValueT>
 void MakeKeyValuePair(size_t i, size_t count, KeyT& key, ValueT& value)
 {
     key = MakeKey<KeyT, KeyT>(i, count);
-    value = wx_truncate_cast(ValueT, key);
+    value = gsl::narrow_cast<ValueT>(key);
 }
 
 // make key/values paris for pointer types
@@ -313,7 +313,7 @@ template <class T, class ValueT>
 void MakeKeyValuePair(size_t i, size_t count, T*& key, ValueT& value)
 {
     key = (T*)wxUIntToPtr(MakeKey<wxUIntPtr, T*>(i, count));
-    value = wx_truncate_cast(ValueT, key);
+    value = gsl::narrow_cast<ValueT>(key);
 }
 
 // the test

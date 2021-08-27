@@ -1418,8 +1418,8 @@ wxSizerItem *wxGridSizer::DoInsert(size_t index, wxSizerItem *item)
     // this here to ensure that we detect errors as soon as possible
     if ( m_cols && m_rows )
     {
-        const int nitems = m_children.GetCount();
-        if ( nitems == m_cols*m_rows )
+        const std::size_t nitems = m_children.GetCount();
+        if ( nitems == m_cols * m_rows )
         {
             wxFAIL_MSG(
                 fmt::format(
@@ -1457,7 +1457,7 @@ wxSizerItem *wxGridSizer::DoInsert(size_t index, wxSizerItem *item)
 
 int wxGridSizer::CalcRowsCols(int& nrows, int& ncols) const
 {
-    const int nitems = m_children.GetCount();
+    const std::size_t nitems = m_children.GetCount();
 
     ncols = GetEffectiveColsCount();
     nrows = GetEffectiveRowsCount();
@@ -1740,8 +1740,8 @@ wxSize wxFlexGridSizer::FindWidthsAndHeights(int WXUNUSED(nrows), int ncols)
 
 wxSize wxFlexGridSizer::CalcMin()
 {
-    int nrows,
-        ncols;
+    int nrows{};
+    int ncols{};
 
     // Number of rows/columns can change as items are added or removed.
     if ( !CalcRowsCols(nrows, ncols) )
@@ -1814,8 +1814,8 @@ DoAdjustForGrowables(int delta,
     const int max_idx = sizes.size();
 
     const size_t count = growable.size();
-    size_t idx;
-    for ( idx = 0; idx < count; idx++ )
+
+    for ( std::size_t idx{0}; idx < count; idx++ )
     {
         // Since the number of rows/columns can change as items are
         // inserted/deleted, we need to verify at runtime that the
@@ -1839,7 +1839,7 @@ DoAdjustForGrowables(int delta,
         return;
 
     // the remaining extra free space, adjusted during each iteration
-    for ( idx = 0; idx < count; idx++ )
+    for ( std::size_t idx{0}; idx < count; idx++ )
     {
         if ( growable[idx] >= max_idx )
             continue;
@@ -1851,7 +1851,7 @@ DoAdjustForGrowables(int delta,
         if ( sum_proportions == 0 )
         {
             // no growable rows -- divide extra space evenly among all
-            cur_delta = delta/num;
+            cur_delta = delta / num;
             num--;
         }
         else // allocate extra space proportionally
@@ -1879,7 +1879,7 @@ void wxFlexGridSizer::AdjustForGrowables(const wxSize& sz, const wxSize& minSize
         {
             int nrows = CalcRows();
 
-            for ( size_t n = 0; n < m_growableRows.size(); n++ )
+            for ( size_t n{0}; n < m_growableRows.size(); n++ )
             {
                 wxASSERT_MSG( m_growableRows[n] < nrows,
                               "invalid growable row index" );
@@ -1890,7 +1890,7 @@ void wxFlexGridSizer::AdjustForGrowables(const wxSize& sz, const wxSize& minSize
         {
             int ncols = CalcCols();
 
-            for ( size_t n = 0; n < m_growableCols.size(); n++ )
+            for ( std::size_t n{0}; n < m_growableCols.size(); n++ )
             {
                 wxASSERT_MSG( m_growableCols[n] < ncols,
                               "invalid growable column index" );

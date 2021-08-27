@@ -107,7 +107,7 @@ public:
     bool UpdateOnInsertNonRadio(int pos)
     {
         bool wasSplit = false;
-        Range newRange;
+        Range newRange{};
 
         for ( Ranges::iterator it = m_ranges.begin();
             it != m_ranges.end();

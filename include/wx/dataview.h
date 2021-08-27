@@ -25,7 +25,10 @@
 #include "wx/dataobj.h"
 #include "wx/withimages.h"
 #include "wx/systhemectrl.h"
+
 #include <vector>
+
+#include <gsl/gsl>
 
 class WXDLLIMPEXP_FWD_CORE wxImageList;
 class wxItemAttr;
@@ -497,7 +500,7 @@ public:
         { m_owner = owner; }
 
     // getters:
-    unsigned int GetModelColumn() const { return static_cast<unsigned int>(m_model_column); }
+    unsigned int GetModelColumn() const { return gsl::narrow_cast<unsigned int>(m_model_column); }
     wxDataViewCtrl *GetOwner() const        { return m_owner; }
     wxDataViewRenderer* GetRenderer() const { return m_renderer; }
 

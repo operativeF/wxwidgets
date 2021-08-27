@@ -57,6 +57,8 @@
 //---------------------------------------------------------------------------
 #include "wx/msw/ole/activex.h"
 
+#include <gsl/gsl>
+
 //---------------------------------------------------------------------------
 //  IIDS - used by CoCreateInstance and IUnknown::QueryInterface
 //
@@ -1529,7 +1531,7 @@ void wxAMMediaEvtHandler::OnActiveX(wxActiveXEvent& event)
 {
     // cast to unsigned long to fix narrowing error with case 0xfffffd9f
     // when using clang
-    switch (static_cast<unsigned long>(event.GetDispatchId()))
+    switch (gsl::narrow_cast<unsigned long>(event.GetDispatchId()))
     {
     case 0x00000001: // statechange in IActiveMovie
     case 0x00000bc4: // playstatechange in IMediaPlayer

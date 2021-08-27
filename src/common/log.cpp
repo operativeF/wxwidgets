@@ -41,6 +41,7 @@
 #endif
 
 #include <fmt/core.h>
+#include <gsl/gsl>
 
 #undef wxLOG_COMPONENT
 const char *wxLOG_COMPONENT = "";
@@ -400,7 +401,7 @@ wxLog::CallDoLogNow(wxLogLevel level,
     wxUIntPtr num = 0;
     if ( info.GetNumValue(wxLOG_KEY_SYS_ERROR_CODE, &num) )
     {
-        const long err = static_cast<long>(num);
+        const long err = gsl::narrow_cast<long>(num);
 
         suffix.Printf(_(" (error %ld: %s)"), err, wxSysErrorMsgStr(err));
     }

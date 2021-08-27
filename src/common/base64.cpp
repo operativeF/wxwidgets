@@ -13,6 +13,8 @@
 
 #include "wx/base64.h"
 
+#include <gsl/gsl>
+
 size_t
 wxBase64Encode(char *dst, size_t dstLen, const void *src_, size_t srcLen)
 {

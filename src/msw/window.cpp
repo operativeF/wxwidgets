@@ -109,6 +109,7 @@
 #endif
 
 #include <boost/nowide/convert.hpp>
+#include <gsl/gsl>
 
 #if wxUSE_DYNLIB_CLASS
     #define HAVE_TRACKMOUSEEVENT
@@ -3384,7 +3385,7 @@ wxWindowMSW::MSWHandleMessage(WXLRESULT *result,
                     processed = HandleZoomGesture
                                 (
                                     pt,
-                                    static_cast<DWORD>(gestureInfo.ullArguments),
+                                    gsl::narrow_cast<DWORD>(gestureInfo.ullArguments),
                                     gestureInfo.dwFlags
                                 );
                     break;
@@ -3395,7 +3396,7 @@ wxWindowMSW::MSWHandleMessage(WXLRESULT *result,
                     processed = HandleRotateGesture
                                 (
                                     pt,
-                                    static_cast<DWORD>(gestureInfo.ullArguments),
+                                    gsl::narrow_cast<DWORD>(gestureInfo.ullArguments),
                                     gestureInfo.dwFlags
                                 );
                     break;
@@ -3939,7 +3940,7 @@ void wxWindowMSW::MSWGetCreateWindowCoords(const wxPoint& pos,
 
 WXHWND wxWindowMSW::MSWGetParent() const
 {
-    return m_parent ? m_parent->GetHWND() : WXHWND(nullptr);
+    return m_parent ? m_parent->GetHWND() : WXHWND{nullptr};
 }
 
 bool wxWindowMSW::MSWCreate(const std::string& wclass,
@@ -4695,7 +4696,7 @@ static wxSize GetWindowDPI(HWND hwnd)
 
     if ( s_pfnGetDpiForWindow )
     {
-        const int dpi = static_cast<int>(s_pfnGetDpiForWindow(hwnd));
+        const int dpi = gsl::narrow_cast<int>(s_pfnGetDpiForWindow(hwnd));
         return wxSize(dpi, dpi);
     }
 #endif // wxUSE_DYNLIB_CLASS
@@ -6301,7 +6302,7 @@ wxWindowMSW::CreateCharEvent(wxEventType evType,
         {
             // For compatibility continue to provide the key code in this field
             // even though using GetUnicodeKey() is recommended now.
-            event.m_keyCode = static_cast<unsigned char>(ch);
+            event.m_keyCode = gsl::narrow_cast<unsigned char>(ch);
         }
         //else: Key can't be represented in the current locale, leave m_keyCode
         //      as WXK_NONE and use GetUnicodeKey() to access the character.

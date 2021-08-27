@@ -631,7 +631,7 @@ wxRadioBox::PositionAllButtons(int x, int y, int width, int WXUNUSED(height))
         // the last button in the row may be wider than the other ones as the
         // radiobox may be wider than the sum of the button widths (as it
         // happens, for example, when the radiobox label is very long)
-        bool isLastInTheRow;
+        bool isLastInTheRow{};
         if ( m_windowStyle & wxRA_SPECIFY_COLS )
         {
             // item is the last in its row if it is a multiple of the number of
@@ -661,7 +661,7 @@ wxRadioBox::PositionAllButtons(int x, int y, int width, int WXUNUSED(height))
             }
         }
 
-        int widthBtn;
+        int widthBtn{};
         if ( isLastInTheRow )
         {
             // make the button go to the end of radio box
@@ -697,8 +697,8 @@ wxRadioBox::PositionAllButtons(int x, int y, int width, int WXUNUSED(height))
 
 int wxRadioBox::GetItemFromPoint(const wxPoint& pt) const
 {
-    const unsigned int count = GetCount();
-    for ( unsigned int i = 0; i < count; i++ )
+    const std::size_t count = GetCount();
+    for ( std::size_t i{0}; i < count; i++ )
     {
         RECT rect = wxGetWindowRect((*m_radioButtons)[i]);
 
@@ -874,7 +874,7 @@ wxRadioBtnWndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
             break;
     }
 
-    return ::CallWindowProc(CASTWNDPROC s_wndprocRadioBtn, hwnd, message, wParam, lParam);
+    return ::CallWindowProcW(CASTWNDPROC s_wndprocRadioBtn, hwnd, message, wParam, lParam);
 }
 
 #endif // wxUSE_RADIOBOX
