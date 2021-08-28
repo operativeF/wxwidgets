@@ -272,7 +272,7 @@ wxSize ScaleAndReverseBitmap(HBITMAP& bitmap, float scale)
     BITMAP bmp;
     if ( !::GetObject(bitmap, sizeof(bmp), &bmp) )
         return {};
-    wxSize cs(bmp.bmWidth * scale, bmp.bmHeight * scale);
+    wxSize cs(gsl::narrow_cast<int>(bmp.bmWidth * scale), gsl::narrow_cast<int>(bmp.bmHeight * scale));
 
     MemoryHDC hdc;
     SelectInHDC selBitmap(hdc, bitmap);

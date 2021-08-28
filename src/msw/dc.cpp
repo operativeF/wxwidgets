@@ -39,6 +39,7 @@
 #include "wx/private/textmeasure.h"
 
 #include <boost/nowide/convert.hpp>
+#include <gsl/gsl>
 
 #ifdef _MSC_VER
     // In the previous versions of wxWidgets, AlphaBlend() was dynamically
@@ -2143,13 +2144,15 @@ bool wxMSWDCImpl::SetTransformMatrix(const wxAffineMatrix2D &matrix)
     wxPoint2DDouble tr;
     matrix.Get(&mat, &tr);
 
-    XFORM xform;
-    xform.eM11 = mat.m_11;
-    xform.eM12 = mat.m_12;
-    xform.eM21 = mat.m_21;
-    xform.eM22 = mat.m_22;
-    xform.eDx = tr.m_x;
-    xform.eDy = tr.m_y;
+    XFORM xform
+    {
+        .eM11 = gsl::narrow_cast<float>(mat.m_11),
+        .eM12 = gsl::narrow_cast<float>(mat.m_12),
+        .eM21 = gsl::narrow_cast<float>(mat.m_21),
+        .eM22 = gsl::narrow_cast<float>(mat.m_22),
+        .eDx  = gsl::narrow_cast<float>(tr.m_x),
+        .eDy  = gsl::narrow_cast<float>(tr.m_y)
+    };
 
     if ( !::SetWorldTransform(GetHdc(), &xform) )
     {

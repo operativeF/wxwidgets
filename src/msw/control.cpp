@@ -642,7 +642,7 @@ int wxControlWithItems::MSWInsertOrAppendItem(unsigned pos,
                                               const std::string& item,
                                               unsigned wm)
 {
-    LRESULT n = SendMessageW((HWND)MSWGetItemsHWND(), wm, pos,
+    LRESULT n = ::SendMessageW((HWND)MSWGetItemsHWND(), wm, pos,
                             reinterpret_cast<LPARAM>(boost::nowide::widen(item).c_str()));
     if ( n == CB_ERR || n == CB_ERRSPACE )
     {

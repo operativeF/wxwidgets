@@ -30,7 +30,7 @@ class WXDLLIMPEXP_BASE wxStopWatch
 {
 public:
     // ctor starts the stop watch
-    wxStopWatch() { m_pauseCount = 0; Start(); }
+    wxStopWatch() { Start(); }
 
     // Start the stop watch at the moment t0 expressed in milliseconds (i.e.
     // calling Time() immediately afterwards returns t0). This can be used to
@@ -84,7 +84,7 @@ private:
     wxLongLong m_elapsedBeforePause;
 
     // if > 0, the stop watch is paused, otherwise it is running
-    int m_pauseCount;
+    int m_pauseCount{0};
 };
 
 #endif // wxUSE_STOPWATCH

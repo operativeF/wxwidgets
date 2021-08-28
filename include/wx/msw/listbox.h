@@ -22,6 +22,8 @@
 #include <utility>
 #include <vector>
 
+#include <gsl/gsl>
+
 class WXDLLIMPEXP_CORE wxListBox : public wxListBoxBase
 {
 public:
@@ -87,7 +89,7 @@ public:
 
     // get the index of the given item
     // FIXME: Use iterators.
-    int GetItemIndex(wxOwnerDrawn *item) const
+    gsl::index GetItemIndex(wxOwnerDrawn *item) const
     {
         const auto index = std::distance(m_aItems.begin(), std::find(m_aItems.begin(), m_aItems.end(), item));
 
