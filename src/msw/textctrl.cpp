@@ -1347,7 +1347,7 @@ bool wxTextCtrl::PositionToXY(long pos, long *x, long *y) const
     }
 
     // This gets the char index for the _beginning_ of this line
-    auto charIndex = ::SendMessageW(hWnd, EM_LINEINDEX, lineNo, 0);
+    int charIndex = ::SendMessageW(hWnd, EM_LINEINDEX, lineNo, 0);
     if ( charIndex == -1 )
     {
         return false;
@@ -1355,7 +1355,7 @@ bool wxTextCtrl::PositionToXY(long pos, long *x, long *y) const
 
     // Line is identified by a character position!
     // New lines characters are not included.
-    auto lineLength = ::SendMessageW(hWnd, EM_LINELENGTH, charIndex, 0);
+    int lineLength = ::SendMessageW(hWnd, EM_LINELENGTH, charIndex, 0);
 
     // To simplify further calculations, make position relative
     // to the beginning of the line.
@@ -1363,7 +1363,7 @@ bool wxTextCtrl::PositionToXY(long pos, long *x, long *y) const
 
     // We need to apply different approach for the position referring
     // to the last line so check if the next line exists.
-    auto charIndexNextLn = IsMultiLine() ?
+    int charIndexNextLn = IsMultiLine() ?
                            ::SendMessageW(hWnd, EM_LINEINDEX, lineNo + 1, 0)
                            : -1;
     if ( charIndexNextLn == -1 )
@@ -1381,7 +1381,7 @@ bool wxTextCtrl::PositionToXY(long pos, long *x, long *y) const
         // Next line found. Char position doesn't refer to the last line
         // so we need to take into account new line characters which were
         // not counted by EM_LINELENGTH.
-        auto lineLengthFull = charIndexNextLn - charIndex;
+        int lineLengthFull = charIndexNextLn - charIndex;
         // (lineLengthFull - lineLength) can be 0 (for wrapped line),
         // 1 (for \r new line mark) or 2 (for \r\n new line mark).
         if ( pos > lineLengthFull )

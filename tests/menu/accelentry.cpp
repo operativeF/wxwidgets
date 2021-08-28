@@ -76,7 +76,7 @@ TEST_CASE( "wxAcceleratorEntry::Create")
  */
 TEST_CASE( "wxAcceleratorEntry::StringTests")
 {
-    wxAcceleratorEntry a(wxACCEL_ALT, 'X');
+    wxAcceleratorEntry a(wxACCEL_ALT, 'X', 0, nullptr);
 
     SUBCASE( "Create string from key" )
     {

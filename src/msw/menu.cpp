@@ -573,7 +573,7 @@ wxMenuItem* wxMenu::DoInsert(size_t pos, wxMenuItem *item)
 wxMenuItem *wxMenu::DoRemove(wxMenuItem *item)
 {
     // we need to find the item's position in the child list
-    size_t pos;
+    std::size_t pos;
     wxMenuItemList::compatibility_iterator node = GetMenuItems().GetFirst();
     for ( pos = 0; node; pos++ )
     {
@@ -599,7 +599,7 @@ wxMenuItem *wxMenu::DoRemove(wxMenuItem *item)
     }
 
     // remove the item from the menu
-    if ( !::RemoveMenu(GetHmenu(), (UINT)pos, MF_BYPOSITION) )
+    if ( !::RemoveMenu(GetHmenu(), gsl::narrow_cast<UINT>(pos), MF_BYPOSITION) )
     {
         wxLogLastError(wxT("RemoveMenu"));
     }
@@ -907,7 +907,7 @@ void wxMenuBar::EnableTop(size_t pos, bool enable)
 
     int flag = enable ? MF_ENABLED : MF_GRAYED;
 
-    EnableMenuItem((HMENU)m_hMenu, MSWPositionForWxMenu(GetMenu(pos),pos), MF_BYPOSITION | flag);
+    ::EnableMenuItem((HMENU)m_hMenu, MSWPositionForWxMenu(GetMenu(pos),pos), MF_BYPOSITION | flag);
 
     Refresh();
 }

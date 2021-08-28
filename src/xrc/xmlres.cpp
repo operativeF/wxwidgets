@@ -155,7 +155,7 @@ protected:
     const wxString m_name;
     int m_start;
     int m_end;
-    unsigned int m_size;
+    std::size_t m_size;
     bool m_item_end_found;
     bool m_finalised;
     wxHashSetInt m_indices;
@@ -1237,7 +1237,7 @@ void wxIdRange::Finalise(const wxXmlNode* node)
 
     // Now we know about all the items, we can get an accurate range size
     // Expand any requested range-size if there were more items than would fit
-    m_size = std::max(static_cast<std::size_t>(m_size), m_indices.size());
+    m_size = std::max(m_size, m_indices.size());
 
     // If an item is explicitly called foo[end], ensure it won't clash with
     // another item

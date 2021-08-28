@@ -70,10 +70,10 @@ bool wxOwnerDrawn::OnDrawItem(wxDC& dc, const wxRect& rc,
         if ( (stat & wxODHidePrefix) )
             flags |= DSS_HIDEPREFIX;
 
-        int x = rc.x + GetMarginWidth();
-        int y = rc.y + (rc.GetHeight() - sizeRect.cy) / 2;
-        int cx = rc.GetWidth() - GetMarginWidth();
-        int cy = sizeRect.cy;
+        const int x = rc.x + GetMarginWidth();
+        const int y = rc.y + (rc.GetHeight() - sizeRect.cy) / 2;
+        const int cx = rc.GetWidth() - GetMarginWidth();
+        const int cy = sizeRect.cy;
 
         ::DrawState(hdc, nullptr, nullptr, wxMSW_CONV_LPARAM(text),
                     text.length(), x, y, cx, cy, flags);

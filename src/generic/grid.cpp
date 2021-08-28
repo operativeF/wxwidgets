@@ -1863,7 +1863,7 @@ bool wxGridStringTable::AppendRows( size_t numRows )
 
 bool wxGridStringTable::DeleteRows( size_t pos, size_t numRows )
 {
-    size_t curNumRows = m_data.size();
+    const auto curNumRows = m_data.size();
 
     if ( pos >= curNumRows )
     {
@@ -1907,7 +1907,7 @@ bool wxGridStringTable::DeleteRows( size_t pos, size_t numRows )
 
 bool wxGridStringTable::InsertCols( size_t pos, size_t numCols )
 {
-    if ( pos >= static_cast<size_t>(m_numCols) )
+    if ( pos >= m_numCols )
     {
         return AppendCols( numCols );
     }

@@ -2316,7 +2316,7 @@ wxOutputStream *wxZipOutputStream::OpenCompressor(
                     || entry.GetSize() != wxInvalidOffset)) {
             entry.SetMethod(wxZIP_METHOD_STORE);
         } else {
-            int size = 0;
+            std::size_t size{0};
             for (int i = 0; bufs[i].m_data; ++i)
                 size += bufs[i].m_size;
             entry.SetMethod(size <= 6 ?

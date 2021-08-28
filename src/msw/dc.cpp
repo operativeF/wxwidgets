@@ -1159,8 +1159,10 @@ void wxMSWDCImpl::DoDrawSpline(const wxPointList *points)
 
     std::vector<POINT> lppt(n_bezier_points);
 
-    size_t bezier_pos = 0;
-    wxCoord x1, y1, x2, y2, cx1, cy1;
+    DWORD bezier_pos{};
+
+    wxCoord x1{};
+    wxCoord y1{};
 
     wxPointList::compatibility_iterator node = points->GetFirst();
     wxPoint *p = node->GetData();
@@ -1169,15 +1171,16 @@ void wxMSWDCImpl::DoDrawSpline(const wxPointList *points)
     bezier_pos++;
     lppt[ bezier_pos ] = lppt[ bezier_pos-1 ];
     bezier_pos++;
+
     CalcBoundingBox(x1, y1);
 
     node = node->GetNext();
     p = node->GetData();
 
-    x2 = p->x;
-    y2 = p->y;
-    cx1 = ( x1 + x2 ) / 2;
-    cy1 = ( y1 + y2 ) / 2;
+    wxCoord x2{p->x};
+    wxCoord y2{p->y};
+    wxCoord cx1 = ( x1 + x2 ) / 2;
+    wxCoord cy1 = ( y1 + y2 ) / 2;
     lppt[ bezier_pos ].x = XLOG2DEV(cx1);
     lppt[ bezier_pos ].y = YLOG2DEV(cy1);
     bezier_pos++;
@@ -1222,7 +1225,7 @@ void wxMSWDCImpl::DoDrawSpline(const wxPointList *points)
     lppt[ bezier_pos ] = lppt[ bezier_pos-1 ];
     bezier_pos++;
 
-    ::PolyBezier( GetHdc(), lppt.data(), bezier_pos );
+    ::PolyBezier( GetHdc(), lppt.data(), gsl::narrow_cast<DWORD>(bezier_pos) );
 }
 #endif // wxUSE_SPLINES
 
@@ -1231,8 +1234,8 @@ void wxMSWDCImpl::DoDrawEllipticArc(wxCoord x,wxCoord y,wxCoord w,wxCoord h,doub
 {
     wxBrushAttrsSetter cc(*this); // needed for wxBrushStyle::StippleMaskOpaque handling
 
-    wxCoord x2 = x + w;
-    wxCoord y2 = y + h;
+    const wxCoord x2 = x + w;
+    const wxCoord y2 = y + h;
 
     int rx1 = XLOG2DEV(x+w/2);
     int ry1 = YLOG2DEV(y+h/2);
@@ -1242,10 +1245,10 @@ void wxMSWDCImpl::DoDrawEllipticArc(wxCoord x,wxCoord y,wxCoord w,wxCoord h,doub
     sa = wxDegToRad(sa);
     ea = wxDegToRad(ea);
 
-    rx1 += (int)(100.0 * abs(w) * cos(sa));
-    ry1 -= (int)(100.0 * abs(h) * m_signY * sin(sa));
-    rx2 += (int)(100.0 * abs(w) * cos(ea));
-    ry2 -= (int)(100.0 * abs(h) * m_signY * sin(ea));
+    rx1 += gsl::narrow_cast<int>(100.0 * std::abs(w) * std::cos(sa));
+    ry1 -= gsl::narrow_cast<int>(100.0 * std::abs(h) * m_signY * std::sin(sa));
+    rx2 += gsl::narrow_cast<int>(100.0 * std::abs(w) * std::cos(ea));
+    ry2 -= gsl::narrow_cast<int>(100.0 * std::abs(h) * m_signY * std::sin(ea));
 
     // draw pie with NULL_PEN first and then outline otherwise a line is
     // drawn from the start and end points to the centre
@@ -1299,8 +1302,8 @@ void wxMSWDCImpl::DoDrawBitmap( const wxBitmap &bmp, wxCoord x, wxCoord y, bool 
 {
     wxCHECK_RET( bmp.IsOk(), wxT("invalid bitmap in wxMSWDCImpl::DrawBitmap") );
 
-    int width = bmp.GetWidth(),
-        height = bmp.GetHeight();
+    int width = bmp.GetWidth();
+    int height = bmp.GetHeight();
 
     HBITMAP hbmpMask = nullptr;
 
@@ -1473,14 +1476,14 @@ void wxMSWDCImpl::DoDrawText(std::string_view text, wxCoord x, wxCoord y)
     // update the bounding box
     CalcBoundingBox(x, y);
 
-    auto textExtents = GetOwner()->GetTextExtent(text);
+    const auto textExtents = GetOwner()->GetTextExtent(text);
     CalcBoundingBox(x + textExtents.x, y + textExtents.y);
 }
 
 void wxMSWDCImpl::DrawAnyText(std::string_view text, wxCoord x, wxCoord y)
 {
     if ( ::ExtTextOutW(GetHdc(), XLOG2DEV(x), YLOG2DEV(y), 0, nullptr,
-                   boost::nowide::widen(text).c_str(), text.length(), nullptr) == 0 )
+                   boost::nowide::widen(text).c_str(), gsl::narrow_cast<UINT>(text.length()), nullptr) == 0 )
     {
         wxLogLastError(wxT("TextOut"));
     }
