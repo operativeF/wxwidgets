@@ -65,14 +65,14 @@ struct wxProgressDialogSharedData
 
     wxWindow *m_parent{nullptr};     // Parent window only used to center us over it.
     HWND m_hwnd{nullptr};            // Task dialog handler
-    long m_style;           // wxProgressDialog style
-    int m_value{0};
-    int m_range;
+    long m_style{};           // wxProgressDialog style
+    int m_value{};
+    int m_range{};
     std::string m_title;
     std::string m_message;
     std::string m_expandedInformation;
     std::string m_labelCancel; // Privately used by callback.
-    unsigned long m_timeStop;
+    unsigned long m_timeStop{};
     wxIcon m_iconSmall;
     wxIcon m_iconBig;
     wxPoint m_winPosition;

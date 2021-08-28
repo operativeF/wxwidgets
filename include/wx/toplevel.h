@@ -339,7 +339,7 @@ protected:
     // a temporary override of m_winDefault, use the latter if NULL
     wxWindowRef m_winTmpDefault;
 
-    bool m_modified;
+    bool m_modified{};
 
     wxDECLARE_EVENT_TABLE();
 };

@@ -58,7 +58,7 @@ private:
     // common part of ctors taking wxInputStream
     void InitFromStream(wxInputStream& stream, wxFileOffset lenFile);
 
-    size_t m_length;
+    size_t m_length{};
 
     // copy ctor is implemented above: it copies the other stream in this one
     wxDECLARE_ABSTRACT_CLASS(wxMemoryInputStream);

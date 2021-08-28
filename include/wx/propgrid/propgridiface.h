@@ -1123,7 +1123,7 @@ protected:
     virtual wxPGProperty* DoGetPropertyByName( const wxString& name ) const;
 
     // Deriving classes must set this (it must be only or current page).
-    wxPropertyGridPageState*         m_pState;
+    wxPropertyGridPageState*         m_pState{nullptr};
 
     // Intermediate version needed due to wxVariant copying inefficiency
     void DoSetPropertyAttribute( wxPGPropArg id,

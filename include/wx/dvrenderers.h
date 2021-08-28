@@ -404,7 +404,7 @@ protected:
 
 private:
     wxDataViewItemAttr m_attr;
-    bool m_enabled;
+    bool m_enabled{};
 };
 
 // include the declaration of all the other renderers to get the real
@@ -450,8 +450,9 @@ public:
 #endif // wxUSE_ACCESSIBILITY
 
 private:
-    long    m_data;
-    long    m_min,m_max;
+    long    m_data{};
+    long    m_min;
+    long    m_max;
 };
 
 #endif // wxUSE_SPINCTRL

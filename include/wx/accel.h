@@ -49,13 +49,16 @@ enum wxAcceleratorEntryFlags
 class WXDLLIMPEXP_CORE wxAcceleratorEntry
 {
 public:
-    wxAcceleratorEntry(int flags = 0, int keyCode = 0, int cmd = 0,
-                       wxMenuItem *item = nullptr)
+    wxAcceleratorEntry() = default;
+    wxAcceleratorEntry(int flags,
+                       int keyCode,
+                       int cmd,
+                       wxMenuItem *item)
         : m_flags(flags)
         , m_keyCode(keyCode)
         , m_command(cmd)
         , m_item(item)
-        { }
+    {}
 
     // create accelerator corresponding to the specified string, return NULL if
     // string couldn't be parsed or a pointer to be deleted by the caller
@@ -124,12 +127,12 @@ private:
     static bool ParseAccel(const std::string& str, int *flags, int *keycode);
 
 
-    int m_flags;    // combination of wxACCEL_XXX constants
-    int m_keyCode;  // ASCII or virtual keycode
-    int m_command;  // Command id to generate
+    int m_flags{0};    // combination of wxACCEL_XXX constants
+    int m_keyCode{0};  // ASCII or virtual keycode
+    int m_command{0};  // Command id to generate
 
     // the menu item this entry corresponds to, may be NULL
-    wxMenuItem *m_item;
+    wxMenuItem *m_item{nullptr};
 
     // for compatibility with old code, use accessors now!
     friend class WXDLLIMPEXP_FWD_CORE wxMenu;

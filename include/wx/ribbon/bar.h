@@ -236,8 +236,8 @@ protected:
     int m_tab_scroll_right_button_state{wxRIBBON_SCROLL_BTN_NORMAL};
     bool m_tab_scroll_buttons_shown{false};
     bool m_arePanelsShown{true};
-    bool m_bar_hovered;
-    bool m_toggle_button_hovered;
+    bool m_bar_hovered{};
+    bool m_toggle_button_hovered{};
     bool m_help_button_hovered{false};
 
     wxRibbonDisplayMode m_ribbon_state;

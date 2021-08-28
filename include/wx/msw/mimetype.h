@@ -102,7 +102,7 @@ private:
 
     wxString m_strFileType,         // may be empty
              m_ext;
-    bool m_suppressNotify;
+    bool m_suppressNotify{};
 
     // these methods are not publicly accessible (as wxMimeTypesManager
     // doesn't know about them), and should only be called by Unassociate

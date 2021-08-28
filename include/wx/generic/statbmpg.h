@@ -74,7 +74,7 @@ private:
     void OnPaint(wxPaintEvent& event);
 
     wxBitmap m_bitmap;
-    ScaleMode m_scaleMode;
+    ScaleMode m_scaleMode{};
 
     wxDECLARE_DYNAMIC_CLASS(wxGenericStaticBitmap);
 };

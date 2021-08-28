@@ -102,11 +102,11 @@ private:
     std::vector<void*> m_frames;
 
     // decoder state vars
-    int           m_restbits;       // remaining valid bits
-    unsigned int  m_restbyte;       // remaining bytes in this block
-    unsigned int  m_lastbyte;       // last byte read
+    int           m_restbits{};       // remaining valid bits
+    unsigned int  m_restbyte{};       // remaining bytes in this block
+    unsigned int  m_lastbyte{};       // last byte read
     unsigned char m_buffer[256];    // buffer for reading
-    unsigned char *m_bufp;          // pointer to next byte in buffer
+    unsigned char *m_bufp{nullptr};          // pointer to next byte in buffer
 };
 
 #endif // wxUSE_STREAMS && wxUSE_GIF

@@ -26,19 +26,18 @@
 #include "wx/msw/private.h"
 #endif
 
-class wxRibbonToolBarToolBase
+struct wxRibbonToolBarToolBase
 {
-public:
     wxString help_string;
     wxBitmap bitmap;
     wxBitmap bitmap_disabled;
     wxRect dropdown;
     wxPoint position;
     wxSize size;
-    wxObject* client_data;
-    int id;
-    wxRibbonButtonKind kind;
-    long state;
+    wxObject* client_data{nullptr};
+    int id{};
+    wxRibbonButtonKind kind{};
+    long state{};
 };
 
 WX_DEFINE_ARRAY_PTR(wxRibbonToolBarToolBase*, wxArrayRibbonToolBarToolBase);

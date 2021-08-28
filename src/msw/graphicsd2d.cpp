@@ -3993,11 +3993,11 @@ private:
 
     struct LayerData
     {
-        LayerType type;
-        D2D1_LAYER_PARAMETERS params;
+        LayerType type{ CLIP_LAYER };
+        D2D1_LAYER_PARAMETERS params{};
         wxCOMPtr<ID2D1Layer> layer;
         wxCOMPtr<ID2D1Geometry> geometry;
-        D2D1_MATRIX_3X2_F transformMatrix;
+        D2D1_MATRIX_3X2_F transformMatrix{};
     };
 
     struct StateData

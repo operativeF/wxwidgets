@@ -25,15 +25,7 @@ struct wxMarkupSpanAttributes
         Yes
     };
 
-    wxMarkupSpanAttributes()
-    {
-        m_sizeKind = Size_Unspecified;
-
-        m_isBold =
-        m_isItalic =
-        m_isUnderlined =
-        m_isStrikethrough = Unspecified;
-    }
+    wxMarkupSpanAttributes() = default;
 
     // If a string is empty, it means that the corresponding attribute is not
     // set.
@@ -55,14 +47,15 @@ struct wxMarkupSpanAttributes
         Size_Relative,
         Size_Symbolic,
         Size_PointParts
-    } m_sizeKind;
+    } m_sizeKind{ Size_Unspecified };
+
     int m_fontSize;
 
     // If the value is Unspecified, the attribute wasn't given.
-    OptionalBool m_isBold,
-                 m_isItalic,
-                 m_isUnderlined,
-                 m_isStrikethrough;
+    OptionalBool m_isBold{ Unspecified };
+    OptionalBool m_isItalic{ Unspecified };
+    OptionalBool m_isUnderlined{ Unspecified };
+    OptionalBool m_isStrikethrough{ Unspecified };
 };
 
 // ----------------------------------------------------------------------------

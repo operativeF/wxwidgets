@@ -118,13 +118,14 @@ enum wxMessageOutputFlags
 class WXDLLIMPEXP_BASE wxMessageOutputBest : public wxMessageOutputStderr
 {
 public:
-    wxMessageOutputBest(wxMessageOutputFlags flags = wxMSGOUT_PREFER_STDERR)
+    wxMessageOutputBest() = default;
+    wxMessageOutputBest(wxMessageOutputFlags flags)
         : m_flags(flags) { }
 
     void Output(const wxString& str) override;
 
 private:
-    wxMessageOutputFlags m_flags;
+    wxMessageOutputFlags m_flags{wxMSGOUT_PREFER_STDERR};
 };
 
 // ----------------------------------------------------------------------------

@@ -37,16 +37,7 @@ class WXDLLIMPEXP_CORE wxControlContainerBase
 {
 public:
     // default ctor, SetContainerWindow() must be called later
-    wxControlContainerBase()
-    {
-        m_winParent = nullptr;
-
-        // By default, we accept focus ourselves.
-        m_acceptsFocusSelf = true;
-
-        m_inSetFocus = false;
-        m_winLastFocused = nullptr;
-    }
+    wxControlContainerBase() = default;
     virtual ~wxControlContainerBase() = default;
 
     // FIXME: Make sure it can't be called twice.
@@ -109,10 +100,10 @@ protected:
 
 
     // the parent window we manage the children for
-    wxWindow *m_winParent;
+    wxWindow *m_winParent{nullptr};
 
     // the child which had the focus last time this panel was activated
-    wxWindow *m_winLastFocused;
+    wxWindow *m_winLastFocused{nullptr};
 
 private:
     // Update the window status to reflect whether it is getting focus or not.
@@ -128,10 +119,10 @@ private:
     // container for its children or just as a normal window which can be
     // focused. But sometimes, e.g. for wxStaticBox, we can never have focus
     // ourselves and can only get it if we have any focusable children.
-    bool m_acceptsFocusSelf;
+    bool m_acceptsFocusSelf{true};
 
     // a guard against infinite recursion
-    bool m_inSetFocus;
+    bool m_inSetFocus{false};
 };
 
 #ifdef wxHAS_NATIVE_TAB_TRAVERSAL

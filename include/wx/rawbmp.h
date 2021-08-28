@@ -845,8 +845,9 @@ struct wxPixelDataOut<wxBitmap>
             // private: -- see comment in the beginning of the file
 
                 // I don't see a way to bit-twiddle without two fields
+                // FIXME: This is possible now.
                 wxByte* m_ptr;
-                std::int8_t m_bit;
+                std::int8_t m_bit{};
             };
 
             // ctor associates this pointer with a bitmap and locks the bitmap for

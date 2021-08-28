@@ -71,10 +71,7 @@ inline constexpr char wxFileSelectorDefaultWildcardStr[] =
 class WXDLLIMPEXP_CORE wxFileDialogBase: public wxDialog
 {
 public:
-    wxFileDialogBase()
-    {
-        m_windowStyle = 0;
-    }
+    wxFileDialogBase() = default;
 
     wxFileDialogBase(wxWindow *parent,
                      const std::string& message = wxFileSelectorPromptStr,
@@ -86,8 +83,6 @@ public:
                      const wxSize& sz = wxDefaultSize,
                      const std::string& name = wxFileDialogNameStr)
     {
-        m_windowStyle = 0;
-
         Create(parent, message, defaultDir, defaultFile, wildCard, style, pos, sz, name);
     }
 

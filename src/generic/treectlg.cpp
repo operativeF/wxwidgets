@@ -142,9 +142,7 @@ private:
 class WXDLLEXPORT wxGenericTreeItem
 {
 public:
-    wxGenericTreeItem()
-    {
-    }
+    wxGenericTreeItem() = default;
 
     wxGenericTreeItem( wxGenericTreeItem *parent,
                        const wxString& text,
@@ -336,7 +334,7 @@ private:
     int                 m_state{wxTREE_ITEMSTATE_NONE};        // item state
 
     wxArrayGenericTreeItems m_children; // list of children
-    wxGenericTreeItem  *m_parent;       // parent of this item
+    wxGenericTreeItem  *m_parent{nullptr};       // parent of this item
 
     wxItemAttr     *m_attr{nullptr};         // attributes???
 

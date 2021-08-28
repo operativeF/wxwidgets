@@ -114,7 +114,7 @@ public:
     wxString GetFile() const;
 
 protected:
-    int m_filterIndex;
+    int m_filterIndex{};
     wxString m_directory;
     std::vector<wxString> m_files;
 

@@ -1714,7 +1714,7 @@ protected:
     bool                 m_disableFocusFromKbd;
 
     // window attributes
-    long                 m_windowStyle;
+    long                 m_windowStyle{0};
     long                 m_exStyle;
     std::string          m_windowName;
     bool                 m_themeEnabled;

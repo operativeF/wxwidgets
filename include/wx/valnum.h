@@ -274,7 +274,8 @@ private:
     }
 
     // Minimal and maximal values accepted (inclusive).
-    ValueType m_min, m_max;
+    ValueType m_min{};
+    ValueType m_max{};
 };
 
 } // namespace wxPrivate

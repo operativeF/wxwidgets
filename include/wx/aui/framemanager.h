@@ -590,7 +590,7 @@ protected:
     int m_action{actionNone};                // current mouse action
     wxPoint m_actionStart;      // position where the action click started
     wxPoint m_actionOffset;     // offset from upper left of the item clicked
-    wxAuiDockUIPart* m_actionPart; // ptr to the part the action happened to
+    wxAuiDockUIPart* m_actionPart{nullptr}; // ptr to the part the action happened to
     wxWindow* m_actionWindow{nullptr};   // action frame or window (NULL if none)
     wxRect m_actionHintRect;    // hint rectangle for the action
     wxRect m_lastRect;
@@ -606,8 +606,8 @@ protected:
 
     wxFrame* m_hintWnd{nullptr};         // transparent hint window, if supported by platform
     wxTimer m_hintFadeTimer;    // transparent fade timer
-    wxByte m_hintFadeAmt;       // transparent fade amount
-    wxByte m_hintFadeMax;       // maximum value of hint fade
+    wxByte m_hintFadeAmt{};       // transparent fade amount
+    wxByte m_hintFadeMax{};       // maximum value of hint fade
 
     void* m_reserved{nullptr};
 

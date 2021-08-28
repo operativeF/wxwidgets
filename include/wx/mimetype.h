@@ -242,8 +242,8 @@ private:
              m_desc;        // a free form description of this file type
 
     // icon stuff
-    wxString m_iconFile;    // the file containing the icon
-    int      m_iconIndex;   // icon index in this file
+    wxString m_iconFile;      // the file containing the icon
+    int      m_iconIndex{};   // icon index in this file
 
     std::vector<wxString> m_exts;   // the extensions which are mapped on this filetype
 

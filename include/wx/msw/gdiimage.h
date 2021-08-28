@@ -31,10 +31,7 @@ WX_DECLARE_EXPORTED_LIST(wxGDIImageHandler, wxGDIImageHandlerList);
 
 struct WXDLLIMPEXP_CORE wxGDIImageRefData : public wxGDIRefData
 {
-    wxGDIImageRefData()
-    {
-        m_handle = nullptr;
-    }
+    wxGDIImageRefData() = default;
 
     wxGDIImageRefData(const wxGDIImageRefData& data)  
     {
@@ -143,7 +140,7 @@ protected:
 class WXDLLIMPEXP_CORE wxGDIImageHandler
 {
 public:
-    wxGDIImageHandler() { m_type = wxBITMAP_TYPE_INVALID; }
+    wxGDIImageHandler() = default;
     wxGDIImageHandler(const std::string& name,
                       const std::string& ext,
                       wxBitmapType type)
@@ -175,7 +172,7 @@ public:
 protected:
     std::string  m_name;
     std::string  m_extension;
-    wxBitmapType m_type;
+    wxBitmapType m_type{wxBITMAP_TYPE_INVALID};
 };
 
 #endif // _WX_MSW_GDIIMAGE_H_

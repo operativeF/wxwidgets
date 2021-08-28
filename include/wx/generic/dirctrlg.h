@@ -198,7 +198,7 @@ private:
     bool            m_showHidden{false};
     wxTreeItemId    m_rootId;
     wxString        m_defaultPath; // Starting path
-    long            m_styleEx; // Extended style
+    long            m_styleEx{}; // Extended style
     wxString        m_filter;  // Wildcards in same format as per wxFileDialog
     int             m_currentFilter{0}; // The current filter index
     wxString        m_currentFilterStr; // Current filter string

@@ -311,7 +311,7 @@ std::optional<wxAcceleratorEntry> wxAcceleratorEntry::Create(const std::string& 
     if ( !ParseAccel(accelStr, &flags, &keyCode) )
         return std::nullopt;
 
-    return wxAcceleratorEntry(flags, keyCode);
+    return wxAcceleratorEntry(flags, keyCode, 0, nullptr);
 }
 
 bool wxAcceleratorEntry::FromString(const std::string& str)

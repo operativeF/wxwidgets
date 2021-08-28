@@ -185,10 +185,7 @@ class WXDLLIMPEXP_CORE wxGenericFileCtrl : public wxNavigationEnabled<wxControl>
                                            public wxFileCtrlBase
 {
 public:
-    wxGenericFileCtrl()
-    {
-        m_ignoreChanges = false;
-    }
+    wxGenericFileCtrl() = default;
 
     wxGenericFileCtrl ( wxWindow *parent,
                         wxWindowID id,
@@ -289,10 +286,10 @@ private:
     wxString        m_fileName;
     wxString        m_wildCard; // wild card in one string as we got it
 
-    int     m_filterIndex;
-    bool    m_inSelected;
-    bool    m_ignoreChanges;
-    bool    m_noSelChgEvent; // suppress selection changed events.
+    int     m_filterIndex{};
+    bool    m_inSelected{};
+    bool    m_ignoreChanges{false};
+    bool    m_noSelChgEvent{}; // suppress selection changed events.
 
     wxDECLARE_DYNAMIC_CLASS(wxGenericFileCtrl);
     wxDECLARE_EVENT_TABLE();

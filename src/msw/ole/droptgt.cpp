@@ -91,7 +91,7 @@ protected:
 
     wxDropTarget *m_pTarget;      // the real target (we're just a proxy)
 
-    HWND          m_hwnd;         // window we're associated with
+    HWND          m_hwnd{};         // window we're associated with
 
     // get default drop effect for given keyboard flags
     static DWORD GetDropEffect(DWORD flags, wxDragResult defaultAction, DWORD pdwEffect);

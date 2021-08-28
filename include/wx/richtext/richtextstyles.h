@@ -679,8 +679,8 @@ public:
 
 protected:
 
-    int             m_itemHere; // hot item in popup
-    int             m_value;
+    int             m_itemHere{}; // hot item in popup
+    int             m_value{};
 
 private:
     wxDECLARE_EVENT_TABLE();

@@ -150,10 +150,10 @@ void SetTimeValFromMS(wxTimeVal_t& tv, unsigned long ms)
 
 struct wxSocketState : public wxObject
 {
-    wxSocketFlags            m_flags;
-    wxSocketEventFlags       m_eventmask;
-    bool                     m_notify;
-    void                    *m_clientData;
+    wxSocketFlags            m_flags{};
+    wxSocketEventFlags       m_eventmask{};
+    bool                     m_notify{};
+    void                    *m_clientData{};
 
     wxSocketState()  = default;
 

@@ -72,7 +72,7 @@ public:
 
   WXHCONV       m_hConv{nullptr};
   const void*   m_sendingData{nullptr};
-  int           m_dataSize;
+  int           m_dataSize{};
 
   wxDECLARE_DYNAMIC_CLASS(wxDDEConnection);
 };

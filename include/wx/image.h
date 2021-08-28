@@ -265,14 +265,15 @@ class WXDLLIMPEXP_CORE wxImage: public wxObject
 {
 public:
     // hue, saturation and value are doubles in the range 0.0..1.0
-    class HSVValue
+    struct HSVValue
     {
-    public:
-        HSVValue(double h=0.0, double s=0.0, double v=0.0)
+        HSVValue() = default;
+        HSVValue(double h, double s, double v)
             : hue(h), saturation(s), value(v) {}
-        double hue;
-        double saturation;
-        double value;
+
+        double hue{0.0};
+        double saturation{0.0};
+        double value{0.0};
     };
 
     wxImage() = default;

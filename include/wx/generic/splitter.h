@@ -326,8 +326,7 @@ public:
         SetEventObject(splitter);
         if (splitter) m_id = splitter->GetId();
     }
-    wxSplitterEvent(const wxSplitterEvent& event)
-         = default;
+    wxSplitterEvent(const wxSplitterEvent& event) = default;
 
     // SASH_POS_CHANGED methods
 

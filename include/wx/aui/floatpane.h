@@ -62,9 +62,9 @@ private:
     static bool isMouseDown();
 
 private:
-    wxWindow* m_paneWindow;    // pane window being managed
-    bool m_solidDrag;          // true if system uses solid window drag
-    bool m_moving;
+    wxWindow* m_paneWindow{nullptr};    // pane window being managed
+    bool m_solidDrag{};          // true if system uses solid window drag
+    bool m_moving{};
     wxRect m_lastRect;
     wxRect m_last2Rect;
     wxRect m_last3Rect;

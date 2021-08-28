@@ -14,6 +14,8 @@
 #include "wx/dialog.h"
 #include "wx/weakref.h"
 
+#include <limits>
+
 class WXDLLIMPEXP_FWD_CORE wxButton;
 class WXDLLIMPEXP_FWD_CORE wxEventLoop;
 class WXDLLIMPEXP_FWD_CORE wxGauge;
@@ -151,7 +153,7 @@ protected:
     unsigned long m_timeStart;
     // time when the dialog was closed or cancelled
     // FIXME: Max
-    unsigned long m_timeStop{static_cast<unsigned long>(-1)};
+    unsigned long m_timeStop{std::numeric_limits<unsigned long>::max()};
     // time between the moment the dialog was closed/cancelled and resume
     unsigned long m_break{0};
 

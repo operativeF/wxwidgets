@@ -120,7 +120,7 @@ protected:
 
 private:
     wxWindow *m_win;
-    wxSizer *m_sizer;
+    wxSizer *m_sizer{nullptr};
     int m_hLine{0};
 };
 

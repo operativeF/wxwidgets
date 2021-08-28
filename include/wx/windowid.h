@@ -26,11 +26,7 @@
 class WXDLLIMPEXP_CORE wxWindowIDRef
 {
 public:
-    // default ctor
-    wxWindowIDRef()
-    {
-        m_id = wxID_NONE;
-    }
+    wxWindowIDRef() = default;
 
     // ctor taking id values
     wxWindowIDRef(int id)
@@ -111,7 +107,7 @@ private:
 #endif // wxUSE_AUTOID_MANAGEMENT/!wxUSE_AUTOID_MANAGEMENT
 
 
-    wxWindowID m_id;
+    wxWindowID m_id{wxID_NONE};
 };
 
 // comparison operators

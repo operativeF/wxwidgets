@@ -153,7 +153,7 @@ WXDLLIMPEXP_CORE wxMouseState wxGetMouseState();
 class WXDLLIMPEXP_BASE wxPlatform
 {
 public:
-    wxPlatform() {  m_longValue = 0; m_doubleValue = 0.0;  }
+    wxPlatform() = default;
     wxPlatform(const wxPlatform& platform) { Copy(platform); }
     void operator = (const wxPlatform& platform) { if (&platform != this) Copy(platform); }
     void Copy(const wxPlatform& platform);
@@ -202,8 +202,8 @@ public:
     static void ClearPlatforms();
 
 private:
-    long                m_longValue;
-    double              m_doubleValue;
+    long                m_longValue{0};
+    double              m_doubleValue{0.0};
     wxString            m_stringValue;
     inline static std::vector<int>*  sm_customPlatforms{nullptr};
 };

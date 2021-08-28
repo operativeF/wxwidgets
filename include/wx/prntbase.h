@@ -450,7 +450,7 @@ public:
     inline wxPreviewControlBar* GetControlBar() const { return m_controlBar; }
 
 protected:
-    wxPreviewCanvas*      m_previewCanvas;
+    wxPreviewCanvas*      m_previewCanvas{nullptr};
     wxPreviewControlBar*  m_controlBar{nullptr};
     wxPrintPreviewBase*   m_printPreview{nullptr};
     wxWindowDisabler*     m_windowDisabler{nullptr};

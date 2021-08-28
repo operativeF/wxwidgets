@@ -1693,7 +1693,8 @@ public:
     wxDataViewMainWindow   *m_win;
     unsigned int            m_row;
     wxFrame                *m_hint;
-    int m_dist_x,m_dist_y;
+    int m_dist_x{};
+    int m_dist_y{};
 };
 
 

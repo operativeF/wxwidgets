@@ -118,7 +118,7 @@ struct PreviousLogInfo
     wxString msg;
 
     // its level
-    wxLogLevel level;
+    wxLogLevel level{};
 
     // other information about it
     wxLogRecordInfo info;

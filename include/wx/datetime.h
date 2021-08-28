@@ -295,10 +295,12 @@ public:
     class WXDLLIMPEXP_BASE TimeZone
     {
     public:
+        TimeZone() = default;
+
         TimeZone(TZ tz);
 
         // create time zone object with the given offset
-        TimeZone(long offset = 0) { m_offset = offset; }
+        TimeZone(long offset) : m_offset{offset} {}
 
         static TimeZone Make(long offset)
         {
@@ -313,7 +315,7 @@ public:
 
     private:
         // offset for this timezone from GMT in seconds
-        long m_offset;
+        long m_offset{};
     };
 
         // standard struct tm is limited to the years from 1900 (because
@@ -468,7 +470,7 @@ public:
     // ------------------------------------------------------------------------
 
         // default ctor does not initialize the object, use Set()!
-    wxDateTime() : m_time(wxINT64_MIN) { }
+    wxDateTime() noexcept : m_time(wxINT64_MIN) { }
 
         // from time_t: seconds since the Epoch 00:00:00 UTC, Jan 1, 1970)
     inline wxDateTime(time_t timet);
@@ -1399,7 +1401,7 @@ public:
     // ------------------------------------------------------------------------
 
         // this many years/months/weeks/days
-    wxDateSpan(int years = 0, int months = 0, int weeks = 0, int days = 0)
+    wxDateSpan(int years = 0, int months = 0, int weeks = 0, int days = 0) noexcept
     {
         m_years = years;
         m_months = months;

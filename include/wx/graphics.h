@@ -461,8 +461,11 @@ public:
 private:
     double m_width;
     wxGradientType m_gradientType;
-    double m_x1, m_y1, m_x2, m_y2; // also used for m_xo, m_yo, m_xc, m_yc
-    double m_radius;
+    double m_x1{0.0};
+    double m_y1{0.0};
+    double m_x2{0.0};
+    double m_y2{0.0}; // also used for m_xo, m_yo, m_xc, m_yc
+    double m_radius{0.0};
     wxGraphicsGradientStops m_stops;
     wxGraphicsMatrix m_matrix;
 };
@@ -880,8 +883,8 @@ public:
 
 protected:
     // These fields must be initialized in the derived class ctors.
-    double m_width,
-             m_height;
+    double m_width{};
+    double m_height{};
 
     wxGraphicsPen m_pen;
     wxGraphicsBrush m_brush;
@@ -889,9 +892,8 @@ protected:
     wxAntialiasMode m_antialias;
     wxCompositionMode m_composition;
     wxInterpolationQuality m_interpolation;
-    bool m_enableOffset;
+    bool m_enableOffset{};
 
-protected:
     // implementations of overloaded public functions: we use different names
     // for them to avoid the virtual function hiding problems in the derived
     // classes
@@ -912,7 +914,7 @@ private:
     // Create() or the associated window of the wxDC this context was created
     // from.
     wxWindow* const m_window;
-    double m_contentScaleFactor;
+    double m_contentScaleFactor{};
 
     wxDECLARE_ABSTRACT_CLASS(wxGraphicsContext);
 };

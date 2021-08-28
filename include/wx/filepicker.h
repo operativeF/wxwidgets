@@ -206,7 +206,7 @@ protected:
 protected:
 
     // m_picker object as wxFileDirPickerWidgetBase interface
-    wxFileDirPickerWidgetBase *m_pickerIface;
+    wxFileDirPickerWidgetBase *m_pickerIface{nullptr};
 };
 
 #endif  // wxUSE_FILEPICKERCTRL || wxUSE_DIRPICKERCTRL

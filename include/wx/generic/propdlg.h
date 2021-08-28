@@ -149,7 +149,7 @@ protected:
     long            m_sheetStyle{wxPROPSHEET_DEFAULT};
     int             m_sheetOuterBorder{2};
     int             m_sheetInnerBorder{5};
-    int             m_selectedPage;
+    int             m_selectedPage{};
 
     wxDECLARE_DYNAMIC_CLASS(wxPropertySheetDialog);
     wxDECLARE_EVENT_TABLE();

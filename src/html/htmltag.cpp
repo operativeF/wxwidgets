@@ -43,7 +43,7 @@ struct wxHtmlCacheItem
         Type_NoMatchingEndingTag, // there's no ending tag for this tag
         Type_EndingTag // this is ending tag </..>
     };
-    Type type;
+    Type type{Type_Normal};
 
     // end positions for the tag:
     // end1 is '<' of ending tag,

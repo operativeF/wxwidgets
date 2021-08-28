@@ -81,9 +81,10 @@ private:
 
     void DoDrawLabel(wxDC& dc, const wxRect& rect);
 
-    // These fields are only used if m_markupText == NULL.
+    // These fields are only used if m_markupText == nullptr.
+    // FIXME: then don't include them automatically.
     std::string m_label;
-    int m_mnemonic;
+    int m_mnemonic{};
 
 #if wxUSE_MARKUP
     class wxMarkupText *m_markupText;

@@ -36,15 +36,6 @@ enum wxMouseButton
 class WXDLLIMPEXP_CORE wxMouseState : public wxKeyboardState
 {
 public:
-    wxMouseState()
-        : m_leftDown(false), m_middleDown(false), m_rightDown(false),
-          m_aux1Down(false), m_aux2Down(false) 
-    {
-    }
-
-    // default copy ctor, assignment operator and dtor are ok
-
-
     // accessors for the mouse position
     wxCoord GetX() const { return m_x; }
     wxCoord GetY() const { return m_y; }
@@ -108,14 +99,14 @@ public:
     // wxMouseEvent often uses them directly -- however they should not be
     // accessed directly in this class, use the accessors above instead
 // private:
-    bool m_leftDown   : 1;
-    bool m_middleDown : 1;
-    bool m_rightDown  : 1;
-    bool m_aux1Down   : 1;
-    bool m_aux2Down   : 1;
+    bool m_leftDown{false};
+    bool m_middleDown{false};
+    bool m_rightDown{false};
+    bool m_aux1Down{false};
+    bool m_aux2Down{false};
 
-    wxCoord m_x{0},
-            m_y{0};
+    wxCoord m_x{0};
+    wxCoord m_y{0};
 };
 
 #endif // _WX_MOUSESTATE_H_

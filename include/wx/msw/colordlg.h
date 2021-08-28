@@ -72,7 +72,7 @@ protected:
     std::string         m_title;
 
     // Currently selected colour, used while the dialog is being shown.
-    WXCOLORREF m_currentCol;
+    WXCOLORREF m_currentCol{};
 
     // indicates that the dialog should be centered in this direction if non 0
     // (set by DoCentre(), used by MSWOnInitDone())

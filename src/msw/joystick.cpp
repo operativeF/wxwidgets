@@ -68,8 +68,8 @@ private:
     int       m_buttons{0};
     wxWindow* m_catchwin{nullptr};
     int       m_polling{0};
-    JOYINFO   m_joyInfo;
-    JOYINFO   m_lastJoyInfo;
+    JOYINFO   m_joyInfo{};
+    JOYINFO   m_lastJoyInfo{};
 };
 
 

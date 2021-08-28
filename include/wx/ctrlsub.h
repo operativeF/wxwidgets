@@ -202,7 +202,7 @@ private:
     }
 
 public:
-    wxItemContainer() { m_clientDataItemsType = wxClientDataType::None; }
+    wxItemContainer() = default;
     ~wxItemContainer() override;
 
     // adding items
@@ -383,7 +383,7 @@ protected:
 
 private:
     // the type of the client data for the items
-    wxClientDataType m_clientDataItemsType;
+    wxClientDataType m_clientDataItemsType{wxClientDataType::None};
 };
 
 // Inheriting directly from a wxWindow-derived class and wxItemContainer

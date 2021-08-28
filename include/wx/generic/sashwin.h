@@ -235,7 +235,7 @@ public:
 private:
     wxSashEdgePosition  m_edge;
     wxRect              m_dragRect;
-    wxSashDragStatus    m_dragStatus;
+    wxSashDragStatus    m_dragStatus{};
 
 	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 

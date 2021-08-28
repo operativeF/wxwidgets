@@ -107,7 +107,7 @@ private:
         State_Registered,   // module registered but not initialized yet
         State_Initializing, // we're initializing this module but not done yet
         State_Initialized   // module initialized successfully
-    } m_state;
+    } m_state{};
 
 
     wxDECLARE_CLASS(wxModule);

@@ -44,7 +44,7 @@ using uchar = unsigned char;
 class WXDLLIMPEXP_CORE Uuid
 {
 private:
-  UUID  m_uuid;
+  UUID  m_uuid{};
   wxUChar *m_pszUuid;   // this string is alloc'd and freed by RPC
   wxChar  *m_pszCForm;  // this string is allocated in Set/Create
 

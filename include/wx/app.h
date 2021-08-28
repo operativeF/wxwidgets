@@ -455,7 +455,7 @@ public:
 
 
     // command line arguments (public for backwards compatibility)
-    int argc;
+    int argc{};
 
     wxCmdLineArgsArray argv;
 

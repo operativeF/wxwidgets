@@ -44,18 +44,16 @@ wxBEGIN_EVENT_TABLE(wxRibbonButtonBar, wxRibbonControl)
     EVT_LEFT_UP(wxRibbonButtonBar::OnMouseUp)
 wxEND_EVENT_TABLE()
 
-class wxRibbonButtonBarButtonSizeInfo
+struct wxRibbonButtonBarButtonSizeInfo
 {
-public:
-    bool is_supported;
+    bool is_supported{};
     wxSize size;
     wxRect normal_region;
     wxRect dropdown_region;
 };
 
-class wxRibbonButtonBarButtonInstance
+struct wxRibbonButtonBarButtonInstance
 {
-public:
     wxPoint position;
     wxRibbonButtonBarButtonBase* base;
     wxRibbonButtonBarButtonState size;

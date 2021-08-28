@@ -18,16 +18,23 @@
 
 struct wxMatrix2D
 {
-    wxMatrix2D(double v11 = 1,
-               double v12 = 0,
-               double v21 = 0,
-               double v22 = 1)
+    wxMatrix2D() = default;
+
+    wxMatrix2D(double v11,
+               double v12,
+               double v21,
+               double v22)
+        : m_11{v11},
+          m_12{v12},
+          m_21{v21},
+          m_22{v22}
     {
-        m_11 = v11; m_12 = v12;
-        m_21 = v21; m_22 = v22;
     }
 
-    double m_11, m_12, m_21, m_22;
+    double m_11{1.0};
+    double m_12{0.0};
+    double m_21{0.0};
+    double m_22{1.0};
 };
 
 // A 2x3 matrix representing an affine 2D transformation.

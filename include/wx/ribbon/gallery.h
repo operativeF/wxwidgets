@@ -107,10 +107,10 @@ protected:
     wxRect m_scroll_down_button_rect;
     wxRect m_extension_button_rect;
     const wxRect* m_mouse_active_rect;
-    int m_item_separation_x;
-    int m_item_separation_y;
-    int m_scroll_amount;
-    int m_scroll_limit;
+    int m_item_separation_x{};
+    int m_item_separation_y{};
+    int m_scroll_amount{};
+    int m_scroll_limit{};
     wxRibbonGalleryButtonState m_up_button_state;
     wxRibbonGalleryButtonState m_down_button_state;
     wxRibbonGalleryButtonState m_extension_button_state;

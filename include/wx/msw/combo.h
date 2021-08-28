@@ -96,7 +96,7 @@ private:
     wxMilliClock_t m_animStart;
     wxTimer     m_animTimer;
     wxRect      m_animRect;
-    int         m_animFlags;
+    int         m_animFlags{};
 #endif
 
     wxDECLARE_EVENT_TABLE();

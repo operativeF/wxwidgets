@@ -390,8 +390,7 @@ public:
         m_isFailing = false;
     }
 
-    ~wxPGValidationInfo()
-    = default;
+    ~wxPGValidationInfo() = default;
 
     // Returns failure behaviour which is a combination of
     // wxPG_VFB_XXX flags.
@@ -420,7 +419,7 @@ public:
 
 private:
     // Value to be validated.
-    wxVariant*      m_pValue;
+    wxVariant*      m_pValue{nullptr};
 
     // Message displayed on validation failure.
     wxString        m_failureMessage;

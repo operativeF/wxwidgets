@@ -38,6 +38,9 @@ public:
     wxDropTarget(wxDataObject *dataObject = nullptr);
     ~wxDropTarget() override;
 
+    wxDropTarget(const wxDropTarget&) = delete;
+    wxDropTarget& operator=(const wxDropTarget&) = delete;
+
     // normally called by wxWindow on window creation/destruction, but might be
     // called `manually' as well. Register() returns true on success.
     bool Register(WXHWND hwnd);
@@ -77,12 +80,9 @@ private:
     // helper used by IsAcceptedData() and GetData()
     wxDataFormat MSWGetSupportedFormat(IDataObject *pIDataSource) const;
 
-    wxIDropTarget     *m_pIDropTarget; // the pointer to our COM interface
-    IDataObject       *m_pIDataSource; // the pointer to the source data object
+    wxIDropTarget     *m_pIDropTarget{nullptr}; // the pointer to our COM interface
+    IDataObject       *m_pIDataSource{nullptr}; // the pointer to the source data object
     wxIDropTargetHelper *m_dropTargetHelper{nullptr}; // the drop target helper
-
-    wxDropTarget(const wxDropTarget&) = delete;
-	wxDropTarget& operator=(const wxDropTarget&) = delete;
 };
 
 #endif  //wxUSE_DRAG_AND_DROP

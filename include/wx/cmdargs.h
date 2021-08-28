@@ -28,7 +28,7 @@
 class WXDLLIMPEXP_BASE wxCmdLineArgsArray
 {
 public:
-    wxCmdLineArgsArray() { m_argsA = nullptr; m_argsW = nullptr; }
+    wxCmdLineArgsArray() = default;
 
     wxCmdLineArgsArray(const wxCmdLineArgsArray&) = delete;
     wxCmdLineArgsArray& operator=(const wxCmdLineArgsArray&) = delete;
@@ -140,8 +140,8 @@ private:
     }
 
     std::vector<wxString> m_args;
-    mutable char **m_argsA;
-    mutable wchar_t **m_argsW;
+    mutable char **m_argsA{nullptr};
+    mutable wchar_t **m_argsW{nullptr};
 };
 
 // provide global operator overload for compatibility with the existing code
