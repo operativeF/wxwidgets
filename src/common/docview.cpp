@@ -848,7 +848,7 @@ wxDocument *wxDocTemplate::DoCreateDocument()
     if (!m_docClassInfo)
         return nullptr;
 
-    return static_cast<wxDocument *>(m_docClassInfo->CreateObject());
+    return dynamic_cast<wxDocument *>(m_docClassInfo->CreateObject());
 }
 
 wxView *wxDocTemplate::DoCreateView()

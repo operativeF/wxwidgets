@@ -763,7 +763,7 @@ double wxWindowBase::GetContentScaleFactor() const
 
 double wxWindowBase::GetDPIScaleFactor() const
 {
-    return wxDisplay(static_cast<const wxWindow*>(this)).GetScaleFactor();
+    return wxDisplay(dynamic_cast<const wxWindow*>(this)).GetScaleFactor();
 }
 
 // helper of GetWindowBorderSize(): as many ports don't implement support for
@@ -772,7 +772,7 @@ double wxWindowBase::GetDPIScaleFactor() const
 static int wxGetMetricOrDefault(wxSystemMetric what, const wxWindowBase* win)
 {
     int rc = wxSystemSettings::GetMetric(
-        what, static_cast<const wxWindow*>(win));
+        what, dynamic_cast<const wxWindow*>(win));
     if ( rc == -1 )
     {
         switch ( what )
@@ -1720,7 +1720,7 @@ void wxWindowBase::SetPalette(const wxPalette& pal)
 
 wxWindow *wxWindowBase::GetAncestorWithCustomPalette() const
 {
-    wxWindow* win = const_cast<wxWindow*>(static_cast<const wxWindow*>(this));
+    wxWindow* win = const_cast<wxWindow*>(dynamic_cast<const wxWindow*>(this));
     while ( win && !win->HasCustomPalette() )
     {
         win = win->GetParent();
@@ -1754,10 +1754,10 @@ void wxWindowBase::SetValidator(const wxValidator& validator)
 {
     delete m_windowValidator;
 
-    m_windowValidator = static_cast<wxValidator *>(validator.Clone());
+    m_windowValidator = dynamic_cast<wxValidator *>(validator.Clone());
 
     if ( m_windowValidator )
-        m_windowValidator->SetWindow(static_cast<wxWindow*>(this));
+        m_windowValidator->SetWindow(dynamic_cast<wxWindow*>(this));
 }
 #endif // wxUSE_VALIDATORS
 
@@ -1805,7 +1805,7 @@ void wxWindowBase::ClearBackground()
 wxWindow *wxWindowBase::FindWindow(long id) const
 {
     if ( id == m_windowId )
-        return const_cast<wxWindow*>(static_cast<const wxWindow*>(this));
+        return const_cast<wxWindow*>(dynamic_cast<const wxWindow*>(this));
 
     wxWindowBase *res = nullptr;
     wxWindowList::compatibility_iterator node;
@@ -1821,13 +1821,13 @@ wxWindow *wxWindowBase::FindWindow(long id) const
         res = child->FindWindow( id );
     }
 
-    return static_cast<wxWindow*>(res);
+    return dynamic_cast<wxWindow*>(res);
 }
 
 wxWindow *wxWindowBase::FindWindow(const wxString& name) const
 {
     if ( name == m_windowName )
-        return const_cast<wxWindow*>(static_cast<const wxWindow*>(this));
+        return const_cast<wxWindow*>(dynamic_cast<const wxWindow*>(this));
 
     wxWindowBase *res = nullptr;
     wxWindowList::compatibility_iterator node;
@@ -1842,7 +1842,7 @@ wxWindow *wxWindowBase::FindWindow(const wxString& name) const
         res = child->FindWindow(name);
     }
 
-    return static_cast<wxWindow*>(res);
+    return dynamic_cast<wxWindow*>(res);
 }
 
 
@@ -1894,7 +1894,7 @@ wxWindow *wxFindWindowRecursively(const wxWindow *parent,
           node = node->GetNext() )
     {
         // recursively check each child
-        wxWindow* win = static_cast<wxWindow*>(node->GetData());
+        auto* win = dynamic_cast<wxWindow*>(node->GetData());
         wxWindow *retwin = wxFindWindowRecursively(win, label, id, cmp);
         if (retwin)
             return retwin;
@@ -1977,7 +1977,7 @@ class ValidationTraverserBase
 {
 public:
     explicit ValidationTraverserBase(wxWindowBase* win)
-        : m_win(static_cast<wxWindow*>(win))
+        : m_win(dynamic_cast<wxWindow*>(win))
     {
     }
 
@@ -2004,7 +2004,7 @@ public:
               i != children.end();
               ++i )
         {
-            wxWindow* const child = static_cast<wxWindow*>(*i);
+            auto* const child = dynamic_cast<wxWindow*>(*i);
 
             // Notice that validation should never recurse into top level
             // children, e.g. some other dialog which might happen to be
@@ -2857,7 +2857,7 @@ wxWindowBase::ToDIP(const wxSize& sz, const wxWindowBase* w)
 wxSize wxWindowBase::GetDlgUnitBase() const
 {
     const wxWindowBase* const parent =
-        wxGetTopLevelParent(const_cast<wxWindow*>(static_cast<const wxWindow*>(this)));
+        wxGetTopLevelParent(const_cast<wxWindow*>(dynamic_cast<const wxWindow*>(this)));
 
     wxCHECK_MSG( parent, wxDefaultSize, wxS("Must have TLW parent") );
 
@@ -2952,7 +2952,7 @@ bool wxWindowBase::PopupMenu(wxMenu *menu, int x, int y)
     wxCHECK_MSG( menu, false, "can't popup NULL menu" );
 
     wxMenuInvokingWindowSetter
-        setInvokingWin(*menu, static_cast<wxWindow *>(this));
+        setInvokingWin(*menu, dynamic_cast<wxWindow *>(this));
 
     wxCurrentPopupMenu = menu;
     const bool rc = DoPopupMenu(menu, x, y);
@@ -3251,7 +3251,7 @@ void wxWindowBase::CaptureMouse()
 
     DoCaptureMouse();
 
-    wxMouseCapture::cap_stack.push_back(static_cast<wxWindow*>(this));
+    wxMouseCapture::cap_stack.push_back(dynamic_cast<wxWindow*>(this));
 }
 
 void wxWindowBase::ReleaseMouse()
@@ -3417,7 +3417,7 @@ wxWindow *wxWindowBase::DoGetSibling(WindowOrder order) const
                     wxT("GetPrev/NextSibling() don't work for TLWs!") );
 
     wxWindowList& siblings = GetParent()->GetChildren();
-    wxWindowList::compatibility_iterator i = siblings.Find(static_cast<const wxWindow*>(this));
+    wxWindowList::compatibility_iterator i = siblings.Find(dynamic_cast<const wxWindow*>(this));
     wxCHECK_MSG( i, nullptr, wxT("window not a child of its parent?") );
 
     if ( order == OrderBefore )
@@ -3582,7 +3582,7 @@ void wxWindowBase::DragAcceptFiles(bool accept)
 
 wxWindow* wxGetTopLevelParent(wxWindowBase *win_)
 {
-    wxWindow* win = static_cast<wxWindow *>(win_);
+    auto* win = dynamic_cast<wxWindow *>(win_);
     while ( win && !win->IsTopLevel() )
          win = win->GetParent();
 

@@ -2200,7 +2200,7 @@ void wxGDIPlusContext::DrawBitmap( const wxGraphicsBitmap &bmp, double x, double
    if (m_composition == wxCOMPOSITION_DEST)
         return;
 
-    Bitmap* image = static_cast<wxGDIPlusBitmapData*>(bmp.GetRefData())->GetGDIPlusBitmap();
+    Bitmap* image = dynamic_cast<wxGDIPlusBitmapData*>(bmp.GetRefData())->GetGDIPlusBitmap();
     if ( image )
     {
         if( image->GetWidth() != (UINT) w || image->GetHeight() != (UINT) h )
@@ -2434,7 +2434,7 @@ bool wxGDIPlusContext::ShouldOffset() const
     if (!m_enableOffset || m_pen.IsNull())
         return false;
 
-    double width = static_cast<wxGDIPlusPenData*>(m_pen.GetRefData())->GetWidth();
+    double width = dynamic_cast<wxGDIPlusPenData*>(m_pen.GetRefData())->GetWidth();
 
     // always offset for 1-pixel width
     if (width <= 0)
@@ -2920,7 +2920,7 @@ wxImage wxGDIPlusRenderer::CreateImageFromBitmap(const wxGraphicsBitmap& bmp)
 {
     ENSURE_LOADED_OR_RETURN(wxNullImage);
     const wxGDIPlusBitmapData* const
-        data = static_cast<wxGDIPlusBitmapData*>(bmp.GetGraphicsData());
+        data = dynamic_cast<wxGDIPlusBitmapData*>(bmp.GetGraphicsData());
 
     return data ? data->ConvertToImage() : wxNullImage;
 }

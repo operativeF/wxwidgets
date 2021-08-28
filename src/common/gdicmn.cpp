@@ -577,7 +577,7 @@ const wxCursor* wxStockGDI::GetCursor(Item item)
 
 const wxFont* wxStockGDI::GetFont(Item item)
 {
-    wxFont* font = static_cast<wxFont*>(ms_stockObject[item]);
+    wxFont* font = dynamic_cast<wxFont*>(ms_stockObject[item]);
     if (font == nullptr)
     {
         switch (item)

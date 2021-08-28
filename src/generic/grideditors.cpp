@@ -654,7 +654,7 @@ void wxGridCellTextEditor::SetParameters(const std::string& params)
 #if wxUSE_VALIDATORS
 void wxGridCellTextEditor::SetValidator(const wxValidator& validator)
 {
-    m_validator.reset(static_cast<wxValidator*>(validator.Clone()));
+    m_validator.reset(dynamic_cast<wxValidator*>(validator.Clone()));
     if ( m_validator && IsCreated() )
         Text()->SetValidator(*m_validator);
 }

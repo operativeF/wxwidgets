@@ -1371,7 +1371,7 @@ void wxPGProperty::SetValue( wxVariant value, wxVariant* pList, int flags )
             // GetPropertyByNameWH(). This optimizes for full list parsing.
             for ( node = list.begin(); node != list.end(); ++node )
             {
-                wxVariant& childValue = *const_cast<wxVariant*>(*node);
+                auto& childValue = *static_cast<wxVariant*>(*node);
                 wxPGProperty* child = GetPropertyByNameWH(childValue.GetName(), i);
                 if ( child )
                 {

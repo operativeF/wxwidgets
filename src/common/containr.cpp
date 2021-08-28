@@ -478,8 +478,8 @@ void wxControlContainer::HandleOnNavigationKey( wxNavigationKeyEvent& event )
                   wxIsKindOf(m_winLastFocused, wxRadioButton) &&
                   !m_winLastFocused->HasFlag(wxRB_SINGLE) )
         {
-            wxRadioButton * const
-                lastBtn = static_cast<wxRadioButton *>(m_winLastFocused);
+            wxRadioButton* const
+                lastBtn = dynamic_cast<wxRadioButton *>(m_winLastFocused);
 
             // cursor keys don't navigate out of a radio button group so
             // find the correct radio button to focus

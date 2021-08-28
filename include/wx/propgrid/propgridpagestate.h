@@ -247,7 +247,7 @@ public:
     wxPGIterator operator++(int) { wxPGIterator it = *this; Next(); return it; }
     wxPGIterator& operator--() { Prev(); return *this; }
     wxPGIterator operator--(int) { wxPGIterator it = *this; Prev(); return it; }
-    PROPERTY* operator *() const { return const_cast<PROPERTY*>(m_property); }
+    PROPERTY* operator *() const { return static_cast<PROPERTY*>(m_property); }
     static PROPERTY* OneStep(STATE* state, int flags = wxPG_ITERATE_DEFAULT,
                              PROPERTY* property = NULL, int dir = 1)
     {

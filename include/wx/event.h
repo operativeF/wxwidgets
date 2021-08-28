@@ -354,7 +354,7 @@ struct HandlerImpl<T, A, true>
     static bool IsEvtHandler()
         { return true; }
     static T *ConvertFromEvtHandler(wxEvtHandler *p)
-        { return static_cast<T *>(p); }
+        { return dynamic_cast<T *>(p); }
     static wxEvtHandler *ConvertToEvtHandler(T *p)
         { return p; }
     static wxEventFunction ConvertToEvtMethod(void (T::*f)(A&))

@@ -374,7 +374,7 @@ wxGDIImageRefData *wxBitmap::CreateData() const
 
 wxGDIRefData *wxBitmap::CloneGDIRefData(const wxGDIRefData *data) const
 {
-    return new wxBitmapRefData(*static_cast<const wxBitmapRefData *>(data));
+    return new wxBitmapRefData(*dynamic_cast<const wxBitmapRefData *>(data));
 }
 
 #if wxUSE_WXDIB

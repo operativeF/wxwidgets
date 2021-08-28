@@ -780,8 +780,8 @@ void wxApp::MSWProcessPendingEventsIfNeeded()
 {
     // The cast below is safe as wxEventLoop derives from wxMSWEventLoopBase in
     // both console and GUI applications.
-    wxMSWEventLoopBase * const evtLoop =
-        static_cast<wxMSWEventLoopBase *>(wxEventLoop::GetActive());
+    auto* const evtLoop =
+        dynamic_cast<wxMSWEventLoopBase *>(wxEventLoop::GetActive());
     if ( evtLoop && evtLoop->MSWIsWakeUpRequested() )
         ProcessPendingEvents();
 }

@@ -791,6 +791,7 @@ bool wxGLCanvas::SwapBuffers()
 /* static */
 bool wxGLCanvasBase::IsExtensionSupported(const char *extension)
 {
+    // FIXME: Use something other than wxUIntPtr.
     static const char *s_extensionsList = (char *)wxUIntPtr(-1);
     if ( s_extensionsList == (char *)wxUIntPtr(-1) )
     {

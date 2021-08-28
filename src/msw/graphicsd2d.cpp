@@ -1188,7 +1188,7 @@ void wxD2DMatrixData::Concat(const wxGraphicsMatrixData* t)
     // Elements of resulting matrix are modified in-place in SetProduct()
     // so multiplied matrices cannot be the instances of the resulting matrix.
     // Note that parameter matrix (t) is the multiplicand.
-    const D2D1::Matrix3x2F m1(static_cast<const wxD2DMatrixData*>(t)->m_matrix);
+    const D2D1::Matrix3x2F m1(dynamic_cast<const wxD2DMatrixData*>(t)->m_matrix);
     const D2D1::Matrix3x2F m2(m_matrix);
     m_matrix.SetProduct(m1, m2);
 }
@@ -1220,7 +1220,7 @@ void wxD2DMatrixData::Invert()
 
 bool wxD2DMatrixData::IsEqual(const wxGraphicsMatrixData* t) const
 {
-    return m_matrix == static_cast<const wxD2DMatrixData*>(t)->m_matrix;
+    return m_matrix == dynamic_cast<const wxD2DMatrixData*>(t)->m_matrix;
 }
 
 bool wxD2DMatrixData::IsIdentity() const
@@ -1894,7 +1894,7 @@ void wxD2DPathData::GetCurrentPoint(double* x, double* y) const
 void wxD2DPathData::AddPath(const wxGraphicsPathData* path)
 {
     wxD2DPathData* pathSrc =
-         const_cast<wxD2DPathData*>(static_cast<const wxD2DPathData*>(path));
+         const_cast<wxD2DPathData*>(dynamic_cast<const wxD2DPathData*>(path));
 
     // Nothing to do if geometry of appended path is not initialized.
     if ( pathSrc->m_pathGeometry == nullptr || pathSrc->m_geometrySink == nullptr )
@@ -2031,7 +2031,7 @@ void wxD2DPathData::Transform(const wxGraphicsMatrixData* matrix)
     // ID2D1Factory::CreateGeometryGroup() from the collection
     // of stored geometries will act as a proxy geometry.
 
-    const D2D1::Matrix3x2F* m = static_cast<D2D1::Matrix3x2F*>(matrix->GetNativeMatrix());
+    const auto* m = static_cast<D2D1::Matrix3x2F*>(matrix->GetNativeMatrix());
 
     // Save current positional data.
     GeometryStateData curState;
@@ -2106,7 +2106,7 @@ bool wxD2DPathData::Contains(double x, double y, wxPolygonFillMode fillStyle) co
 
 wxD2DPathData* wxGetD2DPathData(const wxGraphicsPath& path)
 {
-    return static_cast<wxD2DPathData*>(path.GetGraphicsData());
+    return dynamic_cast<wxD2DPathData*>(path.GetGraphicsData());
 }
 
 // This utility class is used to read a color value with the format
@@ -2669,7 +2669,7 @@ wxCOMPtr<ID2D1Bitmap> wxD2DBitmapData::GetD2DBitmap()
 
 wxD2DBitmapData* wxGetD2DBitmapData(const wxGraphicsBitmap& bitmap)
 {
-    return static_cast<wxD2DBitmapData*>(bitmap.GetRefData());
+    return dynamic_cast<wxD2DBitmapData*>(bitmap.GetRefData());
 }
 
 // Helper class used to create and safely release a ID2D1GradientStopCollection from wxGraphicsGradientStops
@@ -3162,7 +3162,7 @@ ID2D1StrokeStyle* wxD2DPenData::GetStrokeStyle()
 
 wxD2DPenData* wxGetD2DPenData(const wxGraphicsPen& pen)
 {
-    return static_cast<wxD2DPenData*>(pen.GetGraphicsData());
+    return dynamic_cast<wxD2DPenData*>(pen.GetGraphicsData());
 }
 
 class wxD2DFontData : public wxGraphicsObjectRefData
@@ -3361,7 +3361,7 @@ wxCOMPtr<IDWriteTextLayout> wxD2DFontData::CreateTextLayout(std::string_view tex
 
 wxD2DFontData* wxGetD2DFontData(const wxGraphicsFont& font)
 {
-    return static_cast<wxD2DFontData*>(font.GetGraphicsData());
+    return dynamic_cast<wxD2DFontData*>(font.GetGraphicsData());
 }
 
 // A render target resource holder exposes methods relevant
@@ -3535,7 +3535,7 @@ private:
     // ID2D1RenderTarget* to the actual implementation type
     ImplementationType GetRenderTarget()
     {
-        return static_cast<ImplementationType>(GetD2DResource().get());
+        return dynamic_cast<ImplementationType>(GetD2DResource().get());
     }
 
     HWND m_hwnd;
@@ -5373,7 +5373,7 @@ ID2D1Factory* wxD2DRenderer::GetD2DFactory()
 
 ID2D1Factory* wxGetD2DFactory(wxGraphicsRenderer* renderer)
 {
-    return static_cast<wxD2DRenderer*>(renderer)->GetD2DFactory();
+    return dynamic_cast<wxD2DRenderer*>(renderer)->GetD2DFactory();
 }
 
 // ----------------------------------------------------------------------------

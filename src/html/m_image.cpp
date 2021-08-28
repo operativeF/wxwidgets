@@ -651,7 +651,7 @@ wxHtmlLinkInfo *wxHtmlImageCell::GetLink( int x, int y ) const
             m_mapName.Clear();
             return wxHtmlCell::GetLink( x, y );
         }
-        m_imageMap = static_cast<const wxHtmlImageMapCell*>(cell);
+        m_imageMap = dynamic_cast<const wxHtmlImageMapCell*>(cell);
     }
     return m_imageMap->GetLink(x, y);
 }

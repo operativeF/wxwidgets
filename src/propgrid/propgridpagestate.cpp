@@ -1406,7 +1406,7 @@ void wxPropertyGridPageState::DoSetPropertyValues( const wxVariantList& list, wx
     // Second pass for special entries
     for ( node = list.begin(); node != list.end(); ++node )
     {
-        wxVariant *current = const_cast<wxVariant*>(*node);
+        auto* current = static_cast<wxVariant*>(*node);
 
         // Make sure it is wxVariant.
         wxASSERT( current );
@@ -1469,7 +1469,7 @@ void wxPropertyGridPageState::DoSetPropertyValues( const wxVariantList& list, wx
     {
         for ( node = list.begin(); node != list.end(); ++node )
         {
-            wxVariant *current = const_cast<wxVariant*>(*node);
+            auto* current = static_cast<wxVariant*>(*node);
 
             const wxString& name = current->GetName();
             if ( !name.empty() )
@@ -1500,7 +1500,7 @@ void wxPropertyGridPageState::DoSetPropertyValues( const wxVariantList& list, wx
 
                                 for ( node2 = list2.begin(); node2 != list2.end(); ++node2 )
                                 {
-                                    wxVariant *attr = const_cast<wxVariant*>(*node2);
+                                    auto* attr = static_cast<wxVariant*>(*node2);
                                     foundProp->SetAttribute( attr->GetName(), *attr );
                                 }
                             }

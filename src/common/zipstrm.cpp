@@ -297,7 +297,7 @@ wxStoredInputStream::wxStoredInputStream(wxInputStream& stream)
 size_t wxStoredInputStream::OnSysRead(void *buffer, size_t size)
 {
     size_t count = gsl::narrow_cast<size_t>(
-                std::min(size + wxFileOffset(0), m_len - m_pos + size_t(0)));
+        std::min(size + wxFileOffset{0}, m_len - m_pos + size_t{0}));
     count = m_parent_i_stream->Read(buffer, count).LastRead();
     m_pos += count;
 
@@ -2226,7 +2226,7 @@ bool wxZipOutputStream::PutNextEntry(wxArchiveEntry *entry)
 bool wxZipOutputStream::CopyEntry(wxArchiveEntry *entry,
                                   wxArchiveInputStream& stream)
 {
-    auto* zipEntry = static_cast<wxZipEntry*>(entry);
+    auto* zipEntry = dynamic_cast<wxZipEntry*>(entry);
 
     if (!zipEntry || !stream.OpenEntry(*zipEntry)) {
         delete entry;

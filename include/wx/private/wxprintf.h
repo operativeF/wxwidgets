@@ -340,8 +340,8 @@ bool wxPrintfConvSpec<CharType>::Parse(const CharType *format)
                 {
                     int len = 0;
                     CHECK_PREC
-                    while ( (*m_pArgEnd >= CharType('0')) &&
-                            (*m_pArgEnd <= CharType('9')) )
+                        while ( (*m_pArgEnd >= CharType{'0'}) &&
+                            (*m_pArgEnd <= CharType{'9'}) )
                     {
                         m_szFlags[flagofs++] = char(*m_pArgEnd);
                         len = len*10 + (*m_pArgEnd - wxT('0'));

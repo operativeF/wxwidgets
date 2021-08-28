@@ -3976,9 +3976,10 @@ void wxAuiManager::OnFindManager(wxAuiManagerEvent& evt)
     }
 
     // if we are managing a child frame, get the 'real' manager
+    // FIXME: stupid.
     if (wxDynamicCast(window, wxAuiFloatingFrame))
     {
-        wxAuiFloatingFrame* float_frame = static_cast<wxAuiFloatingFrame*>(window);
+        auto* float_frame = dynamic_cast<wxAuiFloatingFrame*>(window);
         evt.SetManager(float_frame->GetOwnerManager());
         return;
     }
@@ -4200,7 +4201,7 @@ bool wxAuiManager::DoEndResizeAction(wxMouseEvent& event)
         // height decreases accordingly
         if (wxDynamicCast(m_frame, wxFrame))
         {
-            wxFrame* frame = static_cast<wxFrame*>(m_frame);
+            auto* frame = dynamic_cast<wxFrame*>(m_frame);
             wxStatusBar* status = frame->GetStatusBar();
             if (status)
             {

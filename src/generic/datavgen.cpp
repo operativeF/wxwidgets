@@ -305,7 +305,7 @@ public:
 	wxDataViewHeaderWindow& operator=(const wxDataViewHeaderWindow&) = delete;
 
     wxDataViewCtrl *GetOwner() const
-        { return static_cast<wxDataViewCtrl *>(GetParent()); }
+        { return dynamic_cast<wxDataViewCtrl *>(GetParent()); }
 
     // Add/Remove additional column to sorting columns
     void ToggleSortByColumn(int column)
@@ -3006,7 +3006,7 @@ void wxDataViewMainWindow::FinishEditing()
 
 void wxDataViewHeaderWindow::FinishEditing()
 {
-    wxDataViewMainWindow *win = static_cast<wxDataViewMainWindow*>(GetOwner()->GetMainWindow());
+    auto* win = dynamic_cast<wxDataViewMainWindow*>(GetOwner()->GetMainWindow());
     win->FinishEditing();
 }
 
@@ -3788,8 +3788,7 @@ int wxDataViewMainWindow::QueryAndCacheLineHeight(unsigned int row, wxDataViewIt
         if ( !model->HasValue(item, col) )
             continue;      // skip it!
 
-        wxDataViewRenderer *renderer =
-            const_cast<wxDataViewRenderer*>(column->GetRenderer());
+        wxDataViewRenderer* renderer = column->GetRenderer();
         renderer->PrepareForItem(model, item, column->GetModelColumn());
 
         height = std::max(height, renderer->GetSize().y);
@@ -5990,8 +5989,7 @@ unsigned int wxDataViewCtrl::GetBestColumnWidth(int idx) const
 
     const int count = m_clientArea->GetRowCount();
     wxDataViewColumn *column = GetColumn(idx);
-    wxDataViewRenderer *renderer =
-        const_cast<wxDataViewRenderer*>(column->GetRenderer());
+    wxDataViewRenderer* renderer = column->GetRenderer();
 
     wxDataViewMaxWidthCalculator calculator(this, m_clientArea, renderer,
                                             GetModel(), column->GetModelColumn(),
