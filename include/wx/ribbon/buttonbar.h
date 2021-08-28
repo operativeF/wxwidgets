@@ -20,7 +20,7 @@
 
 class wxRibbonButtonBarButtonBase;
 class wxRibbonButtonBarLayout;
-class wxRibbonButtonBarButtonInstance;
+struct wxRibbonButtonBarButtonInstance;
 
 WX_DEFINE_USER_EXPORTED_ARRAY_PTR(wxRibbonButtonBarLayout*, wxArrayRibbonButtonBarLayout, class WXDLLIMPEXP_RIBBON);
 WX_DEFINE_USER_EXPORTED_ARRAY_PTR(wxRibbonButtonBarButtonBase*, wxArrayRibbonButtonBarButtonBase, class WXDLLIMPEXP_RIBBON);
