@@ -21,6 +21,8 @@
 
 #include <iterator>
 
+#include <gsl/gsl>
+
 // ----------------------------------------------------------------------------
 // constants
 // ----------------------------------------------------------------------------
@@ -2069,7 +2071,7 @@ public:
     // return the position at which the column with the given index is
     // displayed: notice that this is a slow operation as we don't maintain the
     // reverse mapping currently
-    int GetColPos(int idx) const
+    gsl::index GetColPos(int idx) const
     {
         wxASSERT_MSG( idx >= 0 && idx < m_numCols, "invalid column index" );
 

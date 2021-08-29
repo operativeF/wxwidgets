@@ -1503,15 +1503,13 @@ wxString wxAuiManager::SavePerspective()
     result.Alloc(500);
     result = wxT("layout2|");
 
-    int pane_i, pane_count = m_panes.GetCount();
-    for (pane_i = 0; pane_i < pane_count; ++pane_i)
+    for (std::size_t pane_i{0}; pane_i != m_panes.GetCount(); ++pane_i)
     {
         wxAuiPaneInfo& pane = m_panes.Item(pane_i);
         result += SavePaneInfo(pane)+wxT("|");
     }
 
-    int dock_i, dock_count = m_docks.GetCount();
-    for (dock_i = 0; dock_i < dock_count; ++dock_i)
+    for (std::size_t dock_i{0}; dock_i != m_docks.GetCount(); ++dock_i)
     {
         wxAuiDockInfo& dock = m_docks.Item(dock_i);
 
