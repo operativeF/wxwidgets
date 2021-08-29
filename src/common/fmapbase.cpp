@@ -20,6 +20,10 @@
     #include "wx/intl.h"
     #include "wx/module.h"
     #include "wx/wxcrtvararg.h"
+
+    #include <array>
+    #include <string>
+    #include <string_view>
 #endif //WX_PRECOMP
 
 #if defined(__WINDOWS__)
@@ -39,10 +43,7 @@
     #include "wx/memconf.h"
 #endif
 
-#include <array>
 #include <cwctype>
-#include <string>
-#include <string_view>
 
 // ----------------------------------------------------------------------------
 // constants

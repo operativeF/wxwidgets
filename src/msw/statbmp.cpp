@@ -21,6 +21,8 @@
     #include "wx/window.h"
     #include "wx/icon.h"
     #include "wx/dcclient.h"
+
+    #include <string>
 #endif
 
 #include "wx/msw/private.h"
@@ -29,7 +31,6 @@
 
 #include "wx/sysopt.h"
 
-#include <string>
 
 // ---------------------------------------------------------------------------
 // macros

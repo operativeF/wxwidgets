@@ -19,6 +19,8 @@
     #include "wx/log.h"
     #include "wx/utils.h"
     #include "wx/hashmap.h"
+
+    #include <unordered_map>
 #endif
 
 #include "wx/strconv.h"
@@ -41,8 +43,6 @@
 #ifdef __DARWIN__
 #include "wx/osx/core/private/strconv_cf.h"
 #endif //def __DARWIN__
-
-#include <unordered_map>
 
 constexpr wxChar TRACE_STRCONV[] = wxT("strconv");
 

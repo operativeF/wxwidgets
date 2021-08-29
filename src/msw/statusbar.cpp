@@ -24,6 +24,8 @@
     #include "wx/intl.h"
     #include "wx/log.h"
     #include "wx/control.h"
+
+    #include <boost/nowide/convert.hpp>
 #endif
 
 #include "wx/msw/private.h"
@@ -35,8 +37,6 @@
 #endif
 
 #include <numeric>
-
-#include <boost/nowide/convert.hpp>
 
 // ----------------------------------------------------------------------------
 // constants

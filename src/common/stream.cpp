@@ -19,15 +19,15 @@
 
 #ifndef WX_PRECOMP
     #include "wx/log.h"
+
+    #include <string>
+
+    #include <gsl/gsl>
 #endif
 
 #include "wx/datstrm.h"
 #include "wx/scopeguard.h"
 #include "wx/textfile.h"
-
-#include <string>
-
-#include <gsl/gsl>
 
 // ----------------------------------------------------------------------------
 // constants

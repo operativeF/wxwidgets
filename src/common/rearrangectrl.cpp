@@ -17,11 +17,12 @@
     #include "wx/button.h"
     #include "wx/stattext.h"
     #include "wx/sizer.h"
+
+    #include <gsl/gsl>
 #endif // WX_PRECOMP
 
 #include "wx/rearrangectrl.h"
 
-#include <gsl/gsl>
 
 // ============================================================================
 // wxRearrangeList implementation

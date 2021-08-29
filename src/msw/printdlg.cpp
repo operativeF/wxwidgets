@@ -21,6 +21,8 @@
     #include "wx/app.h"
     #include "wx/dcprint.h"
     #include "wx/cmndata.h"
+
+    #include <boost/nowide/stackstring.hpp>
 #endif
 
 #include "wx/printdlg.h"
@@ -31,7 +33,6 @@
 
 #include <cstdlib>
 
-#include <boost/nowide/stackstring.hpp>
 
 // smart pointer like class using OpenPrinter and ClosePrinter
 class WinPrinter

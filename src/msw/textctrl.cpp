@@ -27,6 +27,10 @@
     #include "wx/math.h"
     #include "wx/module.h"
     #include "wx/wxcrtvararg.h"
+
+    #include <boost/nowide/convert.hpp>
+
+    #include <string>
 #endif
 
 #include "wx/fontutil.h"
@@ -74,9 +78,6 @@
 
 #include "wx/msw/missing.h"
 
-#include <boost/nowide/convert.hpp>
-
-#include <string>
 
 #ifndef CFM_BACKCOLOR
     #define CFM_BACKCOLOR 0x04000000

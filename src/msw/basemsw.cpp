@@ -14,6 +14,8 @@
 
 #ifndef WX_PRECOMP
     #include "wx/event.h"
+
+    #include <boost/nowide/convert.hpp>
 #endif //WX_PRECOMP
 
 #include "wx/apptrait.h"
@@ -28,7 +30,6 @@
 #include "wx/msw/private.h"
 
 #include <fmt/printf.h>
-#include <boost/nowide/convert.hpp>
 
 // ============================================================================
 // wxAppTraits implementation

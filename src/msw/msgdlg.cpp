@@ -21,6 +21,9 @@
     #include "wx/utils.h"
     #include "wx/msw/private.h"
     #include "wx/hashmap.h"
+
+    #include <boost/nowide/convert.hpp>
+    #include <boost/nowide/stackstring.hpp>
 #endif
 
 #include "wx/ptr_scpd.h"
@@ -33,8 +36,6 @@
 #include "wx/textbuf.h"
 #include "wx/display.h"
 
-#include <boost/nowide/convert.hpp>
-#include <boost/nowide/stackstring.hpp>
 
 // Interestingly, this symbol currently seems to be absent from Platform SDK
 // headers but it is documented at MSDN.

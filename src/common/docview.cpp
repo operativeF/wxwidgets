@@ -30,6 +30,11 @@
     #include "wx/msgdlg.h"
     #include "wx/mdi.h"
     #include "wx/choicdlg.h"
+
+    #include <iostream>
+    #include <vector>
+
+    #include <gsl/gsl>
 #endif
 
 #if wxUSE_PRINTING_ARCHITECTURE
@@ -45,16 +50,12 @@
 #include "wx/tokenzr.h"
 #include "wx/filename.h"
 #include "wx/stdpaths.h"
-#include <vector>
 #include "wx/scopedarray.h"
 
 #include "wx/scopeguard.h"
 #include "wx/except.h"
 
 #include <fstream>
-#include <iostream>
-
-#include <gsl/gsl>
 
 // ----------------------------------------------------------------------------
 // wxWidgets macros

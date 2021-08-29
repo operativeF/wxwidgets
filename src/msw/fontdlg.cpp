@@ -23,12 +23,13 @@
     #include "wx/dialog.h"
     #include "wx/log.h"
     #include "wx/math.h"
+
+    #include <boost/nowide/convert.hpp>
 #endif
 
 #include "wx/fontutil.h"
 #include "wx/msw/private/dpiaware.h"
 
-#include <boost/nowide/convert.hpp>
 
 // ----------------------------------------------------------------------------
 // wxWin macros

@@ -27,6 +27,8 @@
     #include "wx/msw/wrapcctl.h"
     #include "wx/msw/private.h"
     #include "wx/msw/missing.h"
+
+    #include <boost/nowide/convert.hpp>
 #endif
 
 #include "wx/imaglist.h"
@@ -36,8 +38,6 @@
 #include "wx/msw/private/winstyle.h"
 #include "wx/msw/uxtheme.h"
 #include "wx/private/window.h"
-
-#include <boost/nowide/convert.hpp>
 
 #if wxUSE_MARKUP
     #include "wx/generic/private/markuptext.h"

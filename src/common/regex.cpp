@@ -22,6 +22,8 @@
     #include "wx/log.h"
     #include "wx/intl.h"
     #include "wx/crt.h"
+
+    #include <gsl/gsl>
 #endif //WX_PRECOMP
 
 // At least FreeBSD requires this.
@@ -30,8 +32,6 @@
 #endif
 
 #include <regex.h>
-
-#include <gsl/gsl>
 
 // WXREGEX_USING_BUILTIN    defined when using the built-in regex lib
 // WXREGEX_USING_RE_SEARCH  defined when using re_search in the GNU regex lib

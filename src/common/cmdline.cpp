@@ -18,6 +18,8 @@
     #include "wx/log.h"
     #include "wx/intl.h"
     #include "wx/app.h"
+    
+    #include <vector>
 #endif //WX_PRECOMP
 
 #include "wx/cmdline.h"
@@ -25,7 +27,6 @@
 #if wxUSE_CMDLINE_PARSER
 
 #include <clocale>             // for LC_ALL
-#include <vector>
 
 #include "wx/datetime.h"
 #include "wx/msgout.h"

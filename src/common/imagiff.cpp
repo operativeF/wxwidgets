@@ -20,6 +20,8 @@
 #ifndef WX_PRECOMP
     #include "wx/log.h"
     #include "wx/intl.h"
+
+    #include <array>
 #endif
 
 #include "wx/imagiff.h"
@@ -28,8 +30,6 @@
 #if wxUSE_PALETTE
     #include "wx/palette.h"
 #endif // wxUSE_PALETTE
-
-#include <array>
 
 // --------------------------------------------------------------------------
 // Constants

@@ -19,6 +19,8 @@
     #include "wx/settings.h"
     #include "wx/bitmap.h"
     #include "wx/menu.h"
+
+    #include <array>
 #endif
 
 #include "wx/renderer.h"
@@ -29,8 +31,6 @@
 #ifdef __WXMAC__
 #include "wx/osx/private.h"
 #endif
-
-#include <array>
 
 // -- GUI helper classes and functions --
 

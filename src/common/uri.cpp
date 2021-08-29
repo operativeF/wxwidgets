@@ -15,11 +15,12 @@
 
 #ifndef WX_PRECOMP
     #include "wx/crt.h"
+
+    #include <vector>
 #endif
 
 #include "wx/uri.h"
 
-#include <vector>
 
 // ---------------------------------------------------------------------------
 // definitions

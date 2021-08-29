@@ -14,6 +14,9 @@
 #ifndef WX_PRECOMP
     #include "wx/icon.h"
     #include "wx/toplevel.h"
+
+    #include <boost/nowide/convert.hpp>
+    #include <boost/nowide/stackstring.hpp>
 #endif
 
 #if wxUSE_TASKBARBUTTON
@@ -35,8 +38,6 @@
     #include "wx/dynlib.h"
 #endif // wxUSE_DYNLIB_CLASS
 
-#include <boost/nowide/convert.hpp>
-#include <boost/nowide/stackstring.hpp>
 
 // ----------------------------------------------------------------------------
 // Redefine the interfaces: ITaskbarList3, IObjectCollection,

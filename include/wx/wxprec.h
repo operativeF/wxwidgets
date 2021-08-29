@@ -41,4 +41,23 @@
 // include the most common wx headers
 #include "wx/wx.h"
 
+// Include standard headers
+#include <algorithm>
+#include <array>
+#include <cmath>
+#include <cstdlib>
+#include <iostream>
+#include <memory>
+#include <span>
+#include <string>
+#include <string_view>
+#include <unordered_map>
+#include <vector>
+
+// Include external library headers that are necessary.
+#include <fmt/core.h>
+#include <boost/nowide/convert.hpp>
+#include <boost/nowide/stackstring.hpp>
+#include <gsl/gsl>
+
 #endif // WX_PRECOMP

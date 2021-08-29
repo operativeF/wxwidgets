@@ -24,6 +24,9 @@
     #include "wx/dialog.h"
     #include "wx/log.h"
     #include "wx/app.h"     // for GetComCtl32Version()
+
+    #include <boost/nowide/convert.hpp>
+    #include <boost/nowide/stackstring.hpp>
 #endif
 
 #include "wx/msw/private.h"
@@ -34,8 +37,6 @@
 
 #include <initguid.h>
 
-#include <boost/nowide/convert.hpp>
-#include <boost/nowide/stackstring.hpp>
 
 // IFileOpenDialog implementation needs wxDynamicLibrary for
 // run-time linking SHCreateItemFromParsingName(), available

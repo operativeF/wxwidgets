@@ -23,15 +23,17 @@
     #include "wx/palette.h"
     #include "wx/intl.h"
     #include "wx/colour.h"
+
+    #include <algorithm>
+    
+    #include <gsl/gsl>
 #endif
 
 #include "wx/wfstream.h"
 #include "wx/xpmdecod.h"
 
-#include <algorithm>
 #include <cstring> // For memcpy
 
-#include <gsl/gsl>
 
 // make the code compile with either wxFile*Stream or wxFFile*Stream:
 #define HAS_FILE_STREAMS (wxUSE_STREAMS && (wxUSE_FILE || wxUSE_FFILE))

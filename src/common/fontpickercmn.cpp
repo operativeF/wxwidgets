@@ -18,12 +18,12 @@
 
 #ifndef WX_PRECOMP
     #include "wx/textctrl.h"
+
+    #include <fmt/core.h>
 #endif
 
 #include "wx/fontenum.h"
 #include "wx/tokenzr.h"
-
-#include <fmt/core.h>
 
 // ============================================================================
 // implementation

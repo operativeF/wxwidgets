@@ -19,11 +19,12 @@
     #include "wx/toplevel.h"
     #include "wx/log.h"
     #include "wx/module.h"
+
+    #include <string>
 #endif //WX_PRECOMP
 
 #include "wx/msw/uxtheme.h"
 
-#include <string>
 
 bool wxUxThemeIsActive()
 {

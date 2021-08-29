@@ -22,6 +22,8 @@
     #include "wx/dcmemory.h"
     #include "wx/image.h"
     #include "wx/sizer.h"
+
+    #include <boost/nowide/convert.hpp>
 #endif
 
 #include "wx/notebook.h"
@@ -36,7 +38,6 @@
 #include "wx/msw/dc.h"
 #include "wx/msw/private/winstyle.h"
 
-#include <boost/nowide/convert.hpp>
 
 namespace
 {

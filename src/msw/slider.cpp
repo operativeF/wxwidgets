@@ -20,11 +20,12 @@
 #ifndef WX_PRECOMP
     #include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
     #include "wx/brush.h"
+
+    #include <boost/nowide/convert.hpp>
 #endif
 
 #include "wx/msw/subwin.h"
 
-#include <boost/nowide/convert.hpp>
 
 // ----------------------------------------------------------------------------
 // constants

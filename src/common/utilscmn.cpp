@@ -56,6 +56,11 @@
             #include "wx/accel.h"
         #endif // wxUSE_ACCEL
     #endif // wxUSE_GUI
+
+    #include <algorithm>
+    #include <string>
+    #include <vector>
+
 #endif // WX_PRECOMP
 
 #include "wx/apptrait.h"
@@ -68,11 +73,8 @@
 #include "wx/versioninfo.h"
 #include "wx/math.h"
 
-#include <algorithm>
 #include <ctime>
-#include <string>
 #include <utility>
-#include <vector>
 
 #include "wx/vector.h"
 

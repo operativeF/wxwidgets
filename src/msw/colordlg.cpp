@@ -23,6 +23,10 @@
     #include "wx/math.h"
     #include "wx/msw/wrapcdlg.h"
     #include "wx/utils.h"
+
+    #include <string>
+
+    #include <boost/nowide/convert.hpp>
 #endif
 
 #include "wx/scopeguard.h"
@@ -30,9 +34,6 @@
 #include "wx/msw/private.h"
 #include "wx/msw/private/dpiaware.h"
 
-#include <string>
-
-#include <boost/nowide/convert.hpp>
 
 // ----------------------------------------------------------------------------
 // wxWin macros

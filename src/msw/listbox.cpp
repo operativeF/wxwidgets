@@ -26,6 +26,11 @@
     #include "wx/utils.h"
     #include "wx/log.h"
     #include "wx/window.h"
+    
+    #include <boost/nowide/convert.hpp>
+    #include <boost/nowide/stackstring.hpp>
+
+    #include <gsl/gsl>
 #endif
 
 #include "wx/msw/private.h"
@@ -33,10 +38,6 @@
 
 #include <windowsx.h>
 
-#include <boost/nowide/convert.hpp>
-#include <boost/nowide/stackstring.hpp>
-
-#include <gsl/gsl>
 
 #if wxUSE_OWNER_DRAWN
     #include  "wx/ownerdrw.h"

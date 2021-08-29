@@ -14,13 +14,13 @@
 
 #ifndef WX_PRECOMP
     #include "wx/palette.h"
+
+    #include <gsl/gsl>
 #endif
 
 #include "wx/imagtga.h"
 #include "wx/log.h"
 #include "wx/scopedarray.h"
-
-#include <gsl/gsl>
 
 // ----------------------------------------------------------------------------
 // constants

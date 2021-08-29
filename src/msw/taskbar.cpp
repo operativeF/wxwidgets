@@ -21,6 +21,8 @@
     #include "wx/utils.h"
     #include "wx/menu.h"
     #include "wx/app.h"
+
+    #include <boost/nowide/convert.hpp>
 #endif
 
 #include "wx/msw/wrapshl.h"
@@ -29,7 +31,6 @@
 #include "wx/platinfo.h"
 #include "wx/taskbar.h"
 
-#include <boost/nowide/convert.hpp>
 
 #ifndef NIN_BALLOONTIMEOUT
     #define NIN_BALLOONTIMEOUT      0x0404

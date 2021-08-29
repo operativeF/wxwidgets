@@ -20,9 +20,10 @@
     #include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
     #include "wx/msw/private.h"
     #include "wx/msw/missing.h"
+
+    #include <fmt/core.h>
 #endif
 
-#include <fmt/core.h>
 
 // ----------------------------------------------------------------------------
 // Definitions

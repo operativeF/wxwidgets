@@ -25,10 +25,11 @@
     #include "wx/stopwatch.h"
     #include "wx/dcclient.h"
     #include "wx/textctrl.h"
+
+    #include <vector>
 #endif
 
 #include "wx/imaglist.h"
-#include <vector>
 
 #include "wx/msw/private.h"
 #include "wx/msw/private/customdraw.h"

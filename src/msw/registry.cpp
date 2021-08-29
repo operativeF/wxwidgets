@@ -24,6 +24,8 @@
     #include "wx/log.h"
     #include "wx/crt.h"
     #include "wx/utils.h"
+
+    #include <fmt/core.h>
 #endif
 
 #include "wx/dynlib.h"
@@ -42,7 +44,6 @@
 #define   HKEY_DEFINED    // already defined in windows.h
 #include  "wx/msw/registry.h"
 
-#include <fmt/core.h>
 
 // some registry functions don't like signed chars
 using RegString = unsigned char *;

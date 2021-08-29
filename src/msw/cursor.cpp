@@ -23,6 +23,8 @@
     #include "wx/intl.h"
     #include "wx/image.h"
     #include "wx/module.h"
+
+    #include <boost/nowide/convert.hpp>
 #endif
 
 #include "wx/display.h"
@@ -30,7 +32,6 @@
 #include "wx/msw/private.h"
 #include "wx/msw/missing.h" // IDC_HAND
 
-#include <boost/nowide/convert.hpp>
 
 // ----------------------------------------------------------------------------
 // private classes

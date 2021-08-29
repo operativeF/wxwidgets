@@ -26,6 +26,11 @@
     #include "wx/accel.h"
     #include "wx/log.h"
     #include "wx/menu.h"
+
+    #include <string>
+
+    #include <boost/nowide/convert.hpp>
+    #include <boost/nowide/stackstring.hpp>
 #endif
 
 #if wxUSE_ACCEL
@@ -37,10 +42,6 @@
 #include "wx/stringutils.h"
 #include "wx/msw/uxtheme.h"
 
-#include <string>
-
-#include <boost/nowide/convert.hpp>
-#include <boost/nowide/stackstring.hpp>
 
 // ---------------------------------------------------------------------------
 // macro

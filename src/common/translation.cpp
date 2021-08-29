@@ -27,6 +27,12 @@
     #include "wx/utils.h"
     #include "wx/hashmap.h"
     #include "wx/module.h"
+
+    #include <algorithm>
+    #include <memory>
+    #include <vector>
+
+    #include <gsl/gsl>
 #endif // WX_PRECOMP
 
 #include "wx/dir.h"
@@ -51,11 +57,6 @@
     #include <CoreFoundation/CFLocale.h>
 #endif
 
-#include <algorithm>
-#include <memory>
-#include <vector>
-
-#include <gsl/gsl>
 
 // ----------------------------------------------------------------------------
 // simple types

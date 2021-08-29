@@ -20,6 +20,9 @@
     #include "wx/settings.h"
     #include "wx/log.h"
     #include "wx/crt.h"
+
+    #include <fmt/core.h>
+    #include <gsl/gsl>
 #endif
 
 #include "wx/datectrl.h"
@@ -31,9 +34,6 @@
 #if wxUSE_ACCESSIBILITY
     #include "wx/access.h"
 #endif // wxUSE_ACCESSIBILITY
-
-#include <fmt/core.h>
-#include <gsl/gsl>
 
 namespace
 {

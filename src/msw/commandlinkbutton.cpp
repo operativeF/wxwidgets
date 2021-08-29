@@ -16,6 +16,8 @@
 #ifndef WX_PRECOMP
     #include "wx/app.h"
     #include "wx/dcclient.h"
+
+    #include <boost/nowide/convert.hpp>
 #endif
 
 #include "wx/commandlinkbutton.h"
@@ -24,7 +26,6 @@
 #include "wx/msw/private/dc.h"
 #include "wx/private/window.h"
 
-#include <boost/nowide/convert.hpp>
 
 #ifndef BCM_SETNOTE
 constexpr int BCM_SETNOTE = 0x1609;

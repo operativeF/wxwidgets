@@ -19,14 +19,14 @@
 #ifndef WX_PRECOMP
     #include "wx/math.h"
     #include "wx/crt.h"
+
+    #include <memory>
+    #include <vector>
 #endif
 
 #include "wx/module.h"
 #include "wx/hashmap.h"
 #include "wx/hashset.h"
-
-#include <memory>
-#include <vector>
 
 using namespace wxPrivate;
 

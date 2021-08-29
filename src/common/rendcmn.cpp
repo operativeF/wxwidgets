@@ -15,12 +15,12 @@
     #include "wx/app.h"
     #include "wx/log.h"
     #include "wx/intl.h"
+
+    #include <memory>
 #endif //WX_PRECOMP
 
 #include "wx/apptrait.h"
 #include "wx/renderer.h"
-
-#include <memory>
 
 #if wxUSE_DYNLIB_CLASS
     #include "wx/dynlib.h"

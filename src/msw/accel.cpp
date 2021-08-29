@@ -16,15 +16,15 @@
 
 #ifndef WX_PRECOMP
     #include "wx/window.h"
+
+    #include <boost/nowide/convert.hpp>
+    #include <gsl/gsl>
 #endif
 
 #include "wx/accel.h"
 
 #include "wx/msw/private.h"
 #include "wx/msw/private/keyboard.h"
-
-#include <boost/nowide/convert.hpp>
-#include <gsl/gsl>
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxAcceleratorTable, wxObject);
 

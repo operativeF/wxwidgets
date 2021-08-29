@@ -23,6 +23,8 @@
     #include "wx/log.h"
     #include "wx/module.h"
     #include "wx/msgout.h"
+
+    #include <gsl/gsl>
 #endif
 
 #include "wx/apptrait.h"
@@ -34,7 +36,6 @@
 
 #include "wx/except.h"
 
-#include <gsl/gsl>
 
 // must have this symbol defined to get _beginthread/_endthread declarations
 #ifndef _MT

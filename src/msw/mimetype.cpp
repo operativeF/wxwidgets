@@ -25,6 +25,8 @@
         #include "wx/icon.h"
         #include "wx/msgdlg.h"
     #endif
+
+    #include <fmt/core.h>
 #endif //WX_PRECOMP
 
 #include "wx/file.h"
@@ -45,7 +47,6 @@
     #endif
 #endif // OS
 
-#include <fmt/core.h>
 
 // Unfortunately the corresponding SDK constants are absent from the headers
 // shipped with some old MinGW versions (e.g. 4.2.1 from Debian) and we can't

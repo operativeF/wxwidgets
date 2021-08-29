@@ -22,9 +22,9 @@
     #include "wx/bitmap.h"
     #include "wx/module.h"
     #include "wx/wxcrtvararg.h"
-#endif
 
-#include <gsl/gsl>
+    #include <gsl/gsl>
+#endif
 
 extern "C"
 {

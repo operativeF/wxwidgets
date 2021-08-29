@@ -17,6 +17,9 @@
     #include "wx/palette.h"
     #include "wx/intl.h"
     #include "wx/log.h"
+
+    #include <array>
+    #include <vector>
 #endif
 
 #include "wx/gifdecod.h"
@@ -24,9 +27,7 @@
 #include "wx/scopedptr.h"
 #include "wx/scopeguard.h"
 
-#include <array>
 #include <tuple>
-#include <vector>
 
 enum
 {

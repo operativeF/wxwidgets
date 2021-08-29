@@ -21,6 +21,13 @@
     #include "wx/intl.h"
     #include "wx/string.h"
     #include "wx/utils.h"
+
+    #include <algorithm>
+    #include <iostream>
+    #include <vector>
+
+    #include <fmt/core.h>
+    #include <gsl/gsl>
 #endif //WX_PRECOMP
 
 #include "wx/apptrait.h"
@@ -32,16 +39,9 @@
 #include "wx/private/threadinfo.h"
 #include "wx/crt.h"
 
-#include <algorithm>
-#include <iostream>
-#include <vector>
-
 #if defined(__WINDOWS__)
     #include "wx/msw/private.h" // includes windows.h
 #endif
-
-#include <fmt/core.h>
-#include <gsl/gsl>
 
 #undef wxLOG_COMPONENT
 const char *wxLOG_COMPONENT = "";

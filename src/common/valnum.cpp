@@ -16,14 +16,15 @@
 #ifndef WX_PRECOMP
     #include "wx/textctrl.h"
     #include "wx/combobox.h"
+
+    #include <cmath>
+
+    #include <gsl/gsl>
 #endif
 
 #include "wx/valnum.h"
 #include "wx/numformatter.h"
 
-#include <cmath>
-
-#include <gsl/gsl>
 
 // ============================================================================
 // wxNumValidatorBase implementation

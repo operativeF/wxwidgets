@@ -26,10 +26,9 @@
     #include "wx/dialog.h"
     #include "wx/msgdlg.h"
     #include "wx/intl.h"
+
+    #include <gsl/gsl>
 #endif
-
-#include <gsl/gsl>
-
 
 inline void wxGetAsIs(wxWindowBase* win, int* w, int* h)
 {

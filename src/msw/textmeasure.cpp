@@ -16,14 +16,15 @@
 #ifndef WX_PRECOMP
     #include "wx/window.h"
     #include "wx/font.h"
+
+    #include <boost/nowide/convert.hpp>
+    #include <boost/nowide/stackstring.hpp>
 #endif //WX_PRECOMP
 
 #include "wx/private/textmeasure.h"
 
 #include "wx/msw/dc.h"
 
-#include <boost/nowide/convert.hpp>
-#include <boost/nowide/stackstring.hpp>
 
 // ============================================================================
 // wxTextMeasure implementation

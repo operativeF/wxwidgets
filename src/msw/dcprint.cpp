@@ -24,6 +24,8 @@
     #include "wx/window.h"
     #include "wx/dcmemory.h"
     #include "wx/math.h"
+
+    #include <boost/nowide/stackstring.hpp>
 #endif
 
 #include "wx/msw/private.h"
@@ -35,7 +37,6 @@
 #include "wx/printdlg.h"
 #include "wx/msw/printdlg.h"
 
-#include <boost/nowide/stackstring.hpp>
 
 // mingw32 defines GDI_ERROR incorrectly
 #if defined(__GNUWIN32__) || !defined(GDI_ERROR)

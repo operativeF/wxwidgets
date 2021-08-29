@@ -17,6 +17,8 @@
     #include "wx/control.h"     // for wxControl::Ellipsize()
     #include "wx/dc.h"
     #include "wx/settings.h"
+
+    #include <string>
 #endif //WX_PRECOMP
 
 #include "wx/dcgraph.h"
@@ -29,7 +31,6 @@
 #include "wx/msw/wrapcctl.h"
 #include "wx/dynlib.h"
 
-#include <string>
 
 // These Vista+ only types used by DrawThemeTextEx may not be available in older SDK headers
 using WXDTT_CALLBACK_PROC = int(__stdcall*)(HDC hdc, const wchar_t * pszText,

@@ -21,6 +21,8 @@
         #include "wx/stream.h"
     #endif
     #include "wx/module.h"
+
+    #include <vector>
 #endif
 
 #include "wx/process.h"
@@ -53,8 +55,6 @@
 
 #include "wx/msw/private/hiddenwin.h"
 #include "wx/msw/private/event.h"
-
-#include <vector>
 
 // ----------------------------------------------------------------------------
 // constants

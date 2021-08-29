@@ -31,6 +31,10 @@
     #include "wx/timer.h"
     #include "wx/module.h"
     #include "wx/filefn.h"
+
+    #include <string>
+
+    #include <gsl/gsl>
 #endif
 
 #include "wx/apptrait.h"
@@ -48,9 +52,6 @@
     #include <errno.h>
 #endif
 
-#include <string>
-
-#include <gsl/gsl>
 
 // we use MSG_NOSIGNAL to avoid getting SIGPIPE when sending data to a remote
 // host which closed the connection if it is available, otherwise we rely on

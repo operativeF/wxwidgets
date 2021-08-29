@@ -20,14 +20,15 @@
     #include "wx/msgdlg.h"
     #include "wx/stopwatch.h"
     #include "wx/msw/private.h"
+
+    #include <boost/nowide/convert.hpp>
+    #include <boost/nowide/stackstring.hpp>
+    #include <gsl/gsl>
 #endif
 
 #include "wx/msw/private/msgdlg.h"
 #include "wx/evtloop.h"
 
-#include <boost/nowide/convert.hpp>
-#include <boost/nowide/stackstring.hpp>
-#include <gsl/gsl>
 
 using namespace wxMSWMessageDialog;
 

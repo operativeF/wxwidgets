@@ -26,6 +26,8 @@
     #include "wx/ctrlsub.h"
     #include "wx/msw/private.h"
     #include "wx/msw/missing.h"
+
+    #include <boost/nowide/convert.hpp>
 #endif
 
 #include "wx/renderer.h"
@@ -34,7 +36,6 @@
 #include "wx/msw/ownerdrawnbutton.h"
 #include "wx/msw/private/winstyle.h"
 
-#include <boost/nowide/convert.hpp>
 
 // ----------------------------------------------------------------------------
 // wxWin macros

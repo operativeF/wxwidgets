@@ -19,16 +19,16 @@
     #include "wx/log.h"
     #include "wx/utils.h"
     #include "wx/crt.h"
+
+    #include <algorithm>
+    #include <array>
+    #include <vector>
 #endif
 
 #include "wx/file.h"
 #include "wx/filename.h"
 #include "wx/dir.h"
 #include "wx/tokenzr.h"
-
-#include <algorithm>
-#include <array>
-#include <vector>
 
 #if defined(__WXMAC__)
     #include  "wx/osx/private.h"  // includes mac headers

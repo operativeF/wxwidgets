@@ -16,6 +16,8 @@
 
 #ifndef WX_PRECOMP
     #include "wx/radiobox.h"
+    
+    #include <gsl/gsl>
 #endif //WX_PRECOMP
 
 #if wxUSE_TOOLTIPS
@@ -25,8 +27,6 @@
 #if wxUSE_HELP
     #include "wx/cshelp.h"
 #endif
-
-#include <gsl/gsl>
 
 // ============================================================================
 // implementation

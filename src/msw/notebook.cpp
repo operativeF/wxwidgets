@@ -27,6 +27,9 @@
     #include "wx/dcmemory.h"
     #include "wx/control.h"
     #include "wx/panel.h"
+
+    #include <boost/nowide/convert.hpp>
+    #include <boost/nowide/stackstring.hpp>
 #endif  // WX_PRECOMP
 
 #include "wx/imaglist.h"
@@ -42,8 +45,6 @@
     #include "wx/msw/uxtheme.h"
 #endif
 
-#include <boost/nowide/convert.hpp>
-#include <boost/nowide/stackstring.hpp>
 
 // ----------------------------------------------------------------------------
 // macros

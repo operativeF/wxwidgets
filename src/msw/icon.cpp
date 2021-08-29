@@ -19,11 +19,12 @@
     #include "wx/icon.h"
     #include "wx/bitmap.h"
     #include "wx/log.h"
+
+    #include <fmt/core.h>
 #endif
 
 #include "wx/msw/private.h"
 
-#include <fmt/core.h>
 
 // ----------------------------------------------------------------------------
 // wxWin macros

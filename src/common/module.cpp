@@ -18,9 +18,9 @@
     #include "wx/hash.h"
     #include "wx/intl.h"
     #include "wx/log.h"
-#endif
 
-#include <algorithm>
+    #include <algorithm>
+#endif
 
 constexpr wxChar TRACE_MODULE[] = wxT("module");
 

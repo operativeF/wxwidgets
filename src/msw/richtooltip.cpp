@@ -15,6 +15,8 @@
 
 #ifndef WX_PRECOMP
     #include "wx/treectrl.h"
+
+    #include <boost/nowide/stackstring.hpp>
 #endif // WX_PRECOMP
 
 #include "wx/private/richtooltip.h"
@@ -22,7 +24,6 @@
 #include "wx/msw/private.h"
 #include "wx/msw/uxtheme.h"
 
-#include <boost/nowide/stackstring.hpp>
 
 // Provide definitions missing from some compilers SDK headers.
 

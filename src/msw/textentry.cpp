@@ -15,6 +15,8 @@
     #include "wx/event.h"
     #include "wx/string.h"
     #include "wx/textctrl.h"    // Only for wxTE_PROCESS_XXX constants
+
+    #include <boost/nowide/convert.hpp>
 #endif // WX_PRECOMP
 
 #if wxUSE_TEXTCTRL || wxUSE_COMBOBOX
@@ -34,7 +36,6 @@
 #include "wx/msw/wrapwin.h"
 #include <shlwapi.h>
 
-#include <boost/nowide/convert.hpp>
 
 #define GetEditHwnd() ((HWND)(GetEditHWND()))
 

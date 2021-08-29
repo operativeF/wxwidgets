@@ -16,6 +16,9 @@
     #include "wx/cursor.h"
     #include "wx/window.h"
     #include "wx/utils.h"
+
+    #include <boost/nowide/convert.hpp>
+    #include <boost/nowide/stackstring.hpp>
 #endif //WX_PRECOMP
 
 #include "wx/msw/private.h"     // includes <windows.h>
@@ -23,8 +26,6 @@
 #include "wx/msw/wrapwin.h"
 #include <shlwapi.h>
 
-#include <boost/nowide/convert.hpp>
-#include <boost/nowide/stackstring.hpp>
 
 // ============================================================================
 // implementation

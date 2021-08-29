@@ -16,9 +16,9 @@
 
 #ifndef WX_PRECOMP
     #include "wx/crt.h"
+    
+    #include <vector>
 #endif
-
-#include <vector>
 
 // ============================================================================
 // implementation

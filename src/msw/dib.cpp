@@ -25,6 +25,9 @@
     #include "wx/intl.h"
     #include "wx/bitmap.h"
     #include "wx/image.h"
+
+    #include <memory>
+    #include <string>
 #endif //WX_PRECOMP
 
 #include "wx/file.h"
@@ -33,8 +36,6 @@
 
 #include "wx/msw/dib.h"
 
-#include <memory>
-#include <string>
 
 // ----------------------------------------------------------------------------
 // private functions

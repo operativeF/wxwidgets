@@ -26,6 +26,10 @@
     #include "wx/log.h"
     #include "wx/app.h"
     #include "wx/math.h"
+
+    #include <memory>
+    #include <string>
+    #include <vector>
 #endif
 
 #include "wx/dynlib.h"
@@ -36,10 +40,8 @@
 #include "wx/modalhook.h"
 #include "wx/msw/private/dpiaware.h"
 
-#include <memory>
-#include <string>
+
 #include <tuple>
-#include <vector>
 
 // ----------------------------------------------------------------------------
 // constants

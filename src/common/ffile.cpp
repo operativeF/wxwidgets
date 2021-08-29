@@ -18,12 +18,12 @@
     #include "wx/intl.h"
     #include "wx/log.h"
     #include "wx/crt.h"
+
+    #include <gsl/gsl>
 #endif
 
 #include "wx/filename.h"
 #include "wx/ffile.h"
-
-#include <gsl/gsl>
 
 // ============================================================================
 // implementation of wxFFile

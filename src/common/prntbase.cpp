@@ -37,6 +37,9 @@
     #include "wx/textdlg.h"
     #include "wx/sizer.h"
     #include "wx/module.h"
+
+    #include <fmt/core.h>
+    #include <gsl/gsl>
 #endif // !WX_PRECOMP
 
 #include "wx/prntbase.h"
@@ -66,8 +69,6 @@
     #endif
 #endif // __WXMSW__
 
-#include <fmt/core.h>
-#include <gsl/gsl>
 
 // The value traditionally used as the default max page number and meaning
 // "infinitely many". It should probably be documented and exposed, but for now

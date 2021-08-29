@@ -23,13 +23,14 @@
     #include "wx/settings.h"
     #include "wx/sizer.h"
     #include "wx/containr.h"
+
+    #include <algorithm>
 #endif
 
 #include "wx/textwrapper.h"
 
 #include "wx/private/markupparser.h"
 
-#include <algorithm>
 
 // ----------------------------------------------------------------------------
 // XTI

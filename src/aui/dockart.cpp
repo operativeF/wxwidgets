@@ -22,6 +22,8 @@
     #include "wx/settings.h"
     #include "wx/dcclient.h"
     #include "wx/image.h"
+
+    #include <cmath>
 #endif
 
 #ifdef __WXMAC__
@@ -43,8 +45,6 @@
     #include "wx/gtk/private.h"
 #endif
 #endif
-
-#include <cmath>
 
 wxColor wxAuiLightContrastColour(const wxColour& c)
 {

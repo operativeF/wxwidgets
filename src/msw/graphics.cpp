@@ -32,6 +32,9 @@
     #include "wx/dcclient.h"
     #include "wx/dcmemory.h"
     #include "wx/dcprint.h"
+
+    #include <boost/nowide/convert.hpp>
+    #include <boost/nowide/stackstring.hpp>
 #endif
 
 #include "wx/stack.h"
@@ -49,8 +52,6 @@
 #include <commdlg.h>
 #endif
 
-#include <boost/nowide/convert.hpp>
-#include <boost/nowide/stackstring.hpp>
 
 // Define REAL_MAX, REAL_MIN
 // if it isn't done in GDI+ header(s).

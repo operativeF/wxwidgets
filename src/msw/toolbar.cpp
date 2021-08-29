@@ -31,6 +31,9 @@
     #include "wx/app.h"         // for GetComCtl32Version
     #include "wx/image.h"
     #include "wx/stattext.h"
+
+    #include <boost/nowide/convert.hpp>
+    #include <gsl/gsl>
 #endif
 
 #include "wx/artprov.h"
@@ -51,8 +54,6 @@
 #include "wx/msw/uxtheme.h"
 #endif
 
-#include <boost/nowide/convert.hpp>
-#include <gsl/gsl>
 
 // ----------------------------------------------------------------------------
 // constants

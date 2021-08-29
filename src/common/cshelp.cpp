@@ -17,6 +17,7 @@
 #ifndef WX_PRECOMP
     #include "wx/app.h"
     #include "wx/module.h"
+    #include <fmt/core.h>
 #endif
 
 #include "wx/tipwin.h"
@@ -28,7 +29,6 @@
 #endif
 
 #include <charconv>
-#include <fmt/core.h>
 
 // ----------------------------------------------------------------------------
 // wxContextHelpEvtHandler private class

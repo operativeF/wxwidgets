@@ -20,9 +20,10 @@
     #include "wx/list.h"
     #include "wx/utils.h"
     #include "wx/module.h"
+
+    #include <string>
 #endif
 
-#include <string>
 
 wxIMPLEMENT_CLASS(wxURL, wxURI);
 

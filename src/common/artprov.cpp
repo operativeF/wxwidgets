@@ -21,9 +21,9 @@
     #include "wx/hashmap.h"
     #include "wx/image.h"
     #include "wx/module.h"
-#endif
 
-#include <fmt/core.h>
+    #include <fmt/core.h>
+#endif
 
 // ===========================================================================
 // implementation

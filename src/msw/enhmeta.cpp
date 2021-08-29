@@ -17,6 +17,10 @@
 #ifndef WX_PRECOMP
     #include "wx/log.h"
     #include "wx/intl.h"
+
+    #include <string>
+
+    #include <boost/nowide/convert.hpp>
 #endif //WX_PRECOMP
 
 #include "wx/dc.h"
@@ -27,9 +31,6 @@
 
 #include "wx/msw/private.h"
 
-#include <string>
-
-#include <boost/nowide/convert.hpp>
 
 // ----------------------------------------------------------------------------
 // wxWin macros

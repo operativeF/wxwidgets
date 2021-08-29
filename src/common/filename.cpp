@@ -71,6 +71,10 @@
     #include "wx/log.h"
     #include "wx/utils.h"
     #include "wx/crt.h"
+
+    #if defined(wxHAS_NATIVE_READLINK)
+        #include <vector>
+    #endif
 #endif
 
 #include "wx/filename.h"
@@ -81,10 +85,6 @@
 #include "wx/dir.h"
 #include "wx/longlong.h"
 #include "wx/uri.h"
-
-#if defined(wxHAS_NATIVE_READLINK)
-    #include <vector>
-#endif
 
 #if defined(__WIN32__) && defined(__MINGW32__)
     #include "wx/msw/gccpriv.h"

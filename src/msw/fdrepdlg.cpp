@@ -18,11 +18,12 @@
     #include "wx/msw/wrapcdlg.h"
     #include "wx/intl.h"
     #include "wx/log.h"
+
+    #include <boost/nowide/convert.hpp>
 #endif
 
 #include "wx/fdrepdlg.h"
 
-#include <boost/nowide/convert.hpp>
 
 // ----------------------------------------------------------------------------
 // functions prototypes

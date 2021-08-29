@@ -22,6 +22,9 @@
     #include "wx/intl.h"
     #include "wx/log.h"
     #include "wx/image.h"
+
+    #include <boost/nowide/convert.hpp>
+    #include <boost/nowide/stackstring.hpp>
 #endif
 
 #if wxUSE_OWNER_DRAWN
@@ -37,8 +40,6 @@
 
 #include "wx/dynlib.h"
 
-#include <boost/nowide/convert.hpp>
-#include <boost/nowide/stackstring.hpp>
 
 // ----------------------------------------------------------------------------
 // global variables

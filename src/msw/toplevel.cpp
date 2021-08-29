@@ -23,6 +23,10 @@
     #include "wx/menu.h"
     #include "wx/containr.h"        // wxSetFocusToChild()
     #include "wx/module.h"
+
+    #include <string>
+
+    #include <boost/nowide/convert.hpp>
 #endif //WX_PRECOMP
 
 #include "wx/scopeguard.h"
@@ -36,9 +40,7 @@
 
 #include "wx/display.h"
 
-#include <string>
 
-#include <boost/nowide/convert.hpp>
 
 // NB: wxDlgProc must be defined here and not in dialog.cpp because the latter
 //     is not included by wxUniv build which does need wxDlgProc

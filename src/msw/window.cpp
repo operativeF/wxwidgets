@@ -40,7 +40,12 @@
     #include "wx/textctrl.h"
     #include "wx/menuitem.h"
     #include "wx/module.h"
+
+    #include <array>
     #include <vector>
+
+    #include <boost/nowide/convert.hpp>
+    #include <gsl/gsl>
 #endif
 
 #if wxUSE_OWNER_DRAWN && !defined(__WXUNIVERSAL__)
@@ -96,7 +101,6 @@
 #include "wx/dynlib.h"
 #include "wx/display.h"
 
-#include <array>
 #include <numbers>
 
 #include <shellapi.h>
@@ -108,8 +112,6 @@
     #include "wx/msw/uxtheme.h"
 #endif
 
-#include <boost/nowide/convert.hpp>
-#include <gsl/gsl>
 
 #if wxUSE_DYNLIB_CLASS
     #define HAVE_TRACKMOUSEEVENT

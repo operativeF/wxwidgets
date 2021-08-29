@@ -23,11 +23,12 @@
 #ifndef WX_PRECOMP
     #include "wx/intl.h"
     #include "wx/log.h"
+
+    #include <fmt/core.h>
 #endif // WX_PRECOMP
 
 #include "wx/ffile.h"
 
-#include <fmt/core.h>
 
 // ----------------------------------------------------------------------------
 // macros

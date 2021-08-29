@@ -23,6 +23,11 @@
     #include "wx/app.h"
     #include "wx/utils.h"
     #include "wx/math.h"
+
+    #include <string>
+    #include <vector>
+
+    #include <gsl/gsl>
 #endif //WX_PRECOMP
 
 #if wxUSE_CONFIG && ((wxUSE_FILE && wxUSE_TEXTFILE) || wxUSE_CONFIG_NATIVE)
@@ -31,10 +36,6 @@
 #include "wx/file.h"
 
 #include <limits>
-#include <string>
-#include <vector>
-
-#include <gsl/gsl>
 
 // ============================================================================
 // implementation

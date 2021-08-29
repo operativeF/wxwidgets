@@ -26,6 +26,9 @@
     #include "wx/icon.h"
     #include "wx/dcprint.h"
     #include "wx/module.h"
+
+    #include <boost/nowide/convert.hpp>
+    #include <gsl/gsl>
 #endif
 
 #include "wx/msw/dc.h"
@@ -38,8 +41,6 @@
 #include "wx/msw/private/dc.h"
 #include "wx/private/textmeasure.h"
 
-#include <boost/nowide/convert.hpp>
-#include <gsl/gsl>
 
 #ifdef _MSC_VER
     // In the previous versions of wxWidgets, AlphaBlend() was dynamically

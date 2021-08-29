@@ -47,6 +47,8 @@
     #include "wx/timer.h"
     #include "wx/math.h"        // log10 & pow
     #include "wx/stopwatch.h"
+
+    #include <gsl/gsl>
 #endif
 
 #include "wx/msw/private.h" // user info and wndproc setting/getting
@@ -57,7 +59,6 @@
 //---------------------------------------------------------------------------
 #include "wx/msw/ole/activex.h"
 
-#include <gsl/gsl>
 
 //---------------------------------------------------------------------------
 //  IIDS - used by CoCreateInstance and IUnknown::QueryInterface

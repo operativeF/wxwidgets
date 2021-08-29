@@ -23,11 +23,14 @@
     #include "wx/log.h"
     #include "wx/app.h"
     #include "wx/settings.h"
+
+    #include <array>
+    
+    #include <boost/nowide/stackstring.hpp>
 #endif
 
 #include <windowsx.h> // needed by GET_X_LPARAM and GET_Y_LPARAM macros
 
-#include <array>
 
 #include "wx/msw/private.h"
 #include "wx/msw/winundef.h"
@@ -38,7 +41,6 @@
 #include "wx/msw/dragimag.h"
 #include "wx/msw/uxtheme.h"
 
-#include <boost/nowide/stackstring.hpp>
 
 // macros to hide the cast ugliness
 // --------------------------------

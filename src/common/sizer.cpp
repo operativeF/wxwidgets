@@ -25,15 +25,15 @@
     #include "wx/statbox.h"
     #include "wx/toplevel.h"
     #include "wx/app.h"
+
+    #include <memory>
+    #include <string>
+    #include <vector>
 #endif // WX_PRECOMP
 
 #include "wx/display.h"
 #include "wx/listimpl.cpp"
 #include "wx/private/window.h"
-
-#include <memory>
-#include <string>
-#include <vector>
 
 //---------------------------------------------------------------------------
 

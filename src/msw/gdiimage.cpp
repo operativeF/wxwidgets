@@ -16,6 +16,10 @@
     #include "wx/log.h"
     #include "wx/app.h"
     #include "wx/bitmap.h"
+
+    #include <string>
+
+    #include <boost/nowide/convert.hpp>
 #endif // WX_PRECOMP
 
 #include "wx/msw/private.h"
@@ -43,9 +47,6 @@
 #include "wx/listimpl.cpp"
 WX_DEFINE_LIST(wxGDIImageHandlerList)
 
-#include <string>
-
-#include <boost/nowide/convert.hpp>
 
 // ----------------------------------------------------------------------------
 // private classes

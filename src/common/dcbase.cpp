@@ -24,6 +24,8 @@
     #include "wx/math.h"
     #include "wx/module.h"
     #include "wx/window.h"
+
+    #include <array>
 #endif
 
 #include "wx/private/textmeasure.h"
@@ -75,8 +77,6 @@
     #include "wx/qt/dcmemory.h"
     #include "wx/qt/dcscreen.h"
 #endif
-
-#include <array>
 
 //----------------------------------------------------------------------------
 // wxDCFactory

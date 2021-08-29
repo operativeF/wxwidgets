@@ -22,13 +22,14 @@
     #include "wx/log.h"
     #include "wx/brush.h"
     #include "wx/settings.h"
+    
+    #include <boost/nowide/convert.hpp>
 #endif
 
 #include "wx/dynlib.h"
 
 #include "wx/msw/private.h"
 
-#include <boost/nowide/convert.hpp>
 
 bool wxChoice::Create(wxWindow *parent,
                       wxWindowID id,

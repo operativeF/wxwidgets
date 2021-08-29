@@ -22,6 +22,8 @@
     #include "wx/wxcrtvararg.h"
     #include "wx/intl.h"
     #include "wx/log.h"
+
+    #include <vector>
 #endif
 
 #include <cctype>
@@ -32,7 +34,6 @@
 #include <cstring>
 
 #include "wx/hashmap.h"
-#include <vector>
 #include "wx/xlocale.h"
 
 #ifdef __WINDOWS__

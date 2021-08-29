@@ -31,6 +31,8 @@
     #include "wx/listbox.h"
     #include "wx/slider.h"
     #include "wx/checklst.h"
+
+    #include <fmt/core.h>
 #endif
 
 #include "wx/spinctrl.h"
@@ -46,7 +48,6 @@
 
 #include "wx/valgen.h"
 
-#include <fmt/core.h>
 
 wxIMPLEMENT_CLASS(wxGenericValidator, wxValidator);
 

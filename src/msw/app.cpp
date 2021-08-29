@@ -30,6 +30,12 @@
     #include "wx/crt.h"
     #include "wx/log.h"
     #include "wx/module.h"
+
+    #include <string>
+    #include <vector>
+
+    #include <boost/nowide/convert.hpp>
+    #include <boost/nowide/stackstring.hpp>
 #endif
 
 #include "wx/apptrait.h"
@@ -38,7 +44,6 @@
 #include "wx/evtloop.h"
 #include "wx/thread.h"
 #include "wx/scopeguard.h"
-#include <vector>
 #include "wx/weakref.h"
 
 #include "wx/msw/private.h"
@@ -54,12 +59,9 @@
     #include <ole2.h>
 #endif
 
-#include <string>
 
 #include "wx/msw/missing.h"
 
-#include <boost/nowide/convert.hpp>
-#include <boost/nowide/stackstring.hpp>
 
 // instead of including <shlwapi.h> which is not part of the core SDK and not
 // shipped at all with other compilers, we always define the parts of it we

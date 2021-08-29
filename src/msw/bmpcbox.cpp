@@ -16,10 +16,11 @@
 
 #ifndef WX_PRECOMP
     #include "wx/log.h"
+
+    #include <vector>
 #endif
 
 #include "wx/settings.h"
-#include <vector>
 
 #include "wx/msw/dcclient.h"
 #include "wx/msw/private.h"
