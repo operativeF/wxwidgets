@@ -176,9 +176,6 @@ static const wxDateTime::wxDateTime_t gs_cumulatedDays[2][MONTHS_IN_YEAR] =
 // global data
 // ----------------------------------------------------------------------------
 
-const char wxDefaultDateTimeFormat[] = "%c";
-const char wxDefaultTimeSpanFormat[] = "%H:%M:%S";
-
 // in the fine tradition of ANSI C we use our equivalent of (time_t)-1 to
 // indicate an invalid wxDateTime object
 const wxDateTime wxDefaultDateTime;
