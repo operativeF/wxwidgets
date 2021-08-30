@@ -676,13 +676,13 @@ class WXDLLIMPEXP_CORE wxTextCtrlBase : public wxControl,
                                    public wxTextEntry
 {
 public:
-    wxTextCtrlBase() = default;
+    wxTextCtrlBase() noexcept = default;
     ~wxTextCtrlBase() override = default;
 
    wxTextCtrlBase(const wxTextCtrlBase&) = delete;
    wxTextCtrlBase& operator=(const wxTextCtrlBase&) = delete;
-   wxTextCtrlBase(wxTextCtrlBase&&) = default;
-   wxTextCtrlBase& operator=(wxTextCtrlBase&&) = default;
+   wxTextCtrlBase(wxTextCtrlBase&&) noexcept = default;
+   wxTextCtrlBase& operator=(wxTextCtrlBase&&) noexcept = default;
 
     // more readable flag testing methods
     bool IsSingleLine() const { return !HasFlag(wxTE_MULTILINE); }

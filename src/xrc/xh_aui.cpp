@@ -19,9 +19,7 @@
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxAuiXmlHandler, wxXmlResourceHandler)
 
-wxAuiXmlHandler::wxAuiXmlHandler()
-                
-                  
+wxAuiXmlHandler::wxAuiXmlHandler() noexcept
 {
     XRC_ADD_STYLE(wxAUI_MGR_ALLOW_ACTIVE_PANE);
     XRC_ADD_STYLE(wxAUI_MGR_ALLOW_FLOATING);

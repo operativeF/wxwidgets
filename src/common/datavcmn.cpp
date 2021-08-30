@@ -550,7 +550,7 @@ unsigned int wxDataViewIndexListModel::GetChildren( const wxDataViewItem &item, 
 
 #ifndef __WXMAC__
 
-wxDataViewVirtualListModel::wxDataViewVirtualListModel( unsigned int initial_size )
+wxDataViewVirtualListModel::wxDataViewVirtualListModel( unsigned int initial_size ) noexcept
     : m_size(initial_size)
 {
 }

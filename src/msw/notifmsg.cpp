@@ -312,7 +312,7 @@ bool wxBalloonNotifMsgImpl::Close()
 // wxNotificationMessage
 // ----------------------------------------------------------------------------
 
-wxNotificationMessage::wxNotificationMessage()
+wxNotificationMessage::wxNotificationMessage() noexcept
 {
 #if wxUSE_WINRT
     if (wxToastNotificationHelper::IsEnabled())

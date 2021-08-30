@@ -1447,7 +1447,7 @@ std::vector<wxString> wxVariant::GetArrayString() const
 class WXDLLIMPEXP_BASE wxVariantDataLongLong : public wxVariantData
 {
 public:
-    wxVariantDataLongLong() : m_value(0) { }
+    wxVariantDataLongLong() noexcept : m_value(0) { }
     explicit wxVariantDataLongLong(wxLongLong value) : m_value(value) { }
 
     wxLongLong GetValue() const { return m_value; }

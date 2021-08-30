@@ -21,7 +21,7 @@
 class wxTLWGeometry : public wxTLWGeometryBase
 {
 public:
-    wxTLWGeometry()
+    wxTLWGeometry() noexcept
     {
         wxZeroMemory(m_placement);
         m_placement.length = sizeof(m_placement);

@@ -36,7 +36,7 @@ inline constexpr char wxGetPasswordFromUserPromptStr[] = "Enter Password";
 class WXDLLIMPEXP_CORE wxTextEntryDialog : public wxDialog
 {
 public:
-    wxTextEntryDialog()
+    wxTextEntryDialog() noexcept
     {
         m_textctrl = nullptr;
         m_dialogStyle = 0;

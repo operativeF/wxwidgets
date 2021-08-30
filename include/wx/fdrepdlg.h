@@ -139,7 +139,7 @@ protected:
 class WXDLLIMPEXP_CORE wxFindDialogEvent : public wxCommandEvent
 {
 public:
-    wxFindDialogEvent(wxEventType commandType = wxEVT_NULL, int id = 0)
+    wxFindDialogEvent(wxEventType commandType = wxEVT_NULL, int id = 0) noexcept
         : wxCommandEvent(commandType, id) { }
     wxFindDialogEvent(const wxFindDialogEvent& event) = default;
 

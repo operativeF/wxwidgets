@@ -1303,7 +1303,7 @@ wxSize wxDataViewTextRenderer::GetSize() const
 wxIMPLEMENT_CLASS(wxDataViewBitmapRenderer, wxDataViewRenderer);
 
 wxDataViewBitmapRenderer::wxDataViewBitmapRenderer( const wxString &varianttype,
-                                                    wxDataViewCellMode mode, int align ) :
+                                                    wxDataViewCellMode mode, int align ) noexcept :
     wxDataViewRenderer( varianttype, mode, align )
 {
 }
@@ -1367,7 +1367,7 @@ wxSize wxDataViewBitmapRenderer::GetSize() const
 wxIMPLEMENT_ABSTRACT_CLASS(wxDataViewToggleRenderer, wxDataViewRenderer);
 
 wxDataViewToggleRenderer::wxDataViewToggleRenderer( const std::string& varianttype,
-                        wxDataViewCellMode mode, int align ) :
+                        wxDataViewCellMode mode, int align ) noexcept :
     wxDataViewRenderer( varianttype, mode, align )
 {
     m_toggle = false;

@@ -699,7 +699,7 @@ private:
 
 public:
     // constructor only initializes m_thread to NULL
-    wxThreadHelper(wxThreadKind kind = wxTHREAD_JOINABLE)
+    wxThreadHelper(wxThreadKind kind = wxTHREAD_JOINABLE) noexcept
         :  m_kind(kind) { }
 
     // destructor deletes m_thread
@@ -822,7 +822,7 @@ inline bool wxIsMainThread() { return true; }
 class WXDLLIMPEXP_BASE wxMutexGuiLocker
 {
 public:
-    wxMutexGuiLocker() { wxMutexGuiEnter(); }
+    wxMutexGuiLocker() noexcept { wxMutexGuiEnter(); }
    ~wxMutexGuiLocker() { wxMutexGuiLeave(); }
 };
 

@@ -65,7 +65,7 @@ class WXDLLIMPEXP_AUI wxAuiNotebookEvent : public wxBookCtrlEvent
 {
 public:
     wxAuiNotebookEvent(wxEventType commandType = wxEVT_NULL,
-                       int winId = 0)
+                       int winId = 0) noexcept
           : wxBookCtrlEvent(commandType, winId)
     {
         m_dragSource = nullptr;
@@ -248,7 +248,7 @@ class WXDLLIMPEXP_AUI wxAuiNotebook : public wxNavigationEnabled<wxBookCtrlBase>
 
 public:
 
-    wxAuiNotebook() { Init(); }
+    wxAuiNotebook() noexcept { Init(); }
 
     wxAuiNotebook(wxWindow* parent,
                   wxWindowID id = wxID_ANY,

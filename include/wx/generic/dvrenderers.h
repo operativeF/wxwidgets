@@ -111,7 +111,7 @@ public:
 
     wxDataViewBitmapRenderer( const wxString &varianttype = DefaultType,
                               wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT,
-                              int align = wxDVR_DEFAULT_ALIGNMENT );
+                              int align = wxDVR_DEFAULT_ALIGNMENT ) noexcept;
 
 	wxDataViewBitmapRenderer(const wxDataViewBitmapRenderer&) = delete;
 	wxDataViewBitmapRenderer& operator=(const wxDataViewBitmapRenderer&) = delete;
@@ -146,7 +146,7 @@ public:
 
     wxDataViewToggleRenderer( const std::string& varianttype = DefaultType,
                               wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT,
-                              int align = wxDVR_DEFAULT_ALIGNMENT );
+                              int align = wxDVR_DEFAULT_ALIGNMENT ) noexcept;
 
 	wxDataViewToggleRenderer(const wxDataViewToggleRenderer&) = delete;
 	wxDataViewToggleRenderer& operator=(const wxDataViewToggleRenderer&) = delete;

@@ -1081,7 +1081,7 @@ void wxOutputStream::Sync()
 // wxCountingOutputStream
 // ----------------------------------------------------------------------------
 
-wxCountingOutputStream::wxCountingOutputStream ()
+wxCountingOutputStream::wxCountingOutputStream() noexcept
 {
     m_currentPos =
     m_lastPos = 0;

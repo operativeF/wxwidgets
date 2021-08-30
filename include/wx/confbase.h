@@ -117,7 +117,7 @@ public:
                const std::string& vendorName = {},
                const std::string& localFilename = {},
                const std::string& globalFilename = {},
-               long style = 0);
+               long style = 0) noexcept;
 
     // empty but ensures that dtor of all derived classes is virtual
   ~wxConfigBase() override;

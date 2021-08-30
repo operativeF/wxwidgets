@@ -38,7 +38,7 @@ class WXDLLIMPEXP_CORE wxGenericTreeCtrl : public wxTreeCtrlBase,
                                       public wxScrollHelper
 {
 public:
-    wxGenericTreeCtrl() :  wxScrollHelper(this) { Init(); }
+    wxGenericTreeCtrl() noexcept :  wxScrollHelper(this) { Init(); }
 
     wxGenericTreeCtrl(wxWindow *parent, wxWindowID id = wxID_ANY,
                const wxPoint& pos = wxDefaultPosition,

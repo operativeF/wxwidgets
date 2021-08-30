@@ -120,7 +120,7 @@ class WXDLLIMPEXP_AUI wxAuiGenericTabArt : public wxAuiTabArt
 
 public:
 
-    wxAuiGenericTabArt();
+    wxAuiGenericTabArt() noexcept;
 
     wxAuiTabArt* Clone() override;
     void SetFlags(unsigned int flags) override;

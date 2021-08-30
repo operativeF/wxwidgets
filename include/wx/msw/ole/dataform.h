@@ -21,7 +21,7 @@ public:
     // the clipboard formats under Win32 are WORD's
     using NativeFormat = unsigned short;
 
-    wxDataFormat(NativeFormat format = wxDF_INVALID) : m_format{format} {}
+    wxDataFormat(NativeFormat format = wxDF_INVALID) noexcept : m_format{format} {}
 
     // we need constructors from all string types as implicit conversions to
     // wxString don't apply when we already rely on implicit conversion of a,

@@ -682,7 +682,7 @@ std::string wxGridCellTextEditor::GetValue() const
 // wxGridCellNumberEditor
 // ----------------------------------------------------------------------------
 
-wxGridCellNumberEditor::wxGridCellNumberEditor(int min, int max)
+wxGridCellNumberEditor::wxGridCellNumberEditor(int min, int max) noexcept
     : m_min(min),
       m_max(max)
 {
@@ -1501,7 +1501,7 @@ void wxGridCellBoolEditor::SetGridFromValue(int row, int col, wxGrid* grid) cons
 // ----------------------------------------------------------------------------
 
 wxGridCellChoiceEditor::wxGridCellChoiceEditor(const std::vector<std::string>& choices,
-                                               bool allowOthers)
+                                               bool allowOthers) noexcept
     : m_choices(choices),
       m_allowOthers(allowOthers) { }
 

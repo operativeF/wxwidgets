@@ -61,7 +61,7 @@ wxConfigBase::wxConfigBase(const std::string& appName,
                            const std::string& vendorName,
                            const std::string& WXUNUSED(localFilename),
                            const std::string& WXUNUSED(globalFilename),
-                           long style)
+                           long style) noexcept
             : m_appName(appName), m_vendorName(vendorName), m_style(style)
 {
 }

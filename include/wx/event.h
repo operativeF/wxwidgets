@@ -1301,7 +1301,7 @@ enum wxIdleMode
 class WXDLLIMPEXP_BASE wxIdleEvent : public wxEvent
 {
 public:
-    wxIdleEvent()
+    wxIdleEvent() noexcept
         : wxEvent(0, wxEVT_IDLE)
           
         { }
@@ -1339,7 +1339,7 @@ class WXDLLIMPEXP_BASE wxThreadEvent : public wxEvent,
                                        public wxEventAnyPayloadMixin
 {
 public:
-    wxThreadEvent(wxEventType eventType = wxEVT_THREAD, int id = wxID_ANY)
+    wxThreadEvent(wxEventType eventType = wxEVT_THREAD, int id = wxID_ANY) noexcept
         : wxEvent(id, eventType)
         { }
 
@@ -1578,7 +1578,7 @@ class WXDLLIMPEXP_CORE wxCommandEvent : public wxEvent,
                                         public wxEventBasicPayloadMixin
 {
 public:
-    wxCommandEvent(wxEventType commandType = wxEVT_NULL, int winid = 0)
+    wxCommandEvent(wxEventType commandType = wxEVT_NULL, int winid = 0) noexcept
         : wxEvent(winid, commandType)
     {
         m_clientData = nullptr;
@@ -1642,7 +1642,7 @@ public:
 class WXDLLIMPEXP_CORE wxNotifyEvent  : public wxCommandEvent
 {
 public:
-    wxNotifyEvent(wxEventType commandType = wxEVT_NULL, int winid = 0)
+    wxNotifyEvent(wxEventType commandType = wxEVT_NULL, int winid = 0) noexcept
         : wxCommandEvent(commandType, winid)
         { m_bAllow = true; }
 
@@ -1691,7 +1691,7 @@ class WXDLLIMPEXP_CORE wxScrollEvent : public wxCommandEvent
 {
 public:
     wxScrollEvent(wxEventType commandType = wxEVT_NULL,
-                  int winid = 0, int pos = 0, int orient = 0);
+                  int winid = 0, int pos = 0, int orient = 0) noexcept;
 
 	wxScrollEvent& operator=(const wxScrollEvent&) = delete;
 
@@ -1921,7 +1921,7 @@ private:
 class WXDLLIMPEXP_CORE wxSetCursorEvent : public wxEvent
 {
 public:
-    wxSetCursorEvent(wxCoord x = 0, wxCoord y = 0)
+    wxSetCursorEvent(wxCoord x = 0, wxCoord y = 0) noexcept
         : wxEvent(0, wxEVT_SET_CURSOR),
           m_x(x), m_y(y) 
         { }
@@ -1956,7 +1956,7 @@ static constexpr unsigned int wxTwoFingerTimeInterval = 200;
 class WXDLLIMPEXP_CORE wxGestureEvent : public wxEvent
 {
 public:
-    wxGestureEvent(wxWindowID winid = 0, wxEventType type = wxEVT_NULL)
+    wxGestureEvent(wxWindowID winid = 0, wxEventType type = wxEVT_NULL) noexcept
         : wxEvent(winid, type)
     {
         m_isStart = false;
@@ -2001,7 +2001,7 @@ public:
 class WXDLLIMPEXP_CORE wxPanGestureEvent : public wxGestureEvent
 {
 public:
-    wxPanGestureEvent(wxWindowID winid = 0)
+    wxPanGestureEvent(wxWindowID winid = 0) noexcept
         : wxGestureEvent(winid, wxEVT_GESTURE_PAN)
     {
     }
@@ -2033,7 +2033,7 @@ public:
 class WXDLLIMPEXP_CORE wxZoomGestureEvent : public wxGestureEvent
 {
 public:
-    wxZoomGestureEvent(wxWindowID winid = 0)
+    wxZoomGestureEvent(wxWindowID winid = 0) noexcept
         : wxGestureEvent(winid, wxEVT_GESTURE_ZOOM)
         { m_zoomFactor = 1.0; }
 
@@ -2067,7 +2067,7 @@ public:
 class WXDLLIMPEXP_CORE wxRotateGestureEvent : public wxGestureEvent
 {
 public:
-    wxRotateGestureEvent(wxWindowID winid = 0)
+    wxRotateGestureEvent(wxWindowID winid = 0) noexcept
         : wxGestureEvent(winid, wxEVT_GESTURE_ROTATE)
         { m_rotationAngle = 0.0; }
 
@@ -2101,7 +2101,7 @@ public:
 class WXDLLIMPEXP_CORE wxTwoFingerTapEvent : public wxGestureEvent
 {
 public:
-    wxTwoFingerTapEvent(wxWindowID winid = 0)
+    wxTwoFingerTapEvent(wxWindowID winid = 0) noexcept
         : wxGestureEvent(winid, wxEVT_TWO_FINGER_TAP)
         { }
 
@@ -2126,7 +2126,7 @@ public:
 class WXDLLIMPEXP_CORE wxLongPressEvent : public wxGestureEvent
 {
 public:
-    wxLongPressEvent(wxWindowID winid = 0)
+    wxLongPressEvent(wxWindowID winid = 0) noexcept
         : wxGestureEvent(winid, wxEVT_LONG_PRESS)
         { }
 
@@ -2151,7 +2151,7 @@ public:
 class WXDLLIMPEXP_CORE wxPressAndTapEvent : public wxGestureEvent
 {
 public:
-    wxPressAndTapEvent(wxWindowID winid = 0)
+    wxPressAndTapEvent(wxWindowID winid = 0) noexcept
         : wxGestureEvent(winid, wxEVT_PRESS_AND_TAP)
         { }
 
@@ -2323,7 +2323,7 @@ private:
 class WXDLLIMPEXP_CORE wxSizeEvent : public wxEvent
 {
 public:
-    wxSizeEvent() : wxEvent(0, wxEVT_SIZE)
+    wxSizeEvent() noexcept : wxEvent(0, wxEVT_SIZE)
         { }
     wxSizeEvent(const wxSize& sz, int winid = 0)
         : wxEvent(winid, wxEVT_SIZE),
@@ -2363,7 +2363,7 @@ public:
 class WXDLLIMPEXP_CORE wxMoveEvent : public wxEvent
 {
 public:
-    wxMoveEvent()
+    wxMoveEvent() noexcept
         : wxEvent(0, wxEVT_MOVE)
         { }
     wxMoveEvent(const wxPoint& pos, int winid = 0)
@@ -2410,7 +2410,7 @@ class WXDLLIMPEXP_CORE wxPaintEvent : public wxEvent
 #ifdef WXBUILDING
 public:
 #endif // WXBUILDING
-    explicit wxPaintEvent(wxWindowBase* window = nullptr);
+    explicit wxPaintEvent(wxWindowBase* window = nullptr) noexcept;
 	
     wxPaintEvent& operator=(const wxPaintEvent&) = delete;
 
@@ -2447,7 +2447,7 @@ public:
 class WXDLLIMPEXP_CORE wxEraseEvent : public wxEvent
 {
 public:
-    wxEraseEvent(int Id = 0, wxDC *dc = nullptr)
+    wxEraseEvent(int Id = 0, wxDC *dc = nullptr) noexcept
         : wxEvent(Id, wxEVT_ERASE_BACKGROUND),
           m_dc(dc)
         { }
@@ -2478,7 +2478,7 @@ public:
 class WXDLLIMPEXP_CORE wxFocusEvent : public wxEvent
 {
 public:
-    wxFocusEvent(wxEventType type = wxEVT_NULL, int winid = 0)
+    wxFocusEvent(wxEventType type = wxEVT_NULL, int winid = 0) noexcept
         : wxEvent(winid, type)
         { m_win = nullptr; }
 
@@ -2543,7 +2543,7 @@ public:
     };
 
     wxActivateEvent(wxEventType type = wxEVT_NULL, bool active = true,
-                    int Id = 0, Reason activationReason = Reason_Unknown)
+                    int Id = 0, Reason activationReason = Reason_Unknown) noexcept
         : wxEvent(Id, type),
         m_activationReason(activationReason)
     {
@@ -2581,7 +2581,7 @@ public:
 class WXDLLIMPEXP_CORE wxInitDialogEvent : public wxEvent
 {
 public:
-    wxInitDialogEvent(int Id = 0)
+    wxInitDialogEvent(int Id = 0) noexcept
         : wxEvent(Id, wxEVT_INIT_DIALOG)
         { }
 
@@ -2605,7 +2605,7 @@ public:
 class WXDLLIMPEXP_CORE wxMenuEvent : public wxEvent
 {
 public:
-    wxMenuEvent(wxEventType type = wxEVT_NULL, int winid = 0, wxMenu* menu = nullptr)
+    wxMenuEvent(wxEventType type = wxEVT_NULL, int winid = 0, wxMenu* menu = nullptr) noexcept
         : wxEvent(winid, type)
         { m_menuId = winid; m_menu = menu; }
     wxMenuEvent(const wxMenuEvent& event)
@@ -2645,7 +2645,7 @@ public:
 class WXDLLIMPEXP_CORE wxCloseEvent : public wxEvent
 {
 public:
-    wxCloseEvent(wxEventType type = wxEVT_NULL, int winid = 0)
+    wxCloseEvent(wxEventType type = wxEVT_NULL, int winid = 0) noexcept
         : wxEvent(winid, type)
           {}
 
@@ -2696,7 +2696,7 @@ public:
 class WXDLLIMPEXP_CORE wxShowEvent : public wxEvent
 {
 public:
-    wxShowEvent(int winid = 0, bool show = false)
+    wxShowEvent(int winid = 0, bool show = false) noexcept
         : wxEvent(winid, wxEVT_SHOW)
         { m_show = show; }
     wxShowEvent(const wxShowEvent& event)
@@ -2728,7 +2728,7 @@ public:
 class WXDLLIMPEXP_CORE wxIconizeEvent : public wxEvent
 {
 public:
-    wxIconizeEvent(int winid = 0, bool iconized = true)
+    wxIconizeEvent(int winid = 0, bool iconized = true) noexcept
         : wxEvent(winid, wxEVT_ICONIZE)
         { m_iconized = iconized; }
     wxIconizeEvent(const wxIconizeEvent& event)
@@ -2757,7 +2757,7 @@ public:
 class WXDLLIMPEXP_CORE wxMaximizeEvent : public wxEvent
 {
 public:
-    wxMaximizeEvent(int winid = 0)
+    wxMaximizeEvent(int winid = 0) noexcept
         : wxEvent(winid, wxEVT_MAXIMIZE)
         { }
 
@@ -2777,7 +2777,7 @@ public:
 class WXDLLIMPEXP_CORE wxFullScreenEvent : public wxEvent
 {
 public:
-    wxFullScreenEvent(int winid = 0, bool fullscreen = true)
+    wxFullScreenEvent(int winid = 0, bool fullscreen = true) noexcept
         : wxEvent(winid, wxEVT_FULLSCREEN)
         { m_fullscreen = fullscreen; }
     wxFullScreenEvent(const wxFullScreenEvent& event)
@@ -2837,7 +2837,7 @@ public:
     wxJoystickEvent(wxEventType type = wxEVT_NULL,
                     int state = 0,
                     int joystick = wxJOYSTICK1,
-                    int change = 0)
+                    int change = 0) noexcept
         : wxEvent(0, type),
           
           
@@ -2911,7 +2911,7 @@ public:
 
     wxDropFilesEvent(wxEventType type = wxEVT_NULL,
                      int noFiles = 0,
-                     std::vector<std::string> files = {})
+                     std::vector<std::string> files = {}) noexcept
         : wxEvent(0, type),
           m_noFiles(noFiles),
           m_files(files)
@@ -2953,7 +2953,7 @@ enum wxUpdateUIMode
 class WXDLLIMPEXP_CORE wxUpdateUIEvent : public wxCommandEvent
 {
 public:
-    wxUpdateUIEvent(wxWindowID commandId = 0)
+    wxUpdateUIEvent(wxWindowID commandId = 0) noexcept
         : wxCommandEvent(wxEVT_UPDATE_UI, commandId)
     {
         m_checked =
@@ -3042,7 +3042,7 @@ public:
 class WXDLLIMPEXP_CORE wxSysColourChangedEvent : public wxEvent
 {
 public:
-    wxSysColourChangedEvent()
+    wxSysColourChangedEvent() noexcept
         : wxEvent(0, wxEVT_SYS_COLOUR_CHANGED)
         { }
 
@@ -3065,7 +3065,7 @@ public:
 class WXDLLIMPEXP_CORE wxMouseCaptureChangedEvent : public wxEvent
 {
 public:
-    wxMouseCaptureChangedEvent(wxWindowID winid = 0, wxWindow* gainedCapture = nullptr)
+    wxMouseCaptureChangedEvent(wxWindowID winid = 0, wxWindow* gainedCapture = nullptr) noexcept
         : wxEvent(winid, wxEVT_MOUSE_CAPTURE_CHANGED),
           m_gainedCapture(gainedCapture)
         { }
@@ -3097,7 +3097,7 @@ public:
 class WXDLLIMPEXP_CORE wxMouseCaptureLostEvent : public wxEvent
 {
 public:
-    wxMouseCaptureLostEvent(wxWindowID winid = 0)
+    wxMouseCaptureLostEvent(wxWindowID winid = 0) noexcept
         : wxEvent(winid, wxEVT_MOUSE_CAPTURE_LOST)
     {}
 
@@ -3119,7 +3119,7 @@ public:
 class WXDLLIMPEXP_CORE wxDisplayChangedEvent : public wxEvent
 {
 public:
-    wxDisplayChangedEvent()
+    wxDisplayChangedEvent() noexcept
         : wxEvent(0, wxEVT_DISPLAY_CHANGED)
         { }
 
@@ -3141,7 +3141,7 @@ class WXDLLIMPEXP_CORE wxDPIChangedEvent : public wxEvent
 public:
     explicit
     wxDPIChangedEvent(const wxSize& oldDPI = wxDefaultSize,
-                      const wxSize& newDPI = wxDefaultSize)
+                      const wxSize& newDPI = wxDefaultSize) noexcept
         : wxEvent(0, wxEVT_DPI_CHANGED),
           m_oldDPI(oldDPI),
           m_newDPI(newDPI)
@@ -3171,7 +3171,7 @@ public:
 class WXDLLIMPEXP_CORE wxPaletteChangedEvent : public wxEvent
 {
 public:
-    wxPaletteChangedEvent(wxWindowID winid = 0)
+    wxPaletteChangedEvent(wxWindowID winid = 0) noexcept
         : wxEvent(winid, wxEVT_PALETTE_CHANGED)
           
         { }
@@ -3202,7 +3202,7 @@ public:
 class WXDLLIMPEXP_CORE wxQueryNewPaletteEvent : public wxEvent
 {
 public:
-    wxQueryNewPaletteEvent(wxWindowID winid = 0)
+    wxQueryNewPaletteEvent(wxWindowID winid = 0) noexcept
         : wxEvent(winid, wxEVT_QUERY_NEW_PALETTE)
           
         { }
@@ -3233,7 +3233,7 @@ public:
 class WXDLLIMPEXP_CORE wxNavigationKeyEvent : public wxEvent
 {
 public:
-    wxNavigationKeyEvent()
+    wxNavigationKeyEvent() noexcept
         : wxEvent(0, wxEVT_NAVIGATION_KEY),
           m_flags(IsForward | FromTab)  
     {
@@ -3320,7 +3320,7 @@ public:
 class WXDLLIMPEXP_CORE wxWindowDestroyEvent : public wxCommandEvent
 {
 public:
-    wxWindowDestroyEvent(wxWindow *win = nullptr);
+    wxWindowDestroyEvent(wxWindow *win = nullptr) noexcept;
 
 	wxWindowDestroyEvent& operator=(const wxWindowDestroyEvent&) = delete;
 
@@ -3353,7 +3353,7 @@ public:
     wxHelpEvent(wxEventType type = wxEVT_NULL,
                 wxWindowID winid = 0,
                 const wxPoint& pt = wxDefaultPosition,
-                Origin origin = Origin_Unknown)
+                Origin origin = Origin_Unknown) noexcept
         : wxCommandEvent(type, winid),
           m_pos(pt),
           m_origin(GuessOrigin(origin))
@@ -3412,7 +3412,7 @@ class WXDLLIMPEXP_CORE wxClipboardTextEvent : public wxCommandEvent
 {
 public:
     wxClipboardTextEvent(wxEventType type = wxEVT_NULL,
-                     wxWindowID winid = 0)
+                     wxWindowID winid = 0) noexcept
         : wxCommandEvent(type, winid)
     { }
 
@@ -3441,7 +3441,7 @@ class WXDLLIMPEXP_CORE wxContextMenuEvent : public wxCommandEvent
 public:
     wxContextMenuEvent(wxEventType type = wxEVT_NULL,
                        wxWindowID winid = 0,
-                       const wxPoint& pt = wxDefaultPosition)
+                       const wxPoint& pt = wxDefaultPosition) noexcept
         : wxCommandEvent(type, winid),
           m_pos(pt)
     { }

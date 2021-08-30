@@ -37,7 +37,7 @@ enum wxFileHistoryMenuPathStyle
 class WXDLLIMPEXP_CORE wxFileHistoryBase
 {
 public:
-    wxFileHistoryBase(size_t maxFiles = 9, wxWindowID idBase = wxID_FILE1);
+    wxFileHistoryBase(size_t maxFiles = 9, wxWindowID idBase = wxID_FILE1) noexcept;
 
     wxFileHistoryBase(const wxFileHistoryBase&) = delete;
 	wxFileHistoryBase& operator=(const wxFileHistoryBase&) = delete;
@@ -108,7 +108,7 @@ private:
     class WXDLLIMPEXP_CORE wxFileHistory : public wxFileHistoryBase
     {
     public:
-        wxFileHistory(size_t maxFiles = 9, wxWindowID idBase = wxID_FILE1)
+        wxFileHistory(size_t maxFiles = 9, wxWindowID idBase = wxID_FILE1) noexcept
             : wxFileHistoryBase(maxFiles, idBase) {}
     };
 #endif

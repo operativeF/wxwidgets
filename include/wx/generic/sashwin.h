@@ -64,7 +64,7 @@ class WXDLLIMPEXP_CORE wxSashWindow: public wxWindow
 {
 public:
     // Default constructor
-    wxSashWindow()
+    wxSashWindow() noexcept
     {
         // Eventually, we'll respond to colour change messages
         InitColours();
@@ -208,7 +208,7 @@ enum wxSashDragStatus
 class WXDLLIMPEXP_CORE wxSashEvent: public wxCommandEvent
 {
 public:
-    wxSashEvent(int id = 0, wxSashEdgePosition edge = wxSASH_NONE)
+    wxSashEvent(int id = 0, wxSashEdgePosition edge = wxSASH_NONE) noexcept
         : m_edge(edge)
     {
         m_id = id;

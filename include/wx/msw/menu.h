@@ -51,7 +51,7 @@ public:
         }
     }
 
-    wxMenu(long style = 0) : wxMenuBase(style)
+    explicit wxMenu(long style = 0) noexcept : wxMenuBase(style)
     { 
         InitNoCreate();
 

@@ -24,7 +24,7 @@ class WXDLLIMPEXP_CORE wxBitmapDataObject : public wxBitmapDataObjectBase
 {
 public:
     // ctors
-    wxBitmapDataObject(const wxBitmap& bitmap = wxNullBitmap)
+    wxBitmapDataObject(const wxBitmap& bitmap = wxNullBitmap) noexcept
         : wxBitmapDataObjectBase(bitmap)
         {
             SetFormat(wxDF_DIB);
@@ -64,7 +64,7 @@ class WXDLLIMPEXP_CORE wxBitmapDataObject2 : public wxBitmapDataObjectBase
 {
 public:
     // ctors
-    wxBitmapDataObject2(const wxBitmap& bitmap = wxNullBitmap)
+    explicit wxBitmapDataObject2(const wxBitmap& bitmap = wxNullBitmap) noexcept
         : wxBitmapDataObjectBase(bitmap)
         {
         }

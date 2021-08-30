@@ -550,7 +550,7 @@ bool wxHTMLDataObject::SetData(size_t WXUNUSED(len), const void *buf)
 // wxCustomDataObject
 // ----------------------------------------------------------------------------
 
-wxCustomDataObject::wxCustomDataObject(const wxDataFormat& format)
+wxCustomDataObject::wxCustomDataObject(const wxDataFormat& format) noexcept
     : wxDataObjectSimple(format)
 {
 }
@@ -682,7 +682,7 @@ wxImage wxImageDataObject::GetImage() const
 //     internal compiler error with VC++ 5.0 (hey, even gcc compiles this!),
 //     so use SetDataObject() instead
 
-wxTextDropTarget::wxTextDropTarget()
+wxTextDropTarget::wxTextDropTarget() noexcept
 {
     SetDataObject(new wxTextDataObject);
 }

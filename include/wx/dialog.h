@@ -64,7 +64,7 @@ inline constexpr char wxDialogNameStr[] = "dialog";
 class WXDLLIMPEXP_CORE wxDialogBase : public wxNavigationEnabled<wxTopLevelWindow>
 {
 public:
-    wxDialogBase();
+    wxDialogBase() noexcept;
     ~wxDialogBase() override = default;
 
     wxDialogBase(const wxDialogBase&) = delete;

@@ -23,7 +23,7 @@
 class WXDLLIMPEXP_CORE wxUIActionSimulator
 {
 public:
-    wxUIActionSimulator();
+    wxUIActionSimulator() noexcept;
     ~wxUIActionSimulator();
 
    wxUIActionSimulator(const wxUIActionSimulator&) = delete;

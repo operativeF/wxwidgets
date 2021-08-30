@@ -244,7 +244,7 @@ private:
 class WXDLLIMPEXP_BASE wxMBConvUTF7 : public wxMBConv
 {
 public:
-    wxMBConvUTF7() = default;
+    wxMBConvUTF7() noexcept = default;
 
     // compiler-generated copy ctor, assignment operator and dtor are ok
     // (assuming it's ok to copy the shift state -- not really sure about it)
@@ -282,7 +282,7 @@ private:
 
     public:
         // the initial state is direct
-        DecoderState() { mode = Direct; accum = bit = msb = 0; isLSB = false; }
+        DecoderState() noexcept { mode = Direct; accum = bit = msb = 0; isLSB = false; }
 
         // switch to/from shifted mode
         void ToDirect() { mode = Direct; }
@@ -311,7 +311,7 @@ private:
         Mode mode;
 
     public:
-        EncoderState() { mode = Direct; accum = bit = 0; }
+        EncoderState() noexcept { mode = Direct; accum = bit = 0; }
 
         void ToDirect() { mode = Direct; }
         void ToShifted() { mode = Shifted; accum = bit = 0; }
@@ -362,7 +362,7 @@ public:
         MAP_INVALID_UTF8_TO_OCTAL = 2
     };
 
-    wxMBConvUTF8(int options = MAP_INVALID_UTF8_NOT) : m_options(options) { }
+    wxMBConvUTF8(int options = MAP_INVALID_UTF8_NOT) noexcept : m_options(options) { }
 
     size_t ToWChar(wchar_t *dst, size_t dstLen,
                            const char *src, size_t srcLen = wxNO_LEN) const override;

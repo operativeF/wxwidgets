@@ -23,7 +23,7 @@ class wxCoTaskMemPtr
 public:
     using element_type = T;
 
-    wxCoTaskMemPtr()
+    wxCoTaskMemPtr() noexcept
         : m_ptr(nullptr)
     {}
 

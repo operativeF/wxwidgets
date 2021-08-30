@@ -38,7 +38,7 @@ class WXDLLIMPEXP_CORE wxSplashScreen: public wxFrame,
 {
 public:
     // for RTTI macros only
-    wxSplashScreen() { wxEvtHandler::AddFilter(this); }
+    wxSplashScreen() noexcept { wxEvtHandler::AddFilter(this); }
     wxSplashScreen(const wxBitmap& bitmap, long splashStyle, int milliseconds,
                    wxWindow* parent, wxWindowID id,
                    const wxPoint& pos = wxDefaultPosition,

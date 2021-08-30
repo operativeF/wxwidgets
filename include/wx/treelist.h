@@ -69,7 +69,7 @@ enum
 class wxTreeListItem : public wxItemId<wxTreeListModelNode*>
 {
 public:
-    wxTreeListItem(wxTreeListModelNode* item = nullptr)
+    wxTreeListItem(wxTreeListModelNode* item = nullptr) noexcept
         : wxItemId<wxTreeListModelNode*>(item)
     {
     }
@@ -466,7 +466,7 @@ class WXDLLIMPEXP_CORE wxTreeListEvent : public wxNotifyEvent
 {
 public:
     // Default ctor is provided for wxRTTI needs only but should never be used.
-    wxTreeListEvent() { 
+    wxTreeListEvent() noexcept { 
         m_column = gsl::narrow_cast<unsigned>(-1);
 
         m_oldCheckedState = wxCHK_UNDETERMINED;

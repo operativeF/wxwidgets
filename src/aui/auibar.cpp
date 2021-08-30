@@ -99,7 +99,7 @@ class ToolbarCommandCapture : public wxEvtHandler
 {
 public:
 
-    ToolbarCommandCapture() { m_lastId = 0; }
+    ToolbarCommandCapture() noexcept { m_lastId = 0; }
     int GetCommandId() const { return m_lastId; }
 
     bool ProcessEvent(wxEvent& evt) override
@@ -122,7 +122,7 @@ private:
 
 } // namespace anonymous
 
-wxAuiGenericToolBarArt::wxAuiGenericToolBarArt()
+wxAuiGenericToolBarArt::wxAuiGenericToolBarArt() noexcept
 {
     UpdateColoursFromSystem();
 

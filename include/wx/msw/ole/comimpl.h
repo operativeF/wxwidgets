@@ -61,7 +61,7 @@ extern WXDLLIMPEXP_CORE bool IsIidFromList(REFIID riid, const IID *aIids[], size
 class wxAutoULong
 {
 public:
-    wxAutoULong(ULONG value = 0) : m_Value(value) { }
+    wxAutoULong(ULONG value = 0) noexcept : m_Value(value) { }
 
     operator ULONG&() { return m_Value; }
     ULONG& operator=(ULONG value) { m_Value = value; return m_Value;  }

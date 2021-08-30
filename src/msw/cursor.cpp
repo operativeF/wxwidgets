@@ -43,7 +43,7 @@ public:
     // the second parameter is used to tell us to delete the cursor when we're
     // done with it (normally we shouldn't call DestroyCursor() this is why it
     // doesn't happen by default)
-    explicit wxCursorRefData(HCURSOR hcursor = nullptr, bool takeOwnership = false);
+    explicit wxCursorRefData(HCURSOR hcursor = nullptr, bool takeOwnership = false) noexcept;
 
     ~wxCursorRefData() override { Free(); }
 
@@ -122,7 +122,7 @@ wxCoord wxCursorRefData::GetStandardHeight()
     return wxSystemSettings::GetMetric(wxSYS_CURSOR_Y, win);
 }
 
-wxCursorRefData::wxCursorRefData(HCURSOR hcursor, bool destroy)
+wxCursorRefData::wxCursorRefData(HCURSOR hcursor, bool destroy) noexcept
 {
     m_hCursor = (WXHCURSOR)hcursor;
 

@@ -2100,17 +2100,17 @@ public:
     /**
         Default constructor.
     */
-    wxRichTextRange() { m_start = 0; m_end = 0; }
+    wxRichTextRange() noexcept { m_start = 0; m_end = 0; }
 
     /**
         Constructor taking start and end positions.
     */
-    wxRichTextRange(long start, long end) { m_start = start; m_end = end; }
+    wxRichTextRange(long start, long end) noexcept { m_start = start; m_end = end; }
 
     /**
         Copy constructor.
     */
-    wxRichTextRange(const wxRichTextRange& range) { m_start = range.m_start; m_end = range.m_end; }
+    wxRichTextRange(const wxRichTextRange& range) noexcept { m_start = range.m_start; m_end = range.m_end; }
     ~wxRichTextRange() = default;
 
     /**
@@ -4008,7 +4008,7 @@ public:
     /**
         Creates a field type definition.
     */
-    wxRichTextFieldType(const wxString& name = wxEmptyString)
+    wxRichTextFieldType(const wxString& name = wxEmptyString) noexcept
         : m_name(name)
         { }
 

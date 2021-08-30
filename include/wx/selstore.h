@@ -39,7 +39,7 @@ WX_DEFINE_SORTED_EXPORTED_ARRAY_CMP_INT(unsigned, wxUIntCmp, wxSelectedIndices);
 class WXDLLIMPEXP_CORE wxSelectionStore
 {
 public:
-    wxSelectionStore() : m_itemsSel(wxUIntCmp) {  m_count = 0; m_defaultState = false;  }
+    wxSelectionStore() noexcept : m_itemsSel(wxUIntCmp) {  m_count = 0; m_defaultState = false;  }
 
    wxSelectionStore(const wxSelectionStore&) = delete;
    wxSelectionStore& operator=(const wxSelectionStore&) = delete;

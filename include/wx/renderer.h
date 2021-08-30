@@ -418,7 +418,7 @@ public:
 class WXDLLIMPEXP_CORE wxDelegateRendererNative : public wxRendererNative
 {
 public:
-    wxDelegateRendererNative()
+    wxDelegateRendererNative() noexcept
         : m_rendererNative(GetGeneric()) { }
 
     wxDelegateRendererNative(wxRendererNative& rendererNative)

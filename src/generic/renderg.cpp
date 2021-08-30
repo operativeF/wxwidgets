@@ -42,7 +42,7 @@
 class WXDLLEXPORT wxRendererGeneric : public wxRendererNative
 {
 public:
-    wxRendererGeneric();
+    wxRendererGeneric() noexcept;
 
     int  DrawHeaderButton(wxWindow *win,
                                   wxDC& dc,
@@ -249,7 +249,7 @@ void wxRendererGeneric::Cleanup()
 
 wxRendererGeneric* wxRendererGeneric::sm_rendererGeneric = nullptr;
 
-wxRendererGeneric::wxRendererGeneric()
+wxRendererGeneric::wxRendererGeneric() noexcept
     : m_penBlack(wxSystemSettings::GetColour(wxSYS_COLOUR_3DDKSHADOW)),
       m_penDarkGrey(wxSystemSettings::GetColour(wxSYS_COLOUR_3DSHADOW)),
       m_penLightGrey(wxSystemSettings::GetColour(wxSYS_COLOUR_3DFACE)),

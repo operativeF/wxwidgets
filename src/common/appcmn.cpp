@@ -49,7 +49,7 @@ WX_CHECK_BUILD_OPTIONS("wxCore")
 // initialization
 // ----------------------------------------------------------------------------
 
-wxAppBase::wxAppBase()
+wxAppBase::wxAppBase() noexcept
 {
     // We don't want to exit the app if the user code shows a dialog from its
     // OnInit() -- but this is what would happen if we set m_exitOnFrameDelete

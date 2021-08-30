@@ -111,7 +111,7 @@ class WXDLLIMPEXP_CORE wxGridCellNumberEditor : public wxGridCellTextEditor
 public:
     // allows to specify the range - if min == max == -1, no range checking is
     // done
-    wxGridCellNumberEditor(int min = -1, int max = -1);
+    wxGridCellNumberEditor(int min = -1, int max = -1) noexcept;
 
     void Create(wxWindow* parent,
                         wxWindowID id,
@@ -314,7 +314,7 @@ class WXDLLIMPEXP_CORE wxGridCellChoiceEditor : public wxGridCellEditor
 public:
     // if !allowOthers, user can't type a string not in choices array
     wxGridCellChoiceEditor(const std::vector<std::string>& choices = {},
-                           bool allowOthers = false);
+                           bool allowOthers = false) noexcept;
 
     wxGridCellChoiceEditor(const wxGridCellChoiceEditor&) = delete;
 	wxGridCellChoiceEditor& operator=(const wxGridCellChoiceEditor&) = delete;

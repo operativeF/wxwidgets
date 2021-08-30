@@ -798,7 +798,7 @@ wxBEGIN_EVENT_TABLE(wxGenericPageSetupDialog, wxPageSetupDialogBase)
 wxEND_EVENT_TABLE()
 
 wxGenericPageSetupDialog::wxGenericPageSetupDialog( wxWindow *parent,
-                                                    wxPageSetupDialogData* data)
+                                                    wxPageSetupDialogData* data) noexcept
     : wxPageSetupDialogBase( parent,
                 wxID_ANY,
                 _("Page setup"),

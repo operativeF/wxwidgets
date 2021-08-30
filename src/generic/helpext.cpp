@@ -60,7 +60,7 @@ constexpr char WXEXTHELP_ENVVAR_BROWSER[] = "WX_HELPBROWSER";
 // Is browser a netscape browser?
 constexpr char WXEXTHELP_ENVVAR_BROWSERISNETSCAPE[] =  "WX_HELPBROWSER_NS";
 
-wxExtHelpController::wxExtHelpController(wxWindow* parentWindow)
+wxExtHelpController::wxExtHelpController(wxWindow* parentWindow) noexcept
                    : wxHelpControllerBase(parentWindow)
 {
     auto* browser = wxGetenv(boost::nowide::widen(WXEXTHELP_ENVVAR_BROWSER).c_str());

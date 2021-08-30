@@ -60,7 +60,7 @@ enum wxLayoutAlignment
 class WXDLLIMPEXP_CORE wxQueryLayoutInfoEvent: public wxEvent
 {
 public:
-    wxQueryLayoutInfoEvent(wxWindowID id = 0)
+    wxQueryLayoutInfoEvent(wxWindowID id = 0) noexcept
     {
         m_id = id;
         SetEventType(wxEVT_QUERY_LAYOUT_INFO);
@@ -115,7 +115,7 @@ typedef void (wxEvtHandler::*wxQueryLayoutInfoEventFunction)(wxQueryLayoutInfoEv
 class WXDLLIMPEXP_CORE wxCalculateLayoutEvent: public wxEvent
 {
 public:
-    wxCalculateLayoutEvent(wxWindowID id = 0)
+    wxCalculateLayoutEvent(wxWindowID id = 0) noexcept
     {
         SetEventType(wxEVT_CALCULATE_LAYOUT);
         m_flags = 0;
@@ -159,7 +159,7 @@ typedef void (wxEvtHandler::*wxCalculateLayoutEventFunction)(wxCalculateLayoutEv
 class WXDLLIMPEXP_CORE wxSashLayoutWindow: public wxSashWindow
 {
 public:
-    wxSashLayoutWindow()
+    wxSashLayoutWindow() noexcept
     {
         
     m_orientation = wxLAYOUT_HORIZONTAL;

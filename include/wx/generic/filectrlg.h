@@ -126,7 +126,7 @@ protected:
 class WXDLLIMPEXP_CORE wxFileListCtrl : public wxListCtrl
 {
 public:
-    wxFileListCtrl();
+    wxFileListCtrl() noexcept;
     wxFileListCtrl( wxWindow *win,
                 wxWindowID id,
                 const wxString &wild,

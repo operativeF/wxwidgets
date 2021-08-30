@@ -188,7 +188,7 @@ class WXDLLIMPEXP_FWD_CORE wxTreeCtrlBase;
 class WXDLLIMPEXP_CORE wxTreeEvent : public wxNotifyEvent
 {
 public:
-    wxTreeEvent(wxEventType commandType = wxEVT_NULL, int id = 0);
+    wxTreeEvent(wxEventType commandType = wxEVT_NULL, int id = 0) noexcept;
     wxTreeEvent(wxEventType commandType,
                 wxTreeCtrlBase *tree,
                 const wxTreeItemId &item = wxTreeItemId());

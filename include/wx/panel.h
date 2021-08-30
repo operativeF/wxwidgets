@@ -28,12 +28,12 @@ class WXDLLIMPEXP_FWD_CORE wxControlContainer;
 class WXDLLIMPEXP_CORE wxPanelBase : public wxNavigationEnabled<wxWindow>
 {
 public:
-    wxPanelBase() = default;
+    wxPanelBase() noexcept = default;
 
     wxPanelBase(const wxPanelBase&) = delete;
     wxPanelBase& operator=(const wxPanelBase&) = delete;
-    wxPanelBase(wxPanelBase&&) = default;
-    wxPanelBase& operator=(wxPanelBase&&) = default;
+    wxPanelBase(wxPanelBase&&) noexcept = default;
+    wxPanelBase& operator=(wxPanelBase&&) noexcept = default;
 
     // Derived classes should also provide this constructor:
     /*

@@ -33,7 +33,7 @@ class WXDLLIMPEXP_FWD_CORE wxDC;
 class WXDLLIMPEXP_CORE wxOverlay
 {
 public:
-    wxOverlay();
+    wxOverlay() noexcept;
     ~wxOverlay();
 
     wxOverlay(const wxOverlay&) = delete;

@@ -247,7 +247,7 @@ wxRect operator*(const wxRect& r1, const wxRect& r2)
     return wxRect(x1, y1, x2-x1, y2-y1);
 }
 
-constexpr wxRealPoint::wxRealPoint(const wxPoint& pt)
+constexpr wxRealPoint::wxRealPoint(const wxPoint& pt) noexcept
  : x(pt.x), y(pt.y)
 {
 }

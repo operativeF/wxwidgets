@@ -28,7 +28,7 @@ class WXDLLIMPEXP_CORE wxGenericCalendarCtrl : public wxCalendarCtrlBase
 public:
     // construction
     // FIXME: This is just the other constructor without creation. Necessary?
-    wxGenericCalendarCtrl()
+    wxGenericCalendarCtrl() noexcept
     { 
         wxDateTime::WeekDay wd;
         for ( wd = wxDateTime::Sun; wd < wxDateTime::Inv_WeekDay; wxNextWDay(wd) )

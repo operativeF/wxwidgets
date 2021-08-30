@@ -424,7 +424,7 @@ STDMETHODIMP wxIDropTarget::Drop(IDataObject *pIDataSource,
 // ctor/dtor
 // ----------------------------------------------------------------------------
 
-wxDropTarget::wxDropTarget(wxDataObject *dataObj)
+wxDropTarget::wxDropTarget(wxDataObject *dataObj) noexcept
             : wxDropTargetBase(dataObj)
               
 {

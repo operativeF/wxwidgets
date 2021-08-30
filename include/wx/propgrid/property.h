@@ -704,7 +704,7 @@ public:
     using ValArrItem = long;
 
     // Default constructor.
-    wxPGChoices()
+    wxPGChoices() noexcept
     {
         Init();
     }

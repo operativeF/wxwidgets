@@ -265,7 +265,7 @@ wxPaintDC::wxPaintDC(wxWindow *win)
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxScreenDC, wxWindowDC);
 
-wxScreenDC::wxScreenDC()
+wxScreenDC::wxScreenDC() noexcept
           : wxDC(wxDCFactory::Get()->CreateScreenDC(this))
 {
 }

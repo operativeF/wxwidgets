@@ -25,7 +25,7 @@
 // wxOverlay
 // ----------------------------------------------------------------------------
 
-wxOverlay::wxOverlay()
+wxOverlay::wxOverlay() noexcept
     : m_impl(new wxOverlayImpl)
 {
 }

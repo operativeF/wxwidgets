@@ -126,7 +126,7 @@ public:
     // constructors and assignment
 
         // the usual stuff
-    wxFileName() { Clear(); }
+    wxFileName() noexcept { Clear(); }
     wxFileName(const wxFileName& filepath) { Assign(filepath); }
 
         // from a full filename: if it terminates with a '/', a directory path

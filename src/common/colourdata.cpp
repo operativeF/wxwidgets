@@ -17,7 +17,7 @@
 // wxColourData
 // ----------------------------------------------------------------------------
 
-wxColourData::wxColourData()
+wxColourData::wxColourData() noexcept
 {
     m_dataColour.Set(0, 0, 0);
     // m_custColours are wxNullColours initially

@@ -1462,7 +1462,7 @@ void wxBitmap::UngetRawData(wxPixelDataBase& WXUNUSED(data))
 // wxMask
 // ----------------------------------------------------------------------------
 
-wxMask::wxMask()
+wxMask::wxMask() noexcept
 {
     m_maskBitmap = nullptr;
 }

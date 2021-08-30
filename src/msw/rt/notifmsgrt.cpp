@@ -462,7 +462,7 @@ HRESULT wxToastEventHandler::Invoke(IToastNotification *WXUNUSED(sender),
 class wxToastNotifMsgModule : public wxModule
 {
 public:
-    wxToastNotifMsgModule()
+    wxToastNotifMsgModule() noexcept
     {
         // Using RT API requires OLE and, importantly, we must ensure our
         // OnExit() runs before it is uninitialized.

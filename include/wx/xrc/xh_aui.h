@@ -22,7 +22,7 @@ class WXDLLIMPEXP_FWD_AUI wxAuiNotebook;
 class WXDLLIMPEXP_AUI wxAuiXmlHandler : public wxXmlResourceHandler
 {
 public:
-    wxAuiXmlHandler();
+    wxAuiXmlHandler() noexcept;
     wxObject *DoCreateResource() override;
     bool CanHandle(wxXmlNode *node) override;
 

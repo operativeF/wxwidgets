@@ -279,7 +279,7 @@ class wxAnyValueTypeImplBase : public wxAnyValueType
     using Ops = typename wxIf<sizeof(T) <= WX_ANY_VALUE_BUFFER_SIZE, wxPrivate::wxAnyValueTypeOpsInplace<T>, wxPrivate::wxAnyValueTypeOpsGeneric<T>>::value;
 
 public:
-    wxAnyValueTypeImplBase() : wxAnyValueType() { }
+    wxAnyValueTypeImplBase() noexcept : wxAnyValueType() { }
     ~wxAnyValueTypeImplBase() override = default;
 
     void DeleteValue(wxAnyValueBuffer& buf) const override

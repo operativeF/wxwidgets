@@ -137,7 +137,7 @@ class WXDLLIMPEXP_CORE wxNotificationMessage : public
 #endif
 {
 public:
-    wxNotificationMessage();
+    wxNotificationMessage() noexcept;
     
     wxNotificationMessage(const std::string& title,
                           const std::string& message = {},

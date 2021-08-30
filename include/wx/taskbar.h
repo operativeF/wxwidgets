@@ -41,12 +41,12 @@ enum class wxTaskBarIconType
 class WXDLLIMPEXP_CORE wxTaskBarIconBase : public wxEvtHandler
 {
 public:
-    wxTaskBarIconBase() = default;
+    wxTaskBarIconBase() noexcept = default;
 
    wxTaskBarIconBase(const wxTaskBarIconBase&) = delete;
    wxTaskBarIconBase& operator=(const wxTaskBarIconBase&) = delete;
-   wxTaskBarIconBase(wxTaskBarIconBase&&) = default;
-   wxTaskBarIconBase& operator=(wxTaskBarIconBase&&) = default;
+   wxTaskBarIconBase(wxTaskBarIconBase&&) noexcept = default;
+   wxTaskBarIconBase& operator=(wxTaskBarIconBase&&) noexcept = default;
 
 #if defined(__WXGTK__) || defined(__WXX11__) || defined(__WXMOTIF__) || defined(__WXQT__)
     static bool IsAvailable();

@@ -97,7 +97,7 @@ class WXDLLIMPEXP_CORE wxPreferencesEditor
 {
 public:
     // Ctor creates an empty editor, use AddPage() to add controls to it.
-    wxPreferencesEditor(const wxString& title = wxString());
+    wxPreferencesEditor(const wxString& title = wxString()) noexcept;
 
     wxPreferencesEditor(const wxPreferencesEditor&) = delete;
     wxPreferencesEditor& operator=(const wxPreferencesEditor&) = delete;

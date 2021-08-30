@@ -280,7 +280,7 @@ class wxGraphicsGradientStop
 {
 public:
     wxGraphicsGradientStop(wxColour col = wxTransparentColour,
-                           float pos = 0.0f)
+                           float pos = 0.0f) noexcept
         : m_col(col),
           m_pos(pos)
     {
@@ -364,7 +364,7 @@ class wxGraphicsPenInfo : public wxPenInfoBase<wxGraphicsPenInfo>
 public:
     explicit wxGraphicsPenInfo(const wxColour& colour = wxColour(),
                                double width = 1.0,
-                               wxPenStyle style = wxPenStyle::Solid)
+                               wxPenStyle style = wxPenStyle::Solid) noexcept
         : wxPenInfoBase<wxGraphicsPenInfo>(colour, style)
     {
         m_width = width;

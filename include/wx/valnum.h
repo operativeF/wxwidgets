@@ -338,7 +338,7 @@ public:
     //
     // Sets the range appropriately for the type, including setting 0 as the
     // minimal value for the unsigned types.
-    wxIntegerValidator(ValueType *value = nullptr, int style = wxNUM_VAL_DEFAULT)
+    wxIntegerValidator(ValueType *value = nullptr, int style = wxNUM_VAL_DEFAULT) noexcept
         : Base(value, style)
     {
         this->SetMin(std::numeric_limits<ValueType>::min());

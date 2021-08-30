@@ -2982,7 +2982,7 @@ void wxGDIPlusRenderer::GetVersion(int *major, int *minor, int *micro) const
 class wxGDIPlusRendererModule : public wxModule
 {
 public:
-    wxGDIPlusRendererModule()
+    wxGDIPlusRendererModule() noexcept
     {
         // We must be uninitialized before GDI+ DLL itself is unloaded.
         AddDependency("wxGdiPlusModule");

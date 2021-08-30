@@ -68,7 +68,7 @@ class WXDLLIMPEXP_BASE wxMemoryOutputStream : public wxOutputStream
 {
 public:
     // if data is !NULL it must be allocated with malloc()
-    wxMemoryOutputStream(void *data = nullptr, size_t length = 0);
+    wxMemoryOutputStream(void *data = nullptr, size_t length = 0) noexcept;
     ~wxMemoryOutputStream() override;
 
     wxMemoryOutputStream(const wxMemoryOutputStream&) = delete;

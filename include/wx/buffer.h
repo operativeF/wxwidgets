@@ -68,7 +68,7 @@ class wxScopedCharTypeBuffer
 public:
     using CharType = T;
 
-    wxScopedCharTypeBuffer()
+    wxScopedCharTypeBuffer() noexcept
     {
         m_data = GetNullData();
     }
@@ -252,7 +252,7 @@ protected:
 public:
     using CharType = T;
 
-    wxCharTypeBuffer(const CharType *str = nullptr, size_t len = wxNO_LEN)
+    wxCharTypeBuffer(const CharType *str = nullptr, size_t len = wxNO_LEN) noexcept
     {
         if ( str )
         {
@@ -401,7 +401,7 @@ public:
     //             always return a buffer
     //             + we should derive this class from wxScopedCharTypeBuffer
     //               then
-    wxWritableCharTypeBuffer(const CharType *str = NULL)
+    wxWritableCharTypeBuffer(const CharType *str = NULL) noexcept
         : wxCharTypeBuffer<T>(str) {}
 
     operator CharType*() { return this->data(); }

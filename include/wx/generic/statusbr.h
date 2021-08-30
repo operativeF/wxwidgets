@@ -24,7 +24,7 @@
 class WXDLLIMPEXP_CORE wxStatusBarGeneric : public wxStatusBarBase
 {
 public:
-    wxStatusBarGeneric() { Init(); }
+    wxStatusBarGeneric() noexcept { Init(); }
     wxStatusBarGeneric(wxWindow *parent,
                        wxWindowID winid = wxID_ANY,
                        long style = wxSTB_DEFAULT_STYLE,

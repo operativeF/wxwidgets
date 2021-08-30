@@ -34,7 +34,7 @@ namespace
 class BusyCursor
 {
 public:
-    BusyCursor()
+    BusyCursor() noexcept
     {
         HCURSOR hcursorBusy = ::LoadCursor(nullptr, IDC_WAIT);
         m_hcursorOld = ::SetCursor(hcursorBusy);

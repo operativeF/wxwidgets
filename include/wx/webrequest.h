@@ -21,7 +21,7 @@ class wxWebCredentials
 {
 public:
     wxWebCredentials(const wxString& user = wxString(),
-                     const wxSecretValue& password = wxSecretValue())
+                     const wxSecretValue& password = wxSecretValue()) noexcept
         : m_user(user), m_password(password)
     {
     }

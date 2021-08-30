@@ -34,7 +34,7 @@ HRESULT WXDLLIMPEXP_CORE GetActivationFactory(const wxString& activatableClassId
 class WXDLLIMPEXP_CORE Initializer
 {
 public:
-    Initializer()
+    Initializer() noexcept
         : m_ok(Initialize())
     {
     }

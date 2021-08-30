@@ -1128,7 +1128,7 @@ void wxGridRowOrColAttrData::UpdateAttrRowsOrCols( size_t pos, int numRowsOrCols
 // wxGridCellAttrProvider
 // ----------------------------------------------------------------------------
 
-wxGridCellAttrProvider::wxGridCellAttrProvider()
+wxGridCellAttrProvider::wxGridCellAttrProvider() noexcept
 {
 }
 
@@ -1500,7 +1500,7 @@ wxGridBlockCoords::SymDifference(const wxGridBlockCoords& other) const
 
 wxIMPLEMENT_ABSTRACT_CLASS(wxGridTableBase, wxObject);
 
-wxGridTableBase::wxGridTableBase()
+wxGridTableBase::wxGridTableBase() noexcept
 {
 }
 
@@ -1730,7 +1730,7 @@ void  wxGridTableBase::SetValueAsCustom( int WXUNUSED(row), int WXUNUSED(col),
 // to the grid view
 //
 
-wxGridTableMessage::wxGridTableMessage()
+wxGridTableMessage::wxGridTableMessage() noexcept
 {
     m_table =  nullptr;
     m_id = -1;

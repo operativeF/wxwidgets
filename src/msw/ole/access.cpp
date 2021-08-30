@@ -1762,7 +1762,7 @@ IAccessible* wxIAccessible::GetChildAccessible(int id)
 
 // ctors
 
-wxAccessible::wxAccessible(wxWindow* win)
+wxAccessible::wxAccessible(wxWindow* win) noexcept
             : wxAccessibleBase(win),
               m_pIAccessible(new wxIAccessible(this))
 {

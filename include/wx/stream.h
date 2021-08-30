@@ -281,12 +281,12 @@ protected:
 class WXDLLIMPEXP_BASE wxCountingOutputStream : public wxOutputStream
 {
 public:
-    wxCountingOutputStream();
+    wxCountingOutputStream() noexcept;
 
     wxCountingOutputStream(const wxCountingOutputStream&) = delete;
     wxCountingOutputStream& operator=(const wxCountingOutputStream&) = delete;
-    wxCountingOutputStream(wxCountingOutputStream&&) = default;
-    wxCountingOutputStream& operator=(wxCountingOutputStream&&) = default;
+    wxCountingOutputStream(wxCountingOutputStream&&) noexcept = default;
+    wxCountingOutputStream& operator=(wxCountingOutputStream&&) noexcept = default;
 
     wxFileOffset GetLength() const override;
     bool Ok() const { return IsOk(); }
@@ -403,7 +403,7 @@ public:
     void Remove();
 
 protected:
-    wxFilterClassFactory() : m_next(this) { }
+    wxFilterClassFactory() noexcept : m_next(this) { }
 
     wxFilterClassFactory& operator=(const wxFilterClassFactory&)
         { return *this; }

@@ -63,7 +63,7 @@
 class WXDLLIMPEXP_BASE wxEventLoopBase
 {
 public:
-    wxEventLoopBase();
+    wxEventLoopBase() noexcept;
     virtual ~wxEventLoopBase();
 
     wxEventLoopBase(const wxEventLoopBase&) = delete;

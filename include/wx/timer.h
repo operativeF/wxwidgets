@@ -46,7 +46,7 @@ public:
 
     // default: if you don't call SetOwner(), your only chance to get timer
     // notifications is to override Notify() in the derived class
-    wxTimer()
+    wxTimer() noexcept
     {
         Init();
         SetOwner(this);

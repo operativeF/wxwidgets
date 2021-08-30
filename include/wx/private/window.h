@@ -58,7 +58,7 @@ class DpiDependentValue
 {
 public:
     // Explicit initialization is needed if T is a primitive type.
-    DpiDependentValue()
+    DpiDependentValue() noexcept
         : m_value() 
     { }
 

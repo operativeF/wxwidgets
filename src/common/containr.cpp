@@ -167,7 +167,7 @@ bool wxControlContainerBase::HasTransparentBackground() const
 // generic wxControlContainer
 // ----------------------------------------------------------------------------
 
-wxControlContainer::wxControlContainer()
+wxControlContainer::wxControlContainer() noexcept
 {
     m_winLastFocused = nullptr;
 }

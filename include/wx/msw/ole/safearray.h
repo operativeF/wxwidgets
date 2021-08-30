@@ -53,7 +53,7 @@ public:
 protected:
     // Default constructor, protected so the class can't be used on its own,
     // it's only used as a base class of wxSafeArray<>.
-    wxSafeArrayBase()
+    wxSafeArrayBase() noexcept
     {
         m_array = nullptr;
     }
@@ -157,7 +157,7 @@ public:
     using externT = typename Convertor::externT;
 
     // Default constructor.
-    wxSafeArray()
+    wxSafeArray() noexcept
     {
         m_array = nullptr;
     }

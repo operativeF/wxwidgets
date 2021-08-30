@@ -34,7 +34,7 @@ class AutoSystemDpiAware
             (WINAPI *SetThreadDpiAwarenessContext_t)(WXDPI_AWARENESS_CONTEXT);
 
 public:
-    AutoSystemDpiAware()
+    AutoSystemDpiAware() noexcept
         : m_prevContext(WXDPI_AWARENESS_CONTEXT_UNAWARE),
           m_pfnSetThreadDpiAwarenessContext((SetThreadDpiAwarenessContext_t)-1)
     {

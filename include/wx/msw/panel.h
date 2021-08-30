@@ -18,7 +18,7 @@ class WXDLLIMPEXP_FWD_CORE wxBrush;
 
 struct WXDLLIMPEXP_CORE wxPanel : public wxPanelBase
 {
-    wxPanel() = default;
+    wxPanel() noexcept = default;
 
     wxPanel(wxWindow *parent,
             wxWindowID winid = wxID_ANY,

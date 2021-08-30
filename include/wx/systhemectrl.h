@@ -21,7 +21,7 @@ class WXDLLIMPEXP_FWD_CORE wxWindow;
 class WXDLLIMPEXP_CORE wxSystemThemedControlBase
 {
 public:
-    wxSystemThemedControlBase()
+    wxSystemThemedControlBase() noexcept
     {
 #ifdef wxHAS_SYSTEM_THEMED_CONTROL
         m_systemThemeDisabled = false;
@@ -30,8 +30,8 @@ public:
 
    wxSystemThemedControlBase(const wxSystemThemedControlBase&) = delete;
    wxSystemThemedControlBase& operator=(const wxSystemThemedControlBase&) = delete;
-   wxSystemThemedControlBase(wxSystemThemedControlBase&&) = default;
-   wxSystemThemedControlBase& operator=(wxSystemThemedControlBase&&) = default;
+   wxSystemThemedControlBase(wxSystemThemedControlBase&&) noexcept = default;
+   wxSystemThemedControlBase& operator=(wxSystemThemedControlBase&&) noexcept = default;
 
     bool IsSystemThemeDisabled() const
     {

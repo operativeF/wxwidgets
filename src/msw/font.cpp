@@ -46,7 +46,7 @@ constexpr int PITCH_MASK = FIXED_PITCH | VARIABLE_PITCH;
 class WXDLLEXPORT wxFontRefData: public wxGDIRefData
 {
 public:
-    explicit wxFontRefData(const wxFontInfo& info = wxFontInfo());
+    explicit wxFontRefData(const wxFontInfo& info = wxFontInfo()) noexcept;
 
     explicit wxFontRefData(const wxNativeFontInfo& info, WXHFONT hFont = nullptr)
     {
@@ -316,7 +316,7 @@ protected:
 // wxFontRefData
 // ----------------------------------------------------------------------------
 
-wxFontRefData::wxFontRefData(const wxFontInfo& info)
+wxFontRefData::wxFontRefData(const wxFontInfo& info) noexcept
     : m_sizeUsingPixels(info.IsUsingSizeInPixels())
 {
     if ( m_sizeUsingPixels )

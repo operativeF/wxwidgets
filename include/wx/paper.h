@@ -68,7 +68,7 @@ class WXDLLIMPEXP_FWD_CORE wxPrintPaperTypeList;
 class WXDLLIMPEXP_CORE wxPrintPaperDatabase
 {
 public:
-    wxPrintPaperDatabase();
+    wxPrintPaperDatabase() noexcept;
     ~wxPrintPaperDatabase();
 
     void CreateDatabase();

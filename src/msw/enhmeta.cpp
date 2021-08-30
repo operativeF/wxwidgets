@@ -327,7 +327,7 @@ wxIMPLEMENT_ABSTRACT_CLASS(wxEnhMetaFileDC, wxDC);
 
 wxEnhMetaFileDC::wxEnhMetaFileDC(const std::string& filename,
                                  int width, int height,
-                                 const std::string& description)
+                                 const std::string& description) noexcept
                : wxDC(new wxEnhMetaFileDCImpl(this,
                                               filename,
                                               width, height,

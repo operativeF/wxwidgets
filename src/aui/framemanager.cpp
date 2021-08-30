@@ -83,7 +83,7 @@ public:
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 long style = wxDEFAULT_FRAME_STYLE,
-                const wxString &name = wxT("frame"))
+                const wxString &name = wxT("frame")) noexcept
                     : wxFrame(parent, id, title, pos, size, style | wxFRAME_SHAPED, name)
     {
         SetBackgroundStyle(wxBG_STYLE_PAINT);
@@ -596,7 +596,7 @@ wxBEGIN_EVENT_TABLE(wxAuiManager, wxEvtHandler)
 wxEND_EVENT_TABLE()
 
 
-wxAuiManager::wxAuiManager(wxWindow* managed_wnd, unsigned int flags)
+wxAuiManager::wxAuiManager(wxWindow* managed_wnd, unsigned int flags) noexcept
     : m_art(new wxAuiDefaultDockArt),
       m_flags(flags)
 {
@@ -1740,9 +1740,9 @@ void wxAuiManager::LayoutAddPane(wxSizer* cont,
     if (pane.HasGripper())
     {
         if (pane.HasGripperTop())
-            sizer_item = vert_pane_sizer ->Add(1, gripperSize, 0, wxEXPAND);
+            sizer_item = vert_pane_sizer->Add(1, gripperSize, 0, wxEXPAND);
         else
-            sizer_item = horz_pane_sizer ->Add(gripperSize, 1, 0, wxEXPAND);
+            sizer_item = horz_pane_sizer->Add(gripperSize, 1, 0, wxEXPAND);
 
         part.type = wxAuiDockUIPart::typeGripper;
         part.dock = &dock;

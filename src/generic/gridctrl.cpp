@@ -158,7 +158,7 @@ using namespace wxGridPrivate;
 
 // Enables a grid cell to display a formatted date
 
-wxGridCellDateRenderer::wxGridCellDateRenderer(const std::string& outformat)
+wxGridCellDateRenderer::wxGridCellDateRenderer(const std::string& outformat) noexcept
 {
     if ( outformat.empty() )
     {
@@ -251,7 +251,7 @@ void wxGridCellDateRenderer::SetParameters(const std::string& params)
 
 // Enables a grid cell to display a formatted date and or time
 
-wxGridCellDateTimeRenderer::wxGridCellDateTimeRenderer(const std::string& outformat, const std::string& informat)
+wxGridCellDateTimeRenderer::wxGridCellDateTimeRenderer(const std::string& outformat, const std::string& informat) noexcept
     : wxGridCellDateRenderer(outformat)
     , m_iformat(informat)
 {
@@ -803,7 +803,7 @@ void wxGridCellNumberRenderer::SetParameters(const std::string& params)
 
 wxGridCellFloatRenderer::wxGridCellFloatRenderer(int width,
                                                  int precision,
-                                                 int format)
+                                                 int format) noexcept
 {
     SetWidth(width);
     SetPrecision(precision);

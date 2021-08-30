@@ -33,7 +33,7 @@ WX_DEFINE_SORTED_ARRAY_CMP_INT(int, CompareInts, wxIntSortedArray);
 
 
 wxGridSelection::wxGridSelection( wxGrid * grid,
-                                  wxGrid::wxGridSelectionModes sel )
+                                  wxGrid::wxGridSelectionModes sel ) noexcept
 {
     m_grid = grid;
     m_selectionMode = sel;

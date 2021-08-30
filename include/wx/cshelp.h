@@ -40,7 +40,7 @@
 class WXDLLIMPEXP_CORE wxContextHelp
 {
 public:
-    wxContextHelp(wxWindow* win = nullptr, bool beginHelp = true);
+    wxContextHelp(wxWindow* win = nullptr, bool beginHelp = true) noexcept;
     ~wxContextHelp();
 
     bool BeginContextHelp(wxWindow* win);

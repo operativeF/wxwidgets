@@ -93,7 +93,7 @@ class WXDLLIMPEXP_CORE wxGridCellFloatRenderer : public wxGridCellStringRenderer
 public:
     wxGridCellFloatRenderer(int width = -1,
                             int precision = -1,
-                            int format = wxGRID_FLOAT_FORMAT_DEFAULT);
+                            int format = wxGRID_FLOAT_FORMAT_DEFAULT) noexcept;
 
     // get/change formatting parameters
     int GetWidth() const { return m_width; }
@@ -171,7 +171,7 @@ namespace wxGridPrivate { class DateParseParams; }
 class WXDLLIMPEXP_CORE wxGridCellDateRenderer : public wxGridCellStringRenderer
 {
 public:
-    explicit wxGridCellDateRenderer(const std::string& outformat = {});
+    explicit wxGridCellDateRenderer(const std::string& outformat = {}) noexcept;
 
     wxGridCellDateRenderer(const wxGridCellDateRenderer& other)
         : m_oformat(other.m_oformat),
@@ -218,7 +218,7 @@ class WXDLLIMPEXP_CORE wxGridCellDateTimeRenderer : public wxGridCellDateRendere
 {
 public:
     wxGridCellDateTimeRenderer(const std::string& outformat = wxDefaultDateTimeFormat,
-                               const std::string& informat = wxDefaultDateTimeFormat);
+                               const std::string& informat = wxDefaultDateTimeFormat) noexcept;
 
     wxGridCellDateTimeRenderer(const wxGridCellDateTimeRenderer& other) = default;
 
@@ -238,7 +238,7 @@ protected:
 class WXDLLIMPEXP_CORE wxGridCellChoiceRenderer : public wxGridCellStringRenderer
 {
 public:
-    wxGridCellChoiceRenderer() = default;
+    wxGridCellChoiceRenderer() noexcept = default;
 
     wxSize GetMaxBestSize(wxGrid& grid,
                                   wxGridCellAttr& attr,

@@ -36,11 +36,11 @@
 class wxMemoryConfig : public wxFileConfig
 {
 public:
-    wxMemoryConfig() : wxFileConfig(wxEmptyString,  // default app name
-                                    wxEmptyString,  // default vendor name
-                                    wxEmptyString,  // no local config file
-                                    wxEmptyString,  // no system config file
-                                    0)              // don't use any files
+    wxMemoryConfig() noexcept : wxFileConfig(wxEmptyString,  // default app name
+                                             wxEmptyString,  // default vendor name
+                                             wxEmptyString,  // no local config file
+                                             wxEmptyString,  // no system config file
+                                             0)              // don't use any files
     {
     }
 

@@ -293,7 +293,7 @@ wxIMPLEMENT_ABSTRACT_CLASS(wxFileConfig, wxConfigBase);
 wxFileConfig::wxFileConfig(const wxString& appName, const wxString& vendorName,
                            const wxString& strLocal, const wxString& strGlobal,
                            long style,
-                           const wxMBConv& conv)
+                           const wxMBConv& conv) noexcept
             : wxConfigBase(( !appName && wxTheApp ) ? wxTheApp->GetAppName() : appName,
                            vendorName,
                            strLocal, strGlobal,

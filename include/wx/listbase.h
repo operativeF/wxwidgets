@@ -474,7 +474,7 @@ private:
 class WXDLLIMPEXP_CORE wxListEvent : public wxNotifyEvent
 {
 public:
-    wxListEvent(wxEventType commandType = wxEVT_NULL, int winid = 0)
+    wxListEvent(wxEventType commandType = wxEVT_NULL, int winid = 0) noexcept
         : wxNotifyEvent(commandType, winid) { }
 
     wxListEvent(const wxListEvent& event) = default;

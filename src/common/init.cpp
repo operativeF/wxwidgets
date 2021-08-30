@@ -55,7 +55,7 @@
 class wxDummyConsoleApp : public wxAppConsole
 {
 public:
-    wxDummyConsoleApp() = default;
+    wxDummyConsoleApp() noexcept = default;
 
     wxDummyConsoleApp(const wxDummyConsoleApp&) = delete;
 	wxDummyConsoleApp& operator=(const wxDummyConsoleApp&) = delete;

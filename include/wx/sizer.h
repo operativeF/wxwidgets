@@ -60,7 +60,7 @@ class WXDLLIMPEXP_CORE wxSizerFlags
 public:
     // construct the flags object initialized with the given proportion (0 by
     // default)
-    wxSizerFlags(int proportion = 0) : m_proportion(proportion)
+    wxSizerFlags(int proportion = 0) noexcept : m_proportion(proportion)
     {
         m_flags = 0;
         m_borderInPixels = 0;
@@ -1120,12 +1120,12 @@ public:
     // Constructor just creates a new wxBoxSizer, not much else.
     // Box sizer orientation is automatically determined here:
     // vertical for PDAs, horizontal for everything else?
-    wxStdDialogButtonSizer();
+    wxStdDialogButtonSizer() noexcept;
 
     wxStdDialogButtonSizer(const wxStdDialogButtonSizer&) = delete;
     wxStdDialogButtonSizer& operator=(const wxStdDialogButtonSizer&) = delete;
-    wxStdDialogButtonSizer(wxStdDialogButtonSizer&&) = default;
-    wxStdDialogButtonSizer& operator=(wxStdDialogButtonSizer&&) = default;
+    wxStdDialogButtonSizer(wxStdDialogButtonSizer&&) noexcept = default;
+    wxStdDialogButtonSizer& operator=(wxStdDialogButtonSizer&&) noexcept = default;
 
     // Checks button ID against system IDs and sets one of the pointers below
     // to this button. Does not do any sizer-related things here.

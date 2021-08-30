@@ -23,7 +23,7 @@ public:
     wxKeyboardState(bool controlDown = false,
                     bool shiftDown = false,
                     bool altDown = false,
-                    bool metaDown = false)
+                    bool metaDown = false) noexcept
         : m_controlDown(controlDown),
           m_shiftDown(shiftDown),
           m_altDown(altDown),

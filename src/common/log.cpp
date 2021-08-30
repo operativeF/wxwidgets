@@ -811,7 +811,7 @@ void wxLogBuffer::DoLogTextAtLevel(wxLogLevel level, const wxString& msg)
 // wxLogStderr class implementation
 // ----------------------------------------------------------------------------
 
-wxLogStderr::wxLogStderr(FILE *fp, const wxMBConv& conv)
+wxLogStderr::wxLogStderr(FILE *fp, const wxMBConv& conv) noexcept
            : wxMessageOutputStderr(fp ? fp : stderr, conv)
 {
 }

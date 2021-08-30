@@ -38,7 +38,7 @@ class wxAuiCommandCapture : public wxEvtHandler
 {
 public:
 
-    wxAuiCommandCapture() { m_lastId = 0; }
+    wxAuiCommandCapture() noexcept { m_lastId = 0; }
     int GetCommandId() const { return m_lastId; }
 
     bool ProcessEvent(wxEvent& evt) override
@@ -167,7 +167,7 @@ static constexpr unsigned char list_bits[] = {
 
 // -- wxAuiGenericTabArt class implementation --
 
-wxAuiGenericTabArt::wxAuiGenericTabArt()
+wxAuiGenericTabArt::wxAuiGenericTabArt() noexcept
     : m_normalFont(*wxNORMAL_FONT)
     , m_selectedFont(m_normalFont)
 {

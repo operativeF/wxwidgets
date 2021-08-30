@@ -406,7 +406,7 @@ class WXDLLIMPEXP_AUI wxAuiManager : public wxEvtHandler
 public:
 
     wxAuiManager(wxWindow* managedWnd = nullptr,
-                   unsigned int flags = wxAUI_MGR_DEFAULT);
+                   unsigned int flags = wxAUI_MGR_DEFAULT) noexcept;
     ~wxAuiManager() override;
     void UnInit();
 
@@ -624,7 +624,7 @@ protected:
 class WXDLLIMPEXP_AUI wxAuiManagerEvent : public wxEvent
 {
 public:
-    wxAuiManagerEvent(wxEventType type=wxEVT_NULL) : wxEvent(0, type)
+    wxAuiManagerEvent(wxEventType type=wxEVT_NULL) noexcept : wxEvent(0, type)
     {
         manager = nullptr;
         pane = nullptr;
@@ -673,7 +673,7 @@ public:
 class WXDLLIMPEXP_AUI wxAuiDockInfo
 {
 public:
-    wxAuiDockInfo()
+    wxAuiDockInfo() noexcept
     {
         dock_direction = 0;
         dock_layer = 0;

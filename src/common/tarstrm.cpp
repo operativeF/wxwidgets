@@ -116,7 +116,7 @@ struct wxTarField { const wxChar *name; int pos; };
 class wxTarHeaderBlock
 {
 public:
-    wxTarHeaderBlock()
+    wxTarHeaderBlock() noexcept
         { Clear(); }
 
     void Clear(size_t len = 0) { memset(data, 0, len ? len : sizeof(data)); }
@@ -384,7 +384,7 @@ static wxString wxTarGroupName(int gid)
 //
 struct wxTarUser
 {
-    wxTarUser();
+    wxTarUser() noexcept;
     ~wxTarUser() { delete [] uname; delete [] gname; }
 
     int uid;
@@ -394,7 +394,7 @@ struct wxTarUser
     wxChar *gname;
 };
 
-wxTarUser::wxTarUser()
+wxTarUser::wxTarUser() noexcept
 {
 #ifdef __UNIX__
     uid = getuid();

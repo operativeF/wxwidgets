@@ -25,7 +25,7 @@ class WXDLLIMPEXP_BASE wxSingleInstanceChecker
 {
 public:
     // default ctor, use Create() after it
-    wxSingleInstanceChecker() {  m_impl = nullptr;  }
+    wxSingleInstanceChecker() noexcept {  m_impl = nullptr;  }
 
     // like Create() but no error checking (dangerous!)
     wxSingleInstanceChecker(const wxString& name,

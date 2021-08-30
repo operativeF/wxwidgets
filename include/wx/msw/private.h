@@ -430,7 +430,7 @@ private:
 class ScreenHDC
 {
 public:
-    ScreenHDC() { m_hdc = ::GetDC(nullptr);    }
+    ScreenHDC() noexcept { m_hdc = ::GetDC(nullptr);    }
    ~ScreenHDC() { ::ReleaseDC(nullptr, m_hdc); }
 
     operator HDC() const { return m_hdc; }
@@ -465,7 +465,7 @@ private:
 class MemoryHDC
 {
 public:
-    MemoryHDC(HDC hdc = nullptr) { m_hdc = ::CreateCompatibleDC(hdc); }
+    explicit MemoryHDC(HDC hdc = nullptr) noexcept { m_hdc = ::CreateCompatibleDC(hdc); }
    ~MemoryHDC() { ::DeleteDC(m_hdc); }
 
     operator HDC() const { return m_hdc; }
@@ -514,7 +514,7 @@ private:
 class AutoGDIObject
 {
 protected:
-    AutoGDIObject() { m_gdiobj = nullptr; }
+    AutoGDIObject() noexcept { m_gdiobj = nullptr; }
     AutoGDIObject(HGDIOBJ gdiobj) : m_gdiobj(gdiobj) { }
     ~AutoGDIObject() { if ( m_gdiobj ) ::DeleteObject(m_gdiobj); }
 

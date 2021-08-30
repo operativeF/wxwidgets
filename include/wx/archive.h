@@ -356,7 +356,7 @@ protected:
     virtual wxArchiveInputStream  *DoNewStream(wxInputStream *stream) const = 0;
     virtual wxArchiveOutputStream *DoNewStream(wxOutputStream *stream) const = 0;
 
-    wxArchiveClassFactory() :  m_next(this) { }
+    wxArchiveClassFactory() noexcept :  m_next(this) { }
     wxArchiveClassFactory& operator=(const wxArchiveClassFactory& WXUNUSED(f))
         { return *this; }
 

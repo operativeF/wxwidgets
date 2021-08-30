@@ -128,9 +128,8 @@ class wxFontInfo
 public:
     // Default ctor uses the default font size appropriate for the current
     // platform.
-    wxFontInfo()
-        : 
-         m_pixelSize(wxDefaultSize)
+    wxFontInfo() noexcept
+        : m_pixelSize(wxDefaultSize)
     {
         
         m_family = wxFONTFAMILY_DEFAULT;
