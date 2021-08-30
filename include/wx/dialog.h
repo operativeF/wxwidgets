@@ -65,7 +65,7 @@ class WXDLLIMPEXP_CORE wxDialogBase : public wxNavigationEnabled<wxTopLevelWindo
 {
 public:
     wxDialogBase();
-    ~wxDialogBase() override = default;
+    ~wxDialogBase() = default;
 
     wxDialogBase(const wxDialogBase&) = delete;
     wxDialogBase& operator=(const wxDialogBase&) = delete;

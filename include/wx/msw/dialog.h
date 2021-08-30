@@ -30,7 +30,7 @@ public:
         Create(parent, id, title, pos, size, style, name);
     }
 
-    ~wxDialog() override;
+    ~wxDialog();
 
     wxDialog(const wxDialog&) = delete;
     wxDialog& operator=(const wxDialog&) = delete;

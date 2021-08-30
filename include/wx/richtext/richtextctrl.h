@@ -230,7 +230,7 @@ public:
     wxRichTextCtrl( wxWindow* parent, wxWindowID id = -1, const std::string& value = {}, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize,
         long style = wxRE_MULTILINE, const wxValidator& validator = wxDefaultValidator, const std::string& name = wxASCII_STR(wxTextCtrlNameStr));
 
-    ~wxRichTextCtrl() override;
+    ~wxRichTextCtrl();
 
     bool Create( wxWindow* parent, wxWindowID id = -1, const std::string& value = {}, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize,
         long style = wxRE_MULTILINE, const wxValidator& validator = wxDefaultValidator, const std::string& name = wxASCII_STR(wxTextCtrlNameStr) );

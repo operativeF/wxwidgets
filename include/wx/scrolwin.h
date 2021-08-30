@@ -113,7 +113,7 @@ class WXDLLIMPEXP_CORE wxScrollHelperBase : public wxAnyScrollHelperBase
 public:
     // ctor must be given the associated window
     wxScrollHelperBase(wxWindow *winToScroll);
-    ~wxScrollHelperBase() override;
+    ~wxScrollHelperBase();
 
    wxScrollHelperBase(const wxScrollHelperBase&) = delete;
    wxScrollHelperBase& operator=(const wxScrollHelperBase&) = delete;

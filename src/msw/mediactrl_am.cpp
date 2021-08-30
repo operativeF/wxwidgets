@@ -816,7 +816,7 @@ class WXDLLIMPEXP_MEDIA wxAMMediaBackend : public wxMediaBackendCommonBase
 {
 public:
     wxAMMediaBackend();
-    ~wxAMMediaBackend() override;
+    ~wxAMMediaBackend();
 
     bool CreateControl(wxControl* ctrl, wxWindow* parent,
                                      wxWindowID id,

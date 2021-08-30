@@ -91,7 +91,7 @@ public:
     {
     }
 
-    ~wxToolBarToolBase() override;
+    ~wxToolBarToolBase();
 
     wxToolBarToolBase(const wxToolBarToolBase&) = delete;
     wxToolBarToolBase& operator=(const wxToolBarToolBase&) = delete;
@@ -252,7 +252,7 @@ class WXDLLIMPEXP_CORE wxToolBarBase : public wxControl
 {
 public:
     wxToolBarBase();
-    ~wxToolBarBase() override;
+    ~wxToolBarBase();
 
     wxToolBarBase(const wxToolBarBase&) = delete;
     wxToolBarBase& operator=(const wxToolBarBase&) = delete;

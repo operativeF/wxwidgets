@@ -35,7 +35,7 @@ public:
 #endif // wxUSE_IMAGE
 
     // m_refData unrefed in ~wxObject
-    ~wxRegion() override = default;
+    ~wxRegion() = default;
 
     // wxRegionBase methods
     void Clear() override;

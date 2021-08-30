@@ -97,7 +97,7 @@ private:
 
 public:
     wxHtmlTableCell(wxHtmlContainerCell *parent, const wxHtmlTag& tag, double pixel_scale = 1.0);
-    ~wxHtmlTableCell() override;
+    ~wxHtmlTableCell();
 
     wxHtmlTableCell(const wxHtmlTableCell&) = delete;
 	wxHtmlTableCell& operator=(const wxHtmlTableCell&) = delete;

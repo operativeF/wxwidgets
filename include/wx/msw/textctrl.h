@@ -29,7 +29,7 @@ public:
         Create(parent, id, value, pos, size, style, validator, name);
     }
 
-    ~wxTextCtrl() override;
+    ~wxTextCtrl();
 
     wxTextCtrl(const wxTextCtrl&) = delete;
     wxTextCtrl& operator=(const wxTextCtrl&) = delete;

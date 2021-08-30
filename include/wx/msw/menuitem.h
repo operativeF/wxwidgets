@@ -40,7 +40,7 @@ public:
                const std::string& help = {},
                wxItemKind kind = wxITEM_NORMAL,
                wxMenu *subMenu = nullptr);
-    ~wxMenuItem() override = default;
+    ~wxMenuItem() = default;
 
     wxMenuItem(const wxMenuItem&) = delete;
     wxMenuItem& operator=(const wxMenuItem&) = delete;

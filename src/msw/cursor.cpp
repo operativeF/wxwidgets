@@ -45,7 +45,7 @@ public:
     // doesn't happen by default)
     explicit wxCursorRefData(HCURSOR hcursor = nullptr, bool takeOwnership = false);
 
-    ~wxCursorRefData() override { Free(); }
+    ~wxCursorRefData() { Free(); }
 
     void Free() override;
 

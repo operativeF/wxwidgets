@@ -41,7 +41,7 @@ public:
     void UpdateText(const std::string& str);
     void UpdateLabel(const std::string& str);
 
-    ~wxBusyInfo() override;
+    ~wxBusyInfo();
 
 private:
     void Init(const wxBusyInfoFlags& flags);

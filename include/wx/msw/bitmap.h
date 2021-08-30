@@ -111,7 +111,7 @@ public:
         return *this;
     }
 
-    ~wxBitmap() override = default;
+    ~wxBitmap() = default;
 
 #if wxUSE_IMAGE
     wxImage ConvertToImage() const;
@@ -251,7 +251,7 @@ public:
     // construct a mask from the givne bitmap handle
     wxMask(WXHBITMAP hbmp) { m_maskBitmap = hbmp; }
 
-    ~wxMask() override;
+    ~wxMask();
 
     [[maybe_unused]] bool Create(const wxBitmap& bitmap, const wxColour& colour);
     [[maybe_unused]] bool Create(const wxBitmap& bitmap, int paletteIndex);
@@ -281,7 +281,7 @@ struct WXDLLIMPEXP_CORE wxBitmapHandler : public wxGDIImageHandler
     wxBitmapHandler(const std::string& name, const std::string& ext, wxBitmapType type)
         : wxGDIImageHandler(name, ext, type) { }
 
-    ~wxBitmapHandler() override = default;
+    ~wxBitmapHandler() = default;
 
     // implement wxGDIImageHandler's pure virtuals:
 

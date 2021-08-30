@@ -2840,7 +2840,7 @@ public:
                      const wxSize& size = wxDefaultSize, long style = 0,
                      const wxString& name = wxSTCNameStr);
     wxStyledTextCtrl() { m_swx = nullptr; }
-    ~wxStyledTextCtrl() override;
+    ~wxStyledTextCtrl();
 
 #endif
 
@@ -5447,7 +5447,7 @@ public:
 #ifndef SWIG
     wxStyledTextEvent(const wxStyledTextEvent& event);
 #endif
-    ~wxStyledTextEvent() override = default;
+    ~wxStyledTextEvent() = default;
 
     void SetPosition(int pos)             { m_position = pos; }
     void SetKey(int k)                    { m_key = k; }

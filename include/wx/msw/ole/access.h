@@ -33,7 +33,7 @@ class WXDLLIMPEXP_CORE wxAccessible : public wxAccessibleBase
 {
 public:
     wxAccessible(wxWindow *win = nullptr);
-    ~wxAccessible() override;
+    ~wxAccessible();
 
     wxAccessible(const wxAccessible&) = delete;
 	wxAccessible& operator=(const wxAccessible&) = delete;

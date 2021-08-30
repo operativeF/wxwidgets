@@ -32,7 +32,7 @@ class WXDLLEXPORT wxWrapSizer : public wxBoxSizer
 {
 public:
     wxWrapSizer(int orient = wxHORIZONTAL, int flags = wxWRAPSIZER_DEFAULT_FLAGS);
-    ~wxWrapSizer() override;
+    ~wxWrapSizer();
 
     wxWrapSizer(const wxWrapSizer&) = delete;
     wxWrapSizer& operator=(const wxWrapSizer&) = delete;

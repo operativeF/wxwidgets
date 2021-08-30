@@ -183,7 +183,7 @@ public:
         // default ctor, initializes everything which can be initialized before
         // Create()
     wxWindowBase();
-    ~wxWindowBase() override;
+    ~wxWindowBase();
 
     wxWindowBase(const wxWindowBase&) = delete;
     wxWindowBase& operator=(const wxWindowBase&) = delete;
@@ -2028,7 +2028,7 @@ class WXDLLIMPEXP_CORE wxWindowAccessible: public wxAccessible
 {
 public:
     wxWindowAccessible(wxWindow* win): wxAccessible(win) { if (win) win->SetAccessible(this); }
-    ~wxWindowAccessible() override = default;
+    ~wxWindowAccessible() = default;
 
 // Overridables
 

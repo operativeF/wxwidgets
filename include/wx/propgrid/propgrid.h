@@ -650,7 +650,7 @@ public:
                     const wxString& name = wxASCII_STR(wxPropertyGridNameStr) );
 
     // Destructor
-    ~wxPropertyGrid() override;
+    ~wxPropertyGrid();
 
     // Adds given key combination to trigger given action.
     // Here is a sample code to make Enter key press move focus to
@@ -1934,7 +1934,7 @@ public:
     wxPropertyGridEvent(const wxPropertyGridEvent& event);
 
     // Destructor.
-    ~wxPropertyGridEvent() override;
+    ~wxPropertyGridEvent();
 
     // Copyer.
     wxEvent* Clone() const override;

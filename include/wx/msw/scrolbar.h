@@ -16,7 +16,7 @@ class WXDLLIMPEXP_CORE wxScrollBar: public wxScrollBarBase
 {
 public:
     wxScrollBar() = default;
-    ~wxScrollBar() override = default;
+    ~wxScrollBar() = default;
 
     wxScrollBar(wxWindow *parent, wxWindowID id,
             const wxPoint& pos = wxDefaultPosition,

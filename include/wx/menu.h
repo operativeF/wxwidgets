@@ -44,7 +44,7 @@ public:
         { Init(style); }
 
     // dtor deletes all the menu items we own
-    ~wxMenuBase() override;
+    ~wxMenuBase();
 
     wxMenuBase(const wxMenuBase&) = delete;
     wxMenuBase& operator=(const wxMenuBase&) = delete;
@@ -444,7 +444,7 @@ public:
     wxMenuBarBase() = default;
 
     // dtor will delete all menus we own
-    ~wxMenuBarBase() override;
+    ~wxMenuBarBase();
 
    wxMenuBarBase(const wxMenuBarBase&) = delete;
    wxMenuBarBase& operator=(const wxMenuBarBase&) = delete;

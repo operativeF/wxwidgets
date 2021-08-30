@@ -46,7 +46,7 @@ class wxNotificationMessageWindow : public wxFrame
 public:
     explicit wxNotificationMessageWindow(wxGenericNotificationMessageImpl* notificationImpl);
 
-    ~wxNotificationMessageWindow() override;
+    ~wxNotificationMessageWindow();
 
     wxNotificationMessageWindow(const wxNotificationMessageWindow&) = delete;
 	wxNotificationMessageWindow& operator=(const wxNotificationMessageWindow&) = delete;

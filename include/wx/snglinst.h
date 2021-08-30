@@ -25,13 +25,12 @@ class WXDLLIMPEXP_BASE wxSingleInstanceChecker
 {
 public:
     // default ctor, use Create() after it
-    wxSingleInstanceChecker() {  m_impl = nullptr;  }
+    wxSingleInstanceChecker() = default;
 
     // like Create() but no error checking (dangerous!)
     wxSingleInstanceChecker(const wxString& name,
                             const wxString& path = wxEmptyString)
     {
-         m_impl = nullptr; 
         Create(name, path);
     }
 
@@ -88,7 +87,7 @@ private:
     bool DoIsAnotherRunning() const;
 
     // the implementation details (platform specific)
-    class WXDLLIMPEXP_FWD_BASE wxSingleInstanceCheckerImpl *m_impl;
+    class WXDLLIMPEXP_FWD_BASE wxSingleInstanceCheckerImpl *m_impl{nullptr};
 };
 
 #endif // wxUSE_SNGLINST_CHECKER

@@ -217,7 +217,7 @@ public:
                          const wxDC& referenceDC,
                          const std::string& filename, int width, int height,
                          const std::string& description );
-    ~wxEnhMetaFileDCImpl() override;
+    ~wxEnhMetaFileDCImpl();
 
     // obtain a pointer to the new metafile (caller should delete it)
     wxEnhMetaFile *Close();

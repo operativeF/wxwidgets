@@ -216,7 +216,7 @@ public:
                 long style = 0,
                 const wxString& name = wxASCII_STR(wxPanelNameStr));
 
-    ~wxSymbolListCtrl() override;
+    ~wxSymbolListCtrl();
 
     // set the current font
     bool SetFont(const wxFont& font) override;

@@ -49,7 +49,7 @@ public:
     wxURL(const std::string& sUrl = {});
     wxURL(const wxURI& uri);
     wxURL(const wxURL& url);
-    ~wxURL() override;
+    ~wxURL();
 
     wxURL& operator = (const std::string& url);
     wxURL& operator = (const wxURI& uri);

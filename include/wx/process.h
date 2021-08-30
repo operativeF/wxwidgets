@@ -57,7 +57,7 @@ public:
 
     wxProcess(int flags) { Init(nullptr, wxID_ANY, flags); }
 
-    ~wxProcess() override;
+    ~wxProcess();
 
     wxProcess(const wxProcess&) = delete;
     wxProcess& operator=(const wxProcess&) = delete;

@@ -156,7 +156,7 @@ public:
                 const std::string& name = wxTreeListCtrlNameStr);
 
 
-    ~wxTreeListCtrl() override;
+    ~wxTreeListCtrl();
 
     // Columns methods
     // ---------------

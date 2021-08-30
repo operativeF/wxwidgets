@@ -39,12 +39,12 @@ WX_DEFINE_SORTED_EXPORTED_ARRAY_CMP_INT(unsigned, wxUIntCmp, wxSelectedIndices);
 class WXDLLIMPEXP_CORE wxSelectionStore
 {
 public:
-    wxSelectionStore() : m_itemsSel(wxUIntCmp) {  m_count = 0; m_defaultState = false;  }
-
-   wxSelectionStore(const wxSelectionStore&) = delete;
-   wxSelectionStore& operator=(const wxSelectionStore&) = delete;
-   wxSelectionStore(wxSelectionStore&&) = default;
-   wxSelectionStore& operator=(wxSelectionStore&&) = default;
+    wxSelectionStore() = default;
+    ~wxSelectionStore() = default;
+    wxSelectionStore(const wxSelectionStore&) = delete;
+    wxSelectionStore& operator=(const wxSelectionStore&) = delete;
+    wxSelectionStore(wxSelectionStore&&) = default;
+    wxSelectionStore& operator=(wxSelectionStore&&) = default;
 
     // set the total number of items we handle
     void SetItemCount(unsigned count);
@@ -109,15 +109,15 @@ public:
 
 private:
     // the total number of items we handle
-    unsigned m_count;
+    unsigned m_count{0};
 
     // the default state: normally, false (i.e. off) but maybe set to true if
     // there are more selected items than non selected ones - this allows to
     // handle selection of all items efficiently
-    bool m_defaultState;
+    bool m_defaultState{false};
 
     // the array of items whose selection state is different from default
-    wxSelectedIndices m_itemsSel;
+    wxSelectedIndices m_itemsSel{wxUIntCmp};
 };
 
 #endif // _WX_SELSTORE_H_

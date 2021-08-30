@@ -283,7 +283,7 @@ public:
     wxImageFileProperty( const wxString& label= wxPG_LABEL,
                          const wxString& name = wxPG_LABEL,
                          const wxString& value = wxEmptyString);
-    ~wxImageFileProperty() override;
+    ~wxImageFileProperty();
 
     void OnSetValue() override;
 
@@ -442,7 +442,7 @@ class WXDLLIMPEXP_PROPGRID wxPGSpinCtrlEditor : public wxPGTextCtrlEditor
 {
     wxDECLARE_DYNAMIC_CLASS(wxPGSpinCtrlEditor);
 public:
-    ~wxPGSpinCtrlEditor() override;
+    ~wxPGSpinCtrlEditor();
 
     wxString GetName() const override;
     wxPGWindowList CreateControls(wxPropertyGrid* propgrid,

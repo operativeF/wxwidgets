@@ -141,7 +141,7 @@ public:
         m_runScriptCount = 0;
     }
 
-    ~wxWebView() override = default;
+    ~wxWebView() = default;
 
     [[maybe_unused]] virtual bool Create(wxWindow* parent,
            wxWindowID id,

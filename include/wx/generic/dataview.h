@@ -209,7 +209,7 @@ public:
         Create(parent, id, pos, size, style, validator, name);
     }
 
-    ~wxDataViewCtrl() override;
+    ~wxDataViewCtrl();
 
     void Init();
 
@@ -429,7 +429,7 @@ class WXDLLIMPEXP_CORE wxDataViewCtrlAccessible: public wxWindowAccessible
 {
 public:
     wxDataViewCtrlAccessible(wxDataViewCtrl* win);
-    ~wxDataViewCtrlAccessible() override = default;
+    ~wxDataViewCtrlAccessible() = default;
 
     wxAccStatus HitTest(const wxPoint& pt, int* childId,
                                 wxAccessible** childObject) override;

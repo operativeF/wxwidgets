@@ -123,7 +123,7 @@ public:
     // ctors and dtors
     wxSocketBase();
     wxSocketBase(wxSocketFlags flags, wxSocketType type);
-    ~wxSocketBase() override;
+    ~wxSocketBase();
 
     wxSocketBase(const wxSocketBase&) = delete;
     wxSocketBase& operator=(const wxSocketBase&) = delete;

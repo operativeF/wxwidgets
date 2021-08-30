@@ -51,7 +51,7 @@ public:
 
     wxGenericValidator(const wxGenericValidator& copyFrom);
 
-    ~wxGenericValidator() override = default;
+    ~wxGenericValidator() = default;
 
     wxGenericValidator& operator=(const wxGenericValidator&) = delete;
 

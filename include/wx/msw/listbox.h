@@ -48,7 +48,7 @@ public:
                 const wxValidator& validator = wxDefaultValidator,
                 const std::string& name = wxListBoxNameStr);
 
-    ~wxListBox() override;
+    ~wxListBox();
 
     wxListBox(const wxListBox&) = delete;
     wxListBox& operator=(const wxListBox&) = delete;

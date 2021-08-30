@@ -35,7 +35,7 @@ public:
                 const std::string &title,
                 int style = 0);
 
-    ~wxFindReplaceDialog() override;
+    ~wxFindReplaceDialog();
 
     // implementation only from now on
 

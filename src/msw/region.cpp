@@ -42,7 +42,7 @@ struct WXDLLEXPORT wxRegionRefData : public wxGDIRefData
 
     wxRegionRefData& operator=(const wxRegionRefData&) = delete;
 
-    ~wxRegionRefData() override
+    ~wxRegionRefData()
     {
         ::DeleteObject(m_region);
         m_region = nullptr;

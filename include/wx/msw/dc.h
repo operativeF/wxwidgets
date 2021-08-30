@@ -25,7 +25,7 @@ struct wxDCCacheEntry: public wxObject
 {
     wxDCCacheEntry(WXHBITMAP hBitmap, int w, int h, int depth);
     wxDCCacheEntry(WXHDC hDC, int depth);
-    ~wxDCCacheEntry() override;
+    ~wxDCCacheEntry();
 
     WXHBITMAP   m_bitmap{nullptr};
     WXHDC       m_dc{nullptr};
@@ -41,7 +41,7 @@ class WXDLLIMPEXP_CORE wxMSWDCImpl: public wxDCImpl
 {
 public:
     wxMSWDCImpl(wxDC *owner, WXHDC hDC);
-    ~wxMSWDCImpl() override;
+    ~wxMSWDCImpl();
 
     wxMSWDCImpl(const wxMSWDCImpl&) = delete;
     wxMSWDCImpl& operator=(const wxMSWDCImpl&) = delete;
@@ -321,7 +321,7 @@ public:
     {
     }
 
-    ~wxDCTempImpl() override
+    ~wxDCTempImpl()
     {
         // prevent base class dtor from freeing it
         SetHDC((WXHDC)nullptr);

@@ -3654,7 +3654,7 @@ class WXDLLIMPEXP_BASE wxEvtHandler : public wxObject
 {
 public:
     wxEvtHandler();
-    ~wxEvtHandler() override;
+    ~wxEvtHandler();
 
     wxEvtHandler(const wxEvtHandler&) = delete;
     wxEvtHandler& operator=(const wxEvtHandler&) = delete;
@@ -4212,7 +4212,7 @@ class WXDLLIMPEXP_CORE wxEventBlocker : public wxEvtHandler
 {
 public:
     wxEventBlocker(wxWindow *win, wxEventType type = wxEVT_ANY);
-    ~wxEventBlocker() override;
+    ~wxEventBlocker();
 
    wxEventBlocker(const wxEventBlocker&) = delete;
    wxEventBlocker& operator=(const wxEventBlocker&) = delete;

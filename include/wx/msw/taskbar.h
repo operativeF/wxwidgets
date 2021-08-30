@@ -21,7 +21,7 @@ class WXDLLIMPEXP_CORE wxTaskBarIcon : public wxTaskBarIconBase
 {
 public:
     wxTaskBarIcon(wxTaskBarIconType iconType = wxTaskBarIconType::DefaultType);
-    ~wxTaskBarIcon() override;
+    ~wxTaskBarIcon();
 
     wxTaskBarIcon(const wxTaskBarIcon&) = delete;
     wxTaskBarIcon& operator=(const wxTaskBarIcon&) = delete;

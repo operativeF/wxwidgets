@@ -120,7 +120,7 @@ class WXDLLIMPEXP_CORE wxTopLevelWindowBase : public wxNonOwnedWindow
 {
 public:
     wxTopLevelWindowBase();
-    ~wxTopLevelWindowBase() override;
+    ~wxTopLevelWindowBase();
 
    wxTopLevelWindowBase(const wxTopLevelWindowBase&) = delete;
    wxTopLevelWindowBase& operator=(const wxTopLevelWindowBase&) = delete;

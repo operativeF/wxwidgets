@@ -28,7 +28,7 @@ public:
 
     wxPoint GetHotSpot() const override;
 
-    ~wxCursor() override = default;
+    ~wxCursor() = default;
 
     void SetHCURSOR(WXHCURSOR cursor) { SetHandle((WXHANDLE)cursor); }
     WXHCURSOR GetHCURSOR() const { return (WXHCURSOR)GetHandle(); }

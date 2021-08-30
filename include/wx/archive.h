@@ -88,7 +88,7 @@ class WXDLLIMPEXP_BASE wxArchiveInputStream : public wxFilterInputStream
 public:
     using entry_type = wxArchiveEntry;
 
-    ~wxArchiveInputStream() override = default;
+    ~wxArchiveInputStream() = default;
 
     virtual bool OpenEntry(wxArchiveEntry& entry) = 0;
     virtual bool CloseEntry() = 0;
@@ -125,7 +125,7 @@ private:
 class WXDLLIMPEXP_BASE wxArchiveOutputStream : public wxFilterOutputStream
 {
 public:
-    ~wxArchiveOutputStream() override = default;
+    ~wxArchiveOutputStream() = default;
 
     virtual bool PutNextEntry(wxArchiveEntry *entry) = 0;
 
@@ -314,7 +314,7 @@ public:
     using pairiter_type = wxArchivePairIter;
 #endif
 
-    ~wxArchiveClassFactory() override = default;
+    ~wxArchiveClassFactory() = default;
 
     wxArchiveEntry *NewEntry() const
         { return DoNewEntry(); }

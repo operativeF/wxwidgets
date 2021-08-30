@@ -118,7 +118,7 @@ public:
                   const wxString& domain = wxEmptyString);
 
     // Destructor.
-    ~wxXmlResource() override;
+    ~wxXmlResource();
 
     // Loads resources from XML files that match given filemask.
     // This method understands wxFileSystem URLs if wxUSE_FILESYS.
@@ -482,7 +482,7 @@ public:
     wxXmlResourceHandlerImpl(wxXmlResourceHandler *handler);
 
     // Destructor.
-    ~wxXmlResourceHandlerImpl() override = default;
+    ~wxXmlResourceHandlerImpl() = default;
 
     // Creates an object (menu, dialog, control, ...) from an XML node.
     // Should check for validity.

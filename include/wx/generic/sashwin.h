@@ -87,7 +87,7 @@ public:
     wxSashWindow(const wxSashWindow&) = delete;
     wxSashWindow& operator=(const wxSashWindow&) = delete;
 
-    ~wxSashWindow() override;
+    ~wxSashWindow();
 
     bool Create(wxWindow *parent, wxWindowID id = wxID_ANY, const wxPoint& pos = wxDefaultPosition,
         const wxSize& size = wxDefaultSize, long style = wxSW_3D|wxCLIP_CHILDREN, const std::string& name = "sashWindow");

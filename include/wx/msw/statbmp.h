@@ -45,7 +45,7 @@ public:
                 long style = 0,
                 const std::string& name = wxStaticBitmapNameStr);
 
-    ~wxStaticBitmap() override { Free(); }
+    ~wxStaticBitmap() { Free(); }
 
     void SetIcon(const wxIcon& icon) override { SetImage(&icon); }
     void SetBitmap(const wxBitmap& bitmap) override { SetImage(&bitmap); }

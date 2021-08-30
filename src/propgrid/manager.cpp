@@ -222,7 +222,7 @@ public:
         Bind(wxEVT_HEADER_END_RESIZE, &wxPGHeaderCtrl::OnEndResize, this);
     }
 
-    ~wxPGHeaderCtrl() override
+    ~wxPGHeaderCtrl()
     {
         for (std::vector<wxHeaderColumnSimple*>::const_iterator it = m_columns.begin();
              it != m_columns.end(); ++it)

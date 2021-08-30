@@ -89,7 +89,7 @@ public:
                     double dpi = 72.0,
                     const std::string& title = {});
 
-    ~wxSVGFileDCImpl() override;
+    ~wxSVGFileDCImpl();
 
     wxSVGFileDCImpl(const wxSVGFileDCImpl&) = delete;
     wxSVGFileDCImpl& operator=(const wxSVGFileDCImpl&) = delete;

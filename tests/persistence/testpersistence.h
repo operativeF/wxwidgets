@@ -46,7 +46,7 @@ private:
         {
         }
 
-        ~TestPersistenceManager() override
+        ~TestPersistenceManager()
         {
             m_config.DeleteAll();
         }

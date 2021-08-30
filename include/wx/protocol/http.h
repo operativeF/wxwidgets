@@ -22,7 +22,7 @@ class WXDLLIMPEXP_NET wxHTTP : public wxProtocol
 {
 public:
     wxHTTP() = default;
-    ~wxHTTP() override;
+    ~wxHTTP();
 
     wxHTTP(const wxHTTP&) = delete;
 	wxHTTP& operator=(const wxHTTP&) = delete;

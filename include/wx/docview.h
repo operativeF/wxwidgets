@@ -63,7 +63,7 @@ class WXDLLIMPEXP_CORE wxDocument : public wxEvtHandler
 {
 public:
     wxDocument(wxDocument *parent = nullptr);
-    ~wxDocument() override;
+    ~wxDocument();
 
     wxDocument(const wxDocument&) = delete;
     wxDocument& operator=(const wxDocument&) = delete;
@@ -212,7 +212,7 @@ class WXDLLIMPEXP_CORE wxView: public wxEvtHandler
 {
 public:
     wxView() = default;
-    ~wxView() override;
+    ~wxView();
 
     wxView(const wxView&) = delete;
     wxView& operator=(const wxView&) = delete;
@@ -305,7 +305,7 @@ public:
                   wxClassInfo *viewClassInfo = nullptr,
                   long flags = wxDEFAULT_TEMPLATE_FLAGS);
 
-    ~wxDocTemplate() override;
+    ~wxDocTemplate();
 
     wxDocTemplate(const wxDocTemplate&) = delete;
     wxDocTemplate& operator=(const wxDocTemplate&) = delete;
@@ -381,7 +381,7 @@ class WXDLLIMPEXP_CORE wxDocManager: public wxEvtHandler
 public:
     // NB: flags are unused, don't pass wxDOC_XXX to this ctor
     wxDocManager(long flags = 0, bool initialize = true);
-    ~wxDocManager() override;
+    ~wxDocManager();
 
     wxDocManager(const wxDocManager&) = delete;
     wxDocManager& operator=(const wxDocManager&) = delete;

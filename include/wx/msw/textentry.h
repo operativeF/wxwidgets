@@ -20,7 +20,7 @@ class WXDLLIMPEXP_CORE wxTextEntry : public wxTextEntryBase
 {
 public:
     wxTextEntry();
-    ~wxTextEntry() override;
+    ~wxTextEntry();
 
     // implement wxTextEntryBase pure virtual methods
     void WriteText(const std::string& text) override;

@@ -37,7 +37,7 @@ public:
     explicit wxTemporaryFileInputStream(const wxString& filename) :
         wxFileInputStream(filename), m_filename(filename) {}
 
-    ~wxTemporaryFileInputStream() override
+    ~wxTemporaryFileInputStream()
     {
         // NB: copied from wxFileInputStream dtor, we need to do it before
         //     wxRemoveFile

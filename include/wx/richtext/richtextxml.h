@@ -32,7 +32,7 @@ class WXDLLIMPEXP_RICHTEXT wxRichTextXMLHelper: public wxObject
 public:
     wxRichTextXMLHelper() { Init(); }
     wxRichTextXMLHelper(const wxString& enc) { Init(); SetupForSaving(enc); }
-    ~wxRichTextXMLHelper() override;
+    ~wxRichTextXMLHelper();
 
     void Init();
 

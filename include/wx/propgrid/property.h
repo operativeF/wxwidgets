@@ -61,7 +61,7 @@ public:
 
     wxPGCellRenderer()
          = default;
-    ~wxPGCellRenderer() override = default;
+    ~wxPGCellRenderer() = default;
 
     // Render flags
     enum
@@ -180,7 +180,7 @@ public:
     void SetFont( const wxFont& font ) { m_font = font; }
 
 protected:
-    ~wxPGCellData() override = default;
+    ~wxPGCellData() = default;
 
     wxString    m_text;
     wxBitmap    m_bitmap;
@@ -205,7 +205,7 @@ public:
               const wxColour& fgCol = wxNullColour,
               const wxColour& bgCol = wxNullColour );
 
-    ~wxPGCell() override = default;
+    ~wxPGCell() = default;
 
     wxPGCellData* GetData()
     {
@@ -627,7 +627,7 @@ public:
         SetText(label);
     }
 
-    ~wxPGChoiceEntry() override = default;
+    ~wxPGChoiceEntry() = default;
 
     void SetValue( int value ) { m_value = value; }
     int GetValue() const { return m_value; }
@@ -684,7 +684,7 @@ private:
     std::vector<wxPGChoiceEntry>   m_items;
 
 protected:
-    ~wxPGChoicesData() override;
+    ~wxPGChoicesData();
 };
 
 #define wxPGChoicesEmptyData    ((wxPGChoicesData*)NULL)
@@ -984,7 +984,7 @@ public:
 
     // Virtual destructor.
     // It is customary for derived properties to implement this.
-    ~wxPGProperty() override;
+    ~wxPGProperty();
 
     // This virtual function is called after m_value has been set.
     // Remarks:

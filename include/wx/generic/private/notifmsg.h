@@ -17,7 +17,7 @@ class wxGenericNotificationMessageImpl : public wxNotificationMessageImpl
 public:
     wxGenericNotificationMessageImpl(wxNotificationMessageBase* notification);
 
-    ~wxGenericNotificationMessageImpl() override;
+    ~wxGenericNotificationMessageImpl();
 
     bool Show(int timeout) override;
 

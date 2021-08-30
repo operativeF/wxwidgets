@@ -36,7 +36,7 @@ public:
     wxButton(wxButton&&) = default;
     wxButton& operator=(wxButton&&) = default;
 
-    ~wxButton() override;
+    ~wxButton();
 
     [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,

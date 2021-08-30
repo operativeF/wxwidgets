@@ -170,7 +170,7 @@ public:
                 const wxValidator& validator,
                 const std::string& name);
 
-    ~wxComboCtrlBase() override;
+    ~wxComboCtrlBase();
 
     // Show/hide popup window (wxComboBox-compatible methods)
     virtual void Popup();

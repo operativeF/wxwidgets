@@ -648,7 +648,7 @@ public:
     // copy attributes (font, colours and writing direction) from another DC
     void CopyAttributes(const wxDC& dc);
 
-    ~wxDC() override { delete m_pimpl; }
+    ~wxDC() { delete m_pimpl; }
 
     wxDC(const wxDC&) = delete;
     wxDC& operator=(const wxDC&) = delete;

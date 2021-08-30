@@ -57,7 +57,7 @@ public:
 #endif
         m_appProgressIndicator(nullptr) { }
 
-    ~wxGaugeBase() override;
+    ~wxGaugeBase();
 
     wxGaugeBase(const wxGaugeBase&) = delete;
     wxGaugeBase& operator=(const wxGaugeBase&) = delete;

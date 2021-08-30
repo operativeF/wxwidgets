@@ -36,7 +36,7 @@ public:
               long style = wxCONFIG_USE_GLOBAL_FILE);
 
     // dtor will save unsaved data
-  ~wxRegConfig() override = default;
+  ~wxRegConfig() = default;
 
   wxRegConfig(const wxRegConfig&) = delete;
 	wxRegConfig& operator=(const wxRegConfig&) = delete;

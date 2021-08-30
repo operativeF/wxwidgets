@@ -198,7 +198,7 @@ class WXDLLIMPEXP_HTML wxHtmlCell : public wxObject
 {
 public:
     wxHtmlCell() = default;
-    ~wxHtmlCell() override;
+    ~wxHtmlCell();
 
     wxHtmlCell(const wxHtmlCell&) = delete;
 	wxHtmlCell& operator=(const wxHtmlCell&) = delete;
@@ -483,7 +483,7 @@ class WXDLLIMPEXP_HTML wxHtmlContainerCell : public wxHtmlCell
 {
 public:
     explicit wxHtmlContainerCell(wxHtmlContainerCell *parent);
-    ~wxHtmlContainerCell() override;
+    ~wxHtmlContainerCell();
 
     wxHtmlContainerCell(const wxHtmlContainerCell&) = delete;
 	wxHtmlContainerCell& operator=(const wxHtmlContainerCell&) = delete;
@@ -695,7 +695,7 @@ public:
     // it's width according to parent container's width
     // (w is percent of parent's width)
     wxHtmlWidgetCell(wxWindow *wnd, int w = 0);
-    ~wxHtmlWidgetCell() override { m_Wnd->Destroy(); }
+    ~wxHtmlWidgetCell() { m_Wnd->Destroy(); }
     void Draw(wxDC& dc, int x, int y, int view_y1, int view_y2,
                       wxHtmlRenderingInfo& info) override;
     void DrawInvisible(wxDC& dc, int x, int y,

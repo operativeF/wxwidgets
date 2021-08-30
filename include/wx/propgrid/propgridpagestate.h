@@ -279,7 +279,7 @@ public:
     wxPGVIteratorBase() = default;
     virtual void Next() = 0;
 protected:
-    ~wxPGVIteratorBase() override = default;
+    ~wxPGVIteratorBase() = default;
 
     wxPropertyGridIterator  m_it;
 };

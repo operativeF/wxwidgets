@@ -36,7 +36,7 @@ public:
     wxEnhMetaFile& operator=(const wxEnhMetaFile& metafile)
         { Free(); Assign(metafile); return *this; }
 
-    ~wxEnhMetaFile() override
+    ~wxEnhMetaFile()
         { Free(); }
 
     // display the picture stored in the metafile on the given DC

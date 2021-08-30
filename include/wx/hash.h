@@ -188,7 +188,7 @@ public:
          { Create( keyType, size ); BeginFind(); }
     wxHashTable( const wxHashTable& table );
 
-    ~wxHashTable() override { Destroy(); }
+    ~wxHashTable() { Destroy(); }
 
     const wxHashTable& operator=( const wxHashTable& );
 

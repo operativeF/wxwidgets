@@ -99,7 +99,7 @@ public:
 
     }
 
-    ~wxToastNotifMsgImpl() override
+    ~wxToastNotifMsgImpl()
     {
         if ( m_toastEventHandler )
             m_toastEventHandler->Detach();

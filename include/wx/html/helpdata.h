@@ -170,7 +170,7 @@ class WXDLLIMPEXP_HTML wxHtmlHelpData : public wxObject
 
 public:
     wxHtmlHelpData() = default;
-    ~wxHtmlHelpData() override = default;
+    ~wxHtmlHelpData() = default;
 
     wxHtmlHelpData(const wxHtmlHelpData&) = delete;
 	wxHtmlHelpData& operator=(const wxHtmlHelpData&) = delete;

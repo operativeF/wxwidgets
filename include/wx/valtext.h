@@ -51,7 +51,7 @@ public:
     wxTextValidator(long style = wxFILTER_NONE, wxString *val = nullptr);
     wxTextValidator(const wxTextValidator& val);
 
-    ~wxTextValidator() override = default;
+    ~wxTextValidator() = default;
 
     wxTextValidator& operator=(const wxTextValidator&) = delete;
 

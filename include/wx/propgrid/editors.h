@@ -193,7 +193,7 @@ class WXDLLIMPEXP_PROPGRID wxPGTextCtrlEditor : public wxPGEditor
     wxDECLARE_DYNAMIC_CLASS(wxPGTextCtrlEditor);
 public:
     wxPGTextCtrlEditor() = default;
-    ~wxPGTextCtrlEditor() override;
+    ~wxPGTextCtrlEditor();
 
     wxPGWindowList CreateControls(wxPropertyGrid* propgrid,
                                           wxPGProperty* property,
@@ -236,7 +236,7 @@ class WXDLLIMPEXP_PROPGRID wxPGChoiceEditor : public wxPGEditor
     wxDECLARE_DYNAMIC_CLASS(wxPGChoiceEditor);
 public:
     wxPGChoiceEditor() = default;
-    ~wxPGChoiceEditor() override;
+    ~wxPGChoiceEditor();
 
     wxPGWindowList CreateControls(wxPropertyGrid* propgrid,
                                           wxPGProperty* property,
@@ -285,7 +285,7 @@ class WXDLLIMPEXP_PROPGRID wxPGComboBoxEditor : public wxPGChoiceEditor
     wxDECLARE_DYNAMIC_CLASS(wxPGComboBoxEditor);
 public:
     wxPGComboBoxEditor() = default;
-    ~wxPGComboBoxEditor() override;
+    ~wxPGComboBoxEditor();
 
     wxPGWindowList CreateControls(wxPropertyGrid* propgrid,
                                           wxPGProperty* property,
@@ -312,7 +312,7 @@ class WXDLLIMPEXP_PROPGRID wxPGChoiceAndButtonEditor : public wxPGChoiceEditor
 {
 public:
     wxPGChoiceAndButtonEditor() = default;
-    ~wxPGChoiceAndButtonEditor() override;
+    ~wxPGChoiceAndButtonEditor();
     wxString GetName() const override;
 
     wxPGWindowList CreateControls(wxPropertyGrid* propgrid,
@@ -328,7 +328,7 @@ wxPGTextCtrlAndButtonEditor : public wxPGTextCtrlEditor
 {
 public:
     wxPGTextCtrlAndButtonEditor() = default;
-    ~wxPGTextCtrlAndButtonEditor() override;
+    ~wxPGTextCtrlAndButtonEditor();
     wxString GetName() const override;
 
     wxPGWindowList CreateControls(wxPropertyGrid* propgrid,
@@ -351,7 +351,7 @@ class WXDLLIMPEXP_PROPGRID wxPGCheckBoxEditor : public wxPGEditor
     wxDECLARE_DYNAMIC_CLASS(wxPGCheckBoxEditor);
 public:
     wxPGCheckBoxEditor() = default;
-    ~wxPGCheckBoxEditor() override;
+    ~wxPGCheckBoxEditor();
 
     wxString GetName() const override;
     wxPGWindowList CreateControls(wxPropertyGrid* propgrid,
@@ -411,7 +411,7 @@ public:
         m_clientData = nullptr;
     }
 
-    ~wxPGEditorDialogAdapter() override = default;
+    ~wxPGEditorDialogAdapter() = default;
 
     bool ShowDialog( wxPropertyGrid* propGrid, wxPGProperty* property );
 
@@ -446,7 +446,7 @@ class WXDLLIMPEXP_PROPGRID wxPGMultiButton : public wxWindow
 {
 public:
     wxPGMultiButton( wxPropertyGrid* pg, const wxSize& sz );
-    ~wxPGMultiButton() override = default;
+    ~wxPGMultiButton() = default;
 
     wxWindow* GetButton( unsigned int i ) { return m_buttons[i]; }
     const wxWindow* GetButton( unsigned int i ) const

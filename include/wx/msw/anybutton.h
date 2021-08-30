@@ -18,7 +18,7 @@ class WXDLLIMPEXP_CORE wxAnyButton : public wxAnyButtonBase
 {
 public:
     wxAnyButton() = default;
-    ~wxAnyButton() override;
+    ~wxAnyButton();
     
     wxAnyButton(const wxAnyButton&) = delete;
     wxAnyButton& operator=(const wxAnyButton&) = delete;

@@ -48,7 +48,7 @@ public:
     wxSplashScreen(const wxSplashScreen&) = delete;
     wxSplashScreen& operator=(const wxSplashScreen&) = delete;
 
-    ~wxSplashScreen() override;
+    ~wxSplashScreen();
 
     void OnCloseWindow(wxCloseEvent& event);
     void OnNotify(wxTimerEvent& event);

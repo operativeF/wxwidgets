@@ -220,7 +220,7 @@ class WXDLLIMPEXP_CORE wxGenericPageSetupDialog : public wxPageSetupDialogBase
 public:
     wxGenericPageSetupDialog(wxWindow *parent = nullptr,
                              wxPageSetupDialogData* data = nullptr);
-    ~wxGenericPageSetupDialog() override = default;
+    ~wxGenericPageSetupDialog() = default;
 
 	wxGenericPageSetupDialog(const wxGenericPageSetupDialog&) = delete;
 	wxGenericPageSetupDialog& operator=(const wxGenericPageSetupDialog&) = delete;

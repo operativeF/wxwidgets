@@ -50,7 +50,7 @@ public:
                 const wxValidator& validator = wxDefaultValidator,
                 const std::string& name = wxSliderNameStr);
 
-    ~wxSlider() override;
+    ~wxSlider();
 
     // slider methods
     int GetValue() const override;

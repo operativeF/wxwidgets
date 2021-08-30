@@ -31,7 +31,7 @@ public:
     };
 
     wxFTP();
-    ~wxFTP() override;
+    ~wxFTP();
 
 	wxFTP(const wxFTP&) = delete;
 	wxFTP& operator=(const wxFTP&) = delete;

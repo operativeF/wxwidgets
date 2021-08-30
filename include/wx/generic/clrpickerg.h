@@ -38,7 +38,7 @@ public:
         Create(parent, id, col, pos, size, style, validator, name);
     }
 
-    ~wxGenericColourButton() override = default;
+    ~wxGenericColourButton() = default;
 
 
 public:     // API extensions specific for wxGenericColourButton

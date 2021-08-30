@@ -41,7 +41,7 @@ public:
     void SetSelectedColour(const wxColour &colour) override
         { m_data.SetColour(colour); UpdateFont(); }
 
-    ~wxGenericFontButton() override = default;
+    ~wxGenericFontButton() = default;
 
 
 public:     // API extensions specific for wxGenericFontButton

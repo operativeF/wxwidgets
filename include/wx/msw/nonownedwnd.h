@@ -20,7 +20,7 @@ class WXDLLIMPEXP_CORE wxNonOwnedWindow : public wxNonOwnedWindowBase
 {
 public:
     wxNonOwnedWindow() = default;
-    ~wxNonOwnedWindow() override;
+    ~wxNonOwnedWindow();
 
     wxNonOwnedWindow(const wxNonOwnedWindow&) = delete;
     wxNonOwnedWindow& operator=(const wxNonOwnedWindow&) = delete;

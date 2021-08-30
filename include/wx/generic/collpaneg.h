@@ -38,7 +38,7 @@ public:
         Create(parent, winid, label, pos, size, style, val, name);
     }
 
-    ~wxGenericCollapsiblePane() override;
+    ~wxGenericCollapsiblePane();
 
     bool Create(wxWindow *parent,
                 wxWindowID winid,

@@ -57,7 +57,7 @@ public:
                 double inc = 1,
                 const std::string& name = "wxSpinCtrl");
 
-    ~wxSpinCtrlGenericBase() override;
+    ~wxSpinCtrlGenericBase();
 
     std::string GetTextValue() const override;
     // T GetValue() const

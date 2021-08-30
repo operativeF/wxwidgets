@@ -88,7 +88,7 @@ public:
                 long style,
                 const std::string& name);
 
-    ~wxMSWHeaderCtrl() override;
+    ~wxMSWHeaderCtrl();
 
     // Override to implement colours support via custom drawing.
     bool SetBackgroundColour(const wxColour& colour) override;

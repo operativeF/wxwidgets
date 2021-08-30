@@ -719,7 +719,7 @@ public:
                             const wxPoint &pos = wxDefaultPosition,
                             const wxSize &size = wxDefaultSize,
                             const wxString &name = wxT("wxdataviewctrlmainwindow") );
-    ~wxDataViewMainWindow() override;
+    ~wxDataViewMainWindow();
 
     bool IsList() const { return GetModel()->IsListModel(); }
     bool IsVirtualList() const { return m_root == nullptr; }
@@ -1650,7 +1650,7 @@ public:
         m_hint = nullptr;
     }
 
-    ~wxDataViewDropSource() override
+    ~wxDataViewDropSource()
     {
         delete m_hint;
     }

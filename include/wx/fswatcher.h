@@ -298,7 +298,7 @@ class WXDLLIMPEXP_BASE wxFileSystemWatcherBase: public wxEvtHandler
 public:
     wxFileSystemWatcherBase();
 
-    ~wxFileSystemWatcherBase() override;
+    ~wxFileSystemWatcherBase();
 
     /**
      * Adds path to currently watched files. Any events concerning this

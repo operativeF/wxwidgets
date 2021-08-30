@@ -122,7 +122,7 @@ public:
                 bool bShow = true,        // show window immediately?
                 bool bPassToOld = true);  // pass messages to the old target?
 
-    ~wxLogWindow() override;
+    ~wxLogWindow();
 
     wxLogWindow(const wxLogWindow&) = delete;
     wxLogWindow& operator=(const wxLogWindow&) = delete;

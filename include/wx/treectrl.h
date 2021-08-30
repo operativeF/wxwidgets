@@ -38,7 +38,7 @@ class WXDLLIMPEXP_CORE wxTreeCtrlBase : public wxSystemThemedControl<wxControl>
 {
 public:
     wxTreeCtrlBase();
-    ~wxTreeCtrlBase() override;
+    ~wxTreeCtrlBase();
 
    wxTreeCtrlBase(const wxTreeCtrlBase&) = delete;
    wxTreeCtrlBase& operator=(const wxTreeCtrlBase&) = delete;

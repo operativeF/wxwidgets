@@ -66,7 +66,7 @@ class WXDLLIMPEXP_BASE wxAppConsoleBase : public wxEvtHandler,
 {
 public:
     wxAppConsoleBase();
-    ~wxAppConsoleBase() override;
+    ~wxAppConsoleBase();
 
    wxAppConsoleBase(const wxAppConsoleBase&) = delete;
    wxAppConsoleBase& operator=(const wxAppConsoleBase&) = delete;

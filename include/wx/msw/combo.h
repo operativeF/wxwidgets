@@ -58,7 +58,7 @@ public:
                 const wxValidator& validator = wxDefaultValidator,
                 const std::string& name = wxComboCtrlNameStr);
 
-    ~wxComboCtrl() override = default;
+    ~wxComboCtrl() = default;
 
     void PrepareBackground( wxDC& dc, const wxRect& rect, int flags ) const override;
     bool IsKeyPopupToggle(const wxKeyEvent& event) const override;

@@ -53,7 +53,7 @@ public:
                 const wxValidator& validator = wxDefaultValidator,
                 const std::string& name = wxBitmapComboBoxNameStr);
 
-    ~wxBitmapComboBox() override;
+    ~wxBitmapComboBox();
 
     // Sets the image for the given item.
     void SetItemBitmap(unsigned int n, const wxBitmap& bitmap) override;

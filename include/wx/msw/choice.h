@@ -24,7 +24,7 @@ class WXDLLIMPEXP_CORE wxChoice : public wxChoiceBase
 public:
     // ctors
     wxChoice() = default;
-    ~wxChoice() override;
+    ~wxChoice();
 
     wxChoice(wxWindow* parent,
         wxWindowID id,

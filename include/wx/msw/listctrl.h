@@ -88,7 +88,7 @@ public:
         Create(parent, id, pos, size, style, validator, name);
     }
 
-    ~wxListCtrl() override;
+    ~wxListCtrl();
 
     wxListCtrl(const wxListCtrl&) = delete;
     wxListCtrl& operator=(const wxListCtrl&) = delete;

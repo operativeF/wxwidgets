@@ -53,7 +53,7 @@ class WXDLLIMPEXP_HTML wxHtmlParser : public wxObject
 
 public:
     wxHtmlParser();
-    ~wxHtmlParser() override;
+    ~wxHtmlParser();
 
     wxHtmlParser(const wxHtmlParser&) = delete;
 	wxHtmlParser& operator=(const wxHtmlParser&) = delete;
@@ -271,7 +271,7 @@ class WXDLLIMPEXP_HTML wxHtmlEntitiesParser : public wxObject
 
 public:
     wxHtmlEntitiesParser() = default;
-    ~wxHtmlEntitiesParser() override = default;
+    ~wxHtmlEntitiesParser() = default;
 
     wxHtmlEntitiesParser(const wxHtmlEntitiesParser&) = delete;
 	wxHtmlEntitiesParser& operator=(const wxHtmlEntitiesParser&) = delete;

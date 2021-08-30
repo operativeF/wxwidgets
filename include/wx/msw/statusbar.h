@@ -36,7 +36,7 @@ public:
                 long style = wxSTB_DEFAULT_STYLE,
                 const std::string& name = wxStatusBarNameStr);
 
-    ~wxStatusBar() override;
+    ~wxStatusBar();
 
     wxStatusBar(const wxStatusBar&) = delete;
     wxStatusBar& operator=(const wxStatusBar&) = delete;

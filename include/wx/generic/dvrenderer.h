@@ -21,7 +21,7 @@ public:
     wxDataViewRenderer( const wxString &varianttype,
                         wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT,
                         int align = wxDVR_DEFAULT_ALIGNMENT );
-    ~wxDataViewRenderer() override;
+    ~wxDataViewRenderer();
 
     wxDataViewRenderer(const wxDataViewRenderer&) = delete;
 	wxDataViewRenderer& operator=(const wxDataViewRenderer&) = delete;

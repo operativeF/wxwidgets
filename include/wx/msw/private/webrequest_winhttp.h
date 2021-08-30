@@ -74,7 +74,7 @@ public:
                         const std::string& url,
                         int id);
 
-    ~wxWebRequestWinHTTP() override;
+    ~wxWebRequestWinHTTP();
 
     void Start() override;
 
@@ -137,7 +137,7 @@ class wxWebSessionWinHTTP : public wxWebSessionImpl
 public:
     wxWebSessionWinHTTP();
 
-    ~wxWebSessionWinHTTP() override;
+    ~wxWebSessionWinHTTP();
 
     static bool Initialize();
 

@@ -87,7 +87,7 @@ public:
         SetMessageDialogStyle(style);
     }
 
-    ~wxMessageDialogBase() override = default;
+    ~wxMessageDialogBase() = default;
 
     wxMessageDialogBase(const wxMessageDialogBase&) = delete;
     wxMessageDialogBase& operator=(const wxMessageDialogBase&) = delete;

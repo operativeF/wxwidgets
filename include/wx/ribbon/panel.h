@@ -49,7 +49,7 @@ public:
                 const wxSize& size = wxDefaultSize,
                 long style = wxRIBBON_PANEL_DEFAULT_STYLE);
 
-    ~wxRibbonPanel() override;
+    ~wxRibbonPanel();
 
     wxBitmap& GetMinimisedIcon() {return m_minimised_icon;}
     const wxBitmap& GetMinimisedIcon() const {return m_minimised_icon;}

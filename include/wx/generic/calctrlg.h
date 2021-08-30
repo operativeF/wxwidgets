@@ -61,7 +61,7 @@ public:
                 long style = wxCAL_SHOW_HOLIDAYS,
                 const std::string& name = wxCalendarNameStr);
 
-    ~wxGenericCalendarCtrl() override;
+    ~wxGenericCalendarCtrl();
 
     bool Destroy() override;
 

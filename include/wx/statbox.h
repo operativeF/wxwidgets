@@ -28,7 +28,7 @@ class WXDLLIMPEXP_CORE wxStaticBoxBase : public wxNavigationEnabled<wxControl>
 {
 public:
     wxStaticBoxBase();
-
+    ~wxStaticBoxBase() = default;
     wxStaticBoxBase(const wxStaticBoxBase&) = delete;
     wxStaticBoxBase& operator=(const wxStaticBoxBase&) = delete;
     wxStaticBoxBase(wxStaticBoxBase&&) = default;

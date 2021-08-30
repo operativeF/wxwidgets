@@ -754,7 +754,7 @@ class wxChmFSHandler : public wxFileSystemHandler
 public:
     /// Constructor and Destructor
     wxChmFSHandler();
-    ~wxChmFSHandler() override;
+    ~wxChmFSHandler();
 
     /// Is able to open location?
     bool CanOpen(const wxString& location) override;

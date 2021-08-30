@@ -475,7 +475,7 @@ class wxRawInputStream : public wxFilterInputStream
 {
 public:
     explicit wxRawInputStream(wxInputStream& stream);
-    ~wxRawInputStream() override { delete m_tee; }
+    ~wxRawInputStream() { delete m_tee; }
 
     wxRawInputStream(const wxRawInputStream&) = delete;
 	wxRawInputStream& operator=(const wxRawInputStream&) = delete;

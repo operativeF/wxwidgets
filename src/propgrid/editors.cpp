@@ -566,7 +566,7 @@ class wxPGComboBox : public wxOwnerDrawnComboBox
 public:
     wxPGComboBox() = default;
 
-    ~wxPGComboBox() override
+    ~wxPGComboBox()
     {
         if ( m_dclickProcessor )
         {

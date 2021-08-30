@@ -91,7 +91,7 @@ public:
     wxFileDialogBase(wxFileDialogBase&&) = default;
     wxFileDialogBase& operator=(wxFileDialogBase&&) = default;
 
-    ~wxFileDialogBase() override = default;
+    ~wxFileDialogBase() = default;
 
 
     [[maybe_unused]] bool Create(wxWindow *parent,

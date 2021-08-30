@@ -71,7 +71,7 @@ public:
                 const std::string& name = wxHtmlListBoxNameStr);
 
     // destructor cleans up whatever resources we use
-    ~wxHtmlListBox() override;
+    ~wxHtmlListBox();
 
     // override some base class virtuals
     void RefreshRow(size_t line) override;
@@ -229,7 +229,7 @@ public:
                 const wxValidator& validator = wxDefaultValidator,
                 const std::string& name = wxSimpleHtmlListBoxNameStr);
 
-    ~wxSimpleHtmlListBox() override;
+    ~wxSimpleHtmlListBox();
 
     wxSimpleHtmlListBox(const wxSimpleHtmlListBox&) = delete;
     wxSimpleHtmlListBox& operator=(const wxSimpleHtmlListBox&) = delete;

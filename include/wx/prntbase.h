@@ -233,7 +233,7 @@ class WXDLLIMPEXP_CORE wxPrinter: public wxPrinterBase
 {
 public:
     wxPrinter(wxPrintDialogData *data = nullptr);
-    ~wxPrinter() override;
+    ~wxPrinter();
 
     wxPrinter(const wxPrinter&) = delete;
     wxPrinter& operator=(const wxPrinter&) = delete;
@@ -373,7 +373,7 @@ public:
                     const wxSize& size = wxDefaultSize,
                     long style = 0,
                     const wxString& name = wxT("canvas"));
-    ~wxPreviewCanvas() override = default;
+    ~wxPreviewCanvas() = default;
 
     wxPreviewCanvas(const wxPreviewCanvas&) = delete;
     wxPreviewCanvas& operator=(const wxPreviewCanvas&) = delete;
@@ -417,7 +417,7 @@ public:
                    const wxSize& size = wxDefaultSize,
                    long style = wxDEFAULT_FRAME_STYLE | wxFRAME_FLOAT_ON_PARENT,
                    const std::string& name = wxFrameNameStr);
-    ~wxPreviewFrame() override;
+    ~wxPreviewFrame();
 
     wxPreviewFrame(const wxPreviewFrame&) = delete;
     wxPreviewFrame& operator=(const wxPreviewFrame&) = delete;
@@ -510,7 +510,7 @@ public:
                         const wxSize& size = wxDefaultSize,
                         long style = wxTAB_TRAVERSAL,
                         const wxString& name = wxT("panel"));
-    ~wxPreviewControlBar() override = default;
+    ~wxPreviewControlBar() = default;
 
     wxPreviewControlBar(const wxPreviewControlBar&) = delete;
     wxPreviewControlBar& operator=(const wxPreviewControlBar&) = delete;
@@ -716,7 +716,7 @@ public:
     wxPrintPreview(wxPrintout *printout,
                    wxPrintout *printoutForPrinting,
                    wxPrintData *data);
-    ~wxPrintPreview() override;
+    ~wxPrintPreview();
 
     wxPrintPreview(const wxPrintPreview&) = delete;
     wxPrintPreview& operator=(const wxPrintPreview&) = delete;

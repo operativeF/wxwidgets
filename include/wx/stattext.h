@@ -35,7 +35,7 @@ class WXDLLIMPEXP_CORE wxStaticTextBase : public wxControl
 {
 public:
     wxStaticTextBase() = default;
-
+    ~wxStaticTextBase() = default;
     wxStaticTextBase(const wxStaticTextBase&) = delete;
     wxStaticTextBase& operator=(const wxStaticTextBase&) = delete;
     wxStaticTextBase(wxStaticTextBase&&) = default;

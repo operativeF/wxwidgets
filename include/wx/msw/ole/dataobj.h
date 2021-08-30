@@ -26,7 +26,7 @@ class WXDLLIMPEXP_CORE wxDataObject : public wxDataObjectBase
 public:
     // ctor & dtor
     wxDataObject();
-    ~wxDataObject() override;
+    ~wxDataObject();
 
     // retrieve IDataObject interface (for other OLE related classes)
     IDataObject *GetInterface() const { return m_pIDataObject; }

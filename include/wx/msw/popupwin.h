@@ -30,7 +30,7 @@ public:
 
     [[maybe_unused]] bool Create(wxWindow *parent, int flags = wxBORDER_NONE);
 
-    ~wxPopupWindow() override;
+    ~wxPopupWindow();
 
     void SetFocus() override;
     bool Show(bool show = true) override;

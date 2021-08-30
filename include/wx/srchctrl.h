@@ -64,7 +64,7 @@ class WXDLLIMPEXP_CORE wxSearchCtrlBase : public wxSearchCtrlBaseBaseClass
 {
 public:
     wxSearchCtrlBase() = default;
-    ~wxSearchCtrlBase() override = default;
+    ~wxSearchCtrlBase() = default;
 
     // search control
 #if wxUSE_MENUS

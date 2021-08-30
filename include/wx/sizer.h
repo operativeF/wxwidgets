@@ -348,7 +348,7 @@ public:
     }
 
     wxSizerItem() = default;
-    ~wxSizerItem() override;
+    ~wxSizerItem();
 
     wxSizerItem(const wxSizerItem&) = delete;
     wxSizerItem& operator=(const wxSizerItem&) = delete;
@@ -538,7 +538,7 @@ class WXDLLIMPEXP_CORE wxSizer: public wxObject, public wxClientDataContainer
 {
 public:
     wxSizer() = default;
-    ~wxSizer() override;
+    ~wxSizer();
 
     // methods for adding elements to the sizer: there are Add/Insert/Prepend
     // overloads for each of window/sizer/spacer/wxSizerItem
@@ -912,7 +912,7 @@ public:
     wxFlexGridSizer( int rows, int cols, int vgap, int hgap );
     wxFlexGridSizer( int rows, int cols, const wxSize& gap );
 
-    ~wxFlexGridSizer() override = default;
+    ~wxFlexGridSizer() = default;
 
     wxFlexGridSizer(const wxFlexGridSizer&) = delete;
     wxFlexGridSizer& operator=(const wxFlexGridSizer&) = delete;
@@ -1080,7 +1080,7 @@ class WXDLLIMPEXP_CORE wxStaticBoxSizer: public wxBoxSizer
 public:
     wxStaticBoxSizer(wxStaticBox *box, int orient);
     wxStaticBoxSizer(int orient, wxWindow *win, const std::string& label = {});
-    ~wxStaticBoxSizer() override;
+    ~wxStaticBoxSizer();
 
     wxStaticBoxSizer(const wxStaticBoxSizer&) = delete;
     wxStaticBoxSizer& operator=(const wxStaticBoxSizer&) = delete;

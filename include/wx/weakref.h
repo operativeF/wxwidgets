@@ -61,7 +61,7 @@ public:
         return *this;
     }
 
-    ~wxWeakRef() override { this->Release(); }
+    ~wxWeakRef() { this->Release(); }
 
     // Smart pointer functions
     T& operator*() const    { return *this->m_pobj; }
@@ -149,7 +149,7 @@ public:
         Assign(wr.get());
     }
 
-    ~wxWeakRefDynamic() override { Release(); }
+    ~wxWeakRefDynamic() { Release(); }
 
     // Smart pointer functions
     T& operator*() const    { return *m_pobj; }

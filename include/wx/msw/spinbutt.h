@@ -31,7 +31,7 @@ public:
         Create(parent, id, pos, size, style, name);
     }
 
-    ~wxSpinButton() override = default;
+    ~wxSpinButton() = default;
 
     wxSpinButton(const wxSpinButton&) = delete;
     wxSpinButton& operator=(const wxSpinButton&) = delete;

@@ -44,7 +44,7 @@ public:
                 long style = wxTB_DEFAULT_STYLE,
                 const std::string& name = wxToolBarNameStr);
 
-    ~wxToolBar() override;
+    ~wxToolBar();
 
     // override/implement base class virtuals
     wxToolBarToolBase *FindToolForPosition(wxCoord x, wxCoord y) const override;

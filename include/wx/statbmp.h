@@ -35,7 +35,6 @@ public:
 
     wxStaticBitmapBase() = default;
     ~wxStaticBitmapBase() = default;
-
     wxStaticBitmapBase(const wxStaticBitmapBase&) = delete;
     wxStaticBitmapBase& operator=(const wxStaticBitmapBase&) = delete;
     wxStaticBitmapBase(wxStaticBitmapBase&&) = default;

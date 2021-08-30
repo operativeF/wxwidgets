@@ -171,7 +171,7 @@ class WXDLLIMPEXP_BASE wxFileSystem : public wxObject
 {
 public:
     wxFileSystem()  { m_FindFileHandler = nullptr;}
-    ~wxFileSystem() override;
+    ~wxFileSystem();
 
     wxFileSystem(const wxFileSystem&) = delete;
     wxFileSystem& operator=(const wxFileSystem&) = delete;
@@ -295,7 +295,7 @@ class WXDLLIMPEXP_BASE wxFSInputStream : public wxWrapperInputStream
 public:
     // Notice that wxFS_READ is implied in flags.
     wxFSInputStream(const wxString& filename, int flags = 0);
-    ~wxFSInputStream() override;
+    ~wxFSInputStream();
 
     wxFSInputStream(const wxFSInputStream&) = delete;
     wxFSInputStream& operator=(const wxFSInputStream&) = delete;

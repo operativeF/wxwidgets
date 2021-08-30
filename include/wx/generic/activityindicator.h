@@ -42,7 +42,7 @@ public:
                 long style = 0,
                 const std::string& name = wxActivityIndicatorNameStr);
 
-    ~wxActivityIndicatorGeneric() override;
+    ~wxActivityIndicatorGeneric();
 
     void Start() override;
     void Stop() override;

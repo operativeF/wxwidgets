@@ -95,7 +95,7 @@ public:
                 const wxSize& size = wxDefaultSize,
                 int style = wxTAB_TRAVERSAL|wxNO_BORDER,
                 int helpStyle = wxHF_DEFAULT_STYLE);
-    ~wxHtmlHelpWindow() override;
+    ~wxHtmlHelpWindow();
 
     wxHtmlHelpWindow(const wxHtmlHelpWindow&) = delete;
 	wxHtmlHelpWindow& operator=(const wxHtmlHelpWindow&) = delete;

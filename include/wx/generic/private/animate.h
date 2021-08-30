@@ -21,7 +21,7 @@ class WXDLLIMPEXP_CORE wxAnimationGenericImpl : public wxAnimationImpl
 {
 public:
     wxAnimationGenericImpl()  = default;
-    ~wxAnimationGenericImpl() override { UnRef(); }
+    ~wxAnimationGenericImpl() { UnRef(); }
 
     bool IsOk() const override
         { return m_decoder != nullptr; }

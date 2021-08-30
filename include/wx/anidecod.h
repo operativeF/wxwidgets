@@ -32,7 +32,7 @@ class WXDLLIMPEXP_CORE wxANIDecoder : public wxAnimationDecoder
 {
 public:
    wxANIDecoder() = default;
-   ~wxANIDecoder() override = default;
+   ~wxANIDecoder() = default;
 
    wxANIDecoder(const wxANIDecoder&) = delete;
    wxANIDecoder& operator=(const wxANIDecoder&) = delete;

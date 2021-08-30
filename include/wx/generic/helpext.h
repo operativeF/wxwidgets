@@ -29,7 +29,7 @@ class WXDLLIMPEXP_CORE wxExtHelpController : public wxHelpControllerBase
 {
 public:
     wxExtHelpController(wxWindow* parentWindow = nullptr);
-    ~wxExtHelpController() override;
+    ~wxExtHelpController();
 
     // Set viewer: new name for SetBrowser
     void SetViewer(const std::string& viewer = {},

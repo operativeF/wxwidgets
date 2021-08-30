@@ -27,19 +27,10 @@ class wxSimplebook : public wxBookCtrlBase
 {
 public:
     wxSimplebook()
-    {
-        
+    {    
         // We don't need any border as we don't have anything to separate the
         // page contents from.
         SetInternalBorder(0);
-
-        // No effects by default.
-        m_showEffect =
-        m_hideEffect = wxSHOW_EFFECT_NONE;
-
-        m_showTimeout =
-        m_hideTimeout = 0;
-    
     }
 
     wxSimplebook(wxWindow *parent,
@@ -50,24 +41,15 @@ public:
                  const std::string& name = {})
         : wxBookCtrlBase(parent, winid, pos, size, style | wxBK_TOP, name)
     {
-        
         // We don't need any border as we don't have anything to separate the
         // page contents from.
         SetInternalBorder(0);
-
-        // No effects by default.
-        m_showEffect =
-        m_hideEffect = wxSHOW_EFFECT_NONE;
-
-        m_showTimeout =
-        m_hideTimeout = 0;
-    
     }
 
-   wxSimplebook(const wxSimplebook&) = delete;
-   wxSimplebook& operator=(const wxSimplebook&) = delete;
-   wxSimplebook(wxSimplebook&&) = default;
-   wxSimplebook& operator=(wxSimplebook&&) = default;
+    wxSimplebook(const wxSimplebook&) = delete;
+    wxSimplebook& operator=(const wxSimplebook&) = delete;
+    wxSimplebook(wxSimplebook&&) = default;
+    wxSimplebook& operator=(wxSimplebook&&) = default;
 
     [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID winid = wxID_ANY,
@@ -231,11 +213,11 @@ protected:
 private:
     std::vector<std::string> m_pageTexts;
 
-    wxShowEffect m_showEffect,
-                 m_hideEffect;
+    wxShowEffect m_showEffect{wxSHOW_EFFECT_NONE};
+    wxShowEffect m_hideEffect{wxSHOW_EFFECT_NONE};
 
-    unsigned m_showTimeout,
-             m_hideTimeout;
+    unsigned int m_showTimeout{0};
+    unsigned int m_hideTimeout{0};
 };
 
 #endif // wxUSE_BOOKCTRL

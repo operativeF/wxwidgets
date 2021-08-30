@@ -139,7 +139,7 @@ public:
     }
 #endif
 
-    ~wxGenericDragImage() override;
+    ~wxGenericDragImage();
 
     // Attributes
     ////////////////////////////////////////////////////////////////////////////

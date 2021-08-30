@@ -52,7 +52,7 @@ public:
         Bind(wxEVT_TEXT, &wxTextEntryHintData::OnTextChanged, this);
     }
 
-    ~wxTextEntryHintData() override
+    ~wxTextEntryHintData()
     {
         m_win->PopEventHandler();
     }

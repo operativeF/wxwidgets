@@ -46,7 +46,7 @@ public:
              const wxPoint& pos = wxDefaultPosition,
              long style = wxDEFAULT_DIALOG_STYLE);
     void Init();
-    ~wxWizard() override;
+    ~wxWizard();
 
     bool RunWizard(wxWizardPage *firstPage) override;
     wxWizardPage *GetCurrentPage() const override;

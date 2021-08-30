@@ -153,7 +153,7 @@ class WXDLLIMPEXP_CORE wxActiveXContainer : public wxWindow
 {
 public:
     wxActiveXContainer(wxWindow * parent, REFIID iid, IUnknown* pUnk);
-    ~wxActiveXContainer() override;
+    ~wxActiveXContainer();
 
     void OnSize(wxSizeEvent&);
     void OnPaint(wxPaintEvent&);

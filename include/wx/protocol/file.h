@@ -21,7 +21,7 @@ class WXDLLIMPEXP_NET wxFileProto: public wxProtocol
 {
 public:
     wxFileProto() = default;
-    ~wxFileProto() override = default;
+    ~wxFileProto() = default;
 
     wxFileProto(const wxFileProto&) = delete;
     wxFileProto& operator=(const wxFileProto&) = delete;

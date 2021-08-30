@@ -69,7 +69,7 @@ public:
     {
     }
 
-    ~wxPaintDCInfoOur() override
+    ~wxPaintDCInfoOur()
     {
         ::EndPaint(m_hwnd, &m_ps);
     }
@@ -101,7 +101,7 @@ public:
     {
     }
 
-    ~wxPaintDCInfoExternal() override
+    ~wxPaintDCInfoExternal()
     {
         ::RestoreDC(m_hdc, m_state);
     }
@@ -326,7 +326,7 @@ class wxPaintDCExImpl: public wxPaintDCImpl
 {
 public:
     wxPaintDCExImpl( wxDC *owner, wxWindow *window, WXHDC dc );
-    ~wxPaintDCExImpl() override;
+    ~wxPaintDCExImpl();
 };
 
 

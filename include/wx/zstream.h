@@ -38,7 +38,7 @@ class WXDLLIMPEXP_BASE wxZlibInputStream: public wxFilterInputStream {
  // FIXME: Redundant construction via ptr / ref?
   wxZlibInputStream(wxInputStream& stream, int flags = wxZLIB_AUTO);
   wxZlibInputStream(wxInputStream *stream, int flags = wxZLIB_AUTO);
-  ~wxZlibInputStream() override;
+  ~wxZlibInputStream();
 
   wxZlibInputStream(const wxZlibInputStream&) = delete;
   wxZlibInputStream& operator=(const wxZlibInputStream&) = delete;
@@ -69,7 +69,7 @@ class WXDLLIMPEXP_BASE wxZlibOutputStream: public wxFilterOutputStream {
  public:
   wxZlibOutputStream(wxOutputStream& stream, int level = -1, int flags = wxZLIB_ZLIB);
   wxZlibOutputStream(wxOutputStream *stream, int level = -1, int flags = wxZLIB_ZLIB);
-  ~wxZlibOutputStream() override { Close(); }
+  ~wxZlibOutputStream() { Close(); }
 
   wxZlibOutputStream(const wxZlibOutputStream&) = delete;
   wxZlibOutputStream& operator=(const wxZlibOutputStream&) = delete;

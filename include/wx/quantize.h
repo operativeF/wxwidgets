@@ -41,7 +41,7 @@ public:
 //// Constructor
 
     wxQuantize() = default;
-    ~wxQuantize() override = default;
+    ~wxQuantize() = default;
 
 //// Operations
 

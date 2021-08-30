@@ -407,7 +407,7 @@ public:
 
     wxAuiManager(wxWindow* managedWnd = nullptr,
                    unsigned int flags = wxAUI_MGR_DEFAULT);
-    ~wxAuiManager() override;
+    ~wxAuiManager();
     void UnInit();
 
     void SetFlags(unsigned int flags);

@@ -39,7 +39,7 @@ public:
                 wxTipWindow** windowPtr = nullptr,
                 wxRect *rectBound = nullptr);
 
-    ~wxTipWindow() override;
+    ~wxTipWindow();
 
    wxTipWindow(const wxTipWindow&) = delete;
    wxTipWindow& operator=(const wxTipWindow&) = delete;

@@ -71,7 +71,7 @@ public:
         }
     }
 
-    ~wxMenu() override;
+    ~wxMenu();
 
     wxMenu(const wxMenu&) = delete;
     wxMenu& operator=(const wxMenu&) = delete;
@@ -215,7 +215,7 @@ public:
     wxMenuBar(long style);
         // menubar takes ownership of the menus arrays but copies the titles
     wxMenuBar(size_t n, wxMenu *menus[], const std::string titles[], long style = 0);
-    ~wxMenuBar() override;
+    ~wxMenuBar();
 
     wxMenuBar(const wxMenuBar&) = delete;
     wxMenuBar& operator=(const wxMenuBar&) = delete;

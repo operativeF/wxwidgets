@@ -59,7 +59,7 @@ public:
     // Create a DC corresponding to the client area of the window
     wxClientDCImpl( wxDC *owner, wxWindow *win );
 
-    ~wxClientDCImpl() override = default;
+    ~wxClientDCImpl() = default;
 
     wxClientDCImpl(const wxClientDCImpl&) = delete;
 	wxClientDCImpl& operator=(const wxClientDCImpl&) = delete;
@@ -82,7 +82,7 @@ public:
     // Create a DC corresponding for painting the window in OnPaint()
     wxPaintDCImpl( wxDC *owner, wxWindow *win );
 
-    ~wxPaintDCImpl() override;
+    ~wxPaintDCImpl();
 
     wxPaintDCImpl(const wxPaintDCImpl&) = delete;
 	wxPaintDCImpl& operator=(const wxPaintDCImpl&) = delete;

@@ -19,7 +19,7 @@ public:
     wxSound() = default;
     wxSound(const std::string& fileName, bool isResource = false);
     wxSound(size_t size, const void* data);
-    ~wxSound() override;
+    ~wxSound();
     wxSound(const wxSound&) = delete;
     wxSound& operator=(const wxSound&) = delete;
     wxSound(wxSound&&) = default;

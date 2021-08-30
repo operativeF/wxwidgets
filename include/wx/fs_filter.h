@@ -23,7 +23,7 @@ class WXDLLIMPEXP_BASE wxFilterFSHandler : public wxFileSystemHandler
 {
 public:
     wxFilterFSHandler()  = default;
-    ~wxFilterFSHandler() override = default;
+    ~wxFilterFSHandler() = default;
 
     wxFilterFSHandler(const wxFilterFSHandler&) = delete;
     wxFilterFSHandler& operator=(const wxFilterFSHandler&) = delete;

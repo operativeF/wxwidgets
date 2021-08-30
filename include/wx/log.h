@@ -741,7 +741,7 @@ class WXDLLIMPEXP_BASE wxLogChain : public wxLog
 {
 public:
     wxLogChain(wxLog *logger);
-    ~wxLogChain() override;
+    ~wxLogChain();
 
     wxLogChain(const wxLogChain&) = delete;
     wxLogChain& operator=(const wxLogChain&) = delete;

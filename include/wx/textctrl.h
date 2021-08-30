@@ -677,7 +677,7 @@ class WXDLLIMPEXP_CORE wxTextCtrlBase : public wxControl,
 {
 public:
     wxTextCtrlBase() = default;
-    ~wxTextCtrlBase() override = default;
+    ~wxTextCtrlBase() = default;
 
    wxTextCtrlBase(const wxTextCtrlBase&) = delete;
    wxTextCtrlBase& operator=(const wxTextCtrlBase&) = delete;

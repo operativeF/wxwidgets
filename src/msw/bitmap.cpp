@@ -61,7 +61,7 @@ public:
     }
     
     wxBitmapRefData(const wxBitmapRefData& data);
-    ~wxBitmapRefData() override { Free(); }
+    ~wxBitmapRefData() { Free(); }
 
     wxBitmapRefData& operator=(const wxBitmapRefData&) = delete;
 

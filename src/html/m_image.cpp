@@ -281,7 +281,7 @@ public:
                     int h = wxDefaultCoord, bool hpresent = false,
                     double scale = 1.0, int align = wxHTML_ALIGN_BOTTOM,
                     const wxString& mapname = wxEmptyString);
-    ~wxHtmlImageCell() override;
+    ~wxHtmlImageCell();
 
     wxHtmlImageCell(const wxHtmlImageCell&) = delete;
 	wxHtmlImageCell& operator=(const wxHtmlImageCell&) = delete;

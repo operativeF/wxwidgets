@@ -37,7 +37,7 @@ class WXDLLIMPEXP_CORE wxStaticLineBase : public wxControl
 {
 public:
     wxStaticLineBase() = default;
-
+    ~wxStaticLineBase() = default;
     wxStaticLineBase(const wxStaticLineBase&) = delete;
     wxStaticLineBase& operator=(const wxStaticLineBase&) = delete;
     wxStaticLineBase(wxStaticLineBase&&) = default;

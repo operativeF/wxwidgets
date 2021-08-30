@@ -53,7 +53,7 @@ public:
         Create(parent, id, pos, size, style, validator, name);
     }
 
-    ~wxGenericTreeCtrl() override;
+    ~wxGenericTreeCtrl();
 
     wxGenericTreeCtrl(const wxGenericTreeCtrl&) = delete;
 	wxGenericTreeCtrl& operator=(const wxGenericTreeCtrl&) = delete;

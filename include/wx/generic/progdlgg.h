@@ -38,7 +38,7 @@ public:
     wxGenericProgressDialog(const wxGenericProgressDialog&) = delete;
     wxGenericProgressDialog& operator=(const wxGenericProgressDialog&) = delete;
 
-    ~wxGenericProgressDialog() override;
+    ~wxGenericProgressDialog();
 
     bool Create(const std::string& title,
                 const std::string& message,

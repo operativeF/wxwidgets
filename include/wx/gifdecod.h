@@ -48,7 +48,7 @@ class WXDLLIMPEXP_CORE wxGIFDecoder : public wxAnimationDecoder
 {
 public:
     wxGIFDecoder() = default;
-    ~wxGIFDecoder() override;
+    ~wxGIFDecoder();
 
     wxGIFDecoder(const wxGIFDecoder&) = delete;
     wxGIFDecoder& operator=(const wxGIFDecoder&) = delete;

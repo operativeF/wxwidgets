@@ -2037,7 +2037,7 @@ public:
         Copy constructor.
     */
     wxRichTextFontTable(const wxRichTextFontTable& table);
-    ~wxRichTextFontTable() override;
+    ~wxRichTextFontTable();
 
     /**
         Returns @true if the font table is valid.
@@ -3117,7 +3117,7 @@ public:
 // Constructors
 
     wxRichTextCompositeObject(wxRichTextObject* parent = nullptr);
-    ~wxRichTextCompositeObject() override;
+    ~wxRichTextCompositeObject();
 
 // Overridables
 
@@ -3238,7 +3238,7 @@ public:
 
     wxRichTextParagraphLayoutBox(wxRichTextObject* parent = nullptr);
     wxRichTextParagraphLayoutBox(const wxRichTextParagraphLayoutBox& obj) { Init(); Copy(obj); }
-    ~wxRichTextParagraphLayoutBox() override;
+    ~wxRichTextParagraphLayoutBox();
 
 // Overridables
 
@@ -4505,7 +4505,7 @@ public:
         Constructor taking a text string, a parent and paragraph and character attributes.
     */
     wxRichTextParagraph(const wxString& text, wxRichTextObject* parent = nullptr, wxRichTextAttr* paraStyle = nullptr, wxRichTextAttr* charStyle = nullptr);
-    ~wxRichTextParagraph() override;
+    ~wxRichTextParagraph();
     wxRichTextParagraph(const wxRichTextParagraph& obj) { Copy(obj); }
 
     void Init();
@@ -4796,7 +4796,7 @@ public:
         Copy constructor.
     */
     wxRichTextImageBlock(const wxRichTextImageBlock& block);
-    ~wxRichTextImageBlock() override;
+    ~wxRichTextImageBlock();
 
     /**
         Initialises the block.
@@ -4966,7 +4966,7 @@ public:
 
     wxRichTextImage(const wxRichTextImage& obj): wxRichTextObject(obj) { Copy(obj); }
 
-    ~wxRichTextImage() override = default;
+    ~wxRichTextImage() = default;
 
     /**
         Initialisation.
@@ -5114,7 +5114,7 @@ public:
     */
     wxRichTextBuffer(const wxRichTextBuffer& obj) { Init(); Copy(obj); }
 
-    ~wxRichTextBuffer() override ;
+    ~wxRichTextBuffer() ;
 
 // Accessors
 
@@ -6381,7 +6381,7 @@ public:
     */
     wxRichTextCommand(const wxString& name);
 
-    ~wxRichTextCommand() override;
+    ~wxRichTextCommand();
 
     /**
         Performs the command.
@@ -6442,7 +6442,7 @@ public:
         wxRichTextBuffer* buffer, wxRichTextParagraphLayoutBox* container,
         wxRichTextCtrl* ctrl, bool ignoreFirstTime = false);
 
-    ~wxRichTextAction() override;
+    ~wxRichTextAction();
 
     /**
         Performs the action.
@@ -6937,7 +6937,7 @@ public:
         is alive.
     */
     wxRichTextBufferDataObject(wxRichTextBuffer* richTextBuffer = nullptr);
-    ~wxRichTextBufferDataObject() override;
+    ~wxRichTextBufferDataObject();
 
     /**
         After a call to this function, the buffer is owned by the caller and it
@@ -6989,7 +6989,7 @@ public:
         Constructor.
     */
     wxRichTextRenderer() = default;
-    ~wxRichTextRenderer() override = default;
+    ~wxRichTextRenderer() = default;
 
     /**
         Draws a standard bullet, as specified by the value of GetBulletName. This function should be overridden.

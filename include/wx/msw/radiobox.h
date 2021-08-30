@@ -39,7 +39,7 @@ public:
                      style, val, name);
     }
 
-    ~wxRadioBox() override;
+    ~wxRadioBox();
 
     wxRadioBox(const wxRadioBox&) = delete;
 	wxRadioBox& operator=(const wxRadioBox&) = delete;

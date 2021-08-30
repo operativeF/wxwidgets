@@ -32,7 +32,7 @@ public:
                   const wxSize& size = wxDefaultSize,
                   long style = 0);
 
-    ~wxRibbonGallery() override;
+    ~wxRibbonGallery();
 
     bool Create(wxWindow* parent,
                 wxWindowID id = wxID_ANY,

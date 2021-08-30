@@ -95,7 +95,7 @@ public:
         Create(parent, id, pos, size, style, validator, name);
     }
 
-    ~wxTreeCtrl() override;
+    ~wxTreeCtrl();
 
     wxTreeCtrl(const wxTreeCtrl&) = delete;
     wxTreeCtrl& operator=(const wxTreeCtrl&) = delete;

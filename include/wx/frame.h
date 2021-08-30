@@ -56,7 +56,7 @@ class WXDLLIMPEXP_CORE wxFrameBase : public wxTopLevelWindow
 {
 public:
     wxFrameBase() = default;
-    ~wxFrameBase() override;
+    ~wxFrameBase();
 
     wxFrameBase(const wxFrameBase&) = delete;
     wxFrameBase& operator=(const wxFrameBase&) = delete;

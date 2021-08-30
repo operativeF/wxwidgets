@@ -103,7 +103,7 @@ class WXDLLIMPEXP_CORE wxFontPickerCtrl : public wxPickerBase
 public:
      wxFontPickerCtrl() = default;
 
-    ~wxFontPickerCtrl() override = default;
+    ~wxFontPickerCtrl() = default;
 
 
     wxFontPickerCtrl(wxWindow *parent,

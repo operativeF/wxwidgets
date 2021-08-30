@@ -71,7 +71,7 @@ public:
     // ---------------------
 
     wxVarScrollHelperBase(wxWindow *winToScroll);
-    ~wxVarScrollHelperBase() override;
+    ~wxVarScrollHelperBase();
 
     // operations
     // ----------

@@ -49,7 +49,7 @@ class WXDLLIMPEXP_CORE wxAutomationObject: public wxObject
 {
 public:
     wxAutomationObject(WXIDISPATCH* dispatchPtr = nullptr);
-    ~wxAutomationObject() override;
+    ~wxAutomationObject();
 
     // Set/get dispatch pointer
     void SetDispatchPtr(WXIDISPATCH* dispatchPtr) { m_dispatchPtr = dispatchPtr; }

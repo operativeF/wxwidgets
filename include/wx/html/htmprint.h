@@ -32,7 +32,7 @@ class WXDLLIMPEXP_HTML wxHtmlDCRenderer : public wxObject
 {
 public:
     wxHtmlDCRenderer();
-    ~wxHtmlDCRenderer() override;
+    ~wxHtmlDCRenderer();
 
     wxHtmlDCRenderer(const wxHtmlDCRenderer&) = delete;
     wxHtmlDCRenderer& operator=(const wxHtmlDCRenderer&) = delete;
@@ -234,7 +234,7 @@ class WXDLLIMPEXP_HTML wxHtmlEasyPrinting : public wxObject
 {
 public:
     wxHtmlEasyPrinting(const wxString& name = wxT("Printing"), wxWindow *parentWindow = nullptr);
-    ~wxHtmlEasyPrinting() override;
+    ~wxHtmlEasyPrinting();
 
     wxHtmlEasyPrinting(const wxHtmlEasyPrinting&) = delete;
     wxHtmlEasyPrinting& operator=(const wxHtmlEasyPrinting&) = delete;

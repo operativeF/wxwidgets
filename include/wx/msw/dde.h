@@ -45,7 +45,7 @@ class WXDLLIMPEXP_BASE wxDDEConnection : public wxConnectionBase
 public:
   wxDDEConnection(void *buffer, size_t size); // use external buffer
   wxDDEConnection() = default; // use internal buffer
-  ~wxDDEConnection() override;
+  ~wxDDEConnection();
 
   wxDDEConnection(const wxDDEConnection&) = delete;
 	wxDDEConnection& operator=(const wxDDEConnection&) = delete;
@@ -82,7 +82,7 @@ class WXDLLIMPEXP_BASE wxDDEServer : public wxServerBase
 public:
     wxDDEServer();
     [[maybe_unused]] bool Create(const wxString& server_name) override;
-    ~wxDDEServer() override;
+    ~wxDDEServer();
 
     wxConnectionBase *OnAcceptConnection(const wxString& topic) override;
 
@@ -107,7 +107,7 @@ class WXDLLIMPEXP_BASE wxDDEClient: public wxClientBase
 {
 public:
     wxDDEClient();
-    ~wxDDEClient() override;
+    ~wxDDEClient();
 
     bool ValidHost(const wxString& host) override;
 

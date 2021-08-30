@@ -28,7 +28,7 @@ class WXDLLIMPEXP_CORE wxApp : public wxAppBase
 {
 public:
     wxApp() = default;
-    ~wxApp() override = default;
+    ~wxApp() = default;
 
     wxApp(const wxApp&) = delete;
     wxApp& operator=(const wxApp&) = delete;

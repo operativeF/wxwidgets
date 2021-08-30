@@ -44,7 +44,7 @@ public:
                 long style = wxAC_DEFAULT_STYLE,
                 const std::string& name = wxAnimationCtrlNameStr);
 
-    ~wxGenericAnimationCtrl() override;
+    ~wxGenericAnimationCtrl();
 
 
 public:

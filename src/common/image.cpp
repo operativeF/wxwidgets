@@ -65,7 +65,7 @@ wxImage wxNullImage;
 struct wxImageRefData: public wxObjectRefData
 {
     wxImageRefData() = default;
-    ~wxImageRefData() override;
+    ~wxImageRefData();
 
     wxImageRefData(const wxImageRefData&) = delete;
 	wxImageRefData& operator=(const wxImageRefData&) = delete;

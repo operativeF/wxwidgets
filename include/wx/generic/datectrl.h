@@ -40,7 +40,7 @@ public:
         Create(parent, id, date, pos, size, style, validator, name);
     }
 
-    ~wxDatePickerCtrlGeneric() override = default;
+    ~wxDatePickerCtrlGeneric() = default;
 
     wxDatePickerCtrlGeneric(const wxDatePickerCtrlGeneric&) = delete;
 	wxDatePickerCtrlGeneric& operator=(const wxDatePickerCtrlGeneric&) = delete;

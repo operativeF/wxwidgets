@@ -73,7 +73,7 @@ public:
         SetSizeHints(wxDefaultCoord, wxDefaultCoord);
     }
 
-    ~wxSpinCtrlTextGeneric() override
+    ~wxSpinCtrlTextGeneric()
     {
         // MSW sends extra kill focus event on destroy
         if (m_spin)

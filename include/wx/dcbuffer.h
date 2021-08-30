@@ -65,7 +65,7 @@ public:
     }
 
     // The usually desired  action in the dtor is to blit the buffer.
-    ~wxBufferedDC() override
+    ~wxBufferedDC()
     {
         if ( m_dc )
             UnMask();
@@ -179,7 +179,7 @@ public:
 
     // default copy ctor ok.
 
-    ~wxBufferedPaintDC() override
+    ~wxBufferedPaintDC()
     {
         // We must UnMask here, else by the time the base class
         // does it, the PaintDC will have already been destroyed.
@@ -233,7 +233,7 @@ public:
         );
     }
 
-    ~wxAutoBufferedPaintDC() override = default;
+    ~wxAutoBufferedPaintDC() = default;
 
     wxAutoBufferedPaintDC(const wxAutoBufferedPaintDC&) = delete;
     wxAutoBufferedPaintDC& operator=(const wxAutoBufferedPaintDC&) = delete;

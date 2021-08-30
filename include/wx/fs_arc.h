@@ -37,7 +37,7 @@ public:
     wxString FindFirst(const wxString& spec, int flags = 0) override;
     wxString FindNext() override;
     void Cleanup();
-    ~wxArchiveFSHandler() override;
+    ~wxArchiveFSHandler();
 
 private:
     class wxArchiveFSCache *m_cache{nullptr};

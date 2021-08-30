@@ -33,7 +33,7 @@ public:
     wxFileInputStream(const wxString& ifileName);
     wxFileInputStream(wxFile& file);
     wxFileInputStream(int fd);
-    ~wxFileInputStream() override;
+    ~wxFileInputStream();
 
     wxFileInputStream(const wxFileInputStream&) = delete;
     wxFileInputStream& operator=(const wxFileInputStream&) = delete;
@@ -66,7 +66,7 @@ public:
     wxFileOutputStream(const wxString& fileName);
     wxFileOutputStream(wxFile& file);
     wxFileOutputStream(int fd);
-    ~wxFileOutputStream() override;
+    ~wxFileOutputStream();
 
     wxFileOutputStream(const wxFileOutputStream&) = delete;
     wxFileOutputStream& operator=(const wxFileOutputStream&) = delete;
@@ -99,7 +99,7 @@ class WXDLLIMPEXP_BASE wxTempFileOutputStream : public wxOutputStream
 {
 public:
     wxTempFileOutputStream(const wxString& fileName);
-    ~wxTempFileOutputStream() override;
+    ~wxTempFileOutputStream();
 
     wxTempFileOutputStream(const wxTempFileOutputStream&) = delete;
     wxTempFileOutputStream& operator=(const wxTempFileOutputStream&) = delete;
@@ -127,7 +127,7 @@ class WXDLLIMPEXP_BASE wxTempFFileOutputStream : public wxOutputStream
 {
 public:
     wxTempFFileOutputStream(const wxString& fileName);
-    ~wxTempFFileOutputStream() override;
+    ~wxTempFFileOutputStream();
 
     wxTempFFileOutputStream(const wxTempFFileOutputStream&) = delete;
     wxTempFFileOutputStream& operator=(const wxTempFFileOutputStream&) = delete;
@@ -204,7 +204,7 @@ public:
     wxFFileInputStream(const wxString& fileName, const wxString& mode = wxASCII_STR("rb"));
     wxFFileInputStream(wxFFile& file);
     wxFFileInputStream(FILE *file);
-    ~wxFFileInputStream() override;
+    ~wxFFileInputStream();
 
     wxFFileInputStream(const wxFFileInputStream&) = delete;
     wxFFileInputStream& operator=(const wxFFileInputStream&) = delete;
@@ -237,7 +237,7 @@ public:
     wxFFileOutputStream(const wxString& fileName, const wxString& mode = wxASCII_STR("wb"));
     wxFFileOutputStream(wxFFile& file);
     wxFFileOutputStream(FILE *file);
-    ~wxFFileOutputStream() override;
+    ~wxFFileOutputStream();
 
     wxFFileOutputStream(const wxFFileOutputStream&) = delete;
     wxFFileOutputStream& operator=(const wxFFileOutputStream&) = delete;

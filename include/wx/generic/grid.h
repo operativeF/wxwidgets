@@ -138,7 +138,7 @@ public:
 protected:
     // virtual dtor for any base class - private because only DecRef() can
     // delete us
-    ~wxGridCellWorker() override = default;
+    ~wxGridCellWorker() = default;
 
 private:
     // suppress the stupid gcc warning about the class having private dtor and
@@ -483,7 +483,7 @@ public:
 
 protected:
     // the dtor is private because only DecRef() can delete us
-    ~wxGridCellEditor() override;
+    ~wxGridCellEditor();
 
     // Helper for the derived classes positioning the control according to the
     // attribute alignment if the desired control size is smaller than the cell
@@ -808,7 +808,7 @@ public:
 
 protected:
     // the dtor is private because only DecRef() can delete us
-    ~wxGridCellAttr() override
+    ~wxGridCellAttr()
     {
         wxSafeDecRef(m_renderer);
         wxSafeDecRef(m_editor);
@@ -872,7 +872,7 @@ class WXDLLIMPEXP_CORE wxGridCellAttrProvider : public wxClientDataContainer
 {
 public:
     wxGridCellAttrProvider() = default;
-    ~wxGridCellAttrProvider() override;
+    ~wxGridCellAttrProvider();
 
     // DecRef() must be called on the returned pointer
     virtual wxGridCellAttr *GetAttr(int row, int col,
@@ -1165,7 +1165,7 @@ class WXDLLIMPEXP_CORE wxGridTableBase : public wxObject,
 {
 public:
     wxGridTableBase() = default;
-    ~wxGridTableBase() override;
+    ~wxGridTableBase();
 
     // You must override these functions in a derived table class
     //
@@ -1490,7 +1490,7 @@ public:
                 long style = wxWANTS_CHARS,
                 const std::string& name = wxGridNameStr);
 
-    ~wxGrid() override;
+    ~wxGrid();
 
     // however to initialize grid data either CreateGrid() (to use a simple
     // default table class) or {Set,Assign}Table() (to use a custom table) must

@@ -199,7 +199,7 @@ public:
     wxFontMapper() = default;
 
     // virtual dtor for a base class
-    ~wxFontMapper() override = default;
+    ~wxFontMapper() = default;
 
     wxFontMapper(const wxFontMapper&) = delete;
     wxFontMapper& operator=(const wxFontMapper&) = delete;

@@ -33,7 +33,7 @@ class WXDLLIMPEXP_CORE wxSpinCtrlBase : public wxControl
 {
 public:
     wxSpinCtrlBase() = default;
-
+    ~wxSpinCtrlBase() = default;
     wxSpinCtrlBase(const wxSpinCtrlBase&) = delete;
     wxSpinCtrlBase& operator=(const wxSpinCtrlBase&) = delete;
     wxSpinCtrlBase(wxSpinCtrlBase&&) = default;

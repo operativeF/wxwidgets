@@ -39,7 +39,7 @@ public:
                                 wxFRAME_NO_TASKBAR | wxFRAME_FLOAT_ON_PARENT |
                                 wxCLIP_CHILDREN
                    );
-    ~wxAuiFloatingFrame() override;
+    ~wxAuiFloatingFrame();
     void SetPaneWindow(const wxAuiPaneInfo& pane);
     wxAuiManager* GetOwnerManager() const;
 

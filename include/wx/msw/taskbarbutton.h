@@ -22,7 +22,7 @@ class WXDLLIMPEXP_FWD_CORE wxITaskbarList3;
 class WXDLLIMPEXP_CORE wxTaskBarButtonImpl : public wxTaskBarButton
 {
 public:
-    ~wxTaskBarButtonImpl() override;
+    ~wxTaskBarButtonImpl();
 
     wxTaskBarButtonImpl(const wxTaskBarButtonImpl&) = delete;
     wxTaskBarButtonImpl& operator=(const wxTaskBarButtonImpl&) = delete;

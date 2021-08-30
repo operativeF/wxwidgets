@@ -64,7 +64,7 @@ public:
     // same as ctor above
     void SetOwner(wxEvtHandler *owner, int timerid = wxID_ANY);
 
-    ~wxTimer() override;
+    ~wxTimer();
 
    wxTimer(const wxTimer&) = delete;
    wxTimer& operator=(const wxTimer&) = delete;

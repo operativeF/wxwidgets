@@ -37,7 +37,7 @@ class WXDLLEXPORT wxAcceleratorRefData: public wxObjectRefData
     friend class WXDLLIMPEXP_FWD_CORE wxAcceleratorTable;
 public:
     wxAcceleratorRefData() = default;
-    ~wxAcceleratorRefData() override;
+    ~wxAcceleratorRefData();
     wxAcceleratorRefData(const wxAcceleratorRefData&) = delete;
 	wxAcceleratorRefData& operator=(const wxAcceleratorRefData&) = delete;
 

@@ -290,7 +290,7 @@ class WXDLLIMPEXP_CORE wxDataObjectComposite : public wxDataObject
 {
 public:
     wxDataObjectComposite() = default;
-    ~wxDataObjectComposite() override;
+    ~wxDataObjectComposite();
 
     wxDataObjectComposite(const wxDataObjectComposite&) = delete;
     wxDataObjectComposite& operator=(const wxDataObjectComposite&) = delete;
@@ -531,7 +531,7 @@ public:
     wxCustomDataObject(const wxDataFormat& format = wxFormatInvalid);
 
     // the dtor calls Free()
-    ~wxCustomDataObject() override;
+    ~wxCustomDataObject();
 
     wxCustomDataObject(const wxCustomDataObject&) = delete;
     wxCustomDataObject& operator=(const wxCustomDataObject&) = delete;

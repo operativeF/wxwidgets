@@ -27,7 +27,7 @@ public:
     {
     }
 
-    ~wxBestHelpController() override { delete m_helpController; }
+    ~wxBestHelpController() { delete m_helpController; }
 
     wxBestHelpController(const wxBestHelpController&) = delete;
     wxBestHelpController& operator=(const wxBestHelpController&) = delete;

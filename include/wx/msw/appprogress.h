@@ -19,7 +19,7 @@ class WXDLLIMPEXP_CORE wxAppProgressIndicator
 {
 public:
     wxAppProgressIndicator(wxWindow* parent = nullptr, int maxValue = 100);
-    ~wxAppProgressIndicator() override;
+    ~wxAppProgressIndicator();
 
     wxAppProgressIndicator(const wxAppProgressIndicator&) = delete;
     wxAppProgressIndicator& operator=(const wxAppProgressIndicator&) = delete;

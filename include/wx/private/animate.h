@@ -18,7 +18,7 @@ class WXDLLIMPEXP_CORE wxAnimationImpl : public wxRefCounter
 {
 public:
     wxAnimationImpl() = default;
-    ~wxAnimationImpl() override = default;
+    ~wxAnimationImpl() = default;
 
     virtual bool IsOk() const = 0;
     virtual bool IsCompatibleWith(wxClassInfo* ci) const = 0;

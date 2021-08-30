@@ -35,7 +35,7 @@ public:
         item.SetProportion(std::numeric_limits<int>::max());
     }
 
-    ~wxPropChanger() override
+    ~wxPropChanger()
     {
         // check if the sizer still has this item, it could have been removed
         if ( m_sizer.GetChildren().Find(&m_item) )

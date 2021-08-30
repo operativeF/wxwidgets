@@ -36,7 +36,7 @@ public:
         Create(parent, id, title, pos, size, style, name);
     }
 
-    ~wxMDIParentFrame() override;
+    ~wxMDIParentFrame();
 
     [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,
@@ -198,7 +198,7 @@ public:
                 long style = wxDEFAULT_FRAME_STYLE,
                 const std::string& name = wxFrameNameStr);
 
-    ~wxMDIChildFrame() override;
+    ~wxMDIChildFrame();
 
     // implement MDI operations
     void Activate() override;

@@ -36,7 +36,7 @@ public:
                const wxValidator& validator = wxDefaultValidator,
                const std::string& name = wxSearchCtrlNameStr);
 
-    ~wxSearchCtrl() override;
+    ~wxSearchCtrl();
 
     bool Create(wxWindow *parent, wxWindowID id,
                 const std::string& value = {},

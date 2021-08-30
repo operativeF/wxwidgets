@@ -49,7 +49,7 @@ public:
     wxSpinCtrl(wxSpinCtrl&&) = default;
     wxSpinCtrl& operator=(wxSpinCtrl&&) = default;
 
-    ~wxSpinCtrl() override;
+    ~wxSpinCtrl();
 
     [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id = wxID_ANY,

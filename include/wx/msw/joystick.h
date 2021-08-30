@@ -20,7 +20,7 @@ class WXDLLIMPEXP_CORE wxJoystick: public wxObject
   wxDECLARE_DYNAMIC_CLASS(wxJoystick);
 public:
   explicit wxJoystick(int joystick = wxJOYSTICK1);
-  ~wxJoystick() override;
+  ~wxJoystick();
 
   wxPoint GetPosition() const;
   int GetPosition(unsigned axis) const;

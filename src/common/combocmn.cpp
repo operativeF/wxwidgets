@@ -778,7 +778,7 @@ public:
         : m_combo(combo)
     {
     }
-    ~wxComboPopupEvtHandler() override = default;
+    ~wxComboPopupEvtHandler() = default;
 
     void OnMouseEvent( wxMouseEvent& event );
 

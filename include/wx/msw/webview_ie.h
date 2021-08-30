@@ -60,7 +60,7 @@ public:
        Create(parent, id, url, pos, size, style, name);
    }
 
-    ~wxWebViewIE() override;
+    ~wxWebViewIE();
 
     [[maybe_unused]] bool Create(wxWindow* parent,
            wxWindowID id,

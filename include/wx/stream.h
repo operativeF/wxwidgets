@@ -94,7 +94,7 @@ class WXDLLIMPEXP_BASE wxInputStream : public wxStreamBase
 {
 public:
     wxInputStream() = default;
-    ~wxInputStream() override;
+    ~wxInputStream();
 
     wxInputStream(const wxInputStream&) = delete;
     wxInputStream& operator=(const wxInputStream&) = delete;
@@ -234,7 +234,7 @@ class WXDLLIMPEXP_BASE wxOutputStream : public wxStreamBase
 {
 public:
     wxOutputStream() = default;
-    ~wxOutputStream() override = default;
+    ~wxOutputStream() = default;
 
     wxOutputStream(const wxOutputStream&) = delete;
     wxOutputStream& operator=(const wxOutputStream&) = delete;
@@ -311,7 +311,7 @@ public:
     wxFilterInputStream() = default;
     wxFilterInputStream(wxInputStream& stream);
     wxFilterInputStream(wxInputStream *stream);
-    ~wxFilterInputStream() override;
+    ~wxFilterInputStream();
 
     wxFilterInputStream(const wxFilterInputStream&) = delete;
     wxFilterInputStream& operator=(const wxFilterInputStream&) = delete;
@@ -335,7 +335,7 @@ public:
     wxFilterOutputStream() = default;
     wxFilterOutputStream(wxOutputStream& stream);
     wxFilterOutputStream(wxOutputStream *stream);
-    ~wxFilterOutputStream() override;
+    ~wxFilterOutputStream();
 
     wxFilterOutputStream(const wxFilterOutputStream&) = delete;
     wxFilterOutputStream& operator=(const wxFilterOutputStream&) = delete;
@@ -385,7 +385,7 @@ protected:
 class WXDLLIMPEXP_BASE wxFilterClassFactory : public wxFilterClassFactoryBase
 {
 public:
-    ~wxFilterClassFactory() override = default;
+    ~wxFilterClassFactory() = default;
 
     virtual wxFilterInputStream  *NewStream(wxInputStream& stream)  const = 0;
     virtual wxFilterOutputStream *NewStream(wxOutputStream& stream) const = 0;
@@ -567,7 +567,7 @@ public:
     // and using the ctor above
     wxBufferedInputStream(wxInputStream& stream, size_t bufsize);
 
-    ~wxBufferedInputStream() override;
+    ~wxBufferedInputStream();
 
     wxBufferedInputStream(const wxBufferedInputStream&) = delete;
     wxBufferedInputStream& operator=(const wxBufferedInputStream&) = delete;
@@ -613,7 +613,7 @@ public:
     // and using the ctor above
     wxBufferedOutputStream(wxOutputStream& stream, size_t bufsize);
 
-    ~wxBufferedOutputStream() override;
+    ~wxBufferedOutputStream();
 
     wxBufferedOutputStream(const wxBufferedOutputStream&) = delete;
     wxBufferedOutputStream& operator=(const wxBufferedOutputStream&) = delete;

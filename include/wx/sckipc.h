@@ -62,7 +62,7 @@ public:
     {
     }
 
-    ~wxTCPConnection() override;
+    ~wxTCPConnection();
 
    wxTCPConnection(const wxTCPConnection&) = delete;
    wxTCPConnection& operator=(const wxTCPConnection&) = delete;
@@ -116,7 +116,7 @@ class WXDLLIMPEXP_NET wxTCPServer : public wxServerBase
 {
 public:
     wxTCPServer() = default;
-    ~wxTCPServer() override;
+    ~wxTCPServer();
 
    wxTCPServer(const wxTCPServer&) = delete;
    wxTCPServer& operator=(const wxTCPServer&) = delete;

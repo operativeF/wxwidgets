@@ -38,7 +38,7 @@ public:
               const wxSize& size = wxDefaultSize,
               long style = 0,
               const std::string& name = wxNotebookNameStr);
-  ~wxNotebook() override;
+  ~wxNotebook();
 
   wxNotebook(const wxNotebook&) = delete;
   wxNotebook& operator=(const wxNotebook&) = delete;

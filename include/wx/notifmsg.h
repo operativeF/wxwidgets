@@ -35,7 +35,7 @@ public:
         Create(title, message, parent, flags);
     }
 
-    ~wxNotificationMessageBase() override;
+    ~wxNotificationMessageBase();
 
     wxNotificationMessageBase(const wxNotificationMessageBase&) = delete;
     wxNotificationMessageBase& operator=(const wxNotificationMessageBase&) = delete;

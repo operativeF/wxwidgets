@@ -164,7 +164,7 @@ public:
     wxDisplayFactoryMSW();
 
     // Dtor destroys the hidden window we use for getting WM_SETTINGCHANGE.
-    ~wxDisplayFactoryMSW() override;
+    ~wxDisplayFactoryMSW();
 
     wxDisplayFactoryMSW(const wxDisplayFactoryMSW&) = delete;
 	wxDisplayFactoryMSW& operator=(const wxDisplayFactoryMSW&) = delete;

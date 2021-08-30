@@ -41,7 +41,7 @@ public:
                 long style = wxDEFAULT_FRAME_STYLE,
                 const std::string& name = wxFrameNameStr);
 
-    ~wxTopLevelWindowMSW() override;
+    ~wxTopLevelWindowMSW();
 
     wxTopLevelWindowMSW(const wxTopLevelWindowMSW&) = delete;
     wxTopLevelWindowMSW& operator=(const wxTopLevelWindowMSW&) = delete;

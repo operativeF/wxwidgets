@@ -26,7 +26,7 @@
 struct WXDLLIMPEXP_CORE wxIconRefData : public wxGDIImageRefData
 {
     wxIconRefData() = default;
-    ~wxIconRefData() override { Free(); }
+    ~wxIconRefData() { Free(); }
 
     void Free() override;
 };
@@ -52,7 +52,7 @@ public:
 
     explicit wxIcon(const wxIconLocation& loc);
 
-    ~wxIcon() override = default;
+    ~wxIcon() = default;
 
     virtual bool LoadFile(const std::string& name,
                           wxBitmapType type = wxICON_DEFAULT_TYPE,

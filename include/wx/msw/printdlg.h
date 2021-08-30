@@ -29,7 +29,7 @@ class WXDLLIMPEXP_CORE wxWindowsPrintNativeData: public wxPrintNativeDataBase
 {
 public:
     wxWindowsPrintNativeData() = default;
-    ~wxWindowsPrintNativeData() override;
+    ~wxWindowsPrintNativeData();
 
     bool TransferTo( wxPrintData &data ) override;
     bool TransferFrom( const wxPrintData &data ) override;
@@ -62,7 +62,7 @@ class WXDLLIMPEXP_CORE wxWindowsPrintDialog : public wxPrintDialogBase
 public:
     wxWindowsPrintDialog(wxWindow *parent, wxPrintDialogData* data = nullptr);
     wxWindowsPrintDialog(wxWindow *parent, wxPrintData* data);
-    ~wxWindowsPrintDialog() override;
+    ~wxWindowsPrintDialog();
 
     wxWindowsPrintDialog(const wxWindowsPrintDialog&) = delete;
     wxWindowsPrintDialog& operator=(const wxWindowsPrintDialog&) = delete;
@@ -101,7 +101,7 @@ class WXDLLIMPEXP_CORE wxWindowsPageSetupDialog: public wxPageSetupDialogBase
 public:
     wxWindowsPageSetupDialog() = default;
     wxWindowsPageSetupDialog(wxWindow *parent, wxPageSetupDialogData *data = nullptr);
-    ~wxWindowsPageSetupDialog() override;
+    ~wxWindowsPageSetupDialog();
 
 wxWindowsPageSetupDialog(const wxWindowsPageSetupDialog&) = delete;
    wxWindowsPageSetupDialog& operator=(const wxWindowsPageSetupDialog&) = delete;

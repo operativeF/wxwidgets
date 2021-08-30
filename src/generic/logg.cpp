@@ -87,7 +87,7 @@ public:
                 const std::vector<long>& timess,
                 const wxString& caption,
                 long style);
-    ~wxLogDialog() override;
+    ~wxLogDialog();
 
     wxLogDialog(const wxLogDialog&) = delete;
 	wxLogDialog& operator=(const wxLogDialog&) = delete;
@@ -428,7 +428,7 @@ class wxLogFrame : public wxFrame
 {
 public:
     wxLogFrame(wxWindow *pParent, wxLogWindow *log, const wxString& szTitle);
-    ~wxLogFrame() override;
+    ~wxLogFrame();
 
     wxLogFrame(const wxLogFrame&) = delete;
 	wxLogFrame& operator=(const wxLogFrame&) = delete;

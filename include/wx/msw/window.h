@@ -46,7 +46,7 @@ public:
         Create(parent, id, pos, size, style, name);
     }
 
-    ~wxWindowMSW() override;
+    ~wxWindowMSW();
 
     wxWindowMSW(const wxWindowMSW&) = delete;
 	wxWindowMSW& operator=(const wxWindowMSW&) = delete;

@@ -277,7 +277,7 @@ public:
 protected:
     // Dtor is protected because the objects of this class must not be deleted,
     // DecRef() must be used instead.
-    ~wxDataViewModel() override;
+    ~wxDataViewModel();
 
     // Helper function used by the default Compare() implementation to compare
     // values of types it is not aware about. Can be overridden in the derived
@@ -493,7 +493,7 @@ public:
         Init(renderer, model_column);
     }
 
-    ~wxDataViewColumnBase() override;
+    ~wxDataViewColumnBase();
 
     // setters:
     virtual void SetOwner( wxDataViewCtrl *owner )
@@ -544,7 +544,7 @@ class WXDLLIMPEXP_CORE wxDataViewCtrlBase: public wxSystemThemedControl<wxContro
 {
 public:
     wxDataViewCtrlBase() = default;
-    ~wxDataViewCtrlBase() override;
+    ~wxDataViewCtrlBase();
 
     wxDataViewCtrlBase(const wxDataViewCtrlBase&) = delete;
     wxDataViewCtrlBase& operator=(const wxDataViewCtrlBase&) = delete;
@@ -1039,7 +1039,7 @@ class WXDLLIMPEXP_CORE wxDataViewListStore: public wxDataViewIndexListModel
 {
 public:
     wxDataViewListStore() = default;
-    ~wxDataViewListStore() override;
+    ~wxDataViewListStore();
 
     void PrependColumn( const std::string &varianttype );
     void InsertColumn( unsigned int pos, const std::string &varianttype );
@@ -1088,7 +1088,7 @@ public:
 
 	wxDataViewListCtrl& operator=(const wxDataViewListCtrl&) = delete;
 
-    ~wxDataViewListCtrl() override = default;
+    ~wxDataViewListCtrl() = default;
 
     [[maybe_unused]] bool Create( wxWindow *parent, wxWindowID id,
            const wxPoint& pos = wxDefaultPosition,
@@ -1233,7 +1233,7 @@ public:
     wxDataViewTreeStoreContainerNode( wxDataViewTreeStoreNode *parent,
         const std::string &text, const wxIcon &icon = wxNullIcon, const wxIcon &expanded = wxNullIcon,
         wxClientData *data = nullptr );
-    ~wxDataViewTreeStoreContainerNode() override;
+    ~wxDataViewTreeStoreContainerNode();
 
     const wxDataViewTreeStoreNodes &GetChildren() const
         { return m_children; }
@@ -1269,7 +1269,7 @@ class WXDLLIMPEXP_CORE wxDataViewTreeStore: public wxDataViewModel
 {
 public:
     wxDataViewTreeStore();
-    ~wxDataViewTreeStore() override;
+    ~wxDataViewTreeStore();
 
     wxDataViewItem AppendItem( const wxDataViewItem& parent,
         const std::string &text, const wxIcon &icon = wxNullIcon, wxClientData *data = nullptr );

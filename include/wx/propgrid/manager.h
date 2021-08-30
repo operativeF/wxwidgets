@@ -179,7 +179,7 @@ public:
                            const wxString& name = wxASCII_STR(wxPropertyGridManagerNameStr) );
 
     // Destructor.
-    ~wxPropertyGridManager() override;
+    ~wxPropertyGridManager();
 
     // Creates new property page. Note that the first page is not created
     // automatically.

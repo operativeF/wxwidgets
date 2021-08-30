@@ -353,7 +353,7 @@ class wxPGDatePickerCtrlEditor : public wxPGEditor
 {
     wxDECLARE_DYNAMIC_CLASS(wxPGDatePickerCtrlEditor);
 public:
-    ~wxPGDatePickerCtrlEditor() override;
+    ~wxPGDatePickerCtrlEditor();
 
     wxString GetName() const override;
     wxPGWindowList CreateControls(wxPropertyGrid* propgrid,

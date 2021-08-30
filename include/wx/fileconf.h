@@ -139,7 +139,7 @@ public:
 #endif // wxUSE_STREAMS
 
     // dtor will save unsaved data
-  ~wxFileConfig() override;
+  ~wxFileConfig();
 
   wxFileConfig(const wxFileConfig&) = delete;
   wxFileConfig& operator=(const wxFileConfig&) = delete;

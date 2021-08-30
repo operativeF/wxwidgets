@@ -22,7 +22,7 @@ public:
 
     wxCustomBackgroundWindow() = default;
 
-    ~wxCustomBackgroundWindow() override { delete m_backgroundBrush; }
+    ~wxCustomBackgroundWindow() { delete m_backgroundBrush; }
 
     wxCustomBackgroundWindow(const wxCustomBackgroundWindow<W>&)  = delete;
 	wxCustomBackgroundWindow& operator=(const wxCustomBackgroundWindow<W>&) = delete;

@@ -25,7 +25,7 @@ public:
     // ctor associates the stream with the given string which makes a copy of
     // it
     wxStringInputStream(const wxString& s);
-
+    ~wxStringInputStream() = default;
     wxStringInputStream(const wxStringInputStream&) = delete;
     wxStringInputStream& operator=(const wxStringInputStream&) = delete;
     wxStringInputStream(wxStringInputStream&&) = default;

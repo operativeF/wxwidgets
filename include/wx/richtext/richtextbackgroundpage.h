@@ -60,7 +60,7 @@ public:
     bool Create( wxWindow* parent, wxWindowID id = SYMBOL_WXRICHTEXTBACKGROUNDPAGE_IDNAME, const wxPoint& pos = SYMBOL_WXRICHTEXTBACKGROUNDPAGE_POSITION, const wxSize& size = SYMBOL_WXRICHTEXTBACKGROUNDPAGE_SIZE, long style = SYMBOL_WXRICHTEXTBACKGROUNDPAGE_STYLE );
 
     /// Destructor
-    ~wxRichTextBackgroundPage() override;
+    ~wxRichTextBackgroundPage();
 
     /// Initialises member variables
     void Init();

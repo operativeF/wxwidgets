@@ -133,7 +133,7 @@ public:
                   const wxSize& size = wxDefaultSize,
                   long style = wxRIBBON_BAR_DEFAULT_STYLE);
 
-    ~wxRibbonBar() override;
+    ~wxRibbonBar();
 
     bool Create(wxWindow* parent,
                 wxWindowID id = wxID_ANY,

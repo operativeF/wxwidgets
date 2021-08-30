@@ -74,7 +74,7 @@ public:
 
     // init and dtor
     wxVListBoxComboPopup()  = default;
-    ~wxVListBoxComboPopup() override;
+    ~wxVListBoxComboPopup();
 
     [[maybe_unused]] bool Create(wxWindow* parent) override;
     void SetFocus() override;
@@ -299,7 +299,7 @@ public:
                 const wxValidator& validator = wxDefaultValidator,
                 const std::string& name = wxComboCtrlNameStr);
 
-    ~wxOwnerDrawnComboBox() override;
+    ~wxOwnerDrawnComboBox();
 
     // Prevent app from using wxComboPopup
     void SetPopupControl(wxVListBoxComboPopup* popup)

@@ -65,7 +65,7 @@ public:
                 long style = 0,
                 const std::string& name = wxVListBoxNameStr);
 
-    ~wxVListBox() override;
+    ~wxVListBox();
 
     // get the number of items in the control
     size_t GetItemCount() const { return GetRowCount(); }

@@ -35,7 +35,7 @@ public:
         InitFromStream(stream, wxInvalidOffset);
     }
 
-    ~wxMemoryInputStream() override;
+    ~wxMemoryInputStream();
 
     wxMemoryInputStream& operator=(const wxMemoryInputStream&) = delete;
 
@@ -69,7 +69,7 @@ class WXDLLIMPEXP_BASE wxMemoryOutputStream : public wxOutputStream
 public:
     // if data is !NULL it must be allocated with malloc()
     wxMemoryOutputStream(void *data = nullptr, size_t length = 0);
-    ~wxMemoryOutputStream() override;
+    ~wxMemoryOutputStream();
 
     wxMemoryOutputStream(const wxMemoryOutputStream&) = delete;
     wxMemoryOutputStream& operator=(const wxMemoryOutputStream&) = delete;

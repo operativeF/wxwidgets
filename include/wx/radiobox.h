@@ -38,7 +38,7 @@ inline constexpr char wxRadioBoxNameStr[] = "radioBox";
 class WXDLLIMPEXP_CORE wxRadioBoxBase : public wxItemContainerImmutable
 {
 public:
-    ~wxRadioBoxBase() override;
+    ~wxRadioBoxBase();
 
     // change/query the individual radio button state
     virtual bool Enable(unsigned int n, bool enable = true) = 0;

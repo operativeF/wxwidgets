@@ -106,7 +106,7 @@ public:
 #ifdef __WXMSW__
     // Prevent the native window, not owned by us, from being destroyed by the
     // base class dtor, unless Disown() had been called.
-    ~wxNativeWindow() override;
+    ~wxNativeWindow();
 #endif // __WXMSW__
 
 private:
@@ -157,7 +157,7 @@ public:
 
     // unlike for the normal windows, dtor will not destroy the native window
     // as it normally doesn't belong to us
-    ~wxNativeContainerWindow() override;
+    ~wxNativeContainerWindow();
 
    wxNativeContainerWindow(const wxNativeContainerWindow&) = delete;
    wxNativeContainerWindow& operator=(const wxNativeContainerWindow&) = delete;

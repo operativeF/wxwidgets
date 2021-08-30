@@ -39,7 +39,7 @@ public:
     wxMouseEventsManager(wxWindow *win) { Create(win); }
     [[maybe_unused]] bool Create(wxWindow *win);
 
-    ~wxMouseEventsManager() override;
+    ~wxMouseEventsManager();
 
     wxMouseEventsManager(const wxMouseEventsManager&) = delete;
     wxMouseEventsManager& operator=(const wxMouseEventsManager&) = delete;

@@ -153,7 +153,7 @@ public:
     wxZipEntry(const wxString& name = wxEmptyString,
                const wxDateTime& dt = wxDateTime::Now(),
                wxFileOffset size = wxInvalidOffset);
-    ~wxZipEntry() override;
+    ~wxZipEntry();
 
     wxZipEntry(const wxZipEntry& entry);
     wxZipEntry& operator=(const wxZipEntry& entry);
@@ -304,7 +304,7 @@ public:
     wxZipOutputStream(wxOutputStream *stream,
                       int level = -1,
                       wxMBConv& conv = wxConvUTF8);
-    WXZIPFIX ~wxZipOutputStream() override;
+    WXZIPFIX ~wxZipOutputStream();
 
    wxZipOutputStream(const wxZipOutputStream&) = delete;
    wxZipOutputStream& operator=(const wxZipOutputStream&) = delete;
@@ -392,7 +392,7 @@ public:
     wxZipInputStream(wxInputStream& stream, wxMBConv& conv = wxConvLocal);
     wxZipInputStream(wxInputStream *stream, wxMBConv& conv = wxConvLocal);
 
-    WXZIPFIX ~wxZipInputStream() override;
+    WXZIPFIX ~wxZipInputStream();
 
    wxZipInputStream(const wxZipInputStream&) = delete;
    wxZipInputStream& operator=(const wxZipInputStream&) = delete;

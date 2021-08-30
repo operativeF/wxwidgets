@@ -50,7 +50,7 @@ public:
                   const wxSize& size = wxDefaultSize,
                   long style = 0);
 
-    ~wxRibbonToolBar() override;
+    ~wxRibbonToolBar();
 
     bool Create(wxWindow* parent,
                 wxWindowID id = wxID_ANY,

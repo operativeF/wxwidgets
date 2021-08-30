@@ -65,7 +65,7 @@ public:
         free(pPal);
     }
 
-    ~wxPaletteRefData() override
+    ~wxPaletteRefData()
     {
         if ( m_hPalette )
             ::DeleteObject(m_hPalette);

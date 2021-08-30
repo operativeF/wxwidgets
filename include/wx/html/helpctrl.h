@@ -47,7 +47,7 @@ public:
     wxHtmlHelpController(int style = wxHF_DEFAULT_STYLE, wxWindow* parentWindow = nullptr);
     wxHtmlHelpController(wxWindow* parentWindow, int style = wxHF_DEFAULT_STYLE);
 
-    ~wxHtmlHelpController() override;
+    ~wxHtmlHelpController();
 
     wxHtmlHelpController(const wxHtmlHelpController&) = delete;
 	wxHtmlHelpController& operator=(const wxHtmlHelpController&) = delete;

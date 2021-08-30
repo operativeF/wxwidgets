@@ -62,7 +62,7 @@ public:
     wxDataViewTextRenderer( const std::string& varianttype = DefaultType,
                             wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT,
                             int align = wxDVR_DEFAULT_ALIGNMENT );
-    ~wxDataViewTextRenderer() override;
+    ~wxDataViewTextRenderer();
 
 	wxDataViewTextRenderer(const wxDataViewTextRenderer&) = delete;
 	wxDataViewTextRenderer& operator=(const wxDataViewTextRenderer&) = delete;

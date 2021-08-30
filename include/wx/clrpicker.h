@@ -103,7 +103,7 @@ class WXDLLIMPEXP_CORE wxColourPickerCtrl : public wxPickerBase
 {
 public:
     wxColourPickerCtrl() = default;
-    ~wxColourPickerCtrl() override = default;
+    ~wxColourPickerCtrl() = default;
 
 
     wxColourPickerCtrl(wxWindow *parent, wxWindowID id,

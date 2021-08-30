@@ -660,7 +660,7 @@ public:
         // socket timeout automatically set in GetPort function
     }
 
-    ~wxInputFTPStream() override
+    ~wxInputFTPStream()
     {
         delete m_i_socket;   // keep at top
 
@@ -707,7 +707,7 @@ public:
     {
     }
 
-    ~wxOutputFTPStream() override
+    ~wxOutputFTPStream()
     {
         if ( IsOk() )
         {

@@ -42,7 +42,7 @@ public:
                 const wxSize& size = wxDefaultSize,
                 long style = wxDEFAULT_FRAME_STYLE,
                 const std::string& name = wxFrameNameStr);
-    ~wxFrame() override;
+    ~wxFrame();
 
     
     bool ShowFullScreen(bool show, long style = wxFULLSCREEN_ALL) override;

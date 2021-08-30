@@ -172,7 +172,7 @@ public:
         m_toBeDeleted  = false;
     }
 
-    ~wxToolBarTool() override
+    ~wxToolBarTool()
     {
         delete m_staticText;
     }

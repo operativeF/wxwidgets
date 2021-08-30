@@ -34,7 +34,7 @@ public:
     wxGCDC(wxGraphicsContext* context);
 
     wxGCDC();
-    ~wxGCDC() override = default;
+    ~wxGCDC() = default;
 
     wxGCDC(const wxGCDC&) = delete;
     wxGCDC& operator=(const wxGCDC&) = delete;
@@ -70,7 +70,7 @@ public:
 
     wxGCDCImpl( wxDC *owner );
 
-    ~wxGCDCImpl() override;
+    ~wxGCDCImpl();
 
     wxGCDCImpl(const wxGCDCImpl&) = delete;
     wxGCDCImpl& operator=(const wxGCDCImpl&) = delete;

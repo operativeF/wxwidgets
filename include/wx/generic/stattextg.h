@@ -55,7 +55,7 @@ public:
                 long style = 0,
                 const std::string& name = wxStaticTextNameStr);
 
-    ~wxGenericStaticText() override;
+    ~wxGenericStaticText();
 
 
     // overridden base class virtual methods

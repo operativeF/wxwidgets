@@ -63,7 +63,7 @@ public:
         m_encDefault = other.m_encDefault;
     }
 
-    ~wxConvAuto() override
+    ~wxConvAuto()
     {
         if ( m_ownsConv )
             delete m_conv;

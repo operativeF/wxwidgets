@@ -350,7 +350,7 @@ class WXDLLIMPEXP_AUI wxAuiGenericToolBarArt : public wxAuiToolBarArt
 public:
 
     wxAuiGenericToolBarArt();
-    ~wxAuiGenericToolBarArt() override;
+    ~wxAuiGenericToolBarArt();
 
     wxAuiToolBarArt* Clone() override;
     void SetFlags(unsigned int flags) override;
@@ -489,7 +489,7 @@ public:
         Create(parent, id, pos, size, style);
     }
 
-    ~wxAuiToolBar() override;
+    ~wxAuiToolBar();
 
     [[maybe_unused]] bool Create(wxWindow* parent,
                 wxWindowID id = wxID_ANY,

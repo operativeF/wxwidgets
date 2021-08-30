@@ -260,7 +260,7 @@ public:
         Create(parent, id, pos, size, style);
     }
 
-    ~wxAuiNotebook() override;
+    ~wxAuiNotebook();
 
     [[maybe_unused]] bool Create(wxWindow* parent,
                 wxWindowID id = wxID_ANY,

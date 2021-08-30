@@ -250,7 +250,7 @@ public:
         Init();
         Create(parent, id, pos, size, style, name);
     }
-    ~wxHtmlWindow() override;
+    ~wxHtmlWindow();
 
     wxHtmlWindow(const wxHtmlWindow&) = delete;
 	wxHtmlWindow& operator=(const wxHtmlWindow&) = delete;

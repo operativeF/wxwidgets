@@ -111,9 +111,7 @@ class WXDLLIMPEXP_CORE wxStatusBarBase : public wxControl
 {
 public:
     wxStatusBarBase() = default;
-
-    ~wxStatusBarBase() override;
-
+    ~wxStatusBarBase();
     wxStatusBarBase(const wxStatusBarBase&) = delete;
     wxStatusBarBase& operator=(const wxStatusBarBase&) = delete;
     wxStatusBarBase(wxStatusBarBase&&) = default;

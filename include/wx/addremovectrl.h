@@ -82,7 +82,7 @@ public:
                 long style = 0,
                 const std::string& name = wxAddRemoveCtrlNameStr);
 
-    ~wxAddRemoveCtrl() override;
+    ~wxAddRemoveCtrl();
 
     // Must be called for the control to be usable, takes ownership of the
     // pointer.

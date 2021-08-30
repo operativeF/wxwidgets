@@ -58,7 +58,7 @@ class WXDLLIMPEXP_CORE wxDirItemData : public wxTreeItemData
 {
 public:
     wxDirItemData(const std::string& path, const std::string& name, bool isDir);
-    ~wxDirItemData() override = default;
+    ~wxDirItemData() = default;
     void SetNewDirName(const wxString& path);
 
     bool HasSubDirs() const;
@@ -104,7 +104,7 @@ public:
               int defaultFilter = 0,
               const std::string& name = wxTreeCtrlNameStr);
 
-    ~wxGenericDirCtrl() override = default;
+    ~wxGenericDirCtrl() = default;
 
     void OnExpandItem(wxTreeEvent &event );
     void OnCollapseItem(wxTreeEvent &event );
@@ -242,7 +242,7 @@ public:
               const wxSize& size = wxDefaultSize,
               long style = 0);
 
-    ~wxDirFilterListCtrl() override = default;
+    ~wxDirFilterListCtrl() = default;
 
     //// Operations
     void FillFilterList(const wxString& filter, int defaultFilter);

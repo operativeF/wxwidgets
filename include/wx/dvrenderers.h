@@ -134,7 +134,7 @@ public:
     wxDataViewRendererBase( const std::string &varianttype,
                             wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT,
                             int alignment = wxDVR_DEFAULT_ALIGNMENT );
-    ~wxDataViewRendererBase() override;
+    ~wxDataViewRendererBase();
 
     wxDataViewRendererBase(const wxDataViewRendererBase&) = delete;
     wxDataViewRendererBase& operator=(const wxDataViewRendererBase&) = delete;

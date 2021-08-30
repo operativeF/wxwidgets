@@ -437,7 +437,7 @@ public:
 	wxHTTPStream& operator=(const wxHTTPStream&) = delete;
 
     size_t GetSize() const override { return m_httpsize; }
-    ~wxHTTPStream() override { m_http->Abort(); }
+    ~wxHTTPStream() { m_http->Abort(); }
 
 protected:
     size_t OnSysRead(void *buffer, size_t bufsize) override;

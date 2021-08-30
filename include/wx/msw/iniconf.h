@@ -51,7 +51,7 @@ public:
               const std::string& localFilename = {},
               const std::string& globalFilename = {},
               long style = wxCONFIG_USE_LOCAL_FILE);
-  ~wxIniConfig() override = default;
+  ~wxIniConfig() = default;
 
   wxIniConfig(const wxIniConfig&) = delete;
   wxIniConfig& operator=(const wxIniConfig&) = delete;

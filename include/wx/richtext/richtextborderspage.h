@@ -61,7 +61,7 @@ public:
     bool Create( wxWindow* parent, wxWindowID id = SYMBOL_WXRICHTEXTBORDERSPAGE_IDNAME, const wxPoint& pos = SYMBOL_WXRICHTEXTBORDERSPAGE_POSITION, const wxSize& size = SYMBOL_WXRICHTEXTBORDERSPAGE_SIZE, long style = SYMBOL_WXRICHTEXTBORDERSPAGE_STYLE );
 
     /// Destructor
-    ~wxRichTextBordersPage() override;
+    ~wxRichTextBordersPage();
 
     /// Initialises member variables
     void Init();

@@ -86,7 +86,7 @@ class WXDLLIMPEXP_RICHTEXT wxRichTextFormattingDialogFactory: public wxObject
 {
 public:
     wxRichTextFormattingDialogFactory() = default;
-    ~wxRichTextFormattingDialogFactory() override = default;
+    ~wxRichTextFormattingDialogFactory() = default;
 
 // Overridables
 
@@ -137,7 +137,7 @@ public:
         Create(flags, parent, title, id, pos, sz, style);
     }
 
-    ~wxRichTextFormattingDialog() override;
+    ~wxRichTextFormattingDialog();
 
     bool Create(long flags, wxWindow* parent, const std::string& title = wxGetTranslation(wxT("Formatting")), wxWindowID id = wxID_ANY,
         const wxPoint& pos = wxDefaultPosition, const wxSize& sz = wxDefaultSize,

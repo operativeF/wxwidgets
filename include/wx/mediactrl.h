@@ -96,7 +96,7 @@ public:
     {   Create(parent, winid, location, pos, size, style,
                szBackend, validator, name);                             }
 
-    ~wxMediaCtrl() override;
+    ~wxMediaCtrl();
 
     [[maybe_unused]] bool Create(wxWindow* parent, wxWindowID winid,
                 const wxString& fileName = wxEmptyString,

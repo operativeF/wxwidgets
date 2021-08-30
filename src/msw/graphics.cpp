@@ -139,7 +139,7 @@ class wxGDIPlusPathData : public wxGraphicsPathData
 {
 public :
     explicit wxGDIPlusPathData(wxGraphicsRenderer* renderer, GraphicsPath* path = nullptr);
-    ~wxGDIPlusPathData() override;
+    ~wxGDIPlusPathData();
 
     wxGraphicsObjectRefData *Clone() const override;
 
@@ -214,7 +214,7 @@ class wxGDIPlusMatrixData : public wxGraphicsMatrixData
 {
 public :
     explicit wxGDIPlusMatrixData(wxGraphicsRenderer* renderer, Matrix* matrix = nullptr) ;
-    ~wxGDIPlusMatrixData() override ;
+    ~wxGDIPlusMatrixData() ;
 
     wxGraphicsObjectRefData* Clone() const override;
 
@@ -286,7 +286,7 @@ public:
                                    const wxGraphicsGradientStops& stops,
                                    const wxGraphicsMatrix& matrix = wxNullGraphicsMatrix);
 protected:
-    ~wxGDIPlusPenBrushBaseData() override;
+    ~wxGDIPlusPenBrushBaseData();
 
     Brush* m_brush;
     GraphicsPath* m_brushPath;
@@ -306,7 +306,7 @@ class wxGDIPlusPenData : public wxGDIPlusPenBrushBaseData
 {
 public:
     wxGDIPlusPenData( wxGraphicsRenderer* renderer, const wxGraphicsPenInfo &info );
-    ~wxGDIPlusPenData() override;
+    ~wxGDIPlusPenData();
 
     void Init() override;
 
@@ -369,7 +369,7 @@ public:
                       int style,
                       Brush* textBrush);
 
-    ~wxGDIPlusFontData() override;
+    ~wxGDIPlusFontData();
 
     virtual Brush* GetGDIPlusBrush() { return m_textBrush; }
     virtual Font* GetGDIPlusFont() { return m_font; }
@@ -415,7 +415,7 @@ public:
     wxGDIPlusContext( wxGraphicsRenderer* renderer, Graphics* gr);
     explicit wxGDIPlusContext(wxGraphicsRenderer* renderer);
 
-    ~wxGDIPlusContext() override;
+    ~wxGDIPlusContext();
 
     wxGDIPlusContext(const wxGDIPlusContext&) = delete;
 	wxGDIPlusContext& operator=(const wxGDIPlusContext&) = delete;
@@ -520,7 +520,7 @@ public:
         );
     }
 
-    ~wxGDIPlusImageContext() override
+    ~wxGDIPlusImageContext()
     {
         Flush();
     }
@@ -547,7 +547,7 @@ public:
     {
     }
 
-    ~wxGDIPlusMeasuringContext() override
+    ~wxGDIPlusMeasuringContext()
     {
         ReleaseDC( nullptr, m_hdc );
     }
@@ -572,7 +572,7 @@ class wxGDIPlusRenderer : public wxGraphicsRenderer
 {
 public :
     wxGDIPlusRenderer() = default;
-    ~wxGDIPlusRenderer() override
+    ~wxGDIPlusRenderer()
     {
         if ( m_loaded == 1 )
         {

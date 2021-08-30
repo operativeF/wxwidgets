@@ -22,7 +22,7 @@ public:
                      wxWindow *parent = nullptr,
                      int style = wxPD_APP_MODAL | wxPD_AUTO_HIDE);
 
-    ~wxProgressDialog() override;
+    ~wxProgressDialog();
 
     wxProgressDialog(const wxProgressDialog&) = delete;
     wxProgressDialog& operator=(const wxProgressDialog&) = delete;

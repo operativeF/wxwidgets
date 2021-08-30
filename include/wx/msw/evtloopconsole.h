@@ -15,7 +15,7 @@ class WXDLLIMPEXP_BASE wxMSWEventLoopBase : public wxEventLoopManual
 {
 public:
     wxMSWEventLoopBase();
-    ~wxMSWEventLoopBase() override;
+    ~wxMSWEventLoopBase();
 
     bool Pending() const override;
     void WakeUp() override;

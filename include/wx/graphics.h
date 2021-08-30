@@ -143,7 +143,7 @@ class WXDLLIMPEXP_CORE wxGraphicsPen : public wxGraphicsObject
 {
 public:
     wxGraphicsPen() = default;
-    ~wxGraphicsPen() override = default;
+    ~wxGraphicsPen() = default;
 private:
     wxDECLARE_DYNAMIC_CLASS(wxGraphicsPen);
 };
@@ -154,7 +154,7 @@ class WXDLLIMPEXP_CORE wxGraphicsBrush : public wxGraphicsObject
 {
 public:
     wxGraphicsBrush() = default;
-    ~wxGraphicsBrush() override = default;
+    ~wxGraphicsBrush() = default;
 private:
     wxDECLARE_DYNAMIC_CLASS(wxGraphicsBrush);
 };
@@ -165,7 +165,7 @@ class WXDLLIMPEXP_CORE wxGraphicsFont : public wxGraphicsObject
 {
 public:
     wxGraphicsFont() = default;
-    ~wxGraphicsFont() override = default;
+    ~wxGraphicsFont() = default;
 private:
     wxDECLARE_DYNAMIC_CLASS(wxGraphicsFont);
 };
@@ -176,7 +176,7 @@ class WXDLLIMPEXP_CORE wxGraphicsBitmap : public wxGraphicsObject
 {
 public:
     wxGraphicsBitmap() = default;
-    ~wxGraphicsBitmap() override = default;
+    ~wxGraphicsBitmap() = default;
 
     // Convert bitmap to wxImage: this is more efficient than converting to
     // wxBitmap first and then to wxImage and also works without X server
@@ -203,7 +203,7 @@ class WXDLLIMPEXP_CORE wxGraphicsMatrix : public wxGraphicsObject
 public:
     wxGraphicsMatrix() = default;
 
-    ~wxGraphicsMatrix() override = default;
+    ~wxGraphicsMatrix() = default;
 
     // concatenates the matrix
     virtual void Concat( const wxGraphicsMatrix *t );
@@ -476,7 +476,7 @@ class WXDLLIMPEXP_CORE wxGraphicsPath : public wxGraphicsObject
 {
 public:
     wxGraphicsPath()  = default;
-    ~wxGraphicsPath() override = default;
+    ~wxGraphicsPath() = default;
 
     //
     // These are the path primitives from which everything else can be constructed
@@ -564,7 +564,7 @@ class WXDLLIMPEXP_CORE wxGraphicsContext : public wxGraphicsObject
 public:
     wxGraphicsContext(wxGraphicsRenderer* renderer, wxWindow* window = nullptr);
 
-    ~wxGraphicsContext() override = default;
+    ~wxGraphicsContext() = default;
 
     wxGraphicsContext(const wxGraphicsContext&) = delete;
     wxGraphicsContext& operator=(const wxGraphicsContext&) = delete;
@@ -964,7 +964,7 @@ class WXDLLIMPEXP_CORE wxGraphicsRenderer : public wxObject
 {
 public:
     wxGraphicsRenderer() = default;
-    ~wxGraphicsRenderer() override = default;
+    ~wxGraphicsRenderer() = default;
 
     wxGraphicsRenderer(const wxGraphicsRenderer&) = delete;
     wxGraphicsRenderer& operator=(const wxGraphicsRenderer&) = delete;

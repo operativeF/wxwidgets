@@ -493,7 +493,7 @@ public:
     wxCSConv(wxFontEncoding encoding);
 
     wxCSConv(const wxCSConv& conv);
-    ~wxCSConv() override;
+    ~wxCSConv();
 
     wxCSConv& operator=(const wxCSConv& conv);
 

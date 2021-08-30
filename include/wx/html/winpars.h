@@ -40,7 +40,7 @@ class WXDLLIMPEXP_HTML wxHtmlWinParser : public wxHtmlParser
 public:
     wxHtmlWinParser(wxHtmlWindowInterface *wndIface = nullptr);
 
-    ~wxHtmlWinParser() override;
+    ~wxHtmlWinParser();
 
     wxHtmlWinParser(const wxHtmlWinParser&) = delete;
 	wxHtmlWinParser& operator=(const wxHtmlWinParser&) = delete;
