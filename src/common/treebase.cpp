@@ -134,7 +134,7 @@ wxTreeEvent::wxTreeEvent(wxEventType commandType,
         SetClientObject(tree->GetItemData(item));
 }
 
-wxTreeEvent::wxTreeEvent(wxEventType commandType, int id) noexcept
+wxTreeEvent::wxTreeEvent(wxEventType commandType, int id)
            : wxNotifyEvent(commandType, id)
 {
     m_itemOld = nullptr;

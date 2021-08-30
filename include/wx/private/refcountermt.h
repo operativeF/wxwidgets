@@ -19,7 +19,7 @@
 class wxRefCounterMT
 {
 public:
-    wxRefCounterMT() noexcept { m_count = 1; }
+    wxRefCounterMT() { m_count = 1; }
 
     void IncRef() { wxAtomicInc(m_count); }
     void DecRef()

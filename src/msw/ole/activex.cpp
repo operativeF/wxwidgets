@@ -194,7 +194,7 @@ private:
     DECLARE_OLE_UNKNOWN(FrameSite);
 
 public:
-    FrameSite(wxWindow * win, wxActiveXContainer * win2) noexcept
+    FrameSite(wxWindow * win, wxActiveXContainer * win2)
     {
         m_window = win2;
         m_bSupportsWindowlessActivation = true;

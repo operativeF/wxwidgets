@@ -473,7 +473,7 @@ class WXDLLIMPEXP_CORE wxBitmapDataObjectBase : public wxDataObjectSimple
 public:
     // ctor: you can specify the bitmap here or in SetBitmap(), or override
     // GetBitmap()
-    wxBitmapDataObjectBase(const wxBitmap& bitmap = wxNullBitmap) noexcept
+    wxBitmapDataObjectBase(const wxBitmap& bitmap = wxNullBitmap)
         : wxDataObjectSimple(wxDF_BITMAP), m_bitmap(bitmap)
         {
         }
@@ -528,7 +528,7 @@ class WXDLLIMPEXP_CORE wxCustomDataObject : public wxDataObjectSimple
 public:
     // if you don't specify the format in the ctor, you can still use
     // SetFormat() later
-    wxCustomDataObject(const wxDataFormat& format = wxFormatInvalid) noexcept;
+    wxCustomDataObject(const wxDataFormat& format = wxFormatInvalid);
 
     // the dtor calls Free()
     ~wxCustomDataObject() override;

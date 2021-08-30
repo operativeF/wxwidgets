@@ -18,7 +18,7 @@ public:
     // number of custom colours we store
     static constexpr int NUM_CUSTOM = 16;
 
-    wxColourData() noexcept;
+    wxColourData();
 
     void SetChooseFull(bool flag) { m_chooseFull = flag; }
     bool GetChooseFull() const { return m_chooseFull; }

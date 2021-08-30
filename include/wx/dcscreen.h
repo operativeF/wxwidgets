@@ -17,7 +17,7 @@
 class WXDLLIMPEXP_CORE wxScreenDC : public wxDC
 {
 public:
-    wxScreenDC() noexcept;
+    wxScreenDC();
 
     static bool StartDrawingOnTop(wxWindow * WXUNUSED(window))
         { return true; }

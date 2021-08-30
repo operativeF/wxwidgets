@@ -42,7 +42,7 @@ wxCommand::wxCommand(bool canUndoIt, const wxString& name)
 // Command processor
 // ----------------------------------------------------------------------------
 
-wxCommandProcessor::wxCommandProcessor(int maxCommands) noexcept
+wxCommandProcessor::wxCommandProcessor(int maxCommands)
     : m_maxNoCommands(maxCommands)
     #if wxUSE_ACCEL
     , m_undoAccelerator('\t' + wxAcceleratorEntry(wxACCEL_CTRL, 'Z', 0, nullptr).ToString())

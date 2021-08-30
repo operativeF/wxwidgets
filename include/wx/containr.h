@@ -149,7 +149,7 @@ class WXDLLIMPEXP_CORE wxControlContainer : public wxControlContainerBase
 {
 public:
     // default ctor, SetContainerWindow() must be called later
-    wxControlContainer() noexcept;
+    wxControlContainer();
 
     wxControlContainer(const wxControlContainer&) = delete;
     wxControlContainer& operator=(const wxControlContainer&) = delete;

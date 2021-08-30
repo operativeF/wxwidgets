@@ -113,7 +113,7 @@ class WXDLLIMPEXP_FWD_BASE wxVariant;
 class WXDLLIMPEXP_CORE wxVariantDataCurrency : public wxVariantData
 {
 public:
-    wxVariantDataCurrency() noexcept { VarCyFromR8(0.0, &m_value); }
+    wxVariantDataCurrency() { VarCyFromR8(0.0, &m_value); }
     wxVariantDataCurrency(CURRENCY value) { m_value = value; }
 
     CURRENCY GetValue() const { return m_value; }
@@ -138,7 +138,7 @@ private:
 class WXDLLIMPEXP_CORE wxVariantDataErrorCode : public wxVariantData
 {
 public:
-    wxVariantDataErrorCode(SCODE value = S_OK) noexcept { m_value = value; }
+    wxVariantDataErrorCode(SCODE value = S_OK) { m_value = value; }
 
     SCODE GetValue() const { return m_value; }
     void SetValue(SCODE value) { m_value = value; }

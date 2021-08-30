@@ -94,7 +94,7 @@ public:
     // Ctors & dtor
     ////////////////////////////////////////////////////////////////////////////
 
-    wxGenericDragImage(const wxCursor& cursor = wxNullCursor) noexcept
+    wxGenericDragImage(const wxCursor& cursor = wxNullCursor)
     {
         Init();
         Create(cursor);

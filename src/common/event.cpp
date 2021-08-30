@@ -430,7 +430,7 @@ std::string wxCommandEvent::GetString() const
 // wxPaintEvent and wxNcPaintEvent
 // ----------------------------------------------------------------------------
 
-wxPaintEvent::wxPaintEvent(wxWindowBase* window) noexcept
+wxPaintEvent::wxPaintEvent(wxWindowBase* window)
     : wxEvent(window ? window->GetId() : 0, wxEVT_PAINT)
 {
     SetEventObject(window);
@@ -502,7 +502,7 @@ void wxUpdateUIEvent::ResetUpdateTime()
 wxScrollEvent::wxScrollEvent(wxEventType commandType,
                              int id,
                              int pos,
-                             int orient) noexcept
+                             int orient)
     : wxCommandEvent(commandType, id)
 {
     m_extraLong = orient;
@@ -854,7 +854,7 @@ wxWindowCreateEvent::wxWindowCreateEvent(wxWindow *win)
 // wxWindowDestroyEvent
 // ----------------------------------------------------------------------------
 
-wxWindowDestroyEvent::wxWindowDestroyEvent(wxWindow *win) noexcept
+wxWindowDestroyEvent::wxWindowDestroyEvent(wxWindow *win)
 {
     SetEventType(wxEVT_DESTROY);
     SetEventObject(win);

@@ -42,7 +42,7 @@ enum
 class WXDLLIMPEXP_CORE wxBMPHandler : public wxImageHandler
 {
 public:
-    wxBMPHandler() noexcept
+    wxBMPHandler()
     {
         m_name = "Windows bitmap file";
         m_extension = "bmp";
@@ -106,7 +106,7 @@ private:
 class WXDLLIMPEXP_CORE wxCURHandler : public wxICOHandler
 {
 public:
-    wxCURHandler() noexcept
+    wxCURHandler()
     {
         m_name = "Windows cursor file";
         m_extension = "cur";
@@ -133,7 +133,7 @@ private:
 class WXDLLIMPEXP_CORE wxANIHandler : public wxCURHandler
 {
 public:
-    wxANIHandler() noexcept
+    wxANIHandler()
     {
         m_name = "Windows animated cursor file";
         m_extension = "ani";

@@ -177,7 +177,7 @@ public:
 
 protected:
     // default ctor, use Open(string)
-    wxTextBuffer() noexcept { m_nCurLine = 0; m_isOpened = false; }
+    wxTextBuffer() { m_nCurLine = 0; m_isOpened = false; }
 
     // ctor from filename
     wxTextBuffer(const wxString& strBufferName);

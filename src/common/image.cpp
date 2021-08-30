@@ -64,7 +64,7 @@ wxImage wxNullImage;
 
 struct wxImageRefData: public wxObjectRefData
 {
-    wxImageRefData() noexcept = default;
+    wxImageRefData() = default;
     ~wxImageRefData() override;
 
     wxImageRefData(const wxImageRefData&) = delete;
@@ -1828,7 +1828,7 @@ namespace
 class WeightValue
 {
 public:
-    explicit WeightValue(double r = 0.0, double g = 0.0, double b = 0.0) noexcept
+    explicit WeightValue(double r = 0.0, double g = 0.0, double b = 0.0)
         : red(r), green(g), blue(b) {}
     double red;
     double green;

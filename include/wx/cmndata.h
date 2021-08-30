@@ -30,7 +30,7 @@ inline constexpr int wxPRINTMEDIA_DEFAULT = 0;
 class WXDLLIMPEXP_CORE wxPrintData
 {
 public:
-    wxPrintData() noexcept;
+    wxPrintData();
     wxPrintData(const wxPrintData& printData);
     ~wxPrintData();
 

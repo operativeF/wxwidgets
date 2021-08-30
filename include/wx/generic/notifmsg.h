@@ -17,7 +17,7 @@
 class WXDLLIMPEXP_CORE wxGenericNotificationMessage : public wxNotificationMessageBase
 {
 public:
-    wxGenericNotificationMessage() noexcept
+    wxGenericNotificationMessage()
     {
         Init();
     }

@@ -48,7 +48,7 @@ WX_DEFINE_LIST(wxAnimationDecoderList)
 // wxAnimation
 // ----------------------------------------------------------------------------
 
-wxAnimation::wxAnimation() noexcept
+wxAnimation::wxAnimation()
 {
     m_refData = wxAnimationImpl::CreateDefault();
 }

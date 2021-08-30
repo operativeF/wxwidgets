@@ -62,7 +62,7 @@ WX_DEFINE_LIST(wxPrintPaperTypeList)
 
 wxPrintPaperDatabase* wxThePrintPaperDatabase = nullptr;
 
-wxPrintPaperDatabase::wxPrintPaperDatabase() noexcept
+wxPrintPaperDatabase::wxPrintPaperDatabase()
     : m_map(new wxStringToPrintPaperTypeHashMap),
       m_list(new wxPrintPaperTypeList)
 {

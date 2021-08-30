@@ -182,7 +182,7 @@ static int OpenLogFile(wxFile& file, wxString *filename = nullptr, wxWindow *par
 
 #if wxUSE_LOGGUI
 
-wxLogGui::wxLogGui() noexcept
+wxLogGui::wxLogGui()
 {
     Clear();
 }

@@ -49,7 +49,7 @@ BOOL CALLBACK wxAbortProc(HDC hdc, int error);
 // Printer
 // ---------------------------------------------------------------------------
 
-wxWindowsPrinter::wxWindowsPrinter(wxPrintDialogData *data) noexcept
+wxWindowsPrinter::wxWindowsPrinter(wxPrintDialogData *data)
                 : wxPrinterBase(data)
 {
 }

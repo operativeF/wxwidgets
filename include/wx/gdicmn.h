@@ -443,9 +443,9 @@ struct WXDLLIMPEXP_CORE wxRealPoint
     double x {0.0};
     double y {0.0};
 
-    constexpr wxRealPoint() noexcept {};
-    constexpr wxRealPoint(double xx, double yy) noexcept : x(xx), y(yy) { }
-    constexpr wxRealPoint(const wxPoint& pt) noexcept;
+    constexpr wxRealPoint() {};
+    constexpr wxRealPoint(double xx, double yy) : x(xx), y(yy) { }
+    constexpr wxRealPoint(const wxPoint& pt);
 
     // no copy ctor or assignment operator - the defaults are ok
 

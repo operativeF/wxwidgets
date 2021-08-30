@@ -357,7 +357,7 @@ wxBEGIN_EVENT_TABLE(wxFileListCtrl,wxListCtrl)
 wxEND_EVENT_TABLE()
 
 
-wxFileListCtrl::wxFileListCtrl() noexcept
+wxFileListCtrl::wxFileListCtrl()
 {
 }
 

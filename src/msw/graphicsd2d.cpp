@@ -4983,7 +4983,7 @@ void wxD2DContext::GetDPI(double* dpiX, double* dpiY) const
 class wxD2DRenderer : public wxGraphicsRenderer
 {
 public :
-    wxD2DRenderer() noexcept;
+    wxD2DRenderer();
 
     ~wxD2DRenderer() override;
 
@@ -5099,7 +5099,7 @@ wxGraphicsRenderer* wxGraphicsRenderer::GetDirect2DRenderer()
     return gs_D2DRenderer;
 }
 
-wxD2DRenderer::wxD2DRenderer() noexcept
+wxD2DRenderer::wxD2DRenderer()
     : m_direct2dFactory(wxD2D1Factory())
 {
     if ( m_direct2dFactory.get() == nullptr )
@@ -5400,7 +5400,7 @@ ID2D1Factory* wxGetD2DFactory(wxGraphicsRenderer* renderer)
 class wxDirect2DModule : public wxModule
 {
 public:
-    wxDirect2DModule() noexcept
+    wxDirect2DModule()
     {
         // Using Direct2D requires OLE and, importantly, we must ensure our
         // OnExit() runs before it is uninitialized.

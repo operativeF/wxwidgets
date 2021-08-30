@@ -27,7 +27,7 @@ class WXDLLIMPEXP_CORE wxGridSelection
 {
 public:
     wxGridSelection(wxGrid *grid,
-                    wxGrid::wxGridSelectionModes sel = wxGrid::wxGridSelectCells) noexcept;
+                    wxGrid::wxGridSelectionModes sel = wxGrid::wxGridSelectCells);
 
     wxGridSelection(const wxGridSelection&) = delete;
     wxGridSelection& operator=(const wxGridSelection&) = delete;

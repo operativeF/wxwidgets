@@ -534,7 +534,7 @@ protected:
 class WXDLLIMPEXP_CORE wxAppBase : public wxAppConsole
 {
 public:
-    wxAppBase() noexcept;
+    wxAppBase();
     ~wxAppBase() override;
 
     wxAppBase(const wxAppBase&) = delete;

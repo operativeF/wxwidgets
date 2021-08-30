@@ -18,7 +18,7 @@
 // ----------------------------------------------------------------------------
 
 
-wxClientDataContainer::wxClientDataContainer() noexcept
+wxClientDataContainer::wxClientDataContainer()
 {
     // no client data (yet)
     m_clientData = nullptr;

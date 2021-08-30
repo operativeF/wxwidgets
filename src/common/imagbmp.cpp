@@ -405,8 +405,8 @@ bool wxBMPHandler::SaveDib(wxImage *image,
             {
                 pixel = 3*(y*width + x);
                 buffer[x] = (std::uint8_t)(.299*data[pixel] +
-                                           .587*data[pixel+1] +
-                                           .114*data[pixel+2]);
+                                      .587*data[pixel+1] +
+                                      .114*data[pixel+2]);
             }
         }
         else if ( format == wxBMP_8BPP_RED ) // 1 byte per pixel, red as greys

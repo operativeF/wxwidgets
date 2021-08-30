@@ -66,7 +66,7 @@ public:
  */
 
 
-wxContextHelp::wxContextHelp(wxWindow* win, bool beginHelp) noexcept
+wxContextHelp::wxContextHelp(wxWindow* win, bool beginHelp)
 {
     if (beginHelp)
         BeginContextHelp(win);

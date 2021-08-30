@@ -420,7 +420,7 @@ using wxDataViewVirtualListModel = wxDataViewIndexListModel;
 class WXDLLIMPEXP_CORE wxDataViewVirtualListModel: public wxDataViewListModel
 {
 public:
-    wxDataViewVirtualListModel( unsigned int initial_size = 0 ) noexcept;
+    wxDataViewVirtualListModel( unsigned int initial_size = 0 );
 
     void RowPrepended();
     void RowInserted( unsigned int before );

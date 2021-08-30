@@ -73,7 +73,7 @@ class WXDLLIMPEXP_BASE wxRegEx
 {
 public:
     // default ctor: use Compile() later
-    wxRegEx() noexcept { 
+    wxRegEx() { 
     m_impl = nullptr;
  }
 

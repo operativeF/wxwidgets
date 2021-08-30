@@ -126,7 +126,7 @@ wxUIActionSimulatorMSWImpl::DoKey(int keycode, int WXUNUSED(modifiers), bool isD
     return true;
 }
 
-wxUIActionSimulator::wxUIActionSimulator() noexcept
+wxUIActionSimulator::wxUIActionSimulator()
                    : m_impl(wxUIActionSimulatorMSWImpl::Get())
 {
 }

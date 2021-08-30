@@ -771,7 +771,7 @@ struct wxPixelDataOut<wxBitmap>
                 }
 
                 // default constructor
-                Iterator() noexcept
+                Iterator()
                 {
                     m_ptr = nullptr;
                     // m_bit doesn't need to be set until m_ptr != NULL

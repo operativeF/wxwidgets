@@ -40,7 +40,7 @@ public:
 
     wxMenuBase(const std::string& title, long style = 0) : m_title(title)
         { Init(style); }
-    explicit wxMenuBase(long style = 0) noexcept
+    wxMenuBase(long style = 0)
         { Init(style); }
 
     // dtor deletes all the menu items we own

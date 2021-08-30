@@ -664,7 +664,7 @@ class WXDLLIMPEXP_BASE wxLogStderr : public wxLog,
 public:
     // redirect log output to a FILE
     wxLogStderr(FILE *fp = nullptr,
-                const wxMBConv &conv = wxConvWhateverWorks) noexcept;
+                const wxMBConv &conv = wxConvWhateverWorks);
 
     wxLogStderr(const wxLogStderr&) = delete;
     wxLogStderr& operator=(const wxLogStderr&) = delete;

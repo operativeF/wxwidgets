@@ -126,7 +126,7 @@ private:
 class WXDLLIMPEXP_BASE wxClientDataContainer
 {
 public:
-    wxClientDataContainer() noexcept;
+    wxClientDataContainer();
     virtual ~wxClientDataContainer();
 
     void SetClientObject( wxClientData *data ) { DoSetClientObject(data); }

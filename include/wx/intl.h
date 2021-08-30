@@ -148,7 +148,7 @@ public:
     // -----------
 
         // call Init() if you use this ctor
-    wxLocale() noexcept { DoCommonInit(); }
+    wxLocale() { DoCommonInit(); }
 
         // the ctor has a side effect of changing current locale
     wxLocale(const wxString& name,                               // name (for messages)

@@ -421,7 +421,7 @@ class wxScrolled : public T,
                    private wxScrolledT_Helper
 {
 public:
-    wxScrolled() noexcept : wxScrollHelper(this) { }
+    wxScrolled() : wxScrollHelper(this) { }
     wxScrolled(wxWindow *parent,
                wxWindowID winid = wxID_ANY,
                const wxPoint& pos = wxDefaultPosition,

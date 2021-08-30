@@ -21,7 +21,7 @@ WX_DECLARE_EXPORTED_OBJARRAY(MSG, wxMSGArray);
 class WXDLLIMPEXP_CORE wxGUIEventLoop : public wxMSWEventLoopBase
 {
 public:
-    wxGUIEventLoop() noexcept = default;
+    wxGUIEventLoop() = default;
 
     // process a single message: calls PreProcessMessage() before dispatching
     // it

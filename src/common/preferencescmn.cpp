@@ -35,7 +35,7 @@ wxString wxStockPreferencesPage::GetName() const
     return name;
 }
 
-wxPreferencesEditor::wxPreferencesEditor(const wxString& title) noexcept
+wxPreferencesEditor::wxPreferencesEditor(const wxString& title)
     : m_impl(wxPreferencesEditorImpl::Create(title))
 {
 }

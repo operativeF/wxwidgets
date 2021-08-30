@@ -296,7 +296,7 @@ class wxFSWatcherImpl;
 class WXDLLIMPEXP_BASE wxFileSystemWatcherBase: public wxEvtHandler
 {
 public:
-    wxFileSystemWatcherBase() noexcept;
+    wxFileSystemWatcherBase();
 
     ~wxFileSystemWatcherBase() override;
 

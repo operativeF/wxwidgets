@@ -39,7 +39,7 @@ class WXDLLIMPEXP_HTML wxHtmlHelpDialog : public wxDialog
     wxDECLARE_DYNAMIC_CLASS(wxHtmlHelpDialog);
 
 public:
-    wxHtmlHelpDialog(wxHtmlHelpData* data = nullptr) noexcept { Init(data); }
+    wxHtmlHelpDialog(wxHtmlHelpData* data = nullptr) { Init(data); }
     wxHtmlHelpDialog(wxWindow* parent, wxWindowID wxWindowID,
                     const wxString& title = wxEmptyString,
                     int style = wxHF_DEFAULT_STYLE, wxHtmlHelpData* data = nullptr);

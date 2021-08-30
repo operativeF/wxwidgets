@@ -166,7 +166,7 @@ protected:
 class WXDLLEXPORT wxDisplayImplSingle : public wxDisplayImpl
 {
 public:
-    wxDisplayImplSingle() noexcept : wxDisplayImpl(0) { }
+    wxDisplayImplSingle() : wxDisplayImpl(0) { }
 
 #if wxUSE_DISPLAY
     // no video modes support for us, provide just the stubs

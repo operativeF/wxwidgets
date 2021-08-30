@@ -68,7 +68,7 @@ class WXDLLIMPEXP_AUI wxAuiToolBarEvent : public wxNotifyEvent
 {
 public:
     wxAuiToolBarEvent(wxEventType commandType = wxEVT_NULL,
-                      int winId = 0) noexcept
+                      int winId = 0)
           : wxNotifyEvent(commandType, winId)
         , m_clickPt(-1, -1)
         , m_rect(-1, -1, 0, 0)
@@ -112,7 +112,7 @@ class WXDLLIMPEXP_AUI wxAuiToolBarItem
 
 public:
 
-    wxAuiToolBarItem() noexcept
+    wxAuiToolBarItem()
     {
         m_window = nullptr;
         m_sizerItem = nullptr;
@@ -349,7 +349,7 @@ class WXDLLIMPEXP_AUI wxAuiGenericToolBarArt : public wxAuiToolBarArt
 
 public:
 
-    wxAuiGenericToolBarArt() noexcept;
+    wxAuiGenericToolBarArt();
     ~wxAuiGenericToolBarArt() override;
 
     wxAuiToolBarArt* Clone() override;
@@ -467,7 +467,7 @@ protected:
 class WXDLLIMPEXP_AUI wxAuiToolBar : public wxControl
 {
 public:
-    wxAuiToolBar() noexcept
+    wxAuiToolBar()
     {
         m_sizer = new wxBoxSizer(wxHORIZONTAL);
         m_art = new wxAuiDefaultToolBarArt;

@@ -53,7 +53,7 @@ inline constexpr int wxSB_SUNKEN    = 0x0003;
 class WXDLLIMPEXP_CORE wxStatusBarPane
 {
 public:
-    wxStatusBarPane(int style = wxSB_NORMAL, int width = 0) noexcept
+    wxStatusBarPane(int style = wxSB_NORMAL, int width = 0)
         : m_nStyle(style), m_nWidth(width)
     {
     }
@@ -110,7 +110,7 @@ WX_DECLARE_EXPORTED_OBJARRAY(wxStatusBarPane, wxStatusBarPaneArray);
 class WXDLLIMPEXP_CORE wxStatusBarBase : public wxControl
 {
 public:
-    wxStatusBarBase() noexcept = default;
+    wxStatusBarBase() = default;
 
     ~wxStatusBarBase() override;
 

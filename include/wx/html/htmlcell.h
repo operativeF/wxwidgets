@@ -126,7 +126,7 @@ public:
 class WXDLLIMPEXP_HTML wxDefaultHtmlRenderingStyle : public wxHtmlRenderingStyle
 {
 public:
-    explicit wxDefaultHtmlRenderingStyle(const wxWindowBase* wnd = nullptr) noexcept
+    explicit wxDefaultHtmlRenderingStyle(const wxWindowBase* wnd = nullptr)
         : m_wnd(wnd)
     {}
 
@@ -722,7 +722,7 @@ protected:
 class WXDLLIMPEXP_HTML wxHtmlLinkInfo : public wxObject
 {
 public:
-    wxHtmlLinkInfo() noexcept
+    wxHtmlLinkInfo()
         { m_Event = nullptr; m_Cell = nullptr; }
     wxHtmlLinkInfo(const wxString& href, const wxString& target = wxString())
         : m_Href(href)

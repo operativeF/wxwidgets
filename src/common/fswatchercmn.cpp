@@ -76,7 +76,7 @@ wxString wxFileSystemWatcherEvent::ToString() const
 // wxFileSystemWatcherEvent implementation
 // ============================================================================
 
-wxFileSystemWatcherBase::wxFileSystemWatcherBase() noexcept :
+wxFileSystemWatcherBase::wxFileSystemWatcherBase() :
      m_owner(this)
 {
 }

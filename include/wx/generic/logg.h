@@ -59,7 +59,7 @@ class WXDLLIMPEXP_CORE wxLogGui : public wxLog
 {
 public:
     // ctor
-    wxLogGui() noexcept;
+    wxLogGui();
 
     // show all messages that were logged since the last Flush()
     void Flush() override;

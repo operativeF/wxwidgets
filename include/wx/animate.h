@@ -35,7 +35,7 @@ WX_DECLARE_LIST_WITH_DECL(wxAnimationDecoder, wxAnimationDecoderList, class WXDL
 class WXDLLIMPEXP_CORE wxAnimation : public wxObject
 {
 public:
-    wxAnimation() noexcept;
+    wxAnimation();
     explicit wxAnimation(const std::string &name, wxAnimationType type = wxANIMATION_TYPE_ANY);
 
     wxAnimation(const wxAnimation&) = default;

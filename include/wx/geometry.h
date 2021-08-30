@@ -36,9 +36,9 @@ enum wxOutCode
 class WXDLLIMPEXP_CORE wxPoint2DInt
 {
 public :
-    inline wxPoint2DInt() noexcept;
-    inline wxPoint2DInt( std::int32_t x , std::int32_t y ) noexcept;
-    inline wxPoint2DInt( const wxPoint &pt ) noexcept;
+    inline wxPoint2DInt();
+    inline wxPoint2DInt( std::int32_t x , std::int32_t y );
+    inline wxPoint2DInt( const wxPoint &pt );
     // default copy ctor and copy-assign operator are OK
 
     // noops for this class, just return the coords
@@ -92,19 +92,19 @@ inline wxPoint2DInt operator/(const wxPoint2DInt& pt1 , const wxPoint2DInt& pt2)
 inline wxPoint2DInt operator/(const wxPoint2DInt& pt , std::int32_t n);
 inline wxPoint2DInt operator/(const wxPoint2DInt& pt , double n);
 
-inline wxPoint2DInt::wxPoint2DInt() noexcept
+inline wxPoint2DInt::wxPoint2DInt()
 {
     m_x = 0;
     m_y = 0;
 }
 
-inline wxPoint2DInt::wxPoint2DInt( std::int32_t x , std::int32_t y ) noexcept
+inline wxPoint2DInt::wxPoint2DInt( std::int32_t x , std::int32_t y )
 {
     m_x = x;
     m_y = y;
 }
 
-inline wxPoint2DInt::wxPoint2DInt( const wxPoint &pt ) noexcept
+inline wxPoint2DInt::wxPoint2DInt( const wxPoint &pt )
 {
     m_x = pt.x;
     m_y = pt.y;
@@ -269,8 +269,8 @@ inline wxPoint2DInt operator/(const wxPoint2DInt& pt , double n)
 class WXDLLIMPEXP_CORE wxPoint2DDouble
 {
 public :
-    inline wxPoint2DDouble() noexcept;
-    inline wxPoint2DDouble( double x , double y ) noexcept;
+    inline wxPoint2DDouble();
+    inline wxPoint2DDouble( double x , double y );
     wxPoint2DDouble( const wxPoint2DInt &pt )
         { m_x = (double) pt.m_x ; m_y = (double) pt.m_y ; }
     wxPoint2DDouble( const wxPoint &pt )
@@ -323,13 +323,13 @@ inline wxPoint2DDouble operator/(const wxPoint2DDouble& pt1 , const wxPoint2DDou
 inline wxPoint2DDouble operator/(const wxPoint2DDouble& pt , double n);
 inline wxPoint2DDouble operator/(const wxPoint2DDouble& pt , std::int32_t n);
 
-inline wxPoint2DDouble::wxPoint2DDouble() noexcept
+inline wxPoint2DDouble::wxPoint2DDouble()
 {
     m_x = 0.0;
     m_y = 0.0;
 }
 
-inline wxPoint2DDouble::wxPoint2DDouble( double x , double y ) noexcept
+inline wxPoint2DDouble::wxPoint2DDouble( double x , double y )
 {
     m_x = x;
     m_y = y;

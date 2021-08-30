@@ -140,7 +140,7 @@ wxFileOffset wxMemoryInputStream::OnSysTell() const
 // wxMemoryOutputStream
 // ----------------------------------------------------------------------------
 
-wxMemoryOutputStream::wxMemoryOutputStream(void *data, size_t len) noexcept
+wxMemoryOutputStream::wxMemoryOutputStream(void *data, size_t len)
     : m_o_streambuf(new wxStreamBuffer(wxStreamBuffer::write))
 {
     if ( data )

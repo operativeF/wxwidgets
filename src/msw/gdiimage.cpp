@@ -58,7 +58,7 @@ WX_DEFINE_LIST(wxGDIImageHandlerList)
 class WXDLLEXPORT wxBMPFileHandler : public wxBitmapHandler
 {
 public:
-    wxBMPFileHandler() noexcept : wxBitmapHandler("Windows bitmap file",
+    wxBMPFileHandler() : wxBitmapHandler("Windows bitmap file",
                                          "bmp",
                                          wxBITMAP_TYPE_BMP)
     {
@@ -75,7 +75,7 @@ public:
 class WXDLLEXPORT wxBMPResourceHandler: public wxBitmapHandler
 {
 public:
-    wxBMPResourceHandler() noexcept : wxBitmapHandler("Windows bitmap resource",
+    wxBMPResourceHandler() : wxBitmapHandler("Windows bitmap resource",
                                              "",
                                              wxBITMAP_TYPE_BMP_RESOURCE)
     {
@@ -135,7 +135,7 @@ protected:
 class WXDLLEXPORT wxICOFileHandler : public wxIconHandler
 {
 public:
-    wxICOFileHandler() noexcept : wxIconHandler("ICO icon file",
+    wxICOFileHandler() : wxIconHandler("ICO icon file",
                                        "ico",
                                        wxBITMAP_TYPE_ICO)
     {
@@ -150,7 +150,7 @@ protected:
 class WXDLLEXPORT wxICOResourceHandler: public wxIconHandler
 {
 public:
-    wxICOResourceHandler() noexcept : wxIconHandler("ICO resource",
+    wxICOResourceHandler() : wxIconHandler("ICO resource",
                                            "ico",
                                            wxBITMAP_TYPE_ICO_RESOURCE)
     {

@@ -241,7 +241,7 @@ wxString wxStandardPaths::MSWGetShellDir(const GUID& rfid)
 // public functions
 // ----------------------------------------------------------------------------
 
-wxStandardPaths::wxStandardPaths() noexcept
+wxStandardPaths::wxStandardPaths()
 {
     // make it possible to run uninstalled application from the build directory
     IgnoreAppBuildSubDirs();

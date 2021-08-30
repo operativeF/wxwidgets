@@ -95,7 +95,7 @@ struct WXDLLIMPEXP_CORE wxEnhMetaFileDC : public wxDC
     // the metafile picture size and the optional description/comment
     wxEnhMetaFileDC(const std::string& filename = {},
                     int width = 0, int height = 0,
-                    const std::string& description = {}) noexcept;
+                    const std::string& description = {});
 
     // as above, but takes reference DC as first argument to take resolution,
     // size, font metrics etc. from
@@ -169,7 +169,7 @@ class WXDLLIMPEXP_CORE wxEnhMetaFileSimpleDataObject : public wxDataObjectSimple
 {
 public:
     // ctors
-    wxEnhMetaFileSimpleDataObject() noexcept : wxDataObjectSimple(wxDF_ENHMETAFILE) { }
+    wxEnhMetaFileSimpleDataObject() : wxDataObjectSimple(wxDF_ENHMETAFILE) { }
     wxEnhMetaFileSimpleDataObject(const wxEnhMetaFile& metafile)
         : wxDataObjectSimple(wxDF_ENHMETAFILE), m_metafile(metafile) { }
     

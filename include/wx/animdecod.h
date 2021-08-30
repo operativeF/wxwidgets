@@ -87,7 +87,7 @@ enum wxAnimationType
 class WXDLLIMPEXP_CORE wxAnimationDecoder : public wxObjectRefData
 {
 public:
-    wxAnimationDecoder() noexcept
+    wxAnimationDecoder()
     {
         m_nFrames = 0;
     }

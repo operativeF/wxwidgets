@@ -2686,7 +2686,7 @@ bool wxStaticBoxSizer::Detach( wxWindow *window )
 
 #if wxUSE_BUTTON
 
-wxStdDialogButtonSizer::wxStdDialogButtonSizer() noexcept
+wxStdDialogButtonSizer::wxStdDialogButtonSizer()
     : wxBoxSizer(wxHORIZONTAL)
 {
     bool is_pda = (wxSystemSettings::GetScreenType() <= wxSYS_SCREEN_PDA);

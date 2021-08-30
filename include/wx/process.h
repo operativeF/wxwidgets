@@ -52,7 +52,7 @@ public:
     // deleted by the caller
     static wxProcess *Open(const wxString& cmd, int flags = wxEXEC_ASYNC);
 
-    wxProcess(wxEvtHandler *parent = nullptr, int nId = wxID_ANY) noexcept
+    wxProcess(wxEvtHandler *parent = nullptr, int nId = wxID_ANY)
         { Init(parent, nId, wxPROCESS_DEFAULT); }
 
     wxProcess(int flags) { Init(nullptr, wxID_ANY, flags); }
@@ -160,7 +160,7 @@ wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_BASE, wxEVT_END_PROCESS, wxProcessEvent );
 class WXDLLIMPEXP_BASE wxProcessEvent : public wxEvent
 {
 public:
-    wxProcessEvent(int nId = 0, int pid = 0, int exitcode = 0) noexcept : wxEvent(nId)
+    wxProcessEvent(int nId = 0, int pid = 0, int exitcode = 0) : wxEvent(nId)
     {
         m_eventType = wxEVT_END_PROCESS;
         m_pid = pid;

@@ -241,7 +241,7 @@ protected:
 class WXDLLIMPEXP_CORE wxTextDropTarget : public wxDropTarget
 {
 public:
-    wxTextDropTarget() noexcept;
+    wxTextDropTarget();
 
     wxTextDropTarget(const wxTextDropTarget&) = delete;
     wxTextDropTarget& operator=(const wxTextDropTarget&) = delete;

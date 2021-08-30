@@ -188,7 +188,7 @@ WX_DECLARE_EXPORTED_HASH_MAP(unsigned long, wxImageHistogramEntry,
 class wxImageHistogram : public wxImageHistogramBase
 {
 public:
-    wxImageHistogram() noexcept : wxImageHistogramBase(256) { }
+    wxImageHistogram() : wxImageHistogramBase(256) { }
 
     // get the key in the histogram for the given RGB values
     static unsigned long MakeKey(unsigned char r,

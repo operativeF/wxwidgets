@@ -35,7 +35,7 @@ class WXDLLIMPEXP_CORE wxDropTarget : public wxDropTargetBase
 {
 public:
     // ctor & dtor
-    wxDropTarget(wxDataObject *dataObject = nullptr) noexcept;
+    wxDropTarget(wxDataObject *dataObject = nullptr);
     ~wxDropTarget() override;
 
     wxDropTarget(const wxDropTarget&) = delete;

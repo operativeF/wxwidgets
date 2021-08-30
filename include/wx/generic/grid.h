@@ -871,7 +871,7 @@ using wxGridCellAttrPtr = wxObjectDataPtr<wxGridCellAttr>;
 class WXDLLIMPEXP_CORE wxGridCellAttrProvider : public wxClientDataContainer
 {
 public:
-    wxGridCellAttrProvider() noexcept;
+    wxGridCellAttrProvider();
     ~wxGridCellAttrProvider() override;
 
     // DecRef() must be called on the returned pointer
@@ -920,8 +920,8 @@ private:
 class WXDLLIMPEXP_CORE wxGridCellCoords
 {
 public:
-    wxGridCellCoords() noexcept { m_row = m_col = -1; }
-    wxGridCellCoords( int r, int c ) noexcept { m_row = r; m_col = c; }
+    wxGridCellCoords() { m_row = m_col = -1; }
+    wxGridCellCoords( int r, int c ) { m_row = r; m_col = c; }
 
     // default copy ctor is ok
 
@@ -1164,7 +1164,7 @@ class WXDLLIMPEXP_CORE wxGridTableBase : public wxObject,
                                         public wxClientDataContainer
 {
 public:
-    wxGridTableBase() noexcept;
+    wxGridTableBase();
     ~wxGridTableBase() override;
 
     // You must override these functions in a derived table class
@@ -1303,7 +1303,7 @@ enum wxGridTableRequest
 class WXDLLIMPEXP_CORE wxGridTableMessage
 {
 public:
-    wxGridTableMessage() noexcept;
+    wxGridTableMessage();
     wxGridTableMessage( wxGridTableBase *table, int id,
                         int comInt1 = -1,
                         int comInt2 = -1 );
@@ -1469,7 +1469,7 @@ public:
     // ------------------------
 
     // ctor and Create() create the grid window, as with the other controls
-    wxGrid() noexcept { Init(); }
+    wxGrid() { Init(); }
 
     wxGrid(wxWindow *parent,
             wxWindowID id,
@@ -3075,7 +3075,7 @@ class WXDLLIMPEXP_CORE wxGridSizeEvent : public wxNotifyEvent,
                                         public wxKeyboardState
 {
 public:
-    wxGridSizeEvent() noexcept
+    wxGridSizeEvent()
          
     {
         Init(-1, -1, -1);
@@ -3136,7 +3136,7 @@ class WXDLLIMPEXP_CORE wxGridRangeSelectEvent : public wxNotifyEvent,
                                                public wxKeyboardState
 {
 public:
-    wxGridRangeSelectEvent() noexcept
+    wxGridRangeSelectEvent()
          
     {
         Init(wxGridNoCellCoords, wxGridNoCellCoords, false);
@@ -3204,12 +3204,13 @@ protected:
 class WXDLLIMPEXP_CORE wxGridEditorCreatedEvent : public wxCommandEvent
 {
 public:
-    wxGridEditorCreatedEvent() noexcept 
-    {
-        m_row  = 0;
-        m_col  = 0;
-        m_window = nullptr;
-    }
+    wxGridEditorCreatedEvent()
+         
+        {
+            m_row  = 0;
+            m_col  = 0;
+            m_window = nullptr;
+        }
 
     wxGridEditorCreatedEvent(int id, wxEventType type, wxObject* obj,
                              int row, int col, wxWindow* window);

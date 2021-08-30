@@ -24,7 +24,7 @@ class wxScopedArray
 public:
     using element_type = T;
 
-    explicit wxScopedArray(T * array = nullptr) noexcept : m_array(array) { }
+    explicit wxScopedArray(T * array = nullptr) : m_array(array) { }
     explicit wxScopedArray(size_t count) : m_array(new T[count]) { }
 
     ~wxScopedArray() { delete [] m_array; }

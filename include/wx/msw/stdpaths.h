@@ -72,7 +72,7 @@ protected:
     //
     // It calls IgnoreAppBuildSubDirs() and also sets up the object to use
     // both vendor and application name by default.
-    wxStandardPaths()noexcept;
+    wxStandardPaths();
 
     static wxString DoGetKnownFolder(const _GUID& rfid);
 

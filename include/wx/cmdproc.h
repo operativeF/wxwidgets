@@ -52,7 +52,7 @@ class WXDLLIMPEXP_CORE wxCommandProcessor : public wxObject
 {
 public:
     // if max number of commands is -1, it is unlimited
-    wxCommandProcessor(int maxCommands = -1) noexcept;
+    wxCommandProcessor(int maxCommands = -1);
     ~wxCommandProcessor() override;
 
     wxCommandProcessor(const wxCommandProcessor&) = delete;

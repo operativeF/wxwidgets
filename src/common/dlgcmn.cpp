@@ -100,7 +100,7 @@ wxBEGIN_EVENT_TABLE(wxDialogBase, wxTopLevelWindow)
     EVT_CHAR_HOOK(wxDialogBase::OnCharHook)
 wxEND_EVENT_TABLE()
 
-wxDialogBase::wxDialogBase() noexcept
+wxDialogBase::wxDialogBase()
 {
     // the dialogs have this flag on by default to prevent the events from the
     // dialog controls from reaching the parent frame which is usually

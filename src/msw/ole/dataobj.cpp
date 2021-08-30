@@ -931,7 +931,7 @@ STDMETHODIMP wxIDataObject::EnumDAdvise(IEnumSTATDATA **WXUNUSED(ppenumAdvise))
 // wxDataObject
 // ----------------------------------------------------------------------------
 
-wxDataObject::wxDataObject() noexcept
+wxDataObject::wxDataObject()
 {
     m_pIDataObject = new wxIDataObject(this);
     m_pIDataObject->AddRef();

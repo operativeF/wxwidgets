@@ -22,7 +22,7 @@ class WXDLLIMPEXP_CORE wxWindowsPrinter : public wxPrinterBase
     wxDECLARE_DYNAMIC_CLASS(wxWindowsPrinter);
 
 public:
-    wxWindowsPrinter(wxPrintDialogData *data = nullptr) noexcept;
+    wxWindowsPrinter(wxPrintDialogData *data = nullptr);
 
     wxWindowsPrinter(const wxWindowsPrinter&) = delete;
     wxWindowsPrinter& operator=(const wxWindowsPrinter&) = delete;

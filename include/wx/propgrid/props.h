@@ -72,7 +72,7 @@ wxPG_IMPLEMENT_PROPERTY_CLASS_PLAIN(NAME, EDITOR)
 class WXDLLIMPEXP_PROPGRID wxPGInDialogValidator
 {
 public:
-    wxPGInDialogValidator() noexcept
+    wxPGInDialogValidator()
     {
         m_textCtrl = nullptr;
     }

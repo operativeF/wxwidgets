@@ -267,7 +267,7 @@ protected:
 class WXDLLIMPEXP_CORE wxPrintout
 {
 public:
-    wxPrintout(const wxString& title = wxGetTranslation("Printout")) noexcept :
+    wxPrintout(const wxString& title = wxGetTranslation("Printout")) :
         m_printoutTitle(title)    
     {
     }

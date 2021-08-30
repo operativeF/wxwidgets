@@ -32,7 +32,7 @@ static int gs_eventLoopCount = 0;
 // wxEventLoopBase
 // ----------------------------------------------------------------------------
 
-wxEventLoopBase::wxEventLoopBase() noexcept
+wxEventLoopBase::wxEventLoopBase()
 {
     gs_eventLoopCount++;
 }

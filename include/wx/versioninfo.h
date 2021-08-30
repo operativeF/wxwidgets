@@ -24,7 +24,7 @@ public:
                   int minor = 0,
                   int micro = 0,
                   const wxString& description = wxString(),
-                  const wxString& copyright = wxString()) noexcept
+                  const wxString& copyright = wxString())
         : m_name(name)
         , m_description(description)
         , m_copyright(copyright)

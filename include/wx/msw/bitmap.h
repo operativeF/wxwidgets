@@ -232,7 +232,7 @@ private:
 class WXDLLIMPEXP_CORE wxMask : public wxObject
 {
 public:
-    wxMask() noexcept;
+    wxMask();
 
     // Copy constructor
     wxMask(const wxMask &mask);

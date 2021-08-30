@@ -38,7 +38,7 @@
 // Print data
 // ----------------------------------------------------------------------------
 
-wxPrintData::wxPrintData() noexcept
+wxPrintData::wxPrintData()
     : m_paperSize(wxDefaultSize),
       m_nativeData(wxPrintFactory::GetFactory()->CreatePrintNativeData())
 {
