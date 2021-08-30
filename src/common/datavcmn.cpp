@@ -412,12 +412,6 @@ int wxDataViewModel::Compare( const wxDataViewItem &item1, const wxDataViewItem 
 // wxDataViewIndexListModel
 // ---------------------------------------------------------
 
-static int my_sort( int *v1, int *v2 )
-{
-   return *v2-*v1;
-}
-
-
 wxDataViewIndexListModel::wxDataViewIndexListModel( unsigned int initial_size )
 {
     // build initial index
