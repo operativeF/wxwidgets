@@ -25,12 +25,12 @@ inline constexpr char wxStaticBitmapNameStr[] = "staticBitmap";
 class WXDLLIMPEXP_CORE wxStaticBitmapBase : public wxControl
 {
 public:
-    enum ScaleMode
+    enum class ScaleMode
     {
-        Scale_None,
-        Scale_Fill,
-        Scale_AspectFit,
-        Scale_AspectFill
+        None,
+        Fill,
+        AspectFit,
+        AspectFill
     };
 
     wxStaticBitmapBase() = default;
@@ -51,7 +51,7 @@ public:
         return wxIcon();
     }
     virtual void SetScaleMode(ScaleMode WXUNUSED(scaleMode)) { }
-    virtual ScaleMode GetScaleMode() const { return Scale_None; }
+    virtual ScaleMode GetScaleMode() const { return ScaleMode::None; }
 
     // overridden base class virtuals
     bool AcceptsFocus() const override { return false; }

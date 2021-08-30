@@ -562,7 +562,7 @@ wxIMPLEMENT_ABSTRACT_CLASS(wxGraphicsContext, wxObject);
 wxGraphicsContext::wxGraphicsContext(wxGraphicsRenderer* renderer,
                                      wxWindow* window)
     : wxGraphicsObject(renderer),
-      m_antialias(wxANTIALIAS_DEFAULT),
+      m_antialias(wxAntialiasMode::Default),
       m_composition(wxCOMPOSITION_OVER),
       m_interpolation(wxInterpolationQuality::Default),
       m_enableOffset(false),

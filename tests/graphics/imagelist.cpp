@@ -46,7 +46,7 @@ TEST_CASE("ImageList:WithMask")
 #if wxUSE_GRAPHICS_CONTEXT
         wxGraphicsContext* gc = mdc.GetGraphicsContext();
         if ( gc )
-            gc->SetAntialiasMode(wxANTIALIAS_NONE);
+            gc->SetAntialiasMode(wxAntialiasMode::None);
 #endif //wxUSE_GRAPHICS_CONTEXT
         mdc.SetBackground(*wxBLACK_BRUSH);
         mdc.Clear();
@@ -456,7 +456,7 @@ TEST_CASE("ImageList:NoMask")
 #if wxUSE_GRAPHICS_CONTEXT
         wxGraphicsContext* gc = mdc.GetGraphicsContext();
         if ( gc )
-            gc->SetAntialiasMode(wxANTIALIAS_NONE);
+            gc->SetAntialiasMode(wxAntialiasMode::None);
 #endif //wxUSE_GRAPHICS_CONTEXT
         mdc.SetBackground(*wxBLACK_BRUSH);
         mdc.Clear();

@@ -36,7 +36,7 @@ bool wxGenericStaticBitmap::Create(wxWindow *parent,
     if (! wxControl::Create(parent, id, pos, size, style,
                             wxDefaultValidator, name))
         return false;
-    m_scaleMode = Scale_None;
+    m_scaleMode = ScaleMode::None;
     SetBitmap(bitmap);
     Bind(wxEVT_PAINT, &wxGenericStaticBitmap::OnPaint, this);
     return true;
@@ -57,21 +57,21 @@ void wxGenericStaticBitmap::OnPaint(wxPaintEvent& WXUNUSED(event))
     double h = 0;
     switch ( m_scaleMode )
     {
-        case Scale_None:
+        case ScaleMode::None:
             dc.DrawBitmap(m_bitmap, 0, 0, true);
             return;
-        case Scale_Fill:
+        case ScaleMode::Fill:
             w = drawSize.x;
             h = drawSize.y;
             break;
-        case Scale_AspectFill:
-        case Scale_AspectFit:
+        case ScaleMode::AspectFill:
+        case ScaleMode::AspectFit:
         {
             double scaleFactor;
             double scaleX = (double)drawSize.x / (double)bmpSize.x;
             double scaleY = (double)drawSize.y / (double)bmpSize.y;
-            if ( ( m_scaleMode == Scale_AspectFit && scaleY < scaleX ) ||
-                 ( m_scaleMode == Scale_AspectFill && scaleY > scaleX ) )
+            if ( ( m_scaleMode == ScaleMode::AspectFit && scaleY < scaleX ) ||
+                 ( m_scaleMode == ScaleMode::AspectFill && scaleY > scaleX ) )
                 scaleFactor = scaleY;
             else
                 scaleFactor = scaleX;

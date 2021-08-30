@@ -82,7 +82,7 @@ public:
         m_gcdc = new wxGCDC(m_mdc);
 
         wxGraphicsContext* ctx = m_gcdc->GetGraphicsContext();
-        ctx->SetAntialiasMode(wxANTIALIAS_NONE);
+        ctx->SetAntialiasMode(wxAntialiasMode::None);
         ctx->DisableOffset();
 
         m_dc = m_gcdc;

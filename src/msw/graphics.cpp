@@ -2060,12 +2060,12 @@ bool wxGDIPlusContext::SetAntialiasMode(wxAntialiasMode antialias)
     TextRenderingHint textRenderingHint;
     switch (antialias)
     {
-        case wxANTIALIAS_DEFAULT:
+        case wxAntialiasMode::Default:
             antialiasMode = SmoothingModeHighQuality;
             textRenderingHint = TextRenderingHintSystemDefault;
             break;
 
-        case wxANTIALIAS_NONE:
+        case wxAntialiasMode::None:
             antialiasMode = SmoothingModeNone;
             textRenderingHint = TextRenderingHintSingleBitPerPixel;
             break;

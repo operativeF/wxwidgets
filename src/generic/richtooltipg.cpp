@@ -315,15 +315,15 @@ private:
         const wxRect rectDpy = wxDisplay(GetParent()).GetClientArea();
 
 #ifdef __WXMAC__
-        return pos.y > rectDpy.height/2 ? wxTipKind_Bottom : wxTipKind_Top;
+        return pos.y > rectDpy.height/2 ? wxTipKind::Bottom : wxTipKind::Top;
 #else // !__WXMAC__
         return pos.y > rectDpy.height/2
                     ? pos.x > rectDpy.width/2
-                        ? wxTipKind_BottomRight
-                        : wxTipKind_BottomLeft
+                        ? wxTipKind::BottomRight
+                        : wxTipKind::BottomLeft
                     : pos.x > rectDpy.width/2
-                        ? wxTipKind_TopRight
-                        : wxTipKind_TopLeft;
+                        ? wxTipKind::TopRight
+                        : wxTipKind::TopLeft;
 #endif // __WXMAC__/!__WXMAC__
     }
 
@@ -378,7 +378,7 @@ private:
         wxGraphicsPath
             path = wxGraphicsRenderer::GetDefaultRenderer()->CreatePath();
 
-        if ( tipKind == wxTipKind_Auto )
+        if ( tipKind == wxTipKind::Auto )
             tipKind = GetBestTipKind();
 
         // Points defining the tip shape (in clockwise order as we must end at
@@ -387,11 +387,11 @@ private:
 
         switch ( tipKind )
         {
-            case wxTipKind_Auto:
+            case wxTipKind::Auto:
                 wxFAIL_MSG( "Impossible kind value" );
                 break;
 
-            case wxTipKind_TopLeft:
+            case wxTipKind::TopLeft:
                 x = tipOffset;
                 yApex = 0;
                 yBase = tipSize;
@@ -404,7 +404,7 @@ private:
                 pointStart = RectPoint_TopRight;
                 break;
 
-            case wxTipKind_TopRight:
+            case wxTipKind::TopRight:
                 x = size.x - tipOffset;
                 yApex = 0;
                 yBase = tipSize;
@@ -417,7 +417,7 @@ private:
                 pointStart = RectPoint_TopRight;
                 break;
 
-            case wxTipKind_BottomLeft:
+            case wxTipKind::BottomLeft:
                 x = tipOffset;
                 yApex = size.y + tipSize;
                 yBase = size.y;
@@ -430,7 +430,7 @@ private:
                 pointStart = RectPoint_BotLeft;
                 break;
 
-            case wxTipKind_BottomRight:
+            case wxTipKind::BottomRight:
                 x = size.x - tipOffset;
                 yApex = size.y + tipSize;
                 yBase = size.y;
@@ -443,7 +443,7 @@ private:
                 pointStart = RectPoint_BotLeft;
                 break;
 
-            case wxTipKind_Top:
+            case wxTipKind::Top:
                 x = size.x/2;
                 yApex = 0;
                 yBase = tipSize;
@@ -462,7 +462,7 @@ private:
                 pointStart = RectPoint_TopRight;
                 break;
 
-            case wxTipKind_Bottom:
+            case wxTipKind::Bottom:
                 x = size.x/2;
                 yApex = size.y + tipSize;
                 yBase = size.y;
@@ -479,7 +479,7 @@ private:
                 pointStart = RectPoint_BotLeft;
                 break;
 
-            case wxTipKind_None:
+            case wxTipKind::None:
                 x = size.x/2;
                 dy = 0;
 
@@ -492,7 +492,7 @@ private:
         size.y += tipSize;
         SetSize(size);
 
-        if ( tipKind != wxTipKind_None )
+        if ( tipKind != wxTipKind::None )
         {
             path.MoveToPoint(tipPoints[0]);
             path.AddLineToPoint(tipPoints[1]);

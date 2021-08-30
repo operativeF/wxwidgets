@@ -4403,12 +4403,12 @@ bool wxD2DContext::SetAntialiasMode(wxAntialiasMode antialias)
     D2D1_TEXT_ANTIALIAS_MODE textAntialiasMode;
     switch ( antialias )
     {
-    case wxANTIALIAS_DEFAULT:
+    case wxAntialiasMode::Default:
         antialiasMode = D2D1_ANTIALIAS_MODE_PER_PRIMITIVE;
         textAntialiasMode = D2D1_TEXT_ANTIALIAS_MODE_DEFAULT;
         break;
 
-    case wxANTIALIAS_NONE:
+    case wxAntialiasMode::None:
         antialiasMode = D2D1_ANTIALIAS_MODE_ALIASED;
         textAntialiasMode = D2D1_TEXT_ANTIALIAS_MODE_ALIASED;
         break;

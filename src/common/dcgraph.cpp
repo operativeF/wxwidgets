@@ -549,9 +549,9 @@ void wxGCDCImpl::SetLogicalFunction( wxRasterOperationMode function )
         m_logicalFunctionSupported = m_graphicContext->SetCompositionMode(mode);
 
     if ( function == wxRasterOperationMode::Xor )
-        m_graphicContext->SetAntialiasMode(wxANTIALIAS_NONE);
+        m_graphicContext->SetAntialiasMode(wxAntialiasMode::None);
     else
-        m_graphicContext->SetAntialiasMode(wxANTIALIAS_DEFAULT);
+        m_graphicContext->SetAntialiasMode(wxAntialiasMode::Default);
 }
 
 // ----------------------------------------------------------------------------
@@ -1080,7 +1080,7 @@ bool wxGCDCImpl::DoStretchBlit(
         const wxAntialiasMode formerAa = m_graphicContext->GetAntialiasMode();
         if (mode == wxCOMPOSITION_XOR)
         {
-            m_graphicContext->SetAntialiasMode(wxANTIALIAS_NONE);
+            m_graphicContext->SetAntialiasMode(wxAntialiasMode::None);
         }
 
         if (xsrcMask == -1 && ysrcMask == -1)

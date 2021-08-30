@@ -34,16 +34,16 @@ class wxRichToolTipImpl;
 // Other values describe the position of the tooltip itself, not the window it
 // relates to. E.g. wxTipKind_Top places the tip on the top of the tooltip and
 // so the tooltip itself is located beneath its associated window.
-enum wxTipKind
+enum class wxTipKind
 {
-    wxTipKind_None,
-    wxTipKind_TopLeft,
-    wxTipKind_Top,
-    wxTipKind_TopRight,
-    wxTipKind_BottomLeft,
-    wxTipKind_Bottom,
-    wxTipKind_BottomRight,
-    wxTipKind_Auto
+    None,
+    TopLeft,
+    Top,
+    TopRight,
+    BottomLeft,
+    Bottom,
+    BottomRight,
+    Auto
 };
 
 // ----------------------------------------------------------------------------

@@ -24,7 +24,7 @@ public:
         m_title(title),
         m_message(message)
     {
-        m_tipKind = wxTipKind_Auto;
+        m_tipKind = wxTipKind::Auto;
 
         // This is pretty arbitrary, we could follow MSW and use some multiple
         // of double-click time here.

@@ -128,7 +128,7 @@ public:
     void SetTipKind(wxTipKind tipKind) override
     {
         // Setting non-default tip is not supported.
-        if ( tipKind != wxTipKind_Auto )
+        if ( tipKind != wxTipKind::Auto )
             m_canUseNative = false;
 
         wxRichToolTipGenericImpl::SetTipKind(tipKind);

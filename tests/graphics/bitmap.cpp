@@ -184,7 +184,7 @@ TEST_CASE("BitmapTestCase::ToImage")
             wxGraphicsContext* gc = dc.GetGraphicsContext();
             if (gc)
             {
-                gc->SetAntialiasMode(wxANTIALIAS_NONE);
+                gc->SetAntialiasMode(wxAntialiasMode::None);
             }
 #endif // wxUSE_GRAPHICS_CONTEXT
             dc.SetBackground(*wxBLACK_BRUSH);
@@ -369,7 +369,7 @@ TEST_CASE("BitmapTestCase::ToImage")
             wxGraphicsContext* gc = dc.GetGraphicsContext();
             if (gc)
             {
-                gc->SetAntialiasMode(wxANTIALIAS_NONE);
+                gc->SetAntialiasMode(wxAntialiasMode::None);
             }
 #endif // wxUSE_GRAPHICS_CONTEXT
             dc.SetBackground(*wxBLACK_BRUSH);
@@ -640,7 +640,7 @@ TEST_CASE("BitmapTestCase::OverlappingBlit")
         wxGraphicsContext* gc = dc.GetGraphicsContext();
         if ( gc )
         {
-            gc->SetAntialiasMode(wxANTIALIAS_NONE);
+            gc->SetAntialiasMode(wxAntialiasMode::None);
         }
 #endif // wxUSE_GRAPHICS_CONTEXT
 
@@ -697,7 +697,7 @@ static wxBitmap GetMask(int w, int h)
         wxGraphicsContext* gc = dc.GetGraphicsContext();
         if ( gc )
         {
-            gc->SetAntialiasMode(wxANTIALIAS_NONE);
+            gc->SetAntialiasMode(wxAntialiasMode::None);
         }
 #endif // wxUSE_GRAPHICS_CONTEXT
         dc.SetBackground(*wxBLACK_BRUSH);

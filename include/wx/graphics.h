@@ -25,10 +25,10 @@
 #include <string_view>
 #include <vector>
 
-enum wxAntialiasMode
+enum class wxAntialiasMode
 {
-    wxANTIALIAS_NONE, // should be 0
-    wxANTIALIAS_DEFAULT
+    None, // should be 0
+    Default
 };
 
 enum class wxInterpolationQuality

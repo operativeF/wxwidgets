@@ -113,11 +113,11 @@ private:
         There are also transitions from PRESSED and DRAGGING to NORMAL in case
         the mouse capture is lost or Escape key is pressed which are not shown.
      */
-    enum State
+    enum class State
     {
-        State_Normal,   // initial, default state
-        State_Pressed,  // mouse was pressed over an item
-        State_Dragging  // the item is being dragged
+        Normal,   // initial, default state
+        Pressed,  // mouse was pressed over an item
+        Dragging  // the item is being dragged
     };
 
     // common part of both ctors
@@ -135,7 +135,7 @@ private:
     wxWindow *m_win{nullptr};
 
     // the current state
-    State m_state{State_Normal};
+    State m_state{State::Normal};
 
     // the details of the operation currently in progress, only valid if
     // m_state is not normal

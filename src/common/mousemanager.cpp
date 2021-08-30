@@ -55,26 +55,26 @@ void wxMouseEventsManager::OnCaptureLost(wxMouseCaptureLostEvent& WXUNUSED(event
 {
     switch ( m_state )
     {
-        case State_Normal:
+        case State::Normal:
             wxFAIL_MSG( "mouse shouldn't be captured in normal state" );
             break;
 
-        case State_Pressed:
+        case State::Pressed:
             MouseClickCancelled(m_item);
             break;
 
-        case State_Dragging:
+        case State::Dragging:
             MouseDragCancelled(m_item);
             break;
     }
 
-    m_state = State_Normal;
+    m_state = State::Normal;
     m_item = wxNOT_FOUND;
 }
 
 void wxMouseEventsManager::OnLeftDown(wxMouseEvent& event)
 {
-    wxASSERT_MSG( m_state == State_Normal,
+    wxASSERT_MSG( m_state == State::Normal,
                   "state hasn't been reset to normal somehow" );
 
     m_posLast = event.GetPosition();
@@ -85,7 +85,7 @@ void wxMouseEventsManager::OnLeftDown(wxMouseEvent& event)
         return;
     }
 
-    m_state = State_Pressed;
+    m_state = State::Pressed;
     m_win->SetFocus();
     m_win->CaptureMouse();
     MouseClickBegin(m_item);
@@ -95,7 +95,7 @@ void wxMouseEventsManager::OnLeftUp(wxMouseEvent& event)
 {
     switch ( m_state )
     {
-        case State_Normal:
+        case State::Normal:
             // ignore it, the mouse hasn't been pressed over any item initially
             // so releasing it shouldn't do anything
             event.Skip();
@@ -103,7 +103,7 @@ void wxMouseEventsManager::OnLeftUp(wxMouseEvent& event)
             // skip releasing the capture below
             return;
 
-        case State_Pressed:
+        case State::Pressed:
             if ( MouseHitTest(event.GetPosition()) == m_item )
             {
                 // mouse released over the same item, so it was a click
@@ -111,12 +111,12 @@ void wxMouseEventsManager::OnLeftUp(wxMouseEvent& event)
             }
             break;
 
-        case State_Dragging:
+        case State::Dragging:
             MouseDragEnd(m_item, event.GetPosition());
             break;
     }
 
-    m_state = State_Normal;
+    m_state = State::Normal;
     m_item = wxNOT_FOUND;
     m_win->ReleaseMouse();
 }
@@ -125,11 +125,11 @@ void wxMouseEventsManager::OnMove(wxMouseEvent& event)
 {
     switch ( m_state )
     {
-        case State_Normal:
+        case State::Normal:
             event.Skip();
             break;
 
-        case State_Pressed:
+        case State::Pressed:
             wxASSERT_MSG( event.LeftIsDown(),
                           "should have detected mouse being released" );
 
@@ -152,7 +152,7 @@ void wxMouseEventsManager::OnMove(wxMouseEvent& event)
                     // drag operation, do [attempt to] start it now
                     if ( MouseDragBegin(m_item, pos) )
                     {
-                        m_state = State_Dragging;
+                        m_state = State::Dragging;
                     }
                 }
                 else // still didn't move far enough away
@@ -162,7 +162,7 @@ void wxMouseEventsManager::OnMove(wxMouseEvent& event)
             }
             break;
 
-        case State_Dragging:
+        case State::Dragging:
             m_posLast = event.GetPosition();
             MouseDragging(m_item, m_posLast);
             break;
