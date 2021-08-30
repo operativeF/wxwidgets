@@ -45,7 +45,7 @@ public:
         Create(parent, id, pos, size, style, name);
     }
 
-    virtual ~wxWindowDFB();
+    ~wxWindowDFB();
 
     bool Create(wxWindow *parent,
                 wxWindowID id,

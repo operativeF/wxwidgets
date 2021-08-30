@@ -920,7 +920,7 @@ class WXDLLIMPEXP_CORE wxResourceCache: public wxList
 {
 public:
     wxResourceCache() = default;
-    virtual ~wxResourceCache();
+    ~wxResourceCache();
 };
 
 // ---------------------------------------------------------------------------

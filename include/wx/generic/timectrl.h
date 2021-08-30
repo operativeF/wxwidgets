@@ -23,7 +23,7 @@ public:
 
     // Creating the control.
     wxTimePickerCtrlGeneric() { Init(); }
-    virtual ~wxTimePickerCtrlGeneric();
+    ~wxTimePickerCtrlGeneric();
     wxTimePickerCtrlGeneric(wxWindow *parent,
                             wxWindowID id,
                             const wxDateTime& date = wxDefaultDateTime,

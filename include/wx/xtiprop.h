@@ -227,7 +227,7 @@ class WXDLLIMPEXP_BASE wxGenericPropertyAccessor : public wxPropertyAccessor
 {
 public:
     wxGenericPropertyAccessor( const wxString &propName );
-    virtual ~wxGenericPropertyAccessor();
+    ~wxGenericPropertyAccessor();
 
     void RenameProperty( const wxString& WXUNUSED_UNLESS_DEBUG(oldName),
         const wxString& newName )

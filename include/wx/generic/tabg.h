@@ -99,7 +99,7 @@ class WXDLLIMPEXP_CORE wxTabView: public wxObject
     wxDECLARE_DYNAMIC_CLASS(wxTabView);
 public:
   wxTabView(long style = wxTAB_STYLE_DRAW_BOX | wxTAB_STYLE_COLOUR_INTERIOR);
-  virtual ~wxTabView();
+  ~wxTabView();
 
   inline int GetNumberOfLayers() const { return m_layers.GetCount(); }
   inline wxTabLayerList& GetLayers() { return m_layers; }
@@ -278,7 +278,7 @@ public:
                    const wxSize& size = wxDefaultSize,
                    long windowStyle = wxDEFAULT_DIALOG_STYLE,
                    const std::string& name = wxDialogNameStr);
-    virtual ~wxTabbedDialog();
+    ~wxTabbedDialog();
 
     wxTabView *GetTabView() const { return m_tabView; }
     void SetTabView(wxTabView *v) { m_tabView = v; }
@@ -309,7 +309,7 @@ public:
                   const wxSize& size = wxDefaultSize,
                   long windowStyle = 0,
                   const std::string& name = wxPanelNameStr);
-    virtual ~wxTabbedPanel();
+    ~wxTabbedPanel();
 
     wxTabView *GetTabView() const { return m_tabView; }
     void SetTabView(wxTabView *v) { m_tabView = v; }

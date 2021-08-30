@@ -360,7 +360,7 @@ public:
     wxChmInputStream(const wxString& archive,
                      const wxString& file, bool simulate = false);
     /// Destructor
-    virtual ~wxChmInputStream();
+    ~wxChmInputStream();
 
     /// Return the size of the accessed file in archive
     size_t GetSize() const override { return m_size; }

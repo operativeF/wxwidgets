@@ -74,8 +74,8 @@ class WXDLLIMPEXP_BASE wxRegEx
 public:
     // default ctor: use Compile() later
     wxRegEx() { 
-    m_impl = nullptr;
- }
+        m_impl = nullptr;
+    }
 
     // create and compile
     wxRegEx(const wxString& expr, int flags = wxRE_DEFAULT)

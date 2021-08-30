@@ -124,7 +124,7 @@ class /*WXDLLIMPEXP_NET */ wxWinINetInputStream : public wxInputStream
 {
 public:
     wxWinINetInputStream(HINTERNET hFile=0);
-    virtual ~wxWinINetInputStream();
+    ~wxWinINetInputStream();
 
     void Attach(HINTERNET hFile);
 

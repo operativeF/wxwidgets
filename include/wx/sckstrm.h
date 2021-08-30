@@ -22,10 +22,10 @@ public:
     wxSocketOutputStream(wxSocketBase& s);
     ~wxSocketOutputStream() = default;
 
-   wxSocketOutputStream(const wxSocketOutputStream&) = delete;
-   wxSocketOutputStream& operator=(const wxSocketOutputStream&) = delete;
-   wxSocketOutputStream(wxSocketOutputStream&&) = default;
-   wxSocketOutputStream& operator=(wxSocketOutputStream&&) = default;
+    wxSocketOutputStream(const wxSocketOutputStream&) = delete;
+    wxSocketOutputStream& operator=(const wxSocketOutputStream&) = delete;
+    wxSocketOutputStream(wxSocketOutputStream&&) = default;
+    wxSocketOutputStream& operator=(wxSocketOutputStream&&) = default;
 
 protected:
     wxSocketBase *m_o_socket;

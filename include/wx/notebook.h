@@ -63,8 +63,8 @@ inline constexpr char wxNotebookNameStr[] = "notebook";
 class WXDLLEXPORT wxNotebookPageInfo : public wxObject
 {
 public:
-    wxNotebookPageInfo() { m_page = nullptr; m_imageId = -1; m_selected = false; }
-    virtual ~wxNotebookPageInfo() { }
+    wxNotebookPageInfo() = default;
+    ~wxNotebookPageInfo() = default;
 
     [[maybe_unused]] bool Create(wxNotebookPage *page,
                 const std::string& text,
@@ -84,10 +84,10 @@ public:
     int GetImageId() const { return m_imageId; }
 
 private:
-    wxNotebookPage *m_page;
+    wxNotebookPage *m_page{nullptr};
     wxString m_text;
-    bool m_selected;
-    int m_imageId;
+    bool m_selected{false};
+    int m_imageId{-1};
 
     wxDECLARE_DYNAMIC_CLASS(wxNotebookPageInfo);
 };

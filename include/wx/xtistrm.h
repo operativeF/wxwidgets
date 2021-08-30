@@ -118,7 +118,7 @@ class WXDLLIMPEXP_BASE wxObjectWriter: public wxObject
     friend class wxObjectWriterFunctor;
 public:
     wxObjectWriter();
-    virtual ~wxObjectWriter();
+    ~wxObjectWriter();
 
     // with this call you start writing out a new top-level object
     void WriteObject(const wxObject *object, const wxClassInfo *classInfo,
@@ -222,7 +222,7 @@ class WXDLLIMPEXP_BASE wxObjectReader: public wxObject
 {
 public:
     wxObjectReader();
-    virtual ~wxObjectReader();
+    ~wxObjectReader();
 
     // the only thing wxObjectReader knows about is the class info by object ID
     wxClassInfo *GetObjectClassInfo(int objectID);
@@ -330,7 +330,7 @@ class WXDLLIMPEXP_BASE wxObjectRuntimeReaderCallback: public wxObjectReaderCallb
 
 public:
     wxObjectRuntimeReaderCallback();
-    virtual ~wxObjectRuntimeReaderCallback();
+    ~wxObjectRuntimeReaderCallback();
 
     // returns the object having the corresponding ID fully constructed
     wxObject *GetObject(int objectID);

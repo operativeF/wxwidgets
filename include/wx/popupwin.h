@@ -170,7 +170,7 @@ public:
     wxPopupTransientWindow() { Init(); }
     wxPopupTransientWindow(wxWindow *parent, int style = wxBORDER_NONE);
 
-    virtual ~wxPopupTransientWindow();
+    ~wxPopupTransientWindow();
 
     wxPopupTransientWindow(const wxPopupTransientWindow&) = delete;
     wxPopupTransientWindow& operator=(const wxPopupTransientWindow&) = delete;

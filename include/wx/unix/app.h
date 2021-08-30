@@ -19,7 +19,7 @@ class WXDLLIMPEXP_BASE wxAppConsole : public wxAppConsoleBase
 {
 public:
     wxAppConsole();
-    virtual ~wxAppConsole();
+    ~wxAppConsole();
 
     // override base class initialization
     bool Initialize(int& argc, wxChar** argv) override;

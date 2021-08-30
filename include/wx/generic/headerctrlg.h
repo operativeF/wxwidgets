@@ -48,7 +48,7 @@ public:
                 long style = wxHD_DEFAULT_STYLE,
                 const std::string& name = wxHeaderCtrlNameStr);
 
-    virtual ~wxHeaderCtrl();
+    ~wxHeaderCtrl();
 
 protected:
     wxSize DoGetBestSize() const override;

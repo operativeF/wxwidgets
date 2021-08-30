@@ -390,7 +390,7 @@ class WXDLLIMPEXP_BASE wxDynamicClassInfo : public wxClassInfo
 public:
     wxDynamicClassInfo( const wxChar *_UnitName, const wxChar *_ClassName,
                         const wxClassInfo* superClass );
-    virtual ~wxDynamicClassInfo();
+    ~wxDynamicClassInfo();
 
     // constructs a wxDynamicObject with an instance
     virtual wxObject *AllocateObject() const;

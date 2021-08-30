@@ -91,7 +91,7 @@ public:
     using ChannelType = unsigned char;
 
     wxColourBase() = default;
-    ~wxColourBase() override = default;
+    ~wxColourBase() = default;
 
 
     // Set() functions

@@ -51,7 +51,7 @@ inline constexpr int wxPD_CAN_SKIP           = 0x0080;
                           int style = wxPD_APP_MODAL | wxPD_AUTO_HIDE )
             : wxGenericProgressDialog( title, message, maximum,
                                        parent, style )
-            { }
+        {}
 
         wxProgressDialog (const  wxProgressDialog &) = delete;
 	    wxProgressDialog & operator=(const  wxProgressDialog &) = delete;

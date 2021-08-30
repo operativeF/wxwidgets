@@ -44,7 +44,7 @@ public:
     wxCaret(wxWindowBase *window, const wxSize& size)
         : wxCaretBase(window, size), m_timer(this) { InitGeneric(); }
 
-    virtual ~wxCaret();
+    ~wxCaret();
 
     // implementation
     // --------------

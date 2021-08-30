@@ -75,7 +75,7 @@ public:
               const wxValidator& validator = wxDefaultValidator,
               const wxString& name = wxASCII_STR(wxListBoxNameStr) );
 
-    virtual ~wxListBox();
+    ~wxListBox();
 
     bool Create(wxWindow *parent,
                 wxWindowID id,

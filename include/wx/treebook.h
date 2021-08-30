@@ -49,10 +49,10 @@ public:
         Create(parent, id, pos, size, style, name);
     }
 
-wxTreebook(const wxTreebook&) = delete;
-   wxTreebook& operator=(const wxTreebook&) = delete;
-   wxTreebook(wxTreebook&&) = default;
-   wxTreebook& operator=(wxTreebook&&) = default;
+    wxTreebook(const wxTreebook&) = delete;
+    wxTreebook& operator=(const wxTreebook&) = delete;
+    wxTreebook(wxTreebook&&) = default;
+    wxTreebook& operator=(wxTreebook&&) = default;
 
     // Really creates the control
     [[maybe_unused]] bool Create(wxWindow *parent,

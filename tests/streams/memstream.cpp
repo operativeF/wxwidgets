@@ -31,7 +31,7 @@ class memStream : public BaseStreamTestCase<wxMemoryInputStream, wxMemoryOutputS
 {
 public:
     memStream();
-    virtual ~memStream();
+    ~memStream();
 
     CPPUNIT_TEST_SUITE(memStream);
         // Base class stream tests the memStream supports.

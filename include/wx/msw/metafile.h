@@ -41,7 +41,6 @@ class WXDLLIMPEXP_CORE wxMetafile: public wxGDIObject
 {
 public:
     wxMetafile(const std::string& file = {});
-    virtual ~wxMetafile();
 
     // After this is called, the metafile cannot be used for anything
     // since it is now owned by the clipboard.
@@ -77,7 +76,7 @@ public:
     wxMetafileDCImpl(wxDC *owner, const std::string& file = {});
     wxMetafileDCImpl(wxDC *owner, const std::string& file,
                      int xext, int yext, int xorg, int yorg);
-    virtual ~wxMetafileDCImpl();
+    ~wxMetafileDCImpl();
 
     wxMetafileDCImpl(const wxMetafileDCImpl&) = delete;
 	wxMetafileDCImpl& operator=(const wxMetafileDCImpl&) = delete;

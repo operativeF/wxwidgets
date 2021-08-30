@@ -52,7 +52,7 @@ public:
         Create(parent, winid, pos, size, style, validator, name);
     }
 
-    virtual ~wxGenericListCtrl();
+    ~wxGenericListCtrl();
 
     void Init();
 

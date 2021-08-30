@@ -25,7 +25,7 @@ public:
                const wxString& help = wxEmptyString,
                wxItemKind kind = wxITEM_NORMAL,
                wxMenu *subMenu = NULL);
-    virtual ~wxMenuItem();
+    ~wxMenuItem();
 
     // override base class virtuals to update the item appearance on screen
     void SetItemLabel(const wxString& text) override;

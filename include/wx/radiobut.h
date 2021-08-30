@@ -35,7 +35,7 @@ class WXDLLIMPEXP_CORE wxRadioButtonBase : public wxRadioButtonBaseBase
 {
 public:
     wxRadioButtonBase() = default;
-
+    ~wxRadioButtonBase() = default;
     wxRadioButtonBase(const wxRadioButtonBase&) = delete;
     wxRadioButtonBase& operator=(const wxRadioButtonBase&) = delete;
     wxRadioButtonBase(wxRadioButtonBase&&) = default;

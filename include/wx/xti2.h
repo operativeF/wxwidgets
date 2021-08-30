@@ -27,7 +27,7 @@ class WXDLLIMPEXP_BASE wxDynamicObject : public wxObject
 public:
     // instantiates this object with an instance of its superclass
     wxDynamicObject(wxObject* superClassInstance, const wxDynamicClassInfo *info) ;
-    virtual ~wxDynamicObject();
+    ~wxDynamicObject();
 
     void SetProperty (const wxChar *propertyName, const wxAny &value);
     wxAny GetProperty (const wxChar *propertyName) const ;

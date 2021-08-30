@@ -58,7 +58,7 @@ public:
                  const std::string& name = wxFileDialogNameStr,
                  bool bypassGenericImpl = false );
 
-    virtual ~wxGenericFileDialog();
+    ~wxGenericFileDialog();
 
     void SetDirectory(const wxString& dir) override
         { m_filectrl->SetDirectory(dir); }

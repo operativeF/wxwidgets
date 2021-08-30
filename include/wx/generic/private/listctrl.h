@@ -362,7 +362,7 @@ public:
                  long style = 0,
                  const std::string& name = "wxlistctrlcolumntitles");
 
-    virtual ~wxListHeaderWindow();
+    ~wxListHeaderWindow();
 
     // We never need focus as we don't have any keyboard interface.
     bool AcceptsFocus() const override { return false; }
@@ -494,7 +494,7 @@ public:
                       const wxPoint& pos,
                       const wxSize& size );
 
-    virtual ~wxListMainWindow();
+    ~wxListMainWindow();
 
     // called by the main control when its mode changes
     void SetReportView(bool inReportView);

@@ -86,7 +86,7 @@ class WXDLLIMPEXP_CORE wxDelegateTheme : public wxTheme
 {
 public:
     wxDelegateTheme(const wxString& theme);
-    virtual ~wxDelegateTheme();
+    ~wxDelegateTheme();
 
     virtual wxRenderer *GetRenderer();
     virtual wxArtProvider *GetArtProvider();

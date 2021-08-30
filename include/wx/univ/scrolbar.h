@@ -72,7 +72,7 @@ public:
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxASCII_STR(wxScrollBarNameStr));
 
-    virtual ~wxScrollBar();
+    ~wxScrollBar();
 
     
     int GetThumbPosition() const override;
@@ -217,7 +217,7 @@ public:
                              const wxMouseEvent& event) override;
     bool HandleMouseMove(wxInputConsumer *consumer, const wxMouseEvent& event) override;
 
-    virtual ~wxStdScrollBarInputHandler();
+    ~wxStdScrollBarInputHandler();
 
     // this method is called by wxScrollBarTimer only and may be overridden
     //

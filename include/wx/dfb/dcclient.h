@@ -23,7 +23,7 @@ class WXDLLIMPEXP_CORE wxWindowDCImpl : public wxDFBDCImpl
 public:
     wxWindowDCImpl(wxDC *owner) : wxDFBDCImpl(owner), m_shouldFlip(false) { }
     wxWindowDCImpl(wxDC *owner, wxWindow *win);
-    virtual ~wxWindowDCImpl();
+    ~wxWindowDCImpl();
 
 protected:
     // initializes the DC for painting on given window; if rect!=NULL, then

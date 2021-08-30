@@ -54,7 +54,7 @@ public:
                  long style = 0,
                  const wxString& name = wxASCII_STR(wxToolBarNameStr) );
 
-    virtual ~wxToolBar();
+    ~wxToolBar();
 
     bool Realize() override;
 

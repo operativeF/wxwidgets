@@ -28,7 +28,7 @@ public:
         Union(bmp, transColour, tolerance);
     }
 
-    virtual ~wxRegion();
+    ~wxRegion();
 
     // wxRegionBase methods
     virtual void Clear();

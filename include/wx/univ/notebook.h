@@ -56,8 +56,7 @@ public:
                 long style = 0,
                 const wxString& name = wxASCII_STR(wxNotebookNameStr));
 
-    // dtor
-    virtual ~wxNotebook();
+    ~wxNotebook();
 
     // implement wxNotebookBase pure virtuals
     // --------------------------------------

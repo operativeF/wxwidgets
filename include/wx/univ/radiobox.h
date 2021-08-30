@@ -77,7 +77,7 @@ public:
                 const wxValidator& val = wxDefaultValidator,
                 const wxString& name = wxASCII_STR(wxRadioBoxNameStr));
 
-    virtual ~wxRadioBox();
+    ~wxRadioBox();
 
     // implement wxRadioBox interface
     void SetSelection(int n) override;

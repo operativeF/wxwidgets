@@ -64,7 +64,7 @@ class hvConnection : public wxConnection
 {
 public:
     hvConnection();
-    virtual ~hvConnection();
+    ~hvConnection();
 
     bool OnExec(const wxString& topic, const wxString& data);
     bool OnPoke(const wxString& topic, const wxString& item,

@@ -930,7 +930,7 @@ class WXDLLIMPEXP_CORE wxGraphicsFigure : public wxGraphicsObject
 public:
     wxGraphicsFigure(wxGraphicsRenderer* renderer);
 
-    virtual ~wxGraphicsFigure();
+    ~wxGraphicsFigure();
 
     void SetPath( wxGraphicsMatrix* matrix );
 

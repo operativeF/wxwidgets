@@ -63,7 +63,7 @@ public:
                 long style = wxDEFAULT_FRAME_STYLE | wxVSCROLL | wxHSCROLL,
                 const std::string& name = wxFrameNameStr);
 
-    virtual ~wxGenericMDIParentFrame();
+    ~wxGenericMDIParentFrame();
 
     
     static bool IsTDI() { return true; }
@@ -157,7 +157,7 @@ public:
                 long style = wxDEFAULT_FRAME_STYLE,
                 const std::string& name = wxFrameNameStr);
 
-    virtual ~wxGenericMDIChildFrame();
+    ~wxGenericMDIChildFrame();
 
     // implement MDI operations
     virtual void Activate();

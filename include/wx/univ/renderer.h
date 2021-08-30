@@ -481,8 +481,7 @@ public:
                              const wxPoint& pt,
                              int flags = 0) const = 0;
 
-    // virtual dtor for any base class
-    virtual ~wxRenderer();
+    ~wxRenderer();
 };
 
 // ----------------------------------------------------------------------------

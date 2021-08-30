@@ -314,7 +314,7 @@ class WXDLLIMPEXP_CORE wxGUIEventLoop : public wxEventLoopBase
 {
 public:
     wxGUIEventLoop() { m_impl = NULL; }
-    virtual ~wxGUIEventLoop();
+    ~wxGUIEventLoop();
 
     wxGUIEventLoop(const wxGUIEventLoop&) = delete;
     wxGUIEventLoop& operator=(const wxGUIEventLoop&) = delete;

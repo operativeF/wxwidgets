@@ -70,8 +70,7 @@ public:
     // return true to refresh the control, false otherwise
     virtual bool HandleActivation(wxInputConsumer *consumer, bool activated);
 
-    // virtual dtor for any base class
-    virtual ~wxInputHandler();
+    ~wxInputHandler();
 };
 
 // ----------------------------------------------------------------------------

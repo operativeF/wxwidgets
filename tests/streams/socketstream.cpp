@@ -100,7 +100,7 @@ class socketStream :
 {
 public:
     socketStream();
-    virtual ~socketStream();
+    ~socketStream();
 
     void setUp() override;
     void tearDown() override;

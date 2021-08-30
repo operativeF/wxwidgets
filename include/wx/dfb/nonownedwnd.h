@@ -52,7 +52,7 @@ public:
                 long style = 0,
                 const wxString& name = wxASCII_STR(wxPanelNameStr));
 
-    virtual ~wxNonOwnedWindow();
+    ~wxNonOwnedWindow();
 
     
     virtual bool Show(bool show = true);

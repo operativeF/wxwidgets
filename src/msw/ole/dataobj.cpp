@@ -191,7 +191,7 @@ class wxIDataObject : public IDataObject
 {
 public:
     explicit wxIDataObject(wxDataObject *pDataObject);
-    virtual ~wxIDataObject();
+    ~wxIDataObject();
 
     wxIDataObject(const wxIDataObject&) = delete;
 	wxIDataObject& operator=(const wxIDataObject&) = delete;

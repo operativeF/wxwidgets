@@ -29,7 +29,7 @@ class strStream :
 {
 public:
     strStream();
-    virtual ~strStream();
+    ~strStream();
 
     CPPUNIT_TEST_SUITE(strStream);
         // Base class stream tests the strStream supports.

@@ -34,7 +34,7 @@ public:
         Create(parent, id, pos, size, style, name);
     }
 
-    virtual ~wxStaticLine();
+    ~wxStaticLine();
 
     bool Create( wxWindow *parent,
                  wxWindowID id = wxID_ANY,

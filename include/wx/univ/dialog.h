@@ -38,7 +38,7 @@ public:
                 long style = wxDEFAULT_DIALOG_STYLE,
                 const wxString& name = wxASCII_STR(wxDialogNameStr));
 
-    virtual ~wxDialog();
+    ~wxDialog();
 
     // is the dialog in modal state right now?
     bool IsModal() const override;

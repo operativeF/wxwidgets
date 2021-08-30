@@ -21,7 +21,7 @@ public:
     wxRegionGeneric(const wxBitmap& bmp);
     wxRegionGeneric(const wxBitmap& bmp, const wxColour& transp, int tolerance = 0);
     wxRegionGeneric();
-    virtual ~wxRegionGeneric();
+    ~wxRegionGeneric();
 
     // wxRegionBase pure virtuals
     virtual void Clear();
@@ -53,7 +53,7 @@ public:
     wxRegionIteratorGeneric();
     wxRegionIteratorGeneric(const wxRegionGeneric& region);
     wxRegionIteratorGeneric(const wxRegionIteratorGeneric& iterator);
-    virtual ~wxRegionIteratorGeneric();
+    ~wxRegionIteratorGeneric();
 
     wxRegionIteratorGeneric& operator=(const wxRegionIteratorGeneric& iterator);
 

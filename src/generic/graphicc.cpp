@@ -254,7 +254,7 @@ public:
     wxCairoPenBrushBaseData(wxGraphicsRenderer* renderer,
                             const wxColour& col,
                             bool isTransparent);
-    virtual ~wxCairoPenBrushBaseData();
+    ~wxCairoPenBrushBaseData();
 
     virtual void Apply( wxGraphicsContext* context );
 
@@ -439,7 +439,7 @@ public:
     // If this ctor is used, Init() must be called by the derived class later.
     wxCairoContext( wxGraphicsRenderer* renderer );
 
-    virtual ~wxCairoContext();
+    ~wxCairoContext();
 
     bool ShouldOffset() const override
     {

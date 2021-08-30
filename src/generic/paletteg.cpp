@@ -29,7 +29,7 @@ class wxPaletteRefData : public wxGDIRefData
 public:
     wxPaletteRefData();
     wxPaletteRefData(const wxPaletteRefData& palette);
-    virtual ~wxPaletteRefData();
+    ~wxPaletteRefData();
 
     int m_count;
     wxPaletteEntry *m_entries;

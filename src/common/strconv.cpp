@@ -2027,7 +2027,7 @@ class wxMBConv_iconv : public wxMBConv
 {
 public:
     wxMBConv_iconv(const char *name);
-    virtual ~wxMBConv_iconv();
+    ~wxMBConv_iconv();
 
     // implement base class virtual methods
     virtual size_t ToWChar(wchar_t *dst, size_t dstLen,

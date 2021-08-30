@@ -82,7 +82,7 @@ public:
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxASCII_STR(wxButtonNameStr));
 
-    virtual ~wxButton();
+    ~wxButton();
 
     wxWindow *SetDefault() override;
 

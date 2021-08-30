@@ -38,7 +38,7 @@ public:
 
     wxMenu(long style = 0) : wxMenuBase(style) { Init(); }
 
-    virtual ~wxMenu();
+    ~wxMenu();
 
     // called by wxMenuItem when an item of this menu changes
     void RefreshItem(wxMenuItem *item);
@@ -143,7 +143,7 @@ public:
     // ctors and dtor
     wxMenuBar(long WXUNUSED(style) = 0) { Init(); }
     wxMenuBar(size_t n, wxMenu *menus[], const wxString titles[], long style = 0);
-    virtual ~wxMenuBar();
+    ~wxMenuBar();
 
     // implement base class virtuals
     bool Append( wxMenu *menu, const wxString &title ) override;

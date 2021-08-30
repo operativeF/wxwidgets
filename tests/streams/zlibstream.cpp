@@ -39,7 +39,7 @@ class zlibStream : public BaseStreamTestCase<wxZlibInputStream, wxZlibOutputStre
 {
 public:
     zlibStream();
-    virtual ~zlibStream();
+    ~zlibStream();
 
     CPPUNIT_TEST_SUITE(zlibStream);
         // Base class stream tests the zlibstream supports.

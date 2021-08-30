@@ -104,7 +104,7 @@ public:
     wxRichTextCaret(wxRichTextCtrl *window, const wxSize& size)
         : wxCaret(window, size), m_timer(this) { Init(); m_richTextCtrl = window; }
 
-    virtual ~wxRichTextCaret();
+    ~wxRichTextCaret();
 
     // implementation
     // --------------

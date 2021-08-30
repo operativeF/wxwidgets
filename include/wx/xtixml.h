@@ -33,7 +33,7 @@ class WXDLLIMPEXP_XML wxObjectXmlWriter: public wxObjectWriter
 public:
 
     wxObjectXmlWriter( wxXmlNode * parent );
-    virtual ~wxObjectXmlWriter();
+    ~wxObjectXmlWriter();
 
     //
     // streaming callbacks

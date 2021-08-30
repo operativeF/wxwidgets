@@ -91,9 +91,7 @@ private:
 class WXDLLIMPEXP_XML wxXmlNode
 {
 public:
-    wxXmlNode()
-         
-    = default;
+    wxXmlNode() = default;
 
     wxXmlNode(wxXmlNode *parent, wxXmlNodeType type,
               const wxString& name, const wxString& content = wxEmptyString,

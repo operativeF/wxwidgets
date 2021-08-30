@@ -20,7 +20,7 @@ class WXDLLIMPEXP_CORE wxAcceleratorTable : public wxObject
 public:
     wxAcceleratorTable() = default;
     wxAcceleratorTable(int n, const wxAcceleratorEntry entries[]);
-    virtual ~wxAcceleratorTable();
+    ~wxAcceleratorTable();
 
     bool Ok() const { return IsOk(); }
     bool IsOk() const;

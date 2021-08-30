@@ -24,7 +24,7 @@ class WXDLLIMPEXP_CORE wxGenericImageList: public wxObject
 public:
     wxGenericImageList() = default;
     wxGenericImageList( int width, int height, bool mask = true, int initialCount = 1 );
-    virtual ~wxGenericImageList();
+    ~wxGenericImageList();
 
    wxGenericImageList(const wxGenericImageList&) = delete;
    wxGenericImageList& operator=(const wxGenericImageList&) = delete;

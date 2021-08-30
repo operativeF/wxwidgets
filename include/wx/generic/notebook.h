@@ -51,7 +51,7 @@ public:
               long style = 0,
               const std::string& name = wxNotebookNameStr);
     // dtor
-  virtual ~wxNotebook();
+  ~wxNotebook();
 
   // accessors
   // ---------

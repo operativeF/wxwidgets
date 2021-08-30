@@ -72,10 +72,6 @@ wxMetafile::wxMetafile(const std::string& file)
         M_METAFILEDATA->m_metafile = (WXHANDLE) GetMetaFile(file);
 }
 
-wxMetafile::~wxMetafile()
-{
-}
-
 wxGDIRefData *wxMetafile::CreateGDIRefData() const
 {
     return new wxMetafileRefData;

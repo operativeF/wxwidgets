@@ -82,7 +82,7 @@ public:
                 const wxValidator& validator = wxDefaultValidator,
                 const std::string& name = wxASCII_STR(wxBitmapComboBoxNameStr));
 
-    virtual ~wxBitmapComboBox();
+    ~wxBitmapComboBox();
 
     std::string GetStringSelection() const override;
 
