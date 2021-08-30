@@ -39,7 +39,7 @@ class WXDLLIMPEXP_CORE wxItemContainerImmutable
 {
 public:
     wxItemContainerImmutable() = default;
-    virtual ~wxItemContainerImmutable();
+    virtual ~wxItemContainerImmutable() = default;
 
     // accessing strings
     // -----------------
@@ -203,7 +203,7 @@ private:
 
 public:
     wxItemContainer() = default;
-    ~wxItemContainer() override;
+    ~wxItemContainer() = default;
 
     // adding items
     // ------------

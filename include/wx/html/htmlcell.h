@@ -197,7 +197,7 @@ enum class wxHtmlScriptMode
 class WXDLLIMPEXP_HTML wxHtmlCell : public wxObject
 {
 public:
-    wxHtmlCell();
+    wxHtmlCell() = default;
     ~wxHtmlCell() override;
 
     wxHtmlCell(const wxHtmlCell&) = delete;

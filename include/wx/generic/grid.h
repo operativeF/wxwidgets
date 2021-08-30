@@ -364,7 +364,7 @@ private:
 class WXDLLIMPEXP_CORE wxGridCellEditor : public wxGridCellWorker
 {
 public:
-    wxGridCellEditor();
+    wxGridCellEditor() = default;
 
     bool IsCreated() const { return m_control != nullptr; }
 
@@ -871,7 +871,7 @@ using wxGridCellAttrPtr = wxObjectDataPtr<wxGridCellAttr>;
 class WXDLLIMPEXP_CORE wxGridCellAttrProvider : public wxClientDataContainer
 {
 public:
-    wxGridCellAttrProvider();
+    wxGridCellAttrProvider() = default;
     ~wxGridCellAttrProvider() override;
 
     // DecRef() must be called on the returned pointer
@@ -1164,7 +1164,7 @@ class WXDLLIMPEXP_CORE wxGridTableBase : public wxObject,
                                         public wxClientDataContainer
 {
 public:
-    wxGridTableBase();
+    wxGridTableBase() = default;
     ~wxGridTableBase() override;
 
     // You must override these functions in a derived table class

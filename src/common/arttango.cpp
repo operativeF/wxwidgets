@@ -73,9 +73,7 @@ namespace
 class wxTangoArtProvider : public wxArtProvider
 {
 public:
-    wxTangoArtProvider()
-    {
-    }
+    wxTangoArtProvider() = default;
 
     wxTangoArtProvider(const wxTangoArtProvider&) = delete;
 	wxTangoArtProvider& operator=(const wxTangoArtProvider&) = delete;

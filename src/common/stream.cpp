@@ -689,10 +689,6 @@ wxFileOffset wxStreamBase::OnSysTell() const
 // wxInputStream
 // ----------------------------------------------------------------------------
 
-wxInputStream::wxInputStream()
-{
-}
-
 wxInputStream::~wxInputStream()
 {
     free(m_wback);

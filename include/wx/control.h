@@ -36,8 +36,7 @@ class WXDLLIMPEXP_CORE wxControlBase : public wxWindow
 {
 public:
     wxControlBase() = default;
-
-    ~wxControlBase() override;
+    ~wxControlBase() = default;
 
     wxControlBase(const wxControlBase&) = delete;
     wxControlBase& operator=(const wxControlBase&) = delete;

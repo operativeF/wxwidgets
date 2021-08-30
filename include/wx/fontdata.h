@@ -23,12 +23,6 @@ enum
 class WXDLLIMPEXP_CORE wxFontData
 {
 public:
-    wxFontData() = default;
-    ~wxFontData() = default;
-
-    wxFontData(const wxFontData& data);
-    wxFontData& operator=(const wxFontData& data);
-
     void SetAllowSymbols(bool flag) { m_allowSymbols = flag; }
     bool GetAllowSymbols() const { return m_allowSymbols; }
 

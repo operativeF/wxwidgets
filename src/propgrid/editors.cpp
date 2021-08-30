@@ -564,10 +564,7 @@ wxEND_EVENT_TABLE()
 class wxPGComboBox : public wxOwnerDrawnComboBox
 {
 public:
-
-    wxPGComboBox()  
-    {
-    }
+    wxPGComboBox() = default;
 
     ~wxPGComboBox() override
     {

@@ -289,7 +289,7 @@ WX_DECLARE_EXPORTED_LIST(wxDataObjectSimple, wxSimpleDataObjectList);
 class WXDLLIMPEXP_CORE wxDataObjectComposite : public wxDataObject
 {
 public:
-    wxDataObjectComposite();
+    wxDataObjectComposite() = default;
     ~wxDataObjectComposite() override;
 
     wxDataObjectComposite(const wxDataObjectComposite&) = delete;

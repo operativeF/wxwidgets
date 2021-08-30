@@ -70,7 +70,7 @@ public:
 
     wxRegionIterator& operator=(const wxRegionIterator& ri);
 
-    ~wxRegionIterator() override;
+    ~wxRegionIterator() = default;
 
     void Reset() { m_current = 0; }
     void Reset(const wxRegion& region);

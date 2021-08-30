@@ -226,10 +226,6 @@ void wxGridCellEditorEvtHandler::OnChar(wxKeyEvent& event)
 // wxGridCellEditor
 // ----------------------------------------------------------------------------
 
-wxGridCellEditor::wxGridCellEditor()
-{
-}
-
 wxGridCellEditor::~wxGridCellEditor()
 {
     Destroy();

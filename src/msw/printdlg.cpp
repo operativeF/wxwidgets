@@ -888,10 +888,6 @@ bool wxWindowsPrintDialog::ConvertFromNative( wxPrintDialogData &data )
 
 wxIMPLEMENT_CLASS(wxWindowsPageSetupDialog, wxPageSetupDialogBase);
 
-wxWindowsPageSetupDialog::wxWindowsPageSetupDialog()
-{
-}
-
 wxWindowsPageSetupDialog::wxWindowsPageSetupDialog(wxWindow *p, wxPageSetupDialogData *data)
 {
     Create(p, data);

@@ -146,10 +146,6 @@ wxBEGIN_EVENT_TABLE(wxRibbonPage, wxRibbonControl)
     EVT_SIZE(wxRibbonPage::OnSize)
 wxEND_EVENT_TABLE()
 
-wxRibbonPage::wxRibbonPage()
-{
-}
-
 wxRibbonPage::wxRibbonPage(wxRibbonBar* parent,
                    wxWindowID id,
                    const wxString& label,

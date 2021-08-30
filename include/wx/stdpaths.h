@@ -175,7 +175,7 @@ public:
                        ConfigFileConv conv = ConfigFileConv_Ext) const = 0;
 
     // virtual dtor for the base class
-    virtual ~wxStandardPathsBase();
+    virtual ~wxStandardPathsBase() = default;
 
     // Information used by AppendAppInfo
     void UseAppInfo(int info)

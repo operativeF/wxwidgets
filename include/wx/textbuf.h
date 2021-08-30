@@ -173,7 +173,7 @@ public:
                const wxMBConv& conv = wxConvAuto());
 
     // dtor
-    virtual ~wxTextBuffer();
+    virtual ~wxTextBuffer() = default;
 
 protected:
     // default ctor, use Open(string)

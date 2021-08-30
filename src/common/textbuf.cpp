@@ -117,11 +117,6 @@ wxTextBuffer::wxTextBuffer(const wxString& strBufferName)
 {
 }
 
-wxTextBuffer::~wxTextBuffer()
-{
-    // required here for Darwin
-}
-
 // ----------------------------------------------------------------------------
 // buffer operations
 // ----------------------------------------------------------------------------

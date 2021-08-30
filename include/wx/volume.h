@@ -64,7 +64,7 @@ public:
 
     // create the volume object with this name (should be one of those returned
     // by GetVolumes()).
-    wxFSVolumeBase();
+    wxFSVolumeBase() = default;
     wxFSVolumeBase(const wxString& name);
     [[maybe_unused]] bool Create(const wxString& name);
 

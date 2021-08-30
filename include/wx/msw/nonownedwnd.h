@@ -19,7 +19,7 @@ class wxNonOwnedWindowShapeImpl;
 class WXDLLIMPEXP_CORE wxNonOwnedWindow : public wxNonOwnedWindowBase
 {
 public:
-    wxNonOwnedWindow();
+    wxNonOwnedWindow() = default;
     ~wxNonOwnedWindow() override;
 
     wxNonOwnedWindow(const wxNonOwnedWindow&) = delete;

@@ -104,11 +104,6 @@ bool wxAppBase::Initialize(int& argcOrig, wxChar **argvOrig)
 // cleanup
 // ----------------------------------------------------------------------------
 
-wxAppBase::~wxAppBase()
-{
-    // this destructor is required for Darwin
-}
-
 void wxAppBase::DeleteAllTLWs()
 {
     // TLWs remove themselves from wxTopLevelWindows when destroyed, so iterate

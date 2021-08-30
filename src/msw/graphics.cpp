@@ -571,10 +571,7 @@ public:
 class wxGDIPlusRenderer : public wxGraphicsRenderer
 {
 public :
-    wxGDIPlusRenderer()
-    {
-    }
-
+    wxGDIPlusRenderer() = default;
     ~wxGDIPlusRenderer() override
     {
         if ( m_loaded == 1 )

@@ -408,7 +408,7 @@ public:
     virtual wxRendererVersion GetVersion() const = 0;
 
     // virtual dtor for any base class
-    virtual ~wxRendererNative();
+    virtual ~wxRendererNative() = default;
 };
 
 // ----------------------------------------------------------------------------

@@ -25,11 +25,6 @@ wxIMPLEMENT_ABSTRACT_CLASS(wxControlWithItems, wxControl);
 // wxItemContainerImmutable implementation
 // ============================================================================
 
-wxItemContainerImmutable::~wxItemContainerImmutable()
-{
-    // this destructor is required for Darwin
-}
-
 // ----------------------------------------------------------------------------
 // selection
 // ----------------------------------------------------------------------------
@@ -72,11 +67,6 @@ std::vector<std::string> wxItemContainerImmutable::GetStrings() const
 // ============================================================================
 // wxItemContainer implementation
 // ============================================================================
-
-wxItemContainer::~wxItemContainer()
-{
-    // this destructor is required for Darwin
-}
 
 // ----------------------------------------------------------------------------
 // deleting items

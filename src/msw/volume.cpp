@@ -463,10 +463,6 @@ void wxFSVolumeBase::CancelSearch()
     ::InterlockedExchange(&s_cancelSearch, TRUE);
 } // CancelSearch
 
-wxFSVolumeBase::wxFSVolumeBase()
-{
-} // wxVolume
-
 wxFSVolumeBase::wxFSVolumeBase(const wxString& name)
 {
     Create(name);

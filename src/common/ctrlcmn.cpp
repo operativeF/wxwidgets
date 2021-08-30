@@ -32,11 +32,6 @@
 // implementation
 // ============================================================================
 
-wxControlBase::~wxControlBase()
-{
-    // this destructor is required for Darwin
-}
-
 bool wxControlBase::Create(wxWindow *parent,
                            wxWindowID id,
                            const wxPoint &pos,
@@ -622,11 +617,6 @@ std::string wxControlBase::Ellipsize(std::string_view label, const wxDC& dc,
 // ----------------------------------------------------------------------------
 
 #if wxUSE_STATBMP
-
-wxStaticBitmapBase::~wxStaticBitmapBase()
-{
-    // this destructor is required for Darwin
-}
 
 wxSize wxStaticBitmapBase::DoGetBestSize() const
 {

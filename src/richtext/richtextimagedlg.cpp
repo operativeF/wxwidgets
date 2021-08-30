@@ -54,14 +54,8 @@ wxEND_EVENT_TABLE()
  * wxRichTextObjectPropertiesDialog constructors
  */
 
-wxRichTextObjectPropertiesDialog::wxRichTextObjectPropertiesDialog()
-{
-    Init();
-}
-
 wxRichTextObjectPropertiesDialog::wxRichTextObjectPropertiesDialog( wxRichTextObject* obj, wxWindow* parent, wxWindowID id, const std::string& caption, const wxPoint& pos, const wxSize& size, long style )
 {
-    Init();
     Create(obj, parent, id, caption, pos, size, style);
 }
 
@@ -82,28 +76,9 @@ bool wxRichTextObjectPropertiesDialog::Create( wxRichTextObject* obj, wxWindow* 
     return true;
 }
 
-
-/*!
- * wxRichTextObjectPropertiesDialog destructor
- */
-
-wxRichTextObjectPropertiesDialog::~wxRichTextObjectPropertiesDialog()
-{
-////@begin wxRichTextObjectPropertiesDialog destruction
-////@end wxRichTextObjectPropertiesDialog destruction
-}
-
-
 /*!
  * Member initialisation
  */
-
-void wxRichTextObjectPropertiesDialog::Init()
-{
-////@begin wxRichTextObjectPropertiesDialog member initialisation
-////@end wxRichTextObjectPropertiesDialog member initialisation
-}
-
 
 /*!
  * Control creation for wxRichTextImageDlg

@@ -305,10 +305,6 @@ WXHRGN wxRegion::GetHRGN() const
 // wxRegionIterator ctors/dtor
 // ----------------------------------------------------------------------------
 
-wxRegionIterator::~wxRegionIterator()
-{
-}
-
 // Initialize iterator for region
 wxRegionIterator::wxRegionIterator(const wxRegion& region)
 {

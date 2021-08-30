@@ -35,7 +35,7 @@ class WXDLLIMPEXP_CORE wxListBoxBase : public wxControlWithItems
 {
 public:
     wxListBoxBase() = default;
-    ~wxListBoxBase() override;
+    ~wxListBoxBase() = default;
 
     wxListBoxBase(const wxListBoxBase&) = delete;
     wxListBoxBase& operator=(const wxListBoxBase&) = delete;

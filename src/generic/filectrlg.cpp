@@ -356,11 +356,6 @@ wxBEGIN_EVENT_TABLE(wxFileListCtrl,wxListCtrl)
     EVT_SIZE (wxFileListCtrl::OnSize)
 wxEND_EVENT_TABLE()
 
-
-wxFileListCtrl::wxFileListCtrl()
-{
-}
-
 wxFileListCtrl::wxFileListCtrl(wxWindow *win,
                        wxWindowID id,
                        const wxString& wild,

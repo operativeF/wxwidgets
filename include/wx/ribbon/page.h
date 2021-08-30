@@ -25,7 +25,7 @@ class wxRibbonPageScrollButton;
 class WXDLLIMPEXP_RIBBON wxRibbonPage : public wxRibbonControl
 {
 public:
-    wxRibbonPage();
+    wxRibbonPage() = default;
 
     wxRibbonPage(wxRibbonBar* parent,
                  wxWindowID id = wxID_ANY,

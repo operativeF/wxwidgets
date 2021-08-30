@@ -92,9 +92,7 @@ struct wxPNGInfoStruct
 // C++ destructors.
 struct wxPNGImageData
 {
-    wxPNGImageData()
-    {
-    }
+    wxPNGImageData() = default;
 
     bool Alloc(png_uint_32 width, png_uint_32 height, unsigned char* buf)
     {

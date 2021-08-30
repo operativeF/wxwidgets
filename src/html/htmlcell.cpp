@@ -76,10 +76,6 @@ GetSelectedTextBgColour(const wxColour& WXUNUSED(clr))
 
 wxIMPLEMENT_ABSTRACT_CLASS(wxHtmlCell, wxObject);
 
-wxHtmlCell::wxHtmlCell()  
-{
-}
-
 wxHtmlCell::~wxHtmlCell()
 {
     delete m_Link;

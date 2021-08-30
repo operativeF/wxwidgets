@@ -535,7 +535,7 @@ class WXDLLIMPEXP_CORE wxAppBase : public wxAppConsole
 {
 public:
     wxAppBase();
-    ~wxAppBase() override;
+    ~wxAppBase() = default;
 
     wxAppBase(const wxAppBase&) = delete;
     wxAppBase& operator=(const wxAppBase&) = delete;

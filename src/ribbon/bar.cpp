@@ -722,10 +722,6 @@ void wxRibbonBar::RecalculateTabSizes()
     }
 }
 
-wxRibbonBar::wxRibbonBar()
-{
-}
-
 wxRibbonBar::wxRibbonBar(wxWindow* parent,
                          wxWindowID id,
                          const wxPoint& pos,

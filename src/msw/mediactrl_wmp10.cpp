@@ -619,8 +619,8 @@ public:
 class WXDLLIMPEXP_MEDIA wxWMP10MediaBackend : public wxMediaBackendCommonBase
 {
 public:
-    wxWMP10MediaBackend();
-    ~wxWMP10MediaBackend() override;
+    wxWMP10MediaBackend() = default;
+    ~wxWMP10MediaBackend();
 
     bool CreateControl(wxControl* ctrl, wxWindow* parent,
                                      wxWindowID id,
@@ -714,13 +714,6 @@ private:
 //---------------------------------------------------------------------------
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxWMP10MediaBackend, wxMediaBackend);
-
-//---------------------------------------------------------------------------
-// wxWMP10MediaBackend Constructor
-//---------------------------------------------------------------------------
-wxWMP10MediaBackend::wxWMP10MediaBackend()
-{
-}
 
 //---------------------------------------------------------------------------
 // wxWMP10MediaBackend Destructor

@@ -344,8 +344,8 @@ bool wxQuickTimeLibrary::Initialize()
 class WXDLLIMPEXP_MEDIA wxQTMediaBackend : public wxMediaBackendCommonBase
 {
 public:
-    wxQTMediaBackend();
-    ~wxQTMediaBackend() override;
+    wxQTMediaBackend() = default;
+    ~wxQTMediaBackend();
 
     bool CreateControl(wxControl* ctrl, wxWindow* parent,
                                      wxWindowID id,
@@ -565,15 +565,6 @@ LRESULT CALLBACK wxQTMediaBackend::QTWndProc(HWND hWnd, UINT nMsg,
     pThis->m_lib.MCIsPlayerEvent(pThis->m_pMC, &theEvent);
 
     return pThis->m_ctrl->MSWWindowProc(nMsg, wParam, lParam);
-}
-
-//---------------------------------------------------------------------------
-// wxQTMediaBackend Destructor
-//
-// Sets m_timer to NULL signifying we havn't loaded anything yet
-//---------------------------------------------------------------------------
-wxQTMediaBackend::wxQTMediaBackend() 
-{
 }
 
 //---------------------------------------------------------------------------

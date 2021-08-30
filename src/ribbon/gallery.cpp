@@ -36,10 +36,6 @@ wxIMPLEMENT_CLASS(wxRibbonGallery, wxRibbonControl);
 class wxRibbonGalleryItem
 {
 public:
-    wxRibbonGalleryItem()
-    {
-    }
-
     void SetId(int id) {m_id = id;}
     void SetBitmap(const wxBitmap& bitmap) {m_bitmap = bitmap;}
     const wxBitmap& GetBitmap() const {return m_bitmap;}

@@ -34,9 +34,7 @@ namespace
 class LocaleId
 {
 public:
-    LocaleId()
-    {
-    }
+    LocaleId() = default;
 
     ~LocaleId()
     {

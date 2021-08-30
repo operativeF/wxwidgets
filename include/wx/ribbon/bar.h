@@ -125,7 +125,7 @@ WX_DECLARE_USER_EXPORTED_OBJARRAY(wxRibbonPageTabInfo, wxRibbonPageTabInfoArray,
 class WXDLLIMPEXP_RIBBON wxRibbonBar : public wxRibbonControl
 {
 public:
-    wxRibbonBar();
+    wxRibbonBar() = default;
 
     wxRibbonBar(wxWindow* parent,
                   wxWindowID id = wxID_ANY,

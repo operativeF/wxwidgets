@@ -130,10 +130,6 @@ bool wxNonOwnedWindow::DoSetPathShape(const wxGraphicsPath& path)
 
 #endif // wxUSE_GRAPHICS_CONTEXT
 
-wxNonOwnedWindow::wxNonOwnedWindow()
-{
-}
-
 wxNonOwnedWindow::~wxNonOwnedWindow()
 {
 #if wxUSE_GRAPHICS_CONTEXT

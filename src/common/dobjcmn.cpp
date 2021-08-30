@@ -77,10 +77,6 @@ bool wxDataObjectBase::IsSupported(const wxDataFormat& format,
 // wxDataObjectComposite
 // ----------------------------------------------------------------------------
 
-wxDataObjectComposite::wxDataObjectComposite()
-{
-}
-
 wxDataObjectComposite::~wxDataObjectComposite()
 {
     WX_CLEAR_LIST( wxSimpleDataObjectList, m_dataObjects );

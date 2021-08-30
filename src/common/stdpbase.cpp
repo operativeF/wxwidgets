@@ -89,11 +89,6 @@ wxStandardPathsBase::wxStandardPathsBase()
     SetFileLayout(FileLayout_Classic);
 }
 
-wxStandardPathsBase::~wxStandardPathsBase()
-{
-    // nothing to do here
-}
-
 wxString wxStandardPathsBase::GetLocalDataDir() const
 {
     return GetDataDir();

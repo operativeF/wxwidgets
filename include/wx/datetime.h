@@ -1565,7 +1565,7 @@ public:
     static void AddAuthority(wxDateTimeHolidayAuthority *auth);
 
     // the base class must have a virtual dtor
-    virtual ~wxDateTimeHolidayAuthority();
+    virtual ~wxDateTimeHolidayAuthority() = default;
 
 protected:
     // this function is called to determine whether a given day is a holiday

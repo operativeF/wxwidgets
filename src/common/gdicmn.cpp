@@ -257,12 +257,8 @@ constexpr wxRealPoint::wxRealPoint(const wxPoint& pt)
 // ============================================================================
 
 // ----------------------------------------------------------------------------
-// wxColourDatabase ctor/dtor
+// wxColourDatabase dtor
 // ----------------------------------------------------------------------------
-
-wxColourDatabase::wxColourDatabase ()
-{
-}
 
 wxColourDatabase::~wxColourDatabase ()
 {

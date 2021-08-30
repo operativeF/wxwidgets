@@ -35,7 +35,7 @@ class WXDLLIMPEXP_CORE wxChoiceBase : public wxControlWithItems
 {
 public:
     wxChoiceBase() = default;
-    ~wxChoiceBase() override;
+    ~wxChoiceBase() = default;
 
     wxChoiceBase(const wxChoiceBase&) = delete;
 	wxChoiceBase& operator=(const wxChoiceBase&) = delete;

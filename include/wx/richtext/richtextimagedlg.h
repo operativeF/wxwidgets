@@ -50,17 +50,14 @@ class WXDLLIMPEXP_RICHTEXT wxRichTextObjectPropertiesDialog: public wxRichTextFo
 
 public:
     /// Constructors
-    wxRichTextObjectPropertiesDialog();
+    wxRichTextObjectPropertiesDialog() = default;
     wxRichTextObjectPropertiesDialog( wxRichTextObject* obj, wxWindow* parent, wxWindowID id = SYMBOL_WXRICHTEXTOBJECTPROPERTIESDIALOG_IDNAME, const std::string& caption = SYMBOL_WXRICHTEXTOBJECTPROPERTIESDIALOG_TITLE, const wxPoint& pos = SYMBOL_WXRICHTEXTOBJECTPROPERTIESDIALOG_POSITION, const wxSize& size = SYMBOL_WXRICHTEXTOBJECTPROPERTIESDIALOG_SIZE, long style = SYMBOL_WXRICHTEXTOBJECTPROPERTIESDIALOG_STYLE );
 
     /// Creation
     bool Create( wxRichTextObject* obj, wxWindow* parent, wxWindowID id = SYMBOL_WXRICHTEXTOBJECTPROPERTIESDIALOG_IDNAME, const std::string& caption = SYMBOL_WXRICHTEXTOBJECTPROPERTIESDIALOG_TITLE, const wxPoint& pos = SYMBOL_WXRICHTEXTOBJECTPROPERTIESDIALOG_POSITION, const wxSize& size = SYMBOL_WXRICHTEXTOBJECTPROPERTIESDIALOG_SIZE, long style = SYMBOL_WXRICHTEXTOBJECTPROPERTIESDIALOG_STYLE );
 
     /// Destructor
-    ~wxRichTextObjectPropertiesDialog() override;
-
-    /// Initialises member variables
-    void Init();
+    ~wxRichTextObjectPropertiesDialog() = default;
 
     /// Creates the controls and sizers
     void CreateControls();

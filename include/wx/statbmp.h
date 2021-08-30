@@ -34,7 +34,7 @@ public:
     };
 
     wxStaticBitmapBase() = default;
-    ~wxStaticBitmapBase() override;
+    ~wxStaticBitmapBase() = default;
 
     wxStaticBitmapBase(const wxStaticBitmapBase&) = delete;
     wxStaticBitmapBase& operator=(const wxStaticBitmapBase&) = delete;

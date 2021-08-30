@@ -352,7 +352,7 @@ public:
     */
 
     // creator function
-    ~wxFontBase() override;
+    ~wxFontBase() = default;
 
 
     // from the font components

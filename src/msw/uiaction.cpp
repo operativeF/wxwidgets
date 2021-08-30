@@ -131,10 +131,4 @@ wxUIActionSimulator::wxUIActionSimulator()
 {
 }
 
-wxUIActionSimulator::~wxUIActionSimulator()
-{
-    // We can use a static wxUIActionSimulatorMSWImpl object because it's
-    // stateless, so no need to delete it.
-}
-
 #endif // wxUSE_UIACTIONSIMULATOR

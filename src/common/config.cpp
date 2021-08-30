@@ -66,11 +66,6 @@ wxConfigBase::wxConfigBase(const std::string& appName,
 {
 }
 
-wxConfigBase::~wxConfigBase()
-{
-    // required here for Darwin
-}
-
 wxConfigBase *wxConfigBase::Set(wxConfigBase *pConfig)
 {
   wxConfigBase *pOld = ms_pConfig;

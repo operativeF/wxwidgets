@@ -93,7 +93,7 @@ protected:
 class WXDLLIMPEXP_BASE wxInputStream : public wxStreamBase
 {
 public:
-    wxInputStream();
+    wxInputStream() = default;
     ~wxInputStream() override;
 
     wxInputStream(const wxInputStream&) = delete;

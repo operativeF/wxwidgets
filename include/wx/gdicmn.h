@@ -898,7 +898,7 @@ WX_DECLARE_STRING_HASH_MAP(wxColour*, wxStringToColourHashMap);
 class WXDLLIMPEXP_CORE wxColourDatabase
 {
 public:
-    wxColourDatabase();
+    wxColourDatabase() = default;
     ~wxColourDatabase();
 
     // find colour by name or name for the given colour

@@ -35,7 +35,7 @@ class WXDLLIMPEXP_CORE wxPopupWindowBase : public wxNonOwnedWindow
 {
 public:
     wxPopupWindowBase() = default;
-    ~wxPopupWindowBase() override;
+    ~wxPopupWindowBase() = default;
 
     wxPopupWindowBase(const wxPopupWindowBase&) = delete;
     wxPopupWindowBase& operator=(const wxPopupWindowBase&) = delete;

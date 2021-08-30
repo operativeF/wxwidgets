@@ -189,9 +189,7 @@ wxGenericPreferencesEditorImplBase* NewGenericImpl()
 class wxModalPreferencesEditorImpl : public wxGenericPreferencesEditorImplBase
 {
 public:
-    wxModalPreferencesEditorImpl()
-    {
-    }
+    wxModalPreferencesEditorImpl() = default;
 
     wxModalPreferencesEditorImpl(const wxModalPreferencesEditorImpl&) = delete;
 	wxModalPreferencesEditorImpl& operator=(const wxModalPreferencesEditorImpl&) = delete;

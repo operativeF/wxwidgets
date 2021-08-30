@@ -167,7 +167,7 @@ class WXDLLIMPEXP_PROPGRID wxPGCellData : public wxObjectRefData
 {
     friend class wxPGCell;
 public:
-    wxPGCellData();
+    wxPGCellData() = default;
 
     void SetText( const wxString& text )
     {

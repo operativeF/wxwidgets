@@ -99,7 +99,7 @@ private:
 class WXDLLIMPEXP_CORE wxWindowsPageSetupDialog: public wxPageSetupDialogBase
 {
 public:
-    wxWindowsPageSetupDialog();
+    wxWindowsPageSetupDialog() = default;
     wxWindowsPageSetupDialog(wxWindow *parent, wxPageSetupDialogData *data = nullptr);
     ~wxWindowsPageSetupDialog() override;
 

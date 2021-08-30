@@ -192,7 +192,7 @@ public:
     wxTreeEvent(wxEventType commandType,
                 wxTreeCtrlBase *tree,
                 const wxTreeItemId &item = wxTreeItemId());
-    wxTreeEvent(const wxTreeEvent& event);
+    wxTreeEvent(const wxTreeEvent& event) = default;
 
     wxEvent *Clone() const override { return new wxTreeEvent(*this); }
 
