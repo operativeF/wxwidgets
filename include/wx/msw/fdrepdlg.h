@@ -55,7 +55,7 @@ protected:
 
     std::string                m_title;
 
-    wxFindReplaceDialogImpl *m_impl {nullptr};
+    wxFindReplaceDialogImpl* m_impl{nullptr};
 
     wxDECLARE_DYNAMIC_CLASS(wxFindReplaceDialog);
 };

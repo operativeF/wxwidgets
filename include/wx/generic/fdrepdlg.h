@@ -15,6 +15,8 @@ class WXDLLIMPEXP_FWD_CORE wxCheckBox;
 class WXDLLIMPEXP_FWD_CORE wxRadioBox;
 class WXDLLIMPEXP_FWD_CORE wxTextCtrl;
 
+#include <tuple>
+
 // ----------------------------------------------------------------------------
 // wxGenericFindReplaceDialog: dialog for searching / replacing text
 // ----------------------------------------------------------------------------
@@ -22,16 +24,14 @@ class WXDLLIMPEXP_FWD_CORE wxTextCtrl;
 class WXDLLIMPEXP_CORE wxGenericFindReplaceDialog : public wxFindReplaceDialogBase
 {
 public:
-    wxGenericFindReplaceDialog() { Init(); }
+    wxGenericFindReplaceDialog() = default;
 
     wxGenericFindReplaceDialog(wxWindow *parent,
                                wxFindReplaceData *data,
                                const std::string& title,
                                int style = 0)
     {
-        Init();
-
-        (void)Create(parent, data, title, style);
+        std::ignore = Create(parent, data, title, style);
     }
 
     bool Create(wxWindow *parent,
@@ -40,8 +40,6 @@ public:
                 int style = 0);
 
 protected:
-    void Init();
-
     void SendEvent(const wxEventType& evtType);
 
     void OnFind(wxCommandEvent& event);
@@ -53,13 +51,13 @@ protected:
 
     void OnCloseWindow(wxCloseEvent& event);
 
-    wxCheckBox *m_chkCase,
-               *m_chkWord;
+    wxCheckBox *m_chkCase{nullptr};
+    wxCheckBox *m_chkWord{nullptr};
 
-    wxRadioBox *m_radioDir;
+    wxRadioBox *m_radioDir{nullptr};
 
-    wxTextCtrl *m_textFind,
-               *m_textRepl;
+    wxTextCtrl *m_textFind{nullptr};
+    wxTextCtrl *m_textRepl{nullptr};
 
 private:
     wxDECLARE_DYNAMIC_CLASS(wxGenericFindReplaceDialog);

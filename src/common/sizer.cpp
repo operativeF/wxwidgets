@@ -173,7 +173,7 @@ void wxSizerItem::DoSetWindow(wxWindow *window)
 {
     wxCHECK_RET( window, wxT("NULL window in wxSizerItem::SetWindow()") );
 
-    m_kind = Item_Window;
+    m_kind = ItemKind::Window;
     m_window = window;
 
     // window doesn't become smaller than its initial size, whatever happens
@@ -204,7 +204,7 @@ wxSizerItem::wxSizerItem(wxWindow *window,
 // sizer item
 void wxSizerItem::DoSetSizer(wxSizer *sizer)
 {
-    m_kind = Item_Sizer;
+    m_kind = ItemKind::Sizer;
     m_sizer = sizer;
 }
 
@@ -230,7 +230,7 @@ wxSizerItem::wxSizerItem(wxSizer *sizer,
 // spacer item
 void wxSizerItem::DoSetSpacer(const wxSize& size)
 {
-    m_kind = Item_Spacer;
+    m_kind = ItemKind::Spacer;
     m_spacer = new wxSizerSpacer(size);
     m_minSize = size;
     SetRatio(size);
@@ -291,33 +291,33 @@ void wxSizerItem::Free()
 {
     switch ( m_kind )
     {
-        case Item_None:
+        case ItemKind::None:
             break;
 
-        case Item_Window:
+        case ItemKind::Window:
             m_window->SetContainingSizer(nullptr);
             break;
 
-        case Item_Sizer:
+        case ItemKind::Sizer:
             delete m_sizer;
             break;
 
-        case Item_Spacer:
+        case ItemKind::Spacer:
             delete m_spacer;
             break;
 
-        case Item_Max:
+        case ItemKind::Max:
         default:
             wxFAIL_MSG( wxT("unexpected wxSizerItem::m_kind") );
     }
 
-    m_kind = Item_None;
+    m_kind = ItemKind::None;
 }
 
 wxSize wxSizerItem::GetSpacer() const
 {
     wxSize size;
-    if ( m_kind == Item_Spacer )
+    if ( m_kind == ItemKind::Spacer )
         size = m_spacer->GetSize();
 
     return size;
@@ -329,22 +329,22 @@ wxSize wxSizerItem::GetSize() const
     wxSize ret;
     switch ( m_kind )
     {
-        case Item_None:
+        case ItemKind::None:
             break;
 
-        case Item_Window:
+        case ItemKind::Window:
             ret = m_window->GetSize();
             break;
 
-        case Item_Sizer:
+        case ItemKind::Sizer:
             ret = m_sizer->GetSize();
             break;
 
-        case Item_Spacer:
+        case ItemKind::Spacer:
             ret = m_spacer->GetSize();
             break;
 
-        case Item_Max:
+        case ItemKind::Max:
         default:
             wxFAIL_MSG( wxT("unexpected wxSizerItem::m_kind") );
     }
@@ -523,11 +523,11 @@ void wxSizerItem::SetDimension( const wxPoint& pos_, const wxSize& size_ )
 
     switch ( m_kind )
     {
-        case Item_None:
+        case ItemKind::None:
             wxFAIL_MSG( wxT("can't set size of uninitialized sizer item") );
             break;
 
-        case Item_Window:
+        case ItemKind::Window:
         {
             // Use wxSIZE_FORCE_EVENT here since a sizer item might
             // have changed alignment or some other property which would
@@ -543,15 +543,15 @@ void wxSizerItem::SetDimension( const wxPoint& pos_, const wxSize& size_ )
 #endif
             break;
         }
-        case Item_Sizer:
+        case ItemKind::Sizer:
             m_sizer->SetDimension(pos, size);
             break;
 
-        case Item_Spacer:
+        case ItemKind::Spacer:
             m_spacer->SetSize(size);
             break;
 
-        case Item_Max:
+        case ItemKind::Max:
         default:
             wxFAIL_MSG( wxT("unexpected wxSizerItem::m_kind") );
     }
@@ -561,11 +561,11 @@ void wxSizerItem::DeleteWindows()
 {
     switch ( m_kind )
     {
-        case Item_None:
-        case Item_Spacer:
+        case ItemKind::None:
+        case ItemKind::Spacer:
             break;
 
-        case Item_Window:
+        case ItemKind::Window:
             //We are deleting the window from this sizer - normally
             //the window destroys the sizer associated with it,
             //which might destroy this, which we don't want
@@ -573,14 +573,14 @@ void wxSizerItem::DeleteWindows()
             m_window->Destroy();
             //Putting this after the switch will result in a spacer
             //not being deleted properly on destruction
-            m_kind = Item_None;
+            m_kind = ItemKind::None;
             break;
 
-        case Item_Sizer:
+        case ItemKind::Sizer:
             m_sizer->DeleteWindows();
             break;
 
-        case Item_Max:
+        case ItemKind::Max:
         default:
             wxFAIL_MSG( wxT("unexpected wxSizerItem::m_kind") );
     }
@@ -591,23 +591,23 @@ void wxSizerItem::Show( bool show )
 {
     switch ( m_kind )
     {
-        case Item_None:
+        case ItemKind::None:
             wxFAIL_MSG( wxT("can't show uninitialized sizer item") );
             break;
 
-        case Item_Window:
+        case ItemKind::Window:
             m_window->Show(show);
             break;
 
-        case Item_Sizer:
+        case ItemKind::Sizer:
             m_sizer->Show(show);
             break;
 
-        case Item_Spacer:
+        case ItemKind::Spacer:
             m_spacer->Show(show);
             break;
 
-        case Item_Max:
+        case ItemKind::Max:
         default:
             wxFAIL_MSG( wxT("unexpected wxSizerItem::m_kind") );
     }
@@ -620,24 +620,24 @@ bool wxSizerItem::IsShown() const
 
     switch ( m_kind )
     {
-        case Item_None:
+        case ItemKind::None:
             // we may be called from CalcMin(), just return false so that we're
             // not used
             break;
 
-        case Item_Window:
+        case ItemKind::Window:
             return m_window->IsShown();
 
-        case Item_Sizer:
+        case ItemKind::Sizer:
             // arbitrarily decide that if at least one of our elements is
             // shown, so are we (this arbitrariness is the reason for
             // deprecating this function)
             return m_sizer->AreAnyItemsShown();
 
-        case Item_Spacer:
+        case ItemKind::Spacer:
             return m_spacer->IsShown();
 
-        case Item_Max:
+        case ItemKind::Max:
         default:
             wxFAIL_MSG( wxT("unexpected wxSizerItem::m_kind") );
     }

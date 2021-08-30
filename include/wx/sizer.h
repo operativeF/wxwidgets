@@ -362,7 +362,7 @@ public:
 
     // Enable deleting the SizerItem without resetting the sizer in the
     // contained window.
-    void DetachWindow() { m_window = nullptr; m_kind = Item_None; }
+    void DetachWindow() { m_window = nullptr; m_kind = ItemKind::None; }
 
     virtual wxSize GetSize() const;
     virtual wxSize CalcMin();
@@ -405,9 +405,9 @@ public:
     void SetId(int id) { m_id = id; }
     int GetId() const { return m_id; }
 
-    bool IsWindow() const { return m_kind == Item_Window; }
-    bool IsSizer() const { return m_kind == Item_Sizer; }
-    bool IsSpacer() const { return m_kind == Item_Spacer; }
+    bool IsWindow() const { return m_kind == ItemKind::Window; }
+    bool IsSizer() const { return m_kind == ItemKind::Sizer; }
+    bool IsSpacer() const { return m_kind == ItemKind::Spacer; }
 
     void SetProportion( int proportion )
         { m_proportion = proportion; }
@@ -423,9 +423,9 @@ public:
         { return m_border; }
 
     wxWindow *GetWindow() const
-        { return m_kind == Item_Window ? m_window : nullptr; }
+        { return m_kind == ItemKind::Window ? m_window : nullptr; }
     wxSizer *GetSizer() const
-        { return m_kind == Item_Sizer ? m_sizer : nullptr; }
+        { return m_kind == ItemKind::Sizer ? m_sizer : nullptr; }
     wxSize GetSpacer() const;
 
     // This function behaves obviously for the windows and spacers but for the
@@ -488,14 +488,16 @@ protected:
     wxSize AddBorderToSize(const wxSize& size) const;
 
     // discriminated union: depending on m_kind one of the fields is valid
-    enum
+    enum ItemKind
     {
-        Item_None,
-        Item_Window,
-        Item_Sizer,
-        Item_Spacer,
-        Item_Max
-    } m_kind{Item_None};
+        None,
+        Window,
+        Sizer,
+        Spacer,
+        Max
+    };
+
+    ItemKind m_kind{ItemKind::None};
 
     union
     {
