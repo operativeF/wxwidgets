@@ -17,14 +17,13 @@
 
 struct WXDLLIMPEXP_CORE wxVideoMode
 {
-    wxVideoMode(int width = 0, int height = 0, int depth = 0, int freq = 0)
+    wxVideoMode() = default;
+    wxVideoMode(int width, int height, int depth, int freq)
+        : w{width},
+          h{height},
+          bpp{depth},
+          refresh{freq}
     {
-        w = width;
-        h = height;
-
-        bpp = depth;
-
-        refresh = freq;
     }
 
     // default copy ctor and assignment operator are ok
@@ -60,13 +59,14 @@ struct WXDLLIMPEXP_CORE wxVideoMode
 
 
     // the screen size in pixels (e.g. 640*480), 0 means unspecified
-    int w, h;
+    int w{0};
+    int h{0};
 
     // bits per pixel (e.g. 32), 1 is monochrome and 0 means unspecified/known
-    int bpp;
+    int bpp{0};
 
     // refresh frequency in Hz, 0 means unspecified/unknown
-    int refresh;
+    int refresh{0};
 };
 
 #endif // _WX_VMODE_H_

@@ -24,8 +24,6 @@
 #include "wx/control.h"
 
 class WXDLLIMPEXP_FWD_CORE wxToolBarBase;
-class WXDLLIMPEXP_FWD_CORE wxToolBarToolBase;
-class WXDLLIMPEXP_FWD_CORE wxImage;
 
 // ----------------------------------------------------------------------------
 // constants

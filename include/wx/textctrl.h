@@ -276,7 +276,7 @@ enum wxTextAttrUnderlineType
 class WXDLLIMPEXP_CORE wxTextAttr
 {
 public:
-    wxTextAttr() : m_colUnderline(wxNullColour) {}
+    wxTextAttr() = default;
     wxTextAttr(const wxTextAttr& attr) : m_colUnderline(wxNullColour) { Copy(attr); }
     wxTextAttr(const wxColour& colText,
                const wxColour& colBack = wxNullColour,
@@ -511,7 +511,7 @@ private:
     wxFontWeight        m_fontWeight{wxFONTWEIGHT_NORMAL};
     wxFontFamily        m_fontFamily{wxFONTFAMILY_DEFAULT};
     wxTextAttrUnderlineType m_fontUnderlineType{wxTEXT_ATTR_UNDERLINE_NONE};
-    wxColour            m_colUnderline;
+    wxColour            m_colUnderline{wxNullColour};
     bool                m_fontStrikethrough{false};
     wxString            m_fontFaceName;
 

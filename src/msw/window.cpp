@@ -6906,7 +6906,7 @@ WXWORD WXToVK(int wxk, bool *isExtended)
 
         default:
             // check to see if its one of the OEM key codes.
-            BYTE vks = LOBYTE(VkKeyScan(wxk));
+            BYTE vks = LOBYTE(::VkKeyScanW(wxk));
             if ( vks != 0xff )
             {
                 vk = vks;
@@ -7124,14 +7124,14 @@ wxKeyboardHook(int nCode, WXWPARAM wParam, WXLPARAM lParam)
         }
     }
 
-    return (int)CallNextHookEx(wxTheKeyboardHook, nCode, wParam, lParam);
+    return (int)::CallNextHookEx(wxTheKeyboardHook, nCode, wParam, lParam);
 }
 
 void wxSetKeyboardHook(bool doIt)
 {
     if ( doIt )
     {
-        wxTheKeyboardHook = ::SetWindowsHookEx
+        wxTheKeyboardHook = ::SetWindowsHookExW
                               (
                                 WH_KEYBOARD,
                                 wxKeyboardHook,

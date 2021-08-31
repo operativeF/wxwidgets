@@ -48,9 +48,18 @@ WX_DEFINE_USER_EXPORTED_ARRAY_INT(wxTextFileType,
 
 class WXDLLIMPEXP_BASE wxTextBuffer
 {
+protected:
+    // default ctor, use Open(string)
+    wxTextBuffer() = default;
+
+    // ctor from filename
+    wxTextBuffer(const wxString& strBufferName);
+
 public:
     wxTextBuffer(const wxTextBuffer&) = delete;
     wxTextBuffer& operator=(const wxTextBuffer&) = delete;
+
+    virtual ~wxTextBuffer() = default;
 
     // constants and static functions
     // default type for current platform (determined at compile time)
@@ -172,16 +181,7 @@ public:
     bool Write(wxTextFileType typeNew = wxTextFileType_None,
                const wxMBConv& conv = wxConvAuto());
 
-    // dtor
-    virtual ~wxTextBuffer() = default;
-
 protected:
-    // default ctor, use Open(string)
-    wxTextBuffer() { m_nCurLine = 0; m_isOpened = false; }
-
-    // ctor from filename
-    wxTextBuffer(const wxString& strBufferName);
-
     enum wxTextBufferOpenMode { ReadAccess, WriteAccess };
 
     // Must implement these in derived classes.

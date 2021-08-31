@@ -31,7 +31,7 @@ public:
     // constructors
     wxTextFile() = default;
     wxTextFile(const std::string& strFileName);
-
+    ~wxTextFile() = default;
     wxTextFile(const wxTextFile&) = delete;
     wxTextFile& operator=(const wxTextFile&) = delete;
     wxTextFile(wxTextFile&&) = default;
