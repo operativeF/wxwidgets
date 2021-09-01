@@ -387,10 +387,10 @@ wxRect wxStatusBarGeneric::GetSizeGripRect() const
 
 #ifndef __WXGTK3__
     if (GetLayoutDirection() == wxLayoutDirection::RightToLeft)
-        return wxRect(2, 2, client_size.y - 2, client_size.y - 4);
+        return {2, 2, client_size.y - 2, client_size.y - 4};
 #endif
 
-        return wxRect(client_size.x - client_size.y - 2, 2, client_size.y - 2, client_size.y - 4);
+        return {client_size.x - client_size.y - 2, 2, client_size.y - 2, client_size.y - 4};
 }
 
 // ----------------------------------------------------------------------------

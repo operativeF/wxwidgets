@@ -719,7 +719,7 @@ wxGridCellCoords wxGridSelection::GetExtensionAnchor() const
 wxGridCellCoordsArray wxGridSelection::GetCellSelection() const
 {
     if ( m_selectionMode != wxGrid::wxGridSelectCells )
-        return wxGridCellCoordsArray();
+        return {};
 
     wxGridCellCoordsArray cells;
     const size_t count = m_selection.size();
@@ -740,7 +740,7 @@ wxGridCellCoordsArray wxGridSelection::GetBlockSelectionTopLeft() const
 {
     // return blocks only in wxGridSelectCells selection mode
     if ( m_selectionMode != wxGrid::wxGridSelectCells )
-        return wxGridCellCoordsArray();
+        return {};
 
     wxGridCellCoordsArray coords;
     const size_t count = m_selection.size();
@@ -755,7 +755,7 @@ wxGridCellCoordsArray wxGridSelection::GetBlockSelectionTopLeft() const
 wxGridCellCoordsArray wxGridSelection::GetBlockSelectionBottomRight() const
 {
     if ( m_selectionMode != wxGrid::wxGridSelectCells )
-        return wxGridCellCoordsArray();
+        return {};
 
     wxGridCellCoordsArray coords;
     const size_t count = m_selection.size();

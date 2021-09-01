@@ -1043,11 +1043,9 @@ bool wxTextEntry::DoSetMargins(const wxPoint& margins)
 
 wxPoint wxTextEntry::DoGetMargins() const
 {
-    LRESULT lResult = ::SendMessageW(GetEditHwnd(), EM_GETMARGINS,
-                                    0, 0);
-    int left = LOWORD(lResult);
-    int top = -1;
-    return wxPoint(left, top);
+    LRESULT lResult = ::SendMessageW(GetEditHwnd(), EM_GETMARGINS, 0, 0);
+    
+    return {LOWORD(lResult), -1};
 }
 
 // ----------------------------------------------------------------------------

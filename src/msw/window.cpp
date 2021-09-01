@@ -4698,8 +4698,8 @@ static wxSize GetWindowDPI(HWND hwnd)
 
     if ( s_pfnGetDpiForWindow )
     {
-        const int dpi = gsl::narrow_cast<int>(s_pfnGetDpiForWindow(hwnd));
-        return wxSize(dpi, dpi);
+        const auto dpi = gsl::narrow_cast<int>(s_pfnGetDpiForWindow(hwnd));
+        return {dpi, dpi};
     }
 #endif // wxUSE_DYNLIB_CLASS
 
@@ -7707,7 +7707,7 @@ wxPoint wxGetMousePosition()
     POINT pt;
     wxGetCursorPosMSW(&pt);
 
-    return wxPoint(pt.x, pt.y);
+    return {pt.x, pt.y};
 }
 
 #if wxUSE_HOTKEY

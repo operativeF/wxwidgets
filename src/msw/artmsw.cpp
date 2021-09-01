@@ -133,7 +133,7 @@ MSWGetBitmapFromIconLocation(const TCHAR* path, int index, const wxSize& size)
     if ( !icon.InitFromHICON((WXHICON)hIcon, size.x, size.x) )
         return wxNullBitmap;
 
-    return wxBitmap(icon);
+    return {icon};
 }
 
 wxBitmap
@@ -319,14 +319,14 @@ wxSize wxArtProvider::GetNativeSizeHint(const wxArtClient& client)
     }
     else if ( client == wxART_FRAME_ICON )
     {
-        return wxSize(wxGetSystemMetrics(SM_CXSMICON, win),
-                      wxGetSystemMetrics(SM_CYSMICON, win));
+        return {wxGetSystemMetrics(SM_CXSMICON, win),
+                wxGetSystemMetrics(SM_CYSMICON, win)};
     }
     else if ( client == wxART_CMN_DIALOG ||
               client == wxART_MESSAGE_BOX )
     {
-        return wxSize(wxGetSystemMetrics(SM_CXICON, win),
-                      wxGetSystemMetrics(SM_CYICON, win));
+        return {wxGetSystemMetrics(SM_CXICON, win),
+                wxGetSystemMetrics(SM_CYICON, win)};
     }
     else if (client == wxART_BUTTON)
     {

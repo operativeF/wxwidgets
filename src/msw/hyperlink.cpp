@@ -159,7 +159,7 @@ wxSize wxHyperlinkCtrl::DoGetBestClientSize() const
     SIZE idealSize;
     ::SendMessageW(m_hWnd, LM_GETIDEALSIZE, 0, (LPARAM)&idealSize);
 
-    return wxSize(idealSize.cx, idealSize.cy);
+    return {idealSize.cx, idealSize.cy};
 }
 
 bool wxHyperlinkCtrl::MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result)

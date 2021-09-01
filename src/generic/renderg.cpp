@@ -154,8 +154,7 @@ public:
 
     wxRendererVersion GetVersion() const override
     {
-        return wxRendererVersion(wxRendererVersion::Current_Version,
-                                 wxRendererVersion::Current_Age);
+        return {wxRendererVersion::Current_Version, wxRendererVersion::Current_Age};
     }
 
 
@@ -569,7 +568,7 @@ wxRendererGeneric::GetSplitterParams(const wxWindow *win)
     else // no 3D effect
         border = 0;
 
-    return wxSplitterRenderParams(sashWidth, border, false);
+    return {sashWidth, border, false};
 }
 
 void
@@ -788,7 +787,7 @@ wxRendererGeneric::DrawCollapseButton(wxWindow *win,
 
 wxSize wxRendererGeneric::GetCollapseButtonSize(wxWindow *WXUNUSED(win), wxDC& WXUNUSED(dc))
 {
-    return wxSize(18, 18);
+    return {18, 18};
 }
 
 void

@@ -374,10 +374,10 @@ void wxDCImpl::DoSetClippingRegion(wxCoord x, wxCoord y, wxCoord w, wxCoord h)
 wxRect wxDCImpl::GetLogicalArea() const
 {
     const wxSize size = GetSize();
-    return wxRect(DeviceToLogicalX(0),
-                  DeviceToLogicalY(0),
-                  DeviceToLogicalXRel(size.x),
-                  DeviceToLogicalYRel(size.y));
+    return {DeviceToLogicalX(0),
+            DeviceToLogicalY(0),
+            DeviceToLogicalXRel(size.x),
+            DeviceToLogicalYRel(size.y)};
 }
 
 bool wxDCImpl::DoGetClippingRect(wxRect& rect) const

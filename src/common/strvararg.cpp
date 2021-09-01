@@ -67,7 +67,7 @@ wxString wxArgNormalizedString::GetString() const
             return wxString(reinterpret_cast<const char*>(m_ptr));
         else
     #endif
-        return wxString(static_cast<const wxChar*>(m_ptr));
+        return {static_cast<const wxChar*>(m_ptr)};
 #endif // !wxUSE_UTF8_LOCALE_ONLY
 }
 
@@ -624,9 +624,9 @@ wxString wxFormatString::InputAsString() const
     if ( m_cstr )
         return m_cstr->AsString();
     if ( m_wchar )
-        return wxString(m_wchar);
+        return {m_wchar};
     if ( m_char )
-        return wxString(m_char);
+        return {m_char};
 
     wxFAIL_MSG( "invalid wxFormatString - not initialized?" );
     return {};

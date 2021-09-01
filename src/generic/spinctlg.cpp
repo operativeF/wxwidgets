@@ -277,7 +277,7 @@ wxSize wxSpinCtrlGenericBase::DoGetSizeFromTextSize(int xlen, int ylen) const
 
     // Note that we don't use the button height here, as it can be
     // much greater than that of a text control that we want to resemble.
-    return wxSize(sizeText.x + sizeBtn.x + MARGIN, sizeText.y);
+    return {sizeText.x + sizeBtn.x + MARGIN, sizeText.y};
 }
 
 void wxSpinCtrlGenericBase::DoMoveWindow(int x, int y, int width, int height)

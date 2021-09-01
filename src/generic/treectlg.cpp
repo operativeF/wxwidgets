@@ -1356,7 +1356,7 @@ bool wxGenericTreeCtrl::IsBold(const wxTreeItemId& item) const
 
 wxTreeItemId wxGenericTreeCtrl::GetItemParent(const wxTreeItemId& item) const
 {
-    wxCHECK_MSG( item.IsOk(), wxTreeItemId(), wxT("invalid tree item") );
+    wxCHECK_MSG( item.IsOk(), {}, wxT("invalid tree item") );
 
     return ((wxGenericTreeItem*) item.m_pItem)->GetParent();
 }
@@ -1364,7 +1364,7 @@ wxTreeItemId wxGenericTreeCtrl::GetItemParent(const wxTreeItemId& item) const
 wxTreeItemId wxGenericTreeCtrl::GetFirstChild(const wxTreeItemId& item,
                                               wxTreeItemIdValue& cookie) const
 {
-    wxCHECK_MSG( item.IsOk(), wxTreeItemId(), wxT("invalid tree item") );
+    wxCHECK_MSG( item.IsOk(), {}, wxT("invalid tree item") );
 
     cookie = nullptr;
     return GetNextChild(item, cookie);
@@ -1373,7 +1373,7 @@ wxTreeItemId wxGenericTreeCtrl::GetFirstChild(const wxTreeItemId& item,
 wxTreeItemId wxGenericTreeCtrl::GetNextChild(const wxTreeItemId& item,
                                              wxTreeItemIdValue& cookie) const
 {
-    wxCHECK_MSG( item.IsOk(), wxTreeItemId(), wxT("invalid tree item") );
+    wxCHECK_MSG( item.IsOk(), {}, wxT("invalid tree item") );
 
     wxArrayGenericTreeItems&
         children = ((wxGenericTreeItem*) item.m_pItem)->GetChildren();
@@ -1388,29 +1388,29 @@ wxTreeItemId wxGenericTreeCtrl::GetNextChild(const wxTreeItemId& item,
     else
     {
         // there are no more of them
-        return wxTreeItemId();
+        return {};
     }
 }
 
 wxTreeItemId wxGenericTreeCtrl::GetLastChild(const wxTreeItemId& item) const
 {
-    wxCHECK_MSG( item.IsOk(), wxTreeItemId(), wxT("invalid tree item") );
+    wxCHECK_MSG( item.IsOk(), {}, wxT("invalid tree item") );
 
     wxArrayGenericTreeItems&
         children = ((wxGenericTreeItem*) item.m_pItem)->GetChildren();
-    return children.empty() ? wxTreeItemId() : wxTreeItemId(children.back());
+    return children.empty() ? wxTreeItemId{} : wxTreeItemId(children.back());
 }
 
 wxTreeItemId wxGenericTreeCtrl::GetNextSibling(const wxTreeItemId& item) const
 {
-    wxCHECK_MSG( item.IsOk(), wxTreeItemId(), wxT("invalid tree item") );
+    wxCHECK_MSG( item.IsOk(), {}, wxT("invalid tree item") );
 
     wxGenericTreeItem *i = (wxGenericTreeItem*) item.m_pItem;
     wxGenericTreeItem *parent = i->GetParent();
     if ( parent == nullptr )
     {
         // root item doesn't have any siblings
-        return wxTreeItemId();
+        return {};
     }
 
     wxArrayGenericTreeItems& siblings = parent->GetChildren();
@@ -1419,20 +1419,20 @@ wxTreeItemId wxGenericTreeCtrl::GetNextSibling(const wxTreeItemId& item) const
     wxASSERT( index != siblings.size() ); // I'm not a child of my parent?
 
     size_t n = (size_t)(index + 1);
-    return n == siblings.size() ? wxTreeItemId()
+    return n == siblings.size() ? wxTreeItemId{}
                                     : wxTreeItemId(siblings[n]);
 }
 
 wxTreeItemId wxGenericTreeCtrl::GetPrevSibling(const wxTreeItemId& item) const
 {
-    wxCHECK_MSG( item.IsOk(), wxTreeItemId(), wxT("invalid tree item") );
+    wxCHECK_MSG( item.IsOk(), {}, wxT("invalid tree item") );
 
     wxGenericTreeItem *i = (wxGenericTreeItem*) item.m_pItem;
     wxGenericTreeItem *parent = i->GetParent();
     if ( parent == nullptr )
     {
         // root item doesn't have any siblings
-        return wxTreeItemId();
+        return {};
     }
 
     wxArrayGenericTreeItems& siblings = parent->GetChildren();
@@ -1440,14 +1440,14 @@ wxTreeItemId wxGenericTreeCtrl::GetPrevSibling(const wxTreeItemId& item) const
 
     wxASSERT( index != siblings.size() ); // I'm not a child of my parent?
 
-    return index == 0 ? wxTreeItemId()
+    return index == 0 ? wxTreeItemId{}
                       : wxTreeItemId(siblings[(size_t)(index - 1)]);
 }
 
 // Only for internal use right now, but should probably be public
 wxTreeItemId wxGenericTreeCtrl::GetNext(const wxTreeItemId& item) const
 {
-    wxCHECK_MSG( item.IsOk(), wxTreeItemId(), wxT("invalid tree item") );
+    wxCHECK_MSG( item.IsOk(), {}, wxT("invalid tree item") );
 
     wxGenericTreeItem *i = (wxGenericTreeItem*) item.m_pItem;
 
@@ -1484,12 +1484,12 @@ wxTreeItemId wxGenericTreeCtrl::GetFirstVisibleItem() const
         itemid = GetNext(itemid);
     } while (itemid.IsOk());
 
-    return wxTreeItemId();
+    return {};
 }
 
 wxTreeItemId wxGenericTreeCtrl::GetNextVisible(const wxTreeItemId& item) const
 {
-    wxCHECK_MSG( item.IsOk(), wxTreeItemId(), wxT("invalid tree item") );
+    wxCHECK_MSG( item.IsOk(), {}, wxT("invalid tree item") );
     wxASSERT_MSG( IsVisible(item), wxT("this item itself should be visible") );
 
     wxTreeItemId id = item;
@@ -1501,12 +1501,12 @@ wxTreeItemId wxGenericTreeCtrl::GetNextVisible(const wxTreeItemId& item) const
                 return id;
         }
     }
-    return wxTreeItemId();
+    return {};
 }
 
 wxTreeItemId wxGenericTreeCtrl::GetPrevVisible(const wxTreeItemId& item) const
 {
-    wxCHECK_MSG( item.IsOk(), wxTreeItemId(), wxT("invalid tree item") );
+    wxCHECK_MSG( item.IsOk(), {}, wxT("invalid tree item") );
     wxASSERT_MSG( IsVisible(item), wxT("this item itself should be visible") );
 
     // find out the starting point
@@ -1523,7 +1523,7 @@ wxTreeItemId wxGenericTreeCtrl::GetPrevVisible(const wxTreeItemId& item) const
         if ( !prevItem.IsOk() || prevItem == item )
         {
             // there are no visible items before item
-            return wxTreeItemId();
+            return {};
         }
     }
 
@@ -1646,7 +1646,7 @@ wxTreeItemId wxGenericTreeCtrl::AddRoot(const wxString& text,
                                         int selImage,
                                         wxTreeItemData *data)
 {
-    wxCHECK_MSG( !m_anchor, wxTreeItemId(), "tree can have only one root" );
+    wxCHECK_MSG( !m_anchor, {}, "tree can have only one root" );
 
     m_dirty = true;     // do this first so stuff below doesn't cause flicker
 
@@ -3422,12 +3422,12 @@ wxGenericTreeCtrl::DoTreeHitTest(const wxPoint& point, int& flags) const
     if (point.x > sz.x) flags |= wxTREE_HITTEST_TORIGHT;
     if (point.y < 0) flags |= wxTREE_HITTEST_ABOVE;
     if (point.y > sz.y) flags |= wxTREE_HITTEST_BELOW;
-    if (flags) return wxTreeItemId();
+    if (flags) return {};
 
     if (m_anchor == nullptr)
     {
         flags = wxTREE_HITTEST_NOWHERE;
-        return wxTreeItemId();
+        return {};
     }
 
     wxGenericTreeItem *hit =  m_anchor->HitTest(CalcUnscrolledPosition(point),
@@ -3435,7 +3435,7 @@ wxGenericTreeCtrl::DoTreeHitTest(const wxPoint& point, int& flags) const
     if (hit == nullptr)
     {
         flags = wxTREE_HITTEST_NOWHERE;
-        return wxTreeItemId();
+        return {};
     }
     return hit;
 }

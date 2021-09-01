@@ -117,7 +117,7 @@ wxBitmap wxAuiBitmapFromBits(const unsigned char bits[], int w, int h,
             }
         }
     }
-    return wxBitmap(img);
+    return {img};
 }
 
 // A utility function to scales a bitmap in place for use at the given scale
@@ -394,7 +394,7 @@ wxColour wxAuiDefaultDockArt::GetColour(int id)
         default: wxFAIL_MSG(wxT("Invalid Metric Ordinal")); break;
     }
 
-    return wxColour();
+    return {};
 }
 
 void wxAuiDefaultDockArt::SetColour(int id, const wxColor& colour)

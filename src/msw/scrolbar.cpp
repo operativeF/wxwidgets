@@ -211,7 +211,7 @@ wxSize wxScrollBar::DoGetBestSize() const
         h = wxSystemSettings::GetMetric(wxSYS_HSCROLL_Y, m_parent);
     }
 
-    return wxSize(w, h);
+    return {w, h};
 }
 
 WXDWORD wxScrollBar::MSWGetStyle(long style, WXDWORD *exstyle) const

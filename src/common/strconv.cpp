@@ -421,7 +421,7 @@ wxMBConv::cMB2WC(const char *inBuff, size_t inLen, size_t *outLen) const
     if ( outLen )
         *outLen = 0;
 
-    return wxWCharBuffer();
+    return {};
 }
 
 wxCharBuffer
@@ -462,7 +462,7 @@ wxMBConv::cWC2MB(const wchar_t *inBuff, size_t inLen, size_t *outLen) const
     if ( outLen )
         *outLen = 0;
 
-    return wxCharBuffer();
+    return {};
 }
 
 wxWCharBuffer wxMBConv::DoConvertMB2WC(const char* buf, size_t srcLen) const
@@ -491,7 +491,7 @@ wxWCharBuffer wxMBConv::DoConvertMB2WC(const char* buf, size_t srcLen) const
         }
     }
 
-    return wxWCharBuffer();
+    return {};
 }
 
 wxCharBuffer wxMBConv::DoConvertWC2MB(const wchar_t* wbuf, size_t srcLen) const
@@ -515,7 +515,7 @@ wxCharBuffer wxMBConv::DoConvertWC2MB(const wchar_t* wbuf, size_t srcLen) const
         }
     }
 
-    return wxCharBuffer();
+    return {};
 }
 
 // ----------------------------------------------------------------------------

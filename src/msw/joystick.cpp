@@ -180,9 +180,9 @@ wxPoint wxJoystick::GetPosition() const
     JOYINFO joyInfo;
     MMRESULT res = joyGetPos(m_joystick, & joyInfo);
     if (res == JOYERR_NOERROR )
-        return wxPoint(joyInfo.wXpos, joyInfo.wYpos);
+        return {gsl::narrow_cast<int>(joyInfo.wXpos), gsl::narrow_cast<int>(joyInfo.wYpos)};
     else
-        return wxPoint(0,0);
+        return {0, 0};
 }
 
 int wxJoystick::GetPosition(unsigned axis) const

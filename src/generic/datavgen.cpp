@@ -1352,9 +1352,9 @@ bool wxDataViewBitmapRenderer::Render( wxRect cell, wxDC *dc, int WXUNUSED(state
 wxSize wxDataViewBitmapRenderer::GetSize() const
 {
     if (m_bitmap.IsOk())
-        return wxSize( m_bitmap.GetWidth(), m_bitmap.GetHeight() );
+        return { m_bitmap.GetWidth(), m_bitmap.GetHeight() };
     else if (m_icon.IsOk())
-        return wxSize( m_icon.GetWidth(), m_icon.GetHeight() );
+        return { m_icon.GetWidth(), m_icon.GetHeight() };
 
     return GetView()->FromDIP(wxSize(wxDVC_DEFAULT_RENDERER_SIZE,
                                      wxDVC_DEFAULT_RENDERER_SIZE));
@@ -1513,7 +1513,7 @@ wxSize wxDataViewProgressRenderer::GetSize() const
     // renderers, it doesn't have a "good" width for the content. This makes it
     // grow to the whole column, which is pretty much always the desired
     // behaviour. Keep the height fixed so that the progress bar isn't too fat.
-    return wxSize(-1, 12);
+    return {-1, 12};
 }
 
 // ---------------------------------------------------------
@@ -1574,7 +1574,7 @@ wxSize wxDataViewIconTextRenderer::GetSize() const
             size.x += m_value.GetIcon().GetWidth() + 4;
         return size;
     }
-    return wxSize(80,20);
+    return {80, 20};
 }
 
 wxWindow* wxDataViewIconTextRenderer::CreateEditorCtrl(wxWindow *parent, wxRect labelRect, const wxVariant& value)
@@ -4198,7 +4198,7 @@ wxRect wxDataViewMainWindow::GetItemRect( const wxDataViewItem & item,
     if ( row == -1 )
     {
         // This means the row is currently not visible at all.
-        return wxRect();
+        return {};
     }
 
     // we have to take an expander column into account and compute its indentation
@@ -4225,7 +4225,7 @@ wxRect wxDataViewMainWindow::GetItemRect( const wxDataViewItem & item,
     // not visible.
     if ( itemRect.GetBottom() < 0 || itemRect.GetTop() > GetClientSize().y )
     {
-        return wxRect();
+        return {};
     }
 
     return itemRect;

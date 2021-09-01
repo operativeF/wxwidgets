@@ -84,5 +84,5 @@ bool wxSystemAppearance::IsUsingDarkBackground() const
 
 wxSystemAppearance wxSystemSettingsNative::GetAppearance()
 {
-    return wxSystemAppearance();
+    return {};
 }

@@ -698,7 +698,7 @@ wxSize wxAuiGenericTabArt::GetTabSize(wxDC& dc,
 
     *x_extent = tab_width;
 
-    return wxSize(tab_width, tab_height);
+    return {tab_width, tab_height};
 }
 
 
@@ -1215,7 +1215,7 @@ wxSize wxAuiSimpleTabArt::GetTabSize(wxDC& dc,
 
     *x_extent = tab_width - (tab_height/2) - 1;
 
-    return wxSize(tab_width, tab_height);
+    return {tab_width, tab_height};
 }
 
 

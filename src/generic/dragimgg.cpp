@@ -492,15 +492,15 @@ wxRect wxGenericDragImage::GetImageRect(const wxPoint& pos) const
 {
     if (m_bitmap.IsOk())
     {
-        return wxRect(pos.x, pos.y, m_bitmap.GetWidth(), m_bitmap.GetHeight());
+        return {pos.x, pos.y, m_bitmap.GetWidth(), m_bitmap.GetHeight()};
     }
     else if (m_icon.IsOk())
     {
-        return wxRect(pos.x, pos.y, m_icon.GetWidth(), m_icon.GetHeight());
+        return {pos.x, pos.y, m_icon.GetWidth(), m_icon.GetHeight()};
     }
     else
     {
-        return wxRect(pos.x, pos.y, 0, 0);
+        return {pos.x, pos.y, 0, 0};
     }
 }
 

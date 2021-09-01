@@ -150,7 +150,7 @@ wxString wxDecToHex(unsigned char dec)
 {
     wxChar buf[3];
     wxDecToHex(dec, buf);
-    return wxString(buf);
+    return {buf};
 }
 
 // ----------------------------------------------------------------------------
@@ -219,17 +219,17 @@ void wxPlatform::Copy(const wxPlatform& platform)
 wxPlatform wxPlatform::If(int platform, long value)
 {
     if (Is(platform))
-        return wxPlatform(value);
+        return {value};
     else
-        return wxPlatform();
+        return {};
 }
 
 wxPlatform wxPlatform::IfNot(int platform, long value)
 {
     if (!Is(platform))
-        return wxPlatform(value);
+        return {value};
     else
-        return wxPlatform();
+        return {};
 }
 
 wxPlatform& wxPlatform::ElseIf(int platform, long value)
@@ -249,17 +249,17 @@ wxPlatform& wxPlatform::ElseIfNot(int platform, long value)
 wxPlatform wxPlatform::If(int platform, double value)
 {
     if (Is(platform))
-        return wxPlatform(value);
+        return {value};
     else
-        return wxPlatform();
+        return {};
 }
 
 wxPlatform wxPlatform::IfNot(int platform, double value)
 {
     if (!Is(platform))
-        return wxPlatform(value);
+        return {value};
     else
-        return wxPlatform();
+        return {};
 }
 
 wxPlatform& wxPlatform::ElseIf(int platform, double value)
@@ -279,17 +279,17 @@ wxPlatform& wxPlatform::ElseIfNot(int platform, double value)
 wxPlatform wxPlatform::If(int platform, const wxString& value)
 {
     if (Is(platform))
-        return wxPlatform(value);
+        return {value};
     else
-        return wxPlatform();
+        return {};
 }
 
 wxPlatform wxPlatform::IfNot(int platform, const wxString& value)
 {
     if (!Is(platform))
-        return wxPlatform(value);
+        return {value};
     else
-        return wxPlatform();
+        return {};
 }
 
 wxPlatform& wxPlatform::ElseIf(int platform, const wxString& value)

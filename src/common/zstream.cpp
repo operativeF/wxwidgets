@@ -54,7 +54,7 @@ wxVersionInfo wxGetZlibVersionInfo()
         build = 0;
     }
 
-    return wxVersionInfo("zlib", major, minor, build);
+    return {"zlib", major, minor, build};
 }
 
 /////////////////////////////////////////////////////////////////////////////

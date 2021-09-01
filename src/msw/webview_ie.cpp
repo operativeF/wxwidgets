@@ -68,7 +68,7 @@ wxVersionInfo wxWebViewFactoryIE::GetVersionInfo()
     tk.GetNextToken().ToLong(&major);
     tk.GetNextToken().ToLong(&minor);
     tk.GetNextToken().ToLong(&micro);
-    return wxVersionInfo("Internet Explorer", major, minor, micro);
+    return {"Internet Explorer", major, minor, micro};
 }
 
 //Convenience function for error conversion

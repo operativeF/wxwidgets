@@ -1506,7 +1506,7 @@ wxPoint wxTextCtrl::DoPositionToCoords(long pos) const
         POINT pt;
         LRESULT rc = ::SendMessageW(GetHwnd(), EM_POSFROMCHAR, (WPARAM)&pt, pos);
         if ( rc != -1 )
-            return wxPoint(pt.x, pt.y);
+            return {pt.x, pt.y};
     }
     else
 #endif // wxUSE_RICHEDIT
@@ -1532,7 +1532,7 @@ wxPoint wxTextCtrl::DoPositionToCoords(long pos) const
                 rc = ::SendMessageW(GetHwnd(), EM_GETMARGINS, 0, 0);
 
                 // Text control seems to effectively add 1 to margin.
-                return wxPoint(LOWORD(rc) + 1, 1);
+                return {LOWORD(rc) + 1, 1};
             }
 
             // We do have a previous character, try to get its coordinates.
@@ -1572,8 +1572,8 @@ wxPoint wxTextCtrl::DoPositionToCoords(long pos) const
         // while we want to have signed values here (the y coordinate of any
         // position above the first currently visible line is negative, for
         // example), hence the need for casts.
-        return wxPoint(static_cast<short>(LOWORD(rc)),
-                        static_cast<short>(HIWORD(rc)));
+        return {static_cast<short>(LOWORD(rc)),
+                static_cast<short>(HIWORD(rc))};
     }
 
     return wxDefaultPosition;
@@ -2484,7 +2484,7 @@ wxSize wxTextCtrl::DoGetSizeFromTextSize(int xlen, int ylen) const
     if ( ylen > 0 )
         hText += ylen - GetCharHeight();
 
-    return wxSize(wText, hText);
+    return {gsl::narrow_cast<int>(wText), gsl::narrow_cast<int>(hText)};
 }
 
 void wxTextCtrl::DoMoveWindow(int x, int y, int width, int height)

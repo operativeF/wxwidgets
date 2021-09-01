@@ -959,7 +959,7 @@ wxString wxTreeCtrl::GetItemText(const wxTreeItemId& item) const
         buf[0] = wxT('\0');
     }
 
-    return wxString(buf);
+    return {buf};
 }
 
 void wxTreeCtrl::SetItemText(const wxTreeItemId& item, const std::string& text)
@@ -1355,7 +1355,7 @@ wxTreeItemId wxTreeCtrl::GetItemParent(const wxTreeItemId& item) const
         }
     }
 
-    return wxTreeItemId(hItem);
+    return {hItem};
 }
 
 wxTreeItemId wxTreeCtrl::GetFirstChild(const wxTreeItemId& item,
@@ -1366,7 +1366,7 @@ wxTreeItemId wxTreeCtrl::GetFirstChild(const wxTreeItemId& item,
     // remember the last child returned in 'cookie'
     cookie = TreeView_GetChild(GetHwnd(), HITEM(item));
 
-    return wxTreeItemId(cookie);
+    return {cookie};
 }
 
 wxTreeItemId wxTreeCtrl::GetNextChild(const wxTreeItemId& WXUNUSED(item),
@@ -1378,7 +1378,7 @@ wxTreeItemId wxTreeCtrl::GetNextChild(const wxTreeItemId& WXUNUSED(item),
 
     hitem = TreeView_GetNextSibling(GetHwnd(), hitem);
 
-    wxTreeItemId item(hitem);
+    wxTreeItemId item{hitem};
 
     cookie = item.m_pItem;
 
@@ -1552,7 +1552,7 @@ wxTreeItemId wxTreeCtrl::DoInsertAfter(const wxTreeItemId& parent,
         data->SetId(id);
     }
 
-    return wxTreeItemId(id);
+    return {id};
 }
 
 wxTreeItemId wxTreeCtrl::AddRoot(const wxString& text,
@@ -2073,7 +2073,7 @@ wxTreeItemId wxTreeCtrl::DoTreeHitTest(const wxPoint& point, int& flags) const
 
     #undef TRANSLATE_FLAG
 
-    return wxTreeItemId(hitTestInfo.hItem);
+    return {hitTestInfo.hItem};
 }
 
 bool wxTreeCtrl::GetBoundingRect(const wxTreeItemId& item,

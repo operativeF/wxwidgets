@@ -474,7 +474,7 @@ wxSize wxGridBagSizer::CalcMin()
     auto width = gapSizing(m_colWidths, m_hgap);
     auto height = gapSizing(m_rowHeights, m_vgap);
 
-    return wxSize(width, height);
+    return {width, height};
 }
 
 
@@ -682,7 +682,7 @@ wxGBPosition wxGridBagSizer::FindEmptyCell()
             if ( !CheckForIntersection(pos, wxDefaultSpan) )
                 return pos;
         }
-    return wxGBPosition(-1, -1);
+    return {-1, -1};
 }
 
 

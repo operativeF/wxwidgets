@@ -20,6 +20,8 @@
 
     #include <array>
     #include <vector>
+
+    #include <gsl/gsl>
 #endif
 
 #include "wx/gifdecod.h"
@@ -218,12 +220,13 @@ bool wxGIFDecoder::ConvertToImage(unsigned int frame, wxImage *image) const
 
 wxSize wxGIFDecoder::GetFrameSize(unsigned int frame) const
 {
-    return wxSize(GetFrame(frame)->w, GetFrame(frame)->h);
+    // FIXME: Narrowing
+    return {gsl::narrow_cast<int>(GetFrame(frame)->w), gsl::narrow_cast<int>(GetFrame(frame)->h)};
 }
 
 wxPoint wxGIFDecoder::GetFramePosition(unsigned int frame) const
 {
-    return wxPoint(GetFrame(frame)->left, GetFrame(frame)->top);
+    return { gsl::narrow_cast<int>(GetFrame(frame)->left), gsl::narrow_cast<int>(GetFrame(frame)->top)};
 }
 
 wxAnimationDisposal wxGIFDecoder::GetDisposalMethod(unsigned int frame) const
@@ -243,9 +246,9 @@ wxColour wxGIFDecoder::GetTransparentColour(unsigned int frame) const
     if (n == -1)
         return wxNullColour;
 
-    return wxColour(pal[n*3 + 0],
-                    pal[n*3 + 1],
-                    pal[n*3 + 2]);
+    return { pal[n*3 + 0],
+             pal[n*3 + 1],
+             pal[n*3 + 2] };
 }
 
 unsigned char* wxGIFDecoder::GetData(unsigned int frame) const    { return (GetFrame(frame)->p.data()); }

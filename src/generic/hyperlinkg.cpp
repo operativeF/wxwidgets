@@ -170,7 +170,7 @@ wxRect wxGenericHyperlinkCtrl::GetLabelRect() const
         offset.x = c.x - b.x;
     else if (HasFlag(wxHL_ALIGN_LEFT))
         offset.x = 0;
-    return wxRect(offset, b);
+    return {offset, b};
 }
 
 

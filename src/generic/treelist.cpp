@@ -324,7 +324,7 @@ public:
         // Our root item must be represented as NULL at wxDVC level to map to
         // its own invisible root.
         if ( !node->GetParent() )
-            return wxDataViewItem();
+            return {};
 
         return ToNonRootDVI(node);
     }

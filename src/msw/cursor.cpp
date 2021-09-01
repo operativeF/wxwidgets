@@ -262,7 +262,7 @@ wxPoint wxCursor::GetHotSpot() const
     if ( !ii.GetFrom((HICON)GetGDIImageData()->m_hCursor) )
         return wxDefaultPosition;
 
-    return wxPoint(ii.xHotspot, ii.yHotspot);
+    return {gsl::narrow_cast<int>(ii.xHotspot), gsl::narrow_cast<int>(ii.yHotspot)};
 }
 
 namespace

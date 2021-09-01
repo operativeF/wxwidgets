@@ -330,7 +330,7 @@ wxSize wxAuiMSWTabArt::GetTabSize(wxDC& dc,
     if (tabHeight > m_maxTabHeight)
         m_maxTabHeight = tabHeight;
 
-    return wxSize(tabWidth, tabHeight);
+    return {tabWidth, tabHeight};
 }
 
 

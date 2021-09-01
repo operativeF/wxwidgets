@@ -2207,7 +2207,7 @@ bool wxAuiNotebook::SetPageToolTip(size_t page_idx, const wxString& text)
 wxString wxAuiNotebook::GetPageToolTip(size_t page_idx) const
 {
     if (page_idx >= m_tabs.GetPageCount())
-        return wxString();
+        return {};
 
     const wxAuiNotebookPage& page_info = m_tabs.GetPage(page_idx);
     return page_info.tooltip;
@@ -2243,7 +2243,7 @@ bool wxAuiNotebook::SetPageBitmap(size_t page_idx, const wxBitmap& bitmap)
 wxBitmap wxAuiNotebook::GetPageBitmap(size_t page_idx) const
 {
     if (page_idx >= m_tabs.GetPageCount())
-        return wxBitmap();
+        return {};
 
     // update our own tab catalog
     const wxAuiNotebookPage& page_info = m_tabs.GetPage(page_idx);
@@ -3553,7 +3553,7 @@ wxSize wxAuiNotebook::DoGetBestSize() const
     }
 
     if ( layouts.empty() )
-        return wxSize(0, 0);
+        return {0, 0};
 
     std::sort(layouts.begin(), layouts.end());
 

@@ -514,8 +514,8 @@ wxSize wxRadioBox::GetMaxButtonSize() const
         + GetCharWidth() / 2;
 
     // calculate the max button size
-    int widthMax = 0,
-        heightMax = 0;
+    int widthMax{0};
+    int heightMax{0};
 
     for ( unsigned int i = 0 ; i < GetCount(); i++ )
     {
@@ -532,7 +532,7 @@ wxSize wxRadioBox::GetMaxButtonSize() const
             heightMax = button_extents.y ;
     }
 
-    return wxSize(widthMax, heightMax);
+    return {widthMax, heightMax};
 }
 
 wxSize wxRadioBox::GetTotalButtonSize(const wxSize& sizeBtn) const
@@ -553,7 +553,7 @@ wxSize wxRadioBox::GetTotalButtonSize(const wxSize& sizeBtn) const
     if ( widthBox > width )
         width = widthBox;
 
-    return wxSize(width, height);
+    return {width, height};
 }
 
 wxSize wxRadioBox::DoGetBestSize() const
@@ -562,7 +562,7 @@ wxSize wxRadioBox::DoGetBestSize() const
     {
         // if we're not fully initialized yet, we can't meaningfully compute
         // our best size, we'll do it later
-        return wxSize(1, 1);
+        return {1, 1};
     }
 
     return GetTotalButtonSize(GetMaxButtonSize());

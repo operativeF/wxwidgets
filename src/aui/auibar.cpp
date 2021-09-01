@@ -562,7 +562,7 @@ wxSize wxAuiGenericToolBarArt::GetLabelSize(
         width = dc.GetTextExtent(item.GetLabel()).GetX();
     }
 
-    return wxSize(width, height);
+    return {width, height};
 }
 
 wxSize wxAuiGenericToolBarArt::GetToolSize(
@@ -616,7 +616,7 @@ wxSize wxAuiGenericToolBarArt::GetToolSize(
         width += dropdownWidth + wnd->FromDIP(4);
     }
 
-    return wxSize(width, height);
+    return {width, height};
 }
 
 void wxAuiGenericToolBarArt::DrawSeparator(
@@ -1772,7 +1772,7 @@ wxRect wxAuiToolBar::GetToolRect(int tool_id) const
         return tool->m_sizerItem->GetRect();
     }
 
-    return wxRect();
+    return {};
 }
 
 bool wxAuiToolBar::GetToolBarFits() const
@@ -2113,7 +2113,7 @@ wxSize wxAuiToolBar::GetLabelSize(const std::string& label)
     // get the text width
     dc.GetTextExtent(label, &textWidth, &ty);
 
-    return wxSize(textWidth, textHeight);
+    return {textWidth, textHeight};
 }
 
 void wxAuiToolBar::DoIdleUpdate()

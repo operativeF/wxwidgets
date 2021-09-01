@@ -252,7 +252,7 @@ public:
 
     wxSize GetBitmapMargins() const override
     {
-        return wxSize(m_data.margin.left, m_data.margin.top);
+        return {m_data.margin.left, m_data.margin.top};
     }
 
     void SetBitmapMargins(wxCoord x, wxCoord y) override

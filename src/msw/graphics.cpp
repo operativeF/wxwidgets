@@ -87,7 +87,7 @@ namespace
 // translate a wxColour to a Color
 inline Color wxColourToColor(const wxColour& col)
 {
-    return Color(col.Alpha(), col.Red(), col.Green(), col.Blue());
+    return {col.Alpha(), col.Red(), col.Green(), col.Blue()};
 }
 
 // Do not use this pointer directly, it's only used by

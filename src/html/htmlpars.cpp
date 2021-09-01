@@ -397,7 +397,7 @@ bool wxHtmlParser::RestoreState()
 
 wxString wxHtmlParser::GetInnerSource(const wxHtmlTag& tag)
 {
-    return wxString(tag.GetBeginIter(), tag.GetEndIter1());
+    return {tag.GetBeginIter(), tag.GetEndIter1()};
 }
 
 //-----------------------------------------------------------------------------

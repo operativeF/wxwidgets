@@ -1553,8 +1553,8 @@ wxSize wxGridSizer::CalcMin()
         }
     }
 
-    return wxSize( ncols * w + (ncols-1) * m_hgap,
-                   nrows * h + (nrows-1) * m_vgap );
+    return { ncols * w + (ncols-1) * m_hgap,
+             nrows * h + (nrows-1) * m_vgap };
 }
 
 void wxGridSizer::SetItemBounds( wxSizerItem *item, int x, int y, int w, int h )

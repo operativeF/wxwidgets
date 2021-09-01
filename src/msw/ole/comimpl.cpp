@@ -144,7 +144,7 @@ static wxString GetIidName(REFIID riid)
 
   // unknown IID, just transform to string
   Uuid uuid(riid);
-  return wxString((const wxChar *)uuid);
+  return {(const wxChar *)uuid};
 }
 
 WXDLLEXPORT void wxLogQueryInterface(const wxChar *szInterface, REFIID riid)

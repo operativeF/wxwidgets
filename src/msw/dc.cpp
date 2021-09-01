@@ -2085,7 +2085,7 @@ wxPoint wxMSWDCImpl::DeviceToLogical(wxCoord x, wxCoord y) const
     p[0].x = x;
     p[0].y = y;
     ::DPtoLP(GetHdc(), p, WXSIZEOF(p));
-    return wxPoint(p[0].x, p[0].y);
+    return {p[0].x, p[0].y};
 }
 
 wxPoint wxMSWDCImpl::LogicalToDevice(wxCoord x, wxCoord y) const
@@ -2094,7 +2094,7 @@ wxPoint wxMSWDCImpl::LogicalToDevice(wxCoord x, wxCoord y) const
     p[0].x = x;
     p[0].y = y;
     ::LPtoDP(GetHdc(), p, WXSIZEOF(p));
-    return wxPoint(p[0].x, p[0].y);
+    return {p[0].x, p[0].y};
 }
 
 wxSize wxMSWDCImpl::DeviceToLogicalRel(int x, int y) const
@@ -2105,7 +2105,7 @@ wxSize wxMSWDCImpl::DeviceToLogicalRel(int x, int y) const
     p[1].x = x;
     p[1].y = y;
     ::DPtoLP(GetHdc(), p, WXSIZEOF(p));
-    return wxSize(p[1].x-p[0].x, p[1].y-p[0].y);
+    return {p[1].x-p[0].x, p[1].y-p[0].y};
 }
 
 wxSize wxMSWDCImpl::LogicalToDeviceRel(int x, int y) const
@@ -2116,7 +2116,7 @@ wxSize wxMSWDCImpl::LogicalToDeviceRel(int x, int y) const
     p[1].x = x;
     p[1].y = y;
     ::LPtoDP(GetHdc(), p, WXSIZEOF(p));
-    return wxSize(p[1].x-p[0].x, p[1].y-p[0].y);
+    return {p[1].x-p[0].x, p[1].y-p[0].y};
 }
 
 // ----------------------------------------------------------------------------

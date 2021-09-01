@@ -928,8 +928,8 @@ void wxVarHVScrollHelper::RefreshRowsColumns(size_t fromRow, size_t toRow,
 
 wxPosition wxVarHVScrollHelper::VirtualHitTest(wxCoord x, wxCoord y) const
 {
-    return wxPosition(wxVarVScrollHelper::VirtualHitTest(y),
-                      wxVarHScrollHelper::VirtualHitTest(x));
+    return {wxVarVScrollHelper::VirtualHitTest(y),
+            wxVarHScrollHelper::VirtualHitTest(x)};
 }
 
 void wxVarHVScrollHelper::DoPrepareDC(wxDC& dc)
@@ -948,17 +948,17 @@ bool wxVarHVScrollHelper::ScrollLayout()
 
 wxSize wxVarHVScrollHelper::GetRowColumnCount() const
 {
-    return wxSize(GetColumnCount(), GetRowCount());
+    return {gsl::narrow_cast<int>(GetColumnCount()), gsl::narrow_cast<int>(GetRowCount())};
 }
 
 wxPosition wxVarHVScrollHelper::GetVisibleBegin() const
 {
-    return wxPosition(GetVisibleRowsBegin(), GetVisibleColumnsBegin());
+    return {gsl::narrow_cast<int>(GetVisibleRowsBegin()), gsl::narrow_cast<int>(GetVisibleColumnsBegin())};
 }
 
 wxPosition wxVarHVScrollHelper::GetVisibleEnd() const
 {
-    return wxPosition(GetVisibleRowsEnd(), GetVisibleColumnsEnd());
+    return {gsl::narrow_cast<int>(GetVisibleRowsEnd()), gsl::narrow_cast<int>(GetVisibleColumnsEnd())};
 }
 
 bool wxVarHVScrollHelper::IsVisible(size_t row, size_t column) const

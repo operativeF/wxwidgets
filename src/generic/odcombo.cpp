@@ -844,8 +844,7 @@ wxSize wxVListBoxComboPopup::GetAdjustedSize( int minWidth, int prefHeight, int 
 
     // Take scrollbar into account in width calculations
     int widestWidth = m_widestWidth + wxSystemSettings::GetMetric(wxSYS_VSCROLL_X, this);
-    return wxSize(minWidth > widestWidth ? minWidth : widestWidth,
-                  height+2);
+    return {minWidth > widestWidth ? minWidth : widestWidth, height + 2};
 }
 
 //void wxVListBoxComboPopup::Populate( int n, const wxString choices[] )

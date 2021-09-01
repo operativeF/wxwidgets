@@ -72,8 +72,7 @@ void wxGenericCredentialEntryDialog::Init(const std::string& message,
 
 wxWebCredentials wxGenericCredentialEntryDialog::GetCredentials() const
 {
-    return wxWebCredentials(m_userTextCtrl->GetValue(),
-                            wxSecretValue(m_passwordTextCtrl->GetValue()));
+    return {m_userTextCtrl->GetValue(), wxSecretValue(m_passwordTextCtrl->GetValue())};
 }
 
 #endif // wxUSE_CREDENTIALDLG

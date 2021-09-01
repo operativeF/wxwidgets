@@ -330,7 +330,7 @@ inline static wxString CacheReadString(wxInputStream *f)
     size_t len = (size_t)CacheReadInt32(f);
     wxCharBuffer str(len-1);
     f->Read(str.data(), len);
-    return wxString(str, wxConvUTF8);
+    return {str, wxConvUTF8};
 }
 
 #define CURRENT_CACHED_BOOK_VERSION     5

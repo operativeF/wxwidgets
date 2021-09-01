@@ -37,9 +37,7 @@ public:
     {
         ScreenHDC dc;
 
-        return wxRect(0, 0,
-                      ::GetDeviceCaps(dc, HORZRES),
-                      ::GetDeviceCaps(dc, VERTRES));
+        return {0, 0, ::GetDeviceCaps(dc, HORZRES), ::GetDeviceCaps(dc, VERTRES)};
     }
 
     wxRect GetClientArea() const override
@@ -141,10 +139,10 @@ protected:
         // note that dmDisplayFrequency may be 0 or 1 meaning "standard one"
         // and although 0 is ok for us we don't want to return modes with 1hz
         // refresh
-        return wxVideoMode(dm.dmPelsWidth,
-                           dm.dmPelsHeight,
-                           dm.dmBitsPerPel,
-                           dm.dmDisplayFrequency > 1 ? dm.dmDisplayFrequency : 0);
+        return {gsl::narrow_cast<int>(dm.dmPelsWidth),
+                gsl::narrow_cast<int>(dm.dmPelsHeight),
+                gsl::narrow_cast<int>(dm.dmBitsPerPel),
+                gsl::narrow_cast<int>(dm.dmDisplayFrequency > 1 ? dm.dmDisplayFrequency : 0)};
     }
 
     wxDisplayInfo m_info;
@@ -306,7 +304,7 @@ wxSize wxDisplayMSW::GetPPI() const
         wxLogApiError("GetDpiForMonitor", hr);
     }
 
-    return IsPrimary() ? wxDisplayImplSingleMSW().GetPPI() : wxSize(0, 0);
+    return IsPrimary() ? wxDisplayImplSingleMSW().GetPPI() : wxSize{0, 0};
 }
 
 double wxDisplayMSW::GetScaleFactor() const

@@ -767,19 +767,19 @@ wxRect wxPrintout::GetLogicalPaperRect() const
 
     if (printout_size.x == pw && printout_size.y == ph) {
         // this DC matches the printed page, so no scaling
-        return wxRect(m_printoutDC->DeviceToLogicalX(paperRect.x),
-            m_printoutDC->DeviceToLogicalY(paperRect.y),
-            m_printoutDC->DeviceToLogicalXRel(paperRect.width),
-            m_printoutDC->DeviceToLogicalYRel(paperRect.height));
+        return {m_printoutDC->DeviceToLogicalX(paperRect.x),
+                m_printoutDC->DeviceToLogicalY(paperRect.y),
+                m_printoutDC->DeviceToLogicalXRel(paperRect.width),
+                m_printoutDC->DeviceToLogicalYRel(paperRect.height)};
     }
     // This DC doesn't match the printed page, so we have to scale.
     float scaleX = float(printout_size.x) / pw;
     float scaleY = float(printout_size.y) / ph;
 
-    return wxRect(m_printoutDC->DeviceToLogicalX(wxRound(paperRect.x * scaleX)),
-        m_printoutDC->DeviceToLogicalY(wxRound(paperRect.y * scaleY)),
-        m_printoutDC->DeviceToLogicalXRel(wxRound(paperRect.width * scaleX)),
-        m_printoutDC->DeviceToLogicalYRel(wxRound(paperRect.height * scaleY)));
+    return {m_printoutDC->DeviceToLogicalX(wxRound(paperRect.x * scaleX)),
+            m_printoutDC->DeviceToLogicalY(wxRound(paperRect.y * scaleY)),
+            m_printoutDC->DeviceToLogicalXRel(wxRound(paperRect.width * scaleX)),
+            m_printoutDC->DeviceToLogicalYRel(wxRound(paperRect.height * scaleY))};
 }
 
 wxRect wxPrintout::GetLogicalPageRect() const
@@ -787,10 +787,10 @@ wxRect wxPrintout::GetLogicalPageRect() const
     // Return the rectangle in logical units that corresponds to the printable
     // area.
     wxSize printout_size = m_printoutDC->GetSize();
-    return wxRect(m_printoutDC->DeviceToLogicalX(0),
-        m_printoutDC->DeviceToLogicalY(0),
-        m_printoutDC->DeviceToLogicalXRel(printout_size.x),
-        m_printoutDC->DeviceToLogicalYRel(printout_size.y));
+    return {m_printoutDC->DeviceToLogicalX(0),
+            m_printoutDC->DeviceToLogicalY(0),
+            m_printoutDC->DeviceToLogicalXRel(printout_size.x),
+            m_printoutDC->DeviceToLogicalYRel(printout_size.y)};
 }
 
 wxRect wxPrintout::GetLogicalPageMarginsRect(const wxPageSetupDialogData& pageSetupData) const
@@ -827,20 +827,19 @@ wxRect wxPrintout::GetLogicalPageMarginsRect(const wxPageSetupDialogData& pageSe
     if (printout_size.x == pw && printout_size.y == ph)
     {
         // this DC matches the printed page, so no scaling
-        return wxRect(
-            m_printoutDC->DeviceToLogicalX(pageMarginsRect.x),
-            m_printoutDC->DeviceToLogicalY(pageMarginsRect.y),
-            m_printoutDC->DeviceToLogicalXRel(pageMarginsRect.width),
-            m_printoutDC->DeviceToLogicalYRel(pageMarginsRect.height));
+        return {m_printoutDC->DeviceToLogicalX(pageMarginsRect.x),
+                m_printoutDC->DeviceToLogicalY(pageMarginsRect.y),
+                m_printoutDC->DeviceToLogicalXRel(pageMarginsRect.width),
+                m_printoutDC->DeviceToLogicalYRel(pageMarginsRect.height)};
     }
 
     // This DC doesn't match the printed page, so we have to scale.
     float scaleX = float(printout_size.x) / pw;
     float scaleY = float(printout_size.y) / ph;
-    return wxRect(m_printoutDC->DeviceToLogicalX(wxRound(pageMarginsRect.x * scaleX)),
-        m_printoutDC->DeviceToLogicalY(wxRound(pageMarginsRect.y * scaleY)),
-        m_printoutDC->DeviceToLogicalXRel(wxRound(pageMarginsRect.width * scaleX)),
-        m_printoutDC->DeviceToLogicalYRel(wxRound(pageMarginsRect.height * scaleY)));
+    return {m_printoutDC->DeviceToLogicalX(wxRound(pageMarginsRect.x * scaleX)),
+            m_printoutDC->DeviceToLogicalY(wxRound(pageMarginsRect.y * scaleY)),
+            m_printoutDC->DeviceToLogicalXRel(wxRound(pageMarginsRect.width * scaleX)),
+            m_printoutDC->DeviceToLogicalYRel(wxRound(pageMarginsRect.height * scaleY))};
 }
 
 void wxPrintout::SetLogicalOrigin(wxCoord x, wxCoord y)

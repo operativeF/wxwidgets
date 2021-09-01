@@ -547,7 +547,7 @@ wxGridCellAutoWrapStringRenderer::GetBestSize(wxGrid& grid,
     // compute the width needed to fully display everything.
     const int height = dc.GetCharHeight();
 
-    return wxSize(GetBestWidth(grid, attr, dc, row, col, height), height);
+    return {GetBestWidth(grid, attr, dc, row, col, height), height};
 }
 
 constexpr int AUTOWRAP_Y_MARGIN = 4;

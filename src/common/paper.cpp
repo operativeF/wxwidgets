@@ -49,7 +49,7 @@ wxPrintPaperType::wxPrintPaperType(wxPaperSize paperId, int platformId, const wx
 // Get width and height in points (1/72th of an inch)
 wxSize wxPrintPaperType::GetSizeDeviceUnits() const
 {
-    return wxSize( (int) ((m_width / 10.0) / (25.4 / 72.0)), (int) ((m_height / 10.0) / (25.4 / 72.0)) );
+    return { (int) ((m_width / 10.0) / (25.4 / 72.0)), (int) ((m_height / 10.0) / (25.4 / 72.0)) };
 }
 
 /*

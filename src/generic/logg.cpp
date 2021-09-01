@@ -74,7 +74,7 @@ static wxString TimeStamp(const wxString& format, time_t t)
         // buffer is too small?
         wxFAIL_MSG(wxT("strftime() failed"));
     }
-    return wxString(buf);
+    return {buf};
 }
 
 

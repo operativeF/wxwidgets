@@ -2593,7 +2593,7 @@ static wxImage LoadImageFromResource(const std::string &name, wxBitmapType type)
         {
             AutoIconInfo info;
             if ( !info.GetFrom(hIcon) )
-                return wxImage();
+                return {};
 
             hBitmap.Init(info.hbmColor);
             hMask.Init(info.hbmMask);
@@ -2614,7 +2614,7 @@ static wxImage LoadImageFromResource(const std::string &name, wxBitmapType type)
     }
 
     if ( !hBitmap )
-        return wxImage();
+        return {};
 
     wxImage image = wxDIB(hBitmap).ConvertToImage();
     if ( hMask )
@@ -3242,7 +3242,7 @@ wxImage::HSVValue wxImage::RGBtoHSV(const RGBValue& rgb)
         saturation = deltaRGB / maximumRGB;
     }
 
-    return HSVValue(hue, saturation, value);
+    return {hue, saturation, value};
 }
 
 RGBValue wxImage::HSVtoRGB(const HSVValue& hsv)
@@ -3304,9 +3304,9 @@ RGBValue wxImage::HSVtoRGB(const HSVValue& hsv)
         }
     }
 
-    return RGBValue((unsigned char)wxRound(red * 255.0),
-                    (unsigned char)wxRound(green * 255.0),
-                    (unsigned char)wxRound(blue * 255.0));
+    return {(unsigned char)wxRound(red * 255.0),
+            (unsigned char)wxRound(green * 255.0),
+            (unsigned char)wxRound(blue * 255.0)};
 }
 
 // TODO-C++11: Replace with a lambda function.
@@ -3643,8 +3643,8 @@ static inline wxRealPoint
 wxRotatePoint(const wxRealPoint& p, double cos_angle, double sin_angle,
               const wxRealPoint& p0)
 {
-    return wxRealPoint(p0.x + (p.x - p0.x) * cos_angle - (p.y - p0.y) * sin_angle,
-                       p0.y + (p.y - p0.y) * cos_angle + (p.x - p0.x) * sin_angle);
+    return {p0.x + (p.x - p0.x) * cos_angle - (p.y - p0.y) * sin_angle,
+            p0.y + (p.y - p0.y) * cos_angle + (p.x - p0.x) * sin_angle};
 }
 
 static inline wxRealPoint

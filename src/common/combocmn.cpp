@@ -604,7 +604,7 @@ wxSize wxComboPopup::GetAdjustedSize( int minWidth,
                                       int prefHeight,
                                       int WXUNUSED(maxHeight) )
 {
-    return wxSize(minWidth,prefHeight);
+    return {minWidth, prefHeight};
 }
 
 void wxComboPopup::DefaultPaintComboControl( wxComboCtrlBase* combo,
@@ -1389,7 +1389,7 @@ wxSize wxComboCtrlBase::DoGetSizeFromTextSize(int xlen, int ylen) const
     if ( ylen > 0 )
         fhei += ylen - GetCharHeight();
 
-    return wxSize(fwid, fhei);
+    return {fwid, fhei};
 }
 
 void wxComboCtrlBase::OnSizeEvent( wxSizeEvent& event )
@@ -2631,7 +2631,7 @@ bool wxComboCtrlBase::DoSetMargins(const wxPoint& margins)
 
 wxPoint wxComboCtrlBase::DoGetMargins() const
 {
-    return wxPoint(m_marginLeft, -1);
+    return {m_marginLeft, -1};
 }
 
 wxCoord wxComboCtrlBase::GetNativeTextIndent() const

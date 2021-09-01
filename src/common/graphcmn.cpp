@@ -213,7 +213,7 @@ wxPoint2DDouble wxGraphicsPath::GetCurrentPoint() const
 {
     double x,y;
     GetCurrentPoint(&x,&y);
-    return wxPoint2DDouble(x,y);
+    return {x, y};
 }
 
 void wxGraphicsPath::MoveToPoint( const wxPoint2DDouble& p)
@@ -240,7 +240,7 @@ wxRect2DDouble wxGraphicsPath::GetBox() const
 {
     double x,y,w,h;
     GetBox(&x,&y,&w,&h);
-    return wxRect2DDouble( x,y,w,h );
+    return { x, y, w, h };
 }
 
 bool wxGraphicsPath::Contains( const wxPoint2DDouble& c, wxPolygonFillMode fillStyle ) const
@@ -836,7 +836,7 @@ wxGraphicsPath wxGraphicsContext::CreatePath() const
 wxGraphicsPen wxGraphicsContext::CreatePen(const wxPen& pen) const
 {
     if ( !pen.IsOk() )
-        return wxGraphicsPen();
+        return {};
 
     wxGraphicsPenInfo info = wxGraphicsPenInfo()
                                 .Colour(pen.GetColour())

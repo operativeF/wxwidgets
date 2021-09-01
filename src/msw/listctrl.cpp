@@ -1277,7 +1277,7 @@ wxSize wxListCtrl::GetItemSpacing() const
 {
     const int spacing = ListView_GetItemSpacing(GetHwnd(), (BOOL)HasFlag(wxLC_SMALL_ICON));
 
-    return wxSize(LOWORD(spacing), HIWORD(spacing));
+    return {LOWORD(spacing), HIWORD(spacing)};
 }
 
 void wxListCtrl::SetItemTextColour( long item, const wxColour &col )

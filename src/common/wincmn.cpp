@@ -951,23 +951,23 @@ void wxWindowBase::SetInitialSize(const wxSize& size)
 // by default the origin is not shifted
 wxPoint wxWindowBase::GetClientAreaOrigin() const
 {
-    return wxPoint(0,0);
+    return {0, 0};
 }
 
 wxSize wxWindowBase::ClientToWindowSize(const wxSize& size) const
 {
     const wxSize diff(GetSize() - GetClientSize());
 
-    return wxSize(size.x == -1 ? -1 : size.x + diff.x,
-                  size.y == -1 ? -1 : size.y + diff.y);
+    return {size.x == -1 ? -1 : size.x + diff.x,
+            size.y == -1 ? -1 : size.y + diff.y};
 }
 
 wxSize wxWindowBase::WindowToClientSize(const wxSize& size) const
 {
     const wxSize diff(GetSize() - GetClientSize());
 
-    return wxSize(size.x == -1 ? -1 : size.x - diff.x,
-                  size.y == -1 ? -1 : size.y - diff.y);
+    return {size.x == -1 ? -1 : size.x - diff.x,
+            size.y == -1 ? -1 : size.y - diff.y};
 }
 
 void wxWindowBase::WXSetInitialFittingClientSize(int flags)
@@ -2827,8 +2827,8 @@ wxWindowBase::FromDIP(const wxSize& sz, const wxWindowBase* w)
 
     // Take care to not scale -1 because it has a special meaning of
     // "unspecified" which should be preserved.
-    return wxSize(sz.x == -1 ? -1 : wxMulDivInt32(sz.x, dpi.x, baseline),
-                  sz.y == -1 ? -1 : wxMulDivInt32(sz.y, dpi.y, baseline));
+    return {sz.x == -1 ? -1 : wxMulDivInt32(sz.x, dpi.x, baseline),
+            sz.y == -1 ? -1 : wxMulDivInt32(sz.y, dpi.y, baseline)};
 }
 
 /* static */
@@ -2841,8 +2841,8 @@ wxWindowBase::ToDIP(const wxSize& sz, const wxWindowBase* w)
 
     // Take care to not scale -1 because it has a special meaning of
     // "unspecified" which should be preserved.
-    return wxSize(sz.x == -1 ? -1 : wxMulDivInt32(sz.x, baseline, dpi.x),
-                  sz.y == -1 ? -1 : wxMulDivInt32(sz.y, baseline, dpi.y));
+    return {sz.x == -1 ? -1 : wxMulDivInt32(sz.x, baseline, dpi.x),
+            sz.y == -1 ? -1 : wxMulDivInt32(sz.y, baseline, dpi.y)};
 }
 
 #endif // !wxHAVE_DPI_INDEPENDENT_PIXELS

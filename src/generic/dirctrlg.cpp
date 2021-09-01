@@ -1193,7 +1193,7 @@ wxTreeItemId wxGenericDirCtrl::AppendItem (const wxTreeItemId & parent,
   }
   else
   {
-    return wxTreeItemId();
+    return {};
   }
 }
 

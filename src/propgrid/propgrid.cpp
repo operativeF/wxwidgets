@@ -2479,7 +2479,7 @@ wxRect wxPropertyGrid::GetPropertyRect( const wxPGProperty* p1, const wxPGProper
     if ( m_width < 10 || m_height < 10 ||
          !m_pState->DoGetRoot()->GetChildCount() ||
          p1 == nullptr )
-        return wxRect(0,0,0,0);
+        return {0, 0, 0, 0};
 
     int vy = 0;
 
@@ -3732,13 +3732,11 @@ wxRect wxPropertyGrid::GetEditorWidgetRect( wxPGProperty* p, int column ) const
         splitterX += (p->GetDepth() - 1) * m_subgroup_extramargin;
     }
 
-    return wxRect
-      (
-        splitterX+imageOffset+wxPG_XBEFOREWIDGET+wxPG_CONTROL_MARGIN+1-vx,
-        itemy-vy,
-        colEnd-splitterX-wxPG_XBEFOREWIDGET-wxPG_CONTROL_MARGIN-imageOffset-1,
-        m_lineHeight-1
-      );
+    return{ splitterX + imageOffset + wxPG_XBEFOREWIDGET + wxPG_CONTROL_MARGIN + 1 - vx,
+            itemy - vy,
+            colEnd - splitterX - wxPG_XBEFOREWIDGET - wxPG_CONTROL_MARGIN - imageOffset - 1,
+            m_lineHeight - 1
+      };
 }
 
 // -----------------------------------------------------------------------

@@ -420,7 +420,7 @@ wxTreeItemId wxTreebook::DoInternalGetPage(size_t pagePos) const
     {
         // invalid position but ok here, in this internal function, don't assert
         // (the caller will do it)
-        return wxTreeItemId();
+        return {};
     }
 
     return m_treeIds[pagePos];

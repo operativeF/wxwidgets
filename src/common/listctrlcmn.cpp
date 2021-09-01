@@ -209,7 +209,7 @@ wxSize wxListCtrlBase::DoGetBestClientSize() const
     }
 
     // Use some arbitrary height, there is no good way to determine it.
-    return wxSize(totalWidth, 10*dc.GetCharHeight());
+    return {totalWidth, 10 * dc.GetCharHeight()};
 }
 
 void wxListCtrlBase::SetAlternateRowColour(const wxColour& colour)

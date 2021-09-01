@@ -296,7 +296,7 @@ private:
         // do they determine it nor whether it's worth the trouble to emulate
         // their behaviour.
         const wxRect r = GetParent()->GetScreenRect();
-        return wxPoint(r.x + r.width/2, r.y + r.height/2);
+        return {r.x + r.width/2, r.y + r.height/2};
     }
 
     // Choose the correct orientation depending on the window position.

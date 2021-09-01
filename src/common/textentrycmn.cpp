@@ -425,7 +425,7 @@ bool wxTextEntryBase::DoSetMargins(const wxPoint& WXUNUSED(pt))
 
 wxPoint wxTextEntryBase::DoGetMargins() const
 {
-    return wxPoint(-1, -1);
+    return {-1, -1};
 }
 
 // ----------------------------------------------------------------------------

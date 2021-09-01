@@ -289,7 +289,7 @@ static wxBitmap wxPaneCreateStippleBitmap()
     // TODO: Provide x1.5 and x2.0 versions.
     unsigned char data[] = { 0,0,0,192,192,192, 192,192,192,0,0,0 };
     wxImage img(2,2,data,true);
-    return wxBitmap(img);
+    return {img};
 }
 
 static void DrawResizeHint(wxDC& dc, const wxRect& rect)

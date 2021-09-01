@@ -401,7 +401,7 @@ wxSize wxCheckListBox::MSWGetFullItemSize(int w, int h) const
     if ( h < size.y )
         h = size.y;
 
-    return wxSize(w, h);
+    return {w, h};
 }
 
 wxSize wxCheckListBox::DoGetBestClientSize() const

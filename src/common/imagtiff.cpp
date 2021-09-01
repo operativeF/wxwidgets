@@ -886,9 +886,9 @@ bool wxTIFFHandler::DoCanRead( wxInputStream& stream )
 
     wxString copyright;
     const wxString desc = ver.BeforeFirst('\n', &copyright);
-    copyright.Replace("\n", wxString());
+    copyright.Replace("\n", "");
 
-    return wxVersionInfo("libtiff", major, minor, micro, desc, copyright);
+    return {"libtiff", major, minor, micro, desc, copyright};
 }
 
 #endif  // wxUSE_LIBTIFF

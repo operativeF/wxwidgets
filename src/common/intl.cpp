@@ -1694,7 +1694,7 @@ wxString wxLocale::GetInfo(wxLocaleInfo index, wxLocaleCategory cat)
         switch ( index )
         {
             case wxLOCALE_THOUSANDS_SEP:
-                return wxString();
+                return {};
 
             case wxLOCALE_DECIMAL_POINT:
                 return ".";

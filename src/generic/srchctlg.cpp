@@ -187,7 +187,7 @@ public:
 protected:
     wxSize DoGetBestSize() const override
     {
-        return wxSize(m_bmp.GetWidth(), m_bmp.GetHeight());
+        return {m_bmp.GetWidth(), m_bmp.GetHeight()};
     }
 
     void OnLeftUp(wxMouseEvent&)

@@ -636,7 +636,7 @@ wxGridFitMode wxGridCellAttr::GetFitMode() const
     else
     {
         wxFAIL_MSG(wxT("Missing default cell attribute"));
-        return wxGridFitMode();
+        return {};
     }
 }
 
@@ -5036,7 +5036,7 @@ wxPoint wxGrid::GetPositionForResizeEvent(int width) const
                                    &x, nullptr,
                                    m_gridWin);
 
-    return wxPoint(x, 0);
+    return {x, 0};
 }
 
 void wxGrid::DoEndDragResizeRow(const wxMouseEvent& event, wxGridWindow* gridWindow)
@@ -6499,7 +6499,7 @@ void wxGrid::DrawCellHighlight( wxDC& dc, const wxGridCellAttr *attr )
 
 wxPen wxGrid::GetDefaultGridLinePen()
 {
-    return wxPen(GetGridLineColour());
+    return {GetGridLineColour()};
 }
 
 wxPen wxGrid::GetRowGridLinePen(int WXUNUSED(row))
@@ -10686,7 +10686,7 @@ bool wxGrid::IsInSelection( int row, int col ) const
 wxGridBlocks wxGrid::GetSelectedBlocks() const
 {
     if ( !m_selection )
-        return wxGridBlocks();
+        return {};
 
     const wxVectorGridBlockCoords& blocks = m_selection->GetBlocks();
     return wxGridBlocks(blocks.begin(), blocks.end());
@@ -11012,7 +11012,7 @@ wxRect wxGrid::BlockToDeviceRect( const wxGridCellCoords& topLeft,
     CalcGridWindowScrolledPosition( right - offset.x, bottom - offset.y, &right, &bottom, gridWindow );
 
     if ( right < 0 || bottom < 0 || left > client_size.x || top > client_size.y )
-        return wxRect(0,0,0,0);
+        return {0, 0, 0, 0};
 
     resultRect.SetLeft( std::max(0, left) );
     resultRect.SetTop( std::max(0, top) );

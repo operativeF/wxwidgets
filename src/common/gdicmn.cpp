@@ -235,7 +235,7 @@ wxRect operator+(const wxRect& r1, const wxRect& r2)
     const int y1 = std::min(r1.y, r2.y);
     const int y2 = std::max(r1.y+r1.height, r2.height+r2.y);
     const int x2 = std::max(r1.x+r1.width, r2.width+r2.x);
-    return wxRect(x1, y1, x2-x1, y2-y1);
+    return {x1, y1, x2 - x1, y2 - y1};
 }
 
 wxRect operator*(const wxRect& r1, const wxRect& r2)
@@ -244,7 +244,7 @@ wxRect operator*(const wxRect& r1, const wxRect& r2)
     const int y1 = std::max(r1.y, r2.y);
     const int y2 = std::min(r1.y+r1.height, r2.height+r2.y);
     const int x2 = std::min(r1.x+r1.width, r2.width+r2.x);
-    return wxRect(x1, y1, x2-x1, y2-y1);
+    return {x1, y1, x2 - x1, y2 - y1};
 }
 
 constexpr wxRealPoint::wxRealPoint(const wxPoint& pt)
@@ -879,8 +879,8 @@ wxSize wxGetDisplaySizeMM()
         return {0, 0};
 
     const wxSize pixels = wxGetDisplaySize();
-    return wxSize(wxRound(pixels.x * inches2mm / ppi.x),
-                  wxRound(pixels.y * inches2mm / ppi.y));
+    return {wxRound(pixels.x * inches2mm / ppi.x),
+            wxRound(pixels.y * inches2mm / ppi.y)};
 }
 
 wxSize wxGetDisplayPPI()

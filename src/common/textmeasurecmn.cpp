@@ -189,7 +189,7 @@ wxSize wxTextMeasureBase::GetLargestStringExtent(const std::vector<std::string>&
             heightMax = textExtent.y;
     }
 
-    return wxSize(widthMax, heightMax);
+    return {widthMax, heightMax};
 }
 
 std::vector<int> wxTextMeasureBase::GetPartialTextExtents(std::string_view text, double scaleX)

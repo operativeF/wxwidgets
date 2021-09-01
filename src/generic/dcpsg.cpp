@@ -330,7 +330,7 @@ bool wxPostScriptDCImpl::IsOk() const
 wxRect wxPostScriptDCImpl::GetPaperRect() const
 {
     wxSize sz = DoGetSize();
-    return wxRect(0,0,sz.x,sz.y);
+    return {0, 0, sz.x, sz.y};
 }
 
 int wxPostScriptDCImpl::GetResolution() const
@@ -1617,7 +1617,7 @@ void wxPostScriptDCImpl::DoGetSizeMM(int *width, int *height) const
 // Resolution in pixels per logical inch
 wxSize wxPostScriptDCImpl::GetPPI() const
 {
-    return wxSize( DPI, DPI );
+    return { DPI, DPI };
 }
 
 

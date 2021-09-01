@@ -147,14 +147,13 @@ void wxPrinterDCImpl::EndPage()
 
 
 wxRect wxPrinterDCImpl::GetPaperRect() const
-
 {
     if (!IsOk()) return wxRect(0, 0, 0, 0);
     int w = ::GetDeviceCaps((HDC) m_hDC, PHYSICALWIDTH);
     int h = ::GetDeviceCaps((HDC) m_hDC, PHYSICALHEIGHT);
     int x = -::GetDeviceCaps((HDC) m_hDC, PHYSICALOFFSETX);
     int y = -::GetDeviceCaps((HDC) m_hDC, PHYSICALOFFSETY);
-    return wxRect(x, y, w, h);
+    return {x, y, w, h};
 }
 
 

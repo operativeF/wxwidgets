@@ -2572,7 +2572,7 @@ public:
         HRESULT hr = m_srcBitmap->GetSize(&w, &h);
         wxCHECK2_HRESULT_RET(hr, wxSize());
 
-        return wxSize((int)w, (int)h);
+        return {gsl::narrow_cast<int>(w), gsl::narrow_cast<int>(h)};
     }
 
 #if wxUSE_IMAGE

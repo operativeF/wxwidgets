@@ -1344,7 +1344,7 @@ wxDateTime wxDateTime::GetDateOnly() const
     tm.sec =
     tm.min =
     tm.hour = 0;
-    return wxDateTime(tm);
+    return {tm};
 }
 
 // ----------------------------------------------------------------------------

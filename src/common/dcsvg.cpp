@@ -587,7 +587,7 @@ void wxSVGFileDCImpl::DoGetSizeMM(int* width, int* height) const
 
 wxSize wxSVGFileDCImpl::GetPPI() const
 {
-    return wxSize(wxRound(m_dpi), wxRound(m_dpi));
+    return {wxRound(m_dpi), wxRound(m_dpi)};
 }
 
 void wxSVGFileDCImpl::Clear()

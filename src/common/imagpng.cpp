@@ -836,11 +836,11 @@ bool wxPNGHandler::SaveFile( wxImage *image, wxOutputStream& stream, bool verbos
     wxString str = png_get_header_version(nullptr) + 1;
     str.Replace("\n", "");
 
-    return wxVersionInfo("libpng",
-                         PNG_LIBPNG_VER_MAJOR,
-                         PNG_LIBPNG_VER_MINOR,
-                         PNG_LIBPNG_VER_RELEASE,
-                         str);
+    return {"libpng",
+            PNG_LIBPNG_VER_MAJOR,
+            PNG_LIBPNG_VER_MINOR,
+            PNG_LIBPNG_VER_RELEASE,
+            str};
 }
 
 #endif  // wxUSE_LIBPNG
