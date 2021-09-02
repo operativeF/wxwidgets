@@ -323,6 +323,7 @@ void wxWindowsPrintPreview::DetermineScaling()
     }
     else
     {
+        // FIXME: Why not just default in the constructor?
         // use some defaults
         printerWidthMM = 150;
         printerHeightMM = 250;
@@ -334,6 +335,7 @@ void wxWindowsPrintPreview::DetermineScaling()
         paperRect = wxRect(0, 0, printerXRes, printerYRes);
         m_isOk = false;
     }
+
     m_pageWidth = printerXRes;
     m_pageHeight = printerYRes;
     m_previewPrintout->SetPageSizePixels(printerXRes, printerYRes);
@@ -404,9 +406,9 @@ BOOL CALLBACK wxAbortProc(HDC WXUNUSED(hdc), int WXUNUSED(error))
     /* Process messages intended for the abort dialog box */
 
     while (!wxPrinterBase::sm_abortIt && ::PeekMessage(&msg, nullptr, 0, 0, TRUE))
-        if (!IsDialogMessage((HWND) wxPrinterBase::sm_abortWindow->GetHWND(), &msg)) {
+        if (!::IsDialogMessageW((HWND) wxPrinterBase::sm_abortWindow->GetHWND(), &msg)) {
             TranslateMessage(&msg);
-            DispatchMessage(&msg);
+            ::DispatchMessageW(&msg);
         }
 
     /* bAbort is TRUE (return is FALSE) if the user has aborted */

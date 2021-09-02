@@ -31,10 +31,6 @@
 // in the standard d2d1helper.h header resulting in C4458 with VC14,
 // so disable this warning for this file as there is no other way to
 // avoid it.
-#ifdef __VISUALC__
-    #pragma warning(push)
-    #pragma warning(disable:4458) // declaration of 'xxx' hides class member
-#endif
 
 #include "wx/msw/private/graphicsd2d.h"
 
@@ -48,10 +44,6 @@
 #include <d3d11.h>
 #include <d2d1_1.h>
 #include <dxgi1_2.h>
-#endif
-
-#ifdef __VISUALC__
-    #pragma warning(pop)
 #endif
 
 #include <algorithm>

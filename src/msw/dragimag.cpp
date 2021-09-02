@@ -372,9 +372,14 @@ bool wxDragImage::Move(const wxPoint& pt)
     wxPoint pt2(pt);
     if (m_window && !m_fullScreen)
     {
-        RECT rect;
-        rect.left = 0; rect.top = 0;
-        rect.right = 0; rect.bottom = 0;
+        RECT rect
+        {
+            .left = 0,
+            .top = 0,
+            .right = 0,
+            .bottom = 0
+        };
+
         DWORD style = ::GetWindowLongW((HWND) m_window->GetHWND(), GWL_STYLE);
         DWORD exStyle = ::GetWindowLongW((HWND) m_window->GetHWND(), GWL_EXSTYLE);
         ::AdjustWindowRectEx(& rect, style, FALSE, exStyle);

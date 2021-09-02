@@ -216,7 +216,7 @@ size_t wxFileTypeImpl::GetAllCommands(std::vector<wxString> *verbs,
 void wxFileTypeImpl::MSWNotifyShell()
 {
     if (!m_suppressNotify)
-        SHChangeNotify(SHCNE_ASSOCCHANGED, SHCNF_IDLIST | SHCNF_FLUSHNOWAIT, nullptr, nullptr);
+        ::SHChangeNotify(SHCNE_ASSOCCHANGED, SHCNF_IDLIST | SHCNF_FLUSHNOWAIT, nullptr, nullptr);
 }
 
 void wxFileTypeImpl::MSWSuppressNotifications(bool supress)

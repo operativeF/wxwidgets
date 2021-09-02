@@ -106,11 +106,9 @@ public:
         { return ms_unlockedItem != (HTREEITEM)-1 && item != ms_unlockedItem; }
 
 private:
-    static HTREEITEM ms_unlockedItem;
+    inline static HTREEITEM ms_unlockedItem{nullptr};
     HTREEITEM m_oldUnlockedItem;
 };
-
-HTREEITEM TreeItemUnlocker::ms_unlockedItem = nullptr;
 
 // another helper class: set the variable to true during its lifetime and reset
 // it to false when it is destroyed
@@ -376,11 +374,6 @@ static bool SetFocus(HWND hwndTV, HTREEITEM htItem)
 // private classes
 // ----------------------------------------------------------------------------
 
-// a convenient wrapper around TV_ITEM struct which adds a ctor
-#ifdef __VISUALC__
-#pragma warning( disable : 4097 ) // inheriting from typedef
-#endif
-
 struct wxTreeViewItem : public TV_ITEM
 {
     wxTreeViewItem(const wxTreeItemId& item,    // the item handle
@@ -513,10 +506,6 @@ public:
 private:
     wxTreeItemParam *m_param;
 };
-
-#ifdef __VISUALC__
-#pragma warning( default : 4097 )
-#endif
 
 // a macro to get the virtual root, returns NULL if none
 #define GET_VIRTUAL_ROOT() ((wxVirtualNode *)m_pVirtualRoot)
@@ -3132,7 +3121,7 @@ wxTreeCtrl::MSWWindowProc(WXUINT nMsg, WXWPARAM wParam, WXLPARAM lParam)
                     // send NM_RCLICK
                     NMHDR nmhdr;
                     nmhdr.hwndFrom = GetHwnd();
-                    nmhdr.idFrom = ::GetWindowLong(GetHwnd(), GWL_ID);
+                    nmhdr.idFrom = ::GetWindowLongW(GetHwnd(), GWL_ID);
                     nmhdr.code = NM_RCLICK;
                     ::SendMessageW(::GetParent(GetHwnd()), WM_NOTIFY,
                                   nmhdr.idFrom, (LPARAM)&nmhdr);

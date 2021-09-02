@@ -148,7 +148,7 @@ wxComboEditWndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         }
     }
 
-    return ::CallWindowProc(CASTWNDPROC gs_wndprocEdit, hWnd, message, wParam, lParam);
+    return ::CallWindowProcW(CASTWNDPROC gs_wndprocEdit, hWnd, message, wParam, lParam);
 }
 
 // ----------------------------------------------------------------------------
@@ -278,7 +278,7 @@ bool wxComboBox::MSWProcessEditMsg(WXUINT msg, WXWPARAM wParam, WXLPARAM lParam)
     {
         // Here we reproduce what MSWDefWindowProc() does for this window
         // itself, but for the EDIT window.
-        ::CallWindowProc(CASTWNDPROC gs_wndprocEdit, (HWND)GetEditHWND(),
+        ::CallWindowProcW(CASTWNDPROC gs_wndprocEdit, (HWND)GetEditHWND(),
                          msg, wParam, lParam);
 
         // Send the event allowing completion code to do its thing.
@@ -420,7 +420,7 @@ WXHWND wxComboBox::GetEditHWNDIfAvailable() const
     }
 
     // we assume that the only child of the combobox is the edit window
-    return (WXHWND)::FindWindowEx(GetHwnd(), nullptr, wxT("EDIT"), nullptr);
+    return (WXHWND)::FindWindowExW(GetHwnd(), nullptr, wxT("EDIT"), nullptr);
 }
 
 WXHWND wxComboBox::GetEditHWND() const

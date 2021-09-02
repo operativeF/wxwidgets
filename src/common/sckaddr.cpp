@@ -74,10 +74,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxUNIXaddress, wxSockAddress);
             // this header does dynamic dispatching of getaddrinfo/freeaddrinfo()
             // by implementing them in its own code if the system versions are
             // not available (as is the case for anything < XP)
-            #pragma warning(push)
-            #pragma warning(disable:4706)
             #include <wspiapi.h>
-            #pragma warning(pop)
         #else
             // TODO: Use wxDynamicLibrary to bind to these functions
             //       dynamically on older Windows systems, currently a program

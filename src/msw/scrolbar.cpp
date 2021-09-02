@@ -139,12 +139,14 @@ bool wxScrollBar::MSWOnScroll(int WXUNUSED(orientation), WXWORD wParam,
 
 void wxScrollBar::SetThumbPosition(int viewStart)
 {
-    SCROLLINFO info;
-    info.cbSize = sizeof(SCROLLINFO);
-    info.nPage = 0;
-    info.nMin = 0;
-    info.nPos = viewStart;
-    info.fMask = SIF_POS ;
+    SCROLLINFO info
+    {
+        info.cbSize = sizeof(SCROLLINFO),
+        info.nPage = 0,
+        info.nMin = 0,
+        info.nPos = viewStart,
+        info.fMask = SIF_POS
+    };
 
     ::SetScrollInfo((HWND) GetHWND(), SB_CTL, &info, TRUE);
 }

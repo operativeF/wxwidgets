@@ -153,14 +153,17 @@ public:
             wxTextCtrl* const text = wxDynamicCast(win, wxTextCtrl);
             if ( text )
             {
-                EDITBALLOONTIP ebt;
-                ebt.cbStruct = sizeof(EDITBALLOONTIP);
                 boost::nowide::wstackstring stackTitle(m_title.c_str());
                 boost::nowide::wstackstring stackMessage(m_message.c_str());
 
-                ebt.pszTitle = stackTitle.get();
-                ebt.pszText = stackMessage.get();
-                ebt.ttiIcon = m_ttiIcon;
+                EDITBALLOONTIP ebt
+                {
+                    .cbStruct = sizeof(EDITBALLOONTIP),
+                    .pszTitle = stackTitle.get(),
+                    .pszText = stackMessage.get(),
+                    .ttiIcon = m_ttiIcon
+                };
+
                 if ( Edit_ShowBalloonTip(GetHwndOf(text), &ebt) )
                     return;
             }

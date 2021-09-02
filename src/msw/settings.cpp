@@ -101,8 +101,8 @@ wxColour wxSystemSettingsNative::GetColour(wxSystemColour index)
         // Determine if we are using flat menus, only then allow wxSYS_COLOUR_MENUBAR
         if ( index == wxSYS_COLOUR_MENUBAR )
         {
-            BOOL isFlat ;
-            if ( SystemParametersInfo( SPI_GETFLATMENU , 0 ,&isFlat, 0 ) )
+            BOOL isFlat;
+            if ( ::SystemParametersInfoW( SPI_GETFLATMENU , 0 ,&isFlat, 0 ) )
             {
                 if ( !isFlat )
                     index = wxSYS_COLOUR_MENU ;

@@ -252,21 +252,12 @@ private:
         wxDL_INIT_FUNC(ms_pfn, SetGestureConfig, dll);
     }
 
-    static GetGestureInfo_t ms_pfnGetGestureInfo;
-    static CloseGestureInfoHandle_t ms_pfnCloseGestureInfoHandle;
-    static SetGestureConfig_t ms_pfnSetGestureConfig;
+    inline static GetGestureInfo_t ms_pfnGetGestureInfo{nullptr};
+    inline static CloseGestureInfoHandle_t ms_pfnCloseGestureInfoHandle{nullptr};
+    inline static SetGestureConfig_t ms_pfnSetGestureConfig{nullptr};
 
-    static bool ms_gestureSymbolsLoaded;
+    inline static bool ms_gestureSymbolsLoaded{false};
 };
-
-GestureFuncs::GetGestureInfo_t
-    GestureFuncs::ms_pfnGetGestureInfo = nullptr;
-GestureFuncs::CloseGestureInfoHandle_t
-    GestureFuncs::ms_pfnCloseGestureInfoHandle = nullptr;
-GestureFuncs::SetGestureConfig_t
-    GestureFuncs::ms_pfnSetGestureConfig = nullptr;
-
-bool GestureFuncs::ms_gestureSymbolsLoaded = false;
 
 } // anonymous namespace
 
@@ -536,7 +527,7 @@ void wxWindowMSW::SetId(wxWindowID winid)
     {
         ::SetLastError(0);
 
-        if ( !::SetWindowLong(GetHwnd(), GWL_ID, winid) )
+        if ( !::SetWindowLongW(GetHwnd(), GWL_ID, winid) )
         {
             const DWORD err = ::GetLastError();
             if ( err )
@@ -855,9 +846,10 @@ bool wxWindowMSW::SetCursor(const wxCursor& cursor)
         if ( !win )
             win = this;
 
-        ::SendMessageW(GetHwndOf(win), WM_SETCURSOR,
-                      (WPARAM)GetHwndOf(win),
-                      MAKELPARAM(HTCLIENT, WM_MOUSEMOVE));
+        ::SendMessageW(GetHwndOf(win),
+                       WM_SETCURSOR,
+                       (WPARAM)GetHwndOf(win),
+                       MAKELPARAM(HTCLIENT, WM_MOUSEMOVE));
     }
 
     return true;
@@ -1833,11 +1825,13 @@ wxSize wxWindowMSW::DoGetClientSize() const
         //        work in this direction neither. So we just have to live with
         //        the slightly wrong results and relayout the window when it
         //        gets finally shown in its maximized state (see #11762).
-        RECT rect;
-        rect.left = m_pendingPosition.x;
-        rect.top = m_pendingPosition.y;
-        rect.right = rect.left + m_pendingSize.x;
-        rect.bottom = rect.top + m_pendingSize.y;
+        RECT rect
+        {
+            .left   = m_pendingPosition.x,
+            .top    = m_pendingPosition.y,
+            .right  = m_pendingPosition.x + m_pendingSize.x,
+            .bottom = m_pendingPosition.y + m_pendingSize.y 
+        };
 
         ::SendMessageW(GetHwnd(), WM_NCCALCSIZE, FALSE, (LPARAM)&rect);
 
@@ -2235,7 +2229,7 @@ wxSize wxWindowMSW::DoGetBorderSize() const
             border = 0;
     }
 
-    return 2*wxSize(border, border);
+    return 2 * wxSize(border, border);
 }
 
 // ---------------------------------------------------------------------------
@@ -2609,6 +2603,7 @@ bool wxWindowMSW::MSWProcessMessage(WXMSG* pMsg)
 
             if ( bProcess )
             {
+                // TODO: Make constructor that takes these params.
                 wxNavigationKeyEvent event;
                 event.SetDirection(bForward);
                 event.SetWindowChange(bWindowChange);
@@ -4384,7 +4379,7 @@ bool wxWindowMSW::HandleDropFiles(WXWPARAM wParam)
     event.SetEventObject(this);
 
     POINT dropPoint;
-    DragQueryPoint(hFilesInfo, (LPPOINT) &dropPoint);
+    ::DragQueryPoint(hFilesInfo, (LPPOINT) &dropPoint);
     event.m_pos.x = dropPoint.x;
     event.m_pos.y = dropPoint.y;
 
@@ -4432,8 +4427,8 @@ bool wxWindowMSW::HandleSetCursor(WXHWND WXUNUSED(hWnd),
         POINT pt;
         wxGetCursorPosMSW(&pt);
 
-        int x = pt.x,
-            y = pt.y;
+        int x = pt.x;
+        int y = pt.y;
         ScreenToClient(&x, &y);
         wxSetCursorEvent event(x, y);
         event.SetId(GetId());
@@ -4780,7 +4775,7 @@ bool wxSystemParametersInfo(UINT uiAction, UINT uiParam, PVOID pvParam, UINT fWi
     wxUnusedVar(window);
 #endif // wxUSE_DYNLIB_CLASS
 
-    return ::SystemParametersInfo(uiAction, uiParam, pvParam, fWinIni) == TRUE;
+    return ::SystemParametersInfoW(uiAction, uiParam, pvParam, fWinIni) == TRUE;
 }
 
 wxSize wxWindowMSW::GetDPI() const
@@ -5145,6 +5140,7 @@ extern wxCOLORMAP *wxGetStdColourMap()
             }
             else // wxBITMAP_STD_COLOURS couldn't be loaded
             {
+                // TODO: Create abstraction for RGB
                 s_stdColours[0] = RGB(000,000,000);     // black
                 s_stdColours[1] = RGB(128,128,128);     // dark grey
                 s_stdColours[2] = RGB(192,192,192);     // light grey
@@ -5985,9 +5981,12 @@ wxWindowMSW::HandleMouseWheel(wxMouseWheelAxis axis,
     // because InitMouseEvent() expects coordinates in Windows client
     // coordinates and not wx ones (the difference being the height of the
     // toolbar, if any).
-    POINT pt;
-    pt.x = GET_X_LPARAM(lParam);
-    pt.y = GET_Y_LPARAM(lParam);
+    POINT pt
+    {
+        .x = GET_X_LPARAM(lParam),
+        .y = GET_Y_LPARAM(lParam)
+    };
+
     ::ScreenToClient(GetHwnd(), &pt);
 
     wxMouseEvent event(wxEVT_MOUSEWHEEL);
@@ -5999,7 +5998,7 @@ wxWindowMSW::HandleMouseWheel(wxMouseWheelAxis axis,
     static int s_linesPerRotation = -1;
     if ( s_linesPerRotation == -1 )
     {
-        if ( !::SystemParametersInfo(SPI_GETWHEELSCROLLLINES, 0,
+        if ( !::SystemParametersInfoW(SPI_GETWHEELSCROLLLINES, 0,
                                      &s_linesPerRotation, 0))
         {
             // this is not supposed to happen
@@ -6013,7 +6012,7 @@ wxWindowMSW::HandleMouseWheel(wxMouseWheelAxis axis,
     static int s_columnsPerRotation = -1;
     if ( s_columnsPerRotation == -1 )
     {
-        if ( !::SystemParametersInfo(SPI_GETWHEELSCROLLCHARS, 0,
+        if ( !::SystemParametersInfoW(SPI_GETWHEELSCROLLCHARS, 0,
                                      &s_columnsPerRotation, 0))
         {
             // this setting is not supported on Windows 2000/XP, so use the value of 1
@@ -6360,7 +6359,7 @@ int wxWindowMSW::HandleMenuChar(int chAccel,
     // find if we have this letter in any owner drawn item
     for ( int i = 0; i < ::GetMenuItemCount(hmenu); i++ )
     {
-        if ( ::GetMenuItemInfo(hmenu, i, TRUE, &mii) )
+        if ( ::GetMenuItemInfoW(hmenu, i, TRUE, &mii) )
         {
             if ( mii.fType == MFT_OWNERDRAW )
             {
@@ -6539,7 +6538,7 @@ wxSize wxGetCharSize(WXHWND wnd, const wxFont& the_font)
     if ( fnt )
         was = (HFONT) SelectObject(dc,fnt);
 
-    GetTextMetrics(dc, &tm);
+    ::GetTextMetricsW(dc, &tm);
     if ( fnt && was )
     {
         SelectObject(dc,was);
@@ -7647,7 +7646,7 @@ static TEXTMETRIC wxGetTextMetrics(const wxWindowMSW *win)
 #endif
 
     // finally retrieve the text metrics from it
-    GetTextMetrics(hdc, &tm);
+    ::GetTextMetricsW(hdc, &tm);
 
 #if !wxDIALOG_UNIT_COMPATIBILITY
     // and clean up
@@ -7672,9 +7671,11 @@ wxWindow* wxFindWindowAtPointer(wxPoint& pt)
 
 wxWindow* wxFindWindowAtPoint(const wxPoint& pt)
 {
-    POINT pt2;
-    pt2.x = pt.x;
-    pt2.y = pt.y;
+    POINT pt2
+    {
+        .x = pt.x,
+        .y = pt.y
+    };
 
     HWND hWnd = ::WindowFromPoint(pt2);
     if ( hWnd )

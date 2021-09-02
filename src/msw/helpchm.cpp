@@ -36,13 +36,8 @@
 // of hhctrl.ocx
 // ----------------------------------------------------------------------------
 
-#ifndef UNICODE
-    using HTMLHELP = HWND ( WINAPI*)( HWND, LPCSTR, UINT, ULONG_PTR );
-    constexpr wxChar HTMLHELP_NAME[] = wxT("HtmlHelpA");
-#else // ANSI
-    using HTMLHELP = HWND ( WINAPI*)( HWND, LPCWSTR, UINT, ULONG_PTR );
-    constexpr wxChar HTMLHELP_NAME[] = wxT("HtmlHelpW");
-#endif
+using HTMLHELP = HWND ( WINAPI*)( HWND, LPCWSTR, UINT, ULONG_PTR );
+constexpr wxChar HTMLHELP_NAME[] = wxT("HtmlHelpW");
 
 HTMLHELP GetHtmlHelpFunction()
 {
@@ -203,7 +198,8 @@ bool wxCHMHelpController::KeywordSearch(const std::string& k,
 
     if (k.empty())
     {
-        HH_FTS_QUERY oQuery = {
+        HH_FTS_QUERY oQuery
+        {
             .cbStruct{sizeof(HH_FTS_QUERY)},
             .fUniCodeStrings{0},
             .pszSearchQuery{TEXT("")},

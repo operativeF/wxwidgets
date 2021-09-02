@@ -213,10 +213,10 @@ bool wxGetUserId(wxChar *buf,
                  int maxSize)
 {
     DWORD nSize = maxSize;
-    if ( ::GetUserName(buf, &nSize) == 0 )
+    if ( ::GetUserNameW(buf, &nSize) == 0 )
     {
         // actually, it does happen if the user didn't log on
-        const DWORD res = ::GetEnvironmentVariable(wxT("username"), buf, maxSize);
+        const DWORD res = ::GetEnvironmentVariableW(wxT("username"), buf, maxSize);
         if ( res == 0 )
         {
             // not found
@@ -301,7 +301,7 @@ error:
 #else  // !USE_NET_API
     // Could use NIS, MS-Mail or other site specific programs
     // Use wxWidgets configuration data
-    bool ok = GetProfileString(WX_SECTION, eUSERNAME, wxEmptyString, buf, maxSize - 1) != 0;
+    bool ok = ::GetProfileStringW(WX_SECTION, eUSERNAME, wxEmptyString, buf, maxSize - 1) != 0;
     if ( !ok )
     {
         ok = wxGetUserId(buf, maxSize);
@@ -424,7 +424,7 @@ bool wxGetDiskSpace(const wxString& path,
     ULARGE_INTEGER bytesFree, bytesTotal;
 
     // may pass the path as is, GetDiskFreeSpaceEx() is smart enough
-    if ( !::GetDiskFreeSpaceEx(path.t_str(),
+    if ( !::GetDiskFreeSpaceExW(path.t_str(),
                                &bytesFree,
                                &bytesTotal,
                                nullptr) )
@@ -466,7 +466,7 @@ bool wxGetEnv(const wxString& var,
               wxString *value)
 {
     // first get the size of the buffer
-    DWORD dwRet = ::GetEnvironmentVariable(var.t_str(), nullptr, 0);
+    DWORD dwRet = ::GetEnvironmentVariableW(var.t_str(), nullptr, 0);
     if ( !dwRet )
     {
         // this means that there is no such variable
@@ -475,7 +475,7 @@ bool wxGetEnv(const wxString& var,
 
     if ( value )
     {
-        std::ignore = ::GetEnvironmentVariable(var.t_str(),
+        std::ignore = ::GetEnvironmentVariableW(var.t_str(),
                                        wxStringBuffer(*value, dwRet),
                                        dwRet);
     }
@@ -651,7 +651,7 @@ int wxKill(long pid, wxSignal sig, wxKillError *krc, int flags)
                         //     opportunity to save any files, for example, but
                         //     this is probably what we want here. If not we
                         //     can also use SendMesageTimeout(WM_CLOSE)
-                        if ( !::PostMessage(params.hwnd, WM_QUIT, 0, 0) )
+                        if ( !::PostMessageW(params.hwnd, WM_QUIT, 0, 0) )
                         {
                             wxLogLastError(wxT("PostMessage(WM_QUIT)"));
                         }
@@ -770,7 +770,7 @@ int wxKillAllChildren(long pid, wxSignal sig, wxKillError *krc)
 
     // Walk the snapshot of the processes, and for each process,
     // kill it if its parent is pid.
-    if (!::Process32First(hProcessSnap, &pe)) {
+    if (!::Process32FirstW(hProcessSnap, &pe)) {
         // Can't get first process.
         if (krc)
             *krc = wxKILL_ERROR;
@@ -783,7 +783,7 @@ int wxKillAllChildren(long pid, wxSignal sig, wxKillError *krc)
             if (wxKill(pe.th32ProcessID, sig, krc))
                 return -1;
         }
-    } while (::Process32Next (hProcessSnap, &pe));
+    } while (::Process32NextW(hProcessSnap, &pe));
 
 
     return 0;
@@ -825,7 +825,7 @@ bool wxShutdown(int flags)
         TOKEN_PRIVILEGES tkp;
 
         // Get the LUID for the shutdown privilege.
-        bOK = ::LookupPrivilegeValue(nullptr, SE_SHUTDOWN_NAME,
+        bOK = ::LookupPrivilegeValueW(nullptr, SE_SHUTDOWN_NAME,
                                         &tkp.Privileges[0].Luid) != 0;
 
         if ( bOK )
@@ -1003,20 +1003,11 @@ OSVERSIONINFOEXW wxGetWindowsVersionInfo()
     }
 #endif // wxUSE_DYNLIB_CLASS
 
-#ifdef __VISUALC__
-    #pragma warning(push)
-    #pragma warning(disable:4996) // 'xxx': was declared deprecated
-#endif
-
     if ( !::GetVersionExW(reinterpret_cast<OSVERSIONINFOW *>(&info)) )
     {
         // This really shouldn't ever happen.
         wxFAIL_MSG( "GetVersionEx() unexpectedly failed" );
     }
-
-#ifdef __VISUALC__
-    #pragma warning(pop)
-#endif
 
     return info;
 }

@@ -236,8 +236,8 @@ private:
         GetDpiForMonitor_t m_pfnGetDpiForMonitor{nullptr};
         bool m_initialized{false};
     };
-    static GetDpiForMonitorData ms_getDpiForMonitorData;
 
+    inline static GetDpiForMonitorData ms_getDpiForMonitorData{};
 
     // the array containing information about all available displays, filled by
     // MultimonEnumProc()
@@ -248,9 +248,6 @@ private:
     HWND m_hiddenHwnd{nullptr};
     const wxChar* m_hiddenClass{nullptr};
 };
-
-wxDisplayFactoryMSW::GetDpiForMonitorData
-    wxDisplayFactoryMSW::ms_getDpiForMonitorData;
 
 // ----------------------------------------------------------------------------
 // wxDisplay implementation
@@ -572,7 +569,7 @@ wxDisplayFactoryMSW::MultimonEnumProc(
         wxLogLastError(wxT("GetMonitorInfo"));
     }
 
-    HDC hdcMonitor = ::CreateDC(nullptr, monInfo.szDevice, nullptr, nullptr);
+    HDC hdcMonitor = ::CreateDCW(nullptr, monInfo.szDevice, nullptr, nullptr);
     const int hdcDepth = wxGetHDCDepth(hdcMonitor);
     ::DeleteDC(hdcMonitor);
 

@@ -24,12 +24,6 @@
 // define wxHAVE_U_ESCAPE if the compiler supports \uxxxx character constants
 #if defined(__VISUALC__) || defined(__GNUC__)
     #define wxHAVE_U_ESCAPE
-
-    // and disable warning that using them results in with MSVC 8+
-    #if wxCHECK_VISUALC_VERSION(8)
-        // universal-character-name encountered in source
-        #pragma warning(disable:4428)
-    #endif
 #endif
 
 // Define wxUSING_MANTISSA_SIZE_3 for certain versions of MinGW and MSVC.

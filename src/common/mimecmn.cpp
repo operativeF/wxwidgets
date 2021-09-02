@@ -114,16 +114,9 @@ void wxFileTypeInfo::DoVarArgInit(const wxString& mimeType,
     for ( ;; )
     {
         // icc gives this warning in its own va_arg() macro, argh
-#ifdef __INTELC__
-    #pragma warning(push)
-    #pragma warning(disable: 1684)
-#endif
 
         const wxArgNormalizedString ext(WX_VA_ARG_STRING(argptr));
 
-#ifdef __INTELC__
-    #pragma warning(pop)
-#endif
         if ( !ext )
         {
             // NULL terminates the list

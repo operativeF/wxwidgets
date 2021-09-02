@@ -1244,7 +1244,3 @@ bool wxMatchWild( const wxString& pat, const wxString& text, bool dot_special )
         }
     }
 }
-
-#ifdef __VISUALC__
-    #pragma warning(default:4706)   // assignment within conditional expression
-#endif // VC++

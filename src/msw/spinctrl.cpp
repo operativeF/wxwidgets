@@ -808,9 +808,9 @@ void wxSpinCtrl::DoMoveWindow(int x, int y, int width, int height)
 wxSize wxSpinCtrl::DoGetSize() const
 {
     RECT spinrect, textrect, ctrlrect;
-    GetWindowRect(GetHwnd(), &spinrect);
-    GetWindowRect(GetBuddyHwnd(), &textrect);
-    UnionRect(&ctrlrect,&textrect, &spinrect);
+    ::GetWindowRect(GetHwnd(), &spinrect);
+    ::GetWindowRect(GetBuddyHwnd(), &textrect);
+    ::UnionRect(&ctrlrect,&textrect, &spinrect);
 
     return {ctrlrect.right - ctrlrect.left, ctrlrect.bottom - ctrlrect.top};
 }
@@ -820,7 +820,7 @@ wxSize wxSpinCtrl::DoGetClientSize() const
     RECT spinrect = wxGetClientRect(GetHwnd());
     RECT textrect = wxGetClientRect(GetBuddyHwnd());
     RECT ctrlrect;
-    UnionRect(&ctrlrect,&textrect, &spinrect);
+    ::UnionRect(&ctrlrect,&textrect, &spinrect);
 
     return {ctrlrect.right - ctrlrect.left, ctrlrect.bottom - ctrlrect.top};
 }

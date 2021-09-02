@@ -20,9 +20,4 @@
  * This will produce a big PCH file.
  */
 
-/* RN:  MSVC Spits out annoying warnings about debug info - tell it to be quiet! */
-#ifdef _MSC_VER
-    #pragma warning(disable : 4786)
-#endif // _MSC_VER
-
 #include "testprec.h"

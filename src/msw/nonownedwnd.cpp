@@ -150,7 +150,7 @@ bool wxNonOwnedWindow::Reparent(wxWindowBase* newParent)
 
     const HWND hwndOwner = GetParent() ? GetHwndOf(GetParent()) : nullptr;
 
-    ::SetWindowLongPtr(GetHwnd(), GWLP_HWNDPARENT, (LONG_PTR)hwndOwner);
+    ::SetWindowLongPtrW(GetHwnd(), GWLP_HWNDPARENT, (LONG_PTR)hwndOwner);
 
     return true;
 }

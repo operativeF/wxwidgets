@@ -263,12 +263,6 @@ void CopyDataFromPNG(wxImage *image,
     }
 }
 
-// temporarily disable the warning C4611 (interaction between '_setjmp' and
-// C++ object destruction is non-portable) - I don't see any dtors here
-#ifdef __VISUALC__
-    #pragma warning(disable:4611)
-#endif /* VC++ */
-
 // This function uses wxPNGImageData to store some of its "local" variables in
 // order to avoid clobbering these variables by longjmp(): having them inside
 // the stack frame of the caller prevents this from happening. It also
@@ -822,10 +816,6 @@ bool wxPNGHandler::SaveFile( wxImage *image, wxOutputStream& stream, bool verbos
 
     return true;
 }
-
-#ifdef __VISUALC__
-    #pragma warning(default:4611)
-#endif /* VC++ */
 
 #endif  // wxUSE_STREAMS
 

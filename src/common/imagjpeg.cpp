@@ -136,25 +136,11 @@ CPP_METHODDEF(void) wx_term_source ( j_decompress_ptr cinfo )
 
 // JPEG error manager:
 
-#ifdef __VISUALC__
-    // We don't care about the size of this struct, but we still get an
-    // annoying warning C4324 here:
-    //
-    //  'wx_error_mgr' : structure was padded due to __declspec(align())
-    //
-    // and suppressing it seems to be the only way to avoid it.
-    #pragma warning(push)
-    #pragma warning(disable: 4324)
-#endif
 
 struct wx_error_mgr : public jpeg_error_mgr
 {
   jmp_buf setjmp_buffer;    /* for return to caller */
 };
-
-#ifdef __VISUALC__
-    #pragma warning(pop)
-#endif
 
 /*
  * Here's the routine that will replace the standard error_exit method:
@@ -221,12 +207,6 @@ static inline void wx_cmyk_to_rgb(unsigned char* rgb, const unsigned char* cmyk)
     c = k + k2 * (255 - cmyk[2]) / 255;
     rgb[2] = (unsigned char)((c > 255) ? 0 : (255 - c));
 }
-
-// temporarily disable the warning C4611 (interaction between '_setjmp' and
-// C++ object destruction is non-portable) - I don't see any dtors here
-#ifdef __VISUALC__
-    #pragma warning(disable:4611)
-#endif /* VC++ */
 
 bool wxJPEGHandler::LoadFile( wxImage *image, wxInputStream& stream, bool verbose, int WXUNUSED(index) )
 {
@@ -484,10 +464,6 @@ bool wxJPEGHandler::SaveFile( wxImage *image, wxOutputStream& stream, bool verbo
 
     return true;
 }
-
-#ifdef __VISUALC__
-    #pragma warning(default:4611)
-#endif /* VC++ */
 
 bool wxJPEGHandler::DoCanRead( wxInputStream& stream )
 {

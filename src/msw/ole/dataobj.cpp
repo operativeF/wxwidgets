@@ -990,11 +990,6 @@ void* wxDataObject::SetSizeInBuffer( void* buffer, size_t size,
 
 const wxChar *wxDataObject::GetFormatName(wxDataFormat format)
 {
-    // case 'xxx' is not a valid value for switch of enum 'wxDataFormat'
-    #ifdef __VISUALC__
-        #pragma warning(disable:4063)
-    #endif // VC++
-
     static wxChar s_szBuf[256];
     switch ( format ) {
         case CF_TEXT:         return wxT("CF_TEXT");
@@ -1023,10 +1018,6 @@ const wxChar *wxDataObject::GetFormatName(wxDataFormat format)
 
             return s_szBuf;
     }
-
-    #ifdef __VISUALC__
-        #pragma warning(default:4063)
-    #endif // VC++
 }
 
 #endif // wxDEBUG_LEVEL

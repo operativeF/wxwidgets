@@ -193,11 +193,12 @@ public:
     bool Create()
     {
         // default secutiry attributes
-        SECURITY_ATTRIBUTES security;
-
-        security.nLength              = sizeof(security);
-        security.lpSecurityDescriptor = nullptr;
-        security.bInheritHandle       = TRUE; // to pass it to the child
+        SECURITY_ATTRIBUTES security
+        {
+            .nLength              = sizeof(security),
+            .lpSecurityDescriptor = nullptr,
+            .bInheritHandle       = TRUE // to pass it to the child
+        };
 
         if ( !::CreatePipe(&m_handles[0], &m_handles[1], &security, 0) )
         {
@@ -353,7 +354,7 @@ wxExecuteWindowCbk(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     }
     else
     {
-        return ::DefWindowProc(hWnd, message, wParam, lParam);
+        return ::DefWindowProcW(hWnd, message, wParam, lParam);
     }
 }
 
@@ -807,7 +808,7 @@ long wxExecute(const wxString& cmd, int flags, wxProcess *handler,
         }
     }
 
-    const bool ok = ::CreateProcess
+    const bool ok = ::CreateProcessW
                 (
                  nullptr,               // application name (use only cmd line)
                  wxMSW_CONV_LPTSTR(command), // full command line
@@ -1018,7 +1019,7 @@ long wxExecute(const wxString& cmd, int flags, wxProcess *handler,
         // we must always process messages for our hidden window or we'd never
         // get wxWM_PROC_TERMINATED and so this loop would never terminate
         MSG msg;
-        ::PeekMessage(&msg, data->hWnd, 0, 0, PM_REMOVE);
+        ::PeekMessageW(&msg, data->hWnd, 0, 0, PM_REMOVE);
 
         // we may also need to process messages for all the other application
         // windows

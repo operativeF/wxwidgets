@@ -84,15 +84,7 @@ TEST_CASE("CharPrintf")
     CHECK( s == "a to z" );
 
     // test char used as integer:
-    #ifdef _MSC_VER
-        #pragma warning(disable:4309) // truncation of constant value
-    #endif
-    wxCLANG_WARNING_SUPPRESS(constant-conversion)
     c = 240;
-    wxCLANG_WARNING_RESTORE(constant-conversion)
-    #ifdef _MSC_VER
-        #pragma warning(default:4309)
-    #endif
     #ifndef __CHAR_UNSIGNED__
     s.Printf("value is %i (int)", c);
     CHECK( s == wxString("value is -16 (int)") );

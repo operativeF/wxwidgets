@@ -359,19 +359,19 @@ void wxCursor::InitFromStock(wxStockCursor idCursor)
     const StdCursor& stdCursor = stdCursors[idCursor];
     bool deleteLater = !stdCursor.isStd;
 
-    HCURSOR hcursor = ::LoadCursor(stdCursor.isStd ? nullptr : wxGetInstance(),
+    HCURSOR hcursor = ::LoadCursorW(stdCursor.isStd ? nullptr : wxGetInstance(),
                                    stdCursor.name);
 
     // IDC_HAND may not be available on some versions of Windows.
     if ( !hcursor && idCursor == wxCURSOR_HAND)
     {
-        hcursor = ::LoadCursor(wxGetInstance(), wxT("WXCURSOR_HAND"));
+        hcursor = ::LoadCursorW(wxGetInstance(), wxT("WXCURSOR_HAND"));
         deleteLater = true;
     }
 
     if ( !hcursor && idCursor == wxCURSOR_RIGHT_ARROW)
     {
-        hcursor = ::LoadCursor(nullptr, IDC_ARROW);
+        hcursor = ::LoadCursorW(nullptr, IDC_ARROW);
         if ( hcursor )
         {
             hcursor = CreateReverseCursor(hcursor);

@@ -76,11 +76,6 @@ class wxToolTipOtherWindows : public std::vector<WXHWND>
 {
 };
 
-// a wrapper around TOOLINFO Win32 structure
-#ifdef __VISUALC__
-    #pragma warning( disable : 4097 ) // we inherit from a typedef - so what?
-#endif
-
 class wxToolInfo : public TOOLINFO
 {
 public:
@@ -147,10 +142,6 @@ private:
 };
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxToolTipModule, wxModule);
-
-#ifdef __VISUALC__
-    #pragma warning( default : 4097 )
-#endif
 
 // ----------------------------------------------------------------------------
 // private functions

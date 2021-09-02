@@ -185,15 +185,18 @@ int wxDirDialog::ShowModal()
 
 int wxDirDialog::ShowSHBrowseForFolder(WXHWND owner)
 {
-    BROWSEINFO bi;
-    bi.hwndOwner      = owner;
-    bi.pidlRoot       = nullptr;
-    bi.pszDisplayName = nullptr;
     boost::nowide::wstackstring stackMessage(m_message.c_str());
-    bi.lpszTitle      = stackMessage.get();
-    bi.ulFlags        = BIF_RETURNONLYFSDIRS | BIF_STATUSTEXT;
-    bi.lpfn           = BrowseCallbackProc;
-    bi.lParam         = reinterpret_cast<LPARAM>(boost::nowide::widen(m_path).c_str()); // param for the callback
+
+    BROWSEINFO bi
+    {
+        .hwndOwner      = owner,
+        .pidlRoot       = nullptr,
+        .pszDisplayName = nullptr,
+        .lpszTitle      = stackMessage.get(),
+        .ulFlags        = BIF_RETURNONLYFSDIRS | BIF_STATUSTEXT,
+        .lpfn           = BrowseCallbackProc,
+        .lParam         = reinterpret_cast<LPARAM>(boost::nowide::widen(m_path).c_str()) // param for the callback
+    };
 
     static const int verComCtl32 = wxApp::GetComCtl32Version();
 
@@ -492,7 +495,7 @@ BrowseCallbackProc(HWND hwnd, UINT uMsg, LPARAM lp, LPARAM pData)
             {
                 // Set the status window to the currently selected path.
                 wxString strDir;
-                if ( SHGetPathFromIDList((LPITEMIDLIST)lp,
+                if ( ::SHGetPathFromIDListW((LPITEMIDLIST)lp,
                                          wxStringBuffer(strDir, MAX_PATH)) )
                 {
                     // NB: this shouldn't be necessary with the new style box

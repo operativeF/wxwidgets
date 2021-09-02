@@ -46,16 +46,6 @@ LRESULT WXDLLIMPEXP_CORE APIENTRY
 wxWndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 
 //---------------------------------------------------------------------------
-// Killed MSVC warnings
-//---------------------------------------------------------------------------
-//disable "cast truncates constant value" for VARIANT_BOOL values
-//passed as parameters in VC5 and up
-#ifdef _MSC_VER
-#pragma warning (disable:4310)
-#endif
-
-
-//---------------------------------------------------------------------------
 //  wxQTMediaBackend
 //
 // We don't include Quicktime headers here and define all the types

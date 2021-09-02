@@ -47,15 +47,6 @@
     // as division by 0 or access violation) to C++ pseudo-exceptions
     extern void wxSETranslator(unsigned int code, EXCEPTION_POINTERS *ep);
 
-    // This warning ("calling _set_se_translator() requires /EHa") seems to be
-    // harmless with all the supported MSVC versions (up to 14.2, a.k.a. MSVS
-    // 2019), i.e. SEH translator seems to work just fine without /EHa too, so
-    // suppress it here as it's easier to suppress it than deal with it at
-    // make/ project files level.
-    #if __VISUALC__ < 2000
-        #pragma warning(disable: 4535)
-    #endif
-
     // note that the SE translator must be called wxSETranslator!
     #define DisableAutomaticSETranslator() _set_se_translator(wxSETranslator)
 #else // !__VISUALC__

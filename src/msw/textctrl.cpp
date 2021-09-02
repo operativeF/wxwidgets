@@ -689,7 +689,7 @@ void wxTextCtrl::AdoptAttributesFromHWND()
     wxWindow::AdoptAttributesFromHWND();
 
     HWND hWnd = GetHwnd();
-    long style = ::GetWindowLong(hWnd, GWL_STYLE);
+    long style = ::GetWindowLongW(hWnd, GWL_STYLE);
 
     // retrieve the style to see whether this is an edit or richedit ctrl
 #if wxUSE_RICHEDIT
@@ -1134,10 +1134,14 @@ long wxTextCtrl::GetInsertionPoint() const
 #if wxUSE_RICHEDIT
     if ( IsRich() )
     {
-        CHARRANGE range;
-        range.cpMin = 0;
-        range.cpMax = 0;
+        CHARRANGE range
+        {
+            .cpMin = 0,
+            .cpMax = 0
+        };
+
         ::SendMessageW(GetHwnd(), EM_EXGETSEL, 0, (LPARAM) &range);
+
         return range.cpMin;
     }
 #endif // wxUSE_RICHEDIT
@@ -1205,9 +1209,12 @@ void wxTextCtrl::DoSetSelection(long from, long to, int flags)
             from = 0;
         }
 
-        CHARRANGE range;
-        range.cpMin = from;
-        range.cpMax = to;
+        CHARRANGE range
+        {
+            .cpMin = from,
+            .cpMax = to
+        };
+
         ::SendMessageW(hWnd, EM_EXSETSEL, 0, (LPARAM)&range);
     }
     else
@@ -2832,7 +2839,8 @@ bool wxTextCtrl::SetForegroundColour(const wxColour& colour)
     if ( IsRich() )
     {
         // change the colour of everything
-        WinStruct<CHARFORMAT> cf;
+        WinStruct<CHARFORMATW> cf;
+
         cf.dwMask = CFM_COLOR;
         cf.crTextColor = wxColourToRGB(colour);
         ::SendMessageW(GetHwnd(), EM_SETCHARFORMAT, SCF_ALL, (LPARAM)&cf);
