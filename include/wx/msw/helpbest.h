@@ -27,7 +27,7 @@ public:
     {
     }
 
-    ~wxBestHelpController() { delete m_helpController; }
+    ~wxBestHelpController() = default;
 
     wxBestHelpController(const wxBestHelpController&) = delete;
     wxBestHelpController& operator=(const wxBestHelpController&) = delete;
@@ -114,10 +114,11 @@ protected:
     // Append/change extension if necessary.
     std::string GetValidFilename(const std::string& file) const;
 
+private:
     enum HelpControllerType { wxUseNone, wxUseHtmlHelp, wxUseChmHelp };
 
     HelpControllerType m_helpControllerType{wxUseNone};
-    wxHelpControllerBase* m_helpController{nullptr};
+    std::unique_ptr<wxHelpControllerBase> m_helpController{};
     int m_style;
 
     wxDECLARE_DYNAMIC_CLASS(wxBestHelpController);

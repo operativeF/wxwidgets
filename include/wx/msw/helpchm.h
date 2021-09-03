@@ -78,7 +78,7 @@ protected:
                                    int contextId,
                                    wxWindow *window);
 
-
+private:
     std::string m_helpFile;
 
     wxDECLARE_DYNAMIC_CLASS(wxCHMHelpController);

@@ -53,6 +53,7 @@ protected:
                            int width, int height,
                            int sizeFlags = wxSIZE_AUTO) override;
 
+private:
     std::string                m_title;
 
     wxFindReplaceDialogImpl* m_impl{nullptr};

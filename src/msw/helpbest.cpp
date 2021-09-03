@@ -27,7 +27,7 @@
 bool wxBestHelpController::Initialize( const std::string& filename )
 {
     // try wxCHMHelpController
-    wxCHMHelpController* chm = new wxCHMHelpController(m_parentWindow);
+    auto chm = std::make_unique<wxCHMHelpController>(m_parentWindow);
 
     m_helpControllerType = wxUseChmHelp;
     // do not warn upon failure
@@ -35,28 +35,21 @@ bool wxBestHelpController::Initialize( const std::string& filename )
 
     if( chm->Initialize( GetValidFilename( filename ) ) )
     {
-        m_helpController = chm;
+        m_helpController = std::move(chm);
         m_parentWindow = nullptr;
         return true;
     }
 
-    // failed
-    delete chm;
-
     // try wxHtmlHelpController
-    wxHtmlHelpController *
-        html = new wxHtmlHelpController(m_style, m_parentWindow);
+    auto html = std::make_unique<wxHtmlHelpController>(m_style, m_parentWindow);
 
     m_helpControllerType = wxUseHtmlHelp;
     if( html->Initialize( GetValidFilename( filename ) ) )
     {
-        m_helpController = html;
+        m_helpController = std::move(html);
         m_parentWindow = nullptr;
         return true;
     }
-
-    // failed
-    delete html;
 
     return false;
 }

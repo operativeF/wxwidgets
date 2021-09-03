@@ -196,7 +196,7 @@ public:
     WXHIMAGELIST GetCursorHIMAGELIST() const { return m_hCursorImageList; }
 #endif
 
-protected:
+private:
     WXHIMAGELIST    m_hImageList{nullptr};
 
 #if wxUSE_SIMPLER_DRAGIMAGE

@@ -54,9 +54,9 @@ protected:
         return GetDeviceSize();
     }
 
+private:
     wxPrintData m_printData;
 
-private:
     wxDECLARE_CLASS(wxPrinterDCImpl);
 };
 

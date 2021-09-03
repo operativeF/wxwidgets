@@ -33,7 +33,7 @@ public:
     void SetTitle(const std::string& title) override;
     std::string GetTitle() const override;
 
-protected:
+private:
     std::string m_title;
 
 public:

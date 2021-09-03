@@ -155,14 +155,6 @@ protected:
 #if wxUSE_STATUSBAR
     void PositionStatusBar() override;
 
-#if wxUSE_NATIVE_STATUSBAR
-    inline static bool m_useNativeStatusBar = true;
-#else
-    inline static bool m_useNativeStatusBar = false;
-#endif
-
-#endif // wxUSE_STATUSBAR
-
 #if wxUSE_MENUS
     // frame menu, NULL if none
     WXHMENU m_hMenu{nullptr};
@@ -173,6 +165,14 @@ protected:
 #endif // wxUSE_MENUS
 
 private:
+#if wxUSE_NATIVE_STATUSBAR
+    inline static bool m_useNativeStatusBar = true;
+#else
+    inline static bool m_useNativeStatusBar = false;
+#endif
+
+#endif // wxUSE_STATUSBAR
+
 #if wxUSE_TOOLTIPS
     WXHWND                m_hwndToolTip{nullptr};
 #endif // tooltips
