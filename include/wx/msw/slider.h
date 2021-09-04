@@ -127,6 +127,7 @@ protected:
 
     void OnDPIChanged(wxDPIChangedEvent& event);
 
+private:
     // the labels windows, if any
     wxSubwindows  *m_labels{nullptr};
 

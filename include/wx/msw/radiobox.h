@@ -140,6 +140,7 @@ protected:
     // resolve ambiguity in base classes
     wxBorder GetDefaultBorder() const override { return wxRadioBoxBase::GetDefaultBorder(); }
 
+private:
     // the buttons we contain
     wxSubwindows *m_radioButtons {nullptr};
 
@@ -150,7 +151,6 @@ protected:
     // currently selected button or wxNOT_FOUND if none
     int m_selectedButton {wxNOT_FOUND};
 
-private:
     wxDECLARE_DYNAMIC_CLASS(wxRadioBox);
 };
 

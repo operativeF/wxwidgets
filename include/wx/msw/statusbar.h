@@ -79,12 +79,6 @@ protected:
     void MSWUpdateFontOnDPIChange(const wxSize& newDPI) override;
 
     // used by DoUpdateStatusText()
-    wxClientDC *m_pDC{nullptr};
-
-#if wxUSE_TOOLTIPS
-    // the tooltips used when wxSTB_SHOW_TIPS is given
-    std::vector<wxToolTip*> m_tooltips;
-#endif
 
 private:
     struct MSWBorders
@@ -93,6 +87,13 @@ private:
         int vert;
         int between;
     };
+
+    wxClientDC *m_pDC{nullptr};
+
+#if wxUSE_TOOLTIPS
+    // the tooltips used when wxSTB_SHOW_TIPS is given
+    std::vector<wxToolTip*> m_tooltips;
+#endif
 
     // retrieve all status bar borders using SB_GETBORDERS
     MSWBorders MSWGetBorders() const;

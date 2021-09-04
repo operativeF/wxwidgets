@@ -66,8 +66,7 @@ protected:
     int MSWGetButtonStyle() const override;
     void MSWOnButtonResetOwnerDrawn() override;
     int MSWGetButtonCheckedFlag() const override;
-    void
-        MSWDrawButtonBitmap(wxDC& dc, const wxRect& rect, int flags) override;
+    void MSWDrawButtonBitmap(wxDC& dc, const wxRect& rect, int flags) override;
 
 
 private:    

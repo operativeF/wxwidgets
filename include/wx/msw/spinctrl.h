@@ -150,6 +150,7 @@ protected:
     // called to ensure that the value is in the correct range
     void NormalizeValue() override;
 
+private:
     // the value of the control before the latest change (which might not have
     // changed anything in fact -- this is why we need this field)
     int m_oldValue{std::numeric_limits<int>::min()};
@@ -161,7 +162,6 @@ protected:
     // Block text update event after SetValue()
     bool m_blockEvent{false};
 
-private:
     // Adjust the text control style depending on whether we need to enter only
     // digits or may need to enter something else (e.g. "-" sign, "x"
     // hexadecimal prefix, ...) in it.

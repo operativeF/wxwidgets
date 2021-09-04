@@ -64,13 +64,12 @@ protected:
     long WindowProc(unsigned int msg, unsigned int wParam, long lParam);
     void RegisterWindowMessages();
 
-
+private:
     wxTaskBarIconWindow *m_win{nullptr};
     bool                 m_iconAdded{false};
     wxIcon               m_icon;
-    std::string             m_strTooltip;
+    std::string          m_strTooltip;
 
-private:
     enum Operation
     {
         Operation_Add,

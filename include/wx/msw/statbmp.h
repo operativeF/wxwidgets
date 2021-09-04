@@ -74,6 +74,7 @@ protected:
 
     void WXHandleSize(wxSizeEvent& event);
 
+private:
     // we can have either an icon or a bitmap
     bool m_isIcon{true};
     wxGDIImage *m_image{nullptr};
@@ -81,7 +82,6 @@ protected:
     // handle used in last call to STM_SETIMAGE
     WXHANDLE m_currentHandle{nullptr};
 
-private:
     // Flag indicating whether we own m_currentHandle, i.e. should delete it.
     bool m_ownsCurrentHandle{false};
 

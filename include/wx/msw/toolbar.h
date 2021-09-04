@@ -141,6 +141,7 @@ protected:
     void RealizeHelper();
     void OnDPIChanged(wxDPIChangedEvent& event);
 
+private:
     // the big bitmap containing all bitmaps of the toolbar buttons
     WXHBITMAP m_hBitmap{nullptr};
 
@@ -158,7 +159,6 @@ protected:
     // the tool the cursor is in
     wxToolBarToolBase *m_pInTool{nullptr};
 
-private:
     // makes sure tool bitmap size is sufficient for all tools
     void AdjustToolBitmapSize();
 

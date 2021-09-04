@@ -257,6 +257,7 @@ protected:
     // its own.
     void OnRightUp(wxMouseEvent& event);
 
+private:
     // we're using RICHEDIT (and not simple EDIT) control if this field is not
     // 0, it also gives the version of the RICHEDIT control being used
     // (although not directly: 1 is for 1.0, 2 is for either 2.0 or 3.0 as we
@@ -272,7 +273,6 @@ protected:
     // text ourselves: we want this to be exactly 1
     int m_updatesCount{-1};
 
-private:
     void EnableTextChangedEvents(bool enable) override
     {
         m_updatesCount = enable ? -1 : -2;

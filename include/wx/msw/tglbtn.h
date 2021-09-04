@@ -61,6 +61,7 @@ protected:
 
     bool MSWIsPushed() const override;
 
+private:
     // current state of the button (when owner-drawn)
     bool m_state{false};
 
