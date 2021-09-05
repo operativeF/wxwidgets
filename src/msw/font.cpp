@@ -32,6 +32,8 @@
 #include "wx/scopeguard.h"
 #include "wx/tokenzr.h"
 
+#include "wx/msw/wrap/utils.h"
+
 // ----------------------------------------------------------------------------
 // constants
 // ----------------------------------------------------------------------------
@@ -42,6 +44,8 @@ constexpr int PITCH_MASK = FIXED_PITCH | VARIABLE_PITCH;
 // ----------------------------------------------------------------------------
 // wxFontRefData - the internal description of the font
 // ----------------------------------------------------------------------------
+
+using namespace msw::utils;
 
 class WXDLLEXPORT wxFontRefData: public wxGDIRefData
 {
@@ -58,12 +62,15 @@ public:
         Init(data.m_nativeFontInfo);
     }
 
-    ~wxFontRefData();
+    ~wxFontRefData() = default;
 
     // operations
     bool Alloc();
 
-    void Free();
+    void Free()
+    {
+        m_hFont.reset();
+    }
 
     // all wxFont accessors
     double GetFractionalPointSize() const
@@ -133,7 +140,7 @@ public:
     {
         AllocIfNeeded();
 
-        return (WXHFONT)m_hFont;
+        return m_hFont.get();
     }
 
     bool HasHFONT() const
@@ -157,7 +164,7 @@ public:
     // new one
     void SetFractionalPointSize(double pointSize)
     {
-        Free();
+        m_hFont.reset();
 
         m_nativeFontInfo.SetFractionalPointSize(pointSize);
         m_sizeUsingPixels = false;
@@ -168,7 +175,7 @@ public:
         wxCHECK_RET( pixelSize.x >= 0, "negative font width" );
         wxCHECK_RET( pixelSize.y != 0, "zero font height" );
 
-        Free();
+        m_hFont.reset();
 
         m_nativeFontInfo.SetPixelSize(pixelSize);
         m_sizeUsingPixels = true;
@@ -176,56 +183,56 @@ public:
 
     void SetFamily(wxFontFamily family)
     {
-        Free();
+        m_hFont.reset();
 
         m_nativeFontInfo.SetFamily(family);
     }
 
     void SetStyle(wxFontStyle style)
     {
-        Free();
+        m_hFont.reset();
 
         m_nativeFontInfo.SetStyle(style);
     }
 
     void SetNumericWeight(int weight)
     {
-        Free();
+        m_hFont.reset();
 
         m_nativeFontInfo.SetNumericWeight(weight);
     }
 
     bool SetFaceName(const wxString& faceName)
     {
-        Free();
+        m_hFont.reset();
 
         return m_nativeFontInfo.SetFaceName(faceName);
     }
 
     void SetUnderlined(bool underlined)
     {
-        Free();
+        m_hFont.reset();
 
         m_nativeFontInfo.SetUnderlined(underlined);
     }
 
     void SetStrikethrough(bool strikethrough)
     {
-        Free();
+        m_hFont.reset();
 
         m_nativeFontInfo.SetStrikethrough(strikethrough);
     }
 
     void SetEncoding(wxFontEncoding encoding)
     {
-        Free();
+        m_hFont.reset();
 
         m_nativeFontInfo.SetEncoding(encoding);
     }
 
     void SetLogFontHeight(int height)
     {
-        Free();
+        m_hFont.reset();
 
         m_nativeFontInfo.lf.lfHeight = height;
     }
@@ -246,7 +253,7 @@ public:
 
     void SetNativeFontInfo(const wxNativeFontInfo& nativeFontInfo)
     {
-        Free();
+        m_hFont.reset();
 
         m_nativeFontInfo = nativeFontInfo;
     }
@@ -300,7 +307,7 @@ protected:
     bool             m_sizeUsingPixels;
 
     // Windows font handle, created on demand in GetHFONT()
-    HFONT            m_hFont{nullptr};
+    unique_font            m_hFont{nullptr};
 
     // Native font info
     wxNativeFontInfo m_nativeFontInfo;
@@ -349,21 +356,17 @@ void wxFontRefData::Init(const wxNativeFontInfo& info, WXHFONT hFont)
     // use the exact font created in the underlying system
     // (for example where we can't guarantee conversion from HFONT
     // to LOGFONT back to HFONT)
-    m_hFont = (HFONT)hFont;
+    m_hFont.reset(hFont);
     m_nativeFontInfo = info;
 
     // size of native fonts is expressed in pixels
     m_sizeUsingPixels = true;
 }
 
-wxFontRefData::~wxFontRefData()
-{
-    Free();
-}
-
 bool wxFontRefData::Alloc()
 {
-    m_hFont = ::CreateFontIndirectW(&m_nativeFontInfo.lf);
+    m_hFont.reset(::CreateFontIndirectW(&m_nativeFontInfo.lf));
+
     if ( !m_hFont )
     {
         wxLogLastError(wxT("CreateFont"));
@@ -371,19 +374,6 @@ bool wxFontRefData::Alloc()
     }
 
     return true;
-}
-
-void wxFontRefData::Free()
-{
-    if ( m_hFont )
-    {
-        if ( !::DeleteObject(m_hFont) )
-        {
-            wxLogLastError(wxT("DeleteObject(font)"));
-        }
-
-        m_hFont = nullptr;
-    }
 }
 
 // ----------------------------------------------------------------------------
