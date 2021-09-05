@@ -22,10 +22,13 @@
 #endif // WX_PRECOMP
 
 #include "wx/msw/private.h"
+#include "wx/msw/wrap/utils.h"
 
 // ----------------------------------------------------------------------------
 // private classes
 // ----------------------------------------------------------------------------
+
+using namespace msw::utils;
 
 class WXDLLEXPORT wxBrushRefData: public wxGDIRefData
 {
@@ -33,7 +36,7 @@ public:
     explicit wxBrushRefData(const wxColour& colour = wxNullColour, wxBrushStyle style = wxBrushStyle::Solid);
     explicit wxBrushRefData(const wxBitmap& stipple);
     wxBrushRefData(const wxBrushRefData& data);
-    ~wxBrushRefData();
+    ~wxBrushRefData() = default;
 
     // no assignment operator, the objects of this class are shared and never
     // assigned after being created once
@@ -42,15 +45,14 @@ public:
     bool operator==(const wxBrushRefData& data) const;
 
     HBRUSH GetHBRUSH();
-    void Free();
 
     const wxColour& GetColour() const { return m_colour; }
     wxBrushStyle GetStyle() const { return m_style; }
     wxBitmap *GetStipple() { return &m_stipple; }
 
-    void SetColour(const wxColour& colour) { Free(); m_colour = colour; }
-    void SetStyle(wxBrushStyle style) { Free(); m_style = style; }
-    void SetStipple(const wxBitmap& stipple) { Free(); DoSetStipple(stipple); }
+    void SetColour(const wxColour& colour) { m_hBrush.reset(); m_colour = colour; }
+    void SetStyle(wxBrushStyle style) { m_hBrush.reset(); m_style = style; }
+    void SetStipple(const wxBitmap& stipple) { m_hBrush.reset(); DoSetStipple(stipple); }
 
 private:
     void DoSetStipple(const wxBitmap& stipple);
@@ -58,7 +60,7 @@ private:
     wxBrushStyle  m_style;
     wxBitmap      m_stipple;
     wxColour      m_colour;
-    HBRUSH        m_hBrush{nullptr};
+    unique_brush  m_hBrush;
 };
 
 #define M_BRUSHDATA ((wxBrushRefData *)m_refData)
@@ -91,12 +93,7 @@ wxBrushRefData::wxBrushRefData(const wxBrushRefData& data)
     m_style = data.m_style;
 
     // we can't share HBRUSH, we'd need to create another one ourselves
-    m_hBrush = nullptr;
-}
-
-wxBrushRefData::~wxBrushRefData()
-{
-    Free();
+    m_hBrush.reset();
 }
 
 // ----------------------------------------------------------------------------
@@ -122,16 +119,6 @@ void wxBrushRefData::DoSetStipple(const wxBitmap& stipple)
 // wxBrushRefData resource handling
 // ----------------------------------------------------------------------------
 
-void wxBrushRefData::Free()
-{
-    if ( m_hBrush )
-    {
-        ::DeleteObject(m_hBrush);
-
-        m_hBrush = nullptr;
-    }
-}
-
 static int TranslateHatchStyle(wxBrushStyle style)
 {
     switch ( style )
@@ -156,16 +143,16 @@ HBRUSH wxBrushRefData::GetHBRUSH()
             switch ( m_style )
             {
                 case wxBrushStyle::Transparent:
-                    m_hBrush = (HBRUSH)::GetStockObject(NULL_BRUSH);
+                    m_hBrush = unique_brush(static_cast<HBRUSH>(::GetStockObject(NULL_BRUSH)));
                     break;
 
                 case wxBrushStyle::Stipple:
-                    m_hBrush = ::CreatePatternBrush(GetHbitmapOf(m_stipple));
+                    m_hBrush = unique_brush(::CreatePatternBrush(GetHbitmapOf(m_stipple)));
                     break;
 
                 case wxBrushStyle::StippleMaskOpaque:
-                    m_hBrush = ::CreatePatternBrush((HBITMAP)m_stipple.GetMask()
-                                                        ->GetMaskBitmap());
+                    m_hBrush = unique_brush(::CreatePatternBrush((HBITMAP)m_stipple.GetMask()
+                                                        ->GetMaskBitmap()));
                     break;
 
                 default:
@@ -173,13 +160,13 @@ HBRUSH wxBrushRefData::GetHBRUSH()
                     [[fallthrough]];
 
                 case wxBrushStyle::Solid:
-                    m_hBrush = ::CreateSolidBrush(m_colour.GetPixel());
+                    m_hBrush = unique_brush(::CreateSolidBrush(m_colour.GetPixel()));
                     break;
             }
         }
         else // create a hatched brush
         {
-            m_hBrush = ::CreateHatchBrush(hatchStyle, m_colour.GetPixel());
+            m_hBrush = unique_brush(::CreateHatchBrush(hatchStyle, m_colour.GetPixel()));
         }
 
         if ( !m_hBrush )
@@ -188,7 +175,7 @@ HBRUSH wxBrushRefData::GetHBRUSH()
         }
     }
 
-    return m_hBrush;
+    return m_hBrush.get();
 }
 
 // ============================================================================
