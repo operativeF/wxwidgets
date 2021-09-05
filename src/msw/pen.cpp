@@ -20,12 +20,15 @@
 #endif
 
 #include "wx/msw/private.h"
+#include "wx/msw/wrap/utils.h"
 
 #define M_PENDATA ((wxPenRefData*)m_refData)
 
 // ----------------------------------------------------------------------------
 // wxPenRefData: contains information about an HPEN and its handle
 // ----------------------------------------------------------------------------
+
+using namespace msw::utils;
 
 class WXDLLEXPORT wxPenRefData : public wxGDIRefData
 {
@@ -36,7 +39,7 @@ public:
     wxPenRefData();
     wxPenRefData(const wxPenRefData& data);
     explicit wxPenRefData(const wxPenInfo& info);
-    ~wxPenRefData();
+    ~wxPenRefData() = default;
 
     wxPenRefData& operator=(const wxPenRefData&) = delete;
 
@@ -65,12 +68,12 @@ public:
     int GetDashCount() const { return m_nbDash; }
     wxBitmap* GetStipple() const { return const_cast<wxBitmap *>(&m_stipple); }
 
-    void SetColour(const wxColour& col) { Free(); m_colour = col; }
-    void SetWidth(int width) { Free(); m_width = width; }
-    void SetStyle(wxPenStyle style) { Free(); m_style = style; }
+    void SetColour(const wxColour& col) { m_hPen.reset(); m_colour = col; }
+    void SetWidth(int width) { m_hPen.reset(); m_width = width; }
+    void SetStyle(wxPenStyle style) { m_hPen.reset(); m_style = style; }
     void SetStipple(const wxBitmap& stipple)
     {
-        Free();
+        m_hPen.reset();
 
         m_style = wxPenStyle::Stipple;
         m_stipple = stipple;
@@ -78,15 +81,15 @@ public:
 
     void SetDashes(int nb_dashes, const wxDash *dash)
     {
-        Free();
+        m_hPen.reset();
 
         m_nbDash = nb_dashes;
         m_dash = const_cast<wxDash *>(dash);
     }
 
-    void SetJoin(wxPenJoin join) { Free(); m_join = join; }
-    void SetCap(wxPenCap cap) { Free(); m_cap = cap; }
-    void SetQuality(wxPenQuality quality) { Free(); m_quality = quality; }
+    void SetJoin(wxPenJoin join) { m_hPen.reset(); m_join = join; }
+    void SetCap(wxPenCap cap) { m_hPen.reset(); m_cap = cap; }
+    void SetQuality(wxPenQuality quality) { m_hPen.reset(); m_quality = quality; }
 
 
     // HPEN management
@@ -101,8 +104,7 @@ public:
     // return true if we have a valid HPEN
     bool HasHPEN() const { return m_hPen != nullptr; }
 
-    // return true if we had a valid handle before, false otherwise
-    bool Free();
+    void Free();
 
 private:
     // initialize the fields which have reasonable default values
@@ -119,7 +121,7 @@ private:
     int           m_nbDash;
     wxDash *      m_dash; // FIXME: Use array
     wxColour      m_colour;
-    HPEN          m_hPen;
+    unique_pen    m_hPen;
 };
 
 // ============================================================================
@@ -133,13 +135,11 @@ private:
 wxPenRefData::wxPenRefData()
 {
     
-        m_join = wxJOIN_ROUND;
-        m_cap = wxCAP_ROUND;
-        m_quality = wxPenQuality::Default;
-        m_nbDash = 0;
-        m_dash = nullptr;
-        m_hPen = nullptr;
-    
+    m_join = wxJOIN_ROUND;
+    m_cap = wxCAP_ROUND;
+    m_quality = wxPenQuality::Default;
+    m_nbDash = 0;
+    m_dash = nullptr;    
 
     m_style = wxPenStyle::Solid;
     m_width = 1;
@@ -156,7 +156,7 @@ wxPenRefData::wxPenRefData(const wxPenRefData& data)
     m_quality = data.m_quality;
     m_nbDash = data.m_nbDash;
     m_dash = data.m_dash;
-    m_hPen = nullptr;
+    m_hPen.reset();
 }
 
 wxPenRefData::wxPenRefData(const wxPenInfo& info)
@@ -164,13 +164,13 @@ wxPenRefData::wxPenRefData(const wxPenInfo& info)
     , m_colour(info.GetColour())
 {
     
-        m_join = wxJOIN_ROUND;
-        m_cap = wxCAP_ROUND;
-        m_quality = wxPenQuality::Default;
-        m_nbDash = 0;
-        m_dash = nullptr;
-        m_hPen = nullptr;
-    
+    m_join = wxJOIN_ROUND;
+    m_cap = wxCAP_ROUND;
+    m_quality = wxPenQuality::Default;
+    m_nbDash = 0;
+    m_dash = nullptr;
+    m_hPen.reset();
+
 
     m_style = info.GetStyle();
     m_width = info.GetWidth();
@@ -178,12 +178,6 @@ wxPenRefData::wxPenRefData(const wxPenInfo& info)
     m_cap = info.GetCap();
     m_quality = info.GetQuality();
     m_nbDash = info.GetDashes(&m_dash);
-}
-
-wxPenRefData::~wxPenRefData()
-{
-    if ( m_hPen )
-        ::DeleteObject(m_hPen);
 }
 
 // ----------------------------------------------------------------------------
@@ -272,7 +266,7 @@ bool wxPenRefData::Alloc()
 
    if ( m_style == wxPenStyle::Transparent )
    {
-       m_hPen = (HPEN)::GetStockObject(NULL_PEN);
+       m_hPen = unique_pen(static_cast<HPEN>(::GetStockObject(NULL_PEN)));
        return true;
    }
 
@@ -328,7 +322,7 @@ bool wxPenRefData::Alloc()
 
    if ( useCreatePen )
    {
-       m_hPen = ::CreatePen(ConvertPenStyle(m_style), m_width, col);
+       m_hPen = unique_pen(::CreatePen(ConvertPenStyle(m_style), m_width, col));
    }
    else // need to use ExtCreatePen()
    {
@@ -400,22 +394,15 @@ bool wxPenRefData::Alloc()
        // Note that width can't be 0 for ExtCreatePen(), unlike for CreatePen().
        int width = m_width == 0 ? 1 : m_width;
 
-       m_hPen = ::ExtCreatePen(styleMSW, width, &lb, m_nbDash, (LPDWORD)dash.get());
+       m_hPen = unique_pen(::ExtCreatePen(styleMSW, width, &lb, m_nbDash, (LPDWORD)dash.get()));
    }
 
    return m_hPen != nullptr;
 }
 
-bool wxPenRefData::Free()
+void wxPenRefData::Free()
 {
-    if ( !m_hPen )
-        return false;
-
-    // FIXME: use unique_ptr with custom deleter
-    ::DeleteObject(m_hPen);
-    m_hPen = nullptr;
-
-    return true;
+    m_hPen.reset();
 }
 
 WXHPEN wxPenRefData::GetHPEN() const
@@ -423,7 +410,7 @@ WXHPEN wxPenRefData::GetHPEN() const
     if ( !m_hPen )
         const_cast<wxPenRefData *>(this)->Alloc();
 
-    return (WXHPEN)m_hPen;
+    return m_hPen.get();
 }
 
 // ----------------------------------------------------------------------------
@@ -468,7 +455,13 @@ WXHANDLE wxPen::GetResourceHandle() const
 
 bool wxPen::FreeResource(bool WXUNUSED(force))
 {
-    return M_PENDATA && M_PENDATA->Free();
+    if(M_PENDATA)
+    {
+        M_PENDATA->Free();
+        return true;
+    }
+
+    return false;
 }
 
 bool wxPen::IsFree() const
