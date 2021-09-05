@@ -17,10 +17,13 @@
 #include "wx/palette.h"
 
 #include "wx/msw/private.h"
+#include "wx/msw/wrap/utils.h"
 
 // ============================================================================
 // wxPaletteRefData
 // ============================================================================
+
+using namespace msw::utils;
 
 class WXDLLEXPORT wxPaletteRefData: public wxGDIRefData
 {
@@ -45,7 +48,7 @@ public:
             pPal->palPalEntry[i].peFlags = 0;
         }
 
-        m_hPalette = ::CreatePalette(pPal);
+        m_hPalette = unique_palette(::CreatePalette(pPal));
         free(pPal);
     }
 
@@ -59,23 +62,19 @@ public:
         if ( !pPal )
             return;
 
-        if ( ::GetPaletteEntries(data.m_hPalette, 0, n, pPal->palPalEntry) )
-            m_hPalette = ::CreatePalette(pPal);
+        if ( ::GetPaletteEntries(data.m_hPalette.get(), 0, n, pPal->palPalEntry) )
+            m_hPalette = unique_palette(::CreatePalette(pPal));
 
         free(pPal);
     }
 
-    ~wxPaletteRefData()
-    {
-        if ( m_hPalette )
-            ::DeleteObject(m_hPalette);
-    }
+    ~wxPaletteRefData() = default;
 
-    bool IsOk() const override { return m_hPalette != nullptr; }
+    bool IsOk() const override { return m_hPalette.get() != nullptr; }
 
     UINT GetEntries() const
     {
-        return ::GetPaletteEntries(m_hPalette, 0, 0, nullptr);
+        return ::GetPaletteEntries(m_hPalette.get(), 0, 0, nullptr);
     }
 
 private:
@@ -93,7 +92,7 @@ private:
         return pPal;
     }
 
-    HPALETTE m_hPalette{nullptr};
+    unique_palette m_hPalette;
 
     friend class WXDLLIMPEXP_FWD_CORE wxPalette;
 };
@@ -138,7 +137,7 @@ int wxPalette::GetPixel(unsigned char red,
     if ( !m_refData )
         return wxNOT_FOUND;
 
-    return ::GetNearestPaletteIndex(M_PALETTEDATA->m_hPalette,
+    return ::GetNearestPaletteIndex(M_PALETTEDATA->m_hPalette.get(),
                                     PALETTERGB(red, green, blue));
 }
 
@@ -154,7 +153,7 @@ bool wxPalette::GetRGB(int index,
         return false;
 
     PALETTEENTRY entry;
-    if ( !::GetPaletteEntries(M_PALETTEDATA->m_hPalette, index, 1, &entry) )
+    if ( !::GetPaletteEntries(M_PALETTEDATA->m_hPalette.get(), index, 1, &entry) )
         return false;
 
     *red = entry.peRed;
@@ -166,14 +165,14 @@ bool wxPalette::GetRGB(int index,
 
 WXHPALETTE wxPalette::GetHPALETTE() const
 {
-    return M_PALETTEDATA ? (WXHPALETTE)M_PALETTEDATA->m_hPalette : nullptr;
+    return M_PALETTEDATA ? (WXHPALETTE)M_PALETTEDATA->m_hPalette.get() : nullptr;
 }
 
 void wxPalette::SetHPALETTE(WXHPALETTE pal)
 {
     AllocExclusive();
 
-    M_PALETTEDATA->m_hPalette = (HPALETTE)pal;
+    M_PALETTEDATA->m_hPalette = unique_palette(pal);
 }
 
 #endif // wxUSE_PALETTE

@@ -114,7 +114,7 @@ using unique_enhmetafile = std::unique_ptr<HENHMETAFILE, detail::WndEnhMetafileD
 template<typename GDIObjT>
 using unique_gdiobj  = std::unique_ptr<GDIObjT, detail::WndGDIObjDeleter<GDIObjT>>;
 
-using unique_palettte = unique_gdiobj<HPALETTE>;
+using unique_palette  = unique_gdiobj<HPALETTE>;
 using unique_brush    = unique_gdiobj<HBRUSH>;
 using unique_bitmap   = unique_gdiobj<HBITMAP>;
 using unique_font     = unique_gdiobj<HFONT>;
