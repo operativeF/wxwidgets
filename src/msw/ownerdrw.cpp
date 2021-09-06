@@ -20,9 +20,13 @@
 #include "wx/msw/private/dc.h"
 #include "wx/msw/wrapcctl.h"            // for HIMAGELIST
 
+#include "wx/msw/wrap/utils.h"
+
 // ============================================================================
 // implementation of wxOwnerDrawn class
 // ============================================================================
+
+using msw::utils::unique_brush;
 
 // draw the item
 bool wxOwnerDrawn::OnDrawItem(wxDC& dc, const wxRect& rc,
@@ -51,17 +55,17 @@ bool wxOwnerDrawn::OnDrawItem(wxDC& dc, const wxRect& rc,
         wxMSWImpl::wxTextColoursChanger textCol(hdc, colText, colBack);
         wxMSWImpl::wxBkModeChanger bkMode(hdc, wxBrushStyle::Transparent);
 
-        AutoHBRUSH hbr(wxColourToPalRGB(colBack));
-        SelectInHDC selBrush(hdc, hbr);
+        auto hbr = unique_brush(::CreateSolidBrush(wxColourToPalRGB(colBack)));
+        SelectInHDC selBrush(hdc, hbr.get());
 
-        ::FillRect(hdc, &rect, hbr);
+        ::FillRect(hdc, &rect, hbr.get());
 
         // using native API because it recognizes '&'
 
         wxString text = GetName();
 
         SIZE sizeRect;
-        ::GetTextExtentPoint32(hdc, text.c_str(), text.length(), &sizeRect);
+        ::GetTextExtentPoint32W(hdc, text.c_str(), text.length(), &sizeRect);
 
         int flags = DST_PREFIXTEXT;
         if ( (stat & wxODDisabled) && !(stat & wxODSelected) )
@@ -75,7 +79,7 @@ bool wxOwnerDrawn::OnDrawItem(wxDC& dc, const wxRect& rc,
         const int cx = rc.GetWidth() - GetMarginWidth();
         const int cy = sizeRect.cy;
 
-        ::DrawState(hdc, nullptr, nullptr, wxMSW_CONV_LPARAM(text),
+        ::DrawStateW(hdc, nullptr, nullptr, wxMSW_CONV_LPARAM(text),
                     text.length(), x, y, cx, cy, flags);
 
     } // reset to default the font, colors and brush
@@ -119,7 +123,7 @@ BOOL wxDrawStateBitmap(HDC hDC, HBITMAP hBitmap, int x, int y, UINT uState)
             break;
 
         case wxDSB_DISABLED:
-            result = ::DrawState(hDC, nullptr, nullptr, (LPARAM)hBitmap, 0, x, y,
+            result = ::DrawStateW(hDC, nullptr, nullptr, (LPARAM)hBitmap, 0, x, y,
                                  bmp.bmWidth, bmp.bmHeight,
                                  DST_BITMAP | DSS_DISABLED);
             break;

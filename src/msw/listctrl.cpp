@@ -35,6 +35,8 @@
 #include "wx/msw/private/customdraw.h"
 #include "wx/msw/private/keyboard.h"
 
+#include "wx/msw/wrap/utils.h"
+
 // Currently gcc doesn't define NMLVFINDITEM, and DMC only defines
 // it by its old name NM_FINDTIEM.
 //
@@ -3044,7 +3046,11 @@ static void HandleItemPaint(LPNMLVCUSTOMDRAW pLVCD, HFONT hfont)
     RECT rc = GetCustomDrawnItemRect(nmcd);
 
     ::SetTextColor(hdc, pLVCD->clrText);
-    ::FillRect(hdc, &rc, AutoHBRUSH(pLVCD->clrTextBk));
+
+    using msw::utils::unique_brush;
+
+    auto hbr = unique_brush(::CreateSolidBrush(pLVCD->clrTextBk));
+    ::FillRect(hdc, &rc, hbr.get());
 
     // we could use CDRF_NOTIFYSUBITEMDRAW here but it results in weird repaint
     // problems so just draw everything except the focus rect from here instead

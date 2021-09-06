@@ -45,6 +45,7 @@
     #include "wx/msw/uxtheme.h"
 #endif
 
+#include "wx/msw/wrap/utils.h"
 
 // ----------------------------------------------------------------------------
 // macros
@@ -800,9 +801,11 @@ void wxNotebook::OnPaint(wxPaintEvent& WXUNUSED(event))
     // Notice that we use our own background here, not the background used for
     // the pages, because the tab row background must blend with the parent and
     // so the background colour inherited from it (if any) must be used.
-    AutoHBRUSH hbr(wxColourToRGB(GetBackgroundColour()));
+    using msw::utils::unique_brush;
 
-    ::FillRect(hdc, &rc, hbr);
+    auto hbr = unique_brush(::CreateSolidBrush(wxColourToRGB(GetBackgroundColour())));
+
+    ::FillRect(hdc, &rc, hbr.get());
 
     MSWDefWindowProc(WM_PAINT, (WPARAM)hdc, 0);
 
@@ -811,7 +814,7 @@ void wxNotebook::OnPaint(wxPaintEvent& WXUNUSED(event))
     // horribly inefficient, of course, but seems to be the only way to do it.
     if ( UseBgCol() )
     {
-        SelectInHDC selectBrush(hdc, hbr);
+        SelectInHDC selectBrush(hdc, hbr.get());
 
         // Find the point which must contain the default background colour:
         // this is a hack, of course, but using this point "close" to the

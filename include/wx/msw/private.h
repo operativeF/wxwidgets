@@ -533,16 +533,6 @@ private:
 
 // TODO: all this asks for using a AutoHandler<T, CreateFunc> template...
 
-// a class for temporary brushes
-class AutoHBRUSH : private AutoGDIObject
-{
-public:
-    AutoHBRUSH(COLORREF col)
-        : AutoGDIObject(::CreateSolidBrush(col)) { }
-
-    operator HBRUSH() const { return (HBRUSH)GetObject(); }
-};
-
 // a class for temporary fonts
 class AutoHFONT : private AutoGDIObject
 {

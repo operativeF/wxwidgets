@@ -43,7 +43,11 @@
     #include "wx/generic/private/markuptext.h"
 #endif // wxUSE_MARKUP
 
+#include "wx/msw/wrap/utils.h"
+
 using namespace wxMSWImpl;
+
+using msw::utils::unique_brush;
 
 #if wxUSE_UXTHEME
     // provide the necessary declarations ourselves if they're missing from
@@ -1185,9 +1189,9 @@ void DrawXPBackground(wxAnyButton *button, HDC hdc, RECT& rectBtn, UINT state)
     if ( button->UseBgCol() && iState != PBS_HOT )
     {
         COLORREF colBg = wxColourToRGB(button->GetBackgroundColour());
-        AutoHBRUSH hbrushBackground(colBg);
+        auto hbrushBackground = unique_brush(::CreateSolidBrush(colBg));
 
-        FillRect(hdc, &rectBtn, hbrushBackground);
+        ::FillRect(hdc, &rectBtn, hbrushBackground.get());
     }
 
     ::InflateRect(&rectBtn, -XP_BUTTON_EXTRA_MARGIN, -XP_BUTTON_EXTRA_MARGIN);
@@ -1327,8 +1331,8 @@ bool wxAnyButton::MSWOnDraw(WXDRAWITEMSTRUCT *wxdis)
             COLORREF colBg = wxColourToRGB(GetBackgroundColour());
 
             // first, draw the background
-            AutoHBRUSH hbrushBackground(colBg);
-            FillRect(hdc, &rectBtn, hbrushBackground);
+            auto hbrushBackground = unique_brush(::CreateSolidBrush(colBg));
+            ::FillRect(hdc, &rectBtn, hbrushBackground.get());
 
             // draw the border for the current state
             bool selected = (state & ODS_SELECTED) != 0;
@@ -1366,8 +1370,8 @@ bool wxAnyButton::MSWOnDraw(WXDRAWITEMSTRUCT *wxdis)
     {
         // clear the background (and erase any previous bitmap)
         COLORREF colBg = wxColourToRGB(GetBackgroundColour());
-        AutoHBRUSH hbrushBackground(colBg);
-        FillRect(hdc, &rectBtn, hbrushBackground);
+        auto hbrushBackground = unique_brush(::CreateSolidBrush(colBg));
+        ::FillRect(hdc, &rectBtn, hbrushBackground.get());
     }
 
     // draw the image, if any

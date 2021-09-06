@@ -42,6 +42,8 @@
 #include "wx/stringutils.h"
 #include "wx/msw/uxtheme.h"
 
+#include "wx/msw/wrap/utils.h"
+
 
 // ---------------------------------------------------------------------------
 // macro
@@ -954,9 +956,11 @@ bool wxMenuItem::OnDrawItem(wxDC& dc, const wxRect& rc,
                 return true;
             }
 
-            AutoHBRUSH hbr(colBack.GetPixel());
-            SelectInHDC selBrush(hdc, hbr);
-            ::FillRect(hdc, &rcSelection, hbr);
+            using msw::utils::unique_brush;
+
+            auto hbr = unique_brush(::CreateSolidBrush(colBack.GetPixel()));
+            SelectInHDC selBrush(hdc, hbr.get());
+            ::FillRect(hdc, &rcSelection, hbr.get());
         }
 
 
