@@ -29,7 +29,7 @@ bool wxBestHelpController::Initialize( const std::string& filename )
     // try wxCHMHelpController
     auto chm = std::make_unique<wxCHMHelpController>(m_parentWindow);
 
-    m_helpControllerType = wxUseChmHelp;
+    m_helpControllerType = HelpControllerType::Chm;
     // do not warn upon failure
     wxLogNull dontWarnOnFailure;
 
@@ -43,7 +43,7 @@ bool wxBestHelpController::Initialize( const std::string& filename )
     // try wxHtmlHelpController
     auto html = std::make_unique<wxHtmlHelpController>(m_style, m_parentWindow);
 
-    m_helpControllerType = wxUseHtmlHelp;
+    m_helpControllerType = HelpControllerType::Html;
     if( html->Initialize( GetValidFilename( filename ) ) )
     {
         m_helpController = std::move(html);
@@ -60,14 +60,14 @@ std::string wxBestHelpController::GetValidFilename( const std::string& filename 
 
     switch( m_helpControllerType )
     {
-        case wxUseChmHelp:
+        case HelpControllerType::Chm:
             fn.SetExt("chm");
             if( fn.FileExists() )
                 return fn.GetFullPath();
 
             return filename;
 
-        case wxUseHtmlHelp:
+        case HelpControllerType::Html:
             fn.SetExt("htb");
             if( fn.FileExists() )
                 return fn.GetFullPath();

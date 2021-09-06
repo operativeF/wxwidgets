@@ -20,17 +20,16 @@ inline constexpr char wxAddRemoveCtrlNameStr[] = "wxAddRemoveCtrl";
 // wxAddRemoveAdaptor: used by wxAddRemoveCtrl to work with the list control
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxAddRemoveAdaptor
+struct WXDLLIMPEXP_CORE wxAddRemoveAdaptor
 {
-public:
     // Default ctor and trivial but virtual dtor.
     wxAddRemoveAdaptor() = default;
     virtual ~wxAddRemoveAdaptor() = default;
 
-   wxAddRemoveAdaptor(const wxAddRemoveAdaptor&) = delete;
-   wxAddRemoveAdaptor& operator=(const wxAddRemoveAdaptor&) = delete;
-   wxAddRemoveAdaptor(wxAddRemoveAdaptor&&) = default;
-   wxAddRemoveAdaptor& operator=(wxAddRemoveAdaptor&&) = default;
+    wxAddRemoveAdaptor(const wxAddRemoveAdaptor&) = delete;
+    wxAddRemoveAdaptor& operator=(const wxAddRemoveAdaptor&) = delete;
+    wxAddRemoveAdaptor(wxAddRemoveAdaptor&&) = default;
+    wxAddRemoveAdaptor& operator=(wxAddRemoveAdaptor&&) = default;
 
     // Override to return the associated control.
     virtual wxWindow* GetItemsCtrl() const = 0;

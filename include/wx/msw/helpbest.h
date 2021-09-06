@@ -115,9 +115,9 @@ protected:
     std::string GetValidFilename(const std::string& file) const;
 
 private:
-    enum HelpControllerType { wxUseNone, wxUseHtmlHelp, wxUseChmHelp };
+    enum class HelpControllerType { None, Html, Chm };
 
-    HelpControllerType m_helpControllerType{wxUseNone};
+    HelpControllerType m_helpControllerType{HelpControllerType::None};
     std::unique_ptr<wxHelpControllerBase> m_helpController{};
     int m_style;
 

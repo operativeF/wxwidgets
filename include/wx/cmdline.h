@@ -18,10 +18,10 @@
 #include "wx/cmdargs.h"
 
 // determines ConvertStringToArgs() behaviour
-enum wxCmdLineSplitType
+enum class wxCmdLineSplitType
 {
-    wxCMD_LINE_SPLIT_DOS,
-    wxCMD_LINE_SPLIT_UNIX
+    DOS,
+    UNIX
 };
 
 #if wxUSE_CMDLINE_PARSER
@@ -348,7 +348,7 @@ public:
     // break down the command line in arguments
     static std::vector<wxString>
     ConvertStringToArgs(const wxString& cmdline,
-                        wxCmdLineSplitType type = wxCMD_LINE_SPLIT_DOS);
+                        wxCmdLineSplitType type = wxCmdLineSplitType::DOS);
 
 private:
     // common part of all ctors
@@ -369,7 +369,7 @@ class WXDLLIMPEXP_BASE wxCmdLineParser
 public:
     static std::vector<wxString>
     ConvertStringToArgs(const wxString& cmdline,
-                        wxCmdLineSplitType type = wxCMD_LINE_SPLIT_DOS);
+                        wxCmdLineSplitType type = wxCmdLineSplitType::DOS);
 };
 
 #endif // wxUSE_CMDLINE_PARSER/!wxUSE_CMDLINE_PARSER

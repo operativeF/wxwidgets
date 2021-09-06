@@ -1588,7 +1588,7 @@ wxCmdLineParser::ConvertStringToArgs(const wxString& cmdline,
         {
             const wxChar ch = *p;
 
-            if ( type == wxCMD_LINE_SPLIT_DOS )
+            if ( type == wxCmdLineSplitType::DOS )
             {
                 if ( ch == '"' )
                 {
