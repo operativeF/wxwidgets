@@ -17,9 +17,13 @@
 
 #include <GL/gl.h>
 
+#include "wx/msw/wrap/utils.h"
+
 // ----------------------------------------------------------------------------
 // wxGLContext: OpenGL rendering context
 // ----------------------------------------------------------------------------
+
+using msw::utils::unique_glrc;
 
 class WXDLLIMPEXP_GL wxGLContext : public wxGLContextBase
 {
@@ -27,14 +31,13 @@ public:
     wxGLContext(wxGLCanvas *win,
                 const wxGLContext *other = nullptr,
                 const wxGLContextAttrs *ctxAttrs = nullptr);
-    ~wxGLContext();
 
     bool SetCurrent(const wxGLCanvas& win) const override;
 
-    HGLRC GetGLRC() const { return m_glContext; }
+    HGLRC GetGLRC() const { return m_glContext.get(); }
 
 protected:
-    HGLRC m_glContext;
+    unique_glrc m_glContext;
 
 private:
     wxDECLARE_CLASS(wxGLContext);

@@ -110,7 +110,6 @@ using unique_accel       = std::unique_ptr<HACCEL, detail::WndAccelDeleter>;
 using unique_icon        = std::unique_ptr<HICON, detail::WndIconDeleter>;
 using unique_enhmetafile = std::unique_ptr<HENHMETAFILE, detail::WndEnhMetafileDeleter>;
 
-
 template<typename GDIObjT>
 using unique_gdiobj  = std::unique_ptr<GDIObjT, detail::WndGDIObjDeleter<GDIObjT>>;
 

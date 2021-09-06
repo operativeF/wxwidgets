@@ -545,7 +545,6 @@ wxIMPLEMENT_CLASS(wxGLContext, wxObject);
 wxGLContext::wxGLContext(wxGLCanvas *win,
                          const wxGLContext *other,
                          const wxGLContextAttrs *ctxAttrs)
-    : m_glContext(nullptr)
 {
     const int* contextAttribs = nullptr;
     bool needsARB = false;
@@ -567,17 +566,16 @@ wxGLContext::wxGLContext(wxGLCanvas *win,
 
     // We need to create a temporary context to get the pointer to
     // wglCreateContextAttribsARB function
-    HGLRC tempContext = wglCreateContext(win->GetHDC());
+    auto tempContext = unique_glrc(wglCreateContext(win->GetHDC()));
     wxCHECK_RET( tempContext, "wglCreateContext failed!" );
 
-    wglMakeCurrent(win->GetHDC(), tempContext);
+    ::wglMakeCurrent(win->GetHDC(), tempContext.get());
 
     using wglCreateContextAttribsARB_t = HGLRC(WINAPI*)
         (HDC hDC, HGLRC hShareContext, const int *attribList);
 
     wxDEFINE_WGL_FUNC(wglCreateContextAttribsARB);
     wglMakeCurrent(win->GetHDC(), nullptr);
-    wglDeleteContext(tempContext);
 
     // The preferred way is using wglCreateContextAttribsARB, even for old context
     if ( !wglCreateContextAttribsARB && needsARB ) // OpenGL 3 context creation
@@ -588,9 +586,9 @@ wxGLContext::wxGLContext(wxGLCanvas *win,
 
     if ( wglCreateContextAttribsARB )
     {
-        m_glContext = wglCreateContextAttribsARB(win->GetHDC(),
-                                                other ? other->m_glContext : nullptr,
-                                                contextAttribs);
+        m_glContext = unique_glrc(wglCreateContextAttribsARB(win->GetHDC(),
+                                                other ? other->m_glContext.get() : nullptr,
+                                                contextAttribs));
     }
 
 
@@ -599,9 +597,9 @@ wxGLContext::wxGLContext(wxGLCanvas *win,
     if ( !m_glContext && (!contextAttribs || !needsARB) )
     {
         // Create legacy context
-        m_glContext = wglCreateContext(win->GetHDC());
+        m_glContext = unique_glrc(::wglCreateContext(win->GetHDC()));
         // Set shared context
-        if ( other && !wglShareLists(other->m_glContext, m_glContext) )
+        if ( other && !::wglShareLists(other->m_glContext.get(), m_glContext.get()) )
             wxLogLastError("wglShareLists");
      }
 
@@ -611,18 +609,9 @@ wxGLContext::wxGLContext(wxGLCanvas *win,
         m_isOk = true;
 }
 
-wxGLContext::~wxGLContext()
-{
-    // note that it's ok to delete the context even if it's the current one
-    if ( m_glContext )
-    {
-        wglDeleteContext(m_glContext);
-    }
-}
-
 bool wxGLContext::SetCurrent(const wxGLCanvas& win) const
 {
-    if ( !wglMakeCurrent(win.GetHDC(), m_glContext) )
+    if ( !::wglMakeCurrent(win.GetHDC(), m_glContext.get()) )
     {
         wxLogLastError(wxT("wglMakeCurrent"));
         return false;

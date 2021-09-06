@@ -27,10 +27,10 @@ public:
         Create(window, size);
     }
 
-   wxCaret(const wxCaret&) = delete;
-   wxCaret& operator=(const wxCaret&) = delete;
-   wxCaret(wxCaret&&) = default;
-   wxCaret& operator=(wxCaret&&) = default;
+    wxCaret(const wxCaret&) = delete;
+    wxCaret& operator=(const wxCaret&) = delete;
+    wxCaret(wxCaret&&) = default;
+    wxCaret& operator=(wxCaret&&) = default;
 
     // process wxWindow notifications
     void OnSetFocus() override;
