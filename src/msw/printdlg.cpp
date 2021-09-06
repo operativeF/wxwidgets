@@ -65,7 +65,7 @@ public:
         BOOL result = TRUE;
         if( m_hPrinter )
         {
-            result = ClosePrinter( m_hPrinter );
+            result = ::ClosePrinter( m_hPrinter );
             m_hPrinter = (HANDLE)nullptr;
         }
         return result;
@@ -387,7 +387,7 @@ void wxWindowsPrintNativeData::InitializeDevMode(const wxString& printerName, Wi
 
             // Step 1:
             // Allocate a buffer of the correct size.
-            dwNeeded = DocumentProperties( nullptr,
+            dwNeeded = ::DocumentPropertiesW( nullptr,
                 *printer,        // Handle to our printer.
                 szPrinterName,   // Name of the printer.
                 nullptr,            // Asking for size, so
@@ -405,7 +405,7 @@ void wxWindowsPrintNativeData::InitializeDevMode(const wxString& printerName, Wi
 
             // Step 2:
             // Get the default DevMode for the printer
-            dwRet = DocumentProperties( nullptr,
+            dwRet = ::DocumentPropertiesW( nullptr,
                 *printer,
                 szPrinterName,
                 tempDevMode,     // The address of the buffer to fill.
@@ -652,7 +652,7 @@ bool wxWindowsPrintNativeData::TransferFrom( const wxPrintData &data )
             // Merge the new settings with the old.
             // This gives the driver an opportunity to update any private
             // portions of the DevMode structure.
-            DocumentPropertiesW( nullptr,
+            ::DocumentPropertiesW( nullptr,
                 printer,
                 szPrinterName,
                 (LPDEVMODE)hDevMode, // Reuse our buffer for output.

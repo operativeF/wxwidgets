@@ -11,8 +11,9 @@
 #define WX_MSW_PRIVATE_FSWATCHER_H_
 
 #include "wx/filename.h"
-#include <vector>
 #include "wx/msw/private.h"
+
+#include <vector>
 
 // ============================================================================
 // wxFSWatcherEntry implementation & helper declarations
@@ -77,16 +78,16 @@ private:
     // asynchronous watched with ReadDirectoryChangesW
     static HANDLE OpenDir(const wxString& path)
     {
-        HANDLE handle = CreateFile(path.t_str(),
-                                   FILE_LIST_DIRECTORY,
-                                   FILE_SHARE_READ |
-                                   FILE_SHARE_WRITE |
-                                   FILE_SHARE_DELETE,
-                                   nullptr,
-                                   OPEN_EXISTING,
-                                   FILE_FLAG_BACKUP_SEMANTICS |
-                                   FILE_FLAG_OVERLAPPED,
-                                   nullptr);
+        HANDLE handle = ::CreateFileW(path.t_str(),
+                                      FILE_LIST_DIRECTORY,
+                                      FILE_SHARE_READ |
+                                      FILE_SHARE_WRITE |
+                                      FILE_SHARE_DELETE,
+                                      nullptr,
+                                      OPEN_EXISTING,
+                                      FILE_FLAG_BACKUP_SEMANTICS |
+                                      FILE_FLAG_OVERLAPPED,
+                                      nullptr);
         if (handle == INVALID_HANDLE_VALUE)
         {
             wxLogSysError(_("Failed to open directory \"%s\" for monitoring."),

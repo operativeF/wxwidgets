@@ -1251,6 +1251,7 @@ bool wxListCtrl::GetSubItemRect(long item, long subItem, wxRect& rect, int code)
 
 
 // Gets the item position
+// FIXME: Return pt / pos pair
 bool wxListCtrl::GetItemPosition(long item, wxPoint& pos) const
 {
     POINT pt;

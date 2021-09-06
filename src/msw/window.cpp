@@ -821,7 +821,7 @@ bool wxWindowMSW::SetCursor(const wxCursor& cursor)
             HWND hWnd = GetHwnd();
 
             POINT point;
-            ::wxGetCursorPosMSW(&point);
+            wxGetCursorPosMSW(&point);
 
             RECT rect = wxGetWindowRect(hWnd);
 

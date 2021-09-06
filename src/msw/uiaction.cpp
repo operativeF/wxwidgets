@@ -79,6 +79,7 @@ DWORD EventTypeForMouseButton(int button, bool isDown)
 
 bool wxUIActionSimulatorMSWImpl::MouseDown(int button)
 {
+    // FIXME: Return cursor pos
     POINT p;
     wxGetCursorPosMSW(&p);
     mouse_event(EventTypeForMouseButton(button, true), p.x, p.y, 0, 0);
@@ -103,6 +104,7 @@ bool wxUIActionSimulatorMSWImpl::MouseMove(long x, long y)
 
 bool wxUIActionSimulatorMSWImpl::MouseUp(int button)
 {
+    // FIXME: Return cursor pos
     POINT p;
     wxGetCursorPosMSW(&p);
     mouse_event(EventTypeForMouseButton(button, false), p.x, p.y, 0, 0);

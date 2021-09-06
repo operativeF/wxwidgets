@@ -414,8 +414,12 @@ WXHWND wxComboBox::GetEditHWNDIfAvailable() const
 
     if (HasFlag(wxCB_SIMPLE))
     {
-        POINT pt;
-        pt.x = pt.y = 4;
+        POINT pt
+        {
+            .x = 4,
+            .y = 4
+        };
+        
         return (WXHWND) ::ChildWindowFromPoint(GetHwnd(), pt);
     }
 

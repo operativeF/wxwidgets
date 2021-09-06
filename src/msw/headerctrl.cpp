@@ -774,6 +774,7 @@ bool wxMSWHeaderCtrl::MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result)
         case NM_RCLICK:
         case NM_RDBLCLK:
             {
+                // FIXME: Return pt / idx pair
                 POINT pt;
                 idx = wxMSWGetColumnClicked(&nmhdr->hdr, &pt);
                 if ( idx != wxNOT_FOUND )

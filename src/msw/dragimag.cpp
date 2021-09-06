@@ -225,9 +225,12 @@ bool wxDragImage::Create(const wxListCtrl& listCtrl, long id)
 {
     if ( m_hImageList )
         ImageList_Destroy(GetHimageList());
-    POINT pt;
-    pt.x =
-    pt.y = 0;
+    POINT pt
+    {
+        .x = 0,
+        .y = 0
+    };
+
     m_hImageList = (WXHIMAGELIST)
         ListView_CreateDragImage(GetHwndOf(&listCtrl), id, &pt);
 

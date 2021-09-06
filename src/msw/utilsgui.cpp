@@ -104,6 +104,7 @@ bool wxCheckForInterrupt(wxWindow *wnd)
 // Deprecated: use wxPoint wxGetMousePosition() instead
 void wxGetMousePosition( int* x, int* y )
 {
+    // FIXME: Return position
     POINT pt;
     wxGetCursorPosMSW( & pt );
     if ( x ) *x = pt.x;

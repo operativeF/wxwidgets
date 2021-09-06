@@ -605,9 +605,11 @@ int wxDisplayFactoryMSW::FindDisplayFromHMONITOR(HMONITOR hmon) const
 
 int wxDisplayFactoryMSW::GetFromPoint(const wxPoint& pt)
 {
-    POINT pt2;
-    pt2.x = pt.x;
-    pt2.y = pt.y;
+    POINT pt2
+    {
+        .x = pt.x,
+        .y = pt.y
+    };
 
     return FindDisplayFromHMONITOR(::MonitorFromPoint(pt2,
                                                        MONITOR_DEFAULTTONULL));

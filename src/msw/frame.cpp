@@ -471,7 +471,7 @@ bool wxFrame::ShowFullScreen(bool show, long style)
 #endif // wxUSE_TOOLBAR
 
         if (style & wxFULLSCREEN_NOMENUBAR)
-            SetMenu((HWND)GetHWND(), (HMENU) nullptr);
+            ::SetMenu((HWND)GetHWND(), (HMENU) nullptr);
 
 #if wxUSE_STATUSBAR
         wxStatusBar *theStatusBar = GetStatusBar();

@@ -298,7 +298,7 @@ WXHWND wxToolTip::GetToolTipCtrl()
        {
            HWND hwnd = (HWND)ms_hwndTT;
            ::SetWindowPos(hwnd, HWND_TOPMOST, 0, 0, 0, 0,
-                        SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
+                          SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
 
 #if wxUSE_TTM_WINDOWFROMPOINT
            // subclass the newly created control
@@ -477,13 +477,13 @@ void wxToolTip::SetWindow(wxWindow *win)
     {
         for ( const auto id : control->GetSubcontrols() )
         {
-            HWND hwnd = GetDlgItem(GetHwndOf(m_window), id);
+            HWND hwnd = ::GetDlgItem(GetHwndOf(m_window), id);
             if ( !hwnd )
             {
                 // maybe it's a child of parent of the control, in fact?
                 // (radiobuttons are subcontrols, i.e. children of the radiobox
                 // for wxWidgets but are its siblings at Windows level)
-                hwnd = GetDlgItem(GetHwndOf(m_window->GetParent()), id);
+                hwnd = ::GetDlgItem(GetHwndOf(m_window->GetParent()), id);
             }
 
             // must have it by now!

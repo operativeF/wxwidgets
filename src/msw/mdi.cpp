@@ -967,9 +967,11 @@ void wxMDIChildFrame::DoSetClientSize(int width, int height)
   }
 #endif // wxUSE_STATUSBAR
 
-  POINT point;
-  point.x = rect2.left;
-  point.y = rect2.top;
+  POINT point
+  {
+      .x = rect2.left,
+      .y = rect2.top
+  };
 
   // If there's an MDI parent, must subtract the parent's top left corner
   // since MoveWindow moves relative to the parent
@@ -1001,9 +1003,11 @@ wxPoint wxMDIChildFrame::DoGetPosition() const
 {
   RECT rect;
   ::GetWindowRect(GetHwnd(), &rect);
-  POINT point;
-  point.x = rect.left;
-  point.y = rect.top;
+  POINT point
+  {
+      .x = rect.left,
+      .y = rect.top
+  };
 
   // Since we now have the absolute screen coords,
   // if there's a parent we must subtract its top left corner
