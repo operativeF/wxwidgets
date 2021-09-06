@@ -40,6 +40,8 @@
     #include "wx/rawbmp.h"
 #endif
 
+#include "wx/msw/wrap/utils.h"
+
 // missing from mingw32 header
 #ifndef CLR_INVALID
     #define CLR_INVALID ((COLORREF)-1)
@@ -51,6 +53,8 @@ constexpr int DSTERASE = 0x00220326;     // dest = (NOT src) AND dest
 // ----------------------------------------------------------------------------
 // wxBitmapRefData
 // ----------------------------------------------------------------------------
+
+using msw::utils::unique_bitmap;
 
 class WXDLLEXPORT wxBitmapRefData : public wxGDIImageRefData
 {
@@ -1787,18 +1791,17 @@ HICON wxBitmapToIconOrCursor(const wxBitmap& bmp,
         // as it does pre-multiplication internally itself so we need to create
         // a special DIB in such format to pass to it. This is inefficient but
         // better than creating an icon with wrong colours.
-        AutoHBITMAP hbmpRelease;
         hbmp = wxDIB(curBmp.ConvertToImage(),
                      wxDIB::PixelFormat_NotPreMultiplied).Detach();
-        hbmpRelease.Init(hbmp);
+
+        auto hbmpRelease = unique_bitmap(hbmp);
 #else // !(wxUSE_WXDIB && wxUSE_IMAGE)
         hbmp = GetHbitmapOf(curBmp);
 #endif // wxUSE_WXDIB && wxUSE_IMAGE
 
         // Create an empty mask bitmap.
         // it doesn't seem to work if we mess with the mask at all.
-        AutoHBITMAP
-            hMonoBitmap(CreateBitmap(curBmp.GetWidth(),curBmp.GetHeight(),1,1,nullptr));
+        auto hMonoBitmap = unique_bitmap(::CreateBitmap(curBmp.GetWidth(), curBmp.GetHeight(), 1, 1, nullptr));
 
         ICONINFO iconInfo;
         wxZeroMemory(iconInfo);
@@ -1809,7 +1812,7 @@ HICON wxBitmapToIconOrCursor(const wxBitmap& bmp,
             iconInfo.yHotspot = hotSpotY;
         }
 
-        iconInfo.hbmMask = hMonoBitmap;
+        iconInfo.hbmMask = hMonoBitmap.get();
         iconInfo.hbmColor = hbmp;
 
         return ::CreateIconIndirect(&iconInfo);
@@ -1833,8 +1836,8 @@ HICON wxBitmapToIconOrCursor(const wxBitmap& bmp,
         iconInfo.yHotspot = hotSpotY;
     }
 
-    AutoHBITMAP hbmpMask(wxInvertMask((HBITMAP)mask->GetMaskBitmap()));
-    iconInfo.hbmMask = hbmpMask;
+    auto hbmpMask = unique_bitmap(wxInvertMask((HBITMAP)mask->GetMaskBitmap()));
+    iconInfo.hbmMask = hbmpMask.get();
     iconInfo.hbmColor = GetHbitmapOf(bmp);
 
     // black out the transparent area to preserve background colour, because

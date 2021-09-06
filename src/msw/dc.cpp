@@ -40,6 +40,7 @@
 
 #include "wx/msw/private/dc.h"
 #include "wx/private/textmeasure.h"
+#include "wx/msw/wrap/utils.h"
 
 
 #ifdef _MSC_VER
@@ -1532,14 +1533,17 @@ void wxMSWDCImpl::DoDrawRotatedText(std::string_view text,
     lf.lfEscapement = angle10;
     lf.lfOrientation = angle10;
 
-    AutoHFONT hfont(lf);
+    using msw::utils::unique_font;
+
+    auto hfont = unique_font(::CreateFontIndirectW(&lf));
+
     if ( !hfont )
     {
         wxLogLastError(wxT("CreateFont"));
         return;
     }
 
-    SelectInHDC selRotatedFont(GetHdc(), hfont);
+    SelectInHDC selRotatedFont(GetHdc(), hfont.get());
 
     // Get extent of whole text.
     wxCoord w, h, heightLine;

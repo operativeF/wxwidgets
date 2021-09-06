@@ -1112,10 +1112,13 @@ WXHBRUSH wxNotebook::QueryBgBitmap()
                             );
 
     MemoryHDC hDCMem(hDC);
-    CompatibleBitmap hBmp(hDC, rcBg.right, rcBg.bottom);
+
+    using msw::utils::unique_bitmap;
+
+    auto hBmp = unique_bitmap(::CreateCompatibleBitmap(hDC, rcBg.right, rcBg.bottom));
 
     {
-        SelectInHDC selectBmp(hDCMem, hBmp);
+        SelectInHDC selectBmp(hDCMem, hBmp.get());
         ::DrawThemeBackground
                                 (
                                     theme,
@@ -1127,7 +1130,7 @@ WXHBRUSH wxNotebook::QueryBgBitmap()
                                 );
     } // deselect bitmap from the memory HDC before using it
 
-    return (WXHBRUSH)::CreatePatternBrush(hBmp);
+    return (WXHBRUSH)::CreatePatternBrush(hBmp.get());
 }
 
 void wxNotebook::UpdateBgBrush()

@@ -1120,8 +1120,12 @@ void DrawColorCheckMark(HDC hdc, int x, int y, int cx, int cy, HDC hdcCheckMask,
 
     // memory DC for color bitmap
     MemoryHDC hdcMem(hdc);
-    CompatibleBitmap hbmpMem(hdc, cx, cy);
-    SelectInHDC selMem(hdcMem, hbmpMem);
+
+    using msw::utils::unique_bitmap;
+
+    auto hbmpMem = unique_bitmap(::CreateCompatibleBitmap(hdc, cx, cy));
+
+    SelectInHDC selMem(hdcMem, hbmpMem.get());
 
     RECT rect = { 0, 0, cx, cy };
     ::FillRect(hdcMem, &rect, ::GetSysColorBrush(idxColor));
@@ -1192,8 +1196,12 @@ void wxMenuItem::DrawStdCheckMark(WXHDC hdc_, const RECT* rc, wxODStatus stat)
 
         // first create mask of check mark
         MemoryHDC hdcMask(hdc);
-        MonoBitmap hbmpMask(cx, cy);
-        SelectInHDC selMask(hdcMask,hbmpMask);
+
+        using msw::utils::unique_bitmap;
+
+        auto hbmpMask = unique_bitmap(::CreateBitmap(cx, cy, 1, 1, nullptr));
+
+        SelectInHDC selMask(hdcMask, hbmpMask.get());
 
         // then draw a check mark into it
         const UINT stateCheck = (GetKind() == wxITEM_CHECK) ? DFCS_MENUCHECK

@@ -34,6 +34,8 @@
 
 #include <cstring> // For memcpy
 
+#include "wx/msw/wrap/utils.h"
+
 
 // make the code compile with either wxFile*Stream or wxFFile*Stream:
 #define HAS_FILE_STREAMS (wxUSE_STREAMS && (wxUSE_FILE || wxUSE_FFILE))
@@ -2568,13 +2570,14 @@ int wxImage::GetLoadFlags() const
 
 static wxImage LoadImageFromResource(const std::string &name, wxBitmapType type)
 {
-    AutoHBITMAP
-        hBitmap,
-        hMask;
+    using msw::utils::unique_bitmap;
+
+    unique_bitmap hBitmap;
+    unique_bitmap hMask;
 
     if ( type == wxBITMAP_TYPE_BMP_RESOURCE )
     {
-        hBitmap.Init( ::LoadBitmap(wxGetInstance(), boost::nowide::widen(name).c_str()) );
+        hBitmap = unique_bitmap( ::LoadBitmap(wxGetInstance(), boost::nowide::widen(name).c_str()) );
 
         if ( !hBitmap )
         {
@@ -2595,8 +2598,8 @@ static wxImage LoadImageFromResource(const std::string &name, wxBitmapType type)
             if ( !info.GetFrom(hIcon) )
                 return {};
 
-            hBitmap.Init(info.hbmColor);
-            hMask.Init(info.hbmMask);
+            hBitmap = unique_bitmap(info.hbmColor);
+            hMask = unique_bitmap(info.hbmMask);
 
             // Reset the fields to prevent them from being destroyed, we took
             // ownership of them.
@@ -2616,10 +2619,11 @@ static wxImage LoadImageFromResource(const std::string &name, wxBitmapType type)
     if ( !hBitmap )
         return {};
 
-    wxImage image = wxDIB(hBitmap).ConvertToImage();
+    wxImage image = wxDIB(hBitmap.get()).ConvertToImage();
+    
     if ( hMask )
     {
-        const wxImage mask = wxDIB(hMask).ConvertToImage();
+        const wxImage mask = wxDIB(hMask.get()).ConvertToImage();
         image.SetMaskFromImage(mask, 255, 255, 255);
     }
     else

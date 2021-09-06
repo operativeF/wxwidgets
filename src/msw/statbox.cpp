@@ -37,7 +37,7 @@
 #include "wx/msw/missing.h"
 #include "wx/msw/dc.h"
 #include "wx/msw/private/winstyle.h"
-
+#include "wx/msw/wrap/utils.h"
 
 namespace
 {
@@ -303,6 +303,8 @@ WXLRESULT wxStaticBox::MSWWindowProc(WXUINT nMsg, WXWPARAM wParam, WXLPARAM lPar
 // static box drawing
 // ----------------------------------------------------------------------------
 
+using msw::utils::unique_region;
+
 /*
    We draw the static box ourselves because it's the only way to prevent it
    from flickering horribly on resize (because everything inside the box is
@@ -314,15 +316,16 @@ WXLRESULT wxStaticBox::MSWWindowProc(WXUINT nMsg, WXWPARAM wParam, WXLPARAM lPar
 // MSWGetRegionWithoutSelf helper: removes the given rectangle from region
 static inline void
 SubtractRectFromRgn(HRGN hrgn, int left, int top, int right, int bottom)
-{
-    AutoHRGN hrgnRect(::CreateRectRgn(left, top, right, bottom));
+{    
+    auto hrgnRect = unique_region(::CreateRectRgn(left, top, right, bottom));
+
     if ( !hrgnRect )
     {
         wxLogLastError(wxT("CreateRectRgn()"));
         return;
     }
 
-    ::CombineRgn(hrgn, hrgn, hrgnRect, RGN_DIFF);
+    ::CombineRgn(hrgn, hrgn, hrgnRect.get(), RGN_DIFF);
 }
 
 void wxStaticBox::MSWGetRegionWithoutSelf(WXHRGN hRgn, int w, int h)
@@ -437,8 +440,8 @@ WXHRGN wxStaticBox::MSWGetRegionWithoutChildren()
                                SWP_FRAMECHANGED);
             }
 
-            AutoHRGN hrgnChild(::CreateRectRgnIndirect(&rc));
-            ::CombineRgn(hrgn, hrgn, hrgnChild, RGN_DIFF);
+            auto hrgnChild = unique_region(::CreateRectRgnIndirect(&rc));
+            ::CombineRgn(hrgn, hrgn, hrgnChild.get(), RGN_DIFF);
         }
     }
 
@@ -457,8 +460,8 @@ WXHRGN wxStaticBox::MSWGetRegionWithoutChildren()
         RECT rc;
         ::GetWindowRect(child, &rc);
         rc = AdjustRectForRtl(GetLayoutDirection(), rc, boxRc );
-        AutoHRGN hrgnChild(::CreateRectRgnIndirect(&rc));
-        ::CombineRgn(hrgn, hrgn, hrgnChild, RGN_DIFF);
+        auto hrgnChild = unique_region(::CreateRectRgnIndirect(&rc));
+        ::CombineRgn(hrgn, hrgn, hrgnChild.get(), RGN_DIFF);
     }
 
     return (WXHRGN)hrgn;
@@ -504,7 +507,10 @@ void wxStaticBox::PaintForeground(wxDC& dc, const RECT&)
         const std::string label = GetLabel();
 
         // choose the correct font
-        AutoHFONT font;
+
+        using msw::utils::unique_font;
+
+        unique_font font;
         SelectInHDC selFont;
         if ( m_hasFont )
         {
@@ -517,18 +523,18 @@ void wxStaticBox::PaintForeground(wxDC& dc, const RECT&)
             {
                 wxUxThemeFont themeFont;
                 if ( ::GetThemeFont
-                                             (
-                                                hTheme,
-                                                hdc,
-                                                BP_GROUPBOX,
-                                                GBS_NORMAL,
-                                                TMT_FONT,
-                                                themeFont.GetPtr()
-                                             ) == S_OK )
+                                    (
+                                    hTheme,
+                                    hdc,
+                                    BP_GROUPBOX,
+                                    GBS_NORMAL,
+                                    TMT_FONT,
+                                    themeFont.GetPtr()
+                                    ) == S_OK )
                 {
-                    font.Init(themeFont.GetLOGFONT());
+                    font = unique_font(::CreateFontIndirectW(&themeFont.GetLOGFONT()));
                     if ( font )
-                        selFont.Init(hdc, font);
+                        selFont.Init(hdc, font.get());
                 }
             }
         }
@@ -652,15 +658,15 @@ void wxStaticBox::OnPaint(wxPaintEvent& WXUNUSED(event))
 
 
     // create the region excluding box children
-    AutoHRGN hrgn((HRGN)MSWGetRegionWithoutChildren());
+    auto hrgn = unique_region((HRGN)MSWGetRegionWithoutChildren());
     RECT rcWin;
     ::GetWindowRect(GetHwnd(), &rcWin);
-    ::OffsetRgn(hrgn, -rcWin.left, -rcWin.top);
+    ::OffsetRgn(hrgn.get(), -rcWin.left, -rcWin.top);
 
     // and also the box itself
-    MSWGetRegionWithoutSelf((WXHRGN) hrgn, rc.right, rc.bottom);
+    MSWGetRegionWithoutSelf((WXHRGN) hrgn.get(), rc.right, rc.bottom);
     wxMSWDCImpl *impl = (wxMSWDCImpl*) dc.GetImpl();
-    HDCClipper clipToBg(GetHdcOf(*impl), hrgn);
+    HDCClipper clipToBg(GetHdcOf(*impl), hrgn.get());
 
     // paint the inside of the box (excluding box itself and child controls)
     PaintBackground(dc, rc);

@@ -29,6 +29,8 @@
 #include "wx/msw/subwin.h"
 #include "wx/renderer.h"
 
+#include "wx/msw/wrap/utils.h"
+
 
 #if wxUSE_TOOLTIPS
     #include "wx/tooltip.h"
@@ -731,6 +733,8 @@ WXHRGN wxRadioBox::MSWGetRegionWithoutChildren()
     ::GetWindowRect(GetHwnd(), &rc);
     HRGN hrgn = ::CreateRectRgn(rc.left, rc.top, rc.right + 1, rc.bottom + 1);
 
+    using msw::utils::unique_region;
+
     for ( unsigned int i = 0; i < GetCount(); ++i )
     {
         // don't clip out hidden children
@@ -738,8 +742,8 @@ WXHRGN wxRadioBox::MSWGetRegionWithoutChildren()
             continue;
 
         ::GetWindowRect((*m_radioButtons)[i], &rc);
-        AutoHRGN hrgnchild(::CreateRectRgnIndirect(&rc));
-        ::CombineRgn(hrgn, hrgn, hrgnchild, RGN_DIFF);
+        auto hrgnchild = unique_region(::CreateRectRgnIndirect(&rc));
+        ::CombineRgn(hrgn, hrgn, hrgnchild.get(), RGN_DIFF);
     }
 
     return (WXHRGN)hrgn;

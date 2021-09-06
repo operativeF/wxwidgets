@@ -38,6 +38,8 @@
 #include "wx/msw/dc.h"
 #include "wx/msw/private/dcdynwrap.h"
 
+#include "wx/msw/wrap/utils.h"
+
 // ----------------------------------------------------------------------------
 // private functions
 // ----------------------------------------------------------------------------
@@ -123,11 +125,14 @@ bool wxCheckListBoxItem::OnDrawItem(wxDC& dc, const wxRect& rc,
 
     // first create bitmap in a memory DC
     MemoryHDC hdcMem(hdc);
-    CompatibleBitmap hBmpCheck(hdc, size.x, size.y);
+
+    using msw::utils::unique_bitmap;
+
+    auto hBmpCheck = unique_bitmap(::CreateCompatibleBitmap(hdc, size.x, size.y));
 
     // then draw a check mark into it
     {
-        SelectInHDC selBmp(hdcMem, hBmpCheck);
+        SelectInHDC selBmp(hdcMem, hBmpCheck.get());
 
         int flags = wxCONTROL_FLAT;
         if ( IsChecked() )
@@ -149,7 +154,7 @@ bool wxCheckListBoxItem::OnDrawItem(wxDC& dc, const wxRect& rc,
     DWORD oldLayout = wxDynLoadWrappers::GetLayout(hdc);
     if ( oldLayout & LAYOUT_RTL )
         ::SetLayout(hdc, oldLayout | LAYOUT_BITMAPORIENTATIONPRESERVED);
-    wxDrawStateBitmap(hdc, hBmpCheck, x, y, uState);
+    wxDrawStateBitmap(hdc, hBmpCheck.get(), x, y, uState);
     if ( oldLayout & LAYOUT_RTL )
         ::SetLayout(hdc, oldLayout);
 

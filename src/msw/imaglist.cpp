@@ -32,6 +32,9 @@
 #include "wx/msw/dib.h"
 #include "wx/msw/private.h"
 
+#include "wx/msw/wrap/utils.h"
+
+using msw::utils::unique_bitmap;
 
 #define GetHImageList()     ((HIMAGELIST)m_hImageList)
 
@@ -109,7 +112,7 @@ bool wxImageList::GetSize(int WXUNUSED(index), int &width, int &height) const
 namespace
 {
 void GetImageListBitmaps(const wxBitmap& bitmap, const wxBitmap& mask, bool useMask,
-                         AutoHBITMAP& hbmpRelease, AutoHBITMAP& hbmpMask, HBITMAP& hbmp)
+                         unique_bitmap& hbmpRelease, unique_bitmap& hbmpMask, HBITMAP& hbmp)
 {
 #if wxUSE_WXDIB && wxUSE_IMAGE
     // wxBitmap normally stores alpha in pre-multiplied format but
@@ -127,14 +130,14 @@ void GetImageListBitmaps(const wxBitmap& bitmap, const wxBitmap& mask, bool useM
             wxImage img = bitmap.ConvertToImage();
             img.ClearAlpha();
             hbmp = wxDIB(img, wxDIB::PixelFormat_NotPreMultiplied).Detach();
-            hbmpRelease.Init(hbmp);
+            hbmpRelease = unique_bitmap(hbmp);
         }
         else
         {
             hbmp = GetHbitmapOf(bitmap);
         }
 
-        hbmpMask.Init(GetMaskForImage(bitmap, mask));
+        hbmpMask = unique_bitmap(GetMaskForImage(bitmap, mask));
     }
     else
     {
@@ -152,7 +155,7 @@ void GetImageListBitmaps(const wxBitmap& bitmap, const wxBitmap& mask, bool useM
             }
             wxImage img = bmp.ConvertToImage();
             hbmp = wxDIB(img, wxDIB::PixelFormat_NotPreMultiplied).Detach();
-            hbmpRelease.Init(hbmp);
+            hbmpRelease = unique_bitmap(hbmp);
         }
         else
         {
@@ -167,7 +170,7 @@ void GetImageListBitmaps(const wxBitmap& bitmap, const wxBitmap& mask, bool useM
                 wxImage img = bmp.ConvertToImage();
                 img.InitAlpha();
                 hbmp = wxDIB(img, wxDIB::PixelFormat_NotPreMultiplied).Detach();
-                hbmpRelease.Init(hbmp);
+                hbmpRelease = unique_bitmap(hbmp);
             }
             else
             {
@@ -187,11 +190,12 @@ void GetImageListBitmaps(const wxBitmap& bitmap, const wxBitmap& mask, bool useM
 int wxImageList::Add(const wxBitmap& bitmap, const wxBitmap& mask)
 {
     HBITMAP hbmp = nullptr;
-    AutoHBITMAP hbmpRelease;
-    AutoHBITMAP hbmpMask;
+    unique_bitmap hbmpRelease;
+    unique_bitmap hbmpMask;
+
     GetImageListBitmaps(bitmap, mask, m_useMask, hbmpRelease, hbmpMask, hbmp);
 
-    int index = ImageList_Add(GetHImageList(), hbmp, hbmpMask);
+    int index = ImageList_Add(GetHImageList(), hbmp, hbmpMask.get());
     if ( index == -1 )
     {
         wxLogError(_("Couldn't add an image to the image list."));
@@ -206,8 +210,9 @@ int wxImageList::Add(const wxBitmap& bitmap, const wxBitmap& mask)
 int wxImageList::Add(const wxBitmap& bitmap, const wxColour& maskColour)
 {
     HBITMAP hbmp = nullptr;
-    AutoHBITMAP hbmpRelease;
-    AutoHBITMAP hbmpMask;
+    unique_bitmap hbmpRelease;
+    unique_bitmap hbmpMask;
+
     wxMask mask(bitmap, maskColour);
     GetImageListBitmaps(bitmap, mask.GetBitmap(), m_useMask, hbmpRelease, hbmpMask, hbmp);
 
@@ -255,11 +260,11 @@ bool wxImageList::Replace(int index,
                           const wxBitmap& mask)
 {
     HBITMAP hbmp = nullptr;
-    AutoHBITMAP hbmpRelease;
-    AutoHBITMAP hbmpMask;
+    unique_bitmap hbmpRelease;
+    unique_bitmap hbmpMask;
     GetImageListBitmaps(bitmap, mask, m_useMask, hbmpRelease, hbmpMask, hbmp);
 
-    if ( !ImageList_Replace(GetHImageList(), index, hbmp, hbmpMask) )
+    if ( !ImageList_Replace(GetHImageList(), index, hbmp, hbmpMask.get()) )
     {
         wxLogLastError(wxT("ImageList_Replace()"));
         return false;
