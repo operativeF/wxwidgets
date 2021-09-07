@@ -71,6 +71,8 @@
 
 using namespace wxMSWImpl;
 
+using msw::utils::unique_region;
+
 /* Quaternary raster codes */
 #ifndef MAKEROP4
 #define MAKEROP4(fore,back) (DWORD)((((back) << 8) & 0xFF000000) | (fore))
@@ -637,19 +639,18 @@ void wxMSWDCImpl::DoSetClippingRegion(wxCoord x, wxCoord y, wxCoord w, wxCoord h
         h = -h;
         y -= (h - 1);
     }
-    HRGN hrgn = ::CreateRectRgn(LogicalToDeviceX(x),
-                                LogicalToDeviceY(y),
-                                LogicalToDeviceX(x + w),
-                                LogicalToDeviceY(y + h));
+
+    unique_region hrgn{::CreateRectRgn(LogicalToDeviceX(x),
+                                       LogicalToDeviceY(y),
+                                       LogicalToDeviceX(x + w),
+                                       LogicalToDeviceY(y + h))};
     if ( !hrgn )
     {
         wxLogLastError(wxT("CreateRectRgn"));
     }
     else
     {
-        SetClippingHrgn((WXHRGN)hrgn);
-
-        ::DeleteObject(hrgn);
+        SetClippingHrgn(hrgn.get());
     }
 }
 
@@ -2343,15 +2344,15 @@ bool wxMSWDCImpl::DoStretchBlit(wxCoord xdest, wxCoord ydest,
 #if wxUSE_DC_CACHEING
             // create a temp buffer bitmap and DCs to access it and the mask
             wxDCCacheEntry* dcCacheEntry1 = FindDCInCache(nullptr, hdcSrc);
-            dc_mask = (HDC) dcCacheEntry1->m_dc;
+            dc_mask = dcCacheEntry1->m_dc.get();
 
             wxDCCacheEntry* dcCacheEntry2 = FindDCInCache(dcCacheEntry1, GetHDC());
-            dc_buffer = (HDC) dcCacheEntry2->m_dc;
+            dc_buffer = dcCacheEntry2->m_dc.get();
 
             wxDCCacheEntry* bitmapCacheEntry = FindBitmapInCache(GetHDC(),
                 dstWidth, dstHeight);
 
-            buffer_bmap = (HBITMAP) bitmapCacheEntry->m_bitmap;
+            buffer_bmap = bitmapCacheEntry->m_bitmap.get();
 #else // !wxUSE_DC_CACHEING
             // create a temp buffer bitmap and DCs to access it and the mask
             dc_mask = wxMSWImpl::CreateCompatibleDCWithLayout(hdcSrc);
@@ -2602,14 +2603,6 @@ wxDCCacheEntry::wxDCCacheEntry(WXHDC hDC, int depth)
 {
 }
 
-wxDCCacheEntry::~wxDCCacheEntry()
-{
-    if (m_bitmap)
-        ::DeleteObject((HBITMAP) m_bitmap);
-    if (m_dc)
-        ::DeleteDC((HDC) m_dc);
-}
-
 wxDCCacheEntry* wxMSWDCImpl::FindBitmapInCache(WXHDC dc, int w, int h)
 {
     const int depth = ::GetDeviceCaps((HDC) dc, PLANES) * ::GetDeviceCaps((HDC) dc, BITSPIXEL);
@@ -2622,15 +2615,18 @@ wxDCCacheEntry* wxMSWDCImpl::FindBitmapInCache(WXHDC dc, int w, int h)
         {
             if (entry->m_width < w || entry->m_height < h)
             {
-                ::DeleteObject((HBITMAP) entry->m_bitmap);
-                entry->m_bitmap = (WXHBITMAP) ::CreateCompatibleBitmap((HDC) dc, w, h);
+                entry->m_bitmap.reset(::CreateCompatibleBitmap((HDC) dc, w, h));
+
                 if ( !entry->m_bitmap)
                 {
                     wxLogLastError(wxT("CreateCompatibleBitmap"));
                 }
+
                 entry->m_width = w; entry->m_height = h;
+                
                 return entry;
             }
+
             return entry;
         }
 

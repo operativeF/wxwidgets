@@ -15,6 +15,8 @@
 #include "wx/math.h"
 #include "wx/palette.h"
 
+#include "wx/msw/wrap/utils.h"
+
 class WXDLLIMPEXP_FWD_CORE wxBitmap;
 struct WXDLLIMPEXP_FWD_CORE wxBitmapHandler; // FIXME: uses in class in non-MSW
 class WXDLLIMPEXP_FWD_CORE wxBitmapRefData;
@@ -229,6 +231,8 @@ private:
 // wxMask: a mono bitmap used for drawing bitmaps transparently.
 // ----------------------------------------------------------------------------
 
+using msw::utils::unique_bitmap;
+
 class WXDLLIMPEXP_CORE wxMask : public wxObject
 {
 public:
@@ -249,9 +253,9 @@ public:
     wxMask(const wxBitmap& bitmap);
 
     // construct a mask from the givne bitmap handle
-    wxMask(WXHBITMAP hbmp) { m_maskBitmap = hbmp; }
+    wxMask(WXHBITMAP hbmp) { m_maskBitmap = unique_bitmap{hbmp}; }
 
-    ~wxMask();
+    ~wxMask() = default;
 
     [[maybe_unused]] bool Create(const wxBitmap& bitmap, const wxColour& colour);
     [[maybe_unused]] bool Create(const wxBitmap& bitmap, int paletteIndex);
@@ -260,11 +264,11 @@ public:
     wxBitmap GetBitmap() const;
 
     // Implementation
-    WXHBITMAP GetMaskBitmap() const { return m_maskBitmap; }
-    void SetMaskBitmap(WXHBITMAP bmp) { m_maskBitmap = bmp; }
+    WXHBITMAP GetMaskBitmap() const { return m_maskBitmap.get(); }
+    void SetMaskBitmap(WXHBITMAP bmp) { m_maskBitmap.reset(bmp); }
 
 protected:
-    WXHBITMAP m_maskBitmap;
+    unique_bitmap m_maskBitmap;
 
     wxDECLARE_DYNAMIC_CLASS(wxMask);
 };

@@ -26,6 +26,8 @@
 #include "wx/fontmap.h"
 #include "wx/tokenzr.h"
 
+#include "wx/msw/wrap/utils.h"
+
 // convert to/from the string representation: format is
 //      encodingid;facename[;charset]
 
@@ -138,14 +140,15 @@ bool wxTestFontEncoding(const wxNativeEncodingInfo& info)
     lf.lfCharSet = (BYTE)info.charset;
     wxStrlcpy(lf.lfFaceName, info.facename.c_str(), WXSIZEOF(lf.lfFaceName));
 
-    HFONT hfont = ::CreateFontIndirectW(&lf);
+    using msw::utils::unique_font;
+
+    unique_font hfont{::CreateFontIndirectW(&lf)};
+
     if ( !hfont )
     {
         // no such font
         return false;
     }
-
-    ::DeleteObject((HGDIOBJ)hfont);
 
     return true;
 }

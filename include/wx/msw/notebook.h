@@ -14,6 +14,10 @@
 
 #include "wx/control.h"
 
+#include "wx/msw/wrap/utils.h"
+
+using msw::utils::unique_brush;
+
 // you can set USE_NOTEBOOK_ANTIFLICKER to 0 for desktop Windows versions too
 // to disable code whih results in flicker-less notebook redrawing at the
 // expense of some extra GDI resource consumption
@@ -38,7 +42,7 @@ public:
               const wxSize& size = wxDefaultSize,
               long style = 0,
               const std::string& name = wxNotebookNameStr);
-  ~wxNotebook();
+  ~wxNotebook() = default;
 
   wxNotebook(const wxNotebook&) = delete;
   wxNotebook& operator=(const wxNotebook&) = delete;
@@ -174,7 +178,7 @@ protected:
   }
 
   // return the themed brush for painting our children
-  WXHBRUSH MSWGetCustomBgBrush() override { return m_hbrBackground; }
+  WXHBRUSH MSWGetCustomBgBrush() override { return m_hbrBackground.get(); }
 
   // gets the bitmap of notebook background and returns a brush from it and
   // sets m_bgBrushAdj
@@ -195,7 +199,7 @@ protected:
 
 #if wxUSE_UXTHEME
   // background brush used to paint the tab control
-  WXHBRUSH m_hbrBackground{nullptr};
+  unique_brush m_hbrBackground;
 
   // offset for MSWAdjustBrushOrg()
   wxPoint m_bgBrushAdj;

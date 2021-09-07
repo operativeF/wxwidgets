@@ -14,6 +14,8 @@
 #include "wx/defs.h"
 #include "wx/dc.h"
 
+#include "wx/msw/wrap/utils.h"
+
 #if wxUSE_DC_CACHEING
 /*
  * Cached blitting, maintaining a cache
@@ -21,17 +23,19 @@
  * instead of constant creation/deletion
  */
 
+using msw::utils::unique_bitmap;
+using msw::utils::unique_dc;
+
 struct wxDCCacheEntry: public wxObject
 {
     wxDCCacheEntry(WXHBITMAP hBitmap, int w, int h, int depth);
     wxDCCacheEntry(WXHDC hDC, int depth);
-    ~wxDCCacheEntry();
 
-    WXHBITMAP   m_bitmap{nullptr};
-    WXHDC       m_dc{nullptr};
-    int         m_width{0};
-    int         m_height{0};
-    int         m_depth{0};
+    unique_bitmap   m_bitmap;
+    unique_dc       m_dc;
+    int             m_width{0};
+    int             m_height{0};
+    int             m_depth{0};
 };
 #endif
 

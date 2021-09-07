@@ -37,6 +37,8 @@
 #include "wx/printdlg.h"
 #include "wx/msw/printdlg.h"
 
+#include "wx/msw/wrap/utils.h"
+
 
 // mingw32 defines GDI_ERROR incorrectly
 #if defined(__GNUWIN32__) || !defined(GDI_ERROR)
@@ -346,6 +348,9 @@ bool wxPrinterDCImpl::DoBlit(wxCoord xdest, wxCoord ydest,
 
     wxBitmap& bmp = msw_impl->GetSelectedBitmap();
     wxMask *mask = useMask ? bmp.GetMask() : nullptr;
+
+    using msw::utils::unique_brush;
+
     if ( mask )
     {
         // If we are printing source colours are screen colours not printer
@@ -362,13 +367,12 @@ bool wxPrinterDCImpl::DoBlit(wxCoord xdest, wxCoord ydest,
                 COLORREF cref = ::GetPixel(dcMask, x, y);
                 if (cref)
                 {
-                    HBRUSH brush = ::CreateSolidBrush(::GetPixel(dcSrc, x, y));
+                    unique_brush brush{::CreateSolidBrush(::GetPixel(dcSrc, x, y))};
                     rect.left = xdest + x;
                     rect.right = rect.left + 1;
                     rect.top = ydest + y;
                     rect.bottom = rect.top + 1;
-                    ::FillRect(GetHdc(), &rect, brush);
-                    ::DeleteObject(brush);
+                    ::FillRect(GetHdc(), &rect, brush.get());
                 }
             }
         }
@@ -390,7 +394,7 @@ bool wxPrinterDCImpl::DoBlit(wxCoord xdest, wxCoord ydest,
                 for (int x = 0; x < width; x++)
                 {
                     COLORREF col = ::GetPixel(dcSrc, x, y);
-                    HBRUSH brush = ::CreateSolidBrush( col );
+                    unique_brush brush{::CreateSolidBrush( col )};
 
                     rect.left = xdest + x;
                     rect.top = ydest + y;
@@ -399,10 +403,10 @@ bool wxPrinterDCImpl::DoBlit(wxCoord xdest, wxCoord ydest,
                     {
                         ++x;
                     }
+
                     rect.right = xdest + x + 1;
                     rect.bottom = rect.top + 1;
-                    ::FillRect((HDC) m_hDC, &rect, brush);
-                    ::DeleteObject(brush);
+                    ::FillRect((HDC) m_hDC, &rect, brush.get());
                 }
             }
         }

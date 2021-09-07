@@ -3523,21 +3523,21 @@ bool wxTreeCtrl::MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result)
                                 hImageList = GetHimagelistOf(m_imageListState);
 
                             // add temporary image
-                            int width, height;
+                            int width;
+                            int height;
                             m_imageListState->GetSize(0, width, height);
 
-                            HBITMAP hbmpTemp = ::CreateBitmap(width, height, 1, 1, nullptr);
-                            int index = ::ImageList_Add(hImageList, hbmpTemp, hbmpTemp);
-                            ::DeleteObject(hbmpTemp);
+                            unique_bitmap hbmpTemp{::CreateBitmap(width, height, 1, 1, nullptr)};
+                            int index = ::ImageList_Add(hImageList, hbmpTemp.get(), hbmpTemp.get());
 
                             if ( index != -1 )
                             {
                                 // move images to right
                                 for ( int i = index; i > 0; i-- )
                                 {
-                                    ImageList_Copy(hImageList, i,
-                                                   hImageList, i-1,
-                                                   ILCF_MOVE);
+                                    ::ImageList_Copy(hImageList, i,
+                                                     hImageList, i-1,
+                                                     ILCF_MOVE);
                                 }
 
                                 // we must remove the image in POSTPAINT notify

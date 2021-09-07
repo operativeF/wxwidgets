@@ -45,7 +45,7 @@ namespace detail
         using pointer = HANDLE;
         
         // TODO: Mark variable unused?
-        void operator()(HANDLE h) { ::FreeConsole(); }
+        void operator()() { ::FreeConsole(); }
     };
 
     struct WndMenuDeleter
@@ -97,10 +97,24 @@ namespace detail
         void operator()(HENHMETAFILE h) { ::DeleteEnhMetaFile(h); }
     };
 
+    struct WndHdcWndDeleter
+    {
+        using pointer = HDC;
+
+        void operator()(HWND hWnd, HDC hDC) { ::ReleaseDC(hWnd, hDC); };
+    };
+
+    struct WndHdcPaintDeleter
+    {
+        using pointer = HDC;
+
+        void operator()(HWND hWnd, const PAINTSTRUCT* lpPaint) { ::EndPaint(hWnd, lpPaint); };
+    };
+
 } // namespace detail
 
 using unique_handle      = std::unique_ptr<HANDLE, detail::WndHandleDeleter>;
-using unique_window      = std::unique_ptr<HWND, detail::WndWindowDeleter>;
+using unique_wnd         = std::unique_ptr<HWND, detail::WndWindowDeleter>;
 using unique_console     = std::unique_ptr<HANDLE, detail::WndConsoleDeleter>;
 using unique_menu        = std::unique_ptr<HMENU, detail::WndMenuDeleter>;
 using unique_cursor      = std::unique_ptr<HCURSOR, detail::WndCursorDeleter>;
@@ -109,6 +123,8 @@ using unique_glrc        = std::unique_ptr<HGLRC, detail::WndGLRCDeleter>;
 using unique_accel       = std::unique_ptr<HACCEL, detail::WndAccelDeleter>;
 using unique_icon        = std::unique_ptr<HICON, detail::WndIconDeleter>;
 using unique_enhmetafile = std::unique_ptr<HENHMETAFILE, detail::WndEnhMetafileDeleter>;
+using unique_dcwnd       = std::unique_ptr<HDC, detail::WndHdcWndDeleter>;
+using unique_dcpaint     = std::unique_ptr<HDC, detail::WndHdcPaintDeleter>;
 
 template<typename GDIObjT>
 using unique_gdiobj  = std::unique_ptr<GDIObjT, detail::WndGDIObjDeleter<GDIObjT>>;

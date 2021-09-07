@@ -266,14 +266,6 @@ WXDWORD wxNotebook::MSWGetStyle(long style, WXDWORD *exstyle) const
     return tabStyle;
 }
 
-wxNotebook::~wxNotebook()
-{
-#if wxUSE_UXTHEME
-    if ( m_hbrBackground )
-        ::DeleteObject((HBRUSH)m_hbrBackground);
-#endif // wxUSE_UXTHEME
-}
-
 // ----------------------------------------------------------------------------
 // wxNotebook accessors
 // ----------------------------------------------------------------------------
@@ -1135,16 +1127,13 @@ WXHBRUSH wxNotebook::QueryBgBitmap()
 
 void wxNotebook::UpdateBgBrush()
 {
-    if ( m_hbrBackground )
-        ::DeleteObject((HBRUSH)m_hbrBackground);
-
     if ( !m_hasBgCol && wxUxThemeIsActive() )
     {
-        m_hbrBackground = QueryBgBitmap();
+        m_hbrBackground.reset(QueryBgBitmap());
     }
     else // no themes or we've got user-defined solid colour
     {
-        m_hbrBackground = nullptr;
+        m_hbrBackground.reset();
     }
 }
 
