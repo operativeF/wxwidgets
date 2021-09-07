@@ -272,10 +272,13 @@ protected:
     // use just the family for example)
     wxString GetMSWFaceName() const
     {
-        ScreenHDC hdc;
-        SelectInHDC selectFont(hdc, (HFONT)GetHFONT());
+        using msw::utils::unique_dcwnd;
 
-        UINT otmSize = ::GetOutlineTextMetricsW(hdc, 0, nullptr);
+        unique_dcwnd screenDC{::GetDC(nullptr)};
+
+        SelectInHDC selectFont(screenDC.get(), (HFONT)GetHFONT());
+
+        UINT otmSize = ::GetOutlineTextMetricsW(screenDC.get(), 0, nullptr);
         if ( !otmSize )
         {
             wxLogLastError("GetOutlineTextMetrics(NULL)");
@@ -287,7 +290,7 @@ protected:
         wxON_BLOCK_EXIT1( free, otm );
 
         otm->otmSize = otmSize;
-        if ( !::GetOutlineTextMetricsW(hdc, otmSize, otm) )
+        if ( !::GetOutlineTextMetricsW(screenDC.get(), otmSize, otm) )
         {
             wxLogLastError("GetOutlineTextMetrics()");
             return {};
@@ -388,8 +391,12 @@ wxNativeFontInfo::wxNativeFontInfo(const LOGFONT& lf_, const wxWindow* win)
 /* static */
 double wxNativeFontInfo::GetPointSizeAtPPI(int lfHeight, int ppi)
 {
+    using msw::utils::unique_dcwnd;
+
+    unique_dcwnd screenDC{::GetDC(nullptr)};
+
     if ( ppi == 0 )
-        ppi = ::GetDeviceCaps(ScreenHDC(), LOGPIXELSY);
+        ppi = ::GetDeviceCaps(screenDC.get(), LOGPIXELSY);
 
     return abs(lfHeight) * 72.0 / ppi;
 }
@@ -503,7 +510,12 @@ void wxNativeFontInfo::SetFractionalPointSize(double pointSizeNew)
     // We don't have the correct DPI to use here, so use that of the
     // primary screen and rely on WXAdjustToPPI() changing it later if
     // necessary.
-    const int ppi = ::GetDeviceCaps(ScreenHDC(), LOGPIXELSY);
+
+    using msw::utils::unique_dcwnd;
+
+    unique_dcwnd screenDC{::GetDC(nullptr)};
+
+    const int ppi = ::GetDeviceCaps(screenDC.get(), LOGPIXELSY);
     lf.lfHeight = GetLogFontHeightAtPPI(pointSizeNew, ppi);
 
     pointSize = pointSizeNew;
@@ -1045,11 +1057,14 @@ bool wxFont::IsFixedWidth() const
 
     // LOGFONT doesn't contain the correct pitch information so we need to call
     // GetTextMetrics() to get it
-    ScreenHDC hdc;
-    SelectInHDC selectFont(hdc, M_FONTDATA->GetHFONT());
+    using msw::utils::unique_dcwnd;
+
+    unique_dcwnd screenDC{::GetDC(nullptr)};
+
+    SelectInHDC selectFont(screenDC.get(), M_FONTDATA->GetHFONT());
 
     TEXTMETRIC tm;
-    if ( !::GetTextMetrics(hdc, &tm) )
+    if ( !::GetTextMetricsW(screenDC.get(), &tm) )
     {
         wxLogLastError(wxT("GetTextMetrics"));
         return false;

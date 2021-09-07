@@ -2527,11 +2527,15 @@ wxGDIPlusPrintingContext::wxGDIPlusPrintingContext( wxGraphicsRenderer* renderer
 void wxGDIPlusPrintingContext::GetDPI(double* dpiX, double* dpiY) const
 {
     // override to use same scaling as wxWindowsPrintPreview::DetermineScaling
-    ScreenHDC hdc;
+
+    using msw::utils::unique_dcwnd;
+
+    unique_dcwnd hdc{::GetDC(nullptr)};
+
     if ( dpiX )
-        *dpiX = ::GetDeviceCaps(hdc, LOGPIXELSX);
+        *dpiX = ::GetDeviceCaps(hdc.get(), LOGPIXELSX);
     if ( dpiY )
-        *dpiY = ::GetDeviceCaps(hdc, LOGPIXELSY);
+        *dpiY = ::GetDeviceCaps(hdc.get(), LOGPIXELSY);
 }
 
 //-----------------------------------------------------------------------------

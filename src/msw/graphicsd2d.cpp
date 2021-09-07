@@ -71,6 +71,8 @@
 #include "wx/stack.h"
 #include "wx/sharedptr.h"
 
+#include "wx/msw/wrap/utils.h"
+
 
 // This must be the last header included to only affect the DEFINE_GUID()
 // occurrences below but not any GUIDs declared in the standard files included
@@ -5298,11 +5300,12 @@ wxGraphicsFont wxD2DRenderer::CreateFont(double sizeInPixels,
                                          int flags,
                                          const wxColour& col)
 {
+    using msw::utils::unique_dcwnd;
     // Use the same DPI as wxFont will use in SetPixelSize, so these cancel
     // each other out and we are left with the actual pixel size.
-    ScreenHDC hdc;
-    wxRealPoint dpi(::GetDeviceCaps(hdc, LOGPIXELSX),
-                    ::GetDeviceCaps(hdc, LOGPIXELSY));
+    unique_dcwnd hdc{::GetDC(nullptr)};
+    wxRealPoint dpi(::GetDeviceCaps(hdc.get(), LOGPIXELSX),
+                    ::GetDeviceCaps(hdc.get(), LOGPIXELSY));
 
     return CreateFontAtDPI(
         wxFontInfo(wxSize(sizeInPixels, sizeInPixels)).AllFlags(flags).FaceName(facename),

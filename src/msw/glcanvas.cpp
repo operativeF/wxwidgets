@@ -1146,7 +1146,11 @@ bool wxGLCanvasBase::IsDisplaySupported(const int *attribList)
     // We need a device context to test the pixel format, so get one
     // for the root window.
     // Not true anymore. Keep it just in case somebody uses this undocumented function
-    return wxGLCanvas::ChooseMatchingPixelFormat(ScreenHDC(), attribList) > 0;
+    using msw::utils::unique_dcwnd;
+
+    unique_dcwnd screenDC{::GetDC(nullptr)};
+
+    return wxGLCanvas::ChooseMatchingPixelFormat(screenDC.get(), attribList) > 0;
 }
 
 int wxGLCanvas::DoSetup(PIXELFORMATDESCRIPTOR &pfd, const int *attribList)
@@ -1281,7 +1285,11 @@ void wxGLCanvas::OnPaletteChanged(wxPaletteChangedEvent& event)
 
 bool wxGLApp::InitGLVisual(const int *attribList)
 {
-    if ( !wxGLCanvas::ChooseMatchingPixelFormat(ScreenHDC(), attribList) )
+    using msw::utils::unique_dcwnd;
+
+    unique_dcwnd screenDC{::GetDC(nullptr)};
+
+    if ( !wxGLCanvas::ChooseMatchingPixelFormat(screenDC.get(), attribList) )
     {
         wxLogError(_("Failed to initialize OpenGL"));
         return false;

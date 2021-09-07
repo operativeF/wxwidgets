@@ -22,14 +22,14 @@ namespace detail
     {
         using pointer = HANDLE;
 
-        void operator()(HANDLE h) { ::CloseHandle(h); }
+        void operator()(HANDLE h) noexcept { ::CloseHandle(h); }
     };
 
     struct WndWindowDeleter
     {
         using pointer = HWND;
 
-        void operator()(HWND h) { ::DestroyWindow(h); }
+        void operator()(HWND h) noexcept { ::DestroyWindow(h); }
     };
 
     template<typename GDIObjT>
@@ -37,7 +37,7 @@ namespace detail
     {
         using pointer = GDIObjT;
 
-        void operator()(GDIObjT h) { ::DeleteObject(h); }
+        void operator()(GDIObjT h) noexcept { ::DeleteObject(h); }
     };
 
     struct WndConsoleDeleter
@@ -45,70 +45,70 @@ namespace detail
         using pointer = HANDLE;
         
         // TODO: Mark variable unused?
-        void operator()() { ::FreeConsole(); }
+        void operator()() noexcept { ::FreeConsole(); }
     };
 
     struct WndMenuDeleter
     {
         using pointer = HMENU;
 
-        void operator()(HMENU h) { ::DestroyMenu(h); }
+        void operator()(HMENU h) noexcept { ::DestroyMenu(h); }
     };
 
     struct WndCursorDeleter
     {
         using pointer = HCURSOR;
 
-        void operator()(HCURSOR h) { ::DestroyCursor(h); }
+        void operator()(HCURSOR h) noexcept { ::DestroyCursor(h); }
     };
 
     struct WndDCDeleter
     {
         using pointer = HDC;
 
-        void operator()(HDC h) { ::DeleteDC(h); }
+        void operator()(HDC h) noexcept { ::DeleteDC(h); }
     };
 
     struct WndGLRCDeleter
     {
         using pointer = HGLRC;
 
-        void operator()(HGLRC h) { ::wglDeleteContext(h); }
+        void operator()(HGLRC h) noexcept { ::wglDeleteContext(h); }
     };
 
     struct WndAccelDeleter
     {
         using pointer = HACCEL;
 
-        void operator()(HACCEL h) { ::DestroyAcceleratorTable(h); }
+        void operator()(HACCEL h) noexcept { ::DestroyAcceleratorTable(h); }
     };
 
     struct WndIconDeleter
     {
         using pointer = HICON;
 
-        void operator()(HICON h) { ::DestroyIcon(h); }
+        void operator()(HICON h) noexcept { ::DestroyIcon(h); }
     };
 
     struct WndEnhMetafileDeleter
     {
         using pointer = HENHMETAFILE;
 
-        void operator()(HENHMETAFILE h) { ::DeleteEnhMetaFile(h); }
+        void operator()(HENHMETAFILE h) noexcept { ::DeleteEnhMetaFile(h); }
     };
 
     struct WndHdcWndDeleter
     {
         using pointer = HDC;
 
-        void operator()(HWND hWnd, HDC hDC) { ::ReleaseDC(hWnd, hDC); };
+        void operator()(HDC hDC) noexcept { ::ReleaseDC(nullptr, hDC); };
     };
 
     struct WndHdcPaintDeleter
     {
         using pointer = HDC;
 
-        void operator()(HWND hWnd, const PAINTSTRUCT* lpPaint) { ::EndPaint(hWnd, lpPaint); };
+        void operator()(HWND hWnd, const PAINTSTRUCT* lpPaint) noexcept { ::EndPaint(hWnd, lpPaint); };
     };
 
 } // namespace detail

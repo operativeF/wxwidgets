@@ -36,6 +36,7 @@
 
 #include "wx/msw/dib.h"
 
+using msw::utils::unique_dcwnd;
 
 // ----------------------------------------------------------------------------
 // private functions
@@ -194,9 +195,11 @@ bool wxDIB::CopyFromDDB(HBITMAP hbmp)
         return false;
     }
 
+    unique_dcwnd dc{::GetDC(nullptr)};
+
     if ( !::GetDIBits
             (
-                ScreenHDC(),                // the DC to use
+                dc.get(),                   // the DC to use
                 hbmp,                       // the source DDB
                 0,                          // first scan line
                 m_height,                   // number of lines to copy
@@ -425,13 +428,15 @@ HBITMAP wxDIB::ConvertToBitmap(const BITMAPINFO *pbmi, HDC hdc, const void *bits
         bits = reinterpret_cast<const char*>(pbmih + 1) + numColors * sizeof(RGBQUAD);
     }
 
+    unique_dcwnd screenDC{::GetDC(nullptr)};
+
     HBITMAP hbmp = ::CreateDIBitmap
                      (
                         hdc
                             ? hdc           // create bitmap compatible
                             : pbmih->biBitCount == 1
                                 ? (HDC) MemoryHDC()
-                                : (HDC) ScreenHDC(),  //  with this DC
+                                : screenDC.get(),  //  with this DC
                         pbmih,              // used to get size &c
                         CBM_INIT,           // initialize bitmap bits too
                         bits,               // ... using this data
@@ -484,10 +489,12 @@ size_t wxDIB::ConvertFromBitmap(BITMAPINFO *pbi, HBITMAP hbmp)
     // memory we need for BITMAPINFO only
     DWORD dwLen = bi.biSize + GetNumberOfColours(bm.bmBitsPixel) * sizeof(RGBQUAD);
 
+    unique_dcwnd screenDC{::GetDC(nullptr)};
+
     // get either just the image size or the image bits
     if ( !::GetDIBits
             (
-                ScreenHDC(),                        // the DC to use
+                screenDC.get(),                        // the DC to use
                 hbmp,                               // the source DDB
                 0,                                  // first scan line
                 h,                                  // number of lines to copy

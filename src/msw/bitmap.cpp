@@ -56,6 +56,7 @@ constexpr int DSTERASE = 0x00220326;     // dest = (NOT src) AND dest
 
 using msw::utils::unique_bitmap;
 using msw::utils::unique_dc;
+using msw::utils::unique_dcwnd;
 
 class WXDLLEXPORT wxBitmapRefData : public wxGDIImageRefData
 {
@@ -786,8 +787,8 @@ bool wxBitmap::DoCreate(int w, int h, int d, WXHDC hdc)
         }
         else // No valid depth, create bitmap compatible with the screen
         {
-            ScreenHDC dc;
-            hbmp = ::CreateCompatibleBitmap(dc, w, h);
+            unique_dcwnd dc{::GetDC(nullptr)};
+            hbmp = ::CreateCompatibleBitmap(dc.get(), w, h);
             if ( !hbmp )
             {
                 wxLogLastError(wxT("CreateCompatibleBitmap"));

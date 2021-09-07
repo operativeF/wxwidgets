@@ -598,7 +598,12 @@ bool wxTextCtrl::MSWCreateText(const std::string& value,
         // is shown on, and calculate and apply the scaling factor.
         // When this control is created in a (wxFrame) constructor the zoom is
         // not correctly applied, use CallAfter to delay setting the zoom.
-        m_richDPIscale = GetDPI().y / (float)::GetDeviceCaps(ScreenHDC(), LOGPIXELSY);
+
+        using msw::utils::unique_dcwnd;
+
+        unique_dcwnd screenDC{::GetDC(nullptr)};
+
+        m_richDPIscale = GetDPI().y / (float)::GetDeviceCaps(screenDC.get(), LOGPIXELSY);
         CallAfter(&wxTextCtrl::MSWSetRichZoom);
     }
     else

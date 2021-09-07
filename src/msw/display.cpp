@@ -20,6 +20,8 @@
 #include "wx/msw/private.h"
 #include "wx/msw/wrapwin.h"
 
+#include "wx/msw/wrap/utils.h"
+
 namespace
 {
 
@@ -28,6 +30,8 @@ int wxGetHDCDepth(HDC hdc)
     return ::GetDeviceCaps(hdc, PLANES) * GetDeviceCaps(hdc, BITSPIXEL);
 }
 
+using msw::utils::unique_dcwnd;
+
 // This implementation is always available, whether wxUSE_DISPLAY is 1 or not,
 // as we fall back to it in case of error.
 class wxDisplayImplSingleMSW : public wxDisplayImplSingle
@@ -35,15 +39,15 @@ class wxDisplayImplSingleMSW : public wxDisplayImplSingle
 public:
     wxRect GetGeometry() const override
     {
-        ScreenHDC dc;
+        unique_dcwnd dc{::GetDC(nullptr)};
 
-        return {0, 0, ::GetDeviceCaps(dc, HORZRES), ::GetDeviceCaps(dc, VERTRES)};
+        return {0, 0, ::GetDeviceCaps(dc.get(), HORZRES), ::GetDeviceCaps(dc.get(), VERTRES)};
     }
 
     wxRect GetClientArea() const override
     {
         RECT rc;
-        SystemParametersInfo(SPI_GETWORKAREA, 0, &rc, 0);
+        ::SystemParametersInfoW(SPI_GETWORKAREA, 0, &rc, 0);
 
         wxRect rectClient;
         wxCopyRECTToRect(rc, rectClient);
@@ -52,7 +56,9 @@ public:
 
     int GetDepth() const override
     {
-        return wxGetHDCDepth(ScreenHDC());
+        unique_dcwnd dc{::GetDC(nullptr)};
+
+        return wxGetHDCDepth(dc.get());
     }
 };
 

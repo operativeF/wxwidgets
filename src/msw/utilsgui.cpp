@@ -26,6 +26,7 @@
 #include "wx/msw/wrapwin.h"
 #include <shlwapi.h>
 
+#include "wx/msw/wrap/utils.h"
 
 // ============================================================================
 // implementation
@@ -196,14 +197,20 @@ void HIMETRICToPixel(LONG *x, LONG *y, HDC hdcRef)
     *y = ::MulDiv(*y, iHeightPels, iHeightMM * 100);
 }
 
+using msw::utils::unique_dcwnd;
+
 void HIMETRICToPixel(LONG *x, LONG *y)
 {
-    HIMETRICToPixel(x, y, ScreenHDC());
+    unique_dcwnd screenDC{::GetDC(nullptr)};
+
+    HIMETRICToPixel(x, y, screenDC.get());
 }
 
 void PixelToHIMETRIC(LONG *x, LONG *y)
 {
-    PixelToHIMETRIC(x, y, ScreenHDC());
+    unique_dcwnd screenDC{::GetDC(nullptr)};
+
+    PixelToHIMETRIC(x, y, screenDC.get());
 }
 
 void wxDrawLine(HDC hdc, int x1, int y1, int x2, int y2)

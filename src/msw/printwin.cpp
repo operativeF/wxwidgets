@@ -283,9 +283,13 @@ bool wxWindowsPrintPreview::Print(bool interactive)
 
 void wxWindowsPrintPreview::DetermineScaling()
 {
-    ScreenHDC dc;
-    int logPPIScreenX = ::GetDeviceCaps(dc, LOGPIXELSX);
-    int logPPIScreenY = ::GetDeviceCaps(dc, LOGPIXELSY);
+    using msw::utils::unique_dcwnd;
+
+    unique_dcwnd dc{::GetDC(nullptr)};
+
+    int logPPIScreenX = ::GetDeviceCaps(dc.get(), LOGPIXELSX);
+    int logPPIScreenY = ::GetDeviceCaps(dc.get(), LOGPIXELSY);
+
     m_previewPrintout->SetPPIScreen(logPPIScreenX, logPPIScreenY);
 
     // Get a device context for the currently selected printer
