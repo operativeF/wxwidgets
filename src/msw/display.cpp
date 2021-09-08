@@ -17,10 +17,12 @@
 
 #include "wx/dynlib.h"
 
-#include "wx/msw/private.h"
-#include "wx/msw/wrapwin.h"
+#ifndef WX_PRECOMP
+    #include "wx/msw/private.h"
+    #include "wx/msw/wrapwin.h"
 
-#include "wx/msw/wrap/utils.h"
+    #include "wx/msw/wrap/utils.h"
+#endif
 
 namespace
 {

@@ -16,7 +16,9 @@
 #ifndef WX_PRECOMP
     #include "wx/app.h"
     #include "wx/log.h"
-
+    #include "wx/msw/wrapcctl.h"
+    #include "wx/msw/private.h"
+    
     #include <boost/nowide/stackstring.hpp>
 #endif // WX_PRECOMP
 
@@ -26,8 +28,6 @@
 
 #include "wx/imaglist.h"
 
-#include "wx/msw/wrapcctl.h"
-#include "wx/msw/private.h"
 #include "wx/msw/private/customdraw.h"
 #include "wx/msw/private/winstyle.h"
 

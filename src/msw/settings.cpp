@@ -19,10 +19,11 @@
     #include "wx/utils.h"
     #include "wx/gdicmn.h"
     #include "wx/module.h"
+
+    #include "wx/msw/private.h"
+    #include "wx/msw/missing.h" // for SM_CXCURSOR, SM_CYCURSOR, SM_TABLETPC
 #endif
 
-#include "wx/msw/private.h"
-#include "wx/msw/missing.h" // for SM_CXCURSOR, SM_CYCURSOR, SM_TABLETPC
 #include "wx/msw/private/metrics.h"
 
 #include "wx/fontutil.h"

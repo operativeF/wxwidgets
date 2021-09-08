@@ -24,13 +24,13 @@
     #include "wx/textctrl.h"
     #include "wx/app.h"
     #include "wx/brush.h"
+    #include "wx/msw/private.h"
 
     #include <boost/nowide/convert.hpp>
 #endif
 
 #include "wx/clipbrd.h"
 #include "wx/wupdlock.h"
-#include "wx/msw/private.h"
 #include "wx/msw/private/winstyle.h"
 
 #if wxUSE_UXTHEME

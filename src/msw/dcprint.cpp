@@ -24,11 +24,11 @@
     #include "wx/window.h"
     #include "wx/dcmemory.h"
     #include "wx/math.h"
+    #include "wx/msw/private.h"
+    #include "wx/msw/wrap/utils.h"
 
     #include <boost/nowide/stackstring.hpp>
 #endif
-
-#include "wx/msw/private.h"
 
 #if wxUSE_WXDIB
     #include "wx/msw/dib.h"
@@ -36,8 +36,6 @@
 
 #include "wx/printdlg.h"
 #include "wx/msw/printdlg.h"
-
-#include "wx/msw/wrap/utils.h"
 
 
 // mingw32 defines GDI_ERROR incorrectly

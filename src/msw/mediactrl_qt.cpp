@@ -31,9 +31,9 @@
     #include "wx/dcclient.h"
     #include "wx/timer.h"
     #include "wx/math.h"        // log10 & pow
+    #include "wx/msw/private.h" // user info and wndproc setting/getting
 #endif
 
-#include "wx/msw/private.h" // user info and wndproc setting/getting
 #include "wx/dynlib.h"
 
 //---------------------------------------------------------------------------

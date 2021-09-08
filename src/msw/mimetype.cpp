@@ -25,6 +25,7 @@
         #include "wx/icon.h"
         #include "wx/msgdlg.h"
     #endif
+    #include "wx/msw/private.h"
 
     #include <fmt/core.h>
 #endif //WX_PRECOMP
@@ -36,7 +37,6 @@
 
 #ifdef __WINDOWS__
     #include "wx/msw/registry.h"
-    #include "wx/msw/private.h"
     #include <shlwapi.h>
     #include "wx/msw/wrapshl.h"
 

@@ -26,14 +26,14 @@
     #include "wx/utils.h"
     #include "wx/log.h"
     #include "wx/window.h"
-    
+    #include "wx/msw/private.h"
+
     #include <boost/nowide/convert.hpp>
     #include <boost/nowide/stackstring.hpp>
 
     #include <gsl/gsl>
 #endif
 
-#include "wx/msw/private.h"
 #include "wx/msw/dc.h"
 
 #include <windowsx.h>

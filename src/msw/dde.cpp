@@ -19,14 +19,13 @@
     #include "wx/app.h"
     #include "wx/hashmap.h"
     #include "wx/module.h"
+    #include "wx/msw/private.h"
 #endif
 
 #include "wx/dde.h"
 #include "wx/intl.h"
 #include "wx/buffer.h"
 #include "wx/strconv.h"
-
-#include "wx/msw/private.h"
 
 #include <ddeml.h>
 

@@ -21,6 +21,7 @@
     #include "wx/control.h"
     #include "wx/module.h"
     #include "wx/toplevel.h"
+    #include "wx/msw/private.h"
 
     #include <vector>
 
@@ -30,7 +31,6 @@
 #endif
 
 #include "wx/tokenzr.h"
-#include "wx/msw/private.h"
 
 
 

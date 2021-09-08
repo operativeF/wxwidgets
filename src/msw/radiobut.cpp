@@ -19,9 +19,9 @@
 #ifndef WX_PRECOMP
     #include "wx/settings.h"
     #include "wx/dcclient.h"
+    #include "wx/msw/private.h"
 #endif
 
-#include "wx/msw/private.h"
 #include "wx/private/window.h"
 #include "wx/renderer.h"
 #include "wx/msw/uxtheme.h"

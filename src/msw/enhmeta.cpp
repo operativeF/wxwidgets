@@ -17,6 +17,7 @@
 #ifndef WX_PRECOMP
     #include "wx/log.h"
     #include "wx/intl.h"
+    #include "wx/msw/private.h"
 
     #include <string>
 
@@ -28,9 +29,6 @@
 
 #include "wx/metafile.h"
 #include "wx/clipbrd.h"
-
-#include "wx/msw/private.h"
-
 
 // ----------------------------------------------------------------------------
 // wxWin macros

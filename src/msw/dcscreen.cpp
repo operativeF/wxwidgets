@@ -16,9 +16,8 @@
 
 #ifndef WX_PRECOMP
    #include "wx/window.h"
+   #include "wx/msw/private.h"
 #endif
-
-#include "wx/msw/private.h"
 
 wxIMPLEMENT_ABSTRACT_CLASS(wxScreenDCImpl, wxMSWDCImpl);
 

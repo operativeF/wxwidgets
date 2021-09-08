@@ -16,13 +16,13 @@
 
 #include "wx/mstream.h"
 #include "wx/dynlib.h"
-#include "wx/msw/private.h"
 #include "wx/msw/private/webrequest_winhttp.h"
 
 #ifndef WX_PRECOMP
     #include "wx/log.h"
     #include "wx/utils.h"
     #include "wx/translation.h"
+    #include "wx/msw/private.h"
 
     #include <fmt/core.h>
 #endif

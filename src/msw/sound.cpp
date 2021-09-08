@@ -14,8 +14,11 @@
 
 #if wxUSE_SOUND
 
+#ifndef WX_PRECOMP
+    #include "wx/msw/private.h"
+#endif
+
 #include "wx/sound.h"
-#include "wx/msw/private.h"
 
 #include <mmsystem.h>
 

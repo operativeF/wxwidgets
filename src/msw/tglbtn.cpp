@@ -22,11 +22,11 @@
     #include "wx/brush.h"
     #include "wx/dcscreen.h"
     #include "wx/settings.h"
+    #include "wx/msw/private.h"
 
     #include "wx/log.h"
 #endif // WX_PRECOMP
 
-#include "wx/msw/private.h"
 #include "wx/msw/private/button.h"
 
 // ----------------------------------------------------------------------------

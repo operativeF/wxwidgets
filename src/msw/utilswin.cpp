@@ -13,10 +13,10 @@
 
 #ifndef WX_PRECOMP
     #include "wx/utils.h"
+    #include "wx/msw/private.h"     // includes <windows.h>
 #endif //WX_PRECOMP
 
 #include "wx/private/launchbrowser.h"
-#include "wx/msw/private.h"     // includes <windows.h>
 #include "wx/msw/registry.h"
 #include <shellapi.h> // needed for SHELLEXECUTEINFO
 

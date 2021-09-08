@@ -14,12 +14,12 @@
 
 #ifndef WX_PRECOMP
     #include "wx/wx.h"
+    #include "wx/msw/private.h"
 
     #include <string>
 #endif
 
 #include "wx/spinbutt.h"
-#include "wx/msw/private.h"
 
 // ---------------------------------------------------------------------------
 // global functions

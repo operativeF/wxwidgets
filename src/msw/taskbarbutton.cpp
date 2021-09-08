@@ -14,6 +14,7 @@
 #ifndef WX_PRECOMP
     #include "wx/icon.h"
     #include "wx/toplevel.h"
+    #include "wx/msw/private.h"
 
     #include <boost/nowide/convert.hpp>
     #include <boost/nowide/stackstring.hpp>
@@ -25,7 +26,6 @@
     #pragma comment( lib, "shlwapi" )
 #endif
 
-#include "wx/msw/private.h"
 #include "wx/msw/taskbarbutton.h"
 
 #include "wx/msw/private/comptr.h"

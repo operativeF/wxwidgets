@@ -22,6 +22,7 @@
     #include "wx/event.h"
     #include "wx/textctrl.h"
     #include "wx/wxcrtvararg.h"
+    #include "wx/msw/private.h"
 
     #include <algorithm>
     #include <boost/nowide/convert.hpp>
@@ -29,7 +30,6 @@
 
 #include "wx/private/spinctrl.h"
 
-#include "wx/msw/private.h"
 #include "wx/msw/private/winstyle.h"
 
 #include "wx/scopeguard.h"

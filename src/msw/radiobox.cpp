@@ -22,15 +22,13 @@
     #include "wx/brush.h"
     #include "wx/settings.h"
     #include "wx/log.h"
+    #include "wx/msw/wrap/utils.h"
 
     #include <boost/nowide/convert.hpp>
 #endif
 
 #include "wx/msw/subwin.h"
 #include "wx/renderer.h"
-
-#include "wx/msw/wrap/utils.h"
-
 
 #if wxUSE_TOOLTIPS
     #include "wx/tooltip.h"

@@ -23,6 +23,7 @@
     #include "wx/log.h"
     #include "wx/hashmap.h"
     #include "wx/filefn.h"
+    #include "wx/msw/missing.h"
 #endif // WX_PRECOMP
 
 #include "wx/dir.h"
@@ -34,7 +35,6 @@
 #include "wx/msw/wrapwin.h"
 #include <shellapi.h>
 #include "wx/msw/wrapshl.h"
-#include "wx/msw/missing.h"
 
 #if wxUSE_BASE
 

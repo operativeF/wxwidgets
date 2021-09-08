@@ -15,13 +15,12 @@
 #ifndef WX_PRECOMP
     #include "wx/window.h"
     #include "wx/log.h"
+    #include "wx/msw/private.h"
 #endif // WX_PRECOMP
 
 #include "wx/caret.h"
 
 #if wxUSE_CARET
-
-#include "wx/msw/private.h"
 
 // ---------------------------------------------------------------------------
 // macros

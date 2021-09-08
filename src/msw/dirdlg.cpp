@@ -24,12 +24,12 @@
     #include "wx/dialog.h"
     #include "wx/log.h"
     #include "wx/app.h"     // for GetComCtl32Version()
+    #include "wx/msw/private.h"
 
     #include <boost/nowide/convert.hpp>
     #include <boost/nowide/stackstring.hpp>
 #endif
 
-#include "wx/msw/private.h"
 #include "wx/msw/wrapshl.h"
 #include "wx/msw/private/comptr.h"
 #include "wx/msw/private/cotaskmemptr.h"

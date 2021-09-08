@@ -27,6 +27,8 @@
     #include "wx/math.h"
     #include "wx/module.h"
     #include "wx/wxcrtvararg.h"
+    #include "wx/msw/private.h"
+    #include "wx/msw/missing.h"
 
     #include <boost/nowide/convert.hpp>
 
@@ -47,7 +49,6 @@
 
 #include <windowsx.h>
 
-#include "wx/msw/private.h"
 #include "wx/msw/winundef.h"
 
 #include <sys/types.h>
@@ -75,8 +76,6 @@
 #if wxUSE_INKEDIT
     #include <wx/dynlib.h>
 #endif
-
-#include "wx/msw/missing.h"
 
 
 #ifndef CFM_BACKCOLOR

@@ -21,6 +21,7 @@
         #include "wx/stream.h"
     #endif
     #include "wx/module.h"
+    #include "wx/msw/private.h"
 
     #include <vector>
 #endif
@@ -29,8 +30,6 @@
 #include "wx/thread.h"
 #include "wx/apptrait.h"
 #include "wx/evtloop.h"
-
-#include "wx/msw/private.h"
 
 #if !defined(__GNUWIN32__)
     #include <direct.h>

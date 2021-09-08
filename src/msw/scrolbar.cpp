@@ -19,11 +19,10 @@
 #ifndef WX_PRECOMP
     #include "wx/utils.h"
     #include "wx/settings.h"
+    #include "wx/msw/private.h"
 
     #include <gsl/gsl>
 #endif
-
-#include "wx/msw/private.h"
 
 
 // Scrollbar

@@ -15,13 +15,13 @@
 
 #ifndef WX_PRECOMP
     #include "wx/treectrl.h"
+    #include "wx/msw/private.h"
 
     #include <boost/nowide/stackstring.hpp>
 #endif // WX_PRECOMP
 
 #include "wx/private/richtooltip.h"
 #include "wx/generic/private/richtooltip.h"
-#include "wx/msw/private.h"
 #include "wx/msw/uxtheme.h"
 
 

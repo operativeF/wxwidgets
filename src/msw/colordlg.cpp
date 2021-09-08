@@ -23,6 +23,7 @@
     #include "wx/math.h"
     #include "wx/msw/wrapcdlg.h"
     #include "wx/utils.h"
+    #include "wx/msw/private.h"
 
     #include <string>
 
@@ -31,7 +32,6 @@
 
 #include "wx/scopeguard.h"
 
-#include "wx/msw/private.h"
 #include "wx/msw/private/dpiaware.h"
 
 

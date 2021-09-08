@@ -18,11 +18,11 @@
     #include "wx/window.h"
     #include "wx/app.h"
     #include "wx/log.h"
+    #include "wx/msw/private.h"
 #endif //WX_PRECOMP
 
 #include "wx/thread.h"
 #include "wx/except.h"
-#include "wx/msw/private.h"
 
 #include "wx/tooltip.h"
 #if wxUSE_THREADS

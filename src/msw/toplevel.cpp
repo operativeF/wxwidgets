@@ -23,6 +23,8 @@
     #include "wx/menu.h"
     #include "wx/containr.h"        // wxSetFocusToChild()
     #include "wx/module.h"
+    #include "wx/msw/private.h"
+    #include "wx/msw/missing.h"
 
     #include <string>
 
@@ -32,11 +34,9 @@
 #include "wx/scopeguard.h"
 #include "wx/tooltip.h"
 
-#include "wx/msw/private.h"
 #include "wx/msw/private/winstyle.h"
 
 #include "wx/msw/winundef.h"
-#include "wx/msw/missing.h"
 
 #include "wx/display.h"
 

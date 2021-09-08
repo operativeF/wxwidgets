@@ -15,6 +15,7 @@
 #ifndef WX_PRECOMP
     #include "wx/utils.h"
     #include "wx/app.h"
+    #include "wx/msw/private.h"
 #endif
 
 #include "wx/metafile.h"
@@ -23,7 +24,6 @@
 #if wxUSE_METAFILE && !defined(wxMETAFILE_IS_ENH)
 
 #include "wx/clipbrd.h"
-#include "wx/msw/private.h"
 
 #include <stdio.h>
 #include <string.h>

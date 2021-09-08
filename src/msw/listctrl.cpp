@@ -25,17 +25,16 @@
     #include "wx/stopwatch.h"
     #include "wx/dcclient.h"
     #include "wx/textctrl.h"
+    #include "wx/msw/wrap/utils.h"
+    #include "wx/msw/private.h"
 
     #include <vector>
 #endif
 
 #include "wx/imaglist.h"
 
-#include "wx/msw/private.h"
 #include "wx/msw/private/customdraw.h"
 #include "wx/msw/private/keyboard.h"
-
-#include "wx/msw/wrap/utils.h"
 
 // Currently gcc doesn't define NMLVFINDITEM, and DMC only defines
 // it by its old name NM_FINDTIEM.

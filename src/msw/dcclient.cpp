@@ -18,13 +18,13 @@
     #include "wx/hashmap.h"
     #include "wx/log.h"
     #include "wx/window.h"
+    #include "wx/msw/private.h"
 
     #include <unordered_map>
 #endif
 
 #include "wx/stack.h"
 
-#include "wx/msw/private.h"
 #include "wx/msw/private/paint.h"
 
 

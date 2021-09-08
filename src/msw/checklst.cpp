@@ -27,6 +27,9 @@
     #include "wx/dcmemory.h"
     #include "wx/settings.h"
     #include "wx/log.h"
+    #include "wx/msw/private.h"
+
+    #include "wx/msw/wrap/utils.h"
 #endif
 
 #include "wx/ownerdrw.h"
@@ -34,11 +37,8 @@
 #include <windowsx.h>
 
 #include "wx/renderer.h"
-#include "wx/msw/private.h"
 #include "wx/msw/dc.h"
 #include "wx/msw/private/dcdynwrap.h"
-
-#include "wx/msw/wrap/utils.h"
 
 // ----------------------------------------------------------------------------
 // private functions

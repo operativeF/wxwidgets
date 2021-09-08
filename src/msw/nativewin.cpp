@@ -12,10 +12,10 @@
 
 
 #ifndef WX_PRECOMP
+    #include "wx/msw/private.h"
 #endif // WX_PRECOMP
 
 #include "wx/nativewin.h"
-#include "wx/msw/private.h"
 
 // ============================================================================
 // implementation

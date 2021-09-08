@@ -22,6 +22,9 @@
     #include "wx/dcmemory.h"
     #include "wx/image.h"
     #include "wx/sizer.h"
+    #include "wx/msw/wrap/utils.h"
+    #include "wx/msw/private.h"
+    #include "wx/msw/missing.h"
 
     #include <boost/nowide/convert.hpp>
 #endif
@@ -33,11 +36,8 @@
 
 #include <windowsx.h> // needed by GET_X_LPARAM and GET_Y_LPARAM macros
 
-#include "wx/msw/private.h"
-#include "wx/msw/missing.h"
 #include "wx/msw/dc.h"
 #include "wx/msw/private/winstyle.h"
-#include "wx/msw/wrap/utils.h"
 
 namespace
 {

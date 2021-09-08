@@ -27,6 +27,8 @@
     #include "wx/dcprint.h"
     #include "wx/module.h"
 
+    #include "wx/msw/wrap/utils.h"
+
     #include <boost/nowide/convert.hpp>
     #include <gsl/gsl>
 #endif
@@ -40,7 +42,6 @@
 
 #include "wx/msw/private/dc.h"
 #include "wx/private/textmeasure.h"
-#include "wx/msw/wrap/utils.h"
 
 
 #ifdef _MSC_VER

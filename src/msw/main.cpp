@@ -16,11 +16,11 @@
     #include "wx/event.h"
     #include "wx/app.h"
     #include "wx/utils.h"
+    #include "wx/msw/private.h"
 #endif //WX_PRECOMP
 
 #include "wx/dynlib.h"
 
-#include "wx/msw/private.h"
 #include "wx/msw/seh.h"
 
 #if wxUSE_ON_FATAL_EXCEPTION

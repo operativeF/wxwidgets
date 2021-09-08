@@ -15,16 +15,15 @@
 #if wxUSE_HELP
 
 #ifndef WX_PRECOMP
+    #ifdef __WXMSW__
+        #include "wx/msw/private.h"
+    #endif
 #endif
 
 #include "wx/filename.h"
 #include "wx/msw/helpwin.h"
 
 #include <ctime>
-
-#ifdef __WXMSW__
-#include "wx/msw/private.h"
-#endif
 
 static HWND GetSuitableHWND(wxWinHelpController* controller)
 {

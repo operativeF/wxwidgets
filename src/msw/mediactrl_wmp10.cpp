@@ -51,9 +51,9 @@
 
 #ifndef WX_PRECOMP
     #include "wx/log.h"
+    #include "wx/msw/private.h" // user info and wndproc setting/getting
 #endif
 
-#include "wx/msw/private.h" // user info and wndproc setting/getting
 #include "wx/msw/ole/activex.h" // wxActiveXContainer - COM-specific stuff
 
 //---------------------------------------------------------------------------

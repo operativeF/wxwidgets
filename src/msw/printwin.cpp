@@ -29,13 +29,13 @@
     #include "wx/dcprint.h"
     #include "wx/dcmemory.h"
     #include "wx/image.h"
+    #include "wx/msw/private.h"
 #endif
 
 #include "wx/msw/dib.h"
 #include "wx/msw/dcmemory.h"
 #include "wx/msw/printwin.h"
 #include "wx/msw/printdlg.h"
-#include "wx/msw/private.h"
 #include "wx/msw/dcprint.h"
 #include "wx/msw/enhmeta.h"
 

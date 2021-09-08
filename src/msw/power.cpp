@@ -13,11 +13,11 @@
 
 
 #ifndef WX_PRECOMP
+    #include "wx/msw/private.h"
 #endif //WX_PRECOMP
 
 #include "wx/power.h"
 #include "wx/atomic.h"
-#include "wx/msw/private.h"
 
 // ----------------------------------------------------------------------------
 // wxPowerResource

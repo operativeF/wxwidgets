@@ -19,10 +19,10 @@
     #include "wx/utils.h"
     #include "wx/app.h"
     #include "wx/bitmap.h"
-#endif // WX_PRECOMP
+    #include "wx/msw/private.h"
 
-#include "wx/msw/private.h"
-#include "wx/msw/wrap/utils.h"
+    #include "wx/msw/wrap/utils.h"
+#endif // WX_PRECOMP
 
 // ----------------------------------------------------------------------------
 // private classes

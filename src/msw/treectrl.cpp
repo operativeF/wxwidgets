@@ -23,6 +23,7 @@
     #include "wx/log.h"
     #include "wx/app.h"
     #include "wx/settings.h"
+    #include "wx/msw/private.h"
 
     #include <array>
     
@@ -32,7 +33,6 @@
 #include <windowsx.h> // needed by GET_X_LPARAM and GET_Y_LPARAM macros
 
 
-#include "wx/msw/private.h"
 #include "wx/msw/winundef.h"
 #include "wx/msw/private/winstyle.h"
 

@@ -57,6 +57,7 @@
     #include "wx/module.h"
     #include "wx/window.h"
     #include "wx/msw/private.h"
+    #include "wx/msw/wrap/utils.h"
 
     #include <boost/nowide/convert.hpp>
     #include <fmt/core.h>
@@ -70,8 +71,6 @@
 #include "wx/private/graphics.h"
 #include "wx/stack.h"
 #include "wx/sharedptr.h"
-
-#include "wx/msw/wrap/utils.h"
 
 
 // This must be the last header included to only affect the DEFINE_GUID()

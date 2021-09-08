@@ -34,8 +34,6 @@
 
 #include <cstring> // For memcpy
 
-#include "wx/msw/wrap/utils.h"
-
 
 // make the code compile with either wxFile*Stream or wxFFile*Stream:
 #define HAS_FILE_STREAMS (wxUSE_STREAMS && (wxUSE_FILE || wxUSE_FFILE))
@@ -2566,7 +2564,12 @@ int wxImage::GetLoadFlags() const
 #ifdef HAS_LOAD_FROM_RESOURCE
 
 #include "wx/msw/dib.h"
-#include "wx/msw/private.h"
+
+#ifndef WX_PRECOMP
+    #include "wx/msw/private.h"
+    #include "wx/msw/wrap/utils.h"
+#endif
+
 
 static wxImage LoadImageFromResource(const std::string &name, wxBitmapType type)
 {

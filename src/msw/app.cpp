@@ -30,6 +30,8 @@
     #include "wx/crt.h"
     #include "wx/log.h"
     #include "wx/module.h"
+    #include "wx/msw/missing.h"
+    #include "wx/msw/private.h"
 
     #include <string>
     #include <vector>
@@ -46,7 +48,6 @@
 #include "wx/scopeguard.h"
 #include "wx/weakref.h"
 
-#include "wx/msw/private.h"
 #include "wx/msw/dc.h"
 #include "wx/msw/ole/oleutils.h"
 #include "wx/msw/private/timer.h"
@@ -58,9 +59,6 @@
 #if wxUSE_OLE
     #include <ole2.h>
 #endif
-
-
-#include "wx/msw/missing.h"
 
 
 // instead of including <shlwapi.h> which is not part of the core SDK and not

@@ -31,6 +31,7 @@
     #include "wx/app.h"         // for GetComCtl32Version
     #include "wx/image.h"
     #include "wx/stattext.h"
+    #include "wx/msw/private.h"
 
     #include <boost/nowide/convert.hpp>
     #include <gsl/gsl>
@@ -45,7 +46,6 @@
 
 #include <windowsx.h> // needed by GET_X_LPARAM and GET_Y_LPARAM macros
 
-#include "wx/msw/private.h"
 #include "wx/msw/winundef.h"
 #include "wx/msw/dc.h"
 #include "wx/msw/dib.h"

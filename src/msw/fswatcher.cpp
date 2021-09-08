@@ -13,11 +13,14 @@
 
 #if wxUSE_FSWATCHER
 
+#ifndef WX_PRECOMP
+    #include "wx/msw/private.h"
+#endif
+
 #include "wx/fswatcher.h"
 #include "wx/thread.h"
 #include "wx/sharedptr.h"
 #include "wx/msw/fswatcher.h"
-#include "wx/msw/private.h"
 #include "wx/private/fswatcher.h"
 
 class wxFSWatcherImplMSW : public wxFSWatcherImpl

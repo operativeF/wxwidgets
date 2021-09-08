@@ -14,6 +14,7 @@
 
 #ifndef WX_PRECOMP
     #include "wx/event.h"
+    #include "wx/msw/private.h"
 
     #include <boost/nowide/convert.hpp>
 #endif //WX_PRECOMP
@@ -27,7 +28,6 @@
 #include "wx/recguard.h"
 
 #include "wx/crt.h"
-#include "wx/msw/private.h"
 
 #include <fmt/printf.h>
 

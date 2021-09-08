@@ -25,14 +25,12 @@
     #include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
     #include "wx/settings.h"
     #include "wx/window.h"
+    #include "wx/msw/private.h"
 
     #include <string>
 #endif
 
-#include "wx/msw/private.h"
-
 #include "wx/msw/dragimag.h"
-#include "wx/msw/private.h"
 
 // Wine doesn't have this yet
 #ifndef ListView_CreateDragImage

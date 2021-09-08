@@ -40,6 +40,7 @@
     #include "wx/textctrl.h"
     #include "wx/menuitem.h"
     #include "wx/module.h"
+    #include "wx/msw/private.h"
 
     #include <array>
     #include <vector>
@@ -72,7 +73,6 @@
     #endif
 #endif
 
-#include "wx/msw/private.h"
 #include "wx/msw/private/keyboard.h"
 #include "wx/msw/private/paint.h"
 #include "wx/msw/private/winstyle.h"

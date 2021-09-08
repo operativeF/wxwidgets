@@ -16,6 +16,7 @@
 
 #ifndef WX_PRECOMP
     #include "wx/log.h"
+    #include "wx/msw/private.h"
 
     #include <vector>
 #endif
@@ -23,7 +24,6 @@
 #include "wx/settings.h"
 
 #include "wx/msw/dcclient.h"
-#include "wx/msw/private.h"
 
 // For wxODCB_XXX flags
 #include "wx/odcombo.h"

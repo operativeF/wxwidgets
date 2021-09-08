@@ -21,6 +21,7 @@
     #include "wx/log.h"
     #include "wx/module.h"
     #include "wx/msw/private.h"
+    #include "wx/msw/wrap/utils.h"
 #endif // WX_PRECOMP
 
 #include "wx/encinfo.h"
@@ -31,8 +32,6 @@
 
 #include "wx/scopeguard.h"
 #include "wx/tokenzr.h"
-
-#include "wx/msw/wrap/utils.h"
 
 // ----------------------------------------------------------------------------
 // constants

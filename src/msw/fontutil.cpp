@@ -20,13 +20,13 @@
     #include "wx/intl.h"
     #include "wx/wxcrtvararg.h"
     #include "wx/msw/private.h"
+    #include "wx/msw/wrap/utils.h"
 #endif //WX_PRECOMP
 
 #include "wx/encinfo.h"
 #include "wx/fontmap.h"
 #include "wx/tokenzr.h"
 
-#include "wx/msw/wrap/utils.h"
 
 // convert to/from the string representation: format is
 //      encodingid;facename[;charset]

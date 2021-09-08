@@ -27,13 +27,13 @@
     #include "wx/log.h"
     #include "wx/dataobj.h"
     #include "wx/dcmemory.h"
+    #include "wx/msw/private.h"
 #endif
 
 #if wxUSE_METAFILE
     #include "wx/metafile.h"
 #endif
 
-#include "wx/msw/private.h"
 #include "wx/msw/ole/oleutils.h"
 
 #if wxUSE_WXDIB

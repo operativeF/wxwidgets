@@ -16,9 +16,10 @@
 
 #ifndef WX_PRECOMP
     #include "wx/gdicmn.h"
+
+    #include "wx/msw/private.h"
 #endif
 
-#include "wx/msw/private.h"
 
 // Colour
 

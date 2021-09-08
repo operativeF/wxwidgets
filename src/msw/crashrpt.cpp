@@ -16,11 +16,11 @@
 
 #ifndef WX_PRECOMP
     #include "wx/wxcrtvararg.h"
+    #include "wx/msw/private.h"
 #endif  //WX_PRECOMP
 
 #include "wx/msw/debughlp.h"
 #include "wx/msw/crashrpt.h"
-#include "wx/msw/private.h"
 
 // ----------------------------------------------------------------------------
 // classes

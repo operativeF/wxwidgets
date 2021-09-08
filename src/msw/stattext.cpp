@@ -21,11 +21,11 @@
     #include "wx/brush.h"
     #include "wx/dcclient.h"
     #include "wx/settings.h"
+    #include "wx/msw/private.h"
 #endif
 
 #include "wx/stringutils.h"
 
-#include "wx/msw/private.h"
 #include "wx/msw/private/winstyle.h"
 
 bool wxStaticText::Create(wxWindow *parent,

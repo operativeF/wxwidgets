@@ -32,6 +32,7 @@
     #include "wx/dcclient.h"
     #include "wx/dcmemory.h"
     #include "wx/dcprint.h"
+    #include "wx/msw/private.h" // needs to be before #include <commdlg.h>
 
     #include <boost/nowide/convert.hpp>
     #include <boost/nowide/stackstring.hpp>
@@ -45,8 +46,6 @@
 #include "wx/msw/enhmeta.h"
 #include "wx/dcgraph.h"
 #include "wx/rawbmp.h"
-
-#include "wx/msw/private.h" // needs to be before #include <commdlg.h>
 
 #if wxUSE_COMMON_DIALOGS
 #include <commdlg.h>

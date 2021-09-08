@@ -18,11 +18,12 @@
 #ifndef WX_PRECOMP
     #include "wx/string.h"
     #include "wx/log.h"
+
+    #include "wx/msw/private.h"
 #endif //WX_PRECOMP
 
 #include "wx/snglinst.h"
 
-#include "wx/msw/private.h"
 
 // ----------------------------------------------------------------------------
 // wxSingleInstanceCheckerImpl: the real implementation class

@@ -26,6 +26,8 @@
     #include "wx/accel.h"
     #include "wx/log.h"
     #include "wx/menu.h"
+    #include "wx/msw/wrap/utils.h"
+    #include "wx/msw/private.h"
 
     #include <string>
 
@@ -37,12 +39,9 @@
     #include "wx/accel.h"
 #endif // wxUSE_ACCEL
 
-#include "wx/msw/private.h"
 #include "wx/msw/dc.h"
 #include "wx/stringutils.h"
 #include "wx/msw/uxtheme.h"
-
-#include "wx/msw/wrap/utils.h"
 
 
 // ---------------------------------------------------------------------------

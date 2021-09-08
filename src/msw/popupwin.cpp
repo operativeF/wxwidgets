@@ -15,11 +15,11 @@
 #if wxUSE_POPUPWIN
 
 #ifndef WX_PRECOMP
+    #include "wx/msw/private.h"     // for GetDesktopWindow()
 #endif //WX_PRECOMP
 
 #include "wx/popupwin.h"
 
-#include "wx/msw/private.h"     // for GetDesktopWindow()
 
 // Set to the popup window currently being shown, if any.
 //

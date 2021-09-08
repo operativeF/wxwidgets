@@ -15,13 +15,13 @@
 #ifndef WX_PRECOMP
     #include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
     #include "wx/app.h"
+
+    #include "wx/msw/private.h"
 #endif
 
 #if wxUSE_SPINBTN
 
 #include "wx/spinbutt.h"
-
-#include "wx/msw/private.h"
 
 #ifndef UDM_SETRANGE32
     #define UDM_SETRANGE32 (WM_USER+111)

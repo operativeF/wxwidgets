@@ -23,6 +23,8 @@
     #include "wx/log.h"
     #include "wx/module.h"
     #include "wx/msgout.h"
+    #include "wx/msw/private.h"
+    #include "wx/msw/missing.h"
 
     #include <gsl/gsl>
 #endif
@@ -30,8 +32,6 @@
 #include "wx/apptrait.h"
 #include "wx/scopeguard.h"
 
-#include "wx/msw/private.h"
-#include "wx/msw/missing.h"
 #include "wx/msw/seh.h"
 
 #include "wx/except.h"

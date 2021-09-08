@@ -21,13 +21,13 @@
     #include "wx/utils.h"
     #include "wx/menu.h"
     #include "wx/app.h"
+    #include "wx/msw/private.h"
 
     #include <boost/nowide/convert.hpp>
 #endif
 
 #include "wx/msw/wrapshl.h"
 
-#include "wx/msw/private.h"
 #include "wx/platinfo.h"
 #include "wx/taskbar.h"
 

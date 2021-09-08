@@ -18,12 +18,11 @@
 
 #ifndef WX_PRECOMP
     #include "wx/app.h"
-
+    #include "wx/msw/private.h"
     #include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
 #endif
 
 #include "wx/appprogress.h"
-#include "wx/msw/private.h"
 #include "wx/msw/private/winstyle.h"
 
 #ifndef PBM_SETBARCOLOR

@@ -13,6 +13,10 @@
 
 #if wxUSE_SECRETSTORE
 
+#ifndef WX_PRECOMP
+    #include "wx/msw/private.h"
+#endif
+
 #include "wx/secretstore.h"
 #include "wx/private/secretstore.h"
 
@@ -22,7 +26,6 @@
 // standard Windows macros being defined without including the headers defining
 // them on its own, so we must include <windows.h> (from our private header)
 // before including it.
-#include "wx/msw/private.h"
 #include <wincred.h>
 
 namespace

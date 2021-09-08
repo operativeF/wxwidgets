@@ -27,6 +27,8 @@
     #include "wx/dcmemory.h"
     #include "wx/control.h"
     #include "wx/panel.h"
+    #include "wx/msw/wrap/utils.h"
+    #include "wx/msw/private.h"
 
     #include <boost/nowide/convert.hpp>
     #include <boost/nowide/stackstring.hpp>
@@ -35,7 +37,6 @@
 #include "wx/imaglist.h"
 #include "wx/sysopt.h"
 
-#include "wx/msw/private.h"
 #include "wx/msw/dc.h"
 
 #include <windowsx.h>
@@ -44,8 +45,6 @@
 #if wxUSE_UXTHEME
     #include "wx/msw/uxtheme.h"
 #endif
-
-#include "wx/msw/wrap/utils.h"
 
 // ----------------------------------------------------------------------------
 // macros

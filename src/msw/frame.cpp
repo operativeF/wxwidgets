@@ -28,9 +28,9 @@
     #include "wx/toolbar.h"
     #include "wx/statusbr.h"
     #include "wx/menuitem.h"
+    #include "wx/msw/private.h"
 #endif // WX_PRECOMP
 
-#include "wx/msw/private.h"
 
 #include "wx/generic/statusbr.h"
 

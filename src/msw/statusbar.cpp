@@ -24,11 +24,11 @@
     #include "wx/intl.h"
     #include "wx/log.h"
     #include "wx/control.h"
+    #include "wx/msw/private.h"
 
     #include <boost/nowide/convert.hpp>
 #endif
 
-#include "wx/msw/private.h"
 #include "wx/tooltip.h"
 #include <windowsx.h>
 

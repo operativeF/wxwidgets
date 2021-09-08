@@ -22,6 +22,8 @@
     #include "wx/log.h"
     #include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
     #include "wx/window.h"
+    #include "wx/msw/wrap/utils.h"
+    #include "wx/msw/private.h"
 
     #include <algorithm>
 #endif
@@ -30,11 +32,9 @@
 #include "wx/dc.h"
 #include "wx/msw/dc.h"
 #include "wx/msw/dib.h"
-#include "wx/msw/private.h"
-
-#include "wx/msw/wrap/utils.h"
 
 using msw::utils::unique_bitmap;
+
 
 #define GetHImageList()     ((HIMAGELIST)m_hImageList)
 

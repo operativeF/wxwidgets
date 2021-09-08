@@ -27,6 +27,7 @@
     #include "wx/msw/wrapcctl.h"
     #include "wx/msw/private.h"
     #include "wx/msw/missing.h"
+    #include "wx/msw/wrap/utils.h"
 
     #include <boost/nowide/convert.hpp>
 #endif
@@ -42,8 +43,6 @@
 #if wxUSE_MARKUP
     #include "wx/generic/private/markuptext.h"
 #endif // wxUSE_MARKUP
-
-#include "wx/msw/wrap/utils.h"
 
 using namespace wxMSWImpl;
 

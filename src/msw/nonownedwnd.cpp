@@ -16,6 +16,7 @@
     #include "wx/frame.h"       // Only for wxFRAME_SHAPED.
     #include "wx/region.h"
     #include "wx/msw/private.h"
+    #include "wx/msw/missing.h"
 #endif // WX_PRECOMP
 
 #include "wx/nonownedwnd.h"
@@ -27,7 +28,6 @@
 
 #include "wx/dynlib.h"
 
-#include "wx/msw/missing.h"
 
 // ============================================================================
 // wxNonOwnedWindow implementation

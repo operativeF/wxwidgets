@@ -16,6 +16,8 @@
 
 #ifndef WX_PRECOMP
     #include "wx/window.h"
+    #include "wx/msw/private.h"
+    #include "wx/msw/wrap/utils.h"
 
     #include <boost/nowide/convert.hpp>
     #include <gsl/gsl>
@@ -23,9 +25,7 @@
 
 #include "wx/accel.h"
 
-#include "wx/msw/private.h"
 #include "wx/msw/private/keyboard.h"
-#include "wx/msw/wrap/utils.h"
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxAcceleratorTable, wxObject);
 

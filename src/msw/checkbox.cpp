@@ -18,13 +18,13 @@
 #ifndef WX_PRECOMP
     #include "wx/dcclient.h"
     #include "wx/settings.h"
+    #include "wx/msw/missing.h"
 #endif
 
 #include "wx/renderer.h"
 #include "wx/msw/uxtheme.h"
 #include "wx/msw/private/button.h"
 #include "wx/private/window.h"
-#include "wx/msw/missing.h"
 
 bool wxCheckBox::Create(wxWindow *parent,
                         wxWindowID id,

@@ -24,9 +24,9 @@
     #include "wx/log.h"
     #include "wx/hashmap.h"
     #include "wx/module.h"
+    #include "wx/msw/private.h"
 #endif
 
-#include "wx/msw/private.h"
 #include "wx/msw/private/hiddenwin.h"
 
 // ----------------------------------------------------------------------------

@@ -23,13 +23,15 @@
     #include "wx/icon.h"
     #include "wx/log.h"
     #include "wx/image.h"
+    #include "wx/msw/private.h"
+
+    #include "wx/msw/wrap/utils.h"
 
     #include <memory>
     #include <string>
 #endif
 
 
-#include "wx/msw/private.h"
 #include "wx/msw/dc.h"
 
 #if wxUSE_WXDIB
@@ -39,8 +41,6 @@
 #ifdef wxHAS_RAW_BITMAP
     #include "wx/rawbmp.h"
 #endif
-
-#include "wx/msw/wrap/utils.h"
 
 // missing from mingw32 header
 #ifndef CLR_INVALID

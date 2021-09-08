@@ -36,6 +36,7 @@
     #include "wx/msw/wrapcctl.h"
     #include "wx/msw/wrapcdlg.h"
     #include "wx/msw/missing.h"
+    #include "wx/msw/wrap/utils.h"
 #endif
 
 // include the most common wx headers

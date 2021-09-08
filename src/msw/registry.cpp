@@ -24,6 +24,7 @@
     #include "wx/log.h"
     #include "wx/crt.h"
     #include "wx/utils.h"
+    #include "wx/msw/private.h"
 
     #include <fmt/core.h>
 #endif
@@ -31,7 +32,6 @@
 #include "wx/dynlib.h"
 #include "wx/file.h"
 #include "wx/wfstream.h"
-#include "wx/msw/private.h"
 
 // other std headers
 #include  <cstdlib>      // for _MAX_PATH

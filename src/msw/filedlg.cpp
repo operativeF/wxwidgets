@@ -40,7 +40,6 @@
 #include "wx/modalhook.h"
 #include "wx/msw/private/dpiaware.h"
 
-
 #include <tuple>
 
 // ----------------------------------------------------------------------------
