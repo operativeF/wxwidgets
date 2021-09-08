@@ -18,9 +18,10 @@
 
 #ifndef   WX_PRECOMP
     #include  "wx/stream.h"
+
+    #include <gsl/gsl>
 #endif  //WX_PRECOMP
 
-#include <gsl/gsl>
 
 // ============================================================================
 // implementation

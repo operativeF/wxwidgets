@@ -19,12 +19,12 @@
     #include "wx/settings.h"
     #include "wx/msw/private.h"
     #include "wx/msw/wrapcctl.h"
+    #include "wx/math.h"
 
     #include <string>
 #endif //WX_PRECOMP
 
 #include "wx/dcgraph.h"
-#include "wx/math.h"
 #include "wx/scopeguard.h"
 #include "wx/splitter.h"
 #include "wx/renderer.h"

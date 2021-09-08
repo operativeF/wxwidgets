@@ -18,13 +18,13 @@
     #include "wx/log.h"
     #include "wx/intl.h"
     #include "wx/msw/private.h"
+    #include "wx/dc.h"
 
     #include <string>
 
     #include <boost/nowide/convert.hpp>
 #endif //WX_PRECOMP
 
-#include "wx/dc.h"
 #include "wx/msw/dc.h"
 
 #include "wx/metafile.h"

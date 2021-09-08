@@ -16,6 +16,8 @@
 #ifndef WX_PRECOMP
     #include "wx/app.h"
     #include "wx/dcclient.h"
+
+    #include <array>
 #endif // WX_PRECOMP
 
 #include "wx/grid.h"
@@ -30,7 +32,6 @@
 
 #include "waitforpaint.h"
 
-#include <array>
 
 namespace
 {

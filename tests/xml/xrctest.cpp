@@ -26,7 +26,7 @@
 #include "wx/xrc/xmlres.h"
 #include "wx/xrc/xh_bmp.h"
 
-#include <stdarg.h>
+#include <cstdarg>
 
 #include "testfile.h"
 

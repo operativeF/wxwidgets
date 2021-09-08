@@ -9,16 +9,17 @@
 #include "testprec.h"
 
 #ifndef WX_PRECOMP
-#   include "wx/wx.h"
+    #include "wx/wx.h"
+
+    #include <string>
+    #include <list>
+    #include <map>
 #endif
 
 #if wxUSE_STREAMS && wxUSE_ARCHIVE_STREAMS
 
 #include "archivetest.h"
 #include "wx/dir.h"
-#include <string>
-#include <list>
-#include <map>
 #include <sys/stat.h>
 
 #include "wx/zipstrm.h"

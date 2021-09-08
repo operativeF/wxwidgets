@@ -20,6 +20,8 @@
     #include "wx/utils.h"
     #include "wx/module.h"
     #include "wx/log.h"
+
+    #include <cstring>
 #endif
 
 #if !wxUSE_PROTOCOL_HTTP
@@ -71,8 +73,7 @@ USE_PROTOCOL(wxHTTPDummyProto)
 
 #include "wx/url.h"
 
-#include <string.h>
-#include <ctype.h>
+#include <cctype>
 #include <wininet.h>
 
 // this class needn't be exported

@@ -11,12 +11,12 @@
 #include "testprec.h"
 
 #ifndef WX_PRECOMP
+    #include <string>
 #endif // WX_PRECOMP
 
 #include "wx/thread.h"
 #include "wx/tls.h"
 
-#include <string>
 
 // ----------------------------------------------------------------------------
 // globals

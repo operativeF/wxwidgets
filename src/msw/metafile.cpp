@@ -16,6 +16,9 @@
     #include "wx/utils.h"
     #include "wx/app.h"
     #include "wx/msw/private.h"
+
+    #include <cstdio>
+    #include <cstring>
 #endif
 
 #include "wx/metafile.h"
@@ -25,8 +28,6 @@
 
 #include "wx/clipbrd.h"
 
-#include <stdio.h>
-#include <string.h>
 
 // ----------------------------------------------------------------------------
 // wxWin macros

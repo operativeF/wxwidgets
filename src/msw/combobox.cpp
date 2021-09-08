@@ -14,9 +14,8 @@
 
 #if wxUSE_COMBOBOX
 
-#include "wx/combobox.h"
-
 #ifndef WX_PRECOMP
+    #include "wx/combobox.h"
     #include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
     #include "wx/settings.h"
     #include "wx/log.h"

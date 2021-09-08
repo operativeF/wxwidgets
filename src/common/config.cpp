@@ -24,6 +24,7 @@
     #include "wx/utils.h"
     #include "wx/math.h"
 
+    #include <limits>
     #include <string>
     #include <vector>
 
@@ -35,7 +36,6 @@
 #include "wx/apptrait.h"
 #include "wx/file.h"
 
-#include <limits>
 
 // ============================================================================
 // implementation

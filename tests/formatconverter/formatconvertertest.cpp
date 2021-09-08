@@ -37,11 +37,13 @@
 // For compilers that support precompilation, includes "wx/wx.h".
 #include "doctest.h"
 
-#include <iostream>
 
 // for all others, include the necessary headers
 #ifndef WX_PRECOMP
     #include "wx/wx.h"
+
+    #include <iostream>
+    #include <string>
 #endif
 
 

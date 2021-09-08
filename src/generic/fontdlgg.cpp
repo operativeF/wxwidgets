@@ -14,7 +14,6 @@
 #if wxUSE_FONTDLG && (!defined(__WXGTK__) || defined(__WXGPE__) || defined(__WXUNIVERSAL__))
 
 #ifndef WX_PRECOMP
-    #include <stdio.h>
     #include "wx/crt.h"
     #include "wx/utils.h"
     #include "wx/dialog.h"
@@ -28,10 +27,11 @@
     #include "wx/intl.h"
     #include "wx/settings.h"
     #include "wx/sizer.h"
-#endif
 
-#include <string.h>
-#include <stdlib.h>
+    #include <cstdio>
+    #include <cstring>
+    #include <cstdlib>
+#endif
 
 #include "wx/fontdlg.h"
 #include "wx/generic/fontdlgg.h"

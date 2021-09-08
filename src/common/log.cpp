@@ -22,6 +22,10 @@
     #include "wx/string.h"
     #include "wx/utils.h"
 
+    #if defined(__WINDOWS__)
+        #include "wx/msw/private.h" // includes windows.h
+    #endif
+    
     #include <algorithm>
     #include <iostream>
     #include <vector>
@@ -38,10 +42,6 @@
 #include "wx/thread.h"
 #include "wx/private/threadinfo.h"
 #include "wx/crt.h"
-
-#if defined(__WINDOWS__)
-    #include "wx/msw/private.h" // includes windows.h
-#endif
 
 #undef wxLOG_COMPONENT
 const char *wxLOG_COMPONENT = "";

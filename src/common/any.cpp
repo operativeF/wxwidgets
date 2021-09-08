@@ -19,12 +19,12 @@
 #ifndef WX_PRECOMP
     #include "wx/math.h"
     #include "wx/crt.h"
+    #include "wx/module.h"
 
     #include <memory>
     #include <vector>
 #endif
 
-#include "wx/module.h"
 #include "wx/hashmap.h"
 #include "wx/hashset.h"
 

@@ -13,12 +13,14 @@
 
 #ifndef WX_PRECOMP
     #include "wx/gdicmn.h"
+    
+    #include <algorithm>
+    #include <array>
 #endif // WX_PRECOMP
 
 #include "asserthelper.h"
 
-#include <algorithm>
-#include <array>
+
 
 TEST_CASE("CentreIn")
 {

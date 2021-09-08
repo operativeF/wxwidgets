@@ -10,14 +10,16 @@
 
 #include "testprec.h"
 
+#ifndef WX_PRECOMP
+    #include "wx/brush.h"
+    #include "wx/pen.h"
+
+    #include <algorithm>
+    #include <array>
+#endif
 
 #include "wx/settings.h"
 #include "wx/fontenum.h"
-#include "wx/brush.h"
-#include "wx/pen.h"
-
-#include <algorithm>
-#include <array>
 
 TEST_CASE("Get colour")
 {

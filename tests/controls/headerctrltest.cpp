@@ -13,12 +13,12 @@
 
 #ifndef WX_PRECOMP
     #include "wx/app.h"
+
+    #include <algorithm>
+    #include <array>
 #endif // WX_PRECOMP
 
 #include "wx/headerctrl.h"
-
-#include <algorithm>
-#include <array>
 
 // ----------------------------------------------------------------------------
 // test class

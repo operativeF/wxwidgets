@@ -19,6 +19,8 @@
     #include "wx/intl.h"
     #include "wx/log.h"
     #include "wx/utils.h"
+
+    #include <gsl/gsl>
 #endif
 
 #include "wx/datstrm.h"
@@ -29,7 +31,6 @@
 
 #include "zlib.h"
 
-#include <gsl/gsl>
 
 // signatures for the various records (PKxx)
 enum {

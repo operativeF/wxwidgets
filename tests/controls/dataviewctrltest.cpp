@@ -12,8 +12,12 @@
 
 #if wxUSE_DATAVIEWCTRL
 
+#ifndef WX_PRECOMP
+    #include "wx/app.h"
 
-#include "wx/app.h"
+    #include <memory>
+#endif
+
 #include "wx/dataview.h"
 #ifdef __WXGTK__
     #include "wx/stopwatch.h"
@@ -22,7 +26,6 @@
 #include "testableframe.h"
 #include "asserthelper.h"
 
-#include <memory>
 
 // ----------------------------------------------------------------------------
 // test class

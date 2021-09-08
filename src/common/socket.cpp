@@ -31,6 +31,7 @@
     #include "wx/timer.h"
     #include "wx/module.h"
     #include "wx/filefn.h"
+    #include "wx/stopwatch.h"
 
     #include <string>
 
@@ -40,7 +41,6 @@
 #include "wx/apptrait.h"
 #include "wx/sckaddr.h"
 #include "wx/scopeguard.h"
-#include "wx/stopwatch.h"
 #include "wx/thread.h"
 #include "wx/evtloop.h"
 #include "wx/link.h"
@@ -49,7 +49,7 @@
 #include "wx/private/socket.h"
 
 #ifdef __UNIX__
-    #include <errno.h>
+    #include <cerrno>
 #endif
 
 

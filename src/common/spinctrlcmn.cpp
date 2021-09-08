@@ -13,12 +13,15 @@
 
 #if wxUSE_SPINCTRL
 
+#ifndef WX_PRECOMP
+    #include <fmt/core.h>
+#endif
+
 #include "wx/spinbutt.h"
 #include "wx/spinctrl.h"
 
 #include "wx/private/spinctrl.h"
 
-#include <fmt/core.h>
 
 wxDEFINE_EVENT(wxEVT_SPINCTRL, wxSpinEvent);
 wxDEFINE_EVENT(wxEVT_SPINCTRLDOUBLE, wxSpinDoubleEvent);

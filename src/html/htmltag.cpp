@@ -16,15 +16,16 @@
 #ifndef WX_PRECOMP
     #include "wx/colour.h"
     #include "wx/wxcrtvararg.h"
+
+    #include <cstdio> // for vsscanf
+    #include <vector>
 #endif
 
 #include "wx/html/htmlpars.h"
 #include "wx/html/styleparams.h"
 
-#include <vector>
 
 #include <cstdarg>
-#include <cstdio> // for vsscanf
 
 //-----------------------------------------------------------------------------
 // wxHtmlTagsCache

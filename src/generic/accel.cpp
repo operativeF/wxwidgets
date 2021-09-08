@@ -20,7 +20,7 @@
 
 #include "wx/accel.h"
 
-#include <ctype.h>
+#include <cctype>
 
 // ----------------------------------------------------------------------------
 // wxAccelList: a list of wxAcceleratorEntries

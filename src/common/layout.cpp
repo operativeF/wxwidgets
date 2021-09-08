@@ -18,9 +18,8 @@
 
 #if wxUSE_CONSTRAINTS
 
-#include "wx/layout.h"
-
 #ifndef WX_PRECOMP
+    #include "wx/layout.h"
     #include "wx/window.h"
     #include "wx/utils.h"
     #include "wx/dialog.h"

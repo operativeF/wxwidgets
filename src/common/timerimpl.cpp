@@ -19,8 +19,11 @@
 
 #if wxUSE_TIMER
 
+#ifndef WX_PRECOMP
+    #include "wx/utils.h"               // for wxNewId()
+#endif
+
 #include "wx/private/timer.h"
-#include "wx/utils.h"               // for wxNewId()
 #include "wx/thread.h"
 
 wxTimerImpl::wxTimerImpl(wxTimer *timer)

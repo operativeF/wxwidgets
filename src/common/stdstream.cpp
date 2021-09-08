@@ -19,13 +19,13 @@
 #if wxUSE_STREAMS
 
 #ifndef WX_PRECOMP
+    #include <ios>
+    #include <istream>
+    #include <ostream>
 #endif
 
 #include "wx/stdstream.h"
 
-#include <ios>
-#include <istream>
-#include <ostream>
 #include <streambuf>
 
 // ==========================================================================

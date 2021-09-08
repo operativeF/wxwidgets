@@ -23,6 +23,8 @@
     #include "wx/cmndata.h"
 
     #include <boost/nowide/stackstring.hpp>
+
+    #include <cstdlib>
 #endif
 
 #include "wx/printdlg.h"
@@ -31,7 +33,6 @@
 #include "wx/paper.h"
 #include "wx/modalhook.h"
 
-#include <cstdlib>
 
 
 // smart pointer like class using OpenPrinter and ClosePrinter

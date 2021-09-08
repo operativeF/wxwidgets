@@ -15,13 +15,15 @@
 
 #include "wx/uiaction.h"
 
-#include "wx/ctrlsub.h"
-
-#ifdef wxNO_RTTI
-    #include "wx/choice.h"
-    #include "wx/combobox.h"
-    #include "wx/listbox.h"
-#endif // wxNO_RTTI
+#ifndef WX_PRECOMP
+    #include "wx/ctrlsub.h"
+    
+    #ifdef wxNO_RTTI
+        #include "wx/choice.h"
+        #include "wx/combobox.h"
+        #include "wx/listbox.h"
+    #endif // wxNO_RTTI
+#endif
 
 #include "wx/private/uiaction.h"
 

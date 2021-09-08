@@ -46,9 +46,6 @@
 #include <dxgi1_2.h>
 #endif
 
-#include <algorithm>
-#include <limits>
-
 #ifndef WX_PRECOMP
     #include "wx/dc.h"
     #include "wx/dcclient.h"
@@ -62,6 +59,9 @@
     #include <boost/nowide/convert.hpp>
     #include <fmt/core.h>
     #include <gsl/gsl>
+
+    #include <algorithm>
+    #include <limits>
 #endif // !WX_PRECOMP
 
 #include "wx/graphics.h"

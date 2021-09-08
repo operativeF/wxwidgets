@@ -14,9 +14,9 @@
 
 #if wxUSE_SCROLLBAR
 
-#include "wx/scrolbar.h"
 
 #ifndef WX_PRECOMP
+    #include "wx/scrolbar.h"
 #endif
 
 // ----------------------------------------------------------------------------

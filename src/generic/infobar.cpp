@@ -23,12 +23,13 @@
     #include "wx/statbmp.h"
     #include "wx/stattext.h"
     #include "wx/sizer.h"
+
+    #include <fmt/core.h>
 #endif // WX_PRECOMP
 
 #include "wx/artprov.h"
 #include "wx/scopeguard.h"
 
-#include <fmt/core.h>
 
 wxBEGIN_EVENT_TABLE(wxInfoBarGeneric, wxInfoBarBase)
     EVT_BUTTON(wxID_ANY, wxInfoBarGeneric::OnButton)

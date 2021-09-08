@@ -65,7 +65,7 @@
     #endif
 #endif
 
-#include <time.h>
+#include <ctime>
 
 #if defined(__UNIX__)
 #include <unistd.h>

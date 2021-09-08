@@ -22,7 +22,7 @@
     #include "wx/intl.h"
 #endif
 
-#include <errno.h>
+#include <cerrno>
 
 constexpr wxChar wxSelectDispatcher_Trace[] = wxT("selectdispatcher");
 

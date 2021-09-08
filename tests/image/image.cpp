@@ -15,22 +15,23 @@
 
 
 #ifndef WX_PRECOMP
+    #include "wx/bitmap.h"
+    #include "wx/cursor.h"
+    #include "wx/icon.h"
+    #include "wx/palette.h"
+    #include "wx/log.h"
+
+    #include <array>
 #endif // WX_PRECOMP
 
 #include "wx/anidecod.h" // wxImageArray
-#include "wx/bitmap.h"
-#include "wx/cursor.h"
-#include "wx/icon.h"
-#include "wx/palette.h"
 #include "wx/url.h"
-#include "wx/log.h"
 #include "wx/mstream.h"
 #include "wx/zstream.h"
 #include "wx/wfstream.h"
 #include "wx/clipbrd.h"
 #include "wx/dataobj.h"
 
-#include <array>
 #include <numeric>
 
 #define CHECK_EQUAL_COLOUR_RGB(c1, c2) \

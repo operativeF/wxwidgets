@@ -25,9 +25,10 @@
     #include "wx/dcclient.h"
     #include "wx/dcscreen.h"
     #include "wx/math.h"
+
+    #include <string>
 #endif
 
-#include <string>
 
 #include "wx/laywin.h"
 

@@ -17,7 +17,8 @@
     #include "wx/menu.h"
 
     #include <algorithm>
-    
+    #include <utility>
+
     #include <gsl/gsl>
 #endif // WX_PRECOMP
 
@@ -26,7 +27,6 @@
 #include "wx/renderer.h"
 
 #include <numeric>
-#include <utility>
 
 namespace
 {

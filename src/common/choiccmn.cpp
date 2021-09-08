@@ -14,7 +14,9 @@
 
 #if wxUSE_CHOICE
 
-#include "wx/choice.h"
+#ifndef WX_PRECOMP
+    #include "wx/choice.h"
+#endif
 
 #include "wx/private/textmeasure.h"
 

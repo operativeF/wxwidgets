@@ -23,6 +23,13 @@
     #include "wx/intl.h"
     #include "wx/log.h"
 
+    #ifdef __WINDOWS__
+        #include "wx/msw/wrapwin.h"
+    #endif // __WINDOWS__
+
+    #include <cstdlib>
+    #include <cstring>
+    #include <iostream>
     #include <vector>
 #endif
 
@@ -30,15 +37,8 @@
 
 #include <cerrno>
 
-#include <cstdlib>
-#include <cstring>
-
 #include "wx/hashmap.h"
 #include "wx/xlocale.h"
-
-#ifdef __WINDOWS__
-    #include "wx/msw/wrapwin.h"
-#endif // __WINDOWS__
 
 #include <sstream>
 
@@ -165,8 +165,6 @@ static wxStrCacheStatsDumper s_showCacheStats;
 // ----------------------------------------------------------------------------
 // global functions
 // ----------------------------------------------------------------------------
-
-#include <iostream>
 
 std::ostream& operator<<(std::ostream& os, const wxCStrData& str)
 {

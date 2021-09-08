@@ -17,11 +17,11 @@
     #include "wx/intl.h"
     #include "wx/dcclient.h"
     #include "wx/math.h"
-#endif
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdarg.h>
+    #include <cstdio>
+    #include <cstdlib>
+    #include <cstdarg>
+#endif
 
 #include "wx/generic/tabg.h"
 #include "wx/listimpl.cpp"

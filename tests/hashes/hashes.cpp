@@ -12,13 +12,14 @@
 
 #ifndef WX_PRECOMP
     #include "wx/wx.h"
+
+    #include <array>
 #endif // WX_PRECOMP
 
 #include "wx/hash.h"
 #include "wx/hashmap.h"
 #include "wx/hashset.h"
 
-#include <array>
 
 #if defined wxLongLong_t && !defined wxLongLongIsLong
     #define TEST_LONGLONG

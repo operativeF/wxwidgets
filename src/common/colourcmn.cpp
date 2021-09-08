@@ -13,9 +13,8 @@
 #include "wx/wxprec.h"
 
 
-#include "wx/colour.h"
-
 #ifndef WX_PRECOMP
+    #include "wx/colour.h"
     #include "wx/log.h"
     #include "wx/utils.h"
     #include "wx/gdicmn.h"
@@ -33,7 +32,7 @@ IMPLEMENT_VARIANT_OBJECT_EXPORTED(wxColour,WXDLLEXPORT)
 
 #if wxUSE_EXTENDED_RTTI
 
-#include <string.h>
+#include <cstring>
 
 template<> void wxStringReadValue(const wxString &s, wxColour &data )
 {

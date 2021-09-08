@@ -14,9 +14,8 @@
 
 #if wxUSE_BUTTON
 
-#include "wx/button.h"
-
 #ifndef WX_PRECOMP
+    #include "wx/button.h"
     #include "wx/app.h"
     #include "wx/brush.h"
     #include "wx/panel.h"

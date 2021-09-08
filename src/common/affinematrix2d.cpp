@@ -12,8 +12,11 @@
 
 #if wxUSE_GEOMETRY
 
+#ifndef WX_PRECOMP
+    #include "wx/math.h"
+#endif
+
 #include "wx/affinematrix2d.h"
-#include "wx/math.h"
 
 // sets the matrix to the respective values
 void wxAffineMatrix2D::Set(const wxMatrix2D &mat2D, const wxPoint2DDouble &tr)

@@ -24,7 +24,7 @@
 #endif
 
 #include <cairo.h>
-#include <float.h>
+#include <cfloat>
 
 bool wxCairoInit();
 
@@ -35,11 +35,12 @@ bool wxCairoInit();
     #include "wx/dcmemory.h"
     #include "wx/dcprint.h"
     #include "wx/window.h"
+
+    #include <vector>
 #endif
 
 #include "wx/private/graphics.h"
 #include "wx/rawbmp.h"
-#include <vector>
 #ifdef __WXMSW__
     #include "wx/msw/enhmeta.h"
 #endif

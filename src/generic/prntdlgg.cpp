@@ -29,6 +29,12 @@
     #include "wx/intl.h"
     #include "wx/sizer.h"
     #include "wx/cmndata.h"
+
+    #include <array>
+    #include <string>
+    #include <vector>
+
+    #include <fmt/core.h>
 #endif
 
 #if wxUSE_STATLINE
@@ -45,12 +51,6 @@
 #include "wx/filename.h"
 #include "wx/tokenzr.h"
 #include "wx/imaglist.h"
-
-#include <array>
-#include <string>
-#include <vector>
-
-#include <fmt/core.h>
 
 #ifndef __WXUNIVERSAL__
 

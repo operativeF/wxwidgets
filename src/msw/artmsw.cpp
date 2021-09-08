@@ -19,9 +19,9 @@
     #include "wx/app.h"
     #include "wx/msw/private.h"
     #include "wx/msw/wrapwin.h"
+    #include "wx/image.h"
 #endif
 
-#include "wx/image.h"
 #include "wx/dynlib.h"
 #include "wx/volume.h"
 #include "wx/msw/wrapshl.h"

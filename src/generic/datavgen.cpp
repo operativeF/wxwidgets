@@ -32,6 +32,10 @@
     #include "wx/msgdlg.h"
     #include "wx/dcscreen.h"
     #include "wx/frame.h"
+
+    #include <fmt/core.h>
+    #include <gsl/gsl>
+    
     #include <vector>
 #endif
 
@@ -56,8 +60,6 @@
 #include "wx/private/markupparser.h"
 #endif // wxUSE_ACCESSIBILITY
 
-#include <fmt/core.h>
-#include <gsl/gsl>
 
 //-----------------------------------------------------------------------------
 // classes

@@ -13,9 +13,8 @@
 
 #if wxUSE_CHECKBOX
 
-#include "wx/checkbox.h"
-
 #ifndef WX_PRECOMP
+    #include "wx/checkbox.h"
     #include "wx/dcclient.h"
     #include "wx/settings.h"
     #include "wx/msw/missing.h"

@@ -18,12 +18,13 @@
     #include "wx/settings.h"
     #include "wx/module.h"
     #include "wx/wxcrtvararg.h"
+
+    #include <cstdlib>
 #endif
 
 #include "wx/html/htmlcell.h"
 #include "wx/html/htmlwin.h"
 
-#include <cstdlib>
 
 //-----------------------------------------------------------------------------
 // Helper classes

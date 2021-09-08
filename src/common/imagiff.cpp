@@ -21,15 +21,15 @@
     #include "wx/log.h"
     #include "wx/intl.h"
 
+    #if wxUSE_PALETTE
+        #include "wx/palette.h"
+    #endif // wxUSE_PALETTE
+
     #include <array>
 #endif
 
 #include "wx/imagiff.h"
 #include "wx/wfstream.h"
-
-#if wxUSE_PALETTE
-    #include "wx/palette.h"
-#endif // wxUSE_PALETTE
 
 // --------------------------------------------------------------------------
 // Constants

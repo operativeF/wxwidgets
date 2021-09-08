@@ -24,12 +24,12 @@
     #include "wx/window.h"
     #include "wx/msw/wrap/utils.h"
     #include "wx/msw/private.h"
+    #include "wx/dc.h"
 
     #include <algorithm>
 #endif
 
 #include "wx/imaglist.h"
-#include "wx/dc.h"
 #include "wx/msw/dc.h"
 #include "wx/msw/dib.h"
 

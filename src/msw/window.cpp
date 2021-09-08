@@ -11,10 +11,8 @@
 // For compilers that support precompilation, includes "wx.h".
 #include "wx/wxprec.h"
 
-
-#include "wx/window.h"
-
 #ifndef WX_PRECOMP
+    #include "wx/window.h"
     #include "wx/msw/wrapwin.h"
     #include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
     #include "wx/msw/missing.h"

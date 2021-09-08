@@ -14,9 +14,6 @@
 
 #ifndef WX_PRECOMP
     #include "wx/containr.h"
-#endif
-
-#ifndef WX_PRECOMP
     #include "wx/log.h"
     #include "wx/event.h"
     #include "wx/window.h"

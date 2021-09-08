@@ -14,12 +14,17 @@
 
 #if wxUSE_AUI
 
+#ifndef WX_PRECOMP
+    #include "wx/image.h"
+    #include "wx/menu.h"
+
+    #include <gsl/gsl>
+#endif
+
 #include "wx/statline.h"
 #include "wx/dcbuffer.h"
 #include "wx/sizer.h"
-#include "wx/image.h"
 #include "wx/settings.h"
-#include "wx/menu.h"
 
 #include "wx/aui/auibar.h"
 #include "wx/aui/framemanager.h"
@@ -31,7 +36,6 @@
 #include "wx/arrimpl.cpp"
 WX_DEFINE_OBJARRAY(wxAuiToolBarItemArray)
 
-#include <gsl/gsl>
 
 wxDEFINE_EVENT( wxEVT_AUITOOLBAR_TOOL_DROPDOWN, wxAuiToolBarEvent );
 wxDEFINE_EVENT( wxEVT_AUITOOLBAR_OVERFLOW_CLICK, wxAuiToolBarEvent );

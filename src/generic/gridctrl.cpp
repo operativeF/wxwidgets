@@ -23,6 +23,8 @@
     #include "wx/settings.h"
     #include "wx/log.h"
     #include "wx/checkbox.h"
+
+    #include <fmt/core.h>
 #endif // WX_PRECOMP
 
 #include "wx/tokenzr.h"
@@ -32,7 +34,6 @@
 #include "wx/private/window.h"
 
 #include <charconv>
-#include <fmt/core.h>
 
 // ----------------------------------------------------------------------------
 // wxGridCellRenderer

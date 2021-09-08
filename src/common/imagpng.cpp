@@ -20,11 +20,12 @@
     #include "wx/intl.h"
     #include "wx/palette.h"
     #include "wx/stream.h"
+
+    #include <tuple>
 #endif
 
 #include "png.h"
 
-#include <tuple>
 
 // ----------------------------------------------------------------------------
 // local functions

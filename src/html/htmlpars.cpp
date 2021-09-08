@@ -17,6 +17,8 @@
     #include "wx/intl.h"
     #include "wx/app.h"
     #include "wx/wxcrtvararg.h"
+
+    #include <vector>
 #endif
 
 #include "wx/tokenzr.h"
@@ -25,7 +27,6 @@
 #include "wx/fontmap.h"
 #include "wx/html/htmldefs.h"
 #include "wx/html/htmlpars.h"
-#include <vector>
 
 // DLL options compatibility check:
 WX_CHECK_BUILD_OPTIONS("wxHTML")

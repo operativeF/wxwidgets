@@ -22,11 +22,12 @@
     #include "wx/settings.h"
     #include "wx/dialog.h"
     #include "wx/textctrl.h"
+
+    #include <utility>
 #endif
 
 #include "wx/combo.h"
 
-#include <utility>
 
 // ============================================================================
 // implementation

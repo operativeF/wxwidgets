@@ -16,6 +16,14 @@
 
 #if wxUSE_SOCKETS
 
+#ifndef WX_PRECOMP
+    #include <boost/nowide/convert.hpp>
+    #include <boost/nowide/stackstring.hpp>
+
+    #include <array>
+    #include <string_view>
+#endif
+
 /* including rasasync.h (included from windows.h itself included from
  * wx/setup.h and/or winsock.h results in this warning for
  * RPCNOTIFICATION_ROUTINE
@@ -37,11 +45,6 @@
 
 #include "wx/msw/private/hiddenwin.h"
 
-#include <boost/nowide/convert.hpp>
-#include <boost/nowide/stackstring.hpp>
-
-#include <array>
-#include <string_view>
 
 constexpr std::string_view CLASSNAME = "_wxSocket_Internal_Window_Class";
 

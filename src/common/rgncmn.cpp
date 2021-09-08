@@ -12,9 +12,8 @@
 #include "wx/wxprec.h"
 
 
-#include "wx/region.h"
-
 #ifndef WX_PRECOMP
+    #include "wx/region.h"
     #include "wx/dcmemory.h"
     #include "wx/bitmap.h"
     #include "wx/image.h"

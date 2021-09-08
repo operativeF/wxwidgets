@@ -25,9 +25,10 @@
     #include "wx/sizer.h"
     #include "wx/app.h"
     #include "wx/settings.h"
+
+    #include <string>
 #endif
 
-#include <string>
 
 #define __WX_COMPILING_MSGDLGG_CPP__ 1
 #include "wx/msgdlg.h"

@@ -20,13 +20,14 @@
     #include "wx/dcclient.h"
     #include "wx/timer.h"
     #include "wx/settings.h"
+
+    #include <vector>
+
+    #include <gsl/gsl>
 #endif // WX_PRECOMP
 
 #include "wx/display.h"
 
-#include <vector>
-
-#include <gsl/gsl>
 
 // ----------------------------------------------------------------------------
 // constants

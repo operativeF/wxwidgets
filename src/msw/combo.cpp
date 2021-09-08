@@ -13,6 +13,8 @@
 
 #if wxUSE_COMBOCTRL
 
+#include "wx/combo.h"
+
 #ifndef WX_PRECOMP
     #include "wx/log.h"
     #include "wx/combobox.h"
@@ -23,7 +25,6 @@
 #endif
 
 #include "wx/dcbuffer.h"
-#include "wx/combo.h"
 
 #include "wx/msw/registry.h"
 #include "wx/msw/uxtheme.h"

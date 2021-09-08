@@ -12,6 +12,8 @@
 
 #ifndef WX_PRECOMP
     #include "wx/timer.h"
+
+    #include <vector>
 #endif
 
 #if wxUSE_FSWATCHER
@@ -22,8 +24,6 @@
 #include "wx/fswatcher.h"
 
 #include "wx/stdpaths.h"
-
-#include <vector>
 
 #include "testfile.h"
 

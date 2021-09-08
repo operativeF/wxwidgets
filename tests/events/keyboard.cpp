@@ -17,10 +17,11 @@
     #include "wx/app.h"
     #include "wx/event.h"
     #include "wx/window.h"
+
+    #include <vector>
 #endif // WX_PRECOMP
 
 #include "wx/uiaction.h"
-#include <vector>
 
 #ifdef __WXGTK__
 #include "wx/stopwatch.h"

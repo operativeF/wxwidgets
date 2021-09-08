@@ -15,13 +15,14 @@
 
 #ifndef WX_PRECOMP
     #include "wx/msw/wrapwin.h"
+
+    #include <tuple>
 #endif
 
 #include  <rpc.h>                       // UUID related functions
 
 #include  "wx/msw/ole/uuid.h"
 
-#include <tuple>
 
 // ============================================================================
 // Implementation

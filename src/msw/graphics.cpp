@@ -11,11 +11,10 @@
 #include "wx/wxprec.h"
 
 
-#include "wx/dc.h"
-
 #if wxUSE_GRAPHICS_GDIPLUS
 
 #ifndef WX_PRECOMP
+    #include "wx/dc.h"
     #include "wx/msw/wrapcdlg.h"
     #include "wx/image.h"
     #include "wx/window.h"

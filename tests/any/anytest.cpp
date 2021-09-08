@@ -15,7 +15,7 @@
 #include "wx/object.h"
 #include <vector>
 
-#include <math.h>
+#include <cmath>
 
 namespace Catch
 {

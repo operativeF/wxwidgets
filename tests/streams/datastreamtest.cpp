@@ -13,13 +13,14 @@
 
 #ifndef WX_PRECOMP
     #include "wx/wx.h"
+    #include "wx/math.h"
+
+    #include <vector>
 #endif // WX_PRECOMP
 
-#include <vector>
 
 #include "wx/datstrm.h"
 #include "wx/wfstream.h"
-#include "wx/math.h"
 
 #include "testfile.h"
 

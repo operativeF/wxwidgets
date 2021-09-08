@@ -15,13 +15,14 @@
 
 #ifndef WX_PRECOMP
     #include "wx/app.h"
+
+    #include <memory>
 #endif // WX_PRECOMP
 
 #include "wx/html/htmlwin.h"
 #include "wx/uiaction.h"
 #include "testableframe.h"
 
-#include <memory>
 
 constexpr char TEST_MARKUP[] =
     "<html><body>"

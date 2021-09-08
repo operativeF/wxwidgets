@@ -21,6 +21,8 @@
     #include "wx/intl.h"
     #include "wx/bitmap.h"
     #include "wx/module.h"
+
+    #include <cstring> // For memcpy
 #endif
 
 // A hack based on one from tif_jpeg.c to overcome the problem on Windows
@@ -38,8 +40,6 @@
 
 #include "wx/filefn.h"
 #include "wx/wfstream.h"
-
-#include <cstring> // For memcpy
 
 // For JPEG library error handling
 #include <csetjmp>

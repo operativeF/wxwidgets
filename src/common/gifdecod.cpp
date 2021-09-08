@@ -20,6 +20,7 @@
 
     #include <array>
     #include <vector>
+    #include <tuple>
 
     #include <gsl/gsl>
 #endif
@@ -28,8 +29,6 @@
 #include "wx/scopedarray.h"
 #include "wx/scopedptr.h"
 #include "wx/scopeguard.h"
-
-#include <tuple>
 
 enum
 {

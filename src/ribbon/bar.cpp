@@ -16,24 +16,24 @@
 #include "wx/ribbon/bar.h"
 #include "wx/ribbon/art.h"
 #include "wx/dcbuffer.h"
-#include "wx/app.h"
 
 #ifndef WX_PRECOMP
-#endif
+    #include "wx/app.h"
 
-#ifdef __WXMSW__
-#include "wx/msw/private.h"
+    #ifdef __WXMSW__
+        #include "wx/msw/private.h"
+    #endif
+
+    #include <algorithm>
+    #include <vector>
+
+    #include <gsl/gsl>
 #endif
 
 #include "wx/arrimpl.cpp"
 #include "wx/imaglist.h"
 
 WX_DEFINE_USER_EXPORTED_OBJARRAY(wxRibbonPageTabInfoArray)
-
-#include <algorithm>
-#include <vector>
-
-#include <gsl/gsl>
 
 wxDEFINE_EVENT(wxEVT_RIBBONBAR_PAGE_CHANGED, wxRibbonBarEvent);
 wxDEFINE_EVENT(wxEVT_RIBBONBAR_PAGE_CHANGING, wxRibbonBarEvent);

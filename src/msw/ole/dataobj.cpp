@@ -19,12 +19,15 @@
     #include "wx/log.h"
     #include "wx/utils.h"
     #include "wx/wxcrtvararg.h"
+
+    #include <vector>
+
+    #include <gsl/gsl>
 #endif
 
 #include "wx/dataobj.h"
 
 #include "wx/scopedarray.h"
-#include <vector>
 #include "wx/msw/private.h"         // includes <windows.h>
 #include "wx/msw/dib.h"
 #include "wx/msw/wrapshl.h"
@@ -35,7 +38,6 @@
 #include "wx/msw/ole/oleutils.h"
 #endif // wxUSE_OLE
 
-#include <gsl/gsl>
 
 #ifndef CFSTR_SHELLURL
 #define CFSTR_SHELLURL wxT("UniformResourceLocator")

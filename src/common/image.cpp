@@ -25,14 +25,12 @@
     #include "wx/colour.h"
 
     #include <algorithm>
-    
+    #include <cstring> // For memcpy
     #include <gsl/gsl>
 #endif
 
 #include "wx/wfstream.h"
 #include "wx/xpmdecod.h"
-
-#include <cstring> // For memcpy
 
 
 // make the code compile with either wxFile*Stream or wxFFile*Stream:

@@ -20,12 +20,12 @@
 #ifndef WX_PRECOMP
     #include "wx/app.h"
     #include "wx/module.h"
+    #include "wx/log.h"
+
+    #include <cstdlib>
 #endif
 
 #include "wx/url.h"
-#include "wx/log.h"
-
-#include <cstdlib>
 
 // ----------------------------------------------------------------------------
 // wxProtoInfo

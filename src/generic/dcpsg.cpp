@@ -23,6 +23,8 @@
     #include "wx/math.h"
     #include "wx/image.h"
     #include "wx/icon.h"
+
+    #include <string_view>
 #endif // WX_PRECOMP
 
 #include "wx/prntbase.h"
@@ -31,7 +33,6 @@
 #include "wx/filename.h"
 #include "wx/stdpaths.h"
 
-#include <string_view>
 
 #ifdef __WXMSW__
 

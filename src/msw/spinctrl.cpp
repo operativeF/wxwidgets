@@ -25,6 +25,8 @@
     #include "wx/msw/private.h"
 
     #include <algorithm>
+    #include <limits>
+
     #include <boost/nowide/convert.hpp>
 #endif
 
@@ -39,7 +41,6 @@
 #endif // wxUSE_TOOLTIPS
 
 #include <charconv>
-#include <limits>
 
 // ----------------------------------------------------------------------------
 // macros

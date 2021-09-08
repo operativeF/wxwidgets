@@ -24,6 +24,7 @@
     #include "wx/log.h"
     #include "wx/settings.h"
     #include "wx/window.h"
+
     #include <cstdio>
 #endif
 

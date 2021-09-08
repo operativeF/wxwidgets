@@ -39,14 +39,14 @@
 #ifndef WX_PRECOMP
     #include "wx/palette.h"
     #include "wx/image.h"
-#endif
+    
+    #ifdef __WXMSW__
+      #include "wx/msw/private.h"
+    #endif
 
-#ifdef __WXMSW__
-    #include "wx/msw/private.h"
+    #include <cstdlib>
+    #include <cstring>
 #endif
-
-#include <cstdlib>
-#include <cstring>
 
 namespace
 {

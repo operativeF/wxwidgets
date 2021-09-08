@@ -14,6 +14,10 @@
 #ifndef WX_PRECOMP
     #include "wx/app.h"
     #include "wx/module.h"
+
+    #include <string>
+
+    #include <boost/nowide/convert.hpp>
 #endif // WX_PRECOMP
 
 #include "wx/msw/rt/private/notifmsg.h"
@@ -34,9 +38,6 @@
 #include <propvarutil.h>
 #include <wrl/implements.h>
 
-#include <string>
-
-#include <boost/nowide/convert.hpp>
 
 using namespace ABI::Windows::UI::Notifications;
 using namespace ABI::Windows::Data::Xml::Dom;

@@ -14,8 +14,14 @@
 
 #if wxUSE_FONTENUM
 
+#ifndef WX_PRECOMP
+    #include "wx/module.h"
+
+    #include <string>
+    #include <vector>
+#endif
+
 #include "wx/fontenum.h"
-#include "wx/module.h"
 
 namespace
 {

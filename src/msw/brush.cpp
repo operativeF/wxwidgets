@@ -12,9 +12,8 @@
 #include "wx/wxprec.h"
 
 
-#include "wx/brush.h"
-
 #ifndef WX_PRECOMP
+    #include "wx/brush.h"
     #include "wx/list.h"
     #include "wx/utils.h"
     #include "wx/app.h"

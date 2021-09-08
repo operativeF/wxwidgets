@@ -37,6 +37,9 @@
 // for all others, include the necessary headers
 #ifndef WX_PRECOMP
     #include "wx/wx.h"
+
+    #include <string>
+    #include <vector>
 #endif
 
 
@@ -46,8 +49,6 @@
 #ifdef wxHAS_REGEX_ADVANCED
 
 #include "wx/regex.h"
-#include <string>
-#include <vector>
 
 using std::string;
 using std::vector;

@@ -19,18 +19,18 @@
     #include "wx/object.h"
     #include "wx/list.h"
     #include "wx/hash.h"
+
+    #include <cstring>
+
+    #include <map>
+    #include <string>
+    #include <list>
 #endif
 
 #include "wx/xti.h"
 #include "wx/xml/xml.h"
 #include "wx/tokenzr.h"
 #include "wx/range.h"
-
-#include <string.h>
-
-#include <map>
-#include <string>
-#include <list>
 
 using namespace std;
 

@@ -11,10 +11,12 @@
 // For compilers that support precompilation, includes "wx.h".
 #include "wx/wxprec.h"
 
+#ifndef WX_PRECOMP
+    #include "wx/dcclient.h"
+#endif
 
 #include "wx/overlay.h"
 #include "wx/private/overlay.h"
-#include "wx/dcclient.h"
 #include "wx/dcmemory.h"
 
 // ============================================================================

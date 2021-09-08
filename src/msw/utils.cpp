@@ -19,6 +19,8 @@
     #include "wx/log.h"
     #include "wx/msw/private.h"     // includes <windows.h>
     #include "wx/msw/missing.h"     // for CHARSET_HANGUL
+
+    #include <tuple>
 #endif  //WX_PRECOMP
 
 #include "wx/msw/registry.h"
@@ -82,7 +84,6 @@
 #define PROCESSOR_ARCHITECTURE_ARM64 12
 #endif
 
-#include <tuple>
 
 // For wxKillAllChildren
 #include <tlhelp32.h>

@@ -22,9 +22,6 @@
 #define _ISOC9X_SOURCE 1 // to get vsscanf()
 #define _BSD_SOURCE    1 // to still get strdup()
 
-#include <cstdio>
-#include <cstdlib>
-#include <cstring>
 #include <cwchar>
 
 #ifdef __SGI__
@@ -39,12 +36,16 @@
 #include <clocale>
 #include <ctime>
 
-#include <limits>
 
 #ifndef WX_PRECOMP
     #include "wx/string.h"
     #include "wx/hash.h"
     #include "wx/log.h"
+
+    #include <cstdio>
+    #include <cstdlib>
+    #include <cstring>
+    #include <limits>
 #endif
 
 #ifdef HAVE_LANGINFO_H

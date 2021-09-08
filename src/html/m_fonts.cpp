@@ -13,6 +13,8 @@
 
 #ifndef WX_PRECOMP
     #include "wx/brush.h"
+
+    #include <boost/nowide/convert.hpp>
 #endif
 
 #include "wx/html/forcelnk.h"
@@ -21,7 +23,6 @@
 #include "wx/tokenzr.h"
 #include "wx/html/styleparams.h"
 
-#include <boost/nowide/convert.hpp>
 
 FORCE_LINK_ME(m_fonts)
 

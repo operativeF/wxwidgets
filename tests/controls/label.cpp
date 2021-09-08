@@ -13,16 +13,17 @@
 
 #ifndef WX_PRECOMP
     #include "wx/app.h"
+    #include "wx/checkbox.h"
+
+    #include <array>
 #endif // WX_PRECOMP
 
-#include "wx/checkbox.h"
 #include "wx/control.h"
 
 #include "wx/stattext.h"
 
 #include "wx/generic/stattextg.h"
 
-#include <array>
 
 constexpr char ORIGINAL_LABEL[] = "origin label";
 

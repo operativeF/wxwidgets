@@ -22,14 +22,14 @@
     #if wxUSE_GUI
         #include "wx/msgdlg.h"
     #endif // wxUSE_GUI
+
+    #if defined(__WINDOWS__)
+        #include "wx/msw/private.h"
+    #endif
 #endif
 
 #include "wx/apptrait.h"
 #include "wx/msgout.h"
-
-#if defined(__WINDOWS__)
-    #include "wx/msw/private.h"
-#endif
 
 // ===========================================================================
 // implementation

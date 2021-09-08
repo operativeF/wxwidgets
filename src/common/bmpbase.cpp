@@ -11,9 +11,8 @@
 #include "wx/wxprec.h"
 
 
-#include "wx/bitmap.h"
-
 #ifndef WX_PRECOMP
+    #include "wx/bitmap.h"
     #include "wx/colour.h"
     #include "wx/icon.h"
     #include "wx/image.h"

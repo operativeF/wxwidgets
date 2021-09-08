@@ -10,13 +10,15 @@
 // For compilers that support precompilation, includes "wx.h".
 #include "wx/wxprec.h"
 
+#ifndef WX_PRECOMP
+    #include <fmt/core.h>
+#endif
 
 #include "wx/numformatter.h"
 #include "wx/intl.h"
 
 #include <clocale> // for setlocale and LC_ALL
 
-#include <fmt/core.h>
 
 // ----------------------------------------------------------------------------
 // local helpers

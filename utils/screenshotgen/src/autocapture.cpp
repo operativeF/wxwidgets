@@ -11,7 +11,11 @@
 #include "autocapture.h"
 
 #ifndef WX_PRECOMP
-#include "wx/wx.h"
+    #include "wx/wx.h"
+
+    #ifdef __WXMAC__
+        #include <cstring>
+    #endif
 #endif
 
 #include "wx/bitmap.h"
@@ -19,10 +23,6 @@
 #include "wx/notebook.h"
 
 #include <ctime>
-
-#ifdef __WXMAC__
-#include <cstring>
-#endif
 
 
 // ----------------------------------------------------------------------------

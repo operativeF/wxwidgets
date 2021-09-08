@@ -9,14 +9,15 @@
 #include "testprec.h"
 
 #ifndef WX_PRECOMP
-#   include "wx/wx.h"
+    #include "wx/wx.h"
+
+    #include <string>
 #endif
 
 #if wxUSE_REGEX
 
 #include "wx/regex.h"
 #include "wx/tokenzr.h"
-#include <string>
 
 using std::string;
 

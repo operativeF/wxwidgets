@@ -17,14 +17,18 @@
 
 #ifndef wxHAS_PREF_EDITOR_NATIVE
 
-#include "wx/app.h"
-#include "wx/dialog.h"
+#ifndef WX_PRECOMP
+    #include "wx/app.h"
+    #include "wx/dialog.h"
+
+    #include <vector>
+#endif
+
 #include "wx/notebook.h"
 #include "wx/sizer.h"
 #include "wx/sharedptr.h"
 
 #include "wx/scopeguard.h"
-#include <vector>
 
 namespace
 {

@@ -31,14 +31,14 @@
     #include "wx/thread.h"
 #endif
 
-#include <stdlib.h>
+#include <cstdlib>
 
 #if !(defined(__VMS__) && ( __VMS_VER < 70000000 ) )
 #include <memory.h>
 #endif
 
-#include <stdarg.h>
-#include <string.h>
+#include <cstdarg>
+#include <cstring>
 
 #if wxUSE_THREADS
 #define USE_THREADSAFE_MEMORY_ALLOCATION 1

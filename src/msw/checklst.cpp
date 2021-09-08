@@ -14,9 +14,8 @@
 
 #if wxUSE_CHECKLISTBOX && wxUSE_OWNER_DRAWN
 
-#include "wx/checklst.h"
-
 #ifndef WX_PRECOMP
+    #include "wx/checklst.h"
     #include "wx/msw/wrapcctl.h"
     #include "wx/object.h"
     #include "wx/colour.h"

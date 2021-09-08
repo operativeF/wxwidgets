@@ -14,9 +14,8 @@
 
 #if wxUSE_CHOICE
 
-#include "wx/choice.h"
-
 #ifndef WX_PRECOMP
+    #include "wx/choice.h"
     #include "wx/utils.h"
     #include "wx/app.h"
     #include "wx/log.h"

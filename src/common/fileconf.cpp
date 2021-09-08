@@ -25,6 +25,10 @@
     #if wxUSE_STREAMS
         #include  "wx/stream.h"
     #endif // wxUSE_STREAMS
+
+    #if defined(__WINDOWS__)
+        #include "wx/msw/private.h"
+    #endif  //windows.h
 #endif  //WX_PRECOMP
 
 #include  "wx/file.h"
@@ -37,10 +41,6 @@
 #include "wx/base64.h"
 
 #include  "wx/stdpaths.h"
-
-#if defined(__WINDOWS__)
-    #include "wx/msw/private.h"
-#endif  //windows.h
 
 #include  <cctype>
 #include  <cstdlib>

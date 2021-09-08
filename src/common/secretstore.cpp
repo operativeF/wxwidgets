@@ -13,9 +13,12 @@
 
 #if wxUSE_SECRETSTORE
 
+#ifndef WX_PRECOMP
+    #include "wx/log.h"
+#endif
+
 #include "wx/secretstore.h"
 
-#include "wx/log.h"
 #include "wx/translation.h"
 
 #include "wx/private/secretstore.h"

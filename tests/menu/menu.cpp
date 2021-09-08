@@ -15,14 +15,15 @@
 
 #ifndef WX_PRECOMP
     #include "wx/wx.h"
+
+    #include "wx/menu.h"
 #endif // WX_PRECOMP
 
-#include "wx/menu.h"
 
 #include "wx/translation.h"
 #include "wx/uiaction.h"
 
-#include <stdarg.h>
+#include <cstdarg>
 
 // ----------------------------------------------------------------------------
 // helper

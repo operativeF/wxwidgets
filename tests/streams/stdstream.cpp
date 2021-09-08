@@ -14,11 +14,12 @@
 // for all others, include the necessary headers
 #ifndef WX_PRECOMP
     #include "wx/wx.h"
+
+    #include <cstring>
 #endif
 
 #include "wx/stdstream.h"
 
-#include <string.h>
 #include "wx/mstream.h"
 
 // ==========================================================================

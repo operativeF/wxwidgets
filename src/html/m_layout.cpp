@@ -13,6 +13,8 @@
 
 #ifndef WX_PRECOMP
     #include "wx/image.h"
+
+    #include <cstdlib>                     // bsearch()
 #endif
 
 #include "wx/html/forcelnk.h"
@@ -22,7 +24,6 @@
 
 FORCE_LINK_ME(m_layout)
 
-#include <cstdlib>                     // bsearch()
 
 //-----------------------------------------------------------------------------
 // wxHtmlPageBreakCell

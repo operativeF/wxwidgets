@@ -10,12 +10,10 @@
 // for compilers that support precompilation, includes "wx.h".
 #include "wx/wxprec.h"
 
-
-#include "wx/msw/private.h"
-
 #ifndef WX_PRECOMP
     #include "wx/window.h"
     #include "wx/font.h"
+    #include "wx/msw/private.h"
 
     #include <boost/nowide/convert.hpp>
     #include <boost/nowide/stackstring.hpp>

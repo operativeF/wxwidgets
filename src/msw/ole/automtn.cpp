@@ -15,6 +15,8 @@
 #ifndef WX_PRECOMP
     #include "wx/log.h"
     #include "wx/math.h"
+
+    #include <fmt/core.h>
 #endif
 
 #ifndef _FORCENAMELESSUNION
@@ -45,7 +47,6 @@
 
 #include <wx/vector.h>
 
-#include <fmt/core.h>
 
 // Report an OLE error when calling the specified method to the user via wxLog.
 static void

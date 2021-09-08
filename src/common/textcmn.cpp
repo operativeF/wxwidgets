@@ -12,17 +12,13 @@
 #include "wx/wxprec.h"
 
 
-#ifndef WX_PRECOMP
-    #include "wx/event.h"
-#endif // WX_PRECOMP
-
 #if wxUSE_TEXTCTRL
 
-#include "wx/textctrl.h"
-
 #ifndef WX_PRECOMP
+    #include "wx/textctrl.h"
     #include "wx/intl.h"
     #include "wx/log.h"
+    #include "wx/event.h"
 
     #include <fmt/core.h>
 #endif // WX_PRECOMP

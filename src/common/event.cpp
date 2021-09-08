@@ -12,11 +12,11 @@
 #include "wx/wxprec.h"
 
 
-#include "wx/event.h"
 #include "wx/eventfilter.h"
 #include "wx/evtloop.h"
 
 #ifndef WX_PRECOMP
+    #include "wx/event.h"
     #include "wx/list.h"
     #include "wx/log.h"
     #include "wx/app.h"

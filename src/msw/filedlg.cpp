@@ -29,6 +29,7 @@
 
     #include <memory>
     #include <string>
+    #include <tuple>
     #include <vector>
 #endif
 
@@ -40,7 +41,6 @@
 #include "wx/modalhook.h"
 #include "wx/msw/private/dpiaware.h"
 
-#include <tuple>
 
 // ----------------------------------------------------------------------------
 // constants

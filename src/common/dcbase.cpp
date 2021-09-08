@@ -11,16 +11,15 @@
 // For compilers that support precompilation, includes "wx.h".
 #include "wx/wxprec.h"
 
-
-#include "wx/dc.h"
-#include "wx/dcclient.h"
-#include "wx/dcmemory.h"
-#include "wx/dcscreen.h"
 #include "wx/dcprint.h"
 #include "wx/prntbase.h"
 #include "wx/scopeguard.h"
 
 #ifndef WX_PRECOMP
+    #include "wx/dc.h"
+    #include "wx/dcclient.h"
+    #include "wx/dcmemory.h"
+    #include "wx/dcscreen.h"
     #include "wx/math.h"
     #include "wx/module.h"
     #include "wx/window.h"

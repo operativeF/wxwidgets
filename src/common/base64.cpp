@@ -11,9 +11,11 @@
 
 #if wxUSE_BASE64
 
-#include "wx/base64.h"
+#ifndef WX_PRECOMP
+    #include <gsl/gsl>
+#endif
 
-#include <gsl/gsl>
+#include "wx/base64.h"
 
 size_t
 wxBase64Encode(char *dst, size_t dstLen, const void *src_, size_t srcLen)

@@ -28,6 +28,9 @@
     #include "wx/frame.h"
 
     #include "wx/settings.h"
+
+    #include <limits>
+    #include <string>
 #endif
 
 #ifdef __WXOSX__
@@ -35,9 +38,6 @@
 #endif
 
 #include "wx/renderer.h"
-
-#include <limits>
-#include <string>
 
 wxDEFINE_EVENT( wxEVT_SPLITTER_SASH_POS_CHANGED, wxSplitterEvent );
 wxDEFINE_EVENT( wxEVT_SPLITTER_SASH_POS_CHANGING, wxSplitterEvent );

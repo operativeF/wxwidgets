@@ -20,6 +20,8 @@
     #include "wx/listbox.h"
     #include "wx/stattext.h"
     #include "wx/textctrl.h"
+
+    #include <fmt/core.h>
 #endif //WX_PRECOMP
 
 
@@ -29,7 +31,6 @@
 #include "wx/calctrl.h"
 #include "wx/generic/calctrlg.h"
 
-#include <fmt/core.h>
 
 #define DEBUG_PAINT 0
 

@@ -12,10 +12,10 @@
 #include "wx/wxprec.h"
 
 
-#include "wx/dialog.h"
 #include "wx/modalhook.h"
 
 #ifndef WX_PRECOMP
+    #include "wx/dialog.h"
     #include "wx/msw/wrapcdlg.h"
     #include "wx/utils.h"
     #include "wx/frame.h"

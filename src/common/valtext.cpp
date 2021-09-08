@@ -15,6 +15,7 @@
 #if wxUSE_VALIDATORS && (wxUSE_TEXTCTRL || wxUSE_COMBOBOX)
 
 #include "wx/valtext.h"
+#include "wx/combo.h"
 
 #ifndef WX_PRECOMP
   #include "wx/combobox.h"
@@ -23,13 +24,13 @@
   #include "wx/msgdlg.h"
   #include "wx/textctrl.h"
   #include "wx/utils.h"
+
   #include <cstdio>
+  #include <cstdlib>
 #endif
 
 #include <cctype>
-#include <cstdlib>
 
-#include "wx/combo.h"
 
 // ----------------------------------------------------------------------------
 // global helpers

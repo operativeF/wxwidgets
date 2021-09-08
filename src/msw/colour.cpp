@@ -12,9 +12,8 @@
 #include "wx/wxprec.h"
 
 
-#include "wx/colour.h"
-
 #ifndef WX_PRECOMP
+    #include "wx/colour.h"
     #include "wx/gdicmn.h"
 
     #include "wx/msw/private.h"
