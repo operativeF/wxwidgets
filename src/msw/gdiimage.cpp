@@ -18,6 +18,11 @@
     #include "wx/bitmap.h"
     #include "wx/msw/private.h"
 
+    #if wxUSE_PNG_RESOURCE_HANDLER
+        #include "wx/image.h"
+        #include "wx/utils.h"       // For wxLoadUserResource()
+    #endif
+    
     #include <string>
 
     #include <boost/nowide/convert.hpp>
@@ -35,11 +40,6 @@
 // avoid doing this if anybody ever needs to do it for some reason.
 #if !defined(wxUSE_PNG_RESOURCE_HANDLER)
 #define wxUSE_PNG_RESOURCE_HANDLER wxUSE_LIBPNG && wxUSE_IMAGE
-#endif
-
-#if wxUSE_PNG_RESOURCE_HANDLER
-    #include "wx/image.h"
-    #include "wx/utils.h"       // For wxLoadUserResource()
 #endif
 
 #include "wx/file.h"

@@ -12,9 +12,8 @@
 #include "wx/wxprec.h"
 
 
-#include "wx/cursor.h"
-
 #ifndef WX_PRECOMP
+    #include "wx/cursor.h"
     #include "wx/utils.h"
     #include "wx/app.h"
     #include "wx/bitmap.h"
