@@ -28,10 +28,13 @@
 #include "wx/tracker.h"
 #include "wx/typeinfo.h"
 #include "wx/any.h"
-#include <vector>
 
 #include "wx/meta/convertible.h"
 #include "wx/meta/removeref.h"
+
+#include <bit>
+#include <vector>
+
 
 // This is now always defined, but keep it for backwards compatibility.
 #define wxHAS_CALL_AFTER
@@ -2827,17 +2830,17 @@ enum
 class WXDLLIMPEXP_CORE wxJoystickEvent : public wxEvent
 {
 protected:
-    wxPoint   m_pos;
-    int       m_zPosition{0};
-    int       m_buttonChange;   // Which button changed?
-    int       m_buttonState;    // Which buttons are down?
-    int       m_joyStick;       // Which joystick?
+    wxPoint      m_pos;
+    int          m_zPosition{0};
+    unsigned int m_buttonChange;   // Which button changed?
+    int          m_buttonState;    // Which buttons are down?
+    int          m_joyStick;       // Which joystick?
 
 public:
     wxJoystickEvent(wxEventType type = wxEVT_NULL,
                     int state = 0,
                     int joystick = wxJOYSTICK1,
-                    int change = 0)
+                    unsigned int change = 0)
         : wxEvent(0, type),
           
           
@@ -2854,13 +2857,13 @@ public:
     wxPoint GetPosition() const { return m_pos; }
     int GetZPosition() const { return m_zPosition; }
     int GetButtonState() const { return m_buttonState; }
-    int GetButtonChange() const { return m_buttonChange; }
-    int GetButtonOrdinal() const { return wxCTZ(m_buttonChange); }
+    unsigned int GetButtonChange() const { return m_buttonChange; }
+    int GetButtonOrdinal() const { return std::countr_zero(m_buttonChange); }
     int GetJoystick() const { return m_joyStick; }
 
     void SetJoystick(int stick) { m_joyStick = stick; }
     void SetButtonState(int state) { m_buttonState = state; }
-    void SetButtonChange(int change) { m_buttonChange = change; }
+    void SetButtonChange(unsigned int change) { m_buttonChange = change; }
     void SetPosition(const wxPoint& pos) { m_pos = pos; }
     void SetZPosition(int zPos) { m_zPosition = zPos; }
 

@@ -57,16 +57,10 @@ inline int wxRound(long double x) { return wxRound(double(x)); }
 static constexpr double wxDegToRad(double deg) { return (deg * std::numbers::pi) / 180.0; }
 static constexpr double wxRadToDeg(double rad) { return (rad * 180.0) / std::numbers::pi; }
 
-// Count trailing zeros.
-WXDLLIMPEXP_BASE unsigned int wxCTZ(std::uint32_t x);
-
 #if defined(__WINDOWS__)
     #define wxMulDivInt32( a , b , c ) ::MulDiv( a , b , c )
 #else
     #define wxMulDivInt32( a , b , c ) (wxRound((a)*(((double)b)/((double)c))))
 #endif
-
-/* Compute the greatest common divisor of two positive integers */
-WXDLLIMPEXP_BASE unsigned int wxGCD(unsigned int u, unsigned int v);
 
 #endif /* _WX_MATH_H_ */
