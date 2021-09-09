@@ -15,11 +15,8 @@
 #if wxUSE_CLIPBOARD
 
 #include "wx/clipbrd.h"
-
-#ifndef WX_PRECOMP
-    #include "wx/dataobj.h"
-    #include "wx/module.h"
-#endif
+#include "wx/dataobj.h"
+#include "wx/module.h"
 
 // ---------------------------------------------------------
 // wxClipboardEvent

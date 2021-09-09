@@ -13,6 +13,7 @@
 
 #include "wx/window.h"                      // base class declaration
 #include "wx/containr.h"                    // wxControlContainer
+#include "wx/pen.h"
 
 #include <memory>
 

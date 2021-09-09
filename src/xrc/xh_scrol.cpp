@@ -14,10 +14,7 @@
 #if wxUSE_XRC && wxUSE_SCROLLBAR
 
 #include "wx/xrc/xh_scrol.h"
-
-#ifndef WX_PRECOMP
-    #include "wx/scrolbar.h"
-#endif
+#include "wx/scrolbar.h"
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxScrollBarXmlHandler, wxXmlResourceHandler);
 

@@ -14,10 +14,7 @@
 #if wxUSE_XRC && wxUSE_BMPBUTTON
 
 #include "wx/xrc/xh_bmpbt.h"
-
-#ifndef WX_PRECOMP
-    #include "wx/bmpbuttn.h"
-#endif
+#include "wx/bmpbuttn.h"
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxBitmapButtonXmlHandler, wxXmlResourceHandler);
 

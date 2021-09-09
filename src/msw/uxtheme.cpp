@@ -15,13 +15,13 @@
 #if wxUSE_UXTHEME
 
 #ifndef WX_PRECOMP
-    #include "wx/app.h"
-    #include "wx/toplevel.h"
-    #include "wx/log.h"
-    #include "wx/module.h"
-
     #include <string>
 #endif //WX_PRECOMP
+
+#include "wx/app.h"
+#include "wx/toplevel.h"
+#include "wx/log.h"
+#include "wx/module.h"
 
 #include "wx/msw/uxtheme.h"
 

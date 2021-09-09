@@ -15,10 +15,7 @@
 #if wxUSE_STATUSBAR
 
 #include "wx/statusbr.h"
-
-#ifndef WX_PRECOMP
-    #include "wx/frame.h"
-#endif //WX_PRECOMP
+#include "wx/frame.h"
 
 // ============================================================================
 // wxStatusBarPane implementation

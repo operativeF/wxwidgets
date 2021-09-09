@@ -18,11 +18,6 @@
 
 
 #ifndef WX_PRECOMP
-    #include "wx/string.h"
-    #include "wx/wxcrtvararg.h"
-    #include "wx/intl.h"
-    #include "wx/log.h"
-
     #ifdef __WINDOWS__
         #include "wx/msw/wrapwin.h"
     #endif // __WINDOWS__
@@ -37,6 +32,10 @@
 
 #include <cerrno>
 
+#include "wx/string.h"
+#include "wx/wxcrtvararg.h"
+#include "wx/intl.h"
+#include "wx/log.h"
 #include "wx/hashmap.h"
 #include "wx/xlocale.h"
 

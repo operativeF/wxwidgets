@@ -12,12 +12,10 @@
 #include "wx/wxprec.h"
 
 
-#ifndef WX_PRECOMP
-    #include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
-    #include "wx/app.h"
+#include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
+#include "wx/app.h"
 
-    #include "wx/msw/private.h"
-#endif
+#include "wx/msw/private.h"
 
 #if wxUSE_SPINBTN
 

@@ -13,15 +13,14 @@
 
 
 #ifndef WX_PRECOMP
-    #include "wx/dynarray.h"
-    #include "wx/string.h"
-    #include "wx/log.h"
-    #include "wx/intl.h"
-    #include "wx/app.h"
-    
     #include <vector>
 #endif //WX_PRECOMP
 
+#include "wx/dynarray.h"
+#include "wx/string.h"
+#include "wx/log.h"
+#include "wx/intl.h"
+#include "wx/app.h"
 #include "wx/cmdline.h"
 
 #if wxUSE_CMDLINE_PARSER

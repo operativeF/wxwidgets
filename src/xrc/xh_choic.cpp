@@ -14,12 +14,8 @@
 #if wxUSE_XRC && wxUSE_CHOICE
 
 #include "wx/xrc/xh_choic.h"
-
-#ifndef WX_PRECOMP
-    #include "wx/intl.h"
-    #include "wx/choice.h"
-#endif
-
+#include "wx/intl.h"
+#include "wx/choice.h"
 #include "wx/xml/xml.h"
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxChoiceXmlHandler, wxXmlResourceHandler);

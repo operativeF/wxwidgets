@@ -13,11 +13,8 @@
 
 #if wxUSE_WXHTML_HELP
 
-#ifndef WX_PRECOMP
-    #include "wx/app.h"
-    #include "wx/intl.h"
-#endif // WX_PRECOMP
-
+#include "wx/app.h"
+#include "wx/intl.h"
 #include "wx/busyinfo.h"
 #include "wx/html/helpctrl.h"
 #include "wx/html/helpwnd.h"

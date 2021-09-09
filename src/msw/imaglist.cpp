@@ -13,21 +13,21 @@
 
 
 #ifndef WX_PRECOMP
-    #include "wx/app.h"
-    #include "wx/dc.h"
-    #include "wx/dcmemory.h"
-    #include "wx/icon.h"
-    #include "wx/image.h"
-    #include "wx/intl.h"
-    #include "wx/log.h"
-    #include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
-    #include "wx/window.h"
-    #include "wx/msw/wrap/utils.h"
-    #include "wx/msw/private.h"
-    #include "wx/dc.h"
-
     #include <algorithm>
 #endif
+
+#include "wx/app.h"
+#include "wx/dc.h"
+#include "wx/dcmemory.h"
+#include "wx/icon.h"
+#include "wx/image.h"
+#include "wx/intl.h"
+#include "wx/log.h"
+#include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
+#include "wx/window.h"
+#include "wx/msw/wrap/utils.h"
+#include "wx/msw/private.h"
+#include "wx/dc.h"
 
 #include "wx/imaglist.h"
 #include "wx/msw/dc.h"

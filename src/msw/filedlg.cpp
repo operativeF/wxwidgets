@@ -17,21 +17,21 @@
 #include "wx/filedlg.h"
 
 #ifndef WX_PRECOMP
-    #include "wx/msw/wrapcdlg.h"
-    #include "wx/msw/missing.h"
-    #include "wx/utils.h"
-    #include "wx/msgdlg.h"
-    #include "wx/filefn.h"
-    #include "wx/intl.h"
-    #include "wx/log.h"
-    #include "wx/app.h"
-    #include "wx/math.h"
-
     #include <memory>
     #include <string>
     #include <tuple>
     #include <vector>
 #endif
+
+#include "wx/msw/wrapcdlg.h"
+#include "wx/msw/missing.h"
+#include "wx/utils.h"
+#include "wx/msgdlg.h"
+#include "wx/filefn.h"
+#include "wx/intl.h"
+#include "wx/log.h"
+#include "wx/app.h"
+#include "wx/math.h"
 
 #include "wx/dynlib.h"
 #include "wx/filename.h"

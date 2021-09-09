@@ -15,12 +15,6 @@
 #if wxUSE_FONTMAP
 
 #ifndef WX_PRECOMP
-    #include "wx/app.h"
-    #include "wx/log.h"
-    #include "wx/intl.h"
-    #include "wx/module.h"
-    #include "wx/wxcrtvararg.h"
-
     #include <array>
     #include <string>
     #include <string_view>
@@ -31,6 +25,11 @@
     #include  "wx/msw/winundef.h"
 #endif
 
+#include "wx/app.h"
+#include "wx/log.h"
+#include "wx/intl.h"
+#include "wx/module.h"
+#include "wx/wxcrtvararg.h"
 #include "wx/fontmap.h"
 #include "wx/fmappriv.h"
 #include "wx/stringutils.h"

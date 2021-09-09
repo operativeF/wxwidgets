@@ -12,12 +12,8 @@
 
 
 #include "wx/toplevel.h"
-
-#ifndef WX_PRECOMP
-    #include "wx/dcclient.h"
-    #include "wx/app.h"
-#endif // WX_PRECOMP
-
+#include "wx/dcclient.h"
+#include "wx/app.h"
 #include "wx/display.h"
 
 #include "wx/private/tlwgeom.h"

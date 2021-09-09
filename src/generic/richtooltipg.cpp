@@ -12,17 +12,15 @@
 
 #if wxUSE_RICHTOOLTIP
 
-#ifndef WX_PRECOMP
-    #include "wx/dcmemory.h"
-    #include "wx/icon.h"
-    #include "wx/region.h"
-    #include "wx/settings.h"
-    #include "wx/sizer.h"
-    #include "wx/statbmp.h"
-    #include "wx/stattext.h"
-    #include "wx/timer.h"
-    #include "wx/utils.h"
-#endif // WX_PRECOMP
+#include "wx/dcmemory.h"
+#include "wx/icon.h"
+#include "wx/region.h"
+#include "wx/settings.h"
+#include "wx/sizer.h"
+#include "wx/statbmp.h"
+#include "wx/stattext.h"
+#include "wx/timer.h"
+#include "wx/utils.h"
 
 #include "wx/private/richtooltip.h"
 #include "wx/generic/private/richtooltip.h"

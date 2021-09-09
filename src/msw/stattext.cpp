@@ -15,14 +15,12 @@
 
 #include "wx/stattext.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/event.h"
-    #include "wx/app.h"
-    #include "wx/brush.h"
-    #include "wx/dcclient.h"
-    #include "wx/settings.h"
-    #include "wx/msw/private.h"
-#endif
+#include "wx/event.h"
+#include "wx/app.h"
+#include "wx/brush.h"
+#include "wx/dcclient.h"
+#include "wx/settings.h"
+#include "wx/msw/private.h"
 
 #include "wx/stringutils.h"
 

@@ -29,13 +29,9 @@
 #if wxUSE_SOCKETS && wxUSE_IPC && wxUSE_STREAMS
 
 #include "wx/sckipc.h"
-
-#ifndef WX_PRECOMP
-    #include "wx/log.h"
-    #include "wx/event.h"
-    #include "wx/module.h"
-#endif
-
+#include "wx/log.h"
+#include "wx/event.h"
+#include "wx/module.h"
 #include "wx/socket.h"
 
 // --------------------------------------------------------------------------

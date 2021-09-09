@@ -13,21 +13,20 @@
 
 
 #ifndef WX_PRECOMP
-    #include "wx/cursor.h"
-    #include "wx/utils.h"
-    #include "wx/app.h"
-    #include "wx/bitmap.h"
-    #include "wx/icon.h"
-    #include "wx/settings.h"
-    #include "wx/intl.h"
-    #include "wx/image.h"
-    #include "wx/module.h"
-    #include "wx/msw/private.h"
-    #include "wx/msw/missing.h" // IDC_HAND
-    
     #include <boost/nowide/convert.hpp>
 #endif
 
+#include "wx/cursor.h"
+#include "wx/utils.h"
+#include "wx/app.h"
+#include "wx/bitmap.h"
+#include "wx/icon.h"
+#include "wx/settings.h"
+#include "wx/intl.h"
+#include "wx/image.h"
+#include "wx/module.h"
+#include "wx/msw/private.h"
+#include "wx/msw/missing.h" // IDC_HAND
 #include "wx/display.h"
 
 

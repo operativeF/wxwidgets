@@ -12,10 +12,8 @@
 #include "wx/wxprec.h"
 
 
-#ifndef WX_PRECOMP
-    #include "wx/log.h"
-    #include "wx/msw/private.h"
-#endif //WX_PRECOMP
+#include "wx/log.h"
+#include "wx/msw/private.h"
 
 #include "wx/evtloop.h"
 

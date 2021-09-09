@@ -9,12 +9,9 @@
 
 #include "wx/wxprec.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/msw/private.h"
-#endif
 
+#include "wx/msw/private.h"
 #include "wx/systhemectrl.h"
-
 #include "wx/msw/uxtheme.h"
 
 #ifdef wxHAS_SYSTEM_THEMED_CONTROL

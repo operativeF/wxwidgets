@@ -13,10 +13,7 @@
 
 #if wxUSE_STACKWALKER
 
-#ifndef WX_PRECOMP
-    #include "wx/string.h"
-#endif
-
+#include "wx/string.h"
 #include "wx/stackwalk.h"
 
 #include "wx/msw/debughlp.h"

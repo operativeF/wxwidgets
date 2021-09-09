@@ -13,11 +13,8 @@
 #include "wx/wxprec.h"
 
 
-#ifndef WX_PRECOMP
-    #include "wx/log.h"
-    #include "wx/intl.h"
-#endif //WX_PRECOMP
-
+#include "wx/log.h"
+#include "wx/intl.h"
 #include "wx/hashmap.h"
 #include "wx/windowid.h"
 

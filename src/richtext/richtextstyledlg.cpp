@@ -13,9 +13,7 @@
 
 #if wxUSE_RICHTEXT
 
-#ifndef WX_PRECOMP
 #include "wx/wx.h"
-#endif
 
 #include "wx/richtext/richtextstyledlg.h"
 #include "wx/richtext/richtextformatdlg.h"

@@ -16,16 +16,15 @@
 
 #include "wx/memory.h"
 
-#ifndef WX_PRECOMP
-    #ifdef __WINDOWS__
-        #include "wx/msw/wrapwin.h"
-    #endif
-    #include "wx/utils.h"
-    #include "wx/app.h"
-    #include "wx/hash.h"
-    #include "wx/log.h"
-    #include "wx/wxcrtvararg.h" // for wxVsnprintf
+#ifdef __WINDOWS__
+    #include "wx/msw/wrapwin.h"
 #endif
+
+#include "wx/utils.h"
+#include "wx/app.h"
+#include "wx/hash.h"
+#include "wx/log.h"
+#include "wx/wxcrtvararg.h" // for wxVsnprintf
 
 #if wxUSE_THREADS
     #include "wx/thread.h"

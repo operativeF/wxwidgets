@@ -23,10 +23,7 @@
 
 #include "wx/listctrl.h"
 #include "wx/imaglist.h"
-
-#ifndef WX_PRECOMP
-    #include "wx/dcclient.h"
-#endif
+#include "wx/dcclient.h"
 
 // ListCtrl events
 wxDEFINE_EVENT( wxEVT_LIST_BEGIN_DRAG, wxListEvent );

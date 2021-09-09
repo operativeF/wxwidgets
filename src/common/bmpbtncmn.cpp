@@ -14,13 +14,10 @@
 
 #if wxUSE_BMPBUTTON
 
-#ifndef WX_PRECOMP
-    #include "wx/bmpbuttn.h"
-    #include "wx/log.h"
-    #include "wx/dcmemory.h"
-    #include "wx/image.h"
-#endif
-
+#include "wx/bmpbuttn.h"
+#include "wx/log.h"
+#include "wx/dcmemory.h"
+#include "wx/image.h"
 #include "wx/artprov.h"
 #include "wx/renderer.h"
 

@@ -14,9 +14,6 @@
 
 #if wxUSE_FINDREPLDLG
 
-#ifndef WX_PRECOMP
-#endif
-
 #include "wx/fdrepdlg.h"
 
 // ----------------------------------------------------------------------------

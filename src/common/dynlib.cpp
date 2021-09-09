@@ -19,13 +19,10 @@
 
 #include "wx/dynlib.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/intl.h"
-    #include "wx/log.h"
-    #include "wx/app.h"
-    #include "wx/utils.h"
-#endif //WX_PRECOMP
-
+#include "wx/intl.h"
+#include "wx/log.h"
+#include "wx/app.h"
+#include "wx/utils.h"
 #include "wx/filefn.h"
 #include "wx/filename.h"        // for SplitPath()
 #include "wx/platinfo.h"

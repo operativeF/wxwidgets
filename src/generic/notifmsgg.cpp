@@ -13,15 +13,12 @@
 
 #if wxUSE_NOTIFICATION_MESSAGE
 
-#ifndef WX_PRECOMP
-    #include "wx/frame.h"
-    #include "wx/timer.h"
-    #include "wx/sizer.h"
-    #include "wx/statbmp.h"
-    #include "wx/settings.h"
-    #include "wx/panel.h"
-#endif //WX_PRECOMP
-
+#include "wx/frame.h"
+#include "wx/timer.h"
+#include "wx/sizer.h"
+#include "wx/statbmp.h"
+#include "wx/settings.h"
+#include "wx/panel.h"
 #include "wx/artprov.h"
 #include "wx/bmpbuttn.h"
 

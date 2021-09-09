@@ -14,10 +14,7 @@
 #if wxUSE_XRC && wxUSE_GAUGE
 
 #include "wx/xrc/xh_gauge.h"
-
-#ifndef WX_PRECOMP
-    #include "wx/gauge.h"
-#endif
+#include "wx/gauge.h"
 
 static const long DEFAULT_RANGE = 100;
 

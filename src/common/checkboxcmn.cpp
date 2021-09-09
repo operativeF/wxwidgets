@@ -14,9 +14,7 @@
 
 #if wxUSE_CHECKBOX
 
-#ifndef WX_PRECOMP
-    #include "wx/checkbox.h"
-#endif
+#include "wx/checkbox.h"
 
 // ----------------------------------------------------------------------------
 // XTI

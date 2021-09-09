@@ -12,14 +12,14 @@
 #if wxUSE_HTML && wxUSE_STREAMS
 
 #ifndef WX_PRECOMP
-    #include "wx/dynarray.h"
-    #include "wx/log.h"
-    #include "wx/intl.h"
-    #include "wx/app.h"
-    #include "wx/wxcrtvararg.h"
-
     #include <vector>
 #endif
+
+#include "wx/dynarray.h"
+#include "wx/log.h"
+#include "wx/intl.h"
+#include "wx/app.h"
+#include "wx/wxcrtvararg.h"
 
 #include "wx/tokenzr.h"
 #include "wx/wfstream.h"

@@ -14,9 +14,6 @@
 
 #if wxUSE_NOTEBOOK
 
-#ifndef WX_PRECOMP
-#endif //WX_PRECOMP
-
 #include "wx/notebook.h"
 
 // ============================================================================

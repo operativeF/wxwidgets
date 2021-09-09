@@ -14,9 +14,9 @@
 
 #if wxUSE_RADIOBOX
 
-#ifndef WX_PRECOMP
-    #include "wx/radiobox.h"
-    
+#include "wx/radiobox.h"
+
+#ifndef WX_PRECOMP    
     #include <gsl/gsl>
 #endif //WX_PRECOMP
 

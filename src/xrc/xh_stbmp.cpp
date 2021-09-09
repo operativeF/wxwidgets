@@ -14,10 +14,7 @@
 #if wxUSE_XRC && wxUSE_STATBMP
 
 #include "wx/xrc/xh_stbmp.h"
-
-#ifndef  WX_PRECOMP
-    #include "wx/statbmp.h"
-#endif
+#include "wx/statbmp.h"
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxStaticBitmapXmlHandler, wxXmlResourceHandler);
 

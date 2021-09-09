@@ -14,12 +14,10 @@
 
 #include "wx/pen.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/bitmap.h"
-    #include "wx/utils.h"
-    #include "wx/msw/private.h"
-    #include "wx/msw/wrap/utils.h"
-#endif
+#include "wx/bitmap.h"
+#include "wx/utils.h"
+#include "wx/msw/private.h"
+#include "wx/msw/wrap/utils.h"
 
 #define M_PENDATA ((wxPenRefData*)m_refData)
 

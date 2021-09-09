@@ -14,13 +14,12 @@
 #if wxUSE_REARRANGECTRL
 
 #ifndef WX_PRECOMP
-    #include "wx/button.h"
-    #include "wx/stattext.h"
-    #include "wx/sizer.h"
-
     #include <gsl/gsl>
 #endif // WX_PRECOMP
 
+#include "wx/button.h"
+#include "wx/stattext.h"
+#include "wx/sizer.h"
 #include "wx/rearrangectrl.h"
 
 

@@ -14,14 +14,11 @@
 
 #include "wx/renderer.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/dc.h"
-    #include "wx/settings.h"
-    #include "wx/gdicmn.h"
-    #include "wx/module.h"
-    #include "wx/control.h"
-#endif //WX_PRECOMP
-
+#include "wx/dc.h"
+#include "wx/settings.h"
+#include "wx/gdicmn.h"
+#include "wx/module.h"
+#include "wx/control.h"
 #include "wx/dcmirror.h"
 #include "wx/math.h"
 #include "wx/splitter.h"

@@ -11,19 +11,17 @@
 
 #if wxUSE_HTML && wxUSE_STREAMS
 
-#ifndef WX_PRECOMP
-    #include "wx/app.h"
-    #include "wx/dynarray.h"
-    #include "wx/dc.h"
-    #include "wx/dcprint.h"
-    #include "wx/scrolwin.h"
-    #include "wx/timer.h"
-    #include "wx/dcmemory.h"
-    #include "wx/log.h"
-    #include "wx/math.h"
-    #include "wx/image.h"
-    #include "wx/wxcrtvararg.h"
-#endif
+#include "wx/app.h"
+#include "wx/dynarray.h"
+#include "wx/dc.h"
+#include "wx/dcprint.h"
+#include "wx/scrolwin.h"
+#include "wx/timer.h"
+#include "wx/dcmemory.h"
+#include "wx/log.h"
+#include "wx/math.h"
+#include "wx/image.h"
+#include "wx/wxcrtvararg.h"
 
 #include "wx/html/forcelnk.h"
 #include "wx/html/m_templ.h"

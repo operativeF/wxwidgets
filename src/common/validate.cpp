@@ -15,10 +15,7 @@
 #if wxUSE_VALIDATORS
 
 #include "wx/validate.h"
-
-#ifndef WX_PRECOMP
-    #include "wx/window.h"
-#endif
+#include "wx/window.h"
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxValidator, wxEvtHandler);
 

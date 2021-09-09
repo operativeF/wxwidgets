@@ -19,16 +19,14 @@
 
 #if wxUSE_INTL
 
-#ifndef WX_PRECOMP
-    #include "wx/dynarray.h"
-    #include "wx/string.h"
-    #include "wx/intl.h"
-    #include "wx/log.h"
-    #include "wx/utils.h"
-    #include "wx/app.h"
-    #include "wx/hashmap.h"
-    #include "wx/module.h"
-#endif // WX_PRECOMP
+#include "wx/dynarray.h"
+#include "wx/string.h"
+#include "wx/intl.h"
+#include "wx/log.h"
+#include "wx/utils.h"
+#include "wx/app.h"
+#include "wx/hashmap.h"
+#include "wx/module.h"
 
 #include <clocale>
 

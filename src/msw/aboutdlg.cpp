@@ -13,10 +13,7 @@
 
 #if wxUSE_ABOUTDLG
 
-#ifndef WX_PRECOMP
-    #include "wx/msgdlg.h"
-#endif //WX_PRECOMP
-
+#include "wx/msgdlg.h"
 #include "wx/aboutdlg.h"
 #include "wx/generic/aboutdlgg.h"
 

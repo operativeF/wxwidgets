@@ -18,13 +18,13 @@
 #include "wx/regex.h"
 
 #ifndef WX_PRECOMP
-    #include "wx/object.h"
-    #include "wx/log.h"
-    #include "wx/intl.h"
-    #include "wx/crt.h"
-
     #include <gsl/gsl>
 #endif //WX_PRECOMP
+
+#include "wx/object.h"
+#include "wx/log.h"
+#include "wx/intl.h"
+#include "wx/crt.h"
 
 // At least FreeBSD requires this.
 #if defined(__UNIX__)

@@ -17,20 +17,19 @@
 #include "wx/private/flagscheck.h"
 
 #ifndef WX_PRECOMP
-    #include "wx/intl.h"
-    #include "wx/math.h"
-    #include "wx/utils.h"
-    #include "wx/settings.h"
-    #include "wx/button.h"
-    #include "wx/statbox.h"
-    #include "wx/toplevel.h"
-    #include "wx/app.h"
-
     #include <memory>
     #include <string>
     #include <vector>
 #endif // WX_PRECOMP
 
+#include "wx/intl.h"
+#include "wx/math.h"
+#include "wx/utils.h"
+#include "wx/settings.h"
+#include "wx/button.h"
+#include "wx/statbox.h"
+#include "wx/toplevel.h"
+#include "wx/app.h"
 #include "wx/display.h"
 #include "wx/listimpl.cpp"
 #include "wx/private/window.h"

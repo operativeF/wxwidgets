@@ -11,12 +11,10 @@
 #include "wx/wxprec.h"
 
 
-#ifndef WX_PRECOMP
-    #include "wx/bitmap.h"
-    #include "wx/colour.h"
-    #include "wx/icon.h"
-    #include "wx/image.h"
-#endif // WX_PRECOMP
+#include "wx/bitmap.h"
+#include "wx/colour.h"
+#include "wx/icon.h"
+#include "wx/image.h"
 
 #if wxUSE_IMAGE && wxUSE_LIBPNG && wxUSE_STREAMS
     #define wxHAS_PNG_LOAD

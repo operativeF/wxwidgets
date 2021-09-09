@@ -17,22 +17,22 @@
 #include "wx/notebook.h"
 
 #ifndef WX_PRECOMP
-    #include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
-    #include "wx/string.h"
-    #include "wx/dc.h"
-    #include "wx/log.h"
-    #include "wx/event.h"
-    #include "wx/app.h"
-    #include "wx/dcclient.h"
-    #include "wx/dcmemory.h"
-    #include "wx/control.h"
-    #include "wx/panel.h"
-    #include "wx/msw/wrap/utils.h"
-    #include "wx/msw/private.h"
-
     #include <boost/nowide/convert.hpp>
     #include <boost/nowide/stackstring.hpp>
 #endif  // WX_PRECOMP
+
+#include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
+#include "wx/string.h"
+#include "wx/dc.h"
+#include "wx/log.h"
+#include "wx/event.h"
+#include "wx/app.h"
+#include "wx/dcclient.h"
+#include "wx/dcmemory.h"
+#include "wx/control.h"
+#include "wx/panel.h"
+#include "wx/msw/wrap/utils.h"
+#include "wx/msw/private.h"
 
 #include "wx/imaglist.h"
 #include "wx/sysopt.h"

@@ -16,11 +16,9 @@
 #include "wx/bitmap.h"
 #include "wx/xml/xml.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/frame.h"
-    #include "wx/log.h"
-    #include "wx/toolbar.h"
-#endif
+#include "wx/frame.h"
+#include "wx/log.h"
+#include "wx/toolbar.h"
 
 #include "wx/xrc/xh_auitoolb.h"
 

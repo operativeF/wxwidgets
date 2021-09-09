@@ -17,19 +17,19 @@
 #include "wx/listctrl.h"
 
 #ifndef WX_PRECOMP
-    #include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
-    #include "wx/app.h"
-    #include "wx/intl.h"
-    #include "wx/log.h"
-    #include "wx/settings.h"
-    #include "wx/stopwatch.h"
-    #include "wx/dcclient.h"
-    #include "wx/textctrl.h"
-    #include "wx/msw/wrap/utils.h"
-    #include "wx/msw/private.h"
-
     #include <vector>
 #endif
+
+#include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
+#include "wx/app.h"
+#include "wx/intl.h"
+#include "wx/log.h"
+#include "wx/settings.h"
+#include "wx/stopwatch.h"
+#include "wx/dcclient.h"
+#include "wx/textctrl.h"
+#include "wx/msw/wrap/utils.h"
+#include "wx/msw/private.h"
 
 #include "wx/imaglist.h"
 

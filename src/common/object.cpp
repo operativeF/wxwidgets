@@ -14,14 +14,13 @@
 
 
 #ifndef WX_PRECOMP
-    #include "wx/object.h"
-    #include "wx/hash.h"
-    #include "wx/memory.h"
-    #include "wx/crt.h"
-
     #include <cstring>
 #endif
 
+#include "wx/object.h"
+#include "wx/hash.h"
+#include "wx/memory.h"
+#include "wx/crt.h"
 
 // we must disable optimizations for VC.NET because otherwise its too eager
 // linker discards wxClassInfo objects in release build thus breaking many,

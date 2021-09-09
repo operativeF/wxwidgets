@@ -21,11 +21,9 @@
 #include "wx/stdpaths.h"
 #include "wx/wfstream.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/app.h"
-    #include "wx/translation.h"
-    #include "wx/utils.h"
-#endif
+#include "wx/app.h"
+#include "wx/translation.h"
+#include "wx/utils.h"
 
 #include "wx/private/webrequest.h"
 

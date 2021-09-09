@@ -96,16 +96,13 @@ license is as follows:
 #if wxUSE_IMAGE && wxUSE_XPM
 
 #include "wx/xpmdecod.h"
-
-#ifndef WX_PRECOMP
-    #include "wx/intl.h"
-    #include "wx/log.h"
-    #include "wx/utils.h"
-    #include "wx/hashmap.h"
-    #include "wx/stream.h"
-    #include "wx/image.h"
-    #include "wx/palette.h"
-#endif
+#include "wx/intl.h"
+#include "wx/log.h"
+#include "wx/utils.h"
+#include "wx/hashmap.h"
+#include "wx/stream.h"
+#include "wx/image.h"
+#include "wx/palette.h"
 
 #if wxUSE_STREAMS
 bool wxXPMDecoder::CanRead(wxInputStream& stream)

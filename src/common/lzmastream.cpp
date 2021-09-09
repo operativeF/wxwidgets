@@ -14,11 +14,8 @@
 #if wxUSE_LIBLZMA && wxUSE_STREAMS
 
 #include "wx/lzmastream.h"
-
-#ifndef WX_PRECOMP
-    #include "wx/log.h"
-    #include "wx/translation.h"
-#endif // WX_PRECOMP
+#include "wx/log.h"
+#include "wx/translation.h"
 
 #include <lzma.h>
 

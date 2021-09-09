@@ -16,15 +16,13 @@
 
 #include "wx/generic/textdlgg.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/utils.h"
-    #include "wx/dialog.h"
-    #include "wx/button.h"
-    #include "wx/stattext.h"
-    #include "wx/textctrl.h"
-    #include "wx/intl.h"
-    #include "wx/sizer.h"
-#endif
+#include "wx/utils.h"
+#include "wx/dialog.h"
+#include "wx/button.h"
+#include "wx/stattext.h"
+#include "wx/textctrl.h"
+#include "wx/intl.h"
+#include "wx/sizer.h"
 
 #if wxUSE_STATLINE
     #include "wx/statline.h"

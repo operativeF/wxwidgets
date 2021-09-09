@@ -15,13 +15,9 @@
 
 #if wxUSE_SNGLINST_CHECKER
 
-#ifndef WX_PRECOMP
-    #include "wx/string.h"
-    #include "wx/log.h"
-
-    #include "wx/msw/private.h"
-#endif //WX_PRECOMP
-
+#include "wx/string.h"
+#include "wx/log.h"
+#include "wx/msw/private.h"
 #include "wx/snglinst.h"
 
 

@@ -16,15 +16,14 @@
 
 #include "wx/valtext.h"
 #include "wx/combo.h"
+#include "wx/combobox.h"
+#include "wx/intl.h"
+#include "wx/log.h"
+#include "wx/msgdlg.h"
+#include "wx/textctrl.h"
+#include "wx/utils.h"
 
 #ifndef WX_PRECOMP
-  #include "wx/combobox.h"
-  #include "wx/intl.h"
-  #include "wx/log.h"
-  #include "wx/msgdlg.h"
-  #include "wx/textctrl.h"
-  #include "wx/utils.h"
-
   #include <cstdio>
   #include <cstdlib>
 #endif

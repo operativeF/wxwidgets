@@ -15,15 +15,15 @@
 #if wxUSE_DATAOBJ
 
 #ifndef WX_PRECOMP
-    #include "wx/intl.h"
-    #include "wx/log.h"
-    #include "wx/utils.h"
-    #include "wx/wxcrtvararg.h"
-
     #include <vector>
 
     #include <gsl/gsl>
 #endif
+
+#include "wx/intl.h"
+#include "wx/log.h"
+#include "wx/utils.h"
+#include "wx/wxcrtvararg.h"
 
 #include "wx/dataobj.h"
 

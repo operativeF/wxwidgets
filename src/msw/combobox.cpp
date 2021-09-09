@@ -15,18 +15,18 @@
 #if wxUSE_COMBOBOX
 
 #ifndef WX_PRECOMP
-    #include "wx/combobox.h"
-    #include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
-    #include "wx/settings.h"
-    #include "wx/log.h"
-    // for wxEVT_TEXT_ENTER
-    #include "wx/textctrl.h"
-    #include "wx/app.h"
-    #include "wx/brush.h"
-    #include "wx/msw/private.h"
-
     #include <boost/nowide/convert.hpp>
 #endif
+
+#include "wx/combobox.h"
+#include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
+#include "wx/settings.h"
+#include "wx/log.h"
+// for wxEVT_TEXT_ENTER
+#include "wx/textctrl.h"
+#include "wx/app.h"
+#include "wx/brush.h"
+#include "wx/msw/private.h"
 
 #include "wx/clipbrd.h"
 #include "wx/wupdlock.h"

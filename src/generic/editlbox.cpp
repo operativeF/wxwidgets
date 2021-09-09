@@ -12,16 +12,12 @@
 
 #if wxUSE_EDITABLELISTBOX
 
-// for all others, include the necessary headers (this file is usually all you
-// need because it includes almost all "standard" wxWidgets headers)
-#ifndef WX_PRECOMP
-    #include "wx/wx.h"
-#endif
-
 #include "wx/editlbox.h"
 #include "wx/sizer.h"
 #include "wx/listctrl.h"
 #include "wx/artprov.h"
+#include "wx/bmpbuttn.h"
+#include "wx/stattext.h"
 
 // ============================================================================
 // implementation

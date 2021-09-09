@@ -15,10 +15,8 @@
 
 #include "wx/xrc/xh_panel.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/panel.h"
-    #include "wx/frame.h"
-#endif
+#include "wx/panel.h"
+#include "wx/frame.h"
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxPanelXmlHandler, wxXmlResourceHandler);
 

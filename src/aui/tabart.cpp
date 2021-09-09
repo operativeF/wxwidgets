@@ -14,14 +14,14 @@
 #if wxUSE_AUI
 
 #ifndef WX_PRECOMP
-    #include "wx/dc.h"
-    #include "wx/dcclient.h"
-    #include "wx/settings.h"
-    #include "wx/bitmap.h"
-    #include "wx/menu.h"
-
     #include <array>
 #endif
+
+#include "wx/dc.h"
+#include "wx/dcclient.h"
+#include "wx/settings.h"
+#include "wx/bitmap.h"
+#include "wx/menu.h"
 
 #include "wx/renderer.h"
 #include "wx/aui/auibook.h"

@@ -15,9 +15,7 @@
 #if wxUSE_SCROLLBAR
 
 
-#ifndef WX_PRECOMP
-    #include "wx/scrolbar.h"
-#endif
+#include "wx/scrolbar.h"
 
 // ----------------------------------------------------------------------------
 // XTI

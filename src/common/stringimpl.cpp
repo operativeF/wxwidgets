@@ -25,17 +25,15 @@
 
 
 #ifndef WX_PRECOMP
-    #include "wx/stringimpl.h"
-    #include "wx/wxcrt.h"
-
     #include <cstdlib>
     #include <cstring>
 #endif
 
 #include <cctype>
-
 #include <cerrno>
 
+#include "wx/stringimpl.h"
+#include "wx/wxcrt.h"
 
 // ---------------------------------------------------------------------------
 // static class variables definition

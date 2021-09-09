@@ -38,32 +38,31 @@
 #endif
 
 #ifndef WX_PRECOMP
-    #include "wx/app.h"
-    #include "wx/string.h"
-    #include "wx/utils.h"
-    #include "wx/intl.h"
-    #include "wx/log.h"
-    #include "wx/math.h"
-
-    #if wxUSE_GUI
-        #include "wx/window.h"
-        #include "wx/frame.h"
-        #include "wx/menu.h"
-        #include "wx/msgdlg.h"
-        #include "wx/textdlg.h"
-        #include "wx/textctrl.h"    // for wxTE_PASSWORD
-        #if wxUSE_ACCEL
-            #include "wx/menuitem.h"
-            #include "wx/accel.h"
-        #endif // wxUSE_ACCEL
-    #endif // wxUSE_GUI
-
     #include <algorithm>
     #include <string>
     #include <vector>
     #include <utility>
-
 #endif // WX_PRECOMP
+
+#include "wx/app.h"
+#include "wx/string.h"
+#include "wx/utils.h"
+#include "wx/intl.h"
+#include "wx/log.h"
+#include "wx/math.h"
+
+#if wxUSE_GUI
+    #include "wx/window.h"
+    #include "wx/frame.h"
+    #include "wx/menu.h"
+    #include "wx/msgdlg.h"
+    #include "wx/textdlg.h"
+    #include "wx/textctrl.h"    // for wxTE_PASSWORD
+    #if wxUSE_ACCEL
+        #include "wx/menuitem.h"
+        #include "wx/accel.h"
+    #endif // wxUSE_ACCEL
+#endif // wxUSE_GUI
 
 #include "wx/apptrait.h"
 

@@ -16,14 +16,13 @@
 #endif
 
 #include "wx/config.h"
+#include "wx/intl.h"
+#include "wx/log.h"
+#include "wx/app.h"
+#include "wx/utils.h"
+#include "wx/math.h"
 
 #ifndef WX_PRECOMP
-    #include "wx/intl.h"
-    #include "wx/log.h"
-    #include "wx/app.h"
-    #include "wx/utils.h"
-    #include "wx/math.h"
-
     #include <limits>
     #include <string>
     #include <vector>

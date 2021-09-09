@@ -11,11 +11,8 @@
 // For compilers that support precompilation, includes "wx.h".
 #include "wx/wxprec.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/dc.h"
-    #include "wx/sizer.h"
-#endif
-
+#include "wx/dc.h"
+#include "wx/sizer.h"
 #include "wx/vscroll.h"
 
 #include "wx/utils.h"   // For std::min/std::max().

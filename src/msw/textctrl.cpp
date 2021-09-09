@@ -15,25 +15,25 @@
 #if wxUSE_TEXTCTRL
 
 #ifndef WX_PRECOMP
-    #include "wx/textctrl.h"
-    #include "wx/settings.h"
-    #include "wx/brush.h"
-    #include "wx/dcclient.h"
-    #include "wx/utils.h"
-    #include "wx/intl.h"
-    #include "wx/log.h"
-    #include "wx/app.h"
-    #include "wx/menu.h"
-    #include "wx/math.h"
-    #include "wx/module.h"
-    #include "wx/wxcrtvararg.h"
-    #include "wx/msw/private.h"
-    #include "wx/msw/missing.h"
-
     #include <boost/nowide/convert.hpp>
 
     #include <string>
 #endif
+
+#include "wx/textctrl.h"
+#include "wx/settings.h"
+#include "wx/brush.h"
+#include "wx/dcclient.h"
+#include "wx/utils.h"
+#include "wx/intl.h"
+#include "wx/log.h"
+#include "wx/app.h"
+#include "wx/menu.h"
+#include "wx/math.h"
+#include "wx/module.h"
+#include "wx/wxcrtvararg.h"
+#include "wx/msw/private.h"
+#include "wx/msw/missing.h"
 
 #include "wx/fontutil.h"
 

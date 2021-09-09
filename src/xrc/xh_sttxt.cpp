@@ -14,10 +14,7 @@
 #if wxUSE_XRC && wxUSE_STATTEXT
 
 #include "wx/xrc/xh_sttxt.h"
-
-#ifndef WX_PRECOMP
-   #include "wx/stattext.h"
-#endif
+#include "wx/stattext.h"
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxStaticTextXmlHandler, wxXmlResourceHandler);
 

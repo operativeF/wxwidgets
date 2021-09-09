@@ -15,13 +15,10 @@
 #if wxUSE_TOOLBAR
 
 #include "wx/toolbar.h"
-
-#ifndef WX_PRECOMP
-    #include "wx/control.h"
-    #include "wx/frame.h"
-    #include "wx/settings.h"
-    #include "wx/menu.h"
-#endif
+#include "wx/control.h"
+#include "wx/frame.h"
+#include "wx/settings.h"
+#include "wx/menu.h"
 
 // ----------------------------------------------------------------------------
 // wxWidgets macros

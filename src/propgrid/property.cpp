@@ -14,10 +14,8 @@
 
 #if wxUSE_PROPGRID
 
-#ifndef WX_PRECOMP
-    #include "wx/dc.h"
-    #include "wx/log.h"
-#endif
+#include "wx/dc.h"
+#include "wx/log.h"
 
 // This define is necessary to prevent macro clearing
 #define __wxPG_SOURCE_FILE__

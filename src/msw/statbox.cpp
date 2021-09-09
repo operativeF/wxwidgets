@@ -17,17 +17,17 @@
 #include "wx/statbox.h"
 
 #ifndef WX_PRECOMP
-    #include "wx/app.h"
-    #include "wx/dcclient.h"
-    #include "wx/dcmemory.h"
-    #include "wx/image.h"
-    #include "wx/sizer.h"
-    #include "wx/msw/wrap/utils.h"
-    #include "wx/msw/private.h"
-    #include "wx/msw/missing.h"
-
     #include <boost/nowide/convert.hpp>
 #endif
+
+#include "wx/app.h"
+#include "wx/dcclient.h"
+#include "wx/dcmemory.h"
+#include "wx/image.h"
+#include "wx/sizer.h"
+#include "wx/msw/wrap/utils.h"
+#include "wx/msw/private.h"
+#include "wx/msw/missing.h"
 
 #include "wx/notebook.h"
 #include "wx/sysopt.h"

@@ -13,23 +13,20 @@
 
 
 #include "wx/display.h"
-
-#ifndef WX_PRECOMP
-    #include "wx/bitmap.h"
-    #include "wx/brush.h"
-    #include "wx/colour.h"
-    #include "wx/cursor.h"
-    #include "wx/font.h"
-    #include "wx/gdicmn.h"
-    #include "wx/gdiobj.h"
-    #include "wx/icon.h"
-    #include "wx/iconbndl.h"
-    #include "wx/log.h"
-    #include "wx/math.h"
-    #include "wx/palette.h"
-    #include "wx/pen.h"
-    #include "wx/settings.h"
-#endif
+#include "wx/bitmap.h"
+#include "wx/brush.h"
+#include "wx/colour.h"
+#include "wx/cursor.h"
+#include "wx/font.h"
+#include "wx/gdicmn.h"
+#include "wx/gdiobj.h"
+#include "wx/icon.h"
+#include "wx/iconbndl.h"
+#include "wx/log.h"
+#include "wx/math.h"
+#include "wx/palette.h"
+#include "wx/pen.h"
+#include "wx/settings.h"
 
 
 wxIMPLEMENT_ABSTRACT_CLASS(wxGDIObject, wxObject);

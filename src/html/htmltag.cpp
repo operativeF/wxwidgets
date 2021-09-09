@@ -13,10 +13,10 @@
 
 #include "wx/html/htmltag.h"
 
-#ifndef WX_PRECOMP
     #include "wx/colour.h"
     #include "wx/wxcrtvararg.h"
 
+#ifndef WX_PRECOMP
     #include <cstdio> // for vsscanf
     #include <vector>
 #endif

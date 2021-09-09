@@ -16,16 +16,16 @@
 #include "wx/infobar.h"
 
 #ifndef WX_PRECOMP
-    #include "wx/bmpbuttn.h"
-    #include "wx/button.h"
-    #include "wx/dcmemory.h"
-    #include "wx/settings.h"
-    #include "wx/statbmp.h"
-    #include "wx/stattext.h"
-    #include "wx/sizer.h"
-
     #include <fmt/core.h>
 #endif // WX_PRECOMP
+
+#include "wx/bmpbuttn.h"
+#include "wx/button.h"
+#include "wx/dcmemory.h"
+#include "wx/settings.h"
+#include "wx/statbmp.h"
+#include "wx/stattext.h"
+#include "wx/sizer.h"
 
 #include "wx/artprov.h"
 #include "wx/scopeguard.h"

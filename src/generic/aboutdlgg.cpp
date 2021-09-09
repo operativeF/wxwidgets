@@ -13,12 +13,10 @@
 
 #if wxUSE_ABOUTDLG
 
-#ifndef WX_PRECOMP
-    #include "wx/sizer.h"
-    #include "wx/statbmp.h"
-    #include "wx/stattext.h"
-    #include "wx/button.h"
-#endif //WX_PRECOMP
+#include "wx/sizer.h"
+#include "wx/statbmp.h"
+#include "wx/stattext.h"
+#include "wx/button.h"
 
 #include "wx/aboutdlg.h"
 #include "wx/generic/aboutdlgg.h"

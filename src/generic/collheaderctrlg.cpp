@@ -14,11 +14,8 @@
 #if wxUSE_COLLPANE
 
 #include "wx/collheaderctrl.h"
-
-#ifndef WX_PRECOMP
-    #include "wx/dcclient.h"
-    #include "wx/sizer.h"
-#endif // !WX_PRECOMP
+#include "wx/dcclient.h"
+#include "wx/sizer.h"
 
 #include "wx/renderer.h"
 

@@ -15,11 +15,11 @@
 #if wxUSE_HELP
 
 #ifndef WX_PRECOMP
-    #include "wx/app.h"
-    #include "wx/module.h"
     #include <fmt/core.h>
 #endif
 
+#include "wx/app.h"
+#include "wx/module.h"
 #include "wx/tipwin.h"
 #include "wx/cshelp.h"
 

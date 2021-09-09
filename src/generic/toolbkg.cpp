@@ -14,12 +14,9 @@
 
 #if wxUSE_TOOLBOOK
 
-#ifndef WX_PRECOMP
-    #include "wx/icon.h"
-    #include "wx/settings.h"
-    #include "wx/toolbar.h"
-#endif
-
+#include "wx/icon.h"
+#include "wx/settings.h"
+#include "wx/toolbar.h"
 #include "wx/imaglist.h"
 #include "wx/sysopt.h"
 #include "wx/toolbook.h"

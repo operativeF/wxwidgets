@@ -14,15 +14,14 @@
 
 #include "wx/imagtiff.h"
 #include "wx/versioninfo.h"
+#include "wx/log.h"
+#include "wx/app.h"
+#include "wx/intl.h"
+#include "wx/bitmap.h"
+#include "wx/module.h"
+#include "wx/wxcrtvararg.h"
 
 #ifndef WX_PRECOMP
-    #include "wx/log.h"
-    #include "wx/app.h"
-    #include "wx/intl.h"
-    #include "wx/bitmap.h"
-    #include "wx/module.h"
-    #include "wx/wxcrtvararg.h"
-
     #include <gsl/gsl>
 #endif
 

@@ -14,14 +14,12 @@
 
 #if wxUSE_MENUS
 
-#ifndef WX_PRECOMP
-    #include "wx/intl.h"
-    #include "wx/log.h"
-    #include "wx/menu.h"
-    #include "wx/frame.h"
-#endif
-
+#include "wx/intl.h"
+#include "wx/log.h"
+#include "wx/menu.h"
+#include "wx/frame.h"
 #include "wx/stockitem.h"
+#include "wx/stringutils.h"
 
 // ----------------------------------------------------------------------------
 // template lists

@@ -24,14 +24,11 @@
 
 #include "wx/treectrl.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/dcclient.h"
-    #include "wx/timer.h"
-    #include "wx/settings.h"
-    #include "wx/listbox.h"
-    #include "wx/textctrl.h"
-#endif
-
+#include "wx/dcclient.h"
+#include "wx/timer.h"
+#include "wx/settings.h"
+#include "wx/listbox.h"
+#include "wx/textctrl.h"
 #include "wx/generic/treectlg.h"
 #include "wx/imaglist.h"
 #include "wx/itemattr.h"

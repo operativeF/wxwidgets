@@ -14,11 +14,9 @@
 
 #if wxUSE_OWNER_DRAWN
 
-#ifndef WX_PRECOMP
-    #include "wx/msw/wrap/utils.h"
-    #include "wx/msw/private.h"
-    #include "wx/msw/wrapcctl.h"            // for HIMAGELIST
-#endif
+#include "wx/msw/wrap/utils.h"
+#include "wx/msw/private.h"
+#include "wx/msw/wrapcctl.h"            // for HIMAGELIST
 
 #include "wx/ownerdrw.h"
 #include "wx/msw/dc.h"

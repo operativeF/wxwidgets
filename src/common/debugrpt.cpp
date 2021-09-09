@@ -11,12 +11,10 @@
 #include "wx/wxprec.h"
 
 
-#ifndef WX_PRECOMP
-    #include "wx/app.h"
-    #include "wx/log.h"
-    #include "wx/intl.h"
-    #include "wx/utils.h"
-#endif // WX_PRECOMP
+#include "wx/app.h"
+#include "wx/log.h"
+#include "wx/intl.h"
+#include "wx/utils.h"
 
 WX_CHECK_BUILD_OPTIONS("wxQA")
 

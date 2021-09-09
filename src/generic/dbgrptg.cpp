@@ -15,16 +15,14 @@
 
 #include "wx/debugrpt.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/sizer.h"
-    #include "wx/checklst.h"
-    #include "wx/textctrl.h"
-    #include "wx/intl.h"
-    #include "wx/stattext.h"
-    #include "wx/filedlg.h"
-    #include "wx/valtext.h"
-    #include "wx/button.h"
-#endif // WX_PRECOMP
+#include "wx/sizer.h"
+#include "wx/checklst.h"
+#include "wx/textctrl.h"
+#include "wx/intl.h"
+#include "wx/stattext.h"
+#include "wx/filedlg.h"
+#include "wx/valtext.h"
+#include "wx/button.h"
 
 #include "wx/filename.h"
 #ifdef wxUSE_FFILE

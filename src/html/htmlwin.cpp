@@ -11,18 +11,16 @@
 
 #if wxUSE_HTML && wxUSE_STREAMS
 
-#ifndef WX_PRECOMP
-    #include "wx/list.h"
-    #include "wx/log.h"
-    #include "wx/intl.h"
-    #include "wx/dcclient.h"
-    #include "wx/frame.h"
-    #include "wx/dcmemory.h"
-    #include "wx/timer.h"
-    #include "wx/settings.h"
-    #include "wx/dataobj.h"
-    #include "wx/statusbr.h"
-#endif
+#include "wx/list.h"
+#include "wx/log.h"
+#include "wx/intl.h"
+#include "wx/dcclient.h"
+#include "wx/frame.h"
+#include "wx/dcmemory.h"
+#include "wx/timer.h"
+#include "wx/settings.h"
+#include "wx/dataobj.h"
+#include "wx/statusbr.h"
 
 #include "wx/html/htmlwin.h"
 #include "wx/html/htmlproc.h"

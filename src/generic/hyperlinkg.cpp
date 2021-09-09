@@ -24,14 +24,11 @@
 
 #include "wx/hyperlink.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/utils.h" // for wxLaunchDefaultBrowser
-    #include "wx/dcclient.h"
-    #include "wx/menu.h"
-    #include "wx/log.h"
-    #include "wx/dataobj.h"
-#endif
-
+#include "wx/utils.h" // for wxLaunchDefaultBrowser
+#include "wx/dcclient.h"
+#include "wx/menu.h"
+#include "wx/log.h"
+#include "wx/dataobj.h"
 #include "wx/clipbrd.h"
 #include "wx/renderer.h"
 

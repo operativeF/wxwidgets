@@ -16,12 +16,9 @@
 
 #include "wx/zstream.h"
 #include "wx/versioninfo.h"
-
-#ifndef WX_PRECOMP
-    #include "wx/intl.h"
-    #include "wx/log.h"
-    #include "wx/utils.h"
-#endif
+#include "wx/intl.h"
+#include "wx/log.h"
+#include "wx/utils.h"
 
 
 // normally, the compiler options should contain -I../zlib, but it is

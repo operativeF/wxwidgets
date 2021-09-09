@@ -16,13 +16,11 @@
 
 #include "wx/richtext/richtextbuffer.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/dc.h"
-    #include "wx/intl.h"
-    #include "wx/log.h"
-    #include "wx/dataobj.h"
-    #include "wx/module.h"
-#endif
+#include "wx/dc.h"
+#include "wx/intl.h"
+#include "wx/log.h"
+#include "wx/dataobj.h"
+#include "wx/module.h"
 
 #include "wx/settings.h"
 #include "wx/filename.h"

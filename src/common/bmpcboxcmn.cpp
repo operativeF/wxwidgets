@@ -14,11 +14,9 @@
 
 #if wxUSE_BITMAPCOMBOBOX
 
-#ifndef WX_PRECOMP
-    #include "wx/log.h"
-    #include "wx/dc.h"
-    #include "wx/ctrlsub.h"
-#endif
+#include "wx/log.h"
+#include "wx/dc.h"
+#include "wx/ctrlsub.h"
 
 #include "wx/settings.h"
 

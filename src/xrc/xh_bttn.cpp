@@ -14,10 +14,7 @@
 #if wxUSE_XRC && wxUSE_BUTTON
 
 #include "wx/xrc/xh_bttn.h"
-
-#ifndef WX_PRECOMP
-    #include "wx/button.h"
-#endif
+#include "wx/button.h"
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxButtonXmlHandler, wxXmlResourceHandler);
 

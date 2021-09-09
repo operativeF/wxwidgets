@@ -10,10 +10,7 @@
 #include "wx/wxprec.h"
 
 
-#ifndef WX_PRECOMP
-    #include "wx/wxcrt.h"
-#endif // WX_PRECOMP
-
+#include "wx/wxcrt.h"
 #include "wx/msw/debughlp.h"
 
 #if wxUSE_DBGHELP && wxUSE_DYNLIB_CLASS

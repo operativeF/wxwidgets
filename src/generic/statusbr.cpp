@@ -15,13 +15,10 @@
 #if wxUSE_STATUSBAR
 
 #include "wx/statusbr.h"
-
-#ifndef WX_PRECOMP
-    #include "wx/settings.h"
-    #include "wx/dcclient.h"
-    #include "wx/toplevel.h"
-    #include "wx/control.h"
-#endif
+#include "wx/settings.h"
+#include "wx/dcclient.h"
+#include "wx/toplevel.h"
+#include "wx/control.h"
 
 #ifdef __WXGTK20__
     #include "wx/gtk/private.h"

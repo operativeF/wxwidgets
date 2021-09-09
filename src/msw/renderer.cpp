@@ -13,16 +13,16 @@
 
 
 #ifndef WX_PRECOMP
-    #include "wx/window.h"
-    #include "wx/control.h"     // for wxControl::Ellipsize()
-    #include "wx/dc.h"
-    #include "wx/settings.h"
-    #include "wx/msw/private.h"
-    #include "wx/msw/wrapcctl.h"
-    #include "wx/math.h"
-
     #include <string>
 #endif //WX_PRECOMP
+
+#include "wx/window.h"
+#include "wx/control.h"     // for wxControl::Ellipsize()
+#include "wx/dc.h"
+#include "wx/settings.h"
+#include "wx/msw/private.h"
+#include "wx/msw/wrapcctl.h"
+#include "wx/math.h"
 
 #include "wx/dcgraph.h"
 #include "wx/scopeguard.h"

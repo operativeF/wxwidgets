@@ -14,21 +14,18 @@
 
 #if wxUSE_BUTTON
 
-#ifndef WX_PRECOMP
-    #include "wx/button.h"
-    #include "wx/app.h"
-    #include "wx/brush.h"
-    #include "wx/panel.h"
-    #include "wx/bmpbuttn.h"
-    #include "wx/settings.h"
-    #include "wx/dcscreen.h"
-    #include "wx/dcclient.h"
-    #include "wx/toplevel.h"
-    #include "wx/msw/wrapcctl.h"
-    #include "wx/msw/private.h"
-    #include "wx/msw/missing.h"
-#endif
-
+#include "wx/button.h"
+#include "wx/app.h"
+#include "wx/brush.h"
+#include "wx/panel.h"
+#include "wx/bmpbuttn.h"
+#include "wx/settings.h"
+#include "wx/dcscreen.h"
+#include "wx/dcclient.h"
+#include "wx/toplevel.h"
+#include "wx/msw/wrapcctl.h"
+#include "wx/msw/private.h"
+#include "wx/msw/missing.h"
 #include "wx/imaglist.h"
 #include "wx/stockitem.h"
 #include "wx/msw/private/button.h"

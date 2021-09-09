@@ -15,15 +15,14 @@
 #include "wx/wxprec.h"
 
 #ifndef WX_PRECOMP
-    #include "wx/intl.h"
-    #include "wx/log.h"
-    #include "wx/utils.h"
-    #include "wx/hashmap.h"
-
     #include <unordered_map>
 #endif
 
 #include "wx/strconv.h"
+#include "wx/intl.h"
+#include "wx/log.h"
+#include "wx/utils.h"
+#include "wx/hashmap.h"
 
 #if defined(__WIN32__)
     #include "wx/msw/private.h"

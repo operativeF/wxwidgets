@@ -14,10 +14,6 @@
 #if wxUSE_STREAMS && wxUSE_GIF
 
 #ifndef WX_PRECOMP
-    #include "wx/palette.h"
-    #include "wx/intl.h"
-    #include "wx/log.h"
-
     #include <array>
     #include <vector>
     #include <tuple>
@@ -25,6 +21,9 @@
     #include <gsl/gsl>
 #endif
 
+#include "wx/palette.h"
+#include "wx/intl.h"
+#include "wx/log.h"
 #include "wx/gifdecod.h"
 #include "wx/scopedarray.h"
 #include "wx/scopedptr.h"

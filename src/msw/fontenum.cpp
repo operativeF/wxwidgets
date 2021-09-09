@@ -16,11 +16,9 @@
 
 #include "wx/fontenum.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/gdicmn.h"
-    #include "wx/font.h"
-    #include "wx/msw/private.h"
-#endif
+#include "wx/gdicmn.h"
+#include "wx/font.h"
+#include "wx/msw/private.h"
 
 #include "wx/encinfo.h"
 #include "wx/fontutil.h"

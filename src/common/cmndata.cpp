@@ -16,15 +16,13 @@
 
 #include "wx/cmndata.h"
 
-#ifndef WX_PRECOMP
-    #if defined(__WXMSW__)
-        #include "wx/msw/wrapcdlg.h"
-    #endif // MSW
-    #include "wx/app.h"
-    #include "wx/gdicmn.h"
-    #include "wx/log.h"
-    #include "wx/utils.h"
-#endif
+#if defined(__WXMSW__)
+    #include "wx/msw/wrapcdlg.h"
+#endif // MSW
+#include "wx/app.h"
+#include "wx/gdicmn.h"
+#include "wx/log.h"
+#include "wx/utils.h"
 
 #include "wx/prntbase.h"
 #include "wx/printdlg.h"

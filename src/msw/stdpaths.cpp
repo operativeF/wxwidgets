@@ -16,10 +16,7 @@
 
 #include "wx/stdpaths.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/utils.h"
-#endif //WX_PRECOMP
-
+#include "wx/utils.h"
 #include "wx/dynlib.h"
 #include "wx/filename.h"
 

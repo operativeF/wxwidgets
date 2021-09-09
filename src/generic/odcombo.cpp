@@ -16,15 +16,15 @@
 #include "wx/odcombo.h"
 
 #ifndef WX_PRECOMP
-    #include "wx/log.h"
-    #include "wx/combobox.h"
-    #include "wx/dcclient.h"
-    #include "wx/settings.h"
-    #include "wx/dialog.h"
-    #include "wx/textctrl.h"
-
     #include <utility>
 #endif
+
+#include "wx/log.h"
+#include "wx/combobox.h"
+#include "wx/dcclient.h"
+#include "wx/settings.h"
+#include "wx/dialog.h"
+#include "wx/textctrl.h"
 
 #include "wx/combo.h"
 

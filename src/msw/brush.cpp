@@ -12,16 +12,14 @@
 #include "wx/wxprec.h"
 
 
-#ifndef WX_PRECOMP
-    #include "wx/brush.h"
-    #include "wx/list.h"
-    #include "wx/utils.h"
-    #include "wx/app.h"
-    #include "wx/bitmap.h"
-    #include "wx/msw/private.h"
+#include "wx/brush.h"
+#include "wx/list.h"
+#include "wx/utils.h"
+#include "wx/app.h"
+#include "wx/bitmap.h"
+#include "wx/msw/private.h"
 
-    #include "wx/msw/wrap/utils.h"
-#endif // WX_PRECOMP
+#include "wx/msw/wrap/utils.h"
 
 // ----------------------------------------------------------------------------
 // private classes

@@ -20,13 +20,13 @@
 #include "wx/dynload.h"
 
 #ifndef WX_PRECOMP
-    #include "wx/intl.h"
-    #include "wx/app.h"
-    #include "wx/msw/private.h"
-
     #include <boost/nowide/stackstring.hpp>
     #include <gsl/gsl>
 #endif
+
+#include "wx/intl.h"
+#include "wx/app.h"
+#include "wx/msw/private.h"
 
 #include "wx/msw/htmlhelp.h"
 

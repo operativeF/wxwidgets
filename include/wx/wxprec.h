@@ -40,7 +40,7 @@
 #endif
 
 // include the most common wx headers
-#include "wx/wx.h"
+//#include "wx/wx.h"
 
 // Include standard headers
 #include <algorithm>

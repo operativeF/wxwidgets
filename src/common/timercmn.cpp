@@ -19,11 +19,9 @@
 
 #if wxUSE_TIMER
 
-#ifndef WX_PRECOMP
-    #include "wx/app.h"
-    #include "wx/timer.h"
-#endif
 
+#include "wx/app.h"
+#include "wx/timer.h"
 #include "wx/apptrait.h"
 #include "wx/private/timer.h"
 

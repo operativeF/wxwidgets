@@ -10,6 +10,12 @@
 
 #include "wx/richtext/richtextfontpage.h"
 
+#include "wx/combobox.h"
+#include "wx/checkbox.h"
+#include "wx/listbox.h"
+#include "wx/sizer.h"
+#include "wx/stattext.h"
+
 /*!
  * wxRichTextFontPage type definition
  */

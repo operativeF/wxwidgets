@@ -12,13 +12,12 @@
 
 
 #ifndef WX_PRECOMP
-    #include "wx/app.h"
-    #include "wx/log.h"
-    #include "wx/intl.h"
-
     #include <memory>
 #endif //WX_PRECOMP
 
+#include "wx/app.h"
+#include "wx/log.h"
+#include "wx/intl.h"
 #include "wx/apptrait.h"
 #include "wx/renderer.h"
 

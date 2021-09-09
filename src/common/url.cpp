@@ -17,13 +17,12 @@
 #include "wx/url.h"
 
 #ifndef WX_PRECOMP
-    #include "wx/list.h"
-    #include "wx/utils.h"
-    #include "wx/module.h"
-
     #include <string>
 #endif
 
+#include "wx/list.h"
+#include "wx/utils.h"
+#include "wx/module.h"
 
 wxIMPLEMENT_CLASS(wxURL, wxURI);
 

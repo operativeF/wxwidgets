@@ -15,12 +15,12 @@
 #if wxUSE_FINDREPLDLG
 
 #ifndef WX_PRECOMP
-    #include "wx/msw/wrapcdlg.h"
-    #include "wx/intl.h"
-    #include "wx/log.h"
-
     #include <boost/nowide/convert.hpp>
 #endif
+
+#include "wx/msw/wrapcdlg.h"
+#include "wx/intl.h"
+#include "wx/log.h"
 
 #include "wx/fdrepdlg.h"
 

@@ -17,16 +17,15 @@
 #if wxUSE_PRINTING_ARCHITECTURE && (!defined(__WXUNIVERSAL__) || !wxUSE_POSTSCRIPT_ARCHITECTURE_IN_MSW)
 
 #ifndef WX_PRECOMP
-    #include "wx/msw/wrapcdlg.h"
-    #include "wx/app.h"
-    #include "wx/dcprint.h"
-    #include "wx/cmndata.h"
-
     #include <boost/nowide/stackstring.hpp>
 
     #include <cstdlib>
 #endif
 
+#include "wx/msw/wrapcdlg.h"
+#include "wx/app.h"
+#include "wx/dcprint.h"
+#include "wx/cmndata.h"
 #include "wx/printdlg.h"
 #include "wx/msw/printdlg.h"
 #include "wx/msw/dcprint.h"

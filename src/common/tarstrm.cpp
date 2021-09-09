@@ -13,13 +13,9 @@
 #if wxUSE_TARSTREAM
 
 #include "wx/tarstrm.h"
-
-#ifndef WX_PRECOMP
-    #include "wx/intl.h"
-    #include "wx/log.h"
-    #include "wx/utils.h"
-#endif
-
+#include "wx/intl.h"
+#include "wx/log.h"
+#include "wx/utils.h"
 #include "wx/buffer.h"
 #include "wx/datetime.h"
 

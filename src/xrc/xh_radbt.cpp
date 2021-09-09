@@ -14,10 +14,7 @@
 #if wxUSE_XRC && wxUSE_RADIOBTN
 
 #include "wx/xrc/xh_radbt.h"
-
-#ifndef WX_PRECOMP
-    #include "wx/radiobut.h"
-#endif
+#include "wx/radiobut.h"
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxRadioButtonXmlHandler, wxXmlResourceHandler);
 

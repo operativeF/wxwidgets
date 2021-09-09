@@ -13,23 +13,20 @@
 
 
 #include "wx/frame.h"
-
-#ifndef WX_PRECOMP
-    #include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
-    #include "wx/app.h"
-    #include "wx/menu.h"
-    #include "wx/utils.h"
-    #include "wx/dialog.h"
-    #include "wx/settings.h"
-    #include "wx/dcclient.h"
-    #include "wx/mdi.h"
-    #include "wx/panel.h"
-    #include "wx/log.h"
-    #include "wx/toolbar.h"
-    #include "wx/statusbr.h"
-    #include "wx/menuitem.h"
-    #include "wx/msw/private.h"
-#endif // WX_PRECOMP
+#include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
+#include "wx/app.h"
+#include "wx/menu.h"
+#include "wx/utils.h"
+#include "wx/dialog.h"
+#include "wx/settings.h"
+#include "wx/dcclient.h"
+#include "wx/mdi.h"
+#include "wx/panel.h"
+#include "wx/log.h"
+#include "wx/toolbar.h"
+#include "wx/statusbr.h"
+#include "wx/menuitem.h"
+#include "wx/msw/private.h"
 
 
 #include "wx/generic/statusbr.h"

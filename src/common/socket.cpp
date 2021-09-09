@@ -22,21 +22,21 @@
 #include "wx/socket.h"
 
 #ifndef WX_PRECOMP
-    #include "wx/object.h"
-    #include "wx/intl.h"
-    #include "wx/log.h"
-    #include "wx/event.h"
-    #include "wx/app.h"
-    #include "wx/utils.h"
-    #include "wx/timer.h"
-    #include "wx/module.h"
-    #include "wx/filefn.h"
-    #include "wx/stopwatch.h"
-
     #include <string>
 
     #include <gsl/gsl>
 #endif
+
+#include "wx/object.h"
+#include "wx/intl.h"
+#include "wx/log.h"
+#include "wx/event.h"
+#include "wx/app.h"
+#include "wx/utils.h"
+#include "wx/timer.h"
+#include "wx/module.h"
+#include "wx/filefn.h"
+#include "wx/stopwatch.h"
 
 #include "wx/apptrait.h"
 #include "wx/sckaddr.h"

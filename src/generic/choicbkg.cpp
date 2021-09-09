@@ -16,12 +16,9 @@
 
 #include "wx/choicebk.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/settings.h"
-    #include "wx/choice.h"
-    #include "wx/sizer.h"
-#endif
-
+#include "wx/settings.h"
+#include "wx/choice.h"
+#include "wx/sizer.h"
 #include "wx/imaglist.h"
 
 // ----------------------------------------------------------------------------

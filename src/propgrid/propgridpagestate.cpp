@@ -14,14 +14,12 @@
 
 #if wxUSE_PROPGRID
 
-#ifndef WX_PRECOMP
-    #include "wx/bitmap.h"
-    #include "wx/dcclient.h"
-    #include "wx/event.h"
-    #include "wx/font.h"
-    #include "wx/log.h"
-    #include "wx/validate.h"
-#endif
+#include "wx/bitmap.h"
+#include "wx/dcclient.h"
+#include "wx/event.h"
+#include "wx/font.h"
+#include "wx/log.h"
+#include "wx/validate.h"
 
 // This define is necessary to prevent macro clearing
 #define __wxPG_SOURCE_FILE__

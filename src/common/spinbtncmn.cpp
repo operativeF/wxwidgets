@@ -12,9 +12,7 @@
 #include "wx/wxprec.h"
 
 
-#ifndef WX_PRECOMP
-    #include "wx/app.h"
-#endif
+#include "wx/app.h"
 
 #if wxUSE_SPINBTN
 

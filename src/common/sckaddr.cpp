@@ -16,16 +16,15 @@
 #if wxUSE_SOCKETS
 
 #ifndef WX_PRECOMP
-    #include "wx/object.h"
-    #include "wx/log.h"
-    #include "wx/intl.h"
-    #include "wx/thread.h"
-
     #include <tuple>
 
     #include <memory.h>
 #endif // !WX_PRECOMP
 
+#include "wx/object.h"
+#include "wx/log.h"
+#include "wx/intl.h"
+#include "wx/thread.h"
 #include "wx/socket.h"
 #include "wx/sckaddr.h"
 #include "wx/private/socket.h"

@@ -17,15 +17,15 @@
 #include "wx/generic/grideditors.h"
 
 #ifndef WX_PRECOMP
-    #include "wx/textctrl.h"
-    #include "wx/dc.h"
-    #include "wx/combobox.h"
-    #include "wx/settings.h"
-    #include "wx/log.h"
-    #include "wx/checkbox.h"
-
     #include <fmt/core.h>
 #endif // WX_PRECOMP
+
+#include "wx/textctrl.h"
+#include "wx/dc.h"
+#include "wx/combobox.h"
+#include "wx/settings.h"
+#include "wx/log.h"
+#include "wx/checkbox.h"
 
 #include "wx/tokenzr.h"
 #include "wx/renderer.h"

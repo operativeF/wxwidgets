@@ -15,6 +15,8 @@
 
 #if wxUSE_PROPGRID
 
+#include "wx/arrstr.h"
+
 #include "wx/propgrid/property.h"
 #include "wx/propgrid/propgridpagestate.h"
 

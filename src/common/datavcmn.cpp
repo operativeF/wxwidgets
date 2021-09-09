@@ -16,15 +16,14 @@
 #include "wx/dataview.h"
 
 #ifndef WX_PRECOMP
-    #include "wx/dc.h"
-    #include "wx/settings.h"
-    #include "wx/log.h"
-    #include "wx/crt.h"
-
     #include <fmt/core.h>
     #include <gsl/gsl>
 #endif
 
+#include "wx/dc.h"
+#include "wx/settings.h"
+#include "wx/log.h"
+#include "wx/crt.h"
 #include "wx/datectrl.h"
 #include "wx/except.h"
 #include "wx/spinctrl.h"

@@ -13,14 +13,13 @@
 
 
 #ifndef WX_PRECOMP
-    #include "wx/dcclient.h"
-
     #include <algorithm>
     #include <array>
 #endif //WX_PRECOMP
 
 #if wxUSE_HTML
 
+#include "wx/dcclient.h"
 #include "wx/htmllbox.h"
 
 #include "wx/html/htmlcell.h"

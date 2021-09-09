@@ -18,14 +18,14 @@
 
 #include "wx/dirdlg.h"
 #include "wx/modalhook.h"
+#include "wx/utils.h"
+#include "wx/dialog.h"
+#include "wx/log.h"
+#include "wx/app.h"     // for GetComCtl32Version()
+#include "wx/msw/private.h"
+#include "wx/stringutils.h"
 
 #ifndef WX_PRECOMP
-    #include "wx/utils.h"
-    #include "wx/dialog.h"
-    #include "wx/log.h"
-    #include "wx/app.h"     // for GetComCtl32Version()
-    #include "wx/msw/private.h"
-
     #include <boost/nowide/convert.hpp>
     #include <boost/nowide/stackstring.hpp>
 #endif

@@ -20,10 +20,7 @@
 #if wxUSE_LONGLONG
 
 #include "wx/longlong.h"
-
-#ifndef WX_PRECOMP
-    #include "wx/math.h"       // for fabs()
-#endif
+#include "wx/math.h"       // for fabs()
 
 #if wxUSE_STREAMS
     #include "wx/txtstrm.h"

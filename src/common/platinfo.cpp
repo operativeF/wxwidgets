@@ -13,12 +13,8 @@
 
 
 #include "wx/platinfo.h"
-
-#ifndef WX_PRECOMP
-    #include "wx/app.h"
-    #include "wx/utils.h"
-#endif //WX_PRECOMP
-
+#include "wx/app.h"
+#include "wx/utils.h"
 #include "wx/apptrait.h"
 
 namespace

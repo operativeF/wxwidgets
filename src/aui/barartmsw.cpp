@@ -11,12 +11,10 @@
 
 #if wxUSE_AUI && wxUSE_UXTHEME
 
-#ifndef WX_PRECOMP
-    #include "wx/bitmap.h"
-    #include "wx/dcclient.h"
-    #include "wx/app.h"
-    #include "wx/dc.h"
-#endif
+#include "wx/bitmap.h"
+#include "wx/dcclient.h"
+#include "wx/app.h"
+#include "wx/dc.h"
 
 #include "wx/aui/auibar.h"
 #include "wx/aui/framemanager.h"

@@ -14,11 +14,11 @@
 
 
 #ifndef WX_PRECOMP
-    #include "wx/crt.h"
-
     #include <vector>
 #endif
 
+#include "wx/arrstr.h"
+#include "wx/crt.h"
 #include "wx/uri.h"
 
 

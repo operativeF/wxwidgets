@@ -21,17 +21,15 @@
 
 #if !defined(wxUSE_DATETIME) || wxUSE_DATETIME
 
-#ifndef WX_PRECOMP
-    #ifdef __WINDOWS__
-        #include "wx/msw/wrapwin.h"
-    #endif
-    #include "wx/string.h"
-    #include "wx/log.h"
-    #include "wx/intl.h"
-    #include "wx/stopwatch.h"           // for wxGetLocalTimeMillis()
-    #include "wx/module.h"
-    #include "wx/crt.h"
-#endif // WX_PRECOMP
+#ifdef __WINDOWS__
+    #include "wx/msw/wrapwin.h"
+#endif
+#include "wx/string.h"
+#include "wx/log.h"
+#include "wx/intl.h"
+#include "wx/stopwatch.h"           // for wxGetLocalTimeMillis()
+#include "wx/module.h"
+#include "wx/crt.h"
 
 #include "wx/thread.h"
 

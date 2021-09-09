@@ -26,7 +26,13 @@ class WXDLLIMPEXP_FWD_PROPGRID wxPGArrayEditorDialog;
 #include "wx/textctrl.h"
 #include "wx/valtext.h"
 
-#include <gsl/gsl>
+// TODO: Replace wxCHOICEDLG_STYLE
+#include "wx/generic/choicdgg.h"
+
+#ifndef WX_PRECOMP
+    #include <gsl/gsl>
+#endif
+
 
 enum
 {

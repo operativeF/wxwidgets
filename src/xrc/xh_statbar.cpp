@@ -15,12 +15,10 @@
 
 #include "wx/xrc/xh_statbar.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/string.h"
-    #include "wx/log.h"
-    #include "wx/frame.h"
-    #include "wx/statusbr.h"
-#endif
+#include "wx/string.h"
+#include "wx/log.h"
+#include "wx/frame.h"
+#include "wx/statusbr.h"
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxStatusBarXmlHandler, wxXmlResourceHandler);
 

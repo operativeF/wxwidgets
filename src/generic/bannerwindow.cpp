@@ -14,12 +14,10 @@
 
 #include "wx/bannerwindow.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/bitmap.h"
-    #include "wx/colour.h"
-#endif
-
+#include "wx/bitmap.h"
+#include "wx/colour.h"
 #include "wx/dcbuffer.h"
+#include "wx/stringutils.h"
 
 // Some constants for banner layout, currently they're hard coded but we could
 // easily make them configurable if needed later.

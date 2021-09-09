@@ -15,6 +15,7 @@
 #if wxUSE_COMMANDLINKBUTTON
 
 #include "wx/button.h"
+#include "wx/stringutils.h"
 
 #include <string>
 

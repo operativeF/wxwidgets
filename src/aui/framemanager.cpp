@@ -20,17 +20,14 @@
 #include "wx/aui/auibar.h"
 #include "wx/mdi.h"
 #include "wx/wupdlock.h"
-
-#ifndef WX_PRECOMP
-    #include "wx/panel.h"
-    #include "wx/settings.h"
-    #include "wx/app.h"
-    #include "wx/dcclient.h"
-    #include "wx/dcscreen.h"
-    #include "wx/toolbar.h"
-    #include "wx/image.h"
-    #include "wx/statusbr.h"
-#endif
+#include "wx/panel.h"
+#include "wx/settings.h"
+#include "wx/app.h"
+#include "wx/dcclient.h"
+#include "wx/dcscreen.h"
+#include "wx/toolbar.h"
+#include "wx/image.h"
+#include "wx/statusbr.h"
 
 WX_CHECK_BUILD_OPTIONS("wxAUI")
 

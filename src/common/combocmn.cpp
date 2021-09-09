@@ -11,8 +11,10 @@
 #include "wx/wxprec.h"
 
 
+#include "wx/app.h"
 #include "wx/combo.h"
 #include "wx/display.h"
+#include "wx/dc.h"
 
 #ifdef __WXMSW__
 #include "wx/msw/private.h"

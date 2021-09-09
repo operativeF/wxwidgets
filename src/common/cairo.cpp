@@ -30,10 +30,8 @@
 #include <cairo-quartz.h>
 #endif
 
-#ifndef WX_PRECOMP
-    #include "wx/module.h"
-    #include "wx/log.h"
-#endif
+#include "wx/module.h"
+#include "wx/log.h"
 
 #define wxCAIRO_METHOD_TYPE(name) \
     wxCairo##name##_t

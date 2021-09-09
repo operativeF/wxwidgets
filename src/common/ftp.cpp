@@ -20,14 +20,11 @@
 
 #if wxUSE_PROTOCOL_FTP
 
-#ifndef WX_PRECOMP
-    #include "wx/intl.h"
-    #include "wx/log.h"
-    #include "wx/string.h"
-    #include "wx/utils.h"
-    #include "wx/wxcrtvararg.h"
-#endif // WX_PRECOMP
-
+#include "wx/intl.h"
+#include "wx/log.h"
+#include "wx/string.h"
+#include "wx/utils.h"
+#include "wx/wxcrtvararg.h"
 #include "wx/sckaddr.h"
 #include "wx/socket.h"
 #include "wx/url.h"

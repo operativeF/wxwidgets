@@ -15,21 +15,19 @@
 
 #if wxUSE_CONFIG && wxUSE_FILECONFIG
 
-#ifndef   WX_PRECOMP
-    #include  "wx/dynarray.h"
-    #include  "wx/string.h"
-    #include  "wx/intl.h"
-    #include  "wx/log.h"
-    #include  "wx/app.h"
-    #include  "wx/utils.h"    // for wxGetHomeDir
-    #if wxUSE_STREAMS
-        #include  "wx/stream.h"
-    #endif // wxUSE_STREAMS
+#include  "wx/dynarray.h"
+#include  "wx/string.h"
+#include  "wx/intl.h"
+#include  "wx/log.h"
+#include  "wx/app.h"
+#include  "wx/utils.h"    // for wxGetHomeDir
+#if wxUSE_STREAMS
+    #include  "wx/stream.h"
+#endif // wxUSE_STREAMS
 
-    #if defined(__WINDOWS__)
-        #include "wx/msw/private.h"
-    #endif  //windows.h
-#endif  //WX_PRECOMP
+#if defined(__WINDOWS__)
+    #include "wx/msw/private.h"
+#endif  //windows.h
 
 #include  "wx/file.h"
 #include  "wx/textfile.h"

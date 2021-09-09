@@ -13,16 +13,13 @@
 
 #if wxUSE_IMAGE && wxUSE_PCX
 
-#ifndef WX_PRECOMP
-    #include "wx/object.h"
-    #include "wx/list.h"
-    #include "wx/log.h"
-    #include "wx/intl.h"
-    #include "wx/palette.h"
-    #include "wx/hash.h"
-    #include "wx/module.h"
-#endif
-
+#include "wx/object.h"
+#include "wx/list.h"
+#include "wx/log.h"
+#include "wx/intl.h"
+#include "wx/palette.h"
+#include "wx/hash.h"
+#include "wx/module.h"
 #include "wx/imagpcx.h"
 #include "wx/wfstream.h"
 

@@ -15,14 +15,11 @@
 #if wxUSE_FONTMAP
 
 #include "wx/fontmap.h"
-
-#ifndef WX_PRECOMP
-    #include "wx/app.h"
-    #include "wx/log.h"
-    #include "wx/intl.h"
-    #include "wx/msgdlg.h"
-    #include "wx/choicdlg.h"
-#endif // PCH
+#include "wx/app.h"
+#include "wx/log.h"
+#include "wx/intl.h"
+#include "wx/msgdlg.h"
+#include "wx/choicdlg.h"
 
 #if wxUSE_CONFIG
     #include "wx/config.h"

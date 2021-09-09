@@ -15,10 +15,7 @@
 
 #if wxUSE_ARTPROVIDER_STD
 
-#ifndef WX_PRECOMP
-    #include "wx/image.h"
-#endif
-
+#include "wx/image.h"
 #include "wx/artprov.h"
 
 // ----------------------------------------------------------------------------

@@ -17,21 +17,22 @@
 #include "wx/splitter.h"
 
 #ifndef WX_PRECOMP
-    #include "wx/utils.h"
-    #include "wx/log.h"
-
-    #include "wx/dcclient.h"
-    #include "wx/dcscreen.h"
-
-    #include "wx/window.h"
-    #include "wx/dialog.h"
-    #include "wx/frame.h"
-
-    #include "wx/settings.h"
-
     #include <limits>
     #include <string>
 #endif
+
+#include "wx/utils.h"
+#include "wx/log.h"
+
+#include "wx/dcclient.h"
+#include "wx/dcscreen.h"
+
+#include "wx/window.h"
+#include "wx/dialog.h"
+#include "wx/frame.h"
+
+#include "wx/settings.h"
+
 
 #ifdef __WXOSX__
     #include "wx/osx/private/available.h"

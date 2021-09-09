@@ -16,12 +16,9 @@
 #if wxUSE_SYSTEM_OPTIONS
 
 #include "wx/sysopt.h"
-
-#ifndef WX_PRECOMP
-    #include "wx/app.h"
-    #include "wx/list.h"
-    #include "wx/string.h"
-#endif
+#include "wx/app.h"
+#include "wx/list.h"
+#include "wx/string.h"
 
 // ----------------------------------------------------------------------------
 // private globals

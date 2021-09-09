@@ -15,9 +15,7 @@
 
 #include "wx/xrc/xh_slidr.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/slider.h"
-#endif
+#include "wx/slider.h"
 
 constexpr long DEFAULT_VALUE = 0;
 constexpr long DEFAULT_MIN = 0;

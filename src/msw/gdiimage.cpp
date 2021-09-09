@@ -13,21 +13,21 @@
 
 
 #ifndef WX_PRECOMP
-    #include "wx/log.h"
-    #include "wx/app.h"
-    #include "wx/bitmap.h"
-    #include "wx/msw/private.h"
-
-    #if wxUSE_PNG_RESOURCE_HANDLER
-        #include "wx/image.h"
-        #include "wx/utils.h"       // For wxLoadUserResource()
-    #endif
-    
     #include <string>
 
     #include <boost/nowide/convert.hpp>
 #endif // WX_PRECOMP
 
+#include "wx/log.h"
+#include "wx/app.h"
+#include "wx/bitmap.h"
+#include "wx/msw/private.h"
+#include "wx/stringutils.h"
+
+#if wxUSE_PNG_RESOURCE_HANDLER
+    #include "wx/image.h"
+    #include "wx/utils.h"       // For wxLoadUserResource()
+#endif
 
 #include "wx/msw/gdiimage.h"
 

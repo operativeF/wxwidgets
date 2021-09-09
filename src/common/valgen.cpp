@@ -15,26 +15,25 @@
 #if wxUSE_VALIDATORS
 
 #ifndef WX_PRECOMP
-    #include "wx/dynarray.h"
-    #include "wx/utils.h"
-    #include "wx/intl.h"
-    #include "wx/choice.h"
-    #include "wx/combobox.h"
-    #include "wx/radiobox.h"
-    #include "wx/radiobut.h"
-    #include "wx/checkbox.h"
-    #include "wx/scrolbar.h"
-    #include "wx/gauge.h"
-    #include "wx/stattext.h"
-    #include "wx/textctrl.h"
-    #include "wx/button.h"
-    #include "wx/listbox.h"
-    #include "wx/slider.h"
-    #include "wx/checklst.h"
-
     #include <fmt/core.h>
 #endif
 
+#include "wx/dynarray.h"
+#include "wx/utils.h"
+#include "wx/intl.h"
+#include "wx/choice.h"
+#include "wx/combobox.h"
+#include "wx/radiobox.h"
+#include "wx/radiobut.h"
+#include "wx/checkbox.h"
+#include "wx/scrolbar.h"
+#include "wx/gauge.h"
+#include "wx/stattext.h"
+#include "wx/textctrl.h"
+#include "wx/button.h"
+#include "wx/listbox.h"
+#include "wx/slider.h"
+#include "wx/checklst.h"
 #include "wx/spinctrl.h"
 // #include "wx/datectrl.h" -- can't use it in this (core) file for now
 

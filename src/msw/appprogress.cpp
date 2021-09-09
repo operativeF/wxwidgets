@@ -12,10 +12,7 @@
 
 #if wxUSE_TASKBARBUTTON
 
-#ifndef WX_PRECOMP
-    #include "wx/toplevel.h"
-#endif
-
+#include "wx/toplevel.h"
 #include "wx/appprogress.h"
 #include "wx/msw/taskbarbutton.h"
 

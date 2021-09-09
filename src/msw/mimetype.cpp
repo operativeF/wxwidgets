@@ -17,18 +17,18 @@
 #include "wx/msw/mimetype.h"
 
 #ifndef WX_PRECOMP
-    #include "wx/string.h"
-    #include "wx/intl.h"
-    #include "wx/log.h"
-    #include "wx/crt.h"
-    #if wxUSE_GUI
-        #include "wx/icon.h"
-        #include "wx/msgdlg.h"
-    #endif
-    #include "wx/msw/private.h"
-
     #include <fmt/core.h>
 #endif //WX_PRECOMP
+
+#include "wx/string.h"
+#include "wx/intl.h"
+#include "wx/log.h"
+#include "wx/crt.h"
+#if wxUSE_GUI
+    #include "wx/icon.h"
+    #include "wx/msgdlg.h"
+#endif
+#include "wx/msw/private.h"
 
 #include "wx/file.h"
 #include "wx/iconloc.h"

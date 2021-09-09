@@ -12,9 +12,7 @@
 #include "wx/wxprec.h"
 
 
-#ifndef WX_PRECOMP
-    #include "wx/textctrl.h"
-#endif //WX_PRECOMP
+#include "wx/textctrl.h"
 
 #include "wx/spinctrl.h"
 #include "wx/tooltip.h"

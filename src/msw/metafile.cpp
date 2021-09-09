@@ -13,13 +13,13 @@
 
 
 #ifndef WX_PRECOMP
-    #include "wx/utils.h"
-    #include "wx/app.h"
-    #include "wx/msw/private.h"
-
     #include <cstdio>
     #include <cstring>
 #endif
+
+#include "wx/utils.h"
+#include "wx/app.h"
+#include "wx/msw/private.h"
 
 #include "wx/metafile.h"
 #include "wx/filename.h"

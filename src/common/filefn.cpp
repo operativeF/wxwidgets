@@ -15,16 +15,15 @@
 #include "wx/filefn.h"
 
 #ifndef WX_PRECOMP
-    #include "wx/intl.h"
-    #include "wx/log.h"
-    #include "wx/utils.h"
-    #include "wx/crt.h"
-
     #include <algorithm>
     #include <array>
     #include <vector>
 #endif
 
+#include "wx/intl.h"
+#include "wx/log.h"
+#include "wx/utils.h"
+#include "wx/crt.h"
 #include "wx/file.h"
 #include "wx/filename.h"
 #include "wx/dir.h"

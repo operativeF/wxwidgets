@@ -15,11 +15,9 @@
 
 #include "wx/xml/xml.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/intl.h"
-    #include "wx/log.h"
-    #include "wx/app.h"
-#endif
+#include "wx/intl.h"
+#include "wx/log.h"
+#include "wx/app.h"
 
 #include "wx/wfstream.h"
 #include "wx/datstrm.h"

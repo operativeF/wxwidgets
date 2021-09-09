@@ -20,14 +20,6 @@
 #if wxUSE_INTL
 
 #ifndef WX_PRECOMP
-    #include "wx/dynarray.h"
-    #include "wx/string.h"
-    #include "wx/intl.h"
-    #include "wx/log.h"
-    #include "wx/utils.h"
-    #include "wx/hashmap.h"
-    #include "wx/module.h"
-
     #include <algorithm>
     #include <memory>
     #include <vector>
@@ -35,6 +27,14 @@
     #include <gsl/gsl>
 #endif // WX_PRECOMP
 
+#include "wx/arrstr.h"
+#include "wx/dynarray.h"
+#include "wx/string.h"
+#include "wx/intl.h"
+#include "wx/log.h"
+#include "wx/utils.h"
+#include "wx/hashmap.h"
+#include "wx/module.h"
 #include "wx/dir.h"
 #include "wx/file.h"
 #include "wx/filename.h"

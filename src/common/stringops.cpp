@@ -16,10 +16,7 @@
 #include "wx/wxprec.h"
 
 
-#ifndef WX_PRECOMP
-    #include "wx/stringops.h"
-#endif
-
+#include "wx/stringops.h"
 #include "wx/private/unicode.h"
 
 // ===========================================================================

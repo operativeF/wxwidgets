@@ -12,6 +12,8 @@
 
 #include "wx/xrc/xmlres.h"
 
+#include "wx/arrstr.h"
+
 #if wxUSE_XRC && wxUSE_RADIOBOX
 
 class WXDLLIMPEXP_XRC wxRadioBoxXmlHandler : public wxXmlResourceHandler

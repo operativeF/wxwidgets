@@ -16,14 +16,13 @@
 
 #include "wx/richtext/richtextstyles.h"
 
-#ifndef WX_PRECOMP
-  #include "wx/wx.h"
-#endif
-
 #include "wx/filename.h"
 #include "wx/clipbrd.h"
 #include "wx/wfstream.h"
 #include "wx/settings.h"
+#include "wx/dc.h"
+#include "wx/sizer.h"
+#include "wx/dcclient.h"
 
 #include "wx/richtext/richtextctrl.h"
 

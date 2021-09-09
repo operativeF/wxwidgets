@@ -20,6 +20,7 @@
 ////@begin includes
 #include "wx/spinctrl.h"
 #include "wx/notebook.h"
+#include "wx/radiobox.h"
 #include "wx/statline.h"
 ////@end includes
 

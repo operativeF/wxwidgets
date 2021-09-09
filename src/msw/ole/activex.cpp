@@ -13,10 +13,8 @@
 
 #if wxUSE_ACTIVEX
 
-#ifndef WX_PRECOMP
-    #include "wx/dcclient.h"
-    #include "wx/math.h"
-#endif
+#include "wx/dcclient.h"
+#include "wx/math.h"
 
 #include "wx/msw/dc.h"
 

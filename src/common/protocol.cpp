@@ -18,13 +18,12 @@
 #include "wx/protocol/log.h"
 
 #ifndef WX_PRECOMP
-    #include "wx/app.h"
-    #include "wx/module.h"
-    #include "wx/log.h"
-
     #include <cstdlib>
 #endif
 
+#include "wx/app.h"
+#include "wx/module.h"
+#include "wx/log.h"
 #include "wx/url.h"
 
 // ----------------------------------------------------------------------------

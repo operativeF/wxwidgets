@@ -15,12 +15,9 @@
 
 #include "wx/xrc/xh_unkwn.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/log.h"
-    #include "wx/window.h"
-    #include "wx/panel.h"
-#endif
-
+#include "wx/log.h"
+#include "wx/window.h"
+#include "wx/panel.h"
 
 class wxUnknownControlContainer : public wxPanel
 {

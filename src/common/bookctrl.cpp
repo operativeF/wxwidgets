@@ -15,7 +15,6 @@
 #if wxUSE_BOOKCTRL
 
 #include "wx/imaglist.h"
-
 #include "wx/bookctrl.h"
 
 #include <numeric>

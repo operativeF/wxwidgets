@@ -14,13 +14,12 @@
 
 #include "wx/imagpng.h"
 #include "wx/versioninfo.h"
+#include "wx/log.h"
+#include "wx/intl.h"
+#include "wx/palette.h"
+#include "wx/stream.h"
 
 #ifndef WX_PRECOMP
-    #include "wx/log.h"
-    #include "wx/intl.h"
-    #include "wx/palette.h"
-    #include "wx/stream.h"
-
     #include <tuple>
 #endif
 

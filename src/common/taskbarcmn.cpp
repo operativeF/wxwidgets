@@ -15,13 +15,9 @@
 #if wxUSE_TASKBARICON
 
 #include "wx/taskbar.h"
-
-#ifndef WX_PRECOMP
-    #include "wx/app.h"
-    #include "wx/list.h"
-    #include "wx/menu.h"
-#endif
-
+#include "wx/app.h"
+#include "wx/list.h"
+#include "wx/menu.h"
 
 
 extern WXDLLIMPEXP_DATA_BASE(wxList) wxPendingDelete;

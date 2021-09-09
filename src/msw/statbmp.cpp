@@ -17,14 +17,14 @@
 #include "wx/statbmp.h"
 
 #ifndef WX_PRECOMP
-    #include "wx/app.h"
-    #include "wx/window.h"
-    #include "wx/icon.h"
-    #include "wx/dcclient.h"
-    #include "wx/msw/private.h"
-
     #include <string>
 #endif
+
+#include "wx/app.h"
+#include "wx/window.h"
+#include "wx/icon.h"
+#include "wx/dcclient.h"
+#include "wx/msw/private.h"
 
 #include "wx/msw/dib.h"
 #include "wx/msw/private/winstyle.h"

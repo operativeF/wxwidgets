@@ -14,12 +14,10 @@
 
 #include "wx/evtloop.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/window.h"
-    #include "wx/app.h"
-    #include "wx/log.h"
-    #include "wx/msw/private.h"
-#endif //WX_PRECOMP
+#include "wx/window.h"
+#include "wx/app.h"
+#include "wx/log.h"
+#include "wx/msw/private.h"
 
 #include "wx/thread.h"
 #include "wx/except.h"

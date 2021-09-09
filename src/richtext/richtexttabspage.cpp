@@ -12,6 +12,8 @@
 
 #include "wx/richtext/richtexttabspage.h"
 
+#include "wx/button.h"
+
 /*!
  * wxRichTextTabsPage type definition
  */

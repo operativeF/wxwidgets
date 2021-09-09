@@ -15,14 +15,12 @@
 #if wxUSE_GRAPHICS_CONTEXT
 
 #include "wx/dcgraph.h"
-
-#ifndef WX_PRECOMP
-    #include "wx/icon.h"
-    #include "wx/dcclient.h"
-    #include "wx/dcmemory.h"
-    #include "wx/math.h"
-    #include "wx/geometry.h"
-#endif
+#include "wx/icon.h"
+#include "wx/dcclient.h"
+#include "wx/dcmemory.h"
+#include "wx/math.h"
+#include "wx/geometry.h"
+#include "wx/stringutils.h"
 
 #include <numbers>
 

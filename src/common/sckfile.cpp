@@ -14,9 +14,6 @@
 
 #if wxUSE_STREAMS && wxUSE_PROTOCOL_FILE
 
-#ifndef WX_PRECOMP
-#endif
-
 #include "wx/uri.h"
 #include "wx/wfstream.h"
 #include "wx/protocol/file.h"

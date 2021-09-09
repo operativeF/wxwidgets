@@ -15,11 +15,7 @@
 #if wxUSE_GEOMETRY
 
 #include "wx/geometry.h"
-
-#ifndef WX_PRECOMP
-    #include "wx/log.h"
-#endif
-
+#include "wx/log.h"
 #include "wx/datstrm.h"
 
 //

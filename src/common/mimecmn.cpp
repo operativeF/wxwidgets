@@ -17,14 +17,11 @@
 
 #include "wx/mimetype.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/string.h"
-    #include "wx/intl.h"
-    #include "wx/log.h"
-    #include "wx/module.h"
-    #include "wx/crt.h"
-#endif //WX_PRECOMP
-
+#include "wx/string.h"
+#include "wx/intl.h"
+#include "wx/log.h"
+#include "wx/module.h"
+#include "wx/crt.h"
 #include "wx/file.h"
 #include "wx/iconloc.h"
 #include "wx/confbase.h"

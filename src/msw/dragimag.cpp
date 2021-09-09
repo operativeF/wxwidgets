@@ -15,21 +15,20 @@
 #if wxUSE_DRAGIMAGE
 
 #ifndef WX_PRECOMP
-    #include "wx/dcclient.h"
-    #include "wx/dcmemory.h"
-    #include "wx/dcscreen.h"
-    #include "wx/frame.h"
-    #include "wx/image.h"
-    #include "wx/intl.h"
-    #include "wx/log.h"
-    #include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
-    #include "wx/settings.h"
-    #include "wx/window.h"
-    #include "wx/msw/private.h"
-
     #include <string>
 #endif
 
+#include "wx/dcclient.h"
+#include "wx/dcmemory.h"
+#include "wx/dcscreen.h"
+#include "wx/frame.h"
+#include "wx/image.h"
+#include "wx/intl.h"
+#include "wx/log.h"
+#include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
+#include "wx/settings.h"
+#include "wx/window.h"
+#include "wx/msw/private.h"
 #include "wx/msw/dragimag.h"
 
 // Wine doesn't have this yet

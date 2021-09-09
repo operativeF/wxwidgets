@@ -12,13 +12,13 @@
 
 
 #ifndef WX_PRECOMP
-    #include "wx/event.h"
-    #include "wx/string.h"
-    #include "wx/textctrl.h"    // Only for wxTE_PROCESS_XXX constants
-    #include "wx/msw/private.h"
-
     #include <boost/nowide/convert.hpp>
 #endif // WX_PRECOMP
+
+#include "wx/event.h"
+#include "wx/string.h"
+#include "wx/textctrl.h"    // Only for wxTE_PROCESS_XXX constants
+#include "wx/msw/private.h"
 
 #if wxUSE_TEXTCTRL || wxUSE_COMBOBOX
 

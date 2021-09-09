@@ -15,12 +15,9 @@
 
 #include "wx/xtistrm.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/object.h"
-    #include "wx/hash.h"
-    #include "wx/event.h"
-#endif
-
+#include "wx/object.h"
+#include "wx/hash.h"
+#include "wx/event.h"
 #include "wx/xml/xml.h"
 #include "wx/tokenzr.h"
 #include "wx/txtstrm.h"

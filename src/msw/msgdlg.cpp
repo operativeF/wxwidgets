@@ -15,16 +15,16 @@
 #if wxUSE_MSGDLG
 
 #ifndef WX_PRECOMP
-    #include "wx/msgdlg.h"
-    #include "wx/app.h"
-    #include "wx/intl.h"
-    #include "wx/utils.h"
-    #include "wx/msw/private.h"
-    #include "wx/hashmap.h"
-
     #include <boost/nowide/convert.hpp>
     #include <boost/nowide/stackstring.hpp>
 #endif
+
+#include "wx/msgdlg.h"
+#include "wx/app.h"
+#include "wx/intl.h"
+#include "wx/utils.h"
+#include "wx/msw/private.h"
+#include "wx/hashmap.h"
 
 #include "wx/ptr_scpd.h"
 #include "wx/dynlib.h"

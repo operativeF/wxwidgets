@@ -12,40 +12,40 @@
 #include "wx/wxprec.h"
 
 #ifndef WX_PRECOMP
-    #include "wx/window.h"
-    #include "wx/msw/wrapwin.h"
-    #include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
-    #include "wx/msw/missing.h"
-    #include "wx/accel.h"
-    #include "wx/menu.h"
-    #include "wx/dc.h"
-    #include "wx/dcclient.h"
-    #include "wx/dcmemory.h"
-    #include "wx/dialog.h"
-    #include "wx/utils.h"
-    #include "wx/app.h"
-    #include "wx/layout.h"
-    #include "wx/dialog.h"
-    #include "wx/frame.h"
-    #include "wx/listbox.h"
-    #include "wx/button.h"
-    #include "wx/msgdlg.h"
-    #include "wx/settings.h"
-    #include "wx/statbox.h"
-    #include "wx/sizer.h"
-    #include "wx/intl.h"
-    #include "wx/log.h"
-    #include "wx/textctrl.h"
-    #include "wx/menuitem.h"
-    #include "wx/module.h"
-    #include "wx/msw/private.h"
-
     #include <array>
     #include <vector>
 
     #include <boost/nowide/convert.hpp>
     #include <gsl/gsl>
 #endif
+
+#include "wx/window.h"
+#include "wx/msw/wrapwin.h"
+#include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
+#include "wx/msw/missing.h"
+#include "wx/accel.h"
+#include "wx/menu.h"
+#include "wx/dc.h"
+#include "wx/dcclient.h"
+#include "wx/dcmemory.h"
+#include "wx/dialog.h"
+#include "wx/utils.h"
+#include "wx/app.h"
+#include "wx/layout.h"
+#include "wx/dialog.h"
+#include "wx/frame.h"
+#include "wx/listbox.h"
+#include "wx/button.h"
+#include "wx/msgdlg.h"
+#include "wx/settings.h"
+#include "wx/statbox.h"
+#include "wx/sizer.h"
+#include "wx/intl.h"
+#include "wx/log.h"
+#include "wx/textctrl.h"
+#include "wx/menuitem.h"
+#include "wx/module.h"
+#include "wx/msw/private.h"
 
 #if wxUSE_OWNER_DRAWN && !defined(__WXUNIVERSAL__)
     #include "wx/ownerdrw.h"

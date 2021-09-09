@@ -12,9 +12,7 @@
 
 #if wxUSE_IMAGE
 
-#ifndef WX_PRECOMP
-    #include "wx/image.h"
-#endif
+#include "wx/image.h"
 
 //-----------------------------------------------------------------------------
 // This function allows dynamic access to all image handlers compile within

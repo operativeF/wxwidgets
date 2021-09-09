@@ -24,9 +24,10 @@
     #ifdef __WINDOWS__
         #include "wx/msw/wrapwin.h"
     #endif
-    #include "wx/log.h"
-    #include "wx/thread.h"
 #endif //WX_PRECOMP
+
+#include "wx/log.h"
+#include "wx/thread.h"
 
 // ============================================================================
 // implementation

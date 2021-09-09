@@ -17,11 +17,10 @@
 #include "wx/fontpicker.h"
 
 #ifndef WX_PRECOMP
-    #include "wx/textctrl.h"
-
     #include <fmt/core.h>
 #endif
 
+#include "wx/textctrl.h"
 #include "wx/fontenum.h"
 #include "wx/tokenzr.h"
 

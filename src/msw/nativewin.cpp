@@ -11,9 +11,7 @@
 #include "wx/wxprec.h"
 
 
-#ifndef WX_PRECOMP
-    #include "wx/msw/private.h"
-#endif // WX_PRECOMP
+#include "wx/msw/private.h"
 
 #include "wx/nativewin.h"
 

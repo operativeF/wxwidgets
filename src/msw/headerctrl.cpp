@@ -14,14 +14,14 @@
 #if wxUSE_HEADERCTRL
 
 #ifndef WX_PRECOMP
-    #include "wx/app.h"
-    #include "wx/log.h"
-    #include "wx/msw/wrapcctl.h"
-    #include "wx/msw/private.h"
-    
     #include <boost/nowide/stackstring.hpp>
 #endif // WX_PRECOMP
 
+#include "wx/app.h"
+#include "wx/log.h"
+#include "wx/msw/wrapcctl.h"
+#include "wx/msw/private.h"
+    
 #include "wx/headerctrl.h"
 
 #ifndef wxHAS_GENERIC_HEADERCTRL

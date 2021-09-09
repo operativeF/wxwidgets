@@ -19,9 +19,7 @@
 #include "wx/ribbon/buttonbar.h"
 #include "wx/ribbon/gallery.h"
 
-#ifndef WX_PRECOMP
 #include "wx/dc.h"
-#endif
 
 #ifdef __WXMSW__
 #include "wx/msw/private.h"

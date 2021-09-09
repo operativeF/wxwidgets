@@ -13,17 +13,16 @@
 
 
 #ifndef WX_PRECOMP
-    #include "wx/dcclient.h"
-    #include "wx/settings.h"
-    #include "wx/brush.h"
-    #include "wx/combobox.h"
-    #include "wx/listbox.h"
-    #include "wx/stattext.h"
-    #include "wx/textctrl.h"
-
     #include <fmt/core.h>
 #endif //WX_PRECOMP
 
+#include "wx/dcclient.h"
+#include "wx/settings.h"
+#include "wx/brush.h"
+#include "wx/combobox.h"
+#include "wx/listbox.h"
+#include "wx/stattext.h"
+#include "wx/textctrl.h"
 
 #if wxUSE_CALENDARCTRL
 

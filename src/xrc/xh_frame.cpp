@@ -15,12 +15,10 @@
 
 #include "wx/xrc/xh_frame.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/intl.h"
-    #include "wx/log.h"
-    #include "wx/frame.h"
-    #include "wx/dialog.h" // to get wxDEFAULT_DIALOG_STYLE
-#endif
+#include "wx/intl.h"
+#include "wx/log.h"
+#include "wx/frame.h"
+#include "wx/dialog.h" // to get wxDEFAULT_DIALOG_STYLE
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxFrameXmlHandler, wxXmlResourceHandler);
 

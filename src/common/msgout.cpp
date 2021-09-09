@@ -13,19 +13,17 @@
 #include "wx/wxprec.h"
 
 
-#ifndef WX_PRECOMP
-    #include "wx/string.h"
-    #include "wx/ffile.h"
-    #include "wx/app.h"
-    #include "wx/intl.h"
-    #include "wx/log.h"
-    #if wxUSE_GUI
-        #include "wx/msgdlg.h"
-    #endif // wxUSE_GUI
+#include "wx/string.h"
+#include "wx/ffile.h"
+#include "wx/app.h"
+#include "wx/intl.h"
+#include "wx/log.h"
+#if wxUSE_GUI
+    #include "wx/msgdlg.h"
+#endif // wxUSE_GUI
 
-    #if defined(__WINDOWS__)
-        #include "wx/msw/private.h"
-    #endif
+#if defined(__WINDOWS__)
+    #include "wx/msw/private.h"
 #endif
 
 #include "wx/apptrait.h"

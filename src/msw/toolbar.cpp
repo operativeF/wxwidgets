@@ -17,25 +17,25 @@
 #include "wx/toolbar.h"
 
 #ifndef WX_PRECOMP
-    #include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
-    #include "wx/frame.h"
-    #include "wx/log.h"
-    #include "wx/intl.h"
-    #include "wx/settings.h"
-    #include "wx/bitmap.h"
-    #include "wx/region.h"
-    #include "wx/dcmemory.h"
-    #include "wx/control.h"
-    #include "wx/choice.h"
-    #include "wx/combobox.h"
-    #include "wx/app.h"         // for GetComCtl32Version
-    #include "wx/image.h"
-    #include "wx/stattext.h"
-    #include "wx/msw/private.h"
-
     #include <boost/nowide/convert.hpp>
     #include <gsl/gsl>
 #endif
+
+#include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
+#include "wx/frame.h"
+#include "wx/log.h"
+#include "wx/intl.h"
+#include "wx/settings.h"
+#include "wx/bitmap.h"
+#include "wx/region.h"
+#include "wx/dcmemory.h"
+#include "wx/control.h"
+#include "wx/choice.h"
+#include "wx/combobox.h"
+#include "wx/app.h"         // for GetComCtl32Version
+#include "wx/image.h"
+#include "wx/stattext.h"
+#include "wx/msw/private.h"
 
 #include "wx/artprov.h"
 #include "wx/sysopt.h"

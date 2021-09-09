@@ -12,18 +12,15 @@
 #include "wx/wxprec.h"
 
 
-#ifndef WX_PRECOMP
-    #include "wx/app.h"
-    #include "wx/button.h"
-    #include "wx/dcclient.h"
-    #include "wx/dialog.h"
-    #include "wx/intl.h"
-    #include "wx/settings.h"
-    #include "wx/stattext.h"
-    #include "wx/sizer.h"
-    #include "wx/containr.h"
-#endif
-
+#include "wx/app.h"
+#include "wx/button.h"
+#include "wx/dcclient.h"
+#include "wx/dialog.h"
+#include "wx/intl.h"
+#include "wx/settings.h"
+#include "wx/stattext.h"
+#include "wx/sizer.h"
+#include "wx/containr.h"
 #include "wx/statline.h"
 #include "wx/sysopt.h"
 #include "wx/module.h"

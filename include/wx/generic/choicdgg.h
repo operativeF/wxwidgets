@@ -11,6 +11,7 @@
 #ifndef _WX_GENERIC_CHOICDGG_H_
 #define _WX_GENERIC_CHOICDGG_H_
 
+#include "wx/arrstr.h"
 #include "wx/dynarray.h"
 #include "wx/dialog.h"
 

@@ -16,13 +16,14 @@
     #ifdef __WINDOWS__
         #include  "wx/msw/wrapwin.h"  // includes windows.h for MessageBox()
     #endif
-    #include "wx/list.h"
-    #include "wx/app.h"
-    #include "wx/intl.h"
-    #include "wx/log.h"
-    #include "wx/utils.h"
-    #include "wx/wxcrtvararg.h"
 #endif //WX_PRECOMP
+
+#include "wx/list.h"
+#include "wx/app.h"
+#include "wx/intl.h"
+#include "wx/log.h"
+#include "wx/utils.h"
+#include "wx/wxcrtvararg.h"
 
 #include "wx/apptrait.h"
 #include "wx/cmdline.h"

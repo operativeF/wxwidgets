@@ -14,10 +14,7 @@
 
 #if wxUSE_PROTOCOL_HTTP
 
-#ifndef WX_PRECOMP
-    #include "wx/string.h"
-#endif
-
+#include "wx/string.h"
 #include "wx/tokenzr.h"
 #include "wx/socket.h"
 #include "wx/protocol/protocol.h"

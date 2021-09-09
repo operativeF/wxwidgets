@@ -16,21 +16,19 @@
 // the PostScript architecture
 #if wxUSE_PRINTING_ARCHITECTURE && (!defined(__WXUNIVERSAL__) || !wxUSE_POSTSCRIPT_ARCHITECTURE_IN_MSW)
 
-#ifndef WX_PRECOMP
-    #include "wx/msw/wrapcdlg.h"
-    #include "wx/window.h"
-    #include "wx/msw/private.h"
-    #include "wx/utils.h"
-    #include "wx/dc.h"
-    #include "wx/app.h"
-    #include "wx/msgdlg.h"
-    #include "wx/intl.h"
-    #include "wx/log.h"
-    #include "wx/dcprint.h"
-    #include "wx/dcmemory.h"
-    #include "wx/image.h"
-    #include "wx/msw/private.h"
-#endif
+#include "wx/msw/wrapcdlg.h"
+#include "wx/window.h"
+#include "wx/msw/private.h"
+#include "wx/utils.h"
+#include "wx/dc.h"
+#include "wx/app.h"
+#include "wx/msgdlg.h"
+#include "wx/intl.h"
+#include "wx/log.h"
+#include "wx/dcprint.h"
+#include "wx/dcmemory.h"
+#include "wx/image.h"
+#include "wx/msw/private.h"
 
 #include "wx/msw/dib.h"
 #include "wx/msw/dcmemory.h"

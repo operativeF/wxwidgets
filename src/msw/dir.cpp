@@ -12,11 +12,8 @@
 #include "wx/wxprec.h"
 
 
-#ifndef WX_PRECOMP
-    #include "wx/intl.h"
-    #include "wx/log.h"
-#endif // PCH
-
+#include "wx/intl.h"
+#include "wx/log.h"
 #include "wx/dir.h"
 
 #ifdef __WINDOWS__

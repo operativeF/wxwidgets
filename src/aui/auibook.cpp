@@ -15,12 +15,10 @@
 
 #include "wx/aui/auibook.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/settings.h"
-    #include "wx/dcclient.h"
-    #include "wx/dcmemory.h"
-    #include "wx/frame.h"
-#endif
+#include "wx/settings.h"
+#include "wx/dcclient.h"
+#include "wx/dcmemory.h"
+#include "wx/frame.h"
 
 #include "wx/aui/tabmdi.h"
 

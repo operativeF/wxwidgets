@@ -17,18 +17,18 @@
 #include "wx/spinctrl.h"
 
 #ifndef WX_PRECOMP
-    #include "wx/hashmap.h"
-    #include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
-    #include "wx/event.h"
-    #include "wx/textctrl.h"
-    #include "wx/wxcrtvararg.h"
-    #include "wx/msw/private.h"
-
     #include <algorithm>
     #include <limits>
 
     #include <boost/nowide/convert.hpp>
 #endif
+
+#include "wx/hashmap.h"
+#include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
+#include "wx/event.h"
+#include "wx/textctrl.h"
+#include "wx/wxcrtvararg.h"
+#include "wx/msw/private.h"
 
 #include "wx/private/spinctrl.h"
 

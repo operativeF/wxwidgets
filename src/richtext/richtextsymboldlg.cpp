@@ -16,15 +16,13 @@
 
 #include "wx/richtext/richtextsymboldlg.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/sizer.h"
-    #include "wx/stattext.h"
-    #include "wx/combobox.h"
-    #include "wx/button.h"
-    #include "wx/settings.h"
-    #include "wx/icon.h"
-    #include "wx/listbox.h"
-#endif
+#include "wx/sizer.h"
+#include "wx/stattext.h"
+#include "wx/combobox.h"
+#include "wx/button.h"
+#include "wx/settings.h"
+#include "wx/icon.h"
+#include "wx/listbox.h"
 
 #include "wx/dcbuffer.h"
 

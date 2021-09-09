@@ -15,10 +15,8 @@
 
 #include "wx/xrc/xh_comboctrl.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/intl.h"
-    #include "wx/textctrl.h"    // for wxTE_PROCESS_ENTER
-#endif
+#include "wx/intl.h"
+#include "wx/textctrl.h"    // for wxTE_PROCESS_ENTER
 
 #include "wx/combo.h"
 

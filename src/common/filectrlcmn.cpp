@@ -13,10 +13,7 @@
 #if wxUSE_FILECTRL
 
 #include "wx/filectrl.h"
-
-#ifndef WX_PRECOMP
-#    include "wx/debug.h"
-#endif
+#include "wx/debug.h"
 
 wxDEFINE_EVENT( wxEVT_FILECTRL_SELECTIONCHANGED, wxFileCtrlEvent );
 wxDEFINE_EVENT( wxEVT_FILECTRL_FILEACTIVATED, wxFileCtrlEvent );

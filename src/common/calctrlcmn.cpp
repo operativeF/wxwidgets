@@ -9,9 +9,6 @@
 #include "wx/wxprec.h"
 
 
-#ifndef WX_PRECOMP
-#endif //WX_PRECOMP
-
 #if wxUSE_CALENDARCTRL || wxUSE_DATEPICKCTRL || wxUSE_TIMEPICKCTRL
 
 #include "wx/dateevt.h"

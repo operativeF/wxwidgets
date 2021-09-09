@@ -15,9 +15,7 @@
 
 #include "wx/xrc/xh_text.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/textctrl.h"
-#endif
+#include "wx/textctrl.h"
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxTextCtrlXmlHandler, wxXmlResourceHandler);
 

@@ -14,15 +14,11 @@
 #if wxUSE_ODCOMBOBOX
 
 #include "wx/odcombo.h"
-
-#ifndef WX_PRECOMP
-    #include "wx/log.h"
-    #include "wx/combobox.h"
-    #include "wx/dcclient.h"
-    #include "wx/settings.h"
-    #include "wx/dialog.h"
-#endif
-
+#include "wx/log.h"
+#include "wx/combobox.h"
+#include "wx/dcclient.h"
+#include "wx/settings.h"
+#include "wx/dialog.h"
 #include "wx/combo.h"
 
 // ----------------------------------------------------------------------------

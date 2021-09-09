@@ -12,13 +12,11 @@
 #include "wx/wxprec.h"
 
 
-#ifndef WX_PRECOMP
-    #include "wx/region.h"
-    #include "wx/dcmemory.h"
-    #include "wx/bitmap.h"
-    #include "wx/image.h"
-    #include "wx/utils.h"
-#endif //WX_PRECOMP
+#include "wx/region.h"
+#include "wx/dcmemory.h"
+#include "wx/bitmap.h"
+#include "wx/image.h"
+#include "wx/utils.h"
 
 // ============================================================================
 // wxRegionBase implementation

@@ -16,13 +16,11 @@
 
 #include "wx/config.h"
 
-#ifndef WX_PRECOMP
-    #include  "wx/string.h"
-    #include  "wx/intl.h"
-    #include "wx/log.h"
-    #include "wx/event.h"
-    #include "wx/app.h"
-#endif //WX_PRECOMP
+#include "wx/string.h"
+#include "wx/intl.h"
+#include "wx/log.h"
+#include "wx/event.h"
+#include "wx/app.h"
 
 #include "wx/msw/registry.h"
 #include "wx/msw/regconf.h"

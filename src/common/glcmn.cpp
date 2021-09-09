@@ -13,10 +13,7 @@
 
 #if wxUSE_GLCANVAS
 
-#ifndef WX_PRECOMP
-    #include "wx/log.h"
-#endif // WX_PRECOMP
-
+#include "wx/log.h"
 #include "wx/glcanvas.h"
 
 // DLL options compatibility check:

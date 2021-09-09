@@ -15,10 +15,7 @@
 #if wxUSE_COLOURPICKERCTRL
 
 #include "wx/clrpicker.h"
-
-#ifndef WX_PRECOMP
-    #include "wx/textctrl.h"
-#endif
+#include "wx/textctrl.h"
 
 // ============================================================================
 // implementation

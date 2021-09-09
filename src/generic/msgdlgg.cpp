@@ -14,21 +14,20 @@
 #if wxUSE_MSGDLG
 
 #ifndef WX_PRECOMP
-    #include "wx/utils.h"
-    #include "wx/dialog.h"
-    #include "wx/button.h"
-    #include "wx/stattext.h"
-    #include "wx/statbmp.h"
-    #include "wx/layout.h"
-    #include "wx/intl.h"
-    #include "wx/icon.h"
-    #include "wx/sizer.h"
-    #include "wx/app.h"
-    #include "wx/settings.h"
-
     #include <string>
 #endif
 
+#include "wx/utils.h"
+#include "wx/dialog.h"
+#include "wx/button.h"
+#include "wx/stattext.h"
+#include "wx/statbmp.h"
+#include "wx/layout.h"
+#include "wx/intl.h"
+#include "wx/icon.h"
+#include "wx/sizer.h"
+#include "wx/app.h"
+#include "wx/settings.h"
 
 #define __WX_COMPILING_MSGDLGG_CPP__ 1
 #include "wx/msgdlg.h"

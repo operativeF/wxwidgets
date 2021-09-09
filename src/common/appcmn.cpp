@@ -13,17 +13,15 @@
 #include "wx/wxprec.h"
 
 
-#ifndef WX_PRECOMP
-    #include "wx/app.h"
-    #include "wx/window.h"
-    #include "wx/bitmap.h"
-    #include "wx/log.h"
-    #include "wx/module.h"
-    #include "wx/msgdlg.h"
-    #include "wx/confbase.h"
-    #include "wx/utils.h"
-    #include "wx/wxcrtvararg.h"
-#endif
+#include "wx/app.h"
+#include "wx/window.h"
+#include "wx/bitmap.h"
+#include "wx/log.h"
+#include "wx/module.h"
+#include "wx/msgdlg.h"
+#include "wx/confbase.h"
+#include "wx/utils.h"
+#include "wx/wxcrtvararg.h"
 
 #include "wx/apptrait.h"
 #include "wx/cmdline.h"

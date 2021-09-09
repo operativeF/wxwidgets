@@ -12,9 +12,6 @@
 #include "wx/wxprec.h"
 
 
-#ifndef WX_PRECOMP
-#endif //WX_PRECOMP
-
 #include "wx/power.h"
 
 // ============================================================================

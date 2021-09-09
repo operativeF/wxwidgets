@@ -23,12 +23,9 @@
 //---------------------------------------------------------------------------
 
 #include "wx/hyperlink.h"
-
-#ifndef WX_PRECOMP
-    #include "wx/menu.h"
-    #include "wx/log.h"
-    #include "wx/dataobj.h"
-#endif
+#include "wx/menu.h"
+#include "wx/log.h"
+#include "wx/dataobj.h"
 
 // ============================================================================
 // implementation

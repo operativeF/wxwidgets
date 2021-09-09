@@ -11,9 +11,8 @@
 // For compilers that support precompilation, includes "wx.h".
 #include "wx/wxprec.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/log.h"
-#endif
+
+#include "wx/log.h"
 
 #include "wx/filename.h"
 

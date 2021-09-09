@@ -16,10 +16,6 @@
 #if wxUSE_EXTENDED_RTTI
 
 #ifndef WX_PRECOMP
-    #include "wx/object.h"
-    #include "wx/list.h"
-    #include "wx/hash.h"
-
     #include <cstring>
 
     #include <map>
@@ -27,6 +23,9 @@
     #include <list>
 #endif
 
+#include "wx/object.h"
+#include "wx/list.h"
+#include "wx/hash.h"
 #include "wx/xti.h"
 #include "wx/xml/xml.h"
 #include "wx/tokenzr.h"

@@ -13,11 +13,8 @@
 
 #include "wx/ustring.h"
 #include "wx/private/unicode.h"
-
-#ifndef WX_PRECOMP
-    #include "wx/crt.h"
-    #include "wx/log.h"
-#endif
+#include "wx/crt.h"
+#include "wx/log.h"
 
 wxUString &wxUString::assignFromAscii( const char *str )
 {

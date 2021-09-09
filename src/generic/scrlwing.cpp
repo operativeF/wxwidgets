@@ -15,14 +15,12 @@
 
 #include "wx/scrolwin.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/utils.h"
-    #include "wx/panel.h"
-    #include "wx/dcclient.h"
-    #include "wx/timer.h"
-    #include "wx/sizer.h"
-    #include "wx/settings.h"
-#endif
+#include "wx/utils.h"
+#include "wx/panel.h"
+#include "wx/dcclient.h"
+#include "wx/timer.h"
+#include "wx/sizer.h"
+#include "wx/settings.h"
 
 #ifdef __WXMAC__
 #include "wx/scrolbar.h"

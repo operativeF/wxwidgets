@@ -15,12 +15,10 @@
 
 #include "wx/srchctrl.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/button.h"
-    #include "wx/dcclient.h"
-    #include "wx/menu.h"
-    #include "wx/dcmemory.h"
-#endif //WX_PRECOMP
+#include "wx/button.h"
+#include "wx/dcclient.h"
+#include "wx/menu.h"
+#include "wx/dcmemory.h"
 
 #if !wxUSE_NATIVE_SEARCH_CONTROL
 

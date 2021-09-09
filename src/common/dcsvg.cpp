@@ -12,20 +12,18 @@
 
 #if wxUSE_SVG
 
-#ifndef WX_PRECOMP
-    #include "wx/dcmemory.h"
-    #include "wx/dcscreen.h"
-    #include "wx/icon.h"
-    #include "wx/image.h"
-    #include "wx/math.h"
-#endif
-
+#include "wx/dcmemory.h"
+#include "wx/dcscreen.h"
+#include "wx/icon.h"
+#include "wx/image.h"
+#include "wx/math.h"
 #include "wx/base64.h"
 #include "wx/dcsvg.h"
 #include "wx/wfstream.h"
 #include "wx/filename.h"
 #include "wx/mstream.h"
 #include "wx/scopedarray.h"
+#include "wx/stringutils.h"
 
 #if wxUSE_MARKUP
     #include "wx/private/markupparser.h"

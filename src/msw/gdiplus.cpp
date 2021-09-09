@@ -13,12 +13,10 @@
 
 #if wxUSE_GRAPHICS_CONTEXT
 
-#ifndef WX_PRECOMP
-    #include "wx/cpp.h"
-    #include "wx/log.h"
-    #include "wx/module.h"
-    #include "wx/string.h"
-#endif // WX_PRECOMP
+#include "wx/cpp.h"
+#include "wx/log.h"
+#include "wx/module.h"
+#include "wx/string.h"
 
 #include "wx/dynload.h"
 

@@ -64,19 +64,18 @@
 #include "wx/wxprec.h"
 
 #ifndef WX_PRECOMP
-    #ifdef __WINDOWS__
-        #include "wx/msw/wrapwin.h" // For GetShort/LongPathName
-    #endif
-    #include "wx/intl.h"
-    #include "wx/log.h"
-    #include "wx/utils.h"
-    #include "wx/crt.h"
-
     #if defined(wxHAS_NATIVE_READLINK)
         #include <vector>
     #endif
 #endif
 
+#ifdef __WINDOWS__
+    #include "wx/msw/wrapwin.h" // For GetShort/LongPathName
+#endif
+#include "wx/intl.h"
+#include "wx/log.h"
+#include "wx/utils.h"
+#include "wx/crt.h"
 #include "wx/filename.h"
 #include "wx/private/filename.h"
 #include "wx/tokenzr.h"

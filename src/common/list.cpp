@@ -19,10 +19,9 @@
 // For compilers that support precompilation, includes "wx.h".
 #include "wx/wxprec.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/list.h"
-    #include "wx/crt.h"
-#endif
+
+#include "wx/list.h"
+#include "wx/crt.h"
 
 #include "wx/listimpl.cpp"
 WX_DEFINE_LIST(wxObjectList)

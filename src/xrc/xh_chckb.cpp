@@ -14,10 +14,7 @@
 #if wxUSE_XRC && wxUSE_CHECKBOX
 
 #include "wx/xrc/xh_chckb.h"
-
-#ifndef WX_PRECOMP
-    #include "wx/checkbox.h"
-#endif
+#include "wx/checkbox.h"
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxCheckBoxXmlHandler, wxXmlResourceHandler);
 

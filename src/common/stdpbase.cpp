@@ -12,11 +12,8 @@
 #include "wx/wxprec.h"
 
 
-#ifndef WX_PRECOMP
-    #include "wx/app.h"
-#endif //WX_PRECOMP
+#include "wx/app.h"
 #include "wx/apptrait.h"
-
 #include "wx/filename.h"
 #include "wx/stdpaths.h"
 

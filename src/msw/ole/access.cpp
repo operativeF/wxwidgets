@@ -16,12 +16,10 @@
 
 #include "wx/access.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/app.h"
-    #include "wx/msw/wrapwin.h"
-    #include "wx/window.h"
-    #include "wx/log.h"
-#endif
+#include "wx/app.h"
+#include "wx/msw/wrapwin.h"
+#include "wx/window.h"
+#include "wx/log.h"
 
 #include <oleauto.h>
 #include <oleacc.h>

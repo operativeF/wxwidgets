@@ -13,11 +13,6 @@
 
 #include "wx/fs_filter.h"
 
-#ifndef WX_PRECOMP
-#endif
-
-
-
 wxDEFINE_SCOPED_PTR_TYPE(wxFSFile)
 wxDEFINE_SCOPED_PTR_TYPE(wxInputStream)
 

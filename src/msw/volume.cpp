@@ -15,16 +15,15 @@
 
 #include "wx/volume.h"
 
-#ifndef WX_PRECOMP
-    #if wxUSE_GUI
-        #include "wx/icon.h"
-    #endif
-    #include "wx/intl.h"
-    #include "wx/log.h"
-    #include "wx/hashmap.h"
-    #include "wx/filefn.h"
-    #include "wx/msw/missing.h"
-#endif // WX_PRECOMP
+#if wxUSE_GUI
+    #include "wx/icon.h"
+#endif
+
+#include "wx/intl.h"
+#include "wx/log.h"
+#include "wx/hashmap.h"
+#include "wx/filefn.h"
+#include "wx/msw/missing.h"
 
 #include "wx/dir.h"
 #include "wx/dynlib.h"

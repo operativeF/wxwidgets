@@ -12,14 +12,12 @@
 
 #if wxUSE_CREDENTIALDLG
 
-#ifndef WX_PRECOMP
-    #include "wx/dialog.h"
-    #include "wx/button.h"
-    #include "wx/stattext.h"
-    #include "wx/textctrl.h"
-    #include "wx/intl.h"
-    #include "wx/sizer.h"
-#endif
+#include "wx/dialog.h"
+#include "wx/button.h"
+#include "wx/stattext.h"
+#include "wx/textctrl.h"
+#include "wx/intl.h"
+#include "wx/sizer.h"
 
 #include "wx/generic/creddlgg.h"
 

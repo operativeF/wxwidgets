@@ -14,10 +14,8 @@
 
 #if wxUSE_HELP
 
-#ifndef WX_PRECOMP
-    #ifdef __WXMSW__
-        #include "wx/msw/private.h"
-    #endif
+#ifdef __WXMSW__
+    #include "wx/msw/private.h"
 #endif
 
 #include "wx/filename.h"

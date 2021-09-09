@@ -13,13 +13,10 @@
 
 #if wxUSE_XRC && wxUSE_RADIOBOX
 
+#include "wx/arrstr.h"
 #include "wx/xrc/xh_radbx.h"
-
-#ifndef WX_PRECOMP
-    #include "wx/intl.h"
-    #include "wx/radiobox.h"
-#endif
-
+#include "wx/intl.h"
+#include "wx/radiobox.h"
 #include "wx/xml/xml.h"
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxRadioBoxXmlHandler, wxXmlResourceHandler);

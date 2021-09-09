@@ -13,10 +13,8 @@
 
 #if wxUSE_BUTTON
 
-#ifndef WX_PRECOMP
-    #include "wx/button.h"
-    #include "wx/toplevel.h"
-#endif //WX_PRECOMP
+#include "wx/button.h"
+#include "wx/toplevel.h"
 
 // ----------------------------------------------------------------------------
 // XTI

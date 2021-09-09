@@ -14,13 +14,11 @@
 
 #if wxUSE_BOOKCTRL
 
-#ifndef WX_PRECOMP
-    #include "wx/button.h"
-    #include "wx/sizer.h"
-    #include "wx/intl.h"
-    #include "wx/log.h"
-    #include "wx/msgdlg.h"
-#endif
+#include "wx/button.h"
+#include "wx/sizer.h"
+#include "wx/intl.h"
+#include "wx/log.h"
+#include "wx/msgdlg.h"
 
 #include "wx/bookctrl.h"
 

@@ -14,17 +14,18 @@
 
 #include "wx/imagbmp.h"
 
-#ifndef WX_PRECOMP
-    #ifdef __WXMSW__
-        #include "wx/msw/wrapwin.h"
-    #endif
-    #include "wx/log.h"
-    #include "wx/app.h"
-    #include "wx/bitmap.h"
-    #include "wx/palette.h"
-    #include "wx/intl.h"
-    #include "wx/math.h"
+#ifdef __WXMSW__
+    #include "wx/msw/wrapwin.h"
+#endif
 
+#include "wx/log.h"
+#include "wx/app.h"
+#include "wx/bitmap.h"
+#include "wx/palette.h"
+#include "wx/intl.h"
+#include "wx/math.h"
+
+#ifndef WX_PRECOMP
     #include <array>
     #include <memory>
 #endif

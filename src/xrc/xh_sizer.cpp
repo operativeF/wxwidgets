@@ -15,17 +15,14 @@
 
 #include "wx/xrc/xh_sizer.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/log.h"
-    #include "wx/panel.h"
-    #include "wx/statbox.h"
-    #include "wx/sizer.h"
-    #include "wx/frame.h"
-    #include "wx/dialog.h"
-    #include "wx/button.h"
-    #include "wx/scrolwin.h"
-#endif
-
+#include "wx/log.h"
+#include "wx/panel.h"
+#include "wx/statbox.h"
+#include "wx/sizer.h"
+#include "wx/frame.h"
+#include "wx/dialog.h"
+#include "wx/button.h"
+#include "wx/scrolwin.h"
 #include "wx/gbsizer.h"
 #include "wx/wrapsizer.h"
 #include "wx/notebook.h"

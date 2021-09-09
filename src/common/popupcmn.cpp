@@ -15,13 +15,9 @@
 #if wxUSE_POPUPWIN
 
 #include "wx/popupwin.h"
-
-#ifndef WX_PRECOMP
-    #include "wx/combobox.h"        // wxComboCtrl
-    #include "wx/app.h"             // wxPostEvent
-    #include "wx/log.h"
-#endif //WX_PRECOMP
-
+#include "wx/combobox.h"        // wxComboCtrl
+#include "wx/app.h"             // wxPostEvent
+#include "wx/log.h"
 #include "wx/display.h"
 #include "wx/recguard.h"
 

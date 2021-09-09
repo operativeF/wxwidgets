@@ -13,11 +13,7 @@
 
 
 #include "wx/evtloop.h"
-
-#ifndef WX_PRECOMP
-    #include "wx/app.h"
-#endif //WX_PRECOMP
-
+#include "wx/app.h"
 #include "wx/scopeguard.h"
 #include "wx/apptrait.h"
 #include "wx/private/eventloopsourcesmanager.h"

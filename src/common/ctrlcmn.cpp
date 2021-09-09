@@ -15,16 +15,14 @@
 #if wxUSE_CONTROLS
 
 #include "wx/control.h"
-
-#ifndef WX_PRECOMP
-    #include "wx/dc.h"
-    #include "wx/log.h"
-    #include "wx/radiobut.h"
-    #include "wx/statbmp.h"
-    #include "wx/bitmap.h"
-    #include "wx/utils.h"       // for wxStripMenuCodes()
-    #include "wx/settings.h"
-#endif
+#include "wx/dc.h"
+#include "wx/log.h"
+#include "wx/radiobut.h"
+#include "wx/statbmp.h"
+#include "wx/bitmap.h"
+#include "wx/utils.h"       // for wxStripMenuCodes()
+#include "wx/settings.h"
+#include "wx/stringutils.h"
 
 #include "wx/private/markupparser.h"
 

@@ -15,13 +15,10 @@
 
 #include "wx/artprov.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/app.h"
-    #include "wx/msw/private.h"
-    #include "wx/msw/wrapwin.h"
-    #include "wx/image.h"
-#endif
-
+#include "wx/app.h"
+#include "wx/msw/private.h"
+#include "wx/msw/wrapwin.h"
+#include "wx/image.h"
 #include "wx/dynlib.h"
 #include "wx/volume.h"
 #include "wx/msw/wrapshl.h"

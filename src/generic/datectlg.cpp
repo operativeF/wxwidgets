@@ -13,15 +13,12 @@
 
 #if wxUSE_DATEPICKCTRL
 
-#ifndef WX_PRECOMP
-    #include "wx/dialog.h"
-    #include "wx/dcmemory.h"
-    #include "wx/intl.h"
-    #include "wx/panel.h"
-    #include "wx/textctrl.h"
-    #include "wx/valtext.h"
-#endif
-
+#include "wx/dialog.h"
+#include "wx/dcmemory.h"
+#include "wx/intl.h"
+#include "wx/panel.h"
+#include "wx/textctrl.h"
+#include "wx/valtext.h"
 #include "wx/calctrl.h"
 #include "wx/combo.h"
 

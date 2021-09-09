@@ -13,10 +13,7 @@
 
 #if wxUSE_MARKUP
 
-#ifndef WX_PRECOMP
-    #include "wx/log.h"
-#endif
-
+#include "wx/log.h"
 #include "wx/private/markupparser.h"
 
 #include "wx/stack.h"

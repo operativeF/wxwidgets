@@ -12,12 +12,10 @@
 #include "wx/wxprec.h"
 
 
-#ifndef WX_PRECOMP
-    #include "wx/event.h"
-    #include "wx/app.h"
-    #include "wx/utils.h"
-    #include "wx/msw/private.h"
-#endif //WX_PRECOMP
+#include "wx/event.h"
+#include "wx/app.h"
+#include "wx/utils.h"
+#include "wx/msw/private.h"
 
 #include "wx/dynlib.h"
 

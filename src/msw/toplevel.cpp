@@ -15,21 +15,21 @@
 #include "wx/toplevel.h"
 
 #ifndef WX_PRECOMP
-    #include "wx/app.h"
-    #include "wx/dialog.h"
-    #include "wx/log.h"
-    #include "wx/intl.h"
-    #include "wx/frame.h"
-    #include "wx/menu.h"
-    #include "wx/containr.h"        // wxSetFocusToChild()
-    #include "wx/module.h"
-    #include "wx/msw/private.h"
-    #include "wx/msw/missing.h"
-
     #include <string>
 
     #include <boost/nowide/convert.hpp>
 #endif //WX_PRECOMP
+
+#include "wx/app.h"
+#include "wx/dialog.h"
+#include "wx/log.h"
+#include "wx/intl.h"
+#include "wx/frame.h"
+#include "wx/menu.h"
+#include "wx/containr.h"        // wxSetFocusToChild()
+#include "wx/module.h"
+#include "wx/msw/private.h"
+#include "wx/msw/missing.h"
 
 #include "wx/scopeguard.h"
 #include "wx/tooltip.h"

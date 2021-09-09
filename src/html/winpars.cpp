@@ -11,13 +11,10 @@
 
 #if wxUSE_HTML && wxUSE_STREAMS
 
-#ifndef WX_PRECOMP
-    #include "wx/intl.h"
-    #include "wx/dc.h"
-    #include "wx/log.h"
-    #include "wx/settings.h"
-#endif
-
+#include "wx/intl.h"
+#include "wx/dc.h"
+#include "wx/log.h"
+#include "wx/settings.h"
 #include "wx/html/htmldefs.h"
 #include "wx/html/winpars.h"
 #include "wx/html/htmlwin.h"

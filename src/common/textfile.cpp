@@ -22,13 +22,10 @@
 
 #if wxUSE_TEXTFILE
 
-#ifndef WX_PRECOMP
-    #include "wx/string.h"
-    #include "wx/intl.h"
-    #include "wx/file.h"
-    #include "wx/log.h"
-#endif
-
+#include "wx/string.h"
+#include "wx/intl.h"
+#include "wx/file.h"
+#include "wx/log.h"
 #include "wx/textfile.h"
 #include "wx/filename.h"
 #include "wx/buffer.h"

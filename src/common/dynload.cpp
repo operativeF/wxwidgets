@@ -18,14 +18,11 @@
     #include "wx/msw/private.h"
 #endif
 
-#ifndef WX_PRECOMP
-    #include "wx/log.h"
-    #include "wx/intl.h"
-    #include "wx/hash.h"
-    #include "wx/utils.h"
-    #include "wx/module.h"
-#endif
-
+#include "wx/log.h"
+#include "wx/intl.h"
+#include "wx/hash.h"
+#include "wx/utils.h"
+#include "wx/module.h"
 #include "wx/strconv.h"
 
 #include "wx/dynload.h"

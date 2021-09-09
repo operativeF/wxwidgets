@@ -14,17 +14,17 @@
 #if wxUSE_HELP
 
 #ifndef WX_PRECOMP
-    #include "wx/list.h"
-    #include "wx/string.h"
-    #include "wx/utils.h"
-    #include "wx/intl.h"
-    #include "wx/msgdlg.h"
-    #include "wx/choicdlg.h"
-    #include "wx/log.h"
-
     #include <string>
     #include <vector>
 #endif
+
+#include "wx/list.h"
+#include "wx/string.h"
+#include "wx/utils.h"
+#include "wx/intl.h"
+#include "wx/msgdlg.h"
+#include "wx/choicdlg.h"
+#include "wx/log.h"
 
 #include "wx/filename.h"
 #include "wx/textfile.h"

@@ -14,18 +14,7 @@
 
 #if wxUSE_LOG
 
-// wxWidgets
 #ifndef WX_PRECOMP
-    #include "wx/log.h"
-    #include "wx/app.h"
-    #include "wx/intl.h"
-    #include "wx/string.h"
-    #include "wx/utils.h"
-
-    #if defined(__WINDOWS__)
-        #include "wx/msw/private.h" // includes windows.h
-    #endif
-    
     #include <algorithm>
     #include <iostream>
     #include <vector>
@@ -33,6 +22,16 @@
     #include <fmt/core.h>
     #include <gsl/gsl>
 #endif //WX_PRECOMP
+
+#include "wx/log.h"
+#include "wx/app.h"
+#include "wx/intl.h"
+#include "wx/string.h"
+#include "wx/utils.h"
+
+#if defined(__WINDOWS__)
+    #include "wx/msw/private.h" // includes windows.h
+#endif
 
 #include "wx/apptrait.h"
 #include "wx/datetime.h"

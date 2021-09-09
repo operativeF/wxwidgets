@@ -19,15 +19,16 @@
 #if wxUSE_CONSTRAINTS
 
 #ifndef WX_PRECOMP
-    #include "wx/layout.h"
-    #include "wx/window.h"
-    #include "wx/utils.h"
-    #include "wx/dialog.h"
-    #include "wx/msgdlg.h"
-    #include "wx/intl.h"
-
     #include <gsl/gsl>
 #endif
+
+#include "wx/layout.h"
+#include "wx/window.h"
+#include "wx/utils.h"
+#include "wx/dialog.h"
+#include "wx/msgdlg.h"
+#include "wx/intl.h"
+
 
 inline void wxGetAsIs(wxWindowBase* win, int* w, int* h)
 {

@@ -14,14 +14,13 @@
 
 #include "wx/imagjpeg.h"
 #include "wx/versioninfo.h"
+#include "wx/log.h"
+#include "wx/app.h"
+#include "wx/intl.h"
+#include "wx/bitmap.h"
+#include "wx/module.h"
 
 #ifndef WX_PRECOMP
-    #include "wx/log.h"
-    #include "wx/app.h"
-    #include "wx/intl.h"
-    #include "wx/bitmap.h"
-    #include "wx/module.h"
-
     #include <cstring> // For memcpy
 #endif
 

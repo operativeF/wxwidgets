@@ -16,10 +16,7 @@
 
 #if wxUSE_FILESYSTEM && wxUSE_FS_INET
 
-#ifndef WX_PRECOMP
-    #include "wx/module.h"
-#endif
-
+#include "wx/module.h"
 #include "wx/wfstream.h"
 #include "wx/url.h"
 #include "wx/filesys.h"

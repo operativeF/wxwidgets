@@ -13,21 +13,19 @@
 #include "wx/wxprec.h"
 
 
-#ifndef WX_PRECOMP
-    #include "wx/app.h"
-    #include "wx/button.h"
-    #include "wx/intl.h"
-    #include "wx/log.h"
-    #include "wx/menu.h"
-    #include "wx/frame.h"
-    #include "wx/filedlg.h"
-    #include "wx/msgdlg.h"
-    #include "wx/textctrl.h"
-    #include "wx/sizer.h"
-    #include "wx/statbmp.h"
-    #include "wx/settings.h"
-    #include "wx/wxcrtvararg.h"
-#endif // WX_PRECOMP
+#include "wx/app.h"
+#include "wx/button.h"
+#include "wx/intl.h"
+#include "wx/log.h"
+#include "wx/menu.h"
+#include "wx/frame.h"
+#include "wx/filedlg.h"
+#include "wx/msgdlg.h"
+#include "wx/textctrl.h"
+#include "wx/sizer.h"
+#include "wx/statbmp.h"
+#include "wx/settings.h"
+#include "wx/wxcrtvararg.h"
 
 #if wxUSE_LOGGUI || wxUSE_LOGWINDOW
 

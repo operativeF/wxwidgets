@@ -13,10 +13,7 @@
 
 #if wxUSE_RICHTOOLTIP
 
-#ifndef WX_PRECOMP
-    #include "wx/icon.h"
-#endif // WX_PRECOMP
-
+#include "wx/icon.h"
 #include "wx/private/richtooltip.h"
 
 // ============================================================================

@@ -15,22 +15,22 @@
 #if wxUSE_DOC_VIEW_ARCHITECTURE
 
 #include "wx/docview.h"
+#include "wx/list.h"
+#include "wx/string.h"
+#include "wx/utils.h"
+#include "wx/app.h"
+#include "wx/dc.h"
+#include "wx/dialog.h"
+#include "wx/menu.h"
+#include "wx/filedlg.h"
+#include "wx/intl.h"
+#include "wx/log.h"
+#include "wx/msgdlg.h"
+#include "wx/mdi.h"
+#include "wx/choicdlg.h"
+#include "wx/stringutils.h"
 
 #ifndef WX_PRECOMP
-    #include "wx/list.h"
-    #include "wx/string.h"
-    #include "wx/utils.h"
-    #include "wx/app.h"
-    #include "wx/dc.h"
-    #include "wx/dialog.h"
-    #include "wx/menu.h"
-    #include "wx/filedlg.h"
-    #include "wx/intl.h"
-    #include "wx/log.h"
-    #include "wx/msgdlg.h"
-    #include "wx/mdi.h"
-    #include "wx/choicdlg.h"
-
     #include <iostream>
     #include <vector>
 

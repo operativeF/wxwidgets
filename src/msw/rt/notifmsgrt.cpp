@@ -12,13 +12,13 @@
 #if wxUSE_NOTIFICATION_MESSAGE && wxUSE_WINRT
 
 #ifndef WX_PRECOMP
-    #include "wx/app.h"
-    #include "wx/module.h"
-
     #include <string>
 
     #include <boost/nowide/convert.hpp>
 #endif // WX_PRECOMP
+
+#include "wx/app.h"
+#include "wx/module.h"
 
 #include "wx/msw/rt/private/notifmsg.h"
 

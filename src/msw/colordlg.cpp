@@ -18,17 +18,17 @@
 #include "wx/modalhook.h"
 
 #ifndef WX_PRECOMP
-    #include "wx/colour.h"
-    #include "wx/gdicmn.h"
-    #include "wx/math.h"
-    #include "wx/msw/wrapcdlg.h"
-    #include "wx/utils.h"
-    #include "wx/msw/private.h"
-
     #include <string>
 
     #include <boost/nowide/convert.hpp>
 #endif
+
+#include "wx/colour.h"
+#include "wx/gdicmn.h"
+#include "wx/math.h"
+#include "wx/msw/wrapcdlg.h"
+#include "wx/utils.h"
+#include "wx/msw/private.h"
 
 #include "wx/scopeguard.h"
 

@@ -15,10 +15,7 @@
 #if wxUSE_STREAMS
 
 #include "wx/txtstrm.h"
-
-#ifndef WX_PRECOMP
-    #include "wx/crt.h"
-#endif
+#include "wx/crt.h"
 
 // ----------------------------------------------------------------------------
 // wxTextInputStream

@@ -12,15 +12,13 @@
 #if wxUSE_FILESYSTEM && wxUSE_STREAMS
 
 #include "wx/fs_mem.h"
+#include "wx/intl.h"
+#include "wx/log.h"
+#include "wx/wxcrtvararg.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/intl.h"
-    #include "wx/log.h"
-    #include "wx/wxcrtvararg.h"
-    #if wxUSE_GUI
-        #include "wx/image.h"
-    #endif // wxUSE_GUI
-#endif
+#if wxUSE_GUI
+    #include "wx/image.h"
+#endif // wxUSE_GUI
 
 #include "wx/mstream.h"
 

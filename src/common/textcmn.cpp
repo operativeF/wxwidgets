@@ -15,14 +15,13 @@
 #if wxUSE_TEXTCTRL
 
 #ifndef WX_PRECOMP
-    #include "wx/textctrl.h"
-    #include "wx/intl.h"
-    #include "wx/log.h"
-    #include "wx/event.h"
-
     #include <fmt/core.h>
 #endif // WX_PRECOMP
 
+#include "wx/textctrl.h"
+#include "wx/intl.h"
+#include "wx/log.h"
+#include "wx/event.h"
 #include "wx/ffile.h"
 
 

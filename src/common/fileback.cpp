@@ -13,12 +13,8 @@
 #if wxUSE_FILESYSTEM
 
 #include "wx/private/fileback.h"
-
-#ifndef WX_PRECOMP
-    #include "wx/utils.h"
-    #include "wx/log.h"
-#endif
-
+#include "wx/utils.h"
+#include "wx/log.h"
 #include "wx/private/filename.h"
 
 // Prefer wxFFile unless wxFile has large file support but wxFFile does not.

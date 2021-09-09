@@ -19,10 +19,7 @@
 
 #include "wx/pickerbase.h"
 #include "wx/tooltip.h"
-
-#ifndef WX_PRECOMP
-    #include "wx/textctrl.h"
-#endif
+#include "wx/textctrl.h"
 
 
 // ============================================================================

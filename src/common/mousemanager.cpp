@@ -11,11 +11,8 @@
 #include "wx/wxprec.h"
 
 
-#ifndef WX_PRECOMP
-    #include "wx/settings.h"
-    #include "wx/window.h"
-#endif // WX_PRECOMP
-
+#include "wx/settings.h"
+#include "wx/window.h"
 #include "wx/mousemanager.h"
 
 // ----------------------------------------------------------------------------

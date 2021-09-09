@@ -11,15 +11,13 @@
 #if wxUSE_BUSYINFO
 
 // for all others, include the necessary headers
-#ifndef WX_PRECOMP
-    #include "wx/busyinfo.h"
-    #include "wx/stattext.h"
-    #include "wx/panel.h"
-    #include "wx/frame.h"
-    #include "wx/sizer.h"
-    #include "wx/statbmp.h"
-    #include "wx/utils.h"
-#endif
+#include "wx/busyinfo.h"
+#include "wx/stattext.h"
+#include "wx/panel.h"
+#include "wx/frame.h"
+#include "wx/sizer.h"
+#include "wx/statbmp.h"
+#include "wx/utils.h"
 
 #include "wx/busyinfo.h"
 

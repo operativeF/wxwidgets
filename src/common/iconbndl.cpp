@@ -13,20 +13,18 @@
 
 #include "wx/iconbndl.h"
 
-#ifndef WX_PRECOMP
-    #ifdef __WINDOWS__
-        #include "wx/msw/wrapwin.h"
-    #endif
-    #include "wx/app.h"
-    #include "wx/settings.h"
-    #include "wx/log.h"
-    #include "wx/intl.h"
-    #include "wx/bitmap.h"
-    #include "wx/image.h"
-    #include "wx/stream.h"
-    #include "wx/utils.h"
+#ifdef __WINDOWS__
+    #include "wx/msw/wrapwin.h"
 #endif
 
+#include "wx/app.h"
+#include "wx/settings.h"
+#include "wx/log.h"
+#include "wx/intl.h"
+#include "wx/bitmap.h"
+#include "wx/image.h"
+#include "wx/stream.h"
+#include "wx/utils.h"
 #include "wx/wfstream.h"
 
 #ifdef __WINDOWS__

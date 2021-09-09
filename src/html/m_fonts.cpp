@@ -12,17 +12,16 @@
 #if wxUSE_HTML && wxUSE_STREAMS
 
 #ifndef WX_PRECOMP
-    #include "wx/brush.h"
-
     #include <boost/nowide/convert.hpp>
 #endif
 
+#include "wx/brush.h"
 #include "wx/html/forcelnk.h"
 #include "wx/html/m_templ.h"
 #include "wx/fontenum.h"
 #include "wx/tokenzr.h"
 #include "wx/html/styleparams.h"
-
+#include "wx/stringutils.h"
 
 FORCE_LINK_ME(m_fonts)
 

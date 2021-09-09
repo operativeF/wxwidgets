@@ -15,13 +15,11 @@
 
 #if wxUSE_ANIMATIONCTRL
 
-#ifndef WX_PRECOMP
-    #include "wx/module.h"
-    #include "wx/image.h"
-    #include "wx/brush.h"
-    #include "wx/dcmemory.h"
-    #include "wx/bitmap.h"
-#endif
+#include "wx/module.h"
+#include "wx/image.h"
+#include "wx/brush.h"
+#include "wx/dcmemory.h"
+#include "wx/bitmap.h"
 
 #include "wx/animate.h"
 #include "wx/log.h"

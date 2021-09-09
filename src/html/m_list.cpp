@@ -11,10 +11,8 @@
 
 #if wxUSE_HTML && wxUSE_STREAMS
 
-#ifndef WX_PRECOMP
-    #include "wx/brush.h"
-    #include "wx/dc.h"
-#endif
+#include "wx/brush.h"
+#include "wx/dc.h"
 
 #include "wx/html/forcelnk.h"
 #include "wx/html/m_templ.h"

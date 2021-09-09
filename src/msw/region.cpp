@@ -14,13 +14,11 @@
 
 #include "wx/region.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/gdicmn.h"
+#include "wx/gdicmn.h"
 
-    #include "wx/msw/wrap/utils.h"
+#include "wx/msw/wrap/utils.h"
 
-    #include "wx/msw/private.h"
-#endif
+#include "wx/msw/private.h"
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxRegion, wxGDIObject);
 wxIMPLEMENT_DYNAMIC_CLASS(wxRegionIterator, wxObject);

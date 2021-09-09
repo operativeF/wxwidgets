@@ -12,13 +12,10 @@
 #include "wx/wxprec.h"
 
 
-#ifndef WX_PRECOMP
-    #include "wx/string.h"
-    #include "wx/log.h"
-    #include "wx/intl.h"
-    #include "wx/filefn.h"
-#endif //WX_PRECOMP
-
+#include "wx/string.h"
+#include "wx/log.h"
+#include "wx/intl.h"
+#include "wx/filefn.h"
 #include "wx/dir.h"
 #include "wx/filename.h"
 

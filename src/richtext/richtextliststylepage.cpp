@@ -10,6 +10,9 @@
 
 #include "wx/richtext/richtextliststylepage.h"
 
+#include "wx/radiobox.h"
+#include "wx/radiobut.h"
+
 ////@begin XPM images
 ////@end XPM images
 

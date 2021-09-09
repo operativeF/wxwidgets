@@ -16,19 +16,17 @@
 
 #include "wx/clipbrd.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/object.h"
-    #include "wx/event.h"
-    #include "wx/app.h"
-    #include "wx/frame.h"
-    #include "wx/bitmap.h"
-    #include "wx/utils.h"
-    #include "wx/intl.h"
-    #include "wx/log.h"
-    #include "wx/dataobj.h"
-    #include "wx/dcmemory.h"
-    #include "wx/msw/private.h"
-#endif
+#include "wx/object.h"
+#include "wx/event.h"
+#include "wx/app.h"
+#include "wx/frame.h"
+#include "wx/bitmap.h"
+#include "wx/utils.h"
+#include "wx/intl.h"
+#include "wx/log.h"
+#include "wx/dataobj.h"
+#include "wx/dcmemory.h"
+#include "wx/msw/private.h"
 
 #if wxUSE_METAFILE
     #include "wx/metafile.h"

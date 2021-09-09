@@ -11,10 +11,8 @@
 
 #if wxUSE_AUI && wxUSE_UXTHEME && !defined(__WXUNIVERSAL__)
 
-#ifndef WX_PRECOMP
-    #include "wx/dc.h"
-    #include "wx/settings.h"
-#endif
+#include "wx/dc.h"
+#include "wx/settings.h"
 
 #include "wx/aui/tabart.h"
 #include "wx/aui/auibook.h"

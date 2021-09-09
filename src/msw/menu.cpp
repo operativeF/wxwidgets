@@ -17,17 +17,17 @@
 #include "wx/menu.h"
 
 #ifndef WX_PRECOMP
-    #include "wx/frame.h"
-    #include "wx/utils.h"
-    #include "wx/intl.h"
-    #include "wx/log.h"
-    #include "wx/image.h"
-    #include "wx/msw/private.h"
-    #include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
-
     #include <boost/nowide/convert.hpp>
     #include <boost/nowide/stackstring.hpp>
 #endif
+
+#include "wx/frame.h"
+#include "wx/utils.h"
+#include "wx/intl.h"
+#include "wx/log.h"
+#include "wx/image.h"
+#include "wx/msw/private.h"
+#include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
 
 #if wxUSE_OWNER_DRAWN
     #include "wx/ownerdrw.h"

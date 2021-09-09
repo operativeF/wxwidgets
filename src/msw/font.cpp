@@ -14,15 +14,13 @@
 
 #include "wx/font.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/list.h"
-    #include "wx/utils.h"
-    #include "wx/app.h"
-    #include "wx/log.h"
-    #include "wx/module.h"
-    #include "wx/msw/private.h"
-    #include "wx/msw/wrap/utils.h"
-#endif // WX_PRECOMP
+#include "wx/list.h"
+#include "wx/utils.h"
+#include "wx/app.h"
+#include "wx/log.h"
+#include "wx/module.h"
+#include "wx/msw/private.h"
+#include "wx/msw/wrap/utils.h"
 
 #include "wx/encinfo.h"
 #include "wx/fontutil.h"

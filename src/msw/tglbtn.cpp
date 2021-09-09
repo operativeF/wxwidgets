@@ -17,15 +17,13 @@
 
 #include "wx/tglbtn.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/button.h"
-    #include "wx/brush.h"
-    #include "wx/dcscreen.h"
-    #include "wx/settings.h"
-    #include "wx/msw/private.h"
+#include "wx/button.h"
+#include "wx/brush.h"
+#include "wx/dcscreen.h"
+#include "wx/settings.h"
+#include "wx/msw/private.h"
 
-    #include "wx/log.h"
-#endif // WX_PRECOMP
+#include "wx/log.h"
 
 #include "wx/msw/private/button.h"
 

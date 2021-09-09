@@ -13,16 +13,13 @@
 
 #if wxUSE_HTML && wxUSE_PRINTING_ARCHITECTURE && wxUSE_STREAMS
 
-#ifndef WX_PRECOMP
-    #include "wx/log.h"
-    #include "wx/intl.h"
-    #include "wx/dc.h"
-    #include "wx/settings.h"
-    #include "wx/msgdlg.h"
-    #include "wx/module.h"
-    #include "wx/sizer.h"
-#endif
-
+#include "wx/log.h"
+#include "wx/intl.h"
+#include "wx/dc.h"
+#include "wx/settings.h"
+#include "wx/msgdlg.h"
+#include "wx/module.h"
+#include "wx/sizer.h"
 #include "wx/print.h"
 #include "wx/printdlg.h"
 #include "wx/html/htmprint.h"

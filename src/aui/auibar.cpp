@@ -15,11 +15,11 @@
 #if wxUSE_AUI
 
 #ifndef WX_PRECOMP
-    #include "wx/image.h"
-    #include "wx/menu.h"
-
     #include <gsl/gsl>
 #endif
+
+#include "wx/image.h"
+#include "wx/menu.h"
 
 #include "wx/statline.h"
 #include "wx/dcbuffer.h"

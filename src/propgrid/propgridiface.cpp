@@ -14,13 +14,11 @@
 
 #if wxUSE_PROPGRID
 
-#ifndef WX_PRECOMP
-    #include "wx/bitmap.h"
-    #include "wx/colour.h"
-    #include "wx/font.h"
-    #include "wx/log.h"
-    #include "wx/validate.h"
-#endif
+#include "wx/bitmap.h"
+#include "wx/colour.h"
+#include "wx/font.h"
+#include "wx/log.h"
+#include "wx/validate.h"
 
 #include "wx/propgrid/propgrid.h"
 

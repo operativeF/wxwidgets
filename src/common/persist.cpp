@@ -13,9 +13,6 @@
 
 #if wxUSE_CONFIG
 
-#ifndef WX_PRECOMP
-#endif // WX_PRECOMP
-
 #include "wx/persist.h"
 
 namespace

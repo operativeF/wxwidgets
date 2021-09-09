@@ -15,10 +15,8 @@
 
 #if wxUSE_STATLINE
 
-#ifndef WX_PRECOMP
-    #include "wx/msw/private.h"
-    #include "wx/msw/missing.h"
-#endif
+#include "wx/msw/private.h"
+#include "wx/msw/missing.h"
 
 // ============================================================================
 // implementation

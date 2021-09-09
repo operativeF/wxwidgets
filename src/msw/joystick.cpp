@@ -16,12 +16,10 @@
 
 #include "wx/joystick.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/string.h"
-    #include "wx/window.h"
+#include "wx/string.h"
+#include "wx/window.h"
 
-    #include "wx/msw/private.h"
-#endif
+#include "wx/msw/private.h"
 
 #include <mmsystem.h>
 

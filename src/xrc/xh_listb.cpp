@@ -14,12 +14,8 @@
 #if wxUSE_XRC && wxUSE_LISTBOX
 
 #include "wx/xrc/xh_listb.h"
-
-#ifndef WX_PRECOMP
-    #include "wx/intl.h"
-    #include "wx/listbox.h"
-#endif
-
+#include "wx/intl.h"
+#include "wx/listbox.h"
 #include "wx/xml/xml.h"
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxListBoxXmlHandler, wxXmlResourceHandler);

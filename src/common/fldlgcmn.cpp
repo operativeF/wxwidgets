@@ -17,12 +17,10 @@
 #include "wx/filedlg.h"
 #include "wx/dirdlg.h"
 #include "wx/filename.h"
-
-#ifndef WX_PRECOMP
-    #include "wx/string.h"
-    #include "wx/intl.h"
-    #include "wx/window.h"
-#endif // WX_PRECOMP
+#include "wx/string.h"
+#include "wx/intl.h"
+#include "wx/window.h"
+#include "wx/arrstr.h"
 
 //----------------------------------------------------------------------------
 // wxFileDialogBase

@@ -14,23 +14,19 @@
 
 #if wxUSE_STARTUP_TIPS
 
-#ifndef WX_PRECOMP
-    #include "wx/button.h"
-    #include "wx/checkbox.h"
-    #include "wx/statbox.h"
-    #include "wx/dialog.h"
-    #include "wx/icon.h"
-    #include "wx/intl.h"
-    #include "wx/textctrl.h"
-    #include "wx/statbmp.h"
-    #include "wx/stattext.h"
-    #include "wx/sizer.h"
-    #include "wx/settings.h"
-#endif // WX_PRECOMP
-
+#include "wx/button.h"
+#include "wx/checkbox.h"
+#include "wx/statbox.h"
+#include "wx/dialog.h"
+#include "wx/icon.h"
+#include "wx/intl.h"
+#include "wx/textctrl.h"
+#include "wx/statbmp.h"
+#include "wx/stattext.h"
+#include "wx/sizer.h"
+#include "wx/settings.h"
 #include "wx/statline.h"
 #include "wx/artprov.h"
-
 #include "wx/tipdlg.h"
 
 // ----------------------------------------------------------------------------

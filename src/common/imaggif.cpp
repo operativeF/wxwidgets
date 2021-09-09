@@ -12,13 +12,10 @@
 
 #if wxUSE_IMAGE && wxUSE_GIF
 
-#ifndef WX_PRECOMP
-    #include "wx/intl.h"
-    #include "wx/log.h"
-    #include "wx/palette.h"
-    #include "wx/utils.h"
-#endif
-
+#include "wx/intl.h"
+#include "wx/log.h"
+#include "wx/palette.h"
+#include "wx/utils.h"
 #include "wx/imaggif.h"
 #include "wx/gifdecod.h"
 #include "wx/stream.h"

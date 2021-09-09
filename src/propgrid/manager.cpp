@@ -14,12 +14,10 @@
 
 #if wxUSE_PROPGRID
 
-#ifndef WX_PRECOMP
-    #include "wx/settings.h"
-    #include "wx/stattext.h"
-    #include "wx/textctrl.h"
-    #include "wx/toolbar.h"
-#endif
+#include "wx/settings.h"
+#include "wx/stattext.h"
+#include "wx/textctrl.h"
+#include "wx/toolbar.h"
 
 #include "wx/dcbuffer.h" // for wxALWAYS_NATIVE_DOUBLE_BUFFER
 #include "wx/headerctrl.h" // for wxPGHeaderCtrl

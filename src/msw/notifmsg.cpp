@@ -19,11 +19,11 @@
 #include "wx/notifmsg.h"
 
 #ifndef WX_PRECOMP
-    #include "wx/toplevel.h"
-    #include "wx/app.h"
-
     #include <string>
 #endif // WX_PRECOMP
+
+#include "wx/toplevel.h"
+#include "wx/app.h"
 
 #include "wx/private/notifmsg.h"
 #include "wx/msw/rt/private/notifmsg.h"

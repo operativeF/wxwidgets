@@ -14,10 +14,7 @@
 #if wxUSE_XRC && wxUSE_STATBOX
 
 #include "wx/xrc/xh_stbox.h"
-
-#ifndef WX_PRECOMP
-    #include "wx/statbox.h"
-#endif
+#include "wx/statbox.h"
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxStaticBoxXmlHandler, wxXmlResourceHandler);
 

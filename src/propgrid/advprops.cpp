@@ -14,12 +14,12 @@
 
 #if wxUSE_PROPGRID
 
-#ifndef WX_PRECOMP
-    #include "wx/dc.h"
-    #include "wx/settings.h"
-    #include "wx/textctrl.h"
-    #include "wx/wxcrtvararg.h"
-#endif
+#include "wx/dc.h"
+#include "wx/dcclient.h"
+#include "wx/dcmemory.h"
+#include "wx/settings.h"
+#include "wx/textctrl.h"
+#include "wx/wxcrtvararg.h"
 
 #define __wxPG_SOURCE_FILE__
 

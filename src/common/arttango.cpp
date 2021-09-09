@@ -13,13 +13,9 @@
 
 #if wxUSE_ARTPROVIDER_TANGO
 
-#ifndef WX_PRECOMP
-    #include "wx/image.h"
-    #include "wx/log.h"
-#endif // WX_PRECOMP
-
+#include "wx/image.h"
+#include "wx/log.h"
 #include "wx/artprov.h"
-
 #include "wx/mstream.h"
 
 // ----------------------------------------------------------------------------

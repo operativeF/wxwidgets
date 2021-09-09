@@ -13,12 +13,8 @@
 #if wxUSE_IMAGE && wxUSE_PNM
 
 #include "wx/imagpnm.h"
-
-#ifndef WX_PRECOMP
-    #include "wx/intl.h"
-    #include "wx/log.h"
-#endif
-
+#include "wx/intl.h"
+#include "wx/log.h"
 #include "wx/txtstrm.h"
 
 //-----------------------------------------------------------------------------

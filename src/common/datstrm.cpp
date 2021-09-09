@@ -15,10 +15,7 @@
 #if wxUSE_STREAMS
 
 #include "wx/datstrm.h"
-
-#ifndef WX_PRECOMP
-    #include "wx/math.h"
-#endif //WX_PRECOMP
+#include "wx/math.h"
 
 namespace
 {

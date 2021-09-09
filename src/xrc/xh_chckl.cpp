@@ -15,11 +15,9 @@
 
 #include "wx/xrc/xh_chckl.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/intl.h"
-    #include "wx/log.h"
-    #include "wx/checklst.h"
-#endif
+#include "wx/intl.h"
+#include "wx/log.h"
+#include "wx/checklst.h"
 
 #include "wx/xml/xml.h"
 

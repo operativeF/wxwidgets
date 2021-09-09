@@ -13,13 +13,13 @@
 
 
 #ifndef WX_PRECOMP
-    #include "wx/module.h"
-    #include "wx/hash.h"
-    #include "wx/intl.h"
-    #include "wx/log.h"
-
     #include <algorithm>
 #endif
+
+#include "wx/module.h"
+#include "wx/hash.h"
+#include "wx/intl.h"
+#include "wx/log.h"
 
 constexpr wxChar TRACE_MODULE[] = wxT("module");
 

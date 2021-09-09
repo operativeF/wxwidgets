@@ -13,12 +13,8 @@
 #if wxUSE_FILESYSTEM
 
 #include "wx/filesys.h"
-
-#ifndef WX_PRECOMP
-    #include "wx/log.h"
-    #include "wx/module.h"
-#endif
-
+#include "wx/log.h"
+#include "wx/module.h"
 #include "wx/sysopt.h"
 #include "wx/wfstream.h"
 #include "wx/mimetype.h"

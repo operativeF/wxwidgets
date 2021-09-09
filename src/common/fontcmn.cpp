@@ -13,14 +13,11 @@
 
 
 #include "wx/font.h"
-
-#ifndef WX_PRECOMP
-    #include "wx/dc.h"
-    #include "wx/intl.h"
-    #include "wx/dcscreen.h"
-    #include "wx/log.h"
-    #include "wx/gdicmn.h"
-#endif // WX_PRECOMP
+#include "wx/dc.h"
+#include "wx/intl.h"
+#include "wx/dcscreen.h"
+#include "wx/log.h"
+#include "wx/gdicmn.h"
 
 #if defined(__WXMSW__)
     #include  "wx/msw/private.h"  // includes windows.h for LOGFONT

@@ -14,9 +14,6 @@
 
 #if wxUSE_HELP
 
-#ifndef WX_PRECOMP
-#endif
-
 #include "wx/helpbase.h"
 
 #endif // wxUSE_HELP

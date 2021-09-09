@@ -15,10 +15,8 @@
 
 #include "wx/xrc/xh_odcombo.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/intl.h"
-    #include "wx/textctrl.h"
-#endif
+#include "wx/intl.h"
+#include "wx/textctrl.h"
 
 #include "wx/odcombo.h"
 

@@ -14,10 +14,8 @@
 
 #if wxUSE_CONTROLS
 
-#ifndef WX_PRECOMP
-    #include "wx/ctrlsub.h"
-    #include "wx/arrstr.h"
-#endif
+#include "wx/ctrlsub.h"
+#include "wx/arrstr.h"
 
 wxIMPLEMENT_ABSTRACT_CLASS(wxControlWithItems, wxControl);
 

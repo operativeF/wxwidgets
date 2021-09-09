@@ -13,17 +13,17 @@
 #if wxUSE_IMAGE
 
 #include "wx/image.h"
+#include "wx/log.h"
+#include "wx/hash.h"
+#include "wx/utils.h"
+#include "wx/math.h"
+#include "wx/module.h"
+#include "wx/palette.h"
+#include "wx/intl.h"
+#include "wx/colour.h"
+#include "wx/stringutils.h"
 
 #ifndef WX_PRECOMP
-    #include "wx/log.h"
-    #include "wx/hash.h"
-    #include "wx/utils.h"
-    #include "wx/math.h"
-    #include "wx/module.h"
-    #include "wx/palette.h"
-    #include "wx/intl.h"
-    #include "wx/colour.h"
-
     #include <algorithm>
     #include <cstring> // For memcpy
     #include <gsl/gsl>

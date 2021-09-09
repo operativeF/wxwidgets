@@ -15,10 +15,9 @@
 #if wxUSE_STREAMS
 
 #include "wx/mstream.h"
+#include  "wx/stream.h"
 
 #ifndef   WX_PRECOMP
-    #include  "wx/stream.h"
-
     #include <gsl/gsl>
 #endif  //WX_PRECOMP
 

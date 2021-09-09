@@ -11,10 +11,7 @@
 #include "wx/wxprec.h"
 
 
-#ifndef WX_PRECOMP
-    #include "wx/module.h"
-#endif //WX_PRECOMP
-
+#include "wx/module.h"
 #include "wx/private/fdiodispatcher.h"
 
 #include "wx/private/selectdispatcher.h"

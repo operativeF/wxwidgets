@@ -13,19 +13,17 @@
 
 #if wxUSE_RICHTEXT && wxUSE_PRINTING_ARCHITECTURE && wxUSE_STREAMS
 
-#ifndef WX_PRECOMP
-    #include "wx/log.h"
-    #include "wx/intl.h"
-    #include "wx/dc.h"
-    #include "wx/settings.h"
-    #include "wx/msgdlg.h"
-#endif
-
+#include "wx/log.h"
+#include "wx/intl.h"
+#include "wx/dc.h"
+#include "wx/settings.h"
+#include "wx/msgdlg.h"
 #include "wx/datetime.h"
 #include "wx/print.h"
 #include "wx/printdlg.h"
 #include "wx/richtext/richtextprint.h"
 #include "wx/wfstream.h"
+#include "wx/stringutils.h"
 
 /*!
  * wxRichTextPrintout

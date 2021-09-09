@@ -15,11 +15,8 @@
 #if wxUSE_RADIOBTN
 
 #include "wx/radiobut.h"
-
-#ifndef WX_PRECOMP
-    #include "wx/settings.h"
-    #include "wx/dcscreen.h"
-#endif
+#include "wx/settings.h"
+#include "wx/dcscreen.h"
 
 // ----------------------------------------------------------------------------
 // XTI

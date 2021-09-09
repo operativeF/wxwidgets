@@ -16,18 +16,16 @@
 
 #include "wx/grid.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/utils.h"
-    #include "wx/dcclient.h"
-    #include "wx/settings.h"
-    #include "wx/log.h"
-    #include "wx/textctrl.h"
-    #include "wx/checkbox.h"
-    #include "wx/combobox.h"
-    #include "wx/intl.h"
-    #include "wx/math.h"
-    #include "wx/listbox.h"
-#endif
+#include "wx/utils.h"
+#include "wx/dcclient.h"
+#include "wx/settings.h"
+#include "wx/log.h"
+#include "wx/textctrl.h"
+#include "wx/checkbox.h"
+#include "wx/combobox.h"
+#include "wx/intl.h"
+#include "wx/math.h"
+#include "wx/listbox.h"
 
 #include "wx/valnum.h"
 #include "wx/textfile.h"

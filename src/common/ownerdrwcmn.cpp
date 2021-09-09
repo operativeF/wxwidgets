@@ -15,15 +15,12 @@
 #if wxUSE_OWNER_DRAWN
 
 #include "wx/ownerdrw.h"
-
-#ifndef WX_PRECOMP
-    #include "wx/window.h"
-    #include "wx/font.h"
-    #include "wx/colour.h"
-    #include "wx/dcmemory.h"
-    #include "wx/settings.h"
-    #include "wx/utils.h"
-#endif
+#include "wx/window.h"
+#include "wx/font.h"
+#include "wx/colour.h"
+#include "wx/dcmemory.h"
+#include "wx/settings.h"
+#include "wx/utils.h"
 
 // ----------------------------------------------------------------------------
 // constants for base class

@@ -17,11 +17,8 @@
 #include "wx/richtext/richtextctrl.h"
 #include "wx/richtext/richtextstyles.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/wx.h"
-    #include "wx/settings.h"
-#endif
-
+#include "wx/settings.h"
+#include "wx/menu.h"
 #include "wx/timer.h"
 #include "wx/textfile.h"
 #include "wx/ffile.h"

@@ -13,10 +13,9 @@
 
 
 #include "wx/tokenzr.h"
+#include "wx/crt.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/crt.h"
-    
+#ifndef WX_PRECOMP    
     #include <vector>
 #endif
 

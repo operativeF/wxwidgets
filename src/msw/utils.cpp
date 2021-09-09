@@ -13,15 +13,15 @@
 
 
 #ifndef WX_PRECOMP
-    #include "wx/utils.h"
-    #include "wx/app.h"
-    #include "wx/intl.h"
-    #include "wx/log.h"
-    #include "wx/msw/private.h"     // includes <windows.h>
-    #include "wx/msw/missing.h"     // for CHARSET_HANGUL
-
     #include <tuple>
 #endif  //WX_PRECOMP
+
+#include "wx/utils.h"
+#include "wx/app.h"
+#include "wx/intl.h"
+#include "wx/log.h"
+#include "wx/msw/private.h"     // includes <windows.h>
+#include "wx/msw/missing.h"     // for CHARSET_HANGUL
 
 #include "wx/msw/registry.h"
 #include "wx/apptrait.h"

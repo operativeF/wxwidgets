@@ -16,12 +16,10 @@
 #include "wx/generic/animate.h"
 #include "wx/generic/private/animate.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/log.h"
-    #include "wx/image.h"
-    #include "wx/dcmemory.h"
-    #include "wx/dcclient.h"
-#endif
+#include "wx/log.h"
+#include "wx/image.h"
+#include "wx/dcmemory.h"
+#include "wx/dcclient.h"
 
 #include "wx/wfstream.h"
 

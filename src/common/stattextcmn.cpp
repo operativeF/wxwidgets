@@ -15,18 +15,18 @@
 #if wxUSE_STATTEXT
 
 #ifndef WX_PRECOMP
-    #include "wx/stattext.h"
-    #include "wx/button.h"
-    #include "wx/dcclient.h"
-    #include "wx/intl.h"
-    #include "wx/log.h"
-    #include "wx/settings.h"
-    #include "wx/sizer.h"
-    #include "wx/containr.h"
-
     #include <algorithm>
 #endif
 
+#include "wx/stattext.h"
+#include "wx/button.h"
+#include "wx/dcclient.h"
+#include "wx/intl.h"
+#include "wx/log.h"
+#include "wx/settings.h"
+#include "wx/sizer.h"
+#include "wx/containr.h"
+#include "wx/stringutils.h"
 #include "wx/textwrapper.h"
 
 #include "wx/private/markupparser.h"

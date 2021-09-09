@@ -67,12 +67,9 @@ license is as follows:
 
 #if wxUSE_XPM
 
-#ifndef WX_PRECOMP
-    #include "wx/log.h"
-    #include "wx/intl.h"
-    #include "wx/utils.h"
-#endif
-
+#include "wx/log.h"
+#include "wx/intl.h"
+#include "wx/utils.h"
 #include "wx/imagxpm.h"
 #include "wx/wfstream.h"
 #include "wx/xpmdecod.h"

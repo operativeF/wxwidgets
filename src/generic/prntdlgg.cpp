@@ -16,26 +16,26 @@
 #include "wx/generic/prntdlgg.h"
 
 #ifndef WX_PRECOMP
-    #include "wx/utils.h"
-    #include "wx/dc.h"
-    #include "wx/stattext.h"
-    #include "wx/statbox.h"
-    #include "wx/button.h"
-    #include "wx/checkbox.h"
-    #include "wx/textctrl.h"
-    #include "wx/radiobox.h"
-    #include "wx/filedlg.h"
-    #include "wx/combobox.h"
-    #include "wx/intl.h"
-    #include "wx/sizer.h"
-    #include "wx/cmndata.h"
-
     #include <array>
     #include <string>
     #include <vector>
 
     #include <fmt/core.h>
 #endif
+
+#include "wx/utils.h"
+#include "wx/dc.h"
+#include "wx/stattext.h"
+#include "wx/statbox.h"
+#include "wx/button.h"
+#include "wx/checkbox.h"
+#include "wx/textctrl.h"
+#include "wx/radiobox.h"
+#include "wx/filedlg.h"
+#include "wx/combobox.h"
+#include "wx/intl.h"
+#include "wx/sizer.h"
+#include "wx/cmndata.h"
 
 #if wxUSE_STATLINE
     #include "wx/statline.h"

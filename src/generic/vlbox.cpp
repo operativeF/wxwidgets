@@ -16,11 +16,9 @@
 
 #include "wx/vlbox.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/settings.h"
-    #include "wx/dcclient.h"
-    #include "wx/listbox.h"
-#endif //WX_PRECOMP
+#include "wx/settings.h"
+#include "wx/dcclient.h"
+#include "wx/listbox.h"
 
 #include "wx/dcbuffer.h"
 #include "wx/selstore.h"

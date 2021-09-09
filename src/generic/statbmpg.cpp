@@ -11,10 +11,7 @@
 
 #if wxUSE_STATBMP
 
-#ifndef WX_PRECOMP
-    #include "wx/dcclient.h"
-#endif
-
+#include "wx/dcclient.h"
 #include "wx/generic/statbmpg.h"
 
 #if wxUSE_GRAPHICS_CONTEXT

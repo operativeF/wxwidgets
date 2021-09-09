@@ -16,6 +16,8 @@
  */
 
 #include "wx/richtext/richtextdialogpage.h"
+#include "wx/radiobox.h"
+#include "wx/radiobut.h"
 
 ////@begin includes
 #include "wx/statline.h"

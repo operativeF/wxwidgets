@@ -13,9 +13,6 @@
 
 #if wxUSE_ADDREMOVECTRL
 
-#ifndef WX_PRECOMP
-#endif // WX_PRECOMP
-
 #include "wx/addremovectrl.h"
 
 #include "wx/private/addremovectrl.h"

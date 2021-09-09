@@ -8,9 +8,9 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-////@begin includes
+
+#include "wx/dcclient.h"
 #include "wx/imaglist.h"
-////@end includes
 
 #include "wx/richtext/richtextborderspage.h"
 

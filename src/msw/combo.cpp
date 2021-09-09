@@ -15,15 +15,12 @@
 
 #include "wx/combo.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/log.h"
-    #include "wx/combobox.h"
-    #include "wx/dcclient.h"
-    #include "wx/settings.h"
-    #include "wx/dialog.h"
-    #include "wx/stopwatch.h"
-#endif
-
+#include "wx/log.h"
+#include "wx/combobox.h"
+#include "wx/dcclient.h"
+#include "wx/settings.h"
+#include "wx/dialog.h"
+#include "wx/stopwatch.h"
 #include "wx/dcbuffer.h"
 
 #include "wx/msw/registry.h"

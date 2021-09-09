@@ -16,11 +16,8 @@
 #include "wx/wxprec.h"
 
 
-#ifndef WX_PRECOMP
-    #include "wx/hash.h"
-    #include "wx/log.h"
-#endif
-
+#include "wx/hash.h"
+#include "wx/log.h"
 #include "wx/private/wxprintf.h"
 
 #include <cerrno>

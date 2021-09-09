@@ -19,11 +19,9 @@
 
 #include "wx/collpane.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/toplevel.h"
-    #include "wx/sizer.h"
-    #include "wx/panel.h"
-#endif // !WX_PRECOMP
+#include "wx/toplevel.h"
+#include "wx/sizer.h"
+#include "wx/panel.h"
 
 #include "wx/collheaderctrl.h"
 

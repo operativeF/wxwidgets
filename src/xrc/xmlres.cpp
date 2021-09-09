@@ -13,21 +13,25 @@
 
 #if wxUSE_XRC
 
-#include "wx/xrc/xmlres.h"
-
 #ifndef WX_PRECOMP
-    #include "wx/intl.h"
-    #include "wx/log.h"
-    #include "wx/panel.h"
-    #include "wx/frame.h"
-    #include "wx/dialog.h"
-    #include "wx/settings.h"
-    #include "wx/bitmap.h"
-    #include "wx/image.h"
-    #include "wx/module.h"
-    #include "wx/wxcrtvararg.h"
+    #include <vector>
+
+    #include <boost/nowide/convert.hpp>
+    #include <gsl/gsl>
 #endif
 
+#include "wx/xrc/xmlres.h"
+
+#include "wx/intl.h"
+#include "wx/log.h"
+#include "wx/panel.h"
+#include "wx/frame.h"
+#include "wx/dialog.h"
+#include "wx/settings.h"
+#include "wx/bitmap.h"
+#include "wx/image.h"
+#include "wx/module.h"
+#include "wx/wxcrtvararg.h"
 #include "wx/wfstream.h"
 #include "wx/filesys.h"
 #include "wx/filename.h"
@@ -39,15 +43,11 @@
 #include "wx/dir.h"
 #include "wx/xml/xml.h"
 #include "wx/hashset.h"
-
+#include "wx/stringutils.h"
 #include "wx/config.h"
 #include "wx/platinfo.h"
 
 #include <clocale>
-#include <vector>
-
-#include <boost/nowide/convert.hpp>
-#include <gsl/gsl>
 
 namespace
 {

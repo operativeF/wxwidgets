@@ -12,14 +12,12 @@
 #include "wx/wxprec.h"
 
 
-#ifndef WX_PRECOMP
-    #include "wx/containr.h"
-    #include "wx/log.h"
-    #include "wx/event.h"
-    #include "wx/window.h"
-    #include "wx/scrolbar.h"
-    #include "wx/radiobut.h"
-#endif //WX_PRECOMP
+#include "wx/containr.h"
+#include "wx/log.h"
+#include "wx/event.h"
+#include "wx/window.h"
+#include "wx/scrolbar.h"
+#include "wx/radiobut.h"
 
 // trace mask for focus messages
 constexpr wxChar TRACE_FOCUS[] = wxT("focus");

@@ -14,12 +14,10 @@
 
 #if wxUSE_LISTBOX
 
-#ifndef WX_PRECOMP
-    #include "wx/arrstr.h"
-    #include "wx/log.h"
-    #include "wx/listbox.h"
-    #include "wx/dcclient.h"
-#endif
+#include "wx/arrstr.h"
+#include "wx/log.h"
+#include "wx/listbox.h"
+#include "wx/dcclient.h"
 
 // ============================================================================
 // implementation

@@ -13,16 +13,13 @@
 
 #include "wx/generic/filectrlg.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/settings.h"
-    #include "wx/sizer.h"
-    #include "wx/stattext.h"
-    #include "wx/checkbox.h"
-    #include "wx/msgdlg.h"
-    #include "wx/log.h"
-    #include "wx/filedlg.h"
-#endif
-
+#include "wx/settings.h"
+#include "wx/sizer.h"
+#include "wx/stattext.h"
+#include "wx/checkbox.h"
+#include "wx/msgdlg.h"
+#include "wx/log.h"
+#include "wx/filedlg.h"
 #include "wx/clntdata.h"
 #include "wx/file.h"        // for wxS_IXXX constants only
 #include "wx/generic/dirctrlg.h" // for wxFileIconsTable

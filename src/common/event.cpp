@@ -14,25 +14,22 @@
 
 #include "wx/eventfilter.h"
 #include "wx/evtloop.h"
+#include "wx/event.h"
+#include "wx/list.h"
+#include "wx/log.h"
+#include "wx/app.h"
+#include "wx/utils.h"
+#include "wx/stopwatch.h"
+#include "wx/module.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/event.h"
-    #include "wx/list.h"
-    #include "wx/log.h"
-    #include "wx/app.h"
-    #include "wx/utils.h"
-    #include "wx/stopwatch.h"
-    #include "wx/module.h"
-
-    #if wxUSE_GUI
-        #include "wx/window.h"
-        #include "wx/control.h"
-        #include "wx/dc.h"
-        #include "wx/spinbutt.h"
-        #include "wx/textentry.h"
-        #include "wx/validate.h"
-    #endif // wxUSE_GUI
-#endif
+#if wxUSE_GUI
+    #include "wx/window.h"
+    #include "wx/control.h"
+    #include "wx/dc.h"
+    #include "wx/spinbutt.h"
+    #include "wx/textentry.h"
+    #include "wx/validate.h"
+#endif // wxUSE_GUI
 
 #include "wx/thread.h"
 

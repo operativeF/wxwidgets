@@ -16,12 +16,9 @@
 
 #include "wx/private/webrequest_curl.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/log.h"
-    #include "wx/translation.h"
-    #include "wx/utils.h"
-#endif
-
+#include "wx/log.h"
+#include "wx/translation.h"
+#include "wx/utils.h"
 #include "wx/uri.h"
 #include "wx/private/socket.h"
 #include "wx/evtloop.h"

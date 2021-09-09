@@ -17,31 +17,30 @@
 #include "wx/dcprint.h"
 
 #ifndef WX_PRECOMP
-    #if defined(__WXMSW__)
-        #include "wx/msw/wrapcdlg.h"
-    #endif // MSW
-    #include "wx/utils.h"
-    #include "wx/dc.h"
-    #include "wx/app.h"
-    #include "wx/math.h"
-    #include "wx/msgdlg.h"
-    #include "wx/layout.h"
-    #include "wx/choice.h"
-    #include "wx/button.h"
-    #include "wx/bmpbuttn.h"
-    #include "wx/settings.h"
-    #include "wx/dcmemory.h"
-    #include "wx/dcclient.h"
-    #include "wx/stattext.h"
-    #include "wx/intl.h"
-    #include "wx/textdlg.h"
-    #include "wx/sizer.h"
-    #include "wx/module.h"
-
     #include <fmt/core.h>
     #include <gsl/gsl>
 #endif // !WX_PRECOMP
 
+#if defined(__WXMSW__)
+    #include "wx/msw/wrapcdlg.h"
+#endif // MSW
+#include "wx/utils.h"
+#include "wx/dc.h"
+#include "wx/app.h"
+#include "wx/math.h"
+#include "wx/msgdlg.h"
+#include "wx/layout.h"
+#include "wx/choice.h"
+#include "wx/button.h"
+#include "wx/bmpbuttn.h"
+#include "wx/settings.h"
+#include "wx/dcmemory.h"
+#include "wx/dcclient.h"
+#include "wx/stattext.h"
+#include "wx/intl.h"
+#include "wx/textdlg.h"
+#include "wx/sizer.h"
+#include "wx/module.h"
 #include "wx/prntbase.h"
 #include "wx/printdlg.h"
 #include "wx/print.h"

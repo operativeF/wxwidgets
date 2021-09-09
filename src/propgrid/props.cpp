@@ -14,13 +14,11 @@
 
 #if wxUSE_PROPGRID
 
-#ifndef WX_PRECOMP
-    #include "wx/dirdlg.h"
-    #include "wx/filedlg.h"
-    #include "wx/log.h"
-    #include "wx/sizer.h"
-    #include "wx/stattext.h"
-#endif
+#include "wx/dirdlg.h"
+#include "wx/filedlg.h"
+#include "wx/log.h"
+#include "wx/sizer.h"
+#include "wx/stattext.h"
 
 #include "wx/numformatter.h"
 

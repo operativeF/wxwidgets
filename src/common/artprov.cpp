@@ -15,13 +15,13 @@
 
 #include "wx/artprov.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/list.h"
-    #include "wx/log.h"
-    #include "wx/hashmap.h"
-    #include "wx/image.h"
-    #include "wx/module.h"
+#include "wx/list.h"
+#include "wx/log.h"
+#include "wx/hashmap.h"
+#include "wx/image.h"
+#include "wx/module.h"
 
+#ifndef WX_PRECOMP
     #include <fmt/core.h>
 #endif
 

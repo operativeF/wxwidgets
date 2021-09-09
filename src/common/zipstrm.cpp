@@ -15,14 +15,13 @@
 #include "wx/zipstrm.h"
 
 #ifndef WX_PRECOMP
-    #include "wx/hashmap.h"
-    #include "wx/intl.h"
-    #include "wx/log.h"
-    #include "wx/utils.h"
-
     #include <gsl/gsl>
 #endif
 
+#include "wx/hashmap.h"
+#include "wx/intl.h"
+#include "wx/log.h"
+#include "wx/utils.h"
 #include "wx/datstrm.h"
 #include "wx/zstream.h"
 #include "wx/mstream.h"

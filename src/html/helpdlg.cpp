@@ -14,19 +14,17 @@
 
 #if wxUSE_WXHTML_HELP
 
-#ifndef WX_PRECOMP
-    #include "wx/object.h"
-    #include "wx/intl.h"
-    #include "wx/log.h"
+#include "wx/object.h"
+#include "wx/intl.h"
+#include "wx/log.h"
 
-    #include "wx/sizer.h"
+#include "wx/sizer.h"
 
-    #include "wx/bmpbuttn.h"
-    #include "wx/statbox.h"
-    #include "wx/radiobox.h"
-    #include "wx/menu.h"
-    #include "wx/msgdlg.h"
-#endif // WX_PRECOMP
+#include "wx/bmpbuttn.h"
+#include "wx/statbox.h"
+#include "wx/radiobox.h"
+#include "wx/menu.h"
+#include "wx/msgdlg.h"
 
 #include "wx/html/htmlwin.h"
 #include "wx/html/helpdlg.h"

@@ -14,28 +14,28 @@
 #if wxUSE_GRAPHICS_GDIPLUS
 
 #ifndef WX_PRECOMP
-    #include "wx/dc.h"
-    #include "wx/msw/wrapcdlg.h"
-    #include "wx/image.h"
-    #include "wx/window.h"
-    #include "wx/utils.h"
-    #include "wx/dialog.h"
-    #include "wx/app.h"
-    #include "wx/bitmap.h"
-    #include "wx/log.h"
-    #include "wx/icon.h"
-    #include "wx/math.h"
-    #include "wx/module.h"
-    // include all dc types that are used as a param
-    #include "wx/dc.h"
-    #include "wx/dcclient.h"
-    #include "wx/dcmemory.h"
-    #include "wx/dcprint.h"
-    #include "wx/msw/private.h" // needs to be before #include <commdlg.h>
-
     #include <boost/nowide/convert.hpp>
     #include <boost/nowide/stackstring.hpp>
 #endif
+
+#include "wx/dc.h"
+#include "wx/msw/wrapcdlg.h"
+#include "wx/image.h"
+#include "wx/window.h"
+#include "wx/utils.h"
+#include "wx/dialog.h"
+#include "wx/app.h"
+#include "wx/bitmap.h"
+#include "wx/log.h"
+#include "wx/icon.h"
+#include "wx/math.h"
+#include "wx/module.h"
+// include all dc types that are used as a param
+#include "wx/dc.h"
+#include "wx/dcclient.h"
+#include "wx/dcmemory.h"
+#include "wx/dcprint.h"
+#include "wx/msw/private.h" // needs to be before #include <commdlg.h>
 
 #include "wx/stack.h"
 

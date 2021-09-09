@@ -13,13 +13,11 @@
 #include "wx/wxprec.h"
 
 
-#ifndef WX_PRECOMP
-    #include "wx/colour.h"
-    #include "wx/log.h"
-    #include "wx/utils.h"
-    #include "wx/gdicmn.h"
-    #include "wx/wxcrtvararg.h"
-#endif
+#include "wx/colour.h"
+#include "wx/log.h"
+#include "wx/utils.h"
+#include "wx/gdicmn.h"
+#include "wx/wxcrtvararg.h"
 
 #if wxUSE_VARIANT
 IMPLEMENT_VARIANT_OBJECT_EXPORTED(wxColour,WXDLLEXPORT)

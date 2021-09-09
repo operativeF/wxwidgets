@@ -13,16 +13,13 @@
 #include "wx/wxprec.h"
 
 
+#include "wx/app.h"
+#include "wx/frame.h"
 #include "wx/private/display.h"
-
 #include "wx/dynlib.h"
-
-#ifndef WX_PRECOMP
-    #include "wx/msw/private.h"
-    #include "wx/msw/wrapwin.h"
-
-    #include "wx/msw/wrap/utils.h"
-#endif
+#include "wx/msw/private.h"
+#include "wx/msw/wrapwin.h"
+#include "wx/msw/wrap/utils.h"
 
 namespace
 {

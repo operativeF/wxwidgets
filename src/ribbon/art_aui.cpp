@@ -20,10 +20,8 @@
 #include "wx/ribbon/gallery.h"
 #include "wx/ribbon/toolbar.h"
 
-#ifndef WX_PRECOMP
 #include "wx/dc.h"
 #include "wx/settings.h"
-#endif
 
 #ifdef __WXMSW__
 #include "wx/msw/private.h"

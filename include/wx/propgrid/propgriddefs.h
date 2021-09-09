@@ -15,6 +15,7 @@
 
 #if wxUSE_PROPGRID
 
+#include "wx/arrstr.h"
 #include "wx/colour.h"
 #include "wx/hashset.h"
 

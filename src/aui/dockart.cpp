@@ -19,12 +19,12 @@
 #include "wx/aui/tabart.h"
 
 #ifndef WX_PRECOMP
-    #include "wx/settings.h"
-    #include "wx/dcclient.h"
-    #include "wx/image.h"
-
     #include <cmath>
 #endif
+
+#include "wx/settings.h"
+#include "wx/dcclient.h"
+#include "wx/image.h"
 
 #ifdef __WXMAC__
 #include "wx/osx/private.h"

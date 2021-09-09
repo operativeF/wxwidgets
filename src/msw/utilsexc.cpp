@@ -13,18 +13,18 @@
 
 
 #ifndef WX_PRECOMP
-    #include "wx/utils.h"
-    #include "wx/app.h"
-    #include "wx/intl.h"
-    #include "wx/log.h"
-    #if wxUSE_STREAMS
-        #include "wx/stream.h"
-    #endif
-    #include "wx/module.h"
-    #include "wx/msw/private.h"
-
     #include <vector>
 #endif
+
+#include "wx/utils.h"
+#include "wx/app.h"
+#include "wx/intl.h"
+#include "wx/log.h"
+#if wxUSE_STREAMS
+    #include "wx/stream.h"
+#endif
+#include "wx/module.h"
+#include "wx/msw/private.h"
 
 #include "wx/process.h"
 #include "wx/thread.h"

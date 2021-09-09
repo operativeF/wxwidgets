@@ -15,11 +15,9 @@
 
 #include "wx/xrc/xh_menu.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/frame.h"
-    #include "wx/log.h"
-    #include "wx/menu.h"
-#endif
+#include "wx/frame.h"
+#include "wx/log.h"
+#include "wx/menu.h"
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxMenuXmlHandler, wxXmlResourceHandler);
 

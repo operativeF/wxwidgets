@@ -12,11 +12,9 @@
 
 #if wxUSE_STATTEXT
 
-#ifndef WX_PRECOMP
-    #include "wx/dcclient.h"
-    #include "wx/settings.h"
-    #include "wx/validate.h"
-#endif
+#include "wx/dcclient.h"
+#include "wx/settings.h"
+#include "wx/validate.h"
 
 #include "wx/generic/stattextg.h"
 
