@@ -11,9 +11,12 @@
 // For compilers that support precompilation, includes "wx.h".
 #include "wx/wxprec.h"
 
+#ifndef WX_PRECOMP
+    #include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
+    #include "wx/msw/private.h"
+#endif
 
 #include "wx/frame.h"
-#include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
 #include "wx/app.h"
 #include "wx/menu.h"
 #include "wx/utils.h"
@@ -26,8 +29,6 @@
 #include "wx/toolbar.h"
 #include "wx/statusbr.h"
 #include "wx/menuitem.h"
-#include "wx/msw/private.h"
-
 
 #include "wx/generic/statusbr.h"
 

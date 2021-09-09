@@ -11,13 +11,14 @@
 #include "wx/wxprec.h"
 
 #ifndef WX_PRECOMP
+    #include "wx/msw/private.h"
+
     #include <boost/nowide/convert.hpp>
     #include <boost/nowide/stackstring.hpp>
 #endif //WX_PRECOMP
 
 #include "wx/window.h"
 #include "wx/font.h"
-#include "wx/msw/private.h"
 
 #include "wx/private/textmeasure.h"
 

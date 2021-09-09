@@ -13,6 +13,8 @@
 
 
 #ifndef WX_PRECOMP
+    #include "wx/msw/private.h"
+
     #include <string>
 
     #include <boost/nowide/convert.hpp>
@@ -21,7 +23,6 @@
 #include "wx/log.h"
 #include "wx/app.h"
 #include "wx/bitmap.h"
-#include "wx/msw/private.h"
 #include "wx/stringutils.h"
 
 #if wxUSE_PNG_RESOURCE_HANDLER

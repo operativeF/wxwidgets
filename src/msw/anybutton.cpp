@@ -16,6 +16,10 @@
 #include "wx/anybutton.h"
 
 #ifndef WX_PRECOMP
+    #include "wx/msw/wrapcctl.h"
+    #include "wx/msw/private.h"
+    #include "wx/msw/missing.h"
+    
     #include <boost/nowide/convert.hpp>
 #endif
 
@@ -27,9 +31,7 @@
 #include "wx/dcscreen.h"
 #include "wx/dcclient.h"
 #include "wx/toplevel.h"
-#include "wx/msw/wrapcctl.h"
-#include "wx/msw/private.h"
-#include "wx/msw/missing.h"
+
 #include "wx/msw/wrap/utils.h"
 #include "wx/stringutils.h"
 #include "wx/imaglist.h"

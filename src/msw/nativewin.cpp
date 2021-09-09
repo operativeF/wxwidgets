@@ -10,8 +10,9 @@
 // for compilers that support precompilation, includes "wx.h".
 #include "wx/wxprec.h"
 
-
-#include "wx/msw/private.h"
+#ifndef WX_PRECOMP
+    #include "wx/msw/private.h"
+#endif
 
 #include "wx/nativewin.h"
 

@@ -12,12 +12,14 @@
 // For compilers that support precompilation, includes "wx.h".
 #include "wx/wxprec.h"
 
+#ifndef WX_PRECOMP
+    #include "wx/msw/private.h"
+    #include "wx/msw/wrapwin.h"
+#endif
 
 #include "wx/artprov.h"
 
 #include "wx/app.h"
-#include "wx/msw/private.h"
-#include "wx/msw/wrapwin.h"
 #include "wx/image.h"
 #include "wx/dynlib.h"
 #include "wx/volume.h"

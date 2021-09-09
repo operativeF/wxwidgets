@@ -16,9 +16,10 @@
 #include "wx/hashmap.h"
 #include "wx/log.h"
 #include "wx/window.h"
-#include "wx/msw/private.h"
 
 #ifndef WX_PRECOMP
+    #include "wx/msw/private.h"
+
     #include <unordered_map>
 #endif
 

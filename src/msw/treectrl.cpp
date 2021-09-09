@@ -17,18 +17,19 @@
 #include "wx/treectrl.h"
 
 #ifndef WX_PRECOMP
+    #include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
+    #include "wx/msw/missing.h"
+    #include "wx/msw/private.h"
+
     #include <array>
     
     #include <boost/nowide/stackstring.hpp>
 #endif
 
-#include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
-#include "wx/msw/missing.h"
 #include "wx/dynarray.h"
 #include "wx/log.h"
 #include "wx/app.h"
 #include "wx/settings.h"
-#include "wx/msw/private.h"
 
 #include <windowsx.h> // needed by GET_X_LPARAM and GET_Y_LPARAM macros
 

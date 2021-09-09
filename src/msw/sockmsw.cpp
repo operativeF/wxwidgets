@@ -17,6 +17,8 @@
 #if wxUSE_SOCKETS
 
 #ifndef WX_PRECOMP
+    #include "wx/msw/private.h"     // for wxGetInstance()
+
     #include <boost/nowide/convert.hpp>
     #include <boost/nowide/stackstring.hpp>
 
@@ -33,7 +35,6 @@
 #endif
 
 #include "wx/private/socket.h"
-#include "wx/msw/private.h"     // for wxGetInstance()
 #include "wx/private/fd.h"
 #include "wx/apptrait.h"
 #include "wx/thread.h"

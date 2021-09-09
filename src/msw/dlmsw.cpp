@@ -13,7 +13,9 @@
 
 #if wxUSE_DYNLIB_CLASS
 
-#include "wx/msw/private.h"
+#ifndef WX_PRECOMP
+    #include "wx/msw/private.h"
+#endif
 
 #include "wx/dynlib.h"
 

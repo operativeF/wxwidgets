@@ -12,7 +12,9 @@
 
 #if wxUSE_TIMEPICKCTRL
 
-#include "wx/msw/wrapcctl.h"
+#ifndef WX_PRECOMP
+    #include "wx/msw/wrapcctl.h"
+#endif
 
 #include "wx/timectrl.h"
 #include "wx/dateevt.h"

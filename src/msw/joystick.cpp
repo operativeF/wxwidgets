@@ -14,12 +14,15 @@
 
 #if wxUSE_JOYSTICK
 
+#ifndef WX_PRECOMP
+    #include "wx/msw/private.h"
+#endif
+
 #include "wx/joystick.h"
 
 #include "wx/string.h"
 #include "wx/window.h"
 
-#include "wx/msw/private.h"
 
 #include <mmsystem.h>
 

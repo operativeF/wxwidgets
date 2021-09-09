@@ -14,11 +14,13 @@
 
 #if wxUSE_GAUGE
 
-#include "wx/gauge.h"
+#ifndef WX_PRECOMP
+    #include "wx/msw/private.h"
+    #include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
+#endif
 
+#include "wx/gauge.h"
 #include "wx/app.h"
-#include "wx/msw/private.h"
-#include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
 
 #include "wx/appprogress.h"
 #include "wx/msw/private/winstyle.h"

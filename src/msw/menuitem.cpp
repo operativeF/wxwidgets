@@ -18,6 +18,9 @@
 #include "wx/stockitem.h"
 
 #ifndef WX_PRECOMP
+    #include "wx/msw/wrap/utils.h"
+    #include "wx/msw/private.h"
+    
     #include <string>
 
     #include <boost/nowide/convert.hpp>
@@ -32,8 +35,6 @@
 #include "wx/accel.h"
 #include "wx/log.h"
 #include "wx/menu.h"
-#include "wx/msw/wrap/utils.h"
-#include "wx/msw/private.h"
 
 #if wxUSE_ACCEL
     #include "wx/accel.h"

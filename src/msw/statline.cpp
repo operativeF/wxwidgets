@@ -11,12 +11,14 @@
 #include "wx/wxprec.h"
 
 
-#include "wx/statline.h"
-
 #if wxUSE_STATLINE
 
-#include "wx/msw/private.h"
-#include "wx/msw/missing.h"
+#include "wx/statline.h"
+
+#ifndef WX_PRECOMP
+    #include "wx/msw/private.h"
+    #include "wx/msw/missing.h"
+#endif
 
 // ============================================================================
 // implementation

@@ -13,6 +13,12 @@
 #include "wx/wxprec.h"
 
 
+#ifndef WX_PRECOMP
+    #if defined(__WINDOWS__)
+        #include "wx/msw/private.h"
+    #endif
+#endif
+
 #include "wx/string.h"
 #include "wx/ffile.h"
 #include "wx/app.h"
@@ -21,10 +27,6 @@
 #if wxUSE_GUI
     #include "wx/msgdlg.h"
 #endif // wxUSE_GUI
-
-#if defined(__WINDOWS__)
-    #include "wx/msw/private.h"
-#endif
 
 #include "wx/apptrait.h"
 #include "wx/msgout.h"

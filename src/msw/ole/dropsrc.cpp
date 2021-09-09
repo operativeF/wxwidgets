@@ -15,13 +15,14 @@
 #if wxUSE_OLE && wxUSE_DRAG_AND_DROP
 
 #ifndef WX_PRECOMP
+    #include "wx/msw/private.h"
+
     #include "wx/window.h"
     #include "wx/log.h"
 #endif
 
 #include "wx/dnd.h"
 
-#include "wx/msw/private.h"
 
 #include <oleauto.h>
 

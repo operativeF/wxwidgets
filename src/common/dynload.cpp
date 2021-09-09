@@ -14,8 +14,10 @@
 
 #if wxUSE_DYNAMIC_LOADER
 
-#ifdef __WINDOWS__
-    #include "wx/msw/private.h"
+#ifndef WX_PRECOMP
+    #ifdef __WINDOWS__
+        #include "wx/msw/private.h"
+    #endif
 #endif
 
 #include "wx/log.h"

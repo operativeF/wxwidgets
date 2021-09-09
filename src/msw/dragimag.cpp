@@ -15,6 +15,9 @@
 #if wxUSE_DRAGIMAGE
 
 #ifndef WX_PRECOMP
+    #include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
+    #include "wx/msw/private.h"
+
     #include <string>
 #endif
 
@@ -25,10 +28,8 @@
 #include "wx/image.h"
 #include "wx/intl.h"
 #include "wx/log.h"
-#include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
 #include "wx/settings.h"
 #include "wx/window.h"
-#include "wx/msw/private.h"
 #include "wx/msw/dragimag.h"
 
 // Wine doesn't have this yet

@@ -15,6 +15,12 @@
 #include "wx/wxprec.h"
 
 #ifndef WX_PRECOMP
+    #if defined(__WIN32__)
+        #include "wx/msw/private.h"
+        #include "wx/msw/missing.h"
+        #define wxHAVE_WIN32_MB2WC
+    #endif
+    
     #include <unordered_map>
 #endif
 
@@ -23,12 +29,6 @@
 #include "wx/log.h"
 #include "wx/utils.h"
 #include "wx/hashmap.h"
-
-#if defined(__WIN32__)
-    #include "wx/msw/private.h"
-    #include "wx/msw/missing.h"
-    #define wxHAVE_WIN32_MB2WC
-#endif
 
 #ifdef HAVE_ICONV
     #include <iconv.h>
@@ -42,6 +42,10 @@
 #ifdef __DARWIN__
 #include "wx/osx/core/private/strconv_cf.h"
 #endif //def __DARWIN__
+
+#if defined(__WIN32__)
+    #define wxHAVE_WIN32_MB2WC
+#endif
 
 constexpr wxChar TRACE_STRCONV[] = wxT("strconv");
 

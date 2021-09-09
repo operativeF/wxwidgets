@@ -13,10 +13,13 @@
 
 #if wxUSE_GLCANVAS
 
+#ifndef WX_PRECOMP
+    #include "wx/msw/private.h"
+#endif
+
 #include "wx/intl.h"
 #include "wx/log.h"
 #include "wx/app.h"
-#include "wx/msw/private.h"
 
 #include "wx/glcanvas.h"
 

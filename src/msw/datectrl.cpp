@@ -13,13 +13,16 @@
 
 #if wxUSE_DATEPICKCTRL
 
-#include "wx/msw/wrapwin.h"
-#include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
+#ifndef WX_PRECOMP
+    #include "wx/msw/wrapwin.h"
+    #include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
+    #include "wx/msw/private.h"
+#endif
+
 #include "wx/app.h"
 #include "wx/intl.h"
 #include "wx/dcclient.h"
 #include "wx/settings.h"
-#include "wx/msw/private.h"
 #include "wx/datectrl.h"
 #include "wx/dateevt.h"
 

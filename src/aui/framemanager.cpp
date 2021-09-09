@@ -13,6 +13,11 @@
 
 #if wxUSE_AUI
 
+#ifndef WX_PRECOMP
+    #include "wx/msw/wrapwin.h"
+    #include "wx/msw/private.h"
+#endif
+
 #include "wx/aui/framemanager.h"
 #include "wx/aui/dockart.h"
 #include "wx/aui/floatpane.h"
@@ -56,8 +61,6 @@ wxDEFINE_EVENT( wxEVT_AUI_FIND_MANAGER, wxAuiManagerEvent );
 #endif
 
 #ifdef __WXMSW__
-    #include "wx/msw/wrapwin.h"
-    #include "wx/msw/private.h"
     #include "wx/msw/dc.h"
 #endif
 

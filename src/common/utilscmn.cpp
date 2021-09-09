@@ -38,6 +38,10 @@
 #endif
 
 #ifndef WX_PRECOMP
+    #if defined(__WINDOWS__)
+        #include "wx/msw/private.h"
+    #endif
+
     #include <algorithm>
     #include <string>
     #include <vector>
@@ -92,9 +96,6 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
-#if defined(__WINDOWS__)
-    #include "wx/msw/private.h"
-#endif
 
 #if wxUSE_GUI
     // Include the definitions of GTK_XXX_VERSION constants.

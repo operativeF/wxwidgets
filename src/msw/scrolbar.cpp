@@ -17,12 +17,13 @@
 #include "wx/scrolbar.h"
 
 #ifndef WX_PRECOMP
+    #include "wx/msw/private.h"
+
     #include <gsl/gsl>
 #endif
 
 #include "wx/utils.h"
 #include "wx/settings.h"
-#include "wx/msw/private.h"
 
 // Scrollbar
 bool wxScrollBar::Create(wxWindow *parent, wxWindowID id,

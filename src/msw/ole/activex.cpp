@@ -13,13 +13,16 @@
 
 #if wxUSE_ACTIVEX
 
+#ifndef WX_PRECOMP
+    #include "wx/msw/private.h" // for wxCopyRectToRECT
+#endif
+
 #include "wx/dcclient.h"
 #include "wx/math.h"
 
 #include "wx/msw/dc.h"
 
 #include "wx/msw/ole/activex.h"
-#include "wx/msw/private.h" // for wxCopyRectToRECT
 
 // autointerfaces that we only use here
 using wxAutoIOleInPlaceSite = wxAutoOleInterface<IOleInPlaceSite>;

@@ -15,6 +15,9 @@
 #include "wx/bitmap.h"
 
 #ifndef WX_PRECOMP
+    #include "wx/msw/private.h"
+    #include "wx/msw/wrap/utils.h"
+    
     #include <memory>
     #include <string>
 #endif
@@ -27,9 +30,7 @@
 #include "wx/icon.h"
 #include "wx/log.h"
 #include "wx/image.h"
-#include "wx/msw/private.h"
 
-#include "wx/msw/wrap/utils.h"
 #include "wx/msw/dc.h"
 
 #if wxUSE_WXDIB

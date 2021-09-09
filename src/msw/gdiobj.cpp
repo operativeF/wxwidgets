@@ -12,12 +12,15 @@
 #include "wx/wxprec.h"
 
 
+#ifndef WX_PRECOMP
+  #include "wx/msw/private.h"
+#endif
+
 #include "wx/gdiobj.h"
 
 #include "wx/app.h"
 #include "wx/list.h"
 #include "wx/utils.h"
-#include "wx/msw/private.h"
 
 
 #define M_GDIDATA static_cast<wxGDIRefData*>(m_refData)

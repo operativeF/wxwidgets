@@ -16,8 +16,10 @@
 #include "wx/display.h"
 #include "wx/dc.h"
 
-#ifdef __WXMSW__
-#include "wx/msw/private.h"
+#ifndef WX_PRECOMP
+    #ifdef __WXMSW__
+        #include "wx/msw/private.h"
+    #endif
 #endif
 
 #if wxUSE_COMBOBOX

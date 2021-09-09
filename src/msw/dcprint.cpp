@@ -22,10 +22,11 @@
 #include "wx/window.h"
 #include "wx/dcmemory.h"
 #include "wx/math.h"
-#include "wx/msw/private.h"
-#include "wx/msw/wrap/utils.h"
 
 #ifndef WX_PRECOMP
+    #include "wx/msw/private.h"
+    #include "wx/msw/wrap/utils.h"
+
     #include <boost/nowide/stackstring.hpp>
 #endif
 

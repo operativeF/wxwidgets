@@ -13,11 +13,12 @@
 
 
 #ifndef WX_PRECOMP
+    #include "wx/msw/private.h"
+
     #include <string>
 #endif
 
 #include "wx/wx.h"
-#include "wx/msw/private.h"
 
 #include "wx/spinbutt.h"
 

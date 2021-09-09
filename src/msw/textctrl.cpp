@@ -15,6 +15,9 @@
 #if wxUSE_TEXTCTRL
 
 #ifndef WX_PRECOMP
+    #include "wx/msw/private.h"
+    #include "wx/msw/missing.h"
+    
     #include <boost/nowide/convert.hpp>
 
     #include <string>
@@ -32,8 +35,6 @@
 #include "wx/math.h"
 #include "wx/module.h"
 #include "wx/wxcrtvararg.h"
-#include "wx/msw/private.h"
-#include "wx/msw/missing.h"
 
 #include "wx/fontutil.h"
 

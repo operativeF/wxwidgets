@@ -18,6 +18,8 @@
 #include "wx/modalhook.h"
 
 #ifndef WX_PRECOMP
+    #include "wx/msw/private.h"
+
     #include <string>
 
     #include <boost/nowide/convert.hpp>
@@ -28,7 +30,6 @@
 #include "wx/math.h"
 #include "wx/msw/wrapcdlg.h"
 #include "wx/utils.h"
-#include "wx/msw/private.h"
 
 #include "wx/scopeguard.h"
 

@@ -17,10 +17,9 @@
 #include "wx/ribbon/bar.h"
 
 #ifndef WX_PRECOMP
-#endif
-
-#ifdef __WXMSW__
-#include "wx/msw/private.h"
+    #ifdef __WXMSW__
+        #include "wx/msw/private.h"
+    #endif
 #endif
 
 wxIMPLEMENT_CLASS(wxRibbonControl, wxControl);

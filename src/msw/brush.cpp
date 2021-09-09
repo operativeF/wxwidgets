@@ -11,15 +11,17 @@
 // For compilers that support precompilation, includes "wx.h".
 #include "wx/wxprec.h"
 
+#ifndef WX_PRECOMP
+    #include "wx/msw/private.h"
+    #include "wx/msw/wrap/utils.h"
+#endif
 
 #include "wx/brush.h"
 #include "wx/list.h"
 #include "wx/utils.h"
 #include "wx/app.h"
 #include "wx/bitmap.h"
-#include "wx/msw/private.h"
 
-#include "wx/msw/wrap/utils.h"
 
 // ----------------------------------------------------------------------------
 // private classes

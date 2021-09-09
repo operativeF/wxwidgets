@@ -16,6 +16,8 @@
 #include "wx/progdlg.h"
 
 #ifndef WX_PRECOMP
+    #include "wx/msw/private.h"
+
     #include <boost/nowide/convert.hpp>
     #include <boost/nowide/stackstring.hpp>
     #include <gsl/gsl>
@@ -24,7 +26,6 @@
 #include "wx/app.h"
 #include "wx/msgdlg.h"
 #include "wx/stopwatch.h"
-#include "wx/msw/private.h"
 
 #include "wx/msw/private/msgdlg.h"
 #include "wx/evtloop.h"

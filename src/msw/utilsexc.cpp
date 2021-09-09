@@ -13,6 +13,8 @@
 
 
 #ifndef WX_PRECOMP
+    #include "wx/msw/private.h"
+
     #include <vector>
 #endif
 
@@ -24,7 +26,6 @@
     #include "wx/stream.h"
 #endif
 #include "wx/module.h"
-#include "wx/msw/private.h"
 
 #include "wx/process.h"
 #include "wx/thread.h"

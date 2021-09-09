@@ -11,13 +11,16 @@
 
 #if wxUSE_AUI && wxUSE_UXTHEME && !defined(__WXUNIVERSAL__)
 
+#ifndef WX_PRECOMP
+    #include "wx/msw/private.h"
+#endif
+
 #include "wx/dc.h"
 #include "wx/settings.h"
 
 #include "wx/aui/tabart.h"
 #include "wx/aui/auibook.h"
 #include "wx/msw/uxtheme.h"
-#include "wx/msw/private.h"
 #include "wx/renderer.h"
 
 wxAuiMSWTabArt::wxAuiMSWTabArt()

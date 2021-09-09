@@ -11,6 +11,10 @@
 // For compilers that support precompilation, includes "wx.h".
 #include "wx/wxprec.h"
 
+#ifndef WX_PRECOMP
+    #include "wx/msw/private.h"
+    #include "wx/msw/wrap/utils.h"
+#endif
 
 #include "wx/fontutil.h"
 
@@ -18,8 +22,6 @@
 #include "wx/log.h"
 #include "wx/intl.h"
 #include "wx/wxcrtvararg.h"
-#include "wx/msw/private.h"
-#include "wx/msw/wrap/utils.h"
 
 #include "wx/encinfo.h"
 #include "wx/fontmap.h"

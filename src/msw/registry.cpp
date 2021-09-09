@@ -18,17 +18,18 @@
 #if wxUSE_REGKEY
 
 #ifndef WX_PRECOMP
+    #include "wx/msw/private.h"
+    #include "wx/msw/wrapwin.h"
+
     #include <fmt/core.h>
     #include <cstdlib>      // for _MAX_PATH
 #endif
 
-#include "wx/msw/wrapwin.h"
 #include "wx/string.h"
 #include "wx/intl.h"
 #include "wx/log.h"
 #include "wx/crt.h"
 #include "wx/utils.h"
-#include "wx/msw/private.h"
 #include "wx/dynlib.h"
 #include "wx/file.h"
 #include "wx/wfstream.h"

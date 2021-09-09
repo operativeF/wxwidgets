@@ -16,6 +16,10 @@
 
 #include "wx/msw/private/timer.h"
 
+#ifndef WX_PRECOMP
+    #include "wx/msw/private.h"
+#endif
+
 #include "wx/list.h"
 #include "wx/event.h"
 #include "wx/app.h"
@@ -23,7 +27,6 @@
 #include "wx/log.h"
 #include "wx/hashmap.h"
 #include "wx/module.h"
-#include "wx/msw/private.h"
 
 #include "wx/msw/private/hiddenwin.h"
 

@@ -10,7 +10,10 @@
 #include "wx/wxprec.h"
 
 
-#include "wx/msw/private.h"
+#ifndef WX_PRECOMP
+    #include "wx/msw/private.h"
+#endif
+
 #include "wx/systhemectrl.h"
 #include "wx/msw/uxtheme.h"
 

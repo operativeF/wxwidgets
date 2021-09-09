@@ -25,10 +25,6 @@
     #include  "wx/stream.h"
 #endif // wxUSE_STREAMS
 
-#if defined(__WINDOWS__)
-    #include "wx/msw/private.h"
-#endif  //windows.h
-
 #include  "wx/file.h"
 #include  "wx/textfile.h"
 #include  "wx/memtext.h"
@@ -40,8 +36,14 @@
 
 #include  "wx/stdpaths.h"
 
-#include  <cctype>
-#include  <cstdlib>
+#ifndef WX_PRECOMP
+    #if defined(__WINDOWS__)
+        #include "wx/msw/private.h"
+    #endif  //windows.h
+
+    #include  <cctype>
+    #include  <cstdlib>
+#endif
 
 // ----------------------------------------------------------------------------
 // constants

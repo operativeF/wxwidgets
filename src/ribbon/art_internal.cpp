@@ -21,8 +21,10 @@
 
 #include "wx/dc.h"
 
-#ifdef __WXMSW__
-#include "wx/msw/private.h"
+#ifndef WX_PRECOMP
+    #ifdef __WXMSW__
+        #include "wx/msw/private.h"
+    #endif
 #endif
 
 wxColour wxRibbonInterpolateColour(const wxColour& start_colour,

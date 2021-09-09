@@ -19,9 +19,11 @@
 
 #include "wx/renderer.h"
 
-#ifdef __WXMSW__
-    #include "wx/msw/private.h"
-#endif // __WXMSW__
+#ifndef WX_PRECOMP
+    #ifdef __WXMSW__
+        #include "wx/msw/private.h"
+    #endif // __WXMSW__
+#endif
 
 // if we have another implementation of this class we should extract
 // the lines below to a common file

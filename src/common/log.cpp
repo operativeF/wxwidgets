@@ -15,6 +15,10 @@
 #if wxUSE_LOG
 
 #ifndef WX_PRECOMP
+    #if defined(__WINDOWS__)
+        #include "wx/msw/private.h" // includes windows.h
+    #endif
+    
     #include <algorithm>
     #include <iostream>
     #include <vector>
@@ -28,10 +32,6 @@
 #include "wx/intl.h"
 #include "wx/string.h"
 #include "wx/utils.h"
-
-#if defined(__WINDOWS__)
-    #include "wx/msw/private.h" // includes windows.h
-#endif
 
 #include "wx/apptrait.h"
 #include "wx/datetime.h"

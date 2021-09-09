@@ -17,6 +17,8 @@
 #include "wx/msw/mimetype.h"
 
 #ifndef WX_PRECOMP
+    #include "wx/msw/private.h"
+
     #include <cctype>
 
     #include <fmt/core.h>
@@ -30,7 +32,6 @@
     #include "wx/icon.h"
     #include "wx/msgdlg.h"
 #endif
-#include "wx/msw/private.h"
 
 #include "wx/file.h"
 #include "wx/iconloc.h"

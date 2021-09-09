@@ -18,11 +18,11 @@
 #include "wx/aui/dockart.h"
 
 #ifndef WX_PRECOMP
+    #ifdef __WXMSW__
+        #include "wx/msw/private.h"
+    #endif
 #endif
 
-#ifdef __WXMSW__
-#include "wx/msw/private.h"
-#endif
 
 wxIMPLEMENT_CLASS(wxAuiFloatingFrame, wxAuiFloatingFrameBaseClass);
 

@@ -13,6 +13,10 @@
 
 #if wxUSE_STATTEXT
 
+#ifndef WX_PRECOMP
+    #include "wx/msw/private.h"
+#endif
+
 #include "wx/stattext.h"
 
 #include "wx/event.h"
@@ -20,7 +24,6 @@
 #include "wx/brush.h"
 #include "wx/dcclient.h"
 #include "wx/settings.h"
-#include "wx/msw/private.h"
 
 #include "wx/stringutils.h"
 

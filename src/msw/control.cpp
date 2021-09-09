@@ -17,18 +17,19 @@
 #include "wx/control.h"
 
 #ifndef WX_PRECOMP
+    #include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
+    #include "wx/msw/private.h"
+    #include "wx/msw/missing.h"
+    
     #include <boost/nowide/convert.hpp>
 #endif
 
-#include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
 #include "wx/event.h"
 #include "wx/app.h"
 #include "wx/dcclient.h"
 #include "wx/log.h"
 #include "wx/settings.h"
 #include "wx/ctrlsub.h"
-#include "wx/msw/private.h"
-#include "wx/msw/missing.h"
 
 #include "wx/renderer.h"
 #include "wx/msw/uxtheme.h"

@@ -22,10 +22,11 @@
 #include "wx/dialog.h"
 #include "wx/log.h"
 #include "wx/app.h"     // for GetComCtl32Version()
-#include "wx/msw/private.h"
 #include "wx/stringutils.h"
 
 #ifndef WX_PRECOMP
+    #include "wx/msw/private.h"
+
     #include <boost/nowide/convert.hpp>
     #include <boost/nowide/stackstring.hpp>
 #endif

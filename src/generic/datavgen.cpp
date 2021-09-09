@@ -18,19 +18,19 @@
 #ifdef wxHAS_GENERIC_DATAVIEWCTRL
 
 #ifndef WX_PRECOMP
+    #ifdef __WXMSW__
+        #include "wx/msw/private.h"
+        #include "wx/msw/wrapwin.h"
+        #include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
+    #endif
+
     #include <fmt/core.h>
     #include <gsl/gsl>
     
     #include <vector>
 #endif
 
-#ifdef __WXMSW__
-    #include "wx/app.h"          // GetRegisteredClassName()
-    #include "wx/msw/private.h"
-    #include "wx/msw/wrapwin.h"
-    #include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
-#endif
-
+#include "wx/app.h"          // GetRegisteredClassName()
 #include "wx/sizer.h"
 #include "wx/log.h"
 #include "wx/dcclient.h"

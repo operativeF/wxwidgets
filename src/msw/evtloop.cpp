@@ -12,12 +12,15 @@
 #include "wx/wxprec.h"
 
 
+#ifndef WX_PRECOMP
+    #include "wx/msw/private.h"
+#endif
+
 #include "wx/evtloop.h"
 
 #include "wx/window.h"
 #include "wx/app.h"
 #include "wx/log.h"
-#include "wx/msw/private.h"
 
 #include "wx/thread.h"
 #include "wx/except.h"

@@ -18,6 +18,8 @@
 #include "wx/mdi.h"
 
 #ifndef WX_PRECOMP
+    #include "wx/msw/private.h"
+
     #include <algorithm>
 
     #include <boost/nowide/convert.hpp>
@@ -35,7 +37,6 @@
 #include "wx/log.h"
 #include "wx/sizer.h"
 #include "wx/toolbar.h"
-#include "wx/msw/private.h"
 
 #include "wx/stockitem.h"
 #include "wx/msw/private/winstyle.h"

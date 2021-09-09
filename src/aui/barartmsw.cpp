@@ -11,6 +11,10 @@
 
 #if wxUSE_AUI && wxUSE_UXTHEME
 
+#ifndef WX_PRECOMP
+    #include "wx/msw/private.h"
+#endif
+
 #include "wx/bitmap.h"
 #include "wx/dcclient.h"
 #include "wx/app.h"
@@ -19,7 +23,6 @@
 #include "wx/aui/auibar.h"
 #include "wx/aui/framemanager.h"
 #include "wx/msw/uxtheme.h"
-#include "wx/msw/private.h"
 
 wxAuiMSWToolBarArt::wxAuiMSWToolBarArt()
 {

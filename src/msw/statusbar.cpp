@@ -16,16 +16,17 @@
 
 #include "wx/statusbr.h"
 
-#include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
 #include "wx/frame.h"
 #include "wx/settings.h"
 #include "wx/dcclient.h"
 #include "wx/intl.h"
 #include "wx/log.h"
 #include "wx/control.h"
-#include "wx/msw/private.h"
 
 #ifndef WX_PRECOMP
+    #include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
+    #include "wx/msw/private.h"
+
     #include <numeric>
 
     #include <boost/nowide/convert.hpp>

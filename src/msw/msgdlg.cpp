@@ -15,6 +15,8 @@
 #if wxUSE_MSGDLG
 
 #ifndef WX_PRECOMP
+    #include "wx/msw/private.h"
+
     #include <boost/nowide/convert.hpp>
     #include <boost/nowide/stackstring.hpp>
 #endif
@@ -23,7 +25,6 @@
 #include "wx/app.h"
 #include "wx/intl.h"
 #include "wx/utils.h"
-#include "wx/msw/private.h"
 #include "wx/hashmap.h"
 
 #include "wx/ptr_scpd.h"

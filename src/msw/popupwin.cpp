@@ -14,7 +14,10 @@
 
 #if wxUSE_POPUPWIN
 
-#include "wx/msw/private.h"     // for GetDesktopWindow()
+#ifndef WX_PRECOMP
+    #include "wx/msw/private.h"     // for GetDesktopWindow()
+#endif
+
 #include "wx/popupwin.h"
 
 

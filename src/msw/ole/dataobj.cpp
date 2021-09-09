@@ -15,6 +15,8 @@
 #if wxUSE_DATAOBJ
 
 #ifndef WX_PRECOMP
+    #include "wx/msw/private.h"         // includes <windows.h>
+
     #include <vector>
 
     #include <gsl/gsl>
@@ -28,7 +30,6 @@
 #include "wx/dataobj.h"
 
 #include "wx/scopedarray.h"
-#include "wx/msw/private.h"         // includes <windows.h>
 #include "wx/msw/dib.h"
 #include "wx/msw/wrapshl.h"
 

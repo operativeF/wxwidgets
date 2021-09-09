@@ -21,8 +21,10 @@
 
 #include "wx/dcmemory.h"
 
-#ifdef __WXMSW__
-#include "wx/msw/private.h"
+#ifndef WX_PRECOMP
+    #ifdef __WXMSW__
+        #include "wx/msw/private.h"
+    #endif
 #endif
 
 static const char* const gallery_up_xpm[] = {

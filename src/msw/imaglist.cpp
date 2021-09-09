@@ -13,6 +13,10 @@
 
 
 #ifndef WX_PRECOMP
+    #include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
+    #include "wx/msw/private.h"
+    #include "wx/msw/wrap/utils.h"
+
     #include <algorithm>
 #endif
 
@@ -23,10 +27,7 @@
 #include "wx/image.h"
 #include "wx/intl.h"
 #include "wx/log.h"
-#include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
 #include "wx/window.h"
-#include "wx/msw/wrap/utils.h"
-#include "wx/msw/private.h"
 #include "wx/dc.h"
 
 #include "wx/imaglist.h"

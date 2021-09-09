@@ -12,13 +12,15 @@
 
 
 #ifndef WX_PRECOMP
+    #include "wx/msw/private.h"
+    #include "wx/msw/wrapwin.h"
+
     #include <boost/nowide/convert.hpp>
 #endif // WX_PRECOMP
 
 #include "wx/event.h"
 #include "wx/string.h"
 #include "wx/textctrl.h"    // Only for wxTE_PROCESS_XXX constants
-#include "wx/msw/private.h"
 
 #if wxUSE_TEXTCTRL || wxUSE_COMBOBOX
 
@@ -33,7 +35,6 @@
     #include "wx/msw/uxtheme.h"
 #endif
 
-#include "wx/msw/wrapwin.h"
 #include <shlwapi.h>
 
 

@@ -14,8 +14,10 @@
 
 #if wxUSE_PALETTE
 
-#include "wx/msw/private.h"
-#include "wx/msw/wrap/utils.h"
+#ifndef WX_PRECOMP
+    #include "wx/msw/private.h"
+    #include "wx/msw/wrap/utils.h"
+#endif
 
 #include "wx/palette.h"
 

@@ -20,10 +20,9 @@
 #include "wx/clntdata.h"
 
 #ifndef WX_PRECOMP
-#endif
-
-#ifdef __WXMSW__
-#include "wx/msw/private.h"
+    #ifdef __WXMSW__
+        #include "wx/msw/private.h"
+    #endif
 #endif
 
 wxDEFINE_EVENT(wxEVT_RIBBONGALLERY_HOVER_CHANGED, wxRibbonGalleryEvent);

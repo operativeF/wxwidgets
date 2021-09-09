@@ -11,10 +11,13 @@
 #include "wx/wxprec.h"
 
 
-#include "wx/app.h"
-#include "wx/msw/wrapcctl.h"
-
 #if wxUSE_DATEPICKCTRL || wxUSE_CALENDARCTRL
+
+#include "wx/app.h"
+
+#ifndef WX_PRECOMP
+    #include "wx/msw/wrapcctl.h"
+#endif
 
 #include "wx/msw/private/datecontrols.h"
 

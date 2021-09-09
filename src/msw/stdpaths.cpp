@@ -16,11 +16,14 @@
 
 #include "wx/stdpaths.h"
 
+#ifndef WX_PRECOMP
+    #include "wx/msw/private.h"
+#endif
+
 #include "wx/utils.h"
 #include "wx/dynlib.h"
 #include "wx/filename.h"
 
-#include "wx/msw/private.h"
 #include "wx/msw/wrapshl.h"
 #include "wx/msw/private/cotaskmemptr.h"
 #include <initguid.h>

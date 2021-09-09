@@ -14,6 +14,11 @@
 
 #if wxUSE_WEBVIEW && wxUSE_WEBVIEW_IE
 
+#ifndef WX_PRECOMP
+    #include "wx/msw/missing.h"
+    #include "wx/msw/private.h"
+#endif
+
 #include "wx/msw/registry.h"
 #include "wx/msw/ole/safearray.h"
 #include "wx/filesys.h"
@@ -21,8 +26,6 @@
 #include "wx/scopeguard.h"
 #include "wx/tokenzr.h"
 
-#include "wx/msw/missing.h"
-#include "wx/msw/private.h"
 #include "wx/msw/private/webview_ie.h"
 #include "wx/private/jsscriptwrapper.h"
 

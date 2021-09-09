@@ -16,6 +16,9 @@
 #include "wx/tooltip.h"
 
 #ifndef WX_PRECOMP
+    #include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
+    #include "wx/msw/private.h"
+
     #include <vector>
 
     #include <boost/nowide/convert.hpp>
@@ -23,15 +26,12 @@
     #include <fmt/core.h>
 #endif
 
-#include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
 #include "wx/app.h"
 #include "wx/control.h"
 #include "wx/module.h"
 #include "wx/toplevel.h"
-#include "wx/msw/private.h"
 #include "wx/stringutils.h"
 #include "wx/tokenzr.h"
-
 
 
 #ifndef TTTOOLINFO_V1_SIZE

@@ -47,6 +47,9 @@
 #endif
 
 #ifndef WX_PRECOMP
+    #include "wx/msw/private.h"
+    #include "wx/msw/wrap/utils.h"
+    
     #include <boost/nowide/convert.hpp>
     #include <fmt/core.h>
     #include <gsl/gsl>
@@ -61,8 +64,6 @@
 #include "wx/image.h"
 #include "wx/module.h"
 #include "wx/window.h"
-#include "wx/msw/private.h"
-#include "wx/msw/wrap/utils.h"
 
 #include "wx/graphics.h"
 #include "wx/dynlib.h"

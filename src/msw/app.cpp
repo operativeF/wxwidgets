@@ -13,6 +13,10 @@
 
 
 #ifndef WX_PRECOMP
+    #include "wx/msw/wrapcctl.h"
+    #include "wx/msw/missing.h"
+    #include "wx/msw/private.h"
+    
     #include <string>
     #include <vector>
 
@@ -20,7 +24,6 @@
     #include <boost/nowide/stackstring.hpp>
 #endif
 
-#include "wx/msw/wrapcctl.h"
 #include "wx/frame.h"
 #include "wx/app.h"
 #include "wx/utils.h"
@@ -37,8 +40,7 @@
 #include "wx/crt.h"
 #include "wx/log.h"
 #include "wx/module.h"
-#include "wx/msw/missing.h"
-#include "wx/msw/private.h"
+
 #include "wx/apptrait.h"
 #include "wx/filename.h"
 #include "wx/dynlib.h"

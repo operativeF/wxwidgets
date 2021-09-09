@@ -14,11 +14,14 @@
 
 #if wxUSE_RADIOBTN
 
+#ifndef WX_PRECOMP
+    #include "wx/msw/private.h"
+#endif
+
 #include "wx/radiobut.h"
 
 #include "wx/settings.h"
 #include "wx/dcclient.h"
-#include "wx/msw/private.h"
 #include "wx/private/window.h"
 #include "wx/renderer.h"
 #include "wx/msw/uxtheme.h"

@@ -14,6 +14,10 @@
 
 #if wxUSE_CLIPBOARD
 
+#ifndef WX_PRECOMP
+    #include "wx/msw/private.h"
+#endif
+
 #include "wx/clipbrd.h"
 
 #include "wx/object.h"
@@ -26,7 +30,6 @@
 #include "wx/log.h"
 #include "wx/dataobj.h"
 #include "wx/dcmemory.h"
-#include "wx/msw/private.h"
 
 #if wxUSE_METAFILE
     #include "wx/metafile.h"

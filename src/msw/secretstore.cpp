@@ -13,7 +13,10 @@
 
 #if wxUSE_SECRETSTORE
 
-#include "wx/msw/private.h"
+#ifndef WX_PRECOMP
+    #include "wx/msw/private.h"
+#endif
+
 #include "wx/secretstore.h"
 #include "wx/private/secretstore.h"
 

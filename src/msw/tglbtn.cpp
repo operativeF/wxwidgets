@@ -15,13 +15,16 @@
 
 #if wxUSE_TOGGLEBTN
 
+#ifndef WX_PRECOMP
+    #include "wx/msw/private.h"
+#endif
+
 #include "wx/tglbtn.h"
 
 #include "wx/button.h"
 #include "wx/brush.h"
 #include "wx/dcscreen.h"
 #include "wx/settings.h"
-#include "wx/msw/private.h"
 
 #include "wx/log.h"
 

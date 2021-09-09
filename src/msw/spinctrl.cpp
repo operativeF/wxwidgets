@@ -17,6 +17,9 @@
 #include "wx/spinctrl.h"
 
 #ifndef WX_PRECOMP
+    #include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
+    #include "wx/msw/private.h"
+
     #include <algorithm>
     #include <charconv>
     #include <limits>
@@ -25,14 +28,11 @@
 #endif
 
 #include "wx/hashmap.h"
-#include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
 #include "wx/event.h"
 #include "wx/textctrl.h"
 #include "wx/wxcrtvararg.h"
-#include "wx/msw/private.h"
 
 #include "wx/private/spinctrl.h"
-
 #include "wx/msw/private/winstyle.h"
 
 #include "wx/scopeguard.h"

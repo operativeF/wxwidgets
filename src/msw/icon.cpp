@@ -13,6 +13,8 @@
 
 
 #ifndef WX_PRECOMP
+    #include "wx/msw/private.h"
+
     #include <fmt/core.h>
 #endif
 
@@ -22,7 +24,6 @@
 #include "wx/icon.h"
 #include "wx/bitmap.h"
 #include "wx/log.h"
-#include "wx/msw/private.h"
 
 
 // ----------------------------------------------------------------------------

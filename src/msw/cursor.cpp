@@ -13,6 +13,9 @@
 
 
 #ifndef WX_PRECOMP
+    #include "wx/msw/private.h"
+    #include "wx/msw/missing.h" // IDC_HAND
+    
     #include <boost/nowide/convert.hpp>
 #endif
 
@@ -25,8 +28,6 @@
 #include "wx/intl.h"
 #include "wx/image.h"
 #include "wx/module.h"
-#include "wx/msw/private.h"
-#include "wx/msw/missing.h" // IDC_HAND
 #include "wx/display.h"
 
 

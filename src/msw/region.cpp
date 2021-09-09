@@ -11,14 +11,14 @@
 // For compilers that support precompilation, includes "wx.h".
 #include "wx/wxprec.h"
 
+#ifndef WX_PRECOMP
+    #include "wx/msw/private.h"
+    #include "wx/msw/wrap/utils.h"
+#endif
 
 #include "wx/region.h"
-
 #include "wx/gdicmn.h"
 
-#include "wx/msw/wrap/utils.h"
-
-#include "wx/msw/private.h"
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxRegion, wxGDIObject);
 wxIMPLEMENT_DYNAMIC_CLASS(wxRegionIterator, wxObject);

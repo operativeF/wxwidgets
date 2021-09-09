@@ -14,14 +14,14 @@
 
 #if wxUSE_HELP
 
-#ifdef __WXMSW__
-    #include "wx/msw/private.h"
-#endif
-
 #include "wx/filename.h"
 #include "wx/msw/helpwin.h"
 
 #ifndef WX_PRECOMP
+    #ifdef __WXMSW__
+        #include "wx/msw/private.h"
+    #endif
+    
     #include <ctime>
 #endif
 

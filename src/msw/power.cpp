@@ -12,7 +12,10 @@
 #include "wx/wxprec.h"
 
 
-#include "wx/msw/private.h"
+#ifndef WX_PRECOMP
+    #include "wx/msw/private.h"
+#endif
+
 #include "wx/power.h"
 #include "wx/atomic.h"
 

@@ -13,7 +13,9 @@
 
 #if wxUSE_FSWATCHER
 
-#include "wx/msw/private.h"
+#ifndef WX_PRECOMP  
+    #include "wx/msw/private.h"
+#endif
 
 #include "wx/fswatcher.h"
 #include "wx/thread.h"

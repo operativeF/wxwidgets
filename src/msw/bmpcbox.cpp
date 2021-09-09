@@ -15,11 +15,12 @@
 #include "wx/bmpcbox.h"
 
 #ifndef WX_PRECOMP
+    #include "wx/msw/private.h"
+
     #include <vector>
 #endif
 
 #include "wx/log.h"
-#include "wx/msw/private.h"
 #include "wx/settings.h"
 
 #include "wx/msw/dcclient.h"

@@ -18,6 +18,11 @@
     #include <algorithm>
     #include <array>
     #include <vector>
+
+    #ifdef __WINDOWS__
+        #include "wx/msw/private.h"
+        #include "wx/msw/missing.h"
+    #endif
 #endif
 
 #include "wx/intl.h"
@@ -34,9 +39,6 @@
 #endif
 
 #ifdef __WINDOWS__
-    #include "wx/msw/private.h"
-    #include "wx/msw/missing.h"
-
     // sys/cygwin.h is needed for cygwin_conv_to_full_win32_path()
     // and for cygwin_conv_path()
     //

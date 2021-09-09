@@ -14,12 +14,13 @@
 #if wxUSE_COMMANDLINKBUTTON
 
 #ifndef WX_PRECOMP
+    #include "wx/msw/private.h"
+
     #include <boost/nowide/convert.hpp>
 #endif
 
 #include "wx/app.h"
 #include "wx/dcclient.h"
-#include "wx/msw/private.h"
 #include "wx/commandlinkbutton.h"
 #include "wx/msw/private/button.h"
 #include "wx/msw/private/dc.h"

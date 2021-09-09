@@ -15,11 +15,11 @@
 #if wxUSE_OLE && wxUSE_DRAG_AND_DROP
 
 #ifndef WX_PRECOMP
+    #include "wx/msw/private.h"
     #include "wx/msw/wrapwin.h"
-    #include "wx/log.h"
 #endif
 
-#include "wx/msw/private.h"
+#include "wx/log.h"
 #include "wx/msw/private/comptr.h"
 
 #include "wx/msw/wrapshl.h"            // for DROPFILES structure

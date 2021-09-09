@@ -14,12 +14,13 @@
 
 #if wxUSE_UIACTIONSIMULATOR
 
-#include "wx/msw/private.h"             // For wxGetCursorPosMSW()
+#ifndef WX_PRECOMP
+    #include "wx/msw/private.h"             // For wxGetCursorPosMSW()
+    #include "wx/msw/wrapwin.h"
+#endif
 
 #include "wx/uiaction.h"
 #include "wx/private/uiaction.h"
-
-#include "wx/msw/wrapwin.h"
 
 #include "wx/msw/private/keyboard.h"
 

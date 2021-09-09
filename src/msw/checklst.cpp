@@ -14,8 +14,13 @@
 
 #if wxUSE_CHECKLISTBOX && wxUSE_OWNER_DRAWN
 
+#ifndef WX_PRECOMP
+    #include "wx/msw/private.h"
+    #include "wx/msw/wrapcctl.h"
+    #include "wx/msw/wrap/utils.h"
+#endif
+
 #include "wx/checklst.h"
-#include "wx/msw/wrapcctl.h"
 #include "wx/object.h"
 #include "wx/colour.h"
 #include "wx/font.h"
@@ -25,9 +30,6 @@
 #include "wx/dcmemory.h"
 #include "wx/settings.h"
 #include "wx/log.h"
-#include "wx/msw/private.h"
-
-#include "wx/msw/wrap/utils.h"
 
 #include "wx/ownerdrw.h"
 

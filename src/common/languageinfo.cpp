@@ -19,8 +19,10 @@
 
 #if wxUSE_INTL
 
-#ifdef __WIN32__
-    #include "wx/msw/private.h"
+#ifndef WX_PRECOMP
+    #ifdef __WIN32__
+        #include "wx/msw/private.h"
+    #endif
 #endif
 
 // ----------------------------------------------------------------------------

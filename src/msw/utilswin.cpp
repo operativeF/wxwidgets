@@ -11,8 +11,11 @@
 #include "wx/wxprec.h"
 
 
+#ifndef WX_PRECOMP
+    #include "wx/msw/private.h"     // includes <windows.h>
+#endif
+
 #include "wx/utils.h"
-#include "wx/msw/private.h"     // includes <windows.h>
 
 #include "wx/private/launchbrowser.h"
 #include "wx/msw/registry.h"

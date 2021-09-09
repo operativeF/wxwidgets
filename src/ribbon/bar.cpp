@@ -18,6 +18,10 @@
 #include "wx/dcbuffer.h"
 
 #ifndef WX_PRECOMP
+    #ifdef __WXMSW__
+        #include "wx/msw/private.h"
+    #endif
+    
     #include <algorithm>
     #include <vector>
 
@@ -25,10 +29,6 @@
 #endif
 
 #include "wx/app.h"
-
-#ifdef __WXMSW__
-#include "wx/msw/private.h"
-#endif
 
 #include "wx/arrimpl.cpp"
 #include "wx/imaglist.h"

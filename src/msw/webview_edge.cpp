@@ -14,6 +14,10 @@
 
 #if wxUSE_WEBVIEW && wxUSE_WEBVIEW_EDGE
 
+#ifndef WX_PRECOMP
+    #include "wx/msw/private.h"
+#endif
+
 #include "wx/filename.h"
 #include "wx/module.h"
 #include "wx/log.h"
@@ -22,7 +26,6 @@
 #include "wx/tokenzr.h"
 #include "wx/private/jsscriptwrapper.h"
 #include "wx/private/json.h"
-#include "wx/msw/private.h"
 #include "wx/msw/private/cotaskmemptr.h"
 #include "wx/msw/private/webview_edge.h"
 

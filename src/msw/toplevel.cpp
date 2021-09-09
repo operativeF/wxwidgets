@@ -15,6 +15,9 @@
 #include "wx/toplevel.h"
 
 #ifndef WX_PRECOMP
+    #include "wx/msw/private.h"
+    #include "wx/msw/missing.h"
+    
     #include <string>
 
     #include <boost/nowide/convert.hpp>
@@ -28,8 +31,6 @@
 #include "wx/menu.h"
 #include "wx/containr.h"        // wxSetFocusToChild()
 #include "wx/module.h"
-#include "wx/msw/private.h"
-#include "wx/msw/missing.h"
 
 #include "wx/scopeguard.h"
 #include "wx/tooltip.h"

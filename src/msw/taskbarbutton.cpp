@@ -12,13 +12,14 @@
 
 
 #ifndef WX_PRECOMP
+    #include "wx/msw/private.h"
+
     #include <boost/nowide/convert.hpp>
     #include <boost/nowide/stackstring.hpp>
 #endif
 
 #include "wx/icon.h"
 #include "wx/toplevel.h"
-#include "wx/msw/private.h"
 
 #if wxUSE_TASKBARBUTTON
 

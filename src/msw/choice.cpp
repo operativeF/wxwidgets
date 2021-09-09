@@ -15,6 +15,8 @@
 #if wxUSE_CHOICE
 
 #ifndef WX_PRECOMP
+    #include "wx/msw/private.h"
+
     #include <boost/nowide/convert.hpp>
 #endif
 
@@ -24,7 +26,6 @@
 #include "wx/log.h"
 #include "wx/brush.h"
 #include "wx/settings.h"
-#include "wx/msw/private.h"
 #include "wx/dynlib.h"
 
 bool wxChoice::Create(wxWindow *parent,

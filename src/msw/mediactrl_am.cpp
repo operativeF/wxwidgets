@@ -42,6 +42,8 @@
 #include "wx/mediactrl.h"
 
 #ifndef WX_PRECOMP
+    #include "wx/msw/private.h" // user info and wndproc setting/getting
+
     #include <gsl/gsl>
 #endif
 
@@ -50,7 +52,6 @@
 #include "wx/timer.h"
 #include "wx/math.h"        // log10 & pow
 #include "wx/stopwatch.h"
-#include "wx/msw/private.h" // user info and wndproc setting/getting
 
 #include "wx/dynlib.h"
 

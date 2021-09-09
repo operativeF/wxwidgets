@@ -16,6 +16,8 @@
 #if wxUSE_TASKBARICON
 
 #ifndef WX_PRECOMP
+    #include "wx/msw/private.h"
+
     #include <boost/nowide/convert.hpp>
 #endif
 
@@ -24,7 +26,6 @@
 #include "wx/utils.h"
 #include "wx/menu.h"
 #include "wx/app.h"
-#include "wx/msw/private.h"
 
 #include "wx/msw/wrapshl.h"
 

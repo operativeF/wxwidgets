@@ -12,6 +12,11 @@
 #include "wx/wxprec.h"
 
 #ifndef WX_PRECOMP
+    #include "wx/msw/wrapwin.h"
+    #include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
+    #include "wx/msw/missing.h"
+    #include "wx/msw/private.h"
+
     #include <array>
     #include <numbers>
     #include <vector>
@@ -21,9 +26,6 @@
 #endif
 
 #include "wx/window.h"
-#include "wx/msw/wrapwin.h"
-#include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
-#include "wx/msw/missing.h"
 #include "wx/accel.h"
 #include "wx/menu.h"
 #include "wx/dc.h"
@@ -46,7 +48,6 @@
 #include "wx/textctrl.h"
 #include "wx/menuitem.h"
 #include "wx/module.h"
-#include "wx/msw/private.h"
 
 #if wxUSE_OWNER_DRAWN && !defined(__WXUNIVERSAL__)
     #include "wx/ownerdrw.h"
