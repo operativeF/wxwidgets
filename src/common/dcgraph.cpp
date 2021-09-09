@@ -14,6 +14,10 @@
 
 #if wxUSE_GRAPHICS_CONTEXT
 
+#ifndef WX_PRECOMP
+    #include <numbers>
+#endif
+
 #include "wx/dcgraph.h"
 #include "wx/icon.h"
 #include "wx/dcclient.h"
@@ -22,7 +26,6 @@
 #include "wx/geometry.h"
 #include "wx/stringutils.h"
 
-#include <numbers>
 
 //-----------------------------------------------------------------------------
 // Local functions

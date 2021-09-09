@@ -28,7 +28,9 @@
 #include "wx/hashmap.h"
 #include "wx/module.h"
 
-#include <clocale>
+#ifndef WX_PRECOMP
+    #include <clocale>
+#endif
 
 #ifdef HAVE_LANGINFO_H
     #include <langinfo.h>

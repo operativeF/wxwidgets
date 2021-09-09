@@ -18,6 +18,7 @@
 
 #ifndef WX_PRECOMP
     #include <algorithm>
+    #include <charconv>
     #include <limits>
 
     #include <boost/nowide/convert.hpp>
@@ -39,8 +40,6 @@
 #if wxUSE_TOOLTIPS
     #include "wx/tooltip.h"
 #endif // wxUSE_TOOLTIPS
-
-#include <charconv>
 
 // ----------------------------------------------------------------------------
 // macros

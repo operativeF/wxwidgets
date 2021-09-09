@@ -62,9 +62,10 @@
     #error  "Please specify the header with file functions declarations."
 #endif  //Win/UNIX
 
-#include  <cstdio>       // SEEK_xxx constants
-
-#include <cerrno>
+#ifndef WX_PRECOMP
+    #include <cstdio>       // SEEK_xxx constants
+    #include <cerrno>
+#endif
 
 // Windows compilers don't have these constants
 #ifndef W_OK

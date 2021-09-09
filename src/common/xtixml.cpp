@@ -26,9 +26,11 @@
 
 // STL headers
 
-#include <map>
-#include <vector>
-#include <string>
+#ifndef WX_PRECOMP
+    #include <map>
+    #include <vector>
+    #include <string>
+#endif
 
 using namespace std;
 

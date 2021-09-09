@@ -14,6 +14,10 @@
 
 #if wxUSE_STATUSBAR
 
+#ifndef WX_PRECOMP
+    #include <numeric>
+#endif
+
 #include "wx/statusbr.h"
 #include "wx/settings.h"
 #include "wx/dcclient.h"
@@ -24,7 +28,6 @@
     #include "wx/gtk/private.h"
 #endif
 
-#include <numeric>
 
 // we only have to do it here when we use wxStatusBarGeneric in addition to the
 // standard wxStatusBar class, if wxStatusBarGeneric is the same as

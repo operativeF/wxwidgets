@@ -42,7 +42,9 @@
 #include "wx/app.h"
 WX_CHECK_BUILD_OPTIONS("wxRichTextCtrl")
 
-#include <gsl/gsl>
+#ifndef WX_PRECOMP
+    #include <gsl/gsl>
+#endif
 
 wxDEFINE_EVENT( wxEVT_RICHTEXT_LEFT_CLICK, wxRichTextEvent );
 wxDEFINE_EVENT( wxEVT_RICHTEXT_MIDDLE_CLICK, wxRichTextEvent );

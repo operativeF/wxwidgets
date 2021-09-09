@@ -21,7 +21,9 @@
 #include "wx/filename.h"
 #include "wx/msw/helpwin.h"
 
-#include <ctime>
+#ifndef WX_PRECOMP
+    #include <ctime>
+#endif
 
 static HWND GetSuitableHWND(wxWinHelpController* controller)
 {

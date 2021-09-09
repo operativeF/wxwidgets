@@ -17,6 +17,8 @@
     #ifdef __WINDOWS__
         #include "wx/msw/wrapwin.h"
     #endif
+    
+    #include <ctime>
 #endif
 
 #include "wx/intl.h"
@@ -29,8 +31,6 @@
         #define WX_GMTOFF_IN_TM
     #endif
 #endif
-
-#include <ctime>
 
 wxDECL_FOR_STRICT_MINGW32(void, tzset, (void));
 

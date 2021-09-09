@@ -14,6 +14,7 @@
 
 #ifndef WX_PRECOMP
     #include <vector>
+    #include <clocale>             // for LC_ALL
 #endif //WX_PRECOMP
 
 #include "wx/dynarray.h"
@@ -24,8 +25,6 @@
 #include "wx/cmdline.h"
 
 #if wxUSE_CMDLINE_PARSER
-
-#include <clocale>             // for LC_ALL
 
 #include "wx/datetime.h"
 #include "wx/msgout.h"

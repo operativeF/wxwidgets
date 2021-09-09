@@ -26,9 +26,8 @@
 #ifndef WX_PRECOMP
   #include <cstdio>
   #include <cstdlib>
+  #include <cctype>
 #endif
-
-#include <cctype>
 
 
 // ----------------------------------------------------------------------------

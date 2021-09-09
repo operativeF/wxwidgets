@@ -15,6 +15,7 @@
 
 #ifndef WX_PRECOMP
     #include <algorithm>
+    #include <numeric>
     #include <utility>
 
     #include <gsl/gsl>
@@ -24,8 +25,6 @@
 #include "wx/headerctrl.h"
 #include "wx/rearrangectrl.h"
 #include "wx/renderer.h"
-
-#include <numeric>
 
 namespace
 {

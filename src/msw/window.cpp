@@ -13,6 +13,7 @@
 
 #ifndef WX_PRECOMP
     #include <array>
+    #include <numbers>
     #include <vector>
 
     #include <boost/nowide/convert.hpp>
@@ -98,8 +99,6 @@
 #include "wx/listctrl.h"
 #include "wx/dynlib.h"
 #include "wx/display.h"
-
-#include <numbers>
 
 #include <shellapi.h>
 #include <mmsystem.h>

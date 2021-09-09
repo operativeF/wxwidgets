@@ -17,6 +17,8 @@
 #include "wx/generic/grideditors.h"
 
 #ifndef WX_PRECOMP
+    #include <charconv>
+
     #include <fmt/core.h>
 #endif // WX_PRECOMP
 
@@ -33,7 +35,6 @@
 #include "wx/generic/private/grid.h"
 #include "wx/private/window.h"
 
-#include <charconv>
 
 // ----------------------------------------------------------------------------
 // wxGridCellRenderer

@@ -15,6 +15,8 @@
 #ifndef WX_PRECOMP
     #include "wx/app.h"
     #include "wx/log.h"
+
+    #include <cerrno>
 #endif
 
 #include "wx/apptrait.h"
@@ -23,8 +25,6 @@
 #include "wx/dfb/private.h"
 #include "wx/nonownedwnd.h"
 #include "wx/buffer.h"
-
-#include <errno.h>
 
 #define TRACE_EVENTS "events"
 

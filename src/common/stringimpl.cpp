@@ -27,10 +27,9 @@
 #ifndef WX_PRECOMP
     #include <cstdlib>
     #include <cstring>
+    #include <cctype>
+    #include <cerrno>
 #endif
-
-#include <cctype>
-#include <cerrno>
 
 #include "wx/stringimpl.h"
 #include "wx/wxcrt.h"

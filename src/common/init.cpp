@@ -40,7 +40,7 @@
 #endif // __WINDOWS__
 
 #if defined(__WXOSX__)
-    #include <locale.h>
+    #include <clocale>
 #endif
 
 // ----------------------------------------------------------------------------

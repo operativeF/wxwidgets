@@ -13,6 +13,10 @@
 
 #if wxUSE_SELECT_DISPATCHER
 
+#ifndef WX_PRECOMP
+    #include <cerrno>
+#endif
+
 #include "wx/private/selectdispatcher.h"
 #include "wx/unix/private.h"
 
@@ -20,7 +24,6 @@
 #include "wx/log.h"
 #include "wx/intl.h"
 
-#include <cerrno>
 
 constexpr wxChar wxSelectDispatcher_Trace[] = wxT("selectdispatcher");
 

@@ -33,15 +33,14 @@
     extern "C" int vswscanf(const wchar_t *, const wchar_t *, va_list);
 #endif
 
-#include <clocale>
-#include <ctime>
-
-
 #ifndef WX_PRECOMP
     #include "wx/string.h"
     #include "wx/hash.h"
     #include "wx/log.h"
 
+    #include <cerrno>
+    #include <clocale>
+    #include <ctime>
     #include <cstdio>
     #include <cstdlib>
     #include <cstring>
@@ -52,7 +51,6 @@
     #include <langinfo.h>
 #endif
 
-#include <cerrno>
 
 #if defined(__DARWIN__)
     #include "wx/osx/core/cfref.h"

@@ -45,12 +45,20 @@
 // Include standard headers
 #include <algorithm>
 #include <array>
+#include <cerrno>
+#include <cctype>
+#include <charconv>
 #include <cmath>
 #include <cstdlib>
+#include <cstdio>
 #include <cstring>
+#include <ctime>
+#include <functional>
 #include <iostream>
 #include <limits>
 #include <memory>
+#include <numeric>
+#include <numbers>
 #include <span>
 #include <string>
 #include <string_view>

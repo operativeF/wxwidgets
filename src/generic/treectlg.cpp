@@ -35,7 +35,9 @@
 
 #include "wx/renderer.h"
 
-#include <numeric>
+#ifndef WX_PRECOMP
+    #include <numeric>
+#endif
 
 #ifdef __WXMAC__
     #include "wx/osx/private.h"

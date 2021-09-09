@@ -29,7 +29,6 @@
     #include <string>
 #endif
 
-
 #include "wx/laywin.h"
 
 wxDEFINE_EVENT( wxEVT_SASH_DRAGGED, wxSashEvent );

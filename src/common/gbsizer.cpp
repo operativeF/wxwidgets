@@ -13,10 +13,12 @@
 // For compilers that support precompilation, includes "wx.h".
 #include "wx/wxprec.h"
 
+#ifndef WX_PRECOMP
+    #include <numeric>
+#endif
 
 #include "wx/gbsizer.h"
 
-#include <numeric>
 
 //---------------------------------------------------------------------------
 

@@ -15,6 +15,8 @@
 #if wxUSE_HELP
 
 #ifndef WX_PRECOMP
+    #include <charconv>
+
     #include <fmt/core.h>
 #endif
 
@@ -28,7 +30,6 @@
     #include "wx/utils.h"           // for wxGetMousePosition()
 #endif
 
-#include <charconv>
 
 // ----------------------------------------------------------------------------
 // wxContextHelpEvtHandler private class

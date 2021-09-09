@@ -16,6 +16,16 @@
     #ifdef __WINDOWS__
         #include  "wx/msw/wrapwin.h"  // includes windows.h for MessageBox()
     #endif
+
+    #include <clocale>
+    
+    #ifdef HAS_EXCEPTION_PTR
+        #include <exception>        // for std::current_exception()
+        #include <utility>          // for std::swap()
+    #endif
+
+    #include <exception>
+    #include <typeinfo>
 #endif //WX_PRECOMP
 
 #include "wx/list.h"
@@ -55,22 +65,11 @@
     #else
         #define HAS_EXCEPTION_PTR
     #endif
-
-
-    #ifdef HAS_EXCEPTION_PTR
-        #include <exception>        // for std::current_exception()
-        #include <utility>          // for std::swap()
-    #endif
-
-        #include <exception>
-        #include <typeinfo>
 #endif // wxUSE_EXCEPTIONS
 
 #if !defined(__WINDOWS__)
   #include  <signal.h>      // for SIGTRAP used by wxTrap()
 #endif  //Win/Unix
-
-#include <clocale>
 
 #if wxUSE_FONTMAP
     #include "wx/fontmap.h"

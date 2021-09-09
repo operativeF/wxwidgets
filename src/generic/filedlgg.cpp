@@ -35,6 +35,8 @@
     #include "wx/textctrl.h"
     #include "wx/sizer.h"
     #include "wx/filedlg.h"     // wxFD_OPEN, wxFD_SAVE...
+
+    #include <ctime>
 #endif
 
 #include "wx/longlong.h"
@@ -64,8 +66,6 @@
     # include <grp.h>
     #endif
 #endif
-
-#include <ctime>
 
 #if defined(__UNIX__)
 #include <unistd.h>

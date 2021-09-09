@@ -25,6 +25,10 @@
     #include <string>
 
     #include <gsl/gsl>
+
+    #ifdef __UNIX__
+        #include <cerrno>
+    #endif
 #endif
 
 #include "wx/object.h"
@@ -47,10 +51,6 @@
 
 #include "wx/private/fd.h"
 #include "wx/private/socket.h"
-
-#ifdef __UNIX__
-    #include <cerrno>
-#endif
 
 
 // we use MSG_NOSIGNAL to avoid getting SIGPIPE when sending data to a remote

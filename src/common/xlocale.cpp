@@ -16,8 +16,10 @@
 #include "wx/module.h"
 #include "wx/xlocale.h"
 
-#include <cerrno>
-#include <clocale>
+#ifndef WX_PRECOMP
+    #include <cerrno>
+    #include <clocale>
+#endif
 
 // ----------------------------------------------------------------------------
 // module globals

@@ -16,11 +16,12 @@
 #ifndef WX_PRECOMP
     #include "wx/list.h"
     #include "wx/event.h"
+
+    #include <cctype>
 #endif // WX_PRECOMP
 
 #include "wx/accel.h"
 
-#include <cctype>
 
 // ----------------------------------------------------------------------------
 // wxAccelList: a list of wxAcceleratorEntries

@@ -54,9 +54,11 @@
 #include "wx/osx/private.h"
 #endif
 
-// Required for wxIs... functions
-#include <cctype>
-#include <charconv>
+#ifndef WX_PRECOMP
+    // Required for wxIs... functions
+    #include <cctype>
+    #include <charconv>
+#endif
 
 // ============================================================================
 // implementation

@@ -13,9 +13,9 @@
 
 #if wxUSE_OLE && (wxUSE_DRAG_AND_DROP || wxUSE_DATAOBJ)
 
-#ifndef WX_PRECOMP
-    #include "wx/msw/wrapwin.h"
+#include "wx/msw/wrapwin.h"
 
+#ifndef WX_PRECOMP
     #include <tuple>
 #endif
 

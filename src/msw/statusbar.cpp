@@ -26,6 +26,8 @@
 #include "wx/msw/private.h"
 
 #ifndef WX_PRECOMP
+    #include <numeric>
+
     #include <boost/nowide/convert.hpp>
 #endif
 
@@ -36,7 +38,6 @@
     #include "wx/msw/uxtheme.h"
 #endif
 
-#include <numeric>
 
 // ----------------------------------------------------------------------------
 // constants

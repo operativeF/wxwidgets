@@ -17,6 +17,8 @@
 #include "wx/msw/mimetype.h"
 
 #ifndef WX_PRECOMP
+    #include <cctype>
+
     #include <fmt/core.h>
 #endif //WX_PRECOMP
 
@@ -55,8 +57,6 @@
 #define wxASSOCF_NOTRUNCATE (static_cast<ASSOCF>(0x20))
 #define wxASSOCSTR_DEFAULTICON (static_cast<ASSOCSTR>(15))
 
-// other standard headers
-#include <cctype>
 
 // in case we're compiling in non-GUI mode
 class WXDLLIMPEXP_FWD_CORE wxIcon;

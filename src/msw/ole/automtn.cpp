@@ -13,8 +13,7 @@
 
 
 #ifndef WX_PRECOMP
-    #include "wx/log.h"
-    #include "wx/math.h"
+    #include <ctime>
 
     #include <fmt/core.h>
 #endif
@@ -23,11 +22,12 @@
     #define _FORCENAMELESSUNION
 #endif
 
+#include "wx/log.h"
+#include "wx/math.h"
+
 #include "wx/msw/private.h"
 #include "wx/msw/ole/oleutils.h"
 #include "wx/msw/ole/automtn.h"
-
-#include <ctime>
 
 #include <wtypes.h>
 #include <unknwn.h>

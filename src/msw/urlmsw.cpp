@@ -15,6 +15,7 @@
 #if wxUSE_URL_NATIVE
 
 #ifndef WX_PRECOMP
+    #include <cctype>
     #include <cstring>
 #endif
 
@@ -73,7 +74,6 @@ USE_PROTOCOL(wxHTTPDummyProto)
 
 #include "wx/url.h"
 
-#include <cctype>
 #include <wininet.h>
 
 // this class needn't be exported

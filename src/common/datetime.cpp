@@ -53,6 +53,7 @@
 #ifdef __WINDOWS__
     #include "wx/msw/wrapwin.h"
 #endif
+
 #include "wx/string.h"
 #include "wx/log.h"
 #include "wx/intl.h"
