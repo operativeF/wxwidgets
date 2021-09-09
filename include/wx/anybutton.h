@@ -10,9 +10,9 @@
 #ifndef _WX_ANYBUTTON_H_BASE_
 #define _WX_ANYBUTTON_H_BASE_
 
-#include "wx/defs.h"
-
 #ifdef wxHAS_ANY_BUTTON
+
+#include "wx/defs.h"
 
 // ----------------------------------------------------------------------------
 // wxAnyButton specific flags

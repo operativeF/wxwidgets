@@ -10,9 +10,9 @@
 #ifndef _WX_DEBUGRPT_H_
 #define _WX_DEBUGRPT_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_DEBUGREPORT && wxUSE_XML
+
+#include "wx/defs.h"
 
 #include "wx/string.h"
 #include "wx/filename.h"

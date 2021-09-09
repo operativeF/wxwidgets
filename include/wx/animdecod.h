@@ -9,9 +9,9 @@
 #ifndef _WX_ANIMDECOD_H
 #define _WX_ANIMDECOD_H
 
-#include "wx/defs.h"
-
 #if wxUSE_STREAMS
+
+#include "wx/defs.h"
 
 #include "wx/colour.h"
 #include "wx/gdicmn.h"

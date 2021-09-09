@@ -11,9 +11,9 @@
 #ifndef _WX_ACCEL_H_BASE_
 #define _WX_ACCEL_H_BASE_
 
-#include "wx/defs.h"
-
 #if wxUSE_ACCEL
+
+#include "wx/defs.h"
 
 #include "wx/object.h"
 

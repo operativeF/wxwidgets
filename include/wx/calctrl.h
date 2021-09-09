@@ -11,9 +11,9 @@
 #ifndef _WX_CALCTRL_H_
 #define _WX_CALCTRL_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_CALENDARCTRL
+
+#include "wx/defs.h"
 
 #include "wx/dateevt.h"
 #include "wx/colour.h"

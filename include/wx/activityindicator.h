@@ -10,9 +10,9 @@
 #ifndef _WX_ACTIVITYINDICATOR_H_
 #define _WX_ACTIVITYINDICATOR_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_ACTIVITYINDICATOR
+
+#include "wx/defs.h"
 
 #include "wx/control.h"
 

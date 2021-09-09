@@ -10,9 +10,9 @@
 #ifndef _WX_ABOUTDLG_H_
 #define _WX_ABOUTDLG_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_ABOUTDLG
+
+#include "wx/defs.h"
 
 #include "wx/app.h"
 #include "wx/icon.h"

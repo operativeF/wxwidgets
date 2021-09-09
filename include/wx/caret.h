@@ -11,9 +11,9 @@
 #ifndef _WX_CARET_H_BASE_
 #define _WX_CARET_H_BASE_
 
-#include "wx/defs.h"
-
 #if wxUSE_CARET
+
+#include "wx/defs.h"
 
 // ---------------------------------------------------------------------------
 // forward declarations

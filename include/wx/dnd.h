@@ -11,9 +11,9 @@
 #ifndef _WX_DND_H_BASE_
 #define _WX_DND_H_BASE_
 
-#include "wx/defs.h"
-
 #if wxUSE_DRAG_AND_DROP
+
+#include "wx/defs.h"
 
 #include "wx/dataobj.h"
 #include "wx/cursor.h"

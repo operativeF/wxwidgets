@@ -18,11 +18,13 @@
     #include "wx/msw/private.h"
     #include "wx/msw/wrapcctl.h"
     #include "wx/msw/wrap/utils.h"
+
+    #include <string>
+    #include <vector>
 #endif
 
 #include "wx/checklst.h"
 #include "wx/object.h"
-#include "wx/colour.h"
 #include "wx/font.h"
 #include "wx/bitmap.h"
 #include "wx/window.h"

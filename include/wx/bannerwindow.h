@@ -10,9 +10,9 @@
 #ifndef _WX_BANNERWINDOW_H_
 #define _WX_BANNERWINDOW_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_BANNERWINDOW
+
+#include "wx/defs.h"
 
 #include "wx/bitmap.h"
 #include "wx/event.h"

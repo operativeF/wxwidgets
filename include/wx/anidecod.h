@@ -9,9 +9,9 @@
 #ifndef _WX_ANIDECOD_H
 #define _WX_ANIDECOD_H
 
-#include "wx/defs.h"
-
 #if wxUSE_STREAMS && (wxUSE_ICO_CUR || wxUSE_GIF)
+
+#include "wx/defs.h"
 
 #include "wx/stream.h"
 #include "wx/image.h"

@@ -13,7 +13,8 @@
 
 #include "wx/toplevel.h"
 #include "wx/containr.h"
-#include "wx/sharedptr.h"
+
+#include <memory>
 
 class WXDLLIMPEXP_FWD_CORE wxSizer;
 class WXDLLIMPEXP_FWD_CORE wxStdDialogButtonSizer;

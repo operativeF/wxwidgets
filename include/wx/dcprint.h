@@ -11,9 +11,9 @@
 #ifndef _WX_DCPRINT_H_BASE_
 #define _WX_DCPRINT_H_BASE_
 
-#include "wx/defs.h"
-
 #if wxUSE_PRINTING_ARCHITECTURE
+
+#include "wx/defs.h"
 
 #include "wx/dc.h"
 

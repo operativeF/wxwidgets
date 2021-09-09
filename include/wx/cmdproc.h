@@ -14,6 +14,7 @@
 #include "wx/defs.h"
 #include "wx/object.h"
 #include "wx/list.h"
+#include "wx/string.h"
 
 class WXDLLIMPEXP_FWD_CORE wxMenu;
 
