@@ -76,16 +76,6 @@ static bool IsNull(void *p)
     return p == nullptr;
 }
 
-TEST_CASE("wxCTZ")
-{
-    CHECK( wxCTZ(1) == 0 );
-    CHECK( wxCTZ(4) == 2 );
-    CHECK( wxCTZ(17) == 0 );
-    CHECK( wxCTZ(0x80000000) == 31 );
-
-    //WX_ASSERT_FAILS_WITH_ASSERT( wxCTZ(0) );
-}
-
 TEST_CASE("wxRound")
 {
     CHECK( wxRound(2.3) == 2 );
