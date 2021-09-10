@@ -15,7 +15,6 @@
 #if wxUSE_OWNER_DRAWN
 
 #include "wx/ownerdrw.h"
-#include "wx/window.h"
 #include "wx/font.h"
 #include "wx/colour.h"
 #include "wx/dcmemory.h"

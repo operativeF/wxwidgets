@@ -27,7 +27,6 @@
 #include "wx/utils.h"
 #include "wx/hashmap.h"
 
-#include "wx/ptr_scpd.h"
 #include "wx/dynlib.h"
 #include "wx/msw/private/button.h"
 #include "wx/msw/private/metrics.h"

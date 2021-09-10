@@ -17,7 +17,6 @@
     #include <boost/nowide/stackstring.hpp>
 #endif //WX_PRECOMP
 
-#include "wx/window.h"
 #include "wx/font.h"
 
 #include "wx/private/textmeasure.h"

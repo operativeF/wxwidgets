@@ -28,7 +28,6 @@
 #include "wx/utils.h"
 #include "wx/intl.h"
 #include "wx/log.h"
-#include "wx/image.h"
 
 #if wxUSE_OWNER_DRAWN
     #include "wx/ownerdrw.h"

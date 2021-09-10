@@ -27,11 +27,9 @@
 
 #include "wx/log.h"
 #include "wx/intl.h"
-#include "wx/bitmap.h"
 #include "wx/image.h"
 #include "wx/file.h"
 #include "wx/quantize.h"
-#include "wx/scopedarray.h"
 
 #include "wx/msw/dib.h"
 

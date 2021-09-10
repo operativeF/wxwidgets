@@ -17,7 +17,6 @@
 #include "wx/bmpbuttn.h"
 #include "wx/log.h"
 #include "wx/dcmemory.h"
-#include "wx/image.h"
 #include "wx/artprov.h"
 #include "wx/renderer.h"
 

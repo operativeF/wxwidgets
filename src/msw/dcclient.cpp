@@ -23,8 +23,6 @@
     #include <unordered_map>
 #endif
 
-#include "wx/stack.h"
-
 #include "wx/msw/private/paint.h"
 
 

@@ -21,8 +21,6 @@
     #include <cstdlib>
 #endif
 
-#include "wx/app.h"
-#include "wx/module.h"
 #include "wx/log.h"
 #include "wx/url.h"
 

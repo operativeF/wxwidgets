@@ -13,7 +13,7 @@
 
 #if wxUSE_DATEPICKCTRL || wxUSE_CALENDARCTRL
 
-#include "wx/app.h"
+#include "wx/log.h"
 
 #ifndef WX_PRECOMP
     #include "wx/msw/wrapcctl.h"

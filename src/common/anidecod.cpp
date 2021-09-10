@@ -13,7 +13,6 @@
 #if wxUSE_STREAMS && wxUSE_ICO_CUR
 
 #include "wx/anidecod.h"
-#include "wx/palette.h"
 
 //---------------------------------------------------------------------------
 // wxANIFrameInfo

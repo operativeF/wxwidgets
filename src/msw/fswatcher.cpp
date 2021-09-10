@@ -15,11 +15,12 @@
 
 #ifndef WX_PRECOMP  
     #include "wx/msw/private.h"
+
+    #include <memory>
 #endif
 
 #include "wx/fswatcher.h"
 #include "wx/thread.h"
-#include "wx/sharedptr.h"
 #include "wx/msw/fswatcher.h"
 #include "wx/private/fswatcher.h"
 

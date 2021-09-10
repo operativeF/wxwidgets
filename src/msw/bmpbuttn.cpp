@@ -20,9 +20,7 @@
 
 #include "wx/bmpbuttn.h"
 #include "wx/log.h"
-#include "wx/dcmemory.h"
 #include "wx/image.h"
-#include "wx/msw/dc.h"          // for wxDCTemp
 
 #include "wx/msw/uxtheme.h"
 

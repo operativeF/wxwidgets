@@ -20,7 +20,6 @@
 #include "wx/artprov.h"
 
 #include "wx/app.h"
-#include "wx/image.h"
 #include "wx/dynlib.h"
 #include "wx/volume.h"
 #include "wx/msw/wrapshl.h"

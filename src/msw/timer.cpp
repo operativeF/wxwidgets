@@ -20,8 +20,6 @@
     #include "wx/msw/private.h"
 #endif
 
-#include "wx/event.h"
-#include "wx/app.h"
 #include "wx/intl.h"
 #include "wx/log.h"
 #include "wx/hashmap.h"

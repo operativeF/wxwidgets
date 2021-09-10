@@ -18,7 +18,6 @@
 #include "wx/combo.h"
 #include "wx/combobox.h"
 #include "wx/intl.h"
-#include "wx/log.h"
 #include "wx/msgdlg.h"
 #include "wx/textctrl.h"
 #include "wx/utils.h"

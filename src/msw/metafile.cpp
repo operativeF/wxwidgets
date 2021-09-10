@@ -20,7 +20,6 @@
 #endif
 
 #include "wx/utils.h"
-#include "wx/app.h"
 
 #include "wx/metafile.h"
 #include "wx/filename.h"

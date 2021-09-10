@@ -20,7 +20,6 @@
 #endif  //WX_PRECOMP
 
 #include "wx/utils.h"
-#include "wx/app.h"
 #include "wx/intl.h"
 #include "wx/log.h"
 

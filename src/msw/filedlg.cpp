@@ -26,11 +26,9 @@
 #endif
 
 #include "wx/utils.h"
-#include "wx/msgdlg.h"
 #include "wx/filefn.h"
 #include "wx/intl.h"
 #include "wx/log.h"
-#include "wx/app.h"
 
 #include "wx/dynlib.h"
 #include "wx/filename.h"

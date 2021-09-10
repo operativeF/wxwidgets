@@ -21,7 +21,6 @@
 
 #include "wx/string.h"
 #include "wx/utils.h"
-#include "wx/module.h"
 #include "wx/log.h"
 
 #if !wxUSE_PROTOCOL_HTTP

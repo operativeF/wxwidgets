@@ -24,7 +24,6 @@
 
 #if wxUSE_GUI
     #include "wx/window.h"
-    #include "wx/control.h"
     #include "wx/dc.h"
     #include "wx/spinbutt.h"
     #include "wx/textentry.h"

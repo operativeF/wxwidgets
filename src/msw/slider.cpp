@@ -16,7 +16,6 @@
 #if wxUSE_SLIDER
 
 #include "wx/slider.h"
-#include "wx/brush.h"
 
 #ifndef WX_PRECOMP
     #include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"

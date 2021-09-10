@@ -16,14 +16,12 @@
 
 #include "wx/graphics.h"
 
-#include "wx/icon.h"
 #include "wx/bitmap.h"
 #include "wx/dcclient.h"
 #include "wx/dcmemory.h"
 #include "wx/dcprint.h"
 #include "wx/math.h"
 #include "wx/pen.h"
-#include "wx/region.h"
 #include "wx/log.h"
 #include "wx/window.h"
 

@@ -23,7 +23,6 @@
 #include "wx/object.h"
 #include "wx/event.h"
 #include "wx/app.h"
-#include "wx/frame.h"
 #include "wx/bitmap.h"
 #include "wx/utils.h"
 #include "wx/intl.h"

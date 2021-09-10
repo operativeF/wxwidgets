@@ -30,13 +30,11 @@
 #include "wx/menu.h"
 #include "wx/app.h"
 #include "wx/utils.h"
-#include "wx/dialog.h"
 #include "wx/statusbr.h"
 #include "wx/settings.h"
 #include "wx/intl.h"
 #include "wx/log.h"
 #include "wx/sizer.h"
-#include "wx/toolbar.h"
 
 #include "wx/stockitem.h"
 #include "wx/msw/private/winstyle.h"

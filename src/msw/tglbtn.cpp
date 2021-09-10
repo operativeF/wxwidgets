@@ -21,8 +21,7 @@
 
 #include "wx/tglbtn.h"
 
-#include "wx/button.h"
-#include "wx/brush.h"
+#include "wx/anybutton.h"
 #include "wx/dcscreen.h"
 #include "wx/settings.h"
 

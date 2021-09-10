@@ -23,7 +23,6 @@
 //---------------------------------------------------------------------------
 
 #include "wx/hyperlink.h"
-#include "wx/menu.h"
 #include "wx/log.h"
 #include "wx/dataobj.h"
 

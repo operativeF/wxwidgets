@@ -24,13 +24,10 @@
 #include "wx/window.h"
 #include "wx/utils.h"
 #include "wx/dc.h"
-#include "wx/app.h"
-#include "wx/msgdlg.h"
 #include "wx/intl.h"
 #include "wx/log.h"
 #include "wx/dcprint.h"
 #include "wx/dcmemory.h"
-#include "wx/image.h"
 
 #include "wx/msw/dib.h"
 #include "wx/msw/dcmemory.h"

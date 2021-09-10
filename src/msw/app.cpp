@@ -23,38 +23,23 @@
     #include <boost/nowide/stackstring.hpp>
 #endif
 
-#include "wx/frame.h"
 #include "wx/app.h"
 #include "wx/utils.h"
 #include "wx/gdicmn.h"
-#include "wx/pen.h"
-#include "wx/brush.h"
-#include "wx/cursor.h"
-#include "wx/icon.h"
-#include "wx/palette.h"
-#include "wx/dc.h"
 #include "wx/dialog.h"
-#include "wx/msgdlg.h"
-#include "wx/intl.h"
 #include "wx/crt.h"
 #include "wx/log.h"
 #include "wx/module.h"
 
 #include "wx/apptrait.h"
-#include "wx/filename.h"
 #include "wx/dynlib.h"
 #include "wx/evtloop.h"
 #include "wx/thread.h"
-#include "wx/scopeguard.h"
 #include "wx/weakref.h"
 
 #include "wx/msw/dc.h"
 #include "wx/msw/ole/oleutils.h"
 #include "wx/msw/private/timer.h"
-
-#if wxUSE_TOOLTIPS
-    #include "wx/tooltip.h"
-#endif // wxUSE_TOOLTIPS
 
 #if wxUSE_OLE
     #include <ole2.h>

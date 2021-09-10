@@ -24,7 +24,6 @@
     #include <gsl/gsl>
 #endif
 
-#include "wx/frame.h"
 #include "wx/log.h"
 #include "wx/intl.h"
 #include "wx/settings.h"
@@ -40,15 +39,12 @@
 
 #include "wx/artprov.h"
 #include "wx/sysopt.h"
-#include "wx/dcclient.h"
 #include "wx/rawbmp.h"
-#include "wx/scopedarray.h"
 #include "wx/stack.h"
 
 #include <windowsx.h> // needed by GET_X_LPARAM and GET_Y_LPARAM macros
 
 #include "wx/msw/winundef.h"
-#include "wx/msw/dc.h"
 #include "wx/msw/dib.h"
 
 #if wxUSE_UXTHEME

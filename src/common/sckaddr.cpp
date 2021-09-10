@@ -21,7 +21,6 @@
     #include <memory.h>
 #endif // !WX_PRECOMP
 
-#include "wx/object.h"
 #include "wx/log.h"
 #include "wx/intl.h"
 #include "wx/thread.h"

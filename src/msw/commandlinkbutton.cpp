@@ -19,7 +19,6 @@
     #include <boost/nowide/convert.hpp>
 #endif
 
-#include "wx/app.h"
 #include "wx/dcclient.h"
 #include "wx/commandlinkbutton.h"
 #include "wx/msw/private/button.h"

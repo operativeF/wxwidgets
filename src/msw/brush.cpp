@@ -18,7 +18,6 @@
 
 #include "wx/brush.h"
 #include "wx/utils.h"
-#include "wx/app.h"
 #include "wx/bitmap.h"
 
 

@@ -25,8 +25,6 @@
 #include "wx/image.h"
 #include "wx/window.h"
 #include "wx/utils.h"
-#include "wx/dialog.h"
-#include "wx/app.h"
 #include "wx/bitmap.h"
 #include "wx/log.h"
 #include "wx/icon.h"

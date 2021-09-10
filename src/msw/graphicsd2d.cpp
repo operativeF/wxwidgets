@@ -56,6 +56,7 @@
 
     #include <algorithm>
     #include <limits>
+    #include <memory>
 #endif // !WX_PRECOMP
 
 #include "wx/dc.h"
@@ -71,7 +72,6 @@
 #include "wx/msw/private/comptr.h"
 #include "wx/private/graphics.h"
 #include "wx/stack.h"
-#include "wx/sharedptr.h"
 
 
 // This must be the last header included to only affect the DEFINE_GUID()

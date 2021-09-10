@@ -18,7 +18,6 @@
 #include "wx/msw/dcprint.h"
 #include "wx/string.h"
 #include "wx/log.h"
-#include "wx/window.h"
 #include "wx/dcmemory.h"
 
 #ifndef WX_PRECOMP

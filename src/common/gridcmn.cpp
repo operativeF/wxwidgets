@@ -13,18 +13,14 @@
 
 #if wxUSE_GRID
 
+#include "wx/defs.h"
+
 #include "wx/grid.h"
 #include "wx/utils.h"
-#include "wx/dcclient.h"
 #include "wx/settings.h"
 #include "wx/log.h"
-#include "wx/textctrl.h"
-#include "wx/checkbox.h"
-#include "wx/combobox.h"
 #include "wx/valtext.h"
 #include "wx/intl.h"
-#include "wx/math.h"
-#include "wx/listbox.h"
 
 // ----------------------------------------------------------------------------
 // XTI

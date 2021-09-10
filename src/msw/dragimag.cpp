@@ -21,7 +21,6 @@
     #include <string>
 #endif
 
-#include "wx/dcclient.h"
 #include "wx/dcmemory.h"
 #include "wx/dcscreen.h"
 #include "wx/frame.h"

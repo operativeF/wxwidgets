@@ -12,8 +12,6 @@
 #include "wx/wxprec.h"
 
 
-#include "wx/app.h"
-
 #if wxUSE_SPINBTN
 
 #include "wx/spinbutt.h"

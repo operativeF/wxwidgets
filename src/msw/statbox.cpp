@@ -24,10 +24,8 @@
     #include <boost/nowide/convert.hpp>
 #endif
 
-#include "wx/app.h"
 #include "wx/dcclient.h"
 #include "wx/dcmemory.h"
-#include "wx/image.h"
 #include "wx/sizer.h"
 
 #include "wx/notebook.h"

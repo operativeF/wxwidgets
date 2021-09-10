@@ -13,8 +13,6 @@
 
 
 #include "wx/object.h"
-#include "wx/font.h"
-#include "wx/colour.h"
 #include "wx/settings.h"
 #include "wx/log.h"
 #include "wx/panel.h"

@@ -16,7 +16,6 @@
 #endif
 
 #include "wx/colour.h"
-#include "wx/gdicmn.h"
 
 // Colour
 

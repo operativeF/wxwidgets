@@ -27,7 +27,6 @@
 
 #include "wx/dynarray.h"
 #include "wx/settings.h"
-#include "wx/brush.h"
 #include "wx/font.h"
 #include "wx/dc.h"
 #include "wx/dcclient.h"

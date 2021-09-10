@@ -25,7 +25,6 @@
 #include "wx/utils.h"
 #include "wx/app.h"
 #include "wx/palette.h"
-#include "wx/dcmemory.h"
 #include "wx/icon.h"
 #include "wx/log.h"
 #include "wx/image.h"

@@ -12,7 +12,7 @@
 #include "wx/wxprec.h"
 
 
-#include "wx/dcclient.h"
+#include "wx/dc.h"
 #include "wx/overlay.h"
 #include "wx/private/overlay.h"
 #include "wx/dcmemory.h"

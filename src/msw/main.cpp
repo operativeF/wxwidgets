@@ -16,7 +16,6 @@
     #include "wx/msw/private.h"
 #endif
 
-#include "wx/event.h"
 #include "wx/app.h"
 #include "wx/utils.h"
 

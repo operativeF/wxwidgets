@@ -43,8 +43,6 @@
 #define wxUSE_PNG_RESOURCE_HANDLER wxUSE_LIBPNG && wxUSE_IMAGE
 #endif
 
-#include "wx/file.h"
-
 #include "wx/listimpl.cpp"
 WX_DEFINE_LIST(wxGDIImageHandlerList)
 

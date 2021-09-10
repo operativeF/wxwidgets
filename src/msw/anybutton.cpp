@@ -22,9 +22,7 @@
     #include <boost/nowide/convert.hpp>
 #endif
 
-#include "wx/app.h"
 #include "wx/brush.h"
-#include "wx/panel.h"
 #include "wx/bmpbuttn.h"
 #include "wx/settings.h"
 #include "wx/dcscreen.h"

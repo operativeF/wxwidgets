@@ -17,14 +17,11 @@
 #endif
 
 #include "wx/frame.h"
-#include "wx/app.h"
 #include "wx/menu.h"
 #include "wx/utils.h"
-#include "wx/dialog.h"
 #include "wx/settings.h"
 #include "wx/dcclient.h"
 #include "wx/mdi.h"
-#include "wx/panel.h"
 #include "wx/log.h"
 #include "wx/toolbar.h"
 #include "wx/statusbr.h"

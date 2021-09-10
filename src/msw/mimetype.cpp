@@ -29,7 +29,6 @@
 #include "wx/log.h"
 #include "wx/crt.h"
 #if wxUSE_GUI
-    #include "wx/icon.h"
     #include "wx/msgdlg.h"
 #endif
 

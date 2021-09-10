@@ -28,7 +28,6 @@
 #include "wx/log.h"
 #include "wx/intl.h"
 #include "wx/stopwatch.h"           // for wxGetLocalTimeMillis()
-#include "wx/module.h"
 #include "wx/crt.h"
 
 #include "wx/thread.h"

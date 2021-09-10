@@ -17,7 +17,6 @@
 #endif
 
 #include "wx/dcclient.h"
-#include "wx/frame.h"       // Only for wxFRAME_SHAPED.
 #include "wx/region.h"
 
 #include "wx/nonownedwnd.h"

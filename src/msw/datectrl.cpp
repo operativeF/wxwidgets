@@ -19,7 +19,6 @@
     #include "wx/msw/private.h"
 #endif
 
-#include "wx/app.h"
 #include "wx/intl.h"
 #include "wx/dcclient.h"
 #include "wx/settings.h"

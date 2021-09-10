@@ -21,8 +21,6 @@
 #endif
 
 #include "wx/hashmap.h"
-#include "wx/bitmap.h"
-#include "wx/brush.h"
 #include "wx/settings.h"
 #include "wx/log.h"
 #include "wx/msw/wrap/utils.h"

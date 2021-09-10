@@ -19,8 +19,6 @@
 #endif
 
 #include "wx/log.h"
-#include "wx/app.h"
-#include "wx/bitmap.h"
 #include "wx/palette.h"
 #include "wx/intl.h"
 

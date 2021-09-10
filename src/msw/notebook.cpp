@@ -26,7 +26,6 @@
 #endif  // WX_PRECOMP
 
 #include "wx/string.h"
-#include "wx/dc.h"
 #include "wx/log.h"
 #include "wx/event.h"
 #include "wx/app.h"

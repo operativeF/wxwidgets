@@ -19,7 +19,6 @@
 #endif
 
 #include "wx/utils.h"
-#include "wx/app.h"
 #include "wx/hashmap.h"
 #include "wx/module.h"
 #include "wx/dde.h"

@@ -14,9 +14,9 @@
 
 #include "wx/intl.h"
 #include "wx/string.h"
-#include "wx/menu.h"
 #include "wx/accel.h"
 #include "wx/cmdproc.h"
+#include "wx/menu.h"
 
 // ============================================================================
 // implementation

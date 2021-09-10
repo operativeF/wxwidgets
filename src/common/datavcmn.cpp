@@ -28,8 +28,8 @@
 #include "wx/except.h"
 #include "wx/spinctrl.h"
 #include "wx/choice.h"
-#include "wx/imaglist.h"
 #include "wx/renderer.h"
+
 #if wxUSE_ACCESSIBILITY
     #include "wx/access.h"
 #endif // wxUSE_ACCESSIBILITY

@@ -24,7 +24,6 @@
 #include "wx/utils.h"
 #include "wx/app.h"
 #include "wx/log.h"
-#include "wx/brush.h"
 #include "wx/settings.h"
 #include "wx/dynlib.h"
 

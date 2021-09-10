@@ -25,8 +25,6 @@
 #include "wx/layout.h"
 #include "wx/window.h"
 #include "wx/utils.h"
-#include "wx/dialog.h"
-#include "wx/msgdlg.h"
 #include "wx/intl.h"
 
 

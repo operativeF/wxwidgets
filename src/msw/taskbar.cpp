@@ -21,11 +21,9 @@
     #include <boost/nowide/convert.hpp>
 #endif
 
-#include "wx/window.h"
 #include "wx/frame.h"
 #include "wx/utils.h"
 #include "wx/menu.h"
-#include "wx/app.h"
 
 #include "wx/msw/wrapshl.h"
 

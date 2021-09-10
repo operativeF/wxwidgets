@@ -21,15 +21,12 @@
 
 #include "wx/button.h"
 #include "wx/app.h"
-#include "wx/brush.h"
-#include "wx/panel.h"
 #include "wx/bmpbuttn.h"
 #include "wx/settings.h"
 #include "wx/dcscreen.h"
 #include "wx/dcclient.h"
 #include "wx/toplevel.h"
 
-#include "wx/imaglist.h"
 #include "wx/stockitem.h"
 #include "wx/msw/private/button.h"
 #include "wx/msw/private/dc.h"

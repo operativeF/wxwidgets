@@ -15,7 +15,6 @@
 #if wxUSE_DATAOBJ
 
 #include "wx/dataobj.h"
-#include "wx/app.h"
 #include "wx/mstream.h"
 #include "wx/textbuf.h"
 

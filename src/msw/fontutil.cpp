@@ -19,7 +19,6 @@
 #include "wx/fontutil.h"
 
 #include "wx/string.h"
-#include "wx/log.h"
 #include "wx/intl.h"
 #include "wx/wxcrtvararg.h"
 

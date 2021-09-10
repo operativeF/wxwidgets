@@ -14,9 +14,9 @@
 #include  "wx/wxprec.h"
 
 
-#include  "wx/string.h"
-#include  "wx/intl.h"
-#include  "wx/log.h"
+#include "wx/string.h"
+#include "wx/intl.h"
+#include "wx/log.h"
 #include "wx/textbuf.h"
 
 // ============================================================================

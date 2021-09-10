@@ -18,7 +18,6 @@
 
 #include "wx/gdiobj.h"
 
-#include "wx/app.h"
 #include "wx/utils.h"
 
 

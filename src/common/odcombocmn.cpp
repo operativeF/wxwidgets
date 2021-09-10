@@ -18,7 +18,6 @@
 #include "wx/combobox.h"
 #include "wx/dcclient.h"
 #include "wx/settings.h"
-#include "wx/dialog.h"
 #include "wx/combo.h"
 
 // ----------------------------------------------------------------------------

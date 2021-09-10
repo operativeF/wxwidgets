@@ -26,8 +26,6 @@
 #include "wx/log.h"
 // for wxEVT_TEXT_ENTER
 #include "wx/textctrl.h"
-#include "wx/app.h"
-#include "wx/brush.h"
 
 #include "wx/clipbrd.h"
 #include "wx/wupdlock.h"
