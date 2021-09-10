@@ -19,6 +19,7 @@
 
 #if wxUSE_TOOLTIPS
 
+#include <string>
 #include <vector>
 
 class WXDLLIMPEXP_FWD_CORE wxToolTip;

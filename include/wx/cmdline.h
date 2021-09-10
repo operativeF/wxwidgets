@@ -17,6 +17,8 @@
 #include "wx/string.h"
 #include "wx/cmdargs.h"
 
+#include <vector>
+
 // determines ConvertStringToArgs() behaviour
 enum class wxCmdLineSplitType
 {

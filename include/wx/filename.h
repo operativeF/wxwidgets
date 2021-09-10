@@ -17,6 +17,8 @@
 #include "wx/longlong.h"
 #include "wx/file.h"
 
+#include <vector>
+
 #if wxUSE_FILE
 class WXDLLIMPEXP_FWD_BASE wxFile;
 #endif

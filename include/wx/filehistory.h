@@ -19,6 +19,8 @@
 #include "wx/list.h"
 #include "wx/string.h"
 
+#include <vector>
+
 class WXDLLIMPEXP_FWD_CORE wxMenu;
 class WXDLLIMPEXP_FWD_BASE wxConfigBase;
 class WXDLLIMPEXP_FWD_BASE wxFileName;

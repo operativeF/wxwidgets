@@ -15,6 +15,8 @@
 #include "wx/sizer.h"
 #include "wx/containr.h"
 
+#include <string>
+
 class WXDLLIMPEXP_FWD_CORE wxTextCtrl;
 class WXDLLIMPEXP_FWD_CORE wxToolTip;
 

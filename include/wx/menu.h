@@ -22,6 +22,8 @@
 // included wx/menu.h
 #include "wx/menuitem.h"
 
+#include <string>
+
 class WXDLLIMPEXP_FWD_CORE wxFrame;
 class WXDLLIMPEXP_FWD_CORE wxMenu;
 class WXDLLIMPEXP_FWD_CORE wxMenuBarBase;

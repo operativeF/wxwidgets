@@ -28,7 +28,9 @@
 #include "wx/region.h"
 #include "wx/affinematrix2d.h"
 
+#include <string>
 #include <string_view>
+#include <vector>
 
 #define wxUSE_NEW_DC 1
 

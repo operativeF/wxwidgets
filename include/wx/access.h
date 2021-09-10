@@ -21,6 +21,8 @@
 
 #include "wx/variant.h"
 
+#include <string>
+
 enum wxAccStatus
 {
     wxACC_FAIL,

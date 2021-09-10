@@ -17,6 +17,8 @@
 #include "wx/string.h"
 #include "wx/filename.h"
 
+#include <vector>
+
 class WXDLLIMPEXP_FWD_XML wxXmlNode;
 
 // ----------------------------------------------------------------------------

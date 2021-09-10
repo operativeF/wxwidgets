@@ -22,6 +22,8 @@
   #include "wx/protocol/http.h"
 #endif
 
+#include <string>
+
 enum wxURLError {
   wxURL_NOERR = 0,
   wxURL_SNTXERR,

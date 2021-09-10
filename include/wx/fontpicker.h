@@ -18,6 +18,8 @@
 
 #include "wx/pickerbase.h"
 
+#include <string>
+
 
 class WXDLLIMPEXP_FWD_CORE wxFontPickerEvent;
 

@@ -19,6 +19,7 @@
 // which one is being used, just include both of them as it's simpler and less
 // error-prone.
 #include <algorithm>        // std::swap() for C++98
+#include <cstdint>
 #include <utility>          // std::swap() for C++11
 
 #include <gsl/gsl>

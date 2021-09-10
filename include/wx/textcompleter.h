@@ -12,6 +12,9 @@
 
 #include "wx/defs.h"
 
+#include <string>
+#include <vector>
+
 // ----------------------------------------------------------------------------
 // wxTextCompleter: used by wxTextEnter::AutoComplete()
 // ----------------------------------------------------------------------------

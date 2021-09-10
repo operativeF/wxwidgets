@@ -18,6 +18,8 @@
 #include "wx/dc.h"
 
 #include <memory>
+#include <string>
+#include <string_view>
 
 inline constexpr wxChar wxSVGVersion[] = wxT("v0101");
 

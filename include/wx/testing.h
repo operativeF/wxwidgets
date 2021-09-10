@@ -29,8 +29,6 @@ class WXDLLIMPEXP_FWD_CORE wxFileDialogBase;
 #include "wx/msgdlg.h"
 #include "wx/filedlg.h"
 
-#include <algorithm>
-#include <iterator>
 #include <queue>
 #include <typeinfo>
 

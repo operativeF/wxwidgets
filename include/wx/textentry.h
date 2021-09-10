@@ -21,6 +21,9 @@ class WXDLLIMPEXP_FWD_CORE wxWindow;
 #include "wx/filefn.h"              // for wxFILE and wxDIR only
 #include "wx/gdicmn.h"              // for wxPoint
 
+#include <string>
+#include <vector>
+
 // ----------------------------------------------------------------------------
 // wxTextEntryBase
 // ----------------------------------------------------------------------------

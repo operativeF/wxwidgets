@@ -33,6 +33,8 @@
 #include "wx/osx/core/cfref.h"
 #endif
 
+#include <vector>
+
 class WXDLLIMPEXP_FWD_CORE wxWindow;
 struct WXDLLIMPEXP_FWD_CORE wxNativeEncodingInfo;
 

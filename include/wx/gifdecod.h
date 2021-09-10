@@ -18,6 +18,8 @@
 #include "wx/image.h"
 #include "wx/animdecod.h"
 
+#include <vector>
+
 // internal utility used to store a frame in 8bit-per-pixel format
 struct GIFImage;
 

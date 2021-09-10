@@ -24,6 +24,9 @@
 #include "wx/gdicmn.h"          // wxPoint
 
 #include <iostream>
+#include <streambuf>
+#include <string>
+#include <vector>
 
 #define wxHAS_TEXT_WINDOW_STREAM 1
 

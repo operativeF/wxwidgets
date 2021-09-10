@@ -15,11 +15,13 @@
 
 #if wxUSE_ANY
 
-#include <new> // for placement new
 #include "wx/string.h"
 #include "wx/meta/if.h"
 #include "wx/typeinfo.h"
 #include "wx/list.h"
+
+#include <cstdint>
+#include <new> // for placement new
 
 // Size of the wxAny value buffer.
 enum

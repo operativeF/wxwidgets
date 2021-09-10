@@ -17,6 +17,8 @@
 
 #include "wx/dialog.h"
 
+#include <string>
+
 // this symbol is defined for the platforms which support multiple
 // ('|'-separated) filters in the file dialog
 #if defined(__WXMSW__) || defined(__WXGTK__) || defined(__WXMAC__)

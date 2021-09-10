@@ -22,6 +22,7 @@
 #include "wx/window.h"
 #include "wx/withimages.h"
 
+#include <string>
 #include <vector>
 
 #include <gsl/gsl>

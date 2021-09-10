@@ -22,6 +22,8 @@
 #include "wx/bitmap.h"
 #include "wx/list.h"
 
+#include <vector>
+
 // ============================================================================
 /*
    Generic data transfer related classes. The class hierarchy is as follows:

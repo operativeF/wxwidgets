@@ -21,6 +21,8 @@
 #include "wx/dir.h"
 #include "wx/hashmap.h"
 
+#include <vector>
+
 inline constexpr char wxTRACE_FSWATCHER[] = "fswatcher";
 
 // ----------------------------------------------------------------------------

@@ -22,7 +22,9 @@
 #include "wx/image.h"
 #include "wx/peninfobase.h"
 
+#include <string>
 #include <string_view>
+#include <utility>
 #include <vector>
 
 enum class wxAntialiasMode

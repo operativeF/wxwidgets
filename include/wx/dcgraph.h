@@ -17,6 +17,10 @@
 #include "wx/geometry.h"
 #include "wx/graphics.h"
 
+#include <string>
+#include <string_view>
+#include <vector>
+
 class WXDLLIMPEXP_FWD_CORE wxWindowDC;
 
 

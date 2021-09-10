@@ -23,6 +23,8 @@
 #include "wx/list.h"
 #include "wx/control.h"
 
+#include <string>
+
 class WXDLLIMPEXP_FWD_CORE wxToolBarBase;
 
 // ----------------------------------------------------------------------------

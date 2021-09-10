@@ -18,6 +18,8 @@
 #include "wx/pickerbase.h"
 #include "wx/filename.h"
 
+#include <string>
+
 class WXDLLIMPEXP_FWD_CORE wxDialog;
 class WXDLLIMPEXP_FWD_CORE wxFileDirPickerEvent;
 

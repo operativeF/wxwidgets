@@ -18,6 +18,8 @@
 #include "wx/toplevel.h"      // the base class
 #include "wx/statusbr.h"
 
+#include <string>
+
 // the default names for various classes
 inline constexpr char wxStatusLineNameStr[] = "status_line";
 

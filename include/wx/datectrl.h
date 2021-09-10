@@ -17,6 +17,8 @@
 
 #include "wx/datetimectrl.h"    // the base class
 
+#include <string>
+
 inline constexpr char wxDatePickerCtrlNameStr[] = "datectrl";
 
 // wxDatePickerCtrl styles

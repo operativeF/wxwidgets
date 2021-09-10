@@ -16,6 +16,9 @@
 
 #include "wx/panel.h"
 
+#include <string>
+#include <vector>
+
 class WXDLLIMPEXP_FWD_CORE wxBitmapButton;
 class WXDLLIMPEXP_FWD_CORE wxListCtrl;
 class WXDLLIMPEXP_FWD_CORE wxListEvent;

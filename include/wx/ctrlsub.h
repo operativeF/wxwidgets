@@ -19,10 +19,12 @@
 #include "wx/control.h"      // base class
 #include "wx/stringutils.h"
 
-#include <gsl/gsl>
-
+#include <cstdint>
 #include <string>
 #include <vector>
+
+#include <gsl/gsl>
+
 
 // ----------------------------------------------------------------------------
 // wxItemContainer defines an interface which is implemented by all controls

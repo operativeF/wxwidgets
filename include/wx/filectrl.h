@@ -19,6 +19,8 @@
 #include "wx/string.h"
 #include "wx/event.h"
 
+#include <vector>
+
 enum
 {
     wxFC_OPEN              = 0x0001,

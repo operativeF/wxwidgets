@@ -23,7 +23,9 @@
     #include "wx/fontutil.h"    // for wxNativeEncodingInfo
 #endif // wxUSE_GUI
 
+#include <string>
 #include <string_view>
+#include <vector>
 
 #if wxUSE_CONFIG && wxUSE_FILECONFIG
     class WXDLLIMPEXP_FWD_BASE wxConfigBase;

@@ -19,6 +19,8 @@
 #include "wx/window.h"
 #include "wx/containr.h"
 
+#include <string>
+
 class WXDLLIMPEXP_FWD_CORE wxControlContainer;
 
 // ----------------------------------------------------------------------------

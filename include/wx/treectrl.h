@@ -24,6 +24,8 @@
 #include "wx/textctrl.h" // wxTextCtrl::ms_classinfo used through wxCLASSINFO macro
 #include "wx/systhemectrl.h"
 
+#include <string>
+
 class WXDLLIMPEXP_FWD_CORE wxImageList;
 
 #if !defined(__WXMSW__) && !defined(__WXQT__) || defined(__WXUNIVERSAL__)

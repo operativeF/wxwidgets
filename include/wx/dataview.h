@@ -26,6 +26,7 @@
 #include "wx/withimages.h"
 #include "wx/systhemectrl.h"
 
+#include <string>
 #include <vector>
 
 #include <gsl/gsl>

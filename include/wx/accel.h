@@ -18,6 +18,7 @@
 #include "wx/object.h"
 
 #include <optional>
+#include <string>
 
 class WXDLLIMPEXP_FWD_CORE wxAcceleratorTable;
 class WXDLLIMPEXP_FWD_CORE wxMenuItem;

@@ -23,6 +23,8 @@
 #include "wx/frame.h"
 #include "wx/dc.h"
 
+#include <string>
+
 class WXDLLIMPEXP_FWD_CORE wxDC;
 class WXDLLIMPEXP_FWD_CORE wxButton;
 class WXDLLIMPEXP_FWD_CORE wxChoice;

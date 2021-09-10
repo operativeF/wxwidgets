@@ -14,6 +14,8 @@
 #include "wx/hashmap.h"
 #include "wx/confbase.h"
 
+#include <string>
+
 class wxPersistentObject;
 
 WX_DECLARE_VOIDPTR_HASH_MAP(wxPersistentObject *, wxPersistentObjectsMap);

@@ -16,6 +16,8 @@
 
 #if wxUSE_STREAMS
 
+#include <cstdint>
+
 class WXDLLIMPEXP_FWD_BASE wxTextInputStream;
 class WXDLLIMPEXP_FWD_BASE wxTextOutputStream;
 

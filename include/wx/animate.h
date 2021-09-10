@@ -20,6 +20,8 @@
 #include "wx/timer.h"
 #include "wx/bitmap.h"
 
+#include <string>
+
 class WXDLLIMPEXP_FWD_CORE wxAnimation;
 class wxAnimationImpl;
 

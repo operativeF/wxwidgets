@@ -14,6 +14,9 @@
 #include "wx/string.h"
 #include "wx/platinfo.h"
 
+#include <string>
+#include <vector>
+
 class WXDLLIMPEXP_FWD_BASE wxConfigBase;
 class WXDLLIMPEXP_FWD_BASE wxEventLoopBase;
 #if wxUSE_FONTMAP

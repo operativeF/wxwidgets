@@ -19,6 +19,9 @@
 #include "wx/palette.h"
 #include "wx/window.h"
 
+#include <string>
+#include <vector>
+
 class WXDLLIMPEXP_FWD_GL wxGLCanvas;
 class WXDLLIMPEXP_FWD_GL wxGLContext;
 

@@ -32,6 +32,8 @@
 #include "wx/meta/removeref.h"
 
 #include <bit>
+#include <cstdint>
+#include <string>
 #include <vector>
 
 

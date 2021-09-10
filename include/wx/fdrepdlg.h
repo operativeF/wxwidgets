@@ -17,6 +17,9 @@
 
 #include "wx/dialog.h"
 
+#include <cstdint>
+#include <string>
+
 class WXDLLIMPEXP_FWD_CORE wxFindDialogEvent;
 class WXDLLIMPEXP_FWD_CORE wxFindReplaceDialog;
 class WXDLLIMPEXP_FWD_CORE wxFindReplaceData;
