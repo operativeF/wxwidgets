@@ -8,7 +8,6 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-// For compilers that support precompilation, includes "wx.h".
 #include "wx/wxprec.h"
 
 
@@ -18,9 +17,19 @@
     #include <string>
 #endif
 
-#include "wx/wx.h"
-
+#include "wx/bmpbuttn.h"
+#include "wx/button.h"
+#include "wx/checkbox.h"
+#include "wx/combobox.h"
+#include "wx/listbox.h"
+#include "wx/radiobut.h"
+#include "wx/scrolbar.h"
+#include "wx/slider.h"
 #include "wx/spinbutt.h"
+#include "wx/statbmp.h"
+#include "wx/statbox.h"
+#include "wx/stattext.h"
+#include "wx/textctrl.h"
 
 // ---------------------------------------------------------------------------
 // global functions

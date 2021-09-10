@@ -10,7 +10,6 @@
 
 #include "doctest.h"
 
-// For compilers that support precompilation, includes "wx/wx.h"
 #include "testprec.h"
 
 // Also define our own global variables.
@@ -21,7 +20,6 @@ std::string wxTheCurrentTestClass, wxTheCurrentTestMethod;
 
 // for all others, include the necessary headers
 #ifndef WX_PRECOMP
-    #include "wx/wx.h"
     #include <iostream>
 #endif
 
@@ -45,6 +43,9 @@ std::string wxTheCurrentTestClass, wxTheCurrentTestMethod;
 #endif // __WXGTK__
 #endif // wxUSE_GUI
 
+#include "wx/app.h"
+#include "wx/wxcrtvararg.h"
+#include "wx/log.h"
 #include "wx/socket.h"
 #include "wx/evtloop.h"
 

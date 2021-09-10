@@ -9,7 +9,6 @@
 
 
 #ifndef WX_PRECOMP
-    #include "wx/wx.h"
 #endif // WX_PRECOMP
 
 #if wxUSE_BASE64

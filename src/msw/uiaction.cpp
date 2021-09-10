@@ -15,6 +15,8 @@
 #if wxUSE_UIACTIONSIMULATOR
 
 #ifndef WX_PRECOMP
+    #include <cmath>
+    
     #include "wx/msw/private.h"             // For wxGetCursorPosMSW()
     #include "wx/msw/wrapwin.h"
 #endif
@@ -23,8 +25,6 @@
 #include "wx/private/uiaction.h"
 
 #include "wx/msw/private/keyboard.h"
-
-#include "wx/math.h"
 
 namespace
 {
@@ -94,8 +94,8 @@ bool wxUIActionSimulatorMSWImpl::MouseMove(long x, long y)
 
     // Casts are safe because x and y are supposed to be less than the display
     // size, so there is no danger of overflow.
-    DWORD scaledx = static_cast<DWORD>(ceil(x * 65535.0 / (displayx-1)));
-    DWORD scaledy = static_cast<DWORD>(ceil(y * 65535.0 / (displayy-1)));
+    DWORD scaledx = static_cast<DWORD>(std::ceil(x * 65535.0 / (displayx-1)));
+    DWORD scaledy = static_cast<DWORD>(std::ceil(y * 65535.0 / (displayy-1)));
     mouse_event(MOUSEEVENTF_ABSOLUTE | MOUSEEVENTF_MOVE, scaledx, scaledy, 0, 0);
 
     return true;

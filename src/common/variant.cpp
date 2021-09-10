@@ -8,7 +8,6 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-// For compilers that support precompilation, includes "wx/wx.h".
 #include "wx/wxprec.h"
 
 
@@ -17,8 +16,8 @@
 #if wxUSE_VARIANT
 
 #include "wx/string.h"
-#include "wx/math.h"
 #include "wx/crt.h"
+
 #if wxUSE_STREAMS
     #include "wx/stream.h"
 #endif

@@ -17,7 +17,6 @@
 
 #include "wx/utils.h"
 #include "wx/gdicmn.h"
-#include "wx/math.h"
 
 class WXDLLIMPEXP_FWD_BASE wxDataInputStream;
 class WXDLLIMPEXP_FWD_BASE wxDataOutputStream;

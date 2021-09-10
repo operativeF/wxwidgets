@@ -33,7 +33,6 @@
 #include "wx/log.h"
 #include "wx/dcclient.h"
 #include "wx/timer.h"
-#include "wx/math.h"        // log10 & pow
 
 #include "wx/dynlib.h"
 

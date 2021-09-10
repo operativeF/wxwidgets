@@ -24,7 +24,6 @@
 #include "wx/brush.h"
 #include "wx/pen.h"
 #include "wx/palette.h"
-#include "wx/math.h"
 #include "wx/image.h"
 #include "wx/region.h"
 #include "wx/affinematrix2d.h"

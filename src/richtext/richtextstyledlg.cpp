@@ -8,15 +8,20 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-// For compilers that support precompilation, includes "wx/wx.h".
 #include "wx/wxprec.h"
 
 #if wxUSE_RICHTEXT
 
-#include "wx/wx.h"
-
 #include "wx/richtext/richtextstyledlg.h"
 #include "wx/richtext/richtextformatdlg.h"
+
+#include "wx/button.h"
+#include "wx/checkbox.h"
+#include "wx/msgdlg.h"
+#include "wx/sizer.h"
+#include "wx/stattext.h"
+
+#include "wx/generic/textdlgg.h"
 
 /*!
  * wxRichTextStyleOrganiserDialog type definition

@@ -31,7 +31,6 @@
 #include "wx/intl.h"
 #include "wx/log.h"
 #include "wx/app.h"
-#include "wx/math.h"
 
 #include "wx/dynlib.h"
 #include "wx/filename.h"

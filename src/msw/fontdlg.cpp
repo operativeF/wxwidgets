@@ -25,7 +25,6 @@
 #include "wx/utils.h"
 #include "wx/dialog.h"
 #include "wx/log.h"
-#include "wx/math.h"
 
 #include "wx/fontutil.h"
 #include "wx/msw/private/dpiaware.h"

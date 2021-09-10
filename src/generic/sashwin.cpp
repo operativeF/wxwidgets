@@ -23,7 +23,6 @@
 #include "wx/settings.h"
 #include "wx/dcclient.h"
 #include "wx/dcscreen.h"
-#include "wx/math.h"
 
 #ifndef WX_PRECOMP
     #include <string>

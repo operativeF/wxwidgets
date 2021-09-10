@@ -15,7 +15,6 @@
 #include "wx/string.h"
 #include "wx/log.h"
 #include "wx/intl.h"
-#include "wx/math.h"
 #include "wx/frame.h"
 #include "wx/window.h"
 #include "wx/control.h"

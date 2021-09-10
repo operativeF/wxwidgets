@@ -15,7 +15,6 @@
 #include "wx/cpp.h"
 #include "wx/object.h"
 #include "wx/clntdata.h"
-#include "wx/math.h"
 
 #if wxUSE_GUI
     #include "wx/gdicmn.h"

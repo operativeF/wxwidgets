@@ -25,7 +25,6 @@
 #endif
 
 #include "wx/log.h"
-#include "wx/math.h"
 
 #include "wx/msw/ole/oleutils.h"
 #include "wx/msw/ole/automtn.h"

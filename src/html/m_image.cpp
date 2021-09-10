@@ -19,7 +19,6 @@
 #include "wx/timer.h"
 #include "wx/dcmemory.h"
 #include "wx/log.h"
-#include "wx/math.h"
 #include "wx/image.h"
 #include "wx/wxcrtvararg.h"
 

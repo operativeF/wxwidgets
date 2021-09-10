@@ -13,8 +13,6 @@
 
 #if wxUSE_TEST_GC_DRAWING
 
-#include "wx/math.h"
-
 #if wxUSE_SVG
 #include "wx/dcsvg.h"
 #endif

@@ -23,7 +23,6 @@
 #include "wx/bitmap.h"
 #include "wx/palette.h"
 #include "wx/intl.h"
-#include "wx/math.h"
 
 #ifndef WX_PRECOMP
     #include <array>

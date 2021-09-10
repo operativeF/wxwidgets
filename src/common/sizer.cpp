@@ -23,7 +23,6 @@
 #endif // WX_PRECOMP
 
 #include "wx/intl.h"
-#include "wx/math.h"
 #include "wx/utils.h"
 #include "wx/settings.h"
 #include "wx/button.h"

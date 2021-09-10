@@ -21,7 +21,6 @@
 #include "wx/log.h"
 #include "wx/window.h"
 #include "wx/dcmemory.h"
-#include "wx/math.h"
 
 #ifndef WX_PRECOMP
     #include "wx/msw/private.h"

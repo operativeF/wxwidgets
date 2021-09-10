@@ -15,6 +15,7 @@
 #include "wx/dcmemory.h"
 #include "wx/affinematrix2d.h"
 #include "wx/math.h"
+
 #if wxUSE_GRAPHICS_CONTEXT
 #include "wx/dcgraph.h"
 #endif // wxUSE_GRAPHICS_CONTEXT

@@ -32,7 +32,6 @@
 #include "wx/log.h"
 #include "wx/app.h"
 #include "wx/menu.h"
-#include "wx/math.h"
 #include "wx/module.h"
 #include "wx/wxcrtvararg.h"
 

@@ -39,9 +39,6 @@
     #include "wx/msw/wrap/utils.h"
 #endif
 
-// include the most common wx headers
-//#include "wx/wx.h"
-
 // Include standard headers
 #include <algorithm>
 #include <array>

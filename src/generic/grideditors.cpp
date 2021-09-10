@@ -8,7 +8,6 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-// For compilers that support precompilation, includes "wx/wx.h".
 #include "wx/wxprec.h"
 
 
@@ -24,7 +23,6 @@
 #include "wx/checkbox.h"
 #include "wx/combobox.h"
 #include "wx/intl.h"
-#include "wx/math.h"
 #include "wx/listbox.h"
 
 #include "wx/valnum.h"

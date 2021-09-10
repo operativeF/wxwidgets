@@ -44,13 +44,14 @@
 #ifndef WX_PRECOMP
     #include "wx/msw/private.h" // user info and wndproc setting/getting
 
+    #include <cmath>
+    
     #include <gsl/gsl>
 #endif
 
 #include "wx/log.h"
 #include "wx/dcclient.h"
 #include "wx/timer.h"
-#include "wx/math.h"        // log10 & pow
 #include "wx/stopwatch.h"
 
 #include "wx/dynlib.h"
@@ -1331,7 +1332,7 @@ double wxAMMediaBackend::GetVolume()
     }
 
     double dVolume = lVolume / 2000.; // volume is now in [-5..0] range
-    dVolume = pow(10.0, dVolume);     //                 [10^-5, 1]
+    dVolume = std::pow(10.0, dVolume);     //                 [10^-5, 1]
     dVolume -= 0.00001;               //                [0, 1-10^-5]
     dVolume /= 1 - 0.00001;           //                   [0, 1]
 
@@ -1341,7 +1342,7 @@ double wxAMMediaBackend::GetVolume()
 bool wxAMMediaBackend::SetVolume(double dVolume)
 {
     // inverse the transformation above
-    long lVolume = static_cast<long>(2000*log10(dVolume + (1 - dVolume)*0.00001));
+    long lVolume = static_cast<long>(2000 * std::log10(dVolume + (1 - dVolume) * 0.00001));
 
     HRESULT hr = GetAM()->put_Volume(lVolume);
     if(FAILED(hr))

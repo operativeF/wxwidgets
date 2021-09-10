@@ -20,7 +20,6 @@
 #include "wx/module.h"
 #include "wx/control.h"
 #include "wx/dcmirror.h"
-#include "wx/math.h"
 #include "wx/splitter.h"
 
 #ifdef __WXMAC__

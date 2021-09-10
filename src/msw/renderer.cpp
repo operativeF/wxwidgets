@@ -23,7 +23,6 @@
 #include "wx/control.h"     // for wxControl::Ellipsize()
 #include "wx/dc.h"
 #include "wx/settings.h"
-#include "wx/math.h"
 
 #include "wx/dcgraph.h"
 #include "wx/scopeguard.h"

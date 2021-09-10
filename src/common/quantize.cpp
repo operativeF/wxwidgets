@@ -29,7 +29,6 @@
 
 /* modified by Vaclav Slavik for use as jpeglib-independent module */
 
-// For compilers that support precompilation, includes "wx/wx.h".
 #include "wx/wxprec.h"
 
 #if wxUSE_IMAGE

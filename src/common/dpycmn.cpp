@@ -15,7 +15,6 @@
 #include "wx/gdicmn.h"
 #include "wx/window.h"
 #include "wx/module.h"
-#include "wx/math.h"
 
 #include "wx/private/display.h"
 

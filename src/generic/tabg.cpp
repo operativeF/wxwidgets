@@ -16,7 +16,6 @@
     #include "wx/settings.h"
     #include "wx/intl.h"
     #include "wx/dcclient.h"
-    #include "wx/math.h"
 
     #include <cstdio>
     #include <cstdlib>

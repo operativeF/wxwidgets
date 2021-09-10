@@ -16,7 +16,6 @@
     - Implement row reordering after dealing with the columns.
  */
 
-// For compilers that support precompilation, includes "wx/wx.h".
 #include "wx/wxprec.h"
 
 
@@ -41,7 +40,6 @@
 #include "wx/combobox.h"
 #include "wx/valtext.h"
 #include "wx/intl.h"
-#include "wx/math.h"
 #include "wx/listbox.h"
 #include "wx/stringutils.h"
 #include "wx/dcbuffer.h"

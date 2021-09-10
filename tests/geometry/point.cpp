@@ -15,8 +15,6 @@
     #include "wx/gdicmn.h"
 #endif // WX_PRECOMP
 
-#include "wx/math.h"
-
 TEST_CASE("Operators")
 {
     wxPoint p1(1,2);

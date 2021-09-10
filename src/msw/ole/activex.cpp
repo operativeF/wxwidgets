@@ -146,7 +146,7 @@ wxDEFINE_EVENT( wxEVT_ACTIVEX, wxActiveXEvent );
 
 
 constexpr int HIMETRIC_PER_INCH =   2540;
-#define MAP_PIX_TO_LOGHIM(x,ppli)   MulDiv(HIMETRIC_PER_INCH, (x), (ppli))
+#define MAP_PIX_TO_LOGHIM(x,ppli)   ::MulDiv(HIMETRIC_PER_INCH, (x), (ppli))
 
 static void PixelsToHimetric(SIZEL &sz)
 {

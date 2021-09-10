@@ -8,7 +8,6 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-// For compilers that support precompilation, includes "wx/wx.h".
 #include "wx/wxprec.h"
 
 
@@ -21,7 +20,6 @@
     #include <vector>
 #endif
 
-#include "wx/math.h"
 #include "wx/crt.h"
 #include "wx/module.h"
 #include "wx/hashmap.h"

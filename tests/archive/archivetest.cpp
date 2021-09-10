@@ -9,8 +9,6 @@
 #include "testprec.h"
 
 #ifndef WX_PRECOMP
-    #include "wx/wx.h"
-
     #include <string>
     #include <list>
     #include <map>

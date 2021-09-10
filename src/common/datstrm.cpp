@@ -15,7 +15,6 @@
 #if wxUSE_STREAMS
 
 #include "wx/datstrm.h"
-#include "wx/math.h"
 
 namespace
 {

@@ -14,6 +14,7 @@
 
 #if wxUSE_HELP
 
+#include "wx/app.h"
 #include "wx/filename.h"
 #include "wx/msw/helpwin.h"
 

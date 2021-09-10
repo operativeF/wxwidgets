@@ -10,7 +10,6 @@
 
 
 #ifndef WX_PRECOMP
-    #include "wx/wx.h"
 #endif // WX_PRECOMP
 
 #include "wx/dynarray.h"

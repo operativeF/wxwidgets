@@ -27,7 +27,6 @@
 
 #include "wx/colour.h"
 #include "wx/gdicmn.h"
-#include "wx/math.h"
 #include "wx/msw/wrapcdlg.h"
 #include "wx/utils.h"
 

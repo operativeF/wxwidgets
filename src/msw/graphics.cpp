@@ -30,7 +30,6 @@
 #include "wx/bitmap.h"
 #include "wx/log.h"
 #include "wx/icon.h"
-#include "wx/math.h"
 #include "wx/module.h"
 // include all dc types that are used as a param
 #include "wx/dc.h"

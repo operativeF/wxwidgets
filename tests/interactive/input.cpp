@@ -288,7 +288,6 @@ void InteractiveInputTestCase::TestFtpInteractive()
 // date time
 // ----------------------------------------------------------------------------
 
-#include "wx/math.h"
 #include "wx/datetime.h"
 
 void InteractiveInputTestCase::TestDateTimeInteractive()

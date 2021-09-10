@@ -21,7 +21,6 @@
 #include "wx/intl.h"
 #include "wx/list.h"
 #include "wx/log.h"
-#include "wx/math.h"
 #include "wx/memory.h"
 #include "wx/module.h"
 #include "wx/object.h"

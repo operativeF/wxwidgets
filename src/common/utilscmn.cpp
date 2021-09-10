@@ -53,8 +53,7 @@
 #include "wx/utils.h"
 #include "wx/intl.h"
 #include "wx/log.h"
-#include "wx/math.h"
-
+ 
 #if wxUSE_GUI
     #include "wx/window.h"
     #include "wx/frame.h"

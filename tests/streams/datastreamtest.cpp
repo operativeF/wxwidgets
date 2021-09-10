@@ -13,7 +13,6 @@
 
 #ifndef WX_PRECOMP
     #include "wx/wx.h"
-    #include "wx/math.h"
 
     #include <vector>
 #endif // WX_PRECOMP
