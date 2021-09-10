@@ -14,9 +14,11 @@
 
 #if wxUSE_PRINTING_ARCHITECTURE
 
-#if defined(__WXMSW__)
-    #include "wx/msw/wrapcdlg.h"
-#endif // MSW
+#ifndef WX_PRECOMP
+    #if defined(__WXMSW__)
+        #include "wx/msw/wrapcdlg.h"
+    #endif // MSW
+#endif
 
 #include "wx/utils.h"
 #include "wx/settings.h"

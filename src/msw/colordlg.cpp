@@ -19,6 +19,7 @@
 
 #ifndef WX_PRECOMP
     #include "wx/msw/private.h"
+    #include "wx/msw/wrapcdlg.h"
 
     #include <string>
 
@@ -27,7 +28,6 @@
 
 #include "wx/colour.h"
 #include "wx/gdicmn.h"
-#include "wx/msw/wrapcdlg.h"
 #include "wx/utils.h"
 
 #include "wx/scopeguard.h"

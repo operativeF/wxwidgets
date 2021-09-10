@@ -77,14 +77,14 @@ protected:
 #if wxUSE_DISPLAY
 
 #ifndef WX_PRECOMP
-    #include "wx/app.h"
-    #include "wx/frame.h"
+    #include "wx/msw/missing.h"
 #endif
 
+#include "wx/app.h"
+#include "wx/frame.h"
 #include "wx/dynlib.h"
 #include "wx/sysopt.h"
 
-#include "wx/msw/missing.h"
 #include "wx/msw/private/hiddenwin.h"
 
 #ifndef DPI_ENUMS_DECLARED

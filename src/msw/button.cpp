@@ -17,7 +17,6 @@
 #ifndef WX_PRECOMP
     #include "wx/msw/wrapcctl.h"
     #include "wx/msw/private.h"
-    #include "wx/msw/missing.h"
 #endif
 
 #include "wx/button.h"

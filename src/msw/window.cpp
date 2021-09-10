@@ -14,7 +14,6 @@
 #ifndef WX_PRECOMP
     #include "wx/msw/wrapwin.h"
     #include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
-    #include "wx/msw/missing.h"
     #include "wx/msw/private.h"
 
     #include <array>

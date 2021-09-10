@@ -17,6 +17,8 @@
 
 #include "wx/defs.h"
 
+#include "wx/string.h"
+
 #if wxUSE_FSVOLUME
 
 // the volume flags

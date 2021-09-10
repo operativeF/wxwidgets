@@ -14,6 +14,7 @@
 #if wxUSE_GRAPHICS_GDIPLUS
 
 #ifndef WX_PRECOMP
+    #include "wx/msw/wrapcdlg.h"
     #include "wx/msw/private.h" // needs to be before #include <commdlg.h>
 
     #include <boost/nowide/convert.hpp>
@@ -21,7 +22,6 @@
 #endif
 
 #include "wx/dc.h"
-#include "wx/msw/wrapcdlg.h"
 #include "wx/image.h"
 #include "wx/window.h"
 #include "wx/utils.h"

@@ -18,10 +18,11 @@
 #include "wx/modalhook.h"
 
 #ifndef WX_PRECOMP
+    #include "wx/msw/wrapcdlg.h"
+
     #include <boost/nowide/convert.hpp>
 #endif
 
-#include "wx/msw/wrapcdlg.h"
 #include "wx/utils.h"
 #include "wx/dialog.h"
 #include "wx/log.h"

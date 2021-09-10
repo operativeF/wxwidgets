@@ -20,6 +20,11 @@
 #if wxUSE_INTL
 
 #ifndef WX_PRECOMP
+    #ifdef __WINDOWS__
+        #include "wx/msw/wrapwin.h"
+        #include "wx/msw/missing.h"
+    #endif
+
     #include <algorithm>
     #include <memory>
     #include <vector>
@@ -48,9 +53,8 @@
 #ifdef __WINDOWS__
     #include "wx/dynlib.h"
     #include "wx/scopedarray.h"
-    #include "wx/msw/wrapwin.h"
-    #include "wx/msw/missing.h"
 #endif
+
 #ifdef __WXOSX__
     #include "wx/osx/core/cfstring.h"
     #include <CoreFoundation/CFBundle.h>

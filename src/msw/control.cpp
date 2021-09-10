@@ -19,7 +19,6 @@
 #ifndef WX_PRECOMP
     #include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
     #include "wx/msw/private.h"
-    #include "wx/msw/missing.h"
     
     #include <boost/nowide/convert.hpp>
 #endif

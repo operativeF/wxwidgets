@@ -23,7 +23,6 @@
 #include "wx/log.h"
 #include "wx/hashmap.h"
 #include "wx/filefn.h"
-#include "wx/msw/missing.h"
 
 #include "wx/dir.h"
 #include "wx/dynlib.h"
@@ -31,7 +30,12 @@
 
 // some compilers require including <windows.h> before <shellapi.h> so do it
 // even if this is not necessary with most of them
-#include "wx/msw/wrapwin.h"
+
+#ifndef WX_PRECOMP
+    #include "wx/msw/wrapwin.h"
+    #include "wx/msw/missing.h"
+#endif
+
 #include <shellapi.h>
 #include "wx/msw/wrapshl.h"
 

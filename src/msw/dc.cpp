@@ -13,13 +13,15 @@
 
 
 #ifndef WX_PRECOMP
+    #include "wx/msw/wrapcdlg.h"
+    #include "wx/msw/wrap/utils.h"
+
     #include <numeric>
 
     #include <boost/nowide/convert.hpp>
     #include <gsl/gsl>
 #endif
 
-#include "wx/msw/wrapcdlg.h"
 #include "wx/image.h"
 #include "wx/window.h"
 #include "wx/utils.h"
@@ -33,8 +35,6 @@
 #include "wx/dcprint.h"
 #include "wx/module.h"
 #include "wx/stringutils.h"
-
-#include "wx/msw/wrap/utils.h"
 
 #include "wx/msw/dc.h"
 #include "wx/sysopt.h"

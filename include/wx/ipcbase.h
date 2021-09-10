@@ -12,6 +12,7 @@
 #define _WX_IPCBASEH__
 
 #include "wx/defs.h"
+
 #include "wx/object.h"
 #include "wx/string.h"
 
