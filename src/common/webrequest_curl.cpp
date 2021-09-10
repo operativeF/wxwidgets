@@ -522,7 +522,7 @@ WinSock1SocketPoller::WinSock1SocketPoller(wxEvtHandler* hndlr)
     WSAStartup(wVersionRequested, &wsaData);
 
     // Create a dummy message only window.
-    m_hwnd = CreateWindowEx(
+    m_hwnd = ::CreateWindowExW(
         0,              //DWORD     dwExStyle,
         TEXT("STATIC"), //LPCSTR    lpClassName,
         NULL,           //LPCSTR    lpWindowName,

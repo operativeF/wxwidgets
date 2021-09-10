@@ -221,7 +221,7 @@ void wxFrame::SendSizeEvent(int flags)
 
         if ( flags & wxSEND_EVENT_POST )
         {
-            ::PostMessage(GetHwnd(), WM_SIZE,
+            ::PostMessageW(GetHwnd(), WM_SIZE,
                           IsMaximized() ? SIZE_MAXIMIZED : SIZE_RESTORED,
                           MAKELPARAM(r.right - r.left, r.bottom - r.top));
         }

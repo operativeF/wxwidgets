@@ -183,13 +183,14 @@ wxSize wxDateTimePickerCtrl::DoGetBestSize() const
                      (
                         DATETIMEPICK_CLASS,
                         wxT(""),
-                        ::GetWindowLong(GetHwnd(), GWL_STYLE) & ~DTS_SHOWNONE,
+                        ::GetWindowLongW(GetHwnd(), GWL_STYLE) & ~DTS_SHOWNONE,
                         0, 0, 1, 1,
                         GetHwndOf(m_parent),
                         nullptr,
                         wxGetInstance(),
                         nullptr
                      );
+
             wxCHECK_MSG( hwnd, wxSize(),
                          wxS("SysDateTimePick32 creation unexpected failed") );
 

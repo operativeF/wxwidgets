@@ -1348,7 +1348,7 @@ bool wxMDIClientWindow::CreateClient(wxMDIParentFrame *parent, long style)
     DWORD exStyle = WS_EX_CLIENTEDGE;
 
     wxWindowCreationHook hook(this);
-    m_hWnd = (WXHWND)::CreateWindowEx
+    m_hWnd = (WXHWND)::CreateWindowExW
                        (
                         exStyle,
                         wxT("MDICLIENT"),

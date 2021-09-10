@@ -563,7 +563,7 @@ int wxRendererMSW::GetHeaderButtonHeight(wxWindow * win)
 
 
     // create a temporary header window just to get its geometry
-    HWND hwndHeader = ::CreateWindow(WC_HEADER, nullptr, 0,
+    HWND hwndHeader = ::CreateWindowW(WC_HEADER, nullptr, 0,
                                      0, 0, 0, 0, nullptr, nullptr, nullptr, nullptr);
     if ( !hwndHeader )
         return DEFAULT_HEIGHT;

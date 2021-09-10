@@ -32,7 +32,6 @@
 #include "wx/dcmemory.h"
 #include "wx/settings.h"
 #include "wx/log.h"
-
 #include "wx/ownerdrw.h"
 
 #include <windowsx.h>

@@ -152,7 +152,7 @@ void wxGUIEventLoop::ProcessMessage(WXMSG *msg)
     {
         // if it wasn't done, dispatch it to the corresponding window
         ::TranslateMessage(msg);
-        ::DispatchMessage(msg);
+        ::DispatchMessageW(msg);
     }
 }
 
@@ -250,7 +250,7 @@ void wxGUIEventLoop::DoYieldFor(long eventsToProcess)
     // the main event loop in order to stop it
     MSG msg;
     int nPaintsReceived = 0;
-    while ( PeekMessage(&msg, (HWND)nullptr, 0, 0, PM_NOREMOVE) &&
+    while ( ::PeekMessageW(&msg, (HWND)nullptr, 0, 0, PM_NOREMOVE) &&
             msg.message != WM_QUIT )
     {
 #if wxUSE_THREADS

@@ -122,7 +122,7 @@ bool wxHandleFatalExceptions(bool doit)
     {
         // try to find a place where we can put out report file later
         wxChar fullname[MAX_PATH];
-        if ( !::GetTempPath(WXSIZEOF(fullname), fullname) )
+        if ( !::GetTempPathW(WXSIZEOF(fullname), fullname) )
         {
             wxLogLastError(wxT("GetTempPath"));
 

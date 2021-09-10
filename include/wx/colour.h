@@ -12,7 +12,9 @@
 #define _WX_COLOUR_H_BASE_
 
 #include "wx/defs.h"
+
 #include "wx/gdiobj.h"
+#include "wx/string.h"
 
 #include <cstdint>
 

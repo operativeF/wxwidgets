@@ -16,6 +16,7 @@
 // ---------------------------------------------------------------------------
 
 #include "wx/defs.h"
+
 #include "wx/list.h"
 #include "wx/string.h"
 #include "wx/fontenc.h"
@@ -35,7 +36,6 @@ class  WXDLLIMPEXP_FWD_CORE wxIcon;
 class  WXDLLIMPEXP_FWD_CORE wxPalette;
 class  WXDLLIMPEXP_FWD_CORE wxPen;
 class  WXDLLIMPEXP_FWD_CORE wxRegion;
-class  WXDLLIMPEXP_FWD_BASE wxString;
 class  WXDLLIMPEXP_FWD_CORE wxIconBundle;
 struct WXDLLIMPEXP_FWD_CORE wxPoint;
 

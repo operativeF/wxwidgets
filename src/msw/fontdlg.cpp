@@ -145,7 +145,7 @@ int wxFontDialog::ShowModal()
 
     wxMSWImpl::AutoSystemDpiAware dpiAwareness;
 
-    if ( ChooseFont(&chooseFontStruct) != 0 )
+    if ( ::ChooseFontW(&chooseFontStruct) != 0 )
     {
         wxRGBToColour(m_fontData.m_fontColour, chooseFontStruct.rgbColors);
         m_fontData.m_chosenFont = wxFont(wxNativeFontInfo(logFont, this));

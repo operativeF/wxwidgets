@@ -99,7 +99,7 @@ wxFindReplaceDialogImpl::wxFindReplaceDialogImpl(wxFindReplaceDialog *dialog,
     // get the identifier for the find dialog message if we don't have it yet
     if ( !ms_msgFindDialog )
     {
-        ms_msgFindDialog = ::RegisterWindowMessage(FINDMSGSTRING);
+        ms_msgFindDialog = ::RegisterWindowMessageW(FINDMSGSTRING);
 
         if ( !ms_msgFindDialog )
         {

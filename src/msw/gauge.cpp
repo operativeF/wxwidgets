@@ -148,7 +148,7 @@ bool wxGauge::SetBackgroundColour(const wxColour& col)
 
 bool wxGauge::IsInIndeterminateMode() const
 {
-    return (::GetWindowLong(GetHwnd(), GWL_STYLE) & PBS_MARQUEE) != 0;
+    return (::GetWindowLongW(GetHwnd(), GWL_STYLE) & PBS_MARQUEE) != 0;
 }
 
 void wxGauge::SetIndeterminateMode()

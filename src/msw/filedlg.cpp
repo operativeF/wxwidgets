@@ -364,7 +364,7 @@ static bool DoShowCommFileDialog(OPENFILENAME *of, long style, DWORD *err)
     if ( of->Flags & OFN_ENABLEHOOK )
         dpiAwareness.reset(new wxMSWImpl::AutoSystemDpiAware());
 
-    if ( style & wxFD_SAVE ? GetSaveFileName(of) : GetOpenFileName(of) )
+    if ( style & wxFD_SAVE ? ::GetSaveFileNameW(of) : ::GetOpenFileNameW(of) )
         return true;
 
     if ( err )

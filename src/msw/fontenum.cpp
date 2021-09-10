@@ -136,7 +136,7 @@ void wxFontEnumeratorHelper::DoEnumerate()
     lf.lfCharSet = (BYTE)m_charset;
     wxStrlcpy(lf.lfFaceName, m_facename.c_str(), WXSIZEOF(lf.lfFaceName));
     lf.lfPitchAndFamily = 0;
-    ::EnumFontFamiliesEx(hDC, &lf, (FONTENUMPROC)wxFontEnumeratorProc,
+    ::EnumFontFamiliesExW(hDC, &lf, (FONTENUMPROC)wxFontEnumeratorProc,
                          (LPARAM)this, wxRESERVED_PARAM) ;
 
     ::ReleaseDC(nullptr, hDC);
