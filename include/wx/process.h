@@ -14,6 +14,10 @@
 #include "wx/event.h"
 #include "wx/utils.h"       // for wxSignal
 
+#if wxUSE_STREAMS
+    #include "wx/stream.h"
+#endif
+
 // the wxProcess creation flags
 enum
 {
@@ -24,10 +28,6 @@ enum
     wxPROCESS_REDIRECT = 1
 };
 
-#if wxUSE_STREAMS
-    class WXDLLIMPEXP_BASE wxInputStream;
-    class WXDLLIMPEXP_BASE wxOutputStream;
-#endif
 
 // ----------------------------------------------------------------------------
 // A wxProcess object should be passed to wxExecute - than its OnTerminate()
