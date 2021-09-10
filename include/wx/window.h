@@ -41,7 +41,9 @@
 #include "wx/access.h"
 #endif
 
+#include <string>
 #include <string_view>
+#include <utility>
 
 // when building wxUniv/Foo we don't want the code for native menu use to be
 // compiled in - it should only be used when building real wxFoo

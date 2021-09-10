@@ -18,6 +18,7 @@
 #include "wx/icon.h"
 
 #include <string>
+#include <vector>
 
 class WXDLLIMPEXP_FWD_CORE wxTaskBarButton;
 class WXDLLIMPEXP_FWD_CORE wxTaskBarJumpListCategory;

@@ -15,6 +15,8 @@
 #include "wx/position.h"
 #include "wx/scrolwin.h"
 
+#include <string>
+
 class WXDLLIMPEXP_FWD_CORE wxVarScrollHelperEvtHandler;
 
 

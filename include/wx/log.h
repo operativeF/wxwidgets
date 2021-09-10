@@ -28,6 +28,9 @@ using wxLogLevel = unsigned long;
 #include "wx/string.h"
 #include "wx/strvararg.h"
 
+#include <iosfwd>
+#include <vector>
+
 // ----------------------------------------------------------------------------
 // forward declarations
 // ----------------------------------------------------------------------------

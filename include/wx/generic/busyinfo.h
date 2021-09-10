@@ -15,6 +15,8 @@
 
 #include "wx/object.h"
 
+#include <string>
+
 class WXDLLIMPEXP_FWD_CORE wxFrame;
 class WXDLLIMPEXP_FWD_CORE wxWindow;
 class WXDLLIMPEXP_FWD_CORE wxControl;

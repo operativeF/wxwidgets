@@ -17,7 +17,6 @@
 #include "wx/event.h"
 #include "wx/sstream.h"
 #include "wx/sharedptr.h"
-#include <vector>
 #include "wx/versioninfo.h"
 
 #if defined(__WXOSX__)
@@ -29,6 +28,11 @@
 #else
     #error "wxWebView not implemented on this platform."
 #endif
+
+#include <memory>
+#include <string>
+#include <vector>
+
 
 class wxFSFile;
 class wxFileSystem;

@@ -23,6 +23,9 @@
     #include "wx/filesys.h"
 #endif // wxUSE_FILESYSTEM
 
+#include <string>
+#include <vector>
+
 class WXDLLIMPEXP_FWD_HTML wxHtmlCell;
 class WXDLLIMPEXP_FWD_HTML wxHtmlWinParser;
 class WXDLLIMPEXP_FWD_HTML wxHtmlListBoxCache;

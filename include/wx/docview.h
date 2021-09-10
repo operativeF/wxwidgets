@@ -20,11 +20,15 @@
 #include "wx/string.h"
 #include "wx/frame.h"
 #include "wx/filehistory.h"
-#include <vector>
+
 
 #if wxUSE_PRINTING_ARCHITECTURE
     #include "wx/print.h"
 #endif
+
+#include <iosfwd>
+#include <string>
+#include <vector>
 
 class WXDLLIMPEXP_FWD_CORE wxWindow;
 class WXDLLIMPEXP_FWD_CORE wxDocument;

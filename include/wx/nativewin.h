@@ -59,6 +59,8 @@
 
 #ifdef wxHAS_NATIVE_WINDOW
 
+#include <string>
+
 // ----------------------------------------------------------------------------
 // wxNativeWindow: for using native windows inside wxWidgets windows
 // ----------------------------------------------------------------------------

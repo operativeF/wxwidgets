@@ -18,6 +18,8 @@
 #include "wx/frame.h"
 #include "wx/menu.h"
 
+#include <string>
+
 // forward declarations
 class WXDLLIMPEXP_FWD_CORE wxMDIParentFrame;
 class WXDLLIMPEXP_FWD_CORE wxMDIChildFrame;

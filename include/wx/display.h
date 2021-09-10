@@ -18,8 +18,9 @@
 //     it becomes just a trivial wrapper around the old wxDisplayXXX() functions
 
 #if wxUSE_DISPLAY
-    #include "wx/dynarray.h"
     #include "wx/vidmode.h"
+
+    #include <vector>
 
     using wxArrayVideoModes = std::vector<wxVideoMode>;
 

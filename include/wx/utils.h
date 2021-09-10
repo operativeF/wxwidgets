@@ -25,6 +25,7 @@
 #if wxUSE_GUI
     #include "wx/gdicmn.h"
     #include "wx/mousestate.h"
+
     #include <vector>
 #endif
 

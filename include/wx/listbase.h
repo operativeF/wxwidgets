@@ -19,6 +19,8 @@
 #include "wx/itemattr.h"
 #include "wx/systhemectrl.h"
 
+#include <vector>
+
 class WXDLLIMPEXP_FWD_CORE wxImageList;
 
 // ----------------------------------------------------------------------------

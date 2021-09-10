@@ -16,6 +16,8 @@
 
 #include "wx/popupwin.h"
 
+#include <string>
+
 class WXDLLIMPEXP_FWD_CORE wxTipWindowView;
 
 // ----------------------------------------------------------------------------

@@ -17,6 +17,8 @@
 
 #include "wx/dynarray.h"
 
+#include <string>
+
 class WXDLLIMPEXP_FWD_BASE wxInputStream;
 
 WX_DECLARE_EXPORTED_OBJARRAY(wxIcon, wxIconArray);

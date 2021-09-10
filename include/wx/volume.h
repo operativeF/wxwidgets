@@ -19,6 +19,8 @@
 
 #include "wx/string.h"
 
+#include <vector>
+
 #if wxUSE_FSVOLUME
 
 // the volume flags

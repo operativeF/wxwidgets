@@ -18,6 +18,8 @@
 
 #include "wx/panel.h"
 
+#include <string>
+
 class WXDLLIMPEXP_FWD_CORE wxBookCtrlBase;
 class WXDLLIMPEXP_FWD_CORE wxBookCtrlEvent;
 class WXDLLIMPEXP_FWD_CORE wxIcon;

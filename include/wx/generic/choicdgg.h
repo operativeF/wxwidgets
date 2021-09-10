@@ -15,6 +15,9 @@
 #include "wx/dynarray.h"
 #include "wx/dialog.h"
 
+#include <string>
+#include <vector>
+
 class WXDLLIMPEXP_FWD_CORE wxListBoxBase;
 
 // ----------------------------------------------------------------------------

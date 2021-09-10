@@ -15,6 +15,8 @@
 #include "wx/longlong.h"
 #include "wx/convauto.h"
 
+#include <cstdint>
+
 #if wxUSE_STREAMS
 
 // Common wxDataInputStream and wxDataOutputStream parameters.

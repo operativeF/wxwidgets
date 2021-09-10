@@ -16,6 +16,8 @@
 
 #include "wx/colour.h"
 
+#include <string>
+
 class WXDLLIMPEXP_FWD_CORE wxFont;
 class WXDLLIMPEXP_FWD_CORE wxIcon;
 class WXDLLIMPEXP_FWD_CORE wxWindow;

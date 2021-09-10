@@ -19,6 +19,7 @@
 #include "wx/string.h"
 
 #include <climits>     // for LONG_MAX
+#include <iosfwd>
 
 #include <gsl/gsl>
 

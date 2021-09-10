@@ -15,6 +15,8 @@
 #include "wx/bmpbuttn.h"
 #include "wx/toolbar.h"
 
+#include <string>
+
 class WXDLLIMPEXP_FWD_CORE wxButtonToolBarTool;
 
 // ----------------------------------------------------------------------------

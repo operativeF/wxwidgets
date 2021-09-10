@@ -18,6 +18,8 @@
     #include "wx/scrolbar.h"
 #endif
 
+#include <string>
+
 class WXDLLIMPEXP_FWD_CORE wxScrollHelperEvtHandler;
 class WXDLLIMPEXP_FWD_BASE wxTimer;
 

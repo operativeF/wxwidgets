@@ -18,6 +18,7 @@
 #include "wx/string.h"
 #include "wx/cpp.h"
 
+#include <iosfwd>
 #include <typeinfo>
 
 #if wxUSE_DATETIME

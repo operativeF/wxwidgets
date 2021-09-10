@@ -16,6 +16,9 @@
 #include "wx/archive.h"
 #include "wx/hashmap.h"
 
+#include <cstdint>
+#include <utility>
+
 
 /////////////////////////////////////////////////////////////////////////////
 // Constants

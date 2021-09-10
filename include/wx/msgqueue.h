@@ -21,6 +21,7 @@
 #include "wx/stopwatch.h"
 
 #include <queue>
+#include <utility>
 
 enum wxMessageQueueError
 {

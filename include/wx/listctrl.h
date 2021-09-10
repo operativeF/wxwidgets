@@ -35,6 +35,8 @@ inline constexpr char wxListCtrlNameStr[] = "listCtrl";
     #include "wx/generic/listctrl.h"
 #endif
 
+#include <string>
+
 // ----------------------------------------------------------------------------
 // wxListView: a class which provides a better API for list control
 // ----------------------------------------------------------------------------

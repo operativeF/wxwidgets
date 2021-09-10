@@ -16,6 +16,7 @@
 
 #include "wx/headercol.h"
 
+#include <string>
 #include <vector>
 
 #include <gsl/gsl>

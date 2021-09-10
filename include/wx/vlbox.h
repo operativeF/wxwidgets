@@ -14,6 +14,8 @@
 #include "wx/vscroll.h"         // base class
 #include "wx/bitmap.h"
 
+#include <string>
+
 class WXDLLIMPEXP_FWD_CORE wxSelectionStore;
 
 inline constexpr char wxVListBoxNameStr[] = "wxVListBox";

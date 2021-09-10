@@ -13,6 +13,7 @@
 
 #include "wx/string.h"
 
+#include <string>
 #include <vector>
 
 #if wxUSE_GUI

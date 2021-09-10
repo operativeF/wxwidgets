@@ -18,6 +18,8 @@
 #include "wx/image.h"
 #include "wx/bitmap.h"
 
+#include <cstdint>
+
 #include <gsl/gsl>
 
 // ----------------------------------------------------------------------------

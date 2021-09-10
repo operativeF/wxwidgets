@@ -17,6 +17,8 @@
 
 #include "wx/dialog.h"
 
+#include <string>
+
 #if wxUSE_SPINCTRL
     class WXDLLIMPEXP_FWD_CORE wxSpinCtrl;
 #else

@@ -17,6 +17,9 @@
 #include "wx/panel.h"
 #include "wx/dialog.h"
 
+#include <string>
+#include <vector>
+
 inline constexpr char wxRearrangeListNameStr[] = "wxRearrangeList";
 inline constexpr char wxRearrangeDialogNameStr[] = "wxRearrangeDlg";
 

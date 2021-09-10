@@ -9,6 +9,9 @@
 #ifndef _WX_MSW_CALCTRL_H_
 #define _WX_MSW_CALCTRL_H_
 
+#include <cstdint>
+#include <string>
+
 class WXDLLIMPEXP_CORE wxCalendarCtrl : public wxCalendarCtrlBase
 {
 public:

@@ -12,6 +12,8 @@
 
 #include "wx/private/notifmsg.h"
 
+#include <string>
+
 class wxGenericNotificationMessageImpl : public wxNotificationMessageImpl
 {
 public:

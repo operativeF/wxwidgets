@@ -23,6 +23,8 @@
 #include "wx/sckaddr.h"
 #include "wx/list.h"
 
+#include <cstdint>
+
 class wxSocketImpl;
 
 // ------------------------------------------------------------------------

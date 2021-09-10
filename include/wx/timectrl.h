@@ -16,6 +16,8 @@
 
 #include "wx/datetimectrl.h"
 
+#include <string>
+
 inline constexpr char wxTimePickerCtrlNameStr[] = "timectrl";
 
 // No special styles are currently defined for this control but still define a

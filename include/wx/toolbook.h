@@ -18,6 +18,8 @@
 #include "wx/bookctrl.h"
 #include "wx/containr.h"
 
+#include <string>
+
 class WXDLLIMPEXP_FWD_CORE wxToolBarBase;
 class WXDLLIMPEXP_FWD_CORE wxCommandEvent;
 

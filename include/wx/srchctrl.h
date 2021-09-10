@@ -16,6 +16,8 @@
 
 #include "wx/textctrl.h"
 
+#include <string>
+
 #if (!defined(__WXMAC__) && !defined(__WXGTK20__)) || defined(__WXUNIVERSAL__)
     // no native version, use the generic one
     #define wxUSE_NATIVE_SEARCH_CONTROL 0

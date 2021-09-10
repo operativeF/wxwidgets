@@ -14,6 +14,9 @@
 
 #if wxUSE_VALIDATORS
 
+#include <string>
+#include <vector>
+
 class WXDLLIMPEXP_FWD_BASE wxDateTime;
 class WXDLLIMPEXP_FWD_BASE wxFileName;
 

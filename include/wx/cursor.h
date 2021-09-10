@@ -22,6 +22,8 @@
     using wxGDIImage = wxGDIObject;
 #endif
 
+#include <string>
+
 class WXDLLIMPEXP_CORE wxCursorBase : public wxGDIImage
 {
 public:

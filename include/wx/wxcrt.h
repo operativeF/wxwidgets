@@ -15,6 +15,8 @@
 #include "wx/wxcrtbase.h"
 #include "wx/string.h"
 
+#include <cstdarg>
+
 #ifndef __WX_SETUP_H__
 // For non-configure builds assume vsscanf is available, if not Visual C
 #if !defined (__VISUALC__)

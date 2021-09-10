@@ -16,6 +16,8 @@
 #include "wx/string.h"
 #include "wx/translation.h"
 
+#include <cstdint>
+
 // Make wxLayoutDirection enum available without need for wxUSE_INTL so wxWindow, wxApp
 // and other classes are not distrubed by wxUSE_INTL
 

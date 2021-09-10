@@ -10,6 +10,8 @@
 #ifndef _WX_GENERIC_RICHMSGDLGG_H_
 #define _WX_GENERIC_RICHMSGDLGG_H_
 
+#include <string>
+
 class WXDLLIMPEXP_FWD_CORE wxCheckBox;
 class WXDLLIMPEXP_FWD_CORE wxCollapsiblePane;
 class WXDLLIMPEXP_FWD_CORE wxCollapsiblePaneEvent;

@@ -25,6 +25,10 @@
     #include "wx/datetime.h"
 #endif // wxUSE_DATETIME
 
+#include <iosfwd>
+#include <string>
+#include <vector>
+
 class wxAny;
 
 /*
