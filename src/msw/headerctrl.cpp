@@ -14,6 +14,8 @@
 #if wxUSE_HEADERCTRL
 
 #ifndef WX_PRECOMP
+    #include <memory>
+
     #include "wx/msw/wrapcctl.h"
     #include "wx/msw/private.h"
     
@@ -88,8 +90,6 @@ public:
                 const wxSize& size,
                 long style,
                 const std::string& name);
-
-    ~wxMSWHeaderCtrl();
 
     // Override to implement colours support via custom drawing.
     bool SetBackgroundColour(const wxColour& colour) override;
@@ -179,7 +179,7 @@ private:
     std::vector<int> m_colIndices;
 
     // the image list: initially nullptr, created on demand
-    wxImageList *m_imageList{nullptr};
+    std::unique_ptr<wxImageList> m_imageList;
 
     // the offset of the window used to emulate scrolling it
     int m_scrollOffset{0};
@@ -192,7 +192,7 @@ private:
 
     // the custom draw helper: initially nullptr, created on demand, use
     // GetCustomDraw() to do it
-    wxMSWHeaderCtrlCustomDraw *m_customDraw{nullptr};
+    std::unique_ptr<wxMSWHeaderCtrlCustomDraw> m_customDraw;
 };
 
 // ============================================================================
@@ -252,12 +252,6 @@ WXDWORD wxMSWHeaderCtrl::MSWGetStyle(long style, WXDWORD *exstyle) const
     msStyle |= HDS_HORZ | HDS_BUTTONS | HDS_FULLDRAG | HDS_HOTTRACK;
 
     return msStyle;
-}
-
-wxMSWHeaderCtrl::~wxMSWHeaderCtrl()
-{
-    delete m_imageList;
-    delete m_customDraw;
 }
 
 // ----------------------------------------------------------------------------
@@ -439,7 +433,7 @@ void wxMSWHeaderCtrl::DoInsertItem(const wxHeaderColumn& col, unsigned int idx)
 
         if ( !m_imageList )
         {
-            m_imageList = new wxImageList(bmpWidth, bmpHeight);
+            m_imageList = std::make_unique<wxImageList>(bmpWidth, bmpHeight);
             // suppress mingw32 warning about unused computed value
             std::ignore = Header_SetImageList(GetHwnd(), GetHimagelistOf(m_imageList));
         }
@@ -650,8 +644,7 @@ wxMSWHeaderCtrlCustomDraw* wxMSWHeaderCtrl::GetCustomDraw()
     {
         if ( m_customDraw )
         {
-            delete m_customDraw;
-            m_customDraw = nullptr;
+            m_customDraw.reset();
         }
 
         return nullptr;
@@ -659,9 +652,9 @@ wxMSWHeaderCtrlCustomDraw* wxMSWHeaderCtrl::GetCustomDraw()
 
     // We do have at least one custom colour, so enable custom drawing.
     if ( !m_customDraw )
-        m_customDraw = new wxMSWHeaderCtrlCustomDraw();
+        m_customDraw = std::make_unique<wxMSWHeaderCtrlCustomDraw>();
 
-    return m_customDraw;
+    return m_customDraw.get();
 }
 
 bool wxMSWHeaderCtrl::SetBackgroundColour(const wxColour& colour)
