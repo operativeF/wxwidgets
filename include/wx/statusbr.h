@@ -16,7 +16,6 @@
 #if wxUSE_STATUSBAR
 
 #include "wx/control.h"
-#include "wx/list.h"
 #include "wx/dynarray.h"
 
 inline constexpr char wxStatusBarNameStr[] = "statusBar";

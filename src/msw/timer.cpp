@@ -20,7 +20,6 @@
     #include "wx/msw/private.h"
 #endif
 
-#include "wx/list.h"
 #include "wx/event.h"
 #include "wx/app.h"
 #include "wx/intl.h"

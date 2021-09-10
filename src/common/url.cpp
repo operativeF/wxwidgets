@@ -20,7 +20,6 @@
     #include <string>
 #endif
 
-#include "wx/list.h"
 #include "wx/utils.h"
 #include "wx/module.h"
 

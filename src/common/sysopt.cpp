@@ -17,7 +17,6 @@
 
 #include "wx/sysopt.h"
 #include "wx/app.h"
-#include "wx/list.h"
 #include "wx/string.h"
 
 // ----------------------------------------------------------------------------

@@ -12,7 +12,6 @@
 #include "wx/utils.h"
 
 #ifndef WX_PRECOMP
-    #include "wx/list.h"
     #include "wx/string.h"
     #include "wx/log.h"
     #include "wx/app.h"

@@ -22,7 +22,6 @@
     #include <string>
 #endif
 
-#include "wx/list.h"
 #include "wx/utils.h"
 #include "wx/app.h"
 #include "wx/palette.h"
