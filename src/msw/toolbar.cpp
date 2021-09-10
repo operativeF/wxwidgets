@@ -2031,7 +2031,7 @@ bool wxToolBar::HandlePaint(WXWPARAM wParam, WXLPARAM lParam)
         // exclude the area occupied by the controls and stretchable spaces
         // from the update region to prevent the toolbar from drawing
         // separators in it
-        if ( !::ValidateRgn(GetHwnd(), GetHrgnOf(rgnDummySeps)) )
+        if ( !::ValidateRgn(GetHwnd(), rgnDummySeps.GetHRGN()) )
         {
             wxLogLastError(wxT("ValidateRgn()"));
         }
@@ -2063,7 +2063,7 @@ bool wxToolBar::HandlePaint(WXWPARAM wParam, WXLPARAM lParam)
         // erase the dummy separators region ourselves now as nobody painted
         // over them
         WindowHDC hdc(GetHwnd());
-        ::SelectClipRgn(hdc, GetHrgnOf(rgnDummySeps));
+        ::SelectClipRgn(hdc, rgnDummySeps.GetHRGN());
         MSWDoEraseBackground(hdc);
     }
 

@@ -1611,7 +1611,7 @@ bool wxWindowMSW::Reparent(wxWindowBase *parent)
         return false;
 
     HWND hWndChild = GetHwnd();
-    HWND hWndParent = GetParent() ? GetWinHwnd(GetParent()) : (HWND)nullptr;
+    HWND hWndParent = GetParent() ? GetHwndOf(GetParent()) : (HWND)nullptr;
 
     ::SetParent(hWndChild, hWndParent);
 

@@ -64,7 +64,7 @@ bool wxCaret::MSWCreateCaret()
 
     if ( !m_hasCaret )
     {
-        CALL_CARET_API(CreateCaret, (GetWinHwnd(GetWindow()), nullptr,
+        CALL_CARET_API(CreateCaret, (GetHwndOf(GetWindow()), nullptr,
                                      m_width, m_height));
 
         m_hasCaret = true;
@@ -121,7 +121,7 @@ void wxCaret::DoShow()
 
     if ( m_hasCaret )
     {
-        CALL_CARET_API(ShowCaret, (GetWinHwnd(GetWindow())));
+        CALL_CARET_API(ShowCaret, (GetHwndOf(GetWindow())));
     }
     //else: will be shown when we get the focus
 }
@@ -130,7 +130,7 @@ void wxCaret::DoHide()
 {
     if ( m_hasCaret )
     {
-        CALL_CARET_API(HideCaret, (GetWinHwnd(GetWindow())));
+        CALL_CARET_API(HideCaret, (GetHwndOf(GetWindow())));
     }
 }
 

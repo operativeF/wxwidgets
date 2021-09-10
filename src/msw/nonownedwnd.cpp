@@ -48,9 +48,9 @@ bool wxNonOwnedWindow::DoSetRegionShape(const wxRegion& region)
 {
     // Windows takes ownership of the region, so
     // we'll have to make a copy of the region to give to it.
-    DWORD noBytes = ::GetRegionData(GetHrgnOf(region), 0, nullptr);
+    DWORD noBytes = ::GetRegionData(region.GetHRGN(), 0, nullptr);
     RGNDATA *rgnData = (RGNDATA*) new char[noBytes];
-    ::GetRegionData(GetHrgnOf(region), noBytes, rgnData);
+    ::GetRegionData(region.GetHRGN(), noBytes, rgnData);
     HRGN hrgn = ::ExtCreateRegion(nullptr, noBytes, rgnData);
     delete[] (char*) rgnData;
 

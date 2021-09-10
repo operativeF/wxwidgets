@@ -766,8 +766,6 @@ private:
 
 #define GetHwnd()               ((HWND)GetHWND())
 #define GetHwndOf(win)          ((HWND)((win)->GetHWND()))
-// old name
-#define GetWinHwnd              GetHwndOf
 
 #define GetHdc()                ((HDC)GetHDC())
 #define GetHdcOf(dc)            ((HDC)(dc).GetHDC())
@@ -802,9 +800,6 @@ private:
 #define GetHpen()               ((HPEN)GetResourceHandle())
 #define GetHpenOf(pen)          ((HPEN)(pen).GetResourceHandle())
 
-#define GetHrgn()               ((HRGN)GetHRGN())
-#define GetHrgnOf(rgn)          ((HRGN)(rgn).GetHRGN())
-
 #endif // wxUSE_GUI
 
 // ---------------------------------------------------------------------------
@@ -815,7 +810,7 @@ private:
 inline wxString wxGetFullModuleName(HMODULE hmod)
 {
     wxString fullname;
-    if ( !::GetModuleFileName
+    if ( !::GetModuleFileNameW
             (
                 hmod,
                 wxStringBuffer(fullname, MAX_PATH),
@@ -934,7 +929,7 @@ inline bool wxStyleHasBorder(long style)
 
 inline bool wxHasWindowExStyle(const wxWindowMSW *win, long style)
 {
-    return (::GetWindowLong(GetHwndOf(win), GWL_EXSTYLE) & style) != 0;
+    return (::GetWindowLongW(GetHwndOf(win), GWL_EXSTYLE) & style) != 0;
 }
 
 // Common helper of wxUpdate{,Edit}LayoutDirection() below: sets or clears the
@@ -948,7 +943,7 @@ wxUpdateExStyleForLayoutDirection(WXHWND hWnd,
     wxCHECK_MSG( hWnd, false,
                  wxS("Can't set layout direction for invalid window") );
 
-    const LONG_PTR styleOld = ::GetWindowLongPtr(hWnd, GWL_EXSTYLE);
+    const LONG_PTR styleOld = ::GetWindowLongPtrW(hWnd, GWL_EXSTYLE);
 
     LONG_PTR styleNew = styleOld;
     switch ( dir )
@@ -1004,7 +999,7 @@ inline wxLayoutDirection wxGetEditLayoutDirection(WXHWND hWnd)
     // them here. In particularly, don't check for WS_EX_RIGHT as it can be set
     // for a right-aligned control even if it doesn't use RTL. And while we
     // could test WS_EX_LEFTSCROLLBAR, this doesn't really seem useful.
-    const LONG_PTR style = ::GetWindowLongPtr(hWnd, GWL_EXSTYLE);
+    const LONG_PTR style = ::GetWindowLongPtrW(hWnd, GWL_EXSTYLE);
 
     return style & WS_EX_RTLREADING ? wxLayoutDirection::RightToLeft
                                     : wxLayoutDirection::LeftToRight;
@@ -1048,22 +1043,22 @@ inline void wxFillRect(HWND hwnd, HDC hdc, HBRUSH hbr)
 // for the 64-bit warning mode of later versions of MSVC (C4311/4312)
 inline WNDPROC wxGetWindowProc(HWND hwnd)
 {
-    return (WNDPROC)(LONG_PTR)::GetWindowLongPtr(hwnd, GWLP_WNDPROC);
+    return (WNDPROC)(LONG_PTR)::GetWindowLongPtrW(hwnd, GWLP_WNDPROC);
 }
 
 inline void *wxGetWindowUserData(HWND hwnd)
 {
-    return (void *)(LONG_PTR)::GetWindowLongPtr(hwnd, GWLP_USERDATA);
+    return (void *)(LONG_PTR)::GetWindowLongPtrW(hwnd, GWLP_USERDATA);
 }
 
 inline WNDPROC wxSetWindowProc(HWND hwnd, WNDPROC func)
 {
-    return (WNDPROC)(LONG_PTR)::SetWindowLongPtr(hwnd, GWLP_WNDPROC, (LONG_PTR)func);
+    return (WNDPROC)(LONG_PTR)::SetWindowLongPtrW(hwnd, GWLP_WNDPROC, (LONG_PTR)func);
 }
 
 inline void *wxSetWindowUserData(HWND hwnd, void *data)
 {
-    return (void *)(LONG_PTR)::SetWindowLongPtr(hwnd, GWLP_USERDATA, (LONG_PTR)data);
+    return (void *)(LONG_PTR)::SetWindowLongPtrW(hwnd, GWLP_USERDATA, (LONG_PTR)data);
 }
 
 #endif // wxUSE_GUI && __WXMSW__

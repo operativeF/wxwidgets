@@ -140,7 +140,7 @@ void wxRegion::Clear()
 
 bool wxRegion::DoOffset(wxCoord x, wxCoord y)
 {
-    wxCHECK_MSG( GetHrgn(), false, wxT("invalid wxRegion") );
+    wxCHECK_MSG( GetHRGN(), false, wxT("invalid wxRegion") );
 
     if ( !x && !y )
     {
@@ -150,7 +150,7 @@ bool wxRegion::DoOffset(wxCoord x, wxCoord y)
 
     AllocExclusive();
 
-    if ( ::OffsetRgn(GetHrgn(), x, y) == ERROR )
+    if ( ::OffsetRgn(GetHRGN(), x, y) == ERROR )
     {
         wxLogLastError(wxT("OffsetRgn"));
 

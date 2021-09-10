@@ -61,7 +61,7 @@ wxWinAPI::Event::Create(wxWinAPI::Event::Kind kind,
 {
     wxCHECK_MSG( !IsOk(), false, wxS("Event can't be created twice") );
 
-    WXHANDLE handle = ::CreateEvent(nullptr,
+    WXHANDLE handle = ::CreateEventW(nullptr,
                                     kind == ManualReset,
                                     initialState == Signaled,
                                     name);

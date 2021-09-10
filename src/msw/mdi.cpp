@@ -237,7 +237,7 @@ wxMDIParentFrame::~wxMDIParentFrame()
 
 wxMDIChildFrame *wxMDIParentFrame::GetActiveChild() const
 {
-    HWND hWnd = (HWND)::SendMessageW(GetWinHwnd(GetClientWindow()),
+    HWND hWnd = (HWND)::SendMessageW(GetHwndOf(GetClientWindow()),
                                     WM_MDIGETACTIVE, 0, 0L);
     if ( !hWnd )
         return nullptr;
@@ -516,7 +516,7 @@ WXHICON wxMDIParentFrame::GetDefaultIcon() const
 
 void wxMDIParentFrame::Cascade()
 {
-    ::SendMessageW(GetWinHwnd(GetClientWindow()), WM_MDICASCADE, 0, 0);
+    ::SendMessageW(GetHwndOf(GetClientWindow()), WM_MDICASCADE, 0, 0);
 }
 
 void wxMDIParentFrame::Tile(wxOrientation orient)
@@ -524,24 +524,24 @@ void wxMDIParentFrame::Tile(wxOrientation orient)
     wxASSERT_MSG( orient == wxHORIZONTAL || orient == wxVERTICAL,
                   wxT("invalid orientation value") );
 
-    ::SendMessageW(GetWinHwnd(GetClientWindow()), WM_MDITILE,
+    ::SendMessageW(GetHwndOf(GetClientWindow()), WM_MDITILE,
                   orient == wxHORIZONTAL ? MDITILE_HORIZONTAL
                                          : MDITILE_VERTICAL, 0);
 }
 
 void wxMDIParentFrame::ArrangeIcons()
 {
-    ::SendMessageW(GetWinHwnd(GetClientWindow()), WM_MDIICONARRANGE, 0, 0);
+    ::SendMessageW(GetHwndOf(GetClientWindow()), WM_MDIICONARRANGE, 0, 0);
 }
 
 void wxMDIParentFrame::ActivateNext()
 {
-    ::SendMessageW(GetWinHwnd(GetClientWindow()), WM_MDINEXT, 0, 0);
+    ::SendMessageW(GetHwndOf(GetClientWindow()), WM_MDINEXT, 0, 0);
 }
 
 void wxMDIParentFrame::ActivatePrevious()
 {
-    ::SendMessageW(GetWinHwnd(GetClientWindow()), WM_MDINEXT, 0, 1);
+    ::SendMessageW(GetHwndOf(GetClientWindow()), WM_MDINEXT, 0, 1);
 }
 
 // ---------------------------------------------------------------------------
@@ -725,7 +725,7 @@ void wxMDIParentFrame::OnMDICommand(wxCommandEvent& event)
             return;
     }
 
-    ::SendMessageW(GetWinHwnd(GetClientWindow()), msg, wParam, lParam);
+    ::SendMessageW(GetHwndOf(GetClientWindow()), msg, wParam, lParam);
 }
 
 #endif // wxUSE_MENUS
@@ -772,7 +772,7 @@ bool wxMDIParentFrame::MSWTranslateMessage(WXMSG* msg)
     // finally, check for MDI specific built-in accelerators
     if ( pMsg->message == WM_KEYDOWN || pMsg->message == WM_SYSKEYDOWN )
     {
-        if ( ::TranslateMDISysAccel(GetWinHwnd(GetClientWindow()), pMsg))
+        if ( ::TranslateMDISysAccel(GetHwndOf(GetClientWindow()), pMsg))
             return true;
     }
 
@@ -865,7 +865,7 @@ bool wxMDIChildFrame::Create(wxMDIParentFrame *parent,
 
   wxWindowCreationHook hook(this);
 
-  m_hWnd = (WXHWND)::SendMessageW(GetWinHwnd(parent->GetClientWindow()),
+  m_hWnd = (WXHWND)::SendMessageW(GetHwndOf(parent->GetClientWindow()),
                                  WM_MDICREATE, 0, (LPARAM)&mcs);
 
   if ( !m_hWnd )
@@ -1053,11 +1053,11 @@ void wxMDIChildFrame::Maximize(bool maximize)
             // Turn off redrawing in the MDI client window because otherwise
             // maximizing it would also show it and we don't want this for
             // hidden windows.
-            ::SendMessageW(GetWinHwnd(parent->GetClientWindow()), WM_SETREDRAW,
+            ::SendMessageW(GetHwndOf(parent->GetClientWindow()), WM_SETREDRAW,
                           FALSE, 0L);
         }
 
-        ::SendMessageW(GetWinHwnd(parent->GetClientWindow()),
+        ::SendMessageW(GetHwndOf(parent->GetClientWindow()),
                       maximize ? WM_MDIMAXIMIZE : WM_MDIRESTORE,
                       (WPARAM)GetHwnd(), 0);
 
@@ -1067,7 +1067,7 @@ void wxMDIChildFrame::Maximize(bool maximize)
             ::ShowWindow(GetHwnd(), SW_HIDE);
 
             // Turn redrawing in the MDI client back on.
-            ::SendMessageW(GetWinHwnd(parent->GetClientWindow()), WM_SETREDRAW,
+            ::SendMessageW(GetHwndOf(parent->GetClientWindow()), WM_SETREDRAW,
                           TRUE, 0L);
         }
     }
@@ -1078,7 +1078,7 @@ void wxMDIChildFrame::Restore()
     wxMDIParentFrame * const parent = GetMDIParent();
     if ( parent && parent->GetClientWindow() )
     {
-        ::SendMessageW(GetWinHwnd(parent->GetClientWindow()), WM_MDIRESTORE,
+        ::SendMessageW(GetHwndOf(parent->GetClientWindow()), WM_MDIRESTORE,
                       (WPARAM) GetHwnd(), 0);
     }
 }
@@ -1093,7 +1093,7 @@ void wxMDIChildFrame::Activate()
         if ( IsIconized() )
             Restore();
 
-        ::SendMessageW(GetWinHwnd(parent->GetClientWindow()), WM_MDIACTIVATE,
+        ::SendMessageW(GetHwndOf(parent->GetClientWindow()), WM_MDIACTIVATE,
                       (WPARAM) GetHwnd(), 0);
     }
 }
@@ -1265,7 +1265,7 @@ void wxMDIChildFrame::MSWDestroyWindow()
     // the wxFrame is destroyed.
 
     HWND oldHandle = (HWND)GetHWND();
-    ::SendMessageW(GetWinHwnd(parent->GetClientWindow()), WM_MDIDESTROY,
+    ::SendMessageW(GetHwndOf(parent->GetClientWindow()), WM_MDIDESTROY,
                 (WPARAM)oldHandle, 0);
 
     if (parent->GetActiveChild() == nullptr)
@@ -1290,14 +1290,14 @@ bool wxMDIChildFrame::ResetWindowStyle(void *vrect)
 
     if (!pChild || (pChild == this))
     {
-        HWND hwndClient = GetWinHwnd(pFrameWnd->GetClientWindow());
+        HWND hwndClient = GetHwndOf(pFrameWnd->GetClientWindow());
 
         wxMSWWinStyleUpdater updateStyle(hwndClient);
 
         // we want to test whether there is a maximized child, so just set
         // dwThisStyle to 0 if there is no child at all
         DWORD dwThisStyle = pChild
-            ? ::GetWindowLongW(GetWinHwnd(pChild), GWL_STYLE) : 0;
+            ? ::GetWindowLongW(GetHwndOf(pChild), GWL_STYLE) : 0;
         updateStyle.TurnOnOrOff(!(dwThisStyle & WS_MAXIMIZE), WS_EX_CLIENTEDGE);
 
         if ( updateStyle.Apply() )
@@ -1353,7 +1353,7 @@ bool wxMDIClientWindow::CreateClient(wxMDIParentFrame *parent, long style)
                         nullptr,
                         msStyle,
                         0, 0, 0, 0,
-                        GetWinHwnd(parent),
+                        GetHwndOf(parent),
                         nullptr,
                         wxGetInstance(),
                         (LPSTR)(LPCLIENTCREATESTRUCT)&ccs);
@@ -1454,7 +1454,7 @@ void MDISetMenu(wxWindow *win, HMENU hmenuFrame, HMENU hmenuWindow)
         // initially.
         ::SetLastError(ERROR_SUCCESS);
 
-        if ( !::SendMessageW(GetWinHwnd(win),
+        if ( !::SendMessageW(GetHwndOf(win),
                             WM_MDISETMENU,
                             (WPARAM)hmenuFrame,
                             (LPARAM)hmenuWindow) )
@@ -1471,9 +1471,9 @@ void MDISetMenu(wxWindow *win, HMENU hmenuFrame, HMENU hmenuWindow)
     wxWindow *parent = win->GetParent();
     wxCHECK_RET( parent, wxT("MDI client without parent frame? weird...") );
 
-    ::SendMessageW(GetWinHwnd(win), WM_MDIREFRESHMENU, 0, 0L);
+    ::SendMessageW(GetHwndOf(win), WM_MDIREFRESHMENU, 0, 0L);
 
-    ::DrawMenuBar(GetWinHwnd(parent));
+    ::DrawMenuBar(GetHwndOf(parent));
 }
 
 class MenuIterator
