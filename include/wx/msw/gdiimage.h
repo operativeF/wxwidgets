@@ -19,6 +19,8 @@
 #include "wx/gdicmn.h"          // wxBITMAP_TYPE_INVALID
 #include "wx/list.h"
 
+#include <string>
+
 struct WXDLLIMPEXP_FWD_CORE wxGDIImageRefData;
 class WXDLLIMPEXP_FWD_CORE wxGDIImageHandler;
 class WXDLLIMPEXP_FWD_CORE wxGDIImage;

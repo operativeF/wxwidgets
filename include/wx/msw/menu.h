@@ -20,6 +20,9 @@
     using wxAcceleratorArray = std::vector<wxAcceleratorEntry>;
 #endif // wxUSE_ACCEL
 
+#include <memory>
+#include <string>
+
 class WXDLLIMPEXP_FWD_CORE wxFrame;
 
 // ----------------------------------------------------------------------------

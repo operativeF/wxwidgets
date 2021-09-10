@@ -17,6 +17,8 @@
 
 #include "wx/control.h"
 
+#include <string>
+
 /*
  * wxStaticText flags
  */

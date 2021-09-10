@@ -13,6 +13,8 @@
 
 #include "wx/msw/ownerdrawnbutton.h"
 
+#include <string>
+
 // Checkbox item (single checkbox)
 class WXDLLIMPEXP_CORE wxCheckBox : public wxMSWOwnerDrawnButton<wxCheckBoxBase>
 {

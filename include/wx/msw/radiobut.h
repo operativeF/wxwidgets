@@ -13,6 +13,8 @@
 
 #include "wx/msw/ownerdrawnbutton.h"
 
+#include <string>
+
 class WXDLLIMPEXP_CORE wxRadioButton : public wxMSWOwnerDrawnButton<wxRadioButtonBase>
 {
 public:

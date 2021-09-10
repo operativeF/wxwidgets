@@ -15,6 +15,8 @@
 #include "wx/icon.h"
 #include "wx/bitmap.h"
 
+#include <string>
+
 // a control showing an icon or a bitmap
 class WXDLLIMPEXP_CORE wxStaticBitmap : public wxStaticBitmapBase
 {

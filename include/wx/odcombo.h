@@ -20,6 +20,9 @@
 #include "wx/vlbox.h"
 #include "wx/timer.h"
 
+#include <string>
+#include <string_view>
+#include <vector>
 
 //
 // New window styles for wxOwnerDrawnComboBox

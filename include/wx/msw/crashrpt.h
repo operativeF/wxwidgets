@@ -15,6 +15,8 @@
 
 #if wxUSE_CRASHREPORT
 
+#include <cstdint>
+
 struct _EXCEPTION_POINTERS;
 
 // ----------------------------------------------------------------------------

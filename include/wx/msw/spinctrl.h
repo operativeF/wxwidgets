@@ -15,6 +15,8 @@
 
 #if wxUSE_SPINCTRL
 
+#include <limits>
+#include <string>
 #include <vector>
 
 class WXDLLIMPEXP_FWD_CORE wxSpinCtrl;

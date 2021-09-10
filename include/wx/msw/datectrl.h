@@ -11,6 +11,8 @@
 #ifndef _WX_MSW_DATECTRL_H_
 #define _WX_MSW_DATECTRL_H_
 
+#include <string>
+
 class WXDLLIMPEXP_CORE wxDatePickerCtrl : public wxDatePickerCtrlBase
 {
 public:

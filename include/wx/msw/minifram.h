@@ -13,6 +13,8 @@
 
 #include "wx/frame.h"
 
+#include <string>
+
 class WXDLLIMPEXP_CORE wxMiniFrame : public wxFrame
 {
 public:

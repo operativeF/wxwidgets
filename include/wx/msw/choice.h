@@ -11,6 +11,8 @@
 #ifndef _WX_CHOICE_H_
 #define _WX_CHOICE_H_
 
+#include <string>
+#include <string_view>
 #include <vector>
 
 struct tagCOMBOBOXINFO;

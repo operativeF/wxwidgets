@@ -10,6 +10,8 @@
 #ifndef _WX_MSW_RICHMSGDLG_H_
 #define _WX_MSW_RICHMSGDLG_H_
 
+#include <string>
+
 class WXDLLIMPEXP_CORE wxRichMessageDialog : public wxGenericRichMessageDialog
 {
 public:

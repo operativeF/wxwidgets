@@ -10,9 +10,11 @@
 #ifndef _WX_NOTIFMSG_H_
 #define _WX_NOTIFMSG_H_
 
+#if wxUSE_NOTIFICATION_MESSAGE
+
 #include "wx/event.h"
 
-#if wxUSE_NOTIFICATION_MESSAGE
+#include <string>
 
 // ----------------------------------------------------------------------------
 // wxNotificationMessage: allows to show the user a message non intrusively

@@ -15,6 +15,7 @@
   #error  "wxCheckListBox class requires owner-drawn functionality."
 #endif
 
+#include <string>
 #include <vector>
 
 struct WXDLLIMPEXP_FWD_CORE wxOwnerDrawn;

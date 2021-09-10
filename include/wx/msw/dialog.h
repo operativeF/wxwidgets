@@ -13,6 +13,8 @@
 
 #include "wx/panel.h"
 
+#include <string>
+
 class WXDLLIMPEXP_FWD_CORE wxDialogModalData;
 
 class WXDLLIMPEXP_CORE wxDialog : public wxDialogBase

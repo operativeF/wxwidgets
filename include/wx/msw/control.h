@@ -11,6 +11,9 @@
 #ifndef _WX_CONTROL_H_
 #define _WX_CONTROL_H_
 
+#include <string>
+#include <vector>
+
 // General item class
 class WXDLLIMPEXP_CORE wxControl : public wxControlBase
 {

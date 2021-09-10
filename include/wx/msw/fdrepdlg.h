@@ -11,6 +11,8 @@
 #ifndef _WX_MSW_FDREPDLG_H_
 #define _WX_MSW_FDREPDLG_H_
 
+#include <string>
+
 // ----------------------------------------------------------------------------
 // wxFindReplaceDialog: dialog for searching / replacing text
 // ----------------------------------------------------------------------------

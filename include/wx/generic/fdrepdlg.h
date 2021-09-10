@@ -15,6 +15,7 @@ class WXDLLIMPEXP_FWD_CORE wxCheckBox;
 class WXDLLIMPEXP_FWD_CORE wxRadioBox;
 class WXDLLIMPEXP_FWD_CORE wxTextCtrl;
 
+#include <string>
 #include <tuple>
 
 // ----------------------------------------------------------------------------

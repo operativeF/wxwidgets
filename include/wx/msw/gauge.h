@@ -13,6 +13,8 @@
 
 #if wxUSE_GAUGE
 
+#include <string>
+
 // Group box
 class WXDLLIMPEXP_CORE wxGauge : public wxGaugeBase
 {

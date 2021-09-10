@@ -15,6 +15,8 @@
 
 #if wxUSE_CONFIG && wxUSE_INICONF
 
+#include <string>
+
 // ----------------------------------------------------------------------------
 // wxIniConfig is a wxConfig implementation which uses MS Windows INI files to
 // store the data. Because INI files don't really support arbitrary nesting of

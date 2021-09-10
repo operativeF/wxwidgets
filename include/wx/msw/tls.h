@@ -12,6 +12,7 @@
 
 #include "wx/msw/wrapwin.h"
 #include "wx/thread.h"
+
 #include <vector>
 
 // ----------------------------------------------------------------------------

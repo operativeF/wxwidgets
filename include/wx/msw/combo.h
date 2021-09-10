@@ -22,6 +22,8 @@
     #define wxUSE_COMBOCTRL_POPUP_ANIMATION     1
 #endif
 
+#include <string>
+
 
 // ----------------------------------------------------------------------------
 // Native wxComboCtrl

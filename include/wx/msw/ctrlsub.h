@@ -10,6 +10,9 @@
 #ifndef _WX_MSW_CTRLSUB_H_
 #define _WX_MSW_CTRLSUB_H_
 
+#include <string>
+#include <vector>
+
 class WXDLLIMPEXP_CORE wxControlWithItems : public wxControlWithItemsBase
 {
 public:

@@ -17,6 +17,8 @@
 
 #include "wx/msw/wrap/utils.h"
 
+#include <string>
+
 class WXDLLIMPEXP_FWD_CORE wxBitmap;
 struct WXDLLIMPEXP_FWD_CORE wxBitmapHandler; // FIXME: uses in class in non-MSW
 class WXDLLIMPEXP_FWD_CORE wxBitmapRefData;

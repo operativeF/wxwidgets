@@ -13,6 +13,9 @@
 
 #include "wx/statbox.h"
 
+#include <string>
+#include <vector>
+
 class WXDLLIMPEXP_FWD_CORE wxSubwindows;
 
 // ----------------------------------------------------------------------------

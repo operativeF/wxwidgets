@@ -11,6 +11,8 @@
 #ifndef _WX_DIRDLG_H_
 #define _WX_DIRDLG_H_
 
+#include <string>
+
 class WXDLLIMPEXP_CORE wxDirDialog : public wxDirDialogBase
 {
 public:

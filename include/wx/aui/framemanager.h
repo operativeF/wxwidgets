@@ -26,6 +26,8 @@
 #include "wx/sizer.h"
 #include "wx/bitmap.h"
 
+#include <vector>
+
 enum wxAuiManagerDock
 {
     wxAUI_DOCK_NONE = 0,

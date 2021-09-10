@@ -20,6 +20,8 @@
 #include "wx/intl.h"
 #include "wx/cmndata.h"
 
+#include <string>
+
 
 // ---------------------------------------------------------------------------
 // wxPrintDialogBase: interface for the dialog for printing

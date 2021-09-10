@@ -10,6 +10,8 @@
 #ifndef _WX_AUI_TABARTMSW_H_
 #define _WX_AUI_TABARTMSW_H_
 
+#include <string>
+
 class WXDLLIMPEXP_AUI wxAuiMSWTabArt : public wxAuiGenericTabArt
 {
 

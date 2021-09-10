@@ -11,6 +11,8 @@
 #ifndef _WX_SLIDER_H_
 #define _WX_SLIDER_H_
 
+#include <string>
+
 #include <fmt/core.h>
 
 class WXDLLIMPEXP_FWD_CORE wxSubwindows;

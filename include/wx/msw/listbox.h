@@ -13,16 +13,18 @@
 
 #if wxUSE_LISTBOX
 
+#include <string>
+#include <string_view>
+#include <utility>
+#include <vector>
+
+#include <gsl/gsl>
+
 #if wxUSE_OWNER_DRAWN
   struct WXDLLIMPEXP_FWD_CORE wxOwnerDrawn;
 
   using wxListBoxItemsArray = std::vector<wxOwnerDrawn*>;
 #endif // wxUSE_OWNER_DRAWN
-
-#include <utility>
-#include <vector>
-
-#include <gsl/gsl>
 
 class WXDLLIMPEXP_CORE wxListBox : public wxListBoxBase
 {

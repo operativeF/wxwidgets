@@ -21,6 +21,8 @@
     #include "wx/window.h"
 #endif // wxUSE_GUI
 
+#include <string>
+
 #include <boost/nowide/convert.hpp>
 
 class WXDLLIMPEXP_FWD_CORE wxFont;

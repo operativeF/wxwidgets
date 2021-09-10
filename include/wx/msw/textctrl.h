@@ -11,6 +11,8 @@
 #ifndef _WX_TEXTCTRL_H_
 #define _WX_TEXTCTRL_H_
 
+#include <string>
+
 class WXDLLIMPEXP_CORE wxTextCtrl : public wxTextCtrlBase
 {
 public:

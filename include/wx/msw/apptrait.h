@@ -11,6 +11,8 @@
 #ifndef _WX_MSW_APPTRAIT_H_
 #define _WX_MSW_APPTRAIT_H_
 
+#include <string>
+
 // ----------------------------------------------------------------------------
 // wxGUI/ConsoleAppTraits: must derive from wxAppTraits, not wxAppTraitsBase
 // ----------------------------------------------------------------------------

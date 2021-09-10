@@ -27,6 +27,7 @@
 #include "wx/brush.h"
 #include "wx/bitmap.h"
 
+#include <string>
 
 class wxAuiNotebookPage;
 class wxAuiNotebookPageArray;

@@ -12,6 +12,8 @@
 
 #include "wx/dynarray.h"
 
+#include <vector>
+
 // ----------------------------------------------------------------------------
 // wxControlWithItemsGeneric: generic implementation of item client data
 // ----------------------------------------------------------------------------

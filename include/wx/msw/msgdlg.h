@@ -11,6 +11,8 @@
 #ifndef _WX_MSGBOXDLG_H_
 #define _WX_MSGBOXDLG_H_
 
+#include <string>
+
 class WXDLLIMPEXP_CORE wxMessageDialog : public wxMessageDialogBase
 {
 public:

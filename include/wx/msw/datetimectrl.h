@@ -12,6 +12,8 @@
 
 #include "wx/intl.h"
 
+#include <string>
+
 // Forward declare a struct from Platform SDK.
 struct tagNMDATETIMECHANGE;
 

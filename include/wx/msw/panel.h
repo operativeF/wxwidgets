@@ -10,6 +10,8 @@
 #ifndef _WX_MSW_PANEL_H_
 #define _WX_MSW_PANEL_H_
 
+#include <string>
+
 class WXDLLIMPEXP_FWD_CORE wxBrush;
 
 // ----------------------------------------------------------------------------

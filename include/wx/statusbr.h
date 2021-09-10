@@ -18,6 +18,9 @@
 #include "wx/control.h"
 #include "wx/dynarray.h"
 
+#include <string>
+#include <vector>
+
 inline constexpr char wxStatusBarNameStr[] = "statusBar";
 
 // ----------------------------------------------------------------------------

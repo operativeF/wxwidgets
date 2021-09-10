@@ -17,6 +17,8 @@
 #include "wx/cmndata.h"
 #include "wx/msw/dc.h"
 
+#include <string>
+
 // ------------------------------------------------------------------------
 //    wxPrinterDCImpl
 //

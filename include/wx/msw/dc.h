@@ -16,6 +16,9 @@
 
 #include "wx/msw/wrap/utils.h"
 
+#include <string>
+#include <string_view>
+
 #if wxUSE_DC_CACHEING
 /*
  * Cached blitting, maintaining a cache

@@ -10,6 +10,9 @@
 #ifndef _WX_MSW_TEXTENTRY_H_
 #define _WX_MSW_TEXTENTRY_H_
 
+#include <string>
+#include <vector>
+
 class wxTextAutoCompleteData; // private class used only by wxTextEntry itself
 
 // ----------------------------------------------------------------------------

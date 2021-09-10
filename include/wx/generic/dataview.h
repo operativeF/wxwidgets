@@ -15,10 +15,12 @@
 #include "wx/control.h"
 #include "wx/scrolwin.h"
 #include "wx/icon.h"
-#include <vector>
 #if wxUSE_ACCESSIBILITY
     #include "wx/access.h"
 #endif // wxUSE_ACCESSIBILITY
+
+#include <string>
+#include <vector>
 
 class WXDLLIMPEXP_FWD_CORE wxDataViewMainWindow;
 class WXDLLIMPEXP_FWD_CORE wxDataViewHeaderWindow;

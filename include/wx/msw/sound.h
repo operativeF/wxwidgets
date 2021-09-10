@@ -13,6 +13,8 @@
 
 #if wxUSE_SOUND
 
+#include <string>
+
 class WXDLLIMPEXP_CORE wxSound : public wxSoundBase
 {
 public:

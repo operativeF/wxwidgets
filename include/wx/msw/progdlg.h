@@ -10,6 +10,8 @@
 #ifndef _WX_PROGDLG_H_
 #define _WX_PROGDLG_H_
 
+#include <string>
+
 class wxProgressDialogTaskRunner;
 struct wxProgressDialogSharedData;
 

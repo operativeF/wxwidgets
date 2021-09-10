@@ -13,6 +13,7 @@
 
 #include "wx/textctrl.h"
 
+#include <string>
 #include <vector>
 
 struct wxMSWListItemData;

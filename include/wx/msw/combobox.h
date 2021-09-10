@@ -11,12 +11,13 @@
 #ifndef _WX_COMBOBOX_H_
 #define _WX_COMBOBOX_H_
 
+#if wxUSE_COMBOBOX
+
 #include "wx/choice.h"
 #include "wx/textentry.h"
 
+#include <string>
 #include <vector>
-
-#if wxUSE_COMBOBOX
 
 class WXDLLIMPEXP_CORE wxComboBox : public wxChoice,
                                     public wxTextEntry

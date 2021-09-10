@@ -15,6 +15,8 @@
 
 #include "wx/helpbase.h"
 
+#include <string>
+
 class WXDLLIMPEXP_CORE wxCHMHelpController : public wxHelpControllerBase
 {
 public:

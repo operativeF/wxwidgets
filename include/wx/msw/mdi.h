@@ -14,6 +14,9 @@
 
 #include "wx/frame.h"
 
+#include <memory>
+#include <string>
+
 class WXDLLIMPEXP_FWD_CORE wxAcceleratorTable;
 
 // ---------------------------------------------------------------------------

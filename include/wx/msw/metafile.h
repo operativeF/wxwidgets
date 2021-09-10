@@ -18,6 +18,8 @@
     #include "wx/dataobj.h"
 #endif
 
+#include <string>
+
 class WXDLLIMPEXP_FWD_CORE wxMetafile;
 
 struct WXDLLIMPEXP_CORE wxMetafileRefData: public wxGDIRefData

@@ -20,6 +20,9 @@
 #include "wx/filedlg.h"
 #include "wx/filename.h"
 
+#include <string>
+#include <vector>
+
 class WXDLLIMPEXP_FWD_CORE wxCheckBox;
 class WXDLLIMPEXP_FWD_CORE wxChoice;
 class WXDLLIMPEXP_FWD_CORE wxStaticText;

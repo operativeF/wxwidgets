@@ -14,6 +14,8 @@
 #include "wx/object.h"
 #include "wx/gdicmn.h"
 
+#include <string>
+
 class WXDLLIMPEXP_FWD_CORE wxWindow;
 class wxToolTipOtherWindows;
 

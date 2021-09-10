@@ -13,6 +13,8 @@
 
 #include "wx/arrstr.h"
 
+#include <vector>
+
 // these structs are declared in windows headers
 struct _CONTEXT;
 struct _EXCEPTION_POINTERS;

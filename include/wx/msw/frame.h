@@ -11,6 +11,8 @@
 #ifndef _WX_FRAME_H_
 #define _WX_FRAME_H_
 
+#include <string>
+
 #if wxUSE_TASKBARBUTTON
 class WXDLLIMPEXP_FWD_CORE wxTaskBarButton;
 #endif

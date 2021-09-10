@@ -16,6 +16,8 @@
 
 #include "wx/msw/wrap/utils.h"
 
+#include <string>
+
 using msw::utils::unique_brush;
 
 // you can set USE_NOTEBOOK_ANTIFLICKER to 0 for desktop Windows versions too

@@ -18,6 +18,8 @@
 #include "wx/font.h"
 #include "wx/colour.h"
 
+#include <string>
+
 class WXDLLIMPEXP_FWD_CORE wxDC;
 
 // ----------------------------------------------------------------------------

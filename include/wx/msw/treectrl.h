@@ -22,6 +22,8 @@
 #include "wx/treebase.h"
 #include "wx/hashmap.h"
 
+#include <string>
+
 #ifdef __GNUWIN32__
     // Cygwin windows.h defines these identifiers
     #undef GetFirstChild

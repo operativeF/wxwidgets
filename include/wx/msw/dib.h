@@ -21,6 +21,8 @@ class WXDLLIMPEXP_FWD_CORE wxPalette;
     #include "wx/bitmap.h"
 #endif // __WXMSW__
 
+#include <string>
+
 // ----------------------------------------------------------------------------
 // wxDIB: represents a DIB section
 // ----------------------------------------------------------------------------
