@@ -17,6 +17,8 @@
     #include <vector>
 #endif // WX_PRECOMP
 
+#include "wx/window.h"
+
 #include "asserthelper.h"
 
 // ----------------------------------------------------------------------------

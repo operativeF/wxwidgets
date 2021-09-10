@@ -13,7 +13,8 @@
 #include "wx/bitmap.h"
 #include "wx/dc.h"
 #include "wx/event.h"
-#include "wx/window.h"
+
+class WXDLLIMPEXP_FWD_CORE wxWindow;
 
 // A helper to avoid template bloat: this class contains all type-independent
 // code of wxCustomBackgroundWindow<> below.

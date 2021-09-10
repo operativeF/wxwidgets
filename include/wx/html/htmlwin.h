@@ -12,7 +12,6 @@
 #include "wx/defs.h"
 #if wxUSE_HTML
 
-#include "wx/window.h"
 #include "wx/scrolwin.h"
 #include "wx/config.h"
 #include "wx/stopwatch.h"
@@ -31,6 +30,7 @@ class WXDLLIMPEXP_FWD_HTML wxHtmlCellEvent;
 class WXDLLIMPEXP_FWD_HTML wxHtmlLinkEvent;
 class WXDLLIMPEXP_FWD_CORE wxStatusBar;
 class WXDLLIMPEXP_FWD_CORE wxFileSystem;
+class WXDLLIMPEXP_FWD_CORE wxWindow;
 
 // wxHtmlWindow flags:
 #define wxHW_SCROLLBAR_NEVER    0x0002

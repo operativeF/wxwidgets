@@ -10,12 +10,12 @@
 #ifndef _WX_COMPOSITEWIN_H_
 #define _WX_COMPOSITEWIN_H_
 
-#include "wx/window.h"
 #include "wx/containr.h"
 
 #include <string>
 
 class WXDLLIMPEXP_FWD_CORE wxToolTip;
+class WXDLLIMPEXP_FWD_CORE wxWindow; 
 
 // NB: This is an experimental and, as for now, undocumented class used only by
 //     wxWidgets itself internally. Don't use it in your code until its API is

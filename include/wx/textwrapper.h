@@ -10,9 +10,9 @@
 #ifndef _WX_TEXTWRAPPER_H_
 #define _WX_TEXTWRAPPER_H_
 
-#include "wx/window.h"
-
 #include <string>
+
+class WXDLLIMPEXP_CORE wxWindow;
 
 // ----------------------------------------------------------------------------
 // wxTextWrapper

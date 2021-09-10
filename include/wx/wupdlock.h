@@ -10,7 +10,7 @@
 #ifndef _WX_WUPDLOCK_H_
 #define _WX_WUPDLOCK_H_
 
-#include "wx/window.h"
+class WXDLLIMPEXP_CORE wxWindow;
 
 // ----------------------------------------------------------------------------
 // wxWindowUpdateLocker prevents updates to the window during its lifetime

@@ -11,10 +11,8 @@
 #include "testprec.h"
 
 
-#ifndef WX_PRECOMP
-    #include "wx/app.h"
-#endif // WX_PRECOMP
-
+#include "wx/app.h"
+#include "wx/window.h"
 #include "wx/wrapsizer.h"
 
 #include "asserthelper.h"

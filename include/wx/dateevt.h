@@ -13,7 +13,8 @@
 
 #include "wx/event.h"
 #include "wx/datetime.h"
-#include "wx/window.h"
+
+class WXDLLIMPEXP_CORE wxWindow;
 
 // ----------------------------------------------------------------------------
 // wxDateEvent: used by wxCalendarCtrl, wxDatePickerCtrl and wxTimePickerCtrl.

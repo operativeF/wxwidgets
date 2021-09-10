@@ -19,7 +19,7 @@
 
 #if wxUSE_TREECTRL
 
-#include "wx/window.h"  // for wxClientData
+#include "wx/clntdata.h"
 #include "wx/event.h"
 #include "wx/dynarray.h"
 #include "wx/itemid.h"

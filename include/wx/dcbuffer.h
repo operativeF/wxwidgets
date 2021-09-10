@@ -13,7 +13,8 @@
 
 #include "wx/dcmemory.h"
 #include "wx/dcclient.h"
-#include "wx/window.h"
+
+class WXDLLIMPEXP_CORE wxWindow;
 
 // Split platforms into two groups - those which have well-working
 // double-buffering by default, and those which do not.

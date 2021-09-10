@@ -13,8 +13,9 @@
 
 #include "wx/dynarray.h"
 #include "wx/msw/wrapwin.h"
-#include "wx/window.h"
 #include "wx/msw/evtloopconsole.h" // for wxMSWEventLoopBase
+
+class WXDLLIMPEXP_FWD_CORE wxWindowMSW;
 
 WX_DECLARE_EXPORTED_OBJARRAY(MSG, wxMSGArray);
 

@@ -21,12 +21,13 @@
 
 #include "wx/dynarray.h"
 #include "wx/gdicmn.h"
-#include "wx/window.h"
 #include "wx/timer.h"
 #include "wx/sizer.h"
 #include "wx/bitmap.h"
 
 #include <vector>
+
+class WXDLLIMPEXP_CORE wxWindow;
 
 enum wxAuiManagerDock
 {

@@ -19,7 +19,6 @@
 #include "wx/colour.h"
 #include "wx/filesys.h"
 #include "wx/imaglist.h"
-#include "wx/window.h"
 
 class WXDLLIMPEXP_FWD_CORE wxAnimation;
 class WXDLLIMPEXP_FWD_CORE wxAnimationCtrlBase;
@@ -28,6 +27,8 @@ class WXDLLIMPEXP_FWD_XML wxXmlNode;
 class WXDLLIMPEXP_FWD_XML wxXmlResource;
 
 class WXDLLIMPEXP_FWD_CORE wxXmlResourceHandler;
+class WXDLLIMPEXP_FWD_CORE wxWindow;
+
 
 // Helper macro used by the classes derived from wxXmlResourceHandler but also
 // by wxXmlResourceHandler implementation itself.
