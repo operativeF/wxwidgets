@@ -14,6 +14,7 @@
 
 #if wxUSE_STREAMS
 
+#include "wx/stream.h"
 #include "wx/datstrm.h"
 
 namespace
@@ -66,6 +67,8 @@ wxDataInputStream::wxDataInputStream(wxInputStream& s, const wxMBConv& conv)
     m_input(&s)
 {
 }
+
+bool wxDataInputStream::IsOk() const { return m_input->IsOk(); }
 
 #if wxHAS_INT64
 std::uint64_t wxDataInputStream::Read64()
@@ -501,6 +504,8 @@ wxDataOutputStream::wxDataOutputStream(wxOutputStream& s, const wxMBConv& conv)
     m_output(&s)
 {
 }
+
+bool wxDataOutputStream::IsOk() const { return m_output->IsOk(); }
 
 #if wxHAS_INT64
 void wxDataOutputStream::Write64(std::uint64_t i)

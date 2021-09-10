@@ -20,6 +20,7 @@
 #include "wx/filesys.h"
 #include "wx/dynarray.h"
 #include "wx/font.h"
+#include "wx/stream.h"
 
 class WXDLLIMPEXP_FWD_HTML wxHtmlHelpData;
 

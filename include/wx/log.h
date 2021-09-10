@@ -12,7 +12,13 @@
 #define _WX_LOG_H_
 
 #include "wx/defs.h"
+
 #include "wx/cpp.h"
+#include "wx/string.h"
+#include "wx/strvararg.h"
+
+#include <iosfwd>
+#include <vector>
 
 // ----------------------------------------------------------------------------
 // types
@@ -20,16 +26,6 @@
 
 // NB: this is needed even if wxUSE_LOG == 0
 using wxLogLevel = unsigned long;
-
-// ----------------------------------------------------------------------------
-// headers
-// ----------------------------------------------------------------------------
-
-#include "wx/string.h"
-#include "wx/strvararg.h"
-
-#include <iosfwd>
-#include <vector>
 
 // ----------------------------------------------------------------------------
 // forward declarations

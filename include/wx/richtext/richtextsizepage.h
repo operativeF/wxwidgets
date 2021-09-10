@@ -16,7 +16,6 @@
  */
 
 #include "wx/richtext/richtextdialogpage.h"
-#include "wx/sizer.h"
 
 ////@begin includes
 #include "wx/statline.h"
@@ -27,7 +26,13 @@
 /*!
  * Forward declarations
  */
-
+class WXDLLIMPEXP_FWD_CORE wxBoxSizer;
+class WXDLLIMPEXP_FWD_CORE wxCheckBox;
+class WXDLLIMPEXP_FWD_CORE wxChoice;
+class WXDLLIMPEXP_FWD_CORE wxComboBox;
+class WXDLLIMPEXP_FWD_CORE wxFlexGridSizer;
+class WXDLLIMPEXP_FWD_CORE wxStaticText;
+class WXDLLIMPEXP_FWD_CORE wxTextCtrl;
 
 /*!
  * Control identifiers

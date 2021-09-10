@@ -18,7 +18,6 @@
 #include "wx/event.h"
 #include "wx/evtloop.h"
 #include "wx/filename.h"
-#include "wx/dir.h"
 #include "wx/hashmap.h"
 
 #include <vector>

@@ -16,7 +16,6 @@
 #if wxUSE_MDI
 
 #include "wx/frame.h"
-#include "wx/menu.h"
 
 #include <string>
 
@@ -25,6 +24,8 @@ class WXDLLIMPEXP_FWD_CORE wxMDIParentFrame;
 class WXDLLIMPEXP_FWD_CORE wxMDIChildFrame;
 class WXDLLIMPEXP_FWD_CORE wxMDIClientWindowBase;
 class WXDLLIMPEXP_FWD_CORE wxMDIClientWindow;
+
+class WXDLLIMPEXP_FWD_CORE wxMenu;
 
 // ----------------------------------------------------------------------------
 // wxMDIParentFrameBase: base class for parent frame for MDI children

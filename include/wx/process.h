@@ -12,11 +12,6 @@
 #define _WX_PROCESSH__
 
 #include "wx/event.h"
-
-#if wxUSE_STREAMS
-    #include "wx/stream.h"
-#endif
-
 #include "wx/utils.h"       // for wxSignal
 
 // the wxProcess creation flags
@@ -28,6 +23,11 @@ enum
     // redirect the IO of the child process
     wxPROCESS_REDIRECT = 1
 };
+
+#if wxUSE_STREAMS
+    class WXDLLIMPEXP_BASE wxInputStream;
+    class WXDLLIMPEXP_BASE wxOutputStream;
+#endif
 
 // ----------------------------------------------------------------------------
 // A wxProcess object should be passed to wxExecute - than its OnTerminate()

@@ -10,6 +10,8 @@
 
 #include "wx/richtext/richtextsizepage.h"
 
+#include "wx/sizer.h"
+
 ////@begin XPM images
 ////@end XPM images
 

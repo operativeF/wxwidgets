@@ -15,11 +15,12 @@
 
 #if wxUSE_HELP
 
-#include "wx/object.h"
 #include "wx/gdicmn.h"
-#include "wx/frame.h"
 
 #include <string>
+
+class WXDLLIMPEXP_FWD_CORE wxFrame;
+class WXDLLIMPEXP_FWD_CORE wxWindow;
 
 // Flags for SetViewer
 inline constexpr int wxHELP_NETSCAPE = 1;

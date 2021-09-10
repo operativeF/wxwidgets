@@ -15,24 +15,18 @@
 
 #if wxUSE_WXHTML_HELP
 
-#include "wx/html/helpdata.h"
-#include "wx/window.h"
 #include "wx/dialog.h"
-#include "wx/frame.h"
-#include "wx/config.h"
-#include "wx/splitter.h"
-#include "wx/notebook.h"
-#include "wx/listbox.h"
-#include "wx/choice.h"
-#include "wx/combobox.h"
-#include "wx/checkbox.h"
-#include "wx/stattext.h"
+#include "wx/string.h"
+
+#include "wx/html/helpdata.h"
 #include "wx/html/htmlwin.h"
 #include "wx/html/helpwnd.h"
 #include "wx/html/htmprint.h"
 
 class WXDLLIMPEXP_FWD_HTML wxHtmlHelpController;
 class WXDLLIMPEXP_FWD_HTML wxHtmlHelpWindow;
+
+class WXDLLIMPEXP_FWD_CORE wxWindow;
 
 class WXDLLIMPEXP_HTML wxHtmlHelpDialog : public wxDialog
 {

@@ -13,6 +13,7 @@
 
 
 #include "wx/process.h"
+#include "wx/stream.h"
 
 // ----------------------------------------------------------------------------
 // event tables and such

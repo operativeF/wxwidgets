@@ -17,14 +17,11 @@
 
 #include "wx/aui/tabmdi.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/panel.h"
-    #include "wx/menu.h"
-    #include "wx/intl.h"
-    #include "wx/log.h"
-    #include "wx/settings.h"
-#endif //WX_PRECOMP
-
+#include "wx/panel.h"
+#include "wx/menu.h"
+#include "wx/intl.h"
+#include "wx/log.h"
+#include "wx/settings.h"
 #include "wx/stockitem.h"
 #include "wx/aui/dockart.h"
 

@@ -13,8 +13,6 @@
 
 #include "wx/defs.h"
 
-#include "wx/window.h"
-
 #include <string>
 #include <vector>
 
@@ -26,6 +24,7 @@ class WXDLLIMPEXP_FWD_CORE wxButton;
 class WXDLLIMPEXP_FWD_CORE wxBoxSizer;
 class WXDLLIMPEXP_FWD_CORE wxSizerItem;
 class WXDLLIMPEXP_FWD_CORE wxSizer;
+class WXDLLIMPEXP_FWD_CORE wxWindow;
 
 #ifndef wxUSE_BORDER_BY_DEFAULT
     #define wxUSE_BORDER_BY_DEFAULT 1

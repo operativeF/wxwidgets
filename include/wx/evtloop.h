@@ -12,7 +12,8 @@
 #define _WX_EVTLOOP_H_
 
 #include "wx/event.h"
-#include "wx/utils.h"
+
+class WXDLLIMPEXP_CORE wxWindowDisabler;
 
 // TODO: implement wxEventLoopSource for MSW (it should wrap a HANDLE and be
 //       monitored using MsgWaitForMultipleObjects())

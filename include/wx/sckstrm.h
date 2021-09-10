@@ -14,7 +14,7 @@
 
 #if wxUSE_SOCKETS && wxUSE_STREAMS
 
-#include "wx/socket.h"
+class WXDLLIMPEXP_NET wxSocketBase;
 
 class WXDLLIMPEXP_NET wxSocketOutputStream : public wxOutputStream
 {

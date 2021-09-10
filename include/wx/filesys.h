@@ -13,16 +13,17 @@
 
 #if wxUSE_FILESYSTEM
 
-#include "wx/stream.h"
 #include "wx/datetime.h"
 #include "wx/filename.h"
 #include "wx/hashmap.h"
+#include "wx/stream.h"
 
 #include <string>
 
 class WXDLLIMPEXP_FWD_BASE wxFSFile;
 class WXDLLIMPEXP_FWD_BASE wxFileSystemHandler;
 class WXDLLIMPEXP_FWD_BASE wxFileSystem;
+
 
 //--------------------------------------------------------------------------------
 // wxFSFile

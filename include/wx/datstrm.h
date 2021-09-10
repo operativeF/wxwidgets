@@ -11,13 +11,15 @@
 #ifndef _WX_DATSTREAM_H_
 #define _WX_DATSTREAM_H_
 
-#include "wx/stream.h"
 #include "wx/longlong.h"
-#include "wx/convauto.h"
 
 #include <cstdint>
 
 #if wxUSE_STREAMS
+
+class WXDLLIMPEXP_BASE wxMBConv;
+class WXDLLIMPEXP_BASE wxInputStream;
+class WXDLLIMPEXP_BASE wxOutputStream;
 
 // Common wxDataInputStream and wxDataOutputStream parameters.
 class WXDLLIMPEXP_BASE wxDataStreamBase
@@ -63,7 +65,7 @@ public:
     wxDataInputStream(wxDataInputStream&&) = default;
     wxDataInputStream& operator=(wxDataInputStream&&) = default;
 
-    bool IsOk() { return m_input->IsOk(); }
+    bool IsOk() const;
 
 #if wxHAS_INT64
     std::uint64_t Read64();
@@ -128,7 +130,7 @@ public:
     wxDataOutputStream(wxDataOutputStream&&) = default;
     wxDataOutputStream& operator=(wxDataOutputStream&&) = default;
 
-    bool IsOk() { return m_output->IsOk(); }
+    bool IsOk() const;
 
 #if wxHAS_INT64
     void Write64(std::uint64_t i);

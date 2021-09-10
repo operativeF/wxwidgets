@@ -17,16 +17,13 @@
 
 #include "wx/richtext/richtextdialogpage.h"
 
-////@begin includes
-#include "wx/statline.h"
-////@end includes
-
 /*!
  * Forward declarations
  */
 
-////@begin forward declarations
-////@end forward declarations
+class WXDLLIMPEXP_FWD_CORE wxCheckBox;
+class WXDLLIMPEXP_FWD_CORE wxComboBox;
+class WXDLLIMPEXP_FWD_CORE wxTextCtrl;
 
 /*!
  * Control identifiers

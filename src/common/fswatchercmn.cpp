@@ -15,6 +15,7 @@
 
 #include "wx/fswatcher.h"
 #include "wx/private/fswatcher.h"
+#include "wx/dir.h"
 
 // ============================================================================
 // helpers

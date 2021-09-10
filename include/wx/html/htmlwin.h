@@ -18,7 +18,6 @@
 #include "wx/stopwatch.h"
 #include "wx/html/winpars.h"
 #include "wx/html/htmlcell.h"
-#include "wx/filesys.h"
 #include "wx/html/htmlfilt.h"
 #include "wx/filename.h"
 #include "wx/bitmap.h"
@@ -31,6 +30,7 @@ class WXDLLIMPEXP_FWD_HTML wxHtmlWinAutoScrollTimer;
 class WXDLLIMPEXP_FWD_HTML wxHtmlCellEvent;
 class WXDLLIMPEXP_FWD_HTML wxHtmlLinkEvent;
 class WXDLLIMPEXP_FWD_CORE wxStatusBar;
+class WXDLLIMPEXP_FWD_CORE wxFileSystem;
 
 // wxHtmlWindow flags:
 #define wxHW_SCROLLBAR_NEVER    0x0002
