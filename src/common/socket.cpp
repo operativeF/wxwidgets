@@ -220,7 +220,7 @@ public:
 
         // connection could have been lost while reading, in this case calling
         // ReenableEvents() would assert and is not necessary anyhow
-        wxSocketImpl * const impl = m_socket->m_impl;
+        wxSocketImpl * const impl = m_socket->m_impl.get();
         if ( impl && impl->m_fd != INVALID_SOCKET )
             impl->ReenableEvents(wxSOCKET_INPUT_FLAG);
     }
@@ -247,7 +247,7 @@ public:
     {
         m_socket->m_writing = false;
 
-        wxSocketImpl * const impl = m_socket->m_impl;
+        wxSocketImpl * const impl = m_socket->m_impl.get();
         if ( impl && impl->m_fd != INVALID_SOCKET )
             impl->ReenableEvents(wxSOCKET_OUTPUT_FLAG);
     }
@@ -515,7 +515,7 @@ wxSocketError wxSocketImpl::CreateUDP()
     return wxSOCKET_NOERROR;
 }
 
-wxSocketImpl *wxSocketImpl::Accept(wxSocketBase& wxsocket)
+std::unique_ptr<wxSocketImpl> wxSocketImpl::Accept(wxSocketBase& wxsocket)
 {
     wxSockAddressStorage from;
     WX_SOCKLEN_T fromlen = sizeof(from);
@@ -534,7 +534,7 @@ wxSocketImpl *wxSocketImpl::Accept(wxSocketBase& wxsocket)
     if ( !manager )
         return nullptr;
 
-    wxSocketImpl * const sock = manager->CreateSocket(wxsocket);
+    std::unique_ptr<wxSocketImpl> sock = manager->CreateSocket(wxsocket);
     if ( !sock )
         return nullptr;
 
@@ -861,9 +861,6 @@ wxSocketBase::~wxSocketBase()
     // Shutdown and close the socket
     if (!m_beingDeleted)
         Close();
-
-    // Destroy the implementation object
-    delete m_impl;
 
     // Free the pushback buffer
     free(m_unread);
@@ -1846,7 +1843,7 @@ wxSocketServer::wxSocketServer(const wxSockAddress& addr,
 
     if (m_impl->CreateServer() != wxSOCKET_NOERROR)
     {
-        wxDELETE(m_impl);
+        m_impl.reset();
 
         wxLogTrace( wxTRACE_Socket, wxT("*** CreateServer() failed") );
         return;
@@ -1992,15 +1989,14 @@ bool wxSocketClient::DoConnect(const wxSockAddress& remote,
 {
     if ( m_impl )
     {
-        // Shutdown and destroy the old socket
+        // Shutdown old socket.
         Close();
-        delete m_impl;
     }
 
     m_connected = false;
     m_establishing = false;
 
-    // Create and set up the new one
+    // Create and set up the new one; implicitly destroys old one.
     wxSocketManager * const manager = wxSocketManager::Get();
     m_impl = manager ? manager->CreateSocket(*this) : nullptr;
     if ( !m_impl )
@@ -2092,6 +2088,7 @@ wxDatagramSocket::wxDatagramSocket( const wxSockAddress& addr,
 
     // Setup the socket as non connection oriented
     m_impl->SetLocal(addr.GetAddress());
+
     if (flags & wxSOCKET_REUSEADDR)
     {
         m_impl->SetReusable();
@@ -2107,7 +2104,7 @@ wxDatagramSocket::wxDatagramSocket( const wxSockAddress& addr,
 
     if ( m_impl->CreateUDP() != wxSOCKET_NOERROR )
     {
-        wxDELETE(m_impl);
+        m_impl.reset();
         return;
     }
 

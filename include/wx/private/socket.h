@@ -43,6 +43,8 @@
 #include "wx/socket.h"
 #include "wx/private/sckaddr.h"
 
+#include <memory>
+
 /*
    Including sys/types.h under Cygwin results in the warnings about "fd_set
    having been defined in sys/types.h" when winsock.h is included later and
@@ -138,7 +140,7 @@ public:
 
 
     // create the socket implementation object matching this manager
-    virtual wxSocketImpl *CreateSocket(wxSocketBase& wxsocket) = 0;
+    virtual std::unique_ptr<wxSocketImpl> CreateSocket(wxSocketBase& wxsocket) = 0;
 
     // these functions enable or disable monitoring of the given socket for the
     // specified events inside the currently running event loop (but notice
@@ -270,7 +272,7 @@ public:
     // corresponding to a new server connection represented by the given
     // wxSocketBase, returns NULL on error (including immediately if there are
     // no pending connections as our sockets are non-blocking)
-    wxSocketImpl *Accept(wxSocketBase& wxsocket);
+    std::unique_ptr<wxSocketImpl> Accept(wxSocketBase& wxsocket);
 
 
     // notifications

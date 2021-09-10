@@ -24,6 +24,7 @@
 #include "wx/list.h"
 
 #include <cstdint>
+#include <memory>
 
 class wxSocketImpl;
 
@@ -281,7 +282,7 @@ private:
 
 private:
     // socket
-    wxSocketImpl *m_impl;             // port-specific implementation
+    std::unique_ptr<wxSocketImpl> m_impl;             // port-specific implementation
     wxSocketType  m_type;             // wxSocket type
 
     // state

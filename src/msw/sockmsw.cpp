@@ -23,6 +23,7 @@
     #include <boost/nowide/stackstring.hpp>
 
     #include <array>
+    #include <memory>
     #include <string_view>
 #endif
 
@@ -78,9 +79,9 @@ public:
     bool OnInit() override;
     void OnExit() override;
 
-    wxSocketImpl *CreateSocket(wxSocketBase& wxsocket) override
+    std::unique_ptr<wxSocketImpl> CreateSocket(wxSocketBase& wxsocket) override
     {
-        return new wxSocketImplMSW(wxsocket);
+        return std::make_unique<wxSocketImplMSW>(wxsocket);
     }
 
     void Install_Callback(wxSocketImpl *socket,
