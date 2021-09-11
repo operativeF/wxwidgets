@@ -417,7 +417,7 @@ bool wxRibbonPage::ScrollSections(int sections)
             {
                 pixels += pos0 - scrollpos;
             }
-            if (abs(pixels) >= abs(minscroll))
+            if (std::abs(pixels) >= std::abs(minscroll))
                 break;
         }
         if (scrollpos <= pos0 && scrollForward)

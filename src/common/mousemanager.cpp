@@ -142,7 +142,7 @@ void wxMouseEventsManager::OnMove(wxMouseEvent& event)
 
                 const wxPoint& pos = event.GetPosition();
                 const wxPoint ofs = pos - m_posLast;
-                if ( abs(ofs.x) > dragMinX || abs(ofs.y) > dragMinY )
+                if ( std::abs(ofs.x) > dragMinX || std::abs(ofs.y) > dragMinY )
                 {
                     // the mouse left the rectangle inside which its movements
                     // are considered to be too small to constitute a start of

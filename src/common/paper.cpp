@@ -269,7 +269,7 @@ wxPrintPaperType *wxPrintPaperDatabase::FindPaperType(const wxSize& sz) const
     {
         wxPrintPaperType* const paperType = Item(i);
         const wxSize paperSize = paperType->GetSize() ;
-        if ( abs(paperSize.x - sz.x) < 10 && abs(paperSize.y - sz.y) < 10 )
+        if ( std::abs(paperSize.x - sz.x) < 10 && std::abs(paperSize.y - sz.y) < 10 )
             return paperType;
     }
 

@@ -1350,7 +1350,7 @@ static wxColour wxPGAdjustColour(const wxColour& src, int ra,
     else if ( b2<0) b2 = 0;
 
     // Make sure they are somewhat different
-    if ( forceDifferent && (abs((r+g+b)-(r2+g2+b2)) < abs(ra/2)) )
+    if ( forceDifferent && (std::abs((r+g+b)-(r2+g2+b2)) < std::abs(ra/2)) )
         dst = wxPGAdjustColour(src,-(ra*2));
     else
         dst = wxColour(r2,g2,b2);
@@ -5172,7 +5172,7 @@ bool wxPropertyGrid::HandleMouseUp( int x, unsigned int WXUNUSED(y),
         // Disable splitter auto-centering (but only if moved any -
         // otherwise we end up disabling auto-center even after a
         // recentering double-click).
-        int posDiff = abs(m_startingSplitterX -
+        int posDiff = std::abs(m_startingSplitterX -
                           GetSplitterPosition(m_draggedSplitter));
 
         if ( posDiff > 1 )

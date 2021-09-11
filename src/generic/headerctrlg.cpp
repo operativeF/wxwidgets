@@ -178,7 +178,7 @@ unsigned int wxHeaderCtrl::FindColumnAtPoint(int xPhysical, bool *onSeparator) c
 
         // if the column is resizable, check if we're approximatively over the
         // line separating it from the next column
-        if ( col.IsResizeable() && abs(xLogical - pos) < separatorClickMargin )
+        if ( col.IsResizeable() && std::abs(xLogical - pos) < separatorClickMargin )
         {
             if ( onSeparator )
                 *onSeparator = true;

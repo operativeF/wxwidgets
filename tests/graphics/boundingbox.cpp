@@ -32,7 +32,7 @@ static void AssertBox(const wxGCDC* aGCDC, int minX, int minY, int width, int he
     if ( margin )
     {
         #define WX_ASSERT_CLOSE(expected, actual, delta) \
-            CHECK_MESSAGE(abs(actual - expected) <= delta, \
+            CHECK_MESSAGE(std::abs(actual - expected) <= delta, \
                          ("%d != %d", actual, expected))
 
         WX_ASSERT_CLOSE(minX, aGCDC->MinX(), margin);

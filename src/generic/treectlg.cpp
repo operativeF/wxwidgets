@@ -2899,7 +2899,7 @@ wxGenericTreeCtrl::PaintLevel(wxGenericTreeItem *item,
                 // Only draw the portion of the line that is visible, in case
                 // it is huge
                 wxPoint Origin = dc.GetDeviceOrigin();
-                Origin.y = abs(Origin.y);
+                Origin.y = std::abs(Origin.y);
 
                 int cli_h = GetClientSize().y;
 

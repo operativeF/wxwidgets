@@ -117,9 +117,9 @@ int wxPalette::GetPixel( unsigned char red,
     wxPaletteEntry *e = M_PALETTEDATA->m_entries;
     for (int i = 0; i < M_PALETTEDATA->m_count; i++, e++)
     {
-        if ((d = 0.299 * abs(red - e->red) +
-                 0.587 * abs(green - e->green) +
-                 0.114 * abs(blue - e->blue)) < distance) {
+        if ((d = 0.299 * std::abs(red - e->red) +
+                 0.587 * std::abs(green - e->green) +
+                 0.114 * std::abs(blue - e->blue)) < distance) {
             distance = d;
             closest = i;
         }

@@ -1969,10 +1969,10 @@ void wxMSWDCImpl::RealizeScaleAndOrigin()
     // In GDI anisotropic mode only devExt/logExt ratio is important
     // so we can reduce the fractions to avoid large numbers
     // which could cause arithmetic overflows inside Win API.
-    int gcd = std::gcd(abs(devExtX), abs(logExtX));
+    int gcd = std::gcd(std::abs(devExtX), std::abs(logExtX));
     devExtX /= gcd;
     logExtX /= gcd;
-    gcd = std::gcd(abs(devExtY), abs(logExtY));
+    gcd = std::gcd(std::abs(devExtY), std::abs(logExtY));
     devExtY /= gcd;
     logExtY /= gcd;
 

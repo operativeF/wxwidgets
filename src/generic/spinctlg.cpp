@@ -381,13 +381,13 @@ void wxSpinCtrlGenericBase::OnSpinButton(wxSpinEvent& event)
 
     // Use the spinbutton's acceleration, if any, but not if wrapping around
     if (((spin_value >= 0) && (m_spin_value >= 0)) || ((spin_value <= 0) && (m_spin_value <= 0)))
-        step *= abs(spin_value - m_spin_value);
+        step *= std::abs(spin_value - m_spin_value);
 
     double value = AdjustToFitInRange(m_value + step*m_increment);
 
     // Ignore the edges when it wraps since the up/down event may be opposite
     // They are in GTK and Mac
-    if (abs(spin_value - m_spin_value) > SPINCTRLBUT_MAX)
+    if (std::abs(spin_value - m_spin_value) > SPINCTRLBUT_MAX)
     {
         m_spin_value = spin_value;
         return;

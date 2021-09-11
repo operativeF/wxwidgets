@@ -1272,8 +1272,8 @@ void wxAuiTabCtrl::OnMotion(wxMouseEvent& evt)
     int drag_x_threshold = wxSystemSettings::GetMetric(wxSYS_DRAG_X, this);
     int drag_y_threshold = wxSystemSettings::GetMetric(wxSYS_DRAG_Y, this);
 
-    if (abs(pos.x - m_clickPt.x) > drag_x_threshold ||
-        abs(pos.y - m_clickPt.y) > drag_y_threshold)
+    if (std::abs(pos.x - m_clickPt.x) > drag_x_threshold ||
+        std::abs(pos.y - m_clickPt.y) > drag_y_threshold)
     {
         wxAuiNotebookEvent e(wxEVT_AUINOTEBOOK_BEGIN_DRAG, m_windowId);
         e.SetSelection(GetIdxFromWindow(m_clickTab));

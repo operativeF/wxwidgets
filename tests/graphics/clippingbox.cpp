@@ -553,7 +553,7 @@ public:
 
 static bool inline IsCoordEqual(int pos1, int pos2, int posTolerance = 0)
 {
-    return abs(pos1 - pos2) <= posTolerance;
+    return std::abs(pos1 - pos2) <= posTolerance;
 }
 
 void ClippingBoxTestCaseBase::CheckBoxPosition(int cur_x, int cur_y, int cur_w, int cur_h,

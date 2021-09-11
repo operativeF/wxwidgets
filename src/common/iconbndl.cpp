@@ -321,7 +321,7 @@ wxIcon wxIconBundle::GetIcon(const wxSize& size, int flags) const
         if ( !bestIsSystem && (flags & FALLBACK_NEAREST_LARGER) )
         {
             const bool iconLarger = (sx >= sizeX) && (sy >= sizeY);
-            const int iconDiff = abs(sx - sizeX) + abs(sy - sizeY);
+            const int iconDiff = std::abs(sx - sizeX) + std::abs(sy - sizeY);
 
             // Use current icon as candidate for the best icon, if either:
             // - we have no candidate yet

@@ -1266,7 +1266,7 @@ void wxListHeaderWindow::OnMouse( wxMouseEvent &event )
             xpos += m_owner->GetColumnWidth( col );
             m_column = col;
 
-            if ( abs(x-xpos) < 3 )
+            if ( std::abs(x-xpos) < 3 )
             {
                 // near the column border
                 hit_border = true;

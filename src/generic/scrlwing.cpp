@@ -1016,7 +1016,7 @@ void wxScrollHelperBase::HandleOnMouseWheel(wxMouseEvent& event)
             else
                 newEvent.SetEventType(wxEVT_SCROLLWIN_LINEDOWN);
 
-            int times = abs(lines);
+            int times = std::abs(lines);
             for (; times > 0; times--)
                 m_win->GetEventHandler()->ProcessEvent(newEvent);
         }

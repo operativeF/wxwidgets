@@ -779,7 +779,7 @@ void wxRichTextCtrl::OnMoveMouse(wxMouseEvent& event)
     {
         int x = m_dragStartPoint.x - event.GetPosition().x;
         int y = m_dragStartPoint.y - event.GetPosition().y;
-        distance = abs(x) + abs(y);
+        distance = std::abs(x) + std::abs(y);
     }
 
     // See if we're starting Drag'n'Drop

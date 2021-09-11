@@ -396,7 +396,7 @@ double wxNativeFontInfo::GetPointSizeAtPPI(int lfHeight, int ppi)
     if ( ppi == 0 )
         ppi = ::GetDeviceCaps(screenDC.get(), LOGPIXELSY);
 
-    return abs(lfHeight) * 72.0 / ppi;
+    return std::abs(lfHeight) * 72.0 / ppi;
 }
 
 /* static */
@@ -428,7 +428,7 @@ double wxNativeFontInfo::GetFractionalPointSize() const
 wxSize wxNativeFontInfo::GetPixelSize() const
 {
     wxSize ret;
-    ret.y = abs((int)lf.lfHeight);
+    ret.y = std::abs((int)lf.lfHeight);
     ret.x = lf.lfWidth;
     return ret;
 }
@@ -530,7 +530,7 @@ void wxNativeFontInfo::SetPixelSize(const wxSize& pixelSize)
     // still accept it for compatibility with the existing code which worked
     // around the wrong interpretation of the height argument in older wxMSW
     // versions by passing a negative value explicitly itself.
-    lf.lfHeight = -abs(pixelSize.y);
+    lf.lfHeight = -std::abs(pixelSize.y);
     lf.lfWidth = pixelSize.x;
 
     // We don't have the right DPI to use here neither, but we need to update

@@ -1504,7 +1504,7 @@ void wxHtmlWindow::OnInternalIdle()
                     // (otherwise it was meant as mouse click, not selection):
                     static constexpr int PRECISION = 2;
                     wxPoint diff = m_tmpSelFromPos - wxPoint(x,y);
-                    if (abs(diff.x) > PRECISION || abs(diff.y) > PRECISION)
+                    if (std::abs(diff.x) > PRECISION || std::abs(diff.y) > PRECISION)
                     {
                         m_selection = new wxHtmlSelection();
                     }

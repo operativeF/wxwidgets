@@ -2984,8 +2984,8 @@ wxTreeCtrl::MSWWindowProc(WXUINT nMsg, WXWPARAM wParam, WXLPARAM lParam)
             case WM_MOUSEMOVE:
                 if ( m_htClickedItem )
                 {
-                    int cx = abs(m_ptClick.x - x);
-                    int cy = abs(m_ptClick.y - y);
+                    int cx = std::abs(m_ptClick.x - x);
+                    int cy = std::abs(m_ptClick.y - y);
 
                     if ( cx > wxGetSystemMetrics(SM_CXDRAG, this) ||
                             cy > wxGetSystemMetrics(SM_CYDRAG, this) )

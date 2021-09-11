@@ -240,7 +240,7 @@ bool wxSetClipboardData(wxDataFormat dataFormat,
                         }
 
                         unsigned long bmpSize = wxDIB::GetLineSize(ds.dsBmih.biWidth, ds.dsBmih.biBitCount) *
-                                                                   abs(ds.dsBmih.biHeight);
+                                                                   std::abs(ds.dsBmih.biHeight);
                         HANDLE hMem;
                         hMem = ::GlobalAlloc(GHND, ds.dsBmih.biSize + numColors*sizeof(RGBQUAD) + bmpSize);
                         if ( !hMem )

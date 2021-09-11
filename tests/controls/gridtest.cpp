@@ -2280,7 +2280,7 @@ wxString TestableGrid::ToString() const
     // Draw horizontal divider.
     s += wxString(' ', colMargin) + '+' + wxString('-', numCols) + "\n";
 
-    const int absEditCount = abs(m_edit.count);
+    const int absEditCount = std::abs(m_edit.count);
     wxString action;
     action.Printf(" %s: %d",
                   m_edit.count < 0 ? "deletions" : "insertions",

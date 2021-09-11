@@ -227,8 +227,8 @@ void wxAuiFloatingFrame::OnMoveEvent(wxMoveEvent& event)
     // skip if moving too fast to avoid massive redraws and
     // jumping hint windows
     // TODO: Should 3x3px threshold increase on Retina displays?
-    if ((abs(winRect.x - m_lastRect.x) > 3) ||
-        (abs(winRect.y - m_lastRect.y) > 3))
+    if ((std::abs(winRect.x - m_lastRect.x) > 3) ||
+        (std::abs(winRect.y - m_lastRect.y) > 3))
     {
         m_last3Rect = m_last2Rect;
         m_last2Rect = m_lastRect;
@@ -257,8 +257,8 @@ void wxAuiFloatingFrame::OnMoveEvent(wxMoveEvent& event)
 
     wxDirection dir = wxALL;
 
-    int horiz_dist = abs(winRect.x - m_last3Rect.x);
-    int vert_dist = abs(winRect.y - m_last3Rect.y);
+    int horiz_dist = std::abs(winRect.x - m_last3Rect.x);
+    int vert_dist = std::abs(winRect.y - m_last3Rect.y);
 
     if (vert_dist >= horiz_dist)
     {

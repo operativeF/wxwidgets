@@ -152,7 +152,7 @@ struct Date
                  hour, min, sec,
                  wxDateTime::GetMonthName(month).c_str(),
                  day,
-                 abs(wxDateTime::ConvertYearToBC(year)),
+                 std::abs(wxDateTime::ConvertYearToBC(year)),
                  year > 0 ? wxT("AD") : wxT("BC"));
         return s;
     }
@@ -163,7 +163,7 @@ struct Date
         s.Printf(wxT("%02d-%s-%4d%s"),
                  day,
                  wxDateTime::GetMonthName(month, wxDateTime::Name_Abbr).c_str(),
-                 abs(wxDateTime::ConvertYearToBC(year)),
+                 std::abs(wxDateTime::ConvertYearToBC(year)),
                  year > 0 ? wxT("AD") : wxT("BC"));
         return s;
     }

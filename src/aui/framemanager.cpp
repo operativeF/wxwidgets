@@ -4572,8 +4572,8 @@ void wxAuiManager::OnMotion(wxMouseEvent& event)
         // is now being dragged. if it is, we need to change the
         // mouse action to 'drag'
         if (m_actionPart &&
-            (abs(event.m_x - m_actionStart.x) > drag_x_threshold ||
-             abs(event.m_y - m_actionStart.y) > drag_y_threshold))
+            (std::abs(event.m_x - m_actionStart.x) > drag_x_threshold ||
+             std::abs(event.m_y - m_actionStart.y) > drag_y_threshold))
         {
             wxAuiPaneInfo* paneInfo = m_actionPart->pane;
 

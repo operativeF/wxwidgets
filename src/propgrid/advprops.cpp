@@ -191,7 +191,7 @@ private:
 
                 wxASSERT( m_spins == 1 );
 
-                m_spins = abs(dy);
+                m_spins = std::abs(dy);
                 GetEventHandler()->ProcessEvent(evtscroll);
                 m_spins = 1;
             }

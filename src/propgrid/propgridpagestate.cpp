@@ -1110,7 +1110,7 @@ int wxPropertyGridPageState::HitTestH( int x, int* pSplitterHit, int* pSplitterH
     if ( col >= 1 )
     {
         int diff = x - prevSplitter;
-        if ( abs(diff) < wxPG_SPLITTERX_DETECTMARGIN1 )
+        if ( std::abs(diff) < wxPG_SPLITTERX_DETECTMARGIN1 )
         {
             *pSplitterHit = col - 1;
             *pSplitterHitOffset = diff;
@@ -1123,7 +1123,7 @@ int wxPropertyGridPageState::HitTestH( int x, int* pSplitterHit, int* pSplitterH
     if ( col < (int)(m_colWidths.size()-1) )
     {
         int diff = x - nextSplitter;
-        if ( abs(diff) < wxPG_SPLITTERX_DETECTMARGIN1 )
+        if ( std::abs(diff) < wxPG_SPLITTERX_DETECTMARGIN1 )
         {
             *pSplitterHit = col;
             *pSplitterHitOffset = diff;

@@ -4950,8 +4950,8 @@ void wxGrid::ProcessGridCellMouseEvent(wxMouseEvent& event, wxGridWindow *eventG
             return;
         }
 
-        if ( abs(m_startDragPos.x - pt.x) <= DRAG_SENSITIVITY &&
-                abs(m_startDragPos.y - pt.y) <= DRAG_SENSITIVITY )
+        if ( std::abs(m_startDragPos.x - pt.x) <= DRAG_SENSITIVITY &&
+                std::abs(m_startDragPos.y - pt.y) <= DRAG_SENSITIVITY )
             return;
 
         if ( DoGridDragEvent(event, coords, true /* first drag */, gridWindow) )
@@ -7829,7 +7829,7 @@ int wxGrid::PosToEdgeOfLine(int pos, const wxGridOperations& oper) const
     {
         // We know that we are in this line, test whether we are close enough
         // to start or end border, respectively.
-        if ( abs(oper.GetLineEndPos(this, line) - pos) < edge )
+        if ( std::abs(oper.GetLineEndPos(this, line) - pos) < edge )
             return line;
         else if ( line > 0 && pos - oper.GetLineStartPos(this, line) < edge )
         {
