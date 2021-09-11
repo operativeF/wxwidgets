@@ -521,10 +521,10 @@ bool wxSpinCtrlGenericBase::DoSetValue(double val, SendEvent sendEvent)
         // FIXME: what to do about a failure?
         if (std::isfinite(snap_value))
         {
-            if ((snap_value - floor(snap_value)) < (ceil(snap_value) - snap_value))
-                val = floor(snap_value) * m_increment;
+            if ((snap_value - std::floor(snap_value)) < (std::ceil(snap_value) - snap_value))
+                val = std::floor(snap_value) * m_increment;
             else
-                val = ceil(snap_value) * m_increment;
+                val = std::ceil(snap_value) * m_increment;
         }
     }
 
@@ -751,10 +751,10 @@ void wxSpinCtrlDouble::ResetTextValidator()
 
 void wxSpinCtrlDouble::DetermineDigits(double inc)
 {
-    inc = fabs(inc);
+    inc = std::fabs(inc);
     if ( inc > 0.0 && inc < 1.0 )
     {
-        m_digits = std::min(SPINCTRLDBL_MAX_DIGITS, -static_cast<int>(floor(log10(inc))));
+        m_digits = std::min(SPINCTRLDBL_MAX_DIGITS, -static_cast<int>(std::floor(std::log10(inc))));
         m_format.Printf("%%0.%ulf", m_digits);
     }
 }

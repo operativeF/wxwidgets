@@ -170,8 +170,8 @@ double wxPoint2DInt::GetVectorAngle() const
 
 void wxPoint2DInt::SetVectorAngle( double degrees )
 {
-    m_x = (int)(GetVectorLength() * cos(wxDegToRad(degrees)));
-    m_y = (int)(GetVectorLength() * sin(wxDegToRad(degrees)));
+    m_x = (int)(GetVectorLength() * std::cos(wxDegToRad(degrees)));
+    m_y = (int)(GetVectorLength() * std::sin(wxDegToRad(degrees)));
 }
 
 double wxPoint2DDouble::GetVectorAngle() const
@@ -202,8 +202,8 @@ double wxPoint2DDouble::GetVectorAngle() const
 
 void wxPoint2DDouble::SetVectorAngle( double degrees )
 {
-    m_x = GetVectorLength() * cos(wxDegToRad(degrees));
-    m_y = GetVectorLength() * sin(wxDegToRad(degrees));
+    m_x = GetVectorLength() * std::cos(wxDegToRad(degrees));
+    m_y = GetVectorLength() * std::sin(wxDegToRad(degrees));
 }
 
 // wxRect2D

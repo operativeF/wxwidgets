@@ -893,7 +893,7 @@ void wxMSWDCImpl::DoDrawArc(wxCoord x1, wxCoord y1,
 {
     double dx = xc - x1;
     double dy = yc - y1;
-    wxCoord r = (wxCoord)sqrt(dx*dx + dy*dy);
+    wxCoord r = (wxCoord)std::sqrt(dx*dx + dy*dy);
 
 
     wxBrushAttrsSetter cc(*this); // needed for wxBrushStyle::StippleMaskOpaque handling
@@ -913,7 +913,7 @@ void wxMSWDCImpl::DoDrawArc(wxCoord x1, wxCoord y1,
     wxCoord yyc = YLOG2DEV(yc);
     dx = xxc - xx1;
     dy = yyc - yy1;
-    wxCoord ray = (wxCoord)sqrt(dx*dx + dy*dy);
+    wxCoord ray = (wxCoord)std::sqrt(dx*dx + dy*dy);
 
     wxCoord xxx1 = (wxCoord) (xxc-ray);
     wxCoord yyy1 = (wxCoord) (yyc-ray);
@@ -1557,8 +1557,8 @@ void wxMSWDCImpl::DoDrawRotatedText(std::string_view text,
 
     // Compute the shift for the origin of the next line.
     const double rad = wxDegToRad(angle);
-    const double dx = heightLine * sin(rad);
-    const double dy = heightLine * cos(rad);
+    const double dx = heightLine * std::sin(rad);
+    const double dy = heightLine * std::cos(rad);
 
     // Draw all text line by line
     const std::vector<std::string_view> lines = wx::unsafe::StrViewSplit(text, '\n');
@@ -1580,13 +1580,13 @@ void wxMSWDCImpl::DoDrawRotatedText(std::string_view text,
 
     // "upper left" and "upper right"
     CalcBoundingBox(x, y);
-    CalcBoundingBox(x + wxCoord(w*cos(rad)), y - wxCoord(w*sin(rad)));
+    CalcBoundingBox(x + wxCoord(w * std::cos(rad)), y - wxCoord(w * std::sin(rad)));
 
     // "bottom left" and "bottom right"
-    x += (wxCoord)(h*sin(rad));
-    y += (wxCoord)(h*cos(rad));
+    x += (wxCoord)(h * std::sin(rad));
+    y += (wxCoord)(h * std::cos(rad));
     CalcBoundingBox(x, y);
-    CalcBoundingBox(x + wxCoord(w*cos(rad)), y - wxCoord(w*sin(rad)));
+    CalcBoundingBox(x + wxCoord(w * std::cos(rad)), y - wxCoord(w * std::sin(rad)));
 }
 
 // ---------------------------------------------------------------------------

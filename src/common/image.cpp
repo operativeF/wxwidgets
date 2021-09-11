@@ -3265,7 +3265,7 @@ RGBValue wxImage::HSVtoRGB(const HSVValue& hsv)
     else // not grey
     {
         double hue = hsv.hue * 6.0;      // sector 0 to 5
-        int i = (int)floor(hue);
+        int i = (int)std::floor(hue);
         double f = hue - i;          // fractional part of h
         double p = hsv.value * (1.0 - hsv.saturation);
 
@@ -3690,8 +3690,8 @@ wxImage wxImage::Rotate(double angle,
     }
 
     // precompute coefficients for rotation formula
-    const double cos_angle = cos(angle);
-    const double sin_angle = sin(angle);
+    const double cos_angle = std::cos(angle);
+    const double sin_angle = std::sin(angle);
 
     // Create new Image to store the result
     // First, find rectangle that covers the rotated image;  to do that,
@@ -3767,8 +3767,8 @@ wxImage wxImage::Rotate(double angle,
 
                     if (0 < src.x && src.x < w - 1)
                     {
-                        x1 = wxRound(floor(src.x));
-                        x2 = wxRound(ceil(src.x));
+                        x1 = wxRound(std::floor(src.x));
+                        x2 = wxRound(std::ceil(src.x));
                     }
                     else    // else means that x is near one of the borders (0 or width-1)
                     {
@@ -3777,8 +3777,8 @@ wxImage wxImage::Rotate(double angle,
 
                     if (0 < src.y && src.y < h - 1)
                     {
-                        y1 = wxRound(floor(src.y));
-                        y2 = wxRound(ceil(src.y));
+                        y1 = wxRound(std::floor(src.y));
+                        y2 = wxRound(std::ceil(src.y));
                     }
                     else
                     {

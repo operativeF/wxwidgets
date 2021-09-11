@@ -481,8 +481,8 @@ void wxGraphicsPathData::AddArcToPoint( double x1, double y1 , double x2, double
     bool drawClockwiseArc = v1.GetCrossProduct(v2) < 0;
 
     alpha = wxDegToRad(alpha);
-    const double distT = r / sin(alpha) * (1.0 + cos(alpha)); // = r / tan(a/2) =  r / sin(a/2) * cos(a/2)
-    const double distC = r / sin(alpha / 2.0);
+    const double distT = r / std::sin(alpha) * (1.0 + std::cos(alpha)); // = r / tan(a/2) =  r / sin(a/2) * cos(a/2)
+    const double distC = r / std::sin(alpha / 2.0);
     // Calculate tangential points
     v1.Normalize();
     v2.Normalize();
@@ -740,11 +740,11 @@ wxGraphicsContext::DoDrawRotatedFilledText(std::string_view str,
 
     wxGraphicsPath path = CreatePath();
     path.MoveToPoint( x , y );
-    path.AddLineToPoint( (int) (x + sin(angle) * height) , (int) (y + cos(angle) * height) );
+    path.AddLineToPoint( (int) (x + std::sin(angle) * height) , (int) (y + std::cos(angle) * height) );
     path.AddLineToPoint(
-        (int) (x + sin(angle) * height + cos(angle) * width) ,
-        (int) (y + cos(angle) * height - sin(angle) * width));
-    path.AddLineToPoint((int) (x + cos(angle) * width) , (int) (y - sin(angle) * width) );
+        (int) (x + std::sin(angle) * height + std::cos(angle) * width) ,
+        (int) (y + std::cos(angle) * height - std::sin(angle) * width));
+    path.AddLineToPoint((int) (x + std::cos(angle) * width) , (int) (y - std::sin(angle) * width) );
     FillPath( path );
     DrawText( str, x ,y, angle);
     SetBrush( formerBrush );

@@ -676,7 +676,7 @@ void wxGCDCImpl::DoDrawArc( wxCoord x1, wxCoord y1,
 
     const double dx = x1 - xc;
     const double dy = y1 - yc;
-    const double radius = sqrt((double)(dx * dx + dy * dy));
+    const double radius = std::sqrt((double)(dx * dx + dy * dy));
     const wxCoord rad = (wxCoord)radius;
 
     double sa, ea; // In radians
@@ -1161,8 +1161,8 @@ void wxGCDCImpl::DoDrawRotatedText(std::string_view text, wxCoord x, wxCoord y,
 
     // Compute the shift for the origin of the next line.
     const double rad = wxDegToRad(angle);
-    const double dx = heightLine * sin(rad);
-    const double dy = heightLine * cos(rad);
+    const double dx = heightLine * std::sin(rad);
+    const double dy = heightLine * std::cos(rad);
 
     // Draw all text line by line
     const std::vector<std::string_view> lines = wx::unsafe::StrViewSplit(text, '\n');
@@ -1186,13 +1186,13 @@ void wxGCDCImpl::DoDrawRotatedText(std::string_view text, wxCoord x, wxCoord y,
 
     // "upper left" and "upper right"
     CalcBoundingBox(x, y);
-    CalcBoundingBox(x + wxCoord(w*cos(rad)), y - wxCoord(w*sin(rad)));
+    CalcBoundingBox(x + wxCoord(w * std::cos(rad)), y - wxCoord(w * std::sin(rad)));
 
     // "bottom left" and "bottom right"
-    x += (wxCoord)(h*sin(rad));
-    y += (wxCoord)(h*cos(rad));
+    x += (wxCoord)(h * std::sin(rad));
+    y += (wxCoord)(h * std::cos(rad));
     CalcBoundingBox(x, y);
-    CalcBoundingBox(x + wxCoord(w*cos(rad)), y - wxCoord(w*sin(rad)));
+    CalcBoundingBox(x + wxCoord(w * std::cos(rad)), y - wxCoord(w * std::sin(rad)));
 }
 
 void wxGCDCImpl::DoDrawText(std::string_view str, wxCoord x, wxCoord y)

@@ -127,7 +127,7 @@ inline void wxPoint2DInt::GetRounded( std::int32_t *x , std::int32_t *y ) const
 inline double wxPoint2DInt::GetVectorLength() const
 {
     // cast needed MIPSpro compiler under SGI
-    return sqrt( (double)(m_x)*(m_x) + (double)(m_y)*(m_y) );
+    return std::sqrt( (double)(m_x)*(m_x) + (double)(m_y)*(m_y) );
 }
 
 inline void wxPoint2DInt::SetVectorLength( double length )
@@ -144,7 +144,7 @@ inline void wxPoint2DInt::Normalize()
 
 inline double wxPoint2DInt::GetDistance( const wxPoint2DInt &pt ) const
 {
-    return sqrt( GetDistanceSquare( pt ) );
+    return std::sqrt( GetDistanceSquare( pt ) );
 }
 
 inline double wxPoint2DInt::GetDistanceSquare( const wxPoint2DInt &pt ) const
@@ -338,19 +338,19 @@ inline wxPoint2DDouble::wxPoint2DDouble( double x , double y )
 
 inline void wxPoint2DDouble::GetFloor( std::int32_t *x , std::int32_t *y ) const
 {
-    *x = (std::int32_t) floor( m_x );
-    *y = (std::int32_t) floor( m_y );
+    *x = (std::int32_t) std::floor( m_x );
+    *y = (std::int32_t) std::floor( m_y );
 }
 
 inline void wxPoint2DDouble::GetRounded( std::int32_t *x , std::int32_t *y ) const
 {
-    *x = (std::int32_t) floor( m_x + 0.5 );
-    *y = (std::int32_t) floor( m_y + 0.5);
+    *x = (std::int32_t) std::floor( m_x + 0.5 );
+    *y = (std::int32_t) std::floor( m_y + 0.5);
 }
 
 inline double wxPoint2DDouble::GetVectorLength() const
 {
-    return sqrt( (m_x)*(m_x) + (m_y)*(m_y) ) ;
+    return std::sqrt( (m_x)*(m_x) + (m_y)*(m_y) ) ;
 }
 
 inline void wxPoint2DDouble::SetVectorLength( double length )
@@ -367,7 +367,7 @@ inline void wxPoint2DDouble::Normalize()
 
 inline double wxPoint2DDouble::GetDistance( const wxPoint2DDouble &pt ) const
 {
-    return sqrt( GetDistanceSquare( pt ) );
+    return std::sqrt( GetDistanceSquare( pt ) );
 }
 
 inline double wxPoint2DDouble::GetDistanceSquare( const wxPoint2DDouble &pt ) const

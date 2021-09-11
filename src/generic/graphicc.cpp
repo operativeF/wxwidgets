@@ -456,11 +456,11 @@ public:
         // no offset if overall scale is not odd integer
         double x = GetContentScaleFactor(), y = x;
         cairo_user_to_device_distance(m_context, &x, &y);
-        if (fmod(std::min(fabs(x), fabs(y)), 2.0) != 1.0)
+        if (std::fmod(std::min(std::fabs(x), std::fabs(y)), 2.0) != 1.0)
             return false;
 
         // offset if pen width is odd integer
-        return fmod(width, 2.0) == 1.0;
+        return std::fmod(width, 2.0) == 1.0;
     }
 
     void Clip( const wxRegion &region ) override;
@@ -1031,7 +1031,7 @@ void wxCairoPenData::Apply( wxGraphicsContext* context )
     {
         double x = context->GetContentScaleFactor(), y = x;
         cairo_user_to_device_distance(ctext, &x, &y);
-        width = 1 / std::min(fabs(x), fabs(y));
+        width = 1 / std::min(std::fabs(x), std::fabs(y));
     }
     cairo_set_line_width(ctext, width);
     cairo_set_line_cap(ctext,m_cap);
@@ -1936,7 +1936,7 @@ public :
         {
              double x = scaleFactor, y = x;
              cairo_user_to_device_distance(ctx, &x, &y);
-             m_offset = 0.5 / std::min(fabs(x), fabs(y));
+             m_offset = 0.5 / std::min(std::fabs(x), std::fabs(y));
              cairo_translate(m_ctx, m_offset, m_offset);
         }
     }

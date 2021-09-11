@@ -1572,7 +1572,7 @@ void wxGDIPlusPathData::AddArc( double x, double y, double r, double startAngle,
     // To ensure compatibility with Cairo an initial
     // line segment to the beginning of the arc needs
     // to be added to the path.
-    AddLineToPoint(r*cos(startAngle) + x, r*sin(startAngle) + y);
+    AddLineToPoint(r * std::cos(startAngle) + x, r * std::sin(startAngle) + y);
 
     // Native GraphicsPath.AddArc() does nothing
     // (even current point is not updated)
@@ -1608,7 +1608,7 @@ void wxGDIPlusPathData::AddArc( double x, double y, double r, double startAngle,
                            wxRadToDeg(startAngle + std::numbers::pi), clockwise ? 180 : -180);
         }
         // We need to reduce the angle to [0..2*M_PI) range
-        angle = fmod(angle, 2.0 * std::numbers::pi);
+        angle = std::fmod(angle, 2.0 * std::numbers::pi);
     }
 
     m_path->AddArc(x0, y0, dim, dim, wxRadToDeg(startAngle),
@@ -2440,12 +2440,12 @@ bool wxGDIPlusContext::ShouldOffset() const
     double x = GetContentScaleFactor(), y = x;
     matrix.TransformDistance(&x, &y);
     // FIXME: Double equality
-    if (!(fmod(std::min(fabs(x), fabs(y)), 2.0) == 1.0))
+    if (!(std::fmod(std::min(std::fabs(x), std::fabs(y)), 2.0) == 1.0))
         return false;
 
     // offset if pen width is odd integer
     // FIXME: Double equality
-    return fmod(width, 2.0) == 1.0;
+    return std::fmod(width, 2.0) == 1.0;
 }
 
 void* wxGDIPlusContext::GetNativeContext()

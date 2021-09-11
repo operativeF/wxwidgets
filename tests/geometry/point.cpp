@@ -63,8 +63,8 @@ TEST_CASE("Operators")
     CHECK( p4 == p6 );
     CHECK( p3 != p4 );
     */
-    CHECK( fabs( p3.x - p5.x ) < EPSILON );
-    CHECK( fabs( p3.y - p5.y ) < EPSILON );
-    CHECK( fabs( p4.x - p6.x ) < EPSILON );
-    CHECK( fabs( p4.y - p6.y ) < EPSILON );
+    CHECK( std::fabs( p3.x - p5.x ) < EPSILON );
+    CHECK( std::fabs( p3.y - p5.y ) < EPSILON );
+    CHECK( std::fabs( p4.x - p6.x ) < EPSILON );
+    CHECK( std::fabs( p4.y - p6.y ) < EPSILON );
 }

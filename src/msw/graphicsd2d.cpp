@@ -1093,7 +1093,7 @@ public:
             const wxGraphicsMatrix matrix(m_context->GetTransform());
             double x = m_context->GetContentScaleFactor(), y = x;
             matrix.TransformDistance(&x, &y);
-            m_offset = 0.5 / std::min(fabs(x), fabs(y));
+            m_offset = 0.5 / std::min(std::fabs(x), std::fabs(y));
             m_context->Translate(m_offset, m_offset);
         }
     }
@@ -1822,7 +1822,7 @@ void wxD2DPathData::AddArc(double x, double y, double r, double startAngle, doub
         }
 
         // Reduce the angle to [0..2*M_PI) range.
-        angle = fmod(angle, 2.0 * std::numbers::pi);
+        angle = std::fmod(angle, 2.0 * std::numbers::pi);
     }
 
     const D2D1_ARC_SIZE arcSize = angle > std::numbers::pi ?
@@ -4733,7 +4733,7 @@ bool wxD2DContext::ShouldOffset() const
     double x = GetContentScaleFactor(), y = x;
     matrix.TransformDistance(&x, &y);
     // FIXME: Double equality
-    if (!(fmod(std::min(fabs(x), fabs(y)), 2.0) == 1.0))
+    if (!(std::fmod(std::min(std::fabs(x), std::fabs(y)), 2.0) == 1.0))
         return false;
 
     // offset if pen width is odd integer

@@ -73,8 +73,8 @@ TEST_CASE("GraphicsPathTestCaseCairo", "[path][cairo]")
 #endif // wxUSE_CAIRO
 
 #define WX_CHECK_POINT(p1, p2, tolerance)      \
-    CHECK(fabs(p1.m_x - p2.m_x) <= tolerance); \
-    CHECK(fabs(p1.m_y - p2.m_y) <= tolerance)
+    CHECK(std::fabs(p1.m_x - p2.m_x) <= tolerance); \
+    CHECK(std::fabs(p1.m_y - p2.m_y) <= tolerance)
 
 static void TestCurrentPoint(wxGraphicsContext* gc)
 {
@@ -140,7 +140,7 @@ static void TestCurrentPoint(wxGraphicsContext* gc)
         const double y2 = y1;
         const double r = 20;
         wxASSERT(x1 == y1 && y2 == y1); // alpha = 45 deg
-        double d = r / tan(45 / 180.0 * std::numbers::pi / 2.0);
+        double d = r / std::tan(45 / 180.0 * std::numbers::pi / 2.0);
         path.AddArcToPoint(x1, y1, x2, y2, r);
         wxPoint2DDouble cp = path.GetCurrentPoint();
         WX_CHECK_POINT(cp, wxPoint2DDouble(x1 - d, y2), 1E-3);
@@ -157,7 +157,7 @@ static void TestCurrentPoint(wxGraphicsContext* gc)
         const double y2 = y1;
         const double r = 20;
         wxASSERT(x0 == y0 && x1 == y1 && y2 == y1); // alpha = 135 deg
-        double d = r / tan(135 / 180.0 * std::numbers::pi / 2.0);
+        double d = r / std::tan(135 / 180.0 * std::numbers::pi / 2.0);
         path.AddArcToPoint(x1, y1, x2, y2, r);
         wxPoint2DDouble cp = path.GetCurrentPoint();
         WX_CHECK_POINT(cp, wxPoint2DDouble(x1 + d, y2), 1E-3);

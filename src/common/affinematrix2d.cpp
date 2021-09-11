@@ -129,8 +129,8 @@ void wxAffineMatrix2D::Scale(double xScale, double yScale)
 // |  0      0    1 |   | m_tx  m_ty   1 |
 void wxAffineMatrix2D::Rotate(double cRadians)
 {
-    double c = cos(cRadians);
-    double s = sin(cRadians);
+    double c = std::cos(cRadians);
+    double s = std::sin(cRadians);
 
     double e11 = c*m_11 + s*m_21;
     double e12 = c*m_12 + s*m_22;

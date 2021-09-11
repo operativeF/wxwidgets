@@ -672,14 +672,14 @@ void wxSVGFileDCImpl::DoDrawRotatedText(std::string_view sText, wxCoord x, wxCoo
 
     // Compute the shift for the origin of the next line.
     const double rad = wxDegToRad(angle);
-    const double dx = heightLine * sin(rad);
-    const double dy = heightLine * cos(rad);
+    const double dx = heightLine * std::sin(rad);
+    const double dy = heightLine * std::cos(rad);
 
     // Update bounding box: upper left, upper right, bottom left, bottom right
     CalcBoundingBox(x, y);
-    CalcBoundingBox((wxCoord)(x + w * cos(rad)), (wxCoord)(y - h * sin(rad)));
-    CalcBoundingBox((wxCoord)(x + h * sin(rad)), (wxCoord)(y + h * cos(rad)));
-    CalcBoundingBox((wxCoord)(x + h * sin(rad) + w * cos(rad)), (wxCoord)(y + h * cos(rad) - w * sin(rad)));
+    CalcBoundingBox((wxCoord)(x + w * std::cos(rad)), (wxCoord)(y - h * std::sin(rad)));
+    CalcBoundingBox((wxCoord)(x + h * std::sin(rad)), (wxCoord)(y + h * std::cos(rad)));
+    CalcBoundingBox((wxCoord)(x + h * std::sin(rad) + w * std::cos(rad)), (wxCoord)(y + h * std::cos(rad) - w * std::sin(rad)));
 
     // Create text style string
     wxString fontstyle;
@@ -735,8 +735,8 @@ void wxSVGFileDCImpl::DoDrawRotatedText(std::string_view sText, wxCoord x, wxCoo
         // convert x,y to SVG text x,y (the coordinates of the text baseline)
         wxCoord desc;
         const auto textExtents = DoGetTextExtent(line, &desc);
-        const double xText = xRect + (textExtents.y - desc) * sin(rad);
-        const double yText = yRect + (textExtents.y - desc) * cos(rad);
+        const double xText = xRect + (textExtents.y - desc) * std::sin(rad);
+        const double yText = yRect + (textExtents.y - desc) * std::cos(rad);
 
         if (m_backgroundMode == wxBrushStyle::Solid)
         {
@@ -897,11 +897,11 @@ void wxSVGFileDCImpl::DoDrawArc(wxCoord x1, wxCoord y1, wxCoord x2, wxCoord y2, 
     wxString s;
 
     // we need the radius of the circle which has two estimates
-    const double r1 = sqrt( double( (x1 - xc)*(x1 - xc) ) + double( (y1 - yc)*(y1 - yc) ) );
-    const double r2 = sqrt( double( (x2 - xc)*(x2 - xc) ) + double( (y2 - yc)*(y2 - yc) ) );
+    const double r1 = std::sqrt( double( (x1 - xc)*(x1 - xc) ) + double( (y1 - yc)*(y1 - yc) ) );
+    const double r2 = std::sqrt( double( (x2 - xc)*(x2 - xc) ) + double( (y2 - yc)*(y2 - yc) ) );
 
-    wxASSERT_MSG((fabs( r2 - r1 ) <= 3), wxS("wxSVGFileDC::DoDrawArc Error in getting radii of circle"));
-    if ( fabs( r2 - r1 ) > 3 )    //pixels
+    wxASSERT_MSG((std::fabs( r2 - r1 ) <= 3), wxS("wxSVGFileDC::DoDrawArc Error in getting radii of circle"));
+    if ( std::fabs( r2 - r1 ) > 3 )    //pixels
     {
         s = wxS("<!--- wxSVGFileDC::DoDrawArc Error in getting radii of circle -->\n");
         write(s);
@@ -917,7 +917,7 @@ void wxSVGFileDCImpl::DoDrawArc(wxCoord x1, wxCoord y1, wxCoord x2, wxCoord y2, 
     if (theta2 < theta1) theta2 = theta2 + std::numbers::pi * 2;
 
     int fArc;                  // flag for large or small arc 0 means less than 180 degrees
-    if (fabs(theta2 - theta1) > std::numbers::pi)
+    if (std::fabs(theta2 - theta1) > std::numbers::pi)
         fArc = 1; else fArc = 0;
 
     int fSweep = 0;             // flag for sweep always 0
@@ -973,23 +973,23 @@ void wxSVGFileDCImpl::DoDrawEllipticArc(wxCoord x, wxCoord y, wxCoord w, wxCoord
     const double yc = y + ry;
 
     // start and end coords
-    const double xs = xc + rx * cos(wxDegToRad(sa));
-    const double xe = xc + rx * cos(wxDegToRad(ea));
-    const double ys = yc - ry * sin(wxDegToRad(sa));
-    const double ye = yc - ry * sin(wxDegToRad(ea));
+    const double xs = xc + rx * std::cos(wxDegToRad(sa));
+    const double xe = xc + rx * std::cos(wxDegToRad(ea));
+    const double ys = yc - ry * std::sin(wxDegToRad(sa));
+    const double ye = yc - ry * std::sin(wxDegToRad(ea));
 
     // svg arcs have 0 degrees at 12-o'clock instead of 3-o'clock
     double start = (sa - 90);
     if (start < 0)
         start += 360;
-    while (fabs(start) > 360)
-        start -= (start / fabs(start)) * 360;
+    while (std::fabs(start) > 360)
+        start -= (start / std::fabs(start)) * 360;
 
     double end = (ea - 90);
     if (end < 0)
         end += 360;
-    while (fabs(end) > 360)
-        end -= (end / fabs(end)) * 360;
+    while (std::fabs(end) > 360)
+        end -= (end / std::fabs(end)) * 360;
 
     // svg arcs are in clockwise direction, reverse angle
     double angle = end - start;

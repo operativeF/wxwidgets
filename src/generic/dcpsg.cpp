@@ -436,7 +436,7 @@ void wxPostScriptDCImpl::DoDrawArc (wxCoord x1, wxCoord y1, wxCoord x2, wxCoord 
 
     wxCoord dx = x1 - xc;
     wxCoord dy = y1 - yc;
-    double radius = sqrt( (double)(dx*dx+dy*dy) );
+    double radius = std::sqrt( (double)(dx*dx+dy*dy) );
     double alpha1, alpha2;
 
     // TODO: Return lambda pair
@@ -1371,7 +1371,7 @@ void wxPostScriptDCImpl::DoDrawText( const wxString& text, wxCoord x, wxCoord y 
     GetOwner()->GetTextExtent(text, nullptr, nullptr, &text_descent);
     int size = m_font.GetPointSize();
 
-//    wxCoord by = y + (wxCoord)floor( double(size) * 2.0 / 3.0 ); // approximate baseline
+//    wxCoord by = y + (wxCoord)std::floor( double(size) * 2.0 / 3.0 ); // approximate baseline
 //    commented by V. Slavik and replaced by accurate version
 //        - note that there is still rounding error in text_descent!
     wxCoord by = y + size - text_descent; // baseline
@@ -1411,8 +1411,8 @@ void wxPostScriptDCImpl::DoDrawRotatedText( const wxString& text, wxCoord x, wxC
     GetOwner()->GetTextExtent(text, nullptr, nullptr, &text_descent);
     int size = m_font.GetPointSize();
     double rad = wxDegToRad(angle);
-    wxCoord bx = wxRound(x + (size - text_descent) * sin(rad));
-    wxCoord by = wxRound(y + (size - text_descent) * cos(rad));
+    wxCoord bx = wxRound(x + (size - text_descent) * std::sin(rad));
+    wxCoord by = wxRound(y + (size - text_descent) * std::cos(rad));
 
     wxString buffer;
     buffer.Printf( "%f %f moveto\n", XLOG2DEV(bx), YLOG2DEV(by));
@@ -1433,12 +1433,12 @@ void wxPostScriptDCImpl::DoDrawRotatedText( const wxString& text, wxCoord x, wxC
     GetOwner()->GetMultiLineTextExtent(text, &w, &h);
     // "upper left" and "upper right"
     CalcBoundingBox(x, y);
-    CalcBoundingBox(x + wxCoord(w*cos(rad)), y - wxCoord(w*sin(rad)));
+    CalcBoundingBox(x + wxCoord(w*cos(rad)), y - wxCoord(w * std::sin(rad)));
     // "bottom left" and "bottom right"
-    x += (wxCoord)(h*sin(rad));
-    y += (wxCoord)(h*cos(rad));
+    x += (wxCoord)(h * std::sin(rad));
+    y += (wxCoord)(h * std::cos(rad));
     CalcBoundingBox(x, y);
-    CalcBoundingBox(x + wxCoord(w*cos(rad)), y - wxCoord(w*sin(rad)));
+    CalcBoundingBox(x + wxCoord(w * std::cos(rad)), y - wxCoord(w * std::sin(rad)));
 }
 
 void wxPostScriptDCImpl::SetBackground (const wxBrush& brush)
@@ -1779,8 +1779,8 @@ void wxPostScriptDCImpl::EndDoc ()
     // The Adobe specifications call for integers; we round as to make
     // the bounding larger.
     PsPrintf( wxT("%%%%BoundingBox: %d %d %d %d\n"),
-            (wxCoord)floor((double)llx), (wxCoord)floor((double)lly),
-            (wxCoord)ceil((double)urx), (wxCoord)ceil((double)ury) );
+            (wxCoord)std::floor((double)llx), (wxCoord)std::floor((double)lly),
+            (wxCoord)std::ceil((double)urx), (wxCoord)std::ceil((double)ury) );
 
     // To check the correctness of the bounding box, postscript commands
     // to draw a box corresponding to the bounding box are generated below.

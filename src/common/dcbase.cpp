@@ -764,8 +764,8 @@ void wx_quadratic_spline(double a1, double b1, double a2, double b2, double a3, 
         double xmid, ymid;
         xmid = (double)half(x2, x3);
         ymid = (double)half(y2, y3);
-        if (fabs(x1 - xmid) < THRESHOLD && fabs(y1 - ymid) < THRESHOLD &&
-            fabs(xmid - x4) < THRESHOLD && fabs(ymid - y4) < THRESHOLD) {
+        if (std::fabs(x1 - xmid) < THRESHOLD && std::fabs(y1 - ymid) < THRESHOLD &&
+            std::fabs(xmid - x4) < THRESHOLD && std::fabs(ymid - y4) < THRESHOLD) {
             wx_spline_add_point( x1, y1 );
             wx_spline_add_point( xmid, ymid );
         } else {
@@ -1043,7 +1043,7 @@ void wxDCImpl::DoGradientFillConcentric(const wxRect& rect,
             const double dx = x;
             const double dy = y;
 
-            double dGradient = ((dRadius - sqrt(  (dx - cx - nCircleOffX) * (dx - cx - nCircleOffX)
+            double dGradient = ((dRadius - std::sqrt(  (dx - cx - nCircleOffX) * (dx - cx - nCircleOffX)
                                           +(dy - cy - nCircleOffY) * (dy - cy - nCircleOffY)
                                          )
                          ) * 100

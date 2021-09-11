@@ -141,7 +141,7 @@ wxLongLongWx &wxLongLongWx::operator=(const class wxULongLongWx &ll)
 wxLongLongWx& wxLongLongWx::Assign(double d)
 {
     bool positive = d >= 0;
-    d = fabs(d);
+    d = std::fabs(d);
     if ( d <= ULONG_MAX )
     {
         m_hi = 0;

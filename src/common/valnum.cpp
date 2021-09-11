@@ -276,7 +276,7 @@ wxString wxFloatingPointValidatorBase::ToString(LongestValueType value) const
     int precision = m_precision;
     if ( precision && m_factor > 1 )
     {
-        precision -= static_cast<int>(log10(static_cast<double>(m_factor)));
+        precision -= static_cast<int>(std::log10(static_cast<double>(m_factor)));
         if ( precision < 0 )
             precision = 0;
     }

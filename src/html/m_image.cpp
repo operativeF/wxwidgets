@@ -103,7 +103,7 @@ wxHtmlLinkInfo *wxHtmlImageMapAreaCell::GetLink( int x, int y ) const
                 int l = coords[ 0 ];
                 int t = coords[ 1 ];
                 int r = coords[ 2 ];
-                double d = sqrt( (double) (((x - l) * (x - l)) + ((y - t) * (y - t))) );
+                double d = std::sqrt( (double) (((x - l) * (x - l)) + ((y - t) * (y - t))) );
                 if (d < (double)r)
                 {
                     return m_Link;

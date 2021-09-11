@@ -126,7 +126,7 @@ void wxAuiScaleBitmap(wxBitmap& bmp, double scale)
 {
 #if wxUSE_IMAGE && !defined(__WXGTK3__) && !defined(__WXMAC__)
     // scale to a close round number to improve quality
-    scale = floor(scale + 0.25);
+    scale = std::floor(scale + 0.25);
     if (scale > 1.0 && !(bmp.GetScaleFactor() > 1.0))
     {
         wxImage img = bmp.ConvertToImage();
