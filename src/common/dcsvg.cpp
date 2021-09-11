@@ -673,8 +673,6 @@ void wxSVGFileDCImpl::DoDrawRotatedText(std::string_view sText, wxCoord x, wxCoo
 
     // Compute the shift for the origin of the next line.
     const double rad = wxDegToRad(angle);
-    const double dx = heightLine * std::sin(rad);
-    const double dy = heightLine * std::cos(rad);
 
     // Update bounding box: upper left, upper right, bottom left, bottom right
     CalcBoundingBox(x, y);
@@ -727,7 +725,11 @@ void wxSVGFileDCImpl::DoDrawRotatedText(std::string_view sText, wxCoord x, wxCoo
     // Draw all text line by line
     const std::vector<std::string_view> lines = wx::unsafe::StrViewSplit(sText, '\n');
 
+    const double dx = heightLine * std::sin(rad);
+    const double dy = heightLine * std::cos(rad);
+
     size_t lineNum{0};
+    
     for (auto line : lines)
     {
         const double xRect = x + lineNum * dx;

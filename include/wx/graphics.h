@@ -477,9 +477,6 @@ private:
 class WXDLLIMPEXP_CORE wxGraphicsPath : public wxGraphicsObject
 {
 public:
-    wxGraphicsPath()  = default;
-    ~wxGraphicsPath() = default;
-
     //
     // These are the path primitives from which everything else can be constructed
     //

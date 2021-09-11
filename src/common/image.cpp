@@ -3704,10 +3704,10 @@ wxImage wxImage::Rotate(double angle,
     wxRealPoint p3 = wxRotatePoint (w, 0, cos_angle, sin_angle, p0);
     wxRealPoint p4 = wxRotatePoint (w, h, cos_angle, sin_angle, p0);
 
-    int x1a = (int) floor (std::min (std::min(p1.x, p2.x), std::min(p3.x, p4.x)));
-    int y1a = (int) floor (std::min (std::min(p1.y, p2.y), std::min(p3.y, p4.y)));
-    int x2a = (int) ceil (std::max (std::max(p1.x, p2.x), std::max(p3.x, p4.x)));
-    int y2a = (int) ceil (std::max (std::max(p1.y, p2.y), std::max(p3.y, p4.y)));
+    int x1a = (int) std::floor(std::min (std::min(p1.x, p2.x), std::min(p3.x, p4.x)));
+    int y1a = (int) std::floor(std::min (std::min(p1.y, p2.y), std::min(p3.y, p4.y)));
+    int x2a = (int) std::ceil(std::max (std::max(p1.x, p2.x), std::max(p3.x, p4.x)));
+    int y2a = (int) std::ceil(std::max (std::max(p1.y, p2.y), std::max(p3.y, p4.y)));
 
     // Create rotated image
     wxImage rotated (x2a - x1a + 1, y2a - y1a + 1, false);
