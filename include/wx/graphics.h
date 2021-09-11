@@ -22,6 +22,7 @@
 #include "wx/image.h"
 #include "wx/peninfobase.h"
 
+#include <memory>
 #include <string>
 #include <string_view>
 #include <utility>
@@ -570,39 +571,39 @@ public:
     wxGraphicsContext(wxGraphicsContext&&) = default;
     wxGraphicsContext& operator=(wxGraphicsContext&&) = default;
 
-    static wxGraphicsContext* Create( const wxWindowDC& dc);
-    static wxGraphicsContext * Create( const wxMemoryDC& dc);
+    static std::unique_ptr<wxGraphicsContext> Create( const wxWindowDC& dc);
+    static std::unique_ptr<wxGraphicsContext> Create( const wxMemoryDC& dc);
 #if wxUSE_PRINTING_ARCHITECTURE
-    static wxGraphicsContext * Create( const wxPrinterDC& dc);
+    static std::unique_ptr<wxGraphicsContext> Create( const wxPrinterDC& dc);
 #endif
 #ifdef __WXMSW__
 #if wxUSE_ENH_METAFILE
-    static wxGraphicsContext * Create( const wxEnhMetaFileDC& dc);
+    static std::unique_ptr<wxGraphicsContext> Create( const wxEnhMetaFileDC& dc);
 #endif
 #endif
 
     // Create a context from a DC of unknown type, if supported, returns NULL otherwise
-    static wxGraphicsContext* CreateFromUnknownDC(const wxDC& dc);
+    static std::unique_ptr<wxGraphicsContext> CreateFromUnknownDC(const wxDC& dc);
 
-    static wxGraphicsContext* CreateFromNative( void * context );
+    static std::unique_ptr<wxGraphicsContext> CreateFromNative( void * context );
 
-    static wxGraphicsContext* CreateFromNativeWindow( void * window );
+    static std::unique_ptr<wxGraphicsContext> CreateFromNativeWindow( void * window );
 
 #ifdef __WXMSW__
-    static wxGraphicsContext* CreateFromNativeHDC(WXHDC dc);
+    static std::unique_ptr<wxGraphicsContext> CreateFromNativeHDC(WXHDC dc);
 #endif
 
-    static wxGraphicsContext* Create( wxWindow* window );
+    static std::unique_ptr<wxGraphicsContext> Create( wxWindow* window );
 
 #if wxUSE_IMAGE
     // Create a context for drawing onto a wxImage. The image life time must be
     // greater than that of the context itself as when the context is destroyed
     // it will copy its contents to the specified image.
-    static wxGraphicsContext* Create(wxImage& image);
+    static std::unique_ptr<wxGraphicsContext> Create(wxImage& image);
 #endif // wxUSE_IMAGE
 
     // create a context that can be used for measuring texts only, no drawing allowed
-    static wxGraphicsContext * Create();
+    static std::unique_ptr<wxGraphicsContext> Create();
 
     // Return the window this context is associated with, if any.
     wxWindow* GetWindow() const { return m_window; }
@@ -986,35 +987,35 @@ public:
 
     // Context
 
-    virtual wxGraphicsContext * CreateContext( const wxWindowDC& dc) = 0;
-    virtual wxGraphicsContext * CreateContext( const wxMemoryDC& dc) = 0;
+    virtual std::unique_ptr<wxGraphicsContext> CreateContext( const wxWindowDC& dc) = 0;
+    virtual std::unique_ptr<wxGraphicsContext> CreateContext( const wxMemoryDC& dc) = 0;
 #if wxUSE_PRINTING_ARCHITECTURE
-    virtual wxGraphicsContext * CreateContext( const wxPrinterDC& dc) = 0;
+    virtual std::unique_ptr<wxGraphicsContext> CreateContext( const wxPrinterDC& dc) = 0;
 #endif
 #ifdef __WXMSW__
 #if wxUSE_ENH_METAFILE
-    virtual wxGraphicsContext * CreateContext( const wxEnhMetaFileDC& dc) = 0;
+    virtual std::unique_ptr<wxGraphicsContext> CreateContext( const wxEnhMetaFileDC& dc) = 0;
 #endif
 #endif
 
-    wxGraphicsContext* CreateContextFromUnknownDC(const wxDC& dc);
+    std::unique_ptr<wxGraphicsContext> CreateContextFromUnknownDC(const wxDC& dc);
 
-    virtual wxGraphicsContext * CreateContextFromNativeContext( void * context ) = 0;
+    virtual std::unique_ptr<wxGraphicsContext> CreateContextFromNativeContext( void * context ) = 0;
 
-    virtual wxGraphicsContext * CreateContextFromNativeWindow( void * window ) = 0;
+    virtual std::unique_ptr<wxGraphicsContext> CreateContextFromNativeWindow( void * window ) = 0;
 
 #ifdef __WXMSW__
-    virtual wxGraphicsContext * CreateContextFromNativeHDC(WXHDC dc) = 0;
+    virtual std::unique_ptr<wxGraphicsContext> CreateContextFromNativeHDC(WXHDC dc) = 0;
 #endif
 
-    virtual wxGraphicsContext * CreateContext( wxWindow* window ) = 0;
+    virtual std::unique_ptr<wxGraphicsContext> CreateContext( wxWindow* window ) = 0;
 
 #if wxUSE_IMAGE
-    virtual wxGraphicsContext * CreateContextFromImage(wxImage& image) = 0;
+    virtual std::unique_ptr<wxGraphicsContext> CreateContextFromImage(wxImage& image) = 0;
 #endif // wxUSE_IMAGE
 
     // create a context that can be used for measuring texts only, no drawing allowed
-    virtual wxGraphicsContext * CreateMeasuringContext() = 0;
+    virtual std::unique_ptr<wxGraphicsContext> CreateMeasuringContext() = 0;
 
     // Path
 

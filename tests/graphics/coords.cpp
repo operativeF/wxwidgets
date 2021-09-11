@@ -1038,9 +1038,9 @@ public:
     CoordinatesGCDCGDIPlusTestCase()
     {
         wxGraphicsRenderer* rend = wxGraphicsRenderer::GetGDIPlusRenderer();
-        wxGraphicsContext* ctx = rend->CreateContext(m_mdc);
+        std::unique_ptr<wxGraphicsContext> ctx = rend->CreateContext(m_mdc);
         REQUIRE(ctx != nullptr);
-        m_gcdc->SetGraphicsContext(ctx);
+        m_gcdc->SetGraphicsContext(std::move(ctx));
     }
 
     virtual ~CoordinatesGCDCGDIPlusTestCase() = default;
@@ -1168,9 +1168,9 @@ public:
     CoordinatesGCDCDirect2DTestCase()
     {
         wxGraphicsRenderer* rend = wxGraphicsRenderer::GetDirect2DRenderer();
-        wxGraphicsContext* ctx = rend->CreateContext(m_mdc);
+        std::unique_ptr<wxGraphicsContext> ctx = rend->CreateContext(m_mdc);
         REQUIRE(ctx != nullptr);
-        m_gcdc->SetGraphicsContext(ctx);
+        m_gcdc->SetGraphicsContext(std::move(ctx));
     }
 
     virtual ~CoordinatesGCDCDirect2DTestCase() = default;

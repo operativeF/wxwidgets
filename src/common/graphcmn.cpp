@@ -31,6 +31,8 @@
 
 #include "wx/private/graphics.h"
 
+#include <memory>
+
 //-----------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------
@@ -965,18 +967,18 @@ wxGraphicsBitmap wxGraphicsContext::CreateSubBitmap( const wxGraphicsBitmap &bmp
     return GetRenderer()->CreateSubBitmap(bmp,x,y,w,h);
 }
 
-/* static */ wxGraphicsContext* wxGraphicsContext::Create( const wxWindowDC& dc)
+/* static */ std::unique_ptr<wxGraphicsContext> wxGraphicsContext::Create( const wxWindowDC& dc)
 {
     return wxGraphicsRenderer::GetDefaultRenderer()->CreateContext(dc);
 }
 
-/* static */ wxGraphicsContext* wxGraphicsContext::Create( const wxMemoryDC& dc)
+/* static */ std::unique_ptr<wxGraphicsContext> wxGraphicsContext::Create( const wxMemoryDC& dc)
 {
     return wxGraphicsRenderer::GetDefaultRenderer()->CreateContext(dc);
 }
 
 #if wxUSE_PRINTING_ARCHITECTURE
-/* static */ wxGraphicsContext* wxGraphicsContext::Create( const wxPrinterDC& dc)
+/* static */ std::unique_ptr<wxGraphicsContext> wxGraphicsContext::Create( const wxPrinterDC& dc)
 {
     return wxGraphicsRenderer::GetDefaultRenderer()->CreateContext(dc);
 }
@@ -984,48 +986,48 @@ wxGraphicsBitmap wxGraphicsContext::CreateSubBitmap( const wxGraphicsBitmap &bmp
 
 #ifdef __WXMSW__
 #if wxUSE_ENH_METAFILE
-/* static */ wxGraphicsContext* wxGraphicsContext::Create( const wxEnhMetaFileDC& dc)
+/* static */ std::unique_ptr<wxGraphicsContext> wxGraphicsContext::Create( const wxEnhMetaFileDC& dc)
 {
     return wxGraphicsRenderer::GetDefaultRenderer()->CreateContext(dc);
 }
 #endif
 #endif
 
-wxGraphicsContext* wxGraphicsContext::CreateFromUnknownDC(const wxDC& dc)
+std::unique_ptr<wxGraphicsContext> wxGraphicsContext::CreateFromUnknownDC(const wxDC& dc)
 {
     return wxGraphicsRenderer::GetDefaultRenderer()->CreateContextFromUnknownDC(dc);
 }
 
-wxGraphicsContext* wxGraphicsContext::CreateFromNative( void * context )
+std::unique_ptr<wxGraphicsContext> wxGraphicsContext::CreateFromNative( void * context )
 {
     return wxGraphicsRenderer::GetDefaultRenderer()->CreateContextFromNativeContext(context);
 }
 
-wxGraphicsContext* wxGraphicsContext::CreateFromNativeWindow( void * window )
+std::unique_ptr<wxGraphicsContext> wxGraphicsContext::CreateFromNativeWindow( void * window )
 {
     return wxGraphicsRenderer::GetDefaultRenderer()->CreateContextFromNativeWindow(window);
 }
 
 #ifdef __WXMSW__
-wxGraphicsContext* wxGraphicsContext::CreateFromNativeHDC(WXHDC dc)
+std::unique_ptr<wxGraphicsContext> wxGraphicsContext::CreateFromNativeHDC(WXHDC dc)
 {
     return wxGraphicsRenderer::GetDefaultRenderer()->CreateContextFromNativeHDC(dc);
 }
 #endif
 
-wxGraphicsContext* wxGraphicsContext::Create( wxWindow* window )
+std::unique_ptr<wxGraphicsContext> wxGraphicsContext::Create( wxWindow* window )
 {
     return wxGraphicsRenderer::GetDefaultRenderer()->CreateContext(window);
 }
 
 #if wxUSE_IMAGE
-/* static */ wxGraphicsContext* wxGraphicsContext::Create(wxImage& image)
+/* static */ std::unique_ptr<wxGraphicsContext> wxGraphicsContext::Create(wxImage& image)
 {
     return wxGraphicsRenderer::GetDefaultRenderer()->CreateContextFromImage(image);
 }
 #endif // wxUSE_IMAGE
 
-wxGraphicsContext* wxGraphicsContext::Create()
+std::unique_ptr<wxGraphicsContext> wxGraphicsContext::Create()
 {
     return wxGraphicsRenderer::GetDefaultRenderer()->CreateMeasuringContext();
 }
@@ -1036,7 +1038,7 @@ wxGraphicsContext* wxGraphicsContext::Create()
 
 wxIMPLEMENT_ABSTRACT_CLASS(wxGraphicsRenderer, wxObject);
 
-wxGraphicsContext* wxGraphicsRenderer::CreateContextFromUnknownDC(const wxDC& dc)
+std::unique_ptr<wxGraphicsContext> wxGraphicsRenderer::CreateContextFromUnknownDC(const wxDC& dc)
 {
     if ( const wxWindowDC *windc = wxDynamicCast(&dc, wxWindowDC) )
         return CreateContext(*windc);

@@ -1678,9 +1678,8 @@ inline void DrawScaledBmp(wxBitmap& bmp, float scale, wxGraphicsRenderer* render
         wxMemoryDC mdc(canvas);
         mdc.SetBackground(*wxBLACK_BRUSH);
         mdc.Clear();
-        wxGraphicsContext* gc = renderer->CreateContext(mdc);
+        std::unique_ptr<wxGraphicsContext> gc = renderer->CreateContext(mdc);
         gc->DrawBitmap(bmp, 0, 0, canvas.GetSize().GetWidth(), canvas.GetSize().GetHeight());
-        delete gc;
     }
 
     wxNativePixelData bmpData(bmp);

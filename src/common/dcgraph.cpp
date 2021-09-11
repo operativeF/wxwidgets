@@ -101,8 +101,8 @@ wxGCDC::wxGCDC(const wxEnhMetaFileDC& dc)
 }
 #endif
 
-wxGCDC::wxGCDC(wxGraphicsContext* context) :
-    wxDC(std::make_unique<wxGCDCImpl>(this, context))
+wxGCDC::wxGCDC(std::unique_ptr<wxGraphicsContext> context) :
+    wxDC(std::make_unique<wxGCDCImpl>(this, std::move(context)))
 {
 }
 
@@ -113,12 +113,12 @@ wxGCDC::wxGCDC() :
 
 wxIMPLEMENT_ABSTRACT_CLASS(wxGCDCImpl, wxDCImpl);
 
-wxGCDCImpl::wxGCDCImpl(wxDC *owner, wxGraphicsContext* context) :
+wxGCDCImpl::wxGCDCImpl(wxDC *owner, std::unique_ptr<wxGraphicsContext> context) :
     wxDCImpl(owner)
 {
     CommonInit();
 
-    DoInitContext(context);
+    DoInitContext(std::move(context));
 
     // We can't currently initialize m_font, m_pen and m_brush here as we don't
     // have any way of converting the corresponding wxGraphicsXXX objects to
@@ -134,11 +134,9 @@ wxGCDCImpl::wxGCDCImpl( wxDC *owner ) :
     Init(wxGraphicsContext::Create());
 }
 
-void wxGCDCImpl::SetGraphicsContext( wxGraphicsContext* ctx )
+void wxGCDCImpl::SetGraphicsContext( std::unique_ptr<wxGraphicsContext> ctx )
 {
-    delete m_graphicContext;
-
-    if ( DoInitContext(ctx) )
+    if ( DoInitContext(std::move(ctx)) )
     {
         // Reapply our attributes to the context.
         m_graphicContext->SetFont( m_font , m_textForegroundColour );
@@ -193,7 +191,7 @@ void wxGCDCImpl::CommonInit()
     m_logicalFunctionSupported = true;
 }
 
-void wxGCDCImpl::Init(wxGraphicsContext* ctx)
+void wxGCDCImpl::Init(std::unique_ptr<wxGraphicsContext> ctx)
 {
     CommonInit();
 
@@ -203,14 +201,13 @@ void wxGCDCImpl::Init(wxGraphicsContext* ctx)
     m_font = *wxNORMAL_FONT;
     m_brush = *wxWHITE_BRUSH;
 
-    m_graphicContext = nullptr;
     if (ctx)
-        SetGraphicsContext(ctx);
+        SetGraphicsContext(std::move(ctx));
 }
 
-bool wxGCDCImpl::DoInitContext(wxGraphicsContext* ctx)
+bool wxGCDCImpl::DoInitContext(std::unique_ptr<wxGraphicsContext> ctx)
 {
-    m_graphicContext = ctx;
+    m_graphicContext = std::move(ctx);
     m_ok = m_graphicContext != nullptr;
 
     if ( m_ok )
@@ -221,11 +218,6 @@ bool wxGCDCImpl::DoInitContext(wxGraphicsContext* ctx)
     }
 
     return m_ok;
-}
-
-wxGCDCImpl::~wxGCDCImpl()
-{
-    delete m_graphicContext;
 }
 
 void wxGCDCImpl::DoDrawBitmap( const wxBitmap &bmp, wxCoord x, wxCoord y,

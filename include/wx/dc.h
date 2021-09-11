@@ -45,7 +45,7 @@ class WXDLLIMPEXP_FWD_CORE wxPrintData;
 class WXDLLIMPEXP_FWD_CORE wxWindow;
 
 #if wxUSE_GRAPHICS_CONTEXT
-class WXDLLIMPEXP_FWD_CORE wxGraphicsContext;
+#include "wx/graphics.h"
 #endif
 
 //  Logical ops
@@ -545,7 +545,7 @@ public:
 #if wxUSE_GRAPHICS_CONTEXT
     virtual wxGraphicsContext* GetGraphicsContext() const
         { return nullptr; }
-    virtual void SetGraphicsContext( wxGraphicsContext* WXUNUSED(ctx) )
+    virtual void SetGraphicsContext( std::unique_ptr<wxGraphicsContext> WXUNUSED(ctx) )
         {}
 #endif
 
@@ -1220,9 +1220,9 @@ public:
     {
         return m_pimpl->GetGraphicsContext();
     }
-    virtual void SetGraphicsContext( wxGraphicsContext* ctx )
+    virtual void SetGraphicsContext( std::unique_ptr<wxGraphicsContext> ctx )
     {
-        m_pimpl->SetGraphicsContext(ctx);
+        m_pimpl->SetGraphicsContext(std::move(ctx));
     }
 #endif
 

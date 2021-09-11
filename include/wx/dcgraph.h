@@ -17,6 +17,7 @@
 #include "wx/geometry.h"
 #include "wx/graphics.h"
 
+#include <memory>
 #include <string>
 #include <string_view>
 #include <vector>
@@ -35,7 +36,7 @@ public:
 #if defined(__WXMSW__) && wxUSE_ENH_METAFILE
     wxGCDC( const wxEnhMetaFileDC& dc );
 #endif
-    wxGCDC(wxGraphicsContext* context);
+    wxGCDC(std::unique_ptr<wxGraphicsContext> context);
 
     wxGCDC();
     ~wxGCDC() = default;
@@ -70,11 +71,11 @@ public:
 #endif
 
     // Ctor using an existing graphics context given to wxGCDC ctor.
-    wxGCDCImpl(wxDC *owner, wxGraphicsContext* context);
+    wxGCDCImpl(wxDC *owner, std::unique_ptr<wxGraphicsContext> context);
 
     wxGCDCImpl( wxDC *owner );
 
-    ~wxGCDCImpl();
+    ~wxGCDCImpl() = default;
 
     wxGCDCImpl(const wxGCDCImpl&) = delete;
     wxGCDCImpl& operator=(const wxGCDCImpl&) = delete;
@@ -119,8 +120,8 @@ public:
 
     void ComputeScaleAndOrigin() override;
 
-    wxGraphicsContext* GetGraphicsContext() const override { return m_graphicContext; }
-    void SetGraphicsContext( wxGraphicsContext* ctx ) override;
+    wxGraphicsContext* GetGraphicsContext() const override { return m_graphicContext.get(); }
+    void SetGraphicsContext( std::unique_ptr<wxGraphicsContext> ctx ) override;
 
     void* GetHandle() const override;
 
@@ -249,7 +250,7 @@ protected:
     wxAffineMatrix2D m_matrixExtTransform;
 #endif // wxUSE_DC_TRANSFORM_MATRIX
 
-    wxGraphicsContext* m_graphicContext;
+    std::unique_ptr<wxGraphicsContext> m_graphicContext;
 
     bool m_isClipBoxValid;
 
@@ -260,11 +261,11 @@ private:
     // This method initializes all fields (including those initialized by
     // CommonInit() as it calls it) and the given context, if non-null, which
     // is assumed to be newly created.
-    void Init(wxGraphicsContext*);
+    void Init(std::unique_ptr<wxGraphicsContext> ctx);
 
     // This method initializes m_graphicContext, m_ok and m_matrixOriginal
     // fields, returns true if the context was valid.
-    bool DoInitContext(wxGraphicsContext* ctx);
+    bool DoInitContext(std::unique_ptr<wxGraphicsContext> ctx);
 
     wxDECLARE_CLASS(wxGCDCImpl);
 };

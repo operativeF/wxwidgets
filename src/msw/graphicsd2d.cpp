@@ -4984,31 +4984,31 @@ public :
 	wxD2DRenderer(const wxD2DRenderer&) = delete;
 	wxD2DRenderer& operator=(const wxD2DRenderer&) = delete;
 
-    wxGraphicsContext* CreateContext(const wxWindowDC& dc) override;
+    std::unique_ptr<wxGraphicsContext> CreateContext(const wxWindowDC& dc) override;
 
-    wxGraphicsContext* CreateContext(const wxMemoryDC& dc) override;
+    std::unique_ptr<wxGraphicsContext> CreateContext(const wxMemoryDC& dc) override;
 
 #if wxUSE_PRINTING_ARCHITECTURE
-    wxGraphicsContext* CreateContext(const wxPrinterDC& dc) override;
+    std::unique_ptr<wxGraphicsContext> CreateContext(const wxPrinterDC& dc) override;
 #endif
 
 #if wxUSE_ENH_METAFILE
-    wxGraphicsContext* CreateContext(const wxEnhMetaFileDC& dc) override;
+    std::unique_ptr<wxGraphicsContext> CreateContext(const wxEnhMetaFileDC& dc) override;
 #endif
 
-    wxGraphicsContext* CreateContextFromNativeContext(void* context) override;
+    std::unique_ptr<wxGraphicsContext> CreateContextFromNativeContext(void* context) override;
 
-    wxGraphicsContext* CreateContextFromNativeWindow(void* window) override;
+    std::unique_ptr<wxGraphicsContext> CreateContextFromNativeWindow(void* window) override;
 
-    wxGraphicsContext * CreateContextFromNativeHDC(WXHDC dc) override;
+    std::unique_ptr<wxGraphicsContext> CreateContextFromNativeHDC(WXHDC dc) override;
 
-    wxGraphicsContext* CreateContext(wxWindow* window) override;
+    std::unique_ptr<wxGraphicsContext> CreateContext(wxWindow* window) override;
 
 #if wxUSE_IMAGE
-    wxGraphicsContext* CreateContextFromImage(wxImage& image) override;
+    std::unique_ptr<wxGraphicsContext> CreateContextFromImage(wxImage& image) override;
 #endif // wxUSE_IMAGE
 
-    wxGraphicsContext* CreateMeasuringContext() override;
+    std::unique_ptr<wxGraphicsContext> CreateMeasuringContext() override;
 
     wxGraphicsPath CreatePath() override;
 
@@ -5107,22 +5107,22 @@ wxD2DRenderer::~wxD2DRenderer()
     m_direct2dFactory.reset();
 }
 
-wxGraphicsContext* wxD2DRenderer::CreateContext(const wxWindowDC& dc)
+std::unique_ptr<wxGraphicsContext> wxD2DRenderer::CreateContext(const wxWindowDC& dc)
 {
-    return new wxD2DContext(this, m_direct2dFactory, dc.GetHDC(), &dc);
+    return std::make_unique<wxD2DContext>(this, m_direct2dFactory, dc.GetHDC(), &dc);
 }
 
-wxGraphicsContext* wxD2DRenderer::CreateContext(const wxMemoryDC& dc)
+std::unique_ptr<wxGraphicsContext> wxD2DRenderer::CreateContext(const wxMemoryDC& dc)
 {
     wxBitmap bmp = dc.GetSelectedBitmap();
     wxASSERT_MSG( bmp.IsOk(), wxS("Should select a bitmap before creating wxGraphicsContext") );
 
-    return new wxD2DContext(this, m_direct2dFactory, dc.GetHDC(), &dc,
+    return std::make_unique<wxD2DContext>(this, m_direct2dFactory, dc.GetHDC(), &dc,
                             bmp.HasAlpha() ? D2D1_ALPHA_MODE_PREMULTIPLIED : D2D1_ALPHA_MODE_IGNORE);
 }
 
 #if wxUSE_PRINTING_ARCHITECTURE
-wxGraphicsContext* wxD2DRenderer::CreateContext(const wxPrinterDC& WXUNUSED(dc))
+std::unique_ptr<wxGraphicsContext> wxD2DRenderer::CreateContext(const wxPrinterDC& WXUNUSED(dc))
 {
     wxFAIL_MSG("not implemented");
     return nullptr;
@@ -5130,43 +5130,43 @@ wxGraphicsContext* wxD2DRenderer::CreateContext(const wxPrinterDC& WXUNUSED(dc))
 #endif
 
 #if wxUSE_ENH_METAFILE
-wxGraphicsContext* wxD2DRenderer::CreateContext(const wxEnhMetaFileDC& WXUNUSED(dc))
+std::unique_ptr<wxGraphicsContext> wxD2DRenderer::CreateContext(const wxEnhMetaFileDC& WXUNUSED(dc))
 {
     wxFAIL_MSG("not implemented");
     return nullptr;
 }
 #endif
 
-wxGraphicsContext* wxD2DRenderer::CreateContextFromNativeContext(void* nativeContext)
+std::unique_ptr<wxGraphicsContext> wxD2DRenderer::CreateContextFromNativeContext(void* nativeContext)
 {
-    return new wxD2DContext(this, m_direct2dFactory, nativeContext);
+    return std::make_unique<wxD2DContext>(this, m_direct2dFactory, nativeContext);
 }
 
-wxGraphicsContext* wxD2DRenderer::CreateContextFromNativeWindow(void* window)
+std::unique_ptr<wxGraphicsContext> wxD2DRenderer::CreateContextFromNativeWindow(void* window)
 {
-    return new wxD2DContext(this, m_direct2dFactory, (HWND)window);
+    return std::make_unique<wxD2DContext>(this, m_direct2dFactory, (HWND)window);
 }
 
-wxGraphicsContext* wxD2DRenderer::CreateContextFromNativeHDC(WXHDC dc)
+std::unique_ptr<wxGraphicsContext> wxD2DRenderer::CreateContextFromNativeHDC(WXHDC dc)
 {
-    return new wxD2DContext(this, m_direct2dFactory, (HDC)dc);
+    return std::make_unique<wxD2DContext>(this, m_direct2dFactory, (HDC)dc);
 }
 
-wxGraphicsContext* wxD2DRenderer::CreateContext(wxWindow* window)
+std::unique_ptr<wxGraphicsContext> wxD2DRenderer::CreateContext(wxWindow* window)
 {
-    return new wxD2DContext(this, m_direct2dFactory, (HWND)window->GetHWND(), window);
+    return std::make_unique<wxD2DContext>(this, m_direct2dFactory, (HWND)window->GetHWND(), window);
 }
 
 #if wxUSE_IMAGE
-wxGraphicsContext* wxD2DRenderer::CreateContextFromImage(wxImage& image)
+std::unique_ptr<wxGraphicsContext> wxD2DRenderer::CreateContextFromImage(wxImage& image)
 {
-    return new wxD2DContext(this, m_direct2dFactory, image);
+    return std::make_unique<wxD2DContext>(this, m_direct2dFactory, image);
 }
 #endif // wxUSE_IMAGE
 
-wxGraphicsContext* wxD2DRenderer::CreateMeasuringContext()
+std::unique_ptr<wxGraphicsContext> wxD2DRenderer::CreateMeasuringContext()
 {
-    return new wxD2DMeasuringContext(this);
+    return std::make_unique<wxD2DMeasuringContext>(this);
 }
 
 wxGraphicsPath wxD2DRenderer::CreatePath()

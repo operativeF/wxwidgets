@@ -142,14 +142,13 @@ TEST_CASE("wxGC::GetTextExtent")
 {
     wxGraphicsRenderer* renderer = wxGraphicsRenderer::GetDefaultRenderer();
     REQUIRE(renderer);
-    wxGraphicsContext* context = renderer->CreateMeasuringContext();
+    std::unique_ptr<wxGraphicsContext> context = renderer->CreateMeasuringContext();
     REQUIRE(context);
     wxFont font(12, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL);
     REQUIRE(font.IsOk());
     context->SetFont(font, *wxBLACK);
     double descent, externalLeading = 0.0;
     auto [width, height] = context->GetTextExtent("x", &descent, &externalLeading);
-    delete context;
 
     // TODO: Determine a way to make these tests more robust.
     CHECK(width > 0.0);

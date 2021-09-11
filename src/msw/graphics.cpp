@@ -582,31 +582,31 @@ public :
 
     // Context
 
-    wxGraphicsContext * CreateContext( const wxWindowDC& dc) override;
+    std::unique_ptr<wxGraphicsContext> CreateContext( const wxWindowDC& dc) override;
 
-    wxGraphicsContext * CreateContext( const wxMemoryDC& dc) override;
+    std::unique_ptr<wxGraphicsContext> CreateContext( const wxMemoryDC& dc) override;
 
 #if wxUSE_PRINTING_ARCHITECTURE
-    wxGraphicsContext * CreateContext( const wxPrinterDC& dc) override;
+    std::unique_ptr<wxGraphicsContext> CreateContext( const wxPrinterDC& dc) override;
 #endif
 
 #if wxUSE_ENH_METAFILE
-    wxGraphicsContext * CreateContext( const wxEnhMetaFileDC& dc) override;
+    std::unique_ptr<wxGraphicsContext> CreateContext( const wxEnhMetaFileDC& dc) override;
 #endif
 
-    wxGraphicsContext * CreateContextFromNativeContext( void * context ) override;
+    std::unique_ptr<wxGraphicsContext> CreateContextFromNativeContext( void * context ) override;
 
-    wxGraphicsContext * CreateContextFromNativeWindow( void * window ) override;
+    std::unique_ptr<wxGraphicsContext> CreateContextFromNativeWindow( void * window ) override;
 
-    wxGraphicsContext * CreateContextFromNativeHDC(WXHDC dc) override;
+    std::unique_ptr<wxGraphicsContext> CreateContextFromNativeHDC(WXHDC dc) override;
 
-    wxGraphicsContext * CreateContext( wxWindow* window ) override;
+    std::unique_ptr<wxGraphicsContext> CreateContext( wxWindow* window ) override;
 
 #if wxUSE_IMAGE
-    wxGraphicsContext * CreateContextFromImage(wxImage& image) override;
+    std::unique_ptr<wxGraphicsContext> CreateContextFromImage(wxImage& image) override;
 #endif // wxUSE_IMAGE
 
-    wxGraphicsContext * CreateMeasuringContext() override;
+    std::unique_ptr<wxGraphicsContext> CreateMeasuringContext() override;
 
     // Path
 
@@ -2627,33 +2627,32 @@ void wxGDIPlusRenderer::Unload()
     m_loaded = -1; // next Load() will try again
 }
 
-wxGraphicsContext * wxGDIPlusRenderer::CreateContext( const wxWindowDC& dc)
+std::unique_ptr<wxGraphicsContext> wxGDIPlusRenderer::CreateContext( const wxWindowDC& dc)
 {
     ENSURE_LOADED_OR_RETURN(NULL);
-    wxGDIPlusContext* context = new wxGDIPlusContext(this, dc);
+    auto context = std::make_unique<wxGDIPlusContext>(this, dc);
     context->EnableOffset(true);
     return context;
 }
 
 #if wxUSE_PRINTING_ARCHITECTURE
-wxGraphicsContext * wxGDIPlusRenderer::CreateContext( const wxPrinterDC& dc)
+std::unique_ptr<wxGraphicsContext> wxGDIPlusRenderer::CreateContext( const wxPrinterDC& dc)
 {
     ENSURE_LOADED_OR_RETURN(NULL);
-    wxGDIPlusContext* context = new wxGDIPlusPrintingContext(this, dc);
-    return context;
+    return std::make_unique<wxGDIPlusPrintingContext>(this, dc);
 }
 #endif
 
 #if wxUSE_ENH_METAFILE
-wxGraphicsContext * wxGDIPlusRenderer::CreateContext( const wxEnhMetaFileDC& dc)
+std::unique_ptr<wxGraphicsContext> wxGDIPlusRenderer::CreateContext( const wxEnhMetaFileDC& dc)
 {
     ENSURE_LOADED_OR_RETURN(NULL);
-    wxGDIPlusContext* context = new wxGDIPlusPrintingContext(this, dc);
+    auto context = std::make_unique<wxGDIPlusPrintingContext>(this, dc);
     return context;
 }
 #endif
 
-wxGraphicsContext * wxGDIPlusRenderer::CreateContext( const wxMemoryDC& dc)
+std::unique_ptr<wxGraphicsContext> wxGDIPlusRenderer::CreateContext( const wxMemoryDC& dc)
 {
     ENSURE_LOADED_OR_RETURN(NULL);
 #if wxUSE_WXDIB
@@ -2711,51 +2710,51 @@ wxGraphicsContext * wxGDIPlusRenderer::CreateContext( const wxMemoryDC& dc)
     }
 #endif // wxUSE_WXDIB
 
-    wxGDIPlusContext* context = new wxGDIPlusContext(this, dc);
+    auto context = std::make_unique<wxGDIPlusContext>(this, dc);
     context->EnableOffset(true);
     return context;
 }
 
 #if wxUSE_IMAGE
-wxGraphicsContext * wxGDIPlusRenderer::CreateContextFromImage(wxImage& image)
+std::unique_ptr<wxGraphicsContext> wxGDIPlusRenderer::CreateContextFromImage(wxImage& image)
 {
     ENSURE_LOADED_OR_RETURN(NULL);
-    wxGDIPlusContext* context = new wxGDIPlusImageContext(this, image);
+    auto context = std::make_unique<wxGDIPlusImageContext>(this, image);
     context->EnableOffset(true);
     return context;
 }
 
 #endif // wxUSE_IMAGE
 
-wxGraphicsContext * wxGDIPlusRenderer::CreateMeasuringContext()
+std::unique_ptr<wxGraphicsContext> wxGDIPlusRenderer::CreateMeasuringContext()
 {
     ENSURE_LOADED_OR_RETURN(NULL);
-    return new wxGDIPlusMeasuringContext(this);
+    return std::make_unique<wxGDIPlusMeasuringContext>(this);
 }
 
-wxGraphicsContext * wxGDIPlusRenderer::CreateContextFromNativeContext( void * context )
+std::unique_ptr<wxGraphicsContext> wxGDIPlusRenderer::CreateContextFromNativeContext( void * context )
 {
     ENSURE_LOADED_OR_RETURN(NULL);
-    return new wxGDIPlusContext(this,(Graphics*) context);
+    return std::make_unique<wxGDIPlusContext>(this,(Graphics*) context);
 }
 
 
-wxGraphicsContext * wxGDIPlusRenderer::CreateContextFromNativeWindow( void * window )
+std::unique_ptr<wxGraphicsContext> wxGDIPlusRenderer::CreateContextFromNativeWindow( void * window )
 {
     ENSURE_LOADED_OR_RETURN(NULL);
-    return new wxGDIPlusContext(this,(HWND) window);
+    return std::make_unique<wxGDIPlusContext>(this,(HWND) window);
 }
 
-wxGraphicsContext * wxGDIPlusRenderer::CreateContextFromNativeHDC(WXHDC dc)
+std::unique_ptr<wxGraphicsContext> wxGDIPlusRenderer::CreateContextFromNativeHDC(WXHDC dc)
 {
     ENSURE_LOADED_OR_RETURN(NULL);
-    return new wxGDIPlusContext(this, new Graphics((HDC)dc));
+    return std::make_unique<wxGDIPlusContext>(this, new Graphics((HDC)dc));
 }
 
-wxGraphicsContext * wxGDIPlusRenderer::CreateContext( wxWindow* window )
+std::unique_ptr<wxGraphicsContext> wxGDIPlusRenderer::CreateContext( wxWindow* window )
 {
     ENSURE_LOADED_OR_RETURN(NULL);
-    return new wxGDIPlusContext(this, (HWND) window->GetHWND(), window );
+    return std::make_unique<wxGDIPlusContext>(this, (HWND) window->GetHWND(), window );
 }
 
 // Path

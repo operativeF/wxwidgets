@@ -12,8 +12,10 @@
 #define _WX_EVTLOOP_H_
 
 #include "wx/event.h"
+#include "wx/utils.h"
 
-class WXDLLIMPEXP_CORE wxWindowDisabler;
+#include <memory>
+
 
 // TODO: implement wxEventLoopSource for MSW (it should wrap a HANDLE and be
 //       monitored using MsgWaitForMultipleObjects())
@@ -382,21 +384,20 @@ class WXDLLIMPEXP_CORE wxModalEventLoop : public wxGUIEventLoop
 {
 public:
     wxModalEventLoop(wxWindow *winModal)
+        : m_windowDisabler{std::make_unique<wxWindowDisabler>(winModal)}
     {
-        m_windowDisabler = new wxWindowDisabler(winModal);
     }
 
 protected:
     void OnExit() override
     {
-        delete m_windowDisabler;
-        m_windowDisabler = nullptr;
+        m_windowDisabler.reset();
 
         wxGUIEventLoop::OnExit();
     }
 
 private:
-    wxWindowDisabler *m_windowDisabler;
+    std::unique_ptr<wxWindowDisabler> m_windowDisabler;
 };
 
 #endif //wxUSE_GUI
@@ -434,11 +435,10 @@ class wxEventLoopGuarantor
 public:
     wxEventLoopGuarantor()
     {
-        m_evtLoopNew = nullptr;
         if (!wxEventLoop::GetActive())
         {
-            m_evtLoopNew = new wxEventLoop;
-            wxEventLoop::SetActive(m_evtLoopNew);
+            m_evtLoopNew = std::make_unique<wxEventLoop>();
+            wxEventLoop::SetActive(m_evtLoopNew.get());
         }
     }
 
@@ -447,12 +447,11 @@ public:
         if (m_evtLoopNew)
         {
             wxEventLoop::SetActive(nullptr);
-            delete m_evtLoopNew;
         }
     }
 
 private:
-    wxEventLoop *m_evtLoopNew;
+    std::unique_ptr<wxEventLoop> m_evtLoopNew;
 };
 
 #endif // wxUSE_GUI || wxUSE_CONSOLE_EVENTLOOP
