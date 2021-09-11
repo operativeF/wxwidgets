@@ -19,6 +19,7 @@
     #include "wx/msw/wrapcctl.h"
     #include "wx/msw/wrap/utils.h"
 
+    #include <memory>
     #include <string>
     #include <vector>
 #endif
@@ -197,10 +198,9 @@ bool wxCheckListBox::Create(wxWindow *parent, wxWindowID id,
 // --------------------
 
 // create a check list box item
-wxOwnerDrawn *wxCheckListBox::CreateLboxItem(size_t WXUNUSED(n))
+std::unique_ptr<wxOwnerDrawn> wxCheckListBox::CreateLboxItem(size_t WXUNUSED(n))
 {
-    wxCheckListBoxItem *pItem = new wxCheckListBoxItem(this);
-    return pItem;
+    return std::make_unique<wxCheckListBoxItem>(this);
 }
 
 // return item size

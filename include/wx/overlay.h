@@ -21,20 +21,23 @@
     // don't define wxHAS_NATIVE_OVERLAY
 #endif
 
+#include "wx/private/overlay.h"
+
+#include <memory>
+
 // ----------------------------------------------------------------------------
 // creates an overlay over an existing window, allowing for manipulations like
 // rubberbanding etc. This API is not stable yet, not to be used outside wx
 // internal code
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_FWD_CORE wxOverlayImpl;
 class WXDLLIMPEXP_FWD_CORE wxDC;
 
 class WXDLLIMPEXP_CORE wxOverlay
 {
 public:
     wxOverlay();
-    ~wxOverlay();
+    ~wxOverlay() = default;
 
     wxOverlay(const wxOverlay&) = delete;
     wxOverlay& operator=(const wxOverlay&) = delete;
@@ -46,7 +49,7 @@ public:
     void Reset();
 
     // returns (port-specific) implementation of the overlay
-    wxOverlayImpl *GetImpl() { return m_impl; }
+    wxOverlayImpl* GetImpl() { return m_impl.get(); }
 
 private:
     friend class WXDLLIMPEXP_FWD_CORE wxDCOverlay;
@@ -62,7 +65,7 @@ private:
 
     void Clear(wxDC* dc);
 
-    wxOverlayImpl* m_impl;
+    std::unique_ptr<wxOverlayImpl> m_impl;
 
     bool m_inDrawing{false};
 };

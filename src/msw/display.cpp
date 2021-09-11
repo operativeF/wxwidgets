@@ -260,14 +260,13 @@ private:
 // wxDisplay implementation
 // ----------------------------------------------------------------------------
 
+// TODO: Return unique_ptr
 /* static */ wxDisplayFactory *wxDisplay::CreateFactory()
 {
-    wxDisplayFactoryMSW *factoryMM = new wxDisplayFactoryMSW;
+    auto factoryMM = std::make_unique<wxDisplayFactoryMSW>();
 
     if ( factoryMM->IsOk() )
-        return factoryMM;
-
-    delete factoryMM;
+        return factoryMM.release();
 
     // fall back to a stub implementation if no multimon support (Win95?)
     return new wxDisplayFactorySingleMSW;

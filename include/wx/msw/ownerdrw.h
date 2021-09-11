@@ -15,9 +15,6 @@
 
 struct WXDLLIMPEXP_CORE wxOwnerDrawn : public wxOwnerDrawnBase
 {
-    wxOwnerDrawn() = default;
-    ~wxOwnerDrawn() = default;
-
     bool OnDrawItem(wxDC& dc, const wxRect& rc,
                             wxODAction act, wxODStatus stat) override;
 };

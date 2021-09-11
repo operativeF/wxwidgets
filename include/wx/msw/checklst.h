@@ -15,6 +15,7 @@
   #error  "wxCheckListBox class requires owner-drawn functionality."
 #endif
 
+#include <memory>
 #include <string>
 #include <vector>
 
@@ -54,7 +55,7 @@ public:
 
     // we create our items ourselves and they have non-standard size,
     // so we need to override these functions
-    wxOwnerDrawn *CreateLboxItem(size_t n) override;
+    std::unique_ptr<wxOwnerDrawn> CreateLboxItem(size_t n) override;
     bool MSWOnMeasure(WXMEASUREITEMSTRUCT *item) override;
 
 protected:

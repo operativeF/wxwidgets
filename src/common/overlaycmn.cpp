@@ -17,6 +17,10 @@
 #include "wx/private/overlay.h"
 #include "wx/dcmemory.h"
 
+#ifndef WX_PRECOMP
+    #include <memory>
+#endif
+
 // ============================================================================
 // implementation
 // ============================================================================
@@ -26,13 +30,8 @@
 // ----------------------------------------------------------------------------
 
 wxOverlay::wxOverlay()
-    : m_impl(new wxOverlayImpl)
+    : m_impl(std::make_unique<wxOverlayImpl>())
 {
-}
-
-wxOverlay::~wxOverlay()
-{
-    delete m_impl;
 }
 
 bool wxOverlay::IsOk()
@@ -64,7 +63,7 @@ void wxOverlay::Clear( wxDC* dc)
 
 void wxOverlay::Reset()
 {
-    wxASSERT_MSG(m_inDrawing==false,wxT("cannot reset overlay during drawing"));
+    wxASSERT_MSG(m_inDrawing == false, wxT("cannot reset overlay during drawing"));
     m_impl->Reset();
 }
 

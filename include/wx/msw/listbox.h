@@ -13,6 +13,7 @@
 
 #if wxUSE_LISTBOX
 
+#include <memory>
 #include <string>
 #include <string_view>
 #include <utility>
@@ -21,9 +22,9 @@
 #include <gsl/gsl>
 
 #if wxUSE_OWNER_DRAWN
-  struct WXDLLIMPEXP_FWD_CORE wxOwnerDrawn;
+  #include <wx/ownerdrw.h>
 
-  using wxListBoxItemsArray = std::vector<wxOwnerDrawn*>;
+  using wxListBoxItemsArray = std::vector<std::unique_ptr<wxOwnerDrawn>>;
 #endif // wxUSE_OWNER_DRAWN
 
 class WXDLLIMPEXP_CORE wxListBox : public wxListBoxBase
@@ -84,16 +85,16 @@ public:
     bool MSWOnDraw(WXDRAWITEMSTRUCT *item) override;
 
     // plug-in for derived classes
-    virtual wxOwnerDrawn *CreateLboxItem(size_t n);
+    virtual std::unique_ptr<wxOwnerDrawn> CreateLboxItem(size_t n);
 
     // allows to get the item and use SetXXX functions to set it's appearance
-    wxOwnerDrawn *GetItem(size_t n) const { return m_aItems[n]; }
+    wxOwnerDrawn* GetItem(size_t n) const { return m_aItems[n].get(); }
 
     // get the index of the given item
     // FIXME: Use iterators.
     gsl::index GetItemIndex(wxOwnerDrawn *item) const
     {
-        const auto index = std::distance(m_aItems.begin(), std::find(m_aItems.begin(), m_aItems.end(), item));
+        const auto index = std::distance(m_aItems.begin(), std::find_if(m_aItems.begin(), m_aItems.end(), [item](auto&& aItem){ return aItem.get() == item; }));
 
         if(std::cmp_equal(index, m_aItems.size()))
         {

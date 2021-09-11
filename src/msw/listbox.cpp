@@ -19,6 +19,8 @@
 #ifndef WX_PRECOMP
     #include "wx/msw/private.h"
 
+    #include <memory>
+
     #include <boost/nowide/convert.hpp>
     #include <boost/nowide/stackstring.hpp>
 
@@ -71,9 +73,9 @@ private:
     wxListBox *m_parent;
 };
 
-wxOwnerDrawn *wxListBox::CreateLboxItem(size_t WXUNUSED(n))
+std::unique_ptr<wxOwnerDrawn> wxListBox::CreateLboxItem(size_t WXUNUSED(n))
 {
-    return new wxListBoxItem(this);
+    return std::make_unique<wxListBoxItem>(this);
 }
 
 #endif  //USE_OWNER_DRAWN
@@ -262,7 +264,6 @@ void wxListBox::DoDeleteOneItem(unsigned int n)
 #if wxUSE_OWNER_DRAWN
     if ( HasFlag(wxLB_OWNERDRAW) )
     {
-        delete m_aItems[n];
         m_aItems.erase(m_aItems.begin() + n);
     }
 #endif // wxUSE_OWNER_DRAWN
@@ -293,7 +294,7 @@ void wxListBox::DoClear()
 #if wxUSE_OWNER_DRAWN
     if ( HasFlag(wxLB_OWNERDRAW) )
     {
-        WX_CLEAR_ARRAY(m_aItems);
+        m_aItems.clear();
     }
 #endif // wxUSE_OWNER_DRAWN
 
@@ -461,9 +462,9 @@ int wxListBox::DoInsertItems(const std::vector<std::string>& items,
 #if wxUSE_OWNER_DRAWN
         if ( HasFlag(wxLB_OWNERDRAW) )
         {
-            wxOwnerDrawn *pNewItem = CreateLboxItem(n);
+            std::unique_ptr<wxOwnerDrawn> pNewItem = CreateLboxItem(n);
             pNewItem->SetFont(GetFont());
-            m_aItems.insert(m_aItems.begin() + n, pNewItem);
+            m_aItems.insert(m_aItems.begin() + n, std::move(pNewItem));
         }
 #endif // wxUSE_OWNER_DRAWN
         AssignNewItemClientData(n, clientData, i, type);
@@ -751,7 +752,7 @@ bool wxListBox::MSWOnDraw(WXDRAWITEMSTRUCT *item)
     if ( pStruct->itemID == (UINT)-1 )
         return false;
 
-    wxOwnerDrawn *pItem = m_aItems[pStruct->itemID];
+    wxOwnerDrawn *pItem = m_aItems[pStruct->itemID].get();
 
     wxDCTemp dc((WXHDC)pStruct->hDC);
 
