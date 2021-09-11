@@ -282,7 +282,7 @@ class WXDLLIMPEXP_CORE wxMirrorDC : public wxDC
 {
 public:
     wxMirrorDC(wxDC& dc, bool mirror)
-        : wxDC(new wxMirrorDCImpl(this, *dc.GetImpl(), mirror))
+        : wxDC(std::make_unique<wxMirrorDCImpl>(this, *dc.GetImpl(), mirror))
     {
         m_mirror = mirror;
     }

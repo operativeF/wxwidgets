@@ -78,36 +78,36 @@ static wxCompositionMode TranslateRasterOp(wxRasterOperationMode function)
 wxIMPLEMENT_DYNAMIC_CLASS(wxGCDC, wxDC);
 
 wxGCDC::wxGCDC(const wxWindowDC& dc) :
-  wxDC( new wxGCDCImpl( this, dc ) )
+  wxDC(std::make_unique<wxGCDCImpl>( this, dc ))
 {
 }
 
 wxGCDC::wxGCDC( const wxMemoryDC& dc) :
-  wxDC( new wxGCDCImpl( this, dc ) )
+  wxDC(std::make_unique<wxGCDCImpl>( this, dc ))
 {
 }
 
 #if wxUSE_PRINTING_ARCHITECTURE
 wxGCDC::wxGCDC( const wxPrinterDC& dc) :
-  wxDC( new wxGCDCImpl( this, dc ) )
+  wxDC(std::make_unique<wxGCDCImpl>( this, dc ))
 {
 }
 #endif
 
 #if defined(__WXMSW__) && wxUSE_ENH_METAFILE
 wxGCDC::wxGCDC(const wxEnhMetaFileDC& dc)
-   : wxDC(new wxGCDCImpl(this, dc))
+   : wxDC(std::make_unique<wxGCDCImpl>(this, dc))
 {
 }
 #endif
 
 wxGCDC::wxGCDC(wxGraphicsContext* context) :
-    wxDC(new wxGCDCImpl(this, context))
+    wxDC(std::make_unique<wxGCDCImpl>(this, context))
 {
 }
 
 wxGCDC::wxGCDC() :
-  wxDC( new wxGCDCImpl( this ) )
+  wxDC(std::make_unique<wxGCDCImpl>( this ))
 {
 }
 

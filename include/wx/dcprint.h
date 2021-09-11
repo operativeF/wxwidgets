@@ -31,7 +31,7 @@ public:
     int GetResolution() const override;
 
 protected:
-    wxPrinterDC(wxDCImpl *impl) : wxDC(impl) { }
+    wxPrinterDC(std::unique_ptr<wxDCImpl> impl) : wxDC(std::move(impl)) { }
 
 private:
     wxDECLARE_DYNAMIC_CLASS(wxPrinterDC);

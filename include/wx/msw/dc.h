@@ -356,7 +356,7 @@ private:
 struct WXDLLIMPEXP_CORE wxDCTemp : public wxDC
 {
     wxDCTemp(WXHDC hdc, const wxSize& size = wxDefaultSize)
-        : wxDC(new wxDCTempImpl(this, hdc, size))
+        : wxDC(std::make_unique<wxDCTempImpl>(this, hdc, size))
     {
     }
 };

@@ -220,12 +220,12 @@ wxDialog *wxNativePrintFactory::CreatePrintSetupDialog( wxWindow *parent,
 #endif
 }
 
-wxDCImpl* wxNativePrintFactory::CreatePrinterDCImpl( wxPrinterDC *owner, const wxPrintData& data )
+std::unique_ptr<wxDCImpl> wxNativePrintFactory::CreatePrinterDCImpl( wxPrinterDC *owner, const wxPrintData& data )
 {
 #if defined(__WXGTK__) || defined(__WXMOTIF__) || ( defined(__WXUNIVERSAL__) && !defined(__WXMAC__) )
-    return new wxPostScriptDCImpl( owner, data );
+    return std::make_unique<wxPostScriptDCImpl>( owner, data );
 #else
-    return new wxPrinterDCImpl( owner, data );
+    return std::make_unique<wxPrinterDCImpl>( owner, data );
 #endif
 }
 

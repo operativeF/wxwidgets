@@ -331,7 +331,7 @@ public:
 wxIMPLEMENT_ABSTRACT_CLASS(wxPaintDCEx, wxPaintDC);
 
 wxPaintDCEx::wxPaintDCEx(wxWindow *window, WXHDC dc)
-           : wxPaintDC(new wxPaintDCExImpl(this, window, dc))
+           : wxPaintDC(std::make_unique<wxPaintDCExImpl>(this, window, dc))
 {
 }
 

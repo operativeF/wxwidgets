@@ -97,7 +97,7 @@ public:
     virtual wxPageSetupDialogBase *CreatePageSetupDialog( wxWindow *parent,
                                                           wxPageSetupDialogData * data = nullptr ) = 0;
 
-    virtual wxDCImpl* CreatePrinterDCImpl( wxPrinterDC *owner, const wxPrintData& data ) = 0;
+    virtual std::unique_ptr<wxDCImpl> CreatePrinterDCImpl( wxPrinterDC *owner, const wxPrintData& data ) = 0;
 
     // What to do and what to show in the wxPrintDialog
     // a) Use the generic print setup dialog or a native one?
@@ -141,7 +141,7 @@ public:
     wxPageSetupDialogBase *CreatePageSetupDialog( wxWindow *parent,
                                                           wxPageSetupDialogData * data = nullptr ) override;
 
-    wxDCImpl* CreatePrinterDCImpl( wxPrinterDC *owner, const wxPrintData& data ) override;
+    std::unique_ptr<wxDCImpl> CreatePrinterDCImpl( wxPrinterDC *owner, const wxPrintData& data ) override;
 
     bool HasPrintSetupDialog() override;
     wxDialog *CreatePrintSetupDialog( wxWindow *parent, wxPrintData *data ) override;

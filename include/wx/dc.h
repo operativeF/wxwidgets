@@ -27,6 +27,7 @@
 #include "wx/region.h"
 #include "wx/affinematrix2d.h"
 
+#include <memory>
 #include <string>
 #include <string_view>
 #include <vector>
@@ -108,15 +109,15 @@ public:
     wxDCFactory() = default;
     virtual ~wxDCFactory() = default;
 
-    virtual wxDCImpl* CreateWindowDC( wxWindowDC *owner, wxWindow *window ) = 0;
-    virtual wxDCImpl* CreateClientDC( wxClientDC *owner, wxWindow *window ) = 0;
-    virtual wxDCImpl* CreatePaintDC( wxPaintDC *owner, wxWindow *window ) = 0;
-    virtual wxDCImpl* CreateMemoryDC( wxMemoryDC *owner ) = 0;
-    virtual wxDCImpl* CreateMemoryDC( wxMemoryDC *owner, wxBitmap &bitmap ) = 0;
-    virtual wxDCImpl* CreateMemoryDC( wxMemoryDC *owner, wxDC *dc ) = 0;
-    virtual wxDCImpl* CreateScreenDC( wxScreenDC *owner ) = 0;
+    virtual std::unique_ptr<wxDCImpl> CreateWindowDC( wxWindowDC *owner, wxWindow *window ) = 0;
+    virtual std::unique_ptr<wxDCImpl> CreateClientDC( wxClientDC *owner, wxWindow *window ) = 0;
+    virtual std::unique_ptr<wxDCImpl> CreatePaintDC( wxPaintDC *owner, wxWindow *window ) = 0;
+    virtual std::unique_ptr<wxDCImpl> CreateMemoryDC( wxMemoryDC *owner ) = 0;
+    virtual std::unique_ptr<wxDCImpl> CreateMemoryDC( wxMemoryDC *owner, wxBitmap &bitmap ) = 0;
+    virtual std::unique_ptr<wxDCImpl> CreateMemoryDC( wxMemoryDC *owner, wxDC *dc ) = 0;
+    virtual std::unique_ptr<wxDCImpl> CreateScreenDC( wxScreenDC *owner ) = 0;
 #if wxUSE_PRINTING_ARCHITECTURE
-    virtual wxDCImpl* CreatePrinterDC( wxPrinterDC *owner, const wxPrintData &data  ) = 0;
+    virtual std::unique_ptr<wxDCImpl> CreatePrinterDC( wxPrinterDC *owner, const wxPrintData &data  ) = 0;
 #endif
 
     static void Set(wxDCFactory *factory);
@@ -135,15 +136,15 @@ class WXDLLIMPEXP_CORE wxNativeDCFactory: public wxDCFactory
 public:
     wxNativeDCFactory() = default;
 
-    wxDCImpl* CreateWindowDC( wxWindowDC *owner, wxWindow *window ) override;
-    wxDCImpl* CreateClientDC( wxClientDC *owner, wxWindow *window ) override;
-    wxDCImpl* CreatePaintDC( wxPaintDC *owner, wxWindow *window ) override;
-    wxDCImpl* CreateMemoryDC( wxMemoryDC *owner ) override;
-    wxDCImpl* CreateMemoryDC( wxMemoryDC *owner, wxBitmap &bitmap ) override;
-    wxDCImpl* CreateMemoryDC( wxMemoryDC *owner, wxDC *dc ) override;
-    wxDCImpl* CreateScreenDC( wxScreenDC *owner ) override;
+    std::unique_ptr<wxDCImpl> CreateWindowDC( wxWindowDC *owner, wxWindow *window ) override;
+    std::unique_ptr<wxDCImpl> CreateClientDC( wxClientDC *owner, wxWindow *window ) override;
+    std::unique_ptr<wxDCImpl> CreatePaintDC( wxPaintDC *owner, wxWindow *window ) override;
+    std::unique_ptr<wxDCImpl> CreateMemoryDC( wxMemoryDC *owner ) override;
+    std::unique_ptr<wxDCImpl> CreateMemoryDC( wxMemoryDC *owner, wxBitmap &bitmap ) override;
+    std::unique_ptr<wxDCImpl> CreateMemoryDC( wxMemoryDC *owner, wxDC *dc ) override;
+    std::unique_ptr<wxDCImpl> CreateScreenDC( wxScreenDC *owner ) override;
 #if wxUSE_PRINTING_ARCHITECTURE
-    wxDCImpl* CreatePrinterDC( wxPrinterDC *owner, const wxPrintData &data  ) override;
+    std::unique_ptr<wxDCImpl> CreatePrinterDC( wxPrinterDC *owner, const wxPrintData &data  ) override;
 #endif
 };
 
@@ -648,7 +649,7 @@ public:
     // copy attributes (font, colours and writing direction) from another DC
     void CopyAttributes(const wxDC& dc);
 
-    ~wxDC() { delete m_pimpl; }
+    ~wxDC() = default;
 
     wxDC(const wxDC&) = delete;
     wxDC& operator=(const wxDC&) = delete;
@@ -656,9 +657,9 @@ public:
     wxDC& operator=(wxDC&&) = default;
 
     wxDCImpl *GetImpl()
-        { return m_pimpl; }
+        { return m_pimpl.get(); }
     const wxDCImpl *GetImpl() const
-        { return m_pimpl; }
+        { return m_pimpl.get(); }
 
     wxWindow *GetWindow() const
         { return m_pimpl->GetWindow(); }
@@ -1226,10 +1227,9 @@ public:
 #endif
 
 protected:
-    // ctor takes ownership of the pointer
-    wxDC(wxDCImpl *pimpl) : m_pimpl(pimpl) { }
+    wxDC(std::unique_ptr<wxDCImpl> pimpl) : m_pimpl(std::move(pimpl)) { }
 
-    wxDCImpl * const m_pimpl;
+    std::unique_ptr<wxDCImpl> m_pimpl;
 
     void SetWindow(wxWindow* w)
         { return m_pimpl->SetWindow(w); }

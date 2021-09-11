@@ -21,7 +21,7 @@ public:
     wxWindowDC(wxWindow *win);
 
 protected:
-    wxWindowDC(wxDCImpl *impl) : wxDC(impl) { }
+    wxWindowDC(std::unique_ptr<wxDCImpl> impl) : wxDC(std::move(impl)) { }
 
 private:
     wxDECLARE_ABSTRACT_CLASS(wxWindowDC);
@@ -37,7 +37,7 @@ public:
     wxClientDC(wxWindow *win);
 
 protected:
-    wxClientDC(wxDCImpl *impl) : wxWindowDC(impl) { }
+    wxClientDC(std::unique_ptr<wxDCImpl> impl) : wxWindowDC(std::move(impl)) { }
 
 private:
     wxDECLARE_ABSTRACT_CLASS(wxClientDC);
@@ -53,7 +53,7 @@ public:
     wxPaintDC(wxWindow *win);
 
 protected:
-    wxPaintDC(wxDCImpl *impl) : wxClientDC(impl) { }
+    wxPaintDC(std::unique_ptr<wxDCImpl> impl) : wxClientDC(std::move(impl)) { }
 
 private:
     wxDECLARE_ABSTRACT_CLASS(wxPaintDC);

@@ -72,7 +72,7 @@ WXHDC WXDLLIMPEXP_CORE wxGetPrinterDC(const wxPrintData& data);
 struct WXDLLIMPEXP_CORE wxPrinterDCFromHDC: public wxPrinterDC
 {
     wxPrinterDCFromHDC( WXHDC theDC )
-        : wxPrinterDC(new wxPrinterDCImpl(this, theDC))
+        : wxPrinterDC(std::make_unique<wxPrinterDCImpl>(this, theDC))
     {
     }
 };

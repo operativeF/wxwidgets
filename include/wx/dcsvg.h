@@ -315,7 +315,7 @@ public:
                 int height = 240,
                 double dpi = 72.0,
                 const std::string& title = {})
-        : wxDC(new wxSVGFileDCImpl(this, filename, width, height, dpi, title))
+        : wxDC(std::make_unique<wxSVGFileDCImpl>(this, filename, width, height, dpi, title))
     {
     }
 

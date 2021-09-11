@@ -112,33 +112,33 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxDCFactoryCleanupModule, wxModule);
 // wxNativeDCFactory
 //-----------------------------------------------------------------------------
 
-wxDCImpl* wxNativeDCFactory::CreateWindowDC( wxWindowDC *owner, wxWindow *window )
+std::unique_ptr<wxDCImpl> wxNativeDCFactory::CreateWindowDC( wxWindowDC *owner, wxWindow *window )
 {
-    wxDCImpl * const impl = new wxWindowDCImpl( owner, window );
+    auto impl = std::make_unique<wxWindowDCImpl>( owner, window );
     impl->InheritAttributes(window);
     return impl;
 }
 
-wxDCImpl* wxNativeDCFactory::CreateClientDC( wxClientDC *owner, wxWindow *window )
+std::unique_ptr<wxDCImpl> wxNativeDCFactory::CreateClientDC( wxClientDC *owner, wxWindow *window )
 {
-    wxDCImpl * const impl = new wxClientDCImpl( owner, window );
+    auto impl = std::make_unique<wxClientDCImpl>( owner, window );
     impl->InheritAttributes(window);
     return impl;
 }
 
-wxDCImpl* wxNativeDCFactory::CreatePaintDC( wxPaintDC *owner, wxWindow *window )
+std::unique_ptr<wxDCImpl> wxNativeDCFactory::CreatePaintDC( wxPaintDC *owner, wxWindow *window )
 {
-    wxDCImpl * const impl = new wxPaintDCImpl( owner, window );
+    auto impl = std::make_unique<wxPaintDCImpl>( owner, window );
     impl->InheritAttributes(window);
     return impl;
 }
 
-wxDCImpl* wxNativeDCFactory::CreateMemoryDC( wxMemoryDC *owner )
+std::unique_ptr<wxDCImpl> wxNativeDCFactory::CreateMemoryDC( wxMemoryDC *owner )
 {
-    return new wxMemoryDCImpl( owner );
+    return std::make_unique<wxMemoryDCImpl>( owner );
 }
 
-wxDCImpl* wxNativeDCFactory::CreateMemoryDC(wxMemoryDC *owner, wxBitmap& bitmap)
+std::unique_ptr<wxDCImpl> wxNativeDCFactory::CreateMemoryDC(wxMemoryDC *owner, wxBitmap& bitmap)
 {
     // the bitmap may be modified when it's selected into a memory DC so make
     // sure changing this bitmap doesn't affect any other shallow copies of it
@@ -150,21 +150,21 @@ wxDCImpl* wxNativeDCFactory::CreateMemoryDC(wxMemoryDC *owner, wxBitmap& bitmap)
     if ( bitmap.IsOk() )
         bitmap.UnShare();
 
-    return new wxMemoryDCImpl(owner, bitmap);
+    return std::make_unique<wxMemoryDCImpl>(owner, bitmap);
 }
 
-wxDCImpl* wxNativeDCFactory::CreateMemoryDC( wxMemoryDC *owner, wxDC *dc )
+std::unique_ptr<wxDCImpl> wxNativeDCFactory::CreateMemoryDC( wxMemoryDC *owner, wxDC *dc )
 {
-    return new wxMemoryDCImpl( owner, dc );
+    return std::make_unique<wxMemoryDCImpl>( owner, dc );
 }
 
-wxDCImpl* wxNativeDCFactory::CreateScreenDC( wxScreenDC *owner )
+std::unique_ptr<wxDCImpl> wxNativeDCFactory::CreateScreenDC( wxScreenDC *owner )
 {
-    return new wxScreenDCImpl( owner );
+    return std::make_unique<wxScreenDCImpl>( owner );
 }
 
 #if wxUSE_PRINTING_ARCHITECTURE
-wxDCImpl *wxNativeDCFactory::CreatePrinterDC( wxPrinterDC *owner, const wxPrintData &data )
+std::unique_ptr<wxDCImpl> wxNativeDCFactory::CreatePrinterDC( wxPrinterDC *owner, const wxPrintData &data )
 {
     wxPrintFactory *factory = wxPrintFactory::GetFactory();
     return factory->CreatePrinterDCImpl( owner, data );
