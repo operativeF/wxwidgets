@@ -138,21 +138,21 @@ TEST_CASE_FIXTURE(WindowTestCase, "Window::Mouse")
 #if wxUSE_CARET
     CHECK(!m_window->GetCaret());
 
-    wxCaret* caret = nullptr;
+    std::unique_ptr<wxCaret> caret;
 
     // Try creating the caret in two different, but normally equivalent, ways.
     SUBCASE("Caret 1-step")
     {
-        caret = new wxCaret(m_window, 16, 16);
+        caret = std::make_unique<wxCaret>(m_window, 16, 16);
     }
 
     SUBCASE("Caret 2-step")
     {
-        caret = new wxCaret();
+        caret = std::make_unique<wxCaret>();
         caret->Create(m_window, 16, 16);
     }
 
-    m_window->SetCaret(caret);
+    m_window->SetCaret(std::move(caret));
 
     CHECK(m_window->GetCaret()->IsOk());
 #endif

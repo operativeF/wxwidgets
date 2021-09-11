@@ -43,6 +43,7 @@
     #endif
 
     #include <algorithm>
+    #include <memory>
     #include <string>
     #include <vector>
     #include <utility>
@@ -629,10 +630,11 @@ static long wxDoExecuteWithCapture(const wxString& command,
                                    const wxExecuteEnv *env)
 {
     // create a wxProcess which will capture the output
-    wxProcess *process = new wxProcess;
+    auto process = std::make_unique<wxProcess>();
+
     process->Redirect();
 
-    long rc = wxExecute(command, wxEXEC_SYNC | flags, process, env);
+    long rc = wxExecute(command, wxEXEC_SYNC | flags, process.get(), env);
 
 #if wxUSE_STREAMS
     // Notice that while -1 indicates an error exit code for us, a program
@@ -650,8 +652,6 @@ static long wxDoExecuteWithCapture(const wxString& command,
     wxUnusedVar(output);
     wxUnusedVar(error);
 #endif // wxUSE_STREAMS/!wxUSE_STREAMS
-
-    delete process;
 
     return rc;
 }

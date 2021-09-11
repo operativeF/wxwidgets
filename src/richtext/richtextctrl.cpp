@@ -288,9 +288,9 @@ bool wxRichTextCtrl::Create( wxWindow* parent, wxWindowID id, const std::string&
     GetBuffer().SetRichTextCtrl(this);
 
 #if wxRICHTEXT_USE_OWN_CARET
-    SetCaret(new wxRichTextCaret(this, wxRICHTEXT_DEFAULT_CARET_WIDTH, 16));
+    SetCaret(std::make_unique<wxRichTextCaret>(this, wxRICHTEXT_DEFAULT_CARET_WIDTH, 16));
 #else
-    SetCaret(new wxCaret(this, wxRICHTEXT_DEFAULT_CARET_WIDTH, 16));
+    SetCaret(std::make_unique<wxCaret>(this, wxRICHTEXT_DEFAULT_CARET_WIDTH, 16));
 #endif
 
     // Tell the sizers to use the given or best size

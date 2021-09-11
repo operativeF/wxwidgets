@@ -33,15 +33,6 @@ class WXDLLIMPEXP_FWD_CORE wxMDIClientWindow;
 class WXDLLIMPEXP_CORE wxMDIParentFrameBase : public wxFrame
 {
 public:
-    wxMDIParentFrameBase()
-    {
-        m_clientWindow = nullptr;
-        m_currentChild = nullptr;
-#if wxUSE_MENUS
-        m_windowMenu = nullptr;
-#endif // wxUSE_MENUS
-    }
-
     /*
         Derived classes should provide ctor and Create() with the following
         declaration:
@@ -54,13 +45,6 @@ public:
                 long style = wxDEFAULT_FRAME_STYLE | wxVSCROLL | wxHSCROLL,
                 const std::string& name = wxFrameNameStr);
      */
-
-#if wxUSE_MENUS
-    ~wxMDIParentFrameBase()
-    {
-        delete m_windowMenu;
-    }
-#endif // wxUSE_MENUS
 
     // Get or change the active MDI child window
     virtual wxMDIChildFrame *GetActiveChild() const
@@ -79,17 +63,17 @@ public:
 #if wxUSE_MENUS
     // return the pointer to the current window menu or NULL if we don't have
     // because of wxFRAME_NO_WINDOW_MENU style
-    wxMenu* GetWindowMenu() const { return m_windowMenu; }
+    wxMenu* GetWindowMenu() const { return m_windowMenu.get(); }
 
     // use the given menu instead of the default window menu
     //
     // menu can be NULL to disable the window menu completely
-    virtual void SetWindowMenu(wxMenu *menu)
+    virtual void SetWindowMenu(wxMenu* menu)
     {
-        if ( menu != m_windowMenu )
+        if ( menu != m_windowMenu.get() )
         {
-            delete m_windowMenu;
-            m_windowMenu = menu;
+            m_windowMenu.reset(menu);
+
         }
     }
 #endif // wxUSE_MENUS
@@ -129,12 +113,12 @@ protected:
     // the generic MDI version which has its own wxGenericMDIClientWindow and
     // so we store it as just a base class pointer because we don't need its
     // exact type anyhow
-    wxMDIClientWindowBase *m_clientWindow;
-    wxMDIChildFrame *m_currentChild;
+    wxMDIClientWindowBase *m_clientWindow{nullptr};
+    wxMDIChildFrame *m_currentChild{nullptr};
 
 #if wxUSE_MENUS
     // the current window menu or NULL if we are not using it
-    wxMenu *m_windowMenu;
+    std::unique_ptr<wxMenu> m_windowMenu;
 #endif // wxUSE_MENUS
 };
 
@@ -145,8 +129,6 @@ protected:
 class WXDLLIMPEXP_CORE wxMDIChildFrameBase : public wxFrame
 {
 public:
-    wxMDIChildFrameBase() { m_mdiParent = nullptr; }
-
     /*
         Derived classes should provide Create() with the following signature:
 
@@ -203,7 +185,7 @@ public:
     void Raise() override { Activate(); }
 
 protected:
-    wxMDIParentFrame *m_mdiParent;
+    wxMDIParentFrame *m_mdiParent{nullptr};
 };
 
 // ----------------------------------------------------------------------------

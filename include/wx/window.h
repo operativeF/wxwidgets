@@ -1180,9 +1180,9 @@ public:
 
 #if wxUSE_CARET
         // associate a caret with the window
-    void SetCaret(wxCaret *caret);
+    void SetCaret(std::unique_ptr<wxCaret> caret);
         // get the current caret (may be NULL)
-    wxCaret *GetCaret() const { return m_caret; }
+    wxCaret* GetCaret() const { return m_caret.get(); }
 #endif // wxUSE_CARET
 
         // get the (average) character size for the current font
@@ -1662,7 +1662,7 @@ protected:
                          m_foregroundColour;    //     m_hasFgCol
 
 #if wxUSE_CARET
-    wxCaret             *m_caret;
+    std::unique_ptr<wxCaret> m_caret;
 #endif // wxUSE_CARET
 
     // the region which should be repainted in response to paint event

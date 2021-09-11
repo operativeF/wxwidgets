@@ -17,16 +17,6 @@
 #include "wx/gauge.h"
 #include "wx/appprogress.h"
 
-// ============================================================================
-// implementation
-// ============================================================================
-
-wxGaugeBase::~wxGaugeBase()
-{
-    // this destructor is required for Darwin
-    delete m_appProgressIndicator;
-}
-
 // ----------------------------------------------------------------------------
 // XTI
 // ----------------------------------------------------------------------------
@@ -90,14 +80,13 @@ wxCONSTRUCTOR_6( wxGauge, wxWindow*, Parent, wxWindowID, Id, int, Range, \
 
 void wxGaugeBase::InitProgressIndicatorIfNeeded()
 {
-    m_appProgressIndicator = nullptr;
     if ( HasFlag(wxGA_PROGRESS) )
     {
         wxWindow* topParent = wxGetTopLevelParent(this);
         if ( topParent != nullptr )
         {
-            m_appProgressIndicator =
-                new wxAppProgressIndicator(topParent, GetRange());
+            m_appProgressIndicator = std::make_unique<wxAppProgressIndicator>
+                                                        (topParent, GetRange());
         }
     }
 }
@@ -156,6 +145,7 @@ void wxGaugeBase::SetValue(int pos)
     if ( m_appProgressIndicator )
     {
         m_appProgressIndicator->SetValue(pos);
+
         if ( pos == 0 )
         {
             m_appProgressIndicator->Reset();

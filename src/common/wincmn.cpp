@@ -446,10 +446,6 @@ wxWindowBase::~wxWindowBase()
     if ( m_parent )
         m_parent->RemoveChild(this);
 
-#if wxUSE_CARET
-    delete m_caret;
-#endif // wxUSE_CARET
-
 #if wxUSE_VALIDATORS
     delete m_windowValidator;
 #endif // wxUSE_VALIDATORS
@@ -1727,10 +1723,9 @@ wxWindow *wxWindowBase::GetAncestorWithCustomPalette() const
 #endif // wxUSE_PALETTE
 
 #if wxUSE_CARET
-void wxWindowBase::SetCaret(wxCaret *caret)
+void wxWindowBase::SetCaret(std::unique_ptr<wxCaret> caret)
 {
-    delete m_caret;
-    m_caret = caret;
+    m_caret = std::move(caret);
 
     if ( m_caret )
     {

@@ -15,8 +15,10 @@
 
 #if wxUSE_GAUGE
 
+#include "wx/appprogress.h"
 #include "wx/control.h"
 
+#include <memory>
 #include <string>
 
 // ----------------------------------------------------------------------------
@@ -44,8 +46,6 @@ inline constexpr int wxGA_TEXT = 0x0040;
 
 inline constexpr char wxGaugeNameStr[] = "gauge";
 
-class WXDLLIMPEXP_FWD_CORE wxAppProgressIndicator;
-
 // ----------------------------------------------------------------------------
 // wxGauge: a progress bar
 // ----------------------------------------------------------------------------
@@ -57,9 +57,9 @@ public:
 #if wxGAUGE_EMULATE_INDETERMINATE_MODE
         m_nDirection(wxRIGHT),
 #endif
-        m_appProgressIndicator(nullptr) { }
+        m_appProgressIndicator{nullptr} { }
 
-    ~wxGaugeBase();
+    ~wxGaugeBase() = default;
 
     wxGaugeBase(const wxGaugeBase&) = delete;
     wxGaugeBase& operator=(const wxGaugeBase&) = delete;
@@ -102,7 +102,6 @@ protected:
     // already does it, after initializing the window style and range.
     void InitProgressIndicatorIfNeeded();
 
-
     // the max position
     int m_rangeMax;
 
@@ -114,7 +113,7 @@ protected:
     int m_nDirection{wxRIGHT};       // can be wxRIGHT or wxLEFT
 #endif
 
-    wxAppProgressIndicator *m_appProgressIndicator;
+    std::unique_ptr<wxAppProgressIndicator> m_appProgressIndicator;
 };
 
 #if defined(__WXUNIVERSAL__)

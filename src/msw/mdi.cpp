@@ -153,7 +153,7 @@ bool wxMDIParentFrame::Create(wxWindow *parent,
   if ( !(style & wxFRAME_NO_WINDOW_MENU) )
   {
       // normal case: we have the window menu, so construct it
-      m_windowMenu = new wxMenu;
+      m_windowMenu = std::make_unique<wxMenu>();
 
       m_windowMenu->Append(wxID_MDI_WINDOW_CASCADE, _("&Cascade"));
       m_windowMenu->Append(wxID_MDI_WINDOW_TILE_HORZ, _("Tile &Horizontally"));
@@ -357,7 +357,7 @@ void wxMDIParentFrame::InternalSetMenuBar()
 
 void wxMDIParentFrame::SetWindowMenu(wxMenu* menu)
 {
-    if ( menu != m_windowMenu )
+    if ( menu != m_windowMenu.get() )
     {
         // We may not be showing the window menu currently if we don't have any
         // children, and in this case we shouldn't remove/add it back right now.
@@ -366,9 +366,7 @@ void wxMDIParentFrame::SetWindowMenu(wxMenu* menu)
         if ( hasWindowMenu )
             RemoveWindowMenu();
 
-        delete m_windowMenu;
-
-        m_windowMenu = menu;
+        m_windowMenu.reset(menu);
 
         if ( hasWindowMenu )
             AddWindowMenu();
@@ -437,8 +435,8 @@ wxMenu* wxMDIParentFrame::MSWFindMenuFromHMENU(WXHMENU hMenu)
     if ( !menu )
         menu = wxFrame::MSWFindMenuFromHMENU(hMenu);
 
-    if ( !menu && m_windowMenu && GetHmenuOf(m_windowMenu) == hMenu )
-        menu = m_windowMenu;
+    if ( !menu && m_windowMenu && GetHmenuOf(m_windowMenu.get()) == hMenu )
+        menu = m_windowMenu.get();
 
     return menu;
 }
