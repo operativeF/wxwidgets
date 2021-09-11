@@ -20,6 +20,7 @@
 #include "wx/string.h"
 #include "wx/frame.h"
 #include "wx/filehistory.h"
+#include "wx/cmdproc.h"
 
 
 #if wxUSE_PRINTING_ARCHITECTURE
@@ -27,6 +28,7 @@
 #endif
 
 #include <iosfwd>
+#include <memory>
 #include <string>
 #include <vector>
 
@@ -36,7 +38,6 @@ class WXDLLIMPEXP_FWD_CORE wxView;
 class WXDLLIMPEXP_FWD_CORE wxDocTemplate;
 class WXDLLIMPEXP_FWD_CORE wxDocManager;
 class WXDLLIMPEXP_FWD_CORE wxPrintInfo;
-class WXDLLIMPEXP_FWD_CORE wxCommandProcessor;
 class WXDLLIMPEXP_FWD_BASE wxConfigBase;
 
 class wxDocChildFrameAnyBase;
@@ -125,11 +126,11 @@ public:
     virtual bool OnCreate(const std::string& path, long flags);
 
     // By default, creates a base wxCommandProcessor.
-    virtual wxCommandProcessor *OnCreateCommandProcessor();
-    virtual wxCommandProcessor *GetCommandProcessor() const
-        { return m_commandProcessor; }
-    virtual void SetCommandProcessor(wxCommandProcessor *proc)
-        { m_commandProcessor = proc; }
+    virtual std::unique_ptr<wxCommandProcessor> OnCreateCommandProcessor();
+    virtual wxCommandProcessor* GetCommandProcessor() const
+        { return m_commandProcessor.get(); }
+    virtual void SetCommandProcessor(std::unique_ptr<wxCommandProcessor> proc)
+        { m_commandProcessor = std::move(proc); }
 
     // Called after a view is added or removed. The default implementation
     // deletes the document if this is there are no more views.
@@ -192,7 +193,7 @@ protected:
     // independently of its parent and is always closed when its parent is
     wxDocument*           m_documentParent;
 
-    wxCommandProcessor*   m_commandProcessor{nullptr};
+    std::unique_ptr<wxCommandProcessor>   m_commandProcessor;
     bool                  m_savedYet{false};
 
     // Called by OnSaveDocument and OnOpenDocument to implement standard

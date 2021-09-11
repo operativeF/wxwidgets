@@ -115,13 +115,13 @@ public:
     // Don't supply origin and extent
     // Supply them to wxMakeMetaFilePlaceable instead.
     wxMetafileDC(const std::string& file)
-        : wxDC(new wxMetafileDCImpl( this, file ))
+        : wxDC(std::make_unique<wxMetafileDCImpl>( this, file ))
         { }
 
     // Supply origin and extent (recommended).
     // Then don't need to supply them to wxMakeMetaFilePlaceable.
     wxMetafileDC(const std::string& file, int xext, int yext, int xorg, int yorg)
-        : wxDC(new wxMetafileDCImpl( this, file, xext, yext, xorg, yorg ))
+        : wxDC(std::make_unique<wxMetafileDCImpl>( this, file, xext, yext, xorg, yorg ))
         { }
 
    wxMetafileDC(const wxMetafileDC&) = delete;
@@ -130,10 +130,10 @@ public:
    wxMetafileDC& operator=(wxMetafileDC&&) = default;
 
     wxMetafile *GetMetafile() const
-       { return ((wxMetafileDCImpl*)m_pimpl)->GetMetaFile(); }
+       { return ((wxMetafileDCImpl*)m_pimpl.get())->GetMetaFile(); }
 
     wxMetafile *Close()
-       { return ((wxMetafileDCImpl*)m_pimpl)->Close(); }
+       { return ((wxMetafileDCImpl*)m_pimpl.get())->Close(); }
 
 private:
     wxDECLARE_CLASS(wxMetafileDC);

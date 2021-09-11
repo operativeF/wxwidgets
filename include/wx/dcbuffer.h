@@ -14,6 +14,8 @@
 #include "wx/dcmemory.h"
 #include "wx/dcclient.h"
 
+#include <memory>
+
 class WXDLLIMPEXP_CORE wxWindow;
 
 // Split platforms into two groups - those which have well-working
@@ -247,12 +249,12 @@ public:
 // Check if the window is natively double buffered and will return a wxPaintDC
 // if it is, a wxBufferedPaintDC otherwise.  It is the caller's responsibility
 // to delete the wxDC pointer when finished with it.
-inline wxDC* wxAutoBufferedPaintDCFactory(wxWindow* window)
+inline std::unique_ptr<wxDC> wxAutoBufferedPaintDCFactory(wxWindow* window)
 {
     if ( window->IsDoubleBuffered() )
-        return new wxPaintDC(window);
+        return std::make_unique<wxPaintDC>(window);
     else
-        return new wxBufferedPaintDC(window);
+        return std::make_unique<wxBufferedPaintDC>(window);
 }
 
 #endif  // _WX_DCBUFFER_H_

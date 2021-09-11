@@ -31,6 +31,7 @@
 
 #ifndef WX_PRECOMP
     #include <iostream>
+    #include <memory>
     #include <vector>
 
     #include <gsl/gsl>
@@ -110,8 +111,6 @@ bool wxDocument::DeleteContents()
 
 wxDocument::~wxDocument()
 {
-    delete m_commandProcessor;
-
     if (GetDocumentManager())
         GetDocumentManager()->RemoveDocument(this);
 
@@ -461,9 +460,9 @@ wxWindow *wxDocument::GetDocumentWindow() const
     return view ? view->GetFrame() : wxTheApp->GetTopWindow();
 }
 
-wxCommandProcessor *wxDocument::OnCreateCommandProcessor()
+std::unique_ptr<wxCommandProcessor> wxDocument::OnCreateCommandProcessor()
 {
-    return new wxCommandProcessor;
+    return std::make_unique<wxCommandProcessor>();
 }
 
 // true if safe to close

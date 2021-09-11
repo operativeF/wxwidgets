@@ -18,6 +18,7 @@
 #include "wx/pickerbase.h"
 #include "wx/filename.h"
 
+#include <memory>
 #include <string>
 
 class WXDLLIMPEXP_FWD_CORE wxDialog;
@@ -200,7 +201,7 @@ public:        // internal functions
 protected:
     // creates the picker control
     virtual
-    wxFileDirPickerWidgetBase *CreatePicker(wxWindow *parent,
+    std::unique_ptr<wxFileDirPickerWidgetBase> CreatePicker(wxWindow *parent,
                                             const std::string& path,
                                             const std::string& message,
                                             const std::string& wildcard) = 0;
@@ -208,7 +209,7 @@ protected:
 protected:
 
     // m_picker object as wxFileDirPickerWidgetBase interface
-    wxFileDirPickerWidgetBase *m_pickerIface{nullptr};
+    std::unique_ptr<wxFileDirPickerWidgetBase> m_pickerIface;
 };
 
 #endif  // wxUSE_FILEPICKERCTRL || wxUSE_DIRPICKERCTRL
@@ -288,12 +289,12 @@ public:     // overrides
 
 protected:
     
-    wxFileDirPickerWidgetBase *CreatePicker(wxWindow *parent,
+    std::unique_ptr<wxFileDirPickerWidgetBase> CreatePicker(wxWindow *parent,
                                             const std::string& path,
                                             const std::string& message,
                                             const std::string& wildcard) override
     {
-        return new wxFilePickerWidget(parent, wxID_ANY,
+        return std::make_unique<wxFilePickerWidget>(parent, wxID_ANY,
                                       wxGetTranslation(wxFilePickerWidgetLabel).ToStdString(),
                                       path, message, wildcard,
                                       wxDefaultPosition, wxDefaultSize,
@@ -387,12 +388,12 @@ public:     // overrides
 
 protected:
     
-    wxFileDirPickerWidgetBase *CreatePicker(wxWindow *parent,
+    std::unique_ptr<wxFileDirPickerWidgetBase> CreatePicker(wxWindow *parent,
                                             const std::string& path,
                                             const std::string& message,
                                             const std::string& WXUNUSED(wildcard)) override
     {
-        return new wxDirPickerWidget(parent, wxID_ANY,
+        return std::make_unique<wxDirPickerWidget>(parent, wxID_ANY,
                                      wxGetTranslation(wxDirPickerWidgetLabel),
                                      path, message,
                                      wxDefaultPosition, wxDefaultSize,
