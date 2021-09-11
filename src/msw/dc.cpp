@@ -891,9 +891,7 @@ void wxMSWDCImpl::DoDrawArc(wxCoord x1, wxCoord y1,
                      wxCoord x2, wxCoord y2,
                      wxCoord xc, wxCoord yc)
 {
-    double dx = xc - x1;
-    double dy = yc - y1;
-    wxCoord r = (wxCoord)std::hypot(dx, dy);
+    wxCoord r = (wxCoord)std::hypot(xc - x1, yc - y1);
 
 
     wxBrushAttrsSetter cc(*this); // needed for wxBrushStyle::StippleMaskOpaque handling
@@ -911,9 +909,8 @@ void wxMSWDCImpl::DoDrawArc(wxCoord x1, wxCoord y1,
     wxCoord yy2 = YLOG2DEV(y2);
     wxCoord xxc = XLOG2DEV(xc);
     wxCoord yyc = YLOG2DEV(yc);
-    dx = xxc - xx1;
-    dy = yyc - yy1;
-    wxCoord ray = (wxCoord)std::hypot(dx, dy);
+
+    wxCoord ray = (wxCoord)std::hypot(xxc - xx1, yyc - yy1);
 
     wxCoord xxx1 = (wxCoord) (xxc-ray);
     wxCoord yyy1 = (wxCoord) (yyc-ray);
@@ -927,11 +924,11 @@ void wxMSWDCImpl::DoDrawArc(wxCoord x1, wxCoord y1,
         // Unfortunately this is not a reliable method, depends
         // on the size of shape.
         // TODO: figure out why this happens!
-        Pie(GetHdc(),xxx1,yyy1,xxx2+1,yyy2+1, xx1,yy1,xx2,yy2);
+        ::Pie(GetHdc(), xxx1, yyy1, xxx2 + 1, yyy2 + 1, xx1, yy1, xx2, yy2);
     }
     else
     {
-        Arc(GetHdc(),xxx1,yyy1,xxx2,yyy2, xx1,yy1,xx2,yy2);
+        ::Arc(GetHdc(), xxx1, yyy1, xxx2, yyy2, xx1, yy1, xx2, yy2);
     }
 
     CalcBoundingBox(xc - r, yc - r);
@@ -946,7 +943,7 @@ void wxMSWDCImpl::DoDrawPoint(wxCoord x, wxCoord y)
         color = m_pen.GetColour().GetPixel();
     }
 
-    SetPixel(GetHdc(), XLOG2DEV(x), YLOG2DEV(y), color);
+    ::SetPixel(GetHdc(), XLOG2DEV(x), YLOG2DEV(y), color);
 
     CalcBoundingBox(x, y);
 }
@@ -971,18 +968,21 @@ void wxMSWDCImpl::DoDrawPolygon(int n,
 
             CalcBoundingBox(cpoints[i].x, cpoints[i].y);
         }
-        int prev = SetPolyFillMode(GetHdc(),fillStyle==wxODDEVEN_RULE?ALTERNATE:WINDING);
-        Polygon(GetHdc(), cpoints.data(), n);
-        SetPolyFillMode(GetHdc(),prev);
+
+        int prev = ::SetPolyFillMode(GetHdc(),fillStyle==wxODDEVEN_RULE?ALTERNATE:WINDING);
+
+        ::Polygon(GetHdc(), cpoints.data(), n);
+
+        ::SetPolyFillMode(GetHdc(),prev);
     }
     else
     {
         for (int i = 0; i < n; i++)
             CalcBoundingBox(points[i].x, points[i].y);
 
-        int prev = SetPolyFillMode(GetHdc(),fillStyle==wxODDEVEN_RULE?ALTERNATE:WINDING);
-        Polygon(GetHdc(), reinterpret_cast<const POINT*>(points), n);
-        SetPolyFillMode(GetHdc(),prev);
+        int prev = ::SetPolyFillMode(GetHdc(),fillStyle==wxODDEVEN_RULE?ALTERNATE:WINDING);
+        ::Polygon(GetHdc(), reinterpret_cast<const POINT*>(points), n);
+        ::SetPolyFillMode(GetHdc(),prev);
     }
 }
 
@@ -1013,18 +1013,18 @@ wxMSWDCImpl::DoDrawPolyPolygon(int n,
             CalcBoundingBox(cpoints[i].x, cpoints[i].y);
         }
 
-        int prev = SetPolyFillMode(GetHdc(),fillStyle==wxODDEVEN_RULE?ALTERNATE:WINDING);
-        PolyPolygon(GetHdc(), cpoints.data(), count, n);
-        SetPolyFillMode(GetHdc(),prev);
+        int prev = ::SetPolyFillMode(GetHdc(),fillStyle==wxODDEVEN_RULE?ALTERNATE:WINDING);
+        ::PolyPolygon(GetHdc(), cpoints.data(), count, n);
+        ::SetPolyFillMode(GetHdc(),prev);
     }
     else
     {
         for (int i = 0; i < cnt; i++)
             CalcBoundingBox(points[i].x, points[i].y);
 
-        int prev = SetPolyFillMode(GetHdc(),fillStyle==wxODDEVEN_RULE?ALTERNATE:WINDING);
-        PolyPolygon(GetHdc(), reinterpret_cast<const POINT*>(points), count, n);
-        SetPolyFillMode(GetHdc(),prev);
+        int prev = ::SetPolyFillMode(GetHdc(),fillStyle==wxODDEVEN_RULE?ALTERNATE:WINDING);
+        ::PolyPolygon(GetHdc(), reinterpret_cast<const POINT*>(points), count, n);
+        ::SetPolyFillMode(GetHdc(),prev);
     }
 }
 
@@ -1043,14 +1043,14 @@ void wxMSWDCImpl::DoDrawLines(int n, const wxPoint points[], wxCoord xoffset, wx
             CalcBoundingBox(cpoints[i].x, cpoints[i].y);
         }
 
-        Polyline(GetHdc(), cpoints.data(), n);
+        ::Polyline(GetHdc(), cpoints.data(), n);
     }
     else
     {
         for (int i = 0; i < n; i++)
             CalcBoundingBox(points[i].x, points[i].y);
 
-        Polyline(GetHdc(), reinterpret_cast<const POINT*>(points), n);
+        ::Polyline(GetHdc(), reinterpret_cast<const POINT*>(points), n);
     }
 }
 
@@ -1081,7 +1081,7 @@ void wxMSWDCImpl::DoDrawRectangle(wxCoord x, wxCoord y, wxCoord width, wxCoord h
         y2dev++;
     }
 
-    Rectangle(GetHdc(), x1dev, y1dev, x2dev, y2dev);
+    ::Rectangle(GetHdc(), x1dev, y1dev, x2dev, y2dev);
 
     CalcBoundingBox(x, y);
     CalcBoundingBox(x2, y2);
@@ -1112,7 +1112,7 @@ void wxMSWDCImpl::DoDrawRoundedRectangle(wxCoord x, wxCoord y, wxCoord width, wx
         y2++;
     }
 
-    RoundRect(GetHdc(), XLOG2DEV(x), YLOG2DEV(y), XLOG2DEV(x2),
+    ::RoundRect(GetHdc(), XLOG2DEV(x), YLOG2DEV(y), XLOG2DEV(x2),
         YLOG2DEV(y2), (int) (2*XLOG2DEV(radius)), (int)( 2*YLOG2DEV(radius)));
 
     CalcBoundingBox(x, y);
@@ -1185,6 +1185,7 @@ void wxMSWDCImpl::DoDrawSpline(const wxPointList *points)
     wxCoord y2{p->y};
     wxCoord cx1 = ( x1 + x2 ) / 2;
     wxCoord cy1 = ( y1 + y2 ) / 2;
+
     lppt[ bezier_pos ].x = XLOG2DEV(cx1);
     lppt[ bezier_pos ].y = YLOG2DEV(cy1);
     bezier_pos++;
@@ -1259,12 +1260,12 @@ void wxMSWDCImpl::DoDrawEllipticArc(wxCoord x,wxCoord y,wxCoord w,wxCoord h,doub
     HPEN hpenOld = (HPEN) ::SelectObject(GetHdc(), (HPEN) ::GetStockObject(NULL_PEN));
     if (m_signY > 0)
     {
-        Pie(GetHdc(), XLOG2DEV(x), YLOG2DEV(y), XLOG2DEV(x2)+1, YLOG2DEV(y2)+1,
+        ::Pie(GetHdc(), XLOG2DEV(x), YLOG2DEV(y), XLOG2DEV(x2)+1, YLOG2DEV(y2)+1,
                   rx1, ry1, rx2, ry2);
     }
     else
     {
-        Pie(GetHdc(), XLOG2DEV(x), YLOG2DEV(y)-1, XLOG2DEV(x2)+1, YLOG2DEV(y2),
+        ::Pie(GetHdc(), XLOG2DEV(x), YLOG2DEV(y)-1, XLOG2DEV(x2)+1, YLOG2DEV(y2),
                   rx1, ry1-1, rx2, ry2-1);
     }
 
