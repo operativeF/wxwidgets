@@ -15,6 +15,7 @@
 #if wxUSE_GRAPHICS_CONTEXT
 
 #ifndef WX_PRECOMP
+    #include <cmath>
     #include <numbers>
 #endif
 
@@ -676,7 +677,7 @@ void wxGCDCImpl::DoDrawArc( wxCoord x1, wxCoord y1,
 
     const double dx = x1 - xc;
     const double dy = y1 - yc;
-    const double radius = std::sqrt((double)(dx * dx + dy * dy));
+    const double radius = std::hypot(dx, dy);
     const wxCoord rad = (wxCoord)radius;
 
     double sa, ea; // In radians
@@ -695,10 +696,10 @@ void wxGCDCImpl::DoDrawArc( wxCoord x1, wxCoord y1,
     {
         sa = (x1 - xc == 0) ?
      (y1 - yc < 0) ? std::numbers::pi / 2.0 : -std::numbers::pi / 2.0 :
-             -atan2(double(y1 - yc), double(x1 - xc));
+             -std::atan2(double(y1 - yc), double(x1 - xc));
         ea = (x2 - xc == 0) ?
      (y2 - yc < 0) ? std::numbers::pi / 2.0 : -std::numbers::pi / 2.0 :
-             -atan2(double(y2 - yc), double(x2 - xc));
+             -std::atan2(double(y2 - yc), double(x2 - xc));
     }
 
     const bool fill = m_brush.GetStyle() != wxBrushStyle::Transparent;

@@ -39,6 +39,8 @@
     #endif
 #endif
 
+#include <numbers>
+
 // ----------------------------------------------------------------------------
 // wxRichToolTipPopup: the popup window used by wxRichToolTip.
 // ----------------------------------------------------------------------------
@@ -449,8 +451,8 @@ private:
 
                 {
                     // A half-side of an equilateral triangle is its altitude
-                    // divided by sqrt(3) ~= 1.73.
-                    const double halfside = tipSize/1.73;
+                    // divided by sqrt(3) (in our case inverse of sqrt(3))
+                    const double halfside = tipSize * std::numbers::inv_sqrt3;
 
                     tipPoints[0] = wxPoint2DDouble(x - halfside, yBase);
                     tipPoints[1] = wxPoint2DDouble(x, yApex);
@@ -467,7 +469,7 @@ private:
                 dy = 0;
 
                 {
-                    const double halfside = tipSize/1.73;
+                    const double halfside = tipSize * std::numbers::inv_sqrt3;
 
                     tipPoints[0] = wxPoint2DDouble(x + halfside, yBase);
                     tipPoints[1] = wxPoint2DDouble(x, yApex);

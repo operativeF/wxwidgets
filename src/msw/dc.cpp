@@ -893,7 +893,7 @@ void wxMSWDCImpl::DoDrawArc(wxCoord x1, wxCoord y1,
 {
     double dx = xc - x1;
     double dy = yc - y1;
-    wxCoord r = (wxCoord)std::sqrt(dx*dx + dy*dy);
+    wxCoord r = (wxCoord)std::hypot(dx, dy);
 
 
     wxBrushAttrsSetter cc(*this); // needed for wxBrushStyle::StippleMaskOpaque handling
@@ -913,7 +913,7 @@ void wxMSWDCImpl::DoDrawArc(wxCoord x1, wxCoord y1,
     wxCoord yyc = YLOG2DEV(yc);
     dx = xxc - xx1;
     dy = yyc - yy1;
-    wxCoord ray = (wxCoord)std::sqrt(dx*dx + dy*dy);
+    wxCoord ray = (wxCoord)std::hypot(dx, dy);
 
     wxCoord xxx1 = (wxCoord) (xxc-ray);
     wxCoord yyy1 = (wxCoord) (yyc-ray);

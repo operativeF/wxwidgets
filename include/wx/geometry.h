@@ -126,8 +126,7 @@ inline void wxPoint2DInt::GetRounded( std::int32_t *x , std::int32_t *y ) const
 
 inline double wxPoint2DInt::GetVectorLength() const
 {
-    // cast needed MIPSpro compiler under SGI
-    return std::sqrt( (double)(m_x)*(m_x) + (double)(m_y)*(m_y) );
+    return std::hypot(m_x, m_y);
 }
 
 inline void wxPoint2DInt::SetVectorLength( double length )
@@ -350,7 +349,7 @@ inline void wxPoint2DDouble::GetRounded( std::int32_t *x , std::int32_t *y ) con
 
 inline double wxPoint2DDouble::GetVectorLength() const
 {
-    return std::sqrt( (m_x)*(m_x) + (m_y)*(m_y) ) ;
+    return std::hypot(m_x, m_y) ;
 }
 
 inline void wxPoint2DDouble::SetVectorLength( double length )

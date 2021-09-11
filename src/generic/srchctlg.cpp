@@ -20,6 +20,11 @@
 #include "wx/menu.h"
 #include "wx/dcmemory.h"
 
+#ifndef WX_PRECOMP
+    #include <cmath>
+    #include <numbers>
+#endif
+
 #if !wxUSE_NATIVE_SEARCH_CONTROL
 
 #include "wx/image.h"
@@ -1012,11 +1017,11 @@ wxBitmap wxSearchCtrl::RenderSearchBitmap( int x, int y, bool renderDrop )
     mem.DrawCircle(radius,radius,radius-penWidth);
 
     // draw handle
-    int lineStart = radius + (radius-penWidth/2) * 707 / 1000; // 707 / 1000 = 0.707 = 1/sqrt(2);
+    int lineStart = radius + (radius-penWidth/2) * (1 / std::numbers::sqrt2);
 
     mem.SetPen( wxPen(fg) );
     mem.SetBrush( wxBrush(fg) );
-    int handleCornerShift = penWidth * 707 / 1000 / 2; // 707 / 1000 = 0.707 = 1/sqrt(2);
+    int handleCornerShift = penWidth * (1 / std::numbers::sqrt2) / 2;
     handleCornerShift = std::max( handleCornerShift, 1 );
     int handleBase = 4 * x / 20;
     int handleLength = 2*handleBase+1;

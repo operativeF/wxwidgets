@@ -24,6 +24,8 @@
     #include "wx/image.h"
     #include "wx/icon.h"
 
+    #include <cmath>
+    #include <numbers>
     #include <string_view>
 #endif // WX_PRECOMP
 
@@ -436,7 +438,7 @@ void wxPostScriptDCImpl::DoDrawArc (wxCoord x1, wxCoord y1, wxCoord x2, wxCoord 
 
     wxCoord dx = x1 - xc;
     wxCoord dy = y1 - yc;
-    double radius = std::sqrt( (double)(dx*dx+dy*dy) );
+    double radius = std::hypot(dx, dy);
     double alpha1, alpha2;
 
     // TODO: Return lambda pair
@@ -455,10 +457,10 @@ void wxPostScriptDCImpl::DoDrawArc (wxCoord x1, wxCoord y1, wxCoord x2, wxCoord 
     {
         alpha1 = (x1 - xc == 0) ?
             (y1 - yc < 0) ? 90.0 : -90.0 :
-                wxRadToDeg(-atan2(double(y1-yc), double(x1-xc)));
+                wxRadToDeg(-std::atan2(double(y1-yc), double(x1-xc)));
         alpha2 = (x2 - xc == 0) ?
             (y2 - yc < 0) ? 90.0 : -90.0 :
-                wxRadToDeg(-atan2(double(y2-yc), double(x2-xc)));
+                wxRadToDeg(-std::atan2(double(y2-yc), double(x2-xc)));
     }
     while (alpha1 < 0)    alpha1 += 360;
     while (alpha2 < 0)    alpha2 += 360; // adjust angles to be between

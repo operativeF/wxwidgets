@@ -24,6 +24,7 @@
 
 #ifndef WX_PRECOMP
     #include <array>
+    #include <cmath>
 #endif
 
 #include "wx/private/textmeasure.h"
@@ -1043,11 +1044,7 @@ void wxDCImpl::DoGradientFillConcentric(const wxRect& rect,
             const double dx = x;
             const double dy = y;
 
-            double dGradient = ((dRadius - std::sqrt(  (dx - cx - nCircleOffX) * (dx - cx - nCircleOffX)
-                                          +(dy - cy - nCircleOffY) * (dy - cy - nCircleOffY)
-                                         )
-                         ) * 100
-                        ) / dRadius;
+            double dGradient = ((dRadius - std::hypot({dx - cx - nCircleOffX}, {dy - cy - nCircleOffY})) * 100) / dRadius;
 
             //normalize Gradient
             if (dGradient < 0)

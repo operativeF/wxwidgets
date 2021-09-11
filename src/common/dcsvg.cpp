@@ -12,6 +12,7 @@
 #if wxUSE_SVG
 
 #ifndef WX_PRECOMP
+    #include <cmath>
     #include <numbers>
 #endif
 
@@ -897,8 +898,8 @@ void wxSVGFileDCImpl::DoDrawArc(wxCoord x1, wxCoord y1, wxCoord x2, wxCoord y2, 
     wxString s;
 
     // we need the radius of the circle which has two estimates
-    const double r1 = std::sqrt( double( (x1 - xc)*(x1 - xc) ) + double( (y1 - yc)*(y1 - yc) ) );
-    const double r2 = std::sqrt( double( (x2 - xc)*(x2 - xc) ) + double( (y2 - yc)*(y2 - yc) ) );
+    const double r1 = std::hypot(x1 - xc, y1 - yc);
+    const double r2 = std::hypot(x2 - xc, y2 - yc);
 
     wxASSERT_MSG((std::fabs( r2 - r1 ) <= 3), wxS("wxSVGFileDC::DoDrawArc Error in getting radii of circle"));
     if ( std::fabs( r2 - r1 ) > 3 )    //pixels
@@ -907,11 +908,11 @@ void wxSVGFileDCImpl::DoDrawArc(wxCoord x1, wxCoord y1, wxCoord x2, wxCoord y2, 
         write(s);
     }
 
-    double theta1 = atan2((double)(yc - y1), (double)(x1 - xc));
+    double theta1 = std::atan2((double)(yc - y1), (double)(x1 - xc));
     if (theta1 < 0)
         theta1 = theta1 + std::numbers::pi * 2.0;
 
-    double theta2 = atan2((double)(yc - y2), (double)(x2 - xc));
+    double theta2 = std::atan2((double)(yc - y2), (double)(x2 - xc));
     if (theta2 < 0)
         theta2 = theta2 + std::numbers::pi * 2.0;
     if (theta2 < theta1) theta2 = theta2 + std::numbers::pi * 2;

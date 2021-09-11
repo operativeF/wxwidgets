@@ -159,7 +159,7 @@ double wxPoint2DInt::GetVectorAngle() const
             return 180;
     }
 
-    double deg = wxRadToDeg(atan2( (double)m_y , (double)m_x ));
+    double deg = wxRadToDeg(std::atan2( (double)m_y , (double)m_x ));
     if ( deg < 0 )
     {
         deg += 360;
@@ -192,7 +192,7 @@ double wxPoint2DDouble::GetVectorAngle() const
         else
             return 180;
     }
-    double deg = wxRadToDeg(atan2( m_y , m_x ));
+    double deg = wxRadToDeg(std::atan2( m_y , m_x ));
     if ( deg < 0 )
     {
         deg += 360;

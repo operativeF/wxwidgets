@@ -11,6 +11,10 @@
 
 #if wxUSE_HTML && wxUSE_STREAMS
 
+#ifndef WX_PRECOMP
+    #include <cmath>
+#endif
+
 #include "wx/app.h"
 #include "wx/dynarray.h"
 #include "wx/dc.h"
@@ -103,7 +107,7 @@ wxHtmlLinkInfo *wxHtmlImageMapAreaCell::GetLink( int x, int y ) const
                 int l = coords[ 0 ];
                 int t = coords[ 1 ];
                 int r = coords[ 2 ];
-                double d = std::sqrt( (double) (((x - l) * (x - l)) + ((y - t) * (y - t))) );
+                double d = std::hypot(x - l, y - t);
                 if (d < (double)r)
                 {
                     return m_Link;

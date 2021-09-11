@@ -461,10 +461,10 @@ void wxWindowDCImpl::DoDrawArc( wxCoord x1, wxCoord y1, wxCoord x2, wxCoord y2, 
     {
         radius1 = (xx1 - xxc == 0) ?
             (yy1 - yyc < 0) ? 90.0 : -90.0 :
-            -atan2(double(yy1-yyc), double(xx1-xxc)) * RAD2DEG;
+            -std::atan2(double(yy1-yyc), double(xx1-xxc)) * RAD2DEG;
         radius2 = (xx2 - xxc == 0) ?
             (yy2 - yyc < 0) ? 90.0 : -90.0 :
-            -atan2(double(yy2-yyc), double(xx2-xxc)) * RAD2DEG;
+            -std::atan2(double(yy2-yyc), double(xx2-xxc)) * RAD2DEG;
     }
     wxCoord alpha1 = wxCoord(radius1 * 64.0);
     wxCoord alpha2 = wxCoord((radius2 - radius1) * 64.0);
