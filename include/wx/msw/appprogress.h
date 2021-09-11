@@ -10,6 +10,7 @@
 #ifndef _WX_MSW_APPPROG_H_
 #define _WX_MSW_APPPROG_H_
 
+#include <memory>
 #include <vector>
 
 class WXDLLIMPEXP_FWD_CORE wxTaskBarButton;
@@ -36,7 +37,7 @@ public:
 private:
     int m_maxValue;
 
-    std::vector<wxTaskBarButton*> m_taskBarButtons;
+    std::vector<std::unique_ptr<wxTaskBarButton>> m_taskBarButtons;
 };
 
 #endif  // _WX_MSW_APPPROG_H_

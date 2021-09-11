@@ -115,13 +115,6 @@ bool wxFrame::Create(wxWindow *parent,
     return true;
 }
 
-wxFrame::~wxFrame()
-{
-#if wxUSE_TASKBARBUTTON
-    delete m_taskBarButton;
-#endif
-}
-
 // ----------------------------------------------------------------------------
 // wxFrame client size calculations
 // ----------------------------------------------------------------------------
@@ -410,9 +403,9 @@ wxMenu* wxFrame::MSWFindMenuFromHMENU(WXHMENU hMenu)
 wxTaskBarButton* wxFrame::MSWGetTaskBarButton()
 {
     if ( !m_taskBarButton )
-        m_taskBarButton = wxTaskBarButton::New(this);
+        m_taskBarButton = wxTaskBarButton::Create(this);
 
-    return m_taskBarButton;
+    return m_taskBarButton.get();
 }
 #endif // wxUSE_TASKBARBUTTON
 
@@ -769,7 +762,7 @@ bool wxFrame::HandleCommand(WXWORD id, WXWORD cmd, WXHWND control)
     if ( cmd == wxTHBN_CLICKED && m_taskBarButton )
     {
         wxTaskBarButtonImpl * const
-            tbButton = dynamic_cast<wxTaskBarButtonImpl*>(m_taskBarButton);
+            tbButton = dynamic_cast<wxTaskBarButtonImpl*>(m_taskBarButton.get());
         // we use the index as id when adding thumbnail toolbar button.
         wxThumbBarButton * const
             thumbBarButton = tbButton->GetThumbBarButtonByIndex(id);

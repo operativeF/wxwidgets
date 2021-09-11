@@ -28,16 +28,16 @@ wxAppProgressIndicator::wxAppProgressIndicator(wxWindow* parent, int maxValue)
               it != wxTopLevelWindows.end();
               ++it )
         {
-            wxTaskBarButton* const button = wxTaskBarButton::New(*it);
+            std::unique_ptr<wxTaskBarButton> button = wxTaskBarButton::Create(*it);
             if ( button )
-                m_taskBarButtons.push_back(button);
+                m_taskBarButtons.emplace_back(std::move(button));
         }
     }
     else
     {
-        wxTaskBarButton* const button = wxTaskBarButton::New(parent);
+        std::unique_ptr<wxTaskBarButton> button = wxTaskBarButton::Create(parent);
         if ( button )
-            m_taskBarButtons.push_back(button);
+            m_taskBarButtons.emplace_back(std::move(button));
     }
 
     Reset();
@@ -47,11 +47,6 @@ wxAppProgressIndicator::wxAppProgressIndicator(wxWindow* parent, int maxValue)
 wxAppProgressIndicator::~wxAppProgressIndicator()
 {
     Reset();
-
-    for ( auto* button : m_taskBarButtons )
-    {
-        delete button;
-    }
 }
 
 bool wxAppProgressIndicator::IsAvailable() const

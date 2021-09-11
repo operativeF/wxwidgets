@@ -52,10 +52,10 @@ public:
     bool InitOrUpdateThumbBarButtons();
     void Realize() override;
 
-private:
-    // This ctor is only used by wxTaskBarButton::New()
+    // This ctor is only used by wxTaskBarButton::Create()
+    // TODO: In public access because unique_ptr doesn't play well (?)
     wxTaskBarButtonImpl(wxITaskbarList3* taskbarList, wxWindow* parent);
-
+private:
     wxWindow* m_parent;
     wxITaskbarList3 *m_taskbarList;
 
@@ -71,7 +71,8 @@ private:
     wxRect m_thumbnailClipRect;
     bool m_hasInitThumbnailToolbar;
 
-    friend wxTaskBarButton* wxTaskBarButton::New(wxWindow*);
+    // TODO: This doesn't work, so the corresponding constructor is in public access.
+    friend std::unique_ptr<wxTaskBarButton> wxTaskBarButton::Create(wxWindow*);
 };
 
 #endif // wxUSE_TASKBARBUTTON

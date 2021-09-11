@@ -14,7 +14,7 @@
 #include <string>
 
 #if wxUSE_TASKBARBUTTON
-class WXDLLIMPEXP_FWD_CORE wxTaskBarButton;
+#include <wx/taskbarbutton.h>
 #endif
 
 class WXDLLIMPEXP_CORE wxFrame : public wxFrameBase
@@ -44,7 +44,8 @@ public:
                 const wxSize& size = wxDefaultSize,
                 long style = wxDEFAULT_FRAME_STYLE,
                 const std::string& name = wxFrameNameStr);
-    ~wxFrame();
+
+    ~wxFrame() = default;
 
     
     bool ShowFullScreen(bool show, long style = wxFULLSCREEN_ALL) override;
@@ -183,7 +184,7 @@ private:
     bool m_wasMinimized{false};
 
 #if wxUSE_TASKBARBUTTON
-    wxTaskBarButton* m_taskBarButton{nullptr};
+    std::unique_ptr<wxTaskBarButton> m_taskBarButton;
 #endif
 
     wxDECLARE_EVENT_TABLE();

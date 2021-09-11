@@ -115,7 +115,7 @@ public:
 
     // Factory function, may return NULL if task bar buttons are not supported
     // by the current system.
-    static wxTaskBarButton* New(wxWindow* parent);
+    static std::unique_ptr<wxTaskBarButton> Create(wxWindow* parent);
 
     virtual ~wxTaskBarButton() = default;
 

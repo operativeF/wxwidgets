@@ -687,11 +687,11 @@ bool wxThumbBarButton::UpdateParentTaskBarButton()
 // ----------------------------------------------------------------------------
 
 /* static */
-wxTaskBarButton* wxTaskBarButton::New(wxWindow* parent)
+std::unique_ptr<wxTaskBarButton> wxTaskBarButton::Create(wxWindow* parent)
 {
     wxITaskbarList3* taskbarList = nullptr;
 
-    HRESULT hr = CoCreateInstance
+    HRESULT hr = ::CoCreateInstance
                  (
                     wxCLSID_TaskbarList,
                     nullptr,
@@ -715,7 +715,7 @@ wxTaskBarButton* wxTaskBarButton::New(wxWindow* parent)
         return nullptr;
     }
 
-    return new wxTaskBarButtonImpl(taskbarList, parent);
+    return std::make_unique<wxTaskBarButtonImpl>(taskbarList, parent);
 }
 
 wxTaskBarButtonImpl::wxTaskBarButtonImpl(wxITaskbarList3* taskbarList,
