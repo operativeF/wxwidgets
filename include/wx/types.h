@@ -158,9 +158,9 @@ typedef wxUint16 wxWord;
         #endif
     #else /*  !defined(SIZEOF_INT) */
         /*  assume default 32bit machine -- what else can we do? */
-        wxCOMPILE_TIME_ASSERT( sizeof(int) == 4, IntMustBeExactly4Bytes);
-        wxCOMPILE_TIME_ASSERT( sizeof(size_t) == 4, SizeTMustBeExactly4Bytes);
-        wxCOMPILE_TIME_ASSERT( sizeof(void *) == 4, PtrMustBeExactly4Bytes);
+        static_assert( sizeof(int) == 4, "Int must be exactly 4 bytes.");
+        static_assert( sizeof(size_t) == 4, "Size T must be exactly 4 bytes.");
+        static_assert( sizeof(void *) == 4, "Ptr must be exactly 4 bytes.");
 
         #define SIZEOF_INT 4
         #define SIZEOF_SIZE_T 4
@@ -177,8 +177,7 @@ typedef wxUint16 wxWord;
             /*  common case is 4 but there configure would have defined */
             /*  SIZEOF_WCHAR_T for us) */
             /*  the most common case */
-            wxCOMPILE_TIME_ASSERT( sizeof(wchar_t) == 2,
-                                    Wchar_tMustBeExactly2Bytes);
+            static_assert( sizeof(wchar_t) == 2, "Wchar_t must be exactly 2 bytes.");
 
             #define SIZEOF_WCHAR_T 2
         #endif /*  !defined(SIZEOF_WCHAR_T) */
