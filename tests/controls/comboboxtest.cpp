@@ -44,19 +44,19 @@ TEST_CASE_FIXTURE(wxComboBoxTest, "Combo box test")
         const int heightOrig = m_container->GetSize().y;
 
         // check that the height doesn't change if we don't touch it
-        m_container->SetSize(100, -1);
+        m_container->SetSize(wxSize{100, -1});
         CHECK_EQ( heightOrig, m_container->GetSize().y );
 
         // check that setting both big and small (but not too small, there is a
         // limit on how small the control can become under MSW) heights works
-        m_container->SetSize(-1, 50);
+        m_container->SetSize(wxSize{-1, 50});
         CHECK_EQ( 50, m_container->GetSize().y );
 
-        m_container->SetSize(-1, 10);
+        m_container->SetSize(wxSize{-1, 10});
         CHECK_EQ( 10, m_container->GetSize().y );
 
         // and also that restoring it works (this used to be broken before 2.9.1)
-        m_container->SetSize(-1, heightOrig);
+        m_container->SetSize(wxSize{-1, heightOrig});
         CHECK_EQ( heightOrig, m_container->GetSize().y );
     }
 

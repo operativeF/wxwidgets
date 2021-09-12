@@ -113,7 +113,7 @@ bool wxBitmapComboBoxBase::OnAddBitmap(const wxBitmap& bitmap)
             wxSize newSz = ctrl->GetBestSize();
             wxSize sz = ctrl->GetSize();
             if ( newSz.y > sz.y )
-                ctrl->SetSize(sz.x, newSz.y);
+                ctrl->SetSize(wxSize{sz.x, newSz.y});
             else
                 DetermineIndent();
         }

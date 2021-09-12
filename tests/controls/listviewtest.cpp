@@ -28,7 +28,7 @@ TEST_CASE_FIXTURE(ListViewTest, "List view test")
 {
     m_listctrl = std::make_unique<wxListView>(wxTheApp->GetTopWindow());
     m_listctrl->SetWindowStyle(wxLC_REPORT);
-    m_listctrl->SetSize(400, 200);
+    m_listctrl->SetSize(wxSize{400, 200});
 
     SUBCASE("Selection")
     {

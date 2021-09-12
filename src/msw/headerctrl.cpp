@@ -109,9 +109,7 @@ public:
 protected:
     // override wxWindow methods which must be implemented by a new control
     wxSize DoGetBestSize() const override;
-    void DoSetSize(int x, int y,
-                           int width, int height,
-                           int sizeFlags = wxSIZE_AUTO) override;
+    void DoSetSize(wxRect boundary, int sizeFlags = wxSIZE_AUTO) override;
     void MSWUpdateFontOnDPIChange(const wxSize& newDPI) override;
 
 private:
@@ -258,11 +256,13 @@ WXDWORD wxMSWHeaderCtrl::MSWGetStyle(long style, WXDWORD *exstyle) const
 // wxMSWHeaderCtrl scrolling
 // ----------------------------------------------------------------------------
 
-void wxMSWHeaderCtrl::DoSetSize(int x, int y,
-                                int w, int h,
+void wxMSWHeaderCtrl::DoSetSize(wxRect boundary,
                                 int sizeFlags)
 {
-    wxControl::DoSetSize(x + m_scrollOffset, y, w - m_scrollOffset, h,
+    wxControl::DoSetSize(wxRect{boundary.x + m_scrollOffset,
+                                boundary.y,
+                                boundary.width - m_scrollOffset,
+                                boundary.height},
                          sizeFlags & wxSIZE_FORCE);
 }
 
@@ -276,8 +276,7 @@ void wxMSWHeaderCtrl::ScrollHorz(int dx)
     // for it (notice that dx is negative when scrolling to the right)
     m_scrollOffset += dx;
 
-    wxControl::DoSetSize(GetPosition().x + dx, -1,
-                         GetSize().x - dx, -1,
+    wxControl::DoSetSize(wxRect{GetPosition().x + dx, -1, GetSize().x - dx, -1},
                          wxSIZE_USE_EXISTING);
 }
 
@@ -1040,7 +1039,7 @@ void wxHeaderCtrl::OnSize(wxSizeEvent& WXUNUSED(event))
     {
         wxSize client_size = GetClientSize();
 
-        m_nativeControl->SetSize(0, 0, client_size.x, client_size.y);
+        m_nativeControl->SetSize(wxRect{wxPoint{}, client_size});
     }
 }
 

@@ -334,7 +334,7 @@ TEST_CASE_FIXTURE(SpinCtrlTestCase3, "SpinCtrl::SetValueInsideEventHandler")
 #if wxUSE_UIACTIONSIMULATOR
     // A dummy control with which we change the focus.
     wxTextCtrl* text = new wxTextCtrl(wxTheApp->GetTopWindow(), wxID_ANY);
-    text->Move(m_spin->GetSize().x, m_spin->GetSize().y * 3);
+    text->Move(wxPoint{m_spin->GetSize().x, m_spin->GetSize().y * 3});
 
     wxUIActionSimulator sim;
 

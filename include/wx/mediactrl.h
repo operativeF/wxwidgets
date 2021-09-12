@@ -161,7 +161,7 @@ protected:
     static const wxClassInfo* NextBackend(wxClassInfo::const_iterator* it);
 
     void OnMediaFinished(wxMediaEvent& evt);
-    void DoMoveWindow(int x, int y, int w, int h) override;
+    void DoMoveWindow(wxRect boundary) override;
     wxSize DoGetBestSize() const override;
 
     class wxMediaBackend* m_imp{nullptr};
@@ -216,8 +216,7 @@ public:
     virtual wxLongLong GetDuration()
     {   return 0;                       }
 
-    virtual void Move(int WXUNUSED(x), int WXUNUSED(y),
-                      int WXUNUSED(w), int WXUNUSED(h))
+    virtual void Move(wxRect boundary)
     {                                   }
     virtual wxSize GetVideoSize() const
     {   return {0, 0};             }

@@ -800,7 +800,7 @@ void wxProgressDialog::SetIcons(const wxIconBundle& icons)
     wxGenericProgressDialog::SetIcons(icons);
 }
 
-void wxProgressDialog::DoMoveWindow(int x, int y, int width, int height)
+void wxProgressDialog::DoMoveWindow(wxRect boundary)
 {
 #ifdef wxHAS_MSW_TASKDIALOG
     if ( HasNativeTaskDialog() )
@@ -808,7 +808,7 @@ void wxProgressDialog::DoMoveWindow(int x, int y, int width, int height)
         if ( m_sharedData )
         {
             wxCriticalSectionLocker locker(m_sharedData->m_cs);
-            m_sharedData->m_winPosition = wxPoint(x, y);
+            m_sharedData->m_winPosition = boundary.GetPosition();
             m_sharedData->m_notifications |= wxSPDD_WINDOW_MOVED;
         }
 
@@ -816,7 +816,7 @@ void wxProgressDialog::DoMoveWindow(int x, int y, int width, int height)
     }
 #endif // wxHAS_MSW_TASKDIALOG
 
-    wxGenericProgressDialog::DoMoveWindow(x, y, width, height);
+    wxGenericProgressDialog::DoMoveWindow(boundary);
 }
 
 wxRect wxProgressDialog::GetTaskDialogRect() const

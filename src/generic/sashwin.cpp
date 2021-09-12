@@ -616,7 +616,7 @@ void wxSashWindow::SizeWindows()
         }
         height -= 2*m_extraBorderSize;
 
-        child->SetSize(x, y, width, height);
+        child->SetSize(wxRect{x, y, width, height});
     }
     else if (GetChildren().GetCount() > 1)
     {

@@ -86,8 +86,7 @@ class WXDLLIMPEXP_CORE wxSVGFileDCImpl : public wxDCImpl
 public:
     wxSVGFileDCImpl(wxSVGFileDC* owner,
                     const std::string& filename,
-                    int width = 320,
-                    int height = 240,
+                    wxSize dimen = {320, 240},
                     double dpi = 72.0,
                     const std::string& title = {});
 
@@ -268,7 +267,7 @@ private:
 
     wxSize GetPPI() const override;
 
-    void Init(const std::string& filename, int width, int height,
+    void Init(const std::string& filename, wxSize dimen,
               double dpi, const std::string& title);
 
     void write(const wxString& s);
@@ -311,11 +310,10 @@ class WXDLLIMPEXP_CORE wxSVGFileDC : public wxDC
 {
 public:
     wxSVGFileDC(const std::string& filename,
-                int width = 320,
-                int height = 240,
+                wxSize dimen = {320, 240},
                 double dpi = 72.0,
                 const std::string& title = {})
-        : wxDC(std::make_unique<wxSVGFileDCImpl>(this, filename, width, height, dpi, title))
+        : wxDC(std::make_unique<wxSVGFileDCImpl>(this, filename, dimen, dpi, title))
     {
     }
 

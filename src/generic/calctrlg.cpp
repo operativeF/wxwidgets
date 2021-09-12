@@ -251,10 +251,10 @@ void wxGenericCalendarCtrl::CreateMonthComboBox()
     }
 
     m_comboMonth->SetSelection(GetDate().GetMonth());
-    m_comboMonth->SetSize(wxDefaultCoord,
-                          wxDefaultCoord,
-                          wxDefaultCoord,
-                          wxDefaultCoord,
+    m_comboMonth->SetSize(wxRect{wxDefaultCoord,
+                                 wxDefaultCoord,
+                                 wxDefaultCoord,
+                                 wxDefaultCoord},
                           wxSIZE_AUTO_WIDTH|wxSIZE_AUTO_HEIGHT);
 
     m_comboMonth->Bind(wxEVT_COMBOBOX, &wxGenericCalendarCtrl::OnMonthChange, this);
@@ -690,7 +690,7 @@ wxSize wxGenericCalendarCtrl::DoGetBestSize() const
     return best;
 }
 
-void wxGenericCalendarCtrl::DoMoveWindow(int x, int y, int width, int height)
+void wxGenericCalendarCtrl::DoMoveWindow(wxRect boundary)
 {
     int yDiff;
 
@@ -702,13 +702,13 @@ void wxGenericCalendarCtrl::DoMoveWindow(int x, int y, int width, int height)
 
         int maxHeight = std::max(sizeSpin.y, sizeCombo.y);
         int dy = (maxHeight - sizeStatic.y) / 2;
-        m_comboMonth->Move(x, y + (maxHeight - sizeCombo.y)/2);
-        m_staticMonth->SetSize(x, y + dy, sizeCombo.x, -1);
+        m_comboMonth->Move(wxPoint{boundary.x, boundary.y + (maxHeight - sizeCombo.y) / 2});
+        m_staticMonth->SetSize(wxRect{boundary.x, boundary.y + dy, sizeCombo.x, -1});
 
         int xDiff = sizeCombo.x + HORZ_MARGIN;
 
-        m_spinYear->SetSize(x + xDiff, y + (maxHeight - sizeSpin.y)/2, width - xDiff, maxHeight);
-        m_staticYear->SetSize(x + xDiff, y + dy, width - xDiff, sizeStatic.y);
+        m_spinYear->SetSize(wxRect{boundary.x + xDiff, boundary.y + (maxHeight - sizeSpin.y) / 2, boundary.width - xDiff, maxHeight});
+        m_staticYear->SetSize(wxRect{boundary.x + xDiff, boundary.y + dy, boundary.width - xDiff, sizeStatic.y});
 
         yDiff = maxHeight + VERT_MARGIN;
     }
@@ -717,7 +717,7 @@ void wxGenericCalendarCtrl::DoMoveWindow(int x, int y, int width, int height)
         yDiff = 0;
     }
 
-    wxControl::DoMoveWindow(x, y + yDiff, width, height - yDiff);
+    wxControl::DoMoveWindow(wxRect{boundary.x, boundary.y + yDiff, boundary.width, boundary.height - yDiff});
 }
 
 wxSize wxGenericCalendarCtrl::DoGetSize() const

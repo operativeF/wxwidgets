@@ -67,7 +67,7 @@ protected:
     // override some base class virtuals
     WXDWORD MSWGetStyle(long flags, WXDWORD *exstyle = nullptr) const override;
     wxSize DoGetBestSize() const override;
-    void DoMoveWindow(int x, int y, int width, int height) override;
+    void DoMoveWindow(wxRect boundary) override;
 #if wxUSE_TOOLTIPS
     bool MSWProcessMessage(WXMSG* pMsg) override;
     bool MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM* result) override;

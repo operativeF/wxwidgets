@@ -157,7 +157,7 @@ void wxSashLayoutWindow::OnCalculateLayout(wxCalculateLayoutEvent& event)
         // TODO: add wxRect& form to wxWindow::SetSize
         wxSize sz2 = GetSize();
         wxPoint pos = GetPosition();
-        SetSize(thisRect.x, thisRect.y, thisRect.width, thisRect.height);
+        SetSize(thisRect);
 
         // Make sure the sash is erased when the window is resized
         if ((pos.x != thisRect.x || pos.y != thisRect.y || sz2.x != thisRect.width || sz2.y != thisRect.height) &&
@@ -206,9 +206,7 @@ bool wxLayoutAlgorithm::LayoutMDIFrame(wxMDIParentFrame* frame, wxRect* r)
 
     wxWindow* clientWindow = frame->GetClientWindow();
 
-    rect = event.GetRect();
-
-    clientWindow->SetSize(rect.x, rect.y, rect.width, rect.height);
+    clientWindow->SetSize(event.GetRect());
 
     return true;
 }
@@ -323,12 +321,14 @@ bool wxLayoutAlgorithm::LayoutWindow(wxWindow* parent, wxWindow* mainWindow)
 
     rect = event.GetRect();
 
+    // TODO: Should we even bother bounding here? probably should be done elsewhere.
+
     if (mainWindow)
-        mainWindow->SetSize(rect.x, rect.y, std::max(0, rect.width), std::max(0, rect.height));
+        mainWindow->SetSize(wxRect{rect.x, rect.y, std::max(0, rect.width), std::max(0, rect.height)});
     else if (lastAwareWindow)
     {
         // Fit the remaining space
-        lastAwareWindow->SetSize(rect.x, rect.y, std::max(0, rect.width), std::max(0, rect.height));
+        lastAwareWindow->SetSize(wxRect{rect.x, rect.y, std::max(0, rect.width), std::max(0, rect.height)});
     }
 
     return true;

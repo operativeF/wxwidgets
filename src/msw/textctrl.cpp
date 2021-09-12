@@ -560,7 +560,7 @@ bool wxTextCtrl::MSWCreateText(const std::string& value,
            // this is clearly a bug and for now it has been only noticed under
            // Windows XP, so if we're sure it works correctly under other
            // systems we could do this only for XP
-           SetSize(-1, 1); // 1 is small enough to force vert scrollbar
+           SetSize(wxSize{-1, 1}); // 1 is small enough to force vert scrollbar
            SetInitialSize(size);
         }
         else if ( m_windowStyle & wxTE_AUTO_URL )
@@ -2497,7 +2497,7 @@ wxSize wxTextCtrl::DoGetSizeFromTextSize(int xlen, int ylen) const
     return {gsl::narrow_cast<int>(wText), gsl::narrow_cast<int>(hText)};
 }
 
-void wxTextCtrl::DoMoveWindow(int x, int y, int width, int height)
+void wxTextCtrl::DoMoveWindow(wxRect boundary)
 {
     // We reset the text of single line controls each time their width changes
     // because they don't adjust their horizontal offset on their own and there
@@ -2510,7 +2510,7 @@ void wxTextCtrl::DoMoveWindow(int x, int y, int width, int height)
         oldWidth = GetSize().x;
     }
 
-    wxTextCtrlBase::DoMoveWindow(x, y, width, height);
+    wxTextCtrlBase::DoMoveWindow(boundary);
 
     if ( resetText && GetSize().x != oldWidth )
     {

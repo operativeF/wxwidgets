@@ -107,7 +107,7 @@ protected:
     // override the base class virtuals involved into geometry calculations
     wxSize DoGetBestSize() const override;
     wxSize DoGetSizeFromTextSize(int xlen, int ylen = -1) const override;
-    void DoMoveWindow(int x, int y, int width, int height) override;
+    void DoMoveWindow(wxRect boundary) override;
 
 #ifdef __WXMSW__
     // and, for MSW, enabling this window itself

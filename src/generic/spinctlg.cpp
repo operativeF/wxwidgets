@@ -278,9 +278,9 @@ wxSize wxSpinCtrlGenericBase::DoGetSizeFromTextSize(int xlen, int ylen) const
     return {sizeText.x + sizeBtn.x + MARGIN, sizeText.y};
 }
 
-void wxSpinCtrlGenericBase::DoMoveWindow(int x, int y, int width, int height)
+void wxSpinCtrlGenericBase::DoMoveWindow(wxRect boundary)
 {
-    wxControl::DoMoveWindow(x, y, width, height);
+    wxControl::DoMoveWindow(boundary);
 
     // position the subcontrols inside the client area
 
@@ -292,9 +292,9 @@ void wxSpinCtrlGenericBase::DoMoveWindow(int x, int y, int width, int height)
     // changes.
     const wxSize sizeBtn = m_spinButton->GetBestSize();
 
-    const wxCoord wText = width - sizeBtn.x - MARGIN;
-    m_textCtrl->SetSize(0, 0, wText, height);
-    m_spinButton->SetSize(0 + wText + MARGIN, 0, wxDefaultCoord, height);
+    const wxCoord wText = boundary.width - sizeBtn.x - MARGIN;
+    m_textCtrl->SetSize(wxRect{0, 0, wText, boundary.height});
+    m_spinButton->SetSize(wxRect{0 + wText + MARGIN, 0, wxDefaultCoord, boundary.height});
 }
 
 // ----------------------------------------------------------------------------

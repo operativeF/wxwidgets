@@ -1940,7 +1940,7 @@ void wxWindowMSW::DoClientToScreen(int *x, int *y) const
 }
 
 bool
-wxWindowMSW::DoMoveSibling(WXHWND hwnd, int x, int y, int width, int height)
+wxWindowMSW::DoMoveSibling(WXHWND hwnd, wxRect boundary)
 {
     // toplevel window's coordinates are mirrored if the TLW is a child of another
     // RTL window and changing width without moving the position would enlarge the
@@ -1953,16 +1953,16 @@ wxWindowMSW::DoMoveSibling(WXHWND hwnd, int x, int y, int width, int height)
         {
             RECT old;
             ::GetWindowRect((HWND) hwnd, &old);
-            if ( old.left == x && old.right - old.left != width )
+            if ( old.left == boundary.x && old.right - old.left != boundary.width )
             {
-                x -= width - (old.right - old.left);
+                boundary.x -= boundary.width - (old.right - old.left);
             }
             // else: not a simple resize
         }
     }
 
 #if wxUSE_DEFERRED_SIZING
-    else if ( MSWIsPositionDirectlySupported(x, y) )
+    else if ( MSWIsPositionDirectlySupported(boundary.GetPosition()) )
     {
         // if our parent had prepared a defer window handle for us, use it
         wxWindowMSW * const parent = GetParent();
@@ -1970,7 +1970,7 @@ wxWindowMSW::DoMoveSibling(WXHWND hwnd, int x, int y, int width, int height)
         HDWP hdwp = parent ? (HDWP)parent->m_hDWP : nullptr;
         if ( hdwp )
         {
-            hdwp = ::DeferWindowPos(hdwp, (HWND)hwnd, nullptr, x, y, width, height,
+            hdwp = ::DeferWindowPos(hdwp, (HWND)hwnd, nullptr, boundary.x, boundary.y, boundary.width, boundary.height,
                                     SWP_NOZORDER | SWP_NOOWNERZORDER | SWP_NOACTIVATE);
             if ( !hdwp )
             {
@@ -1995,25 +1995,25 @@ wxWindowMSW::DoMoveSibling(WXHWND hwnd, int x, int y, int width, int height)
     }
 #endif // wxUSE_DEFERRED_SIZING
 
-    MSWMoveWindowToAnyPosition(hwnd, x, y, width, height, IsShown());
+    MSWMoveWindowToAnyPosition(hwnd, boundary, IsShown());
 
     // if wxUSE_DEFERRED_SIZING, indicates that we didn't use deferred move,
     // ignored otherwise
     return false;
 }
 
-void wxWindowMSW::MSWMoveWindowToAnyPosition(WXHWND hwnd, int x, int y, int width, int height, bool bRepaint)
+void wxWindowMSW::MSWMoveWindowToAnyPosition(WXHWND hwnd, wxRect boundary, bool bRepaint)
 {
-    bool scroll = GetParent() && !MSWIsPositionDirectlySupported(x, y);
+    bool scroll = GetParent() && !MSWIsPositionDirectlySupported(boundary.GetPosition());
 
     if ( scroll )
     {
         // scroll to the actual position (looks like there is no need to Freeze() the parent)
-        ::ScrollWindow(GetHwndOf(GetParent()), -x, -y, nullptr, nullptr);
+        ::ScrollWindow(GetHwndOf(GetParent()), -boundary.x, -boundary.y, nullptr, nullptr);
     }
 
     // move to relative coordinates
-    if ( !::MoveWindow(hwnd, (scroll ? 0 : x), (scroll ? 0 : y), width, height, bRepaint) )
+    if ( !::MoveWindow(hwnd, (scroll ? 0 : boundary.x), (scroll ? 0 : boundary.y), boundary.width, boundary.height, bRepaint) )
     {
         wxLogLastError(wxT("MoveWindow"));
     }
@@ -2021,24 +2021,24 @@ void wxWindowMSW::MSWMoveWindowToAnyPosition(WXHWND hwnd, int x, int y, int widt
     if ( scroll )
     {
         // scroll back
-        ::ScrollWindow(GetHwndOf(GetParent()), x, y, nullptr, nullptr);
+        ::ScrollWindow(GetHwndOf(GetParent()), boundary.x, boundary.y, nullptr, nullptr);
     }
 }
 
-void wxWindowMSW::DoMoveWindow(int x, int y, int width, int height)
+void wxWindowMSW::DoMoveWindow(wxRect boundary)
 {
     // TODO: is this consistent with other platforms?
     // Still, negative width or height shouldn't be allowed
-    if (width < 0)
-        width = 0;
-    if (height < 0)
-        height = 0;
+    if (boundary.width < 0)
+        boundary.width = 0;
+    if (boundary.height < 0)
+        boundary.height = 0;
 
-    if ( DoMoveSibling(m_hWnd, x, y, width, height) )
+    if ( DoMoveSibling(m_hWnd, boundary) )
     {
 #if wxUSE_DEFERRED_SIZING
-        m_pendingPosition = wxPoint(x, y);
-        m_pendingSize = wxSize(width, height);
+        m_pendingPosition = boundary.GetPosition();
+        m_pendingSize = boundary.GetSize();
     }
     else // window was moved immediately, without deferring it
     {
@@ -2056,32 +2056,32 @@ void wxWindowMSW::DoMoveWindow(int x, int y, int width, int height)
 // If sizeFlags contains wxSIZE_AUTO_WIDTH/HEIGHT flags (default), we calculate
 // the width/height to best suit our contents, otherwise we reuse the current
 // width/height
-void wxWindowMSW::DoSetSize(int x, int y, int width, int height, int sizeFlags)
+void wxWindowMSW::DoSetSize(wxRect boundary, int sizeFlags)
 {
     wxPoint currentPos = GetPosition();
     wxSize currentSz = GetSize();
 
-    if ( x == wxDefaultCoord && !(sizeFlags & wxSIZE_ALLOW_MINUS_ONE) )
-        x = currentPos.x;
-    if ( y == wxDefaultCoord && !(sizeFlags & wxSIZE_ALLOW_MINUS_ONE) )
-        y = currentPos.y;
+    if ( boundary.x == wxDefaultCoord && !(sizeFlags & wxSIZE_ALLOW_MINUS_ONE) )
+        boundary.x = currentPos.x;
+    if ( boundary.y == wxDefaultCoord && !(sizeFlags & wxSIZE_ALLOW_MINUS_ONE) )
+        boundary.y = currentPos.y;
 
     wxSize size = wxDefaultSize;
-    if ( width == wxDefaultCoord )
+    if ( boundary.width == wxDefaultCoord )
     {
         if ( sizeFlags & wxSIZE_AUTO_WIDTH )
         {
             size = GetBestSize();
-            width = size.x;
+            boundary.width = size.x;
         }
         else
         {
             // just take the current one
-            width = currentSz.x;
+            boundary.width = currentSz.x;
         }
     }
 
-    if ( height == wxDefaultCoord )
+    if ( boundary.height == wxDefaultCoord )
     {
         if ( sizeFlags & wxSIZE_AUTO_HEIGHT )
         {
@@ -2091,12 +2091,12 @@ void wxWindowMSW::DoSetSize(int x, int y, int width, int height, int sizeFlags)
             }
             //else: already called GetBestSize() above
 
-            height = size.y;
+            boundary.height = size.y;
         }
         else
         {
             // just take the current one
-            height = currentSz.y;
+            boundary.height = currentSz.y;
         }
     }
 
@@ -2104,27 +2104,27 @@ void wxWindowMSW::DoSetSize(int x, int y, int width, int height, int sizeFlags)
     // we're forced to resize the window
     if ( !(sizeFlags & wxSIZE_FORCE) )
     {
-        if ( width == currentSz.x && height == currentSz.y )
+        if ( boundary.width == currentSz.x && boundary.height == currentSz.y )
         {
             // We need to send wxSizeEvent ourselves because Windows won't do
             // it if the size doesn't change.
             if ( sizeFlags & wxSIZE_FORCE_EVENT )
             {
-                wxSizeEvent event( wxSize(width,height), GetId() );
+                wxSizeEvent event( boundary.GetSize(), GetId() );
                 event.SetEventObject( this );
                 HandleWindowEvent( event );
             }
 
             // Still call DoMoveWindow() below if we need to change the
             // position, otherwise we're done.
-            if ( x == currentSz.x && y == currentSz.y )
+            if ( boundary.x == currentSz.x && boundary.y == currentSz.y )
                 return;
         }
     }
 
-    AdjustForParentClientOrigin(x, y, sizeFlags);
+    AdjustForParentClientOrigin(boundary.x, boundary.y, sizeFlags);
 
-    DoMoveWindow(x, y, width, height);
+    DoMoveWindow(boundary);
 }
 
 void wxWindowMSW::DoSetClientSize(int width, int height)
@@ -2193,9 +2193,12 @@ void wxWindowMSW::DoSetClientSize(int width, int height)
         // and not defer it here as otherwise the value returned by
         // GetClient/WindowRect() wouldn't change as the window wouldn't be
         // really resized
-        MSWMoveWindowToAnyPosition(GetHwnd(), rectWin.left, rectWin.top,
-                                   width + widthWin - rectClient.right,
-                                   height + heightWin - rectClient.bottom, true);
+        MSWMoveWindowToAnyPosition(GetHwnd(),
+                                   wxRect{rectWin.left,
+                                          rectWin.top,
+                                          width + widthWin - rectClient.right,
+                                          height + heightWin - rectClient.bottom},
+                                   true);
     }
 }
 
@@ -3972,7 +3975,7 @@ bool wxWindowMSW::MSWCreate(const std::string& wclass,
               wclass,
               !title.empty() ? title : m_windowName,
               style,
-              x, y, w, h,
+              wxRect{x, y, w, h},
               MSWGetParent(),
               controlId
              );
@@ -3989,14 +3992,14 @@ bool wxWindowMSW::MSWCreate(const std::string& wclass,
 
 WXHWND wxWindowMSW::MSWCreateWindowAtAnyPosition(WXDWORD exStyle, const std::string& clName,
                                                  const std::string& title, WXDWORD style,
-                                                 int x, int y, int width, int height,
+                                                 wxRect boundary,
                                                  WXHWND parent, wxWindowID id)
 {
 
     WXHWND hWnd = ::CreateWindowExW(exStyle,
                                     boost::nowide::widen(clName).c_str(),
                                     boost::nowide::widen(title).c_str(),
-                                    style, x, y, width, height,
+                                    style, boundary.x, boundary.y, boundary.width, boundary.height,
                                     parent, (HMENU)wxUIntToPtr(id), wxGetInstance(),
                                     nullptr); // no extra data
 
@@ -4008,10 +4011,10 @@ WXHWND wxWindowMSW::MSWCreateWindowAtAnyPosition(WXDWORD exStyle, const std::str
             clName, style, exStyle
         ));
     }
-    else if ( !IsTopLevel() && !MSWIsPositionDirectlySupported(x, y) )
+    else if ( !IsTopLevel() && !MSWIsPositionDirectlySupported(boundary.GetPosition()) )
     {
         // fix position if limited by Short range
-        MSWMoveWindowToAnyPosition(hWnd, x, y, width, height, IsShown());
+        MSWMoveWindowToAnyPosition(hWnd, boundary, IsShown());
     }
 
     return hWnd;

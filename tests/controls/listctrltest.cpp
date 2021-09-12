@@ -32,7 +32,7 @@ TEST_CASE_FIXTURE(ListCtrlTest, "List control test")
 {
     m_listctrl = std::make_unique<wxListCtrl>(wxTheApp->GetTopWindow());
     m_listctrl->SetWindowStyle(wxLC_REPORT);
-    m_listctrl->SetSize(400, 200);
+    m_listctrl->SetSize(wxSize{400, 200});
 
     SUBCASE("EditLabel")
     {

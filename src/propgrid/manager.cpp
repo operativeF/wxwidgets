@@ -1268,7 +1268,7 @@ void wxPropertyGridManager::UpdateDescriptionBox( int new_splittery, int new_wid
 
     // Fix help control positions.
     int cap_y = new_splittery+m_splitterHeight+5;
-    m_pTxtHelpCaption->SetSize(3, cap_y, use_width, wxDefaultCoord, wxSIZE_AUTO_HEIGHT);
+    m_pTxtHelpCaption->SetSize(wxRect{3, cap_y, use_width, wxDefaultCoord}, wxSIZE_AUTO_HEIGHT);
     int cap_hei = m_pTxtHelpCaption->GetSize().y;
     int cnt_y = cap_y+cap_hei+3;
     int sub_cap_hei = cap_y+cap_hei-use_hei;
@@ -1293,7 +1293,7 @@ void wxPropertyGridManager::UpdateDescriptionBox( int new_splittery, int new_wid
         }
         else
         {
-            m_pTxtHelpContent->SetSize(3,cnt_y,use_width,cnt_hei);
+            m_pTxtHelpContent->SetSize(wxRect{3, cnt_y, use_width, cnt_hei});
             m_pTxtHelpContent->Wrap(use_width);
             m_pTxtHelpContent->Show( true );
         }
@@ -1318,7 +1318,7 @@ void wxPropertyGridManager::RecalculatePositions( int width, int height )
 #if wxUSE_TOOLBAR
     if ( m_pToolbar )
     {
-        m_pToolbar->SetSize(0, 0, width, wxDefaultCoord);
+        m_pToolbar->SetSize(wxRect{0, 0, width, wxDefaultCoord});
         propgridY += m_pToolbar->GetSize().y;
 
         if ( HasExtraStyle(wxPG_EX_TOOLBAR_SEPARATOR) )
@@ -1330,7 +1330,7 @@ void wxPropertyGridManager::RecalculatePositions( int width, int height )
 #if wxUSE_HEADERCTRL
     if ( m_pHeaderCtrl && m_pHeaderCtrl->IsShown() )
     {
-        m_pHeaderCtrl->SetSize(0, propgridY, width, wxDefaultCoord);
+        m_pHeaderCtrl->SetSize(wxRect{0, propgridY, width, wxDefaultCoord});
         // Sync horizontal scroll position with grid
         int x;
         m_pPropGrid->CalcScrolledPosition(0, 0, &x, nullptr);
@@ -1376,7 +1376,7 @@ void wxPropertyGridManager::RecalculatePositions( int width, int height )
         int pgh = propgridBottomY - propgridY;
         if ( pgh < 0 )
             pgh = 0;
-        m_pPropGrid->SetSize( 0, propgridY, width, pgh );
+        m_pPropGrid->SetSize(wxRect{0, propgridY, width, pgh});
 
         m_extraHeight = height - pgh;
 
@@ -1825,8 +1825,8 @@ void wxPropertyGridManager::SetDescription( const wxString& label, const wxStrin
         m_pTxtHelpCaption->SetLabel(label);
         m_pTxtHelpContent->SetLabel(content);
 
-        m_pTxtHelpCaption->SetSize(wxDefaultCoord, osz1.y);
-        m_pTxtHelpContent->SetSize(wxDefaultCoord, osz2.y);
+        m_pTxtHelpCaption->SetSize(wxSize{wxDefaultCoord, osz1.y});
+        m_pTxtHelpContent->SetSize(wxSize{wxDefaultCoord, osz2.y});
 
         UpdateDescriptionBox( m_splitterY, m_width, m_height );
     }
@@ -2030,7 +2030,7 @@ void wxPropertyGridManager::OnMouseMove( wxMouseEvent &event )
             {
                 m_splitterY = sy;
 
-                m_pPropGrid->SetSize( m_width, m_splitterY - m_pPropGrid->GetPosition().y );
+                m_pPropGrid->SetSize(wxSize{m_width, m_splitterY - m_pPropGrid->GetPosition().y});
                 UpdateDescriptionBox( m_splitterY, m_width, m_height );
 
                 m_extraHeight -= change;

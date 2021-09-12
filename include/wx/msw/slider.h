@@ -120,7 +120,7 @@ protected:
     // overridden base class virtuals
     wxPoint DoGetPosition() const override;
     wxSize DoGetSize() const override;
-    void DoMoveWindow(int x, int y, int width, int height) override;
+    void DoMoveWindow(wxRect boundary) override;
     wxSize DoGetBestSize() const override;
 
     WXHBRUSH DoMSWControlColor(WXHDC pDC, wxColour colBg, WXHWND hWnd) override;

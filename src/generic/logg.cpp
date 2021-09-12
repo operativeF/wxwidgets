@@ -710,7 +710,7 @@ wxLogDialog::wxLogDialog(wxWindow *parent,
     // create the text sizer with a minimal size so that we are sure it won't be too small
     wxString message = EllipsizeString(messages.back());
     wxSizer *szText = CreateTextSizer(message);
-    szText->SetMinSize(std::min(300, wxGetDisplaySize().x / 3), -1);
+    szText->SetMinSize(wxSize{std::min(300, wxGetDisplaySize().x / 3), -1});
 
     sizerAll->Add(szText, wxSizerFlags(1).Centre().Border(wxLEFT | wxRIGHT));
 
@@ -878,7 +878,7 @@ void wxLogDialog::CreateDetailsControls(wxWindow *parent)
     heightMax *= 9;
     heightMax /= 10;
 
-    m_listctrl->SetSize(wxDefaultCoord, std::min(height, heightMax));
+    m_listctrl->SetSize(wxSize{wxDefaultCoord, std::min(height, heightMax)});
 }
 
 void wxLogDialog::OnListItemActivated(wxListEvent& event)

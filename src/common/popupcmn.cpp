@@ -188,7 +188,7 @@ void wxPopupWindowBase::Position(const wxPoint& ptOrigin,
         //else: not enough space there neither, leave in default position
     }
 
-    Move(x, y, wxSIZE_NO_ADJUSTMENTS);
+    Move(wxPoint{x, y}, wxSIZE_NO_ADJUSTMENTS);
 }
 
 // ----------------------------------------------------------------------------

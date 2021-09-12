@@ -241,12 +241,12 @@ public:
     {
         wxControl * const control = GetControl();
 
-        control->Move(control->GetPosition().x + offset, wxDefaultCoord);
+        control->Move(wxPoint{control->GetPosition().x + offset, wxDefaultCoord});
 
         if ( m_staticText )
         {
-            m_staticText->Move(m_staticText->GetPosition().x + offset,
-                               wxDefaultCoord);
+            m_staticText->Move(wxPoint{m_staticText->GetPosition().x + offset,
+                               wxDefaultCoord});
         }
     }
 
@@ -1308,17 +1308,17 @@ bool wxToolBar::Realize()
 
                 // Center the static text horizontally for consistency with the
                 // button labels and position it below the control vertically.
-                staticText->Move(x + (totalWidth - staticTextSize.x)/2,
+                staticText->Move(wxPoint{x + (totalWidth - staticTextSize.x)/2,
                                  r.top + (height + controlSize.y
                                                  - staticTextSize.y
-                                                 + MARGIN_CONTROL_LABEL)/2);
+                                                 + MARGIN_CONTROL_LABEL)/2});
 
                 totalHeight += staticTextSize.y + MARGIN_CONTROL_LABEL;
             }
         }
 
-        control->Move(x + (totalWidth - controlSize.x)/2,
-                      r.top + (height - totalHeight)/2);
+        control->Move(wxPoint{x + (totalWidth - controlSize.x)/2,
+                      r.top + (height - totalHeight)/2});
 
         m_totalFixedSize += r.right - r.left;
     }

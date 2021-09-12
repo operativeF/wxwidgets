@@ -515,8 +515,7 @@ void wxSearchCtrl::LayoutControls()
 
     if ( IsSearchButtonVisible() )
     {
-        m_searchButton->SetSize(x, (height - sizeSearch.y) / 2,
-                                sizeSearch.x, sizeSearch.y);
+        m_searchButton->SetSize(wxRect{x, (height - sizeSearch.y) / 2, sizeSearch.x, sizeSearch.y});
         x += sizeSearch.x;
         x += searchMargin;
     }
@@ -531,14 +530,13 @@ void wxSearchCtrl::LayoutControls()
     int textY = 0;
 #endif
 
-    m_text->SetSize(x, textY, textWidth, height-textY);
+    m_text->SetSize(wxRect{x, textY, textWidth, height - textY});
     x += textWidth;
 
     if ( IsCancelButtonVisible() )
     {
         x += cancelMargin;
-        m_cancelButton->SetSize(x, (height - sizeCancel.y) / 2,
-                                sizeCancel.x, sizeCancel.y);
+        m_cancelButton->SetSize(wxRect{x, (height - sizeCancel.y) / 2, sizeCancel.x, sizeCancel.y});
     }
 }
 

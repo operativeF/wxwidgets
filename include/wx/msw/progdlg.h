@@ -50,7 +50,7 @@ public:
     std::string GetTitle() const override;
 
     void SetIcons(const wxIconBundle& icons) override;
-    void DoMoveWindow(int x, int y, int width, int height) override;
+    void DoMoveWindow(wxRect boundary) override;
     wxPoint DoGetPosition() const override;
     wxSize DoGetSize() const override;
     void Fit() override;

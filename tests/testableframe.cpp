@@ -19,7 +19,7 @@
 wxTestableFrame::wxTestableFrame() : wxFrame(nullptr, wxID_ANY, wxASCII_STR("Test Frame"))
 {
     // Use fixed position to facilitate debugging.
-    Move(200, 200);
+    Move(wxPoint{200, 200});
 
     Show();
 }

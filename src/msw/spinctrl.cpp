@@ -303,8 +303,7 @@ bool wxSpinCtrl::Create(wxWindow *parent,
                    "EDIT",                 // window class
                    "",                // no window title
                    msStyle,                // style (will be shown later)
-                   pos.x, pos.y,           // position
-                   0, 0,                   // size (will be set later)
+                   wxRect{pos, wxSize{0, 0}}, // position (size will be set later)
                    GetHwndOf(parent),      // parent
                    -1                      // control id
                   );
@@ -516,7 +515,7 @@ void wxSpinCtrl::SetLayoutDirection(wxLayoutDirection dir)
     wxSpinButton::SetLayoutDirection(dir);
 
     // Reposition the child windows according to the new layout.
-    SetSize(-1, -1, -1, -1, wxSIZE_AUTO | wxSIZE_FORCE);
+    SetSize(wxRect{-1, -1, -1, -1}, wxSIZE_AUTO | wxSIZE_FORCE);
 }
 
 WXHWND wxSpinCtrl::MSWGetFocusHWND() const
@@ -758,12 +757,12 @@ wxSize wxSpinCtrl::DoGetSizeFromTextSize(int xlen, int ylen) const
     return text.GetSizeFromTextSize(xlen + sizeBtn.x - GetOverlap(), ylen);
 }
 
-void wxSpinCtrl::DoMoveWindow(int x, int y, int width, int height)
+void wxSpinCtrl::DoMoveWindow(wxRect boundary)
 {
     // make sure the given width will be the total of both controls
     const int overlap = GetOverlap();
     int widthBtn = wxSpinButton::DoGetBestSize().x;
-    int widthText = width - widthBtn + overlap;
+    int widthText = boundary.width - widthBtn + overlap;
 
     if ( widthText < 0 )
     {
@@ -778,8 +777,8 @@ void wxSpinCtrl::DoMoveWindow(int x, int y, int width, int height)
         widthText = 0;
     }
 
-    if ( widthBtn > width )
-        widthBtn = width;
+    if ( widthBtn > boundary.width )
+        widthBtn = boundary.width;
 
     // Because both subcontrols are positioned relatively
     // to the parent which can have different layout direction
@@ -788,19 +787,19 @@ void wxSpinCtrl::DoMoveWindow(int x, int y, int width, int height)
     {
         // Logical positions: x(Text) < x(Button)
         // 1) The buddy window
-        DoMoveSibling(m_hwndBuddy, x, y, widthText, height);
+        DoMoveSibling(m_hwndBuddy, wxRect{boundary.GetPosition(), wxSize{widthText, boundary.height}});
 
         // 2) The button window
-        wxSpinButton::DoMoveWindow(x + widthText - overlap, y, widthBtn, height);
+        wxSpinButton::DoMoveWindow(wxRect{boundary.x + widthText - overlap, boundary.y, widthBtn, boundary.height});
     }
     else
     {
         // Logical positions: x(Button) < x(Text)
         // 1) The button window
-        wxSpinButton::DoMoveWindow(x, y, widthBtn, height);
+        wxSpinButton::DoMoveWindow(wxRect{boundary.GetPosition(), wxSize{widthBtn, boundary.height}});
 
         // 2) The buddy window
-        DoMoveSibling(m_hwndBuddy, x + widthBtn - overlap, y, widthText, height);
+        DoMoveSibling(m_hwndBuddy, wxRect{boundary.x + widthBtn - overlap, boundary.y, widthText, boundary.height});
     }
 }
 

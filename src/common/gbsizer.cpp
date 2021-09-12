@@ -481,7 +481,7 @@ wxSize wxGridBagSizer::CalcMin()
 
 
 
-void wxGridBagSizer::RepositionChildren(const wxSize& minSize)
+void wxGridBagSizer::RepositionChildren(wxSize minSize)
 {
     // We can't lay out our elements if we don't have at least a single row and
     // a single column. Notice that this may happen even if we have some
@@ -543,7 +543,7 @@ void wxGridBagSizer::RepositionChildren(const wxSize& minSize)
                 width += m_colWidths[idx];
             width += (endcol - pos.GetCol()) * m_hgap; // add a hgap for every col spanned
 
-            SetItemBounds(item, colpos[pos.GetCol()], rowpos[pos.GetRow()], width, height);
+            SetItemBounds(item, wxRect{colpos[pos.GetCol()], rowpos[pos.GetRow()], width, height});
         }
 
         node = node->GetNext();

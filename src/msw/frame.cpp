@@ -291,14 +291,14 @@ void wxFrame::PositionStatusBar()
     // our status bars preserve their programmatically set size to avoid being
     // resized by DefWindowProc() to the full window width, so if we didn't do
     // this here, the status bar would retain the possibly wrong current height.
-    m_frameStatusBar->SetSize(x, client_size.y, client_size.x, wxDefaultCoord, wxSIZE_AUTO_HEIGHT);
+    m_frameStatusBar->SetSize(wxRect{x, client_size.y, client_size.x, wxDefaultCoord}, wxSIZE_AUTO_HEIGHT);
 
     const int sh = m_frameStatusBar->GetSize().y;
     client_size.y += shOld - sh;
 
     // Since we wish the status bar to be directly under the client area,
     // we use the adjusted sizes without using wxSIZE_NO_ADJUSTMENTS.
-    m_frameStatusBar->SetSize(x, client_size.y, client_size.x, sh);
+    m_frameStatusBar->SetSize(wxRect{x, client_size.y, client_size.x, sh});
 }
 
 #endif // wxUSE_STATUSBAR
@@ -448,7 +448,7 @@ bool wxFrame::ShowFullScreen(bool show, long style)
         {
             if ( theToolBar->IsShown() )
             {
-                theToolBar->SetSize(wxDefaultCoord,0);
+                theToolBar->SetSize(wxSize{wxDefaultCoord, 0});
                 theToolBar->Show(false);
             }
             else // prevent it from being restored later
@@ -600,7 +600,7 @@ void wxFrame::PositionToolBar()
 
         // use the 'real' MSW position here, don't offset relatively to the
         // client area origin
-        toolbar->SetSize(x, y, desiredW, desiredH, wxSIZE_NO_ADJUSTMENTS);
+        toolbar->SetSize(wxRect{x, y, desiredW, desiredH}, wxSIZE_NO_ADJUSTMENTS);
 
     }
 }

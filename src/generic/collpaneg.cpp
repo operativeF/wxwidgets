@@ -186,8 +186,7 @@ bool wxGenericCollapsiblePane::Layout()
     {
         // move & resize the container window
         int yoffset = m_sz->GetSize().y + GetBorder();
-        m_pPane->SetSize(0, yoffset,
-                        oursz.x, oursz.y - yoffset);
+        m_pPane->SetSize(wxRect{0, yoffset, oursz.x, oursz.y - yoffset});
 
         // this is very important to make the pane window layout show correctly
         m_pPane->Layout();

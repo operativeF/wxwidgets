@@ -108,7 +108,7 @@ public:
         // SetLayoutDirection(wxLayoutDirection::Default) wouldn't result in a re-layout
         // neither, but then we're not supposed to be called with it at all.
         if ( dir != wxLayoutDirection::Default )
-            this->SetSize(-1, -1, -1, -1, wxSIZE_FORCE);
+            this->SetSize(wxRect{-1, -1, -1, -1}, wxSIZE_FORCE);
     }
 
 #if wxUSE_TOOLTIPS

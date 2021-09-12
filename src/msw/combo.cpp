@@ -629,14 +629,14 @@ void wxComboCtrl::DoTimerEvent()
 
             if ( m_animFlags & ShowAbove )
             {
-                win->SetSize( rect.x, rect.y + height - h, rect.width, h );
+                win->SetSize( wxRect{rect.x, rect.y + height - h, rect.width, h} );
             }
             else
             {
                 // Note that apparently Move() should be called after
                 // SetSize() to reduce (or even eliminate) animation garbage
-                win->SetSize( rect.x, rect.y, rect.width, h );
-                popup->Move( 0, -y );
+                win->SetSize( wxRect{rect.x, rect.y, rect.width, h} );
+                popup->Move( wxPoint{0, -y} );
             }
         }
         else
@@ -649,7 +649,7 @@ void wxComboCtrl::DoTimerEvent()
     {
         m_animTimer.Stop();
         DoShowPopup( m_animRect, m_animFlags );
-        popup->Move( 0, 0 );
+        popup->Move( wxPoint{0, 0} );
 
         // Do a one final refresh to clean up the rare cases of animation
         // garbage
@@ -668,7 +668,7 @@ bool wxComboCtrl::AnimateShow( const wxRect& rect, int flags )
         m_animFlags = flags;
 
         wxWindow* win = GetPopupWindow();
-        win->SetSize( rect.x, rect.y, rect.width, 0 );
+        win->SetSize( wxRect{rect.x, rect.y, rect.width, 0} );
         win->Show();
 
         m_animTimer.SetOwner( this, wxID_ANY );

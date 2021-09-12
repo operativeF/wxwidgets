@@ -437,12 +437,12 @@ wxFileOffset wxMediaCtrl::GetDownloadTotal()
 // 2) If the backend exists and is loaded, move the video
 //    of the media to where our control's window is now located
 //---------------------------------------------------------------------------
-void wxMediaCtrl::DoMoveWindow(int x, int y, int w, int h)
+void wxMediaCtrl::DoMoveWindow(wxRect boundary)
 {
-    wxControl::DoMoveWindow(x,y,w,h);
+    wxControl::DoMoveWindow(boundary);
 
     if(m_imp)
-        m_imp->Move(x, y, w, h);
+        m_imp->Move(boundary);
 }
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

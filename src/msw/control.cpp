@@ -120,7 +120,7 @@ bool wxControl::MSWCreateControl(const std::string& classname,
               classname,          // the kind of control to create
               label,      // the window name
               style,              // the window style
-              x, y, w, h,         // the window position and size
+              wxRect{x, y, w, h}, // the window position and size
               GetHwndOf(GetParent()),         // parent
               GetId()             // child id
              );

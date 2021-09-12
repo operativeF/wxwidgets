@@ -117,7 +117,7 @@ bool wxStatusBarGeneric::Create(wxWindow *parent,
     InitColours();
 
     int height = (int)((11*GetCharHeight())/10 + 2*GetBorderY());
-    SetSize(wxDefaultCoord, wxDefaultCoord, wxDefaultCoord, height);
+    SetSize(wxRect{wxDefaultCoord, wxDefaultCoord, wxDefaultCoord, height});
 
     SetFieldsCount(1);
 
@@ -378,7 +378,7 @@ void wxStatusBarGeneric::SetMinHeight(int height)
     int minHeight = (int)((11*GetCharHeight())/10);
 
     if ( height > minHeight )
-        SetSize(wxDefaultCoord, wxDefaultCoord, wxDefaultCoord, height + 2*m_borderY);
+        SetSize(wxRect{wxDefaultCoord, wxDefaultCoord, wxDefaultCoord, height + 2*m_borderY});
 }
 
 wxRect wxStatusBarGeneric::GetSizeGripRect() const

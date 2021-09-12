@@ -3212,31 +3212,31 @@ void wxGrid::CalcWindowSizes()
         gh = 0;
 
     if ( m_cornerLabelWin && m_cornerLabelWin->IsShown() )
-        m_cornerLabelWin->SetSize( 0, 0, m_rowLabelWidth, m_colLabelHeight );
+        m_cornerLabelWin->SetSize(wxRect{0, 0, m_rowLabelWidth, m_colLabelHeight});
 
     if ( m_colFrozenLabelWin && m_colFrozenLabelWin->IsShown() )
-        m_colFrozenLabelWin->SetSize( m_rowLabelWidth, 0, fgw, m_colLabelHeight);
+        m_colFrozenLabelWin->SetSize(wxRect{m_rowLabelWidth, 0, fgw, m_colLabelHeight});
 
     if ( m_colLabelWin && m_colLabelWin->IsShown() )
-        m_colLabelWin->SetSize( m_rowLabelWidth + fgw, 0, gw, m_colLabelHeight );
+        m_colLabelWin->SetSize(wxRect{m_rowLabelWidth + fgw, 0, gw, m_colLabelHeight});
 
     if ( m_rowFrozenLabelWin && m_rowFrozenLabelWin->IsShown() )
-        m_rowFrozenLabelWin->SetSize ( 0, m_colLabelHeight, m_rowLabelWidth, fgh);
+        m_rowFrozenLabelWin->SetSize(wxRect{0, m_colLabelHeight, m_rowLabelWidth, fgh});
 
     if ( m_rowLabelWin && m_rowLabelWin->IsShown() )
-        m_rowLabelWin->SetSize( 0, m_colLabelHeight + fgh, m_rowLabelWidth, gh );
+        m_rowLabelWin->SetSize(wxRect{0, m_colLabelHeight + fgh, m_rowLabelWidth, gh});
 
     if ( m_frozenCornerGridWin && m_frozenCornerGridWin->IsShown() )
-        m_frozenCornerGridWin->SetSize( m_rowLabelWidth, m_colLabelHeight, fgw, fgh );
+        m_frozenCornerGridWin->SetSize(wxRect{m_rowLabelWidth, m_colLabelHeight, fgw, fgh});
 
     if ( m_frozenColGridWin && m_frozenColGridWin->IsShown() )
-        m_frozenColGridWin->SetSize( m_rowLabelWidth, m_colLabelHeight + fgh, fgw, gh);
+        m_frozenColGridWin->SetSize(wxRect{m_rowLabelWidth, m_colLabelHeight + fgh, fgw, gh});
 
     if ( m_frozenRowGridWin && m_frozenRowGridWin->IsShown() )
-        m_frozenRowGridWin->SetSize( m_rowLabelWidth + fgw, m_colLabelHeight, gw, fgh);
+        m_frozenRowGridWin->SetSize(wxRect{m_rowLabelWidth + fgw, m_colLabelHeight, gw, fgh});
 
     if ( m_gridWin && m_gridWin->IsShown() )
-        m_gridWin->SetSize( m_rowLabelWidth + fgw, m_colLabelHeight + fgh, gw, gh );
+        m_gridWin->SetSize(wxRect{m_rowLabelWidth + fgw, m_colLabelHeight + fgh, gw, gh});
 }
 
 // this is called when the grid table sends a message
@@ -7558,7 +7558,7 @@ bool wxGrid::DoShowCellEditControl(const wxGridActivationSource& actSource)
         if ( rect.y > sizeMax.y - rect.height )
             rect.y = sizeMax.y - rect.height;
 
-        editor->GetWindow()->Move(rect.x, rect.y);
+        editor->GetWindow()->Move(rect.GetPosition());
     }
 
     editor->Show( true, attr.get() );

@@ -124,12 +124,10 @@ protected:
     wxSize GetTotalButtonSize(const wxSize& sizeBtn) const;
 
     // Adjust all the buttons to the new window size.
-    void PositionAllButtons(int x, int y, int width, int height);
+    void PositionAllButtons(wxRect boundary);
 
-    void DoSetSize(int x, int y,
-                           int width, int height,
-                           int sizeFlags = wxSIZE_AUTO) override;
-    void DoMoveWindow(int x, int y, int width, int height) override;
+    void DoSetSize(wxRect boundary, int sizeFlags = wxSIZE_AUTO) override;
+    void DoMoveWindow(wxRect boundary) override;
     wxSize DoGetBestSize() const override;
 
 #if wxUSE_TOOLTIPS

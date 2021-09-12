@@ -1269,10 +1269,10 @@ void wxComboCtrlBase::PositionTextCtrl( int textCtrlXAdjust, int textCtrlYAdjust
         if ( y < customBorder )
             y = customBorder;
 
-        m_text->SetSize(x,
-                        y,
-                        m_tcArea.width - m_tcArea.x - x,
-                        -1 );
+        m_text->SetSize(wxRect{x,
+                               y,
+                               m_tcArea.width - m_tcArea.x - x,
+                               -1} );
 
         // Make sure textctrl doesn't exceed the bottom custom border
         wxSize tsz = m_text->GetSize();
@@ -1288,10 +1288,10 @@ void wxComboCtrlBase::PositionTextCtrl( int textCtrlXAdjust, int textCtrlYAdjust
         // If it has border, have textctrl fill the entire text field.
         int w = m_tcArea.width - m_widthCustomPaint;
         if (w < 0) w = 0;
-        m_text->SetSize( m_tcArea.x + m_widthCustomPaint,
-                         m_tcArea.y,
-                         w,
-                         m_tcArea.height );
+        m_text->SetSize( wxRect{m_tcArea.x + m_widthCustomPaint,
+                                m_tcArea.y,
+                                w,
+                                m_tcArea.height} );
     }
 }
 
@@ -2272,7 +2272,7 @@ void wxComboCtrlBase::ShowPopup()
                                                             maxHeightPopup);
 
     popup->SetSize(adjustedSize);
-    popup->Move(0,0);
+    popup->Move(wxPoint{0, 0});
     m_popupInterface->OnPopup();
 
     //

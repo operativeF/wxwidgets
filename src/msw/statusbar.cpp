@@ -407,7 +407,7 @@ void wxStatusBar::SetMinHeight(int height)
 
     // And also update the size immediately, which may be useful for the status
     // bars not managed by wxFrame.
-    SetSize(-1, height);
+    SetSize(wxSize{-1, height});
 
     ::SendMessageW(GetHwnd(), SB_SETMINHEIGHT, height, 0);
 
@@ -487,11 +487,11 @@ wxSize wxStatusBar::DoGetBestSize() const
     return {width, height};
 }
 
-void wxStatusBar::DoMoveWindow(int x, int y, int width, int height)
+void wxStatusBar::DoMoveWindow(wxRect boundary)
 {
     if ( GetParent()->IsSizeDeferred() )
     {
-        wxWindowMSW::DoMoveWindow(x, y, width, height);
+        wxWindowMSW::DoMoveWindow(boundary);
     }
     else
     {
@@ -499,7 +499,7 @@ void wxStatusBar::DoMoveWindow(int x, int y, int width, int height)
         // WM_WINDOWPOSCHANGING since we don't want to change pos/size later
         // we must use SWP_NOCOPYBITS here otherwise it paints incorrectly
         // if other windows are size deferred
-        ::SetWindowPos(GetHwnd(), nullptr, x, y, width, height,
+        ::SetWindowPos(GetHwnd(), nullptr, boundary.x, boundary.y, boundary.width, boundary.height,
                        SWP_NOZORDER | SWP_NOOWNERZORDER | SWP_NOACTIVATE
                        | SWP_NOCOPYBITS | SWP_NOSENDCHANGING
                        );

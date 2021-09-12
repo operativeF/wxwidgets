@@ -184,7 +184,7 @@ public:
 protected:
     // override some base class virtuals
     wxSize DoGetBestSize() const override;
-    void DoMoveWindow(int x, int y, int width, int height) override;
+    void DoMoveWindow(wxRect boundary) override;
     wxSize DoGetSize() const override;
 
 private:

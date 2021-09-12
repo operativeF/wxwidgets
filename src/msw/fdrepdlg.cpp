@@ -422,9 +422,7 @@ std::string wxFindReplaceDialog::GetTitle() const
 // wxFindReplaceDialog position/size
 // ----------------------------------------------------------------------------
 
-void wxFindReplaceDialog::DoSetSize(int WXUNUSED(x), int WXUNUSED(y),
-                                    int WXUNUSED(width), int WXUNUSED(height),
-                                    int WXUNUSED(sizeFlags))
+void wxFindReplaceDialog::DoSetSize(wxRect boundary, int WXUNUSED(sizeFlags))
 {
     // ignore - we can't change the size of this standard dialog
     return;

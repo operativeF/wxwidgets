@@ -125,7 +125,7 @@ public:
 
 protected:
     wxPoint DoGetPosition() const override;
-    void DoMoveWindow(int x, int y, int width, int height) override;
+    void DoMoveWindow(wxRect boundary) override;
     wxSize DoGetBestSize() const override;
     wxSize DoGetSizeFromTextSize(int xlen, int ylen = -1) const override;
     wxSize DoGetSize() const override;

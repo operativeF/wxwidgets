@@ -119,7 +119,7 @@ bool wxStaticBox::Create(wxWindow* parent,
 void wxStaticBox::PositionLabelWindow()
 {
     m_labelWin->SetSize(m_labelWin->GetBestSize());
-    m_labelWin->Move(FromDIP(LABEL_HORZ_OFFSET), 0);
+    m_labelWin->Move(wxPoint{FromDIP(LABEL_HORZ_OFFSET), 0});
 }
 
 wxWindowList wxStaticBox::GetCompositeWindowParts() const

@@ -441,11 +441,10 @@ void wxChoice::MSWUpdateDropDownHeight()
     }
 
     // be careful to not change the width here
-    DoSetSize(wxDefaultCoord, wxDefaultCoord, wxDefaultCoord, GetSize().y,
-              flags);
+    DoSetSize(wxRect{wxDefaultCoord, wxDefaultCoord, wxDefaultCoord, GetSize().y}, flags);
 }
 
-void wxChoice::DoMoveWindow(int x, int y, int width, int height)
+void wxChoice::DoMoveWindow(wxRect boundary)
 {
     // here is why this is necessary: if the width is negative, the combobox
     // window proc makes the window of the size width*height instead of
@@ -457,7 +456,7 @@ void wxChoice::DoMoveWindow(int x, int y, int width, int height)
     // here (NT 4.4) and, anyhow, the check shouldn't hurt - however without
     // the check, constraints/sizers using combos may break the height
     // constraint will have not at all the same value as expected
-    if ( width < 0 )
+    if ( boundary.width < 0 )
         return;
 
     // the height which we must pass to Windows should be the total height of
@@ -483,14 +482,14 @@ void wxChoice::DoMoveWindow(int x, int y, int width, int height)
         // scrollbar from appearing with comctl32.dll versions earlier
         // than 6.0 (such as found in Win2k).
         const auto hItem = ::SendMessageW(GetHwnd(), CB_GETITEMHEIGHT, 0, 0);
-        heightWithItems = height + hItem*(nItems + 1);
+        heightWithItems = boundary.height + hItem*(nItems + 1);
     }
     else
     {
         heightWithItems = SetHeightSimpleComboBox(nItems);
     }
 
-    wxControl::DoMoveWindow(x, y, width, heightWithItems);
+    wxControl::DoMoveWindow(wxRect{boundary.x, boundary.y, boundary.width, heightWithItems});
 }
 
 wxSize wxChoice::DoGetSize() const
@@ -508,23 +507,21 @@ wxSize wxChoice::DoGetSize() const
     return ctrl_sz;
 }
 
-void wxChoice::DoSetSize(int x, int y,
-                         int width, int height,
-                         int sizeFlags)
+void wxChoice::DoSetSize(wxRect boundary, int sizeFlags)
 {
-    if ( height == GetBestSize().y )
+    if ( boundary.height == GetBestSize().y )
     {
         // we don't need to manually manage our height, let the system use the
         // default one
         m_heightOwn = wxDefaultCoord;
     }
-    else if ( height != wxDefaultCoord ) // non-default height specified
+    else if ( boundary.height != wxDefaultCoord ) // non-default height specified
     {
         // set our new own height but be careful not to make it too big: the
         // native control apparently stores it as a single byte and so setting
         // own height to 256 pixels results in default height being used (255
         // is still ok)
-        m_heightOwn = height;
+        m_heightOwn = boundary.height;
 
         if ( m_heightOwn > UCHAR_MAX )
             m_heightOwn = UCHAR_MAX;
@@ -534,7 +531,7 @@ void wxChoice::DoSetSize(int x, int y,
     }
 
     // do resize the native control
-    wxControl::DoSetSize(x, y, width, height, sizeFlags);
+    wxControl::DoSetSize(boundary, sizeFlags);
 
 
     // make the control itself of the requested height: notice that this
@@ -552,7 +549,7 @@ void wxChoice::DoSetSize(int x, int y,
     {
         // we need to report the size of the visible part of the control back
         // in GetSize() and not height stored by DoSetSize() in m_pendingSize
-        m_pendingSize = wxSize(width, height);
+        m_pendingSize = boundary.GetSize();
     }
 #else // !wxUSE_DEFERRED_SIZING
     // always update the visible height immediately

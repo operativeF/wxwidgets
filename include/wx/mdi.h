@@ -281,9 +281,9 @@ protected:
         return wxWindow::DoGetSize();
     }
 
-    void DoSetSize(int x, int y, int width, int height, int sizeFlags) override
+    void DoSetSize(wxRect boundary, int sizeFlags) override
     {
-        wxWindow::DoSetSize(x, y, width, height, sizeFlags);
+        wxWindow::DoSetSize(boundary, sizeFlags);
     }
 
     wxSize DoGetClientSize() const override
@@ -296,9 +296,9 @@ protected:
         wxWindow::DoSetClientSize(width, height);
     }
 
-    void DoMoveWindow(int x, int y, int width, int height) override
+    void DoMoveWindow(wxRect boundary) override
     {
-        wxWindow::DoMoveWindow(x, y, width, height);
+        wxWindow::DoMoveWindow(boundary);
     }
 
     wxPoint DoGetScreenPosition() const override

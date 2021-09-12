@@ -147,10 +147,10 @@ bool wxGenericStaticText::SetFont(const wxFont &font)
     return true;
 }
 
-void wxGenericStaticText::DoSetSize(int x, int y, int width, int height,
+void wxGenericStaticText::DoSetSize(wxRect boundary,
                                     int sizeFlags)
 {
-    wxStaticTextBase::DoSetSize(x, y, width, height, sizeFlags);
+    wxStaticTextBase::DoSetSize(boundary, sizeFlags);
     UpdateLabel();
 }
 

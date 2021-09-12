@@ -352,7 +352,7 @@ GridTestCase::GridTestCase() : m_tempGrid(nullptr)
     m_grid = new TestableGrid(wxTheApp->GetTopWindow());
     m_grid->CreateGrid(10, 2);
     // FIXME: Do not hard code this, it should be relative to screen density.
-    m_grid->SetSize(500, 300);
+    m_grid->SetSize(wxSize{500, 300});
 
     WaitForPaint waitForPaint(m_grid->GetGridWindow());
 

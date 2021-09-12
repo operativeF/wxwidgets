@@ -59,7 +59,7 @@ public:
 
 protected:
 
-    void DoMoveWindow(int x, int y, int width, int height) override;
+    void DoMoveWindow(wxRect boundary) override;
     void DoCentre(int dir) override;
     wxSize DoGetSize() const override;
     wxPoint DoGetPosition() const override;

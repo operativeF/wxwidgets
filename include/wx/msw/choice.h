@@ -96,16 +96,14 @@ protected:
                               unsigned int pos,
                               void **clientData, wxClientDataType type) override;
 
-    void DoMoveWindow(int x, int y, int width, int height) override;
+    void DoMoveWindow(wxRect boundary) override;
     void DoSetItemClientData(unsigned int n, void* clientData) override;
     void* DoGetItemClientData(unsigned int n) const override;
 
     // MSW implementation
     wxSize DoGetBestSize() const override;
     wxSize DoGetSize() const override;
-    void DoSetSize(int x, int y,
-                           int width, int height,
-                           int sizeFlags = wxSIZE_AUTO) override;
+    void DoSetSize(wxRect chsize, int sizeFlags = wxSIZE_AUTO) override;
     wxSize DoGetSizeFromTextSize(int xlen, int ylen = -1) const override;
 
     // Show or hide the popup part of the control.

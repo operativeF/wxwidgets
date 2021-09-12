@@ -291,7 +291,7 @@ public:
 
     // These are what make the sizer do size calculations and layout
     wxSize CalcMin() override;
-    void RepositionChildren(const wxSize& minSize) override;
+    void RepositionChildren(wxSize minSize) override;
 
 
     // Look at all items and see if any intersect (or would overlap) the given

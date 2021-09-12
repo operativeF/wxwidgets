@@ -281,10 +281,10 @@ private:
 class WXDLLIMPEXP_CORE wxSizerSpacer
 {
 public:
-    wxSizerSpacer(const wxSize& size) : m_size(size), m_isShown(true) { }
+    wxSizerSpacer(wxSize size) : m_size(size), m_isShown(true) { }
 
-    void SetSize(const wxSize& size) { m_size = size; }
-    const wxSize& GetSize() const { return m_size; }
+    void SetSize(wxSize size) { m_size = size; }
+    wxSize GetSize() const { return m_size; }
 
     void Show(bool show) { m_isShown = show; }
     bool IsShown() const { return m_isShown; }
@@ -369,7 +369,7 @@ public:
 
     virtual wxSize GetSize() const;
     virtual wxSize CalcMin();
-    virtual void SetDimension( const wxPoint& pos, const wxSize& size );
+    virtual void SetDimension( const wxPoint& pos, wxSize size );
 
     wxSize GetMinSize() const
         { return m_minSize; }
@@ -379,7 +379,7 @@ public:
         { return IsWindow() ? m_window->GetMaxSize() : wxDefaultSize; }
     wxSize GetMaxSizeWithBorder() const;
 
-    void SetMinSize(const wxSize& size)
+    void SetMinSize(wxSize size)
     {
         if ( IsWindow() )
             m_window->SetMinSize(size);
@@ -394,7 +394,7 @@ public:
     // to avoid "divide by zero" errors
     void SetRatio(int width, int height)
         { m_ratio = (width && height) ? ((float) width / (float) height) : 1; }
-    void SetRatio(const wxSize& size)
+    void SetRatio(wxSize size)
         { SetRatio(size.x, size.y); }
     void SetRatio(float ratio)
         { m_ratio = ratio; }
@@ -466,7 +466,7 @@ public:
         DoSetSizer(sizer);
     }
 
-    void AssignSpacer(const wxSize& size)
+    void AssignSpacer(wxSize size)
     {
         Free();
         DoSetSpacer(size);
@@ -484,11 +484,11 @@ protected:
     // common parts of Set/AssignXXX()
     void DoSetWindow(wxWindow *window);
     void DoSetSizer(wxSizer *sizer);
-    void DoSetSpacer(const wxSize& size);
+    void DoSetSpacer(wxSize size);
 
     // Add the border specified for this item to the given size
     // if it's != wxDefaultSize, just return wxDefaultSize otherwise.
-    wxSize AddBorderToSize(const wxSize& size) const;
+    wxSize AddBorderToSize(wxSize size) const;
 
     // discriminated union: depending on m_kind one of the fields is valid
     enum ItemKind
@@ -659,27 +659,19 @@ public:
     virtual bool InformFirstDirection( int WXUNUSED(direction), int WXUNUSED(size), int WXUNUSED(availableOtherDir) )
         { return false; }
 
-    void SetMinSize( int width, int height )
-        { DoSetMinSize( width, height ); }
-    void SetMinSize( const wxSize& size )
-        { DoSetMinSize( size.x, size.y ); }
+    void SetMinSize( wxSize size )
+        { DoSetMinSize( size ); }
 
     // Searches recursively
-    bool SetItemMinSize( wxWindow *window, int width, int height )
-        { return DoSetItemMinSize( window, width, height ); }
-    bool SetItemMinSize( wxWindow *window, const wxSize& size )
-        { return DoSetItemMinSize( window, size.x, size.y ); }
+    bool SetItemMinSize( wxWindow *window, wxSize minSize )
+        { return DoSetItemMinSize( window, minSize ); }
 
     // Searches recursively
-    bool SetItemMinSize( wxSizer *sizer, int width, int height )
-        { return DoSetItemMinSize( sizer, width, height ); }
-    bool SetItemMinSize( wxSizer *sizer, const wxSize& size )
-        { return DoSetItemMinSize( sizer, size.x, size.y ); }
+    bool SetItemMinSize( wxSizer *sizer, wxSize minSize )
+        { return DoSetItemMinSize( sizer, minSize ); }
 
-    bool SetItemMinSize( size_t index, int width, int height )
-        { return DoSetItemMinSize( index, width, height ); }
-    bool SetItemMinSize( size_t index, const wxSize& size )
-        { return DoSetItemMinSize( index, size.x, size.y ); }
+    bool SetItemMinSize( size_t index, wxSize minSize )
+        { return DoSetItemMinSize( index, minSize ); }
 
     wxSize GetSize() const
         { return m_size; }
@@ -697,7 +689,7 @@ public:
 
     // This method should be overridden but isn't pure virtual for backwards
     // compatibility.
-    virtual void RepositionChildren(const wxSize& WXUNUSED(minSize))
+    virtual void RepositionChildren(wxSize WXUNUSED(minSize))
     {
         RecalcSizes();
     }
@@ -726,7 +718,7 @@ public:
     const wxSizerItemList& GetChildren() const
         { return m_children; }
 
-    void SetDimension(const wxPoint& pos, const wxSize& size)
+    void SetDimension(const wxPoint& pos, wxSize size)
     {
         m_position = pos;
         m_size = size;
@@ -786,10 +778,10 @@ protected:
     wxSize GetMinClientSize( wxWindow *window );
     wxSize VirtualFitSize( wxWindow *window );
 
-    virtual void DoSetMinSize( int width, int height );
-    virtual bool DoSetItemMinSize( wxWindow *window, int width, int height );
-    virtual bool DoSetItemMinSize( wxSizer *sizer, int width, int height );
-    virtual bool DoSetItemMinSize( size_t index, int width, int height );
+    virtual void DoSetMinSize( wxSize minsize );
+    virtual bool DoSetItemMinSize( wxWindow *window, wxSize minSize );
+    virtual bool DoSetItemMinSize( wxSizer *sizer, wxSize minSize );
+    virtual bool DoSetItemMinSize( size_t index, wxSize minSize );
 
     // insert a new item into m_children at given index and return the item
     // itself
@@ -809,13 +801,13 @@ public:
     // ctors specifying the number of columns only: number of rows will be
     // deduced automatically depending on the number of sizer elements
     wxGridSizer( int cols, int vgap, int hgap );
-    wxGridSizer( int cols, const wxSize& gap = wxSize(0, 0) );
+    wxGridSizer( int cols, wxSize gap = {0, 0} );
 
     // ctors specifying the number of rows and columns
     wxGridSizer( int rows, int cols, int vgap, int hgap );
-    wxGridSizer( int rows, int cols, const wxSize& gap );
+    wxGridSizer( int rows, int cols, wxSize gap );
 
-    void RepositionChildren(const wxSize& minSize) override;
+    void RepositionChildren(wxSize minSize) override;
     wxSize CalcMin() override;
 
     void SetCols( int cols )
@@ -856,7 +848,7 @@ protected:
 
     wxSizerItem *DoInsert(size_t index, wxSizerItem *item) override;
 
-    void SetItemBounds( wxSizerItem *item, int x, int y, int w, int h );
+    void SetItemBounds(wxSizerItem *item, wxRect boundary);
 
     // returns the number of columns/rows needed for the current total number
     // of children (and the fixed number of rows/columns)
@@ -910,10 +902,10 @@ public:
     // ctors specifying the number of columns only: number of rows will be
     // deduced automatically depending on the number of sizer elements
     wxFlexGridSizer( int cols, int vgap, int hgap );
-    wxFlexGridSizer( int cols, const wxSize& gap = wxSize(0, 0) );
+    wxFlexGridSizer( int cols, wxSize gap = {0, 0} );
 
     wxFlexGridSizer( int rows, int cols, int vgap, int hgap );
-    wxFlexGridSizer( int rows, int cols, const wxSize& gap );
+    wxFlexGridSizer( int rows, int cols, wxSize gap );
 
     ~wxFlexGridSizer() = default;
 
@@ -949,12 +941,12 @@ public:
     const std::vector<int>& GetColWidths() const  { return m_colWidths; }
 
     // implementation
-    void RepositionChildren(const wxSize& minSize) override;
+    void RepositionChildren(wxSize minSize) override;
     wxSize CalcMin() override;
 
 protected:
     void AdjustForFlexDirection();
-    void AdjustForGrowables(const wxSize& sz, const wxSize& minSize);
+    void AdjustForGrowables(wxSize sz, wxSize minSize);
     wxSize FindWidthsAndHeights(int nrows, int ncols);
 
     // the heights/widths of all rows/columns
@@ -1004,7 +996,7 @@ public:
 
     // implementation of our resizing logic
     wxSize CalcMin() override;
-    void RepositionChildren(const wxSize& minSize) override;
+    void RepositionChildren(wxSize minSize) override;
 
     bool InformFirstDirection(int direction,
                                       int size,
@@ -1016,7 +1008,7 @@ protected:
 
     // helpers for our code: this returns the component of the given wxSize in
     // the direction of the sizer and in the other direction, respectively
-    int GetSizeInMajorDir(const wxSize& sz) const
+    int GetSizeInMajorDir(wxSize sz) const
     {
         return m_orient == wxHORIZONTAL ? sz.x : sz.y;
     }
@@ -1031,7 +1023,7 @@ protected:
         return m_orient == wxHORIZONTAL ? pt.x : pt.y;
     }
 
-    int GetSizeInMinorDir(const wxSize& sz) const
+    int GetSizeInMinorDir(wxSize sz) const
     {
         return m_orient == wxHORIZONTAL ? sz.y : sz.x;
     }
@@ -1091,7 +1083,7 @@ public:
     wxStaticBoxSizer& operator=(wxStaticBoxSizer&&) = default;
 
     wxSize CalcMin() override;
-    void RepositionChildren(const wxSize& minSize) override;
+    void RepositionChildren(wxSize minSize) override;
 
     wxStaticBox *GetStaticBox() const
         { return m_staticBox; }

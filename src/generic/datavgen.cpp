@@ -1686,7 +1686,7 @@ public:
         }
         else
         {
-            m_hint->Move( pos.x - m_dist_x, pos.y + 5  );
+            m_hint->Move(wxPoint{pos.x - m_dist_x, pos.y + 5});
             m_hint->SetTransparent( 128 );
         }
 

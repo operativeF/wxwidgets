@@ -362,7 +362,7 @@ public:
     wxLongLong GetPosition() override;
     wxLongLong GetDuration() override;
 
-    void Move(int x, int y, int w, int h) override;
+    void Move(wxRect boundary) override;
     wxSize GetVideoSize() const override;
 
     double GetPlaybackRate() override;
@@ -1189,22 +1189,22 @@ wxSize wxQTMediaBackend::GetVideoSize() const
 //
 // Sets the bounds of either the Movie or Movie Controller
 //---------------------------------------------------------------------------
-void wxQTMediaBackend::Move(int WXUNUSED(x), int WXUNUSED(y), int w, int h)
+void wxQTMediaBackend::Move(wxRect boundary)
 {
     if (m_movie)
     {
         // make room for controller
         if (m_pMC)
         {
-            if (w < 320)
-                w = 320;
+            if (boundary.width < 320)
+                boundary.width = 320;
 
-            Rect theRect = {0, 0, (short)h, (short)w};
+            Rect theRect = {0, 0, (short)boundary.height, (short)boundary.width};
             m_lib.MCSetControllerBoundsRect(m_pMC, &theRect);
         }
         else
         {
-            Rect theRect = {0, 0, (short)h, (short)w};
+            Rect theRect = {0, 0, (short)boundary.height, (short)boundary.width};
             m_lib.SetMovieBox(m_movie, &theRect);
         }
 

@@ -1591,9 +1591,10 @@ void wxHtmlWidgetCell::Draw(wxDC& WXUNUSED(dc),
                  wxT("widget cells can only be placed in wxHtmlWindow") );
 
     scrolwin->GetViewStart(&stx, &sty);
-    m_Wnd->SetSize(absx - wxHTML_SCROLL_STEP * stx,
-                   absy  - wxHTML_SCROLL_STEP * sty,
-                   m_Width, m_Height);
+    m_Wnd->SetSize(wxRect{absx - wxHTML_SCROLL_STEP * stx,
+                          absy  - wxHTML_SCROLL_STEP * sty,
+                          m_Width,
+                          m_Height});
 }
 
 
@@ -1613,7 +1614,10 @@ void wxHtmlWidgetCell::DrawInvisible(wxDC& WXUNUSED(dc),
     }
 
     ((wxScrolledWindow*)(m_Wnd->GetParent()))->GetViewStart(&stx, &sty);
-    m_Wnd->SetSize(absx - wxHTML_SCROLL_STEP * stx, absy  - wxHTML_SCROLL_STEP * sty, m_Width, m_Height);
+    m_Wnd->SetSize(wxRect{absx - wxHTML_SCROLL_STEP * stx,
+                          absy  - wxHTML_SCROLL_STEP * sty,
+                          m_Width,
+                          m_Height});
 }
 
 
@@ -1623,7 +1627,7 @@ void wxHtmlWidgetCell::Layout(int w)
     if (m_WidthFloat != 0)
     {
         m_Width = (w * m_WidthFloat) / 100;
-        m_Wnd->SetSize(m_Width, m_Height);
+        m_Wnd->SetSize(wxSize{m_Width, m_Height});
     }
 
     wxHtmlCell::Layout(w);

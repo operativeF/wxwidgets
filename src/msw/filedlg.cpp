@@ -263,10 +263,10 @@ wxSize wxFileDialog::DoGetSize() const
     return { gs_rectDialog.width, gs_rectDialog.height };
 }
 
-void wxFileDialog::DoMoveWindow(int x, int y, int WXUNUSED(w), int WXUNUSED(h))
+void wxFileDialog::DoMoveWindow(wxRect boundary)
 {
-    gs_rectDialog.x = x;
-    gs_rectDialog.y = y;
+    gs_rectDialog.x = boundary.x;
+    gs_rectDialog.y = boundary.y;
 
     // our HWND is only set when we're called from MSWOnInitDone(), test if
     // this is the case
@@ -275,7 +275,7 @@ void wxFileDialog::DoMoveWindow(int x, int y, int WXUNUSED(w), int WXUNUSED(h))
     {
         // size of the dialog can't be changed because the controls are not
         // laid out correctly then
-       ::SetWindowPos(hwnd, HWND_TOP, x, y, 0, 0, SWP_NOZORDER | SWP_NOSIZE);
+       ::SetWindowPos(hwnd, HWND_TOP, boundary.x, boundary.y, 0, 0, SWP_NOZORDER | SWP_NOSIZE);
     }
     else // just remember that we were requested to move the window
     {

@@ -100,7 +100,7 @@ wxDumpPreviewDlg::wxDumpPreviewDlg(wxWindow *parent,
     // ----------------
 
     // make the text window bigger to show more contents of the file
-    sizerTop->SetItemMinSize(m_text, 600, 300);
+    sizerTop->SetItemMinSize(m_text, wxSize{600, 300});
     SetSizer(sizerTop);
 
     Layout();

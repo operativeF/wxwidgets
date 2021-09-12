@@ -235,7 +235,7 @@ protected:
     wxSize DoGetBestSize() const override;
     wxSize DoGetSizeFromTextSize(int xlen, int ylen = -1) const override;
 
-    void DoMoveWindow(int x, int y, int width, int height) override;
+    void DoMoveWindow(wxRect boundary) override;
 
 #if wxUSE_RICHEDIT
     void MSWUpdateFontOnDPIChange(const wxSize& newDPI) override;

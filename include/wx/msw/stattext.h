@@ -48,8 +48,7 @@ public:
 
 protected:
     // implement/override some base class virtuals
-    void DoSetSize(int x, int y, int w, int h,
-                           int sizeFlags = wxSIZE_AUTO) override;
+    void DoSetSize(wxRect boundary, int sizeFlags = wxSIZE_AUTO) override;
     wxSize DoGetBestClientSize() const override;
 
     std::string WXGetVisibleLabel() const override;

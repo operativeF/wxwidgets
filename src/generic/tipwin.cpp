@@ -276,7 +276,7 @@ void wxTipWindowView::Adjust(std::string_view text, wxCoord maxLength)
     width  = 2*(TEXT_MARGIN_X + 1) + widthMax;
     height = 2*(TEXT_MARGIN_Y + 1) + gsl::narrow<wxCoord>(m_textLines.size()) * m_heightLine;
     m_parent->SetClientSize(width, height);
-    SetSize(0, 0, width, height);
+    SetSize(wxRect{0, 0, width, height});
 }
 
 void wxTipWindowView::OnPaint(wxPaintEvent& WXUNUSED(event))

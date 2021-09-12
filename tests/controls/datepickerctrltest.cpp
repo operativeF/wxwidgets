@@ -102,7 +102,7 @@ TEST_CASE("Date picker control test")
     {
         // Create another control just to give focus to it initially.
         auto m_button = std::make_unique<wxButton>(wxTheApp->GetTopWindow(), wxID_OK);
-        m_button->Move(0, m_datepicker->GetSize().y * 3);
+        m_button->Move(wxPoint{0, m_datepicker->GetSize().y * 3});
         m_button->SetFocus();
         wxYield();
 

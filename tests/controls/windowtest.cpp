@@ -320,16 +320,16 @@ TEST_CASE_FIXTURE(WindowTestCase, "Window::PositioningBeyondShortLimit")
                                wxSize(commonDim, commonDim));
     CHECK( w->GetPosition().y == SHRT_MAX + commonDim );
 
-    w->Move(0, 0);
+    w->Move(wxPoint{0, 0});
 
     //
     //Test window moving beyond SHRT_MAX
-    w->Move(0, SHRT_MAX + commonDim);
+    w->Move(wxPoint{0, SHRT_MAX + commonDim});
     CHECK( w->GetPosition().y == SHRT_MAX + commonDim );
 
     //
     //Test window moving below SHRT_MIN
-    w->Move(0, SHRT_MIN - commonDim);
+    w->Move(wxPoint{0, SHRT_MIN - commonDim});
     CHECK( w->GetPosition().y == SHRT_MIN - commonDim );
 
     //

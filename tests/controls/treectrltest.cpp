@@ -51,7 +51,7 @@ TEST_CASE("Tree control test")
     wxTreeItemId m_child2 = m_tree->AppendItem(m_root, "child2");
     wxTreeItemId m_grandchild = m_tree->AppendItem(m_child1, "grandchild");
 
-    m_tree->SetSize(400, 200);
+    m_tree->SetSize(wxSize{400, 200});
     m_tree->ExpandAll();
     m_tree->Refresh();
     m_tree->Update();

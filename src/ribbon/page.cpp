@@ -485,10 +485,10 @@ void wxRibbonPage::SetSizeWithScrollButtonAdjustment(int x, int y, int width, in
     }
     if (width < 0) width = 0;
     if (height < 0) height = 0;
-    SetSize(x, y, width, height);
+    SetSize(wxRect{x, y, width, height});
 }
 
-void wxRibbonPage::DoSetSize(int x, int y, int width, int height, int sizeFlags)
+void wxRibbonPage::DoSetSize(wxRect boundary, int sizeFlags)
 {
     // When a resize triggers the scroll buttons to become visible, the page is resized.
     // This resize from within a resize event can cause (MSW) wxWidgets some confusion,
@@ -497,7 +497,7 @@ void wxRibbonPage::DoSetSize(int x, int y, int width, int height, int sizeFlags)
 
     if(GetMajorAxis() == wxHORIZONTAL)
     {
-        m_size_in_major_axis_for_children = width;
+        m_size_in_major_axis_for_children = boundary.width;
         if(m_scroll_buttons_visible)
         {
             if(m_scroll_left_btn)
@@ -508,7 +508,7 @@ void wxRibbonPage::DoSetSize(int x, int y, int width, int height, int sizeFlags)
     }
     else
     {
-        m_size_in_major_axis_for_children = height;
+        m_size_in_major_axis_for_children = boundary.height;
         if(m_scroll_buttons_visible)
         {
             if(m_scroll_left_btn)
@@ -518,7 +518,7 @@ void wxRibbonPage::DoSetSize(int x, int y, int width, int height, int sizeFlags)
         }
     }
 
-    wxRibbonControl::DoSetSize(x, y, width, height, sizeFlags);
+    wxRibbonControl::DoSetSize(boundary, sizeFlags);
 }
 
 void wxRibbonPage::OnSize(wxSizeEvent& evt)
@@ -735,7 +735,7 @@ bool wxRibbonPage::DoActualLayout()
         wxWindow* child = node->GetData();
         int w = m_size_calc_array[size_index].x;
         int h = m_size_calc_array[size_index].y;
-        child->SetSize(origin.x, origin.y, w, h);
+        child->SetSize(wxRect{origin, wxSize{w, h}});
         if(major_axis == wxHORIZONTAL)
         {
             origin.x += w + gap;

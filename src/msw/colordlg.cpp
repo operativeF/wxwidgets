@@ -249,10 +249,9 @@ void wxColourDialog::DoCentre(int dir)
     // MSWOnInitDone() anyhow
 }
 
-void wxColourDialog::DoMoveWindow(int x, int y, int WXUNUSED(w), int WXUNUSED(h))
+void wxColourDialog::DoMoveWindow(wxRect boundary)
 {
-    s_rectDialog.x = x;
-    s_rectDialog.y = y;
+    s_rectDialog.SetPosition(boundary.GetPosition());
 
     // our HWND is only set when we're called from MSWOnInitDone(), test if
     // this is the case
@@ -261,7 +260,7 @@ void wxColourDialog::DoMoveWindow(int x, int y, int WXUNUSED(w), int WXUNUSED(h)
     {
         // size of the dialog can't be changed because the controls are not
         // laid out correctly then
-       ::SetWindowPos(hwnd, HWND_TOP, x, y, 0, 0, SWP_NOZORDER | SWP_NOSIZE);
+       ::SetWindowPos(hwnd, HWND_TOP, boundary.x, boundary.y, 0, 0, SWP_NOZORDER | SWP_NOSIZE);
     }
     else // just remember that we were requested to move the window
     {

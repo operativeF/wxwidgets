@@ -68,7 +68,7 @@ protected:
     std::string WXGetVisibleLabel() const override { return m_label; }
     void WXSetVisibleLabel(const std::string& label) override;
 
-    void DoSetSize(int x, int y, int width, int height, int sizeFlags) override;
+    void DoSetSize(wxRect boundary, int sizeFlags) override;
 
 #if wxUSE_MARKUP
     bool DoSetLabelMarkup(const std::string& markup) override;

@@ -466,7 +466,7 @@ void wxNotebook::SetPageSize(const wxSize& size)
     (void)TabCtrl_AdjustRect(GetHwnd(), true, &rc);
 
     // and now set it
-    SetSize(rc.right - rc.left, rc.bottom - rc.top);
+    SetSize(wxSize{rc.right - rc.left, rc.bottom - rc.top});
 }
 
 void wxNotebook::SetPadding(const wxSize& padding)
@@ -936,7 +936,7 @@ void wxNotebook::OnSize(wxSizeEvent& event)
 
     std::for_each(m_pages.begin(), m_pages.end(),
         [width, height, rc](auto* page){
-            page->SetSize(rc.left, rc.top, width, height);
+            page->SetSize(wxRect{rc.left, rc.top, width, height});
         });
 
 

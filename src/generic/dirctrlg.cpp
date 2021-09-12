@@ -1160,10 +1160,10 @@ void wxGenericDirCtrl::DoResize()
             filterSz = m_filterListCtrl->GetBestSize();
             sz.y -= (filterSz.y + verticalSpacing);
         }
-        m_treeCtrl->SetSize(0, 0, sz.x, sz.y);
+        m_treeCtrl->SetSize(wxRect{wxPoint{0, 0}, sz});
         if (m_filterListCtrl)
         {
-            m_filterListCtrl->SetSize(0, sz.y + verticalSpacing, sz.x, filterSz.y);
+            m_filterListCtrl->SetSize(wxRect{0, sz.y + verticalSpacing, sz.x, filterSz.y});
             // Don't know why, but this needs refreshing after a resize (wxMSW)
             m_filterListCtrl->Refresh();
         }

@@ -2581,12 +2581,12 @@ void wxWindowBase::SetConstraintSizes(bool recurse)
         {
             // We really shouldn't set negative sizes for the windows so make
             // them at least of 1*1 size
-            SetSize(x, y, w > 0 ? w : 1, h > 0 ? h : 1);
+            SetSize(wxRect{x, y, w > 0 ? w : 1, h > 0 ? h : 1});
         }
         else
         {
             // If we don't want to resize this window, just move it...
-            Move(x, y);
+            Move(wxPoint{x, y});
         }
     }
     else if ( constr )

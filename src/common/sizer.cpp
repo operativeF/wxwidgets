@@ -226,7 +226,7 @@ wxSizerItem::wxSizerItem(wxSizer *sizer,
 }
 
 // spacer item
-void wxSizerItem::DoSetSpacer(const wxSize& size)
+void wxSizerItem::DoSetSpacer(wxSize size)
 {
     m_kind = ItemKind::Spacer;
     m_spacer = new wxSizerSpacer(size);
@@ -234,7 +234,7 @@ void wxSizerItem::DoSetSpacer(const wxSize& size)
     SetRatio(size);
 }
 
-wxSize wxSizerItem::AddBorderToSize(const wxSize& size) const
+wxSize wxSizerItem::AddBorderToSize(wxSize size) const
 {
     wxSize result = size;
 
@@ -457,7 +457,7 @@ wxSize wxSizerItem::GetMaxSizeWithBorder() const
     return AddBorderToSize(GetMaxSize());
 }
 
-void wxSizerItem::SetDimension( const wxPoint& pos_, const wxSize& size_ )
+void wxSizerItem::SetDimension( const wxPoint& pos_, wxSize size_ )
 {
     wxPoint pos = pos_;
     wxSize size = size_;
@@ -533,8 +533,7 @@ void wxSizerItem::SetDimension( const wxPoint& pos_, const wxSize& size_ )
             // wxSizeEvent would normally be generated and thus the
             // control wouldn't get laid out correctly here.
 #if 1
-            m_window->SetSize(pos.x, pos.y, size.x, size.y,
-                              wxSIZE_ALLOW_MINUS_ONE|wxSIZE_FORCE_EVENT );
+            m_window->SetSize(wxRect{pos, size}, wxSIZE_ALLOW_MINUS_ONE|wxSIZE_FORCE_EVENT );
 #else
             m_window->SetSize(pos.x, pos.y, size.x, size.y,
                               wxSIZE_ALLOW_MINUS_ONE );
@@ -1063,13 +1062,12 @@ wxSize wxSizer::GetMinSize()
     return ret;
 }
 
-void wxSizer::DoSetMinSize( int width, int height )
+void wxSizer::DoSetMinSize(wxSize minSize)
 {
-    m_minSize.x = width;
-    m_minSize.y = height;
+    m_minSize = minSize;
 }
 
-bool wxSizer::DoSetItemMinSize( wxWindow *window, int width, int height )
+bool wxSizer::DoSetItemMinSize( wxWindow *window, wxSize minSize )
 {
     wxASSERT_MSG( window, wxT("SetMinSize for NULL window") );
 
@@ -1082,7 +1080,7 @@ bool wxSizer::DoSetItemMinSize( wxWindow *window, int width, int height )
 
         if (item->GetWindow() == window)
         {
-            item->SetMinSize( width, height );
+            item->SetMinSize( minSize );
             return true;
         }
         node = node->GetNext();
@@ -1096,7 +1094,7 @@ bool wxSizer::DoSetItemMinSize( wxWindow *window, int width, int height )
         wxSizerItem     *item = node->GetData();
 
         if ( item->GetSizer() &&
-             item->GetSizer()->DoSetItemMinSize( window, width, height ) )
+             item->GetSizer()->DoSetItemMinSize( window, minSize ) )
         {
             // A child sizer found the requested windw, exit.
             return true;
@@ -1107,7 +1105,7 @@ bool wxSizer::DoSetItemMinSize( wxWindow *window, int width, int height )
     return false;
 }
 
-bool wxSizer::DoSetItemMinSize( wxSizer *sizer, int width, int height )
+bool wxSizer::DoSetItemMinSize( wxSizer *sizer, wxSize minSize )
 {
     wxASSERT_MSG( sizer, wxT("SetMinSize for NULL sizer") );
 
@@ -1120,7 +1118,7 @@ bool wxSizer::DoSetItemMinSize( wxSizer *sizer, int width, int height )
 
         if (item->GetSizer() == sizer)
         {
-            item->GetSizer()->DoSetMinSize( width, height );
+            item->GetSizer()->DoSetMinSize( minSize );
             return true;
         }
         node = node->GetNext();
@@ -1134,7 +1132,7 @@ bool wxSizer::DoSetItemMinSize( wxSizer *sizer, int width, int height )
         wxSizerItem     *item = node->GetData();
 
         if ( item->GetSizer() &&
-             item->GetSizer()->DoSetItemMinSize( sizer, width, height ) )
+             item->GetSizer()->DoSetItemMinSize( sizer, minSize ) )
         {
             // A child found the requested sizer, exit.
             return true;
@@ -1145,7 +1143,7 @@ bool wxSizer::DoSetItemMinSize( wxSizer *sizer, int width, int height )
     return false;
 }
 
-bool wxSizer::DoSetItemMinSize( size_t index, int width, int height )
+bool wxSizer::DoSetItemMinSize( size_t index, wxSize minSize )
 {
     wxSizerItemList::compatibility_iterator node = m_children.Item( index );
 
@@ -1156,12 +1154,12 @@ bool wxSizer::DoSetItemMinSize( size_t index, int width, int height )
     if (item->GetSizer())
     {
         // Sizers contains the minimal size in them, if not calculated ...
-        item->GetSizer()->DoSetMinSize( width, height );
+        item->GetSizer()->DoSetMinSize( minSize );
     }
     else
     {
         // ... but the minimal size of spacers and windows is stored via the item
-        item->SetMinSize( width, height );
+        item->SetMinSize( minSize );
     }
 
     return true;
@@ -1378,7 +1376,7 @@ wxGridSizer::wxGridSizer( int cols, int vgap, int hgap )
     wxASSERT(cols >= 0);
 }
 
-wxGridSizer::wxGridSizer( int cols, const wxSize& gap )
+wxGridSizer::wxGridSizer( int cols, wxSize gap )
     : m_rows( cols == 0 ? 1 : 0 ),
       m_cols( cols ),
       m_vgap( gap.y ),
@@ -1396,7 +1394,7 @@ wxGridSizer::wxGridSizer( int rows, int cols, int vgap, int hgap )
     wxASSERT(rows >= 0 && cols >= 0);
 }
 
-wxGridSizer::wxGridSizer( int rows, int cols, const wxSize& gap )
+wxGridSizer::wxGridSizer( int rows, int cols, wxSize gap )
     : m_rows( rows || cols ? rows : 1 ),
       m_cols( cols ),
       m_vgap( gap.y ),
@@ -1467,7 +1465,7 @@ int wxGridSizer::CalcRowsCols(int& nrows, int& ncols) const
     return nitems;
 }
 
-void wxGridSizer::RepositionChildren(const wxSize& WXUNUSED(minSize))
+void wxGridSizer::RepositionChildren(wxSize WXUNUSED(minSize))
 {
     int nitems, nrows, ncols;
     if ( (nitems = CalcRowsCols(nrows, ncols)) == 0 )
@@ -1492,7 +1490,7 @@ void wxGridSizer::RepositionChildren(const wxSize& WXUNUSED(minSize))
 
                 wxASSERT_MSG( node, wxT("Failed to find SizerItemList node") );
 
-                SetItemBounds( node->GetData(), x, y, w, h);
+                SetItemBounds( node->GetData(), wxRect{x, y, w, h});
             }
             y = y + h + m_vgap;
         }
@@ -1555,9 +1553,9 @@ wxSize wxGridSizer::CalcMin()
              nrows * h + (nrows-1) * m_vgap };
 }
 
-void wxGridSizer::SetItemBounds( wxSizerItem *item, int x, int y, int w, int h )
+void wxGridSizer::SetItemBounds(wxSizerItem *item, wxRect boundary)
 {
-    wxPoint pt( x,y );
+    wxPoint pt{boundary.GetPosition()};
     wxSize sz( item->GetMinSizeWithBorder() );
     int flag = item->GetFlag();
 
@@ -1565,34 +1563,34 @@ void wxGridSizer::SetItemBounds( wxSizerItem *item, int x, int y, int w, int h )
     // directions.
     if ( flag & wxSHAPED )
     {
-        sz = wxSize(w, h);
+        sz = boundary.GetSize();
     }
     else // Otherwise we handle each direction individually.
     {
         if (flag & wxALIGN_CENTER_HORIZONTAL)
         {
-            pt.x = x + (w - sz.x) / 2;
+            pt.x = boundary.x + (boundary.width - sz.x) / 2;
         }
         else if (flag & wxALIGN_RIGHT)
         {
-            pt.x = x + (w - sz.x);
+            pt.x = boundary.x + (boundary.width - sz.x);
         }
         else if (flag & wxEXPAND)
         {
-            sz.x = w;
+            sz.x = boundary.width;
         }
 
         if (flag & wxALIGN_CENTER_VERTICAL)
         {
-            pt.y = y + (h - sz.y) / 2;
+            pt.y = boundary.y + (boundary.height - sz.y) / 2;
         }
         else if (flag & wxALIGN_BOTTOM)
         {
-            pt.y = y + (h - sz.y);
+            pt.y = boundary.y + (boundary.height - sz.y);
         }
         else if ( flag & wxEXPAND )
         {
-            sz.y = h;
+            sz.y = boundary.height;
         }
     }
 
@@ -1608,7 +1606,7 @@ wxFlexGridSizer::wxFlexGridSizer( int cols, int vgap, int hgap )
 {
 }
 
-wxFlexGridSizer::wxFlexGridSizer( int cols, const wxSize& gap )
+wxFlexGridSizer::wxFlexGridSizer( int cols, wxSize gap )
                : wxGridSizer( cols, gap )
 {
 }
@@ -1618,12 +1616,12 @@ wxFlexGridSizer::wxFlexGridSizer( int rows, int cols, int vgap, int hgap )
 {
 }
 
-wxFlexGridSizer::wxFlexGridSizer( int rows, int cols, const wxSize& gap )
+wxFlexGridSizer::wxFlexGridSizer( int rows, int cols, wxSize gap )
                : wxGridSizer( rows, cols, gap )
 {
 }
 
-void wxFlexGridSizer::RepositionChildren(const wxSize& minSize)
+void wxFlexGridSizer::RepositionChildren(wxSize minSize)
 {
     int nrows, ncols;
     if ( !CalcRowsCols(nrows, ncols) )
@@ -1671,7 +1669,7 @@ void wxFlexGridSizer::RepositionChildren(const wxSize& minSize)
             if ( wcol < w )
                 w = wcol;
 
-            SetItemBounds(*i, pt.x + x, pt.y + y, w, h);
+            SetItemBounds(*i, wxRect{pt.x + x, pt.y + y, w, h});
 
             x += wcol + m_hgap;
         }
@@ -1864,7 +1862,7 @@ DoAdjustForGrowables(int delta,
     }
 }
 
-void wxFlexGridSizer::AdjustForGrowables(const wxSize& sz, const wxSize& minSize)
+void wxFlexGridSizer::AdjustForGrowables(wxSize sz, wxSize minSize)
 {
 #if wxDEBUG_LEVEL
     // by the time this function is called, the sizer should be already fully
@@ -2137,7 +2135,7 @@ GetMinOrRemainingSize(int orient, const wxSizerItem *item, int *remainingSpace_)
 
 } // anonymous namespace
 
-void wxBoxSizer::RepositionChildren(const wxSize& minSize)
+void wxBoxSizer::RepositionChildren(wxSize minSize)
 {
     if ( m_children.empty() )
         return;
@@ -2578,12 +2576,12 @@ wxStaticBoxSizer::~wxStaticBoxSizer()
         m_staticBox->WXDestroyWithoutChildren();
 }
 
-void wxStaticBoxSizer::RepositionChildren(const wxSize& minSize)
+void wxStaticBoxSizer::RepositionChildren(wxSize minSize)
 {
     int top_border, other_border;
     m_staticBox->GetBordersForSizer(&top_border, &other_border);
 
-    m_staticBox->SetSize( m_position.x, m_position.y, m_size.x, m_size.y );
+    m_staticBox->SetSize( wxRect{m_position.x, m_position.y, m_size.x, m_size.y} );
 
     wxSize old_size( m_size );
     m_size.x -= 2*other_border;

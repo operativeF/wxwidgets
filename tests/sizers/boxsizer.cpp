@@ -272,7 +272,7 @@ TEST_CASE_FIXTURE(BoxSizerTestCase, "BoxSizer::SetMinSize")
 
     // Setting minimal size explicitly must make GetMinSize() return at least
     // this size even if it needs a much smaller one.
-    m_sizer->SetMinSize(100, 0);
+    m_sizer->SetMinSize(wxSize{100, 0});
     CHECK(m_sizer->GetMinSize().x == 100);
 
     m_sizer->Layout();

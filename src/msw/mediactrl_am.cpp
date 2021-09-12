@@ -845,7 +845,7 @@ public:
     wxLongLong GetPosition() override;
     wxLongLong GetDuration() override;
 
-    void Move(int x, int y, int w, int h) override;
+    void Move(wxRect boundary) override;
     wxSize GetVideoSize() const override;
 
     double GetPlaybackRate() override;
@@ -1516,8 +1516,7 @@ wxSize wxAMMediaBackend::GetVideoSize() const
 //
 // We take care of this in our redrawing
 //---------------------------------------------------------------------------
-void wxAMMediaBackend::Move(int WXUNUSED(x), int WXUNUSED(y),
-                            int WXUNUSED(w), int WXUNUSED(h))
+void wxAMMediaBackend::Move(wxRect boundary)
 {
 }
 

@@ -51,9 +51,7 @@ public:
 protected:
     wxSize DoGetSize() const override;
     wxSize DoGetClientSize() const override;
-    void DoSetSize(int x, int y,
-                           int width, int height,
-                           int sizeFlags = wxSIZE_AUTO) override;
+    void DoSetSize(wxRect boundary, int sizeFlags = wxSIZE_AUTO) override;
 
 private:
     std::string                m_title;

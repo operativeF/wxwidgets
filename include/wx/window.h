@@ -271,24 +271,15 @@ public:
     // ---------------
 
         // set the window size and/or position
-    void SetSize( int x, int y, int width, int height,
+    void SetSize( wxRect boundary,
                   int sizeFlags = wxSIZE_AUTO )
-        {  DoSetSize(x, y, width, height, sizeFlags); }
+        {  DoSetSize(boundary, sizeFlags); }
 
-    void SetSize( int width, int height )
-        { DoSetSize( wxDefaultCoord, wxDefaultCoord, width, height, wxSIZE_USE_EXISTING ); }
+    void SetSize( wxSize sz )
+        { DoSetSize( wxRect{wxDefaultCoord, wxDefaultCoord, sz.x, sz.y}, wxSIZE_USE_EXISTING ); }
 
-    void SetSize( const wxSize& size )
-        { SetSize( size.x, size.y); }
-
-    void SetSize(const wxRect& rect, int sizeFlags = wxSIZE_AUTO)
-        { DoSetSize(rect.x, rect.y, rect.width, rect.height, sizeFlags); }
-
-    void Move(int x, int y, int flags = wxSIZE_USE_EXISTING)
-        { DoSetSize(x, y, wxDefaultCoord, wxDefaultCoord, flags); }
-
-    void Move(const wxPoint& pt, int flags = wxSIZE_USE_EXISTING)
-        { Move(pt.x, pt.y, flags); }
+    void Move(wxPoint pos, int flags = wxSIZE_USE_EXISTING)
+        { DoSetSize( wxRect{pos.x, pos.y, wxDefaultCoord, wxDefaultCoord}, flags); }
 
     void SetPosition(const wxPoint& pt) { Move(pt); }
 
@@ -1811,9 +1802,7 @@ protected:
     // this is the virtual function to be overridden in any derived class which
     // wants to change how SetSize() or Move() works - it is called by all
     // versions of these functions in the base class
-    virtual void DoSetSize(int x, int y,
-                           int width, int height,
-                           int sizeFlags = wxSIZE_AUTO) = 0;
+    virtual void DoSetSize(wxRect boundary, int sizeFlags = wxSIZE_AUTO) = 0;
 
     // same as DoSetSize() for the client size
     virtual void DoSetClientSize(int x, int y) = 0;
@@ -1839,7 +1828,7 @@ protected:
     // Important note: the coordinates passed to this method are in parent's
     // *window* coordinates and not parent's client coordinates (as the values
     // passed to DoSetSize and returned by DoGetPosition are)!
-    virtual void DoMoveWindow(int x, int y, int width, int height) = 0;
+    virtual void DoMoveWindow(wxRect boundary) = 0;
 
     // centre the window in the specified direction on parent, note that
     // wxCENTRE_ON_SCREEN shouldn't be specified here, it only makes sense for

@@ -1212,7 +1212,7 @@ bool wxAuiManager::DetachPane(wxWindow* window)
                 // reparent it to m_frame and destroy the floating frame
 
                 // reduce flicker
-                p.window->SetSize(1,1);
+                p.window->SetSize(wxSize{1, 1});
 
                 if (p.frame->IsShown())
                     p.frame->Show(false);
@@ -1829,7 +1829,7 @@ void wxAuiManager::LayoutAddPane(wxSizer* cont,
         // Don't do this because it breaks the pane size in floating windows
         // BIW: Right now commenting this out is causing problems with
         // an mdi client window as the center pane.
-        vert_pane_sizer->SetItemMinSize(pane.window, 1, 1);
+        vert_pane_sizer->SetItemMinSize(pane.window, wxSize{1, 1});
     }
 
     part.type = wxAuiDockUIPart::typePane;
@@ -1859,8 +1859,8 @@ void wxAuiManager::LayoutAddPane(wxSizer* cont,
     if (min_size != wxDefaultSize)
     {
         vert_pane_sizer->SetItemMinSize(
-                        vert_pane_sizer->GetChildren().GetCount()-1,
-                        min_size.x, min_size.y);
+                        vert_pane_sizer->GetChildren().GetCount() - 1,
+                        min_size);
     }
 
 
@@ -2025,9 +2025,9 @@ void wxAuiManager::LayoutAddDock(wxSizer* cont,
     uiparts.Add(part);
 
     if (dock.IsHorizontal())
-        cont->SetItemMinSize(dock_sizer, 0, dock.size);
+        cont->SetItemMinSize(dock_sizer, wxSize{0, dock.size});
     else
-        cont->SetItemMinSize(dock_sizer, dock.size, 0);
+        cont->SetItemMinSize(dock_sizer, wxSize{dock.size, 0});
 
     //  top and left docks have a sash after them
     if (!m_hasMaximized &&
@@ -2480,7 +2480,7 @@ void wxAuiManager::Update()
             // reparent it to m_frame and destroy the floating frame
 
             // reduce flicker
-            p.window->SetSize(1,1);
+            p.window->SetSize(wxSize{1, 1});
 
 
             // the following block is a workaround for bug #1531361
@@ -2563,8 +2563,7 @@ void wxAuiManager::Update()
                 // and size reflect the information in wxAuiPaneInfo
                 if ((p.frame->GetPosition() != p.floating_pos) || (p.frame->GetSize() != p.floating_size))
                 {
-                    p.frame->SetSize(p.floating_pos.x, p.floating_pos.y,
-                                     p.floating_size.x, p.floating_size.y,
+                    p.frame->SetSize(wxRect{p.floating_pos.x, p.floating_pos.y, p.floating_size.x, p.floating_size.y},
                                      wxSIZE_USE_EXISTING);
                 /*
                     p.frame->SetSize(p.floating_pos.x, p.floating_pos.y,
@@ -4628,8 +4627,8 @@ void wxAuiManager::OnMotion(wxMouseEvent& event)
             }
 
             wxPoint pt = m_frame->ClientToScreen(event.GetPosition());
-            m_actionWindow->Move(pt.x - m_actionOffset.x,
-                                pt.y - m_actionOffset.y);
+            m_actionWindow->Move(wxPoint{pt.x - m_actionOffset.x,
+                                         pt.y - m_actionOffset.y});
         }
     }
     else if (m_action == actionDragToolbarPane)
@@ -4647,8 +4646,8 @@ void wxAuiManager::OnMotion(wxMouseEvent& event)
         if (pane.IsFloating())
         {
             wxPoint pt = m_frame->ClientToScreen(event.GetPosition());
-            pane.floating_pos = wxPoint(pt.x - m_actionOffset.x,
-                                        pt.y - m_actionOffset.y);
+            pane.floating_pos = wxPoint{pt.x - m_actionOffset.x,
+                                        pt.y - m_actionOffset.y};
         }
 
         // this will do the actual move operation;

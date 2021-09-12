@@ -340,9 +340,9 @@ void wxHtmlHelpController::SetFrameParameters(const std::string& titleFormat,
     wxHtmlHelpFrame* frame = wxDynamicCast(FindTopLevelWindow(), wxHtmlHelpFrame);
     wxHtmlHelpDialog* dialog = wxDynamicCast(FindTopLevelWindow(), wxHtmlHelpDialog);
     if (frame)
-        frame->SetSize(pos.x, pos.y, size.x, size.y);
+        frame->SetSize(wxRect{pos, size});
     else if (dialog)
-        dialog->SetSize(pos.x, pos.y, size.x, size.y);
+        dialog->SetSize(wxRect{pos, size});
 }
 
 wxFrame* wxHtmlHelpController::GetFrameParameters(wxSize *size,

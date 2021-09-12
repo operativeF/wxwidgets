@@ -67,7 +67,7 @@ protected:
     wxPoint DoGetPosition() const override;
     wxSize DoGetSize() const override;
     wxSize DoGetClientSize() const override;
-    void DoMoveWindow(int x, int y, int width, int height) override;
+    void DoMoveWindow(wxRect boundary) override;
     void DoCentre(int dir) override;
 
     wxColourData        m_colourData;

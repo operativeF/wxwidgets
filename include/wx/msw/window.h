@@ -654,9 +654,7 @@ protected:
     wxPoint DoGetPosition() const override;
     wxSize DoGetSize() const override;
     wxSize DoGetClientSize() const override;
-    void DoSetSize(int x, int y,
-                           int width, int height,
-                           int sizeFlags = wxSIZE_AUTO) override;
+    void DoSetSize(wxRect boundary, int sizeFlags = wxSIZE_AUTO) override;
     void DoSetClientSize(int width, int height) override;
 
     wxSize DoGetBorderSize() const override;
@@ -675,13 +673,13 @@ protected:
     //
     // returns true if the window move was deferred, false if it was moved
     // immediately (no error return)
-    bool DoMoveSibling(WXHWND hwnd, int x, int y, int width, int height);
+    bool DoMoveSibling(WXHWND hwnd, wxRect boundary);
 
     // move the window to the specified location and resize it: this is called
     // from both DoSetSize() and DoSetClientSize() and would usually just call
     // ::MoveWindow() except for composite controls which will want to arrange
     // themselves inside the given rectangle
-    void DoMoveWindow(int x, int y, int width, int height) override;
+    void DoMoveWindow(wxRect boundary) override;
 
 #if wxUSE_TOOLTIPS
     void DoSetToolTip( wxToolTip *tip ) override;
@@ -765,7 +763,7 @@ private:
     bool MSWSafeIsDialogMessage(WXMSG* msg);
 #endif // __WXUNIVERSAL__
 
-    static inline bool MSWIsPositionDirectlySupported(int x, int y)
+    static inline bool MSWIsPositionDirectlySupported(wxPoint pos)
     {
         // The supported coordinate intervals for various functions are:
         // - MoveWindow, DeferWindowPos: [-32768, 32767] a.k.a. [SHRT_MIN, SHRT_MAX];
@@ -773,17 +771,16 @@ private:
         // CreateXXX will _sometimes_ manage to create the window at higher coordinates
         // like 32580, 32684, 32710, but that was not consistent and the lowest common
         // limit was 32554 (so far at least).
-        return (x >= SHRT_MIN && x <= 32554 && y >= SHRT_MIN && y <= 32554);
+        return (pos.x >= SHRT_MIN && pos.x <= 32554 && pos.y >= SHRT_MIN && pos.y <= 32554);
     }
 
 protected:
     WXHWND MSWCreateWindowAtAnyPosition(WXDWORD exStyle, const std::string& clName,
                                         const std::string& title, WXDWORD style,
-                                        int x, int y, int width, int height,
+                                        wxRect boundary,
                                         WXHWND parent, wxWindowID id);
 
-    void MSWMoveWindowToAnyPosition(WXHWND hwnd, int x, int y,
-                                    int width, int height, bool bRepaint);
+    void MSWMoveWindowToAnyPosition(WXHWND hwnd, wxRect boundary, bool bRepaint);
 
 #if wxUSE_DEFERRED_SIZING
     // this function is called after the window was resized to its new size

@@ -673,8 +673,10 @@ void wxSplitterWindow::SizeWindows()
 
     if ( GetWindow1() && !GetWindow2() )
     {
-        GetWindow1()->SetSize(GetBorderSize(), GetBorderSize(),
-                              client_size.x - 2*GetBorderSize(), client_size.y - 2*GetBorderSize());
+        GetWindow1()->SetSize(wxRect{GetBorderSize(),
+                                     GetBorderSize(),
+                                     client_size.x - 2*GetBorderSize(),
+                                     client_size.y - 2*GetBorderSize()});
     }
     else if ( GetWindow1() && GetWindow2() )
     {
@@ -712,8 +714,8 @@ void wxSplitterWindow::SizeWindows()
             y2 = size2;
         }
 
-        GetWindow2()->SetSize(x2, y2, w2, h2);
-        GetWindow1()->SetSize(border, border, w1, h1);
+        GetWindow2()->SetSize(wxRect{x2, y2, w2, h2});
+        GetWindow1()->SetSize(wxRect{border, border, w1, h1});
     }
 
     wxClientDC dc(this);

@@ -40,7 +40,7 @@ public:
     wxWrapSizer& operator=(wxWrapSizer&&) = default;
 
     wxSize CalcMin() override;
-    void RepositionChildren(const wxSize& minSize) override;
+    void RepositionChildren(wxSize minSize) override;
 
     bool InformFirstDirection(int direction,
                               int size,

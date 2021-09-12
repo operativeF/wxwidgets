@@ -502,23 +502,21 @@ wxIMPLEMENT_ABSTRACT_CLASS(wxSVGFileDCImpl, wxDCImpl);
 
 wxSVGFileDCImpl::wxSVGFileDCImpl(wxSVGFileDC* owner,
                                  const std::string& filename,
-                                 int width,
-                                 int height,
+                                 wxSize dimen,
                                  double dpi,
                                  const std::string& title)
     : wxDCImpl(owner)
 {
-    Init(filename, width, height, dpi, title);
+    Init(filename, dimen, dpi, title);
 }
 
 void wxSVGFileDCImpl::Init(const std::string& filename,
-                           int width,
-                           int height,
+                           wxSize dimen,
                            double dpi,
                            const std::string& title)
 {
-    m_width = width;
-    m_height = height;
+    m_width = dimen.x;
+    m_height = dimen.y;
 
     m_dpi = dpi;
 

@@ -217,14 +217,14 @@ bool wxRadioBox::Create(wxWindow *parent,
     // Select the first radio button if we have any buttons at all.
     if ( !choices.empty() )
         SetSelection(0);
-    SetSize(pos.x, pos.y, size.x, size.y);
+    SetSize(wxRect{pos, size});
 
     // Now that we have items determine what is the best size and set it.
     SetInitialSize(size);
 
     // And update all the buttons positions to match it.
     const wxSize actualSize = GetSize();
-    PositionAllButtons(pos.x, pos.y, actualSize.x, actualSize.y);
+    PositionAllButtons(wxRect{pos, actualSize});
 
     // The base wxStaticBox class never accepts focus, but we do because giving
     // focus to a wxRadioBox actually gives it to one of its buttons, which are
@@ -566,35 +566,35 @@ wxSize wxRadioBox::DoGetBestSize() const
     return GetTotalButtonSize(GetMaxButtonSize());
 }
 
-void wxRadioBox::DoSetSize(int x, int y, int width, int height, int sizeFlags)
+void wxRadioBox::DoSetSize(wxRect boundary, int sizeFlags)
 {
-    if ( (width == wxDefaultCoord && (sizeFlags & wxSIZE_AUTO_WIDTH)) ||
-            (height == wxDefaultCoord && (sizeFlags & wxSIZE_AUTO_HEIGHT)) )
+    if ( (boundary.width == wxDefaultCoord && (sizeFlags & wxSIZE_AUTO_WIDTH)) ||
+            (boundary.height == wxDefaultCoord && (sizeFlags & wxSIZE_AUTO_HEIGHT)) )
     {
         // Attempt to have a look coherent with other platforms: We compute the
         // biggest toggle dim, then we align all items according this value.
         const wxSize totSize = GetTotalButtonSize(GetMaxButtonSize());
 
         // only change our width/height if asked for
-        if ( width == wxDefaultCoord && (sizeFlags & wxSIZE_AUTO_WIDTH) )
-            width = totSize.x;
+        if ( boundary.width == wxDefaultCoord && (sizeFlags & wxSIZE_AUTO_WIDTH) )
+            boundary.width = totSize.x;
 
-        if ( height == wxDefaultCoord && (sizeFlags & wxSIZE_AUTO_HEIGHT) )
-            height = totSize.y;
+        if ( boundary.height == wxDefaultCoord && (sizeFlags & wxSIZE_AUTO_HEIGHT) )
+            boundary.height = totSize.y;
     }
 
-    wxStaticBox::DoSetSize(x, y, width, height);
+    wxStaticBox::DoSetSize(boundary);
 }
 
-void wxRadioBox::DoMoveWindow(int x, int y, int width, int height)
+void wxRadioBox::DoMoveWindow(wxRect boundary)
 {
-    wxStaticBox::DoMoveWindow(x, y, width, height);
+    wxStaticBox::DoMoveWindow(boundary);
 
-    PositionAllButtons(x, y, width, height);
+    PositionAllButtons(boundary);
 }
 
 void
-wxRadioBox::PositionAllButtons(int x, int y, int width, int WXUNUSED(height))
+wxRadioBox::PositionAllButtons(wxRect boundary)
 {
     wxSize maxSize = GetMaxButtonSize();
     int maxWidth = maxSize.x,
@@ -613,8 +613,8 @@ wxRadioBox::PositionAllButtons(int x, int y, int width, int WXUNUSED(height))
 
     wxSize ch_size = wxGetCharSize(m_hWnd, GetFont());
 
-    int x_offset = x + ch_size.x;
-    int y_offset = y + ch_size.y;
+    int x_offset = boundary.x + ch_size.x;
+    int y_offset = boundary.y + ch_size.y;
 
     // Add extra space under the label, if it exists.
     if (!wxControl::GetLabel().empty())
@@ -664,7 +664,7 @@ wxRadioBox::PositionAllButtons(int x, int y, int width, int WXUNUSED(height))
         if ( isLastInTheRow )
         {
             // make the button go to the end of radio box
-            widthBtn = startX + width - x_offset - 2*ch_size.x;
+            widthBtn = startX + boundary.width - x_offset - 2*ch_size.x;
             if ( widthBtn < maxWidth )
                 widthBtn = maxWidth;
         }
@@ -678,7 +678,7 @@ wxRadioBox::PositionAllButtons(int x, int y, int width, int WXUNUSED(height))
         // the radiobox entirely and the radiobox tooltips are always shown
         // (otherwise they are not when the mouse pointer is in the radiobox
         // part not belonging to any radiobutton)
-        DoMoveSibling((*m_radioButtons)[i], x_offset, y_offset, widthBtn, maxHeight);
+        DoMoveSibling((*m_radioButtons)[i], wxRect{x_offset, y_offset, widthBtn, maxHeight});
 
         // where do we put the next button?
         if ( m_windowStyle & wxRA_SPECIFY_ROWS )

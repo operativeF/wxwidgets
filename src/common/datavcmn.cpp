@@ -1801,7 +1801,7 @@ wxWindow* wxDataViewChoiceRenderer::CreateEditorCtrl( wxWindow *parent, wxRect l
                           wxSize(labelRect.GetWidth(), -1),
                           m_choices
                       );
-    c->Move(labelRect.GetRight() - c->GetRect().width, wxDefaultCoord);
+    c->Move(wxPoint{labelRect.GetRight() - c->GetRect().width, wxDefaultCoord});
     c->SetStringSelection( value.GetString() );
     return c;
 }

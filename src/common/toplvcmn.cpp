@@ -457,7 +457,7 @@ bool wxTopLevelWindowBase::Layout()
             // exactly one child - set it's size to fill the whole frame
             const wxSize client_size = DoGetClientSize();
 
-            child->SetSize(0, 0, client_size.x, client_size.y);
+            child->SetSize(wxRect{0, 0, client_size.x, client_size.y});
 
             return true;
         }

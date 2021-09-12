@@ -1512,11 +1512,9 @@ public:
     }
 
 protected:
-    void DoSetSize(int x, int y,
-                   int width, int height,
-                   int WXUNUSED(sizeFlags = wxSIZE_AUTO)) override
+    void DoSetSize(wxRect boundary, int WXUNUSED(sizeFlags = wxSIZE_AUTO)) override
     {
-        m_rect = wxRect(x, y, width, height);
+        m_rect = boundary;
         DoSizing();
     }
 
@@ -1540,14 +1538,14 @@ public:
         if (m_tabs->GetFlags() & wxAUI_NB_BOTTOM)
         {
             m_tab_rect = wxRect (m_rect.x, m_rect.y + m_rect.height - m_tabCtrlHeight, m_rect.width, m_tabCtrlHeight);
-            m_tabs->SetSize     (m_rect.x, m_rect.y + m_rect.height - m_tabCtrlHeight, m_rect.width, m_tabCtrlHeight);
-            m_tabs->SetRect     (wxRect(0, 0, m_rect.width, m_tabCtrlHeight));
+            m_tabs->SetSize     (wxRect{m_rect.x, m_rect.y + m_rect.height - m_tabCtrlHeight, m_rect.width, m_tabCtrlHeight});
+            m_tabs->SetRect     (wxRect{0, 0, m_rect.width, m_tabCtrlHeight});
         }
         else //TODO: if (GetFlags() & wxAUI_NB_TOP)
         {
             m_tab_rect = wxRect (m_rect.x, m_rect.y, m_rect.width, m_tabCtrlHeight);
-            m_tabs->SetSize     (m_rect.x, m_rect.y, m_rect.width, m_tabCtrlHeight);
-            m_tabs->SetRect     (wxRect(0, 0,        m_rect.width, m_tabCtrlHeight));
+            m_tabs->SetSize     (wxRect{m_rect.x, m_rect.y, m_rect.width, m_tabCtrlHeight});
+            m_tabs->SetRect     (wxRect{0, 0,        m_rect.width, m_tabCtrlHeight});
         }
         // TODO: else if (GetFlags() & wxAUI_NB_LEFT){}
         // TODO: else if (GetFlags() & wxAUI_NB_RIGHT){}
@@ -1576,17 +1574,17 @@ public:
 
             if (m_tabs->GetFlags() & wxAUI_NB_BOTTOM)
             {
-                page.window->SetSize(m_rect.x + border_space,
-                                     m_rect.y + border_space,
-                                     width,
-                                     height);
+                page.window->SetSize(wxRect{m_rect.x + border_space,
+                                            m_rect.y + border_space,
+                                            width,
+                                            height});
             }
             else //TODO: if (GetFlags() & wxAUI_NB_TOP)
             {
-                page.window->SetSize(m_rect.x + border_space,
-                                     m_rect.y + m_tabCtrlHeight,
-                                     width,
-                                     height);
+                page.window->SetSize(wxRect{m_rect.x + border_space,
+                                            m_rect.y + m_tabCtrlHeight,
+                                            width,
+                                            height});
             }
             // TODO: else if (GetFlags() & wxAUI_NB_LEFT){}
             // TODO: else if (GetFlags() & wxAUI_NB_RIGHT){}

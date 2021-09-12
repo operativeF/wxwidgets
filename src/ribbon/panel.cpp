@@ -246,7 +246,7 @@ void wxRibbonPanel::OnSize(wxSizeEvent& evt)
     evt.Skip();
 }
 
-void wxRibbonPanel::DoSetSize(int x, int y, int width, int height, int sizeFlags)
+void wxRibbonPanel::DoSetSize(wxRect boundary, int sizeFlags)
 {
     // At least on MSW, changing the size of a window will cause GetSize() to
     // report the new size, but a size event may not be handled immediately.
@@ -256,7 +256,7 @@ void wxRibbonPanel::DoSetSize(int x, int y, int width, int height, int sizeFlags
     // will refuse to grow any larger while in limbo between minimised and non.
 
     bool minimised = (m_flags & wxRIBBON_PANEL_NO_AUTO_MINIMISE) == 0 &&
-        IsMinimised(wxSize(width, height)); // check if would be at this size
+        IsMinimised(boundary.GetSize()); // check if would be at this size
     if(minimised != m_minimised)
     {
         m_minimised = minimised;
@@ -273,7 +273,7 @@ void wxRibbonPanel::DoSetSize(int x, int y, int width, int height, int sizeFlags
         Refresh();
     }
 
-    wxRibbonControl::DoSetSize(x, y, width, height, sizeFlags);
+    wxRibbonControl::DoSetSize(boundary, sizeFlags);
 }
 
 // Checks if panel would be minimised at (client size) at_size
@@ -746,7 +746,7 @@ bool wxRibbonPanel::Layout()
     {
         // Common case of no sizer and single child taking up the entire panel
         wxWindow* child = GetChildren().Item(0)->GetData();
-        child->SetSize(position.x, position.y, size.x, size.y);
+        child->SetSize(wxRect{position.x, position.y, size.x, size.y});
     }
 
     if(HasExtButton())

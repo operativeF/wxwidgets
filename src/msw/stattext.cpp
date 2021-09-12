@@ -115,13 +115,13 @@ wxSize wxStaticText::DoGetBestClientSize() const
     return {widthTextMax, heightTextTotal};
 }
 
-void wxStaticText::DoSetSize(int x, int y, int w, int h, int sizeFlags)
+void wxStaticText::DoSetSize(wxRect boundary, int sizeFlags)
 {
     // Keep track of the size before so we can see if it changed
     const wxSize sizeBefore = GetSize();
 
     // note: we first need to set the size and _then_ call UpdateLabel
-    wxStaticTextBase::DoSetSize(x, y, w, h, sizeFlags);
+    wxStaticTextBase::DoSetSize(boundary, sizeFlags);
 
     // Avoid flicker by not refreshing or updating the label if the size didn't
     // change.

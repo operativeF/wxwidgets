@@ -2107,7 +2107,7 @@ bool wxLongStringProperty::DisplayEditorDialog(wxPropertyGrid* pg, wxVariant& va
 
     if ( !wxPropertyGrid::IsSmallScreen())
     {
-        dlg->SetSize(400,300);
+        dlg->SetSize(wxSize{400, 300});
         dlg->Move( pg->GetGoodEditorDialogPosition(this,dlg->GetSize()) );
     }
 
@@ -2283,7 +2283,7 @@ bool wxPGArrayEditorDialog::Create( wxWindow *parent,
     {
         if ( sz.x == wxDefaultSize.x &&
              sz.y == wxDefaultSize.y )
-            SetSize(275, 360);
+            SetSize(wxSize{275, 360});
         else
             SetSize(sz);
     }
