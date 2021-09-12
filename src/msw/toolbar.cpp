@@ -40,7 +40,6 @@
 #include "wx/artprov.h"
 #include "wx/sysopt.h"
 #include "wx/rawbmp.h"
-#include "wx/stack.h"
 
 #include <windowsx.h> // needed by GET_X_LPARAM and GET_Y_LPARAM macros
 
@@ -51,6 +50,7 @@
 #include "wx/msw/uxtheme.h"
 #endif
 
+#include <stack>
 
 // ----------------------------------------------------------------------------
 // constants
@@ -129,7 +129,7 @@ namespace
 {
     // Global stack used to track all active toolbars in the chain to check if
     // the toolbar itself doesn't get destroyed while handling its event.
-    wxStack<wxToolBar*> gs_liveToolbars;
+    std::stack<wxToolBar*> gs_liveToolbars;
 } // anonymous namespace
 
 // ----------------------------------------------------------------------------

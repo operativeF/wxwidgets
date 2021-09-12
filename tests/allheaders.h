@@ -304,7 +304,6 @@
 #include <wx/splitter.h>
 #include <wx/srchctrl.h>
 #include <wx/sstream.h>
-#include <wx/stack.h>
 #include <wx/stackwalk.h>
 #include <wx/statbmp.h>
 #include <wx/statbox.h>

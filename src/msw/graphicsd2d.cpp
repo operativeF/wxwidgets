@@ -71,8 +71,8 @@
 #include "wx/msw/ole/comimpl.h"
 #include "wx/msw/private/comptr.h"
 #include "wx/private/graphics.h"
-#include "wx/stack.h"
 
+#include <stack>
 
 // This must be the last header included to only affect the DEFINE_GUID()
 // occurrences below but not any GUIDs declared in the standard files included
@@ -4012,13 +4012,13 @@ private:
         // The context owns these pointers and is responsible for releasing them.
         wxCOMPtr<ID2D1DrawingStateBlock> drawingState;
         // We need to store also current layers.
-        wxStack<LayerData> layers;
+        std::stack<LayerData> layers;
     };
 
     ID2D1Factory* m_direct2dFactory;
     std::shared_ptr<wxD2DRenderTargetResourceHolder> m_renderTargetHolder;
-    wxStack<StateData> m_stateStack;
-    wxStack<LayerData> m_layers;
+    std::stack<StateData> m_stateStack;
+    std::stack<LayerData> m_layers;
     ID2D1RenderTarget* m_cachedRenderTarget;
     D2D1::Matrix3x2F m_initTransform;
     // Clipping box
@@ -4189,7 +4189,7 @@ void wxD2DContext::SetClipLayer(ID2D1Geometry* clipGeometry)
 
 void wxD2DContext::ResetClip()
 {
-    wxStack<LayerData> layersToRestore;
+    std::stack<LayerData> layersToRestore;
     // Remove all clipping layers from the stack of layers.
     while ( !m_layers.empty() )
     {
@@ -4251,7 +4251,7 @@ void wxD2DContext::GetClipBox(double* x, double* y, double* w, double* h)
 
         wxCOMPtr<ID2D1Geometry> clipGeometry(rectGeometry);
 
-        wxStack<LayerData> layers(m_layers);
+        std::stack<LayerData> layers(m_layers);
         while( !layers.empty() )
         {
             LayerData ld = layers.top();
@@ -4471,7 +4471,7 @@ void wxD2DContext::BeginLayer(double opacity)
 
 void wxD2DContext::EndLayer()
 {
-    wxStack<LayerData> layersToRestore;
+    std::stack<LayerData> layersToRestore;
     // Temporarily remove all clipping layers
     // above the first standard layer
     // and next permanently remove this layer.
@@ -4666,7 +4666,7 @@ void wxD2DContext::PopState()
     m_stateStack.pop();
 
     // Restore all saved layers.
-    wxStack<LayerData> layersToRestore;
+    std::stack<LayerData> layersToRestore;
     // We have to restore layers on the stack from "bottom" to "top",
     // so we have to create a "reverted" stack.
     while ( !state.layers.empty() )
@@ -4903,7 +4903,7 @@ void wxD2DContext::DrawEllipse(double x, double y, double w, double h)
 
 void wxD2DContext::Flush()
 {
-    wxStack<LayerData> layersToRestore;
+    std::stack<LayerData> layersToRestore;
     // Temporarily remove all layers from the stack of layers.
     while ( !m_layers.empty() )
     {

@@ -77,6 +77,7 @@ protected:
     void WXHandleSize(wxSizeEvent& event);
 
 private:
+    // TODO: Use a variant instead.
     // we can have either an icon or a bitmap
     bool m_isIcon{true};
     wxGDIImage *m_image{nullptr};

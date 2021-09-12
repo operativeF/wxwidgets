@@ -35,8 +35,6 @@
 #include "wx/wxcrtvararg.h"
 
 #include "wx/fontutil.h"
-
-#include "wx/stack.h"
 #include "wx/sysopt.h"
 
 #if wxUSE_CLIPBOARD
@@ -75,6 +73,8 @@
 #if wxUSE_INKEDIT
     #include <wx/dynlib.h>
 #endif
+
+#include <stack>
 
 
 #ifndef CFM_BACKCOLOR
@@ -311,7 +311,7 @@ namespace
 // time (but possibly more than into one, if wxEVT_TEXT event handler does
 // something that results in another text control update), and we don't want to
 // waste space in every wxTextCtrl object for this field unnecessarily.
-wxStack<int> gs_lenOfInsertedText;
+std::stack<int> gs_lenOfInsertedText;
 
 } // anonymous namespace
 

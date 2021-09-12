@@ -3209,7 +3209,7 @@ namespace wxMouseCapture
 // Stack of the windows which previously had the capture, the top most element
 // is the window that has the mouse capture now.
 //
-// NB: We use wxVector and not wxStack to be able to examine all of the stack
+// NB: We use vector and not wxStack to be able to examine all of the stack
 //     elements for debug checks, but only the stack operations should be
 //     performed with this vector.
 std::vector<wxWindow*> cap_stack;

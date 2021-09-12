@@ -16,7 +16,7 @@
 #include "wx/log.h"
 #include "wx/private/markupparser.h"
 
-#include "wx/stack.h"
+#include <stack>
 
 namespace
 {
@@ -243,7 +243,7 @@ bool wxMarkupParser::Parse(const wxString& text)
     // The stack containing the names and corresponding attributes (which are
     // actually only used for <span> tags) of all of the currently opened tag
     // or none if we're not inside any tag.
-    wxStack<TagAndAttrs> tags;
+    std::stack<TagAndAttrs> tags;
 
     // Current run of text.
     wxString current;

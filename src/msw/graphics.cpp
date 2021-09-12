@@ -35,8 +35,6 @@
 #include "wx/dcmemory.h"
 #include "wx/dcprint.h"
 
-#include "wx/stack.h"
-
 #include "wx/private/graphics.h"
 #include "wx/msw/wrapgdip.h"
 #include "wx/msw/dc.h"
@@ -48,6 +46,8 @@
 #if wxUSE_COMMON_DIALOGS
 #include <commdlg.h>
 #endif
+
+#include <stack>
 
 
 // Define REAL_MAX, REAL_MIN
@@ -494,7 +494,7 @@ private:
     void DoDrawText(std::string_view str, double x, double y) override;
 
     Graphics* m_context;
-    wxStack<GraphicsState> m_stateStack;
+    std::stack<GraphicsState> m_stateStack;
     GraphicsState m_state1;
     GraphicsState m_state2;
 };

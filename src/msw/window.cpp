@@ -5242,7 +5242,7 @@ wxColour wxWindowMSW::MSWGetThemeColour(const wchar_t *themeName,
 // endless stream of WM_PAINT messages for this window resulting in a lot of
 // difficult to debug problems (e.g. impossibility to repaint other windows,
 // lack of timer and idle events and so on)
-wxStack<wxMSWImpl::PaintData> wxMSWImpl::paintStack;
+std::stack<wxMSWImpl::PaintData> wxMSWImpl::paintStack;
 
 bool wxWindowMSW::HandlePaint()
 {

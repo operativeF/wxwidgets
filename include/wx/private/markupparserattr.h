@@ -12,10 +12,10 @@
 
 #include "wx/private/markupparser.h"
 
-#include "wx/stack.h"
-
 #include "wx/colour.h"
 #include "wx/font.h"
+
+#include <stack>
 
 // ----------------------------------------------------------------------------
 // wxMarkupParserAttrOutput: simplified wxFont-using version of the above.
@@ -248,7 +248,7 @@ private:
     };
 
 
-    wxStack<Attr> m_attrs;
+    std::stack<Attr> m_attrs;
 
     wxMarkupParserAttrOutput(const wxMarkupParserAttrOutput&) = delete;
 	wxMarkupParserAttrOutput& operator=(const wxMarkupParserAttrOutput&) = delete;

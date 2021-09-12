@@ -10,7 +10,7 @@
 #ifndef _WX_MSW_PRIVATE_PAINT_H_
 #define _WX_MSW_PRIVATE_PAINT_H_
 
-#include "wx/stack.h"
+#include <stack>
 
 namespace wxMSWImpl
 {
@@ -32,7 +32,7 @@ struct PaintData
 };
 
 // Stack storing data for the possibly nested WM_PAINT handlers.
-extern wxStack<PaintData> paintStack;
+extern std::stack<PaintData> paintStack;
 
 } // namespace wxMSWImpl
 
