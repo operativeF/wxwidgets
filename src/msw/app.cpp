@@ -634,10 +634,14 @@ const std::string& wxApp::GetRegisteredClassName(const std::string& name,
     // we need to register this class
     WNDCLASS wndclass;
     wxZeroMemory(wndclass);
-
+    
     wndclass.lpfnWndProc   = (WNDPROC)wxWndProc;
     wndclass.hInstance     = wxGetInstance();
-    wndclass.hCursor       = ::LoadCursorW(nullptr, IDC_ARROW);
+    wndclass.hCursor       = static_cast<HCURSOR>(::LoadImageW(nullptr,
+                                                               MAKEINTRESOURCEW(OCR_NORMAL),
+                                                               IMAGE_CURSOR,
+                                                               0, 0,
+                                                               LR_SHARED | LR_DEFAULTSIZE));
     wndclass.hbrBackground = (HBRUSH)wxUIntToPtr(bgBrushCol + 1);
     wndclass.style         = CS_HREDRAW | CS_VREDRAW | CS_DBLCLKS | extraStyles;
 

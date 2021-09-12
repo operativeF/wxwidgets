@@ -10,6 +10,8 @@
 #ifndef _WX_WRAPWIN_H_
 #define _WX_WRAPWIN_H_
 
+#define OEMRESOURCE
+
 #include "wx/platform.h"
 
 // before including windows.h, define version macros at (currently) maximal

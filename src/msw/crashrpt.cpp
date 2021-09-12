@@ -36,8 +36,11 @@ class BusyCursor
 public:
     BusyCursor()
     {
-        HCURSOR hcursorBusy = ::LoadCursor(nullptr, IDC_WAIT);
-        m_hcursorOld = ::SetCursor(hcursorBusy);
+        m_hcursorOld = ::SetCursor(static_cast<HCURSOR>(::LoadImageW(nullptr,
+                                                                     MAKEINTRESOURCEW(OCR_WAIT),
+                                                                     IMAGE_CURSOR,
+                                                                     0, 0,
+                                                                     LR_SHARED | LR_DEFAULTSIZE)));
     }
 
     ~BusyCursor()
