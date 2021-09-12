@@ -75,7 +75,7 @@ public:
         if ( m_style == m_styleCurrent )
             return false;
 
-        ::SetWindowLongPtr(m_hwnd, m_gwlSlot, m_style);
+        ::SetWindowLongPtrW(m_hwnd, m_gwlSlot, m_style);
 
         m_styleCurrent = m_style;
 

@@ -545,8 +545,8 @@ WinSock1SocketPoller::WinSock1SocketPoller(wxEvtHandler* hndlr)
 
     // Set the event handler to be the message window's user data. Also set the
     // message window to use our MsgProc to process messages it receives.
-    SetWindowLongPtr(m_hwnd, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(hndlr));
-    SetWindowLongPtr(m_hwnd, GWLP_WNDPROC,
+    ::SetWindowLongPtrW(m_hwnd, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(hndlr));
+    ::SetWindowLongPtrW(m_hwnd, GWLP_WNDPROC,
                      reinterpret_cast<LONG_PTR>(WinSock1SocketPoller::MsgProc));
 }
 
