@@ -12,6 +12,8 @@
 
 #include "wx/richtooltip.h"
 
+#include <memory>
+
 // ----------------------------------------------------------------------------
 // wxRichToolTipImpl: defines wxRichToolTip implementation.
 // ----------------------------------------------------------------------------
@@ -20,7 +22,7 @@ class wxRichToolTipImpl
 {
 public:
     // This is implemented in a platform-specific way.
-    static wxRichToolTipImpl* Create(const std::string& title,
+    static std::unique_ptr<wxRichToolTipImpl> Create(const std::string& title,
                                      const std::string& message);
 
     // These methods simply mirror the public wxRichToolTip ones.

@@ -61,7 +61,7 @@ public:
     wxRichToolTip(const std::string& title, const std::string& message);
 
     // Non-virtual dtor as this class is not supposed to be derived from.
-    ~wxRichToolTip();
+    ~wxRichToolTip() = default;
     wxRichToolTip(const wxRichToolTip&) = delete;
     wxRichToolTip& operator=(const wxRichToolTip&) = delete;
     wxRichToolTip(wxRichToolTip&&) = default;
@@ -99,7 +99,7 @@ public:
     void ShowFor(wxWindow* win, const wxRect* rect = nullptr);
 
 private:
-    wxRichToolTipImpl* const m_impl;
+    std::unique_ptr<wxRichToolTipImpl> m_impl;
 };
 
 #endif // wxUSE_RICHTOOLTIP

@@ -65,9 +65,4 @@ void wxRichToolTip::ShowFor(wxWindow* win, const wxRect* rect)
     m_impl->ShowFor(win, rect);
 }
 
-wxRichToolTip::~wxRichToolTip()
-{
-    delete m_impl;
-}
-
 #endif // wxUSE_RICHTOOLTIP

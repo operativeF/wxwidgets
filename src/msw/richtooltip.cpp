@@ -17,6 +17,8 @@
     #include "wx/msw/private.h"
 
     #include <boost/nowide/stackstring.hpp>
+
+    #include <memory>
 #endif // WX_PRECOMP
 
 #include "wx/treectrl.h"
@@ -186,15 +188,15 @@ private:
 };
 
 /* static */
-wxRichToolTipImpl*
+std::unique_ptr<wxRichToolTipImpl>
 wxRichToolTipImpl::Create(const std::string& title, const std::string& message)
 {
     // EM_SHOWBALLOONTIP is only implemented by comctl32.dll v6 so don't even
     // bother using the native implementation if we're not using themes.
     if ( wxUxThemeIsActive() )
-        return new wxRichToolTipMSWImpl(title, message);
+        return std::make_unique<wxRichToolTipMSWImpl>(title, message);
 
-    return new wxRichToolTipGenericImpl(title, message);
+    return std::make_unique<wxRichToolTipGenericImpl>(title, message);
 }
 
 #endif // wxUSE_RICHTOOLTIP
