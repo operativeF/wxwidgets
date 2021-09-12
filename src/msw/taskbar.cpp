@@ -16,6 +16,7 @@
 #if wxUSE_TASKBARICON
 
 #ifndef WX_PRECOMP
+    #include <chrono>
     #include <memory>
 
     #include "wx/msw/private.h"
@@ -215,7 +216,7 @@ wxTaskBarIcon::DoSetIcon(const wxIcon& icon,
 bool
 wxTaskBarIcon::ShowBalloon(const std::string& title,
                            const std::string& text,
-                           unsigned msec,
+                           std::chrono::milliseconds timeoutDuration,
                            int flags,
                            const wxIcon& icon)
 {
@@ -238,7 +239,7 @@ wxTaskBarIcon::ShowBalloon(const std::string& title,
     // do show the balloon now
     notifyData = NotifyIconData(hwnd);
     notifyData.uFlags |= NIF_INFO;
-    notifyData.uTimeout = msec;
+    notifyData.uTimeout = timeoutDuration.count();
     wxStrlcpy(notifyData.szInfo, boost::nowide::widen(text).c_str(), WXSIZEOF(notifyData.szInfo));
     wxStrlcpy(notifyData.szInfoTitle, boost::nowide::widen(title).c_str(),
                 WXSIZEOF(notifyData.szInfoTitle));

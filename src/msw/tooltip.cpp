@@ -16,10 +16,11 @@
 #include "wx/tooltip.h"
 
 #ifndef WX_PRECOMP
+    #include <chrono>
+    #include <vector>
+
     #include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
     #include "wx/msw/private.h"
-
-    #include <vector>
 
     #include <boost/nowide/convert.hpp>
     #include <boost/nowide/stackstring.hpp>
@@ -230,25 +231,25 @@ void wxToolTip::Enable(bool flag)
     SendTooltipMessageToAll(ms_hwndTT, TTM_ACTIVATE, flag, 0);
 }
 
-void wxToolTip::SetDelay(long milliseconds)
+void wxToolTip::SetDelay(std::chrono::milliseconds delay)
 {
     // Make sure the tooltip has been created
     GetToolTipCtrl();
 
     SendTooltipMessageToAll(ms_hwndTT, TTM_SETDELAYTIME,
-                            TTDT_INITIAL, milliseconds);
+                            TTDT_INITIAL, delay.count());
 }
 
-void wxToolTip::SetAutoPop(long milliseconds)
+void wxToolTip::SetAutoPop(std::chrono::milliseconds autopopTime)
 {
     SendTooltipMessageToAll(ms_hwndTT, TTM_SETDELAYTIME,
-                            TTDT_AUTOPOP, milliseconds);
+                            TTDT_AUTOPOP, autopopTime.count());
 }
 
-void wxToolTip::SetReshow(long milliseconds)
+void wxToolTip::SetReshow(std::chrono::milliseconds reshowDelay)
 {
     SendTooltipMessageToAll(ms_hwndTT, TTM_SETDELAYTIME,
-                            TTDT_RESHOW, milliseconds);
+                            TTDT_RESHOW, reshowDelay.count());
 }
 
 void wxToolTip::SetMaxWidth(int width)

@@ -14,7 +14,10 @@
 
 #include "wx/icon.h"
 
+#include <chrono>
 #include <memory>
+
+using namespace std::chrono_literals;
 
 // private helper class:
 class WXDLLIMPEXP_FWD_CORE wxTaskBarIconWindow;
@@ -55,7 +58,7 @@ public:
     // or function unsupported by OS)
     bool ShowBalloon(const std::string& title,
                      const std::string& text,
-                     unsigned msec = 0,
+                     std::chrono::milliseconds timeoutDuration = 0ms,
                      int flags = 0,
                      const wxIcon& icon = wxNullIcon);
 #endif // wxUSE_TASKBARICON_BALLOONS

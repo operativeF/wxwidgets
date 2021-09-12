@@ -14,6 +14,7 @@
 #include "wx/object.h"
 #include "wx/gdicmn.h"
 
+#include <chrono>
 #include <string>
 
 class WXDLLIMPEXP_FWD_CORE wxWindow;
@@ -47,12 +48,12 @@ public:
         // enable or disable the tooltips globally
     static void Enable(bool flag);
         // set the delay after which the tooltip appears
-    static void SetDelay(long milliseconds);
+    static void SetDelay(std::chrono::milliseconds delay);
         // set the delay after which the tooltip disappears or how long the
         // tooltip remains visible
-    static void SetAutoPop(long milliseconds);
+    static void SetAutoPop(std::chrono::milliseconds autopopTime);
         // set the delay between subsequent tooltips to appear
-    static void SetReshow(long milliseconds);
+    static void SetReshow(std::chrono::milliseconds reshowDelay);
         // set maximum width for the new tooltips: -1 disables wrapping
         // entirely, 0 restores the default behaviour
     static void SetMaxWidth(int width);

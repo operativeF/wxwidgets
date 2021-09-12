@@ -13,6 +13,10 @@
 
 #include "wx/event.h"
 
+#include <chrono>
+
+using namespace std::chrono_literals;
+
 class wxJoystickThread;
 
 class WXDLLIMPEXP_CORE wxJoystick: public wxObject
@@ -70,7 +74,7 @@ public:
 
   // pollingFreq = 0 means that movement events are sent when above the threshold.
   // If pollingFreq > 0, events are received every this many milliseconds.
-  bool SetCapture(wxWindow* win, int pollingFreq = 0);
+  bool SetCapture(wxWindow* win, std::chrono::milliseconds pollingFreq = 0ms);
   bool ReleaseCapture();
 
 protected:

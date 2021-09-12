@@ -19,6 +19,7 @@
 #include "wx/notifmsg.h"
 
 #ifndef WX_PRECOMP
+    #include <chrono>
     #include <string>
 #endif // WX_PRECOMP
 
@@ -281,7 +282,8 @@ wxBalloonNotifMsgImpl::Show(int timeout)
 
     timeout *= 1000; // Windows expresses timeout in milliseconds
 
-    bool res = ms_icon->ShowBalloon(m_title, m_message, timeout, m_flags, m_icon);
+    // TODO: Change function to accept chrono.
+    bool res = ms_icon->ShowBalloon(m_title, m_message, std::chrono::milliseconds{timeout}, m_flags, m_icon);
     if ( res )
     {
         ms_icon->Bind(wxEVT_TASKBAR_BALLOON_CLICK, &wxBalloonNotifMsgImpl::OnClick, this);

@@ -15,6 +15,8 @@
 #if wxUSE_JOYSTICK
 
 #ifndef WX_PRECOMP
+    #include <chrono>
+
     #include "wx/msw/private.h"
 #endif
 
@@ -56,7 +58,7 @@ class wxJoystickThread : public wxThread
 public:
     explicit wxJoystickThread(int joystick);
     void* Entry() override;
-    void SetPolling(wxWindow* win, int pollingFreq)
+    void SetPolling(wxWindow* win, std::chrono::milliseconds pollingFreq)
     {
         m_catchwin = win;
         m_polling = pollingFreq;
@@ -68,7 +70,7 @@ private:
     int       m_joystick;
     int       m_buttons{0};
     wxWindow* m_catchwin{nullptr};
-    int       m_polling{0};
+    std::chrono::milliseconds m_polling{0ms};
     JOYINFO   m_joyInfo{};
     JOYINFO   m_lastJoyInfo{};
 };
@@ -98,7 +100,8 @@ void* wxJoystickThread::Entry()
 
     while (!TestDestroy())
     {
-        Sleep(m_polling);
+        // TODO: Change in thread.
+        Sleep(m_polling.count());
         auto ts = ::GetTickCount64();
 
         joyGetPos(m_joystick, &m_joyInfo);
@@ -683,7 +686,7 @@ bool wxJoystick::HasPOVCTS() const
 // Operations
 ////////////////////////////////////////////////////////////////////////////
 
-bool wxJoystick::SetCapture(wxWindow* win, int pollingFreq)
+bool wxJoystick::SetCapture(wxWindow* win, std::chrono::milliseconds pollingFreq)
 {
     if (m_thread)
     {
@@ -697,7 +700,7 @@ bool wxJoystick::ReleaseCapture()
 {
     if (m_thread)
     {
-        m_thread->SetPolling(nullptr, 0);
+        m_thread->SetPolling(nullptr, 0ms);
         return true;
     }
     return false;
