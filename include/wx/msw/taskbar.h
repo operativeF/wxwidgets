@@ -14,6 +14,8 @@
 
 #include "wx/icon.h"
 
+#include <memory>
+
 // private helper class:
 class WXDLLIMPEXP_FWD_CORE wxTaskBarIconWindow;
 
@@ -65,7 +67,7 @@ protected:
     void RegisterWindowMessages();
 
 private:
-    wxTaskBarIconWindow *m_win{nullptr};
+    std::unique_ptr<wxTaskBarIconWindow> m_win;
     bool                 m_iconAdded{false};
     wxIcon               m_icon;
     std::string          m_strTooltip;

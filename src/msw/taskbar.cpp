@@ -16,6 +16,8 @@
 #if wxUSE_TASKBARICON
 
 #ifndef WX_PRECOMP
+    #include <memory>
+
     #include "wx/msw/private.h"
 
     #include <boost/nowide/convert.hpp>
@@ -123,14 +125,10 @@ wxTaskBarIcon::~wxTaskBarIcon()
     if ( m_iconAdded )
         RemoveIcon();
 
-    if ( m_win )
-    {
-        // we must use delete and not Destroy() here because the latter will
-        // only schedule the window to be deleted during the next idle event
-        // processing but we may not get any idle events if there are no other
-        // windows left in the program
-        delete m_win;
-    }
+    // we must use delete and not Destroy() here because the latter will
+    // only schedule the window to be deleted during the next idle event
+    // processing but we may not get any idle events if there are no other
+    // windows left in the program
 }
 
 // Operations
@@ -159,13 +157,13 @@ wxTaskBarIcon::DoSetIcon(const wxIcon& icon,
     //     is initialized (as samples/taskbar used to do)
     if (!m_win)
     {
-        m_win = new wxTaskBarIconWindow(this);
+        m_win = std::make_unique<wxTaskBarIconWindow>(this);
     }
 
     m_icon = icon;
     m_strTooltip = tooltip;
 
-    NotifyIconData notifyData(GetHwndOf(m_win));
+    NotifyIconData notifyData(GetHwndOf(m_win.get()));
 
     if (icon.IsOk())
     {
@@ -224,7 +222,7 @@ wxTaskBarIcon::ShowBalloon(const std::string& title,
     wxCHECK_MSG( m_iconAdded, false,
                     wxT("can't be used before the icon is created") );
 
-    const HWND hwnd = GetHwndOf(m_win);
+    const HWND hwnd = GetHwndOf(m_win.get());
 
     // we need to enable version 5.0 behaviour to receive notifications about
     // the balloon disappearance
@@ -281,7 +279,7 @@ bool wxTaskBarIcon::RemoveIcon()
 
     m_iconAdded = false;
 
-    NotifyIconData notifyData(GetHwndOf(m_win));
+    NotifyIconData notifyData(GetHwndOf(m_win.get()));
 
     bool ok = ::Shell_NotifyIconW(NIM_DELETE, &notifyData) != 0;
     if ( !ok )
@@ -295,7 +293,7 @@ bool wxTaskBarIcon::RemoveIcon()
 #if wxUSE_MENUS
 bool wxTaskBarIcon::PopupMenu(wxMenu *menu)
 {
-    wxASSERT_MSG( m_win != nullptr, wxT("taskbar icon not initialized") );
+    wxASSERT_MSG( m_win.get() != nullptr, wxT("taskbar icon not initialized") );
 
     static bool s_inPopup = false;
 
@@ -316,11 +314,11 @@ bool wxTaskBarIcon::PopupMenu(wxMenu *menu)
     // the SetForegroundWindow() and PostMessage() calls are needed to work
     // around Win32 bug with the popup menus shown for the notifications as
     // documented at http://support.microsoft.com/kb/q135788/
-    ::SetForegroundWindow(GetHwndOf(m_win));
+    ::SetForegroundWindow(GetHwndOf(m_win.get()));
 
     bool rval = m_win->PopupMenu(menu, 0, 0);
 
-    ::PostMessageW(GetHwndOf(m_win), WM_NULL, 0, 0L);
+    ::PostMessageW(GetHwndOf(m_win.get()), WM_NULL, 0, 0L);
 
     m_win->PopEventHandler(false);
 
