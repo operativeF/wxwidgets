@@ -425,7 +425,7 @@ bool wxToolBar::MSWCreateToolbar(const wxPoint& pos, const wxSize& size)
     HWND hwndTTip = (HWND)::SendMessageW(GetHwnd(), TB_GETTOOLTIPS, 0, 0);
     if ( hwndTTip )
     {
-        long styleTTip = ::GetWindowLongW(hwndTTip, GWL_STYLE);
+        long styleTTip = ::GetWindowLongPtrW(hwndTTip, GWL_STYLE);
         styleTTip |= TTS_NOPREFIX;
         ::SetWindowLongW(hwndTTip, GWL_STYLE, styleTTip);
     }

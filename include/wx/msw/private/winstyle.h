@@ -96,7 +96,7 @@ protected:
     wxMSWWinLongUpdater(HWND hwnd, int gwlSlot)
         : m_hwnd(hwnd),
           m_gwlSlot(gwlSlot),
-          m_styleCurrent(::GetWindowLongPtr(hwnd, gwlSlot)),
+          m_styleCurrent(::GetWindowLongPtrW(hwnd, gwlSlot)),
           m_style(m_styleCurrent)
     {
     }

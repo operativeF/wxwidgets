@@ -166,7 +166,7 @@ wxWindow* wxWindow::CreateWindowFromHWND(wxWindow* parent, WXHWND hWnd)
     wx::utils::ToUpper(str);
 
     long id = wxGetWindowId(hWnd);
-    long style = GetWindowLongW((HWND) hWnd, GWL_STYLE);
+    long style = ::GetWindowLongPtrW((HWND) hWnd, GWL_STYLE);
 
     wxWindow* win = nullptr;
 
@@ -311,7 +311,7 @@ void wxWindow::AdoptAttributesFromHWND()
 {
     SetId(wxGetWindowId(m_hWnd));
 
-    long style = ::GetWindowLongW(GetHwnd(), GWL_STYLE);
+    long style = ::GetWindowLongPtrW(GetHwnd(), GWL_STYLE);
 
     if (style & WS_VSCROLL)
         m_windowStyle |= wxVSCROLL;

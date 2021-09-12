@@ -2994,7 +2994,7 @@ wxTreeCtrl::MSWWindowProc(WXUINT nMsg, WXWPARAM wParam, WXLPARAM lParam)
                         wxZeroMemory(tv);
 
                         tv.hdr.hwndFrom = GetHwnd();
-                        tv.hdr.idFrom = ::GetWindowLong(GetHwnd(), GWL_ID);
+                        tv.hdr.idFrom = ::GetWindowLongPtrW(GetHwnd(), GWL_ID);
                         tv.hdr.code = TVN_BEGINDRAG;
 
                         tv.itemNew.hItem = HITEM(m_htClickedItem);
@@ -3121,7 +3121,7 @@ wxTreeCtrl::MSWWindowProc(WXUINT nMsg, WXWPARAM wParam, WXLPARAM lParam)
                     // send NM_RCLICK
                     NMHDR nmhdr;
                     nmhdr.hwndFrom = GetHwnd();
-                    nmhdr.idFrom = ::GetWindowLongW(GetHwnd(), GWL_ID);
+                    nmhdr.idFrom = ::GetWindowLongPtrW(GetHwnd(), GWL_ID);
                     nmhdr.code = NM_RCLICK;
                     ::SendMessageW(::GetParent(GetHwnd()), WM_NOTIFY,
                                   nmhdr.idFrom, (LPARAM)&nmhdr);

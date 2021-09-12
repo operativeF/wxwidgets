@@ -938,7 +938,7 @@ bool wxTextEntry::DoAutoCompleteCustom(wxTextCompleter *completer)
 
 bool wxTextEntry::IsEditable() const
 {
-    return !(::GetWindowLongW(GetEditHwnd(), GWL_STYLE) & ES_READONLY);
+    return !(::GetWindowLongPtrW(GetEditHwnd(), GWL_STYLE) & ES_READONLY);
 }
 
 void wxTextEntry::SetEditable(bool editable)

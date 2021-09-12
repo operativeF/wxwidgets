@@ -402,7 +402,7 @@ wxMSWOwnerDrawnButtonBase::MSWMakeOwnerDrawnIfNecessary(const wxColour& colFg)
 bool wxMSWOwnerDrawnButtonBase::MSWIsOwnerDrawn() const
 {
     return
-        (::GetWindowLong(GetHwndOf(m_win), GWL_STYLE) & BS_OWNERDRAW) == BS_OWNERDRAW;
+        (::GetWindowLongPtrW(GetHwndOf(m_win), GWL_STYLE) & BS_OWNERDRAW) == BS_OWNERDRAW;
 }
 
 void wxMSWOwnerDrawnButtonBase::MSWMakeOwnerDrawn(bool ownerDrawn)

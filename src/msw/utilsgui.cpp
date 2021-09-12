@@ -167,7 +167,7 @@ wxString WXDLLEXPORT wxGetWindowClass(WXHWND hWnd)
 
 int WXDLLEXPORT wxGetWindowId(WXHWND hWnd)
 {
-    return ::GetWindowLongW((HWND)hWnd, GWL_ID);
+    return ::GetWindowLongPtrW((HWND)hWnd, GWL_ID);
 }
 
 // ----------------------------------------------------------------------------

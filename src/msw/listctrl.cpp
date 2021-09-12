@@ -484,7 +484,7 @@ void wxListCtrl::SetWindowStyleFlag(long flag)
 
         // we don't have wxVSCROLL style, but the list control may have it,
         // don't change it then in the call to parent's SetWindowStyleFlags()
-        DWORD dwStyle = ::GetWindowLong(GetHwnd(), GWL_STYLE);
+        DWORD dwStyle = ::GetWindowLongPtrW(GetHwnd(), GWL_STYLE);
         flag &= ~(wxHSCROLL | wxVSCROLL);
         if ( dwStyle & WS_HSCROLL )
             flag |= wxHSCROLL;
@@ -1509,7 +1509,7 @@ wxSize wxListCtrl::MSWGetBestViewRect(int x, int y) const
     // We have to add space for the scrollbars ourselves, they're not taken
     // into account by ListView_ApproximateViewRect(), at least not with
     // commctrl32.dll v6.
-    const DWORD mswStyle = ::GetWindowLong(GetHwnd(), GWL_STYLE);
+    const DWORD mswStyle = ::GetWindowLongPtrW(GetHwnd(), GWL_STYLE);
 
     if ( mswStyle & WS_HSCROLL )
         size.y += wxSystemSettings::GetMetric(wxSYS_HSCROLL_Y, m_parent);

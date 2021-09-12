@@ -691,7 +691,7 @@ void wxTextCtrl::AdoptAttributesFromHWND()
     wxWindow::AdoptAttributesFromHWND();
 
     HWND hWnd = GetHwnd();
-    long style = ::GetWindowLongW(hWnd, GWL_STYLE);
+    long style = ::GetWindowLongPtrW(hWnd, GWL_STYLE);
 
     // retrieve the style to see whether this is an edit or richedit ctrl
 #if wxUSE_RICHEDIT
@@ -1251,7 +1251,7 @@ void wxTextCtrl::DoSetSelection(long from, long to, int flags)
             {
                 // setting ECO_NOHIDESEL also sets WS_VISIBLE and possibly
                 // others, remember the style so we can reset it later if needed
-                style = ::GetWindowLongW(GetHwnd(), GWL_STYLE);
+                style = ::GetWindowLongPtrW(GetHwnd(), GWL_STYLE);
                 ::SendMessageW(GetHwnd(), EM_SETOPTIONS,
                               ECOOP_OR, ECO_NOHIDESEL);
             }
@@ -1267,7 +1267,7 @@ void wxTextCtrl::DoSetSelection(long from, long to, int flags)
         {
             ::SendMessageW(GetHwnd(), EM_SETOPTIONS,
                           ECOOP_AND, ~ECO_NOHIDESEL);
-            if ( style != ::GetWindowLongW(GetHwnd(), GWL_STYLE) )
+            if ( style != ::GetWindowLongPtrW(GetHwnd(), GWL_STYLE) )
                 ::SetWindowLongW(GetHwnd(), GWL_STYLE, style);
         }
 #endif // wxUSE_RICHEDIT

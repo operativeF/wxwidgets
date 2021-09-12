@@ -454,7 +454,7 @@ bool wxRadioBox::IsItemShown(unsigned int item) const
     // don't use IsWindowVisible() here because it would return false if the
     // radiobox itself is hidden while we want to only return false if this
     // button specifically is hidden
-    return (::GetWindowLong((*m_radioButtons)[item],
+    return (::GetWindowLongPtrW((*m_radioButtons)[item],
                             GWL_STYLE) & WS_VISIBLE) != 0;
 }
 

@@ -183,7 +183,7 @@ wxSize wxDateTimePickerCtrl::DoGetBestSize() const
                      (
                         DATETIMEPICK_CLASS,
                         wxT(""),
-                        ::GetWindowLongW(GetHwnd(), GWL_STYLE) & ~DTS_SHOWNONE,
+                        ::GetWindowLongPtrW(GetHwnd(), GWL_STYLE) & ~DTS_SHOWNONE,
                         0, 0, 1, 1,
                         GetHwndOf(m_parent),
                         nullptr,

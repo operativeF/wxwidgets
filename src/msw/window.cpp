@@ -1949,7 +1949,7 @@ wxWindowMSW::DoMoveSibling(WXHWND hwnd, int x, int y, int width, int height)
     {
         // note that this may be different from GetParent() for wxDialogs
         HWND tlwParent = ::GetParent((HWND)hwnd);
-        if ( tlwParent && (::GetWindowLongW(tlwParent, GWL_EXSTYLE) & WS_EX_LAYOUTRTL) != 0 )
+        if ( tlwParent && (::GetWindowLongPtrW(tlwParent, GWL_EXSTYLE) & WS_EX_LAYOUTRTL) != 0 )
         {
             RECT old;
             ::GetWindowRect((HWND) hwnd, &old);
@@ -2171,7 +2171,7 @@ void wxWindowMSW::DoSetClientSize(int width, int height)
 
             // note that this may be different from GetParent() for wxDialogs
             HWND tlwParent = ::GetParent(GetHwnd());
-            if ( tlwParent && (::GetWindowLong(tlwParent, GWL_EXSTYLE) & WS_EX_LAYOUTRTL) != 0 )
+            if ( tlwParent && (::GetWindowLongPtrW(tlwParent, GWL_EXSTYLE) & WS_EX_LAYOUTRTL) != 0 )
             {
                 const int diffWidth = width - (rectClient.right - rectClient.left);
                 rectWin.left -= diffWidth;
@@ -2527,7 +2527,7 @@ bool wxWindowMSW::MSWProcessMessage(WXMSG* pMsg)
                             // let IsDialogMessage() handle this for all
                             // buttons except the owner-drawn ones which it
                             // just seems to ignore
-                            long style = ::GetWindowLongW(msg->hwnd, GWL_STYLE);
+                            long style = ::GetWindowLongPtrW(msg->hwnd, GWL_STYLE);
                             if ( (style & BS_OWNERDRAW) == BS_OWNERDRAW )
                             {
                                 btn = wxDynamicCast
@@ -2689,7 +2689,7 @@ bool wxWindowMSW::MSWSafeIsDialogMessage(WXMSG* msg)
         // style has the focus, it can happen. One such possibility is if
         // all windows are either toplevel, wxDialog, wxPanel or static
         // controls and no window can actually accept keyboard input.
-        if ( ::GetWindowLongW(hwndFocus, GWL_EXSTYLE) & WS_EX_CONTROLPARENT )
+        if ( ::GetWindowLongPtrW(hwndFocus, GWL_EXSTYLE) & WS_EX_CONTROLPARENT )
         {
             // pessimistic by default
             bool canSafelyCallIsDlgMsg = false;
@@ -2725,7 +2725,7 @@ bool wxWindowMSW::MSWSafeIsDialogMessage(WXMSG* msg)
                 return false;
             }
 
-            if ( !(::GetWindowLongW(hwndFocus, GWL_STYLE) & WS_CHILD) )
+            if ( !(::GetWindowLongPtrW(hwndFocus, GWL_STYLE) & WS_CHILD) )
             {
                 // it's a top level window, don't go further -- e.g. even
                 // if the parent of a dialog is disabled, this doesn't

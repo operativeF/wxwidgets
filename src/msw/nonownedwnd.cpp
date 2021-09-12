@@ -215,7 +215,7 @@ bool wxNonOwnedWindow::IsThisEnabled() const
     // But we can only do this if the window had been already created, so test
     // for this in order to return correct result if it was disabled after
     // using default ctor but before calling Create().
-    return m_hWnd ? !(::GetWindowLongW(GetHwnd(), GWL_STYLE) & WS_DISABLED)
+    return m_hWnd ? !(::GetWindowLongPtrW(GetHwnd(), GWL_STYLE) & WS_DISABLED)
                   : m_isEnabled;
 }
 

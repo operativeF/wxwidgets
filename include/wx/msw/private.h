@@ -929,7 +929,7 @@ inline bool wxStyleHasBorder(long style)
 
 inline bool wxHasWindowExStyle(const wxWindowMSW *win, long style)
 {
-    return (::GetWindowLongW(GetHwndOf(win), GWL_EXSTYLE) & style) != 0;
+    return (::GetWindowLongPtrW(GetHwndOf(win), GWL_EXSTYLE) & style) != 0;
 }
 
 // Common helper of wxUpdate{,Edit}LayoutDirection() below: sets or clears the

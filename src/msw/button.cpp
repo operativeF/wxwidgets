@@ -338,7 +338,7 @@ wxButton::SetDefaultStyle(wxButton *btn, bool on)
     }
 
     // then also change the style as needed
-    long style = ::GetWindowLongW(GetHwndOf(btn), GWL_STYLE);
+    long style = ::GetWindowLongPtrW(GetHwndOf(btn), GWL_STYLE);
     if ( !(style & BS_DEFPUSHBUTTON) == on )
     {
         // don't do it with the owner drawn buttons because it will

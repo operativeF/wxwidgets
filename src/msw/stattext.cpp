@@ -130,7 +130,7 @@ void wxStaticText::DoSetSize(int x, int y, int w, int h, int sizeFlags)
 
 #ifdef SS_ENDELLIPSIS
     // do we need to ellipsize the contents?
-    long styleReal = ::GetWindowLong(GetHwnd(), GWL_STYLE);
+    long styleReal = ::GetWindowLongPtrW(GetHwnd(), GWL_STYLE);
     if ( !(styleReal & SS_ENDELLIPSIS) )
     {
         // we don't have SS_ENDELLIPSIS style:

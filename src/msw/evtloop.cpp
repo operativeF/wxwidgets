@@ -62,7 +62,7 @@ bool wxGUIEventLoop::PreProcessMessage(WXMSG *msg)
     // children which themselves were not created by wx (i.e. wxActiveX control children)
     if ( !wndThis )
     {
-        while ( hwnd && (::GetWindowLong(hwnd, GWL_STYLE) & WS_CHILD ))
+        while ( hwnd && (::GetWindowLongPtrW(hwnd, GWL_STYLE) & WS_CHILD ))
         {
             hwnd = ::GetParent(hwnd);
 

@@ -171,7 +171,7 @@ void wxMessageDialog::ReplaceStaticWithEdit()
     // icon and the text itself so search for all of them and ignore the icon
     // ones
     HWND hwndStatic = ::FindWindowExW(GetHwnd(), nullptr, wxT("STATIC"), nullptr);
-    if ( ::GetWindowLong(hwndStatic, GWL_STYLE) & SS_ICON )
+    if ( ::GetWindowLongPtrW(hwndStatic, GWL_STYLE) & SS_ICON )
         hwndStatic = ::FindWindowExW(GetHwnd(), hwndStatic, wxT("STATIC"), nullptr);
 
     if ( !hwndStatic )

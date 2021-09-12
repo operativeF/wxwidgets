@@ -1207,8 +1207,8 @@ bool wxMDIChildFrame::HandleWindowPosChanging(void *pos)
     if (!(lpPos->flags & SWP_NOSIZE))
     {
         RECT rectClient;
-        DWORD dwExStyle = ::GetWindowLongW(GetHwnd(), GWL_EXSTYLE);
-        DWORD dwStyle = ::GetWindowLongW(GetHwnd(), GWL_STYLE);
+        DWORD dwExStyle = ::GetWindowLongPtrW(GetHwnd(), GWL_EXSTYLE);
+        DWORD dwStyle = ::GetWindowLongPtrW(GetHwnd(), GWL_STYLE);
         if (ResetWindowStyle((void *) & rectClient) && (dwStyle & WS_MAXIMIZE))
         {
             ::AdjustWindowRectEx(&rectClient, dwStyle, false, dwExStyle);
@@ -1295,7 +1295,7 @@ bool wxMDIChildFrame::ResetWindowStyle(void *vrect)
         // we want to test whether there is a maximized child, so just set
         // dwThisStyle to 0 if there is no child at all
         DWORD dwThisStyle = pChild
-            ? ::GetWindowLongW(GetHwndOf(pChild), GWL_STYLE) : 0;
+            ? ::GetWindowLongPtrW(GetHwndOf(pChild), GWL_STYLE) : 0;
         updateStyle.TurnOnOrOff(!(dwThisStyle & WS_MAXIMIZE), WS_EX_CLIENTEDGE);
 
         if ( updateStyle.Apply() )

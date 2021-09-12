@@ -92,7 +92,7 @@ wxSize wxCheckBox::DoGetBestClientSize() const
         dc.GetMultiLineTextExtent(GetLabelText(str), &wCheckbox, &hCheckbox);
         wCheckbox += checkSize + GetCharWidth();
 
-        if ( ::GetWindowLongW(GetHwnd(), GWL_STYLE) & BS_MULTILINE )
+        if ( ::GetWindowLongPtrW(GetHwnd(), GWL_STYLE) & BS_MULTILINE )
         {
             // We need to make the checkbox even wider in this case because
             // otherwise it wraps lines automatically and not only on "\n"s as

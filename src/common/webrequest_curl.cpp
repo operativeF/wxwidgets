@@ -645,7 +645,7 @@ LRESULT CALLBACK WinSock1SocketPoller::MsgProc(WXHWND hwnd, WXUINT uMsg,
         {
             // The event handler is stored in the window's user data and the
             // socket with activity is given by wParam.
-            LONG_PTR userData = GetWindowLongPtr(hwnd, GWLP_USERDATA);
+            LONG_PTR userData = ::GetWindowLongPtrW(hwnd, GWLP_USERDATA);
             wxEvtHandler* hndlr = reinterpret_cast<wxEvtHandler*>(userData);
             wxSOCKET_T sock = wParam;
 
