@@ -21,6 +21,7 @@
     #include "wx/msw/private.h"
     #include "wx/msw/wrap/utils.h"
 
+    #include <cassert>
     #include <vector>
 #endif
 
@@ -136,12 +137,11 @@ public:
     // init with conversion
     void Init(const LV_ITEM_OTHER& item)
     {
-        // avoid unnecessary dynamic memory allocation, jjust make m_pItem
+        // avoid unnecessary dynamic memory allocation, just make m_pItem
         // point to our own m_item
 
         // memcpy() can't work if the struct sizes are different
-        wxCOMPILE_TIME_ASSERT( sizeof(LV_ITEM_OTHER) == sizeof(LV_ITEM_NATIVE),
-                               CodeCantWorkIfDiffSizes);
+        static_assert(sizeof(LV_ITEM_OTHER) == sizeof(LV_ITEM_NATIVE), "LV_ITEM structs must be the same size.");
 
         memcpy(&m_item, &item, sizeof(LV_ITEM_NATIVE));
 

@@ -18,6 +18,8 @@
 #include "wx/textentry.h"
 #include "wx/validate.h"
 
+#include <cassert>
+
 #include <gsl/gsl>
 
 // This header uses std::numeric_limits<>::min/max, but these symbols are,
@@ -155,11 +157,7 @@ public:
 
     wxNumValidator& operator=(const wxNumValidator&) = delete;
 
-    wxCOMPILE_TIME_ASSERT
-    (
-        sizeof(ValueType) <= sizeof(LongestValueType),
-        UnsupportedType
-    );
+    static_assert(sizeof(ValueType) <= sizeof(LongestValueType), "Unsupported type.");
 
     void SetMin(ValueType min)
     {

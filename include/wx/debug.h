@@ -476,15 +476,6 @@ template<int x> struct static_assert_test{};
     inline bool wxIsDebuggerRunning() { return false; }
 #endif // Mac/!Mac
 
-// An assert helper used to avoid warning when testing constant expressions,
-// i.e. wxASSERT( sizeof(int) == 4 ) can generate a compiler warning about
-// expression being always true, but not using
-// wxASSERT( wxAssertIsEqual(sizeof(int), 4) )
-//
-// NB: this is made obsolete by wxCOMPILE_TIME_ASSERT() and should no
-//     longer be used.
-extern bool WXDLLIMPEXP_BASE wxAssertIsEqual(int x, int y);
-
 // Use of wxFalse instead of false suppresses compiler warnings about testing
 // constant expression
 inline constexpr bool wxFalse = false;

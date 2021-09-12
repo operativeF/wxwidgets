@@ -19,9 +19,13 @@
 #include "wx/log.h"
 #include "wx/gdicmn.h"
 
-#if defined(__WXMSW__)
-    #include  "wx/msw/private.h"  // includes windows.h for LOGFONT
-    #include  "wx/msw/winundef.h"
+#ifndef WX_PRECOMP
+    #if defined(__WXMSW__)
+        #include  "wx/msw/private.h"  // includes windows.h for LOGFONT
+        #include  "wx/msw/winundef.h"
+    #endif
+
+    #include <cassert>
 #endif
 
 #include "wx/fontutil.h" // for wxNativeFontInfo
@@ -595,10 +599,10 @@ int wxFontBase::AdjustToSymbolicSize(wxFontSymbolicSize size, int base)
     // instead.
     static constexpr float factors[] = { 0.60f, 0.75f, 0.89f, 1.f, 1.2f, 1.5f, 2.f };
 
-    wxCOMPILE_TIME_ASSERT
+    static_assert
     (
         WXSIZEOF(factors) == wxFONTSIZE_XX_LARGE - wxFONTSIZE_XX_SMALL + 1,
-        WrongFontSizeFactorsSize
+        "Wrong font size / factors size."
     );
 
     return wxRound(factors[size - wxFONTSIZE_XX_SMALL]*base);

@@ -16,6 +16,8 @@
 #ifndef WX_PRECOMP
     #include "wx/textctrl.h"
     #include "wx/utils.h"           // std::max()
+
+    #include <cassert>
 #endif // WX_PRECOMP
 
 #include "wx/timectrl.h"
@@ -319,8 +321,7 @@ private:
             { 9, 11},
         };
 
-        wxCOMPILE_TIME_ASSERT( WXSIZEOF(ranges) == Field_Max,
-                               FieldRangesMismatch );
+        static_assert(WXSIZEOF(ranges) == Field_Max, "Field ranges mismatch");
 
         return ranges[field];
     }

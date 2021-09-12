@@ -70,6 +70,7 @@
         #include "wx/msw/wrapwin.h" // For GetShort/LongPathName
     #endif
 
+    #include <cassert>
     #if defined(wxHAS_NATIVE_READLINK)
         #include <vector>
     #endif
@@ -1862,7 +1863,8 @@ wxString wxFileName::GetForbiddenChars(wxPathFormat format)
 
     // If asserts, wxPathFormat has been changed. In case of a new path format
     // addition, the following code might have to be updated.
-    wxCOMPILE_TIME_ASSERT(wxPATH_MAX == 5, wxPathFormatChanged);
+    static_assert(wxPATH_MAX == 5, "Path format changed.");
+
     switch ( GetFormat(format) )
     {
         default :

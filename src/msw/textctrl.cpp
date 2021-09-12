@@ -20,6 +20,7 @@
     
     #include <boost/nowide/convert.hpp>
 
+    #include <cassert>
     #include <string>
 #endif
 
@@ -3446,8 +3447,7 @@ bool wxRichEditModule::Load(Version version)
         "msftedit",
     };
 
-    wxCOMPILE_TIME_ASSERT( WXSIZEOF(dllnames) == Version_Max,
-                            RichEditDllNamesVersionsMismatch );
+    static_assert(WXSIZEOF(dllnames) == Version_Max, "RichEditDllNames versions mismatch");
 
     ms_hRichEdit[version] = ::LoadLibrary(boost::nowide::widen(dllnames[version]).c_str());
 

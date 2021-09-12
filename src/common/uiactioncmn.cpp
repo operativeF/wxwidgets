@@ -25,6 +25,10 @@
 
 #include "wx/private/uiaction.h"
 
+#ifndef WX_PRECOMP
+    #include <cassert>
+#endif
+
 // ----------------------------------------------------------------------------
 // Methods forwarded to wxUIActionSimulatorImpl
 // ----------------------------------------------------------------------------
@@ -149,8 +153,8 @@ static bool MapUnshifted(char& ch)
         "<>?"
         ;
 
-    wxCOMPILE_TIME_ASSERT( sizeof(unshifted) == sizeof(shifted),
-                           ShiftedUnshiftedKeysMismatch );
+    static_assert(sizeof(unshifted) == sizeof(shifted),
+                  "Shifted / Unshifted keys mismatch");
 
     const char* const p = strchr(shifted, ch);
     if ( !p )

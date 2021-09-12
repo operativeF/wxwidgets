@@ -17,6 +17,8 @@
     #include "wx/msw/missing.h" // IDC_HAND
     
     #include <boost/nowide/convert.hpp>
+
+    #include <cassert>
 #endif
 
 #include "wx/cursor.h"
@@ -348,8 +350,7 @@ void wxCursor::InitFromStock(wxStockCursor idCursor)
         // no entry for wxCURSOR_MAX
     };
 
-    wxCOMPILE_TIME_ASSERT( WXSIZEOF(stdCursors) == wxCURSOR_MAX,
-                           CursorsIdArrayMismatch );
+    static_assert(WXSIZEOF(stdCursors) == wxCURSOR_MAX);
 
     wxCHECK_RET( idCursor > 0 && (size_t)idCursor < WXSIZEOF(stdCursors),
                  wxT("invalid cursor id in wxCursor() ctor") );

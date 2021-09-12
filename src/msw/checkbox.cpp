@@ -14,6 +14,8 @@
 #if wxUSE_CHECKBOX
 
 #ifndef WX_PRECOMP
+    #include <cassert>
+    
     #include "wx/msw/missing.h"
 #endif
 
@@ -149,9 +151,10 @@ void wxCheckBox::Command(wxCommandEvent& event)
     ProcessCommand(event);
 }
 
-wxCOMPILE_TIME_ASSERT(wxCHK_UNCHECKED == BST_UNCHECKED
-    && wxCHK_CHECKED == BST_CHECKED
-    && wxCHK_UNDETERMINED == BST_INDETERMINATE, EnumValuesIncorrect);
+static_assert(wxCHK_UNCHECKED == BST_UNCHECKED
+              && wxCHK_CHECKED == BST_CHECKED
+              && wxCHK_UNDETERMINED == BST_INDETERMINATE,
+              "Enum values incorrect");
 
 void wxCheckBox::DoSet3StateValue(wxCheckBoxState state)
 {

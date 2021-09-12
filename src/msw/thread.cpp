@@ -22,6 +22,8 @@
     #include "wx/msw/missing.h"
 
     #include <gsl/gsl>
+
+    #include <cassert>
 #endif
 
 #include "wx/intl.h"
@@ -124,8 +126,8 @@ static bool gs_waitingForThread = false;
 
 wxCriticalSection::wxCriticalSection( wxCriticalSectionType WXUNUSED(critSecType) )
 {
-    wxCOMPILE_TIME_ASSERT( sizeof(CRITICAL_SECTION) <= sizeof(wxCritSectBuffer),
-                           wxCriticalSectionBufferTooSmall );
+    static_assert(sizeof(CRITICAL_SECTION) <= sizeof(wxCritSectBuffer),
+                  "Critical section buffer too small.");
 
     ::InitializeCriticalSection((CRITICAL_SECTION *)m_buffer);
 }

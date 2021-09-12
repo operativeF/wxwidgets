@@ -11,10 +11,10 @@
 #define _WX_WEAKREF_H_
 
 #include "wx/tracker.h"
-
-
 #include "wx/meta/convertible.h"
 #include "wx/meta/int2type.h"
+
+#include <cassert>
 
 template <class T>
 struct wxIsStaticTrackable
@@ -96,8 +96,10 @@ protected:
     template <class TDerived>
     void Assign( TDerived* pobj )
     {
-        wxCOMPILE_TIME_ASSERT( wxIsStaticTrackable<TDerived>::value,
-                                Tracked_class_should_inherit_from_wxTrackable );
+        // FIXME: Use concepts
+        static_assert( wxIsStaticTrackable<TDerived>::value,
+            "Tracked class should inherit from wxTrackable" );
+
         wxTrackable *ptbase = pobj;
         DoAssign(pobj, ptbase);
     }

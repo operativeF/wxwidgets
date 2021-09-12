@@ -17,6 +17,10 @@
 #include "wx/utils.h"
 #include "wx/apptrait.h"
 
+#ifndef WX_PRECOMP
+    #include <cassert>
+#endif
+
 namespace
 {
 
@@ -277,16 +281,16 @@ wxString wxPlatformInfo::GetPortIdShortName(wxPortId port, bool usingUniversal)
 
 wxString wxPlatformInfo::GetBitnessName(wxBitness bitness)
 {
-    wxCOMPILE_TIME_ASSERT( WXSIZEOF(wxBitnessNames) == wxBITNESS_MAX,
-                           wxBitnessNamesMismatch );
+    static_assert(WXSIZEOF(wxBitnessNames) == wxBITNESS_MAX,
+                  "BitnessNames Mismatch (size)");
 
     return wxBitnessNames[bitness];
 }
 
 wxString wxPlatformInfo::GetEndiannessName(wxEndianness end)
 {
-    wxCOMPILE_TIME_ASSERT( WXSIZEOF(wxEndiannessNames) == wxENDIAN_MAX,
-                           wxEndiannessNamesMismatch );
+    static_assert(WXSIZEOF(wxEndiannessNames) == wxENDIAN_MAX,
+                  "EndianNames Mismatch (size)");
 
     return wxEndiannessNames[end];
 }

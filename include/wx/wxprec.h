@@ -42,6 +42,7 @@
 // Include standard headers
 #include <algorithm>
 #include <array>
+#include <cassert>
 #include <cerrno>
 #include <cctype>
 #include <charconv>

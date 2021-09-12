@@ -17,6 +17,10 @@
 
 #include "wx/scopedarray.h"
 
+#ifndef WX_PRECOMP
+    #include <cassert>
+#endif
+
 // ----------------------------------------------------------------------------
 // constants
 // ----------------------------------------------------------------------------
@@ -939,8 +943,7 @@ static wxString TagString(wxDbgHelpDLL::SymbolTag tag)
         wxT("dimension"),
     };
 
-    wxCOMPILE_TIME_ASSERT( WXSIZEOF(tags) == wxDbgHelpDLL::SYMBOL_TAG_MAX,
-                                SymbolTagStringMismatch );
+    static_assert(WXSIZEOF(tags) == wxDbgHelpDLL::SYMBOL_TAG_MAX, "Symbol tag string mismatch");
 
     wxString s;
     if ( tag < WXSIZEOF(tags) )
@@ -967,8 +970,7 @@ static wxString KindString(wxDbgHelpDLL::DataKind kind)
          wxT("constant"),
     };
 
-    wxCOMPILE_TIME_ASSERT( WXSIZEOF(kinds) == wxDbgHelpDLL::DATA_MAX,
-                                DataKindStringMismatch );
+    static_assert(WXSIZEOF(kinds) == wxDbgHelpDLL::DATA_MAX, "Data kind string mismatch");
 
     wxString s;
     if ( kind < WXSIZEOF(kinds) )
@@ -988,8 +990,7 @@ static wxString UdtKindString(wxDbgHelpDLL::UdtKind kind)
          wxT("union"),
     };
 
-    wxCOMPILE_TIME_ASSERT( WXSIZEOF(kinds) == wxDbgHelpDLL::UDT_MAX,
-                                UDTKindStringMismatch );
+    static_assert(WXSIZEOF(kinds) == wxDbgHelpDLL::UDT_MAX, "UDT kind string mismatch" );
 
     wxString s;
     if ( kind < WXSIZEOF(kinds) )
@@ -1038,8 +1039,7 @@ static wxString TypeString(wxDbgHelpDLL::BasicType bt)
         wxT("HRESULT"),
     };
 
-    wxCOMPILE_TIME_ASSERT( WXSIZEOF(types) == wxDbgHelpDLL::BASICTYPE_MAX,
-                                BasicTypeStringMismatch );
+    static_assert(WXSIZEOF(types) == wxDbgHelpDLL::BASICTYPE_MAX, "Basic type string mismatch");
 
     wxString s;
     if ( bt < WXSIZEOF(types) )

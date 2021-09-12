@@ -1078,12 +1078,6 @@ void wxWakeUpIdle()
     //else: do nothing, what can we do?
 }
 
-// wxASSERT() helper
-bool wxAssertIsEqual(int x, int y)
-{
-    return x == y;
-}
-
 void wxAbort()
 {
     abort();
