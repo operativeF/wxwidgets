@@ -40,7 +40,7 @@ TEST_CASE("GraphicsPathTestCase", "[path]")
 #if wxUSE_GRAPHICS_GDIPLUS
 TEST_CASE("GraphicsPathTestCaseGDIPlus")
 {
-    wxBitmap bmp(500, 500);
+    wxBitmap bmp(wxSize{500, 500});
     wxMemoryDC mdc(bmp);
     std::unique_ptr<wxGraphicsContext> gc(wxGraphicsRenderer::GetGDIPlusRenderer()->CreateContext(mdc));
     REQUIRE(gc);
@@ -51,7 +51,7 @@ TEST_CASE("GraphicsPathTestCaseGDIPlus")
 #if wxUSE_GRAPHICS_DIRECT2D
 TEST_CASE("GraphicsPathTestCaseDirect2D")
 {
-    wxBitmap bmp(500, 500);
+    wxBitmap bmp(wxSize{500, 500});
     wxMemoryDC mdc(bmp);
     std::unique_ptr<wxGraphicsContext> gc(wxGraphicsRenderer::GetDirect2DRenderer()->CreateContext(mdc));
     REQUIRE(gc);
@@ -64,7 +64,7 @@ TEST_CASE("GraphicsPathTestCaseDirect2D")
 #if wxUSE_CAIRO
 TEST_CASE("GraphicsPathTestCaseCairo", "[path][cairo]")
 {
-    wxBitmap bmp(500, 500);
+    wxBitmap bmp(wxSize{500, 500});
     wxMemoryDC mdc(bmp);
     std::unique_ptr<wxGraphicsContext> gc(wxGraphicsRenderer::GetCairoRenderer()->CreateContext(mdc));
     REQUIRE(gc);

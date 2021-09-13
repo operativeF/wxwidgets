@@ -1113,7 +1113,7 @@ void wxHtmlWindow::OnPaint(wxPaintEvent& WXUNUSED(event))
     else // window is not double buffered by the system, do it ourselves
     {
         if ( !m_backBuffer.IsOk() )
-            m_backBuffer.Create(sz.x, sz.y);
+            m_backBuffer.Create(sz);
         dcm.SelectObject(m_backBuffer);
         dc = &dcm;
     }

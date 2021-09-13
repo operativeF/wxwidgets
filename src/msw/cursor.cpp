@@ -128,8 +128,7 @@ wxCursorRefData::wxCursorRefData(HCURSOR hcursor, bool destroy)
 
     if ( m_hCursor )
     {
-        m_width = GetStandardWidth();
-        m_height = GetStandardHeight();
+        m_size = {GetStandardWidth(), GetStandardHeight()};
     }
 
     m_destroyCursor = destroy;

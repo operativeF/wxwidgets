@@ -88,7 +88,7 @@ inline void MonochromeLineWriteBit(unsigned char* dstLineStart, int index, bool 
 // wxDIB creation
 // ----------------------------------------------------------------------------
 
-bool wxDIB::Create(int width, int height, int depth)
+bool wxDIB::Create(wxSize sz, int depth)
 {
     // we don't support formats using palettes right now so we only create
     // either 24bpp (RGB) or 32bpp (RGBA) bitmaps
@@ -101,18 +101,18 @@ bool wxDIB::Create(int width, int height, int depth)
     wxZeroMemory(info);
 
     info.bmiHeader.biSize = sizeof(BITMAPINFOHEADER);
-    info.bmiHeader.biWidth = width;
+    info.bmiHeader.biWidth = sz.x;
 
     // we use positive height here which corresponds to a DIB with normal, i.e.
     // bottom to top, order -- normally using negative height (which means
     // reversed for MS and hence natural for all the normal people top to
     // bottom line scan order) could be used to avoid the need for the image
     // reversal in Create(image) but this doesn't work under NT, only Win9x!
-    info.bmiHeader.biHeight = height;
+    info.bmiHeader.biHeight = sz.y;
 
     info.bmiHeader.biPlanes = 1;
     info.bmiHeader.biBitCount = (WORD)depth;
-    info.bmiHeader.biSizeImage = GetLineSize(width, depth)*height;
+    info.bmiHeader.biSizeImage = GetLineSize(sz.x, depth) * sz.y;
 
     m_handle = ::CreateDIBSection
                  (
@@ -131,8 +131,7 @@ bool wxDIB::Create(int width, int height, int depth)
         return false;
     }
 
-    m_width = width;
-    m_height = height;
+    m_size = sz;
     m_depth = depth;
 
     return true;
@@ -153,9 +152,9 @@ bool wxDIB::Create(HBITMAP hbmp, int depth /* = -1 */)
         m_ownsHandle = false;
 
         // copy all the bitmap parameters too as we have them now anyhow
-        m_width = ds.dsBm.bmWidth;
-        m_height = ds.dsBm.bmHeight;
-        m_depth = ds.dsBm.bmBitsPixel;
+        m_size.x = ds.dsBm.bmWidth;
+        m_size.y = ds.dsBm.bmHeight;
+        m_depth  = ds.dsBm.bmBitsPixel;
 
         m_data = ds.dsBm.bmBits;
     }
@@ -174,7 +173,7 @@ bool wxDIB::Create(HBITMAP hbmp, int depth /* = -1 */)
         if ( d <= 0 )
             d = wxDisplayDepth();
 
-        if ( !Create(bm.bmWidth, bm.bmHeight, d) || !CopyFromDDB(hbmp) )
+        if ( !Create(wxSize{bm.bmWidth, bm.bmHeight}, d) || !CopyFromDDB(hbmp) )
             return false;
     }
 
@@ -199,7 +198,7 @@ bool wxDIB::CopyFromDDB(HBITMAP hbmp)
                 dc.get(),                   // the DC to use
                 hbmp,                       // the source DDB
                 0,                          // first scan line
-                m_height,                   // number of lines to copy
+                m_size.y,                   // number of lines to copy
                 ds.dsBm.bmBits,             // pointer to the buffer
                 (BITMAPINFO *)&ds.dsBmih,   // bitmap header
                 DIB_RGB_COLORS              // and not DIB_PAL_COLORS
@@ -330,8 +329,7 @@ void wxDIB::DoGetObject() const
 
         wxDIB *self = const_cast<wxDIB *>(this);
 
-        self->m_width = ds.dsBm.bmWidth;
-        self->m_height = ds.dsBm.bmHeight;
+        self->m_size = wxSize{ds.dsBm.bmWidth, ds.dsBm.bmHeight};
         self->m_depth = ds.dsBm.bmBitsPixel;
         self->m_data = ds.dsBm.bmBits;
     }
@@ -636,9 +634,7 @@ bool wxDIB::Create(const wxImage& image, PixelFormat pf, int dstDepth)
     wxCHECK_MSG(dstDepth != 1, false,
         "wxImage conversion to monochrome bitmap requires wxUSE_PALETTE");
 #endif
-
-    const int h = image.GetHeight();
-    const int w = image.GetWidth();
+    const wxSize sz = image.GetSize();
 
     // if we have alpha channel, we need to create a 32bpp RGBA DIB, otherwise
     // a 24bpp RGB is sufficient
@@ -648,7 +644,7 @@ bool wxDIB::Create(const wxImage& image, PixelFormat pf, int dstDepth)
     const int srcBpp = hasAlpha ? 32 : 24;
     dstDepth = dstDepth != -1 ? dstDepth : srcBpp;
 
-    if ( !Create(w, h, dstDepth) )
+    if ( !Create(sz, dstDepth) )
         return false;
 
     // if requested, convert wxImage's content to monochrome
@@ -699,13 +695,13 @@ bool wxDIB::Create(const wxImage& image, PixelFormat pf, int dstDepth)
     // DIBs are stored in bottom to top order (see also the comment above in
     // Create()) so we need to copy bits line by line and starting from the end
     // N.B.:  srcBytesPerLine varies with dstDepth because dstDepth == 1 uses quantized input
-    const int srcBytesPerLine = dstDepth != 1 ? w * 3 : w;
-    const int dstBytesPerLine = GetLineSize(w, dstDepth);
-    const unsigned char *src = (dstDepth != 1 ? image.GetData() : eightBitData.get()) + ((h - 1) * srcBytesPerLine);
-    const unsigned char *alpha = hasAlpha ? image.GetAlpha() + (h - 1)*w
+    const int srcBytesPerLine = dstDepth != 1 ? sz.x * 3 : sz.x;
+    const int dstBytesPerLine = GetLineSize(sz.x, dstDepth);
+    const unsigned char *src = (dstDepth != 1 ? image.GetData() : eightBitData.get()) + ((sz.y - 1) * srcBytesPerLine);
+    const unsigned char *alpha = hasAlpha ? image.GetAlpha() + (sz.y - 1) * sz.x
                                           : nullptr;
     unsigned char *dstLineStart = (unsigned char *)m_data;
-    for ( int y = 0; y < h; y++ )
+    for ( int y = 0; y < sz.y; y++ )
     {
         // Copy one DIB line. Note that RGB components order is reversed in
         // Windows bitmaps compared to wxImage and is actually BGR.
@@ -717,7 +713,7 @@ bool wxDIB::Create(const wxImage& image, PixelFormat pf, int dstDepth)
                 case PixelFormat_PreMultiplied:
                     // Pre-multiply pixel values so that the DIB could be used
                     // with ::AlphaBlend().
-                    for ( int x = 0; x < w; x++ )
+                    for ( int x = 0; x < sz.x; x++ )
                     {
                         const unsigned char a = *alpha++;
                         *dst++ = (unsigned char)((src[2] * a + 127) / 255);
@@ -730,7 +726,7 @@ bool wxDIB::Create(const wxImage& image, PixelFormat pf, int dstDepth)
 
                 case PixelFormat_NotPreMultiplied:
                     // Just copy pixel data without changing it.
-                    for ( int x = 0; x < w; x++ )
+                    for ( int x = 0; x < sz.x; x++ )
                     {
                         *dst++ = src[2];
                         *dst++ = src[1];
@@ -747,7 +743,7 @@ bool wxDIB::Create(const wxImage& image, PixelFormat pf, int dstDepth)
         {
             if ( dstDepth != 1 )
             {
-                for ( int x = 0; x < w; x++ )
+                for ( int x = 0; x < sz.x; x++ )
                 {
                     *dst++ = src[2];
                     *dst++ = src[1];
@@ -757,7 +753,7 @@ bool wxDIB::Create(const wxImage& image, PixelFormat pf, int dstDepth)
             }
             else
             {
-                for ( int x = 0; x < w; x++ )
+                for ( int x = 0; x < sz.x; x++ )
                 {
                     MonochromeLineWriteBit(dstLineStart, x, src[0] != 0);
                     ++src;
@@ -768,7 +764,7 @@ bool wxDIB::Create(const wxImage& image, PixelFormat pf, int dstDepth)
         // pass to the previous line in the image
         src -= 2*srcBytesPerLine;
         if ( alpha )
-            alpha -= 2*w;
+            alpha -= 2 * sz.x;
 
         // and to the next one in the DIB
         dstLineStart += dstBytesPerLine;

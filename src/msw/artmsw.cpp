@@ -128,7 +128,7 @@ MSWGetBitmapFromIconLocation(const TCHAR* path, int index, const wxSize& size)
     // be size.x in both directions as we only pass "x" to SHDefExtractIcon()
     // above.
     wxIcon icon;
-    if ( !icon.InitFromHICON((WXHICON)hIcon, size.x, size.x) )
+    if ( !icon.InitFromHICON((WXHICON)hIcon, size) )
         return wxNullBitmap;
 
     return {icon};
@@ -142,8 +142,11 @@ MSWGetBitmapForPath(const wxString& path, const wxSize& size, DWORD uFlags = 0)
 
     uFlags |= SHGFI_USEFILEATTRIBUTES | SHGFI_ICONLOCATION;
 
-    if ( !SHGetFileInfo(path.t_str(), FILE_ATTRIBUTE_DIRECTORY,
-                        &fi, sizeof(SHFILEINFO), uFlags) )
+    if ( !::SHGetFileInfoW(path.t_str(),
+                           FILE_ATTRIBUTE_DIRECTORY,
+                           &fi,
+                           sizeof(SHFILEINFO),
+                           uFlags) )
        return wxNullBitmap;
 
     return MSWGetBitmapFromIconLocation(fi.szDisplayName, fi.iIcon, size);

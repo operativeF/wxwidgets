@@ -356,7 +356,7 @@ bool wxGenericAnimationCtrl::RebuildBackingStoreUpToFrame(unsigned int frame)
     if ( !m_backingStore.IsOk() ||
             m_backingStore.GetWidth() < w || m_backingStore.GetHeight() < h )
     {
-        if (!m_backingStore.Create(w, h))
+        if (!m_backingStore.Create(wxSize{w, h}))
             return false;
     }
 

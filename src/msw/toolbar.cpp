@@ -823,7 +823,7 @@ bool wxToolBar::Realize()
 
         // Create a bitmap and copy all the tool bitmaps into it
         wxMemoryDC dcAllButtons;
-        wxBitmap bitmap(totalBitmapWidth, totalBitmapHeight);
+        wxBitmap bitmap(wxSize{totalBitmapWidth, totalBitmapHeight});
 
         for ( node = m_tools.GetFirst(); node; node = node->GetNext() )
         {

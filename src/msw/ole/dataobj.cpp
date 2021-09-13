@@ -1063,7 +1063,7 @@ bool wxBitmapDataObject::SetData(size_t WXUNUSED(len), const void *buf)
 
     const BITMAPINFOHEADER * const pbmih = &pbmi->bmiHeader;
     wxBitmap bitmap;
-    bitmap.InitFromHBITMAP((WXHBITMAP)hbmp, pbmih->biWidth, pbmih->biHeight, pbmih->biBitCount);
+    bitmap.InitFromHBITMAP((WXHBITMAP)hbmp, wxSize{pbmih->biWidth, pbmih->biHeight}, pbmih->biBitCount);
 
     // TODO: create wxPalette if the bitmap has any
 
@@ -1109,7 +1109,7 @@ bool wxBitmapDataObject2::SetData(size_t WXUNUSED(len), const void *pBuf)
     }
 
     wxBitmap bitmap;
-    if ( !bitmap.InitFromHBITMAP((WXHBITMAP)hbmp, bmp.bmWidth, bmp.bmHeight, bmp.bmBitsPixel) )
+    if ( !bitmap.InitFromHBITMAP((WXHBITMAP)hbmp, wxSize{bmp.bmWidth, bmp.bmHeight}, bmp.bmBitsPixel) )
     {
         wxFAIL_MSG(wxT("pasting/dropping invalid bitmap"));
 

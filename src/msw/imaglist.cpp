@@ -376,10 +376,11 @@ bool wxImageList::Draw(int index,
 // Get the bitmap
 wxBitmap wxImageList::GetBitmap(int index) const
 {
+    // TODO: Return size
     int bmp_width = 0, bmp_height = 0;
     GetSize(index, bmp_width, bmp_height);
 
-    wxBitmap bitmap(bmp_width, bmp_height);
+    wxBitmap bitmap(wxSize{bmp_width, bmp_height});
 
 #if wxUSE_WXDIB && wxUSE_IMAGE
     wxMemoryDC dc;
@@ -447,7 +448,7 @@ wxIcon wxImageList::GetIcon(int index) const
         // TODO: Return size.
         int iconW, iconH;
         GetSize(index, iconW, iconH);
-        icon.InitFromHICON((WXHICON)hIcon, iconW, iconH);
+        icon.InitFromHICON((WXHICON)hIcon, wxSize{iconW, iconH});
 
         return icon;
     }

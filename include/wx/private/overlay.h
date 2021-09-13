@@ -44,7 +44,7 @@ public:
     // returns true if it has been setup
     bool IsOk();
 
-    void Init(wxDC* dc, int x , int y , int width , int height);
+    void Init(wxDC* dc, wxRect boundary);
 
     void BeginDrawing(wxDC* dc);
 

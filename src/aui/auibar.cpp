@@ -47,7 +47,7 @@ wxDEFINE_EVENT( wxEVT_AUITOOLBAR_BEGIN_DRAG, wxAuiToolBarEvent );
 wxIMPLEMENT_CLASS(wxAuiToolBar, wxControl);
 wxIMPLEMENT_DYNAMIC_CLASS(wxAuiToolBarEvent, wxEvent);
 
-wxBitmap wxAuiBitmapFromBits(const unsigned char bits[], int w, int h,
+wxBitmap wxAuiBitmapFromBits(const unsigned char bits[], wxSize sz,
                              const wxColour& color);
 
 namespace
@@ -170,14 +170,14 @@ void wxAuiGenericToolBarArt::UpdateColoursFromSystem()
     static constexpr unsigned char buttonDropdownBits[] = { 0xe0, 0xf1, 0xfb };
     static constexpr unsigned char overflowBits[] = { 0x80, 0xff, 0x80, 0xc1, 0xe3, 0xf7 };
 
-    m_buttonDropDownBmp = wxAuiBitmapFromBits(buttonDropdownBits, 5, 3,
+    m_buttonDropDownBmp = wxAuiBitmapFromBits(buttonDropdownBits, wxSize{5, 3},
                                               wxSystemSettings::GetColour(wxSYS_COLOUR_BTNTEXT));
     m_disabledButtonDropDownBmp = wxAuiBitmapFromBits(
-                                                buttonDropdownBits, 5, 3,
+                                                buttonDropdownBits, wxSize{5, 3},
                                                 wxColor(128,128,128));
-    m_overflowBmp = wxAuiBitmapFromBits(overflowBits, 7, 6,
+    m_overflowBmp = wxAuiBitmapFromBits(overflowBits, wxSize{7, 6},
                                         wxSystemSettings::GetColour(wxSYS_COLOUR_BTNTEXT));
-    m_disabledOverflowBmp = wxAuiBitmapFromBits(overflowBits, 7, 6, wxColor(128,128,128));
+    m_disabledOverflowBmp = wxAuiBitmapFromBits(overflowBits, wxSize{7, 6}, wxColor(128,128,128));
 }
 
 void wxAuiGenericToolBarArt::SetFlags(unsigned int flags)
@@ -575,7 +575,7 @@ wxSize wxAuiGenericToolBarArt::GetToolSize(
                                         const wxAuiToolBarItem& item)
 {
     if (!item.GetBitmap().IsOk() && !(m_flags & wxAUI_TB_TEXT))
-        return wnd->FromDIP(wxSize(16,16));
+        return wnd->FromDIP(wxSize{16,16});
 
     const wxBitmap& bmp = item.GetBitmap();
     int width = bmp.IsOk() ? bmp.GetScaledWidth() : 0;

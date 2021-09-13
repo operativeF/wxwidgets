@@ -39,9 +39,9 @@ bool wxOverlay::IsOk()
     return m_impl->IsOk();
 }
 
-void wxOverlay::Init( wxDC* dc, int x , int y , int width , int height )
+void wxOverlay::Init( wxDC* dc, wxRect boundary )
 {
-    m_impl->Init(dc, x, y, width, height);
+    m_impl->Init(dc, boundary);
 }
 
 void wxOverlay::BeginDrawing( wxDC* dc)
@@ -72,10 +72,10 @@ void wxOverlay::Reset()
 // wxDCOverlay
 // ----------------------------------------------------------------------------
 
-wxDCOverlay::wxDCOverlay(wxOverlay &overlay, wxDC *dc, int x , int y , int width , int height) :
+wxDCOverlay::wxDCOverlay(wxOverlay &overlay, wxDC *dc, wxRect boundary) :
     m_overlay(overlay)
 {
-    Init(dc, x, y, width, height);
+    Init(dc, boundary);
 }
 
 wxDCOverlay::wxDCOverlay(wxOverlay &overlay, wxDC *dc) :
@@ -83,16 +83,16 @@ wxDCOverlay::wxDCOverlay(wxOverlay &overlay, wxDC *dc) :
 {
     const wxSize size(dc->GetSize());
 
-    const wxCoord logicalLeft = dc->DeviceToLogicalX(0);
-    const wxCoord logicalTop = dc->DeviceToLogicalY(0);
-    const wxCoord logicalRight = dc->DeviceToLogicalX(size.x);
+    const wxCoord logicalLeft   = dc->DeviceToLogicalX(0);
+    const wxCoord logicalTop    = dc->DeviceToLogicalY(0);
+    const wxCoord logicalRight  = dc->DeviceToLogicalX(size.x);
     const wxCoord logicalBottom = dc->DeviceToLogicalY(size.y);
 
     Init(dc,
-         logicalLeft,
-         logicalTop,
-         logicalRight - logicalLeft,
-         logicalBottom - logicalTop);
+         wxRect{logicalLeft,
+                logicalTop,
+                logicalRight - logicalLeft,
+                logicalBottom - logicalTop});
 }
 
 wxDCOverlay::~wxDCOverlay()
@@ -100,12 +100,12 @@ wxDCOverlay::~wxDCOverlay()
     m_overlay.EndDrawing(m_dc);
 }
 
-void wxDCOverlay::Init(wxDC *dc, int x , int y , int width , int height )
+void wxDCOverlay::Init(wxDC *dc, wxRect boundary )
 {
     m_dc = dc ;
     if ( !m_overlay.IsOk() )
     {
-        m_overlay.Init(dc,x,y,width,height);
+        m_overlay.Init(dc, boundary);
     }
     m_overlay.BeginDrawing(dc);
 }
@@ -126,18 +126,18 @@ bool wxOverlayImpl::IsOk()
     return m_bmpSaved.IsOk() ;
 }
 
-void wxOverlayImpl::Init( wxDC* dc, int x , int y , int width , int height )
+void wxOverlayImpl::Init( wxDC* dc, wxRect boundary )
 {
     m_window = dc->GetWindow();
     wxMemoryDC dcMem ;
-    m_bmpSaved.Create( width, height );
+    m_bmpSaved.Create( boundary.GetSize() );
     dcMem.SelectObject( m_bmpSaved );
-    m_x = x ;
-    m_y = y ;
-    m_width = width ;
-    m_height = height ;
+    m_x = boundary.x;
+    m_y = boundary.y;
+    m_width = boundary.width;
+    m_height = boundary.height;
     dcMem.Blit(0, 0, m_width, m_height,
-        dc, x, y);
+        dc, boundary.x, boundary.y);
     dcMem.SelectObject( wxNullBitmap );
 }
 

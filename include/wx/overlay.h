@@ -57,7 +57,7 @@ private:
     // returns true if it has been setup
     bool IsOk();
 
-    void Init(wxDC* dc, int x , int y , int width , int height);
+    void Init(wxDC* dc, wxRect boundary);
 
     void BeginDrawing(wxDC* dc);
 
@@ -76,7 +76,7 @@ class WXDLLIMPEXP_CORE wxDCOverlay
 public:
     // connects this overlay to the corresponding drawing dc, if the overlay is
     // not initialized yet this call will do so
-    wxDCOverlay(wxOverlay &overlay, wxDC *dc, int x , int y , int width , int height);
+    wxDCOverlay(wxOverlay &overlay, wxDC *dc, wxRect boundary);
 
     // convenience wrapper that behaves the same using the entire area of the dc
     wxDCOverlay(wxOverlay &overlay, wxDC *dc);
@@ -93,7 +93,7 @@ public:
     void Clear();
 
 private:
-    void Init(wxDC *dc, int x , int y , int width , int height);
+    void Init(wxDC *dc, wxRect boundary);
 
     wxOverlay& m_overlay;
 

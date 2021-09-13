@@ -3013,9 +3013,9 @@ bool wxRichTextCtrl::RecreateBuffer(const wxSize& size)
         // destination by making the backing bitmap 24-bit. Note that using 24-bit depth breaks painting of
         // scrolled areas on wxWidgets 2.8.
 #if defined(__WXMSW__) && wxCHECK_VERSION(3,0,0)
-        m_bufferBitmap = wxBitmap(sz.x, sz.y, 24);
+        m_bufferBitmap = wxBitmap(sz, 24);
 #else
-        m_bufferBitmap = wxBitmap(sz.x, sz.y);
+        m_bufferBitmap = wxBitmap(sz);
 #endif
     return m_bufferBitmap.IsOk();
 }

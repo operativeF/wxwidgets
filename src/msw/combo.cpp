@@ -13,6 +13,10 @@
 
 #if wxUSE_COMBOCTRL
 
+#ifndef WX_PRECOMP
+    #include <chrono>
+#endif
+
 #include "wx/combo.h"
 
 #include "wx/log.h"
@@ -31,7 +35,9 @@ constexpr int NATIVE_TEXT_INDENT_CLASSIC = 2;
 
 constexpr int COMBOBOX_ANIMATION_RESOLUTION = 10;
 
-constexpr int COMBOBOX_ANIMATION_DURATION = 200;  // In milliseconds
+using namespace std::chrono_literals;
+
+constexpr auto COMBOBOX_ANIMATION_DURATION = 200ms;
 
 #define wxMSW_DESKTOP_USERPREFERENCESMASK_COMBOBOXANIM    (1<<2)
 
@@ -618,11 +624,11 @@ void wxComboCtrl::DoTimerEvent()
 #else
         int pos = (int) (t-m_animStart);
 #endif
-        if ( pos < COMBOBOX_ANIMATION_DURATION )
+        if ( pos < COMBOBOX_ANIMATION_DURATION.count() )
         {
             int height = rect.height;
             //int h0 = rect.height;
-            int h = (((pos*256)/COMBOBOX_ANIMATION_DURATION)*height)/256;
+            int h = (((pos*256)/COMBOBOX_ANIMATION_DURATION.count())*height)/256;
             int y = (height - h);
             if ( y < 0 )
                 y = 0;

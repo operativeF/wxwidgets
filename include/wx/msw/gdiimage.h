@@ -37,8 +37,7 @@ struct WXDLLIMPEXP_CORE wxGDIImageRefData : public wxGDIRefData
 
     wxGDIImageRefData(const wxGDIImageRefData& data)  
     {
-        m_width = data.m_width;
-        m_height = data.m_height;
+        m_size = data.m_size;
         m_depth = data.m_depth;
 
         // can't copy handles like this, derived class copy ctor must do it!
@@ -47,15 +46,14 @@ struct WXDLLIMPEXP_CORE wxGDIImageRefData : public wxGDIRefData
 
     bool IsOk() const override { return m_handle != nullptr; }
 
-    void SetSize(int w, int h) { m_width = w; m_height = h; }
+    void SetSize(wxSize sz) { m_size = sz; }
 
     virtual void Free() = 0;
 
     // for compatibility, the member fields are public
 
     // the size of the image
-    int m_width{0};
-    int m_height{0};
+    wxSize m_size{0, 0};
 
     // the depth of the image
     int m_depth{0};
@@ -102,14 +100,13 @@ public:
     void SetHandle(WXHANDLE handle)
         { AllocExclusive(); GetGDIImageData()->m_handle = handle; }
 
-    int GetWidth() const { return IsNull() ? 0 : GetGDIImageData()->m_width; }
-    int GetHeight() const { return IsNull() ? 0 : GetGDIImageData()->m_height; }
+    int GetWidth() const { return IsNull() ? 0 : GetGDIImageData()->m_size.x; }
+    int GetHeight() const { return IsNull() ? 0 : GetGDIImageData()->m_size.y; }
     int GetDepth() const { return IsNull() ? 0 : GetGDIImageData()->m_depth; }
 
     wxSize GetSize() const
     {
-        return IsNull() ? wxSize(0,0) :
-               wxSize(GetGDIImageData()->m_width, GetGDIImageData()->m_height);
+        return IsNull() ? wxSize{0, 0} : GetGDIImageData()->m_size;
     }
 
     // forward some of base class virtuals to wxGDIImageRefData
@@ -162,11 +159,11 @@ public:
     [[maybe_unused]] virtual bool Create(wxGDIImage *image,
                         const void* data,
                         wxBitmapType flags,
-                        int width, int height, int depth = 1) = 0;
+                        wxSize sz, int depth = 1) = 0;
     virtual bool Load(wxGDIImage *image,
                       const std::string& name,
                       wxBitmapType flags,
-                      int desiredWidth, int desiredHeight) = 0;
+                      wxSize desiredSz) = 0;
     virtual bool Save(const wxGDIImage *image,
                       const std::string& name,
                       wxBitmapType type) const = 0;

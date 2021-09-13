@@ -2024,7 +2024,7 @@ bool wxPrintPreviewBase::RenderPage(int pageNum)
 
     if (!m_previewBitmap)
     {
-        m_previewBitmap = new wxBitmap(pageRect.width, pageRect.height);
+        m_previewBitmap = new wxBitmap(pageRect.GetSize());
 
         if (!m_previewBitmap || !m_previewBitmap->IsOk())
         {

@@ -43,14 +43,14 @@ public:
     wxIcon() = default;
 
         // from raw data
-    explicit wxIcon(const char bits[], int width, int height);
+    explicit wxIcon(const char bits[], wxSize sz);
 
         // from XPM data
     explicit wxIcon(const char* const* data) { CreateIconFromXpm(data); }
         // from resource/file
     wxIcon(const std::string& name,
            wxBitmapType type = wxICON_DEFAULT_TYPE,
-           int desiredWidth = -1, int desiredHeight = -1);
+           wxSize desiredSz = {-1, -1});
 
     explicit wxIcon(const wxIconLocation& loc);
 
@@ -58,7 +58,7 @@ public:
 
     virtual bool LoadFile(const std::string& name,
                           wxBitmapType type = wxICON_DEFAULT_TYPE,
-                          int desiredWidth = -1, int desiredHeight = -1);
+                          wxSize desiredSz = {-1, -1});
 
     bool CreateFromHICON(WXHICON icon);
 
@@ -66,7 +66,7 @@ public:
     wxIconRefData *GetIconData() const { return (wxIconRefData *)m_refData; }
 
     WXHICON GetHICON() const { return (WXHICON)GetHandle(); }
-    bool InitFromHICON(WXHICON icon, int width, int height);
+    bool InitFromHICON(WXHICON icon, wxSize sz);
 
     // create from bitmap (which should have a mask unless it's monochrome):
     // there shouldn't be any implicit bitmap -> icon conversion (i.e. no

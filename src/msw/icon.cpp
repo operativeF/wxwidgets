@@ -52,19 +52,18 @@ void wxIconRefData::Free()
 // wxIcon
 // ----------------------------------------------------------------------------
 
-wxIcon::wxIcon(const char bits[], int width, int height)
+wxIcon::wxIcon(const char bits[], wxSize sz)
 {
-    wxBitmap bmp(bits, width, height);
+    wxBitmap bmp(bits, sz);
     CopyFromBitmap(bmp);
 }
 
 wxIcon::wxIcon(const std::string& iconfile,
                wxBitmapType type,
-               int desiredWidth,
-               int desiredHeight)
+               wxSize desiredSz)
 
 {
-    LoadFile(iconfile, type, desiredWidth, desiredHeight);
+    LoadFile(iconfile, type, desiredSz);
 }
 
 wxIcon::wxIcon(const wxIconLocation& loc)
@@ -103,7 +102,7 @@ void wxIcon::CopyFromBitmap(const wxBitmap& bmp)
     }
     else
     {
-        InitFromHICON((WXHICON)hicon, bmp.GetWidth(), bmp.GetHeight());
+        InitFromHICON((WXHICON)hicon, bmp.GetSize());
     }
 }
 
@@ -115,7 +114,7 @@ void wxIcon::CreateIconFromXpm(const char* const* data)
 
 bool wxIcon::LoadFile(const std::string& filename,
                       wxBitmapType type,
-                      int desiredWidth, int desiredHeight)
+                      wxSize desiredSz)
 {
     UnRef();
 
@@ -133,16 +132,15 @@ bool wxIcon::LoadFile(const std::string& filename,
         return true;
     }
 
-    return handler->Load(this, filename, type, desiredWidth, desiredHeight);
+    return handler->Load(this, filename, type, desiredSz);
 }
 
 bool wxIcon::CreateFromHICON(WXHICON icon)
 {
-    wxSize size = wxGetHiconSize(icon);
-    return InitFromHICON(icon, size.x, size.y);
+    return InitFromHICON(icon, wxGetHiconSize(icon));
 }
 
-bool wxIcon::InitFromHICON(WXHICON icon, int width, int height)
+bool wxIcon::InitFromHICON(WXHICON icon, wxSize sz)
 {
 #if wxDEBUG_LEVEL >= 2
     if ( icon != NULL )
@@ -156,8 +154,7 @@ bool wxIcon::InitFromHICON(WXHICON icon, int width, int height)
     AllocExclusive();
 
     GetGDIImageData()->m_handle = (WXHANDLE)icon;
-    GetGDIImageData()->m_width = width;
-    GetGDIImageData()->m_height = height;
+    GetGDIImageData()->m_size   = sz;
 
     return IsOk();
 }

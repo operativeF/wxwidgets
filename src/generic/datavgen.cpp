@@ -2433,7 +2433,7 @@ wxBitmap wxDataViewMainWindow::CreateItemBitmap( unsigned int row, int &indent )
     }
     width -= indent;
 
-    wxBitmap bitmap( width, height );
+    wxBitmap bitmap( wxSize{width, height} );
     wxMemoryDC dc( bitmap );
     dc.SetFont( GetFont() );
     dc.SetPen( *wxBLACK_PEN );

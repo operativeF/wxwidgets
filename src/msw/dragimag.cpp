@@ -169,7 +169,7 @@ bool wxDragImage::Create(const std::string& str, const wxCursor& cursor)
 
     wxMemoryDC dc2;
     dc2.SetFont(font);
-    wxBitmap bitmap((int) textExtents.x + 2, (int) textExtents.y + 2);
+    wxBitmap bitmap(wxSize{(int) textExtents.x + 2, (int) textExtents.y + 2});
     dc2.SelectObject(bitmap);
 
     dc2.SetBackground(* wxWHITE_BRUSH);

@@ -91,17 +91,17 @@ namespace
 
 wxBitmap
 GetCloseButtonBitmap(wxWindow *win,
-                     const wxSize& size,
+                     wxSize sz,
                      const wxColour& colBg,
                      int flags = 0)
 {
     // size is physical here because it comes from wxArtProvider::GetSizeHint
     wxBitmap bmp;
-    bmp.Create(size.x, size.y, wxBITMAP_SCREEN_DEPTH);
+    bmp.Create(sz, wxBITMAP_SCREEN_DEPTH);
     wxMemoryDC dc(bmp);
     dc.SetBackground(colBg);
     dc.Clear();
-    wxRendererNative::Get().DrawTitleBarBitmap(win, dc, size, wxTITLEBAR_BUTTON_CLOSE, flags);
+    wxRendererNative::Get().DrawTitleBarBitmap(win, dc, sz, wxTITLEBAR_BUTTON_CLOSE, flags);
     return bmp;
 }
 

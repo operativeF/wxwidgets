@@ -55,7 +55,7 @@ public:
     wxBitmap() = default;
 
     // Initialize with raw data
-    wxBitmap(const char bits[], int width, int height, int depth = 1);
+    wxBitmap(const char bits[], wxSize sz, int depth = 1);
 
     // Initialize with XPM data
     explicit wxBitmap(const char* const* data);
@@ -64,18 +64,17 @@ public:
     wxBitmap(const std::string& name, wxBitmapType type = wxBITMAP_DEFAULT_TYPE);
 
     // New constructor for generalised creation from data
-    wxBitmap(const void* data, wxBitmapType type, int width, int height, int depth = 1);
+    wxBitmap(const void* data, wxBitmapType type, wxSize sz, int depth = 1);
 
     // Create a new, uninitialized bitmap of the given size and depth (if it
     // is omitted, will create a bitmap compatible with the display)
     //
     // NB: this ctor will create a DIB for 24 and 32bpp bitmaps, use ctor
     //     taking a DC argument if you want to force using DDB in this case
-    wxBitmap(int width, int height, int depth = -1) { Create(width, height, depth); }
-    wxBitmap(const wxSize& sz, int depth = -1) { Create(sz, depth); }
+    wxBitmap(wxSize sz, int depth = -1) { Create(sz, depth); }
 
     // Create a bitmap compatible with the given DC
-    wxBitmap(int width, int height, const wxDC& dc);
+    wxBitmap(wxSize sz, const wxDC& dc);
 
 #if wxUSE_IMAGE
     // Convert from wxImage
@@ -144,14 +143,11 @@ public:
     bool ConvertToDIB();
 #endif
 
-    [[maybe_unused]] virtual bool Create(int width, int height, int depth = wxBITMAP_SCREEN_DEPTH);
-    [[maybe_unused]] virtual bool Create(const wxSize& sz, int depth = wxBITMAP_SCREEN_DEPTH)
-        { return Create(sz.x, sz.y, depth); }
-
-    [[maybe_unused]] virtual bool Create(int width, int height, const wxDC& dc);
-    [[maybe_unused]] virtual bool Create(const void* data, wxBitmapType type, int width, int height, int depth = 1);
+    [[maybe_unused]] virtual bool Create(wxSize sz, int depth = wxBITMAP_SCREEN_DEPTH);
+    [[maybe_unused]] virtual bool Create(wxSize sz, const wxDC& dc);
+    [[maybe_unused]] virtual bool Create(const void* data, wxBitmapType type, wxSize sz, int depth = 1);
     virtual bool CreateScaled(int w, int h, int d, double logicalScale)
-        { return Create(wxRound(w*logicalScale), wxRound(h*logicalScale), d); }
+        { return Create(wxSize{wxRound(w*logicalScale), wxRound(h*logicalScale)}, d); }
 
     virtual bool LoadFile(const std::string& name, wxBitmapType type = wxBITMAP_DEFAULT_TYPE);
     virtual bool SaveFile(const std::string& name, wxBitmapType type, const wxPalette *cmap = nullptr) const;
@@ -195,8 +191,8 @@ public:
     void MSWBlendMaskWithAlpha();
 
     WXHBITMAP GetHBITMAP() const { return (WXHBITMAP)GetHandle(); }
-    bool InitFromHBITMAP(WXHBITMAP bmp, int width, int height, int depth);
-    void ResetHBITMAP() { InitFromHBITMAP(nullptr, 0, 0, 0); }
+    bool InitFromHBITMAP(WXHBITMAP bmp, wxSize sz, int depth);
+    void ResetHBITMAP() { InitFromHBITMAP(nullptr, wxSize{0, 0}, 0); }
 
     void SetSelectedInto(wxDC *dc);
     wxDC *GetSelectedInto() const;
@@ -206,7 +202,7 @@ protected:
     wxGDIRefData *CloneGDIRefData(const wxGDIRefData *data) const override;
 
     // creates an uninitialized bitmap, called from Create()s above
-    bool DoCreate(int w, int h, int depth, WXHDC hdc);
+    bool DoCreate(wxSize sz, int depth, WXHDC hdc);
 
 #if wxUSE_IMAGE
     // creates the bitmap from wxImage, supposed to be called from ctor
@@ -294,11 +290,11 @@ struct WXDLLIMPEXP_CORE wxBitmapHandler : public wxGDIImageHandler
     [[maybe_unused]] bool Create(wxGDIImage *image,
                         const void* data,
                         wxBitmapType type,
-                        int width, int height, int depth = 1) override;
+                        wxSize sz, int depth = 1) override;
     bool Load(wxGDIImage *image,
                       const std::string& name,
                       wxBitmapType type,
-                      int desiredWidth, int desiredHeight) override;
+                      wxSize desiredSz) override;
     bool Save(const wxGDIImage *image,
                       const std::string& name,
                       wxBitmapType type) const override;
@@ -310,11 +306,11 @@ struct WXDLLIMPEXP_CORE wxBitmapHandler : public wxGDIImageHandler
     [[maybe_unused]] virtual bool Create(wxBitmap *bitmap,
                         const void* data,
                         wxBitmapType type,
-                        int width, int height, int depth = 1);
+                        wxSize sz, int depth = 1);
     virtual bool LoadFile(wxBitmap *bitmap,
                           const std::string& name,
                           wxBitmapType type,
-                          int desiredWidth, int desiredHeight);
+                          wxSize desiredSz);
     virtual bool SaveFile(const wxBitmap *bitmap,
                           const std::string& name,
                           wxBitmapType type,

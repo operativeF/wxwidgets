@@ -74,7 +74,7 @@ TEST_CASE("wxHtmlPrintout::Pagination")
     pr.SetPPIPrinter(wxSize(96, 96));
 #endif
 
-    wxBitmap bmp(1000, 1000);
+    wxBitmap bmp(wxSize{1000, 1000});
     wxMemoryDC dc(bmp);
     pr.SetUp(dc);
 

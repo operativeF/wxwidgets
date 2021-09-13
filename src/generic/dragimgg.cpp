@@ -118,7 +118,7 @@ bool wxGenericDragImage::Create(const std::string& str, const wxCursor& cursor)
     wxMemoryDC dc2;
 
     // Sometimes GetTextExtent isn't accurate enough, so make it longer
-    wxBitmap bitmap((int) ((w+2) * 1.5), (int) h+2);
+    wxBitmap bitmap(wxSize{(int) ((w+2) * 1.5), (int) h+2});
     dc2.SelectObject(bitmap);
 
     dc2.SetFont(font);
@@ -224,7 +224,7 @@ bool wxGenericDragImage::BeginDrag(const wxPoint& hotspot,
     wxBitmap* backing = (m_pBackingBitmap ? m_pBackingBitmap : (wxBitmap*) & m_backingBitmap);
 
     if (!backing->IsOk() || (backing->GetWidth() < clientSize.x || backing->GetHeight() < clientSize.y))
-        (*backing) = wxBitmap(clientSize.x, clientSize.y);
+        (*backing) = wxBitmap{clientSize};
 #endif // !wxHAS_NATIVE_OVERLAY
 
     if (!m_fullScreen)
@@ -436,7 +436,7 @@ bool wxGenericDragImage::RedrawImage(const wxPoint& oldPos,
 
     if (!m_repairBitmap.IsOk() || (m_repairBitmap.GetWidth() < fullRect.GetWidth() || m_repairBitmap.GetHeight() < fullRect.GetHeight()))
     {
-        m_repairBitmap = wxBitmap(fullRect.GetWidth() + excess, fullRect.GetHeight() + excess);
+        m_repairBitmap = wxBitmap{wxSize{fullRect.GetWidth() + excess, fullRect.GetHeight() + excess}};
     }
 
     wxMemoryDC memDC;

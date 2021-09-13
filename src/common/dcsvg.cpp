@@ -1304,7 +1304,7 @@ bool wxSVGFileDCImpl::DoBlit(wxCoord xdest, wxCoord ydest,
         wxASSERT_MSG(false, "wxSVGFileDC::DoBlit Call requested mask; this is not possible");
         return false;
     }
-    wxBitmap myBitmap(width, height);
+    wxBitmap myBitmap(wxSize{width, height});
     wxMemoryDC memDC;
     memDC.SelectObject(myBitmap);
     memDC.Blit(0, 0, width, height, source, xsrc, ysrc);
@@ -1315,7 +1315,7 @@ bool wxSVGFileDCImpl::DoBlit(wxCoord xdest, wxCoord ydest,
 
 void wxSVGFileDCImpl::DoDrawIcon(const wxIcon& icon, wxCoord x, wxCoord y)
 {
-    wxBitmap myBitmap(icon.GetWidth(), icon.GetHeight());
+    wxBitmap myBitmap(icon.GetSize());
     wxMemoryDC memDC;
     memDC.SelectObject(myBitmap);
     memDC.DrawIcon(icon, 0, 0);

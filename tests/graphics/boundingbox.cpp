@@ -56,7 +56,7 @@ static void AssertBox(const wxGCDC* aGCDC, int minX, int minY, int width, int he
 TEST_CASE("Bounding box tests.")
 {
 
-    wxBitmap m_bmp{100, 100};
+    wxBitmap m_bmp{wxSize{100, 100}};
     wxMemoryDC m_dc;
 
     m_dc.SelectObject(m_bmp);
@@ -66,7 +66,7 @@ TEST_CASE("Bounding box tests.")
 
     SUBCASE("DrawBitmap")
     {
-        wxBitmap bitmap{12, 12};
+        wxBitmap bitmap{wxSize{12, 12}};
 
         m_gcdc->DrawBitmap(bitmap, 5, 5);
         AssertBox(m_gcdc.get(), 5, 5, 12, 12);
@@ -74,7 +74,7 @@ TEST_CASE("Bounding box tests.")
 
     SUBCASE("DrawIcon")
     {
-        wxBitmap bitmap{16, 16};
+        wxBitmap bitmap{wxSize{16, 16}};
         wxIcon icon;
         icon.CopyFromBitmap(bitmap);
 
@@ -190,7 +190,7 @@ TEST_CASE("Bounding box tests.")
 
     SUBCASE("Blit")
     {
-        wxBitmap bitmap{20, 20};
+        wxBitmap bitmap{wxSize{20, 20}};
 
         wxMemoryDC dc(bitmap);
 
@@ -202,7 +202,7 @@ TEST_CASE("Bounding box tests.")
 
     SUBCASE("StretchBlit")
     {
-        wxBitmap bitmap{20, 20};
+        wxBitmap bitmap{wxSize{20, 20}};
 
         wxMemoryDC dc(bitmap);
 

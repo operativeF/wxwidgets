@@ -26,7 +26,7 @@ TEST_CASE("ImageList:WithMask")
 {
     wxInitAllImageHandlers();
 
-    wxBitmap bmpRGB(32, 32, 24);
+    wxBitmap bmpRGB(wxSize{32, 32}, 24);
     {
         wxMemoryDC mdc(bmpRGB);
         mdc.SetBackground(*wxBLUE_BRUSH);
@@ -40,7 +40,7 @@ TEST_CASE("ImageList:WithMask")
     bmpRGBA.LoadFile("image/wx.png", wxBITMAP_TYPE_PNG);
     REQUIRE(bmpRGBA.IsOk());
 
-    wxBitmap bmpMask(32, 32, 1);
+    wxBitmap bmpMask(wxSize{32, 32}, 1);
     {
         wxMemoryDC mdc(bmpMask);
 #if wxUSE_GRAPHICS_CONTEXT
@@ -199,7 +199,7 @@ TEST_CASE("ImageList:WithMask")
         il.RemoveAll();
         wxSize sz = il.GetSize();
 
-        wxBitmap bmpSmallerW(sz.GetWidth() / 2, sz.GetHeight(), 24);
+        wxBitmap bmpSmallerW(wxSize{sz.GetWidth() / 2, sz.GetHeight()}, 24);
         {
             wxMemoryDC mdc(bmpSmallerW);
             mdc.SetBackground(*wxBLUE_BRUSH);
@@ -207,7 +207,7 @@ TEST_CASE("ImageList:WithMask")
         }
         REQUIRE(bmpSmallerW.IsOk());
 
-        wxBitmap bmpSmallerH(sz.GetWidth(), sz.GetHeight() / 2, 24);
+        wxBitmap bmpSmallerH(wxSize{sz.GetWidth(), sz.GetHeight() / 2}, 24);
         {
             wxMemoryDC mdc(bmpSmallerH);
             mdc.SetBackground(*wxBLUE_BRUSH);
@@ -215,7 +215,7 @@ TEST_CASE("ImageList:WithMask")
         }
         REQUIRE(bmpSmallerH.IsOk());
 
-        wxBitmap bmpSmallerWH(sz.GetWidth() / 2, sz.GetHeight() / 2, 24);
+        wxBitmap bmpSmallerWH(wxSize{sz.GetWidth() / 2, sz.GetHeight() / 2}, 24);
         {
             wxMemoryDC mdc(bmpSmallerWH);
             mdc.SetBackground(*wxBLUE_BRUSH);
@@ -223,7 +223,7 @@ TEST_CASE("ImageList:WithMask")
         }
         REQUIRE(bmpSmallerWH.IsOk());
 
-        wxBitmap bmpBiggerW(sz.GetWidth() * 3 / 2, sz.GetHeight(), 24);
+        wxBitmap bmpBiggerW(wxSize{sz.GetWidth() * 3 / 2, sz.GetHeight()}, 24);
         {
             wxMemoryDC mdc(bmpBiggerW);
             mdc.SetBackground(*wxBLUE_BRUSH);
@@ -231,7 +231,7 @@ TEST_CASE("ImageList:WithMask")
         }
         REQUIRE(bmpBiggerW.IsOk());
 
-        wxBitmap bmpBiggerW2x(sz.GetWidth() * 2, sz.GetHeight(), 24);
+        wxBitmap bmpBiggerW2x(wxSize{sz.GetWidth() * 2, sz.GetHeight()}, 24);
         {
             wxMemoryDC mdc(bmpBiggerW2x);
             mdc.SetBackground(*wxBLUE_BRUSH);
@@ -239,7 +239,7 @@ TEST_CASE("ImageList:WithMask")
         }
         REQUIRE(bmpBiggerW2x.IsOk());
 
-        wxBitmap bmpBiggerH(sz.GetWidth(), sz.GetHeight() * 3 / 2, 24);
+        wxBitmap bmpBiggerH(wxSize{sz.GetWidth(), sz.GetHeight() * 3 / 2}, 24);
         {
             wxMemoryDC mdc(bmpBiggerH);
             mdc.SetBackground(*wxBLUE_BRUSH);
@@ -247,7 +247,7 @@ TEST_CASE("ImageList:WithMask")
         }
         REQUIRE(bmpBiggerH.IsOk());
 
-        wxBitmap bmpBiggerH2x(sz.GetWidth(), sz.GetHeight() * 2, 24);
+        wxBitmap bmpBiggerH2x(wxSize{sz.GetWidth(), sz.GetHeight() * 2}, 24);
         {
             wxMemoryDC mdc(bmpBiggerH2x);
             mdc.SetBackground(*wxBLUE_BRUSH);
@@ -255,7 +255,7 @@ TEST_CASE("ImageList:WithMask")
         }
         REQUIRE(bmpBiggerH2x.IsOk());
 
-        wxBitmap bmpBiggerWH(sz.GetWidth() * 3 / 2, sz.GetHeight() * 3 / 2, 24);
+        wxBitmap bmpBiggerWH(wxSize{sz.GetWidth() * 3 / 2, sz.GetHeight() * 3 / 2}, 24);
         {
             wxMemoryDC mdc(bmpBiggerWH);
             mdc.SetBackground(*wxBLUE_BRUSH);
@@ -263,7 +263,7 @@ TEST_CASE("ImageList:WithMask")
         }
         REQUIRE(bmpBiggerWH.IsOk());
 
-        wxBitmap bmpBiggerWH2x(sz.GetWidth() * 2, sz.GetHeight() * 2, 24);
+        wxBitmap bmpBiggerWH2x(wxSize{sz.GetWidth() * 2, sz.GetHeight() * 2}, 24);
         {
             wxMemoryDC mdc(bmpBiggerWH2x);
             mdc.SetBackground(*wxBLUE_BRUSH);
@@ -436,7 +436,7 @@ TEST_CASE("ImageList:NoMask")
 {
     wxInitAllImageHandlers();
 
-    wxBitmap bmpRGB(32, 32, 24);
+    wxBitmap bmpRGB(wxSize{32, 32}, 24);
     {
         wxMemoryDC mdc(bmpRGB);
         mdc.SetBackground(*wxBLUE_BRUSH);
@@ -450,7 +450,7 @@ TEST_CASE("ImageList:NoMask")
     bmpRGBA.LoadFile("image/wx.png", wxBITMAP_TYPE_PNG);
     REQUIRE(bmpRGBA.IsOk());
 
-    wxBitmap bmpMask(32, 32, 1);
+    wxBitmap bmpMask(wxSize{32, 32}, 1);
     {
         wxMemoryDC mdc(bmpMask);
 #if wxUSE_GRAPHICS_CONTEXT
@@ -607,7 +607,7 @@ TEST_CASE("ImageList:NoMask")
 
 TEST_CASE("ImageList:NegativeTests")
 {
-    wxBitmap bmp(32, 32, 24);
+    wxBitmap bmp(wxSize{32, 32}, 24);
     {
         wxMemoryDC mdc(bmp);
         mdc.SetBackground(*wxBLUE_BRUSH);

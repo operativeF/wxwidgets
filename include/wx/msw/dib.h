@@ -38,9 +38,9 @@ public:
     //
     // after using this ctor, GetData() and GetHandle() may be used if IsOk()
     // returns true
-    wxDIB(int width, int height, int depth)
+    wxDIB(wxSize sz, int depth)
     { 
-        Create(width, height, depth);
+        Create(sz, depth);
     }
 
 #ifdef __WXMSW__
@@ -72,7 +72,7 @@ public:
     wxDIB& operator=(wxDIB&&) = default;
 
     // same as the corresponding ctors but with return value
-    [[maybe_unused]] bool Create(int width, int height, int depth);
+    [[maybe_unused]] bool Create(wxSize sz, int depth);
 #ifdef __WXMSW__
     [[maybe_unused]] bool Create(const wxBitmap& bmp, int depth = -1) { return Create(GetHbitmapOf(bmp), depth); }
 #endif
@@ -105,9 +105,9 @@ public:
     bool IsOk() const { return m_handle != nullptr; }
 
     // get the bitmap size
-    wxSize GetSize() const { DoGetObject(); return wxSize(m_width, m_height); }
-    int GetWidth() const { DoGetObject(); return m_width; }
-    int GetHeight() const { DoGetObject(); return m_height; }
+    wxSize GetSize() const { DoGetObject(); return m_size; }
+    int GetWidth() const { DoGetObject(); return m_size.x; }
+    int GetHeight() const { DoGetObject(); return m_size.y; }
 
     // get the number of bits per pixel, or depth
     int GetDepth() const { DoGetObject(); return m_depth; }
@@ -226,8 +226,7 @@ private:
     void *m_data{nullptr};
 
     // size and depth of the image
-    int m_width{0};
-    int m_height{0};
+    wxSize m_size{0, 0};
     int m_depth{0};
 
     // in some cases we could be using a handle which we didn't create and in
@@ -257,8 +256,7 @@ void wxDIB::Free()
 
         m_data = nullptr;
 
-        m_width =
-        m_height =
+        m_size = {0, 0};
         m_depth = 0;
     }
 }

@@ -140,8 +140,7 @@ void wxAnimationCtrlBase::UpdateStaticImage()
             m_bmpStaticReal.GetHeight() != sz.y)
         {
             // need to (re)create m_bmpStaticReal
-            if (!m_bmpStaticReal.Create(sz.x, sz.y,
-                                        m_bmpStatic.GetDepth()))
+            if (!m_bmpStaticReal.Create(sz, m_bmpStatic.GetDepth()))
             {
                 wxLogDebug(wxT("Cannot create the static bitmap"));
                 m_bmpStatic = wxNullBitmap;

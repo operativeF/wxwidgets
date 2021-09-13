@@ -994,7 +994,7 @@ wxBitmap wxSearchCtrl::RenderSearchBitmap( int x, int y, bool renderDrop )
 
     penWidth = penWidth * x / 20;
 
-    wxBitmap bitmap( multiplier*x, multiplier*y );
+    wxBitmap bitmap( wxSize{multiplier * x, multiplier * y});
     wxMemoryDC mem;
     mem.SelectObject(bitmap);
 
@@ -1097,7 +1097,7 @@ wxBitmap wxSearchCtrl::RenderCancelBitmap( int x, int y )
 
     int penWidth = multiplier * x / 14;
 
-    wxBitmap bitmap( multiplier*x, multiplier*y );
+    wxBitmap bitmap( wxSize{multiplier * x, multiplier * y} );
     wxMemoryDC mem;
     mem.SelectObject(bitmap);
 

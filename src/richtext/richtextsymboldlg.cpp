@@ -966,7 +966,7 @@ void wxSymbolListCtrl::OnPaint(wxPaintEvent& WXUNUSED(event))
          clientSize.y > m_doubleBuffer->GetHeight() )
     {
         delete m_doubleBuffer;
-        m_doubleBuffer = new wxBitmap(clientSize.x+25,clientSize.y+25);
+        m_doubleBuffer = new wxBitmap(wxSize{clientSize.x + 25, clientSize.y + 25});
     }
 
     wxBufferedPaintDC dc(this,*m_doubleBuffer);

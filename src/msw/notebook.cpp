@@ -763,7 +763,7 @@ void wxNotebook::OnPaint(wxPaintEvent& WXUNUSED(event))
     if ( !rc.right || !rc.bottom )
         return;
 
-    wxBitmap bmp(rc.right, rc.bottom);
+    wxBitmap bmp(wxSize{rc.right, rc.bottom});
     wxMemoryDC memdc(bmp);
 
     const wxLayoutDirection dir = dc.GetLayoutDirection();

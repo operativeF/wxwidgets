@@ -143,7 +143,7 @@ wxSize wxMemoryDCImpl::DoGetSize() const
 {
     if ( m_selectedBitmap.IsOk() )
     {
-        return { m_selectedBitmap.GetWidth() , m_selectedBitmap.GetHeight() };
+        return m_selectedBitmap.GetSize();
     }
     else
     {

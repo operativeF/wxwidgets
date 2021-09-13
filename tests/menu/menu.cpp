@@ -513,13 +513,13 @@ TEST_CASE("Menu tests.")
         // item has already been added, used to result in a stack overflow:
         // [Do]SetBitmap can call GetHBitmapForMenu which will call SetBitmap
         // again etc...
-        item->SetBitmap(wxBitmap(1, 1));
+        item->SetBitmap(wxBitmap(wxSize{1, 1}));
 
 
         // Force owner drawn usage by having a bitmap that's wider than the
         // standard size. This results in rearranging the parent menu which
         // hasn't always worked properly and lead to a nullptr pointer exception.
-        item->SetBitmap(wxBitmap(512, 1));
+        item->SetBitmap(wxBitmap(wxSize{512, 1}));
 
         wxDELETE(menu);
     }

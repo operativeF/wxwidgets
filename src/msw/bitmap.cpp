@@ -162,7 +162,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxMask, wxObject);
 
 // decide whether we should create a DIB or a DDB for the given parameters
 #if wxUSE_WXDIB
-    static inline bool wxShouldCreateDIB(int w, int h, int d, WXHDC hdc)
+    static inline bool wxShouldCreateDIB(wxSize sz, int d, WXHDC hdc)
     {
         // here is the logic:
         //
@@ -181,7 +181,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxMask, wxObject);
         return !hdc &&
                 (d >= 24 ||
                     (d == -1 &&
-                        wxDIB::GetLineSize(w, wxDisplayDepth())*h > 16*1024*1024));
+                        wxDIB::GetLineSize(sz.x, wxDisplayDepth()) * sz.y > 16 * 1024 * 1024));
     }
 
     #define SOMETIMES_USE_DIB
@@ -234,12 +234,12 @@ wxBitmapRefData::wxBitmapRefData(const wxBitmapRefData& data)
         {
             // We got DDB with a different colour depth than we wanted, so we
             // can't use it and need to continue using the DIB instead.
-            wxDIB dibDst(m_width, m_height, dib.GetDepth());
+            wxDIB dibDst(m_size, dib.GetDepth());
             if ( dibDst.IsOk() )
             {
                 m_depth = dib.GetDepth();
                 memcpy(dibDst.GetData(), dib.GetData(),
-                        wxDIB::GetLineSize(m_width, m_depth)*m_height);
+                        wxDIB::GetLineSize(m_size.x, m_depth) * m_size.y);
                 AssignDIB(dibDst);
             }
             else
@@ -282,8 +282,8 @@ void wxBitmapRefData::Free()
 
 void wxBitmapRefData::InitFromDIB(const wxDIB& dib, HBITMAP hbitmap)
 {
-    m_width = dib.GetWidth();
-    m_height = dib.GetHeight();
+    m_size.x = dib.GetWidth();
+    m_size.y = dib.GetHeight();
     m_depth = dib.GetDepth();
 
 #if wxUSE_PALETTE
@@ -496,8 +496,8 @@ bool wxBitmap::CopyFromIconOrCursor(const wxGDIImage& icon,
 
     if ( iconInfo.hbmColor )
     {
-        refData->m_width = w;
-        refData->m_height = h;
+        refData->m_size.x = w;
+        refData->m_size.y = h;
         refData->m_depth = wxDisplayDepth();
         refData->m_hBitmap = (WXHBITMAP)iconInfo.hbmColor;
 
@@ -542,8 +542,8 @@ bool wxBitmap::CopyFromIconOrCursor(const wxGDIImage& icon,
                 wxLogLastError(wxT("wxBitmap::CopyFromIconOrCursor - BitBlt"));
             }
         }
-        refData->m_width = w;
-        refData->m_height = h;
+        refData->m_size.x = w;
+        refData->m_size.y = h;
         refData->m_depth = wxDisplayDepth();
         refData->m_hBitmap = hbmp;
     }
@@ -642,13 +642,12 @@ bool wxBitmap::ConvertToDIB()
 
 #endif // wxUSE_WXDIB
 
-wxBitmap::wxBitmap(const char bits[], int width, int height, int depth)
+wxBitmap::wxBitmap(const char bits[], wxSize sz, int depth)
 {
     wxBitmapRefData *refData = new wxBitmapRefData;
     m_refData = refData;
 
-    refData->m_width = width;
-    refData->m_height = height;
+    refData->m_size = sz;
     refData->m_depth = depth;
 
     char *data;
@@ -657,14 +656,14 @@ wxBitmap::wxBitmap(const char bits[], int width, int height, int depth)
         // we assume that it is in XBM format which is not quite the same as
         // the format CreateBitmap() wants because the order of bytes in the
         // line is reversed!
-        const size_t bytesPerLine = (width + 7) / 8;
+        const size_t bytesPerLine = (sz.x + 7) / 8;
         const size_t padding = bytesPerLine % 2;
-        const size_t len = height * ( padding + bytesPerLine );
+        const size_t len = sz.y * ( padding + bytesPerLine );
         data = (char *)malloc(len);
         const char *src = bits;
         char *dst = data;
 
-        for ( int rows = 0; rows < height; rows++ )
+        for ( int rows = 0; rows < sz.y; rows++ )
         {
             for ( size_t cols = 0; cols < bytesPerLine; cols++ )
             {
@@ -690,7 +689,7 @@ wxBitmap::wxBitmap(const char bits[], int width, int height, int depth)
         data = const_cast<char *>(bits);
     }
 
-    HBITMAP hbmp = ::CreateBitmap(width, height, 1, depth, data);
+    HBITMAP hbmp = ::CreateBitmap(sz.x, sz.y, 1, depth, data);
     if ( !hbmp )
     {
         wxLogLastError(wxT("CreateBitmap"));
@@ -704,14 +703,14 @@ wxBitmap::wxBitmap(const char bits[], int width, int height, int depth)
     refData->m_handle = (WXHANDLE)hbmp;
 }
 
-wxBitmap::wxBitmap(int w, int h, const wxDC& dc)
+wxBitmap::wxBitmap(wxSize sz, const wxDC& dc)
 {
-    Create(w, h, dc);
+    Create(sz, dc);
 }
 
-wxBitmap::wxBitmap(const void* data, wxBitmapType type, int width, int height, int depth)
+wxBitmap::wxBitmap(const void* data, wxBitmapType type, wxSize sz, int depth)
 {
-    Create(data, type, width, height, depth);
+    Create(data, type, sz, depth);
 }
 
 wxBitmap::wxBitmap(const std::string& filename, wxBitmapType type)
@@ -719,38 +718,37 @@ wxBitmap::wxBitmap(const std::string& filename, wxBitmapType type)
     LoadFile(filename, type);
 }
 
-bool wxBitmap::Create(int width, int height, int depth)
+bool wxBitmap::Create(wxSize sz, int depth)
 {
-    return DoCreate(width, height, depth, nullptr);
+    return DoCreate(sz, depth, nullptr);
 }
 
-bool wxBitmap::Create(int width, int height, const wxDC& dc)
+bool wxBitmap::Create(wxSize sz, const wxDC& dc)
 {
     wxCHECK_MSG( dc.IsOk(), false, wxT("invalid HDC in wxBitmap::Create()") );
 
     const wxMSWDCImpl *impl = wxDynamicCast( dc.GetImpl(), wxMSWDCImpl );
 
     if (impl)
-        return DoCreate(width, height, -1, impl->GetHDC());
+        return DoCreate(sz, -1, impl->GetHDC());
     else
         return false;
 }
 
-bool wxBitmap::DoCreate(int w, int h, int d, WXHDC hdc)
+bool wxBitmap::DoCreate(wxSize sz, int d, WXHDC hdc)
 {
     UnRef();
 
-    wxCHECK_MSG( w > 0 && h > 0, false, wxT("invalid bitmap size") );
+    //wxCHECK_MSG( sz > wxSize{0, 0}, false, wxT("invalid bitmap size") );
 
     m_refData = new wxBitmapRefData;
 
-    GetBitmapData()->m_width = w;
-    GetBitmapData()->m_height = h;
+    GetBitmapData()->m_size = sz;
 
     HBITMAP hbmp    wxDUMMY_INITIALIZE(nullptr);
 
 #ifndef NEVER_USE_DIB
-    if ( wxShouldCreateDIB(w, h, d, hdc) )
+    if ( wxShouldCreateDIB(sz, d, hdc) )
     {
         if ( d == -1 )
         {
@@ -758,7 +756,7 @@ bool wxBitmap::DoCreate(int w, int h, int d, WXHDC hdc)
             d = 24;
         }
 
-        wxDIB dib(w, h, d);
+        wxDIB dib(sz, d);
         if ( !dib.IsOk() )
            return false;
 
@@ -774,7 +772,7 @@ bool wxBitmap::DoCreate(int w, int h, int d, WXHDC hdc)
 #ifndef ALWAYS_USE_DIB
         if ( d > 0 )
         {
-            hbmp = ::CreateBitmap(w, h, 1, d, nullptr);
+            hbmp = ::CreateBitmap(sz.x, sz.y, 1, d, nullptr);
             if ( !hbmp )
             {
                 wxLogLastError(wxT("CreateBitmap"));
@@ -785,7 +783,7 @@ bool wxBitmap::DoCreate(int w, int h, int d, WXHDC hdc)
         else // No valid depth, create bitmap compatible with the screen
         {
             unique_dcwnd dc{::GetDC(nullptr)};
-            hbmp = ::CreateCompatibleBitmap(dc.get(), w, h);
+            hbmp = ::CreateCompatibleBitmap(dc.get(), sz.x, sz.y);
             if ( !hbmp )
             {
                 wxLogLastError(wxT("CreateCompatibleBitmap"));
@@ -848,8 +846,7 @@ bool wxBitmap::CreateFromImage(const wxImage& image, int depth, WXHDC hdc)
 
     // store the bitmap parameters
     wxBitmapRefData * const refData = new wxBitmapRefData;
-    refData->m_width = w;
-    refData->m_height = h;
+    refData->m_size = {w, h};
     refData->m_hasAlpha = hasAlpha;
     refData->m_depth = depth;
 
@@ -862,7 +859,7 @@ bool wxBitmap::CreateFromImage(const wxImage& image, int depth, WXHDC hdc)
     // are we going to use DIB?
     //
     // NB: DDBs don't support alpha so if we have alpha channel we must use DIB
-    if ( hasAlpha || wxShouldCreateDIB(w, h, depth, hdc) )
+    if ( hasAlpha || wxShouldCreateDIB(wxSize{w, h}, depth, hdc) )
     {
         // don't delete the DIB section in dib object dtor
         hbitmap = dib.Detach();
@@ -1049,7 +1046,7 @@ bool wxBitmap::LoadFile(const std::string& filename, wxBitmapType type)
     {
         m_refData = new wxBitmapRefData;
 
-        if ( !handler->LoadFile(this, filename, type, -1, -1) )
+        if ( !handler->LoadFile(this, filename, type, wxSize{-1, -1}) )
             return false;
 
 #if wxUSE_WXDIB
@@ -1079,7 +1076,7 @@ bool wxBitmap::LoadFile(const std::string& filename, wxBitmapType type)
     return false;
 }
 
-bool wxBitmap::Create(const void* data, wxBitmapType type, int width, int height, int depth)
+bool wxBitmap::Create(const void* data, wxBitmapType type, wxSize sz, int depth)
 {
     UnRef();
 
@@ -1094,7 +1091,7 @@ bool wxBitmap::Create(const void* data, wxBitmapType type, int width, int height
 
     m_refData = new wxBitmapRefData;
 
-    return handler->Create(this, data, type, width, height, depth);
+    return handler->Create(this, data, type, sz, depth);
 }
 
 bool wxBitmap::SaveFile(const std::string& filename,
@@ -1140,7 +1137,7 @@ wxBitmap wxBitmap::GetSubBitmapOfHDC( const wxRect& rect, WXHDC hdc ) const
                  (rect.y+rect.height <= GetHeight()),
                  wxNullBitmap, wxT("Invalid bitmap or bitmap region") );
 
-    wxBitmap ret( rect.width, rect.height, GetDepth() );
+    wxBitmap ret( rect.GetSize(), GetDepth() );
     wxASSERT_MSG( ret.IsOk(), wxT("GetSubBitmap error") );
 
     // handle alpha channel, if any
@@ -1319,7 +1316,7 @@ void wxBitmap::SetMask(wxMask *mask)
     GetBitmapData()->SetMask(mask);
 }
 
-bool wxBitmap::InitFromHBITMAP(WXHBITMAP bmp, int width, int height, int depth)
+bool wxBitmap::InitFromHBITMAP(WXHBITMAP bmp, wxSize sz, int depth)
 {
 #if wxDEBUG_LEVEL >= 2
     if ( bmp != NULL )
@@ -1340,8 +1337,7 @@ bool wxBitmap::InitFromHBITMAP(WXHBITMAP bmp, int width, int height, int depth)
     AllocExclusive();
 
     GetBitmapData()->m_handle = (WXHANDLE)bmp;
-    GetBitmapData()->m_width = width;
-    GetBitmapData()->m_height = height;
+    GetBitmapData()->m_size = sz;
     GetBitmapData()->m_depth = depth;
     GetBitmapData()->m_hasAlpha = (depth == 32) && CheckAlpha(bmp);
 
@@ -1661,7 +1657,7 @@ wxBitmap wxMask::GetBitmap() const
 
     // Create and return a new wxBitmap.
     wxBitmap bmp;
-    bmp.InitFromHBITMAP((WXHBITMAP)hNewBitmap, bm.bmWidth, bm.bmHeight, bm.bmBitsPixel);
+    bmp.InitFromHBITMAP((WXHBITMAP)hNewBitmap, wxSize{bm.bmWidth, bm.bmHeight}, bm.bmBitsPixel);
 
     return bmp;
 }
@@ -1673,21 +1669,21 @@ wxBitmap wxMask::GetBitmap() const
 bool wxBitmapHandler::Create(wxGDIImage *image,
                              const void* data,
                              wxBitmapType type,
-                             int width, int height, int depth)
+                             wxSize sz, int depth)
 {
     wxBitmap *bitmap = wxDynamicCast(image, wxBitmap);
 
-    return bitmap && Create(bitmap, data, type, width, height, depth);
+    return bitmap && Create(bitmap, data, type, sz, depth);
 }
 
 bool wxBitmapHandler::Load(wxGDIImage *image,
                            const std::string& name,
                            wxBitmapType type,
-                           int width, int height)
+                           wxSize sz)
 {
     wxBitmap *bitmap = wxDynamicCast(image, wxBitmap);
 
-    return bitmap && LoadFile(bitmap, name, type, width, height);
+    return bitmap && LoadFile(bitmap, name, type, sz);
 }
 
 bool wxBitmapHandler::Save(const wxGDIImage *image,
@@ -1702,8 +1698,7 @@ bool wxBitmapHandler::Save(const wxGDIImage *image,
 bool wxBitmapHandler::Create(wxBitmap *WXUNUSED(bitmap),
                              const void* WXUNUSED(data),
                              wxBitmapType WXUNUSED(type),
-                             int WXUNUSED(width),
-                             int WXUNUSED(height),
+                             wxSize WXUNUSED(sz),
                              int WXUNUSED(depth))
 {
     return false;
@@ -1712,8 +1707,7 @@ bool wxBitmapHandler::Create(wxBitmap *WXUNUSED(bitmap),
 bool wxBitmapHandler::LoadFile(wxBitmap *WXUNUSED(bitmap),
                                const std::string& WXUNUSED(name),
                                wxBitmapType WXUNUSED(type),
-                               int WXUNUSED(desiredWidth),
-                               int WXUNUSED(desiredHeight))
+                               wxSize WXUNUSED(desiredSz))
 {
     return false;
 }

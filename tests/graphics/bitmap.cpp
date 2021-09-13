@@ -106,7 +106,7 @@ TEST_CASE("BitmapTestCase::Monochrome")
 
 TEST_CASE("BitmapTestCase::Mask")
 {
-    wxBitmap bmp(10, 10);
+    wxBitmap bmp(wxSize{10, 10});
     {
         wxMemoryDC dc(bmp);
         dc.SetBackground(*wxWHITE);
@@ -134,7 +134,7 @@ TEST_CASE("BitmapTestCase::ToImage")
     SUBCASE("RGB bitmap without mask")
     {
         // RGB bitmap
-        wxBitmap bmp(16, 16, 24);
+        wxBitmap bmp(wxSize{16, 16}, 24);
         {
             wxMemoryDC dc(bmp);
             dc.SetPen(*wxYELLOW_PEN);
@@ -169,7 +169,7 @@ TEST_CASE("BitmapTestCase::ToImage")
     SUBCASE("RGB bitmap with mask")
     {
         // RGB bitmap
-        wxBitmap bmp(16, 16, 24);
+        wxBitmap bmp(wxSize{16, 16}, 24);
         {
             wxMemoryDC dc(bmp);
             dc.SetPen(*wxYELLOW_PEN);
@@ -177,7 +177,7 @@ TEST_CASE("BitmapTestCase::ToImage")
             dc.DrawRectangle(0, 0, bmp.GetWidth(), bmp.GetHeight());
         }
         // Mask
-        wxBitmap bmask(bmp.GetWidth(), bmp.GetHeight(), 1);
+        wxBitmap bmask(bmp.GetSize(), 1);
         {
             wxMemoryDC dc(bmask);
 #if wxUSE_GRAPHICS_CONTEXT
@@ -241,7 +241,7 @@ TEST_CASE("BitmapTestCase::ToImage")
     SUBCASE("RGBA bitmap without mask")
     {
         // RGBA Bitmap
-        wxBitmap bmp(16, 16, 32);
+        wxBitmap bmp(wxSize{16, 16}, 32);
 #if defined(__WXMSW__) || defined(__WXOSX__)
         bmp.UseAlpha();
 #endif // __WXMSW__ || __WXOSX__
@@ -319,7 +319,7 @@ TEST_CASE("BitmapTestCase::ToImage")
     SUBCASE("RGBA bitmap with mask")
     {
         // RGBA Bitmap
-        wxBitmap bmp(16, 16, 32);
+        wxBitmap bmp(wxSize{16, 16}, 32);
 #if defined(__WXMSW__) || defined(__WXOSX__)
         bmp.UseAlpha();
 #endif // __WXMSW__ || __WXOSX__
@@ -362,7 +362,7 @@ TEST_CASE("BitmapTestCase::ToImage")
             }
         }
         // Mask
-        wxBitmap bmask(bmp.GetWidth(), bmp.GetHeight(), 1);
+        wxBitmap bmask(bmp.GetSize(), 1);
         {
             wxMemoryDC dc(bmask);
 #if wxUSE_GRAPHICS_CONTEXT
@@ -620,7 +620,7 @@ TEST_CASE("BitmapTestCase::FromImage")
 
 TEST_CASE("BitmapTestCase::OverlappingBlit")
 {
-    wxBitmap bmp(10, 10);
+    wxBitmap bmp(wxSize{10, 10});
     {
         wxMemoryDC dc(bmp);
         dc.SetBackground(*wxWHITE);
@@ -690,7 +690,7 @@ TEST_CASE("BitmapTestCase::OverlappingBlit")
 
 static wxBitmap GetMask(int w, int h)
 {
-    wxBitmap bmask(w, h, 1);
+    wxBitmap bmask(wxSize{w, h}, 1);
     {
         wxMemoryDC dc(bmask);
 #if wxUSE_GRAPHICS_CONTEXT
@@ -723,7 +723,7 @@ TEST_CASE("BitmapTestCase::DrawNonAlphaWithMask")
     const wxColour clrBg(*wxCYAN);
 
     // Bitmap with mask to be drawn
-    wxBitmap bmp(w, h, 24);
+    wxBitmap bmp(wxSize{w, h}, 24);
     {
         wxMemoryDC dc(bmp);
         dc.SetPen(wxPen(clrLeft));
@@ -741,7 +741,7 @@ TEST_CASE("BitmapTestCase::DrawNonAlphaWithMask")
 
     // Drawing the bitmap using mask
     {
-        wxBitmap bmpOut(w, h, 24);
+        wxBitmap bmpOut(wxSize{w, h}, 24);
         {
             wxMemoryDC dc(bmpOut);
             dc.SetBackground(wxBrush(clrBg));
@@ -770,13 +770,13 @@ TEST_CASE("BitmapTestCase::DrawNonAlphaWithMask")
 
     // Drawing the bitmap not using mask
     {
-        wxBitmap bmpOut(w, h, 24);
+        wxBitmap bmpOut(wxSize{w, h}, 24);
         {
             wxMemoryDC dc(bmpOut);
             dc.SetBackground(wxBrush(clrBg));
             dc.Clear();
 
-            dc.DrawBitmap(bmp, wxPoint(0, 0), false);
+            dc.DrawBitmap(bmp, wxPoint{0, 0}, false);
         }
 
         // Check pixels
@@ -815,7 +815,7 @@ TEST_CASE("BitmapTestCase::DrawAlpha")
 #endif // __WXMSW__ || __WXOSX__
 
     // Bitmap to be drawn
-    wxBitmap bmp(w, h, 32);
+    wxBitmap bmp(wxSize{w, h}, 32);
 #if defined(__WXMSW__) || defined(__WXOSX__)
     bmp.UseAlpha();
 #endif // __WXMSW__ || __WXOSX__
@@ -851,7 +851,7 @@ TEST_CASE("BitmapTestCase::DrawAlpha")
     REQUIRE(bmp.GetMask() == nullptr);
 
     // Drawing the bitmap on 24 bpp RGB target
-    wxBitmap bmpOut24(w, h, 24);
+    wxBitmap bmpOut24(wxSize{w, h}, 24);
     REQUIRE_FALSE(bmpOut24.HasAlpha());
     {
         wxMemoryDC dc(bmpOut24);
@@ -883,7 +883,7 @@ TEST_CASE("BitmapTestCase::DrawAlpha")
 
 #if defined(__WXMSW__) || defined(__WXOSX__)
     // Drawing the bitmap on 32 bpp xRGB target
-    wxBitmap bmpOut32(w, h, 32);
+    wxBitmap bmpOut32(wxSize{w, h}, 32);
     REQUIRE_FALSE(bmpOut32.HasAlpha());
     {
         wxMemoryDC dc(bmpOut32);
@@ -930,7 +930,7 @@ TEST_CASE("BitmapTestCase::DrawAlphaWithMask")
 #endif // __WXMSW__ || __WXOSX__
 
      // Bitmap with mask to be drawn
-     wxBitmap bmp(w, h, 32);
+     wxBitmap bmp(wxSize{w, h}, 32);
 #if defined(__WXMSW__) || defined(__WXOSX__)
      bmp.UseAlpha();
 #endif // __WXMSW__ || __WXOSX__
@@ -970,7 +970,7 @@ TEST_CASE("BitmapTestCase::DrawAlphaWithMask")
 
     // Drawing the bitmap on 24 bpp RGB target using mask
     {
-        wxBitmap bmpOut24(w, h, 24);
+        wxBitmap bmpOut24(wxSize{w, h}, 24);
         REQUIRE_FALSE(bmpOut24.HasAlpha());
         {
             wxMemoryDC dc(bmpOut24);
@@ -1010,7 +1010,7 @@ TEST_CASE("BitmapTestCase::DrawAlphaWithMask")
 
     // Drawing the bitmap on 24 bpp RGB target not using mask
     {
-        wxBitmap bmpOut24(w, h, 24);
+        wxBitmap bmpOut24(wxSize{w, h}, 24);
         REQUIRE_FALSE(bmpOut24.HasAlpha());
         {
             wxMemoryDC dc(bmpOut24);
@@ -1060,7 +1060,7 @@ TEST_CASE("BitmapTestCase::DrawAlphaWithMask")
 #if defined(__WXMSW__) || defined(__WXOSX__)
     // Drawing the bitmap on 32 bpp xRGB target using mask
     {
-        wxBitmap bmpOut32(w, h, 32);
+        wxBitmap bmpOut32(wxSize{w, h}, 32);
         REQUIRE_FALSE(bmpOut32.HasAlpha());
         {
             wxMemoryDC dc(bmpOut32);
@@ -1095,7 +1095,7 @@ TEST_CASE("BitmapTestCase::DrawAlphaWithMask")
 
     // Drawing the bitmap on 32 bpp xRGB target not using mask
     {
-        wxBitmap bmpOut32(w, h, 32);
+        wxBitmap bmpOut32(wxSize{w, h}, 32);
         REQUIRE_FALSE(bmpOut32.HasAlpha());
         {
             wxMemoryDC dc(bmpOut32);
@@ -1144,7 +1144,7 @@ TEST_CASE("BitmapTestCase::SubBitmapNonAlpha")
     const wxColour clrBottomRight(*wxCYAN);
 
     // Bitmap
-    wxBitmap bmp(w, h, 24);
+    wxBitmap bmp(wxSize{w, h}, 24);
     {
         wxMemoryDC dc(bmp);
         dc.SetPen(wxPen(clrTopLeft));
@@ -1206,7 +1206,7 @@ TEST_CASE("BitmapTestCase::SubBitmapNonAlphaWithMask")
     const wxColour clrBottomRight(*wxCYAN);
 
     // Bitmap
-    wxBitmap bmp(w, h, 24);
+    wxBitmap bmp(wxSize{w, h}, 24);
     {
         wxMemoryDC dc(bmp);
         dc.SetPen(wxPen(clrTopLeft));
@@ -1392,7 +1392,7 @@ TEST_CASE("BitmapTestCase::SubBitmapAlphaWithMask")
     const wxColour clrRight(clrLeft.Red(), clrLeft.Green(), clrLeft.Blue(), alpha);
 #endif // __WXMSW__ || __WXOSX__
 
-    wxBitmap bmp(w, h, 32);
+    wxBitmap bmp(wxSize{w, h}, 32);
 #if defined(__WXMSW__) || defined(__WXOSX__)
     bmp.UseAlpha();
 #endif // __WXMSW__ || __WXOSX__
@@ -1673,7 +1673,7 @@ inline void DrawScaledBmp(wxBitmap& bmp, float scale, wxGraphicsRenderer* render
     if ( !renderer )
         return;
 
-    wxBitmap canvas{std::lround(bmp.GetWidth() * scale), std::lround(bmp.GetHeight() * scale), 24};
+    wxBitmap canvas{wxSize{std::lround(bmp.GetWidth() * scale), std::lround(bmp.GetHeight() * scale)}, 24};
     {
         wxMemoryDC mdc(canvas);
         mdc.SetBackground(*wxBLACK_BRUSH);
@@ -1709,7 +1709,7 @@ TEST_CASE("GC::DrawBitmap")
     // canvas and test if the bitmap scaled correctly by checking pixels
     // inside and outside the rectangle.
 
-    wxBitmap bmp(100, 100, 24);
+    wxBitmap bmp(wxSize{100, 100}, 24);
     {
         wxMemoryDC mdc(bmp);
         mdc.SetBackground(*wxBLACK_BRUSH);
