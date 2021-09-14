@@ -216,25 +216,25 @@ wxCursor::wxCursor(const std::string& filename,
     HCURSOR hcursor = [=]() {
         switch ( kind )
         {
-            case wxBITMAP_TYPE_CUR_RESOURCE:
+            case wxBitmapType::CUR_Resource:
                 return ::LoadCursorW(wxGetInstance(), boost::nowide::widen(filename).c_str());
 
-            case wxBITMAP_TYPE_ANI:
-            case wxBITMAP_TYPE_CUR:
+            case wxBitmapType::ANI:
+            case wxBitmapType::CUR:
                 return ::LoadCursorFromFileW(boost::nowide::widen(filename).c_str());
 
-            case wxBITMAP_TYPE_ICO:
+            case wxBitmapType::ICO:
                 return wxBitmapToHCURSOR
                         (
-                        wxIcon(filename, wxBITMAP_TYPE_ICO),
+                        wxIcon(filename, wxBitmapType::ICO),
                         hotSpotX,
                         hotSpotY
                         );
 
-            case wxBITMAP_TYPE_BMP:
+            case wxBitmapType::BMP:
                 return wxBitmapToHCURSOR
                         (
-                        wxBitmap(filename, wxBITMAP_TYPE_BMP),
+                        wxBitmap(filename, wxBitmapType::BMP),
                         hotSpotX,
                         hotSpotY
                         );

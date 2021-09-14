@@ -535,8 +535,8 @@ void TransformMatrixTestCaseDCBase::CompareToGraphicsContext()
                 RGBSameAs(bmpUsingMatrixAG.ConvertToImage()) );
 
     // Save the images to check that something _is_ inside the visible area.
-    //bmpUsingMatrixA1.SaveFile("matrixA1.jpg", wxBITMAP_TYPE_JPEG);
-    //bmpUsingMatrixAG.SaveFile("matrixAG.jpg", wxBITMAP_TYPE_JPEG);
+    //bmpUsingMatrixA1.SaveFile("matrixA1.jpg", wxBitmapType::JPEG);
+    //bmpUsingMatrixAG.SaveFile("matrixAG.jpg", wxBitmapType::JPEG);
 }
 #endif // wxUSE_GRAPHICS_CONTEXT
 

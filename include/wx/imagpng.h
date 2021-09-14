@@ -43,7 +43,7 @@ public:
     {
         m_name = "PNG file";
         m_extension = "png";
-        m_type = wxBITMAP_TYPE_PNG;
+        m_type = wxBitmapType::PNG;
         m_mime = "image/png";
     }
 

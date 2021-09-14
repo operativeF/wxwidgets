@@ -274,14 +274,14 @@ wxTangoArtProvider::CreateBitmap(const wxArtID& id,
         {
             // Of course, if the user code did add it already, we have nothing
             // to do.
-            if ( !wxImage::FindHandler(wxBITMAP_TYPE_PNG) )
+            if ( !wxImage::FindHandler(wxBitmapType::PNG) )
                 wxImage::AddHandler(new wxPNGHandler);
 
             // In any case, no need to do it again.
             m_imageHandledAdded = true;
         }
 
-        wxImage image(is, wxBITMAP_TYPE_PNG);
+        wxImage image(is, wxBitmapType::PNG);
         if ( !image.IsOk() )
         {
             // This should normally never happen as all the embedded images are

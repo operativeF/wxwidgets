@@ -110,7 +110,7 @@ bool wxGIFDecoder::ConvertToImage(unsigned int frame, wxImage *image) const
     // create the image
     const wxSize sz = GetFrameSize(frame);
     image->Create(sz.x, sz.y);
-    image->SetType(wxBITMAP_TYPE_GIF);
+    image->SetType(wxBitmapType::GIF);
 
     if (!image->IsOk())
         return false;

@@ -1271,7 +1271,7 @@ bool wxICOHandler::SaveFile(wxImage *image,
     //     identical, we have all the meat in wxICOHandler and check for
     //     the actual (handler) type when the code has to distinguish between
     //     the two formats
-    const int type = (this->GetType() == wxBITMAP_TYPE_CUR) ? 2 : 1;
+    const int type = (this->GetType() == wxBitmapType::CUR) ? 2 : 1;
 
     // write a header, (ICONDIR)
     // Calculate the header size
@@ -1659,7 +1659,7 @@ bool wxICOHandler::DoLoadFile(wxImage *image, wxInputStream& stream,
         {
             bResult = LoadDib(image, stream, verbose, false /* not BMP */);
         }
-        bool bIsCursorType = (this->GetType() == wxBITMAP_TYPE_CUR) || (this->GetType() == wxBITMAP_TYPE_ANI);
+        bool bIsCursorType = (this->GetType() == wxBitmapType::CUR) || (this->GetType() == wxBitmapType::ANI);
         if ( bResult && bIsCursorType && nType == 2 )
         {
             // it is a cursor, so let's set the hotspot:

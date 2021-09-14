@@ -29,7 +29,7 @@ public:
         m_extension = "jpg";
         m_altExtensions.push_back("jpeg");
         m_altExtensions.push_back("jpe");
-        m_type = wxBITMAP_TYPE_JPEG;
+        m_type = wxBitmapType::JPEG;
         m_mime = "image/jpeg";
     }
 

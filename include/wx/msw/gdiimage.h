@@ -16,7 +16,7 @@
 #define _WX_MSW_GDIIMAGE_H_
 
 #include "wx/gdiobj.h"          // base class
-#include "wx/gdicmn.h"          // wxBITMAP_TYPE_INVALID
+#include "wx/gdicmn.h"          // wxBitmapType::Invalid
 #include "wx/list.h"
 
 #include <string>
@@ -171,7 +171,7 @@ public:
 protected:
     std::string  m_name;
     std::string  m_extension;
-    wxBitmapType m_type{wxBITMAP_TYPE_INVALID};
+    wxBitmapType m_type{wxBitmapType::Invalid};
 };
 
 #endif // _WX_MSW_GDIIMAGE_H_

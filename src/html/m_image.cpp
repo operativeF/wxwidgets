@@ -423,7 +423,7 @@ wxHtmlImageCell::wxHtmlImageCell(wxHtmlWindowInterface *windowIface,
                 if ( readImg )
 #endif // wxUSE_GIF && wxUSE_TIMER
                 {
-                    wxImage image(*s, wxBITMAP_TYPE_ANY);
+                    wxImage image(*s, wxBitmapType::Any);
                     if ( image.IsOk() )
                         SetImage(image, scaleHDPI);
                 }

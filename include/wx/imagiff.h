@@ -24,7 +24,7 @@ public:
     {
         m_name = wxT("IFF file");
         m_extension = wxT("iff");
-        m_type = wxBITMAP_TYPE_IFF;
+        m_type = wxBitmapType::IFF;
         m_mime = wxT("image/x-iff");
     }
 

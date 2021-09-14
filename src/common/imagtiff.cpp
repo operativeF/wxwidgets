@@ -91,7 +91,7 @@ wxTIFFHandler::wxTIFFHandler()
     m_name = "TIFF file";
     m_extension = "tif";
     m_altExtensions.push_back("tiff");
-    m_type = wxBITMAP_TYPE_TIFF;
+    m_type = wxBitmapType::TIFF;
     m_mime = "image/tiff";
     TIFFSetWarningHandler((TIFFErrorHandler) TIFFwxWarningHandler);
     TIFFSetErrorHandler((TIFFErrorHandler) TIFFwxErrorHandler);

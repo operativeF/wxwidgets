@@ -24,7 +24,7 @@ public:
     {
         m_name = "PCX file";
         m_extension = "pcx";
-        m_type = wxBITMAP_TYPE_PCX;
+        m_type = wxBitmapType::PCX;
         m_mime = "image/pcx";
     }
 

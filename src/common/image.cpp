@@ -70,7 +70,7 @@ struct wxImageRefData: public wxObjectRefData
 
     int             m_width{0};
     int             m_height{0};
-    wxBitmapType    m_type{wxBITMAP_TYPE_INVALID};
+    wxBitmapType    m_type{wxBitmapType::Invalid};
     unsigned char  *m_data{nullptr};
 
     bool            m_hasMask{false};
@@ -1920,7 +1920,7 @@ int wxImage::GetHeight() const
 
 wxBitmapType wxImage::GetType() const
 {
-    wxCHECK_MSG( IsOk(), wxBITMAP_TYPE_INVALID, wxT("invalid image") );
+    wxCHECK_MSG( IsOk(), wxBitmapType::Invalid, wxT("invalid image") );
 
     return M_IMGDATA->m_type;
 }
@@ -1929,8 +1929,8 @@ void wxImage::SetType(wxBitmapType type)
 {
     wxCHECK_RET( IsOk(), "must create the image before setting its type");
 
-    // type can be wxBITMAP_TYPE_INVALID to reset the image type to default
-    wxASSERT_MSG( type != wxBITMAP_TYPE_MAX, "invalid bitmap type" );
+    // type can be wxBitmapType::Invalid to reset the image type to default
+    wxASSERT_MSG( type != wxBitmapType::Max, "invalid bitmap type" );
 
     M_IMGDATA->m_type = type;
 }
@@ -2576,7 +2576,7 @@ static wxImage LoadImageFromResource(const std::string &name, wxBitmapType type)
     unique_bitmap hBitmap;
     unique_bitmap hMask;
 
-    if ( type == wxBITMAP_TYPE_BMP_RESOURCE )
+    if ( type == wxBitmapType::BMP_Resource )
     {
         hBitmap = unique_bitmap( ::LoadBitmap(wxGetInstance(), boost::nowide::widen(name).c_str()) );
 
@@ -2585,7 +2585,7 @@ static wxImage LoadImageFromResource(const std::string &name, wxBitmapType type)
             wxLogError(_("Failed to load bitmap \"%s\" from resources."), name);
         }
     }
-    else if ( type == wxBITMAP_TYPE_ICO_RESOURCE )
+    else if ( type == wxBitmapType::ICO_Resource )
     {
         const HICON hIcon = ::LoadIcon(wxGetInstance(), boost::nowide::widen(name).c_str());
 
@@ -2608,7 +2608,7 @@ static wxImage LoadImageFromResource(const std::string &name, wxBitmapType type)
             info.hbmMask = nullptr;
         }
     }
-    else if ( type == wxBITMAP_TYPE_CUR_RESOURCE )
+    else if ( type == wxBitmapType::CUR_Resource )
     {
         wxLogDebug(wxS("Loading cursors from resources is not implemented."));
     }
@@ -2648,9 +2648,9 @@ bool wxImage::LoadFile( const std::string& filename,
                         int WXUNUSED_UNLESS_STREAMS(index) )
 {
 #ifdef HAS_LOAD_FROM_RESOURCE
-    if (   type == wxBITMAP_TYPE_BMP_RESOURCE
-        || type == wxBITMAP_TYPE_ICO_RESOURCE
-        || type == wxBITMAP_TYPE_CUR_RESOURCE)
+    if (   type == wxBitmapType::BMP_Resource
+        || type == wxBitmapType::ICO_Resource
+        || type == wxBitmapType::CUR_Resource)
     {
         const wxImage image = ::LoadImageFromResource(filename, type);
         if ( image.IsOk() )
@@ -2700,7 +2700,7 @@ bool wxImage::SaveFile( const std::string& filename ) const
 {
     std::string ext = wx::utils::ToLowerCopy(wx::utils::AfterLast(filename, '.'));
 
-    wxImageHandler *handler = FindHandler(ext, wxBITMAP_TYPE_ANY);
+    wxImageHandler *handler = FindHandler(ext, wxBitmapType::Any);
     if ( !handler)
     {
        wxLogError(_("Can't save image to file '%s': unknown extension."),
@@ -2793,7 +2793,7 @@ int wxImage::GetImageCount( wxInputStream &stream, wxBitmapType type )
 {
     wxImageHandler *handler;
 
-    if ( type == wxBITMAP_TYPE_ANY )
+    if ( type == wxBitmapType::Any )
     {
         const wxList& list = GetHandlers();
 
@@ -2902,7 +2902,7 @@ bool wxImage::LoadFile( wxInputStream& stream, wxBitmapType type, int index )
     // do we issue warning/error messages?
     const bool verbose = M_IMGDATA->m_loadFlags & Load_Verbose;
 
-    if ( type == wxBITMAP_TYPE_ANY )
+    if ( type == wxBitmapType::Any )
     {
         if ( !stream.IsSeekable() )
         {
@@ -3104,7 +3104,7 @@ wxImageHandler *wxImage::FindHandler( const std::string& extension, wxBitmapType
     while (node)
     {
         wxImageHandler *handler = (wxImageHandler*)node->GetData();
-        if ((bitmapType == wxBITMAP_TYPE_ANY) || (handler->GetType() == bitmapType))
+        if ((bitmapType == wxBitmapType::Any) || (handler->GetType() == bitmapType))
         {
             if (handler->GetExtension() == extension)
                 return handler;

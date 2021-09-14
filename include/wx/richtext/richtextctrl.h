@@ -998,10 +998,10 @@ public:
         Write a bitmap or image at the current insertion point.
         Supply an optional type to use for internal and file storage of the raw data.
     */
-    virtual bool WriteImage(const wxImage& image, wxBitmapType bitmapType = wxBITMAP_TYPE_PNG,
+    virtual bool WriteImage(const wxImage& image, wxBitmapType bitmapType = wxBitmapType::PNG,
                             const wxRichTextAttr& textAttr = wxRichTextAttr());
 
-    virtual bool WriteImage(const wxBitmap& bitmap, wxBitmapType bitmapType = wxBITMAP_TYPE_PNG,
+    virtual bool WriteImage(const wxBitmap& bitmap, wxBitmapType bitmapType = wxBitmapType::PNG,
                             const wxRichTextAttr& textAttr = wxRichTextAttr());
     //@}
 

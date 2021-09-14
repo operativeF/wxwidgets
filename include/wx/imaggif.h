@@ -37,7 +37,7 @@ public:
     {
         m_name = "GIF file";
         m_extension = "gif";
-        m_type = wxBITMAP_TYPE_GIF;
+        m_type = wxBitmapType::GIF;
         m_mime = "image/gif";
         m_hashTable = nullptr;
     }

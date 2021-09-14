@@ -144,12 +144,12 @@ void GUIFrame::AddPanel_1()
     m_radioBtn2->SetToolTip( _("wxRadioButton") );
     fgSizer1->Add( m_radioBtn2, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 20 );
 
-    m_bpButton1 = new wxBitmapButton( m_panel1, wxID_ANY, wxBitmap( wxT("bitmaps/wxwin32x32.png"), wxBITMAP_TYPE_ANY ), wxDefaultPosition, wxDefaultSize, 0 );
+    m_bpButton1 = new wxBitmapButton( m_panel1, wxID_ANY, wxBitmap( wxT("bitmaps/wxwin32x32.png"), wxBitmapType::Any ), wxDefaultPosition, wxDefaultSize, 0 );
     m_bpButton1->SetToolTip( _("wxBitmapButton") );
     m_bpButton1->SetToolTip( _("wxBitmapButton") );
     fgSizer1->Add( m_bpButton1, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 20 );
 
-    m_bitmap1 = new wxStaticBitmap( m_panel1, wxID_ANY, wxBitmap( wxT("bitmaps/wxwin32x32.png"), wxBITMAP_TYPE_ANY ), wxDefaultPosition, wxDefaultSize, 0 );
+    m_bitmap1 = new wxStaticBitmap( m_panel1, wxID_ANY, wxBitmap( wxT("bitmaps/wxwin32x32.png"), wxBitmapType::Any ), wxDefaultPosition, wxDefaultSize, 0 );
     m_bitmap1->SetToolTip( _("wxStaticBitmap") );
     fgSizer1->Add( m_bitmap1, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 20 );
 
@@ -418,10 +418,10 @@ void GUIFrame::AddPanel_5()
     */
     m_bmpComboBox1 = new wxBitmapComboBox(m_panel5, wxID_ANY,_("Item1"),
         wxDefaultPosition, wxDefaultSize, 0, NULL, wxCB_READONLY);
-    m_bmpComboBox1->Append(_("Item1"), wxBitmap(wxT("bitmaps/bell.png"),wxBITMAP_TYPE_PNG));
-    m_bmpComboBox1->Append(_("Item2"), wxBitmap(wxT("bitmaps/sound.png"),wxBITMAP_TYPE_PNG));
-    m_bmpComboBox1->Append(_("Item3"), wxBitmap(wxT("bitmaps/bell.png"),wxBITMAP_TYPE_PNG));
-    m_bmpComboBox1->Append(_("Item4"), wxBitmap(wxT("bitmaps/sound.png"),wxBITMAP_TYPE_PNG));
+    m_bmpComboBox1->Append(_("Item1"), wxBitmap(wxT("bitmaps/bell.png"),wxBitmapType::PNG));
+    m_bmpComboBox1->Append(_("Item2"), wxBitmap(wxT("bitmaps/sound.png"),wxBitmapType::PNG));
+    m_bmpComboBox1->Append(_("Item3"), wxBitmap(wxT("bitmaps/bell.png"),wxBitmapType::PNG));
+    m_bmpComboBox1->Append(_("Item4"), wxBitmap(wxT("bitmaps/sound.png"),wxBitmapType::PNG));
     m_bmpComboBox1->SetToolTip(_("wxBitmapComboBox"));
     m_bmpComboBox1->SetSelection(0);
     fgSizer4->Add(m_bmpComboBox1, m_commonExpandFlags);

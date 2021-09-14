@@ -1040,7 +1040,7 @@ bool wxBitmap::LoadFile(const std::string& filename, wxBitmapType type)
 {
     UnRef();
 
-    wxBitmapHandler *handler = dynamic_cast<wxBitmapHandler*>(FindHandler(type));
+    wxBitmapHandler *handler = dynamic_cast<wxBitmapHandler*>(FindHandler(static_cast<int>(type)));
 
     if ( handler )
     {
@@ -1080,11 +1080,12 @@ bool wxBitmap::Create(const void* data, wxBitmapType type, wxSize sz, int depth)
 {
     UnRef();
 
-    wxBitmapHandler *handler = dynamic_cast<wxBitmapHandler*>(FindHandler(type));
+    // FIXME: Stupid solution.
+    wxBitmapHandler *handler = dynamic_cast<wxBitmapHandler*>(FindHandler(static_cast<int>(type)));
 
     if ( !handler )
     {
-        wxLogDebug(wxT("Failed to create bitmap: no bitmap handler for type %ld defined."), type);
+        wxLogDebug(wxT("Failed to create bitmap: no bitmap handler for type %ld defined."), static_cast<int>(type));
 
         return false;
     }
@@ -1098,7 +1099,8 @@ bool wxBitmap::SaveFile(const std::string& filename,
                         wxBitmapType type,
                         const wxPalette *palette) const
 {
-    wxBitmapHandler *handler = dynamic_cast<wxBitmapHandler*>(FindHandler(type));
+    // FIXME: Stupid solution.
+    wxBitmapHandler *handler = dynamic_cast<wxBitmapHandler*>(FindHandler(static_cast<int>(type)));
 
     if ( handler )
     {

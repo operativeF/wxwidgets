@@ -59,18 +59,18 @@ struct testData {
 
 constexpr std::array<testData, 12> g_testfiles =
 {{
-    { "horse.ico", wxBITMAP_TYPE_ICO, 4 },
-    { "horse.xpm", wxBITMAP_TYPE_XPM, 8 },
-    { "horse.png", wxBITMAP_TYPE_PNG, 24 },
-    { "horse.ani", wxBITMAP_TYPE_ANI, 24 },
-    { "horse.bmp", wxBITMAP_TYPE_BMP, 8 },
-    { "horse.cur", wxBITMAP_TYPE_CUR, 1 },
-    { "horse.gif", wxBITMAP_TYPE_GIF, 8 },
-    { "horse.jpg", wxBITMAP_TYPE_JPEG, 24 },
-    { "horse.pcx", wxBITMAP_TYPE_PCX, 8 },
-    { "horse.pnm", wxBITMAP_TYPE_PNM, 24 },
-    { "horse.tga", wxBITMAP_TYPE_TGA, 8 },
-    { "horse.tif", wxBITMAP_TYPE_TIFF, 8 }
+    { "horse.ico", wxBitmapType::ICO, 4 },
+    { "horse.xpm", wxBitmapType::XPM, 8 },
+    { "horse.png", wxBitmapType::PNG, 24 },
+    { "horse.ani", wxBitmapType::ANI, 24 },
+    { "horse.bmp", wxBitmapType::BMP, 8 },
+    { "horse.cur", wxBitmapType::CUR, 1 },
+    { "horse.gif", wxBitmapType::GIF, 8 },
+    { "horse.jpg", wxBitmapType::JPEG, 24 },
+    { "horse.pcx", wxBitmapType::PCX, 8 },
+    { "horse.pnm", wxBitmapType::PNM, 24 },
+    { "horse.tga", wxBitmapType::TGA, 8 },
+    { "horse.tif", wxBitmapType::TIFF, 8 }
 }};
 
 static void SetAlpha(wxImage* image)
@@ -102,25 +102,25 @@ void CompareImage(const wxImageHandler& handler, const wxImage& image,
     with image format features before it gets hairier.
     */
     if (testPalette
-        && (!(type == wxBITMAP_TYPE_BMP
-            || type == wxBITMAP_TYPE_GIF
-            || type == wxBITMAP_TYPE_ICO
-            || type == wxBITMAP_TYPE_PNG)
-            || type == wxBITMAP_TYPE_XPM))
+        && (!(type == wxBitmapType::BMP
+            || type == wxBitmapType::GIF
+            || type == wxBitmapType::ICO
+            || type == wxBitmapType::PNG)
+            || type == wxBitmapType::XPM))
     {
         return;
     }
 
     const bool testAlpha = (properties & wxIMAGE_HAVE_ALPHA) != 0;
     if (testAlpha
-        && !(type == wxBITMAP_TYPE_PNG || type == wxBITMAP_TYPE_TGA
-            || type == wxBITMAP_TYPE_TIFF))
+        && !(type == wxBitmapType::PNG || type == wxBitmapType::TGA
+            || type == wxBitmapType::TIFF))
     {
         // don't test images with alpha if this handler doesn't support alpha
         return;
     }
 
-    if (type == wxBITMAP_TYPE_JPEG /* skip lossy JPEG */)
+    if (type == wxBitmapType::JPEG /* skip lossy JPEG */)
     {
         return;
     }
@@ -148,7 +148,7 @@ void CompareImage(const wxImageHandler& handler, const wxImage& image,
 
 #if wxUSE_PALETTE
     CHECK(actual.HasPalette()
-        == (testPalette || type == wxBITMAP_TYPE_XPM));
+        == (testPalette || type == wxBitmapType::XPM));
 #endif
 
     CHECK(actual.HasAlpha() == testAlpha);
@@ -181,7 +181,7 @@ static void TestTIFFImage(const wxString& option, int value,
     wxMemoryOutputStream memOut;
     image.SetOption(option, value);
 
-    CHECK(image.SaveFile(memOut, wxBITMAP_TYPE_TIFF));
+    CHECK(image.SaveFile(memOut, wxBitmapType::TIFF));
 
     wxMemoryInputStream memIn(memOut);
     CHECK(memIn.IsOk());
@@ -207,7 +207,7 @@ static void TestGIFComment(const wxString& comment)
 
     image.SetOption(wxIMAGE_OPTION_GIF_COMMENT, comment);
     wxMemoryOutputStream memOut;
-    CHECK(image.SaveFile(memOut, wxBITMAP_TYPE_GIF));
+    CHECK(image.SaveFile(memOut, wxBitmapType::GIF));
 
     wxMemoryInputStream memIn(memOut);
     CHECK(image.LoadFile(memIn));
@@ -226,7 +226,7 @@ static void CompareBMPImage(const wxString& file1, const wxString& file2)
     wxImage image2(file2);
     CHECK(image2.IsOk());
 
-    CompareImage(*wxImage::FindHandler(wxBITMAP_TYPE_BMP), image1, 0, &image2);
+    CompareImage(*wxImage::FindHandler(wxBitmapType::BMP), image1, 0, &image2);
 }
 
 
@@ -325,8 +325,8 @@ TEST_CASE("Image test")
             wxBitmapType type;
         } testData[] =
         {
-            { "http://www.wxwidgets.org/assets/img/header-logo.png", wxBITMAP_TYPE_PNG },
-            { "http://www.wxwidgets.org/assets/ico/favicon-1.ico", wxBITMAP_TYPE_ICO }
+            { "http://www.wxwidgets.org/assets/img/header-logo.png", wxBitmapType::PNG },
+            { "http://www.wxwidgets.org/assets/ico/favicon-1.ico", wxBitmapType::ICO }
         };
 
         for (unsigned int i=0; i<WXSIZEOF(testData); i++)
@@ -369,11 +369,11 @@ TEST_CASE("Image test")
         {
             switch (testFile.type)
             {
-                case wxBITMAP_TYPE_XPM:
-                case wxBITMAP_TYPE_GIF:
-                case wxBITMAP_TYPE_PCX:
-                case wxBITMAP_TYPE_TGA:
-                case wxBITMAP_TYPE_TIFF:
+                case wxBitmapType::XPM:
+                case wxBitmapType::GIF:
+                case wxBitmapType::PCX:
+                case wxBitmapType::TGA:
+                case wxBitmapType::TIFF:
                 continue;       // skip testing those wxImageHandlers which cannot
                                 // load data from non-seekable streams
 
@@ -1012,8 +1012,8 @@ TEST_CASE("Image test")
                expected(st.ref_xpm);
 
            // to check results with an image viewer uncomment this:
-           //actual.SaveFile(wxString::Format("imagetest-%02d-actual.png", i), wxBITMAP_TYPE_PNG);
-           //expected.SaveFile(wxString::Format("imagetest-%02d-exp.png", i), wxBITMAP_TYPE_PNG);
+           //actual.SaveFile(wxString::Format("imagetest-%02d-actual.png", i), wxBitmapType::PNG);
+           //expected.SaveFile(wxString::Format("imagetest-%02d-exp.png", i), wxBitmapType::PNG);
 
            INFO("Resize test #%u: (%d, %d), (%d, %d)",
                        i, st.w, st.h, st.dx, st.dy);
@@ -1033,7 +1033,7 @@ TEST_CASE("Image test")
         for (const auto& testFile : g_testfiles)
         {
             if ( !(testFile.bitDepth == 8 || testFile.bitDepth == 24)
-                || testFile.type == wxBITMAP_TYPE_JPEG /*skip lossy JPEG*/)
+                || testFile.type == wxBitmapType::JPEG /*skip lossy JPEG*/)
             {
                 continue;
             }
@@ -1106,14 +1106,14 @@ TEST_CASE("Image test")
         /*
         horse.png converted to greyscale should be saved without a palette.
         */
-        CompareImage(*wxImage::FindHandler(wxBITMAP_TYPE_PNG), expected8);
+        CompareImage(*wxImage::FindHandler(wxBitmapType::PNG), expected8);
 
         /*
         But if we explicitly ask for trying to save with a palette, it should work.
         */
         expected8.SetOption(wxIMAGE_OPTION_PNG_FORMAT, wxPNG_TYPE_PALETTE);
 
-        CompareImage(*wxImage::FindHandler(wxBITMAP_TYPE_PNG),
+        CompareImage(*wxImage::FindHandler(wxBitmapType::PNG),
             expected8, wxIMAGE_HAVE_PALETTE);
 
 
@@ -1122,7 +1122,7 @@ TEST_CASE("Image test")
         CHECK(expected8.HasPalette());
 #endif // #if wxUSE_PALETTE
 
-        CompareImage(*wxImage::FindHandler(wxBITMAP_TYPE_PNG),
+        CompareImage(*wxImage::FindHandler(wxBitmapType::PNG),
             expected8, wxIMAGE_HAVE_PALETTE);
 
         /*
@@ -1143,7 +1143,7 @@ TEST_CASE("Image test")
             }
         }
 
-        CompareImage(*wxImage::FindHandler(wxBITMAP_TYPE_PNG),
+        CompareImage(*wxImage::FindHandler(wxBitmapType::PNG),
             expected8, wxIMAGE_HAVE_ALPHA | wxIMAGE_HAVE_PALETTE);
 
         /*
@@ -1153,14 +1153,14 @@ TEST_CASE("Image test")
         */
         expected8.SetAlpha(0, 0, 1);
 
-        CompareImage(*wxImage::FindHandler(wxBITMAP_TYPE_PNG),
+        CompareImage(*wxImage::FindHandler(wxBitmapType::PNG),
             expected8, wxIMAGE_HAVE_ALPHA);
 
         /*
         Even if we explicitly ask for saving palettised it should not be done.
         */
         expected8.SetOption(wxIMAGE_OPTION_PNG_FORMAT, wxPNG_TYPE_PALETTE);
-        CompareImage(*wxImage::FindHandler(wxBITMAP_TYPE_PNG),
+        CompareImage(*wxImage::FindHandler(wxBitmapType::PNG),
             expected8, wxIMAGE_HAVE_ALPHA);
 
     }
@@ -1342,7 +1342,7 @@ TEST_CASE("Image test")
         image = image.Scale(99, 99);
 
         wxMemoryOutputStream memOut;
-        CHECK(image.SaveFile(memOut, wxBITMAP_TYPE_ICO));
+        CHECK(image.SaveFile(memOut, wxBitmapType::ICO));
     }
 
     SUBCASE("BMPFlippingAndRLECompression")
@@ -2175,56 +2175,56 @@ TEST_CASE("wxImage::XPM")
 TEST_CASE("wxImage::ChangeColours")
 {
     wxImage original;
-    REQUIRE(original.LoadFile("image/toucan.png", wxBITMAP_TYPE_PNG));
+    REQUIRE(original.LoadFile("image/toucan.png", wxBitmapType::PNG));
 
     wxImage test;
     wxImage expected;
 
     test = original;
     test.RotateHue(0.538);
-    REQUIRE(expected.LoadFile("image/toucan_hue_0.538.png", wxBITMAP_TYPE_PNG));
+    REQUIRE(expected.LoadFile("image/toucan_hue_0.538.png", wxBitmapType::PNG));
     // FIXME: Figure out better way.
     //CHECK_THAT(test, RGBSameAs(expected));
 
     test = original;
     test.ChangeSaturation(-0.41);
-    REQUIRE(expected.LoadFile("image/toucan_sat_-0.41.png", wxBITMAP_TYPE_PNG));
+    REQUIRE(expected.LoadFile("image/toucan_sat_-0.41.png", wxBitmapType::PNG));
     // FIXME: Figure out better way.
     //CHECK_THAT(test, RGBSameAs(expected));
 
     test = original;
     test.ChangeBrightness(-0.259);
-    REQUIRE(expected.LoadFile("image/toucan_bright_-0.259.png", wxBITMAP_TYPE_PNG));
+    REQUIRE(expected.LoadFile("image/toucan_bright_-0.259.png", wxBitmapType::PNG));
     // FIXME: Figure out better way.
     //CHECK_THAT(test, RGBSameAs(expected));
 
     test = original;
     test.ChangeHSV(0.538, -0.41, -0.259);
-    REQUIRE(expected.LoadFile("image/toucan_hsv_0.538_-0.41_-0.259.png", wxBITMAP_TYPE_PNG));
+    REQUIRE(expected.LoadFile("image/toucan_hsv_0.538_-0.41_-0.259.png", wxBitmapType::PNG));
     // FIXME: Figure out better way.
     //CHECK_THAT(test, RGBSameAs(expected));
 
     test = original;
     test = test.ChangeLightness(46);
-    REQUIRE(expected.LoadFile("image/toucan_light_46.png", wxBITMAP_TYPE_PNG));
+    REQUIRE(expected.LoadFile("image/toucan_light_46.png", wxBitmapType::PNG));
     // FIXME: Figure out better way.
     //CHECK_THAT(test, RGBSameAs(expected));
 
     test = original;
     test = test.ConvertToDisabled(240);
-    REQUIRE(expected.LoadFile("image/toucan_dis_240.png", wxBITMAP_TYPE_PNG));
+    REQUIRE(expected.LoadFile("image/toucan_dis_240.png", wxBitmapType::PNG));
     // FIXME: Figure out better way.
     //CHECK_THAT(test, RGBSameAs(expected));
 
     test = original;
     test = test.ConvertToGreyscale();
-    REQUIRE(expected.LoadFile("image/toucan_grey.png", wxBITMAP_TYPE_PNG));
+    REQUIRE(expected.LoadFile("image/toucan_grey.png", wxBitmapType::PNG));
     // FIXME: Figure out better way.
     //CHECK_THAT(test, RGBSameAs(expected));
 
     test = original;
     test = test.ConvertToMono(255, 255, 255);
-    REQUIRE(expected.LoadFile("image/toucan_mono_255_255_255.png", wxBITMAP_TYPE_PNG));
+    REQUIRE(expected.LoadFile("image/toucan_mono_255_255_255.png", wxBitmapType::PNG));
     // FIXME: Figure out better way.
     //CHECK_THAT(test, RGBSameAs(expected));
 }

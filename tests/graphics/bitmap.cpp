@@ -64,7 +64,7 @@ TEST_CASE("BitmapTestCase::Monochrome")
     WARN("Skipping test known not to work in wxOSX.");
 #else
     wxBitmap color;
-    color.LoadFile("horse.bmp", wxBITMAP_TYPE_BMP);
+    color.LoadFile("horse.bmp", wxBitmapType::BMP);
     REQUIRE(color.IsOk());
     REQUIRE(color.GetDepth() == 32);
 
@@ -72,10 +72,10 @@ TEST_CASE("BitmapTestCase::Monochrome")
     wxBitmap bmpQuant(imgQuant, 1);
     REQUIRE(bmpQuant.GetDepth() == 1);
     TempFile mono_horse("mono_horse.bmp");
-    REQUIRE(bmpQuant.SaveFile(mono_horse.GetName(), wxBITMAP_TYPE_BMP));
+    REQUIRE(bmpQuant.SaveFile(mono_horse.GetName(), wxBitmapType::BMP));
 
     wxBitmap mono;
-    REQUIRE(mono.LoadFile(mono_horse.GetName(), wxBITMAP_TYPE_BMP));
+    REQUIRE(mono.LoadFile(mono_horse.GetName(), wxBitmapType::BMP));
     REQUIRE(mono.IsOk());
     REQUIRE(mono.GetDepth() == 1);
 
@@ -99,7 +99,7 @@ TEST_CASE("BitmapTestCase::Monochrome")
         }
     }
     TempFile mono_lines_horse("mono_lines_horse.bmp");
-    REQUIRE(mono.SaveFile(mono_lines_horse.GetName(), wxBITMAP_TYPE_BMP));
+    REQUIRE(mono.SaveFile(mono_lines_horse.GetName(), wxBitmapType::BMP));
 #endif      // __WXMSW__
 #endif      // !__WXGTK__
 }

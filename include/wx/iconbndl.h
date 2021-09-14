@@ -49,9 +49,9 @@ public:
     // initializes the bundle with the icon(s) found in the file
 #if wxUSE_STREAMS && wxUSE_IMAGE
 #if wxUSE_FFILE || wxUSE_FILE
-    wxIconBundle(const std::string& file, wxBitmapType type = wxBITMAP_TYPE_ANY);
+    wxIconBundle(const std::string& file, wxBitmapType type = wxBitmapType::Any);
 #endif // wxUSE_FFILE || wxUSE_FILE
-    wxIconBundle(wxInputStream& stream, wxBitmapType type = wxBITMAP_TYPE_ANY);
+    wxIconBundle(wxInputStream& stream, wxBitmapType type = wxBitmapType::Any);
 #endif // wxUSE_STREAMS && wxUSE_IMAGE
 
     // initializes the bundle with a single icon
@@ -69,9 +69,9 @@ public:
     // width and height, they are replaced
 #if wxUSE_STREAMS && wxUSE_IMAGE
 #if wxUSE_FFILE || wxUSE_FILE
-    void AddIcon(const std::string& file, wxBitmapType type = wxBITMAP_TYPE_ANY);
+    void AddIcon(const std::string& file, wxBitmapType type = wxBitmapType::Any);
 #endif // wxUSE_FFILE || wxUSE_FILE
-    void AddIcon(wxInputStream& stream, wxBitmapType type = wxBITMAP_TYPE_ANY);
+    void AddIcon(wxInputStream& stream, wxBitmapType type = wxBitmapType::Any);
 #endif // wxUSE_STREAMS && wxUSE_IMAGE
 
 #if defined(__WINDOWS__) && wxUSE_ICO_CUR

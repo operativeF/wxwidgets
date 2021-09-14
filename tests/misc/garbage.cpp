@@ -26,9 +26,9 @@ constexpr int GARBAGE_DATA_SIZE   = 1000000; // in bytes; ~ 1MB
 // Execute the given macro with the given first and second parameters and
 // bitmap type as its third parameter for all bitmap types.
 #define wxFOR_ALL_VALID_BITMAP_TYPES(m, p1, p2) \
-    for ( wxBitmapType type = wxBitmapType(wxBITMAP_TYPE_INVALID + 1); \
-          type < wxBITMAP_TYPE_MAX; \
-          type = (wxBitmapType)(type + 1) ) \
+    for ( wxBitmapType type = wxBitmapType(static_cast<int>(wxBitmapType::Invalid) + 1); \
+          static_cast<int>(type) < static_cast<int>(wxBitmapType::Max); \
+          type = static_cast<wxBitmapType>(static_cast<int>(type) + 1) ) \
         m(p1, p2, type)
 
 // Similar to above but for animation types.

@@ -51,7 +51,7 @@ wxBitmap wxBitmapHelpers::NewFromPNGData(const void* data, size_t size)
 
 #ifdef wxHAS_PNG_LOAD
     wxMemoryInputStream is(data, size);
-    wxImage image(is, wxBITMAP_TYPE_PNG);
+    wxImage image(is, wxBitmapType::PNG);
     if ( image.IsOk() )
         bitmap = wxBitmap(image);
 #endif // wxHAS_PNG_LOAD
@@ -120,7 +120,7 @@ wxBitmapHandler *wxBitmapBase::FindHandler(std::string_view extension, wxBitmapT
     {
         wxBitmapHandler *handler = (wxBitmapHandler *)node->GetData();
         if ( handler->GetExtension() == extension &&
-                    (bitmapType == wxBITMAP_TYPE_ANY || handler->GetType() == bitmapType) )
+                    (bitmapType == wxBitmapType::Any || handler->GetType() == bitmapType) )
             return handler;
         node = node->GetNext();
     }

@@ -46,7 +46,7 @@ public:
     {
         m_name = "Windows bitmap file";
         m_extension = "bmp";
-        m_type = wxBITMAP_TYPE_BMP;
+        m_type = wxBitmapType::BMP;
         m_mime = "image/x-bmp";
     }
 
@@ -80,7 +80,7 @@ public:
     {
         m_name = "Windows icon file";
         m_extension = "ico";
-        m_type = wxBITMAP_TYPE_ICO;
+        m_type = wxBitmapType::ICO;
         m_mime = "image/x-ico";
     }
 
@@ -110,7 +110,7 @@ public:
     {
         m_name = "Windows cursor file";
         m_extension = "cur";
-        m_type = wxBITMAP_TYPE_CUR;
+        m_type = wxBitmapType::CUR;
         m_mime = "image/x-cur";
     }
 
@@ -137,7 +137,7 @@ public:
     {
         m_name = "Windows animated cursor file";
         m_extension = "ani";
-        m_type = wxBITMAP_TYPE_ANI;
+        m_type = wxBitmapType::ANI;
         m_mime = "image/x-ani";
     }
 

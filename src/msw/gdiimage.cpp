@@ -59,7 +59,7 @@ class WXDLLEXPORT wxBMPFileHandler : public wxBitmapHandler
 public:
     wxBMPFileHandler() : wxBitmapHandler("Windows bitmap file",
                                          "bmp",
-                                         wxBITMAP_TYPE_BMP)
+                                         wxBitmapType::BMP)
     {
     }
 
@@ -76,7 +76,7 @@ class WXDLLEXPORT wxBMPResourceHandler: public wxBitmapHandler
 public:
     wxBMPResourceHandler() : wxBitmapHandler("Windows bitmap resource",
                                              "",
-                                             wxBITMAP_TYPE_BMP_RESOURCE)
+                                             wxBitmapType::BMP_Resource)
     {
     }
 
@@ -135,7 +135,7 @@ class WXDLLEXPORT wxICOFileHandler : public wxIconHandler
 public:
     wxICOFileHandler() : wxIconHandler("ICO icon file",
                                        "ico",
-                                       wxBITMAP_TYPE_ICO)
+                                       wxBitmapType::ICO)
     {
     }
 
@@ -150,7 +150,7 @@ class WXDLLEXPORT wxICOResourceHandler: public wxIconHandler
 public:
     wxICOResourceHandler() : wxIconHandler("ICO resource",
                                            "ico",
-                                           wxBITMAP_TYPE_ICO_RESOURCE)
+                                           wxBitmapType::ICO_Resource)
     {
     }
 
@@ -167,7 +167,7 @@ class WXDLLEXPORT wxPNGResourceHandler : public wxBitmapHandler
 public:
     wxPNGResourceHandler() : wxBitmapHandler("Windows PNG resource",
                                              "",
-                                             wxBITMAP_TYPE_PNG_RESOURCE)
+                                             wxBitmapType::PNG_Resource)
     {
     }
 
@@ -250,9 +250,10 @@ wxGDIImageHandler *wxGDIImage::FindHandler(const std::string& extension,
     wxGDIImageHandlerList::compatibility_iterator node = ms_handlers.GetFirst();
     while ( node )
     {
+        // FIXME: Stupid solution.
         wxGDIImageHandler *handler = node->GetData();
         if ( (handler->GetExtension() == extension) &&
-             (type == -1 || handler->GetType() == type) )
+             (type == -1 || static_cast<long>(handler->GetType()) == type) )
         {
             return handler;
         }
@@ -267,8 +268,9 @@ wxGDIImageHandler *wxGDIImage::FindHandler(long type)
     wxGDIImageHandlerList::compatibility_iterator node = ms_handlers.GetFirst();
     while ( node )
     {
+        // FIXME: Stupid solution.
         wxGDIImageHandler *handler = node->GetData();
-        if ( handler->GetType() == type )
+        if ( static_cast<long>(handler->GetType()) == type )
             return handler;
 
         node = node->GetNext();
@@ -360,7 +362,7 @@ bool wxBMPFileHandler::LoadFile(wxBitmap *bitmap,
     // with negative height. Try to use our own bitmap loading code which does
     // support them.
 #if wxUSE_IMAGE
-    wxImage img(name, wxBITMAP_TYPE_BMP);
+    wxImage img(name, wxBitmapType::BMP);
     if ( img.IsOk() )
     {
         *bitmap = wxBitmap(img);

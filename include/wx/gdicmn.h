@@ -46,46 +46,46 @@ struct WXDLLIMPEXP_FWD_CORE wxPoint;
 // ---------------------------------------------------------------------------
 
 // Bitmap flags
-enum wxBitmapType
+enum class wxBitmapType
 {
-    wxBITMAP_TYPE_INVALID,          // should be == 0 for compatibility!
-    wxBITMAP_TYPE_BMP,
-    wxBITMAP_TYPE_BMP_RESOURCE,
-    wxBITMAP_TYPE_RESOURCE = wxBITMAP_TYPE_BMP_RESOURCE,
-    wxBITMAP_TYPE_ICO,
-    wxBITMAP_TYPE_ICO_RESOURCE,
-    wxBITMAP_TYPE_CUR,
-    wxBITMAP_TYPE_CUR_RESOURCE,
-    wxBITMAP_TYPE_XBM,
-    wxBITMAP_TYPE_XBM_DATA,
-    wxBITMAP_TYPE_XPM,
-    wxBITMAP_TYPE_XPM_DATA,
-    wxBITMAP_TYPE_TIFF,
-    wxBITMAP_TYPE_TIF = wxBITMAP_TYPE_TIFF,
-    wxBITMAP_TYPE_TIFF_RESOURCE,
-    wxBITMAP_TYPE_TIF_RESOURCE = wxBITMAP_TYPE_TIFF_RESOURCE,
-    wxBITMAP_TYPE_GIF,
-    wxBITMAP_TYPE_GIF_RESOURCE,
-    wxBITMAP_TYPE_PNG,
-    wxBITMAP_TYPE_PNG_RESOURCE,
-    wxBITMAP_TYPE_JPEG,
-    wxBITMAP_TYPE_JPEG_RESOURCE,
-    wxBITMAP_TYPE_PNM,
-    wxBITMAP_TYPE_PNM_RESOURCE,
-    wxBITMAP_TYPE_PCX,
-    wxBITMAP_TYPE_PCX_RESOURCE,
-    wxBITMAP_TYPE_PICT,
-    wxBITMAP_TYPE_PICT_RESOURCE,
-    wxBITMAP_TYPE_ICON,
-    wxBITMAP_TYPE_ICON_RESOURCE,
-    wxBITMAP_TYPE_ANI,
-    wxBITMAP_TYPE_IFF,
-    wxBITMAP_TYPE_TGA,
-    wxBITMAP_TYPE_MACCURSOR,
-    wxBITMAP_TYPE_MACCURSOR_RESOURCE,
+    Invalid,          // should be == 0 for compatibility!
+    BMP,
+    BMP_Resource,
+    resource = BMP_Resource,
+    ICO,
+    ICO_Resource,
+    CUR,
+    CUR_Resource,
+    XBM,
+    XBM_Data,
+    XPM,
+    XPM_Data,
+    TIFF,
+    TIF = TIFF,
+    TIFF_Resource,
+    TIF_Resource = TIFF_Resource,
+    GIF,
+    GIF_Resource,
+    PNG,
+    PNG_Resource,
+    JPEG,
+    JPEG_Resource,
+    PNM,
+    PNM_Resource,
+    PCX,
+    PCX_Resource,
+    PICT,
+    PICT_Resource,
+    ICON,
+    ICON_Resource,
+    ANI,
+    IFF,
+    TGA,
+    MACCURSOR,
+    MACCURSOR_Resource,
 
-    wxBITMAP_TYPE_MAX,
-    wxBITMAP_TYPE_ANY = 50
+    Max,
+    Any = 50
 };
 
 //  Polygon filling mode
@@ -230,7 +230,7 @@ enum wxEllipsizeMode
  */
 
 #if defined(__WINDOWS__) && wxUSE_WXDIB
-    #define wxBITMAP(name) wxBitmap(wxT(#name), wxBITMAP_TYPE_BMP_RESOURCE)
+    #define wxBITMAP(name) wxBitmap(wxT(#name), wxBitmapType::BMP_Resource)
 #elif defined(__WXGTK__)   || \
       defined(__WXMOTIF__) || \
       defined(__WXX11__)   || \
@@ -239,7 +239,7 @@ enum wxEllipsizeMode
     // Initialize from an included XPM
     #define wxBITMAP(name) wxBitmap(name##_xpm)
 #else // other platforms
-    #define wxBITMAP(name) wxBitmap(name##_xpm, wxBITMAP_TYPE_XPM)
+    #define wxBITMAP(name) wxBitmap(name##_xpm, wxBitmapType::XPM)
 #endif // platform
 
 // Macro for creating wxBitmap from in-memory PNG data.

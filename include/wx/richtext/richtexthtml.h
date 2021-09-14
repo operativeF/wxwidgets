@@ -101,8 +101,8 @@ protected:
     /// Typical base64 encoder
     wxChar* b64enc(unsigned char* input, size_t in_len);
 
-    /// Gets the mime type of the given wxBITMAP_TYPE
-    const wxChar* GetMimeType(int imageType);
+    /// Gets the mime type of the given wxBitmapType
+    const wxChar* GetMimeType(wxBitmapType imageType);
 
     /// Gets the html equivalent of the specified value
     std::string GetAlignment(const wxRichTextAttr& thisStyle);

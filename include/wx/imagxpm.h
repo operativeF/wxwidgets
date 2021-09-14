@@ -24,7 +24,7 @@ public:
     {
         m_name = "XPM file";
         m_extension = "xpm";
-        m_type = wxBITMAP_TYPE_XPM;
+        m_type = wxBitmapType::XPM;
         m_mime = "image/xpm";
     }
 

@@ -593,19 +593,19 @@ std::string wxRichTextHTMLHandler::SymbolicIndent(long indent)
     return in;
 }
 
-const wxChar* wxRichTextHTMLHandler::GetMimeType(int imageType)
+const wxChar* wxRichTextHTMLHandler::GetMimeType(wxBitmapType imageType)
 {
     switch(imageType)
     {
-    case wxBITMAP_TYPE_BMP:
+    case wxBitmapType::BMP:
         return wxT("image/bmp");
-    case wxBITMAP_TYPE_TIFF:
+    case wxBitmapType::TIFF:
         return wxT("image/tiff");
-    case wxBITMAP_TYPE_GIF:
+    case wxBitmapType::GIF:
         return wxT("image/gif");
-    case wxBITMAP_TYPE_PNG:
+    case wxBitmapType::PNG:
         return wxT("image/png");
-    case wxBITMAP_TYPE_JPEG:
+    case wxBitmapType::JPEG:
         return wxT("image/jpeg");
     default:
         return wxT("image/unknown");

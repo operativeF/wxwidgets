@@ -485,7 +485,7 @@ bool wxEmulatorInfo::Load(const wxString& appDir)
         }
 
         wxBitmapType type = wxDetermineImageType(m_emulatorBackgroundBitmapName);
-        if (type == wxBITMAP_TYPE_INVALID)
+        if (type == wxBitmapType::Invalid)
             return false;
 
         if (!m_emulatorBackgroundBitmap.LoadFile(m_emulatorBackgroundBitmapName, type))
@@ -512,19 +512,19 @@ wxBitmapType wxDetermineImageType(const wxString& filename)
 
     ext.MakeLower();
     if (ext == wxT("jpg") || ext == wxT("jpeg"))
-        return wxBITMAP_TYPE_JPEG;
+        return wxBitmapType::JPEG;
     if (ext == wxT("gif"))
-        return wxBITMAP_TYPE_GIF;
+        return wxBitmapType::GIF;
     if (ext == wxT("bmp"))
-        return wxBITMAP_TYPE_BMP;
+        return wxBitmapType::BMP;
     if (ext == wxT("png"))
-        return wxBITMAP_TYPE_PNG;
+        return wxBitmapType::PNG;
     if (ext == wxT("pcx"))
-        return wxBITMAP_TYPE_PCX;
+        return wxBitmapType::PCX;
     if (ext == wxT("tif") || ext == wxT("tiff"))
-        return wxBITMAP_TYPE_TIFF;
+        return wxBitmapType::TIFF;
 
-    return wxBITMAP_TYPE_INVALID;
+    return wxBitmapType::Invalid;
 }
 
 // Convert a colour to a 6-digit hex string

@@ -148,7 +148,7 @@ void DoAddIcon(wxIconBundle& bundle,
             continue;
         }
 
-        if ( type == wxBITMAP_TYPE_ANY )
+        if ( type == wxBitmapType::Any )
         {
             // store the type so that we don't need to try all handlers again
             // for the subsequent images, they should all be of the same type

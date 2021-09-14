@@ -78,7 +78,7 @@ bool AutoCaptureMechanism::Capture(wxBitmap* bitmap, int x, int y,
     wxBitmap fullscreen;
     do
     {
-        fullscreen = wxBitmap(wxT("/tmp/wx_screen_capture.png"), wxBITMAP_TYPE_PNG);
+        fullscreen = wxBitmap(wxT("/tmp/wx_screen_capture.png"), wxBitmapType::PNG);
     }
     while(!fullscreen.IsOk());
 
@@ -144,7 +144,7 @@ void AutoCaptureMechanism::Save(wxBitmap* screenshot, const wxString& fileName)
         fullFileName.SetName(fullFileName.GetName() + "_");
 
     // save the screenshot as a PNG
-    screenshot->SaveFile(fullFileName.GetFullPath(), wxBITMAP_TYPE_PNG);
+    screenshot->SaveFile(fullFileName.GetFullPath(), wxBitmapType::PNG);
 }
 
 void AutoCaptureMechanism::CaptureAll()

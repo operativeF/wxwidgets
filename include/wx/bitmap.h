@@ -114,7 +114,7 @@ public:
 class WXDLLIMPEXP_CORE wxBitmapHandler : public wxObject
 {
 public:
-    wxBitmapHandler() { m_type = wxBITMAP_TYPE_INVALID; }
+    wxBitmapHandler() { m_type = wxBitmapType::Invalid; }
     virtual ~wxBitmapHandler() { }
 
     // NOTE: the following functions should be pure virtuals, but they aren't
@@ -167,7 +167,7 @@ public:
     wxBitmap(int width, int height, int depth = wxBITMAP_SCREEN_DEPTH);
     wxBitmap(const wxSize& sz, int depth = wxBITMAP_SCREEN_DEPTH);
     wxBitmap(const char* const* bits);
-    wxBitmap(const std::string &filename, wxBitmapType type = wxBITMAP_TYPE_XPM);
+    wxBitmap(const std::string &filename, wxBitmapType type = wxBitmapType::XPM);
     wxBitmap(const wxImage& image, int depth = wxBITMAP_SCREEN_DEPTH, double scale = 1.0);
 
     static void InitStandardHandlers();
@@ -259,32 +259,32 @@ protected:
 // the wxBITMAP_DEFAULT_TYPE constant defines the default argument value
 // for wxBitmap's ctor and wxBitmap::LoadFile() functions.
 #if defined(__WXMSW__)
-    #define wxBITMAP_DEFAULT_TYPE    wxBITMAP_TYPE_BMP_RESOURCE
+    #define wxBITMAP_DEFAULT_TYPE    wxBitmapType::BMP_Resource
     #include "wx/msw/bitmap.h"
 #elif defined(__WXMOTIF__)
-    #define wxBITMAP_DEFAULT_TYPE    wxBITMAP_TYPE_XPM
+    #define wxBITMAP_DEFAULT_TYPE    wxBitmapType::XPM
     #include "wx/x11/bitmap.h"
 #elif defined(__WXGTK20__)
     #ifdef __WINDOWS__
-        #define wxBITMAP_DEFAULT_TYPE    wxBITMAP_TYPE_BMP_RESOURCE
+        #define wxBITMAP_DEFAULT_TYPE    wxBitmapType::BMP_Resource
     #else
-        #define wxBITMAP_DEFAULT_TYPE    wxBITMAP_TYPE_XPM
+        #define wxBITMAP_DEFAULT_TYPE    wxBitmapType::XPM
     #endif
     #include "wx/gtk/bitmap.h"
 #elif defined(__WXGTK__)
-    #define wxBITMAP_DEFAULT_TYPE    wxBITMAP_TYPE_XPM
+    #define wxBITMAP_DEFAULT_TYPE    wxBitmapType::XPM
     #include "wx/gtk1/bitmap.h"
 #elif defined(__WXX11__)
-    #define wxBITMAP_DEFAULT_TYPE    wxBITMAP_TYPE_XPM
+    #define wxBITMAP_DEFAULT_TYPE    wxBitmapType::XPM
     #include "wx/x11/bitmap.h"
 #elif defined(__WXDFB__)
-    #define wxBITMAP_DEFAULT_TYPE    wxBITMAP_TYPE_BMP_RESOURCE
+    #define wxBITMAP_DEFAULT_TYPE    wxBitmapType::BMP_Resource
     #include "wx/dfb/bitmap.h"
 #elif defined(__WXMAC__)
     #define wxBITMAP_DEFAULT_TYPE    wxBITMAP_TYPE_PICT_RESOURCE
     #include "wx/osx/bitmap.h"
 #elif defined(__WXQT__)
-    #define wxBITMAP_DEFAULT_TYPE    wxBITMAP_TYPE_XPM
+    #define wxBITMAP_DEFAULT_TYPE    wxBitmapType::XPM
     #include "wx/qt/bitmap.h"
 #endif
 

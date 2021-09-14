@@ -12455,7 +12455,7 @@ wxRichTextImage::wxRichTextImage(const wxImage& image, wxRichTextObject* parent,
     wxRichTextObject(parent)
 {
     Init();
-    m_imageBlock.MakeImageBlockDefaultQuality(image, wxBITMAP_TYPE_PNG);
+    m_imageBlock.MakeImageBlockDefaultQuality(image, wxBitmapType::PNG);
     if (charStyle)
         SetAttributes(*charStyle);
 }
@@ -13103,14 +13103,14 @@ void wxRichTextImageBlock::Init()
 {
     m_data = nullptr;
     m_dataSize = 0;
-    m_imageType = wxBITMAP_TYPE_INVALID;
+    m_imageType = wxBitmapType::Invalid;
 }
 
 void wxRichTextImageBlock::Clear()
 {
     wxDELETEA(m_data);
     m_dataSize = 0;
-    m_imageType = wxBITMAP_TYPE_INVALID;
+    m_imageType = wxBitmapType::Invalid;
 }
 
 
@@ -13128,21 +13128,21 @@ bool wxRichTextImageBlock::MakeImageBlock(const wxString& filename, wxBitmapType
     wxString filenameToRead(filename);
     bool removeFile = false;
 
-    if (imageType == wxBITMAP_TYPE_INVALID)
+    if (imageType == wxBitmapType::Invalid)
         return false; // Could not determine image type
 
-    if ((imageType != wxBITMAP_TYPE_JPEG) && convertToJPEG)
+    if ((imageType != wxBitmapType::JPEG) && convertToJPEG)
     {
         wxString tempFile =
             wxFileName::CreateTempFileName(_("image"));
 
         wxASSERT(!tempFile.IsEmpty());
 
-        image.SaveFile(tempFile, wxBITMAP_TYPE_JPEG);
+        image.SaveFile(tempFile, wxBitmapType::JPEG);
         filenameToRead = tempFile;
         removeFile = true;
 
-        m_imageType = wxBITMAP_TYPE_JPEG;
+        m_imageType = wxBitmapType::JPEG;
     }
     wxFile file;
     if (!file.Open(filenameToRead))
@@ -13167,7 +13167,7 @@ bool wxRichTextImageBlock::MakeImageBlock(wxImage& image, wxBitmapType imageType
 {
     image.SetOption("quality", quality);
 
-    if (imageType == wxBITMAP_TYPE_INVALID)
+    if (imageType == wxBitmapType::Invalid)
         return false; // Could not determine image type
 
     return DoMakeImageBlock(image, imageType);
@@ -13176,7 +13176,7 @@ bool wxRichTextImageBlock::MakeImageBlock(wxImage& image, wxBitmapType imageType
 // Uses a const wxImage for efficiency, but can't set quality (only relevant for JPEG)
 bool wxRichTextImageBlock::MakeImageBlockDefaultQuality(const wxImage& image, wxBitmapType imageType)
 {
-    if (imageType == wxBITMAP_TYPE_INVALID)
+    if (imageType == wxBitmapType::Invalid)
         return false; // Could not determine image type
 
     return DoMakeImageBlock(image, imageType);

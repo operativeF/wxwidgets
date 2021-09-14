@@ -25,7 +25,7 @@ public:
         m_name = "TGA file";
         m_extension = "tga";
         m_altExtensions.push_back("tpic");
-        m_type = wxBITMAP_TYPE_TGA;
+        m_type = wxBitmapType::TGA;
         m_mime = "image/tga";
     }
 

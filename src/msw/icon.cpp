@@ -76,7 +76,7 @@ wxIcon::wxIcon(const wxIconLocation& loc)
     }
     //else: 0 is default
 
-    LoadFile(fullname, wxBITMAP_TYPE_ICO);
+    LoadFile(fullname, wxBitmapType::ICO);
 }
 
 wxObjectRefData *wxIcon::CloneRefData(const wxObjectRefData *dataOrig) const
@@ -118,7 +118,8 @@ bool wxIcon::LoadFile(const std::string& filename,
 {
     UnRef();
 
-    wxGDIImageHandler *handler = FindHandler(type);
+    // FIXME: Stupid solution.
+    wxGDIImageHandler *handler = FindHandler(static_cast<int>(type));
 
     if ( !handler )
     {

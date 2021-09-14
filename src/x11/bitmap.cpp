@@ -448,7 +448,7 @@ bool wxBitmap::Create(WXPixmap pixmap)
 
 wxBitmap::wxBitmap(const char* const* bits)
 {
-    Create(bits, wxBITMAP_TYPE_XPM_DATA, 0, 0, 0);
+    Create(bits, wxBitmapType::XPM_Data, 0, 0, 0);
 }
 
 wxGDIRefData *wxBitmap::CreateGDIRefData() const
@@ -948,7 +948,7 @@ wxBitmap::wxBitmap( const char bits[], int width, int height, int depth )
 {
     m_refData = new wxBitmapRefData;
 
-    (void) Create(bits, wxBITMAP_TYPE_XBM_DATA, width, height, depth);
+    (void) Create(bits, wxBitmapType::XBM_Data, width, height, depth);
 }
 
 wxBitmap::~wxBitmap()
@@ -1310,7 +1310,7 @@ public:
     {
         SetName( wxT("XPM file") );
         SetExtension( wxT("xpm") );
-        SetType( wxBITMAP_TYPE_XPM );
+        SetType( wxBitmapType::XPM );
     };
 
     virtual bool LoadFile(wxBitmap *bitmap, const wxString& name,
@@ -1430,7 +1430,7 @@ public:
     {
         SetName( wxT("XPM data") );
         SetExtension( wxT("xpm") );
-        SetType( wxBITMAP_TYPE_XPM_DATA );
+        SetType( wxBitmapType::XPM_Data );
     };
 
     virtual bool LoadFile(wxBitmap *WXUNUSED(bitmap),
@@ -1536,7 +1536,7 @@ public:
     {
         SetName( wxT("XBM data") );
         SetExtension( wxT("xbm") );
-        SetType( wxBITMAP_TYPE_XBM_DATA );
+        SetType( wxBitmapType::XBM_Data );
     };
 
     virtual bool LoadFile(wxBitmap *WXUNUSED(bitmap),

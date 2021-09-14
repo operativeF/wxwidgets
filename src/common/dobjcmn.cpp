@@ -610,19 +610,19 @@ bool wxCustomDataObject::SetData(size_t size, const void *buf)
 
 #if defined(__WXMSW__)
 #define wxIMAGE_FORMAT_DATA wxDF_PNG
-#define wxIMAGE_FORMAT_BITMAP_TYPE wxBITMAP_TYPE_PNG
+#define wxIMAGE_FORMAT_BITMAP_TYPE wxBitmapType::PNG
 #define wxIMAGE_FORMAT_NAME "PNG"
 #elif defined(__WXGTK__)
 #define wxIMAGE_FORMAT_DATA wxDF_BITMAP
-#define wxIMAGE_FORMAT_BITMAP_TYPE wxBITMAP_TYPE_PNG
+#define wxIMAGE_FORMAT_BITMAP_TYPE wxBitmapType::PNG
 #define wxIMAGE_FORMAT_NAME "PNG"
 #elif defined(__WXOSX__)
 #define wxIMAGE_FORMAT_DATA wxDF_BITMAP
-#define wxIMAGE_FORMAT_BITMAP_TYPE wxBITMAP_TYPE_TIFF
+#define wxIMAGE_FORMAT_BITMAP_TYPE wxBitmapType::TIFF
 #define wxIMAGE_FORMAT_NAME "TIFF"
 #else
 #define wxIMAGE_FORMAT_DATA wxDF_BITMAP
-#define wxIMAGE_FORMAT_BITMAP_TYPE wxBITMAP_TYPE_PNG
+#define wxIMAGE_FORMAT_BITMAP_TYPE wxBitmapType::PNG
 #define wxIMAGE_FORMAT_NAME "PNG"
 #endif
 

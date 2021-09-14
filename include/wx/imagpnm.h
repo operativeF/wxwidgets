@@ -26,7 +26,7 @@ public:
         m_altExtensions.push_back("ppm");
         m_altExtensions.push_back("pgm");
         m_altExtensions.push_back("pbm");
-        m_type = wxBITMAP_TYPE_PNM;
+        m_type = wxBitmapType::PNM;
         m_mime = "image/pnm";
     }
 

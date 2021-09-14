@@ -403,12 +403,12 @@ wxSVGBitmapEmbedHandler::ProcessBitmap(const wxBitmap& bmp,
 {
     static int sub_images = 0;
 
-    if ( wxImage::FindHandler(wxBITMAP_TYPE_PNG) == nullptr )
+    if ( wxImage::FindHandler(wxBitmapType::PNG) == nullptr )
         wxImage::AddHandler(new wxPNGHandler);
 
     // write the bitmap as a PNG to a memory stream and Base64 encode
     wxMemoryOutputStream mem;
-    bmp.ConvertToImage().SaveFile(mem, wxBITMAP_TYPE_PNG);
+    bmp.ConvertToImage().SaveFile(mem, wxBitmapType::PNG);
     wxString data = wxBase64Encode(mem.GetOutputStreamBuffer()->GetBufferStart(),
                                    mem.GetSize());
 
@@ -448,7 +448,7 @@ wxSVGBitmapFileHandler::ProcessBitmap(const wxBitmap& bmp,
 {
     static int sub_images = 0;
 
-    if ( wxImage::FindHandler(wxBITMAP_TYPE_PNG) == nullptr )
+    if ( wxImage::FindHandler(wxBitmapType::PNG) == nullptr )
         wxImage::AddHandler(new wxPNGHandler);
 
     // find a suitable file name
@@ -462,7 +462,7 @@ wxSVGBitmapFileHandler::ProcessBitmap(const wxBitmap& bmp,
     }
     while ( sPNG.FileExists() );
 
-    if ( !bmp.SaveFile(sPNG.GetFullPath(), wxBITMAP_TYPE_PNG) )
+    if ( !bmp.SaveFile(sPNG.GetFullPath(), wxBitmapType::PNG) )
         return false;
 
     // reference the bitmap from the SVG doc
