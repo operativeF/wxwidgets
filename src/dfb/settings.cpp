@@ -37,7 +37,7 @@ wxFont wxSystemSettingsNative::GetFont(wxSystemFont index)
             // FIXME_DFB
             return wxFont(12,
                           wxFONTFAMILY_TELETYPE,
-                          wxFONTSTYLE_NORMAL,
+                          wxFontStyle::Normal,
                           wxFONTWEIGHT_NORMAL);
         }
 
@@ -49,7 +49,7 @@ wxFont wxSystemSettingsNative::GetFont(wxSystemFont index)
             // FIXME_DFB
             return wxFont(12,
                           wxFONTFAMILY_DEFAULT,
-                          wxFONTSTYLE_NORMAL,
+                          wxFontStyle::Normal,
                           wxFONTWEIGHT_NORMAL);
         }
 

@@ -735,7 +735,7 @@ TEST_CASE("Richtext control test")
 
     SUBCASE("Font")
     {
-        wxFont font(14, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL);
+        wxFont font(14, wxFONTFAMILY_DEFAULT, wxFontStyle::Normal, wxFONTWEIGHT_NORMAL);
         m_rich->BeginFont(font);
         m_rich->AddParagraph("paragraph with font");
         m_rich->EndFont();

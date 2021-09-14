@@ -100,15 +100,15 @@ static const wxChar *wxFontWeightIntToString(int weight)
     }
 }
 
-static const wxChar *wxFontStyleIntToString(int style)
+static const wxChar *wxFontStyleToString(wxFontStyle style)
 {
     switch (style)
     {
-        case wxFONTSTYLE_ITALIC:
+        case wxFontStyle::Italic:
             return wxT("Italic");
-        case wxFONTSTYLE_SLANT:
+        case wxFontStyle::Slant:
             return wxT("Slant");
-        case wxFONTSTYLE_NORMAL:
+        case wxFontStyle::Normal:
             default:
             return wxT("Normal");
     }
@@ -155,13 +155,13 @@ static wxFontFamily wxFontFamilyStringToInt(const wxString& family)
 static wxFontStyle wxFontStyleStringToInt(const wxString& style)
 {
     if (style.empty())
-        return wxFONTSTYLE_NORMAL;
+        return wxFontStyle::Normal;
     if (wxStrcmp(style, wxT("Italic")) == 0)
-        return wxFONTSTYLE_ITALIC;
+        return wxFontStyle::Italic;
     else if (wxStrcmp(style, wxT("Slant")) == 0)
-        return wxFONTSTYLE_SLANT;
+        return wxFontStyle::Slant;
     else
-        return wxFONTSTYLE_NORMAL;
+        return wxFontStyle::Normal;
 }
 
 static wxFontWeight wxFontWeightStringToInt(const wxString& weight)
@@ -529,7 +529,7 @@ void wxGenericFontDialog::InitializeFont()
 {
     wxFontFamily fontFamily = wxFONTFAMILY_SWISS;
     wxFontWeight fontWeight = wxFONTWEIGHT_NORMAL;
-    wxFontStyle fontStyle = wxFONTSTYLE_NORMAL;
+    wxFontStyle fontStyle = wxFontStyle::Normal;
     int fontSize = 12;
     bool fontUnderline = false;
 

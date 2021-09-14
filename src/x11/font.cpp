@@ -77,7 +77,7 @@ friend class wxFont;
 public:
     wxFontRefData(int size = wxDEFAULT,
                   wxFontFamily family = wxFONTFAMILY_DEFAULT,
-                  wxFontStyle style = wxFONTSTYLE_NORMAL,
+                  wxFontStyle style = wxFontStyle::Normal,
                   wxFontWeight weight = wxFONTWEIGHT_NORMAL,
                   bool underlined = false,
                   bool strikethrough = false,
@@ -156,7 +156,7 @@ void wxFontRefData::Init(int pointSize,
     m_faceName = faceName;
 
     // we accept both wxDEFAULT and wxNORMAL here - should we?
-    m_style = static_cast<int>(style) == wxDEFAULT ? wxFONTSTYLE_NORMAL : style;
+    m_style = static_cast<int>(style) == wxDEFAULT ? wxFontStyle::Normal : style;
     m_weight = static_cast<int>(weight) == wxDEFAULT ? wxFONTWEIGHT_NORMAL : weight;
 
     m_underlined = underlined;
@@ -215,13 +215,13 @@ void wxFontRefData::InitFromNative()
     switch (pango_font_description_get_style( desc ))
     {
         case PANGO_STYLE_NORMAL:
-            m_style = wxFONTSTYLE_NORMAL;
+            m_style = wxFontStyle::Normal;
             break;
         case PANGO_STYLE_ITALIC:
-            m_style = wxFONTSTYLE_ITALIC;
+            m_style = wxFontStyle::Italic;
             break;
         case PANGO_STYLE_OBLIQUE:
-            m_style = wxFONTSTYLE_SLANT;
+            m_style = wxFontStyle::Slant;
             break;
     }
 
@@ -298,16 +298,16 @@ void wxFontRefData::SetStyle(wxFontStyle style)
 
     switch ( style )
     {
-        case wxFONTSTYLE_ITALIC:
+        case wxFontStyle::Italic:
             pango_font_description_set_style( desc, PANGO_STYLE_ITALIC );
             break;
-        case wxFONTSTYLE_SLANT:
+        case wxFontStyle::Slant:
             pango_font_description_set_style( desc, PANGO_STYLE_OBLIQUE );
             break;
         default:
             wxFAIL_MSG( wxT("unknown font style") );
             // fall through
-        case wxFONTSTYLE_NORMAL:
+        case wxFontStyle::Normal:
             pango_font_description_set_style( desc, PANGO_STYLE_NORMAL );
             break;
     }
@@ -414,8 +414,8 @@ bool wxFont::Create(const wxString& fontname, wxFontEncoding enc)
     M_FONTDATA->m_weight = ParseWeightString(tn.GetNextToken()); // weight
 
     tmp = tn.GetNextToken().MakeUpper();        // slant
-    if (tmp == wxT("I")) M_FONTDATA->m_style = wxFONTSTYLE_ITALIC;
-    if (tmp == wxT("O")) M_FONTDATA->m_style = wxFONTSTYLE_ITALIC;
+    if (tmp == wxT("I")) M_FONTDATA->m_style = wxFontStyle::Italic;
+    if (tmp == wxT("O")) M_FONTDATA->m_style = wxFontStyle::Italic;
 
     tn.GetNextToken();                           // set width
     tn.GetNextToken();                           // add. style
@@ -509,7 +509,7 @@ wxFontFamily wxFont::DoGetFamily() const
 
 wxFontStyle wxFont::GetStyle() const
 {
-    wxCHECK_MSG( IsOk(), wxFONTSTYLE_MAX, wxT("invalid font") );
+    wxCHECK_MSG( IsOk(), wxFontStyle::Max, wxT("invalid font") );
 
     return M_FONTDATA->m_style;
 }

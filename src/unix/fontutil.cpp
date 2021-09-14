@@ -87,18 +87,18 @@ double wxNativeFontInfo::GetFractionalPointSize() const
 
 wxFontStyle wxNativeFontInfo::GetStyle() const
 {
-    wxFontStyle m_style = wxFONTSTYLE_NORMAL;
+    wxFontStyle m_style = wxFontStyle::Normal;
 
     switch (pango_font_description_get_style( description ))
     {
         case PANGO_STYLE_NORMAL:
-            m_style = wxFONTSTYLE_NORMAL;
+            m_style = wxFontStyle::Normal;
             break;
         case PANGO_STYLE_ITALIC:
-            m_style = wxFONTSTYLE_ITALIC;
+            m_style = wxFontStyle::Italic;
             break;
         case PANGO_STYLE_OBLIQUE:
-            m_style = wxFONTSTYLE_SLANT;
+            m_style = wxFontStyle::Slant;
             break;
     }
 
@@ -213,16 +213,16 @@ void wxNativeFontInfo::SetStyle(wxFontStyle style)
 {
     switch (style)
     {
-        case wxFONTSTYLE_ITALIC:
+        case wxFontStyle::Italic:
             pango_font_description_set_style( description, PANGO_STYLE_ITALIC );
             break;
-        case wxFONTSTYLE_SLANT:
+        case wxFontStyle::Slant:
             pango_font_description_set_style( description, PANGO_STYLE_OBLIQUE );
             break;
         default:
             wxFAIL_MSG( "unknown font style" );
             [[fallthrough]];
-        case wxFONTSTYLE_NORMAL:
+        case wxFontStyle::Normal:
             pango_font_description_set_style( description, PANGO_STYLE_NORMAL );
             break;
     }
@@ -699,7 +699,7 @@ wxFontStyle wxNativeFontInfo::GetStyle() const
     {
         // it is really unknown but we don't have any way to return it from
         // here
-        return wxFONTSTYLE_NORMAL;
+        return wxFontStyle::Normal;
     }
 
     switch ( s[0].GetValue() )
@@ -708,13 +708,13 @@ wxFontStyle wxNativeFontInfo::GetStyle() const
             // again, unknown but consider normal by default
 
         case wxT('r'):
-            return wxFONTSTYLE_NORMAL;
+            return wxFontStyle::Normal;
 
         case wxT('i'):
-            return wxFONTSTYLE_ITALIC;
+            return wxFontStyle::Italic;
 
         case wxT('o'):
-            return wxFONTSTYLE_SLANT;
+            return wxFontStyle::Slant;
     }
 }
 
@@ -790,15 +790,15 @@ void wxNativeFontInfo::SetStyle(wxFontStyle style)
     wxString s;
     switch ( style )
     {
-        case wxFONTSTYLE_ITALIC:
+        case wxFontStyle::Italic:
             s = wxT('i');
             break;
 
-        case wxFONTSTYLE_SLANT:
+        case wxFontStyle::Slant:
             s = wxT('o');
             break;
 
-        case wxFONTSTYLE_NORMAL:
+        case wxFontStyle::Normal:
             s = wxT('r');
             break;
 
@@ -1119,9 +1119,9 @@ wxNativeFont wxLoadQueryNearestFont(double pointSize,
             // third round: ... and use normal style
             if ( round == 2 )
             {
-                if ( teststyle != wxFONTSTYLE_NORMAL )
+                if ( teststyle != wxFontStyle::Normal )
                 {
-                    teststyle = wxFONTSTYLE_NORMAL;
+                    teststyle = wxFontStyle::Normal;
                 }
                 else
                 {
@@ -1159,7 +1159,7 @@ wxNativeFont wxLoadQueryNearestFont(double pointSize,
         if ( !font )
         {
             font = wxLoadQueryFont(120, wxFONTFAMILY_DEFAULT,
-                                   wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL,
+                                   wxFontStyle::Normal, wxFONTWEIGHT_NORMAL,
                                    underlined, facename,
                                    info.xregistry, info.xencoding,
                                    xFontName);
@@ -1168,7 +1168,7 @@ wxNativeFont wxLoadQueryNearestFont(double pointSize,
             if ( !font )
             {
                 font = wxLoadQueryFont(120, wxFONTFAMILY_DEFAULT,
-                                       wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL,
+                                       wxFontStyle::Normal, wxFONTWEIGHT_NORMAL,
                                        underlined, wxEmptyString,
                                        info.xregistry, info.xencoding,
                                        xFontName);
@@ -1180,7 +1180,7 @@ wxNativeFont wxLoadQueryNearestFont(double pointSize,
                 if ( !font )
                 {
                     font = wxLoadQueryFont(-1, wxFONTFAMILY_DEFAULT,
-                                           wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL,
+                                           wxFontStyle::Normal, wxFONTWEIGHT_NORMAL,
                                            false, wxEmptyString,
                                            info.xregistry, info.xencoding,
                                            xFontName);
@@ -1193,7 +1193,7 @@ wxNativeFont wxLoadQueryNearestFont(double pointSize,
                         wxFAIL_MSG( wxT("this encoding should be available!") );
 
                         font = wxLoadQueryFont(-1, wxFONTFAMILY_DEFAULT,
-                                               wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL,
+                                               wxFontStyle::Normal, wxFONTWEIGHT_NORMAL,
                                                false, wxEmptyString,
                                                wxT("*"), wxT("*"),
                                                xFontName);
@@ -1300,7 +1300,7 @@ static wxNativeFont wxLoadQueryFont(double pointSize,
     logFont.lfEscapement = 0;
     logFont.lfOrientation = 0;
     logFont.lfWeight = xweight;
-    logFont.lfItalic = (style == wxFONTSTYLE_ITALIC ? 0 : 1) ;
+    logFont.lfItalic = (style == wxFontStyle::Italic ? 0 : 1) ;
     logFont.lfUnderline = 0;
     logFont.lfStrikeOut = 0;
     logFont.lfCharSet = MWLF_CHARSET_DEFAULT; // TODO: select appropriate one

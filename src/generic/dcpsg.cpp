@@ -1090,7 +1090,7 @@ void wxPostScriptDCImpl::SetPSFont()
         case wxFONTFAMILY_TELETYPE:
         case wxFONTFAMILY_MODERN:
         {
-            if (Style == wxFONTSTYLE_ITALIC)
+            if (Style == wxFontStyle::Italic)
             {
                 if (Weight == wxFONTWEIGHT_BOLD)
                     name = wxS("/Courier-BoldOblique");
@@ -1108,7 +1108,7 @@ void wxPostScriptDCImpl::SetPSFont()
         }
         case wxFONTFAMILY_ROMAN:
         {
-            if (Style == wxFONTSTYLE_ITALIC)
+            if (Style == wxFontStyle::Italic)
             {
                 if (Weight == wxFONTWEIGHT_BOLD)
                     name = wxS("/Times-BoldItalic");
@@ -1132,7 +1132,7 @@ void wxPostScriptDCImpl::SetPSFont()
         case wxFONTFAMILY_SWISS:
         default:
         {
-            if (Style == wxFONTSTYLE_ITALIC)
+            if (Style == wxFontStyle::Italic)
             {
                 if (Weight == wxFONTWEIGHT_BOLD)
                     name = wxS("/Helvetica-BoldOblique");
@@ -2040,17 +2040,17 @@ void wxPostScriptDCImpl::DoGetTextExtent(const wxString& string,
             case wxFONTFAMILY_MODERN:
             case wxFONTFAMILY_TELETYPE:
             {
-                if ((Style == wxFONTSTYLE_ITALIC) && (Weight == wxFONTWEIGHT_BOLD)) name = wxT("CourBoO.afm");
-                else if ((Style != wxFONTSTYLE_ITALIC) && (Weight == wxFONTWEIGHT_BOLD)) name = wxT("CourBo.afm");
-                else if ((Style == wxFONTSTYLE_ITALIC) && (Weight != wxFONTWEIGHT_BOLD)) name = wxT("CourO.afm");
+                if ((Style == wxFontStyle::Italic) && (Weight == wxFONTWEIGHT_BOLD)) name = wxT("CourBoO.afm");
+                else if ((Style != wxFontStyle::Italic) && (Weight == wxFONTWEIGHT_BOLD)) name = wxT("CourBo.afm");
+                else if ((Style == wxFontStyle::Italic) && (Weight != wxFONTWEIGHT_BOLD)) name = wxT("CourO.afm");
                 else name = wxT("Cour.afm");
                 break;
             }
             case wxFONTFAMILY_ROMAN:
             {
-                if ((Style == wxFONTSTYLE_ITALIC) && (Weight == wxFONTWEIGHT_BOLD)) name = wxT("TimesBoO.afm");
-                else if ((Style != wxFONTSTYLE_ITALIC) && (Weight == wxFONTWEIGHT_BOLD)) name = wxT("TimesBo.afm");
-                else if ((Style == wxFONTSTYLE_ITALIC) && (Weight != wxFONTWEIGHT_BOLD)) name = wxT("TimesO.afm");
+                if ((Style == wxFontStyle::Italic) && (Weight == wxFONTWEIGHT_BOLD)) name = wxT("TimesBoO.afm");
+                else if ((Style != wxFontStyle::Italic) && (Weight == wxFONTWEIGHT_BOLD)) name = wxT("TimesBo.afm");
+                else if ((Style == wxFontStyle::Italic) && (Weight != wxFONTWEIGHT_BOLD)) name = wxT("TimesO.afm");
                 else name = wxT("TimesRo.afm");
                 break;
             }
@@ -2062,9 +2062,9 @@ void wxPostScriptDCImpl::DoGetTextExtent(const wxString& string,
             case wxFONTFAMILY_SWISS:
             default:
             {
-                if ((Style == wxFONTSTYLE_ITALIC) && (Weight == wxFONTWEIGHT_BOLD)) name = wxT("HelvBoO.afm");
-                else if ((Style != wxFONTSTYLE_ITALIC) && (Weight == wxFONTWEIGHT_BOLD)) name = wxT("HelvBo.afm");
-                else if ((Style == wxFONTSTYLE_ITALIC) && (Weight != wxFONTWEIGHT_BOLD)) name = wxT("HelvO.afm");
+                if ((Style == wxFontStyle::Italic) && (Weight == wxFONTWEIGHT_BOLD)) name = wxT("HelvBoO.afm");
+                else if ((Style != wxFontStyle::Italic) && (Weight == wxFONTWEIGHT_BOLD)) name = wxT("HelvBo.afm");
+                else if ((Style == wxFontStyle::Italic) && (Weight != wxFONTWEIGHT_BOLD)) name = wxT("HelvO.afm");
                 else name = wxT("Helv.afm");
                 break;
             }

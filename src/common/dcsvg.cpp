@@ -682,16 +682,16 @@ void wxSVGFileDCImpl::DoDrawRotatedText(std::string_view sText, wxCoord x, wxCoo
     wxString fontstyle;
     switch (m_font.GetStyle())
     {
-        case wxFONTSTYLE_MAX:
+        case wxFontStyle::Max:
             wxFAIL_MSG(wxS("invalid font style value"));
             [[fallthrough]];
-        case wxFONTSTYLE_NORMAL:
+        case wxFontStyle::Normal:
             fontstyle = wxS("normal");
             break;
-        case wxFONTSTYLE_ITALIC:
+        case wxFontStyle::Italic:
             fontstyle = wxS("italic");
             break;
-        case wxFONTSTYLE_SLANT:
+        case wxFontStyle::Slant:
             fontstyle = wxS("oblique");
             break;
     }

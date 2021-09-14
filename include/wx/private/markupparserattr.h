@@ -129,7 +129,7 @@ public:
 
         FontModifier<wxFontStyle>()(spanAttr.m_isItalic,
                                     font, &wxFont::SetStyle,
-                                    wxFONTSTYLE_NORMAL, wxFONTSTYLE_ITALIC);
+                                    wxFontStyle::Normal, wxFontStyle::Italic);
 
         FontModifier<bool>()(spanAttr.m_isUnderlined,
                              font, &wxFont::SetUnderlined,

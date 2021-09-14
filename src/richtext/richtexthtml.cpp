@@ -217,7 +217,7 @@ void wxRichTextHTMLHandler::BeginCharacterFormatting(const wxRichTextAttr& curre
 
     if (thisStyle.GetFontWeight() == wxFONTWEIGHT_BOLD)
         str << wxT("<b>");
-    if (thisStyle.GetFontStyle() == wxFONTSTYLE_ITALIC)
+    if (thisStyle.GetFontStyle() == wxFontStyle::Italic)
         str << wxT("<i>");
     if (thisStyle.GetFontUnderlined())
         str << wxT("<u>");
@@ -243,7 +243,7 @@ void wxRichTextHTMLHandler::EndCharacterFormatting(const wxRichTextAttr& WXUNUSE
 
     if (thisStyle.GetFontUnderlined())
         stream << wxT("</u>");
-    if (thisStyle.GetFontStyle() == wxFONTSTYLE_ITALIC)
+    if (thisStyle.GetFontStyle() == wxFontStyle::Italic)
         stream << wxT("</i>");
     if (thisStyle.GetFontWeight() == wxFONTWEIGHT_BOLD)
         stream << wxT("</b>");

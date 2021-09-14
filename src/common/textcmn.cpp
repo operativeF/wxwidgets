@@ -386,7 +386,7 @@ wxFont wxTextAttr::GetFont() const
     if (HasFontSize())
         fontSize = GetFontSize();
 
-    wxFontStyle fontStyle = wxFONTSTYLE_NORMAL;
+    wxFontStyle fontStyle = wxFontStyle::Normal;
     if (HasFontItalic())
         fontStyle = GetFontStyle();
 

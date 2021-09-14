@@ -229,7 +229,7 @@ bool wxTextCtrl::Create( wxWindow *parent,
     m_editable = ((m_windowStyle & wxTE_READONLY) == 0);
 
     if (HasFlag(wxTE_PASSWORD))
-        m_sourceFont = wxFont( 12, wxFONTFAMILY_MODERN, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL );
+        m_sourceFont = wxFont( 12, wxFONTFAMILY_MODERN, wxFontStyle::Normal, wxFONTWEIGHT_NORMAL );
     else
         m_sourceFont = GetFont();
 

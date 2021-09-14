@@ -504,10 +504,11 @@ static const wxChar* const gs_fp_es_style_labels[] = {
     (const wxChar*) nullptr
 };
 
+// FIXME: Stupid solution.
 constexpr long gs_fp_es_style_values[] = {
-    wxFONTSTYLE_NORMAL,
-    wxFONTSTYLE_SLANT,
-    wxFONTSTYLE_ITALIC
+    static_cast<long>(wxFontStyle::Normal),
+    static_cast<long>(wxFontStyle::Slant),
+    static_cast<long>(wxFontStyle::Italic)
 };
 
 static const wxChar* const gs_fp_es_weight_labels[] = {
@@ -583,7 +584,7 @@ wxFontProperty::wxFontProperty( const wxString& label, const wxString& name,
     /* TRANSLATORS: Label of font style */
     AddPrivateChild( new wxEnumProperty(_("Style"), wxS("Style"),
                      gs_fp_es_style_labels,gs_fp_es_style_values,
-                     font.GetStyle()) );
+                     static_cast<int>(font.GetStyle())) ); // FIXME: Stupid solution.
 
     /* TRANSLATORS: Label of font weight */
     AddPrivateChild( new wxEnumProperty(_("Weight"), wxS("Weight"),
@@ -680,9 +681,10 @@ wxVariant wxFontProperty::ChildChanged( wxVariant& thisValue,
     else if ( ind == 2 )
     {
         int st = childValue.GetLong();
-        if ( st != wxFONTSTYLE_NORMAL &&
-             st != wxFONTSTYLE_SLANT &&
-             st != wxFONTSTYLE_ITALIC )
+        // FIXME: Stupid solution.
+        if ( st != static_cast<int>(wxFontStyle::Normal) &&
+             st != static_cast<int>(wxFontStyle::Slant) &&
+             st != static_cast<int>(wxFontStyle::Italic) )
              st = wxFONTWEIGHT_NORMAL;
         font.SetStyle( static_cast<wxFontStyle>(st) );
     }

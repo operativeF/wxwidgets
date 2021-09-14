@@ -510,7 +510,7 @@ private:
     wxColour            m_colText;
     wxColour            m_colBack;
     int                 m_fontSize{12};
-    wxFontStyle         m_fontStyle{wxFONTSTYLE_NORMAL};
+    wxFontStyle         m_fontStyle{wxFontStyle::Normal};
     wxFontWeight        m_fontWeight{wxFONTWEIGHT_NORMAL};
     wxFontFamily        m_fontFamily{wxFONTFAMILY_DEFAULT};
     wxTextAttrUnderlineType m_fontUnderlineType{wxTEXT_ATTR_UNDERLINE_NONE};

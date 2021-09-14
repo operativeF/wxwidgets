@@ -44,7 +44,7 @@ extern const char *wxDumpFont(const wxFont *font)
     s.Printf(wxS("%s-%d-%s-%.2f-%d"),
              font->GetFaceName(),
              font->GetNumericWeight(),
-             font->GetStyle() == wxFONTSTYLE_NORMAL ? "regular" : "italic",
+             font->GetStyle() == wxFontStyle::Normal ? "regular" : "italic",
              font->GetFractionalPointSize(),
              font->GetEncoding());
 
@@ -67,9 +67,9 @@ wxENUM_MEMBER( wxFONTFAMILY_TELETYPE )
 wxEND_ENUM( wxFontFamily )
 
 wxBEGIN_ENUM( wxFontStyle )
-wxENUM_MEMBER( wxFONTSTYLE_NORMAL )
-wxENUM_MEMBER( wxFONTSTYLE_ITALIC )
-wxENUM_MEMBER( wxFONTSTYLE_SLANT )
+wxENUM_MEMBER( wxFontStyle::Normal )
+wxENUM_MEMBER( wxFontStyle::Italic )
+wxENUM_MEMBER( wxFontStyle::Slant )
 wxEND_ENUM( wxFontStyle )
 
 wxBEGIN_ENUM( wxFontWeight )
@@ -94,7 +94,7 @@ wxPROPERTY( Size,int, SetPointSize, GetPointSize, 12, 0 /*flags*/, \
            wxT("Helpstring"), wxT("group"))
 wxPROPERTY( Family, wxFontFamily , SetFamily, GetFamily, (wxFontFamily)wxDEFAULT, \
            0 /*flags*/, wxT("Helpstring"), wxT("group")) // wxFontFamily
-wxPROPERTY( Style, wxFontStyle, SetStyle, GetStyle, wxFONTSTYLE_NORMAL, 0 /*flags*/, \
+wxPROPERTY( Style, wxFontStyle, SetStyle, GetStyle, wxFontStyle::Normal, 0 /*flags*/, \
            wxT("Helpstring"), wxT("group")) // wxFontStyle
 wxPROPERTY( Weight, wxFontWeight, SetWeight, GetWeight, wxFONTWEIGHT_NORMAL, 0 /*flags*/, \
            wxT("Helpstring"), wxT("group")) // wxFontWeight
@@ -472,9 +472,9 @@ wxString wxFontBase::GetStyleString() const
 
     switch ( GetStyle() )
     {
-        case wxFONTSTYLE_NORMAL:   return "wxFONTSTYLE_NORMAL";
-        case wxFONTSTYLE_SLANT:    return "wxFONTSTYLE_SLANT";
-        case wxFONTSTYLE_ITALIC:   return "wxFONTSTYLE_ITALIC";
+        case wxFontStyle::Normal:   return "wxFontStyle::Normal";
+        case wxFontStyle::Slant:    return "wxFontStyle::Slant";
+        case wxFontStyle::Italic:   return "wxFontStyle::Italic";
         default:                   return "wxFONTSTYLE_DEFAULT";
     }
 }
@@ -525,10 +525,7 @@ void InitInfoWithLegacyParams(wxFontInfo& info,
                               const wxString& face,
                               wxFontEncoding encoding)
 {
-    // FIXME: Superfluous now.
-    if ( static_cast<int>(style) == wxFONTSTYLE_NORMAL )
-        style = wxFONTSTYLE_NORMAL;
-
+    // FIXME: Superfluous now
     if ( static_cast<int>(weight) == wxFONTWEIGHT_NORMAL)
         weight = wxFONTWEIGHT_NORMAL;
 
@@ -553,7 +550,7 @@ wxFontInfo wxFontBase::InfoFromLegacyParams(int pointSize,
                                             wxFontEncoding encoding)
 {
     // Old code specifies wxDEFAULT instead of -1 or wxNORMAL instead of the
-    // new type-safe wxFONTSTYLE_NORMAL or wxFONTWEIGHT_NORMAL, continue
+    // new type-safe wxFontStyle::Normal or wxFONTWEIGHT_NORMAL, continue
     // handling this for compatibility.
     // FIXME: Deprecate and replace the Legacy Font functions.
     // static constexpr int wxDEFAULT = 70; // Value taken from old gui macros.
@@ -624,7 +621,7 @@ wxFont wxFont::Bold() const
 wxFont wxFont::GetBaseFont() const
 {
     wxFont font(*this);
-    font.SetStyle(wxFONTSTYLE_NORMAL);
+    font.SetStyle(wxFontStyle::Normal);
     font.SetWeight(wxFONTWEIGHT_NORMAL );
     font.SetUnderlined(false);
     font.SetStrikethrough(false);
@@ -633,7 +630,7 @@ wxFont wxFont::GetBaseFont() const
 
 wxFont& wxFont::MakeItalic()
 {
-    SetStyle(wxFONTSTYLE_ITALIC);
+    SetStyle(wxFontStyle::Italic);
     return *this;
 }
 
@@ -816,7 +813,7 @@ void wxNativeFontInfo::Init()
 {
     pointSize = 0.0f;
     family = wxFONTFAMILY_DEFAULT;
-    style = wxFONTSTYLE_NORMAL;
+    style = wxFontStyle::Normal;
     weight = wxFONTWEIGHT_NORMAL;
     underlined = false;
     strikethrough = false;
@@ -982,12 +979,12 @@ wxString wxNativeFontInfo::ToUserString() const
             wxFAIL_MSG( wxT("unknown font style") );
             [[fallthrough]];
 
-        case wxFONTSTYLE_NORMAL:
+        case wxFontStyle::Normal:
             break;
 
             // we don't distinguish between the two for now anyhow...
-        case wxFONTSTYLE_ITALIC:
-        case wxFONTSTYLE_SLANT:
+        case wxFontStyle::Italic:
+        case wxFontStyle::Slant:
             desc << _(" italic");
             break;
     }
@@ -1216,7 +1213,7 @@ bool wxNativeFontInfo::FromUserString(const wxString& s)
         }
         else if ( token == wxT("italic") || token == _("italic") )
         {
-            SetStyle(wxFONTSTYLE_ITALIC);
+            SetStyle(wxFontStyle::Italic);
         }
         else if ( token.ToULong(&size ) )
         {

@@ -576,7 +576,7 @@ const wxFont* wxStockGDI::GetFont(Item item)
         {
         case FONT_ITALIC:
             font = new wxFont(GetFont(FONT_NORMAL)->GetPointSize(),
-                              wxFONTFAMILY_ROMAN, wxFONTSTYLE_ITALIC, wxFONTWEIGHT_NORMAL);
+                              wxFONTFAMILY_ROMAN, wxFontStyle::Italic, wxFONTWEIGHT_NORMAL);
             break;
         case FONT_NORMAL:
             font = new wxFont(wxSystemSettings::GetFont(wxSYS_DEFAULT_GUI_FONT));
@@ -594,11 +594,11 @@ const wxFont* wxStockGDI::GetFont(Item item)
 #else
                     - 2,
 #endif
-                    wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL);
+                    wxFONTFAMILY_SWISS, wxFontStyle::Normal, wxFONTWEIGHT_NORMAL);
             break;
         case FONT_SWISS:
             font = new wxFont(GetFont(FONT_NORMAL)->GetPointSize(),
-                              wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL);
+                              wxFONTFAMILY_SWISS, wxFontStyle::Normal, wxFONTWEIGHT_NORMAL);
             break;
         default:
             wxFAIL;
@@ -754,16 +754,16 @@ wxFont *wxFontList::FindOrCreateFont(int pointSize,
         family = wxFONTFAMILY_SWISS;
 #endif // !__WXOSX__
 
-    // In wxMSW, creating a font with wxFONTSTYLE_SLANT creates the same font
-    // as wxFONTSTYLE_ITALIC and its GetStyle() returns the latter, so we must
+    // In wxMSW, creating a font with wxFontStyle::Slant creates the same font
+    // as wxFontStyle::Italic and its GetStyle() returns the latter, so we must
     // account for it here. Notice that wxOSX also uses the same native font
     // for these styles, but wxFont::GetStyle() in it still returns different
     // values depending on how the font was created, so there is inconsistency
     // between ports here which it would be nice to fix in one way or another
     // (wxGTK supports both as separate styles, so it doesn't suffer from it).
  #ifdef __WXMSW__
-    if ( style == wxFONTSTYLE_SLANT )
-        style = wxFONTSTYLE_ITALIC;
+    if ( style == wxFontStyle::Slant )
+        style = wxFontStyle::Italic;
  #endif // __WXMSW__
 
     wxFont *font;

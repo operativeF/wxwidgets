@@ -993,7 +993,7 @@ TEST_CASE_FIXTURE(TextCtrlTest, "Text control test")
             // with SetDefaultStyle().
             wxFont fontIn(14,
                 wxFONTFAMILY_DEFAULT,
-                wxFONTSTYLE_NORMAL,
+                wxFontStyle::Normal,
                 wxFONTWEIGHT_NORMAL);
             wxTextAttr attrIn;
             attrIn.SetFont(fontIn);

@@ -1139,7 +1139,7 @@ wxGDIPlusFontData::wxGDIPlusFontData( wxGraphicsRenderer* renderer,
     : wxGraphicsObjectRefData( renderer )
 {
     int style = FontStyleRegular;
-    if ( font.GetStyle() == wxFONTSTYLE_ITALIC )
+    if ( font.GetStyle() == wxFontStyle::Italic )
         style |= FontStyleItalic;
     if ( font.GetUnderlined() )
         style |= FontStyleUnderline;

@@ -144,7 +144,7 @@ TEST_CASE("wxGC::GetTextExtent")
     REQUIRE(renderer);
     std::unique_ptr<wxGraphicsContext> context = renderer->CreateMeasuringContext();
     REQUIRE(context);
-    wxFont font(12, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL);
+    wxFont font(12, wxFONTFAMILY_DEFAULT, wxFontStyle::Normal, wxFONTWEIGHT_NORMAL);
     REQUIRE(font.IsOk());
     context->SetFont(font, *wxBLACK);
     double descent, externalLeading = 0.0;

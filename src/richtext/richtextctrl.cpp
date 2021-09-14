@@ -4313,7 +4313,7 @@ bool wxRichTextCtrl::IsSelectionItalics()
     {
         wxRichTextAttr attr;
         attr.SetFlags(wxTEXT_ATTR_FONT_ITALIC);
-        attr.SetFontStyle(wxFONTSTYLE_ITALIC);
+        attr.SetFontStyle(wxFontStyle::Italic);
 
         return HasCharacterAttributes(GetSelectionRange(), attr);
     }
@@ -4328,7 +4328,7 @@ bool wxRichTextCtrl::IsSelectionItalics()
         {
             if (IsDefaultStyleShowing())
                 wxRichTextApplyStyle(attr, GetDefaultStyleEx());
-            return attr.GetFontStyle() == wxFONTSTYLE_ITALIC;
+            return attr.GetFontStyle() == wxFontStyle::Italic;
         }
     }
 
@@ -4417,7 +4417,7 @@ bool wxRichTextCtrl::ApplyItalicToSelection()
 {
     wxRichTextAttr attr;
     attr.SetFlags(wxTEXT_ATTR_FONT_ITALIC);
-    attr.SetFontStyle(IsSelectionItalics() ? wxFONTSTYLE_NORMAL : wxFONTSTYLE_ITALIC);
+    attr.SetFontStyle(IsSelectionItalics() ? wxFontStyle::Normal : wxFontStyle::Italic);
 
     if (HasSelection())
         return SetStyleEx(GetSelectionRange(), attr, wxRICHTEXT_SETSTYLE_WITH_UNDO|wxRICHTEXT_SETSTYLE_OPTIMIZE|wxRICHTEXT_SETSTYLE_CHARACTERS_ONLY);

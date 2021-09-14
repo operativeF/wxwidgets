@@ -435,7 +435,7 @@ wxSize wxNativeFontInfo::GetPixelSize() const
 
 wxFontStyle wxNativeFontInfo::GetStyle() const
 {
-    return lf.lfItalic ? wxFONTSTYLE_ITALIC : wxFONTSTYLE_NORMAL;
+    return lf.lfItalic ? wxFontStyle::Italic : wxFontStyle::Normal;
 }
 
 int wxNativeFontInfo::GetNumericWeight() const
@@ -546,12 +546,12 @@ void wxNativeFontInfo::SetStyle(wxFontStyle style)
             wxFAIL_MSG( "unknown font style" );
             [[fallthrough]];
 
-        case wxFONTSTYLE_NORMAL:
+        case wxFontStyle::Normal:
             lf.lfItalic = FALSE;
             break;
 
-        case wxFONTSTYLE_ITALIC:
-        case wxFONTSTYLE_SLANT:
+        case wxFontStyle::Italic:
+        case wxFontStyle::Slant:
             lf.lfItalic = TRUE;
             break;
     }
@@ -1004,7 +1004,7 @@ wxFontFamily wxFont::DoGetFamily() const
 
 wxFontStyle wxFont::GetStyle() const
 {
-    wxCHECK_MSG( IsOk(), wxFONTSTYLE_MAX, wxT("invalid font") );
+    wxCHECK_MSG( IsOk(), wxFontStyle::Max, wxT("invalid font") );
 
     return M_FONTDATA->GetStyle();
 }

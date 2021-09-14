@@ -396,6 +396,7 @@ public:
                     const std::vector<std::string>& labels,
                     const std::vector<int>& values = {},
                     int value = 0 );
+
 #else
     wxEnumProperty( const wxString& label = wxPG_LABEL,
                     const wxString& name = wxPG_LABEL,

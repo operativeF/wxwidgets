@@ -2346,15 +2346,15 @@ wxFont wxXmlResourceHandlerImpl::GetFont(const wxString& param, wxWindow* parent
         pointSize = GetFloat(wxT("size"), -1.0f);
 
     // style
-    wxFontStyle istyle = wxFONTSTYLE_NORMAL;
+    wxFontStyle istyle = wxFontStyle::Normal;
     bool hasStyle = HasParam(wxT("style"));
     if (hasStyle)
     {
         wxString style = GetParamValue(wxT("style"));
         if (style == wxT("italic"))
-            istyle = wxFONTSTYLE_ITALIC;
+            istyle = wxFontStyle::Italic;
         else if (style == wxT("slant"))
-            istyle = wxFONTSTYLE_SLANT;
+            istyle = wxFontStyle::Slant;
         else if (style != wxT("normal"))
         {
             ReportParamError

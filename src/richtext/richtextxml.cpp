@@ -2059,7 +2059,7 @@ wxString wxRichTextXMLHelper::AddAttributes(const wxRichTextAttr& attr, bool isP
         AddAttribute(str, wxT("fontfamily"), attr.GetFontFamily());
 
     if (attr.HasFontItalic())
-        AddAttribute(str, wxT("fontstyle"), attr.GetFontStyle());
+        AddAttribute(str, wxT("fontstyle"), static_cast<int>(attr.GetFontStyle())); // FIXME: Stupid solution.
 
     if (attr.HasFontWeight())
         AddAttribute(str, wxT("fontweight"), attr.GetFontWeight());
@@ -2552,7 +2552,7 @@ bool wxRichTextXMLHelper::AddAttributes(wxXmlNode* node, wxRichTextAttr& attr, b
     if (attr.HasFontFamily())
         node->AddAttribute(wxT("fontfamily"), MakeString(attr.GetFontFamily()));
     if (attr.HasFontItalic())
-        node->AddAttribute(wxT("fontstyle"), MakeString(attr.GetFontStyle()));
+        node->AddAttribute(wxT("fontstyle"), MakeString(static_cast<int>(attr.GetFontStyle()))); // FIXME: Stupid solution.
     if (attr.HasFontWeight())
         node->AddAttribute(wxT("fontweight"), MakeString(attr.GetFontWeight()));
     if (attr.HasFontUnderlined())

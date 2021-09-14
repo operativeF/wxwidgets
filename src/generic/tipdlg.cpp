@@ -215,7 +215,7 @@ wxTipDialog::wxTipDialog(wxWindow *parent,
                             wxDEFAULT_CONTROL_BORDER
                             );
 #if defined(__WXMSW__)
-    m_text->SetFont(wxFont(12, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL));
+    m_text->SetFont(wxFont(12, wxFONTFAMILY_SWISS, wxFontStyle::Normal, wxFONTWEIGHT_NORMAL));
 #endif
 
     wxIcon icon = wxArtProvider::GetIcon(wxART_TIP, wxART_CMN_DIALOG);

@@ -103,7 +103,7 @@ wxSize wxTextMeasure::DoGetTextExtent(std::string_view string,
     // calling GetTextExtentPoint32() itself, so avoid its overhead unless it's
     // really, really necessary).
     const wxFont font = GetFont();
-    if ( font.IsOk() && font.GetStyle() != wxFONTSTYLE_NORMAL && len > 0 )
+    if ( font.IsOk() && font.GetStyle() != wxFontStyle::Normal && len > 0 )
     {
         ABC widthABC;
 

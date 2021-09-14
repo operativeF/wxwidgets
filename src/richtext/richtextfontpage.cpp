@@ -407,9 +407,9 @@ bool wxRichTextFontPage::TransferDataFromWindow()
     {
         wxFontStyle style;
         if (m_styleCtrl->GetSelection() == 2)
-            style = wxFONTSTYLE_ITALIC;
+            style = wxFontStyle::Italic;
         else
-            style = wxFONTSTYLE_NORMAL;
+            style = wxFontStyle::Normal;
 
         attr->SetFontStyle(style);
     }
@@ -615,7 +615,7 @@ bool wxRichTextFontPage::TransferDataToWindow()
 
     if (attr->HasFontItalic())
     {
-        if (attr->GetFontStyle() == wxFONTSTYLE_ITALIC)
+        if (attr->GetFontStyle() == wxFontStyle::Italic)
             m_styleCtrl->SetSelection(2);
         else
             m_styleCtrl->SetSelection(1);
@@ -819,9 +819,9 @@ void wxRichTextFontPage::UpdatePreview()
     {
         wxFontStyle style;
         if (m_styleCtrl->GetSelection() == 2)
-            style = wxFONTSTYLE_ITALIC;
+            style = wxFontStyle::Italic;
         else
-            style = wxFONTSTYLE_NORMAL;
+            style = wxFontStyle::Normal;
 
         attr.SetFontStyle(style);
     }

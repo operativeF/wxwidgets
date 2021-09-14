@@ -80,7 +80,7 @@ wxDumpPreviewDlg::wxDumpPreviewDlg(wxWindow *parent,
 
     // use fixed-width font
     m_text->SetFont(wxFont(12, wxFONTFAMILY_TELETYPE,
-                           wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL));
+                           wxFontStyle::Normal, wxFONTWEIGHT_NORMAL));
 
     wxButton *btnClose = new wxButton(this, wxID_CANCEL, _("Close"));
 

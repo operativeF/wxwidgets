@@ -203,7 +203,7 @@ class wxFontMgrFontRefData : public wxGDIRefData
 public:
     wxFontMgrFontRefData(int size = wxDEFAULT,
                   wxFontFamily family = wxFONTFAMILY_DEFAULT,
-                  wxFontStyle style = wxFONTSTYLE_NORMAL,
+                  wxFontStyle style = wxFontStyle::Normal,
                   int weight = wxFONTWEIGHT_NORMAL,
                   bool underlined = false,
                   const wxString& faceName = wxEmptyString,

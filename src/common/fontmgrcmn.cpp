@@ -116,11 +116,11 @@ wxFontBundleBase::GetFaceForFont(const wxFontMgrFontRefData& font) const
     if ( font.GetNumericWeight() >= wxFONTWEIGHT_BOLD )
         type |= FaceType_Bold;
 
-    // FIXME -- this should read "if ( font->GetStyle() == wxFONTSTYLE_ITALIC )",
+    // FIXME -- this should read "if ( font->GetStyle() == wxFontStyle::Italic )",
     // but since DFB doesn't support slant, we try to display it with italic
     // face (better than nothing...)
-    if ( font.GetStyle() == wxFONTSTYLE_ITALIC
-            || font.GetStyle() == wxFONTSTYLE_SLANT )
+    if ( font.GetStyle() == wxFontStyle::Italic
+            || font.GetStyle() == wxFontStyle::Slant )
     {
         if ( HasFace((FaceType)(type | FaceType_Italic)) )
             type |= FaceType_Italic;

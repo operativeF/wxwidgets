@@ -1141,7 +1141,7 @@ wxCairoFontData::wxCairoFontData( wxGraphicsRenderer* renderer, const wxFont &fo
     InitFontComponents
     (
         font.GetFaceName(),
-        font.GetStyle() == wxFONTSTYLE_ITALIC ? CAIRO_FONT_SLANT_ITALIC
+        font.GetStyle() == wxFontStyle::Italic ? CAIRO_FONT_SLANT_ITALIC
                                               : CAIRO_FONT_SLANT_NORMAL,
         font.GetWeight() == wxFONTWEIGHT_BOLD ? CAIRO_FONT_WEIGHT_BOLD
                                               : CAIRO_FONT_WEIGHT_NORMAL

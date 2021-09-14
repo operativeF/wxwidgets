@@ -34,7 +34,7 @@ static const wxFont *GetTestFonts(unsigned& numFonts)
         *wxSMALL_FONT,
         *wxITALIC_FONT,
         *wxSWISS_FONT,
-        wxFont(5, wxFONTFAMILY_TELETYPE, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL)
+        wxFont(5, wxFONTFAMILY_TELETYPE, wxFontStyle::Normal, wxFONTWEIGHT_NORMAL)
     };
 
     numFonts = WXSIZEOF(testfonts);
@@ -75,7 +75,7 @@ TEST_CASE("wxFont::Construct")
     // overloaded wxFont ctors.
 
     CHECK( wxFont(10, wxFONTFAMILY_DEFAULT,
-                      wxFONTSTYLE_NORMAL,
+                      wxFontStyle::Normal,
                       wxFONTWEIGHT_NORMAL).IsOk() );
 }
 
@@ -106,7 +106,7 @@ TEST_CASE("wxFont::Size")
         // any compatibility hacks.
         const wxFont font(size.specified,
                           wxFONTFAMILY_DEFAULT,
-                          wxFONTSTYLE_NORMAL,
+                          wxFontStyle::Normal,
                           wxFONTWEIGHT_NORMAL);
 
         int expected = size.expected;
@@ -231,14 +231,14 @@ TEST_CASE("wxFont::GetSet")
 
         // test Get/SetStyle()
 
-        test.SetStyle(wxFONTSTYLE_SLANT);
+        test.SetStyle(wxFontStyle::Slant);
         CHECK( test.IsOk() );
 #ifdef __WXMSW__
-        // on wxMSW wxFONTSTYLE_SLANT==wxFONTSTYLE_ITALIC, so accept the latter
+        // on wxMSW wxFontStyle::Slant==wxFontStyle::Italic, so accept the latter
         // as a valid value too.
-        if ( test.GetStyle() != wxFONTSTYLE_ITALIC )
+        if ( test.GetStyle() != wxFontStyle::Italic )
 #endif
-        CHECK( wxFONTSTYLE_SLANT == test.GetStyle() );
+        CHECK( wxFontStyle::Slant == test.GetStyle() );
 
         // test Get/SetUnderlined()
 
@@ -251,7 +251,7 @@ TEST_CASE("wxFont::GetSet")
         CHECK( !fontBase.GetUnderlined() );
         CHECK( !fontBase.GetStrikethrough() );
         CHECK( wxFONTWEIGHT_NORMAL == fontBase.GetWeight() );
-        CHECK( wxFONTSTYLE_NORMAL == fontBase.GetStyle() );
+        CHECK( wxFontStyle::Normal == fontBase.GetStyle() );
 
         // test Get/SetStrikethrough()
 

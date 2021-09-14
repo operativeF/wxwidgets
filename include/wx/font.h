@@ -50,12 +50,12 @@ enum wxFontFamily
 };
 
 // font styles
-enum wxFontStyle
+enum class wxFontStyle
 {
-    wxFONTSTYLE_NORMAL,
-    wxFONTSTYLE_ITALIC,
-    wxFONTSTYLE_SLANT,
-    wxFONTSTYLE_MAX
+    Normal,
+    Italic,
+    Slant,
+    Max
 };
 
 // font weights
@@ -191,10 +191,10 @@ public:
         { SetFlag(wxFONTFLAG_SLANT, slant); return *this; }
     wxFontInfo& Style(wxFontStyle style)
     {
-        if ( style == wxFONTSTYLE_ITALIC )
+        if ( style == wxFontStyle::Italic )
             return Italic();
 
-        if ( style == wxFONTSTYLE_SLANT )
+        if ( style == wxFontStyle::Slant )
             return Slant();
 
         return *this;
@@ -240,10 +240,10 @@ public:
     wxFontStyle GetStyle() const
     {
         return m_flags & wxFONTFLAG_ITALIC
-                        ? wxFONTSTYLE_ITALIC
+                        ? wxFontStyle::Italic
                         : m_flags & wxFONTFLAG_SLANT
-                            ? wxFONTSTYLE_SLANT
-                            : wxFONTSTYLE_NORMAL;
+                            ? wxFontStyle::Slant
+                            : wxFontStyle::Normal;
     }
 
     int GetNumericWeight() const
@@ -499,10 +499,10 @@ protected:
     static wxFontStyle GetStyleFromFlags(int flags)
     {
         return flags & wxFONTFLAG_ITALIC
-                        ? wxFONTSTYLE_ITALIC
+                        ? wxFontStyle::Italic
                         : flags & wxFONTFLAG_SLANT
-                            ? wxFONTSTYLE_SLANT
-                            : wxFONTSTYLE_NORMAL;
+                            ? wxFontStyle::Slant
+                            : wxFontStyle::Normal;
     }
 
     static wxFontWeight GetWeightFromFlags(int flags)

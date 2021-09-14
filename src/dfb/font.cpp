@@ -104,7 +104,7 @@ wxFontFamily wxFont::DoGetFamily() const
 
 wxFontStyle wxFont::GetStyle() const
 {
-    wxCHECK_MSG( IsOk(), wxFONTSTYLE_MAX, wxT("invalid font") );
+    wxCHECK_MSG( IsOk(), wxFontStyle::Max, wxT("invalid font") );
 
     return M_FONTDATA->GetStyle();
 }

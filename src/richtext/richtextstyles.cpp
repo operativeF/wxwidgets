@@ -848,7 +848,7 @@ std::string wxRichTextStyleListBox::CreateHTML(wxRichTextStyleDefinition* def) c
 
     if (attr.GetFontWeight() == wxFONTWEIGHT_BOLD)
         hasBold = true;
-    if (attr.GetFontStyle() == wxFONTSTYLE_ITALIC)
+    if (attr.GetFontStyle() == wxFontStyle::Italic)
         hasItalic = true;
     if (attr.GetFontUnderlined())
         hasUnderline = true;

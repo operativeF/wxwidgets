@@ -8376,7 +8376,7 @@ bool wxRichTextBuffer::BeginBold()
 bool wxRichTextBuffer::BeginItalic()
 {
     wxRichTextAttr attr;
-    attr.SetFontStyle(wxFONTSTYLE_ITALIC);
+    attr.SetFontStyle(wxFontStyle::Italic);
 
     return BeginStyle(attr);
 }
@@ -9501,7 +9501,7 @@ wxRichTextFieldTypeStandard::wxRichTextFieldTypeStandard(const wxString& name, c
 void wxRichTextFieldTypeStandard::Init()
 {
     m_displayStyle = wxRICHTEXT_FIELD_STYLE_RECTANGLE;
-    m_font = wxFont(6, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL);
+    m_font = wxFont(6, wxFONTFAMILY_SWISS, wxFontStyle::Normal, wxFONTWEIGHT_NORMAL);
     m_textColour = *wxWHITE;
     m_borderColour = *wxBLACK;
     m_backgroundColour = *wxBLACK;
