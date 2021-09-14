@@ -438,14 +438,14 @@ bool wxJPEGHandler::SaveFile( wxImage *image, wxOutputStream& stream, bool verbo
     // set the resolution fields in the output file
     int resX, resY;
     wxImageResolution res = GetResolutionFromOptions(*image, &resX, &resY);
-    if ( res != wxIMAGE_RESOLUTION_NONE )
+    if ( res != wxImageResolution::None )
     {
         cinfo.X_density = resX;
         cinfo.Y_density = resY;
 
-        // it so happens that wxIMAGE_RESOLUTION_INCHES/CM values are the same
+        // it so happens that wxImageResolution::Inches/CM values are the same
         // ones as used by libjpeg, so we can assign them directly
-        cinfo.density_unit = res;
+        cinfo.density_unit = static_cast<int>(res);
     }
 
     jpeg_start_compress(&cinfo, TRUE);

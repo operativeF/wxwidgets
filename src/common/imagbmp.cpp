@@ -202,18 +202,18 @@ bool wxBMPHandler::SaveDib(wxImage *image,
             wxFAIL_MSG( wxT("unexpected image resolution units") );
             [[fallthrough]];
 
-        case wxIMAGE_RESOLUTION_NONE:
+        case wxImageResolution::None:
             hres =
             vres = 72;
             [[fallthrough]];// fall through to convert it to correct units
 
-        case wxIMAGE_RESOLUTION_INCHES:
+        case wxImageResolution::Inches:
             // convert resolution in inches to resolution in centimeters
             hres = (int)(10*mm2inches*hres);
             vres = (int)(10*mm2inches*vres);
             [[fallthrough]];// fall through to convert it to resolution in meters
 
-        case wxIMAGE_RESOLUTION_CM:
+        case wxImageResolution::Centimeters:
             // convert resolution in centimeters to resolution in meters
             hres *= 100;
             vres *= 100;
@@ -1202,7 +1202,8 @@ bool wxBMPHandler::LoadDib(wxImage *image, wxInputStream& stream,
     // the resolution in the bitmap header is in meters, convert to centimeters
     if ( res.IsValid() )
     {
-        image->SetOption(wxIMAGE_OPTION_RESOLUTIONUNIT, wxIMAGE_RESOLUTION_CM);
+        // FIXME: Stupid solution.
+        image->SetOption(wxIMAGE_OPTION_RESOLUTIONUNIT, static_cast<int>(wxImageResolution::Centimeters));
         image->SetOption(wxIMAGE_OPTION_RESOLUTIONX, res.GetX());
         image->SetOption(wxIMAGE_OPTION_RESOLUTIONY, res.GetY());
     }

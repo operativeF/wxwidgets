@@ -3515,7 +3515,7 @@ bool wxImageHandler::CallDoCanRead(wxInputStream& stream)
 wxImageResolution
 wxImageHandler::GetResolutionFromOptions(const wxImage& image, int *x, int *y)
 {
-    wxCHECK_MSG( x && y, wxIMAGE_RESOLUTION_NONE, wxT("NULL pointer") );
+    wxCHECK_MSG( x && y, wxImageResolution::None, wxT("NULL pointer") );
 
     if ( image.HasOption(wxIMAGE_OPTION_RESOLUTIONX) &&
          image.HasOption(wxIMAGE_OPTION_RESOLUTIONY) )
@@ -3533,7 +3533,7 @@ wxImageHandler::GetResolutionFromOptions(const wxImage& image, int *x, int *y)
         *x =
         *y = 0;
 
-        return wxIMAGE_RESOLUTION_NONE;
+        return wxImageResolution::None;
     }
 
     // get the resolution unit too
@@ -3541,7 +3541,8 @@ wxImageHandler::GetResolutionFromOptions(const wxImage& image, int *x, int *y)
     if ( !resUnit )
     {
         // this is the default
-        resUnit = wxIMAGE_RESOLUTION_INCHES;
+        // FIXME: Stupid conversion.
+        resUnit = static_cast<int>(wxImageResolution::Inches);
     }
 
     return (wxImageResolution)resUnit;

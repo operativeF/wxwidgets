@@ -508,7 +508,7 @@ bool wxTIFFHandler::LoadFile( wxImage *image, wxInputStream& stream, bool verbos
     }
 
     // Set the resolution unit.
-    wxImageResolution resUnit = wxIMAGE_RESOLUTION_NONE;
+    wxImageResolution resUnit = wxImageResolution::None;
     uint16 tiffRes;
     if ( TIFFGetFieldDefaulted(tif, TIFFTAG_RESOLUTIONUNIT, &tiffRes) )
     {
@@ -520,20 +520,21 @@ bool wxTIFFHandler::LoadFile( wxImage *image, wxInputStream& stream, bool verbos
                 [[fallthrough]];
 
             case RESUNIT_NONE:
-                resUnit = wxIMAGE_RESOLUTION_NONE;
+                resUnit = wxImageResolution::None;
                 break;
 
             case RESUNIT_INCH:
-                resUnit = wxIMAGE_RESOLUTION_INCHES;
+                resUnit = wxImageResolution::Inches;
                 break;
 
             case RESUNIT_CENTIMETER:
-                resUnit = wxIMAGE_RESOLUTION_CM;
+                resUnit = wxImageResolution::Centimeters;
                 break;
         }
     }
 
-    image->SetOption(wxIMAGE_OPTION_RESOLUTIONUNIT, resUnit);
+    // TODO: Add formatting for wxImageResolution enum.
+    image->SetOption(wxIMAGE_OPTION_RESOLUTIONUNIT, static_cast<int>(resUnit));
 
     /*
     Set the image resolution if it's available. Resolution tag is not
@@ -616,15 +617,15 @@ bool wxTIFFHandler::SaveFile( wxImage *image, wxOutputStream& stream, bool verbo
             wxFAIL_MSG( wxT("unknown image resolution units") );
             [[fallthrough]];
 
-        case wxIMAGE_RESOLUTION_NONE:
+        case wxImageResolution::None:
             tiffRes = RESUNIT_NONE;
             break;
 
-        case wxIMAGE_RESOLUTION_INCHES:
+        case wxImageResolution::Inches:
             tiffRes = RESUNIT_INCH;
             break;
 
-        case wxIMAGE_RESOLUTION_CM:
+        case wxImageResolution::Centimeters:
             tiffRes = RESUNIT_CENTIMETER;
             break;
     }

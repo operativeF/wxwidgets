@@ -38,16 +38,16 @@ inline constexpr char wxIMAGE_OPTION_ORIGINAL_HEIGHT[] = "OriginalHeight";
 // constants used with wxIMAGE_OPTION_RESOLUTIONUNIT
 //
 // NB: don't change these values, they correspond to libjpeg constants
-enum wxImageResolution
+enum class wxImageResolution
 {
     // Resolution not specified
-    wxIMAGE_RESOLUTION_NONE = 0,
+    None,
 
     // Resolution specified in inches
-    wxIMAGE_RESOLUTION_INCHES = 1,
+    Inches,
 
     // Resolution specified in centimeters
-    wxIMAGE_RESOLUTION_CM = 2
+    Centimeters
 };
 
 // Constants for wxImage::Scale() for determining the level of quality

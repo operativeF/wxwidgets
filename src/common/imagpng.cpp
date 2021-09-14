@@ -353,7 +353,7 @@ wxPNGImageData::DoLoadPNGFile(wxImage* image, wxPNGInfoStruct& wxinfo)
     if (png_get_pHYs(png_ptr, info_ptr, &resX, &resY, &unitType)
         == PNG_INFO_pHYs)
     {
-        wxImageResolution res = wxIMAGE_RESOLUTION_CM;
+        wxImageResolution res = wxImageResolution::Centimeters;
 
         switch (unitType)
         {
@@ -365,7 +365,7 @@ wxPNGImageData::DoLoadPNGFile(wxImage* image, wxPNGInfoStruct& wxinfo)
                 image->SetOption(wxIMAGE_OPTION_RESOLUTIONX, resX);
                 image->SetOption(wxIMAGE_OPTION_RESOLUTIONY, resY);
 
-                res = wxIMAGE_RESOLUTION_NONE;
+                res = wxImageResolution::None;
                 break;
 
             case PNG_RESOLUTION_METER:
@@ -383,7 +383,8 @@ wxPNGImageData::DoLoadPNGFile(wxImage* image, wxPNGInfoStruct& wxinfo)
                 break;
         }
 
-        image->SetOption(wxIMAGE_OPTION_RESOLUTIONUNIT, res);
+        // FIXME: Stupid solution.
+        image->SetOption(wxIMAGE_OPTION_RESOLUTIONUNIT, static_cast<int>(res));
     }
 
 
@@ -689,7 +690,7 @@ bool wxPNGHandler::SaveFile( wxImage *image, wxOutputStream& stream, bool verbos
     int resX, resY;
     switch ( GetResolutionFromOptions(*image, &resX, &resY) )
     {
-        case wxIMAGE_RESOLUTION_INCHES:
+        case wxImageResolution::Inches:
             {
                 static constexpr double INCHES_IN_METER = 10000.0 / 254;
                 resX = int(resX * INCHES_IN_METER);
@@ -697,12 +698,12 @@ bool wxPNGHandler::SaveFile( wxImage *image, wxOutputStream& stream, bool verbos
             }
             break;
 
-        case wxIMAGE_RESOLUTION_CM:
+        case wxImageResolution::Centimeters:
             resX *= 100;
             resY *= 100;
             break;
 
-        case wxIMAGE_RESOLUTION_NONE:
+        case wxImageResolution::None:
             break;
 
         default:
