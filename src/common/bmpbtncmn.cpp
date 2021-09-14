@@ -101,7 +101,7 @@ GetCloseButtonBitmap(wxWindow *win,
     wxMemoryDC dc(bmp);
     dc.SetBackground(colBg);
     dc.Clear();
-    wxRendererNative::Get().DrawTitleBarBitmap(win, dc, sz, wxTITLEBAR_BUTTON_CLOSE, flags);
+    wxRendererNative::Get().DrawTitleBarBitmap(win, dc, sz, wxTitleBarButton::Close, flags);
     return bmp;
 }
 

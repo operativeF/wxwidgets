@@ -517,23 +517,23 @@ wxRendererMSW::DrawTitleBarBitmap(wxWindow *win,
     UINT kind;
     switch ( button )
     {
-        case wxTITLEBAR_BUTTON_CLOSE:
+        case wxTitleBarButton::Close:
             kind = DFCS_CAPTIONCLOSE;
             break;
 
-        case wxTITLEBAR_BUTTON_MAXIMIZE:
+        case wxTitleBarButton::Maximize:
             kind = DFCS_CAPTIONMAX;
             break;
 
-        case wxTITLEBAR_BUTTON_ICONIZE:
+        case wxTitleBarButton::Iconize:
             kind = DFCS_CAPTIONMIN;
             break;
 
-        case wxTITLEBAR_BUTTON_RESTORE:
+        case wxTitleBarButton::Restore:
             kind = DFCS_CAPTIONRESTORE;
             break;
 
-        case wxTITLEBAR_BUTTON_HELP:
+        case wxTitleBarButton::Help:
             kind = DFCS_CAPTIONHELP;
             break;
 
@@ -862,23 +862,23 @@ wxRendererXP::DrawTitleBarBitmap(wxWindow *win,
     int part;
     switch ( button )
     {
-        case wxTITLEBAR_BUTTON_CLOSE:
+        case wxTitleBarButton::Close:
             part = WP_CLOSEBUTTON;
             break;
 
-        case wxTITLEBAR_BUTTON_MAXIMIZE:
+        case wxTitleBarButton::Maximize:
             part = WP_MAXBUTTON;
             break;
 
-        case wxTITLEBAR_BUTTON_ICONIZE:
+        case wxTitleBarButton::Iconize:
             part = WP_MINBUTTON;
             break;
 
-        case wxTITLEBAR_BUTTON_RESTORE:
+        case wxTitleBarButton::Restore:
             part = WP_RESTOREBUTTON;
             break;
 
-        case wxTITLEBAR_BUTTON_HELP:
+        case wxTitleBarButton::Help:
             part = WP_HELPBUTTON;
             break;
 

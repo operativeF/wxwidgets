@@ -82,13 +82,13 @@ enum
 //
 // NB: they have the same values as wxTOPLEVEL_BUTTON_XXX constants in
 //     wx/univ/toplevel.h as they really represent the same things
-enum wxTitleBarButton
+enum class wxTitleBarButton
 {
-    wxTITLEBAR_BUTTON_CLOSE    = 0x01000000,
-    wxTITLEBAR_BUTTON_MAXIMIZE = 0x02000000,
-    wxTITLEBAR_BUTTON_ICONIZE  = 0x04000000,
-    wxTITLEBAR_BUTTON_RESTORE  = 0x08000000,
-    wxTITLEBAR_BUTTON_HELP     = 0x10000000
+    Close,
+    Maximize,
+    Iconize,
+    Restore,
+    Help
 };
 
 // ----------------------------------------------------------------------------
