@@ -19,21 +19,11 @@ class wxCustomBackgroundWindow : public W,
 {
 public:
     using BaseWindowClass = W;
-
-    wxCustomBackgroundWindow() = default;
-
-    ~wxCustomBackgroundWindow() { delete m_backgroundBrush; }
-
-    wxCustomBackgroundWindow(const wxCustomBackgroundWindow<W>&)  = delete;
-	wxCustomBackgroundWindow& operator=(const wxCustomBackgroundWindow<W>&) = delete;
-    wxCustomBackgroundWindow(wxCustomBackgroundWindow<W>&&)  = default;
-	wxCustomBackgroundWindow& operator=(wxCustomBackgroundWindow<W>&&) = default;
-
 protected:
     void DoSetBackgroundBitmap(const wxBitmap& bmp) override
     {
-        delete m_backgroundBrush;
-        m_backgroundBrush = bmp.IsOk() ? new wxBrush(bmp) : nullptr;
+        m_backgroundBrush.reset();
+        m_backgroundBrush = bmp.IsOk() ? std::make_unique<wxBrush>(bmp) : nullptr;
 
         // Our transparent children should use our background if we have it,
         // otherwise try to restore m_inheritBgCol to some reasonable value: true
@@ -50,7 +40,7 @@ protected:
         return BaseWindowClass::MSWGetCustomBgBrush();
     }
 
-    wxBrush *m_backgroundBrush{nullptr};
+    std::unique_ptr<wxBrush> m_backgroundBrush;
 };
 
 #endif // _WX_MSW_CUSTOMBGWIN_H_
