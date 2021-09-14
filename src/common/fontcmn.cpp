@@ -57,13 +57,13 @@ extern const char *wxDumpFont(const wxFont *font)
 // ----------------------------------------------------------------------------
 
 wxBEGIN_ENUM( wxFontFamily )
-wxENUM_MEMBER( wxFONTFAMILY_DEFAULT )
-wxENUM_MEMBER( wxFONTFAMILY_DECORATIVE )
-wxENUM_MEMBER( wxFONTFAMILY_ROMAN )
-wxENUM_MEMBER( wxFONTFAMILY_SCRIPT )
-wxENUM_MEMBER( wxFONTFAMILY_SWISS )
-wxENUM_MEMBER( wxFONTFAMILY_MODERN )
-wxENUM_MEMBER( wxFONTFAMILY_TELETYPE )
+wxENUM_MEMBER( wxFontFamily::Default )
+wxENUM_MEMBER( wxFontFamily::Decorative )
+wxENUM_MEMBER( wxFontFamily::Roman )
+wxENUM_MEMBER( wxFontFamily::Script )
+wxENUM_MEMBER( wxFontFamily::Swiss )
+wxENUM_MEMBER( wxFontFamily::Modern )
+wxENUM_MEMBER( wxFontFamily::Teletype )
 wxEND_ENUM( wxFontFamily )
 
 wxBEGIN_ENUM( wxFontStyle )
@@ -203,7 +203,7 @@ wxFont *wxFontBase::New(const wxString& strNativeFontDesc)
 
 bool wxFontBase::IsFixedWidth() const
 {
-    return GetFamily() == wxFONTFAMILY_TELETYPE;
+    return GetFamily() == wxFontFamily::Teletype;
 }
 
 
@@ -437,32 +437,32 @@ bool wxFontBase::operator==(const wxFontBase& font) const
 
 wxFontFamily wxFontBase::GetFamily() const
 {
-    wxCHECK_MSG( IsOk(), wxFONTFAMILY_UNKNOWN, wxS("invalid font") );
+    wxCHECK_MSG( IsOk(), wxFontFamily::Unknown, wxS("invalid font") );
 
-    // Don't return wxFONTFAMILY_UNKNOWN from here because it prevents the code
+    // Don't return wxFontFamily::Unknown from here because it prevents the code
     // like wxFont(size, wxNORMAL_FONT->GetFamily(), ...) from working (see
     // #12330). This is really just a hack but it allows to keep compatibility
     // and doesn't really have any bad drawbacks so do this until someone comes
     // up with a better idea.
     const wxFontFamily family = DoGetFamily();
 
-    return family == wxFONTFAMILY_UNKNOWN ? wxFONTFAMILY_DEFAULT : family;
+    return family == wxFontFamily::Unknown ? wxFontFamily::Default : family;
 }
 
 wxString wxFontBase::GetFamilyString() const
 {
-    wxCHECK_MSG( IsOk(), "wxFONTFAMILY_DEFAULT", "invalid font" );
+    wxCHECK_MSG( IsOk(), "wxFontFamily::Default", "invalid font" );
 
     switch ( GetFamily() )
     {
-        case wxFONTFAMILY_DECORATIVE:   return "wxFONTFAMILY_DECORATIVE";
-        case wxFONTFAMILY_ROMAN:        return "wxFONTFAMILY_ROMAN";
-        case wxFONTFAMILY_SCRIPT:       return "wxFONTFAMILY_SCRIPT";
-        case wxFONTFAMILY_SWISS:        return "wxFONTFAMILY_SWISS";
-        case wxFONTFAMILY_MODERN:       return "wxFONTFAMILY_MODERN";
-        case wxFONTFAMILY_TELETYPE:     return "wxFONTFAMILY_TELETYPE";
-        case wxFONTFAMILY_UNKNOWN:      return "wxFONTFAMILY_UNKNOWN";
-        default:                        return "wxFONTFAMILY_DEFAULT";
+        case wxFontFamily::Decorative:   return "wxFontFamily::Decorative";
+        case wxFontFamily::Roman:        return "wxFontFamily::Roman";
+        case wxFontFamily::Script:       return "wxFontFamily::Script";
+        case wxFontFamily::Swiss:        return "wxFontFamily::Swiss";
+        case wxFontFamily::Modern:       return "wxFontFamily::Modern";
+        case wxFontFamily::Teletype:     return "wxFontFamily::Teletype";
+        case wxFontFamily::Unknown:      return "wxFontFamily::Unknown";
+        default:                        return "wxFontFamily::Default";
     }
 }
 
@@ -812,7 +812,7 @@ wxString wxNativeFontInfo::ToString() const
 void wxNativeFontInfo::Init()
 {
     pointSize = 0.0f;
-    family = wxFONTFAMILY_DEFAULT;
+    family = wxFontFamily::Default;
     style = wxFontStyle::Normal;
     weight = wxFONTWEIGHT_NORMAL;
     underlined = false;
@@ -1013,32 +1013,32 @@ wxString wxNativeFontInfo::ToUserString() const
         wxString familyStr;
         switch ( GetFamily() )
         {
-            case wxFONTFAMILY_DECORATIVE:
+            case wxFontFamily::Decorative:
                 familyStr = "decorative";
                 break;
 
-            case wxFONTFAMILY_ROMAN:
+            case wxFontFamily::Roman:
                 familyStr = "roman";
                 break;
 
-            case wxFONTFAMILY_SCRIPT:
+            case wxFontFamily::Script:
                 familyStr = "script";
                 break;
 
-            case wxFONTFAMILY_SWISS:
+            case wxFontFamily::Swiss:
                 familyStr = "swiss";
                 break;
 
-            case wxFONTFAMILY_MODERN:
+            case wxFontFamily::Modern:
                 familyStr = "modern";
                 break;
 
-            case wxFONTFAMILY_TELETYPE:
+            case wxFontFamily::Teletype:
                 familyStr = "teletype";
                 break;
 
-            case wxFONTFAMILY_DEFAULT:
-            case wxFONTFAMILY_UNKNOWN:
+            case wxFontFamily::Default:
+            case wxFontFamily::Unknown:
                 break;
 
             default:
@@ -1262,17 +1262,17 @@ bool wxNativeFontInfo::FromUserString(const wxString& s)
                 // it's not a facename but rather a font family
                 wxFontFamily family;
                 if ( familyStr == "decorative" )
-                    family = wxFONTFAMILY_DECORATIVE;
+                    family = wxFontFamily::Decorative;
                 else if ( familyStr == "roman" )
-                    family = wxFONTFAMILY_ROMAN;
+                    family = wxFontFamily::Roman;
                 else if ( familyStr == "script" )
-                    family = wxFONTFAMILY_SCRIPT;
+                    family = wxFontFamily::Script;
                 else if ( familyStr == "swiss" )
-                    family = wxFONTFAMILY_SWISS;
+                    family = wxFontFamily::Swiss;
                 else if ( familyStr == "modern" )
-                    family = wxFONTFAMILY_MODERN;
+                    family = wxFontFamily::Modern;
                 else if ( familyStr == "teletype" )
-                    family = wxFONTFAMILY_TELETYPE;
+                    family = wxFontFamily::Teletype;
                 else
                     return false;
 

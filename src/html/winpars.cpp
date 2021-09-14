@@ -539,7 +539,7 @@ wxFont* wxHtmlWinParser::CreateCurrentFont()
         *faceptr = face;
         *fontptr = new wxFont(
                        (int) (m_FontsSizes[fs] * m_FontScale),
-                       ff ? wxFONTFAMILY_MODERN : wxFONTFAMILY_SWISS,
+                       ff ? wxFontFamily::Modern : wxFontFamily::Swiss,
                        fi ? wxFontStyle::Italic : wxFontStyle::Normal,
                        fb ? wxFONTWEIGHT_BOLD : wxFONTWEIGHT_NORMAL,
                        fu != 0, face

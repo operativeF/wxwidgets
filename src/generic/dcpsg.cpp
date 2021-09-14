@@ -1087,8 +1087,8 @@ void wxPostScriptDCImpl::SetPSFont()
     wxString name;
     switch ( m_font.GetFamily() )
     {
-        case wxFONTFAMILY_TELETYPE:
-        case wxFONTFAMILY_MODERN:
+        case wxFontFamily::Teletype:
+        case wxFontFamily::Modern:
         {
             if (Style == wxFontStyle::Italic)
             {
@@ -1106,7 +1106,7 @@ void wxPostScriptDCImpl::SetPSFont()
             }
             break;
         }
-        case wxFONTFAMILY_ROMAN:
+        case wxFontFamily::Roman:
         {
             if (Style == wxFontStyle::Italic)
             {
@@ -1124,12 +1124,12 @@ void wxPostScriptDCImpl::SetPSFont()
             }
             break;
         }
-        case wxFONTFAMILY_SCRIPT:
+        case wxFontFamily::Script:
         {
             name = wxS("/ZapfChancery-MediumItalic");
             break;
         }
-        case wxFONTFAMILY_SWISS:
+        case wxFontFamily::Swiss:
         default:
         {
             if (Style == wxFontStyle::Italic)
@@ -1526,7 +1526,7 @@ void wxPostScriptDCImpl::DoDrawSpline( const wxPointList *points )
 
 wxCoord wxPostScriptDCImpl::GetCharWidth() const
 {
-    // Chris Breeze: reasonable approximation using wxFONTFAMILY_MODERN/Courier
+    // Chris Breeze: reasonable approximation using wxFontFamily::Modern/Courier
     return (wxCoord) (GetCharHeight() * 72.0 / 120.0);
 }
 
@@ -1959,7 +1959,7 @@ void wxPostScriptDCImpl::DoGetTextExtent(const wxString& string,
 #if !wxUSE_AFM_FOR_POSTSCRIPT
     /* Provide a VERY rough estimate (avoid using it).
      * Produces accurate results for mono-spaced font
-     * such as Courier (aka wxFONTFAMILY_MODERN) */
+     * such as Courier (aka wxFontFamily::Modern) */
 
     if ( x )
         *x = strlen (strbuf) * fontSize * 72.0 / 120.0;
@@ -1997,7 +1997,7 @@ void wxPostScriptDCImpl::DoGetTextExtent(const wxString& string,
     /      dc.StartDoc("Test");
     /      dc.StartPage();
     /      wxCoord w,h;
-    /      dc.SetFont(new wxFontInfo(10).Family(wxFONTFAMILY_ROMAN));
+    /      dc.SetFont(new wxFontInfo(10).Family(wxFontFamily::Roman));
     /      dc.GetTextExtent("Hallo",&w,&h);
     /      dc.EndPage();
     /      dc.EndDoc();
@@ -2037,8 +2037,8 @@ void wxPostScriptDCImpl::DoGetTextExtent(const wxString& string,
 
         switch (Family)
         {
-            case wxFONTFAMILY_MODERN:
-            case wxFONTFAMILY_TELETYPE:
+            case wxFontFamily::Modern:
+            case wxFontFamily::Teletype:
             {
                 if ((Style == wxFontStyle::Italic) && (Weight == wxFONTWEIGHT_BOLD)) name = wxT("CourBoO.afm");
                 else if ((Style != wxFontStyle::Italic) && (Weight == wxFONTWEIGHT_BOLD)) name = wxT("CourBo.afm");
@@ -2046,7 +2046,7 @@ void wxPostScriptDCImpl::DoGetTextExtent(const wxString& string,
                 else name = wxT("Cour.afm");
                 break;
             }
-            case wxFONTFAMILY_ROMAN:
+            case wxFontFamily::Roman:
             {
                 if ((Style == wxFontStyle::Italic) && (Weight == wxFONTWEIGHT_BOLD)) name = wxT("TimesBoO.afm");
                 else if ((Style != wxFontStyle::Italic) && (Weight == wxFONTWEIGHT_BOLD)) name = wxT("TimesBo.afm");
@@ -2054,12 +2054,12 @@ void wxPostScriptDCImpl::DoGetTextExtent(const wxString& string,
                 else name = wxT("TimesRo.afm");
                 break;
             }
-            case wxFONTFAMILY_SCRIPT:
+            case wxFontFamily::Script:
             {
                 name = wxT("Zapf.afm");
                 break;
             }
-            case wxFONTFAMILY_SWISS:
+            case wxFontFamily::Swiss:
             default:
             {
                 if ((Style == wxFontStyle::Italic) && (Weight == wxFONTWEIGHT_BOLD)) name = wxT("HelvBoO.afm");

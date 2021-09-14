@@ -76,7 +76,7 @@ friend class wxFont;
 
 public:
     wxFontRefData(int size = wxDEFAULT,
-                  wxFontFamily family = wxFONTFAMILY_DEFAULT,
+                  wxFontFamily family = wxFontFamily::Default,
                   wxFontStyle style = wxFontStyle::Normal,
                   wxFontWeight weight = wxFONTWEIGHT_NORMAL,
                   bool underlined = false,
@@ -151,7 +151,7 @@ void wxFontRefData::Init(int pointSize,
                          const wxString& faceName,
                          wxFontEncoding encoding)
 {
-    m_family = family == wxFONTFAMILY_DEFAULT ? wxFONTFAMILY_SWISS : family;
+    m_family = family == wxFontFamily::Default ? wxFontFamily::Swiss : family;
 
     m_faceName = faceName;
 
@@ -177,11 +177,11 @@ void wxFontRefData::Init(int pointSize,
         //       of hardcoding them here
         switch ( m_family )
         {
-            case wxFONTFAMILY_TELETYPE:
+            case wxFontFamily::Teletype:
                 m_faceName = wxT("monospace");
                 break;
 
-            case wxFONTFAMILY_ROMAN:
+            case wxFontFamily::Roman:
                 m_faceName = wxT("serif");
                 break;
 
@@ -434,17 +434,17 @@ bool wxFont::Create(const wxString& fontname, wxFontEncoding enc)
     tmp = tn.GetNextToken().MakeUpper();         // spacing
 
     if (tmp == wxT("M"))
-        M_FONTDATA->m_family = wxFONTFAMILY_MODERN;
+        M_FONTDATA->m_family = wxFontFamily::Modern;
     else if (M_FONTDATA->m_faceName == wxT("TIMES"))
-        M_FONTDATA->m_family = wxFONTFAMILY_ROMAN;
+        M_FONTDATA->m_family = wxFontFamily::Roman;
     else if (M_FONTDATA->m_faceName == wxT("HELVETICA"))
-        M_FONTDATA->m_family = wxFONTFAMILY_SWISS;
+        M_FONTDATA->m_family = wxFontFamily::Swiss;
     else if (M_FONTDATA->m_faceName == wxT("LUCIDATYPEWRITER"))
-        M_FONTDATA->m_family = wxFONTFAMILY_TELETYPE;
+        M_FONTDATA->m_family = wxFontFamily::Teletype;
     else if (M_FONTDATA->m_faceName == wxT("LUCIDA"))
-        M_FONTDATA->m_family = wxFONTFAMILY_DECORATIVE;
+        M_FONTDATA->m_family = wxFontFamily::Decorative;
     else if (M_FONTDATA->m_faceName == wxT("UTOPIA"))
-        M_FONTDATA->m_family = wxFONTFAMILY_SCRIPT;
+        M_FONTDATA->m_family = wxFontFamily::Script;
 
     tn.GetNextToken();                           // avg width
 

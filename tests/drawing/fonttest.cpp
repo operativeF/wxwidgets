@@ -48,13 +48,13 @@ void GraphicsContextDrawingTestCase::DoFontDrawings (wxGraphicsContext *gc)
         gc->CreateBrush( wxBrush ( wxColour ( 192, 192, 192 ) ) );
 
     // set underlined font for testing
-    gc->SetFont( wxFont(wxFontInfo(12).Family(wxFONTFAMILY_MODERN).Underlined()), *wxBLACK );
+    gc->SetFont( wxFont(wxFontInfo(12).Family(wxFontFamily::Modern).Underlined()), *wxBLACK );
     gc->DrawText( wxT("This is text"), 110, 10, gbTextBackground );
     gc->DrawText( wxT("That is text"), 20, 10, wxDegToRad(-45), gbTextBackground );
 
     // use wxSWISS_FONT and not wxNORMAL_FONT as the latter can't be rotated
     // (it is not TrueType)
-    gc->SetFont( wxFont(wxFontInfo(12).Family(wxFONTFAMILY_SWISS)), *wxBLACK );
+    gc->SetFont( wxFont(wxFontInfo(12).Family(wxFontFamily::Swiss)), *wxBLACK );
 
     wxString text;
 
@@ -64,7 +64,7 @@ void GraphicsContextDrawingTestCase::DoFontDrawings (wxGraphicsContext *gc)
         gc->DrawText(text , 400, 400, wxDegToRad(n) );
     }
 
-    wxFont swissDcFont( wxFontInfo(18).Family(wxFONTFAMILY_SWISS) );
+    wxFont swissDcFont( wxFontInfo(18).Family(wxFontFamily::Swiss) );
     wxGraphicsFont swissFont = gc->CreateFont( swissDcFont, *wxBLACK );
     gc->SetFont( swissFont );
 

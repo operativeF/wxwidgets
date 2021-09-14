@@ -466,32 +466,32 @@ wxFontFamily wxNativeFontInfo::GetFamily() const
     switch ( lf.lfPitchAndFamily & ~PITCH_MASK )
     {
         case 0:
-            family = wxFONTFAMILY_UNKNOWN;
+            family = wxFontFamily::Unknown;
             break;
 
         case FF_ROMAN:
-            family = wxFONTFAMILY_ROMAN;
+            family = wxFontFamily::Roman;
             break;
 
         case FF_SWISS:
-            family = wxFONTFAMILY_SWISS;
+            family = wxFontFamily::Swiss;
             break;
 
         case FF_SCRIPT:
-            family = wxFONTFAMILY_SCRIPT;
+            family = wxFontFamily::Script;
             break;
 
         case FF_MODERN:
-            family = wxFONTFAMILY_MODERN;
+            family = wxFontFamily::Modern;
             break;
 
         case FF_DECORATIVE:
-            family = wxFONTFAMILY_DECORATIVE;
+            family = wxFontFamily::Decorative;
             break;
 
         default:
             wxFAIL_MSG( "unknown LOGFONT::lfFamily value" );
-            family = wxFONTFAMILY_UNKNOWN;
+            family = wxFontFamily::Unknown;
                 // just to avoid a warning
     }
 
@@ -584,29 +584,29 @@ void wxNativeFontInfo::SetFamily(wxFontFamily family)
 
     switch ( family )
     {
-        case wxFONTFAMILY_SCRIPT:
+        case wxFontFamily::Script:
             ff_family = FF_SCRIPT;
             break;
 
-        case wxFONTFAMILY_DECORATIVE:
+        case wxFontFamily::Decorative:
             ff_family = FF_DECORATIVE;
             break;
 
-        case wxFONTFAMILY_ROMAN:
+        case wxFontFamily::Roman:
             ff_family = FF_ROMAN;
             break;
 
-        case wxFONTFAMILY_TELETYPE:
-        case wxFONTFAMILY_MODERN:
+        case wxFontFamily::Teletype:
+        case wxFontFamily::Modern:
             ff_family = FF_MODERN;
             break;
 
-        case wxFONTFAMILY_SWISS:
-        case wxFONTFAMILY_DEFAULT:
+        case wxFontFamily::Swiss:
+        case wxFontFamily::Default:
             ff_family = FF_SWISS;
             break;
 
-        case wxFONTFAMILY_UNKNOWN:
+        case wxFontFamily::Unknown:
             wxFAIL_MSG( "invalid font family" );
             return;
     }

@@ -118,17 +118,17 @@ static const wxChar *wxFontFamilyIntToString(int family)
 {
     switch (family)
     {
-        case wxFONTFAMILY_ROMAN:
+        case wxFontFamily::Roman:
             return wxT("Roman");
-        case wxFONTFAMILY_DECORATIVE:
+        case wxFontFamily::Decorative:
             return wxT("Decorative");
-        case wxFONTFAMILY_MODERN:
+        case wxFontFamily::Modern:
             return wxT("Modern");
-        case wxFONTFAMILY_SCRIPT:
+        case wxFontFamily::Script:
             return wxT("Script");
-        case wxFONTFAMILY_TELETYPE:
+        case wxFontFamily::Teletype:
             return wxT("Teletype");
-        case wxFONTFAMILY_SWISS:
+        case wxFontFamily::Swiss:
         default:
             return wxT("Swiss");
     }
@@ -137,19 +137,19 @@ static const wxChar *wxFontFamilyIntToString(int family)
 static wxFontFamily wxFontFamilyStringToInt(const wxString& family)
 {
     if (family.empty())
-        return wxFONTFAMILY_SWISS;
+        return wxFontFamily::Swiss;
 
     if (wxStrcmp(family, wxT("Roman")) == 0)
-        return wxFONTFAMILY_ROMAN;
+        return wxFontFamily::Roman;
     else if (wxStrcmp(family, wxT("Decorative")) == 0)
-        return wxFONTFAMILY_DECORATIVE;
+        return wxFontFamily::Decorative;
     else if (wxStrcmp(family, wxT("Modern")) == 0)
-        return wxFONTFAMILY_MODERN;
+        return wxFontFamily::Modern;
     else if (wxStrcmp(family, wxT("Script")) == 0)
-        return wxFONTFAMILY_SCRIPT;
+        return wxFontFamily::Script;
     else if (wxStrcmp(family, wxT("Teletype")) == 0)
-        return wxFONTFAMILY_TELETYPE;
-    else return wxFONTFAMILY_SWISS;
+        return wxFontFamily::Teletype;
+    else return wxFontFamily::Swiss;
 }
 
 static wxFontStyle wxFontStyleStringToInt(const wxString& style)
@@ -527,7 +527,7 @@ void wxGenericFontDialog::CreateWidgets()
 
 void wxGenericFontDialog::InitializeFont()
 {
-    wxFontFamily fontFamily = wxFONTFAMILY_SWISS;
+    wxFontFamily fontFamily = wxFontFamily::Swiss;
     wxFontWeight fontWeight = wxFONTWEIGHT_NORMAL;
     wxFontStyle fontStyle = wxFontStyle::Normal;
     int fontSize = 12;

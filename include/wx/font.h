@@ -36,17 +36,17 @@ class WXDLLIMPEXP_FWD_CORE wxFont;
 // doesn't make sense to query an existing font for its font family as,
 // especially if the font had been created from a native font description, it
 // may be unknown
-enum wxFontFamily
+enum class wxFontFamily
 {
-    wxFONTFAMILY_DEFAULT,
-    wxFONTFAMILY_DECORATIVE,
-    wxFONTFAMILY_ROMAN,
-    wxFONTFAMILY_SCRIPT,
-    wxFONTFAMILY_SWISS,
-    wxFONTFAMILY_MODERN,
-    wxFONTFAMILY_TELETYPE,
-    wxFONTFAMILY_MAX,
-    wxFONTFAMILY_UNKNOWN = wxFONTFAMILY_MAX
+    Default,
+    Decorative,
+    Roman,
+    Script,
+    Swiss,
+    Modern,
+    Teletype,
+    Max,
+    Unknown = Max
 };
 
 // font styles
@@ -134,7 +134,7 @@ public:
          m_pixelSize(wxDefaultSize)
     {
         
-        m_family = wxFONTFAMILY_DEFAULT;
+        m_family = wxFontFamily::Default;
         m_flags = wxFONTFLAG_DEFAULT;
         m_weight = wxFONTWEIGHT_NORMAL;
         m_encoding = wxFONTENCODING_DEFAULT;
@@ -147,7 +147,7 @@ public:
         , m_pixelSize(wxDefaultSize)
     {
         
-        m_family = wxFONTFAMILY_DEFAULT;
+        m_family = wxFontFamily::Default;
         m_flags = wxFONTFLAG_DEFAULT;
         m_weight = wxFONTWEIGHT_NORMAL;
         m_encoding = wxFONTENCODING_DEFAULT;
@@ -163,7 +163,7 @@ public:
         , m_pixelSize(pixelSize)
     {
         
-        m_family = wxFONTFAMILY_DEFAULT;
+        m_family = wxFontFamily::Default;
         m_flags = wxFONTFLAG_DEFAULT;
         m_weight = wxFONTWEIGHT_NORMAL;
         m_encoding = wxFONTENCODING_DEFAULT;
@@ -490,7 +490,7 @@ protected:
     virtual void DoSetNativeFontInfo(const wxNativeFontInfo& info);
 
     // The function called by public GetFamily(): it can return
-    // wxFONTFAMILY_UNKNOWN unlike the public method (see comment there).
+    // wxFontFamily::Unknown unlike the public method (see comment there).
     virtual wxFontFamily DoGetFamily() const = 0;
 
 

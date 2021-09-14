@@ -34,7 +34,7 @@ static const wxFont *GetTestFonts(unsigned& numFonts)
         *wxSMALL_FONT,
         *wxITALIC_FONT,
         *wxSWISS_FONT,
-        wxFont(5, wxFONTFAMILY_TELETYPE, wxFontStyle::Normal, wxFONTWEIGHT_NORMAL)
+        wxFont(5, wxFontFamily::Teletype, wxFontStyle::Normal, wxFONTWEIGHT_NORMAL)
     };
 
     numFonts = WXSIZEOF(testfonts);
@@ -74,7 +74,7 @@ TEST_CASE("wxFont::Construct")
     // compile because it's easy to introduce ambiguities due to the number of
     // overloaded wxFont ctors.
 
-    CHECK( wxFont(10, wxFONTFAMILY_DEFAULT,
+    CHECK( wxFont(10, wxFontFamily::Default,
                       wxFontStyle::Normal,
                       wxFONTWEIGHT_NORMAL).IsOk() );
 }
@@ -105,7 +105,7 @@ TEST_CASE("wxFont::Size")
         // Note: use the old-style wxFont ctor as wxFontInfo doesn't implement
         // any compatibility hacks.
         const wxFont font(size.specified,
-                          wxFONTFAMILY_DEFAULT,
+                          wxFontFamily::Default,
                           wxFontStyle::Normal,
                           wxFONTWEIGHT_NORMAL);
 
@@ -193,15 +193,15 @@ TEST_CASE("wxFont::GetSet")
 
         // test Get/SetFamily()
 
-        test.SetFamily( wxFONTFAMILY_ROMAN );
+        test.SetFamily( wxFontFamily::Roman );
         CHECK( test.IsOk() );
 
         // note that there is always the possibility that GetFamily() returns
-        // wxFONTFAMILY_DEFAULT (meaning "unknown" in this case) so that we
+        // wxFontFamily::Default (meaning "unknown" in this case) so that we
         // consider it as a valid return value
         const wxFontFamily family = test.GetFamily();
-        if ( family != wxFONTFAMILY_DEFAULT )
-            CHECK( wxFONTFAMILY_ROMAN == family );
+        if ( family != wxFontFamily::Default )
+            CHECK( wxFontFamily::Roman == family );
 
 
         // test Get/SetEncoding()

@@ -255,24 +255,24 @@ void wxFontsManager::SetDefaultFonts(wxFileConfig& cfg)
 
     if ( cfg.Read("Default", &name) )
     {
-        m_defaultFacenames[wxFONTFAMILY_DECORATIVE] =
-        m_defaultFacenames[wxFONTFAMILY_ROMAN] =
-        m_defaultFacenames[wxFONTFAMILY_SCRIPT] =
-        m_defaultFacenames[wxFONTFAMILY_SWISS] =
-        m_defaultFacenames[wxFONTFAMILY_MODERN] =
-        m_defaultFacenames[wxFONTFAMILY_TELETYPE] = name;
+        m_defaultFacenames[wxFontFamily::Decorative] =
+        m_defaultFacenames[wxFontFamily::Roman] =
+        m_defaultFacenames[wxFontFamily::Script] =
+        m_defaultFacenames[wxFontFamily::Swiss] =
+        m_defaultFacenames[wxFontFamily::Modern] =
+        m_defaultFacenames[wxFontFamily::Teletype] = name;
     }
 
     if ( cfg.Read("DefaultDecorative", &name) )
-        m_defaultFacenames[wxFONTFAMILY_DECORATIVE] = name;
+        m_defaultFacenames[wxFontFamily::Decorative] = name;
     if ( cfg.Read("DefaultRoman", &name) )
-        m_defaultFacenames[wxFONTFAMILY_ROMAN] = name;
+        m_defaultFacenames[wxFontFamily::Roman] = name;
     if ( cfg.Read("DefaultScript", &name) )
-        m_defaultFacenames[wxFONTFAMILY_SCRIPT] = name;
+        m_defaultFacenames[wxFontFamily::Script] = name;
     if ( cfg.Read("DefaultSwiss", &name) )
-        m_defaultFacenames[wxFONTFAMILY_SWISS] = name;
+        m_defaultFacenames[wxFontFamily::Swiss] = name;
     if ( cfg.Read("DefaultModern", &name) )
-        m_defaultFacenames[wxFONTFAMILY_MODERN] = name;
+        m_defaultFacenames[wxFontFamily::Modern] = name;
     if ( cfg.Read("DefaultTeletype", &name) )
-        m_defaultFacenames[wxFONTFAMILY_TELETYPE] = name;
+        m_defaultFacenames[wxFontFamily::Teletype] = name;
 }

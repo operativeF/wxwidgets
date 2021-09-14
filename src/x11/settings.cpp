@@ -43,13 +43,13 @@ wxFont wxSystemSettingsNative::GetFont(wxSystemFont index)
     switch (index)
     {
         case wxSYS_SYSTEM_FIXED_FONT:
-            return wxFontInfo(12).Family(wxFONTFAMILY_MODERN);
+            return wxFontInfo(12).Family(wxFontFamily::Modern);
 
         case wxSYS_DEVICE_DEFAULT_FONT:
         case wxSYS_SYSTEM_FONT:
         case wxSYS_DEFAULT_GUI_FONT:
         default:
-            return wxFontInfo(12).Family(wxFONTFAMILY_SWISS);
+            return wxFontInfo(12).Family(wxFontFamily::Swiss);
     }
 
     return wxFont();

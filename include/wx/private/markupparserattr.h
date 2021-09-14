@@ -112,7 +112,7 @@ public:
     void OnTeletypeStart() override
     {
         wxFont font(GetFont());
-        font.SetFamily(wxFONTFAMILY_TELETYPE);
+        font.SetFamily(wxFontFamily::Teletype);
         DoSetFont(font);
     }
     void OnTeletypeEnd() override { DoEndAttr(); }

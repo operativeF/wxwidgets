@@ -2419,18 +2419,18 @@ wxFont wxXmlResourceHandlerImpl::GetFont(const wxString& param, wxWindow* parent
     bool strikethrough = hasStrikethrough ? GetBool(wxT("strikethrough"), false) : false;
 
     // family and facename
-    wxFontFamily ifamily = wxFONTFAMILY_DEFAULT;
+    wxFontFamily ifamily = wxFontFamily::Default;
     bool hasFamily = HasParam(wxT("family"));
     if (hasFamily)
     {
         wxString family = GetParamValue(wxT("family"));
-        if (family == wxT("default")) ifamily = wxFONTFAMILY_DEFAULT;
-        else if (family == wxT("decorative")) ifamily = wxFONTFAMILY_DECORATIVE;
-        else if (family == wxT("roman")) ifamily = wxFONTFAMILY_ROMAN;
-        else if (family == wxT("script")) ifamily = wxFONTFAMILY_SCRIPT;
-        else if (family == wxT("swiss")) ifamily = wxFONTFAMILY_SWISS;
-        else if (family == wxT("modern")) ifamily = wxFONTFAMILY_MODERN;
-        else if (family == wxT("teletype")) ifamily = wxFONTFAMILY_TELETYPE;
+        if (family == wxT("default")) ifamily = wxFontFamily::Default;
+        else if (family == wxT("decorative")) ifamily = wxFontFamily::Decorative;
+        else if (family == wxT("roman")) ifamily = wxFontFamily::Roman;
+        else if (family == wxT("script")) ifamily = wxFontFamily::Script;
+        else if (family == wxT("swiss")) ifamily = wxFontFamily::Swiss;
+        else if (family == wxT("modern")) ifamily = wxFontFamily::Modern;
+        else if (family == wxT("teletype")) ifamily = wxFontFamily::Teletype;
         else
         {
             ReportParamError

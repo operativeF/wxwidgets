@@ -512,7 +512,7 @@ private:
     int                 m_fontSize{12};
     wxFontStyle         m_fontStyle{wxFontStyle::Normal};
     wxFontWeight        m_fontWeight{wxFONTWEIGHT_NORMAL};
-    wxFontFamily        m_fontFamily{wxFONTFAMILY_DEFAULT};
+    wxFontFamily        m_fontFamily{wxFontFamily::Default};
     wxTextAttrUnderlineType m_fontUnderlineType{wxTEXT_ATTR_UNDERLINE_NONE};
     wxColour            m_colUnderline{wxNullColour};
     bool                m_fontStrikethrough{false};

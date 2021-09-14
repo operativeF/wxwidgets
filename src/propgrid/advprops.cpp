@@ -490,11 +490,16 @@ static const wxChar* const gs_fp_es_family_labels[] = {
     (const wxChar*) nullptr
 };
 
+// FIXME: Stupid solution.
 constexpr long gs_fp_es_family_values[] = {
-    wxFONTFAMILY_DEFAULT, wxFONTFAMILY_DECORATIVE,
-    wxFONTFAMILY_ROMAN, wxFONTFAMILY_SCRIPT,
-    wxFONTFAMILY_SWISS, wxFONTFAMILY_MODERN,
-    wxFONTFAMILY_TELETYPE, wxFONTFAMILY_UNKNOWN
+    static_cast<long>(wxFontFamily::Default),
+    static_cast<long>(wxFontFamily::Decorative),
+    static_cast<long>(wxFontFamily::Roman),
+    static_cast<long>(wxFontFamily::Script),
+    static_cast<long>(wxFontFamily::Swiss),
+    static_cast<long>(wxFontFamily::Modern),
+    static_cast<long>(wxFontFamily::Teletype),
+    static_cast<long>(wxFontFamily::Unknown)
 };
 
 static const wxChar* const gs_fp_es_style_labels[] = {
@@ -598,7 +603,7 @@ wxFontProperty::wxFontProperty( const wxString& label, const wxString& name,
     /* TRANSLATORS: Label of font family */
     AddPrivateChild( new wxEnumProperty(_("Family"), wxS("PointSize"),
                      gs_fp_es_family_labels,gs_fp_es_family_values,
-                     font.GetFamily()) );
+                     static_cast<int>(font.GetFamily())) ); // FIXME: Stupid solution.
 }
 
 void wxFontProperty::OnSetValue()
@@ -701,10 +706,11 @@ wxVariant wxFontProperty::ChildChanged( wxVariant& thisValue,
     }
     else if ( ind == 5 )
     {
+        // FIXME: Stupid solution.
         int fam = childValue.GetLong();
-        if ( fam < wxFONTFAMILY_DEFAULT ||
-             fam > wxFONTFAMILY_TELETYPE )
-             fam = wxFONTFAMILY_DEFAULT;
+        if ( fam < static_cast<int>(wxFontFamily::Default)||
+             fam > static_cast<int>(wxFontFamily::Teletype))
+             fam = static_cast<int>(wxFontFamily::Default);
         font.SetFamily( static_cast<wxFontFamily>(fam) );
     }
 

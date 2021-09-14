@@ -550,7 +550,7 @@ void wxSymbolPickerDialog::UpdateSymbolDisplay(bool updateSymbolList, bool showA
 
     if (!fontNameToUse.empty())
     {
-        font = wxFont(14, wxFONTFAMILY_DEFAULT, wxFontStyle::Normal, wxFONTWEIGHT_NORMAL, false, fontNameToUse);
+        font = wxFont(14, wxFontFamily::Default, wxFontStyle::Normal, wxFONTWEIGHT_NORMAL, false, fontNameToUse);
     }
     else
         font = *wxNORMAL_FONT;

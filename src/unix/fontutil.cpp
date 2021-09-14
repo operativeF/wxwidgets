@@ -134,7 +134,7 @@ wxString wxNativeFontInfo::GetFaceName() const
 
 wxFontFamily wxNativeFontInfo::GetFamily() const
 {
-    wxFontFamily ret = wxFONTFAMILY_UNKNOWN;
+    wxFontFamily ret = wxFontFamily::Unknown;
 
     const char *family_name = pango_font_description_get_family( description );
 
@@ -148,9 +148,9 @@ wxFontFamily wxNativeFontInfo::GetFamily() const
     // Check for some common fonts, to salvage what we can from the current
     // win32 centric wxFont API:
     if (wxStrnicmp( family_text, "monospace", 9 ) == 0)
-        ret = wxFONTFAMILY_TELETYPE;    // begins with "Monospace"
+        ret = wxFontFamily::Teletype;    // begins with "Monospace"
     else if (wxStrnicmp( family_text, "courier", 7 ) == 0)
-        ret = wxFONTFAMILY_TELETYPE;    // begins with "Courier"
+        ret = wxFontFamily::Teletype;    // begins with "Courier"
 #if defined(__WXGTK20__) || defined(HAVE_PANGO_FONT_FAMILY_IS_MONOSPACE)
     else
     {
@@ -179,21 +179,21 @@ wxFontFamily wxNativeFontInfo::GetFamily() const
         // wxASSERT_MSG( family, "No appropriate PangoFontFamily found for ::description" );
 
         if (family != NULL && pango_font_family_is_monospace( family ))
-            ret = wxFONTFAMILY_TELETYPE; // is deemed a monospace font by pango
+            ret = wxFontFamily::Teletype; // is deemed a monospace font by pango
     }
 #endif // GTK+ 2 || HAVE_PANGO_FONT_FAMILY_IS_MONOSPACE
 
-    if (ret == wxFONTFAMILY_UNKNOWN)
+    if (ret == wxFontFamily::Unknown)
     {
         if (strstr( family_text, "sans" ) != NULL || strstr( family_text, "Sans" ) != NULL)
             // checked before serif, so that "* Sans Serif" fonts are detected correctly
-            ret = wxFONTFAMILY_SWISS;       // contains "Sans"
+            ret = wxFontFamily::Swiss;       // contains "Sans"
         else if (strstr( family_text, "serif" ) != NULL || strstr( family_text, "Serif" ) != NULL)
-            ret = wxFONTFAMILY_ROMAN;       // contains "Serif"
+            ret = wxFontFamily::Roman;       // contains "Serif"
         else if (wxStrnicmp( family_text, "times", 5 ) == 0)
-            ret = wxFONTFAMILY_ROMAN;       // begins with "Times"
+            ret = wxFontFamily::Roman;       // begins with "Times"
         else if (wxStrnicmp( family_text, "old", 3 ) == 0)
-            ret = wxFONTFAMILY_DECORATIVE;  // begins with "Old" - "Old English", "Old Town"
+            ret = wxFontFamily::Decorative;  // begins with "Old" - "Old English", "Old Town"
     }
 
     return ret;
@@ -266,18 +266,18 @@ void wxNativeFontInfo::SetFamily(wxFontFamily family)
 
     switch ( family )
     {
-        case wxFONTFAMILY_SCRIPT:
+        case wxFontFamily::Script:
             // corresponds to the cursive font family in the page linked above
             facename.Add(wxS("URW Chancery L"));
             facename.Add(wxS("Comic Sans MS"));
             break;
 
-        case wxFONTFAMILY_DECORATIVE:
+        case wxFontFamily::Decorative:
             // corresponds to the fantasy font family in the page linked above
             facename.Add(wxS("Impact"));
             break;
 
-        case wxFONTFAMILY_ROMAN:
+        case wxFontFamily::Roman:
             // corresponds to the serif font family in the page linked above
             facename.Add(wxS("Serif"));
             facename.Add(wxS("DejaVu Serif"));
@@ -293,8 +293,8 @@ void wxNativeFontInfo::SetFamily(wxFontFamily family)
             facename.Add(wxS("Times"));
             break;
 
-        case wxFONTFAMILY_TELETYPE:
-        case wxFONTFAMILY_MODERN:
+        case wxFontFamily::Teletype:
+        case wxFontFamily::Modern:
             // corresponds to the monospace font family in the page linked above
             facename.Add(wxS("Monospace"));
             facename.Add(wxS("DejaVu Sans Mono"));
@@ -310,8 +310,8 @@ void wxNativeFontInfo::SetFamily(wxFontFamily family)
             facename.Add(wxS("Courier"));
             break;
 
-        case wxFONTFAMILY_SWISS:
-        case wxFONTFAMILY_DEFAULT:
+        case wxFontFamily::Swiss:
+        case wxFontFamily::Default:
         default:
             // corresponds to the sans-serif font family in the page linked above
             facename.Add(wxS("Sans"));
@@ -763,7 +763,7 @@ wxFontFamily wxNativeFontInfo::GetFamily() const
     // wxFontFamily somehow...
     wxFAIL_MSG(wxT("not implemented")); // GetXFontComponent(wxXLFD_FOUNDRY);
 
-    return wxFONTFAMILY_DEFAULT;
+    return wxFontFamily::Default;
 }
 
 wxFontEncoding wxNativeFontInfo::GetEncoding() const
@@ -886,14 +886,14 @@ void wxNativeFontInfo::SetFamily(wxFontFamily family)
     wxString xfamily;
     switch (family)
     {
-        case wxFONTFAMILY_DECORATIVE: xfamily = "lucida"; break;
-        case wxFONTFAMILY_ROMAN:      xfamily = "times";  break;
-        case wxFONTFAMILY_MODERN:     xfamily = "courier"; break;
-        case wxFONTFAMILY_DEFAULT:
-        case wxFONTFAMILY_SWISS:      xfamily = "helvetica"; break;
-        case wxFONTFAMILY_TELETYPE:   xfamily = "lucidatypewriter"; break;
-        case wxFONTFAMILY_SCRIPT:     xfamily = "utopia"; break;
-        case wxFONTFAMILY_UNKNOWN:    break;
+        case wxFontFamily::Decorative: xfamily = "lucida"; break;
+        case wxFontFamily::Roman:      xfamily = "times";  break;
+        case wxFontFamily::Modern:     xfamily = "courier"; break;
+        case wxFontFamily::Default:
+        case wxFontFamily::Swiss:      xfamily = "helvetica"; break;
+        case wxFontFamily::Teletype:   xfamily = "lucidatypewriter"; break;
+        case wxFontFamily::Script:     xfamily = "utopia"; break;
+        case wxFontFamily::Unknown:    break;
     }
 
     wxCHECK_RET( !xfamily.empty(), "Unknown wxFontFamily" );
@@ -1146,9 +1146,9 @@ wxNativeFont wxLoadQueryNearestFont(double pointSize,
         }
 
         // Try default family
-        if ( !font && family != wxFONTFAMILY_DEFAULT )
+        if ( !font && family != wxFontFamily::Default )
         {
-            font = wxLoadQueryFont(pointSize, wxFONTFAMILY_DEFAULT, style, weight,
+            font = wxLoadQueryFont(pointSize, wxFontFamily::Default, style, weight,
                                    underlined, facename,
                                    info.xregistry, info.xencoding,
                                    xFontName );
@@ -1158,7 +1158,7 @@ wxNativeFont wxLoadQueryNearestFont(double pointSize,
         // given facename and encoding
         if ( !font )
         {
-            font = wxLoadQueryFont(120, wxFONTFAMILY_DEFAULT,
+            font = wxLoadQueryFont(120, wxFontFamily::Default,
                                    wxFontStyle::Normal, wxFONTWEIGHT_NORMAL,
                                    underlined, facename,
                                    info.xregistry, info.xencoding,
@@ -1167,7 +1167,7 @@ wxNativeFont wxLoadQueryNearestFont(double pointSize,
             // ignore family as well
             if ( !font )
             {
-                font = wxLoadQueryFont(120, wxFONTFAMILY_DEFAULT,
+                font = wxLoadQueryFont(120, wxFontFamily::Default,
                                        wxFontStyle::Normal, wxFONTWEIGHT_NORMAL,
                                        underlined, wxEmptyString,
                                        info.xregistry, info.xencoding,
@@ -1179,7 +1179,7 @@ wxNativeFont wxLoadQueryNearestFont(double pointSize,
                 // different from 120
                 if ( !font )
                 {
-                    font = wxLoadQueryFont(-1, wxFONTFAMILY_DEFAULT,
+                    font = wxLoadQueryFont(-1, wxFontFamily::Default,
                                            wxFontStyle::Normal, wxFONTWEIGHT_NORMAL,
                                            false, wxEmptyString,
                                            info.xregistry, info.xencoding,
@@ -1192,7 +1192,7 @@ wxNativeFont wxLoadQueryNearestFont(double pointSize,
                     {
                         wxFAIL_MSG( wxT("this encoding should be available!") );
 
-                        font = wxLoadQueryFont(-1, wxFONTFAMILY_DEFAULT,
+                        font = wxLoadQueryFont(-1, wxFontFamily::Default,
                                                wxFontStyle::Normal, wxFONTWEIGHT_NORMAL,
                                                false, wxEmptyString,
                                                wxT("*"), wxT("*"),
@@ -1306,11 +1306,11 @@ static wxNativeFont wxLoadQueryFont(double pointSize,
     logFont.lfCharSet = MWLF_CHARSET_DEFAULT; // TODO: select appropriate one
     logFont.lfOutPrecision = MWLF_TYPE_DEFAULT;
     logFont.lfClipPrecision = 0; // Not used
-    logFont.lfRoman = (family == wxFONTFAMILY_ROMAN ? 1 : 0) ;
-    logFont.lfSerif = (family == wxFONTFAMILY_SWISS ? 0 : 1) ;
+    logFont.lfRoman = (family == wxFontFamily::Roman ? 1 : 0) ;
+    logFont.lfSerif = (family == wxFontFamily::Swiss ? 0 : 1) ;
     logFont.lfSansSerif = !logFont.lfSerif ;
-    logFont.lfModern = (family == wxFONTFAMILY_MODERN ? 1 : 0) ;
-    logFont.lfProportional = (family == wxFONTFAMILY_TELETYPE ? 0 : 1) ;
+    logFont.lfModern = (family == wxFontFamily::Modern ? 1 : 0) ;
+    logFont.lfProportional = (family == wxFontFamily::Teletype ? 0 : 1) ;
     logFont.lfOblique = 0;
     logFont.lfSmallCaps = 0;
     logFont.lfPitch = 0; // 0 = default

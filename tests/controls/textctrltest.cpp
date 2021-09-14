@@ -992,7 +992,7 @@ TEST_CASE_FIXTURE(TextCtrlTest, "Text control test")
             // Check that we get back the same font from GetStyle() after setting it
             // with SetDefaultStyle().
             wxFont fontIn(14,
-                wxFONTFAMILY_DEFAULT,
+                wxFontFamily::Default,
                 wxFontStyle::Normal,
                 wxFONTWEIGHT_NORMAL);
             wxTextAttr attrIn;

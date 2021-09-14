@@ -410,7 +410,7 @@ wxFont wxTextAttr::GetFont() const
     if (HasFontEncoding())
         encoding = GetFontEncoding();
 
-    wxFontFamily fontFamily = wxFONTFAMILY_DEFAULT;
+    wxFontFamily fontFamily = wxFontFamily::Default;
     if (HasFontFamily())
         fontFamily = GetFontFamily();
 
@@ -485,7 +485,7 @@ bool wxTextAttr::GetFontAttributes(const wxFont& font, int flags)
         // invalid value and rather pretend that we don't have any font family
         // information at all in this case
         const wxFontFamily fontFamily = font.GetFamily();
-        if ( fontFamily == wxFONTFAMILY_UNKNOWN )
+        if ( fontFamily == wxFontFamily::Unknown )
             flags &= ~wxTEXT_ATTR_FONT_FAMILY;
         else
             m_fontFamily = fontFamily;

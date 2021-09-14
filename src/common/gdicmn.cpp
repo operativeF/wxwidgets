@@ -576,7 +576,7 @@ const wxFont* wxStockGDI::GetFont(Item item)
         {
         case FONT_ITALIC:
             font = new wxFont(GetFont(FONT_NORMAL)->GetPointSize(),
-                              wxFONTFAMILY_ROMAN, wxFontStyle::Italic, wxFONTWEIGHT_NORMAL);
+                              wxFontFamily::Roman, wxFontStyle::Italic, wxFONTWEIGHT_NORMAL);
             break;
         case FONT_NORMAL:
             font = new wxFont(wxSystemSettings::GetFont(wxSYS_DEFAULT_GUI_FONT));
@@ -594,11 +594,11 @@ const wxFont* wxStockGDI::GetFont(Item item)
 #else
                     - 2,
 #endif
-                    wxFONTFAMILY_SWISS, wxFontStyle::Normal, wxFONTWEIGHT_NORMAL);
+                    wxFontFamily::Swiss, wxFontStyle::Normal, wxFONTWEIGHT_NORMAL);
             break;
         case FONT_SWISS:
             font = new wxFont(GetFont(FONT_NORMAL)->GetPointSize(),
-                              wxFONTFAMILY_SWISS, wxFontStyle::Normal, wxFONTWEIGHT_NORMAL);
+                              wxFontFamily::Swiss, wxFontStyle::Normal, wxFONTWEIGHT_NORMAL);
             break;
         default:
             wxFAIL;
@@ -744,14 +744,14 @@ wxFont *wxFontList::FindOrCreateFont(int pointSize,
                                      wxFontEncoding encoding)
 {
     // In all ports but wxOSX, the effective family of a font created using
-    // wxFONTFAMILY_DEFAULT is wxFONTFAMILY_SWISS so this is what we need to
+    // wxFontFamily::Default is wxFontFamily::Swiss so this is what we need to
     // use for comparison.
     //
-    // In wxOSX the original wxFONTFAMILY_DEFAULT seems to be kept and it uses
-    // a different font than wxFONTFAMILY_SWISS anyhow so we just preserve it.
+    // In wxOSX the original wxFontFamily::Default seems to be kept and it uses
+    // a different font than wxFontFamily::Swiss anyhow so we just preserve it.
 #ifndef __WXOSX__
-    if ( family == wxFONTFAMILY_DEFAULT )
-        family = wxFONTFAMILY_SWISS;
+    if ( family == wxFontFamily::Default )
+        family = wxFontFamily::Swiss;
 #endif // !__WXOSX__
 
     // In wxMSW, creating a font with wxFontStyle::Slant creates the same font

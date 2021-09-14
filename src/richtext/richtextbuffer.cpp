@@ -9501,7 +9501,7 @@ wxRichTextFieldTypeStandard::wxRichTextFieldTypeStandard(const wxString& name, c
 void wxRichTextFieldTypeStandard::Init()
 {
     m_displayStyle = wxRICHTEXT_FIELD_STYLE_RECTANGLE;
-    m_font = wxFont(6, wxFONTFAMILY_SWISS, wxFontStyle::Normal, wxFONTWEIGHT_NORMAL);
+    m_font = wxFont(6, wxFontFamily::Swiss, wxFontStyle::Normal, wxFONTWEIGHT_NORMAL);
     m_textColour = *wxWHITE;
     m_borderColour = *wxBLACK;
     m_backgroundColour = *wxBLACK;
@@ -13520,7 +13520,7 @@ wxFont wxRichTextFontTableData::FindFont(const wxRichTextAttr& fontSpec, double 
     {
         if (fontSpec.HasFontPixelSize() && !fontSpec.HasFontPointSize())
         {
-            wxFont font(wxSize(0, fontSize), wxFONTFAMILY_DEFAULT, fontSpec.GetFontStyle(), fontSpec.GetFontWeight(), fontSpec.GetFontUnderlined(), facename);
+            wxFont font(wxSize(0, fontSize), wxFontFamily::Default, fontSpec.GetFontStyle(), fontSpec.GetFontWeight(), fontSpec.GetFontUnderlined(), facename);
             if (fontSpec.HasFontStrikethrough() && fontSpec.GetFontStrikethrough())
                 font.SetStrikethrough(true);
             m_hashMap[spec] = font;
@@ -13528,7 +13528,7 @@ wxFont wxRichTextFontTableData::FindFont(const wxRichTextAttr& fontSpec, double 
         }
         else
         {
-            wxFont font(fontSize, wxFONTFAMILY_DEFAULT, fontSpec.GetFontStyle(), fontSpec.GetFontWeight(), fontSpec.GetFontUnderlined(), facename);
+            wxFont font(fontSize, wxFontFamily::Default, fontSpec.GetFontStyle(), fontSpec.GetFontWeight(), fontSpec.GetFontUnderlined(), facename);
             if (fontSpec.HasFontStrikethrough() && fontSpec.GetFontStrikethrough())
                 font.SetStrikethrough(true);
 

@@ -227,8 +227,8 @@ wxFontMgrFontRefData::wxFontMgrFontRefData(int size,
                                            const wxString& faceName,
                                            wxFontEncoding encoding)
 {
-    if ( family == wxFONTFAMILY_DEFAULT )
-        family = wxFONTFAMILY_SWISS;
+    if ( family == wxFontFamily::Default )
+        family = wxFontFamily::Swiss;
     if ( size == wxDEFAULT )
         size = 12;
 

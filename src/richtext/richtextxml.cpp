@@ -2056,7 +2056,7 @@ wxString wxRichTextXMLHelper::AddAttributes(const wxRichTextAttr& attr, bool isP
         AddAttribute(str, wxT("fontpixelsize"), attr.GetFontSize());
 
     if (attr.HasFontFamily())
-        AddAttribute(str, wxT("fontfamily"), attr.GetFontFamily());
+        AddAttribute(str, wxT("fontfamily"), static_cast<int>(attr.GetFontFamily())); // FIXME: Stupid solution.
 
     if (attr.HasFontItalic())
         AddAttribute(str, wxT("fontstyle"), static_cast<int>(attr.GetFontStyle())); // FIXME: Stupid solution.
@@ -2550,7 +2550,7 @@ bool wxRichTextXMLHelper::AddAttributes(wxXmlNode* node, wxRichTextAttr& attr, b
     else if (attr.HasFontPixelSize())
         node->AddAttribute(wxT("fontpixelsize"), MakeString(attr.GetFontSize()));
     if (attr.HasFontFamily())
-        node->AddAttribute(wxT("fontfamily"), MakeString(attr.GetFontFamily()));
+        node->AddAttribute(wxT("fontfamily"), MakeString(static_cast<int>(attr.GetFontFamily()))); // FIXME: Stupid solution.s
     if (attr.HasFontItalic())
         node->AddAttribute(wxT("fontstyle"), MakeString(static_cast<int>(attr.GetFontStyle()))); // FIXME: Stupid solution.
     if (attr.HasFontWeight())

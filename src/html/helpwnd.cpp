@@ -1317,13 +1317,13 @@ void wxHtmlHelpWindow::OptionsDialog()
     if (m_NormalFace.empty())
     {
         wxFont fnt(m_FontSize,
-                   wxFONTFAMILY_SWISS, wxFontStyle::Normal, wxFONTWEIGHT_NORMAL);
+                   wxFontFamily::Swiss, wxFontStyle::Normal, wxFONTWEIGHT_NORMAL);
         m_NormalFace = fnt.GetFaceName();
     }
     if (m_FixedFace.empty())
     {
         wxFont fnt(m_FontSize,
-                   wxFONTFAMILY_MODERN, wxFontStyle::Normal, wxFONTWEIGHT_NORMAL);
+                   wxFontFamily::Modern, wxFontStyle::Normal, wxFONTWEIGHT_NORMAL);
         m_FixedFace = fnt.GetFaceName();
     }
 

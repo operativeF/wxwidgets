@@ -77,7 +77,7 @@ private:
 
 private:
     // default facenames
-    wxString m_defaultFacenames[wxFONTFAMILY_MAX];
+    wxString m_defaultFacenames[wxFontFamily::Max];
 };
 
 #endif // _WX_DFB_PRIVATE_FONTMGR_H_
