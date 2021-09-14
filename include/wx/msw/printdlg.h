@@ -34,7 +34,6 @@ public:
     bool TransferTo( wxPrintData &data ) override;
     bool TransferFrom( const wxPrintData &data ) override;
 
-    bool Ok() const override { return IsOk(); }
     bool IsOk() const override;
 
     void InitializeDevMode(const wxString &printerName = wxEmptyString, WinPrinter* printer = nullptr);

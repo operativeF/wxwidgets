@@ -289,7 +289,6 @@ public:
     wxCountingOutputStream& operator=(wxCountingOutputStream&&) = default;
 
     wxFileOffset GetLength() const override;
-    bool Ok() const { return IsOk(); }
     bool IsOk() const override { return true; }
 
 protected:

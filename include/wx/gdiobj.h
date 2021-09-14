@@ -54,10 +54,6 @@ public:
     // don't use in the new code, use IsOk() instead
     bool IsNull() const { return m_refData == nullptr; }
 
-    // older version, for backwards compatibility only (but not deprecated
-    // because it's still widely used)
-    bool Ok() const { return IsOk(); }
-
 #if defined(__WXMSW__)
     // Creates the resource
     virtual bool RealizeResource() { return false; }

@@ -176,7 +176,6 @@ public:
     virtual void TransferFrom( const wxPageSetupDialogData * ) = 0;
     virtual void TransferTo( wxPageSetupDialogData * ) = 0;
 #endif
-    virtual bool Ok() const { return IsOk(); }
     virtual bool IsOk() const = 0;
 
     int  m_ref{1};
@@ -654,7 +653,6 @@ public:
     virtual int GetMaxPage() const;
     virtual int GetMinPage() const;
 
-    virtual bool Ok() const { return IsOk(); }
     virtual bool IsOk() const;
     virtual void SetOk(bool ok);
 
@@ -751,7 +749,6 @@ public:
     int GetMaxPage() const override;
     int GetMinPage() const override;
 
-    bool Ok() const override { return IsOk(); }
     bool IsOk() const override;
     void SetOk(bool ok) override;
 

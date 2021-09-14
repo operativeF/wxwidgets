@@ -56,7 +56,7 @@ bool AreImagesFilesContentsEqual(const wxString &filename,
     // assertion_traits<wxImage> could do part of the job or maybe the contrary
     // there should probably be somethin common at least
 
-    if (!input.Ok() || !refInput.Ok())
+    if (!input.IsOk() || !refInput.IsOk())
         return false;
     if (input.GetSize() != refInput.GetSize())
         return false;

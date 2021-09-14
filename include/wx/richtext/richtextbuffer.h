@@ -4902,7 +4902,6 @@ public:
         Returns @true if the data is non-NULL.
     */
     bool IsOk() const { return GetData() != nullptr; }
-    bool Ok() const { return IsOk(); }
 
     /**
         Gets the extension for the block's type.

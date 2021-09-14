@@ -50,7 +50,6 @@ public:
 
     ~wxPostScriptDCImpl();
 
-    virtual bool Ok() const { return IsOk(); }
     bool IsOk() const override;
 
     bool CanDrawBitmap() const override { return true; }

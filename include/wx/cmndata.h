@@ -40,7 +40,6 @@ public:
     bool IsOrientationReversed() const { return m_printOrientationReversed; }
 
     // Is this data OK for showing the print dialog?
-    bool Ok() const { return IsOk(); }
     bool IsOk() const ;
 
     const std::string& GetPrinterName() const { return m_printerName; }
@@ -158,7 +157,6 @@ public:
     bool GetEnableHelp() const { return m_printEnableHelp; }
 
     // Is this data OK for showing the print dialog?
-    bool Ok() const { return IsOk(); }
     bool IsOk() const { return m_printData.IsOk() ; }
 
     wxPrintData& GetPrintData() { return m_printData; }
@@ -213,7 +211,6 @@ public:
     bool GetEnableHelp() const { return m_enableHelp; }
 
     // Is this data OK for showing the page setup dialog?
-    bool Ok() const { return IsOk(); }
     bool IsOk() const { return m_printData.IsOk() ; }
 
     // If a corresponding paper type is found in the paper database, will set the m_printData

@@ -42,7 +42,6 @@ public:
 
     wxFileOffset GetLength() const override;
 
-    bool Ok() const { return IsOk(); }
     bool IsOk() const override;
     bool IsSeekable() const override { return m_file->GetKind() == wxFileKind::Disk; }
 
@@ -77,7 +76,6 @@ public:
     bool Close() override { return m_file_destroy ? m_file->Close() : true; }
     wxFileOffset GetLength() const override;
 
-    bool Ok() const { return IsOk(); }
     bool IsOk() const override;
     bool IsSeekable() const override { return m_file->GetKind() == wxFileKind::Disk; }
 
@@ -213,7 +211,6 @@ public:
 
     wxFileOffset GetLength() const override;
 
-    bool Ok() const { return IsOk(); }
     bool IsOk() const override;
     bool IsSeekable() const override { return m_file->GetKind() == wxFileKind::Disk; }
 
@@ -248,7 +245,6 @@ public:
     bool Close() override { return m_file_destroy ? m_file->Close() : true; }
     wxFileOffset GetLength() const override;
 
-    bool Ok() const { return IsOk(); }
     bool IsOk() const override;
     bool IsSeekable() const override { return m_file->GetKind() == wxFileKind::Disk; }
 

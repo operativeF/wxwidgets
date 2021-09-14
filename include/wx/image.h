@@ -476,7 +476,6 @@ public:
     virtual bool SaveFile( wxOutputStream& stream, const std::string& mimetype ) const;
 #endif
 
-    bool Ok() const { return IsOk(); }
     bool IsOk() const;
     int GetWidth() const;
     int GetHeight() const;

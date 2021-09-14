@@ -31,7 +31,6 @@ public:
     // initialize from array
     wxAcceleratorTable(std::span<wxAcceleratorEntry> entries);
 
-    bool Ok() const { return IsOk(); }
     bool IsOk() const;
     void SetHACCEL(WXHACCEL hAccel);
     WXHACCEL GetHACCEL() const;

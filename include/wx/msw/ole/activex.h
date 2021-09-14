@@ -133,7 +133,6 @@ public:
     operator I*() const {return m_interface; }
     I* operator->() {return m_interface; }
     I** GetRef() {return &m_interface; }
-    bool Ok() const { return IsOk(); }
     bool IsOk() const { return m_interface != nullptr; }
 
 protected:

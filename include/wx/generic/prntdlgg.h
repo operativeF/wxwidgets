@@ -85,7 +85,6 @@ public:
     bool TransferTo( wxPrintData &data ) override;
     bool TransferFrom( const wxPrintData &data ) override;
 
-    bool Ok() const override { return IsOk(); }
     bool IsOk() const override { return true; }
 
     const std::string& GetPrinterCommand() const { return m_printerCommand; }

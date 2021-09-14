@@ -22,7 +22,6 @@ public:
     wxAcceleratorTable(int n, const wxAcceleratorEntry entries[]);
     ~wxAcceleratorTable();
 
-    bool Ok() const { return IsOk(); }
     bool IsOk() const;
 
     void Add(const wxAcceleratorEntry& entry);
