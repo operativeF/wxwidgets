@@ -40,10 +40,18 @@ class WXDLLIMPEXP_FWD_CORE wxLayoutConstraints;
 
 inline constexpr int wxLAYOUT_DEFAULT_MARGIN = 0;
 
-enum wxEdge
+enum class wxEdge
 {
-    wxLeft, wxTop, wxRight, wxBottom, wxWidth, wxHeight,
-    wxCentre, wxCenter = wxCentre, wxCentreX, wxCentreY
+    Left,
+    Top,
+    Right,
+    Bottom,
+    Width,
+    Height,
+    Centre,
+    Center = Centre,
+    CenterX,
+    CenterY
 };
 
 enum wxRelationship
@@ -116,7 +124,7 @@ public:
     void SetMargin(int m) { margin = m; }
     int GetValue() const { return value; }
     int GetPercent() const { return percent; }
-    int GetOtherEdge() const { return otherEdge; }
+    wxEdge GetOtherEdge() const { return otherEdge; }
     bool GetDone() const { return done; }
     void SetDone(bool d) { done = d; }
     wxRelationship GetRelationship() const { return relationship; }
@@ -139,12 +147,12 @@ protected:
     // 'This' window is the parent or sibling of otherWin
     wxWindowBase *otherWin{nullptr};
 
-    wxEdge myEdge{wxTop};
+    wxEdge myEdge{wxEdge::Top};
     wxRelationship relationship{wxUnconstrained};
     int margin{0};
     int value{0};
     int percent{0};
-    wxEdge otherEdge{wxTop};
+    wxEdge otherEdge{wxEdge::Top};
     bool done{false};
 };
 

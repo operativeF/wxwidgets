@@ -85,22 +85,22 @@ void wxIndividualLayoutConstraint::Set(wxRelationship rel, wxWindowBase *otherW,
 
 void wxIndividualLayoutConstraint::LeftOf(wxWindowBase *sibling, int marg)
 {
-    Set(wxLeftOf, sibling, wxLeft, 0, marg);
+    Set(wxLeftOf, sibling, wxEdge::Left, 0, marg);
 }
 
 void wxIndividualLayoutConstraint::RightOf(wxWindowBase *sibling, int marg)
 {
-    Set(wxRightOf, sibling, wxRight, 0, marg);
+    Set(wxRightOf, sibling, wxEdge::Right, 0, marg);
 }
 
 void wxIndividualLayoutConstraint::Above(wxWindowBase *sibling, int marg)
 {
-    Set(wxAbove, sibling, wxTop, 0, marg);
+    Set(wxAbove, sibling, wxEdge::Top, 0, marg);
 }
 
 void wxIndividualLayoutConstraint::Below(wxWindowBase *sibling, int marg)
 {
-    Set(wxBelow, sibling, wxBottom, 0, marg);
+    Set(wxBelow, sibling, wxEdge::Bottom, 0, marg);
 }
 
 //
@@ -131,12 +131,12 @@ bool wxIndividualLayoutConstraint::ResetIfWin(wxWindowBase *otherW)
 {
     if (otherW == otherWin)
     {
-        myEdge = wxTop;
+        myEdge = wxEdge::Top;
         relationship = wxAsIs;
         margin = 0;
         value = 0;
         percent = 0;
-        otherEdge = wxTop;
+        otherEdge = wxEdge::Top;
         otherWin = nullptr;
         return true;
     }
@@ -155,7 +155,7 @@ bool wxIndividualLayoutConstraint::SatisfyConstraint(wxLayoutConstraints *constr
 
     switch (myEdge)
     {
-        case wxLeft:
+        case wxEdge::Left:
         {
             switch (relationship)
             {
@@ -229,7 +229,7 @@ bool wxIndividualLayoutConstraint::SatisfyConstraint(wxLayoutConstraints *constr
             }
             break;
         }
-        case wxRight:
+        case wxEdge::Right:
         {
             switch (relationship)
             {
@@ -306,7 +306,7 @@ bool wxIndividualLayoutConstraint::SatisfyConstraint(wxLayoutConstraints *constr
             }
             break;
         }
-        case wxTop:
+        case wxEdge::Top:
         {
             switch (relationship)
             {
@@ -380,7 +380,7 @@ bool wxIndividualLayoutConstraint::SatisfyConstraint(wxLayoutConstraints *constr
             }
             break;
         }
-        case wxBottom:
+        case wxEdge::Bottom:
         {
             switch (relationship)
             {
@@ -457,7 +457,7 @@ bool wxIndividualLayoutConstraint::SatisfyConstraint(wxLayoutConstraints *constr
             }
             break;
         }
-        case wxCentreX:
+        case wxEdge::CenterX:
         {
             switch (relationship)
             {
@@ -525,7 +525,7 @@ bool wxIndividualLayoutConstraint::SatisfyConstraint(wxLayoutConstraints *constr
             }
             break;
         }
-        case wxCentreY:
+        case wxEdge::CenterY:
         {
             switch (relationship)
             {
@@ -593,7 +593,7 @@ bool wxIndividualLayoutConstraint::SatisfyConstraint(wxLayoutConstraints *constr
             }
             break;
         }
-        case wxWidth:
+        case wxEdge::Width:
         {
             switch (relationship)
             {
@@ -651,7 +651,7 @@ bool wxIndividualLayoutConstraint::SatisfyConstraint(wxLayoutConstraints *constr
             }
             break;
         }
-        case wxHeight:
+        case wxEdge::Height:
         {
             switch (relationship)
             {
@@ -727,36 +727,36 @@ int wxIndividualLayoutConstraint::GetEdge(wxEdge which,
     {
         switch (which)
         {
-            case wxLeft:
+            case wxEdge::Left:
                 {
                     return 0;
                 }
-            case wxTop:
+            case wxEdge::Top:
                 {
                     return 0;
                 }
-            case wxRight:
+            case wxEdge::Right:
                 {
                     return other->GetClientSizeConstraint().x;
                 }
-            case wxBottom:
+            case wxEdge::Bottom:
                 {
                     return other->GetClientSizeConstraint().y;
                 }
-            case wxWidth:
+            case wxEdge::Width:
                 {
                     return other->GetClientSizeConstraint().x;
                 }
-            case wxHeight:
+            case wxEdge::Height:
                 {
                     return other->GetClientSizeConstraint().y;
                 }
-            case wxCentreX:
-            case wxCentreY:
+            case wxEdge::CenterX:
+            case wxEdge::CenterY:
                 {
                     wxSize sz_constraint = other->GetClientSizeConstraint();
                     // FIXME: rounding?
-                    if (which == wxCentreX)
+                    if (which == wxEdge::CenterX)
                         return gsl::narrow_cast<int>(sz_constraint.x / 2);
                     else
                         return gsl::narrow_cast<int>(sz_constraint.y / 2);
@@ -767,7 +767,7 @@ int wxIndividualLayoutConstraint::GetEdge(wxEdge which,
     }
     switch (which)
     {
-        case wxLeft:
+        case wxEdge::Left:
             {
                 wxLayoutConstraints *constr = other->GetConstraints();
                 // If no constraints, it means the window is not dependent
@@ -784,7 +784,7 @@ int wxIndividualLayoutConstraint::GetEdge(wxEdge which,
                     return other->GetPosition().x;
                 }
             }
-        case wxTop:
+        case wxEdge::Top:
             {
                 wxLayoutConstraints *constr = other->GetConstraints();
                 // If no constraints, it means the window is not dependent
@@ -801,7 +801,7 @@ int wxIndividualLayoutConstraint::GetEdge(wxEdge which,
                     return other->GetPosition().y;
                 }
             }
-        case wxRight:
+        case wxEdge::Right:
             {
                 wxLayoutConstraints *constr = other->GetConstraints();
                 // If no constraints, it means the window is not dependent
@@ -820,7 +820,7 @@ int wxIndividualLayoutConstraint::GetEdge(wxEdge which,
                     return x_pos + w;
                 }
             }
-        case wxBottom:
+        case wxEdge::Bottom:
             {
                 wxLayoutConstraints *constr = other->GetConstraints();
                 // If no constraints, it means the window is not dependent
@@ -839,7 +839,7 @@ int wxIndividualLayoutConstraint::GetEdge(wxEdge which,
                     return y_pos + h_size;
                 }
             }
-        case wxWidth:
+        case wxEdge::Width:
             {
                 wxLayoutConstraints *constr = other->GetConstraints();
                 // If no constraints, it means the window is not dependent
@@ -856,7 +856,7 @@ int wxIndividualLayoutConstraint::GetEdge(wxEdge which,
                     return other->GetSize().x;
                 }
             }
-        case wxHeight:
+        case wxEdge::Height:
             {
                 wxLayoutConstraints *constr = other->GetConstraints();
                 // If no constraints, it means the window is not dependent
@@ -873,7 +873,7 @@ int wxIndividualLayoutConstraint::GetEdge(wxEdge which,
                     return other->GetSize().y;
                 }
             }
-        case wxCentreX:
+        case wxEdge::CenterX:
             {
                 wxLayoutConstraints *constr = other->GetConstraints();
                 // If no constraints, it means the window is not dependent
@@ -892,7 +892,7 @@ int wxIndividualLayoutConstraint::GetEdge(wxEdge which,
                     return x_pos + (w/2);
                 }
             }
-        case wxCentreY:
+        case wxEdge::CenterY:
             {
                 wxLayoutConstraints *constr = other->GetConstraints();
                 // If no constraints, it means the window is not dependent
@@ -919,14 +919,14 @@ int wxIndividualLayoutConstraint::GetEdge(wxEdge which,
 
 wxLayoutConstraints::wxLayoutConstraints()
 {
-    left.SetEdge(wxLeft);
-    top.SetEdge(wxTop);
-    right.SetEdge(wxRight);
-    bottom.SetEdge(wxBottom);
-    centreX.SetEdge(wxCentreX);
-    centreY.SetEdge(wxCentreY);
-    width.SetEdge(wxWidth);
-    height.SetEdge(wxHeight);
+    left.SetEdge(wxEdge::Left);
+    top.SetEdge(wxEdge::Top);
+    right.SetEdge(wxEdge::Right);
+    bottom.SetEdge(wxEdge::Bottom);
+    centreX.SetEdge(wxEdge::CenterX);
+    centreY.SetEdge(wxEdge::CenterY);
+    width.SetEdge(wxEdge::Width);
+    height.SetEdge(wxEdge::Height);
 }
 
 bool wxLayoutConstraints::SatisfyConstraints(wxWindowBase *win, int *nChanges)
