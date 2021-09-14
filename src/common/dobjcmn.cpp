@@ -417,7 +417,7 @@ bool wxTextDataObject::SetData(size_t len, const void *buf)
 {
     const wxString
         text = wxString(static_cast<const wxChar*>(buf), len/sizeof(wxChar));
-    SetText(wxTextBuffer::Translate(text, wxTextFileType_Unix));
+    SetText(wxTextBuffer::Translate(text, wxTextFileType::Unix));
 
     return true;
 }

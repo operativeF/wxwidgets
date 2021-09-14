@@ -7193,8 +7193,8 @@ void wxGrid::DrawTextRectangle(wxDC& dc,
 void wxGrid::StringToLines( const std::string& value, std::vector<std::string>& lines ) const
 {
     int startPos = 0;
-    std::string eol = wxTextFile::GetEOL( wxTextFileType_Unix );
-    std::string tVal = wxTextFile::Translate( value, wxTextFileType_Unix );
+    std::string eol = wxTextFile::GetEOL( wxTextFileType::Unix );
+    std::string tVal = wxTextFile::Translate( value, wxTextFileType::Unix );
 
     while ( startPos < (int)tVal.length() )
     {

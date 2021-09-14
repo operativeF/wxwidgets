@@ -38,7 +38,7 @@ static wxString Dump(wxFileConfig& fc)
 {
     wxStringOutputStream sos;
     fc.Save(sos);
-    return wxTextFile::Translate(sos.GetString(), wxTextFileType_Unix);
+    return wxTextFile::Translate(sos.GetString(), wxTextFileType::Unix);
 }
 
 // helper macro to test wxFileConfig contents

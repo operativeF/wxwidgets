@@ -24,13 +24,13 @@
 // ----------------------------------------------------------------------------
 
 // the line termination type (kept wxTextFileType name for compatibility)
-enum wxTextFileType
+enum class wxTextFileType
 {
-    wxTextFileType_None,  // incomplete (the last line of the file only)
-    wxTextFileType_Unix,  // line is terminated with 'LF' = 0xA = 10 = '\n'
-    wxTextFileType_Dos,   //                         'CR' 'LF'
-    wxTextFileType_Mac,   //                         'CR' = 0xD = 13 = '\r'
-    wxTextFileType_Os2    //                         'CR' 'LF'
+    None,     // incomplete (the last line of the file only)
+    Unix,     // line is terminated with 'LF' = 0xA = 10 = '\n'
+    Dos,      //                         'CR' 'LF'
+    Mac,      //                         'CR' = 0xD = 13 = '\r'
+    Os2 = Dos //                         'CR' 'LF'
 };
 
 #include "wx/string.h"
@@ -68,11 +68,11 @@ public:
     // default type for current platform (determined at compile time)
     inline static const wxTextFileType typeDefault = 
 #if defined(__WINDOWS__)
-  wxTextFileType_Dos;
+  wxTextFileType::Dos;
 #elif defined(__UNIX__)
-  wxTextFileType_Unix;
+  wxTextFileType::Unix;
 #else
-  wxTextFileType_None;
+  wxTextFileType::None;
   #error  "wxTextBuffer: unsupported platform."
 #endif
 
@@ -181,7 +181,7 @@ public:
 
     // change the buffer (default argument means "don't change type")
     // possibly in another format
-    bool Write(wxTextFileType typeNew = wxTextFileType_None,
+    bool Write(wxTextFileType typeNew = wxTextFileType::None,
                const wxMBConv& conv = wxConvAuto());
 
 protected:

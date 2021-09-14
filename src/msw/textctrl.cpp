@@ -507,7 +507,7 @@ bool wxTextCtrl::MSWCreateText(const std::string& value,
     wxString valueWin;
     if ( m_windowStyle & wxTE_MULTILINE )
     {
-        valueWin = wxTextFile::Translate(value, wxTextFileType_Dos);
+        valueWin = wxTextFile::Translate(value, wxTextFileType::Dos);
     }
     else // single line
     {
@@ -938,7 +938,7 @@ std::string wxTextCtrl::GetRange(long from, long to) const
             if ( m_verRichEdit == 1 )
             {
                 // convert to the canonical form - see comment below
-                str = wxTextFile::Translate(str, wxTextFileType_Unix);
+                str = wxTextFile::Translate(str, wxTextFileType::Unix);
             }
         }
         //else: no text at all, leave the string empty
@@ -959,7 +959,7 @@ std::string wxTextCtrl::GetRange(long from, long to) const
         // WM_GETTEXT uses standard DOS CR+LF (\r\n) convention - convert to the
         // canonical one (same one as above) for consistency with the other kinds
         // of controls and, more importantly, with the other ports
-        str = wxTextFile::Translate(str, wxTextFileType_Unix);
+        str = wxTextFile::Translate(str, wxTextFileType::Unix);
     }
 
     return str;
@@ -1006,7 +1006,7 @@ void wxTextCtrl::DoWriteText(const std::string& value, int flags)
     bool selectionOnly = (flags & SetValue_SelectionOnly) != 0;
     std::string valueDos;
     if ( m_windowStyle & wxTE_MULTILINE )
-        valueDos = wxTextFile::Translate(value, wxTextFileType_Dos);
+        valueDos = wxTextFile::Translate(value, wxTextFileType::Dos);
     else
         valueDos = value;
 
@@ -2410,7 +2410,7 @@ void wxTextCtrl::AdjustMaxLengthBeforePaste()
     // convert EOLs, otherwise our calculation of the required length could be
     // way off when there are many lines.
     const unsigned long lenPasted =
-         wxTextFile::Translate(textData.GetText(), wxTextFileType_Dos).length();
+         wxTextFile::Translate(textData.GetText(), wxTextFileType::Dos).length();
 
     long from, to;
     GetSelection(&from, &to);

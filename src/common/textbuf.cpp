@@ -34,17 +34,17 @@ std::string wxTextBuffer::GetEOL(wxTextFileType type)
             wxFAIL_MSG(wxT("bad buffer type in wxTextBuffer::GetEOL."));
             [[fallthrough]]; // fall through nevertheless - we must return something...
 
-        case wxTextFileType_None: return {};
-        case wxTextFileType_Unix: return "\n";
-        case wxTextFileType_Dos:  return "\r\n";
-        case wxTextFileType_Mac:  return "\r";
+        case wxTextFileType::None: return {};
+        case wxTextFileType::Unix: return "\n";
+        case wxTextFileType::Dos:  return "\r\n";
+        case wxTextFileType::Mac:  return "\r";
     }
 }
 
 wxString wxTextBuffer::Translate(const wxString& text, wxTextFileType type)
 {
     // don't do anything if there is nothing to do
-    if ( type == wxTextFileType_None )
+    if ( type == wxTextFileType::None )
         return text;
 
     // nor if it is empty
@@ -188,9 +188,9 @@ wxTextFileType wxTextBuffer::GuessType() const
 
     #define   AnalyseLine(n)              \
         switch ( m_aTypes[n] ) {            \
-            case wxTextFileType_Unix: nUnix++; break;   \
-            case wxTextFileType_Dos:  nDos++;  break;   \
-            case wxTextFileType_Mac:  nMac++;  break;   \
+            case wxTextFileType::Unix: nUnix++; break;   \
+            case wxTextFileType::Dos:  nDos++;  break;   \
+            case wxTextFileType::Mac:  nMac++;  break;   \
             default: wxFAIL_MSG(wxT("unknown line terminator")); \
         }
 
@@ -209,10 +209,10 @@ wxTextFileType wxTextBuffer::GuessType() const
         wxLogWarning(_("'%s' is probably a binary buffer."), m_strBufferName.c_str());
     }
     else {
-        #define   GREATER_OF(t1, t2) n##t1 == n##t2 ? typeDefault               \
+        #define   GREATER_OF(t1, t2) n##t1 == n##t2 ? typeDefault           \
                                                 : n##t1 > n##t2             \
-                                                    ? wxTextFileType_##t1   \
-                                                    : wxTextFileType_##t2
+                                                    ? wxTextFileType::##t1   \
+                                                    : wxTextFileType::##t2
 
         if ( nDos > nUnix )
             return GREATER_OF(Dos, Mac);
@@ -220,7 +220,7 @@ wxTextFileType wxTextBuffer::GuessType() const
             return GREATER_OF(Unix, Mac);
         else {
             // nDos == nUnix
-            return nMac > nDos ? wxTextFileType_Mac : typeDefault;
+            return nMac > nDos ? wxTextFileType::Mac : typeDefault;
         }
 
         #undef    GREATER_OF

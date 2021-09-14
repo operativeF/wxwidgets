@@ -183,15 +183,15 @@ static wxTextFileType wxConvertEOLMode(int scintillaMode)
 
     switch (scintillaMode) {
         case wxSTC_EOL_CRLF:
-            type = wxTextFileType_Dos;
+            type = wxTextFileType::Dos;
             break;
 
         case wxSTC_EOL_CR:
-            type = wxTextFileType_Mac;
+            type = wxTextFileType::Mac;
             break;
 
         case wxSTC_EOL_LF:
-            type = wxTextFileType_Unix;
+            type = wxTextFileType::Unix;
             break;
 
         default:

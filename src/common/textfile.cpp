@@ -105,24 +105,24 @@ bool wxTextFile::OnRead(const wxMBConv& conv)
         if ( ch == '\r' || ch == '\n' )
         {
             // Determine the kind of line ending this is.
-            wxTextFileType lineType = wxTextFileType_None;
+            wxTextFileType lineType = wxTextFileType::None;
             if ( ch == '\r' )
             {
                 wxString::const_iterator next = p + 1;
                 if ( next != end && *next == '\n' )
-                    lineType = wxTextFileType_Dos;
+                    lineType = wxTextFileType::Dos;
                 else
-                    lineType = wxTextFileType_Mac;
+                    lineType = wxTextFileType::Mac;
             }
             else // ch == '\n'
             {
-                lineType = wxTextFileType_Unix;
+                lineType = wxTextFileType::Unix;
             }
 
             AddLine(wxString(lineStart, p), lineType);
 
             // DOS EOL is the only one consisting of two chars, not one.
-            if ( lineType == wxTextFileType_Dos )
+            if ( lineType == wxTextFileType::Dos )
                 ++p;
 
             lineStart = p + 1;
@@ -135,7 +135,7 @@ bool wxTextFile::OnRead(const wxMBConv& conv)
         // Add the last line; notice that it is certainly not terminated with a
         // newline, otherwise it would be handled above.
         wxString lastLine(lineStart, end);
-        AddLine(lastLine, wxTextFileType_None);
+        AddLine(lastLine, wxTextFileType::None);
     }
 
     return true;
@@ -169,7 +169,7 @@ bool wxTextFile::OnWrite(wxTextFileType typeNew, const wxMBConv& conv)
     for ( size_t n = 0; n < nCount; n++ )
     {
         chunk += GetLine(n) +
-                  GetEOL(typeNew == wxTextFileType_None ? GetLineType(n)
+                  GetEOL(typeNew == wxTextFileType::None ? GetLineType(n)
                                                         : typeNew);
         if ( chunk.size() >= chunk_size )
         {

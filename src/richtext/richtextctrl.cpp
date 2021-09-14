@@ -812,7 +812,7 @@ void wxRichTextCtrl::OnMoveMouse(wxMouseEvent& event)
             wxDataObjectComposite* compositeObject = new wxDataObjectComposite();
             std::string text = GetFocusObject()->GetTextForRange(range);
 #ifdef __WXMSW__
-            text = wxTextFile::Translate(text, wxTextFileType_Dos);
+            text = wxTextFile::Translate(text, wxTextFileType::Dos);
 #endif
             compositeObject->Add(new wxTextDataObject(text), false /* not preferred */);
 
@@ -3300,7 +3300,7 @@ void wxRichTextCtrl::WriteText(const std::string& value)
 
 void wxRichTextCtrl::DoWriteText(const std::string& value, int flags)
 {
-    std::string valueUnix = wxTextFile::Translate(value, wxTextFileType_Unix);
+    std::string valueUnix = wxTextFile::Translate(value, wxTextFileType::Unix);
 
     GetFocusObject()->InsertTextWithUndo(& GetBuffer(), m_caretPosition+1, valueUnix, this, wxRICHTEXT_INSERT_WITH_PREVIOUS_PARAGRAPH_STYLE);
 

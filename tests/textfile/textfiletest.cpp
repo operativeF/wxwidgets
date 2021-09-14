@@ -67,8 +67,8 @@ TEST_CASE("Text file tests")
         CHECK( f.Open(wxString::FromAscii(GetTestFileName)) );
 
         CHECK_EQ( (size_t)3, f.GetLineCount() );
-        CHECK_EQ( wxTextFileType_Dos, f.GetLineType(0) );
-        CHECK_EQ( wxTextFileType_None, f.GetLineType(2) );
+        CHECK_EQ( wxTextFileType::Dos, f.GetLineType(0) );
+        CHECK_EQ( wxTextFileType::None, f.GetLineType(2) );
         CHECK_EQ( wxString(wxT("bar")), f.GetLine(1) );
         CHECK_EQ( wxString(wxT("baz")), f.GetLastLine() );
     }
@@ -81,7 +81,7 @@ TEST_CASE("Text file tests")
         CHECK( f.Open(GetTestFileName) );
 
         CHECK_EQ( 1, f.GetLineCount() );
-        CHECK_EQ( wxTextFileType_Dos, f.GetLineType(0) );
+        CHECK_EQ( wxTextFileType::Dos, f.GetLineType(0) );
         CHECK_EQ( "foo", f.GetFirstLine() );
     }
 
@@ -93,8 +93,8 @@ TEST_CASE("Text file tests")
         CHECK( f.Open(wxString::FromAscii(GetTestFileName)) );
 
         CHECK_EQ( (size_t)3, f.GetLineCount() );
-        CHECK_EQ( wxTextFileType_Unix, f.GetLineType(0) );
-        CHECK_EQ( wxTextFileType_None, f.GetLineType(2) );
+        CHECK_EQ( wxTextFileType::Unix, f.GetLineType(0) );
+        CHECK_EQ( wxTextFileType::None, f.GetLineType(2) );
         CHECK_EQ( wxString(wxT("bar")), f.GetLine(1) );
         CHECK_EQ( wxString(wxT("baz")), f.GetLastLine() );
     }
@@ -107,7 +107,7 @@ TEST_CASE("Text file tests")
         CHECK( f.Open(GetTestFileName) );
 
         CHECK_EQ( 1, f.GetLineCount() );
-        CHECK_EQ( wxTextFileType_Unix, f.GetLineType(0) );
+        CHECK_EQ( wxTextFileType::Unix, f.GetLineType(0) );
         CHECK_EQ( "foo", f.GetFirstLine() );
     }
 
@@ -119,10 +119,10 @@ TEST_CASE("Text file tests")
         CHECK( f.Open(wxString::FromAscii(GetTestFileName)) );
 
         CHECK_EQ( (size_t)4, f.GetLineCount() );
-        CHECK_EQ( wxTextFileType_Mac, f.GetLineType(0) );
-        CHECK_EQ( wxTextFileType_Mac, f.GetLineType(1) );
-        CHECK_EQ( wxTextFileType_Mac, f.GetLineType(2) );
-        CHECK_EQ( wxTextFileType_None, f.GetLineType(3) );
+        CHECK_EQ( wxTextFileType::Mac, f.GetLineType(0) );
+        CHECK_EQ( wxTextFileType::Mac, f.GetLineType(1) );
+        CHECK_EQ( wxTextFileType::Mac, f.GetLineType(2) );
+        CHECK_EQ( wxTextFileType::None, f.GetLineType(3) );
         CHECK_EQ( wxString(wxT("foo")), f.GetLine(0) );
         CHECK_EQ( wxString(wxT("bar")), f.GetLine(1) );
         CHECK_EQ( wxString(wxT("")), f.GetLine(2) );
@@ -137,7 +137,7 @@ TEST_CASE("Text file tests")
         CHECK( f.Open(GetTestFileName) );
 
         CHECK_EQ( 1, f.GetLineCount() );
-        CHECK_EQ( wxTextFileType_Mac, f.GetLineType(0) );
+        CHECK_EQ( wxTextFileType::Mac, f.GetLineType(0) );
         CHECK_EQ( "foo", f.GetFirstLine() );
     }
 
@@ -149,9 +149,9 @@ TEST_CASE("Text file tests")
         CHECK( f.Open(wxString::FromAscii(GetTestFileName)) );
 
         CHECK_EQ( (size_t)3, f.GetLineCount() );
-        CHECK_EQ( wxTextFileType_Mac, f.GetLineType(0) );
-        CHECK_EQ( wxTextFileType_Dos, f.GetLineType(1) );
-        CHECK_EQ( wxTextFileType_Unix, f.GetLineType(2) );
+        CHECK_EQ( wxTextFileType::Mac, f.GetLineType(0) );
+        CHECK_EQ( wxTextFileType::Dos, f.GetLineType(1) );
+        CHECK_EQ( wxTextFileType::Unix, f.GetLineType(2) );
         CHECK_EQ( wxString(wxT("foo")), f.GetFirstLine() );
         CHECK_EQ( wxString(wxT("bar")), f.GetLine(1) );
         CHECK_EQ( wxString(wxT("baz")), f.GetLastLine() );
@@ -218,8 +218,8 @@ TEST_CASE("Text file tests")
         CHECK( f.Open(wxString::FromAscii(GetTestFileName), wxConvUTF8) );
 
         CHECK_EQ( (size_t)2, f.GetLineCount() );
-        CHECK_EQ( wxTextFileType_Unix, f.GetLineType(0) );
-        CHECK_EQ( wxTextFileType_None, f.GetLineType(1) );
+        CHECK_EQ( wxTextFileType::Unix, f.GetLineType(0) );
+        CHECK_EQ( wxTextFileType::None, f.GetLineType(1) );
     #ifdef wxHAVE_U_ESCAPE
         CHECK_EQ( wxString(L"\u041f"), f.GetFirstLine() );
         CHECK_EQ( wxString(L"\u0440\u0438\u0432\u0435\u0442"),
@@ -238,8 +238,8 @@ TEST_CASE("Text file tests")
         CHECK( f.Open(wxString::FromAscii(GetTestFileName), conv) );
 
         CHECK_EQ( (size_t)2, f.GetLineCount() );
-        CHECK_EQ( wxTextFileType_Dos, f.GetLineType(0) );
-        CHECK_EQ( wxTextFileType_None, f.GetLineType(1) );
+        CHECK_EQ( wxTextFileType::Dos, f.GetLineType(0) );
+        CHECK_EQ( wxTextFileType::None, f.GetLineType(1) );
 
     #ifdef wxHAVE_U_ESCAPE
         CHECK_EQ( wxString(L"\u041f"), f.GetFirstLine() );

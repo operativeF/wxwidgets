@@ -449,12 +449,12 @@ bool wxXmlDoctype::IsValid() const
 wxXmlDocument::wxXmlDocument()
     : m_version(wxS("1.0")), m_fileEncoding(wxS("UTF-8")) 
 {
-    SetFileType(wxTextFileType_Unix);
+    SetFileType(wxTextFileType::Unix);
 }
 
 wxXmlDocument::wxXmlDocument(const wxString& filename, const wxString& encoding)
 {
-    SetFileType(wxTextFileType_Unix);
+    SetFileType(wxTextFileType::Unix);
 
     if ( !Load(filename, encoding) )
     {
@@ -464,7 +464,7 @@ wxXmlDocument::wxXmlDocument(const wxString& filename, const wxString& encoding)
 
 wxXmlDocument::wxXmlDocument(wxInputStream& stream, const wxString& encoding)
 {
-    SetFileType(wxTextFileType_Unix);
+    SetFileType(wxTextFileType::Unix);
 
     if ( !Load(stream, encoding) )
     {

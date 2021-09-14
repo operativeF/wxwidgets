@@ -8811,7 +8811,7 @@ bool wxRichTextBuffer::CopyToClipboard(const wxRichTextRange& range)
             wxString text = container->GetTextForRange(range);
 
 #ifdef __WXMSW__
-            text = wxTextFile::Translate(text, wxTextFileType_Dos);
+            text = wxTextFile::Translate(text, wxTextFileType::Dos);
 #endif
 
             compositeObject->Add(new wxTextDataObject(text), false /* not preferred */);

@@ -2204,7 +2204,7 @@ bool wxTextCtrl::DoPaste()
     {
         // reverse transformation: '\r\n\" -> '\n'
         wxString text = wxTextFile::Translate(data.GetText(),
-                                              wxTextFileType_Unix);
+                                              wxTextFileType::Unix);
         if ( !text.empty() )
         {
             WriteText(text);
