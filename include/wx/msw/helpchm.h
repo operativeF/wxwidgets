@@ -35,7 +35,7 @@ public:
     bool DisplayContextPopup(int contextId) override;
     bool DisplayTextPopup(const std::string& text, const wxPoint& pos) override;
     bool KeywordSearch(const std::string& k,
-                               wxHelpSearchMode mode = wxHELP_SEARCH_ALL) override;
+                               wxHelpSearchMode mode = wxHelpSearchMode::All) override;
     bool Quit() override;
 
     const std::string& GetHelpFile() const { return m_helpFile; }

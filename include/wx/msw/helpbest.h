@@ -77,7 +77,7 @@ public:
     }
 
     bool KeywordSearch(const std::string& k,
-                               wxHelpSearchMode mode = wxHELP_SEARCH_ALL) override
+                               wxHelpSearchMode mode = wxHelpSearchMode::All) override
     {
         return m_helpController->KeywordSearch( k, mode );
     }

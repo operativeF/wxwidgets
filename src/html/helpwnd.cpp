@@ -813,13 +813,13 @@ bool wxHtmlHelpWindow::KeywordSearch(const wxString& keyword,
 {
     wxCHECK_MSG( !keyword.empty(), false, "must have a non empty keyword" );
 
-    if (mode == wxHELP_SEARCH_ALL)
+    if (mode == wxHelpSearchMode::All)
     {
         if ( !(m_SearchList &&
                m_SearchButton && m_SearchText && m_SearchChoice) )
             return false;
     }
-    else if (mode == wxHELP_SEARCH_INDEX)
+    else if (mode == wxHelpSearchMode::Index)
     {
         if ( !(m_IndexList &&
                m_IndexButton && m_IndexButtonAll && m_IndexText) )
@@ -837,7 +837,7 @@ bool wxHtmlHelpWindow::KeywordSearch(const wxString& keyword,
         m_Splitter->SplitVertically(m_NavigPan, m_HtmlWin, m_Cfg.sashpos);
     }
 
-    if (mode == wxHELP_SEARCH_ALL)
+    if (mode == wxHelpSearchMode::All)
     {
         m_NavigNotebook->SetSelection(m_SearchPage);
         m_SearchList->Clear();
@@ -883,7 +883,7 @@ bool wxHtmlHelpWindow::KeywordSearch(const wxString& keyword,
         m_SearchText->SetSelection(0, keyword.length());
         m_SearchText->SetFocus();
     }
-    else if (mode == wxHELP_SEARCH_INDEX)
+    else if (mode == wxHelpSearchMode::Index)
     {
         m_NavigNotebook->SetSelection(m_IndexPage);
         m_IndexList->Clear();
@@ -905,7 +905,7 @@ bool wxHtmlHelpWindow::KeywordSearch(const wxString& keyword,
                 wxFAIL_MSG( wxT("unknown help search mode") );
                 [[fallthrough]];
 
-            case wxHELP_SEARCH_ALL:
+            case wxHelpSearchMode::All:
             {
                 wxHtmlHelpDataItem *it =
                     (wxHtmlHelpDataItem*) m_SearchList->GetClientData(0);
@@ -916,7 +916,7 @@ bool wxHtmlHelpWindow::KeywordSearch(const wxString& keyword,
                 break;
             }
 
-            case wxHELP_SEARCH_INDEX:
+            case wxHelpSearchMode::Index:
             {
                 wxHtmlHelpMergedIndexItem* it =
                     (wxHtmlHelpMergedIndexItem*) m_IndexList->GetClientData(0);
@@ -1734,7 +1734,7 @@ void wxHtmlHelpWindow::OnSearch(wxCommandEvent& WXUNUSED(event))
     wxString sr = m_SearchText->GetLineText(0);
 
     if (!sr.empty())
-        KeywordSearch(sr, wxHELP_SEARCH_ALL);
+        KeywordSearch(sr, wxHelpSearchMode::All);
 }
 
 void wxHtmlHelpWindow::OnBookmarksSel(wxCommandEvent& WXUNUSED(event))

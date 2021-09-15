@@ -37,7 +37,7 @@ public:
     bool DisplayBlock(long blockNo) override;
     bool DisplayContextPopup(int contextId) override;
     bool KeywordSearch(const std::string& k,
-                               wxHelpSearchMode mode = wxHELP_SEARCH_ALL) override;
+                               wxHelpSearchMode mode = wxHelpSearchMode::All) override;
     bool Quit() override;
 
     inline std::string GetHelpFile() const { return m_helpFile; }

@@ -45,7 +45,7 @@ public:
     bool DisplaySection(const std::string& section) override;
     bool DisplayBlock(long blockNo) override;
     bool KeywordSearch(const std::string& k,
-                                wxHelpSearchMode mode = wxHELP_SEARCH_ALL) override;
+                                wxHelpSearchMode mode = wxHelpSearchMode::All) override;
 
     bool Quit() override;
     void OnQuit() override;

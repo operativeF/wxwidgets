@@ -26,10 +26,10 @@ class WXDLLIMPEXP_FWD_CORE wxWindow;
 inline constexpr int wxHELP_NETSCAPE = 1;
 
 // Search modes:
-enum wxHelpSearchMode
+enum class wxHelpSearchMode
 {
-    wxHELP_SEARCH_INDEX,
-    wxHELP_SEARCH_ALL
+    Index,
+    All
 };
 
 // Defines the API for help controllers
@@ -68,7 +68,7 @@ public:
     virtual bool DisplaySection(const std::string& section) { return KeywordSearch(section); }
     virtual bool DisplayBlock(long blockNo) = 0;
     virtual bool KeywordSearch(const std::string& k,
-                               wxHelpSearchMode mode = wxHELP_SEARCH_ALL) = 0;
+                               wxHelpSearchMode mode = wxHelpSearchMode::All) = 0;
     /// Allows one to override the default settings for the help frame.
     virtual void SetFrameParameters(const std::string& WXUNUSED(title),
         const wxSize& WXUNUSED(size),

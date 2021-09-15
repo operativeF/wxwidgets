@@ -132,7 +132,7 @@ public:
     //   (+ : page must contain the word ; - : page can't contain the word)
     // * if there is no + or - before the word, + is default
     bool KeywordSearch(const wxString& keyword,
-                       wxHelpSearchMode mode = wxHELP_SEARCH_ALL);
+                       wxHelpSearchMode mode = wxHelpSearchMode::All);
 
 #if wxUSE_CONFIG
     void UseConfig(wxConfigBase *config, const wxString& rootpath = wxEmptyString)

@@ -64,7 +64,7 @@ public:
     bool DisplayContents() override;
     bool DisplayIndex();
     bool KeywordSearch(const std::string& keyword,
-                       wxHelpSearchMode mode = wxHELP_SEARCH_ALL) override;
+                       wxHelpSearchMode mode = wxHelpSearchMode::All) override;
 
     wxHtmlHelpWindow* GetHelpWindow() { return m_helpWindow; }
     void SetHelpWindow(wxHtmlHelpWindow* helpWindow);
