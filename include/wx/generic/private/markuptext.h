@@ -123,8 +123,8 @@ public:
     // The meaning of the flags here is different than in wxMarkupText too:
     // they're passed to DrawItemText().
     //
-    // Currently the only supported ellipsize modes are wxELLIPSIZE_NONE and
-    // wxELLIPSIZE_END, the others are treated as wxELLIPSIZE_END.
+    // Currently the only supported ellipsize modes are wxEllipsizeMode::None and
+    // wxEllipsizeMode::End, the others are treated as wxEllipsizeMode::End.
     void Render(wxWindow *win,
                 wxDC& dc,
                 const wxRect& rect,

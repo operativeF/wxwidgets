@@ -114,7 +114,7 @@ wxRegion::wxRegion(size_t n, const wxPoint *points, wxPolygonFillMode fillStyle)
                (
                     reinterpret_cast<const POINT*>(points),
                     n,
-                    fillStyle == wxODDEVEN_RULE ? ALTERNATE : WINDING
+                    fillStyle == wxPolygonFillMode::OddEven ? ALTERNATE : WINDING
                ));
 }
 
@@ -170,9 +170,9 @@ bool wxRegion::DoCombine(const wxRegion& rgn, wxRegionOp op)
         // on the operation
         switch ( op )
         {
-            case wxRGN_COPY:
-            case wxRGN_OR:
-            case wxRGN_XOR:
+            case wxRegionOp::Copy:
+            case wxRegionOp::Or:
+            case wxRegionOp::Xor:
                 *this = rgn;
                 break;
 
@@ -180,8 +180,8 @@ bool wxRegion::DoCombine(const wxRegion& rgn, wxRegionOp op)
                 wxFAIL_MSG( wxT("unknown region operation") );
                 [[fallthrough]];
 
-            case wxRGN_AND:
-            case wxRGN_DIFF:
+            case wxRegionOp::And:
+            case wxRegionOp::Diff:
                 // leave empty/invalid
                 return false;
         }
@@ -193,19 +193,19 @@ bool wxRegion::DoCombine(const wxRegion& rgn, wxRegionOp op)
         int mode;
         switch ( op )
         {
-            case wxRGN_AND:
+            case wxRegionOp::And:
                 mode = RGN_AND;
                 break;
 
-            case wxRGN_OR:
+            case wxRegionOp::Or:
                 mode = RGN_OR;
                 break;
 
-            case wxRGN_XOR:
+            case wxRegionOp::Xor:
                 mode = RGN_XOR;
                 break;
 
-            case wxRGN_DIFF:
+            case wxRegionOp::Diff:
                 mode = RGN_DIFF;
                 break;
 
@@ -213,7 +213,7 @@ bool wxRegion::DoCombine(const wxRegion& rgn, wxRegionOp op)
                 wxFAIL_MSG( wxT("unknown region operation") );
                 [[fallthrough]];
 
-            case wxRGN_COPY:
+            case wxRegionOp::Copy:
                 mode = RGN_COPY;
                 break;
         }
@@ -277,21 +277,21 @@ bool wxRegion::DoIsEqual(const wxRegion& region) const
 wxRegionContain wxRegion::DoContainsPoint(wxCoord x, wxCoord y) const
 {
     if (!m_refData)
-        return wxOutRegion;
+        return wxRegionContain::Outside;
 
-    return ::PtInRegion(M_REGION.get(), (int) x, (int) y) ? wxInRegion : wxOutRegion;
+    return ::PtInRegion(M_REGION.get(), (int) x, (int) y) ? wxRegionContain::Inside : wxRegionContain::Outside;
 }
 
 // Does the region contain the rectangle (x, y, w, h)?
 wxRegionContain wxRegion::DoContainsRect(const wxRect& rect) const
 {
     if (!m_refData)
-        return wxOutRegion;
+        return wxRegionContain::Outside;
 
     RECT rc;
     wxCopyRectToRECT(rect, rc);
 
-    return ::RectInRegion(M_REGION.get(), &rc) ? wxInRegion : wxOutRegion;
+    return ::RectInRegion(M_REGION.get(), &rc) ? wxRegionContain::Inside : wxRegionContain::Outside;
 }
 
 // Get internal region handle

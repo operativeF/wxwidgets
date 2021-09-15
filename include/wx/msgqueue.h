@@ -23,11 +23,11 @@
 #include <queue>
 #include <utility>
 
-enum wxMessageQueueError
+enum class wxMessageQueueError
 {
-    wxMSGQUEUE_NO_ERROR = 0, // operation completed successfully
-    wxMSGQUEUE_TIMEOUT,      // no messages received before timeout expired
-    wxMSGQUEUE_MISC_ERROR    // some unexpected (and fatal) error has occurred
+    None, // operation completed successfully
+    Timeout,      // no messages received before timeout expired
+    Misc    // some unexpected (and fatal) error has occurred
 };
 
 // ---------------------------------------------------------------------------
@@ -61,13 +61,13 @@ public:
     {
         wxMutexLocker locker(m_mutex);
 
-        wxCHECK( locker.IsOk(), wxMSGQUEUE_MISC_ERROR );
+        wxCHECK( locker.IsOk(), wxMessageQueueError::Misc );
 
         m_messages.push(msg);
 
         m_conditionNotEmpty.Signal();
 
-        return wxMSGQUEUE_NO_ERROR;
+        return wxMessageQueueError::None;
     }
 
     // Remove all messages from the queue.
@@ -76,14 +76,14 @@ public:
     // Post() to discard any still pending requests if they became unnecessary.
     wxMessageQueueError Clear()
     {
-        wxCHECK( IsOk(), wxMSGQUEUE_MISC_ERROR );
+        wxCHECK( IsOk(), wxMessageQueueError::Misc );
 
         wxMutexLocker locker(m_mutex);
 
         std::queue<T> empty;
         std::swap(m_messages, empty);
 
-        return wxMSGQUEUE_NO_ERROR;
+        return wxMessageQueueError::None;
     }
 
     // Wait no more than timeout milliseconds until a message becomes available.
@@ -91,11 +91,11 @@ public:
     // Setting timeout to 0 is equivalent to an infinite timeout. See Receive().
     wxMessageQueueError ReceiveTimeout(long timeout, T& msg)
     {
-        wxCHECK( IsOk(), wxMSGQUEUE_MISC_ERROR );
+        wxCHECK( IsOk(), wxMessageQueueError::Misc );
 
         wxMutexLocker locker(m_mutex);
 
-        wxCHECK( locker.IsOk(), wxMSGQUEUE_MISC_ERROR );
+        wxCHECK( locker.IsOk(), wxMessageQueueError::Misc );
 
         const wxMilliClock_t waitUntil = wxGetLocalTimeMillis() + timeout;
         while ( m_messages.empty() )
@@ -105,12 +105,12 @@ public:
             if ( result == wxCOND_NO_ERROR )
                 continue;
 
-            wxCHECK( result == wxCOND_TIMEOUT, wxMSGQUEUE_MISC_ERROR );
+            wxCHECK( result == wxCOND_TIMEOUT, wxMessageQueueError::Misc );
 
             const wxMilliClock_t now = wxGetLocalTimeMillis();
 
             if ( now >= waitUntil )
-                return wxMSGQUEUE_TIMEOUT;
+                return wxMessageQueueError::Timeout;
 
             timeout = (waitUntil - now).ToLong();
             wxASSERT(timeout > 0);
@@ -119,30 +119,30 @@ public:
         msg = m_messages.front();
         m_messages.pop();
 
-        return wxMSGQUEUE_NO_ERROR;
+        return wxMessageQueueError::None;
     }
 
     // Same as ReceiveTimeout() but waits for as long as it takes for a message
-    // to become available (so it can't return wxMSGQUEUE_TIMEOUT)
+    // to become available (so it can't return wxMessageQueueError::Timeout)
     wxMessageQueueError Receive(T& msg)
     {
-        wxCHECK( IsOk(), wxMSGQUEUE_MISC_ERROR );
+        wxCHECK( IsOk(), wxMessageQueueError::Misc );
 
         wxMutexLocker locker(m_mutex);
 
-        wxCHECK( locker.IsOk(), wxMSGQUEUE_MISC_ERROR );
+        wxCHECK( locker.IsOk(), wxMessageQueueError::Misc );
 
         while ( m_messages.empty() )
         {
             wxCondError result = m_conditionNotEmpty.Wait();
 
-            wxCHECK( result == wxCOND_NO_ERROR, wxMSGQUEUE_MISC_ERROR );
+            wxCHECK( result == wxCOND_NO_ERROR, wxMessageQueueError::Misc );
         }
 
         msg = m_messages.front();
         m_messages.pop();
 
-        return wxMSGQUEUE_NO_ERROR;
+        return wxMessageQueueError::None;
     }
 
     // Return false only if there was a fatal error in ctor

@@ -197,7 +197,7 @@ public :
     // gets the bounding box enclosing all points (possibly including control points)
     void GetBox(double *x, double *y, double *w, double *h) const override;
 
-    bool Contains( double x, double y, wxPolygonFillMode fillStyle = wxODDEVEN_RULE) const override;
+    bool Contains( double x, double y, wxPolygonFillMode fillStyle = wxPolygonFillMode::OddEven) const override;
 
 private :
     GraphicsPath* m_path;
@@ -430,7 +430,7 @@ public:
     void * GetNativeContext() override;
 
     void StrokePath( const wxGraphicsPath& p ) override;
-    void FillPath( const wxGraphicsPath& p , wxPolygonFillMode fillStyle = wxODDEVEN_RULE ) override;
+    void FillPath( const wxGraphicsPath& p , wxPolygonFillMode fillStyle = wxPolygonFillMode::OddEven ) override;
 
     void DrawRectangle( double x, double y, double w, double h ) override;
 
@@ -445,7 +445,7 @@ public:
     }
 
     // draws a polygon
-    void DrawLines( size_t n, const wxPoint2DDouble *points, wxPolygonFillMode fillStyle = wxODDEVEN_RULE ) override;
+    void DrawLines( size_t n, const wxPoint2DDouble *points, wxPolygonFillMode fillStyle = wxPolygonFillMode::OddEven ) override;
 
     bool SetAntialiasMode(wxAntialiasMode antialias) override;
 
@@ -1592,7 +1592,7 @@ void wxGDIPlusPathData::AddArc( double x, double y, double r, double startAngle,
         // Remarks:
         // 1. Parity of the number of the circles has to be
         // preserved because this matters when path would be
-        // filled with wxODDEVEN_RULE flag set (using
+        // filled with wxPolygonFillMode::OddEven flag set (using
         // FillModeAlternate mode) when number of the edges
         // is counted.
         // 2. With GraphicsPath.AddEllipse() we cannot
@@ -1682,7 +1682,7 @@ void wxGDIPlusPathData::GetBox(double *x, double *y, double *w, double *h) const
 
 bool wxGDIPlusPathData::Contains( double x, double y, wxPolygonFillMode fillStyle ) const
 {
-    m_path->SetFillMode( fillStyle == wxODDEVEN_RULE ? FillModeAlternate : FillModeWinding);
+    m_path->SetFillMode( fillStyle == wxPolygonFillMode::OddEven ? FillModeAlternate : FillModeWinding);
     return m_path->IsVisible( (FLOAT) x,(FLOAT) y) == TRUE ;
 }
 
@@ -2014,7 +2014,7 @@ void wxGDIPlusContext::DrawLines( size_t n, const wxPoint2DDouble *points, wxPol
     } // for (int i = 0; i < n; i++)
     if ( !m_brush.IsNull() )
         m_context->FillPolygon(((wxGDIPlusBrushData*)m_brush.GetRefData())->GetGDIPlusBrush(), cpoints.data(), n,
-                                fillStyle == wxODDEVEN_RULE ? FillModeAlternate : FillModeWinding);
+                                fillStyle == wxPolygonFillMode::OddEven ? FillModeAlternate : FillModeWinding);
     if ( !m_pen.IsNull() )
         m_context->DrawLines(((wxGDIPlusPenData*)m_pen.GetGraphicsData())->GetGDIPlusPen(), cpoints.data(), n);
 }
@@ -2039,7 +2039,7 @@ void wxGDIPlusContext::FillPath( const wxGraphicsPath& path , wxPolygonFillMode 
     if ( !m_brush.IsNull() )
     {
         wxGDIPlusOffsetHelper helper(m_context, GetContentScaleFactor(), ShouldOffset());
-        ((GraphicsPath*) path.GetNativePath())->SetFillMode( fillStyle == wxODDEVEN_RULE ? FillModeAlternate : FillModeWinding);
+        ((GraphicsPath*) path.GetNativePath())->SetFillMode( fillStyle == wxPolygonFillMode::OddEven ? FillModeAlternate : FillModeWinding);
         m_context->FillPath( ((wxGDIPlusBrushData*)m_brush.GetRefData())->GetGDIPlusBrush() ,
             (GraphicsPath*) path.GetNativePath());
     }

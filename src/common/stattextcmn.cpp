@@ -258,11 +258,11 @@ std::string wxStaticTextBase::Ellipsize(const std::string& label) const
 
     wxEllipsizeMode mode;
     if ( HasFlag(wxST_ELLIPSIZE_START) )
-        mode = wxELLIPSIZE_START;
+        mode = wxEllipsizeMode::Start;
     else if ( HasFlag(wxST_ELLIPSIZE_MIDDLE) )
-        mode = wxELLIPSIZE_MIDDLE;
+        mode = wxEllipsizeMode::Middle;
     else if ( HasFlag(wxST_ELLIPSIZE_END) )
-        mode = wxELLIPSIZE_END;
+        mode = wxEllipsizeMode::End;
     else
     {
         wxFAIL_MSG( "should only be called if have one of wxST_ELLIPSIZE_XXX" );

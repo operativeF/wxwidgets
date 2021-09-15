@@ -625,7 +625,7 @@ void wxPostScriptDCImpl::DoDrawPolygon (int n, const wxPoint points[], wxCoord x
             CalcBoundingBox( points[i].x + xoffset, points[i].y + yoffset);
         }
 
-        PsPrint( (fillStyle == wxODDEVEN_RULE ? "eofill\n" : "fill\n") );
+        PsPrint( (fillStyle == wxPolygonFillMode::OddEven ? "eofill\n" : "fill\n") );
     }
 
     if ( m_pen.IsNonTransparent() )
@@ -698,7 +698,7 @@ void wxPostScriptDCImpl::DoDrawPolyPolygon (int n, const int count[], const wxPo
                 CalcBoundingBox( points[ofs+j].x + xoffset, points[ofs+j].y + yoffset);
             }
         }
-        PsPrint( (fillStyle == wxODDEVEN_RULE ? "eofill\n" : "fill\n") );
+        PsPrint( (fillStyle == wxPolygonFillMode::OddEven ? "eofill\n" : "fill\n") );
     }
 
     if ( m_pen.IsNonTransparent() )

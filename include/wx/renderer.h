@@ -362,7 +362,7 @@ public:
                               const wxRect& rect,
                               int align = wxALIGN_LEFT | wxALIGN_TOP,
                               int flags = 0,
-                              wxEllipsizeMode ellipsizeMode = wxELLIPSIZE_END) = 0;
+                              wxEllipsizeMode ellipsizeMode = wxEllipsizeMode::End) = 0;
 
     // geometry functions
     // ------------------
@@ -581,7 +581,7 @@ public:
                       const wxRect& rect,
                       int align = wxALIGN_LEFT | wxALIGN_TOP,
                       int flags = 0,
-                      wxEllipsizeMode ellipsizeMode = wxELLIPSIZE_END) override
+                      wxEllipsizeMode ellipsizeMode = wxEllipsizeMode::End) override
         { m_rendererNative.DrawItemText(win, dc, text, rect, align, flags, ellipsizeMode); }
 
     wxSplitterRenderParams GetSplitterParams(const wxWindow *win) override

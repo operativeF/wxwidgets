@@ -969,7 +969,7 @@ void wxMSWDCImpl::DoDrawPolygon(int n,
             CalcBoundingBox(cpoints[i].x, cpoints[i].y);
         }
 
-        int prev = ::SetPolyFillMode(GetHdc(),fillStyle==wxODDEVEN_RULE?ALTERNATE:WINDING);
+        int prev = ::SetPolyFillMode(GetHdc(),fillStyle==wxPolygonFillMode::OddEven?ALTERNATE:WINDING);
 
         ::Polygon(GetHdc(), cpoints.data(), n);
 
@@ -980,7 +980,7 @@ void wxMSWDCImpl::DoDrawPolygon(int n,
         for (int i = 0; i < n; i++)
             CalcBoundingBox(points[i].x, points[i].y);
 
-        int prev = ::SetPolyFillMode(GetHdc(),fillStyle==wxODDEVEN_RULE?ALTERNATE:WINDING);
+        int prev = ::SetPolyFillMode(GetHdc(),fillStyle==wxPolygonFillMode::OddEven?ALTERNATE:WINDING);
         ::Polygon(GetHdc(), reinterpret_cast<const POINT*>(points), n);
         ::SetPolyFillMode(GetHdc(),prev);
     }
@@ -1013,7 +1013,7 @@ wxMSWDCImpl::DoDrawPolyPolygon(int n,
             CalcBoundingBox(cpoints[i].x, cpoints[i].y);
         }
 
-        int prev = ::SetPolyFillMode(GetHdc(),fillStyle==wxODDEVEN_RULE?ALTERNATE:WINDING);
+        int prev = ::SetPolyFillMode(GetHdc(),fillStyle==wxPolygonFillMode::OddEven?ALTERNATE:WINDING);
         ::PolyPolygon(GetHdc(), cpoints.data(), count, n);
         ::SetPolyFillMode(GetHdc(),prev);
     }
@@ -1022,7 +1022,7 @@ wxMSWDCImpl::DoDrawPolyPolygon(int n,
         for (int i = 0; i < cnt; i++)
             CalcBoundingBox(points[i].x, points[i].y);
 
-        int prev = ::SetPolyFillMode(GetHdc(),fillStyle==wxODDEVEN_RULE?ALTERNATE:WINDING);
+        int prev = ::SetPolyFillMode(GetHdc(),fillStyle==wxPolygonFillMode::OddEven?ALTERNATE:WINDING);
         ::PolyPolygon(GetHdc(), reinterpret_cast<const POINT*>(points), count, n);
         ::SetPolyFillMode(GetHdc(),prev);
     }

@@ -1769,12 +1769,12 @@ wxRect wxWindowBase::GetUpdateClientRect() const
 
 bool wxWindowBase::DoIsExposed(int x, int y) const
 {
-    return m_updateRegion.Contains(x, y) != wxOutRegion;
+    return m_updateRegion.Contains(x, y) != wxRegionContain::Outside;
 }
 
 bool wxWindowBase::DoIsExposed(int x, int y, int w, int h) const
 {
-    return m_updateRegion.Contains(x, y, w, h) != wxOutRegion;
+    return m_updateRegion.Contains(x, y, w, h) != wxRegionContain::Outside;
 }
 
 void wxWindowBase::ClearBackground()
@@ -3588,15 +3588,15 @@ wxWindow* wxGetTopLevelParent(wxWindowBase *win_)
 // representing the child element, starting from 1.
 wxAccStatus wxWindowAccessible::HitTest(const wxPoint& WXUNUSED(pt), int* WXUNUSED(childId), wxAccessible** WXUNUSED(childObject))
 {
-    wxCHECK( GetWindow() != nullptr, wxACC_FAIL );
+    wxCHECK( GetWindow() != nullptr, wxAccStatus::Fail );
 
-    return wxACC_NOT_IMPLEMENTED;
+    return wxAccStatus::NotImplemented;
 }
 
 // Returns the rectangle for this object (id = 0) or a child element (id > 0).
 wxAccStatus wxWindowAccessible::GetLocation(wxRect& rect, int elementId)
 {
-    wxCHECK( GetWindow() != nullptr, wxACC_FAIL );
+    wxCHECK( GetWindow() != nullptr, wxAccStatus::Fail );
 
     wxWindow* win = nullptr;
     if (elementId == wxACC_SELF)
@@ -3610,48 +3610,48 @@ wxAccStatus wxWindowAccessible::GetLocation(wxRect& rect, int elementId)
             win = GetWindow()->GetChildren().Item(elementId-1)->GetData();
         }
         else
-            return wxACC_FAIL;
+            return wxAccStatus::Fail;
     }
     if (win)
     {
         rect = win->GetRect();
         if (win->GetParent() && !wxDynamicCast(win, wxTopLevelWindow))
             rect.SetPosition(win->GetParent()->ClientToScreen(rect.GetPosition()));
-        return wxACC_OK;
+        return wxAccStatus::Ok;
     }
 
-    return wxACC_NOT_IMPLEMENTED;
+    return wxAccStatus::NotImplemented;
 }
 
 // Navigates from fromId to toId/toObject.
 wxAccStatus wxWindowAccessible::Navigate(wxNavDir navDir, int fromId,
                              int* WXUNUSED(toId), wxAccessible** toObject)
 {
-    wxCHECK( GetWindow() != nullptr, wxACC_FAIL );
+    wxCHECK( GetWindow() != nullptr, wxAccStatus::Fail );
 
     switch (navDir)
     {
-    case wxNAVDIR_FIRSTCHILD:
+    case wxNavDir::FirstChild:
         {
             if (GetWindow()->GetChildren().GetCount() == 0)
-                return wxACC_FALSE;
+                return wxAccStatus::False;
             wxWindow* childWindow = (wxWindow*) GetWindow()->GetChildren().GetFirst()->GetData();
             *toObject = childWindow->GetOrCreateAccessible();
 
-            return wxACC_OK;
+            return wxAccStatus::Ok;
         }
-    case wxNAVDIR_LASTCHILD:
+    case wxNavDir::LastChild:
         {
             if (GetWindow()->GetChildren().GetCount() == 0)
-                return wxACC_FALSE;
+                return wxAccStatus::False;
             wxWindow* childWindow = (wxWindow*) GetWindow()->GetChildren().GetLast()->GetData();
             *toObject = childWindow->GetOrCreateAccessible();
 
-            return wxACC_OK;
+            return wxAccStatus::Ok;
         }
-    case wxNAVDIR_RIGHT:
-    case wxNAVDIR_DOWN:
-    case wxNAVDIR_NEXT:
+    case wxNavDir::Right:
+    case wxNavDir::Down:
+    case wxNavDir::Next:
         {
             wxWindowList::compatibility_iterator node =
                 wxWindowList::compatibility_iterator();
@@ -3660,7 +3660,7 @@ wxAccStatus wxWindowAccessible::Navigate(wxNavDir navDir, int fromId,
                 // Can't navigate to sibling of this window
                 // if we're a top-level window.
                 if (!GetWindow()->GetParent())
-                    return wxACC_NOT_IMPLEMENTED;
+                    return wxAccStatus::NotImplemented;
 
                 node = GetWindow()->GetParent()->GetChildren().Find(GetWindow());
             }
@@ -3674,14 +3674,14 @@ wxAccStatus wxWindowAccessible::Navigate(wxNavDir navDir, int fromId,
             {
                 wxWindow* nextWindow = node->GetNext()->GetData();
                 *toObject = nextWindow->GetOrCreateAccessible();
-                return wxACC_OK;
+                return wxAccStatus::Ok;
             }
             else
-                return wxACC_FALSE;
+                return wxAccStatus::False;
         }
-    case wxNAVDIR_LEFT:
-    case wxNAVDIR_UP:
-    case wxNAVDIR_PREVIOUS:
+    case wxNavDir::Left:
+    case wxNavDir::Up:
+    case wxNavDir::Previous:
         {
             wxWindowList::compatibility_iterator node =
                 wxWindowList::compatibility_iterator();
@@ -3690,7 +3690,7 @@ wxAccStatus wxWindowAccessible::Navigate(wxNavDir navDir, int fromId,
                 // Can't navigate to sibling of this window
                 // if we're a top-level window.
                 if (!GetWindow()->GetParent())
-                    return wxACC_NOT_IMPLEMENTED;
+                    return wxAccStatus::NotImplemented;
 
                 node = GetWindow()->GetParent()->GetChildren().Find(GetWindow());
             }
@@ -3704,27 +3704,27 @@ wxAccStatus wxWindowAccessible::Navigate(wxNavDir navDir, int fromId,
             {
                 wxWindow* previousWindow = node->GetPrevious()->GetData();
                 *toObject = previousWindow->GetOrCreateAccessible();
-                return wxACC_OK;
+                return wxAccStatus::Ok;
             }
             else
-                return wxACC_FALSE;
+                return wxAccStatus::False;
         }
     }
 
-    return wxACC_NOT_IMPLEMENTED;
+    return wxAccStatus::NotImplemented;
 }
 
 // Gets the name of the specified object.
 wxAccStatus wxWindowAccessible::GetName(int childId, std::string* name)
 {
-    wxCHECK( GetWindow() != nullptr, wxACC_FAIL );
+    wxCHECK( GetWindow() != nullptr, wxAccStatus::Fail );
 
     wxString title;
 
     // If a child, leave wxWidgets to call the function on the actual
     // child object.
     if (childId > 0)
-        return wxACC_NOT_IMPLEMENTED;
+        return wxAccStatus::NotImplemented;
 
     // This will eventually be replaced by specialised
     // accessible classes, one for each kind of wxWidgets
@@ -3739,95 +3739,95 @@ wxAccStatus wxWindowAccessible::GetName(int childId, std::string* name)
     if (!title.empty())
     {
         *name = title;
-        return wxACC_OK;
+        return wxAccStatus::Ok;
     }
     else
-        return wxACC_NOT_IMPLEMENTED;
+        return wxAccStatus::NotImplemented;
 }
 
 // Gets the number of children.
 wxAccStatus wxWindowAccessible::GetChildCount(int* childId)
 {
-    wxCHECK( GetWindow() != nullptr, wxACC_FAIL );
+    wxCHECK( GetWindow() != nullptr, wxAccStatus::Fail );
 
     *childId = (int) GetWindow()->GetChildren().GetCount();
-    return wxACC_OK;
+    return wxAccStatus::Ok;
 }
 
 // Gets the specified child (starting from 1).
-// If *child is NULL and return value is wxACC_OK,
+// If *child is NULL and return value is wxAccStatus::Ok,
 // this means that the child is a simple element and
 // not an accessible object.
 wxAccStatus wxWindowAccessible::GetChild(int childId, wxAccessible** child)
 {
-    wxCHECK( GetWindow() != nullptr, wxACC_FAIL );
+    wxCHECK( GetWindow() != nullptr, wxAccStatus::Fail );
 
     if (childId == wxACC_SELF)
     {
         *child = this;
-        return wxACC_OK;
+        return wxAccStatus::Ok;
     }
 
     if (childId > (int) GetWindow()->GetChildren().GetCount())
-        return wxACC_FAIL;
+        return wxAccStatus::Fail;
 
     wxWindow* childWindow = GetWindow()->GetChildren().Item(childId-1)->GetData();
     *child = childWindow->GetOrCreateAccessible();
     if (*child)
-        return wxACC_OK;
+        return wxAccStatus::Ok;
     else
-        return wxACC_FAIL;
+        return wxAccStatus::Fail;
 }
 
 // Gets the parent, or NULL.
 wxAccStatus wxWindowAccessible::GetParent(wxAccessible** parent)
 {
-    wxCHECK( GetWindow() != nullptr, wxACC_FAIL );
+    wxCHECK( GetWindow() != nullptr, wxAccStatus::Fail );
 
     wxWindow* parentWindow = GetWindow()->GetParent();
     if (!parentWindow)
     {
         *parent = nullptr;
-        return wxACC_OK;
+        return wxAccStatus::Ok;
     }
     else
     {
         *parent = parentWindow->GetOrCreateAccessible();
         if (*parent)
-            return wxACC_OK;
+            return wxAccStatus::Ok;
         else
-            return wxACC_FAIL;
+            return wxAccStatus::Fail;
     }
 }
 
 // Performs the default action. childId is 0 (the action for this object)
 // or > 0 (the action for a child).
-// Return wxACC_NOT_SUPPORTED if there is no default action for this
+// Return wxAccStatus::NotSupported if there is no default action for this
 // window (e.g. an edit control).
 wxAccStatus wxWindowAccessible::DoDefaultAction(int WXUNUSED(childId))
 {
-    wxCHECK( GetWindow() != nullptr, wxACC_FAIL );
+    wxCHECK( GetWindow() != nullptr, wxAccStatus::Fail );
 
-    return wxACC_NOT_IMPLEMENTED;
+    return wxAccStatus::NotImplemented;
 }
 
 // Gets the default action for this object (0) or > 0 (the action for a child).
-// Return wxACC_OK even if there is no action. actionName is the action, or the empty
+// Return wxAccStatus::Ok even if there is no action. actionName is the action, or the empty
 // string if there is no action.
 // The retrieved string describes the action that is performed on an object,
 // not what the object does as a result. For example, a toolbar button that prints
 // a document has a default action of "Press" rather than "Prints the current document."
 wxAccStatus wxWindowAccessible::GetDefaultAction(int WXUNUSED(childId), std::string* WXUNUSED(actionName))
 {
-    wxCHECK( GetWindow() != nullptr, wxACC_FAIL );
+    wxCHECK( GetWindow() != nullptr, wxAccStatus::Fail );
 
-    return wxACC_NOT_IMPLEMENTED;
+    return wxAccStatus::NotImplemented;
 }
 
 // Returns the description for this object or a child.
 wxAccStatus wxWindowAccessible::GetDescription(int WXUNUSED(childId), std::string* description)
 {
-    wxCHECK( GetWindow() != nullptr, wxACC_FAIL );
+    wxCHECK( GetWindow() != nullptr, wxAccStatus::Fail );
 
     // FIXME: Make this more optional.
     std::ignore = description;
@@ -3836,18 +3836,18 @@ wxAccStatus wxWindowAccessible::GetDescription(int WXUNUSED(childId), std::strin
     if (!ht.empty())
     {
         *description = ht;
-        return wxACC_OK;
+        return wxAccStatus::Ok;
     }
 #endif // wxUSE_HELP
 
-    return wxACC_NOT_IMPLEMENTED;
+    return wxAccStatus::NotImplemented;
 }
 
 // Returns help text for this object or a child, similar to tooltip text.
 // FIXME: Change this to be more optional.
 wxAccStatus wxWindowAccessible::GetHelpText(int WXUNUSED(childId), std::string* helpText)
 {
-    wxCHECK( GetWindow() != nullptr, wxACC_FAIL );
+    wxCHECK( GetWindow() != nullptr, wxAccStatus::Fail );
 
     std::ignore = helpText;
 #if wxUSE_HELP
@@ -3855,79 +3855,79 @@ wxAccStatus wxWindowAccessible::GetHelpText(int WXUNUSED(childId), std::string* 
     if (!ht.empty())
     {
         *helpText = ht;
-        return wxACC_OK;
+        return wxAccStatus::Ok;
     }
 #endif // wxUSE_HELP
 
-    return wxACC_NOT_IMPLEMENTED;
+    return wxAccStatus::NotImplemented;
 }
 
 // Returns the keyboard shortcut for this object or child.
 // Return e.g. ALT+K
 wxAccStatus wxWindowAccessible::GetKeyboardShortcut(int WXUNUSED(childId), std::string* WXUNUSED(shortcut))
 {
-    wxCHECK( GetWindow() != nullptr, wxACC_FAIL );
+    wxCHECK( GetWindow() != nullptr, wxAccStatus::Fail );
 
-    return wxACC_NOT_IMPLEMENTED;
+    return wxAccStatus::NotImplemented;
 }
 
 // Returns a role constant.
 wxAccStatus wxWindowAccessible::GetRole(int childId, wxAccRole* role)
 {
-    wxCHECK( GetWindow() != nullptr, wxACC_FAIL );
+    wxCHECK( GetWindow() != nullptr, wxAccStatus::Fail );
 
     // If a child, leave wxWidgets to call the function on the actual
     // child object.
     if (childId > 0)
-        return wxACC_NOT_IMPLEMENTED;
+        return wxAccStatus::NotImplemented;
 
     if (wxDynamicCast(GetWindow(), wxControl))
-        return wxACC_NOT_IMPLEMENTED;
+        return wxAccStatus::NotImplemented;
 #if wxUSE_STATUSBAR
     if (wxDynamicCast(GetWindow(), wxStatusBar))
-        return wxACC_NOT_IMPLEMENTED;
+        return wxAccStatus::NotImplemented;
 #endif
 #if wxUSE_TOOLBAR
     if (wxDynamicCast(GetWindow(), wxToolBar))
-        return wxACC_NOT_IMPLEMENTED;
+        return wxAccStatus::NotImplemented;
 #endif
 
     //*role = wxROLE_SYSTEM_CLIENT;
     *role = wxROLE_SYSTEM_CLIENT;
-    return wxACC_OK;
+    return wxAccStatus::Ok;
 
     #if 0
-    return wxACC_NOT_IMPLEMENTED;
+    return wxAccStatus::NotImplemented;
     #endif
 }
 
 // Returns a state constant.
 wxAccStatus wxWindowAccessible::GetState(int childId, long* state)
 {
-    wxCHECK( GetWindow() != nullptr, wxACC_FAIL );
+    wxCHECK( GetWindow() != nullptr, wxAccStatus::Fail );
 
     // If a child, leave wxWidgets to call the function on the actual
     // child object.
     if (childId > 0)
-        return wxACC_NOT_IMPLEMENTED;
+        return wxAccStatus::NotImplemented;
 
     if (wxDynamicCast(GetWindow(), wxControl))
-        return wxACC_NOT_IMPLEMENTED;
+        return wxAccStatus::NotImplemented;
 
 #if wxUSE_STATUSBAR
     if (wxDynamicCast(GetWindow(), wxStatusBar))
-        return wxACC_NOT_IMPLEMENTED;
+        return wxAccStatus::NotImplemented;
 #endif
 #if wxUSE_TOOLBAR
     if (wxDynamicCast(GetWindow(), wxToolBar))
-        return wxACC_NOT_IMPLEMENTED;
+        return wxAccStatus::NotImplemented;
 #endif
 
     *state = 0;
-    return wxACC_OK;
+    return wxAccStatus::Ok;
 
     #if 0
-    return wxACC_NOT_IMPLEMENTED;
+    return wxAccStatus::NotImplemented;
     #endif
 }
 
@@ -3935,17 +3935,17 @@ wxAccStatus wxWindowAccessible::GetState(int childId, long* state)
 // or child.
 wxAccStatus wxWindowAccessible::GetValue(int WXUNUSED(childId), std::string* WXUNUSED(strValue))
 {
-    wxCHECK( GetWindow() != nullptr, wxACC_FAIL );
+    wxCHECK( GetWindow() != nullptr, wxAccStatus::Fail );
 
-    return wxACC_NOT_IMPLEMENTED;
+    return wxAccStatus::NotImplemented;
 }
 
 // Selects the object or child.
 wxAccStatus wxWindowAccessible::Select(int WXUNUSED(childId), wxAccSelectionFlags WXUNUSED(selectFlags))
 {
-    wxCHECK( GetWindow() != nullptr, wxACC_FAIL );
+    wxCHECK( GetWindow() != nullptr, wxAccStatus::Fail );
 
-    return wxACC_NOT_IMPLEMENTED;
+    return wxAccStatus::NotImplemented;
 }
 
 // Gets the window with the keyboard focus.
@@ -3954,9 +3954,9 @@ wxAccStatus wxWindowAccessible::Select(int WXUNUSED(childId), wxAccSelectionFlag
 // If this object has the focus, child should be 'this'.
 wxAccStatus wxWindowAccessible::GetFocus(int* WXUNUSED(childId), wxAccessible** WXUNUSED(child))
 {
-    wxCHECK( GetWindow() != nullptr, wxACC_FAIL );
+    wxCHECK( GetWindow() != nullptr, wxAccStatus::Fail );
 
-    return wxACC_NOT_IMPLEMENTED;
+    return wxAccStatus::NotImplemented;
 }
 
 #if wxUSE_VARIANT
@@ -3970,9 +3970,9 @@ wxAccStatus wxWindowAccessible::GetFocus(int* WXUNUSED(childId), wxAccessible** 
 // - a "void*" pointer to a wxAccessible child object
 wxAccStatus wxWindowAccessible::GetSelections(wxVariant* WXUNUSED(selections))
 {
-    wxCHECK( GetWindow() != nullptr, wxACC_FAIL );
+    wxCHECK( GetWindow() != nullptr, wxAccStatus::Fail );
 
-    return wxACC_NOT_IMPLEMENTED;
+    return wxAccStatus::NotImplemented;
 }
 #endif // wxUSE_VARIANT
 

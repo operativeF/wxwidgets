@@ -43,7 +43,7 @@ public:
                              wxCoord xoffset, wxCoord yoffset) override;
     virtual void DoDrawPolygon(int n, const wxPoint points[],
                                wxCoord xoffset, wxCoord yoffset,
-                               wxPolygonFillMode fillStyle = wxODDEVEN_RULE) override;
+                               wxPolygonFillMode fillStyle = wxPolygonFillMode::OddEven) override;
 
     void DoDrawRectangle( wxCoord x, wxCoord y, wxCoord width, wxCoord height ) override;
     void DoDrawRoundedRectangle( wxCoord x, wxCoord y, wxCoord width, wxCoord height, double radius = 20.0 ) override;

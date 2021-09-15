@@ -384,7 +384,7 @@ bool wxRegionGeneric::IsEmpty() const
 wxRegionContain wxRegionGeneric::DoContainsPoint(wxCoord x, wxCoord y) const
 {
     wxASSERT(m_refData);
-    return REGION::XPointInRegion(M_REGIONDATA,x,y) ? wxInRegion : wxOutRegion;
+    return REGION::XPointInRegion(M_REGIONDATA,x,y) ? wxRegionContain::Inside : wxRegionContain::Outside;
 }
 
 // Does the region contain the rectangle rect?
@@ -1866,7 +1866,7 @@ wxRegionContain REGION::XRectInRegion(Region region,
 
     /* this is (just) a useful optimization */
     if ((region->numRects == 0) || !EXTENTCHECK(&region->extents, prect))
-        return(wxOutRegion);
+        return(wxRegionContain::Outside);
 
     partOut = false;
     partIn = false;
@@ -1925,6 +1925,6 @@ wxRegionContain REGION::XRectInRegion(Region region,
 
     }
 
-    return(partIn ? ((ry < prect->y2) ? wxPartRegion : wxInRegion) :
-                wxOutRegion);
+    return(partIn ? ((ry < prect->y2) ? wxRegionContain::Partial : wxRegionContain::Inside) :
+                wxRegionContain::Outside);
 }

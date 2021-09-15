@@ -184,11 +184,11 @@ public:
     virtual void SetAlignment( int align ) = 0;
     virtual int GetAlignment() const = 0;
 
-    // enable or disable (if called with wxELLIPSIZE_NONE) replacing parts of
+    // enable or disable (if called with wxEllipsizeMode::None) replacing parts of
     // the item text (hence this only makes sense for renderers showing
     // text...) with ellipsis in order to make it fit the column width
-    virtual void EnableEllipsize(wxEllipsizeMode mode = wxELLIPSIZE_MIDDLE) = 0;
-    void DisableEllipsize() { EnableEllipsize(wxELLIPSIZE_NONE); }
+    virtual void EnableEllipsize(wxEllipsizeMode mode = wxEllipsizeMode::Middle) = 0;
+    void DisableEllipsize() { EnableEllipsize(wxEllipsizeMode::None); }
 
     virtual wxEllipsizeMode GetEllipsizeMode() const = 0;
 

@@ -615,7 +615,7 @@ public:
 
     virtual bool
     Contains(double x, double y,
-             wxPolygonFillMode /*fillStyle = wxWINDING_RULE*/) const override
+             wxPolygonFillMode /*fillStyle = wxPolygonFillMode::WindingRule*/) const override
     {
         return m_path->contains(QPointF(x, y));
     }
@@ -860,7 +860,7 @@ public:
 
     virtual void
     FillPath(const wxGraphicsPath& p,
-             wxPolygonFillMode /*fillStyle = wxWINDING_RULE*/) override
+             wxPolygonFillMode /*fillStyle = wxPolygonFillMode::WindingRule*/) override
     {
         if ( m_brush.IsNull() )
         {

@@ -297,16 +297,16 @@ wxString GetRenderMode(const wxSVGShapeRenderingMode style)
     wxString mode;
     switch (style)
     {
-        case wxSVG_SHAPE_RENDERING_OPTIMIZE_SPEED:
+        case wxSVGShapeRenderingMode::OptimizeSpeed:
             mode = wxS("optimizeSpeed");
             break;
-        case wxSVG_SHAPE_RENDERING_CRISP_EDGES:
+        case wxSVGShapeRenderingMode::CrispEdges:
             mode = wxS("crispEdges");
             break;
-        case wxSVG_SHAPE_RENDERING_GEOMETRIC_PRECISION:
+        case wxSVGShapeRenderingMode::GeometricPrecision:
             mode = wxS("geometricPrecision");
             break;
-        case wxSVG_SHAPE_RENDERING_AUTO:
+        case wxSVGShapeRenderingMode::Auto:
             mode = wxS("auto");
             break;
     }
@@ -541,7 +541,7 @@ void wxSVGFileDCImpl::Init(const std::string& filename,
     m_filename = filename;
     m_graphics_changed = true;
 
-    m_renderingMode = wxSVG_SHAPE_RENDERING_AUTO;
+    m_renderingMode = wxSVGShapeRenderingMode::Auto;
 
     ////////////////////code here
 
@@ -817,7 +817,7 @@ void wxSVGFileDCImpl::DoDrawPolygon(int n, const wxPoint points[],
 
     s += wxString::Format(wxS("\" %s %s %s style=\"fill-rule:%s;\"/>\n"),
         GetRenderMode(m_renderingMode), GetPenPattern(m_pen), GetBrushPattern(m_brush),
-        fillStyle == wxODDEVEN_RULE ? wxS("evenodd") : wxS("nonzero"));
+        fillStyle == wxPolygonFillMode::OddEven ? wxS("evenodd") : wxS("nonzero"));
 
     write(s);
 }

@@ -503,7 +503,7 @@ public:
 
     virtual void DoDrawPolygon(int n, const wxPoint points[],
                            wxCoord xoffset, wxCoord yoffset,
-                           wxPolygonFillMode fillStyle = wxODDEVEN_RULE) = 0;
+                           wxPolygonFillMode fillStyle = wxPolygonFillMode::OddEven) = 0;
     virtual void DoDrawPolyPolygon(int n, const int count[], const wxPoint points[],
                                wxCoord xoffset, wxCoord yoffset,
                                wxPolygonFillMode fillStyle);
@@ -1039,15 +1039,15 @@ public:
         { m_pimpl->DrawLines( list, xoffset, yoffset ); }
     void DrawPolygon(int n, const wxPoint points[],
                      wxCoord xoffset = 0, wxCoord yoffset = 0,
-                     wxPolygonFillMode fillStyle = wxODDEVEN_RULE)
+                     wxPolygonFillMode fillStyle = wxPolygonFillMode::OddEven)
         { m_pimpl->DoDrawPolygon(n, points, xoffset, yoffset, fillStyle); }
     void DrawPolygon(const wxPointList *list,
                      wxCoord xoffset = 0, wxCoord yoffset = 0,
-                     wxPolygonFillMode fillStyle = wxODDEVEN_RULE)
+                     wxPolygonFillMode fillStyle = wxPolygonFillMode::OddEven)
         { m_pimpl->DrawPolygon( list, xoffset, yoffset, fillStyle ); }
     void DrawPolyPolygon(int n, const int count[], const wxPoint points[],
                          wxCoord xoffset = 0, wxCoord yoffset = 0,
-                         wxPolygonFillMode fillStyle = wxODDEVEN_RULE)
+                         wxPolygonFillMode fillStyle = wxPolygonFillMode::OddEven)
         { m_pimpl->DoDrawPolyPolygon(n, count, points, xoffset, yoffset, fillStyle); }
     void DrawRectangle(wxCoord x, wxCoord y, wxCoord width, wxCoord height)
         { m_pimpl->DoDrawRectangle(x, y, width, height); }

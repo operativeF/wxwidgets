@@ -2041,7 +2041,7 @@ public:
     wxAccStatus GetChildCount(int* childCount) override;
 
         // Gets the specified child (starting from 1).
-        // If *child is NULL and return value is wxACC_OK,
+        // If *child is NULL and return value is wxAccStatus::Ok,
         // this means that the child is a simple element and
         // not an accessible object.
     wxAccStatus GetChild(int childId, wxAccessible** child) override;
@@ -2051,12 +2051,12 @@ public:
 
         // Performs the default action. childId is 0 (the action for this object)
         // or > 0 (the action for a child).
-        // Return wxACC_NOT_SUPPORTED if there is no default action for this
+        // Return wxAccStatus::NotSupported if there is no default action for this
         // window (e.g. an edit control).
     wxAccStatus DoDefaultAction(int childId) override;
 
         // Gets the default action for this object (0) or > 0 (the action for a child).
-        // Return wxACC_OK even if there is no action. actionName is the action, or the empty
+        // Return wxAccStatus::Ok even if there is no action. actionName is the action, or the empty
         // string if there is no action.
         // The retrieved string describes the action that is performed on an object,
         // not what the object does as a result. For example, a toolbar button that prints

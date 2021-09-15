@@ -108,10 +108,10 @@ protected:
     void DoDrawLines(int n, const wxPoint points[], wxCoord xoffset = 0, wxCoord yoffset = 0) override;
     void DoDrawPolygon(int n, const wxPoint points[],
                        wxCoord xoffset = 0, wxCoord yoffset = 0,
-                       wxPolygonFillMode fillStyle = wxODDEVEN_RULE) override;
+                       wxPolygonFillMode fillStyle = wxPolygonFillMode::OddEven) override;
     void DoDrawPolyPolygon(int n, const int count[], const wxPoint points[],
                            wxCoord xoffset = 0, wxCoord yoffset = 0,
-                           wxPolygonFillMode fillStyle = wxODDEVEN_RULE) override;
+                           wxPolygonFillMode fillStyle = wxPolygonFillMode::OddEven) override;
     void DoDrawRectangle(wxCoord x, wxCoord y, wxCoord width, wxCoord height) override;
     void DoDrawRoundedRectangle(wxCoord x, wxCoord y, wxCoord width, wxCoord height, double radius = 20) override;
     void DoDrawEllipse(wxCoord x, wxCoord y, wxCoord width, wxCoord height) override;

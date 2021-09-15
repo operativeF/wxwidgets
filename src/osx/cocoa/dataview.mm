@@ -2867,7 +2867,7 @@ void wxDataViewRendererNativeData::Init()
     m_origFont = NULL;
     m_origTextColour = NULL;
     m_origBackgroundColour = NULL;
-    m_ellipsizeMode = wxELLIPSIZE_MIDDLE;
+    m_ellipsizeMode = wxEllipsizeMode::Middle;
     m_hasCustomFont = false;
 
     if ( m_ColumnCell )
@@ -2879,19 +2879,19 @@ void wxDataViewRendererNativeData::ApplyLineBreakMode(NSCell *cell)
     NSLineBreakMode nsMode = NSLineBreakByWordWrapping;
     switch ( m_ellipsizeMode )
     {
-        case wxELLIPSIZE_NONE:
+        case wxEllipsizeMode::None:
             nsMode = NSLineBreakByClipping;
             break;
 
-        case wxELLIPSIZE_START:
+        case wxEllipsizeMode::Start:
             nsMode = NSLineBreakByTruncatingHead;
             break;
 
-        case wxELLIPSIZE_MIDDLE:
+        case wxEllipsizeMode::Middle:
             nsMode = NSLineBreakByTruncatingMiddle;
             break;
 
-        case wxELLIPSIZE_END:
+        case wxEllipsizeMode::End:
             nsMode = NSLineBreakByTruncatingTail;
             break;
     }

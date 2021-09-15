@@ -17,7 +17,7 @@ public:
     wxRegionGeneric(wxCoord x, wxCoord y, wxCoord w, wxCoord h);
     wxRegionGeneric(const wxPoint& topLeft, const wxPoint& bottomRight);
     wxRegionGeneric(const wxRect& rect);
-    wxRegionGeneric(size_t n, const wxPoint *points, wxPolygonFillMode fillStyle = wxODDEVEN_RULE);
+    wxRegionGeneric(size_t n, const wxPoint *points, wxPolygonFillMode fillStyle = wxPolygonFillMode::OddEven);
     wxRegionGeneric(const wxBitmap& bmp);
     wxRegionGeneric(const wxBitmap& bmp, const wxColour& transp, int tolerance = 0);
     wxRegionGeneric();

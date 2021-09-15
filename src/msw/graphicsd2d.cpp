@@ -1349,7 +1349,7 @@ public :
     // gets the bounding box enclosing all points (possibly including control points)
     void GetBox(double* x, double* y, double* w, double *h) const override;
 
-    bool Contains(double x, double y, wxPolygonFillMode fillStyle = wxODDEVEN_RULE) const override;
+    bool Contains(double x, double y, wxPolygonFillMode fillStyle = wxPolygonFillMode::OddEven) const override;
 
     // appends an ellipsis as a new closed subpath fitting the passed rectangle
     void AddCircle(double x, double y, double r) override;
@@ -1790,7 +1790,7 @@ void wxD2DPathData::AddArc(double x, double y, double r, double startAngle, doub
         // Remarks:
         // 1. Parity of the number of the circles has to be
         // preserved because this matters when path would be
-        // filled with wxODDEVEN_RULE flag set (using
+        // filled with wxPolygonFillMode::OddEven flag set (using
         // D2D1_FILL_MODE_ALTERNATE mode) when number of the
         // edges is counted.
         // 2. ID2D1GeometrySink::AddArc() doesn't work
@@ -2102,7 +2102,7 @@ void wxD2DPathData::GetBox(double* x, double* y, double* w, double *h) const
 bool wxD2DPathData::Contains(double x, double y, wxPolygonFillMode fillStyle) const
 {
     BOOL result;
-    const D2D1_FILL_MODE fillMode = (fillStyle == wxODDEVEN_RULE) ? D2D1_FILL_MODE_ALTERNATE : D2D1_FILL_MODE_WINDING;
+    const D2D1_FILL_MODE fillMode = (fillStyle == wxPolygonFillMode::OddEven) ? D2D1_FILL_MODE_ALTERNATE : D2D1_FILL_MODE_WINDING;
     ID2D1Geometry *curGeometry = GetFullGeometry(fillMode);
     curGeometry->FillContainsPoint(D2D1::Point2F(gsl::narrow_cast<float>(x), gsl::narrow_cast<float>(y)), D2D1::Matrix3x2F::Identity(), &result);
     return result != FALSE;
@@ -3937,7 +3937,7 @@ public:
 
     void StrokePath(const wxGraphicsPath& p) override;
 
-    void FillPath(const wxGraphicsPath& p , wxPolygonFillMode fillStyle = wxODDEVEN_RULE) override;
+    void FillPath(const wxGraphicsPath& p , wxPolygonFillMode fillStyle = wxPolygonFillMode::OddEven) override;
 
     void DrawRectangle(double x, double y, double w, double h) override;
 
@@ -4375,7 +4375,7 @@ void wxD2DContext::FillPath(const wxGraphicsPath& p , wxPolygonFillMode fillStyl
     AdjustRenderTargetSize();
 
     wxD2DPathData* pathData = wxGetD2DPathData(p);
-    pathData->SetFillMode(fillStyle == wxODDEVEN_RULE ? D2D1_FILL_MODE_ALTERNATE : D2D1_FILL_MODE_WINDING);
+    pathData->SetFillMode(fillStyle == wxPolygonFillMode::OddEven ? D2D1_FILL_MODE_ALTERNATE : D2D1_FILL_MODE_WINDING);
     pathData->Flush();
 
     if (!m_brush.IsNull())

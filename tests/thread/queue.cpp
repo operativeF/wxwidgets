@@ -101,7 +101,7 @@ TEST_CASE("TestReceive")
         // each thread should return the number of messages received.
         // if it returns a negative, then it detected some problem.
         wxThread::ExitCode code = threads[i]->Wait();
-        CHECK_EQ( code, (wxThread::ExitCode)wxMSGQUEUE_NO_ERROR );
+        CHECK_EQ( code, (wxThread::ExitCode)wxMessageQueueError::None );
         delete threads[i];
     }
 }
@@ -110,7 +110,7 @@ TEST_CASE("TestReceive")
 // exactly two messages.
 // Exactly to messages are posted into first thread queue, but
 // only one message is posted to the second thread queue.
-// Therefore first thread should return with wxMSGQUEUE_NO_ERROR, but the second
+// Therefore first thread should return with wxMessageQueueError::None, but the second
 // should return wxMSGQUEUUE_TIMEOUT.
 TEST_CASE("TestReceiveTimeout")
 {
@@ -124,17 +124,17 @@ TEST_CASE("TestReceiveTimeout")
     thread2->Run();
 
     // Post two messages to the first thread
-    CHECK_EQ( thread1->GetQueue().Post(0), wxMSGQUEUE_NO_ERROR );
-    CHECK_EQ( thread1->GetQueue().Post(1), wxMSGQUEUE_NO_ERROR );
+    CHECK_EQ( thread1->GetQueue().Post(0), wxMessageQueueError::None );
+    CHECK_EQ( thread1->GetQueue().Post(1), wxMessageQueueError::None );
 
     // ...but only one message to the second
-    CHECK_EQ( thread2->GetQueue().Post(0), wxMSGQUEUE_NO_ERROR );
+    CHECK_EQ( thread2->GetQueue().Post(0), wxMessageQueueError::None );
 
     wxThread::ExitCode code1 = thread1->Wait();
     wxThread::ExitCode code2 = thread2->Wait();
 
-    CHECK_EQ( code1, (wxThread::ExitCode)wxMSGQUEUE_NO_ERROR );
-    CHECK_EQ( code2, (wxThread::ExitCode)wxMSGQUEUE_TIMEOUT );
+    CHECK_EQ( code1, (wxThread::ExitCode)wxMessageQueueError::None );
+    CHECK_EQ( code2, (wxThread::ExitCode)wxMessageQueueError::Timeout );
     delete thread2;
     delete thread1;
 }
@@ -155,28 +155,28 @@ void* MyThread::Entry()
         else
             result = m_queue.Receive(msg);
 
-        if ( result == wxMSGQUEUE_MISC_ERROR )
-            return (wxThread::ExitCode)wxMSGQUEUE_MISC_ERROR;
+        if ( result == wxMessageQueueError::Misc )
+            return (wxThread::ExitCode)wxMessageQueueError::Misc;
 
-        if ( result == wxMSGQUEUE_NO_ERROR )
+        if ( result == wxMessageQueueError::None )
         {
             if ( m_nextThread != nullptr )
             {
                 wxMessageQueueError res = m_nextThread->GetQueue().Post(msg);
 
-                if ( res == wxMSGQUEUE_MISC_ERROR )
-                    return (wxThread::ExitCode)wxMSGQUEUE_MISC_ERROR;
+                if ( res == wxMessageQueueError::Misc )
+                    return (wxThread::ExitCode)wxMessageQueueError::Misc;
 
                 // We can't use Catch asserts outside of the main thread
                 // currently, unfortunately.
                 // TODO: Should we really be throwing asserts here?
-                //wxASSERT( res == wxMSGQUEUE_NO_ERROR );
+                //wxASSERT( res == wxMessageQueueError::None );
             }
             ++messagesReceived;
             continue;
         }
 
-        wxASSERT( result == wxMSGQUEUE_TIMEOUT );
+        wxASSERT( result == wxMessageQueueError::Timeout );
 
         break;
     }
@@ -186,8 +186,8 @@ void* MyThread::Entry()
         // TODO: Should we really be throwing asserts here?
         //wxASSERT( m_type == WaitWithTimeout );
 
-        return (wxThread::ExitCode)wxMSGQUEUE_TIMEOUT;
+        return (wxThread::ExitCode)wxMessageQueueError::Timeout;
     }
 
-    return (wxThread::ExitCode)wxMSGQUEUE_NO_ERROR;
+    return (wxThread::ExitCode)wxMessageQueueError::None;
 }

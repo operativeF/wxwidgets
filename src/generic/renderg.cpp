@@ -144,7 +144,7 @@ public:
                               const wxRect& rect,
                               int align = wxALIGN_LEFT | wxALIGN_TOP,
                               int flags = 0,
-                              wxEllipsizeMode ellipsizeMode = wxELLIPSIZE_END) override;
+                              wxEllipsizeMode ellipsizeMode = wxEllipsizeMode::End) override;
 
     wxSplitterRenderParams GetSplitterParams(const wxWindow *win) override;
 
@@ -456,7 +456,7 @@ wxRendererGeneric::DrawHeaderButtonContents(wxWindow *win,
         {
             label = wxControl::Ellipsize(label,
                                          dc,
-                                         wxELLIPSIZE_END,
+                                         wxEllipsizeMode::End,
                                          availWidth,
                                          wxELLIPSIZE_FLAGS_NONE);
             textSize.x = dc.GetTextExtent(label).x;

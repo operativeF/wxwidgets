@@ -450,7 +450,7 @@ std::string DoEllipsizeSingleLine(const std::string& curLine, const wxDC& dc,
     wxASSERT_LEVEL_2_MSG(!curLine.Contains('\n'),
                          "Use Ellipsize() instead!");
 
-    wxASSERT_MSG( mode != wxELLIPSIZE_NONE, "shouldn't be called at all then" );
+    wxASSERT_MSG( mode != wxEllipsizeMode::None, "shouldn't be called at all then" );
 
     if (maxFinalWidthPx <= 0)
         return {};
@@ -470,7 +470,7 @@ std::string DoEllipsizeSingleLine(const std::string& curLine, const wxDC& dc,
     // let's compute the range of characters to remove depending on the ellipsization mode:
     switch (mode)
     {
-        case wxELLIPSIZE_START:
+        case wxEllipsizeMode::Start:
             {
                 calc.Init(0, 1);
                 while ( !calc.IsShortEnough() )
@@ -483,7 +483,7 @@ std::string DoEllipsizeSingleLine(const std::string& curLine, const wxDC& dc,
                 break;
             }
 
-        case wxELLIPSIZE_MIDDLE:
+        case wxEllipsizeMode::Middle:
             {
                 // NOTE: the following piece of code works also when len == 1
 
@@ -534,7 +534,7 @@ std::string DoEllipsizeSingleLine(const std::string& curLine, const wxDC& dc,
             }
             break;
 
-        case wxELLIPSIZE_END:
+        case wxEllipsizeMode::End:
             {
                 calc.Init(len - 1, 1);
                 while ( !calc.IsShortEnough() )
@@ -547,7 +547,7 @@ std::string DoEllipsizeSingleLine(const std::string& curLine, const wxDC& dc,
                 break;
             }
 
-        case wxELLIPSIZE_NONE:
+        case wxEllipsizeMode::None:
         default:
             wxFAIL_MSG("invalid ellipsize mode");
             return curLine;
@@ -564,7 +564,7 @@ std::string wxControlBase::Ellipsize(std::string_view label, const wxDC& dc,
                                   wxEllipsizeMode mode, int maxFinalWidth,
                                   int flags)
 {
-    if (mode == wxELLIPSIZE_NONE)
+    if (mode == wxEllipsizeMode::None)
         return std::string(label);
 
     std::string ret;

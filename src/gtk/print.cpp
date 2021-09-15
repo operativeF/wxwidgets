@@ -1534,7 +1534,7 @@ void wxGtkPrinterDCImpl::DoDrawPolygon(int n, const wxPoint points[],
     if (n==0) return;
 
     cairo_save(m_cairo);
-    if (fillStyle == wxWINDING_RULE)
+    if (fillStyle == wxPolygonFillMode::WindingRule)
         cairo_set_fill_rule( m_cairo, CAIRO_FILL_RULE_WINDING);
     else
         cairo_set_fill_rule( m_cairo, CAIRO_FILL_RULE_EVEN_ODD);

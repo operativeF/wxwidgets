@@ -306,7 +306,7 @@ public:
                               const wxRect& rect,
                               int align = wxALIGN_LEFT | wxALIGN_TOP,
                               int flags = 0,
-                              wxEllipsizeMode ellipsizeMode = wxELLIPSIZE_END) override;
+                              wxEllipsizeMode ellipsizeMode = wxEllipsizeMode::End) override;
 
     wxSplitterRenderParams GetSplitterParams(const wxWindow *win) override;
 
@@ -1103,12 +1103,12 @@ void wxRendererXP::DrawItemText(wxWindow* win,
         std::string ellipsizedText;
         switch ( ellipsizeMode )
         {
-            case wxELLIPSIZE_NONE:
+            case wxEllipsizeMode::None:
                 // no flag required
                 break;
 
-            case wxELLIPSIZE_START:
-            case wxELLIPSIZE_MIDDLE:
+            case wxEllipsizeMode::Start:
+            case wxEllipsizeMode::Middle:
                 // no native support for this ellipsize modes, use wxWidgets
                 // implementation (may not be 100% accurate because per
                 // definition the theme defines the font but should be close
@@ -1119,7 +1119,7 @@ void wxRendererXP::DrawItemText(wxWindow* win,
                                                       wxELLIPSIZE_FLAGS_NONE);
                 break;
 
-            case wxELLIPSIZE_END:
+            case wxEllipsizeMode::End:
                 textFlags |= DT_END_ELLIPSIS;
                 break;
         }

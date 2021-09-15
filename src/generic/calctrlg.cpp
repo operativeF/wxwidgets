@@ -837,7 +837,7 @@ void wxGenericCalendarCtrl::OnPaint(wxPaintEvent& WXUNUSED(event))
                 m_leftArrowRect = wxRect(larrowx - 3, arrowy - 3, (arrowheight / 2) + 8, (arrowheight + 6));
                 dc.SetBrush(*wxBLACK_BRUSH);
                 dc.SetPen(*wxBLACK_PEN);
-                dc.DrawPolygon(3, leftarrow, larrowx , arrowy, wxWINDING_RULE);
+                dc.DrawPolygon(3, leftarrow, larrowx , arrowy, wxPolygonFillMode::WindingRule);
                 dc.SetBrush(*wxTRANSPARENT_BRUSH);
                 dc.DrawRectangle(m_leftArrowRect);
             }
@@ -847,7 +847,7 @@ void wxGenericCalendarCtrl::OnPaint(wxPaintEvent& WXUNUSED(event))
                 m_rightArrowRect = wxRect(rarrowx - 4, arrowy - 3, (arrowheight / 2) + 8, (arrowheight + 6));
                 dc.SetBrush(*wxBLACK_BRUSH);
                 dc.SetPen(*wxBLACK_PEN);
-                dc.DrawPolygon(3, rightarrow, rarrowx , arrowy, wxWINDING_RULE);
+                dc.DrawPolygon(3, rightarrow, rarrowx , arrowy, wxPolygonFillMode::WindingRule);
                 dc.SetBrush(*wxTRANSPARENT_BRUSH);
                 dc.DrawRectangle(m_rightArrowRect);
             }

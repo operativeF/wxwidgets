@@ -185,7 +185,7 @@ public :
     // gets the bounding box enclosing all points (possibly including control points)
     void GetBox(double *x, double *y, double *w, double *h) const override;
 
-    bool Contains( double x, double y, wxPolygonFillMode fillStyle = wxWINDING_RULE) const override;
+    bool Contains( double x, double y, wxPolygonFillMode fillStyle = wxPolygonFillMode::WindingRule) const override;
 
 private :
     cairo_t* m_pathContext;
@@ -487,7 +487,7 @@ public:
     void EndLayer() override;
 
     void StrokePath( const wxGraphicsPath& p ) override;
-    void FillPath( const wxGraphicsPath& p , wxPolygonFillMode fillStyle = wxWINDING_RULE ) override;
+    void FillPath( const wxGraphicsPath& p , wxPolygonFillMode fillStyle = wxPolygonFillMode::WindingRule ) override;
     void ClearRectangle( double x, double y, double w, double h ) override;
     void DrawRectangle( double x, double y, double w, double h) override;
 
@@ -1369,7 +1369,7 @@ void wxCairoPathData::GetBox(double *x, double *y, double *w, double *h) const
 
 bool wxCairoPathData::Contains( double x, double y, wxPolygonFillMode fillStyle ) const
 {
-    cairo_set_fill_rule(m_pathContext,fillStyle==wxODDEVEN_RULE ? CAIRO_FILL_RULE_EVEN_ODD : CAIRO_FILL_RULE_WINDING);
+    cairo_set_fill_rule(m_pathContext,fillStyle==wxPolygonFillMode::OddEven ? CAIRO_FILL_RULE_EVEN_ODD : CAIRO_FILL_RULE_WINDING);
     return cairo_in_fill( m_pathContext, x, y) != 0;
 }
 
@@ -2641,7 +2641,7 @@ void wxCairoContext::FillPath( const wxGraphicsPath& path , wxPolygonFillMode fi
         cairo_path_t* cp = (cairo_path_t*) path.GetNativePath() ;
         cairo_append_path(m_context,cp);
         ((wxCairoBrushData*)m_brush.GetRefData())->Apply(this);
-        cairo_set_fill_rule(m_context,fillStyle==wxODDEVEN_RULE ? CAIRO_FILL_RULE_EVEN_ODD : CAIRO_FILL_RULE_WINDING);
+        cairo_set_fill_rule(m_context,fillStyle==wxPolygonFillMode::OddEven ? CAIRO_FILL_RULE_EVEN_ODD : CAIRO_FILL_RULE_WINDING);
         cairo_fill(m_context);
         path.UnGetNativePath(cp);
     }

@@ -241,7 +241,7 @@ protected:
 
     void DoDrawPolygon(int n, const wxPoint points[],
                                wxCoord xoffset, wxCoord yoffset,
-                               wxPolygonFillMode fillStyle = wxODDEVEN_RULE) override
+                               wxPolygonFillMode fillStyle = wxPolygonFillMode::OddEven) override
     {
         wxPoint* points_alloc = Mirror(n, points);
 

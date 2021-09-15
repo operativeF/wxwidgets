@@ -832,7 +832,7 @@ void wxRibbonBar::OnPaint(wxPaintEvent& WXUNUSED(evt))
 {
     wxAutoBufferedPaintDC dc(this);
 
-    if(GetUpdateRegion().Contains(0, 0, GetClientSize().x, m_tab_height) == wxOutRegion)
+    if(GetUpdateRegion().Contains(0, 0, GetClientSize().x, m_tab_height) == wxRegionContain::Outside)
     {
         // Nothing to do in the tab area, and the page area is handled by the active page
         return;

@@ -89,10 +89,10 @@ enum class wxBitmapType
 };
 
 //  Polygon filling mode
-enum wxPolygonFillMode
+enum class wxPolygonFillMode
 {
-    wxODDEVEN_RULE = 1,
-    wxWINDING_RULE
+    OddEven,
+    WindingRule
 };
 
 // Standard cursors
@@ -173,12 +173,12 @@ enum wxEllipsizeFlags
 
 // NB: Don't change the order of these values, they're the same as in
 //     PangoEllipsizeMode enum.
-enum wxEllipsizeMode
+enum class wxEllipsizeMode
 {
-    wxELLIPSIZE_NONE,
-    wxELLIPSIZE_START,
-    wxELLIPSIZE_MIDDLE,
-    wxELLIPSIZE_END
+    None,
+    Start,
+    Middle,
+    End
 };
 
 // ---------------------------------------------------------------------------

@@ -2989,7 +2989,7 @@ void wxSTCListBox::OnDrawItemText(wxDC& dc, const wxRect& rect,
 {
     wxDCTextColourChanger tcc(dc, textCol);
 
-    wxString ellipsizedlabel = wxControl::Ellipsize(label, dc, wxELLIPSIZE_END,
+    wxString ellipsizedlabel = wxControl::Ellipsize(label, dc, wxEllipsizeMode::End,
                                                     rect.GetWidth());
     dc.DrawText(ellipsizedlabel, rect.GetLeft(), rect.GetTop());
 }

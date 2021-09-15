@@ -802,7 +802,7 @@ scanFillGeneralPoly( wxRegion* rgn,
     }
     pSLL = ET.scanlines.next;
     
-    if (fillStyle == wxODDEVEN_RULE)
+    if (fillStyle == wxPolygonFillMode::OddEven)
     {
         /*
          *  for each scanline
@@ -1068,15 +1068,15 @@ bool wxRegion::DoCombine(const wxRegion& region, wxRegionOp op)
     {
         switch ( op )
         {
-            case wxRGN_COPY:
-            case wxRGN_OR:
-            case wxRGN_XOR:
+            case wxRegionOp::Copy:
+            case wxRegionOp::Or:
+            case wxRegionOp::Xor:
                 // These operations make sense with a null region.
                 *this = region;
                 return true;
 
-            case wxRGN_AND:
-            case wxRGN_DIFF:
+            case wxRegionOp::And:
+            case wxRegionOp::Diff:
                 // Those ones don't really make sense so just leave this region
                 // empty/invalid.
                 return false;
@@ -1090,15 +1090,15 @@ bool wxRegion::DoCombine(const wxRegion& region, wxRegionOp op)
 
     switch (op)
     {
-        case wxRGN_AND:
+        case wxRegionOp::And:
             wxOSX_VERIFY_NOERR(HIShapeIntersect( M_REGION , OTHER_M_REGION(region) , M_REGION ));
             break ;
 
-        case wxRGN_OR:
+        case wxRegionOp::Or:
             wxOSX_VERIFY_NOERR(HIShapeUnion( M_REGION , OTHER_M_REGION(region) , M_REGION ));
             break ;
 
-        case wxRGN_XOR:
+        case wxRegionOp::Xor:
             {
                 // XOR is defined as the difference between union and intersection
                 wxCFRef< HIShapeRef > unionshape( HIShapeCreateUnion( M_REGION , OTHER_M_REGION(region) ) );
@@ -1107,11 +1107,11 @@ bool wxRegion::DoCombine(const wxRegion& region, wxRegionOp op)
             }
             break ;
 
-        case wxRGN_DIFF:
+        case wxRegionOp::Diff:
             wxOSX_VERIFY_NOERR(HIShapeDifference( M_REGION , OTHER_M_REGION(region) , M_REGION )) ;
             break ;
 
-        case wxRGN_COPY:
+        case wxRegionOp::Copy:
         default:
             M_REGION.reset( HIShapeCreateMutableCopy( OTHER_M_REGION(region) ) );
             break ;
@@ -1188,20 +1188,20 @@ WXHRGN wxRegion::GetWXHRGN() const
 wxRegionContain wxRegion::DoContainsPoint(wxCoord x, wxCoord y) const
 {
     if (!m_refData)
-        return wxOutRegion;
+        return wxRegionContain::Outside;
 
     CGPoint p = CGPointMake( x, y ) ;
     if (HIShapeContainsPoint( M_REGION , &p ) )
-        return wxInRegion;
+        return wxRegionContain::Inside;
 
-    return wxOutRegion;
+    return wxRegionContain::Outside;
 }
 
 // Does the region contain the rectangle (x, y, w, h)?
 wxRegionContain wxRegion::DoContainsRect(const wxRect& r) const
 {
     if (!m_refData)
-        return wxOutRegion;
+        return wxRegionContain::Outside;
 
     CGRect rect = CGRectMake(r.x,r.y,r.width,r.height);
     wxCFRef<HIShapeRef> rectshape(HIShapeCreateWithRect(&rect));
@@ -1210,11 +1210,11 @@ wxRegionContain wxRegion::DoContainsRect(const wxRect& r) const
     HIShapeGetBounds(intersect, &bounds);
 
     if ( HIShapeIsRectangular(intersect) && CGRectEqualToRect(rect,bounds) )
-        return wxInRegion;
+        return wxRegionContain::Inside;
     else if ( HIShapeIsEmpty( intersect ) )
-        return wxOutRegion;
+        return wxRegionContain::Outside;
     else
-        return wxPartRegion;
+        return wxRegionContain::Partial;
 }
 
 ///////////////////////////////////////////////////////////////////////////////

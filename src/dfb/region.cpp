@@ -204,28 +204,28 @@ bool wxRegion::DoXor(const wxRegion& region)
 
 wxRegionContain wxRegion::DoContainsPoint(wxCoord x, wxCoord y) const
 {
-    wxCHECK_MSG( IsOk(), wxOutRegion, "invalid region" );
+    wxCHECK_MSG( IsOk(), wxRegionContain::Outside, "invalid region" );
 
     if (M_REGION->m_rect.Contains(x, y))
-        return wxInRegion;
+        return wxRegionContain::Inside;
     else
-        return wxOutRegion;
+        return wxRegionContain::Outside;
 }
 
 wxRegionContain wxRegion::DoContainsRect(const wxRect& rect) const
 {
-    wxCHECK_MSG( IsOk(), wxOutRegion, "invalid region" );
+    wxCHECK_MSG( IsOk(), wxRegionContain::Outside, "invalid region" );
 
     // 1) is the rectangle entirely covered by the region?
     if (M_REGION->m_rect.Contains(rect))
-        return wxInRegion;
+        return wxRegionContain::Inside;
 
     // 2) is the rectangle completely outside the region?
     if (!M_REGION->m_rect.Intersects(rect))
-        return wxOutRegion;
+        return wxRegionContain::Outside;
 
     // 3) neither case happened => it is partially covered:
-    return wxPartRegion;
+    return wxRegionContain::Partial;
 }
 
 //-----------------------------------------------------------------------------

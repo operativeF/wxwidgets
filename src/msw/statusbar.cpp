@@ -271,12 +271,12 @@ void wxStatusBar::DoUpdateStatusText(int nField)
     std::string text = GetStatusText(nField);
 
     // do we need to ellipsize this string?
-    wxEllipsizeMode ellmode = wxELLIPSIZE_NONE;
-    if (HasFlag(wxSTB_ELLIPSIZE_START)) ellmode = wxELLIPSIZE_START;
-    else if (HasFlag(wxSTB_ELLIPSIZE_MIDDLE)) ellmode = wxELLIPSIZE_MIDDLE;
-    else if (HasFlag(wxSTB_ELLIPSIZE_END)) ellmode = wxELLIPSIZE_END;
+    wxEllipsizeMode ellmode = wxEllipsizeMode::None;
+    if (HasFlag(wxSTB_ELLIPSIZE_START)) ellmode = wxEllipsizeMode::Start;
+    else if (HasFlag(wxSTB_ELLIPSIZE_MIDDLE)) ellmode = wxEllipsizeMode::Middle;
+    else if (HasFlag(wxSTB_ELLIPSIZE_END)) ellmode = wxEllipsizeMode::End;
 
-    if (ellmode == wxELLIPSIZE_NONE)
+    if (ellmode == wxEllipsizeMode::None)
     {
         // if we have the wxSTB_SHOW_TIPS we must set the ellipsized flag even if
         // we don't ellipsize the text but just truncate it

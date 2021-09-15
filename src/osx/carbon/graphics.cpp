@@ -1217,7 +1217,7 @@ public :
     // gets the bounding box enclosing all points (possibly including control points)
     void GetBox(double *x, double *y, double *w, double *h) const override;
 
-    bool Contains( double x, double y, wxPolygonFillMode fillStyle = wxODDEVEN_RULE) const override;
+    bool Contains( double x, double y, wxPolygonFillMode fillStyle = wxPolygonFillMode::OddEven) const override;
 private :
     CGMutablePathRef m_path;
 };
@@ -1375,7 +1375,7 @@ void wxMacCoreGraphicsPathData::GetBox(double *x, double *y, double *w, double *
 
 bool wxMacCoreGraphicsPathData::Contains( double x, double y, wxPolygonFillMode fillStyle) const
 {
-    return CGPathContainsPoint( m_path, NULL, CGPointMake((CGFloat) x,(CGFloat) y), fillStyle == wxODDEVEN_RULE );
+    return CGPathContainsPoint( m_path, NULL, CGPointMake((CGFloat) x,(CGFloat) y), fillStyle == wxPolygonFillMode::OddEven );
 }
 
 
@@ -1470,10 +1470,10 @@ public:
     void StrokePath( const wxGraphicsPath &path ) override;
 
     // fills a path with the current brush
-    void FillPath( const wxGraphicsPath &path, wxPolygonFillMode fillStyle = wxODDEVEN_RULE ) override;
+    void FillPath( const wxGraphicsPath &path, wxPolygonFillMode fillStyle = wxPolygonFillMode::OddEven ) override;
 
     // draws a path by first filling and then stroking
-    void DrawPath( const wxGraphicsPath &path, wxPolygonFillMode fillStyle = wxODDEVEN_RULE ) override;
+    void DrawPath( const wxGraphicsPath &path, wxPolygonFillMode fillStyle = wxPolygonFillMode::OddEven ) override;
 
     // paints a transparent rectangle (only useful for bitmaps or windows)
     void ClearRectangle(double x, double y, double w, double h) override;
@@ -2274,14 +2274,14 @@ void wxMacCoreGraphicsContext::DrawPath( const wxGraphicsPath &path , wxPolygonF
     {
         if ( m_pen.IsNull() )
         {
-            if ( fillStyle == wxODDEVEN_RULE )
+            if ( fillStyle == wxPolygonFillMode::OddEven )
                 mode = kCGPathEOFill;
             else
                 mode = kCGPathFill;
         }
         else
         {
-            if ( fillStyle == wxODDEVEN_RULE )
+            if ( fillStyle == wxPolygonFillMode::OddEven )
                 mode = kCGPathEOFillStroke;
             else
                 mode = kCGPathFillStroke;
@@ -2332,7 +2332,7 @@ void wxMacCoreGraphicsContext::FillPath( const wxGraphicsPath &path , wxPolygonF
     {
         ((wxMacCoreGraphicsBrushData*)m_brush.GetRefData())->Apply(this);
         CGContextAddPath( m_cgContext , (CGPathRef) path.GetNativePath() );
-        if ( fillStyle == wxODDEVEN_RULE )
+        if ( fillStyle == wxPolygonFillMode::OddEven )
             CGContextEOFillPath( m_cgContext );
         else
             CGContextFillPath( m_cgContext );

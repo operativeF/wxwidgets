@@ -1101,11 +1101,11 @@ void wxWindowDCImpl::DoDrawBitmap( const wxBitmap &bitmap,
 
     GdkRegion* const clipRegion = m_currentClippingRegion.GetRegion();
     // determine clip region overlap
-    int overlap = wxInRegion;
+    int overlap = wxRegionContain::Inside;
     if (clipRegion)
     {
         overlap = m_currentClippingRegion.Contains(xx, yy, ww, hh);
-        if (overlap == wxOutRegion)
+        if (overlap == wxRegionContain::Outside)
             return;
     }
 
@@ -1130,7 +1130,7 @@ void wxWindowDCImpl::DoDrawBitmap( const wxBitmap &bitmap,
             mask = ScaleMask(mask, 0, 0, w, h, ww, hh, m_scale.x, m_scale.y);
             mask_new = mask;
         }
-        if (overlap == wxPartRegion)
+        if (overlap == wxRegionContain::Partial)
         {
             // need a new mask that also masks the clipped area,
             // because gc can't have both a mask and a clip region
@@ -1279,11 +1279,11 @@ bool wxWindowDCImpl::DoBlit( wxCoord xdest, wxCoord ydest,
 
     GdkRegion* const clipRegion = m_currentClippingRegion.GetRegion();
     // determine dest clip region overlap
-    int overlap = wxInRegion;
+    int overlap = wxRegionContain::Inside;
     if (clipRegion)
     {
         overlap = m_currentClippingRegion.Contains(dst_x, dst_y, dst_w, dst_h);
-        if (overlap == wxOutRegion)
+        if (overlap == wxRegionContain::Outside)
             return true;
     }
 
@@ -1320,7 +1320,7 @@ bool wxWindowDCImpl::DoBlit( wxCoord xdest, wxCoord ydest,
             srcMask_x = 0;
             srcMask_y = 0;
         }
-        if (overlap == wxPartRegion)
+        if (overlap == wxRegionContain::Partial)
         {
             // need a new mask that also masks the clipped area,
             // because gc can't have both a mask and a clip region

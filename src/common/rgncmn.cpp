@@ -158,27 +158,27 @@ bool wxRegionBase::Union(const wxBitmap& bmp,
 // implement some wxRegionBase pure virtuals in terms of Combine()
 bool wxRegionWithCombine::DoUnionWithRect(const wxRect& rect)
 {
-    return Combine(rect, wxRGN_OR);
+    return Combine(rect, wxRegionOp::Or);
 }
 
 bool wxRegionWithCombine::DoUnionWithRegion(const wxRegion& region)
 {
-    return DoCombine(region, wxRGN_OR);
+    return DoCombine(region, wxRegionOp::Or);
 }
 
 bool wxRegionWithCombine::DoIntersect(const wxRegion& region)
 {
-    return DoCombine(region, wxRGN_AND);
+    return DoCombine(region, wxRegionOp::And);
 }
 
 bool wxRegionWithCombine::DoSubtract(const wxRegion& region)
 {
-    return DoCombine(region, wxRGN_DIFF);
+    return DoCombine(region, wxRegionOp::Diff);
 }
 
 bool wxRegionWithCombine::DoXor(const wxRegion& region)
 {
-    return DoCombine(region, wxRGN_XOR);
+    return DoCombine(region, wxRegionOp::Xor);
 }
 
 #endif // wxHAS_REGION_COMBINE

@@ -96,7 +96,7 @@ public:
 
     virtual void DoDrawPolygon(int n, const wxPoint points[],
                            wxCoord xoffset, wxCoord yoffset,
-                           wxPolygonFillMode fillStyle = wxODDEVEN_RULE) override;
+                           wxPolygonFillMode fillStyle = wxPolygonFillMode::OddEven) override;
 
 private:
     wxDECLARE_CLASS(wxPrinterDCImpl);

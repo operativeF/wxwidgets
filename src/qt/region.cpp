@@ -85,7 +85,7 @@ wxRegion::wxRegion(size_t n, const wxPoint *points, wxPolygonFillMode fillStyle)
     }
     QPolygon p( qtPoints );
 
-    Qt::FillRule fillingRule = fillStyle == wxODDEVEN_RULE ? Qt::OddEvenFill : Qt::WindingFill;
+    Qt::FillRule fillingRule = fillStyle == wxPolygonFillMode::OddEven ? Qt::OddEvenFill : Qt::WindingFill;
     m_refData = new wxRegionRefData( p, fillingRule );
 }
 
@@ -200,16 +200,16 @@ bool wxRegion::DoGetBox(wxCoord& x, wxCoord& y, wxCoord& w, wxCoord& h) const
 
 wxRegionContain wxRegion::DoContainsPoint(wxCoord x, wxCoord y) const
 {
-    wxCHECK_MSG( IsOk(), wxOutRegion, "Invalid region" );
+    wxCHECK_MSG( IsOk(), wxRegionContain::Outside, "Invalid region" );
 
-    return M_REGIONDATA.contains( QPoint( x, y ) ) ? wxInRegion : wxOutRegion;
+    return M_REGIONDATA.contains( QPoint( x, y ) ) ? wxRegionContain::Inside : wxRegionContain::Outside;
 }
 
 wxRegionContain wxRegion::DoContainsRect(const wxRect& rect) const
 {
-    wxCHECK_MSG( IsOk(), wxOutRegion, "Invalid region" );
+    wxCHECK_MSG( IsOk(), wxRegionContain::Outside, "Invalid region" );
 
-    return M_REGIONDATA.contains( wxQtConvertRect( rect ) ) ? wxInRegion : wxOutRegion;
+    return M_REGIONDATA.contains( wxQtConvertRect( rect ) ) ? wxRegionContain::Inside : wxRegionContain::Outside;
 }
 
 bool wxRegion::DoOffset(wxCoord x, wxCoord y)
@@ -230,9 +230,9 @@ bool wxRegion::DoCombine(const wxRegion& region, wxRegionOp op)
         // on the operation
         switch ( op )
         {
-            case wxRGN_COPY:
-            case wxRGN_OR:
-            case wxRGN_XOR:
+            case wxRegionOp::Copy:
+            case wxRegionOp::Or:
+            case wxRegionOp::Xor:
                 *this = region;
                 break;
 
@@ -240,8 +240,8 @@ bool wxRegion::DoCombine(const wxRegion& region, wxRegionOp op)
                 wxFAIL_MSG(wxT("unknown region operation"));
                 [[fallthrough]];
 
-            case wxRGN_AND:
-            case wxRGN_DIFF:
+            case wxRegionOp::And:
+            case wxRegionOp::Diff:
                 // leave empty/invalid
                 return false;
         }
@@ -252,19 +252,19 @@ bool wxRegion::DoCombine(const wxRegion& region, wxRegionOp op)
 
         switch ( op )
         {
-        case wxRGN_AND:
+        case wxRegionOp::And:
             M_REGIONDATA = M_REGIONDATA.intersected(region.GetHandle());
             break;
 
-        case wxRGN_OR:
+        case wxRegionOp::Or:
             M_REGIONDATA = M_REGIONDATA.united(region.GetHandle());
             break;
 
-        case wxRGN_XOR:
+        case wxRegionOp::Xor:
             M_REGIONDATA = M_REGIONDATA.xored(region.GetHandle());
             break;
 
-        case wxRGN_DIFF:
+        case wxRegionOp::Diff:
             M_REGIONDATA = M_REGIONDATA.subtracted(region.GetHandle());
             break;
 
@@ -272,7 +272,7 @@ bool wxRegion::DoCombine(const wxRegion& region, wxRegionOp op)
             wxFAIL_MSG(wxT("unknown region operation"));
             [[fallthrough]];
 
-        case wxRGN_COPY:
+        case wxRegionOp::Copy:
             M_REGIONDATA = QRegion(region.GetHandle());
             break;
         }
@@ -282,22 +282,22 @@ bool wxRegion::DoCombine(const wxRegion& region, wxRegionOp op)
 
 bool wxRegion::DoUnionWithRegion(const wxRegion& region)
 {
-    return DoCombine(region, wxRGN_OR);
+    return DoCombine(region, wxRegionOp::Or);
 }
 
 bool wxRegion::DoIntersect(const wxRegion& region)
 {
-    return DoCombine(region, wxRGN_AND);
+    return DoCombine(region, wxRegionOp::And);
 }
 
 bool wxRegion::DoSubtract(const wxRegion& region)
 {
-    return DoCombine(region, wxRGN_DIFF);
+    return DoCombine(region, wxRegionOp::Diff);
 }
 
 bool wxRegion::DoXor(const wxRegion& region)
 {
-    return DoCombine(region, wxRGN_XOR);
+    return DoCombine(region, wxRegionOp::Xor);
 }
 
 bool wxRegion::DoUnionWithRect(const wxRect& rect)

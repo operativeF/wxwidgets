@@ -482,13 +482,13 @@ void wxWindowDCImpl::DoDrawPolygon( int n, const wxPoint points[],
     if (m_brush.IsOk() && m_brush.GetStyle () != wxBrushStyle::Transparent)
     {
         SetBrush (m_brush);
-        XSetFillRule ((Display*) m_display, (GC) m_gc, fillStyle == wxODDEVEN_RULE ? EvenOddRule : WindingRule);
+        XSetFillRule ((Display*) m_display, (GC) m_gc, fillStyle == wxPolygonFillMode::OddEven ? EvenOddRule : WindingRule);
         XFillPolygon ((Display*) m_display, (Pixmap) m_pixmap, (GC) m_gc, xpoints1, n, Complex, 0);
         XSetFillRule ((Display*) m_display, (GC) m_gc, EvenOddRule);    // default mode
         if (m_window && m_window->GetBackingPixmap())
         {
             XSetFillRule ((Display*) m_display,(GC) m_gcBacking,
-                fillStyle == wxODDEVEN_RULE ? EvenOddRule : WindingRule);
+                fillStyle == wxPolygonFillMode::OddEven ? EvenOddRule : WindingRule);
             XFillPolygon ((Display*) m_display, (Pixmap) m_window->GetBackingPixmap(),(GC) m_gcBacking, xpoints2, n, Complex, 0);
             XSetFillRule ((Display*) m_display,(GC) m_gcBacking, EvenOddRule);    // default mode
         }

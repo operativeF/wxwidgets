@@ -25,7 +25,7 @@ public:
     virtual void SetAlignment( int align );
     virtual int GetAlignment() const;
 
-    virtual void EnableEllipsize(wxEllipsizeMode mode = wxELLIPSIZE_MIDDLE);
+    virtual void EnableEllipsize(wxEllipsizeMode mode = wxEllipsizeMode::Middle);
     virtual wxEllipsizeMode GetEllipsizeMode() const;
 };
 

@@ -94,9 +94,9 @@ wxRegion::wxRegion( size_t n, const wxPoint *points, wxPolygonFillMode fillStyle
 
     m_refData = new wxRegionRefData();
 
-    if ( fillStyle == wxODDEVEN_RULE )
+    if ( fillStyle == wxPolygonFillMode::OddEven )
         M_REGIONDATA->m_region = XPolygonRegion(xpoints, n, EvenOddRule);
-    else if ( fillStyle == wxWINDING_RULE )
+    else if ( fillStyle == wxPolygonFillMode::WindingRule )
         M_REGIONDATA->m_region = XPolygonRegion(xpoints, n, WindingRule);
 }
 
@@ -300,27 +300,27 @@ bool wxRegion::IsEmpty() const
 wxRegionContain wxRegion::DoContainsPoint( wxCoord x, wxCoord y ) const
 {
     if (!m_refData)
-        return wxOutRegion;
+        return wxRegionContain::Outside;
 
     if (XPointInRegion( M_REGIONDATA->m_region, x, y ))
-        return wxInRegion;
+        return wxRegionContain::Inside;
     else
-        return wxOutRegion;
+        return wxRegionContain::Outside;
 }
 
 wxRegionContain wxRegion::DoContainsRect(const wxRect& r) const
 {
     if (!m_refData)
-        return wxOutRegion;
+        return wxRegionContain::Outside;
 
     int res = XRectInRegion(M_REGIONDATA->m_region, r.x, r.y, r.width, r.height);
     switch (res)
     {
-        case RectangleIn:   return wxInRegion;
-        case RectangleOut:  return wxOutRegion;
-        case RectanglePart: return wxPartRegion;
+        case RectangleIn:   return wxRegionContain::Inside;
+        case RectangleOut:  return wxRegionContain::Outside;
+        case RectanglePart: return wxRegionContain::Partial;
     }
-    return wxOutRegion;
+    return wxRegionContain::Outside;
 }
 
 WXRegion *wxRegion::GetX11Region() const

@@ -101,7 +101,7 @@ public:
 
     virtual void DoDrawPolygon(int n, const wxPoint points[],
                            wxCoord xoffset, wxCoord yoffset,
-                           wxPolygonFillMode fillStyle = wxODDEVEN_RULE) override;
+                           wxPolygonFillMode fillStyle = wxPolygonFillMode::OddEven) override;
 
     // Use Qt transformations, as they automatically scale pen widths, text...
     void ComputeScaleAndOrigin() override;

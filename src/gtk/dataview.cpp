@@ -2179,7 +2179,7 @@ wxEllipsizeMode wxDataViewRenderer::GetEllipsizeMode() const
 {
     GtkCellRendererText * const rend = GtkGetTextRenderer();
     if ( !rend )
-        return wxELLIPSIZE_NONE;
+        return wxEllipsizeMode::None;
 
     wxGtkValue gvalue( PANGO_TYPE_ELLIPSIZE_MODE );
     g_object_get_property( G_OBJECT(rend), "ellipsize", gvalue );

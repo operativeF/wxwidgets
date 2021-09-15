@@ -39,7 +39,7 @@ public:
     }
 
     wxRegion( size_t n, const wxPoint *points,
-              wxPolygonFillMode fillStyle = wxODDEVEN_RULE );
+              wxPolygonFillMode fillStyle = wxPolygonFillMode::OddEven );
 
 #if wxUSE_IMAGE
     wxRegion( const wxBitmap& bmp)

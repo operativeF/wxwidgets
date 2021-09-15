@@ -208,7 +208,7 @@ public:
         wxCoord xoffset, wxCoord yoffset) override;
     void DoDrawPolygon(int n, const wxPoint points[],
                                wxCoord xoffset, wxCoord yoffset,
-                               wxPolygonFillMode fillStyle = wxODDEVEN_RULE) override;
+                               wxPolygonFillMode fillStyle = wxPolygonFillMode::OddEven) override;
     void DoDrawPolyPolygon(int n, const int count[], const wxPoint points[],
                                    wxCoord xoffset, wxCoord yoffset,
                                    wxPolygonFillMode fillStyle) override;

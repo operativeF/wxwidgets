@@ -23,14 +23,13 @@
 
 inline constexpr wxChar wxSVGVersion[] = wxT("v0101");
 
-enum wxSVGShapeRenderingMode
+enum class wxSVGShapeRenderingMode
 {
-    wxSVG_SHAPE_RENDERING_AUTO = 0,
-    wxSVG_SHAPE_RENDERING_OPTIMIZE_SPEED,
-    wxSVG_SHAPE_RENDERING_CRISP_EDGES,
-    wxSVG_SHAPE_RENDERING_GEOMETRIC_PRECISION,
-
-    wxSVG_SHAPE_RENDERING_OPTIMISE_SPEED = wxSVG_SHAPE_RENDERING_OPTIMIZE_SPEED
+    Auto,
+    OptimizeSpeed,
+    CrispEdges,
+    GeometricPrecision,
+    OptimiseSpeed = OptimizeSpeed
 };
 
 class WXDLLIMPEXP_FWD_BASE wxFileOutputStream;
@@ -209,7 +208,7 @@ private:
 
     void DoDrawPolygon(int n, const wxPoint points[],
                                wxCoord xoffset, wxCoord yoffset,
-                               wxPolygonFillMode fillStyle = wxODDEVEN_RULE) override;
+                               wxPolygonFillMode fillStyle = wxPolygonFillMode::OddEven) override;
 
     void DoDrawPolyPolygon(int n, const int count[], const wxPoint points[],
                                    wxCoord xoffset, wxCoord yoffset,

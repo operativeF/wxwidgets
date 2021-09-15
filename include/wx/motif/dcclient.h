@@ -124,7 +124,7 @@ protected:
         wxCoord xoffset, wxCoord yoffset);
     virtual void DoDrawPolygon(int n, const wxPoint points[],
         wxCoord xoffset, wxCoord yoffset,
-        wxPolygonFillMode fillStyle = wxODDEVEN_RULE);
+        wxPolygonFillMode fillStyle = wxPolygonFillMode::OddEven);
 
     wxSize DoGetSize() const;
 

@@ -544,8 +544,8 @@ public:
     virtual void GetBox(double *x, double *y, double *w, double *h)const;
     wxRect2DDouble GetBox()const;
 
-    virtual bool Contains( double x, double y, wxPolygonFillMode fillStyle = wxODDEVEN_RULE)const;
-    bool Contains( const wxPoint2DDouble& c, wxPolygonFillMode fillStyle = wxODDEVEN_RULE)const;
+    virtual bool Contains( double x, double y, wxPolygonFillMode fillStyle = wxPolygonFillMode::OddEven)const;
+    bool Contains( const wxPoint2DDouble& c, wxPolygonFillMode fillStyle = wxPolygonFillMode::OddEven)const;
 
     const wxGraphicsPathData* GetPathData() const
     { return (const wxGraphicsPathData*) GetRefData(); }
@@ -800,10 +800,10 @@ public:
     virtual void StrokePath( const wxGraphicsPath& path ) = 0;
 
     // fills a path with the current brush
-    virtual void FillPath( const wxGraphicsPath& path, wxPolygonFillMode fillStyle = wxODDEVEN_RULE ) = 0;
+    virtual void FillPath( const wxGraphicsPath& path, wxPolygonFillMode fillStyle = wxPolygonFillMode::OddEven ) = 0;
 
     // draws a path by first filling and then stroking
-    virtual void DrawPath( const wxGraphicsPath& path, wxPolygonFillMode fillStyle = wxODDEVEN_RULE );
+    virtual void DrawPath( const wxGraphicsPath& path, wxPolygonFillMode fillStyle = wxPolygonFillMode::OddEven );
 
     // paints a transparent rectangle (only useful for bitmaps or windows)
     virtual void ClearRectangle(double x, double y, double w, double h);
@@ -855,7 +855,7 @@ public:
     virtual void StrokeLines( size_t n, const wxPoint2DDouble *beginPoints, const wxPoint2DDouble *endPoints);
 
     // draws a polygon
-    virtual void DrawLines( size_t n, const wxPoint2DDouble *points, wxPolygonFillMode fillStyle = wxODDEVEN_RULE );
+    virtual void DrawLines( size_t n, const wxPoint2DDouble *points, wxPolygonFillMode fillStyle = wxPolygonFillMode::OddEven );
 
     // draws a rectangle
     virtual void DrawRectangle( double x, double y, double w, double h);

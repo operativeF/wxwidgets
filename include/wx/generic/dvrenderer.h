@@ -31,7 +31,7 @@ public:
     void SetAlignment( int align ) override;
     int GetAlignment() const override;
 
-    void EnableEllipsize(wxEllipsizeMode mode = wxELLIPSIZE_MIDDLE) override
+    void EnableEllipsize(wxEllipsizeMode mode = wxEllipsizeMode::Middle) override
         { m_ellipsizeMode = mode; }
     wxEllipsizeMode GetEllipsizeMode() const override
         { return m_ellipsizeMode; }

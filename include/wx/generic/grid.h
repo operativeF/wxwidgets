@@ -637,7 +637,7 @@ public:
     // Static methods allowing to create objects actually specifying behaviour.
     static wxGridFitMode Clip() { return wxGridFitMode(Mode_Clip); }
     static wxGridFitMode Overflow() { return wxGridFitMode(Mode_Overflow); }
-    static wxGridFitMode Ellipsize(wxEllipsizeMode ellipsize = wxELLIPSIZE_END)
+    static wxGridFitMode Ellipsize(wxEllipsizeMode ellipsize = wxEllipsizeMode::End)
     {
         // This cast works because the enum elements are the same, see below.
         return wxGridFitMode(static_cast<Mode>(ellipsize));
@@ -663,7 +663,7 @@ public:
                 break;
         }
 
-        return wxELLIPSIZE_NONE;
+        return wxEllipsizeMode::None;
     }
 
     // This one is used in the implementation only.
@@ -675,10 +675,10 @@ private:
     {
         // This is a hack to save space: the first 4 elements of this enum are
         // the same as those of wxEllipsizeMode.
-        Mode_Unset = wxELLIPSIZE_NONE,
-        Mode_EllipsizeStart = wxELLIPSIZE_START,
-        Mode_EllipsizeMiddle = wxELLIPSIZE_MIDDLE,
-        Mode_EllipsizeEnd = wxELLIPSIZE_END,
+        Mode_Unset = wxEllipsizeMode::None,
+        Mode_EllipsizeStart = wxEllipsizeMode::Start,
+        Mode_EllipsizeMiddle = wxEllipsizeMode::Middle,
+        Mode_EllipsizeEnd = wxEllipsizeMode::End,
         Mode_Overflow,
         Mode_Clip
     };

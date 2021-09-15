@@ -23,31 +23,31 @@ class WXDLLIMPEXP_FWD_CORE wxRegion;
 // ----------------------------------------------------------------------------
 
 // result of wxRegion::Contains() call
-enum wxRegionContain
+enum class wxRegionContain
 {
-    wxOutRegion = 0,
-    wxPartRegion = 1,
-    wxInRegion = 2
+    Outside,
+    Partial,
+    Inside
 };
 
 // these constants are used with wxRegion::Combine() in the ports which have
 // this method
-enum wxRegionOp
+enum class wxRegionOp
 {
     // Creates the intersection of the two combined regions.
-    wxRGN_AND,
+    And,
 
     // Creates a copy of the region
-    wxRGN_COPY,
+    Copy,
 
     // Combines the parts of first region that are not in the second one
-    wxRGN_DIFF,
+    Diff,
 
     // Creates the union of two combined regions.
-    wxRGN_OR,
+    Or,
 
     // Creates the union of two regions except for any overlapping areas.
-    wxRGN_XOR
+    Xor
 };
 
 // ----------------------------------------------------------------------------
@@ -66,7 +66,7 @@ public:
     wxRegion(wxCoord x, wxCoord y, wxCoord w, wxCoord h);
     wxRegion(const wxPoint& topLeft, const wxPoint& bottomRight);
     wxRegion(const wxRect& rect);
-    wxRegion(size_t n, const wxPoint *points, wxPolygonFillMode fillStyle = wxODDEVEN_RULE);
+    wxRegion(size_t n, const wxPoint *points, wxPolygonFillMode fillStyle = wxPolygonFillMode::OddEven);
     wxRegion(const wxBitmap& bmp);
     wxRegion(const wxBitmap& bmp, const wxColour& transp, int tolerance = 0);
 #endif // 0

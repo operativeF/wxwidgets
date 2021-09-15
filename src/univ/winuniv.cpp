@@ -416,7 +416,7 @@ void wxWindow::DoDrawBorder(wxDC& dc, const wxRect& rect)
     // draw outline unless the update region is enitrely inside it in which
     // case we don't need to do it
 #if 0 // doesn't seem to work, why?
-    if ( wxRegion(rect).Contains(GetUpdateRegion().GetBox()) != wxInRegion )
+    if ( wxRegion(rect).Contains(GetUpdateRegion().GetBox()) != wxRegionContain::Inside )
 #endif
     {
         m_renderer->DrawBorder(dc, GetBorder(), rect, GetStateFlags());

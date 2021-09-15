@@ -235,7 +235,7 @@ public:
           m_win(win),
           m_rendererFlags(rendererFlags),
           m_renderer(&wxRendererNative::Get()),
-          m_ellipsizeMode(ellipsizeMode == wxELLIPSIZE_NONE ? wxELLIPSIZE_NONE : wxELLIPSIZE_END)
+          m_ellipsizeMode(ellipsizeMode == wxEllipsizeMode::None ? wxEllipsizeMode::None : wxEllipsizeMode::End)
     {
         // TODO: Support all ellipsizing modes
     }

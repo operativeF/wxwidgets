@@ -147,7 +147,7 @@ wxRegion::wxRegion( size_t n, const wxPoint *points,
     cairo_surface_set_device_offset(surface, -min_x, -min_y);
     cairo_t* cr = cairo_create(surface);
     cairo_set_antialias(cr, CAIRO_ANTIALIAS_NONE);
-    if (fillStyle == wxODDEVEN_RULE)
+    if (fillStyle == wxPolygonFillMode::OddEven)
         cairo_set_fill_rule(cr, CAIRO_FILL_RULE_EVEN_ODD);
     // make path
     cairo_move_to(cr, points[0].x, points[0].y);
@@ -174,7 +174,7 @@ wxRegion::wxRegion( size_t n, const wxPoint *points,
                      (
                         gdkpoints,
                         n,
-                        fillStyle == wxWINDING_RULE ? GDK_WINDING_RULE
+                        fillStyle == wxPolygonFillMode::WindingRule ? GDK_WINDING_RULE
                                                     : GDK_EVEN_ODD_RULE
                      );
 
@@ -397,15 +397,15 @@ wxRegionContain wxRegion::DoContainsPoint( wxCoord x, wxCoord y ) const
 #else
     if (m_refData == NULL || !gdk_region_point_in(M_REGIONDATA->m_region, x, y))
 #endif
-        return wxOutRegion;
+        return wxRegionContain::Outside;
 
-    return wxInRegion;
+    return wxRegionContain::Inside;
 }
 
 wxRegionContain wxRegion::DoContainsRect(const wxRect& r) const
 {
     if (!m_refData)
-        return wxOutRegion;
+        return wxRegionContain::Outside;
 
     GdkRectangle rect;
     rect.x = r.x;
@@ -415,20 +415,20 @@ wxRegionContain wxRegion::DoContainsRect(const wxRect& r) const
 #ifdef __WXGTK3__
     switch (cairo_region_contains_rectangle(M_REGIONDATA->m_region, &rect))
     {
-        case CAIRO_REGION_OVERLAP_IN:   return wxInRegion;
-        case CAIRO_REGION_OVERLAP_PART: return wxPartRegion;
+        case CAIRO_REGION_OVERLAP_IN:   return wxRegionContain::Inside;
+        case CAIRO_REGION_OVERLAP_PART: return wxRegionContain::Partial;
         default: break;
     }
 #else
     GdkOverlapType res = gdk_region_rect_in( M_REGIONDATA->m_region, &rect );
     switch (res)
     {
-        case GDK_OVERLAP_RECTANGLE_IN:   return wxInRegion;
-        case GDK_OVERLAP_RECTANGLE_OUT:  return wxOutRegion;
-        case GDK_OVERLAP_RECTANGLE_PART: return wxPartRegion;
+        case GDK_OVERLAP_RECTANGLE_IN:   return wxRegionContain::Inside;
+        case GDK_OVERLAP_RECTANGLE_OUT:  return wxRegionContain::Outside;
+        case GDK_OVERLAP_RECTANGLE_PART: return wxRegionContain::Partial;
     }
 #endif
-    return wxOutRegion;
+    return wxRegionContain::Outside;
 }
 
 #ifdef __WXGTK3__

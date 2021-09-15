@@ -1101,7 +1101,7 @@ wxDataViewRenderer::wxDataViewRenderer( const wxString &varianttype,
 {
     m_align = align;
     m_mode = mode;
-    m_ellipsizeMode = wxELLIPSIZE_MIDDLE;
+    m_ellipsizeMode = wxEllipsizeMode::Middle;
     m_dc = nullptr;
     m_state = 0;
 }
@@ -6520,7 +6520,7 @@ wxAccStatus wxDataViewCtrlAccessible::HitTest(const wxPoint& pt,
                             int* childId, wxAccessible** childObject)
 {
     wxDataViewCtrl* dvCtrl = wxDynamicCast(GetWindow(), wxDataViewCtrl);
-    wxCHECK( dvCtrl, wxACC_FAIL );
+    wxCHECK( dvCtrl, wxAccStatus::Fail );
 
     wxDataViewItem item;
     wxDataViewColumn* col;
@@ -6545,7 +6545,7 @@ wxAccStatus wxDataViewCtrlAccessible::HitTest(const wxPoint& pt,
                 {
                     *childId = wxACC_SELF;
                     *childObject = dvHdr->GetOrCreateAccessible();
-                    return wxACC_OK;
+                    return wxAccStatus::Ok;
                 }
             }
 
@@ -6559,14 +6559,14 @@ wxAccStatus wxDataViewCtrlAccessible::HitTest(const wxPoint& pt,
         }
     }
 
-    return wxACC_OK;
+    return wxAccStatus::Ok;
 }
 
 // Returns the rectangle for this object (id = 0) or a child element (id > 0).
 wxAccStatus wxDataViewCtrlAccessible::GetLocation(wxRect& rect, int elementId)
 {
     wxDataViewCtrl* dvCtrl = wxDynamicCast(GetWindow(), wxDataViewCtrl);
-    wxCHECK( dvCtrl, wxACC_FAIL );
+    wxCHECK( dvCtrl, wxAccStatus::Fail );
     wxDataViewMainWindow* dvWnd = wxDynamicCast(dvCtrl->GetMainWindow(), wxDataViewMainWindow);
 
     if ( elementId == wxACC_SELF )
@@ -6581,7 +6581,7 @@ wxAccStatus wxDataViewCtrlAccessible::GetLocation(wxRect& rect, int elementId)
         wxDataViewItem item = dvWnd->GetItemByRow(elementId-1);
         if ( !item.IsOk() )
         {
-            return wxACC_NOT_IMPLEMENTED;
+            return wxAccStatus::NotImplemented;
         }
 
         rect = dvWnd->GetItemRect(item, nullptr);
@@ -6593,7 +6593,7 @@ wxAccStatus wxDataViewCtrlAccessible::GetLocation(wxRect& rect, int elementId)
         rect.SetPosition(posScreen);
     }
 
-    return wxACC_OK;
+    return wxAccStatus::Ok;
 }
 
 // Navigates from fromId to toId/toObject.
@@ -6601,7 +6601,7 @@ wxAccStatus wxDataViewCtrlAccessible::Navigate(wxNavDir navDir, int fromId,
             int* toId, wxAccessible** toObject)
 {
     wxDataViewCtrl* dvCtrl = wxDynamicCast(GetWindow(), wxDataViewCtrl);
-    wxCHECK( dvCtrl, wxACC_FAIL );
+    wxCHECK( dvCtrl, wxAccStatus::Fail );
     wxDataViewMainWindow* dvWnd = wxDynamicCast(dvCtrl->GetMainWindow(), wxDataViewMainWindow);
 
     const int numRows = (int)dvWnd->GetRowCount();
@@ -6610,33 +6610,33 @@ wxAccStatus wxDataViewCtrlAccessible::Navigate(wxNavDir navDir, int fromId,
     {
         switch ( navDir )
         {
-        case wxNAVDIR_FIRSTCHILD:
+        case wxNavDir::FirstChild:
             if ( numRows > 0 )
             {
                 *toId = 1;
                 *toObject = nullptr;
-                return wxACC_OK;
+                return wxAccStatus::Ok;
             }
-            return wxACC_FALSE;
-        case wxNAVDIR_LASTCHILD:
+            return wxAccStatus::False;
+        case wxNavDir::LastChild:
             if ( numRows > 0 )
             {
                 *toId = numRows;
                 *toObject = nullptr;
-                return wxACC_OK;
+                return wxAccStatus::Ok;
             }
-            return wxACC_FALSE;
-        case wxNAVDIR_DOWN:
+            return wxAccStatus::False;
+        case wxNavDir::Down:
             [[fallthrough]];
-        case wxNAVDIR_NEXT:
+        case wxNavDir::Next:
             [[fallthrough]];
-        case wxNAVDIR_UP:
+        case wxNavDir::Up:
             [[fallthrough]];
-        case wxNAVDIR_PREVIOUS:
+        case wxNavDir::Previous:
             [[fallthrough]];
-        case wxNAVDIR_LEFT:
+        case wxNavDir::Left:
             [[fallthrough]];
-        case wxNAVDIR_RIGHT:
+        case wxNavDir::Right:
             // Standard wxWindow navigation is applicable here.
             return wxWindowAccessible::Navigate(navDir, fromId, toId, toObject);
         }
@@ -6645,46 +6645,46 @@ wxAccStatus wxDataViewCtrlAccessible::Navigate(wxNavDir navDir, int fromId,
     {
         switch ( navDir )
         {
-        case wxNAVDIR_FIRSTCHILD:
-            return wxACC_FALSE;
-        case wxNAVDIR_LASTCHILD:
-            return wxACC_FALSE;
-        case wxNAVDIR_LEFT:
-            return wxACC_FALSE;
-        case wxNAVDIR_RIGHT:
-            return wxACC_FALSE;
-        case wxNAVDIR_DOWN:
+        case wxNavDir::FirstChild:
+            return wxAccStatus::False;
+        case wxNavDir::LastChild:
+            return wxAccStatus::False;
+        case wxNavDir::Left:
+            return wxAccStatus::False;
+        case wxNavDir::Right:
+            return wxAccStatus::False;
+        case wxNavDir::Down:
             [[fallthrough]];
-        case wxNAVDIR_NEXT:
+        case wxNavDir::Next:
             if ( fromId < numRows )
             {
                 *toId = fromId + 1;
                 *toObject = nullptr;
-                return wxACC_OK;
+                return wxAccStatus::Ok;
             }
-            return wxACC_FALSE;
-        case wxNAVDIR_PREVIOUS:
+            return wxAccStatus::False;
+        case wxNavDir::Previous:
             [[fallthrough]];
-        case wxNAVDIR_UP:
+        case wxNavDir::Up:
             if ( fromId > 1 )
             {
                 *toId = fromId - 1;
                 *toObject = nullptr;
-                return wxACC_OK;
+                return wxAccStatus::Ok;
             }
-            return wxACC_FALSE;
+            return wxAccStatus::False;
         }
     }
 
     // Let the framework handle the other cases.
-    return wxACC_NOT_IMPLEMENTED;
+    return wxAccStatus::NotImplemented;
 }
 
 // Gets the name of the specified object.
 wxAccStatus wxDataViewCtrlAccessible::GetName(int childId, std::string* name)
 {
     wxDataViewCtrl* dvCtrl = wxDynamicCast(GetWindow(), wxDataViewCtrl);
-    wxCHECK( dvCtrl, wxACC_FAIL );
+    wxCHECK( dvCtrl, wxAccStatus::Fail );
 
     if ( childId == wxACC_SELF )
     {
@@ -6695,7 +6695,7 @@ wxAccStatus wxDataViewCtrlAccessible::GetName(int childId, std::string* name)
         wxDataViewItem item = dvCtrl->GetItemByRow(childId-1);
         if ( !item.IsOk() )
         {
-            return wxACC_NOT_IMPLEMENTED;
+            return wxAccStatus::NotImplemented;
         }
 
         // Name is the value in the first textual column
@@ -6738,38 +6738,38 @@ wxAccStatus wxDataViewCtrlAccessible::GetName(int childId, std::string* name)
         }
     }
 
-    return wxACC_OK;
+    return wxAccStatus::Ok;
 }
 
 // Gets the number of children.
 wxAccStatus wxDataViewCtrlAccessible::GetChildCount(int* childCount)
 {
     wxDataViewCtrl* dvCtrl = wxDynamicCast(GetWindow(), wxDataViewCtrl);
-    wxCHECK( dvCtrl, wxACC_FAIL );
+    wxCHECK( dvCtrl, wxAccStatus::Fail );
     wxDataViewMainWindow* dvWnd = wxDynamicCast(dvCtrl->GetMainWindow(), wxDataViewMainWindow);
 
     *childCount = (int)dvWnd->GetRowCount();
-    return wxACC_OK;
+    return wxAccStatus::Ok;
 }
 
 // Gets the specified child (starting from 1).
-// If *child is NULL and return value is wxACC_OK,
+// If *child is NULL and return value is wxAccStatus::Ok,
 // this means that the child is a simple element and
 // not an accessible object.
 wxAccStatus wxDataViewCtrlAccessible::GetChild(int childId, wxAccessible** child)
 {
     *child = (childId == wxACC_SELF) ? this : nullptr;
-    return wxACC_OK;
+    return wxAccStatus::Ok;
 }
 
 // Performs the default action. childId is 0 (the action for this object)
 // or > 0 (the action for a child).
-// Return wxACC_NOT_SUPPORTED if there is no default action for this
+// Return wxAccStatus::NotSupported if there is no default action for this
 // window (e.g. an edit control).
 wxAccStatus wxDataViewCtrlAccessible::DoDefaultAction(int childId)
 {
     wxDataViewCtrl* dvCtrl = wxDynamicCast(GetWindow(), wxDataViewCtrl);
-    wxCHECK( dvCtrl, wxACC_FAIL );
+    wxCHECK( dvCtrl, wxAccStatus::Fail );
 
     if ( childId != wxACC_SELF )
     {
@@ -6787,17 +6787,17 @@ wxAccStatus wxDataViewCtrlAccessible::DoDefaultAction(int childId)
                         dvWnd->Collapse(row);
                     else
                         dvWnd->Expand(row);
-                    return wxACC_OK;
+                    return wxAccStatus::Ok;
                 }
             }
         }
     }
 
-    return wxACC_NOT_SUPPORTED;
+    return wxAccStatus::NotSupported;
 }
 
 // Gets the default action for this object (0) or > 0 (the action for a child).
-// Return wxACC_OK even if there is no action. actionName is the action, or the empty
+// Return wxAccStatus::Ok even if there is no action. actionName is the action, or the empty
 // string if there is no action.
 // The retrieved string describes the action that is performed on an object,
 // not what the object does as a result. For example, a toolbar button that prints
@@ -6805,7 +6805,7 @@ wxAccStatus wxDataViewCtrlAccessible::DoDefaultAction(int childId)
 wxAccStatus wxDataViewCtrlAccessible::GetDefaultAction(int childId, std::string* actionName)
 {
     wxDataViewCtrl* dvCtrl = wxDynamicCast(GetWindow(), wxDataViewCtrl);
-    wxCHECK( dvCtrl, wxACC_FAIL );
+    wxCHECK( dvCtrl, wxAccStatus::Fail );
 
     wxString action;
     if ( childId != wxACC_SELF )
@@ -6830,14 +6830,14 @@ wxAccStatus wxDataViewCtrlAccessible::GetDefaultAction(int childId, std::string*
     }
 
     *actionName = action;
-    return wxACC_OK;
+    return wxAccStatus::Ok;
 }
 
 // Returns the description for this object or a child.
 wxAccStatus wxDataViewCtrlAccessible::GetDescription(int childId, std::string* description)
 {
     wxDataViewCtrl* dvCtrl = wxDynamicCast(GetWindow(), wxDataViewCtrl);
-    wxCHECK( dvCtrl, wxACC_FAIL );
+    wxCHECK( dvCtrl, wxAccStatus::Fail );
 
     if ( childId == wxACC_SELF )
     {
@@ -6850,7 +6850,7 @@ wxAccStatus wxDataViewCtrlAccessible::GetDescription(int childId, std::string* d
         wxDataViewItem item = dvCtrl->GetItemByRow(childId-1);
         if ( !item.IsOk() )
         {
-            return wxACC_NOT_IMPLEMENTED;
+            return wxAccStatus::NotImplemented;
         }
 
         // Description is concatenation of the contents of items in all columns:
@@ -6905,14 +6905,14 @@ wxAccStatus wxDataViewCtrlAccessible::GetDescription(int childId, std::string* d
         *description = itemDesc;
     }
 
-    return wxACC_OK;
+    return wxAccStatus::Ok;
 }
 
 // Returns help text for this object or a child, similar to tooltip text.
 wxAccStatus wxDataViewCtrlAccessible::GetHelpText(int childId, std::string* helpText)
 {
     wxDataViewCtrl* dvCtrl = wxDynamicCast(GetWindow(), wxDataViewCtrl);
-    wxCHECK( dvCtrl, wxACC_FAIL );
+    wxCHECK( dvCtrl, wxAccStatus::Fail );
 
 #if wxUSE_HELP
     if ( childId == wxACC_SELF )
@@ -6933,11 +6933,11 @@ wxAccStatus wxDataViewCtrlAccessible::GetHelpText(int childId, std::string* help
             helpText->clear();
         }
     }
-    return wxACC_OK;
+    return wxAccStatus::Ok;
 #else
     (void)childId;
     (void)helpText;
-    return wxACC_NOT_IMPLEMENTED;
+    return wxAccStatus::NotImplemented;
 #endif
 }
 
@@ -6946,7 +6946,7 @@ wxAccStatus wxDataViewCtrlAccessible::GetHelpText(int childId, std::string* help
 wxAccStatus wxDataViewCtrlAccessible::GetKeyboardShortcut(int childId, std::string* shortcut)
 {
     wxDataViewCtrl* dvCtrl = wxDynamicCast(GetWindow(), wxDataViewCtrl);
-    wxCHECK( dvCtrl, wxACC_FAIL );
+    wxCHECK( dvCtrl, wxAccStatus::Fail );
 
     if ( childId != wxACC_SELF )
     {
@@ -6965,20 +6965,20 @@ wxAccStatus wxDataViewCtrlAccessible::GetKeyboardShortcut(int childId, std::stri
                         /* TRANSLATORS: Keystroke for manipulating a tree control */
                         *shortcut = _("Right");
 
-                    return wxACC_OK;
+                    return wxAccStatus::Ok;
                 }
             }
         }
     }
 
-    return wxACC_FALSE;
+    return wxAccStatus::False;
 }
 
 // Returns a role constant.
 wxAccStatus wxDataViewCtrlAccessible::GetRole(int childId, wxAccRole* role)
 {
     wxDataViewCtrl* dvCtrl = wxDynamicCast(GetWindow(), wxDataViewCtrl);
-    wxCHECK( dvCtrl, wxACC_FAIL );
+    wxCHECK( dvCtrl, wxAccStatus::Fail );
     wxDataViewMainWindow* dvWnd = wxDynamicCast(dvCtrl->GetMainWindow(), wxDataViewMainWindow);
 
     if ( childId == wxACC_SELF )
@@ -6986,14 +6986,14 @@ wxAccStatus wxDataViewCtrlAccessible::GetRole(int childId, wxAccRole* role)
     else
         *role = dvWnd->IsList() ? wxROLE_SYSTEM_LISTITEM : wxROLE_SYSTEM_OUTLINEITEM;
 
-    return wxACC_OK;
+    return wxAccStatus::Ok;
 }
 
 // Returns a state constant.
 wxAccStatus wxDataViewCtrlAccessible::GetState(int childId, long* state)
 {
     wxDataViewCtrl* dvCtrl = wxDynamicCast(GetWindow(), wxDataViewCtrl);
-    wxCHECK( dvCtrl, wxACC_FAIL );
+    wxCHECK( dvCtrl, wxAccStatus::Fail );
     wxDataViewMainWindow* dvWnd = wxDynamicCast(dvCtrl->GetMainWindow(), wxDataViewMainWindow);
 
     long st = 0;
@@ -7042,7 +7042,7 @@ wxAccStatus wxDataViewCtrlAccessible::GetState(int childId, long* state)
         }
     }
     *state = st;
-    return wxACC_OK;
+    return wxAccStatus::Ok;
 }
 
 // Returns a localized string representing the value for the object
@@ -7050,7 +7050,7 @@ wxAccStatus wxDataViewCtrlAccessible::GetState(int childId, long* state)
 wxAccStatus wxDataViewCtrlAccessible::GetValue(int childId, std::string* strValue)
 {
     wxDataViewCtrl* dvCtrl = wxDynamicCast(GetWindow(), wxDataViewCtrl);
-    wxCHECK( dvCtrl, wxACC_FAIL );
+    wxCHECK( dvCtrl, wxAccStatus::Fail );
 
     wxString val;
 
@@ -7071,14 +7071,14 @@ wxAccStatus wxDataViewCtrlAccessible::GetValue(int childId, std::string* strValu
     }
 
     *strValue = val;
-    return wxACC_OK;
+    return wxAccStatus::Ok;
 }
 
 // Selects the object or child.
 wxAccStatus wxDataViewCtrlAccessible::Select(int childId, wxAccSelectionFlags selectFlags)
 {
     wxDataViewCtrl* dvCtrl = wxDynamicCast(GetWindow(), wxDataViewCtrl);
-    wxCHECK( dvCtrl, wxACC_FAIL );
+    wxCHECK( dvCtrl, wxAccStatus::Fail );
     wxDataViewMainWindow* dvWnd = wxDynamicCast(dvCtrl->GetMainWindow(), wxDataViewMainWindow);
 
     if ( childId == wxACC_SELF )
@@ -7090,7 +7090,7 @@ wxAccStatus wxDataViewCtrlAccessible::Select(int childId, wxAccSelectionFlags se
         else if ( selectFlags != wxACC_SEL_NONE )
         {
             wxFAIL_MSG( wxS("Invalid selection flag") );
-            return wxACC_INVALID_ARG;
+            return wxAccStatus::InvalidArg;
         }
     }
     else
@@ -7100,7 +7100,7 @@ wxAccStatus wxDataViewCtrlAccessible::Select(int childId, wxAccSelectionFlags se
              selectFlags & (wxACC_SEL_EXTENDSELECTION | wxACC_SEL_ADDSELECTION | wxACC_SEL_REMOVESELECTION) )
         {
             wxFAIL_MSG( wxS("Invalid selection flag") );
-            return wxACC_INVALID_ARG;
+            return wxAccStatus::InvalidArg;
         }
 
         const int row = childId-1;
@@ -7115,7 +7115,7 @@ wxAccStatus wxDataViewCtrlAccessible::Select(int childId, wxAccSelectionFlags se
             if ( selectFlags & (wxACC_SEL_EXTENDSELECTION | wxACC_SEL_ADDSELECTION | wxACC_SEL_REMOVESELECTION) )
             {
                 wxFAIL_MSG( wxS("Invalid selection flag") );
-                return wxACC_INVALID_ARG;
+                return wxAccStatus::InvalidArg;
             }
 
             dvWnd->UnselectAllRows();
@@ -7131,14 +7131,14 @@ wxAccStatus wxDataViewCtrlAccessible::Select(int childId, wxAccSelectionFlags se
             if ( selectFlags & wxACC_SEL_TAKESELECTION )
             {
                 wxFAIL_MSG( wxS("Invalid selection flag") );
-                return wxACC_INVALID_ARG;
+                return wxAccStatus::InvalidArg;
             }
             // These flags cannot be set together:
             if ( (selectFlags & (wxACC_SEL_ADDSELECTION | wxACC_SEL_REMOVESELECTION))
                  == (wxACC_SEL_ADDSELECTION | wxACC_SEL_REMOVESELECTION) )
             {
                 wxFAIL_MSG( wxS("Invalid selection flag") );
-                return wxACC_INVALID_ARG;
+                return wxAccStatus::InvalidArg;
             }
 
             // We have to have a focused object as a selection anchor.
@@ -7146,7 +7146,7 @@ wxAccStatus wxDataViewCtrlAccessible::Select(int childId, wxAccSelectionFlags se
             if ( focusedRow == (unsigned int)-1 )
             {
                 wxFAIL_MSG( wxS("No selection anchor") );
-                return wxACC_INVALID_ARG;
+                return wxAccStatus::InvalidArg;
             }
 
             bool doSelect;
@@ -7180,7 +7180,7 @@ wxAccStatus wxDataViewCtrlAccessible::Select(int childId, wxAccSelectionFlags se
             if ( selectFlags & (wxACC_SEL_TAKESELECTION | wxACC_SEL_REMOVESELECTION) )
             {
                 wxFAIL_MSG( wxS("Invalid selection flag") );
-                return wxACC_INVALID_ARG;
+                return wxAccStatus::InvalidArg;
             }
 
             // Combination with wxACC_SEL_EXTENDSELECTION is already handled
@@ -7197,7 +7197,7 @@ wxAccStatus wxDataViewCtrlAccessible::Select(int childId, wxAccSelectionFlags se
             if ( selectFlags & (wxACC_SEL_TAKESELECTION | wxACC_SEL_ADDSELECTION) )
             {
                 wxFAIL_MSG( wxS("Invalid selection flag") );
-                return wxACC_INVALID_ARG;
+                return wxAccStatus::InvalidArg;
             }
 
             // Combination with wxACC_SEL_EXTENDSELECTION is already handled
@@ -7210,7 +7210,7 @@ wxAccStatus wxDataViewCtrlAccessible::Select(int childId, wxAccSelectionFlags se
         }
     }
 
-    return wxACC_OK;
+    return wxAccStatus::Ok;
 }
 
 // Gets the window with the keyboard focus.
@@ -7220,7 +7220,7 @@ wxAccStatus wxDataViewCtrlAccessible::Select(int childId, wxAccSelectionFlags se
 wxAccStatus wxDataViewCtrlAccessible::GetFocus(int* childId, wxAccessible** child)
 {
     wxDataViewCtrl* dvCtrl = wxDynamicCast(GetWindow(), wxDataViewCtrl);
-    wxCHECK( dvCtrl, wxACC_FAIL );
+    wxCHECK( dvCtrl, wxAccStatus::Fail );
     wxDataViewMainWindow* dvWnd = wxDynamicCast(dvCtrl->GetMainWindow(), wxDataViewMainWindow);
 
     const unsigned int row = dvWnd->GetCurrentRow();
@@ -7240,7 +7240,7 @@ wxAccStatus wxDataViewCtrlAccessible::GetFocus(int* childId, wxAccessible** chil
             {
                 *childId = wxACC_SELF;
                 *child = dvHdr->GetOrCreateAccessible();
-                return wxACC_OK;
+                return wxAccStatus::Ok;
             }
         }
 
@@ -7256,7 +7256,7 @@ wxAccStatus wxDataViewCtrlAccessible::GetFocus(int* childId, wxAccessible** chil
         }
     }
 
-    return wxACC_OK;
+    return wxAccStatus::Ok;
 }
 
 // Gets a variant representing the selected children
@@ -7270,7 +7270,7 @@ wxAccStatus wxDataViewCtrlAccessible::GetFocus(int* childId, wxAccessible** chil
 wxAccStatus wxDataViewCtrlAccessible::GetSelections(wxVariant* selections)
 {
     wxDataViewCtrl* dvCtrl = wxDynamicCast(GetWindow(), wxDataViewCtrl);
-    wxCHECK( dvCtrl, wxACC_FAIL );
+    wxCHECK( dvCtrl, wxAccStatus::Fail );
 
     wxDataViewItemArray sel;
     dvCtrl->GetSelections(sel);
@@ -7296,7 +7296,7 @@ wxAccStatus wxDataViewCtrlAccessible::GetSelections(wxVariant* selections)
             *selections = v;
     }
 
-    return wxACC_OK;
+    return wxAccStatus::Ok;
 }
 #endif // wxUSE_ACCESSIBILITY
 

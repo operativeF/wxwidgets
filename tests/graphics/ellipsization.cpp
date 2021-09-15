@@ -50,9 +50,9 @@ TEST_CASE("Ellipsization::NormalCase")
 
     static constexpr wxEllipsizeMode modesToTest[] =
     {
-        wxELLIPSIZE_START,
-        wxELLIPSIZE_MIDDLE,
-        wxELLIPSIZE_END
+        wxEllipsizeMode::Start,
+        wxEllipsizeMode::Middle,
+        wxEllipsizeMode::End
     };
 
     const int charWidth = dc.GetCharWidth();
@@ -116,9 +116,9 @@ TEST_CASE("Ellipsization::EnoughSpace")
     std::string testString{"some label"};
     const int width = dc.GetTextExtent(testString).GetWidth() + 50;
 
-    CHECK( wxControl::Ellipsize(testString, dc, wxELLIPSIZE_START, width) == testString );
-    CHECK( wxControl::Ellipsize(testString, dc, wxELLIPSIZE_MIDDLE, width) == testString );
-    CHECK( wxControl::Ellipsize(testString, dc, wxELLIPSIZE_END, width) == testString );
+    CHECK( wxControl::Ellipsize(testString, dc, wxEllipsizeMode::Start, width) == testString );
+    CHECK( wxControl::Ellipsize(testString, dc, wxEllipsizeMode::Middle, width) == testString );
+    CHECK( wxControl::Ellipsize(testString, dc, wxEllipsizeMode::End, width) == testString );
 }
 
 
@@ -130,10 +130,10 @@ TEST_CASE("Ellipsization::VeryLittleSpace")
 
     const int width = dc.GetTextExtent("s...").GetWidth();
 
-    CHECK_EQ( wxControl::Ellipsize("some label", dc, wxELLIPSIZE_START, width), "...l" );
-    CHECK_EQ( wxControl::Ellipsize("some label", dc, wxELLIPSIZE_MIDDLE, width), "s..." );
-    CHECK_EQ( wxControl::Ellipsize("some label1", dc, wxELLIPSIZE_MIDDLE, width), "s..." );
-    CHECK_EQ( wxControl::Ellipsize("some label", dc, wxELLIPSIZE_END, width), "s..." );
+    CHECK_EQ( wxControl::Ellipsize("some label", dc, wxEllipsizeMode::Start, width), "...l" );
+    CHECK_EQ( wxControl::Ellipsize("some label", dc, wxEllipsizeMode::Middle, width), "s..." );
+    CHECK_EQ( wxControl::Ellipsize("some label1", dc, wxEllipsizeMode::Middle, width), "s..." );
+    CHECK_EQ( wxControl::Ellipsize("some label", dc, wxEllipsizeMode::End, width), "s..." );
 }
 
 
@@ -144,12 +144,12 @@ TEST_CASE("Ellipsization::HasThreeDots")
     std::string testString("some longer text");
     const int width = dc.GetTextExtent(testString).GetWidth() - 5;
 
-    CHECK( wxControl::Ellipsize(testString, dc, wxELLIPSIZE_START, width).starts_with("..."));
-    CHECK_FALSE( wxControl::Ellipsize(testString, dc, wxELLIPSIZE_START, width).ends_with("..."));
+    CHECK( wxControl::Ellipsize(testString, dc, wxEllipsizeMode::Start, width).starts_with("..."));
+    CHECK_FALSE( wxControl::Ellipsize(testString, dc, wxEllipsizeMode::Start, width).ends_with("..."));
 
-    CHECK( wxControl::Ellipsize(testString, dc, wxELLIPSIZE_END, width).ends_with("...") );
+    CHECK( wxControl::Ellipsize(testString, dc, wxEllipsizeMode::End, width).ends_with("...") );
 
-    CHECK( wx::utils::Contains(wxControl::Ellipsize(testString, dc, wxELLIPSIZE_MIDDLE, width), "...") );
-    CHECK_FALSE( wxControl::Ellipsize(testString, dc, wxELLIPSIZE_MIDDLE, width).starts_with("...") );
-    CHECK_FALSE( wxControl::Ellipsize(testString, dc, wxELLIPSIZE_MIDDLE, width).ends_with("...") );
+    CHECK( wx::utils::Contains(wxControl::Ellipsize(testString, dc, wxEllipsizeMode::Middle, width), "...") );
+    CHECK_FALSE( wxControl::Ellipsize(testString, dc, wxEllipsizeMode::Middle, width).starts_with("...") );
+    CHECK_FALSE( wxControl::Ellipsize(testString, dc, wxEllipsizeMode::Middle, width).ends_with("...") );
 }

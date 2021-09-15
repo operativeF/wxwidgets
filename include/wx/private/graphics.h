@@ -160,7 +160,7 @@ public :
     // gets the bounding box enclosing all points (possibly including control points)
     virtual void GetBox(double *x, double *y, double *w, double *h) const=0;
 
-    virtual bool Contains( double x, double y, wxPolygonFillMode fillStyle = wxODDEVEN_RULE) const=0;
+    virtual bool Contains( double x, double y, wxPolygonFillMode fillStyle = wxPolygonFillMode::OddEven) const=0;
 };
 
 #endif

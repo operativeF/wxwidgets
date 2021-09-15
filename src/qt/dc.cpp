@@ -839,7 +839,7 @@ void wxQtDCImpl::DoDrawPolygon(int n, const wxPoint points[],
         qtPoints << wxQtConvertPoint(points[i]);
     }
 
-    Qt::FillRule fill = (fillStyle == wxWINDING_RULE) ? Qt::WindingFill : Qt::OddEvenFill;
+    Qt::FillRule fill = (fillStyle == wxPolygonFillMode::WindingRule) ? Qt::WindingFill : Qt::OddEvenFill;
 
     m_qtPainter->translate(xoffset, yoffset);
     m_qtPainter->drawPolygon(qtPoints, fill);

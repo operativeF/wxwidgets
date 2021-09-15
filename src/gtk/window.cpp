@@ -5051,17 +5051,17 @@ void wxWindowGTK::Update()
 
 bool wxWindowGTK::DoIsExposed( int x, int y ) const
 {
-    return m_updateRegion.Contains(x, y) != wxOutRegion;
+    return m_updateRegion.Contains(x, y) != wxRegionContain::Outside;
 }
 
 bool wxWindowGTK::DoIsExposed( int x, int y, int w, int h ) const
 {
 #ifndef __WXGTK3__
     if (GetLayoutDirection() == wxLayoutDirection::RightToLeft)
-        return m_updateRegion.Contains(x-w, y, w, h) != wxOutRegion;
+        return m_updateRegion.Contains(x-w, y, w, h) != wxRegionContain::Outside;
 #endif
 
-    return m_updateRegion.Contains(x, y, w, h) != wxOutRegion;
+    return m_updateRegion.Contains(x, y, w, h) != wxRegionContain::Outside;
 }
 
 #ifdef __WXGTK3__

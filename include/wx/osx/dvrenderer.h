@@ -57,7 +57,7 @@ public:
         return true;
     }
 
-    void EnableEllipsize(wxEllipsizeMode mode = wxELLIPSIZE_MIDDLE) override;
+    void EnableEllipsize(wxEllipsizeMode mode = wxEllipsizeMode::Middle) override;
     wxEllipsizeMode GetEllipsizeMode() const override;
 
     // implementation
