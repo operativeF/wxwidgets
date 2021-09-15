@@ -3872,7 +3872,7 @@ wxAccStatus wxWindowAccessible::GetKeyboardShortcut(int WXUNUSED(childId), std::
 }
 
 // Returns a role constant.
-wxAccStatus wxWindowAccessible::GetRole(int childId, wxAccRole* role)
+wxAccStatus wxWindowAccessible::GetRole(int childId, wxAccSystemRole* role)
 {
     wxCHECK( GetWindow() != nullptr, wxAccStatus::Fail );
 
@@ -3892,8 +3892,8 @@ wxAccStatus wxWindowAccessible::GetRole(int childId, wxAccRole* role)
         return wxAccStatus::NotImplemented;
 #endif
 
-    //*role = wxROLE_SYSTEM_CLIENT;
-    *role = wxROLE_SYSTEM_CLIENT;
+    //*role = wxAccSystemRole::Client;
+    *role = wxAccSystemRole::Client;
     return wxAccStatus::Ok;
 
     #if 0

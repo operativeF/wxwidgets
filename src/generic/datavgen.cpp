@@ -6975,16 +6975,16 @@ wxAccStatus wxDataViewCtrlAccessible::GetKeyboardShortcut(int childId, std::stri
 }
 
 // Returns a role constant.
-wxAccStatus wxDataViewCtrlAccessible::GetRole(int childId, wxAccRole* role)
+wxAccStatus wxDataViewCtrlAccessible::GetRole(int childId, wxAccSystemRole* role)
 {
     wxDataViewCtrl* dvCtrl = wxDynamicCast(GetWindow(), wxDataViewCtrl);
     wxCHECK( dvCtrl, wxAccStatus::Fail );
     wxDataViewMainWindow* dvWnd = wxDynamicCast(dvCtrl->GetMainWindow(), wxDataViewMainWindow);
 
     if ( childId == wxACC_SELF )
-        *role = dvWnd->IsList() ? wxROLE_SYSTEM_LIST : wxROLE_SYSTEM_OUTLINE;
+        *role = dvWnd->IsList() ? wxAccSystemRole::List : wxAccSystemRole::Outline;
     else
-        *role = dvWnd->IsList() ? wxROLE_SYSTEM_LISTITEM : wxROLE_SYSTEM_OUTLINEITEM;
+        *role = dvWnd->IsList() ? wxAccSystemRole::ListItem : wxAccSystemRole::OutlineItem;
 
     return wxAccStatus::Ok;
 }

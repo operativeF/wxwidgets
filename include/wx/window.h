@@ -2074,7 +2074,7 @@ public:
     wxAccStatus GetKeyboardShortcut(int childId, std::string* shortcut) override;
 
         // Returns a role constant.
-    wxAccStatus GetRole(int childId, wxAccRole* role) override;
+    wxAccStatus GetRole(int childId, wxAccSystemRole* role) override;
 
         // Returns a state constant.
     wxAccStatus GetState(int childId, long* state) override;

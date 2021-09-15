@@ -460,7 +460,7 @@ public:
 
     wxAccStatus GetKeyboardShortcut(int childId, std::string* shortcut) override;
 
-    wxAccStatus GetRole(int childId, wxAccRole* role) override;
+    wxAccStatus GetRole(int childId, wxAccSystemRole* role) override;
 
     wxAccStatus GetState(int childId, long* state) override;
 

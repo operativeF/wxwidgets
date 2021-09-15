@@ -31,7 +31,7 @@
 #endif
 
 // Convert to Windows role
-int wxConvertToWindowsRole(wxAccRole wxrole);
+int wxConvertToWindowsRole(wxAccSystemRole wxrole);
 
 // Convert to Windows state
 LONG wxConvertToWindowsState(long wxstate);
@@ -1245,7 +1245,7 @@ STDMETHODIMP wxIAccessible::get_accRole ( VARIANT varID, VARIANT* pVarRole)
 
     VariantInit(pVarRole);
 
-    wxAccRole role = wxROLE_NONE;
+    wxAccSystemRole role = wxAccSystemRole::None;
 
     wxAccStatus status = m_pAccessible->GetRole(varID.lVal, & role);
 
@@ -1276,7 +1276,7 @@ STDMETHODIMP wxIAccessible::get_accRole ( VARIANT varID, VARIANT* pVarRole)
     }
     else
     {
-        if (role == wxROLE_NONE)
+        if (role == wxAccSystemRole::None)
         {
             pVarRole->vt = VT_EMPTY;
             return S_OK;
@@ -1831,133 +1831,133 @@ void wxAccessible::NotifyEvent(int eventType, wxWindow* window, wxAccObject obje
 // Utilities
 
 // Convert to Windows role
-int wxConvertToWindowsRole(wxAccRole wxrole)
+int wxConvertToWindowsRole(wxAccSystemRole wxrole)
 {
     switch (wxrole)
     {
-    case wxROLE_NONE:
+    case wxAccSystemRole::None:
         return 0;
-    case wxROLE_SYSTEM_ALERT:
+    case wxAccSystemRole::Alert:
         return ROLE_SYSTEM_ALERT;
-    case wxROLE_SYSTEM_ANIMATION:
+    case wxAccSystemRole::Animation:
         return ROLE_SYSTEM_ANIMATION;
-    case wxROLE_SYSTEM_APPLICATION:
+    case wxAccSystemRole::Application:
         return ROLE_SYSTEM_APPLICATION;
-    case wxROLE_SYSTEM_BORDER:
+    case wxAccSystemRole::Border:
         return ROLE_SYSTEM_BORDER;
-    case wxROLE_SYSTEM_BUTTONDROPDOWN:
+    case wxAccSystemRole::ButtonDropDown:
         return ROLE_SYSTEM_BUTTONDROPDOWN;
-    case wxROLE_SYSTEM_BUTTONDROPDOWNGRID:
+    case wxAccSystemRole::ButtonDropDownGRID:
         return ROLE_SYSTEM_BUTTONDROPDOWNGRID;
-    case wxROLE_SYSTEM_BUTTONMENU:
+    case wxAccSystemRole::ButtonMenu:
         return ROLE_SYSTEM_BUTTONMENU;
-    case wxROLE_SYSTEM_CARET:
+    case wxAccSystemRole::Caret:
         return ROLE_SYSTEM_CARET;
-    case wxROLE_SYSTEM_CELL:
+    case wxAccSystemRole::Cell:
         return ROLE_SYSTEM_CELL;
-    case wxROLE_SYSTEM_CHARACTER:
+    case wxAccSystemRole::Character:
         return ROLE_SYSTEM_CHARACTER;
-    case wxROLE_SYSTEM_CHART:
+    case wxAccSystemRole::Chart:
         return ROLE_SYSTEM_CHART;
-    case wxROLE_SYSTEM_CHECKBUTTON:
+    case wxAccSystemRole::CheckButton:
         return ROLE_SYSTEM_CHECKBUTTON;
-    case wxROLE_SYSTEM_CLIENT:
+    case wxAccSystemRole::Client:
         return ROLE_SYSTEM_CLIENT;
-    case wxROLE_SYSTEM_CLOCK:
+    case wxAccSystemRole::Clock:
         return ROLE_SYSTEM_CLOCK;
-    case wxROLE_SYSTEM_COLUMN:
+    case wxAccSystemRole::Column:
         return ROLE_SYSTEM_COLUMN;
-    case wxROLE_SYSTEM_COLUMNHEADER:
+    case wxAccSystemRole::ColumnHeader:
         return ROLE_SYSTEM_COLUMNHEADER;
-    case wxROLE_SYSTEM_COMBOBOX:
+    case wxAccSystemRole::ComboBox:
         return ROLE_SYSTEM_COMBOBOX;
-    case wxROLE_SYSTEM_CURSOR:
+    case wxAccSystemRole::Cursor:
         return ROLE_SYSTEM_CURSOR;
-    case wxROLE_SYSTEM_DIAGRAM:
+    case wxAccSystemRole::Diagram:
         return ROLE_SYSTEM_DIAGRAM;
-    case wxROLE_SYSTEM_DIAL:
+    case wxAccSystemRole::Dial:
         return ROLE_SYSTEM_DIAL;
-    case wxROLE_SYSTEM_DIALOG:
+    case wxAccSystemRole::Dialog:
         return ROLE_SYSTEM_DIALOG;
-    case wxROLE_SYSTEM_DOCUMENT:
+    case wxAccSystemRole::Document:
         return ROLE_SYSTEM_DOCUMENT;
-    case wxROLE_SYSTEM_DROPLIST:
+    case wxAccSystemRole::Droplist:
         return ROLE_SYSTEM_DROPLIST;
-    case wxROLE_SYSTEM_EQUATION:
+    case wxAccSystemRole::Equation:
         return ROLE_SYSTEM_EQUATION;
-    case wxROLE_SYSTEM_GRAPHIC:
+    case wxAccSystemRole::Graphic:
         return ROLE_SYSTEM_GRAPHIC;
-    case wxROLE_SYSTEM_GRIP:
+    case wxAccSystemRole::Grip:
         return ROLE_SYSTEM_GRIP;
-    case wxROLE_SYSTEM_GROUPING:
+    case wxAccSystemRole::Grouping:
         return ROLE_SYSTEM_GROUPING;
-    case wxROLE_SYSTEM_HELPBALLOON:
+    case wxAccSystemRole::HelpBalloon:
         return ROLE_SYSTEM_HELPBALLOON;
-    case wxROLE_SYSTEM_HOTKEYFIELD:
+    case wxAccSystemRole::HotkeyField:
         return ROLE_SYSTEM_HOTKEYFIELD;
-    case wxROLE_SYSTEM_INDICATOR:
+    case wxAccSystemRole::Indicator:
         return ROLE_SYSTEM_INDICATOR;
-    case wxROLE_SYSTEM_LINK:
+    case wxAccSystemRole::Link:
         return ROLE_SYSTEM_LINK;
-    case wxROLE_SYSTEM_LIST:
+    case wxAccSystemRole::List:
         return ROLE_SYSTEM_LIST;
-    case wxROLE_SYSTEM_LISTITEM:
+    case wxAccSystemRole::ListItem:
         return ROLE_SYSTEM_LISTITEM;
-    case wxROLE_SYSTEM_MENUBAR:
+    case wxAccSystemRole::Menubar:
         return ROLE_SYSTEM_MENUBAR;
-    case wxROLE_SYSTEM_MENUITEM:
+    case wxAccSystemRole::MenuItem:
         return ROLE_SYSTEM_MENUITEM;
-    case wxROLE_SYSTEM_MENUPOPUP:
+    case wxAccSystemRole::MenuPopup:
         return ROLE_SYSTEM_MENUPOPUP;
-    case wxROLE_SYSTEM_OUTLINE:
+    case wxAccSystemRole::Outline:
         return ROLE_SYSTEM_OUTLINE;
-    case wxROLE_SYSTEM_OUTLINEITEM:
+    case wxAccSystemRole::OutlineItem:
         return ROLE_SYSTEM_OUTLINEITEM;
-    case wxROLE_SYSTEM_PAGETAB:
+    case wxAccSystemRole::PageTab:
         return ROLE_SYSTEM_PAGETAB;
-    case wxROLE_SYSTEM_PAGETABLIST:
+    case wxAccSystemRole::PageTabList:
         return ROLE_SYSTEM_PAGETABLIST;
-    case wxROLE_SYSTEM_PANE:
+    case wxAccSystemRole::Pane:
         return ROLE_SYSTEM_PANE;
-    case wxROLE_SYSTEM_PROGRESSBAR:
+    case wxAccSystemRole::ProgressBar:
         return ROLE_SYSTEM_PROGRESSBAR;
-    case wxROLE_SYSTEM_PROPERTYPAGE:
+    case wxAccSystemRole::PropertyPage:
         return ROLE_SYSTEM_PROPERTYPAGE;
-    case wxROLE_SYSTEM_PUSHBUTTON:
+    case wxAccSystemRole::PushButton:
         return ROLE_SYSTEM_PUSHBUTTON;
-    case wxROLE_SYSTEM_RADIOBUTTON:
+    case wxAccSystemRole::RadioButton:
         return ROLE_SYSTEM_RADIOBUTTON;
-    case wxROLE_SYSTEM_ROW:
+    case wxAccSystemRole::Row:
         return ROLE_SYSTEM_ROW;
-    case wxROLE_SYSTEM_ROWHEADER:
+    case wxAccSystemRole::RowHeader:
         return ROLE_SYSTEM_ROWHEADER;
-    case wxROLE_SYSTEM_SCROLLBAR:
+    case wxAccSystemRole::Scrollbar:
         return ROLE_SYSTEM_SCROLLBAR;
-    case wxROLE_SYSTEM_SEPARATOR:
+    case wxAccSystemRole::Separator:
         return ROLE_SYSTEM_SEPARATOR;
-    case wxROLE_SYSTEM_SLIDER:
+    case wxAccSystemRole::Slider:
         return ROLE_SYSTEM_SLIDER;
-    case wxROLE_SYSTEM_SOUND:
+    case wxAccSystemRole::Sound:
         return ROLE_SYSTEM_SOUND;
-    case wxROLE_SYSTEM_SPINBUTTON:
+    case wxAccSystemRole::SpinButton:
         return ROLE_SYSTEM_SPINBUTTON;
-    case wxROLE_SYSTEM_STATICTEXT:
+    case wxAccSystemRole::StaticText:
         return ROLE_SYSTEM_STATICTEXT;
-    case wxROLE_SYSTEM_STATUSBAR:
+    case wxAccSystemRole::StatusBar:
         return ROLE_SYSTEM_STATUSBAR;
-    case wxROLE_SYSTEM_TABLE:
+    case wxAccSystemRole::Table:
         return ROLE_SYSTEM_TABLE;
-    case wxROLE_SYSTEM_TEXT:
+    case wxAccSystemRole::Text:
         return ROLE_SYSTEM_TEXT;
-    case wxROLE_SYSTEM_TITLEBAR:
+    case wxAccSystemRole::Titlebar:
         return ROLE_SYSTEM_TITLEBAR;
-    case wxROLE_SYSTEM_TOOLBAR:
+    case wxAccSystemRole::Toolbar:
         return ROLE_SYSTEM_TOOLBAR;
-    case wxROLE_SYSTEM_TOOLTIP:
+    case wxAccSystemRole::Tooltip:
         return ROLE_SYSTEM_TOOLTIP;
-    case wxROLE_SYSTEM_WHITESPACE:
+    case wxAccSystemRole::Whitespace:
         return ROLE_SYSTEM_WHITESPACE;
-    case wxROLE_SYSTEM_WINDOW:
+    case wxAccSystemRole::Window:
         return ROLE_SYSTEM_WINDOW;
     }
     return 0;
