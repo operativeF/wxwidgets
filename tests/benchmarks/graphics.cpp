@@ -897,7 +897,7 @@ public:
     virtual bool OnCmdLineParsed(wxCmdLineParser& parser)
     {
         if ( parser.Found("m", &opts.mapMode) &&
-                (opts.mapMode < 1 || opts.mapMode > wxMM_METRIC) )
+                (opts.mapMode < 1 || opts.mapMode > wxMappingMode::Metric) )
             return false;
         if ( parser.Found("p", &opts.penWidth) && opts.penWidth < 1 )
             return false;

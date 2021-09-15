@@ -517,13 +517,13 @@ wxLongLong wxAVMediaBackend::GetDuration()
 wxMediaState wxAVMediaBackend::GetState()
 {
     if ( [m_player isPlaying] )
-        return wxMEDIASTATE_PLAYING;
+        return wxMediaState::Playing;
     else
     {
         if ( GetPosition() == 0 )
-            return wxMEDIASTATE_STOPPED;
+            return wxMediaState::Stopped;
         else
-            return wxMEDIASTATE_PAUSED;
+            return wxMediaState::Paused;
     }
 }
 

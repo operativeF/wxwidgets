@@ -223,7 +223,7 @@ BombsCanvas::BombsCanvas(wxFrame *parent, BombsGame *game)
     dc.GetTextExtent(buf, &chw, &chh);
     dc.SetFont(wxNullFont);
 
-    dc.SetMapMode(wxMM_METRIC);
+    dc.SetMapMode(wxMappingMode::Metric);
 
     int xcm = dc.LogicalToDeviceX(10);
     int ycm = dc.LogicalToDeviceY(10);
@@ -242,7 +242,7 @@ BombsCanvas::BombsCanvas(wxFrame *parent, BombsGame *game)
 
     m_cellWidth = (sx+3+X_UNIT)/X_UNIT;
     m_cellHeight = (sy+3+Y_UNIT)/Y_UNIT;
-    dc.SetMapMode(wxMM_TEXT);
+    dc.SetMapMode(wxMappingMode::Text);
     m_bmp = NULL;
 }
 

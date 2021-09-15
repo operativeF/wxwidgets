@@ -37,7 +37,7 @@ public:
 
 protected:
     virtual wxSize DoGetSize() const;
-    virtual bool DoFloodFill( wxCoord x, wxCoord y, const wxColour& col, wxFloodFillStyle style=wxFLOOD_SURFACE );
+    virtual bool DoFloodFill( wxCoord x, wxCoord y, const wxColour& col, wxFloodFillStyle style=wxFloodFillStyle::Surface );
     virtual bool DoGetPixel( wxCoord x1, wxCoord y1, wxColour *col ) const;
 
     virtual void DoDrawLine( wxCoord x1, wxCoord y1, wxCoord x2, wxCoord y2 );

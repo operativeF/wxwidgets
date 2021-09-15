@@ -166,9 +166,9 @@ wxMetafileDCImpl::wxMetafileDCImpl(wxDC *owner, const std::string& file)
     m_ok = (m_hDC != (WXHDC) 0) ;
 
     // Actual Windows mapping mode, for future reference.
-    m_windowsMappingMode = wxMM_TEXT;
+    m_windowsMappingMode = wxMappingMode::Text;
 
-    SetMapMode(wxMM_TEXT); // NOTE: does not set HDC mapmode (this is correct)
+    SetMapMode(wxMappingMode::Text); // NOTE: does not set HDC mapmode (this is correct)
 }
 
 // New constructor that takes origin and extent. If you use this, don't
@@ -193,7 +193,7 @@ wxMetafileDCImpl::wxMetafileDCImpl(wxDC *owner, const std::string& file,
     // Actual Windows mapping mode, for future reference.
     m_windowsMappingMode = MM_ANISOTROPIC;
 
-    SetMapMode(wxMM_TEXT); // NOTE: does not set HDC mapmode (this is correct)
+    SetMapMode(wxMappingMode::Text); // NOTE: does not set HDC mapmode (this is correct)
 }
 
 wxMetafileDCImpl::~wxMetafileDCImpl()
@@ -267,28 +267,28 @@ void wxMetafileDCImpl::SetMapMode(wxMappingMode mode)
 
     switch (mode)
     {
-        case wxMM_TWIPS:
+        case wxMappingMode::Twips:
             {
                 m_logicalScale = {twips2mm * mm2pixelsX, twips2mm * mm2pixelsY};
                 break;
             }
-        case wxMM_POINTS:
+        case wxMappingMode::Points:
             {
                 m_logicalScale = {pt2mm * mm2pixelsX, pt2mm * mm2pixelsY};
                 break;
             }
-        case wxMM_METRIC:
+        case wxMappingMode::Metric:
             {
                 m_logicalScale = {mm2pixelsX, mm2pixelsY};
                 break;
             }
-        case wxMM_LOMETRIC:
+        case wxMappingMode::LoMetric:
             {
                 m_logicalScale = {mm2pixelsX / 10, mm2pixelsY / 10};
                 break;
             }
         default:
-        case wxMM_TEXT:
+        case wxMappingMode::Text:
             {
                 m_logicalScale = {1.0, 1.0};
                 break;
@@ -320,7 +320,7 @@ struct mfPLACEABLEHEADER {
 /*
  * Pass filename of existing non-placeable metafile, and bounding box.
  * Adds a placeable metafile header, sets the mapping mode to anisotropic,
- * and sets the window origin and extent to mimic the wxMM_TEXT mapping mode.
+ * and sets the window origin and extent to mimic the wxMappingMode::Text mapping mode.
  *
  */
 

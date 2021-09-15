@@ -52,7 +52,7 @@ public:
     void DoSetDeviceClippingRegion(const wxRegion& region) override;
 
     virtual bool DoFloodFill(wxCoord x, wxCoord y, const wxColour& col,
-                             wxFloodFillStyle style = wxFLOOD_SURFACE) override;
+                             wxFloodFillStyle style = wxFloodFillStyle::Surface) override;
 
     bool DoGetPixel(wxCoord x, wxCoord y, wxColour *col) const override;
 

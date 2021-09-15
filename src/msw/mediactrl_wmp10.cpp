@@ -1262,17 +1262,17 @@ wxMediaState wxWMP10MediaBackend::GetState()
     if(FAILED(hr))
     {
         wxWMP10LOG(hr);
-        return wxMEDIASTATE_STOPPED;
+        return wxMediaState::Stopped;
     }
 
     switch(nState)
     {
     case wmppsPaused:
-        return wxMEDIASTATE_PAUSED;
+        return wxMediaState::Paused;
     case wmppsPlaying:
-        return wxMEDIASTATE_PLAYING;
+        return wxMediaState::Playing;
     default:
-        return wxMEDIASTATE_STOPPED;
+        return wxMediaState::Stopped;
     }
 }
 

@@ -1402,7 +1402,7 @@ wxMediaState wxAMMediaBackend::GetState()
     if(FAILED(hr))
     {
         wxAMLOG(hr);
-        return wxMEDIASTATE_STOPPED;
+        return wxMediaState::Stopped;
     }
 
     return (wxMediaState)nState;

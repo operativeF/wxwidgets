@@ -90,7 +90,7 @@ protected:
     void DFBInit(const wxIDirectFBSurfacePtr& surface);
 
     virtual bool DoFloodFill(wxCoord x, wxCoord y, const wxColour& col,
-                             wxFloodFillStyle style = wxFLOOD_SURFACE);
+                             wxFloodFillStyle style = wxFloodFillStyle::Surface);
 
     virtual bool DoGetPixel(wxCoord x, wxCoord y, wxColour *col) const;
 

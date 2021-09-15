@@ -18,11 +18,11 @@
 #include "wx/control.h"
 #include "wx/uri.h"
 
-enum wxMediaState
+enum class wxMediaState
 {
-    wxMEDIASTATE_STOPPED,
-    wxMEDIASTATE_PAUSED,
-    wxMEDIASTATE_PLAYING
+    Stopped,
+    Paused,
+    Playing
 };
 
 enum wxMediaCtrlPlayerControls
@@ -227,7 +227,7 @@ public:
     {   return false;                   }
 
     virtual wxMediaState GetState()
-    {   return wxMEDIASTATE_STOPPED;    }
+    {   return wxMediaState::Stopped;    }
 
     virtual double GetVolume()
     {   return 0.0;                     }

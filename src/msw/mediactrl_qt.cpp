@@ -1025,11 +1025,11 @@ wxLongLong wxQTMediaBackend::GetDuration()
 wxMediaState wxQTMediaBackend::GetState()
 {
     if (m_bPlaying)
-        return wxMEDIASTATE_PLAYING;
+        return wxMediaState::Playing;
     else if ( !m_movie || wxQTMediaBackend::GetPosition() == 0 )
-        return wxMEDIASTATE_STOPPED;
+        return wxMediaState::Stopped;
     else
-        return wxMEDIASTATE_PAUSED;
+        return wxMediaState::Paused;
 }
 
 //---------------------------------------------------------------------------

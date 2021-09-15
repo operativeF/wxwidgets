@@ -257,7 +257,7 @@ public:
 
 protected:
     bool DoFloodFill(wxCoord x1, wxCoord y1, const wxColour &col,
-                     wxFloodFillStyle style=wxFLOOD_SURFACE ) override;
+                     wxFloodFillStyle style=wxFloodFillStyle::Surface ) override;
     void DoGradientFillConcentric(const wxRect& rect, const wxColour& initialColour, const wxColour& destColour, const wxPoint& circleCenter) override;
     void DoGradientFillLinear(const wxRect& rect, const wxColour& initialColour, const wxColour& destColour, wxDirection nDirection = wxEAST) override;
     bool DoGetPixel(wxCoord x1, wxCoord y1, wxColour *col) const override;

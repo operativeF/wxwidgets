@@ -28,7 +28,7 @@ public:
 
     wxSize DoGetSize() const override;
     virtual bool DoFloodFill( wxCoord x, wxCoord y, const wxColour& col,
-                              wxFloodFillStyle style=wxFLOOD_SURFACE ) override;
+                              wxFloodFillStyle style=wxFloodFillStyle::Surface ) override;
     bool DoGetPixel( wxCoord x1, wxCoord y1, wxColour *col ) const override;
 
     void DoDrawLine( wxCoord x1, wxCoord y1, wxCoord x2, wxCoord y2 ) override;

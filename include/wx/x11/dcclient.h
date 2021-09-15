@@ -40,7 +40,7 @@ public:
 protected:
     virtual wxSize DoGetSize() const;
     virtual bool DoFloodFill( wxCoord x, wxCoord y, const wxColour& col,
-                              wxFloodFillStyle style = wxFLOOD_SURFACE );
+                              wxFloodFillStyle style = wxFloodFillStyle::Surface );
     virtual bool DoGetPixel( wxCoord x, wxCoord y, wxColour *col ) const;
 
     virtual void DoDrawPoint(wxCoord x, wxCoord y);

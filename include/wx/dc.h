@@ -70,20 +70,20 @@ enum class wxRasterOperationMode
 };
 
 //  Flood styles
-enum wxFloodFillStyle
+enum class wxFloodFillStyle
 {
-    wxFLOOD_SURFACE = 1,
-    wxFLOOD_BORDER
+    Surface,
+    Border
 };
 
 //  Mapping modes
-enum wxMappingMode
+enum class wxMappingMode
 {
-    wxMM_TEXT = 1,
-    wxMM_METRIC,
-    wxMM_LOMETRIC,
-    wxMM_TWIPS,
-    wxMM_POINTS
+    Text,
+    Metric,
+    LoMetric,
+    Twips,
+    Points
 };
 
 // Description of text characteristics.
@@ -431,7 +431,7 @@ public:
     // the actual drawing API
 
     virtual bool DoFloodFill(wxCoord x, wxCoord y, const wxColour& col,
-                             wxFloodFillStyle style = wxFLOOD_SURFACE) = 0;
+                             wxFloodFillStyle style = wxFloodFillStyle::Surface) = 0;
 
     virtual void DoGradientFillLinear(const wxRect& rect,
                                       const wxColour& initialColour,
@@ -964,10 +964,10 @@ public:
     // the actual drawing API
 
     bool FloodFill(wxCoord x, wxCoord y, const wxColour& col,
-                   wxFloodFillStyle style = wxFLOOD_SURFACE)
+                   wxFloodFillStyle style = wxFloodFillStyle::Surface)
         { return m_pimpl->DoFloodFill(x, y, col, style); }
     bool FloodFill(const wxPoint& pt, const wxColour& col,
-                   wxFloodFillStyle style = wxFLOOD_SURFACE)
+                   wxFloodFillStyle style = wxFloodFillStyle::Surface)
         { return m_pimpl->DoFloodFill(pt.x, pt.y, col, style); }
 
     // fill the area specified by rect with a radial gradient, starting from

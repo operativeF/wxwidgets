@@ -107,7 +107,7 @@ protected:
 
     // wxDCBase functions
     bool DoFloodFill(wxCoord x, wxCoord y, const wxColour& col,
-                             wxFloodFillStyle style = wxFLOOD_SURFACE) override
+                             wxFloodFillStyle style = wxFloodFillStyle::Surface) override
     {
         return m_dc.DoFloodFill(GetX(x, y), GetY(x, y), col, style);
     }

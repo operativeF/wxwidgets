@@ -140,7 +140,7 @@ public:
 
     // the true implementations
     bool DoFloodFill(wxCoord x, wxCoord y, const wxColour& col,
-                             wxFloodFillStyle style = wxFLOOD_SURFACE) override;
+                             wxFloodFillStyle style = wxFloodFillStyle::Surface) override;
 
     void DoGradientFillLinear(const wxRect& rect,
         const wxColour& initialColour,

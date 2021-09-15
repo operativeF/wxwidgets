@@ -74,7 +74,7 @@ wxPrinterDCImpl::wxPrinterDCImpl( wxPrinterDC *owner, const wxPrintData& printDa
     {
         //     int width = GetDeviceCaps(m_hDC, VERTRES);
         //     int height = GetDeviceCaps(m_hDC, HORZRES);
-        SetMapMode(wxMM_TEXT);
+        SetMapMode(wxMappingMode::Text);
 
         SetBrush(*wxBLACK_BRUSH);
         SetPen(*wxBLACK_PEN);

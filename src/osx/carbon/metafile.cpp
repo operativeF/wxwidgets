@@ -285,7 +285,7 @@ wxMetafileDCImpl::wxMetafileDCImpl(
     SetGraphicsContext( wxGraphicsContext::CreateFromNative(metafiledata->GetContext()));
     m_ok = (m_graphicContext != NULL) ;
 
-    SetMapMode( wxMM_TEXT );
+    SetMapMode( wxMappingMode::Text );
 }
 
 wxMetafileDCImpl::~wxMetafileDCImpl()

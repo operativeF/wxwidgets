@@ -759,7 +759,7 @@ bool wxMSWDCImpl::DoFloodFill(wxCoord x,
 {
     bool success = (0 != ::ExtFloodFill(GetHdc(), XLOG2DEV(x), YLOG2DEV(y),
                          col.GetPixel(),
-                         style == wxFLOOD_SURFACE ? FLOODFILLSURFACE
+                         style == wxFloodFillStyle::Surface ? FLOODFILLSURFACE
                                                   : FLOODFILLBORDER) ) ;
     if (!success)
     {
@@ -1990,7 +1990,7 @@ void wxMSWDCImpl::SetMapMode(wxMappingMode mode)
 {
     m_mappingMode = mode;
 
-    if ( mode == wxMM_TEXT )
+    if ( mode == wxMappingMode::Text )
     {
         m_logicalScale = {1.0, 1.0};
     }
@@ -2012,19 +2012,19 @@ void wxMSWDCImpl::SetMapMode(wxMappingMode mode)
 
         switch (mode)
         {
-            case wxMM_TWIPS:
+            case wxMappingMode::Twips:
                 m_logicalScale = {twips2mm * mm2pixelsX, twips2mm * mm2pixelsY};
                 break;
 
-            case wxMM_POINTS:
+            case wxMappingMode::Points:
                 m_logicalScale = {pt2mm * mm2pixelsX, pt2mm * mm2pixelsY};
                 break;
 
-            case wxMM_METRIC:
+            case wxMappingMode::Metric:
                 m_logicalScale = {mm2pixelsX, mm2pixelsY};
                 break;
 
-            case wxMM_LOMETRIC:
+            case wxMappingMode::LoMetric:
                 m_logicalScale = {mm2pixelsX / 10.0, mm2pixelsY / 10.0};
                 break;
 

@@ -486,7 +486,7 @@ bool wxHtmlWindow::DoSetPage(const std::string& source)
 
     // ...and run the parser on it:
     wxClientDC dc(this);
-    dc.SetMapMode(wxMM_TEXT);
+    dc.SetMapMode(wxMappingMode::Text);
     SetBackgroundColour(wxColour(0xFF, 0xFF, 0xFF));
     SetBackgroundImage(wxNullBitmap);
 
@@ -1140,7 +1140,7 @@ void wxHtmlWindow::OnPaint(wxPaintEvent& WXUNUSED(event))
 
 
     // draw the HTML window contents
-    dc->SetMapMode(wxMM_TEXT);
+    dc->SetMapMode(wxMappingMode::Text);
     dc->SetBackgroundMode(wxBrushStyle::Transparent);
     dc->SetLayoutDirection(GetLayoutDirection());
 

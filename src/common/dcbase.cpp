@@ -317,7 +317,7 @@ wxDCImpl::wxDCImpl( wxDC *owner )
         , m_clipX1(0), m_clipY1(0), m_clipX2(0), m_clipY2(0)
         , m_logicalFunction(wxRasterOperationMode::Copy)
         , m_backgroundMode(wxBrushStyle::Transparent)
-        , m_mappingMode(wxMM_TEXT)
+        , m_mappingMode(wxMappingMode::Text)
         , m_textForegroundColour(*wxBLACK)
         , m_textBackgroundColour(*wxWHITE)
         , m_owner(owner)
@@ -472,20 +472,20 @@ void wxDCImpl::SetMapMode( wxMappingMode mode )
 {
     switch (mode)
     {
-        case wxMM_TWIPS:
+        case wxMappingMode::Twips:
           SetLogicalScale( {twips2mm*GetMMToPXx(), twips2mm*GetMMToPXy()} );
           break;
-        case wxMM_POINTS:
+        case wxMappingMode::Points:
           SetLogicalScale( {pt2mm*GetMMToPXx(), pt2mm*GetMMToPXy()} );
           break;
-        case wxMM_METRIC:
+        case wxMappingMode::Metric:
           SetLogicalScale( {GetMMToPXx(), GetMMToPXy()} );
           break;
-        case wxMM_LOMETRIC:
+        case wxMappingMode::LoMetric:
           SetLogicalScale( {GetMMToPXx()/10.0, GetMMToPXy()/10.0} );
           break;
         default:
-        case wxMM_TEXT:
+        case wxMappingMode::Text:
           SetLogicalScale(1.0);
           break;
     }

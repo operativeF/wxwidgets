@@ -189,7 +189,7 @@ static void realize_callback(GtkWidget* widget, wxGStreamerMediaBackend* be)
 #endif // wxGTK
 
 wxGStreamerMediaBackend()
-  : m_player(0), m_video_renderer(0), m_videoSize(0, 0), m_last_state(wxMEDIASTATE_STOPPED), m_loaded(false)
+  : m_player(0), m_video_renderer(0), m_videoSize(0, 0), m_last_state(wxMediaState::Stopped), m_loaded(false)
 {
 
 }
@@ -402,16 +402,16 @@ void wxGStreamerMediaBackend(GstPlayerState state)
           m_loaded = true;
       }
 
-      m_last_state = wxMEDIASTATE_PAUSED;
+      m_last_state = wxMediaState::Paused;
       QueuePauseEvent();
       break;
     case GST_PLAYER_STATE_PLAYING:
-      m_last_state = wxMEDIASTATE_PLAYING;
+      m_last_state = wxMediaState::Playing;
       QueuePlayEvent();
       break;
     case GST_PLAYER_STATE_STOPPED:
     default:
-      m_last_state = wxMEDIASTATE_STOPPED;
+      m_last_state = wxMediaState::Stopped;
       QueueStopEvent();
       break;
   }

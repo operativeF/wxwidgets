@@ -21,8 +21,8 @@
 
 // DoFloodFill
 // Fills with the colour extracted from fillBrush, starting at x,y until either
-// a color different from the start pixel is reached (wxFLOOD_SURFACE)
-// or fill color is reached (wxFLOOD_BORDER)
+// a color different from the start pixel is reached (wxFloodFillStyle::Surface)
+// or fill color is reached (wxFloodFillStyle::Border)
 
 static bool MatchPixel(wxImage *img, int x, int y, int w, int h, const wxColour& c)
 {
@@ -73,9 +73,9 @@ wxImageFloodFill(wxImage *image,
     unsigned char b = fillColour.Blue();
 
     //initial test :
-    if (style == wxFLOOD_SURFACE)
+    if (style == wxFloodFillStyle::Surface)
     {
-       //if wxFLOOD_SURFACE, if fill colour is same as required, we don't do anything
+       //if wxFloodFillStyle::Surface, if fill colour is same as required, we don't do anything
        if (     image->GetRed(x,y)   != r
              || image->GetGreen(x,y) != g
              || image->GetBlue (x,y) != b   )
@@ -169,7 +169,7 @@ wxImageFloodFill(wxImage *image,
     }
     else
     {
-    //style is wxFLOOD_BORDER
+    //style is wxFloodFillStyle::Border
     // fill up to testColor border - if already testColour don't do anything
     if (  image->GetRed(x,y)   != testColour.Red()
           || image->GetGreen(x,y) != testColour.Green()

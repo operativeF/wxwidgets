@@ -384,7 +384,7 @@ wxMediaState wxMediaCtrl::GetState()
 {
     if(m_imp && m_bLoaded)
         return m_imp->GetState();
-    return wxMEDIASTATE_STOPPED;
+    return wxMediaState::Stopped;
 }
 
 wxSize wxMediaCtrl::DoGetBestSize() const

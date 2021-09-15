@@ -1345,14 +1345,14 @@ wxMediaState wxGStreamerMediaBackend::GetState()
     switch(GST_STATE(m_playbin))
     {
         case GST_STATE_PLAYING:
-            return wxMEDIASTATE_PLAYING;
+            return wxMediaState::Playing;
         case GST_STATE_PAUSED:
             if (m_llPausedPos == 0)
-                return wxMEDIASTATE_STOPPED;
+                return wxMediaState::Stopped;
             else
-                return wxMEDIASTATE_PAUSED;
+                return wxMediaState::Paused;
         default://case GST_STATE_READY:
-            return wxMEDIASTATE_STOPPED;
+            return wxMediaState::Stopped;
     }
 }
 
@@ -1373,7 +1373,7 @@ wxMediaState wxGStreamerMediaBackend::GetState()
 //-----------------------------------------------------------------------------
 wxLongLong wxGStreamerMediaBackend::GetPosition()
 {
-    if(GetState() != wxMEDIASTATE_PLAYING)
+    if(GetState() != wxMediaState::Playing)
         return m_llPausedPos;
     else
     {
