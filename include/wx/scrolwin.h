@@ -27,11 +27,11 @@ class WXDLLIMPEXP_FWD_BASE wxTimer;
 inline constexpr int wxScrolledWindowStyle = wxHSCROLL | wxVSCROLL;
 
 // values for the second argument of wxScrollHelper::ShowScrollbars()
-enum wxScrollbarVisibility
+enum class wxScrollbarVisibility
 {
-    wxSHOW_SB_NEVER = -1,   // never show the scrollbar at all
-    wxSHOW_SB_DEFAULT,      // show scrollbar only if it is needed
-    wxSHOW_SB_ALWAYS        // always show scrollbar, even if not needed
+    Never,   // never show the scrollbar at all
+    Default,      // show scrollbar only if it is needed
+    Always        // always show scrollbar, even if not needed
 };
 
 // ----------------------------------------------------------------------------

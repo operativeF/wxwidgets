@@ -5360,12 +5360,12 @@ public:
     {
         const long l = PositionFromPoint(pt);
         if ( l == -1 )
-            return wxTE_HT_BELOW; // we don't really know where it was
+            return wxTextCtrlHitTestResult::Below; // we don't really know where it was
 
         if ( pos )
             *pos = l;
 
-        return wxTE_HT_ON_TEXT;
+        return wxTextCtrlHitTestResult::OnText;
     }
 
     // just unhide it

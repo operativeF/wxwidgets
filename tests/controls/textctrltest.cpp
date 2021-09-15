@@ -673,7 +673,7 @@ TEST_CASE_FIXTURE(TextCtrlTest, "Text control test")
             // first few characters under it.
             SUBCASE("Normal")
             {
-                REQUIRE(m_entry->HitTest(wxPoint(2 * sizeChar.x, yMid), &pos) == wxTE_HT_ON_TEXT);
+                REQUIRE(m_entry->HitTest(wxPoint(2 * sizeChar.x, yMid), &pos) == wxTextCtrlHitTestResult::OnText);
                 CHECK(pos >= 0);
                 CHECK(pos < 3);
             }
@@ -682,7 +682,7 @@ TEST_CASE_FIXTURE(TextCtrlTest, "Text control test")
             // character.
             SUBCASE("Beyond")
             {
-                REQUIRE(m_entry->HitTest(wxPoint(20 * sizeChar.x, yMid), &pos) == wxTE_HT_BEYOND);
+                REQUIRE(m_entry->HitTest(wxPoint(20 * sizeChar.x, yMid), &pos) == wxTextCtrlHitTestResult::Beyond);
                 CHECK(pos == m_entry->GetLastPosition());
             }
 
@@ -700,13 +700,13 @@ TEST_CASE_FIXTURE(TextCtrlTest, "Text control test")
                     wxYield();
 #endif
 
-                REQUIRE(m_entry->HitTest(wxPoint(2 * sizeChar.x, yMid), &pos) == wxTE_HT_ON_TEXT);
+                REQUIRE(m_entry->HitTest(wxPoint(2 * sizeChar.x, yMid), &pos) == wxTextCtrlHitTestResult::OnText);
                 CHECK(pos > 3);
 
                 // Using negative coordinates works even under Xvfb, so test at least
                 // for this -- however this only works in wxGTK, not wxMSW.
 #ifdef __WXGTK__
-                REQUIRE(m_entry->HitTest(wxPoint(-2 * sizeChar.x, yMid), &pos) == wxTE_HT_ON_TEXT);
+                REQUIRE(m_entry->HitTest(wxPoint(-2 * sizeChar.x, yMid), &pos) == wxTextCtrlHitTestResult::OnText);
                 CHECK(pos > 3);
 #endif // __WXGTK__
             }

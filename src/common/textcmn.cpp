@@ -468,7 +468,7 @@ bool wxTextAttr::GetFontAttributes(const wxFont& font, int flags)
         m_fontWeight = font.GetWeight();
 
     if (flags & wxTEXT_ATTR_FONT_UNDERLINE)
-        m_fontUnderlineType = font.GetUnderlined() ? wxTEXT_ATTR_UNDERLINE_SOLID : wxTEXT_ATTR_UNDERLINE_NONE;
+        m_fontUnderlineType = font.GetUnderlined() ? wxTextAttrUnderlineType::Solid : wxTextAttrUnderlineType::None;
 
     if (flags & wxTEXT_ATTR_FONT_STRIKETHROUGH)
         m_fontStrikethrough = font.GetStrikethrough();
@@ -1181,7 +1181,7 @@ wxTextAreaBase::HitTest(const wxPoint& pt, wxTextCoord *x, wxTextCoord *y) const
     long pos;
     wxTextCtrlHitTestResult rc = HitTest(pt, &pos);
 
-    if ( rc != wxTE_HT_UNKNOWN )
+    if ( rc != wxTextCtrlHitTestResult::Unknown )
     {
         PositionToXY(pos, x, y);
     }
@@ -1193,7 +1193,7 @@ wxTextCtrlHitTestResult
 wxTextAreaBase::HitTest(const wxPoint& WXUNUSED(pt), long * WXUNUSED(pos)) const
 {
     // not implemented
-    return wxTE_HT_UNKNOWN;
+    return wxTextCtrlHitTestResult::Unknown;
 }
 
 wxPoint wxTextAreaBase::PositionToCoords(long pos) const

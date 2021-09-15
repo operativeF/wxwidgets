@@ -1445,7 +1445,7 @@ wxTextCtrl::HitTest(const wxPoint& pt, long *posOut) const
     if ( pos == -1 )
     {
         // this seems to indicate an error...
-        return wxTE_HT_UNKNOWN;
+        return wxTextCtrlHitTestResult::Unknown;
     }
 
 #if wxUSE_RICHEDIT
@@ -1491,11 +1491,11 @@ wxTextCtrl::HitTest(const wxPoint& pt, long *posOut) const
     wxTextCtrlHitTestResult rc;
 
     if ( pt.y > ptReal.y + GetCharHeight() )
-        rc = wxTE_HT_BELOW;
+        rc = wxTextCtrlHitTestResult::Below;
     else if ( pt.x > ptReal.x + GetCharWidth() )
-        rc = wxTE_HT_BEYOND;
+        rc = wxTextCtrlHitTestResult::Beyond;
     else
-        rc = wxTE_HT_ON_TEXT;
+        rc = wxTextCtrlHitTestResult::OnText;
 
     if ( posOut )
         *posOut = pos;
@@ -2980,13 +2980,13 @@ bool wxTextCtrl::MSWSetCharFormat(const wxTextAttr& style, long start, long end)
         BYTE underlineType = CFU_UNDERLINENONE;
         switch ( style.GetUnderlineType() )
         {
-            case wxTEXT_ATTR_UNDERLINE_SOLID:
+            case wxTextAttrUnderlineType::Solid:
                 underlineType = CFU_UNDERLINE;
                 break;
-            case wxTEXT_ATTR_UNDERLINE_DOUBLE:
+            case wxTextAttrUnderlineType::Double:
                 underlineType = CFU_UNDERLINEDOUBLE;
                 break;
-            case wxTEXT_ATTR_UNDERLINE_SPECIAL:
+            case wxTextAttrUnderlineType::Special:
                 underlineType = CFU_UNDERLINEWAVE;
                 break;
             default:
@@ -3323,20 +3323,20 @@ bool wxTextCtrl::GetStyle(long position, wxTextAttr& style)
     }
 #endif // wxUSE_RICHEDIT2
 
-    wxTextAttrUnderlineType underlineType = wxTEXT_ATTR_UNDERLINE_NONE;
+    wxTextAttrUnderlineType underlineType = wxTextAttrUnderlineType::None;
     switch ( cf.bUnderlineType )
     {
         case CFU_UNDERLINE:
-            underlineType = wxTEXT_ATTR_UNDERLINE_SOLID;
+            underlineType = wxTextAttrUnderlineType::Solid;
             break;
         case CFU_UNDERLINEDOUBLE:
-            underlineType = wxTEXT_ATTR_UNDERLINE_DOUBLE;
+            underlineType = wxTextAttrUnderlineType::Double;
             break;
         case CFU_UNDERLINEWAVE:
-            underlineType = wxTEXT_ATTR_UNDERLINE_SPECIAL;
+            underlineType = wxTextAttrUnderlineType::Special;
             break;
         default:
-            underlineType = wxTEXT_ATTR_UNDERLINE_NONE;
+            underlineType = wxTextAttrUnderlineType::None;
             break;
     }
 
@@ -3346,7 +3346,7 @@ bool wxTextCtrl::GetStyle(long position, wxTextAttr& style)
         underlineColour = gs_underlineColourMap[cf.bUnderlineColor];
 #endif
 
-    if ( underlineType != wxTEXT_ATTR_UNDERLINE_NONE )
+    if ( underlineType != wxTextAttrUnderlineType::None )
         style.SetFontUnderlined(underlineType, underlineColour);
 
     // now get the paragraph formatting

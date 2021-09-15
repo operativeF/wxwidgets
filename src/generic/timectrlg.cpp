@@ -252,16 +252,16 @@ private:
         long pos;
         switch ( m_text->HitTest(event.GetPosition(), &pos) )
         {
-            case wxTE_HT_UNKNOWN:
+            case wxTextCtrlHitTestResult::Unknown:
                 // Don't do anything, it's better than doing something wrong.
                 return;
 
-            case wxTE_HT_BEFORE:
+            case wxTextCtrlHitTestResult::Before:
                 // Select the first field.
                 field = Field_Hour;
                 break;
 
-            case wxTE_HT_ON_TEXT:
+            case wxTextCtrlHitTestResult::OnText:
                 // Find the field containing this position.
                 for ( field = Field_Hour; field <= GetLastField(); )
                 {
@@ -277,12 +277,12 @@ private:
                 }
                 break;
 
-            case wxTE_HT_BELOW:
+            case wxTextCtrlHitTestResult::Below:
                 // This shouldn't happen for single line control.
                 wxFAIL_MSG( "Unreachable" );
                 [[fallthrough]];
 
-            case wxTE_HT_BEYOND:
+            case wxTextCtrlHitTestResult::Beyond:
                 // Select the last field.
                 field = GetLastField();
                 break;

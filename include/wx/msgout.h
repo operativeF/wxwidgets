@@ -109,10 +109,10 @@ protected:
 // uses stderr or message box if available according to the flag given to ctor.
 // ----------------------------------------------------------------------------
 
-enum wxMessageOutputFlags
+enum class wxMessageOutputFlags
 {
-    wxMSGOUT_PREFER_STDERR = 0, // use stderr if available (this is the default)
-    wxMSGOUT_PREFER_MSGBOX = 1  // always use message box if available
+    StdErr, // use stderr if available (this is the default)
+    MsgBox  // always use message box if available
 };
 
 class WXDLLIMPEXP_BASE wxMessageOutputBest : public wxMessageOutputStderr
@@ -125,7 +125,7 @@ public:
     void Output(const wxString& str) override;
 
 private:
-    wxMessageOutputFlags m_flags{wxMSGOUT_PREFER_STDERR};
+    wxMessageOutputFlags m_flags{wxMessageOutputFlags::StdErr};
 };
 
 // ----------------------------------------------------------------------------

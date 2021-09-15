@@ -2454,7 +2454,7 @@ void wxTextCtrl::UpdateLastVisible()
     wxTextCoord col;
     switch ( HitTestLine(text, m_rectText.width, &col) )
     {
-        case wxTE_HT_BEYOND:
+        case wxTextCtrlHitTestResult::Beyond:
             // everything is visible
             SData().m_ofsHorz = 0;
 
@@ -2466,14 +2466,14 @@ void wxTextCtrl::UpdateLastVisible()
             break;
 
            /*
-        case wxTE_HT_BEFORE:
-        case wxTE_HT_BELOW:
+        case wxTextCtrlHitTestResult::Before:
+        case wxTextCtrlHitTestResult::Below:
             */
         default:
             wxFAIL_MSG(wxT("unexpected HitTestLine() return value"));
             // fall through
 
-        case wxTE_HT_ON_TEXT:
+        case wxTextCtrlHitTestResult::OnText:
             if ( col > 0 )
             {
                 // the last entirely seen character is the previous one because
@@ -2730,14 +2730,14 @@ size_t wxTextCtrl::GetPartOfWrappedLine(const wxChar* text,
     switch ( HitTestLine(s, m_rectText.width, &col) )
     {
             /*
-        case wxTE_HT_BEFORE:
-        case wxTE_HT_BELOW:
+        case wxTextCtrlHitTestResult::Before:
+        case wxTextCtrlHitTestResult::Below:
             */
         default:
             wxFAIL_MSG(wxT("unexpected HitTestLine() return value"));
             // fall through
 
-        case wxTE_HT_ON_TEXT:
+        case wxTextCtrlHitTestResult::OnText:
             if ( col > 0 )
             {
                 // the last entirely seen character is the previous one because
@@ -2780,7 +2780,7 @@ size_t wxTextCtrl::GetPartOfWrappedLine(const wxChar* text,
             }
             break;
 
-        case wxTE_HT_BEYOND:
+        case wxTextCtrlHitTestResult::Beyond:
             break;
     }
 
@@ -2863,7 +2863,7 @@ wxTextCtrlHitTestResult wxTextCtrl::HitTestLine(const wxString& line,
                                                 wxCoord x,
                                                 wxTextCoord *colOut) const
 {
-    wxTextCtrlHitTestResult res = wxTE_HT_ON_TEXT;
+    wxTextCtrlHitTestResult res = wxTextCtrlHitTestResult::OnText;
 
     int col;
     wxTextCtrl *self = const_cast<wxTextCtrl *>(this);
@@ -2885,13 +2885,13 @@ wxTextCtrlHitTestResult wxTextCtrl::HitTestLine(const wxString& line,
             col--;
         }
 
-        res = wxTE_HT_BEYOND;
+        res = wxTextCtrlHitTestResult::Beyond;
     }
     else if ( x < 0 )
     {
         col = 0;
 
-        res = wxTE_HT_BEFORE;
+        res = wxTextCtrlHitTestResult::Before;
     }
     else // we're inside the line
     {
@@ -2985,7 +2985,7 @@ wxTextCtrlHitTestResult wxTextCtrl::HitTestLine(const wxString& line,
 
     // check that we calculated it correctly
 #ifdef WXDEBUG_TEXT
-    if ( res == wxTE_HT_ON_TEXT )
+    if ( res == wxTextCtrlHitTestResult::OnText )
     {
         wxCoord width1;
         wxString text = line.Left(col);
@@ -3017,7 +3017,7 @@ wxTextCtrlHitTestResult wxTextCtrl::HitTest(const wxPoint& pt, long *pos) const
 {
     wxTextCoord x, y;
     wxTextCtrlHitTestResult rc = HitTest(pt, &x, &y);
-    if ( rc != wxTE_HT_UNKNOWN && pos )
+    if ( rc != wxTextCtrlHitTestResult::Unknown && pos )
     {
         *pos = XYToPosition(x, y);
     }
@@ -3049,7 +3049,7 @@ wxTextCtrlHitTestResult wxTextCtrl::HitTest2(wxCoord y0,
                                              bool deviceCoords) const
 {
     // is the point in the text area or to the right or below it?
-    wxTextCtrlHitTestResult res = wxTE_HT_ON_TEXT;
+    wxTextCtrlHitTestResult res = wxTextCtrlHitTestResult::OnText;
 
     // translate the window coords x0 and y0 into the client coords in the text
     // area by adjusting for both the client and text area offsets (unless this
@@ -3082,7 +3082,7 @@ wxTextCtrlHitTestResult wxTextCtrl::HitTest2(wxCoord y0,
         // and clicking before it is the same as clicking on the first one
         row = 0;
 
-        res = wxTE_HT_BEFORE;
+        res = wxTextCtrlHitTestResult::Before;
     }
     else // y >= 0
     {
@@ -3098,7 +3098,7 @@ wxTextCtrlHitTestResult wxTextCtrl::HitTest2(wxCoord y0,
                 // line
                 row = rowLast;
 
-                res = wxTE_HT_BELOW;
+                res = wxTextCtrlHitTestResult::Below;
             }
         }
         else // multline control with line wrap
@@ -3133,7 +3133,7 @@ wxTextCtrlHitTestResult wxTextCtrl::HitTest2(wxCoord y0,
                         // be the last one and set res accordingly
                         if ( (size_t)(row - rowFirst) >= lineData.GetRowCount() )
                         {
-                            res = wxTE_HT_BELOW;
+                            res = wxTextCtrlHitTestResult::Below;
 
                             row = lineData.GetRowCount() + rowFirst - 1;
                         }
@@ -3165,7 +3165,7 @@ wxTextCtrlHitTestResult wxTextCtrl::HitTest2(wxCoord y0,
         }
     }
 
-    if ( res == wxTE_HT_ON_TEXT )
+    if ( res == wxTextCtrlHitTestResult::OnText )
     {
         // now find the position in the line
         wxString lineText = GetLineText(row),
@@ -3216,9 +3216,9 @@ wxTextCtrlHitTestResult wxTextCtrl::HitTest2(wxCoord y0,
         {
             // fill the column with the first/last position in the
             // corresponding line
-            if ( res == wxTE_HT_BEFORE )
+            if ( res == wxTextCtrlHitTestResult::Before )
                 *colStart = 0;
-            else // res == wxTE_HT_BELOW
+            else // res == wxTextCtrlHitTestResult::Below
                 *colStart = GetLineText(GetNumberOfLines() - 1).length();
         }
     }
@@ -4063,7 +4063,7 @@ void wxTextCtrl::DoDrawTextInRect(wxDC& dc, const wxRect& rectUpdate)
                                               &line, &colStart, &colEnd,
                                               &colRowStart);
 
-        if ( (ht == wxTE_HT_BEYOND) || (ht == wxTE_HT_BELOW) )
+        if ( (ht == wxTextCtrlHitTestResult::Beyond) || (ht == wxTextCtrlHitTestResult::Below) )
         {
             wxASSERT_MSG( line <= lineEnd, wxT("how did we get that far?") );
 
@@ -4398,7 +4398,7 @@ wxTextPos wxTextCtrl::GetPositionAbove()
     pt.y -= GetLineHeight();
 
     wxTextCoord col, row;
-    if ( HitTestLogical(pt, &col, &row) == wxTE_HT_BEFORE )
+    if ( HitTestLogical(pt, &col, &row) == wxTextCtrlHitTestResult::Before )
     {
         // can't move further
         return INVALID_POS_VALUE;
@@ -4429,15 +4429,15 @@ wxTextPos wxTextCtrl::GetPositionBelow()
     pt.y += GetLineHeight();
 
     wxTextCoord col, row;
-    if ( HitTestLogical(pt, &col, &row) == wxTE_HT_BELOW )
+    if ( HitTestLogical(pt, &col, &row) == wxTextCtrlHitTestResult::Below )
     {
         // can't go further down
         return INVALID_POS_VALUE;
     }
 
-    // note that wxTE_HT_BEYOND is ok: it happens when we go down
+    // note that wxTextCtrlHitTestResult::Beyond is ok: it happens when we go down
     // from a longer line to a shorter one, for example (OTOH
-    // wxTE_HT_BEFORE can never happen)
+    // wxTextCtrlHitTestResult::Before can never happen)
     return XYToPosition(col, row);
 }
 
@@ -4816,7 +4816,7 @@ wxTextPos wxStdTextCtrlInputHandler::HitTest(const wxTextCtrl *text,
 
     // if the point is after the last column we must adjust the position to be
     // the last position in the line (unless it is already the last)
-    if ( (ht == wxTE_HT_BEYOND) && (pos < text->GetLastPosition()) )
+    if ( (ht == wxTextCtrlHitTestResult::Beyond) && (pos < text->GetLastPosition()) )
     {
         pos++;
     }

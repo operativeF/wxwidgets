@@ -432,7 +432,7 @@ wxMessageOutput *wxGUIAppTraitsBase::CreateMessageOutput()
     #ifdef __WXMOTIF__
         return new wxMessageOutputLog;
     #elif wxUSE_MSGDLG
-        return new wxMessageOutputBest(wxMSGOUT_PREFER_STDERR);
+        return new wxMessageOutputBest(wxMessageOutputFlags::StdErr);
     #else
         return new wxMessageOutputStderr;
     #endif

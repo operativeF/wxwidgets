@@ -1077,23 +1077,23 @@ bool wxNSTextViewControl::GetStyle(long position, wxTextAttr& style)
         if (fgcolor)
             style.SetTextColour(wxColour(fgcolor));
 
-        wxTextAttrUnderlineType underlineType = wxTEXT_ATTR_UNDERLINE_NONE;
+        wxTextAttrUnderlineType underlineType = wxTextAttrUnderlineType::None;
         if ( ultype )
         {
             NSInteger ulval = [ultype integerValue];
             switch ( ulval )
             {
                 case NSUnderlineStyleSingle:
-                    underlineType = wxTEXT_ATTR_UNDERLINE_SOLID;
+                    underlineType = wxTextAttrUnderlineType::Solid;
                     break;
                 case NSUnderlineStyleDouble:
-                    underlineType = wxTEXT_ATTR_UNDERLINE_DOUBLE;
+                    underlineType = wxTextAttrUnderlineType::Double;
                     break;
                 case NSUnderlineStyleSingle | NSUnderlinePatternDot:
-                    underlineType = wxTEXT_ATTR_UNDERLINE_SPECIAL;
+                    underlineType = wxTextAttrUnderlineType::Special;
                     break;
                 default:
-                    underlineType = wxTEXT_ATTR_UNDERLINE_NONE;
+                    underlineType = wxTextAttrUnderlineType::None;
                     break;
             }
         }
@@ -1102,7 +1102,7 @@ bool wxNSTextViewControl::GetStyle(long position, wxTextAttr& style)
         if ( ulcolor )
             underlineColour = wxColour(ulcolor);
 
-        if ( underlineType != wxTEXT_ATTR_UNDERLINE_NONE )
+        if ( underlineType != wxTextAttrUnderlineType::None )
             style.SetFontUnderlined(underlineType, underlineColour);
 
         return true;
@@ -1133,13 +1133,13 @@ void wxNSTextViewControl::SetStyle(long start,
             int underlineStyle = NSUnderlineStyleNone;
             switch ( style.GetUnderlineType() )
             {
-                case wxTEXT_ATTR_UNDERLINE_SOLID:
+                case wxTextAttrUnderlineType::Solid:
                     underlineStyle = NSUnderlineStyleSingle;
                     break;
-                case wxTEXT_ATTR_UNDERLINE_DOUBLE:
+                case wxTextAttrUnderlineType::Double:
                     underlineStyle = NSUnderlineStyleDouble;
                     break;
-                case wxTEXT_ATTR_UNDERLINE_SPECIAL:
+                case wxTextAttrUnderlineType::Special:
                     underlineStyle = NSUnderlineStyleSingle | NSUnderlinePatternDot;
                     break;
                 default:
@@ -1175,13 +1175,13 @@ void wxNSTextViewControl::SetStyle(long start,
             int underlineStyle = NSUnderlineStyleNone;
             switch ( style.GetUnderlineType() )
             {
-                case wxTEXT_ATTR_UNDERLINE_SOLID:
+                case wxTextAttrUnderlineType::Solid:
                     underlineStyle = NSUnderlineStyleSingle;
                     break;
-                case wxTEXT_ATTR_UNDERLINE_DOUBLE:
+                case wxTextAttrUnderlineType::Double:
                     underlineStyle = NSUnderlineStyleDouble;
                     break;
-                case wxTEXT_ATTR_UNDERLINE_SPECIAL:
+                case wxTextAttrUnderlineType::Special:
                     underlineStyle = NSUnderlineStyleSingle | NSUnderlinePatternDot;
                     break;
                 default:

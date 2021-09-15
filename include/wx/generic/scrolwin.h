@@ -47,8 +47,8 @@ private:
                            wxScrollbarVisibility visibility);
 
 
-    wxScrollbarVisibility m_xVisibility{wxSHOW_SB_DEFAULT};
-    wxScrollbarVisibility m_yVisibility{wxSHOW_SB_DEFAULT};
+    wxScrollbarVisibility m_xVisibility{wxScrollbarVisibility::Default};
+    wxScrollbarVisibility m_yVisibility{wxScrollbarVisibility::Default};
     wxRecursionGuardFlag m_adjustScrollFlagReentrancy{0};
 };
 

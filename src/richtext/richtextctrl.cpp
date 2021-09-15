@@ -3191,7 +3191,7 @@ wxRichTextCtrl::HitTest(const wxPoint& pt, wxTextCoord *x, wxTextCoord *y) const
     long pos;
     wxTextCtrlHitTestResult rc = HitTest(pt, &pos);
 
-    if ( rc != wxTE_HT_UNKNOWN )
+    if ( rc != wxTextCtrlHitTestResult::Unknown )
     {
         PositionToXY(pos, x, y);
     }
@@ -3216,13 +3216,13 @@ wxRichTextCtrl::HitTest(const wxPoint& pt,
     int hit = const_cast<wxRichTextCtrl*>(this)->GetFocusObject()->HitTest(dc, context, pt2, *pos, &hitObj, &contextObj, wxRICHTEXT_HITTEST_NO_NESTED_OBJECTS);
 
     if ((hit & wxRICHTEXT_HITTEST_BEFORE) && (hit & wxRICHTEXT_HITTEST_OUTSIDE))
-        return wxTE_HT_BEFORE;
+        return wxTextCtrlHitTestResult::Before;
     else if ((hit & wxRICHTEXT_HITTEST_AFTER) && (hit & wxRICHTEXT_HITTEST_OUTSIDE))
-        return wxTE_HT_BEYOND;
+        return wxTextCtrlHitTestResult::Beyond;
     else if (hit & (wxRICHTEXT_HITTEST_BEFORE|wxRICHTEXT_HITTEST_AFTER))
-        return wxTE_HT_ON_TEXT;
+        return wxTextCtrlHitTestResult::OnText;
 
-    return wxTE_HT_UNKNOWN;
+    return wxTextCtrlHitTestResult::Unknown;
 }
 
 wxRichTextParagraphLayoutBox*

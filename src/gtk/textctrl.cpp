@@ -129,13 +129,13 @@ static void wxGtkTextApplyTagsFromAttr(GtkWidget *text,
         PangoUnderline pangoUnderlineStyle = PANGO_UNDERLINE_NONE;
         switch ( attr.GetUnderlineType() )
         {
-            case wxTEXT_ATTR_UNDERLINE_SOLID:
+            case wxTextAttrUnderlineType::Solid:
                 pangoUnderlineStyle = PANGO_UNDERLINE_SINGLE;
                 break;
-            case wxTEXT_ATTR_UNDERLINE_DOUBLE:
+            case wxTextAttrUnderlineType::Double:
                 pangoUnderlineStyle = PANGO_UNDERLINE_DOUBLE;
                 break;
-            case wxTEXT_ATTR_UNDERLINE_SPECIAL:
+            case wxTextAttrUnderlineType::Special:
                 pangoUnderlineStyle = PANGO_UNDERLINE_ERROR;
                 break;
             default:
@@ -1578,21 +1578,21 @@ wxTextCtrl::HitTest(const wxPoint& pt, long *pos) const
                 if ( pos )
                     *pos = 0;
 
-                return wxTE_HT_BEFORE;
+                return wxTextCtrlHitTestResult::Before;
             }
             else
             {
                 if ( pos )
                     *pos = wxTextEntry::GetLastPosition();
 
-                return wxTE_HT_BEYOND;
+                return wxTextCtrlHitTestResult::Beyond;
             }
         }
 
         if ( pos )
             *pos = idx;
 
-        return wxTE_HT_ON_TEXT;
+        return wxTextCtrlHitTestResult::OnText;
     }
 
     int x, y;
@@ -1609,7 +1609,7 @@ wxTextCtrl::HitTest(const wxPoint& pt, long *pos) const
     if ( pos )
         *pos = gtk_text_iter_get_offset(&iter);
 
-    return wxTE_HT_ON_TEXT;
+    return wxTextCtrlHitTestResult::OnText;
 }
 
 long wxTextCtrl::GetInsertionPoint() const
@@ -1952,20 +1952,20 @@ bool wxTextCtrl::GetStyle(long position, wxTextAttr& style)
         if ( font.SetNativeFontInfo(wxString(pangoFontString)) )
             style.SetFont(font);
 
-        wxTextAttrUnderlineType underlineType = wxTEXT_ATTR_UNDERLINE_NONE;
+        wxTextAttrUnderlineType underlineType = wxTextAttrUnderlineType::None;
         switch ( pattr->appearance.underline )
         {
             case PANGO_UNDERLINE_SINGLE:
-                underlineType = wxTEXT_ATTR_UNDERLINE_SOLID;
+                underlineType = wxTextAttrUnderlineType::Solid;
                 break;
             case PANGO_UNDERLINE_DOUBLE:
-                underlineType = wxTEXT_ATTR_UNDERLINE_DOUBLE;
+                underlineType = wxTextAttrUnderlineType::Double;
                 break;
             case PANGO_UNDERLINE_ERROR:
-                underlineType = wxTEXT_ATTR_UNDERLINE_SPECIAL;
+                underlineType = wxTextAttrUnderlineType::Special;
                 break;
             default:
-                underlineType = wxTEXT_ATTR_UNDERLINE_NONE;
+                underlineType = wxTextAttrUnderlineType::None;
                 break;
         }
 
@@ -1994,7 +1994,7 @@ bool wxTextCtrl::GetStyle(long position, wxTextAttr& style)
         }
 #endif
 
-        if ( underlineType != wxTEXT_ATTR_UNDERLINE_NONE )
+        if ( underlineType != wxTextAttrUnderlineType::None )
             style.SetFontUnderlined(underlineType, underlineColour);
 
         if ( pattr->appearance.strikethrough )

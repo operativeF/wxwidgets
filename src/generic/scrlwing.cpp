@@ -1190,7 +1190,7 @@ bool wxScrollHelper::IsScrollbarShown(int orient) const
     wxScrollbarVisibility visibility = orient == wxHORIZONTAL ? m_xVisibility
                                                               : m_yVisibility;
 
-    return visibility != wxSHOW_SB_NEVER;
+    return visibility != wxScrollbarVisibility::Never;
 }
 
 void wxScrollHelper::DoShowScrollbars(wxScrollbarVisibility horz,
@@ -1254,17 +1254,17 @@ wxScrollHelper::DoAdjustScrollbar(int orient,
         }
     }
 
-    // in wxSHOW_SB_NEVER case don't show the scrollbar even if it's needed, in
-    // wxSHOW_SB_ALWAYS case show the scrollbar even if it's not needed by
+    // in wxScrollbarVisibility::Never case don't show the scrollbar even if it's needed, in
+    // wxScrollbarVisibility::Always case show the scrollbar even if it's not needed by
     // passing a special range value to SetScrollbar()
     int range;
     switch ( visibility )
     {
-        case wxSHOW_SB_NEVER:
+        case wxScrollbarVisibility::Never:
             range = 0;
             break;
 
-        case wxSHOW_SB_ALWAYS:
+        case wxScrollbarVisibility::Always:
             range = scrollUnits ? scrollUnits : -1;
             break;
 
@@ -1272,7 +1272,7 @@ wxScrollHelper::DoAdjustScrollbar(int orient,
             wxFAIL_MSG( wxS("unknown scrollbar visibility") );
             [[fallthrough]];
 
-        case wxSHOW_SB_DEFAULT:
+        case wxScrollbarVisibility::Default:
             range = scrollUnits;
             break;
 

@@ -115,13 +115,13 @@ inline constexpr int wxTE_RICH2          = 0x8000;
 // ----------------------------------------------------------------------------
 
 // the point asked is ...
-enum wxTextCtrlHitTestResult
+enum class wxTextCtrlHitTestResult
 {
-    wxTE_HT_UNKNOWN = -2,   // this means HitTest() is simply not implemented
-    wxTE_HT_BEFORE,         // either to the left or upper
-    wxTE_HT_ON_TEXT,        // directly on
-    wxTE_HT_BELOW,          // below [the last line]
-    wxTE_HT_BEYOND          // after [the end of line]
+    Unknown,   // this means HitTest() is simply not implemented
+    Before,         // either to the left or upper
+    OnText,        // directly on
+    Below,          // below [the last line]
+    Beyond          // after [the end of line]
 };
 // ... the character returned
 
@@ -264,12 +264,12 @@ enum wxTextAttrLineSpacing
     wxTEXT_ATTR_LINE_SPACING_TWICE          = 20
 };
 
-enum wxTextAttrUnderlineType
+enum class wxTextAttrUnderlineType
 {
-     wxTEXT_ATTR_UNDERLINE_NONE,
-     wxTEXT_ATTR_UNDERLINE_SOLID,
-     wxTEXT_ATTR_UNDERLINE_DOUBLE,
-     wxTEXT_ATTR_UNDERLINE_SPECIAL
+    None,
+    Solid,
+    Double,
+    Special
 };
 
 // ----------------------------------------------------------------------------
@@ -318,7 +318,7 @@ public:
     void SetFontStyle(wxFontStyle fontStyle) { m_fontStyle = fontStyle; m_flags |= wxTEXT_ATTR_FONT_ITALIC; }
     void SetFontWeight(wxFontWeight fontWeight) { m_fontWeight = fontWeight; m_flags |= wxTEXT_ATTR_FONT_WEIGHT; }
     void SetFontFaceName(const wxString& faceName) { m_fontFaceName = faceName; m_flags |= wxTEXT_ATTR_FONT_FACE; }
-    void SetFontUnderlined(bool underlined) { SetFontUnderlined(underlined ? wxTEXT_ATTR_UNDERLINE_SOLID : wxTEXT_ATTR_UNDERLINE_NONE); }
+    void SetFontUnderlined(bool underlined) { SetFontUnderlined(underlined ? wxTextAttrUnderlineType::Solid : wxTextAttrUnderlineType::None); }
     void SetFontUnderlined(wxTextAttrUnderlineType type, const wxColour& colour = wxNullColour)
     {
         m_flags |= wxTEXT_ATTR_FONT_UNDERLINE;
@@ -363,7 +363,7 @@ public:
     int GetFontSize() const { return m_fontSize; }
     wxFontStyle GetFontStyle() const { return m_fontStyle; }
     wxFontWeight GetFontWeight() const { return m_fontWeight; }
-    bool GetFontUnderlined() const { return m_fontUnderlineType != wxTEXT_ATTR_UNDERLINE_NONE; }
+    bool GetFontUnderlined() const { return m_fontUnderlineType != wxTextAttrUnderlineType::None; }
     wxTextAttrUnderlineType GetUnderlineType() const { return m_fontUnderlineType; }
     const wxColour& GetUnderlineColour() const { return m_colUnderline; }
     bool GetFontStrikethrough() const { return m_fontStrikethrough; }
@@ -513,7 +513,7 @@ private:
     wxFontStyle         m_fontStyle{wxFontStyle::Normal};
     wxFontWeight        m_fontWeight{wxFONTWEIGHT_NORMAL};
     wxFontFamily        m_fontFamily{wxFontFamily::Default};
-    wxTextAttrUnderlineType m_fontUnderlineType{wxTEXT_ATTR_UNDERLINE_NONE};
+    wxTextAttrUnderlineType m_fontUnderlineType{wxTextAttrUnderlineType::None};
     wxColour            m_colUnderline{wxNullColour};
     bool                m_fontStrikethrough{false};
     wxString            m_fontFaceName;

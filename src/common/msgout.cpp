@@ -99,7 +99,7 @@ void wxMessageOutputBest::Output(const wxString& str)
     wxAppTraits * const traits = wxApp::GetTraitsIfExists();
     const bool hasStderr = traits ? traits->CanUseStderr() : false;
 
-    if ( !(m_flags & wxMSGOUT_PREFER_MSGBOX) )
+    if ( !(m_flags == wxMessageOutputFlags::MsgBox) )
     {
         if ( hasStderr && traits->WriteToStderr(AppendLineFeedIfNeeded(str)) )
             return;
