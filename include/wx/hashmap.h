@@ -57,7 +57,6 @@ private:
 #endif // wxHAS_LONG_LONG_T_DIFFERENT_FROM_LONG
 
 public:
-    wxIntegerHash() = default;
     size_t operator()( long x ) const noexcept { return longHash( x ); }
     size_t operator()( unsigned long x ) const noexcept { return ulongHash( x ); }
     size_t operator()( int x ) const noexcept { return intHash( x ); }
@@ -75,7 +74,6 @@ public:
 // integer types
 struct WXDLLIMPEXP_BASE wxIntegerHash
 {
-    wxIntegerHash() { }
     unsigned long operator()( long x ) const noexcept { return (unsigned long)x; }
     unsigned long operator()( unsigned long x ) const noexcept { return x; }
     unsigned long operator()( int x ) const noexcept { return (unsigned long)x; }
@@ -92,7 +90,6 @@ struct WXDLLIMPEXP_BASE wxIntegerHash
 
 struct WXDLLIMPEXP_BASE wxIntegerEqual
 {
-    wxIntegerEqual() = default;
     bool operator()( long a, long b ) const { return a == b; }
     bool operator()( unsigned long a, unsigned long b ) const { return a == b; }
     bool operator()( int a, int b ) const { return a == b; }
@@ -108,8 +105,6 @@ struct WXDLLIMPEXP_BASE wxIntegerEqual
 // pointers
 struct WXDLLIMPEXP_BASE wxPointerHash
 {
-    wxPointerHash() = default;
-
 #ifdef wxNEEDS_WX_HASH_MAP
     wxUIntPtr operator()( const void* k ) const noexcept { return wxPtrToUInt(k); }
 #else
@@ -119,14 +114,12 @@ struct WXDLLIMPEXP_BASE wxPointerHash
 
 struct WXDLLIMPEXP_BASE wxPointerEqual
 {
-    wxPointerEqual() = default;
     bool operator()( const void* a, const void* b ) const noexcept { return a == b; }
 };
 
 // wxString, char*, wchar_t*
 struct WXDLLIMPEXP_BASE wxStringHash
 {
-    wxStringHash() = default;
     unsigned long operator()( const wxString& x ) const noexcept
         { return stringHash( x.wx_str() ); }
     unsigned long operator()( const wchar_t* x ) const noexcept
@@ -140,7 +133,6 @@ struct WXDLLIMPEXP_BASE wxStringHash
 
 struct WXDLLIMPEXP_BASE wxStringEqual
 {
-    wxStringEqual() = default;
     bool operator()( const wxString& a, const wxString& b ) const noexcept
         { return a == b; }
     bool operator()( const wxChar* a, const wxChar* b ) const noexcept

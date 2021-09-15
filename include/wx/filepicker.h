@@ -151,9 +151,6 @@ protected:
 
 class WXDLLIMPEXP_CORE wxFileDirPickerCtrlBase : public wxPickerBase
 {
-public:
-    wxFileDirPickerCtrlBase() = default;
-
 protected:
     // NB: no default values since this function will never be used
     //     directly by the user and derived classes wouldn't use them
