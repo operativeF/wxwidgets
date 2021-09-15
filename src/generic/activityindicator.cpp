@@ -13,6 +13,10 @@
 
 #if wxUSE_ACTIVITYINDICATOR && !defined(__WXGTK3__)
 
+#ifndef WX_PRECOMP
+    #include <chrono>
+#endif
+
 #include "wx/activityindicator.h"
 #include "wx/dcclient.h"
 #include "wx/timer.h"
@@ -29,8 +33,10 @@
 // Total number of "running" dots.
 constexpr int NUM_DOTS = 8;
 
+using namespace std::chrono_literals;
+
 // Delay between the consecutive updates in milliseconds.
-constexpr int FRAME_DELAY = 150;
+constexpr auto FRAME_DELAY = 150ms;
 
 // ----------------------------------------------------------------------------
 // wxActivityIndicatorImpl: class containing the real implementation.

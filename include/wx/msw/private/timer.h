@@ -15,12 +15,16 @@
 #include "wx/private/timer.h"
 #include "wx/msw/wrapwin.h"     // for WPARAM
 
+#include <chrono>
+
+using namespace std::chrono_literals;
+
 class WXDLLIMPEXP_BASE wxMSWTimerImpl : public wxTimerImpl
 {
 public:
     wxMSWTimerImpl(wxTimer *timer) : wxTimerImpl(timer) { m_id = 0; }
 
-    bool Start(int milliseconds = -1, bool oneShot = false) override;
+    bool Start(std::chrono::milliseconds startTime = -1ms, bool oneShot = false) override;
     void Stop() override;
 
     bool IsRunning() const override { return m_id != 0; }

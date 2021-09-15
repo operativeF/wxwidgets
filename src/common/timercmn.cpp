@@ -19,6 +19,9 @@
 
 #if wxUSE_TIMER
 
+#ifndef WX_PRECOMP
+    #include <chrono>
+#endif
 
 #include "wx/app.h"
 #include "wx/timer.h"
@@ -75,11 +78,11 @@ wxEvtHandler *wxTimer::GetOwner() const
     return m_impl->GetOwner();
 }
 
-bool wxTimer::Start(int milliseconds, bool oneShot)
+bool wxTimer::Start(std::chrono::milliseconds startTime, bool oneShot)
 {
     wxCHECK_MSG( m_impl, false, wxT("uninitialized timer") );
 
-    return m_impl->Start(milliseconds, oneShot);
+    return m_impl->Start(startTime, oneShot);
 }
 
 void wxTimer::Stop()
@@ -113,9 +116,9 @@ int wxTimer::GetId() const
     return m_impl->GetId();
 }
 
-int wxTimer::GetInterval() const
+std::chrono::milliseconds wxTimer::GetInterval() const
 {
-    wxCHECK_MSG( m_impl, -1, wxT("uninitialized timer") );
+    wxCHECK_MSG( m_impl, -1ms, wxT("uninitialized timer") );
 
     return m_impl->GetInterval();
 }

@@ -24,6 +24,8 @@
 #include "wx/dnd.h"
 #endif
 
+#include <chrono>
+
 #if !defined(__WXGTK__) && !defined(__WXMAC__)
 #define wxRICHTEXT_BUFFERED_PAINTING 1
 #else
@@ -60,6 +62,7 @@ inline constexpr auto wxRICHTEXT_ALT_DOWN    = 0x04;
 // Don't draw guide lines around boxes and tables
 inline constexpr auto wxRICHTEXT_EX_NO_GUIDELINES = 0x00000100;
 
+using namespace std::chrono_literals;
 
 /*
     Defaults
@@ -76,11 +79,11 @@ inline constexpr auto wxRICHTEXT_DEFAULT_MARGIN = 3;
 #define wxRICHTEXT_DEFAULT_FOCUS_RECT_COLOUR wxColour(100, 80, 80)
 inline constexpr auto wxRICHTEXT_DEFAULT_CARET_WIDTH = 2;
 // Minimum buffer size before delayed layout kicks in
-inline constexpr auto wxRICHTEXT_DEFAULT_DELAYED_LAYOUT_THRESHOLD = 20000;
+inline constexpr auto wxRICHTEXT_DEFAULT_DELAYED_LAYOUT_THRESHOLD = 20000ms;
 // Milliseconds before layout occurs after resize
-inline constexpr auto wxRICHTEXT_DEFAULT_LAYOUT_INTERVAL = 50;
+inline constexpr auto wxRICHTEXT_DEFAULT_LAYOUT_INTERVAL = 50ms;
 // Milliseconds before delayed image processing occurs
-inline constexpr auto wxRICHTEXT_DEFAULT_DELAYED_IMAGE_PROCESSING_INTERVAL = 200;
+inline constexpr auto wxRICHTEXT_DEFAULT_DELAYED_IMAGE_PROCESSING_INTERVAL = 200ms;
 
 /* Identifiers
  */
@@ -311,13 +314,13 @@ public:
         Sets the size of the buffer beyond which layout is delayed during resizing.
         This optimizes sizing for large buffers. The default is 20000.
     */
-    void SetDelayedLayoutThreshold(long threshold) { m_delayedLayoutThreshold = threshold; }
+    void SetDelayedLayoutThreshold(std::chrono::milliseconds threshold) { m_delayedLayoutThreshold = threshold; }
 
     /**
         Gets the size of the buffer beyond which layout is delayed during resizing.
         This optimizes sizing for large buffers. The default is 20000.
     */
-    long GetDelayedLayoutThreshold() const { return m_delayedLayoutThreshold; }
+    std::chrono::milliseconds GetDelayedLayoutThreshold() const { return m_delayedLayoutThreshold; }
 
     /**
         Gets the flag indicating that full layout is required.
@@ -2352,7 +2355,7 @@ protected:
     long                    m_fullLayoutSavedPosition{0};
 
     /// Threshold for doing delayed layout
-    long                    m_delayedLayoutThreshold{wxRICHTEXT_DEFAULT_DELAYED_LAYOUT_THRESHOLD};
+    std::chrono::milliseconds m_delayedLayoutThreshold{wxRICHTEXT_DEFAULT_DELAYED_LAYOUT_THRESHOLD};
 
     /// Cursors
     wxCursor                m_textCursor;

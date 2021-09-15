@@ -18,6 +18,8 @@
 #include "wx/log.h"
 #include "wx/stream.h"
 
+#include <chrono>
+
 class WXDLLIMPEXP_FWD_CORE wxImage;
 
 /*
@@ -139,7 +141,7 @@ public:
 
     // the number of milliseconds this frame should be displayed.
     // if returns -1 then the frame must be displayed forever.
-    virtual long GetDelay(unsigned int frame) const = 0;
+    virtual std::chrono::milliseconds GetDelay(unsigned int frame) const = 0;
 
     // the transparent colour for this frame if any or wxNullColour.
     virtual wxColour GetTransparentColour(unsigned int frame) const = 0;

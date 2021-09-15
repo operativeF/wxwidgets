@@ -16,6 +16,8 @@
 
 #if wxUSE_TIMER
 
+#include <chrono>
+
 #include "wx/object.h"
 #include "wx/longlong.h"
 #include "wx/event.h"
@@ -36,6 +38,8 @@ class WXDLLIMPEXP_FWD_BASE wxTimerEvent;
 
 // timer event type
 wxDECLARE_EXPORTED_EVENT(WXDLLIMPEXP_BASE, wxEVT_TIMER, wxTimerEvent);
+
+using namespace std::chrono_literals;
 
 // the interface of wxTimer class
 class WXDLLIMPEXP_BASE wxTimer : public wxEvtHandler
@@ -82,11 +86,11 @@ public:
     //
     // it is now valid to call Start() multiple times: this just restarts the
     // timer if it is already running
-    virtual bool Start(int milliseconds = -1, bool oneShot = false);
+    virtual bool Start(std::chrono::milliseconds startTime = -1ms, bool oneShot = false);
 
     // start the timer for one iteration only, this is just a simple wrapper
     // for Start()
-    bool StartOnce(int milliseconds = -1) { return Start(milliseconds, true); }
+    bool StartOnce(std::chrono::milliseconds startTime = -1ms) { return Start(startTime, true); }
 
     // stop the timer, does nothing if the timer is not running
     virtual void Stop();
@@ -105,7 +109,7 @@ public:
     int GetId() const;
 
     // get the (last) timer interval in milliseconds
-    int GetInterval() const;
+    std::chrono::milliseconds GetInterval() const;
 
     // return true if the timer is one shot
     bool IsOneShot() const;
@@ -125,15 +129,15 @@ class WXDLLIMPEXP_BASE wxTimerRunner
 {
 public:
     wxTimerRunner(wxTimer& timer) : m_timer(timer) { }
-    wxTimerRunner(wxTimer& timer, int milli, bool oneShot = false)
+    wxTimerRunner(wxTimer& timer, std::chrono::milliseconds startTime, bool oneShot = false)
         : m_timer(timer)
     {
-        m_timer.Start(milli, oneShot);
+        m_timer.Start(startTime, oneShot);
     }
 
-    void Start(int milli, bool oneShot = false)
+    void Start(std::chrono::milliseconds startTime, bool oneShot = false)
     {
-        m_timer.Start(milli, oneShot);
+        m_timer.Start(startTime, oneShot);
     }
 
     ~wxTimerRunner()
@@ -169,7 +173,7 @@ public:
 
 	wxTimerEvent& operator=(const wxTimerEvent&) = delete;
 
-    int GetInterval() const { return m_timer->GetInterval(); }
+    std::chrono::milliseconds GetInterval() const { return m_timer->GetInterval(); }
     wxTimer& GetTimer() const { return *m_timer; }
 
     // implement the base class pure virtual

@@ -235,8 +235,7 @@ void wxNotificationMessageWindow::Set(int timeout)
 
     if ( timeout != wxGenericNotificationMessage::Timeout_Never )
     {
-        // wxTimer uses ms, timeout is in seconds
-        m_timer.Start(500);
+        m_timer.Start(500ms);
         m_timeout = timeout;
         m_timeoutTargetTime = wxGetUTCTime() + timeout;
     }

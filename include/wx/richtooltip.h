@@ -16,6 +16,7 @@
 
 #include "wx/colour.h"
 
+#include <chrono>
 #include <string>
 
 class WXDLLIMPEXP_FWD_CORE wxFont;
@@ -85,7 +86,7 @@ public:
     // hiding the tooltip automatically entirely by passing 0 in this parameter
     // (but doing this can result in native version not being used).
     // Optionally specify a show delay.
-    void SetTimeout(unsigned milliseconds, unsigned millisecondsShowdelay = 0);
+    void SetTimeout(std::chrono::milliseconds milliseconds, std::chrono::milliseconds millisecondsShowdelay = {});
 
     // Choose the tip kind, possibly none. By default the tip is positioned
     // automatically, as if wxTipKind_Auto was used.

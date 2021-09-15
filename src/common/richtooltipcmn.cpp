@@ -42,10 +42,10 @@ void wxRichToolTip::SetIcon(const wxIcon& icon)
     m_impl->SetCustomIcon(icon);
 }
 
-void wxRichToolTip::SetTimeout(unsigned milliseconds,
-                               unsigned millisecondsDelay)
+void wxRichToolTip::SetTimeout(std::chrono::milliseconds timeout,
+                               std::chrono::milliseconds delay)
 {
-    m_impl->SetTimeout(milliseconds, millisecondsDelay);
+    m_impl->SetTimeout(timeout, delay);
 }
 
 void wxRichToolTip::SetTipKind(wxTipKind tipKind)

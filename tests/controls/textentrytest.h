@@ -483,7 +483,7 @@ namespace
             CallAfter(&TestDialog::SimulateEnter);
 
             m_timer.Bind(wxEVT_TIMER, &TestDialog::OnTimeOut, this);
-            m_timer.StartOnce(2000);
+            m_timer.StartOnce(2000ms);
         }
 
         bool GotEnter() const { return m_gotEnter; }

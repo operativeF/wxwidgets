@@ -103,19 +103,20 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxTimerHiddenWindowModule, wxModule);
 // wxMSWTimerImpl class
 // ----------------------------------------------------------------------------
 
-bool wxMSWTimerImpl::Start(int milliseconds, bool oneShot)
+bool wxMSWTimerImpl::Start(std::chrono::milliseconds startTime, bool oneShot)
 {
-    if ( !wxTimerImpl::Start(milliseconds, oneShot) )
+    if ( !wxTimerImpl::Start(startTime, oneShot) )
         return false;
 
     m_id = GetNewTimerId(this);
     // SetTimer() normally returns just idTimer but this might change in the
     // future so use its return value to be safe
+    // FIXME: value of -1 could cause problems.
     const UINT_PTR ret = ::SetTimer
              (
               wxTimerHiddenWindowModule::GetHWND(),  // window for WM_TIMER
               m_id,                                  // timer ID to create
-              (UINT)m_milli,                         // delay
+              (UINT)startTime.count(),                         // delay
               nullptr                                   // timer proc (unused)
              );
 

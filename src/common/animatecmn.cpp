@@ -82,9 +82,9 @@ bool wxAnimation::IsCompatibleWith(wxClassInfo* ci) const
     return GetImpl()->IsCompatibleWith(ci);
 }
 
-int wxAnimation::GetDelay(unsigned int frame) const
+std::chrono::milliseconds wxAnimation::GetDelay(unsigned int frame) const
 {
-    wxCHECK_MSG( IsOk(), -1, wxT("invalid animation") );
+    wxCHECK_MSG( IsOk(), -1ms, wxT("invalid animation") );
     return GetImpl()->GetDelay(frame);
 }
 

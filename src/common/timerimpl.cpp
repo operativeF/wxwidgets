@@ -23,6 +23,12 @@
 #include "wx/private/timer.h"
 #include "wx/thread.h"
 
+#ifndef WX_PRECOMP
+    #include <chrono>
+#endif
+
+using namespace std::chrono_literals;
+
 wxTimerImpl::wxTimerImpl(wxTimer *timer)
     : m_timer(timer)
 {
@@ -40,7 +46,7 @@ void wxTimerImpl::SendEvent()
     std::ignore = m_owner->SafelyProcessEvent(event);
 }
 
-bool wxTimerImpl::Start(int milliseconds, bool oneShot)
+bool wxTimerImpl::Start(std::chrono::milliseconds startTime, bool oneShot)
 {
     // under MSW timers only work when they're started from the main thread so
     // let the caller know about it
@@ -57,9 +63,9 @@ bool wxTimerImpl::Start(int milliseconds, bool oneShot)
         Stop();
     }
 
-    if ( milliseconds != -1 )
+    if ( startTime != -1ms )
     {
-        m_milli = milliseconds;
+        m_interval = startTime;
     }
 
     m_oneShot = oneShot;

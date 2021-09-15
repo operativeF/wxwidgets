@@ -11,12 +11,17 @@
 #define _WX_TIMERIMPL_H_BASE_
 
 #include "wx/defs.h"
+
 #include "wx/event.h"
 #include "wx/timer.h"
+
+#include <chrono>
 
 // ----------------------------------------------------------------------------
 // wxTimerImpl: abstract base class for wxTimer implementations
 // ----------------------------------------------------------------------------
+
+using namespace std::chrono_literals;
 
 class WXDLLIMPEXP_BASE wxTimerImpl
 {
@@ -37,7 +42,7 @@ public:
 
 
     // start the timer. When overriding call base version first.
-    virtual bool Start(int milliseconds = -1, bool oneShot = false);
+    virtual bool Start(std::chrono::milliseconds startTime = -1ms, bool oneShot = false);
 
     // stop the timer, only called if the timer is really running (unlike
     // wxTimer::Stop())
@@ -54,7 +59,7 @@ public:
 
     wxEvtHandler *GetOwner() const { return m_owner; }
     int GetId() const { return m_idTimer; }
-    int GetInterval() const { return m_milli; }
+    std::chrono::milliseconds GetInterval() const { return m_interval; }
     bool IsOneShot() const { return m_oneShot; }
 
 protected:
@@ -63,7 +68,7 @@ protected:
     wxEvtHandler *m_owner{nullptr};
 
     int     m_idTimer{wxID_ANY};      // id passed to wxTimerEvent
-    int     m_milli{0};        // the timer interval
+    std::chrono::milliseconds m_interval{0ms};        // the timer interval
     bool    m_oneShot{false};      // true if one shot
 };
 

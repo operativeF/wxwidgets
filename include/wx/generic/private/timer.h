@@ -13,11 +13,15 @@
 
 #include "wx/private/timer.h"
 
+#include <chrono>
+
 //-----------------------------------------------------------------------------
 // wxTimer
 //-----------------------------------------------------------------------------
 
 class wxTimerDesc;
+
+using namespace std::chrono_literals;
 
 class WXDLLIMPEXP_CORE wxGenericTimerImpl : public wxTimerImpl
 {
@@ -25,7 +29,7 @@ public:
     wxGenericTimerImpl(wxTimer* timer) : wxTimerImpl(timer) { Init(); }
     ~wxGenericTimerImpl();
 
-    virtual bool Start(int millisecs = -1, bool oneShot = false);
+    virtual bool Start(std::chrono::milliseconds startTime = -1ms, bool oneShot = false);
     virtual void Stop();
 
     virtual bool IsRunning() const;

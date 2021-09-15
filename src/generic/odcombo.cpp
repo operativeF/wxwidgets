@@ -16,6 +16,7 @@
 #include "wx/odcombo.h"
 
 #ifndef WX_PRECOMP
+    #include <chrono>
     #include <utility>
 #endif
 
@@ -33,8 +34,10 @@
 // implementation
 // ============================================================================
 
+using namespace std::chrono_literals;
+
 // time in milliseconds before partial completion buffer drops
-constexpr int wxODCB_PARTIAL_COMPLETION_TIME = 1000;
+constexpr auto wxODCB_PARTIAL_COMPLETION_TIME = 1000ms;
 
 // ----------------------------------------------------------------------------
 // wxVListBoxComboPopup is a wxVListBox customized to act as a popup control

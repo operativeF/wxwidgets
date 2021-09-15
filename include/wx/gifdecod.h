@@ -18,6 +18,7 @@
 #include "wx/image.h"
 #include "wx/animdecod.h"
 
+#include <chrono>
 #include <vector>
 
 // internal utility used to store a frame in 8bit-per-pixel format
@@ -67,7 +68,7 @@ public:
     wxSize GetFrameSize(unsigned int frame) const override;
     wxPoint GetFramePosition(unsigned int frame) const override;
     wxAnimationDisposal GetDisposalMethod(unsigned int frame) const override;
-    long GetDelay(unsigned int frame) const override;
+    std::chrono::milliseconds GetDelay(unsigned int frame) const override;
 
     // GIFs can contain both static images and animations
     bool IsAnimation() const

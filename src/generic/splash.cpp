@@ -39,13 +39,13 @@ wxEND_EVENT_TABLE()
  * slightly too small.
  */
 
-wxSplashScreen::wxSplashScreen(const wxBitmap& bitmap, long splashStyle, int milliseconds,
+wxSplashScreen::wxSplashScreen(const wxBitmap& bitmap, long splashStyle, std::chrono::milliseconds displayTime,
                                wxWindow* parent, wxWindowID id, const wxPoint& pos,
                                const wxSize& size, long style)
     : wxFrame(parent, id, "", wxPoint(0,0), wxSize(100, 100),
               style | wxFRAME_TOOL_WINDOW | wxFRAME_NO_TASKBAR),
       m_splashStyle(splashStyle),
-      m_milliseconds(milliseconds),
+      m_displayTime(displayTime),
       m_window(new wxSplashScreenWindow(bitmap, this, wxID_ANY, pos, size, wxNO_BORDER))
 {
     wxEvtHandler::AddFilter(this);
@@ -68,7 +68,7 @@ wxSplashScreen::wxSplashScreen(const wxBitmap& bitmap, long splashStyle, int mil
     if (m_splashStyle & wxSPLASH_TIMEOUT)
     {
         m_timer.SetOwner(this, wxSPLASH_TIMER_ID);
-        m_timer.Start(milliseconds, true);
+        m_timer.Start(displayTime, true);
     }
 
     Show(true);

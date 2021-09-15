@@ -435,9 +435,11 @@ private:
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxQTMediaBackend, wxMediaBackend);
 
+using namespace std::chrono_literals;
+
 // Time between timer calls - this is the Apple recommendation to the TCL
 // team I believe
-#define MOVIE_DELAY 20
+constexpr auto MOVIE_DELAY = 20ms;
 
 //---------------------------------------------------------------------------
 // wxQTLoadTimer

@@ -13,6 +13,7 @@
 
 #include "wx/private/animate.h"
 
+#include <chrono>
 #include <string>
 
 // ----------------------------------------------------------------------------
@@ -30,7 +31,7 @@ public:
     bool IsCompatibleWith(wxClassInfo* ci) const override;
 
     unsigned int GetFrameCount() const override;
-    int GetDelay(unsigned int i) const override;
+    std::chrono::milliseconds GetDelay(unsigned int i) const override;
     wxImage GetFrame(unsigned int i) const override;
     wxSize GetSize() const override;
 

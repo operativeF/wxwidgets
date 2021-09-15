@@ -972,7 +972,7 @@ void wxScrollHelperBase::HandleOnMouseLeave(wxMouseEvent& event)
                                     pos,
                                     orient
                                 );
-        m_timerAutoScroll->Start(50); // FIXME: make configurable
+        m_timerAutoScroll->Start(50ms); // FIXME: make configurable
 #else
         wxUnusedVar(pos);
 #endif

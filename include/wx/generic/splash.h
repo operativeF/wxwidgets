@@ -16,6 +16,8 @@
 #include "wx/frame.h"
 #include "wx/timer.h"
 
+#include <chrono>
+
 
 /*
  * A window for displaying a splash screen
@@ -39,7 +41,7 @@ class WXDLLIMPEXP_CORE wxSplashScreen: public wxFrame,
 public:
     // for RTTI macros only
     wxSplashScreen() { wxEvtHandler::AddFilter(this); }
-    wxSplashScreen(const wxBitmap& bitmap, long splashStyle, int milliseconds,
+    wxSplashScreen(const wxBitmap& bitmap, long splashStyle, std::chrono::milliseconds displayTime,
                    wxWindow* parent, wxWindowID id,
                    const wxPoint& pos = wxDefaultPosition,
                    const wxSize& size = wxDefaultSize,
@@ -55,7 +57,7 @@ public:
 
     long GetSplashStyle() const { return m_splashStyle; }
     wxSplashScreenWindow* GetSplashWindow() const { return m_window; }
-    int GetTimeout() const { return m_milliseconds; }
+    std::chrono::milliseconds GetTimeout() const { return m_displayTime; }
 
     // Override wxEventFilter method to hide splash screen on any user input.
     int FilterEvent(wxEvent& event) override;
@@ -66,7 +68,7 @@ protected:
 
     wxSplashScreenWindow*   m_window{nullptr};
     long                    m_splashStyle{wxSPLASH_NO_TIMEOUT}; // TODO: Correct default style?
-    int                     m_milliseconds{0};
+    std::chrono::milliseconds m_displayTime{};
     wxTimer                 m_timer;
 
     wxDECLARE_DYNAMIC_CLASS(wxSplashScreen);

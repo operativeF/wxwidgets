@@ -65,6 +65,11 @@ constexpr int MARGIN_BETWEEN_STATE_AND_IMAGE = 2;
 // the margin between the item image and the item text
 constexpr int MARGIN_BETWEEN_IMAGE_AND_TEXT = 4;
 
+using namespace std::chrono_literals;
+
+// start editing the current item after half a second (if the mouse hasn't
+// been clicked/moved)
+constexpr auto EDITING_DELAY = 500ms;
 // -----------------------------------------------------------------------------
 // private classes
 // -----------------------------------------------------------------------------
@@ -73,10 +78,6 @@ constexpr int MARGIN_BETWEEN_IMAGE_AND_TEXT = 4;
 class WXDLLEXPORT wxTreeRenameTimer: public wxTimer
 {
 public:
-    // start editing the current item after half a second (if the mouse hasn't
-    // been clicked/moved)
-    enum { DELAY = 500 };
-
     explicit wxTreeRenameTimer( wxGenericTreeCtrl *owner );
 
     wxTreeRenameTimer(const wxTreeRenameTimer&) = delete;
@@ -123,9 +124,6 @@ private:
 class WXDLLEXPORT wxTreeFindTimer : public wxTimer
 {
 public:
-    // reset the current prefix after half a second of inactivity
-    enum { DELAY = 500 };
-
     explicit wxTreeFindTimer( wxGenericTreeCtrl *owner ) : m_owner(owner) {}
 
     wxTreeFindTimer(const wxTreeFindTimer&) = delete;
@@ -3378,7 +3376,7 @@ void wxGenericTreeCtrl::OnChar( wxKeyEvent &event )
 
                 // Notice that we should start the timer even if we didn't find
                 // anything to make sure we reset the search state later.
-                m_findTimer->Start(wxTreeFindTimer::DELAY, wxTIMER_ONE_SHOT);
+                m_findTimer->Start(EDITING_DELAY, wxTIMER_ONE_SHOT);
 
                 if ( id.IsOk() )
                 {
@@ -3851,7 +3849,7 @@ void wxGenericTreeCtrl::OnMouse( wxMouseEvent &event )
                         m_renameTimer = new wxTreeRenameTimer( this );
                     }
 
-                    m_renameTimer->Start( wxTreeRenameTimer::DELAY, true );
+                    m_renameTimer->Start( EDITING_DELAY, true );
                 }
 
                 m_lastOnSame = false;

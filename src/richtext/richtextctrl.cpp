@@ -2797,7 +2797,7 @@ bool wxRichTextCtrl::WordRight(int WXUNUSED(n), int flags)
 void wxRichTextCtrl::OnSize(wxSizeEvent& event)
 {
     // Only do sizing optimization for large buffers
-    if (GetBuffer().GetOwnRange().GetEnd() > m_delayedLayoutThreshold)
+    if (GetBuffer().GetOwnRange().GetEnd() > m_delayedLayoutThreshold.count())
     {
         m_fullLayoutRequired = true;
         m_fullLayoutTime = wxGetLocalTimeMillis();
@@ -2848,9 +2848,9 @@ void wxRichTextCtrl::OnIdle(wxIdleEvent& event)
     }
 #endif
 
-    static constexpr int layoutInterval = wxRICHTEXT_DEFAULT_LAYOUT_INTERVAL;
+    static constexpr auto layoutInterval = wxRICHTEXT_DEFAULT_LAYOUT_INTERVAL;
 
-    if (m_fullLayoutRequired && (wxGetLocalTimeMillis() > (m_fullLayoutTime + layoutInterval)))
+    if (m_fullLayoutRequired && (wxGetLocalTimeMillis() > (m_fullLayoutTime + layoutInterval.count())))
     {
         m_fullLayoutRequired = false;
         m_fullLayoutTime = 0;
@@ -2859,9 +2859,9 @@ void wxRichTextCtrl::OnIdle(wxIdleEvent& event)
         Refresh(false);
     }
 
-    static constexpr int imageProcessingInterval = wxRICHTEXT_DEFAULT_DELAYED_IMAGE_PROCESSING_INTERVAL;
+    static constexpr auto imageProcessingInterval = wxRICHTEXT_DEFAULT_DELAYED_IMAGE_PROCESSING_INTERVAL;
 
-    if (m_enableDelayedImageLoading && m_delayedImageProcessingRequired && (wxGetLocalTimeMillis() > (m_delayedImageProcessingTime + imageProcessingInterval)))
+    if (m_enableDelayedImageLoading && m_delayedImageProcessingRequired && (wxGetLocalTimeMillis() > (m_delayedImageProcessingTime + imageProcessingInterval.count())))
     {
         m_delayedImageProcessingTimer.Stop();
         m_delayedImageProcessingRequired = false;

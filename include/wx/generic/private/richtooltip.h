@@ -13,9 +13,13 @@
 #include "wx/icon.h"
 #include "wx/colour.h"
 
+#include <chrono>
+
 // ----------------------------------------------------------------------------
 // wxRichToolTipGenericImpl: defines generic wxRichToolTip implementation.
 // ----------------------------------------------------------------------------
+
+using namespace std::chrono_literals;
 
 class wxRichToolTipGenericImpl : public wxRichToolTipImpl
 {
@@ -28,16 +32,16 @@ public:
 
         // This is pretty arbitrary, we could follow MSW and use some multiple
         // of double-click time here.
-        m_timeout = 5000;
-        m_delay = 0;
+        m_timeout = 5000ms;
+        m_delay = 0ms;
     }
 
     void SetBackgroundColour(const wxColour& col,
                                      const wxColour& colEnd) override;
     void SetCustomIcon(const wxIcon& icon) override;
     void SetStandardIcon(int icon) override;
-    void SetTimeout(unsigned milliseconds,
-                            unsigned millisecondsDelay = 0) override;
+    void SetTimeout(std::chrono::milliseconds timeout,
+                    std::chrono::milliseconds delay = 0ms) override;
     void SetTipKind(wxTipKind tipKind) override;
     void SetTitleFont(const wxFont& font) override;
 
@@ -53,8 +57,8 @@ private:
     wxColour m_colStart,
              m_colEnd;
 
-    unsigned m_timeout,
-             m_delay;
+    std::chrono::milliseconds m_timeout;
+    std::chrono::milliseconds m_delay;
 
     wxTipKind m_tipKind;
 

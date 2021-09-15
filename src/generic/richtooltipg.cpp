@@ -238,9 +238,9 @@ public:
         Popup();
     }
 
-    void SetTimeoutAndShow(unsigned timeout, unsigned delay)
+    void SetTimeoutAndShow(std::chrono::milliseconds timeout, std::chrono::milliseconds delay)
     {
-        if ( !timeout && !delay )
+        if ( timeout == 0ms && delay == 0ms)
         {
             DoShow();
             return;
@@ -249,12 +249,12 @@ public:
         Bind(wxEVT_TIMER, &wxRichToolTipPopup::OnTimer, this);
 
         m_timeout = timeout; // set for use in OnTimer if we have a delay
-        m_delayShow = delay != 0;
+        m_delayShow = delay != 0ms;
 
         if ( !m_delayShow )
             DoShow();
 
-        m_timer.Start((delay ? delay : timeout), true /* one shot */);
+        m_timer.Start((m_delayShow ? delay : timeout), true /* one shot */);
     }
 
 protected:
@@ -572,7 +572,7 @@ private:
 
         m_delayShow = false;
 
-        if ( m_timeout )
+        if ( m_timeout != 0ms )
             m_timer.Start(m_timeout, true);
 
         DoShow();
@@ -587,7 +587,7 @@ private:
     wxTimer m_timer;
 
     // We will need to accesss the timeout period when delaying showing tooltip.
-    int m_timeout;
+    std::chrono::milliseconds m_timeout;
 
     // If true, delay showing the tooltip.
     bool m_delayShow;
@@ -637,11 +637,11 @@ void wxRichToolTipGenericImpl::SetStandardIcon(int icon)
     }
 }
 
-void wxRichToolTipGenericImpl::SetTimeout(unsigned millisecondsTimeout,
-                                          unsigned millisecondsDelay)
+void wxRichToolTipGenericImpl::SetTimeout(std::chrono::milliseconds timeout,
+                                          std::chrono::milliseconds delay)
 {
-    m_delay = millisecondsDelay;
-    m_timeout = millisecondsTimeout;
+    m_delay = delay;
+    m_timeout = timeout;
 }
 
 void wxRichToolTipGenericImpl::SetTipKind(wxTipKind tipKind)

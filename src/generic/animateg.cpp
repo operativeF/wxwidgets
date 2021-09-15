@@ -12,6 +12,10 @@
 
 #if wxUSE_ANIMATIONCTRL
 
+#ifndef WX_PRECOMP
+    #include <chrono>
+#endif
+
 #include "wx/animate.h"
 #include "wx/generic/animate.h"
 #include "wx/generic/private/animate.h"
@@ -60,7 +64,7 @@ wxImage wxAnimationGenericImpl::GetFrame(unsigned int i) const
     return ret;
 }
 
-int wxAnimationGenericImpl::GetDelay(unsigned int i) const
+std::chrono::milliseconds wxAnimationGenericImpl::GetDelay(unsigned int i) const
 {
     return m_decoder->GetDelay(i);
 }
@@ -330,9 +334,9 @@ bool wxGenericAnimationCtrl::Play(bool looped)
     DrawCurrentFrame(clientDC);
 
     // start the timer
-    int delay = m_animation.GetDelay(0);
-    if (delay == 0)
-        delay = 1;      // 0 is invalid timeout for wxTimer.
+    auto delay = m_animation.GetDelay(0);
+    if (delay == 0ms)
+        delay = 1ms;      // 0 is invalid timeout for wxTimer.
     m_timer.Start(delay, true);
 
     return true;
@@ -576,9 +580,9 @@ void wxGenericAnimationCtrl::OnTimer(wxTimerEvent &WXUNUSED(event))
 #endif // __WXMAC__
 
     // Set the timer for the next frame
-    int delay = m_animation.GetDelay(m_currentFrame);
-    if (delay == 0)
-        delay = 1;      // 0 is invalid timeout for wxTimer.
+    auto delay = m_animation.GetDelay(m_currentFrame);
+    if (delay == 0ms)
+        delay = 1ms;      // 0 is invalid timeout for wxTimer.
     m_timer.Start(delay, true);
 }
 

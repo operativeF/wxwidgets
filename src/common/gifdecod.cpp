@@ -15,6 +15,7 @@
 
 #ifndef WX_PRECOMP
     #include <array>
+    #include <chrono>
     #include <vector>
     #include <tuple>
 
@@ -46,6 +47,8 @@ enum
 // GIFImage
 //---------------------------------------------------------------------------
 
+using namespace std::chrono_literals;
+
 // internal class for storing GIF image data
 struct GIFImage
 {
@@ -57,7 +60,7 @@ struct GIFImage
     unsigned int top{0};               // y coord (in logical screen)
     int transparent{0};                // transparent color index (-1 = none)
     wxAnimationDisposal disposal{wxANIM_DONOTREMOVE};   // disposal method
-    long delay{-1};                 // delay in ms (-1 = unused)
+    std::chrono::milliseconds delay{-1ms};                 // delay in ms (-1 = unused)
     std::vector<unsigned char> p;      // bitmap
     unsigned char *pal{nullptr};    // palette
     unsigned int ncolours{0};       // number of colours
@@ -232,7 +235,7 @@ wxAnimationDisposal wxGIFDecoder::GetDisposalMethod(unsigned int frame) const
     return GetFrame(frame)->disposal;
 }
 
-long wxGIFDecoder::GetDelay(unsigned int frame) const
+std::chrono::milliseconds wxGIFDecoder::GetDelay(unsigned int frame) const
 {
     return GetFrame(frame)->delay;
 }
@@ -594,7 +597,7 @@ wxGIFErrorCode wxGIFDecoder::LoadGIF(wxInputStream& stream)
     unsigned int  global_ncolors = 0;
     int           bits, interl, i;
     wxAnimationDisposal disposal;
-    long          delay;
+    std::chrono::milliseconds delay;
     unsigned char type = 0;
     unsigned char pal[768];
     unsigned char buf[16];
@@ -655,7 +658,7 @@ wxGIFErrorCode wxGIFDecoder::LoadGIF(wxInputStream& stream)
     // transparent colour, disposal method and delay default to unused
     int transparent = -1;
     disposal = wxANIM_UNSPECIFIED;
-    delay = -1;
+    delay = -1ms;
     wxString comment;
 
     bool done = false;
@@ -701,7 +704,8 @@ wxGIFErrorCode wxGIFDecoder::LoadGIF(wxInputStream& stream)
                         }
 
                         // read delay and convert from 1/100 of a second to ms
-                        delay = 10 * (buf[2] + 256 * buf[3]);
+                        // FIXME: Make this a better conversion; works but it's not techinically correct.
+                        delay = 10 * std::chrono::milliseconds((buf[2] + 256 * buf[3]));
 
                         // read transparent colour index, if used
                         transparent = buf[1] & 0x01 ? buf[4] : -1;

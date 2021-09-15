@@ -20,6 +20,7 @@
 #include "wx/timer.h"
 #include "wx/bitmap.h"
 
+#include <chrono>
 #include <string>
 
 class WXDLLIMPEXP_FWD_CORE wxAnimation;
@@ -46,7 +47,7 @@ public:
     bool IsOk() const;
     bool IsCompatibleWith(wxClassInfo* ci) const;
 
-    int GetDelay(unsigned int frame) const;
+    std::chrono::milliseconds GetDelay(unsigned int frame) const;
     unsigned int GetFrameCount() const;
     wxImage GetFrame(unsigned int frame) const;
     wxSize GetSize() const;

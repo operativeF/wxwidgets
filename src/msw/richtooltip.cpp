@@ -117,15 +117,14 @@ public:
         }
     }
 
-    void SetTimeout(unsigned millisecondsTimeout,
-                            unsigned millisecondsDelay) override
+    void SetTimeout(std::chrono::milliseconds timeout,
+                    std::chrono::milliseconds delay) override
     {
         // We don't support changing the timeout or the delay
         // (maybe TTM_SETDELAYTIME could be used for this?).
         m_canUseNative = false;
 
-        wxRichToolTipGenericImpl::SetTimeout(millisecondsTimeout,
-                                             millisecondsDelay);
+        wxRichToolTipGenericImpl::SetTimeout(timeout, delay);
     }
 
     void SetTipKind(wxTipKind tipKind) override

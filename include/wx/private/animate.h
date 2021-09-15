@@ -14,6 +14,8 @@
 // wxAnimationImpl
 // ----------------------------------------------------------------------------
 
+#include <chrono>
+
 class WXDLLIMPEXP_CORE wxAnimationImpl : public wxRefCounter
 {
 public:
@@ -24,7 +26,7 @@ public:
     virtual bool IsCompatibleWith(wxClassInfo* ci) const = 0;
 
     // can be -1
-    virtual int GetDelay(unsigned int frame) const = 0;
+    virtual std::chrono::milliseconds GetDelay(unsigned int frame) const = 0;
 
     virtual unsigned int GetFrameCount() const = 0;
     virtual wxImage GetFrame(unsigned int frame) const = 0;

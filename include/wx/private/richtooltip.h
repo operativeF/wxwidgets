@@ -12,6 +12,7 @@
 
 #include "wx/richtooltip.h"
 
+#include <chrono>
 #include <memory>
 
 // ----------------------------------------------------------------------------
@@ -30,8 +31,8 @@ public:
                                      const wxColour& colEnd) = 0;
     virtual void SetCustomIcon(const wxIcon& icon) = 0;
     virtual void SetStandardIcon(int icon) = 0;
-    virtual void SetTimeout(unsigned milliseconds,
-                            unsigned millisecondsShowdelay = 0) = 0;
+    virtual void SetTimeout(std::chrono::milliseconds timeout,
+                            std::chrono::milliseconds showdelay = {}) = 0;
     virtual void SetTipKind(wxTipKind tipKind) = 0;
     virtual void SetTitleFont(const wxFont& font) = 0;
 

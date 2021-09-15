@@ -14,6 +14,10 @@
 
 #include "wx/anidecod.h"
 
+#include <chrono>
+
+using namespace std::chrono_literals;
+
 //---------------------------------------------------------------------------
 // wxANIFrameInfo
 //---------------------------------------------------------------------------
@@ -21,12 +25,12 @@
 class wxANIFrameInfo
 {
 public:
-    explicit wxANIFrameInfo(unsigned int delay = 0, int idx = -1)
+    explicit wxANIFrameInfo(std::chrono::milliseconds delay = 0ms, int idx = -1)
         : m_delay(delay),
           m_imageIndex(idx)
     {}
 
-    unsigned int m_delay;
+    std::chrono::milliseconds m_delay;
     int m_imageIndex;
 };
 
@@ -71,7 +75,7 @@ wxAnimationDisposal wxANIDecoder::GetDisposalMethod(unsigned int WXUNUSED(frame)
     return wxANIM_TOBACKGROUND;
 }
 
-long wxANIDecoder::GetDelay(unsigned int frame) const
+std::chrono::milliseconds wxANIDecoder::GetDelay(unsigned int frame) const
 {
     return m_info[frame].m_delay;
 }
@@ -190,7 +194,7 @@ bool wxANIDecoder::Load( wxInputStream& stream )
 {
     std::int32_t FCC1, FCC2;
     std::uint32_t datalen;
-    unsigned int globaldelay=0;
+    std::chrono::milliseconds globaldelay{0ms};
 
     std::int32_t riff32;
     memcpy( &riff32, "RIFF", 4 );
@@ -260,7 +264,8 @@ bool wxANIDecoder::Load( wxInputStream& stream )
             if ( m_nFrames == 0 )
                 return false;
 
-            globaldelay = header.JifRate * 1000 / 60;
+            // FIXME: Use better conversion. Not technically correct.
+            globaldelay = std::chrono::milliseconds{header.JifRate * 1000 / 60};
 
             m_images.Alloc(header.cFrames);
             m_info.Add(wxANIFrameInfo(), m_nFrames);
@@ -276,7 +281,8 @@ bool wxANIDecoder::Load( wxInputStream& stream )
             {
                 if (!stream.Read(&FCC2, 4))
                     return false;
-                m_info[i].m_delay = wxINT32_SWAP_ON_BE(FCC2) * 1000 / 60;
+                // FIXME: Use better conversion. Not technically correct.
+                m_info[i].m_delay = std::chrono::milliseconds{wxINT32_SWAP_ON_BE(FCC2) * 1000 / 60};
             }
         }
         else if ( FCC1 == seq32 )
@@ -334,7 +340,7 @@ bool wxANIDecoder::Load( wxInputStream& stream )
     // if some frame has an invalid delay, use the global delay given in the
     // ANI header
     for (unsigned int i=0; i<m_nFrames; i++)
-        if (m_info[i].m_delay == 0)
+        if (m_info[i].m_delay == 0ms)
             m_info[i].m_delay = globaldelay;
 
     // if the header did not contain a valid frame size, try to grab

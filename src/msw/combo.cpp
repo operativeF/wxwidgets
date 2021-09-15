@@ -33,10 +33,9 @@
 constexpr int NATIVE_TEXT_INDENT_XP = 4;
 constexpr int NATIVE_TEXT_INDENT_CLASSIC = 2;
 
-constexpr int COMBOBOX_ANIMATION_RESOLUTION = 10;
-
 using namespace std::chrono_literals;
 
+constexpr auto COMBOBOX_ANIMATION_RESOLUTION = 10ms;
 constexpr auto COMBOBOX_ANIMATION_DURATION = 200ms;
 
 #define wxMSW_DESKTOP_USERPREFERENCESMASK_COMBOBOXANIM    (1<<2)

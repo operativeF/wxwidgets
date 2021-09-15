@@ -42,7 +42,7 @@ public:
     wxSize GetFrameSize(unsigned int frame) const override;
     wxPoint GetFramePosition(unsigned int frame) const override;
     wxAnimationDisposal GetDisposalMethod(unsigned int frame) const override;
-    long GetDelay(unsigned int frame) const override;
+    std::chrono::milliseconds GetDelay(unsigned int frame) const override;
     wxColour GetTransparentColour(unsigned int frame) const override;
 
     // implementation of wxAnimationDecoder's pure virtuals

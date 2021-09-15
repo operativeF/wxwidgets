@@ -75,7 +75,7 @@ public:
 
         // Trigger the timer to go off inside the event loop
         // so that we can run wxExecute there.
-        StartOnce(10);
+        StartOnce(10ms);
 
         // Run the event loop.
         loop.Run();

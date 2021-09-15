@@ -5174,7 +5174,7 @@ void wxDataViewMainWindow::OnMouse( wxMouseEvent &event )
             if ((col == m_currentCol) && (current == m_currentRow) &&
                 IsCellEditableInMode(item, col, wxDATAVIEW_CELL_EDITABLE) )
             {
-                m_renameTimer->Start( 100, true );
+                m_renameTimer->Start( 100ms, true );
             }
         }
 
