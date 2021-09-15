@@ -46,31 +46,31 @@ enum wxCmdLineEntryFlags
 
 // an option value or parameter may be a string (the most common case), a
 // number or a date
-enum wxCmdLineParamType
+enum class wxCmdLineParamType
 {
-    wxCMD_LINE_VAL_STRING,  // should be 0 (default)
-    wxCMD_LINE_VAL_NUMBER,
-    wxCMD_LINE_VAL_DATE,
-    wxCMD_LINE_VAL_DOUBLE,
-    wxCMD_LINE_VAL_NONE
+    String,  // should be 0 (default)
+    Number,
+    Date,
+    Double,
+    None
 };
 
 // for constructing the cmd line description using Init()
-enum wxCmdLineEntryType
+enum class wxCmdLineEntryType
 {
-    wxCMD_LINE_SWITCH,
-    wxCMD_LINE_OPTION,
-    wxCMD_LINE_PARAM,
-    wxCMD_LINE_USAGE_TEXT,
-    wxCMD_LINE_NONE         // to terminate the list
+    Switch,
+    Option,
+    Param,
+    UsageText,
+    None         // to terminate the list
 };
 
 // Possible return values of wxCmdLineParser::FoundSwitch()
-enum wxCmdLineSwitchState
+enum class wxCmdLineSwitchState
 {
-    wxCMD_SWITCH_OFF = -1,  // Found but turned off/negated.
-    wxCMD_SWITCH_NOT_FOUND, // Not found at all.
-    wxCMD_SWITCH_ON         // Found in normal state.
+    Off,  // Found but turned off/negated.
+    NotFound, // Not found at all.
+    On         // Found in normal state.
 };
 
 // ----------------------------------------------------------------------------
@@ -90,7 +90,7 @@ struct wxCmdLineEntryDesc
 
 // the list of wxCmdLineEntryDesc objects should be terminated with this one
 #define wxCMD_LINE_DESC_END \
-        { wxCMD_LINE_NONE, NULL, NULL, NULL, wxCMD_LINE_VAL_NONE, 0x0 }
+        { wxCmdLineEntryType::None, NULL, NULL, NULL, wxCmdLineParamType::None, 0x0 }
 
 // ----------------------------------------------------------------------------
 // wxCmdLineArg contains the value for one command line argument
@@ -253,7 +253,7 @@ public:
     // construct the cmd line description
     // ----------------------------------
 
-    // take the cmd line description from the wxCMD_LINE_NONE terminated table
+    // take the cmd line description from the wxCmdLineEntryType::None terminated table
     void SetDesc(const wxCmdLineEntryDesc *desc);
 
     // a switch: i.e. an option without value
@@ -270,11 +270,11 @@ public:
     // an option taking a value of the given type
     void AddOption(const wxString& name, const wxString& lng = wxEmptyString,
                    const wxString& desc = wxEmptyString,
-                   wxCmdLineParamType type = wxCMD_LINE_VAL_STRING,
+                   wxCmdLineParamType type = wxCmdLineParamType::String,
                    int flags = 0);
     void AddLongOption(const wxString& lng,
                        const wxString& desc = wxEmptyString,
-                       wxCmdLineParamType type = wxCMD_LINE_VAL_STRING,
+                       wxCmdLineParamType type = wxCmdLineParamType::String,
                        int flags = 0)
     {
         AddOption(wxString(), lng, desc, type, flags);
@@ -282,7 +282,7 @@ public:
 
     // a parameter
     void AddParam(const wxString& desc = wxEmptyString,
-                  wxCmdLineParamType type = wxCMD_LINE_VAL_STRING,
+                  wxCmdLineParamType type = wxCmdLineParamType::String,
                   int flags = 0);
 
     // add an explanatory text to be shown to the user in help
@@ -311,8 +311,8 @@ public:
     // returns true if the given switch was found
     bool Found(const wxString& name) const;
 
-    // Returns wxCMD_SWITCH_NOT_FOUND if the switch was not found at all,
-    // wxCMD_SWITCH_ON if it was found in normal state and wxCMD_SWITCH_OFF if
+    // Returns wxCmdLineSwitchState::NotFound if the switch was not found at all,
+    // wxCmdLineSwitchState::On if it was found in normal state and wxCmdLineSwitchState::Off if
     // it was found but negated (i.e. followed by "-", this can only happen for
     // the switches with wxCMD_LINE_SWITCH_NEGATABLE flag).
     wxCmdLineSwitchState FoundSwitch(const wxString& name) const;

@@ -220,11 +220,11 @@ void wxAppBase::OnInitCmdLine(wxCmdLineParser& parser)
     {
 #ifdef __WXUNIVERSAL__
         {
-            wxCMD_LINE_OPTION,
+            wxCmdLineEntryType::Option,
             NULL,
             OPTION_THEME,
             gettext_noop("specify the theme to use"),
-            wxCMD_LINE_VAL_STRING,
+            wxCmdLineParamType::String,
             0x0
         },
 #endif // __WXUNIVERSAL__
@@ -234,11 +234,11 @@ void wxAppBase::OnInitCmdLine(wxCmdLineParser& parser)
         //     should provide this option. That's why it is in common/appcmn.cpp
         //     and not dfb/app.cpp
         {
-            wxCMD_LINE_OPTION,
+            wxCmdLineEntryType::Option,
             NULL,
             OPTION_MODE,
             gettext_noop("specify display mode to use (e.g. 640x480-16)"),
-            wxCMD_LINE_VAL_STRING,
+            wxCmdLineParamType::String,
             0x0
         },
 #endif // __WXDFB__

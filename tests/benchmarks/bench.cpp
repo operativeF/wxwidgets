@@ -129,7 +129,7 @@ void BenchApp::OnInitCmdLine(wxCmdLineParser& parser)
                         "number of times to run benchmarking loop (default: %ld)",
                         m_avgCount
                      ),
-                     wxCMD_LINE_VAL_NUMBER);
+                     wxCmdLineParamType::Number);
     parser.AddOption(OPTION_NUM_RUNS,
                      "num-runs",
                      wxString::Format
@@ -138,7 +138,7 @@ void BenchApp::OnInitCmdLine(wxCmdLineParser& parser)
                          "(default: %ld)",
                          m_numRuns
                      ),
-                     wxCMD_LINE_VAL_NUMBER);
+                     wxCmdLineParamType::Number);
     parser.AddOption(OPTION_NUMERIC_PARAM,
                      "num-param",
                      wxString::Format
@@ -147,15 +147,15 @@ void BenchApp::OnInitCmdLine(wxCmdLineParser& parser)
                          "(default: %ld)",
                          m_numParam
                      ),
-                     wxCMD_LINE_VAL_NUMBER);
+                     wxCmdLineParamType::Number);
     parser.AddOption(OPTION_STRING_PARAM,
                      "str-param",
                      "string parameter used by some benchmark functions "
                      "(default: empty)",
-                     wxCMD_LINE_VAL_STRING);
+                     wxCmdLineParamType::String);
 
     parser.AddParam("benchmark name",
-                    wxCMD_LINE_VAL_STRING,
+                    wxCmdLineParamType::String,
                     wxCMD_LINE_PARAM_OPTIONAL | wxCMD_LINE_PARAM_MULTIPLE);
 }
 

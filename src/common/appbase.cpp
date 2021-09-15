@@ -733,21 +733,21 @@ void wxAppConsoleBase::OnInitCmdLine(wxCmdLineParser& parser)
     static constexpr wxCmdLineEntryDesc cmdLineDesc[] =
     {
         {
-            wxCMD_LINE_SWITCH,
+            wxCmdLineEntryType::Switch,
             "h",
             "help",
             gettext_noop("show this help message"),
-            wxCMD_LINE_VAL_NONE,
+            wxCmdLineParamType::None,
             wxCMD_LINE_OPTION_HELP
         },
 
 #if wxUSE_LOG
         {
-            wxCMD_LINE_SWITCH,
+            wxCmdLineEntryType::Switch,
             nullptr,
             OPTION_VERBOSE,
             gettext_noop("generate verbose log messages"),
-            wxCMD_LINE_VAL_NONE,
+            wxCmdLineParamType::None,
             0x0
         },
 #endif // wxUSE_LOG

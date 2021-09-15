@@ -45,24 +45,24 @@ bool g_verbose = false;
 
 static const wxCmdLineEntryDesc g_cmdLineDesc[] =
 {
-    { wxCMD_LINE_OPTION, USE_PREPROCESSOR_OPTION, "use-preproc",
+    { wxCmdLineEntryType::Option, USE_PREPROCESSOR_OPTION, "use-preproc",
         "uses the preprocessor output to increase the checker accuracy",
-        wxCMD_LINE_VAL_STRING, wxCMD_LINE_NEEDS_SEPARATOR },
-    { wxCMD_LINE_OPTION, PROCESS_ONLY_OPTION, "process-only",
+        wxCmdLineParamType::String, wxCMD_LINE_NEEDS_SEPARATOR },
+    { wxCmdLineEntryType::Option, PROCESS_ONLY_OPTION, "process-only",
         "processes only header files matching the given wildcard",
-        wxCMD_LINE_VAL_STRING, wxCMD_LINE_NEEDS_SEPARATOR },
-    { wxCMD_LINE_SWITCH, MODIFY_SWITCH, "modify",
+        wxCmdLineParamType::String, wxCMD_LINE_NEEDS_SEPARATOR },
+    { wxCmdLineEntryType::Switch, MODIFY_SWITCH, "modify",
         "modify the interface headers to match the real ones" },
-    { wxCMD_LINE_SWITCH, DUMP_SWITCH, "dump",
+    { wxCmdLineEntryType::Switch, DUMP_SWITCH, "dump",
         "dump both interface and API to plain text dump.*.txt files" },
-    { wxCMD_LINE_SWITCH, HELP_SWITCH, "help",
-        "show help message", wxCMD_LINE_VAL_NONE, wxCMD_LINE_OPTION_HELP },
-    { wxCMD_LINE_SWITCH, VERBOSE_SWITCH, "verbose",
+    { wxCmdLineEntryType::Switch, HELP_SWITCH, "help",
+        "show help message", wxCmdLineParamType::None, wxCMD_LINE_OPTION_HELP },
+    { wxCmdLineEntryType::Switch, VERBOSE_SWITCH, "verbose",
         "be verbose" },
-    { wxCMD_LINE_PARAM,  NULL, NULL,
-        "gccXML", wxCMD_LINE_VAL_STRING, wxCMD_LINE_OPTION_MANDATORY },
-    { wxCMD_LINE_PARAM,  NULL, NULL,
-        "doxygenXML", wxCMD_LINE_VAL_STRING, wxCMD_LINE_OPTION_MANDATORY },
+    { wxCmdLineEntryType::Param,  NULL, NULL,
+        "gccXML", wxCmdLineParamType::String, wxCMD_LINE_OPTION_MANDATORY },
+    { wxCmdLineEntryType::Param,  NULL, NULL,
+        "doxygenXML", wxCmdLineParamType::String, wxCMD_LINE_OPTION_MANDATORY },
     wxCMD_LINE_DESC_END
 };
 

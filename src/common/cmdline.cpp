@@ -88,17 +88,17 @@ public:
     // from wxCmdLineArg
     wxCmdLineEntryType GetKind() const override { return kind; }
     wxString GetShortName() const override {
-        wxASSERT_MSG( kind == wxCMD_LINE_OPTION || kind == wxCMD_LINE_SWITCH,
+        wxASSERT_MSG( kind == wxCmdLineEntryType::Option || kind == wxCmdLineEntryType::Switch,
                       wxT("kind mismatch in wxCmdLineArg") );
         return shortName;
     }
     wxString GetLongName() const override {
-        wxASSERT_MSG( kind == wxCMD_LINE_OPTION || kind == wxCMD_LINE_SWITCH,
+        wxASSERT_MSG( kind == wxCmdLineEntryType::Option || kind == wxCmdLineEntryType::Switch,
                       wxT("kind mismatch in wxCmdLineArg") );
         return longName;
     }
     wxCmdLineParamType GetType() const override {
-        wxASSERT_MSG( kind == wxCMD_LINE_OPTION,
+        wxASSERT_MSG( kind == wxCmdLineEntryType::Option,
                       wxT("kind mismatch in wxCmdLineArg") );
         return type;
     }
@@ -109,7 +109,7 @@ public:
     const wxDateTime& GetDateVal() const override;
 #endif // wxUSE_DATETIME
     bool IsNegated() const override {
-        wxASSERT_MSG( kind == wxCMD_LINE_SWITCH,
+        wxASSERT_MSG( kind == wxCmdLineEntryType::Switch,
                       wxT("kind mismatch in wxCmdLineArg") );
         return m_isNegated;
     }
@@ -222,8 +222,8 @@ wxCmdLineArgImpl::wxCmdLineArgImpl(wxCmdLineEntryType k,
                 const wxString& lng,
                 wxCmdLineParamType typ)
 {
-    // wxCMD_LINE_USAGE_TEXT uses only description, shortName and longName is empty
-    if ( k != wxCMD_LINE_USAGE_TEXT && k != wxCMD_LINE_PARAM)
+    // wxCmdLineEntryType::UsageText uses only description, shortName and longName is empty
+    if ( k != wxCmdLineEntryType::UsageText && k != wxCmdLineEntryType::Param)
     {
         wxASSERT_MSG
         (
@@ -256,42 +256,42 @@ wxCmdLineArgImpl::wxCmdLineArgImpl(wxCmdLineEntryType k,
 
 void wxCmdLineArgImpl::Check(wxCmdLineParamType WXUNUSED_UNLESS_DEBUG(typ)) const
 {
-    // NB: Type is always wxCMD_LINE_VAL_NONE for booleans, so mismatch between
+    // NB: Type is always wxCmdLineParamType::None for booleans, so mismatch between
     //  switches / options / params is well checked by this test
-    // The parameters have type == wxCMD_LINE_VAL_STRING and thus can be
+    // The parameters have type == wxCmdLineParamType::String and thus can be
     //  retrieved only by GetStrVal()
     wxASSERT_MSG( type == typ, wxT("type mismatch in wxCmdLineArg") );
 }
 
 double wxCmdLineArgImpl::GetDoubleVal() const
 {
-    Check(wxCMD_LINE_VAL_DOUBLE);
+    Check(wxCmdLineParamType::Double);
     return m_doubleVal;
 }
 
 long wxCmdLineArgImpl::GetLongVal() const
 {
-    Check(wxCMD_LINE_VAL_NUMBER);
+    Check(wxCmdLineParamType::Number);
     return m_longVal;
 }
 
 const wxString& wxCmdLineArgImpl::GetStrVal() const
 {
-    Check(wxCMD_LINE_VAL_STRING);
+    Check(wxCmdLineParamType::String);
     return m_strVal;
 }
 
 #if wxUSE_DATETIME
 const wxDateTime& wxCmdLineArgImpl::GetDateVal() const
 {
-    Check(wxCMD_LINE_VAL_DATE);
+    Check(wxCmdLineParamType::Date);
     return m_dateVal;
 }
 #endif // wxUSE_DATETIME
 
 wxCmdLineArgImpl& wxCmdLineArgImpl::SetDoubleVal(double val)
 {
-    Check(wxCMD_LINE_VAL_DOUBLE);
+    Check(wxCmdLineParamType::Double);
     m_doubleVal = val;
     m_hasVal = true;
     return *this;
@@ -299,7 +299,7 @@ wxCmdLineArgImpl& wxCmdLineArgImpl::SetDoubleVal(double val)
 
 wxCmdLineArgImpl& wxCmdLineArgImpl::SetLongVal(long val)
 {
-    Check(wxCMD_LINE_VAL_NUMBER);
+    Check(wxCmdLineParamType::Number);
     m_longVal = val;
     m_hasVal = true;
     return *this;
@@ -307,7 +307,7 @@ wxCmdLineArgImpl& wxCmdLineArgImpl::SetLongVal(long val)
 
 wxCmdLineArgImpl& wxCmdLineArgImpl::SetStrVal(const wxString& val)
 {
-    Check(wxCMD_LINE_VAL_STRING);
+    Check(wxCmdLineParamType::String);
     m_strVal = val;
     m_hasVal = true;
     return *this;
@@ -316,7 +316,7 @@ wxCmdLineArgImpl& wxCmdLineArgImpl::SetStrVal(const wxString& val)
 #if wxUSE_DATETIME
 wxCmdLineArgImpl& wxCmdLineArgImpl::SetDateVal(const wxDateTime& val)
 {
-    Check(wxCMD_LINE_VAL_DATE);
+    Check(wxCmdLineParamType::Date);
     m_dateVal = val;
     m_hasVal = true;
     return *this;
@@ -579,24 +579,24 @@ void wxCmdLineParser::SetDesc(const wxCmdLineEntryDesc *desc)
     {
         switch ( desc->kind )
         {
-            case wxCMD_LINE_SWITCH:
+            case wxCmdLineEntryType::Switch:
                 AddSwitch(desc->shortName, desc->longName,
                           wxGetTranslation(desc->description),
                           desc->flags);
                 break;
 
-            case wxCMD_LINE_OPTION:
+            case wxCmdLineEntryType::Option:
                 AddOption(desc->shortName, desc->longName,
                           wxGetTranslation(desc->description),
                           desc->type, desc->flags);
                 break;
 
-            case wxCMD_LINE_PARAM:
+            case wxCmdLineEntryType::Param:
                 AddParam(wxGetTranslation(desc->description),
                          desc->type, desc->flags);
                 break;
 
-            case wxCMD_LINE_USAGE_TEXT:
+            case wxCmdLineEntryType::UsageText:
                 AddUsageText(wxGetTranslation(desc->description));
                 break;
 
@@ -604,7 +604,7 @@ void wxCmdLineParser::SetDesc(const wxCmdLineEntryDesc *desc)
                 wxFAIL_MSG( wxT("unknown command line entry type") );
                 [[fallthrough]];
 
-            case wxCMD_LINE_NONE:
+            case wxCmdLineEntryType::None:
                 return;
         }
     }
@@ -618,9 +618,9 @@ void wxCmdLineParser::AddSwitch(const wxString& shortName,
     wxASSERT_MSG( m_data->FindOption(shortName) == wxNOT_FOUND,
                   wxT("duplicate switch") );
 
-    wxCmdLineOption *option = new wxCmdLineOption(wxCMD_LINE_SWITCH,
+    wxCmdLineOption *option = new wxCmdLineOption(wxCmdLineEntryType::Switch,
                                                   shortName, longName, desc,
-                                                  wxCMD_LINE_VAL_NONE, flags);
+                                                  wxCmdLineParamType::None, flags);
 
     m_data->m_options.Add(option);
 }
@@ -634,7 +634,7 @@ void wxCmdLineParser::AddOption(const wxString& shortName,
     wxASSERT_MSG( m_data->FindOption(shortName) == wxNOT_FOUND,
                   wxT("duplicate option") );
 
-    wxCmdLineOption *option = new wxCmdLineOption(wxCMD_LINE_OPTION,
+    wxCmdLineOption *option = new wxCmdLineOption(wxCmdLineEntryType::Option,
                                                   shortName, longName, desc,
                                                   type, flags);
 
@@ -672,9 +672,9 @@ void wxCmdLineParser::AddUsageText(const wxString& text)
 {
     wxASSERT_MSG( !text.empty(), wxT("text can't be empty") );
 
-    wxCmdLineOption *option = new wxCmdLineOption(wxCMD_LINE_USAGE_TEXT,
+    wxCmdLineOption *option = new wxCmdLineOption(wxCmdLineEntryType::UsageText,
                                                   wxEmptyString, wxEmptyString,
-                                                  text, wxCMD_LINE_VAL_NONE, 0);
+                                                  text, wxCmdLineParamType::None, 0);
 
     m_data->m_options.Add(option);
 }
@@ -695,9 +695,9 @@ wxCmdLineSwitchState wxCmdLineParser::FoundSwitch(const wxString& name) const
     const wxCmdLineOption* const opt = m_data->FindOptionByAnyName(name);
 
     if ( !opt || !opt->HasValue() )
-        return wxCMD_SWITCH_NOT_FOUND;
+        return wxCmdLineSwitchState::NotFound;
 
-    return opt->IsNegated() ? wxCMD_SWITCH_OFF : wxCMD_SWITCH_ON;
+    return opt->IsNegated() ? wxCmdLineSwitchState::Off : wxCmdLineSwitchState::On;
 }
 
 bool wxCmdLineParser::Found(const wxString& name, wxString *value) const
@@ -949,7 +949,7 @@ int wxCmdLineParser::Parse(bool showUsage)
                     // something else in it - it is either the value of this
                     // option or other switches if it is a switch
                     if ( m_data->m_options[(size_t)optInd].kind
-                            == wxCMD_LINE_SWITCH )
+                            == wxCmdLineEntryType::Switch )
                     {
                         // if the switch is negatable and it is just followed
                         // by '-' the '-' is considered to be part of this
@@ -993,7 +993,7 @@ int wxCmdLineParser::Parse(bool showUsage)
                 ++p;    // for another leading '-'
 
             wxCmdLineOption& opt = m_data->m_options[(size_t)optInd];
-            if ( opt.kind == wxCMD_LINE_SWITCH )
+            if ( opt.kind == wxCmdLineEntryType::Switch )
             {
                 // we must check that there is no value following the switch
                 bool negated = (opt.flags & wxCMD_LINE_SWITCH_NEGATABLE) &&
@@ -1072,11 +1072,11 @@ int wxCmdLineParser::Parse(bool showUsage)
                             wxFAIL_MSG( wxT("unknown option type") );
                             [[fallthrough]];
 
-                        case wxCMD_LINE_VAL_STRING:
+                        case wxCmdLineParamType::String:
                             opt.SetStrVal(value);
                             break;
 
-                        case wxCMD_LINE_VAL_NUMBER:
+                        case wxCmdLineParamType::Number:
                             {
                                 long val;
                                 if ( value.ToLong(&val) )
@@ -1094,7 +1094,7 @@ int wxCmdLineParser::Parse(bool showUsage)
                             }
                             break;
 
-                        case wxCMD_LINE_VAL_DOUBLE:
+                        case wxCmdLineParamType::Double:
                             {
                                 double val;
                                 if ( value.ToDouble(&val) )
@@ -1113,7 +1113,7 @@ int wxCmdLineParser::Parse(bool showUsage)
                             break;
 
 #if wxUSE_DATETIME
-                        case wxCMD_LINE_VAL_DATE:
+                        case wxCmdLineParamType::Date:
                             {
                                 wxDateTime dt;
                                 wxString::const_iterator endDate;
@@ -1149,8 +1149,8 @@ int wxCmdLineParser::Parse(bool showUsage)
 
                 m_data->m_parameters.push_back(arg);
                 m_data->m_parsedArguments.push_back (
-                    wxCmdLineArgImpl(wxCMD_LINE_PARAM, wxString(), wxString(),
-                                     wxCMD_LINE_VAL_STRING).SetStrVal(arg));
+                    wxCmdLineArgImpl(wxCmdLineEntryType::Param, wxString(), wxString(),
+                                     wxCmdLineParamType::String).SetStrVal(arg));
 
                 if ( !(param.flags & wxCMD_LINE_PARAM_MULTIPLE) )
                 {
@@ -1316,7 +1316,7 @@ wxString wxCmdLineParser::GetUsageString() const
         if ( opt.flags & wxCMD_LINE_HIDDEN )
             continue;
 
-        if ( opt.kind != wxCMD_LINE_USAGE_TEXT )
+        if ( opt.kind != wxCmdLineEntryType::UsageText )
         {
             usage << wxT(' ');
             if ( !(opt.flags & wxCMD_LINE_OPTION_MANDATORY) )
@@ -1359,7 +1359,7 @@ wxString wxCmdLineParser::GetUsageString() const
                        << wxT("--") << opt.longName;
             }
 
-            if ( opt.kind != wxCMD_LINE_SWITCH )
+            if ( opt.kind != wxCmdLineEntryType::Switch )
             {
                 wxString val;
                 val << wxT('<') << GetTypeName(opt.type) << wxT('>');
@@ -1459,19 +1459,19 @@ static wxString GetTypeName(wxCmdLineParamType type)
             wxFAIL_MSG( wxT("unknown option type") );
             [[fallthrough]];
 
-        case wxCMD_LINE_VAL_STRING:
+        case wxCmdLineParamType::String:
             s = _("str");
             break;
 
-        case wxCMD_LINE_VAL_NUMBER:
+        case wxCmdLineParamType::Number:
             s = _("num");
             break;
 
-        case wxCMD_LINE_VAL_DOUBLE:
+        case wxCmdLineParamType::Double:
             s = _("double");
             break;
 
-        case wxCMD_LINE_VAL_DATE:
+        case wxCmdLineParamType::Date:
             s = _("date");
             break;
     }

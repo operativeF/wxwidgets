@@ -174,20 +174,20 @@ TEST_CASE("ParseSwitches")
 
     p.SetCmdLine("-n");
     CHECK_EQ(0, p.Parse(false) );
-    CHECK_EQ(wxCMD_SWITCH_NOT_FOUND, p.FoundSwitch("a") );
-    CHECK_EQ(wxCMD_SWITCH_ON, p.FoundSwitch("n") );
+    CHECK_EQ(wxCmdLineSwitchState::NotFound, p.FoundSwitch("a") );
+    CHECK_EQ(wxCmdLineSwitchState::On, p.FoundSwitch("n") );
 
     p.SetCmdLine("-n-");
     CHECK_EQ(0, p.Parse(false) );
-    CHECK_EQ(wxCMD_SWITCH_OFF, p.FoundSwitch("neg") );
+    CHECK_EQ(wxCmdLineSwitchState::Off, p.FoundSwitch("neg") );
 
     p.SetCmdLine("--neg");
     CHECK_EQ(0, p.Parse(false) );
-    CHECK_EQ(wxCMD_SWITCH_ON, p.FoundSwitch("neg") );
+    CHECK_EQ(wxCmdLineSwitchState::On, p.FoundSwitch("neg") );
 
     p.SetCmdLine("--neg-");
     CHECK_EQ(0, p.Parse(false) );
-    CHECK_EQ(wxCMD_SWITCH_OFF, p.FoundSwitch("n") );
+    CHECK_EQ(wxCmdLineSwitchState::Off, p.FoundSwitch("n") );
 }
 
 TEST_CASE("ArgumentsCollection")
@@ -195,11 +195,11 @@ TEST_CASE("ArgumentsCollection")
     wxCmdLineParser p;
 
     p.AddLongSwitch ("verbose");
-    p.AddOption ("l", "long", wxEmptyString, wxCMD_LINE_VAL_NUMBER);
-    p.AddOption ("d", "date", wxEmptyString, wxCMD_LINE_VAL_DATE);
-    p.AddOption ("f", "double", wxEmptyString, wxCMD_LINE_VAL_DOUBLE);
-    p.AddOption ("s", "string", wxEmptyString, wxCMD_LINE_VAL_STRING);
-    p.AddParam (wxEmptyString, wxCMD_LINE_VAL_STRING, wxCMD_LINE_PARAM_MULTIPLE);
+    p.AddOption ("l", "long", wxEmptyString, wxCmdLineParamType::Number);
+    p.AddOption ("d", "date", wxEmptyString, wxCmdLineParamType::Date);
+    p.AddOption ("f", "double", wxEmptyString, wxCmdLineParamType::Double);
+    p.AddOption ("s", "string", wxEmptyString, wxCmdLineParamType::String);
+    p.AddParam (wxEmptyString, wxCmdLineParamType::String, wxCMD_LINE_PARAM_MULTIPLE);
 
     wxDateTime wasNow = wxDateTime::Now().GetDateOnly();
     p.SetCmdLine (wxString::Format ("--verbose param1 -l 22 -d \"%s\" -f 50.12e-1 param2 --string \"some string\"",
@@ -210,45 +210,45 @@ TEST_CASE("ArgumentsCollection")
     wxCmdLineArgs::const_iterator itargs = p.GetArguments().begin();
 
     // --verbose
-    CHECK_EQ(wxCMD_LINE_SWITCH, itargs->GetKind());
+    CHECK_EQ(wxCmdLineEntryType::Switch, itargs->GetKind());
     CHECK_EQ("verbose", itargs->GetLongName());
     CHECK_EQ(false, itargs->IsNegated());
 
     // param1
     ++itargs; // pre incrementation test
-    CHECK_EQ(wxCMD_LINE_PARAM, itargs->GetKind());
+    CHECK_EQ(wxCmdLineEntryType::Param, itargs->GetKind());
     CHECK_EQ("param1", itargs->GetStrVal());
 
     // -l 22
     itargs++; // post incrementation test
-    CHECK_EQ(wxCMD_LINE_OPTION, itargs->GetKind());
-    CHECK_EQ(wxCMD_LINE_VAL_NUMBER, itargs->GetType());
+    CHECK_EQ(wxCmdLineEntryType::Option, itargs->GetKind());
+    CHECK_EQ(wxCmdLineParamType::Number, itargs->GetType());
     CHECK_EQ("l", itargs->GetShortName());
     CHECK_EQ(22, itargs->GetLongVal());
 
     // -d (some date)
     ++itargs;
-    CHECK_EQ(wxCMD_LINE_OPTION, itargs->GetKind());
-    CHECK_EQ(wxCMD_LINE_VAL_DATE, itargs->GetType());
+    CHECK_EQ(wxCmdLineEntryType::Option, itargs->GetKind());
+    CHECK_EQ(wxCmdLineParamType::Date, itargs->GetType());
     CHECK_EQ("d", itargs->GetShortName());
     CHECK_EQ(wasNow, itargs->GetDateVal());
 
     // -f 50.12e-1
     ++itargs;
-    CHECK_EQ(wxCMD_LINE_OPTION, itargs->GetKind());
-    CHECK_EQ(wxCMD_LINE_VAL_DOUBLE, itargs->GetType());
+    CHECK_EQ(wxCmdLineEntryType::Option, itargs->GetKind());
+    CHECK_EQ(wxCmdLineParamType::Double, itargs->GetType());
     CHECK_EQ("f", itargs->GetShortName());
     CHECK_EQ(50.12e-1, doctest::Approx(itargs->GetDoubleVal()).epsilon(0.000001));
 
     // param2
     ++itargs;
-    CHECK_EQ (wxCMD_LINE_PARAM, itargs->GetKind());
+    CHECK_EQ (wxCmdLineEntryType::Param, itargs->GetKind());
     CHECK_EQ ("param2", itargs->GetStrVal());
 
     // --string "some string"
     ++itargs;
-    CHECK_EQ(wxCMD_LINE_OPTION, itargs->GetKind());
-    CHECK_EQ(wxCMD_LINE_VAL_STRING, itargs->GetType());
+    CHECK_EQ(wxCmdLineEntryType::Option, itargs->GetKind());
+    CHECK_EQ(wxCmdLineParamType::String, itargs->GetType());
     CHECK_EQ("s", itargs->GetShortName());
     CHECK_EQ("string", itargs->GetLongName());
     CHECK_EQ("some string", itargs->GetStrVal());
@@ -256,7 +256,7 @@ TEST_CASE("ArgumentsCollection")
     // testing pre and post-increment
     --itargs;
     itargs--;
-    CHECK_EQ(wxCMD_LINE_VAL_DOUBLE, itargs->GetType());
+    CHECK_EQ(wxCmdLineParamType::Double, itargs->GetType());
 
     ++itargs;++itargs;++itargs;
     CHECK(itargs == p.GetArguments().end());
@@ -270,20 +270,20 @@ TEST_CASE("Usage")
     // details, its format can change in the future)
     static constexpr wxCmdLineEntryDesc desc[] =
     {
-        { wxCMD_LINE_USAGE_TEXT, nullptr, nullptr, "Verbosity options" },
-        { wxCMD_LINE_SWITCH, "v", "verbose", "be verbose" },
-        { wxCMD_LINE_SWITCH, "q", "quiet",   "be quiet" },
+        { wxCmdLineEntryType::UsageText, nullptr, nullptr, "Verbosity options" },
+        { wxCmdLineEntryType::Switch, "v", "verbose", "be verbose" },
+        { wxCmdLineEntryType::Switch, "q", "quiet",   "be quiet" },
 
-        { wxCMD_LINE_USAGE_TEXT, nullptr, nullptr, "Output options" },
-        { wxCMD_LINE_OPTION, "o", "output",  "output file" },
-        { wxCMD_LINE_OPTION, "s", "size",    "output block size", wxCMD_LINE_VAL_NUMBER },
-        { wxCMD_LINE_OPTION, "d", "date",    "output file date", wxCMD_LINE_VAL_DATE },
-        { wxCMD_LINE_OPTION, "f", "double",  "output double", wxCMD_LINE_VAL_DOUBLE },
+        { wxCmdLineEntryType::UsageText, nullptr, nullptr, "Output options" },
+        { wxCmdLineEntryType::Option, "o", "output",  "output file" },
+        { wxCmdLineEntryType::Option, "s", "size",    "output block size", wxCmdLineParamType::Number },
+        { wxCmdLineEntryType::Option, "d", "date",    "output file date", wxCmdLineParamType::Date },
+        { wxCmdLineEntryType::Option, "f", "double",  "output double", wxCmdLineParamType::Double },
 
-        { wxCMD_LINE_PARAM,  nullptr, nullptr, "input file", },
+        { wxCmdLineEntryType::Param,  nullptr, nullptr, "input file", },
 
-        { wxCMD_LINE_USAGE_TEXT, nullptr, nullptr, "\nEven more usage text" },
-        { wxCMD_LINE_NONE }
+        { wxCmdLineEntryType::UsageText, nullptr, nullptr, "\nEven more usage text" },
+        { wxCmdLineEntryType::None }
     };
 
     wxGCC_WARNING_RESTORE(missing-field-initializers)
@@ -321,13 +321,13 @@ TEST_CASE("Found")
 
     static constexpr wxCmdLineEntryDesc desc[] =
     {
-        { wxCMD_LINE_SWITCH, "v", "verbose", "be verbose" },
-        { wxCMD_LINE_OPTION, "o", "output",  "output file" },
-        { wxCMD_LINE_OPTION, "s", "size",    "output block size", wxCMD_LINE_VAL_NUMBER },
-        { wxCMD_LINE_OPTION, "d", "date",    "output file date", wxCMD_LINE_VAL_DATE },
-        { wxCMD_LINE_OPTION, "f", "double",  "output double", wxCMD_LINE_VAL_DOUBLE },
-        { wxCMD_LINE_PARAM,  nullptr, nullptr, "input file", },
-        { wxCMD_LINE_NONE }
+        { wxCmdLineEntryType::Switch, "v", "verbose", "be verbose" },
+        { wxCmdLineEntryType::Option, "o", "output",  "output file" },
+        { wxCmdLineEntryType::Option, "s", "size",    "output block size", wxCmdLineParamType::Number },
+        { wxCmdLineEntryType::Option, "d", "date",    "output file date", wxCmdLineParamType::Date },
+        { wxCmdLineEntryType::Option, "f", "double",  "output double", wxCmdLineParamType::Double },
+        { wxCmdLineEntryType::Param,  nullptr, nullptr, "input file", },
+        { wxCmdLineEntryType::None }
     };
 
     wxGCC_WARNING_RESTORE(missing-field-initializers)
@@ -346,7 +346,7 @@ TEST_CASE("Found")
     CHECK_THROWS(p.Found("v", &dummydate));
     CHECK_THROWS(p.Found("v", &dummyl));
     CHECK_THROWS(p.Found("v", &dummys));
-    CHECK(p.FoundSwitch("v") != wxCMD_SWITCH_NOT_FOUND);
+    CHECK(p.FoundSwitch("v") != wxCmdLineSwitchState::NotFound);
     CHECK(p.Found("v"));
 
     CHECK_THROWS(p.Found("o", &dummyd));

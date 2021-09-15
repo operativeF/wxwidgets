@@ -253,22 +253,22 @@ int XmlResApp::OnRun()
 {
     static const wxCmdLineEntryDesc cmdLineDesc[] =
     {
-        { wxCMD_LINE_SWITCH, "h", "help",  "show help message", wxCMD_LINE_VAL_NONE, wxCMD_LINE_OPTION_HELP },
-        { wxCMD_LINE_SWITCH, "v", "verbose", "be verbose" },
-        { wxCMD_LINE_SWITCH, "e", "extra-cpp-code",  "output C++ header file with XRC derived classes" },
-        { wxCMD_LINE_SWITCH, "c", "cpp-code",  "output C++ source rather than .rsc file" },
-        { wxCMD_LINE_SWITCH, "p", "python-code",  "output wxPython source rather than .rsc file" },
-        { wxCMD_LINE_SWITCH, "g", "gettext",  "output list of translatable strings (to stdout or file if -o used)" },
-        { wxCMD_LINE_OPTION, "n", "function",  "C++/Python function name (with -c or -p) [InitXmlResource]" },
-        { wxCMD_LINE_OPTION, "o", "output",  "output file [resource.xrs/cpp]" },
-        { wxCMD_LINE_SWITCH, "",  "validate", "check XRC correctness (in addition to other processing)" },
-        { wxCMD_LINE_SWITCH, "",  "validate-only", "check XRC correctness and do nothing else" },
-        { wxCMD_LINE_OPTION, "",  "xrc-schema", "RELAX NG schema file to validate against (optional)" },
+        { wxCmdLineEntryType::Switch, "h", "help",  "show help message", wxCmdLineParamType::None, wxCMD_LINE_OPTION_HELP },
+        { wxCmdLineEntryType::Switch, "v", "verbose", "be verbose" },
+        { wxCmdLineEntryType::Switch, "e", "extra-cpp-code",  "output C++ header file with XRC derived classes" },
+        { wxCmdLineEntryType::Switch, "c", "cpp-code",  "output C++ source rather than .rsc file" },
+        { wxCmdLineEntryType::Switch, "p", "python-code",  "output wxPython source rather than .rsc file" },
+        { wxCmdLineEntryType::Switch, "g", "gettext",  "output list of translatable strings (to stdout or file if -o used)" },
+        { wxCmdLineEntryType::Option, "n", "function",  "C++/Python function name (with -c or -p) [InitXmlResource]" },
+        { wxCmdLineEntryType::Option, "o", "output",  "output file [resource.xrs/cpp]" },
+        { wxCmdLineEntryType::Switch, "",  "validate", "check XRC correctness (in addition to other processing)" },
+        { wxCmdLineEntryType::Switch, "",  "validate-only", "check XRC correctness and do nothing else" },
+        { wxCmdLineEntryType::Option, "",  "xrc-schema", "RELAX NG schema file to validate against (optional)" },
 #if 0 // not yet implemented
-        { wxCMD_LINE_OPTION, "l", "list-of-handlers",  "output list of necessary handlers to this file" },
+        { wxCmdLineEntryType::Option, "l", "list-of-handlers",  "output list of necessary handlers to this file" },
 #endif
-        { wxCMD_LINE_PARAM,  nullptr, nullptr, "input file(s)",
-              wxCMD_LINE_VAL_STRING,
+        { wxCmdLineEntryType::Param,  nullptr, nullptr, "input file(s)",
+              wxCmdLineParamType::String,
               wxCMD_LINE_PARAM_MULTIPLE | wxCMD_LINE_OPTION_MANDATORY },
 
         wxCMD_LINE_DESC_END

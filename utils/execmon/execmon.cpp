@@ -172,17 +172,17 @@ int main(int argc, char **argv)
 
     static const wxCmdLineEntryDesc cmdLineDesc[] =
     {
-        { wxCMD_LINE_SWITCH, "h", "help",
+        { wxCmdLineEntryType::Switch, "h", "help",
             "show this help message",
-            wxCMD_LINE_VAL_NONE, wxCMD_LINE_OPTION_HELP },
-        { wxCMD_LINE_OPTION, "t", "timeout",
+            wxCmdLineParamType::None, wxCMD_LINE_OPTION_HELP },
+        { wxCmdLineEntryType::Option, "t", "timeout",
             "kills all processes still alive after 'num' seconds",
-            wxCMD_LINE_VAL_NUMBER, 0 },
-        { wxCMD_LINE_PARAM, "", "",
+            wxCmdLineParamType::Number, 0 },
+        { wxCmdLineEntryType::Param, "", "",
             "program-to-run",
-            wxCMD_LINE_VAL_STRING, wxCMD_LINE_PARAM_MULTIPLE },
+            wxCmdLineParamType::String, wxCMD_LINE_PARAM_MULTIPLE },
 
-        { wxCMD_LINE_NONE }
+        { wxCmdLineEntryType::None }
     };
 
     wxLog::DisableTimestamp();

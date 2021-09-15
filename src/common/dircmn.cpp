@@ -30,7 +30,7 @@
 wxDirTraverseResult
 wxDirTraverser::OnOpenError(const wxString& WXUNUSED(dirname))
 {
-    return wxDIR_IGNORE;
+    return wxDirTraverseResult::Ignore;
 }
 
 // ----------------------------------------------------------------------------
@@ -113,11 +113,11 @@ size_t wxDir::Traverse(wxDirTraverser& sink,
                     wxFAIL_MSG(wxT("unexpected OnDir() return value") );
                     [[fallthrough]];
 
-                case wxDIR_STOP:
+                case wxDirTraverseResult::Stop:
                     cont = false;
                     break;
 
-                case wxDIR_CONTINUE:
+                case wxDirTraverseResult::Continue:
                     {
                         wxDir subdir;
 
@@ -141,15 +141,15 @@ size_t wxDir::Traverse(wxDirTraverser& sink,
                                         wxFAIL_MSG(wxT("unexpected OnOpenError() return value") );
                                         [[fallthrough]];
 
-                                    case wxDIR_STOP:
+                                    case wxDirTraverseResult::Stop:
                                         cont = false;
                                         [[fallthrough]];
 
-                                    case wxDIR_IGNORE:
+                                    case wxDirTraverseResult::Ignore:
                                         tryagain = false;
                                         break;
 
-                                    case wxDIR_CONTINUE:
+                                    case wxDirTraverseResult::Continue:
                                         tryagain = true;
                                 }
 
@@ -166,7 +166,7 @@ size_t wxDir::Traverse(wxDirTraverser& sink,
                     }
                     break;
 
-                case wxDIR_IGNORE:
+                case wxDirTraverseResult::Ignore:
                     // nothing to do
                     ;
             }
@@ -183,10 +183,10 @@ size_t wxDir::Traverse(wxDirTraverser& sink,
         while ( cont )
         {
             wxDirTraverseResult res = sink.OnFile(prefix + filename);
-            if ( res == wxDIR_STOP )
+            if ( res == wxDirTraverseResult::Stop )
                 break;
 
-            wxASSERT_MSG( res == wxDIR_CONTINUE,
+            wxASSERT_MSG( res == wxDirTraverseResult::Continue,
                           wxT("unexpected OnFile() return value") );
 
             nFiles++;
@@ -213,12 +213,12 @@ public:
     wxDirTraverseResult OnFile(const wxString& filename) override
     {
         m_files.push_back(filename);
-        return wxDIR_CONTINUE;
+        return wxDirTraverseResult::Continue;
     }
 
     wxDirTraverseResult OnDir(const wxString& WXUNUSED(dirname)) override
     {
-        return wxDIR_CONTINUE;
+        return wxDirTraverseResult::Continue;
     }
 
 private:
@@ -264,12 +264,12 @@ public:
     wxDirTraverseResult OnFile(const wxString& filename) override
     {
         m_file = filename;
-        return wxDIR_STOP;
+        return wxDirTraverseResult::Stop;
     }
 
     wxDirTraverseResult OnDir(const wxString& WXUNUSED(dirname)) override
     {
-        return wxDIR_CONTINUE;
+        return wxDirTraverseResult::Continue;
     }
 
     const wxString& GetFile() const
@@ -323,16 +323,16 @@ public:
             // final size could be not reliable (if e.g. the locked
             // file is very big).
             m_skippedFiles.push_back(filename);
-            return wxDIR_CONTINUE;
+            return wxDirTraverseResult::Continue;
         }
 
         m_sz += sz;
-        return wxDIR_CONTINUE;
+        return wxDirTraverseResult::Continue;
     }
 
     wxDirTraverseResult OnDir(const wxString& WXUNUSED(dirname)) override
     {
-        return wxDIR_CONTINUE;
+        return wxDirTraverseResult::Continue;
     }
 
     wxULongLong GetTotalSize() const

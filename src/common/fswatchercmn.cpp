@@ -192,7 +192,7 @@ bool wxFileSystemWatcherBase::AddTree(const wxFileName& path, int events,
         {
             // There is no need to watch individual files as we watch the
             // parent directory which will notify us about any changes in them.
-            return wxDIR_CONTINUE;
+            return wxDirTraverseResult::Continue;
         }
 
         wxDirTraverseResult OnDir(const wxString& dirname) override
@@ -203,7 +203,7 @@ bool wxFileSystemWatcherBase::AddTree(const wxFileName& path, int events,
                 wxLogTrace(wxTRACE_FSWATCHER,
                    "--- AddTree adding directory '%s' ---", dirname);
             }
-            return wxDIR_CONTINUE;
+            return wxDirTraverseResult::Continue;
         }
 
     private:
@@ -248,13 +248,13 @@ bool wxFileSystemWatcherBase::RemoveTree(const wxFileName& path)
         {
             // We never watch the individual files when watching the tree, so
             // nothing to do here.
-            return wxDIR_CONTINUE;
+            return wxDirTraverseResult::Continue;
         }
 
         wxDirTraverseResult OnDir(const wxString& dirname) override
         {
             m_watcher->Remove(wxFileName::DirName(dirname));
-            return wxDIR_CONTINUE;
+            return wxDirTraverseResult::Continue;
         }
 
     private:

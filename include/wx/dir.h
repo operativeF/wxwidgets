@@ -38,11 +38,11 @@ enum wxDirFlags
 };
 
 // these constants are possible return value of wxDirTraverser::OnDir()
-enum wxDirTraverseResult
+enum class wxDirTraverseResult
 {
-    wxDIR_IGNORE = -1,      // ignore this directory but continue with others
-    wxDIR_STOP,             // stop traversing
-    wxDIR_CONTINUE          // continue into this directory
+    Ignore,      // ignore this directory but continue with others
+    Stop,             // stop traversing
+    Continue          // continue into this directory
 };
 
 #if wxUSE_LONGLONG
@@ -61,7 +61,7 @@ public:
     virtual ~wxDirTraverser() = default;
     // called for each file found by wxDir::Traverse()
     //
-    // return wxDIR_STOP or wxDIR_CONTINUE from here (wxDIR_IGNORE doesn't
+    // return wxDirTraverseResult::Stop or wxDirTraverseResult::Continue from here (wxDirTraverseResult::Ignore doesn't
     // make sense)
     virtual wxDirTraverseResult OnFile(const wxString& filename) = 0;
 
@@ -73,12 +73,12 @@ public:
     // called for each directory which we couldn't open during our traversal
     // of the directory tree
     //
-    // this method can also return either wxDIR_STOP, wxDIR_IGNORE or
-    // wxDIR_CONTINUE but the latter is treated specially: it means to retry
+    // this method can also return either wxDirTraverseResult::Stop, wxDirTraverseResult::Ignore or
+    // wxDirTraverseResult::Continue but the latter is treated specially: it means to retry
     // opening the directory and so may lead to infinite loop if it is
     // returned unconditionally, be careful with this!
     //
-    // the base class version always returns wxDIR_IGNORE
+    // the base class version always returns wxDirTraverseResult::Ignore
     virtual wxDirTraverseResult OnOpenError(const wxString& dirname);
 };
 

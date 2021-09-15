@@ -107,13 +107,13 @@ TEST_CASE("Directory Tests")
 
         wxDirTraverseResult OnFile(const wxString& WXUNUSED(filename)) override
         {
-            return wxDIR_CONTINUE;
+            return wxDirTraverseResult::Continue;
         }
 
         wxDirTraverseResult OnDir(const wxString& dirname) override
         {
             dirs.push_back(dirname);
-            return wxDIR_CONTINUE;
+            return wxDirTraverseResult::Continue;
         }
     };
 
