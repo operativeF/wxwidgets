@@ -448,7 +448,7 @@ bool wxUpdateUIEvent::CanUpdate(wxWindowBase *win)
     // Don't update if we've switched global updating off
     // and this window doesn't support updates.
     if (win &&
-       (GetMode() == wxUPDATE_UI_PROCESS_SPECIFIED &&
+       (GetMode() == wxUpdateUIMode::Specified &&
        ((win->GetExtraStyle() & wxWS_EX_PROCESS_UI_UPDATES) == 0)))
         return false;
 

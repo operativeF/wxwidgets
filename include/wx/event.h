@@ -2944,14 +2944,14 @@ public:
 // to only send update events to those with the
 // wxWS_EX_PROCESS_UI_UPDATES style.
 
-enum wxUpdateUIMode
+enum class wxUpdateUIMode
 {
         // Send UI update events to all windows
-    wxUPDATE_UI_PROCESS_ALL,
+    All,
 
         // Send UI update events to windows that have
         // the wxWS_EX_PROCESS_UI_UPDATES flag specified
-    wxUPDATE_UI_PROCESS_SPECIFIED
+    Specified
 };
 
 class WXDLLIMPEXP_CORE wxUpdateUIEvent : public wxCommandEvent
@@ -3030,7 +3030,7 @@ protected:
     inline static wxLongLong       sm_lastUpdate{0};
 #endif
     inline static long             sm_updateInterval{0};
-    inline static wxUpdateUIMode   sm_updateMode{wxUPDATE_UI_PROCESS_ALL};
+    inline static wxUpdateUIMode   sm_updateMode{wxUpdateUIMode::All};
 
 public:
 	wxClassInfo *GetClassInfo() const override ;
