@@ -376,7 +376,7 @@ bool wxToolBar::DoInsertTool(size_t pos, wxToolBarToolBase *toolBase)
 
     switch ( tool->GetStyle() )
     {
-        case wxTOOL_STYLE_BUTTON:
+        case wxToolBarToolStyle::Button:
             // for a radio button we need the widget which starts the radio
             // group it belongs to, i.e. the first radio button immediately
             // preceding this one
@@ -446,13 +446,13 @@ bool wxToolBar::DoInsertTool(size_t pos, wxToolBarToolBase *toolBase)
             }
             break;
 
-        case wxTOOL_STYLE_SEPARATOR:
+        case wxToolBarToolStyle::Separator:
             gtk_toolbar_insert_space( m_toolbar, posGtk );
 
             // skip the rest
             return true;
 
-        case wxTOOL_STYLE_CONTROL:
+        case wxToolBarToolStyle::Control:
             gtk_toolbar_insert_widget(
                                        m_toolbar,
                                        tool->GetControl()->m_widget,
@@ -479,14 +479,14 @@ bool wxToolBar::DoDeleteTool(size_t WXUNUSED(pos), wxToolBarToolBase *toolBase)
 
     switch ( tool->GetStyle() )
     {
-        case wxTOOL_STYLE_CONTROL:
+        case wxToolBarToolStyle::Control:
             // don't destroy the control here as we can be called from
             // RemoveTool() and then we need to keep the control alive;
             // while if we're called from DeleteTool() the control will
             // be destroyed when wxToolBarToolBase itself is deleted
             break;
 
-        case wxTOOL_STYLE_BUTTON:
+        case wxToolBarToolStyle::Button:
             gtk_widget_destroy( tool->m_item );
             break;
 

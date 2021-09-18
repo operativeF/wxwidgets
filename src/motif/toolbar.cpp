@@ -270,7 +270,7 @@ bool wxToolBar::Realize()
 
         switch ( tool->GetStyle() )
         {
-            case wxTOOL_STYLE_CONTROL:
+            case wxToolBarToolStyle::Control:
             {
                 wxControl* control = tool->GetControl();
                 wxSize sz = control->GetSize();
@@ -289,7 +289,7 @@ bool wxToolBar::Realize()
 
                 break;
             }
-            case wxTOOL_STYLE_SEPARATOR:
+            case wxToolBarToolStyle::Separator:
                 // skip separators for vertical toolbars
                 if( !isVertical )
                 {
@@ -297,7 +297,7 @@ bool wxToolBar::Realize()
                 }
                 break;
 
-            case wxTOOL_STYLE_BUTTON:
+            case wxToolBarToolStyle::Button:
                 button = (Widget) 0;
 
                 if ( tool->CanBeToggled() && !tool->GetButtonWidget() )
@@ -497,17 +497,17 @@ bool wxToolBar::DoDeleteTool(size_t WXUNUSED(pos), wxToolBarToolBase *tool)
         {
             switch ( t->GetStyle() )
             {
-            case wxTOOL_STYLE_CONTROL:
+            case wxToolBarToolStyle::Control:
             {
                 wxSize size = t->GetControl()->GetSize();
                 offset = isVertical ? size.y : size.x;
                 offset += packing;
                 break;
             }
-            case wxTOOL_STYLE_SEPARATOR:
+            case wxToolBarToolStyle::Separator:
                 offset = isVertical ? 0 : separatorSize;
                 break;
-            case wxTOOL_STYLE_BUTTON:
+            case wxToolBarToolStyle::Button:
             {
                 Widget w = t->GetButtonWidget();
                 Dimension width, height;
@@ -527,7 +527,7 @@ bool wxToolBar::DoDeleteTool(size_t WXUNUSED(pos), wxToolBarToolBase *tool)
         {
             switch ( t->GetStyle() )
             {
-            case wxTOOL_STYLE_CONTROL:
+            case wxToolBarToolStyle::Control:
             {
                 wxPoint location = t->GetControl()->GetPosition();
 
@@ -539,9 +539,9 @@ bool wxToolBar::DoDeleteTool(size_t WXUNUSED(pos), wxToolBarToolBase *tool)
                 t->GetControl()->Move( location );
                 break;
             }
-            case wxTOOL_STYLE_SEPARATOR:
+            case wxToolBarToolStyle::Separator:
                 break;
-            case wxTOOL_STYLE_BUTTON:
+            case wxToolBarToolStyle::Button:
             {
                 Dimension x, y;
                 XtVaGetValues( t->GetButtonWidget(),
@@ -572,7 +572,7 @@ void wxToolBar::DoEnableTool(wxToolBarToolBase *toolBase, bool enable)
     wxToolBarTool *tool = (wxToolBarTool *)toolBase;
     if (tool->GetButtonWidget()){
         XtSetSensitive(tool->GetButtonWidget(), (Boolean) enable);
-    } else if (wxTOOL_STYLE_CONTROL == tool->GetStyle()){
+    } else if (wxToolBarToolStyle::Control == tool->GetStyle()){
         // Controls (such as wxChoice) do not have button widgets
         tool->GetControl()->Enable(enable);
     }

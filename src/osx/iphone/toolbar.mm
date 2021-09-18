@@ -352,13 +352,13 @@ bool wxToolBar::DoInsertTool(size_t pos, wxToolBarToolBase *toolBase)
     
     switch (tool->GetStyle())
     {
-        case wxTOOL_STYLE_SEPARATOR:
+        case wxToolBarToolStyle::Separator:
             break;
             
-        case wxTOOL_STYLE_BUTTON:
+        case wxToolBarToolStyle::Button:
             break;
             
-        case wxTOOL_STYLE_CONTROL:
+        case wxToolBarToolStyle::Control:
             // right now there's nothing to do here
             break;
             

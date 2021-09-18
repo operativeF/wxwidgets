@@ -1088,7 +1088,7 @@ bool wxToolBar::Realize()
         bool isRadio = false;
         switch ( tool->GetStyle() )
         {
-            case wxTOOL_STYLE_CONTROL:
+            case wxToolBarToolStyle::Control:
                 if ( !IsVertical() )
                 {
                     button.iBitmap = MSWGetFittingtSizeForControl(tool).x;
@@ -1096,7 +1096,7 @@ bool wxToolBar::Realize()
 
                 [[fallthrough]];
 
-            case wxTOOL_STYLE_SEPARATOR:
+            case wxToolBarToolStyle::Separator:
                 if ( tool->IsStretchableSpace() )
                 {
                     // we're going to modify the size of this button later and
@@ -1117,7 +1117,7 @@ bool wxToolBar::Realize()
                 button.fsStyle = TBSTYLE_SEP;
                 break;
 
-            case wxTOOL_STYLE_BUTTON:
+            case wxToolBarToolStyle::Button:
                 if ( !HasFlag(wxTB_NOICONS) )
                     button.iBitmap = bitmapId;
 

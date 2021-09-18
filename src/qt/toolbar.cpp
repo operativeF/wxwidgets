@@ -287,7 +287,7 @@ bool wxToolBar::DoInsertTool(size_t pos, wxToolBarToolBase *toolBase)
     QAction *action;
     switch ( tool->GetStyle() )
     {
-        case wxTOOL_STYLE_BUTTON:
+        case wxToolBarToolStyle::Button:
             tool->m_qtToolButton = new wxQtToolButton(this, tool);
             tool->m_qtToolButton->setToolButtonStyle((Qt::ToolButtonStyle)GetButtonStyle());
             tool->SetLabel( tool->GetLabel() );
@@ -315,7 +315,7 @@ bool wxToolBar::DoInsertTool(size_t pos, wxToolBarToolBase *toolBase)
             }
             break;
 
-        case wxTOOL_STYLE_SEPARATOR:
+        case wxToolBarToolStyle::Separator:
             if (tool->IsStretchable()) {
                 QWidget* spacer = new QWidget();
                 spacer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
@@ -324,7 +324,7 @@ bool wxToolBar::DoInsertTool(size_t pos, wxToolBarToolBase *toolBase)
                 m_qtToolBar->insertSeparator(before);
             break;
 
-        case wxTOOL_STYLE_CONTROL:
+        case wxToolBarToolStyle::Control:
             wxWindow* control = tool->GetControl();
             m_qtToolBar->insertWidget(before, control->GetHandle());
             break;

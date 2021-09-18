@@ -33,11 +33,11 @@ class WXDLLIMPEXP_FWD_CORE wxToolBarBase;
 
 inline constexpr char wxToolBarNameStr[] = "toolbar";
 
-enum wxToolBarToolStyle
+enum class wxToolBarToolStyle
 {
-    wxTOOL_STYLE_BUTTON    = 1,
-    wxTOOL_STYLE_SEPARATOR = 2,
-    wxTOOL_STYLE_CONTROL
+    Button,
+    Separator,
+    Control
 };
 
 // ----------------------------------------------------------------------------
@@ -74,7 +74,7 @@ public:
           m_clientData(clientData),
           m_kind(kind)
     {
-        m_toolStyle = toolid == wxID_SEPARATOR ? wxTOOL_STYLE_SEPARATOR : wxTOOL_STYLE_BUTTON;
+        m_toolStyle = toolid == wxID_SEPARATOR ? wxToolBarToolStyle::Separator : wxToolBarToolStyle::Button;
         m_id = toolid == wxID_ANY ? wxWindow::NewControlId() : toolid;
     }
 
@@ -85,7 +85,7 @@ public:
         : m_label(label),
           m_control(control),
           m_tbar(tbar),
-          m_toolStyle(wxTOOL_STYLE_CONTROL),
+          m_toolStyle(wxToolBarToolStyle::Control),
           m_kind(wxITEM_MAX),
           m_id(control->GetId())
     {
@@ -112,11 +112,11 @@ public:
 
     // style/kind
     bool IsStretchable() const { return m_stretchable; }
-    bool IsButton() const { return m_toolStyle == wxTOOL_STYLE_BUTTON; }
-    bool IsControl() const { return m_toolStyle == wxTOOL_STYLE_CONTROL; }
-    bool IsSeparator() const { return m_toolStyle == wxTOOL_STYLE_SEPARATOR; }
+    bool IsButton() const { return m_toolStyle == wxToolBarToolStyle::Button; }
+    bool IsControl() const { return m_toolStyle == wxToolBarToolStyle::Control; }
+    bool IsSeparator() const { return m_toolStyle == wxToolBarToolStyle::Separator; }
     bool IsStretchableSpace() const { return IsSeparator() && IsStretchable(); }
-    int GetStyle() const { return m_toolStyle; }
+    wxToolBarToolStyle GetStyle() const { return m_toolStyle; }
     wxItemKind GetKind() const
     {
         wxASSERT_MSG( IsButton(), wxT("only makes sense for buttons") );
@@ -151,7 +151,7 @@ public:
 
     wxObject *GetClientData() const
     {
-        if ( m_toolStyle == wxTOOL_STYLE_CONTROL )
+        if ( m_toolStyle == wxToolBarToolStyle::Control )
         {
             return (wxObject*)m_control->GetClientData();
         }
@@ -177,7 +177,7 @@ public:
 
     void SetClientData(wxObject *clientData)
     {
-        if ( m_toolStyle == wxTOOL_STYLE_CONTROL )
+        if ( m_toolStyle == wxToolBarToolStyle::Control )
         {
             m_control->SetClientData(clientData);
         }

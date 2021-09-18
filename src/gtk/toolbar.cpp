@@ -549,7 +549,7 @@ bool wxToolBar::DoInsertTool(size_t pos, wxToolBarToolBase *toolBase)
     GtkWidget* bin_child;
     switch ( tool->GetStyle() )
     {
-        case wxTOOL_STYLE_BUTTON:
+        case wxToolBarToolStyle::Button:
             switch (tool->GetKind())
             {
                 case wxITEM_CHECK:
@@ -628,7 +628,7 @@ bool wxToolBar::DoInsertTool(size_t pos, wxToolBarToolBase *toolBase)
             gtk_toolbar_insert(m_toolbar, tool->m_item, int(pos));
             break;
 
-        case wxTOOL_STYLE_SEPARATOR:
+        case wxToolBarToolStyle::Separator:
             tool->m_item = gtk_separator_tool_item_new();
             if ( tool->IsStretchable() )
             {
@@ -642,7 +642,7 @@ bool wxToolBar::DoInsertTool(size_t pos, wxToolBarToolBase *toolBase)
             gtk_toolbar_insert(m_toolbar, tool->m_item, int(pos));
             break;
 
-        case wxTOOL_STYLE_CONTROL:
+        case wxToolBarToolStyle::Control:
             wxWindow* control = tool->GetControl();
             if (gtk_widget_get_parent(control->m_widget) == NULL)
                 AddChildGTK(control);
@@ -672,7 +672,7 @@ bool wxToolBar::DoDeleteTool(size_t /* pos */, wxToolBarToolBase* toolBase)
 {
     wxToolBarTool* tool = static_cast<wxToolBarTool*>(toolBase);
 
-    if (tool->GetStyle() == wxTOOL_STYLE_CONTROL)
+    if (tool->GetStyle() == wxToolBarToolStyle::Control)
     {
         // don't destroy the control here as we can be called from
         // RemoveTool() and then we need to keep the control alive;

@@ -1726,7 +1726,7 @@ void wxWin32Renderer::DrawToolBarButton(wxDC& dc,
                                         long style,
                                         int tbarStyle)
 {
-    if (style == wxTOOL_STYLE_BUTTON)
+    if (style == wxToolBarToolStyle::Button)
     {
         wxRect rect = rectOrig;
         rect.Deflate(BORDER_THICKNESS);
@@ -1758,7 +1758,7 @@ void wxWin32Renderer::DrawToolBarButton(wxDC& dc,
             dc.DrawBitmap(bitmap, xpoint, ypoint, bitmap.GetMask() != NULL);
         }
     }
-    else if (style == wxTOOL_STYLE_SEPARATOR)
+    else if (style == wxToolBarToolStyle::Separator)
     {
         // leave a small gap aroudn the line, also account for the toolbar
         // border itself
@@ -1777,7 +1777,7 @@ void wxWin32Renderer::DrawToolBarButton(wxDC& dc,
                          rectOrig.GetRight() - BORDER_THICKNESS);
         }
     }
-    // don't draw wxTOOL_STYLE_CONTROL
+    // don't draw wxToolBarToolStyle::Control
 }
 #endif // wxUSE_TOOLBAR
 
