@@ -3,131 +3,85 @@
 
 #include <concepts>
 
-namespace wx::type
+template<typename Enum>
+concept BitfieldCompatible =  requires
 {
-
-template<unsigned int N, typename C>
-struct Flag : C
-{
-    using base = C;
-    static constexpr unsigned int value = N;
+    requires(std::is_enum_v<Enum>);
+    requires(std::unsigned_integral<std::underlying_type_t<Enum>>);
+    {Enum::_max_size};
 };
 
-namespace detail
-{
+template<typename Enum, typename Tag> requires(BitfieldCompatible<Enum>)
+class Bitfield;
 
-template<typename... Flags>
-struct BitFlagsImpl : Flags... {};
+template<typename Enum>
+using InclBitfield = Bitfield<Enum, struct InclType>;
 
-} // namespace detail
+template<typename Enum>
+using MaskBitfield = Bitfield<Enum, struct MaskType>;
 
-template<typename BF, typename... Flags>
-concept SameBase = requires
-{
-    requires(std::derived_from<BF, Flags> && ...);
-};
-
-template<typename... Flags>
-class InclBitflags
+template<typename Enum, typename Tag> requires(BitfieldCompatible<Enum>)
+class Bitfield
 {
 public:
-    using BF = detail::BitFlagsImpl<Flags...>;
+    // TODO: Specialize based on the number of bits.
+    using value_type = std::underlying_type_t<Enum>;
 
-    constexpr InclBitflags() noexcept {}
-
-    constexpr InclBitflags(auto... flags) noexcept requires(SameBase<BF, decltype(flags)...>)
+    explicit constexpr Bitfield(value_type bits) : m_fields{bits}
     {
-        SetFlags(flags...);
     }
 
-    constexpr void SetFlag(auto flag) noexcept requires(SameBase<BF, decltype(flag)>)
+    explicit constexpr Bitfield(const Enum& e)
     {
-        m_flags |= decltype(flag)::value;
+        set(e);
     }
 
-    constexpr void SetFlags(auto... flags) noexcept requires(SameBase<BF, decltype(flags)...>)
+    static constexpr value_type bitmask(const Enum& e) noexcept
     {
-        m_flags |= (decltype(flags)::value | ...);
+        return value_type{1} << static_cast<std::size_t>(e);
     }
 
-    constexpr void ClearFlag(auto flag) noexcept requires(SameBase<BF, decltype(flag)>)
+    constexpr auto clear() noexcept
     {
-        m_flags &= ~decltype(flag)::value;
+        m_fields = value_type{0};
     }
 
-    constexpr void ClearFlags(auto... flags) noexcept requires(SameBase<BF, decltype(flags)...>)
+    constexpr void set(const Enum& e) noexcept
     {
-        m_flags &= ~(decltype(flags)::value | ...);
+        m_fields |= bitmask(e);
     }
 
-    constexpr void Reset() noexcept
+    constexpr void reset(const Enum& e) noexcept
     {
-        m_flags = 0;
+        m_fields &= ~bitmask(e);
     }
 
-    constexpr auto GetFlags() const noexcept
+    constexpr void toggle(const Enum& e) noexcept
     {
-        return m_flags;
+        m_fields ^= bitmask(e);
     }
 
-    constexpr bool IsFlagSet(auto flag) const noexcept requires(SameBase<BF, decltype(flag)>)
+    constexpr void set_all() noexcept
     {
-        return m_flags & decltype(flag)::value;
+        m_fields = (value_type{1} << static_cast<value_type>(Enum::_max_size)) - value_type{1};
     }
 
-    constexpr auto operator|=(auto flag) noexcept requires(SameBase<BF, decltype(flag)>)
+    constexpr auto operator|=(const Enum& e) noexcept
     {
-        m_flags |= decltype(flag)::value;
-        return this;
+        m_fields |= static_cast<std::size_t>(e);
     }
+
+    constexpr auto operator&=(const Enum& e) noexcept
+    {
+        m_fields &= static_cast<std::size_t>(e);
+    }
+
+    auto operator<=>(const Bitfield&) const noexcept = default;
 
 private:
-    unsigned int m_flags{};
-};
-
-template<typename... Flags>
-class ExclBitflags
-{
-public:
-    using BF = detail::BitFlagsImpl<Flags...>;
-
-    constexpr ExclBitflags() {}
-
-    constexpr ExclBitflags(auto flag) noexcept requires(SameBase<BF, decltype(flag)>)
-    {
-        SetFlag(flag);
-    }
-
-    constexpr void SetFlag(auto flag) noexcept requires(SameBase<BF, decltype(flag)>)
-    {
-        m_flag = decltype(flag)::value;
-    }
-
-    constexpr void Reset() noexcept
-    {
-        m_flag = 0;
-    }
-
-    constexpr auto GetFlag() const noexcept
-    {
-        return m_flag;
-    }
-
-    constexpr auto GetFlagAsType() const noexcept
-    {
-        return Flag<m_flag>{};
-    }
-
-    constexpr bool IsFlagSet(auto flag) const noexcept requires(SameBase<BF, decltype(flag)>)
-    {
-        return m_flag & decltype(flag)::value;
-    }
-
-private:
-    unsigned int m_flag{};
+    value_type m_fields;
 };
 
 
-} // namespace wx::type
 
 #endif // _BITFLAGS_H_
