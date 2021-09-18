@@ -65,19 +65,19 @@ enum
 // this is a combination of the bit masks defined above
 using wxSocketEventFlags = int;
 
-enum wxSocketError
+enum class wxSocketError
 {
-    wxSOCKET_NOERROR = 0,
-    wxSOCKET_INVOP,
-    wxSOCKET_IOERR,
-    wxSOCKET_INVADDR,
-    wxSOCKET_INVSOCK,
-    wxSOCKET_NOHOST,
-    wxSOCKET_INVPORT,
-    wxSOCKET_WOULDBLOCK,
-    wxSOCKET_TIMEDOUT,
-    wxSOCKET_MEMERR,
-    wxSOCKET_OPTERR
+    None,
+    InvOp,
+    IOErr,
+    InvAddr,
+    InvSock,
+    NoHost,
+    InvPort,
+    WouldBlock,
+    Timeout,
+    MemErr,
+    OptErr
 };
 
 // socket options/flags bit masks
@@ -138,7 +138,7 @@ public:
 
     // state
     bool IsOk() const { return m_impl != nullptr; }
-    bool Error() const { return LastError() != wxSOCKET_NOERROR; }
+    bool Error() const { return LastError() != wxSocketError::None; }
     bool IsClosed() const { return m_closed; }
     bool IsConnected() const { return m_connected; }
     bool IsData() { return WaitForRead(0, 0); }

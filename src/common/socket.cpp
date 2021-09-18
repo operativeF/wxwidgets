@@ -323,13 +323,13 @@ bool wxSocketImpl::PreCreateCheck(const wxSockAddressImpl& addr)
 {
     if ( m_fd != INVALID_SOCKET )
     {
-        m_error = wxSOCKET_INVSOCK;
+        m_error = wxSocketError::InvSock;
         return false;
     }
 
     if ( !addr.IsOk() )
     {
-        m_error = wxSOCKET_INVADDR;
+        m_error = wxSocketError::InvAddr;
         return false;
     }
 
@@ -377,11 +377,11 @@ wxSocketError wxSocketImpl::UpdateLocalAddress()
     if ( getsockname(m_fd, m_local.GetWritableAddr(), &lenAddr) != 0 )
     {
         Close();
-        m_error = wxSOCKET_IOERR;
+        m_error = wxSocketError::IOErr;
         return m_error;
     }
 
-    return wxSOCKET_NOERROR;
+    return wxSocketError::None;
 }
 
 wxSocketError wxSocketImpl::CreateServer()
@@ -397,8 +397,8 @@ wxSocketError wxSocketImpl::CreateServer()
 
     if ( m_fd == INVALID_SOCKET )
     {
-        m_error = wxSOCKET_IOERR;
-        return wxSOCKET_IOERR;
+        m_error = wxSocketError::IOErr;
+        return wxSocketError::IOErr;
     }
 
     PostCreation();
@@ -407,12 +407,12 @@ wxSocketError wxSocketImpl::CreateServer()
     //
     // FIXME: should we test for m_dobind here?
     if ( bind(m_fd, m_local.GetAddr(), m_local.GetLen()) != 0 )
-        m_error = wxSOCKET_IOERR;
+        m_error = wxSocketError::IOErr;
 
     if ( IsOk() )
     {
         if ( listen(m_fd, 5) != 0 )
-            m_error = wxSOCKET_IOERR;
+            m_error = wxSocketError::IOErr;
     }
 
     if ( !IsOk() )
@@ -434,8 +434,8 @@ wxSocketError wxSocketImpl::CreateClient(bool wait)
 
     if ( m_fd == INVALID_SOCKET )
     {
-        m_error = wxSOCKET_IOERR;
-        return wxSOCKET_IOERR;
+        m_error = wxSocketError::IOErr;
+        return wxSocketError::IOErr;
     }
 
     PostCreation();
@@ -446,7 +446,7 @@ wxSocketError wxSocketImpl::CreateClient(bool wait)
         if ( bind(m_fd, m_local.GetAddr(), m_local.GetLen()) != 0 )
         {
             Close();
-            m_error = wxSOCKET_IOERR;
+            m_error = wxSocketError::IOErr;
             return m_error;
         }
     }
@@ -456,17 +456,17 @@ wxSocketError wxSocketImpl::CreateClient(bool wait)
     if ( rc == SOCKET_ERROR )
     {
         wxSocketError err = GetLastError();
-        if ( err == wxSOCKET_WOULDBLOCK )
+        if ( err == wxSocketError::WouldBlock )
         {
             m_establishing = true;
 
             // block waiting for connection if we should (otherwise just return
-            // wxSOCKET_WOULDBLOCK to the caller)
+            // wxSocketError::WouldBlock to the caller)
             if ( wait )
             {
                 err = SelectWithTimeout(wxSOCKET_CONNECTION_FLAG)
-                        ? wxSOCKET_NOERROR
-                        : wxSOCKET_TIMEDOUT;
+                        ? wxSocketError::None
+                        : wxSocketError::Timeout;
                 m_establishing = false;
             }
         }
@@ -475,7 +475,7 @@ wxSocketError wxSocketImpl::CreateClient(bool wait)
     }
     else // connected
     {
-        m_error = wxSOCKET_NOERROR;
+        m_error = wxSocketError::None;
     }
 
     return m_error;
@@ -494,8 +494,8 @@ wxSocketError wxSocketImpl::CreateUDP()
 
     if ( m_fd == INVALID_SOCKET )
     {
-        m_error = wxSOCKET_IOERR;
-        return wxSOCKET_IOERR;
+        m_error = wxSocketError::IOErr;
+        return wxSocketError::IOErr;
     }
 
     PostCreation();
@@ -505,14 +505,14 @@ wxSocketError wxSocketImpl::CreateUDP()
         if ( bind(m_fd, m_local.GetAddr(), m_local.GetLen()) != 0 )
         {
             Close();
-            m_error = wxSOCKET_IOERR;
+            m_error = wxSocketError::IOErr;
             return m_error;
         }
 
         return UpdateLocalAddress();
     }
 
-    return wxSOCKET_NOERROR;
+    return wxSocketError::None;
 }
 
 std::unique_ptr<wxSocketImpl> wxSocketImpl::Accept(wxSocketBase& wxsocket)
@@ -587,32 +587,32 @@ wxSocketError wxSocketImpl::SetLocal(const wxSockAddressImpl& local)
     /* the socket must be initialized, or it must be a server */
     if (m_fd != INVALID_SOCKET && !m_server)
     {
-        m_error = wxSOCKET_INVSOCK;
-        return wxSOCKET_INVSOCK;
+        m_error = wxSocketError::InvSock;
+        return wxSocketError::InvSock;
     }
 
     if ( !local.IsOk() )
     {
-        m_error = wxSOCKET_INVADDR;
-        return wxSOCKET_INVADDR;
+        m_error = wxSocketError::InvAddr;
+        return wxSocketError::InvAddr;
     }
 
     m_local = local;
 
-    return wxSOCKET_NOERROR;
+    return wxSocketError::None;
 }
 
 wxSocketError wxSocketImpl::SetPeer(const wxSockAddressImpl& peer)
 {
     if ( !peer.IsOk() )
     {
-        m_error = wxSOCKET_INVADDR;
-        return wxSOCKET_INVADDR;
+        m_error = wxSocketError::InvAddr;
+        return wxSocketError::InvAddr;
     }
 
     m_peer = peer;
 
-    return wxSOCKET_NOERROR;
+    return wxSocketError::None;
 }
 
 const wxSockAddressImpl& wxSocketImpl::GetLocal()
@@ -697,7 +697,7 @@ int wxSocketImpl::SendDgram(const void *buffer, int size)
 {
     if ( !m_peer.IsOk() )
     {
-        m_error = wxSOCKET_INVADDR;
+        m_error = wxSocketError::InvAddr;
         return -1;
     }
 
@@ -713,14 +713,14 @@ int wxSocketImpl::Read(void *buffer, int size)
     // server sockets can't be used for IO, only to accept new connections
     if ( m_fd == INVALID_SOCKET || m_server )
     {
-        m_error = wxSOCKET_INVSOCK;
+        m_error = wxSocketError::InvSock;
         return -1;
     }
 
     int ret = m_stream ? RecvStream(buffer, size)
                        : RecvDgram(buffer, size);
 
-    m_error = ret == SOCKET_ERROR ? GetLastError() : wxSOCKET_NOERROR;
+    m_error = ret == SOCKET_ERROR ? GetLastError() : wxSocketError::None;
 
     return ret;
 }
@@ -729,14 +729,14 @@ int wxSocketImpl::Write(const void *buffer, int size)
 {
     if ( m_fd == INVALID_SOCKET || m_server )
     {
-        m_error = wxSOCKET_INVSOCK;
+        m_error = wxSocketError::InvSock;
         return -1;
     }
 
     int ret = m_stream ? SendStream(buffer, size)
                        : SendDgram(buffer, size);
 
-    m_error = ret == SOCKET_ERROR ? GetLastError() : wxSOCKET_NOERROR;
+    m_error = ret == SOCKET_ERROR ? GetLastError() : wxSocketError::None;
 
     return ret;
 }
@@ -982,13 +982,13 @@ std::uint32_t wxSocketBase::DoRead(void* buffer_, std::uint32_t nbytes)
                             : 0;
         if ( ret == -1 )
         {
-            if ( m_impl->GetLastError() == wxSOCKET_WOULDBLOCK )
+            if ( m_impl->GetLastError() == wxSocketError::WouldBlock )
             {
                 // if we don't want to wait, just return immediately
                 if ( m_flags & wxSOCKET_NOWAIT_READ )
                 {
                     // this shouldn't be counted as an error in this case
-                    SetError(wxSOCKET_NOERROR);
+                    SetError(wxSocketError::None);
                     break;
                 }
 
@@ -997,7 +997,7 @@ std::uint32_t wxSocketBase::DoRead(void* buffer_, std::uint32_t nbytes)
                 if ( !DoWaitWithTimeout(wxSOCKET_INPUT_FLAG) )
                 {
                     // and exit if the timeout elapsed before it did
-                    SetError(wxSOCKET_TIMEDOUT);
+                    SetError(wxSocketError::Timeout);
                     break;
                 }
 
@@ -1006,7 +1006,7 @@ std::uint32_t wxSocketBase::DoRead(void* buffer_, std::uint32_t nbytes)
             }
             else // "real" error
             {
-                SetError(wxSOCKET_IOERR);
+                SetError(wxSocketError::IOErr);
                 break;
             }
         }
@@ -1022,7 +1022,7 @@ std::uint32_t wxSocketBase::DoRead(void* buffer_, std::uint32_t nbytes)
             // anything (or not everything in wxSOCKET_WAITALL case) already,
             // signal an error
             if ( (m_flags & wxSOCKET_WAITALL_READ) || !total )
-                SetError(wxSOCKET_IOERR);
+                SetError(wxSocketError::IOErr);
             break;
         }
 
@@ -1111,7 +1111,7 @@ wxSocketBase& wxSocketBase::ReadMsg(void* buffer, std::uint32_t nbytes)
     }
 
     if ( !ok )
-        SetError(wxSOCKET_IOERR);
+        SetError(wxSocketError::IOErr);
 
     return *this;
 }
@@ -1156,21 +1156,21 @@ std::uint32_t wxSocketBase::DoWrite(const void *buffer_, std::uint32_t nbytes)
         if ( m_impl->m_stream && !m_connected )
         {
             if ( (m_flags & wxSOCKET_WAITALL_WRITE) || !total )
-                SetError(wxSOCKET_IOERR);
+                SetError(wxSocketError::IOErr);
             break;
         }
 
         const int ret = m_impl->Write(buffer, nbytes);
         if ( ret == -1 )
         {
-            if ( m_impl->GetLastError() == wxSOCKET_WOULDBLOCK )
+            if ( m_impl->GetLastError() == wxSocketError::WouldBlock )
             {
                 if ( m_flags & wxSOCKET_NOWAIT_WRITE )
                     break;
 
                 if ( !DoWaitWithTimeout(wxSOCKET_OUTPUT_FLAG) )
                 {
-                    SetError(wxSOCKET_TIMEDOUT);
+                    SetError(wxSocketError::Timeout);
                     break;
                 }
 
@@ -1178,7 +1178,7 @@ std::uint32_t wxSocketBase::DoWrite(const void *buffer_, std::uint32_t nbytes)
             }
             else // "real" error
             {
-                SetError(wxSOCKET_IOERR);
+                SetError(wxSocketError::IOErr);
                 break;
             }
         }
@@ -1239,7 +1239,7 @@ wxSocketBase& wxSocketBase::WriteMsg(const void *buffer, std::uint32_t nbytes)
     }
 
     if ( !ok )
-        SetError(wxSOCKET_IOERR);
+        SetError(wxSocketError::IOErr);
 
     return *this;
 }
@@ -1249,7 +1249,7 @@ wxSocketBase& wxSocketBase::Unread(const void *buffer, std::uint32_t nbytes)
     if (nbytes != 0)
         Pushback(buffer, nbytes);
 
-    SetError(wxSOCKET_NOERROR);
+    SetError(wxSocketError::None);
     m_lcount = nbytes;
 
     return *this;
@@ -1274,7 +1274,7 @@ wxSocketBase& wxSocketBase::Discard()
 
     delete[] buffer;
     m_lcount = total;
-    SetError(wxSOCKET_NOERROR);
+    SetError(wxSocketError::None);
 
     return *this;
 }
@@ -1694,9 +1694,9 @@ void wxSocketBase::OnRequest(wxSocketNotify notification)
             m_connected = true;
             m_establishing = false;
 
-            // error was previously set to wxSOCKET_WOULDBLOCK, but this is not
+            // error was previously set to wxSocketError::WouldBlock, but this is not
             // the case any longer
-            SetError(wxSOCKET_NOERROR);
+            SetError(wxSocketError::None);
             break;
 
         case wxSOCKET_LOST:
@@ -1841,7 +1841,7 @@ wxSocketServer::wxSocketServer(const wxSockAddress& addr,
         m_impl->DontDoBind();
     }
 
-    if (m_impl->CreateServer() != wxSOCKET_NOERROR)
+    if (m_impl->CreateServer() != wxSocketError::None)
     {
         m_impl.reset();
 
@@ -1866,7 +1866,7 @@ bool wxSocketServer::AcceptWith(wxSocketBase& sock, bool wait)
     {
         wxFAIL_MSG( "can only be called for a valid server socket" );
 
-        SetError(wxSOCKET_INVSOCK);
+        SetError(wxSocketError::InvSock);
 
         return false;
     }
@@ -1876,7 +1876,7 @@ bool wxSocketServer::AcceptWith(wxSocketBase& sock, bool wait)
         // wait until we get a connection
         if ( !m_impl->SelectWithTimeout(wxSOCKET_INPUT_FLAG) )
         {
-            SetError(wxSOCKET_TIMEDOUT);
+            SetError(wxSocketError::Timeout);
 
             return false;
         }
@@ -2025,9 +2025,9 @@ bool wxSocketClient::DoConnect(const wxSockAddress& remote,
     // Finally do create the socket and connect to the peer
     const wxSocketError err = m_impl->CreateClient(wait);
 
-    if ( err != wxSOCKET_NOERROR )
+    if ( err != wxSocketError::None )
     {
-        if ( err == wxSOCKET_WOULDBLOCK )
+        if ( err == wxSocketError::WouldBlock )
         {
             wxASSERT_MSG( !wait, "shouldn't get this for blocking connect" );
 
@@ -2102,7 +2102,7 @@ wxDatagramSocket::wxDatagramSocket( const wxSockAddress& addr,
         m_impl->DontDoBind();
     }
 
-    if ( m_impl->CreateUDP() != wxSOCKET_NOERROR )
+    if ( m_impl->CreateUDP() != wxSocketError::None )
     {
         m_impl.reset();
         return;

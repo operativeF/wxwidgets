@@ -76,6 +76,11 @@ public:
         m_fields &= static_cast<std::size_t>(e);
     }
 
+    constexpr auto as_value() const noexcept
+    {
+        return m_fields;
+    }
+
     auto operator<=>(const Bitfield&) const noexcept = default;
 
 private:

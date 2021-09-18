@@ -296,16 +296,16 @@ wxSocketError wxSocketImplMSW::GetLastError() const
     switch ( WSAGetLastError() )
     {
         case 0:
-            return wxSOCKET_NOERROR;
+            return wxSocketError::None;
 
         case WSAENOTSOCK:
-            return wxSOCKET_INVSOCK;
+            return wxSocketError::InvSock;
 
         case WSAEWOULDBLOCK:
-            return wxSOCKET_WOULDBLOCK;
+            return wxSocketError::WouldBlock;
 
         default:
-            return wxSOCKET_IOERR;
+            return wxSocketError::IOErr;
     }
 }
 

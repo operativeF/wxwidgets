@@ -186,7 +186,7 @@ void SocketTestCase::ReadNormal()
     char bufSmall[128];
     sock->Read(bufSmall, WXSIZEOF(bufSmall));
 
-    CHECK_EQ( wxSOCKET_NOERROR, sock->LastError() );
+    CHECK_EQ( wxSocketError::None, sock->LastError() );
     CHECK_EQ( WXSIZEOF(bufSmall), (size_t)sock->LastCount() );
     CHECK_EQ( WXSIZEOF(bufSmall), (size_t)sock->LastReadCount() );
 
@@ -194,7 +194,7 @@ void SocketTestCase::ReadNormal()
     char bufBig[102400];
     sock->Read(bufBig, WXSIZEOF(bufBig));
 
-    CHECK_EQ( wxSOCKET_NOERROR, sock->LastError() );
+    CHECK_EQ( wxSocketError::None, sock->LastError() );
     CHECK( WXSIZEOF(bufBig) >= sock->LastCount() );
     CHECK( WXSIZEOF(bufBig) >= sock->LastReadCount() );
 }
@@ -208,7 +208,7 @@ void SocketTestCase::ReadBlock()
     char bufSmall[128];
     sock->Read(bufSmall, WXSIZEOF(bufSmall));
 
-    CHECK_EQ( wxSOCKET_NOERROR, sock->LastError() );
+    CHECK_EQ( wxSocketError::None, sock->LastError() );
     CHECK_EQ( WXSIZEOF(bufSmall), (size_t)sock->LastCount() );
     CHECK_EQ( WXSIZEOF(bufSmall), (size_t)sock->LastReadCount() );
 
@@ -216,7 +216,7 @@ void SocketTestCase::ReadBlock()
     char bufBig[102400];
     sock->Read(bufBig, WXSIZEOF(bufBig));
 
-    CHECK_EQ( wxSOCKET_NOERROR, sock->LastError() );
+    CHECK_EQ( wxSocketError::None, sock->LastError() );
     CHECK( WXSIZEOF(bufBig) >= sock->LastCount() );
     CHECK( WXSIZEOF(bufBig) >= sock->LastReadCount() );
 }
@@ -229,9 +229,9 @@ void SocketTestCase::ReadNowait()
 
     char buf[1024];
     sock->Read(buf, WXSIZEOF(buf));
-    if ( sock->LastError() != wxSOCKET_WOULDBLOCK )
+    if ( sock->LastError() != wxSocketError::WouldBlock )
     {
-        CHECK_EQ( wxSOCKET_NOERROR, sock->LastError() );
+        CHECK_EQ( wxSocketError::None, sock->LastError() );
     }
 }
 
@@ -246,7 +246,7 @@ void SocketTestCase::ReadWaitall()
     char buf[128];
     sock->Read(buf, WXSIZEOF(buf));
 
-    CHECK_EQ( wxSOCKET_NOERROR, sock->LastError() );
+    CHECK_EQ( wxSocketError::None, sock->LastError() );
     CHECK_EQ( WXSIZEOF(buf), (size_t)sock->LastCount() );
     CHECK_EQ( WXSIZEOF(buf), (size_t)sock->LastReadCount() );
 }
@@ -270,7 +270,7 @@ void SocketTestCase::ReadAnotherThread()
             char bufSmall[128];
             sock->Read(bufSmall, WXSIZEOF(bufSmall));
 
-            REQUIRE( sock->LastError() == wxSOCKET_NOERROR );
+            REQUIRE( sock->LastError() == wxSocketError::None );
             CHECK( sock->LastCount() == WXSIZEOF(bufSmall) );
             CHECK( sock->LastReadCount() == WXSIZEOF(bufSmall) );
 

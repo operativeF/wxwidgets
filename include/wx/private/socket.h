@@ -199,7 +199,7 @@ public:
     const wxSockAddressImpl& GetPeer() const { return m_peer; }
 
     wxSocketError GetError() const { return m_error; }
-    bool IsOk() const { return m_error == wxSOCKET_NOERROR; }
+    bool IsOk() const { return m_error == wxSocketError::None; }
 
     // get the error code corresponding to the last operation
     virtual wxSocketError GetLastError() const = 0;
@@ -211,12 +211,12 @@ public:
     // notice that SetLocal() must be called before creating the socket using
     // any of the functions below
     //
-    // all of Create() functions return wxSOCKET_NOERROR if the operation
+    // all of Create() functions return wxSocketError::None if the operation
     // completed successfully or one of:
-    //  wxSOCKET_INVSOCK - the socket is in use.
-    //  wxSOCKET_INVADDR - the local (server) or peer (client) address has not
+    //  wxSocketError::InvSock - the socket is in use.
+    //  wxSocketError::InvAddr - the local (server) or peer (client) address has not
     //                     been set.
-    //  wxSOCKET_IOERR   - any other error.
+    //  wxSocketError::IOErr   - any other error.
 
     // create a socket listening on the local address specified by SetLocal()
     // (notice that DontDoBind() is ignored by this function)
@@ -225,7 +225,7 @@ public:
     // create a socket connected to the peer address specified by SetPeer()
     // (notice that DontDoBind() is ignored by this function)
     //
-    // this function may return wxSOCKET_WOULDBLOCK in addition to the return
+    // this function may return wxSocketError::WouldBlock in addition to the return
     // values listed above if wait is false
     wxSocketError CreateClient(bool wait);
 
@@ -303,7 +303,7 @@ public:
 
     wxSockAddressImpl m_local,
                       m_peer;
-    wxSocketError m_error{wxSOCKET_NOERROR};
+    wxSocketError m_error{wxSocketError::None};
 
     bool m_stream{true};
     bool m_establishing{false};
