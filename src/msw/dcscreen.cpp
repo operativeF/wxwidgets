@@ -15,6 +15,7 @@
     #include "wx/msw/private.h"
 #endif
 
+#include "wx/dcscreen.h"
 #include "wx/msw/dcscreen.h"
 #include "wx/window.h"
 

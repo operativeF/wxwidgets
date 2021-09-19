@@ -12,8 +12,6 @@
 #ifndef _WX_MSW_MDI_H_
 #define _WX_MSW_MDI_H_
 
-#include "wx/frame.h"
-
 #include <memory>
 #include <string>
 

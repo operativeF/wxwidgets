@@ -10,8 +10,9 @@
 #ifndef _WX_MSW_CUSTOMBGWIN_H_
 #define _WX_MSW_CUSTOMBGWIN_H_
 
-#include "wx/bitmap.h"
 #include "wx/brush.h"
+
+class WXDLLIMPEXP_FWD_CORE wxBitmap;
 
 template <class W>
 class wxCustomBackgroundWindow : public W,

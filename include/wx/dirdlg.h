@@ -19,6 +19,7 @@
 #include "wx/dialog.h"
 
 #include <string>
+#include <vector>
 
 // ----------------------------------------------------------------------------
 // constants

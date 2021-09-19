@@ -11,11 +11,11 @@
 #ifndef _WX_STATBMP_H_
 #define _WX_STATBMP_H_
 
-#include "wx/control.h"
-#include "wx/icon.h"
 #include "wx/bitmap.h"
 
 #include <string>
+
+class WXDLLIMPEXP_FWD_CORE wxIcon;
 
 // a control showing an icon or a bitmap
 class WXDLLIMPEXP_CORE wxStaticBitmap : public wxStaticBitmapBase

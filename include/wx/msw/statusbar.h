@@ -14,9 +14,9 @@
 #if wxUSE_NATIVE_STATUSBAR
 
 #include <vector>
-#include "wx/tooltip.h"
 
 class WXDLLIMPEXP_FWD_CORE wxClientDC;
+class WXDLLIMPEXP_FWD_CORE wxToolTip;
 
 class WXDLLIMPEXP_CORE wxStatusBar : public wxStatusBarBase
 {

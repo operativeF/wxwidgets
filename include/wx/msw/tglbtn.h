@@ -12,9 +12,9 @@
 #ifndef _WX_TOGGLEBUTTON_H_
 #define _WX_TOGGLEBUTTON_H_
 
-#include "wx/bitmap.h"
-
 #include <string>
+
+class WXDLLIMPEXP_FWD_CORE wxBitmap;
 
 // Checkbox item (single checkbox)
 class WXDLLIMPEXP_CORE wxToggleButton : public wxToggleButtonBase

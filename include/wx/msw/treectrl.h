@@ -17,7 +17,6 @@
 
 #if wxUSE_TREECTRL
 
-#include "wx/textctrl.h"
 #include "wx/dynarray.h"
 #include "wx/treebase.h"
 #include "wx/hashmap.h"
@@ -34,6 +33,8 @@
 class  WXDLLIMPEXP_FWD_CORE wxImageList;
 class  WXDLLIMPEXP_FWD_CORE wxDragImage;
 struct WXDLLIMPEXP_FWD_CORE wxTreeViewItem;
+class WXDLLIMPEXP_FWD_CORE wxTextCtrl;
+
 
 // hash storing attributes for our items
 class wxItemAttr;

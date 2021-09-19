@@ -25,15 +25,12 @@
 #include "wx/dynarray.h"
 #include "wx/thread.h"
 #include "wx/tracker.h"
-#include "wx/typeinfo.h"
 #include "wx/any.h"
-
-#include "wx/meta/convertible.h"
-#include "wx/meta/removeref.h"
 
 #include <bit>
 #include <cstdint>
 #include <string>
+#include <type_traits>
 #include <vector>
 
 
@@ -47,6 +44,7 @@
 class WXDLLIMPEXP_FWD_BASE wxList;
 class WXDLLIMPEXP_FWD_BASE wxEvent;
 class WXDLLIMPEXP_FWD_BASE wxEventFilter;
+
 #if wxUSE_GUI
     class WXDLLIMPEXP_FWD_CORE wxDC;
     class WXDLLIMPEXP_FWD_CORE wxMenu;
@@ -270,7 +268,7 @@ public:
 
     bool IsMatching(const wxEventFunctor& functor) const override
     {
-        if ( wxTypeId(functor) == wxTypeId(*this) )
+        if ( typeid(functor) == typeid(*this) )
         {
             const wxObjectEventFunctor &other =
                 static_cast< const wxObjectEventFunctor & >( functor );
@@ -399,7 +397,7 @@ class wxEventFunctorMethod
               <
                 Class,
                 EventArg,
-                wxIsPubliclyDerived<Class, wxEvtHandler>::value != 0
+                std::is_base_of_v<Class, wxEvtHandler> != false
               >
 {
 private:
@@ -442,7 +440,7 @@ public:
 
     bool IsMatching(const wxEventFunctor& functor) const override
     {
-        if ( wxTypeId(functor) != wxTypeId(*this) )
+        if ( typeid(functor) != typeid(*this) )
             return false;
 
         using ThisFunctor = wxEventFunctorMethod<EventTag, Class, EventArg, EventHandler>;
@@ -506,7 +504,7 @@ public:
 
     bool IsMatching(const wxEventFunctor &functor) const override
     {
-        if ( wxTypeId(functor) != wxTypeId(*this) )
+        if ( typeid(functor) != typeid(*this) )
             return false;
 
         typedef wxEventFunctorFunction<EventTag, EventArg> ThisFunctor;
@@ -551,7 +549,7 @@ public:
 
     bool IsMatching(const wxEventFunctor &functor) const override
     {
-        if ( wxTypeId(functor) != wxTypeId(*this) )
+        if ( typeid(functor) != typeid(*this) )
             return false;
 
         typedef wxEventFunctorFunctor<EventTag, Functor> FunctorThis;
@@ -1439,7 +1437,7 @@ class wxAsyncMethodCallEvent1 : public wxAsyncMethodCallEvent
 public:
     using ObjectType = T;
     typedef void (ObjectType::*MethodType)(T1 x1);
-    typedef typename wxRemoveRef<T1>::type ParamType1;
+    using ParamType1 = std::remove_reference_t<T1>;
 
     wxAsyncMethodCallEvent1(ObjectType* object,
                             MethodType method,
@@ -1482,8 +1480,8 @@ class wxAsyncMethodCallEvent2 : public wxAsyncMethodCallEvent
 public:
     using ObjectType = T;
     typedef void (ObjectType::*MethodType)(T1 x1, T2 x2);
-    typedef typename wxRemoveRef<T1>::type ParamType1;
-    typedef typename wxRemoveRef<T2>::type ParamType2;
+    using ParamType1 = std::remove_reference_t<T1>;
+    using ParamType2 = std::remove_reference_t<T1>;
 
     wxAsyncMethodCallEvent2(ObjectType* object,
                             MethodType method,

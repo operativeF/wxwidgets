@@ -13,9 +13,6 @@
 
 #if wxUSE_SPINBTN
 
-#include "wx/control.h"
-#include "wx/event.h"
-
 #include <string>
 
 class WXDLLIMPEXP_CORE wxSpinButton : public wxSpinButtonBase

@@ -23,6 +23,7 @@
 #include "wx/log.h"
 #include "wx/app.h"
 #include "wx/bitmap.h"
+#include "wx/icon.h"
 #include "wx/stringutils.h"
 
 #if wxUSE_PNG_RESOURCE_HANDLER

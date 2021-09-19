@@ -48,7 +48,7 @@ enum wxSystemFont
 //
 // NB: wxMSW assumes that they have the same values as the parameters of
 //     Windows GetSysColor() API, don't change the values!
-enum wxSystemColour
+enum wxSystemColour : unsigned int
 {
     wxSYS_COLOUR_SCROLLBAR,
     wxSYS_COLOUR_DESKTOP,
@@ -100,7 +100,7 @@ enum wxSystemColour
 //
 // NB: update the conversion table in msw/settings.cpp if you change the values
 //     of the elements of this enum
-enum wxSystemMetric
+enum wxSystemMetric : unsigned int
 {
     wxSYS_MOUSE_BUTTONS = 1,
     wxSYS_BORDER_X,

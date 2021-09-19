@@ -18,6 +18,7 @@
 #include "wx/frame.h"
 #include "wx/menu.h"
 
+#include <memory>
 #include <string>
 
 // forward declarations

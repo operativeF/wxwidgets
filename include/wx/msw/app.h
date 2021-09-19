@@ -12,7 +12,6 @@
 #define _WX_APP_H_
 
 #include "wx/event.h"
-#include "wx/icon.h"
 
 #include <string_view>
 

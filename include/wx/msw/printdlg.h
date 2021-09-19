@@ -13,8 +13,6 @@
 
 #if wxUSE_PRINTING_ARCHITECTURE
 
-#include "wx/dialog.h"
-#include "wx/cmndata.h"
 #include "wx/prntbase.h"
 #include "wx/printdlg.h"
 

@@ -18,8 +18,6 @@
 #include "wx/list.h"
 #include "wx/dlist.h"
 #include "wx/string.h"
-#include "wx/frame.h"
-#include "wx/filehistory.h"
 #include "wx/cmdproc.h"
 
 
@@ -32,6 +30,8 @@
 #include <string>
 #include <vector>
 
+class WXDLLIMPEXP_FWD_CORE wxFileHistory;
+class WXDLLIMPEXP_FWD_CORE wxFrame;
 class WXDLLIMPEXP_FWD_CORE wxWindow;
 class WXDLLIMPEXP_FWD_CORE wxDocument;
 class WXDLLIMPEXP_FWD_CORE wxView;

@@ -11,11 +11,10 @@
 #ifndef _WX_BMPBUTTN_H_
 #define _WX_BMPBUTTN_H_
 
-#include "wx/button.h"
-#include "wx/bitmap.h"
-#include "wx/brush.h"
-
 #include <string>
+
+class WXDLLIMPEXP_FWD_CORE wxBitmap;
+
 
 class WXDLLIMPEXP_CORE wxBitmapButton : public wxBitmapButtonBase
 {

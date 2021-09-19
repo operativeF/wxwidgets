@@ -22,10 +22,6 @@ using WXIDISPATCH = void;
 using WXBSTR = unsigned short *;
 using WXLCID = unsigned long;
 
-#ifdef GetObject
-#undef GetObject
-#endif
-
 // Flags used with wxAutomationObject::GetInstance()
 enum wxAutomationInstanceFlags
 {

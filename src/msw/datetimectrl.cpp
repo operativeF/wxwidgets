@@ -22,6 +22,7 @@
 #endif
 
 #include "wx/dcclient.h"
+#include "wx/settings.h"
 
 #include "wx/msw/private/datecontrols.h"
 

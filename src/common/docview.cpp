@@ -28,6 +28,7 @@
 #include "wx/mdi.h"
 #include "wx/choicdlg.h"
 #include "wx/stringutils.h"
+#include "wx/filehistory.h"
 
 #ifndef WX_PRECOMP
     #include <iostream>

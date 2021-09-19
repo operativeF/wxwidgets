@@ -11,8 +11,6 @@
 #ifndef _WX_DIALOG_H_
 #define _WX_DIALOG_H_
 
-#include "wx/panel.h"
-
 #include <string>
 
 class WXDLLIMPEXP_FWD_CORE wxDialogModalData;

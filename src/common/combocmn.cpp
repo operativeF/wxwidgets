@@ -15,6 +15,7 @@
 #include "wx/combo.h"
 #include "wx/display.h"
 #include "wx/dc.h"
+#include "wx/textctrl.h"
 
 #ifndef WX_PRECOMP
     #ifdef __WXMSW__

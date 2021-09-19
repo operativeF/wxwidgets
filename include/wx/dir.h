@@ -92,7 +92,7 @@ class WXDLLIMPEXP_BASE wxDir
 {
 public:
     // default, use Open()
-    wxDir() { m_data = nullptr; }
+    wxDir() = default;
 
     // opens the directory for enumeration, use IsOpened() to test success
     wxDir(const wxString& dir);

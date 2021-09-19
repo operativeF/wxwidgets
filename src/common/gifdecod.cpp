@@ -23,6 +23,7 @@
 #endif
 
 #include "wx/palette.h"
+#include "wx/image.h"
 #include "wx/intl.h"
 #include "wx/log.h"
 #include "wx/gifdecod.h"

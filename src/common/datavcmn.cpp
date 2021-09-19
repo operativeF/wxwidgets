@@ -29,6 +29,7 @@
 #include "wx/spinctrl.h"
 #include "wx/choice.h"
 #include "wx/renderer.h"
+#include "wx/textctrl.h"
 
 #if wxUSE_ACCESSIBILITY
     #include "wx/access.h"

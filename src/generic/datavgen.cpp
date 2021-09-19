@@ -39,7 +39,7 @@
 #include "wx/msgdlg.h"
 #include "wx/dcscreen.h"
 #include "wx/frame.h"
-
+#include "wx/textctrl.h"
 #include "wx/stockitem.h"
 #include "wx/popupwin.h"
 #include "wx/renderer.h"

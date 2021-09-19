@@ -19,6 +19,8 @@
 
 #include <string>
 
+class WXDLLIMPEXP_FWD_CORE wxPrintData;
+
 // ------------------------------------------------------------------------
 //    wxPrinterDCImpl
 //

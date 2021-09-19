@@ -14,13 +14,14 @@
 
 #if wxUSE_DRAGIMAGE
 
-#include "wx/bitmap.h"
-#include "wx/icon.h"
 #include "wx/cursor.h"
 #include "wx/treectrl.h"
 #include "wx/listctrl.h"
 
 #include <string>
+
+class WXDLLIMPEXP_FWD_CORE wxBitmap;
+class WXDLLIMPEXP_FWD_CORE wxIcon;
 
 // If 1, use a simple wxCursor instead of ImageList_SetDragCursorImage
 #define wxUSE_SIMPLER_DRAGIMAGE 0

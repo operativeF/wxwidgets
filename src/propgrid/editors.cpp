@@ -14,12 +14,12 @@
 #if wxUSE_PROPGRID
 
 #ifndef WX_PRECOMP
-    #include "wx/settings.h"
-    #include "wx/textctrl.h"
 #endif
 
 #include "wx/dcbuffer.h"
 #include "wx/odcombo.h"
+#include "wx/settings.h"
+#include "wx/textctrl.h"
 
 // This define is necessary to prevent macro clearing
 #define __wxPG_SOURCE_FILE__

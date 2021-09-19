@@ -19,6 +19,7 @@
 #include "wx/dcclient.h"
 #include "wx/app.h"
 #include "wx/dc.h"
+#include "wx/settings.h"
 
 #include "wx/aui/auibar.h"
 #include "wx/aui/framemanager.h"

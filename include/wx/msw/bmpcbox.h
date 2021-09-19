@@ -22,7 +22,7 @@
 // ----------------------------------------------------------------------------
 
 class WXDLLIMPEXP_CORE wxBitmapComboBox : public wxComboBox,
-                                         public wxBitmapComboBoxBase
+                                          public wxBitmapComboBoxBase
 {
 public:
     

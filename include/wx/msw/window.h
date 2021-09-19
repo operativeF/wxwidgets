@@ -12,11 +12,10 @@
 #ifndef _WX_WINDOW_H_
 #define _WX_WINDOW_H_
 
-#include "wx/settings.h"        // solely for wxSystemColour
-
 #include <string_view>
 
 class WXDLLIMPEXP_FWD_CORE wxButton;
+enum wxSystemColour : unsigned int;
 
 // if this is set to 1, we use deferred window sizing to reduce flicker when
 // resizing complicated window hierarchies, but this can in theory result in

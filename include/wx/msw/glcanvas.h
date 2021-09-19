@@ -11,15 +11,14 @@
 #ifndef _WX_GLCANVAS_H_
 #define _WX_GLCANVAS_H_
 
-#include "wx/palette.h"
-
 #include "wx/msw/wrapwin.h"
+#include "wx/msw/wrap/utils.h"
 
 #include <GL/gl.h>
 
-#include "wx/msw/wrap/utils.h"
-
 #include <string>
+
+class WXDLLIMPEXP_FWD_CORE wxPalette;
 
 // ----------------------------------------------------------------------------
 // wxGLContext: OpenGL rendering context

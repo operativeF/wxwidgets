@@ -17,6 +17,7 @@
 #include "wx/artprov.h"
 #include "wx/bmpbuttn.h"
 #include "wx/stattext.h"
+#include "wx/settings.h"
 
 // ============================================================================
 // implementation

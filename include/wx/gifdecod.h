@@ -15,7 +15,6 @@
 #if wxUSE_STREAMS && wxUSE_GIF
 
 #include "wx/stream.h"
-#include "wx/image.h"
 #include "wx/animdecod.h"
 
 #include <chrono>
@@ -23,6 +22,8 @@
 
 // internal utility used to store a frame in 8bit-per-pixel format
 struct GIFImage;
+class WXDLLIMPEXP_FWD_CORE wxImage;
+
 
 
 // --------------------------------------------------------------------------

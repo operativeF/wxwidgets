@@ -11,9 +11,9 @@
 #ifndef _WX_MSW_SPINCTRL_H_
 #define _WX_MSW_SPINCTRL_H_
 
-#include "wx/spinbutt.h"    // the base class
-
 #if wxUSE_SPINCTRL
+
+#include "wx/spinbutt.h"    // the base class
 
 #include <limits>
 #include <string>
