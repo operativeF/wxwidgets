@@ -258,54 +258,6 @@
 #endif
 
 /*
-    Macro taking the deprecation message. It applies to the next declaration.
-
-    If the compiler doesn't support showing the message, this degrades to a
-    simple wxDEPRECATED(), i.e. at least gives a warning, if possible.
- */
-#if defined(__clang__) && defined(__has_extension)
-    #if __has_extension(attribute_deprecated_with_message)
-        #define wxDEPRECATED_MSG(msg) __attribute__((deprecated(msg)))
-    #else
-        #define wxDEPRECATED_MSG(msg) __attribute__((deprecated))
-    #endif
-#elif wxCHECK_GCC_VERSION(4, 5)
-    #define wxDEPRECATED_MSG(msg) __attribute__((deprecated(msg)))
-#elif wxCHECK_VISUALC_VERSION(8)
-    #define wxDEPRECATED_MSG(msg) __declspec(deprecated("deprecated: " msg))
-#else
-    #define wxDEPRECATED_MSG(msg) wxDEPRECATED_DECL
-#endif
-
-/*
-    Macro taking the declaration that it deprecates. Prefer to use
-    wxDEPRECATED_MSG() instead as it's simpler (wrapping the entire declaration
-    makes the code unclear) and allows to specify the explanation.
- */
-#define wxDEPRECATED(x) wxDEPRECATED_DECL x
-
-/*
-    This macro used to be defined differently for gcc < 3.4, but we don't
-    support it any more, so it's just the same thing as wxDEPRECATED now.
- */
-#define wxDEPRECATED_CONSTRUCTOR(x) wxDEPRECATED(x)
-
-/*
-   Macro which marks the function as being deprecated but also defines it
-   inline.
-
-   Currently it's defined in the same trivial way in all cases but it could
-   need a special definition with some other compilers in the future which
-   explains why do we have it.
- */
-#define wxDEPRECATED_INLINE(func, body) wxDEPRECATED(func) { body }
-
-/*
-    A macro to define a simple deprecated accessor.
- */
-#define wxDEPRECATED_ACCESSOR(func, what) wxDEPRECATED_INLINE(func, return what;)
-
-/*
    Special variant of the macro above which should be used for the functions
    which are deprecated but called by wx itself: this often happens with
    deprecated virtual functions which are called by the library.

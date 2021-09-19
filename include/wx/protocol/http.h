@@ -50,9 +50,6 @@ public:
     wxString GetCookie(const wxString& cookie) const;
     bool HasCookies() const { return m_cookies.size() > 0; }
 
-    // Use the other SetPostBuffer() overload or SetPostText() instead.
-    wxDEPRECATED(void SetPostBuffer(const wxString& post_buf));
-
 protected:
     using wxHeaderIterator = wxStringToStringHashMap::iterator;
     using wxHeaderConstIterator = wxStringToStringHashMap::const_iterator;

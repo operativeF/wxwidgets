@@ -155,9 +155,6 @@ wxPGGlobalVarsClass::wxPGGlobalVarsClass()
     , m_strMax(wxS("Max"))
     , m_strUnits(wxS("Units"))
     , m_strHint(wxS("Hint"))
-#if wxPG_COMPATIBILITY_1_4
-    , m_strInlineHelp(wxS("InlineHelp"))
-#endif
     , m_defaultRenderer(new wxPGDefaultRenderer())
 {
     wxPGProperty::sm_wxPG_LABEL = new wxString(wxPG_LABEL_STRING);

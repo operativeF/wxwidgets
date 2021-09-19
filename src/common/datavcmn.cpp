@@ -930,19 +930,6 @@ int wxDataViewRendererBase::GetEffectiveAlignmentIfKnown() const
 // wxDataViewCustomRendererBase
 // ----------------------------------------------------------------------------
 
-bool wxDataViewCustomRendererBase::ActivateCell(const wxRect& cell,
-                                                wxDataViewModel *model,
-                                                const wxDataViewItem & item,
-                                                unsigned int col,
-                                                const wxMouseEvent* mouseEvent)
-{
-    // Compatibility code
-    if ( mouseEvent )
-        return LeftClick(mouseEvent->GetPosition(), cell, model, item, col);
-    else
-        return Activate(cell, model, item, col);
-}
-
 void wxDataViewCustomRendererBase::RenderBackground(wxDC* dc, const wxRect& rect)
 {
     if ( !m_attr.HasBackgroundColour() )
@@ -1639,11 +1626,6 @@ wxDataViewCtrlBase::InsertColumn( unsigned int WXUNUSED(pos), wxDataViewColumn *
 {
     col->SetOwner( (wxDataViewCtrl*) this );
     return true;
-}
-
-void wxDataViewCtrlBase::StartEditor(const wxDataViewItem& item, unsigned int column)
-{
-    EditItem(item, GetColumn(column));
 }
 
 // ---------------------------------------------------------

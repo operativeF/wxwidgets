@@ -104,9 +104,6 @@ public:
                 const wxValidator& validator = wxDefaultValidator,
                 const std::string& name = wxToggleButtonNameStr);
 
-    // deprecated synonym for SetBitmapLabel()
-    wxDEPRECATED_INLINE( void SetLabel(const wxBitmap& bitmap),
-       SetBitmapLabel(bitmap); )
     // prevent virtual function hiding
     void SetLabel(const std::string& label) override { wxToggleButton::SetLabel(label); }
 

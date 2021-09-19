@@ -11091,48 +11091,8 @@ void wxGrid::SetDropTarget(wxDropTarget *dropTarget)
 // ----------------------------------------------------------------------------
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxGridEvent, wxNotifyEvent);
-
-wxGridEvent::wxGridEvent( int id, wxEventType type, wxObject* obj,
-                          int row, int col, int x, int y, bool sel,
-                          bool control, bool shift, bool alt, bool meta )
-        : wxNotifyEvent( type, id ),
-          wxKeyboardState(control, shift, alt, meta)
-{
-    Init(row, col, x, y, sel);
-
-    SetEventObject(obj);
-}
-
 wxIMPLEMENT_DYNAMIC_CLASS(wxGridSizeEvent, wxNotifyEvent);
-
-wxGridSizeEvent::wxGridSizeEvent( int id, wxEventType type, wxObject* obj,
-                                  int rowOrCol, int x, int y,
-                                  bool control, bool shift, bool alt, bool meta )
-        : wxNotifyEvent( type, id ),
-          wxKeyboardState(control, shift, alt, meta)
-{
-    Init(rowOrCol, x, y);
-
-    SetEventObject(obj);
-}
-
-
 wxIMPLEMENT_DYNAMIC_CLASS(wxGridRangeSelectEvent, wxNotifyEvent);
-
-wxGridRangeSelectEvent::wxGridRangeSelectEvent(int id, wxEventType type, wxObject* obj,
-                                               const wxGridCellCoords& topLeft,
-                                               const wxGridCellCoords& bottomRight,
-                                               bool sel, bool control,
-                                               bool shift, bool alt, bool meta )
-        : wxNotifyEvent( type, id ),
-          wxKeyboardState(control, shift, alt, meta)
-{
-    Init(topLeft, bottomRight, sel);
-
-    SetEventObject(obj);
-}
-
-
 wxIMPLEMENT_DYNAMIC_CLASS(wxGridEditorCreatedEvent, wxCommandEvent);
 
 wxGridEditorCreatedEvent::wxGridEditorCreatedEvent(int id, wxEventType type,

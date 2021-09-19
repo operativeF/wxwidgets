@@ -224,10 +224,6 @@ public:
     bool MacClipGrandChildren() const override { return true ; }
 #endif
 
-    // Sets the sash size: this doesn't do anything and shouldn't be used at
-    // all any more.
-    wxDEPRECATED_INLINE( void SetSashSize(int WXUNUSED(width)), return; )
-
 protected:
     // event handlers
 #if defined(__WXMSW__) || defined(__WXMAC__)

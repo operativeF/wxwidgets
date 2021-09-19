@@ -51,9 +51,6 @@ public:
     void SetNoCopies(int v) { m_printNoCopies = v; }
     void SetCollate(bool flag) { m_printCollate = flag; }
 
-    // Please use the overloaded method below
-    wxDEPRECATED_INLINE(void SetOrientation(int orient),
-                        m_printOrientation = (wxPrintOrientation)orient; )
     void SetOrientation(wxPrintOrientation orient) { m_printOrientation = orient; }
     void SetOrientationReversed(bool reversed) { m_printOrientationReversed = reversed; }
 

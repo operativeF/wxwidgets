@@ -2664,17 +2664,8 @@ std::string wxComboCtrlBase::DoGetValue() const
     return m_valueString;
 }
 
-void wxComboCtrlBase::SetValueWithEvent(const std::string& value,
-                                        bool withEvent)
-{
-    DoSetValue(value, withEvent ? SetValue_SendEvent : 0);
-}
-
 void wxComboCtrlBase::OnSetValue(const std::string& value)
 {
-    // Note: before wxComboCtrl inherited from wxTextEntry,
-    //       this code used to be in SetValueWithEvent().
-
     // Since wxComboPopup may want to paint the combo as well, we need
     // to set the string value here (as well as sometimes in ShowPopup).
     if ( m_valueString != value )

@@ -3028,18 +3028,6 @@ public:
         SetEventObject(obj);
     }
 
-    // explicitly specifying inline allows gcc < 3.4 to
-    // handle the deprecation attribute even in the constructor.
-    wxDEPRECATED_CONSTRUCTOR(
-    wxGridEvent(int id,
-                wxEventType type,
-                wxObject* obj,
-                int row, int col,
-                int x, int y,
-                bool sel,
-                bool control,
-                bool shift = false, bool alt = false, bool meta = false));
-
     int GetRow() const { return m_row; }
     int GetCol() const { return m_col; }
     wxPoint GetPosition() const { return wxPoint( m_x, m_y ); }
@@ -3095,17 +3083,6 @@ public:
         SetEventObject(obj);
     }
 
-    wxDEPRECATED_CONSTRUCTOR(
-    wxGridSizeEvent(int id,
-                    wxEventType type,
-                    wxObject* obj,
-                    int rowOrCol,
-                    int x, int y,
-                    bool control,
-                    bool shift = false,
-                    bool alt = false,
-                    bool meta = false) );
-
     int GetRowOrCol() const { return m_rowOrCol; }
     wxPoint GetPosition() const { return wxPoint( m_x, m_y ); }
 
@@ -3156,18 +3133,6 @@ public:
 
         SetEventObject(obj);
     }
-
-    wxDEPRECATED_CONSTRUCTOR(
-    wxGridRangeSelectEvent(int id,
-                           wxEventType type,
-                           wxObject* obj,
-                           const wxGridCellCoords& topLeft,
-                           const wxGridCellCoords& bottomRight,
-                           bool sel,
-                           bool control,
-                           bool shift = false,
-                           bool alt = false,
-                           bool meta = false) );
 
     wxGridCellCoords GetTopLeftCoords() const { return m_topLeft; }
     wxGridCellCoords GetBottomRightCoords() const { return m_bottomRight; }

@@ -844,16 +844,6 @@ public:
     void SetDeviceClippingRegion(const wxRegion& region)
         { m_pimpl->DoSetDeviceClippingRegion(region); }
 
-    // this function is deprecated because its name is confusing: you may
-    // expect it to work with logical coordinates but, in fact, it does exactly
-    // the same thing as SetDeviceClippingRegion()
-    //
-    // please review the code using it and either replace it with calls to
-    // SetDeviceClippingRegion() or correct it if it was [wrongly] passing
-    // logical coordinates to this function
-    wxDEPRECATED_INLINE(void SetClippingRegion(const wxRegion& region),
-                        SetDeviceClippingRegion(region); )
-
     void DestroyClippingRegion()
         { m_pimpl->DestroyClippingRegion(); }
 

@@ -1273,9 +1273,7 @@ def processMethods(methods):
             if is_override:
                 theDef = theDef + ' wxOVERRIDE'
             theDef = theDef + ';'
-        if category=='DeprecatedMessages' or icat=='Deprecated':
-            defs.append('    wxDEPRECATED_MSG( "This method uses a function '
-                        'deprecated in the Scintilla library." )')
+
         defs.append(theDef)
 
         # Skip override from the interface file

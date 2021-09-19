@@ -275,11 +275,6 @@ public:
     // (ie. wxComboPopup::SetStringValue doesn't get called).
     void SetText(const std::string& value);
 
-    // This method sets value and also optionally sends EVT_TEXT
-    // (needed by combo popups)
-    wxDEPRECATED( void SetValueWithEvent(const std::string& value,
-                                         bool withEvent = true) );
-
     // Changes value of the control as if user had done it by selecting an
     // item from a combo box drop-down list. Needs to be public so that
     // derived popup classes can call it.

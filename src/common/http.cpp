@@ -168,19 +168,6 @@ wxString wxHTTP::GenerateAuthString(const wxString& user, const wxString& pass) 
     return buf;
 }
 
-void wxHTTP::SetPostBuffer(const wxString& post_buf)
-{
-    // Use To8BitData() for backwards compatibility in this deprecated method.
-    // The new code should use the other overload or SetPostText() and specify
-    // the encoding to use for the text explicitly.
-    wxScopedCharBuffer scb = post_buf.To8BitData();
-    if ( scb.length() )
-    {
-        m_postBuffer.Clear();
-        m_postBuffer.AppendData(scb.data(), scb.length());
-    }
-}
-
 bool
 wxHTTP::SetPostBuffer(const wxString& contentType,
                       const wxMemoryBuffer& data)
