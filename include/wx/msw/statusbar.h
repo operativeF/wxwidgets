@@ -111,7 +111,7 @@ private:
     static const MSWMetrics& MSWGetMetrics();
 
 public:
-	wxClassInfo *GetClassInfo() const override;
+	wxClassInfo *wxGetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
 };

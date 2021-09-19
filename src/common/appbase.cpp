@@ -372,14 +372,14 @@ bool wxAppConsoleBase::Dispatch()
     return loop && loop->Dispatch();
 }
 
-bool wxAppConsoleBase::Yield(bool onlyIfNeeded)
+bool wxAppConsoleBase::AppYield(bool onlyIfNeeded)
 {
     wxEventLoopBase * const loop = wxEventLoopBase::GetActive();
     if ( loop )
-       return loop->Yield(onlyIfNeeded);
+       return loop->EvtYield(onlyIfNeeded);
 
     std::unique_ptr<wxEventLoopBase> tmpLoop(CreateMainLoop());
-    return tmpLoop->Yield(onlyIfNeeded);
+    return tmpLoop->EvtYield(onlyIfNeeded);
 }
 
 void wxAppConsoleBase::WakeUpIdle()

@@ -254,14 +254,14 @@ public:
     // The parent item may be invalid for the root-level items.
     wxTreeListItem GetItemParent(wxTreeListItem item) const;
 
-    // Iterate over the given item children: start by calling GetFirstChild()
-    // and then call GetNextSibling() for as long as it returns valid item.
-    wxTreeListItem GetFirstChild(wxTreeListItem item) const;
-    wxTreeListItem GetNextSibling(wxTreeListItem item) const;
+    // Iterate over the given item children: start by calling wxGetFirstChild()
+    // and then call wxGetNextSibling() for as long as it returns valid item.
+    wxTreeListItem wxGetFirstChild(wxTreeListItem item) const;
+    wxTreeListItem wxGetNextSibling(wxTreeListItem item) const;
 
     // Return the first child of the root item, which is also the first item of
     // the tree in depth-first traversal order.
-    wxTreeListItem GetFirstItem() const { return GetFirstChild(GetRootItem()); }
+    wxTreeListItem GetFirstItem() const { return wxGetFirstChild(GetRootItem()); }
 
     // Get item after the given one in the depth-first tree-traversal order.
     // Calling this function starting with the result of GetFirstItem() allows
@@ -530,7 +530,7 @@ private:
     friend class wxTreeListCtrl;
 
 public:
-	wxClassInfo *GetClassInfo() const override ;
+	wxClassInfo *wxGetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };

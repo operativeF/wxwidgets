@@ -6325,7 +6325,7 @@ public:
     /**
         Returns the object specified by the address, given a top level container.
     */
-    wxRichTextObject* GetObject(wxRichTextParagraphLayoutBox* topLevelContainer) const;
+    wxRichTextObject* wxGetObject(wxRichTextParagraphLayoutBox* topLevelContainer) const;
 
     /**
         Creates the address given a container and an object.
@@ -6485,7 +6485,7 @@ public:
         Returns the object to replace the one at the position defined by the container address
         and the action's range start position.
     */
-    wxRichTextObject* GetObject() const { return m_object; }
+    wxRichTextObject* wxGetObject() const { return m_object; }
 
     /**
         Returns the associated rich text control.

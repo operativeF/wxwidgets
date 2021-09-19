@@ -437,10 +437,10 @@ struct wxIDirectFBDisplayLayer : public wxDfbWrapper<IDirectFBDisplayLayer>
 {
     wxIDirectFBDisplayLayer(IDirectFBDisplayLayer *s) { Init(s); }
 
-    wxIDirectFBWindowPtr CreateWindow(const DFBWindowDescription *desc)
+    wxIDirectFBWindowPtr wxCreateWindow(const DFBWindowDescription *desc)
     {
         IDirectFBWindow *w;
-        if ( Check(m_ptr->CreateWindow(m_ptr, desc, &w)) )
+        if ( Check(m_ptr->CreateWindowW(m_ptr, desc, &w)) )
             return new wxIDirectFBWindow(w);
         else
             return NULL;
@@ -497,7 +497,7 @@ struct wxIDirectFB : public wxDfbWrapper<IDirectFB>
             return NULL;
     }
 
-    wxIDirectFBFontPtr CreateFont(const char *filename,
+    wxIDirectFBFontPtr wxCreateFont(const char *filename,
                                   const DFBFontDescription *desc)
     {
         IDirectFBFont *f;

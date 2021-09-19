@@ -50,7 +50,7 @@ public:
 
 public:     // overridable
 
-    virtual wxDialog *CreateDialog() = 0;
+    virtual wxDialog *wxCreateDialog() = 0;
 
     virtual wxWindow *GetDialogParent()
         { return GetParent(); }
@@ -141,7 +141,7 @@ public:     // overridable
         return filedlgstyle;
     }
 
-    wxDialog *CreateDialog() override;
+    wxDialog *wxCreateDialog() override;
 
     wxEventType GetEventType() const override
         { return wxEVT_FILEPICKER_CHANGED; }
@@ -196,7 +196,7 @@ public:     // overridable
         return dirdlgstyle;
     }
 
-    wxDialog *CreateDialog() override;
+    wxDialog *wxCreateDialog() override;
 
     wxEventType GetEventType() const override
         { return wxEVT_DIRPICKER_CHANGED; }

@@ -136,7 +136,7 @@ void wxGenericCollapsiblePane::OnStateChange(const wxSize& sz)
     top->SetMinClientSize(newBestSize);
 
     // we shouldn't attempt to resize a maximized window, whatever happens
-    if ( !top->IsMaximized() )
+    if ( !top->wxIsMaximized() )
         top->SetClientSize(newBestSize);
 }
 

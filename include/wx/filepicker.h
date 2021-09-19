@@ -58,7 +58,7 @@ private:
     wxString m_path;
 
 public:
-	wxClassInfo *GetClassInfo() const override;
+	wxClassInfo *wxGetClassInfo() const override;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -295,7 +295,7 @@ protected:
                                       wxGetTranslation(wxFilePickerWidgetLabel).ToStdString(),
                                       path, message, wildcard,
                                       wxDefaultPosition, wxDefaultSize,
-                                      GetPickerStyle(GetWindowStyle()));
+                                      GetPickerStyle(wxGetWindowStyle()));
     }
 
     // extracts the style for our picker from wxFileDirPickerCtrlBase's style
@@ -394,7 +394,7 @@ protected:
                                      wxGetTranslation(wxDirPickerWidgetLabel),
                                      path, message,
                                      wxDefaultPosition, wxDefaultSize,
-                                     GetPickerStyle(GetWindowStyle()));
+                                     GetPickerStyle(wxGetWindowStyle()));
     }
 
     // extracts the style for our picker from wxFileDirPickerCtrlBase's style

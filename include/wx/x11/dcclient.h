@@ -98,7 +98,7 @@ public:
     virtual void SetTextBackground(const wxColour& colour);
 
     virtual wxCoord GetCharHeight() const;
-    virtual wxCoord GetCharWidth() const;
+    virtual wxCoord wxGetCharWidth() const;
 
     virtual int GetDepth() const;
     virtual wxSize GetPPI() const;

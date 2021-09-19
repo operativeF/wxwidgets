@@ -382,7 +382,7 @@ void wxGenericComboCtrl::SetCustomPaintWidth( int width )
 
     if ( tc && (m_iFlags & wxCC_BUTTON_OUTSIDE_BORDER) )
     {
-        int borderType = tc->GetWindowStyle() & wxBORDER_MASK;
+        int borderType = tc->wxGetWindowStyle() & wxBORDER_MASK;
         int tcCreateStyle = -1;
 
         if ( width > 0 )

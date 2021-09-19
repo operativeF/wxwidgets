@@ -508,7 +508,7 @@ public:
     wxScrolledWindow(wxScrolledWindow&&) = default;
     wxScrolledWindow& operator=(wxScrolledWindow&&) = default;
 
-	wxClassInfo *GetClassInfo() const override;
+	wxClassInfo *wxGetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
 };

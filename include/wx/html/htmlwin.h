@@ -609,7 +609,7 @@ private:
     bool m_bLinkWasClicked;
 
 public:
-	wxClassInfo *GetClassInfo() const override ;
+	wxClassInfo *wxGetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -640,7 +640,7 @@ private:
 
     public:
 	wxHtmlLinkEvent& operator=(const wxHtmlLinkEvent&) = delete;
-	wxClassInfo *GetClassInfo() const override ;
+	wxClassInfo *wxGetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };

@@ -386,7 +386,7 @@ void wxGUIEventLoop::DoYieldFor(long eventsToProcess)
         else
         {
             // remove the message and store it
-            ::GetMessage(&msg, nullptr, 0, 0);
+            ::GetMessageW(&msg, nullptr, 0, 0);
             m_arrMSG.Add(msg);
         }
     }

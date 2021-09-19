@@ -953,7 +953,7 @@ const wxObject* wxAnyGetAsObjectPtr( const wxAny& data)
     {
         const wxClassTypeInfo* ti = wx_dynamic_cast(const wxClassTypeInfo*, data.GetTypeInfo());
         if( ti )
-            return ti->GetClassInfo()->AnyToObjectPtr(data);
+            return ti->wxGetClassInfo()->AnyToObjectPtr(data);
     }
     return NULL;
 }

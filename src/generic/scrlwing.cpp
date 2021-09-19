@@ -28,7 +28,6 @@
 
 #ifdef __WXMSW__
     #include <windows.h> // for DLGC_WANTARROWS
-    #include "wx/msw/winundef.h"
 #endif
 
 #ifdef __WXMOTIF__
@@ -1362,7 +1361,7 @@ void wxScrollHelper::AdjustScrollbars()
     // be entirely generic because it relies on the wxWindowDC implementation
     // to duplicate X drawing calls for the backing pixmap.
 
-    if ( m_targetWindow->GetWindowStyle() & wxRETAINED )
+    if ( m_targetWindow->wxGetWindowStyle() & wxRETAINED )
     {
         Display* dpy = XtDisplay((Widget)m_targetWindow->GetMainWidget());
 

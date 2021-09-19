@@ -173,7 +173,7 @@ private:
     wxDateTime::WeekDay m_wday{wxDateTime::Inv_WeekDay};
 
 public:
-	wxClassInfo *GetClassInfo() const override ;
+	wxClassInfo *wxGetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };

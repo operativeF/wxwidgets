@@ -1358,7 +1358,7 @@ wxTreeItemId wxGenericTreeCtrl::GetItemParent(const wxTreeItemId& item) const
     return ((wxGenericTreeItem*) item.m_pItem)->GetParent();
 }
 
-wxTreeItemId wxGenericTreeCtrl::GetFirstChild(const wxTreeItemId& item,
+wxTreeItemId wxGenericTreeCtrl::wxGetFirstChild(const wxTreeItemId& item,
                                               wxTreeItemIdValue& cookie) const
 {
     wxCHECK_MSG( item.IsOk(), {}, wxT("invalid tree item") );
@@ -1398,7 +1398,7 @@ wxTreeItemId wxGenericTreeCtrl::GetLastChild(const wxTreeItemId& item) const
     return children.empty() ? wxTreeItemId{} : wxTreeItemId(children.back());
 }
 
-wxTreeItemId wxGenericTreeCtrl::GetNextSibling(const wxTreeItemId& item) const
+wxTreeItemId wxGenericTreeCtrl::wxGetNextSibling(const wxTreeItemId& item) const
 {
     wxCHECK_MSG( item.IsOk(), {}, wxT("invalid tree item") );
 
@@ -1420,7 +1420,7 @@ wxTreeItemId wxGenericTreeCtrl::GetNextSibling(const wxTreeItemId& item) const
                                     : wxTreeItemId(siblings[n]);
 }
 
-wxTreeItemId wxGenericTreeCtrl::GetPrevSibling(const wxTreeItemId& item) const
+wxTreeItemId wxGenericTreeCtrl::wxGetPrevSibling(const wxTreeItemId& item) const
 {
     wxCHECK_MSG( item.IsOk(), {}, wxT("invalid tree item") );
 
@@ -1461,7 +1461,7 @@ wxTreeItemId wxGenericTreeCtrl::GetNext(const wxTreeItemId& item) const
          wxTreeItemId toFind;
          do
          {
-              toFind = GetNextSibling(p);
+              toFind = wxGetNextSibling(p);
               p = GetItemParent(p);
          } while (p.IsOk() && !toFind.IsOk());
          return toFind;
@@ -1507,7 +1507,7 @@ wxTreeItemId wxGenericTreeCtrl::GetPrevVisible(const wxTreeItemId& item) const
     wxASSERT_MSG( IsVisible(item), wxT("this item itself should be visible") );
 
     // find out the starting point
-    wxTreeItemId prevItem = GetPrevSibling(item);
+    wxTreeItemId prevItem = wxGetPrevSibling(item);
     if ( !prevItem.IsOk() )
     {
         prevItem = GetItemParent(item);
@@ -1874,7 +1874,7 @@ void wxGenericTreeCtrl::Expand(const wxTreeItemId& itemId)
     // been added from the EXPANDING handler, we shouldn't consider the item to
     // be really expanded.
     wxTreeItemIdValue cookie;
-    if ( GetFirstChild(item, cookie).IsOk() )
+    if ( wxGetFirstChild(item, cookie).IsOk() )
     {
         event.SetEventType(wxEVT_TREE_ITEM_EXPANDED);
         GetEventHandler()->ProcessEvent( event );
@@ -2676,7 +2676,7 @@ void wxGenericTreeCtrl::PaintItem(wxGenericTreeItem *item, wxDC& dc)
 
     dc.SetBackgroundMode(wxBrushStyle::Transparent);
     int extraH = (total_h > text_h) ? (total_h - text_h)/2 : 0;
-    dc.DrawText( item->GetText(),
+    dc.wxDrawText( item->GetText(),
                  (wxCoord)(state_w + image_w + item->GetX()),
                  (wxCoord)(item->GetY() + extraH));
 
@@ -3166,7 +3166,7 @@ void wxGenericTreeCtrl::OnChar( wxKeyEvent &event )
             // of its children if it's expanded
         case WXK_UP:
             {
-                wxTreeItemId prev = GetPrevSibling( m_key_current );
+                wxTreeItemId prev = wxGetPrevSibling( m_key_current );
                 if (!prev)
                 {
                     prev = GetItemParent( m_key_current );
@@ -3180,7 +3180,7 @@ void wxGenericTreeCtrl::OnChar( wxKeyEvent &event )
                         wxTreeItemId current = m_key_current;
                         // TODO: Huh?  If we get here, we'd better be the first
                         // child of our parent.  How else could it be?
-                        if (current == GetFirstChild( prev, cookie ))
+                        if (current == wxGetFirstChild( prev, cookie ))
                         {
                             // otherwise we return to where we came from
                             DoSelectItem(prev,
@@ -3247,7 +3247,7 @@ void wxGenericTreeCtrl::OnChar( wxKeyEvent &event )
                     if (IsExpanded(m_current))
                     {
                         wxTreeItemIdValue cookie;
-                        wxTreeItemId child = GetFirstChild(m_current, cookie);
+                        wxTreeItemId child = wxGetFirstChild(m_current, cookie);
                         if (child)
                         {
                             DoSelectItem(child, unselect_others, extended_select);
@@ -3266,7 +3266,7 @@ void wxGenericTreeCtrl::OnChar( wxKeyEvent &event )
                 if (IsExpanded(m_key_current) && HasChildren(m_key_current))
                 {
                     wxTreeItemIdValue cookie;
-                    wxTreeItemId child = GetFirstChild( m_key_current, cookie );
+                    wxTreeItemId child = wxGetFirstChild( m_key_current, cookie );
                     if ( !child )
                         break;
 
@@ -3275,14 +3275,14 @@ void wxGenericTreeCtrl::OnChar( wxKeyEvent &event )
                 }
                 else
                 {
-                    wxTreeItemId next = GetNextSibling( m_key_current );
+                    wxTreeItemId next = wxGetNextSibling( m_key_current );
                     if (!next)
                     {
                         wxTreeItemId current = m_key_current;
                         while (current.IsOk() && !next)
                         {
                             current = GetItemParent( current );
-                            if (current) next = GetNextSibling( current );
+                            if (current) next = wxGetNextSibling( current );
                         }
                     }
                     if (next)
@@ -3329,7 +3329,7 @@ void wxGenericTreeCtrl::OnChar( wxKeyEvent &event )
                 if ( HasFlag(wxTR_HIDE_ROOT) )
                 {
                     wxTreeItemIdValue cookie;
-                    prev = GetFirstChild(prev, cookie);
+                    prev = wxGetFirstChild(prev, cookie);
                     if (!prev)
                         break;
                 }

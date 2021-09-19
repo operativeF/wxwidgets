@@ -15,8 +15,6 @@
 
 #include <shlobj.h>
 
-#include "wx/msw/winundef.h"
-
 #include "wx/log.h"
 
 // ----------------------------------------------------------------------------

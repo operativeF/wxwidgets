@@ -475,7 +475,7 @@ wxHtmlTag::~wxHtmlTag()
     t1 = m_FirstChild;
     while (t1)
     {
-        t2 = t1->GetNextSibling();
+        t2 = t1->wxGetNextSibling();
         delete t1;
         t1 = t2;
     }
@@ -641,7 +641,7 @@ wxString wxHtmlTag::GetAllParams() const
     return s;
 }
 
-wxHtmlTag *wxHtmlTag::GetFirstSibling() const
+wxHtmlTag *wxHtmlTag::wxGetFirstSibling() const
 {
     if (m_Parent)
         return m_Parent->m_FirstChild;
@@ -654,7 +654,7 @@ wxHtmlTag *wxHtmlTag::GetFirstSibling() const
     }
 }
 
-wxHtmlTag *wxHtmlTag::GetLastSibling() const
+wxHtmlTag *wxHtmlTag::wxGetLastSibling() const
 {
     if (m_Parent)
         return m_Parent->m_LastChild;

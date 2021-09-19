@@ -2241,7 +2241,7 @@ int wxWindowMSW::GetCharHeight() const
     return wxGetTextMetrics(this).tmHeight;
 }
 
-int wxWindowMSW::GetCharWidth() const
+int wxWindowMSW::wxGetCharWidth() const
 {
     // +1 is needed because Windows apparently adds it when calculating the
     // dialog units size in pixels
@@ -3872,7 +3872,7 @@ void wxAssociateWinWithHandle(HWND hwnd, wxWindowMSW *win)
             wxFAIL_MSG(
                 wxString::Format(
                     wxT("HWND %p already associated with another window (%s)"),
-                    hwnd, win->GetClassInfo()->GetClassName()
+                    hwnd, win->wxGetClassInfo()->wxGetClassName()
                 )
             );
         }

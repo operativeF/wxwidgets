@@ -102,7 +102,7 @@ bool wxAutomationObject::Invoke(const wxString& member, int action,
         wxString member2(member.Left((size_t) ch));
         wxString rest(member.Right(member.length() - ch - 1));
         wxAutomationObject obj;
-        if (!GetObject(obj, member2))
+        if (!wxGetObject(obj, member2))
             return false;
         return obj.Invoke(rest, action, retValue, noArgs, args, ptrArgs);
     }
@@ -451,7 +451,7 @@ WXIDISPATCH* wxAutomationObject::GetDispatchProperty(const wxString& property, i
 
 
 // A way of initialising another wxAutomationObject with a dispatch object
-bool wxAutomationObject::GetObject(wxAutomationObject& obj, const wxString& property, int noArgs, wxVariant args[]) const
+bool wxAutomationObject::wxGetObject(wxAutomationObject& obj, const wxString& property, int noArgs, wxVariant args[]) const
 {
     WXIDISPATCH* dispatch = GetDispatchProperty(property, noArgs, args);
     if (dispatch)
@@ -466,7 +466,7 @@ bool wxAutomationObject::GetObject(wxAutomationObject& obj, const wxString& prop
 }
 
 // A way of initialising another wxAutomationObject with a dispatch object
-bool wxAutomationObject::GetObject(wxAutomationObject& obj, const wxString& property, int noArgs, const wxVariant **args) const
+bool wxAutomationObject::wxGetObject(wxAutomationObject& obj, const wxString& property, int noArgs, const wxVariant **args) const
 {
     WXIDISPATCH* dispatch = GetDispatchProperty(property, noArgs, args);
     if (dispatch)

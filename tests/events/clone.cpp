@@ -28,7 +28,7 @@ TEST_CASE("EventClone")
     const wxClassInfo *ci = wxClassInfo::GetFirst();
     for (; ci; ci = ci->GetNext())
     {
-        wxString cn = wxString(ci->GetClassName());
+        wxString cn = wxString(ci->wxGetClassName());
 
         // is this class derived from wxEvent?
         if ( !ci->IsKindOf(CLASSINFO(wxEvent)) ||
@@ -58,7 +58,7 @@ TEST_CASE("EventClone")
         delete test;
 
         REQUIRE( cloned );
-        CHECK( cloned->GetClassInfo() == ci );
+        CHECK( cloned->wxGetClassInfo() == ci );
 
         delete cloned;
     }

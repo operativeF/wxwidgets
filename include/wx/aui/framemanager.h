@@ -202,7 +202,7 @@ public:
     bool IsFloatable() const { return HasFlag(optionFloatable); }
     bool IsMovable() const { return HasFlag(optionMovable); }
     bool IsDestroyOnClose() const { return HasFlag(optionDestroyOnClose); }
-    bool IsMaximized() const { return HasFlag(optionMaximized); }
+    bool wxIsMaximized() const { return HasFlag(optionMaximized); }
     bool HasCaption() const { return HasFlag(optionCaption); }
     bool HasGripper() const { return HasFlag(optionGripper); }
     bool HasBorder() const { return HasFlag(optionPaneBorder); }
@@ -666,7 +666,7 @@ public:
 
 #ifndef SWIG
 public:
-	wxClassInfo *GetClassInfo() const override ;
+	wxClassInfo *wxGetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 #endif

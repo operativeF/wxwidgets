@@ -37,7 +37,7 @@ public:
     void Resume() override;
 
     int GetValue() const override;
-    std::string GetMessage() const override;
+    std::string wxGetMessage() const override;
 
     void SetRange(int maximum) override;
 
@@ -91,7 +91,7 @@ private:
     std::string m_title;
 
 public:
-	wxClassInfo *GetClassInfo() const override;
+	wxClassInfo *wxGetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
 };

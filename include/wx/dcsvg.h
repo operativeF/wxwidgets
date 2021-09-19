@@ -112,7 +112,7 @@ public:
     void DestroyClippingRegion() override;
 
     wxCoord GetCharHeight() const override;
-    wxCoord GetCharWidth() const override;
+    wxCoord wxGetCharWidth() const override;
 
 #if wxUSE_PALETTE
     void SetPalette(const wxPalette& WXUNUSED(palette)) override

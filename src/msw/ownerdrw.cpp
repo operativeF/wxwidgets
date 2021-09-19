@@ -101,7 +101,7 @@ BOOL wxDrawStateBitmap(HDC hDC, HBITMAP hBitmap, int x, int y, UINT uState)
 {
     // determine size of bitmap image
     BITMAP bmp;
-    if ( !::GetObject(hBitmap, sizeof(BITMAP), &bmp) )
+    if ( !::GetObjectW(hBitmap, sizeof(BITMAP), &bmp) )
         return FALSE;
 
     BOOL result;

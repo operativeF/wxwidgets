@@ -16,7 +16,6 @@
 
 #include "wx/app.h"
 #include "wx/evtloop.h"
-#include "wx/msw/winundef.h"
 
 class WXDLLIMPEXP_FWD_CORE wxWindow;
 

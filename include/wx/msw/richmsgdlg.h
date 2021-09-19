@@ -31,7 +31,7 @@ public:
     // overridden base class method showing the native task dialog if possible
     int ShowModal() override;
 
-	wxClassInfo *GetClassInfo() const override;
+	wxClassInfo *wxGetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
 };

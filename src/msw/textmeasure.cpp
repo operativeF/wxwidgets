@@ -32,7 +32,7 @@ void wxTextMeasure::Init()
 {
     if ( m_dc )
     {
-        wxClassInfo* const ci = m_dc->GetImpl()->GetClassInfo();
+        wxClassInfo* const ci = m_dc->GetImpl()->wxGetClassInfo();
 
         if ( ci->IsKindOf(wxCLASSINFO(wxMSWDCImpl)))
         {

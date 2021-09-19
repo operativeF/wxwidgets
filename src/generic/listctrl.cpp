@@ -787,7 +787,7 @@ void wxListLineData::Draw(wxDC *dc, bool current)
         const wxRect& rectLabel = m_gi->m_rectLabel;
 
         wxDCClipper clipper(*dc, rectLabel);
-        dc->DrawText(item->GetText(), rectLabel.x, rectLabel.y);
+        dc->wxDrawText(item->GetText(), rectLabel.x, rectLabel.y);
     }
 }
 
@@ -901,7 +901,7 @@ void wxListLineData::DrawTextFormatted(wxDC *dc,
                 break;
         }
 
-        dc->DrawText(text, x, y);
+        dc->wxDrawText(text, x, y);
     }
     else // otherwise, truncate and add an ellipsis if possible
     {
@@ -932,8 +932,8 @@ void wxListLineData::DrawTextFormatted(wxDC *dc,
         }
 
         // now draw the text
-        dc->DrawText(drawntext, x, y);
-        dc->DrawText(ellipsis, x + w, y);
+        dc->wxDrawText(drawntext, x, y);
+        dc->wxDrawText(ellipsis, x + w, y);
     }
 }
 
@@ -1170,7 +1170,7 @@ void wxListHeaderWindow::OnPaint( wxPaintEvent &WXUNUSED(event) )
                        );
         }
 
-        dc.DrawText( item.GetText(),
+        dc.wxDrawText( item.GetText(),
                      xAligned + EXTRA_WIDTH, (cliSize.y - hLabel) / 2 );
 
         x += wCol;
@@ -5071,7 +5071,7 @@ void wxGenericListCtrl::SetSingleStyle( long style, bool add )
     wxASSERT_MSG( !(style & wxLC_VIRTUAL),
                   wxT("wxLC_VIRTUAL can't be [un]set") );
 
-    long flag = GetWindowStyle();
+    long flag = wxGetWindowStyle();
 
     if (add)
     {

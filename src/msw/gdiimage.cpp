@@ -121,11 +121,11 @@ public:
         wxIcon *icon = wxDynamicCast(image, wxIcon);
         wxCHECK_MSG( icon, false, wxT("wxIconHandler only works with icons") );
 
-        return LoadIcon(icon, name, flags, desiredSz);
+        return wxLoadIcon(icon, name, flags, desiredSz);
     }
 
 protected:
-    virtual bool LoadIcon(wxIcon *icon,
+    virtual bool wxLoadIcon(wxIcon *icon,
                           const std::string& name, wxBitmapType flags,
                           wxSize desiredSz = {-1, -1}) = 0;
 };
@@ -140,7 +140,7 @@ public:
     }
 
 protected:
-    bool LoadIcon(wxIcon *icon,
+    bool wxLoadIcon(wxIcon *icon,
                           const std::string& name, wxBitmapType flags,
                           wxSize desiredSz = {-1, -1}) override;
 };
@@ -155,7 +155,7 @@ public:
     }
 
 protected:
-    bool LoadIcon(wxIcon *icon,
+    bool wxLoadIcon(wxIcon *icon,
                           const std::string& name, wxBitmapType flags,
                           wxSize desiredSz = {-1, -1}) override;
 };
@@ -324,7 +324,7 @@ bool wxBMPResourceHandler::LoadFile(wxBitmap *bitmap,
 
     int w, h, d;
     BITMAP bm;
-    if (::GetObject(hbmp, sizeof(BITMAP), &bm))
+    if (::GetObjectW(hbmp, sizeof(BITMAP), &bm))
     {
         w = bm.bmWidth;
         h = bm.bmHeight;
@@ -393,7 +393,7 @@ bool wxBMPFileHandler::SaveFile(const wxBitmap *bitmap,
 // wxIcon handlers
 // ----------------------------------------------------------------------------
 
-bool wxICOFileHandler::LoadIcon(wxIcon *icon,
+bool wxICOFileHandler::wxLoadIcon(wxIcon *icon,
                                 const std::string& name,
                                 wxBitmapType WXUNUSED(flags),
                                 wxSize desiredSz)
@@ -497,7 +497,7 @@ bool wxICOFileHandler::LoadIcon(wxIcon *icon,
     return true;
 }
 
-bool wxICOResourceHandler::LoadIcon(wxIcon *icon,
+bool wxICOResourceHandler::wxLoadIcon(wxIcon *icon,
                                     const std::string& name,
                                     wxBitmapType WXUNUSED(flags),
                                     wxSize desiredSz)
@@ -623,7 +623,7 @@ wxSize wxGetHiconSize(HICON hicon)
             if ( hbmp )
             {
                 BITMAP bm;
-                if ( ::GetObject(hbmp, sizeof(BITMAP), (LPSTR) &bm) )
+                if ( ::GetObjectW(hbmp, sizeof(BITMAP), (LPSTR) &bm) )
                 {
                     size = wxSize(bm.bmWidth, bm.bmHeight);
                 }

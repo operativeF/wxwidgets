@@ -108,7 +108,7 @@ bool wxVListBoxComboPopup::LazyCreate()
 // paint the control itself
 void wxVListBoxComboPopup::PaintComboControl( wxDC& dc, const wxRect& rect )
 {
-    if ( !(m_combo->GetWindowStyle() & wxODCB_STD_CONTROL_PAINT) )
+    if ( !(m_combo->wxGetWindowStyle() & wxODCB_STD_CONTROL_PAINT) )
     {
         int flags = wxODCB_PAINTING_CONTROL;
 
@@ -260,7 +260,7 @@ bool wxVListBoxComboPopup::HandleKey( int keycode, bool saturate, wxChar keychar
         return false;
 
     int value = m_value;
-    int comboStyle = m_combo->GetWindowStyle();
+    int comboStyle = m_combo->wxGetWindowStyle();
 
     if ( keychar > 0 )
     {
@@ -482,7 +482,7 @@ void wxVListBoxComboPopup::OnKey(wxKeyEvent& event)
 
 void wxVListBoxComboPopup::OnChar(wxKeyEvent& event)
 {
-    if ( m_combo->GetWindowStyle() & wxCB_READONLY )
+    if ( m_combo->wxGetWindowStyle() & wxCB_READONLY )
     {
         // Process partial completion key codes here, but not the arrow keys as
         // the base class will do that for us
@@ -526,7 +526,7 @@ int wxVListBoxComboPopup::Append(const wxString& item)
 {
     int pos = (int)m_strings.size();
 
-    if ( m_combo->GetWindowStyle() & wxCB_SORT )
+    if ( m_combo->wxGetWindowStyle() & wxCB_SORT )
     {
         // Find position
         // TODO: Could be optimized with binary search
@@ -759,7 +759,7 @@ void wxVListBoxComboPopup::CalcWidths()
                     }
                     else
                     {
-                        x = text.length() * (dc.GetCharWidth() + 1);
+                        x = text.length() * (dc.wxGetCharWidth() + 1);
                     }
                 }
 
@@ -869,7 +869,7 @@ void wxVListBoxComboPopup::Populate( const std::vector<std::string>& choices )
         wxVListBox::SetItemCount(n);
 
     // Sort the initial choices
-    if ( m_combo->GetWindowStyle() & wxCB_SORT )
+    if ( m_combo->wxGetWindowStyle() & wxCB_SORT )
         std::sort(m_strings.begin(), m_strings.end());
     // Find initial selection
     wxString strValue = m_combo->GetValue();
@@ -1163,13 +1163,13 @@ void wxOwnerDrawnComboBox::OnDrawItem( wxDC& dc,
             dc.SetTextForeground(col);
         }
 
-        dc.DrawText( text,
+        dc.wxDrawText( text,
                      rect.x + GetMargins().x,
                      (rect.height-dc.GetCharHeight())/2 + rect.y );
     }
     else
     {
-        dc.DrawText( GetVListBoxComboPopup()->GetString(item), rect.x + 2, rect.y );
+        dc.wxDrawText( GetVListBoxComboPopup()->GetString(item), rect.x + 2, rect.y );
     }
 }
 

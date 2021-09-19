@@ -199,7 +199,7 @@ void wxControlContainer::SetLastFocus(wxWindow *win)
         if ( win )
         {
             wxLogTrace(TRACE_FOCUS, wxT("Set last focus to %s(%s)"),
-                       win->GetClassInfo()->GetClassName(),
+                       win->wxGetClassInfo()->wxGetClassName(),
                        win->GetLabel().c_str());
         }
         else

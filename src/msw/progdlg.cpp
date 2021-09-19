@@ -676,14 +676,14 @@ int wxProgressDialog::GetValue() const
     return wxGenericProgressDialog::GetValue();
 }
 
-std::string wxProgressDialog::GetMessage() const
+std::string wxProgressDialog::wxGetMessage() const
 {
 #ifdef wxHAS_MSW_TASKDIALOG
     if ( HasNativeTaskDialog() )
         return m_message;
 #endif // wxHAS_MSW_TASKDIALOG
 
-    return wxGenericProgressDialog::GetMessage();
+    return wxGenericProgressDialog::wxGetMessage();
 }
 
 void wxProgressDialog::SetRange(int maximum)

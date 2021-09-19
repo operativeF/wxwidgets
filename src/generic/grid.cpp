@@ -7153,7 +7153,7 @@ void wxGrid::DrawTextRectangle(wxDC& dc,
 
         if ( textOrientation == wxHORIZONTAL )
         {
-            dc.DrawText( line, x, y );
+            dc.wxDrawText( line, x, y );
             y += lineSize.y;
         }
         else
@@ -7486,7 +7486,7 @@ bool wxGrid::DoShowCellEditControl(const wxGridActivationSource& actSource)
         wxWindow* const editorWindow = editor->GetWindow();
         if ( editorWindow )
         {
-            editorWindow->SetWindowStyle(editorWindow->GetWindowStyle()
+            editorWindow->SetWindowStyle(editorWindow->wxGetWindowStyle()
                                             | wxWANTS_CHARS);
         }
 

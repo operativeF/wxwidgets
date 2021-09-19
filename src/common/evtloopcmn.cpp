@@ -93,7 +93,7 @@ bool wxEventLoopBase::ProcessIdle()
     return wxTheApp && wxTheApp->ProcessIdle();
 }
 
-bool wxEventLoopBase::Yield(bool onlyIfNeeded)
+bool wxEventLoopBase::EvtYield(bool onlyIfNeeded)
 {
     if ( onlyIfNeeded && IsYielding() )
         return false;

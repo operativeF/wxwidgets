@@ -348,7 +348,7 @@ void wxAuiGtkTabArt::DrawTab(wxDC& dc, wxWindow* wnd, const wxAuiNotebookPage& p
                          focus_area.x, focus_area.y, focus_area.width, focus_area.height);
     }
 
-    dc.DrawText(page.caption, textX, textY);
+    dc.wxDrawText(page.caption, textX, textY);
 
     // draw close-button on tab (if enabled)
     if (close_button_state != wxAUI_BUTTON_STATE_HIDDEN)

@@ -91,16 +91,16 @@ TEST_CASE_FIXTURE(TreeListCtrlTest, "Tree list control test")
         CHECK_EQ( m_code, m_treelist->GetItemParent(m_code_osx) );
 
 
-        // GetFirstChild() and GetNextSibling() tests:
-        CHECK_EQ( m_code, m_treelist->GetFirstChild(root) );
+        // wxGetFirstChild() and wxGetNextSibling() tests:
+        CHECK_EQ( m_code, m_treelist->wxGetFirstChild(root) );
         CHECK_EQ
         (
             m_code_osx,
-            m_treelist->GetNextSibling
+            m_treelist->wxGetNextSibling
             (
-                m_treelist->GetNextSibling
+                m_treelist->wxGetNextSibling
                 (
-                    m_treelist->GetFirstChild(m_code)
+                    m_treelist->wxGetFirstChild(m_code)
                 )
             )
         );

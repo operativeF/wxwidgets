@@ -26,7 +26,7 @@ public:
         if ( !m_win )
             return "(no window)";
 
-        wxString s = m_win->GetClassInfo()->GetClassName();
+        wxString s = m_win->wxGetClassInfo()->wxGetClassName();
         const wxString& label = m_win->GetLabel();
         if ( !label.empty() )
         {

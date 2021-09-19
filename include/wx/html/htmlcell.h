@@ -249,7 +249,7 @@ public:
     // return next cell among parent's cells
     wxHtmlCell *GetNext() const {return m_Next;}
     // returns first child cell (if there are any, i.e. if this is container):
-    virtual wxHtmlCell* GetFirstChild() const { return nullptr; }
+    virtual wxHtmlCell* wxGetFirstChild() const { return nullptr; }
 
     // members writing methods
     virtual void SetPos(int x, int y) {m_PosX = x; m_PosY = y;}
@@ -547,7 +547,7 @@ public:
                                    const wxPoint& pos,
                                    const wxMouseEvent& event) override;
 
-    wxHtmlCell* GetFirstChild() const override { return m_Cells; }
+    wxHtmlCell* wxGetFirstChild() const override { return m_Cells; }
 
     // returns last child cell:
     wxHtmlCell* GetLastChild() const { return m_LastCell; }

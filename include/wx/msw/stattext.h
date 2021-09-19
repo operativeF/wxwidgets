@@ -55,7 +55,7 @@ protected:
     void WXSetVisibleLabel(const std::string& str) override;
 
 public:
-	wxClassInfo *GetClassInfo() const override;
+	wxClassInfo *wxGetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
 };

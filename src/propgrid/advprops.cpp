@@ -745,7 +745,7 @@ void wxFontProperty::OnCustomPaint(wxDC& dc,
         dc.SetFont(wxFontInfo(oldFont.GetPointSize().Bold().FaceName(drawFace));
 
         dc.SetTextForeground( wxSystemSettings::GetColour(wxSYS_COLOUR_BTNTEXT) );
-        dc.DrawText( wxS("Aa"), rect.x+2, rect.y+1 );
+        dc.wxDrawText( wxS("Aa"), rect.x+2, rect.y+1 );
 
         dc.SetFont(oldFont);
     }
@@ -975,7 +975,7 @@ int wxSystemColourProperty::ColToInd( const wxColour& colour ) const
         if ( colour == GetColour(ind) )
         {
             /*wxLogDebug(wxS("%s(%s): Index %i for ( getcolour(%i,%i,%i), colour(%i,%i,%i))"),
-                GetClassName(),GetLabel(),
+                wxGetClassName(),GetLabel(),
                 (int)i,(int)GetColour(ind).Red(),(int)GetColour(ind).Green(),(int)GetColour(ind).Blue(),
                 (int)colour.Red(),(int)colour.Green(),(int)colour.Blue());*/
             return ind;
@@ -1275,7 +1275,7 @@ public:
             text = property->GetValueAsString();
         else
             text = property->GetChoiceString(item);
-        DrawText( dc, rect, imageRect.width, text );
+        wxDrawText( dc, rect, imageRect.width, text );
     }
 protected:
 };

@@ -138,7 +138,7 @@ void wxGenericColourButton::UpdateColour()
         const wxSize textSize = dc.GetTextExtent(text);
         const int x = (m_bitmap.GetWidth() - textSize.x) / 2;
         const int y = (m_bitmap.GetHeight() - textSize.y) / 2;
-        dc.DrawText(text, x, y);
+        dc.wxDrawText(text, x, y);
     }
 
     dc.SelectObject( wxNullBitmap );

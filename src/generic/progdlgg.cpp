@@ -107,7 +107,7 @@ bool wxGenericProgressDialog::Create( const std::string& title,
 
     m_pdStyle = style;
 
-    if (!wxDialog::Create(m_parentTop, wxID_ANY, title, wxDefaultPosition, wxDefaultSize, GetWindowStyle()))
+    if (!wxDialog::Create(m_parentTop, wxID_ANY, title, wxDefaultPosition, wxDefaultSize, wxGetWindowStyle()))
         return false;
 
     SetMaximum(maximum);
@@ -517,7 +517,7 @@ int wxGenericProgressDialog::GetRange() const
     return m_maximum;
 }
 
-std::string wxGenericProgressDialog::GetMessage() const
+std::string wxGenericProgressDialog::wxGetMessage() const
 {
     return m_msg->GetLabel();
 }

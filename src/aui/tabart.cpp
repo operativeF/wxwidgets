@@ -596,7 +596,7 @@ void wxAuiGenericTabArt::DrawTab(wxDC& dc,
     wxColor font_color = wxAuiHasSufficientContrast(back_color, sys_color) ? sys_color
         : wxAuiGetBetterContrastColour(back_color, *wxWHITE, *wxBLACK);
     dc.SetTextForeground(font_color);
-    dc.DrawText(draw_text,
+    dc.wxDrawText(draw_text,
                 text_offset,
                 drawn_tab_yoff + (drawn_tab_height)/2 - (texty/2) - 1);
 
@@ -1142,7 +1142,7 @@ void wxAuiSimpleTabArt::DrawTab(wxDC& dc,
     wxColor font_color = wxAuiHasSufficientContrast(back_color, sys_color) ? sys_color
         : wxAuiGetBetterContrastColour(back_color, *wxWHITE, *wxBLACK);
     dc.SetTextForeground(font_color);
-    dc.DrawText(draw_text,
+    dc.wxDrawText(draw_text,
                  text_offset,
                  (tab_y + tab_height)/2 - (texty/2) + 1);
 

@@ -139,7 +139,7 @@ wxComboEditWndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     {
         wxCHECK_MSG( win, 0, wxT("should have a parent") );
 
-        if ( win->GetWindowStyle() & wxTE_PROCESS_ENTER )
+        if ( win->wxGetWindowStyle() & wxTE_PROCESS_ENTER )
         {
             // need to return a custom dlg code or we'll never get it
             return DLGC_WANTMESSAGE;

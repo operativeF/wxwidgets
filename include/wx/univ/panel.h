@@ -33,7 +33,7 @@ struct WXDLLIMPEXP_CORE wxPanel : public wxPanelBase
 
     virtual bool IsCanvasWindow() const { return true; }
 
-	wxClassInfo *GetClassInfo() const;
+	wxClassInfo *wxGetClassInfo() const;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
 };

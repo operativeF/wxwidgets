@@ -133,7 +133,7 @@ public:
         // only the bitmap it should take up the entire button area
         if ( btn->ShowsLabel() )
         {
-            m_margin.x = btn->GetCharWidth();
+            m_margin.x = btn->wxGetCharWidth();
             m_margin.y = btn->GetCharHeight() / 2;
         }
     }
@@ -390,11 +390,11 @@ wxSize wxMSWButton::GetFittingSize(wxWindow *win,
     {
         // We still need some margin or the text would be overwritten, just
         // make it as small as possible.
-        sizeBtn.x += 2*win->GetCharWidth();
+        sizeBtn.x += 2*win->wxGetCharWidth();
     }
     else
     {
-        sizeBtn.x += 3*win->GetCharWidth();
+        sizeBtn.x += 3*win->wxGetCharWidth();
     }
 
     // account for the shield UAC icon if we have it

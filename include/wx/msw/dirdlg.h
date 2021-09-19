@@ -40,7 +40,7 @@ private:
     int ShowIFileOpenDialog(WXHWND owner);
 
 public:
-	wxClassInfo *GetClassInfo() const override;
+	wxClassInfo *wxGetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
 };

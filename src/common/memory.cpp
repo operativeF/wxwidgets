@@ -300,7 +300,7 @@ void wxMemStruct::PrintNode ()
   if (m_isObject)
   {
     wxObject *obj = (wxObject *)m_actualData;
-    wxClassInfo *info = obj->GetClassInfo();
+    wxClassInfo *info = obj->wxGetClassInfo();
 
     // Let's put this in standard form so IDEs can load the file at the appropriate
     // line
@@ -309,8 +309,8 @@ void wxMemStruct::PrintNode ()
     if (m_fileName)
       msg.Printf(wxT("%s(%d): "), m_fileName, (int)m_lineNum);
 
-    if (info && info->GetClassName())
-      msg += info->GetClassName();
+    if (info && info->wxGetClassName())
+      msg += info->wxGetClassName();
     else
       msg += wxT("object");
 
@@ -355,8 +355,8 @@ void wxMemStruct::Dump ()
     obj->Dump(wxDebugContext::GetStream());
      */
 
-    if (obj->GetClassInfo() && obj->GetClassInfo()->GetClassName())
-      msg += obj->GetClassInfo()->GetClassName();
+    if (obj->wxGetClassInfo() && obj->wxGetClassInfo()->wxGetClassName())
+      msg += obj->wxGetClassInfo()->wxGetClassName();
     else
       msg += wxT("unknown object class");
 
@@ -656,8 +656,8 @@ bool wxDebugContext::PrintStatistics(bool detailed)
       if (st->m_isObject && st->GetActualData())
       {
         wxObject *obj = (wxObject *)st->GetActualData();
-        if (obj->GetClassInfo()->GetClassName())
-          className = (wxChar*)obj->GetClassInfo()->GetClassName();
+        if (obj->wxGetClassInfo()->wxGetClassName())
+          className = (wxChar*)obj->wxGetClassInfo()->wxGetClassName();
       }
       wxDebugStatsStruct *stats = FindStatsStruct(list, className);
       if (!stats)
@@ -727,9 +727,9 @@ bool wxDebugContext::PrintClasses()
        node != end; ++node)
   {
     info = *node;
-    if (info->GetClassName())
+    if (info->wxGetClassName())
     {
-        wxString msg(info->GetClassName());
+        wxString msg(info->wxGetClassName());
         msg += wxT(" ");
 
         if (info->GetBaseClassName1() && !info->GetBaseClassName2())

@@ -89,7 +89,7 @@ protected:
     inline static wxRect s_rectDialog{ 0, 0, 222, 324 };
 
 public:
-	wxClassInfo *GetClassInfo() const override;
+	wxClassInfo *wxGetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
 };

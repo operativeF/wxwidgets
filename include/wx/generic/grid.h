@@ -1395,7 +1395,7 @@ private:
     std::string m_cornerLabel;
 
 public:
-	wxClassInfo *GetClassInfo() const override;
+	wxClassInfo *wxGetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
 };
@@ -3066,7 +3066,7 @@ private:
 
     public:
 	wxGridEvent& operator=(const wxGridEvent&) = delete;
-	wxClassInfo *GetClassInfo() const override ;
+	wxClassInfo *wxGetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -3126,7 +3126,7 @@ private:
 
     public:
 	wxGridSizeEvent& operator=(const wxGridSizeEvent&) = delete;
-	wxClassInfo *GetClassInfo() const override ;
+	wxClassInfo *wxGetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -3195,7 +3195,7 @@ protected:
 
     public:
 	wxGridRangeSelectEvent& operator=(const wxGridRangeSelectEvent&) = delete;
-	wxClassInfo *GetClassInfo() const override ;
+	wxClassInfo *wxGetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -3236,7 +3236,7 @@ private:
 
     public:
 	wxGridEditorCreatedEvent& operator=(const wxGridEditorCreatedEvent&) = delete;
-	wxClassInfo *GetClassInfo() const override ;
+	wxClassInfo *wxGetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };

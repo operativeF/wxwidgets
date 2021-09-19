@@ -142,11 +142,11 @@ void wxPluginLibrary::UpdateClasses()
 
     for ( const wxClassInfo *info = m_ourFirst; ; info = info->GetNext() )
     {
-        if( info->GetClassName() )
+        if( info->wxGetClassName() )
         {
             // Hash all the class names into a local table too so
             // we can quickly find the entry they correspond to.
-            (*ms_classes)[info->GetClassName()] = this;
+            (*ms_classes)[info->wxGetClassName()] = this;
         }
 
         if ( info == m_ourLast )
@@ -165,7 +165,7 @@ void wxPluginLibrary::RestoreClasses()
 
     for ( const wxClassInfo *info = m_ourFirst; ; info = info->GetNext() )
     {
-        ms_classes->erase(ms_classes->find(info->GetClassName()));
+        ms_classes->erase(ms_classes->find(info->wxGetClassName()));
 
         if ( info == m_ourLast )
             break;
@@ -251,7 +251,7 @@ void wxPluginLibrary::UnregisterModules()
 }
 
 wxPluginLibrary *
-wxPluginManager::LoadLibrary(const wxString &libname, int flags)
+wxPluginManager::wxLoadLibrary(const wxString &libname, int flags)
 {
     wxString realname(libname);
 
@@ -272,7 +272,7 @@ wxPluginManager::LoadLibrary(const wxString &libname, int flags)
     if ( entry )
     {
         wxLogTrace(wxT("dll"),
-                   wxT("LoadLibrary(%s): already loaded."), realname.c_str());
+                   wxT("wxLoadLibrary(%s): already loaded."), realname.c_str());
 
         entry->RefLib();
     }
@@ -285,13 +285,13 @@ wxPluginManager::LoadLibrary(const wxString &libname, int flags)
             (*ms_manifest)[realname] = entry;
 
             wxLogTrace(wxT("dll"),
-                       wxT("LoadLibrary(%s): loaded ok."), realname.c_str());
+                       wxT("wxLoadLibrary(%s): loaded ok."), realname.c_str());
 
         }
         else
         {
             wxLogTrace(wxT("dll"),
-                       wxT("LoadLibrary(%s): failed to load."), realname.c_str());
+                       wxT("wxLoadLibrary(%s): failed to load."), realname.c_str());
 
             // we have created entry just above
             if ( !entry->UnrefLib() )
@@ -347,7 +347,7 @@ bool wxPluginManager::UnloadLibrary(const wxString& libname)
 
 bool wxPluginManager::Load(const wxString &libname, int flags)
 {
-    m_entry = wxPluginManager::LoadLibrary(libname, flags);
+    m_entry = wxPluginManager::wxLoadLibrary(libname, flags);
 
     return IsLoaded();
 }

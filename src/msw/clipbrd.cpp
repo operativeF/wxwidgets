@@ -219,7 +219,7 @@ bool wxSetClipboardData(wxDataFormat dataFormat,
                     if ( dib.IsOk() )
                     {
                         DIBSECTION ds;
-                        int n = ::GetObject(dib.GetHandle(), sizeof(DIBSECTION), &ds);
+                        int n = ::GetObjectW(dib.GetHandle(), sizeof(DIBSECTION), &ds);
                         wxASSERT( n == sizeof(DIBSECTION) && ds.dsBm.bmBits );
                         // Number of colours in the palette.
                         int numColors;

@@ -198,7 +198,7 @@ void wxAuiMSWToolBarArt::DrawButton(
 
         if ( (m_flags & wxAUI_TB_TEXT) && !item.GetLabel().empty() )
         {
-            dc.DrawText(item.GetLabel(), textX, textY);
+            dc.wxDrawText(item.GetLabel(), textX, textY);
         }
     }
     else
@@ -321,7 +321,7 @@ void wxAuiMSWToolBarArt::DrawDropDownButton(
 
         if ( (m_flags & wxAUI_TB_TEXT) && !item.GetLabel().empty() )
         {
-            dc.DrawText(item.GetLabel(), textX, textY);
+            dc.wxDrawText(item.GetLabel(), textX, textY);
         }
 
     }

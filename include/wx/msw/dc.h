@@ -57,7 +57,7 @@ public:
 
     void Clear() override;
 
-    bool StartDoc(const std::string& message) override;
+    bool wxStartDoc(const std::string& message) override;
     void EndDoc() override;
 
     void StartPage() override;
@@ -75,7 +75,7 @@ public:
     void DestroyClippingRegion() override;
 
     wxCoord GetCharHeight() const override;
-    wxCoord GetCharWidth() const override;
+    wxCoord wxGetCharWidth() const override;
 
     bool CanDrawBitmap() const override;
     bool CanGetTextExtent() const override;

@@ -738,7 +738,7 @@ void wxStdRenderer::DrawTextLine(wxDC& dc,
     if ( (selStart == -1) || !(flags & wxCONTROL_FOCUSED) )
     {
         // just draw it as is
-        dc.DrawText(text, rect.x, rect.y);
+        dc.wxDrawText(text, rect.x, rect.y);
     }
     else // we have selection
     {
@@ -749,7 +749,7 @@ void wxStdRenderer::DrawTextLine(wxDC& dc,
         wxString s(text, (size_t)selStart);
         if ( !s.empty() )
         {
-            dc.DrawText(s, x, rect.y);
+            dc.wxDrawText(s, x, rect.y);
 
             dc.GetTextExtent(s, &width, NULL);
             x += width;
@@ -765,7 +765,7 @@ void wxStdRenderer::DrawTextLine(wxDC& dc,
             dc.SetTextBackground(wxSCHEME_COLOUR(m_scheme, HIGHLIGHT));
             dc.SetBackgroundMode(wxBrushStyle::Solid);
 
-            dc.DrawText(s, x, rect.y);
+            dc.wxDrawText(s, x, rect.y);
             dc.GetTextExtent(s, &width, NULL);
             x += width;
 
@@ -778,7 +778,7 @@ void wxStdRenderer::DrawTextLine(wxDC& dc,
         s = text.c_str() + selEnd;
         if ( !s.empty() )
         {
-            dc.DrawText(s, x, rect.y);
+            dc.wxDrawText(s, x, rect.y);
         }
     }
 }

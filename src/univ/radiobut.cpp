@@ -67,7 +67,7 @@ void wxRadioButton::OnCheck()
         // stop if we found a radio button with wxRB_GROUP style or it we
         // are at the first control
         if ( !nodeStart->GetPrevious() ||
-             (nodeStart->GetData()->GetWindowStyle() & wxRB_GROUP) )
+             (nodeStart->GetData()->wxGetWindowStyle() & wxRB_GROUP) )
             break;
 
         nodeStart = nodeStart->GetPrevious();
@@ -89,7 +89,7 @@ void wxRadioButton::OnCheck()
 
         nodeStart = nodeStart->GetNext();
         if ( !nodeStart ||
-             (nodeStart->GetData()->GetWindowStyle() & wxRB_GROUP) )
+             (nodeStart->GetData()->wxGetWindowStyle() & wxRB_GROUP) )
         {
             // we reached the next group
             break;
@@ -157,7 +157,7 @@ void wxRadioButton::DoDraw(wxControlRenderer *renderer)
                         GetBitmap(GetState(flags), status),
                         renderer->GetRect(),
                         flags,
-                        GetWindowStyle() & wxALIGN_RIGHT ? wxALIGN_RIGHT
+                        wxGetWindowStyle() & wxALIGN_RIGHT ? wxALIGN_RIGHT
                                                          : wxALIGN_LEFT,
                         GetAccelIndex());
 }

@@ -486,7 +486,7 @@ STDMETHODIMP wxIAccessible::accNavigate ( LONG navDir, VARIANT varStart, VARIANT
     wxASSERT( ( m_pAccessible != nullptr ) || ( m_bQuiescing == true ) );
     if (!m_pAccessible)
         return E_FAIL;
-    wxLogTrace(wxT("access"), wxString(wxT("accNavigate for ")) + m_pAccessible->GetWindow()->GetClassInfo()->GetClassName());
+    wxLogTrace(wxT("access"), wxString(wxT("accNavigate for ")) + m_pAccessible->GetWindow()->wxGetClassInfo()->wxGetClassName());
 
     if ( varStart.vt != VT_I4 || varStart.lVal < 0 )
     {

@@ -84,7 +84,7 @@ int wxFontDialog::ShowModal()
 {
     WX_HOOK_MODAL_DIALOG();
 
-    wxWindow* const parent = GetParentForModalDialog(m_parent, GetWindowStyle());
+    wxWindow* const parent = GetParentForModalDialog(m_parent, wxGetWindowStyle());
     WXHWND hWndParent = parent ? GetHwndOf(parent) : nullptr;
     // It should be OK to always use GDI simulations
     DWORD flags = CF_SCREENFONTS /* | CF_NOSIMULATIONS */ ;

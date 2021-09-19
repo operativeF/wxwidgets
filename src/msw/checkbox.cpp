@@ -92,7 +92,7 @@ wxSize wxCheckBox::DoGetBestClientSize() const
         wxClientDC dc(const_cast<wxCheckBox *>(this));
         dc.SetFont(GetFont());
         dc.GetMultiLineTextExtent(GetLabelText(str), &wCheckbox, &hCheckbox);
-        wCheckbox += checkSize + GetCharWidth();
+        wCheckbox += checkSize + wxGetCharWidth();
 
         if ( ::GetWindowLongPtrW(GetHwnd(), GWL_STYLE) & BS_MULTILINE )
         {

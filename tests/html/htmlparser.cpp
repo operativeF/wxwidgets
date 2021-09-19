@@ -57,7 +57,7 @@ TEST_CASE("wxHtmlCell::Detach")
     SUBCASE("container")
     {
         top->Detach(cont);
-        CHECK( top->GetFirstChild() == nullptr );
+        CHECK( top->wxGetFirstChild() == nullptr );
 
         delete cont;
     }
@@ -65,7 +65,7 @@ TEST_CASE("wxHtmlCell::Detach")
     SUBCASE("first-child")
     {
         cont->Detach(cell1);
-        CHECK( cont->GetFirstChild() == cell2 );
+        CHECK( cont->wxGetFirstChild() == cell2 );
 
         delete cell1;
     }
@@ -73,7 +73,7 @@ TEST_CASE("wxHtmlCell::Detach")
     SUBCASE("middle-child")
     {
         cont->Detach(cell2);
-        CHECK( cont->GetFirstChild() == cell1 );
+        CHECK( cont->wxGetFirstChild() == cell1 );
         CHECK( cell1->GetNext() == cell3 );
 
         delete cell2;
@@ -82,7 +82,7 @@ TEST_CASE("wxHtmlCell::Detach")
     SUBCASE("last-child")
     {
         cont->Detach(cell3);
-        CHECK( cont->GetFirstChild() == cell1 );
+        CHECK( cont->wxGetFirstChild() == cell1 );
         CHECK( cell1->GetNext() == cell2 );
         CHECK( cell2->GetNext() == nullptr );
 

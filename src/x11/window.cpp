@@ -418,7 +418,7 @@ void wxWindowX11::SetFocus()
 
     if (wa.map_state == IsViewable)
     {
-        wxLogTrace( wxT("focus"), wxT("wxWindowX11::SetFocus: %s"), GetClassInfo()->GetClassName());
+        wxLogTrace( wxT("focus"), wxT("wxWindowX11::SetFocus: %s"), wxGetClassInfo()->wxGetClassName());
         //        XSetInputFocus( wxGlobalDisplay(), xwindow, RevertToParent, CurrentTime );
         XSetInputFocus( wxGlobalDisplay(), xwindow, RevertToNone, CurrentTime );
         m_needsInputFocus = false;
@@ -555,7 +555,7 @@ void wxWindowX11::DoCaptureMouse()
         if (res != GrabSuccess)
         {
             wxString msg;
-            msg.Printf(wxT("Failed to grab pointer for window %s"), this->GetClassInfo()->GetClassName());
+            msg.Printf(wxT("Failed to grab pointer for window %s"), this->wxGetClassInfo()->wxGetClassName());
             wxLogDebug(msg);
             if (res == GrabNotViewable)
             {
@@ -895,7 +895,7 @@ void wxWindowX11::DoGetClientSize(int *x, int *y) const
 
 void wxWindowX11::DoSetSize(int x, int y, int width, int height, int sizeFlags)
 {
-    //    wxLogDebug("DoSetSize: %s (%ld) %d, %d %dx%d", GetClassInfo()->GetClassName(), GetId(), x, y, width, height);
+    //    wxLogDebug("DoSetSize: %s (%ld) %d, %d %dx%d", wxGetClassInfo()->wxGetClassName(), GetId(), x, y, width, height);
 
     Window xwindow = (Window) m_mainWindow;
 
@@ -937,7 +937,7 @@ void wxWindowX11::DoSetSize(int x, int y, int width, int height, int sizeFlags)
 
 void wxWindowX11::DoSetClientSize(int width, int height)
 {
-    //    wxLogDebug("DoSetClientSize: %s (%ld) %dx%d", GetClassInfo()->GetClassName(), GetId(), width, height);
+    //    wxLogDebug("DoSetClientSize: %s (%ld) %dx%d", wxGetClassInfo()->wxGetClassName(), GetId(), width, height);
 
     Window xwindow = (Window) m_mainWindow;
 
@@ -1078,7 +1078,7 @@ int wxWindowX11::GetCharHeight() const
     return h;
 }
 
-int wxWindowX11::GetCharWidth() const
+int wxWindowX11::wxGetCharWidth() const
 {
     wxFont font(GetFont());
     wxCHECK_MSG( font.IsOk(), 0, wxT("valid window font needed") );
@@ -1182,14 +1182,14 @@ void wxWindowX11::Update()
 {
     if (m_updateNcArea)
     {
-        // wxLogDebug("wxWindowX11::UpdateNC: %s", GetClassInfo()->GetClassName());
+        // wxLogDebug("wxWindowX11::UpdateNC: %s", wxGetClassInfo()->wxGetClassName());
         // Send nc paint events.
         SendNcPaintEvents();
     }
 
     if (!m_updateRegion.IsEmpty())
     {
-        // wxLogDebug("wxWindowX11::Update: %s", GetClassInfo()->GetClassName());
+        // wxLogDebug("wxWindowX11::Update: %s", wxGetClassInfo()->wxGetClassName());
         // Actually send erase events.
         SendEraseEvents();
 
@@ -1228,7 +1228,7 @@ void wxWindowX11::SendEraseEvents()
 
 void wxWindowX11::SendPaintEvents()
 {
-    //    wxLogDebug("SendPaintEvents: %s (%ld)", GetClassInfo()->GetClassName(), GetId());
+    //    wxLogDebug("SendPaintEvents: %s (%ld)", wxGetClassInfo()->wxGetClassName(), GetId());
 
     m_clipPaintRegion = true;
 
@@ -1317,7 +1317,7 @@ void wxWindowX11::OnInternalIdle()
     {
 #if 0
         wxString msg;
-        msg.Printf("Setting focus for %s from OnInternalIdle\n", GetClassInfo()->GetClassName());
+        msg.Printf("Setting focus for %s from OnInternalIdle\n", wxGetClassInfo()->wxGetClassName());
         printf(msg.c_str());
 #endif
         SetFocus();
@@ -1338,12 +1338,12 @@ static bool DoAddWindowToTable(wxWindowHash *hash, Window w, wxWindow *win)
     if ( !hash->insert(wxWindowHash::value_type(w, win)).second )
     {
         wxLogDebug( wxT("Widget table clash: new widget is 0x%08x, %s"),
-                    (unsigned int)w, win->GetClassInfo()->GetClassName());
+                    (unsigned int)w, win->wxGetClassInfo()->wxGetClassName());
         return false;
     }
 
     wxLogTrace( wxT("widget"), wxT("XWindow 0x%08x <-> window %p (%s)"),
-                (unsigned int) w, win, win->GetClassInfo()->GetClassName());
+                (unsigned int) w, win, win->wxGetClassInfo()->wxGetClassName());
 
     return true;
 }

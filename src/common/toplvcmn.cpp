@@ -239,7 +239,7 @@ void wxTopLevelWindowBase::DoCentre(int dir)
     //
     // and centering a maximized window doesn't make sense as its position
     // can't change
-    if ( IsAlwaysMaximized() || IsMaximized() )
+    if ( IsAlwaysMaximized() || wxIsMaximized() )
         return;
 
     // we need the display rect anyhow so store it first: notice that we should

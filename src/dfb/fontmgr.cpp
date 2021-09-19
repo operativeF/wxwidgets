@@ -55,9 +55,9 @@ wxFontInstance::wxFontInstance(float ptSize, bool aa,
     desc.fract_height = pixSize;
 
     if ( filename == BUILTIN_DFB_FONT_FILENAME )
-        m_font = wxIDirectFB::Get()->CreateFont(NULL, &desc);
+        m_font = wxIDirectFB::Get()->CreateFontW(NULL, &desc);
     else
-        m_font = wxIDirectFB::Get()->CreateFont(filename.fn_str(), &desc);
+        m_font = wxIDirectFB::Get()->CreateFontW(filename.fn_str(), &desc);
 
     wxASSERT_MSG( m_font, "cannot create font instance" );
 }

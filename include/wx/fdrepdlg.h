@@ -166,7 +166,7 @@ private:
     std::string m_strReplace;
 
 public:
-	wxClassInfo *GetClassInfo() const override ;
+	wxClassInfo *wxGetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };

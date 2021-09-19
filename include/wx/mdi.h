@@ -237,7 +237,7 @@ public:
 
     // no maximize etc
     void Maximize(bool WXUNUSED(maximize) = true) override { }
-    bool IsMaximized() const override { return true; }
+    bool wxIsMaximized() const override { return true; }
     bool IsAlwaysMaximized() const override { return true; }
     void Iconize(bool WXUNUSED(iconize) = true) override { }
     bool IsIconized() const override { return false; }

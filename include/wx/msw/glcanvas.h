@@ -123,7 +123,7 @@ protected:
     // the real window creation function, Create() may reuse it twice as we may
     // need to create an OpenGL window to query the available extensions and
     // then potentially delete and recreate it with another pixel format
-    bool CreateWindow(wxWindow *parent,
+    bool wxCreateWindow(wxWindow *parent,
                       wxWindowID id = wxID_ANY,
                       const wxPoint& pos = wxDefaultPosition,
                       const wxSize& size = wxDefaultSize,

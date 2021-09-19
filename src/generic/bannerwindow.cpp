@@ -299,7 +299,7 @@ wxBannerWindow::DrawBannerTextLine(wxDC& dc,
         case wxTOP:
         case wxBOTTOM:
             // The simple case: we just draw the text normally.
-            dc.DrawText(str, pos);
+            dc.wxDrawText(str, pos);
             break;
 
         case wxLEFT:

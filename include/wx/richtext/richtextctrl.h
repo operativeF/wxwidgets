@@ -160,7 +160,7 @@ public:
     /**
         Returns the nth object.
     */
-    wxRichTextObject* GetObject(int n) const { return m_objects[n]; }
+    wxRichTextObject* wxGetObject(int n) const { return m_objects[n]; }
 
     /**
         Returns the array of objects.
@@ -2629,7 +2629,7 @@ protected:
 private:
     public:
     wxRichTextEvent& operator=(const wxRichTextEvent&) = delete;
-    wxClassInfo *GetClassInfo() const override ;
+    wxClassInfo *wxGetClassInfo() const override ;
     static wxClassInfo ms_classInfo; 
     static wxObject* wxCreateObject();
 };

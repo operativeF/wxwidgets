@@ -144,14 +144,14 @@ void wxTopLevelWindowDFB::Maximize(bool maximize)
     }
 }
 
-bool wxTopLevelWindowDFB::IsMaximized() const
+bool wxTopLevelWindowDFB::wxIsMaximized() const
 {
     return m_isMaximized;
 }
 
 void wxTopLevelWindowDFB::Restore()
 {
-    if ( IsMaximized() )
+    if ( wxIsMaximized() )
     {
         Maximize(false);
     }

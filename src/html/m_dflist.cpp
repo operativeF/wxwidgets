@@ -35,7 +35,7 @@ TAG_HANDLER_BEGIN(DEFLIST, "DL,DT,DD" )
 
         if (tag.GetName() == wxT("DL"))
         {
-            if (m_WParser->GetContainer()->GetFirstChild() != nullptr)
+            if (m_WParser->GetContainer()->wxGetFirstChild() != nullptr)
             {
                 m_WParser->CloseContainer();
                 m_WParser->OpenContainer();
@@ -44,7 +44,7 @@ TAG_HANDLER_BEGIN(DEFLIST, "DL,DT,DD" )
 
             ParseInner(tag);
 
-            if (m_WParser->GetContainer()->GetFirstChild() != nullptr)
+            if (m_WParser->GetContainer()->wxGetFirstChild() != nullptr)
             {
                 m_WParser->CloseContainer();
                 m_WParser->OpenContainer();
@@ -65,7 +65,7 @@ TAG_HANDLER_BEGIN(DEFLIST, "DL,DT,DD" )
         {
             m_WParser->CloseContainer();
             c = m_WParser->OpenContainer();
-            c->SetIndent(5 * m_WParser->GetCharWidth(), wxHTML_INDENT_LEFT);
+            c->SetIndent(5 * m_WParser->wxGetCharWidth(), wxHTML_INDENT_LEFT);
             return false;
         }
     }

@@ -46,8 +46,6 @@
 
 #include <windowsx.h>
 
-#include "wx/msw/winundef.h"
-
 #include <sys/types.h>
 
 #if wxUSE_RICHEDIT
@@ -393,7 +391,7 @@ bool wxTextCtrl::Create(wxWindow *parent,
 bool wxTextCtrl::CanApplyThemeBorder() const
 {
     // Standard text control already handles theming
-    return ((GetWindowStyle() & (wxTE_RICH|wxTE_RICH2)) != 0);
+    return ((wxGetWindowStyle() & (wxTE_RICH|wxTE_RICH2)) != 0);
 }
 
 bool wxTextCtrl::MSWCreateText(const std::string& value,
@@ -804,7 +802,7 @@ void wxTextCtrl::SetWindowStyleFlag(long style)
     if ( IsRich() || wxGetWinVersion() < wxWinVersion_2003 )
     {
         const long alignMask = wxTE_LEFT | wxTE_CENTRE | wxTE_RIGHT;
-        if ( (style & alignMask) != (GetWindowStyle() & alignMask) )
+        if ( (style & alignMask) != (wxGetWindowStyle() & alignMask) )
         {
             const wxString value = GetValue();
             const wxPoint pos = GetPosition();
@@ -857,7 +855,7 @@ void wxTextCtrl::SetWindowStyleFlag(long style)
     // changed by simply calling SetWindowLong(GWL_STYLE) but can be changed
     // using richedit-specific EM_SETOPTIONS
     if ( IsRich() &&
-            ((style & wxTE_NOHIDESEL) != (GetWindowStyle() & wxTE_NOHIDESEL)) )
+            ((style & wxTE_NOHIDESEL) != (wxGetWindowStyle() & wxTE_NOHIDESEL)) )
     {
         bool set = (style & wxTE_NOHIDESEL) != 0;
 
@@ -1492,7 +1490,7 @@ wxTextCtrl::HitTest(const wxPoint& pt, long *posOut) const
 
     if ( pt.y > ptReal.y + GetCharHeight() )
         rc = wxTextCtrlHitTestResult::Below;
-    else if ( pt.x > ptReal.x + GetCharWidth() )
+    else if ( pt.x > ptReal.x + wxGetCharWidth() )
         rc = wxTextCtrlHitTestResult::Beyond;
     else
         rc = wxTextCtrlHitTestResult::OnText;
@@ -3449,7 +3447,7 @@ bool wxRichEditModule::Load(Version version)
 
     static_assert(WXSIZEOF(dllnames) == Version_Max, "RichEditDllNames versions mismatch");
 
-    ms_hRichEdit[version] = ::LoadLibrary(boost::nowide::widen(dllnames[version]).c_str());
+    ms_hRichEdit[version] = ::LoadLibraryW(boost::nowide::widen(dllnames[version]).c_str());
 
     if ( !ms_hRichEdit[version] )
     {

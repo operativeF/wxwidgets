@@ -154,7 +154,7 @@ void wxCheckBox::DoDraw(wxControlRenderer *renderer)
                         bitmap,
                         renderer->GetRect(),
                         flags,
-                        GetWindowStyle() & wxALIGN_RIGHT ? wxALIGN_RIGHT
+                        wxGetWindowStyle() & wxALIGN_RIGHT ? wxALIGN_RIGHT
                                                          : wxALIGN_LEFT,
                         GetAccelIndex());
 }
@@ -188,7 +188,7 @@ wxSize wxCheckBox::DoGetBestClientSize() const
     height += GetCharHeight()/2;
 #endif // wxUNIV_COMPATIBLE_MSW
 
-    width += sizeBmp.x + 2*GetCharWidth();
+    width += sizeBmp.x + 2*wxGetCharWidth();
 
     return wxSize(width, height);
 }

@@ -99,7 +99,7 @@ private:
         wxRichMessageDialog(const wxRichMessageDialog&) = delete;
         wxRichMessageDialog& operator=(const wxRichMessageDialog&) = delete;
 
-        wxClassInfo *GetClassInfo() const;
+        wxClassInfo *wxGetClassInfo() const;
         static wxClassInfo ms_classInfo;
         static wxObject* wxCreateObject();
     };

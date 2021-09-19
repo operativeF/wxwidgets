@@ -609,7 +609,7 @@ public:
     wxWindow* GetWindow() const { return m_window; }
 
     // begin a new document (relevant only for printing / pdf etc) if there is a progress dialog, message will be shown
-    virtual bool StartDoc( const std::string& message );
+    virtual bool wxStartDoc( const std::string& message );
 
     // done with that document (relevant only for printing / pdf etc)
     virtual void EndDoc();
@@ -662,8 +662,8 @@ public:
                               const wxGraphicsMatrix& matrix = wxNullGraphicsMatrix) const;
 
     // creates a font
-    virtual wxGraphicsFont CreateFont( const wxFont &font , const wxColour &col = *wxBLACK ) const;
-    virtual wxGraphicsFont CreateFont(double sizeInPixels,
+    virtual wxGraphicsFont wxCreateFont( const wxFont &font , const wxColour &col = *wxBLACK ) const;
+    virtual wxGraphicsFont wxCreateFont(double sizeInPixels,
                                       const std::string& facename,
                                       int flags = wxFONTFLAG_DEFAULT,
                                       const wxColour& col = *wxBLACK) const;
@@ -812,17 +812,17 @@ public:
     // text
     //
 
-    void DrawText(std::string_view str, double x, double y )
+    void wxDrawText(std::string_view str, double x, double y )
         { DoDrawText(str, x, y); }
 
-    void DrawText(std::string_view str, double x, double y, double angle )
+    void wxDrawText(std::string_view str, double x, double y, double angle )
         { DoDrawRotatedText(str, x, y, angle); }
 
-    void DrawText(std::string_view str, double x, double y,
+    void wxDrawText(std::string_view str, double x, double y,
                    const wxGraphicsBrush& backgroundBrush )
         { DoDrawFilledText(str, x, y, backgroundBrush); }
 
-    void DrawText(std::string_view str, double x, double y,
+    void wxDrawText(std::string_view str, double x, double y,
                    double angle, const wxGraphicsBrush& backgroundBrush )
         { DoDrawRotatedFilledText(str, x, y, angle, backgroundBrush); }
 
@@ -1049,8 +1049,8 @@ public:
                               const wxGraphicsMatrix& matrix = wxNullGraphicsMatrix) = 0;
 
     // sets the font
-    virtual wxGraphicsFont CreateFont( const wxFont &font , const wxColour &col = *wxBLACK ) = 0;
-    virtual wxGraphicsFont CreateFont(double sizeInPixels,
+    virtual wxGraphicsFont wxCreateFont( const wxFont &font , const wxColour &col = *wxBLACK ) = 0;
+    virtual wxGraphicsFont wxCreateFont(double sizeInPixels,
                                       const std::string& facename,
                                       int flags = wxFONTFLAG_DEFAULT,
                                       const wxColour& col = *wxBLACK) = 0;

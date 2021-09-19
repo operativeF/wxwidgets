@@ -194,7 +194,7 @@ wxSize wxListCtrlBase::DoGetBestClientSize() const
     if ( HasFlag(wxLC_NO_HEADER) || !columns )
     {
         // Use some arbitrary width.
-        totalWidth = 50*dc.GetCharWidth();
+        totalWidth = 50*dc.wxGetCharWidth();
     }
     else // We do have columns, use them to determine the best width.
     {

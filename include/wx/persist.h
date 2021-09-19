@@ -210,7 +210,7 @@ public:
 
 
     // return the associated object
-    void *GetObject() const { return m_obj; }
+    void *wxGetObject() const { return m_obj; }
 
 protected:
     // wrappers for wxPersistenceManager methods which don't require passing

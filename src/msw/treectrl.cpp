@@ -32,8 +32,6 @@
 
 #include <windowsx.h> // needed by GET_X_LPARAM and GET_Y_LPARAM macros
 
-
-#include "wx/msw/winundef.h"
 #include "wx/msw/private/winstyle.h"
 
 #include "wx/imaglist.h"
@@ -648,7 +646,7 @@ bool wxTreeTraversal::DoTraverse(const wxTreeItemId& root, bool recursively)
 bool wxTreeTraversal::Traverse(const wxTreeItemId& root, bool recursively)
 {
     wxTreeItemIdValue cookie;
-    wxTreeItemId child = m_tree->GetFirstChild(root, cookie);
+    wxTreeItemId child = m_tree->wxGetFirstChild(root, cookie);
     while ( child.IsOk() )
     {
         // depth first traversal
@@ -1258,7 +1256,7 @@ bool wxTreeCtrl::ItemHasChildren(const wxTreeItemId& item) const
     if ( IS_VIRTUAL_ROOT(item) )
     {
         wxTreeItemIdValue cookie;
-        return GetFirstChild(item, cookie).IsOk();
+        return wxGetFirstChild(item, cookie).IsOk();
     }
 
     wxTreeViewItem tvItem(item, TVIF_CHILDREN);
@@ -1347,7 +1345,7 @@ wxTreeItemId wxTreeCtrl::GetItemParent(const wxTreeItemId& item) const
     return {hItem};
 }
 
-wxTreeItemId wxTreeCtrl::GetFirstChild(const wxTreeItemId& item,
+wxTreeItemId wxTreeCtrl::wxGetFirstChild(const wxTreeItemId& item,
                                        wxTreeItemIdValue& cookie) const
 {
     wxCHECK_MSG( item.IsOk(), wxTreeItemId(), wxT("invalid tree item") );
@@ -1382,7 +1380,7 @@ wxTreeItemId wxTreeCtrl::GetLastChild(const wxTreeItemId& item) const
     wxTreeItemIdValue cookie;
 
     wxTreeItemId childLast,
-    child = GetFirstChild(item, cookie);
+    child = wxGetFirstChild(item, cookie);
     while ( child.IsOk() )
     {
         childLast = child;
@@ -1392,13 +1390,13 @@ wxTreeItemId wxTreeCtrl::GetLastChild(const wxTreeItemId& item) const
     return childLast;
 }
 
-wxTreeItemId wxTreeCtrl::GetNextSibling(const wxTreeItemId& item) const
+wxTreeItemId wxTreeCtrl::wxGetNextSibling(const wxTreeItemId& item) const
 {
     wxCHECK_MSG( item.IsOk(), wxTreeItemId(), wxT("invalid tree item") );
     return wxTreeItemId(TreeView_GetNextSibling(GetHwnd(), HITEM(item)));
 }
 
-wxTreeItemId wxTreeCtrl::GetPrevSibling(const wxTreeItemId& item) const
+wxTreeItemId wxTreeCtrl::wxGetPrevSibling(const wxTreeItemId& item) const
 {
     wxCHECK_MSG( item.IsOk(), wxTreeItemId(), wxT("invalid tree item") );
     return wxTreeItemId(TreeView_GetPrevSibling(GetHwnd(), HITEM(item)));
@@ -1580,7 +1578,7 @@ wxTreeItemId wxTreeCtrl::DoInsertItem(const wxTreeItemId& parent,
     else // find the item from index
     {
         wxTreeItemIdValue cookie;
-        wxTreeItemId idCur = GetFirstChild(parent, cookie);
+        wxTreeItemId idCur = wxGetFirstChild(parent, cookie);
         while ( index != 0 && idCur.IsOk() )
         {
             index--;
@@ -1661,7 +1659,7 @@ void wxTreeCtrl::DeleteChildren(const wxTreeItemId& item)
     wxTreeItemIdValue cookie;
 
     wxArrayTreeItemIds children;
-    wxTreeItemId child = GetFirstChild(item, cookie);
+    wxTreeItemId child = wxGetFirstChild(item, cookie);
     while ( child.IsOk() )
     {
         children.Add(child);
@@ -1843,7 +1841,7 @@ void wxTreeCtrl::DoSelectChildren(const wxTreeItemId& parent)
     DoUnselectAll();
 
     wxTreeItemIdValue cookie;
-    wxTreeItemId child = GetFirstChild(parent, cookie);
+    wxTreeItemId child = wxGetFirstChild(parent, cookie);
     while ( child.IsOk() )
     {
         DoSelectItem(child, true);
@@ -2166,7 +2164,7 @@ void wxTreeCtrl::SortChildren(const wxTreeItemId& item)
     //     may be why as if you don't use the wxDECLARE_CLASS/wxIMPLEMENT_CLASS
     //     combo for your derived wxTreeCtrl it will sort without
     //     OnCompareItems
-    if ( GetClassInfo() == wxCLASSINFO(wxTreeCtrl) )
+    if ( wxGetClassInfo() == wxCLASSINFO(wxTreeCtrl) )
     {
         if ( !TreeView_SortChildren(GetHwnd(), HITEM(item), 0) )
             wxLogLastError(wxS("TreeView_SortChildren()"));
@@ -3765,7 +3763,7 @@ bool wxTreeCtrl::MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result)
                     // force it to process the Enter presses itself, otherwise
                     // they could be stolen from it by the dialog
                     // navigation code
-                    m_textCtrl->SetWindowStyle(m_textCtrl->GetWindowStyle()
+                    m_textCtrl->SetWindowStyle(m_textCtrl->wxGetWindowStyle()
                                                | wxTE_PROCESS_ENTER);
                 }
             }

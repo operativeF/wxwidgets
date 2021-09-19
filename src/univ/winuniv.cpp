@@ -937,7 +937,7 @@ void wxWindow::SetScrollbar(int orient,
 
             PositionScrollbars();
         }
-        else if ( GetWindowStyle() & wxALWAYS_SHOW_SB )
+        else if ( wxGetWindowStyle() & wxALWAYS_SHOW_SB )
         {
             // we might have disabled it before
             scrollbar->Enable();
@@ -950,7 +950,7 @@ void wxWindow::SetScrollbar(int orient,
         if ( scrollbar )
         {
             // wxALWAYS_SHOW_SB only applies to the vertical scrollbar
-            if ( (orient & wxVERTICAL) && (GetWindowStyle() & wxALWAYS_SHOW_SB) )
+            if ( (orient & wxVERTICAL) && (wxGetWindowStyle() & wxALWAYS_SHOW_SB) )
             {
                 // just disable the scrollbar
                 scrollbar->SetScrollbar(pos, pageSize, range, pageSize, refresh);
@@ -1338,7 +1338,7 @@ void wxWindow::OnKeyDown(wxKeyEvent& event)
             // if it wasn't in a menu, try to find a button
             if ( command != -1 )
             {
-                wxWindow* child = win->FindWindow(command);
+                wxWindow* child = win->wxFindWindow(command);
                 if ( child && wxDynamicCast(child, wxButton) )
                 {
                     wxCommandEvent eventCmd(wxEVT_BUTTON, command);

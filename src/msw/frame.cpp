@@ -212,13 +212,13 @@ void wxFrame::SendSizeEvent(int flags)
         if ( flags & wxSEND_EVENT_POST )
         {
             ::PostMessageW(GetHwnd(), WM_SIZE,
-                          IsMaximized() ? SIZE_MAXIMIZED : SIZE_RESTORED,
+                          wxIsMaximized() ? SIZE_MAXIMIZED : SIZE_RESTORED,
                           MAKELPARAM(r.right - r.left, r.bottom - r.top));
         }
         else // send it
         {
             ::SendMessageW(GetHwnd(), WM_SIZE,
-                          IsMaximized() ? SIZE_MAXIMIZED : SIZE_RESTORED,
+                          wxIsMaximized() ? SIZE_MAXIMIZED : SIZE_RESTORED,
                           MAKELPARAM(r.right - r.left, r.bottom - r.top));
         }
     }
@@ -628,7 +628,7 @@ void wxFrame::IconizeChildFrames(bool bIconize)
         // the screen (as the MDI children) instead of making them appear
         // in the taskbar because they are, by virtue of this style, not
         // managed by the taskbar - instead leave Windows take care of them
-        if ( win->GetWindowStyle() & wxFRAME_TOOL_WINDOW )
+        if ( win->wxGetWindowStyle() & wxFRAME_TOOL_WINDOW )
             continue;
 
         // the child MDI frames are a special case and should not be touched by

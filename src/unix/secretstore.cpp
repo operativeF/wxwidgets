@@ -173,7 +173,7 @@ public:
                                        );
         if ( !service )
         {
-            errmsg = error.GetMessage();
+            errmsg = error.wxGetMessage();
             return NULL;
         }
 
@@ -206,7 +206,7 @@ public:
                 error.Out()
               ) )
         {
-            errmsg = error.GetMessage();
+            errmsg = error.wxGetMessage();
             return false;
         }
 
@@ -240,7 +240,7 @@ public:
             // empty in this case, this is exactly how our API is supposed to
             // behave.
             if ( error )
-                errmsg = error.GetMessage();
+                errmsg = error.wxGetMessage();
             return false;
         }
 
@@ -273,7 +273,7 @@ public:
               ) )
         {
             if ( error )
-                errmsg = error.GetMessage();
+                errmsg = error.wxGetMessage();
             return false;
         }
 

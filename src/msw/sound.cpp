@@ -176,13 +176,13 @@ bool wxSound::DoPlay(unsigned flags) const
         flagsMSW |= SND_LOOP | SND_ASYNC;
     }
 
-    return ::PlaySound(m_data->GetSoundData(), hmod, flagsMSW) != FALSE;
+    return ::PlaySoundW(m_data->GetSoundData(), hmod, flagsMSW) != FALSE;
 }
 
 /* static */
 void wxSound::Stop()
 {
-    ::PlaySound(nullptr, nullptr, 0);
+    ::PlaySoundW(nullptr, nullptr, 0);
 }
 
 #endif // wxUSE_SOUND

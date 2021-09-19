@@ -81,7 +81,7 @@ bool wxGenericFileDirButton::Create(wxWindow *parent,
 
 void wxGenericFileDirButton::OnButtonClick(wxCommandEvent& WXUNUSED(ev))
 {
-    std::unique_ptr<wxDialog> p(CreateDialog());
+    std::unique_ptr<wxDialog> p(wxCreateDialog());
     if (p->ShowModal() == wxID_OK)
     {
         // save updated path in m_path
@@ -102,7 +102,7 @@ void wxGenericFileDirButton::SetInitialDirectory(const std::string& dir)
 // wxGenericFileButton
 // ----------------------------------------------------------------------------
 
-wxDialog *wxGenericFileButton::CreateDialog()
+wxDialog *wxGenericFileButton::wxCreateDialog()
 {
     // Determine the initial directory for the dialog: it comes either from the
     // default path, if it has it, or from the separately specified initial
@@ -127,7 +127,7 @@ wxDialog *wxGenericFileButton::CreateDialog()
 // wxGenericDirButton
 // ----------------------------------------------------------------------------
 
-wxDialog *wxGenericDirButton::CreateDialog()
+wxDialog *wxGenericDirButton::wxCreateDialog()
 {
     wxDirDialog* const dialog = new wxDirDialog
                                     (

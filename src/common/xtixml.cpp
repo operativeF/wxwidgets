@@ -104,7 +104,7 @@ void wxObjectXmlWriter::DoBeginWriteObject(const wxObject *WXUNUSED(object),
 {
     wxXmlNode *pnode;
     pnode = new wxXmlNode(wxXML_ELEMENT_NODE, wxT("object"));
-    pnode->AddAttribute(wxT("class"), wxString(classInfo->GetClassName()));
+    pnode->AddAttribute(wxT("class"), wxString(classInfo->wxGetClassName()));
     pnode->AddAttribute(wxT("id"), wxString::Format( wxT("%d"), objectID ) );
 
     wxStringToAnyHashMap::const_iterator it, en;
@@ -321,7 +321,7 @@ int wxObjectXmlReader::ReadComponent(wxXmlNode *node, wxObjectReaderCallback *ca
             {
                 createParamOids[i] = ReadComponent( prop, callbacks );
                 createClassInfos[i] =
-                    wx_dynamic_cast(const wxClassTypeInfo*, pi->GetTypeInfo())->GetClassInfo();
+                    wx_dynamic_cast(const wxClassTypeInfo*, pi->GetTypeInfo())->wxGetClassInfo();
             }
             else
             {
@@ -360,7 +360,7 @@ int wxObjectXmlReader::ReadComponent(wxXmlNode *node, wxObjectReaderCallback *ca
             {
                 createParamOids[i] = wxNullObjectID;
                 createClassInfos[i] =
-                    wx_dynamic_cast(const wxClassTypeInfo*, pi->GetTypeInfo())->GetClassInfo();
+                    wx_dynamic_cast(const wxClassTypeInfo*, pi->GetTypeInfo())->wxGetClassInfo();
             }
             else
             {

@@ -64,7 +64,7 @@ wxRect wxStaticBox::GetBorderGeometry() const
     // FIXME should use the renderer here
     wxRect rect;
     rect.width =
-    rect.x = GetCharWidth() / 2 + 1;
+    rect.x = wxGetCharWidth() / 2 + 1;
     rect.y = GetCharHeight() + 1;
     rect.height = rect.y / 2;
 

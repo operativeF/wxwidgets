@@ -178,7 +178,7 @@ long wxTopLevelWindow::GetDecorationsStyle() const
             style |= wxTOPLEVEL_BUTTON_ICONIZE;
         if ( m_windowStyle & wxMAXIMIZE_BOX )
         {
-            if ( IsMaximized() )
+            if ( wxIsMaximized() )
                 style |= wxTOPLEVEL_BUTTON_RESTORE;
             else
                 style |= wxTOPLEVEL_BUTTON_MAXIMIZE;
@@ -193,7 +193,7 @@ long wxTopLevelWindow::GetDecorationsStyle() const
     if ( m_windowStyle & wxRESIZE_BORDER )
         style |= wxTOPLEVEL_RESIZEABLE;
 
-    if ( IsMaximized() )
+    if ( wxIsMaximized() )
         style |= wxTOPLEVEL_MAXIMIZED;
     if ( GetIcon().IsOk() )
         style |= wxTOPLEVEL_ICON;
@@ -849,12 +849,12 @@ bool wxStdTLWInputHandler::HandleMouse(wxInputConsumer *consumer,
                 consumer->PerformAction(wxACTION_TOPLEVEL_BUTTON_PRESS, m_winPressed);
                 return true;
             }
-            else if ( (hit & wxHT_TOPLEVEL_TITLEBAR) && !w->IsMaximized() )
+            else if ( (hit & wxHT_TOPLEVEL_TITLEBAR) && !w->wxIsMaximized() )
             {
                 consumer->PerformAction(wxACTION_TOPLEVEL_MOVE);
                 return true;
             }
-            else if ( (consumer->GetInputWindow()->GetWindowStyle() & wxRESIZE_BORDER)
+            else if ( (consumer->GetInputWindow()->wxGetWindowStyle() & wxRESIZE_BORDER)
                       && (hit & wxHT_TOPLEVEL_ANY_BORDER) )
             {
                 consumer->PerformAction(wxACTION_TOPLEVEL_RESIZE, hit);
@@ -901,7 +901,7 @@ bool wxStdTLWInputHandler::HandleMouseMove(wxInputConsumer *consumer,
             return true;
         }
     }
-    else if ( consumer->GetInputWindow()->GetWindowStyle() & wxRESIZE_BORDER )
+    else if ( consumer->GetInputWindow()->wxGetWindowStyle() & wxRESIZE_BORDER )
     {
         wxTopLevelWindow *win = wxStaticCast(consumer->GetInputWindow(),
                                              wxTopLevelWindow);

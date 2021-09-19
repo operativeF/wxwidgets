@@ -222,12 +222,12 @@ TEST_CASE("Bounding box tests.")
                                 textExtent.y, textExtent.x, 3);
     }
 
-    SUBCASE("DrawText")
+    SUBCASE("wxDrawText")
     {
         std::string text("H");
         auto textExtent = m_gcdc->GetTextExtent(text);
 
-        m_gcdc->DrawText(text, 3, 3);
+        m_gcdc->wxDrawText(text, 3, 3);
         AssertBox(m_gcdc.get(), 3, 3, textExtent.x, textExtent.y, 3);
     }
 

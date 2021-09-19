@@ -94,7 +94,7 @@ wxPrinterDCImpl::wxPrinterDCImpl( wxPrinterDC *owner, WXHDC dc ) :
 // wxPrinterDCImpl {Start/End}{Page/Doc} methods
 // ----------------------------------------------------------------------------
 
-bool wxPrinterDCImpl::StartDoc(const std::string& message)
+bool wxPrinterDCImpl::wxStartDoc(const std::string& message)
 {
     DOCINFO docinfo;
     docinfo.cbSize = sizeof(DOCINFO);
@@ -275,7 +275,7 @@ bool DrawBitmapUsingStretchDIBits(HDC hdc,
         return false;
 
     DIBSECTION ds;
-    if ( !::GetObject(dib.GetHandle(), sizeof(ds), &ds) )
+    if ( !::GetObjectW(dib.GetHandle(), sizeof(ds), &ds) )
     {
         wxLogLastError(wxT("GetObject(DIBSECTION)"));
 

@@ -53,7 +53,7 @@ public:
 #endif // wxUSE_PALETTE
     void DestroyClippingRegion() override { m_dc.DestroyClippingRegion(); }
     wxCoord GetCharHeight() const override { return m_dc.GetCharHeight(); }
-    wxCoord GetCharWidth() const override { return m_dc.GetCharWidth(); }
+    wxCoord wxGetCharWidth() const override { return m_dc.wxGetCharWidth(); }
     bool CanDrawBitmap() const override { return m_dc.CanDrawBitmap(); }
     bool CanGetTextExtent() const override { return m_dc.CanGetTextExtent(); }
     int GetDepth() const override { return m_dc.GetDepth(); }

@@ -120,7 +120,7 @@ wxFindReplaceDialogImpl::wxFindReplaceDialogImpl(wxFindReplaceDialog *dialog,
     // always set this to be able to set the title
     int flags = FR_ENABLEHOOK;
 
-    int flagsDialog = dialog->GetWindowStyle();
+    int flagsDialog = dialog->wxGetWindowStyle();
     if ( flagsDialog & wxFR_NOMATCHCASE)
         flags |= FR_NOMATCHCASE;
     if ( flagsDialog & wxFR_NOWHOLEWORD)
@@ -379,7 +379,7 @@ bool wxFindReplaceDialog::Show(bool show)
     if ( replace )
         hwnd = ::ReplaceTextW(pFR);
     else
-        hwnd = ::FindText(pFR);
+        hwnd = ::FindTextW(pFR);
 
     if ( !hwnd )
     {

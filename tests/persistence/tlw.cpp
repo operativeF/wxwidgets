@@ -98,7 +98,7 @@ TEST_CASE_FIXTURE(PersistenceTests, "wxPersistTLW")
         CHECK(pos.y == frame->GetPosition().y);
         CHECK(size.x == frame->GetSize().GetWidth());
         CHECK(size.y == frame->GetSize().GetHeight());
-        CHECK(!frame->IsMaximized());
+        CHECK(!frame->wxIsMaximized());
         CHECK(!frame->IsIconized());
 
         // Next try that restoring a minimized frame works correctly: for
@@ -142,7 +142,7 @@ TEST_CASE_FIXTURE(PersistenceTests, "wxPersistTLW")
         // As above, we need to show the frame for it to be actually iconized.
         frame->Show();
 
-        CHECK(!frame->IsMaximized());
+        CHECK(!frame->wxIsMaximized());
         if ( checkIconized )
         {
 #ifdef __WXGTK__
@@ -186,7 +186,7 @@ TEST_CASE_FIXTURE(PersistenceTests, "wxPersistTLW")
 
         CHECK(wxPersistenceManager::Get().RegisterAndRestore(frame));
 
-        CHECK(frame->IsMaximized());
+        CHECK(frame->wxIsMaximized());
         CHECK(!frame->IsIconized());
 
         frame->Restore();

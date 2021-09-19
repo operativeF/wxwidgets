@@ -931,7 +931,7 @@ wxThread *wxThread::This()
     return thread;
 }
 
-void wxThread::Yield()
+void wxThread::ThreadYield()
 {
     // 0 argument to Sleep() is special and means to just give away the rest of
     // our timeslice

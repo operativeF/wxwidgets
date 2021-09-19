@@ -2756,7 +2756,7 @@ size_t wxTextCtrl::GetPartOfWrappedLine(const wxChar* text,
                 //else: we can just see it
 
                 // wrap at any character or only at words boundaries?
-                if ( !(GetWindowStyle() & wxTE_CHARWRAP) )
+                if ( !(wxGetWindowStyle() & wxTE_CHARWRAP) )
                 {
                     // find the (last) not word char before this word
                     wxTextCoord colWordStart;
@@ -2898,7 +2898,7 @@ wxTextCtrlHitTestResult wxTextCtrl::HitTestLine(const wxString& line,
         // now calculate the column: first, approximate it with fixed-width
         // value and then calculate the correct value iteratively: note that
         // we use the first character of the line instead of (average)
-        // GetCharWidth(): it is common to have lines of dashes, for example,
+        // wxGetCharWidth(): it is common to have lines of dashes, for example,
         // and this should give us much better approximation in such case
         //
         // OPT: maybe using (cache) m_widthAvg would be still faster? profile!
@@ -3536,7 +3536,7 @@ void wxTextCtrl::UpdateMaxWidth(wxTextCoord line)
 void wxTextCtrl::RecalcFontMetrics()
 {
     m_heightLine = GetCharHeight();
-    m_widthAvg = GetCharWidth();
+    m_widthAvg = wxGetCharWidth();
 }
 
 void wxTextCtrl::RecalcMaxWidth()
@@ -4222,7 +4222,7 @@ void wxTextCtrl::DoDraw(wxControlRenderer *renderer)
     // even though the drawing is already clipped to the update region, we must
     // explicitly clip it to the rect we will use as otherwise parts of letters
     // might be drawn outside of it (if even a small part of a charater is
-    // inside, HitTest() will return its column and DrawText() can't draw only
+    // inside, HitTest() will return its column and wxDrawText() can't draw only
     // the part of the character, of course)
 #ifdef __WXMSW__
     // FIXME: is this really a bug in wxMSW?
@@ -4752,7 +4752,7 @@ void wxTextCtrl::OnChar(wxKeyEvent& event)
         wxChar unicode = event.GetUnicodeKey();
         if ( keycode == WXK_RETURN )
         {
-            if ( IsSingleLine() || (GetWindowStyle() & wxTE_PROCESS_ENTER) )
+            if ( IsSingleLine() || (wxGetWindowStyle() & wxTE_PROCESS_ENTER) )
             {
                 wxCommandEvent event(wxEVT_TEXT_ENTER, GetId());
                 InitCommandEvent(event);

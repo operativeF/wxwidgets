@@ -2587,7 +2587,7 @@ static wxImage LoadImageFromResource(const std::string &name, wxBitmapType type)
     }
     else if ( type == wxBitmapType::ICO_Resource )
     {
-        const HICON hIcon = ::LoadIcon(wxGetInstance(), boost::nowide::widen(name).c_str());
+        const HICON hIcon = ::LoadIconW(wxGetInstance(), boost::nowide::widen(name).c_str());
 
         if ( !hIcon )
         {

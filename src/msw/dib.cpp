@@ -51,13 +51,13 @@ inline WORD GetNumberOfColours(WORD bitsPerPixel)
     return (WORD)(bitsPerPixel <= 8 ? 1 << bitsPerPixel : 0);
 }
 
-// wrapper around ::GetObject() for DIB sections
+// wrapper around ::GetObjectW() for DIB sections
 inline bool GetDIBSection(HBITMAP hbmp, DIBSECTION *ds)
 {
     // note that GetObject() may return sizeof(DIBSECTION) for a bitmap
     // which is *not* a DIB section and the way to check for it is
     // by looking at the bits pointer
-    return ::GetObject(hbmp, sizeof(DIBSECTION), ds) == sizeof(DIBSECTION) &&
+    return ::GetObjectW(hbmp, sizeof(DIBSECTION), ds) == sizeof(DIBSECTION) &&
                 ds->dsBm.bmBits;
 }
 
@@ -162,7 +162,7 @@ bool wxDIB::Create(HBITMAP hbmp, int depth /* = -1 */)
     {
         // prepare all the info we need
         BITMAP bm;
-        if ( !::GetObject(hbmp, sizeof(bm), &bm) )
+        if ( !::GetObjectW(hbmp, sizeof(bm), &bm) )
         {
             wxLogLastError(wxT("GetObject(bitmap)"));
 
@@ -454,7 +454,7 @@ size_t wxDIB::ConvertFromBitmap(BITMAPINFO *pbi, HBITMAP hbmp)
 
     // prepare all the info we need
     BITMAP bm;
-    if ( !::GetObject(hbmp, sizeof(bm), &bm) )
+    if ( !::GetObjectW(hbmp, sizeof(bm), &bm) )
     {
         wxLogLastError(wxT("GetObject(bitmap)"));
 

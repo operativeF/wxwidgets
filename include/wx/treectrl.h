@@ -221,11 +221,11 @@ public:
         // which is opaque for the application but is necessary for the library
         // to make these functions reentrant (i.e. allow more than one
         // enumeration on one and the same object simultaneously). Of course,
-        // the "cookie" passed to GetFirstChild() and GetNextChild() should be
+        // the "cookie" passed to wxGetFirstChild() and GetNextChild() should be
         // the same!
 
         // get the first child of this item
-    virtual wxTreeItemId GetFirstChild(const wxTreeItemId& item,
+    virtual wxTreeItemId wxGetFirstChild(const wxTreeItemId& item,
                                        wxTreeItemIdValue& cookie) const = 0;
         // get the next child
     virtual wxTreeItemId GetNextChild(const wxTreeItemId& item,
@@ -234,9 +234,9 @@ public:
     virtual wxTreeItemId GetLastChild(const wxTreeItemId& item) const = 0;
 
         // get the next sibling of this item
-    virtual wxTreeItemId GetNextSibling(const wxTreeItemId& item) const = 0;
+    virtual wxTreeItemId wxGetNextSibling(const wxTreeItemId& item) const = 0;
         // get the previous sibling
-    virtual wxTreeItemId GetPrevSibling(const wxTreeItemId& item) const = 0;
+    virtual wxTreeItemId wxGetPrevSibling(const wxTreeItemId& item) const = 0;
 
         // get first visible item
     virtual wxTreeItemId GetFirstVisibleItem() const = 0;

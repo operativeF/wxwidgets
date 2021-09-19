@@ -267,7 +267,7 @@ void wxAuiGenericToolBarArt::DrawLabel(
     int textX, textY;
     textX = rect.x + 1;
     textY = rect.y + (rect.height-textHeight)/2;
-    dc.DrawText(item.GetLabel(), textX, textY);
+    dc.wxDrawText(item.GetLabel(), textX, textY);
     dc.DestroyClippingRegion();
 }
 
@@ -370,7 +370,7 @@ void wxAuiGenericToolBarArt::DrawButton(
 
     if ( (m_flags & wxAUI_TB_TEXT) && !item.GetLabel().empty() )
     {
-        dc.DrawText(item.GetLabel(), textX, textY);
+        dc.wxDrawText(item.GetLabel(), textX, textY);
     }
 }
 
@@ -500,7 +500,7 @@ void wxAuiGenericToolBarArt::DrawDropDownButton(
 
     if ( (m_flags & wxAUI_TB_TEXT) && !item.GetLabel().empty() )
     {
-        dc.DrawText(item.GetLabel(), textX, textY);
+        dc.wxDrawText(item.GetLabel(), textX, textY);
     }
 }
 
@@ -542,7 +542,7 @@ void wxAuiGenericToolBarArt::DrawControlLabel(
 
     if ( (m_flags & wxAUI_TB_TEXT) && !item.GetLabel().empty() )
     {
-        dc.DrawText(item.GetLabel(), textX, textY);
+        dc.wxDrawText(item.GetLabel(), textX, textY);
     }
 }
 
@@ -1133,7 +1133,7 @@ bool wxAuiToolBar::DestroyToolByIndex(int idx)
 
 wxControl* wxAuiToolBar::FindControl(int id)
 {
-    wxWindow* wnd = FindWindow(id);
+    wxWindow* wnd = wxFindWindow(id);
     return (wxControl*)wnd;
 }
 

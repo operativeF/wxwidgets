@@ -33,7 +33,7 @@
 class wxWinHTTP
 {
 public:
-    static bool LoadLibrary()
+    static bool wxLoadLibrary()
     {
         bool result = m_winhttp.Load("winhttp.dll", wxDL_VERBATIM | wxDL_QUIET);
         if ( !result )
@@ -663,7 +663,7 @@ wxWebSessionWinHTTP::~wxWebSessionWinHTTP()
 
 bool wxWebSessionWinHTTP::Initialize()
 {
-    return wxWinHTTP::LoadLibrary();
+    return wxWinHTTP::wxLoadLibrary();
 }
 
 bool wxWebSessionWinHTTP::Open()

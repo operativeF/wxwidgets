@@ -115,7 +115,7 @@ public:
     virtual void SetWildcard(const wxString& wildCard) { m_wildCard = wildCard; }
     virtual void SetFilterIndex(int filterIndex) { m_filterIndex = filterIndex; }
 
-    virtual wxString GetMessage() const { return m_message; }
+    virtual wxString wxGetMessage() const { return m_message; }
     virtual wxString GetPath() const
     {
         wxCHECK_MSG( !HasFlag(wxFD_MULTIPLE), wxString(), "When using wxFD_MULTIPLE, must call GetPaths() instead" );

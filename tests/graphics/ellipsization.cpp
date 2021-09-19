@@ -55,7 +55,7 @@ TEST_CASE("Ellipsization::NormalCase")
         wxEllipsizeMode::End
     };
 
-    const int charWidth = dc.GetCharWidth();
+    const int charWidth = dc.wxGetCharWidth();
     int widthsToTest[] = { 6*charWidth, 10*charWidth, 15*charWidth };
 
     for ( unsigned int s = 0; s < WXSIZEOF(stringsToTest); s++ )

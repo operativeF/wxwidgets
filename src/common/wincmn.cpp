@@ -1792,7 +1792,7 @@ void wxWindowBase::ClearBackground()
 // find child window by id or name
 // ----------------------------------------------------------------------------
 
-wxWindow *wxWindowBase::FindWindow(long id) const
+wxWindow *wxWindowBase::wxFindWindow(long id) const
 {
     if ( id == m_windowId )
         return const_cast<wxWindow*>(dynamic_cast<const wxWindow*>(this));
@@ -1808,13 +1808,13 @@ wxWindow *wxWindowBase::FindWindow(long id) const
         if ( child->IsTopLevel() )
             continue;
 
-        res = child->FindWindow( id );
+        res = child->wxFindWindow( id );
     }
 
     return dynamic_cast<wxWindow*>(res);
 }
 
-wxWindow *wxWindowBase::FindWindow(const wxString& name) const
+wxWindow *wxWindowBase::wxFindWindow(const wxString& name) const
 {
     if ( name == m_windowName )
         return const_cast<wxWindow*>(dynamic_cast<const wxWindow*>(this));
@@ -1829,7 +1829,7 @@ wxWindow *wxWindowBase::FindWindow(const wxString& name) const
         if ( child->IsTopLevel() )
             continue;
 
-        res = child->FindWindow(name);
+        res = child->wxFindWindow(name);
     }
 
     return dynamic_cast<wxWindow*>(res);
@@ -2178,7 +2178,7 @@ void wxWindowBase::OnHelp(wxHelpEvent& event)
             {
                 // position help slightly under and to the right of this window
                 pos = ClientToScreen(wxPoint(
-                        2*GetCharWidth(),
+                        2*wxGetCharWidth(),
                         rectClient.height + GetCharHeight()
                       ));
             }
@@ -2592,7 +2592,7 @@ void wxWindowBase::SetConstraintSizes(bool recurse)
     else if ( constr )
     {
         wxLogDebug(wxT("Constraints not satisfied for %s named '%s'."),
-                   GetClassInfo()->GetClassName(),
+                   wxGetClassInfo()->wxGetClassName(),
                    GetName().c_str());
     }
 
@@ -3260,7 +3260,7 @@ void wxWindowBase::ReleaseMouse()
           wxString::Format
           (
             "Releasing mouse in %p(%s) but it is not captured",
-            this, GetClassInfo()->GetClassName()
+            this, wxGetClassInfo()->wxGetClassName()
           )
         );
     }
@@ -3271,8 +3271,8 @@ void wxWindowBase::ReleaseMouse()
           wxString::Format
           (
             "Releasing mouse in %p(%s) but it is captured by %p(%s)",
-            this, GetClassInfo()->GetClassName(),
-            winCapture, winCapture->GetClassInfo()->GetClassName()
+            this, wxGetClassInfo()->wxGetClassName(),
+            winCapture, winCapture->wxGetClassInfo()->wxGetClassName()
           )
         );
     }

@@ -943,7 +943,7 @@ enum wxEventCategory
     wxEVT_CATEGORY_UNKNOWN = 32,
 
     // a special category used as an argument to wxEventLoopBase::YieldFor to indicate that
-    // Yield() should leave all wxEvents on the queue while emptying the native event queue
+    // AppYield() should leave all wxEvents on the queue while emptying the native event queue
     // (native events will be processed but the wxEvents they generate will be queued)
     wxEVT_CATEGORY_CLIPBOARD = 64,
 
@@ -1331,7 +1331,7 @@ protected:
     inline static wxIdleMode sm_idleMode{wxIDLE_PROCESS_ALL};
 
 public:
-	wxClassInfo *GetClassInfo() const override ;
+	wxClassInfo *wxGetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -1367,7 +1367,7 @@ public:
         { return wxEVT_CATEGORY_THREAD; }
 
 public:
-	wxClassInfo *GetClassInfo() const override ;
+	wxClassInfo *wxGetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -1636,7 +1636,7 @@ protected:
     wxClientData*     m_clientObject;  // Arbitrary client object
 
 public:
-	wxClassInfo *GetClassInfo() const override ;
+	wxClassInfo *wxGetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -1671,7 +1671,7 @@ private:
     bool m_bAllow;
 
 public:
-	wxClassInfo *GetClassInfo() const override ;
+	wxClassInfo *wxGetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -1707,7 +1707,7 @@ public:
     wxEvent *Clone() const override { return new wxScrollEvent(*this); }
 
 public:
-	wxClassInfo *GetClassInfo() const override ;
+	wxClassInfo *wxGetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -1748,7 +1748,7 @@ protected:
     long              m_extraLong;
 
 public:
-	wxClassInfo *GetClassInfo() const override ;
+	wxClassInfo *wxGetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -1948,7 +1948,7 @@ private:
     wxCursor m_cursor;
 
 public:
-	wxClassInfo *GetClassInfo() const override ;
+	wxClassInfo *wxGetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -1990,7 +1990,7 @@ protected:
     bool m_isStart, m_isEnd;
 
 public:
-	wxClassInfo *GetClassInfo() const override ;
+	wxClassInfo *wxGetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 
@@ -2023,7 +2023,7 @@ private:
     wxPoint m_delta;
 
 public:
-	wxClassInfo *GetClassInfo() const override ;
+	wxClassInfo *wxGetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -2057,7 +2057,7 @@ private:
     double m_zoomFactor;
 
 public:
-	wxClassInfo *GetClassInfo() const override ;
+	wxClassInfo *wxGetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -2091,7 +2091,7 @@ private:
     double m_rotationAngle;
 
 public:
-	wxClassInfo *GetClassInfo() const override ;
+	wxClassInfo *wxGetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -2116,7 +2116,7 @@ public:
     wxEvent *Clone() const override { return new wxTwoFingerTapEvent(*this); }
 
 public:
-	wxClassInfo *GetClassInfo() const override ;
+	wxClassInfo *wxGetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -2141,7 +2141,7 @@ public:
     wxEvent *Clone() const override { return new wxLongPressEvent(*this); }
 
 public:
-	wxClassInfo *GetClassInfo() const override ;
+	wxClassInfo *wxGetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -2166,7 +2166,7 @@ public:
     wxEvent *Clone() const override { return new wxPressAndTapEvent(*this); }
 
 public:
-	wxClassInfo *GetClassInfo() const override ;
+	wxClassInfo *wxGetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -2353,7 +2353,7 @@ private:
     wxRect m_rect; // Used for wxEVT_SIZING
 
 public:
-	wxClassInfo *GetClassInfo() const override ;
+	wxClassInfo *wxGetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -2396,7 +2396,7 @@ protected:
     wxRect m_rect;
 
 public:
-	wxClassInfo *GetClassInfo() const override ;
+	wxClassInfo *wxGetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -2420,7 +2420,7 @@ public:
 
     wxEvent *Clone() const override { return new wxPaintEvent(*this); }
 
-	wxClassInfo *GetClassInfo() const override ;
+	wxClassInfo *wxGetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -2438,7 +2438,7 @@ public:
 
     wxEvent *Clone() const override { return new wxNcPaintEvent(*this); }
 
-	wxClassInfo *GetClassInfo() const override ;
+	wxClassInfo *wxGetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -2468,7 +2468,7 @@ protected:
     wxDC *m_dc;
 
 public:
-	wxClassInfo *GetClassInfo() const override ;
+	wxClassInfo *wxGetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -2504,7 +2504,7 @@ private:
     wxWindow *m_win;
 
 public:
-	wxClassInfo *GetClassInfo() const override ;
+	wxClassInfo *wxGetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -2523,7 +2523,7 @@ public:
     wxEvent *Clone() const override { return new wxChildFocusEvent(*this); }
 
 public:
-	wxClassInfo *GetClassInfo() const override ;
+	wxClassInfo *wxGetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -2572,7 +2572,7 @@ private:
     Reason m_activationReason;
 
 public:
-	wxClassInfo *GetClassInfo() const override ;
+	wxClassInfo *wxGetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -2594,7 +2594,7 @@ public:
     wxEvent *Clone() const override { return new wxInitDialogEvent(*this); }
 
 public:
-	wxClassInfo *GetClassInfo() const override ;
+	wxClassInfo *wxGetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -2634,7 +2634,7 @@ private:
     wxMenu* m_menu;
 
 public:
-	wxClassInfo *GetClassInfo() const override ;
+	wxClassInfo *wxGetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -2688,7 +2688,7 @@ protected:
          m_canVeto{true};
 
 public:
-	wxClassInfo *GetClassInfo() const override ;
+	wxClassInfo *wxGetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -2720,7 +2720,7 @@ protected:
     bool m_show;
 
 public:
-	wxClassInfo *GetClassInfo() const override ;
+	wxClassInfo *wxGetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -2750,7 +2750,7 @@ protected:
     bool m_iconized;
 
 public:
-	wxClassInfo *GetClassInfo() const override ;
+	wxClassInfo *wxGetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -2770,7 +2770,7 @@ public:
     wxEvent *Clone() const override { return new wxMaximizeEvent(*this); }
 
 public:
-	wxClassInfo *GetClassInfo() const override ;
+	wxClassInfo *wxGetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -2798,7 +2798,7 @@ protected:
     bool m_fullscreen;
 
 public:
-	wxClassInfo *GetClassInfo() const override ;
+	wxClassInfo *wxGetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -2896,7 +2896,7 @@ public:
     wxEvent *Clone() const override { return new wxJoystickEvent(*this); }
 
 public:
-	wxClassInfo *GetClassInfo() const override ;
+	wxClassInfo *wxGetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -2930,7 +2930,7 @@ public:
     wxEvent *Clone() const override { return new wxDropFilesEvent(*this); }
 
 public:
-	wxClassInfo *GetClassInfo() const override ;
+	wxClassInfo *wxGetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -3033,7 +3033,7 @@ protected:
     inline static wxUpdateUIMode   sm_updateMode{wxUpdateUIMode::All};
 
 public:
-	wxClassInfo *GetClassInfo() const override ;
+	wxClassInfo *wxGetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -3055,7 +3055,7 @@ public:
     wxEvent *Clone() const override { return new wxSysColourChangedEvent(*this); }
 
 public:
-	wxClassInfo *GetClassInfo() const override ;
+	wxClassInfo *wxGetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -3086,7 +3086,7 @@ private:
     wxWindow* m_gainedCapture;
 
 public:
-	wxClassInfo *GetClassInfo() const override ;
+	wxClassInfo *wxGetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -3112,7 +3112,7 @@ public:
     wxEvent *Clone() const override { return new wxMouseCaptureLostEvent(*this); }
 
 public:
-	wxClassInfo *GetClassInfo() const override ;
+	wxClassInfo *wxGetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -3131,7 +3131,7 @@ public:
 
     wxEvent *Clone() const override { return new wxDisplayChangedEvent(*this); }
 
-	wxClassInfo *GetClassInfo() const override ;
+	wxClassInfo *wxGetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 
@@ -3163,7 +3163,7 @@ private:
     wxSize m_newDPI;
 
 public:
-	wxClassInfo *GetClassInfo() const override ;
+	wxClassInfo *wxGetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -3193,7 +3193,7 @@ protected:
     wxWindow*     m_changedWindow{nullptr};
 
 public:
-	wxClassInfo *GetClassInfo() const override ;
+	wxClassInfo *wxGetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -3224,7 +3224,7 @@ protected:
     bool m_paletteRealized{false};
 
 public:
-	wxClassInfo *GetClassInfo() const override ;
+	wxClassInfo *wxGetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -3290,7 +3290,7 @@ public:
     wxWindow *m_focus{nullptr};
 
 public:
-	wxClassInfo *GetClassInfo() const override ;
+	wxClassInfo *wxGetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -3316,7 +3316,7 @@ public:
 
     wxEvent *Clone() const override { return new wxWindowCreateEvent(*this); }
 
-	wxClassInfo *GetClassInfo() const override ;
+	wxClassInfo *wxGetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -3332,7 +3332,7 @@ public:
 
     wxEvent *Clone() const override { return new wxWindowDestroyEvent(*this); }
 
-	wxClassInfo *GetClassInfo() const override ;
+	wxClassInfo *wxGetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -3396,7 +3396,7 @@ protected:
     static Origin GuessOrigin(Origin origin);
 
 public:
-	wxClassInfo *GetClassInfo() const override ;
+	wxClassInfo *wxGetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -3427,7 +3427,7 @@ public:
     wxEvent *Clone() const override { return new wxClipboardTextEvent(*this); }
 
 public:
-	wxClassInfo *GetClassInfo() const override ;
+	wxClassInfo *wxGetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -3464,7 +3464,7 @@ protected:
     wxPoint   m_pos;
 
 public:
-	wxClassInfo *GetClassInfo() const override ;
+	wxClassInfo *wxGetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -4107,7 +4107,7 @@ private:
     static wxEventFilter* ms_filterList;
 
 public:
-	wxClassInfo *GetClassInfo() const override;
+	wxClassInfo *wxGetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
 };

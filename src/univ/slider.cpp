@@ -374,7 +374,7 @@ wxSize wxSlider::DoGetBestClientSize() const
     // this dimension is completely arbitrary
     static const wxCoord SLIDER_WIDTH = 40;
 
-    long style = GetWindowStyle();
+    long style = wxGetWindowStyle();
 
     // first calculate the size of the slider itself: i.e. the shaft and the
     // thumb
@@ -475,7 +475,7 @@ void wxSlider::CalcGeometry()
        | H *|
        ------
     */
-    long style = GetWindowStyle();
+    long style = wxGetWindowStyle();
 
     // initialize to the full client rect
     wxRect rectTotal = GetClientRect();
@@ -579,7 +579,7 @@ wxSize wxSlider::GetThumbSize() const
 
 wxRect wxSlider::GetShaftRect() const
 {
-    return GetRenderer()->GetSliderShaftRect(m_rectSlider, m_thumbSize, GetOrientation(), GetWindowStyle());
+    return GetRenderer()->GetSliderShaftRect(m_rectSlider, m_thumbSize, GetOrientation(), wxGetWindowStyle());
 }
 
 void wxSlider::CalcThumbRect(const wxRect *rectShaftIn,
@@ -644,7 +644,7 @@ void wxSlider::CalcThumbRect(const wxRect *rectShaftIn,
     // calc the label rect
     if ( HasLabels() && rectLabelOut )
     {
-        long style = GetWindowStyle();
+        long style = wxGetWindowStyle();
         wxRect rectLabel = m_rectLabel;
 
         // centre the label relatively to the thumb position
@@ -682,7 +682,7 @@ void wxSlider::DoDraw(wxControlRenderer *renderer)
 
     wxOrientation orient = GetOrientation();
     int flags = GetStateFlags();
-    long style = GetWindowStyle();
+    long style = wxGetWindowStyle();
 
     wxSize sz = GetThumbSize();
     int len = IsVert() ? sz.x : sz.y;

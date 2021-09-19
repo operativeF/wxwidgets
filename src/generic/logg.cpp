@@ -671,7 +671,7 @@ wxLogDialog::wxLogDialog(wxWindow *parent,
 
     if ( ms_maxLength == 0 )
     {
-        ms_maxLength = (2 * wxGetDisplaySize().x/3) / GetCharWidth();
+        ms_maxLength = (2 * wxGetDisplaySize().x/3) / wxGetCharWidth();
     }
 
     size_t count = messages.size();

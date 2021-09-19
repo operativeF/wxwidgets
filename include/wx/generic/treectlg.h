@@ -127,13 +127,13 @@ public:
     void SetFocusedItem(const wxTreeItemId& item) override;
 
     wxTreeItemId GetItemParent(const wxTreeItemId& item) const override;
-    wxTreeItemId GetFirstChild(const wxTreeItemId& item,
+    wxTreeItemId wxGetFirstChild(const wxTreeItemId& item,
                                        wxTreeItemIdValue& cookie) const override;
     wxTreeItemId GetNextChild(const wxTreeItemId& item,
                                       wxTreeItemIdValue& cookie) const override;
     wxTreeItemId GetLastChild(const wxTreeItemId& item) const override;
-    wxTreeItemId GetNextSibling(const wxTreeItemId& item) const override;
-    wxTreeItemId GetPrevSibling(const wxTreeItemId& item) const override;
+    wxTreeItemId wxGetNextSibling(const wxTreeItemId& item) const override;
+    wxTreeItemId wxGetPrevSibling(const wxTreeItemId& item) const override;
 
     wxTreeItemId GetFirstVisibleItem() const override;
     wxTreeItemId GetNextVisible(const wxTreeItemId& item) const override;

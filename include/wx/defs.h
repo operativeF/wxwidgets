@@ -10,30 +10,6 @@
 
 /* THIS IS A C FILE, DON'T USE C++ FEATURES (IN PARTICULAR COMMENTS) IN IT */
 
-/*
-    We want to avoid compilation and, even more perniciously, link errors if
-    the user code includes <windows.h> before include wxWidgets headers. These
-    error happen because <windows.h> #define's many common symbols, such as
-    Yield or GetClassInfo, which are also used in wxWidgets API. Including our
-    "cleanup" header below un-#defines them to fix this.
-
-    Moreover, notice that it is also possible for the user code to include some
-    wx header (this including wx/defs.h), then include <windows.h> and then
-    include another wx header. To avoid the problem for the second header
-    inclusion, we must include wx/msw/winundef.h from here always and not just
-    during the first inclusion, so it has to be outside of _WX_DEFS_H_ guard
-    check below.
- */
-#ifdef __cplusplus
-    /*
-        Test for _WINDOWS_, used as header guard by windows.h itself, not our
-        own __WINDOWS__, which is not defined yet.
-     */
-#   ifdef _WINDOWS_
-#       include "wx/msw/winundef.h"
-#   endif /* WIN32 */
-#endif /* __cplusplus */
-
 
 #ifndef _WX_DEFS_H_
 #define _WX_DEFS_H_

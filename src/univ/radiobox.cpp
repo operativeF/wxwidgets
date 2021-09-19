@@ -416,7 +416,7 @@ void wxRadioBox::DoMoveWindow(int x0, int y0, int width, int height)
     {
         m_buttons[n]->SetSize(x, y, sizeBtn.x, sizeBtn.y);
 
-        if ( GetWindowStyle() & wxRA_SPECIFY_ROWS )
+        if ( wxGetWindowStyle() & wxRA_SPECIFY_ROWS )
         {
             // from top to bottom
             if ( (n + 1) % GetRowCount() )
@@ -479,7 +479,7 @@ bool wxRadioBox::OnKeyDown(wxKeyEvent& event)
     }
 
     int selOld = GetSelection();
-    int selNew = GetNextItem(selOld, dir, GetWindowStyle());
+    int selNew = GetNextItem(selOld, dir, wxGetWindowStyle());
     if ( selNew != selOld )
     {
         SetSelection(selNew);

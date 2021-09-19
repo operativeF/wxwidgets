@@ -117,7 +117,7 @@ void wxStatusBarUniv::DoDraw(wxControlRenderer *renderer)
             if ( n == (int)m_panes.GetCount() - 1 &&
                  HasFlag(wxSTB_SIZEGRIP) &&
                  GetParent()->HasFlag(wxRESIZE_BORDER) &&
-                 parentTLW && !parentTLW->IsMaximized() )
+                 parentTLW && !parentTLW->wxIsMaximized() )
             {
                 flags |= wxCONTROL_SIZEGRIP;
             }

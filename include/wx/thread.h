@@ -474,7 +474,7 @@ public:
     static wxThreadIdType GetMainId() { return ms_idMainThread; }
 
         // Release the rest of our time slice letting the other threads run
-    static void Yield();
+    static void ThreadYield();
 
         // Sleep during the specified period of time in milliseconds
         //

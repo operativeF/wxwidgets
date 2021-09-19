@@ -135,7 +135,7 @@ bool wxButtonToolBar::Create(wxWindow *parent,
     SetFont(font);
 
     // Calculate the label height if necessary
-    if (GetWindowStyle() & wxTB_TEXT)
+    if (wxGetWindowStyle() & wxTB_TEXT)
     {
         wxClientDC dc(this);
         dc.SetFont(font);
@@ -446,7 +446,7 @@ void wxButtonToolBar::DoLayout()
     m_maxWidth = x + 2*m_xMargin;
     m_maxHeight = maxHeight + 2*m_yMargin;
 
-    if ((GetWindowStyle() & wxTB_NODIVIDER) == 0)
+    if ((wxGetWindowStyle() & wxTB_NODIVIDER) == 0)
         m_maxHeight += 2;
 
 }
@@ -510,11 +510,11 @@ void wxButtonToolBar::OnPaint(wxPaintEvent& WXUNUSED(event))
             dc.GetTextExtent(tool->GetShortHelp(), & tw, & th);
 
             int x = tool->m_x;
-            dc.DrawText(tool->GetShortHelp(), x, tool->m_y + tool->GetButton()->GetSize().y + m_labelMargin);
+            dc.wxDrawText(tool->GetShortHelp(), x, tool->m_y + tool->GetButton()->GetSize().y + m_labelMargin);
         }
     }
 
-    if ((GetWindowStyle() & wxTB_NODIVIDER) == 0)
+    if ((wxGetWindowStyle() & wxTB_NODIVIDER) == 0)
     {
         wxPen pen(wxColour(159, 159, 159));
         dc.SetPen(pen);

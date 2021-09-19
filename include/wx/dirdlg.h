@@ -87,7 +87,7 @@ public:
     virtual void SetMessage(const std::string& message) { m_message = message; }
     virtual void SetPath(const std::string& path) { m_path = path; }
 
-    virtual const std::string& GetMessage() const { return m_message; }
+    virtual const std::string& wxGetMessage() const { return m_message; }
     virtual const std::string& GetPath() const
     {
         // FIXME: returns local variable.

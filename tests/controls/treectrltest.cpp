@@ -394,14 +394,14 @@ TEST_CASE("Tree control test")
     {
         // Get first / next / last child
         wxTreeItemIdValue cookie;
-        CHECK_EQ(m_tree->GetFirstChild(m_root, cookie), m_child1);
+        CHECK_EQ(m_tree->wxGetFirstChild(m_root, cookie), m_child1);
         CHECK_EQ(m_tree->GetNextChild(m_root, cookie),
                              m_tree->GetLastChild(m_root));
         CHECK_EQ(m_child2, m_tree->GetLastChild(m_root));
 
         // Get next / previous sibling
-        CHECK_EQ(m_child2, m_tree->GetNextSibling(m_child1));
-        CHECK_EQ(m_child1, m_tree->GetPrevSibling(m_child2));
+        CHECK_EQ(m_child2, m_tree->wxGetNextSibling(m_child1));
+        CHECK_EQ(m_child1, m_tree->wxGetPrevSibling(m_child2));
     }
 
     SUBCASE("Parent")
@@ -519,7 +519,7 @@ TEST_CASE("Tree control test")
 
         wxTreeItemIdValue cookie;
 
-        CHECK_EQ(aitem, m_tree->GetFirstChild(m_root, cookie));
+        CHECK_EQ(aitem, m_tree->wxGetFirstChild(m_root, cookie));
         CHECK_EQ(m_child1, m_tree->GetNextChild(m_root, cookie));
         CHECK_EQ(m_child2, m_tree->GetNextChild(m_root, cookie));
         CHECK_EQ(zitem, m_tree->GetNextChild(m_root, cookie));

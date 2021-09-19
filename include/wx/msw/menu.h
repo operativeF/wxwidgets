@@ -201,7 +201,7 @@ private:
 #endif // wxUSE_OWNER_DRAWN
 
 public:
-	wxClassInfo *GetClassInfo() const override;
+	wxClassInfo *wxGetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
 };
@@ -271,7 +271,7 @@ protected:
     int MSWPositionForWxMenu(wxMenu *menu, int wxpos);
 
 public:
-	wxClassInfo *GetClassInfo() const override;
+	wxClassInfo *wxGetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
 };

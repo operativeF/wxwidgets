@@ -97,7 +97,7 @@ protected:
 private:
     public:
 	wxRibbonBarEvent& operator=(const wxRibbonBarEvent&) = delete;
-	wxClassInfo *GetClassInfo() const override ;
+	wxClassInfo *wxGetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 #endif

@@ -63,10 +63,10 @@ wxSize wxPGCellRenderer::GetImageSize( const wxPGProperty* WXUNUSED(property),
      return {0, 0};
 }
 
-void wxPGCellRenderer::DrawText( wxDC& dc, const wxRect& rect,
+void wxPGCellRenderer::wxDrawText( wxDC& dc, const wxRect& rect,
                                  int xOffset, const std::string& text ) const
 {
-    dc.DrawText( text,
+    dc.wxDrawText( text,
                  rect.x+xOffset+wxPG_XBEFORETEXT,
                  rect.y+((rect.height-dc.GetCharHeight())/2) );
 }
@@ -87,7 +87,7 @@ void wxPGCellRenderer::DrawEditorValue( wxDC& dc, const wxRect& rect,
     }
     else
     {
-        dc.DrawText( text,
+        dc.wxDrawText( text,
                      rect.x+xOffset+wxPG_XBEFORETEXT,
                      rect.y+yOffset );
     }
@@ -188,7 +188,7 @@ bool wxPGDefaultRenderer::Render( wxDC& dc, const wxRect& rect,
             if ( !isUnspecified )
             {
                 text = propertyGrid->GetCommonValueLabel(cmnVal);
-                DrawText( dc, rect, 0, text );
+                wxDrawText( dc, rect, 0, text );
                 if ( !text.empty() )
                     return true;
             }
@@ -2674,7 +2674,7 @@ bool wxPGProperty::IsTextEditable() const
 
     if ( HasFlag(wxPG_PROP_NOEDITOR) &&
          (GetChildCount() ||
-          wxString(GetEditorClass()->GetClassInfo()->GetClassName()).EndsWith(wxS("Button")))
+          wxString(GetEditorClass()->wxGetClassInfo()->wxGetClassName()).EndsWith(wxS("Button")))
        )
         return false;
 

@@ -142,7 +142,7 @@ public:
     virtual void Iconize(bool iconize = true) = 0;
 
     // return true if the frame is maximized
-    virtual bool IsMaximized() const = 0;
+    virtual bool wxIsMaximized() const = 0;
 
     // return true if the frame is always maximized
     // due to native guidelines or current policy
@@ -396,7 +396,7 @@ protected:
         wxTopLevelWindow(const wxTopLevelWindow&) = delete;
         wxTopLevelWindow& operator=(const wxTopLevelWindow&) = delete;
 
-    	wxClassInfo *GetClassInfo() const override;
+    	wxClassInfo *wxGetClassInfo() const override;
 	    static wxClassInfo ms_classInfo;
 	    static wxObject* wxCreateObject();
     };

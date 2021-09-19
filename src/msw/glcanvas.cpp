@@ -667,7 +667,7 @@ wxGLCanvas::~wxGLCanvas()
 
 // Replaces wxWindow::Create functionality, since we need to use a different
 // window class
-bool wxGLCanvas::CreateWindow(wxWindow *parent,
+bool wxGLCanvas::wxCreateWindow(wxWindow *parent,
                               wxWindowID id,
                               const wxPoint& pos,
                               const wxSize& size,
@@ -726,7 +726,7 @@ bool wxGLCanvas::Create(wxWindow *parent,
                         const std::string& name,
                         const wxPalette& palette)
 {
-    if ( !CreateWindow(parent, id, pos, size, style, name) )
+    if ( !wxCreateWindow(parent, id, pos, size, style, name) )
         return false;
 
     // Choose a matching pixel format.

@@ -183,7 +183,7 @@ void wxGenericHyperlinkCtrl::OnPaint(wxPaintEvent& WXUNUSED(event))
     dc.SetTextForeground(GetForegroundColour());
     dc.SetTextBackground(GetBackgroundColour());
 
-    dc.DrawText(GetLabel(), GetLabelRect().GetTopLeft());
+    dc.wxDrawText(GetLabel(), GetLabelRect().GetTopLeft());
     if (HasFocus())
     {
         wxRendererNative::Get().DrawFocusRect(this, dc, GetClientRect(), wxCONTROL_SELECTED);
@@ -234,7 +234,7 @@ void wxGenericHyperlinkCtrl::OnLeftUp(wxMouseEvent& event)
 
 void wxGenericHyperlinkCtrl::OnRightUp(wxMouseEvent& event)
 {
-    if( GetWindowStyle() & wxHL_CONTEXTMENU )
+    if( wxGetWindowStyle() & wxHL_CONTEXTMENU )
         if ( GetLabelRect().Contains(event.GetPosition()) )
             DoContextMenu(wxPoint(event.m_x, event.m_y));
 }

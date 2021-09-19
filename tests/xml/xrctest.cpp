@@ -252,8 +252,8 @@ TEST_CASE("XRC::PathWithFragment")
         )
     );
 
-    CHECK( wxXmlResource::Get()->LoadBitmap("good").IsOk() );
-    CHECK( !wxXmlResource::Get()->LoadBitmap("bad").IsOk() );
+    CHECK( wxXmlResource::Get()->wxLoadBitmap("good").IsOk() );
+    CHECK( !wxXmlResource::Get()->wxLoadBitmap("bad").IsOk() );
 }
 
 // FIXME:

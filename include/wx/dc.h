@@ -199,7 +199,7 @@ public:
 
     // page and document
 
-    virtual bool StartDoc(const std::string& WXUNUSED(message)) { return true; }
+    virtual bool wxStartDoc(const std::string& WXUNUSED(message)) { return true; }
     virtual void EndDoc() { }
 
     virtual void StartPage() { }
@@ -301,7 +301,7 @@ public:
     // text measurement
 
     virtual wxCoord GetCharHeight() const = 0;
-    virtual wxCoord GetCharWidth() const = 0;
+    virtual wxCoord wxGetCharWidth() const = 0;
 
     // The derived classes should really override DoGetFontMetrics() to return
     // the correct values in the future but for now provide a default
@@ -711,8 +711,8 @@ public:
 
     // page and document
 
-    bool StartDoc(const wxString& message)
-        { return m_pimpl->StartDoc(message); }
+    bool wxStartDoc(const wxString& message)
+        { return m_pimpl->wxStartDoc(message); }
     void EndDoc()
         { m_pimpl->EndDoc(); }
 
@@ -790,8 +790,8 @@ public:
 
     wxCoord GetCharHeight() const
         { return m_pimpl->GetCharHeight(); }
-    wxCoord GetCharWidth() const
-        { return m_pimpl->GetCharWidth(); }
+    wxCoord wxGetCharWidth() const
+        { return m_pimpl->wxGetCharWidth(); }
 
     wxFontMetrics GetFontMetrics() const
     {
@@ -1089,9 +1089,9 @@ public:
                     bool useMask = false)
         { m_pimpl->DoDrawBitmap(bmp, pt.x, pt.y, useMask); }
 
-    void DrawText(std::string_view text, wxCoord x, wxCoord y)
+    void wxDrawText(std::string_view text, wxCoord x, wxCoord y)
         { m_pimpl->DoDrawText(text, x, y); }
-    void DrawText(std::string_view text, const wxPoint& pt)
+    void wxDrawText(std::string_view text, const wxPoint& pt)
         { m_pimpl->DoDrawText(text, pt.x, pt.y); }
 
     void DrawRotatedText(std::string_view text, wxCoord x, wxCoord y, double angle)

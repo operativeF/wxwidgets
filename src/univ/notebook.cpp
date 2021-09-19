@@ -652,7 +652,7 @@ bool wxNotebook::IsVertical() const
 
 wxDirection wxNotebook::GetTabOrientation() const
 {
-    long style = GetWindowStyle();
+    long style = wxGetWindowStyle();
     if ( style & wxBK_BOTTOM )
         return wxBOTTOM;
     else if ( style & wxBK_RIGHT )

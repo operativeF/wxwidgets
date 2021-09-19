@@ -92,7 +92,7 @@ public:
     wxContextHelpButton(wxContextHelpButton&&) = default;
     wxContextHelpButton& operator=(wxContextHelpButton&&) = default;
 
-	wxClassInfo *GetClassInfo() const override;
+	wxClassInfo *wxGetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
 

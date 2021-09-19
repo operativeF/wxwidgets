@@ -109,7 +109,7 @@ public:
 
         // Static accessors.
 
-    static wxPluginLibrary    *LoadLibrary( const wxString &libname,
+    static wxPluginLibrary    *wxLoadLibrary( const wxString &libname,
                                             int flags = wxDL_DEFAULT );
     static bool                UnloadLibrary(const wxString &libname);
 

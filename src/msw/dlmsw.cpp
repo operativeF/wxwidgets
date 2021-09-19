@@ -177,7 +177,7 @@ wxDynamicLibrary::RawLoad(const wxString& libname, int flags)
     if (flags & wxDL_GET_LOADED)
         return ::GetModuleHandleW(libname.t_str());
 
-    return ::LoadLibrary(libname.t_str());
+    return ::LoadLibraryW(libname.t_str());
 }
 
 /* static */

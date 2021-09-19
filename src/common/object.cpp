@@ -69,7 +69,7 @@ wxHashTable* wxClassInfo::sm_classTable = nullptr;
 // useful to keep it inline than this function)
 #if !wxUSE_EXTENDED_RTTI
 
-wxClassInfo *wxObject::GetClassInfo() const
+wxClassInfo *wxObject::wxGetClassInfo() const
 {
     return &wxObject::ms_classInfo;
 }
@@ -82,7 +82,7 @@ wxClassInfo *wxObject::GetClassInfo() const
 // two possible base classes.
 bool wxObject::IsKindOf(const wxClassInfo *info) const
 {
-    const wxClassInfo *thisInfo = GetClassInfo();
+    const wxClassInfo *thisInfo = wxGetClassInfo();
     return (thisInfo) ? thisInfo->IsKindOf(info) : false ;
 }
 
@@ -181,7 +181,7 @@ wxClassInfo *wxClassInfo::FindClass(const wxString& className)
     {
         for ( wxClassInfo *info = sm_first; info ; info = info->m_next )
         {
-            if ( className == info->GetClassName() )
+            if ( className == info->wxGetClassName() )
                 return info;
         }
 

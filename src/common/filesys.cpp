@@ -433,7 +433,7 @@ void wxFileSystem::ChangePathTo(const wxString& location, bool is_dir)
 
 wxFileSystemHandler *wxFileSystem::MakeLocal(wxFileSystemHandler *h)
 {
-    wxClassInfo *classinfo = h->GetClassInfo();
+    wxClassInfo *classinfo = h->wxGetClassInfo();
 
     if (classinfo->IsDynamic())
     {

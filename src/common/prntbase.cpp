@@ -550,7 +550,7 @@ void wxPrintAbortDialog::OnCancel(wxCommandEvent& WXUNUSED(event))
 
 bool wxPrintout::OnBeginDocument(int WXUNUSED(startPage), int WXUNUSED(endPage))
 {
-    return GetDC()->StartDoc(_("Printing ") + m_printoutTitle);
+    return GetDC()->wxStartDoc(_("Printing ") + m_printoutTitle);
 }
 
 void wxPrintout::OnEndDocument()
@@ -1746,7 +1746,7 @@ void wxPreviewFrame::InitializeWithModality(wxPreviewFrameModalityKind kind)
         // Behave like modal dialogs, don't show in taskbar. This implies
         // removing the minimize box, because minimizing windows without
         // taskbar entry is confusing.
-        SetWindowStyle((GetWindowStyle() & ~wxMINIMIZE_BOX) | wxFRAME_NO_TASKBAR);
+        SetWindowStyle((wxGetWindowStyle() & ~wxMINIMIZE_BOX) | wxFRAME_NO_TASKBAR);
     }
 
     Layout();

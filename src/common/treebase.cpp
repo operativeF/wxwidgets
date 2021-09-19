@@ -199,7 +199,7 @@ wxGetBestTreeSize(const wxTreeCtrlBase* treeCtrl, wxTreeItemId id, wxSize& size)
     }
 
     wxTreeItemIdValue cookie;
-    for ( wxTreeItemId item = treeCtrl->GetFirstChild(id, cookie);
+    for ( wxTreeItemId item = treeCtrl->wxGetFirstChild(id, cookie);
           item.IsOk();
           item = treeCtrl->GetNextChild(id, cookie) )
     {
@@ -271,7 +271,7 @@ void wxTreeCtrlBase::ExpandAllChildren(const wxTreeItemId& item)
 
     // then (recursively) expand all the children
     wxTreeItemIdValue cookie;
-    for ( wxTreeItemId idCurr = GetFirstChild(item, cookie);
+    for ( wxTreeItemId idCurr = wxGetFirstChild(item, cookie);
           idCurr.IsOk();
           idCurr = GetNextChild(item, cookie) )
     {
@@ -293,7 +293,7 @@ void wxTreeCtrlBase::CollapseAllChildren(const wxTreeItemId& item)
     Freeze();
     // first (recursively) collapse all the children
     wxTreeItemIdValue cookie;
-    for ( wxTreeItemId idCurr = GetFirstChild(item, cookie);
+    for ( wxTreeItemId idCurr = wxGetFirstChild(item, cookie);
           idCurr.IsOk();
           idCurr = GetNextChild(item, cookie) )
     {

@@ -349,7 +349,7 @@ void wxDialogBase::SetEscapeId(int escapeId)
 bool wxDialogBase::EmulateButtonClickIfPresent(int id)
 {
 #if wxUSE_BUTTON
-    wxButton *btn = wxDynamicCast(FindWindow(id), wxButton);
+    wxButton *btn = wxDynamicCast(wxFindWindow(id), wxButton);
 
     if ( !btn || !btn->IsEnabled() || !btn->IsShown() )
         return false;

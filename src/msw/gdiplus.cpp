@@ -19,6 +19,13 @@
 
 #include "wx/dynload.h"
 
+// Windows GDI+ defines it's own CreateFont, so undefine the globally
+// scoped variable for this file to prevent that function from being laundered in.
+// TODO: Will be fixed when this wrapper is rewritten / modules are used.
+#ifdef CreateFont
+    #undef CreateFont
+#endif
+
 #include "wx/msw/wrapgdip.h"
 
 // w32api headers used by both MinGW and Cygwin wrongly define UINT16 inside
@@ -28,6 +35,7 @@
 #if defined(__CYGWIN__) || defined(__MINGW32__)
     #define UINT16 unsigned short
 #endif
+
 
 // ----------------------------------------------------------------------------
 // helper macros

@@ -306,7 +306,7 @@ wxHitTest wxScrollBar::HitTestBar(const wxPoint& pt) const
 
     wxCoord coord, sizeArrow, sizeTotal;
     wxSize size = GetSize();
-    if ( GetWindowStyle() & wxVERTICAL )
+    if ( wxGetWindowStyle() & wxVERTICAL )
     {
         if ( pt.x < 0 || pt.x > size.x )
             return wxHT_NOWHERE;
@@ -508,7 +508,7 @@ wxCoord wxScrollBar::GetScrollbarSize() const
     const wxSize sizeArrowSB = m_renderer->GetScrollbarArrowSize();
 
     wxCoord sizeArrow, sizeTotal;
-    if ( GetWindowStyle() & wxVERTICAL )
+    if ( wxGetWindowStyle() & wxVERTICAL )
     {
         sizeArrow = sizeArrowSB.y;
         sizeTotal = GetSize().y;
@@ -930,7 +930,7 @@ wxStdScrollBarInputHandler::GetMouseCoord(const wxScrollBar *scrollbar,
                                           const wxMouseEvent& event) const
 {
     wxPoint pt = event.GetPosition();
-    return scrollbar->GetWindowStyle() & wxVERTICAL ? pt.y : pt.x;
+    return scrollbar->wxGetWindowStyle() & wxVERTICAL ? pt.y : pt.x;
 }
 
 void wxStdScrollBarInputHandler::HandleThumbMove(wxScrollBar *scrollbar,

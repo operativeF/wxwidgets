@@ -212,7 +212,7 @@ private:
     HBITMAP m_handle{nullptr};
 
     // NB: we could store only m_handle and not any of the other fields as
-    //     we may always retrieve them from it using ::GetObject(), but we
+    //     we may always retrieve them from it using GetObjectW(), but we
     //     decide to still store them for efficiency concerns -- however if we
     //     don't have them from the very beginning (e.g. DIB constructed from a
     //     bitmap), we only retrieve them when necessary and so these fields

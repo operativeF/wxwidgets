@@ -600,10 +600,10 @@ wxSize wxListBox::DoGetBestClientSize() const
     // give it some reasonable default value if there are no strings in the
     // list
     if ( wListbox == 0 )
-        wListbox = 6*GetCharWidth();
+        wListbox = 6*wxGetCharWidth();
 
     // the listbox should be slightly larger than the widest string
-    wListbox += 3*GetCharWidth();
+    wListbox += 3*wxGetCharWidth();
 
     // add room for the scrollbar
     wListbox += wxSystemSettings::GetMetric(wxSYS_VSCROLL_X, m_parent);
@@ -732,7 +732,7 @@ bool wxListBox::MSWOnMeasure(WXMEASUREITEMSTRUCT *item)
         dc.SetFont(GetFont());
 
         pStruct->itemHeight = dc.GetCharHeight() + 2 * LISTBOX_EXTRA_SPACE;
-        pStruct->itemWidth  = dc.GetCharWidth();
+        pStruct->itemWidth  = dc.wxGetCharWidth();
     }
 
     DeleteDC(hdc);

@@ -196,7 +196,7 @@ bool wxStatusBarGeneric::ShowsSizeGrip() const
 
     wxTopLevelWindow * const
         tlw = wxDynamicCast(wxGetTopLevelParent(GetParent()), wxTopLevelWindow);
-    return tlw && !tlw->IsMaximized() && tlw->HasFlag(wxRESIZE_BORDER);
+    return tlw && !tlw->wxIsMaximized() && tlw->HasFlag(wxRESIZE_BORDER);
 #else // !__WXGTK20__
     return false;
 #endif // __WXGTK20__/!__WXGTK20__
@@ -226,7 +226,7 @@ void wxStatusBarGeneric::DrawFieldText(wxDC& dc, const wxRect& rect, int i, int 
             const wxRect& gripRc = GetSizeGripRect();
 
             // NOTE: we don't need any special treatment wrt to the layout direction
-            //       since DrawText() will automatically adjust the origin of the
+            //       since wxDrawText() will automatically adjust the origin of the
             //       text accordingly to the layout in use
 
             maxWidth -= gripRc.width;
@@ -271,7 +271,7 @@ void wxStatusBarGeneric::DrawFieldText(wxDC& dc, const wxRect& rect, int i, int 
 #endif
 
     // draw the text
-    dc.DrawText(text, xpos, ypos);
+    dc.wxDrawText(text, xpos, ypos);
 
     if (ellmode == wxEllipsizeMode::None)
         dc.DestroyClippingRegion();

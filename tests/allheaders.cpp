@@ -397,7 +397,7 @@ struct DerivedWithoutOverride : Base
 	DerivedWithoutOverride(const DerivedWithoutOverride&) = delete;
 	DerivedWithoutOverride& operator=(const DerivedWithoutOverride&) = delete;
 
-	wxClassInfo *GetClassInfo() const;
+	wxClassInfo *wxGetClassInfo() const;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
     wxDECLARE_EVENT_TABLE();
@@ -412,7 +412,7 @@ struct DerivedWithOverride : Base
 
     void OnIdle(wxIdleEvent&) { }
 
-	wxClassInfo *GetClassInfo() const;
+	wxClassInfo *wxGetClassInfo() const;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
     wxDECLARE_EVENT_TABLE();

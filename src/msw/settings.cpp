@@ -130,7 +130,7 @@ wxFont wxCreateFontFromStockObject(int index)
     if ( hFont )
     {
         LOGFONT lf;
-        if ( ::GetObject(hFont, sizeof(LOGFONT), &lf) != 0 )
+        if ( ::GetObjectW(hFont, sizeof(LOGFONT), &lf) != 0 )
         {
             wxNativeFontInfo info(lf, nullptr);
             font.Create(info);

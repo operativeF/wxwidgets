@@ -198,7 +198,7 @@ bool AutoCaptureMechanism::Capture(wxBitmap* bitmap, Control& ctrl)
     if (ctrl.name == wxT("") || m_flag & AJ_DisableNameAdjust)
     {
         // Get its name from wxRTTI
-        ctrl.name = ctrl.ctrl->GetClassInfo()->GetClassName();
+        ctrl.name = ctrl.ctrl->wxGetClassInfo()->wxGetClassName();
     }
 
     int choice = wxNO;

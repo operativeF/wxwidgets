@@ -109,7 +109,7 @@ public:
         m_message = message;
     }
 
-    const std::string& GetMessage() const { return m_message; }
+    const std::string& wxGetMessage() const { return m_message; }
 
     void SetExtendedMessage(const std::string& extendedMessage)
     {

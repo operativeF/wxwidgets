@@ -1707,7 +1707,7 @@ void wxHtmlWindow::SelectLine(const wxPoint& pos)
                 after = cell;
 
             // find first cell of line:
-            for ( c = cell->GetParent()->GetFirstChild();
+            for ( c = cell->GetParent()->wxGetFirstChild();
                     c && c != cell; c = c->GetNext())
             {
                 y = c->GetAbsPos().y;

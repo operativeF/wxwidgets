@@ -159,7 +159,7 @@ bool wxTreebook::DoInsertPage(size_t pagePos,
     {
         wxTreeItemId nodeId = m_treeIds[pagePos];
 
-        wxTreeItemId previousId = tree->GetPrevSibling(nodeId);
+        wxTreeItemId previousId = tree->wxGetPrevSibling(nodeId);
         wxTreeItemId parentId = tree->GetItemParent(nodeId);
 
         if ( previousId.IsOk() )
@@ -359,7 +359,7 @@ void wxTreebook::DoInternalRemovePageRange(size_t pagePos, size_t subCount)
 
             // as selected page is going to be deleted, try to select the next
             // sibling if exists, if not then the parent
-            const wxTreeItemId nodeId = tree->GetNextSibling(pageId);
+            const wxTreeItemId nodeId = tree->wxGetNextSibling(pageId);
 
             m_selection = wxNOT_FOUND;
 
@@ -544,7 +544,7 @@ wxWindow *wxTreebook::TryGetNonNullPage(size_t n)
         for ( wxTreeItemId childId = m_treeIds[n]; childId.IsOk(); )
         {
             wxTreeItemIdValue cookie;
-            childId = tree->GetFirstChild( childId, cookie );
+            childId = tree->wxGetFirstChild( childId, cookie );
             if ( childId.IsOk() )
             {
                 page = wxBookCtrlBase::GetPage(++n);

@@ -76,7 +76,7 @@ private:
     WXHANDLE m_hook{nullptr}; // HHOOK used to position the message box
 
 public:
-	wxClassInfo *GetClassInfo() const override;
+	wxClassInfo *wxGetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
 };

@@ -140,9 +140,9 @@ bool wxRichTextFormattingDialog::ApplyStyle(wxRichTextCtrl* ctrl, const wxRichTe
 // Apply attributes to the object being edited, if any
 bool wxRichTextFormattingDialog::ApplyStyle(wxRichTextCtrl* ctrl, int flags)
 {
-    if (GetObject())
+    if (wxGetObject())
     {
-        ctrl->SetStyle(GetObject(), m_attributes, flags);
+        ctrl->SetStyle(wxGetObject(), m_attributes, flags);
         return true;
     }
     else
@@ -259,7 +259,7 @@ wxWindow* wxRichTextFormattingDialog::FindPage(wxClassInfo* info) const
     for (i = 0; i < GetBookCtrl()->GetPageCount(); i++)
     {
         wxWindow* w = GetBookCtrl()->GetPage(i);
-        if (w && w->GetClassInfo() == info)
+        if (w && w->wxGetClassInfo() == info)
             return w;
     }
     return nullptr;
@@ -512,7 +512,7 @@ void wxRichTextFontPreviewCtrl::OnPaint(wxPaintEvent& WXUNUSED(event))
 
         dc.SetTextForeground(GetForegroundColour());
         dc.SetClippingRegion(2, 2, size.x-4, size.y-4);
-        dc.DrawText(text, cx, cy);
+        dc.wxDrawText(text, cx, cy);
 
         if (GetTextEffects() & wxTEXT_ATTR_EFFECT_STRIKETHROUGH)
         {

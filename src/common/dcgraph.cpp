@@ -267,9 +267,9 @@ void wxGCDCImpl::DoDrawIcon( const wxIcon &icon, wxCoord x, wxCoord y )
     CalcBoundingBox(x + w, y + h);
 }
 
-bool wxGCDCImpl::StartDoc( const std::string& message )
+bool wxGCDCImpl::wxStartDoc( const std::string& message )
 {
-    return m_graphicContext->StartDoc(message);
+    return m_graphicContext->wxStartDoc(message);
 }
 
 void wxGCDCImpl::EndDoc()
@@ -1166,9 +1166,9 @@ void wxGCDCImpl::DoDrawRotatedText(std::string_view text, wxCoord x, wxCoord y,
         // Calculate origin for each line to avoid accumulation of
         // rounding errors.
         if ( m_backgroundMode == wxBrushStyle::Transparent )
-            m_graphicContext->DrawText( line, x + wxRound(lineNum*dx), y + wxRound(lineNum*dy), wxDegToRad(angle ));
+            m_graphicContext->wxDrawText( line, x + wxRound(lineNum*dx), y + wxRound(lineNum*dy), wxDegToRad(angle ));
         else
-            m_graphicContext->DrawText( line, x + wxRound(lineNum*dx), y + wxRound(lineNum*dy), wxDegToRad(angle ), m_graphicContext->CreateBrush(m_textBackgroundColour) );
+            m_graphicContext->wxDrawText( line, x + wxRound(lineNum*dx), y + wxRound(lineNum*dy), wxDegToRad(angle ), m_graphicContext->CreateBrush(m_textBackgroundColour) );
 
         ++lineNum;
    }
@@ -1196,7 +1196,7 @@ void wxGCDCImpl::DoDrawText(std::string_view str, wxCoord x, wxCoord y)
         return;
 
     // For compatibility with other ports (notably wxGTK) and because it's
-    // genuinely useful, we allow passing multiline strings to DrawText().
+    // genuinely useful, we allow passing multiline strings to wxDrawText().
     // However there is no native OSX function to draw them directly so we
     // instead reuse the generic DrawLabel() method to render them. Of course,
     // DrawLabel() itself will call back to us but with single line strings
@@ -1215,9 +1215,9 @@ void wxGCDCImpl::DoDrawText(std::string_view str, wxCoord x, wxCoord y)
     m_graphicContext->SetCompositionMode(wxCOMPOSITION_OVER);
 
     if ( m_backgroundMode == wxBrushStyle::Transparent )
-        m_graphicContext->DrawText( str, x ,y);
+        m_graphicContext->wxDrawText( str, x ,y);
     else
-        m_graphicContext->DrawText( str, x ,y , m_graphicContext->CreateBrush(m_textBackgroundColour) );
+        m_graphicContext->wxDrawText( str, x ,y , m_graphicContext->CreateBrush(m_textBackgroundColour) );
 
     m_graphicContext->SetCompositionMode(curMode);
 
@@ -1283,7 +1283,7 @@ std::vector<int> wxGCDCImpl::DoGetPartialTextExtents(std::string_view text) cons
     return widths;
 }
 
-wxCoord wxGCDCImpl::GetCharWidth() const
+wxCoord wxGCDCImpl::wxGetCharWidth() const
 {
     return DoGetTextExtent( "g", nullptr, nullptr, nullptr ).x;
 }

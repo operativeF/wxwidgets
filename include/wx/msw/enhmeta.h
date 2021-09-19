@@ -115,7 +115,7 @@ struct WXDLLIMPEXP_CORE wxEnhMetaFileDC : public wxDC
     // obtain a pointer to the new metafile (caller should delete it)
     wxEnhMetaFile *Close();
 
-	wxClassInfo *GetClassInfo() const override;
+	wxClassInfo *wxGetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
 };

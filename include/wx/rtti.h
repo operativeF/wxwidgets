@@ -70,11 +70,11 @@ public:
         { return m_objectConstructor ? (*m_objectConstructor)() : nullptr; }
     bool IsDynamic() const { return (nullptr != m_objectConstructor); }
 
-    const wxChar       *GetClassName() const { return m_className; }
+    const wxChar       *wxGetClassName() const { return m_className; }
     const wxChar       *GetBaseClassName1() const
-        { return m_baseInfo1 ? m_baseInfo1->GetClassName() : nullptr; }
+        { return m_baseInfo1 ? m_baseInfo1->wxGetClassName() : nullptr; }
     const wxChar       *GetBaseClassName2() const
-        { return m_baseInfo2 ? m_baseInfo2->GetClassName() : nullptr; }
+        { return m_baseInfo2 ? m_baseInfo2->wxGetClassName() : nullptr; }
     const wxClassInfo  *GetBaseClass1() const { return m_baseInfo1; }
     const wxClassInfo  *GetBaseClass2() const { return m_baseInfo2; }
     int                 GetSize() const { return m_objectSize; }
@@ -143,7 +143,7 @@ WXDLLIMPEXP_BASE wxObject *wxCreateDynamicObject(const wxString& name);
 #define wxDECLARE_ABSTRACT_CLASS(name)                                        \
     public:                                                                   \
         wxWARNING_SUPPRESS_MISSING_OVERRIDE()                                 \
-        wxClassInfo *GetClassInfo() const wxDUMMY_OVERRIDE;           \
+        wxClassInfo *wxGetClassInfo() const wxDUMMY_OVERRIDE;           \
         wxWARNING_RESTORE_MISSING_OVERRIDE()                                  \
         static wxClassInfo ms_classInfo
 
@@ -163,7 +163,7 @@ WXDLLIMPEXP_BASE wxObject *wxCreateDynamicObject(const wxString& name);
             (int) sizeof(name),                                               \
             func);                                                            \
                                                                               \
-    wxClassInfo *name::GetClassInfo() const                                   \
+    wxClassInfo *name::wxGetClassInfo() const                                   \
         { return &name::ms_classInfo; }
 
 #define wxIMPLEMENT_CLASS_COMMON1(name, basename, func)                       \

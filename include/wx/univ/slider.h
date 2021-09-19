@@ -82,7 +82,7 @@ public:
     // -----------------------
 
     // is this a vertical slider?
-    bool IsVert() const { return (GetWindowStyle() & wxSL_VERTICAL) != 0; }
+    bool IsVert() const { return (wxGetWindowStyle() & wxSL_VERTICAL) != 0; }
 
     // get the slider orientation
     wxOrientation GetOrientation() const
@@ -90,13 +90,13 @@ public:
 
     // do we have labels?
     bool HasLabels() const
-        { return ((GetWindowStyle() & wxSL_LABELS) != 0) &&
-                 ((GetWindowStyle() & (wxSL_TOP|wxSL_BOTTOM|wxSL_LEFT|wxSL_RIGHT)) != 0); }
+        { return ((wxGetWindowStyle() & wxSL_LABELS) != 0) &&
+                 ((wxGetWindowStyle() & (wxSL_TOP|wxSL_BOTTOM|wxSL_LEFT|wxSL_RIGHT)) != 0); }
 
     // do we have ticks?
     bool HasTicks() const
-        { return ((GetWindowStyle() & wxSL_TICKS) != 0) &&
-                 ((GetWindowStyle() & (wxSL_TOP|wxSL_BOTTOM|wxSL_LEFT|wxSL_RIGHT|wxSL_BOTH)) != 0); }
+        { return ((wxGetWindowStyle() & wxSL_TICKS) != 0) &&
+                 ((wxGetWindowStyle() & (wxSL_TOP|wxSL_BOTTOM|wxSL_LEFT|wxSL_RIGHT|wxSL_BOTH)) != 0); }
 
     // implement wxControlWithThumb interface
     wxWindow *GetWindow() override { return this; }

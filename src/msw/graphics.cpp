@@ -642,10 +642,10 @@ public :
     wxImage CreateImageFromBitmap(const wxGraphicsBitmap& bmp) override;
 #endif // wxUSE_IMAGE
 
-    wxGraphicsFont CreateFont( const wxFont& font,
+    wxGraphicsFont wxCreateFont( const wxFont& font,
                                        const wxColour& col) override;
 
-    wxGraphicsFont CreateFont(double sizeInPixels,
+    wxGraphicsFont wxCreateFont(double sizeInPixels,
                                       const std::string& facename,
                                       int flags = wxFONTFLAG_DEFAULT,
                                       const wxColour& col = *wxBLACK) override;
@@ -674,7 +674,7 @@ private :
     ULONG_PTR m_gditoken{0};
 
 public:
-	wxClassInfo *GetClassInfo() const override;
+	wxClassInfo *wxGetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
 };
@@ -2284,7 +2284,7 @@ void wxGDIPlusContext::DoDrawText(std::string_view str,
         return;
 
     wxCHECK_RET( !m_font.IsNull(),
-                 wxT("wxGDIPlusContext::DrawText - no valid font set") );
+                 wxT("wxGDIPlusContext::wxDrawText - no valid font set") );
 
     if ( str.empty())
         return;
@@ -2838,14 +2838,14 @@ wxGDIPlusRenderer::CreateRadialGradientBrush(double startX, double startY,
 }
 
 wxGraphicsFont
-wxGDIPlusRenderer::CreateFont( const wxFont &font,
+wxGDIPlusRenderer::wxCreateFont( const wxFont &font,
                                const wxColour &col )
 {
     return CreateFontAtDPI(font, wxRealPoint(), col);
 }
 
 wxGraphicsFont
-wxGDIPlusRenderer::CreateFont(double sizeInPixels,
+wxGDIPlusRenderer::wxCreateFont(double sizeInPixels,
                               const std::string& facename,
                               int flags,
                               const wxColour& col)

@@ -45,7 +45,4 @@
 
 #include <windows.h>
 
-// #undef the macros defined in windows.h which conflict with code elsewhere
-#include "wx/msw/winundef.h"
-
 #endif // _WX_WRAPWIN_H_

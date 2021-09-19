@@ -872,7 +872,7 @@ public:
     virtual HRESULT wxSTDCALL IsRightOfOrEqualTo(wxIMarkupPointer *pPointerThat, BOOL *pfResult) = 0;
     virtual HRESULT wxSTDCALL IsEqualTo(wxIMarkupPointer *pPointerThat, BOOL *pfAreEqual) = 0;
     virtual HRESULT wxSTDCALL MoveUnit(wxMOVEUNIT_ACTION muAction) = 0;
-    virtual HRESULT wxSTDCALL FindText(OLECHAR *pchFindText, DWORD dwFlags, wxIMarkupPointer *pIEndMatch, wxIMarkupPointer *pIEndSearch) = 0;
+    virtual HRESULT wxSTDCALL FindTextW(OLECHAR *pchFindText, DWORD dwFlags, wxIMarkupPointer *pIEndMatch, wxIMarkupPointer *pIEndSearch) = 0;
 };
 
 struct wxIMarkupServices : public IUnknown

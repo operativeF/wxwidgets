@@ -209,7 +209,7 @@ void wx28HtmlParser::CreateDOMSubTree(wx28HtmlTag *cur,
                     {
                         // if there is already a root tag add this tag as
                         // the last sibling:
-                        chd->m_Prev = m_Tags->GetLastSibling();
+                        chd->m_Prev = m_Tags->wxGetLastSibling();
                         chd->m_Prev->m_Next = chd;
                     }
                 }
@@ -249,7 +249,7 @@ void wx28HtmlParser::DestroyDOMTree()
     t1 = m_Tags;
     while (t1)
     {
-        t2 = t1->GetNextSibling();
+        t2 = t1->wxGetNextSibling();
         delete t1;
         t1 = t2;
     }

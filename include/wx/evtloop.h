@@ -152,15 +152,15 @@ public:
     // process all currently pending events right now
     //
     // if onlyIfNeeded is true, returns false without doing anything else if
-    // we're already inside Yield()
+    // we're already inside AppYield()
     //
     // WARNING: this function is dangerous as it can lead to unexpected
     //          reentrancies (i.e. when called from an event handler it
     //          may result in calling the same event handler again), use
     //          with _extreme_ care or, better, don't use at all!
-    bool Yield(bool onlyIfNeeded = false);
+    bool EvtYield(bool onlyIfNeeded = false);
 
-    // more selective version of Yield()
+    // more selective version of EvtYield()
     //
     // notice that it is virtual for backwards-compatibility but new code
     // should override DoYieldFor() and not YieldFor() itself
@@ -171,7 +171,7 @@ public:
         { return m_yieldLevel != 0; }
 
     // returns true if events of the given event category should be immediately
-    // processed inside a wxApp::Yield() call or rather should be queued for
+    // processed inside a wxApp::AppYield() call or rather should be queued for
     // later processing by the main event loop
     virtual bool IsEventAllowedInsideYield(wxEventCategory cat) const
         { return (m_eventsToProcessInsideYield & cat) != 0; }

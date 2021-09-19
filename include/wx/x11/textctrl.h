@@ -126,7 +126,7 @@ public:
     // more readable flag testing methods
     // ----------------------------------
 
-    bool IsPassword() const { return (GetWindowStyle() & wxTE_PASSWORD) != 0; }
+    bool IsPassword() const { return (wxGetWindowStyle() & wxTE_PASSWORD) != 0; }
     bool WrapLines() const { return false; }
 
     // If the return values from and to are the same, there is no selection.

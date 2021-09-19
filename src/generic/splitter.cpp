@@ -205,7 +205,7 @@ void wxSplitterWindow::OnMouseEvent(wxMouseEvent& event)
     int x = (int)event.GetX(),
         y = (int)event.GetY();
 
-    if ( GetWindowStyle() & wxSP_NOSASH )
+    if ( wxGetWindowStyle() & wxSP_NOSASH )
     {
         event.Skip();
         return;

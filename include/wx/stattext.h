@@ -54,7 +54,7 @@ public:
 
     bool IsEllipsized() const
     {
-        return (GetWindowStyle() & wxST_ELLIPSIZE_MASK) != 0;
+        return (wxGetWindowStyle() & wxST_ELLIPSIZE_MASK) != 0;
     }
 
 protected:      // functions required for wxST_ELLIPSIZE_* support

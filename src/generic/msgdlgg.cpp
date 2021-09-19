@@ -190,14 +190,14 @@ void wxGenericMessageDialog::DoCreateMsgdialog()
     if ( !m_extendedMessage.empty() )
     {
         wxTitleTextWrapper titleWrapper(this);
-        textsizer->Add(CreateTextSizer(GetMessage(), titleWrapper),
+        textsizer->Add(CreateTextSizer(wxGetMessage(), titleWrapper),
                        wxSizerFlags().Border(wxBOTTOM, 20));
 
         lowerMessage = GetExtendedMessage();
     }
     else // no extended message
     {
-        lowerMessage = GetMessage();
+        lowerMessage = wxGetMessage();
     }
 
     textsizer->Add(CreateTextSizer(lowerMessage));

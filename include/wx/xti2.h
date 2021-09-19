@@ -33,7 +33,7 @@ public:
     wxAny GetProperty (const wxChar *propertyName) const ;
 
     // get the runtime identity of this object
-    wxClassInfo *GetClassInfo() const
+    wxClassInfo *wxGetClassInfo(o() const
     {
 #ifdef _MSC_VER
         return (wxClassInfo*) m_classInfo;

@@ -569,7 +569,7 @@ wxGraphicsContext::wxGraphicsContext(wxGraphicsRenderer* renderer,
 {
 }
 
-bool wxGraphicsContext::StartDoc(const std::string& WXUNUSED(message))
+bool wxGraphicsContext::wxStartDoc(const std::string& WXUNUSED(message))
 {
     return true;
 }
@@ -669,7 +669,7 @@ void wxGraphicsContext::SetFont(const wxFont& font, const wxColour& colour)
     if ( font.IsOk() )
     {
         // Change current font only if new graphics font is successfully created.
-        wxGraphicsFont grFont = CreateFont(font, colour);
+        wxGraphicsFont grFont = wxCreateFont(font, colour);
         if ( !grFont.IsSameAs(wxNullGraphicsFont) )
         {
             SetFont(grFont);
@@ -695,7 +695,7 @@ wxGraphicsContext::DoDrawRotatedText(std::string_view str,
 {
     Translate(x,y);
     Rotate( -angle );
-    DrawText( str , 0, 0 );
+    wxDrawText( str , 0, 0 );
     Rotate( angle );
     Translate(-x,-y);
 }
@@ -718,7 +718,7 @@ wxGraphicsContext::DoDrawFilledText(std::string_view str,
 
     DrawRectangle(x , y, width, height);
 
-    DrawText( str, x ,y);
+    wxDrawText( str, x ,y);
     SetBrush( formerBrush );
     SetPen( formerPen );
 }
@@ -748,7 +748,7 @@ wxGraphicsContext::DoDrawRotatedFilledText(std::string_view str,
         (int) (y + std::cos(angle) * height - std::sin(angle) * width));
     path.AddLineToPoint((int) (x + std::cos(angle) * width) , (int) (y - std::sin(angle) * width) );
     FillPath( path );
-    DrawText( str, x ,y, angle);
+    wxDrawText( str, x ,y, angle);
     SetBrush( formerBrush );
     SetPen( formerPen );
 }
@@ -934,7 +934,7 @@ wxGraphicsContext::CreateRadialGradientBrush(
                           );
 }
 
-wxGraphicsFont wxGraphicsContext::CreateFont( const wxFont &font , const wxColour &col ) const
+wxGraphicsFont wxGraphicsContext::wxCreateFont( const wxFont &font , const wxColour &col ) const
 {
     wxRealPoint dpi;
     GetDPI(&dpi.x, &dpi.y);
@@ -942,12 +942,12 @@ wxGraphicsFont wxGraphicsContext::CreateFont( const wxFont &font , const wxColou
 }
 
 wxGraphicsFont
-wxGraphicsContext::CreateFont(double sizeInPixels,
+wxGraphicsContext::wxCreateFont(double sizeInPixels,
                               const std::string& facename,
                               int flags,
                               const wxColour& col) const
 {
-    return GetRenderer()->CreateFont(sizeInPixels, facename, flags, col);
+    return GetRenderer()->wxCreateFont(sizeInPixels, facename, flags, col);
 }
 
 wxGraphicsBitmap wxGraphicsContext::CreateBitmap( const wxBitmap& bmp ) const

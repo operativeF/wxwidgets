@@ -4744,7 +4744,7 @@ bool wxD2DContext::ShouldOffset() const
 void wxD2DContext::DoDrawText(std::string_view str, double x, double y)
 {
     wxCHECK_RET(!m_font.IsNull(),
-        wxS("wxD2DContext::DrawText - no valid font set"));
+        wxS("wxD2DContext::wxDrawText - no valid font set"));
 
     if (m_composition == wxCOMPOSITION_DEST)
         return;
@@ -5041,9 +5041,9 @@ public :
     wxImage CreateImageFromBitmap(const wxGraphicsBitmap& bmp) override;
 #endif
 
-    wxGraphicsFont CreateFont(const wxFont& font, const wxColour& col) override;
+    wxGraphicsFont wxCreateFont(const wxFont& font, const wxColour& col) override;
 
-    wxGraphicsFont CreateFont(double sizeInPixels,
+    wxGraphicsFont wxCreateFont(double sizeInPixels,
                               const std::string& facename,
                               int flags = wxFONTFLAG_DEFAULT,
                               const wxColour& col = *wxBLACK) override;
@@ -5067,7 +5067,7 @@ private:
     wxCOMPtr<ID2D1Factory> m_direct2dFactory;
 
 public:
-	wxClassInfo *GetClassInfo() const override;
+	wxClassInfo *wxGetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
 };
@@ -5290,12 +5290,12 @@ wxImage wxD2DRenderer::CreateImageFromBitmap(const wxGraphicsBitmap& bmp)
 }
 #endif
 
-wxGraphicsFont wxD2DRenderer::CreateFont(const wxFont& font, const wxColour& col)
+wxGraphicsFont wxD2DRenderer::wxCreateFont(const wxFont& font, const wxColour& col)
 {
     return CreateFontAtDPI(font, wxRealPoint(), col);
 }
 
-wxGraphicsFont wxD2DRenderer::CreateFont(double sizeInPixels,
+wxGraphicsFont wxD2DRenderer::wxCreateFont(double sizeInPixels,
                                          const std::string& facename,
                                          int flags,
                                          const wxColour& col)

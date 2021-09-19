@@ -447,7 +447,7 @@ iaculis malesuada. Donec bibendum ipsum ut ante porta fringilla.\n";
     wxRichTextListStyleDefinition* listDef = wxDynamicCast(def, wxRichTextListStyleDefinition);
     wxRichTextBoxStyleDefinition* boxDef = wxDynamicCast(def, wxRichTextBoxStyleDefinition);
 
-    wxStaticText* labelCtrl = (wxStaticText*) FindWindow(ID_RICHTEXTSTYLEORGANISERDIALOG_CURRENT_STYLE);
+    wxStaticText* labelCtrl = (wxStaticText*) wxFindWindow(ID_RICHTEXTSTYLEORGANISERDIALOG_CURRENT_STYLE);
     if (labelCtrl)
         labelCtrl->SetLabel(def->GetName() + wxT(":"));
 
@@ -520,7 +520,7 @@ iaculis malesuada. Donec bibendum ipsum ut ante porta fringilla.\n";
 void wxRichTextStyleOrganiserDialog::ClearPreview()
 {
     m_previewCtrl->Clear();
-    wxStaticText* labelCtrl = (wxStaticText*) FindWindow(ID_RICHTEXTSTYLEORGANISERDIALOG_CURRENT_STYLE);
+    wxStaticText* labelCtrl = (wxStaticText*) wxFindWindow(ID_RICHTEXTSTYLEORGANISERDIALOG_CURRENT_STYLE);
     if (labelCtrl)
         labelCtrl->SetLabel("");
 }

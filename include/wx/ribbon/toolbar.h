@@ -222,7 +222,7 @@ protected:
 private:
     public:
 	wxRibbonToolBarEvent& operator=(const wxRibbonToolBarEvent&) = delete;
-	wxClassInfo *GetClassInfo() const override ;
+	wxClassInfo *wxGetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 #endif

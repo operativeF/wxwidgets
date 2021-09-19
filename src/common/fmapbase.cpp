@@ -22,7 +22,6 @@
 
 #if defined(__WINDOWS__)
     #include  "wx/msw/private.h"  // includes windows.h for LOGFONT
-    #include  "wx/msw/winundef.h"
 #endif
 
 #include "wx/app.h"

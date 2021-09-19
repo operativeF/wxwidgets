@@ -614,11 +614,11 @@ wxSize wxComboPopup::GetAdjustedSize( int minWidth,
 void wxComboPopup::DefaultPaintComboControl( wxComboCtrlBase* combo,
                                              wxDC& dc, const wxRect& rect )
 {
-    if ( combo->GetWindowStyle() & wxCB_READONLY ) // ie. no textctrl
+    if ( combo->wxGetWindowStyle() & wxCB_READONLY ) // ie. no textctrl
     {
         combo->PrepareBackground(dc,rect,0);
 
-        dc.DrawText( combo->GetValue(),
+        dc.wxDrawText( combo->GetValue(),
                      rect.x + combo->m_marginLeft,
                      (rect.height-dc.GetCharHeight())/2 + rect.y );
     }
@@ -1975,7 +1975,7 @@ void wxComboCtrlBase::OnKeyEvent(wxKeyEvent& event)
 
         const int keycode = event.GetKeyCode();
 
-        if ( (GetWindowStyle() & wxCB_READONLY) ||
+        if ( (wxGetWindowStyle() & wxCB_READONLY) ||
              (keycode != WXK_RIGHT && keycode != WXK_LEFT) )
         {
             popupInterface->OnComboKeyEvent(event);
@@ -2245,7 +2245,7 @@ void wxComboCtrlBase::ShowPopup()
     //     transient popup doesn't work yet.
     const wxWindow* mainCtrl = GetMainWindowOfCompositeControl();
     wxWindow* parent = mainCtrl->GetParent();
-    const int parentFlags = parent->GetWindowStyle();
+    const int parentFlags = parent->wxGetWindowStyle();
     if ( parentFlags & wxTAB_TRAVERSAL )
     {
         parent->SetWindowStyle( parentFlags & ~(wxTAB_TRAVERSAL) );
@@ -2490,7 +2490,7 @@ void wxComboCtrlBase::OnPopupDismiss(bool generateEvent)
     if ( m_iFlags & wxCC_IFLAG_PARENT_TAB_TRAVERSAL )
     {
         wxWindow* parent = GetParent();
-        parent->SetWindowStyle( parent->GetWindowStyle() | wxTAB_TRAVERSAL );
+        parent->SetWindowStyle( parent->wxGetWindowStyle() | wxTAB_TRAVERSAL );
         m_iFlags &= ~(wxCC_IFLAG_PARENT_TAB_TRAVERSAL);
     }
 

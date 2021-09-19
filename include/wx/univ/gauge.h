@@ -50,10 +50,10 @@ public:
     // wxUniv-specific methods
 
     // is it a smooth progress bar or a discrete one?
-    bool IsSmooth() const { return (GetWindowStyle() & wxGA_SMOOTH) != 0; }
+    bool IsSmooth() const { return (wxGetWindowStyle() & wxGA_SMOOTH) != 0; }
 
     // is it a vertica; progress bar or a horizontal one?
-    bool IsVertical() const { return (GetWindowStyle() & wxGA_VERTICAL) != 0; }
+    bool IsVertical() const { return (wxGetWindowStyle() & wxGA_VERTICAL) != 0; }
 
 protected:
     // common part of all ctors

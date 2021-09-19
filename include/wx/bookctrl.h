@@ -404,7 +404,7 @@ private:
 
     public:
 	wxBookCtrlEvent& operator=(const wxBookCtrlEvent&) = delete;
-	wxClassInfo *GetClassInfo() const override ;
+	wxClassInfo *wxGetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };

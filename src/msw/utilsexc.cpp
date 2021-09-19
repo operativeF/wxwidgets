@@ -1027,7 +1027,7 @@ long wxExecute(const wxString& cmd, int flags, wxProcess *handler,
         {
             wxEventLoopBase * const loop = wxEventLoopBase::GetActive();
             if ( loop )
-                loop->Yield();
+                loop->EvtYield();
         }
     }
 

@@ -236,7 +236,7 @@ bool wxTextCtrl::Create( wxWindow *parent,
     wxClientDC dc(this);
     dc.SetFont( m_sourceFont );
     m_lineHeight = dc.GetCharHeight();
-    m_charWidth = dc.GetCharWidth();
+    m_charWidth = dc.wxGetCharWidth();
 
     SetValue( value );
 
@@ -331,7 +331,7 @@ void wxTextCtrl::DoSetValue(const wxString& value, int flags)
     }
 
     // Don't need to refresh if the value hasn't changed
-    if ((GetWindowStyle() & wxTE_MULTILINE) == 0)
+    if ((wxGetWindowStyle() & wxTE_MULTILINE) == 0)
     {
         if (value == oldValue)
             return;
@@ -862,7 +862,7 @@ bool wxTextCtrl::SetFont(const wxFont& font)
     wxClientDC dc(this);
     dc.SetFont( m_sourceFont );
     m_lineHeight = dc.GetCharHeight();
-    m_charWidth = dc.GetCharWidth();
+    m_charWidth = dc.wxGetCharWidth();
 
     // TODO: recalc longest lines
 
@@ -1502,7 +1502,7 @@ void wxTextCtrl::DrawLinePart( wxDC &dc, int x, int y, const wxString &toDraw, c
         GetTextExtent( tmp, &xx, NULL, NULL, NULL );
         xx += x;
         int yy = y;
-        dc.DrawText( current, xx, yy );
+        dc.wxDrawText( current, xx, yy );
     }
 }
 
@@ -1548,7 +1548,7 @@ void wxTextCtrl::DrawLine( wxDC &dc, int x, int y, const wxString &line2, int li
                 red.SetChar( m_bracketX, line[(size_t) (m_bracketX)] );
                 line.SetChar( m_bracketX, ' ' );
                 dc.SetTextForeground( *wxRED );
-                dc.DrawText( red, x, y );
+                dc.wxDrawText( red, x, y );
                 dc.SetTextForeground( *wxBLACK );
             }
         }

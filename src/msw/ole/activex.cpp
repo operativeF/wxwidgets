@@ -917,7 +917,7 @@ void wxActiveXContainer::CreateActiveX(REFIID iid, IUnknown* pUnk)
 
     // type info
     wxAutoITypeInfo typeInfo;
-    hret = classInfo->GetClassInfo(typeInfo.GetRef());
+    hret = classInfo->GetClassInfoW(typeInfo.GetRef());
     CHECK_HR(hret);
     wxASSERT(typeInfo.IsOk());
 

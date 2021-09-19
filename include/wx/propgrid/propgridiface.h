@@ -254,7 +254,7 @@ public:
 
     // Returns id of first child of given property.
     // Does not return sub-properties!
-    wxPGProperty* GetFirstChild( wxPGPropArg id )
+    wxPGProperty* wxGetFirstChild( wxPGPropArg id )
     {
         wxPG_PROP_ARG_CALL_PROLOG_RETVAL(wxNullProperty)
 

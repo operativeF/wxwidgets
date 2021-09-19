@@ -39,7 +39,7 @@ public:
     }
 
 protected:
-    wxWindow *GetWindow() const { return static_cast<wxWindow *>(GetObject()); }
+    wxWindow *GetWindow() const { return static_cast<wxWindow *>(wxGetObject()); }
 
 private:
     void HandleDestroy(wxWindowDestroyEvent& event)
@@ -48,7 +48,7 @@ private:
 
         // only react to the destruction of this object itself, not of any of
         // its children
-        if ( event.GetEventObject() == GetObject() )
+        if ( event.GetEventObject() == wxGetObject() )
         {
             // this will delete this object itself
             wxPersistenceManager::Get().SaveAndUnregister(GetWindow());

@@ -51,7 +51,6 @@
 
 #ifdef __WINDOWS__
 #include <windows.h>
-#include "wx/msw/winundef.h"
 #include "wx/volume.h"
 
 // MinGW has _getdrive() and _chdrive(), Cygwin doesn't.
@@ -776,7 +775,7 @@ void wxGenericDirCtrl::ReCreateTree()
 void wxGenericDirCtrl::CollapseTree()
 {
     wxTreeItemIdValue cookie;
-    wxTreeItemId child = m_treeCtrl->GetFirstChild(m_rootId, cookie);
+    wxTreeItemId child = m_treeCtrl->wxGetFirstChild(m_rootId, cookie);
     while (child.IsOk())
     {
         CollapseDir(child);
@@ -804,7 +803,7 @@ wxTreeItemId wxGenericDirCtrl::FindChild(wxTreeItemId parentId, const wxString& 
 #endif
 
     wxTreeItemIdValue cookie;
-    wxTreeItemId childId = m_treeCtrl->GetFirstChild(parentId, cookie);
+    wxTreeItemId childId = m_treeCtrl->wxGetFirstChild(parentId, cookie);
     while (childId.IsOk())
     {
         wxDirItemData* data = GetItemData(childId);
@@ -864,7 +863,7 @@ bool wxGenericDirCtrl::ExpandPath(const wxString& path)
     {
         // Find the first file in this directory
         wxTreeItemIdValue cookie;
-        wxTreeItemId childId = m_treeCtrl->GetFirstChild(lastId, cookie);
+        wxTreeItemId childId = m_treeCtrl->wxGetFirstChild(lastId, cookie);
         bool selectedChild = false;
         while (childId.IsOk())
         {

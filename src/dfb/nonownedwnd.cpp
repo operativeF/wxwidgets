@@ -118,7 +118,7 @@ bool wxNonOwnedWindow::Create(wxWindow *parent,
     desc.posy = pos.y;
     desc.width = size.x;
     desc.height = size.y;
-    m_dfbwin = layer->CreateWindow(&desc);
+    m_dfbwin = layer->wxCreateWindow(&desc);
     if ( !m_dfbwin )
         return false;
 

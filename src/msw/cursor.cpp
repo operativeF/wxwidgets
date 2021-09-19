@@ -270,7 +270,7 @@ namespace
 wxSize ScaleAndReverseBitmap(HBITMAP& bitmap, float scale)
 {
     BITMAP bmp;
-    if ( !::GetObject(bitmap, sizeof(bmp), &bmp) )
+    if ( !::GetObjectW(bitmap, sizeof(bmp), &bmp) )
         return {};
     wxSize cs(gsl::narrow_cast<int>(bmp.bmWidth * scale), gsl::narrow_cast<int>(bmp.bmHeight * scale));
 

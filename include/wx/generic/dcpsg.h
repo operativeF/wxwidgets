@@ -63,13 +63,13 @@ public:
 
     void DestroyClippingRegion() override;
 
-    bool StartDoc(const wxString& message) override;
+    bool wxStartDoc(const wxString& message) override;
     void EndDoc() override;
     void StartPage() override;
     void EndPage() override;
 
     wxCoord GetCharHeight() const override;
-    wxCoord GetCharWidth() const override;
+    wxCoord wxGetCharWidth() const override;
     bool CanGetTextExtent() const override { return true; }
 
     // Resolution in pixels per logical inch

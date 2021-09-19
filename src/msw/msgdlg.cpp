@@ -344,7 +344,7 @@ void wxMessageDialog::AdjustButtonLabels()
     // resize the message box to be wider if needed
     const int wBoxOld = wxGetClientRect(GetHwnd()).right;
 
-    const int CHAR_WIDTH_IN_PIXELS = GetCharWidth();
+    const int CHAR_WIDTH_IN_PIXELS = wxGetCharWidth();
     const int MARGIN_OUTER = 2*CHAR_WIDTH_IN_PIXELS;  // margin between box and buttons
     const int MARGIN_INNER = CHAR_WIDTH_IN_PIXELS;    // margin between buttons
 
@@ -611,7 +611,7 @@ wxMSWTaskDialogConfig::wxMSWTaskDialogConfig(const wxMessageDialogBase& dlg)
 {
     parent = dlg.GetParentForModalDialog();
     caption = dlg.GetCaption();
-    message = dlg.GetMessage();
+    message = dlg.wxGetMessage();
     extendedMessage = dlg.GetExtendedMessage();
 
     // Before wxMessageDialog added support for extended message it was common

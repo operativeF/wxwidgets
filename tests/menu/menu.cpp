@@ -546,7 +546,7 @@ TEST_CASE("Menu tests.")
         CHECK(src);
 
         CHECK_EQ("wxMenu",
-            wxString(src->GetClassInfo()->GetClassName()));
+            wxString(src->wxGetClassInfo()->wxGetClassName()));
         CHECK_EQ(static_cast<wxObject*>(m_menuWithBar),
             src);
 

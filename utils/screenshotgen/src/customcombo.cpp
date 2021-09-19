@@ -86,7 +86,7 @@ void PenStyleComboBox::OnDrawItem( wxDC& dc,
 
     if ( !(flags & wxODCB_PAINTING_CONTROL) )
     {
-        dc.DrawText(GetString( item ),
+        dc.wxDrawText(GetString( item ),
                     r.x + 3,
                     (r.y + 0) + ( (r.height/2) - dc.GetCharHeight() )/2
                    );

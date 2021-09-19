@@ -2186,9 +2186,9 @@ int wxPropertyGrid::DoDrawItems( wxDC& dc,
         // whitespace between the real border and the propgrid margin exacerbates the double-border look).
 
         // Is this or its parent themed?
-        bool suppressMarginEdge = (GetWindowStyle() & wxPG_HIDE_MARGIN) &&
-            (((GetWindowStyle() & wxBORDER_MASK) == wxBORDER_THEME) ||
-            (((GetWindowStyle() & wxBORDER_MASK) == wxBORDER_NONE) && ((GetParent()->GetWindowStyle() & wxBORDER_MASK) == wxBORDER_THEME)));
+        bool suppressMarginEdge = (wxGetWindowStyle() & wxPG_HIDE_MARGIN) &&
+            (((wxGetWindowStyle() & wxBORDER_MASK) == wxBORDER_THEME) ||
+            (((wxGetWindowStyle() & wxBORDER_MASK) == wxBORDER_NONE) && ((GetParent()->wxGetWindowStyle() & wxBORDER_MASK) == wxBORDER_THEME)));
         if (suppressMarginEdge)
         {
             // Blank out the margin edge
@@ -3981,12 +3981,12 @@ bool wxPropertyGrid::DoSelectProperty( wxPGProperty* p, unsigned int flags )
 
 /*
     if ( prevFirstSel )
-        wxPrintf( "Selected %s\n", prevFirstSel->GetClassInfo()->GetClassName() );
+        wxPrintf( "Selected %s\n", prevFirstSel->wxGetClassInfo()->wxGetClassName() );
     else
         wxPrintf( "None selected\n" );
 
     if (p)
-        wxPrintf( "P =  %s\n", p->GetClassInfo()->GetClassName() );
+        wxPrintf( "P =  %s\n", p->wxGetClassInfo()->wxGetClassName() );
     else
         wxPrintf( "P = NULL\n" );
 */
@@ -5570,7 +5570,7 @@ void wxPropertyGrid::HandleKeyEvent( wxKeyEvent &event, bool fromChild )
                 // in every scenario (for instance, when property grid
                 // is either first or last control).
             #if defined(__WXGTK__)
-                wxWindow* sibling = mainControl->GetNextSibling();
+                wxWindow* sibling = mainControl->wxGetNextSibling();
                 if ( sibling )
                     sibling->SetFocusFromKbd();
             #else
@@ -5587,7 +5587,7 @@ void wxPropertyGrid::HandleKeyEvent( wxKeyEvent &event, bool fromChild )
             else
             {
             #if defined(__WXGTK__)
-                wxWindow* sibling = mainControl->GetPrevSibling();
+                wxWindow* sibling = mainControl->wxGetPrevSibling();
                 if ( sibling )
                     sibling->SetFocusFromKbd();
             #else
@@ -6035,7 +6035,7 @@ wxPGEditor* wxPropertyGrid::DoRegisterEditorClass( wxPGEditor* editorClass,
     if ( vt_it != wxPGGlobalVars->m_mapEditorClasses.end() )
     {
         // If this name was already used, try class name.
-        name = editorClass->GetClassInfo()->GetClassName();
+        name = editorClass->wxGetClassInfo()->wxGetClassName();
         vt_it = wxPGGlobalVars->m_mapEditorClasses.find(name);
     }
 

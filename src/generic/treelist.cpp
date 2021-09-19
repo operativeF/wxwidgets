@@ -1038,7 +1038,7 @@ wxTreeListItem wxTreeListCtrl::GetItemParent(wxTreeListItem item) const
     return item->GetParent();
 }
 
-wxTreeListItem wxTreeListCtrl::GetFirstChild(wxTreeListItem item) const
+wxTreeListItem wxTreeListCtrl::wxGetFirstChild(wxTreeListItem item) const
 {
     wxCHECK_MSG( item.IsOk(), wxTreeListItem(), "Invalid item" );
 
@@ -1046,7 +1046,7 @@ wxTreeListItem wxTreeListCtrl::GetFirstChild(wxTreeListItem item) const
 }
 
 wxTreeListItem
-wxTreeListCtrl::GetNextSibling(wxTreeListItem item) const
+wxTreeListCtrl::wxGetNextSibling(wxTreeListItem item) const
 {
     wxCHECK_MSG( item.IsOk(), wxTreeListItem(), "Invalid item" );
 
@@ -1248,9 +1248,9 @@ wxTreeListCtrl::CheckItemRecursively(wxTreeListItem item, wxCheckBoxState state)
 
     m_model->CheckItem(item, state);
 
-    for ( wxTreeListItem child = GetFirstChild(item);
+    for ( wxTreeListItem child = wxGetFirstChild(item);
           child.IsOk();
-          child = GetNextSibling(child) )
+          child = wxGetNextSibling(child) )
     {
         CheckItemRecursively(child, state);
     }
@@ -1296,9 +1296,9 @@ wxTreeListCtrl::AreAllChildrenInState(wxTreeListItem item,
 {
     wxCHECK_MSG( item.IsOk(), false, "Invalid item" );
 
-    for ( wxTreeListItem child = GetFirstChild(item);
+    for ( wxTreeListItem child = wxGetFirstChild(item);
           child.IsOk();
-          child = GetNextSibling(child) )
+          child = wxGetNextSibling(child) )
     {
         if ( GetCheckedState(child) != state )
             return false;

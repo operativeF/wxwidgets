@@ -497,16 +497,16 @@ void wxXmlResource::ClearHandlers()
 }
 
 
-wxMenu *wxXmlResource::LoadMenu(const wxString& name)
+wxMenu *wxXmlResource::wxLoadMenu(const wxString& name)
 {
-    return (wxMenu*)CreateResFromNode(FindResource(name, wxT("wxMenu")), nullptr, nullptr);
+    return (wxMenu*)CreateResFromNode(wxFindResource(name, wxT("wxMenu")), nullptr, nullptr);
 }
 
 
 
 wxMenuBar *wxXmlResource::LoadMenuBar(wxWindow *parent, const wxString& name)
 {
-    return (wxMenuBar*)CreateResFromNode(FindResource(name, wxT("wxMenuBar")), parent, nullptr);
+    return (wxMenuBar*)CreateResFromNode(wxFindResource(name, wxT("wxMenuBar")), parent, nullptr);
 }
 
 
@@ -514,57 +514,57 @@ wxMenuBar *wxXmlResource::LoadMenuBar(wxWindow *parent, const wxString& name)
 #if wxUSE_TOOLBAR
 wxToolBar *wxXmlResource::LoadToolBar(wxWindow *parent, const wxString& name)
 {
-    return (wxToolBar*)CreateResFromNode(FindResource(name, wxT("wxToolBar")), parent, nullptr);
+    return (wxToolBar*)CreateResFromNode(wxFindResource(name, wxT("wxToolBar")), parent, nullptr);
 }
 #endif
 
 
 wxDialog *wxXmlResource::LoadDialog(wxWindow *parent, const wxString& name)
 {
-    return (wxDialog*)CreateResFromNode(FindResource(name, wxT("wxDialog")), parent, nullptr);
+    return (wxDialog*)CreateResFromNode(wxFindResource(name, wxT("wxDialog")), parent, nullptr);
 }
 
 bool wxXmlResource::LoadDialog(wxDialog *dlg, wxWindow *parent, const wxString& name)
 {
-    return CreateResFromNode(FindResource(name, wxT("wxDialog")), parent, dlg) != nullptr;
+    return CreateResFromNode(wxFindResource(name, wxT("wxDialog")), parent, dlg) != nullptr;
 }
 
 
 
 wxPanel *wxXmlResource::LoadPanel(wxWindow *parent, const wxString& name)
 {
-    return (wxPanel*)CreateResFromNode(FindResource(name, wxT("wxPanel")), parent, nullptr);
+    return (wxPanel*)CreateResFromNode(wxFindResource(name, wxT("wxPanel")), parent, nullptr);
 }
 
 bool wxXmlResource::LoadPanel(wxPanel *panel, wxWindow *parent, const wxString& name)
 {
-    return CreateResFromNode(FindResource(name, wxT("wxPanel")), parent, panel) != nullptr;
+    return CreateResFromNode(wxFindResource(name, wxT("wxPanel")), parent, panel) != nullptr;
 }
 
 wxFrame *wxXmlResource::LoadFrame(wxWindow* parent, const wxString& name)
 {
-    return (wxFrame*)CreateResFromNode(FindResource(name, wxT("wxFrame")), parent, nullptr);
+    return (wxFrame*)CreateResFromNode(wxFindResource(name, wxT("wxFrame")), parent, nullptr);
 }
 
 bool wxXmlResource::LoadFrame(wxFrame* frame, wxWindow *parent, const wxString& name)
 {
-    return CreateResFromNode(FindResource(name, wxT("wxFrame")), parent, frame) != nullptr;
+    return CreateResFromNode(wxFindResource(name, wxT("wxFrame")), parent, frame) != nullptr;
 }
 
-wxBitmap wxXmlResource::LoadBitmap(const wxString& name)
+wxBitmap wxXmlResource::wxLoadBitmap(const wxString& name)
 {
     wxBitmap *bmp = (wxBitmap*)CreateResFromNode(
-                               FindResource(name, wxT("wxBitmap")), nullptr, nullptr);
+                               wxFindResource(name, wxT("wxBitmap")), nullptr, nullptr);
     wxBitmap rt;
 
     if (bmp) { rt = *bmp; delete bmp; }
     return rt;
 }
 
-wxIcon wxXmlResource::LoadIcon(const wxString& name)
+wxIcon wxXmlResource::wxLoadIcon(const wxString& name)
 {
     wxIcon *icon = (wxIcon*)CreateResFromNode(
-                            FindResource(name, wxT("wxIcon")), nullptr, nullptr);
+                            wxFindResource(name, wxT("wxIcon")), nullptr, nullptr);
     wxIcon rt;
 
     if (icon) { rt = *icon; delete icon; }
@@ -578,7 +578,7 @@ wxXmlResource::DoLoadObject(wxWindow *parent,
                             const wxString& classname,
                             bool recursive)
 {
-    wxXmlNode * const node = FindResource(name, classname, recursive);
+    wxXmlNode * const node = wxFindResource(name, classname, recursive);
 
     return node ? DoCreateResFromNode(*node, parent, nullptr) : nullptr;
 }
@@ -590,7 +590,7 @@ wxXmlResource::DoLoadObject(wxObject *instance,
                             const wxString& classname,
                             bool recursive)
 {
-    wxXmlNode * const node = FindResource(name, classname, recursive);
+    wxXmlNode * const node = wxFindResource(name, classname, recursive);
 
     return node && DoCreateResFromNode(*node, parent, instance) != nullptr;
 }
@@ -601,7 +601,7 @@ bool wxXmlResource::AttachUnknownControl(const wxString& name,
 {
     if (parent == nullptr)
         parent = control->GetParent();
-    wxWindow *container = parent->FindWindow(name + wxT("_container"));
+    wxWindow *container = parent->wxFindWindow(name + wxT("_container"));
     if (!container)
     {
         wxLogError("Cannot find container for unknown control '%s'.", name);
@@ -891,7 +891,7 @@ wxXmlNode *wxXmlResource::DoFindResource(wxXmlNode *parent,
     return nullptr;
 }
 
-wxXmlNode *wxXmlResource::FindResource(const wxString& name,
+wxXmlNode *wxXmlResource::wxFindResource(const wxString& name,
                                        const wxString& classname,
                                        bool recursive)
 {
@@ -915,7 +915,7 @@ wxXmlNode *wxXmlResource::FindResource(const wxString& name,
     else // node was found
     {
         // ensure that relative paths work correctly when loading this node
-        // (which should happen as soon as we return as FindResource() result
+        // (which should happen as soon as we return as wxFindResource() result
         // is always passed to CreateResFromNode())
         m_curFileSystem.ChangePathTo(path);
     }
@@ -1028,7 +1028,7 @@ wxXmlResource::DoCreateResFromNode(wxXmlNode& node,
     if ( node.GetName() == wxT("object_ref") )
     {
         wxString refName = node.GetAttribute("ref", "");
-        wxXmlNode* refNode = FindResource(refName, wxEmptyString, true);
+        wxXmlNode* refNode = wxFindResource(refName, wxEmptyString, true);
 
         if ( !refNode )
         {

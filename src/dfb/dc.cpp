@@ -326,7 +326,7 @@ void wxDFBDCImpl::DoDrawText(const wxString& text, wxCoord x, wxCoord y)
     DoGetTextExtent(text, &w, &h);
     CalcBoundingBox(x + w, y + h);
 
-    // if background mode is solid, DrawText must paint text's background:
+    // if background mode is solid, wxDrawText must paint text's background:
     if ( m_backgroundMode == wxBrushStyle::Solid )
     {
         wxCHECK_RET( m_textBackgroundColour.IsOk(),
@@ -436,7 +436,7 @@ void wxDFBDCImpl::SetLogicalFunction(wxRasterOperationMode function)
     m_logicalFunction = function;
 }
 
-bool wxDFBDCImpl::StartDoc(const wxString& WXUNUSED(message))
+bool wxDFBDCImpl::wxStartDoc(const wxString& WXUNUSED(message))
 {
     // We might be previewing, so return true to let it continue.
     return true;
@@ -468,7 +468,7 @@ wxCoord wxDFBDCImpl::GetCharHeight() const
     return YDEV2LOGREL(h);
 }
 
-wxCoord wxDFBDCImpl::GetCharWidth() const
+wxCoord wxDFBDCImpl::wxGetCharWidth() const
 {
     wxCHECK_MSG( IsOk(), -1, wxT("invalid dc") );
     wxCHECK_MSG( m_font.IsOk(), -1, wxT("no font selected") );

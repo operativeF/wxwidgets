@@ -64,7 +64,7 @@ private:
     double m_scaleFactor;
 
 public:
-	wxClassInfo *GetClassInfo() const;
+	wxClassInfo *wxGetClassInfo(o() const;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
 };

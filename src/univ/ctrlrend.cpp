@@ -131,7 +131,7 @@ void wxControlRenderer::DrawButtonBorder()
 
 void wxControlRenderer::DrawBitmap(const wxBitmap& bitmap)
 {
-    int style = m_window->GetWindowStyle();
+    int style = m_window->wxGetWindowStyle();
     DrawBitmap(m_dc, bitmap, m_rect,
                style & wxALIGN_MASK,
                style & wxBI_EXPAND ? wxEXPAND : wxSTRETCH_NOT);

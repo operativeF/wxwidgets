@@ -185,7 +185,7 @@ public:
 
     /// If editing the attributes for a particular object, such as an image,
     /// set the object so the code can initialize attributes such as size correctly.
-    wxRichTextObject* GetObject() const { return m_object; }
+    wxRichTextObject* wxGetObject() const { return m_object; }
     void SetObject(wxRichTextObject* obj) { m_object = obj; }
 
     /// Transfers the data and from to the window

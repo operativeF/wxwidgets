@@ -42,7 +42,7 @@ public:
 
     
     virtual void Maximize(bool maximize = true);
-    virtual bool IsMaximized() const;
+    virtual bool wxIsMaximized() const;
     virtual void Iconize(bool iconize = true);
     virtual bool IsIconized() const;
     virtual void Restore();

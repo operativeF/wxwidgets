@@ -166,7 +166,7 @@ private:
         wxCommandLinkButton(const wxCommandLinkButton&) = delete;
         wxCommandLinkButton& operator=(const wxCommandLinkButton&) = delete;
 
-        wxClassInfo *GetClassInfo() const;
+        wxClassInfo *wxGetClassInfo() const;
         static wxClassInfo ms_classInfo;
         static wxObject* wxCreateObject();
     };

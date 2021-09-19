@@ -68,11 +68,11 @@ public:
     virtual ~wx28HtmlTag();
 
     wx28HtmlTag *GetParent() const {return m_Parent;}
-    wx28HtmlTag *GetFirstSibling() const;
-    wx28HtmlTag *GetLastSibling() const;
+    wx28HtmlTag *wxGetFirstSibling() const;
+    wx28HtmlTag *wxGetLastSibling() const;
     wx28HtmlTag *GetChildren() const { return m_FirstChild; }
     wx28HtmlTag *GetPreviousSibling() const { return m_Prev; }
-    wx28HtmlTag *GetNextSibling() const {return m_Next; }
+    wx28HtmlTag *wxGetNextSibling() const {return m_Next; }
     // Return next tag, as if tree had been flattened
     wx28HtmlTag *GetNextTag() const;
 

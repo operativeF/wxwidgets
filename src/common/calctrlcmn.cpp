@@ -108,7 +108,7 @@ wxCalendarDateAttr wxCalendarDateAttr::m_mark(wxCAL_BORDER_SQUARE);
 
 bool wxCalendarCtrlBase::EnableMonthChange(bool enable)
 {
-    const long styleOrig = GetWindowStyle();
+    const long styleOrig = wxGetWindowStyle();
     long style = enable ? styleOrig & ~wxCAL_NO_MONTH_CHANGE
                         : styleOrig | wxCAL_NO_MONTH_CHANGE;
     if ( style == styleOrig )
@@ -147,13 +147,13 @@ bool wxCalendarCtrlBase::GenerateAllChangeEvents(const wxDateTime& dateOld)
 
 void wxCalendarCtrlBase::EnableHolidayDisplay(bool display)
 {
-    long style = GetWindowStyle();
+    long style = wxGetWindowStyle();
     if ( display )
         style |= wxCAL_SHOW_HOLIDAYS;
     else
         style &= ~wxCAL_SHOW_HOLIDAYS;
 
-    if ( style == GetWindowStyle() )
+    if ( style == wxGetWindowStyle() )
         return;
 
     SetWindowStyle(style);

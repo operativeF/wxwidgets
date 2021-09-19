@@ -572,7 +572,7 @@ void SurfaceImpl::DrawTextNoClip(PRectangle rc, Font &font, XYPOSITION ybase,
 
     // ybase is where the baseline should be, but wxWin uses the upper left
     // corner, so I need to calculate the real position for the text...
-    hdc->DrawText(stc2wx(s, len), wxRound(rc.left), wxRound(ybase - GetAscent(font)));
+    hdc->wxDrawText(stc2wx(s, len), wxRound(rc.left), wxRound(ybase - GetAscent(font)));
 }
 
 void SurfaceImpl::DrawTextClipped(PRectangle rc, Font &font, XYPOSITION ybase,
@@ -585,7 +585,7 @@ void SurfaceImpl::DrawTextClipped(PRectangle rc, Font &font, XYPOSITION ybase,
     hdc->SetClippingRegion(wxRectFromPRectangle(rc));
 
     // see comments above
-    hdc->DrawText(stc2wx(s, len), wxRound(rc.left), wxRound(ybase - GetAscent(font)));
+    hdc->wxDrawText(stc2wx(s, len), wxRound(rc.left), wxRound(ybase - GetAscent(font)));
     hdc->DestroyClippingRegion();
 }
 
@@ -600,7 +600,7 @@ void SurfaceImpl::DrawTextTransparent(PRectangle rc, Font &font, XYPOSITION ybas
 
     // ybase is where the baseline should be, but wxWin uses the upper left
     // corner, so I need to calculate the real position for the text...
-    hdc->DrawText(stc2wx(s, len), wxRound(rc.left), wxRound(ybase - GetAscent(font)));
+    hdc->wxDrawText(stc2wx(s, len), wxRound(rc.left), wxRound(ybase - GetAscent(font)));
 
     hdc->SetBackgroundMode(wxBrushStyle::Solid);
 }
@@ -2991,7 +2991,7 @@ void wxSTCListBox::OnDrawItemText(wxDC& dc, const wxRect& rect,
 
     wxString ellipsizedlabel = wxControl::Ellipsize(label, dc, wxEllipsizeMode::End,
                                                     rect.GetWidth());
-    dc.DrawText(ellipsizedlabel, rect.GetLeft(), rect.GetTop());
+    dc.wxDrawText(ellipsizedlabel, rect.GetLeft(), rect.GetTop());
 }
 
 void wxSTCListBox::OnDrawItem(wxDC& dc, const wxRect& rect, size_t n) const

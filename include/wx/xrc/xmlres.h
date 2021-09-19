@@ -164,7 +164,7 @@ public:
     static void AddSubclassFactory(wxXmlSubclassFactory *factory);
 
     // Loads menu from resource. Returns NULL on failure.
-    wxMenu *LoadMenu(const wxString& name);
+    wxMenu *wxLoadMenu(const wxString& name);
 
     // Loads menubar from resource. Returns NULL on failure.
     wxMenuBar *LoadMenuBar(wxWindow *parent, const wxString& name);
@@ -239,10 +239,10 @@ public:
     }
 
     // Loads a bitmap resource from a file.
-    wxBitmap LoadBitmap(const wxString& name);
+    wxBitmap wxLoadBitmap(const wxString& name);
 
     // Loads an icon resource from a file.
-    wxIcon LoadIcon(const wxString& name);
+    wxIcon wxLoadIcon(const wxString& name);
 
     // Attaches an unknown control to the given panel/window/dialog.
     // Unknown controls are used in conjunction with <object class="unknown">.
@@ -334,7 +334,7 @@ protected:
     bool UpdateResources();
 
 
-    // Common implementation of GetResourceNode() and FindResource(): searches
+    // Common implementation of GetResourceNode() and wxFindResource(): searches
     // all top-level or all (if recursive == true) nodes if all loaded XRC
     // files and returns the node, if found, as well as the path of the file it
     // was found in if path is non-NULL
@@ -346,19 +346,19 @@ protected:
 
     // Note that these functions are used outside of wxWidgets itself, e.g.
     // there are several known cases of inheriting from wxXmlResource just to
-    // be able to call FindResource() so we keep them for compatibility even if
+    // be able to call wxFindResource() so we keep them for compatibility even if
     // their names are not really consistent with GetResourceNode() public
-    // function and FindResource() is also non-const because it changes the
+    // function and wxFindResource() is also non-const because it changes the
     // current path of m_curFileSystem to ensure that relative paths work
     // correctly when CreateResFromNode() is called immediately afterwards
     // (something const public function intentionally does not do)
 
     // Returns the node containing the resource with the given name and class
     // name unless it's empty (then any class matches) or NULL if not found.
-    wxXmlNode *FindResource(const wxString& name, const wxString& classname,
+    wxXmlNode *wxFindResource(const wxString& name, const wxString& classname,
                             bool recursive = false);
 
-    // Helper function used by FindResource() to look under the given node.
+    // Helper function used by wxFindResource() to look under the given node.
     wxXmlNode *DoFindResource(wxXmlNode *parent, const wxString& name,
                               const wxString& classname, bool recursive) const;
 
@@ -455,7 +455,7 @@ private:
 //    XRCCTRL(dlg, "my_textctrl", wxTextCtrl)->SetValue(wxT("default value"));
 
 #define XRCCTRL(window, id, type) \
-    (wxStaticCast((window).FindWindow(XRCID(id)), type))
+    (wxStaticCast((window).wxFindWindow(XRCID(id)), type))
 
 // This macro returns pointer to sizer item
 // Example:

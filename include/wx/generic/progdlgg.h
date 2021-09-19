@@ -53,7 +53,7 @@ public:
 
     virtual int GetValue() const;
     virtual int GetRange() const;
-    virtual std::string GetMessage() const;
+    virtual std::string wxGetMessage() const;
 
     virtual void SetRange(int maximum);
 

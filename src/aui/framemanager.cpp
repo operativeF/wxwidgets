@@ -1257,7 +1257,7 @@ bool wxAuiManager::DetachPane(wxWindow* window)
 void wxAuiManager::ClosePane(wxAuiPaneInfo& paneInfo)
 {
     // if we were maximized, restore
-    if (paneInfo.IsMaximized())
+    if (paneInfo.wxIsMaximized())
     {
         RestorePane(paneInfo);
     }
@@ -1359,7 +1359,7 @@ void wxAuiManager::RestoreMaximizedPane()
     for (size_t i = 0; i < m_panes.GetCount(); ++i)
     {
         wxAuiPaneInfo& p = m_panes.Item(i);
-        if (p.IsMaximized())
+        if (p.wxIsMaximized())
         {
             RestorePane(p);
             break;
@@ -1600,7 +1600,7 @@ bool wxAuiManager::LoadPerspective(const wxString& layout, bool update)
 
         LoadPaneInfo(pane_part, pane);
 
-        if ( pane.IsMaximized() )
+        if ( pane.wxIsMaximized() )
             m_hasMaximized = true;
 
         wxAuiPaneInfo& p = GetPane(pane.name);
@@ -1940,7 +1940,7 @@ void wxAuiManager::LayoutAddDock(wxSizer* cont,
             wxAuiPaneInfo& pane = *(dock.panes.Item(pane_i));
             int pane_pos = pane_positions[pane_i];
 
-            if (pane.IsMaximized())
+            if (pane.wxIsMaximized())
                 has_maximized_pane = true;
 
 
@@ -1987,7 +1987,7 @@ void wxAuiManager::LayoutAddDock(wxSizer* cont,
         {
             wxAuiPaneInfo& pane = *(dock.panes.Item(pane_i));
 
-            if (pane.IsMaximized())
+            if (pane.wxIsMaximized())
                 has_maximized_pane = true;
 
             // if this is not the first pane being added,
@@ -4589,7 +4589,7 @@ void wxAuiManager::OnMotion(wxMouseEvent& event)
                                                       pt.y - m_actionOffset.y);
 
                     // float the window
-                    if (paneInfo->IsMaximized())
+                    if (paneInfo->wxIsMaximized())
                         RestorePane(*paneInfo);
                     paneInfo->Float();
                     Update();
@@ -4771,7 +4771,7 @@ void wxAuiManager::OnPaneButton(wxAuiManagerEvent& evt)
             Update();
         }
     }
-    else if (evt.button == wxAUI_BUTTON_MAXIMIZE_RESTORE && !pane.IsMaximized())
+    else if (evt.button == wxAUI_BUTTON_MAXIMIZE_RESTORE && !pane.wxIsMaximized())
     {
         // fire pane maximize event
         wxAuiManagerEvent e(wxEVT_AUI_PANE_MAXIMIZE);
@@ -4785,7 +4785,7 @@ void wxAuiManager::OnPaneButton(wxAuiManagerEvent& evt)
             Update();
         }
     }
-    else if (evt.button == wxAUI_BUTTON_MAXIMIZE_RESTORE && pane.IsMaximized())
+    else if (evt.button == wxAUI_BUTTON_MAXIMIZE_RESTORE && pane.wxIsMaximized())
     {
         // fire pane restore event
         wxAuiManagerEvent e(wxEVT_AUI_PANE_RESTORE);
@@ -4802,7 +4802,7 @@ void wxAuiManager::OnPaneButton(wxAuiManagerEvent& evt)
     else if (evt.button == wxAUI_BUTTON_PIN &&
                 (m_flags & wxAUI_MGR_ALLOW_FLOATING) && pane.IsFloatable())
     {
-        if (pane.IsMaximized())
+        if (pane.wxIsMaximized())
         {
             // If the pane is maximized, the original state must be restored
             // before trying to float the pane, otherwise the other panels

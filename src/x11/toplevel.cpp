@@ -292,7 +292,7 @@ void wxTopLevelWindowX11::Maximize(bool WXUNUSED(maximize))
     // TODO
 }
 
-bool wxTopLevelWindowX11::IsMaximized() const
+bool wxTopLevelWindowX11::wxIsMaximized() const
 {
     // TODO
     return true;
@@ -458,7 +458,7 @@ void wxTopLevelWindowX11::DoSetClientSize(int width, int height)
     if (m_width == old_width && m_height == old_height)
         return;
 
-    // wxLogDebug("DoSetClientSize: %s (%ld) %dx%d", GetClassInfo()->GetClassName(), GetId(), width, height);
+    // wxLogDebug("DoSetClientSize: %s (%ld) %dx%d", wxGetClassInfo()->wxGetClassName(), GetId(), width, height);
 
 #if !wxUSE_NANOX
     XSizeHints size_hints;
@@ -493,7 +493,7 @@ void wxTopLevelWindowX11::DoSetSize(int x, int y, int width, int height, int siz
     if (m_x == old_x && m_y == old_y && m_width == old_width && m_height == old_height)
         return;
 
-    // wxLogDebug("DoSetSize: %s (%ld) %d, %d %dx%d", GetClassInfo()->GetClassName(), GetId(), x, y, width, height);
+    // wxLogDebug("DoSetSize: %s (%ld) %d, %d %dx%d", wxGetClassInfo()->wxGetClassName(), GetId(), x, y, width, height);
 
 #if !wxUSE_NANOX
     XSizeHints size_hints;

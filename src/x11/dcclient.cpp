@@ -1671,7 +1671,7 @@ void wxWindowDCImpl::DoGetTextExtent( const wxString &string, wxCoord *width, wx
     g_object_unref( G_OBJECT( layout ) );
 }
 
-wxCoord wxWindowDCImpl::GetCharWidth() const
+wxCoord wxWindowDCImpl::wxGetCharWidth() const
 {
     // Do not test for DC validity here for the same reasons as in
     // DoGetTextExtent() above.
@@ -2041,7 +2041,7 @@ void wxWindowDCImpl::SetLogicalFunction( wxRasterOperationMode function )
     XSetFunction( (Display*) m_display, (GC) m_brushGC, x_function );
 
     // to stay compatible with wxMSW, we don't apply ROPs to the text
-    // operations (i.e. DrawText/DrawRotatedText).
+    // operations (i.e. wxDrawText/DrawRotatedText).
     // True, but mono-bitmaps use the m_textGC and they use ROPs as well.
     XSetFunction( (Display*) m_display, (GC) m_textGC, x_function );
 

@@ -304,7 +304,7 @@ void wxTipWindowView::OnPaint(wxPaintEvent& WXUNUSED(event))
 
     for ( std::string_view line : m_textLines )
     {
-        dc.DrawText(line, pt);
+        dc.wxDrawText(line, pt);
 
         pt.y += m_heightLine;
     }

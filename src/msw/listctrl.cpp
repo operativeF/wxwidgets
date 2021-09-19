@@ -1643,7 +1643,7 @@ void wxListCtrl::InitEditControl(WXHWND hWnd)
     // shown because this leaves it in some strange state (just try removing
     // this line and then pressing TAB while editing an item in  listctrl
     // inside a panel)
-    m_textCtrl->SetWindowStyle(m_textCtrl->GetWindowStyle() | wxTE_PROCESS_TAB);
+    m_textCtrl->SetWindowStyle(m_textCtrl->wxGetWindowStyle() | wxTE_PROCESS_TAB);
 }
 
 wxTextCtrl* wxListCtrl::EditLabel(long item, wxClassInfo* textControlClass)
@@ -2964,7 +2964,7 @@ bool HandleSubItemPrepaint(LPNMLVCUSTOMDRAW pLVCD, HFONT hfont, int colCount)
     }
     //else: failed to get alignment, assume it's DT_LEFT (default)
 
-    DrawText(hdc, text, -1, &rc, fmt);
+    ::DrawTextW(hdc, text, -1, &rc, fmt);
 
     return true;
 }

@@ -52,7 +52,7 @@ wxGetDialogClassDescription(const wxClassInfo *ci, const std::type_info& ti)
     }
 
     // We consider that an unmangled name is clear enough to be used on its own.
-    return ci->GetClassName();
+    return ci->wxGetClassName();
 }
 
 // Non-template base class for wxExpectModal<T> (via wxExpectModalBase).
@@ -405,14 +405,14 @@ protected:
             return wxString::Format
                    (
                         wxASCII_STR("A message box \"%s\""),
-                        msgdlg->GetMessage()
+                        msgdlg->wxGetMessage()
                    );
         }
 
         return wxString::Format
                (
                     wxASCII_STR("A %s with title \"%s\""),
-                    wxGetDialogClassDescription(dlg->GetClassInfo(), typeid(*dlg)),
+                    wxGetDialogClassDescription(dlg->wxGetClassInfo(), typeid(*dlg)),
                     dlg->GetTitle()
                );
     }

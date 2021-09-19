@@ -1245,7 +1245,7 @@ void wxWebViewIEImpl::FindInternal(const wxString& text, int flags, int internal
                m_findPointers.reserve(text.Len() == 1 ? 1000 : 500);
             }
 
-            while(ptrBegin->FindText(text_bstr, find_flag, ptrEnd, nullptr) == S_OK)
+            while(ptrBegin->FindTextW(text_bstr, find_flag, ptrEnd, nullptr) == S_OK)
             {
                 wxCOMPtr<IHTMLElement> elm;
                 if(ptrBegin->CurrentScope(&elm) == S_OK)

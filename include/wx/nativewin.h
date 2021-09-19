@@ -184,7 +184,7 @@ public:
         wxFAIL_MSG( "not implemented for native windows" );
     }
 
-    bool IsMaximized() const override
+    bool wxIsMaximized() const override
     {
         wxFAIL_MSG( "not implemented for native windows" );
 

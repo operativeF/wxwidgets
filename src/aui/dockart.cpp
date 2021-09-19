@@ -679,7 +679,7 @@ void wxAuiDefaultDockArt::DrawCaption(wxDC& dc,
     std::string draw_text = wxAuiChopText(dc, text, clip_rect.width);
 
     dc.SetClippingRegion(clip_rect);
-    dc.DrawText(draw_text, rect.x+window->FromDIP(3) + caption_offset, rect.y+(rect.height/2)-(h/2)-1);
+    dc.wxDrawText(draw_text, rect.x+window->FromDIP(3) + caption_offset, rect.y+(rect.height/2)-(h/2)-1);
     dc.DestroyClippingRegion();
 }
 
@@ -769,7 +769,7 @@ void wxAuiDefaultDockArt::DrawPaneButton(wxDC& dc,
                 bmp = m_inactivePinBitmap;
             break;
         case wxAUI_BUTTON_MAXIMIZE_RESTORE:
-            if (pane.IsMaximized())
+            if (pane.wxIsMaximized())
             {
                 if (pane.state & wxAuiPaneInfo::optionActive)
                     bmp = m_activeRestoreBitmap;

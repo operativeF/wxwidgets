@@ -237,7 +237,7 @@ private:
     wxRect              m_dragRect;
     wxSashDragStatus    m_dragStatus{};
 
-	wxClassInfo *GetClassInfo() const override ;
+	wxClassInfo *wxGetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };

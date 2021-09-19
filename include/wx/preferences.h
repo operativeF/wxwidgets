@@ -65,7 +65,7 @@ public:
 
     // Create a window (usually a wxPanel) for this page. The caller takes
     // ownership of the returned window.
-    virtual wxWindow *CreateWindow(wxWindow *parent) = 0;
+    virtual wxWindow *wxCreateWindow(wxWindow *parent) = 0;
 };
 
 

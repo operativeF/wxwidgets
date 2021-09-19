@@ -167,7 +167,7 @@ protected:
     friend class wxOutputFTPStream;
 
 public:
-	wxClassInfo *GetClassInfo() const override;
+	wxClassInfo *wxGetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
     DECLARE_PROTOCOL(wxFTP)

@@ -162,7 +162,7 @@ protected:
 private:
     public:
 	wxRibbonPanelEvent& operator=(const wxRibbonPanelEvent&) = delete;
-	wxClassInfo *GetClassInfo() const override ;
+	wxClassInfo *wxGetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 #endif

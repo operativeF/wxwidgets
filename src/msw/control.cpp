@@ -73,7 +73,7 @@ bool wxControl::MSWCreateControl(const std::string& classname,
                                  const wxSize& size)
 {
     WXDWORD exstyle;
-    WXDWORD msStyle = MSWGetStyle(GetWindowStyle(), &exstyle);
+    WXDWORD msStyle = MSWGetStyle(wxGetWindowStyle(), &exstyle);
 
     return MSWCreateControl(classname, msStyle, pos, size, label, exstyle);
 }
@@ -89,7 +89,7 @@ bool wxControl::MSWCreateControl(const std::string& classname,
     if ( exstyle == (WXDWORD)-1 )
     {
         exstyle = 0;
-        (void) MSWGetStyle(GetWindowStyle(), &exstyle);
+        (void) MSWGetStyle(wxGetWindowStyle(), &exstyle);
     }
 
     // all controls should have this style

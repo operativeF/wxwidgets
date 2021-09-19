@@ -229,16 +229,16 @@ TEST_CASE_FIXTURE(WindowTestCase, "Window::Parent")
 
 TEST_CASE_FIXTURE(WindowTestCase, "Window::Siblings")
 {
-    CHECK( m_window->GetNextSibling() == static_cast<wxWindow*>(nullptr) );
-    CHECK( m_window->GetPrevSibling() == static_cast<wxWindow*>(nullptr) );
+    CHECK( m_window->wxGetNextSibling() == static_cast<wxWindow*>(nullptr) );
+    CHECK( m_window->wxGetPrevSibling() == static_cast<wxWindow*>(nullptr) );
 
     wxWindow* newwin = new wxWindow(wxTheApp->GetTopWindow(), wxID_ANY);
 
-    CHECK( m_window->GetNextSibling() == newwin );
-    CHECK( m_window->GetPrevSibling() == static_cast<wxWindow*>(nullptr) );
+    CHECK( m_window->wxGetNextSibling() == newwin );
+    CHECK( m_window->wxGetPrevSibling() == static_cast<wxWindow*>(nullptr) );
 
-    CHECK( newwin->GetNextSibling() == static_cast<wxWindow*>(nullptr) );
-    CHECK( newwin->GetPrevSibling() == m_window );
+    CHECK( newwin->wxGetNextSibling() == static_cast<wxWindow*>(nullptr) );
+    CHECK( newwin->wxGetPrevSibling() == m_window );
 
     wxDELETE(newwin);
 }
@@ -261,8 +261,8 @@ TEST_CASE_FIXTURE(WindowTestCase, "Window::Children")
     m_window->AddChild(child1);
 
     CHECK( m_window->GetChildren().GetCount() == 1 );
-    CHECK( m_window->FindWindow(wxID_HIGHEST + 1) == child1 );
-    CHECK( m_window->FindWindow("child1") == child1 );
+    CHECK( m_window->wxFindWindow(wxID_HIGHEST + 1) == child1 );
+    CHECK( m_window->wxFindWindow("child1") == child1 );
 
     m_window->DestroyChildren();
 

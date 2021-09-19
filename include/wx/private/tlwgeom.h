@@ -115,7 +115,7 @@ public:
         m_hasPos =
         m_hasSize = true;
         m_iconized = tlw->IsIconized();
-        m_maximized = tlw->IsMaximized();
+        m_maximized = tlw->wxIsMaximized();
 
         return true;
     }

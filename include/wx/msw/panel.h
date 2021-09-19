@@ -38,7 +38,7 @@ struct WXDLLIMPEXP_CORE wxPanel : public wxPanelBase
     wxPanel& operator=(wxPanel&&) = default;
     ~wxPanel() = default;
 
-	wxClassInfo *GetClassInfo() const override;
+	wxClassInfo *wxGetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
 };

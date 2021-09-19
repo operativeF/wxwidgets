@@ -1188,7 +1188,7 @@ wxRect wxRichTextObject::AdjustAvailableSpace(wxDC& dc, wxRichTextBuffer* buffer
 // Dump to output stream for debugging
 void wxRichTextObject::Dump(wxTextOutputStream& stream)
 {
-    stream << GetClassInfo()->GetClassName() << wxT("\n");
+    stream << wxGetClassInfo()->wxGetClassName() << wxT("\n");
     stream << wxString::Format(wxT("Size: %d,%d. Position: %d,%d, Range: %ld,%ld"), m_size.x, m_size.y, m_pos.x, m_pos.y, m_range.GetStart(), m_range.GetEnd()) << wxT("\n");
     stream << wxString::Format(wxT("Text colour: %d,%d,%d."), (int) m_attributes.GetTextColour().Red(), (int) m_attributes.GetTextColour().Green(), (int) m_attributes.GetTextColour().Blue()) << wxT("\n");
 }
@@ -5505,7 +5505,7 @@ bool wxRichTextParagraph::Layout(wxDC& dc, wxRichTextDrawingContext& context, co
             // Give the minimum width at least one character width
             wxFont font(buffer->GetFontTable().FindFont(attr));
             wxCheckSetFont(dc, font);
-            int charWidth = dc.GetCharWidth();
+            int charWidth = dc.wxGetCharWidth();
             minWidth = std::max(charWidth, minWidth);
         }
 
@@ -7069,7 +7069,7 @@ bool wxRichTextPlainText::DrawTabbedString(wxDC& dc, const wxRichTextAttr& attr,
                     wxRect selRect(x, rect.y, w, rect.GetHeight());
                     dc.DrawRectangle(selRect);
                 }
-                dc.DrawText(stringChunk, x, y);
+                dc.wxDrawText(stringChunk, x, y);
 
                 if (attr.HasTextEffects() && (attr.GetTextEffects() & wxTEXT_ATTR_EFFECT_STRIKETHROUGH))
                 {
@@ -7093,7 +7093,7 @@ bool wxRichTextPlainText::DrawTabbedString(wxDC& dc, const wxRichTextAttr& attr,
             wxRect selRect(x, rect.y, w, rect.GetHeight());
             dc.DrawRectangle(selRect);
         }
-        dc.DrawText(str, x, y);
+        dc.wxDrawText(str, x, y);
 
         if (attr.HasTextEffects() && (attr.GetTextEffects() & wxTEXT_ATTR_EFFECT_STRIKETHROUGH))
         {
@@ -7417,7 +7417,7 @@ bool wxRichTextPlainText::CanMerge(wxRichTextObject* object, wxRichTextDrawingCo
     // JACS 2013-01-27
     if (!context.GetVirtualAttributesEnabled())
     {
-        return object->GetClassInfo() == wxCLASSINFO(wxRichTextPlainText) &&
+        return object->wxGetClassInfo() == wxCLASSINFO(wxRichTextPlainText) &&
             (m_text.empty() || (wxTextAttrEq(GetAttributes(), object->GetAttributes()) && m_properties == object->GetProperties()));
     }
     else
@@ -9189,7 +9189,7 @@ bool wxRichTextStdRenderer::DrawTextBullet(wxRichTextParagraph* paragraph, wxDC&
         else if (attr.GetBulletStyle() & wxTEXT_ATTR_BULLET_STYLE_ALIGN_CENTRE)
             x = x + (rect.width)/2 - tw/2;
 
-        dc.DrawText(text1, x, y);
+        dc.wxDrawText(text1, x, y);
 
         return true;
     }
@@ -9628,7 +9628,7 @@ bool wxRichTextFieldTypeStandard::Draw(wxRichTextField* obj, wxDC& dc, wxRichTex
 
             int x = clientArea.x + (clientArea.width - textExtents.x)/2;
             int y = clientArea.y + (clientArea.height - textExtents.y)/2;
-            dc.DrawText(label, x, y);
+            dc.wxDrawText(label, x, y);
         }
     }
 
@@ -11757,7 +11757,7 @@ wxRichTextAction::~wxRichTextAction()
 // Returns the container that this action refers to, using the container address and top-level buffer.
 wxRichTextParagraphLayoutBox* wxRichTextAction::GetContainer() const
 {
-    wxRichTextParagraphLayoutBox* container = wxDynamicCast(GetContainerAddress().GetObject(m_buffer), wxRichTextParagraphLayoutBox);
+    wxRichTextParagraphLayoutBox* container = wxDynamicCast(GetContainerAddress().wxGetObject(m_buffer), wxRichTextParagraphLayoutBox);
     return container;
 }
 
@@ -11987,7 +11987,7 @@ bool wxRichTextAction::Do()
         }
     case wxRICHTEXT_CHANGE_ATTRIBUTES:
         {
-            wxRichTextObject* obj = m_objectAddress.GetObject(m_buffer); // container->GetChildAtPosition(GetRange().GetStart());
+            wxRichTextObject* obj = m_objectAddress.wxGetObject(m_buffer); // container->GetChildAtPosition(GetRange().GetStart());
             if (obj)
             {
                 wxRichTextAttr oldAttr = obj->GetAttributes();
@@ -12019,7 +12019,7 @@ bool wxRichTextAction::Do()
         }
     case wxRICHTEXT_CHANGE_OBJECT:
         {
-            wxRichTextObject* obj = m_objectAddress.GetObject(m_buffer);
+            wxRichTextObject* obj = m_objectAddress.wxGetObject(m_buffer);
             if (obj && m_object && m_ctrl)
             {
                 // The plan is to swap the current object with the stored, previous-state, clone
@@ -15270,7 +15270,7 @@ void wxRichTextProperties::MergeProperties(const wxRichTextProperties& propertie
     }
 }
 
-wxRichTextObject* wxRichTextObjectAddress::GetObject(wxRichTextParagraphLayoutBox* topLevelContainer) const
+wxRichTextObject* wxRichTextObjectAddress::wxGetObject(wxRichTextParagraphLayoutBox* topLevelContainer) const
 {
     if (m_address.size() == 0)
         return topLevelContainer;

@@ -165,7 +165,7 @@ public:
     wxTreeItemId FindItemByText( wxTreeItemId parent, const wxString& text )
     {
         wxTreeItemIdValue cookie;
-        wxTreeItemId child = GetFirstChild(parent,cookie);
+        wxTreeItemId child = wxGetFirstChild(parent,cookie);
         while ( child.IsOk() )
         {
             if ( GetItemText(child) == text )

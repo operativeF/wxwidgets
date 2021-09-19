@@ -1014,7 +1014,7 @@ wxString wxVariantDataWxObjectPtr::GetType() const
 
     if (m_value)
     {
-        returnVal = m_value->GetClassInfo()->GetClassName();
+        returnVal = m_value->wxGetClassInfo()->wxGetClassName();
         returnVal += wxT("*");
     }
 
@@ -1025,7 +1025,7 @@ wxClassInfo* wxVariantDataWxObjectPtr::GetValueClassInfo()
 {
     wxClassInfo* returnVal=nullptr;
 
-    if (m_value) returnVal = m_value->GetClassInfo();
+    if (m_value) returnVal = m_value->wxGetClassInfo();
 
     return returnVal;
 }

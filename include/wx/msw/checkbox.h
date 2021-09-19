@@ -84,7 +84,7 @@ private:
     wxCheckBoxState m_state{wxCHK_UNCHECKED};
 
 public:
-	wxClassInfo *GetClassInfo() const override;
+	wxClassInfo *wxGetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
 };

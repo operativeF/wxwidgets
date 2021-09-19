@@ -44,7 +44,7 @@ public:
     wxStaticLineBase& operator=(wxStaticLineBase&&) = default;
 
     // is the line vertical?
-    bool IsVertical() const { return (GetWindowStyle() & wxLI_VERTICAL) != 0; }
+    bool IsVertical() const { return (wxGetWindowStyle() & wxLI_VERTICAL) != 0; }
 
     // get the default size for the "lesser" dimension of the static line
     static int GetDefaultSize() { return 2; }

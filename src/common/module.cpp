@@ -52,7 +52,7 @@ void wxModule::RegisterModules()
              (classInfo != (& (wxModule::ms_classInfo))) )
         {
             wxLogTrace(TRACE_MODULE, wxT("Registering module %s"),
-                       classInfo->GetClassName());
+                       classInfo->wxGetClassName());
             wxModule* module = (wxModule *)classInfo->CreateObject();
             wxModule::RegisterModule(module);
         }
@@ -65,7 +65,7 @@ bool wxModule::DoInitializeModule(wxModule *module,
     if ( module->m_state == State_Initializing )
     {
         wxLogError(_("Circular dependency involving module \"%s\" detected."),
-                   module->GetClassInfo()->GetClassName());
+                   module->wxGetClassInfo()->wxGetClassName());
         return false;
     }
 
@@ -88,7 +88,7 @@ bool wxModule::DoInitializeModule(wxModule *module,
               it != initializedModules.end();
               ++it )
         {
-            if ( (*it)->GetClassInfo() == cinfo )
+            if ( (*it)->wxGetClassInfo() == cinfo )
                 break;
         }
 
@@ -102,7 +102,7 @@ bool wxModule::DoInitializeModule(wxModule *module,
         for ( it = ms_modules.begin(); it != ms_modules.end(); ++it )
         {
             wxModule *moduleDep = *it;
-            if ( moduleDep->GetClassInfo() == cinfo )
+            if ( moduleDep->wxGetClassInfo() == cinfo )
             {
                 if ( !DoInitializeModule(moduleDep, initializedModules ) )
                 {
@@ -117,8 +117,8 @@ bool wxModule::DoInitializeModule(wxModule *module,
         if ( it == ms_modules.end() )
         {
             wxLogError(_("Dependency \"%s\" of module \"%s\" doesn't exist."),
-                       cinfo->GetClassName(),
-                       module->GetClassInfo()->GetClassName());
+                       cinfo->wxGetClassName(),
+                       module->wxGetClassInfo()->wxGetClassName());
             return false;
         }
     }
@@ -126,12 +126,12 @@ bool wxModule::DoInitializeModule(wxModule *module,
     if ( !module->Init() )
     {
         wxLogError(_("Module \"%s\" initialization failed"),
-                   module->GetClassInfo()->GetClassName());
+                   module->wxGetClassInfo()->wxGetClassName());
         return false;
     }
 
     wxLogTrace(TRACE_MODULE, wxT("Module \"%s\" initialized"),
-               module->GetClassInfo()->GetClassName());
+               module->wxGetClassInfo()->wxGetClassName());
 
     module->m_state = State_Initialized;
     initializedModules.push_back(module);
@@ -190,7 +190,7 @@ void wxModule::DoCleanUpModules(const wxModuleList& modules)
           ++rit )
     {
         wxLogTrace(TRACE_MODULE, wxT("Cleanup module %s"),
-                   (*rit)->GetClassInfo()->GetClassName());
+                   (*rit)->wxGetClassInfo()->wxGetClassName());
 
         wxModule * module = *rit;
 

@@ -119,14 +119,14 @@ wxIMPLEMENT_ABSTRACT_CLASS(wxPGEditor, wxObject);
 
 wxString wxPGEditor::GetName() const
 {
-    return GetClassInfo()->GetClassName();
+    return wxGetClassInfo()->wxGetClassName();
 }
 
 void wxPGEditor::DrawValue( wxDC& dc, const wxRect& rect,
                             wxPGProperty* WXUNUSED(property),
                             const std::string& text ) const
 {
-    dc.DrawText( text, rect.x+wxPG_XBEFORETEXT, rect.y );
+    dc.wxDrawText( text, rect.x+wxPG_XBEFORETEXT, rect.y );
 }
 
 bool wxPGEditor::GetValueFromControl( wxVariant&, wxPGProperty*, wxWindow* ) const
@@ -323,7 +323,7 @@ void wxPGTextCtrlEditor::DrawValue( wxDC& dc, wxPGProperty* property, const wxRe
             drawStr.Empty();
             drawStr.Append(wxS('*'),a);
         }*/
-        dc.DrawText( drawStr, rect.x+wxPG_XBEFORETEXT, rect.y );
+        dc.wxDrawText( drawStr, rect.x+wxPG_XBEFORETEXT, rect.y );
     }
 }
 #endif
@@ -885,7 +885,7 @@ void wxPropertyGrid::OnComboItemPaint( const wxPGComboBox* pCb,
 
     pt.x += 1;
 
-    dc.DrawText( text, pt.x + wxPG_XBEFORETEXT, pt.y );
+    dc.wxDrawText( text, pt.x + wxPG_XBEFORETEXT, pt.y );
 
     if ( renderer )
         renderer->PostDrawCell(dc, this, *cell, renderFlags);

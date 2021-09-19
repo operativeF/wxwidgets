@@ -64,7 +64,7 @@ protected:
     bool MSWOnDateTimeChange(const tagNMDATETIMECHANGE& dtch) override;
 
 public:
-	wxClassInfo *GetClassInfo() const override;
+	wxClassInfo *wxGetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
 };

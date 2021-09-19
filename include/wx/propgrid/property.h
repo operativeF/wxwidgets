@@ -111,7 +111,7 @@ public:
                                           int x, int y, int w, int h) const;
 
     // Utility to draw vertically centered text.
-    void DrawText( wxDC& dc,
+    void wxDrawText( wxDC& dc,
                    const wxRect& rect,
                    int imageWidth,
                    const std::string& text ) const;
@@ -126,7 +126,7 @@ public:
     // Utility to render cell bitmap and set text
     // colour plus bg brush colour.
     // Returns image width, which, for instance,
-    // can be passed to DrawText.
+    // can be passed to wxDrawText.
     int PreDrawCell( wxDC& dc,
                      const wxRect& rect,
                      const wxPGCell& cell,

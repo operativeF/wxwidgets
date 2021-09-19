@@ -213,12 +213,12 @@ public:
 
     bool NeedsDirectConstruction() const;
 
-    const wxChar       *GetClassName() const
+    const wxChar       *wxGetClassName() const
         { return m_className; }
     const wxChar       *GetBaseClassName1() const
-        { return m_parents[0] ? m_parents[0]->GetClassName() : NULL; }
+        { return m_parents[0] ? m_parents[0]->wxGetClassName() : NULL; }
     const wxChar       *GetBaseClassName2() const
-        { return (m_parents[0] && m_parents[1]) ? m_parents[1]->GetClassName() : NULL; }
+        { return (m_parents[0] && m_parents[1]) ? m_parents[1]->wxGetClassName() : NULL; }
 
     const wxClassInfo  *GetBaseClass1() const
         { return m_parents[0]; }
@@ -445,7 +445,7 @@ private:
         static wxHandlerInfo* GetHandlersStatic();          \
         static wxClassInfo *GetClassInfoStatic()            \
             { return &name::ms_classInfo; }                 \
-        virtual wxClassInfo *GetClassInfo() const           \
+        virtual wxClassInfo *wxGetClassInfo() const           \
             { return &name::ms_classInfo; }
 
 #define wxDECLARE_DYNAMIC_CLASS(name)                       \

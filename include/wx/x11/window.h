@@ -70,7 +70,7 @@ public:
     virtual bool SetFont( const wxFont &font );
 
     virtual int GetCharHeight() const;
-    virtual int GetCharWidth() const;
+    virtual int wxGetCharWidth() const;
 
     virtual void ScrollWindow( int dx, int dy, const wxRect* rect = NULL );
 

@@ -120,7 +120,7 @@ public:
     // from the ctor. It uses the current window parent and style.
     wxWindow *GetParentForModalDialog() const
     {
-        return GetParentForModalDialog(GetParent(), GetWindowStyle());
+        return GetParentForModalDialog(GetParent(), wxGetWindowStyle());
     }
 
 #if wxUSE_STATTEXT // && wxUSE_TEXTCTRL
@@ -389,7 +389,7 @@ public:
     wxEvent *Clone() const override { return new wxWindowModalDialogEvent (*this); }
 
 public:
-	wxClassInfo *GetClassInfo() const override ;
+	wxClassInfo *wxGetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };

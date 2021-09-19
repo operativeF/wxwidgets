@@ -1493,17 +1493,17 @@ bool wxSafeYield(wxWindow *win, bool onlyIfNeeded)
 }
 
 // ----------------------------------------------------------------------------
-// wxApp::Yield() wrappers for backwards compatibility
+// wxApp::AppYield() wrappers for backwards compatibility
 // ----------------------------------------------------------------------------
 
 bool wxYield()
 {
-    return wxTheApp && wxTheApp->Yield();
+    return wxTheApp && wxTheApp->AppYield();
 }
 
 bool wxYieldIfNeeded()
 {
-    return wxTheApp && wxTheApp->Yield(true);
+    return wxTheApp && wxTheApp->AppYield(true);
 }
 
 #endif // wxUSE_GUI

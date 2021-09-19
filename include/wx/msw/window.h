@@ -122,7 +122,7 @@ public:
     bool SetFont( const wxFont &font ) override;
 
     int GetCharHeight() const override;
-    int GetCharWidth() const override;
+    int wxGetCharWidth() const override;
 
     void SetScrollbar( int orient, int pos, int thumbVisible,
                                int range, bool refresh = true ) override;
@@ -253,7 +253,7 @@ public:
     // the functions returns the flags (WS_XXX) directly and puts the ext
     // (WS_EX_XXX) flags into the provided pointer if not NULL
     WXDWORD MSWGetCreateWindowFlags(WXDWORD *exflags = nullptr) const
-        { return MSWGetStyle(GetWindowStyle(), exflags); }
+        { return MSWGetStyle(wxGetWindowStyle(), exflags); }
 
     // update the real underlying window style flags to correspond to the
     // current wxWindow object style (safe to call even if window isn't fully

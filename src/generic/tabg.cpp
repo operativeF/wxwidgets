@@ -208,7 +208,7 @@ void wxTabControl::OnDraw(wxDC& dc, bool lastInRow)
     textX = (tabX + 2);
 
   dc.SetClippingRegion(tabX, tabY, GetWidth(), GetHeight());
-  dc.DrawText(GetLabel(), textX, textY);
+  dc.wxDrawText(GetLabel(), textX, textY);
   dc.DestroyClippingRegion();
 
   if (m_isSelected)
@@ -477,7 +477,7 @@ void wxTabControl::OnDraw(wxDC& dc, bool lastInRow)
     float textX = (tabLeft + tabRight - textWidth) / 2;
     float textY = (tabInc + tabTop + m_view->GetVerticalTabTextSpacing());
 
-    dc.DrawText(GetLabel(), (long)textX, (long)textY);
+    dc.wxDrawText(GetLabel(), (long)textX, (long)textY);
 #endif
 }
 

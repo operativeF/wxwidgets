@@ -326,7 +326,7 @@ public:
 
     bool IsKindOf(const wxClassInfo *info) const;
 
-    virtual wxClassInfo *GetClassInfo() const;
+    virtual wxClassInfo *wxGetClassInfo() const;
 
     // Turn on the correct set of new and delete operators
 
@@ -397,7 +397,7 @@ protected:
 
 inline wxObject *wxCheckDynamicCast(wxObject *obj, wxClassInfo *classInfo)
 {
-    return obj && obj->GetClassInfo()->IsKindOf(classInfo) ? obj : nullptr;
+    return obj && obj->wxGetClassInfo()->IsKindOf(classInfo) ? obj : nullptr;
 }
 
 #include "wx/xti2.h"

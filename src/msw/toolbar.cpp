@@ -43,7 +43,6 @@
 
 #include <windowsx.h> // needed by GET_X_LPARAM and GET_Y_LPARAM macros
 
-#include "wx/msw/winundef.h"
 #include "wx/msw/dib.h"
 
 #if wxUSE_UXTHEME
@@ -1658,7 +1657,7 @@ void wxToolBar::SetRows(int nRows)
     // at most as many
     RECT rect;
     ::SendMessageW(GetHwnd(), TB_SETROWS,
-                  MAKEWPARAM(nRows, !(GetWindowStyle() & wxTB_VERTICAL)),
+                  MAKEWPARAM(nRows, !(wxGetWindowStyle() & wxTB_VERTICAL)),
                   (LPARAM) &rect);
 
     m_maxRows = nRows;
@@ -1752,7 +1751,7 @@ void wxToolBar::SetWindowStyleFlag(long style)
     // the style bits whose changes force us to recreate the toolbar
     static const long MASK_NEEDS_RECREATE = wxTB_TEXT | wxTB_NOICONS;
 
-    const long styleOld = GetWindowStyle();
+    const long styleOld = wxGetWindowStyle();
 
     wxToolBarBase::SetWindowStyleFlag(style);
 

@@ -22,7 +22,6 @@
 #ifndef WX_PRECOMP
     #if defined(__WXMSW__)
         #include  "wx/msw/private.h"  // includes windows.h for LOGFONT
-        #include  "wx/msw/winundef.h"
     #endif
 
     #include <cassert>
@@ -243,7 +242,7 @@ wxSize wxFontBase::GetPixelSize() const
 {
     wxScreenDC dc;
     dc.SetFont(*dynamic_cast<const wxFont*>(this));
-    return wxSize(dc.GetCharWidth(), dc.GetCharHeight());
+    return wxSize(dc.wxGetCharWidth(), dc.GetCharHeight());
 }
 
 wxFontWeight wxFontBase::GetWeight() const
@@ -292,7 +291,7 @@ void wxFontBase::SetPixelSize( const wxSize& pixelSize )
         // NOTE: the pixel size width may be zero
         if (dc.GetCharHeight() <= pixelSize.y &&
                 (pixelSize.x == 0 ||
-                 dc.GetCharWidth() <= pixelSize.x))
+                 dc.wxGetCharWidth() <= pixelSize.x))
         {
             largestGood = currentSize;
             initialGoodFound = true;

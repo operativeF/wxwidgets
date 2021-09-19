@@ -34,7 +34,7 @@ public:
 
     wxInputStream *GetInputStream(const wxString& path) override;
 
-	wxClassInfo *GetClassInfo() const override;
+	wxClassInfo *wxGetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
     DECLARE_PROTOCOL(wxFileProto)

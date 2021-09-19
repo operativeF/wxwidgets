@@ -1200,12 +1200,12 @@ wxCoord wxSVGFileDCImpl::GetCharHeight() const
 
 }
 
-wxCoord wxSVGFileDCImpl::GetCharWidth() const
+wxCoord wxSVGFileDCImpl::wxGetCharWidth() const
 {
     wxScreenDC sDC;
     SetScaledScreenDCFont(sDC, m_font);
 
-    return sDC.GetCharWidth();
+    return sDC.wxGetCharWidth();
 }
 
 

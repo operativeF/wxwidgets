@@ -630,7 +630,7 @@ public:
 
         // just some (somewhat shorter) synonyms
     void SetWindowStyle( long style ) { SetWindowStyleFlag(style); }
-    long GetWindowStyle() const { return GetWindowStyleFlag(); }
+    long wxGetWindowStyle() const { return GetWindowStyleFlag(); }
 
         // check if the flag is set
     bool HasFlag(int flag) const { return (m_windowStyle & flag) != 0; }
@@ -761,8 +761,8 @@ public:
 
         // get the window before/after this one in the parents children list,
         // returns NULL if this is the first/last window
-    wxWindow *GetPrevSibling() const { return DoGetSibling(OrderBefore); }
-    wxWindow *GetNextSibling() const { return DoGetSibling(OrderAfter); }
+    wxWindow *wxGetPrevSibling() const { return DoGetSibling(OrderBefore); }
+    wxWindow *wxGetNextSibling() const { return DoGetSibling(OrderAfter); }
 
         // get the parent or the parent of the parent
     wxWindow *GetParent() const { return m_parent; }
@@ -795,8 +795,8 @@ public:
 
         // find window among the descendants of this one either by id or by
         // name (return NULL if not found)
-    wxWindow *FindWindow(long winid) const;
-    wxWindow *FindWindow(const wxString& name) const;
+    wxWindow *wxFindWindow(long winid) const;
+    wxWindow *wxFindWindow(const wxString& name) const;
 
         // Find a window among any window (all return NULL if not found)
     static wxWindow *FindWindowById( long winid, const wxWindow *parent = nullptr );
@@ -1178,7 +1178,7 @@ public:
 
         // get the (average) character size for the current font
     virtual int GetCharHeight() const = 0;
-    virtual int GetCharWidth() const = 0;
+    virtual int wxGetCharWidth() const = 0;
 
         // get the width/height/... of the text using current or specified
         // font

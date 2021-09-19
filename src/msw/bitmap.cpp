@@ -333,7 +333,7 @@ void wxBitmapRefData::CopyFromDIB(const wxDIB& dib, int depth /* = -1 */)
         // than source DIB and we have to adjust respective data member
         // accordingly.
         BITMAP bm;
-        if ( ::GetObject(hbitmap, sizeof(bm), &bm) != sizeof(bm) )
+        if ( ::GetObjectW(hbitmap, sizeof(bm), &bm) != sizeof(bm) )
         {
             wxLogLastError(wxS("GetObject (@wxBitmapRefData::CopyFromDIB)"));
         }
@@ -404,7 +404,7 @@ static void PremultiplyPixels(unsigned char* begin, unsigned char* end)
 static bool CheckAlpha(HBITMAP hbmp, HBITMAP* hdib = nullptr)
 {
     BITMAP bm;
-    if ( !::GetObject(hbmp, sizeof(bm), &bm) || (bm.bmBitsPixel != 32) )
+    if ( !::GetObjectW(hbmp, sizeof(bm), &bm) || (bm.bmBitsPixel != 32) )
         return false;
 
     wxDIB dib(hbmp);
@@ -452,7 +452,7 @@ static HBITMAP CreatePremultipliedDIBIfNeeded(HBITMAP hbmp)
     // and premuliply it if necessary.
 
     BITMAP bm;
-    if ( !::GetObject(hbmp, sizeof(bm), &bm) || (bm.bmBitsPixel != 32) )
+    if ( !::GetObjectW(hbmp, sizeof(bm), &bm) || (bm.bmBitsPixel != 32) )
         return nullptr;
 
     wxDIB dib(hbmp);
@@ -874,7 +874,7 @@ bool wxBitmap::CreateFromImage(const wxImage& image, int depth, WXHDC hdc)
         // than source DIB and we have to adjust respective data member
         // accordingly.
         BITMAP bm;
-        if ( ::GetObject(hbitmap, sizeof(bm), &bm) != sizeof(bm) )
+        if ( ::GetObjectW(hbitmap, sizeof(bm), &bm) != sizeof(bm) )
         {
             wxLogLastError(wxS("GetObject (@wxBitmap::CreateFromImage)"));
         }
@@ -1324,7 +1324,7 @@ bool wxBitmap::InitFromHBITMAP(WXHBITMAP bmp, wxSize sz, int depth)
     if ( bmp != NULL )
     {
         BITMAP bm;
-        if ( ::GetObject(bmp, sizeof(bm), &bm) == sizeof(bm) )
+        if ( ::GetObjectW(bmp, sizeof(bm), &bm) == sizeof(bm) )
         {
             wxASSERT_MSG(bm.bmWidth == width && bm.bmHeight == height && bm.bmBitsPixel == depth,
                          wxS("Inconsistent bitmap parameters"));
@@ -1395,7 +1395,7 @@ void *wxBitmap::GetRawData(wxPixelDataBase& data, int bpp)
     }
 
     DIBSECTION ds;
-    if ( ::GetObject(hDIB, sizeof(ds), &ds) != sizeof(DIBSECTION) )
+    if ( ::GetObjectW(hDIB, sizeof(ds), &ds) != sizeof(DIBSECTION) )
     {
         wxFAIL_MSG( wxT("failed to get DIBSECTION from a DIB?") );
 
@@ -1479,7 +1479,7 @@ wxMask::wxMask(const wxMask &mask)
 
     // GetBitmapDimensionEx won't work if SetBitmapDimensionEx wasn't used
     // so we'll use GetObject() API here:
-    if (::GetObject(mask.m_maskBitmap.get(), sizeof(bmp), &bmp) == 0)
+    if (::GetObjectW(mask.m_maskBitmap.get(), sizeof(bmp), &bmp) == 0)
     {
         wxFAIL_MSG(wxT("Cannot retrieve the dimensions of the wxMask to copy"));
         return;
@@ -1634,7 +1634,7 @@ wxBitmap wxMask::GetBitmap() const
 
     // Create new bitmap with the same parameters as a mask bitmap.
     BITMAP bm;
-    ::GetObject(m_maskBitmap.get(), sizeof(bm), (LPVOID)&bm);
+    ::GetObjectW(m_maskBitmap.get(), sizeof(bm), (LPVOID)&bm);
 
     HBITMAP hNewBitmap = ::CreateBitmapIndirect(&bm);
     if ( !hNewBitmap )
@@ -1855,7 +1855,7 @@ HBITMAP wxInvertMask(HBITMAP hbmpMask, int w, int h)
     if ( !w || !h )
     {
         BITMAP bm;
-        ::GetObject(hbmpMask, sizeof(BITMAP), (LPVOID)&bm);
+        ::GetObjectW(hbmpMask, sizeof(BITMAP), (LPVOID)&bm);
         w = bm.bmWidth;
         h = bm.bmHeight;
     }

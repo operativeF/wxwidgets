@@ -209,7 +209,7 @@ protected:
 
 
 public:
-	wxClassInfo *GetClassInfo() const override;
+	wxClassInfo *wxGetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
   wxDECLARE_EVENT_TABLE();

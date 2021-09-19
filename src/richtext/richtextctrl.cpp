@@ -1826,7 +1826,7 @@ bool wxRichTextCtrl::ScrollIntoView(long position, int keyCode)
     }
     clientSize.y -= (int) (0.5 + bottomMargin * GetScale());
 
-    if (GetWindowStyle() & wxRE_CENTRE_CARET)
+    if (wxGetWindowStyle() & wxRE_CENTRE_CARET)
     {
         int y = rect.y - GetClientSize().y/2;
         int yUnits = (y + ppuY - 1) / ppuY;
@@ -3826,7 +3826,7 @@ void wxRichTextCtrl::OnProperties(wxCommandEvent& event)
     int idx = event.GetId() - wxID_RICHTEXT_PROPERTIES1;
     if (idx >= 0 && idx < m_contextMenuPropertiesInfo.GetCount())
     {
-        wxRichTextObject* obj = m_contextMenuPropertiesInfo.GetObject(idx);
+        wxRichTextObject* obj = m_contextMenuPropertiesInfo.wxGetObject(idx);
         if (obj && CanEditProperties(obj))
             EditProperties(obj, this);
 

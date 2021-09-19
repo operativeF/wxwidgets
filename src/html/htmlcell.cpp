@@ -282,7 +282,7 @@ bool wxHtmlCell::IsBefore(wxHtmlCell *cell) const
 
 wxString wxHtmlCell::GetDescription() const
 {
-    return GetClassInfo()->GetClassName();
+    return wxGetClassInfo()->wxGetClassName();
 }
 
 wxString wxHtmlCell::Dump(int indent) const
@@ -472,20 +472,20 @@ void wxHtmlWordCell::Draw(wxDC& dc, int x, int y,
         if ( part1 > 0 )
         {
             txt = m_Word.substr(0, part1);
-            dc.DrawText(txt, x + m_PosX, y + m_PosY);
+            dc.wxDrawText(txt, x + m_PosX, y + m_PosY);
             ofs += s->GetExtentBeforeSelection();
         }
 
         SwitchSelState(dc, info, true);
 
         txt = m_Word.substr(part1, part2-part1);
-        dc.DrawText(txt, ofs + x + m_PosX, y + m_PosY);
+        dc.wxDrawText(txt, ofs + x + m_PosX, y + m_PosY);
 
         if ( (size_t)part2 < m_Word.length() )
         {
             SwitchSelState(dc, info, false);
             txt = m_Word.substr(part2);
-            dc.DrawText(txt, x + m_PosX + s->GetExtentBeforeSelectionEnd(), y + m_PosY);
+            dc.wxDrawText(txt, x + m_PosX + s->GetExtentBeforeSelectionEnd(), y + m_PosY);
         }
         else
             drawSelectionAfterCell = true;
@@ -499,7 +499,7 @@ void wxHtmlWordCell::Draw(wxDC& dc, int x, int y,
         // This is a quite horrible hack but it fixes a nasty user-visible
         // problem: when drawing underlined text, which is common in wxHTML as
         // all links are underlined, there is a 1 pixel gap between the
-        // underlines because we draw separate words in separate DrawText()
+        // underlines because we draw separate words in separate wxDrawText()
         // calls. The right thing to do would be to draw all of them appearing
         // on the same line at once (this would probably be more efficient as
         // well), but this doesn't seem simple to do, so instead we just draw
@@ -510,11 +510,11 @@ void wxHtmlWordCell::Draw(wxDC& dc, int x, int y,
         const bool thisUnderlined = dc.GetFont().GetUnderlined();
         if ( prevUnderlined && thisUnderlined )
         {
-            dc.DrawText(" ", x + m_PosX - 1, y + m_PosY);
+            dc.wxDrawText(" ", x + m_PosX - 1, y + m_PosY);
         }
         info.SetCurrentUnderlined(thisUnderlined);
 
-        dc.DrawText(m_Word, x + m_PosX, y + m_PosY);
+        dc.wxDrawText(m_Word, x + m_PosX, y + m_PosY);
         drawSelectionAfterCell = (selstate != wxHTML_SEL_OUT);
     }
 
@@ -718,7 +718,7 @@ wxHtmlContainerCell::AdjustPagebreak(int *pagebreak, int pageHeight) const
     bool rt = false;
     int pbrk = *pagebreak - m_PosY;
 
-    for ( wxHtmlCell *c = GetFirstChild(); c; c = c->GetNext() )
+    for ( wxHtmlCell *c = wxGetFirstChild(); c; c = c->GetNext() )
     {
         if (c->AdjustPagebreak(&pbrk, pageHeight))
             rt = true;
@@ -1180,7 +1180,7 @@ void wxHtmlContainerCell::InsertCell(wxHtmlCell *f)
 
 void wxHtmlContainerCell::Detach(wxHtmlCell *cell)
 {
-    wxHtmlCell* const firstChild = GetFirstChild();
+    wxHtmlCell* const firstChild = wxGetFirstChild();
     if ( cell == firstChild )
     {
         m_Cells = cell->GetNext();
@@ -1378,7 +1378,7 @@ wxHtmlCell *wxHtmlContainerCell::GetLastTerminal() const
 
 static bool IsEmptyContainer(wxHtmlContainerCell *cell)
 {
-    for ( wxHtmlCell *c = cell->GetFirstChild(); c; c = c->GetNext() )
+    for ( wxHtmlCell *c = cell->wxGetFirstChild(); c; c = c->GetNext() )
     {
         if ( !c->IsTerminalCell() || !c->IsFormattingCell() )
             return false;
@@ -1666,8 +1666,8 @@ const wxHtmlCell* wxHtmlTerminalCellsInterator::operator++()
             }
             m_pos = m_pos->GetNext();
         }
-        while ( m_pos->GetFirstChild() != nullptr )
-            m_pos = m_pos->GetFirstChild();
+        while ( m_pos->wxGetFirstChild() != nullptr )
+            m_pos = m_pos->wxGetFirstChild();
     } while ( !m_pos->IsTerminalCell() );
 
     return m_pos;

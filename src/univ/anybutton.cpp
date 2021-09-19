@@ -115,7 +115,7 @@ wxSize wxAnyButton::DoGetBestClientSize() const
     // less than the standard one, but not when display not PDAs.
     if (wxSystemSettings::GetScreenType() > wxSYS_SCREEN_PDA)
     {
-        if ( !(GetWindowStyle() & wxBU_EXACTFIT) )
+        if ( !(wxGetWindowStyle() & wxBU_EXACTFIT) )
         {
             wxSize szDef = GetDefaultSize();
             if ( width < szDef.x )
@@ -132,7 +132,7 @@ wxSize wxAnyButton::DoGetBestClientSize() const
 
 void wxAnyButton::DoDraw(wxControlRenderer *renderer)
 {
-    if ( !(GetWindowStyle() & wxBORDER_NONE) )
+    if ( !(wxGetWindowStyle() & wxBORDER_NONE) )
     {
         renderer->DrawButtonBorder();
     }

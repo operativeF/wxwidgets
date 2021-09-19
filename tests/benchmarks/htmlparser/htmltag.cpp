@@ -363,7 +363,7 @@ wx28HtmlTag::~wx28HtmlTag()
     t1 = m_FirstChild;
     while (t1)
     {
-        t2 = t1->GetNextSibling();
+        t2 = t1->wxGetNextSibling();
         delete t1;
         t1 = t2;
     }
@@ -429,7 +429,7 @@ wxString wx28HtmlTag::GetAllParams() const
     return s;
 }
 
-wx28HtmlTag *wx28HtmlTag::GetFirstSibling() const
+wx28HtmlTag *wx28HtmlTag::wxGetFirstSibling() const
 {
     if (m_Parent)
         return m_Parent->m_FirstChild;
@@ -442,7 +442,7 @@ wx28HtmlTag *wx28HtmlTag::GetFirstSibling() const
     }
 }
 
-wx28HtmlTag *wx28HtmlTag::GetLastSibling() const
+wx28HtmlTag *wx28HtmlTag::wxGetLastSibling() const
 {
     if (m_Parent)
         return m_Parent->m_LastChild;

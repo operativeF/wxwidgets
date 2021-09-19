@@ -37,8 +37,6 @@
 
 #include "wx/msw/private/winstyle.h"
 
-#include "wx/msw/winundef.h"
-
 #include "wx/display.h"
 
 
@@ -311,7 +309,7 @@ WXLRESULT wxTopLevelWindowMSW::MSWWindowProc(WXUINT message, WXWPARAM wParam, WX
     return rc;
 }
 
-bool wxTopLevelWindowMSW::CreateDialog(const void *dlgTemplate,
+bool wxTopLevelWindowMSW::wxCreateDialog(const void *dlgTemplate,
                                        const std::string& title,
                                        const wxPoint& pos,
                                        const wxSize& size)
@@ -395,7 +393,7 @@ bool wxTopLevelWindowMSW::CreateFrame(const std::string& title,
     if ( wxApp::MSWGetDefaultLayout(m_parent) == wxLayoutDirection::RightToLeft )
         exflags |= WS_EX_LAYOUTRTL;
 
-    return MSWCreate(GetMSWClassName(GetWindowStyle()), title, pos, sz, flags, exflags);
+    return MSWCreate(GetMSWClassName(wxGetWindowStyle()), title, pos, sz, flags, exflags);
 }
 
 bool wxTopLevelWindowMSW::Create(wxWindow *parent,
@@ -467,7 +465,7 @@ bool wxTopLevelWindowMSW::Create(wxWindow *parent,
         if ( style & (wxRESIZE_BORDER | wxCAPTION) )
             dlgTemplate->style |= DS_MODALFRAME;
 
-        if ( !CreateDialog(dlgTemplate, title, pos, sizeReal) )
+        if ( !wxCreateDialog(dlgTemplate, title, pos, sizeReal) )
             return false;
     }
     else // !dialog
@@ -671,7 +669,7 @@ void wxTopLevelWindowMSW::Maximize(bool maximize)
     }
 }
 
-bool wxTopLevelWindowMSW::IsMaximized() const
+bool wxTopLevelWindowMSW::wxIsMaximized() const
 {
     if ( IsAlwaysMaximized() )
         return true;
@@ -917,7 +915,7 @@ bool wxTopLevelWindowMSW::ShowFullScreen(bool show, long style)
 
         // save the old position, width & height, maximize state
         m_fsOldSize = GetRect();
-        m_fsIsMaximized = IsMaximized();
+        m_fsIsMaximized = wxIsMaximized();
 
         // decide which window style flags to turn off
         LONG offFlags = 0;
@@ -1083,7 +1081,7 @@ bool wxTopLevelWindowMSW::EnableMaximizeButton(bool enable)
         {
             SetWindowStyleFlag(GetWindowStyleFlag() ^ wxMAXIMIZE_BOX);
             // Restore the style to our internal store
-            wxWindowBase::SetWindowStyleFlag(GetWindowStyle() | wxMAXIMIZE_BOX);
+            wxWindowBase::SetWindowStyleFlag(wxGetWindowStyle() | wxMAXIMIZE_BOX);
         }
 
         return true;
@@ -1106,7 +1104,7 @@ bool wxTopLevelWindowMSW::EnableMinimizeButton(bool enable)
         {
             SetWindowStyleFlag(GetWindowStyleFlag() ^ wxMINIMIZE_BOX);
             // Restore the style to our internal store
-            wxWindowBase::SetWindowStyleFlag(GetWindowStyle() | wxMINIMIZE_BOX);
+            wxWindowBase::SetWindowStyleFlag(wxGetWindowStyle() | wxMINIMIZE_BOX);
         }
 
         return true;

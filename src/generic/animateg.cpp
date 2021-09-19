@@ -254,7 +254,7 @@ void wxGenericAnimationCtrl::SetAnimation(const wxAnimation& animation)
         return;
     }
 
-    wxCHECK_RET(animation.IsCompatibleWith(GetClassInfo()),
+    wxCHECK_RET(animation.IsCompatibleWith(wxGetClassInfo()),
                 wxT("incompatible animation") );
 
     if (AnimationImplGetBackgroundColour() == wxNullColour)

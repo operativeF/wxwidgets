@@ -116,7 +116,7 @@ public:
 
     wxEvent *Clone() const override { return new wxSpinEvent(*this); }
 
-	wxClassInfo *GetClassInfo() const override;
+	wxClassInfo *wxGetClassInfo() const override;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };

@@ -124,7 +124,7 @@ private:
     std::string m_url;
 
 public:
-	wxClassInfo *GetClassInfo() const override ;
+	wxClassInfo *wxGetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -172,7 +172,7 @@ typedef void (wxEvtHandler::*wxHyperlinkEventFunction)(wxHyperlinkEvent&);
         wxHyperlinkCtrl (const  wxHyperlinkCtrl &) = delete;
         wxHyperlinkCtrl & operator=(const  wxHyperlinkCtrl &) = delete;
 
-        wxClassInfo *GetClassInfo() const;
+        wxClassInfo *wxGetClassInfo() const;
         static wxClassInfo ms_classInfo;
         static wxObject* wxCreateObject();
     };

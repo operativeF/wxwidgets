@@ -50,7 +50,7 @@ protected:
     wxProtocolError m_error;
 
 public:
-	wxClassInfo *GetClassInfo() const;
+	wxClassInfo *wxGetClassInfo() const;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
     DECLARE_PROTOCOL(wxHTTPDummyProto)

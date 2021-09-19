@@ -578,7 +578,7 @@ void wxListBox::UpdateScrollbars()
     bool showScrollbarX;
     if ( HasHorzScrollbar() )
     {
-        charWidth = GetCharWidth();
+        charWidth = wxGetCharWidth();
         maxWidth = GetMaxWidth();
         showScrollbarX = maxWidth > size.x;
     }
@@ -807,7 +807,7 @@ void wxListBox::DoSetSize(int x, int y,
                           int width, int height,
                           int sizeFlags)
 {
-    if ( GetWindowStyle() & wxLB_INT_HEIGHT )
+    if ( wxGetWindowStyle() & wxLB_INT_HEIGHT )
     {
         // we must round up the height to an entire number of rows
 
@@ -845,7 +845,7 @@ wxSize wxListBox::DoGetBestClientSize() const
     if ( !width )
         width = 100;
     else
-        width += 3*GetCharWidth();
+        width += 3*wxGetCharWidth();
 
     if ( !height )
         height = GetCharHeight();
@@ -944,12 +944,12 @@ bool wxListBox::FindItem(const wxString& prefix, bool strictlyAfter)
         {
             SetCurrentItem(item);
 
-            if ( !(GetWindowStyle() & wxLB_MULTIPLE) )
+            if ( !(wxGetWindowStyle() & wxLB_MULTIPLE) )
             {
                 DeselectAll(item);
                 SelectAndNotify(item);
 
-                if ( GetWindowStyle() & wxLB_EXTENDED )
+                if ( wxGetWindowStyle() & wxLB_EXTENDED )
                     AnchorSelection(item);
             }
 
@@ -1089,7 +1089,7 @@ void wxListBox::Activate(int item)
     else
         item = m_current;
 
-    if ( !(GetWindowStyle() & wxLB_MULTIPLE) )
+    if ( !(wxGetWindowStyle() & wxLB_MULTIPLE) )
     {
         DeselectAll(item);
     }
@@ -1296,7 +1296,7 @@ wxStdListboxInputHandler::SetupCapture(wxListBox *lbox,
     wxControlAction action;
     if ( lbox->HasMultipleSelection() )
     {
-        if ( lbox->GetWindowStyle() & wxLB_MULTIPLE )
+        if ( lbox->wxGetWindowStyle() & wxLB_MULTIPLE )
         {
             if ( m_toggleOnPressAlways )
             {
@@ -1353,7 +1353,7 @@ bool wxStdListboxInputHandler::HandleKey(wxInputConsumer *consumer,
     if ( pressed && !event.AltDown() )
     {
         bool isMoveCmd = true;
-        int style = consumer->GetInputWindow()->GetWindowStyle();
+        int style = consumer->GetInputWindow()->wxGetWindowStyle();
 
         wxControlAction action;
         wxString strArg;

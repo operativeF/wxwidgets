@@ -3135,10 +3135,10 @@ void wxWin32Renderer::AdjustSize(wxSize *size, const wxWindow *window)
 #  endif // wxUSE_TOGGLEBTN
         )
     {
-        if ( !(window->GetWindowStyle() & wxBU_EXACTFIT) )
+        if ( !(window->wxGetWindowStyle() & wxBU_EXACTFIT) )
         {
             // TODO: don't harcode all this
-            size->x += 3*window->GetCharWidth();
+            size->x += 3*window->wxGetCharWidth();
 
             wxCoord heightBtn = (11*(window->GetCharHeight() + 8))/10;
             if ( size->y < heightBtn - 8 )
@@ -3151,7 +3151,7 @@ void wxWin32Renderer::AdjustSize(wxSize *size, const wxWindow *window)
         // less than the standard one, but not when display not PDAs.
         if (wxSystemSettings::GetScreenType() > wxSYS_SCREEN_PDA)
         {
-            if ( !(window->GetWindowStyle() & wxBU_EXACTFIT) )
+            if ( !(window->wxGetWindowStyle() & wxBU_EXACTFIT) )
             {
                 wxSize szDef = wxButton::GetDefaultSize();
                 if ( size->x < szDef.x )
@@ -3508,7 +3508,7 @@ bool wxWin32StatusBarInputHandler::IsOnGrip(wxWindow *statbar,
                      wxT("the status bar should be a child of a TLW") );
 
         // a maximized window can't be resized anyhow
-        if ( !parentTLW->IsMaximized() )
+        if ( !parentTLW->wxIsMaximized() )
         {
             // VZ: I think that the standard Windows behaviour is to only
             //     show the resizing cursor when the mouse is on top of the
@@ -3704,11 +3704,11 @@ bool wxWin32FrameInputHandler::HandleMouse(wxInputConsumer *consumer,
         if ( event.LeftDClick() && hit == wxHT_TOPLEVEL_TITLEBAR )
         {
             tlw->PerformAction(wxACTION_TOPLEVEL_BUTTON_CLICK,
-                               tlw->IsMaximized() ? wxTOPLEVEL_BUTTON_RESTORE
+                               tlw->wxIsMaximized() ? wxTOPLEVEL_BUTTON_RESTORE
                                                   : wxTOPLEVEL_BUTTON_MAXIMIZE);
             return true;
         }
-        else if ( tlw->GetWindowStyle() & wxSYSTEM_MENU )
+        else if ( tlw->wxGetWindowStyle() & wxSYSTEM_MENU )
         {
             if ( (event.LeftDown() && hit == wxHT_TOPLEVEL_ICON) ||
                  (event.RightDown() &&
@@ -3732,25 +3732,25 @@ void wxWin32FrameInputHandler::PopupSystemMenu(wxTopLevelWindow *window) const
 {
     wxMenu menu;
 
-    if ( window->GetWindowStyle() & wxMAXIMIZE_BOX )
+    if ( window->wxGetWindowStyle() & wxMAXIMIZE_BOX )
         menu.Append(wxID_RESTORE_FRAME , _("&Restore"));
     menu.Append(wxID_MOVE_FRAME , _("&Move"));
-    if ( window->GetWindowStyle() & wxRESIZE_BORDER )
+    if ( window->wxGetWindowStyle() & wxRESIZE_BORDER )
         menu.Append(wxID_RESIZE_FRAME , _("&Size"));
     if ( wxSystemSettings::HasFeature(wxSYS_CAN_ICONIZE_FRAME) )
         menu.Append(wxID_ICONIZE_FRAME , _("Mi&nimize"));
-    if ( window->GetWindowStyle() & wxMAXIMIZE_BOX )
+    if ( window->wxGetWindowStyle() & wxMAXIMIZE_BOX )
         menu.Append(wxID_MAXIMIZE_FRAME , _("Ma&ximize"));
     menu.AppendSeparator();
     menu.Append(wxID_CLOSE_FRAME, _("&Close") + wxT("\t") + _("Alt+") + wxT("F4"));
 
-    if ( window->GetWindowStyle() & wxMAXIMIZE_BOX )
+    if ( window->wxGetWindowStyle() & wxMAXIMIZE_BOX )
     {
-        if ( window->IsMaximized() )
+        if ( window->wxIsMaximized() )
         {
             menu.Enable(wxID_MAXIMIZE_FRAME, false);
             menu.Enable(wxID_MOVE_FRAME, false);
-            if ( window->GetWindowStyle() & wxRESIZE_BORDER )
+            if ( window->wxGetWindowStyle() & wxRESIZE_BORDER )
                 menu.Enable(wxID_RESIZE_FRAME, false);
         }
         else
@@ -3765,7 +3765,7 @@ void wxWin32FrameInputHandler::PopupSystemMenu(wxTopLevelWindow *window) const
 bool wxWin32FrameInputHandler::HandleActivation(wxInputConsumer *consumer,
                                                 bool activated)
 {
-    if ( consumer->GetInputWindow()->GetWindowStyle() & wxSYSTEM_MENU )
+    if ( consumer->GetInputWindow()->wxGetWindowStyle() & wxSYSTEM_MENU )
     {
         // always detach if active frame changed:
         m_menuHandler->Detach();

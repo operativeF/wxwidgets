@@ -60,7 +60,7 @@ public:
     wxDC *GetDC() {return m_DC;}
     double GetPixelScale() const { return m_PixelScale; }
     int GetCharHeight() const {return m_CharHeight;}
-    int GetCharWidth() const {return m_CharWidth;}
+    int wxGetCharWidth() const {return m_CharWidth;}
 
     // NOTE : these functions do _not_ return _actual_
     // height/width. They return h/w of default font

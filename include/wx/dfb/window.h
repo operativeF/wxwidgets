@@ -79,7 +79,7 @@ public:
     virtual bool SetFont(const wxFont &font) { m_font = font; return true; }
 
     virtual int GetCharHeight() const;
-    virtual int GetCharWidth() const;
+    virtual int wxGetCharWidth() const;
 
 #if wxUSE_DRAG_AND_DROP
     virtual void SetDropTarget(wxDropTarget *dropTarget);

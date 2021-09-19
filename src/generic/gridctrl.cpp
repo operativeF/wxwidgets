@@ -595,7 +595,7 @@ wxGridCellAutoWrapStringRenderer::GetBestWidth(wxGrid& grid,
     // Increase width until all the text fits.
     //
     // TODO: this is not the most efficient to do it for the long strings.
-    const int charWidth = dc.GetCharWidth();
+    const int charWidth = dc.wxGetCharWidth();
     int width = 2*charWidth;
     while ( GetTextLines(grid, dc, attr, wxSize(width, height),
                          row, col).size() > maxLines )

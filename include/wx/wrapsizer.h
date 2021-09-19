@@ -102,7 +102,7 @@ protected:
     wxBoxSizer m_rows;       // Sizer containing multiple rows of our items
 
 public:
-	wxClassInfo *GetClassInfo() const override;
+	wxClassInfo *wxGetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
 };

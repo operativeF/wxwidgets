@@ -204,7 +204,7 @@ void wxBitmapComboBoxBase::DrawItem(wxDC& dc,
     }
 
     if ( !text.empty() )
-        dc.DrawText(text,
+        dc.wxDrawText(text,
                     rect.x + m_imgAreaWidth + 1,
                     rect.y + (rect.height-dc.GetCharHeight())/2);
 }

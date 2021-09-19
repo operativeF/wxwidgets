@@ -1407,7 +1407,7 @@ void wxPropertyGridPageState::DoSetPropertyValues( const wxVariantList& list, wx
 
         // Make sure it is wxVariant.
         wxASSERT( current );
-        wxASSERT( wxStrcmp(current->GetClassInfo()->GetClassName(),wxS("wxVariant")) == 0 );
+        wxASSERT( wxStrcmp(current->wxGetClassInfo()->wxGetClassName(),wxS("wxVariant")) == 0 );
 
         const wxString& name = current->GetName();
         if ( !name.empty() )

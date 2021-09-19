@@ -776,7 +776,7 @@ bool wxRichTextSizePage::TransferDataToWindow()
     if (dialog)
     {
         // Only show the Move Object controls if there's an object.
-        if (!dialog->GetObject())
+        if (!dialog->wxGetObject())
         {
             m_moveObjectParentSizer->Show(m_moveObjectSizer, false);
             GetSizer()->Layout();
@@ -785,7 +785,7 @@ bool wxRichTextSizePage::TransferDataToWindow()
 
     wxRichTextImage* imageObj = nullptr;
     if (dialog)
-        imageObj = wxDynamicCast(dialog->GetObject(), wxRichTextImage);
+        imageObj = wxDynamicCast(dialog->wxGetObject(), wxRichTextImage);
 
     // For an image, show the original width and height if the size is not explicitly specified.
     if (imageObj && !GetAttributes()->GetTextBoxAttr().GetWidth().IsValid() && !GetAttributes()->GetTextBoxAttr().GetHeight().IsValid() &&
@@ -945,19 +945,19 @@ void wxRichTextSizePage::OnRichtextHeightUpdate( wxUpdateUIEvent& event )
 void wxRichTextSizePage::OnRichtextParaUpClick( wxCommandEvent& WXUNUSED(event) )
 {
     wxRichTextFormattingDialog* dialog = wxRichTextFormattingDialog::GetDialog(this);
-    if (!dialog || !dialog->GetObject())
+    if (!dialog || !dialog->wxGetObject())
         return;
 
     // Make sure object attributes are up-to-date
     dialog->TransferDataFromWindow();
 
-    wxRichTextBuffer* buffer = dialog->GetObject()->GetBuffer();
-    wxRichTextParagraphLayoutBox* container = dialog->GetObject()->GetParentContainer();
-    wxRichTextObject* parent = dialog->GetObject()->GetParent();
+    wxRichTextBuffer* buffer = dialog->wxGetObject()->GetBuffer();
+    wxRichTextParagraphLayoutBox* container = dialog->wxGetObject()->GetParentContainer();
+    wxRichTextObject* parent = dialog->wxGetObject()->GetParent();
     if (!container || !parent || !buffer)
         return;
 
-    wxRichTextRange range = dialog->GetObject()->GetRange();
+    wxRichTextRange range = dialog->wxGetObject()->GetRange();
     wxRichTextObjectList::compatibility_iterator iter = container->GetChildren().GetFirst();
     if (!iter)
         return;
@@ -978,7 +978,7 @@ void wxRichTextSizePage::OnRichtextParaUpClick( wxCommandEvent& WXUNUSED(event) 
     wxRichTextRange rg = obj->GetRange();
     // tempObj will be deleted along with the undo object, and a clone of it will be
     // returned by InsertObjectWithUndo
-    wxRichTextObject* tempObj = dialog->GetObject()->Clone();
+    wxRichTextObject* tempObj = dialog->wxGetObject()->Clone();
 
     container->DeleteRangeWithUndo(range, buffer->GetRichTextCtrl(), buffer);
 
@@ -993,19 +993,19 @@ void wxRichTextSizePage::OnRichtextParaUpClick( wxCommandEvent& WXUNUSED(event) 
 void wxRichTextSizePage::OnRichtextParaDownClick( wxCommandEvent& WXUNUSED(event) )
 {
     wxRichTextFormattingDialog* dialog = wxRichTextFormattingDialog::GetDialog(this);
-    if (!dialog || !dialog->GetObject())
+    if (!dialog || !dialog->wxGetObject())
         return;
 
     // Make sure object attributes are up-to-date
     dialog->TransferDataFromWindow();
 
-    wxRichTextBuffer* buffer = dialog->GetObject()->GetBuffer();
-    wxRichTextParagraphLayoutBox* container = dialog->GetObject()->GetParentContainer();
-    wxRichTextObject* parent = dialog->GetObject()->GetParent();
+    wxRichTextBuffer* buffer = dialog->wxGetObject()->GetBuffer();
+    wxRichTextParagraphLayoutBox* container = dialog->wxGetObject()->GetParentContainer();
+    wxRichTextObject* parent = dialog->wxGetObject()->GetParent();
     if (!container || !parent || !buffer)
         return;
 
-    wxRichTextRange range = dialog->GetObject()->GetRange();
+    wxRichTextRange range = dialog->wxGetObject()->GetRange();
 
     wxRichTextObjectList::compatibility_iterator iter = buffer->GetChildren().GetFirst();
     if (!iter)
@@ -1026,7 +1026,7 @@ void wxRichTextSizePage::OnRichtextParaDownClick( wxCommandEvent& WXUNUSED(event
     wxRichTextRange rg = obj->GetRange();
     // tempObj will be deleted along with the undo object, and a clone of it will be
     // returned by InsertObjectWithUndo
-    wxRichTextObject* tempObj = dialog->GetObject()->Clone();
+    wxRichTextObject* tempObj = dialog->wxGetObject()->Clone();
 
     container->DeleteRangeWithUndo(range, buffer->GetRichTextCtrl(), buffer);
 

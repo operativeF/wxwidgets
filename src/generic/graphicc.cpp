@@ -2126,7 +2126,7 @@ wxCairoContext::wxCairoContext( wxGraphicsRenderer* renderer, const wxMemoryDC& 
         // We need to pass a pointer to the location
         // of the bit values to Cairo function.
         BITMAP info;
-        if ( ::GetObject(bmp.GetHBITMAP(), sizeof(info), &info) == sizeof(info) )
+        if ( ::GetObjectW(bmp.GetHBITMAP(), sizeof(info), &info) == sizeof(info) )
         {
             if( info.bmBits )
             {
@@ -2792,7 +2792,7 @@ void wxCairoContext::DrawIcon( const wxIcon &icon, double x, double y, double w,
 void wxCairoContext::DoDrawText(const wxString& str, double x, double y)
 {
     wxCHECK_RET( !m_font.IsNull(),
-                 wxT("wxCairoContext::DrawText - no valid font set") );
+                 wxT("wxCairoContext::wxDrawText - no valid font set") );
 
     if ( str.empty())
         return;
@@ -3151,8 +3151,8 @@ public :
                               const wxGraphicsMatrix& matrix = wxNullGraphicsMatrix) override;
 
     // sets the font
-    wxGraphicsFont CreateFont( const wxFont &font , const wxColour &col = *wxBLACK ) override ;
-    virtual wxGraphicsFont CreateFont(double sizeInPixels,
+    wxGraphicsFont wxCreateFont( const wxFont &font , const wxColour &col = *wxBLACK ) override ;
+    virtual wxGraphicsFont wxCreateFont(double sizeInPixels,
                                       const wxString& facename,
                                       int flags = wxFONTFLAG_DEFAULT,
                                       const wxColour& col = *wxBLACK) override;
@@ -3177,7 +3177,7 @@ public :
     void GetVersion(int *major, int *minor, int *micro) const override;
 
 public:
-	wxClassInfo *GetClassInfo() const;
+	wxClassInfo *wxGetClassInfo() const;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
 };
@@ -3368,7 +3368,7 @@ wxCairoRenderer::CreateRadialGradientBrush(double startX, double startY,
 }
 
 
-wxGraphicsFont wxCairoRenderer::CreateFont( const wxFont &font , const wxColour &col )
+wxGraphicsFont wxCairoRenderer::wxCreateFont( const wxFont &font , const wxColour &col )
 {
     wxGraphicsFont p;
     ENSURE_LOADED_OR_RETURN(p);
@@ -3380,7 +3380,7 @@ wxGraphicsFont wxCairoRenderer::CreateFont( const wxFont &font , const wxColour 
 }
 
 wxGraphicsFont
-wxCairoRenderer::CreateFont(double sizeInPixels,
+wxCairoRenderer::wxCreateFont(double sizeInPixels,
                             const wxString& facename,
                             int flags,
                             const wxColour& col)
@@ -3396,7 +3396,7 @@ wxCairoRenderer::CreateFontAtDPI(const wxFont& font,
                                  const wxRealPoint& WXUNUSED(dpi),
                                  const wxColour& col)
 {
-    return CreateFont(font, col);
+    return wxCreateFont(font, col);
 }
 
 wxGraphicsBitmap wxCairoRenderer::CreateBitmap( const wxBitmap& bmp )

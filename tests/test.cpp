@@ -236,7 +236,7 @@ public:
             if ( loop )
             {
                 loop->DispatchTimeout(1000);
-                loop->Yield();
+                loop->EvtYield();
             }
 #endif // __WXOSX__
 

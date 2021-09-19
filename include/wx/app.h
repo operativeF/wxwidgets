@@ -154,7 +154,7 @@ public:
     void SetAppDisplayName(const wxString& name) { m_appDisplayName = name; }
 
         // set/get the app class name
-    wxString GetClassName() const { return m_className; }
+    wxString wxGetClassName() const { return m_className; }
     void SetClassName(const wxString& name) { m_className = name; }
 
         // set/get the vendor name
@@ -392,7 +392,7 @@ public:
     virtual int MainLoop();
     virtual void ExitMainLoop();
 
-    bool Yield(bool onlyIfNeeded = false);
+    bool AppYield(bool onlyIfNeeded = false);
 
     virtual void WakeUpIdle();
 
@@ -575,7 +575,7 @@ public:
     // the worker functions - usually not used directly by the user code
     // -----------------------------------------------------------------
 
-        // safer alternatives to Yield(), using wxWindowDisabler
+        // safer alternatives to AppYield(), using wxWindowDisabler
     virtual bool SafeYield(wxWindow *win, bool onlyIfNeeded);
     virtual bool SafeYieldFor(wxWindow *win, long eventsToProcess);
 

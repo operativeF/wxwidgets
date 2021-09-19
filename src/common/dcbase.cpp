@@ -1185,10 +1185,10 @@ void wxDC::DrawLabel(std::string_view text,
 
     // split the string into lines and draw each of them separately
     //
-    // NB: while wxDC::DrawText() on some platforms supports drawing multi-line
+    // NB: while wxDC::wxDrawText() on some platforms supports drawing multi-line
     //     strings natively, this is not the case for all of them, notably not
     //     wxMSW which uses this function for multi-line texts, so we may only
-    //     call DrawText() for single-line strings from here to avoid infinite
+    //     call wxDrawText() for single-line strings from here to avoid infinite
     //     recursion.
     std::string curLine;
     for ( std::string_view::const_iterator pc = text.begin(); ; ++pc )
@@ -1216,7 +1216,7 @@ void wxDC::DrawLabel(std::string_view text,
                 }
                 //else: left aligned, nothing to do
 
-                DrawText(curLine, xRealStart, y);
+                wxDrawText(curLine, xRealStart, y);
             }
 
             y += heightLine;

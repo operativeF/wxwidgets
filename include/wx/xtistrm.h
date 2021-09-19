@@ -333,7 +333,7 @@ public:
     ~wxObjectRuntimeReaderCallback();
 
     // returns the object having the corresponding ID fully constructed
-    wxObject *GetObject(int objectID);
+    wxObject *wxGetObject(int objectID);
 
     // allocate the new object on the heap, that object will have the passed in ID
     virtual void AllocateObject(int objectID, wxClassInfo *classInfo,

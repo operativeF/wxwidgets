@@ -354,7 +354,7 @@ bool wxAppBase::SafeYield(wxWindow *win, bool onlyIfNeeded)
 
     wxEventLoopBase * const loop = wxEventLoopBase::GetActive();
 
-    return loop && loop->Yield(onlyIfNeeded);
+    return loop && loop->EvtYield(onlyIfNeeded);
 }
 
 bool wxAppBase::SafeYieldFor(wxWindow *win, long eventsToProcess)

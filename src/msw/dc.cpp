@@ -1526,7 +1526,7 @@ void wxMSWDCImpl::DoDrawRotatedText(std::string_view text,
     }
 
     LOGFONT lf;
-    if ( ::GetObject(GetHfontOf(font), sizeof(lf), &lf) == 0 )
+    if ( ::GetObjectW(GetHfontOf(font), sizeof(lf), &lf) == 0 )
     {
         wxLogLastError(wxT("GetObject(hfont)"));
     }
@@ -1843,7 +1843,7 @@ void wxMSWDCImpl::SetRop(WXHDC dc)
     SetROP2(GetHdc(), rop);
 }
 
-bool wxMSWDCImpl::StartDoc(const std::string& WXUNUSED(message))
+bool wxMSWDCImpl::wxStartDoc(const std::string& WXUNUSED(message))
 {
     // We might be previewing, so return true to let it continue.
     return true;
@@ -1874,7 +1874,7 @@ wxCoord wxMSWDCImpl::GetCharHeight() const
     return lpTextMetric.tmHeight;
 }
 
-wxCoord wxMSWDCImpl::GetCharWidth() const
+wxCoord wxMSWDCImpl::wxGetCharWidth() const
 {
     TEXTMETRIC lpTextMetric;
 
@@ -2435,7 +2435,7 @@ bool wxMSWDCImpl::DoStretchBlit(wxCoord xdest, wxCoord ydest,
             DIBSECTION ds;
             wxZeroMemory(ds);
 
-            if ( ::GetObject(GetHbitmapOf(bmpSrc),
+            if ( ::GetObjectW(GetHbitmapOf(bmpSrc),
                              sizeof(ds),
                              &ds) == sizeof(ds) )
             {

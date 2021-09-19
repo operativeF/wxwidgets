@@ -49,8 +49,8 @@ void GraphicsContextDrawingTestCase::DoFontDrawings (wxGraphicsContext *gc)
 
     // set underlined font for testing
     gc->SetFont( wxFont(wxFontInfo(12).Family(wxFontFamily::Modern).Underlined()), *wxBLACK );
-    gc->DrawText( wxT("This is text"), 110, 10, gbTextBackground );
-    gc->DrawText( wxT("That is text"), 20, 10, wxDegToRad(-45), gbTextBackground );
+    gc->wxDrawText( wxT("This is text"), 110, 10, gbTextBackground );
+    gc->wxDrawText( wxT("That is text"), 20, 10, wxDegToRad(-45), gbTextBackground );
 
     // use wxSWISS_FONT and not wxNORMAL_FONT as the latter can't be rotated
     // (it is not TrueType)
@@ -61,19 +61,19 @@ void GraphicsContextDrawingTestCase::DoFontDrawings (wxGraphicsContext *gc)
     for ( int n = -180; n < 180; n += 30 )
     {
         text.Printf(wxT("     %d rotated text"), n);
-        gc->DrawText(text , 400, 400, wxDegToRad(n) );
+        gc->wxDrawText(text , 400, 400, wxDegToRad(n) );
     }
 
     wxFont swissDcFont( wxFontInfo(18).Family(wxFontFamily::Swiss) );
-    wxGraphicsFont swissFont = gc->CreateFont( swissDcFont, *wxBLACK );
+    wxGraphicsFont swissFont = gc->wxCreateFont( swissDcFont, *wxBLACK );
     gc->SetFont( swissFont );
 
-    gc->DrawText( wxT("This is Swiss 18pt text."), 110, 40 );
+    gc->wxDrawText( wxT("This is Swiss 18pt text."), 110, 40 );
 
     double descent;
     auto [length, height] = gc->GetTextExtent( wxT("This is Swiss 18pt text."), &descent );
     text.Printf( wxT("Dimensions are length %f, height %f, descent %f"), length, height, descent );
-    gc->DrawText( text, 110, 80 );
+    gc->wxDrawText( text, 110, 80 );
 
     // (did not find equivalent to CharHeight())
 
@@ -84,25 +84,25 @@ void GraphicsContextDrawingTestCase::DoFontDrawings (wxGraphicsContext *gc)
     // test the logical function effect
     wxCoord y = 150;
     // text drawing should ignore logical function
-    gc->DrawText( wxT("There should be a text below"), 110, 150 );
+    gc->wxDrawText( wxT("There should be a text below"), 110, 150 );
     gc->DrawRectangle( 110, y, 100, height );
 
     y += height;
-    gc->DrawText( wxT("Visible text"), 110, y );
+    gc->wxDrawText( wxT("Visible text"), 110, y );
     gc->DrawRectangle( 110, y, 100, height );
-    gc->DrawText( wxT("Visible text"), 110, y );
+    gc->wxDrawText( wxT("Visible text"), 110, y );
     gc->DrawRectangle( 110, y, 100, height );
 
     y += height;
     gc->DrawRectangle( 110, y, 100, height );
-    gc->DrawText( wxT("Another visible text"), 110, y );
+    gc->wxDrawText( wxT("Another visible text"), 110, y );
 
     y += height;
-    gc->DrawText("And\nmore\ntext on\nmultiple\nlines", 110, y);
+    gc->wxDrawText("And\nmore\ntext on\nmultiple\nlines", 110, y);
     y += 5*height;
 
     gc->SetFont( swissDcFont, *wxBLUE );
-    gc->DrawText( "Rotated text\ncan have\nmultiple lines\nas well", 110, y, wxDegToRad(15) );
+    gc->wxDrawText( "Rotated text\ncan have\nmultiple lines\nas well", 110, y, wxDegToRad(15) );
 }
 
 #endif // wxUSE_TEST_GC_DRAWING

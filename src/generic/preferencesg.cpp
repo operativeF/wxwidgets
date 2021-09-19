@@ -58,7 +58,7 @@ public:
 
     void AddPage(wxPreferencesPage *page)
     {
-        wxWindow *win = page->CreateWindow(m_notebook);
+        wxWindow *win = page->wxCreateWindow(m_notebook);
         m_notebook->AddPage(win, page->GetName());
     }
 
@@ -96,7 +96,7 @@ public:
     }
 
 protected:
-    wxGenericPrefsDialog *CreateDialog(wxWindow *parent)
+    wxGenericPrefsDialog *wxCreateDialog(wxWindow *parent)
     {
         if ( m_title.empty() )
         {
@@ -155,7 +155,7 @@ public:
     {
         if ( !m_win )
         {
-            wxWindow *win = CreateDialog(parent);
+            wxWindow *win = wxCreateDialog(parent);
             win->Show();
             m_win = win;
         }
@@ -200,7 +200,7 @@ public:
 
     void Show(wxWindow* parent) override
     {
-        std::unique_ptr<wxGenericPrefsDialog> dlg(CreateDialog(parent));
+        std::unique_ptr<wxGenericPrefsDialog> dlg(wxCreateDialog(parent));
 
         // Store it for Dismiss() but ensure that the pointer is reset to NULL
         // when the dialog is destroyed on leaving this function.

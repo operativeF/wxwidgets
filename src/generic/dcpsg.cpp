@@ -38,14 +38,6 @@
 
 #ifdef __WXMSW__
 
-#ifdef DrawText
-#undef DrawText
-#endif
-
-#ifdef StartDoc
-#undef StartDoc
-#endif
-
 #ifdef GetCharWidth
 #undef GetCharWidth
 #endif
@@ -1524,7 +1516,7 @@ void wxPostScriptDCImpl::DoDrawSpline( const wxPointList *points )
 }
 #endif // wxUSE_SPLINES
 
-wxCoord wxPostScriptDCImpl::GetCharWidth() const
+wxCoord wxPostScriptDCImpl::wxGetCharWidth() const
 {
     // Chris Breeze: reasonable approximation using wxFontFamily::Modern/Courier
     return (wxCoord) (GetCharHeight() * 72.0 / 120.0);
@@ -1624,7 +1616,7 @@ wxSize wxPostScriptDCImpl::GetPPI() const
 }
 
 
-bool wxPostScriptDCImpl::StartDoc( const wxString& WXUNUSED(message) )
+bool wxPostScriptDCImpl::wxStartDoc( const wxString& WXUNUSED(message) )
 {
     wxCHECK_MSG( m_ok, false, wxT("invalid postscript dc") );
 
@@ -1994,7 +1986,7 @@ void wxPostScriptDCImpl::DoGetTextExtent(const wxString& string,
     /    wxPostScriptDC dc(NULL, true);
     /    if (dc.IsOk()){
     /      wxSetAFMPath("d:\\wxw161\\afm\\");
-    /      dc.StartDoc("Test");
+    /      dc.wxStartDoc("Test");
     /      dc.StartPage();
     /      wxCoord w,h;
     /      dc.SetFont(new wxFontInfo(10).Family(wxFontFamily::Roman));

@@ -103,11 +103,11 @@ public:
 
     // A way of initialising another wxAutomationObject with a dispatch object,
     // without having to deal with nasty IDispatch pointers.
-    bool GetObject(wxAutomationObject& obj, const wxString& property, int noArgs = 0, wxVariant args[] = nullptr) const;
-    bool GetObject(wxAutomationObject& obj, const wxString& property, int noArgs, const wxVariant **args) const;
+    bool wxGetObject(wxAutomationObject& obj, const wxString& property, int noArgs = 0, wxVariant args[] = nullptr) const;
+    bool wxGetObject(wxAutomationObject& obj, const wxString& property, int noArgs, const wxVariant **args) const;
 
     // Returns the locale identifier used in automation calls. The default is
-    // LOCALE_SYSTEM_DEFAULT. Objects obtained by GetObject() inherit the
+    // LOCALE_SYSTEM_DEFAULT. Objects obtained by wxGetObject() inherit the
     // locale identifier from the one that created them.
     WXLCID GetLCID() const;
 
@@ -117,7 +117,7 @@ public:
 
     // Returns the flags used for conversions between wxVariant and OLE
     // VARIANT, see wxOleConvertVariantFlags. The default value is
-    // wxOleConvertVariant_Default but all the objects obtained by GetObject()
+    // wxOleConvertVariant_Default but all the objects obtained by wxGetObject()
     // inherit the flags from the one that created them.
     long GetConvertVariantFlags() const;
 

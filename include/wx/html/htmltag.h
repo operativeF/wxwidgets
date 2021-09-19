@@ -74,11 +74,11 @@ public:
     ~wxHtmlTag();
 
     wxHtmlTag *GetParent() const {return m_Parent;}
-    wxHtmlTag *GetFirstSibling() const;
-    wxHtmlTag *GetLastSibling() const;
+    wxHtmlTag *wxGetFirstSibling() const;
+    wxHtmlTag *wxGetLastSibling() const;
     wxHtmlTag *GetChildren() const { return m_FirstChild; }
     wxHtmlTag *GetPreviousSibling() const { return m_Prev; }
-    wxHtmlTag *GetNextSibling() const {return m_Next; }
+    wxHtmlTag *wxGetNextSibling() const {return m_Next; }
     // Return next tag, as if tree had been flattened
     wxHtmlTag *GetNextTag() const;
 

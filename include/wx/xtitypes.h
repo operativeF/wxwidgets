@@ -453,7 +453,7 @@ public:
                      wxVariant2StringFnc to = NULL, wxString2VariantFnc from = NULL,
                      const wxString &name = wxEmptyString);
 
-    const wxClassInfo *GetClassInfo() const { return m_classInfo; }
+    const wxClassInfo *wxGetClassInfo() const { return m_classInfo; }
 
 private:
     wxClassInfo *m_classInfo; // Kind == wxT_OBJECT - could be NULL

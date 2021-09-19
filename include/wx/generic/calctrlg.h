@@ -251,7 +251,7 @@ private:
     // deprecated
     bool AllowYearChange() const
     {
-        return !(GetWindowStyle() & wxCAL_NO_YEAR_CHANGE);
+        return !(wxGetWindowStyle() & wxCAL_NO_YEAR_CHANGE);
     }
 
     // show the correct controls

@@ -313,7 +313,7 @@ public:
     // Returns the pointer to the object which supports this format or NULL.
     // The returned pointer is owned by wxDataObjectComposite and must
     // therefore not be destroyed by the caller.
-    wxDataObjectSimple *GetObject(const wxDataFormat& format,
+    wxDataObjectSimple *wxGetObject(const wxDataFormat& format,
                                   wxDataObjectBase::Direction dir = Get) const;
 
     

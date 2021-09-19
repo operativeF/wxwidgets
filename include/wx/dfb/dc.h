@@ -39,7 +39,7 @@ public:
 
     virtual void Clear();
 
-    virtual bool StartDoc(const wxString& message);
+    virtual bool wxStartDoc(const wxString& message);
     virtual void EndDoc();
 
     virtual void StartPage();
@@ -59,7 +59,7 @@ public:
     virtual void DestroyClippingRegion();
 
     virtual wxCoord GetCharHeight() const;
-    virtual wxCoord GetCharWidth() const;
+    virtual wxCoord wxGetCharWidth() const;
     virtual void DoGetTextExtent(const wxString& string,
                                  wxCoord *x, wxCoord *y,
                                  wxCoord *descent = NULL,

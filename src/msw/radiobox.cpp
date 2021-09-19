@@ -509,7 +509,7 @@ wxSize wxRadioBox::GetMaxButtonSize() const
     const int radioWidth =
         wxRendererNative::Get().GetCheckBoxSize(
             static_cast<wxWindow*>(const_cast<wxRadioBox*>(this))).x
-        + GetCharWidth() / 2;
+        + wxGetCharWidth() / 2;
 
     // calculate the max button size
     int widthMax{0};
@@ -806,7 +806,7 @@ wxRadioBtnWndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
                                  (
                                   selOld,
                                   dir,
-                                  radiobox->GetWindowStyle()
+                                  radiobox->wxGetWindowStyle()
                                  );
 
                     if ( selNew != selOld )

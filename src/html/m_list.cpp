@@ -106,7 +106,7 @@ int wxHtmlListCell::ComputeMaxBase(wxHtmlCell *cell)
     if(!cell)
         return 0;
 
-    wxHtmlCell *child = cell->GetFirstChild();
+    wxHtmlCell *child = cell->wxGetFirstChild();
 
     while(child)
     {
@@ -233,7 +233,7 @@ TAG_HANDLER_BEGIN(OLULLI, "OL,UL,LI")
             c->SetAlignVer(wxHTML_ALIGN_TOP);
 
             wxHtmlContainerCell *mark = c;
-            c->SetWidthFloat(2 * m_WParser->GetCharWidth(), wxHTML_UNITS_PIXELS);
+            c->SetWidthFloat(2 * m_WParser->wxGetCharWidth(), wxHTML_UNITS_PIXELS);
             if (m_Numbering == 0)
             {
                 // Centering gives more space after the bullet
@@ -271,7 +271,7 @@ TAG_HANDLER_BEGIN(OLULLI, "OL,UL,LI")
 
             wxHtmlListCell *oldList = m_List;
             m_List = new wxHtmlListCell(c);
-            m_List->SetIndent(2 * m_WParser->GetCharWidth(), wxHTML_INDENT_LEFT);
+            m_List->SetIndent(2 * m_WParser->wxGetCharWidth(), wxHTML_INDENT_LEFT);
 
             ParseInner(tag);
 

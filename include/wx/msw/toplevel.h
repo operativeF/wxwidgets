@@ -53,7 +53,7 @@ public:
     void SetTitle( const std::string& title) override;
     std::string GetTitle() const override;
     void Maximize(bool maximize = true) override;
-    bool IsMaximized() const override;
+    bool wxIsMaximized() const override;
     void Iconize(bool iconize = true) override;
     bool IsIconized() const override;
     void SetIcons(const wxIconBundle& icons ) override;
@@ -114,7 +114,7 @@ public:
     // translate wxWidgets flags to Windows ones
     WXDWORD MSWGetStyle(long flags, WXDWORD *exstyle) const override;
 
-    // choose the right parent to use with CreateWindow()
+    // choose the right parent to use with wxCreateWindow()
     WXHWND MSWGetParent() const override;
 
     // window proc for the frames
@@ -134,7 +134,7 @@ protected:
 
     // create a new dialog using the given dialog template from resources,
     // return false if it couldn't be created
-    bool CreateDialog(const void *dlgTemplate,
+    bool wxCreateDialog(const void *dlgTemplate,
                       const std::string& title,
                       const wxPoint& pos,
                       const wxSize& size);

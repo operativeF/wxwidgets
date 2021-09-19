@@ -502,12 +502,12 @@ protected:\
 \
 wxString classname##VariantData::GetType() const\
 {\
-    return m_value.GetClassInfo()->GetClassName();\
+    return m_value.wxGetClassInfo()->wxGetClassName();\
 }\
 \
 wxClassInfo* classname##VariantData::GetValueClassInfo()\
 {\
-    return m_value.GetClassInfo();\
+    return m_value.wxGetClassInfo();\
 }\
 \
 expdecl classname& operator << ( classname &value, const wxVariant &variant )\

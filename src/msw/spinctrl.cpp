@@ -277,7 +277,7 @@ bool wxSpinCtrl::Create(wxWindow *parent,
     SetWindowStyle(style);
 
     WXDWORD exStyle = 0;
-    WXDWORD msStyle = MSWGetStyle(GetWindowStyle(), & exStyle) ;
+    WXDWORD msStyle = MSWGetStyle(wxGetWindowStyle(), & exStyle) ;
 
     // Scroll text automatically if there is not enough space to show all of
     // it, this is better than not allowing to enter more digits at all.
@@ -632,7 +632,7 @@ bool wxSpinCtrl::Reparent(wxWindowBase *newParent)
     // create and initialize the new one
     if ( !wxSpinButton::Create(GetParent(), GetId(),
                                wxPoint(0, 0), wxSize(0, 0), // it will have a buddy
-                               GetWindowStyle(), GetName()) )
+                               wxGetWindowStyle(), GetName()) )
         return false;
 
     // reapply our values to wxSpinButton

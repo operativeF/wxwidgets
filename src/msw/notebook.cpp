@@ -40,7 +40,6 @@
 #include "wx/msw/dc.h"
 
 #include <windowsx.h>
-#include "wx/msw/winundef.h"
 
 #if wxUSE_UXTHEME
     #include "wx/msw/uxtheme.h"
@@ -813,7 +812,7 @@ void wxNotebook::OnPaint(wxPaintEvent& WXUNUSED(event))
         int x = 0,
             y = 0;
 
-        switch ( GetWindowStyle() & wxBK_ALIGN_MASK )
+        switch ( wxGetWindowStyle() & wxBK_ALIGN_MASK )
         {
             case wxBK_TOP:
                 x = rc.right - 2;
