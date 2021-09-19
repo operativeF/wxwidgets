@@ -22,6 +22,12 @@
 // the base class declaration
 #include "wx/control.h"
 
+/*
+ * wxStaticLine flags
+ */
+#define wxLI_HORIZONTAL         wxHORIZONTAL
+#define wxLI_VERTICAL           wxVERTICAL
+
 // ----------------------------------------------------------------------------
 // global variables
 // ----------------------------------------------------------------------------

@@ -85,11 +85,6 @@
 /*  ---------------------------------------------------------------------------- */
 
 #include "wx/version.h"
-
-/*  ============================================================================ */
-/*  non portable C++ features */
-/*  ============================================================================ */
-
 /*  ---------------------------------------------------------------------------- */
 /*  compiler defects workarounds */
 /*  ---------------------------------------------------------------------------- */
@@ -239,33 +234,10 @@
 #   define WX_ATTRIBUTE_PRINTF_5 WX_ATTRIBUTE_PRINTF(5, 6)
 #endif /* !defined(WX_ATTRIBUTE_PRINTF) */
 
-#ifndef WX_ATTRIBUTE_NORETURN
-#   if WX_HAS_CLANG_FEATURE(attribute_analyzer_noreturn)
-#       define WX_ATTRIBUTE_NORETURN __attribute__((analyzer_noreturn))
-#   elif defined( __GNUC__ )
-#       define WX_ATTRIBUTE_NORETURN __attribute__ ((noreturn))
-#   elif defined(__VISUALC__)
-#       define WX_ATTRIBUTE_NORETURN __declspec(noreturn)
-#   else
-#       define WX_ATTRIBUTE_NORETURN
-#   endif
-#endif
-
 #if defined(__GNUC__)
     #define WX_ATTRIBUTE_UNUSED __attribute__ ((unused))
 #else
     #define WX_ATTRIBUTE_UNUSED
-#endif
-
-/*
-   Special variant of the macro above which should be used for the functions
-   which are deprecated but called by wx itself: this often happens with
-   deprecated virtual functions which are called by the library.
- */
-#ifdef WXBUILDING
-#   define wxDEPRECATED_BUT_USED_INTERNALLY(x) x
-#else
-#   define wxDEPRECATED_BUT_USED_INTERNALLY(x) wxDEPRECATED(x)
 #endif
 
 /*
@@ -1225,42 +1197,6 @@ wxALLOW_COMBINING_ENUMS(wxDirection, wxGeometryCentre)
  */
 #define wxSB_HORIZONTAL      wxHORIZONTAL
 #define wxSB_VERTICAL        wxVERTICAL
-
-/*
- * wxSpinButton flags.
- * Note that a wxSpinCtrl is sometimes defined as a wxTextCtrl, and so the
- * flags shouldn't overlap with wxTextCtrl flags that can be used for a single
- * line controls (currently we reuse wxTE_CHARWRAP and wxTE_RICH2 neither of
- * which makes sense for them).
- */
-#define wxSP_HORIZONTAL       wxHORIZONTAL /*  4 */
-#define wxSP_VERTICAL         wxVERTICAL   /*  8 */
-#define wxSP_ARROW_KEYS       0x4000
-#define wxSP_WRAP             0x8000
-
-/*
- * wxTabCtrl flags
- */
-#define wxTC_RIGHTJUSTIFY     0x0010
-#define wxTC_FIXEDWIDTH       0x0020
-#define wxTC_TOP              0x0000    /*  default */
-#define wxTC_LEFT             0x0020
-#define wxTC_RIGHT            0x0040
-#define wxTC_BOTTOM           0x0080
-#define wxTC_MULTILINE        0x0200    /* == wxNB_MULTILINE */
-#define wxTC_OWNERDRAW        0x0400
-
-/*
- * wxStaticBitmap flags
- */
-#define wxBI_EXPAND           wxEXPAND
-
-/*
- * wxStaticLine flags
- */
-#define wxLI_HORIZONTAL         wxHORIZONTAL
-#define wxLI_VERTICAL           wxVERTICAL
-
 
 /*
  * extended dialog specifiers. these values are stored in a different

@@ -36,6 +36,19 @@ inline constexpr char wxSPIN_BUTTON_NAME[] = "wxSpinButton";
 //  wxSP_WRAP:         value wraps at either end
 // ----------------------------------------------------------------------------
 
+/*
+ * wxSpinButton flags.
+ * Note that a wxSpinCtrl is sometimes defined as a wxTextCtrl, and so the
+ * flags shouldn't overlap with wxTextCtrl flags that can be used for a single
+ * line controls (currently we reuse wxTE_CHARWRAP and wxTE_RICH2 neither of
+ * which makes sense for them).
+ */
+#define wxSP_HORIZONTAL       wxHORIZONTAL /*  4 */
+#define wxSP_VERTICAL         wxVERTICAL   /*  8 */
+#define wxSP_ARROW_KEYS       0x4000
+#define wxSP_WRAP             0x8000
+
+
 class WXDLLIMPEXP_CORE wxSpinButtonBase : public wxControl
 {
 public:

@@ -28,6 +28,11 @@
 #include "wx/univ/renderer.h"
 #include "wx/univ/colschem.h"
 
+/*
+ * wxStaticBitmap flags
+ */
+#define wxBI_EXPAND           wxEXPAND
+
 // ============================================================================
 // implementation
 // ============================================================================
