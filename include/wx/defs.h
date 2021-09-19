@@ -258,26 +258,6 @@
 #endif
 
 /*
-    Macros for marking functions as being deprecated.
-
-    The preferred macro in the new code is wxDEPRECATED_MSG() which allows to
-    explain why is the function deprecated. Almost all the existing code uses
-    the older wxDEPRECATED() or its variants currently, but this will hopefully
-    change in the future.
- */
-
-/* The basic compiler-specific construct to generate a deprecation warning. */
-#ifdef __clang__
-    #define wxDEPRECATED_DECL __attribute__((deprecated))
-#elif defined(__GNUC__)
-    #define wxDEPRECATED_DECL __attribute__((deprecated))
-#elif defined(__VISUALC__)
-    #define wxDEPRECATED_DECL __declspec(deprecated)
-#else
-    #define wxDEPRECATED_DECL
-#endif
-
-/*
     Macro taking the deprecation message. It applies to the next declaration.
 
     If the compiler doesn't support showing the message, this degrades to a
