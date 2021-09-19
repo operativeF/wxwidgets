@@ -16,8 +16,9 @@
 #if wxUSE_STATBMP
 
 #include "wx/control.h"
-#include "wx/bitmap.h"
 #include "wx/icon.h"
+
+class WXDLLIMPEXP_FWD_CORE wxBitmap;
 
 inline constexpr char wxStaticBitmapNameStr[] = "staticBitmap";
 

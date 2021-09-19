@@ -17,7 +17,6 @@
 
 #include "wx/animdecod.h"
 #include "wx/control.h"
-#include "wx/timer.h"
 #include "wx/bitmap.h"
 
 #include <chrono>

@@ -15,7 +15,8 @@
 #include "wx/utils.h"       // for wxSignal
 
 #if wxUSE_STREAMS
-    #include "wx/stream.h"
+    class WXDLLIMPEXP_FWD_CORE wxInputStream;
+    class WXDLLIMPEXP_FWD_CORE wxOutputStream;
 #endif
 
 // the wxProcess creation flags

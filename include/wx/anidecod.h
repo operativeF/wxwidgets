@@ -13,13 +13,14 @@
 
 #include "wx/defs.h"
 
-#include "wx/stream.h"
 #include "wx/image.h"
 #include "wx/animdecod.h"
 #include "wx/dynarray.h"
 
 
 class /*WXDLLIMPEXP_CORE*/ wxANIFrameInfo;      // private implementation detail
+class WXDLLIMPEXP_FWD_CORE wxInputStream;
+
 
 WX_DECLARE_EXPORTED_OBJARRAY(wxANIFrameInfo, wxANIFrameInfoArray);
 WX_DECLARE_EXPORTED_OBJARRAY(wxImage, wxImageArray);

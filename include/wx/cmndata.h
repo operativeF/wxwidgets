@@ -17,10 +17,6 @@
 
 #include "wx/gdicmn.h"
 
-#if wxUSE_STREAMS
-#include "wx/stream.h"
-#endif
-
 #include <string>
 
 class WXDLLIMPEXP_FWD_CORE wxPrintNativeDataBase;

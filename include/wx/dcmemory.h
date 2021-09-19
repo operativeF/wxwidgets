@@ -12,7 +12,9 @@
 #define _WX_DCMEMORY_H_BASE_
 
 #include "wx/dc.h"
-#include "wx/bitmap.h"
+
+class WXDLLIMPEXP_FWD_CORE wxBitmap;
+
 
 //-----------------------------------------------------------------------------
 // wxMemoryDC

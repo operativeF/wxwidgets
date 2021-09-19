@@ -12,7 +12,7 @@
 #define _WX_GENERIC_ANIMATEH__
 
 #include "wx/bitmap.h"
-
+#include "wx/timer.h"
 
 // ----------------------------------------------------------------------------
 // wxGenericAnimationCtrl

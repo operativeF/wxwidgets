@@ -10,10 +10,9 @@
 #ifndef _WX_REARRANGECTRL_H_
 #define _WX_REARRANGECTRL_H_
 
-#include "wx/checklst.h"
-
 #if wxUSE_REARRANGECTRL
 
+#include "wx/checklst.h"
 #include "wx/panel.h"
 #include "wx/dialog.h"
 
