@@ -2702,10 +2702,8 @@ wxDoLaunchDefaultBrowser(const wxLaunchBrowserParams& params)
     if (wx_is_at_least_gtk2(14))
     {
         GdkScreen* screen = gdk_window_get_screen(wxGetTopLevelGDK());
-        wxGCC_WARNING_SUPPRESS(deprecated-declarations)
         if (gtk_show_uri(screen, params.url.utf8_str(), GDK_CURRENT_TIME, NULL))
             return true;
-        wxGCC_WARNING_RESTORE()
     }
 #endif // GTK_CHECK_VERSION(2,14,0)
 #endif // __WXGTK__

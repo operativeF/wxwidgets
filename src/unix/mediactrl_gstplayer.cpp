@@ -30,9 +30,7 @@
     #include "wx/gtk/private/mediactrl.h"
 #endif
 
-wxGCC_WARNING_SUPPRESS(cast-qual)
 #include <gst/player/player.h>      // main gstreamer player header
-wxGCC_WARNING_RESTORE()
 
 //=============================================================================
 //  Declarations

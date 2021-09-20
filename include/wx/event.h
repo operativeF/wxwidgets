@@ -135,11 +135,8 @@ inline wxEventFunction wxEventFunctionCast(void (wxEvtHandler::*func)(T&))
     // them locally to avoid generating hundreds of them when compiling any
     // code using event table macros.
 
-    wxGCC_WARNING_SUPPRESS_CAST_FUNCTION_TYPE()
-
+    // FIXME: UB
     return reinterpret_cast<wxEventFunction>(func);
-
-    wxGCC_WARNING_RESTORE_CAST_FUNCTION_TYPE()
 }
 
 // In good old pre-C++17 times we could just static_cast the event handler,
@@ -4374,10 +4371,8 @@ typedef void (wxEvtHandler::*wxPressAndTapEventFunction)(wxPressAndTapEvent&);
     private:                                                            \
         static const wxEventTableEntry sm_eventTableEntries[];          \
     protected:                                                          \
-        wxWARNING_SUPPRESS_MISSING_OVERRIDE()                           \
-        const wxEventTable* GetEventTable() const wxDUMMY_OVERRIDE;     \
-        wxEventHashTable& GetEventHashTable() const wxDUMMY_OVERRIDE;   \
-        wxWARNING_RESTORE_MISSING_OVERRIDE()                            \
+        const wxEventTable* GetEventTable() const override;     \
+        wxEventHashTable& GetEventHashTable() const override;   \
         static const wxEventTable        sm_eventTable;                 \
         static wxEventHashTable          sm_eventHashTable
 

@@ -1036,11 +1036,7 @@ inline wchar_t* wxGetenv(const wxScopedWCharBuffer& name) { return wxCRT_GetenvW
 inline size_t wxStrftime(char *s, size_t max,
                          const wxString& format, const struct tm *tm)
     {
-        wxGCC_ONLY_WARNING_SUPPRESS(format-nonliteral)
-
         return wxCRT_StrftimeA(s, max, format.mb_str(), tm);
-
-        wxGCC_ONLY_WARNING_RESTORE(format-nonliteral)
     }
 #endif // wxNO_IMPLICIT_WXSTRING_ENCODING
 

@@ -23,7 +23,7 @@ public:
     }
 
     // Create a new subkey and assign to it an optional value (otherwise default)
-    void Create(const std::string& subkey, const std::string& val = {})
+    void Create([[maybe_unused]] const std::string& subkey, [[maybe_unused]] const std::string& val = {})
     {
         
     }

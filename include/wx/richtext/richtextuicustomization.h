@@ -103,13 +103,11 @@ protected:
 /// of the formatting dialog.
 
 #define DECLARE_HELP_PROVISION() \
-    wxWARNING_SUPPRESS_MISSING_OVERRIDE() \
     virtual long GetHelpId() const { return sm_helpInfo.GetHelpId(); } \
     virtual void SetHelpId(long id) { sm_helpInfo.SetHelpId(id); } \
     virtual wxRichTextUICustomization* GetUICustomization() const { return sm_helpInfo.GetUICustomization(); } \
     virtual void SetUICustomization(wxRichTextUICustomization* customization) { sm_helpInfo.SetUICustomization(customization); } \
     virtual bool ShowHelp(wxWindow* win) { return sm_helpInfo.ShowHelp(win); } \
-    wxWARNING_RESTORE_MISSING_OVERRIDE() \
 public: \
     static wxRichTextHelpInfo& GetHelpInfo() { return sm_helpInfo; }\
 protected: \

@@ -142,9 +142,7 @@ WXDLLIMPEXP_BASE wxObject *wxCreateDynamicObject(const wxString& name);
 
 #define wxDECLARE_ABSTRACT_CLASS(name)                                        \
     public:                                                                   \
-        wxWARNING_SUPPRESS_MISSING_OVERRIDE()                                 \
-        wxClassInfo *wxGetClassInfo() const wxDUMMY_OVERRIDE;           \
-        wxWARNING_RESTORE_MISSING_OVERRIDE()                                  \
+        wxClassInfo *wxGetClassInfo() const;           \
         static wxClassInfo ms_classInfo
 
 #define wxDECLARE_DYNAMIC_CLASS(name)                                         \

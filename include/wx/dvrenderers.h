@@ -335,11 +335,11 @@ public:
     // item, clicked or the user starts to drag it: by default they all simply
     // return false indicating that the events are not handled
 
-    virtual bool ActivateCell(const wxRect& cell,
-                              wxDataViewModel *model,
-                              const wxDataViewItem & item,
-                              unsigned int col,
-                              const wxMouseEvent* mouseEvent) { return false; };
+    virtual bool ActivateCell([[maybe_unused]] const wxRect& cell,
+                              [[maybe_unused]] wxDataViewModel *model,
+                              [[maybe_unused]] const wxDataViewItem & item,
+                              [[maybe_unused]] unsigned int col,
+                              [[maybe_unused]] const wxMouseEvent* mouseEvent) { return false; };
 
     virtual bool StartDrag(const wxPoint& WXUNUSED(cursor),
                            const wxRect& WXUNUSED(cell),

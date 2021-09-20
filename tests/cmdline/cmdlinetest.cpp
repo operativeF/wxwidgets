@@ -264,8 +264,6 @@ TEST_CASE("ArgumentsCollection")
 
 TEST_CASE("Usage")
 {
-    wxGCC_WARNING_SUPPRESS(missing-field-initializers)
-
     // check that Usage() returns roughly what we expect (don't check all the
     // details, its format can change in the future)
     static constexpr wxCmdLineEntryDesc desc[] =
@@ -285,8 +283,6 @@ TEST_CASE("Usage")
         { wxCmdLineEntryType::UsageText, nullptr, nullptr, "\nEven more usage text" },
         { wxCmdLineEntryType::None }
     };
-
-    wxGCC_WARNING_RESTORE(missing-field-initializers)
 
     wxCmdLineParser p(desc);
     const std::vector<wxString> usageLines = wxSplit(p.GetUsageString(), '\n');
@@ -317,8 +313,6 @@ TEST_CASE("Usage")
 
 TEST_CASE("Found")
 {
-    wxGCC_WARNING_SUPPRESS(missing-field-initializers)
-
     static constexpr wxCmdLineEntryDesc desc[] =
     {
         { wxCmdLineEntryType::Switch, "v", "verbose", "be verbose" },
@@ -329,8 +323,6 @@ TEST_CASE("Found")
         { wxCmdLineEntryType::Param,  nullptr, nullptr, "input file", },
         { wxCmdLineEntryType::None }
     };
-
-    wxGCC_WARNING_RESTORE(missing-field-initializers)
 
     wxCmdLineParser p(desc);
     p.SetCmdLine ("-v --output hello -s 2 --date=2014-02-17 -f 0.2 input-file.txt");

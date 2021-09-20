@@ -290,11 +290,6 @@ private:
     // helper function to make changing the code later simpler.
     static SecretSchema* GetSchema()
     {
-        // SecretSchema struct has some "reserved" fields in it which we don't
-        // want to initialize, but this results in this warning if it's
-        // enabled, so just suppress it here.
-        wxGCC_WARNING_SUPPRESS(missing-field-initializers)
-
         static SecretSchema s_schema =
             {
                 "org.freedesktop.Secret.Generic",
@@ -305,8 +300,6 @@ private:
                     { NULL }
                 }
             };
-
-        wxGCC_WARNING_RESTORE(missing-field-initializers)
 
         return &s_schema;
     }

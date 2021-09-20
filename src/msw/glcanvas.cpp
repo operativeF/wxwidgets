@@ -141,11 +141,7 @@ wxWndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 template <typename T>
 inline T wxWGLProcCast(PROC proc)
 {
-    wxGCC_WARNING_SUPPRESS_CAST_FUNCTION_TYPE()
-
     return reinterpret_cast<T>(proc);
-
-    wxGCC_WARNING_RESTORE_CAST_FUNCTION_TYPE()
 }
 
 // this macro defines a variable of type "name_t" called "name" and initializes

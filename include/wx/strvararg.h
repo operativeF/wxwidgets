@@ -27,10 +27,6 @@
 class WXDLLIMPEXP_FWD_BASE wxCStrData;
 class WXDLLIMPEXP_FWD_BASE wxString;
 
-// There are a lot of structs with intentionally private ctors in this file,
-// suppress gcc warnings about this.
-wxGCC_WARNING_SUPPRESS(ctor-dtor-privacy)
-
 // ----------------------------------------------------------------------------
 // WX_DEFINE_VARARG_FUNC* macros
 // ----------------------------------------------------------------------------
@@ -1202,7 +1198,5 @@ private:
 #define _WX_VARARG_DEFINE_FUNC_NOP_N0(name, numfixed, fixed)                  \
     inline void name(_WX_VARARG_FIXED_UNUSED_EXPAND(numfixed, fixed))         \
     {}
-
-wxGCC_WARNING_RESTORE(ctor-dtor-privacy)
 
 #endif // _WX_STRVARARG_H_

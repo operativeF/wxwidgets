@@ -334,7 +334,6 @@ TEST_CASE("wxArrayString", "[dynarray]")
 
     // The whole point of this code is to test self-assignment, so suppress
     // clang warning about it.
-    wxCLANG_WARNING_SUPPRESS(self-assign-overloaded)
 
     wxArrayString a7;
     a7 = a7;
@@ -342,8 +341,6 @@ TEST_CASE("wxArrayString", "[dynarray]")
     a7.Add("Bar");
     a7 = a7;
     CHECK( a7.size() == 1 );
-
-    wxCLANG_WARNING_RESTORE(self-assign-overloaded)
 }
 
 TEST_CASE("wxSortedArrayString", "[dynarray]")

@@ -185,9 +185,7 @@ bool wxApp::Initialize(int& argC, wxChar **argV)
 
     // Glib's type system required by Pango (deprecated since glib 2.36 but
     // used to be required, so still call it, it's harmless).
-    wxGCC_WARNING_SUPPRESS(deprecated-declarations)
     g_type_init();
-    wxGCC_WARNING_RESTORE()
 
 #if wxUSE_INTL
     wxFont::SetDefaultEncoding(wxLocale::GetSystemEncoding());
@@ -721,11 +719,7 @@ PangoContext* wxApp::GetPangoContext()
         // pango_font_map_create_context(pango_xft_get_font_map(dpy, xscreen))
         // so continue to use it even if it's deprecated to not bother with
         // checking for Pango 1.2 in configure and just disable the warning.
-        wxGCC_WARNING_SUPPRESS(deprecated-declarations)
-
         s_pangoContext = pango_xft_get_context(dpy, xscreen);
-
-        wxGCC_WARNING_RESTORE(deprecated-declarations)
 
         if (!PANGO_IS_CONTEXT(s_pangoContext))
         {

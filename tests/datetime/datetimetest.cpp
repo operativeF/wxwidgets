@@ -626,8 +626,6 @@ TEST_CASE("TestTimeFormat")
         3*3600 + 30*60
     };
 
-    wxGCC_WARNING_SUPPRESS(missing-field-initializers)
-
     static const Date formatTestDates[] =
     {
         { 29, wxDateTime::May, 1976, 18, 30, 00, 0.0, wxDateTime::Inv_WeekDay },
@@ -645,8 +643,6 @@ TEST_CASE("TestTimeFormat")
         { 01, wxDateTime::Jan,  -52, 03, 16, 47, 0.0, wxDateTime::Inv_WeekDay },
 #endif
     };
-
-    wxGCC_WARNING_RESTORE(missing-field-initializers)
 
     for ( unsigned idxtz = 0; idxtz < WXSIZEOF(timeZonesOffsets); ++idxtz )
     {
@@ -854,8 +850,6 @@ TEST_CASE("TestTimeParse")
 
 TEST_CASE("TestTimeZoneParse")
 {
-    wxGCC_WARNING_SUPPRESS(missing-field-initializers)
-
     static constexpr struct
     {
         const char *str;
@@ -901,8 +895,6 @@ TEST_CASE("TestTimeZoneParse")
         { "17:37+04:0" },
     };
 
-    wxGCC_WARNING_RESTORE(missing-field-initializers)
-
     for ( size_t n = 0; n < WXSIZEOF(parseTestTimeZones); ++n )
     {
         wxDateTime dt;
@@ -925,8 +917,6 @@ TEST_CASE("TestTimeZoneParse")
 
 TEST_CASE("TestTimeSpanFormat")
 {
-    wxGCC_WARNING_SUPPRESS(missing-field-initializers)
-
     static constexpr struct TimeSpanFormatTestData
     {
         long h, min, sec, msec;
@@ -949,8 +939,6 @@ TEST_CASE("TestTimeSpanFormat")
         {    0, -1,  0,   0, "%H:%M:%S",      "-00:01:00"             },
         {    0,  0, -1,   0, "%H:%M:%S",      "-00:00:01"             },
     };
-
-    wxGCC_WARNING_RESTORE(missing-field-initializers)
 
     for ( size_t n = 0; n < WXSIZEOF(testSpans); n++ )
     {
@@ -980,8 +968,6 @@ TEST_CASE("TestTimeTicks")
 // test parsing dates in RFC822 format
 TEST_CASE("TestParseRFC822")
 {
-    wxGCC_WARNING_SUPPRESS(missing-field-initializers)
-
     static constexpr struct ParseTestData
     {
         const char *rfc822;
@@ -1026,8 +1012,6 @@ TEST_CASE("TestParseRFC822")
         },
     };
 
-    wxGCC_WARNING_RESTORE(missing-field-initializers)
-
     for ( unsigned n = 0; n < WXSIZEOF(parseTestDates); n++ )
     {
         const char * const datestr = parseTestDates[n].rfc822;
@@ -1056,8 +1040,6 @@ TEST_CASE("TestParseRFC822")
 // test parsing dates in free format
 TEST_CASE("TestDateParse")
 {
-    wxGCC_WARNING_SUPPRESS(missing-field-initializers)
-
     static constexpr struct ParseTestData
     {
         const char *str;
@@ -1077,8 +1059,6 @@ TEST_CASE("TestDateParse")
         { "bloordyblop" },
         { "2 .  .    " },
     };
-
-    wxGCC_WARNING_RESTORE(missing-field-initializers)
 
     // special cases
     wxDateTime dt;
@@ -1115,8 +1095,6 @@ TEST_CASE("TestDateParse")
 
 TEST_CASE("TestDateParseISO")
 {
-    wxGCC_WARNING_SUPPRESS(missing-field-initializers)
-
     static const struct
     {
         const char *str;
@@ -1151,8 +1129,6 @@ TEST_CASE("TestDateParseISO")
         { "bloordyblop" },
         { "" },
     };
-
-    wxGCC_WARNING_RESTORE(missing-field-initializers)
 
     for ( size_t n = 0; n < WXSIZEOF(parseTestDates); n++ )
     {
@@ -1193,8 +1169,6 @@ TEST_CASE("TestDateParseISO")
 
 TEST_CASE("TestDateTimeParse")
 {
-    wxGCC_WARNING_SUPPRESS(missing-field-initializers)
-
     static const struct ParseTestData
     {
         const char *str;
@@ -1226,8 +1200,6 @@ TEST_CASE("TestDateTimeParse")
             false // ParseDateTime does know yet +0100
         },
     };
-
-    wxGCC_WARNING_RESTORE(missing-field-initializers)
 
     // the test strings here use "PM" which is not available in all locales so
     // we need to use "C" locale for them

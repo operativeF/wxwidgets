@@ -216,7 +216,7 @@ public:
     virtual wxLongLong GetDuration()
     {   return 0;                       }
 
-    virtual void Move(wxRect boundary)
+    virtual void Move([[maybe_unused]] wxRect boundary)
     {                                   }
     virtual wxSize GetVideoSize() const
     {   return {0, 0};             }

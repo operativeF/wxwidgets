@@ -41,8 +41,6 @@ typedef wxLongLong_t TestValue_t;
 typedef long TestValue_t;
 #endif
 
-wxGCC_WARNING_SUPPRESS(missing - field - initializers)
-
 static constexpr struct ToLongData
 {
     const wxChar* str;
@@ -98,8 +96,6 @@ static constexpr struct ToLongData
       { wxT("0x11"), 17, Number_Ok,      16 },
 };
 
-wxGCC_WARNING_RESTORE(missing - field - initializers)
-
 static void DoCStrDataTernaryOperator(bool cond)
 {
     // test compilation of wxCStrData when used with operator?: (the asserts
@@ -107,13 +103,7 @@ static void DoCStrDataTernaryOperator(bool cond)
 
     wxString s("foo");
 
-    // Using literal strings in ternary operator below results in these
-    // warnings, but they're unavoidable if we want such code to continue to
-    // compile at all, as it used to in pre-3.0 versions, so just suppress them.
-    wxGCC_WARNING_SUPPRESS(write - strings)
-        wxCLANG_WARNING_SUPPRESS(c++11 - compat - deprecated - writable - strings)
-
-        const wchar_t* wcStr = L"foo";
+    const wchar_t* wcStr = L"foo";
     CHECK(CheckStr(s, (cond ? s.c_str() : wcStr)));
     CHECK(CheckStr(s, (cond ? s.c_str() : L"foo")));
     CHECK(CheckStr(s, (cond ? wcStr : s.c_str())));
@@ -125,10 +115,7 @@ static void DoCStrDataTernaryOperator(bool cond)
     CHECK(CheckStr(s, (cond ? mbStr : s.c_str())));
     CHECK(CheckStr(s, (cond ? "foo" : s.c_str())));
 
-    wxGCC_WARNING_RESTORE(write - strings)
-        wxCLANG_WARNING_RESTORE(c++11 - compat - deprecated - writable - strings)
-
-        wxString empty("");
+    wxString empty("");
     CHECK(CheckStr(empty, (cond ? empty.c_str() : wxEmptyString)));
     CHECK(CheckStr(empty, (cond ? wxEmptyString : empty.c_str())));
 }

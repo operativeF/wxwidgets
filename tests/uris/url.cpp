@@ -96,9 +96,7 @@ TEST_CASE("URL Tests")
         CHECK(url1 == url2);
 
         // assignment to self
-        wxCLANG_WARNING_SUPPRESS(self-assign-overloaded)
         url2 = url2;
-        wxCLANG_WARNING_RESTORE(self-assign-overloaded)
 
         // check for destructor (with base pointer!)
         puri = new wxURL();

@@ -336,11 +336,9 @@ bool wxPopupTransientWindow::Show( bool show )
 #ifdef __WXGTK4__
         gdk_seat_ungrab(gdk_display_get_default_seat(display));
 #else
-        wxGCC_WARNING_SUPPRESS(deprecated-declarations)
         GdkDeviceManager* manager = gdk_display_get_device_manager(display);
         GdkDevice* device = gdk_device_manager_get_client_pointer(manager);
         gdk_device_ungrab(device, unsigned(GDK_CURRENT_TIME));
-        wxGCC_WARNING_RESTORE()
 #endif
 #else
         gdk_pointer_ungrab( (guint32)GDK_CURRENT_TIME );
@@ -384,12 +382,10 @@ bool wxPopupTransientWindow::Show( bool show )
             GDK_POINTER_MOTION_MASK);
 #ifdef __WXGTK3__
         GdkDisplay* display = gdk_window_get_display(window);
-        wxGCC_WARNING_SUPPRESS(deprecated-declarations)
         GdkDeviceManager* manager = gdk_display_get_device_manager(display);
         GdkDevice* device = gdk_device_manager_get_client_pointer(manager);
         gdk_device_grab(device, window,
             GDK_OWNERSHIP_NONE, true, mask, NULL, unsigned(GDK_CURRENT_TIME));
-        wxGCC_WARNING_RESTORE()
 #else
         gdk_pointer_grab( window, true,
                           mask,
