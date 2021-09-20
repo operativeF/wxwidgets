@@ -36,8 +36,6 @@ constexpr int PWC_CHILD_SUMMARY_CHAR_LIMIT =    64; // Character limit of summar
 // Used to establish backwards compatibility
 const char* g_invalidStringContent = "@__TOTALLY_INVALID_STRING__@";
 
-#endif
-
 // -----------------------------------------------------------------------
 
 static void wxPGDrawFocusRect(wxWindow *win, wxDC& dc,
