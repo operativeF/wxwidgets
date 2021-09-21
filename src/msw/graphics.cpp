@@ -136,7 +136,6 @@ class wxGDIPlusPathData : public wxGraphicsPathData
 {
 public :
     explicit wxGDIPlusPathData(wxGraphicsRenderer* renderer, GraphicsPath* path = nullptr);
-    ~wxGDIPlusPathData();
 
     wxGraphicsObjectRefData *Clone() const override;
 
@@ -186,7 +185,7 @@ public :
     */
 
     // returns the native path
-    void * GetNativePath() const override { return m_path; }
+    void * GetNativePath() const override { return m_path.get(); }
 
     // give the native path returned by GetNativePath() back (there might be some deallocations necessary)
     void UnGetNativePath(void * WXUNUSED(path)) const override {}
@@ -200,7 +199,7 @@ public :
     bool Contains( double x, double y, wxPolygonFillMode fillStyle = wxPolygonFillMode::OddEven) const override;
 
 private :
-    GraphicsPath* m_path;
+    std::unique_ptr<GraphicsPath> m_path;
     bool m_logCurrentPointSet;
     PointF m_logCurrentPoint;
     bool m_figureOpened;
@@ -211,7 +210,6 @@ class wxGDIPlusMatrixData : public wxGraphicsMatrixData
 {
 public :
     explicit wxGDIPlusMatrixData(wxGraphicsRenderer* renderer, Matrix* matrix = nullptr) ;
-    ~wxGDIPlusMatrixData() ;
 
     wxGraphicsObjectRefData* Clone() const override;
 
@@ -261,7 +259,7 @@ public :
     // returns the native representation
     void * GetNativeMatrix() const override;
 private:
-    Matrix* m_matrix ;
+    std::unique_ptr<Matrix> m_matrix;
 } ;
 
 
@@ -270,8 +268,6 @@ class wxGDIPlusPenBrushBaseData : public wxGraphicsObjectRefData
 {
 public:
     explicit wxGDIPlusPenBrushBaseData(wxGraphicsRenderer* renderer);
-
-    virtual void Init();
 
     void CreateLinearGradientBrush(double x1, double y1,
                                    double x2, double y2,
@@ -283,11 +279,11 @@ public:
                                    const wxGraphicsGradientStops& stops,
                                    const wxGraphicsMatrix& matrix = wxNullGraphicsMatrix);
 protected:
-    ~wxGDIPlusPenBrushBaseData();
+    ~wxGDIPlusPenBrushBaseData() = default;
 
-    Brush* m_brush;
-    GraphicsPath* m_brushPath;
-    Image* m_image;
+    std::unique_ptr<Brush>        m_brush;
+    std::unique_ptr<GraphicsPath> m_brushPath;
+    std::unique_ptr<Image>        m_image;
 
 
 private:
@@ -303,16 +299,13 @@ class wxGDIPlusPenData : public wxGDIPlusPenBrushBaseData
 {
 public:
     wxGDIPlusPenData( wxGraphicsRenderer* renderer, const wxGraphicsPenInfo &info );
-    ~wxGDIPlusPenData();
-
-    void Init() override;
 
     virtual double GetWidth() { return m_width; }
-    virtual Pen* GetGDIPlusPen() { return m_pen; }
+    virtual Pen* GetGDIPlusPen() { return m_pen.get(); }
 
 protected :
-    Pen* m_pen;
-    double m_width;
+    std::unique_ptr<Pen> m_pen;
+    double m_width{0.0};
 };
 
 
@@ -322,7 +315,7 @@ public:
     explicit wxGDIPlusBrushData( wxGraphicsRenderer* renderer );
     wxGDIPlusBrushData( wxGraphicsRenderer* renderer, const wxBrush &brush );
 
-    virtual Brush* GetGDIPlusBrush() { return m_brush; }
+    virtual Brush* GetGDIPlusBrush() { return m_brush.get(); }
 
 };
 
@@ -332,18 +325,17 @@ public:
     wxGDIPlusBitmapData( wxGraphicsRenderer* renderer, Bitmap* bitmap );
     wxGDIPlusBitmapData( wxGraphicsRenderer* renderer, const wxBitmap &bmp );
     wxGDIPlusBitmapData(wxGraphicsRenderer* renderer, const wxImage& img);
-    ~wxGDIPlusBitmapData () override;
 
-    virtual Bitmap* GetGDIPlusBitmap() { return m_bitmap; }
-    void* GetNativeBitmap() const override { return m_bitmap; }
+    virtual Bitmap* GetGDIPlusBitmap() { return m_bitmap.get(); }
+    void* GetNativeBitmap() const override { return m_bitmap.get(); } // FIXME: ??
 
 #if wxUSE_IMAGE
     wxImage ConvertToImage() const;
 #endif // wxUSE_IMAGE
 
 private :
-    Bitmap* m_bitmap{nullptr};
-    Bitmap* m_helper{nullptr};
+    std::unique_ptr<Bitmap> m_bitmap;
+    std::unique_ptr<Bitmap> m_helper;
 };
 
 class wxGDIPlusFontData : public wxGraphicsObjectRefData
@@ -366,16 +358,14 @@ public:
                       int style,
                       Brush* textBrush);
 
-    ~wxGDIPlusFontData();
-
-    virtual Brush* GetGDIPlusBrush() { return m_textBrush; }
-    virtual Font* GetGDIPlusFont() { return m_font; }
+    virtual Brush* GetGDIPlusBrush() { return m_textBrush.get(); }
+    virtual Font* GetGDIPlusFont() { return m_font.get(); }
     virtual FontFamily * GetGDIPlusPrivateFontFamily() const
     {
 #if wxUSE_PRIVATE_FONTS
         return m_privateFontFamily;
 #else
-        return NULL;
+        return nullptr;
 #endif // wxUSE_PRIVATE_FONTS
     }
 
@@ -396,8 +386,8 @@ private :
         Init(name, sizeInPixels, style, new SolidBrush(wxColourToColor(col)));
     }
 
-    Brush* m_textBrush;
-    Font* m_font;
+    std::unique_ptr<Brush> m_textBrush;
+    std::unique_ptr<Font> m_font;
 #if wxUSE_PRIVATE_FONTS
     FontFamily* m_privateFontFamily;
 #endif // wxUSE_PRIVATE_FONTS
@@ -483,7 +473,7 @@ public:
     virtual void GetSize( double* width, double *height );
     void GetDPI(double* dpiX, double* dpiY) const override;
 
-    Graphics* GetGraphics() const { return m_context; }
+    Graphics* GetGraphics() const { return m_context.get(); }
 
 protected:
     // Used from ctors (including those in the derived classes) and takes
@@ -493,7 +483,7 @@ protected:
 private:
     void DoDrawText(std::string_view str, double x, double y) override;
 
-    Graphics* m_context;
+    std::unique_ptr<Graphics> m_context;
     std::stack<GraphicsState> m_stateStack;
     GraphicsState m_state1;
     GraphicsState m_state2;
@@ -686,21 +676,6 @@ public:
 wxGDIPlusPenBrushBaseData::wxGDIPlusPenBrushBaseData(wxGraphicsRenderer* renderer)
     : wxGraphicsObjectRefData(renderer)
 {
-    Init();
-}
-
-wxGDIPlusPenBrushBaseData::~wxGDIPlusPenBrushBaseData()
-{
-    delete m_brush;
-    delete m_brushPath;
-    delete m_image;
-}
-
-void wxGDIPlusPenBrushBaseData::Init()
-{
-    m_brush = nullptr;
-    m_brushPath = nullptr;
-    m_image = nullptr;
 }
 
 template <typename T>
@@ -751,10 +726,9 @@ wxGDIPlusPenBrushBaseData::CreateLinearGradientBrush(
     const wxGraphicsGradientStops& stops,
     const wxGraphicsMatrix& matrix)
 {
-    LinearGradientBrush * const
-        brush = new LinearGradientBrush(PointF(x1, y1) , PointF(x2, y2),
-                                        wxColourToColor(stops.GetStartColour()),
-                                        wxColourToColor(stops.GetEndColour()));
+    auto brush = std::make_unique<LinearGradientBrush>(PointF(x1, y1) , PointF(x2, y2),
+                                                       wxColourToColor(stops.GetStartColour()),
+                                                       wxColourToColor(stops.GetEndColour()));
 
     // Tell the brush how to draw what's beyond the ends of the gradient
     brush->SetWrapMode(WrapModeTileFlipXY);
@@ -767,8 +741,8 @@ wxGDIPlusPenBrushBaseData::CreateLinearGradientBrush(
         brush->MultiplyTransform(m);
     }
 
-    SetGradientStops(brush, stops);
-    m_brush = brush;
+    SetGradientStops(brush.get(), stops);
+    m_brush = std::move(brush);
 }
 
 void
@@ -779,11 +753,11 @@ wxGDIPlusPenBrushBaseData::CreateRadialGradientBrush(
     const wxGraphicsGradientStops& stops,
     const wxGraphicsMatrix& matrix)
 {
-    m_brushPath = new GraphicsPath();
+    m_brushPath = std::make_unique<GraphicsPath>();
     m_brushPath->AddEllipse( (REAL)(endX-radius), (REAL)(endY-radius),
                              (REAL)(2*radius), (REAL)(2*radius));
 
-    PathGradientBrush * const brush = new PathGradientBrush(m_brushPath);
+    auto brush = std::make_unique<PathGradientBrush>(m_brushPath.get());
     brush->SetCenterPoint(PointF(startX, startY));
     brush->SetCenterColor(wxColourToColor(stops.GetStartColour()));
 
@@ -804,8 +778,8 @@ wxGDIPlusPenBrushBaseData::CreateRadialGradientBrush(
 
     // Because the GDI+ API draws radial gradients from outside towards the
     // center we have to reverse the order of the gradient stops.
-    SetGradientStops(brush, stops, true);
-    m_brush = brush;
+    SetGradientStops(brush.get(), stops, true);
+    m_brush = std::move(brush);
 }
 
 
@@ -813,24 +787,12 @@ wxGDIPlusPenBrushBaseData::CreateRadialGradientBrush(
 // wxGDIPlusPen implementation
 //-----------------------------------------------------------------------------
 
-wxGDIPlusPenData::~wxGDIPlusPenData()
-{
-    delete m_pen;
-}
-
-void wxGDIPlusPenData::Init()
-{
-    m_pen = nullptr ;
-}
-
 wxGDIPlusPenData::wxGDIPlusPenData( wxGraphicsRenderer* renderer,
                                     const wxGraphicsPenInfo &info )
     : wxGDIPlusPenBrushBaseData(renderer),
       m_width(info.GetWidth())
 {
-    Init();
-
-    m_pen = new Pen(wxColourToColor(info.GetColour()), m_width );
+    m_pen = std::make_unique<Pen>(wxColourToColor(info.GetColour()), m_width );
 
     const LineCap cap = [info]() {
         switch ( info.GetCap() )
@@ -915,15 +877,15 @@ wxGDIPlusPenData::wxGDIPlusPenData( wxGraphicsRenderer* renderer,
             wxBitmap bmp = info.GetStipple();
             if ( bmp.IsOk() )
             {
-                m_image = Bitmap::FromHBITMAP((HBITMAP)bmp.GetHBITMAP(),
+                m_image.reset(Bitmap::FromHBITMAP((HBITMAP)bmp.GetHBITMAP(),
 #if wxUSE_PALETTE
                     (HPALETTE)bmp.GetPalette()->GetHPALETTE()
 #else
-                    NULL
+                    nullptr
 #endif
-                );
-                m_brush = new TextureBrush(m_image);
-                m_pen->SetBrush( m_brush );
+                ));
+                m_brush = std::make_unique<TextureBrush>(m_image.get());
+                m_pen->SetBrush( m_brush.get() );
             }
 
         }
@@ -956,13 +918,13 @@ wxGDIPlusPenData::wxGDIPlusPenData( wxGraphicsRenderer* renderer,
             default:
                 style = HatchStyleHorizontal;
             }
-            m_brush = new HatchBrush
+            m_brush = std::make_unique<HatchBrush>
                              (
                                 style,
                                 wxColourToColor(info.GetColour()),
                                 Color::Transparent
                              );
-            m_pen->SetBrush( m_brush );
+            m_pen->SetBrush( m_brush.get() );
         }
         break;
     }
@@ -976,21 +938,21 @@ wxGDIPlusPenData::wxGDIPlusPenData( wxGraphicsRenderer* renderer,
 
     case wxGradientType::Linear:
         if (m_brush)
-            delete m_brush;
+            m_brush.reset();
         CreateLinearGradientBrush(info.GetX1(), info.GetY1(),
                                   info.GetX2(), info.GetY2(),
                                   info.GetStops());
-        m_pen->SetBrush(m_brush);
+        m_pen->SetBrush(m_brush.get());
         break;
 
     case wxGradientType::Radial:
         if (m_brush)
-            delete m_brush;
+            m_brush.reset();
         CreateRadialGradientBrush(info.GetStartX(), info.GetStartY(),
                                   info.GetEndX(), info.GetEndY(),
                                   info.GetRadius(),
                                   info.GetStops());
-        m_pen->SetBrush(m_brush);
+        m_pen->SetBrush(m_brush.get());
         break;
     }
 }
@@ -1002,16 +964,14 @@ wxGDIPlusPenData::wxGDIPlusPenData( wxGraphicsRenderer* renderer,
 wxGDIPlusBrushData::wxGDIPlusBrushData( wxGraphicsRenderer* renderer )
 : wxGDIPlusPenBrushBaseData(renderer)
 {
-    Init();
 }
 
 wxGDIPlusBrushData::wxGDIPlusBrushData( wxGraphicsRenderer* renderer , const wxBrush &brush )
 : wxGDIPlusPenBrushBaseData(renderer)
 {
-    Init();
     if ( brush.GetStyle() == wxBrushStyle::Solid)
     {
-        m_brush = new SolidBrush(wxColourToColor( brush.GetColour()));
+        m_brush = std::make_unique<SolidBrush>(wxColourToColor( brush.GetColour()));
     }
     else if ( brush.IsHatch() )
     {
@@ -1039,7 +999,7 @@ wxGDIPlusBrushData::wxGDIPlusBrushData( wxGraphicsRenderer* renderer , const wxB
         default:
             style = HatchStyleHorizontal;
         }
-        m_brush = new HatchBrush
+        m_brush = std::make_unique<HatchBrush>
                       (
                         style,
                         wxColourToColor(brush.GetColour()),
@@ -1051,15 +1011,14 @@ wxGDIPlusBrushData::wxGDIPlusBrushData( wxGraphicsRenderer* renderer , const wxB
         wxBitmap* bmp = brush.GetStipple();
         if ( bmp && bmp->IsOk() )
         {
-            wxDELETE( m_image );
-            m_image = Bitmap::FromHBITMAP((HBITMAP)bmp->GetHBITMAP(),
+            m_image.reset(Bitmap::FromHBITMAP((HBITMAP)bmp->GetHBITMAP(),
 #if wxUSE_PALETTE
                 (HPALETTE)bmp->GetPalette()->GetHPALETTE()
 #else
-                NULL
+                nullptr
 #endif
-            );
-            m_brush = new TextureBrush(m_image);
+            ));
+            m_brush = std::make_unique<TextureBrush>(m_image.get());
         }
     }
 }
@@ -1116,7 +1075,7 @@ wxGDIPlusFontData::Init(const std::string& name,
                 // for private font because calling this method apparently is messing up something
                 // in the array of font families (m_privateFontFamily).
                 m_privateFontFamily = &gs_pFontFamily[j];
-                m_font = new Font(m_privateFontFamily, sizeInPixels, style, UnitPixel);
+                m_font = std::make_unique<Font>(m_privateFontFamily, sizeInPixels, style, UnitPixel);
 
                 break;
             }
@@ -1126,10 +1085,10 @@ wxGDIPlusFontData::Init(const std::string& name,
     if ( !m_font )
 #endif // wxUSE_PRIVATE_FONTS
     {
-        m_font = new Font(boost::nowide::widen(name).c_str(), sizeInPixels, style, UnitPixel);
+        m_font = std::make_unique<Font>(boost::nowide::widen(name).c_str(), sizeInPixels, style, UnitPixel);
     }
 
-    m_textBrush = textBrush;
+    m_textBrush.reset(textBrush);
 }
 
 wxGDIPlusFontData::wxGDIPlusFontData( wxGraphicsRenderer* renderer,
@@ -1175,12 +1134,6 @@ wxGDIPlusFontData::wxGDIPlusFontData(wxGraphicsRenderer* renderer,
     Init(name, sizeInPixels, style, brush);
 }
 
-wxGDIPlusFontData::~wxGDIPlusFontData()
-{
-    delete m_textBrush;
-    delete m_font;
-}
-
 // the built-in conversions functions create non-premultiplied bitmaps, while GDIPlus needs them in the
 // premultiplied format, therefore in the failing cases we create a new bitmap using the non-premultiplied
 // bytes as parameter, since there is no real copying of the data going in, only references are stored
@@ -1215,7 +1168,7 @@ wxGDIPlusBitmapData::wxGDIPlusBitmapData( wxGraphicsRenderer* renderer,
         {
             BitmapData data;
 
-            m_helper = interim;
+            m_helper.reset(interim);
             m_helper->LockBits(&bounds, ImageLockModeRead, m_helper->GetPixelFormat(), &data);
             image = new Bitmap(data.Width, data.Height, data.Stride, PixelFormat32bppPARGB, (BYTE*)data.Scan0);
             m_helper->UnlockBits(&data);
@@ -1280,7 +1233,7 @@ wxGDIPlusBitmapData::wxGDIPlusBitmapData( wxGraphicsRenderer* renderer,
             Rect bounds(0,0,width,height);
             static BitmapData data ;
 
-            m_helper = image ;
+            m_helper.reset(image);
             image = nullptr ;
             m_helper->LockBits(&bounds, ImageLockModeRead,
                 m_helper->GetPixelFormat(),&data);
@@ -1291,8 +1244,9 @@ wxGDIPlusBitmapData::wxGDIPlusBitmapData( wxGraphicsRenderer* renderer,
             m_helper->UnlockBits(&data);
         }
     }
+
     if ( image )
-        m_bitmap = image;
+        m_bitmap.reset(image);
 }
 
 #if wxUSE_IMAGE
@@ -1402,12 +1356,6 @@ wxImage wxGDIPlusBitmapData::ConvertToImage() const
 
 #endif // wxUSE_IMAGE
 
-wxGDIPlusBitmapData::~wxGDIPlusBitmapData()
-{
-    delete m_bitmap;
-    delete m_helper;
-}
-
 //-----------------------------------------------------------------------------
 // wxGDIPlusPath implementation
 //-----------------------------------------------------------------------------
@@ -1419,14 +1367,9 @@ wxGDIPlusPathData::wxGDIPlusPathData(wxGraphicsRenderer* renderer, GraphicsPath*
     , m_figureStart(0.0, 0.0)
 {
     if ( path )
-        m_path = path;
+        m_path.reset(path);
     else
-        m_path = new GraphicsPath();
-}
-
-wxGDIPlusPathData::~wxGDIPlusPathData()
-{
-    delete m_path;
+        m_path = std::make_unique<GraphicsPath>();
 }
 
 wxGraphicsObjectRefData* wxGDIPlusPathData::Clone() const
@@ -1694,14 +1637,9 @@ wxGDIPlusMatrixData::wxGDIPlusMatrixData(wxGraphicsRenderer* renderer, Matrix* m
     : wxGraphicsMatrixData(renderer)
 {
     if ( matrix )
-        m_matrix = matrix ;
+        m_matrix.reset(matrix);
     else
-        m_matrix = new Matrix();
-}
-
-wxGDIPlusMatrixData::~wxGDIPlusMatrixData()
-{
-    delete m_matrix;
+        m_matrix = std::make_unique<Matrix>();
 }
 
 wxGraphicsObjectRefData *wxGDIPlusMatrixData::Clone() const
@@ -1799,9 +1737,9 @@ void wxGDIPlusMatrixData::TransformDistance( double *dx, double *dy ) const
 }
 
 // returns the native representation
-void * wxGDIPlusMatrixData::GetNativeMatrix() const
+void* wxGDIPlusMatrixData::GetNativeMatrix() const
 {
-    return m_matrix;
+    return m_matrix.get();
 }
 
 //-----------------------------------------------------------------------------
@@ -1878,7 +1816,7 @@ wxGDIPlusContext::wxGDIPlusContext(wxGraphicsRenderer* renderer)
 
 void wxGDIPlusContext::Init(Graphics* graphics, int width, int height)
 {
-    m_context = graphics;
+    m_context.reset(graphics);
     m_state1 = 0;
     m_state2 = 0;
     m_width = width;
@@ -1898,7 +1836,6 @@ wxGDIPlusContext::~wxGDIPlusContext()
     {
         m_context->Restore( m_state2 );
         m_context->Restore( m_state1 );
-        delete m_context;
     }
 }
 
@@ -1944,7 +1881,7 @@ void wxGDIPlusContext::DrawRectangle( double x, double y, double w, double h )
     if (m_composition == wxCOMPOSITION_DEST)
         return;
 
-    wxGDIPlusOffsetHelper helper(m_context, GetContentScaleFactor(), ShouldOffset());
+    wxGDIPlusOffsetHelper helper(m_context.get(), GetContentScaleFactor(), ShouldOffset());
     Brush *brush = m_brush.IsNull() ? nullptr : ((wxGDIPlusBrushData*)m_brush.GetRefData())->GetGDIPlusBrush();
     Pen *pen = m_pen.IsNull() ? nullptr : ((wxGDIPlusPenData*)m_pen.GetGraphicsData())->GetGDIPlusPen();
 
@@ -1983,7 +1920,7 @@ void wxGDIPlusContext::StrokeLines( size_t n, const wxPoint2DDouble *points)
 
    if ( !m_pen.IsNull() )
    {
-        wxGDIPlusOffsetHelper helper(m_context, GetContentScaleFactor(), ShouldOffset());
+        wxGDIPlusOffsetHelper helper(m_context.get(), GetContentScaleFactor(), ShouldOffset());
 
         std::vector<PointF> cpoints(n);
 
@@ -2003,7 +1940,7 @@ void wxGDIPlusContext::DrawLines( size_t n, const wxPoint2DDouble *points, wxPol
    if (m_composition == wxCOMPOSITION_DEST)
         return;
 
-    wxGDIPlusOffsetHelper helper(m_context, GetContentScaleFactor(), ShouldOffset());
+    wxGDIPlusOffsetHelper helper(m_context.get(), GetContentScaleFactor(), ShouldOffset());
     std::vector<PointF> cpoints(n);
 
     for (size_t i = 0; i < n; i++)
@@ -2026,7 +1963,7 @@ void wxGDIPlusContext::StrokePath( const wxGraphicsPath& path )
 
     if ( !m_pen.IsNull() )
     {
-        wxGDIPlusOffsetHelper helper(m_context, GetContentScaleFactor(), ShouldOffset());
+        wxGDIPlusOffsetHelper helper(m_context.get(), GetContentScaleFactor(), ShouldOffset());
         m_context->DrawPath( ((wxGDIPlusPenData*)m_pen.GetGraphicsData())->GetGDIPlusPen() , (GraphicsPath*) path.GetNativePath() );
     }
 }
@@ -2038,7 +1975,7 @@ void wxGDIPlusContext::FillPath( const wxGraphicsPath& path , wxPolygonFillMode 
 
     if ( !m_brush.IsNull() )
     {
-        wxGDIPlusOffsetHelper helper(m_context, GetContentScaleFactor(), ShouldOffset());
+        wxGDIPlusOffsetHelper helper(m_context.get(), GetContentScaleFactor(), ShouldOffset());
         ((GraphicsPath*) path.GetNativePath())->SetFillMode( fillStyle == wxPolygonFillMode::OddEven ? FillModeAlternate : FillModeWinding);
         m_context->FillPath( ((wxGDIPlusBrushData*)m_brush.GetRefData())->GetGDIPlusBrush() ,
             (GraphicsPath*) path.GetNativePath());
@@ -2411,7 +2348,7 @@ std::vector<double> wxGDIPlusContext::GetPartialTextExtents(std::string_view tex
         RectF bbox ;
         for ( size_t i = 0 ; i < span ; ++i)
         {
-            regions[i].GetBounds(&bbox,m_context);
+            regions[i].GetBounds(&bbox, m_context.get());
             widths[startPosition+i] = bbox.Width;
         }
         remainder -= span;
@@ -2450,7 +2387,7 @@ bool wxGDIPlusContext::ShouldOffset() const
 
 void* wxGDIPlusContext::GetNativeContext()
 {
-    return m_context;
+    return m_context.get();
 }
 
 // concatenates this transform with the current transform of this context
