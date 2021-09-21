@@ -325,11 +325,7 @@
 /*  ---------------------------------------------------------------------------- */
 
 /*  Macro to cut down on compiler warnings. */
-#if 1 /*  there should be no more any compilers needing the "#else" version */
-    #define WXUNUSED(identifier) /* identifier */
-#else  /*  stupid, broken compiler */
-    #define WXUNUSED(identifier) identifier
-#endif
+#define WXUNUSED(identifier) /* identifier */
 
 /*  some arguments are not used in unicode mode */
 #define WXUNUSED_IN_UNICODE(param)  WXUNUSED(param)
@@ -473,19 +469,6 @@ inline void *wxUIntToPtr(wxUIntPtr p)
 #else /* !wxWCHAR_T_IS_REAL_TYPE */
     #define wxIF_WCHAR_T_TYPE(x)
 #endif /* wxWCHAR_T_IS_REAL_TYPE/!wxWCHAR_T_IS_REAL_TYPE */
-
-/*
-   This constant should be used instead of NULL in vararg functions taking
-   wxChar* arguments: passing NULL (which is the same as 0, unless the compiler
-   defines it specially, e.g. like gcc does with its __null built-in) doesn't
-   work in this case as va_arg() wouldn't interpret the integer 0 correctly
-   when trying to convert it to a pointer on architectures where sizeof(int) is
-   strictly less than sizeof(void *).
-
-   Examples of places where this must be used include wxFileTypeInfo ctor.
- */
-#define wxNullPtr ((void *)NULL)
-
 
 /* Define wxChar16 and wxChar32                                              */
 
@@ -992,13 +975,6 @@ wxALLOW_COMBINING_ENUMS(wxDirection, wxGeometryCentre)
 /*  this window should always process idle events */
 #define wxWS_EX_PROCESS_IDLE            0x00000010
 
-/*  this window should always process UI update events */
-#define wxWS_EX_PROCESS_UI_UPDATES      0x00000020
-
-/*  Draw the window in a metal theme on Mac */
-#define wxFRAME_EX_METAL                0x00000040
-#define wxDIALOG_EX_METAL               0x00000040
-
 /*  Use this style to add a context-sensitive help to the window (currently for */
 /*  Win32 only and it doesn't work if wxMINIMIZE_BOX or wxMAXIMIZE_BOX are used) */
 #define wxWS_EX_CONTEXTHELP             0x00000080
@@ -1034,13 +1010,6 @@ wxALLOW_COMBINING_ENUMS(wxDirection, wxGeometryCentre)
 #define wxCOLOURED          0x0800
 #define wxFIXED_LENGTH      0x0400
 
-/*
- * Styles for wxListBox
- */
-#define wxLB_SORT           0x0010
-#define wxLB_SINGLE         0x0020
-#define wxLB_MULTIPLE       0x0040
-#define wxLB_EXTENDED       0x0080
 /*  wxLB_OWNERDRAW is Windows-only */
 #define wxLB_NEEDED_SB      0x0000
 #define wxLB_OWNERDRAW      0x0100
@@ -1072,12 +1041,6 @@ wxALLOW_COMBINING_ENUMS(wxDirection, wxGeometryCentre)
 /*  Old names for compatibility */
 #define wxRA_HORIZONTAL     wxHORIZONTAL
 #define wxRA_VERTICAL       wxVERTICAL
-
-/*
- * wxRadioButton style flag
- */
-#define wxRB_GROUP          0x0004
-#define wxRB_SINGLE         0x0008
 
 /*
  * wxScrollBar flags
@@ -1126,47 +1089,6 @@ wxALLOW_COMBINING_ENUMS(wxDirection, wxGeometryCentre)
 
 #define wxICON_MASK \
     (wxICON_EXCLAMATION|wxICON_HAND|wxICON_QUESTION|wxICON_INFORMATION|wxICON_NONE|wxICON_AUTH_NEEDED)
-
-/*
- * Background styles. See wxWindow::SetBackgroundStyle
- */
-enum wxBackgroundStyle
-{
-    /*
-        background is erased in the EVT_ERASE_BACKGROUND handler or using
-        the system default background if no such handler is defined (this
-        is the default style)
-     */
-    wxBG_STYLE_ERASE,
-
-    /*
-        background is erased by the system, no EVT_ERASE_BACKGROUND event
-        is generated at all
-     */
-    wxBG_STYLE_SYSTEM,
-
-    /*
-        background is erased in EVT_PAINT handler and not erased at all
-        before it, this should be used if the paint handler paints over
-        the entire window to avoid flicker
-     */
-    wxBG_STYLE_PAINT,
-
-    /*
-        Indicates that the window background is not erased, letting the parent
-        window show through.
-     */
-    wxBG_STYLE_TRANSPARENT,
-
-    /* this style is deprecated and doesn't do anything, don't use */
-    wxBG_STYLE_COLOUR,
-
-    /*
-        this style is deprecated and is synonymous with
-        wxBG_STYLE_PAINT, use the new name
-     */
-    wxBG_STYLE_CUSTOM = wxBG_STYLE_PAINT
-};
 
 /*
  * Key types used by (old style) lists and hashes.
@@ -1689,21 +1611,6 @@ enum wxUpdateUI
     wxUPDATE_UI_RECURSE       = 0x0001,
     wxUPDATE_UI_FROMIDLE      = 0x0002 /*  Invoked from On(Internal)Idle */
 };
-
-
-/* ---------------------------------------------------------------------------- */
-/* wxList types */
-/* ---------------------------------------------------------------------------- */
-
-/* type of compare function for list sort operation (as in 'qsort'): it should
-   return a negative value, 0 or positive value if the first element is less
-   than, equal or greater than the second */
-
-typedef int (* wxSortCompareFunction)(const void *elem1, const void *elem2);
-
-/* wxList iterator function */
-typedef int (* wxListIterateFunction)(void *current);
-
 
 /*  ---------------------------------------------------------------------------- */
 /*  miscellaneous */

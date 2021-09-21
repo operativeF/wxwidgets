@@ -28,6 +28,8 @@
     extern WXDLLIMPEXP_DATA_CORE(const wxVideoMode) wxDefaultVideoMode;
 #endif // wxUSE_DISPLAY
 
+#include <memory>
+
 class  WXDLLIMPEXP_FWD_CORE wxWindow;
 struct WXDLLIMPEXP_FWD_CORE wxPoint;
 class  WXDLLIMPEXP_FWD_CORE wxRect;
@@ -157,7 +159,7 @@ private:
     //
     // this method must be implemented in platform-specific code if
     // wxUSE_DISPLAY == 1 (if it is 0 we provide the stub in common code)
-    static wxDisplayFactory *CreateFactory();
+    static std::unique_ptr<wxDisplayFactory> CreateFactory();
 
     wxDisplayImpl *m_impl;
 };

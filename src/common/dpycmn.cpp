@@ -12,6 +12,10 @@
 #include "wx/wxprec.h"
 
 
+#ifndef WX_PRECOMP
+    #include <memory>
+#endif
+
 #include "wx/gdicmn.h"
 #include "wx/window.h"
 #include "wx/module.h"
@@ -30,7 +34,7 @@ namespace
 // the factory object used by wxDisplay
 //
 // created on demand and destroyed by wxDisplayModule
-static wxDisplayFactory *gs_factory = nullptr;
+static std::unique_ptr<wxDisplayFactory> gs_factory;
 
 // ----------------------------------------------------------------------------
 // wxDisplayModule is used to cleanup gs_factory
@@ -42,7 +46,7 @@ public:
     bool OnInit() override { return true; }
     void OnExit() override
     {
-        wxDELETE(gs_factory);
+        gs_factory.reset();
     }
 
     wxDECLARE_DYNAMIC_CLASS(wxDisplayModule);

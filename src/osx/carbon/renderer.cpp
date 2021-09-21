@@ -37,6 +37,9 @@
     #include "wx/mstream.h"
 #endif // wxHAS_DRAW_TITLE_BAR_BITMAP
 
+/*  Draw the window in a metal theme on Mac */
+#define wxFRAME_EX_METAL                0x00000040
+#define wxDIALOG_EX_METAL               0x00000040
 
 // check if we're having a CGContext we can draw into
 inline bool wxHasCGContext(wxWindow* WXUNUSED(win), wxDC& dc)

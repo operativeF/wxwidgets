@@ -423,7 +423,7 @@ void wxFrame::OnSysColourChanged(wxSysColourChangedEvent& event)
     if ( m_frameStatusBar )
     {
         wxSysColourChangedEvent event2;
-        event2.SetEventObject( m_frameStatusBar );
+        event2.SetEventObject( m_frameStatusBar.get() );
         m_frameStatusBar->HandleWindowEvent(event2);
     }
 #endif // wxUSE_STATUSBAR
@@ -522,7 +522,7 @@ wxToolBar* wxFrame::CreateToolBar(long style, wxWindowID id, const std::string& 
         PositionToolBar();
     }
 
-    return m_frameToolBar;
+    return m_frameToolBar.get();
 }
 
 void wxFrame::PositionToolBar()

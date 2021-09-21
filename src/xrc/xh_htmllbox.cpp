@@ -17,6 +17,7 @@
 
 #include "wx/htmllbox.h"
 #include "wx/filesys.h"
+#include "wx/listbox.h"
 
 #include "wx/xml/xml.h"
 

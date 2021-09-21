@@ -16,6 +16,8 @@
     #include "wx/msw/private.h"
     #include "wx/msw/wrapwin.h"
     #include "wx/msw/wrap/utils.h"
+
+    #include <memory>
 #endif
 
 #include "wx/app.h"
@@ -261,15 +263,15 @@ private:
 // ----------------------------------------------------------------------------
 
 // TODO: Return unique_ptr
-/* static */ wxDisplayFactory *wxDisplay::CreateFactory()
+/* static */ std::unique_ptr<wxDisplayFactory> wxDisplay::CreateFactory()
 {
     auto factoryMM = std::make_unique<wxDisplayFactoryMSW>();
 
     if ( factoryMM->IsOk() )
-        return factoryMM.release();
+        return factoryMM;
 
     // fall back to a stub implementation if no multimon support (Win95?)
-    return new wxDisplayFactorySingleMSW;
+    return std::make_unique<wxDisplayFactorySingleMSW>();
 }
 
 

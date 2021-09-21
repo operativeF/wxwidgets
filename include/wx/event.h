@@ -37,6 +37,9 @@
 // This is now always defined, but keep it for backwards compatibility.
 #define wxHAS_CALL_AFTER
 
+/*  this window should always process UI update events */
+#define wxWS_EX_PROCESS_UI_UPDATES      0x00000020
+
 // ----------------------------------------------------------------------------
 // forward declarations
 // ----------------------------------------------------------------------------

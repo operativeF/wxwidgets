@@ -19,6 +19,12 @@
 
 class WXDLLIMPEXP_FWD_CORE wxRadioButton;
 
+/*
+ * wxRadioButton style flag
+ */
+#define wxRB_GROUP          0x0004
+#define wxRB_SINGLE         0x0008
+
 // TODO: In wxUniv, wxRadioButton must derive from wxCheckBox as it reuses
 // much of its code. This should be fixed by refactoring wxCheckBox to allow
 // this class to reuse its functionality without inheriting from it, but for

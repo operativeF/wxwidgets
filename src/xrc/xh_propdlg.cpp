@@ -41,7 +41,9 @@ wxPropertySheetDialogXmlHandler::wxPropertySheetDialogXmlHandler()
 
     XRC_ADD_STYLE(wxTAB_TRAVERSAL);
     XRC_ADD_STYLE(wxWS_EX_VALIDATE_RECURSIVELY);
+#ifdef __WXMAC__
     XRC_ADD_STYLE(wxDIALOG_EX_METAL);
+#endif
     XRC_ADD_STYLE(wxMAXIMIZE_BOX);
     XRC_ADD_STYLE(wxMINIMIZE_BOX);
     XRC_ADD_STYLE(wxFRAME_SHAPED);

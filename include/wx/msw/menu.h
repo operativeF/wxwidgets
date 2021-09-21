@@ -11,6 +11,7 @@
 #ifndef _WX_MENU_H_
 #define _WX_MENU_H_
 
+#include "wx/log.h"
 #include "wx/private/menuradio.h"
 
 #if wxUSE_ACCEL

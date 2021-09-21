@@ -17,7 +17,9 @@
 
 #include "wx/toplevel.h"      // the base class
 #include "wx/statusbr.h"
+#include "wx/toolbar.h"
 
+#include <memory>
 #include <string>
 
 // the default names for various classes
@@ -25,6 +27,7 @@ inline constexpr char wxStatusLineNameStr[] = "status_line";
 
 class WXDLLIMPEXP_FWD_CORE wxFrame;
 #if wxUSE_MENUBAR
+#include <wx/menu.h>
 class WXDLLIMPEXP_FWD_CORE wxMenuBar;
 #endif
 class WXDLLIMPEXP_FWD_CORE wxMenuItem;
@@ -87,7 +90,7 @@ public:
 #if wxUSE_MENUS
 #if wxUSE_MENUBAR
     virtual void SetMenuBar(wxMenuBar *menubar);
-    virtual wxMenuBar *GetMenuBar() const { return m_frameMenuBar; }
+    virtual wxMenuBar *GetMenuBar() const { return m_frameMenuBar.get(); }
 
     // find the item by id in the frame menu bar: this is an internal function
     // and exists mainly in order to be overridden in the MDI parent frame
@@ -121,7 +124,7 @@ public:
                                            wxWindowID winid,
                                            const std::string& name);
     // get the main status bar
-    virtual wxStatusBar *GetStatusBar() const { return m_frameStatusBar; }
+    virtual wxStatusBar *GetStatusBar() const { return m_frameStatusBar.get(); }
 
     // sets the main status bar
     virtual void SetStatusBar(wxStatusBar *statBar);
@@ -151,7 +154,7 @@ public:
                                        const std::string& name );
 
     // get/set the main toolbar
-    virtual wxToolBar *GetToolBar() const { return m_frameToolBar; }
+    virtual wxToolBar *GetToolBar() const { return m_frameToolBar.get(); }
     virtual void SetToolBar(wxToolBar *toolbar);
 #endif // wxUSE_TOOLBAR
 
@@ -190,13 +193,6 @@ public:
     }
 
 protected:
-    // the frame main menu/status/tool bars
-    // ------------------------------------
-
-    // this (non virtual!) function should be called from dtor to delete the
-    // main menubar, statusbar and toolbar (if any)
-    void DeleteAllBars();
-
     // test whether this window makes part of the frame
     bool IsOneOfBars(const wxWindow *win) const override;
 
@@ -218,7 +214,7 @@ protected:
     static bool ShouldUpdateMenuFromIdle();
 
 #if wxUSE_MENUBAR
-    wxMenuBar *m_frameMenuBar{nullptr};
+    std::unique_ptr<wxMenuBar> m_frameMenuBar;
 #endif // wxUSE_MENUBAR
 
 #if wxUSE_STATUSBAR && (wxUSE_MENUS || wxUSE_TOOLBAR)
@@ -239,7 +235,7 @@ protected:
     // return false if there is no help for such item
     bool ShowMenuHelp(int helpid);
 
-    wxStatusBar *m_frameStatusBar{nullptr};
+    std::unique_ptr<wxStatusBar> m_frameStatusBar;
 #endif // wxUSE_STATUSBAR
 
 
@@ -250,7 +246,7 @@ protected:
     // something changes
     virtual void PositionToolBar() { }
 
-    wxToolBar *m_frameToolBar{nullptr};
+    std::unique_ptr<wxToolBar> m_frameToolBar;
 #endif // wxUSE_TOOLBAR
 
 #if wxUSE_MENUS

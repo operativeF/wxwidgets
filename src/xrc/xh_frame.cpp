@@ -42,7 +42,9 @@ wxFrameXmlHandler::wxFrameXmlHandler()
 
     XRC_ADD_STYLE(wxTAB_TRAVERSAL);
     XRC_ADD_STYLE(wxWS_EX_VALIDATE_RECURSIVELY);
+#ifdef __WXMAC__
     XRC_ADD_STYLE(wxFRAME_EX_METAL);
+#endif
     XRC_ADD_STYLE(wxFRAME_EX_CONTEXTHELP);
 
     AddWindowStyles();

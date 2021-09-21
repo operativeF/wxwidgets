@@ -30,6 +30,14 @@
 
 inline constexpr char wxListBoxNameStr[] = "listBox";
 
+/*
+ * Styles for wxListBox
+ */
+#define wxLB_SORT           0x0010
+#define wxLB_SINGLE         0x0020
+#define wxLB_MULTIPLE       0x0040
+#define wxLB_EXTENDED       0x0080
+
 // ----------------------------------------------------------------------------
 // wxListBox interface is defined by the class wxListBoxBase
 // ----------------------------------------------------------------------------

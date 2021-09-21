@@ -127,8 +127,6 @@ wxCONSTRUCTOR_6( wxFrame, wxWindow*, Parent, wxWindowID, Id, std::string, Title,
 wxFrameBase::~wxFrameBase()
 {
     SendDestroyEvent();
-
-    DeleteAllBars();
 }
 
 wxFrame *wxFrameBase::New(wxWindow *parent,
@@ -140,21 +138,6 @@ wxFrame *wxFrameBase::New(wxWindow *parent,
                           const std::string& name)
 {
     return new wxFrame(parent, id, title, pos, size, style, name);
-}
-
-void wxFrameBase::DeleteAllBars()
-{
-#if wxUSE_MENUBAR
-    wxDELETE(m_frameMenuBar);
-#endif // wxUSE_MENUS
-
-#if wxUSE_STATUSBAR
-    wxDELETE(m_frameStatusBar);
-#endif // wxUSE_STATUSBAR
-
-#if wxUSE_TOOLBAR
-    wxDELETE(m_frameToolBar);
-#endif // wxUSE_TOOLBAR
 }
 
 bool wxFrameBase::IsOneOfBars(const wxWindow *win) const
@@ -350,7 +333,7 @@ wxStatusBar* wxFrameBase::CreateStatusBar(int number,
 
     SetStatusBar(OnCreateStatusBar(number, style, id, name));
 
-    return m_frameStatusBar;
+    return m_frameStatusBar.get();
 }
 
 wxStatusBar *wxFrameBase::OnCreateStatusBar(int number,
@@ -423,7 +406,7 @@ bool wxFrameBase::ShowMenuHelp(int menuId)
 void wxFrameBase::SetStatusBar(wxStatusBar *statBar)
 {
     const bool hadBar = m_frameStatusBar != nullptr;
-    m_frameStatusBar = statBar;
+    m_frameStatusBar.reset(statBar);
 
     if ( (m_frameStatusBar != nullptr) != hadBar )
     {
@@ -534,7 +517,7 @@ wxToolBar* wxFrameBase::CreateToolBar(long style,
 
     SetToolBar(OnCreateToolBar(style, id, name));
 
-    return m_frameToolBar;
+    return m_frameToolBar.get();
 }
 
 wxToolBar* wxFrameBase::OnCreateToolBar(long style,
@@ -558,7 +541,7 @@ void wxFrameBase::SetToolBar(wxToolBar *toolbar)
         {
             // we need to assign it to m_frameToolBar for PositionToolBar() to
             // do anything
-            m_frameToolBar = toolbar;
+            m_frameToolBar.reset(toolbar);
             PositionToolBar();
         }
         //else: tricky: do not reset m_frameToolBar yet as otherwise Layout()
@@ -581,7 +564,7 @@ void wxFrameBase::SetToolBar(wxToolBar *toolbar)
 
     // this might have been already done above but it's simpler to just always
     // do it unconditionally instead of testing for whether we already did it
-    m_frameToolBar = toolbar;
+    m_frameToolBar.reset(toolbar);
 }
 
 #endif // wxUSE_TOOLBAR
@@ -625,7 +608,7 @@ void wxFrameBase::AttachMenuBar(wxMenuBar *menubar)
     if ( menubar )
     {
         menubar->Attach((wxFrame *)this);
-        m_frameMenuBar = menubar;
+        m_frameMenuBar.reset(menubar);
     }
 }
 
