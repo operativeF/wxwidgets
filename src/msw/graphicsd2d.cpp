@@ -120,6 +120,8 @@ public:
     {
         wxD2D_VERSION_1_0,
         wxD2D_VERSION_1_1,
+        wxD2D_VERSION_1_2,
+        wxD2D_VERSION_1_3,
         wxD2D_VERSION_NONE
     };
 
@@ -498,9 +500,9 @@ public:
     DECLARE_IUNKNOWN_METHODS;
 
 private:
-    inline static bool ms_isInitialized{true};
     inline static std::vector<std::string> ms_fontList;
-    static wxDirect2DFontKey ms_key;
+    inline static wxDirect2DFontKey ms_key{0};
+    inline static bool ms_isInitialized{true};
 };
 
 BEGIN_IID_TABLE(wxDirect2DFontCollectionLoader)
@@ -509,8 +511,6 @@ ADD_RAW_IID(wxIID_IDWriteFontCollectionLoader)
 END_IID_TABLE;
 
 IMPLEMENT_IUNKNOWN_METHODS(wxDirect2DFontCollectionLoader)
-
-wxDirect2DFontKey wxDirect2DFontCollectionLoader::ms_key(0);
 
 } // anonymous namespace
 
@@ -521,7 +521,7 @@ static IWICImagingFactory* gs_WICImagingFactory = nullptr;
 IWICImagingFactory* wxWICImagingFactory()
 {
     if (gs_WICImagingFactory == nullptr) {
-        HRESULT hr = CoCreateInstance(
+        HRESULT hr = ::CoCreateInstance(
             CLSID_WICImagingFactory,
             nullptr,
             CLSCTX_INPROC_SERVER,
@@ -668,14 +668,13 @@ public:
 
     void ReleaseResources()
     {
-        wxManagedResourceListType::iterator it;
-        for (it = m_resources.begin(); it != m_resources.end(); ++it)
+        for (auto it = m_resources.begin(); it != m_resources.end(); ++it)
         {
             (*it)->ReleaseResource();
         }
 
         // Check that all resources were released
-        for (it = m_resources.begin(); it != m_resources.end(); ++it)
+        for (auto it = m_resources.begin(); it != m_resources.end(); ++it)
         {
             wxCHECK_RET(!(*it)->IsResourceAcquired(), "One or more device-dependent resources failed to release");
         }
@@ -910,12 +909,7 @@ D2D1_COLOR_F wxD2DConvertColour(wxColour colour)
 #if wxD2D_DEVICE_CONTEXT_SUPPORTED
 bool wxD2DCompositionModeSupported(wxCompositionMode compositionMode)
 {
-    if (compositionMode == wxCOMPOSITION_CLEAR || compositionMode == wxCOMPOSITION_INVALID)
-    {
-        return false;
-    }
-
-    return true;
+    return (compositionMode != wxCOMPOSITION_CLEAR) || (compositionMode != wxCOMPOSITION_INVALID);
 }
 
 D2D1_COMPOSITE_MODE wxD2DConvertCompositionMode(wxCompositionMode compositionMode)
@@ -951,12 +945,13 @@ D2D1_COMPOSITE_MODE wxD2DConvertCompositionMode(wxCompositionMode compositionMod
     case wxCOMPOSITION_CLEAR:
         [[fallthrough]];
     case wxCOMPOSITION_INVALID:
+        [[fallthrough]];
+    default: // FIXME: Unknown should never happen. Fix with enum class.
+        wxFAIL_MSG("unknown / unsupported composition mode");
         return D2D1_COMPOSITE_MODE_SOURCE_COPY;
     }
-
-    wxFAIL_MSG("unknown composition mode");
-    return D2D1_COMPOSITE_MODE_SOURCE_COPY;
 }
+
 #endif // wxD2D_DEVICE_CONTEXT_SUPPORTED
 
 // Direct2D 1.1 introduces a new enum for specifying the interpolation quality
@@ -1016,16 +1011,15 @@ wxCOMPtr<ID2D1Geometry> wxD2DConvertRegionToGeometry(ID2D1Factory* direct2dFacto
     // TODO: Use lambdas.
     // Build the array of geometries
     HRESULT hr;
-    ID2D1Geometry** geometries;
+    std::vector<ID2D1Geometry*> geometries;
     int rectCount;
     if ( region.IsEmpty() )
     {
         // Empty region is skipped by iterator
         // so we have to create it in a special way.
         rectCount = 1;
-        geometries = new ID2D1Geometry*[rectCount];
+        geometries.resize(rectCount);
 
-        geometries[0] = nullptr;
         hr = direct2dFactory->CreateRectangleGeometry(
                         D2D1::RectF(0.0F, 0.0F, 0.0F, 0.0F),
                         (ID2D1RectangleGeometry**)(&geometries[0]));
@@ -1035,18 +1029,18 @@ wxCOMPtr<ID2D1Geometry> wxD2DConvertRegionToGeometry(ID2D1Factory* direct2dFacto
     {
         // Count the number of rectangles which compose the region
         wxRegionIterator regionIterator(region);
-        rectCount = 0;
+        std::size_t rectCount{0};
+
+        // FIXME: Isn't it better just to get m_numRect instead of iterating?
         while(regionIterator++)
             rectCount++;
 
-        geometries = new ID2D1Geometry*[rectCount];
+        geometries.resize(rectCount);
         regionIterator.Reset(region);
 
         int i = 0;
         while(regionIterator)
         {
-            geometries[i] = nullptr;
-
             wxRect rect = regionIterator.GetRect();
             rect.SetWidth(rect.GetWidth() + 1);
             rect.SetHeight(rect.GetHeight() + 1);
@@ -1065,18 +1059,13 @@ wxCOMPtr<ID2D1Geometry> wxD2DConvertRegionToGeometry(ID2D1Factory* direct2dFacto
     wxCOMPtr<ID2D1GeometryGroup> resultGeometry;
     hr = direct2dFactory->CreateGeometryGroup(
         D2D1_FILL_MODE_WINDING,
-        geometries,
-        rectCount,
+        &geometries[0],
+        geometries.size(),
         &resultGeometry);
     wxFAILED_HRESULT_MSG(hr);
 
     // Cleanup temporaries
-    for (int i = 0; i < rectCount; ++i)
-    {
-        geometries[i]->Release();
-    }
-
-    delete[] geometries;
+    std::for_each(geometries.begin(), geometries.end(), [](auto&& geometry){ geometry->Release(); });
 
     return wxCOMPtr<ID2D1Geometry>(resultGeometry);
 }
@@ -1087,7 +1076,6 @@ public:
     explicit wxD2DOffsetHelper(wxGraphicsContext* g)
         : m_context(g)
     {
-        m_offset = 0;
         if (m_context->ShouldOffset())
         {
             const wxGraphicsMatrix matrix(m_context->GetTransform());
@@ -1100,7 +1088,7 @@ public:
 
     ~wxD2DOffsetHelper()
     {
-        if (m_offset > 0)
+        if (m_offset > 0.0)
         {
             m_context->Translate(-m_offset, -m_offset);
         }
@@ -1108,7 +1096,7 @@ public:
 
 private:
     wxGraphicsContext* m_context;
-    double m_offset;
+    double m_offset{0.0};
 };
 
 bool operator==(const D2D1::Matrix3x2F& lhs, const D2D1::Matrix3x2F& rhs)
@@ -2101,9 +2089,10 @@ void wxD2DPathData::GetBox(double* x, double* y, double* w, double *h) const
 
 bool wxD2DPathData::Contains(double x, double y, wxPolygonFillMode fillStyle) const
 {
-    BOOL result;
     const D2D1_FILL_MODE fillMode = (fillStyle == wxPolygonFillMode::OddEven) ? D2D1_FILL_MODE_ALTERNATE : D2D1_FILL_MODE_WINDING;
     ID2D1Geometry *curGeometry = GetFullGeometry(fillMode);
+
+    BOOL result;
     curGeometry->FillContainsPoint(D2D1::Point2F(gsl::narrow_cast<float>(x), gsl::narrow_cast<float>(y)), D2D1::Matrix3x2F::Identity(), &result);
     return result != FALSE;
 }
@@ -2686,10 +2675,13 @@ public:
         m_gradientStops.reserve(stopCount);
         for ( int i = 0; i < stopCount; ++i )
         {
-            D2D1_GRADIENT_STOP stop;
-            stop.position = gradientStops.Item(i).GetPosition();
-            stop.color = wxD2DConvertColour(gradientStops.Item(i).GetColour());
-            m_gradientStops.push_back(stop);
+            D2D1_GRADIENT_STOP stop
+            {
+                .position = gradientStops.Item(i).GetPosition(),
+                .color = wxD2DConvertColour(gradientStops.Item(i).GetColour())
+            };
+
+            m_gradientStops.emplace_back(stop);
         }
     }
 
@@ -2997,10 +2989,8 @@ wxBrushStyle wxConvertPenStyleToBrushStyle(wxPenStyle penStyle)
     case wxPenStyle::VerticalHatch:
         return wxBrushStyle::VerticalHatch;
     default:
-        break;
+        return wxBrushStyle::Solid;
     }
-
-    return wxBrushStyle::Solid;
 }
 
 //-----------------------------------------------------------------------------
@@ -3111,14 +3101,11 @@ void wxD2DPenData::CreateStrokeStyle(ID2D1Factory* const direct2dfactory)
     const D2D1_LINE_JOIN lineJoin = wxD2DConvertPenJoin(m_penInfo.GetJoin());
     const D2D1_DASH_STYLE dashStyle = wxD2DConvertPenStyle(m_penInfo.GetStyle());
 
-    int dashCount = 0;
-    FLOAT* dashes = nullptr;
+    int dashCount{m_penInfo.GetDashCount()};
+    auto dashes = std::make_unique<FLOAT[]>(dashCount);
 
     if (dashStyle == D2D1_DASH_STYLE_CUSTOM)
     {
-        dashCount = m_penInfo.GetDashCount();
-        dashes = new FLOAT[dashCount];
-
         for (int i = 0; i < dashCount; ++i)
         {
             dashes[i] = m_penInfo.GetDash()[i];
@@ -3128,10 +3115,8 @@ void wxD2DPenData::CreateStrokeStyle(ID2D1Factory* const direct2dfactory)
 
     direct2dfactory->CreateStrokeStyle(
         D2D1::StrokeStyleProperties(capStyle, capStyle, capStyle, lineJoin, 0, dashStyle, 0.0f),
-        dashes, dashCount,
+        dashes.get(), dashCount,
         &m_strokeStyle);
-
-    delete[] dashes;
 }
 
 void wxD2DPenData::SetWidth(const wxGraphicsContext* context)
@@ -3157,7 +3142,7 @@ FLOAT wxD2DPenData::GetWidth()
 
 bool wxD2DPenData::IsZeroWidth() const
 {
-    return m_penInfo.GetWidth() <= 0;
+    return m_penInfo.GetWidth() <= 0.0;
 }
 
 ID2D1StrokeStyle* wxD2DPenData::GetStrokeStyle()
@@ -3202,10 +3187,8 @@ wxD2DFontData::wxD2DFontData(wxGraphicsRenderer* renderer, const wxFont& font, c
     wxGraphicsObjectRefData(renderer), m_brushData(renderer, wxBrush(color)),
     m_underlined(font.GetUnderlined()), m_strikethrough(font.GetStrikethrough())
 {
-    HRESULT hr;
-
     wxCOMPtr<IDWriteGdiInterop> gdiInterop;
-    hr = wxDWriteFactory()->GetGdiInterop(&gdiInterop);
+    HRESULT hr = wxDWriteFactory()->GetGdiInterop(&gdiInterop);
     wxCHECK_HRESULT_RET(hr);
 
     LOGFONTW logfont;
@@ -3218,8 +3201,7 @@ wxD2DFontData::wxD2DFontData(wxGraphicsRenderer* renderer, const wxFont& font, c
         // The length of the font name must not exceed LF_FACESIZE TCHARs,
         // including the terminating NULL.
         std::wstring name = font.GetFaceName().substr(0, WXSIZEOF(logfont.lfFaceName)-1);
-        size_t i{ 0 };
-        for (auto&& ch : name)
+        for(std::size_t i{0}; auto&& ch : name)
         {
             logfont.lfFaceName[i] = ch;
             ++i;
@@ -3258,15 +3240,17 @@ wxD2DFontData::wxD2DFontData(wxGraphicsRenderer* renderer, const wxFont& font, c
         }
         wxCHECK_RET(gs_pPrivateFontCollection != nullptr, "No custom font collection created");
 
-        UINT32 fontIdx = ~0U;
-        BOOL fontFound = FALSE;
+        UINT32 fontIdx{std::numeric_limits<std::uint32_t>::max()};
+        BOOL fontFound{FALSE};
         hr = gs_pPrivateFontCollection->FindFamilyName(logfont.lfFaceName, &fontIdx, &fontFound);
         wxCHECK_HRESULT_RET(hr);
+
         if ( !fontFound )
         {
             wxFAIL_MSG(wxString::Format("Couldn't find custom font family '%s'", logfont.lfFaceName));
             return;
         }
+
         hr = gs_pPrivateFontCollection->GetFontFamily(fontIdx, &fontFamily);
         wxCHECK_HRESULT_RET(hr);
 
@@ -3308,8 +3292,8 @@ wxD2DFontData::wxD2DFontData(wxGraphicsRenderer* renderer, const wxFont& font, c
     hr = familyNames->GetStringLength(0, &length);
     wxCHECK_HRESULT_RET(hr);
 
-    wchar_t* name = new wchar_t[length+1];
-    hr = familyNames->GetString(0, name, length+1);
+    auto name = std::make_unique<wchar_t[]>(length + 1);
+    hr = familyNames->GetString(0, name.get(), length + 1);
     wxCHECK_HRESULT_RET(hr);
 
     FLOAT fontSize = !dpi.y
@@ -3317,7 +3301,7 @@ wxD2DFontData::wxD2DFontData(wxGraphicsRenderer* renderer, const wxFont& font, c
         : FLOAT(font.GetFractionalPointSize() * dpi.y / 72);
 
     hr = wxDWriteFactory()->CreateTextFormat(
-        name,
+        name.get(),
         fontCollection,
         m_font->GetWeight(),
         m_font->GetStyle(),
@@ -3326,14 +3310,12 @@ wxD2DFontData::wxD2DFontData(wxGraphicsRenderer* renderer, const wxFont& font, c
         L"en-us",
         &m_textFormat);
 
-    delete[] name;
-
     wxCHECK_HRESULT_RET(hr);
 }
 
 wxCOMPtr<IDWriteTextLayout> wxD2DFontData::CreateTextLayout(std::string_view text) const
 {
-    static constexpr FLOAT MAX_WIDTH = std::numeric_limits<float>::max();
+    static constexpr FLOAT MAX_WIDTH  = std::numeric_limits<float>::max();
     static constexpr FLOAT MAX_HEIGHT = std::numeric_limits<float>::max();
 
     HRESULT hr;
@@ -3420,15 +3402,7 @@ public:
     //                      draws images.
     virtual bool SetCompositionMode(wxCompositionMode compositionMode)
     {
-        if (compositionMode == wxCOMPOSITION_DEST ||
-            compositionMode == wxCOMPOSITION_OVER)
-        {
-            // There's nothing we can do but notify the caller the composition
-            // mode is supported
-            return true;
-        }
-
-        return false;
+        return compositionMode == wxCOMPOSITION_DEST || compositionMode == wxCOMPOSITION_OVER;
     }
 };
 
@@ -3512,15 +3486,13 @@ protected:
     {
         wxCOMPtr<ID2D1HwndRenderTarget> renderTarget;
 
-        HRESULT result;
-
         const RECT clientRect = wxGetClientRect(m_hwnd);
 
         const D2D1_SIZE_U size = D2D1::SizeU(
             clientRect.right - clientRect.left,
             clientRect.bottom - clientRect.top);
 
-        result = m_factory->CreateHwndRenderTarget(
+        HRESULT result = m_factory->CreateHwndRenderTarget(
             D2D1::RenderTargetProperties(),
             D2D1::HwndRenderTargetProperties(m_hwnd, size),
             &renderTarget);
@@ -3584,8 +3556,6 @@ protected:
     // Adapted from http://msdn.microsoft.com/en-us/library/windows/desktop/hh780339%28v=vs.85%29.aspx
     void DoAcquireResource() override
     {
-        HRESULT hr;
-
         // This flag adds support for surfaces with a different color channel ordering than the API default.
         // You need it for compatibility with Direct2D.
         UINT creationFlags = D3D11_CREATE_DEVICE_BGRA_SUPPORT;
@@ -3596,6 +3566,9 @@ protected:
         // description.  All apps are assumed to support 9.1 unless otherwise stated.
         D3D_FEATURE_LEVEL featureLevels[] =
         {
+            D3D_FEATURE_LEVEL_12_0,
+            D3D_FEATURE_LEVEL_11_3,
+            D3D_FEATURE_LEVEL_11_2,
             D3D_FEATURE_LEVEL_11_1,
             D3D_FEATURE_LEVEL_11_0,
             D3D_FEATURE_LEVEL_10_1,
@@ -3609,7 +3582,7 @@ protected:
         wxCOMPtr<ID3D11Device> device;
         wxCOMPtr<ID3D11DeviceContext> context;
 
-        hr = D3D11CreateDevice(
+        HRESULT hr = D3D11CreateDevice(
             NULL,                    // specify null to use the default adapter
             D3D_DRIVER_TYPE_HARDWARE,
             0,
@@ -3644,8 +3617,6 @@ protected:
 private:
     void AttachSurface()
     {
-        HRESULT hr;
-
         // Allocate a descriptor.
         DXGI_SWAP_CHAIN_DESC1 swapChainDesc = {0};
         swapChainDesc.Width = 0;
@@ -3662,7 +3633,7 @@ private:
 
         // Identify the physical adapter (GPU or card) this device is runs on.
         wxCOMPtr<IDXGIAdapter> dxgiAdapter;
-        hr = m_dxgiDevice->GetAdapter(&dxgiAdapter);
+        HRESULT hr = m_dxgiDevice->GetAdapter(&dxgiAdapter);
         wxCHECK_HRESULT_RET(hr);
 
         // Get the factory object that created the DXGI device.
@@ -3689,8 +3660,8 @@ private:
         hr = m_swapChain->GetBuffer(0, IID_PPV_ARGS(&backBuffer));
         wxCHECK_HRESULT_RET(hr);
 
-        FLOAT dpiX, dpiY;
-        dpiX = dpiY = (FLOAT)::GetDpiForWindow(m_hwnd);
+        FLOAT dpiX{static_cast<FLOAT>(::GetDpiForWindow(m_hwnd))};
+        FLOAT dpiY{dpiX};
 
         // Now we set up the Direct2D render target bitmap linked to the swapchain.
         // Whenever we render to this bitmap, it is directly rendered to the
@@ -3718,7 +3689,7 @@ private:
 
     ~wxD2DDeviceContextResourceHolder()
     {
-        DXGI_PRESENT_PARAMETERS params = { 0 };
+        DXGI_PRESENT_PARAMETERS params{0};
         m_swapChain->Present1(1, 0, &params);
     }
 
@@ -3998,7 +3969,7 @@ private:
 
     struct LayerData
     {
-        LayerType type{ CLIP_LAYER };
+        LayerType type{CLIP_LAYER};
         D2D1_LAYER_PARAMETERS params{};
         wxCOMPtr<ID2D1Layer> layer;
         wxCOMPtr<ID2D1Geometry> geometry;
@@ -4016,14 +3987,21 @@ private:
     };
 
     ID2D1Factory* m_direct2dFactory;
+
     std::shared_ptr<wxD2DRenderTargetResourceHolder> m_renderTargetHolder;
     std::stack<StateData> m_stateStack;
     std::stack<LayerData> m_layers;
-    ID2D1RenderTarget* m_cachedRenderTarget;
+
+    ID2D1RenderTarget* m_cachedRenderTarget{nullptr};
     D2D1::Matrix3x2F m_initTransform;
+
     // Clipping box
-    bool m_isClipBoxValid;
-    double m_clipX1, m_clipY1, m_clipX2, m_clipY2;
+    bool m_isClipBoxValid{false};
+
+    double m_clipX1{0.0};
+    double m_clipY1{0.0};
+    double m_clipX2{0.0};
+    double m_clipY2{0.0};
 };
 
 //-----------------------------------------------------------------------------
@@ -4045,14 +4023,8 @@ wxD2DContext::wxD2DContext(wxGraphicsRenderer* renderer,
     m_width = r.right - r.left;
     m_height = r.bottom - r.top;
     
-    m_cachedRenderTarget = nullptr;
-    m_composition = wxCOMPOSITION_OVER;
     m_renderTargetHolder->Bind(this);
-    m_enableOffset = true;
-    m_isClipBoxValid = false;
-    m_clipX1 = m_clipY1 = m_clipX2 = m_clipY2 = 0.0;
     EnsureInitialized();
-
 }
 
 wxD2DContext::wxD2DContext(wxGraphicsRenderer* renderer,
@@ -4070,13 +4042,7 @@ wxD2DContext::wxD2DContext(wxGraphicsRenderer* renderer,
         m_height = dcSize.y;
     }
 
-    
-    m_cachedRenderTarget = nullptr;
-    m_composition = wxCOMPOSITION_OVER;
     m_renderTargetHolder->Bind(this);
-    m_enableOffset = true;
-    m_isClipBoxValid = false;
-    m_clipX1 = m_clipY1 = m_clipX2 = m_clipY2 = 0.0;
     EnsureInitialized();
 
 }
@@ -4089,12 +4055,7 @@ wxD2DContext::wxD2DContext(wxGraphicsRenderer* renderer, ID2D1Factory* direct2dF
     m_width = image.GetWidth();
     m_height = image.GetHeight();
     
-    m_cachedRenderTarget = nullptr;
-    m_composition = wxCOMPOSITION_OVER;
     m_renderTargetHolder->Bind(this);
-    m_enableOffset = true;
-    m_isClipBoxValid = false;
-    m_clipX1 = m_clipY1 = m_clipX2 = m_clipY2 = 0.0;
     EnsureInitialized();
 
 }
@@ -4104,17 +4065,9 @@ wxD2DContext::wxD2DContext(wxGraphicsRenderer* renderer, ID2D1Factory* direct2dF
     wxGraphicsContext(renderer), m_direct2dFactory(direct2dFactory)
 {
     m_renderTargetHolder = *((std::shared_ptr<wxD2DRenderTargetResourceHolder>*)nativeContext);
-    m_width = 0;
-    m_height = 0;
     
-    m_cachedRenderTarget = nullptr;
-    m_composition = wxCOMPOSITION_OVER;
     m_renderTargetHolder->Bind(this);
-    m_enableOffset = true;
-    m_isClipBoxValid = false;
-    m_clipX1 = m_clipY1 = m_clipX2 = m_clipY2 = 0.0;
     EnsureInitialized();
-
 }
 
 
@@ -4242,16 +4195,16 @@ void wxD2DContext::GetClipBox(double* x, double* y, double* w, double* h)
         // all clipping layers. Bounding box of the final geometry
         // (being intersection of all clipping layers) is a clipping box.
 
-        HRESULT hr;
         wxCOMPtr<ID2D1RectangleGeometry> rectGeometry;
-        hr = m_direct2dFactory->CreateRectangleGeometry(
-                    D2D1::RectF(0.0F, 0.0F, (FLOAT)m_width, (FLOAT)m_height),
-                    &rectGeometry);
+        HRESULT hr = m_direct2dFactory->CreateRectangleGeometry(
+                        D2D1::RectF(0.0F, 0.0F, (FLOAT)m_width, (FLOAT)m_height),
+                        &rectGeometry);
         wxCHECK_HRESULT_RET(hr);
 
         wxCOMPtr<ID2D1Geometry> clipGeometry(rectGeometry);
 
         std::stack<LayerData> layers(m_layers);
+
         while( !layers.empty() )
         {
             LayerData ld = layers.top();
@@ -4310,6 +4263,7 @@ void wxD2DContext::GetClipBox(double* x, double* y, double* w, double* h)
         FLOAT clipArea;
         hr = clipGeometry->ComputeArea(currTransform, &clipArea);
         wxCHECK_HRESULT_RET(hr);
+
         if ( clipArea <= std::numeric_limits<float>::min() )
         {
             bounds.left = bounds.top = bounds.right = bounds.bottom = 0.0F;
@@ -4395,6 +4349,7 @@ bool wxD2DContext::SetAntialiasMode(wxAntialiasMode antialias)
 
     D2D1_ANTIALIAS_MODE antialiasMode;
     D2D1_TEXT_ANTIALIAS_MODE textAntialiasMode;
+
     switch ( antialias )
     {
     case wxAntialiasMode::Default:
@@ -4661,8 +4616,7 @@ void wxD2DContext::PopState()
     }
 
     // Retrieve state data.
-    StateData state;
-    state = m_stateStack.top();
+    StateData state = m_stateStack.top();
     m_stateStack.pop();
 
     // Restore all saved layers.
@@ -4730,7 +4684,8 @@ bool wxD2DContext::ShouldOffset() const
 
     // no offset if overall scale is not odd integer
     const wxGraphicsMatrix matrix(GetTransform());
-    double x = GetContentScaleFactor(), y = x;
+    double x = GetContentScaleFactor();
+    double y = x;
     matrix.TransformDistance(&x, &y);
     // FIXME: Double equality
     if (!(std::fmod(std::min(std::fabs(x), std::fabs(y)), 2.0) == 1.0))
@@ -4881,8 +4836,8 @@ void wxD2DContext::DrawEllipse(double x, double y, double w, double h)
 
     D2D1_ELLIPSE ellipse = {
         { (FLOAT)(x + w / 2), (FLOAT)(y + h / 2) }, // center point
-        (FLOAT)(w / 2),                      // radius x
-        (FLOAT)(h / 2)                       // radius y
+          (FLOAT)(w / 2),                      // radius x
+          (FLOAT)(h / 2)                       // radius y
     };
 
     if (!m_brush.IsNull())
@@ -5316,17 +5271,16 @@ wxGraphicsFont wxD2DRenderer::CreateFontAtDPI(const wxFont& font,
                                               const wxRealPoint& dpi,
                                               const wxColour& col)
 {
-    wxD2DFontData* fontData = new wxD2DFontData(this, font, dpi, col);
+    auto fontData = std::make_unique<wxD2DFontData>(this, font, dpi, col);
     if ( !fontData->GetFont() )
     {
         // Apparently a non-TrueType font is given and hence
         // corresponding DirectWrite font couldn't be created.
-        delete fontData;
         return wxNullGraphicsFont;
     }
 
     wxGraphicsFont graphicsFont;
-    graphicsFont.SetRefData(fontData);
+    graphicsFont.SetRefData(fontData.release());
 
     return graphicsFont;
 }
@@ -5363,6 +5317,12 @@ void wxD2DRenderer::GetVersion(int* major, int* minor, int* micro) const
                 break;
             case wxDirect2D::wxD2D_VERSION_1_1:
                 *minor = 1;
+                break;
+            case wxDirect2D::wxD2D_VERSION_1_2:
+                *minor = 2;
+                break;
+            case wxDirect2D::wxD2D_VERSION_1_3:
+                *minor = 3;
                 break;
             case wxDirect2D::wxD2D_VERSION_NONE:
                 // This is not supposed to happen, but we handle this value in

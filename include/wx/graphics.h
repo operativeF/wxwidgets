@@ -880,9 +880,9 @@ protected:
     wxGraphicsBrush m_brush;
     wxGraphicsFont m_font;
     wxAntialiasMode m_antialias;
-    wxCompositionMode m_composition;
+    wxCompositionMode m_composition{wxCOMPOSITION_OVER};
     wxInterpolationQuality m_interpolation;
-    bool m_enableOffset{};
+    bool m_enableOffset{true};
 
     // implementations of overloaded public functions: we use different names
     // for them to avoid the virtual function hiding problems in the derived
