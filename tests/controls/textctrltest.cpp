@@ -16,6 +16,8 @@
 #ifndef WX_PRECOMP
     #include "wx/app.h"
     #include "wx/textctrl.h"
+
+    #include <fmt/core.h>
 #endif // WX_PRECOMP
 
 
@@ -500,6 +502,25 @@ static void DoXYToPositionMultiLine(long style)
             CHECK_EQ(ref_pos_4[y][x], p);
         }
 }
+
+constexpr int lenPattern = 100;
+
+// Pattern for the line.
+consteval std::array<unsigned char, lenPattern> getLinePattern()
+{
+    std::array<unsigned char, lenPattern> lpArray{};
+
+    for (int i = 0; i < lpArray.size() - 1; i++)
+    {
+        lpArray[i] = unsigned char('0' + i % 10);
+    }
+
+    lpArray[lpArray.size() - 1] = unsigned char('\0');
+
+    return lpArray;
+}
+
+constexpr auto linePattern = getLinePattern();
 
 // ----------------------------------------------------------------------------
 // tests themselves
@@ -1092,29 +1113,18 @@ TEST_CASE_FIXTURE(TextCtrlTest, "Text control test")
             m_entry = CreateText(wxTE_MULTILINE | wxTE_DONTWRAP);
 
             const int numLines = 1000;
-            const int lenPattern = 100;
-
-            // Pattern for the line.
-            wxChar linePattern[lenPattern + 1];
-            for (int i = 0; i < lenPattern - 1; i++)
-            {
-                linePattern[i] = wxChar('0' + i % 10);
-            }
-            linePattern[WXSIZEOF(linePattern) - 1] = wxChar('\0');
 
             // Fill the control.
             m_entry->SetMaxLength(15000);
             for (int i = 0; i < numLines; i++)
             {
-                m_entry->AppendText(wxString::Format(wxT("[%3d] %s\n"), i, linePattern));
+                m_entry->AppendText(fmt::format("[{:3d}] {}\n", i, linePattern.data()));
             }
 
             // Check the content.
             for (int i = 0; i < numLines; i++)
             {
-                wxString pattern = wxString::Format(wxT("[%3d] %s"), i, linePattern);
-                wxString line = m_entry->GetLineText(i);
-                CHECK_EQ(line, pattern);
+                CHECK_EQ(m_entry->GetLineText(i), fmt::format("[{:3d}] {}", i, linePattern.data()));
         }
 #endif // __WXMSW__
     }

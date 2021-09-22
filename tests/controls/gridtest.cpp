@@ -330,18 +330,18 @@ protected:
     {
         if ( !m_tempGrid )
         {
-            m_tempGrid = new TestableGrid(wxTheApp->GetTopWindow());
+            m_tempGrid = std::make_unique<TestableGrid>(wxTheApp->GetTopWindow());
             m_tempGrid->Hide();
         }
 
-        return m_tempGrid;
+        return m_tempGrid.get();
     }
 
-    TestableGrid *m_grid;
+    std::unique_ptr<TestableGrid> m_grid;
 
     // Temporary/scratch grid filled with expected content, used when
     // comparing against m_grid.
-    TestableGrid *m_tempGrid;
+    std::unique_ptr<TestableGrid> m_tempGrid;
 
     GridTestCase(const GridTestCase&) = delete;
     GridTestCase& operator=(const GridTestCase&) = delete;
@@ -349,7 +349,7 @@ protected:
 
 GridTestCase::GridTestCase() : m_tempGrid(nullptr)
 {
-    m_grid = new TestableGrid(wxTheApp->GetTopWindow());
+    m_grid = std::make_unique<TestableGrid>(wxTheApp->GetTopWindow());
     m_grid->CreateGrid(10, 2);
     // FIXME: Do not hard code this, it should be relative to screen density.
     m_grid->SetSize(wxSize{500, 300});
@@ -375,9 +375,6 @@ GridTestCase::~GridTestCase()
     wxWindow* const win = wxWindow::GetCapture();
     if ( win )
         win->ReleaseMouse();
-
-    wxDELETE(m_grid);
-    delete m_tempGrid;
 }
 
 TEST_CASE_FIXTURE(GridTestCase, "Grid::CellEdit")
@@ -388,9 +385,9 @@ TEST_CASE_FIXTURE(GridTestCase, "Grid::CellEdit")
     if ( !EnableUITests() )
         return;
 
-    EventCounter changing(m_grid, wxEVT_GRID_CELL_CHANGING);
-    EventCounter changed(m_grid, wxEVT_GRID_CELL_CHANGED);
-    EventCounter created(m_grid, wxEVT_GRID_EDITOR_CREATED);
+    EventCounter changing(m_grid.get(), wxEVT_GRID_CELL_CHANGING);
+    EventCounter changed(m_grid.get(), wxEVT_GRID_CELL_CHANGED);
+    EventCounter created(m_grid.get(), wxEVT_GRID_EDITOR_CREATED);
 
     wxUIActionSimulator sim;
 
@@ -418,10 +415,10 @@ TEST_CASE_FIXTURE(GridTestCase, "Grid::CellEdit")
 TEST_CASE_FIXTURE(GridTestCase, "Grid::CellClick")
 {
 #if wxUSE_UIACTIONSIMULATOR
-    EventCounter lclick(m_grid, wxEVT_GRID_CELL_LEFT_CLICK);
-    EventCounter ldclick(m_grid, wxEVT_GRID_CELL_LEFT_DCLICK);
-    EventCounter rclick(m_grid, wxEVT_GRID_CELL_RIGHT_CLICK);
-    EventCounter rdclick(m_grid, wxEVT_GRID_CELL_RIGHT_DCLICK);
+    EventCounter lclick(m_grid.get(), wxEVT_GRID_CELL_LEFT_CLICK);
+    EventCounter ldclick(m_grid.get(), wxEVT_GRID_CELL_LEFT_DCLICK);
+    EventCounter rclick(m_grid.get(), wxEVT_GRID_CELL_RIGHT_CLICK);
+    EventCounter rdclick(m_grid.get(), wxEVT_GRID_CELL_RIGHT_DCLICK);
 
 
     wxUIActionSimulator sim;
@@ -466,7 +463,7 @@ TEST_CASE_FIXTURE(GridTestCase, "Grid::CellClick")
 TEST_CASE_FIXTURE(GridTestCase, "Grid::ReorderedColumnsCellClick")
 {
 #if wxUSE_UIACTIONSIMULATOR
-    EventCounter click(m_grid, wxEVT_GRID_CELL_LEFT_CLICK);
+    EventCounter click(m_grid.get(), wxEVT_GRID_CELL_LEFT_CLICK);
 
     wxUIActionSimulator sim;
 
@@ -493,7 +490,7 @@ TEST_CASE_FIXTURE(GridTestCase, "Grid::ReorderedColumnsCellClick")
 TEST_CASE_FIXTURE(GridTestCase, "Grid::CellSelect")
 {
 #if wxUSE_UIACTIONSIMULATOR
-    EventCounter cell(m_grid, wxEVT_GRID_SELECT_CELL);
+    EventCounter cell(m_grid.get(), wxEVT_GRID_SELECT_CELL);
 
     wxUIActionSimulator sim;
 
@@ -536,10 +533,10 @@ TEST_CASE_FIXTURE(GridTestCase, "Grid::LabelClick")
     SUBCASE("Native header") { m_grid->UseNativeColHeader(); }
     SUBCASE("Native labels") { m_grid->SetUseNativeColLabels(); }
 
-    EventCounter lclick(m_grid, wxEVT_GRID_LABEL_LEFT_CLICK);
-    EventCounter ldclick(m_grid, wxEVT_GRID_LABEL_LEFT_DCLICK);
-    EventCounter rclick(m_grid, wxEVT_GRID_LABEL_RIGHT_CLICK);
-    EventCounter rdclick(m_grid, wxEVT_GRID_LABEL_RIGHT_DCLICK);
+    EventCounter lclick(m_grid.get(), wxEVT_GRID_LABEL_LEFT_CLICK);
+    EventCounter ldclick(m_grid.get(), wxEVT_GRID_LABEL_LEFT_DCLICK);
+    EventCounter rclick(m_grid.get(), wxEVT_GRID_LABEL_RIGHT_CLICK);
+    EventCounter rdclick(m_grid.get(), wxEVT_GRID_LABEL_RIGHT_DCLICK);
 
     wxUIActionSimulator sim;
 
@@ -594,7 +591,7 @@ TEST_CASE_FIXTURE(GridTestCase, "Grid::SortClick")
 
     m_grid->SetSortingColumn(0);
 
-    EventCounter sort(m_grid, wxEVT_GRID_COL_SORT);
+    EventCounter sort(m_grid.get(), wxEVT_GRID_COL_SORT);
 
     wxUIActionSimulator sim;
 
@@ -626,8 +623,8 @@ TEST_CASE_FIXTURE(GridTestCase, "Grid::Size")
         return;
 #endif
 
-    EventCounter colsize(m_grid, wxEVT_GRID_COL_SIZE);
-    EventCounter rowsize(m_grid, wxEVT_GRID_ROW_SIZE);
+    EventCounter colsize(m_grid.get(), wxEVT_GRID_COL_SIZE);
+    EventCounter rowsize(m_grid.get(), wxEVT_GRID_ROW_SIZE);
 
     wxUIActionSimulator sim;
 
@@ -664,7 +661,7 @@ TEST_CASE_FIXTURE(GridTestCase, "Grid::RangeSelect")
     if ( !EnableUITests() )
         return;
 
-    EventCounter select(m_grid, wxEVT_GRID_RANGE_SELECTED);
+    EventCounter select(m_grid.get(), wxEVT_GRID_RANGE_SELECTED);
 
     wxUIActionSimulator sim;
 
@@ -1299,7 +1296,7 @@ TEST_CASE_FIXTURE(GridTestCase, "Grid::Editable")
         return;
 
     //As the grid is not editable we shouldn't create an editor
-    EventCounter created(m_grid, wxEVT_GRID_EDITOR_CREATED);
+    EventCounter created(m_grid.get(), wxEVT_GRID_EDITOR_CREATED);
 
     wxUIActionSimulator sim;
 
@@ -1329,7 +1326,7 @@ TEST_CASE_FIXTURE(GridTestCase, "Grid::ReadOnly")
         return;
 
     //As the cell is readonly we shouldn't create an editor
-    EventCounter created(m_grid, wxEVT_GRID_EDITOR_CREATED);
+    EventCounter created(m_grid.get(), wxEVT_GRID_EDITOR_CREATED);
 
     wxUIActionSimulator sim;
 
@@ -1400,7 +1397,7 @@ TEST_CASE_FIXTURE(GridTestCase, "Grid::WindowAsEditorControl")
     attr->SetEditor(new TestEditor());
     m_grid->SetAttr(1, 1, attr);
 
-    EventCounter created(m_grid, wxEVT_GRID_EDITOR_CREATED);
+    EventCounter created(m_grid.get(), wxEVT_GRID_EDITOR_CREATED);
 
     wxUIActionSimulator sim;
 
@@ -1541,7 +1538,7 @@ TEST_CASE_FIXTURE(GridTestCase, "Grid::AutoSizeColumn")
     const int margin = m_grid->FromDIP(10);
 
     wxGridCellAttrPtr attr(m_grid->GetOrCreateCellAttr(0, 0));
-    wxGridCellRendererPtr renderer(attr->GetRenderer(m_grid, 0, 0));
+    wxGridCellRendererPtr renderer(attr->GetRenderer(m_grid.get(), 0, 0));
     REQUIRE(renderer);
 
     wxClientDC dcCell(m_grid->GetGridWindow());
@@ -1751,7 +1748,7 @@ TEST_CASE_FIXTURE(GridTestCase,
 
     SUBCASE("Sanity checks")
     {
-        FitGridToMulticell(m_grid, multi);
+        FitGridToMulticell(m_grid.get(), multi);
         m_grid->SetMulticell(multi);
 
         REQUIRE( static_cast<int>(m_grid->GetCellAttrCount())
@@ -1785,7 +1782,7 @@ TEST_CASE_FIXTURE(GridTestCase,
 
     GIVEN("Basic column insertions")
     {
-        FitGridToMulticell(m_grid, multi);
+        FitGridToMulticell(m_grid.get(), multi);
         m_grid->SetMulticell(multi);
 
         insertions = 2;
@@ -1820,7 +1817,7 @@ TEST_CASE_FIXTURE(GridTestCase,
 
     GIVEN("Basic row insertions")
     {
-        FitGridToMulticell(m_grid, multi);
+        FitGridToMulticell(m_grid.get(), multi);
         m_grid->SetMulticell(multi);
 
         const std::array<int, 3> insertionCounts = {1, 2, multi.rows};
@@ -1898,7 +1895,7 @@ TEST_CASE_FIXTURE(GridTestCase,
 
     GIVEN("Row tests")
     {
-        FitGridToMulticell(m_grid, multi);
+        FitGridToMulticell(m_grid.get(), multi);
         m_grid->SetMulticell(multi);
 
         WHEN("deleting any rows, at main")
@@ -1933,7 +1930,7 @@ TEST_CASE_FIXTURE(GridTestCase,
 
     GIVEN("Column tests")
     {
-        FitGridToMulticell(m_grid, multi);
+        FitGridToMulticell(m_grid.get(), multi);
         m_grid->SetMulticell(multi);
 
         WHEN("deleting one column, just before main")
