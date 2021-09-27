@@ -445,7 +445,7 @@ void wxGraphicsPathData::AddArcToPoint( double x1, double y1 , double x2, double
 {
     wxPoint2DDouble current;
     GetCurrentPoint(&current.m_x, &current.m_y);
-    if ( current == wxPoint(0, 0) )
+    if ( current == wxPoint2DDouble{0, 0} )
     {
         // (0, 0) is returned by GetCurrentPoint() also when the last point is not yet actually set,
         // so we should reposition it to (0, 0) to be sure that a last point is initially set.
@@ -456,11 +456,11 @@ void wxGraphicsPathData::AddArcToPoint( double x1, double y1 , double x2, double
     const wxPoint2DDouble p2(x2, y2);
 
     wxPoint2DDouble v1 = current - p1;
-    const double v1Length = v1.GetVectorLength();
+    const double v1Length = GetVectorLength(v1);
     wxPoint2DDouble v2 = p2 - p1;
-    const double v2Length = v2.GetVectorLength();
+    const double v2Length = GetVectorLength(v2);
 
-    double alpha = v1.GetVectorAngle() - v2.GetVectorAngle();
+    double alpha = GetVectorAngle(v1) - GetVectorAngle(v2);
     // Reduce angle value to the range [0..180] degrees.
     if ( alpha < 0 )
         alpha = 360 + alpha;
@@ -480,21 +480,21 @@ void wxGraphicsPathData::AddArcToPoint( double x1, double y1 , double x2, double
     }
 
     // Determine spatial relation between the vectors.
-    bool drawClockwiseArc = v1.GetCrossProduct(v2) < 0;
+    bool drawClockwiseArc = VectorCrossProduct(v1, v2) < 0;
 
     alpha = wxDegToRad(alpha);
     const double distT = r / std::sin(alpha) * (1.0 + std::cos(alpha)); // = r / tan(a/2) =  r / sin(a/2) * cos(a/2)
     const double distC = r / std::sin(alpha / 2.0);
     // Calculate tangential points
-    v1.Normalize();
-    v2.Normalize();
+    Normalize(v1);
+    Normalize(v2);
     const wxPoint2DDouble t1 = distT*v1 + p1;
     const wxPoint2DDouble t2 = distT*v2 + p1;
     // Calculate the angle bisector vector
     // (because central point is located on the bisector).
     wxPoint2DDouble v = v1 + v2;
-    if ( v.GetVectorLength() > 0 )
-        v.Normalize();
+    if ( GetVectorLength(v) > 0 )
+        Normalize(v);
     // Calculate center of the arc
     const wxPoint2DDouble c = distC*v + p1;
     // Calculate normal vectors at tangential points
@@ -502,8 +502,8 @@ void wxGraphicsPathData::AddArcToPoint( double x1, double y1 , double x2, double
     const wxPoint2DDouble nv1 = t1 - c;
     const wxPoint2DDouble nv2 = t2 - c;
     // Calculate start and end angle of the arc.
-    const double a1 = nv1.GetVectorAngle();
-    const double a2 = nv2.GetVectorAngle();
+    const double a1 = GetVectorAngle(nv1);
+    const double a2 = GetVectorAngle(nv2);
 
     AddLineToPoint(t1.m_x, t1.m_y);
     AddArc(c.m_x, c.m_y, r, wxDegToRad(a1), wxDegToRad(a2), drawClockwiseArc);

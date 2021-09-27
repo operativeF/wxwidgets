@@ -34,450 +34,204 @@ enum wxOutCode
     wxOutBottom = 0x04
 };
 
-class WXDLLIMPEXP_CORE wxPoint2DInt
+template<typename NumericalT>
+struct WXDLLIMPEXP_CORE wxPoint2D
 {
-public :
-    inline wxPoint2DInt();
-    inline wxPoint2DInt( std::int32_t x , std::int32_t y );
-    inline wxPoint2DInt( const wxPoint &pt );
-    // default copy ctor and copy-assign operator are OK
+    using value_type = NumericalT;
 
-    // noops for this class, just return the coords
-    inline void GetFloor( std::int32_t *x , std::int32_t *y ) const;
-    inline void GetRounded( std::int32_t *x , std::int32_t *y ) const;
+    constexpr wxPoint2D() noexcept {}
 
-    inline double GetVectorLength() const;
-           double GetVectorAngle() const;
-    inline void SetVectorLength( double length );
-           void SetVectorAngle( double degrees );
-    // set the vector length to 1.0, preserving the angle
-    inline void Normalize();
+    constexpr wxPoint2D(const wxPoint& pt) noexcept : m_x(pt.x), m_y(pt.y) {}
 
-    inline double GetDistance( const wxPoint2DInt &pt ) const;
-    inline double GetDistanceSquare( const wxPoint2DInt &pt ) const;
-    inline std::int32_t GetDotProduct( const wxPoint2DInt &vec ) const;
-    inline std::int32_t GetCrossProduct( const wxPoint2DInt &vec ) const;
+    constexpr wxPoint2D(value_type a, value_type b) noexcept
+        : m_x{a},
+          m_y{b}
+    {
+    }
 
-    // the reflection of this point
-    wxPoint2DInt operator-() const;
+    constexpr operator wxPoint() const noexcept
+    {
+        return wxPoint{m_x, m_y};
+    }
 
-    inline wxPoint2DInt& operator+=(const wxPoint2DInt& pt);
-    inline wxPoint2DInt& operator-=(const wxPoint2DInt& pt);
-    inline wxPoint2DInt& operator*=(const wxPoint2DInt& pt);
-    inline wxPoint2DInt& operator*=(double n);
-    inline wxPoint2DInt& operator*=(std::int32_t n);
-    inline wxPoint2DInt& operator/=(const wxPoint2DInt& pt);
-    inline wxPoint2DInt& operator/=(double n);
-    inline wxPoint2DInt& operator/=(std::int32_t n);
-    inline operator wxPoint() const;
-    inline bool operator==(const wxPoint2DInt& pt) const;
-    inline bool operator!=(const wxPoint2DInt& pt) const;
+    constexpr bool operator==(const wxPoint2D<value_type>& b) const noexcept
+    {
+        return m_x == b.m_x && m_y == b.m_y;
+    }
 
-#if wxUSE_STREAMS
-    void WriteTo( wxDataOutputStream &stream ) const;
-    void ReadFrom( wxDataInputStream &stream );
-#endif // wxUSE_STREAMS
+    constexpr bool operator!=(const wxPoint2D<value_type>& b) const noexcept
+    {
+        return !(*this == b);
+    }
 
-    std::int32_t m_x;
-    std::int32_t m_y;
+    template<typename ScalarT = value_type>
+    constexpr wxPoint2D<value_type>& operator*=(ScalarT val) noexcept
+    {
+        m_x *= val;
+        m_y *= val;
+
+        return *this;
+    }
+
+    
+    template<typename ScalarT = value_type>
+    constexpr wxPoint2D<value_type>& operator/=(ScalarT val) noexcept
+    {
+        m_x /= val;
+        m_y /= val;
+
+        return *this;
+    }
+
+    template<typename NumericalU = value_type>
+    constexpr wxPoint2D<value_type>& operator-=(const wxPoint2D<NumericalU>& val) noexcept
+    {
+        m_x -= val.m_x;
+        m_y -= val.m_y;
+
+        return *this;
+    }
+
+    template<typename NumericalU = value_type>
+    constexpr wxPoint2D<value_type>& operator+=(const wxPoint2D<NumericalU>& val) noexcept
+    {
+        m_x += val.m_x;
+        m_y += val.m_y;
+
+        return *this;
+    }
+
+    constexpr wxPoint2D<value_type> operator-() const noexcept
+    {
+        return {-m_x, -m_y};
+    }
+
+    // TODO: Add fmt stream operators.
+
+    value_type m_x{};
+    value_type m_y{};
 };
 
-inline wxPoint2DInt operator+(const wxPoint2DInt& pt1 , const wxPoint2DInt& pt2);
-inline wxPoint2DInt operator-(const wxPoint2DInt& pt1 , const wxPoint2DInt& pt2);
-inline wxPoint2DInt operator*(const wxPoint2DInt& pt1 , const wxPoint2DInt& pt2);
-inline wxPoint2DInt operator*(std::int32_t n , const wxPoint2DInt& pt);
-inline wxPoint2DInt operator*(double n , const wxPoint2DInt& pt);
-inline wxPoint2DInt operator*(const wxPoint2DInt& pt , std::int32_t n);
-inline wxPoint2DInt operator*(const wxPoint2DInt& pt , double n);
-inline wxPoint2DInt operator/(const wxPoint2DInt& pt1 , const wxPoint2DInt& pt2);
-inline wxPoint2DInt operator/(const wxPoint2DInt& pt , std::int32_t n);
-inline wxPoint2DInt operator/(const wxPoint2DInt& pt , double n);
-
-inline wxPoint2DInt::wxPoint2DInt()
+template<typename NumericalT, typename NumericalU = NumericalT>
+constexpr auto VectorDotProduct(const wxPoint2D<NumericalT>& vecA, const wxPoint2D<NumericalU>& vecB) noexcept
 {
-    m_x = 0;
-    m_y = 0;
+    return vecA.m_x * vecB.m_x + vecA.m_y * vecB.m_y;
 }
 
-inline wxPoint2DInt::wxPoint2DInt( std::int32_t x , std::int32_t y )
+template<typename NumericalT, typename NumericalU = NumericalT>
+constexpr auto VectorCrossProduct(const wxPoint2D<NumericalT>& vecA, const wxPoint2D<NumericalU>& vecB) noexcept
 {
-    m_x = x;
-    m_y = y;
+    return vecA.m_x * vecB.m_y - vecB.m_x * vecA.m_y;
 }
 
-inline wxPoint2DInt::wxPoint2DInt( const wxPoint &pt )
+template<typename NumericalT>
+auto GetVectorLength(const wxPoint2D<NumericalT>& vec) noexcept
 {
-    m_x = pt.x;
-    m_y = pt.y;
+    return std::hypot(vec.m_x, vec.m_y);
 }
 
-inline void wxPoint2DInt::GetFloor( std::int32_t *x , std::int32_t *y ) const
+template<typename NumericalT>
+auto GetVectorAngle(const wxPoint2D<NumericalT>& vec) noexcept
 {
-    if ( x )
-        *x = m_x;
-    if ( y )
-        *y = m_y;
+    // FIXME: Double equality
+    if ( vec.m_x == 0.0 )
+    {
+        if ( vec.m_y >= 0 )
+            return 90.0;
+        else
+            return 270.0;
+    }
+    // FIXME: Double equality
+    if ( vec.m_y == 0.0 )
+    {
+        if ( vec.m_x >= 0 )
+            return 0.0;
+        else
+            return 180.0;
+    }
+    
+    auto deg = wxRadToDeg(std::atan2( vec.m_y , vec.m_x ));
+
+    if ( deg < 0.0 )
+    {
+        deg += 360.0;
+    }
+    
+    return deg;
 }
 
-inline void wxPoint2DInt::GetRounded( std::int32_t *x , std::int32_t *y ) const
+template<typename NumericalT>
+void SetVectorAngle(wxPoint2D<NumericalT>& vec, auto angle) noexcept
 {
-    GetFloor(x, y);
+    const auto length = GetLength(vec);
+
+    vec.m_x = length * std::cos(wxDegToRad(angle));
+    vec.m_y = length * std::sin(wxDegToRad(angle));
 }
 
-inline double wxPoint2DInt::GetVectorLength() const
+template<typename NumericalT>
+void SetVectorLength(wxPoint2D<NumericalT>& vec, auto length) noexcept
 {
-    return std::hypot(m_x, m_y);
+    const auto priorLength = GetVectorLength(vec);
+
+    vec.m_x = vec.m_x * length / priorLength;
+    vec.m_y = vec.m_y * length / priorLength;
 }
 
-inline void wxPoint2DInt::SetVectorLength( double length )
+template<typename NumericalT>
+constexpr void Normalize(wxPoint2D<NumericalT>& vec) noexcept
 {
-    const double before = GetVectorLength();
-    m_x = (std::int32_t)(m_x * length / before);
-    m_y = (std::int32_t)(m_y * length / before);
+    SetVectorLength(vec, 1.0);
 }
 
-inline void wxPoint2DInt::Normalize()
+template<typename NumericalT, typename NumericalU = NumericalT>
+auto GetVectorDistance(const wxPoint2D<NumericalT>& vecA, const wxPoint2D<NumericalU>& vecB) noexcept
 {
-    SetVectorLength( 1 );
+    return std::hypot(vecA.m_x - vecB.m_x, vecA.m_y - vecB.m_y);
 }
 
-inline double wxPoint2DInt::GetDistance( const wxPoint2DInt &pt ) const
+template<typename NumericalT, typename NumericalU = NumericalT>
+auto GetVectorDistanceSquare(const wxPoint2D<NumericalT>& vecA, const wxPoint2D<NumericalU>& vecB) noexcept
 {
-    return std::sqrt( GetDistanceSquare( pt ) );
+    return std::pow(GetDistance(vecA, vecB), 2.0); 
 }
 
-inline double wxPoint2DInt::GetDistanceSquare( const wxPoint2DInt &pt ) const
+template<typename NumericalT>
+constexpr wxPoint2D<NumericalT> operator+(wxPoint2D<NumericalT> vecA, const wxPoint2D<NumericalT>& vecB) noexcept
 {
-    return ( ((double)pt.m_x-m_x)*((double)pt.m_x-m_x) +
-             ((double)pt.m_y-m_y)*((double)pt.m_y-m_y) );
+    vecA += vecB;
+    return vecA;
 }
 
-inline std::int32_t wxPoint2DInt::GetDotProduct( const wxPoint2DInt &vec ) const
+template<typename NumericalT>
+constexpr wxPoint2D<NumericalT> operator-(wxPoint2D<NumericalT> vecA, const wxPoint2D<NumericalT>& vecB) noexcept
 {
-    return ( m_x * vec.m_x + m_y * vec.m_y );
+    vecA -= vecB;
+    return vecA;
 }
 
-inline std::int32_t wxPoint2DInt::GetCrossProduct( const wxPoint2DInt &vec ) const
+template<typename NumericalT, typename ScalarT = NumericalT>
+constexpr wxPoint2D<NumericalT> operator*(wxPoint2D<NumericalT> vec, ScalarT val) noexcept
 {
-    return ( m_x * vec.m_y - vec.m_x * m_y );
+    vec *= val;
+    return vec;
 }
 
-inline wxPoint2DInt::operator wxPoint() const
+template<typename NumericalT, typename ScalarT = NumericalT>
+constexpr wxPoint2D<NumericalT> operator*(ScalarT val, const wxPoint2D<NumericalT>& vec) noexcept
 {
-    return wxPoint( m_x, m_y);
+    return vec * val;
 }
 
-inline wxPoint2DInt wxPoint2DInt::operator-() const
+template<typename NumericalT, typename ScalarT = NumericalT>
+constexpr wxPoint2D<NumericalT>  operator/(wxPoint2D<NumericalT> vec, ScalarT val) noexcept
 {
-    return wxPoint2DInt( -m_x, -m_y);
+    vec /= val;
+    return vec;
 }
 
-inline wxPoint2DInt& wxPoint2DInt::operator+=(const wxPoint2DInt& pt)
-{
-    m_x = m_x + pt.m_x;
-    m_y = m_y + pt.m_y;
-    return *this;
-}
-
-inline wxPoint2DInt& wxPoint2DInt::operator-=(const wxPoint2DInt& pt)
-{
-    m_x = m_x - pt.m_x;
-    m_y = m_y - pt.m_y;
-    return *this;
-}
-
-inline wxPoint2DInt& wxPoint2DInt::operator*=(const wxPoint2DInt& pt)
-{
-    m_x = m_x * pt.m_x;
-    m_y = m_y * pt.m_y;
-    return *this;
-}
-
-inline wxPoint2DInt& wxPoint2DInt::operator/=(const wxPoint2DInt& pt)
-{
-    m_x = m_x / pt.m_x;
-    m_y = m_y / pt.m_y;
-    return *this;
-}
-
-inline bool wxPoint2DInt::operator==(const wxPoint2DInt& pt) const
-{
-    return m_x == pt.m_x && m_y == pt.m_y;
-}
-
-inline bool wxPoint2DInt::operator!=(const wxPoint2DInt& pt) const
-{
-    return m_x != pt.m_x || m_y != pt.m_y;
-}
-
-inline wxPoint2DInt operator+(const wxPoint2DInt& pt1 , const wxPoint2DInt& pt2)
-{
-    return wxPoint2DInt( pt1.m_x + pt2.m_x , pt1.m_y + pt2.m_y );
-}
-
-inline wxPoint2DInt operator-(const wxPoint2DInt& pt1 , const wxPoint2DInt& pt2)
-{
-    return wxPoint2DInt( pt1.m_x - pt2.m_x , pt1.m_y - pt2.m_y );
-}
-
-
-inline wxPoint2DInt operator*(const wxPoint2DInt& pt1 , const wxPoint2DInt& pt2)
-{
-    return wxPoint2DInt( pt1.m_x * pt2.m_x , pt1.m_y * pt2.m_y );
-}
-
-inline wxPoint2DInt operator*(std::int32_t n , const wxPoint2DInt& pt)
-{
-    return wxPoint2DInt( pt.m_x * n , pt.m_y * n );
-}
-
-inline wxPoint2DInt operator*(double n , const wxPoint2DInt& pt)
-{
-    return wxPoint2DInt( static_cast<std::int32_t>(pt.m_x * n) ,
-        static_cast<std::int32_t>(pt.m_y * n) );
-}
-
-inline wxPoint2DInt operator*(const wxPoint2DInt& pt , std::int32_t n)
-{
-    return wxPoint2DInt( pt.m_x * n , pt.m_y * n );
-}
-
-inline wxPoint2DInt operator*(const wxPoint2DInt& pt , double n)
-{
-    return wxPoint2DInt( static_cast<std::int32_t>(pt.m_x * n) ,
-        static_cast<std::int32_t>(pt.m_y * n) );
-}
-
-inline wxPoint2DInt operator/(const wxPoint2DInt& pt1 , const wxPoint2DInt& pt2)
-{
-    return wxPoint2DInt( pt1.m_x / pt2.m_x , pt1.m_y / pt2.m_y );
-}
-
-inline wxPoint2DInt operator/(const wxPoint2DInt& pt , std::int32_t n)
-{
-    return wxPoint2DInt( pt.m_x / n , pt.m_y / n );
-}
-
-inline wxPoint2DInt operator/(const wxPoint2DInt& pt , double n)
-{
-    return wxPoint2DInt( static_cast<std::int32_t>(pt.m_x / n) ,
-        static_cast<std::int32_t>(pt.m_y / n) );
-}
-
-// wxPoint2Ds represent a point or a vector in a 2d coordinate system
-
-class WXDLLIMPEXP_CORE wxPoint2DDouble
-{
-public :
-    inline wxPoint2DDouble();
-    inline wxPoint2DDouble( double x , double y );
-    wxPoint2DDouble( const wxPoint2DInt &pt )
-        { m_x = (double) pt.m_x ; m_y = (double) pt.m_y ; }
-    wxPoint2DDouble( const wxPoint &pt )
-        { m_x = (double) pt.x ; m_y = (double) pt.y ; }
-    // default copy ctor and copy-assign operator are OK
-
-    // two different conversions to integers, floor and rounding
-    inline void GetFloor( std::int32_t *x , std::int32_t *y ) const;
-    inline void GetRounded( std::int32_t *x , std::int32_t *y ) const;
-
-    inline double GetVectorLength() const;
-     double GetVectorAngle() const ;
-    void SetVectorLength( double length );
-    void SetVectorAngle( double degrees );
-    // set the vector length to 1.0, preserving the angle
-    void Normalize();
-
-    inline double GetDistance( const wxPoint2DDouble &pt ) const;
-    inline double GetDistanceSquare( const wxPoint2DDouble &pt ) const;
-    inline double GetDotProduct( const wxPoint2DDouble &vec ) const;
-    inline double GetCrossProduct( const wxPoint2DDouble &vec ) const;
-
-    // the reflection of this point
-    wxPoint2DDouble operator-() const;
-
-    inline wxPoint2DDouble& operator+=(const wxPoint2DDouble& pt);
-    inline wxPoint2DDouble& operator-=(const wxPoint2DDouble& pt);
-    inline wxPoint2DDouble& operator*=(const wxPoint2DDouble& pt);
-    inline wxPoint2DDouble& operator*=(double n);
-    inline wxPoint2DDouble& operator*=(std::int32_t n);
-    inline wxPoint2DDouble& operator/=(const wxPoint2DDouble& pt);
-    inline wxPoint2DDouble& operator/=(double n);
-    inline wxPoint2DDouble& operator/=(std::int32_t n);
-
-    inline bool operator==(const wxPoint2DDouble& pt) const;
-    inline bool operator!=(const wxPoint2DDouble& pt) const;
-
-    double m_x;
-    double m_y;
-};
-
-inline wxPoint2DDouble operator+(const wxPoint2DDouble& pt1 , const wxPoint2DDouble& pt2);
-inline wxPoint2DDouble operator-(const wxPoint2DDouble& pt1 , const wxPoint2DDouble& pt2);
-inline wxPoint2DDouble operator*(const wxPoint2DDouble& pt1 , const wxPoint2DDouble& pt2);
-inline wxPoint2DDouble operator*(double n , const wxPoint2DDouble& pt);
-inline wxPoint2DDouble operator*(std::int32_t n , const wxPoint2DDouble& pt);
-inline wxPoint2DDouble operator*(const wxPoint2DDouble& pt , double n);
-inline wxPoint2DDouble operator*(const wxPoint2DDouble& pt , std::int32_t n);
-inline wxPoint2DDouble operator/(const wxPoint2DDouble& pt1 , const wxPoint2DDouble& pt2);
-inline wxPoint2DDouble operator/(const wxPoint2DDouble& pt , double n);
-inline wxPoint2DDouble operator/(const wxPoint2DDouble& pt , std::int32_t n);
-
-inline wxPoint2DDouble::wxPoint2DDouble()
-{
-    m_x = 0.0;
-    m_y = 0.0;
-}
-
-inline wxPoint2DDouble::wxPoint2DDouble( double x , double y )
-{
-    m_x = x;
-    m_y = y;
-}
-
-inline void wxPoint2DDouble::GetFloor( std::int32_t *x , std::int32_t *y ) const
-{
-    *x = (std::int32_t) std::floor( m_x );
-    *y = (std::int32_t) std::floor( m_y );
-}
-
-inline void wxPoint2DDouble::GetRounded( std::int32_t *x , std::int32_t *y ) const
-{
-    *x = (std::int32_t) std::floor( m_x + 0.5 );
-    *y = (std::int32_t) std::floor( m_y + 0.5);
-}
-
-inline double wxPoint2DDouble::GetVectorLength() const
-{
-    return std::hypot(m_x, m_y) ;
-}
-
-inline void wxPoint2DDouble::SetVectorLength( double length )
-{
-    const double before = GetVectorLength() ;
-    m_x = (m_x * length / before) ;
-    m_y = (m_y * length / before) ;
-}
-
-inline void wxPoint2DDouble::Normalize()
-{
-    SetVectorLength( 1 );
-}
-
-inline double wxPoint2DDouble::GetDistance( const wxPoint2DDouble &pt ) const
-{
-    return std::sqrt( GetDistanceSquare( pt ) );
-}
-
-inline double wxPoint2DDouble::GetDistanceSquare( const wxPoint2DDouble &pt ) const
-{
-    return ( (pt.m_x-m_x)*(pt.m_x-m_x) + (pt.m_y-m_y)*(pt.m_y-m_y) );
-}
-
-inline double wxPoint2DDouble::GetDotProduct( const wxPoint2DDouble &vec ) const
-{
-    return ( m_x * vec.m_x + m_y * vec.m_y );
-}
-
-inline double wxPoint2DDouble::GetCrossProduct( const wxPoint2DDouble &vec ) const
-{
-    return ( m_x * vec.m_y - vec.m_x * m_y );
-}
-
-inline wxPoint2DDouble wxPoint2DDouble::operator-() const
-{
-    return wxPoint2DDouble( -m_x, -m_y);
-}
-
-inline wxPoint2DDouble& wxPoint2DDouble::operator+=(const wxPoint2DDouble& pt)
-{
-    m_x = m_x + pt.m_x;
-    m_y = m_y + pt.m_y;
-    return *this;
-}
-
-inline wxPoint2DDouble& wxPoint2DDouble::operator-=(const wxPoint2DDouble& pt)
-{
-    m_x = m_x - pt.m_x;
-    m_y = m_y - pt.m_y;
-    return *this;
-}
-
-inline wxPoint2DDouble& wxPoint2DDouble::operator*=(const wxPoint2DDouble& pt)
-{
-    m_x = m_x * pt.m_x;
-    m_y = m_y * pt.m_y;
-    return *this;
-}
-
-inline wxPoint2DDouble& wxPoint2DDouble::operator/=(const wxPoint2DDouble& pt)
-{
-    m_x = m_x / pt.m_x;
-    m_y = m_y / pt.m_y;
-    return *this;
-}
-
-// FIXME: Double equality
-inline bool wxPoint2DDouble::operator==(const wxPoint2DDouble& pt) const
-{
-    return (m_x == pt.m_x) && (m_y == pt.m_y);
-}
-
-inline bool wxPoint2DDouble::operator!=(const wxPoint2DDouble& pt) const
-{
-    return !(*this == pt);
-}
-
-inline wxPoint2DDouble operator+(const wxPoint2DDouble& pt1 , const wxPoint2DDouble& pt2)
-{
-    return wxPoint2DDouble( pt1.m_x + pt2.m_x , pt1.m_y + pt2.m_y );
-}
-
-inline wxPoint2DDouble operator-(const wxPoint2DDouble& pt1 , const wxPoint2DDouble& pt2)
-{
-    return wxPoint2DDouble( pt1.m_x - pt2.m_x , pt1.m_y - pt2.m_y );
-}
-
-
-inline wxPoint2DDouble operator*(const wxPoint2DDouble& pt1 , const wxPoint2DDouble& pt2)
-{
-    return wxPoint2DDouble( pt1.m_x * pt2.m_x , pt1.m_y * pt2.m_y );
-}
-
-inline wxPoint2DDouble operator*(double n , const wxPoint2DDouble& pt)
-{
-    return wxPoint2DDouble( pt.m_x * n , pt.m_y * n );
-}
-
-inline wxPoint2DDouble operator*(std::int32_t n , const wxPoint2DDouble& pt)
-{
-    return wxPoint2DDouble( pt.m_x * n , pt.m_y * n );
-}
-
-inline wxPoint2DDouble operator*(const wxPoint2DDouble& pt , double n)
-{
-    return wxPoint2DDouble( pt.m_x * n , pt.m_y * n );
-}
-
-inline wxPoint2DDouble operator*(const wxPoint2DDouble& pt , std::int32_t n)
-{
-    return wxPoint2DDouble( pt.m_x * n , pt.m_y * n );
-}
-
-inline wxPoint2DDouble operator/(const wxPoint2DDouble& pt1 , const wxPoint2DDouble& pt2)
-{
-    return wxPoint2DDouble( pt1.m_x / pt2.m_x , pt1.m_y / pt2.m_y );
-}
-
-inline wxPoint2DDouble operator/(const wxPoint2DDouble& pt , double n)
-{
-    return wxPoint2DDouble( pt.m_x / n , pt.m_y / n );
-}
-
-inline wxPoint2DDouble operator/(const wxPoint2DDouble& pt , std::int32_t n)
-{
-    return wxPoint2DDouble( pt.m_x / n , pt.m_y / n );
-}
+using wxPoint2DInt = wxPoint2D<int>;
+using wxPoint2DDouble = wxPoint2D<double>;
 
 // wxRect2Ds are a axis-aligned rectangles, each side of the rect is parallel to the x- or m_y- axis. The rectangle is either defined by the
 // top left and bottom right corner, or by the top left corner and size. A point is contained within the rectangle if
