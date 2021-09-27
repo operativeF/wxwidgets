@@ -31,9 +31,9 @@
 #include <memory>
 
 class  WXDLLIMPEXP_FWD_CORE wxWindow;
-struct WXDLLIMPEXP_FWD_CORE wxPoint;
 class  WXDLLIMPEXP_FWD_CORE wxRect;
 class  WXDLLIMPEXP_FWD_BASE wxString;
+
 
 class WXDLLIMPEXP_FWD_CORE wxDisplayFactory;
 class WXDLLIMPEXP_FWD_CORE wxDisplayImpl;

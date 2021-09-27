@@ -801,8 +801,8 @@ void wxGCDCImpl::DoDrawLines(int n, const wxPoint points[],
     for( int i = 0; i < n; ++i)
     {
         const wxPoint p = points[i];
-        pointsD[i].m_x = p.x + xoffset;
-        pointsD[i].m_y = p.y + yoffset;
+        pointsD[i].x = p.x + xoffset;
+        pointsD[i].y = p.y + yoffset;
 
         if (p.x < minX)      minX = p.x;
         else if (p.x > maxX) maxX = p.x;
@@ -898,8 +898,8 @@ void wxGCDCImpl::DoDrawPolygon( int n, const wxPoint points[],
     for( int i = 0; i < n; ++i)
     {
         wxPoint p = points[i];
-        pointsD[i].m_x = p.x + xoffset;
-        pointsD[i].m_y = p.y + yoffset;
+        pointsD[i].x = p.x + xoffset;
+        pointsD[i].y = p.y + yoffset;
 
         if (p.x < minX)      minX = p.x;
         else if (p.x > maxX) maxX = p.x;

@@ -17,6 +17,7 @@
 
 #include "wx/object.h"          // the base class
 
+#include "wx/gdicmn.h"
 #include "wx/intl.h"            // for wxLayoutDirection
 #include "wx/colour.h"          // we have member variables of these classes
 #include "wx/font.h"            // so we can't do without them

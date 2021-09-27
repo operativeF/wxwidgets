@@ -228,7 +228,6 @@ enum wxAccSelectionFlags
 
 class  WXDLLIMPEXP_FWD_CORE wxAccessible;
 class  WXDLLIMPEXP_FWD_CORE wxWindow;
-struct WXDLLIMPEXP_FWD_CORE wxPoint;
 class  WXDLLIMPEXP_FWD_CORE wxRect;
 
 class WXDLLIMPEXP_CORE wxAccessibleBase

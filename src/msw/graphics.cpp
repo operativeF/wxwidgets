@@ -1926,8 +1926,8 @@ void wxGDIPlusContext::StrokeLines( size_t n, const wxPoint2DDouble *points)
 
         for (size_t i = 0; i < n; i++)
         {
-            cpoints[i].X = static_cast<REAL>(points[i].m_x);
-            cpoints[i].Y = static_cast<REAL>(points[i].m_y);
+            cpoints[i].X = static_cast<REAL>(points[i].x);
+            cpoints[i].Y = static_cast<REAL>(points[i].y);
         
         }
 
@@ -1945,8 +1945,8 @@ void wxGDIPlusContext::DrawLines( size_t n, const wxPoint2DDouble *points, wxPol
 
     for (size_t i = 0; i < n; i++)
     {
-        cpoints[i].X = static_cast<REAL>(points[i].m_x);
-        cpoints[i].Y = static_cast<REAL>(points[i].m_y);
+        cpoints[i].X = static_cast<REAL>(points[i].x);
+        cpoints[i].Y = static_cast<REAL>(points[i].y);
 
     } // for (int i = 0; i < n; i++)
     if ( !m_brush.IsNull() )

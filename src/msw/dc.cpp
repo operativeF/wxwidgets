@@ -2161,8 +2161,8 @@ bool wxMSWDCImpl::SetTransformMatrix(const wxAffineMatrix2D &matrix)
         .eM12 = gsl::narrow_cast<float>(mat.m_12),
         .eM21 = gsl::narrow_cast<float>(mat.m_21),
         .eM22 = gsl::narrow_cast<float>(mat.m_22),
-        .eDx  = gsl::narrow_cast<float>(tr.m_x),
-        .eDy  = gsl::narrow_cast<float>(tr.m_y)
+        .eDx  = gsl::narrow_cast<float>(tr.x),
+        .eDy  = gsl::narrow_cast<float>(tr.y)
     };
 
     if ( !::SetWorldTransform(GetHdc(), &xform) )

@@ -721,13 +721,14 @@ wxSize wxWindowBase::DoGetBestSize() const
     else // ! has children
     {
         wxSize size = GetMinSize();
+
         if ( !size.IsFullySpecified() )
         {
             // if the window doesn't define its best size we assume that it can
             // be arbitrarily small -- usually this is not the case, of course,
             // but we have no way to know what the limit is, it should really
             // override DoGetBestClientSize() itself to tell us
-            size.SetDefaults(wxSize(1, 1));
+            size = {1, 1};
         }
 
         // return as-is, unadjusted by the client size difference.

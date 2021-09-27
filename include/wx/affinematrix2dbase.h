@@ -102,8 +102,8 @@ public:
         wxCHECK_RET( x && y, "Can't be NULL" );
 
         const wxPoint2DDouble dst = DoTransformPoint(wxPoint2DDouble(*x, *y));
-        *x = dst.m_x;
-        *y = dst.m_y;
+        *x = dst.x;
+        *y = dst.y;
     }
 
     // applies the matrix except for translations
@@ -118,8 +118,8 @@ public:
 
         const wxPoint2DDouble
             dst = DoTransformDistance(wxPoint2DDouble(*dx, *dy));
-        *dx = dst.m_x;
-        *dy = dst.m_y;
+        *dx = dst.x;
+        *dy = dst.y;
     }
 
 protected:

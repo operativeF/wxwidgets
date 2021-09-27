@@ -1755,16 +1755,16 @@ void wxD2DPathData::AddArc(double x, double y, double r, double startAngle, doub
     // to be added to the path.
     if ( m_figureOpened )
     {
-        AddLineToPoint(start.m_x + x, start.m_y + y);
+        AddLineToPoint(start.x + x, start.y + y);
     }
     else if ( m_currentPointSet )
     {
         EnsureFigureOpen(m_currentPoint);
-        AddLineToPoint(start.m_x + x, start.m_y + y);
+        AddLineToPoint(start.x + x, start.y + y);
     }
     else
     {
-        MoveToPoint(start.m_x + x, start.m_y + y);
+        MoveToPoint(start.x + x, start.y + y);
         EnsureFigureOpen(m_currentPoint);
     }
 
@@ -1786,7 +1786,7 @@ void wxD2DPathData::AddArc(double x, double y, double r, double startAngle, doub
         // the circle from two halves.
         D2D1_ARC_SEGMENT circleSegment1 =
         {
-            D2D1::Point2(gsl::narrow_cast<float>(x - start.m_x), gsl::narrow_cast<float>(y - start.m_y)),  // end point
+            D2D1::Point2(gsl::narrow_cast<float>(x - start.x), gsl::narrow_cast<float>(y - start.y)),  // end point
             size,                     // size
             0.0f,                     // rotation
             sweepDirection,           // sweep direction
@@ -1794,7 +1794,7 @@ void wxD2DPathData::AddArc(double x, double y, double r, double startAngle, doub
         };
         D2D1_ARC_SEGMENT circleSegment2 =
         {
-            D2D1::Point2(gsl::narrow_cast<float>(x + start.m_x), gsl::narrow_cast<float>(y + start.m_y)),  // end point
+            D2D1::Point2(gsl::narrow_cast<float>(x + start.x), gsl::narrow_cast<float>(y + start.y)),  // end point
             size,                     // size
             0.0f,                     // rotation
             sweepDirection,           // sweep direction
@@ -1816,7 +1816,7 @@ void wxD2DPathData::AddArc(double x, double y, double r, double startAngle, doub
     const D2D1_ARC_SIZE arcSize = angle > std::numbers::pi ?
        D2D1_ARC_SIZE_LARGE : D2D1_ARC_SIZE_SMALL;
     const D2D1_POINT_2F endPoint =
-       D2D1::Point2(gsl::narrow_cast<float>(end.m_x + x), gsl::narrow_cast<float>(end.m_y + y));
+       D2D1::Point2(gsl::narrow_cast<float>(end.x + x), gsl::narrow_cast<float>(end.y + y));
 
     D2D1_ARC_SEGMENT arcSegment =
     {

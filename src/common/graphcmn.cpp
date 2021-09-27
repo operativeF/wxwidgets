@@ -216,22 +216,22 @@ wxPoint2DDouble wxGraphicsPath::GetCurrentPoint() const
 
 void wxGraphicsPath::MoveToPoint( const wxPoint2DDouble& p)
 {
-    MoveToPoint( p.m_x , p.m_y);
+    MoveToPoint( p.x , p.y);
 }
 
 void wxGraphicsPath::AddLineToPoint( const wxPoint2DDouble& p)
 {
-    AddLineToPoint( p.m_x , p.m_y);
+    AddLineToPoint( p.x , p.y);
 }
 
 void wxGraphicsPath::AddCurveToPoint( const wxPoint2DDouble& c1, const wxPoint2DDouble& c2, const wxPoint2DDouble& e)
 {
-    AddCurveToPoint(c1.m_x, c1.m_y, c2.m_x, c2.m_y, e.m_x, e.m_y);
+    AddCurveToPoint(c1.x, c1.y, c2.x, c2.y, e.x, e.y);
 }
 
 void wxGraphicsPath::AddArc( const wxPoint2DDouble& c, double r, double startAngle, double endAngle, bool clockwise)
 {
-    AddArc(c.m_x, c.m_y, r, startAngle, endAngle, clockwise);
+    AddArc(c.x, c.y, r, startAngle, endAngle, clockwise);
 }
 
 wxRect2DDouble wxGraphicsPath::GetBox() const
@@ -243,7 +243,7 @@ wxRect2DDouble wxGraphicsPath::GetBox() const
 
 bool wxGraphicsPath::Contains( const wxPoint2DDouble& c, wxPolygonFillMode fillStyle ) const
 {
-    return Contains( c.m_x, c.m_y, fillStyle);
+    return Contains( c.x, c.y, fillStyle);
 }
 
 // true redirections
@@ -383,12 +383,12 @@ void wxGraphicsPathData::AddQuadCurveToPoint( double cx, double cy, double x, do
     wxPoint2DDouble c2;
 
     wxPoint2DDouble start;
-    GetCurrentPoint(&start.m_x,&start.m_y);
+    GetCurrentPoint(&start.x,&start.y);
     const wxPoint2DDouble end(x,y);
     const wxPoint2DDouble c(cx,cy);
     c1 = double(1/3.0) * start + double(2/3.0) * c;
     c2 = double(2/3.0) * c + double(1/3.0) * end;
-    AddCurveToPoint(c1.m_x,c1.m_y,c2.m_x,c2.m_y,x,y);
+    AddCurveToPoint(c1.x,c1.y,c2.x,c2.y,x,y);
 }
 
 void wxGraphicsPathData::AddRectangle( double x, double y, double w, double h )
@@ -444,7 +444,7 @@ void wxGraphicsPathData::AddRoundedRectangle( double x, double y, double w, doub
 void wxGraphicsPathData::AddArcToPoint( double x1, double y1 , double x2, double y2, double r )
 {
     wxPoint2DDouble current;
-    GetCurrentPoint(&current.m_x, &current.m_y);
+    GetCurrentPoint(&current.x, &current.y);
     if ( current == wxPoint2DDouble{0, 0} )
     {
         // (0, 0) is returned by GetCurrentPoint() also when the last point is not yet actually set,
@@ -475,7 +475,7 @@ void wxGraphicsPathData::AddArcToPoint( double x1, double y1 , double x2, double
     if ( v1Length == 0 || v2Length == 0 ||
          alpha == 0 || alpha == 180 || r == 0 )
     {
-        AddLineToPoint(p1.m_x, p1.m_y);
+        AddLineToPoint(p1.x, p1.y);
         return;
     }
 
@@ -505,8 +505,8 @@ void wxGraphicsPathData::AddArcToPoint( double x1, double y1 , double x2, double
     const double a1 = GetVectorAngle(nv1);
     const double a2 = GetVectorAngle(nv2);
 
-    AddLineToPoint(t1.m_x, t1.m_y);
-    AddArc(c.m_x, c.m_y, r, wxDegToRad(a1), wxDegToRad(a2), drawClockwiseArc);
+    AddLineToPoint(t1.x, t1.y);
+    AddArc(c.x, c.y, r, wxDegToRad(a1), wxDegToRad(a2), drawClockwiseArc);
 }
 
 //-----------------------------------------------------------------------------
@@ -791,9 +791,9 @@ void wxGraphicsContext::StrokeLines( size_t n, const wxPoint2DDouble *points)
 {
     wxASSERT(n > 1);
     wxGraphicsPath path = CreatePath();
-    path.MoveToPoint(points[0].m_x, points[0].m_y);
+    path.MoveToPoint(points[0].x, points[0].y);
     for ( size_t i = 1; i < n; ++i)
-        path.AddLineToPoint( points[i].m_x, points[i].m_y );
+        path.AddLineToPoint( points[i].x, points[i].y );
     StrokePath( path );
 }
 
@@ -801,9 +801,9 @@ void wxGraphicsContext::DrawLines( size_t n, const wxPoint2DDouble *points, wxPo
 {
     wxASSERT(n > 1);
     wxGraphicsPath path = CreatePath();
-    path.MoveToPoint(points[0].m_x, points[0].m_y);
+    path.MoveToPoint(points[0].x, points[0].y);
     for ( size_t i = 1; i < n; ++i)
-        path.AddLineToPoint( points[i].m_x, points[i].m_y );
+        path.AddLineToPoint( points[i].x, points[i].y );
     DrawPath( path , fillStyle);
 }
 
@@ -813,8 +813,8 @@ void wxGraphicsContext::StrokeLines( size_t n, const wxPoint2DDouble *beginPoint
     wxGraphicsPath path = CreatePath();
     for ( size_t i = 0; i < n; ++i)
     {
-        path.MoveToPoint(beginPoints[i].m_x, beginPoints[i].m_y);
-        path.AddLineToPoint( endPoints[i].m_x, endPoints[i].m_y );
+        path.MoveToPoint(beginPoints[i].x, beginPoints[i].y);
+        path.AddLineToPoint( endPoints[i].x, endPoints[i].y );
     }
     StrokePath( path );
 }

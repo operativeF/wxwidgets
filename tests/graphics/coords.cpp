@@ -525,12 +525,12 @@ static void TransformedWithMatrix(wxDC* dc)
         // Results should be nagative because legacy functions
         // don't take affine transformation into account.
         m.Invert();
-        wxPoint2DDouble posLogRef = m.TransformPoint(wxPoint2DDouble(s_posDev));
+        wxPoint2DDouble posLogRef = m.TransformPoint(wxPoint2DDouble(s_posDev.x, s_posDev.y));
         wxPoint posLog;
         posLog.x = dc->DeviceToLogicalX(s_posDev.x);
         posLog.y = dc->DeviceToLogicalY(s_posDev.y);
-        CHECK_FALSE(posLog.x == wxRound(posLogRef.m_x));
-        CHECK_FALSE(posLog.y == wxRound(posLogRef.m_y));
+        CHECK_FALSE(posLog.x == wxRound(posLogRef.x));
+        CHECK_FALSE(posLog.y == wxRound(posLogRef.y));
         CHECK(posLog.x == s_posDev.x);
         CHECK(posLog.y == s_posDev.y);
 
@@ -538,8 +538,8 @@ static void TransformedWithMatrix(wxDC* dc)
         wxSize dimLog;
         dimLog.x = dc->DeviceToLogicalXRel(s_dimDev.x);
         dimLog.y = dc->DeviceToLogicalYRel(s_dimDev.y);
-        CHECK_FALSE(dimLog.x == wxRound(dimLogRef.m_x));
-        CHECK_FALSE(dimLog.y == wxRound(dimLogRef.m_y));
+        CHECK_FALSE(dimLog.x == wxRound(dimLogRef.x));
+        CHECK_FALSE(dimLog.y == wxRound(dimLogRef.y));
         CHECK(dimLog.x == s_dimDev.x);
         CHECK(dimLog.y == s_dimDev.y);
 
@@ -573,17 +573,17 @@ static void TransformedWithMatrixEx(wxDC * dc)
 
         // First convert from device to logical coordinates
         m.Invert();
-        wxPoint2DDouble posLogRef = m.TransformPoint(wxPoint2DDouble(s_posDev));
+        wxPoint2DDouble posLogRef = m.TransformPoint(wxPoint2DDouble(s_posDev.x, s_posDev.y));
         wxPoint posLog;
         posLog = dc->DeviceToLogical(s_posDev);
-        CHECK(posLog.x == wxRound(posLogRef.m_x));
-        CHECK(posLog.y == wxRound(posLogRef.m_y));
+        CHECK(posLog.x == wxRound(posLogRef.x));
+        CHECK(posLog.y == wxRound(posLogRef.y));
 
         wxPoint2DDouble dimLogRef = m.TransformDistance(wxPoint2DDouble(s_dimDev.x, s_dimDev.y));
         wxSize dimLog;
         dimLog = dc->DeviceToLogicalRel(s_dimDev);
-        CHECK(dimLog.x == wxRound(dimLogRef.m_x));
-        CHECK(dimLog.y == wxRound(dimLogRef.m_y));
+        CHECK(dimLog.x == wxRound(dimLogRef.x));
+        CHECK(dimLog.y == wxRound(dimLogRef.y));
 
         // And next back from logical to device coordinates
         wxPoint posDev;
@@ -625,19 +625,19 @@ static void TransformedWithMatrixAndStd(wxDC* dc)
         m1.Concat(m);
         m1.Invert();
 
-        wxPoint2DDouble posLogRef = m1.TransformPoint(wxPoint2DDouble(s_posDev));
+        wxPoint2DDouble posLogRef = m1.TransformPoint(wxPoint2DDouble(s_posDev.x, s_posDev.y));
         wxPoint posLog;
         posLog.x = dc->DeviceToLogicalX(s_posDev.x);
         posLog.y = dc->DeviceToLogicalY(s_posDev.y);
-        CHECK_FALSE(posLog.x == wxRound(posLogRef.m_x));
-        CHECK_FALSE(posLog.y == wxRound(posLogRef.m_y));
+        CHECK_FALSE(posLog.x == wxRound(posLogRef.x));
+        CHECK_FALSE(posLog.y == wxRound(posLogRef.y));
 
         wxPoint2DDouble dimLogRef = m1.TransformDistance(wxPoint2DDouble(s_dimDev.x, s_dimDev.y));
         wxSize dimLog;
         dimLog.x = dc->DeviceToLogicalXRel(s_dimDev.x);
         dimLog.y = dc->DeviceToLogicalYRel(s_dimDev.y);
-        CHECK_FALSE(dimLog.x == wxRound(dimLogRef.m_x));
-        CHECK_FALSE(dimLog.y == wxRound(dimLogRef.m_y));
+        CHECK_FALSE(dimLog.x == wxRound(dimLogRef.x));
+        CHECK_FALSE(dimLog.y == wxRound(dimLogRef.y));
 
         // And next back from logical to device coordinates
         wxPoint posDev;
@@ -679,17 +679,17 @@ static void TransformedWithMatrixAndStdEx(wxDC * dc)
         m1.Concat(m);
         m1.Invert();
 
-        wxPoint2DDouble posLogRef = m1.TransformPoint(wxPoint2DDouble(s_posDev));
+        wxPoint2DDouble posLogRef = m1.TransformPoint(wxPoint2DDouble(s_posDev.x, s_posDev.y));
         wxPoint posLog;
         posLog = dc->DeviceToLogical(s_posDev);
-        CHECK(posLog.x == wxRound(posLogRef.m_x));
-        CHECK(posLog.y == wxRound(posLogRef.m_y));
+        CHECK(posLog.x == wxRound(posLogRef.x));
+        CHECK(posLog.y == wxRound(posLogRef.y));
 
         wxPoint2DDouble dimLogRef = m1.TransformDistance(wxPoint2DDouble(s_dimDev.x, s_dimDev.y));
         wxSize dimLog;
         dimLog = dc->DeviceToLogicalRel(s_dimDev);
-        CHECK(dimLog.x == wxRound(dimLogRef.m_x));
-        CHECK(dimLog.y == wxRound(dimLogRef.m_y));
+        CHECK(dimLog.x == wxRound(dimLogRef.x));
+        CHECK(dimLog.y == wxRound(dimLogRef.y));
 
         // And next back from logical to device coordinates
         wxPoint posDev;
@@ -721,12 +721,12 @@ static void RotatedWithMatrix(wxDC* dc)
         // Results should be nagative because legacy functions
         // don't take affine transformation into account.
         m.Invert();
-        wxPoint2DDouble posLogRef = m.TransformPoint(wxPoint2DDouble(s_posDev));
+        wxPoint2DDouble posLogRef = m.TransformPoint(wxPoint2DDouble(s_posDev.x, s_posDev.y));
         wxPoint posLog;
         posLog.x = dc->DeviceToLogicalX(s_posDev.x);
         posLog.y = dc->DeviceToLogicalY(s_posDev.y);
-        CHECK_FALSE(posLog.x == wxRound(posLogRef.m_x));
-        CHECK_FALSE(posLog.y == wxRound(posLogRef.m_y));
+        CHECK_FALSE(posLog.x == wxRound(posLogRef.x));
+        CHECK_FALSE(posLog.y == wxRound(posLogRef.y));
         CHECK(posLog.x == s_posDev.x);
         CHECK(posLog.y == s_posDev.y);
 
@@ -734,8 +734,8 @@ static void RotatedWithMatrix(wxDC* dc)
         wxSize dimLog;
         dimLog.x = dc->DeviceToLogicalXRel(s_dimDev.x);
         dimLog.y = dc->DeviceToLogicalYRel(s_dimDev.y);
-        CHECK_FALSE(dimLog.x == wxRound(dimLogRef.m_x));
-        CHECK_FALSE(dimLog.y == wxRound(dimLogRef.m_y));
+        CHECK_FALSE(dimLog.x == wxRound(dimLogRef.x));
+        CHECK_FALSE(dimLog.y == wxRound(dimLogRef.y));
         CHECK(dimLog.x == s_dimDev.x);
         CHECK(dimLog.y == s_dimDev.y);
 
@@ -769,17 +769,17 @@ static void RotatedWithMatrixEx(wxDC * dc)
 
         // First convert from device to logical coordinates
         m.Invert();
-        wxPoint2DDouble posLogRef = m.TransformPoint(wxPoint2DDouble(s_posDev));
+        wxPoint2DDouble posLogRef = m.TransformPoint(wxPoint2DDouble(s_posDev.x, s_posDev.y));
         wxPoint posLog;
         posLog = dc->DeviceToLogical(s_posDev);
-        CHECK(posLog.x == wxRound(posLogRef.m_x));
-        CHECK(posLog.y == wxRound(posLogRef.m_y));
+        CHECK(posLog.x == wxRound(posLogRef.x));
+        CHECK(posLog.y == wxRound(posLogRef.y));
 
         wxPoint2DDouble dimLogRef = m.TransformDistance(wxPoint2DDouble(s_dimDev.x, s_dimDev.y));
         wxSize dimLog;
         dimLog = dc->DeviceToLogicalRel(s_dimDev);
-        CHECK(dimLog.x == wxRound(dimLogRef.m_x));
-        CHECK(dimLog.y == wxRound(dimLogRef.m_y));
+        CHECK(dimLog.x == wxRound(dimLogRef.x));
+        CHECK(dimLog.y == wxRound(dimLogRef.y));
 
         // And next back from logical to device coordinates
         wxPoint posDev;

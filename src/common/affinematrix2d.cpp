@@ -21,8 +21,8 @@ void wxAffineMatrix2D::Set(const wxMatrix2D &mat2D, const wxPoint2DDouble &tr)
     m_12 = mat2D.m_12;
     m_21 = mat2D.m_21;
     m_22 = mat2D.m_22;
-    m_tx = tr.m_x;
-    m_ty = tr.m_y;
+    m_tx = tr.x;
+    m_ty = tr.y;
 }
 
 // gets the component valuess of the matrix
@@ -35,8 +35,8 @@ void wxAffineMatrix2D::Get(wxMatrix2D *mat2D, wxPoint2DDouble *tr) const
 
     if ( tr )
     {
-        tr->m_x = m_tx;
-        tr->m_y = m_ty;
+        tr->x = m_tx;
+        tr->y = m_ty;
     }
 }
 
@@ -50,8 +50,8 @@ void wxAffineMatrix2D::Concat(const wxAffineMatrix2DBase &t)
     wxPoint2DDouble tr;
     t.Get(&mat, &tr);
 
-    m_tx += tr.m_x*m_11 + tr.m_y*m_21;
-    m_ty += tr.m_x*m_12 + tr.m_y*m_22;
+    m_tx += tr.x*m_11 + tr.y*m_21;
+    m_ty += tr.x*m_12 + tr.y*m_22;
     double e11 = mat.m_11*m_11 + mat.m_12*m_21;
     double e12 = mat.m_11*m_12 + mat.m_12*m_22;
     double e21 = mat.m_21*m_11 + mat.m_22*m_21;
@@ -94,7 +94,7 @@ bool wxAffineMatrix2D::IsEqual(const wxAffineMatrix2DBase& t) const
 
     return m_11 == mat.m_11 && m_12 == mat.m_12 &&
            m_21 == mat.m_21 && m_22 == mat.m_22 &&
-           m_tx == tr.m_x && m_ty == tr.m_y;
+           m_tx == tr.x && m_ty == tr.y;
 }
 
 //
@@ -154,8 +154,8 @@ wxAffineMatrix2D::DoTransformPoint(const wxPoint2DDouble& src) const
     if ( IsIdentity() )
         return src;
 
-    return {src.m_x * m_11 + src.m_y * m_21 + m_tx,
-            src.m_x * m_12 + src.m_y * m_22 + m_ty};
+    return {src.x * m_11 + src.y * m_21 + m_tx,
+            src.x * m_12 + src.y * m_22 + m_ty};
 }
 
 // applies the matrix except for translations
@@ -168,8 +168,8 @@ wxAffineMatrix2D::DoTransformDistance(const wxPoint2DDouble& src) const
     if ( IsIdentity() )
         return src;
 
-    return {src.m_x * m_11 + src.m_y * m_21,
-            src.m_x * m_12 + src.m_y * m_22};
+    return {src.x * m_11 + src.y * m_21,
+            src.x * m_12 + src.y * m_22};
 }
 
 bool wxAffineMatrix2D::IsIdentity() const

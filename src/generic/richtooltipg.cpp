@@ -526,7 +526,7 @@ private:
 
                 const wxPoint2DDouble& pt2 = rectPoints[n];
 
-                path.AddArcToPoint(pt1.m_x, pt1.m_y, pt2.m_x, pt2.m_y, RADIUS);
+                path.AddArcToPoint(pt1.x, pt1.y, pt2.x, pt2.y, RADIUS);
 
                 n = (n + 1) % RectPoint_Max;
             }
@@ -535,7 +535,7 @@ private:
             const wxPoint2DDouble& pt1 = rectPoints[n];
             const wxPoint2DDouble& pt2 = tipPoints[0];
 
-            path.AddArcToPoint(pt1.m_x, pt1.m_y, pt2.m_x, pt2.m_y, RADIUS);
+            path.AddArcToPoint(pt1.x, pt1.y, pt2.x, pt2.y, RADIUS);
 
             path.CloseSubpath();
         }

@@ -407,7 +407,7 @@ bool wxTopLevelWindowMSW::Create(wxWindow *parent,
     wxSize sizeReal = size;
     if ( !sizeReal.IsFullySpecified() )
     {
-        sizeReal.SetDefaults(GetDefaultSize());
+        sizeReal = GetDefaultSize();
     }
 
     // notice that we should append this window to wxTopLevelWindows list
@@ -856,7 +856,7 @@ wxTopLevelWindowMSW::MSWGetCreateWindowCoords(const wxPoint& pos,
         y = pos.y == wxDefaultCoord ? DEFAULT_Y : pos.y;
     }
 
-    if ( size.x == wxDefaultCoord || size.y == wxDefaultCoord )
+    if ( !size.IsFullySpecified() )
     {
         // We don't use CW_USEDEFAULT here for several reasons:
         //
@@ -876,8 +876,8 @@ wxTopLevelWindowMSW::MSWGetCreateWindowCoords(const wxPoint& pos,
         //     guess a reasonably good size for a new window just as well
         //     ourselves
         //
-        wxSize sizeReal = size;
-        sizeReal.SetDefaults(GetDefaultSize());
+        
+        const auto sizeReal = GetDefaultSize();
 
         w = sizeReal.x;
         h = sizeReal.y;

@@ -39,7 +39,6 @@ class  WXDLLIMPEXP_FWD_CORE wxPalette;
 class  WXDLLIMPEXP_FWD_CORE wxPen;
 class  WXDLLIMPEXP_FWD_CORE wxRegion;
 class  WXDLLIMPEXP_FWD_CORE wxIconBundle;
-struct WXDLLIMPEXP_FWD_CORE wxPoint;
 
 // ---------------------------------------------------------------------------
 // constants
@@ -268,6 +267,254 @@ enum class wxEllipsizeMode
 // classes
 // ===========================================================================
 
+template<typename NumericalT>
+struct WXDLLIMPEXP_CORE wxPoint2D
+{
+    using value_type = NumericalT;
+
+    constexpr wxPoint2D() noexcept {}
+
+    constexpr wxPoint2D(value_type a, value_type b) noexcept
+        : x{ a },
+        y{ b }
+    {
+    }
+
+    constexpr bool operator==(const wxPoint2D<value_type>& b) const noexcept
+    {
+        return x == b.x && y == b.y;
+    }
+
+    constexpr bool operator!=(const wxPoint2D<value_type>& b) const noexcept
+    {
+        return !(*this == b);
+    }
+
+    template<typename ScalarT = value_type>
+    constexpr wxPoint2D<value_type>& operator*=(ScalarT val) noexcept
+    {
+        x *= val;
+        y *= val;
+
+        return *this;
+    }
+
+
+    template<typename ScalarT = value_type>
+    constexpr wxPoint2D<value_type>& operator/=(ScalarT val) noexcept
+    {
+        x /= val;
+        y /= val;
+
+        return *this;
+    }
+
+    template<typename NumericalU = value_type>
+    constexpr wxPoint2D<value_type>& operator-=(const wxPoint2D<NumericalU>& val) noexcept
+    {
+        x -= val.x;
+        y -= val.y;
+
+        return *this;
+    }
+
+    template<typename PointLike>
+    constexpr wxPoint2D<value_type>& operator-=(const PointLike& val) noexcept
+    {
+        x -= val.x;
+        y -= val.y;
+
+        return *this;
+    }
+
+    template<typename NumericalU = value_type>
+    constexpr wxPoint2D<value_type>& operator+=(const wxPoint2D<NumericalU>& val) noexcept
+    {
+        x += val.x;
+        y += val.y;
+
+        return *this;
+    }
+
+    template<typename PointLike>
+    constexpr wxPoint2D<value_type>& operator+=(const PointLike& val) noexcept
+    {
+        x += val.x;
+        y += val.y;
+
+        return *this;
+    }
+
+    constexpr wxPoint2D<value_type> operator-() const noexcept
+    {
+        return { -x, -y };
+    }
+
+    // TODO: Add fmt stream operators.
+
+    value_type x{};
+    value_type y{};
+};
+
+template<typename NumericalT, typename NumericalU = NumericalT>
+constexpr auto VectorDotProduct(const wxPoint2D<NumericalT>& vecA, const wxPoint2D<NumericalU>& vecB) noexcept
+{
+    return vecA.x * vecB.x + vecA.y * vecB.y;
+}
+
+template<typename NumericalT, typename NumericalU = NumericalT>
+constexpr auto VectorCrossProduct(const wxPoint2D<NumericalT>& vecA, const wxPoint2D<NumericalU>& vecB) noexcept
+{
+    return vecA.x * vecB.y - vecB.x * vecA.y;
+}
+
+template<typename NumericalT>
+auto GetVectorLength(const wxPoint2D<NumericalT>& vec) noexcept
+{
+    return std::hypot(vec.x, vec.y);
+}
+
+template<typename NumericalT>
+auto GetVectorAngle(const wxPoint2D<NumericalT>& vec) noexcept
+{
+    // FIXME: Double equality
+    if (vec.x == 0.0)
+    {
+        if (vec.y >= 0)
+            return 90.0;
+        else
+            return 270.0;
+    }
+    // FIXME: Double equality
+    if (vec.y == 0.0)
+    {
+        if (vec.x >= 0)
+            return 0.0;
+        else
+            return 180.0;
+    }
+
+    auto deg = wxRadToDeg(std::atan2(vec.y, vec.x));
+
+    if (deg < 0.0)
+    {
+        deg += 360.0;
+    }
+
+    return deg;
+}
+
+template<typename NumericalT>
+void SetVectorAngle(wxPoint2D<NumericalT>& vec, auto angle) noexcept
+{
+    const auto length = GetLength(vec);
+
+    vec.x = length * std::cos(wxDegToRad(angle));
+    vec.y = length * std::sin(wxDegToRad(angle));
+}
+
+template<typename NumericalT>
+void SetVectorLength(wxPoint2D<NumericalT>& vec, auto length) noexcept
+{
+    const auto priorLength = GetVectorLength(vec);
+
+    vec.x = vec.x * length / priorLength;
+    vec.y = vec.y * length / priorLength;
+}
+
+template<typename NumericalT>
+constexpr void Normalize(wxPoint2D<NumericalT>& vec) noexcept
+{
+    SetVectorLength(vec, 1.0);
+}
+
+template<typename NumericalT, typename NumericalU = NumericalT>
+auto GetVectorDistance(const wxPoint2D<NumericalT>& vecA, const wxPoint2D<NumericalU>& vecB) noexcept
+{
+    return std::hypot(vecA.x - vecB.x, vecA.y - vecB.y);
+}
+
+template<typename NumericalT, typename NumericalU = NumericalT>
+auto GetVectorDistanceSquare(const wxPoint2D<NumericalT>& vecA, const wxPoint2D<NumericalU>& vecB) noexcept
+{
+    return std::pow(GetDistance(vecA, vecB), 2.0);
+}
+
+template<typename NumericalT>
+constexpr wxPoint2D<NumericalT> operator+(wxPoint2D<NumericalT> vecA, const wxPoint2D<NumericalT>& vecB) noexcept
+{
+    vecA += vecB;
+    return vecA;
+}
+
+template<typename NumericalT, typename PointLike>
+constexpr wxPoint2D<NumericalT> operator+(wxPoint2D<NumericalT> vec, const PointLike& ptl) noexcept
+{
+
+    vec += ptl;
+    return vec;
+}
+
+template<typename NumericalT, typename PointLike>
+constexpr wxPoint2D<NumericalT> operator+(const PointLike& ptl, wxPoint2D<NumericalT> vec) noexcept
+{
+    vec += ptl;
+    return vec;
+}
+
+template<typename NumericalT>
+constexpr wxPoint2D<NumericalT> operator-(wxPoint2D<NumericalT> vecA, const wxPoint2D<NumericalT>& vecB) noexcept
+{
+    vecA -= vecB;
+    return vecA;
+}
+
+template<typename NumericalT, typename PointLike>
+constexpr wxPoint2D<NumericalT> operator-(const PointLike& ptl, wxPoint2D<NumericalT> vec) noexcept
+{
+    vec = -vec;
+    vec += ptl;
+    return vec;
+}
+
+template<typename NumericalT, typename PointLike>
+constexpr wxPoint2D<NumericalT> operator-(wxPoint2D<NumericalT> vec, const PointLike& ptl) noexcept
+{
+    vec -= ptl;
+    return vec;
+}
+
+
+template<typename NumericalT, typename ScalarT = NumericalT>
+constexpr wxPoint2D<NumericalT> operator*(wxPoint2D<NumericalT> vec, ScalarT val) noexcept
+{
+    vec *= val;
+    return vec;
+}
+
+template<typename NumericalT, typename ScalarT = NumericalT>
+constexpr wxPoint2D<NumericalT> operator*(ScalarT val, const wxPoint2D<NumericalT>& vec) noexcept
+{
+    return vec * val;
+}
+
+template<typename NumericalT, typename ScalarT = NumericalT>
+constexpr wxPoint2D<NumericalT>  operator/(wxPoint2D<NumericalT> vec, ScalarT val) noexcept
+{
+    vec /= val;
+    return vec;
+}
+
+using wxPoint2DInt = wxPoint2D<int>;
+using wxPoint2DDouble = wxPoint2D<double>;
+
+using wxPoint = wxPoint2D<int>;
+
+constexpr bool IsFullySpecified(const wxPoint& pt) { return pt.x != wxDefaultCoord && pt.y != wxDefaultCoord; }
+
+WX_DECLARE_LIST_WITH_DECL(wxPoint, wxPointList, class WXDLLIMPEXP_CORE);
+
+
 // ---------------------------------------------------------------------------
 // wxSize
 // ---------------------------------------------------------------------------
@@ -328,16 +575,6 @@ struct WXDLLIMPEXP_CORE wxSize
     int GetHeight() const { return y; }
 
     bool IsFullySpecified() const { return x != wxDefaultCoord && y != wxDefaultCoord; }
-
-    // combine this size with the other one replacing the default (i.e. equal
-    // to wxDefaultCoord) components of this object with those of the other
-    void SetDefaults(const wxSize& size)
-    {
-        if ( x == wxDefaultCoord )
-            x = size.x;
-        if ( y == wxDefaultCoord )
-            y = size.y;
-    }
 
     // compatibility
     int GetX() const { return x; }
@@ -554,163 +791,6 @@ constexpr wxRealPoint operator*(double i, const wxRealPoint& s)
 {
     return wxRealPoint(s.x * i, s.y * i);
 }
-
-
-// ----------------------------------------------------------------------------
-// wxPoint: 2D point with integer coordinates
-// ----------------------------------------------------------------------------
-
-struct WXDLLIMPEXP_CORE wxPoint
-{
-    int x {0};
-    int y {0};
-
-    constexpr wxPoint() noexcept {};
-    constexpr wxPoint(int xx, int yy) noexcept : x(xx), y(yy) { }
-    constexpr wxPoint(const wxRealPoint& pt);
-
-    // no copy ctor or assignment operator - the defaults are ok
-
-    //assignment operators
-    constexpr wxPoint& operator+=(const wxPoint& p) { x += p.x; y += p.y; return *this; }
-    constexpr wxPoint& operator-=(const wxPoint& p) { x -= p.x; y -= p.y; return *this; }
-
-    constexpr wxPoint& operator+=(const wxSize& s) { x += s.x; y += s.y; return *this; }
-    constexpr wxPoint& operator-=(const wxSize& s) { x -= s.x; y -= s.y; return *this; }
-
-    // check if both components are set/initialized
-    bool IsFullySpecified() const { return x != wxDefaultCoord && y != wxDefaultCoord; }
-
-    // fill in the unset components with the values from the other point
-    void SetDefaults(const wxPoint& pt)
-    {
-        if ( x == wxDefaultCoord )
-            x = pt.x;
-        if ( y == wxDefaultCoord )
-            y = pt.y;
-    }
-};
-
-
-// comparison
-constexpr bool operator==(const wxPoint& p1, const wxPoint& p2)
-{
-    return p1.x == p2.x && p1.y == p2.y;
-}
-
-constexpr bool operator!=(const wxPoint& p1, const wxPoint& p2)
-{
-    return !(p1 == p2);
-}
-
-
-// arithmetic operations (component wise)
-constexpr wxPoint operator+(const wxPoint& p1, const wxPoint& p2)
-{
-    return wxPoint(p1.x + p2.x, p1.y + p2.y);
-}
-
-constexpr wxPoint operator-(const wxPoint& p1, const wxPoint& p2)
-{
-    return wxPoint(p1.x - p2.x, p1.y - p2.y);
-}
-
-constexpr wxPoint operator+(const wxPoint& p, const wxSize& s)
-{
-    return wxPoint(p.x + s.x, p.y + s.y);
-}
-
-constexpr wxPoint operator-(const wxPoint& p, const wxSize& s)
-{
-    return wxPoint(p.x - s.x, p.y - s.y);
-}
-
-constexpr wxPoint operator+(const wxSize& s, const wxPoint& p)
-{
-    return wxPoint(p.x + s.x, p.y + s.y);
-}
-
-constexpr wxPoint operator-(const wxSize& s, const wxPoint& p)
-{
-    return wxPoint(s.x - p.x, s.y - p.y);
-}
-
-constexpr wxPoint operator-(const wxPoint& p)
-{
-    return wxPoint(-p.x, -p.y);
-}
-
-constexpr wxPoint operator/(const wxPoint& s, int i)
-{
-    return wxPoint(s.x / i, s.y / i);
-}
-
-constexpr wxPoint operator*(const wxPoint& s, int i)
-{
-    return wxPoint(s.x * i, s.y * i);
-}
-
-constexpr wxPoint operator*(int i, const wxPoint& s)
-{
-    return wxPoint(s.x * i, s.y * i);
-}
-
-constexpr wxPoint operator/(const wxPoint& s, unsigned int i)
-{
-    return wxPoint(s.x / i, s.y / i);
-}
-
-constexpr wxPoint operator*(const wxPoint& s, unsigned int i)
-{
-    return wxPoint(s.x * i, s.y * i);
-}
-
-constexpr wxPoint operator*(unsigned int i, const wxPoint& s)
-{
-    return wxPoint(s.x * i, s.y * i);
-}
-
-constexpr wxPoint operator/(const wxPoint& s, long i)
-{
-    return wxPoint(s.x / i, s.y / i);
-}
-
-constexpr wxPoint operator*(const wxPoint& s, long i)
-{
-    return wxPoint(int(s.x * i), int(s.y * i));
-}
-
-constexpr wxPoint operator*(long i, const wxPoint& s)
-{
-    return wxPoint(int(s.x * i), int(s.y * i));
-}
-
-constexpr wxPoint operator/(const wxPoint& s, unsigned long i)
-{
-    return wxPoint(s.x / i, s.y / i);
-}
-
-constexpr wxPoint operator*(const wxPoint& s, unsigned long i)
-{
-    return wxPoint(int(s.x * i), int(s.y * i));
-}
-
-constexpr wxPoint operator*(unsigned long i, const wxPoint& s)
-{
-    return wxPoint(int(s.x * i), int(s.y * i));
-}
-
-constexpr wxPoint operator*(const wxPoint& s, double i)
-{
-    return wxPoint(int(s.x * i), int(s.y * i));
-}
-
-constexpr wxPoint operator*(double i, const wxPoint& s)
-{
-    return wxPoint(int(s.x * i), int(s.y * i));
-}
-
-WX_DECLARE_LIST_WITH_DECL(wxPoint, wxPointList, class WXDLLIMPEXP_CORE);
 
 // ---------------------------------------------------------------------------
 // wxRect

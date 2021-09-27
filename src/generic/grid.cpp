@@ -2486,7 +2486,7 @@ wxPoint wxGrid::GetRenderPosition( wxDC& dc, const wxPoint& position )
 {
     wxPoint positionRender( position );
 
-    if ( !positionRender.IsFullySpecified() )
+    if ( !IsFullySpecified(positionRender) )
     {
         if ( positionRender.x == wxDefaultPosition.x )
             positionRender.x = dc.MaxX();

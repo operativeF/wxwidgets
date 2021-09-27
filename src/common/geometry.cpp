@@ -76,8 +76,8 @@ void wxRect2DDouble::Union( const wxRect2DDouble &src1 , const wxRect2DDouble &s
 
 void wxRect2DDouble::Union( const wxPoint2DDouble &pt )
 {
-    const double x = pt.m_x;
-    const double y = pt.m_y;
+    const double x = pt.x;
+    const double y = pt.y;
 
     if ( x < m_x )
     {
@@ -173,8 +173,8 @@ void wxRect2DInt::Union( const wxRect2DInt &src1 , const wxRect2DInt &src2 , wxR
 
 void wxRect2DInt::Union( const wxPoint2DInt &pt )
 {
-    const std::int32_t x = pt.m_x;
-    const std::int32_t y = pt.m_y;
+    const std::int32_t x = pt.x;
+    const std::int32_t y = pt.y;
 
     if ( x < m_x )
     {

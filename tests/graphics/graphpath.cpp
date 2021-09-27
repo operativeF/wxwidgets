@@ -73,8 +73,8 @@ TEST_CASE("GraphicsPathTestCaseCairo", "[path][cairo]")
 #endif // wxUSE_CAIRO
 
 #define WX_CHECK_POINT(p1, p2, tolerance)      \
-    CHECK(std::fabs(p1.m_x - p2.m_x) <= tolerance); \
-    CHECK(std::fabs(p1.m_y - p2.m_y) <= tolerance)
+    CHECK(std::fabs(p1.x - p2.x) <= tolerance); \
+    CHECK(std::fabs(p1.y - p2.y) <= tolerance)
 
 static void TestCurrentPoint(wxGraphicsContext* gc)
 {

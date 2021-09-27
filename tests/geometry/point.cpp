@@ -12,8 +12,9 @@
 
 
 #ifndef WX_PRECOMP
-    #include "wx/gdicmn.h"
 #endif // WX_PRECOMP
+
+#include "wx/gdicmn.h"
 
 TEST_CASE("Operators")
 {

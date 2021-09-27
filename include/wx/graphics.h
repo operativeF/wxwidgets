@@ -678,7 +678,7 @@ public:
         mat.Get(&mat2D, &tr);
 
         return CreateMatrix(mat2D.m_11, mat2D.m_12, mat2D.m_21, mat2D.m_22,
-                            tr.m_x, tr.m_y);
+                            tr.x, tr.y);
     }
 
     // push the current state of the context, ie the transformation matrix on a stack
