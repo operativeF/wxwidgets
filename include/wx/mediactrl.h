@@ -18,6 +18,8 @@
 #include "wx/control.h"
 #include "wx/uri.h"
 
+class WXDLLIMPEXP_FWD_CORE wxRect;
+
 enum class wxMediaState
 {
     Stopped,

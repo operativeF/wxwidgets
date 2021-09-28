@@ -14,6 +14,8 @@
 
 #if wxUSE_TASKBARBUTTON
 
+#include "wx/geometry/rect.h"
+
 #include <vector>
 #include "wx/taskbarbutton.h"
 

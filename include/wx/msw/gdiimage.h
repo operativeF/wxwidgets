@@ -18,7 +18,7 @@
 #include "wx/gdiobj.h"          // base class
 #include "wx/gdicmn.h"          // wxBitmapType::Invalid
 #include "wx/list.h"
-#include "wx/size.h"
+#include "wx/geometry/size.h"
 
 #include <string>
 

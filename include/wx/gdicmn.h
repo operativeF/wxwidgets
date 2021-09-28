@@ -18,8 +18,8 @@
 #include "wx/defs.h"
 
 #include "wx/list.h"
-#include "wx/point.h"
-#include "wx/size.h"
+#include "wx/geometry/point.h"
+#include "wx/geometry/size.h"
 #include "wx/string.h"
 #include "wx/fontenc.h"
 #include "wx/hashmap.h"
@@ -39,6 +39,7 @@ class  WXDLLIMPEXP_FWD_CORE wxFont;
 class  WXDLLIMPEXP_FWD_CORE wxIcon;
 class  WXDLLIMPEXP_FWD_CORE wxPalette;
 class  WXDLLIMPEXP_FWD_CORE wxPen;
+class  WXDLLIMPEXP_FWD_CORE wxRect;
 class  WXDLLIMPEXP_FWD_CORE wxRegion;
 class  WXDLLIMPEXP_FWD_CORE wxIconBundle;
 
@@ -264,173 +265,6 @@ enum class wxEllipsizeMode
 #else
     #define wxBITMAP_PNG(name) wxBITMAP_PNG_FROM_DATA(name)
 #endif
-
-// ===========================================================================
-// classes
-// ===========================================================================
-
-// ---------------------------------------------------------------------------
-// wxRect
-// ---------------------------------------------------------------------------
-
-class WXDLLIMPEXP_CORE wxRect
-{
-public:
-    wxRect() = default;
-    wxRect(int xx, int yy, int ww, int hh)
-        : x(xx), y(yy), width(ww), height(hh)
-        { }
-    wxRect(const wxPoint& topLeft, const wxPoint& bottomRight);
-    wxRect(const wxPoint& pt, const wxSize& size)
-        : x(pt.x), y(pt.y), width(size.x), height(size.y)
-        { }
-    wxRect(const wxSize& size)
-        : x(0), y(0), width(size.x), height(size.y)
-        { }
-
-    // default copy ctor and assignment operators ok
-
-    int GetX() const { return x; }
-    void SetX(int xx) { x = xx; }
-
-    int GetY() const { return y; }
-    void SetY(int yy) { y = yy; }
-
-    int GetWidth() const { return width; }
-    void SetWidth(int w) { width = w; }
-
-    int GetHeight() const { return height; }
-    void SetHeight(int h) { height = h; }
-
-    wxPoint GetPosition() const { return wxPoint(x, y); }
-    void SetPosition( const wxPoint &p ) { x = p.x; y = p.y; }
-
-    wxSize GetSize() const { return wxSize(width, height); }
-    void SetSize( const wxSize &s ) { width = s.x; height = s.y; }
-
-    bool IsEmpty() const { return (width <= 0) || (height <= 0); }
-
-    int GetLeft()   const { return x; }
-    int GetTop()    const { return y; }
-    int GetBottom() const { return y + height - 1; }
-    int GetRight()  const { return x + width - 1; }
-
-    void SetLeft(int left) { x = left; }
-    void SetRight(int right) { width = right - x + 1; }
-    void SetTop(int top) { y = top; }
-    void SetBottom(int bottom) { height = bottom - y + 1; }
-
-    wxPoint GetTopLeft() const { return GetPosition(); }
-    wxPoint GetLeftTop() const { return GetTopLeft(); }
-    void SetTopLeft(const wxPoint &p) { SetPosition(p); }
-    void SetLeftTop(const wxPoint &p) { SetTopLeft(p); }
-
-    wxPoint GetBottomRight() const { return wxPoint(GetRight(), GetBottom()); }
-    wxPoint GetRightBottom() const { return GetBottomRight(); }
-    void SetBottomRight(const wxPoint &p) { SetRight(p.x); SetBottom(p.y); }
-    void SetRightBottom(const wxPoint &p) { SetBottomRight(p); }
-
-    wxPoint GetTopRight() const { return wxPoint(GetRight(), GetTop()); }
-    wxPoint GetRightTop() const { return GetTopRight(); }
-    void SetTopRight(const wxPoint &p) { SetRight(p.x); SetTop(p.y); }
-    void SetRightTop(const wxPoint &p) { SetTopRight(p); }
-
-    wxPoint GetBottomLeft() const { return wxPoint(GetLeft(), GetBottom()); }
-    wxPoint GetLeftBottom() const { return GetBottomLeft(); }
-    void SetBottomLeft(const wxPoint &p) { SetLeft(p.x); SetBottom(p.y); }
-    void SetLeftBottom(const wxPoint &p) { SetBottomLeft(p); }
-
-    // operations with rect
-    wxRect& Inflate(wxCoord dx, wxCoord dy);
-    wxRect& Inflate(const wxSize& d) { return Inflate(d.x, d.y); }
-    wxRect& Inflate(wxCoord d) { return Inflate(d, d); }
-    wxRect Inflate(wxCoord dx, wxCoord dy) const
-    {
-        wxRect r = *this;
-        r.Inflate(dx, dy);
-        return r;
-    }
-
-    wxRect& Deflate(wxCoord dx, wxCoord dy) { return Inflate(-dx, -dy); }
-    wxRect& Deflate(const wxSize& d) { return Inflate(-d.x, -d.y); }
-    wxRect& Deflate(wxCoord d) { return Inflate(-d); }
-    wxRect Deflate(wxCoord dx, wxCoord dy) const
-    {
-        wxRect r = *this;
-        r.Deflate(dx, dy);
-        return r;
-    }
-
-    void Offset(wxCoord dx, wxCoord dy) { x += dx; y += dy; }
-    void Offset(const wxPoint& pt) { Offset(pt.x, pt.y); }
-
-    wxRect& Intersect(const wxRect& rect);
-    wxRect Intersect(const wxRect& rect) const
-    {
-        wxRect r = *this;
-        r.Intersect(rect);
-        return r;
-    }
-
-    wxRect& Union(const wxRect& rect);
-    wxRect Union(const wxRect& rect) const
-    {
-        wxRect r = *this;
-        r.Union(rect);
-        return r;
-    }
-
-    // return true if the point is (not strcitly) inside the rect
-    bool Contains(int x, int y) const;
-    bool Contains(const wxPoint& pt) const { return Contains(pt.x, pt.y); }
-    // return true if the rectangle 'rect' is (not strictly) inside this rect
-    bool Contains(const wxRect& rect) const;
-
-    // return true if the rectangles have a non empty intersection
-    bool Intersects(const wxRect& rect) const;
-
-    // like Union() but don't ignore empty rectangles
-    wxRect& operator+=(const wxRect& rect);
-
-    // intersections of two rectrangles not testing for empty rectangles
-    wxRect& operator*=(const wxRect& rect);
-
-    // centre this rectangle in the given (usually, but not necessarily,
-    // larger) one
-    wxRect CentreIn(const wxRect& r, int dir = wxBOTH) const
-    {
-        return wxRect(dir & wxHORIZONTAL ? r.x + (r.width - width)/2 : x,
-                      dir & wxVERTICAL ? r.y + (r.height - height)/2 : y,
-                      width, height);
-    }
-
-    wxRect CenterIn(const wxRect& r, int dir = wxBOTH) const
-    {
-        return CentreIn(r, dir);
-    }
-
-public:
-    int x{0}, y{0}, width{0}, height{0};
-};
-
-
-// compare rectangles
-constexpr bool operator==(const wxRect& r1, const wxRect& r2)
-{
-    return (r1.x == r2.x) && (r1.y == r2.y) &&
-           (r1.width == r2.width) && (r1.height == r2.height);
-}
-
-constexpr bool operator!=(const wxRect& r1, const wxRect& r2)
-{
-    return !(r1 == r2);
-}
-
-// like Union() but don't treat empty rectangles specially
-WXDLLIMPEXP_CORE wxRect operator+(const wxRect& r1, const wxRect& r2);
-
-// intersections of two rectangles
-WXDLLIMPEXP_CORE wxRect operator*(const wxRect& r1, const wxRect& r2);
 
 // ---------------------------------------------------------------------------
 // Management of pens, brushes and fonts

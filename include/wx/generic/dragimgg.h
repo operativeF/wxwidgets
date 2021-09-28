@@ -12,6 +12,8 @@
 #ifndef _WX_DRAGIMGG_H_
 #define _WX_DRAGIMGG_H_
 
+#include "wx/geometry/rect.h"
+
 #include "wx/bitmap.h"
 #include "wx/icon.h"
 #include "wx/cursor.h"

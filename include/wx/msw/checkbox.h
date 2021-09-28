@@ -15,6 +15,8 @@
 
 #include <string>
 
+class WXDLLIMPEXP_FWD_CORE wxRect;
+
 // Checkbox item (single checkbox)
 class WXDLLIMPEXP_CORE wxCheckBox : public wxMSWOwnerDrawnButton<wxCheckBoxBase>
 {

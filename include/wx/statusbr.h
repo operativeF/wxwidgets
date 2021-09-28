@@ -21,6 +21,8 @@
 #include <string>
 #include <vector>
 
+class WXDLLIMPEXP_FWD_CORE wxRect;
+
 inline constexpr char wxStatusBarNameStr[] = "statusBar";
 
 // ----------------------------------------------------------------------------

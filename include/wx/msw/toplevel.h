@@ -11,6 +11,8 @@
 #ifndef _WX_MSW_TOPLEVEL_H_
 #define _WX_MSW_TOPLEVEL_H_
 
+#include "wx/geometry/rect.h"
+
 #include "wx/weakref.h"
 
 #include <string>

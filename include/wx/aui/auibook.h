@@ -25,6 +25,7 @@
 #include "wx/aui/framemanager.h"
 #include "wx/bookctrl.h"
 #include "wx/containr.h"
+#include "wx/geometry/rect.h"
 
 #include <string>
 

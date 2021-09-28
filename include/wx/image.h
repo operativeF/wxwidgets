@@ -14,7 +14,7 @@
 #if wxUSE_IMAGE
 
 #include "wx/object.h"
-#include "wx/point.h"
+#include "wx/geometry/point.h"
 #include "wx/hashmap.h"
 
 #if wxUSE_STREAMS
@@ -91,6 +91,8 @@ inline constexpr unsigned char wxIMAGE_ALPHA_OPAQUE = 0xff;
 class WXDLLIMPEXP_FWD_CORE wxImageHandler;
 class WXDLLIMPEXP_FWD_CORE wxImage;
 class WXDLLIMPEXP_FWD_CORE wxPalette;
+class WXDLLIMPEXP_FWD_CORE wxRect;
+
 
 //-----------------------------------------------------------------------------
 // wxVariant support

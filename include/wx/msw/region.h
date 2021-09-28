@@ -11,6 +11,8 @@
 #ifndef _WX_MSW_REGION_H_
 #define _WX_MSW_REGION_H_
 
+#include "wx/geometry/rect.h"
+
 #include <memory>
 
 class WXDLLIMPEXP_CORE wxRegion : public wxRegionWithCombine

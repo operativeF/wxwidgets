@@ -254,7 +254,7 @@
 #include <wx/pickerbase.h>
 #include <wx/platform.h>
 #include <wx/platinfo.h>
-#include <wx/point.h>
+#include <wx/geometry/point.h>
 #include <wx/popupwin.h>
 #include <wx/position.h>
 #include <wx/power.h>
@@ -293,7 +293,7 @@
 #include <wx/settings.h>
 #include <wx/sharedptr.h>
 #include <wx/simplebook.h>
-#include <wx/size.h>
+#include <wx/geometry/size.h>
 #include <wx/sizer.h>
 #include <wx/slider.h>
 #include <wx/snglinst.h>

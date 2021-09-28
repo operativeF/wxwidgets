@@ -11,6 +11,7 @@
 #define _WX_MSW_NONOWNEDWND_H_
 
 class wxNonOwnedWindowShapeImpl;
+class WXDLLIMPEXP_FWD_CORE wxRect;
 
 // ----------------------------------------------------------------------------
 // wxNonOwnedWindow

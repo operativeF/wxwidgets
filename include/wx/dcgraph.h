@@ -23,6 +23,7 @@
 #include <vector>
 
 class WXDLLIMPEXP_FWD_CORE wxWindowDC;
+class WXDLLIMPEXP_FWD_CORE wxRect;
 
 
 class WXDLLIMPEXP_CORE wxGCDC: public wxDC

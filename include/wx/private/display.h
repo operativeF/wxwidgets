@@ -11,8 +11,8 @@
 #define _WX_PRIVATE_DISPLAY_H_
 
 #include "wx/display.h"
-#include "wx/gdicmn.h"      // for wxRect
-#include "wx/size.h"
+#include "wx/geometry/rect.h"
+#include "wx/geometry/size.h"
 
 #include <vector>
 

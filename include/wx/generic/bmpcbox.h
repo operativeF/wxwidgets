@@ -16,6 +16,8 @@
 
 #include "wx/odcombo.h"
 
+class WXDLLIMPEXP_FWD_CORE wxRect;
+
 // ----------------------------------------------------------------------------
 // wxBitmapComboBox: a wxComboBox that allows images to be shown
 // in front of string items.

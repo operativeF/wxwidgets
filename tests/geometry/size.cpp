@@ -14,7 +14,7 @@
 #ifndef WX_PRECOMP
 #endif // WX_PRECOMP
 
-#include "wx/size.h"
+#include "wx/geometry/size.h"
 
 TEST_CASE("Operators")
 {

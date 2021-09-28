@@ -15,8 +15,8 @@
 
 #include "wx/colour.h"
 #include "wx/log.h"
-#include "wx/point.h"
-#include "wx/size.h"
+#include "wx/geometry/point.h"
+#include "wx/geometry/size.h"
 #include "wx/stream.h"
 
 #include <chrono>

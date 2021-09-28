@@ -25,10 +25,11 @@
 #define _WX_RENDERER_H_
 
 class WXDLLIMPEXP_FWD_CORE wxDC;
+class WXDLLIMPEXP_FWD_CORE wxRect;
 class WXDLLIMPEXP_FWD_CORE wxWindow;
 
-#include "wx/point.h"
-#include "wx/size.h"
+#include "wx/geometry/point.h"
+#include "wx/geometry/size.h"
 #include "wx/colour.h"
 #include "wx/font.h"
 #include "wx/bitmap.h"

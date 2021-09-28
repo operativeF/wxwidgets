@@ -18,6 +18,8 @@
 #include "wx/treectrl.h"
 #include "wx/listctrl.h"
 
+#include "wx/geometry/rect.h"
+
 #include <string>
 
 class WXDLLIMPEXP_FWD_CORE wxBitmap;

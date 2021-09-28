@@ -18,6 +18,8 @@
 
 struct wxMSWListItemData;
 class wxMSWListHeaderCustomDraw;
+class WXDLLIMPEXP_FWD_CORE wxRect;
+
 
 // define this symbol to indicate the availability of SetColumnsOrder() and
 // related functions

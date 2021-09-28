@@ -16,6 +16,8 @@
 #include <string>
 
 class WXDLLIMPEXP_FWD_CORE wxAcceleratorTable;
+class WXDLLIMPEXP_FWD_CORE wxRect;
+
 
 // ---------------------------------------------------------------------------
 // wxMDIParentFrame

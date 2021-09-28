@@ -13,6 +13,8 @@
 
 #include <string>
 
+class WXDLLIMPEXP_FWD_CORE wxRect;
+
 class WXDLLIMPEXP_CORE wxTextCtrl : public wxTextCtrlBase
 {
 public:

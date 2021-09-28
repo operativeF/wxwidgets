@@ -12,12 +12,14 @@
 #ifndef _WX_WINDOW_H_
 #define _WX_WINDOW_H_
 
-#include "wx/point.h"
-#include "wx/size.h"
+#include "wx/geometry/point.h"
+#include "wx/geometry/size.h"
 
 #include <string_view>
 
 class WXDLLIMPEXP_FWD_CORE wxButton;
+class WXDLLIMPEXP_FWD_CORE wxRect;
+
 enum wxSystemColour : unsigned int;
 
 // if this is set to 1, we use deferred window sizing to reduce flicker when

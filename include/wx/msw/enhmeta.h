@@ -24,6 +24,9 @@
 
 #include <string>
 
+class WXDLLIMPEXP_FWD_CORE wxRect;
+
+
 // ----------------------------------------------------------------------------
 // wxEnhMetaFile: encapsulation of Win32 HENHMETAFILE
 // ----------------------------------------------------------------------------

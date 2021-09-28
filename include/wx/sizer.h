@@ -13,6 +13,8 @@
 
 #include "wx/defs.h"
 
+#include "wx/geometry/rect.h"
+
 #include "wx/window.h"
 
 #include <string>

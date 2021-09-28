@@ -15,6 +15,8 @@
 // wxDataViewRenderer
 // ----------------------------------------------------------------------------
 
+class WXDLLIMPEXP_FWD_CORE wxRect;
+
 class WXDLLIMPEXP_CORE wxDataViewRenderer: public wxDataViewCustomRendererBase
 {
 public:

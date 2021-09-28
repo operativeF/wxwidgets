@@ -14,6 +14,9 @@
 #include "wx/dcmemory.h"
 #include "wx/msw/dc.h"
 
+class WXDLLIMPEXP_FWD_CORE wxRect;
+
+
 class WXDLLIMPEXP_CORE wxMemoryDCImpl: public wxMSWDCImpl
 {
 public:

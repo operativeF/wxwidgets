@@ -14,6 +14,7 @@
 #define _WX_PRIVATE_H_
 
 #include "wx/msw/wrapwin.h"
+#include "wx/geometry/rect.h"
 
 #include "wx/log.h"
 
@@ -217,7 +218,7 @@ struct WinStruct : public T
 
 #if wxUSE_GUI
 
-#include "wx/gdicmn.h"
+#include "wx/geometry/rect.h"
 #include "wx/colour.h"
 
 #ifdef COM_DECLSPEC_NOTHROW

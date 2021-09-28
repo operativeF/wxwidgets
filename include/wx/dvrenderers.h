@@ -33,6 +33,7 @@
  */
 
 class WXDLLIMPEXP_FWD_CORE wxDataViewCustomRenderer;
+class WXDLLIMPEXP_FWD_CORE wxRect;
 
 // ----------------------------------------------------------------------------
 // wxDataViewIconText: helper class used by wxDataViewIconTextRenderer

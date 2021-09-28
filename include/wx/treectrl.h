@@ -26,6 +26,7 @@
 
 #include <string>
 
+class WXDLLIMPEXP_FWD_CORE wxRect;
 class WXDLLIMPEXP_FWD_CORE wxImageList;
 
 #if !defined(__WXMSW__) && !defined(__WXQT__) || defined(__WXUNIVERSAL__)

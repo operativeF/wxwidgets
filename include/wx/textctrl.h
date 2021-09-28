@@ -21,7 +21,7 @@
 
 #include "wx/control.h"         // the base class
 #include "wx/textentry.h"       // single-line text entry interface
-#include "wx/point.h"
+#include "wx/geometry/point.h"
 
 #include <iostream>
 #include <streambuf>

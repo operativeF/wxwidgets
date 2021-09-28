@@ -12,6 +12,8 @@
 
 #include <string>
 
+class WXDLLIMPEXP_FWD_CORE wxRect;
+
 class WXDLLIMPEXP_AUI wxAuiMSWTabArt : public wxAuiGenericTabArt
 {
 

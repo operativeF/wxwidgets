@@ -22,6 +22,7 @@
 
 #include "wx/aui/tabart.h"
 
+class WXDLLIMPEXP_FWD_CORE wxRect;
 struct WXDLLIMPEXP_FWD_CORE wxSize;
 class wxWindow;
 class wxDC;

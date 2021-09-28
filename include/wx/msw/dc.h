@@ -13,6 +13,7 @@
 
 #include "wx/defs.h"
 #include "wx/dc.h"
+#include "wx/geometry/rect.h"
 
 #include "wx/msw/wrap/utils.h"
 

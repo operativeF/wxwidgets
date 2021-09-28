@@ -15,7 +15,7 @@
 
 #if wxUSE_PROPGRID
 
-#include "wx/point.h"
+#include "wx/geometry/point.h"
 #include "wx/scrolwin.h"
 #include "wx/recguard.h"
 #include "wx/time.h" // needed for wxMilliClock_t

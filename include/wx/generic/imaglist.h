@@ -12,7 +12,7 @@
 
 #include "wx/bitmap.h"
 #include "wx/gdicmn.h"
-#include "wx/size.h"
+#include "wx/geometry/size.h"
 
 #include <vector>
 

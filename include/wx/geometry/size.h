@@ -1,8 +1,6 @@
 #ifndef _WX_SIZE_H
 #define _WX_SIZE_H
 
-#include "wx/point.h"
-
 #include <cmath>
 
 struct WXDLLIMPEXP_CORE wxSize
@@ -24,8 +22,8 @@ struct WXDLLIMPEXP_CORE wxSize
     constexpr wxSize& operator*=(long i) { x *= i; y *= i; return *this; }
     constexpr wxSize& operator/=(unsigned long i) { x /= i; y /= i; return *this; }
     constexpr wxSize& operator*=(unsigned long i) { x *= i; y *= i; return *this; }
-    wxSize& operator/=(double i) { x = wxRound(x/i); y = wxRound(y/i); return *this; }
-    wxSize& operator*=(double i) { x = wxRound(x*i); y = wxRound(y*i); return *this; }
+    wxSize& operator/=(double i) { x = std::lround(x/i); y = std::lround(y/i); return *this; }
+    wxSize& operator*=(double i) { x = std::lround(x*i); y = std::lround(y*i); return *this; }
 
     void IncTo(const wxSize& sz)
         { if ( sz.x > x ) x = sz.x; if ( sz.y > y ) y = sz.y; }
@@ -40,18 +38,24 @@ struct WXDLLIMPEXP_CORE wxSize
     }
 
     void IncBy(int dx, int dy) { x += dx; y += dy; }
-    void IncBy(const wxPoint& pt) { IncBy(pt.x, pt.y); }
+    
+    template<typename SizeLike>
+    void IncBy(const SizeLike& pt) { IncBy(pt.x, pt.y); }
+    
     void IncBy(const wxSize& sz) { IncBy(sz.x, sz.y); }
     void IncBy(int d) { IncBy(d, d); }
 
     void DecBy(int dx, int dy) { IncBy(-dx, -dy); }
-    void DecBy(const wxPoint& pt) { DecBy(pt.x, pt.y); }
+    
+    template<typename SizeLike>
+    void DecBy(const SizeLike& pt) { DecBy(pt.x, pt.y); }
+
     void DecBy(const wxSize& sz) { DecBy(sz.x, sz.y); }
     void DecBy(int d) { DecBy(d, d); }
 
 
     wxSize& Scale(double xscale, double yscale)
-        { x = wxRound(x*xscale); y = wxRound(y*yscale); return *this; }
+        { x = std::lround(x * xscale); y = std::lround(y * yscale); return *this; }
 
     void Set(int xx, int yy) { x = xx; y = yy; }
     void SetWidth(int w) { x = w; }
@@ -149,12 +153,12 @@ constexpr wxSize operator*(unsigned long i, const wxSize& s)
 
 inline wxSize operator*(const wxSize& s, double i)
 {
-    return wxSize(wxRound(s.x * i), wxRound(s.y * i));
+    return wxSize(std::lround(s.x * i), std::lround(s.y * i));
 }
 
 inline wxSize operator*(double i, const wxSize& s)
 {
-    return wxSize(wxRound(s.x * i), wxRound(s.y * i));
+    return wxSize(std::lround(s.x * i), std::lround(s.y * i));
 }
 
 #endif // _WX_SIZE_H

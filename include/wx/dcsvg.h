@@ -33,6 +33,7 @@ enum class wxSVGShapeRenderingMode
 };
 
 class WXDLLIMPEXP_FWD_BASE wxFileOutputStream;
+class WXDLLIMPEXP_FWD_CORE wxRect;
 class WXDLLIMPEXP_FWD_CORE wxSVGFileDC;
 
 // Base class for bitmap handlers used by wxSVGFileDC, used by the standard

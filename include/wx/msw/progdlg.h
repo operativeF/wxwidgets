@@ -14,6 +14,7 @@
 
 class wxProgressDialogTaskRunner;
 struct wxProgressDialogSharedData;
+class WXDLLIMPEXP_FWD_CORE wxRect;
 
 class WXDLLIMPEXP_CORE wxProgressDialog : public wxGenericProgressDialog
 {

@@ -30,7 +30,7 @@
 #include "wx/sizer.h"
 #include "wx/textdlg.h"
 #include "wx/gdicmn.h"
-#include "wx/point.h"
+#include "wx/geometry/point.h"
 #include "wx/image.h"
 #include "wx/module.h"
 #include "wx/filedlg.h"
@@ -41,7 +41,7 @@
 #include "wx/dir.h"
 #include "wx/artprov.h"
 #include "wx/mimetype.h"
-#include "wx/size.h"
+#include "wx/geometry/size.h"
 
 #if wxUSE_STATLINE
     #include "wx/statline.h"

@@ -18,7 +18,7 @@
 #include "wx/arrstr.h"
 #include "wx/colour.h"
 #include "wx/hashset.h"
-#include "wx/point.h"
+#include "wx/geometry/point.h"
 
 struct WXDLLIMPEXP_FWD_CORE wxSize;
 class  WXDLLIMPEXP_FWD_CORE wxFont;

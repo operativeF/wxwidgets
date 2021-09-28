@@ -15,7 +15,7 @@
 
 #if wxUSE_HELP
 
-#include "wx/point.h"
+#include "wx/geometry/point.h"
 
 #include <string>
 

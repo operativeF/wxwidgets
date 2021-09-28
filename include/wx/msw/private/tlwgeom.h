@@ -11,6 +11,7 @@
 #define _WX_MSW_PRIVATE_TLWGEOM_H_
 
 #include "wx/log.h"
+#include "wx/geometry/rect.h"
 
 #include "wx/msw/private.h"
 

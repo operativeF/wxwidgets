@@ -23,7 +23,7 @@
 #include "wx/clipbrd.h"
 #include "wx/dataobj.h"
 #include "wx/panel.h"
-#include "wx/point.h"
+#include "wx/geometry/point.h"
 
 #include "asserthelper.h"
 

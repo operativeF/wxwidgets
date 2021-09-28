@@ -10,7 +10,7 @@
 #ifndef _WX_MOUSESTATE_H_
 #define _WX_MOUSESTATE_H_
 
-#include "wx/point.h"
+#include "wx/geometry/point.h"
 #include "wx/kbdstate.h"
 
 // the symbolic names for the mouse buttons

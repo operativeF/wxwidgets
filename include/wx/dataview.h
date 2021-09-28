@@ -33,6 +33,7 @@
 class WXDLLIMPEXP_FWD_CORE wxImageList;
 class wxItemAttr;
 class WXDLLIMPEXP_FWD_CORE wxHeaderCtrl;
+class WXDLLIMPEXP_FWD_CORE wxRect;
 
 #if wxUSE_NATIVE_DATAVIEWCTRL && !defined(__WXUNIVERSAL__)
     #if defined(__WXGTK20__) || defined(__WXOSX__)

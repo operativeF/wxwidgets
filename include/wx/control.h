@@ -21,7 +21,7 @@
 
 #include "wx/window.h"      // base class
 #include "wx/gdicmn.h"      // wxEllipsize...
-#include "wx/point.h"
+#include "wx/geometry/point.h"
 
 #include <string>
 #include <string_view>

@@ -16,7 +16,7 @@
 #if wxUSE_GEOMETRY
 
 #include "wx/utils.h"
-#include "wx/point.h"
+#include "wx/geometry/point.h"
 
 #include <cstdint>
 

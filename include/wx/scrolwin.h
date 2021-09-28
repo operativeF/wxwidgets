@@ -14,6 +14,8 @@
 #include "wx/control.h"
 #include "wx/panel.h"
 
+#include "wx/geometry/rect.h"
+
 #ifdef  __WXOSX__
     #include "wx/scrolbar.h"
 #endif

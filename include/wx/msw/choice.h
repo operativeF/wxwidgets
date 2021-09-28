@@ -16,6 +16,7 @@
 #include <vector>
 
 struct tagCOMBOBOXINFO;
+class WXDLLIMPEXP_FWD_CORE wxRect;
 
 // ----------------------------------------------------------------------------
 // Choice item

@@ -46,6 +46,8 @@
 #include "wx/bitmap.h" // wxBitmap used by-value
 #include "wx/textentry.h"
 #include "wx/time.h" // needed for wxMilliClock_t
+#include "wx/geometry/rect.h"
+
 
 #include <cstdint>
 #include <string>

@@ -15,6 +15,9 @@
 
 #include <string>
 
+class WXDLLIMPEXP_FWD_CORE wxRect;
+
+
 class WXDLLIMPEXP_CORE wxRadioButton : public wxMSWOwnerDrawnButton<wxRadioButtonBase>
 {
 public:

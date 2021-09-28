@@ -24,6 +24,8 @@
 #include <string_view>
 #include <vector>
 
+class WXDLLIMPEXP_FWD_CORE wxRect;
+
 //
 // New window styles for wxOwnerDrawnComboBox
 //

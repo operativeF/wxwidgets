@@ -17,6 +17,7 @@
 
 #include "wx/image.h"
 #include "wx/bitmap.h"
+#include "wx/geometry/rect.h"
 
 #include <cstdint>
 

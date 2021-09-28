@@ -32,6 +32,7 @@
 // fwd decl
 class  WXDLLIMPEXP_FWD_CORE wxImageList;
 class  WXDLLIMPEXP_FWD_CORE wxDragImage;
+class WXDLLIMPEXP_FWD_CORE wxRect;
 struct WXDLLIMPEXP_FWD_CORE wxTreeViewItem;
 class WXDLLIMPEXP_FWD_CORE wxTextCtrl;
 

@@ -22,6 +22,8 @@
     #define wxUSE_COMBOCTRL_POPUP_ANIMATION     1
 #endif
 
+class WXDLLIMPEXP_FWD_CORE wxRect;
+
 #include <string>
 
 

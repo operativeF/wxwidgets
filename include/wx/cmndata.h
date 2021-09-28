@@ -15,7 +15,7 @@
 
 #if wxUSE_PRINTING_ARCHITECTURE
 
-#include "wx/point.h"
+#include "wx/geometry/point.h"
 
 #include <string>
 

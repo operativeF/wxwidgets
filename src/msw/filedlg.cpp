@@ -32,6 +32,7 @@
 
 #include "wx/dynlib.h"
 #include "wx/filename.h"
+#include "wx/geometry/rect.h"
 
 #include "wx/scopeguard.h"
 #include "wx/tokenzr.h"

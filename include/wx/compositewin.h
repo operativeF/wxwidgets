@@ -11,6 +11,7 @@
 #define _WX_COMPOSITEWIN_H_
 
 #include "wx/containr.h"
+#include "wx/geometry/rect.h"
 
 #include <string>
 

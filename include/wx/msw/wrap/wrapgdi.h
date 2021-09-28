@@ -2,7 +2,7 @@
 #ifndef _MSW_WRAPGDI_H
 #define _MSW_WRAPGDI_H
 
-#include <wx/size.h>
+#include <wx/geometry/size.h>
 #include <wx/position.h>
 
 #include <string>

@@ -19,7 +19,7 @@ class WXDLLIMPEXP_FWD_CORE wxTextEntryHintData;
 class WXDLLIMPEXP_FWD_CORE wxWindow;
 
 #include "wx/filefn.h"              // for wxFILE and wxDIR only
-#include "wx/point.h"
+#include "wx/geometry/point.h"
 
 #include <string>
 #include <vector>

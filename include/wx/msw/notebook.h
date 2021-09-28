@@ -20,6 +20,9 @@
 
 using msw::utils::unique_brush;
 
+class WXDLLIMPEXP_FWD_CORE wxRect;
+
+
 // you can set USE_NOTEBOOK_ANTIFLICKER to 0 for desktop Windows versions too
 // to disable code whih results in flicker-less notebook redrawing at the
 // expense of some extra GDI resource consumption

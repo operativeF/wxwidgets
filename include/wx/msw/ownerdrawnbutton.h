@@ -10,6 +10,8 @@
 #ifndef _WX_MSW_OWNERDRAWNBUTTON_H_
 #define _WX_MSW_OWNERDRAWNBUTTON_H_
 
+class WXDLLIMPEXP_FWD_CORE wxRect;
+
 // ----------------------------------------------------------------------------
 // wxMSWOwnerDrawnButton: base class for any kind of Windows buttons
 // ----------------------------------------------------------------------------

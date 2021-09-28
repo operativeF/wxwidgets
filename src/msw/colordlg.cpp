@@ -28,7 +28,7 @@
 
 #include "wx/colour.h"
 #include "wx/gdicmn.h"
-#include "wx/size.h"
+#include "wx/geometry/size.h"
 #include "wx/utils.h"
 
 #include "wx/scopeguard.h"

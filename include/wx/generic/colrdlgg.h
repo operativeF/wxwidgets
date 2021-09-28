@@ -11,7 +11,7 @@
 #ifndef _WX_COLORDLGG_H_
 #define _WX_COLORDLGG_H_
 
-#include "wx/size.h"
+#include "wx/geometry/size.h"
 #include "wx/dialog.h"
 
 #if wxUSE_SLIDER

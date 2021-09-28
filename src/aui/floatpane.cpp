@@ -16,6 +16,8 @@
 #include "wx/aui/framemanager.h"
 #include "wx/aui/floatpane.h"
 #include "wx/aui/dockart.h"
+#include "wx/geometry/rect.h"
+
 
 #ifndef WX_PRECOMP
     #ifdef __WXMSW__

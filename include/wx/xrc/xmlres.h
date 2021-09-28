@@ -19,7 +19,7 @@
 #include "wx/datetime.h"
 #include "wx/list.h"
 #include "wx/gdicmn.h"
-#include "wx/point.h"
+#include "wx/geometry/point.h"
 #include "wx/filesys.h"
 #include "wx/bitmap.h"
 #include "wx/icon.h"

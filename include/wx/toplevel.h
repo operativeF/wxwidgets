@@ -17,7 +17,7 @@
 // headers
 // ----------------------------------------------------------------------------
 
-#include "wx/point.h"
+#include "wx/geometry/point.h"
 #include "wx/nonownedwnd.h"
 #include "wx/iconbndl.h"
 #include "wx/weakref.h"

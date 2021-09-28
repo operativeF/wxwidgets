@@ -19,6 +19,7 @@
 #include <string>
 #include <vector>
 
+class WXDLLIMPEXP_FWD_CORE wxRect;
 class WXDLLIMPEXP_FWD_CORE wxSpinCtrl;
 
 using wxArraySpins = std::vector<wxSpinCtrl*>;

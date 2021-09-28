@@ -23,7 +23,7 @@
 #include "wx/meta/implicitconversion.h"
 
 #if wxUSE_GUI
-    #include "wx/point.h"
+    #include "wx/geometry/point.h"
     #include "wx/mousestate.h"
 
     #include <vector>

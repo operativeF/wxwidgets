@@ -18,6 +18,8 @@
 #include <string>
 
 class WXDLLIMPEXP_FWD_CORE wxButtonToolBarTool;
+class WXDLLIMPEXP_FWD_CORE wxRect;
+
 
 // ----------------------------------------------------------------------------
 // wxButtonToolBar

@@ -20,8 +20,8 @@
 #include "wx/icon.h"
 #include "wx/colour.h"
 #include "wx/gdicmn.h"
-#include "wx/point.h"
-#include "wx/size.h"
+#include "wx/geometry/point.h"
+#include "wx/geometry/size.h"
 
 static void AssertBox(const wxGCDC* aGCDC, int minX, int minY, int width, int height, int margin = 0)
 {

@@ -19,6 +19,7 @@
 
 #include <string>
 
+class WXDLLIMPEXP_FWD_CORE wxRect;
 class WXDLLIMPEXP_FWD_CORE wxPrintData;
 
 // ------------------------------------------------------------------------

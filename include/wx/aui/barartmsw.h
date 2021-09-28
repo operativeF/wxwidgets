@@ -10,6 +10,8 @@
 #ifndef _WX_AUI_BARART_MSW_H_
 #define _WX_AUI_BARART_MSW_H_
 
+class WXDLLIMPEXP_FWD_CORE wxRect;
+
 class WXDLLIMPEXP_AUI wxAuiMSWToolBarArt : public wxAuiGenericToolBarArt
 {
 public:

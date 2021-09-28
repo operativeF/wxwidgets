@@ -14,7 +14,7 @@
 #ifndef WX_PRECOMP
 #endif // WX_PRECOMP
 
-#include "wx/point.h"
+#include "wx/geometry/point.h"
 
 TEST_CASE("Operators")
 {

@@ -13,6 +13,8 @@
 
 #if wxUSE_OWNER_DRAWN
 
+class WXDLLIMPEXP_FWD_CORE wxRect;
+
 struct WXDLLIMPEXP_CORE wxOwnerDrawn : public wxOwnerDrawnBase
 {
     bool OnDrawItem(wxDC& dc, const wxRect& rc,

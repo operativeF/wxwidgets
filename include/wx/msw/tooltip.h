@@ -12,7 +12,8 @@
 #define _WX_MSW_TOOLTIP_H_
 
 #include "wx/object.h"
-#include "wx/gdicmn.h"
+
+#include "wx/geometry/rect.h"
 
 #include <chrono>
 #include <string>

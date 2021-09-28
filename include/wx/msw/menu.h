@@ -25,6 +25,8 @@
 #include <string>
 
 class WXDLLIMPEXP_FWD_CORE wxFrame;
+class WXDLLIMPEXP_FWD_CORE wxRect;
+
 
 // ----------------------------------------------------------------------------
 // Menu

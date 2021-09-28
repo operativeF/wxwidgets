@@ -17,6 +17,8 @@
 
 #include "wx/frame.h"
 #include "wx/menu.h"
+#include "wx/geometry/rect.h"
+
 
 #include <memory>
 #include <string>

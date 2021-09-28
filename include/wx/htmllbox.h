@@ -30,6 +30,8 @@ class WXDLLIMPEXP_FWD_HTML wxHtmlCell;
 class WXDLLIMPEXP_FWD_HTML wxHtmlWinParser;
 class WXDLLIMPEXP_FWD_HTML wxHtmlListBoxCache;
 class WXDLLIMPEXP_FWD_HTML wxHtmlListBoxStyle;
+class WXDLLIMPEXP_FWD_CORE wxRect;
+
 
 constexpr char wxHtmlListBoxNameStr[] = "htmlListBox";
 constexpr char wxSimpleHtmlListBoxNameStr[] = "simpleHtmlListBox";
