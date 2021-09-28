@@ -16,7 +16,7 @@
     #include <memory>
 #endif
 
-#include "wx/gdicmn.h"
+#include "wx/point.h"
 #include "wx/window.h"
 #include "wx/module.h"
 

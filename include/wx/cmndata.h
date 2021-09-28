@@ -15,7 +15,7 @@
 
 #if wxUSE_PRINTING_ARCHITECTURE
 
-#include "wx/gdicmn.h"
+#include "wx/point.h"
 
 #include <string>
 

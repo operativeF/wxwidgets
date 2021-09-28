@@ -27,6 +27,8 @@
 #include "wx/palette.h"
 #include "wx/pen.h"
 #include "wx/settings.h"
+#include "wx/size.h"
+#include "wx/point.h"
 
 
 wxIMPLEMENT_ABSTRACT_CLASS(wxGDIObject, wxObject);
@@ -241,11 +243,6 @@ wxRect operator*(const wxRect& r1, const wxRect& r2)
     const int y2 = std::min(r1.y+r1.height, r2.height+r2.y);
     const int x2 = std::min(r1.x+r1.width, r2.width+r2.x);
     return {x1, y1, x2 - x1, y2 - y1};
-}
-
-constexpr wxRealPoint::wxRealPoint(const wxPoint& pt)
- : x(pt.x), y(pt.y)
-{
 }
 
 // ============================================================================

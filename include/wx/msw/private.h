@@ -26,6 +26,7 @@
 #include <boost/nowide/convert.hpp>
 
 class WXDLLIMPEXP_FWD_CORE wxFont;
+struct WXDLLIMPEXP_FWD_CORE wxSize;
 class WXDLLIMPEXP_FWD_CORE wxWindow;
 class WXDLLIMPEXP_FWD_CORE wxWindowBase;
 

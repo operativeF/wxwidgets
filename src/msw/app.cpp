@@ -25,7 +25,7 @@
 
 #include "wx/app.h"
 #include "wx/utils.h"
-#include "wx/gdicmn.h"
+#include "wx/point.h"
 #include "wx/dialog.h"
 #include "wx/crt.h"
 #include "wx/log.h"

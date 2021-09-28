@@ -11,9 +11,10 @@
 #define _WX_GENERIC_PRIVATE_MARKUPTEXT_H_
 
 #include "wx/defs.h"
-#include "wx/gdicmn.h"
 
+enum class wxEllipsizeMode;
 class WXDLLIMPEXP_FWD_CORE wxDC;
+struct WXDLLIMPEXP_FWD_CORE wxSize;
 
 class wxMarkupParserOutput;
 

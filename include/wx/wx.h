@@ -60,8 +60,10 @@
 #include "wx/palette.h"
 #include "wx/panel.h"
 #include "wx/pen.h"
+#include "wx/point.h"
 #include "wx/region.h"
 #include "wx/settings.h"
+#include "wx/size.h"
 #include "wx/toplevel.h"
 #include "wx/window.h"
 

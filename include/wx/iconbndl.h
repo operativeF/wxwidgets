@@ -12,7 +12,7 @@
 #define _WX_ICONBNDL_H_
 
 #include "wx/gdiobj.h"
-#include "wx/gdicmn.h"      // for wxSize
+#include "wx/size.h"
 #include "wx/icon.h"
 
 #include "wx/dynarray.h"

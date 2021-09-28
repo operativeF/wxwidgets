@@ -26,7 +26,8 @@ class WXDLLIMPEXP_FWD_CORE wxWindowBase;
 // headers we have to include
 // ----------------------------------------------------------------------------
 
-#include "wx/gdicmn.h"  // for wxPoint, wxSize
+#include "wx/size.h"
+#include "wx/point.h"
 
 // ----------------------------------------------------------------------------
 // A caret is a blinking cursor showing the position where the typed text will

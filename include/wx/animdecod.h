@@ -14,8 +14,9 @@
 #include "wx/defs.h"
 
 #include "wx/colour.h"
-#include "wx/gdicmn.h"
 #include "wx/log.h"
+#include "wx/point.h"
+#include "wx/size.h"
 #include "wx/stream.h"
 
 #include <chrono>

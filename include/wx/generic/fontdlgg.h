@@ -11,7 +11,6 @@
 #ifndef _WX_GENERIC_FONTDLGG_H
 #define _WX_GENERIC_FONTDLGG_H
 
-#include "wx/gdicmn.h"
 #include "wx/font.h"
 
 #define USE_SPINCTRL_FOR_POINT_SIZE 0

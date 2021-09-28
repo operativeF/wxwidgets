@@ -20,7 +20,7 @@
 #if wxUSE_AUI
 
 #include "wx/dynarray.h"
-#include "wx/gdicmn.h"
+#include "wx/point.h"
 #include "wx/timer.h"
 #include "wx/sizer.h"
 #include "wx/bitmap.h"

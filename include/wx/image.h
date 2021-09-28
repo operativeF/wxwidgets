@@ -14,7 +14,7 @@
 #if wxUSE_IMAGE
 
 #include "wx/object.h"
-#include "wx/gdicmn.h"
+#include "wx/point.h"
 #include "wx/hashmap.h"
 
 #if wxUSE_STREAMS

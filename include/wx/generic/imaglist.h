@@ -12,6 +12,8 @@
 
 #include "wx/bitmap.h"
 #include "wx/gdicmn.h"
+#include "wx/size.h"
+
 #include <vector>
 
 class WXDLLIMPEXP_FWD_CORE wxDC;

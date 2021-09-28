@@ -27,7 +27,8 @@
 class WXDLLIMPEXP_FWD_CORE wxDC;
 class WXDLLIMPEXP_FWD_CORE wxWindow;
 
-#include "wx/gdicmn.h" // for wxPoint, wxSize
+#include "wx/point.h"
+#include "wx/size.h"
 #include "wx/colour.h"
 #include "wx/font.h"
 #include "wx/bitmap.h"

@@ -24,6 +24,7 @@
 
 #include "wx/gdicmn.h"
 #include "wx/log.h"
+#include "wx/size.h"
 #include "wx/utils.h"
 
 #include "wx/prntbase.h"

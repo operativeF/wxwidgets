@@ -13,7 +13,7 @@
 
 #include "wx/colour.h"
 #include "wx/font.h"
-#include "wx/gdicmn.h"
+#include "wx/point.h"
 #include "wx/event.h"
 #include "wx/control.h"
 #include "wx/itemattr.h"

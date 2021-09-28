@@ -12,6 +12,8 @@
 
 #include "wx/display.h"
 #include "wx/gdicmn.h"      // for wxRect
+#include "wx/size.h"
+
 #include <vector>
 
 // ----------------------------------------------------------------------------

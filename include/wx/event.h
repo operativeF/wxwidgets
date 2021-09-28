@@ -17,12 +17,13 @@
 #include "wx/clntdata.h"
 
 #if wxUSE_GUI
-    #include "wx/gdicmn.h"
+    #include "wx/size.h"
     #include "wx/cursor.h"
     #include "wx/mousestate.h"
 #endif
 
 #include "wx/dynarray.h"
+#include "wx/point.h"
 #include "wx/thread.h"
 #include "wx/tracker.h"
 #include "wx/any.h"

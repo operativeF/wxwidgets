@@ -254,6 +254,7 @@
 #include <wx/pickerbase.h>
 #include <wx/platform.h>
 #include <wx/platinfo.h>
+#include <wx/point.h>
 #include <wx/popupwin.h>
 #include <wx/position.h>
 #include <wx/power.h>
@@ -284,7 +285,6 @@
 #include <wx/sckipc.h>
 #include <wx/sckstrm.h>
 #include <wx/scopedarray.h>
-#include <>
 #include <wx/scopeguard.h>
 #include <wx/scrolbar.h>
 #include <wx/scrolwin.h>
@@ -293,6 +293,7 @@
 #include <wx/settings.h>
 #include <wx/sharedptr.h>
 #include <wx/simplebook.h>
+#include <wx/size.h>
 #include <wx/sizer.h>
 #include <wx/slider.h>
 #include <wx/snglinst.h>

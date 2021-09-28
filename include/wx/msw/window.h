@@ -12,7 +12,8 @@
 #ifndef _WX_WINDOW_H_
 #define _WX_WINDOW_H_
 
-#include "wx/gdicmn.h"
+#include "wx/point.h"
+#include "wx/size.h"
 
 #include <string_view>
 

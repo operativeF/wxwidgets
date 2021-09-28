@@ -11,9 +11,9 @@
 #ifndef _WX_FONT_H_
 #define _WX_FONT_H_
 
-#include "wx/gdicmn.h"
-
 #include <string>
+
+struct WXDLLIMPEXP_FWD_CORE wxSize;
 
 // ----------------------------------------------------------------------------
 // wxFont

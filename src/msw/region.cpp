@@ -17,7 +17,7 @@
 #endif
 
 #include "wx/region.h"
-#include "wx/gdicmn.h"
+#include "wx/point.h"
 
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxRegion, wxGDIObject);

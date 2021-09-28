@@ -13,6 +13,7 @@
 
 #include "wx/gdiobj.h"
 #include "wx/gdicmn.h"
+#include "wx/point.h"
 
 class WXDLLIMPEXP_FWD_CORE wxBitmap;
 class WXDLLIMPEXP_FWD_CORE wxColour;

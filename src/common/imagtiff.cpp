@@ -18,6 +18,7 @@
 #include "wx/log.h"
 #include "wx/intl.h"
 #include "wx/module.h"
+#include "wx/size.h"
 #include "wx/wxcrtvararg.h"
 
 #ifndef WX_PRECOMP

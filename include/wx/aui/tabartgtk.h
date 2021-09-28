@@ -21,8 +21,8 @@
 #if wxUSE_AUI
 
 #include "wx/aui/tabart.h"
-#include "wx/gdicmn.h"
 
+struct WXDLLIMPEXP_FWD_CORE wxSize;
 class wxWindow;
 class wxDC;
 

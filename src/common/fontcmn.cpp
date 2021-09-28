@@ -18,6 +18,7 @@
 #include "wx/dcscreen.h"
 #include "wx/log.h"
 #include "wx/gdicmn.h"
+#include "wx/size.h"
 
 #ifndef WX_PRECOMP
     #if defined(__WXMSW__)

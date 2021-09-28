@@ -11,7 +11,8 @@
 #define _WX_DISPLAY_H_BASE_
 
 #include "wx/defs.h"
-#include "wx/gdicmn.h"      // wxSize
+#include "wx/size.h"
+#include "wx/point.h"
 
 // NB: no #if wxUSE_DISPLAY here, the display geometry part of this class (but
 //     not the video mode stuff) is always available but if wxUSE_DISPLAY == 0

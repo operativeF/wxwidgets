@@ -15,7 +15,7 @@
 
 #if wxUSE_HELP
 
-#include "wx/gdicmn.h"
+#include "wx/point.h"
 
 #include <string>
 

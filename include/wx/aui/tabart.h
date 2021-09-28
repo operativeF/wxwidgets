@@ -21,7 +21,6 @@
 #if wxUSE_AUI
 
 #include "wx/colour.h"
-#include "wx/gdicmn.h"
 #include "wx/font.h"
 #include "wx/pen.h"
 #include "wx/brush.h"
@@ -31,6 +30,7 @@
 
 class wxAuiNotebookPage;
 class wxAuiNotebookPageArray;
+struct WXDLLIMPEXP_FWD_CORE wxSize;
 class wxWindow;
 class wxDC;
 

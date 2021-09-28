@@ -17,6 +17,7 @@
 #include "wx/control.h"
 #include "wx/dc.h"
 #include "wx/renderer.h"
+#include "wx/size.h"
 
 #include "wx/generic/private/markuptext.h"
 
