@@ -1482,11 +1482,11 @@ void wxRibbonMSWArtProvider::DrawTab(
             if(width <= text_width)
             {
                 dc.SetClippingRegion(x, tab.rect.y, width, tab.rect.height);
-                dc.wxDrawText(label, x, y);
+                dc.wxDrawText(label, wxPoint{x, y});
             }
             else
             {
-                dc.wxDrawText(label, x + (width - text_width) / 2 + 1, y);
+                dc.wxDrawText(label, wxPoint{x + (width - text_width) / 2 + 1, y});
             }
         }
     }
@@ -1944,15 +1944,15 @@ void wxRibbonMSWArtProvider::DrawPanelBackground(
         if(clip_label)
         {
             wxDCClipper clip(dc, label_rect);
-            dc.wxDrawText(label, label_rect.x, label_rect.y +
-                (label_rect.GetHeight() - label_size.y) / 2);
+            dc.wxDrawText(label, wxPoint{label_rect.x, label_rect.y +
+                (label_rect.GetHeight() - label_size.y) / 2});
         }
         else
         {
-            dc.wxDrawText(label, label_rect.x +
+            dc.wxDrawText(label, wxPoint{label_rect.x +
                 (label_rect.GetWidth() - label_size.x) / 2,
                 label_rect.y +
-                (label_rect.GetHeight() - label_size.y) / 2);
+                (label_rect.GetHeight() - label_size.y) / 2});
         }
 
         if(has_ext_button)
@@ -2369,7 +2369,7 @@ void wxRibbonMSWArtProvider::DrawMinimisedPanelCommon(
     }
 
     dc.SetTextForeground(m_panel_minimised_label_colour);
-    dc.wxDrawText(wnd->GetLabel(), xpos, ypos);
+    dc.wxDrawText(wnd->GetLabel(), wxPoint{xpos, ypos});
 
 
     wxPoint arrow_points[3];
@@ -2616,7 +2616,7 @@ void wxRibbonMSWArtProvider::DrawButtonBarButtonForeground(
             dc.GetTextExtent(label, &label_w, &label_h);
             if(label_w + 2 * padding <= rect.width)
             {
-                dc.wxDrawText(label, rect.x + (rect.width - label_w) / 2, ypos);
+                dc.wxDrawText(label, wxPoint{rect.x + (rect.width - label_w) / 2, ypos});
                 if(arrow_width != 0)
                 {
                     DrawDropdownArrow(dc, rect.x + rect.width / 2,
@@ -2637,13 +2637,13 @@ void wxRibbonMSWArtProvider::DrawButtonBarButtonForeground(
                         if(label_w + 2 * padding <= rect.width)
                         {
                             dc.wxDrawText(label_top,
-                                rect.x + (rect.width - label_w) / 2, ypos);
+                                wxPoint{rect.x + (rect.width - label_w) / 2, ypos});
                             ypos += label_h;
                             std::string label_bottom = label.substr(breaki + 1);
                             dc.GetTextExtent(label_bottom, &label_w, &label_h);
                             label_w += arrow_width;
                             int iX = rect.x + (rect.width - label_w) / 2;
-                            dc.wxDrawText(label_bottom, iX, ypos);
+                            dc.wxDrawText(label_bottom, wxPoint{iX, ypos});
                             if(arrow_width != 0)
                             {
                                 DrawDropdownArrow(dc,
@@ -2667,8 +2667,7 @@ void wxRibbonMSWArtProvider::DrawButtonBarButtonForeground(
             // TODO: Return value.
             wxCoord label_w, label_h;
             dc.GetTextExtent(label, &label_w, &label_h);
-            dc.wxDrawText(label, x_cursor,
-                rect.y + (rect.height - label_h) / 2);
+            dc.wxDrawText(label, wxPoint{x_cursor, rect.y + (rect.height - label_h) / 2});
             x_cursor += label_w + 3;
             if(kind != wxRIBBON_BUTTON_NORMAL)
             {

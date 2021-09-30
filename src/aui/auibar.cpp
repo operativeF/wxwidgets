@@ -267,7 +267,7 @@ void wxAuiGenericToolBarArt::DrawLabel(
     int textX, textY;
     textX = rect.x + 1;
     textY = rect.y + (rect.height-textHeight)/2;
-    dc.wxDrawText(item.GetLabel(), textX, textY);
+    dc.wxDrawText(item.GetLabel(), wxPoint{textX, textY});
     dc.DestroyClippingRegion();
 }
 
@@ -370,7 +370,7 @@ void wxAuiGenericToolBarArt::DrawButton(
 
     if ( (m_flags & wxAUI_TB_TEXT) && !item.GetLabel().empty() )
     {
-        dc.wxDrawText(item.GetLabel(), textX, textY);
+        dc.wxDrawText(item.GetLabel(), wxPoint{textX, textY});
     }
 }
 
@@ -500,7 +500,7 @@ void wxAuiGenericToolBarArt::DrawDropDownButton(
 
     if ( (m_flags & wxAUI_TB_TEXT) && !item.GetLabel().empty() )
     {
-        dc.wxDrawText(item.GetLabel(), textX, textY);
+        dc.wxDrawText(item.GetLabel(), wxPoint{textX, textY});
     }
 }
 
@@ -542,7 +542,7 @@ void wxAuiGenericToolBarArt::DrawControlLabel(
 
     if ( (m_flags & wxAUI_TB_TEXT) && !item.GetLabel().empty() )
     {
-        dc.wxDrawText(item.GetLabel(), textX, textY);
+        dc.wxDrawText(item.GetLabel(), wxPoint{textX, textY});
     }
 }
 

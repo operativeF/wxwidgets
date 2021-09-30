@@ -209,7 +209,7 @@ void wxRichTextPrintout::RenderPage(wxDC *dc, int page)
 
             int x = headerRect.GetLeft();
             int y = headerRect.GetX();
-            dc->wxDrawText(headerTextLeft, x, y);
+            dc->wxDrawText(headerTextLeft, wxPoint{x, y});
         }
         if (!headerTextCentre.empty())
         {
@@ -220,7 +220,7 @@ void wxRichTextPrintout::RenderPage(wxDC *dc, int page)
 
             int x = headerRect.GetWidth()/2 - tx/2 + headerRect.GetLeft();
             int y = headerRect.GetY();
-            dc->wxDrawText(headerTextCentre, x, y);
+            dc->wxDrawText(headerTextCentre, wxPoint{x, y});
         }
         if (!headerTextRight.empty())
         {
@@ -231,7 +231,7 @@ void wxRichTextPrintout::RenderPage(wxDC *dc, int page)
 
             int x = headerRect.GetRight() - tx;
             int y = headerRect.GetY();
-            dc->wxDrawText(headerTextRight, x, y);
+            dc->wxDrawText(headerTextRight, wxPoint{x, y});
         }
 
         // Draw footer, if any
@@ -248,7 +248,7 @@ void wxRichTextPrintout::RenderPage(wxDC *dc, int page)
 
             int x = footerRect.GetLeft();
             int y = footerRect.GetBottom() - ty;
-            dc->wxDrawText(footerTextLeft, x, y);
+            dc->wxDrawText(footerTextLeft, wxPoint{x, y});
         }
         if (!footerTextCentre.empty())
         {
@@ -259,7 +259,7 @@ void wxRichTextPrintout::RenderPage(wxDC *dc, int page)
 
             int x = footerRect.GetWidth()/2 - tx/2 + footerRect.GetLeft();
             int y = footerRect.GetBottom() - ty;
-            dc->wxDrawText(footerTextCentre, x, y);
+            dc->wxDrawText(footerTextCentre, wxPoint{x, y});
         }
         if (!footerTextRight.empty())
         {
@@ -270,7 +270,7 @@ void wxRichTextPrintout::RenderPage(wxDC *dc, int page)
 
             int x = footerRect.GetRight() - tx;
             int y = footerRect.GetBottom() - ty;
-            dc->wxDrawText(footerTextRight, x, y);
+            dc->wxDrawText(footerTextRight, wxPoint{x, y});
         }
     }
 

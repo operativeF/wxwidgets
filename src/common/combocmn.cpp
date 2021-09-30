@@ -620,8 +620,8 @@ void wxComboPopup::DefaultPaintComboControl( wxComboCtrlBase* combo,
         combo->PrepareBackground(dc,rect,0);
 
         dc.wxDrawText( combo->GetValue(),
-                     rect.x + combo->m_marginLeft,
-                     (rect.height-dc.GetCharHeight())/2 + rect.y );
+                     wxPoint{rect.x + combo->m_marginLeft,
+                            (rect.height-dc.GetCharHeight())/2 + rect.y} );
     }
 }
 

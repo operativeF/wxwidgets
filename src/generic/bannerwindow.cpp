@@ -305,13 +305,13 @@ wxBannerWindow::DrawBannerTextLine(wxDC& dc,
         case wxLEFT:
             // We draw the text vertically and start from the lower left
             // corner and not the upper left one as usual.
-            dc.DrawRotatedText(str, pos.y, GetClientSize().y - pos.x, 90);
+            dc.DrawRotatedText(str, wxPoint{pos.y, GetClientSize().y - pos.x}, 90);
             break;
 
         case wxRIGHT:
             // We also draw the text vertically but now we start from the upper
             // right corner and draw it from top to bottom.
-            dc.DrawRotatedText(str, GetClientSize().x - pos.y, pos.x, -90);
+            dc.DrawRotatedText(str, wxPoint{GetClientSize().x - pos.y, pos.x}, -90);
             break;
 
         case wxALL:

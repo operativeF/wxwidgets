@@ -63,8 +63,8 @@ void wxPGCellRenderer::wxDrawText( wxDC& dc, const wxRect& rect,
                                  int xOffset, const std::string& text ) const
 {
     dc.wxDrawText( text,
-                 rect.x+xOffset+wxPG_XBEFORETEXT,
-                 rect.y+((rect.height-dc.GetCharHeight())/2) );
+                   wxPoint{rect.x+xOffset+wxPG_XBEFORETEXT,
+                           rect.y+((rect.height-dc.GetCharHeight())/2)} );
 }
 
 void wxPGCellRenderer::DrawEditorValue( wxDC& dc, const wxRect& rect,
@@ -84,8 +84,8 @@ void wxPGCellRenderer::DrawEditorValue( wxDC& dc, const wxRect& rect,
     else
     {
         dc.wxDrawText( text,
-                     rect.x+xOffset+wxPG_XBEFORETEXT,
-                     rect.y+yOffset );
+                       wxPoint{rect.x+xOffset+wxPG_XBEFORETEXT,
+                               rect.y+yOffset} );
     }
 }
 

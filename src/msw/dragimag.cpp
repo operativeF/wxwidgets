@@ -176,15 +176,15 @@ bool wxDragImage::Create(const std::string& str, const wxCursor& cursor)
     dc2.Clear();
     dc2.SetBackgroundMode(wxBrushStyle::Transparent);
     dc2.SetTextForeground(* wxLIGHT_GREY);
-    dc2.wxDrawText(str, 0, 0);
-    dc2.wxDrawText(str, 1, 0);
-    dc2.wxDrawText(str, 2, 0);
-    dc2.wxDrawText(str, 1, 1);
-    dc2.wxDrawText(str, 2, 1);
-    dc2.wxDrawText(str, 1, 2);
-    dc2.wxDrawText(str, 2, 2);
+    dc2.wxDrawText(str, wxPoint{0, 0});
+    dc2.wxDrawText(str, wxPoint{1, 0});
+    dc2.wxDrawText(str, wxPoint{2, 0});
+    dc2.wxDrawText(str, wxPoint{1, 1});
+    dc2.wxDrawText(str, wxPoint{2, 1});
+    dc2.wxDrawText(str, wxPoint{1, 2});
+    dc2.wxDrawText(str, wxPoint{2, 2});
     dc2.SetTextForeground(* wxBLACK);
-    dc2.wxDrawText(str, 1, 1);
+    dc2.wxDrawText(str, wxPoint{1, 1});
 
     dc2.SelectObject(wxNullBitmap);
 

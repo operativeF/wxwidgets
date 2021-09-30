@@ -218,7 +218,7 @@ TEST_CASE("Bounding box tests.")
         std::string text("vertical");
         auto textExtent = m_gcdc->GetTextExtent(text);
 
-        m_gcdc->DrawRotatedText(text, 43, 22, -90);
+        m_gcdc->DrawRotatedText(text, wxPoint{43, 22}, -90);
         AssertBox(m_gcdc.get(), 43 - textExtent.y, 22,
                                 textExtent.y, textExtent.x, 3);
     }
@@ -228,7 +228,7 @@ TEST_CASE("Bounding box tests.")
         std::string text("H");
         auto textExtent = m_gcdc->GetTextExtent(text);
 
-        m_gcdc->wxDrawText(text, 3, 3);
+        m_gcdc->wxDrawText(text, wxPoint{3, 3});
         AssertBox(m_gcdc.get(), 3, 3, textExtent.x, textExtent.y, 3);
     }
 

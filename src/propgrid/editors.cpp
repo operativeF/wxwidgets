@@ -126,7 +126,7 @@ void wxPGEditor::DrawValue( wxDC& dc, const wxRect& rect,
                             wxPGProperty* WXUNUSED(property),
                             const std::string& text ) const
 {
-    dc.wxDrawText( text, rect.x+wxPG_XBEFORETEXT, rect.y );
+    dc.wxDrawText( text, wxPoint{rect.x + wxPG_XBEFORETEXT, rect.y} );
 }
 
 bool wxPGEditor::GetValueFromControl( wxVariant&, wxPGProperty*, wxWindow* ) const
@@ -885,7 +885,7 @@ void wxPropertyGrid::OnComboItemPaint( const wxPGComboBox* pCb,
 
     pt.x += 1;
 
-    dc.wxDrawText( text, pt.x + wxPG_XBEFORETEXT, pt.y );
+    dc.wxDrawText( text, wxPoint{pt.x + wxPG_XBEFORETEXT, pt.y} );
 
     if ( renderer )
         renderer->PostDrawCell(dc, this, *cell, renderFlags);

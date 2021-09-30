@@ -124,8 +124,8 @@ protected:
                 wxCoord xsrcMask = wxDefaultCoord, wxCoord ysrcMask = wxDefaultCoord) override;
     void DoDrawIcon(const wxIcon& icon, wxCoord x, wxCoord y) override;
     void DoDrawBitmap(const wxBitmap& bitmap, wxCoord x, wxCoord y, bool useMask = false) override;
-    void DoDrawText(const wxString& text, wxCoord x, wxCoord y) override;
-    void DoDrawRotatedText(const wxString& text, wxCoord x, wxCoord y, double angle) override;
+    void DoDrawText(const wxString& text, const wxPoint& pt) override;
+    void DoDrawRotatedText(const wxString& text, const wxPoint& pt, double angle) override;
     void DoSetClippingRegion(wxCoord x, wxCoord y, wxCoord width, wxCoord height) override;
     void DoSetDeviceClippingRegion( const wxRegion &WXUNUSED(clip)) override
     {

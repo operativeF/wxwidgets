@@ -2677,8 +2677,8 @@ void wxGenericTreeCtrl::PaintItem(wxGenericTreeItem *item, wxDC& dc)
     dc.SetBackgroundMode(wxBrushStyle::Transparent);
     int extraH = (total_h > text_h) ? (total_h - text_h)/2 : 0;
     dc.wxDrawText( item->GetText(),
-                 (wxCoord)(state_w + image_w + item->GetX()),
-                 (wxCoord)(item->GetY() + extraH));
+                   wxPoint{(wxCoord)(state_w + image_w + item->GetX()),
+                           (wxCoord)(item->GetY() + extraH)});
 
     // restore normal font
     dc.SetFont( m_normalFont );

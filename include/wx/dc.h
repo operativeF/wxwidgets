@@ -473,9 +473,9 @@ public:
     virtual void DoDrawBitmap(const wxBitmap &bmp, wxCoord x, wxCoord y,
                               bool useMask = false) = 0;
 
-    virtual void DoDrawText(std::string_view text, wxCoord x, wxCoord y) = 0;
+    virtual void DoDrawText(std::string_view text, wxPoint pt) = 0;
     virtual void DoDrawRotatedText(std::string_view text,
-                                   wxCoord x, wxCoord y, double angle) = 0;
+                                   wxPoint pt, double angle) = 0;
 
     virtual bool DoBlit(wxCoord xdest, wxCoord ydest,
                         wxCoord width, wxCoord height,
@@ -517,9 +517,9 @@ public:
 
 
 #if wxUSE_SPLINES
-    void DrawSpline(wxCoord x1, wxCoord y1,
-                            wxCoord x2, wxCoord y2,
-                            wxCoord x3, wxCoord y3);
+    void DrawSpline(wxPoint pt1,
+                    wxPoint pt2,
+                    wxPoint pt3);
     void DrawSpline(int n, const wxPoint points[]);
     void DrawSpline(const wxPointList *points) { DoDrawSpline(points); }
 
@@ -1083,15 +1083,11 @@ public:
                     bool useMask = false)
         { m_pimpl->DoDrawBitmap(bmp, pt.x, pt.y, useMask); }
 
-    void wxDrawText(std::string_view text, wxCoord x, wxCoord y)
-        { m_pimpl->DoDrawText(text, x, y); }
     void wxDrawText(std::string_view text, const wxPoint& pt)
-        { m_pimpl->DoDrawText(text, pt.x, pt.y); }
+        { m_pimpl->DoDrawText(text, pt); }
 
-    void DrawRotatedText(std::string_view text, wxCoord x, wxCoord y, double angle)
-        { m_pimpl->DoDrawRotatedText(text, x, y, angle); }
     void DrawRotatedText(std::string_view text, const wxPoint& pt, double angle)
-        { m_pimpl->DoDrawRotatedText(text, pt.x, pt.y, angle); }
+        { m_pimpl->DoDrawRotatedText(text, pt, angle); }
 
     // this version puts both optional bitmap and the text into the given
     // rectangle and aligns is as specified by alignment parameter; it also
@@ -1152,10 +1148,10 @@ public:
     }
 
 #if wxUSE_SPLINES
-    void DrawSpline(wxCoord x1, wxCoord y1,
-                    wxCoord x2, wxCoord y2,
-                    wxCoord x3, wxCoord y3)
-        { m_pimpl->DrawSpline(x1,y1,x2,y2,x3,y3); }
+    void DrawSpline(wxPoint pt1,
+                    wxPoint pt2,
+                    wxPoint pt3)
+        { m_pimpl->DrawSpline(pt1, pt2, pt3); }
     void DrawSpline(int n, const wxPoint points[])
         { m_pimpl->DrawSpline(n,points); }
     void DrawSpline(const wxPointList *points)

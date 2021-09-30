@@ -654,12 +654,12 @@ void wxSVGFileDCImpl::DoDrawPoint(wxCoord x, wxCoord y)
     write(s);
 }
 
-void wxSVGFileDCImpl::DoDrawText(std::string_view text, wxCoord x, wxCoord y)
+void wxSVGFileDCImpl::DoDrawText(std::string_view text, wxPoint pt)
 {
-    DoDrawRotatedText(text, x, y, 0.0);
+    DoDrawRotatedText(text, pt, 0.0);
 }
 
-void wxSVGFileDCImpl::DoDrawRotatedText(std::string_view sText, wxCoord x, wxCoord y, double angle)
+void wxSVGFileDCImpl::DoDrawRotatedText(std::string_view sText, wxPoint pt, double angle)
 {
     //known bug; if the font is drawn in a scaled DC, it will not behave exactly as wxMSW
     NewGraphicsIfNeeded();
@@ -673,10 +673,10 @@ void wxSVGFileDCImpl::DoDrawRotatedText(std::string_view sText, wxCoord x, wxCoo
     const double rad = wxDegToRad(angle);
 
     // Update bounding box: upper left, upper right, bottom left, bottom right
-    CalcBoundingBox(x, y);
-    CalcBoundingBox((wxCoord)(x + w * std::cos(rad)), (wxCoord)(y - h * std::sin(rad)));
-    CalcBoundingBox((wxCoord)(x + h * std::sin(rad)), (wxCoord)(y + h * std::cos(rad)));
-    CalcBoundingBox((wxCoord)(x + h * std::sin(rad) + w * std::cos(rad)), (wxCoord)(y + h * std::cos(rad) - w * std::sin(rad)));
+    CalcBoundingBox(pt.x, pt.y);
+    CalcBoundingBox((wxCoord)(pt.x + w * std::cos(rad)), (wxCoord)(pt.y - h * std::sin(rad)));
+    CalcBoundingBox((wxCoord)(pt.x + h * std::sin(rad)), (wxCoord)(pt.y + h * std::cos(rad)));
+    CalcBoundingBox((wxCoord)(pt.x + h * std::sin(rad) + w * std::cos(rad)), (wxCoord)(pt.y + h * std::cos(rad) - w * std::sin(rad)));
 
     // Create text style string
     wxString fontstyle;
@@ -730,8 +730,8 @@ void wxSVGFileDCImpl::DoDrawRotatedText(std::string_view sText, wxCoord x, wxCoo
     
     for (auto line : lines)
     {
-        const double xRect = x + lineNum * dx;
-        const double yRect = y + lineNum * dy;
+        const double xRect = pt.x + lineNum * dx;
+        const double yRect = pt.y + lineNum * dy;
 
         // convert x,y to SVG text x,y (the coordinates of the text baseline)
         wxCoord desc;

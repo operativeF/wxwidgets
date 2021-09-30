@@ -185,9 +185,8 @@ public:
     void DoDrawBitmap(const wxBitmap &bmp, wxCoord x, wxCoord y,
         bool useMask = false) override;
 
-    void DoDrawText(std::string_view text, wxCoord x, wxCoord y) override;
-    void DoDrawRotatedText(std::string_view text, wxCoord x, wxCoord y,
-        double angle) override;
+    void DoDrawText(std::string_view text, wxPoint pt) override;
+    void DoDrawRotatedText(std::string_view text, wxPoint pt, double angle) override;
 
     bool DoBlit(wxCoord xdest, wxCoord ydest, wxCoord width, wxCoord height,
                         wxDC *source, wxCoord xsrc, wxCoord ysrc,

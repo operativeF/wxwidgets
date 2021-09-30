@@ -1383,12 +1383,12 @@ void wxPostScriptDCImpl::DoDrawText( const wxString& text, wxCoord x, wxCoord y 
     CalcBoundingBox(x + w , y + h);
 }
 
-void wxPostScriptDCImpl::DoDrawRotatedText( const wxString& text, wxCoord x, wxCoord y, double angle )
+void wxPostScriptDCImpl::DoDrawRotatedText( const wxString& text, const wxPoint& pt, double angle )
 {
     // FIXME: Double equality
     if ( angle == 0.0 )
     {
-        DoDrawText(text, x, y);
+        DoDrawText(text, pt);
         return;
     }
 
@@ -1405,8 +1405,8 @@ void wxPostScriptDCImpl::DoDrawRotatedText( const wxString& text, wxCoord x, wxC
     GetOwner()->GetTextExtent(text, nullptr, nullptr, &text_descent);
     int size = m_font.GetPointSize();
     double rad = wxDegToRad(angle);
-    wxCoord bx = wxRound(x + (size - text_descent) * std::sin(rad));
-    wxCoord by = wxRound(y + (size - text_descent) * std::cos(rad));
+    wxCoord bx = wxRound(pt.x + (size - text_descent) * std::sin(rad));
+    wxCoord by = wxRound(pt.y + (size - text_descent) * std::cos(rad));
 
     wxString buffer;
     buffer.Printf( "%f %f moveto\n", XLOG2DEV(bx), YLOG2DEV(by));
@@ -1426,8 +1426,8 @@ void wxPostScriptDCImpl::DoDrawRotatedText( const wxString& text, wxCoord x, wxC
     wxCoord w, h;
     GetOwner()->GetMultiLineTextExtent(text, &w, &h);
     // "upper left" and "upper right"
-    CalcBoundingBox(x, y);
-    CalcBoundingBox(x + wxCoord(w*cos(rad)), y - wxCoord(w * std::sin(rad)));
+    CalcBoundingBox(pt.x, pt.y);
+    CalcBoundingBox(pt.x + wxCoord(w*cos(rad)), pt.y - wxCoord(w * std::sin(rad)));
     // "bottom left" and "bottom right"
     x += (wxCoord)(h * std::sin(rad));
     y += (wxCoord)(h * std::cos(rad));

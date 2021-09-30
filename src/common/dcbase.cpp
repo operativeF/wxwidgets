@@ -506,7 +506,7 @@ void wxDCImpl::SetUserScale(wxScale userScale)
 
 void wxDCImpl::SetLogicalScale(double logicalScale)
 {
-    SetLogicalScale({ logicalScale, logicalScale });
+    SetLogicalScale(wxScale{ logicalScale, logicalScale });
 }
 
 void wxDCImpl::SetLogicalScale(wxScale logicalScale)
@@ -712,11 +712,11 @@ wxDCImpl::DoDrawPolyPolygon(int n,
 #if wxUSE_SPLINES
 
 // TODO: Use wxPoint.
-void wxDCImpl::DrawSpline(wxCoord x1, wxCoord y1,
-                          wxCoord x2, wxCoord y2,
-                          wxCoord x3, wxCoord y3)
+void wxDCImpl::DrawSpline(wxPoint pt1,
+                          wxPoint pt2,
+                          wxPoint pt3)
 {
-    std::array<wxPoint, 3> points = { wxPoint{x1, y1}, wxPoint{x2, y2}, wxPoint{x3, y3} };
+    std::array<wxPoint, 3> points = { pt1, pt2, pt3 };
     // TODO: Use span
     DrawSpline(points.size(), points.data());
 }
@@ -1216,7 +1216,7 @@ void wxDC::DrawLabel(std::string_view text,
                 }
                 //else: left aligned, nothing to do
 
-                wxDrawText(curLine, xRealStart, y);
+                wxDrawText(curLine, wxPoint{xRealStart, y});
             }
 
             y += heightLine;

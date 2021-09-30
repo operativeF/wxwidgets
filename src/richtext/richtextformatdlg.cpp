@@ -512,7 +512,7 @@ void wxRichTextFontPreviewCtrl::OnPaint(wxPaintEvent& WXUNUSED(event))
 
         dc.SetTextForeground(GetForegroundColour());
         dc.SetClippingRegion(2, 2, size.x-4, size.y-4);
-        dc.wxDrawText(text, cx, cy);
+        dc.wxDrawText(text, wxPoint{cx, cy});
 
         if (GetTextEffects() & wxTEXT_ATTR_EFFECT_STRIKETHROUGH)
         {

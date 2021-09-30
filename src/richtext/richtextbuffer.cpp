@@ -7069,7 +7069,7 @@ bool wxRichTextPlainText::DrawTabbedString(wxDC& dc, const wxRichTextAttr& attr,
                     wxRect selRect(x, rect.y, w, rect.GetHeight());
                     dc.DrawRectangle(selRect);
                 }
-                dc.wxDrawText(stringChunk, x, y);
+                dc.wxDrawText(stringChunk, wxPoint{x, y});
 
                 if (attr.HasTextEffects() && (attr.GetTextEffects() & wxTEXT_ATTR_EFFECT_STRIKETHROUGH))
                 {
@@ -7093,7 +7093,7 @@ bool wxRichTextPlainText::DrawTabbedString(wxDC& dc, const wxRichTextAttr& attr,
             wxRect selRect(x, rect.y, w, rect.GetHeight());
             dc.DrawRectangle(selRect);
         }
-        dc.wxDrawText(str, x, y);
+        dc.wxDrawText(str, wxPoint{x, y});
 
         if (attr.HasTextEffects() && (attr.GetTextEffects() & wxTEXT_ATTR_EFFECT_STRIKETHROUGH))
         {
@@ -9189,7 +9189,7 @@ bool wxRichTextStdRenderer::DrawTextBullet(wxRichTextParagraph* paragraph, wxDC&
         else if (attr.GetBulletStyle() & wxTEXT_ATTR_BULLET_STYLE_ALIGN_CENTRE)
             x = x + (rect.width)/2 - tw/2;
 
-        dc.wxDrawText(text1, x, y);
+        dc.wxDrawText(text1, wxPoint{x, y});
 
         return true;
     }
@@ -9628,7 +9628,7 @@ bool wxRichTextFieldTypeStandard::Draw(wxRichTextField* obj, wxDC& dc, wxRichTex
 
             int x = clientArea.x + (clientArea.width - textExtents.x)/2;
             int y = clientArea.y + (clientArea.height - textExtents.y)/2;
-            dc.wxDrawText(label, x, y);
+            dc.wxDrawText(label, wxPoint{x, y});
         }
     }
 

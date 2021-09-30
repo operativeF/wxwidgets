@@ -496,7 +496,7 @@ void wxRibbonAUIArtProvider::DrawTab(wxDC& dc,
                     icon.GetScaledHeight()) / 2, true);
             }
             dc.SetClippingRegion(x, tab.rect.y, width, tab.rect.height);
-            dc.wxDrawText(label, x, y);
+            dc.wxDrawText(label, wxPoint{x, y});
         }
     }
 
@@ -783,7 +783,7 @@ void wxRibbonAUIArtProvider::DrawPanelBackground(
         label_bg_colour, label_bg_grad_colour, wxSOUTH);
 #endif
     dc.SetFont(m_panel_label_font);
-    dc.wxDrawText(wnd->GetLabel(), label_rect.x + 3, label_rect.y + 2);
+    dc.wxDrawText(wnd->GetLabel(), wxPoint{label_rect.x + 3, label_rect.y + 2});
 
     if(wnd->IsHovered())
     {

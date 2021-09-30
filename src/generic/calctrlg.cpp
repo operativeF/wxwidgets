@@ -805,7 +805,7 @@ void wxGenericCalendarCtrl::OnPaint(wxPaintEvent& WXUNUSED(event))
         // draw month-name centered above weekdays
         const wxCoord monthx = ((m_widthCol * 7) - monthw) / 2 + x0;
         const wxCoord monthy = ((m_heightRow - monthh) / 2) + y;
-        dc.wxDrawText(headertext, monthx,  monthy);
+        dc.wxDrawText(headertext, wxPoint{monthx,  monthy});
 
         // calculate the "month-arrows"
         wxPoint leftarrow[3];
@@ -879,7 +879,7 @@ void wxGenericCalendarCtrl::OnPaint(wxPaintEvent& WXUNUSED(event))
                 n = wd;
             wxCoord dayw, dayh;
             dc.GetTextExtent(m_weekdays[n], &dayw, &dayh);
-            dc.wxDrawText(m_weekdays[n], x0 + (wd*m_widthCol) + ((m_widthCol- dayw) / 2), y); // center the day-name
+            dc.wxDrawText(m_weekdays[n], wxPoint{x0 + (wd*m_widthCol) + ((m_widthCol- dayw) / 2), y}); // center the day-name
         }
     }
 
@@ -897,11 +897,11 @@ void wxGenericCalendarCtrl::OnPaint(wxPaintEvent& WXUNUSED(event))
         dc.SetPen(wxPen(m_colHeaderBg, 1, wxPenStyle::Solid));
         dc.DrawRectangle( 0, y, m_calendarWeekWidth, m_heightRow * 6 );
         wxDateTime date = GetStartDate();
-        for ( size_t i = 0; i < 6; ++i )
+        for ( int i = 0; i < 6; ++i )
         {
             const int weekNr = date.GetWeekOfYear();
             std::string text = fmt::format("{:d}", weekNr );
-            dc.wxDrawText( text, m_calendarWeekWidth - dc.GetTextExtent( text ).x - 2, y + m_heightRow * i );
+            dc.wxDrawText( text, wxPoint{m_calendarWeekWidth - dc.GetTextExtent( text ).x - 2, y + m_heightRow * i} );
             date += wxDateSpan::Week();
         }
     }
@@ -999,7 +999,7 @@ void wxGenericCalendarCtrl::OnPaint(wxPaintEvent& WXUNUSED(event))
                 }
 
                 const wxCoord x = wd*m_widthCol + (m_widthCol - width) / 2 + x0;
-                dc.wxDrawText(dayStr, x, y + 1);
+                dc.wxDrawText(dayStr, wxPoint{x, y + 1});
 
                 if ( !isSel && attr && attr->HasBorder() )
                 {

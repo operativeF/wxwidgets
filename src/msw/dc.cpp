@@ -1457,7 +1457,7 @@ void wxMSWDCImpl::DoDrawBitmap( const wxBitmap &bmp, wxCoord x, wxCoord y, bool 
     CalcBoundingBox(x + bmp.GetWidth(), y + bmp.GetHeight());
 }
 
-void wxMSWDCImpl::DoDrawText(std::string_view text, wxCoord x, wxCoord y)
+void wxMSWDCImpl::DoDrawText(std::string_view text, wxPoint pt)
 {
     // For compatibility with other ports (notably wxGTK) and because it's
     // genuinely useful, we allow passing multiline strings to DrawText().
@@ -1467,7 +1467,7 @@ void wxMSWDCImpl::DoDrawText(std::string_view text, wxCoord x, wxCoord y)
     // only so there won't be any infinite recursion here.
     if ( text.find('\n') != std::string_view::npos )
     {
-        GetOwner()->DrawLabel(text, wxRect(x, y, 0, 0));
+        GetOwner()->DrawLabel(text, wxRect(pt.x, pt.y, 0, 0));
         return;
     }
 
@@ -1476,18 +1476,18 @@ void wxMSWDCImpl::DoDrawText(std::string_view text, wxCoord x, wxCoord y)
 
     wxBkModeChanger bkMode(GetHdc(), m_backgroundMode);
 
-    DrawAnyText(text, x, y);
+    DrawAnyText(text, pt);
 
     // update the bounding box
-    CalcBoundingBox(x, y);
+    CalcBoundingBox(pt.x, pt.y);
 
     const auto textExtents = GetOwner()->GetTextExtent(text);
-    CalcBoundingBox(x + textExtents.x, y + textExtents.y);
+    CalcBoundingBox(pt.x + textExtents.x, pt.y + textExtents.y);
 }
 
-void wxMSWDCImpl::DrawAnyText(std::string_view text, wxCoord x, wxCoord y)
+void wxMSWDCImpl::DrawAnyText(std::string_view text, wxPoint pt)
 {
-    if ( ::ExtTextOutW(GetHdc(), XLOG2DEV(x), YLOG2DEV(y), 0, nullptr,
+    if ( ::ExtTextOutW(GetHdc(), XLOG2DEV(pt.x), YLOG2DEV(pt.y), 0, nullptr,
                    boost::nowide::widen(text).c_str(), gsl::narrow_cast<UINT>(text.length()), nullptr) == 0 )
     {
         wxLogLastError(wxT("TextOut"));
@@ -1495,8 +1495,8 @@ void wxMSWDCImpl::DrawAnyText(std::string_view text, wxCoord x, wxCoord y)
 }
 
 void wxMSWDCImpl::DoDrawRotatedText(std::string_view text,
-                             wxCoord x, wxCoord y,
-                             double angle)
+                                    wxPoint pt,
+                                    double angle)
 {
     // we test that we have some font because otherwise we should still use the
     // "else" part below to avoid that DrawRotatedText(angle = 180) and
@@ -1504,7 +1504,7 @@ void wxMSWDCImpl::DoDrawRotatedText(std::string_view text,
     // font for drawing rotated fonts unfortunately)
     if ( (angle == 0.0) && m_font.IsOk() )
     {
-        DoDrawText(text, x, y);
+        DoDrawText(text, pt);
 
         // Bounding box already updated by DoDrawText(), no need to do it again.
         return;
@@ -1569,8 +1569,7 @@ void wxMSWDCImpl::DoDrawRotatedText(std::string_view text,
         // Calculate origin for each line to avoid accumulation of
         // rounding errors.
         DrawAnyText(line,
-                    x + wxRound(lineNum*dx),
-                    y + wxRound(lineNum*dy));
+                    wxPoint{pt.x + wxRound(lineNum*dx), pt.y + wxRound(lineNum*dy)});
         ++lineNum;
     }
 
@@ -1580,14 +1579,14 @@ void wxMSWDCImpl::DoDrawRotatedText(std::string_view text,
     // determining which of them is really topmost/leftmost/...)
 
     // "upper left" and "upper right"
-    CalcBoundingBox(x, y);
-    CalcBoundingBox(x + wxCoord(w * std::cos(rad)), y - wxCoord(w * std::sin(rad)));
+    CalcBoundingBox(pt.x, pt.y);
+    CalcBoundingBox(pt.x + wxCoord(w * std::cos(rad)), pt.y - wxCoord(w * std::sin(rad)));
 
     // "bottom left" and "bottom right"
-    x += (wxCoord)(h * std::sin(rad));
-    y += (wxCoord)(h * std::cos(rad));
-    CalcBoundingBox(x, y);
-    CalcBoundingBox(x + wxCoord(w * std::cos(rad)), y - wxCoord(w * std::sin(rad)));
+    pt.x += (wxCoord)(h * std::sin(rad));
+    pt.y += (wxCoord)(h * std::cos(rad));
+    CalcBoundingBox(pt.x, pt.y);
+    CalcBoundingBox(pt.x + wxCoord(w * std::cos(rad)), pt.y - wxCoord(w * std::sin(rad)));
 }
 
 // ---------------------------------------------------------------------------

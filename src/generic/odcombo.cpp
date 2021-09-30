@@ -1164,12 +1164,12 @@ void wxOwnerDrawnComboBox::OnDrawItem( wxDC& dc,
         }
 
         dc.wxDrawText( text,
-                     rect.x + GetMargins().x,
-                     (rect.height-dc.GetCharHeight())/2 + rect.y );
+                       wxPoint{rect.x + GetMargins().x,
+                               (rect.height-dc.GetCharHeight())/2 + rect.y} );
     }
     else
     {
-        dc.wxDrawText( GetVListBoxComboPopup()->GetString(item), rect.x + 2, rect.y );
+        dc.wxDrawText( GetVListBoxComboPopup()->GetString(item), wxPoint{rect.x + 2, rect.y} );
     }
 }
 

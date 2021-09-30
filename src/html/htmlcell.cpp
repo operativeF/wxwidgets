@@ -472,20 +472,20 @@ void wxHtmlWordCell::Draw(wxDC& dc, int x, int y,
         if ( part1 > 0 )
         {
             txt = m_Word.substr(0, part1);
-            dc.wxDrawText(txt, x + m_PosX, y + m_PosY);
+            dc.wxDrawText(txt, wxPoint{x + m_PosX, y + m_PosY});
             ofs += s->GetExtentBeforeSelection();
         }
 
         SwitchSelState(dc, info, true);
 
         txt = m_Word.substr(part1, part2-part1);
-        dc.wxDrawText(txt, ofs + x + m_PosX, y + m_PosY);
+        dc.wxDrawText(txt, wxPoint{ofs + x + m_PosX, y + m_PosY});
 
         if ( (size_t)part2 < m_Word.length() )
         {
             SwitchSelState(dc, info, false);
             txt = m_Word.substr(part2);
-            dc.wxDrawText(txt, x + m_PosX + s->GetExtentBeforeSelectionEnd(), y + m_PosY);
+            dc.wxDrawText(txt, wxPoint{x + m_PosX + gsl::narrow_cast<int>(s->GetExtentBeforeSelectionEnd()), y + m_PosY});
         }
         else
             drawSelectionAfterCell = true;
@@ -510,11 +510,11 @@ void wxHtmlWordCell::Draw(wxDC& dc, int x, int y,
         const bool thisUnderlined = dc.GetFont().GetUnderlined();
         if ( prevUnderlined && thisUnderlined )
         {
-            dc.wxDrawText(" ", x + m_PosX - 1, y + m_PosY);
+            dc.wxDrawText(" ", wxPoint{x + m_PosX - 1, y + m_PosY});
         }
         info.SetCurrentUnderlined(thisUnderlined);
 
-        dc.wxDrawText(m_Word, x + m_PosX, y + m_PosY);
+        dc.wxDrawText(m_Word, wxPoint{x + m_PosX, y + m_PosY});
         drawSelectionAfterCell = (selstate != wxHTML_SEL_OUT);
     }
 

@@ -191,17 +191,16 @@ protected:
         m_dc.DoDrawBitmap(bmp, GetX(x, y), GetY(x, y), useMask);
     }
 
-    void DoDrawText(std::string_view text, wxCoord x, wxCoord y) override
+    void DoDrawText(std::string_view text, wxPoint pt) override
     {
         // this is never mirrored
-        m_dc.DoDrawText(text, x, y);
+        m_dc.DoDrawText(text, pt);
     }
 
-    void DoDrawRotatedText(std::string_view text,
-                                   wxCoord x, wxCoord y, double angle) override
+    void DoDrawRotatedText(std::string_view text, wxPoint pt, double angle) override
     {
         // this is never mirrored
-        m_dc.DoDrawRotatedText(text, x, y, angle);
+        m_dc.DoDrawRotatedText(text, pt, angle);
     }
 
     bool DoBlit(wxCoord xdest, wxCoord ydest,

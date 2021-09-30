@@ -271,7 +271,7 @@ void wxStatusBarGeneric::DrawFieldText(wxDC& dc, const wxRect& rect, int i, int 
 #endif
 
     // draw the text
-    dc.wxDrawText(text, xpos, ypos);
+    dc.wxDrawText(text, wxPoint{xpos, ypos});
 
     if (ellmode == wxEllipsizeMode::None)
         dc.DestroyClippingRegion();

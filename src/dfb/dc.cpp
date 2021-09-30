@@ -348,7 +348,7 @@ void wxDFBDCImpl::DoDrawText(const wxString& text, wxCoord x, wxCoord y)
 }
 
 void wxDFBDCImpl::DoDrawRotatedText(const wxString& WXUNUSED(text),
-                                    wxCoord WXUNUSED(x), wxCoord WXUNUSED(y),
+                                    wxPoint WXUNUSED(pt),
                                     double WXUNUSED(angle))
 {
     wxCHECK_RET( IsOk(), wxT("invalid dc") );

@@ -78,8 +78,7 @@ void wxBitmapComboBoxBase::BCBDoClear()
 
     m_bitmaps.clear();
 
-    m_usedImgSize.x = -1;
-    m_usedImgSize.y = -1;
+    m_usedImgSize = {-1, -1};
 
     DetermineIndent();
 }
@@ -205,8 +204,8 @@ void wxBitmapComboBoxBase::DrawItem(wxDC& dc,
 
     if ( !text.empty() )
         dc.wxDrawText(text,
-                    rect.x + m_imgAreaWidth + 1,
-                    rect.y + (rect.height-dc.GetCharHeight())/2);
+                      wxPoint{rect.x + m_imgAreaWidth + 1,
+                              rect.y + (rect.height-dc.GetCharHeight())/2});
 }
 
 wxCoord wxBitmapComboBoxBase::MeasureItem(size_t WXUNUSED(item)) const

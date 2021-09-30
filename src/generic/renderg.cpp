@@ -480,7 +480,7 @@ wxRendererGeneric::DrawHeaderButtonContents(wxWindow *win,
             }
         }
 
-        dc.wxDrawText(label, x, y);
+        dc.wxDrawText(label, wxPoint{x, y});
 
         labelWidth += textSize.x;
     }

@@ -597,8 +597,8 @@ void wxAuiGenericTabArt::DrawTab(wxDC& dc,
         : wxAuiGetBetterContrastColour(back_color, *wxWHITE, *wxBLACK);
     dc.SetTextForeground(font_color);
     dc.wxDrawText(draw_text,
-                text_offset,
-                drawn_tab_yoff + (drawn_tab_height)/2 - (texty/2) - 1);
+                  wxPoint{text_offset,
+                          drawn_tab_yoff + (drawn_tab_height)/2 - (texty/2) - 1});
 
     // draw focus rectangle
     if (page.active && (wxWindow::FindFocus() == wnd))
@@ -1143,8 +1143,8 @@ void wxAuiSimpleTabArt::DrawTab(wxDC& dc,
         : wxAuiGetBetterContrastColour(back_color, *wxWHITE, *wxBLACK);
     dc.SetTextForeground(font_color);
     dc.wxDrawText(draw_text,
-                 text_offset,
-                 (tab_y + tab_height)/2 - (texty/2) + 1);
+                  wxPoint{text_offset,
+                          (tab_y + tab_height)/2 - (texty/2) + 1});
 
 
     // draw focus rectangle

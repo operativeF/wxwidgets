@@ -7153,12 +7153,12 @@ void wxGrid::DrawTextRectangle(wxDC& dc,
 
         if ( textOrientation == wxHORIZONTAL )
         {
-            dc.wxDrawText( line, x, y );
+            dc.wxDrawText( line, wxPoint{x, y} );
             y += lineSize.y;
         }
         else
         {
-            dc.DrawRotatedText( line, x, y, 90.0 );
+            dc.DrawRotatedText( line, wxPoint{x, y}, 90.0 );
             x += lineSize.y;
         }
     }

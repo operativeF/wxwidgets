@@ -1126,7 +1126,7 @@ bool wxGCDCImpl::DoStretchBlit(
     return retval;
 }
 
-void wxGCDCImpl::DoDrawRotatedText(std::string_view text, wxCoord x, wxCoord y,
+void wxGCDCImpl::DoDrawRotatedText(std::string_view text, wxPoint pt,
                                double angle)
 {
     wxCHECK_RET( IsOk(), wxT("wxGCDC(cg)::DoDrawRotatedText - invalid DC") );
@@ -1142,7 +1142,7 @@ void wxGCDCImpl::DoDrawRotatedText(std::string_view text, wxCoord x, wxCoord y,
     // font for drawing rotated fonts unfortunately)
     if ( (angle == 0.0) && m_font.IsOk() )
     {
-        DoDrawText(text, x, y);
+        DoDrawText(text, pt);
 
         // Bounding box already updated by DoDrawText(), no need to do it again.
         return;
@@ -1166,9 +1166,9 @@ void wxGCDCImpl::DoDrawRotatedText(std::string_view text, wxCoord x, wxCoord y,
         // Calculate origin for each line to avoid accumulation of
         // rounding errors.
         if ( m_backgroundMode == wxBrushStyle::Transparent )
-            m_graphicContext->wxDrawText( line, x + wxRound(lineNum*dx), y + wxRound(lineNum*dy), wxDegToRad(angle ));
+            m_graphicContext->wxDrawText( line, pt.x + wxRound(lineNum*dx), pt.y + wxRound(lineNum*dy), wxDegToRad(angle ));
         else
-            m_graphicContext->wxDrawText( line, x + wxRound(lineNum*dx), y + wxRound(lineNum*dy), wxDegToRad(angle ), m_graphicContext->CreateBrush(m_textBackgroundColour) );
+            m_graphicContext->wxDrawText( line, pt.x + wxRound(lineNum*dx), pt.y + wxRound(lineNum*dy), wxDegToRad(angle ), m_graphicContext->CreateBrush(m_textBackgroundColour) );
 
         ++lineNum;
    }
@@ -1178,17 +1178,17 @@ void wxGCDCImpl::DoDrawRotatedText(std::string_view text, wxCoord x, wxCoord y,
     // determining which of them is really topmost/leftmost/...)
 
     // "upper left" and "upper right"
-    CalcBoundingBox(x, y);
-    CalcBoundingBox(x + wxCoord(w * std::cos(rad)), y - wxCoord(w * std::sin(rad)));
+    CalcBoundingBox(pt.x, pt.y);
+    CalcBoundingBox(pt.x + wxCoord(w * std::cos(rad)), pt.y - wxCoord(w * std::sin(rad)));
 
     // "bottom left" and "bottom right"
-    x += (wxCoord)(h * std::sin(rad));
-    y += (wxCoord)(h * std::cos(rad));
-    CalcBoundingBox(x, y);
-    CalcBoundingBox(x + wxCoord(w * std::cos(rad)), y - wxCoord(w * std::sin(rad)));
+    pt.x += (wxCoord)(h * std::sin(rad));
+    pt.y += (wxCoord)(h * std::cos(rad));
+    CalcBoundingBox(pt.x, pt.y);
+    CalcBoundingBox(pt.x + wxCoord(w * std::cos(rad)), pt.y - wxCoord(w * std::sin(rad)));
 }
 
-void wxGCDCImpl::DoDrawText(std::string_view str, wxCoord x, wxCoord y)
+void wxGCDCImpl::DoDrawText(std::string_view str, wxPoint pt)
 {
     wxCHECK_RET( IsOk(), "wxGCDC::DoDrawText - invalid DC" );
 
@@ -1203,7 +1203,7 @@ void wxGCDCImpl::DoDrawText(std::string_view str, wxCoord x, wxCoord y)
     // only so there won't be any infinite recursion here.
     if ( str.find('\n') != std::string_view::npos )
     {
-        GetOwner()->DrawLabel(str, wxRect(x, y, 0, 0));
+        GetOwner()->DrawLabel(str, wxRect(pt.x, pt.y, 0, 0));
         return;
     }
 
@@ -1215,15 +1215,15 @@ void wxGCDCImpl::DoDrawText(std::string_view str, wxCoord x, wxCoord y)
     m_graphicContext->SetCompositionMode(wxCOMPOSITION_OVER);
 
     if ( m_backgroundMode == wxBrushStyle::Transparent )
-        m_graphicContext->wxDrawText( str, x ,y);
+        m_graphicContext->wxDrawText( str, pt.x, pt.y);
     else
-        m_graphicContext->wxDrawText( str, x ,y , m_graphicContext->CreateBrush(m_textBackgroundColour) );
+        m_graphicContext->wxDrawText( str, pt.x, pt.y, m_graphicContext->CreateBrush(m_textBackgroundColour) );
 
     m_graphicContext->SetCompositionMode(curMode);
 
     auto textExtents = GetOwner()->GetTextExtent(str);
-    CalcBoundingBox(x, y);
-    CalcBoundingBox(x + textExtents.x, y + textExtents.y);
+    CalcBoundingBox(pt.x, pt.y);
+    CalcBoundingBox(pt.x + textExtents.x, pt.y + textExtents.y);
 }
 
 bool wxGCDCImpl::CanGetTextExtent() const

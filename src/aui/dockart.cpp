@@ -679,7 +679,7 @@ void wxAuiDefaultDockArt::DrawCaption(wxDC& dc,
     std::string draw_text = wxAuiChopText(dc, text, clip_rect.width);
 
     dc.SetClippingRegion(clip_rect);
-    dc.wxDrawText(draw_text, rect.x+window->FromDIP(3) + caption_offset, rect.y+(rect.height/2)-(h/2)-1);
+    dc.wxDrawText(draw_text, wxPoint{rect.x+window->FromDIP(3) + caption_offset, rect.y+(rect.height/2)-(h/2)-1});
     dc.DestroyClippingRegion();
 }
 

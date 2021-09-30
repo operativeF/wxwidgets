@@ -945,7 +945,7 @@ void wxSymbolListCtrl::OnDrawItem(wxDC& dc, const wxRect& rect, size_t n) const
 
             int x = rect.x + i*m_cellSize.x + (m_cellSize.x - w)/2;
             int y = rect.y + (m_cellSize.y - h)/2;
-            dc.wxDrawText(text, x, y);
+            dc.wxDrawText(text, wxPoint{x, y});
         }
 
         if (resetColour)
