@@ -3159,18 +3159,17 @@ void wxGrid::CalcDimensions()
     h -= offset.y;
 
     // preserve (more or less) the previous position
-    int x, y;
-    GetViewStart( &x, &y );
+    wxPoint start = GetViewStart();
 
     // ensure the position is valid for the new scroll ranges
-    if ( x >= w )
-        x = std::max( w - 1, 0 );
-    if ( y >= h )
-        y = std::max( h - 1, 0 );
+    if ( start.x >= w )
+        start.x = std::max( w - 1, 0 );
+    if ( start.y >= h )
+        start.y = std::max( h - 1, 0 );
 
     // update the virtual size and refresh the scrollbars to reflect it
-    m_gridWin->SetVirtualSize(w, h);
-    Scroll(x, y);
+    m_gridWin->SetVirtualSize(wxSize{w, h});
+    Scroll(start.x, start.y);
     AdjustScrollbars();
 }
 

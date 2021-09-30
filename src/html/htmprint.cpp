@@ -164,7 +164,7 @@ int wxHtmlDCRenderer::FindNextPageBreak(int pos) const
     return posNext;
 }
 
-void wxHtmlDCRenderer::Render(int x, int y, int from, int to)
+void wxHtmlDCRenderer::Render(wxPoint pt, int from, int to)
 {
     wxCHECK_RET( m_DC, "SetDC() must be called before Render()" );
 
@@ -174,10 +174,10 @@ void wxHtmlDCRenderer::Render(int x, int y, int from, int to)
     wxDefaultHtmlRenderingStyle rstyle;
     rinfo.SetStyle(&rstyle);
     m_DC->SetBrush(*wxWHITE_BRUSH);
-    wxDCClipper clip(*m_DC, x, y, m_Width, hght);
+    wxDCClipper clip(*m_DC, pt.x, pt.y, m_Width, hght);
     m_Cells->Draw(*m_DC,
-                  x, (y - from),
-                  y, y + hght,
+                  pt.x, (pt.y - from),
+                  pt.y, pt.y + hght,
                   rinfo);
 }
 
@@ -515,9 +515,10 @@ void wxHtmlPrintout::RenderPage(wxDC *dc, int page)
 
     dc->SetBackgroundMode(wxBrushStyle::Transparent);
 
-    m_Renderer.Render((int) (ppmm_h * m_MarginLeft),
-                         (int) (ppmm_v * (m_MarginTop + (m_HeaderHeight == 0 ? 0 : m_MarginSpace)) + m_HeaderHeight),
-                         m_PageBreaks[page-1], m_PageBreaks[page]);
+    m_Renderer.Render(wxPoint{gsl::narrow_cast<int>(ppmm_h * m_MarginLeft),
+                              gsl::narrow_cast<int>(ppmm_v * (m_MarginTop + (m_HeaderHeight == 0 ? 0 : m_MarginSpace)) + m_HeaderHeight)},
+                              m_PageBreaks[page-1],
+                              m_PageBreaks[page]);
 
 
     m_RendererHdr.SetDC(dc,
@@ -526,12 +527,14 @@ void wxHtmlPrintout::RenderPage(wxDC *dc, int page)
     if (!m_Headers[page % 2].empty())
     {
         m_RendererHdr.SetHtmlText(TranslateHeader(m_Headers[page % 2], page));
-        m_RendererHdr.Render((int) (ppmm_h * m_MarginLeft), (int) (ppmm_v * m_MarginTop));
+        m_RendererHdr.Render(wxPoint{gsl::narrow_cast<int>(ppmm_h * m_MarginLeft),
+                                     gsl::narrow_cast<int>(ppmm_v * m_MarginTop)});
     }
     if (!m_Footers[page % 2].empty())
     {
         m_RendererHdr.SetHtmlText(TranslateHeader(m_Footers[page % 2], page));
-        m_RendererHdr.Render((int) (ppmm_h * m_MarginLeft), (int) (pageHeight - ppmm_v * m_MarginBottom - m_FooterHeight));
+        m_RendererHdr.Render(wxPoint{gsl::narrow_cast<int>(ppmm_h * m_MarginLeft),
+                                     gsl::narrow_cast<int>(pageHeight - ppmm_v * m_MarginBottom - m_FooterHeight)});
     }
 }
 

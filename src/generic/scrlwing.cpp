@@ -17,6 +17,7 @@
 
 #include "wx/utils.h"
 #include "wx/panel.h"
+#include "wx/position.h"
 #include "wx/dcclient.h"
 #include "wx/timer.h"
 #include "wx/sizer.h"
@@ -370,8 +371,7 @@ void wxScrollHelperBase::SetScrollbars(int pixelsPerUnitX,
     m_xScrollPosition = xPos;
     m_yScrollPosition = yPos;
 
-    int w = noUnitsX * pixelsPerUnitX;
-    int h = noUnitsY * pixelsPerUnitY;
+    wxSize sz{noUnitsX * pixelsPerUnitX, noUnitsY * pixelsPerUnitY};
 
     // For better backward compatibility we set persisting limits
     // here not just the size.  It makes SetScrollbars 'sticky'
@@ -383,8 +383,14 @@ void wxScrollHelperBase::SetScrollbars(int pixelsPerUnitX,
     // take care not to set 0 virtual size, 0 means that we don't have any
     // scrollbars and hence we should use the real size instead of the virtual
     // one which is indicated by using wxDefaultCoord
-    m_targetWindow->SetVirtualSize( w ? w : wxDefaultCoord,
-                                    h ? h : wxDefaultCoord);
+    if(sz == wxSize{0, 0})
+    {
+        m_targetWindow->SetVirtualSize(sz);
+    }
+    else
+    {
+        m_targetWindow->SetVirtualSize(wxDefaultSize);
+    }
 
     if (do_refresh && !noRefresh)
         m_targetWindow->Refresh(true, GetScrollRect());
@@ -696,12 +702,9 @@ void wxScrollHelperBase::EnableScrolling (bool x_scroll, bool y_scroll)
 }
 
 // Where the current view starts from
-void wxScrollHelperBase::DoGetViewStart (int *x, int *y) const
+wxPoint wxScrollHelperBase::DoGetViewStart() const
 {
-    if ( x )
-        *x = m_xScrollPosition;
-    if ( y )
-        *y = m_yScrollPosition;
+    return wxPoint{m_xScrollPosition, m_yScrollPosition};
 }
 
 void wxScrollHelperBase::DoCalcScrolledPosition(int x, int y,
@@ -743,7 +746,7 @@ bool wxScrollHelperBase::ScrollLayout()
         if ( !IsScrollbarShown(wxVERTICAL) )
             size.y = clientSize.y;
 
-        m_win->GetSizer()->SetDimension(CalcScrolledPosition(wxPoint(0, 0)),
+        m_win->GetSizer()->SetDimension(CalcScrolledPosition(wxPoint{0, 0}),
                                         size);
         return true;
     }
@@ -752,9 +755,9 @@ bool wxScrollHelperBase::ScrollLayout()
     return m_win->wxWindow::Layout();
 }
 
-void wxScrollHelperBase::ScrollDoSetVirtualSize(int x, int y)
+void wxScrollHelperBase::ScrollDoSetVirtualSize(wxSize sz)
 {
-    m_win->wxWindow::DoSetVirtualSize( x, y );
+    m_win->wxWindow::DoSetVirtualSize( sz );
     AdjustScrollbars();
 
     if (m_win->GetAutoLayout())
@@ -1126,8 +1129,7 @@ void wxScrollHelperBase::HandleOnChildFocus(wxChildFocusEvent& event)
     int stepx, stepy;
     GetScrollPixelsPerUnit(&stepx, &stepy);
 
-    int startx, starty;
-    GetViewStart(&startx, &starty);
+    wxPoint start = GetViewStart();
 
     // first in vertical direction:
     if ( stepy > 0 )
@@ -1146,7 +1148,7 @@ void wxScrollHelperBase::HandleOnChildFocus(wxChildFocusEvent& event)
             diff += stepy - 1;
         }
 
-        starty = (starty * stepy + diff) / stepy;
+        start.y = (start.y * stepy + diff) / stepy;
     }
 
     // then horizontal:
@@ -1166,10 +1168,10 @@ void wxScrollHelperBase::HandleOnChildFocus(wxChildFocusEvent& event)
             diff += stepx - 1;
         }
 
-        startx = (startx * stepx + diff) / stepx;
+        start.x = (start.x * stepx + diff) / stepx;
     }
 
-    Scroll(startx, starty);
+    Scroll(start.x, start.y);
 }
 
 

@@ -3393,7 +3393,7 @@ void wxDataViewMainWindow::RecalculateDisplay()
     int width = GetEndOfLastCol();
     int height = GetLineStart( GetRowCount() );
 
-    SetVirtualSize( width, height );
+    SetVirtualSize( wxSize{width, height} );
     GetOwner()->SetScrollRate( 10, m_lineHeight );
     UpdateColumnSizes();
 
@@ -5490,14 +5490,14 @@ void wxDataViewMainWindow::UpdateColumnSizes()
         // To prevent flickering scrollbar when resizing the window to be
         // narrower, force-set the virtual width to 0 here. It will eventually
         // be corrected at idle time.
-        SetVirtualSize(0, m_virtualSize.y);
+        SetVirtualSize(wxSize{0, m_virtualSize.y});
 
         RefreshRect(wxRect(lastColX, 0, availableWidth, GetSize().y));
     }
     else
     {
         // else: don't bother, the columns won't fit anyway
-        SetVirtualSize(colswidth, m_virtualSize.y);
+        SetVirtualSize(wxSize{colswidth, m_virtualSize.y});
     }
 }
 

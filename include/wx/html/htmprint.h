@@ -76,7 +76,7 @@ public:
     // [x,y] is position of upper-left corner of printing rectangle (see SetSize)
     // from is y-coordinate of the very first visible cell
     // to is y-coordinate of the next following page break, if any
-    void Render(int x, int y, int from = 0, int to = INT_MAX);
+    void Render(wxPoint pt, int from = 0, int to = INT_MAX);
 
     // returns total width of the html document
     int GetTotalWidth() const;

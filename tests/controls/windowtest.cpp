@@ -334,7 +334,7 @@ TEST_CASE_FIXTURE(WindowTestCase, "Window::PositioningBeyondShortLimit")
 
     //
     //Test deferred move beyond SHRT_MAX
-    m_window->SetVirtualSize(-1, SHRT_MAX + 2 * commonDim);
+    m_window->SetVirtualSize(wxSize{-1, SHRT_MAX + 2 * commonDim});
     wxWindow* bigWin = new wxWindow(m_window, wxID_ANY, wxDefaultPosition,
                                     //size is also limited by SHRT_MAX
                                     wxSize(commonDim, SHRT_MAX));

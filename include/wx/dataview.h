@@ -867,7 +867,7 @@ public:
 
     // for wxEVT_DATAVIEW_CONTEXT_MENU only
     wxPoint GetPosition() const { return m_pos; }
-    void SetPosition( int x, int y ) { m_pos.x = x; m_pos.y = y; }
+    void SetPosition( wxPoint pt ) { m_pos = pt; }
 
     // For wxEVT_DATAVIEW_CACHE_HINT
     int GetCacheFrom() const { return m_cacheFrom; }

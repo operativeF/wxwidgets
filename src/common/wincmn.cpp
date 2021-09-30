@@ -1037,9 +1037,9 @@ void wxWindowBase::DoSetSizeHints( int minW, int minH,
     m_maxHeight = maxH;
 }
 
-void wxWindowBase::DoSetVirtualSize( int x, int y )
+void wxWindowBase::DoSetVirtualSize( wxSize sz )
 {
-    m_virtualSize = wxSize(x, y);
+    m_virtualSize = sz;
 }
 
 wxSize wxWindowBase::DoGetVirtualSize() const

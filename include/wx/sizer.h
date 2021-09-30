@@ -387,10 +387,6 @@ public:
             m_window->SetMinSize(size);
         m_minSize = size;
     }
-    void SetMinSize( int x, int y )
-        { SetMinSize(wxSize(x, y)); }
-    void SetInitSize( int x, int y )
-        { SetMinSize(wxSize(x, y)); }
 
     // if either of dimensions is zero, ratio is assumed to be 1
     // to avoid "divide by zero" errors

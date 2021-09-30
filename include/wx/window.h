@@ -503,8 +503,7 @@ public:
         // the screen window size.  You may override the DoXXXVirtual
         // methods below for classes where that is the case.
 
-    void SetVirtualSize( const wxSize &size ) { DoSetVirtualSize( size.x, size.y ); }
-    void SetVirtualSize( int x, int y ) { DoSetVirtualSize( x, y ); }
+    void SetVirtualSize( wxSize sz ) { DoSetVirtualSize( sz ); }
 
     wxSize GetVirtualSize() const { return DoGetVirtualSize(); }
     void GetVirtualSize( int *x, int *y ) const
@@ -521,7 +520,7 @@ public:
         // independent of their client size. e.g. the virtual area of a
         // wxScrolledWindow.
 
-    virtual void DoSetVirtualSize( int x, int y );
+    virtual void DoSetVirtualSize( wxSize sz );
     virtual wxSize DoGetVirtualSize() const;
 
         // Return the largest of ClientSize and BestSize (as determined

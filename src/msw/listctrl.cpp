@@ -1498,6 +1498,7 @@ void wxListCtrl::AssignImageList(wxImageList *imageList, int which)
 
 wxSize wxListCtrl::MSWGetBestViewRect(int x, int y) const
 {
+    // FIXME: Remove this.
     // Older Platform SDKs lack a cast to WPARAM inside the
     // ListView_ApproximateViewRect macro, so cast -1 to
     // WPARAM here to suppress a warning about signed/unsigned mismatch.

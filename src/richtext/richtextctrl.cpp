@@ -1800,11 +1800,11 @@ bool wxRichTextCtrl::ScrollIntoView(long position, int keyCode)
     int ppuX, ppuY;
     GetScrollPixelsPerUnit(& ppuX, & ppuY);
 
-    int startXUnits, startYUnits;
-    GetViewStart(& startXUnits, & startYUnits);
+    int startYUnits = GetViewStart().y;
     int startY = startYUnits * ppuY;
 
-    int sx = 0, sy = 0;
+    int sx = 0;
+    int sy = 0;
     GetVirtualSize(& sx, & sy);
     int sxUnits = 0;
     int syUnits = 0;
@@ -1940,10 +1940,7 @@ bool wxRichTextCtrl::IsPositionVisible(long pos) const
     int ppuX, ppuY;
     GetScrollPixelsPerUnit(& ppuX, & ppuY);
 
-    int startX, startY;
-    GetViewStart(& startX, & startY); // FIXME: ?
-    startX = 0;
-    startY = startY * ppuY;
+    int startY = GetViewStart().y * ppuY;
 
     wxRect rect = GetScaledRect(line->GetRect());
     wxSize clientSize = GetClientSize();
@@ -2917,26 +2914,25 @@ void wxRichTextCtrl::SetupScrollbars(bool atTop, bool fromOnPaint)
     // Round up so we have at least maxHeight pixels
     int unitsY = (maxHeight + pixelsPerUnit - 1) / pixelsPerUnit;
 
-    int startX = 0, startY = 0;
+    wxPoint start{0, 0};
     if (!atTop)
-        GetViewStart(& startX, & startY);
+        start = GetViewStart();
 
     int maxPositionX = 0;
     int maxPositionY = (std::max(unitsY * pixelsPerUnit - clientSize.y, 0) + pixelsPerUnit - 1) / pixelsPerUnit;
 
-    int newStartX = std::min(maxPositionX, startX);
-    int newStartY = std::min(maxPositionY, startY);
+    int newStartX = std::min(maxPositionX, start.x);
+    int newStartY = std::min(maxPositionY, start.y);
 
     int oldPPUX, oldPPUY;
-    int oldStartX, oldStartY;
     int oldVirtualSizeX = 0, oldVirtualSizeY = 0;
     GetScrollPixelsPerUnit(& oldPPUX, & oldPPUY);
-    GetViewStart(& oldStartX, & oldStartY);
+    wxPoint oldStart = GetViewStart();
     GetVirtualSize(& oldVirtualSizeX, & oldVirtualSizeY);
     if (oldPPUY > 0)
         oldVirtualSizeY /= oldPPUY;
 
-    if (oldPPUX == 0 && oldPPUY == pixelsPerUnit && oldVirtualSizeY == unitsY && oldStartX == newStartX && oldStartY == newStartY)
+    if (oldPPUX == 0 && oldPPUY == pixelsPerUnit && oldVirtualSizeY == unitsY && oldStart.x == newStartX && oldStart.y == newStartY)
         return;
 
     // Don't set scrollbars if there were none before, and there will be none now.
@@ -4648,12 +4644,11 @@ long wxRichTextCtrl::GetFirstVisiblePosition() const
 wxPoint wxRichTextCtrl::GetFirstVisiblePoint() const
 {
     int ppuX, ppuY;
-    int startXUnits, startYUnits;
 
     GetScrollPixelsPerUnit(& ppuX, & ppuY);
-    GetViewStart(& startXUnits, & startYUnits);
+    wxPoint startUnits = GetViewStart();
 
-    return {startXUnits * ppuX, startYUnits * ppuY};
+    return {startUnits.x * ppuX, startUnits.y * ppuY};
 }
 
 /// The adjusted caret position is the character position adjusted to take

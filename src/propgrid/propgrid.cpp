@@ -1613,21 +1613,20 @@ bool wxPropertyGrid::EnsureVisible( wxPGPropArg id )
     }
 
     // Need to scroll?
-    int vx, vy;
-    GetViewStart(&vx,&vy);
-    vy*=wxPG_PIXELS_PER_UNIT;
+    wxPoint start = GetViewStart();
+    start.y *= wxPG_PIXELS_PER_UNIT;
 
     int y = p->GetY();
 
-    if ( y < vy )
+    if ( y < start.y )
     {
-        Scroll(vx, y/wxPG_PIXELS_PER_UNIT );
+        Scroll(start.x, y/wxPG_PIXELS_PER_UNIT );
         m_iFlags |= wxPG_FL_SCROLLED;
         changed = true;
     }
-    else if ( (y+m_lineHeight) > (vy+m_height) )
+    else if ( (y + m_lineHeight) > (start.y + m_height) )
     {
-        Scroll(vx, (y-m_height+(m_lineHeight*2))/wxPG_PIXELS_PER_UNIT );
+        Scroll(start.x, (y - m_height + (m_lineHeight * 2))/wxPG_PIXELS_PER_UNIT );
         m_iFlags |= wxPG_FL_SCROLLED;
         changed = true;
     }
@@ -1863,14 +1862,13 @@ void wxPropertyGrid::OnPaint( wxPaintEvent& WXUNUSED(event) )
     }
 
     // Find out where the window is scrolled to
-    int vx, vy;
-    GetViewStart(&vx, &vy);
-    vx *= wxPG_PIXELS_PER_UNIT;
-    vy *= wxPG_PIXELS_PER_UNIT;
+    wxPoint start = GetViewStart();
+    start.x *= wxPG_PIXELS_PER_UNIT;
+    start.y *= wxPG_PIXELS_PER_UNIT;
 
     // Update everything inside the box
     wxRect r = GetUpdateRegion().GetBox();
-    r.Offset(vx, vy);
+    r.Offset(start.x, start.y);
 
     // Repaint this rectangle
     DrawItems(*dcPtr, r.y, r.y + r.height-1, &r);
@@ -2523,11 +2521,10 @@ void wxPropertyGrid::DrawItems( const wxPGProperty* p1, const wxPGProperty* p2 )
     if ( !r.IsEmpty() )
     {
         // Convert rectangle from logical grid coordinates to physical ones
-        int vx, vy;
-        GetViewStart(&vx, &vy);
-        vx *= wxPG_PIXELS_PER_UNIT;
-        vy *= wxPG_PIXELS_PER_UNIT;
-        r.Offset(-vx, -vy);
+        wxPoint start = GetViewStart();
+        start.x *= wxPG_PIXELS_PER_UNIT;
+        start.y *= wxPG_PIXELS_PER_UNIT;
+        r.Offset(-start.x, -start.y);
         RefreshRect(r);
         Update();
     }
@@ -2803,8 +2800,8 @@ void wxPropertyGrid::CenterSplitter( bool enableAutoResizing )
 // it itself will be returned
 wxPGProperty* wxPropertyGrid::GetNearestPaintVisible( wxPGProperty* p ) const
 {
-    int vy1;// Top left corner of client
-    GetViewStart(nullptr,&vy1);
+    // Top left corner of client
+    int vy1 = GetViewStart().y;
     vy1 *= wxPG_PIXELS_PER_UNIT;
 
     int vy2 = vy1 + m_height;
@@ -3702,10 +3699,10 @@ wxRect wxPropertyGrid::GetEditorWidgetRect( wxPGProperty* p, int column ) const
     int colEnd = splitterX + m_pState->GetColumnWidth(column);
     int imageOffset = 0;
 
-    int vx, vy;  // Top left corner of client
-    GetViewStart(&vx, &vy);
-    vx *= wxPG_PIXELS_PER_UNIT;
-    vy *= wxPG_PIXELS_PER_UNIT;
+    // Top left corner of client
+    wxPoint start = GetViewStart();
+    start.x *= wxPG_PIXELS_PER_UNIT;
+    start.y *= wxPG_PIXELS_PER_UNIT;
 
     if ( column == 1 )
     {
@@ -3725,8 +3722,8 @@ wxRect wxPropertyGrid::GetEditorWidgetRect( wxPGProperty* p, int column ) const
         splitterX += (p->GetDepth() - 1) * m_subgroup_extramargin;
     }
 
-    return{ splitterX + imageOffset + wxPG_XBEFOREWIDGET + wxPG_CONTROL_MARGIN + 1 - vx,
-            itemy - vy,
+    return{ splitterX + imageOffset + wxPG_XBEFOREWIDGET + wxPG_CONTROL_MARGIN + 1 - start.x,
+            itemy - start.y,
             colEnd - splitterX - wxPG_XBEFOREWIDGET - wxPG_CONTROL_MARGIN - imageOffset - 1,
             m_lineHeight - 1
       };
@@ -4493,7 +4490,7 @@ void wxPropertyGrid::RecalculateVirtualSize( int forceXPos )
     int w = m_pState->GetVirtualWidth();
     int h = m_pState->m_virtualHeight;
     // Now adjust virtual size.
-    SetVirtualSize(w, h);
+    SetVirtualSize(wxSize{w, h});
     if ( forceXPos != -1 )
     {
         Scroll(forceXPos, wxDefaultCoord);

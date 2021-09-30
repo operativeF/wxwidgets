@@ -535,9 +535,8 @@ bool wxHtmlWindow::LoadPage(const std::string& location)
     if (m_HistoryOn && (m_HistoryPos != -1))
     {
         // store scroll position into history item:
-        int x, y;
-        GetViewStart(&x, &y);
-        (*m_History)[m_HistoryPos].SetPos(y);
+        int y_pos = GetViewStart().y;
+        (*m_History)[m_HistoryPos].SetPos(y_pos);
     }
 
     // first check if we're moving to an anchor in the same page
@@ -754,14 +753,14 @@ void wxHtmlWindow::CreateLayout()
         // scrollbar for the given contents size.
         ShowScrollbars(wxScrollbarVisibility::Default, wxScrollbarVisibility::Default);
         m_Cell->Layout(widthWithVScrollbar);
-        SetVirtualSize(m_Cell->GetWidth(), m_Cell->GetHeight());
+        SetVirtualSize(m_Cell->GetSize());
 
         // Check if the vertical scrollbar was hidden.
         const int newClientWidth = GetClientSize().x;
         if ( newClientWidth != widthWithVScrollbar )
         {
             m_Cell->Layout(newClientWidth);
-            SetVirtualSize(m_Cell->GetWidth(), m_Cell->GetHeight());
+            SetVirtualSize(m_Cell->GetSize());
         }
     }
 }
@@ -830,9 +829,8 @@ bool wxHtmlWindow::HistoryBack()
     if (m_HistoryPos < 1) return false;
 
     // store scroll position into history item:
-    int x, y;
-    GetViewStart(&x, &y);
-    (*m_History)[m_HistoryPos].SetPos(y);
+    int y_pos = GetViewStart().y;
+    (*m_History)[m_HistoryPos].SetPos(y_pos);
 
     // go to previous position:
     m_HistoryPos--;
@@ -1091,8 +1089,7 @@ void wxHtmlWindow::OnPaint(wxPaintEvent& WXUNUSED(event))
     if (m_tmpCanDrawLocks > 0 || m_Cell == nullptr)
         return;
 
-    int x, y;
-    GetViewStart(&x, &y);
+    wxPoint start = GetViewStart();
     const wxRect rect = GetUpdateRegion().GetBox();
     const wxSize sz = GetClientSize();
 
@@ -1149,8 +1146,8 @@ void wxHtmlWindow::OnPaint(wxPaintEvent& WXUNUSED(event))
     rinfo.SetSelection(m_selection);
     rinfo.SetStyle(&rstyle);
     m_Cell->Draw(*dc, 0, 0,
-                 y * wxHTML_SCROLL_STEP + rect.GetTop(),
-                 y * wxHTML_SCROLL_STEP + rect.GetBottom(),
+                 start.y * wxHTML_SCROLL_STEP + rect.GetTop(),
+                 start.y * wxHTML_SCROLL_STEP + rect.GetBottom(),
                  rinfo);
 
 #ifdef DEBUG_HTML_SELECTION

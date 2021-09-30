@@ -214,8 +214,8 @@ public:
     // Draws the sash tracker (for whilst moving the sash)
     virtual void DrawSashTracker(int x, int y);
 
-    // Tests for x, y over sash
-    virtual bool SashHitTest(int x, int y);
+    // Tests for pt over sash
+    virtual bool SashHitTest(wxPoint pt);
 
     // Resizes subwindows
     virtual void SizeWindows();

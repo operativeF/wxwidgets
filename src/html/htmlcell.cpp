@@ -1590,9 +1590,9 @@ void wxHtmlWidgetCell::Draw(wxDC& WXUNUSED(dc),
     wxCHECK_RET( scrolwin,
                  wxT("widget cells can only be placed in wxHtmlWindow") );
 
-    scrolwin->GetViewStart(&stx, &sty);
-    m_Wnd->SetSize(wxRect{absx - wxHTML_SCROLL_STEP * stx,
-                          absy  - wxHTML_SCROLL_STEP * sty,
+    wxPoint start = scrolwin->GetViewStart();
+    m_Wnd->SetSize(wxRect{absx - wxHTML_SCROLL_STEP * start.x,
+                          absy  - wxHTML_SCROLL_STEP * start.y,
                           m_Width,
                           m_Height});
 }
@@ -1603,7 +1603,7 @@ void wxHtmlWidgetCell::DrawInvisible(wxDC& WXUNUSED(dc),
                                      int WXUNUSED(x), int WXUNUSED(y),
                                      wxHtmlRenderingInfo& WXUNUSED(info))
 {
-    int absx = 0, absy = 0, stx, sty;
+    int absx = 0, absy = 0;
     wxHtmlCell *c = this;
 
     while (c)
@@ -1613,9 +1613,9 @@ void wxHtmlWidgetCell::DrawInvisible(wxDC& WXUNUSED(dc),
         c = c->GetParent();
     }
 
-    ((wxScrolledWindow*)(m_Wnd->GetParent()))->GetViewStart(&stx, &sty);
-    m_Wnd->SetSize(wxRect{absx - wxHTML_SCROLL_STEP * stx,
-                          absy  - wxHTML_SCROLL_STEP * sty,
+    wxPoint start = ((wxScrolledWindow*)(m_Wnd->GetParent()))->GetViewStart();
+    m_Wnd->SetSize(wxRect{absx - wxHTML_SCROLL_STEP * start.x,
+                          absy  - wxHTML_SCROLL_STEP * start.y,
                           m_Width,
                           m_Height});
 }

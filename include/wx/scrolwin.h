@@ -177,13 +177,9 @@ public:
     virtual void EnableScrolling(bool x_scrolling, bool y_scrolling);
 
     // Get the view start
-    void GetViewStart(int *x, int *y) const { DoGetViewStart(x, y); }
-
     wxPoint GetViewStart() const
     {
-        wxPoint pt;
-        DoGetViewStart(&pt.x, &pt.y);
-        return pt;
+        return DoGetViewStart();
     }
 
     // Set the scale factor, used in PrepareDC
@@ -278,7 +274,7 @@ protected:
     }
 
     // implementation of public methods with the same name
-    virtual void DoGetViewStart(int *x, int *y) const;
+    virtual wxPoint DoGetViewStart() const;
     virtual void DoScroll(int x, int y) = 0;
     virtual void DoShowScrollbars(wxScrollbarVisibility horz,
                                   wxScrollbarVisibility vert) = 0;
@@ -286,7 +282,7 @@ protected:
     // implementations of various wxWindow virtual methods which should be
     // forwarded to us (this can be done by WX_FORWARD_TO_SCROLL_HELPER())
     bool ScrollLayout();
-    void ScrollDoSetVirtualSize(int x, int y);
+    void ScrollDoSetVirtualSize(wxSize sz);
     wxSize ScrollGetBestVirtualSize() const;
 
     // change just the target window (unlike SetWindow which changes m_win as
@@ -364,8 +360,8 @@ public:                                                                       \
     bool Layout() override { return ScrollLayout(); }               \
     bool CanScroll(int orient) const override                       \
         { return IsScrollbarShown(orient); }                                  \
-    void DoSetVirtualSize(int x, int y) override                    \
-        { ScrollDoSetVirtualSize(x, y); }                                     \
+    void DoSetVirtualSize(wxSize sz) override                    \
+        { ScrollDoSetVirtualSize(sz); }                                     \
     wxSize GetBestVirtualSize() const override                      \
         { return ScrollGetBestVirtualSize(); }
 

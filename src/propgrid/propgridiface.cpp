@@ -932,9 +932,8 @@ wxString wxPropertyGridInterface::SaveEditableState( int includedStates ) const
         }
         if ( includedStates & ScrollPosState )
         {
-            int x, y;
-            GetPropertyGrid()->GetViewStart(&x,&y);
-            result += wxString::Format(wxS("scrollpos=%i,%i;"), x, y);
+            wxPoint start = GetPropertyGrid()->GetViewStart();
+            result += wxString::Format(wxS("scrollpos=%i,%i;"), start.x, start.y);
         }
         if ( includedStates & SplitterPosState )
         {

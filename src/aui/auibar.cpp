@@ -2033,7 +2033,7 @@ bool wxAuiToolBar::RealizeHelper(wxClientDC& dc, bool horizontal)
     {
         wxAuiToolBarItem& item = m_items.Item(i);
         if (item.m_sizerItem && item.m_proportion > 0 && item.m_minSize.IsFullySpecified())
-            item.m_sizerItem->SetMinSize(0,0);
+            item.m_sizerItem->SetMinSize(wxSize{0, 0});
     }
 
     m_absoluteMinSize = m_sizer->GetMinSize();

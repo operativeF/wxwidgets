@@ -1296,9 +1296,6 @@ bool wxGenericTreeCtrl::IsVisible(const wxTreeItemId& item) const
         parent = parent->GetParent();
     }
 
-    int startX, startY;
-    GetViewStart(& startX, & startY);
-
     wxSize clientSize = GetClientSize();
 
     wxRect rect;
@@ -2305,15 +2302,13 @@ void wxGenericTreeCtrl::ScrollTo(const wxTreeItemId &item)
 
     int itemY = gitem->GetY();
 
-    int start_x = 0;
-    int start_y = 0;
-    GetViewStart( &start_x, &start_y );
+    int start_y = GetViewStart().y;
 
     const int clientHeight = GetClientSize().y;
 
     const int itemHeight = GetLineHeight(gitem) + 2;
 
-    if ( itemY + itemHeight > start_y*PIXELS_PER_UNIT + clientHeight )
+    if ( itemY + itemHeight > start_y * PIXELS_PER_UNIT + clientHeight )
     {
         // need to scroll down by enough to show this item fully
         itemY += itemHeight - clientHeight;
@@ -2323,7 +2318,7 @@ void wxGenericTreeCtrl::ScrollTo(const wxTreeItemId &item)
         // partially visible, so make sure we are rounding up
         itemY += PIXELS_PER_UNIT - 1;
     }
-    else if ( itemY > start_y*PIXELS_PER_UNIT )
+    else if ( itemY > start_y * PIXELS_PER_UNIT )
     {
         // item is already fully visible, don't do anything
         return;

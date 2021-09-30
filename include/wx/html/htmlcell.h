@@ -210,7 +210,7 @@ public:
     int GetPosX() const {return m_PosX;}
     int GetPosY() const {return m_PosY;}
     int GetWidth() const {return m_Width;}
-
+    wxSize GetSize() const { return {m_Width, m_Height}; }
     // Returns the maximum possible length of the cell.
     // Call Layout at least once before using GetMaxTotalWidth()
     virtual int GetMaxTotalWidth() const { return m_Width; }

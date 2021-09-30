@@ -98,8 +98,7 @@ public:
     // operations
     // ----------
 
-        // move the caret to given position (in logical coords)
-    void Move(int x, int y) { m_x = x; m_y = y; DoMove(); }
+    // move the caret to given position (in logical coords)
     void Move(const wxPoint& pt) { m_x = pt.x; m_y = pt.y; DoMove(); }
 
         // show/hide the caret (should be called by wxWindow when needed):
