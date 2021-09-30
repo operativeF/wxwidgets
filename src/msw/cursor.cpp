@@ -14,7 +14,6 @@
 
 #ifndef WX_PRECOMP
     #include "wx/msw/private.h"
-    #include "wx/msw/missing.h" // IDC_HAND
     
     #include <boost/nowide/convert.hpp>
 

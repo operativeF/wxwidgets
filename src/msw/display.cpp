@@ -78,10 +78,6 @@ protected:
 
 #if wxUSE_DISPLAY
 
-#ifndef WX_PRECOMP
-    #include "wx/msw/missing.h"
-#endif
-
 #include "wx/app.h"
 #include "wx/frame.h"
 #include "wx/dynlib.h"

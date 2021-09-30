@@ -15,7 +15,6 @@
 
 #include "wx/msw/wrapwin.h"
 #include "wx/msw/private.h"
-#include "wx/msw/missing.h"
 
 #if wxUSE_COMMON_DIALOGS
     #include <commdlg.h>

@@ -66,7 +66,6 @@
 #ifndef WX_PRECOMP
     #ifdef __WINDOWS__
         #include "wx/msw/private.h"
-        #include "wx/msw/missing.h"
         #include "wx/msw/wrapwin.h" // For GetShort/LongPathName
     #endif
 

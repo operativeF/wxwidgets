@@ -21,7 +21,6 @@
 
     #ifdef __WINDOWS__
         #include "wx/msw/private.h"
-        #include "wx/msw/missing.h"
     #endif
 #endif
 

@@ -14,7 +14,6 @@
 
 #ifndef WX_PRECOMP
     #include "wx/msw/private.h"
-    #include "wx/msw/missing.h" // for SM_CXCURSOR, SM_CYCURSOR, SM_TABLETPC
 #endif
 
 #include "wx/settings.h"

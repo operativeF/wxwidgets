@@ -22,7 +22,6 @@
 #ifndef WX_PRECOMP
     #ifdef __WINDOWS__
         #include "wx/msw/wrapwin.h"
-        #include "wx/msw/missing.h"
     #endif
 
     #include <algorithm>

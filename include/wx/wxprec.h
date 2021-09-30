@@ -35,7 +35,6 @@
 #if defined(__WXMSW__)
     #include "wx/msw/wrapcctl.h"
     #include "wx/msw/wrapcdlg.h"
-    #include "wx/msw/missing.h"
     #include "wx/msw/wrap/utils.h"
 #endif
 

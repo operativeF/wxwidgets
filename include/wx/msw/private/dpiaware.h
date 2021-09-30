@@ -10,10 +10,6 @@
 #ifndef _WX_MSW_DPI_AWARE_H_
 #define _WX_MSW_DPI_AWARE_H_
 
-#ifndef WX_PRECOMP
-    #include "wx/msw/missing.h"
-#endif
-
 #include "wx/dynlib.h"
 
 #if wxUSE_DYNLIB_CLASS

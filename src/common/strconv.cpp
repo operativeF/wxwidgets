@@ -17,7 +17,6 @@
 #ifndef WX_PRECOMP
     #if defined(__WIN32__)
         #include "wx/msw/private.h"
-        #include "wx/msw/missing.h"
         #define wxHAVE_WIN32_MB2WC
     #endif
     

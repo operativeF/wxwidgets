@@ -33,7 +33,6 @@
 
 #ifndef WX_PRECOMP
     #include "wx/msw/wrapwin.h"
-    #include "wx/msw/missing.h"
 #endif
 
 #include <shellapi.h>

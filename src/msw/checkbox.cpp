@@ -16,7 +16,6 @@
 #ifndef WX_PRECOMP
     #include <cassert>
     
-    #include "wx/msw/missing.h"
 #endif
 
 #include "wx/checkbox.h"
