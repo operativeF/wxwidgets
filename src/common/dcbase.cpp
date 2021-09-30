@@ -306,24 +306,9 @@ int wxPrinterDC::GetResolution() const
 wxIMPLEMENT_ABSTRACT_CLASS(wxDCImpl, wxObject);
 
 wxDCImpl::wxDCImpl( wxDC *owner )
-        : m_window(nullptr)
-        , m_colour(true)
-        , m_clipping(false)
-        , m_isBBoxValid(false)
-        , m_signX(1), m_signY(1)
-        , m_contentScaleFactor(1)
-        , m_mm_to_pix_x(0.0), m_mm_to_pix_y(0.0)
-        , m_minX(0), m_minY(0), m_maxX(0), m_maxY(0)
-        , m_clipX1(0), m_clipY1(0), m_clipX2(0), m_clipY2(0)
-        , m_logicalFunction(wxRasterOperationMode::Copy)
-        , m_backgroundMode(wxBrushStyle::Transparent)
-        , m_mappingMode(wxMappingMode::Text)
-        , m_textForegroundColour(*wxBLACK)
+        : m_textForegroundColour(*wxBLACK)
         , m_textBackgroundColour(*wxWHITE)
         , m_owner(owner)
-#if wxUSE_PALETTE
-        , m_hasCustomPalette(false)
-#endif // wxUSE_PALETTE
 {
 }
 
@@ -359,7 +344,10 @@ void wxDCImpl::DoSetClippingRegion(wxCoord x, wxCoord y, wxCoord w, wxCoord h)
 
     if ( clipRegion.IsEmpty() )
     {
-        m_clipX1 = m_clipY1 = m_clipX2 = m_clipY2 = 0;
+        m_clipX1 = 0;
+        m_clipY1 = 0;
+        m_clipX2 = 0;
+        m_clipY2 = 0;
     }
     else
     {
@@ -851,44 +839,39 @@ void wxDCImpl::DoDrawSpline( const wxPointList *points )
 {
     wxCHECK_RET( IsOk(), wxT("invalid window dc") );
 
-    const wxPoint *p;
-    double cx1, cy1, cx2, cy2;
-    double           x1, y1, x2, y2;
-
     wxPointList::compatibility_iterator node = points->GetFirst();
     if (!node)
         // empty list
         return;
 
-    p = node->GetData();
+    const wxPoint* p = node->GetData();
 
-    x1 = p->x;
-    y1 = p->y;
+    double x1 = static_cast<double>(p->x);
+    double y1 = static_cast<double>(p->y);
 
     node = node->GetNext();
     p = node->GetData();
 
-    x2 = p->x;
-    y2 = p->y;
-    cx1 = (double)((x1 + x2) / 2);
-    cy1 = (double)((y1 + y2) / 2);
-    cx2 = (double)((cx1 + x2) / 2);
-    cy2 = (double)((cy1 + y2) / 2);
+    double x2 = static_cast<double>(p->x);
+    double y2 = static_cast<double>(p->y);
+    double cx1 = (x1 + x2) / 2.0;
+    double cy1 = (y1 + y2) / 2.0;
+    double cx2 = (cx1 + x2) / 2.0;
+    double cy2 = (cy1 + y2) / 2.0;
 
     wx_spline_add_point(x1, y1);
 
     while ((node = node->GetNext()))
     {
-        double cx3, cy3, cx4, cy4;
         p = node->GetData();
         x1 = x2;
         y1 = y2;
         x2 = p->x;
         y2 = p->y;
-        cx4 = (double)(x1 + x2) / 2;
-        cy4 = (double)(y1 + y2) / 2;
-        cx3 = (double)(x1 + cx4) / 2;
-        cy3 = (double)(y1 + cy4) / 2;
+        double cx4 = (x1 + x2) / 2.0;
+        double cy4 = (y1 + y2) / 2.0;
+        double cx3 = (x1 + cx4) / 2.0;
+        double cy3 = (y1 + cy4) / 2.0;
 
         wx_quadratic_spline(cx1, cy1, cx2, cy2, cx3, cy3, cx4, cy4);
 

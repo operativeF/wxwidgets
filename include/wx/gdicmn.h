@@ -270,8 +270,6 @@ enum class wxEllipsizeMode
 // Management of pens, brushes and fonts
 // ---------------------------------------------------------------------------
 
-using wxDash = std::int8_t;
-
 class WXDLLIMPEXP_CORE wxGDIObjListBase {
 public:
     wxGDIObjListBase() = default;

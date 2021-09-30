@@ -12,7 +12,8 @@
 
 #include "wx/bitmap.h"
 #include "wx/colour.h"
-#include "wx/gdicmn.h"  // for wxDash
+
+using wxDash = std::int8_t;
 
 enum class wxPenStyle
 {
