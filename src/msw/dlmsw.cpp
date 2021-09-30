@@ -166,10 +166,6 @@ void wxDynamicLibrary::ReportError(const wxString& message, const wxString& name
 // loading/unloading DLLs
 // ----------------------------------------------------------------------------
 
-#ifndef MAX_PATH
-    #define MAX_PATH 260        // from VC++ headers
-#endif
-
 /* static */
 wxDllType
 wxDynamicLibrary::RawLoad(const wxString& libname, int flags)

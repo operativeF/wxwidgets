@@ -49,31 +49,6 @@
 
 #include <stack>
 
-
-// Define REAL_MAX, REAL_MIN
-// if it isn't done in GDI+ header(s).
-#ifndef REAL_MAX
-    #define REAL_MAX    std::numeric_limits<float>::max()
-#endif // REAL_MAX
-#ifndef REAL_MIN
-    #define REAL_MIN    std::numeric_limits<float>::min()
-#endif // REAL_MIN
-
-// Define colour componenets positions in ARGB structure
-// if it isn't done in GDI+ header(s).
-#ifndef ALPHA_SHIFT
-    #define ALPHA_SHIFT 24
-#endif // ALPHA_SHIFT
-#ifndef RED_SHIFT
-    #define RED_SHIFT   16
-#endif // RED_SHIFT
-#ifndef GREEN_SHIFT
-    #define GREEN_SHIFT 8
-#endif // GREEN_SHIFT
-#ifndef BLUE_SHIFT
-    #define BLUE_SHIFT  0
-#endif // BLUE_SHIFT
-
 namespace
 {
 
