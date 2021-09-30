@@ -13,39 +13,39 @@
 class WXDLLIMPEXP_CORE wxPosition
 {
 public:
-    wxPosition() = default;
-    wxPosition(int row, int col) : m_row(row), m_column(col) {}
+    constexpr wxPosition() noexcept = default;
+    constexpr wxPosition(int row, int col) noexcept : m_row(row), m_column(col) {}
 
     // default copy ctor and assignment operator are okay.
 
-    int GetRow() const          { return m_row; }
-    int GetColumn() const       { return m_column; }
-    int GetCol() const          { return GetColumn(); }
-    void SetRow(int row)        { m_row = row; }
-    void SetColumn(int column)  { m_column = column; }
-    void SetCol(int column)     { SetColumn(column); }
+    constexpr int GetRow() const noexcept          { return m_row; }
+    constexpr int GetColumn() const noexcept       { return m_column; }
+    constexpr int GetCol() const noexcept          { return GetColumn(); }
+    constexpr void SetRow(int row) noexcept        { m_row = row; }
+    constexpr void SetColumn(int column) noexcept  { m_column = column; }
+    constexpr void SetCol(int column) noexcept     { SetColumn(column); }
 
-    bool operator==(const wxPosition& p) const
+    constexpr bool operator==(const wxPosition& p) const noexcept
         { return m_row == p.m_row && m_column == p.m_column; }
-    bool operator!=(const wxPosition& p) const
+    constexpr bool operator!=(const wxPosition& p) const noexcept
         { return !(*this == p); }
 
-    wxPosition& operator+=(const wxPosition& p)
+    constexpr wxPosition& operator+=(const wxPosition& p) noexcept
         { m_row += p.m_row; m_column += p.m_column; return *this; }
-    wxPosition& operator-=(const wxPosition& p)
+    constexpr wxPosition& operator-=(const wxPosition& p) noexcept
         { m_row -= p.m_row; m_column -= p.m_column; return *this; }
-    wxPosition& operator+=(const wxSize& s)
+    constexpr wxPosition& operator+=(const wxSize& s) noexcept
         { m_row += s.y; m_column += s.x; return *this; }
-    wxPosition& operator-=(const wxSize& s)
+    constexpr wxPosition& operator-=(const wxSize& s) noexcept
         { m_row -= s.y; m_column -= s.x; return *this; }
 
-    wxPosition operator+(const wxPosition& p) const
+    constexpr wxPosition operator+(const wxPosition& p) const noexcept
         { return wxPosition(m_row + p.m_row, m_column + p.m_column); }
-    wxPosition operator-(const wxPosition& p) const
+    constexpr wxPosition operator-(const wxPosition& p) const noexcept
         { return wxPosition(m_row - p.m_row, m_column - p.m_column); }
-    wxPosition operator+(const wxSize& s) const
+    constexpr wxPosition operator+(const wxSize& s) const noexcept
         { return wxPosition(m_row + s.y, m_column + s.x); }
-    wxPosition operator-(const wxSize& s) const
+    constexpr wxPosition operator-(const wxSize& s) const noexcept
         { return wxPosition(m_row - s.y, m_column - s.x); }
 
 private:

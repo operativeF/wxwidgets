@@ -1442,7 +1442,7 @@ void wxWindowMSW::MSWUpdateStyle(long flagsOld, long exflagsOld)
     }
 }
 
-wxBorder wxWindowMSW::GetDefaultBorderForControl() const
+constexpr wxBorder wxWindowMSW::GetDefaultBorderForControl() const noexcept
 {
     return wxBORDER_THEME;
 }

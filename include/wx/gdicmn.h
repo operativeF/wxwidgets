@@ -150,13 +150,13 @@ enum wxStockCursor
 };
 
 #ifndef __WXGTK__
-    inline constexpr int wxCURSOR_DEFAULT = wxCURSOR_ARROW;
+    constexpr int wxCURSOR_DEFAULT = wxCURSOR_ARROW;
 #endif
 
 #ifndef __WXMAC__
     // TODO CS supply openhand and closedhand cursors
-    inline constexpr int wxCURSOR_OPEN_HAND      = wxCURSOR_HAND;
-    inline constexpr int wxCURSOR_CLOSED_HAND    = wxCURSOR_HAND;
+    constexpr int wxCURSOR_OPEN_HAND      = wxCURSOR_HAND;
+    constexpr int wxCURSOR_CLOSED_HAND    = wxCURSOR_HAND;
 #endif
 
 // ----------------------------------------------------------------------------

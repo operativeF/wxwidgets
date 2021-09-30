@@ -249,7 +249,10 @@ public:
     {
         m_isBBoxValid = false;
 
-        m_minX = m_maxX = m_minY = m_maxY = 0;
+        m_minX = 0;
+        m_maxX = 0;
+        m_minY = 0;
+        m_maxY = 0;
     }
 
     // Get bounding box in logical units.
@@ -352,7 +355,15 @@ public:
     // up to date.
     virtual bool DoGetClippingRect(wxRect& rect) const;
 
-    virtual void DestroyClippingRegion() { ResetClipping(); }
+    virtual void DestroyClippingRegion()
+    {
+        m_clipping = false;
+
+        m_clipX1 = 0;
+        m_clipX2 = 0;
+        m_clipY1 = 0;
+        m_clipY2 = 0;
+    }
 
     // coordinates conversions and transforms
 
@@ -557,17 +568,6 @@ private:
     wxDC       *m_owner;
 
 protected:
-    // This method exists for backwards compatibility only (while it's not
-    // documented, there are derived classes using it outside wxWidgets
-    // itself), don't use it in any new code and just call wxDCImpl version of
-    // DestroyClippingRegion() to reset the clipping information instead.
-    void ResetClipping()
-    {
-        m_clipping = false;
-
-        m_clipX1 = m_clipX2 = m_clipY1 = m_clipY2 = 0;
-    }
-
     // returns adjustment factor for converting wxFont "point size"; in wx
     // it is point size on screen and needs to be multiplied by this value
     // for rendering on higher-resolution DCs such as printer ones
@@ -584,14 +584,14 @@ protected:
 
 
     // window on which the DC draws or NULL
-    wxWindow   *m_window;
+    wxWindow   *m_window{nullptr};
 
     // flags
-    bool m_colour;
+    bool m_colour{true};
     bool m_ok{true};
-    bool m_clipping;
+    bool m_clipping{false};
     bool m_isInteractive{false};
-    bool m_isBBoxValid;
+    bool m_isBBoxValid{false};
 
     // coordinate system variables
 
@@ -608,24 +608,32 @@ protected:
     wxScale m_userScale{1.0, 1.0};
     wxScale m_scale{1.0, 1.0};
 
-    int m_signX, m_signY;  // Used by SetAxisOrientation() to invert the axes
+    int m_signX{1};
+    int m_signY{1};  // Used by SetAxisOrientation() to invert the axes
 
-    double m_contentScaleFactor; // used by high resolution displays (retina)
+    double m_contentScaleFactor{1.0}; // used by high resolution displays (retina)
 
     // Pixel per mm in horizontal and vertical directions.
     //
     // These variables are computed on demand by GetMMToPX[xy]() functions,
     // don't access them directly other than for assigning to them.
-    mutable double m_mm_to_pix_x,
-                   m_mm_to_pix_y;
+    mutable double m_mm_to_pix_x{0.0};
+    mutable double m_mm_to_pix_y{0.0};
 
     // bounding and clipping boxes
-    wxCoord m_minX, m_minY, m_maxX, m_maxY; // Bounding box is stored in device units.
-    wxCoord m_clipX1, m_clipY1, m_clipX2, m_clipY2;  // Clipping box is stored in logical units.
+    wxCoord m_minX{0};
+    wxCoord m_minY{0};
+    wxCoord m_maxX{0};
+    wxCoord m_maxY{0}; // Bounding box is stored in device units.
 
-    wxRasterOperationMode m_logicalFunction;
-    wxBrushStyle m_backgroundMode;
-    wxMappingMode m_mappingMode;
+    wxCoord m_clipX1{0};
+    wxCoord m_clipY1{0};
+    wxCoord m_clipX2{0};
+    wxCoord m_clipY2{0};  // Clipping box is stored in logical units.
+
+    wxRasterOperationMode m_logicalFunction{wxRasterOperationMode::Copy};
+    wxBrushStyle m_backgroundMode{wxBrushStyle::Transparent};
+    wxMappingMode m_mappingMode{wxMappingMode::Text};
 
     wxPen             m_pen;
     wxBrush           m_brush;
@@ -636,7 +644,7 @@ protected:
 
 #if wxUSE_PALETTE
     wxPalette         m_palette;
-    bool              m_hasCustomPalette;
+    bool              m_hasCustomPalette{false};
 #endif // wxUSE_PALETTE
 
 private:

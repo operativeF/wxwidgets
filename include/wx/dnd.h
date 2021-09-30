@@ -64,7 +64,8 @@ public:
         : m_cursorCopy(cursorCopy),
           m_cursorMove(cursorMove),
           m_cursorStop(cursorStop)
-        { m_data = nullptr; }
+    {}
+
     virtual ~wxDropSourceBase() = default;
 
     wxDropSourceBase(const wxDropSourceBase&) = delete;
@@ -114,7 +115,7 @@ protected:
     }
 
     // the data we're dragging
-    wxDataObject *m_data;
+    wxDataObject *m_data{nullptr};
 
     // the cursors to use for feedback
     wxCursor m_cursorCopy,

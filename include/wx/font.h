@@ -496,7 +496,7 @@ protected:
 
     // Helper functions to recover wxFONTSTYLE/wxFONTWEIGHT and underlined flag
     // values from flags containing a combination of wxFONTFLAG_XXX.
-    static wxFontStyle GetStyleFromFlags(int flags)
+    static constexpr wxFontStyle GetStyleFromFlags(int flags) noexcept
     {
         return flags & wxFONTFLAG_ITALIC
                         ? wxFontStyle::Italic
@@ -505,7 +505,7 @@ protected:
                             : wxFontStyle::Normal;
     }
 
-    static wxFontWeight GetWeightFromFlags(int flags)
+    static constexpr wxFontWeight GetWeightFromFlags(int flags) noexcept
     {
         return flags & wxFONTFLAG_LIGHT
                         ? wxFONTWEIGHT_LIGHT
@@ -514,12 +514,12 @@ protected:
                             : wxFONTWEIGHT_NORMAL;
     }
 
-    static bool GetUnderlinedFromFlags(int flags)
+    static constexpr bool GetUnderlinedFromFlags(int flags) noexcept
     {
         return (flags & wxFONTFLAG_UNDERLINED) != 0;
     }
 
-    static bool GetStrikethroughFromFlags(int flags)
+    static constexpr bool GetStrikethroughFromFlags(int flags) noexcept
     {
         return (flags & wxFONTFLAG_STRIKETHROUGH) != 0;
     }

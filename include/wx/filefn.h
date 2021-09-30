@@ -535,7 +535,7 @@ inline constexpr wxChar wxPATH_SEP_MAC[]        = wxT(";");
 #endif  // Unix/Windows
 
 // is the char a path separator?
-inline bool wxIsPathSeparator(wxChar c)
+constexpr bool wxIsPathSeparator(wxChar c)
 {
     // under DOS/Windows we should understand both Unix and DOS file separators
 #if defined(__UNIX__) || defined(__MAC__)

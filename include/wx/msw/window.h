@@ -619,7 +619,7 @@ protected:
     // this allows you to implement standard control borders without
     // repeating the code in different classes that are not derived from
     // wxControl
-    wxBorder GetDefaultBorderForControl() const override;
+    constexpr wxBorder GetDefaultBorderForControl() const noexcept override;
 
     // choose the default border for this window
     wxBorder GetDefaultBorder() const override;
@@ -767,7 +767,7 @@ private:
     bool MSWSafeIsDialogMessage(WXMSG* msg);
 #endif // __WXUNIVERSAL__
 
-    static inline bool MSWIsPositionDirectlySupported(wxPoint pos)
+    constexpr bool MSWIsPositionDirectlySupported(wxPoint pos)
     {
         // The supported coordinate intervals for various functions are:
         // - MoveWindow, DeferWindowPos: [-32768, 32767] a.k.a. [SHRT_MIN, SHRT_MAX];

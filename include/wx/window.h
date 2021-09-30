@@ -1780,12 +1780,12 @@ protected:
     // this allows you to implement standard control borders without
     // repeating the code in different classes that are not derived from
     // wxControl
-    virtual wxBorder GetDefaultBorderForControl() const { return wxBORDER_THEME; }
+    virtual wxBorder GetDefaultBorderForControl() const noexcept { return wxBORDER_THEME; }
 
     // Get the default size for the new window if no explicit size given. TLWs
     // have their own default size so this is just for non top-level windows.
-    static int WidthDefault(int w) { return w == wxDefaultCoord ? 20 : w; }
-    static int HeightDefault(int h) { return h == wxDefaultCoord ? 20 : h; }
+    static constexpr int WidthDefault(int w)  noexcept { return w == wxDefaultCoord ? 20 : w; }
+    static constexpr int HeightDefault(int h) noexcept { return h == wxDefaultCoord ? 20 : h; }
 
 
     // Used to save the results of DoGetBestSize so it doesn't need to be
