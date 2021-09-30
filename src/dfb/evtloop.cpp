@@ -26,7 +26,7 @@
 #include "wx/nonownedwnd.h"
 #include "wx/buffer.h"
 
-#define TRACE_EVENTS "events"
+constexpr char TRACE_EVENTS[] = "events";
 
 // ===========================================================================
 // implementation

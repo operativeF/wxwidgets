@@ -16,8 +16,8 @@
 #include "wx/msw/private.h"
 
 // names for MSW-specific options
-#define wxPERSIST_TLW_MAX_X "xmax"
-#define wxPERSIST_TLW_MAX_Y "ymax"
+constexpr char wxPERSIST_TLW_MAX_X[] = "xmax";
+constexpr char wxPERSIST_TLW_MAX_Y[] = "ymax";
 
 class wxTLWGeometry : public wxTLWGeometryBase
 {

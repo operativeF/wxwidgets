@@ -610,20 +610,20 @@ bool wxCustomDataObject::SetData(size_t size, const void *buf)
 
 #if defined(__WXMSW__)
 #define wxIMAGE_FORMAT_DATA wxDF_PNG
-#define wxIMAGE_FORMAT_BITMAP_TYPE wxBitmapType::PNG
-#define wxIMAGE_FORMAT_NAME "PNG"
+const wxBitmapType wxIMAGE_FORMAT_BITMAP_TYPE{wxBitmapType::PNG};
+constexpr char wxIMAGE_FORMAT_NAME[] = "PNG";
 #elif defined(__WXGTK__)
 #define wxIMAGE_FORMAT_DATA wxDF_BITMAP
 #define wxIMAGE_FORMAT_BITMAP_TYPE wxBitmapType::PNG
-#define wxIMAGE_FORMAT_NAME "PNG"
+constexpr char wxIMAGE_FORMAT_NAME[] = "PNG";
 #elif defined(__WXOSX__)
 #define wxIMAGE_FORMAT_DATA wxDF_BITMAP
 #define wxIMAGE_FORMAT_BITMAP_TYPE wxBitmapType::TIFF
-#define wxIMAGE_FORMAT_NAME "TIFF"
+constexpr char wxIMAGE_FORMAT_NAME[] = "TIFF";
 #else
 #define wxIMAGE_FORMAT_DATA wxDF_BITMAP
 #define wxIMAGE_FORMAT_BITMAP_TYPE wxBitmapType::PNG
-#define wxIMAGE_FORMAT_NAME "PNG"
+constexpr char wxIMAGE_FORMAT_NAME[] = "PNG";
 #endif
 
 wxImageDataObject::wxImageDataObject(const wxImage& image)
@@ -637,8 +637,9 @@ wxImageDataObject::wxImageDataObject(const wxImage& image)
 
 void wxImageDataObject::SetImage(const wxImage& image)
 {
-    wxCHECK_RET(wxImage::FindHandler(wxIMAGE_FORMAT_BITMAP_TYPE) != nullptr,
-        wxIMAGE_FORMAT_NAME " image handler must be installed to use clipboard with image");
+    // FIXME: Doesn't work with constexpr yet.
+    //wxCHECK_RET(wxImage::FindHandler(wxIMAGE_FORMAT_BITMAP_TYPE) != nullptr,
+    //    wxIMAGE_FORMAT_NAME " image handler must be installed to use clipboard with image");
 
     wxMemoryOutputStream mem;
     image.SaveFile(mem, wxIMAGE_FORMAT_BITMAP_TYPE);
@@ -648,8 +649,9 @@ void wxImageDataObject::SetImage(const wxImage& image)
 
 wxImage wxImageDataObject::GetImage() const
 {
-    wxCHECK_MSG(wxImage::FindHandler(wxIMAGE_FORMAT_BITMAP_TYPE) != nullptr, wxNullImage,
-        wxIMAGE_FORMAT_NAME " image handler must be installed to use clipboard with image");
+    // FIXME: Doesn't work with constexpr yet.
+    //wxCHECK_MSG(wxImage::FindHandler(wxIMAGE_FORMAT_BITMAP_TYPE) != nullptr, wxNullImage,
+    //    wxIMAGE_FORMAT_NAME " image handler must be installed to use clipboard with image");
 
     wxMemoryInputStream mem(GetData(), GetSize());
     wxImage image;

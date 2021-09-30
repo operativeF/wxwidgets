@@ -22,8 +22,8 @@
 #include "wx/anidecod.h" // wxImageArray
 #include "wx/scopedarray.h"
 
-#define GIF89_HDR     "GIF89a"
-#define NETSCAPE_LOOP "NETSCAPE2.0"
+constexpr char GIF89_HDR[]     = "GIF89a";
+constexpr char NETSCAPE_LOOP[] = "NETSCAPE2.0";
 
 // see members.aol.com/royalef/gifabout.htm
 //     members.aol.com/royalef/gif89a.txt
