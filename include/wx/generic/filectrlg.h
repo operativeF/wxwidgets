@@ -174,11 +174,12 @@ protected:
     void FreeAllItemsData();
 
     wxString      m_dirName;
-    bool          m_showHidden{false};
     wxString      m_wild;
 
-    bool m_sort_forward{true};
     wxFileData::fileListFieldType m_sort_field{wxFileData::FileList_Name};
+
+    bool m_showHidden{false};
+    bool m_sort_forward{true};
 
 private:
     wxDECLARE_DYNAMIC_CLASS(wxFileListCtrl);

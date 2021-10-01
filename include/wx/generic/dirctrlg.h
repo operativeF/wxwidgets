@@ -193,17 +193,21 @@ protected:
 
 private:
     void PopulateNode(wxTreeItemId node);
-    wxDirItemData* GetItemData(wxTreeItemId itemId);
 
-    bool            m_showHidden{false};
-    wxTreeItemId    m_rootId;
     wxString        m_defaultPath; // Starting path
-    long            m_styleEx{}; // Extended style
     wxString        m_filter;  // Wildcards in same format as per wxFileDialog
-    int             m_currentFilter{0}; // The current filter index
     wxString        m_currentFilterStr; // Current filter string
+
+    wxTreeItemId    m_rootId;
+
+    wxDirItemData* GetItemData(wxTreeItemId itemId);
     wxTreeCtrl*     m_treeCtrl{nullptr};
     wxDirFilterListCtrl* m_filterListCtrl{nullptr};
+    
+    long            m_styleEx{}; // Extended style
+    int             m_currentFilter{0}; // The current filter index
+
+    bool            m_showHidden{false};
 
     wxDECLARE_EVENT_TABLE();
     wxDECLARE_DYNAMIC_CLASS(wxGenericDirCtrl);

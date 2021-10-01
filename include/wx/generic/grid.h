@@ -1380,11 +1380,7 @@ public:
 private:
     std::vector<std::vector<std::string>> m_data;
 
-    // notice that while we don't need to store the number of our rows as it's
-    // always equal to the size of m_data array, we do need to store the number
-    // of our columns as we can't retrieve it from m_data when the number of
-    // rows is 0 (see #10818)
-    int m_numCols;
+    std::string m_cornerLabel;
 
     // These only get used if you set your own labels, otherwise the
     // GetRow/ColLabelValue functions return wxGridTableBase defaults
@@ -1392,7 +1388,11 @@ private:
     std::vector<std::string>     m_rowLabels;
     std::vector<std::string>     m_colLabels;
 
-    std::string m_cornerLabel;
+    // notice that while we don't need to store the number of our rows as it's
+    // always equal to the size of m_data array, we do need to store the number
+    // of our columns as we can't retrieve it from m_data when the number of
+    // rows is 0 (see #10818)
+    int m_numCols;
 
 public:
 	wxClassInfo *wxGetClassInfo() const override;
@@ -2348,38 +2348,30 @@ protected:
     wxSize DoGetBestSize() const override;
     void DoEnable(bool enable) override;
 
-    bool m_created;
+    wxColour    m_selectionBackground;
+    wxColour    m_selectionForeground;
+    wxColour   m_labelBackgroundColour;
+    wxColour   m_labelTextColour;
+    wxColour   m_gridLineColour;
+    wxColour   m_cellHighlightColour;
+    wxColour   m_gridFrozenBorderColour;
 
-    wxGridWindow             *m_gridWin;
-    wxGridWindow             *m_frozenColGridWin;
-    wxGridWindow             *m_frozenRowGridWin;
-    wxGridWindow             *m_frozenCornerGridWin;
-    wxGridCornerLabelWindow  *m_cornerLabelWin;
-    wxGridRowLabelWindow     *m_rowLabelWin;
-    wxGridRowLabelWindow     *m_rowFrozenLabelWin;
+    std::vector<int> m_rowHeights;
+    std::vector<int> m_rowBottoms;
+    std::vector<int> m_colWidths;
+    std::vector<int> m_colRights;
+    //Column positions
+    std::vector<int> m_colAt;
 
-    // the real type of the column window depends on m_useNativeHeader value:
-    // if it is true, its dynamic type is wxHeaderCtrl, otherwise it is
-    // wxGridColLabelWindow, use accessors below when the real type matters
-    wxWindow                *m_colLabelWin;
-    wxWindow                *m_colFrozenLabelWin;
+    // if a column has a minimal width, it will be the value for it in this
+    // hash table
+    wxLongToLongHashMap m_colMinWidths,
+                        m_rowMinHeights;
 
-    wxGridColLabelWindow *GetColLabelWindow() const
-    {
-        wxASSERT_MSG( !m_useNativeHeader, "no column label window" );
+    wxFont     m_labelFont;
 
-        return reinterpret_cast<wxGridColLabelWindow *>(m_colLabelWin);
-    }
-
-    wxGridTableBase          *m_table;
-    bool                      m_ownTable;
-
-    std::size_t m_numRows;
-    std::size_t m_numCols;
-
-    // Number of frozen rows/columns in the beginning of the grid, 0 if none.
-    int m_numFrozenRows;
-    int m_numFrozenCols;
+    wxCursor m_rowResizeCursor;
+    wxCursor m_colResizeCursor;
 
     wxGridCellCoords m_currentCellCoords;
 
@@ -2397,10 +2389,51 @@ protected:
     // if no block selection is in process, it is set to wxGridNoCellCoords
     wxGridCellCoords m_selectedBlockCorner;
 
+    // the position (in physical coordinates) where the user started dragging
+    // the mouse or wxDefaultPosition if mouse isn't being dragged
+    //
+    // notice that this can be != wxDefaultPosition while m_isDragging is still
+    // false because we wait until the mouse is moved some distance away before
+    // setting m_isDragging to true
+    wxPoint m_startDragPos;
+
+    wxGridWindow             *m_gridWin;
+    wxGridWindow             *m_frozenColGridWin;
+    wxGridWindow             *m_frozenRowGridWin;
+    wxGridWindow             *m_frozenCornerGridWin;
+    wxGridCornerLabelWindow  *m_cornerLabelWin;
+    wxGridRowLabelWindow     *m_rowLabelWin;
+    wxGridRowLabelWindow     *m_rowFrozenLabelWin;
+    wxGridTableBase          *m_table;
+
     wxGridSelection  *m_selection;
 
-    wxColour    m_selectionBackground;
-    wxColour    m_selectionForeground;
+    wxWindow *m_winCapture;     // the window which captured the mouse
+
+    // the default cell attr object for cells that don't have their own
+    wxGridCellAttr*     m_defaultCellAttr;
+    wxGridTypeRegistry*    m_typeRegistry;
+
+
+    // the real type of the column window depends on m_useNativeHeader value:
+    // if it is true, its dynamic type is wxHeaderCtrl, otherwise it is
+    // wxGridColLabelWindow, use accessors below when the real type matters
+    wxWindow                *m_colLabelWin;
+    wxWindow                *m_colFrozenLabelWin;
+
+    wxGridColLabelWindow *GetColLabelWindow() const
+    {
+        wxASSERT_MSG( !m_useNativeHeader, "no column label window" );
+
+        return reinterpret_cast<wxGridColLabelWindow *>(m_colLabelWin);
+    }
+
+    std::size_t m_numRows;
+    std::size_t m_numCols;
+
+    // Number of frozen rows/columns in the beginning of the grid, 0 if none.
+    int m_numFrozenRows;
+    int m_numFrozenCols;
 
     // NB: *never* access m_row/col arrays directly because they are created
     //     on demand, *always* use accessor functions instead!
@@ -2410,22 +2443,96 @@ protected:
 
     int        m_defaultRowHeight;
     int        m_minAcceptableRowHeight;
-    std::vector<int> m_rowHeights;
-    std::vector<int> m_rowBottoms;
 
     // init the m_colWidths/Rights arrays
     void InitColWidths();
 
     int        m_defaultColWidth;
     int        m_minAcceptableColWidth;
-    std::vector<int> m_colWidths;
-    std::vector<int> m_colRights;
+    
+    int m_rowLabelWidth;
+    int m_colLabelHeight;
 
     int m_sortCol;
+
+    // the size of the margin left to the right and bottom of the cell area
+    int m_extraWidth,
+        m_extraHeight;
+
+    int        m_rowLabelHorizAlign;
+    int        m_rowLabelVertAlign;
+    int        m_colLabelHorizAlign;
+    int        m_colLabelVertAlign;
+    int        m_colLabelTextOrientation;
+    int        m_cornerLabelHorizAlign;
+    int        m_cornerLabelVertAlign;
+    int        m_cornerLabelTextOrientation;
+    int        m_cellHighlightPenWidth;
+    int        m_cellHighlightROPenWidth;
+    int        m_gridFrozenBorderPenWidth;
+
+    int  m_batchCount;
+
+    // Index of the column being drag-moved or -1 if there is no move operation
+    // in progress.
+    int     m_dragMoveCol;
+
+    // Last horizontal mouse position while drag-moving a column.
+    int     m_dragLastPos;
+
+    // Row or column (depending on m_cursorMode value) currently being resized
+    // or -1 if there is no resize operation in progress.
+    int     m_dragRowOrCol;
+
+    enum CursorMode
+    {
+        WXGRID_CURSOR_SELECT_CELL,
+        WXGRID_CURSOR_RESIZE_ROW,
+        WXGRID_CURSOR_RESIZE_COL,
+        WXGRID_CURSOR_SELECT_ROW,
+        WXGRID_CURSOR_SELECT_COL,
+        WXGRID_CURSOR_MOVE_COL
+    };
+
+    // this variable is used not for finding the correct current cursor but
+    // mainly for finding out what is going to happen if the mouse starts being
+    // dragged right now
+    //
+    // by default it is WXGRID_CURSOR_SELECT_CELL meaning that nothing else is
+    // going on, and it is set to one of RESIZE/SELECT/MOVE values while the
+    // corresponding operation will be started if the user starts dragging the
+    // mouse from the current position
+    CursorMode m_cursorMode;
+
+    TabBehaviour m_tabBehaviour;        // determines how the TAB key behaves
+
     bool m_sortIsAscending;
 
     bool m_useNativeHeader,
          m_nativeColumnLabels;
+    bool m_ownTable;
+    bool m_created;
+    bool       m_defaultRowLabelValues;
+    bool       m_defaultColLabelValues;
+
+    bool       m_gridLinesEnabled;
+    bool       m_gridLinesClipHorz,
+               m_gridLinesClipVert;
+
+    bool       m_editable;              // applies to whole grid
+    bool       m_cellEditCtrlEnabled;   // is in-place edit currently shown?
+
+    bool    m_canDragRowSize;
+    bool    m_canDragColSize;
+    bool    m_canDragColMove;
+    bool    m_canHideColumns;
+    bool    m_canDragGridSize;
+    bool    m_canDragCell;
+    bool    m_waitForSlowClick;
+
+    // true if a drag operation is in progress; when this is true,
+    // m_startDragPos is valid, i.e. not wxDefaultPosition
+    bool    m_isDragging;
 
     // get the col/row coords
     int GetColWidth(int col) const;
@@ -2440,49 +2547,11 @@ protected:
     int GetRowTop(int row) const;
     int GetRowBottom(int row) const;
 
-    int m_rowLabelWidth;
-    int m_colLabelHeight;
-
-    // the size of the margin left to the right and bottom of the cell area
-    int m_extraWidth,
-        m_extraHeight;
-
-    wxColour   m_labelBackgroundColour;
-    wxColour   m_labelTextColour;
-    wxFont     m_labelFont;
-
-    int        m_rowLabelHorizAlign;
-    int        m_rowLabelVertAlign;
-    int        m_colLabelHorizAlign;
-    int        m_colLabelVertAlign;
-    int        m_colLabelTextOrientation;
-    int        m_cornerLabelHorizAlign;
-    int        m_cornerLabelVertAlign;
-    int        m_cornerLabelTextOrientation;
-
-    bool       m_defaultRowLabelValues;
-    bool       m_defaultColLabelValues;
-
-    wxColour   m_gridLineColour;
-    bool       m_gridLinesEnabled;
-    bool       m_gridLinesClipHorz,
-               m_gridLinesClipVert;
-    wxColour   m_cellHighlightColour;
-    int        m_cellHighlightPenWidth;
-    int        m_cellHighlightROPenWidth;
-    wxColour   m_gridFrozenBorderColour;
-    int        m_gridFrozenBorderPenWidth;
-
     // common part of AutoSizeColumn/Row()
     void AutoSizeColOrRow(int n, bool setAsMin, wxGridDirection direction);
 
     // Calculate the minimum acceptable size for labels area
     wxCoord CalcColOrRowLabelAreaMinSize(wxGridDirection direction);
-
-    // if a column has a minimal width, it will be the value for it in this
-    // hash table
-    wxLongToLongHashMap m_colMinWidths,
-                        m_rowMinHeights;
 
     // get the minimal width of the given column/row
     int GetColMinimalWidth(int col) const;
@@ -2523,26 +2592,6 @@ protected:
         return wxGridCellAttrPtr(GetCellAttr(coords));
     }
 
-
-    // the default cell attr object for cells that don't have their own
-    wxGridCellAttr*     m_defaultCellAttr;
-
-
-    int  m_batchCount;
-
-
-    wxGridTypeRegistry*    m_typeRegistry;
-
-    enum CursorMode
-    {
-        WXGRID_CURSOR_SELECT_CELL,
-        WXGRID_CURSOR_RESIZE_ROW,
-        WXGRID_CURSOR_RESIZE_COL,
-        WXGRID_CURSOR_SELECT_ROW,
-        WXGRID_CURSOR_SELECT_COL,
-        WXGRID_CURSOR_MOVE_COL
-    };
-
     // this method not only sets m_cursorMode but also sets the correct cursor
     // for the given mode and, if captureMouse is not false releases the mouse
     // if it was captured and captures it if it must be captured
@@ -2553,69 +2602,12 @@ protected:
                           wxWindow *win = nullptr,
                           bool captureMouse = true);
 
-    wxWindow *m_winCapture;     // the window which captured the mouse
-
-    // this variable is used not for finding the correct current cursor but
-    // mainly for finding out what is going to happen if the mouse starts being
-    // dragged right now
-    //
-    // by default it is WXGRID_CURSOR_SELECT_CELL meaning that nothing else is
-    // going on, and it is set to one of RESIZE/SELECT/MOVE values while the
-    // corresponding operation will be started if the user starts dragging the
-    // mouse from the current position
-    CursorMode m_cursorMode;
-
-
-    //Column positions
-    std::vector<int> m_colAt;
-
-    bool    m_canDragRowSize;
-    bool    m_canDragColSize;
-    bool    m_canDragColMove;
-    bool    m_canHideColumns;
-    bool    m_canDragGridSize;
-    bool    m_canDragCell;
-
-    // Index of the column being drag-moved or -1 if there is no move operation
-    // in progress.
-    int     m_dragMoveCol;
-
-    // Last horizontal mouse position while drag-moving a column.
-    int     m_dragLastPos;
-
-    // Row or column (depending on m_cursorMode value) currently being resized
-    // or -1 if there is no resize operation in progress.
-    int     m_dragRowOrCol;
-
-    // true if a drag operation is in progress; when this is true,
-    // m_startDragPos is valid, i.e. not wxDefaultPosition
-    bool    m_isDragging;
-
-    // the position (in physical coordinates) where the user started dragging
-    // the mouse or wxDefaultPosition if mouse isn't being dragged
-    //
-    // notice that this can be != wxDefaultPosition while m_isDragging is still
-    // false because we wait until the mouse is moved some distance away before
-    // setting m_isDragging to true
-    wxPoint m_startDragPos;
-
-    bool    m_waitForSlowClick;
-
-    wxCursor m_rowResizeCursor;
-    wxCursor m_colResizeCursor;
-
-    bool       m_editable;              // applies to whole grid
-    bool       m_cellEditCtrlEnabled;   // is in-place edit currently shown?
-
-    TabBehaviour m_tabBehaviour;        // determines how the TAB key behaves
-
     void Init();        // common part of all ctors
     void Create();
     void CreateColumnWindow();
     void CalcDimensions();
     void CalcWindowSizes();
     bool Redimension( wxGridTableMessage& );
-
 
     enum EventResult
     {
@@ -3040,6 +3032,7 @@ protected:
     int         m_col;
     int         m_x;
     int         m_y;
+
     bool        m_selecting;
 
 private:
@@ -3052,7 +3045,7 @@ private:
         m_selecting = sel;
     }
 
-    public:
+public:
 	wxGridEvent& operator=(const wxGridEvent&) = delete;
 	wxClassInfo *wxGetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 

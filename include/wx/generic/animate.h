@@ -120,15 +120,16 @@ protected:      // internal utilities
 
 
 protected:
-    unsigned int  m_currentFrame;     // Current frame
-    bool          m_looped;           // Looped, or not
+    wxBitmap      m_backingStore;     // The frames are drawn here and then blitted
+                                      // on the screen
+                                      
     wxTimer       m_timer;            // The timer
+
+    unsigned int  m_currentFrame;     // Current frame
 
     bool          m_isPlaying;        // Is the animation playing?
     bool          m_useWinBackgroundColour; // Use animation bg colour or window bg colour?
-
-    wxBitmap      m_backingStore;     // The frames are drawn here and then blitted
-                                      // on the screen
+    bool          m_looped;           // Looped, or not
 
 private:
     using base_type = wxAnimationCtrlBase;

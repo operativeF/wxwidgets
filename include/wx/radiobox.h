@@ -123,13 +123,6 @@ protected:
 #endif // wxUSE_HELP
 
 private:
-    // the number of elements in major dimension (i.e. number of columns if
-    // wxRA_SPECIFY_COLS or the number of rows if wxRA_SPECIFY_ROWS) and also
-    // the number of rows/columns calculated from it
-    unsigned int m_majorDim{0};
-    unsigned int m_numCols{0};
-    unsigned int m_numRows{0};
-
 #if wxUSE_TOOLTIPS
     // array of tooltips for the individual items
 
@@ -140,6 +133,13 @@ private:
     // help text associated with a particular item or empty string if none
     std::vector<std::string> m_itemsHelpTexts;
 #endif // wxUSE_HELP
+
+    // the number of elements in major dimension (i.e. number of columns if
+    // wxRA_SPECIFY_COLS or the number of rows if wxRA_SPECIFY_ROWS) and also
+    // the number of rows/columns calculated from it
+    unsigned int m_majorDim{0};
+    unsigned int m_numCols{0};
+    unsigned int m_numRows{0};
 };
 
 #if defined(__WXUNIVERSAL__)

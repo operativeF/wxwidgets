@@ -257,11 +257,12 @@ protected:
     void IncOrient(wxCoord& x, wxCoord& y, wxCoord inc);
 
 private:
+
+    // handler injected into target window to forward some useful events to us
+    wxVarScrollHelperEvtHandler *m_handler{nullptr};
+    
     // the total number of (logical) units
     size_t m_unitMax{0};
-
-    // the total (estimated) size
-    wxCoord m_sizeTotal{0};
 
     // the first currently visible unit
     size_t m_unitFirst{0};
@@ -270,6 +271,9 @@ private:
     // partly, visible one)
     size_t m_nUnitsVisible{0};
 
+    // the total (estimated) size
+    wxCoord m_sizeTotal{0};
+
     // accumulated mouse wheel rotation
 #if wxUSE_MOUSEWHEEL
     int m_sumWheelRotation{0};
@@ -277,9 +281,6 @@ private:
 
     // do child scrolling (used in DoPrepareDC())
     bool m_physicalScrolling{true};
-
-    // handler injected into target window to forward some useful events to us
-    wxVarScrollHelperEvtHandler *m_handler{nullptr};
 };
 
 

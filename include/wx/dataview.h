@@ -517,10 +517,12 @@ public:
     virtual int WXGetSpecifiedWidth() const { return GetWidth(); }
 
 protected:
-    wxDataViewRenderer      *m_renderer;
-    int                      m_model_column;
     wxBitmap                 m_bitmap;
+
+    wxDataViewRenderer      *m_renderer;
     wxDataViewCtrl          *m_owner;
+
+    int                      m_model_column;
 
 private:
     // common part of all ctors
@@ -903,27 +905,35 @@ public:
     void SetEditCancelled() { m_editCancelled = true; }
 
 protected:
-    wxDataViewItem      m_item;
-    int                 m_col;
-    wxDataViewModel    *m_model;
     wxVariant           m_value;
-    wxDataViewColumn   *m_column;
-    wxPoint             m_pos;
-    int                 m_cacheFrom;
-    int                 m_cacheTo;
-    bool                m_editCancelled;
 
+    wxDataViewModel    *m_model;
+    wxDataViewColumn   *m_column;
+    
 #if wxUSE_DRAG_AND_DROP
     wxDataObject       *m_dataObject;
 
     wxDataFormat        m_dataFormat;
+    
     void*               m_dataBuffer;
+
     size_t              m_dataSize;
 
     int                 m_dragFlags;
-    wxDragResult        m_dropEffect;
     int                 m_proposedDropIndex;
+    
+    wxDragResult        m_dropEffect;
 #endif // wxUSE_DRAG_AND_DROP
+
+    wxPoint             m_pos;
+
+    wxDataViewItem      m_item;
+    
+    int                 m_col;
+    int                 m_cacheFrom;
+    int                 m_cacheTo;
+
+    bool                m_editCancelled;
 
 private:
     // Common part of non-copy ctors.

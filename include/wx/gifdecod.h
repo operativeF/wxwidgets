@@ -102,15 +102,17 @@ private:
     wxGIFErrorCode dgif(wxInputStream& stream,
                         GIFImage *img, int interl, int bits);
 
+    unsigned char m_buffer[256];    // buffer for reading
+
     // array of all frames
     std::vector<void*> m_frames;
+
+    unsigned char *m_bufp{nullptr};          // pointer to next byte in buffer
 
     // decoder state vars
     int           m_restbits{};       // remaining valid bits
     unsigned int  m_restbyte{};       // remaining bytes in this block
     unsigned int  m_lastbyte{};       // last byte read
-    unsigned char m_buffer[256];    // buffer for reading
-    unsigned char *m_bufp{nullptr};          // pointer to next byte in buffer
 };
 
 #endif // wxUSE_STREAMS && wxUSE_GIF

@@ -64,14 +64,14 @@ protected:
         { return m_state & wxDATAVIEW_CELL_SELECTED; }
 
 private:
+    wxDC *m_dc;
+
+    int                          m_state;
     int                          m_align;
+    
     wxDataViewCellMode           m_mode;
 
     wxEllipsizeMode m_ellipsizeMode;
-
-    wxDC *m_dc;
-
-    int m_state;
 
 public:
 	wxClassInfo *wxGetClassInfo() const override;

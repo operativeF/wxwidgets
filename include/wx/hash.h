@@ -28,8 +28,8 @@ inline constexpr int wxHASH_SIZE_DEFAULT = 1000;
 
 union wxHashKeyValue
 {
-    long integer;
     wxString *string;
+    long integer;
 };
 
 // for some compilers (AIX xlC), defining it as friend inside the class is not

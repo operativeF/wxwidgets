@@ -52,17 +52,16 @@ protected:
     std::string m_message;
 
 private:
-    wxIcon m_icon;
-
     wxColour m_colStart,
              m_colEnd;
+             
+    wxIcon m_icon;
+    wxFont m_titleFont;
 
     std::chrono::milliseconds m_timeout;
     std::chrono::milliseconds m_delay;
 
     wxTipKind m_tipKind;
-
-    wxFont m_titleFont;
 };
 
 #endif // _WX_GENERIC_PRIVATE_RICHTOOLTIP_H_

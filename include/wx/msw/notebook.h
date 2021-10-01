@@ -197,11 +197,6 @@ protected:
   void OnEraseBackground(wxEraseEvent& event);
   void OnPaint(wxPaintEvent& event);
 
-#if USE_NOTEBOOK_ANTIFLICKER
-    // true if we have already subclassed our updown control
-    bool m_hasSubclassedUpdown{false};
-#endif // USE_NOTEBOOK_ANTIFLICKER
-
 #if wxUSE_UXTHEME
   // background brush used to paint the tab control
   unique_brush m_hbrBackground;
@@ -210,6 +205,10 @@ protected:
   wxPoint m_bgBrushAdj;
 #endif // wxUSE_UXTHEME
 
+#if USE_NOTEBOOK_ANTIFLICKER
+    // true if we have already subclassed our updown control
+    bool m_hasSubclassedUpdown{false};
+#endif // USE_NOTEBOOK_ANTIFLICKER
 
 public:
 	wxClassInfo *wxGetClassInfo() const override;

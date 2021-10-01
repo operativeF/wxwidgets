@@ -244,11 +244,15 @@ public:
     void SetPrintData(const wxPrintData& printData);
 
 private:
+    wxPrintData     m_printData;
+
     wxSize          m_paperSize; // The dimensions selected by the user (on return, same as in wxPrintData?)
+
     wxPoint         m_minMarginTopLeft{0, 0};
     wxPoint         m_minMarginBottomRight{0, 0};
     wxPoint         m_marginTopLeft{0, 0};
     wxPoint         m_marginBottomRight{0, 0};
+
     bool            m_defaultMinMargins{false};
     bool            m_enableMargins{true};
     bool            m_enableOrientation{true};
@@ -256,7 +260,6 @@ private:
     bool            m_enablePrinter{true};
     bool            m_getDefaultInfo{false}; // Equiv. to PSD_RETURNDEFAULT
     bool            m_enableHelp{false};
-    wxPrintData     m_printData;
 };
 
 #endif // wxUSE_PRINTING_ARCHITECTURE

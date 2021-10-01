@@ -130,6 +130,9 @@ protected:
     const wxDC* const m_dc;
     const wxWindow* const m_win;
 
+    // This one can be NULL or not.
+    const wxFont* const m_font;
+    
     // If this is true, simply forward to wxDC::GetTextExtent() from our
     // CallGetTextExtent() instead of calling our own DoGetTextExtent().
     //
@@ -139,9 +142,6 @@ protected:
     // necessarily a native one and in this case we must call back into the DC
     // implementation of text measuring itself.
     bool m_useDCImpl;
-
-    // This one can be NULL or not.
-    const wxFont* const m_font;
 };
 
 // Include the platform dependent class declaration, if any.

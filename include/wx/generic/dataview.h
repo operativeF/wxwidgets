@@ -210,6 +210,9 @@ public:
     {
         Create(parent, id, pos, size, style, validator, name);
     }
+    
+    wxDataViewCtrl(const wxDataViewCtrl&) = delete;
+	wxDataViewCtrl& operator=(const wxDataViewCtrl&) = delete;
 
     ~wxDataViewCtrl();
 
@@ -375,7 +378,6 @@ private:
 
     void DoClearColumns();
 
-    std::vector<wxDataViewColumn*> m_cols;
     // cached column best widths information, values are for
     // respective columns from m_cols and the arrays have same size
     struct CachedColWidthInfo
@@ -384,24 +386,26 @@ private:
         int width{0};  // cached width or 0 if not computed
         bool dirty{true}; // column was invalidated, header needs updating
     };
-    std::vector<CachedColWidthInfo> m_colsBestWidths;
-    // This indicates that at least one entry in m_colsBestWidths has 'dirty'
-    // flag set. It's cheaper to check one flag in OnInternalIdle() than to
-    // iterate over m_colsBestWidths to check if anything needs to be done.
-    bool                      m_colsDirty;
-
-    wxDataViewModelNotifier  *m_notifier;
-    wxDataViewMainWindow     *m_clientArea;
-    wxDataViewHeaderWindow   *m_headerArea;
 
     // user defined color to draw row lines, may be invalid
     wxColour m_alternateRowColour;
 
     // columns indices used for sorting, empty if nothing is sorted
     std::vector<int> m_sortingColumnIdxs;
+    std::vector<CachedColWidthInfo> m_colsBestWidths;
+    std::vector<wxDataViewColumn*> m_cols;
+
+    wxDataViewModelNotifier  *m_notifier;
+    wxDataViewMainWindow     *m_clientArea;
+    wxDataViewHeaderWindow   *m_headerArea;
 
     // if true, allow sorting by more than one column
     bool m_allowMultiColumnSort;
+
+    // This indicates that at least one entry in m_colsBestWidths has 'dirty'
+    // flag set. It's cheaper to check one flag in OnInternalIdle() than to
+    // iterate over m_colsBestWidths to check if anything needs to be done.
+    bool                      m_colsDirty;
 
 private:
     void OnSize( wxSizeEvent &event );
@@ -417,8 +421,6 @@ private:
 
 private:
     wxDECLARE_DYNAMIC_CLASS(wxDataViewCtrl);
-    wxDataViewCtrl(const wxDataViewCtrl&) = delete;
-	wxDataViewCtrl& operator=(const wxDataViewCtrl&) = delete;
     wxDECLARE_EVENT_TABLE();
 };
 

@@ -71,13 +71,15 @@ protected:
     // Filename of currently active map file.
     std::string         m_helpDir;
 
-    // How many entries do we have in the map file?
-    int              m_NumOfEntries{0};
-
     // A list containing all id,url,documentation triples.
     wxList          *m_MapList{nullptr};
 
+    // How many entries do we have in the map file?
+    int              m_NumOfEntries{0};
 private:
+    // How to call the html viewer.
+    std::string         m_BrowserName;
+
     // parse a single line of the map file (called by LoadFile())
     //
     // return true if the line was valid or false otherwise
@@ -85,10 +87,6 @@ private:
 
     // Deletes the list and all objects.
     void DeleteList();
-
-
-    // How to call the html viewer.
-    std::string         m_BrowserName;
 
     // Is the viewer a variant of netscape?
     bool             m_BrowserIsNetscape{false};

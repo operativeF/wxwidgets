@@ -152,12 +152,14 @@ protected:
     bool ContainsExcludedCharacters(const wxString& val) const;
 
 protected:
-    long                 m_validatorStyle;
-    wxString*            m_stringValue;
     wxString             m_charIncludes;
     wxString             m_charExcludes;
+
     std::vector<wxString>        m_includes;
     std::vector<wxString>        m_excludes;
+    
+    wxString*            m_stringValue;
+    long                 m_validatorStyle;
 
 private:
     wxDECLARE_DYNAMIC_CLASS(wxTextValidator);

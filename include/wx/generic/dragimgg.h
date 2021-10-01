@@ -230,10 +230,10 @@ protected:
     wxCursor        m_cursor;
     wxCursor        m_oldCursor;
 //    wxPoint         m_hotspot;
+
     wxPoint         m_offset; // The hostpot value passed to BeginDrag
     wxPoint         m_position;
-    bool            m_isDirty;
-    bool            m_isShown;
+
     wxWindow*       m_window;
     wxDC*           m_windowDC;
 
@@ -242,15 +242,18 @@ protected:
     wxDCOverlay*     m_dcOverlay;
 #else
     // Stores the window contents while we're dragging the image around
+    // A temporary bitmap for repairing/redrawing
+    wxBitmap        m_repairBitmap;
     wxBitmap        m_backingBitmap;
     wxBitmap*       m_pBackingBitmap; // Pointer to existing backing bitmap
                                       // (pass to wxGenericDragImage as an efficiency measure)
-    // A temporary bitmap for repairing/redrawing
-    wxBitmap        m_repairBitmap;
 #endif // !wxHAS_NATIVE_OVERLAY
 
     wxRect          m_boundingRect;
+
     bool            m_fullScreen;
+    bool            m_isDirty;
+    bool            m_isShown;
 
 private:
     wxDECLARE_DYNAMIC_CLASS(wxGenericDragImage);
