@@ -151,14 +151,6 @@ private:
     // return the pointer which can be used to update it if it's non-null
     wxMSWHeaderCtrlCustomDraw* GetCustomDraw();
 
-
-    // the real wxHeaderCtrl control
-    wxHeaderCtrl &m_header;
-
-    // the number of columns in the control, including the hidden ones (not
-    // taken into account by the native control, see comment in DoGetCount())
-    unsigned int m_numColumns{0};
-
     // this is a lookup table allowing us to check whether the column with the
     // given index is currently shown in the native control, in which case the
     // value of this array element with this index is 0, or hidden
@@ -179,18 +171,25 @@ private:
     // the image list: initially nullptr, created on demand
     std::unique_ptr<wxImageList> m_imageList;
 
+    // the custom draw helper: initially nullptr, created on demand, use
+    // GetCustomDraw() to do it
+    std::unique_ptr<wxMSWHeaderCtrlCustomDraw> m_customDraw;
+
+    // the real wxHeaderCtrl control
+    wxHeaderCtrl& m_header;
+
     // the offset of the window used to emulate scrolling it
     int m_scrollOffset{0};
 
     // actual column we are dragging or -1 if not dragging anything
     int m_colBeingDragged{-1};
 
+    // the number of columns in the control, including the hidden ones (not
+    // taken into account by the native control, see comment in DoGetCount())
+    unsigned int m_numColumns{ 0 };
+
     // a column is currently being resized
     bool m_isColBeingResized{false};
-
-    // the custom draw helper: initially nullptr, created on demand, use
-    // GetCustomDraw() to do it
-    std::unique_ptr<wxMSWHeaderCtrlCustomDraw> m_customDraw;
 };
 
 // ============================================================================

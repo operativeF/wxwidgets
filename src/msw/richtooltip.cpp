@@ -178,12 +178,12 @@ public:
     }
 
 private:
+    // One of TTI_NONE, TTI_INFO, TTI_WARNING or TTI_ERROR.
+    int m_ttiIcon;
+
     // If this is false, we've been requested to do something that the native
     // version doesn't support and so need to fall back to the generic one.
     bool m_canUseNative;
-
-    // One of TTI_NONE, TTI_INFO, TTI_WARNING or TTI_ERROR.
-    int m_ttiIcon;
 };
 
 /* static */

@@ -416,6 +416,13 @@ struct EllipsizeCalculator
         return m_dc.GetTextExtent(GetEllipsizedText()).x <= m_maxFinalWidthPx;
     }
 
+    std::string m_output;
+    std::string m_str;
+
+    std::vector<int> m_charOffsetsPx;
+
+    const wxDC& m_dc;
+
     // calculation state:
 
     // REMEMBER: indexes inside the string have a valid range of [0;len-1] if not otherwise constrained
@@ -429,16 +436,10 @@ struct EllipsizeCalculator
     // how many chars do we need to erase? valid range is [0;len-m_initialCharToRemove]
     size_t m_nCharsToRemove;
 
-    std::string m_output;
-    bool m_outputNeedsUpdate;
-
-    // inputs:
-    std::string m_str;
-    const wxDC& m_dc;
     int m_maxFinalWidthPx;
     int m_replacementWidthPx;
-    std::vector<int> m_charOffsetsPx;
 
+    bool m_outputNeedsUpdate;
     bool m_isOk;
 };
 

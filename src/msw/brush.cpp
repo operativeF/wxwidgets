@@ -54,10 +54,12 @@ public:
 private:
     void DoSetStipple(const wxBitmap& stipple);
 
-    wxBrushStyle  m_style;
-    wxBitmap      m_stipple;
     wxColour      m_colour;
+    wxBitmap      m_stipple;
+
     unique_brush  m_hBrush;
+
+    wxBrushStyle  m_style;
 };
 
 #define M_BRUSHDATA ((wxBrushRefData *)m_refData)

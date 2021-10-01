@@ -123,18 +123,19 @@ private:
 class wxFileConfigEntry
 {
 private:
-  wxFileConfigGroup *m_pParent; // group that contains us
-
   wxString      m_strName,      // entry name
-                m_strValue;     //       value
-  bool          m_bImmutable; // can be overridden locally?
-  bool          m_bHasValue;  // set after first call to SetValue()
+                m_strValue;     // value
 
-  int           m_nLine;        // used if m_pLine == NULL only
+  wxFileConfigGroup *m_pParent; // group that contains us
 
   // pointer to our line in the linked list or NULL if it was found in global
   // file (which we don't modify)
-  wxFileConfigLineList *m_pLine;
+  wxFileConfigLineList* m_pLine;
+
+  int           m_nLine;        // used if m_pLine == NULL only
+
+  bool          m_bImmutable; // can be overridden locally?
+  bool          m_bHasValue;  // set after first call to SetValue()
 
 public:
   wxFileConfigEntry(wxFileConfigGroup *pParent,

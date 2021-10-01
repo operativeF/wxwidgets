@@ -233,9 +233,10 @@ protected:
 
 
 private:
-    wxSearchCtrl *m_search;
-    wxEventType   m_eventType;
     wxBitmap      m_bmp;
+    wxSearchCtrl *m_search;
+
+    wxEventType   m_eventType;
 
     wxDECLARE_EVENT_TABLE();
 };

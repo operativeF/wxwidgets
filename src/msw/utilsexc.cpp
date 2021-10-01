@@ -104,9 +104,11 @@ struct wxExecuteData
     // class, but the thread handle can't be set until later, so initialize
     // it here to ensure we never use an uninitialized value in our dtor.
     HANDLE     hThread{nullptr};       // handle of the thread monitoring its termination
-    DWORD      dwProcessId{};   // pid of the process
     wxProcess *handler{nullptr};
+
     DWORD      dwExitCode{};    // the exit code of the process
+    DWORD      dwProcessId{};   // pid of the process
+
     bool       state{};         // set to false when the process finishes
 };
 

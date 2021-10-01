@@ -172,11 +172,12 @@ public:
         delete m_data;
     }
 
+    // time of record generation in milliseconds since Epoch
+    wxLongLong_t timestampMS;
 
     // the file name and line number of the file where the log record was
     // generated, if available or NULL and 0 otherwise
     const char *filename;
-    int line;
 
     // the name of the function where the log record was generated (may be NULL
     // if the compiler doesn't support __FUNCTION__)
@@ -186,14 +187,12 @@ public:
     // not set (i.e. wxLOG_COMPONENT not defined). It must be in ASCII.
     const char *component;
 
-    // time of record generation in milliseconds since Epoch
-    wxLongLong_t timestampMS;
+    int line;
 
 #if wxUSE_THREADS
     // id of the thread which logged this record
     wxThreadIdType threadId;
 #endif // wxUSE_THREADS
-
 
     // store an arbitrary value in this record context
     //

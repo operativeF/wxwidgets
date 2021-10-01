@@ -101,8 +101,10 @@ struct wxDisplayInfo
         : hmon(hmon_), monInfo(monInfo_), depth(depth_)
     {}
 
-    HMONITOR hmon;
     MONITORINFOEX monInfo;
+
+    HMONITOR hmon;
+
     int depth;
 };
 
@@ -238,7 +240,9 @@ private:
         }
 
         wxDynamicLibrary m_dllShcore;
+
         GetDpiForMonitor_t m_pfnGetDpiForMonitor{nullptr};
+
         bool m_initialized{false};
     };
 

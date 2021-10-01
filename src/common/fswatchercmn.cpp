@@ -207,9 +207,11 @@ bool wxFileSystemWatcherBase::AddTree(const wxFileName& path, int events,
         }
 
     private:
-        wxFileSystemWatcherBase* m_watcher;
-        int m_events;
         wxString m_filespec;
+
+        wxFileSystemWatcherBase* m_watcher;
+
+        int m_events;
     };
 
     wxDir dir(path.GetFullPath());

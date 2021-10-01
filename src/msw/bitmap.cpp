@@ -121,6 +121,11 @@ public:
     wxDIB *m_dib{nullptr};
 #endif
 
+private:
+    // optional mask for transparent drawing
+    wxMask* m_bitmapMask{ nullptr };
+
+public:
     // true if we have alpha transparency info and can be drawn using
     // AlphaBlend()
     bool m_hasAlpha{false};
@@ -139,9 +144,6 @@ private:
     // reference because this is how it's passed to us).
     void InitFromDIB(const wxDIB& dib, HBITMAP hbitmap = nullptr);
 #endif // wxUSE_WXDIB
-
-    // optional mask for transparent drawing
-    wxMask       *m_bitmapMask{nullptr};
 };
 
 // ----------------------------------------------------------------------------

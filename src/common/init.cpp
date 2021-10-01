@@ -126,23 +126,23 @@ static struct InitData
     // critical section protecting this struct
     wxCRIT_SECT_DECLARE_MEMBER(csInit);
 
-    // number of times wxInitialize() was called minus the number of times
-    // wxUninitialize() was
-    size_t nInitCount{0};
-
-    int argc{0};
-
     // if we receive the command line arguments as ASCII and have to convert
     // them to Unicode ourselves (this is the case under Unix but not Windows,
     // for example), we remember the converted argv here because we'll have to
     // free it when doing cleanup to avoid memory leaks
     wchar_t **argv{nullptr};
+    wchar_t **argvOrig{nullptr};
+
+    // number of times wxInitialize() was called minus the number of times
+    // wxUninitialize() was
+    size_t nInitCount{ 0 };
 
     // we also need to keep two copies, one passed to other functions, and one
     // unmodified original; somebody may modify the former, so we need to have
     // the latter to be able to free everything correctly
-    int argcOrig{0};
-    wchar_t **argvOrig{nullptr};
+    int argcOrig{ 0 };
+
+    int argc{ 0 };
 
 } gs_initData;
 

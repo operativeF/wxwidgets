@@ -2735,8 +2735,9 @@ public:
 
     bool IsOk() const { return m_ok; }
 
-    wxFontEncoding m_enc;
     wxEncodingConverter m2w, w2m;
+
+    wxFontEncoding m_enc;
 
 private:
     // were we initialized successfully?

@@ -141,6 +141,7 @@ struct wxPNGImageData
     unsigned char* m_buf{nullptr};
     png_infop info_ptr{nullptr};
     png_structp png_ptr{nullptr};
+
     bool ok{false};
 };
 

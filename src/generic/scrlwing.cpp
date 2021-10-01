@@ -92,9 +92,9 @@ public:
 private:
     wxWindow *m_win;
     wxScrollHelperBase *m_scrollHelper;
-    wxEventType m_eventType;
     int m_pos,
         m_orient;
+    wxEventType m_eventType;
 };
 
 // ============================================================================

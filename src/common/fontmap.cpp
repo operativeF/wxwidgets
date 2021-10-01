@@ -131,8 +131,8 @@ public:
 	ReentrancyBlocker& operator=(const ReentrancyBlocker&) = delete;
 
 private:
-    bool m_flagOld;
     bool& m_flag;
+    bool m_flagOld;
 };
 
 } // namespace anonymous

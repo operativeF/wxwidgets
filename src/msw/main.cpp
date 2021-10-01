@@ -198,8 +198,9 @@ struct wxMSWCommandLineArguments
             ::LocalFree(argv);
     }
 
+    wxChar** argv{ nullptr };
+
     int argc{0};
-    wxChar **argv{nullptr};
 };
 
 static wxMSWCommandLineArguments wxArgs;

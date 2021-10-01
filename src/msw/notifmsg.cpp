@@ -139,9 +139,11 @@ protected:
 private:
     std::string m_title;
     std::string m_message;
-    int m_flags;
+
     wxIcon m_icon;
+
     wxWindow* m_parent;
+    int m_flags;
 
     void OnTimeout(wxTaskBarIconEvent& event);
     void OnClick(wxTaskBarIconEvent& event);

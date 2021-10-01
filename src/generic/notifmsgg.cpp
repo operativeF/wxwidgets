@@ -76,13 +76,14 @@ private:
     wxStaticText* m_messageTitle;
     wxBitmapButton* m_closeBtn;
     wxBoxSizer* m_buttonSizer{nullptr};
+    wxGenericNotificationMessageImpl* m_notificationImpl;
 
     wxTimer m_timer;
-    int m_timeout;
-    long m_timeoutTargetTime;
-    int m_mouseActiveCount;
 
-    wxGenericNotificationMessageImpl* m_notificationImpl;
+    long m_timeoutTargetTime;
+
+    int m_timeout;
+    int m_mouseActiveCount;
 
     void PrepareNotificationControl(wxWindow* ctrl, bool handleClick = true);
 

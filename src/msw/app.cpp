@@ -359,17 +359,19 @@ private:
     // check if the console history has changed
     bool IsHistoryUnchanged() const;
 
-    int m_ok{-1};                   // initially -1, set to true or false by Init()
+    std::wstring m_data;        // data between empty line and cursor position
+
+    wxWxCharBuffer m_history;      // command history on startup
 
     wxDynamicLibrary m_dllKernel32;
 
-    HANDLE m_hStderr{INVALID_HANDLE_VALUE}; // console handle, if it's valid we must call
-                                            // FreeConsole() (even if m_ok != 1)
+    HANDLE m_hStderr{ INVALID_HANDLE_VALUE }; // console handle, if it's valid we must call
+                                        // FreeConsole() (even if m_ok != 1)
 
-    wxWxCharBuffer m_history;      // command history on startup
+    int m_ok{-1};                   // initially -1, set to true or false by Init()
+
     int m_historyLen{0};           // length command history buffer
 
-    std::wstring m_data;        // data between empty line and cursor position
     int m_dataLen{0};              // length data buffer
     int m_dataLine{0};             // line offset
 

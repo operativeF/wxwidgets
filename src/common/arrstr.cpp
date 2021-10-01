@@ -260,9 +260,11 @@ struct wxStringFragment
         LetterOrSymbol // letters and symbols, i.e., anything not covered by the above types
     };
 
-    Type     type{Empty};
     wxString text;
+
     std::uint64_t value{0}; // used only for Digit type
+
+    Type     type{ Empty };
 };
 
 

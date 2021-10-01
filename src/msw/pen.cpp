@@ -110,18 +110,20 @@ private:
     // initialize the fields which have reasonable default values
     //
     // doesn't initialize m_width and m_style which must be initialize in ctor
-    
+    wxColour      m_colour;
+
+    wxBitmap      m_stipple;
+
+    wxDash* m_dash; // FIXME: Use array
+    unique_pen    m_hPen;
 
     int           m_width;
+    int           m_nbDash;
+
     wxPenStyle    m_style;
     wxPenJoin     m_join;
     wxPenCap      m_cap;
     wxPenQuality  m_quality;
-    wxBitmap      m_stipple;
-    int           m_nbDash;
-    wxDash *      m_dash; // FIXME: Use array
-    wxColour      m_colour;
-    unique_pen    m_hPen;
 };
 
 // ============================================================================

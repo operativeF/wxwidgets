@@ -153,21 +153,21 @@ bool wxBMPHandler::SaveDib(wxImage *image,
     struct
     {
         // BitmapHeader:
-        std::uint16_t  magic;          // format magic, always 'BM'
         std::uint32_t  filesize;       // total file size, inc. headers
         std::uint32_t  reserved;       // for future use
         std::uint32_t  data_offset;    // image data offset in the file
+        std::uint16_t  magic;          // format magic, always 'BM'
 
         // BitmapInfoHeader:
         std::uint32_t  bih_size;       // 2nd part's size
         std::uint32_t  width, height;  // bitmap's dimensions
-        std::uint16_t  planes;         // num of planes
-        std::uint16_t  bpp;            // bits per pixel
         std::uint32_t  compression;    // compression method
         std::uint32_t  size_of_bmp;    // size of the bitmap
         std::uint32_t  h_res, v_res;   // image resolution in pixels-per-meter
         std::uint32_t  num_clrs;       // number of colors used
         std::uint32_t  num_signif_clrs;// number of significant colors
+        std::uint16_t  planes;         // num of planes
+        std::uint16_t  bpp;            // bits per pixel
     } hdr;
 
     std::uint32_t hdr_size = 14/*BitmapHeader*/ + 40/*BitmapInfoHeader*/;
@@ -1112,6 +1112,7 @@ bool wxBMPHandler::LoadDib(wxImage *image, wxInputStream& stream,
         int m_y{0};
         bool m_valid{false};
     } res;
+
     int comp;
     int ncolors;
 

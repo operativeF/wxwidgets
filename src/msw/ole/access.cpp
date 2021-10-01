@@ -1810,8 +1810,8 @@ struct SendNotification
         ::NotifyWinEvent(eventType, hwnd, idObject, idChild);
     }
 
-    DWORD eventType;
     HWND hwnd;
+    DWORD eventType;
     LONG idObject, idChild;
 };
 

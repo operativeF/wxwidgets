@@ -168,10 +168,10 @@ public:
     const wxString& GetName() const { return m_dirname; }
 
 private:
-    FIND_DATA m_finddata;
-
     wxString m_dirname;
     wxString m_filespec;
+
+    FIND_DATA m_finddata;
 
     int      m_flags{0};
 };

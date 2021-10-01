@@ -167,11 +167,14 @@ public:
     }
 
 protected:
-    wxDC& m_dc;
+    wxColour m_origTextBackground;
+
     const wxRect m_rect;
+
+    wxDC& m_dc;
+
     const int m_flags;
 
-    wxColour m_origTextBackground;
 
     // Current horizontal text output position.
     //

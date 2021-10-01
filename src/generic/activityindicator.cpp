@@ -162,6 +162,7 @@ private:
     }
 
     AdvanceTimer m_timer;
+
     wxWindow* const m_win;
 
     int m_frame;

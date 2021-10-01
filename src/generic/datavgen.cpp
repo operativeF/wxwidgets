@@ -669,10 +669,10 @@ private:
     void PutChildInSortOrder(wxDataViewMainWindow* window,
                              wxDataViewTreeNode* childNode);
 
-    wxDataViewTreeNode  *m_parent;
-
     // Corresponding model item.
     wxDataViewItem       m_item;
+
+    wxDataViewTreeNode  *m_parent;
 
     // Data specific to non-leaf (branch, inner) nodes. They are kept in a
     // separate struct in order to conserve memory.
@@ -695,14 +695,14 @@ private:
         // Order in which children are sorted (possibly none).
         SortOrder            sortOrder;
 
-        // Is the branch node currently open (expanded)?
-        bool                 open{false};
-
         // Total count of expanded (i.e. visible with the help of some
         // scrolling) items in the subtree, but excluding this node. I.e. it is
         // 0 for leaves and is the number of rows the subtree occupies for
         // branch nodes.
-        int                  subTreeCount{0};
+        int                  subTreeCount{ 0 };
+
+        // Is the branch node currently open (expanded)?
+        bool                 open{false};
     };
 
     BranchNodeData *m_branchData;
@@ -906,12 +906,14 @@ public:
     };
     struct DropItemInfo
     {
-        unsigned int        m_row;
-        DropHint            m_hint{DropHint_None};
-
         wxDataViewItem      m_item;
+
+        unsigned int        m_row;
+
         int                 m_proposedDropIndex{-1};
         int                 m_indentLevel{-1};
+
+        DropHint            m_hint{ DropHint_None };
 
         DropItemInfo()
         :   m_row(gsl::narrow_cast<unsigned int>(-1))
@@ -1009,54 +1011,62 @@ private:
     // Helper of public Expand(), must be called with a valid node.
     void DoExpand(wxDataViewTreeNode* node, unsigned int row, bool expandChildren);
 
-    wxDataViewCtrl             *m_owner;
-    int                         m_lineHeight;
-    bool                        m_dirty;
+    // The control used for editing or NULL.
+    wxWeakRef<wxWindow> m_editorCtrl;
 
-    wxDataViewColumn           *m_currentCol;
-    unsigned int                m_currentRow;
+    // the pen used to draw horiz/vertical rules
+    wxPen m_penRule;
+
+    // Id m_editorCtrl is non-NULL, pointer to the associated renderer.
+    wxDataViewRenderer* m_editorRenderer;
+
+    // This is the tree structure of the model
+    wxDataViewTreeNode* m_root;
+
+    wxDataViewCtrl* m_owner;
+
+    // This is the tree node under the cursor
+    wxDataViewTreeNode*    m_underMouse;
+
+    wxDataViewRenameTimer* m_renameTimer;
+    HeightCache*           m_rowHeightCache;
+    wxDataViewColumn*      m_currentCol;
+
     wxSelectionStore            m_selection;
 
-    wxDataViewRenameTimer      *m_renameTimer;
-    bool                        m_lastOnSame;
-
-    bool                        m_hasFocus;
-    bool                        m_useCellFocus;
-    bool                        m_currentColSetByKeyboard;
-    HeightCache                *m_rowHeightCache;
-
 #if wxUSE_DRAG_AND_DROP
-    int                         m_dragCount;
     wxPoint                     m_dragStart;
 
-    bool                        m_dragEnabled;
     wxDataFormat                m_dragFormat;
 
-    bool                        m_dropEnabled;
     wxDataFormat                m_dropFormat;
     DropItemInfo                m_dropItemInfo;
+
+    int                         m_dragCount;
 #endif // wxUSE_DRAG_AND_DROP
+
+    int                         m_lineHeight;
+
+    int m_count;
+
+    unsigned int                m_currentRow;
 
     // for double click logic
     unsigned int m_lineLastClicked,
         m_lineBeforeLastClicked,
         m_lineSelectSingleOnUp;
 
-    // the pen used to draw horiz/vertical rules
-    wxPen m_penRule;
+    bool                        m_dirty;
+    bool                        m_lastOnSame;
 
-    // This is the tree structure of the model
-    wxDataViewTreeNode * m_root;
-    int m_count;
+    bool                        m_hasFocus;
+    bool                        m_useCellFocus;
+    bool                        m_currentColSetByKeyboard;
 
-    // This is the tree node under the cursor
-    wxDataViewTreeNode * m_underMouse;
-
-    // The control used for editing or NULL.
-    wxWeakRef<wxWindow> m_editorCtrl;
-
-    // Id m_editorCtrl is non-NULL, pointer to the associated renderer.
-    wxDataViewRenderer* m_editorRenderer;
+#if wxUSE_DRAG_AND_DROP
+    bool                        m_dropEnabled;
+    bool                        m_dragEnabled;
+#endif
 
     wxDECLARE_DYNAMIC_CLASS(wxDataViewMainWindow);
     wxDECLARE_EVENT_TABLE();
@@ -1693,9 +1703,11 @@ public:
         return false;
     }
 
-    wxDataViewMainWindow   *m_win;
-    unsigned int            m_row;
     wxFrame                *m_hint;
+    wxDataViewMainWindow   *m_win;
+
+    unsigned int            m_row;
+
     int m_dist_x{};
     int m_dist_y{};
 };
@@ -4295,7 +4307,6 @@ private:
 
     // The row corresponding to the last node seen in our operator().
     int m_current;
-
 };
 
 int
@@ -5977,12 +5988,14 @@ public:
     }
 
 private:
-    const wxDataViewCtrl *m_dvc;
-    wxDataViewMainWindow *m_clientArea;
-    wxDataViewRenderer *m_renderer;
+    const wxDataViewCtrl  *m_dvc;
+    wxDataViewMainWindow  *m_clientArea;
+    wxDataViewRenderer    *m_renderer;
     const wxDataViewModel *m_model;
-    bool m_isExpanderCol;
+
     int m_expanderSize;
+
+    bool m_isExpanderCol;
 };
 
 

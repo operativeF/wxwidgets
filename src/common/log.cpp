@@ -116,11 +116,11 @@ struct PreviousLogInfo
     // previous message itself
     wxString msg;
 
-    // its level
-    wxLogLevel level{};
-
     // other information about it
     wxLogRecordInfo info;
+
+    // its level
+    wxLogLevel level{};
 
     // the number of times it was already repeated
     unsigned numRepeated{0};

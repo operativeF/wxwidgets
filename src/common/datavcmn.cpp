@@ -62,6 +62,7 @@ private:
 
     wxDataViewRenderer     *m_owner;
     wxWindow               *m_editorCtrl;
+
     bool                    m_finished{false};
     bool                    m_focusOnIdle;
 

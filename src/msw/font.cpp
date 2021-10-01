@@ -304,14 +304,15 @@ protected:
                     wxPtrToUInt(otm->otmpFamilyName)/sizeof(wxChar);
     }
 
-    // are we using m_nativeFontInfo.lf.lfHeight for point size or pixel size?
-    bool             m_sizeUsingPixels;
-
     // Windows font handle, created on demand in GetHFONT()
     unique_font            m_hFont{nullptr};
 
     // Native font info
     wxNativeFontInfo m_nativeFontInfo;
+
+    // are we using m_nativeFontInfo.lf.lfHeight for point size or pixel size?
+    bool             m_sizeUsingPixels;
+
 };
 
 #define M_FONTDATA ((wxFontRefData*)m_refData)

@@ -419,9 +419,11 @@ public:
     DECLARE_IUNKNOWN_METHODS;
 
 private:
+    std::vector<std::string> m_filePaths;
+
     wxCOMPtr<IDWriteFactory> m_factory;
     wxCOMPtr<IDWriteFontFile> m_currentFile;
-    std::vector<std::string> m_filePaths;
+
     size_t m_nextIndex;
 };
 
@@ -1361,36 +1363,37 @@ private:
 
     struct GeometryStateData
     {
-        bool m_isCurrentPointSet;
         D2D1_POINT_2F m_currentPoint;
-        bool m_isFigureOpen;
         D2D1_POINT_2F m_figureStart;
-        bool m_isFigureLogStartSet;
         D2D1_POINT_2F m_figureLogStart;
+
+        bool m_isCurrentPointSet;
+        bool m_isFigureOpen;
+        bool m_isFigureLogStartSet;
     };
+
     void SaveGeometryState(GeometryStateData& data) const;
     void RestoreGeometryState(const GeometryStateData& data);
 
+    std::vector<ID2D1Geometry*> m_pTransformedGeometries;
+
     wxCOMPtr<ID2D1PathGeometry> m_pathGeometry;
-
     wxCOMPtr<ID2D1GeometrySink> m_geometrySink;
-
     wxCOMPtr<ID2D1Factory> m_direct2dfactory;
 
     mutable wxCOMPtr<ID2D1GeometryGroup> m_combinedGeometry;
-    std::vector<ID2D1Geometry*> m_pTransformedGeometries;
 
-    bool m_currentPointSet;
     D2D1_POINT_2F m_currentPoint;
-
-    bool m_figureOpened;
     D2D1_POINT_2F m_figureStart;
-    bool m_figureLogStartSet;
     D2D1_POINT_2F m_figureLogStart;
 
+    D2D1_FILL_MODE m_fillMode;
+
+    bool m_currentPointSet;
+    bool m_figureOpened;
+    bool m_figureLogStartSet;
     bool m_geometryWritable;
 
-    D2D1_FILL_MODE m_fillMode;
 };
 
 //-----------------------------------------------------------------------------
@@ -3169,14 +3172,14 @@ public:
     wxCOMPtr<IDWriteFont> GetFont() { return m_font; }
 
 private:
+    // We use a color brush to render the font
+    wxD2DBrushData m_brushData;
+
     // The native, device-independent font object
     wxCOMPtr<IDWriteFont> m_font;
 
     // The native, device-independent font object
     wxCOMPtr<IDWriteTextFormat> m_textFormat;
-
-    // We use a color brush to render the font
-    wxD2DBrushData m_brushData;
 
     bool m_underlined;
 
@@ -3744,8 +3747,9 @@ protected:
     }
 
 private:
-    ID2D1Factory* m_factory;
     HDC m_hdc;
+    ID2D1Factory* m_factory;
+
     D2D1_ALPHA_MODE m_alphaMode;
 };
 
@@ -3969,11 +3973,14 @@ private:
 
     struct LayerData
     {
-        LayerType type{CLIP_LAYER};
+        D2D1_MATRIX_3X2_F transformMatrix{};
+
         D2D1_LAYER_PARAMETERS params{};
+
         wxCOMPtr<ID2D1Layer> layer;
         wxCOMPtr<ID2D1Geometry> geometry;
-        D2D1_MATRIX_3X2_F transformMatrix{};
+
+        LayerType type{ CLIP_LAYER };
     };
 
     struct StateData
@@ -3986,22 +3993,23 @@ private:
         std::stack<LayerData> layers;
     };
 
-    ID2D1Factory* m_direct2dFactory;
-
-    std::shared_ptr<wxD2DRenderTargetResourceHolder> m_renderTargetHolder;
     std::stack<StateData> m_stateStack;
     std::stack<LayerData> m_layers;
 
-    ID2D1RenderTarget* m_cachedRenderTarget{nullptr};
     D2D1::Matrix3x2F m_initTransform;
 
-    // Clipping box
-    bool m_isClipBoxValid{false};
+    std::shared_ptr<wxD2DRenderTargetResourceHolder> m_renderTargetHolder;
+
+    ID2D1Factory* m_direct2dFactory;
+    ID2D1RenderTarget* m_cachedRenderTarget{nullptr};
 
     double m_clipX1{0.0};
     double m_clipY1{0.0};
     double m_clipX2{0.0};
     double m_clipY2{0.0};
+
+    // Clipping box
+    bool m_isClipBoxValid{ false };
 };
 
 //-----------------------------------------------------------------------------

@@ -111,9 +111,11 @@ protected:
     void Finish( bool setfocus );
 
 private:
+    wxString            m_startValue;
+
     wxGenericTreeCtrl  *m_owner;
     wxGenericTreeItem  *m_itemEdited;
-    wxString            m_startValue;
+
     bool                m_aboutToFinish{false};
 
     wxDECLARE_EVENT_TABLE();
@@ -323,26 +325,30 @@ private:
     // the smallest representation for the elements and by ordering
     // the members to avoid padding.
     std::string         m_text;         // label to be rendered for item
-    int                 m_widthText{-1};
-    int                 m_heightText{-1};
+
+    wxArrayGenericTreeItems m_children; // list of children
 
     wxTreeItemData     *m_data{nullptr};         // user-provided data
 
-    int                 m_state{wxTREE_ITEMSTATE_NONE};        // item state
-
-    wxArrayGenericTreeItems m_children; // list of children
     wxGenericTreeItem  *m_parent{nullptr};       // parent of this item
 
-    wxItemAttr     *m_attr{nullptr};         // attributes???
+    wxItemAttr         *m_attr{nullptr};         // attributes???
+
+
+    wxCoord             m_x{0};            // (virtual) offset from top
+    wxCoord             m_y{0};            // (virtual) offset from left
 
     // tree ctrl images for the normal, selected, expanded and
     // expanded+selected states
     int                 m_images[wxTreeItemIcon_Max];
 
-    wxCoord             m_x{0};            // (virtual) offset from top
-    wxCoord             m_y{0};            // (virtual) offset from left
     int                 m_width{-1};        // width of this item
     int                 m_height{-1};       // height of this item
+
+    int                 m_widthText{ -1 };
+    int                 m_heightText{ -1 };
+
+    int                 m_state{ wxTREE_ITEMSTATE_NONE };        // item state
 
     bool        m_isCollapsed{true};
     bool        m_hasHilight{false}; // same as focused

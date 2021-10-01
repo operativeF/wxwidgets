@@ -641,8 +641,9 @@ public:
     void  init(wxPluralFormsToken::Number nplurals, wxPluralFormsNode* plural);
 
 private:
+    wxPluralFormsNodePtr m_plural{ nullptr };
+
     wxPluralFormsToken::Number m_nplurals{0};
-    wxPluralFormsNodePtr m_plural{nullptr};
 };
 
 wxDEFINE_SCOPED_PTR(wxPluralFormsCalculator, wxPluralFormsCalculatorPtr)

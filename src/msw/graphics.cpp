@@ -175,10 +175,12 @@ public :
 
 private :
     std::unique_ptr<GraphicsPath> m_path;
-    bool m_logCurrentPointSet;
+
     PointF m_logCurrentPoint;
-    bool m_figureOpened;
     PointF m_figureStart;
+
+    bool m_logCurrentPointSet;
+    bool m_figureOpened;
 };
 
 class wxGDIPlusMatrixData : public wxGraphicsMatrixData
@@ -635,8 +637,8 @@ protected :
     friend class wxGDIPlusRendererModule;
 
 private :
-    int m_loaded{-1};
     ULONG_PTR m_gditoken{0};
+    int m_loaded{ -1 };
 
 public:
 	wxClassInfo *wxGetClassInfo() const override;

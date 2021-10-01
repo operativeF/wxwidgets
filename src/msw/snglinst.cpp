@@ -72,11 +72,11 @@ public:
     }
 
 private:
+    // the mutex handle, may be NULL
+    HANDLE m_hMutex{ nullptr };
+
     // the result of the CreateMutex() call
     bool m_wasOpened{false};
-
-    // the mutex handle, may be NULL
-    HANDLE m_hMutex{nullptr};
 };
 
 // ============================================================================

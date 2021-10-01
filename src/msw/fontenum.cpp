@@ -57,26 +57,26 @@ public:
     bool OnFont(const LPLOGFONT lf, const LPTEXTMETRIC tm) const;
 
 private:
-    // the object we forward calls to OnFont() to
-    wxFontEnumerator *m_fontEnum;
-
-    // if != -1, enum only fonts which have this encoding
-    int m_charset{DEFAULT_CHARSET};
-
     // if not empty, enum only the fonts with this facename
     wxString m_facename;
-
-    // if true, enum only fixed fonts
-    bool m_fixedOnly{false};
-
-    // if true, we enumerate the encodings, not fonts
-    bool m_enumEncodings{false};
 
     // the list of charsets we already found while enumerating charsets
     std::vector<int> m_charsets;
 
     // the list of facenames we already found while enumerating facenames
     std::vector<wxString> m_facenames;
+
+    // the object we forward calls to OnFont() to
+    wxFontEnumerator *m_fontEnum;
+
+    // if != -1, enum only fonts which have this encoding
+    int m_charset{DEFAULT_CHARSET};
+
+    // if true, enum only fixed fonts
+    bool m_fixedOnly{false};
+
+    // if true, we enumerate the encodings, not fonts
+    bool m_enumEncodings{false};
 };
 
 // ----------------------------------------------------------------------------

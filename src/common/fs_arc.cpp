@@ -59,15 +59,16 @@ private:
     wxArchiveFSEntry *AddToCache(wxArchiveEntry *entry);
     void CloseStreams();
 
-    int m_refcount;
-
     wxArchiveFSEntryHash m_hash;
+    wxBackingFile m_backer;
+
     wxArchiveFSEntry *m_begin;
     wxArchiveFSEntry **m_endptr;
 
-    wxBackingFile m_backer;
     wxInputStream *m_stream;
     wxArchiveInputStream *m_archive;
+
+    int m_refcount;
 };
 
 wxArchiveFSCacheDataImpl::wxArchiveFSCacheDataImpl(

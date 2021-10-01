@@ -1157,13 +1157,14 @@ wxOperatingSystemId wxGetOsVersion(int *verMaj, int *verMin, int *verMicro)
 {
     static struct
     {
-        bool initialized;
-
-        wxOperatingSystemId os;
 
         int verMaj,
             verMin,
             verMicro;
+
+        wxOperatingSystemId os;
+
+        bool initialized;
     } s_version;
 
     // query the OS info only once as it's not supposed to change

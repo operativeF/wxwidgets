@@ -80,10 +80,11 @@ public:
         m_isNegated = false;
     }
 
-    wxCmdLineEntryType kind;
-    wxString shortName,
-             longName;
+    wxString shortName;
+    wxString longName;
+
     wxCmdLineParamType type;
+    wxCmdLineEntryType kind;
 
     // from wxCmdLineArg
     wxCmdLineEntryType GetKind() const override { return kind; }
@@ -121,16 +122,16 @@ private:
 
     void Check(wxCmdLineParamType typ) const;
 
-    bool m_hasVal;
-    bool m_isNegated;
-
-    double m_doubleVal;
-    long m_longVal;
     wxString m_strVal;
 #if wxUSE_DATETIME
     wxDateTime m_dateVal;
 #endif // wxUSE_DATETIME
 
+    double m_doubleVal;
+    long m_longVal;
+
+    bool m_hasVal;
+    bool m_isNegated;
 };
 
 // an internal representation of an option
@@ -183,15 +184,17 @@ struct wxCmdLineParserData
 {
     // options
     wxString m_switchChars;     // characters which may start an option
-    bool m_enableLongOptions{true};   // true if long options are enabled
     wxString m_logo;            // some extra text to show in Usage()
 
     // cmd line data
-    std::vector<wxString> m_arguments;  // == argv, argc == m_arguments.GetCount()
     wxArrayOptions m_options;   // all possible options and switches
     wxArrayParams m_paramDesc;  // description of all possible params
-    std::vector<wxString> m_parameters; // all params found
     wxArrayArgs m_parsedArguments; // all options and parameters in parsing order
+
+    std::vector<wxString> m_arguments;  // == argv, argc == m_arguments.GetCount()
+    std::vector<wxString> m_parameters; // all params found
+
+    bool m_enableLongOptions{ true };   // true if long options are enabled
 
     // methods
     wxCmdLineParserData();

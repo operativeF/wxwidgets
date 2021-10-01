@@ -200,6 +200,8 @@ public:
 #endif // !wxUSE_UXTHEME
     };
 
+    wxFont Font;                // default menu font
+
     Margins ItemMargin;         // popup item margins
 
     Margins CheckMargin;        // popup check margins
@@ -225,13 +227,11 @@ public:
     int Offset;                 // system added space at the end of the menu,
                                 // add this offset for remove the extra space
 
-    wxFont Font;                // default menu font
+    int dpi;                    // DPI used for calculating sizes
 
     bool AlwaysShowCues;        // must keyboard cues always be shown?
 
     bool Theme;                 // is data initialized for FullTheme?
-
-    int dpi;                    // DPI used for calculating sizes
 
     static const MenuDrawData* Get(wxMenu* menu)
     {

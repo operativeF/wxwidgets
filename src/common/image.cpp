@@ -68,36 +68,41 @@ struct wxImageRefData: public wxObjectRefData
     wxImageRefData(const wxImageRefData&) = delete;
 	wxImageRefData& operator=(const wxImageRefData&) = delete;
 
-    int             m_width{0};
-    int             m_height{0};
-    wxBitmapType    m_type{wxBitmapType::Invalid};
-    unsigned char  *m_data{nullptr};
+    std::vector<std::string>   m_optionNames;
+    std::vector<std::string>   m_optionValues;
 
-    bool            m_hasMask{false};
-    unsigned char   m_maskRed{0};
-    unsigned char   m_maskGreen{0};
-    unsigned char   m_maskBlue{0};
-
-    // alpha channel data, may be nullptr for the formats without alpha support
-    unsigned char  *m_alpha{nullptr};
-
-    bool            m_ok{false};
-
-    // if true, m_data is pointer to static data and shouldn't be freed
-    bool            m_static{false};
-
-    // same as m_static but for m_alpha
-    bool            m_staticAlpha{false};
-
-    // global and per-object flags determining LoadFile() behaviour
-    static int      sm_defaultLoadFlags;
-    int             m_loadFlags{sm_defaultLoadFlags};
 #if wxUSE_PALETTE
     wxPalette       m_palette;
 #endif // wxUSE_PALETTE
 
-    std::vector<std::string>   m_optionNames;
-    std::vector<std::string>   m_optionValues;
+    unsigned char* m_data{ nullptr };
+
+    // alpha channel data, may be nullptr for the formats without alpha support
+    unsigned char* m_alpha{ nullptr };
+
+    static int      sm_defaultLoadFlags;
+
+    int             m_width{0};
+    int             m_height{0};
+    int             m_loadFlags{ sm_defaultLoadFlags };
+
+    unsigned char   m_maskRed{0};
+    unsigned char   m_maskGreen{0};
+    unsigned char   m_maskBlue{0};
+
+    // global and per-object flags determining LoadFile() behaviour
+
+    wxBitmapType    m_type{ wxBitmapType::Invalid };
+
+    bool            m_ok{ false };
+
+    // if true, m_data is pointer to static data and shouldn't be freed
+    bool            m_static{ false };
+
+    // same as m_static but for m_alpha
+    bool            m_staticAlpha{ false };
+
+    bool            m_hasMask{ false };
 };
 
 // For compatibility, if nothing else, loading is verbose by default.

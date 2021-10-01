@@ -606,20 +606,20 @@ public:
     }
 
 protected:
-    wxActiveXContainer * m_window;
-
     HDC m_hDCBuffer;
     HWND m_hWndParent;
+
+    LCID m_nAmbientLocale;
+    COLORREF m_clrAmbientForeColor;
+    COLORREF m_clrAmbientBackColor;
+
+    wxActiveXContainer* m_window;
 
     bool m_bSupportsWindowlessActivation;
     bool m_bInPlaceLocked;
     bool m_bInPlaceActive;
     bool m_bUIActive;
     bool m_bWindowless;
-
-    LCID m_nAmbientLocale;
-    COLORREF m_clrAmbientForeColor;
-    COLORREF m_clrAmbientBackColor;
     bool m_bAmbientShowHatching;
     bool m_bAmbientShowGrabHandles;
     bool m_bAmbientAppearance;

@@ -57,11 +57,11 @@ public:
     void Adjust(std::string_view text, wxCoord maxLength);
 
 private:
+    std::vector<std::string> m_textLines;
+
     wxTipWindow* m_parent;
 
-    std::vector<std::string> m_textLines;
     wxCoord m_heightLine{0};
-
 
     wxDECLARE_EVENT_TABLE();
 };
