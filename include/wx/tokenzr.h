@@ -125,15 +125,17 @@ protected:
         MoreTokens_No
     };
 
-    MoreTokensState m_hasMoreTokens;
-
     wxString m_string;              // the string we tokenize
+    
     wxString::const_iterator m_stringEnd;
     // FIXME-UTF8: use wxWcharBuffer
     wxWxCharBuffer m_delims;        // all possible delimiters
-    size_t m_delimsLen;
 
     wxString::const_iterator m_pos; // the current position in m_string
+
+    size_t m_delimsLen;
+
+    MoreTokensState m_hasMoreTokens;
 
     wxStringTokenizerMode m_mode{wxTOKEN_INVALID}; // see wxTOKEN_XXX values
 

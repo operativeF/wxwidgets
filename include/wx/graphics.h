@@ -452,15 +452,15 @@ public:
     const wxGraphicsMatrix& GetMatrix() const { return m_matrix; }
 
 private:
+    wxGraphicsGradientStops m_stops;
+    wxGraphicsMatrix m_matrix;
     double m_width;
-    wxGradientType m_gradientType;
     double m_x1{0.0};
     double m_y1{0.0};
     double m_x2{0.0};
     double m_y2{0.0}; // also used for m_xo, m_yo, m_xc, m_yc
     double m_radius{0.0};
-    wxGraphicsGradientStops m_stops;
-    wxGraphicsMatrix m_matrix;
+    wxGradientType m_gradientType;
 };
 
 
@@ -872,16 +872,26 @@ public:
     double GetContentScaleFactor() const { return m_contentScaleFactor; }
 
 protected:
+    wxGraphicsPen m_pen;
+    wxGraphicsBrush m_brush;
+    wxGraphicsFont m_font;
+
+private:
+    // The associated window, if any, i.e. if one was passed directly to
+    // Create() or the associated window of the wxDC this context was created
+    // from.
+    wxWindow* const m_window;
+    double m_contentScaleFactor{};
+
+protected:
     // These fields must be initialized in the derived class ctors.
     double m_width{};
     double m_height{};
 
-    wxGraphicsPen m_pen;
-    wxGraphicsBrush m_brush;
-    wxGraphicsFont m_font;
     wxAntialiasMode m_antialias;
     wxCompositionMode m_composition{wxCOMPOSITION_OVER};
     wxInterpolationQuality m_interpolation;
+    
     bool m_enableOffset{true};
 
     // implementations of overloaded public functions: we use different names
@@ -900,12 +910,6 @@ protected:
                                          const wxGraphicsBrush& backgroundBrush);
 
 private:
-    // The associated window, if any, i.e. if one was passed directly to
-    // Create() or the associated window of the wxDC this context was created
-    // from.
-    wxWindow* const m_window;
-    double m_contentScaleFactor{};
-
     wxDECLARE_ABSTRACT_CLASS(wxGraphicsContext);
 };
 

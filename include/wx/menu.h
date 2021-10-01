@@ -379,18 +379,19 @@ protected:
 
     // associate the submenu with this menu
     void AddSubMenu(wxMenu *submenu);
+    
+    std::string       m_title;          // the menu title or label
+    
+    wxMenuItemList    m_items;          // the list of menu items
 
     wxMenuBar     *m_menuBar;           // menubar we belong to or NULL
     wxMenu        *m_menuParent;        // parent menu or NULL
 
-    std::string       m_title;             // the menu title or label
-    wxMenuItemList m_items;             // the list of menu items
-
     wxWindow      *m_invokingWindow;    // for popup menus
 
-    long           m_style;             // combination of wxMENU_XXX flags
-
     wxEvtHandler  *m_eventHandler;      // a pluggable in event handler
+
+    long           m_style;             // combination of wxMENU_XXX flags
 
     inline static bool      ms_locked{true};
 

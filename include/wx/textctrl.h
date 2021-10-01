@@ -481,41 +481,8 @@ public:
     static bool SplitParaCharStyles(const wxTextAttr& style, wxTextAttr& parStyle, wxTextAttr& charStyle);
 
 private:
-    long                m_flags{0};
-
-    // Paragraph styles
-    std::vector<int>    m_tabs; // array of int: tab stops in 1/10 mm
-    int                 m_leftIndent{0}; // left indent in 1/10 mm
-    int                 m_leftSubIndent{0}; // left indent for all but the first
-                                         // line in a paragraph relative to the
-                                         // first line, in 1/10 mm
-    int                 m_rightIndent{0}; // right indent in 1/10 mm
-    wxTextAttrAlignment m_textAlignment{wxTextAttrAlignment::Default};
-
-    int                 m_paragraphSpacingAfter{0};
-    int                 m_paragraphSpacingBefore{0};
-    int                 m_lineSpacing{0};
-    int                 m_bulletStyle{wxTEXT_ATTR_BULLET_STYLE_NONE};
-    int                 m_bulletNumber{0};
-    int                 m_textEffects{wxTEXT_ATTR_EFFECT_NONE};
-    int                 m_textEffectFlags{wxTEXT_ATTR_EFFECT_NONE};
-    int                 m_outlineLevel{0};
     wxString            m_bulletText;
     wxString            m_bulletFont;
-    std::string         m_bulletName;
-    std::string         m_urlTarget;
-    wxFontEncoding      m_fontEncoding{wxFONTENCODING_DEFAULT};
-
-    // Character styles
-    wxColour            m_colText;
-    wxColour            m_colBack;
-    int                 m_fontSize{12};
-    wxFontStyle         m_fontStyle{wxFontStyle::Normal};
-    wxFontWeight        m_fontWeight{wxFONTWEIGHT_NORMAL};
-    wxFontFamily        m_fontFamily{wxFontFamily::Default};
-    wxTextAttrUnderlineType m_fontUnderlineType{wxTextAttrUnderlineType::None};
-    wxColour            m_colUnderline{wxNullColour};
-    bool                m_fontStrikethrough{false};
     wxString            m_fontFaceName;
 
     // Character style
@@ -526,6 +493,44 @@ private:
 
     // List style
     wxString            m_listStyleName;
+
+    std::string         m_bulletName;
+    std::string         m_urlTarget;
+
+    // Character styles
+    wxColour            m_colText;
+    wxColour            m_colBack;
+    wxColour            m_colUnderline{wxNullColour};
+
+    // Paragraph styles
+    std::vector<int>    m_tabs; // array of int: tab stops in 1/10 mm
+
+    long                m_flags{0};
+
+    int                 m_leftIndent{0}; // left indent in 1/10 mm
+    int                 m_leftSubIndent{0}; // left indent for all but the first
+                                         // line in a paragraph relative to the
+                                         // first line, in 1/10 mm
+    int                 m_rightIndent{0}; // right indent in 1/10 mm
+
+    int                 m_paragraphSpacingAfter{0};
+    int                 m_paragraphSpacingBefore{0};
+    int                 m_lineSpacing{0};
+    int                 m_bulletStyle{wxTEXT_ATTR_BULLET_STYLE_NONE};
+    int                 m_bulletNumber{0};
+    int                 m_textEffects{wxTEXT_ATTR_EFFECT_NONE};
+    int                 m_textEffectFlags{wxTEXT_ATTR_EFFECT_NONE};
+    int                 m_outlineLevel{0};
+    int                 m_fontSize{12};
+
+    wxFontEncoding      m_fontEncoding{wxFONTENCODING_DEFAULT};
+    wxTextAttrAlignment m_textAlignment{wxTextAttrAlignment::Default};
+    wxFontStyle         m_fontStyle{wxFontStyle::Normal};
+    wxFontWeight        m_fontWeight{wxFONTWEIGHT_NORMAL};
+    wxFontFamily        m_fontFamily{wxFontFamily::Default};
+    wxTextAttrUnderlineType m_fontUnderlineType{wxTextAttrUnderlineType::None};
+    
+    bool                m_fontStrikethrough{false};
 };
 
 // ----------------------------------------------------------------------------

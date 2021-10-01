@@ -227,6 +227,13 @@ protected:
     // wxID_OK return code
     void AcceptAndClose();
 
+    // Extra button identifiers to be taken as 'main' button identifiers
+    // to be placed in the non-scrolling area
+    std::vector<int>                          m_mainButtonIds;
+
+    // Adaptation level
+    int                                 m_layoutAdaptationLevel{3};
+
     // The return code from modal dialog
     int m_returnCode{0};
 
@@ -236,18 +243,11 @@ protected:
     // The identifier for cancel button (usually wxID_CANCEL)
     int m_escapeId{wxID_ANY};
 
-    // Flags whether layout adaptation has been done for this dialog
-    bool                                m_layoutAdaptationDone{false};
-
-    // Extra button identifiers to be taken as 'main' button identifiers
-    // to be placed in the non-scrolling area
-    std::vector<int>                          m_mainButtonIds;
-
-    // Adaptation level
-    int                                 m_layoutAdaptationLevel{3};
-
     // Local override for global adaptation enabled status
     wxDialogLayoutAdaptationMode        m_layoutAdaptationMode{wxDialogLayoutAdaptationMode::Default};
+
+    // Flags whether layout adaptation has been done for this dialog
+    bool                                m_layoutAdaptationDone{false};
 
     // Global layout adapter
     inline static wxDialogLayoutAdapter*       sm_layoutAdapter{nullptr};

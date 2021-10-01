@@ -121,13 +121,14 @@ protected:
     virtual void GetColourToUse(wxODStatus stat, wxColour& colText, wxColour& colBack) const;
 
 private:
-    bool        m_ownerDrawn;       // true if something is non standard
-
-    wxFont      m_font;             // font to use for drawing
     wxColour    m_colText,          // color ----"---"---"----
                 m_colBack;          // background color
 
+    wxFont      m_font;             // font to use for drawing
+
     int         m_margin;           // space occupied by bitmap to the left of the item
+
+    bool        m_ownerDrawn;       // true if something is non standard
 
     inline static int  ms_defaultMargin{3};
 };

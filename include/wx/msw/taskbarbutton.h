@@ -58,19 +58,23 @@ public:
     // TODO: In public access because unique_ptr doesn't play well (?)
     wxTaskBarButtonImpl(wxITaskbarList3* taskbarList, wxWindow* parent);
 private:
-    wxWindow* m_parent;
-    wxITaskbarList3 *m_taskbarList;
+    std::string m_thumbnailTooltip;
+    std::string m_overlayIconDescription;
 
     using wxThumbBarButtons = std::vector<wxThumbBarButton *>;
     wxThumbBarButtons m_thumbBarButtons;
 
+    wxIcon m_overlayIcon;
+    wxRect m_thumbnailClipRect;
+
+    wxWindow* m_parent;
+    wxITaskbarList3 *m_taskbarList;
+
     int m_progressRange;
     int m_progressValue;
+    
     wxTaskBarButtonState m_progressState;
-    std::string m_thumbnailTooltip;
-    wxIcon m_overlayIcon;
-    std::string m_overlayIconDescription;
-    wxRect m_thumbnailClipRect;
+
     bool m_hasInitThumbnailToolbar;
 
     // TODO: This doesn't work, so the corresponding constructor is in public access.

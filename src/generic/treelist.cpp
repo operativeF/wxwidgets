@@ -83,8 +83,22 @@ public:
     int m_imageClosed,
         m_imageOpened;
 
-    wxCheckBoxState m_checkedState;
+private:
+    // The (never changing after creation) parent of this node and the possibly
+    // NULL pointers to its first child and next sibling.
+    wxTreeListModelNode* const m_parent;
+    wxTreeListModelNode* m_child;
+    wxTreeListModelNode* m_next;
 
+    // Client data pointer owned by the control. May be NULL.
+    wxClientData* m_data;
+
+    // Array of column values for all the columns except the first one. May be
+    // NULL if no values had been set for them.
+    wxString* m_columnsTexts;
+
+public:
+    wxCheckBoxState m_checkedState;
 
     // Accessors for the fields that are not directly exposed.
 
@@ -259,21 +273,6 @@ public:
 
         return nullptr;
     }
-
-
-private:
-    // The (never changing after creation) parent of this node and the possibly
-    // NULL pointers to its first child and next sibling.
-    wxTreeListModelNode* const m_parent;
-    wxTreeListModelNode* m_child;
-    wxTreeListModelNode* m_next;
-
-    // Client data pointer owned by the control. May be NULL.
-    wxClientData* m_data;
-
-    // Array of column values for all the columns except the first one. May be
-    // NULL if no values had been set for them.
-    wxString* m_columnsTexts;
 };
 
 // ----------------------------------------------------------------------------

@@ -1660,26 +1660,28 @@ protected:
     // widgets state are necessary
     virtual void DoEnable(bool WXUNUSED(enable)) { }
 
+    std::string          m_windowName;
 
-    // the window id - a number which uniquely identifies a window among
-    // its siblings unless it is wxID_ANY
-    wxWindowIDRef        m_windowId;
-
-    // the parent window of this window (or NULL) and the list of the children
-    // of this window
-    wxWindow            *m_parent;
     wxWindowList         m_children;
 
-    // the minimal allowed size for the window (no minimal size if variable(s)
-    // contain(s) wxDefaultCoord)
-    int                  m_minWidth,
-                         m_minHeight,
-                         m_maxWidth,
-                         m_maxHeight;
+    // visual window attributes
+    wxCursor             m_cursor;
+    wxFont               m_font;                // see m_hasFont
+    wxColour             m_backgroundColour,    //     m_hasBgCol
+                         m_foregroundColour;    //     m_hasFgCol
 
-    // event handler for this window: usually is just 'this' but may be
-    // changed with SetEventHandler()
-    wxEvtHandler        *m_eventHandler;
+#if wxUSE_PALETTE
+    wxPalette            m_palette;
+#endif // wxUSE_PALETTE
+
+    // the region which should be repainted in response to paint event
+    wxRegion             m_updateRegion;
+
+#if wxUSE_ACCEL
+    // the accelerator table for the window which translates key strokes into
+    // command events
+    wxAcceleratorTable   m_acceleratorTable;
+#endif // wxUSE_ACCEL
 
 #if wxUSE_VALIDATORS
     // associated validator or NULL if none
@@ -1690,24 +1692,9 @@ protected:
     wxDropTarget        *m_dropTarget;
 #endif // wxUSE_DRAG_AND_DROP
 
-    // visual window attributes
-    wxCursor             m_cursor;
-    wxFont               m_font;                // see m_hasFont
-    wxColour             m_backgroundColour,    //     m_hasBgCol
-                         m_foregroundColour;    //     m_hasFgCol
-
 #if wxUSE_CARET
     std::unique_ptr<wxCaret> m_caret;
 #endif // wxUSE_CARET
-
-    // the region which should be repainted in response to paint event
-    wxRegion             m_updateRegion;
-
-#if wxUSE_ACCEL
-    // the accelerator table for the window which translates key strokes into
-    // command events
-    wxAcceleratorTable   m_acceleratorTable;
-#endif // wxUSE_ACCEL
 
     // the tooltip for this window (may be NULL)
 #if wxUSE_TOOLTIPS
@@ -1728,6 +1715,49 @@ protected:
 
     // The sizer this window is a member of, if any
     wxSizer             *m_containingSizer;
+
+    // the parent window of this window (or NULL) and the list of the children
+    // of this window
+    wxWindow            *m_parent;
+
+    // event handler for this window: usually is just 'this' but may be
+    // changed with SetEventHandler()
+    wxEvtHandler        *m_eventHandler;
+
+#if wxUSE_ACCESSIBILITY
+    wxAccessible*       m_accessible;
+#endif
+
+    wxScrollHelper       *m_scrollHelper;
+
+    // Virtual size (scrolling)
+    wxSize                m_virtualSize;
+
+    // Used to save the results of DoGetBestSize so it doesn't need to be
+    // recalculated each time the value is needed.
+    wxSize m_bestSizeCache;
+    
+    // number of Freeze() calls minus the number of Thaw() calls: we're frozen
+    // (i.e. not being updated) if it is positive
+    unsigned int m_freezeCount;
+
+    long                 m_windowStyle{0};
+    long                 m_exStyle;
+
+    // the minimal allowed size for the window (no minimal size if variable(s)
+    // contain(s) wxDefaultCoord)
+    int m_minWidth;
+    int m_minHeight;
+    int m_maxWidth;
+    int m_maxHeight;
+
+    // the window id - a number which uniquely identifies a window among
+    // its siblings unless it is wxID_ANY
+    wxWindowIDRef        m_windowId;
+
+    wxBackgroundStyle    m_backgroundStyle;
+
+    wxWindowVariant       m_windowVariant;
 
     // Layout() window automatically when its size changes?
     bool                 m_autoLayout;
@@ -1751,26 +1781,11 @@ protected:
     bool                 m_disableFocusFromKbd;
 
     // window attributes
-    long                 m_windowStyle{0};
-    long                 m_exStyle;
-    std::string          m_windowName;
+
     bool                 m_themeEnabled;
-    wxBackgroundStyle    m_backgroundStyle;
 #if wxUSE_PALETTE
-    wxPalette            m_palette;
     bool                 m_hasCustomPalette;
 #endif // wxUSE_PALETTE
-
-#if wxUSE_ACCESSIBILITY
-    wxAccessible*       m_accessible;
-#endif
-
-    // Virtual size (scrolling)
-    wxSize                m_virtualSize;
-
-    wxScrollHelper       *m_scrollHelper;
-
-    wxWindowVariant       m_windowVariant;
 
     // override this to change the default (i.e. used when no style is
     // specified) border for the window class
@@ -1785,11 +1800,6 @@ protected:
     // have their own default size so this is just for non top-level windows.
     static constexpr int WidthDefault(int w)  noexcept { return w == wxDefaultCoord ? 20 : w; }
     static constexpr int HeightDefault(int h) noexcept { return h == wxDefaultCoord ? 20 : h; }
-
-
-    // Used to save the results of DoGetBestSize so it doesn't need to be
-    // recalculated each time the value is needed.
-    wxSize m_bestSizeCache;
 
     // more pure virtual functions
     // ---------------------------
@@ -1928,11 +1938,6 @@ private:
 
     // base for dialog unit conversion, i.e. average character size
     wxSize GetDlgUnitBase() const;
-
-
-    // number of Freeze() calls minus the number of Thaw() calls: we're frozen
-    // (i.e. not being updated) if it is positive
-    unsigned int m_freezeCount;
 
     wxDECLARE_ABSTRACT_CLASS(wxWindowBase);
     wxDECLARE_EVENT_TABLE();

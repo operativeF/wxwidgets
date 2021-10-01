@@ -199,12 +199,22 @@ public:
 #endif
 
 protected:
+    // the button label
+    std::string m_label;
+
+    // short and long help strings
+    std::string m_shortHelpString;
+    std::string m_longHelpString;
+
+    // normal and disabled bitmaps for the tool, both can be invalid
+    wxBitmap m_bmpNormal;
+    wxBitmap m_bmpDisabled;
+
     wxToolBarBase *m_tbar;  // the toolbar to which we belong (may be NULL)
 
-    // tool parameters
-    wxToolBarToolStyle m_toolStyle;
-    wxWindowIDRef m_id; // the tool id, wxID_SEPARATOR for separator
-    wxItemKind m_kind;  // for normal buttons may be wxITEM_NORMAL/CHECK/RADIO
+#if wxUSE_MENUS
+    wxMenu *m_dropdownMenu{nullptr};
+#endif
 
     // as controls have their own client data, no need to waste memory
     union
@@ -213,27 +223,17 @@ protected:
         wxControl        *m_control;
     };
 
+    // tool parameters
+    wxToolBarToolStyle m_toolStyle;
+    wxWindowIDRef m_id; // the tool id, wxID_SEPARATOR for separator
+    wxItemKind m_kind;  // for normal buttons may be wxITEM_NORMAL/CHECK/RADIO
+
     // true if this tool is stretchable: currently is only value for separators
     bool m_stretchable{false};
 
     // tool state
     bool m_toggled{false};
     bool m_enabled{true};
-
-    // normal and disabled bitmaps for the tool, both can be invalid
-    wxBitmap m_bmpNormal;
-    wxBitmap m_bmpDisabled;
-
-    // the button label
-    std::string m_label;
-
-    // short and long help strings
-    std::string m_shortHelpString;
-    std::string m_longHelpString;
-
-#if wxUSE_MENUS
-    wxMenu *m_dropdownMenu{nullptr};
-#endif
 
 public:
 	wxClassInfo *wxGetClassInfo() const override;

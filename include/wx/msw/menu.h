@@ -173,6 +173,10 @@ private:
     // common part of Append/Insert (behaves as Append is pos == (size_t)-1)
     bool DoInsertOrAppend(wxMenuItem *item, size_t pos = (size_t)-1);
 
+#if wxUSE_ACCEL
+    // the accelerators for our menu items
+    wxAcceleratorArray m_accels;
+#endif // wxUSE_ACCEL
 
     // This variable contains the description of the radio item groups and
     // allows to find whether an item at the given position is part of the
@@ -181,27 +185,22 @@ private:
     // It is initially NULL and only allocated if we have any radio items.
     std::unique_ptr<wxMenuRadioItemsData> m_radioData;
 
-    // if true, insert a break before appending the next item
-    bool m_doBreak;
-
     // the menu handle of this menu
     WXHMENU m_hMenu;
 
-#if wxUSE_ACCEL
-    // the accelerators for our menu items
-    wxAcceleratorArray m_accels;
-#endif // wxUSE_ACCEL
-
 #if wxUSE_OWNER_DRAWN
-    // true if the menu has any ownerdrawn items
-    bool m_ownerDrawn;
-
     // the max width of menu items bitmaps
     int m_maxBitmapWidth;
 
     // the max width of menu items accels
     int m_maxAccelWidth;
+
+    // true if the menu has any ownerdrawn items
+    bool m_ownerDrawn;
 #endif // wxUSE_OWNER_DRAWN
+
+    // if true, insert a break before appending the next item
+    bool m_doBreak;
 
 public:
 	wxClassInfo *wxGetClassInfo() const override;

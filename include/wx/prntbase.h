@@ -681,16 +681,15 @@ protected:
 
 protected:
     wxPrintDialogData m_printDialogData;
+    
     wxPreviewCanvas*  m_previewCanvas;
     wxFrame*          m_previewFrame;
     wxBitmap*         m_previewBitmap;
-    bool              m_previewFailed;
     wxPrintout*       m_previewPrintout;
     wxPrintout*       m_printPrintout;
+    
     int               m_currentPage;
     int               m_currentZoom;
-    float             m_previewScaleX;
-    float             m_previewScaleY;
     int               m_topMargin;
     int               m_leftMargin;
     int               m_pageWidth;
@@ -698,6 +697,10 @@ protected:
     int               m_minPage;
     int               m_maxPage;
 
+    float             m_previewScaleX;
+    float             m_previewScaleY;
+    
+    bool              m_previewFailed;
     bool              m_isOk;
     bool              m_printingPrepared; // Called OnPreparePrinting?
 

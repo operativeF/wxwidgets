@@ -345,9 +345,6 @@ protected:
     // controller buddy if available, NULL otherwise (usually for native book controls like wxNotebook)
     wxWindow *m_bookctrl{nullptr};
 
-    // Whether to shrink to fit current page
-    bool m_fitToCurrentPage{false};
-
     // the sizer containing the choice control
     wxSizer *m_controlSizer{nullptr};
 
@@ -366,6 +363,11 @@ private:
 
     wxDECLARE_ABSTRACT_CLASS(wxBookCtrlBase);
     wxDECLARE_EVENT_TABLE();
+
+// FIXME: protected variable
+protected:
+    // Whether to shrink to fit current page
+    bool m_fitToCurrentPage{false};
 };
 
 // ----------------------------------------------------------------------------

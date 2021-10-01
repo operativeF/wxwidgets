@@ -284,9 +284,6 @@ protected:
 
     wxBitmap          m_selectedBitmap;
 
-    // TRUE => DeleteDC() in dtor, FALSE => only ReleaseDC() it
-    bool              m_bOwnsDC{false};
-
     // our HDC
     WXHDC             m_hDC{nullptr};
 
@@ -308,6 +305,10 @@ protected:
 #endif
 
     bool m_isClipBoxValid{false};
+    
+    // TRUE => DeleteDC() in dtor, FALSE => only ReleaseDC() it
+    bool              m_bOwnsDC{false};
+
 
     wxDECLARE_CLASS(wxMSWDCImpl);
 };

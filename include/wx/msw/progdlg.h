@@ -81,15 +81,14 @@ private:
     // Get the task dialog geometry when using the native dialog.
     wxRect GetTaskDialogRect() const;
 
-
-    wxProgressDialogTaskRunner *m_taskDialogRunner{nullptr};
-
-    wxProgressDialogSharedData *m_sharedData{nullptr};
-
     // Store the message and title we currently use to be able to return it
     // from Get{Message,Title}()
     std::string m_message;
     std::string m_title;
+
+    wxProgressDialogTaskRunner *m_taskDialogRunner{nullptr};
+
+    wxProgressDialogSharedData *m_sharedData{nullptr};
 
 public:
 	wxClassInfo *wxGetClassInfo() const override;

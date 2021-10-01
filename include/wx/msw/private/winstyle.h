@@ -103,10 +103,11 @@ protected:
 
 private:
     const HWND m_hwnd;
-    const int m_gwlSlot;
 
     LONG_PTR m_styleCurrent;
     LONG_PTR m_style;
+
+    const int m_gwlSlot;
 
     wxMSWWinLongUpdater(const wxMSWWinLongUpdater&) = delete;
 	wxMSWWinLongUpdater& operator=(const wxMSWWinLongUpdater&) = delete;

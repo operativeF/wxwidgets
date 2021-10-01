@@ -453,13 +453,35 @@ public:
     static wxAppConsole *GetInstance() { return ms_appInstance; }
     static void SetInstance(wxAppConsole *app) { ms_appInstance = app; }
 
+protected:
+    // application info (must be set from the user code)
+    wxString m_vendorName,        // vendor name ("acme")
+             m_vendorDisplayName, // vendor display name (e.g. "ACME Inc")
+             m_appName,           // app name ("myapp")
+             m_appDisplayName,    // app display name ("My Application")
+             m_className;         // class name
 
-    // command line arguments (public for backwards compatibility)
-    int argc{};
-
+public:
     wxCmdLineArgsArray argv;
 
 protected:
+#if wxUSE_THREADS
+    // this critical section protects both the lists above
+    wxCriticalSection m_handlersWithPendingEventsLocker;
+#endif
+
+    // pending events management vars:
+
+    // the array of the handlers with pending events which needs to be processed
+    // inside ProcessPendingEvents()
+    wxEvtHandlerArray m_handlersWithPendingEvents;
+
+    // helper array used by ProcessPendingEvents() to store the event handlers
+    // which have pending events but of these events none can be processed right now
+    // (because of a call to wxEventLoop::YieldFor() which asked to selectively process
+    // pending events)
+    wxEvtHandlerArray m_handlersWithPendingDelayedEvents;
+
     // delete all objects in wxPendingDelete list
     //
     // called from ProcessPendingEvents()
@@ -479,13 +501,6 @@ protected:
     // there is no main loop implementation
     wxEventLoopBase *CreateMainLoop();
 
-    // application info (must be set from the user code)
-    wxString m_vendorName,        // vendor name ("acme")
-             m_vendorDisplayName, // vendor display name (e.g. "ACME Inc")
-             m_appName,           // app name ("myapp")
-             m_appDisplayName,    // app display name ("My Application")
-             m_className;         // class name
-
     // the class defining the application behaviour, NULL initially and created
     // by GetTraits() when first needed
     wxAppTraits *m_traits{nullptr};
@@ -494,24 +509,11 @@ protected:
     // been started yet or has already terminated)
     wxEventLoopBase *m_mainLoop{nullptr};
 
+public:
+    // command line arguments (public for backwards compatibility)
+    int argc{};
 
-    // pending events management vars:
-
-    // the array of the handlers with pending events which needs to be processed
-    // inside ProcessPendingEvents()
-    wxEvtHandlerArray m_handlersWithPendingEvents;
-
-    // helper array used by ProcessPendingEvents() to store the event handlers
-    // which have pending events but of these events none can be processed right now
-    // (because of a call to wxEventLoop::YieldFor() which asked to selectively process
-    // pending events)
-    wxEvtHandlerArray m_handlersWithPendingDelayedEvents;
-
-#if wxUSE_THREADS
-    // this critical section protects both the lists above
-    wxCriticalSection m_handlersWithPendingEventsLocker;
-#endif
-
+protected:
     // flag modified by Suspend/ResumeProcessingOfPendingEvents()
     bool m_bDoPendingEventProcessing{true};
 

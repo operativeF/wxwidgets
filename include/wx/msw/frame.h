@@ -117,6 +117,8 @@ public:
 #endif // wxUSE_MENUS
 
 #if wxUSE_TASKBARBUTTON
+    std::unique_ptr<wxTaskBarButton> m_taskBarButton;
+    
     // Return the taskbar button of the window.
     //
     // The pointer returned by this method belongs to the window and will be
@@ -155,6 +157,10 @@ protected:
     void PositionToolBar() override;
 #endif // wxUSE_TOOLBAR
 
+#if wxUSE_TOOLTIPS
+    WXHWND                m_hwndToolTip{nullptr};
+#endif // tooltips
+
 #if wxUSE_STATUSBAR
     void PositionStatusBar() override;
 
@@ -176,16 +182,8 @@ private:
 
 #endif // wxUSE_STATUSBAR
 
-#if wxUSE_TOOLTIPS
-    WXHWND                m_hwndToolTip{nullptr};
-#endif // tooltips
-
     // used by IconizeChildFrames(), see comments there
     bool m_wasMinimized{false};
-
-#if wxUSE_TASKBARBUTTON
-    std::unique_ptr<wxTaskBarButton> m_taskBarButton;
-#endif
 
     wxDECLARE_EVENT_TABLE();
 

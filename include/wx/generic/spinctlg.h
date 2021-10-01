@@ -151,17 +151,18 @@ protected:
     // Assign validator with current parameters
     virtual void ResetTextValidator() = 0;
 
+    // the subcontrols
+    wxTextCtrl   *m_textCtrl{nullptr};
+    wxSpinButton *m_spinButton{nullptr};
+
     double m_value{0.0};
     double m_min{0.0};
     double m_max{100.0};
     double m_increment{1.0};
-    bool   m_snap_to_ticks{false};
 
     int m_spin_value{0};
 
-    // the subcontrols
-    wxTextCtrl   *m_textCtrl{nullptr};
-    wxSpinButton *m_spinButton{nullptr};
+    bool   m_snap_to_ticks{false};
 
 private:
     // common part of all ctors
@@ -396,6 +397,9 @@ public:
     int GetBase() const override { return 10; }
     bool SetBase(int WXUNUSED(base)) override { return false; }
 
+private:
+    wxString m_format{"%0.0f"};
+
 protected:
     void DoSendEvent() override;
 
@@ -407,8 +411,6 @@ protected:
     unsigned m_digits{0};
 
 private:
-    wxString m_format{"%0.0f"};
-
     wxDECLARE_DYNAMIC_CLASS(wxSpinCtrlDouble);
 };
 

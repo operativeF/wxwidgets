@@ -81,28 +81,28 @@ public:
     wxPrintNativeDataBase *GetNativeData() const { return m_nativeData; }
 
 private:
-    wxPrintBin      m_bin{wxPrintBin::Default};
-    int             m_media{wxPRINTMEDIA_DEFAULT};
-    wxPrintMode     m_printMode{wxPrintMode::Printer};
-
-    int             m_printNoCopies{1};
-    wxPrintOrientation m_printOrientation{wxPrintOrientation::Portrait};
-    bool            m_printOrientationReversed{false};
-    bool            m_printCollate{false};
-
     std::string     m_printerName;
-    bool            m_colour{true};
+    std::string     m_filename;
+
+    wxSize          m_paperSize;
+
+    wxPrintNativeDataBase  *m_nativeData;
+    char* m_privData{nullptr};
+
+    int   m_media{wxPRINTMEDIA_DEFAULT};
+    int   m_printNoCopies{1};
+    int   m_privDataLen{0};
+
+    wxPrintOrientation m_printOrientation{wxPrintOrientation::Portrait};
+    wxPrintBin      m_bin{wxPrintBin::Default};
+    wxPrintMode     m_printMode{wxPrintMode::Printer};
     wxDuplexMode    m_duplexMode{wxDuplexMode::Simplex};
     wxPrintQuality  m_printQuality{wxPRINT_QUALITY_HIGH};
     wxPaperSize     m_paperId{wxPaperSize::None};
-    wxSize          m_paperSize;
-
-    std::string        m_filename;
-
-    char* m_privData{nullptr};
-    int   m_privDataLen{0};
-
-    wxPrintNativeDataBase  *m_nativeData;
+    
+    bool            m_colour{true};
+    bool            m_printOrientationReversed{false};
+    bool            m_printCollate{false};
 };
 
 /*
@@ -159,11 +159,14 @@ public:
     void operator=(const wxPrintData& data); // Sets internal m_printData member
 
 private:
+    wxPrintData     m_printData;
+
     int             m_printFromPage{0};
     int             m_printToPage{0};
     int             m_printMinPage{0};
     int             m_printMaxPage{0};
     int             m_printNoCopies{1};
+    
     bool            m_printAllPages{false};
     bool            m_printCollate{false};
     bool            m_printToFile{false};
@@ -172,7 +175,6 @@ private:
     bool            m_printEnablePageNumbers{true};
     bool            m_printEnableHelp{false};
     bool            m_printEnablePrintToFile{true}; // TODO: correct default behavior?
-    wxPrintData     m_printData;
 };
 
 /*

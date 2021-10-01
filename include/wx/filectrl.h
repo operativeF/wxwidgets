@@ -116,9 +116,9 @@ public:
     wxString GetFile() const;
 
 protected:
-    int m_filterIndex{};
     wxString m_directory;
     std::vector<wxString> m_files;
+    int m_filterIndex{};
 
 public:
 	wxClassInfo *wxGetClassInfo() const override ;

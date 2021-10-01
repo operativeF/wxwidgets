@@ -177,21 +177,22 @@ protected:
     wxString      m_path;       // Full path
     wxString      m_fileName;
     wxString      m_wildCard;
-    int           m_filterIndex{0};
-
+    
     // Currently selected, but not yet necessarily accepted by the user, file.
     // This should be updated whenever the selection in the control changes by
     // the platform-specific code to provide a useful implementation of
     // GetCurrentlySelectedFilename().
     wxString      m_currentlySelectedFilename;
 
+    wxWindow*     m_extraControl{nullptr};
+
+    int           m_filterIndex{0};
+
     // Currently selected, but not yet necessarily accepted by the user, file
     // type (a.k.a. filter) index. This should be updated whenever the
     // selection in the control changes by the platform-specific code to
     // provide a useful implementation of GetCurrentlySelectedFilterIndex().
     int           m_currentlySelectedFilterIndex{wxNOT_FOUND};
-
-    wxWindow*     m_extraControl{nullptr};
 
     // returns true if control is created (if it already exists returns false)
     bool CreateExtraControl();

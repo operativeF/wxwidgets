@@ -154,14 +154,14 @@ protected:
     void NormalizeValue() override;
 
 private:
-    // the value of the control before the latest change (which might not have
-    // changed anything in fact -- this is why we need this field)
-    int m_oldValue{std::numeric_limits<int>::min()};
-
     // the data for the "buddy" text ctrl
     WXHWND     m_hwndBuddy{nullptr};
     WXWNDPROC  m_wndProcBuddy{nullptr};
 
+    // the value of the control before the latest change (which might not have
+    // changed anything in fact -- this is why we need this field)
+    int m_oldValue{std::numeric_limits<int>::min()};
+    
     // Block text update event after SetValue()
     bool m_blockEvent{false};
 

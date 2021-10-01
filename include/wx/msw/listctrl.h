@@ -395,6 +395,15 @@ protected:
     // free memory taken by all internal data
     void FreeAllInternalData();
 
+    // all wxMSWListItemData objects we use
+    std::vector<wxMSWListItemData *> m_internalData;
+
+private:
+    // Object using for header custom drawing if necessary, may be NULL.
+    wxMSWListHeaderCustomDraw* m_headerCustomDraw{nullptr};
+
+// FIXME: Make all variables private
+protected:
     // get the internal data object for this item (may return NULL)
     wxMSWListItemData *MSWGetItemData(long item) const;
 
@@ -407,15 +416,13 @@ protected:
     wxImageList *     m_imageListNormal{nullptr}; // The image list for normal icons
     wxImageList *     m_imageListSmall{nullptr};  // The image list for small icons
     wxImageList *     m_imageListState{nullptr};  // The image list state icons (not implemented yet)
-    bool              m_ownsImageListNormal{false};
-    bool              m_ownsImageListSmall{false};
-    bool              m_ownsImageListState{false};
 
     int               m_colCount{0};   // Windows doesn't have GetColumnCount so must
                                     // keep track of inserted/deleted columns
 
-    // all wxMSWListItemData objects we use
-    std::vector<wxMSWListItemData *> m_internalData;
+    bool              m_ownsImageListNormal{false};
+    bool              m_ownsImageListSmall{false};
+    bool              m_ownsImageListState{false};
 
     // true if we have any items with custom attributes
     bool m_hasAnyAttr{false};
@@ -437,10 +444,6 @@ private:
     // Intercept Escape and Enter keys to avoid them being stolen from our
     // in-place editor control.
     void OnCharHook(wxKeyEvent& event);
-
-
-    // Object using for header custom drawing if necessary, may be NULL.
-    wxMSWListHeaderCustomDraw* m_headerCustomDraw{nullptr};
 
     wxDECLARE_DYNAMIC_CLASS(wxListCtrl);
     wxDECLARE_EVENT_TABLE();

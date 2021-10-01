@@ -262,6 +262,8 @@ protected:
     void OnRightUp(wxMouseEvent& event);
 
 private:
+    wxMenu* m_privateContextMenu{nullptr};
+
     // we're using RICHEDIT (and not simple EDIT) control if this field is not
     // 0, it also gives the version of the RICHEDIT control being used
     // (although not directly: 1 is for 1.0, 2 is for either 2.0 or 3.0 as we
@@ -276,6 +278,10 @@ private:
     // number of EN_UPDATE events sent by Windows when we change the controls
     // text ourselves: we want this to be exactly 1
     int m_updatesCount{-1};
+
+#if wxUSE_INKEDIT && wxUSE_RICHEDIT
+    int  m_isInkEdit{0};
+#endif
 
     void EnableTextChangedEvents(bool enable) override
     {
@@ -310,14 +316,7 @@ private:
     // pasting the entire text on the clipboard.
     void AdjustMaxLengthBeforePaste();
 
-
-    wxMenu* m_privateContextMenu{nullptr};
-
     bool m_isNativeCaretShown{true};
-
-#if wxUSE_INKEDIT && wxUSE_RICHEDIT
-    int  m_isInkEdit{0};
-#endif
 
     wxDECLARE_EVENT_TABLE();
 

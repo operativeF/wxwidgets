@@ -498,7 +498,13 @@ protected:
         Max
     };
 
-    ItemKind m_kind{ItemKind::None};
+    // on screen rectangle of this item (not including borders)
+    wxRect       m_rect;
+
+    wxPoint      m_pos;
+    wxSize       m_minSize;
+
+    wxObject    *m_userData{nullptr};
 
     union
     {
@@ -507,22 +513,17 @@ protected:
         wxSizerSpacer *m_spacer;
     };
 
-    wxPoint      m_pos;
-    wxSize       m_minSize;
     int          m_proportion{0};
     int          m_border{0};
     int          m_flag{0};
     int          m_id{wxID_NONE};
 
-    // on screen rectangle of this item (not including borders)
-    wxRect       m_rect;
-
     // Aspect ratio can always be calculated from m_size,
     // but this would cause precision loss when the window
     // is shrunk.  It is safer to preserve the initial value.
     float        m_ratio;
-
-    wxObject    *m_userData{nullptr};
+    
+    ItemKind m_kind{ItemKind::None};
 
 private:
     wxDECLARE_CLASS(wxSizerItem);

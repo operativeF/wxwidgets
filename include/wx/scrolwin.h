@@ -323,11 +323,13 @@ protected:
         return true;
     }
 
-    wxScale m_scale{1.0, 1.0};
-
     wxRect                m_rectToScroll;
 
+    wxScale               m_scale{1.0, 1.0};
+
     wxTimer*              m_timerAutoScroll{nullptr};
+
+    wxScrollHelperEvtHandler* m_handler{nullptr};
 
     // The number of pixels to scroll in horizontal and vertical directions
     // respectively.
@@ -342,14 +344,12 @@ protected:
     int                   m_xScrollLinesPerPage{0};
     int                   m_yScrollLinesPerPage{0};
 
-    bool                  m_xScrollingEnabled{true};
-    bool                  m_yScrollingEnabled{true};
-
 #if wxUSE_MOUSEWHEEL
     int m_wheelRotation{0};
 #endif // wxUSE_MOUSEWHEEL
 
-    wxScrollHelperEvtHandler* m_handler{nullptr};
+    bool                  m_xScrollingEnabled{true};
+    bool                  m_yScrollingEnabled{true};
 };
 
 // this macro can be used in a wxScrollHelper-derived class to forward wxWindow

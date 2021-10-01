@@ -568,6 +568,11 @@ private:
     void AddCustomCategoriesToDestinationList();
     void LoadKnownCategory(const std::string& title);
 
+    // Application User Model ID.
+    std::string m_appID;
+
+    wxTaskBarJumpListCategories m_customCategories;
+
     wxTaskBarJumpList *m_jumpList;
 
     wxCOMPtr<ICustomDestinationList>    m_destinationList;
@@ -577,12 +582,8 @@ private:
     std::unique_ptr<wxTaskBarJumpListCategory> m_frequent;
     std::unique_ptr<wxTaskBarJumpListCategory> m_recent;
 
-    wxTaskBarJumpListCategories m_customCategories;
     bool m_recent_visible;
     bool m_frequent_visible;
-
-    // Application User Model ID.
-    std::string m_appID;
 };
 
 // ----------------------------------------------------------------------------

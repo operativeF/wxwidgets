@@ -276,24 +276,29 @@ protected:
     // subwindows
     wxSize DoGetBestSize() const override;
 
+    wxCursor    m_sashCursorWE{wxCURSOR_SIZEWE};
+    wxCursor    m_sashCursorNS{wxCURSOR_SIZENS};
+
+    wxPoint     m_ptStart;      // mouse position when dragging started
+    wxSize      m_lastSize;
+
     std::unique_ptr<wxPen> m_sashTrackerPen;
 
-    wxSplitMode m_splitMode{wxSPLIT_VERTICAL};
     wxWindow*   m_windowOne{nullptr};
     wxWindow*   m_windowTwo{nullptr};
+    
+    double      m_sashGravity{0.0};
+
     int         m_dragMode{wxSPLIT_DRAG_NONE};
     int         m_oldX{0};         // current tracker position if not live mode
     int         m_oldY{0};         // current tracker position if not live mode
     int         m_sashPosition{0}; // Number of pixels from left or top
-    double      m_sashGravity{0.0};
-    wxSize      m_lastSize;
     int         m_requestedSashPosition{std::numeric_limits<int>::max()};
     int         m_sashPositionCurrent; // while dragging
-    wxPoint     m_ptStart;      // mouse position when dragging started
     int         m_sashStart{0};    // sash position when dragging started
     int         m_minimumPaneSize{0};
-    wxCursor    m_sashCursorWE{wxCURSOR_SIZEWE};
-    wxCursor    m_sashCursorNS{wxCURSOR_SIZENS};
+
+    wxSplitMode m_splitMode{wxSPLIT_VERTICAL};
 
     // when in live mode, set this to true to resize children in idle
     bool        m_needUpdating{false};
@@ -376,12 +381,12 @@ private:
     // data for the different types of event
     union
     {
-        int pos;            // position for SASH_POS_CHANGED event
-        wxWindow *win;      // window being removed for UNSPLIT event
         struct
         {
             int x, y;
         } pt;               // position of double click for DCLICK event
+        wxWindow *win;      // window being removed for UNSPLIT event
+        int pos;            // position for SASH_POS_CHANGED event
     } m_data;
 
     public:

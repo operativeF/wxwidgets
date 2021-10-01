@@ -638,13 +638,31 @@ protected:
     // the old window proc (we subclass all windows)
     WXWNDPROC             m_oldWndProc{nullptr};
 
-    // additional (MSW specific) flags
-    bool                  m_mouseInWindow{false};
-    bool                  m_lastKeydownProcessed{false};
+    // current defer window position operation handle (may be NULL)
+    WXHANDLE m_hDWP{nullptr};
+
+#if wxUSE_DEFERRED_SIZING
+    // this function is called after the window was resized to its new size
+    virtual void MSWEndDeferWindowPos()
+    {
+        m_pendingPosition = wxDefaultPosition;
+        m_pendingSize = wxDefaultSize;
+    }
+    
+    // When deferred positioning is done these hold the pending changes, and
+    // are used for the default values if another size/pos changes is done on
+    // this window before the group of deferred changes is completed.
+    wxPoint     m_pendingPosition{wxDefaultPosition};
+    wxSize      m_pendingSize{wxDefaultSize};
+#endif // wxUSE_DEFERRED_SIZING
 
     // the size of one page for scrolling
     int                   m_xThumbSize{0};
     int                   m_yThumbSize{0};
+
+    // additional (MSW specific) flags
+    bool                  m_mouseInWindow{false};
+    bool                  m_lastKeydownProcessed{false};
 
     // implement the base class pure virtuals
     wxSize DoGetTextExtent(std::string_view string,
@@ -785,24 +803,6 @@ protected:
                                         WXHWND parent, wxWindowID id);
 
     void MSWMoveWindowToAnyPosition(WXHWND hwnd, wxRect boundary, bool bRepaint);
-
-#if wxUSE_DEFERRED_SIZING
-    // this function is called after the window was resized to its new size
-    virtual void MSWEndDeferWindowPos()
-    {
-        m_pendingPosition = wxDefaultPosition;
-        m_pendingSize = wxDefaultSize;
-    }
-
-    // current defer window position operation handle (may be NULL)
-    WXHANDLE m_hDWP{nullptr};
-
-    // When deferred positioning is done these hold the pending changes, and
-    // are used for the default values if another size/pos changes is done on
-    // this window before the group of deferred changes is completed.
-    wxPoint     m_pendingPosition{wxDefaultPosition};
-    wxSize      m_pendingSize{wxDefaultSize};
-#endif // wxUSE_DEFERRED_SIZING
 
 private:
     wxDECLARE_DYNAMIC_CLASS(wxWindowMSW);

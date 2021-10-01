@@ -1093,9 +1093,6 @@ public:
 
 protected:
     wxObject*         m_eventObject{nullptr};
-    wxEventType       m_eventType;
-    long              m_timeStamp{0};
-    int               m_id;
 
 public:
     // m_callbackUserData is for internal usage only
@@ -1106,13 +1103,17 @@ private:
     wxEvtHandler *m_handlerToProcessOnlyIn{nullptr};
 
 protected:
-    // the propagation level: while it is positive, we propagate the event to
-    // the parent window (if any)
-    int               m_propagationLevel{wxEVENT_PROPAGATE_NONE};
-
     // The object that the event is being propagated from, initially NULL and
     // only set by wxPropagateOnce.
     wxEvtHandler*     m_propagatedFrom{nullptr};
+
+    wxEventType       m_eventType;
+    long              m_timeStamp{0};
+    int               m_id;
+    
+    // the propagation level: while it is positive, we propagate the event to
+    // the parent window (if any)
+    int               m_propagationLevel{wxEVENT_PROPAGATE_NONE};
 
     bool              m_skipped{false};
     bool              m_isCommandEvent{false};
@@ -4056,6 +4057,11 @@ protected:
     static wxEventHashTable   sm_eventHashTable;
     virtual wxEventHashTable& GetEventHashTable() const;
 
+#if wxUSE_THREADS
+    // critical section protecting m_pendingEvents
+    wxCriticalSection m_pendingEventsLock;
+#endif // wxUSE_THREADS
+
     wxEvtHandler*       m_nextHandler{nullptr};
     wxEvtHandler*       m_previousHandler{nullptr};
 
@@ -4063,15 +4069,6 @@ protected:
     DynamicEvents* m_dynamicEvents{nullptr};
 
     wxList*             m_pendingEvents{nullptr};
-
-#if wxUSE_THREADS
-    // critical section protecting m_pendingEvents
-    wxCriticalSection m_pendingEventsLock;
-#endif // wxUSE_THREADS
-
-    // Is event handler enabled?
-    bool                m_enabled{true};
-
 
     // The user data: either an object which will be deleted by the container
     // when it's deleted or some raw pointer which we do nothing with - only
@@ -4086,6 +4083,9 @@ protected:
 
     // what kind of data do we have?
     wxClientDataType m_clientDataType{wxClientDataType::None};
+
+    // Is event handler enabled?
+    bool                m_enabled{true};
 
     // client data accessors
     virtual void DoSetClientObject( wxClientData *data );

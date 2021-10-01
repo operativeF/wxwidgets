@@ -216,15 +216,14 @@ protected:
 
     // the pointer to currently active loop
     inline static wxEventLoopBase *ms_activeLoop{nullptr};
-
-    // should we exit the loop?
-    bool m_shouldExit{false};
-
     // incremented each time on entering Yield() and decremented on leaving it
     int m_yieldLevel{0};
 
     // the argument of the last call to YieldFor()
     long m_eventsToProcessInsideYield{wxEVT_CATEGORY_ALL};
+    
+    // should we exit the loop?
+    bool m_shouldExit{false};
 
 private:
     // this flag is set on entry into Run() and reset before leaving it

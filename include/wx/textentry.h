@@ -304,12 +304,11 @@ private:
     // return true if the events are currently not suppressed
     bool EventsAllowed() const { return m_eventsBlock == 0; }
 
-
-    // if this counter is non-null, events are blocked
-    unsigned m_eventsBlock{0};
-
     // hint-related stuff, only allocated if/when SetHint() is used
     wxTextEntryHintData *m_hintData{nullptr};
+
+    // if this counter is non-null, events are blocked
+    unsigned int m_eventsBlock{0};
 
     // It needs to call our Do{Get,Set}Value() to work with the real control
     // contents.

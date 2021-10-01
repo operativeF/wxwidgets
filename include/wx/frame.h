@@ -213,10 +213,6 @@ protected:
     // handler or false if we should delay it until the menu is opened.
     static bool ShouldUpdateMenuFromIdle();
 
-#if wxUSE_MENUBAR
-    std::unique_ptr<wxMenuBar> m_frameMenuBar;
-#endif // wxUSE_MENUBAR
-
 #if wxUSE_STATUSBAR && (wxUSE_MENUS || wxUSE_TOOLBAR)
     // the saved status bar text overwritten by DoGiveHelp()
     wxString m_oldStatusText;
@@ -225,21 +221,9 @@ protected:
     wxString m_lastHelpShown;
 #endif
 
-#if wxUSE_STATUSBAR
-    // override to update status bar position (or anything else) when
-    // something changes
-    virtual void PositionStatusBar() { }
-
-    // show the help string for the given menu item using DoGiveHelp() if the
-    // given item does have a help string (as determined by FindInMenuBar()),
-    // return false if there is no help for such item
-    bool ShowMenuHelp(int helpid);
-
-    std::unique_ptr<wxStatusBar> m_frameStatusBar;
-#endif // wxUSE_STATUSBAR
-
-
-    int m_statusBarPane{0};
+#if wxUSE_MENUBAR
+    std::unique_ptr<wxMenuBar> m_frameMenuBar;
+#endif // wxUSE_MENUBAR
 
 #if wxUSE_TOOLBAR
     // override to update status bar position (or anything else) when
@@ -248,6 +232,21 @@ protected:
 
     std::unique_ptr<wxToolBar> m_frameToolBar;
 #endif // wxUSE_TOOLBAR
+
+#if wxUSE_STATUSBAR
+    std::unique_ptr<wxStatusBar> m_frameStatusBar;
+
+    // override to update status bar position (or anything else) when
+    // something changes
+    virtual void PositionStatusBar() { }
+
+    // show the help string for the given menu item using DoGiveHelp() if the
+    // given item does have a help string (as determined by FindInMenuBar()),
+    // return false if there is no help for such item
+    bool ShowMenuHelp(int helpid);
+#endif // wxUSE_STATUSBAR
+
+    int m_statusBarPane{0};
 
 #if wxUSE_MENUS
     wxDECLARE_EVENT_TABLE();

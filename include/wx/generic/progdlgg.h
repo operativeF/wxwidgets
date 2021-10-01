@@ -136,10 +136,51 @@ protected:
     // return the top level parent window of this dialog (may be NULL)
     wxWindow *GetTopParent() const { return m_parentTop; }
 
+private:
+    // Reference to the parent top level window, automatically becomes NULL if
+    // it it is destroyed and could be always NULL if it's not given at all.
+    wxWindowRef m_parentTop{nullptr};
 
-    // continue processing or not (return value for Update())
-    State m_state{Uncancelable};
+    // the widget displaying current status (may be NULL)
+    wxGauge *m_gauge{nullptr};
+    // the message displayed
+    wxStaticText *m_msg{nullptr};
+    // displayed elapsed, estimated, remaining time
+    wxStaticText *m_elapsed{nullptr};
+    wxStaticText *m_estimated{nullptr};
+    wxStaticText *m_remaining{nullptr};
 
+    // the abort and skip buttons (or NULL if none)
+    wxButton *m_btnAbort{nullptr};
+    wxButton *m_btnSkip{nullptr};
+
+    // for wxPD_APP_MODAL case
+    wxWindowDisabler *m_winDisabler{nullptr};
+
+    // Temporary event loop created by the dialog itself if there is no
+    // currently active loop when it is created.
+    wxEventLoop *m_tempEventLoop{nullptr};
+
+    // saves the time when elapsed time was updated so there is only one
+    // update per second
+    unsigned long m_last_timeupdate{0};
+
+    // tells how often a change of the estimated time has to be confirmed
+    // before it is actually displayed - this reduces the frequency of updates
+    // of estimated and remaining time
+    int m_delay{3};
+
+    // counts the confirmations
+    int m_ctdelay{0};
+    unsigned long m_display_estimated{0};
+
+    // Progress dialog styles: this is not the same as m_windowStyle because
+    // wxPD_XXX constants clash with the existing TLW styles so to be sure we
+    // don't have any conflicts we just use a separate variable for storing
+    // them.
+    int m_pdStyle{0};
+
+protected:
     // the maximum value
     int m_maximum{0};
 
@@ -157,7 +198,13 @@ protected:
     // time between the moment the dialog was closed/cancelled and resume
     unsigned long m_break{0};
 
+    // continue processing or not (return value for Update())
+    State m_state{Uncancelable};
+
 private:
+    // skip some portion
+    bool m_skip{false};
+
     // update the label to show the given time (in seconds)
     static void SetTimeLabel(unsigned long val, wxStaticText *label);    
 
@@ -180,53 +227,6 @@ private:
     void EnableAbort(bool enable = true);
     void DisableSkip() { EnableSkip(false); }
     void DisableAbort() { EnableAbort(false); }
-
-    // the widget displaying current status (may be NULL)
-    wxGauge *m_gauge{nullptr};
-    // the message displayed
-    wxStaticText *m_msg{nullptr};
-    // displayed elapsed, estimated, remaining time
-    wxStaticText *m_elapsed{nullptr};
-    wxStaticText *m_estimated{nullptr};
-    wxStaticText *m_remaining{nullptr};
-
-    // Reference to the parent top level window, automatically becomes NULL if
-    // it it is destroyed and could be always NULL if it's not given at all.
-    wxWindowRef m_parentTop{nullptr};
-
-    // Progress dialog styles: this is not the same as m_windowStyle because
-    // wxPD_XXX constants clash with the existing TLW styles so to be sure we
-    // don't have any conflicts we just use a separate variable for storing
-    // them.
-    int m_pdStyle{0};
-
-    // skip some portion
-    bool m_skip{false};
-
-    // the abort and skip buttons (or NULL if none)
-    wxButton *m_btnAbort{nullptr};
-    wxButton *m_btnSkip{nullptr};
-
-    // saves the time when elapsed time was updated so there is only one
-    // update per second
-    unsigned long m_last_timeupdate{0};
-
-    // tells how often a change of the estimated time has to be confirmed
-    // before it is actually displayed - this reduces the frequency of updates
-    // of estimated and remaining time
-    int m_delay{3};
-
-    // counts the confirmations
-    int m_ctdelay{0};
-    unsigned long m_display_estimated{0};
-
-    // for wxPD_APP_MODAL case
-    wxWindowDisabler *m_winDisabler{nullptr};
-
-    // Temporary event loop created by the dialog itself if there is no
-    // currently active loop when it is created.
-    wxEventLoop *m_tempEventLoop{nullptr};
-
 
     wxDECLARE_EVENT_TABLE();
 };

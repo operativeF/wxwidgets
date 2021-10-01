@@ -65,23 +65,23 @@ struct wxProgressDialogSharedData
 {
     wxCriticalSection m_cs;
 
-    wxWindow *m_parent{nullptr};     // Parent window only used to center us over it.
-    HWND m_hwnd{nullptr};            // Task dialog handler
-    long m_style{};           // wxProgressDialog style
-    int m_value{};
-    int m_range{};
     std::string m_title;
     std::string m_message;
     std::string m_expandedInformation;
     std::string m_labelCancel; // Privately used by callback.
-    unsigned long m_timeStop{};
+
     wxIcon m_iconSmall;
     wxIcon m_iconBig;
+
     wxPoint m_winPosition;
 
-    wxProgressDialog::State m_state;
-    bool m_progressBarMarquee{false};
-    bool m_skipped{false};
+    wxWindow *m_parent{nullptr};     // Parent window only used to center us over it.
+    HWND m_hwnd{nullptr};            // Task dialog handler
+
+    unsigned long m_timeStop{};
+    long m_style{};           // wxProgressDialog style
+    int m_value{};
+    int m_range{};
 
     // The task dialog message to use for changing the text of its elements:
     // it is set to TDM_SET_ELEMENT_TEXT by Fit() to let the dialog adjust
@@ -94,6 +94,11 @@ struct wxProgressDialogSharedData
     // Bit field that indicates fields that have been modified by the
     // main thread so the task dialog runner knows what to update.
     int m_notifications{0};
+
+    wxProgressDialog::State m_state;
+
+    bool m_progressBarMarquee{false};
+    bool m_skipped{false};
 
 
     // Helper function to split a single message, passed via our public API,

@@ -246,6 +246,17 @@ protected:
     std::string m_extendedMessage;
     std::string m_caption;
 
+private:
+    // labels for the buttons, initially empty meaning that the defaults should
+    // be used, use GetYes/No/OK/CancelLabel() to access them
+    std::string m_yes;
+    std::string m_no;
+    std::string m_ok;
+    std::string m_cancel;
+    std::string m_help;
+
+// FIXME: Make protected variables private.
+protected:
     long m_dialogStyle{0};
 
     // this function is called by our public SetXXXLabels() and should assign
@@ -276,14 +287,6 @@ private:
     virtual std::string GetDefaultOKLabel() const { return wxGetTranslation("OK"); }
     virtual std::string GetDefaultCancelLabel() const { return wxGetTranslation("Cancel"); }
     virtual std::string GetDefaultHelpLabel() const { return wxGetTranslation("Help"); }
-
-    // labels for the buttons, initially empty meaning that the defaults should
-    // be used, use GetYes/No/OK/CancelLabel() to access them
-    std::string m_yes;
-    std::string m_no;
-    std::string m_ok;
-    std::string m_cancel;
-    std::string m_help;
 };
 
 #include "wx/generic/msgdlgg.h"

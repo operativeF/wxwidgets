@@ -158,13 +158,13 @@ protected:
     // this function should modify the stream current position without taking care
     // of restoring it since CanRead() will do it.
     virtual bool DoCanRead(wxInputStream& stream) const = 0;
-
-    wxSize m_szAnimation;
-    unsigned int m_nFrames;
-
+    
     // this is the colour to use for the wxANIM_TOBACKGROUND disposal.
     // if not specified by the animation, it's set to wxNullColour
     wxColour m_background;
+
+    wxSize m_szAnimation;
+    unsigned int m_nFrames;
 };
 
 #endif  // wxUSE_STREAMS

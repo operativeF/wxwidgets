@@ -292,15 +292,16 @@ public:
     operator long() const { return m_itemId; }
 
     // these members are public for compatibility
+    wxString        m_text;     // The label/header text
+
+    wxUIntPtr       m_data{0};     // App-defined data
 
     long            m_mask{0};     // Indicates what fields are valid
     long            m_itemId{-1};   // The zero-based item position
-    int             m_col{0};      // Zero-based column, if in report mode
     long            m_state{0};    // The state of the item
     long            m_stateMask{0};// Which flags of m_state are valid (uses same flags)
-    wxString        m_text;     // The label/header text
     int             m_image{-1};    // The zero-based index into an image list
-    wxUIntPtr       m_data{0};     // App-defined data
+    int             m_col{0};      // Zero-based column, if in report mode
 
     // For columns only
     int             m_format{wxLIST_FORMAT_CENTRE};   // left, right, centre

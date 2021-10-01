@@ -139,11 +139,12 @@ public:
     }
 
 protected:
-    wxWindowIDRef m_id;             // numeric id of the item >= 0 or wxID_ANY or wxID_SEPARATOR
+    std::string      m_text,           // label of the item
+                     m_help;           // the help string for the item
     wxMenu       *m_parentMenu,     // the menu we belong to
                  *m_subMenu;        // our sub menu or NULL
-    std::string      m_text,           // label of the item
-                  m_help;           // the help string for the item
+
+    wxWindowIDRef m_id;             // numeric id of the item >= 0 or wxID_ANY or wxID_SEPARATOR
     wxItemKind    m_kind;           // separator/normal/check/radio item?
     bool          m_isChecked;      // is checked?
     bool          m_isEnabled;      // is enabled?

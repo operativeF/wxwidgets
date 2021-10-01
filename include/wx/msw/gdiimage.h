@@ -53,12 +53,6 @@ struct WXDLLIMPEXP_CORE wxGDIImageRefData : public wxGDIRefData
 
     // for compatibility, the member fields are public
 
-    // the size of the image
-    wxSize m_size{0, 0};
-
-    // the depth of the image
-    int m_depth{0};
-
     // the handle to it
     union
     {
@@ -67,6 +61,12 @@ struct WXDLLIMPEXP_CORE wxGDIImageRefData : public wxGDIRefData
         WXHICON   m_hIcon;
         WXHCURSOR m_hCursor;
     };
+    
+    // the size of the image
+    wxSize m_size{0, 0};
+
+    // the depth of the image
+    int m_depth{0};
 };
 
 // ----------------------------------------------------------------------------

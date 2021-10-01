@@ -130,8 +130,8 @@ protected:
     void UpdateClientSize();
 
 private:
-    // common part of all ctors
-    
+    // holds the current translation for the window menu label
+    wxString m_currentWindowMenuLabel;
 
 #if wxUSE_MENUS
     // "Window" menu commands event handlers
@@ -158,10 +158,6 @@ private:
     // if true, indicates whether the event wasn't really processed even though
     // it was "handled", see OnActivate() and HandleActivate()
     bool m_activationNotHandled{false};
-
-    // holds the current translation for the window menu label
-    wxString m_currentWindowMenuLabel;
-
 
     friend class WXDLLIMPEXP_FWD_CORE wxMDIChildFrame;
 

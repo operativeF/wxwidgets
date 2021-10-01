@@ -40,19 +40,23 @@ namespace wxMSWMessageDialog
         // initializes the object from a message dialog.
         wxMSWTaskDialogConfig(const wxMessageDialogBase& dlg);
 
-        std::unique_ptr<TASKDIALOG_BUTTON[]> buttons;
-        wxWindow *parent{nullptr};
-        std::string caption;
-        std::string message;
-        std::string extendedMessage;
-        long iconId{0};
-        long style{0};
-        bool useCustomLabels{false};
         wxString btnYesLabel;
         wxString btnNoLabel;
         wxString btnOKLabel;
         wxString btnCancelLabel;
         wxString btnHelpLabel;
+
+        std::string caption;
+        std::string message;
+        std::string extendedMessage;
+
+        std::unique_ptr<TASKDIALOG_BUTTON[]> buttons;
+        wxWindow *parent{nullptr};
+
+        long iconId{0};
+        long style{0};
+
+        bool useCustomLabels{false};
 
         // Will create a task dialog with it's parameters for it's creation
         // stored in the provided TASKDIALOGCONFIG parameter.

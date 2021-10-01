@@ -346,9 +346,6 @@ private:
     // the hash storing the items attributes (indexed by item ids)
     wxMapTreeAttr m_attrs;
 
-    // true if the hash above is not empty
-    bool m_hasAnyAttr{false};
-
 #if wxUSE_DRAGIMAGE
     // used for dragging
     wxDragImage *m_dragImage{nullptr};
@@ -364,6 +361,9 @@ private:
     wxTreeItemId m_htSelStart, m_htClickedItem;
     wxPoint m_ptClick;
 
+    // true if the hash above is not empty
+    bool m_hasAnyAttr{false};
+    
     // whether dragging has started
     bool m_dragStarted{false};
 

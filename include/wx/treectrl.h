@@ -440,12 +440,13 @@ protected:
 
     wxImageList *m_imageListNormal{nullptr}; // images for tree elements
     wxImageList *m_imageListState{nullptr};  // special images for app defined states
-    bool         m_ownsImageListNormal{false};
-    bool         m_ownsImageListState{false};
 
     // spacing between left border and the text
     unsigned int m_spacing{18};
 
+    bool         m_ownsImageListNormal{false};
+    bool         m_ownsImageListState{false};
+    
     // whether full or quick calculation is done in DoGetBestSize
     bool        m_quickBestSize{true};
 

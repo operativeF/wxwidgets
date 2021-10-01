@@ -53,7 +53,7 @@ private:
     static const struct ButtonAccessors
     {
         int id;
-        std::string (wxMessageDialog::*getter)() const;
+        std::string(wxMessageDialog::* getter)() const;
     } ms_buttons[];
 
     // replace the static text control with a text control in order to show

@@ -167,17 +167,29 @@ protected:
                                           const wxSize& size,
                                           int& x, int& y,
                                           int& w, int& h) const override;
+    // The last focused child: we remember it when we're deactivated and
+    // restore focus to it when we're activated (this is done here) or restored
+    // from iconic state (done by wxFrame).
+    wxWindowRef m_winLastFocused;
 
+    wxRect                m_fsOldSize;
+
+private:
+    // The system menu: initially NULL but can be set (once) by
+    // MSWGetSystemMenu(). Owned by this window.
+    wxMenu *m_menuSystem {nullptr};
+
+protected:
+    // Data to save/restore when calling ShowFullScreen
+    long                  m_fsStyle {0}; // Passed to ShowFullScreen
+    long                  m_fsOldWindowStyle {0};
+    
     // This field contains the show command to use when showing the window the
     // next time and also indicates whether the window should be considered
     // being iconized or maximized (which may be different from whether it's
     // actually iconized or maximized at MSW level).
     WXUINT m_showCmd {SW_SHOWNORMAL};
 
-    // Data to save/restore when calling ShowFullScreen
-    long                  m_fsStyle {0}; // Passed to ShowFullScreen
-    wxRect                m_fsOldSize;
-    long                  m_fsOldWindowStyle {0};
     bool                  m_fsIsMaximized {false};
     bool                  m_fsIsShowing {false};
 
@@ -188,16 +200,7 @@ protected:
     // Restore focus to m_winLastFocused if possible and needed.
     void DoRestoreLastFocus();
 
-    // The last focused child: we remember it when we're deactivated and
-    // restore focus to it when we're activated (this is done here) or restored
-    // from iconic state (done by wxFrame).
-    wxWindowRef m_winLastFocused;
-
 private:
-    // The system menu: initially NULL but can be set (once) by
-    // MSWGetSystemMenu(). Owned by this window.
-    wxMenu *m_menuSystem {nullptr};
-
     wxDECLARE_EVENT_TABLE();
 };
 

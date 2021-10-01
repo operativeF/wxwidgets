@@ -242,7 +242,6 @@ protected:
 #endif
 
     // scaling variables
-    bool m_logicalFunctionSupported;
     wxGraphicsMatrix m_matrixOriginal;
     wxGraphicsMatrix m_matrixCurrent;
     wxGraphicsMatrix m_matrixCurrentInv;
@@ -253,6 +252,8 @@ protected:
     std::unique_ptr<wxGraphicsContext> m_graphicContext;
 
     bool m_isClipBoxValid;
+
+    bool m_logicalFunctionSupported;
 
 private:
     // This method only initializes trivial fields.

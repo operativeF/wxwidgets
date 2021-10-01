@@ -564,9 +564,6 @@ public:
         {}
 #endif
 
-private:
-    wxDC       *m_owner;
-
 protected:
     // returns adjustment factor for converting wxFont "point size"; in wx
     // it is point size on screen and needs to be multiplied by this value
@@ -582,18 +579,22 @@ protected:
     double GetMMToPXx() const;
     double GetMMToPXy() const;
 
+    wxColour          m_textForegroundColour;
+    wxColour          m_textBackgroundColour;
 
-    // window on which the DC draws or NULL
-    wxWindow   *m_window{nullptr};
+    wxPen             m_pen;
+    wxBrush           m_brush;
+    wxBrush           m_backgroundBrush;
+    wxFont            m_font;
+#if wxUSE_PALETTE
+    wxPalette         m_palette;
+#endif
 
-    // flags
-    bool m_colour{true};
-    bool m_ok{true};
-    bool m_clipping{false};
-    bool m_isInteractive{false};
-    bool m_isBBoxValid{false};
+    wxScale m_logicalScale{1.0, 1.0};
+    wxScale m_userScale{1.0, 1.0};
+    wxScale m_scale{1.0, 1.0};
 
-    // coordinate system variables
+        // coordinate system variables
 
     wxPoint m_logicalOrigin{0, 0};
     wxPoint m_deviceOrigin{0, 0};
@@ -603,13 +604,15 @@ protected:
                                    // used toplevel window's origin) and
                                    // e.g. for Postscript, where the native
                                    // origin in the bottom left corner.
-    
-    wxScale m_logicalScale{1.0, 1.0};
-    wxScale m_userScale{1.0, 1.0};
-    wxScale m_scale{1.0, 1.0};
 
-    int m_signX{1};
-    int m_signY{1};  // Used by SetAxisOrientation() to invert the axes
+    // window on which the DC draws or NULL
+    wxWindow   *m_window{nullptr};
+
+// FIXME: Probably should make all variables private.
+private:
+    wxDC       *m_owner;
+
+protected:
 
     double m_contentScaleFactor{1.0}; // used by high resolution displays (retina)
 
@@ -620,6 +623,9 @@ protected:
     mutable double m_mm_to_pix_x{0.0};
     mutable double m_mm_to_pix_y{0.0};
 
+    int m_signX{1};
+    int m_signY{1};  // Used by SetAxisOrientation() to invert the axes
+    
     // bounding and clipping boxes
     wxCoord m_minX{0};
     wxCoord m_minY{0};
@@ -635,17 +641,16 @@ protected:
     wxBrushStyle m_backgroundMode{wxBrushStyle::Transparent};
     wxMappingMode m_mappingMode{wxMappingMode::Text};
 
-    wxPen             m_pen;
-    wxBrush           m_brush;
-    wxBrush           m_backgroundBrush;
-    wxColour          m_textForegroundColour;
-    wxColour          m_textBackgroundColour;
-    wxFont            m_font;
-
+    // flags
 #if wxUSE_PALETTE
-    wxPalette         m_palette;
     bool              m_hasCustomPalette{false};
 #endif // wxUSE_PALETTE
+
+    bool m_colour{true};
+    bool m_ok{true};
+    bool m_clipping{false};
+    bool m_isInteractive{false};
+    bool m_isBBoxValid{false};
 
 private:
     // Return the full DC area in logical coordinates.

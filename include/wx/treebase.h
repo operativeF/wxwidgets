@@ -229,12 +229,13 @@ public:
     wxString GetToolTip() const { return m_label; }
 
 private:
+    wxString      m_label;
+
     // not all of the members are used (or initialized) for all events
     wxKeyEvent    m_evtKey;
     wxTreeItemId  m_item,
                   m_itemOld;
     wxPoint       m_pointDrag;
-    wxString      m_label;
     bool          m_editCancelled{false};
 
     friend class WXDLLIMPEXP_FWD_CORE wxTreeCtrl;

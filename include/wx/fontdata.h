@@ -55,22 +55,26 @@ public:
 
     wxNativeEncodingInfo& EncodingInfo() { return m_encodingInfo; }
 
+private:
+    wxNativeEncodingInfo m_encodingInfo;
+
+public:
     // public for backwards compatibility only: don't use directly
     wxColour        m_fontColour;
     wxFont          m_initialFont;
     wxFont          m_chosenFont;
 
-    bool            m_showHelp{false};
-    bool            m_allowSymbols{true};
-    bool            m_enableEffects{true};
-
     int             m_minSize{0};
     int             m_maxSize{0};
 
 private:
-    wxFontEncoding       m_encoding{wxFONTENCODING_SYSTEM};
-    wxNativeEncodingInfo m_encodingInfo;
     int                  m_restrictSelection{wxFONTRESTRICT_NONE};
+    wxFontEncoding       m_encoding{wxFONTENCODING_SYSTEM};
+
+public:
+    bool            m_showHelp{false};
+    bool            m_allowSymbols{true};
+    bool            m_enableEffects{true};
 };
 
 #endif // _WX_FONTDATA_H_

@@ -151,15 +151,15 @@ private:
     // system-provided versions of them
     wxImageList *m_disabledImgList{nullptr};
 
+    // the tool the cursor is in
+    wxToolBarToolBase *m_pInTool{nullptr};
+
     // the total number of toolbar elements
     size_t m_nButtons{0};
 
     // the sum of the sizes of the fixed items (i.e. excluding stretchable
     // spaces) in the toolbar direction
     int m_totalFixedSize{0};
-
-    // the tool the cursor is in
-    wxToolBarToolBase *m_pInTool{nullptr};
 
     // makes sure tool bitmap size is sufficient for all tools
     void AdjustToolBitmapSize();
