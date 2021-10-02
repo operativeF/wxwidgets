@@ -182,14 +182,11 @@ public:
     wxGridBagSizer* GetGBSizer() const { return m_gbsizer; }
     void SetGBSizer(wxGridBagSizer* sizer) { m_gbsizer = sizer; }
 
-
-protected:
+private:
     wxGBPosition    m_pos;
     wxGBSpan        m_span;
     wxGridBagSizer* m_gbsizer{nullptr};  // so SetPos/SetSpan can check for intersects
 
-
-private:
     wxDECLARE_DYNAMIC_CLASS(wxGBSizerItem);
 };
 

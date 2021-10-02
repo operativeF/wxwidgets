@@ -240,7 +240,7 @@ protected:
 #ifdef __WXOSX__
     virtual wxPoint OSXGetOrigin() const { return wxPoint(); }
 #endif
-
+private:
     // scaling variables
     wxGraphicsMatrix m_matrixOriginal;
     wxGraphicsMatrix m_matrixCurrent;
@@ -255,7 +255,6 @@ protected:
 
     bool m_logicalFunctionSupported;
 
-private:
     // This method only initializes trivial fields.
     void CommonInit();
 

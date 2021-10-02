@@ -2919,10 +2919,6 @@ public:
 class WXDLLIMPEXP_CORE wxDropFilesEvent : public wxEvent
 {
 public:
-    int       m_noFiles;
-    wxPoint   m_pos;
-    std::vector<std::string> m_files;
-
     wxDropFilesEvent(wxEventType type = wxEVT_NULL,
                      int noFiles = 0,
                      std::vector<std::string> files = {})
@@ -2938,6 +2934,10 @@ public:
     const std::vector<std::string>& GetFiles() const { return m_files; }
 
     wxEvent *Clone() const override { return new wxDropFilesEvent(*this); }
+
+    std::vector<std::string> m_files;
+    wxPoint   m_pos;
+    int       m_noFiles;
 
 public:
 	wxClassInfo *wxGetClassInfo() const override ;
@@ -2970,14 +2970,6 @@ public:
     wxUpdateUIEvent(wxWindowID commandId = 0)
         : wxCommandEvent(wxEVT_UPDATE_UI, commandId)
     {
-        m_checked =
-        m_enabled =
-        m_shown =
-        m_setEnabled =
-        m_setShown =
-        m_setText =
-        m_setChecked = false;
-        m_isCheckable = true;
     }
 
     wxUpdateUIEvent(const wxUpdateUIEvent& event) = default;
@@ -3029,14 +3021,15 @@ public:
 protected:
     std::string   m_text;
 
-    bool          m_checked;
-    bool          m_enabled;
-    bool          m_shown;
-    bool          m_setEnabled;
-    bool          m_setShown;
-    bool          m_setText;
-    bool          m_setChecked;
-    bool          m_isCheckable;
+    bool          m_checked{false};
+    bool          m_enabled{false};
+    bool          m_shown{false};
+    bool          m_setEnabled{false};
+    bool          m_setShown{false};
+    bool          m_setText{false};
+    bool          m_setChecked{false};
+    bool          m_isCheckable{true};
+
 #if wxUSE_LONGLONG
     inline static wxLongLong       sm_lastUpdate{0};
 #endif
@@ -3611,6 +3604,7 @@ private:
         wxEventType                   eventType;
         wxEventTableEntryPointerArray eventEntryTable;
     };
+    
     using EventTypeTablePointer = EventTypeTable *;
 
 public:

@@ -111,10 +111,7 @@ public:
 protected:
     wxSize DoGetBestClientSize() const override;
 
-private:
-    // Common part of all constructors.
-    
-
+private:    
     // Fully invalidates the window.
     void OnSize(wxSizeEvent& event);
 
@@ -133,16 +130,13 @@ private:
     // configurable in the future.
     wxFont GetTitleFont() const;
 
+    // Start and stop gradient colours, only used when drawing text.
+    wxColour m_colStart,
+             m_colEnd;
+
     // Return the colour to use for extending the bitmap. Non-const as it
     // updates m_colBitmapBg if needed.
     wxColour GetBitmapBg();
-
-
-    // The window side along which the banner is laid out.
-    wxDirection m_direction;
-
-    // If valid, this bitmap is drawn as is.
-    wxBitmap m_bitmap;
 
     // If bitmap is valid, this is the colour we use to extend it if the bitmap
     // is smaller than this window. It is computed on demand by GetBitmapBg().
@@ -151,10 +145,12 @@ private:
     // The title and main message to draw, used if m_bitmap is invalid.
     std::string m_title;
     std::string m_message;
+    
+    // If valid, this bitmap is drawn as is.
+    wxBitmap m_bitmap;
 
-    // Start and stop gradient colours, only used when drawing text.
-    wxColour m_colStart,
-             m_colEnd;
+    // The window side along which the banner is laid out.
+    wxDirection m_direction;
 
     wxDECLARE_EVENT_TABLE();
 };

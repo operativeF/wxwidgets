@@ -51,7 +51,7 @@ public:
 
     void SetStatus(bool status) { m_status = status; }
 
-protected:
+private:
     bool    m_inHelp{false};
     bool    m_status; // true if the user left-clicked
 };
@@ -220,7 +220,7 @@ public:
     void AddHelp(wxWindowID id, const std::string& text) override;
     void RemoveHelp(wxWindowBase* window) override;
 
-protected:
+private:
     // we use 2 hashes for storing the help strings associated with windows
     // and the ids
     wxSimpleHelpProviderHashMap m_hashWindows,
@@ -253,7 +253,7 @@ public:
     void SetHelpController(wxHelpControllerBase* hc) { m_helpController = hc; }
     wxHelpControllerBase* GetHelpController() const { return m_helpController; }
 
-protected:
+private:
     wxHelpControllerBase*   m_helpController;
 };
 

@@ -104,9 +104,7 @@ class WXDLLIMPEXP_CORE wxFontPickerCtrl : public wxPickerBase
 {
 public:
      wxFontPickerCtrl() = default;
-
     ~wxFontPickerCtrl() = default;
-
 
     wxFontPickerCtrl(wxWindow *parent,
                      wxWindowID id,
@@ -172,13 +170,13 @@ protected:
     long GetPickerStyle(long style) const override
         { return (style & (wxFNTP_FONTDESC_AS_LABEL|wxFNTP_USEFONT_FOR_LABEL)); }
 
+private:
     // the minimum pointsize allowed to the user
     unsigned int m_nMinPointSize{wxFNTP_MINPOINT_SIZE};
 
     // the maximum pointsize allowed to the user
     unsigned int m_nMaxPointSize{wxFNTP_MAXPOINT_SIZE};
 
-private:
     wxFontPickerWidget* GetPickerWidget() const
         { return dynamic_cast<wxFontPickerWidget*>(m_picker); }
 
