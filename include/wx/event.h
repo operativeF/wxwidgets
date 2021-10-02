@@ -1903,13 +1903,15 @@ public:
 public:
     int           m_clickCount;
 
-    wxMouseWheelAxis m_wheelAxis;
     int           m_wheelRotation;
     int           m_wheelDelta;
-    bool          m_wheelInverted;
     int           m_linesPerAction;
     int           m_columnsPerAction;
+
     float         m_magnification;
+    wxMouseWheelAxis m_wheelAxis;
+
+    bool          m_wheelInverted;
 
 protected:
     void Assign(const wxMouseEvent& evt);
@@ -1946,8 +1948,9 @@ public:
     wxEvent *Clone() const override { return new wxSetCursorEvent(*this); }
 
 private:
-    wxCoord  m_x, m_y;
     wxCursor m_cursor;
+
+    wxCoord  m_x, m_y;
 
 public:
 	wxClassInfo *wxGetClassInfo() const override ;
@@ -2264,6 +2267,11 @@ public:
     wxKeyEvent& operator=(const wxKeyEvent& evt);
 
 public:
+    // these fields contain the platform-specific information about
+    // key that was pressed
+    std::uint32_t      m_rawCode;
+    std::uint32_t      m_rawFlags;
+
     // Do not use these fields directly, they are initialized on demand, so
     // call GetX() and GetY() or GetPosition() instead.
     wxCoord       m_x, m_y;
@@ -2273,11 +2281,6 @@ public:
     // This contains the full Unicode character
     // in a character events in Unicode mode
     wxChar        m_uniChar{WXK_NONE};
-
-    // these fields contain the platform-specific information about
-    // key that was pressed
-    std::uint32_t      m_rawCode;
-    std::uint32_t      m_rawFlags;
 
 private:
     // Set the event to propagate if necessary, i.e. if it's of wxEVT_CHAR_HOOK
@@ -2350,9 +2353,10 @@ public:
     wxEvent *Clone() const override { return new wxSizeEvent(*this); }
 
 private:
+    wxRect m_rect; // Used for wxEVT_SIZING
+
     // For internal usage only. Will be converted to protected members.
     wxSize m_size;
-    wxRect m_rect; // Used for wxEVT_SIZING
 
 public:
 	wxClassInfo *wxGetClassInfo() const override ;
@@ -2394,8 +2398,9 @@ public:
     wxEvent *Clone() const override { return new wxMoveEvent(*this); }
 
 protected:
-    wxPoint m_pos;
     wxRect m_rect;
+
+    wxPoint m_pos;
 
 public:
 	wxClassInfo *wxGetClassInfo() const override ;
@@ -2570,8 +2575,9 @@ public:
     wxEvent *Clone() const override { return new wxActivateEvent(*this); }
 
 private:
-    bool m_active;
     Reason m_activationReason;
+
+    bool m_active;
 
 public:
 	wxClassInfo *wxGetClassInfo() const override ;
@@ -2632,8 +2638,9 @@ public:
     wxEvent *Clone() const override { return new wxMenuEvent(*this); }
 
 private:
-    int     m_menuId;
     wxMenu* m_menu;
+
+    int     m_menuId;
 
 public:
 	wxClassInfo *wxGetClassInfo() const override ;
@@ -2834,8 +2841,9 @@ class WXDLLIMPEXP_CORE wxJoystickEvent : public wxEvent
 {
 protected:
     wxPoint      m_pos;
-    int          m_zPosition{0};
     unsigned int m_buttonChange;   // Which button changed?
+
+    int          m_zPosition{0};
     int          m_buttonState;    // Which buttons are down?
     int          m_joyStick;       // Which joystick?
 
@@ -3019,6 +3027,8 @@ public:
     wxEvent *Clone() const override { return new wxUpdateUIEvent(*this); }
 
 protected:
+    std::string   m_text;
+
     bool          m_checked;
     bool          m_enabled;
     bool          m_shown;
@@ -3027,7 +3037,6 @@ protected:
     bool          m_setText;
     bool          m_setChecked;
     bool          m_isCheckable;
-    std::string      m_text;
 #if wxUSE_LONGLONG
     inline static wxLongLong       sm_lastUpdate{0};
 #endif
@@ -3288,8 +3297,9 @@ public:
         FromTab = 0x0004
     };
 
-    long m_flags;
     wxWindow *m_focus{nullptr};
+
+    long m_flags;
 
 public:
 	wxClassInfo *wxGetClassInfo() const override ;
@@ -3388,9 +3398,10 @@ public:
     void SetOrigin(Origin origin) { m_origin = origin; }
 
 protected:
-    wxPoint   m_pos;
     std::string  m_target;
     std::string  m_link;
+
+    wxPoint   m_pos;
     Origin    m_origin;
 
     // we can try to guess the event origin ourselves, even if none is
@@ -3526,16 +3537,16 @@ struct WXDLLIMPEXP_BASE wxEventTableEntryBase
 
     wxEventTableEntryBase& operator=(const wxEventTableEntryBase&) = delete;
 
-    // the range of ids for this entry: if m_lastId == wxID_ANY, the range
-    // consists only of m_id, otherwise it is m_id..m_lastId inclusive
-    int m_id,
-        m_lastId;
-
     // function/method/functor to call
     wxEventFunctor* m_fn;
 
     // arbitrary user data associated with the callback
     wxObject* m_callbackUserData;
+
+    // the range of ids for this entry: if m_lastId == wxID_ANY, the range
+    // consists only of m_id, otherwise it is m_id..m_lastId inclusive
+    int m_id,
+        m_lastId;
 };
 
 // an entry from a static event table
@@ -3640,15 +3651,17 @@ protected:
     void GrowEventTypeTable();
 
 protected:
-    const wxEventTable    &m_table;
-    bool                   m_rebuildHash;
+    EventTypeTablePointer* m_eventTypeTable;
+    wxEventHashTable*      m_previous;
+    wxEventHashTable*      m_next;
+
+    const wxEventTable&    m_table;
 
     size_t                 m_size;
-    EventTypeTablePointer *m_eventTypeTable;
+
+    bool                   m_rebuildHash;
 
     inline static wxEventHashTable* sm_first{nullptr};
-    wxEventHashTable* m_previous;
-    wxEventHashTable* m_next;
 };
 
 // ----------------------------------------------------------------------------
