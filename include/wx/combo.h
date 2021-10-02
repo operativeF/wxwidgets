@@ -614,6 +614,19 @@ protected:
     // This is used when control is unfocused and m_valueString is empty
     std::string                m_hintText;
 
+    // Colour of the text area, in case m_text is NULL
+    wxColour                m_tcBgCol;
+
+    // The button and textctrl click/paint areas
+    wxRect                  m_tcArea;
+    wxRect                  m_btnArea;
+
+    // custom dropbutton bitmaps
+    wxBitmap                m_bmpNormal;
+    wxBitmap                m_bmpPressed;
+    wxBitmap                m_bmpHover;
+    wxBitmap                m_bmpDisabled;
+
     // the text control and button we show all the time
     wxTextCtrl*             m_text{nullptr};
     wxWindow*               m_btn{nullptr};
@@ -673,13 +686,6 @@ protected:
     // Width of the "fake" border
     wxCoord                 m_widthCustomBorder{0};
 
-    // The button and textctrl click/paint areas
-    wxRect                  m_tcArea;
-    wxRect                  m_btnArea;
-
-    // Colour of the text area, in case m_text is NULL
-    wxColour                m_tcBgCol;
-
     // current button state (uses renderer flags)
     int                     m_btnState{0};
 
@@ -692,26 +698,20 @@ protected:
     // last default button width
     int                     m_btnWidDefault{0};
 
-    // custom dropbutton bitmaps
-    wxBitmap                m_bmpNormal;
-    wxBitmap                m_bmpPressed;
-    wxBitmap                m_bmpHover;
-    wxBitmap                m_bmpDisabled;
+    // platform-dependent customization and other flags
+    std::uint32_t                m_iFlags{0};
 
     // area used by the button
     wxSize                  m_btnSize;
 
-    // platform-dependent customization and other flags
-    std::uint32_t                m_iFlags{0};
-
     // custom style for m_text
     int                     m_textCtrlStyle{0};
 
-    // draw blank button background under bitmap?
-    bool                    m_blankButtonBg{false};
-
     // is the popup window currently shown?
     wxByte                  m_popupWinState{Hidden};
+
+    // draw blank button background under bitmap?
+    bool                    m_blankButtonBg{false};
 
     // should the focus be reset to the textctrl in idle time?
     bool                    m_resetFocus{false};

@@ -1227,9 +1227,11 @@ public:
         { return m_parent; }
 
 private:
-    wxDataViewTreeStoreNode  *m_parent;
-    std::string                  m_text;
+    std::string               m_text;
+
     wxIcon                    m_icon;
+
+    wxDataViewTreeStoreNode  *m_parent;
     wxClientData             *m_data;
 };
 
