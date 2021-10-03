@@ -727,9 +727,9 @@ wxWebSessionWinHTTP::CreateRequest(wxWebSession& session,
 
 wxVersionInfo wxWebSessionWinHTTP::GetLibraryVersionInfo()
 {
-    int verMaj, verMin, verMicro;
-    wxGetOsVersion(&verMaj, &verMin, &verMicro);
-    return wxVersionInfo("WinHTTP", verMaj, verMin, verMicro);
+    VersionNumbering versioning;
+    wxGetOsVersion(&versioning.major, &versioning.minor, &versioning.micro.value());
+    return wxVersionInfo("WinHTTP", versioning);
 }
 
 

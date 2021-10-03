@@ -18,6 +18,7 @@
 #include "wx/intl.h"
 #include "wx/palette.h"
 #include "wx/stream.h"
+#include "wx/stringutils.h"
 
 #ifndef WX_PRECOMP
     #include <tuple>
@@ -825,13 +826,13 @@ bool wxPNGHandler::SaveFile( wxImage *image, wxOutputStream& stream, bool verbos
 {
     // The version string seems to always have a leading space and a trailing
     // new line, get rid of them both.
-    wxString str = png_get_header_version(nullptr) + 1;
-    str.Replace("\n", "");
+    std::string str = png_get_header_version(nullptr) + 1;
+    wx::utils::ReplaceAll(str, "\n", "");
 
     return {"libpng",
-            PNG_LIBPNG_VER_MAJOR,
-            PNG_LIBPNG_VER_MINOR,
-            PNG_LIBPNG_VER_RELEASE,
+            {PNG_LIBPNG_VER_MAJOR,
+             PNG_LIBPNG_VER_MINOR,
+             PNG_LIBPNG_VER_RELEASE},
             str};
 }
 

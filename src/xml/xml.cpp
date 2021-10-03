@@ -1175,7 +1175,7 @@ bool wxXmlDocument::Save(wxOutputStream& stream, int indentstep) const
 
 /*static*/ wxVersionInfo wxXmlDocument::GetLibraryVersionInfo()
 {
-    return {"expat", XML_MAJOR_VERSION, XML_MINOR_VERSION, XML_MICRO_VERSION};
+    return {"expat", {XML_MAJOR_VERSION, XML_MINOR_VERSION, XML_MICRO_VERSION}};
 }
 
 #endif // wxUSE_XML

@@ -20,6 +20,7 @@
 #include "wx/module.h"
 #include "wx/geometry/size.h"
 #include "wx/wxcrtvararg.h"
+#include "wx/stringutils.h"
 
 #ifndef WX_PRECOMP
     #include <gsl/gsl>
@@ -870,25 +871,22 @@ bool wxTIFFHandler::DoCanRead( wxInputStream& stream )
 
 /*static*/ wxVersionInfo wxTIFFHandler::GetLibraryVersionInfo()
 {
-    int major,
-        minor,
-        micro;
+    VersionNumbering versioning;
 
-    const wxString ver(::TIFFGetVersion());
-    if ( wxSscanf(ver, "LIBTIFF, Version %d.%d.%d", &major, &minor, &micro) != 3 )
+    const std::string ver(::TIFFGetVersion());
+
+    if ( wxSscanf(ver, "LIBTIFF, Version %d.%d.%d", &versioning.major, &versioning.minor, &versioning.micro) != 3 )
     {
         wxLogDebug("Unrecognized libtiff version string \"%s\"", ver);
 
-        major =
-        minor =
-        micro = 0;
+        versioning = {0, 0, 0};
     }
 
-    wxString copyright;
-    const wxString desc = ver.BeforeFirst('\n', &copyright);
-    copyright.Replace("\n", "");
+    std::string copyright = wx::utils::AfterFirst(ver, '\n');
+    const auto desc = wx::utils::BeforeFirst(ver, '\n');
+    wx::utils::ReplaceAll(copyright, "\n", "");
 
-    return {"libtiff", major, minor, micro, desc, copyright};
+    return {"libtiff", versioning, desc, copyright};
 }
 
 #endif  // wxUSE_LIBTIFF

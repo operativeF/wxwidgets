@@ -10,68 +10,71 @@
 #ifndef _WX_VERSIONINFO_H_
 #define _WX_VERSIONINFO_H_
 
-#include "wx/string.h"
+#include <optional>
+
+#include <fmt/core.h>
 
 // ----------------------------------------------------------------------------
 // wxVersionInfo: represents version information
 // ----------------------------------------------------------------------------
 
+struct VersionNumbering
+{
+    int major{};
+    int minor{};
+    std::optional<int> micro{};
+};
+
 class wxVersionInfo
 {
 public:
-    wxVersionInfo(const wxString& name = wxString(),
-                  int major = 0,
-                  int minor = 0,
-                  int micro = 0,
-                  const wxString& description = wxString(),
-                  const wxString& copyright = wxString())
-        : m_name(name)
-        , m_description(description)
-        , m_copyright(copyright)
+    constexpr wxVersionInfo(const std::string& name = {},
+                  VersionNumbering versionNum = {},
+                  const std::string& description = {},
+                  const std::string& copyright = {})
+        : m_name{name}
+        , m_description{description}
+        , m_copyright{copyright}
+        , m_versionNum{versionNum}
     {
-        m_major = major;
-        m_minor = minor;
-        m_micro = micro;
     }
 
-    // Default copy ctor, assignment operator and dtor are ok.
+    const std::string& GetName() const { return m_name; }
 
-
-    const wxString& GetName() const { return m_name; }
-
-    int GetMajor() const { return m_major; }
-    int GetMinor() const { return m_minor; }
-    int GetMicro() const { return m_micro; }
-
-    wxString ToString() const
+    const VersionNumbering& GetVersionNum() const
     {
-        return HasDescription() ? GetDescription() : GetVersionString();
+        return m_versionNum;
     }
 
-    wxString GetVersionString() const
+    std::string ToString() const
     {
-        wxString str;
-        str << m_name << ' ' << GetMajor() << '.' << GetMinor();
-        if ( GetMicro() )
-            str << '.' << GetMicro();
-
-        return str;
+        return !m_description.empty() ? GetDescription() : GetVersionString();
     }
 
-    bool HasDescription() const { return !m_description.empty(); }
-    const wxString& GetDescription() const { return m_description; }
+    std::string GetVersionString() const
+    {
+        std::string optMicroVersion;
 
-    bool HasCopyright() const { return !m_copyright.empty(); }
-    const wxString& GetCopyright() const { return m_copyright; }
+        if(m_versionNum.micro.has_value())
+        {
+            optMicroVersion = fmt::format(".{}", m_versionNum.micro.value());
+        }
+
+        return fmt::format("{} {}.{}{}", m_name,
+                                         m_versionNum.major,
+                                         m_versionNum.minor,
+                                         optMicroVersion);
+    }
+
+    const std::string& GetDescription() const { return m_description; }
+    const std::string& GetCopyright() const { return m_copyright; }
 
 private:
-    wxString m_name,
-             m_description,
-             m_copyright;
+    std::string m_name;
+    std::string m_description;
+    std::string m_copyright;
 
-    int m_major,
-        m_minor,
-        m_micro;
+    VersionNumbering m_versionNum;
 };
 
 #endif // _WX_VERSIONINFO_H_

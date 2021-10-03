@@ -1333,12 +1333,12 @@ wxVersionInfo wxGetLibraryVersionInfo()
                             QT_VERSION_STR);
 #endif // __WXQT__
 
-    return wxVersionInfo(wxS("wxWidgets"),
-                         wxMAJOR_VERSION,
-                         wxMINOR_VERSION,
-                         wxRELEASE_NUMBER,
-                         msg,
-                         wxS("Copyright (c) 1995-2021 wxWidgets team"));
+    return wxVersionInfo("wxWidgets",
+                         {wxMAJOR_VERSION,
+                          wxMINOR_VERSION,
+                          wxRELEASE_NUMBER},
+                          msg,
+                          "Copyright (c) 1995-2021 wxWidgets team");
 }
 
 void wxInfoMessageBox(wxWindow* parent)
