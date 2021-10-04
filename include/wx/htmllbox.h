@@ -302,6 +302,7 @@ protected:
             wxVListBox::InitEvent(event, n);
         }
 
+private:
     std::vector<std::string>   m_items;
     std::vector<void*>      m_HTMLclientData;
 

@@ -143,13 +143,13 @@ TEST_CASE_FIXTURE(WindowTestCase, "Window::Mouse")
     // Try creating the caret in two different, but normally equivalent, ways.
     SUBCASE("Caret 1-step")
     {
-        caret = std::make_unique<wxCaret>(m_window, 16, 16);
+        caret = std::make_unique<wxCaret>(m_window, wxSize{16, 16});
     }
 
     SUBCASE("Caret 2-step")
     {
         caret = std::make_unique<wxCaret>();
-        caret->Create(m_window, 16, 16);
+        caret->Create(m_window, wxSize{16, 16});
     }
 
     m_window->SetCaret(std::move(caret));

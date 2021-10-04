@@ -122,7 +122,7 @@ public:
     }
 
 
-protected:
+private:
     std::vector<wxDataFormat> m_formats;
 
 public:

@@ -139,11 +139,14 @@ protected:
 private:
     static wxCalendarDateAttr m_mark;
 
-    wxColour m_colText,
-             m_colBack,
-             m_colBorder;
+    wxColour m_colText;
+    wxColour m_colBack;
+    wxColour m_colBorder;
+
     wxFont   m_font;
+    
     wxCalendarDateBorder m_border;
+    
     bool m_holiday;
 };
 

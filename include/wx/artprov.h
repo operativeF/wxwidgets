@@ -229,8 +229,6 @@ private:
     static void CommonAddingProvider();
     static wxIconBundle DoGetIconBundle(const wxArtID& id,
                                         const wxArtClient& client);
-
-private:
     // list of providers:
     inline static wxArtProvidersList *sm_providers{nullptr};
     // art resources cache (so that CreateXXX is not called that often):

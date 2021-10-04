@@ -17,11 +17,6 @@ public:
     wxCaret() = default;
         // create the caret of given (in pixels) width and height and associate
         // with the given window
-    wxCaret(wxWindow *window, int width, int height)
-    {
-        Create(window, width, height);
-    }
-        // same as above
     wxCaret(wxWindowBase *window, const wxSize& size)
     {
         Create(window, size);

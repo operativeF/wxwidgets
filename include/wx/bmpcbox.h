@@ -96,9 +96,11 @@ protected:
 
     void UpdateInternals();
 
+    // FIXME: Remove protected data
     std::vector<void*>  m_bitmaps;  // Images associated with items
     wxSize              m_usedImgSize{-1, -1};  // Size of bitmaps
 
+private:
     int                 m_imgAreaWidth{0};  // Width and height of area next to text field
     int                 m_fontHeight{0};
     int                 m_indent{0};

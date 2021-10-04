@@ -37,11 +37,10 @@ public:
     virtual bool CanUndo() const { return m_canUndo; }
     virtual wxString GetName() const { return m_commandName; }
 
-protected:
+private:
     bool     m_canUndo;
     wxString m_commandName;
 
-private:
     wxDECLARE_CLASS(wxCommand);
 };
 

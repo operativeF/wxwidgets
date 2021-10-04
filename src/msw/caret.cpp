@@ -65,7 +65,7 @@ bool wxCaret::MSWCreateCaret()
     if ( !m_hasCaret )
     {
         CALL_CARET_API(CreateCaret, (GetHwndOf(GetWindow()), nullptr,
-                                     m_width, m_height));
+                                     m_size.x, m_size.y));
 
         m_hasCaret = true;
     }
@@ -148,7 +148,7 @@ void wxCaret::DoMove()
         // for compatibility with the generic version, the coordinates are
         // client ones
         wxPoint pt = GetWindow()->GetClientAreaOrigin();
-        CALL_CARET_API(SetCaretPos, (m_x + pt.x, m_y + pt.y));
+        CALL_CARET_API(SetCaretPos, (m_pos.x + pt.x, m_pos.y + pt.y));
     }
     //else: we don't have caret right now, nothing to do (this does happen)
 }

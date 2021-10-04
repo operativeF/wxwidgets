@@ -43,11 +43,6 @@ public:
     wxCaretBase() = default;
         // create the caret of given (in pixels) width and height and associate
         // with the given window
-    wxCaretBase(wxWindowBase *window, int width, int height)
-    {
-        Create(window, width, height);
-    }
-        // same as above
     wxCaretBase(wxWindowBase *window, const wxSize& size)
     {
         Create(window, size);
@@ -64,42 +59,37 @@ public:
     // Create() functions - same as ctor but returns the success code
     // --------------------------------------------------------------
 
-        // same as ctor
-    [[maybe_unused]] bool Create(wxWindowBase *window, int width, int height)
-        { return DoCreate(window, width, height); }
-        // same as ctor
-    [[maybe_unused]] bool Create(wxWindowBase *window, const wxSize& size)
-        { return DoCreate(window, size.x, size.y); }
+    // same as ctor
+    [[maybe_unused]] bool Create(wxWindowBase *window, wxSize sz)
+        { return DoCreate(window, sz); }
 
         // is the caret valid?
-    bool IsOk() const { return m_width != 0 && m_height != 0; }
+    bool IsOk() const { return m_size != wxSize{0, 0}; }
 
         // is the caret currently shown?
     bool IsVisible() const { return m_countVisible > 0; }
 
         // get the caret position
-    wxPoint GetPosition() const { return wxPoint(m_x, m_y); }
+    wxPoint GetPosition() const { return m_pos; }
 
         // get the caret size
-    wxSize GetSize() const { return wxSize(m_width, m_height); }
+    wxSize GetSize() const { return m_size; }
 
         // get the window we're associated with
     wxWindow *GetWindow() const { return (wxWindow *)m_window; }
 
         // change the size of the caret
-    void SetSize(int width, int height) {
-        m_width = width;
-        m_height = height;
+    void SetSize(wxSize sz)
+    {
+        m_size = sz;
         DoSize();
     }
-    void SetSize(const wxSize& size) { SetSize(size.x, size.y); }
-
 
     // operations
     // ----------
 
     // move the caret to given position (in logical coords)
-    void Move(const wxPoint& pt) { m_x = pt.x; m_y = pt.y; DoMove(); }
+    void Move(const wxPoint& pt) { m_pos = pt; DoMove(); }
 
         // show/hide the caret (should be called by wxWindow when needed):
         // Show() must be called as many times as Hide() + 1 to make the caret
@@ -136,11 +126,10 @@ public:
 protected:
     // these functions may be overridden in the derived classes, but they
     // should call the base class version first
-    virtual bool DoCreate(wxWindowBase *window, int width, int height)
+    virtual bool DoCreate(wxWindowBase *window, wxSize sz)
     {
         m_window = window;
-        m_width = width;
-        m_height = height;
+        m_size = sz;
         DoSize();
 
         return true;
@@ -150,15 +139,13 @@ protected:
     virtual void DoShow() = 0;
     virtual void DoHide() = 0;
     virtual void DoMove() = 0;
-    virtual void DoSize() { }
+    virtual void DoSize() = 0;
 
     // the size of the caret
-    int m_width{0};
-    int m_height{0};
+    wxSize m_size{};
 
     // the position of the caret
-    int m_x{0};
-    int m_y{0};
+    wxPoint m_pos{};
 
     // the window we're associated with
     wxWindowBase *m_window{nullptr};
@@ -225,7 +212,7 @@ public:
     wxCaretSuspend& operator=(wxCaretSuspend&&) = default;
 
 private:
-    wxCaret *m_caret;
+    wxCaret* m_caret;
     bool     m_show;
 };
 

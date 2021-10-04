@@ -197,7 +197,6 @@ protected:
     static std::string RemoveMarkup(const std::string& markup);
 #endif // wxUSE_MARKUP
 
-
     // this field contains the label in wx format, i.e. with '&' mnemonics,
     // as it was passed to the last SetLabel() call
     std::string m_labelOrig;

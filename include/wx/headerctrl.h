@@ -434,7 +434,7 @@ public:
 
     wxEvent *Clone() const override { return new wxHeaderCtrlEvent(*this); }
 
-protected:
+private:
     // the column affected by the event
     int m_col{-1};
 

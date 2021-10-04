@@ -50,9 +50,9 @@ protected:
     // Under OSX, legacy wxColourDialog had opacity selector
     // (slider) always enabled, so for backward compatibilty
     // we should tell the dialog to enable it by default.
-    bool m_chooseAlpha = true;
+    bool m_chooseAlpha{true};
 #else
-    bool m_chooseAlpha = false;
+    bool m_chooseAlpha{false};
 #endif // __WXOSX__ / !__WXOSX__
 };
 

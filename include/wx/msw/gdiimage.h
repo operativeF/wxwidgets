@@ -169,9 +169,10 @@ public:
                       const std::string& name,
                       wxBitmapType type) const = 0;
 
-protected:
+private:
     std::string  m_name;
     std::string  m_extension;
+
     wxBitmapType m_type{wxBitmapType::Invalid};
 };
 

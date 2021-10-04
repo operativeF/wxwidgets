@@ -53,11 +53,11 @@ public:
     constexpr int GetHeight() const { return height; }
     constexpr void SetHeight(int h) { height = h; }
 
-    constexpr wxPoint GetPosition() const { return wxPoint(x, y); }
+    constexpr wxPoint GetPosition() const { return wxPoint{x, y}; }
     constexpr void SetPosition( const wxPoint &p ) { x = p.x; y = p.y; }
 
-    wxSize GetSize() const { return wxSize(width, height); }
-    void SetSize( const wxSize &s ) { width = s.x; height = s.y; }
+    constexpr wxSize GetSize() const { return wxSize{width, height}; }
+    constexpr void SetSize( const wxSize &s ) { width = s.x; height = s.y; }
 
     constexpr bool IsEmpty() const { return (width <= 0) || (height <= 0); }
 
