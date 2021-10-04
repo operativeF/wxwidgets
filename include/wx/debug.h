@@ -403,7 +403,7 @@ extern void WXDLLIMPEXP_BASE wxAbort();
 
 // Use of wxFalse instead of false suppresses compiler warnings about testing
 // constant expression
-inline constexpr bool wxFalse = false;
+constexpr bool wxFalse = false;
 
 #define wxAssertFailure wxFalse
 

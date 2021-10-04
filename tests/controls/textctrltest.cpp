@@ -758,7 +758,7 @@ TEST_CASE_FIXTURE(TextCtrlTest, "Text control test")
             // pure one line
             text = wxS("1234");
             m_entry->SetValue(text);
-            const long numChars_1 = text.Length();
+            const std::size_t numChars_1 = text.Length();
             CHECK_EQ(numChars_1, m_entry->GetLastPosition());
             for (long i = 0; i <= numChars_1; i++)
             {
@@ -774,7 +774,7 @@ TEST_CASE_FIXTURE(TextCtrlTest, "Text control test")
             // with new line characters
             text = wxS("123\nab\nX");
             m_entry->SetValue(text);
-            const long numChars_2 = text.Length();
+            const std::size_t numChars_2 = text.Length();
             CHECK_EQ(numChars_2, m_entry->GetLastPosition());
             for (long i = 0; i <= numChars_2; i++)
             {

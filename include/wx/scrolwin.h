@@ -26,7 +26,7 @@ class WXDLLIMPEXP_FWD_CORE wxScrollHelperEvtHandler;
 class WXDLLIMPEXP_FWD_BASE wxTimer;
 
 // default scrolled window style: scroll in both directions
-inline constexpr int wxScrolledWindowStyle = wxHSCROLL | wxVSCROLL;
+constexpr unsigned int wxScrolledWindowStyle = wxHSCROLL | wxVSCROLL;
 
 // values for the second argument of wxScrollHelper::ShowScrollbars()
 enum class wxScrollbarVisibility

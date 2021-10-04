@@ -100,7 +100,7 @@ TEST_CASE("VariantListReturnSafeArray")
     CHECK_EQ( 0, bound );
     CHECK( safeArray.GetUBound(1, bound) );
 
-    const long count = variant.GetCount();
+    const std::size_t count = variant.GetCount();
 
     // bound + 1 because safearray elements are accessed by index ranging from
     // LBound to UBound inclusive

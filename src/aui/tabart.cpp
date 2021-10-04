@@ -287,7 +287,7 @@ void wxAuiGenericTabArt::DrawBackground(wxDC& dc,
     wxColor bottom_color = m_baseColour.ChangeLightness(bottomLightness);
     wxRect r;
 
-   if (m_flags &wxAUI_NB_BOTTOM)
+   if (m_flags & wxAUI_NB_BOTTOM)
        r = wxRect(rect.x, rect.y, rect.width+2, rect.height);
    // TODO: else if (m_flags &wxAUI_NB_LEFT) {}
    // TODO: else if (m_flags &wxAUI_NB_RIGHT) {}

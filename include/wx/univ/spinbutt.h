@@ -18,8 +18,8 @@
 // ----------------------------------------------------------------------------
 
 // actions supported by this control
-inline constexpr wxChar wxACTION_SPIN_INC[]    = wxT("inc");
-inline constexpr wxChar wxACTION_SPIN_DEC[]    = wxT("dec");
+constexpr wxChar wxACTION_SPIN_INC[]    = wxT("inc");
+constexpr wxChar wxACTION_SPIN_DEC[]    = wxT("dec");
 
 class WXDLLIMPEXP_CORE wxSpinButton : public wxSpinButtonBase,
                                  public wxControlWithArrows
@@ -30,14 +30,14 @@ public:
                  wxWindowID id = wxID_ANY,
                  const wxPoint& pos = wxDefaultPosition,
                  const wxSize& size = wxDefaultSize,
-                 long style = wxSP_VERTICAL | wxSP_ARROW_KEYS,
+                 unsigned int style = wxSP_VERTICAL | wxSP_ARROW_KEYS,
                  const wxString& name = wxSPIN_BUTTON_NAME);
 
     bool Create(wxWindow *parent,
                 wxWindowID id = wxID_ANY,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = wxSP_VERTICAL | wxSP_ARROW_KEYS,
+                unsigned int style = wxSP_VERTICAL | wxSP_ARROW_KEYS,
                 const wxString& name = wxSPIN_BUTTON_NAME);
 
     // implement wxSpinButtonBase methods

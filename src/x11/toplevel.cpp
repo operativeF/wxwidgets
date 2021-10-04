@@ -62,7 +62,7 @@ bool wxTopLevelWindowX11::Create(wxWindow *parent,
                                  const wxString& title,
                                  const wxPoint& pos,
                                  const wxSize& size,
-                                 long style,
+                                 unsigned int style,
                                  const wxString& name)
 {
     // init our fields
@@ -333,7 +333,7 @@ void wxTopLevelWindowX11::Restore()
 // wxTopLevelWindowX11 fullscreen
 // ----------------------------------------------------------------------------
 
-bool wxTopLevelWindowX11::ShowFullScreen(bool show, long style)
+bool wxTopLevelWindowX11::ShowFullScreen(bool show, unsigned int style)
 {
     if (show)
     {
@@ -651,7 +651,7 @@ struct MwmHints {
 
 // Set the window manager decorations according to the
 // given wxWidgets style
-bool wxSetWMDecorations(Window w, long style)
+bool wxSetWMDecorations(Window w, unsigned int style)
 {
 #if wxUSE_NANOX
     GR_WM_PROPERTIES wmProp;

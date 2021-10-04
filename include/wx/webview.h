@@ -263,7 +263,7 @@ public:
     //Get the pointer to the underlying native engine.
     virtual void* GetNativeBackend() const = 0;
     //Find function
-    virtual long Find(const wxString& text, int flags = wxWEBVIEW_FIND_DEFAULT);
+    virtual long Find(const wxString& text, unsigned int flags = wxWEBVIEW_FIND_DEFAULT);
 
 protected:
     virtual void DoSetPage(const wxString& html, const wxString& baseUrl) = 0;

@@ -102,10 +102,10 @@ public:
     int GetLastRectBottom();
 
     // Draw the floats inside a rect
-    void Draw(wxDC& dc, wxRichTextDrawingContext& context, const wxRichTextRange& range, const wxRichTextSelection& selection, const wxRect& rect, int descent, int style);
+    void Draw(wxDC& dc, wxRichTextDrawingContext& context, const wxRichTextRange& range, const wxRichTextSelection& selection, const wxRect& rect, int descent, unsigned int style);
 
     // HitTest the floats
-    int HitTest(wxDC& dc, wxRichTextDrawingContext& context, const wxPoint& pt, long& textPosition, wxRichTextObject** obj, wxRichTextObject** contextObj, int flags);
+    int HitTest(wxDC& dc, wxRichTextDrawingContext& context, const wxPoint& pt, long& textPosition, wxRichTextObject** obj, wxRichTextObject** contextObj, unsigned int flags);
 
     // Get floating object count
     int GetFloatingObjectCount() const { return m_left.GetCount() + m_right.GetCount(); }
@@ -127,9 +127,9 @@ public:
 
     static void FreeFloatRectMapArray(wxRichTextFloatRectMapArray& array);
 
-    static void DrawFloat(const wxRichTextFloatRectMapArray& array, wxDC& dc, wxRichTextDrawingContext& context, const wxRichTextRange& range, const wxRichTextSelection& selection, const wxRect& rect, int descent, int style);
+    static void DrawFloat(const wxRichTextFloatRectMapArray& array, wxDC& dc, wxRichTextDrawingContext& context, const wxRichTextRange& range, const wxRichTextSelection& selection, const wxRect& rect, int descent, unsigned int style);
 
-    static int HitTestFloat(const wxRichTextFloatRectMapArray& array, wxDC& dc, wxRichTextDrawingContext& context, const wxPoint& pt, long& textPosition, wxRichTextObject** obj, wxRichTextObject** contextObj, int flags);
+    static int HitTestFloat(const wxRichTextFloatRectMapArray& array, wxDC& dc, wxRichTextDrawingContext& context, const wxPoint& pt, long& textPosition, wxRichTextObject** obj, wxRichTextObject** contextObj, unsigned int flags);
 
 private:
     wxRichTextFloatRectMapArray m_left;
@@ -403,7 +403,7 @@ int wxRichTextFloatCollector::GetLastRectBottom()
     return ret;
 }
 
-void wxRichTextFloatCollector::DrawFloat(const wxRichTextFloatRectMapArray& array, wxDC& dc, wxRichTextDrawingContext& context, const wxRichTextRange& WXUNUSED(range), const wxRichTextSelection& selection, const wxRect& rect, int descent, int style)
+void wxRichTextFloatCollector::DrawFloat(const wxRichTextFloatRectMapArray& array, wxDC& dc, wxRichTextDrawingContext& context, const wxRichTextRange& WXUNUSED(range), const wxRichTextSelection& selection, const wxRect& rect, int descent, unsigned int style)
 {
     int start = rect.y;
     int end = rect.y + rect.height;
@@ -425,7 +425,7 @@ void wxRichTextFloatCollector::DrawFloat(const wxRichTextFloatRectMapArray& arra
     }
 }
 
-void wxRichTextFloatCollector::Draw(wxDC& dc, wxRichTextDrawingContext& context, const wxRichTextRange& range, const wxRichTextSelection& selection, const wxRect& rect, int descent, int style)
+void wxRichTextFloatCollector::Draw(wxDC& dc, wxRichTextDrawingContext& context, const wxRichTextRange& range, const wxRichTextSelection& selection, const wxRect& rect, int descent, unsigned int style)
 {
     if (m_left.GetCount() > 0)
         DrawFloat(m_left, dc, context, range, selection, rect, descent, style);
@@ -433,7 +433,7 @@ void wxRichTextFloatCollector::Draw(wxDC& dc, wxRichTextDrawingContext& context,
         DrawFloat(m_right, dc, context, range, selection, rect, descent, style);
 }
 
-int wxRichTextFloatCollector::HitTestFloat(const wxRichTextFloatRectMapArray& array, wxDC& dc, wxRichTextDrawingContext& context, const wxPoint& pt, long& textPosition, wxRichTextObject** obj, wxRichTextObject** contextObj, int WXUNUSED(flags))
+int wxRichTextFloatCollector::HitTestFloat(const wxRichTextFloatRectMapArray& array, wxDC& dc, wxRichTextDrawingContext& context, const wxPoint& pt, long& textPosition, wxRichTextObject** obj, wxRichTextObject** contextObj, unsigned int WXUNUSED(flags))
 {
     int i;
     if (array.GetCount() == 0)
@@ -470,7 +470,7 @@ int wxRichTextFloatCollector::HitTestFloat(const wxRichTextFloatRectMapArray& ar
     return wxRICHTEXT_HITTEST_NONE;
 }
 
-int wxRichTextFloatCollector::HitTest(wxDC& dc, wxRichTextDrawingContext& context, const wxPoint& pt, long& textPosition, wxRichTextObject** obj, wxRichTextObject** contextObj, int flags)
+int wxRichTextFloatCollector::HitTest(wxDC& dc, wxRichTextDrawingContext& context, const wxPoint& pt, long& textPosition, wxRichTextObject** obj, wxRichTextObject** contextObj, unsigned int flags)
 {
     int ret = HitTestFloat(m_left, dc, context, pt, textPosition, obj, contextObj, flags);
     if (ret == wxRICHTEXT_HITTEST_NONE)
@@ -671,7 +671,7 @@ int wxRichTextObject::ConvertPixelsToTenthsMM(int ppi, int pixels, double scale)
 
 // Draw the borders and background for the given rectangle and attributes.
 // Width and height are taken to be the outer margin size, not the content.
-bool wxRichTextObject::DrawBoxAttributes(wxDC& dc, wxRichTextBuffer* buffer, const wxRichTextAttr& attr, const wxRect& boxRect, int flags, wxRichTextObject* obj)
+bool wxRichTextObject::DrawBoxAttributes(wxDC& dc, wxRichTextBuffer* buffer, const wxRichTextAttr& attr, const wxRect& boxRect, unsigned int flags, wxRichTextObject* obj)
 {
     // Assume boxRect is the area around the content
     wxRect marginRect = boxRect;
@@ -815,7 +815,7 @@ bool wxRichTextObject::DrawBoxAttributes(wxDC& dc, wxRichTextBuffer* buffer, con
 }
 
 // Draw a border
-bool wxRichTextObject::DrawBorder(wxDC& dc, wxRichTextBuffer* buffer, const wxRichTextAttr& attr, const wxTextAttrBorders& borders, const wxRect& rect, int WXUNUSED(flags))
+bool wxRichTextObject::DrawBorder(wxDC& dc, wxRichTextBuffer* buffer, const wxRichTextAttr& attr, const wxTextAttrBorders& borders, const wxRect& rect, unsigned int WXUNUSED(flags))
 {
     int borderLeft = 0, borderRight = 0, borderTop = 0, borderBottom = 0;
     wxTextAttrDimensionConverter converter(dc, buffer ? buffer->GetScale() : 1.0);
@@ -1219,7 +1219,7 @@ wxPoint wxRichTextObject::GetAbsolutePosition() const
 
 // Hit-testing: returns a flag indicating hit test details, plus
 // information about position
-int wxRichTextObject::HitTest(wxDC& WXUNUSED(dc), wxRichTextDrawingContext& WXUNUSED(context), const wxPoint& pt, long& textPosition, wxRichTextObject** obj, wxRichTextObject** contextObj, int WXUNUSED(flags))
+int wxRichTextObject::HitTest(wxDC& WXUNUSED(dc), wxRichTextDrawingContext& WXUNUSED(context), const wxPoint& pt, long& textPosition, wxRichTextObject** obj, wxRichTextObject** contextObj, unsigned int WXUNUSED(flags))
 {
     if (!IsShown())
         return wxRICHTEXT_HITTEST_NONE;
@@ -1242,7 +1242,7 @@ int wxRichTextObject::HitTest(wxDC& WXUNUSED(dc), wxRichTextDrawingContext& WXUN
 bool wxRichTextObject::LayoutToBestSize(wxDC& dc, wxRichTextDrawingContext& context, wxRichTextBuffer* buffer,
     const wxRichTextAttr& parentAttr, const wxRichTextAttr& attr,
     const wxRect& availableParentSpace, const wxRect& availableContainerSpace,
-    int style)
+    unsigned int style)
 {
     wxRect availableChildRect = AdjustAvailableSpace(dc, buffer, parentAttr, attr, availableParentSpace, availableContainerSpace);
 #if 0
@@ -1433,7 +1433,7 @@ void wxRichTextCompositeObject::Copy(const wxRichTextCompositeObject& obj)
 
 /// Hit-testing: returns a flag indicating hit test details, plus
 /// information about position
-int wxRichTextCompositeObject::HitTest(wxDC& dc, wxRichTextDrawingContext& context, const wxPoint& pt, long& textPosition, wxRichTextObject** obj, wxRichTextObject** contextObj, int flags)
+int wxRichTextCompositeObject::HitTest(wxDC& dc, wxRichTextDrawingContext& context, const wxPoint& pt, long& textPosition, wxRichTextObject** obj, wxRichTextObject** contextObj, unsigned int flags)
 {
     if (!IsShown())
         return wxRICHTEXT_HITTEST_NONE;
@@ -1755,7 +1755,7 @@ void wxRichTextCompositeObject::Dump(wxTextOutputStream& stream)
 
 /// Get/set the object size for the given range. Returns false if the range
 /// is invalid for this object.
-bool wxRichTextCompositeObject::GetRangeSize(const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, int flags, const wxPoint& position, const wxSize& parentSize, std::vector<int>* partialExtents) const
+bool wxRichTextCompositeObject::GetRangeSize(const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, unsigned int flags, const wxPoint& position, const wxSize& parentSize, std::vector<int>* partialExtents) const
 {
     if (!range.IsWithin(GetRange()))
         return false;
@@ -2021,7 +2021,7 @@ void wxRichTextParagraphLayoutBox::UpdateRanges()
 }
 
 // HitTest
-int wxRichTextParagraphLayoutBox::HitTest(wxDC& dc, wxRichTextDrawingContext& context, const wxPoint& pt, long& textPosition, wxRichTextObject** obj, wxRichTextObject** contextObj, int flags)
+int wxRichTextParagraphLayoutBox::HitTest(wxDC& dc, wxRichTextDrawingContext& context, const wxPoint& pt, long& textPosition, wxRichTextObject** obj, wxRichTextObject** contextObj, unsigned int flags)
 {
     if (!IsShown())
         return wxRICHTEXT_HITTEST_NONE;
@@ -2046,7 +2046,7 @@ int wxRichTextParagraphLayoutBox::HitTest(wxDC& dc, wxRichTextDrawingContext& co
 }
 
 /// Draw the floating objects
-void wxRichTextParagraphLayoutBox::DrawFloats(wxDC& dc, wxRichTextDrawingContext& context, const wxRichTextRange& range, const wxRichTextSelection& selection, const wxRect& rect, int descent, int style)
+void wxRichTextParagraphLayoutBox::DrawFloats(wxDC& dc, wxRichTextDrawingContext& context, const wxRichTextRange& range, const wxRichTextSelection& selection, const wxRect& rect, int descent, unsigned int style)
 {
     if (wxRichTextBuffer::GetFloatingLayoutMode() && m_floatCollector)
         m_floatCollector->Draw(dc, context, range, selection, rect, descent, style);
@@ -2062,7 +2062,7 @@ void wxRichTextParagraphLayoutBox::MoveAnchoredObjectToParagraph(wxRichTextParag
 }
 
 /// Draw the item
-bool wxRichTextParagraphLayoutBox::Draw(wxDC& dc, wxRichTextDrawingContext& context, const wxRichTextRange& range, const wxRichTextSelection& selection, const wxRect& rect, int descent, int style)
+bool wxRichTextParagraphLayoutBox::Draw(wxDC& dc, wxRichTextDrawingContext& context, const wxRichTextRange& range, const wxRichTextSelection& selection, const wxRect& rect, int descent, unsigned int style)
 {
     context.SetLayingOut(false);
 
@@ -2074,7 +2074,7 @@ bool wxRichTextParagraphLayoutBox::Draw(wxDC& dc, wxRichTextDrawingContext& cont
     wxRichTextAttr attr(GetAttributes());
     AdjustAttributes(attr, context);
 
-    int flags = style;
+    unsigned int flags = style;
     if (selection.IsValid() &&
         ((GetParentContainer() != this && selection.GetContainer() == this && selection.WithinSelection(GetRange().GetStart(), GetParentContainer()))))
     {
@@ -2123,7 +2123,7 @@ bool wxRichTextParagraphLayoutBox::Draw(wxDC& dc, wxRichTextDrawingContext& cont
 }
 
 /// Lay the item out
-bool wxRichTextParagraphLayoutBox::Layout(wxDC& dc, wxRichTextDrawingContext& context, const wxRect& rect, const wxRect& parentRect, int style)
+bool wxRichTextParagraphLayoutBox::Layout(wxDC& dc, wxRichTextDrawingContext& context, const wxRect& rect, const wxRect& parentRect, unsigned int style)
 {
     context.SetLayingOut(true);
 
@@ -2480,7 +2480,7 @@ bool wxRichTextParagraphLayoutBox::Layout(wxDC& dc, wxRichTextDrawingContext& co
 }
 
 /// Get/set the size for the given range.
-bool wxRichTextParagraphLayoutBox::GetRangeSize(const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, int flags, const wxPoint& position, const wxSize& parentSize, std::vector<int>* WXUNUSED(partialExtents)) const
+bool wxRichTextParagraphLayoutBox::GetRangeSize(const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, unsigned int flags, const wxPoint& position, const wxSize& parentSize, std::vector<int>* WXUNUSED(partialExtents)) const
 {
     wxSize sz;
 
@@ -3456,7 +3456,7 @@ wxRichTextObject* wxRichTextParagraphLayoutBox::GetLeafObjectAtPosition(long pos
 }
 
 /// Set character or paragraph text attributes: apply character styles only to immediate text nodes
-bool wxRichTextParagraphLayoutBox::SetStyle(const wxRichTextRange& range, const wxRichTextAttr& style, int flags)
+bool wxRichTextParagraphLayoutBox::SetStyle(const wxRichTextRange& range, const wxRichTextAttr& style, unsigned int flags)
 {
     bool characterStyle = false;
     bool paragraphStyle = false;
@@ -3672,7 +3672,7 @@ bool wxRichTextParagraphLayoutBox::SetStyle(const wxRichTextRange& range, const 
 }
 
 // Just change the attributes for this single object.
-void wxRichTextParagraphLayoutBox::SetStyle(wxRichTextObject* obj, const wxRichTextAttr& textAttr, int flags)
+void wxRichTextParagraphLayoutBox::SetStyle(wxRichTextObject* obj, const wxRichTextAttr& textAttr, unsigned int flags)
 {
     wxRichTextBuffer* buffer = GetBuffer();
     bool withUndo = flags & wxRICHTEXT_SETSTYLE_WITH_UNDO;
@@ -3919,7 +3919,7 @@ bool wxRichTextParagraphLayoutBox::HasParagraphAttributes(const wxRichTextRange&
 
                 // These flags can mess up EqPartial because they don't represent existence of the attributes,
                 // only the attributes.
-                int flags = wxTEXT_ATTR_AVOID_PAGE_BREAK_BEFORE|wxTEXT_ATTR_AVOID_PAGE_BREAK_AFTER|wxTEXT_ATTR_PAGE_BREAK;
+                unsigned int flags = wxTEXT_ATTR_AVOID_PAGE_BREAK_BEFORE|wxTEXT_ATTR_AVOID_PAGE_BREAK_AFTER|wxTEXT_ATTR_PAGE_BREAK;
                 int theseFlags = (textAttr.GetFlags() & ~flags) | (textAttr.GetFlags() & flags & style.GetFlags());
                 textAttr.SetFlags(theseFlags);
 
@@ -3942,7 +3942,7 @@ void wxRichTextParagraphLayoutBox::PrepareContent(wxRichTextParagraphLayoutBox& 
 }
 
 /// Set character or paragraph properties
-bool wxRichTextParagraphLayoutBox::SetProperties(const wxRichTextRange& range, const wxRichTextProperties& properties, int flags)
+bool wxRichTextParagraphLayoutBox::SetProperties(const wxRichTextRange& range, const wxRichTextProperties& properties, unsigned int flags)
 {
     wxRichTextBuffer* buffer = GetBuffer();
 
@@ -4309,7 +4309,7 @@ bool wxRichTextParagraphLayoutBox::ApplyStyleSheet(wxRichTextStyleSheet* styleSh
 }
 
 /// Set list style
-bool wxRichTextParagraphLayoutBox::SetListStyle(const wxRichTextRange& range, wxRichTextListStyleDefinition* def, int flags, int startFrom, int specifiedLevel)
+bool wxRichTextParagraphLayoutBox::SetListStyle(const wxRichTextRange& range, wxRichTextListStyleDefinition* def, unsigned int flags, int startFrom, int specifiedLevel)
 {
     wxRichTextBuffer* buffer = GetBuffer();
     wxRichTextStyleSheet* styleSheet = buffer->GetStyleSheet();
@@ -4433,7 +4433,7 @@ bool wxRichTextParagraphLayoutBox::SetListStyle(const wxRichTextRange& range, wx
     return true;
 }
 
-bool wxRichTextParagraphLayoutBox::SetListStyle(const wxRichTextRange& range, const wxString& defName, int flags, int startFrom, int specifiedLevel)
+bool wxRichTextParagraphLayoutBox::SetListStyle(const wxRichTextRange& range, const wxString& defName, unsigned int flags, int startFrom, int specifiedLevel)
 {
     wxRichTextBuffer* buffer = GetBuffer();
     if (buffer && buffer->GetStyleSheet())
@@ -4446,20 +4446,20 @@ bool wxRichTextParagraphLayoutBox::SetListStyle(const wxRichTextRange& range, co
 }
 
 /// Clear list for given range
-bool wxRichTextParagraphLayoutBox::ClearListStyle(const wxRichTextRange& range, int flags)
+bool wxRichTextParagraphLayoutBox::ClearListStyle(const wxRichTextRange& range, unsigned int flags)
 {
     return SetListStyle(range, nullptr, flags);
 }
 
 /// Number/renumber any list elements in the given range
-bool wxRichTextParagraphLayoutBox::NumberList(const wxRichTextRange& range, wxRichTextListStyleDefinition* def, int flags, int startFrom, int specifiedLevel)
+bool wxRichTextParagraphLayoutBox::NumberList(const wxRichTextRange& range, wxRichTextListStyleDefinition* def, unsigned int flags, int startFrom, int specifiedLevel)
 {
     return DoNumberList(range, range, 0, def, flags, startFrom, specifiedLevel);
 }
 
 /// Number/renumber any list elements in the given range. Also do promotion or demotion of items, if specified
 bool wxRichTextParagraphLayoutBox::DoNumberList(const wxRichTextRange& range, const wxRichTextRange& promotionRange, int promoteBy,
-                                                wxRichTextListStyleDefinition* def, int flags, int startFrom, int specifiedLevel)
+                                                wxRichTextListStyleDefinition* def, unsigned int flags, int startFrom, int specifiedLevel)
 {
     wxRichTextBuffer* buffer = GetBuffer();
     wxRichTextStyleSheet* styleSheet = buffer->GetStyleSheet();
@@ -4639,7 +4639,7 @@ bool wxRichTextParagraphLayoutBox::DoNumberList(const wxRichTextRange& range, co
     return true;
 }
 
-bool wxRichTextParagraphLayoutBox::NumberList(const wxRichTextRange& range, const wxString& defName, int flags, int startFrom, int specifiedLevel)
+bool wxRichTextParagraphLayoutBox::NumberList(const wxRichTextRange& range, const wxString& defName, unsigned int flags, int startFrom, int specifiedLevel)
 {
     wxRichTextBuffer* buffer = GetBuffer();
     if (buffer->GetStyleSheet())
@@ -4653,7 +4653,7 @@ bool wxRichTextParagraphLayoutBox::NumberList(const wxRichTextRange& range, cons
 }
 
 /// Promote the list items within the given range. promoteBy can be a positive or negative number, e.g. 1 or -1
-bool wxRichTextParagraphLayoutBox::PromoteList(int promoteBy, const wxRichTextRange& range, wxRichTextListStyleDefinition* def, int flags, int specifiedLevel)
+bool wxRichTextParagraphLayoutBox::PromoteList(int promoteBy, const wxRichTextRange& range, wxRichTextListStyleDefinition* def, unsigned int flags, int specifiedLevel)
 {
     // TODO
     // One strategy is to first work out the range within which renumbering must occur. Then could pass these two ranges
@@ -4670,7 +4670,7 @@ bool wxRichTextParagraphLayoutBox::PromoteList(int promoteBy, const wxRichTextRa
     return DoNumberList(range, range, promoteBy, def, flags, 1, specifiedLevel);
 }
 
-bool wxRichTextParagraphLayoutBox::PromoteList(int promoteBy, const wxRichTextRange& range, const wxString& defName, int flags, int specifiedLevel)
+bool wxRichTextParagraphLayoutBox::PromoteList(int promoteBy, const wxRichTextRange& range, const wxString& defName, unsigned int flags, int specifiedLevel)
 {
     wxRichTextBuffer* buffer = GetBuffer();
     if (buffer->GetStyleSheet())
@@ -4794,7 +4794,7 @@ wxRichTextParagraph::~wxRichTextParagraph()
 }
 
 /// Draw the item
-bool wxRichTextParagraph::Draw(wxDC& dc, wxRichTextDrawingContext& context, const wxRichTextRange& range, const wxRichTextSelection& selection, const wxRect& rect, int WXUNUSED(descent), int style)
+bool wxRichTextParagraph::Draw(wxDC& dc, wxRichTextDrawingContext& context, const wxRichTextRange& range, const wxRichTextSelection& selection, const wxRect& rect, int WXUNUSED(descent), unsigned int style)
 {
     if (!IsShown())
         return true;
@@ -4959,7 +4959,7 @@ static int wxRichTextGetRangeWidth(const wxRichTextParagraph& para, const wxRich
 }
 
 /// Lay the item out
-bool wxRichTextParagraph::Layout(wxDC& dc, wxRichTextDrawingContext& context, const wxRect& rect, const wxRect& parentRect, int style)
+bool wxRichTextParagraph::Layout(wxDC& dc, wxRichTextDrawingContext& context, const wxRect& rect, const wxRect& parentRect, unsigned int style)
 {
     // Deal with floating objects firstly before the normal layout
     wxRichTextBuffer* buffer = GetBuffer();
@@ -5684,7 +5684,7 @@ void wxRichTextParagraph::ClearLines()
 
 /// Get/set the object size for the given range. Returns false if the range
 /// is invalid for this object.
-bool wxRichTextParagraph::GetRangeSize(const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, int flags, const wxPoint& position, const wxSize& parentSize, std::vector<int>* partialExtents) const
+bool wxRichTextParagraph::GetRangeSize(const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, unsigned int flags, const wxPoint& position, const wxSize& parentSize, std::vector<int>* partialExtents) const
 {
     if (!range.IsWithin(GetRange()))
         return false;
@@ -6015,7 +6015,7 @@ bool wxRichTextParagraph::FindPosition(wxDC& dc, wxRichTextDrawingContext& conte
 
 /// Hit-testing: returns a flag indicating hit test details, plus
 /// information about position
-int wxRichTextParagraph::HitTest(wxDC& dc, wxRichTextDrawingContext& context, const wxPoint& pt, long& textPosition, wxRichTextObject** obj, wxRichTextObject** contextObj, int flags)
+int wxRichTextParagraph::HitTest(wxDC& dc, wxRichTextDrawingContext& context, const wxPoint& pt, long& textPosition, wxRichTextObject** obj, wxRichTextObject** contextObj, unsigned int flags)
 {
     if (!IsShown())
         return wxRICHTEXT_HITTEST_NONE;
@@ -6613,7 +6613,7 @@ void wxRichTextParagraph::ClearDefaultTabs()
     sm_defaultTabs.clear();
 }
 
-void wxRichTextParagraph::LayoutFloat(wxDC& dc, wxRichTextDrawingContext& context, const wxRect& rect, const wxRect& parentRect, int style, wxRichTextFloatCollector* floatCollector)
+void wxRichTextParagraph::LayoutFloat(wxDC& dc, wxRichTextDrawingContext& context, const wxRect& rect, const wxRect& parentRect, unsigned int style, wxRichTextFloatCollector* floatCollector)
 {
     wxTextAttrDimensionConverter converter(dc, GetBuffer() ? GetBuffer()->GetScale() : 1.0, parentRect.GetSize());
 
@@ -6773,7 +6773,7 @@ wxRichTextPlainText::wxRichTextPlainText(const wxString& text, wxRichTextObject*
 #define WIDTH_FOR_DEFAULT_TABS 50
 
 /// Draw the item
-bool wxRichTextPlainText::Draw(wxDC& dc, wxRichTextDrawingContext& context, const wxRichTextRange& range, const wxRichTextSelection& selection, const wxRect& rect, int descent, int WXUNUSED(style))
+bool wxRichTextPlainText::Draw(wxDC& dc, wxRichTextDrawingContext& context, const wxRichTextRange& range, const wxRichTextSelection& selection, const wxRect& rect, int descent, unsigned int WXUNUSED(style))
 {
     wxRichTextParagraph* para = wxDynamicCast(GetParent(), wxRichTextParagraph);
     wxASSERT (para != nullptr);
@@ -7110,7 +7110,7 @@ bool wxRichTextPlainText::DrawTabbedString(wxDC& dc, const wxRichTextAttr& attr,
 }
 
 /// Lay the item out
-bool wxRichTextPlainText::Layout(wxDC& dc, wxRichTextDrawingContext& context, const wxRect& WXUNUSED(rect), const wxRect& WXUNUSED(parentRect), int WXUNUSED(style))
+bool wxRichTextPlainText::Layout(wxDC& dc, wxRichTextDrawingContext& context, const wxRect& WXUNUSED(rect), const wxRect& WXUNUSED(parentRect), unsigned int WXUNUSED(style))
 {
     // Only lay out if we haven't already cached the size
     if (m_size.x == -1)
@@ -7148,7 +7148,7 @@ void wxRichTextPlainText::Copy(const wxRichTextPlainText& obj)
 
 /// Get/set the object size for the given range. Returns false if the range
 /// is invalid for this object.
-bool wxRichTextPlainText::GetRangeSize(const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, int WXUNUSED(flags), const wxPoint& position, const wxSize& WXUNUSED(parentSize), std::vector<int>* partialExtents) const
+bool wxRichTextPlainText::GetRangeSize(const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, unsigned int WXUNUSED(flags), const wxPoint& position, const wxSize& WXUNUSED(parentSize), std::vector<int>* partialExtents) const
 {
     if (!range.IsWithin(GetRange()))
         return false;
@@ -7782,13 +7782,13 @@ wxRichTextStyleSheet* wxRichTextBuffer::PopStyleSheet()
 }
 
 /// Submit command to insert paragraphs
-bool wxRichTextBuffer::InsertParagraphsWithUndo(long pos, const wxRichTextParagraphLayoutBox& paragraphs, wxRichTextCtrl* ctrl, int flags)
+bool wxRichTextBuffer::InsertParagraphsWithUndo(long pos, const wxRichTextParagraphLayoutBox& paragraphs, wxRichTextCtrl* ctrl, unsigned int flags)
 {
     return ctrl->GetFocusObject()->InsertParagraphsWithUndo(this, pos, paragraphs, ctrl, flags);
 }
 
 /// Submit command to insert paragraphs
-bool wxRichTextParagraphLayoutBox::InsertParagraphsWithUndo(wxRichTextBuffer* buffer, long pos, const wxRichTextParagraphLayoutBox& paragraphs, wxRichTextCtrl* ctrl, int WXUNUSED(flags))
+bool wxRichTextParagraphLayoutBox::InsertParagraphsWithUndo(wxRichTextBuffer* buffer, long pos, const wxRichTextParagraphLayoutBox& paragraphs, wxRichTextCtrl* ctrl, unsigned int WXUNUSED(flags))
 {
     wxRichTextAction* action = new wxRichTextAction(nullptr, _("Insert Text"), wxRICHTEXT_INSERT, buffer, this, ctrl, false);
 
@@ -7809,7 +7809,7 @@ bool wxRichTextParagraphLayoutBox::InsertParagraphsWithUndo(wxRichTextBuffer* bu
 }
 
 /// Submit command to insert the given text
-bool wxRichTextBuffer::InsertTextWithUndo(long pos, const wxString& text, wxRichTextCtrl* ctrl, int flags)
+bool wxRichTextBuffer::InsertTextWithUndo(long pos, const wxString& text, wxRichTextCtrl* ctrl, unsigned int flags)
 {
     if (ctrl)
         return ctrl->GetFocusObject()->InsertTextWithUndo(this, pos, text, ctrl, flags);
@@ -7818,7 +7818,7 @@ bool wxRichTextBuffer::InsertTextWithUndo(long pos, const wxString& text, wxRich
 }
 
 /// Submit command to insert the given text
-bool wxRichTextParagraphLayoutBox::InsertTextWithUndo(wxRichTextBuffer* buffer, long pos, const wxString& text, wxRichTextCtrl* ctrl, int flags)
+bool wxRichTextParagraphLayoutBox::InsertTextWithUndo(wxRichTextBuffer* buffer, long pos, const wxString& text, wxRichTextCtrl* ctrl, unsigned int flags)
 {
     wxRichTextAction* action = new wxRichTextAction(nullptr, _("Insert Text"), wxRICHTEXT_INSERT, buffer, this, ctrl, false);
 
@@ -7854,13 +7854,13 @@ bool wxRichTextParagraphLayoutBox::InsertTextWithUndo(wxRichTextBuffer* buffer, 
 }
 
 /// Submit command to insert the given text
-bool wxRichTextBuffer::InsertNewlineWithUndo(long pos, wxRichTextCtrl* ctrl, int flags)
+bool wxRichTextBuffer::InsertNewlineWithUndo(long pos, wxRichTextCtrl* ctrl, unsigned int flags)
 {
     return ctrl->GetFocusObject()->InsertNewlineWithUndo(this, pos, ctrl, flags);
 }
 
 /// Submit command to insert the given text
-bool wxRichTextParagraphLayoutBox::InsertNewlineWithUndo(wxRichTextBuffer* buffer, long pos, wxRichTextCtrl* ctrl, int flags)
+bool wxRichTextParagraphLayoutBox::InsertNewlineWithUndo(wxRichTextBuffer* buffer, long pos, wxRichTextCtrl* ctrl, unsigned int flags)
 {
     wxRichTextAction* action = new wxRichTextAction(nullptr, _("Insert Text"), wxRICHTEXT_INSERT, buffer, this, ctrl, false);
 
@@ -7935,7 +7935,7 @@ bool wxRichTextParagraphLayoutBox::InsertNewlineWithUndo(wxRichTextBuffer* buffe
 }
 
 /// Submit command to insert the given image
-bool wxRichTextBuffer::InsertImageWithUndo(long pos, const wxRichTextImageBlock& imageBlock, wxRichTextCtrl* ctrl, int flags,
+bool wxRichTextBuffer::InsertImageWithUndo(long pos, const wxRichTextImageBlock& imageBlock, wxRichTextCtrl* ctrl, unsigned int flags,
                                             const wxRichTextAttr& textAttr)
 {
     return ctrl->GetFocusObject()->InsertImageWithUndo(this, pos, imageBlock, ctrl, flags, textAttr);
@@ -7943,7 +7943,7 @@ bool wxRichTextBuffer::InsertImageWithUndo(long pos, const wxRichTextImageBlock&
 
 /// Submit command to insert the given image
 bool wxRichTextParagraphLayoutBox::InsertImageWithUndo(wxRichTextBuffer* buffer, long pos, const wxRichTextImageBlock& imageBlock,
-                                                        wxRichTextCtrl* ctrl, int flags,
+                                                        wxRichTextCtrl* ctrl, unsigned int flags,
                                                         const wxRichTextAttr& textAttr)
 {
     wxRichTextAction* action = new wxRichTextAction(nullptr, _("Insert Image"), wxRICHTEXT_INSERT, buffer, this, ctrl, false);
@@ -7985,13 +7985,13 @@ bool wxRichTextParagraphLayoutBox::InsertImageWithUndo(wxRichTextBuffer* buffer,
 }
 
 // Insert an object with no change of it
-wxRichTextObject* wxRichTextBuffer::InsertObjectWithUndo(long pos, wxRichTextObject *object, wxRichTextCtrl* ctrl, int flags)
+wxRichTextObject* wxRichTextBuffer::InsertObjectWithUndo(long pos, wxRichTextObject *object, wxRichTextCtrl* ctrl, unsigned int flags)
 {
     return ctrl->GetFocusObject()->InsertObjectWithUndo(this, pos, object, ctrl, flags);
 }
 
 // Insert an object with no change of it
-wxRichTextObject* wxRichTextParagraphLayoutBox::InsertObjectWithUndo(wxRichTextBuffer* buffer, long pos, wxRichTextObject *object, wxRichTextCtrl* ctrl, int flags)
+wxRichTextObject* wxRichTextParagraphLayoutBox::InsertObjectWithUndo(wxRichTextBuffer* buffer, long pos, wxRichTextObject *object, wxRichTextCtrl* ctrl, unsigned int flags)
 {
     wxRichTextAction* action = new wxRichTextAction(nullptr, _("Insert Object"), wxRICHTEXT_INSERT, buffer, this, ctrl, false);
 
@@ -8032,7 +8032,7 @@ wxRichTextObject* wxRichTextParagraphLayoutBox::InsertObjectWithUndo(wxRichTextB
 
 wxRichTextField* wxRichTextParagraphLayoutBox::InsertFieldWithUndo(wxRichTextBuffer* buffer, long pos, const wxString& fieldType,
                                                         const wxRichTextProperties& properties,
-                                                        wxRichTextCtrl* ctrl, int flags,
+                                                        wxRichTextCtrl* ctrl, unsigned int flags,
                                                         const wxRichTextAttr& textAttr)
 {
     wxRichTextAction* action = new wxRichTextAction(nullptr, _("Insert Field"), wxRICHTEXT_INSERT, buffer, this, ctrl, false);
@@ -8165,7 +8165,7 @@ wxRichTextAttr wxRichTextParagraphLayoutBox::GetStyleForNewParagraph(wxRichTextB
         if (!foundAttributes)
         {
             attr = para->GetAttributes();
-            int flags = attr.GetFlags();
+            unsigned int flags = attr.GetFlags();
 
             // Eliminate character styles
             flags &= ( (~ wxTEXT_ATTR_FONT) |
@@ -9058,7 +9058,7 @@ void wxRichTextBuffer::SetRenderer(wxRichTextRenderer* renderer)
 
 /// Hit-testing: returns a flag indicating hit test details, plus
 /// information about position
-int wxRichTextBuffer::HitTest(wxDC& dc, wxRichTextDrawingContext& context, const wxPoint& pt, long& textPosition, wxRichTextObject** obj, wxRichTextObject** contextObj, int flags)
+int wxRichTextBuffer::HitTest(wxDC& dc, wxRichTextDrawingContext& context, const wxPoint& pt, long& textPosition, wxRichTextObject** obj, wxRichTextObject** contextObj, unsigned int flags)
 {
     int ret = wxRichTextParagraphLayoutBox::HitTest(dc, context, pt, textPosition, obj, contextObj, flags);
     if (ret != wxRICHTEXT_HITTEST_NONE)
@@ -9322,7 +9322,7 @@ wxRichTextBox::wxRichTextBox(wxRichTextObject* parent):
 }
 
 /// Draw the item
-bool wxRichTextBox::Draw(wxDC& dc, wxRichTextDrawingContext& context, const wxRichTextRange& range, const wxRichTextSelection& selection, const wxRect& rect, int descent, int style)
+bool wxRichTextBox::Draw(wxDC& dc, wxRichTextDrawingContext& context, const wxRichTextRange& range, const wxRichTextSelection& selection, const wxRect& rect, int descent, unsigned int style)
 {
     if (!IsShown())
         return true;
@@ -9371,7 +9371,7 @@ wxRichTextField::wxRichTextField(const wxString& fieldType, wxRichTextObject* pa
 }
 
 /// Draw the item
-bool wxRichTextField::Draw(wxDC& dc, wxRichTextDrawingContext& context, const wxRichTextRange& range, const wxRichTextSelection& selection, const wxRect& rect, int descent, int style)
+bool wxRichTextField::Draw(wxDC& dc, wxRichTextDrawingContext& context, const wxRichTextRange& range, const wxRichTextSelection& selection, const wxRect& rect, int descent, unsigned int style)
 {
     if (!IsShown())
         return true;
@@ -9387,7 +9387,7 @@ bool wxRichTextField::Draw(wxDC& dc, wxRichTextDrawingContext& context, const wx
     return defaultFieldType.Draw(this, dc, context, range, selection, rect, descent, style);
 }
 
-bool wxRichTextField::Layout(wxDC& dc, wxRichTextDrawingContext& context, const wxRect& rect, const wxRect& parentRect, int style)
+bool wxRichTextField::Layout(wxDC& dc, wxRichTextDrawingContext& context, const wxRect& rect, const wxRect& parentRect, unsigned int style)
 {
     wxRichTextFieldType* fieldType = wxRichTextBuffer::FindFieldType(GetFieldType());
     if (fieldType && fieldType->Layout(this, dc, context, rect, parentRect, style))
@@ -9400,7 +9400,7 @@ bool wxRichTextField::Layout(wxDC& dc, wxRichTextDrawingContext& context, const 
     return defaultFieldType.Layout(this, dc, context, rect, parentRect, style);
 }
 
-bool wxRichTextField::GetRangeSize(const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, int flags, const wxPoint& position, const wxSize& parentSize, std::vector<int>* partialExtents) const
+bool wxRichTextField::GetRangeSize(const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, unsigned int flags, const wxPoint& position, const wxSize& parentSize, std::vector<int>* partialExtents) const
 {
     wxRichTextFieldType* fieldType = wxRichTextBuffer::FindFieldType(GetFieldType());
     if (fieldType)
@@ -9527,7 +9527,7 @@ void wxRichTextFieldTypeStandard::Copy(const wxRichTextFieldTypeStandard& field)
     m_bitmap = field.m_bitmap;
 }
 
-bool wxRichTextFieldTypeStandard::Draw(wxRichTextField* obj, wxDC& dc, wxRichTextDrawingContext& WXUNUSED(context), const wxRichTextRange& WXUNUSED(range), const wxRichTextSelection& selection, const wxRect& rect, int descent, int WXUNUSED(style))
+bool wxRichTextFieldTypeStandard::Draw(wxRichTextField* obj, wxDC& dc, wxRichTextDrawingContext& WXUNUSED(context), const wxRichTextRange& WXUNUSED(range), const wxRichTextSelection& selection, const wxRect& rect, int descent, unsigned int WXUNUSED(style))
 {
     if (m_displayStyle == wxRICHTEXT_FIELD_STYLE_COMPOSITE)
         return false; // USe default composite drawing
@@ -9635,7 +9635,7 @@ bool wxRichTextFieldTypeStandard::Draw(wxRichTextField* obj, wxDC& dc, wxRichTex
     return true;
 }
 
-bool wxRichTextFieldTypeStandard::Layout(wxRichTextField* obj, wxDC& dc, wxRichTextDrawingContext& context, const wxRect& WXUNUSED(rect), const wxRect& WXUNUSED(parentRect), int style)
+bool wxRichTextFieldTypeStandard::Layout(wxRichTextField* obj, wxDC& dc, wxRichTextDrawingContext& context, const wxRect& WXUNUSED(rect), const wxRect& WXUNUSED(parentRect), unsigned int style)
 {
     if (m_displayStyle == wxRICHTEXT_FIELD_STYLE_COMPOSITE)
         return false; // USe default composite layout
@@ -9647,7 +9647,7 @@ bool wxRichTextFieldTypeStandard::Layout(wxRichTextField* obj, wxDC& dc, wxRichT
     return true;
 }
 
-bool wxRichTextFieldTypeStandard::GetRangeSize(wxRichTextField* obj, const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, int flags, const wxPoint& position, const wxSize& parentSize, std::vector<int>* partialExtents) const
+bool wxRichTextFieldTypeStandard::GetRangeSize(wxRichTextField* obj, const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, unsigned int flags, const wxPoint& position, const wxSize& parentSize, std::vector<int>* partialExtents) const
 {
     if (IsTopLevel(obj))
         return obj->wxRichTextParagraphLayoutBox::GetRangeSize(range, size, descent, dc, context, flags, position, parentSize);
@@ -9668,7 +9668,7 @@ bool wxRichTextFieldTypeStandard::GetRangeSize(wxRichTextField* obj, const wxRic
     }
 }
 
-wxSize wxRichTextFieldTypeStandard::GetSize(wxRichTextField* WXUNUSED(obj), wxDC& dc, wxRichTextDrawingContext& WXUNUSED(context), int WXUNUSED(style)) const
+wxSize wxRichTextFieldTypeStandard::GetSize(wxRichTextField* WXUNUSED(obj), wxDC& dc, wxRichTextDrawingContext& WXUNUSED(context), unsigned int WXUNUSED(style)) const
 {
     int borderSize = 1;
     int maxDescent = 0;
@@ -9715,7 +9715,7 @@ wxRichTextCell::wxRichTextCell(wxRichTextObject* parent):
 }
 
 /// Draw the item
-bool wxRichTextCell::Draw(wxDC& dc, wxRichTextDrawingContext& context, const wxRichTextRange& range, const wxRichTextSelection& selection, const wxRect& rect, int descent, int style)
+bool wxRichTextCell::Draw(wxDC& dc, wxRichTextDrawingContext& context, const wxRichTextRange& range, const wxRichTextSelection& selection, const wxRect& rect, int descent, unsigned int style)
 {
     if (selection.IsValid() &&
        (selection.WithinSelection(GetRange().GetStart(), this)))
@@ -9726,7 +9726,7 @@ bool wxRichTextCell::Draw(wxDC& dc, wxRichTextDrawingContext& context, const wxR
     return wxRichTextBox::Draw(dc, context, range, selection, rect, descent, style);
 }
 
-int wxRichTextCell::HitTest(wxDC& dc, wxRichTextDrawingContext& context, const wxPoint& pt, long& textPosition, wxRichTextObject** obj, wxRichTextObject** contextObj, int flags)
+int wxRichTextCell::HitTest(wxDC& dc, wxRichTextDrawingContext& context, const wxPoint& pt, long& textPosition, wxRichTextObject** obj, wxRichTextObject** contextObj, unsigned int flags)
 {
     int ret = wxRichTextParagraphLayoutBox::HitTest(dc, context, pt, textPosition, obj, contextObj, flags);
     if (ret != wxRICHTEXT_HITTEST_NONE)
@@ -10014,7 +10014,7 @@ wxRichTextTable::wxRichTextTable(wxRichTextObject* parent): wxRichTextBox(parent
 }
 
 // Draws the object.
-bool wxRichTextTable::Draw(wxDC& dc, wxRichTextDrawingContext& context, const wxRichTextRange& range, const wxRichTextSelection& selection, const wxRect& rect, int descent, int style)
+bool wxRichTextTable::Draw(wxDC& dc, wxRichTextDrawingContext& context, const wxRichTextRange& range, const wxRichTextSelection& selection, const wxRect& rect, int descent, unsigned int style)
 {
     wxRichTextBox::Draw(dc, context, range, selection, rect, descent, style);
 
@@ -10110,7 +10110,7 @@ int GetRowspanDisplacement(const wxRichTextTable* table, int row, int col, int p
 
     // Helper function for Layout() that expands any cell with rowspan > 1
 static
-void ExpandCellsWithRowspan(const wxRichTextTable* table, int paddingY, int& bottomY, wxDC& dc, wxRichTextDrawingContext& context, const wxRect& availableSpace, int style)
+void ExpandCellsWithRowspan(const wxRichTextTable* table, int paddingY, int& bottomY, wxDC& dc, wxRichTextDrawingContext& context, const wxRect& availableSpace, unsigned int style)
 {
     // This is called when the table's cell layout is otherwise complete.
     // For any cell with rowspan > 1, expand downwards into the row(s) below.
@@ -10291,7 +10291,7 @@ void wxRichTextTable::getInitialLayoutAndWidths(
     wxRect availableSpace,
     wxRichTextDrawingContext& context,
     wxDC& dc,
-    int style)
+    unsigned int style)
 {
     for (int j = 0; j < m_rowCount; j++)
     {
@@ -10508,7 +10508,7 @@ void wxRichTextTable::completeSpanningWidth(
 // layout to a particular size, or it could be the total space available in the
 // parent. rect is the overall size, so we must subtract margins and padding.
 // to get the actual available space.
-bool wxRichTextTable::Layout(wxDC& dc, wxRichTextDrawingContext& context, const wxRect& rect, const wxRect& WXUNUSED(parentRect), int style)
+bool wxRichTextTable::Layout(wxDC& dc, wxRichTextDrawingContext& context, const wxRect& rect, const wxRect& WXUNUSED(parentRect), unsigned int style)
 {
     SetPosition(rect.GetPosition());
 
@@ -11035,7 +11035,7 @@ void wxRichTextTable::CalculateRange(long start, long& end)
 }
 
 // Gets the range size.
-bool wxRichTextTable::GetRangeSize(const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, int flags, const wxPoint& position, const wxSize& parentSize, std::vector<int>* partialExtents) const
+bool wxRichTextTable::GetRangeSize(const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, unsigned int flags, const wxPoint& position, const wxSize& parentSize, std::vector<int>* partialExtents) const
 {
     return wxRichTextBox::GetRangeSize(range, size, descent, dc, context, flags, position, parentSize, partialExtents);
 }
@@ -11214,7 +11214,7 @@ wxRichTextSelection wxRichTextTable::GetSelection(long start, long end) const
 }
 
 // Sets the attributes for the cells specified by the selection.
-bool wxRichTextTable::SetCellStyle(const wxRichTextSelection& selection, const wxRichTextAttr& style, int flags)
+bool wxRichTextTable::SetCellStyle(const wxRichTextSelection& selection, const wxRichTextAttr& style, unsigned int flags)
 {
     if (selection.GetContainer() != this)
         return false;
@@ -11263,7 +11263,7 @@ wxPosition wxRichTextTable::GetFocusedCell() const
     return position;
 }
 
-int wxRichTextTable::HitTest(wxDC& dc, wxRichTextDrawingContext& context, const wxPoint& pt, long& textPosition, wxRichTextObject** obj, wxRichTextObject** contextObj, int flags)
+int wxRichTextTable::HitTest(wxDC& dc, wxRichTextDrawingContext& context, const wxPoint& pt, long& textPosition, wxRichTextObject** obj, wxRichTextObject** contextObj, unsigned int flags)
 {
     for (int row = 0; row < GetRowCount(); ++row)
     {
@@ -12719,7 +12719,7 @@ bool wxRichTextImage::LoadAndScaleImageCache(wxImage& image, const wxSize& sz, w
 }
 
 /// Draw the item
-bool wxRichTextImage::Draw(wxDC& dc, wxRichTextDrawingContext& context, const wxRichTextRange& WXUNUSED(range), const wxRichTextSelection& selection, const wxRect& rect, int WXUNUSED(descent), int WXUNUSED(style))
+bool wxRichTextImage::Draw(wxDC& dc, wxRichTextDrawingContext& context, const wxRichTextRange& WXUNUSED(range), const wxRichTextSelection& selection, const wxRect& rect, int WXUNUSED(descent), unsigned int WXUNUSED(style))
 {
     if (!IsShown())
         return true;
@@ -12781,7 +12781,7 @@ bool wxRichTextImage::Draw(wxDC& dc, wxRichTextDrawingContext& context, const wx
 }
 
 /// Lay the item out
-bool wxRichTextImage::Layout(wxDC& dc, wxRichTextDrawingContext& context, const wxRect& rect, const wxRect& parentRect, int WXUNUSED(style))
+bool wxRichTextImage::Layout(wxDC& dc, wxRichTextDrawingContext& context, const wxRect& rect, const wxRect& parentRect, unsigned int WXUNUSED(style))
 {
     wxSize imageSize;
     if (!LoadImageCache(dc, context, imageSize, false, parentRect.GetSize()))
@@ -12807,7 +12807,7 @@ bool wxRichTextImage::Layout(wxDC& dc, wxRichTextDrawingContext& context, const 
 
 /// Get/set the object size for the given range. Returns false if the range
 /// is invalid for this object.
-bool wxRichTextImage::GetRangeSize(const wxRichTextRange& range, wxSize& size, int& WXUNUSED(descent), wxDC& dc, wxRichTextDrawingContext& context, int WXUNUSED(flags), const wxPoint& WXUNUSED(position), const wxSize& parentSize, std::vector<int>* partialExtents) const
+bool wxRichTextImage::GetRangeSize(const wxRichTextRange& range, wxSize& size, int& WXUNUSED(descent), wxDC& dc, wxRichTextDrawingContext& context, unsigned int WXUNUSED(flags), const wxPoint& WXUNUSED(position), const wxSize& parentSize, std::vector<int>* partialExtents) const
 {
     if (!range.IsWithin(GetRange()))
         return false;
@@ -12922,7 +12922,7 @@ bool wxRichTextCombineBitlists(int& valueA, int valueB, int& flagsA, int flagsB)
 }
 
 /// Compare two bitlists
-bool wxRichTextBitlistsEqPartial(int valueA, int valueB, int flags)
+bool wxRichTextBitlistsEqPartial(int valueA, int valueB, unsigned int flags)
 {
     return wxRichTextAttr::BitlistsEqPartial(valueA, valueB, flags);
 }
@@ -14216,7 +14216,7 @@ void wxTextAttrBorders::CollectCommonAttributes(const wxTextAttrBorders& attr, w
 }
 
 // Set style of all borders
-void wxTextAttrBorders::SetStyle(int style)
+void wxTextAttrBorders::SetStyle(unsigned int style)
 {
     m_left.SetStyle(style);
     m_right.SetStyle(style);

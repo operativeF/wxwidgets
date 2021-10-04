@@ -119,7 +119,7 @@ protected:
     wxDateTime m_dateTime;
 
     wxFileOffset m_size{0};
-    int      m_type{wxFileData::is_file};
+    unsigned int m_type{wxFileData::is_file};
     int      m_image{wxFileIconsTable::file};    
 };
 
@@ -278,7 +278,7 @@ private:
     wxFileName DoGetFileName() const;
     std::vector<wxString> DoGetFilenames(bool fullPath ) const;
 
-    int m_style;
+    unsigned int m_style;
 
     wxString         m_filterExtension;
     wxChoice        *m_choice;

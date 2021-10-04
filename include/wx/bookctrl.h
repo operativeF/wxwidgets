@@ -44,12 +44,12 @@ enum
 };
 
 // wxBookCtrl flags (common for wxNotebook, wxListbook, wxChoicebook, wxTreebook)
-inline constexpr int wxBK_DEFAULT          = 0x0000;
-inline constexpr int wxBK_TOP              = 0x0010;
-inline constexpr int wxBK_BOTTOM           = 0x0020;
-inline constexpr int wxBK_LEFT             = 0x0040;
-inline constexpr int wxBK_RIGHT            = 0x0080;
-inline constexpr int wxBK_ALIGN_MASK       = wxBK_TOP | wxBK_BOTTOM | wxBK_LEFT | wxBK_RIGHT;
+constexpr unsigned int wxBK_DEFAULT          = 0x0000;
+constexpr unsigned int wxBK_TOP              = 0x0010;
+constexpr unsigned int wxBK_BOTTOM           = 0x0020;
+constexpr unsigned int wxBK_LEFT             = 0x0040;
+constexpr unsigned int wxBK_RIGHT            = 0x0080;
+constexpr unsigned int wxBK_ALIGN_MASK       = wxBK_TOP | wxBK_BOTTOM | wxBK_LEFT | wxBK_RIGHT;
 
 // ----------------------------------------------------------------------------
 // wxBookCtrlBase
@@ -221,7 +221,7 @@ public:
 
     // hit test: returns which page is hit and, optionally, where (icon, label)
     virtual int HitTest(const wxPoint& WXUNUSED(pt),
-                        long * WXUNUSED(flags) = nullptr) const
+                        unsigned int* WXUNUSED(flags) = nullptr) const
     {
         return wxNOT_FOUND;
     }
@@ -261,7 +261,7 @@ protected:
     // set the selection to the given page, sending the events (which can
     // possibly prevent the page change from taking place) if SendEvent flag is
     // included
-    virtual int DoSetSelection(size_t nPage, int flags = 0);
+    virtual int DoSetSelection(size_t nPage, unsigned int flags = 0);
 
     // if the derived class uses DoSetSelection() for implementing
     // [Set|Change]Selection, it must override UpdateSelectedPage(),

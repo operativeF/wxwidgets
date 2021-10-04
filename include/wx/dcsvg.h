@@ -21,7 +21,7 @@
 #include <string>
 #include <string_view>
 
-inline constexpr wxChar wxSVGVersion[] = wxT("v0101");
+constexpr wxChar wxSVGVersion[] = wxT("v0101");
 
 enum class wxSVGShapeRenderingMode
 {

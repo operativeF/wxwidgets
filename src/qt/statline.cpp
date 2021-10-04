@@ -21,7 +21,7 @@ wxStaticLine::wxStaticLine( wxWindow *parent,
               wxWindowID id,
               const wxPoint& pos,
               const wxSize& size,
-              long style,
+              unsigned int style,
               const wxString &name)
 {
     Create( parent, id, pos, size, style, name );
@@ -31,7 +31,7 @@ bool wxStaticLine::Create( wxWindow *parent,
              wxWindowID id,
              const wxPoint& pos,
              const wxSize& size,
-             long style,
+             unsigned int style,
              const wxString &name)
 {
     m_qtFrame = new QFrame( parent->GetHandle() );

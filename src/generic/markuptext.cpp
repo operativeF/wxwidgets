@@ -104,7 +104,7 @@ public:
     // descent by the caller.
     wxMarkupParserRenderOutput(wxDC& dc,
                                const wxRect& rect,
-                               int flags)
+                               unsigned int flags)
         : wxMarkupParserAttrOutput(dc.GetFont(),
                                    dc.GetTextForeground(),
                                    wxColour()),
@@ -173,7 +173,7 @@ protected:
 
     wxDC& m_dc;
 
-    const int m_flags;
+    const unsigned int m_flags;
 
 
     // Current horizontal text output position.

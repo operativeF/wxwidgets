@@ -198,7 +198,7 @@ void wxWebView::SelectAll()
     RunScript("window.getSelection().selectAllChildren(document.body);");
 }
 
-long wxWebView::Find(const wxString& text, int flags)
+long wxWebView::Find(const wxString& text, unsigned int flags)
 {
     if (text != m_findText)
         ClearSelection();

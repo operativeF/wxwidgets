@@ -70,7 +70,7 @@ bool wxOwnerDrawn::OnDrawItem(wxDC& dc, const wxRect& rc,
         SIZE sizeRect;
         ::GetTextExtentPoint32W(hdc, text.c_str(), text.length(), &sizeRect);
 
-        int flags = DST_PREFIXTEXT;
+        unsigned int flags = DST_PREFIXTEXT;
         if ( (stat & wxODDisabled) && !(stat & wxODSelected) )
             flags |= DSS_DISABLED;
 

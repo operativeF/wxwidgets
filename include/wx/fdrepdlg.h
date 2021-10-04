@@ -156,7 +156,7 @@ public:
         { return wxStaticCast(GetEventObject(), wxFindReplaceDialog); }
 
     // implementation only
-    void SetFlags(int flags) { SetInt(flags); }
+    void SetFlags(unsigned int flags) { SetInt(flags); }
     void SetFindString(const std::string& str) { SetString(str); }
     void SetReplaceString(const std::string& str) { m_strReplace = str; }
 

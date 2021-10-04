@@ -347,7 +347,7 @@ protected:
 // wxCalendarCtrl
 // ----------------------------------------------------------------------------
 
-inline constexpr char wxCalendarNameStr[] = "CalendarCtrl";
+constexpr char wxCalendarNameStr[] = "CalendarCtrl";
 
 #ifndef __WXUNIVERSAL__
     #if defined(__WXGTK20__)

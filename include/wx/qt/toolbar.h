@@ -21,7 +21,7 @@ public:
               wxWindowID id,
               const wxPoint& pos = wxDefaultPosition,
               const wxSize& size = wxDefaultSize,
-              long style = wxTB_DEFAULT_STYLE | wxNO_BORDER,
+              unsigned int style = wxTB_DEFAULT_STYLE | wxNO_BORDER,
               const wxString& name = wxASCII_STR(wxToolBarNameStr))
     {
         Init();
@@ -35,12 +35,12 @@ public:
                 wxWindowID id,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = wxTB_DEFAULT_STYLE | wxNO_BORDER,
+                unsigned int style = wxTB_DEFAULT_STYLE | wxNO_BORDER,
                 const wxString& name = wxASCII_STR(wxToolBarNameStr));
 
     wxToolBarToolBase *FindToolForPosition(wxCoord x, wxCoord y) const override;
 
-    void SetWindowStyleFlag( long style ) override;
+    void SetWindowStyleFlag( unsigned int style ) override;
 
     void SetToolShortHelp(int id, const wxString& helpString) override;
     void SetToolNormalBitmap(int id, const wxBitmap& bitmap) override;

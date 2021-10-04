@@ -36,10 +36,10 @@ enum
 };
 
 // Flags for Draw
-#define wxIMAGELIST_DRAW_NORMAL         0x0001
-#define wxIMAGELIST_DRAW_TRANSPARENT    0x0002
-#define wxIMAGELIST_DRAW_SELECTED       0x0004
-#define wxIMAGELIST_DRAW_FOCUSED        0x0008
+constexpr unsigned int wxIMAGELIST_DRAW_NORMAL         = 0x0001;
+constexpr unsigned int wxIMAGELIST_DRAW_TRANSPARENT    = 0x0002;
+constexpr unsigned int wxIMAGELIST_DRAW_SELECTED       = 0x0004;
+constexpr unsigned int wxIMAGELIST_DRAW_FOCUSED        = 0x0008;
 
 #if defined(__WXMSW__)
     #include "wx/msw/imaglist.h"

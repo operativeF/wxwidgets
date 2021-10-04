@@ -19,7 +19,7 @@
 
 #include <string>
 
-inline constexpr char wxDatePickerCtrlNameStr[] = "datectrl";
+constexpr char wxDatePickerCtrlNameStr[] = "datectrl";
 
 // wxDatePickerCtrl styles
 enum

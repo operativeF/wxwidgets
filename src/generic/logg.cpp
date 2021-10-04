@@ -196,7 +196,7 @@ void wxLogGui::Clear()
     m_aTimes.clear();
 }
 
-int wxLogGui::GetSeverityIcon() const
+unsigned int wxLogGui::GetSeverityIcon() const
 {
     return m_bErrors ? wxICON_STOP
                      : m_bWarnings ? wxICON_EXCLAMATION
@@ -230,7 +230,7 @@ wxString wxLogGui::GetTitle() const
 void
 wxLogGui::DoShowSingleLogMessage(const wxString& message,
                                  const wxString& title,
-                                 int style)
+                                 unsigned int style)
 {
     wxMessageBox(message, title, wxOK | style);
 }
@@ -240,7 +240,7 @@ wxLogGui::DoShowMultipleLogMessages(const std::vector<wxString>& messages,
                                     const std::vector<int>& severities,
                                     const std::vector<long>& times,
                                     const wxString& title,
-                                    int style)
+                                    unsigned int style)
 {
 #if wxUSE_LOG_DIALOG
     wxLogDialog dlg(nullptr,
@@ -277,7 +277,7 @@ void wxLogGui::Flush()
 
     // note that this must be done before examining m_aMessages as it may log
     // yet another message
-    const unsigned repeatCount = LogLastRepeatIfNeeded();
+    const unsigned int repeatCount = LogLastRepeatIfNeeded();
 
     const size_t nMsgCount = m_aMessages.size();
 
@@ -287,7 +287,7 @@ void wxLogGui::Flush()
     }
 
     const wxString title = GetTitle();
-    const int style = GetSeverityIcon();
+    const unsigned int style = GetSeverityIcon();
 
     // avoid showing other log dialogs until we're done with the dialog we're
     // showing right now: nested modal dialogs make for really bad UI!

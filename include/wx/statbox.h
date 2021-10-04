@@ -18,7 +18,7 @@
 #include "wx/control.h"
 #include "wx/containr.h"
 
-inline constexpr char wxStaticBoxNameStr[] = "groupBox";
+constexpr char wxStaticBoxNameStr[] = "groupBox";
 
 // ----------------------------------------------------------------------------
 // wxStaticBox: a grouping box with a label

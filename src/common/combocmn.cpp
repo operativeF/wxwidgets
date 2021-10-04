@@ -1636,7 +1636,7 @@ void wxComboCtrlBase::PrepareBackground( wxDC&, const wxRect&, unsigned int ) co
 
 void wxComboCtrlBase::DrawButton( wxDC& dc, const wxRect& rect, unsigned int flags )
 {
-    int drawState = m_btnState;
+    unsigned int drawState = m_btnState;
 
     if ( (m_iFlags & wxCC_BUTTON_STAYS_DOWN) &&
          GetPopupWindowState() >= Animating )
@@ -1880,7 +1880,7 @@ bool wxComboCtrlBase::PreprocessMouseEvent( wxMouseEvent& event,
 
 void wxComboCtrlBase::HandleNormalMouseEvent( wxMouseEvent& event )
 {
-    const int evtType = event.GetEventType();
+    const auto evtType = event.GetEventType();
 
     if ( (evtType == wxEVT_LEFT_DOWN || evtType == wxEVT_LEFT_DCLICK) &&
          (m_windowStyle & wxCB_READONLY) )

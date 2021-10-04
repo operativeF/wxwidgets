@@ -116,9 +116,9 @@ public:
     // GetFlags()
 
     // retrieve all column flags at once: combination of wxCOL_XXX values above
-    virtual int GetFlags() const = 0;
+    virtual unsigned int GetFlags() const = 0;
 
-    bool HasFlag(int flag) const { return (GetFlags() & flag) != 0; }
+    bool HasFlag(unsigned int flag) const { return (GetFlags() & flag) != 0; }
 
 
     // wxCOL_RESIZABLE
@@ -152,7 +152,7 @@ public:
 
 protected:
     // helper for the class overriding IsXXX()
-    int GetFromIndividualFlags() const;
+    unsigned int GetFromIndividualFlags() const;
 };
 
 // ----------------------------------------------------------------------------
@@ -172,11 +172,11 @@ public:
     // between SetFlags() and Set{Sortable,Reorderable,...}
 
     // change, set, clear, toggle or test for any individual flag
-    virtual void SetFlags(int flags) = 0;
-    void ChangeFlag(int flag, bool set);
-    void SetFlag(int flag);
-    void ClearFlag(int flag);
-    void ToggleFlag(int flag);
+    virtual void SetFlags(unsigned int flags) = 0;
+    void ChangeFlag(unsigned int flag, bool set);
+    void SetFlag(unsigned int flag);
+    void ClearFlag(unsigned int flag);
+    void ToggleFlag(unsigned int flag);
 
     virtual void SetResizeable(bool resizable)
         { ChangeFlag(wxCOL_RESIZABLE, resizable); }
@@ -200,7 +200,7 @@ public:
 protected:
     // helper for the class overriding individual SetXXX() methods instead of
     // overriding SetFlags()
-    void SetIndividualFlags(int flags);
+    void SetIndividualFlags(unsigned int flags);
 };
 
 // ----------------------------------------------------------------------------
@@ -214,7 +214,7 @@ public:
     wxHeaderColumnSimple(const std::string& title,
                          int width = wxCOL_WIDTH_DEFAULT,
                          wxAlignment align = wxALIGN_NOT,
-                         int flags = wxCOL_DEFAULT_FLAGS)
+                         unsigned int flags = wxCOL_DEFAULT_FLAGS)
         : m_title(title),
           m_width(width),
           m_align(align),
@@ -230,7 +230,7 @@ public:
     wxHeaderColumnSimple(const wxBitmap& bitmap,
                          int width = wxCOL_WIDTH_DEFAULT,
                          wxAlignment align = wxALIGN_CENTER,
-                         int flags = wxCOL_DEFAULT_FLAGS)
+                         unsigned int flags = wxCOL_DEFAULT_FLAGS)
         : m_bitmap(bitmap),
           m_width(width),
           m_align(align),
@@ -259,8 +259,8 @@ public:
     void SetAlignment(wxAlignment align) override { m_align = align; }
     wxAlignment GetAlignment() const override { return m_align; }
 
-    void SetFlags(int flags) override { m_flags = flags; }
-    int GetFlags() const override { return m_flags; }
+    void SetFlags(unsigned int flags) override { m_flags = flags; }
+    unsigned int GetFlags() const override { return m_flags; }
 
     bool IsSortKey() const override { return m_sort; }
     void UnsetAsSortKey() override { m_sort = false; }
@@ -279,7 +279,7 @@ private:
     int m_width,
         m_minWidth;
     wxAlignment m_align;
-    int m_flags;
+    unsigned int m_flags;
     bool m_sort,
          m_sortAscending;
 };

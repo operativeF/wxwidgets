@@ -15,7 +15,7 @@
 
 #if wxUSE_COMBOBOX
 
-inline constexpr char wxComboBoxNameStr[] = "comboBox";
+constexpr char wxComboBoxNameStr[] = "comboBox";
 
 // ----------------------------------------------------------------------------
 // wxComboBoxBase: this interface defines the methods wxComboBox must implement

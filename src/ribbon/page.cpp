@@ -150,7 +150,7 @@ wxRibbonPage::wxRibbonPage(wxRibbonBar* parent,
                    wxWindowID id,
                    const wxString& label,
                    const wxBitmap& icon,
-                   long WXUNUSED(style))
+                   unsigned int WXUNUSED(style))
     : wxRibbonControl(parent, id, wxDefaultPosition, wxDefaultSize, wxBORDER_NONE)
 {
     CommonInit(label, icon);
@@ -167,7 +167,7 @@ bool wxRibbonPage::Create(wxRibbonBar* parent,
                 wxWindowID id,
                 const wxString& label,
                 const wxBitmap& icon,
-                long WXUNUSED(style))
+                unsigned int WXUNUSED(style))
 {
     if(!wxRibbonControl::Create(parent, id, wxDefaultPosition, wxDefaultSize, wxBORDER_NONE))
         return false;

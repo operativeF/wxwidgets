@@ -19,21 +19,21 @@
 // wxTheme::GetInputHandler()
 // ----------------------------------------------------------------------------
 
-inline constexpr wxChar wxINP_HANDLER_DEFAULT[]           = wxT("");
-inline constexpr wxChar wxINP_HANDLER_BUTTON[]            = wxT("button");
-inline constexpr wxChar wxINP_HANDLER_CHECKBOX[]          = wxT("checkbox");
-inline constexpr wxChar wxINP_HANDLER_CHECKLISTBOX[]      = wxT("checklistbox");
-inline constexpr wxChar wxINP_HANDLER_COMBOBOX[]          = wxT("combobox");
-inline constexpr wxChar wxINP_HANDLER_LISTBOX[]           = wxT("listbox");
-inline constexpr wxChar wxINP_HANDLER_NOTEBOOK[]          = wxT("notebook");
-inline constexpr wxChar wxINP_HANDLER_RADIOBTN[]          = wxT("radiobtn");
-inline constexpr wxChar wxINP_HANDLER_SCROLLBAR[]         = wxT("scrollbar");
-inline constexpr wxChar wxINP_HANDLER_SLIDER[]            = wxT("slider");
-inline constexpr wxChar wxINP_HANDLER_SPINBTN[]           = wxT("spinbtn");
-inline constexpr wxChar wxINP_HANDLER_STATUSBAR[]         = wxT("statusbar");
-inline constexpr wxChar wxINP_HANDLER_TEXTCTRL[]          = wxT("textctrl");
-inline constexpr wxChar wxINP_HANDLER_TOOLBAR[]           = wxT("toolbar");
-inline constexpr wxChar wxINP_HANDLER_TOPLEVEL[]          = wxT("toplevel");
+constexpr wxChar wxINP_HANDLER_DEFAULT[]           = wxT("");
+constexpr wxChar wxINP_HANDLER_BUTTON[]            = wxT("button");
+constexpr wxChar wxINP_HANDLER_CHECKBOX[]          = wxT("checkbox");
+constexpr wxChar wxINP_HANDLER_CHECKLISTBOX[]      = wxT("checklistbox");
+constexpr wxChar wxINP_HANDLER_COMBOBOX[]          = wxT("combobox");
+constexpr wxChar wxINP_HANDLER_LISTBOX[]           = wxT("listbox");
+constexpr wxChar wxINP_HANDLER_NOTEBOOK[]          = wxT("notebook");
+constexpr wxChar wxINP_HANDLER_RADIOBTN[]          = wxT("radiobtn");
+constexpr wxChar wxINP_HANDLER_SCROLLBAR[]         = wxT("scrollbar");
+constexpr wxChar wxINP_HANDLER_SLIDER[]            = wxT("slider");
+constexpr wxChar wxINP_HANDLER_SPINBTN[]           = wxT("spinbtn");
+constexpr wxChar wxINP_HANDLER_STATUSBAR[]         = wxT("statusbar");
+constexpr wxChar wxINP_HANDLER_TEXTCTRL[]          = wxT("textctrl");
+constexpr wxChar wxINP_HANDLER_TOOLBAR[]           = wxT("toolbar");
+constexpr wxChar wxINP_HANDLER_TOPLEVEL[]          = wxT("toplevel");
 
 // ----------------------------------------------------------------------------
 // wxInputHandler: maps the events to the actions

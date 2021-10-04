@@ -14,13 +14,13 @@ public:
     wxControl();
     wxControl(wxWindow *parent, wxWindowID id,
              const wxPoint& pos = wxDefaultPosition,
-             const wxSize& size = wxDefaultSize, long style = 0,
+             const wxSize& size = wxDefaultSize, unsigned int style = 0,
              const wxValidator& validator = wxDefaultValidator,
              const wxString& name = wxASCII_STR(wxControlNameStr));
 
     bool Create(wxWindow *parent, wxWindowID id,
             const wxPoint& pos = wxDefaultPosition,
-            const wxSize& size = wxDefaultSize, long style = 0,
+            const wxSize& size = wxDefaultSize, unsigned int style = 0,
             const wxValidator& validator = wxDefaultValidator,
             const wxString& name = wxASCII_STR(wxControlNameStr));
 
@@ -28,7 +28,7 @@ public:
 
 protected:
     bool QtCreateControl( wxWindow *parent, wxWindowID id, const wxPoint &pos,
-        const wxSize &size, long style, const wxValidator &validator,
+        const wxSize &size, unsigned int style, const wxValidator &validator,
         const wxString &name );
 
 private:

@@ -966,7 +966,7 @@ std::string wxGridCellNumberEditor::GetValue() const
 
 wxGridCellFloatEditor::wxGridCellFloatEditor(int width,
                                              int precision,
-                                             int format)
+                                             unsigned int format)
     : m_width(width),
       m_precision(precision),
       m_style(format)

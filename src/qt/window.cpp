@@ -296,7 +296,7 @@ wxWindowQt::wxWindowQt()
 
 
 wxWindowQt::wxWindowQt(wxWindowQt *parent, wxWindowID id, const wxPoint& pos, const wxSize& size,
-    long style, const wxString& name)
+    unsigned int style, const wxString& name)
 {
     Init();
 
@@ -343,7 +343,7 @@ wxWindowQt::~wxWindowQt()
 
 
 bool wxWindowQt::Create( wxWindowQt * parent, wxWindowID id, const wxPoint & pos,
-        const wxSize & size, long style, const wxString &name )
+        const wxSize & size, unsigned int style, const wxString &name )
 {
     // If the underlying control hasn't been created then this most probably means
     // that a generic control, like wxPanel, is being created, so we need a very
@@ -786,7 +786,7 @@ void wxWindowQt::SetDropTarget( wxDropTarget *dropTarget )
 }
 #endif
 
-void wxWindowQt::SetWindowStyleFlag( long style )
+void wxWindowQt::SetWindowStyleFlag( unsigned int style )
 {
     wxWindowBase::SetWindowStyleFlag( style );
 

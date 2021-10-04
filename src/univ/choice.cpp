@@ -27,7 +27,7 @@ wxChoice::wxChoice(wxWindow *parent, wxWindowID id,
                    const wxPoint& pos,
                    const wxSize& size,
                    const wxArrayString& choices,
-                   long style,
+                   unsigned int style,
                    const wxValidator& validator,
                    const wxString& name)
 {
@@ -38,7 +38,7 @@ bool wxChoice::Create(wxWindow *parent, wxWindowID id,
                       const wxPoint& pos,
                       const wxSize& size,
                       const wxArrayString& choices,
-                      long style,
+                      unsigned int style,
                       const wxValidator& validator,
                       const wxString& name)
 {
@@ -52,7 +52,7 @@ bool wxChoice::Create(wxWindow *parent, wxWindowID id,
                       const wxPoint& pos,
                       const wxSize& size,
                       int n, const wxString choices[],
-                      long style,
+                      unsigned int style,
                       const wxValidator& validator,
                       const wxString& name)
 {

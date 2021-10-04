@@ -51,7 +51,7 @@ class WXDLLIMPEXP_CORE wxAcceleratorEntry
 {
 public:
     wxAcceleratorEntry() = default;
-    wxAcceleratorEntry(int flags,
+    wxAcceleratorEntry(unsigned int flags,
                        int keyCode,
                        int cmd,
                        wxMenuItem *item)
@@ -65,7 +65,7 @@ public:
     // string couldn't be parsed or a pointer to be deleted by the caller
     static std::optional<wxAcceleratorEntry> Create(const std::string& str);
 
-    void Set(int flags, int keyCode, int cmd, wxMenuItem *item = nullptr)
+    void Set(unsigned int flags, int keyCode, int cmd, wxMenuItem *item = nullptr)
     {
         m_flags = flags;
         m_keyCode = keyCode;
@@ -75,7 +75,7 @@ public:
 
     void SetMenuItem(wxMenuItem *item) { m_item = item; }
 
-    int GetFlags() const { return m_flags; }
+    unsigned int GetFlags() const { return m_flags; }
     int GetKeyCode() const { return m_keyCode; }
     int GetCommand() const { return m_command; }
 
@@ -125,10 +125,10 @@ private:
     std::string AsPossiblyLocalizedString(bool localized) const;
 
     // common part of Create() and FromString()
-    static bool ParseAccel(const std::string& str, int *flags, int *keycode);
+    static bool ParseAccel(const std::string& str, unsigned int* flags, int *keycode);
 
 
-    int m_flags{0};    // combination of wxACCEL_XXX constants
+    unsigned int m_flags{};    // combination of wxACCEL_XXX constants
     int m_keyCode{0};  // ASCII or virtual keycode
     int m_command{0};  // Command id to generate
 

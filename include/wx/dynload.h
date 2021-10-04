@@ -49,7 +49,7 @@ public:
 
     inline static wxDLImports* ms_classes{nullptr};  // Static hash of all imported classes.
 
-    wxPluginLibrary( const wxString &libname, int flags = wxDL_DEFAULT );
+    wxPluginLibrary( const wxString &libname, unsigned int flags = wxDL_DEFAULT );
     ~wxPluginLibrary();
 
     wxPluginLibrary(const wxPluginLibrary&) = delete;
@@ -129,7 +129,7 @@ public:
     wxPluginManager(wxPluginManager&&) = default;
     wxPluginManager& operator=(wxPluginManager&&) = default;
 
-    bool   Load(const wxString &libname, int flags = wxDL_DEFAULT);
+    bool   Load(const wxString &libname, unsigned int flags = wxDL_DEFAULT);
     void   Unload();
 
     bool   IsLoaded() const { return m_entry && m_entry->IsLoaded(); }

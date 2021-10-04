@@ -232,7 +232,7 @@ wxSize wxTopLevelWindowBase::GetDefaultSize()
     return size;
 }
 
-void wxTopLevelWindowBase::DoCentre(int dir)
+void wxTopLevelWindowBase::DoCentre(unsigned int dir)
 {
     // on some platforms centering top level windows is impossible
     // because they are always maximized by guidelines or limitations
@@ -496,7 +496,7 @@ void wxTopLevelWindowBase::DoUpdateWindowUI(wxUpdateUIEvent& event)
     }
 }
 
-void wxTopLevelWindowBase::RequestUserAttention(int WXUNUSED(flags))
+void wxTopLevelWindowBase::RequestUserAttention(unsigned int WXUNUSED(flags))
 {
     // it's probably better than do nothing, isn't it?
     Raise();

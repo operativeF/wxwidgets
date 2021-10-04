@@ -39,7 +39,7 @@ bool wxFrame::Create(wxWindow *parent,
                      const wxString& title,
                      const wxPoint& pos,
                      const wxSize& size,
-                     long style,
+                     unsigned int style,
                      const wxString& name)
 {
     if ( !wxTopLevelWindow::Create(parent, id, title, pos, size, style, name) )
@@ -126,7 +126,7 @@ void wxFrame::PositionStatusBar()
     }
 }
 
-wxStatusBar* wxFrame::CreateStatusBar(int number, long style,
+wxStatusBar* wxFrame::CreateStatusBar(int number, unsigned int style,
                                       wxWindowID id, const wxString& name)
 {
     wxStatusBar *bar = wxFrameBase::CreateStatusBar(number, style, id, name);
@@ -138,7 +138,7 @@ wxStatusBar* wxFrame::CreateStatusBar(int number, long style,
 
 #if wxUSE_TOOLBAR
 
-wxToolBar* wxFrame::CreateToolBar(long style, wxWindowID id, const wxString& name)
+wxToolBar* wxFrame::CreateToolBar(unsigned int style, wxWindowID id, const wxString& name)
 {
     if ( wxFrameBase::CreateToolBar(style, id, name) )
     {

@@ -2251,7 +2251,7 @@ wxString TestableGrid::ToString() const
     const int numRows = GetNumberRows();
     const int numCols = GetNumberCols();
 
-    const int colMargin = GetRowLabelValue(numRows - 1).length();
+    const std::size_t colMargin = GetRowLabelValue(numRows - 1).length();
     const wxString leftIndent = wxString(' ', colMargin + 1);
 
     // String s contains the rendering of the grid, start with drawing

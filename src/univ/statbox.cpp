@@ -34,7 +34,7 @@ bool wxStaticBox::Create(wxWindow *parent,
                          const wxString &label,
                          const wxPoint &pos,
                          const wxSize &size,
-                         long style,
+                         unsigned int style,
                          const wxString &name)
 {
     // FIXME refresh just the right/bottom parts affected in OnSize

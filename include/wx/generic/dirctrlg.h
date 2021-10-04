@@ -186,7 +186,7 @@ protected:
                 int image = -1, int selectedImage = -1,
                 wxTreeItemData * data = nullptr);
     //void FindChildFiles(wxTreeItemId id, int dirFlags, wxArrayString& filenames);
-    virtual wxTreeCtrl* CreateTreeCtrl(wxWindow *parent, wxWindowID id, const wxPoint& pos, const wxSize& size, long treeStyle);
+    virtual wxTreeCtrl* CreateTreeCtrl(wxWindow *parent, wxWindowID id, const wxPoint& pos, const wxSize& size, unsigned int treeStyle);
 
     // Extract description and actual filter from overall filter string
     bool ExtractWildcard(const wxString& filterStr, int n, wxString& filter, wxString& description);

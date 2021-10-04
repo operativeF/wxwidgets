@@ -27,12 +27,12 @@ wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_LISTBOOK_PAGE_CHANGED,  wxBook
 wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_LISTBOOK_PAGE_CHANGING, wxBookCtrlEvent );
 
 // wxListbook flags
-inline constexpr int wxLB_DEFAULT    = wxBK_DEFAULT;
-inline constexpr int wxLB_TOP        = wxBK_TOP;
-inline constexpr int wxLB_BOTTOM     = wxBK_BOTTOM;
-inline constexpr int wxLB_LEFT       = wxBK_LEFT;
-inline constexpr int wxLB_RIGHT      = wxBK_RIGHT;
-inline constexpr int wxLB_ALIGN_MASK = wxBK_ALIGN_MASK;
+constexpr unsigned int wxLB_DEFAULT    = wxBK_DEFAULT;
+constexpr unsigned int wxLB_TOP        = wxBK_TOP;
+constexpr unsigned int wxLB_BOTTOM     = wxBK_BOTTOM;
+constexpr unsigned int wxLB_LEFT       = wxBK_LEFT;
+constexpr unsigned int wxLB_RIGHT      = wxBK_RIGHT;
+constexpr unsigned int wxLB_ALIGN_MASK = wxBK_ALIGN_MASK;
 
 // ----------------------------------------------------------------------------
 // wxListbook
@@ -79,7 +79,7 @@ public:
                             int imageId = NO_IMAGE) override;
     int SetSelection(size_t n) override { return DoSetSelection(n, SetSelection_SendEvent); }
     int ChangeSelection(size_t n) override { return DoSetSelection(n); }
-    int HitTest(const wxPoint& pt, long *flags = nullptr) const override;
+    int HitTest(const wxPoint& pt, unsigned int* flags = nullptr) const override;
     void SetImageList(wxImageList *imageList) override;
 
     bool DeleteAllPages() override;
@@ -95,7 +95,7 @@ protected:
     void MakeChangedEvent(wxBookCtrlEvent &event) override;
 
     // Get the correct wxListCtrl flags to use depending on our own flags.
-    long GetListCtrlFlags() const;
+    unsigned int GetListCtrlFlags() const;
 
     // event handlers
     void OnListSelected(wxListEvent& event);

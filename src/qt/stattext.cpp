@@ -32,7 +32,7 @@ wxStaticText::wxStaticText(wxWindow *parent,
              const wxString &label,
              const wxPoint &pos,
              const wxSize &size,
-             long style,
+             unsigned int style,
              const wxString &name)
 {
     Create( parent, id, label, pos, size, style, name );
@@ -43,7 +43,7 @@ bool wxStaticText::Create(wxWindow *parent,
             const wxString &label,
             const wxPoint &pos,
             const wxSize &size,
-            long style,
+            unsigned int style,
             const wxString &name)
 {
     m_qtLabel = new wxQtStaticText( parent, this );

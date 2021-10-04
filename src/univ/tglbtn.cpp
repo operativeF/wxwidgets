@@ -34,7 +34,7 @@ wxToggleButton::wxToggleButton(wxWindow *parent,
                        const wxString& label,
                        const wxPoint& pos,
                        const wxSize& size,
-                       long style,
+                       unsigned int style,
                        const wxValidator& validator,
                        const wxString& name)
 {
@@ -46,7 +46,7 @@ bool wxToggleButton::Create(wxWindow *parent,
                             wxWindowID id,
                             const wxString& lbl,
                             const wxPoint& pos,
-                            const wxSize& size, long style,
+                            const wxSize& size, unsigned int style,
                             const wxValidator& validator,
                             const wxString& name)
 {

@@ -215,7 +215,7 @@ public:
                                    const wxBitmap& bitmap,
                                    const wxRect& rect,
                                    int flags = 0,
-                                   long style = 0,
+                                   unsigned int style = 0,
                                    int tbarStyle = 0) = 0;
 #endif // wxUSE_TOOLBAR
 
@@ -251,7 +251,7 @@ public:
                                  int lenThumb,
                                  wxOrientation orient,
                                  int flags = 0,
-                                 long style = 0,
+                                 unsigned int style = 0,
                                  wxRect *rectShaft = NULL) = 0;
 
     // draw the slider thumb
@@ -259,7 +259,7 @@ public:
                                  const wxRect& rect,
                                  wxOrientation orient,
                                  int flags = 0,
-                                 long style = 0) = 0;
+                                 unsigned int style = 0) = 0;
 
     // draw the slider ticks
     virtual void DrawSliderTicks(wxDC& dc,
@@ -270,7 +270,7 @@ public:
                                  int end,
                                  int step = 1,
                                  int flags = 0,
-                                 long style = 0) = 0;
+                                 unsigned int style = 0) = 0;
 #endif // wxUSE_SLIDER
 
 #if wxUSE_MENUS
@@ -427,7 +427,7 @@ public:
     virtual wxRect GetSliderShaftRect(const wxRect& rect,
                                       int lenThumb,
                                       wxOrientation orient,
-                                      long style = 0) const = 0;
+                                      unsigned int style = 0) const = 0;
 
     // get the size of the slider thumb for the given total slider rect
     virtual wxSize GetSliderThumbSize(const wxRect& rect,
@@ -616,7 +616,7 @@ public:
                                    const wxBitmap& bitmap,
                                    const wxRect& rect,
                                    int flags = 0,
-                                   long style = 0,
+                                   unsigned int style = 0,
                                    int tbarStyle = 0) override
         { m_renderer->DrawToolBarButton(dc, label, bitmap, rect, flags, style, tbarStyle); }
 #endif // wxUSE_TOOLBAR
@@ -651,14 +651,14 @@ public:
                                  int lenThumb,
                                  wxOrientation orient,
                                  int flags = 0,
-                                 long style = 0,
+                                 unsigned int style = 0,
                                  wxRect *rectShaft = NULL) override
         { m_renderer->DrawSliderShaft(dc, rect, lenThumb, orient, flags, style, rectShaft); }
     virtual void DrawSliderThumb(wxDC& dc,
                                  const wxRect& rect,
                                  wxOrientation orient,
                                  int flags = 0,
-                                 long style = 0) override
+                                 unsigned int style = 0) override
         { m_renderer->DrawSliderThumb(dc, rect, orient, flags, style); }
     virtual void DrawSliderTicks(wxDC& dc,
                                  const wxRect& rect,
@@ -668,7 +668,7 @@ public:
                                  int end,
                                  int WXUNUSED(step) = 1,
                                  int flags = 0,
-                                 long style = 0) override
+                                 unsigned int style = 0) override
         { m_renderer->DrawSliderTicks(dc, rect, lenThumb, orient,
                                       start, end, start, flags, style); }
 #endif // wxUSE_SLIDER
@@ -798,7 +798,7 @@ public:
     virtual wxRect GetSliderShaftRect(const wxRect& rect,
                                       int lenThumb,
                                       wxOrientation orient,
-                                      long style = 0) const override
+                                      unsigned int style = 0) const override
         { return m_renderer->GetSliderShaftRect(rect, lenThumb, orient, style); }
     virtual wxSize GetSliderThumbSize(const wxRect& rect,
                                       int lenThumb,

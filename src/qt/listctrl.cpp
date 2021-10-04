@@ -1041,7 +1041,7 @@ wxListCtrl::wxListCtrl(wxWindow *parent,
            wxWindowID id,
            const wxPoint& pos,
            const wxSize& size,
-           long style,
+           unsigned int style,
            const wxValidator& validator,
            const wxString& name)
 {
@@ -1054,7 +1054,7 @@ bool wxListCtrl::Create(wxWindow *parent,
             wxWindowID id,
             const wxPoint& pos,
             const wxSize& size,
-            long style,
+            unsigned int style,
             const wxValidator& validator,
             const wxString& name)
 {
@@ -1500,7 +1500,7 @@ void wxListCtrl::SetSingleStyle(long WXUNUSED(style), bool WXUNUSED(add))
 {
 }
 
-void wxListCtrl::SetWindowStyleFlag(long style)
+void wxListCtrl::SetWindowStyleFlag(unsigned int style)
 {
     m_windowStyle = style;
     m_qtTreeWidget->setHeaderHidden((style & wxLC_NO_HEADER) != 0);

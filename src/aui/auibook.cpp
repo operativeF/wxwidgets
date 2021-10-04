@@ -3335,7 +3335,7 @@ void wxAuiNotebook::SetPageSize (const wxSize& WXUNUSED(size))
     wxFAIL_MSG("Not implemented for wxAuiNotebook");
 }
 
-int wxAuiNotebook::HitTest (const wxPoint &pt, long *flags) const
+int wxAuiNotebook::HitTest (const wxPoint &pt, unsigned int* flags) const
 {
     wxWindow *w = nullptr;
     long position = wxBK_HITTEST_NOWHERE;

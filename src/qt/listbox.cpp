@@ -75,7 +75,7 @@ wxListBox::wxListBox(wxWindow *parent, wxWindowID id,
         const wxPoint& pos,
         const wxSize& size,
         int n, const wxString choices[],
-        long style,
+        unsigned int style,
         const wxValidator& validator,
         const wxString& name)
 {
@@ -86,7 +86,7 @@ wxListBox::wxListBox(wxWindow *parent, wxWindowID id,
         const wxPoint& pos,
         const wxSize& size,
         const wxArrayString& choices,
-        long style,
+        unsigned int style,
         const wxValidator& validator,
         const wxString& name)
 {
@@ -102,7 +102,7 @@ bool wxListBox::Create(wxWindow *parent, wxWindowID id,
             const wxPoint& pos,
             const wxSize& size,
             int n, const wxString choices[],
-            long style,
+            unsigned int style,
             const wxValidator& validator,
             const wxString& name)
 {
@@ -127,7 +127,7 @@ bool wxListBox::Create(wxWindow *parent, wxWindowID id,
             const wxPoint& pos,
             const wxSize& size,
             const wxArrayString& choices,
-            long style,
+            unsigned int style,
             const wxValidator& validator,
             const wxString& name)
 {
@@ -143,7 +143,7 @@ bool wxListBox::Create(wxWindow *parent, wxWindowID id,
     return wxListBoxBase::Create( parent, id, pos, size, style, validator, name );
 }
 
-void wxListBox::DoCreate(wxWindow* parent, long style)
+void wxListBox::DoCreate(wxWindow* parent, unsigned int style)
 {
     Init();
 

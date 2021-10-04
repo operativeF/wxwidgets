@@ -25,7 +25,7 @@ public:
                wxWindowID id = wxID_ANY,
                const wxPoint& pos = wxDefaultPosition,
                const wxSize& size = wxDefaultSize,
-               long style = wxLC_ICON,
+               unsigned int style = wxLC_ICON,
                const wxValidator& validator = wxDefaultValidator,
                const wxString& name = wxASCII_STR(wxListCtrlNameStr));
 
@@ -33,7 +33,7 @@ public:
                 wxWindowID id = wxID_ANY,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = wxLC_ICON,
+                unsigned int style = wxLC_ICON,
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxASCII_STR(wxListCtrlNameStr));
 
@@ -166,10 +166,10 @@ public:
     void CheckItem(long item, bool check) override;
 
     // Add or remove a single window style
-    void SetSingleStyle(long style, bool add = true);
+    void SetSingleStyle(unsigned int style, bool add = true);
 
     // Set the whole window style
-    void SetWindowStyleFlag(long style) override;
+    void SetWindowStyleFlag(unsigned int style) override;
 
     // Searches for an item, starting from 'item'.
     // item can be -1 to find the first item that matches the
@@ -233,7 +233,7 @@ public:
     // Determines which item (if any) is at the specified point,
     // giving details in 'flags' (see wxLIST_HITTEST_... flags above)
     // Request the subitem number as well at the given coordinate.
-    long HitTest(const wxPoint& point, int& flags, long* ptrSubItem = NULL) const;
+    long HitTest(const wxPoint& point, unsigned int& flags, long* ptrSubItem = NULL) const;
 
     // Inserts an item, returning the index of the new item if successful,
     // -1 otherwise.

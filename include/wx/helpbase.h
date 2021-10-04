@@ -23,7 +23,7 @@ class WXDLLIMPEXP_FWD_CORE wxFrame;
 class WXDLLIMPEXP_FWD_CORE wxWindow;
 
 // Flags for SetViewer
-inline constexpr int wxHELP_NETSCAPE = 1;
+constexpr unsigned int wxHELP_NETSCAPE = 1;
 
 // Search modes:
 enum class wxHelpSearchMode

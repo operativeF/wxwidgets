@@ -189,7 +189,7 @@ wxTextCtrl::wxTextCtrl( wxWindow *parent,
                         const wxString &value,
                         const wxPoint &pos,
                         const wxSize &size,
-                        long style,
+                        unsigned int style,
                         const wxValidator& validator,
                         const wxString &name )
     : wxScrollHelper(this)
@@ -209,7 +209,7 @@ bool wxTextCtrl::Create( wxWindow *parent,
                          const wxString &value,
                          const wxPoint &pos,
                          const wxSize &size,
-                         long style,
+                         unsigned int style,
                          const wxValidator& validator,
                          const wxString &name )
 {

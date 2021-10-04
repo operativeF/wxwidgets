@@ -105,7 +105,7 @@ bool wxIsStockID(wxWindowID id)
     }
 }
 
-std::string wxGetStockLabel(wxWindowID id, long flags)
+std::string wxGetStockLabel(wxWindowID id, unsigned int flags)
 {
     std::string stockLabel;
 

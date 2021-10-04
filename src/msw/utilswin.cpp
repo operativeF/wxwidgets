@@ -25,7 +25,7 @@
 // Launch document with default app
 // ----------------------------------------------------------------------------
 
-bool wxLaunchDefaultApplication(const wxString& document, int flags)
+bool wxLaunchDefaultApplication(const wxString& document, unsigned int flags)
 {
     wxUnusedVar(flags);
 

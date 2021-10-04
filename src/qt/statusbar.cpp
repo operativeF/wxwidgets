@@ -37,7 +37,7 @@ wxStatusBar::wxStatusBar()
 }
 
 wxStatusBar::wxStatusBar(wxWindow *parent, wxWindowID winid,
-            long style,
+            unsigned int style,
             const wxString& name)
 {
     Init();
@@ -45,7 +45,7 @@ wxStatusBar::wxStatusBar(wxWindow *parent, wxWindowID winid,
 }
 
 bool wxStatusBar::Create(wxWindow *parent, wxWindowID WXUNUSED(winid),
-                         long style, const wxString& WXUNUSED(name))
+                         unsigned int style, const wxString& WXUNUSED(name))
 {
     m_qtStatusBar = new wxQtStatusBar( parent, this );
 

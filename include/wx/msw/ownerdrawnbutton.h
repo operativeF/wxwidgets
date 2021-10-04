@@ -69,12 +69,12 @@ protected:
     // drawing it. Notice that this class already takes care of the common
     // logic and sets the other wxCONTROL_XXX flags on its own, this method
     // really only needs to return the flags depending on the checked state.
-    virtual int MSWGetButtonCheckedFlag() const = 0;
+    virtual unsigned int MSWGetButtonCheckedFlag() const = 0;
 
     // Actually draw the check or radio bitmap, typically just by using the
     // appropriate wxRendererNative method.
     virtual void
-        MSWDrawButtonBitmap(wxDC& dc, const wxRect& rect, int flags) = 0;
+        MSWDrawButtonBitmap(wxDC& dc, const wxRect& rect, unsigned int flags) = 0;
 
 
 private:

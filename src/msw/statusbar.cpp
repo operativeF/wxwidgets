@@ -525,7 +525,7 @@ void wxStatusBar::SetStatusStyles(int n, const int styles[])
 
     for (int i = 0; i < n; i++)
     {
-        int style;
+        unsigned int style;
         switch(styles[i])
         {
         case wxSB_RAISED:

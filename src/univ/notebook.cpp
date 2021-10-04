@@ -115,7 +115,7 @@ bool wxNotebook::Create(wxWindow *parent,
                         wxWindowID id,
                         const wxPoint& pos,
                         const wxSize& size,
-                        long style,
+                        unsigned int style,
                         const wxString& name)
 {
     if ( (style & wxBK_ALIGN_MASK) == wxBK_DEFAULT )
@@ -652,7 +652,7 @@ bool wxNotebook::IsVertical() const
 
 wxDirection wxNotebook::GetTabOrientation() const
 {
-    long style = wxGetWindowStyle();
+    unsigned int style = wxGetWindowStyle();
     if ( style & wxBK_BOTTOM )
         return wxBOTTOM;
     else if ( style & wxBK_RIGHT )

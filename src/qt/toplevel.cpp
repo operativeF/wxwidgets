@@ -22,7 +22,7 @@ wxTopLevelWindowQt::wxTopLevelWindowQt(wxWindow *parent,
            const wxString &title,
            const wxPoint &pos,
            const wxSize &size,
-           long style,
+           unsigned int style,
            const wxString &name )
 {
     Create( parent, winId, title, pos, size, style, name );
@@ -30,7 +30,7 @@ wxTopLevelWindowQt::wxTopLevelWindowQt(wxWindow *parent,
 
 bool wxTopLevelWindowQt::Create( wxWindow *parent, wxWindowID winId,
     const wxString &title, const wxPoint &pos, const wxSize &sizeOrig,
-    long style, const wxString &name )
+    unsigned int style, const wxString &name )
 {
     wxSize size(sizeOrig);
     if ( !size.IsFullySpecified() )
@@ -160,7 +160,7 @@ void wxTopLevelWindowQt::SetIcons( const wxIconBundle& icons )
     GetHandle()->setWindowIcon( qtIcons );
 }
 
-void wxTopLevelWindowQt::SetWindowStyleFlag( long style )
+void wxTopLevelWindowQt::SetWindowStyleFlag( unsigned int style )
 {
     wxWindow::SetWindowStyleFlag( style );
 

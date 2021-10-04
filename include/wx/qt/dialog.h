@@ -19,7 +19,7 @@ public:
             const wxString &title,
             const wxPoint &pos = wxDefaultPosition,
             const wxSize &size = wxDefaultSize,
-            long style = wxDEFAULT_DIALOG_STYLE,
+            unsigned int style = wxDEFAULT_DIALOG_STYLE,
             const wxString &name = wxASCII_STR(wxDialogNameStr) );
 
     virtual ~wxDialog();
@@ -28,7 +28,7 @@ public:
             const wxString &title,
             const wxPoint &pos = wxDefaultPosition,
             const wxSize &size = wxDefaultSize,
-            long style = wxDEFAULT_DIALOG_STYLE,
+            unsigned int style = wxDEFAULT_DIALOG_STYLE,
             const wxString &name = wxASCII_STR(wxDialogNameStr) );
 
     int ShowModal() override;

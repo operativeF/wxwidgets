@@ -20,7 +20,7 @@ public:
             int range,
             const wxPoint& pos = wxDefaultPosition,
             const wxSize& size = wxDefaultSize,
-            long style = wxGA_HORIZONTAL,
+            unsigned int style = wxGA_HORIZONTAL,
             const wxValidator& validator = wxDefaultValidator,
             const wxString& name = wxASCII_STR(wxGaugeNameStr));
 
@@ -29,7 +29,7 @@ public:
                 int range,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = wxGA_HORIZONTAL,
+                unsigned int style = wxGA_HORIZONTAL,
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxASCII_STR(wxGaugeNameStr));
 

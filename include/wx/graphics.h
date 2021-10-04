@@ -655,7 +655,7 @@ public:
     virtual wxGraphicsFont wxCreateFont( const wxFont &font , const wxColour &col = *wxBLACK ) const;
     virtual wxGraphicsFont wxCreateFont(double sizeInPixels,
                                       const std::string& facename,
-                                      int flags = wxFONTFLAG_DEFAULT,
+                                      unsigned int flags = wxFONTFLAG_DEFAULT,
                                       const wxColour& col = *wxBLACK) const;
 
     // create a native bitmap representation
@@ -1046,7 +1046,7 @@ public:
     virtual wxGraphicsFont wxCreateFont( const wxFont &font , const wxColour &col = *wxBLACK ) = 0;
     virtual wxGraphicsFont wxCreateFont(double sizeInPixels,
                                       const std::string& facename,
-                                      int flags = wxFONTFLAG_DEFAULT,
+                                      unsigned int flags = wxFONTFLAG_DEFAULT,
                                       const wxColour& col = *wxBLACK) = 0;
     virtual wxGraphicsFont CreateFontAtDPI(const wxFont& font,
                                            const wxRealPoint& dpi,

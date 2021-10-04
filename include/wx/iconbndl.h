@@ -86,11 +86,11 @@ public:
 
     // returns the icon with the given size; if no such icon exists,
     // behavior is specified by the flags.
-    wxIcon GetIcon(const wxSize& size, int flags = FALLBACK_SYSTEM) const;
+    wxIcon GetIcon(const wxSize& size, unsigned int flags = FALLBACK_SYSTEM) const;
 
     // equivalent to GetIcon(wxSize(size, size))
     wxIcon GetIcon(wxCoord size = wxDefaultCoord,
-                   int flags = FALLBACK_SYSTEM) const
+                   unsigned int flags = FALLBACK_SYSTEM) const
         { return GetIcon(wxSize(size, size), flags); }
 
     // returns the icon exactly of the specified size or wxNullIcon if no icon

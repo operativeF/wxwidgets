@@ -31,7 +31,7 @@ wxStaticBitmap::wxStaticBitmap( wxWindow *parent,
                 const wxBitmap& label,
                 const wxPoint& pos,
                 const wxSize& size,
-                long style,
+                unsigned int style,
                 const wxString& name)
 {
     Create( parent, id, label, pos, size, style, name );
@@ -42,7 +42,7 @@ bool wxStaticBitmap::Create( wxWindow *parent,
              const wxBitmap& label,
              const wxPoint& pos,
              const wxSize& size,
-             long style,
+             unsigned int style,
              const wxString& name)
 {
     m_qtLabel = new wxQtStaticBmp( parent, this );

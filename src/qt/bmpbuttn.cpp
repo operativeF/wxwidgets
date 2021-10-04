@@ -20,7 +20,7 @@ wxBitmapButton::wxBitmapButton(wxWindow *parent,
                const wxBitmap& bitmap,
                const wxPoint& pos,
                const wxSize& size,
-               long style,
+               unsigned int style,
                const wxValidator& validator,
                const wxString& name )
 {
@@ -33,7 +33,7 @@ bool wxBitmapButton::Create(wxWindow *parent,
             const wxBitmap& bitmap,
             const wxPoint& pos,
             const wxSize& size,
-            long style,
+            unsigned int style,
             const wxValidator& validator,
             const wxString& name )
 {

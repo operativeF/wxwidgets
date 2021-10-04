@@ -19,7 +19,7 @@ wxColourPickerWidget::wxColourPickerWidget(wxWindow *parent,
                const wxColour& initial,
                const wxPoint& pos,
                const wxSize& size,
-               long style,
+               unsigned int style,
                const wxValidator& validator,
                const wxString& name )
 {
@@ -32,7 +32,7 @@ bool wxColourPickerWidget::Create(wxWindow *parent,
             const wxColour& initial,
             const wxPoint& pos,
             const wxSize& size,
-            long style,
+            unsigned int style,
             const wxValidator& validator,
             const wxString& name )
 {

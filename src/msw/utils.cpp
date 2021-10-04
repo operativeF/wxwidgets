@@ -567,7 +567,7 @@ BOOL CALLBACK wxEnumFindByPidProc(HWND hwnd, LPARAM lParam)
 
 int wxKillAllChildren(long pid, wxSignal sig, wxKillError *krc);
 
-int wxKill(long pid, wxSignal sig, wxKillError *krc, int flags)
+int wxKill(long pid, wxSignal sig, wxKillError *krc, unsigned int flags)
 {
     if (flags & wxKILL_CHILDREN)
         wxKillAllChildren(pid, sig, krc);

@@ -42,7 +42,7 @@ QDate wxQtConvertDate(const wxDateTime& date)
 
 #endif // wxUSE_DATETIME
 
-Qt::Orientation wxQtConvertOrientation( long style, wxOrientation defaultOrientation )
+Qt::Orientation wxQtConvertOrientation( unsigned int style, wxOrientation defaultOrientation )
 {
     if (( style & ( wxHORIZONTAL | wxVERTICAL )) == 0 )
         style |= defaultOrientation;

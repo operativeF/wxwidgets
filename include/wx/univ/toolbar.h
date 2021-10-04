@@ -23,8 +23,8 @@ class WXDLLIMPEXP_FWD_CORE wxToolBarTool;
 #define wxACTION_TOOLBAR_PRESS   wxACTION_BUTTON_PRESS
 #define wxACTION_TOOLBAR_RELEASE wxACTION_BUTTON_RELEASE
 #define wxACTION_TOOLBAR_CLICK   wxACTION_BUTTON_CLICK
-inline constexpr wxChar wxACTION_TOOLBAR_ENTER[]   = wxT("enter");     // highlight the tool
-inline constexpr wxChar wxACTION_TOOLBAR_LEAVE[]   = wxT("leave");     // unhighlight the tool
+constexpr wxChar wxACTION_TOOLBAR_ENTER[]   = wxT("enter");     // highlight the tool
+constexpr wxChar wxACTION_TOOLBAR_LEAVE[]   = wxT("leave");     // unhighlight the tool
 
 // ----------------------------------------------------------------------------
 // wxToolBar
@@ -39,7 +39,7 @@ public:
               wxWindowID id,
               const wxPoint& pos = wxDefaultPosition,
               const wxSize& size = wxDefaultSize,
-              long style = 0,
+              unsigned int style = 0,
               const wxString& name = wxASCII_STR(wxToolBarNameStr))
     {
         Init();
@@ -51,14 +51,14 @@ public:
                  wxWindowID id,
                  const wxPoint& pos = wxDefaultPosition,
                  const wxSize& size = wxDefaultSize,
-                 long style = 0,
+                 unsigned int style = 0,
                  const wxString& name = wxASCII_STR(wxToolBarNameStr) );
 
     ~wxToolBar();
 
     bool Realize() override;
 
-    void SetWindowStyleFlag( long style ) override;
+    void SetWindowStyleFlag( unsigned int style ) override;
 
     wxToolBarToolBase *FindToolForPosition(wxCoord x, wxCoord y) const override;
 

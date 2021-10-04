@@ -21,7 +21,7 @@ wxControl::wxControl()
 
 wxControl::wxControl(wxWindow *parent, wxWindowID id,
          const wxPoint& pos,
-         const wxSize& size, long style,
+         const wxSize& size, unsigned int style,
          const wxValidator& validator,
          const wxString& name )
 {
@@ -31,7 +31,7 @@ wxControl::wxControl(wxWindow *parent, wxWindowID id,
 
 bool wxControl::Create(wxWindow *parent, wxWindowID id,
         const wxPoint& pos,
-        const wxSize& size, long style,
+        const wxSize& size, unsigned int style,
         const wxValidator& validator,
         const wxString& name )
 {
@@ -45,7 +45,7 @@ bool wxControl::Create(wxWindow *parent, wxWindowID id,
 }
 
 bool wxControl::QtCreateControl( wxWindow *parent, wxWindowID id,
-    const wxPoint &pos, const wxSize &size, long style,
+    const wxPoint &pos, const wxSize &size, unsigned int style,
     const wxValidator &validator, const wxString &name )
 {
     // The Qt widget has been created without a position/size so move/resize it:

@@ -16,13 +16,13 @@
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
 
-static void ApplyStyle( QMenu *qtMenu, long style )
+static void ApplyStyle( QMenu *qtMenu, unsigned int style )
 {
     if ( style & wxMENU_TEAROFF )
         qtMenu->setTearOffEnabled( true );
 }
 
-wxMenu::wxMenu(long style)
+wxMenu::wxMenu(unsigned int style)
     : wxMenuBase( style )
 {
     m_qtMenu = new QMenu();
@@ -30,7 +30,7 @@ wxMenu::wxMenu(long style)
     ApplyStyle( m_qtMenu, style );
 }
 
-wxMenu::wxMenu(const wxString& title, long style)
+wxMenu::wxMenu(const wxString& title, unsigned int style)
     : wxMenuBase( title, style )
 {
     m_qtMenu = new QMenu( wxQtConvertString( title ));

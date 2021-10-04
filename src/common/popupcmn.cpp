@@ -115,7 +115,7 @@ wxEND_EVENT_TABLE()
 // wxPopupWindowBase
 // ----------------------------------------------------------------------------
 
-bool wxPopupWindowBase::Create(wxWindow* WXUNUSED(parent), int WXUNUSED(flags))
+bool wxPopupWindowBase::Create(wxWindow* WXUNUSED(parent), unsigned int WXUNUSED(flags))
 {
     // By default, block event propagation at this window as it usually
     // doesn't make sense. This notably prevents wxScrolledWindow from trying

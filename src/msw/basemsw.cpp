@@ -38,7 +38,7 @@ bool wxAppTraits::SafeMessageBox(const std::string& text,
                                  const std::string& title)
 {
     const HWND hwndParent = GetMainHWND();
-    int flags = MB_OK | MB_ICONSTOP;
+    unsigned int flags = MB_OK | MB_ICONSTOP;
 
     // Using MB_TASKMODAL with valid parent doesn't work well because it
     // prevents the typical behaviour of modal message boxes, e.g. the message

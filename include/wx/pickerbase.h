@@ -20,7 +20,7 @@
 class WXDLLIMPEXP_FWD_CORE wxTextCtrl;
 class WXDLLIMPEXP_FWD_CORE wxToolTip;
 
-inline constexpr char wxPickerNameStr[] = "picker";
+constexpr char wxPickerNameStr[] = "picker";
 
 // ----------------------------------------------------------------------------
 // wxPickerBase is the base class for the picker controls which support
@@ -31,8 +31,8 @@ inline constexpr char wxPickerNameStr[] = "picker";
 // its sizing and positioning.
 // ----------------------------------------------------------------------------
 
-inline constexpr int wxPB_USE_TEXTCTRL = 0x0002;
-inline constexpr int wxPB_SMALL        = 0x8000;
+constexpr unsigned int wxPB_USE_TEXTCTRL = 0x0002;
+constexpr unsigned int wxPB_SMALL        = 0x8000;
 
 class WXDLLIMPEXP_CORE wxPickerBase : public wxNavigationEnabled<wxControl>
 {

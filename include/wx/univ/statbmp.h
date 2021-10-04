@@ -28,7 +28,7 @@ public:
                    const wxBitmap& label,
                    const wxPoint& pos = wxDefaultPosition,
                    const wxSize& size = wxDefaultSize,
-                   long style = 0)
+                   unsigned int style = 0)
     {
         Create(parent, wxID_ANY, label, pos, size, style);
     }
@@ -38,7 +38,7 @@ public:
                    const wxBitmap& label,
                    const wxPoint& pos = wxDefaultPosition,
                    const wxSize& size = wxDefaultSize,
-                   long style = 0,
+                   unsigned int style = 0,
                    const wxString& name = wxASCII_STR(wxStaticBitmapNameStr))
     {
         Create(parent, id, label, pos, size, style, name);
@@ -49,7 +49,7 @@ public:
                 const wxBitmap& label,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = 0,
+                unsigned int style = 0,
                 const wxString& name = wxASCII_STR(wxStaticBitmapNameStr));
 
     void SetBitmap(const wxBitmap& bitmap) override;

@@ -21,14 +21,14 @@
 #include <string>
 
 // class name
-inline constexpr char wxCollapsiblePaneNameStr[] = "collapsiblePane";
+constexpr char wxCollapsiblePaneNameStr[] = "collapsiblePane";
 
 // ----------------------------------------------------------------------------
 // wxCollapsiblePaneBase: interface for wxCollapsiblePane
 // ----------------------------------------------------------------------------
 
-#define wxCP_DEFAULT_STYLE          (wxTAB_TRAVERSAL | wxNO_BORDER)
-#define wxCP_NO_TLW_RESIZE          (0x0002)
+constexpr unsigned int wxCP_DEFAULT_STYLE          = wxTAB_TRAVERSAL | wxNO_BORDER;
+constexpr unsigned int wxCP_NO_TLW_RESIZE          = 0x0002;
 
 class WXDLLIMPEXP_CORE wxCollapsiblePaneBase : public wxControl
 {

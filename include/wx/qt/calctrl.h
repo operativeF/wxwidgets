@@ -22,7 +22,7 @@ public:
                    const wxDateTime& date = wxDefaultDateTime,
                    const wxPoint& pos = wxDefaultPosition,
                    const wxSize& size = wxDefaultSize,
-                   long style = wxCAL_SHOW_HOLIDAYS,
+                   unsigned int style = wxCAL_SHOW_HOLIDAYS,
                    const wxString& name = wxASCII_STR(wxCalendarNameStr))
     {
         Init();
@@ -36,7 +36,7 @@ public:
                 const wxDateTime& date = wxDefaultDateTime,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = wxCAL_SHOW_HOLIDAYS,
+                unsigned int style = wxCAL_SHOW_HOLIDAYS,
                 const wxString& name = wxASCII_STR(wxCalendarNameStr));
 
     bool SetDate(const wxDateTime& date) override;
@@ -66,7 +66,7 @@ public:
     void ResetAttr(size_t day) override { SetAttr(day, NULL); }
 
 
-    void SetWindowStyleFlag(long style) override;
+    void SetWindowStyleFlag(unsigned int style) override;
 
     using wxCalendarCtrlBase::GenerateAllChangeEvents;
 

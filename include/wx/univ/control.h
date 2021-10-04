@@ -31,7 +31,7 @@ typedef wxString wxControlAction;
 // the list of actions which apply to all controls (other actions are defined
 // in the controls headers)
 
-inline constexpr wxChar wxACTION_NONE[]    = wxT("");           // no action to perform
+constexpr wxChar wxACTION_NONE[]    = wxT("");           // no action to perform
 
 // ----------------------------------------------------------------------------
 // wxControl: the base class for all GUI controls
@@ -45,7 +45,7 @@ public:
     wxControl(wxWindow *parent,
               wxWindowID id,
               const wxPoint& pos = wxDefaultPosition,
-              const wxSize& size = wxDefaultSize, long style = 0,
+              const wxSize& size = wxDefaultSize, unsigned int style = 0,
               const wxValidator& validator = wxDefaultValidator,
               const wxString& name = wxASCII_STR(wxControlNameStr))
     {
@@ -57,7 +57,7 @@ public:
     bool Create(wxWindow *parent,
                 wxWindowID id,
                 const wxPoint& pos = wxDefaultPosition,
-                const wxSize& size = wxDefaultSize, long style = 0,
+                const wxSize& size = wxDefaultSize, unsigned int style = 0,
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxASCII_STR(wxControlNameStr));
 

@@ -24,8 +24,8 @@
 
 class WXDLLIMPEXP_FWD_CORE wxTextCtrl;
 
-inline constexpr char wxGetTextFromUserPromptStr[] = "Input Text";
-inline constexpr char wxGetPasswordFromUserPromptStr[] = "Enter Password";
+constexpr char wxGetTextFromUserPromptStr[] = "Input Text";
+constexpr char wxGetPasswordFromUserPromptStr[] = "Enter Password";
 
 #define wxTextEntryDialogStyle (wxOK | wxCANCEL | wxCENTRE)
 

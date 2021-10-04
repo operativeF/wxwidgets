@@ -40,7 +40,7 @@ public:
                wxWindowID id = wxID_ANY,
                const wxPoint& pos = wxDefaultPosition,
                const wxSize& size = wxDefaultSize,
-               long style = 0,
+               unsigned int style = 0,
                const wxString& name = wxGLCanvasName,
                const wxPalette& palette = wxNullPalette);
 
@@ -50,7 +50,7 @@ public:
                const int *attribList = NULL,
                const wxPoint& pos = wxDefaultPosition,
                const wxSize& size = wxDefaultSize,
-               long style = 0,
+               unsigned int style = 0,
                const wxString& name = wxGLCanvasName,
                const wxPalette& palette = wxNullPalette);
 
@@ -61,7 +61,7 @@ public:
                 wxWindowID id = wxID_ANY,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = 0,
+                unsigned int style = 0,
                 const wxString& name = wxGLCanvasName,
                 const wxPalette& palette = wxNullPalette);
 
@@ -69,7 +69,7 @@ public:
                 wxWindowID id = wxID_ANY,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = 0,
+                unsigned int style = 0,
                 const wxString& name = wxGLCanvasName,
                 const int *attribList = NULL,
                 const wxPalette& palette = wxNullPalette);

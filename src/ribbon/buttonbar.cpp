@@ -971,7 +971,7 @@ void wxRibbonButtonBar::OnSize(wxSizeEvent& evt)
     Refresh();
 }
 
-void wxRibbonButtonBar::CommonInit(long WXUNUSED(style))
+void wxRibbonButtonBar::CommonInit(unsigned int WXUNUSED(style))
 {
     m_bitmap_size_large = wxSize(32, 32);
     m_bitmap_size_small = wxSize(16, 16);

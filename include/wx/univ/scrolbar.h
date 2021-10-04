@@ -21,17 +21,17 @@ class WXDLLIMPEXP_FWD_CORE wxScrollTimer;
 // ----------------------------------------------------------------------------
 
 // scroll the bar
-inline constexpr wxChar wxACTION_SCROLL_START[]       = wxT("start");     // to the beginning
-inline constexpr wxChar wxACTION_SCROLL_END[]         = wxT("end");       // to the end
-inline constexpr wxChar wxACTION_SCROLL_LINE_UP[]     = wxT("lineup");    // one line up/left
-inline constexpr wxChar wxACTION_SCROLL_PAGE_UP[]     = wxT("pageup");    // one page up/left
-inline constexpr wxChar wxACTION_SCROLL_LINE_DOWN[]   = wxT("linedown");  // one line down/right
-inline constexpr wxChar wxACTION_SCROLL_PAGE_DOWN[]   = wxT("pagedown");  // one page down/right
+constexpr wxChar wxACTION_SCROLL_START[]       = wxT("start");     // to the beginning
+constexpr wxChar wxACTION_SCROLL_END[]         = wxT("end");       // to the end
+constexpr wxChar wxACTION_SCROLL_LINE_UP[]     = wxT("lineup");    // one line up/left
+constexpr wxChar wxACTION_SCROLL_PAGE_UP[]     = wxT("pageup");    // one page up/left
+constexpr wxChar wxACTION_SCROLL_LINE_DOWN[]   = wxT("linedown");  // one line down/right
+constexpr wxChar wxACTION_SCROLL_PAGE_DOWN[]   = wxT("pagedown");  // one page down/right
 
 // the scrollbar thumb may be dragged
-inline constexpr wxChar wxACTION_SCROLL_THUMB_DRAG[]      = wxT("thumbdrag");
-inline constexpr wxChar wxACTION_SCROLL_THUMB_MOVE[]      = wxT("thumbmove");
-inline constexpr wxChar wxACTION_SCROLL_THUMB_RELEASE[]   = wxT("thumbrelease");
+constexpr wxChar wxACTION_SCROLL_THUMB_DRAG[]      = wxT("thumbdrag");
+constexpr wxChar wxACTION_SCROLL_THUMB_MOVE[]      = wxT("thumbmove");
+constexpr wxChar wxACTION_SCROLL_THUMB_RELEASE[]   = wxT("thumbrelease");
 
 // ----------------------------------------------------------------------------
 // wxScrollBar
@@ -60,7 +60,7 @@ public:
                 wxWindowID id,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = wxSB_HORIZONTAL,
+                unsigned int style = wxSB_HORIZONTAL,
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxASCII_STR(wxScrollBarNameStr));
 
@@ -68,7 +68,7 @@ public:
                 wxWindowID id,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = wxSB_HORIZONTAL,
+                unsigned int style = wxSB_HORIZONTAL,
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxASCII_STR(wxScrollBarNameStr));
 

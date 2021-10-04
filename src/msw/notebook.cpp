@@ -696,7 +696,7 @@ bool wxNotebook::InsertPage(size_t nPage,
     return true;
 }
 
-int wxNotebook::HitTest(const wxPoint& pt, long *flags) const
+int wxNotebook::HitTest(const wxPoint& pt, unsigned int* flags) const
 {
     TC_HITTESTINFO hitTestInfo;
     hitTestInfo.pt.x = pt.x;

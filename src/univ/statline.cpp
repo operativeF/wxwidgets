@@ -34,7 +34,7 @@ bool wxStaticLine::Create(wxWindow *parent,
                           wxWindowID id,
                           const wxPoint &pos,
                           const wxSize &size,
-                          long style,
+                          unsigned int style,
                           const wxString &name)
 {
     if ( !wxControl::Create(parent, id, pos, size, style, wxDefaultValidator, name) )

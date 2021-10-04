@@ -101,7 +101,7 @@ bool wxRibbonGallery::Create(wxWindow* parent,
     return true;
 }
 
-void wxRibbonGallery::CommonInit(long WXUNUSED(style))
+void wxRibbonGallery::CommonInit(unsigned int WXUNUSED(style))
 {
     m_selected_item = nullptr;
     m_hovered_item = nullptr;

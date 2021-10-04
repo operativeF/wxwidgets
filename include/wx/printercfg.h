@@ -195,10 +195,10 @@ enum class wxDuplexMode
 /* Print quality.
  */
 
-inline constexpr int wxPRINT_QUALITY_HIGH    = -1;
-inline constexpr int wxPRINT_QUALITY_MEDIUM  = -2;
-inline constexpr int wxPRINT_QUALITY_LOW     = -3;
-inline constexpr int wxPRINT_QUALITY_DRAFT   = -4;
+constexpr int wxPRINT_QUALITY_HIGH    = -1;
+constexpr int wxPRINT_QUALITY_MEDIUM  = -2;
+constexpr int wxPRINT_QUALITY_LOW     = -3;
+constexpr int wxPRINT_QUALITY_DRAFT   = -4;
 
 using wxPrintQuality = int;
 

@@ -562,7 +562,7 @@ wxTreeCtrl::wxTreeCtrl() :
 wxTreeCtrl::wxTreeCtrl(wxWindow *parent, wxWindowID id,
            const wxPoint& pos,
            const wxSize& size,
-           long style,
+           unsigned int style,
            const wxValidator& validator,
            const wxString& name)
 {
@@ -572,7 +572,7 @@ wxTreeCtrl::wxTreeCtrl(wxWindow *parent, wxWindowID id,
 bool wxTreeCtrl::Create(wxWindow *parent, wxWindowID id,
             const wxPoint& pos,
             const wxSize& size,
-            long style,
+            unsigned int style,
             const wxValidator& validator,
             const wxString& name)
 {

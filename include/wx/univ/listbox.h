@@ -20,28 +20,28 @@
 // ----------------------------------------------------------------------------
 
 // change the current item
-inline constexpr wxChar wxACTION_LISTBOX_SETFOCUS[]   = wxT("setfocus");  // select the item
-inline constexpr wxChar wxACTION_LISTBOX_MOVEDOWN[]   = wxT("down");      // select item below
-inline constexpr wxChar wxACTION_LISTBOX_MOVEUP[]     = wxT("up");        // select item above
-inline constexpr wxChar wxACTION_LISTBOX_PAGEDOWN[]   = wxT("pagedown");  // go page down
-inline constexpr wxChar wxACTION_LISTBOX_PAGEUP[]     = wxT("pageup");    // go page up
-inline constexpr wxChar wxACTION_LISTBOX_START[]      = wxT("start");     // go to first item
-inline constexpr wxChar wxACTION_LISTBOX_END[]        = wxT("end");       // go to last item
-inline constexpr wxChar wxACTION_LISTBOX_FIND[]       = wxT("find");      // find item by 1st letter
+constexpr wxChar wxACTION_LISTBOX_SETFOCUS[]   = wxT("setfocus");  // select the item
+constexpr wxChar wxACTION_LISTBOX_MOVEDOWN[]   = wxT("down");      // select item below
+constexpr wxChar wxACTION_LISTBOX_MOVEUP[]     = wxT("up");        // select item above
+constexpr wxChar wxACTION_LISTBOX_PAGEDOWN[]   = wxT("pagedown");  // go page down
+constexpr wxChar wxACTION_LISTBOX_PAGEUP[]     = wxT("pageup");    // go page up
+constexpr wxChar wxACTION_LISTBOX_START[]      = wxT("start");     // go to first item
+constexpr wxChar wxACTION_LISTBOX_END[]        = wxT("end");       // go to last item
+constexpr wxChar wxACTION_LISTBOX_FIND[]       = wxT("find");      // find item by 1st letter
 
 // do something with the current item
-inline constexpr wxChar wxACTION_LISTBOX_ACTIVATE[]   = wxT("activate");  // activate (choose)
-inline constexpr wxChar wxACTION_LISTBOX_TOGGLE[]     = wxT("toggle");    // togglee selected state
-inline constexpr wxChar wxACTION_LISTBOX_SELECT[]     = wxT("select");    // sel this, unsel others
-inline constexpr wxChar wxACTION_LISTBOX_SELECTADD[]  = wxT("selectadd"); // add to selection
-inline constexpr wxChar wxACTION_LISTBOX_UNSELECT[]   = wxT("unselect");  // unselect
-inline constexpr wxChar wxACTION_LISTBOX_ANCHOR[]     = wxT("selanchor"); // anchor selection
+constexpr wxChar wxACTION_LISTBOX_ACTIVATE[]   = wxT("activate");  // activate (choose)
+constexpr wxChar wxACTION_LISTBOX_TOGGLE[]     = wxT("toggle");    // togglee selected state
+constexpr wxChar wxACTION_LISTBOX_SELECT[]     = wxT("select");    // sel this, unsel others
+constexpr wxChar wxACTION_LISTBOX_SELECTADD[]  = wxT("selectadd"); // add to selection
+constexpr wxChar wxACTION_LISTBOX_UNSELECT[]   = wxT("unselect");  // unselect
+constexpr wxChar wxACTION_LISTBOX_ANCHOR[]     = wxT("selanchor"); // anchor selection
 
 // do something with the selection globally (not for single selection ones)
-inline constexpr wxChar wxACTION_LISTBOX_SELECTALL[]   = wxT("selectall");   // select all items
-inline constexpr wxChar wxACTION_LISTBOX_UNSELECTALL[] = wxT("unselectall"); // unselect all items
-inline constexpr wxChar wxACTION_LISTBOX_SELTOGGLE[]   = wxT("togglesel");   // invert the selection
-inline constexpr wxChar wxACTION_LISTBOX_EXTENDSEL[]   = wxT("extend");      // extend to item
+constexpr wxChar wxACTION_LISTBOX_SELECTALL[]   = wxT("selectall");   // select all items
+constexpr wxChar wxACTION_LISTBOX_UNSELECTALL[] = wxT("unselectall"); // unselect all items
+constexpr wxChar wxACTION_LISTBOX_SELTOGGLE[]   = wxT("togglesel");   // invert the selection
+constexpr wxChar wxACTION_LISTBOX_EXTENDSEL[]   = wxT("extend");      // extend to item
 
 // ----------------------------------------------------------------------------
 // wxListBox: a list of selectable items
@@ -57,7 +57,7 @@ public:
               const wxPoint& pos = wxDefaultPosition,
               const wxSize& size = wxDefaultSize,
               int n = 0, const wxString choices[] = (const wxString *) NULL,
-              long style = 0,
+              unsigned int style = 0,
               const wxValidator& validator = wxDefaultValidator,
               const wxString& name = wxASCII_STR(wxListBoxNameStr) )
         : wxScrollHelper(this)
@@ -71,7 +71,7 @@ public:
               const wxPoint& pos,
               const wxSize& size,
               const wxArrayString& choices,
-              long style = 0,
+              unsigned int style = 0,
               const wxValidator& validator = wxDefaultValidator,
               const wxString& name = wxASCII_STR(wxListBoxNameStr) );
 
@@ -82,7 +82,7 @@ public:
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 int n = 0, const wxString choices[] = (const wxString *) NULL,
-                long style = 0,
+                unsigned int style = 0,
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxASCII_STR(wxListBoxNameStr));
     bool Create(wxWindow *parent,
@@ -90,7 +90,7 @@ public:
                 const wxPoint& pos,
                 const wxSize& size,
                 const wxArrayString& choices,
-                long style = 0,
+                unsigned int style = 0,
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxASCII_STR(wxListBoxNameStr));
 

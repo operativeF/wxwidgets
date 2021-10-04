@@ -206,7 +206,8 @@ void wxFileData::ReadData()
                              buff.st_mode & wxS_IXOTH ? wxT('x') : wxT('-'));
     }
 #elif defined(__WIN32__)
-    DWORD attribs = ::GetFileAttributes(m_filePath.c_str());
+    // FIXME: Doesn't convert to wide
+    DWORD attribs = ::GetFileAttributesW(m_filePath.c_str());
     if (attribs != (DWORD)-1)
     {
         m_permissions.Printf(wxT("%c%c%c%c"),
@@ -427,7 +428,7 @@ long wxFileListCtrl::Add( wxFileData *fd, wxListItem &item )
     long ret = -1;
     item.m_mask = wxLIST_MASK_TEXT + wxLIST_MASK_DATA + wxLIST_MASK_IMAGE;
     fd->MakeItem( item );
-    long my_style = GetWindowStyleFlag();
+    unsigned int my_style = GetWindowStyleFlag();
     if (my_style & wxLC_REPORT)
     {
         ret = InsertItem( item );

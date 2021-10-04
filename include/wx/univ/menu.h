@@ -33,10 +33,10 @@ class WXDLLIMPEXP_CORE wxMenu : public wxMenuBase
 {
 public:
     // ctors and dtor
-    wxMenu(const wxString& title, long style = 0)
+    wxMenu(const wxString& title, unsigned int style = 0)
         : wxMenuBase(title, style) { Init(); }
 
-    wxMenu(long style = 0) : wxMenuBase(style) { Init(); }
+    wxMenu(unsigned int style = 0) : wxMenuBase(style) { Init(); }
 
     ~wxMenu();
 
@@ -142,7 +142,7 @@ class WXDLLIMPEXP_CORE wxMenuBar : public wxMenuBarBase
 public:
     // ctors and dtor
     wxMenuBar(long WXUNUSED(style) = 0) { Init(); }
-    wxMenuBar(size_t n, wxMenu *menus[], const wxString titles[], long style = 0);
+    wxMenuBar(size_t n, wxMenu *menus[], const wxString titles[], unsigned int style = 0);
     ~wxMenuBar();
 
     // implement base class virtuals

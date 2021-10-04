@@ -709,7 +709,7 @@ public:
     long FindItem( long start, const wxString& str, bool partial = false );
     long FindItem( long start, wxUIntPtr data);
     long FindItem( const wxPoint& pt );
-    long HitTest( int x, int y, int &flags ) const;
+    long HitTest( int x, int y, unsigned int& flags ) const;
     void InsertItem( wxListItem &item );
     long InsertColumn( long col, const wxListItem &item );
     int GetItemWidthWithImage(wxListItem * item);

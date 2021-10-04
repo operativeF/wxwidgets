@@ -382,7 +382,7 @@ wxGLCanvas::wxGLCanvas(wxWindow *parent,
                        wxWindowID id,
                        const wxPoint& pos,
                        const wxSize& size,
-                       long style,
+                       unsigned int style,
                        const wxString& name,
                        const wxPalette& palette)
 {
@@ -394,7 +394,7 @@ wxGLCanvas::wxGLCanvas(wxWindow *parent,
                        const int *attribList,
                        const wxPoint& pos,
                        const wxSize& size,
-                       long style,
+                       unsigned int style,
                        const wxString& name,
                        const wxPalette& palette)
 {
@@ -412,7 +412,7 @@ bool wxGLCanvas::Create(wxWindow *parent,
                         wxWindowID id,
                         const wxPoint& pos,
                         const wxSize& size,
-                        long style,
+                        unsigned int style,
                         const wxString& name,
                         const wxPalette& palette)
 {
@@ -424,7 +424,7 @@ bool wxGLCanvas::Create(wxWindow *parent,
                         wxWindowID id,
                         const wxPoint& pos,
                         const wxSize& size,
-                        long style,
+                        unsigned int style,
                         const wxString& name,
                         const int *attribList,
                         const wxPalette& palette)

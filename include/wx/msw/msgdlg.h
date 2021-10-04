@@ -34,7 +34,7 @@ public:
 
     int ShowModal() override;
 
-    long GetEffectiveIcon() const override;
+    unsigned int GetEffectiveIcon() const override;
 
     // implementation-specific
 
@@ -43,7 +43,7 @@ public:
 
 protected:
     // Override this as task dialogs are always centered on parent.
-    void DoCentre(int dir) override;
+    void DoCentre(unsigned int dir) override;
 
 private:
     // hook procedure used to adjust the message box beyond what the standard

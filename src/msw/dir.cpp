@@ -386,7 +386,7 @@ void wxDir::Close()
 
 bool wxDir::GetFirst(wxString *filename,
                      const wxString& filespec,
-                     int flags) const
+                     unsigned int flags) const
 {
     wxCHECK_MSG( IsOpened(), false, wxT("must wxDir::Open() first") );
 

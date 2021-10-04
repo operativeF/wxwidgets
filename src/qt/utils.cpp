@@ -129,7 +129,7 @@ wxWindow *wxGetActiveWindow()
     return NULL;
 }
 
-bool wxLaunchDefaultApplication(const wxString& path, int WXUNUSED( flags ) )
+bool wxLaunchDefaultApplication(const wxString& path, unsigned int WXUNUSED( flags ) )
 {
     return QDesktopServices::openUrl( QUrl::fromLocalFile( wxQtConvertString( path ) ) );
 }

@@ -33,7 +33,7 @@ public:
                  const wxString& label,
                  const wxPoint& pos = wxDefaultPosition,
                  const wxSize& size = wxDefaultSize,
-                 long style = 0,
+                 unsigned int style = 0,
                  const wxString &name = wxASCII_STR(wxStaticTextNameStr))
     {
         Create(parent, id, label, pos, size, style, name);
@@ -45,7 +45,7 @@ public:
                 const wxString &label,
                 const wxPoint &pos = wxDefaultPosition,
                 const wxSize &size = wxDefaultSize,
-                long style = 0,
+                unsigned int style = 0,
                 const wxString &name = wxASCII_STR(wxStaticTextNameStr));
 
     // implementation only from now on

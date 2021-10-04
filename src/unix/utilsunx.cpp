@@ -198,7 +198,7 @@ void wxMilliSleep(unsigned long milliseconds)
 // process management
 // ----------------------------------------------------------------------------
 
-int wxKill(long pid, wxSignal sig, wxKillError *rc, int flags)
+int wxKill(long pid, wxSignal sig, wxKillError *rc, unsigned int flags)
 {
     int err = kill((pid_t) (flags & wxKILL_CHILDREN) ? -pid : pid, (int)sig);
     if ( rc )
@@ -234,7 +234,7 @@ int wxKill(long pid, wxSignal sig, wxKillError *rc, int flags)
 }
 
 // Shutdown or reboot the PC
-bool wxShutdown(int flags)
+bool wxShutdown(unsigned int flags)
 {
 #if defined(__WXOSX__) && wxOSX_USE_IPHONE
     wxUnusedVar(flags);
@@ -453,7 +453,7 @@ private:
 bool wxCocoaLaunch(const char* const* argv, pid_t &pid);
 #endif
 
-long wxExecute(const wxString& command, int flags, wxProcess *process,
+long wxExecute(const wxString& command, unsigned int flags, wxProcess *process,
         const wxExecuteEnv *env)
 {
     ArgsArray argv(wxCmdLineParser::ConvertStringToArgs(command,
@@ -462,7 +462,7 @@ long wxExecute(const wxString& command, int flags, wxProcess *process,
     return wxExecute(argv, flags, process, env);
 }
 
-long wxExecute(const wchar_t* const* wargv, int flags, wxProcess* process,
+long wxExecute(const wchar_t* const* wargv, unsigned int flags, wxProcess* process,
         const wxExecuteEnv *env)
 {
     ArgsArray argv(wargv);
@@ -548,7 +548,7 @@ int BlockUntilChildExit(wxExecuteData& execData)
 } // anonymous namespace
 
 // wxExecute: the real worker function
-long wxExecute(const char* const* argv, int flags, wxProcess* process,
+long wxExecute(const char* const* argv, unsigned int flags, wxProcess* process,
         const wxExecuteEnv *env)
 {
     // for the sync execution, we return -1 to indicate failure, but for async

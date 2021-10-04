@@ -614,7 +614,7 @@ public :
 
     wxGraphicsFont wxCreateFont(double sizeInPixels,
                                       const std::string& facename,
-                                      int flags = wxFONTFLAG_DEFAULT,
+                                      unsigned int flags = wxFONTFLAG_DEFAULT,
                                       const wxColour& col = *wxBLACK) override;
 
     wxGraphicsFont CreateFontAtDPI(const wxFont& font,
@@ -2761,13 +2761,13 @@ wxGDIPlusRenderer::wxCreateFont( const wxFont &font,
 wxGraphicsFont
 wxGDIPlusRenderer::wxCreateFont(double sizeInPixels,
                               const std::string& facename,
-                              int flags,
+                              unsigned int flags,
                               const wxColour& col)
 {
     ENSURE_LOADED_OR_RETURN(wxNullGraphicsFont);
 
     // Convert wxFont flags to GDI+ style:
-    int style = FontStyleRegular;
+    unsigned int style = FontStyleRegular;
     if ( flags & wxFONTFLAG_ITALIC )
         style |= FontStyleItalic;
     if ( flags & wxFONTFLAG_UNDERLINED )

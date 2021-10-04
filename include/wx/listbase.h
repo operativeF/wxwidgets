@@ -36,31 +36,30 @@ int (wxCALLBACK *wxListCtrlCompare)(wxIntPtr item1, wxIntPtr item2, wxIntPtr sor
 // ----------------------------------------------------------------------------
 
 // style flags
-inline constexpr int wxLC_VRULES          = 0x0001;
-inline constexpr int wxLC_HRULES          = 0x0002;
+constexpr unsigned int wxLC_VRULES          = 0x0001;
+constexpr unsigned int wxLC_HRULES          = 0x0002;
 
-inline constexpr int wxLC_ICON            = 0x0004;
-inline constexpr int wxLC_SMALL_ICON      = 0x0008;
-inline constexpr int wxLC_LIST            = 0x0010;
-inline constexpr int wxLC_REPORT          = 0x0020;
+constexpr unsigned int wxLC_ICON            = 0x0004;
+constexpr unsigned int wxLC_SMALL_ICON      = 0x0008;
+constexpr unsigned int wxLC_LIST            = 0x0010;
+constexpr unsigned int wxLC_REPORT          = 0x0020;
 
-inline constexpr int wxLC_ALIGN_TOP       = 0x0040;
-inline constexpr int wxLC_ALIGN_LEFT      = 0x0080;
-inline constexpr int wxLC_AUTOARRANGE     = 0x0100;
-inline constexpr int wxLC_VIRTUAL         = 0x0200;
-inline constexpr int wxLC_EDIT_LABELS     = 0x0400;
-inline constexpr int wxLC_NO_HEADER       = 0x0800;
-inline constexpr int wxLC_NO_SORT_HEADER  = 0x1000;
-inline constexpr int wxLC_SINGLE_SEL      = 0x2000;
-inline constexpr int wxLC_SORT_ASCENDING  = 0x4000;
-inline constexpr int wxLC_SORT_DESCENDING = 0x8000;
-
-inline constexpr int wxLC_MASK_TYPE       = wxLC_ICON | wxLC_SMALL_ICON | wxLC_LIST | wxLC_REPORT;
-inline constexpr int wxLC_MASK_ALIGN      = wxLC_ALIGN_TOP | wxLC_ALIGN_LEFT;
-inline constexpr int wxLC_MASK_SORT       = wxLC_SORT_ASCENDING | wxLC_SORT_DESCENDING;
+constexpr unsigned int wxLC_ALIGN_TOP       = 0x0040;
+constexpr unsigned int wxLC_ALIGN_LEFT      = 0x0080;
+constexpr unsigned int wxLC_AUTOARRANGE     = 0x0100;
+constexpr unsigned int wxLC_VIRTUAL         = 0x0200;
+constexpr unsigned int wxLC_EDIT_LABELS     = 0x0400;
+constexpr unsigned int wxLC_NO_HEADER       = 0x0800;
+constexpr unsigned int wxLC_NO_SORT_HEADER  = 0x1000;
+constexpr unsigned int wxLC_SINGLE_SEL      = 0x2000;
+constexpr unsigned int wxLC_SORT_ASCENDING  = 0x4000;
+constexpr unsigned int wxLC_SORT_DESCENDING = 0x8000;
+constexpr unsigned int wxLC_MASK_TYPE       = wxLC_ICON | wxLC_SMALL_ICON | wxLC_LIST | wxLC_REPORT;
+constexpr unsigned int wxLC_MASK_ALIGN      = wxLC_ALIGN_TOP | wxLC_ALIGN_LEFT;
+constexpr unsigned int wxLC_MASK_SORT       = wxLC_SORT_ASCENDING | wxLC_SORT_DESCENDING;
 
 // for compatibility only
-inline constexpr int wxLC_USER_TEXT       = wxLC_VIRTUAL;
+constexpr unsigned int wxLC_USER_TEXT       = wxLC_VIRTUAL;
 
 // Omitted because
 //  (a) too much detail
@@ -73,41 +72,41 @@ inline constexpr int wxLC_USER_TEXT       = wxLC_VIRTUAL;
 // #define wxLC_SHOW_SEL_ALWAYS
 
 // Mask flags to tell app/GUI what fields of wxListItem are valid
-inline constexpr int wxLIST_MASK_STATE           = 0x0001;
-inline constexpr int wxLIST_MASK_TEXT            = 0x0002;
-inline constexpr int wxLIST_MASK_IMAGE           = 0x0004;
-inline constexpr int wxLIST_MASK_DATA            = 0x0008;
-inline constexpr int wxLIST_SET_ITEM             = 0x0010;
-inline constexpr int wxLIST_MASK_WIDTH           = 0x0020;
-inline constexpr int wxLIST_MASK_FORMAT          = 0x0040;
+constexpr unsigned int wxLIST_MASK_STATE           = 0x0001;
+constexpr unsigned int wxLIST_MASK_TEXT            = 0x0002;
+constexpr unsigned int wxLIST_MASK_IMAGE           = 0x0004;
+constexpr unsigned int wxLIST_MASK_DATA            = 0x0008;
+constexpr unsigned int wxLIST_SET_ITEM             = 0x0010;
+constexpr unsigned int wxLIST_MASK_WIDTH           = 0x0020;
+constexpr unsigned int wxLIST_MASK_FORMAT          = 0x0040;
 
 // State flags for indicating the state of an item
-inline constexpr int wxLIST_STATE_DONTCARE       = 0x0000;
-inline constexpr int wxLIST_STATE_DROPHILITED    = 0x0001;      // MSW only
-inline constexpr int wxLIST_STATE_FOCUSED        = 0x0002;
-inline constexpr int wxLIST_STATE_SELECTED       = 0x0004;
-inline constexpr int wxLIST_STATE_CUT            = 0x0008;      // MSW only
-inline constexpr int wxLIST_STATE_DISABLED       = 0x0010;      // Not used
-inline constexpr int wxLIST_STATE_FILTERED       = 0x0020;      // Not used
-inline constexpr int wxLIST_STATE_INUSE          = 0x0040;      // Not used
-inline constexpr int wxLIST_STATE_PICKED         = 0x0080;      // Not used
-inline constexpr int wxLIST_STATE_SOURCE         = 0x0100;      // Not used
+constexpr unsigned int wxLIST_STATE_DONTCARE       = 0x0000;
+constexpr unsigned int wxLIST_STATE_DROPHILITED    = 0x0001;      // MSW only
+constexpr unsigned int wxLIST_STATE_FOCUSED        = 0x0002;
+constexpr unsigned int wxLIST_STATE_SELECTED       = 0x0004;
+constexpr unsigned int wxLIST_STATE_CUT            = 0x0008;      // MSW only
+constexpr unsigned int wxLIST_STATE_DISABLED       = 0x0010;      // Not used
+constexpr unsigned int wxLIST_STATE_FILTERED       = 0x0020;      // Not used
+constexpr unsigned int wxLIST_STATE_INUSE          = 0x0040;      // Not used
+constexpr unsigned int wxLIST_STATE_PICKED         = 0x0080;      // Not used
+constexpr unsigned int wxLIST_STATE_SOURCE         = 0x0100;      // Not used
 
 // Hit test flags, used in HitTest
-inline constexpr int wxLIST_HITTEST_ABOVE            = 0x0001;  // Above the control's client area.
-inline constexpr int wxLIST_HITTEST_BELOW            = 0x0002;  // Below the control's client area.
-inline constexpr int wxLIST_HITTEST_NOWHERE          = 0x0004;  // Inside the control's client area but not over an item.
-inline constexpr int wxLIST_HITTEST_ONITEMICON       = 0x0020;  // Over an item's icon.
-inline constexpr int wxLIST_HITTEST_ONITEMLABEL      = 0x0080;  // Over an item's text.
-inline constexpr int wxLIST_HITTEST_ONITEMRIGHT      = 0x0100;  // Not used
-inline constexpr int wxLIST_HITTEST_ONITEMSTATEICON  = 0x0200;  // Over the checkbox of an item.
-inline constexpr int wxLIST_HITTEST_TOLEFT           = 0x0400;  // To the left of the control's client area.
-inline constexpr int wxLIST_HITTEST_TORIGHT          = 0x0800;  // To the right of the control's client area.
+constexpr unsigned int wxLIST_HITTEST_ABOVE            = 0x0001;  // Above the control's client area.
+constexpr unsigned int wxLIST_HITTEST_BELOW            = 0x0002;  // Below the control's client area.
+constexpr unsigned int wxLIST_HITTEST_NOWHERE          = 0x0004;  // Inside the control's client area but not over an item.
+constexpr unsigned int wxLIST_HITTEST_ONITEMICON       = 0x0020;  // Over an item's icon.
+constexpr unsigned int wxLIST_HITTEST_ONITEMLABEL      = 0x0080;  // Over an item's text.
+constexpr unsigned int wxLIST_HITTEST_ONITEMRIGHT      = 0x0100;  // Not used
+constexpr unsigned int wxLIST_HITTEST_ONITEMSTATEICON  = 0x0200;  // Over the checkbox of an item.
+constexpr unsigned int wxLIST_HITTEST_TOLEFT           = 0x0400;  // To the left of the control's client area.
+constexpr unsigned int wxLIST_HITTEST_TORIGHT          = 0x0800;  // To the right of the control's client area.
 
-inline constexpr int wxLIST_HITTEST_ONITEM = wxLIST_HITTEST_ONITEMICON | wxLIST_HITTEST_ONITEMLABEL | wxLIST_HITTEST_ONITEMSTATEICON;
+constexpr unsigned int wxLIST_HITTEST_ONITEM = wxLIST_HITTEST_ONITEMICON | wxLIST_HITTEST_ONITEMLABEL | wxLIST_HITTEST_ONITEMSTATEICON;
 
 // GetSubItemRect constants
-inline constexpr long wxLIST_GETSUBITEMRECT_WHOLEITEM = -1L;
+constexpr long wxLIST_GETSUBITEMRECT_WHOLEITEM = -1L;
 
 // Flags for GetNextItem (MSW only except wxLIST_NEXT_ALL)
 enum
@@ -234,15 +233,15 @@ public:
     void ClearAttributes() { if ( m_attr ) { delete m_attr; m_attr = nullptr; } }
 
     // setters
-    void SetMask(long mask)
+    void SetMask(unsigned int mask)
         { m_mask = mask; }
     void SetId(long id)
         { m_itemId = id; }
     void SetColumn(int col)
         { m_col = col; }
-    void SetState(long state)
+    void SetState(unsigned int state)
         { m_mask |= wxLIST_MASK_STATE; m_state = state; m_stateMask |= state; }
-    void SetStateMask(long stateMask)
+    void SetStateMask(unsigned int stateMask)
         { m_stateMask = stateMask; }
     void SetText(const wxString& text)
         { m_mask |= wxLIST_MASK_TEXT; m_text = text; }
@@ -265,10 +264,10 @@ public:
     void SetFont(const wxFont& font)
         { Attributes().SetFont(font); }
 
-    long GetMask() const { return m_mask; }
+    unsigned int GetMask() const { return m_mask; }
     long GetId() const { return m_itemId; }
     int GetColumn() const { return m_col; }
-    long GetState() const { return m_state & m_stateMask; }
+    unsigned int GetState() const { return m_state & m_stateMask; }
     const wxString& GetText() const { return m_text; }
     int GetImage() const { return m_image; }
     wxUIntPtr GetData() const { return m_data; }
@@ -296,10 +295,10 @@ public:
 
     wxUIntPtr       m_data{0};     // App-defined data
 
-    long            m_mask{0};     // Indicates what fields are valid
+    unsigned int    m_mask{};     // Indicates what fields are valid
     long            m_itemId{-1};   // The zero-based item position
-    long            m_state{0};    // The state of the item
-    long            m_stateMask{0};// Which flags of m_state are valid (uses same flags)
+    unsigned int    m_state{0};    // The state of the item
+    unsigned int    m_stateMask{};// Which flags of m_state are valid (uses same flags)
     int             m_image{-1};    // The zero-based index into an image list
     int             m_col{0};      // Zero-based column, if in report mode
 

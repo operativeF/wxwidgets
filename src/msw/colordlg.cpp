@@ -242,7 +242,7 @@ wxPoint wxColourDialog::DoGetPosition() const
     return {s_rectDialog.x, s_rectDialog.y};
 }
 
-void wxColourDialog::DoCentre(int dir)
+void wxColourDialog::DoCentre(unsigned int dir)
 {
     m_centreDir = dir;
 

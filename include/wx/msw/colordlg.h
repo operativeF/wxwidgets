@@ -69,7 +69,7 @@ protected:
     wxSize DoGetSize() const override;
     wxSize DoGetClientSize() const override;
     void DoMoveWindow(wxRect boundary) override;
-    void DoCentre(int dir) override;
+    void DoCentre(unsigned int dir) override;
 
     wxColourData        m_colourData;
     std::string         m_title;
@@ -79,7 +79,7 @@ protected:
 
     // indicates that the dialog should be centered in this direction if non 0
     // (set by DoCentre(), used by MSWOnInitDone())
-    int m_centreDir{0};
+    unsigned int m_centreDir{};
 
     // true if DoMoveWindow() had been called
     bool m_movedWindow{false};

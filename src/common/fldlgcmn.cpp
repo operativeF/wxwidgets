@@ -239,7 +239,7 @@ wxString wxFileSelector(const wxString& title,
                         const wxString& defaultFileName,
                         const wxString& defaultExtension,
                         const wxString& filter,
-                        int flags,
+                        unsigned int flags,
                         wxWindow *parent,
                         int x, int y)
 {

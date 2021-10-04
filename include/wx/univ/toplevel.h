@@ -76,12 +76,12 @@ enum
 // the actions supported by this control
 // ----------------------------------------------------------------------------
 
-inline constexpr wxChar wxACTION_TOPLEVEL_ACTIVATE[]       = wxT("activate");   // (de)activate the frame
-inline constexpr wxChar wxACTION_TOPLEVEL_BUTTON_PRESS[]   = wxT("pressbtn");   // press titlebar btn
-inline constexpr wxChar wxACTION_TOPLEVEL_BUTTON_RELEASE[] = wxT("releasebtn"); // press titlebar btn
-inline constexpr wxChar wxACTION_TOPLEVEL_BUTTON_CLICK[]   = wxT("clickbtn");   // press titlebar btn
-inline constexpr wxChar wxACTION_TOPLEVEL_MOVE[]           = wxT("move");       // move the frame
-inline constexpr wxChar wxACTION_TOPLEVEL_RESIZE[]         = wxT("resize");     // resize the frame
+constexpr wxChar wxACTION_TOPLEVEL_ACTIVATE[]       = wxT("activate");   // (de)activate the frame
+constexpr wxChar wxACTION_TOPLEVEL_BUTTON_PRESS[]   = wxT("pressbtn");   // press titlebar btn
+constexpr wxChar wxACTION_TOPLEVEL_BUTTON_RELEASE[] = wxT("releasebtn"); // press titlebar btn
+constexpr wxChar wxACTION_TOPLEVEL_BUTTON_CLICK[]   = wxT("clickbtn");   // press titlebar btn
+constexpr wxChar wxACTION_TOPLEVEL_MOVE[]           = wxT("move");       // move the frame
+constexpr wxChar wxACTION_TOPLEVEL_RESIZE[]         = wxT("resize");     // resize the frame
 
 //-----------------------------------------------------------------------------
 // wxTopLevelWindow
@@ -98,7 +98,7 @@ public:
                      const wxString& title,
                      const wxPoint& pos = wxDefaultPosition,
                      const wxSize& size = wxDefaultSize,
-                     long style = wxDEFAULT_FRAME_STYLE,
+                     unsigned int style = wxDEFAULT_FRAME_STYLE,
                      const wxString& name = wxASCII_STR(wxFrameNameStr))
     {
         Init();
@@ -111,7 +111,7 @@ public:
                 const wxString& title,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = wxDEFAULT_FRAME_STYLE,
+                unsigned int style = wxDEFAULT_FRAME_STYLE,
                 const wxString& name = wxASCII_STR(wxFrameNameStr));
 
     // wxUniv-specific methods: do [not] use native decorations for this (or
@@ -127,7 +127,7 @@ public:
 
 
     
-    bool ShowFullScreen(bool show, long style = wxFULLSCREEN_ALL) override;
+    bool ShowFullScreen(bool show, unsigned int style = wxFULLSCREEN_ALL) override;
     wxPoint GetClientAreaOrigin() const override;
     void SetIcons(const wxIconBundle& icons) override;
 

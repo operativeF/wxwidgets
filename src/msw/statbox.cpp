@@ -131,7 +131,7 @@ wxWindowList wxStaticBox::GetCompositeWindowParts() const
 
 DWORD wxStaticBox::MSWGetStyle(unsigned int style, DWORD *exstyle) const
 {
-    long styleWin = wxStaticBoxBase::MSWGetStyle(style, exstyle);
+    DWORD styleWin = wxStaticBoxBase::MSWGetStyle(style, exstyle);
 
     // no need for it anymore, must be removed for wxRadioBox child
     // buttons to be able to repaint themselves

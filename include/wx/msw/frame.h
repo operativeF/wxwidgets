@@ -89,7 +89,7 @@ public:
 #endif // tooltips
 
     // override the base class function to handle iconized/maximized frames
-    void SendSizeEvent(int flags = 0) override;
+    void SendSizeEvent(unsigned int flags = 0) override;
 
     wxPoint GetClientAreaOrigin() const override;
 

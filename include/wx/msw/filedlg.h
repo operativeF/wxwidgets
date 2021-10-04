@@ -63,7 +63,7 @@ public:
 protected:
 
     void DoMoveWindow(wxRect boundary) override;
-    void DoCentre(int dir) override;
+    void DoCentre(unsigned int dir) override;
     wxSize DoGetSize() const override;
     wxPoint DoGetPosition() const override;
 
@@ -73,7 +73,7 @@ private:
     // remember if our SetPosition() or Centre() (which requires special
     // treatment) was called
     bool m_bMovedWindow{false};
-    int m_centreDir{0};        // nothing to do if 0
+    unsigned int m_centreDir{};        // nothing to do if 0
 
     wxDECLARE_DYNAMIC_CLASS(wxFileDialog);
 };

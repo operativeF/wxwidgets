@@ -21,7 +21,7 @@
 
 // This flag can be used in MSW if some controls are not working with the
 // default popup style.
-inline constexpr int wxPU_CONTAINS_CONTROLS = 0x0001;
+constexpr unsigned int wxPU_CONTAINS_CONTROLS = 0x0001;
 
 
 #include "wx/nonownedwnd.h"
@@ -45,7 +45,7 @@ public:
     // create the popup window
     //
     // style may only contain border flags
-    [[maybe_unused]] bool Create(wxWindow *parent, int style = wxBORDER_NONE);
+    [[maybe_unused]] bool Create(wxWindow *parent, unsigned int style = wxBORDER_NONE);
 
     // move the popup window to the right position, i.e. such that it is
     // entirely visible

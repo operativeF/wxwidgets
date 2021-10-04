@@ -29,7 +29,7 @@ public:
         wxWindowID id,
         const wxPoint& pos = wxDefaultPosition,
         const wxSize& size = wxDefaultSize,
-        long style = 0,
+        unsigned int style = 0,
         const wxString& name = wxASCII_STR(wxPanelNameStr))
     {
         Init();
@@ -42,7 +42,7 @@ public:
         wxWindowID id,
         const wxPoint& pos = wxDefaultPosition,
         const wxSize& size = wxDefaultSize,
-        long style = 0,
+        unsigned int style = 0,
         const wxString& name = wxASCII_STR(wxPanelNameStr));
 
     virtual void Raise();

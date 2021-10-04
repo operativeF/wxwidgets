@@ -1750,10 +1750,10 @@ bool wxFileName::MakeRelativeTo(const wxString& pathBase, wxPathFormat format)
 
     // Normalize both paths to be absolute but avoid expanding environment
     // variables in them, this could be unexpected.
-    static constexpr int normFlags = wxPATH_NORM_DOTS |
-                                     wxPATH_NORM_TILDE |
-                                     wxPATH_NORM_ABSOLUTE |
-                                     wxPATH_NORM_LONG;
+    static constexpr unsigned int normFlags = wxPATH_NORM_DOTS |
+                                              wxPATH_NORM_TILDE |
+                                              wxPATH_NORM_ABSOLUTE |
+                                              wxPATH_NORM_LONG;
     Normalize(normFlags, cwd, format);
     fnBase.Normalize(normFlags, cwd, format);
 

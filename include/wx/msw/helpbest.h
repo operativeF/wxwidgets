@@ -23,7 +23,7 @@ class WXDLLIMPEXP_HTML wxBestHelpController: public wxHelpControllerBase
 {
 public:
     wxBestHelpController(wxWindow* parentWindow = nullptr,
-                         int style = wxHF_DEFAULT_STYLE)
+                         unsigned int style = wxHF_DEFAULT_STYLE)
         : wxHelpControllerBase(parentWindow),
           m_style(style)
     {
@@ -121,7 +121,7 @@ private:
 
     HelpControllerType m_helpControllerType{HelpControllerType::None};
     std::unique_ptr<wxHelpControllerBase> m_helpController{};
-    int m_style;
+    unsigned int m_style;
 
     wxDECLARE_DYNAMIC_CLASS(wxBestHelpController);
 };

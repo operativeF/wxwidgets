@@ -28,7 +28,7 @@ public:
                 const wxString& label,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = 0,
+                unsigned int style = 0,
                 const wxString& name = wxASCII_STR(wxStaticBoxNameStr))
     {
         Create(parent, id, label, pos, size, style, name);
@@ -39,7 +39,7 @@ public:
                 const wxString& label,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = 0,
+                unsigned int style = 0,
                 const wxString& name = wxASCII_STR(wxStaticBoxNameStr));
 
     // the origin of the static box is inside the border and under the label:

@@ -265,7 +265,7 @@ public:
     wxWindow *GetWindow() const;
 
     // style
-    long GetStyle() const { return m_style; }
+    unsigned int GetStyle() const { return m_style; }
 
     // implementation helpers
     // ----------------------
@@ -391,7 +391,7 @@ protected:
 
     wxEvtHandler  *m_eventHandler;      // a pluggable in event handler
 
-    long           m_style;             // combination of wxMENU_XXX flags
+    unsigned int   m_style;             // combination of wxMENU_XXX flags
 
     inline static bool      ms_locked{true};
 

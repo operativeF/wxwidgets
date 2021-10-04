@@ -656,7 +656,7 @@ static long wxDoExecuteWithCapture(const wxString& command,
     return rc;
 }
 
-long wxExecute(const wxString& command, std::vector<wxString>& output, int flags,
+long wxExecute(const wxString& command, std::vector<wxString>& output, unsigned int flags,
                const wxExecuteEnv *env)
 {
     return wxDoExecuteWithCapture(command, output, nullptr, flags, env);
@@ -665,7 +665,7 @@ long wxExecute(const wxString& command, std::vector<wxString>& output, int flags
 long wxExecute(const wxString& command,
                std::vector<wxString>& output,
                std::vector<wxString>& error,
-               int flags,
+               unsigned int flags,
                const wxExecuteEnv *env)
 {
     return wxDoExecuteWithCapture(command, output, &error, flags, env);
@@ -1009,7 +1009,7 @@ bool wxDoLaunchDefaultBrowser(const wxLaunchBrowserParams& params)
 }
 #endif
 
-static bool DoLaunchDefaultBrowserHelper(const wxString& url, int flags)
+static bool DoLaunchDefaultBrowserHelper(const wxString& url, unsigned int flags)
 {
     wxLaunchBrowserParams params(flags);
 
@@ -1055,7 +1055,7 @@ static bool DoLaunchDefaultBrowserHelper(const wxString& url, int flags)
     return true;
 }
 
-bool wxLaunchDefaultBrowser(const wxString& url, int flags)
+bool wxLaunchDefaultBrowser(const wxString& url, unsigned int flags)
 {
     // NOTE: as documented, "url" may be both a real well-formed URL
     //       and a local file name
@@ -1071,7 +1071,7 @@ bool wxLaunchDefaultBrowser(const wxString& url, int flags)
 // Menu accelerators related functions
 // ----------------------------------------------------------------------------
 
-wxString wxStripMenuCodes(const wxString& in, int flags)
+wxString wxStripMenuCodes(const wxString& in, unsigned int flags)
 {
     wxASSERT_MSG( flags, wxT("this is useless to call without any flags") );
 

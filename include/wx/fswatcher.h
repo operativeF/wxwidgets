@@ -22,7 +22,7 @@
 
 #include <vector>
 
-inline constexpr char wxTRACE_FSWATCHER[] = "fswatcher";
+constexpr char wxTRACE_FSWATCHER[] = "fswatcher";
 
 // ----------------------------------------------------------------------------
 // wxFileSystemWatcherEventType & wxFileSystemWatcherEvent
@@ -338,7 +338,7 @@ public:
     /**
      * Returns the number of watched paths
      */
-    int GetWatchedPathsCount() const;
+    std::size_t GetWatchedPathsCount() const;
 
     /**
      * Retrieves all watched paths and places them in wxArrayString. Returns
@@ -347,7 +347,7 @@ public:
      * TODO think about API here: we need to return more information (like is
      * the path watched recursively)
      */
-    int GetWatchedPaths(std::vector<wxString>* paths) const;
+    std::size_t GetWatchedPaths(std::vector<wxString>* paths) const;
 
     wxEvtHandler* GetOwner() const
     {

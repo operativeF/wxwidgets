@@ -17,9 +17,9 @@
 // the actions supported by wxCheckBox
 // ----------------------------------------------------------------------------
 
-inline constexpr wxChar wxACTION_CHECKBOX_CHECK[]   = wxT("check");   // SetValue(true)
-inline constexpr wxChar wxACTION_CHECKBOX_CLEAR[]   = wxT("clear");   // SetValue(false)
-inline constexpr wxChar wxACTION_CHECKBOX_TOGGLE[]  = wxT("toggle");  // toggle the check state
+constexpr wxChar wxACTION_CHECKBOX_CHECK[]   = wxT("check");   // SetValue(true)
+constexpr wxChar wxACTION_CHECKBOX_CLEAR[]   = wxT("clear");   // SetValue(false)
+constexpr wxChar wxACTION_CHECKBOX_TOGGLE[]  = wxT("toggle");  // toggle the check state
 
 // additionally it accepts wxACTION_BUTTON_PRESS and RELEASE
 
@@ -56,7 +56,7 @@ public:
                const wxString& label,
                const wxPoint& pos = wxDefaultPosition,
                const wxSize& size = wxDefaultSize,
-               long style = 0,
+               unsigned int style = 0,
                const wxValidator& validator = wxDefaultValidator,
                const wxString& name = wxASCII_STR(wxCheckBoxNameStr))
     {
@@ -70,7 +70,7 @@ public:
                 const wxString& label,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = 0,
+                unsigned int style = 0,
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxASCII_STR(wxCheckBoxNameStr));
 

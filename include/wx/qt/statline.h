@@ -19,14 +19,14 @@ public:
                   wxWindowID id = wxID_ANY,
                   const wxPoint& pos = wxDefaultPosition,
                   const wxSize& size = wxDefaultSize,
-                  long style = wxLI_HORIZONTAL,
+                  unsigned int style = wxLI_HORIZONTAL,
                   const wxString &name = wxASCII_STR(wxStaticLineNameStr) );
 
     bool Create( wxWindow *parent,
                  wxWindowID id = wxID_ANY,
                  const wxPoint& pos = wxDefaultPosition,
                  const wxSize& size = wxDefaultSize,
-                 long style = wxLI_HORIZONTAL,
+                 unsigned int style = wxLI_HORIZONTAL,
                  const wxString &name = wxASCII_STR(wxStaticLineNameStr) );
 
     QWidget *GetHandle() const override;

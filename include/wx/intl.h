@@ -165,7 +165,7 @@ public:
         }
 
     wxLocale(int language, // wxLanguage id or custom language
-             int flags = wxLOCALE_LOAD_DEFAULT)
+             unsigned int flags = wxLOCALE_LOAD_DEFAULT)
         {
             DoCommonInit();
 
@@ -186,7 +186,7 @@ public:
 
         // same as second ctor (returns true on success)
     bool Init(int language = wxLANGUAGE_DEFAULT,
-              int flags = wxLOCALE_LOAD_DEFAULT);
+              unsigned int flags = wxLOCALE_LOAD_DEFAULT);
 
         // restores old locale
     virtual ~wxLocale();

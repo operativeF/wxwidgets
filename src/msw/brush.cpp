@@ -136,7 +136,8 @@ HBRUSH wxBrushRefData::GetHBRUSH()
 {
     if ( !m_hBrush )
     {
-        int hatchStyle = TranslateHatchStyle(m_style);
+        unsigned int hatchStyle = TranslateHatchStyle(m_style);
+        
         if ( hatchStyle == -1 )
         {
             switch ( m_style )

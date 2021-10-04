@@ -137,32 +137,32 @@ enum wxAccObject {
 
 // Accessible states
 
-#define wxACC_STATE_SYSTEM_ALERT_HIGH       0x00000001
-#define wxACC_STATE_SYSTEM_ALERT_MEDIUM     0x00000002
-#define wxACC_STATE_SYSTEM_ALERT_LOW        0x00000004
-#define wxACC_STATE_SYSTEM_ANIMATED         0x00000008
-#define wxACC_STATE_SYSTEM_BUSY             0x00000010
-#define wxACC_STATE_SYSTEM_CHECKED          0x00000020
-#define wxACC_STATE_SYSTEM_COLLAPSED        0x00000040
-#define wxACC_STATE_SYSTEM_DEFAULT          0x00000080
-#define wxACC_STATE_SYSTEM_EXPANDED         0x00000100
-#define wxACC_STATE_SYSTEM_EXTSELECTABLE    0x00000200
-#define wxACC_STATE_SYSTEM_FLOATING         0x00000400
-#define wxACC_STATE_SYSTEM_FOCUSABLE        0x00000800
-#define wxACC_STATE_SYSTEM_FOCUSED          0x00001000
-#define wxACC_STATE_SYSTEM_HOTTRACKED       0x00002000
-#define wxACC_STATE_SYSTEM_INVISIBLE        0x00004000
-#define wxACC_STATE_SYSTEM_MARQUEED         0x00008000
-#define wxACC_STATE_SYSTEM_MIXED            0x00010000
-#define wxACC_STATE_SYSTEM_MULTISELECTABLE  0x00020000
-#define wxACC_STATE_SYSTEM_OFFSCREEN        0x00040000
-#define wxACC_STATE_SYSTEM_PRESSED          0x00080000
-#define wxACC_STATE_SYSTEM_PROTECTED        0x00100000
-#define wxACC_STATE_SYSTEM_READONLY         0x00200000
-#define wxACC_STATE_SYSTEM_SELECTABLE       0x00400000
-#define wxACC_STATE_SYSTEM_SELECTED         0x00800000
-#define wxACC_STATE_SYSTEM_SELFVOICING      0x01000000
-#define wxACC_STATE_SYSTEM_UNAVAILABLE      0x02000000
+constexpr unsigned int wxACC_STATE_SYSTEM_ALERT_HIGH       = 0x00000001;
+constexpr unsigned int wxACC_STATE_SYSTEM_ALERT_MEDIUM     = 0x00000002;
+constexpr unsigned int wxACC_STATE_SYSTEM_ALERT_LOW        = 0x00000004;
+constexpr unsigned int wxACC_STATE_SYSTEM_ANIMATED         = 0x00000008;
+constexpr unsigned int wxACC_STATE_SYSTEM_BUSY             = 0x00000010;
+constexpr unsigned int wxACC_STATE_SYSTEM_CHECKED          = 0x00000020;
+constexpr unsigned int wxACC_STATE_SYSTEM_COLLAPSED        = 0x00000040;
+constexpr unsigned int wxACC_STATE_SYSTEM_DEFAULT          = 0x00000080;
+constexpr unsigned int wxACC_STATE_SYSTEM_EXPANDED         = 0x00000100;
+constexpr unsigned int wxACC_STATE_SYSTEM_EXTSELECTABLE    = 0x00000200;
+constexpr unsigned int wxACC_STATE_SYSTEM_FLOATING         = 0x00000400;
+constexpr unsigned int wxACC_STATE_SYSTEM_FOCUSABLE        = 0x00000800;
+constexpr unsigned int wxACC_STATE_SYSTEM_FOCUSED          = 0x00001000;
+constexpr unsigned int wxACC_STATE_SYSTEM_HOTTRACKED       = 0x00002000;
+constexpr unsigned int wxACC_STATE_SYSTEM_INVISIBLE        = 0x00004000;
+constexpr unsigned int wxACC_STATE_SYSTEM_MARQUEED         = 0x00008000;
+constexpr unsigned int wxACC_STATE_SYSTEM_MIXED            = 0x00010000;
+constexpr unsigned int wxACC_STATE_SYSTEM_MULTISELECTABLE  = 0x00020000;
+constexpr unsigned int wxACC_STATE_SYSTEM_OFFSCREEN        = 0x00040000;
+constexpr unsigned int wxACC_STATE_SYSTEM_PRESSED          = 0x00080000;
+constexpr unsigned int wxACC_STATE_SYSTEM_PROTECTED        = 0x00100000;
+constexpr unsigned int wxACC_STATE_SYSTEM_READONLY         = 0x00200000;
+constexpr unsigned int wxACC_STATE_SYSTEM_SELECTABLE       = 0x00400000;
+constexpr unsigned int wxACC_STATE_SYSTEM_SELECTED         = 0x00800000;
+constexpr unsigned int wxACC_STATE_SYSTEM_SELFVOICING      = 0x01000000;
+constexpr unsigned int wxACC_STATE_SYSTEM_UNAVAILABLE      = 0x02000000;
 
 // Selection flag
 
@@ -178,48 +178,48 @@ enum wxAccSelectionFlags
 
 // Accessibility event identifiers
 
-#define wxACC_EVENT_SYSTEM_SOUND              0x0001
-#define wxACC_EVENT_SYSTEM_ALERT              0x0002
-#define wxACC_EVENT_SYSTEM_FOREGROUND         0x0003
-#define wxACC_EVENT_SYSTEM_MENUSTART          0x0004
-#define wxACC_EVENT_SYSTEM_MENUEND            0x0005
-#define wxACC_EVENT_SYSTEM_MENUPOPUPSTART     0x0006
-#define wxACC_EVENT_SYSTEM_MENUPOPUPEND       0x0007
-#define wxACC_EVENT_SYSTEM_CAPTURESTART       0x0008
-#define wxACC_EVENT_SYSTEM_CAPTUREEND         0x0009
-#define wxACC_EVENT_SYSTEM_MOVESIZESTART      0x000A
-#define wxACC_EVENT_SYSTEM_MOVESIZEEND        0x000B
-#define wxACC_EVENT_SYSTEM_CONTEXTHELPSTART   0x000C
-#define wxACC_EVENT_SYSTEM_CONTEXTHELPEND     0x000D
-#define wxACC_EVENT_SYSTEM_DRAGDROPSTART      0x000E
-#define wxACC_EVENT_SYSTEM_DRAGDROPEND        0x000F
-#define wxACC_EVENT_SYSTEM_DIALOGSTART        0x0010
-#define wxACC_EVENT_SYSTEM_DIALOGEND          0x0011
-#define wxACC_EVENT_SYSTEM_SCROLLINGSTART     0x0012
-#define wxACC_EVENT_SYSTEM_SCROLLINGEND       0x0013
-#define wxACC_EVENT_SYSTEM_SWITCHSTART        0x0014
-#define wxACC_EVENT_SYSTEM_SWITCHEND          0x0015
-#define wxACC_EVENT_SYSTEM_MINIMIZESTART      0x0016
-#define wxACC_EVENT_SYSTEM_MINIMIZEEND        0x0017
-#define wxACC_EVENT_OBJECT_CREATE                 0x8000
-#define wxACC_EVENT_OBJECT_DESTROY                0x8001
-#define wxACC_EVENT_OBJECT_SHOW                   0x8002
-#define wxACC_EVENT_OBJECT_HIDE                   0x8003
-#define wxACC_EVENT_OBJECT_REORDER                0x8004
-#define wxACC_EVENT_OBJECT_FOCUS                  0x8005
-#define wxACC_EVENT_OBJECT_SELECTION              0x8006
-#define wxACC_EVENT_OBJECT_SELECTIONADD           0x8007
-#define wxACC_EVENT_OBJECT_SELECTIONREMOVE        0x8008
-#define wxACC_EVENT_OBJECT_SELECTIONWITHIN        0x8009
-#define wxACC_EVENT_OBJECT_STATECHANGE            0x800A
-#define wxACC_EVENT_OBJECT_LOCATIONCHANGE         0x800B
-#define wxACC_EVENT_OBJECT_NAMECHANGE             0x800C
-#define wxACC_EVENT_OBJECT_DESCRIPTIONCHANGE      0x800D
-#define wxACC_EVENT_OBJECT_VALUECHANGE            0x800E
-#define wxACC_EVENT_OBJECT_PARENTCHANGE           0x800F
-#define wxACC_EVENT_OBJECT_HELPCHANGE             0x8010
-#define wxACC_EVENT_OBJECT_DEFACTIONCHANGE        0x8011
-#define wxACC_EVENT_OBJECT_ACCELERATORCHANGE      0x8012
+constexpr unsigned int wxACC_EVENT_SYSTEM_SOUND              = 0x0001;
+constexpr unsigned int wxACC_EVENT_SYSTEM_ALERT              = 0x0002;
+constexpr unsigned int wxACC_EVENT_SYSTEM_FOREGROUND         = 0x0003;
+constexpr unsigned int wxACC_EVENT_SYSTEM_MENUSTART          = 0x0004;
+constexpr unsigned int wxACC_EVENT_SYSTEM_MENUEND            = 0x0005;
+constexpr unsigned int wxACC_EVENT_SYSTEM_MENUPOPUPSTART     = 0x0006;
+constexpr unsigned int wxACC_EVENT_SYSTEM_MENUPOPUPEND       = 0x0007;
+constexpr unsigned int wxACC_EVENT_SYSTEM_CAPTURESTART       = 0x0008;
+constexpr unsigned int wxACC_EVENT_SYSTEM_CAPTUREEND         = 0x0009;
+constexpr unsigned int wxACC_EVENT_SYSTEM_MOVESIZESTART      = 0x000A;
+constexpr unsigned int wxACC_EVENT_SYSTEM_MOVESIZEEND        = 0x000B;
+constexpr unsigned int wxACC_EVENT_SYSTEM_CONTEXTHELPSTART   = 0x000C;
+constexpr unsigned int wxACC_EVENT_SYSTEM_CONTEXTHELPEND     = 0x000D;
+constexpr unsigned int wxACC_EVENT_SYSTEM_DRAGDROPSTART      = 0x000E;
+constexpr unsigned int wxACC_EVENT_SYSTEM_DRAGDROPEND        = 0x000F;
+constexpr unsigned int wxACC_EVENT_SYSTEM_DIALOGSTART        = 0x0010;
+constexpr unsigned int wxACC_EVENT_SYSTEM_DIALOGEND          = 0x0011;
+constexpr unsigned int wxACC_EVENT_SYSTEM_SCROLLINGSTART     = 0x0012;
+constexpr unsigned int wxACC_EVENT_SYSTEM_SCROLLINGEND       = 0x0013;
+constexpr unsigned int wxACC_EVENT_SYSTEM_SWITCHSTART        = 0x0014;
+constexpr unsigned int wxACC_EVENT_SYSTEM_SWITCHEND          = 0x0015;
+constexpr unsigned int wxACC_EVENT_SYSTEM_MINIMIZESTART      = 0x0016;
+constexpr unsigned int wxACC_EVENT_SYSTEM_MINIMIZEEND        = 0x0017;
+constexpr unsigned int wxACC_EVENT_OBJECT_CREATE                 = 0x8000;
+constexpr unsigned int wxACC_EVENT_OBJECT_DESTROY                = 0x8001;
+constexpr unsigned int wxACC_EVENT_OBJECT_SHOW                   = 0x8002;
+constexpr unsigned int wxACC_EVENT_OBJECT_HIDE                   = 0x8003;
+constexpr unsigned int wxACC_EVENT_OBJECT_REORDER                = 0x8004;
+constexpr unsigned int wxACC_EVENT_OBJECT_FOCUS                  = 0x8005;
+constexpr unsigned int wxACC_EVENT_OBJECT_SELECTION              = 0x8006;
+constexpr unsigned int wxACC_EVENT_OBJECT_SELECTIONADD           = 0x8007;
+constexpr unsigned int wxACC_EVENT_OBJECT_SELECTIONREMOVE        = 0x8008;
+constexpr unsigned int wxACC_EVENT_OBJECT_SELECTIONWITHIN        = 0x8009;
+constexpr unsigned int wxACC_EVENT_OBJECT_STATECHANGE            = 0x800A;
+constexpr unsigned int wxACC_EVENT_OBJECT_LOCATIONCHANGE         = 0x800B;
+constexpr unsigned int wxACC_EVENT_OBJECT_NAMECHANGE             = 0x800C;
+constexpr unsigned int wxACC_EVENT_OBJECT_DESCRIPTIONCHANGE      = 0x800D;
+constexpr unsigned int wxACC_EVENT_OBJECT_VALUECHANGE            = 0x800E;
+constexpr unsigned int wxACC_EVENT_OBJECT_PARENTCHANGE           = 0x800F;
+constexpr unsigned int wxACC_EVENT_OBJECT_HELPCHANGE             = 0x8010;
+constexpr unsigned int wxACC_EVENT_OBJECT_DEFACTIONCHANGE        = 0x8011;
+constexpr unsigned int wxACC_EVENT_OBJECT_ACCELERATORCHANGE      = 0x8012;
 
 // ----------------------------------------------------------------------------
 // wxAccessible

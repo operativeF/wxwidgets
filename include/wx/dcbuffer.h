@@ -33,15 +33,15 @@ class WXDLLIMPEXP_CORE wxWindow;
 
 // Assumes the buffer bitmap covers the entire scrolled window,
 // and prepares the window DC accordingly
-inline constexpr int wxBUFFER_VIRTUAL_AREA = 0x01;
+constexpr unsigned int wxBUFFER_VIRTUAL_AREA = 0x01;
 
 // Assumes the buffer bitmap only covers the client area;
 // does not prepare the window DC
-inline constexpr int wxBUFFER_CLIENT_AREA = 0x02;
+constexpr unsigned int wxBUFFER_CLIENT_AREA = 0x02;
 
 // Set when not using specific buffer bitmap. Note that this
 // is private style and not returned by GetStyle.
-inline constexpr int wxBUFFER_USES_SHARED_BUFFER = 0x04;
+constexpr unsigned int wxBUFFER_USES_SHARED_BUFFER = 0x04;
 
 class WXDLLIMPEXP_CORE wxBufferedDC : public wxMemoryDC
 {
@@ -61,7 +61,7 @@ public:
     // Construct a wxBufferedDC with an internal buffer of 'area'
     // (where area is usually something like the size of the window
     // being buffered)
-    wxBufferedDC(wxDC *dc, const wxSize& area, int style = wxBUFFER_CLIENT_AREA)
+    wxBufferedDC(wxDC *dc, const wxSize& area, unsigned int style = wxBUFFER_CLIENT_AREA)
         : m_dc(nullptr), m_buffer(nullptr)
     {
         Init(dc, area, style);
@@ -82,7 +82,7 @@ public:
     // These reimplement the actions of the ctors for two stage creation
     void Init(wxDC *dc,
               wxBitmap& buffer = wxNullBitmap,
-              int style = wxBUFFER_CLIENT_AREA)
+              unsigned int style = wxBUFFER_CLIENT_AREA)
     {
         InitCommon(dc, style);
 
@@ -91,7 +91,7 @@ public:
         UseBuffer();
     }
 
-    void Init(wxDC *dc, const wxSize &area, int style = wxBUFFER_CLIENT_AREA)
+    void Init(wxDC *dc, const wxSize &area, unsigned int style = wxBUFFER_CLIENT_AREA)
     {
         InitCommon(dc, style);
 
@@ -107,12 +107,12 @@ public:
     void UnMask();
 
     // Set and get the style
-    void SetStyle(int style) { m_style = style; }
-    int GetStyle() const { return m_style & ~wxBUFFER_USES_SHARED_BUFFER; }
+    void SetStyle(unsigned int style) { m_style = style; }
+    unsigned int GetStyle() const { return m_style & ~wxBUFFER_USES_SHARED_BUFFER; }
 
 private:
     // common part of Init()s
-    void InitCommon(wxDC *dc, int style)
+    void InitCommon(wxDC *dc, unsigned int style)
     {
         wxASSERT_MSG( !m_dc, wxT("wxBufferedDC already initialised") );
 
@@ -134,7 +134,7 @@ private:
     wxBitmap *m_buffer{nullptr};
 
     // the buffering style
-    int m_style{0};
+    unsigned int m_style{};
 
     wxSize m_area;
 

@@ -174,7 +174,7 @@ wxCoord wxVListBoxComboPopup::OnMeasureItemWidth(size_t n) const
 void wxVListBoxComboPopup::OnDrawBg( wxDC& dc,
                                      const wxRect& rect,
                                      int item,
-                                     int flags ) const
+                                     unsigned int flags ) const
 {
     wxOwnerDrawnComboBox* combo = (wxOwnerDrawnComboBox*) m_combo;
 
@@ -193,7 +193,7 @@ void wxVListBoxComboPopup::OnDrawBackground(wxDC& dc, const wxRect& rect, size_t
 }
 
 // This is called from wxVListBoxComboPopup::OnDrawItem, with text colour and font prepared
-void wxVListBoxComboPopup::OnDrawItem( wxDC& dc, const wxRect& rect, int item, int flags ) const
+void wxVListBoxComboPopup::OnDrawItem( wxDC& dc, const wxRect& rect, int item, unsigned int flags ) const
 {
     wxOwnerDrawnComboBox* combo = (wxOwnerDrawnComboBox*) m_combo;
 
@@ -1146,7 +1146,7 @@ void* wxOwnerDrawnComboBox::DoGetItemClientData(unsigned int n) const
 void wxOwnerDrawnComboBox::OnDrawItem( wxDC& dc,
                                        const wxRect& rect,
                                        int item,
-                                       int flags ) const
+                                       unsigned int flags ) const
 {
     if ( flags & wxODCB_PAINTING_CONTROL )
     {
@@ -1198,7 +1198,7 @@ wxSize wxOwnerDrawnComboBox::DoGetBestSize() const
 void wxOwnerDrawnComboBox::OnDrawBackground(wxDC& dc,
                                             const wxRect& rect,
                                             int WXUNUSED(item),
-                                            int flags) const
+                                            unsigned int flags) const
 {
     // We need only to explicitly draw background for items
     // that should have selected background. Also, call PrepareBackground

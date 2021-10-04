@@ -22,16 +22,16 @@
 /*
  * wxStaticText flags
  */
-inline constexpr int wxST_NO_AUTORESIZE         = 0x0001;
+constexpr unsigned int wxST_NO_AUTORESIZE         = 0x0001;
 // free 0x0002 bit
-inline constexpr int wxST_ELLIPSIZE_START       = 0x0004;
-inline constexpr int wxST_ELLIPSIZE_MIDDLE      = 0x0008;
-inline constexpr int wxST_ELLIPSIZE_END         = 0x0010;
+constexpr unsigned int wxST_ELLIPSIZE_START       = 0x0004;
+constexpr unsigned int wxST_ELLIPSIZE_MIDDLE      = 0x0008;
+constexpr unsigned int wxST_ELLIPSIZE_END         = 0x0010;
 
-inline constexpr int wxST_ELLIPSIZE_MASK =
+constexpr unsigned int wxST_ELLIPSIZE_MASK =
     wxST_ELLIPSIZE_START | wxST_ELLIPSIZE_MIDDLE | wxST_ELLIPSIZE_END;
 
-inline constexpr char wxStaticTextNameStr[] = "staticText";
+constexpr char wxStaticTextNameStr[] = "staticText";
 
 class WXDLLIMPEXP_CORE wxStaticTextBase : public wxControl
 {

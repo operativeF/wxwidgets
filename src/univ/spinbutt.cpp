@@ -45,7 +45,7 @@ wxSpinButton::wxSpinButton(wxWindow *parent,
                            wxWindowID id,
                            const wxPoint& pos,
                            const wxSize& size,
-                           long style,
+                           unsigned int style,
                            const wxString& name)
             : m_arrows(this)
 {
@@ -73,7 +73,7 @@ bool wxSpinButton::Create(wxWindow *parent,
                           wxWindowID id,
                           const wxPoint& pos,
                           const wxSize& size,
-                          long style,
+                          unsigned int style,
                           const wxString& name)
 {
     // the spin buttons never have the border

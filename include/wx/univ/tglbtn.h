@@ -25,7 +25,7 @@ public:
              const wxString& label = wxEmptyString,
              const wxPoint& pos = wxDefaultPosition,
              const wxSize& size = wxDefaultSize,
-             long style = 0,
+             unsigned int style = 0,
              const wxValidator& validator = wxDefaultValidator,
              const wxString& name = wxASCII_STR(wxToggleButtonNameStr));
 
@@ -35,7 +35,7 @@ public:
                 const wxString& lbl = wxEmptyString,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = 0,
+                unsigned int style = 0,
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxASCII_STR(wxToggleButtonNameStr));
 

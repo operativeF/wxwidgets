@@ -85,7 +85,7 @@ inline QSize wxQtConvertSize( const wxSize &size )
     return QSize(size.GetWidth(), size.GetHeight());
 }
 
-Qt::Orientation wxQtConvertOrientation( long style, wxOrientation defaultOrientation );
+Qt::Orientation wxQtConvertOrientation( unsigned int style, wxOrientation defaultOrientation );
 wxOrientation wxQtConvertOrientation( Qt::Orientation );
 
 wxKeyCode wxQtConvertKeyCode( int key, Qt::KeyboardModifiers modifiers );

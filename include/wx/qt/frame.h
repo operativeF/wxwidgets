@@ -25,7 +25,7 @@ public:
                const wxString& title,
                const wxPoint& pos = wxDefaultPosition,
                const wxSize& size = wxDefaultSize,
-               long style = wxDEFAULT_FRAME_STYLE,
+               unsigned int style = wxDEFAULT_FRAME_STYLE,
                const wxString& name = wxASCII_STR(wxFrameNameStr))
     {
         Init();
@@ -39,14 +39,14 @@ public:
                 const wxString& title,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = wxDEFAULT_FRAME_STYLE,
+                unsigned int style = wxDEFAULT_FRAME_STYLE,
                 const wxString& name = wxASCII_STR(wxFrameNameStr));
 
     void SetMenuBar(wxMenuBar *menubar) override;
     void SetStatusBar(wxStatusBar *statusBar ) override;
     void SetToolBar(wxToolBar *toolbar) override;
 
-    void SetWindowStyleFlag( long style ) override;
+    void SetWindowStyleFlag( unsigned int style ) override;
 
     void AddChild( wxWindowBase *child ) override;
     void RemoveChild( wxWindowBase *child ) override;

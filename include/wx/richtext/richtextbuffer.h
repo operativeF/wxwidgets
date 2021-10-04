@@ -105,7 +105,7 @@
 /**
     The line break character that can be embedded in content.
  */
-inline constexpr wxChar wxRichTextLineBreakChar = (wxChar)29;
+constexpr wxChar wxRichTextLineBreakChar = (wxChar)29;
 
 
 /**
@@ -900,7 +900,7 @@ public:
     /**
         Sets the border style.
     */
-    void SetStyle(int style) { m_borderStyle = style; m_flags |= wxTEXT_BOX_ATTR_BORDER_STYLE; }
+    void SetStyle(unsigned int style) { m_borderStyle = style; m_flags |= wxTEXT_BOX_ATTR_BORDER_STYLE; }
 
     /**
         Gets the border style.
@@ -981,7 +981,7 @@ public:
     /**
         Sets the border flags.
     */
-    void SetFlags(int flags) { m_flags = flags; }
+    void SetFlags(unsigned int flags) { m_flags = flags; }
 
     /**
         Adds a border flag.
@@ -1029,7 +1029,7 @@ public:
     /**
         Sets the style of all borders.
     */
-    void SetStyle(int style);
+    void SetStyle(unsigned int style);
 
     /**
         Sets colour of all borders.
@@ -1268,7 +1268,7 @@ public:
     /**
         Sets the border flags.
     */
-    void SetFlags(int flags) { m_flags = flags; }
+    void SetFlags(unsigned int flags) { m_flags = flags; }
 
     /**
         Adds a border flag.
@@ -1368,7 +1368,7 @@ public:
     /**
         Sets the flags.
     */
-    void SetFlags(int flags) { m_flags = flags; }
+    void SetFlags(unsigned int flags) { m_flags = flags; }
 
     /**
         Returns the flags.
@@ -2540,7 +2540,7 @@ public:
         Draw the item, within the given range. Some objects may ignore the range (for
         example paragraphs) while others must obey it (lines, to implement wrapping)
     */
-    virtual bool Draw(wxDC& dc, wxRichTextDrawingContext& context, const wxRichTextRange& range, const wxRichTextSelection& selection, const wxRect& rect, int descent, int style) = 0;
+    virtual bool Draw(wxDC& dc, wxRichTextDrawingContext& context, const wxRichTextRange& range, const wxRichTextSelection& selection, const wxRect& rect, int descent, unsigned int style) = 0;
 
     /**
         Lay the item out at the specified position with the given size constraint.
@@ -2548,7 +2548,7 @@ public:
         and @a parentRect is the container that is used to determine a relative size
         or position (for example if a text box must be 50% of the parent text box).
     */
-    virtual bool Layout(wxDC& dc, wxRichTextDrawingContext& context, const wxRect& rect, const wxRect& parentRect, int style) = 0;
+    virtual bool Layout(wxDC& dc, wxRichTextDrawingContext& context, const wxRect& rect, const wxRect& parentRect, unsigned int style) = 0;
 
     /**
         Hit-testing: returns a flag indicating hit test details, plus
@@ -2567,7 +2567,7 @@ public:
         @return One of the ::wxRichTextHitTestFlags values.
     */
 
-    virtual int HitTest(wxDC& dc, wxRichTextDrawingContext& context, const wxPoint& pt, long& textPosition, wxRichTextObject** obj, wxRichTextObject** contextObj, int flags = 0);
+    virtual int HitTest(wxDC& dc, wxRichTextDrawingContext& context, const wxPoint& pt, long& textPosition, wxRichTextObject** obj, wxRichTextObject** contextObj, unsigned int flags = 0);
 
     /**
         Finds the absolute position and row height for the given character position.
@@ -2586,7 +2586,7 @@ public:
         is invalid for this object.
     */
 
-    virtual bool GetRangeSize(const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, int flags, const wxPoint& position = wxPoint(0,0), const wxSize& parentSize = wxDefaultSize, std::vector<int>* partialExtents = nullptr) const  = 0;
+    virtual bool GetRangeSize(const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, unsigned int flags, const wxPoint& position = wxPoint(0,0), const wxSize& parentSize = wxDefaultSize, std::vector<int>* partialExtents = nullptr) const  = 0;
 
     /**
         Do a split from @a pos, returning an object containing the second part, and setting
@@ -2912,7 +2912,7 @@ public:
     */
     virtual bool LayoutToBestSize(wxDC& dc, wxRichTextDrawingContext& context, wxRichTextBuffer* buffer,
                     const wxRichTextAttr& parentAttr, const wxRichTextAttr& attr,
-                    const wxRect& availableParentSpace, const wxRect& availableContainerSpace, int style);
+                    const wxRect& availableParentSpace, const wxRect& availableContainerSpace, unsigned int style);
 
     /**
         Adjusts the attributes for virtual attribute provision, collapsed borders, etc.
@@ -3044,12 +3044,12 @@ public:
         Draws the borders and background for the given rectangle and attributes.
         @a boxRect is taken to be the outer margin box, not the box around the content.
     */
-    static bool DrawBoxAttributes(wxDC& dc, wxRichTextBuffer* buffer, const wxRichTextAttr& attr, const wxRect& boxRect, int flags = 0, wxRichTextObject* obj = nullptr);
+    static bool DrawBoxAttributes(wxDC& dc, wxRichTextBuffer* buffer, const wxRichTextAttr& attr, const wxRect& boxRect, unsigned int flags = 0, wxRichTextObject* obj = nullptr);
 
     /**
         Draws a border.
     */
-    static bool DrawBorder(wxDC& dc, wxRichTextBuffer* buffer, const wxRichTextAttr& attr, const wxTextAttrBorders& borders, const wxRect& rect, int flags = 0);
+    static bool DrawBorder(wxDC& dc, wxRichTextBuffer* buffer, const wxRichTextAttr& attr, const wxTextAttrBorders& borders, const wxRect& rect, unsigned int flags = 0);
 
     /**
         Returns the various rectangles of the box model in pixels. You can either specify @a contentRect (inner)
@@ -3121,7 +3121,7 @@ public:
 
 // Overridables
 
-    int HitTest(wxDC& dc, wxRichTextDrawingContext& context, const wxPoint& pt, long& textPosition, wxRichTextObject** obj, wxRichTextObject** contextObj, int flags = 0) override;
+    int HitTest(wxDC& dc, wxRichTextDrawingContext& context, const wxPoint& pt, long& textPosition, wxRichTextObject** obj, wxRichTextObject** contextObj, unsigned int flags = 0) override;
 
     bool FindPosition(wxDC& dc, wxRichTextDrawingContext& context, long index, wxPoint& pt, int* height, bool forceLineStart) override;
 
@@ -3131,7 +3131,7 @@ public:
 
     wxString GetTextForRange(const wxRichTextRange& range) const override;
 
-    bool GetRangeSize(const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, int flags, const wxPoint& position = wxPoint(0,0), const wxSize& parentSize = wxDefaultSize, std::vector<int>* partialExtents = nullptr) const override;
+    bool GetRangeSize(const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, unsigned int flags, const wxPoint& position = wxPoint(0,0), const wxSize& parentSize = wxDefaultSize, std::vector<int>* partialExtents = nullptr) const override;
 
     void Dump(wxTextOutputStream& stream) override;
 
@@ -3242,13 +3242,13 @@ public:
 
 // Overridables
 
-    int HitTest(wxDC& dc, wxRichTextDrawingContext& context, const wxPoint& pt, long& textPosition, wxRichTextObject** obj, wxRichTextObject** contextObj, int flags = 0) override;
+    int HitTest(wxDC& dc, wxRichTextDrawingContext& context, const wxPoint& pt, long& textPosition, wxRichTextObject** obj, wxRichTextObject** contextObj, unsigned int flags = 0) override;
 
-    bool Draw(wxDC& dc, wxRichTextDrawingContext& context, const wxRichTextRange& range, const wxRichTextSelection& selection, const wxRect& rect, int descent, int style) override;
+    bool Draw(wxDC& dc, wxRichTextDrawingContext& context, const wxRichTextRange& range, const wxRichTextSelection& selection, const wxRect& rect, int descent, unsigned int style) override;
 
-    bool Layout(wxDC& dc, wxRichTextDrawingContext& context, const wxRect& rect, const wxRect& parentRect, int style) override;
+    bool Layout(wxDC& dc, wxRichTextDrawingContext& context, const wxRect& rect, const wxRect& parentRect, unsigned int style) override;
 
-    bool GetRangeSize(const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, int flags, const wxPoint& position = wxPoint(0,0), const wxSize& parentSize = wxDefaultSize, std::vector<int>* partialExtents = nullptr) const override;
+    bool GetRangeSize(const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, unsigned int flags, const wxPoint& position = wxPoint(0,0), const wxSize& parentSize = wxDefaultSize, std::vector<int>* partialExtents = nullptr) const override;
 
     bool DeleteRange(const wxRichTextRange& range) override;
 
@@ -3304,23 +3304,23 @@ public:
     /**
         Submits a command to insert paragraphs.
     */
-    bool InsertParagraphsWithUndo(wxRichTextBuffer* buffer, long pos, const wxRichTextParagraphLayoutBox& paragraphs, wxRichTextCtrl* ctrl, int flags = 0);
+    bool InsertParagraphsWithUndo(wxRichTextBuffer* buffer, long pos, const wxRichTextParagraphLayoutBox& paragraphs, wxRichTextCtrl* ctrl, unsigned int flags = 0);
 
     /**
         Submits a command to insert the given text.
     */
-    bool InsertTextWithUndo(wxRichTextBuffer* buffer, long pos, const wxString& text, wxRichTextCtrl* ctrl, int flags = 0);
+    bool InsertTextWithUndo(wxRichTextBuffer* buffer, long pos, const wxString& text, wxRichTextCtrl* ctrl, unsigned int flags = 0);
 
     /**
         Submits a command to insert the given text.
     */
-    bool InsertNewlineWithUndo(wxRichTextBuffer* buffer, long pos, wxRichTextCtrl* ctrl, int flags = 0);
+    bool InsertNewlineWithUndo(wxRichTextBuffer* buffer, long pos, wxRichTextCtrl* ctrl, unsigned int flags = 0);
 
     /**
         Submits a command to insert the given image.
     */
     bool InsertImageWithUndo(wxRichTextBuffer* buffer, long pos, const wxRichTextImageBlock& imageBlock,
-                                                        wxRichTextCtrl* ctrl, int flags, const wxRichTextAttr& textAttr);
+                                                        wxRichTextCtrl* ctrl, unsigned int flags, const wxRichTextAttr& textAttr);
 
     /**
         Submits a command to insert the given field. Field data can be included in properties.
@@ -3329,7 +3329,7 @@ public:
     */
     wxRichTextField* InsertFieldWithUndo(wxRichTextBuffer* buffer, long pos, const wxString& fieldType,
                                                         const wxRichTextProperties& properties,
-                                                        wxRichTextCtrl* ctrl, int flags,
+                                                        wxRichTextCtrl* ctrl, unsigned int flags,
                                                         const wxRichTextAttr& textAttr);
 
     /**
@@ -3342,7 +3342,7 @@ public:
     /**
         Inserts an object.
     */
-    wxRichTextObject* InsertObjectWithUndo(wxRichTextBuffer* buffer, long pos, wxRichTextObject *object, wxRichTextCtrl* ctrl, int flags = 0);
+    wxRichTextObject* InsertObjectWithUndo(wxRichTextBuffer* buffer, long pos, wxRichTextObject *object, wxRichTextCtrl* ctrl, unsigned int flags = 0);
 
     /**
         Submits a command to delete this range.
@@ -3352,7 +3352,7 @@ public:
     /**
         Draws the floating objects in this buffer.
     */
-    void DrawFloats(wxDC& dc, wxRichTextDrawingContext& context, const wxRichTextRange& range, const wxRichTextSelection& selection, const wxRect& rect, int descent, int style);
+    void DrawFloats(wxDC& dc, wxRichTextDrawingContext& context, const wxRichTextRange& range, const wxRichTextSelection& selection, const wxRect& rect, int descent, unsigned int style);
 
     /**
         Moves an anchored object to another paragraph.
@@ -3497,12 +3497,12 @@ public:
         - wxRICHTEXT_SETSTYLE_REMOVE: removes the specified style.
           Only the style flags are used in this operation.
     */
-    virtual bool SetStyle(const wxRichTextRange& range, const wxRichTextAttr& style, int flags = wxRICHTEXT_SETSTYLE_WITH_UNDO);
+    virtual bool SetStyle(const wxRichTextRange& range, const wxRichTextAttr& style, unsigned int flags = wxRICHTEXT_SETSTYLE_WITH_UNDO);
 
     /**
         Sets the attributes for the given object only, for example the box attributes for a text box.
     */
-    virtual void SetStyle(wxRichTextObject *obj, const wxRichTextAttr& textAttr, int flags = wxRICHTEXT_SETSTYLE_WITH_UNDO);
+    virtual void SetStyle(wxRichTextObject *obj, const wxRichTextAttr& textAttr, unsigned int flags = wxRICHTEXT_SETSTYLE_WITH_UNDO);
 
     /**
         Returns the combined text attributes for this position.
@@ -3574,8 +3574,8 @@ public:
 
         @see NumberList(), PromoteList(), ClearListStyle().
     */
-    virtual bool SetListStyle(const wxRichTextRange& range, wxRichTextListStyleDefinition* def, int flags = wxRICHTEXT_SETSTYLE_WITH_UNDO, int startFrom = 1, int specifiedLevel = -1);
-    virtual bool SetListStyle(const wxRichTextRange& range, const wxString& defName, int flags = wxRICHTEXT_SETSTYLE_WITH_UNDO, int startFrom = 1, int specifiedLevel = -1);
+    virtual bool SetListStyle(const wxRichTextRange& range, wxRichTextListStyleDefinition* def, unsigned int flags = wxRICHTEXT_SETSTYLE_WITH_UNDO, int startFrom = 1, int specifiedLevel = -1);
+    virtual bool SetListStyle(const wxRichTextRange& range, const wxString& defName, unsigned int flags = wxRICHTEXT_SETSTYLE_WITH_UNDO, int startFrom = 1, int specifiedLevel = -1);
     //@}
 
     /**
@@ -3587,7 +3587,7 @@ public:
 
         @see SetListStyle(), PromoteList(), NumberList()
     */
-    virtual bool ClearListStyle(const wxRichTextRange& range, int flags = wxRICHTEXT_SETSTYLE_WITH_UNDO);
+    virtual bool ClearListStyle(const wxRichTextRange& range, unsigned int flags = wxRICHTEXT_SETSTYLE_WITH_UNDO);
 
     //@{
     /**
@@ -3608,8 +3608,8 @@ public:
 
         @see SetListStyle(), PromoteList(), ClearListStyle()
     */
-    virtual bool NumberList(const wxRichTextRange& range, wxRichTextListStyleDefinition* def = nullptr, int flags = wxRICHTEXT_SETSTYLE_WITH_UNDO, int startFrom = 1, int specifiedLevel = -1);
-    virtual bool NumberList(const wxRichTextRange& range, const wxString& defName, int flags = wxRICHTEXT_SETSTYLE_WITH_UNDO, int startFrom = 1, int specifiedLevel = -1);
+    virtual bool NumberList(const wxRichTextRange& range, wxRichTextListStyleDefinition* def = nullptr, unsigned int flags = wxRICHTEXT_SETSTYLE_WITH_UNDO, int startFrom = 1, int specifiedLevel = -1);
+    virtual bool NumberList(const wxRichTextRange& range, const wxString& defName, unsigned int flags = wxRICHTEXT_SETSTYLE_WITH_UNDO, int startFrom = 1, int specifiedLevel = -1);
     //@}
 
     //@{
@@ -3629,15 +3629,15 @@ public:
 
         @see SetListStyle(), SetListStyle(), ClearListStyle()
     */
-    virtual bool PromoteList(int promoteBy, const wxRichTextRange& range, wxRichTextListStyleDefinition* def = nullptr, int flags = wxRICHTEXT_SETSTYLE_WITH_UNDO, int specifiedLevel = -1);
-    virtual bool PromoteList(int promoteBy, const wxRichTextRange& range, const wxString& defName, int flags = wxRICHTEXT_SETSTYLE_WITH_UNDO, int specifiedLevel = -1);
+    virtual bool PromoteList(int promoteBy, const wxRichTextRange& range, wxRichTextListStyleDefinition* def = nullptr, unsigned int flags = wxRICHTEXT_SETSTYLE_WITH_UNDO, int specifiedLevel = -1);
+    virtual bool PromoteList(int promoteBy, const wxRichTextRange& range, const wxString& defName, unsigned int flags = wxRICHTEXT_SETSTYLE_WITH_UNDO, int specifiedLevel = -1);
     //@}
 
     /**
         Helper for NumberList and PromoteList, that does renumbering and promotion simultaneously
         @a def can be NULL/empty to indicate that the existing list style should be used.
     */
-    virtual bool DoNumberList(const wxRichTextRange& range, const wxRichTextRange& promotionRange, int promoteBy, wxRichTextListStyleDefinition* def, int flags = wxRICHTEXT_SETSTYLE_WITH_UNDO, int startFrom = 1, int specifiedLevel = -1);
+    virtual bool DoNumberList(const wxRichTextRange& range, const wxRichTextRange& promotionRange, int promoteBy, wxRichTextListStyleDefinition* def, unsigned int flags = wxRICHTEXT_SETSTYLE_WITH_UNDO, int startFrom = 1, int specifiedLevel = -1);
 
     /**
         Fills in the attributes for numbering a paragraph after previousParagraph.
@@ -3664,7 +3664,7 @@ public:
           the new properties.
         - wxRICHTEXT_SETPROPERTIES_REMOVE: removes the specified properties.
     */
-    virtual bool SetProperties(const wxRichTextRange& range, const wxRichTextProperties& properties, int flags = wxRICHTEXT_SETPROPERTIES_WITH_UNDO);
+    virtual bool SetProperties(const wxRichTextRange& range, const wxRichTextProperties& properties, unsigned int flags = wxRICHTEXT_SETPROPERTIES_WITH_UNDO);
 
     /**
         Sets with undo the properties for the given object.
@@ -3855,7 +3855,7 @@ public:
 
 // Overridables
 
-    bool Draw(wxDC& dc, wxRichTextDrawingContext& context, const wxRichTextRange& range, const wxRichTextSelection& selection, const wxRect& rect, int descent, int style) override;
+    bool Draw(wxDC& dc, wxRichTextDrawingContext& context, const wxRichTextRange& range, const wxRichTextSelection& selection, const wxRect& rect, int descent, unsigned int style) override;
 
     wxString GetXMLNodeName() const override { return wxT("textbox"); }
 
@@ -3937,11 +3937,11 @@ public:
 
 // Overridables
 
-    bool Draw(wxDC& dc, wxRichTextDrawingContext& context, const wxRichTextRange& range, const wxRichTextSelection& selection, const wxRect& rect, int descent, int style) override;
+    bool Draw(wxDC& dc, wxRichTextDrawingContext& context, const wxRichTextRange& range, const wxRichTextSelection& selection, const wxRect& rect, int descent, unsigned int style) override;
 
-    bool Layout(wxDC& dc, wxRichTextDrawingContext& context, const wxRect& rect, const wxRect& parentRect, int style) override;
+    bool Layout(wxDC& dc, wxRichTextDrawingContext& context, const wxRect& rect, const wxRect& parentRect, unsigned int style) override;
 
-    bool GetRangeSize(const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, int flags, const wxPoint& position = wxPoint(0,0), const wxSize& parentSize = wxDefaultSize, std::vector<int>* partialExtents = nullptr) const override;
+    bool GetRangeSize(const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, unsigned int flags, const wxPoint& position = wxPoint(0,0), const wxSize& parentSize = wxDefaultSize, std::vector<int>* partialExtents = nullptr) const override;
 
     wxString GetXMLNodeName() const override { return wxT("field"); }
 
@@ -4025,7 +4025,7 @@ public:
         Draw the item, within the given range. Some objects may ignore the range (for
         example paragraphs) while others must obey it (lines, to implement wrapping)
     */
-    virtual bool Draw(wxRichTextField* obj, wxDC& dc, wxRichTextDrawingContext& context, const wxRichTextRange& range, const wxRichTextSelection& selection, const wxRect& rect, int descent, int style) = 0;
+    virtual bool Draw(wxRichTextField* obj, wxDC& dc, wxRichTextDrawingContext& context, const wxRichTextRange& range, const wxRichTextSelection& selection, const wxRect& rect, int descent, unsigned int style) = 0;
 
     /**
         Lay the item out at the specified position with the given size constraint.
@@ -4033,13 +4033,13 @@ public:
         and @a parentRect is the container that is used to determine a relative size
         or position (for example if a text box must be 50% of the parent text box).
     */
-    virtual bool Layout(wxRichTextField* obj, wxDC& dc, wxRichTextDrawingContext& context, const wxRect& rect, const wxRect& parentRect, int style) = 0;
+    virtual bool Layout(wxRichTextField* obj, wxDC& dc, wxRichTextDrawingContext& context, const wxRect& rect, const wxRect& parentRect, unsigned int style) = 0;
 
     /**
         Returns the object size for the given range. Returns @false if the range
         is invalid for this object.
     */
-    virtual bool GetRangeSize(wxRichTextField* obj, const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, int flags, const wxPoint& position = wxPoint(0,0), const wxSize& parentSize = wxDefaultSize, std::vector<int>* partialExtents = nullptr) const = 0;
+    virtual bool GetRangeSize(wxRichTextField* obj, const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, unsigned int flags, const wxPoint& position = wxPoint(0,0), const wxSize& parentSize = wxDefaultSize, std::vector<int>* partialExtents = nullptr) const = 0;
 
     /**
         Returns @true if we can edit the object's properties via a GUI.
@@ -4193,7 +4193,7 @@ public:
         Draw the item, within the given range. Some objects may ignore the range (for
         example paragraphs) while others must obey it (lines, to implement wrapping)
     */
-    bool Draw(wxRichTextField* obj, wxDC& dc, wxRichTextDrawingContext& context, const wxRichTextRange& range, const wxRichTextSelection& selection, const wxRect& rect, int descent, int style) override;
+    bool Draw(wxRichTextField* obj, wxDC& dc, wxRichTextDrawingContext& context, const wxRichTextRange& range, const wxRichTextSelection& selection, const wxRect& rect, int descent, unsigned int style) override;
 
     /**
         Lay the item out at the specified position with the given size constraint.
@@ -4201,18 +4201,18 @@ public:
         and @a parentRect is the container that is used to determine a relative size
         or position (for example if a text box must be 50% of the parent text box).
     */
-    bool Layout(wxRichTextField* obj, wxDC& dc, wxRichTextDrawingContext& context, const wxRect& rect, const wxRect& parentRect, int style) override;
+    bool Layout(wxRichTextField* obj, wxDC& dc, wxRichTextDrawingContext& context, const wxRect& rect, const wxRect& parentRect, unsigned int style) override;
 
     /**
         Returns the object size for the given range. Returns @false if the range
         is invalid for this object.
     */
-    bool GetRangeSize(wxRichTextField* obj, const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, int flags, const wxPoint& position = wxPoint(0,0), const wxSize& parentSize = wxDefaultSize, std::vector<int>* partialExtents = nullptr) const override;
+    bool GetRangeSize(wxRichTextField* obj, const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, unsigned int flags, const wxPoint& position = wxPoint(0,0), const wxSize& parentSize = wxDefaultSize, std::vector<int>* partialExtents = nullptr) const override;
 
     /**
         Get the size of the field, given the label, font size, and so on.
     */
-    wxSize GetSize(wxRichTextField* obj, wxDC& dc, wxRichTextDrawingContext& context, int style) const;
+    wxSize GetSize(wxRichTextField* obj, wxDC& dc, wxRichTextDrawingContext& context, unsigned int style) const;
 
     /**
         Returns @true if the display type is wxRICHTEXT_FIELD_STYLE_COMPOSITE, @false otherwise.
@@ -4512,15 +4512,15 @@ public:
 
 // Overridables
 
-    bool Draw(wxDC& dc, wxRichTextDrawingContext& context, const wxRichTextRange& range, const wxRichTextSelection& selection, const wxRect& rect, int descent, int style) override;
+    bool Draw(wxDC& dc, wxRichTextDrawingContext& context, const wxRichTextRange& range, const wxRichTextSelection& selection, const wxRect& rect, int descent, unsigned int style) override;
 
-    bool Layout(wxDC& dc, wxRichTextDrawingContext& context, const wxRect& rect, const wxRect& parentRect, int style) override;
+    bool Layout(wxDC& dc, wxRichTextDrawingContext& context, const wxRect& rect, const wxRect& parentRect, unsigned int style) override;
 
-    bool GetRangeSize(const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, int flags, const wxPoint& position = wxPoint(0,0), const wxSize& parentSize = wxDefaultSize, std::vector<int>* partialExtents = nullptr) const override;
+    bool GetRangeSize(const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, unsigned int flags, const wxPoint& position = wxPoint(0,0), const wxSize& parentSize = wxDefaultSize, std::vector<int>* partialExtents = nullptr) const override;
 
     bool FindPosition(wxDC& dc, wxRichTextDrawingContext& context, long index, wxPoint& pt, int* height, bool forceLineStart) override;
 
-    int HitTest(wxDC& dc, wxRichTextDrawingContext& context, const wxPoint& pt, long& textPosition, wxRichTextObject** obj, wxRichTextObject** contextObj, int flags = 0) override;
+    int HitTest(wxDC& dc, wxRichTextDrawingContext& context, const wxPoint& pt, long& textPosition, wxRichTextObject** obj, wxRichTextObject** contextObj, unsigned int flags = 0) override;
 
     void CalculateRange(long start, long& end) override;
 
@@ -4641,7 +4641,7 @@ public:
     /**
         Lays out the floating objects.
     */
-    void LayoutFloat(wxDC& dc, wxRichTextDrawingContext& context, const wxRect& rect, const wxRect& parentRect, int style, wxRichTextFloatCollector* floatCollector);
+    void LayoutFloat(wxDC& dc, wxRichTextDrawingContext& context, const wxRect& rect, const wxRect& parentRect, unsigned int style, wxRichTextFloatCollector* floatCollector);
 
     /**
         Whether the paragraph is impacted by floating objects from above.
@@ -4696,13 +4696,13 @@ public:
 
 // Overridables
 
-    bool Draw(wxDC& dc, wxRichTextDrawingContext& context, const wxRichTextRange& range, const wxRichTextSelection& selection, const wxRect& rect, int descent, int style) override;
+    bool Draw(wxDC& dc, wxRichTextDrawingContext& context, const wxRichTextRange& range, const wxRichTextSelection& selection, const wxRect& rect, int descent, unsigned int style) override;
 
-    bool Layout(wxDC& dc, wxRichTextDrawingContext& context, const wxRect& rect, const wxRect& parentRect, int style) override;
+    bool Layout(wxDC& dc, wxRichTextDrawingContext& context, const wxRect& rect, const wxRect& parentRect, unsigned int style) override;
 
     bool AdjustAttributes(wxRichTextAttr& attr, wxRichTextDrawingContext& context) override;
 
-    bool GetRangeSize(const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, int flags, const wxPoint& position = wxPoint(0,0), const wxSize& parentSize = wxDefaultSize, std::vector<int>* partialExtents = nullptr) const override;
+    bool GetRangeSize(const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, unsigned int flags, const wxPoint& position = wxPoint(0,0), const wxSize& parentSize = wxDefaultSize, std::vector<int>* partialExtents = nullptr) const override;
 
     wxString GetTextForRange(const wxRichTextRange& range) const override;
 
@@ -4974,11 +4974,11 @@ public:
 
 // Overridables
 
-    bool Draw(wxDC& dc, wxRichTextDrawingContext& context, const wxRichTextRange& range, const wxRichTextSelection& selection, const wxRect& rect, int descent, int style) override;
+    bool Draw(wxDC& dc, wxRichTextDrawingContext& context, const wxRichTextRange& range, const wxRichTextSelection& selection, const wxRect& rect, int descent, unsigned int style) override;
 
-    bool Layout(wxDC& dc, wxRichTextDrawingContext& context, const wxRect& rect, const wxRect& parentRect, int style) override;
+    bool Layout(wxDC& dc, wxRichTextDrawingContext& context, const wxRect& rect, const wxRect& parentRect, unsigned int style) override;
 
-    bool GetRangeSize(const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, int flags, const wxPoint& position = wxPoint(0,0), const wxSize& parentSize = wxDefaultSize, std::vector<int>* partialExtents = nullptr) const override;
+    bool GetRangeSize(const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, unsigned int flags, const wxPoint& position = wxPoint(0,0), const wxSize& parentSize = wxDefaultSize, std::vector<int>* partialExtents = nullptr) const override;
 
     /**
         Returns the 'natural' size for this object - the image size.
@@ -5242,12 +5242,12 @@ public:
     /**
         Sets the handler flags, controlling loading and saving.
     */
-    void SetHandlerFlags(int flags) { m_handlerFlags = flags; }
+    void SetHandlerFlags(unsigned int flags) { m_handlerFlags = flags; }
 
     /**
         Gets the handler flags, controlling loading and saving.
     */
-    int GetHandlerFlags() const { return m_handlerFlags; }
+    unsigned int GetHandlerFlags() const { return m_handlerFlags; }
 
     /**
         Convenience function to add a paragraph of text.
@@ -5592,7 +5592,7 @@ public:
 
 // Implementation
 
-    int HitTest(wxDC& dc, wxRichTextDrawingContext& context, const wxPoint& pt, long& textPosition, wxRichTextObject** obj, wxRichTextObject** contextObj, int flags = 0) override;
+    int HitTest(wxDC& dc, wxRichTextDrawingContext& context, const wxPoint& pt, long& textPosition, wxRichTextObject** obj, wxRichTextObject** contextObj, unsigned int flags = 0) override;
 
     /**
         Copies the buffer.
@@ -5612,28 +5612,28 @@ public:
     /**
         Submits a command to insert paragraphs.
     */
-    bool InsertParagraphsWithUndo(long pos, const wxRichTextParagraphLayoutBox& paragraphs, wxRichTextCtrl* ctrl, int flags = 0);
+    bool InsertParagraphsWithUndo(long pos, const wxRichTextParagraphLayoutBox& paragraphs, wxRichTextCtrl* ctrl, unsigned int flags = 0);
 
     /**
         Submits a command to insert the given text.
     */
-    bool InsertTextWithUndo(long pos, const wxString& text, wxRichTextCtrl* ctrl, int flags = 0);
+    bool InsertTextWithUndo(long pos, const wxString& text, wxRichTextCtrl* ctrl, unsigned int flags = 0);
 
     /**
         Submits a command to insert a newline.
     */
-    bool InsertNewlineWithUndo(long pos, wxRichTextCtrl* ctrl, int flags = 0);
+    bool InsertNewlineWithUndo(long pos, wxRichTextCtrl* ctrl, unsigned int flags = 0);
 
     /**
         Submits a command to insert the given image.
     */
-    bool InsertImageWithUndo(long pos, const wxRichTextImageBlock& imageBlock, wxRichTextCtrl* ctrl, int flags = 0,
+    bool InsertImageWithUndo(long pos, const wxRichTextImageBlock& imageBlock, wxRichTextCtrl* ctrl, unsigned int flags = 0,
             const wxRichTextAttr& textAttr = wxRichTextAttr());
 
     /**
         Submits a command to insert an object.
     */
-    wxRichTextObject* InsertObjectWithUndo(long pos, wxRichTextObject *object, wxRichTextCtrl* ctrl, int flags);
+    wxRichTextObject* InsertObjectWithUndo(long pos, wxRichTextObject *object, wxRichTextCtrl* ctrl, unsigned int flags);
 
     /**
         Submits a command to delete this range.
@@ -5870,7 +5870,7 @@ protected:
     wxList                  m_attributeStack;
 
     /// Flags to be passed to handlers
-    int                     m_handlerFlags;
+    unsigned int                     m_handlerFlags;
 
     /// File handlers
     inline static wxList           sm_handlers;
@@ -5929,9 +5929,9 @@ public:
 
 // Overridables
 
-    bool Draw(wxDC& dc, wxRichTextDrawingContext& context, const wxRichTextRange& range, const wxRichTextSelection& selection, const wxRect& rect, int descent, int style) override;
+    bool Draw(wxDC& dc, wxRichTextDrawingContext& context, const wxRichTextRange& range, const wxRichTextSelection& selection, const wxRect& rect, int descent, unsigned int style) override;
 
-    int HitTest(wxDC& dc, wxRichTextDrawingContext& context, const wxPoint& pt, long& textPosition, wxRichTextObject** obj, wxRichTextObject** contextObj, int flags = 0) override;
+    int HitTest(wxDC& dc, wxRichTextDrawingContext& context, const wxPoint& pt, long& textPosition, wxRichTextObject** obj, wxRichTextObject** contextObj, unsigned int flags = 0) override;
 
     bool AdjustAttributes(wxRichTextAttr& attr, wxRichTextDrawingContext& context) override;
 
@@ -6007,17 +6007,17 @@ public:
 
 // Overridables
 
-    bool Draw(wxDC& dc, wxRichTextDrawingContext& context, const wxRichTextRange& range, const wxRichTextSelection& selection, const wxRect& rect, int descent, int style) override;
+    bool Draw(wxDC& dc, wxRichTextDrawingContext& context, const wxRichTextRange& range, const wxRichTextSelection& selection, const wxRect& rect, int descent, unsigned int style) override;
 
-    int HitTest(wxDC& dc, wxRichTextDrawingContext& context, const wxPoint& pt, long& textPosition, wxRichTextObject** obj, wxRichTextObject** contextObj, int flags = 0) override;
+    int HitTest(wxDC& dc, wxRichTextDrawingContext& context, const wxPoint& pt, long& textPosition, wxRichTextObject** obj, wxRichTextObject** contextObj, unsigned int flags = 0) override;
 
     bool AdjustAttributes(wxRichTextAttr& attr, wxRichTextDrawingContext& context) override;
 
     wxString GetXMLNodeName() const override { return wxT("table"); }
 
-    bool Layout(wxDC& dc, wxRichTextDrawingContext& context, const wxRect& rect, const wxRect& parentRect, int style) override;
+    bool Layout(wxDC& dc, wxRichTextDrawingContext& context, const wxRect& rect, const wxRect& parentRect, unsigned int style) override;
 
-    bool GetRangeSize(const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, int flags, const wxPoint& position = wxPoint(0,0), const wxSize& parentSize = wxDefaultSize, std::vector<int>* partialExtents = nullptr) const override;
+    bool GetRangeSize(const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, unsigned int flags, const wxPoint& position = wxPoint(0,0), const wxSize& parentSize = wxDefaultSize, std::vector<int>* partialExtents = nullptr) const override;
 
     bool DeleteRange(const wxRichTextRange& range) override;
 
@@ -6127,7 +6127,7 @@ public:
         Sets the attributes for the cells specified by the selection.
     */
 
-    virtual bool SetCellStyle(const wxRichTextSelection& selection, const wxRichTextAttr& style, int flags = wxRICHTEXT_SETSTYLE_WITH_UNDO);
+    virtual bool SetCellStyle(const wxRichTextSelection& selection, const wxRichTextAttr& style, unsigned int flags = wxRICHTEXT_SETSTYLE_WITH_UNDO);
 
     /**
         Deletes rows from the given row position.
@@ -6215,7 +6215,7 @@ private:
         wxRect availableSpace,
         wxRichTextDrawingContext& context,
         wxDC& dc,
-        int style);
+        unsigned int style);
 };
 
 /** @class wxRichTextTableBlock
@@ -6632,24 +6632,24 @@ protected:
  */
 
 // Include style sheet when loading and saving
-#define wxRICHTEXT_HANDLER_INCLUDE_STYLESHEET       0x0001
+constexpr unsigned int wxRICHTEXT_HANDLER_INCLUDE_STYLESHEET       = 0x0001;
 
 // Save images to memory file system in HTML handler
-#define wxRICHTEXT_HANDLER_SAVE_IMAGES_TO_MEMORY    0x0010
+constexpr unsigned int wxRICHTEXT_HANDLER_SAVE_IMAGES_TO_MEMORY    = 0x0010;
 
 // Save images to files in HTML handler
-#define wxRICHTEXT_HANDLER_SAVE_IMAGES_TO_FILES     0x0020
+constexpr unsigned int wxRICHTEXT_HANDLER_SAVE_IMAGES_TO_FILES     = 0x0020;
 
 // Save images as inline base64 data in HTML handler
-#define wxRICHTEXT_HANDLER_SAVE_IMAGES_TO_BASE64    0x0040
+constexpr unsigned int wxRICHTEXT_HANDLER_SAVE_IMAGES_TO_BASE64    = 0x0040;
 
 // Don't write header and footer (or BODY), so we can include the fragment
 // in a larger document
-#define wxRICHTEXT_HANDLER_NO_HEADER_FOOTER         0x0080
+constexpr unsigned int wxRICHTEXT_HANDLER_NO_HEADER_FOOTER         = 0x0080;
 
 // Convert the more common face names to names that will work on the current platform
 // in a larger document
-#define wxRICHTEXT_HANDLER_CONVERT_FACENAMES        0x0100
+constexpr unsigned int wxRICHTEXT_HANDLER_CONVERT_FACENAMES        = 0x0100;
 
 /**
     @class wxRichTextFileHandler
@@ -6767,7 +6767,7 @@ public:
         Or, you can call the control or buffer's SetHandlerFlags function to set
         the flags that will be used for subsequent load and save operations.
     */
-    void SetFlags(int flags) { m_flags = flags; }
+    void SetFlags(unsigned int flags) { m_flags = flags; }
 
     /**
         Returns flags controlling how loading and saving is done.
@@ -7059,7 +7059,7 @@ public:
  *
  */
 
-inline bool wxRichTextHasStyle(int flags, int style)
+inline bool wxRichTextHasStyle(unsigned int flags, unsigned int style)
 {
     return ((flags & style) == style);
 }
@@ -7078,7 +7078,7 @@ WXDLLIMPEXP_RICHTEXT bool wxRichTextRemoveStyle(wxRichTextAttr& destStyle, const
 WXDLLIMPEXP_RICHTEXT bool wxRichTextCombineBitlists(int& valueA, int valueB, int& flagsA, int flagsB);
 
 /// Compare two bitlists
-WXDLLIMPEXP_RICHTEXT bool wxRichTextBitlistsEqPartial(int valueA, int valueB, int flags);
+WXDLLIMPEXP_RICHTEXT bool wxRichTextBitlistsEqPartial(int valueA, int valueB, unsigned int flags);
 
 /// Split into paragraph and character styles
 WXDLLIMPEXP_RICHTEXT bool wxRichTextSplitParaCharStyles(const wxRichTextAttr& style, wxRichTextAttr& parStyle, wxRichTextAttr& charStyle);

@@ -431,7 +431,7 @@ wxFont wxTextAttr::GetFont() const
 }
 
 // Get attributes from font.
-bool wxTextAttr::GetFontAttributes(const wxFont& font, int flags)
+bool wxTextAttr::GetFontAttributes(const wxFont& font, unsigned int flags)
 {
     if (!font.IsOk())
         return false;
@@ -836,7 +836,7 @@ bool wxTextAttr::CombineBitlists(int& valueA, int valueB, int& flagsA, int flags
 }
 
 /// Compare two bitlists
-bool wxTextAttr::BitlistsEqPartial(int valueA, int valueB, int flags)
+bool wxTextAttr::BitlistsEqPartial(int valueA, int valueB, unsigned int flags)
 {
     return (valueA & flags) == (valueB & flags);
 }

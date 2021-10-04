@@ -203,7 +203,7 @@ wxSize wxFrame::DoGetClientSize() const
 // ----------------------------------------------------------------------------
 
 // generate an artificial resize event
-void wxFrame::SendSizeEvent(int flags)
+void wxFrame::SendSizeEvent(unsigned int flags)
 {
     if ( !MSWIsIconized() )
     {

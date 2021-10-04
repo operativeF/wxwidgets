@@ -149,7 +149,7 @@ protected:
     //
     // NOTE: If wxVListBoxComboPopup is used with a wxComboCtrl class not derived from
     //       wxOwnerDrawnComboBox, this method must be overridden.
-    virtual void OnDrawItem( wxDC& dc, const wxRect& rect, int item, int flags) const;
+    virtual void OnDrawItem( wxDC& dc, const wxRect& rect, int item, unsigned int flags) const;
 
     // This is same as in wxVListBox
     wxCoord OnMeasureItem( size_t item ) const override;
@@ -159,7 +159,7 @@ protected:
 
     // Draw item and combo control background. Flags are same as with OnDrawItem.
     // NB: Can't use name OnDrawBackground because of virtual function hiding warnings.
-    virtual void OnDrawBg(wxDC& dc, const wxRect& rect, int item, int flags) const;
+    virtual void OnDrawBg(wxDC& dc, const wxRect& rect, int item, unsigned int flags) const;
 
     // Additional wxVListBox implementation (no need to override in derived classes)
     void OnDrawItem(wxDC& dc, const wxRect& rect, size_t n) const override;
@@ -355,7 +355,7 @@ protected:
     // item: item index to be drawn, may be wxNOT_FOUND when painting combo control itself
     //       and there is no valid selection
     // flags: wxODCB_PAINTING_CONTROL is set if painting to combo control instead of list
-    virtual void OnDrawItem( wxDC& dc, const wxRect& rect, int item, int flags ) const;
+    virtual void OnDrawItem( wxDC& dc, const wxRect& rect, int item, unsigned int flags ) const;
 
     // Callback for item height, or -1 for default
     virtual wxCoord OnMeasureItem( size_t item ) const;
@@ -369,7 +369,7 @@ protected:
 
     // Callback for background drawing. Flags are same as with
     // OnDrawItem.
-    virtual void OnDrawBackground( wxDC& dc, const wxRect& rect, int item, int flags ) const;
+    virtual void OnDrawBackground( wxDC& dc, const wxRect& rect, int item, unsigned int flags ) const;
 
     // NULL popup can be used to indicate default interface
     void DoSetPopupControl(wxComboPopup* popup) override;

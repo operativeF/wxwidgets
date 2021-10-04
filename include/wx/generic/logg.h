@@ -67,8 +67,8 @@ public:
 
 protected:
     void DoLogRecord(wxLogLevel level,
-                             const wxString& msg,
-                             const wxLogRecordInfo& info) override;
+                     const wxString& msg,
+                     const wxLogRecordInfo& info) override;
 
     // return the title to be used for the log dialog, depending on m_bErrors
     // and m_bWarnings values
@@ -76,7 +76,7 @@ protected:
 
     // return the icon (one of wxICON_XXX constants) to be used for the dialog
     // depending on m_bErrors/m_bWarnings
-    int GetSeverityIcon() const;
+    unsigned int GetSeverityIcon() const;
 
     // empty everything
     void Clear();
@@ -94,14 +94,14 @@ private:
     // wxMessageBox() by default
     virtual void DoShowSingleLogMessage(const wxString& message,
                                         const wxString& title,
-                                        int style);
+                                        unsigned int style);
 
     // this method is called to show multiple log messages, it uses wxLogDialog
     virtual void DoShowMultipleLogMessages(const std::vector<wxString>& messages,
                                            const std::vector<int>& severities,
                                            const std::vector<long>& times,
                                            const wxString& title,
-                                           int style);
+                                           unsigned int style);
 };
 
 #endif // wxUSE_LOGGUI

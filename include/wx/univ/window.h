@@ -61,7 +61,7 @@ public:
              wxWindowID id,
              const wxPoint& pos = wxDefaultPosition,
              const wxSize& size = wxDefaultSize,
-             long style = 0,
+             unsigned int style = 0,
              const wxString& name = wxASCII_STR(wxPanelNameStr))
         : wxWindowNative(parent, id, pos, size, style | wxCLIP_CHILDREN, name)
         { Init(); }
@@ -70,7 +70,7 @@ public:
                 wxWindowID id,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = 0,
+                unsigned int style = 0,
                 const wxString& name = wxASCII_STR(wxPanelNameStr));
 
     ~wxWindow();

@@ -48,7 +48,7 @@ wxFrame::~wxFrame()
 }
 
 bool wxFrame::Create( wxWindow *parent, wxWindowID id, const wxString& title,
-    const wxPoint& pos, const wxSize& size, long style, const wxString& name )
+    const wxPoint& pos, const wxSize& size, unsigned int style, const wxString& name )
 {
     m_qtWindow = new wxQtMainWindow( parent, this );
 
@@ -127,7 +127,7 @@ void wxFrame::SetToolBar(wxToolBar *toolbar)
     wxFrameBase::SetToolBar( toolbar );
 }
 
-void wxFrame::SetWindowStyleFlag( long style )
+void wxFrame::SetWindowStyleFlag( unsigned int style )
 {
     wxWindow::SetWindowStyleFlag( style );
 

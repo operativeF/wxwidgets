@@ -20,7 +20,7 @@
 class WXDLLIMPEXP_FWD_BASE wxStackFrame;
 
 // TODO: Make adjustable?
-inline constexpr int wxSTACKWALKER_MAX_DEPTH = 200;
+constexpr unsigned int wxSTACKWALKER_MAX_DEPTH = 200;
 
 // ----------------------------------------------------------------------------
 // wxStackFrame: a single stack level

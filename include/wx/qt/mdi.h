@@ -17,7 +17,7 @@ public:
                      const wxString& title,
                      const wxPoint& pos = wxDefaultPosition,
                      const wxSize& size = wxDefaultSize,
-                     long style = wxDEFAULT_FRAME_STYLE | wxVSCROLL | wxHSCROLL,
+                     unsigned int style = wxDEFAULT_FRAME_STYLE | wxVSCROLL | wxHSCROLL,
                      const wxString& name = wxASCII_STR(wxFrameNameStr));
 
     bool Create(wxWindow *parent,
@@ -25,7 +25,7 @@ public:
                 const wxString& title,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = wxDEFAULT_FRAME_STYLE | wxVSCROLL | wxHSCROLL,
+                unsigned int style = wxDEFAULT_FRAME_STYLE | wxVSCROLL | wxHSCROLL,
                 const wxString& name = wxASCII_STR(wxFrameNameStr));
 
     // override/implement base class [pure] virtual methods
@@ -53,7 +53,7 @@ public:
                     const wxString& title,
                     const wxPoint& pos = wxDefaultPosition,
                     const wxSize& size = wxDefaultSize,
-                    long style = wxDEFAULT_FRAME_STYLE,
+                    unsigned int style = wxDEFAULT_FRAME_STYLE,
                     const wxString& name = wxASCII_STR(wxFrameNameStr));
 
     bool Create(wxMDIParentFrame *parent,
@@ -61,7 +61,7 @@ public:
                 const wxString& title,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = wxDEFAULT_FRAME_STYLE,
+                unsigned int style = wxDEFAULT_FRAME_STYLE,
                 const wxString& name = wxASCII_STR(wxFrameNameStr));
 
     void Activate() override;
@@ -76,7 +76,7 @@ class WXDLLIMPEXP_CORE wxMDIClientWindow : public wxMDIClientWindowBase
 public:
     wxMDIClientWindow();
 
-    bool CreateClient(wxMDIParentFrame *parent, long style = wxVSCROLL | wxHSCROLL) override;
+    bool CreateClient(wxMDIParentFrame *parent, unsigned int style = wxVSCROLL | wxHSCROLL) override;
     wxDECLARE_DYNAMIC_CLASS(wxMDIClientWindow);
 };
 

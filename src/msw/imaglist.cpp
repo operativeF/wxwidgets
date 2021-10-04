@@ -331,7 +331,7 @@ bool wxImageList::RemoveAll()
 bool wxImageList::Draw(int index,
                        wxDC& dc,
                        int x, int y,
-                       int flags,
+                       unsigned int flags,
                        bool solidBackground)
 {
     wxDCImpl *impl = dc.GetImpl();

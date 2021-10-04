@@ -55,7 +55,7 @@ wxCalendarCtrl::~wxCalendarCtrl()
 }
 
 bool wxCalendarCtrl::Create(wxWindow *parent, wxWindowID id, const wxDateTime& date,
-    const wxPoint& pos, const wxSize& size, long style, const wxString& name )
+    const wxPoint& pos, const wxSize& size, unsigned int style, const wxString& name )
 {
     m_qtCalendar = new wxQtCalendarWidget( parent, this );
     m_qtCalendar->resize(m_qtCalendar->sizeHint());
@@ -117,7 +117,7 @@ void wxCalendarCtrl::UpdateStyle()
     RefreshHolidays();
 }
 
-void wxCalendarCtrl::SetWindowStyleFlag(long style)
+void wxCalendarCtrl::SetWindowStyleFlag(unsigned int style)
 {
     const long styleOld = GetWindowStyleFlag();
 

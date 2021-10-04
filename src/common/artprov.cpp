@@ -340,7 +340,7 @@ wxIcon wxArtProvider::GetIcon(const wxArtID& id,
 }
 
 /* static */
-wxArtID wxArtProvider::GetMessageBoxIconId(int flags)
+wxArtID wxArtProvider::GetMessageBoxIconId(unsigned int flags)
 {
     switch ( flags & wxICON_MASK )
     {

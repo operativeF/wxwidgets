@@ -49,7 +49,7 @@ wxDialog::~wxDialog()
 bool wxDialog::Create(wxWindow *parent,
                       wxWindowID id, const wxString &title,
                       const wxPoint &pos, const wxSize &size,
-                      long style, const wxString &name)
+                      unsigned int style, const wxString &name)
 {
     SetExtraStyle(GetExtraStyle() | wxTOPLEVEL_EX_DIALOG);
 

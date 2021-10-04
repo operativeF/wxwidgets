@@ -37,7 +37,7 @@ struct wxLaunchBrowserParams
     wxString scheme;
 
     // The flags passed to wxLaunchDefaultBrowser().
-    int flags;
+    unsigned int flags;
 };
 
 #endif // _WX_PRIVATE_LAUNCHBROWSER_H_

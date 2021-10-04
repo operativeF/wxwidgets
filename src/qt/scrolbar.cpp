@@ -35,7 +35,7 @@ wxScrollBar::wxScrollBar() :
 wxScrollBar::wxScrollBar( wxWindow *parent, wxWindowID id,
        const wxPoint& pos,
        const wxSize& size,
-       long style,
+       unsigned int style,
        const wxValidator& validator,
        const wxString& name)
 {
@@ -45,7 +45,7 @@ wxScrollBar::wxScrollBar( wxWindow *parent, wxWindowID id,
 bool wxScrollBar::Create( wxWindow *parent, wxWindowID id,
        const wxPoint& pos,
        const wxSize& size,
-       long style,
+       unsigned int style,
        const wxValidator& validator,
        const wxString& name)
 {

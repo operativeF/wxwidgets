@@ -19,17 +19,17 @@
 
 // our actions are the same as scrollbars
 
-inline constexpr wxChar wxACTION_SLIDER_START[]       = wxT("start");      // to the beginning
-inline constexpr wxChar wxACTION_SLIDER_END[]         = wxT("end");        // to the end
-inline constexpr wxChar wxACTION_SLIDER_LINE_UP[]     = wxT("lineup");     // one line up/left
-inline constexpr wxChar wxACTION_SLIDER_PAGE_UP[]     = wxT("pageup");     // one page up/left
-inline constexpr wxChar wxACTION_SLIDER_LINE_DOWN[]   = wxT("linedown");   // one line down/right
-inline constexpr wxChar wxACTION_SLIDER_PAGE_DOWN[]   = wxT("pagedown");   // one page down/right
-inline constexpr wxChar wxACTION_SLIDER_PAGE_CHANGE[] = wxT("pagechange"); // change page by numArg
+constexpr wxChar wxACTION_SLIDER_START[]       = wxT("start");      // to the beginning
+constexpr wxChar wxACTION_SLIDER_END[]         = wxT("end");        // to the end
+constexpr wxChar wxACTION_SLIDER_LINE_UP[]     = wxT("lineup");     // one line up/left
+constexpr wxChar wxACTION_SLIDER_PAGE_UP[]     = wxT("pageup");     // one page up/left
+constexpr wxChar wxACTION_SLIDER_LINE_DOWN[]   = wxT("linedown");   // one line down/right
+constexpr wxChar wxACTION_SLIDER_PAGE_DOWN[]   = wxT("pagedown");   // one page down/right
+constexpr wxChar wxACTION_SLIDER_PAGE_CHANGE[] = wxT("pagechange"); // change page by numArg
 
-inline constexpr wxChar wxACTION_SLIDER_THUMB_DRAG[]      = wxT("thumbdrag");
-inline constexpr wxChar wxACTION_SLIDER_THUMB_MOVE[]      = wxT("thumbmove");
-inline constexpr wxChar wxACTION_SLIDER_THUMB_RELEASE[]   = wxT("thumbrelease");
+constexpr wxChar wxACTION_SLIDER_THUMB_DRAG[]      = wxT("thumbdrag");
+constexpr wxChar wxACTION_SLIDER_THUMB_MOVE[]      = wxT("thumbmove");
+constexpr wxChar wxACTION_SLIDER_THUMB_RELEASE[]   = wxT("thumbrelease");
 
 // ----------------------------------------------------------------------------
 // wxSlider
@@ -47,7 +47,7 @@ public:
              int value, int minValue, int maxValue,
              const wxPoint& pos = wxDefaultPosition,
              const wxSize& size = wxDefaultSize,
-             long style = wxSL_HORIZONTAL,
+             unsigned int style = wxSL_HORIZONTAL,
              const wxValidator& validator = wxDefaultValidator,
              const wxString& name = wxASCII_STR(wxSliderNameStr));
 
@@ -56,7 +56,7 @@ public:
                 int value, int minValue, int maxValue,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = wxSL_HORIZONTAL,
+                unsigned int style = wxSL_HORIZONTAL,
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxASCII_STR(wxSliderNameStr));
 

@@ -152,7 +152,7 @@ struct wxComboCtrlFeatures
     };
 };
 
-inline constexpr char wxComboCtrlNameStr[] = "comboCtrl";
+constexpr char wxComboCtrlNameStr[] = "comboCtrl";
 
 class WXDLLIMPEXP_CORE wxComboCtrlBase : public wxControl,
                                          public wxTextEntry
@@ -687,7 +687,7 @@ protected:
     wxCoord                 m_widthCustomBorder{0};
 
     // current button state (uses renderer flags)
-    int                     m_btnState{0};
+    unsigned int            m_btnState{0};
 
     // button position
     int                     m_btnWid{-1};

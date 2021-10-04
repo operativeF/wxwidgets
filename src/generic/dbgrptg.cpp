@@ -218,7 +218,7 @@ void wxDumpOpenExternalDlg::OnBrowse(wxCommandEvent& )
     wxFileName fname(m_command);
     wxFileDialog dlg(this,
                      wxFileSelectorPromptStr,
-                     fname.GetPathWithSep(),
+                     fname.GetFullPath(),
                      fname.GetFullName()
 #ifdef __WXMSW__
                      , wxString(_("Executable files (*.exe)|*.exe|")) + wxALL_FILES

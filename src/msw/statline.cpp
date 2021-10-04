@@ -54,7 +54,7 @@ DWORD wxStaticLine::MSWGetStyle(unsigned int style, DWORD *exstyle) const
     msStyle |= SS_SUNKEN | SS_NOTIFY | WS_CLIPSIBLINGS;
     msStyle |= SS_GRAYRECT ;
 
-    return msStyle ;
+    return msStyle;
 }
 
 #endif // wxUSE_STATLINE

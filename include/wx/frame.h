@@ -23,7 +23,7 @@
 #include <string>
 
 // the default names for various classes
-inline constexpr char wxStatusLineNameStr[] = "status_line";
+constexpr char wxStatusLineNameStr[] = "status_line";
 
 class WXDLLIMPEXP_FWD_CORE wxFrame;
 #if wxUSE_MENUBAR
@@ -41,9 +41,9 @@ class WXDLLIMPEXP_FWD_CORE wxToolBar;
 // wxFrame-specific (i.e. not for wxDialog) styles
 //
 // Also see the bit summary table in wx/toplevel.h.
-inline constexpr int wxFRAME_NO_TASKBAR      = 0x0002;  // No taskbar button (MSW only)
-inline constexpr int wxFRAME_TOOL_WINDOW     = 0x0004;  // No taskbar button, no system menu
-inline constexpr int wxFRAME_FLOAT_ON_PARENT = 0x0008;  // Always above its parent
+constexpr unsigned int wxFRAME_NO_TASKBAR      = 0x0002;  // No taskbar button (MSW only)
+constexpr unsigned int wxFRAME_TOOL_WINDOW     = 0x0004;  // No taskbar button, no system menu
+constexpr unsigned int wxFRAME_FLOAT_ON_PARENT = 0x0008;  // Always above its parent
 
 // ----------------------------------------------------------------------------
 // wxFrame is a top-level window with optional menubar, statusbar and toolbar

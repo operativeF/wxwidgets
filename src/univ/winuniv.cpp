@@ -63,7 +63,7 @@ public:
                       wxWindowID id,
                       const wxPoint& pos = wxDefaultPosition,
                       const wxSize& size = wxDefaultSize,
-                      long style = wxSB_HORIZONTAL)
+                      unsigned int style = wxSB_HORIZONTAL)
         : wxScrollBar(parent, id, pos, size, style)
     {
     }
@@ -130,7 +130,7 @@ bool wxWindow::Create(wxWindow *parent,
                       wxWindowID id,
                       const wxPoint& pos,
                       const wxSize& size,
-                      long style,
+                      unsigned int style,
                       const wxString& name)
 {
     // Get default border

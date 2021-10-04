@@ -18,7 +18,7 @@
 
 #include <string>
 
-inline constexpr char wxTimePickerCtrlNameStr[] = "timectrl";
+constexpr char wxTimePickerCtrlNameStr[] = "timectrl";
 
 // No special styles are currently defined for this control but still define a
 // symbolic constant for the default style for consistency.

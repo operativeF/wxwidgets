@@ -26,7 +26,7 @@
 #include <string>
 #include <string_view>
 
-inline constexpr char wxControlNameStr[] = "control";
+constexpr char wxControlNameStr[] = "control";
 
 
 // ----------------------------------------------------------------------------

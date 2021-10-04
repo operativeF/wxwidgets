@@ -64,7 +64,7 @@ public:
 
     void SetLayoutDirection(wxLayoutDirection dir) override;
 
-    void RequestUserAttention(int flags = wxUSER_ATTENTION_INFO) override;
+    void RequestUserAttention(unsigned int flags = wxUSER_ATTENTION_INFO) override;
 
     bool Show(bool show = true) override;
     void Raise() override;

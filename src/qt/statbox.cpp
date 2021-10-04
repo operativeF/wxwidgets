@@ -32,7 +32,7 @@ wxStaticBox::wxStaticBox(wxWindow *parent, wxWindowID id,
             const wxString& label,
             const wxPoint& pos,
             const wxSize& size,
-            long style,
+            unsigned int style,
             const wxString& name)
 {
     Create( parent, id, label, pos, size, style, name );
@@ -42,7 +42,7 @@ bool wxStaticBox::Create(wxWindow *parent, wxWindowID id,
             const wxString& label,
             const wxPoint& pos,
             const wxSize& size,
-            long style,
+            unsigned int style,
             const wxString& name)
 {
     m_qtGroupBox = new wxQtGroupBox( parent, this );

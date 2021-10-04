@@ -61,7 +61,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxPluginLibraryModule, wxModule);
 // It is simple to know what is the first object in the linked list of
 // wxClassInfo that we registered (it's also the last one chronologically),
 // it's just the new head of the wxClassInfo list:
-wxPluginLibrary::wxPluginLibrary(const wxString &libname, int flags)
+wxPluginLibrary::wxPluginLibrary(const wxString &libname, unsigned int flags)
         : m_ourFirst(wxClassInfo::GetFirst())
 {
     const wxClassInfo* const oldFirst = wxClassInfo::GetFirst();
@@ -345,7 +345,7 @@ bool wxPluginManager::UnloadLibrary(const wxString& libname)
 // Class implementation
 // ------------------------
 
-bool wxPluginManager::Load(const wxString &libname, int flags)
+bool wxPluginManager::Load(const wxString &libname, unsigned int flags)
 {
     m_entry = wxPluginManager::wxLoadLibrary(libname, flags);
 

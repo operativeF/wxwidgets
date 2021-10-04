@@ -117,7 +117,7 @@ public:
     void Redo() override;
 
     //Find function
-    long Find(const wxString& text, int flags = wxWEBVIEW_FIND_DEFAULT) override;
+    long Find(const wxString& text, unsigned int flags = wxWEBVIEW_FIND_DEFAULT) override;
 
     //Editing functions
     void SetEditable(bool enable = true) override;

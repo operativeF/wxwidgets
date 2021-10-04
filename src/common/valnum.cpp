@@ -34,9 +34,9 @@ wxBEGIN_EVENT_TABLE(wxNumValidatorBase, wxValidator)
     EVT_KILL_FOCUS(wxNumValidatorBase::OnKillFocus)
 wxEND_EVENT_TABLE()
 
-int wxNumValidatorBase::GetFormatFlags() const
+unsigned int wxNumValidatorBase::GetFormatFlags() const
 {
-    int flags = wxNumberFormatter::Style_None;
+    unsigned int flags = wxNumberFormatter::Style_None;
     if ( m_style & wxNUM_VAL_THOUSANDS_SEPARATOR )
         flags |= wxNumberFormatter::Style_WithThousandsSep;
     if ( m_style & wxNUM_VAL_NO_TRAILING_ZEROES )

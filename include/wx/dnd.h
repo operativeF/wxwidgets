@@ -96,7 +96,7 @@ public:
     // if flags contains wxDrag_AllowMove, moving (and only copying) data is
     // allowed, if it contains wxDrag_DefaultMove (which includes the previous
     // flag), it is even the default operation
-    virtual wxDragResult DoDragDrop(int flags = wxDrag_CopyOnly) = 0;
+    virtual wxDragResult DoDragDrop(unsigned int flags = wxDrag_CopyOnly) = 0;
 
     // override to give feedback depending on the current operation result
     // "effect" and return true if you did something, false to let the library

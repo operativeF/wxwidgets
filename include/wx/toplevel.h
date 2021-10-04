@@ -25,7 +25,7 @@
 #include <string>
 
 // the default names for various classes
-inline constexpr char wxFrameNameStr[] = "frame";
+constexpr char wxFrameNameStr[] = "frame";
 
 // ----------------------------------------------------------------------------
 // constants
@@ -65,21 +65,21 @@ inline constexpr char wxFrameNameStr[] = "frame";
  */
 
 // style common to both wxFrame and wxDialog
-inline constexpr int wxSTAY_ON_TOP = 0x8000;
-inline constexpr int wxICONIZE     = 0x4000;
-inline constexpr int wxMINIMIZE    = wxICONIZE;
-inline constexpr int wxMAXIMIZE    = 0x2000;
-inline constexpr int wxCLOSE_BOX   = 0x1000;  // == wxHELP so can't be used with it
+constexpr unsigned int wxSTAY_ON_TOP = 0x8000;
+constexpr unsigned int wxICONIZE     = 0x4000;
+constexpr unsigned int wxMINIMIZE    = wxICONIZE;
+constexpr unsigned int wxMAXIMIZE    = 0x2000;
+constexpr unsigned int wxCLOSE_BOX   = 0x1000;  // == wxHELP so can't be used with it
 
-inline constexpr int wxSYSTEM_MENU  = 0x0800;
-inline constexpr int wxMINIMIZE_BOX = 0x0400;
-inline constexpr int wxMAXIMIZE_BOX = 0x0200;
+constexpr unsigned int wxSYSTEM_MENU  = 0x0800;
+constexpr unsigned int wxMINIMIZE_BOX = 0x0400;
+constexpr unsigned int wxMAXIMIZE_BOX = 0x0200;
 
-inline constexpr int wxTINY_CAPTION  = 0x0080;  // clashes with wxNO_DEFAULT
-inline constexpr int wxRESIZE_BORDER = 0x0040;  // == wxCLOSE
+constexpr unsigned int wxTINY_CAPTION  = 0x0080;  // clashes with wxNO_DEFAULT
+constexpr unsigned int wxRESIZE_BORDER = 0x0040;  // == wxCLOSE
 
 // default style
-inline constexpr int wxDEFAULT_FRAME_STYLE =
+constexpr unsigned int wxDEFAULT_FRAME_STYLE =
              wxSYSTEM_MENU |
              wxRESIZE_BORDER |
              wxMINIMIZE_BOX |
@@ -90,7 +90,7 @@ inline constexpr int wxDEFAULT_FRAME_STYLE =
 
 
 // Dialogs are created in a special way
-inline constexpr auto wxTOPLEVEL_EX_DIALOG = 0x00000008;
+constexpr auto wxTOPLEVEL_EX_DIALOG = 0x00000008;
 
 // Styles for ShowFullScreen
 // (note that wxTopLevelWindow only handles wxFULLSCREEN_NOBORDER and
@@ -193,7 +193,7 @@ public:
 
     // Attracts the users attention to this window if the application is
     // inactive (should be called when a background event occurs)
-    virtual void RequestUserAttention(int flags = wxUSER_ATTENTION_INFO);
+    virtual void RequestUserAttention(unsigned int flags = wxUSER_ATTENTION_INFO);
 
     // Is this the active frame (highlighted in the taskbar)?
     //
@@ -208,8 +208,8 @@ public:
     virtual bool ShouldPreventAppExit() const { return true; }
 
     // centre the window on screen: this is just a shortcut
-    void CentreOnScreen(int dir = wxBOTH) { DoCentre(dir | wxCENTRE_ON_SCREEN); }
-    void CenterOnScreen(int dir = wxBOTH) { CentreOnScreen(dir); }
+    void CentreOnScreen(unsigned int dir = wxBOTH) { DoCentre(dir | wxCENTRE_ON_SCREEN); }
+    void CenterOnScreen(unsigned int dir = wxBOTH) { CentreOnScreen(dir); }
 
     // Get the default size for a new top level window. This is used when
     // creating a wxTLW under some platforms if no explicit size given.
@@ -310,7 +310,7 @@ protected:
     void DoScreenToClient(int *x, int *y) const override;
 
     // add support for wxCENTRE_ON_SCREEN
-    void DoCentre(int dir) override;
+    void DoCentre(unsigned int dir) override;
 
     // no need to do client to screen translation to get our position in screen
     // coordinates: this is already the case

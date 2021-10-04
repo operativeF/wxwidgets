@@ -628,7 +628,7 @@ void wxTreebook::OnTreeNodeExpandedCollapsed(wxTreeEvent & event)
 // wxTreebook geometry management
 // ----------------------------------------------------------------------------
 
-int wxTreebook::HitTest(wxPoint const & pt, long * flags) const
+int wxTreebook::HitTest(wxPoint const & pt, unsigned int* flags) const
 {
     int pagePos = wxNOT_FOUND;
 
@@ -642,7 +642,7 @@ int wxTreebook::HitTest(wxPoint const & pt, long * flags) const
     // is it over the tree?
     if ( wxRect(tree->GetSize()).Contains(treePt) )
     {
-        int flagsTree;
+        unsigned int flagsTree;
         const wxTreeItemId id = tree->HitTest(treePt, flagsTree);
 
         if ( id.IsOk() && (flagsTree & wxTREE_HITTEST_ONITEM) )

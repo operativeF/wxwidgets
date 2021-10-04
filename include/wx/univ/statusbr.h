@@ -25,7 +25,7 @@ public:
 
     wxStatusBarUniv(wxWindow *parent,
                     wxWindowID id = wxID_ANY,
-                    long style = wxSTB_DEFAULT_STYLE,
+                    unsigned int style = wxSTB_DEFAULT_STYLE,
                     const wxString& name = wxASCII_STR(wxPanelNameStr))
     {
         Init();
@@ -35,7 +35,7 @@ public:
 
     bool Create(wxWindow *parent,
                 wxWindowID id = wxID_ANY,
-                long style = wxSTB_DEFAULT_STYLE,
+                unsigned int style = wxSTB_DEFAULT_STYLE,
                 const wxString& name = wxASCII_STR(wxPanelNameStr));
 
     // implement base class methods

@@ -760,7 +760,7 @@ void wxWebViewIE::Redo()
     m_impl->ExecCommand("Redo");
 }
 
-long wxWebViewIE::Find(const wxString& text, int flags)
+long wxWebViewIE::Find(const wxString& text, unsigned int flags)
 {
     return m_impl->Find(text, flags);
 }

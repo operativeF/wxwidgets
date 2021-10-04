@@ -15,6 +15,7 @@
 
 #if wxUSE_HTML
 
+#include "wx/listbox.h"
 #include "wx/vlbox.h"               // base class
 #include "wx/html/htmlwin.h"
 #include "wx/ctrlsub.h"
@@ -201,8 +202,8 @@ private:
 // wxSimpleHtmlListBox
 // ----------------------------------------------------------------------------
 
-#define wxHLB_DEFAULT_STYLE     wxBORDER_SUNKEN
-#define wxHLB_MULTIPLE          wxLB_MULTIPLE
+constexpr unsigned int wxHLB_DEFAULT_STYLE     = wxBORDER_SUNKEN;
+constexpr unsigned int wxHLB_MULTIPLE          = wxLB_MULTIPLE;
 
 class WXDLLIMPEXP_HTML wxSimpleHtmlListBox :
     public wxWindowWithItems<wxHtmlListBox, wxItemContainer>

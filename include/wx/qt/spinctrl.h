@@ -20,12 +20,12 @@ class WXDLLIMPEXP_CORE wxSpinCtrlQt : public wxSpinCtrlBase
 public:
     wxSpinCtrlQt();
     wxSpinCtrlQt( wxWindow *parent, wxWindowID id, const wxString& value,
-        const wxPoint& pos, const wxSize& size, long style,
+        const wxPoint& pos, const wxSize& size, unsigned int style,
         T min, T max, T initial, T inc,
         const wxString& name );
 
     bool Create( wxWindow *parent, wxWindowID id, const wxString& value,
-        const wxPoint& pos, const wxSize& size, long style,
+        const wxPoint& pos, const wxSize& size, unsigned int style,
         T min, T max, T initial, T inc,
         const wxString& name );
 
@@ -62,7 +62,7 @@ public:
                const wxString& value = wxEmptyString,
                const wxPoint& pos = wxDefaultPosition,
                const wxSize& size = wxDefaultSize,
-               long style = wxSP_ARROW_KEYS,
+               unsigned int style = wxSP_ARROW_KEYS,
                int min = 0, int max = 100, int initial = 0,
                const wxString& name = wxT("wxSpinCtrl"));
 
@@ -71,7 +71,7 @@ public:
                 const wxString& value = wxEmptyString,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = wxSP_ARROW_KEYS,
+                unsigned int style = wxSP_ARROW_KEYS,
                 int min = 0, int max = 100, int initial = 0,
                 const wxString& name = wxT("wxSpinCtrl"));
     int GetBase() const override { return m_base; }
@@ -98,7 +98,7 @@ public:
                      const wxString& value = wxEmptyString,
                      const wxPoint& pos = wxDefaultPosition,
                      const wxSize& size = wxDefaultSize,
-                     long style = wxSP_ARROW_KEYS,
+                     unsigned int style = wxSP_ARROW_KEYS,
                      double min = 0, double max = 100, double initial = 0,
                      double inc = 1,
                      const wxString& name = wxT("wxSpinCtrlDouble"));
@@ -108,7 +108,7 @@ public:
                 const wxString& value = wxEmptyString,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = wxSP_ARROW_KEYS,
+                unsigned int style = wxSP_ARROW_KEYS,
                 double min = 0, double max = 100, double initial = 0,
                 double inc = 1,
                 const wxString& name = wxT("wxSpinCtrlDouble"));

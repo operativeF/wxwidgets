@@ -338,7 +338,7 @@ void wxComboCtrl::OnPaintEvent( wxPaintEvent& WXUNUSED(event) )
         borderRect.Inflate(1);
     }
 
-    int drawButFlags = 0;
+    unsigned int drawButFlags{};
 
 #if wxUSE_UXTHEME
     if ( hTheme )
@@ -517,7 +517,7 @@ void wxComboCtrl::OnMouseEvent( wxMouseEvent& event )
 {
     int mx = event.m_x;
     bool isOnButtonArea = m_btnArea.Contains(mx,event.m_y);
-    int handlerFlags = isOnButtonArea ? wxCC_MF_ON_BUTTON : 0;
+    unsigned int handlerFlags = isOnButtonArea ? wxCC_MF_ON_BUTTON : 0;
 
     if ( PreprocessMouseEvent(event,isOnButtonArea) )
         return;
@@ -537,7 +537,7 @@ void wxComboCtrl::OnMouseEvent( wxMouseEvent& event )
         {
             handlerFlags |= wxCC_MF_ON_CLICK_AREA;
 
-            if ( HandleButtonMouseEvent(event,handlerFlags) )
+            if ( HandleButtonMouseEvent(event, handlerFlags) )
                 return;
         }
         else if ( m_btnState )

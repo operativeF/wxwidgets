@@ -23,13 +23,13 @@
 // constants
 // ----------------------------------------------------------------------------
 
-inline constexpr int wxHL_CONTEXTMENU        = 0x0001;
-inline constexpr int wxHL_ALIGN_LEFT         = 0x0002;
-inline constexpr int wxHL_ALIGN_RIGHT        = 0x0004;
-inline constexpr int wxHL_ALIGN_CENTRE       = 0x0008;
-inline constexpr int wxHL_DEFAULT_STYLE      = wxHL_CONTEXTMENU | wxNO_BORDER | wxHL_ALIGN_CENTRE;
+constexpr unsigned int wxHL_CONTEXTMENU        = 0x0001;
+constexpr unsigned int wxHL_ALIGN_LEFT         = 0x0002;
+constexpr unsigned int wxHL_ALIGN_RIGHT        = 0x0004;
+constexpr unsigned int wxHL_ALIGN_CENTRE       = 0x0008;
+constexpr unsigned int wxHL_DEFAULT_STYLE      = wxHL_CONTEXTMENU | wxNO_BORDER | wxHL_ALIGN_CENTRE;
 
-inline constexpr char wxHyperlinkCtrlNameStr[] = "hyperlink";
+constexpr char wxHyperlinkCtrlNameStr[] = "hyperlink";
 
 // ----------------------------------------------------------------------------
 // wxHyperlinkCtrl

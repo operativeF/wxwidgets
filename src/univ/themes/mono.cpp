@@ -90,7 +90,7 @@ public:
                                    const wxBitmap& bitmap,
                                    const wxRect& rect,
                                    int flags = 0,
-                                   long style = 0,
+                                   unsigned int style = 0,
                                    int tbarStyle = 0);
 #endif // wxUSE_TOOLBAR
 
@@ -110,14 +110,14 @@ public:
                                  int lenThumb,
                                  wxOrientation orient,
                                  int flags = 0,
-                                 long style = 0,
+                                 unsigned int style = 0,
                                  wxRect *rectShaft = NULL);
 
     virtual void DrawSliderThumb(wxDC& dc,
                                  const wxRect& rect,
                                  wxOrientation orient,
                                  int flags = 0,
-                                 long style = 0);
+                                 unsigned int style = 0);
 
     virtual void DrawSliderTicks(wxDC& dc,
                                  const wxRect& rect,
@@ -127,7 +127,7 @@ public:
                                  int end,
                                  int step = 1,
                                  int flags = 0,
-                                 long style = 0);
+                                 unsigned int style = 0);
 #endif // wxUSE_SLIDER
 
 #if wxUSE_MENUS
@@ -188,7 +188,7 @@ public:
     virtual wxRect GetSliderShaftRect(const wxRect& rect,
                                       int lenThumb,
                                       wxOrientation orient,
-                                      long style = 0) const;
+                                      unsigned int style = 0) const;
 
     virtual wxSize GetSliderThumbSize(const wxRect& rect,
                                       int lenThumb,

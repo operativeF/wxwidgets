@@ -183,7 +183,7 @@ public:
     virtual int  DrawHeaderButton(wxWindow *win,
                                   wxDC& dc,
                                   const wxRect& rect,
-                                  int flags = 0,
+                                  unsigned int flags = 0,
                                   wxHeaderSortIconType sortArrow = wxHeaderSortIconType::None,
                                   wxHeaderButtonParams* params=nullptr) = 0;
 
@@ -193,7 +193,7 @@ public:
     virtual int  DrawHeaderButtonContents(wxWindow *win,
                                           wxDC& dc,
                                           const wxRect& rect,
-                                          int flags = 0,
+                                          unsigned int flags = 0,
                                           wxHeaderSortIconType sortArrow = wxHeaderSortIconType::None,
                                           wxHeaderButtonParams* params=nullptr) = 0;
 
@@ -209,14 +209,14 @@ public:
     virtual void DrawTreeItemButton(wxWindow *win,
                                     wxDC& dc,
                                     const wxRect& rect,
-                                    int flags = 0) = 0;
+                                    unsigned int flags = 0) = 0;
 
     // draw the border for sash window: this border must be such that the sash
     // drawn by DrawSash() blends into it well
     virtual void DrawSplitterBorder(wxWindow *win,
                                     wxDC& dc,
                                     const wxRect& rect,
-                                    int flags = 0) = 0;
+                                    unsigned int flags = 0) = 0;
 
     // draw a (vertical) sash
     virtual void DrawSplitterSash(wxWindow *win,
@@ -224,7 +224,7 @@ public:
                                   const wxSize& size,
                                   wxCoord position,
                                   wxOrientation orient,
-                                  int flags = 0) = 0;
+                                  unsigned int flags = 0) = 0;
 
     // draw a combobox dropdown button
     //
@@ -232,7 +232,7 @@ public:
     virtual void DrawComboBoxDropButton(wxWindow *win,
                                         wxDC& dc,
                                         const wxRect& rect,
-                                        int flags = 0) = 0;
+                                        unsigned int flags = 0) = 0;
 
     // draw a dropdown arrow
     //
@@ -240,7 +240,7 @@ public:
     virtual void DrawDropArrow(wxWindow *win,
                                wxDC& dc,
                                const wxRect& rect,
-                               int flags = 0) = 0;
+                               unsigned int flags = 0) = 0;
 
     // draw check button
     //
@@ -248,7 +248,7 @@ public:
     virtual void DrawCheckBox(wxWindow *win,
                               wxDC& dc,
                               const wxRect& rect,
-                              int flags = 0) = 0;
+                              unsigned int flags = 0) = 0;
 
     // draw check mark
     //
@@ -256,10 +256,10 @@ public:
     virtual void DrawCheckMark(wxWindow *win,
                                wxDC& dc,
                                const wxRect& rect,
-                               int flags = 0) = 0;
+                               unsigned int flags = 0) = 0;
 
     // Returns the default size of a check box.
-    virtual wxSize GetCheckBoxSize(wxWindow *win, int flags = 0) = 0;
+    virtual wxSize GetCheckBoxSize(wxWindow *win, unsigned int flags = 0) = 0;
 
     // Returns the default size of a check mark.
     virtual wxSize GetCheckMarkSize(wxWindow *win) = 0;
@@ -273,7 +273,7 @@ public:
     virtual void DrawPushButton(wxWindow *win,
                                 wxDC& dc,
                                 const wxRect& rect,
-                                int flags = 0) = 0;
+                                unsigned int flags = 0) = 0;
 
     // draw collapse button
     //
@@ -281,7 +281,7 @@ public:
     virtual void DrawCollapseButton(wxWindow *win,
                                     wxDC& dc,
                                     const wxRect& rect,
-                                    int flags = 0) = 0;
+                                    unsigned int flags = 0) = 0;
 
     // Returns the default size of a collapse button
     virtual wxSize GetCollapseButtonSize(wxWindow *win, wxDC& dc) = 0;
@@ -296,7 +296,7 @@ public:
     virtual void DrawItemSelectionRect(wxWindow *win,
                                        wxDC& dc,
                                        const wxRect& rect,
-                                       int flags = 0) = 0;
+                                       unsigned int flags = 0) = 0;
 
     // draw the focus rectangle around the label contained in the given rect
     //
@@ -304,31 +304,31 @@ public:
     virtual void DrawFocusRect(wxWindow* win,
                                wxDC& dc,
                                const wxRect& rect,
-                               int flags = 0) = 0;
+                               unsigned int flags = 0) = 0;
 
     // Draw a native wxChoice
     virtual void DrawChoice(wxWindow* win,
                             wxDC& dc,
                             const wxRect& rect,
-                            int flags = 0) = 0;
+                            unsigned int flags = 0) = 0;
 
     // Draw a native wxComboBox
     virtual void DrawComboBox(wxWindow* win,
                               wxDC& dc,
                               const wxRect& rect,
-                              int flags = 0) = 0;
+                              unsigned int flags = 0) = 0;
 
     // Draw a native wxTextCtrl frame
     virtual void DrawTextCtrl(wxWindow* win,
                               wxDC& dc,
                               const wxRect& rect,
-                              int flags = 0) = 0;
+                              unsigned int flags = 0) = 0;
 
     // Draw a native wxRadioButton bitmap
     virtual void DrawRadioBitmap(wxWindow* win,
                                  wxDC& dc,
                                  const wxRect& rect,
-                                 int flags = 0) = 0;
+                                 unsigned int flags = 0) = 0;
 
 #ifdef wxHAS_DRAW_TITLE_BAR_BITMAP
     // Draw one of the standard title bar buttons
@@ -344,7 +344,7 @@ public:
                                     wxDC& dc,
                                     const wxRect& rect,
                                     wxTitleBarButton button,
-                                    int flags = 0) = 0;
+                                    unsigned int flags = 0) = 0;
 #endif // wxHAS_DRAW_TITLE_BAR_BITMAP
 
     // Draw a gauge with native style like a wxGauge would display.
@@ -355,15 +355,15 @@ public:
                            const wxRect& rect,
                            int value,
                            int max,
-                           int flags = 0) = 0;
+                           unsigned int flags = 0) = 0;
 
     // Draw text using the appropriate color for normal and selected states.
     virtual void DrawItemText(wxWindow* win,
                               wxDC& dc,
                               const std::string& text,
                               const wxRect& rect,
-                              int align = wxALIGN_LEFT | wxALIGN_TOP,
-                              int flags = 0,
+                              unsigned int align = wxALIGN_LEFT | wxALIGN_TOP,
+                              unsigned int flags = 0,
                               wxEllipsizeMode ellipsizeMode = wxEllipsizeMode::End) = 0;
 
     // geometry functions
@@ -436,7 +436,7 @@ public:
     int  DrawHeaderButton(wxWindow *win,
                           wxDC& dc,
                           const wxRect& rect,
-                          int flags = 0,
+                          unsigned int flags = 0,
                           wxHeaderSortIconType sortArrow = wxHeaderSortIconType::None,
                           wxHeaderButtonParams* params = nullptr) override
         { return m_rendererNative.DrawHeaderButton(win, dc, rect, flags, sortArrow, params); }
@@ -444,7 +444,7 @@ public:
     int  DrawHeaderButtonContents(wxWindow *win,
                                   wxDC& dc,
                                   const wxRect& rect,
-                                  int flags = 0,
+                                  unsigned int flags = 0,
                                   wxHeaderSortIconType sortArrow = wxHeaderSortIconType::None,
                                   wxHeaderButtonParams* params = nullptr) override
         { return m_rendererNative.DrawHeaderButtonContents(win, dc, rect, flags, sortArrow, params); }
@@ -458,13 +458,13 @@ public:
     void DrawTreeItemButton(wxWindow *win,
                             wxDC& dc,
                             const wxRect& rect,
-                            int flags = 0) override
+                            unsigned int flags = 0) override
         { m_rendererNative.DrawTreeItemButton(win, dc, rect, flags); }
 
     void DrawSplitterBorder(wxWindow *win,
                             wxDC& dc,
                             const wxRect& rect,
-                            int flags = 0) override
+                            unsigned int flags = 0) override
         { m_rendererNative.DrawSplitterBorder(win, dc, rect, flags); }
 
     void DrawSplitterSash(wxWindow *win,
@@ -472,35 +472,35 @@ public:
                           const wxSize& size,
                           wxCoord position,
                           wxOrientation orient,
-                          int flags = 0) override
+                          unsigned int flags = 0) override
         { m_rendererNative.DrawSplitterSash(win, dc, size,
                                             position, orient, flags); }
 
     void DrawComboBoxDropButton(wxWindow *win,
                                 wxDC& dc,
                                 const wxRect& rect,
-                                int flags = 0) override
+                                unsigned int flags = 0) override
         { m_rendererNative.DrawComboBoxDropButton(win, dc, rect, flags); }
 
     void DrawDropArrow(wxWindow *win,
                        wxDC& dc,
                        const wxRect& rect,
-                       int flags = 0) override
+                       unsigned int flags = 0) override
         { m_rendererNative.DrawDropArrow(win, dc, rect, flags); }
 
     void DrawCheckBox(wxWindow *win,
                       wxDC& dc,
                       const wxRect& rect,
-                      int flags = 0) override
+                      unsigned int flags = 0) override
         { m_rendererNative.DrawCheckBox( win, dc, rect, flags ); }
 
     void DrawCheckMark(wxWindow *win,
                       wxDC& dc,
                       const wxRect& rect,
-                      int flags = 0) override
+                      unsigned int flags = 0) override
         { m_rendererNative.DrawCheckMark( win, dc, rect, flags ); }
 
-    wxSize GetCheckBoxSize(wxWindow *win, int flags = 0) override
+    wxSize GetCheckBoxSize(wxWindow *win, unsigned int flags = 0) override
         { return m_rendererNative.GetCheckBoxSize(win, flags); }
 
     wxSize GetCheckMarkSize(wxWindow *win) override
@@ -512,13 +512,13 @@ public:
     void DrawPushButton(wxWindow *win,
                         wxDC& dc,
                         const wxRect& rect,
-                        int flags = 0) override
+                        unsigned int flags = 0) override
         { m_rendererNative.DrawPushButton( win, dc, rect, flags ); }
 
     void DrawCollapseButton(wxWindow *win,
                             wxDC& dc,
                             const wxRect& rect,
-                            int flags = 0) override
+                            unsigned int flags = 0) override
         { m_rendererNative.DrawCollapseButton(win, dc, rect, flags); }
 
     wxSize GetCollapseButtonSize(wxWindow *win, wxDC& dc) override
@@ -527,37 +527,37 @@ public:
     void DrawItemSelectionRect(wxWindow *win,
                                wxDC& dc,
                                const wxRect& rect,
-                               int flags = 0) override
+                               unsigned int flags = 0) override
         { m_rendererNative.DrawItemSelectionRect( win, dc, rect, flags ); }
 
     void DrawFocusRect(wxWindow* win,
                        wxDC& dc,
                        const wxRect& rect,
-                       int flags = 0) override
+                       unsigned int flags = 0) override
         { m_rendererNative.DrawFocusRect( win, dc, rect, flags ); }
 
     void DrawChoice(wxWindow* win,
                     wxDC& dc,
                     const wxRect& rect,
-                    int flags = 0) override
+                    unsigned int flags = 0) override
         { m_rendererNative.DrawChoice( win, dc, rect, flags); }
 
     void DrawComboBox(wxWindow* win,
                       wxDC& dc,
                       const wxRect& rect,
-                      int flags = 0) override
+                      unsigned int flags = 0) override
         { m_rendererNative.DrawComboBox( win, dc, rect, flags); }
 
     void DrawTextCtrl(wxWindow* win,
                       wxDC& dc,
                       const wxRect& rect,
-                      int flags = 0) override
+                      unsigned int flags = 0) override
         { m_rendererNative.DrawTextCtrl( win, dc, rect, flags); }
 
     void DrawRadioBitmap(wxWindow* win,
                          wxDC& dc,
                          const wxRect& rect,
-                         int flags = 0) override
+                         unsigned int flags = 0) override
         { m_rendererNative.DrawRadioBitmap(win, dc, rect, flags); }
 
 #ifdef wxHAS_DRAW_TITLE_BAR_BITMAP
@@ -565,7 +565,7 @@ public:
                             wxDC& dc,
                             const wxRect& rect,
                             wxTitleBarButton button,
-                            int flags = 0) override
+                            unsigned int flags = 0) override
         { m_rendererNative.DrawTitleBarBitmap(win, dc, rect, button, flags); }
 #endif // wxHAS_DRAW_TITLE_BAR_BITMAP
 
@@ -574,15 +574,15 @@ public:
                    const wxRect& rect,
                    int value,
                    int max,
-                   int flags = 0) override
+                   unsigned int flags = 0) override
         { m_rendererNative.DrawGauge(win, dc, rect, value, max, flags); }
 
     void DrawItemText(wxWindow* win,
                       wxDC& dc,
                       const std::string& text,
                       const wxRect& rect,
-                      int align = wxALIGN_LEFT | wxALIGN_TOP,
-                      int flags = 0,
+                      unsigned int align = wxALIGN_LEFT | wxALIGN_TOP,
+                      unsigned int flags = 0,
                       wxEllipsizeMode ellipsizeMode = wxEllipsizeMode::End) override
         { m_rendererNative.DrawItemText(win, dc, text, rect, align, flags, ellipsizeMode); }
 

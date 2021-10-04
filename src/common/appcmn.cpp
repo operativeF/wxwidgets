@@ -484,7 +484,7 @@ bool wxGUIAppTraitsBase::ShowAssertDialog(const wxString& msg)
         // "No" button means to continue execution, so it should be the default
         // action as leaving the "Yes" button the default one would mean that
         // accidentally pressing Space or Enter would trap and kill the program.
-        static constexpr int flags = wxYES_NO | wxNO_DEFAULT | wxICON_STOP;
+        static constexpr unsigned int flags = wxYES_NO | wxNO_DEFAULT | wxICON_STOP;
 
 #if wxUSE_STACKWALKER
         const wxString stackTrace = GetAssertStackTrace();

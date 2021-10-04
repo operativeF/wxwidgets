@@ -288,7 +288,7 @@ void wxFileDialog::DoMoveWindow(wxRect boundary)
     }
 }
 
-void wxFileDialog::DoCentre(int dir)
+void wxFileDialog::DoCentre(unsigned int dir)
 {
     m_centreDir = dir;
     m_bMovedWindow = true;

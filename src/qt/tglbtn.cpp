@@ -33,7 +33,7 @@ wxBitmapToggleButton::wxBitmapToggleButton(wxWindow *parent,
                const wxBitmap& label,
                const wxPoint& pos,
                const wxSize& size,
-               long style,
+               unsigned int style,
                const wxValidator& validator,
                const wxString& name)
 {
@@ -44,7 +44,7 @@ bool wxBitmapToggleButton::Create(wxWindow *parent,
             wxWindowID id,
             const wxBitmap& label,
             const wxPoint& pos,
-            const wxSize& size, long style,
+            const wxSize& size, unsigned int style,
             const wxValidator& validator,
             const wxString& name)
 {
@@ -79,7 +79,7 @@ wxToggleButton::wxToggleButton(wxWindow *parent,
                const wxString& label,
                const wxPoint& pos,
                const wxSize& size,
-               long style,
+               unsigned int style,
                const wxValidator& validator,
                const wxString& name)
 {
@@ -90,7 +90,7 @@ bool wxToggleButton::Create(wxWindow *parent,
             wxWindowID id,
             const wxString& label,
             const wxPoint& pos,
-            const wxSize& size, long style,
+            const wxSize& size, unsigned int style,
             const wxValidator& validator,
             const wxString& name)
 {

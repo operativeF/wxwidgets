@@ -32,7 +32,7 @@ wxSpinCtrlQt< T, Widget >::wxSpinCtrlQt( wxWindow *WXUNUSED(WXUNUSED(parent)), w
 
 template< typename T, typename Widget >
 bool wxSpinCtrlQt< T, Widget >::Create( wxWindow *parent, wxWindowID id,
-    const wxString& value, const wxPoint& pos, const wxSize& size, long style,
+    const wxString& value, const wxPoint& pos, const wxSize& size, unsigned int style,
     T min, T max, T initial, T inc, const wxString& name )
 {
     if ( !(style & wxSP_ARROW_KEYS) )
@@ -203,7 +203,7 @@ wxSpinCtrl::wxSpinCtrl()
 }
 
 wxSpinCtrl::wxSpinCtrl(wxWindow *parent, wxWindowID id, const wxString& value,
-    const wxPoint& pos, const wxSize& size, long style,
+    const wxPoint& pos, const wxSize& size, unsigned int style,
     int min, int max, int initial,
     const wxString& name )
 
@@ -215,7 +215,7 @@ wxSpinCtrl::wxSpinCtrl(wxWindow *parent, wxWindowID id, const wxString& value,
 }
 
 bool wxSpinCtrl::Create( wxWindow *parent, wxWindowID id, const wxString& value,
-    const wxPoint& pos, const wxSize& size, long style,
+    const wxPoint& pos, const wxSize& size, unsigned int style,
     int min, int max, int initial,
     const wxString& name )
 {
@@ -258,7 +258,7 @@ wxSpinCtrlDouble::wxSpinCtrlDouble()
 }
 
 wxSpinCtrlDouble::wxSpinCtrlDouble(wxWindow *parent, wxWindowID id, const wxString& value,
-    const wxPoint& pos, const wxSize& size, long style,
+    const wxPoint& pos, const wxSize& size, unsigned int style,
     double min, double max, double initial, double inc,
     const wxString& name )
 
@@ -269,7 +269,7 @@ wxSpinCtrlDouble::wxSpinCtrlDouble(wxWindow *parent, wxWindowID id, const wxStri
 }
 
 bool wxSpinCtrlDouble::Create(wxWindow *parent, wxWindowID id, const wxString& value,
-    const wxPoint& pos, const wxSize& size, long style,
+    const wxPoint& pos, const wxSize& size, unsigned int style,
     double min, double max, double initial, double inc,
     const wxString& name )
 {

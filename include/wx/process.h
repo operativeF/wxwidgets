@@ -38,7 +38,7 @@ class WXDLLIMPEXP_BASE wxProcess : public wxEvtHandler
 {
 public:
     // kill the process with the given PID
-    static wxKillError Kill(int pid, wxSignal sig = wxSIGTERM, int flags = wxKILL_NOCHILDREN);
+    static wxKillError Kill(int pid, wxSignal sig = wxSIGTERM, unsigned int flags = wxKILL_NOCHILDREN);
 
     // test if the given process exists
     static bool Exists(int pid);
@@ -50,12 +50,12 @@ public:
     // on error NULL is returned, in any case the process object will be
     // deleted automatically when the process terminates and should *not* be
     // deleted by the caller
-    static wxProcess *Open(const wxString& cmd, int flags = wxEXEC_ASYNC);
+    static wxProcess *Open(const wxString& cmd, unsigned int flags = wxEXEC_ASYNC);
 
     wxProcess(wxEvtHandler *parent = nullptr, int nId = wxID_ANY)
         { Init(parent, nId, wxPROCESS_DEFAULT); }
 
-    wxProcess(int flags) { Init(nullptr, wxID_ANY, flags); }
+    wxProcess(unsigned int flags) { Init(nullptr, wxID_ANY, flags); }
 
     ~wxProcess();
 
@@ -128,7 +128,7 @@ public:
     void SetPid(long pid) { m_pid = pid; }
 
 protected:
-    void Init(wxEvtHandler *parent, int id, int flags);
+    void Init(wxEvtHandler *parent, int id, unsigned int flags);
 
     int m_id;
     long m_pid;

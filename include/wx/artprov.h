@@ -162,12 +162,12 @@ public:
     // Helper used by GetMessageBoxIcon(): return the art id corresponding to
     // the standard wxICON_INFORMATION/WARNING/ERROR/QUESTION flags (only one
     // can be set)
-    static wxArtID GetMessageBoxIconId(int flags);
+    static wxArtID GetMessageBoxIconId(unsigned int flags);
 
     // Helper used by several generic classes: return the icon corresponding to
     // the standard wxICON_INFORMATION/WARNING/ERROR/QUESTION flags (only one
     // can be set)
-    static wxIcon GetMessageBoxIcon(int flags)
+    static wxIcon GetMessageBoxIcon(unsigned int flags)
     {
         return GetIcon(GetMessageBoxIconId(flags), wxASCII_STR(wxART_MESSAGE_BOX));
     }

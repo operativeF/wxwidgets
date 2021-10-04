@@ -453,7 +453,7 @@ void wxBookCtrlBase::DoSetSelectionAfterRemoval(size_t n)
     }
 }
 
-int wxBookCtrlBase::DoSetSelection(size_t n, int flags)
+int wxBookCtrlBase::DoSetSelection(size_t n, unsigned int flags)
 {
     wxCHECK_MSG( n < GetPageCount(), wxNOT_FOUND,
                  wxT("invalid page index in wxBookCtrlBase::DoSetSelection()") );

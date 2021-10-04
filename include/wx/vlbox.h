@@ -19,7 +19,7 @@
 class WXDLLIMPEXP_FWD_CORE wxRect;
 class WXDLLIMPEXP_FWD_CORE wxSelectionStore;
 
-inline constexpr char wxVListBoxNameStr[] = "wxVListBox";
+constexpr char wxVListBoxNameStr[] = "wxVListBox";
 
 // ----------------------------------------------------------------------------
 // wxVListBox
@@ -264,7 +264,7 @@ protected:
     };
 
     // common part of keyboard and mouse handling processing code
-    void DoHandleItemClick(int item, int flags);
+    void DoHandleItemClick(int item, unsigned int flags);
 
     // paint the background of the given item using the provided colour if it's
     // valid, otherwise just return false and do nothing (this is used by

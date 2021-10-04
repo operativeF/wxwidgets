@@ -146,7 +146,7 @@ public:
     long FindItem( long start, const wxString& str, bool partial = false );
     long FindItem( long start, wxUIntPtr data );
     long FindItem( long start, const wxPoint& pt, int direction ); // not supported in wxGLC
-    long HitTest( const wxPoint& point, int& flags, long *pSubItem = NULL ) const;
+    long HitTest( const wxPoint& point, unsigned int& flags, long *pSubItem = NULL ) const;
     long InsertItem(wxListItem& info);
     long InsertItem( long index, const wxString& label );
     long InsertItem( long index, int imageIndex );

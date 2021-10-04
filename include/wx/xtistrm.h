@@ -17,8 +17,8 @@
 
 #include "wx/object.h"
 
-inline constexpr int wxInvalidObjectID = -2;
-inline constexpr int wxNullObjectID = -3;
+constexpr unsigned int wxInvalidObjectID = -2;
+constexpr unsigned int wxNullObjectID = -3;
 
 // Filer contains the interfaces for streaming objects in and out of XML,
 // rendering them either to objects in memory, or to code.  Note:  We

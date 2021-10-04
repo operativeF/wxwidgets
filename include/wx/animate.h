@@ -26,7 +26,7 @@ class WXDLLIMPEXP_FWD_CORE wxAnimation;
 class wxAnimationImpl;
 
 extern WXDLLIMPEXP_DATA_CORE(wxAnimation) wxNullAnimation;
-inline constexpr char wxAnimationCtrlNameStr[] = "animationctrl";
+constexpr char wxAnimationCtrlNameStr[] = "animationctrl";
 
 WX_DECLARE_LIST_WITH_DECL(wxAnimationDecoder, wxAnimationDecoderList, class WXDLLIMPEXP_CORE);
 
@@ -85,11 +85,11 @@ private:
 // ----------------------------------------------------------------------------
 
 // do not autoresize to the animation's size when SetAnimation() is called
-#define wxAC_NO_AUTORESIZE       (0x0010)
+constexpr unsigned int wxAC_NO_AUTORESIZE       = 0x0010;
 
 // default style does not include wxAC_NO_AUTORESIZE, that is, the control
 // auto-resizes by default to fit the new animation when SetAnimation() is called
-#define wxAC_DEFAULT_STYLE       (wxBORDER_NONE)
+constexpr unsigned int wxAC_DEFAULT_STYLE       = wxBORDER_NONE;
 
 class WXDLLIMPEXP_CORE wxAnimationCtrlBase : public wxControl
 {

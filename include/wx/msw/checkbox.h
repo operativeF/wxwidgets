@@ -77,9 +77,9 @@ protected:
     // Implement wxMSWOwnerDrawnButtonBase methods.
     int MSWGetButtonStyle() const override;
     void MSWOnButtonResetOwnerDrawn() override;
-    int MSWGetButtonCheckedFlag() const override;
+    unsigned int MSWGetButtonCheckedFlag() const override;
     void
-        MSWDrawButtonBitmap(wxDC& dc, const wxRect& rect, int flags) override;
+        MSWDrawButtonBitmap(wxDC& dc, const wxRect& rect, unsigned int flags) override;
 
 private:    
     // current state of the checkbox

@@ -173,7 +173,7 @@ public:
     bool HasMultiplePages() const override { return true; }
 
     void SetWindowStyleFlag(unsigned int style) override;
-    long GetWindowStyleFlag() const override;
+    unsigned int GetWindowStyleFlag() const override;
     bool Realize() override;
 
     // Implementation only.
@@ -223,7 +223,7 @@ protected:
     wxRect m_tab_scroll_right_button_rect;
     wxRect m_toggle_button_rect;
     wxRect m_help_button_rect;
-    long m_flags{0};
+    unsigned int m_flags{};
     int m_tabs_total_width_ideal{0};
     int m_tabs_total_width_minimum{0};
     int m_tab_margin_left{0};

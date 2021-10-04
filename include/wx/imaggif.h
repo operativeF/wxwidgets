@@ -20,11 +20,11 @@
 
 #if wxUSE_GIF
 
-inline constexpr char wxIMAGE_OPTION_GIF_COMMENT[] = "GifComment";
+constexpr char wxIMAGE_OPTION_GIF_COMMENT[] = "GifComment";
 
-inline constexpr char wxIMAGE_OPTION_GIF_TRANSPARENCY[]           = "Transparency";
-inline constexpr char wxIMAGE_OPTION_GIF_TRANSPARENCY_HIGHLIGHT[] = "Highlight";
-inline constexpr char wxIMAGE_OPTION_GIF_TRANSPARENCY_UNCHANGED[] = "Unchanged";
+constexpr char wxIMAGE_OPTION_GIF_TRANSPARENCY[]           = "Transparency";
+constexpr char wxIMAGE_OPTION_GIF_TRANSPARENCY_HIGHLIGHT[] = "Highlight";
+constexpr char wxIMAGE_OPTION_GIF_TRANSPARENCY_UNCHANGED[] = "Unchanged";
 
 struct wxRGB;
 struct GifHashTableType;

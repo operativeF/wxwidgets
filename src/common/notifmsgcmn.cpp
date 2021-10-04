@@ -59,7 +59,7 @@ void wxNotificationMessageBase::SetParent(wxWindow *parent)
     m_impl->SetParent(parent);
 }
 
-void wxNotificationMessageBase::SetFlags(int flags)
+void wxNotificationMessageBase::SetFlags(unsigned int flags)
 {
     wxASSERT_MSG(flags == wxICON_INFORMATION ||
         flags == wxICON_WARNING || flags == wxICON_ERROR ||

@@ -30,7 +30,7 @@
 class WXDLLIMPEXP_FWD_CORE wxDataViewCtrl;
 class WXDLLIMPEXP_FWD_CORE wxDataViewEvent;
 
-inline constexpr char wxTreeListCtrlNameStr[] = "wxTreeListCtrl";
+constexpr char wxTreeListCtrlNameStr[] = "wxTreeListCtrl";
 
 class wxTreeListCtrl;
 class wxTreeListModel;

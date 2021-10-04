@@ -23,32 +23,32 @@
 
 class WXDLLIMPEXP_FWD_CORE wxRect;
 
-inline constexpr char wxStatusBarNameStr[] = "statusBar";
+constexpr char wxStatusBarNameStr[] = "statusBar";
 
 // ----------------------------------------------------------------------------
 // wxStatusBar constants
 // ----------------------------------------------------------------------------
 
 // wxStatusBar styles
-inline constexpr int wxSTB_SIZEGRIP          = 0x0010;
-inline constexpr int wxSTB_SHOW_TIPS         = 0x0020;
+constexpr unsigned int wxSTB_SIZEGRIP          = 0x0010;
+constexpr unsigned int wxSTB_SHOW_TIPS         = 0x0020;
 
-inline constexpr int wxSTB_ELLIPSIZE_START   = 0x0040;
-inline constexpr int wxSTB_ELLIPSIZE_MIDDLE  = 0x0080;
-inline constexpr int wxSTB_ELLIPSIZE_END     = 0x0100;
+constexpr unsigned int wxSTB_ELLIPSIZE_START   = 0x0040;
+constexpr unsigned int wxSTB_ELLIPSIZE_MIDDLE  = 0x0080;
+constexpr unsigned int wxSTB_ELLIPSIZE_END     = 0x0100;
 
-inline constexpr int wxSTB_DEFAULT_STYLE     = wxSTB_SIZEGRIP|wxSTB_ELLIPSIZE_END|wxSTB_SHOW_TIPS|wxFULL_REPAINT_ON_RESIZE;
+constexpr unsigned int wxSTB_DEFAULT_STYLE     = wxSTB_SIZEGRIP|wxSTB_ELLIPSIZE_END|wxSTB_SHOW_TIPS|wxFULL_REPAINT_ON_RESIZE;
 
 
 // old compat style name:
-inline constexpr int wxST_SIZEGRIP =    wxSTB_SIZEGRIP;
+constexpr unsigned int wxST_SIZEGRIP =    wxSTB_SIZEGRIP;
 
 
 // style flags for wxStatusBar fields
-inline constexpr int wxSB_NORMAL    = 0x0000;
-inline constexpr int wxSB_FLAT      = 0x0001;
-inline constexpr int wxSB_RAISED    = 0x0002;
-inline constexpr int wxSB_SUNKEN    = 0x0003;
+constexpr unsigned int wxSB_NORMAL    = 0x0000;
+constexpr unsigned int wxSB_FLAT      = 0x0001;
+constexpr unsigned int wxSB_RAISED    = 0x0002;
+constexpr unsigned int wxSB_SUNKEN    = 0x0003;
 
 // ----------------------------------------------------------------------------
 // wxStatusBarPane: an helper for wxStatusBar
@@ -57,13 +57,13 @@ inline constexpr int wxSB_SUNKEN    = 0x0003;
 class WXDLLIMPEXP_CORE wxStatusBarPane
 {
 public:
-    wxStatusBarPane(int style = wxSB_NORMAL, int width = 0)
+    wxStatusBarPane(unsigned int style = wxSB_NORMAL, int width = 0)
         : m_nStyle(style), m_nWidth(width)
     {
     }
 
     int GetWidth() const { return m_nWidth; }
-    int GetStyle() const { return m_nStyle; }
+    unsigned int GetStyle() const { return m_nStyle; }
     std::string GetText() const { return m_text; }
 
 
@@ -75,7 +75,7 @@ public:
     void SetIsEllipsized(bool isEllipsized) { m_bEllipsized = isEllipsized; }
 
     void SetWidth(int width) { m_nWidth = width; }
-    void SetStyle(int style) { m_nStyle = style; }
+    void SetStyle(unsigned int style) { m_nStyle = style; }
 
     // set text, return true if it changed or false if it was already set to
     // this value
@@ -91,15 +91,17 @@ public:
     bool PopText();
 
 private:
-    int m_nStyle;
-    int m_nWidth;     // may be negative, indicating a variable-width field
     std::string m_text;
+
+    std::vector<std::string> m_arrStack;
+
+    unsigned int m_nStyle;
+    int m_nWidth;     // may be negative, indicating a variable-width field
 
     // the array used to keep the previous values of this pane after a
     // PushStatusText() call, its top element is the value to restore after the
     // next PopStatusText() call while the currently shown value is always in
     // m_text
-    std::vector<std::string> m_arrStack;
 
     // is the currently shown value shown with ellipsis in the status bar?
     bool m_bEllipsized{false};

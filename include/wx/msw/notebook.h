@@ -111,7 +111,7 @@ public:
   void SetTabSize(const wxSize& sz) override;
 
     // hit test
-  int HitTest(const wxPoint& pt, long *flags = nullptr) const override;
+  int HitTest(const wxPoint& pt, unsigned int* flags = nullptr) const override;
 
     // calculate the size of the notebook from the size of its page
   wxSize CalcSizeFromPage(const wxSize& sizePage) const override;

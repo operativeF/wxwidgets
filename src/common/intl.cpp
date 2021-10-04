@@ -463,7 +463,7 @@ static void wxMSWSetThreadUILanguage(LANGID langid)
 
 #endif // __WIN32__
 
-bool wxLocale::Init(int lang, int flags)
+bool wxLocale::Init(int lang, unsigned int flags)
 {
     wxCHECK_MSG( lang != wxLANGUAGE_UNKNOWN, false,
                  wxS("Initializing unknown locale doesn't make sense, did you ")

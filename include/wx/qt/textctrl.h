@@ -20,7 +20,7 @@ public:
                const wxString &value = wxEmptyString,
                const wxPoint &pos = wxDefaultPosition,
                const wxSize &size = wxDefaultSize,
-               long style = 0,
+               unsigned int style = 0,
                const wxValidator& validator = wxDefaultValidator,
                const wxString &name = wxASCII_STR(wxTextCtrlNameStr));
 
@@ -31,7 +31,7 @@ public:
                 const wxString &value = wxEmptyString,
                 const wxPoint &pos = wxDefaultPosition,
                 const wxSize &size = wxDefaultSize,
-                long style = 0,
+                unsigned int style = 0,
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString &name = wxASCII_STR(wxTextCtrlNameStr));
 

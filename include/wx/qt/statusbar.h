@@ -20,11 +20,11 @@ class WXDLLIMPEXP_CORE wxStatusBar : public wxStatusBarBase
 public:
     wxStatusBar();
     wxStatusBar(wxWindow *parent, wxWindowID winid = wxID_ANY,
-                long style = wxSTB_DEFAULT_STYLE,
+                unsigned int style = wxSTB_DEFAULT_STYLE,
                 const wxString& name = wxASCII_STR(wxStatusBarNameStr));
 
     bool Create(wxWindow *parent, wxWindowID winid = wxID_ANY,
-                long style = wxSTB_DEFAULT_STYLE,
+                unsigned int style = wxSTB_DEFAULT_STYLE,
                 const wxString& name = wxASCII_STR(wxStatusBarNameStr));
 
     bool GetFieldRect(int i, wxRect& rect) const override;

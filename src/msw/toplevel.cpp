@@ -1112,7 +1112,7 @@ bool wxTopLevelWindowMSW::EnableMinimizeButton(bool enable)
     return false;
 }
 
-void wxTopLevelWindowMSW::RequestUserAttention(int flags)
+void wxTopLevelWindowMSW::RequestUserAttention(unsigned int flags)
 {
 #if defined(FLASHW_STOP)
     WinStruct<FLASHWINFO> fwi;

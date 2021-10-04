@@ -31,7 +31,7 @@ class WXDLLIMPEXP_FWD_CORE wxToolBarBase;
 // constants
 // ----------------------------------------------------------------------------
 
-inline constexpr char wxToolBarNameStr[] = "toolbar";
+constexpr char wxToolBarNameStr[] = "toolbar";
 
 enum class wxToolBarToolStyle
 {

@@ -152,7 +152,7 @@ void wxRibbonBar::SetWindowStyleFlag(unsigned int style)
         m_art->SetFlags(style);
 }
 
-long wxRibbonBar::GetWindowStyleFlag() const
+unsigned int wxRibbonBar::GetWindowStyleFlag() const
 {
     return m_flags;
 }

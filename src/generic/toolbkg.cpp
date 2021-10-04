@@ -222,7 +222,7 @@ void wxToolbook::Realize()
     DoSize();
 }
 
-int wxToolbook::HitTest(const wxPoint& pt, long *flags) const
+int wxToolbook::HitTest(const wxPoint& pt, unsigned int* flags) const
 {
     int pagePos = wxNOT_FOUND;
 

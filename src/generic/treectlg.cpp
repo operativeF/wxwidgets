@@ -265,7 +265,7 @@ public:
         // on the item's label
     wxGenericTreeItem *HitTest( const wxPoint& point,
                                 const wxGenericTreeCtrl *,
-                                int &flags,
+                                unsigned int& flags,
                                 int level );
 
     void Expand() { m_isCollapsed = false; }
@@ -648,7 +648,7 @@ void wxGenericTreeItem::GetSize( int &x, int &y,
 
 wxGenericTreeItem *wxGenericTreeItem::HitTest(const wxPoint& point,
                                               const wxGenericTreeCtrl *theCtrl,
-                                              int &flags,
+                                              unsigned int &flags,
                                               int level)
 {
     // for a hidden root node, don't evaluate it, but do evaluate children
@@ -3410,11 +3410,11 @@ void wxGenericTreeCtrl::OnChar( wxKeyEvent &event )
 }
 
 wxTreeItemId
-wxGenericTreeCtrl::DoTreeHitTest(const wxPoint& point, int& flags) const
+wxGenericTreeCtrl::DoTreeHitTest(const wxPoint& point, unsigned int& flags) const
 {
     wxSize sz = GetSize();
 
-    flags=0;
+    flags = 0;
 
     if (point.x < 0) flags |= wxTREE_HITTEST_TOLEFT;
     if (point.x > sz.x) flags |= wxTREE_HITTEST_TORIGHT;
@@ -3566,7 +3566,7 @@ void wxGenericTreeCtrl::OnMouse( wxMouseEvent &event )
     wxPoint pt = CalcUnscrolledPosition(event.GetPosition());
 
     // Is the mouse over a tree item button?
-    int flags = 0;
+    unsigned int flags{};
     wxGenericTreeItem *thisItem = m_anchor->HitTest(pt, this, flags, 0);
     wxGenericTreeItem *underMouse = thisItem;
 #if wxUSE_TOOLTIPS

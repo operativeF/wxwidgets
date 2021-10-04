@@ -16,7 +16,7 @@
 
 #include <string>
 
-inline constexpr char wxAddRemoveCtrlNameStr[] = "wxAddRemoveCtrl";
+constexpr char wxAddRemoveCtrlNameStr[] = "wxAddRemoveCtrl";
 
 // ----------------------------------------------------------------------------
 // wxAddRemoveAdaptor: used by wxAddRemoveCtrl to work with the list control

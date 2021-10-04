@@ -40,7 +40,7 @@ public:
                      unsigned int model_column,
                      int width = wxDVC_DEFAULT_WIDTH,
                      wxAlignment align = wxALIGN_CENTER,
-                     int flags = wxDATAVIEW_COL_RESIZABLE)
+                     unsigned int flags = wxDATAVIEW_COL_RESIZABLE)
         : wxDataViewColumnBase(renderer, model_column),
           m_title(title)
     {
@@ -52,7 +52,7 @@ public:
                      unsigned int model_column,
                      int width = wxDVC_DEFAULT_WIDTH,
                      wxAlignment align = wxALIGN_CENTER,
-                     int flags = wxDATAVIEW_COL_RESIZABLE)
+                     unsigned int flags = wxDATAVIEW_COL_RESIZABLE)
         : wxDataViewColumnBase(bitmap, renderer, model_column)
     {
         Init(width, align, flags);
@@ -103,12 +103,12 @@ public:
         return m_align;
     }
 
-    void SetFlags(int flags) override
+    void SetFlags(unsigned int flags) override
     {
         m_flags = flags;
         UpdateDisplay();
     }
-    int GetFlags() const override
+    unsigned int GetFlags() const override
     {
         return m_flags;
     }
@@ -152,7 +152,7 @@ public:
 
 private:
     // common part of all ctors
-    void Init(int width, wxAlignment align, int flags);
+    void Init(int width, wxAlignment align, unsigned int flags);
 
     // These methods forward to wxDataViewCtrl::OnColumnChange() and
     // OnColumnWidthChange() respectively, i.e. the latter is stronger than the
@@ -170,7 +170,7 @@ private:
         m_manuallySetWidth,
         m_minWidth;
     wxAlignment m_align;
-    int m_flags;
+    unsigned int m_flags;
     bool m_sort,
          m_sortAscending;
 

@@ -143,7 +143,7 @@ private:
     wxIcon m_icon;
 
     wxWindow* m_parent;
-    int m_flags;
+    unsigned int m_flags;
 
     void OnTimeout(wxTaskBarIconEvent& event);
     void OnClick(wxTaskBarIconEvent& event);
@@ -331,7 +331,7 @@ wxNotificationMessage::wxNotificationMessage()
 wxNotificationMessage::wxNotificationMessage(const std::string& title,
     const std::string& message,
     wxWindow* parent,
-    int flags)
+    unsigned int flags)
 {
 #if wxUSE_WINRT
     if (wxToastNotificationHelper::IsEnabled())

@@ -30,16 +30,16 @@
 #include "wx/bitmap.h"
 
 // Extended style to specify a help button
-inline constexpr auto wxWIZARD_EX_HELPBUTTON   = 0x00000010;
+constexpr auto wxWIZARD_EX_HELPBUTTON   = 0x00000010;
 
 // Placement flags
-inline constexpr int wxWIZARD_VALIGN_TOP       = 0x01;
-inline constexpr int wxWIZARD_VALIGN_CENTRE    = 0x02;
-inline constexpr int wxWIZARD_VALIGN_BOTTOM    = 0x04;
-inline constexpr int wxWIZARD_HALIGN_LEFT      = 0x08;
-inline constexpr int wxWIZARD_HALIGN_CENTRE    = 0x10;
-inline constexpr int wxWIZARD_HALIGN_RIGHT     = 0x20;
-inline constexpr int wxWIZARD_TILE             = 0x40;
+constexpr unsigned int wxWIZARD_VALIGN_TOP       = 0x01;
+constexpr unsigned int wxWIZARD_VALIGN_CENTRE    = 0x02;
+constexpr unsigned int wxWIZARD_VALIGN_BOTTOM    = 0x04;
+constexpr unsigned int wxWIZARD_HALIGN_LEFT      = 0x08;
+constexpr unsigned int wxWIZARD_HALIGN_CENTRE    = 0x10;
+constexpr unsigned int wxWIZARD_HALIGN_RIGHT     = 0x20;
+constexpr unsigned int wxWIZARD_TILE             = 0x40;
 
 // forward declarations
 class WXDLLIMPEXP_FWD_CORE wxWizard;

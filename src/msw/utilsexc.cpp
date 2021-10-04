@@ -558,7 +558,7 @@ wxExecuteDDE(const wxString& ddeServer,
 
 #endif // wxUSE_IPC
 
-long wxExecute(const wxString& cmd, int flags, wxProcess *handler,
+long wxExecute(const wxString& cmd, unsigned int flags, wxProcess *handler,
                const wxExecuteEnv *env)
 {
     wxCHECK_MSG( !cmd.empty(), 0, wxT("empty command in wxExecute") );
@@ -1090,13 +1090,13 @@ long wxExecuteImpl(const CharType* const* argv, int flags, wxProcess* handler,
     return wxExecute(command, flags, handler, env);
 }
 
-long wxExecute(const char* const* argv, int flags, wxProcess* handler,
+long wxExecute(const char* const* argv, unsigned int flags, wxProcess* handler,
                const wxExecuteEnv *env)
 {
     return wxExecuteImpl(argv, flags, handler, env);
 }
 
-long wxExecute(const wchar_t* const* argv, int flags, wxProcess* handler,
+long wxExecute(const wchar_t* const* argv, unsigned int flags, wxProcess* handler,
                const wxExecuteEnv *env)
 {
     return wxExecuteImpl(argv, flags, handler, env);

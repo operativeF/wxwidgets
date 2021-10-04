@@ -27,7 +27,7 @@ wxButton::wxButton()
 wxButton::wxButton(wxWindow *parent, wxWindowID id,
        const wxString& label,
        const wxPoint& pos,
-       const wxSize& size, long style,
+       const wxSize& size, unsigned int style,
        const wxValidator& validator,
        const wxString& name )
 {
@@ -37,7 +37,7 @@ wxButton::wxButton(wxWindow *parent, wxWindowID id,
 bool wxButton::Create(wxWindow *parent, wxWindowID id,
        const wxString& label,
        const wxPoint& pos,
-       const wxSize& size, long style,
+       const wxSize& size, unsigned int style,
        const wxValidator& validator,
        const wxString& name )
 {

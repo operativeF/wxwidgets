@@ -24,7 +24,7 @@ public:
                const wxSize& size = wxDefaultSize,
                int n = 0, const wxString choices[] = NULL,
                int majorDim = 0,
-               long style = wxRA_SPECIFY_COLS,
+               unsigned int style = wxRA_SPECIFY_COLS,
                const wxValidator& val = wxDefaultValidator,
                const wxString& name = wxASCII_STR(wxRadioBoxNameStr));
 
@@ -35,7 +35,7 @@ public:
                const wxSize& size,
                const wxArrayString& choices,
                int majorDim = 0,
-               long style = wxRA_SPECIFY_COLS,
+               unsigned int style = wxRA_SPECIFY_COLS,
                const wxValidator& val = wxDefaultValidator,
                const wxString& name = wxASCII_STR(wxRadioBoxNameStr));
 
@@ -46,7 +46,7 @@ public:
                 const wxSize& size = wxDefaultSize,
                 int n = 0, const wxString choices[] = NULL,
                 int majorDim = 0,
-                long style = wxRA_SPECIFY_COLS,
+                unsigned int style = wxRA_SPECIFY_COLS,
                 const wxValidator& val = wxDefaultValidator,
                 const wxString& name = wxASCII_STR(wxRadioBoxNameStr));
 
@@ -57,7 +57,7 @@ public:
                 const wxSize& size,
                 const wxArrayString& choices,
                 int majorDim = 0,
-                long style = wxRA_SPECIFY_COLS,
+                unsigned int style = wxRA_SPECIFY_COLS,
                 const wxValidator& val = wxDefaultValidator,
                 const wxString& name = wxASCII_STR(wxRadioBoxNameStr));
 

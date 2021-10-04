@@ -219,7 +219,7 @@ wxSizer *wxDialogBase::CreateSeparatedSizer(wxSizer *sizer)
     return sizer;
 }
 
-wxSizer *wxDialogBase::CreateSeparatedButtonSizer(long flags)
+wxSizer *wxDialogBase::CreateSeparatedButtonSizer(unsigned int flags)
 {
     wxSizer *sizer = CreateButtonSizer(flags);
     if ( !sizer )
@@ -230,7 +230,7 @@ wxSizer *wxDialogBase::CreateSeparatedButtonSizer(long flags)
 
 #if wxUSE_BUTTON
 
-wxStdDialogButtonSizer *wxDialogBase::CreateStdDialogButtonSizer( long flags )
+wxStdDialogButtonSizer *wxDialogBase::CreateStdDialogButtonSizer( unsigned int flags )
 {
     wxStdDialogButtonSizer *sizer = new wxStdDialogButtonSizer();
 

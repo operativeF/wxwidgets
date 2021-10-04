@@ -41,7 +41,7 @@
 #define wxHAS_CALL_AFTER
 
 /*  this window should always process UI update events */
-#define wxWS_EX_PROCESS_UI_UPDATES      0x00000020
+constexpr unsigned int wxWS_EX_PROCESS_UI_UPDATES      = 0x00000020;
 
 // ----------------------------------------------------------------------------
 // forward declarations
@@ -84,7 +84,7 @@ class wxEventConnectionRef;
 
 using wxEventType = int;
 
-inline constexpr wxEventType wxEVT_ANY = -1;
+constexpr wxEventType wxEVT_ANY = -1;
 
 // This macro exists for compatibility only (even though it was never public,
 // it still appears in some code using wxWidgets), see public
@@ -1245,7 +1245,7 @@ public:
     void SetString(const std::string& s) { m_cmdString = s; }
     const std::string& GetString() const { return m_cmdString; }
 
-    void SetInt(int i) { m_commandInt = i; }
+    void SetInt(unsigned int i) { m_commandInt = i; }
     int GetInt() const { return m_commandInt; }
 
     void SetExtraLong(long extraLong) { m_extraLong = extraLong; }
@@ -1255,8 +1255,8 @@ protected:
     // Note: these variables have "cmd" or "command" in their name for backward compatibility:
     //       they used to be part of wxCommandEvent, not this mixin.
     std::string          m_cmdString;     // String event argument
-    int               m_commandInt{0};
-    long              m_extraLong{0};     // Additional information (e.g. select/deselect)
+    unsigned int         m_commandInt{0};
+    long                 m_extraLong{0};     // Additional information (e.g. select/deselect)
 };
 
 class WXDLLIMPEXP_BASE wxEventAnyPayloadMixin : public wxEventBasicPayloadMixin

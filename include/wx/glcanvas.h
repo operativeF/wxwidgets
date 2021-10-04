@@ -69,7 +69,7 @@ enum
     WX_GL_RELEASE_NONE     // on context release, pending commands are not flushed
 };
 
-inline constexpr char wxGLCanvasName[] = "GLCanvas";
+constexpr char wxGLCanvasName[] = "GLCanvas";
 
 // ----------------------------------------------------------------------------
 // wxGLAttribsBase: OpenGL rendering attributes

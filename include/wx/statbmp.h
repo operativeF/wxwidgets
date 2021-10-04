@@ -20,7 +20,7 @@
 
 class WXDLLIMPEXP_FWD_CORE wxBitmap;
 
-inline constexpr char wxStaticBitmapNameStr[] = "staticBitmap";
+constexpr char wxStaticBitmapNameStr[] = "staticBitmap";
 
 // a control showing an icon or a bitmap
 class WXDLLIMPEXP_CORE wxStaticBitmapBase : public wxControl

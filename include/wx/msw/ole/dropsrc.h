@@ -57,7 +57,7 @@ public:
 
     // do it (call this in response to a mouse button press, for example)
     // params: if bAllowMove is false, data can be only copied
-    wxDragResult DoDragDrop(int flags = wxDrag_CopyOnly) override;
+    wxDragResult DoDragDrop(unsigned int flags = wxDrag_CopyOnly) override;
 
     // overridable: you may give some custom UI feedback during d&d operation
     // in this function (it's called on each mouse move, so it shouldn't be

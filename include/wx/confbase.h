@@ -31,13 +31,13 @@
 
 /// separates group and entry names (probably shouldn't be changed)
 #ifndef wxCONFIG_PATH_SEPARATOR
-  inline constexpr wxChar wxCONFIG_PATH_SEPARATOR = wxT('/');
+  constexpr wxChar wxCONFIG_PATH_SEPARATOR = wxT('/');
 #endif
 
 /// introduces immutable entries
 // (i.e. the ones which can't be changed from the local config file)
 #ifndef wxCONFIG_IMMUTABLE_PREFIX
-  inline constexpr wxChar wxCONFIG_IMMUTABLE_PREFIX = wxT('!');
+  constexpr wxChar wxCONFIG_IMMUTABLE_PREFIX = wxT('!');
 #endif
 
 #if wxUSE_CONFIG
@@ -378,7 +378,7 @@ public:
   void SetVendorName(const wxString& vendorName) { m_vendorName = vendorName; }
 
   void SetStyle(unsigned int style) { m_style = style; }
-  long GetStyle() const { return m_style; }
+  unsigned int GetStyle() const { return m_style; }
 
 protected:
   static bool IsImmutable(const wxString& key)
@@ -429,7 +429,7 @@ private:
   wxString          m_vendorName;
 
   // Style flag
-  long              m_style;
+  unsigned int      m_style;
 
   wxDECLARE_ABSTRACT_CLASS(wxConfigBase);
 };

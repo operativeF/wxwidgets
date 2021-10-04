@@ -487,7 +487,7 @@ void wxVListBox::OnSize(wxSizeEvent& event)
 // wxVListBox keyboard/mouse handling
 // ============================================================================
 
-void wxVListBox::DoHandleItemClick(int item, int flags)
+void wxVListBox::DoHandleItemClick(int item, unsigned int flags)
 {
     // has anything worth telling the client code about happened?
     bool notify = false;
@@ -667,7 +667,7 @@ void wxVListBox::OnLeftDown(wxMouseEvent& event)
 
     if ( item != wxNOT_FOUND )
     {
-        int flags = 0;
+        unsigned int flags{};
         if ( event.ShiftDown() )
            flags |= ItemClick_Shift;
 

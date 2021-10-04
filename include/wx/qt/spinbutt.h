@@ -19,14 +19,14 @@ public:
                  wxWindowID id = -1,
                  const wxPoint& pos = wxDefaultPosition,
                  const wxSize& size = wxDefaultSize,
-                 long style = wxSP_VERTICAL,
+                 unsigned int style = wxSP_VERTICAL,
                  const wxString& name = wxSPIN_BUTTON_NAME);
 
     bool Create(wxWindow *parent,
                 wxWindowID id = -1,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = wxSP_VERTICAL,
+                unsigned int style = wxSP_VERTICAL,
                 const wxString& name = wxSPIN_BUTTON_NAME);
 
     int GetValue() const override;

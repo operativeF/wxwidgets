@@ -333,15 +333,15 @@ struct wxExecuteEnv
 // process if everything was ok. Otherwise (i.e. if wxEXEC_ASYNC), return 0 on
 // failure and the PID of the launched process if ok.
 WXDLLIMPEXP_BASE long wxExecute(const wxString& command,
-                                int flags = wxEXEC_ASYNC,
+                                unsigned int flags = wxEXEC_ASYNC,
                                 wxProcess *process = nullptr,
                                 const wxExecuteEnv *env = nullptr);
 WXDLLIMPEXP_BASE long wxExecute(const char* const* argv,
-                                int flags = wxEXEC_ASYNC,
+                                unsigned int flags = wxEXEC_ASYNC,
                                 wxProcess *process = nullptr,
                                 const wxExecuteEnv *env = nullptr);
 WXDLLIMPEXP_BASE long wxExecute(const wchar_t* const* argv,
-                                int flags = wxEXEC_ASYNC,
+                                unsigned int flags = wxEXEC_ASYNC,
                                 wxProcess *process = nullptr,
                                 const wxExecuteEnv *env = nullptr);
 
@@ -349,14 +349,14 @@ WXDLLIMPEXP_BASE long wxExecute(const wchar_t* const* argv,
 // always synchronous
 WXDLLIMPEXP_BASE long wxExecute(const wxString& command,
                                 std::vector<wxString>& output,
-                                int flags = 0,
+                                unsigned int flags = 0,
                                 const wxExecuteEnv *env = nullptr);
 
 // also capture stderr (also synchronous)
 WXDLLIMPEXP_BASE long wxExecute(const wxString& command,
                                 std::vector<wxString>& output,
                                 std::vector<wxString>& error,
-                                int flags = 0,
+                                unsigned int flags = 0,
                                 const wxExecuteEnv *env = nullptr);
 
 #if defined(__WINDOWS__) && wxUSE_IPC
@@ -413,7 +413,7 @@ enum wxShutdownFlags
 };
 
 // Shutdown or reboot the PC
-WXDLLIMPEXP_BASE bool wxShutdown(int flags = wxSHUTDOWN_POWEROFF);
+WXDLLIMPEXP_BASE bool wxShutdown(unsigned int flags = wxSHUTDOWN_POWEROFF);
 
 // send the given signal to the process (only NONE and KILL are supported under
 // Windows, all others mean TERM), return 0 if ok and -1 on error
@@ -422,7 +422,7 @@ WXDLLIMPEXP_BASE bool wxShutdown(int flags = wxSHUTDOWN_POWEROFF);
 WXDLLIMPEXP_BASE int wxKill(long pid,
                        wxSignal sig = wxSIGTERM,
                        wxKillError *rc = nullptr,
-                       int flags = wxKILL_NOCHILDREN);
+                       unsigned int flags = wxKILL_NOCHILDREN);
 
 // Execute a command in an interactive shell window (always synchronously)
 // If no command then just the shell
@@ -551,10 +551,10 @@ enum
 };
 
 // Launch url in the user's default internet browser
-WXDLLIMPEXP_CORE bool wxLaunchDefaultBrowser(const wxString& url, int flags = 0);
+WXDLLIMPEXP_CORE bool wxLaunchDefaultBrowser(const wxString& url, unsigned int flags = 0);
 
 // Launch document in the user's default application
-WXDLLIMPEXP_CORE bool wxLaunchDefaultApplication(const wxString& path, int flags = 0);
+WXDLLIMPEXP_CORE bool wxLaunchDefaultApplication(const wxString& path, unsigned int flags = 0);
 
 // ----------------------------------------------------------------------------
 // Menu accelerators related things
@@ -585,7 +585,7 @@ enum
 
 // strip mnemonics and/or accelerators from the label
 WXDLLIMPEXP_CORE wxString
-wxStripMenuCodes(const wxString& str, int flags = wxStrip_All);
+wxStripMenuCodes(const wxString& str, unsigned int flags = wxStrip_All);
 
 // ----------------------------------------------------------------------------
 // Window search

@@ -96,7 +96,7 @@ bool wxRibbonToolBar::Create(wxWindow* parent,
     return true;
 }
 
-void wxRibbonToolBar::CommonInit(long WXUNUSED(style))
+void wxRibbonToolBar::CommonInit(unsigned int WXUNUSED(style))
 {
     AppendGroup();
     m_hover_tool = nullptr;

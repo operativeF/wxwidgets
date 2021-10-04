@@ -944,7 +944,7 @@ wxGraphicsFont wxGraphicsContext::wxCreateFont( const wxFont &font , const wxCol
 wxGraphicsFont
 wxGraphicsContext::wxCreateFont(double sizeInPixels,
                               const std::string& facename,
-                              int flags,
+                              unsigned int flags,
                               const wxColour& col) const
 {
     return GetRenderer()->wxCreateFont(sizeInPixels, facename, flags, col);

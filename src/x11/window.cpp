@@ -130,7 +130,7 @@ void wxWindowX11::Init()
 bool wxWindowX11::Create(wxWindow *parent, wxWindowID id,
                          const wxPoint& pos,
                          const wxSize& size,
-                         long style,
+                         unsigned int style,
                          const wxString& name)
 {
     wxCHECK_MSG( parent, false, wxT("can't create wxWindow without parent") );

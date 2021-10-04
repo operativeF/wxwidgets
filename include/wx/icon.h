@@ -15,7 +15,7 @@
 
 
 // a more readable way to tell
-inline constexpr int wxICON_SCREEN_DEPTH = -1;
+constexpr auto wxICON_SCREEN_DEPTH = static_cast<unsigned int>(-1);
 
 
 // the wxICON_DEFAULT_TYPE (the wxIcon equivalent of wxBITMAP_DEFAULT_TYPE)

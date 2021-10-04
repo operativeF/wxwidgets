@@ -167,7 +167,7 @@ wxDropSource::~wxDropSource()
 // Returns : wxDragResult - the code of performed operation
 // Params  : [in] int flags: specifies if moving is allowed (or only copying)
 // Notes   : you must call SetData() before if you had used def ctor
-wxDragResult wxDropSource::DoDragDrop(int flags)
+wxDragResult wxDropSource::DoDragDrop(unsigned int flags)
 {
   wxCHECK_MSG( m_data != nullptr, wxDragResult::None, wxT("No data in wxDropSource!") );
 

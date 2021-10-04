@@ -297,9 +297,9 @@ public:
     static wxXmlResource *Set(wxXmlResource *res);
 
     // Returns flags, which is a bitlist of wxXmlResourceFlags.
-    int GetFlags() const { return m_flags; }
+    unsigned int GetFlags() const { return m_flags; }
     // Set flags after construction.
-    void SetFlags(int flags) { m_flags = flags; }
+    void SetFlags(unsigned int flags) { m_flags = flags; }
 
     // Get/Set the domain to be passed to the translation functions, defaults
     // to empty string (no domain).
@@ -409,7 +409,7 @@ private:
 private:
     long m_version{-1};
 
-    int m_flags;
+    unsigned int m_flags;
     std::vector<wxXmlResourceHandler*> m_handlers;
     wxXmlResourceDataRecords *m_data;
 #if wxUSE_FILESYSTEM

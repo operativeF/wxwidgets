@@ -87,7 +87,7 @@ bool wxTopLevelWindow::Create(wxWindow *parent,
                               const wxString& title,
                               const wxPoint& pos,
                               const wxSize& size,
-                              long style,
+                              unsigned int style,
                               const wxString &name)
 {
     // init them to avoid compiler warnings
@@ -119,7 +119,7 @@ bool wxTopLevelWindow::Create(wxWindow *parent,
     return true;
 }
 
-bool wxTopLevelWindow::ShowFullScreen(bool show, long style)
+bool wxTopLevelWindow::ShowFullScreen(bool show, unsigned int style)
 {
     if ( show == IsFullScreen() ) return false;
 
@@ -162,7 +162,7 @@ bool wxTopLevelWindow::IsUsingNativeDecorations() const
 
 long wxTopLevelWindow::GetDecorationsStyle() const
 {
-    long style = 0;
+    unsigned int style = 0;
 
     if ( m_windowStyle & wxCAPTION )
     {

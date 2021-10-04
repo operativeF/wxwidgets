@@ -17,7 +17,7 @@ public:
     wxTreeCtrl(wxWindow *parent, wxWindowID id = wxID_ANY,
                const wxPoint& pos = wxDefaultPosition,
                const wxSize& size = wxDefaultSize,
-               long style = wxTR_HAS_BUTTONS | wxTR_LINES_AT_ROOT,
+               unsigned int style = wxTR_HAS_BUTTONS | wxTR_LINES_AT_ROOT,
                const wxValidator& validator = wxDefaultValidator,
                const wxString& name = wxASCII_STR(wxTreeCtrlNameStr));
 
@@ -26,7 +26,7 @@ public:
     bool Create(wxWindow *parent, wxWindowID id = wxID_ANY,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = wxTR_HAS_BUTTONS | wxTR_LINES_AT_ROOT,
+                unsigned int style = wxTR_HAS_BUTTONS | wxTR_LINES_AT_ROOT,
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxASCII_STR(wxTreeCtrlNameStr));
 

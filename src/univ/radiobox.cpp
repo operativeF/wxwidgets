@@ -89,7 +89,7 @@ void wxRadioBox::Init()
 wxRadioBox::wxRadioBox(wxWindow *parent, wxWindowID id, const wxString& title,
                        const wxPoint& pos, const wxSize& size,
                        const wxArrayString& choices,
-                       int majorDim, long style,
+                       int majorDim, unsigned int style,
                        const wxValidator& val, const wxString& name)
 {
     wxCArrayString chs(choices);
@@ -107,7 +107,7 @@ bool wxRadioBox::Create(wxWindow *parent,
                         const wxSize& size,
                         const wxArrayString& choices,
                         int majorDim,
-                        long style,
+                        unsigned int style,
                         const wxValidator& val,
                         const wxString& name)
 {
@@ -125,7 +125,7 @@ bool wxRadioBox::Create(wxWindow *parent,
                         int n,
                         const wxString *choices,
                         int majorDim,
-                        long style,
+                        unsigned int style,
                         const wxValidator& wxVALIDATOR_PARAM(val),
                         const wxString& name)
 {

@@ -225,7 +225,7 @@ enum
 static bool SelectRange(HWND hwndTV,
                         HTREEITEM htFirst,
                         HTREEITEM htLast,
-                        int flags)
+                        unsigned int flags)
 {
     // find the first (or last) item and select it
     bool changed = false;
@@ -2032,7 +2032,7 @@ void wxTreeCtrl::DoEndEditLabel(bool discardChanges)
     DeleteTextCtrl();
 }
 
-wxTreeItemId wxTreeCtrl::DoTreeHitTest(const wxPoint& point, int& flags) const
+wxTreeItemId wxTreeCtrl::DoTreeHitTest(const wxPoint& point, unsigned int& flags) const
 {
     TV_HITTESTINFO hitTestInfo;
     hitTestInfo.pt.x = (int)point.x;
@@ -3633,7 +3633,7 @@ bool wxTreeCtrl::MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result)
                 };
 
                 ::MapWindowPoints(HWND_DESKTOP, GetHwnd(), &point, 1);
-                int htFlags = 0;
+                unsigned int htFlags = 0;
                 wxTreeItemId item = HitTest(wxPoint(point.x, point.y), htFlags);
 
                 if ( htFlags & wxTREE_HITTEST_ONITEMSTATEICON )

@@ -39,7 +39,7 @@ public:
 
     // show the info bar with the given message and optionally an icon
     virtual void ShowMessage(const std::string& msg,
-                             int flags) = 0;
+                             unsigned int flags) = 0;
 
     // hide the info bar
     virtual void Dismiss() = 0;

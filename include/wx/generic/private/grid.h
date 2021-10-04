@@ -60,7 +60,7 @@ public:
         return static_cast<wxAlignment>(horz);
     }
 
-    int GetFlags() const override
+    unsigned int GetFlags() const override
     {
         // we can't know in advance whether we can sort by this column or not
         // with wxGrid API so suppose we can by default

@@ -24,12 +24,12 @@
 class WXDLLIMPEXP_FWD_CORE wxDialog;
 class WXDLLIMPEXP_FWD_CORE wxFileDirPickerEvent;
 
-inline constexpr char wxFilePickerCtrlNameStr[] = "filepicker";
-inline constexpr char wxFilePickerWidgetNameStr[] = "filepickerwidget";
-inline constexpr char wxDirPickerCtrlNameStr[] = "dirpicker";
-inline constexpr char wxDirPickerWidgetNameStr[] = "dirpickerwidget";
-inline constexpr char wxFilePickerWidgetLabel[] = wxTRANSLATE("Browse");
-inline constexpr char wxDirPickerWidgetLabel[] = wxTRANSLATE("Browse");
+constexpr char wxFilePickerCtrlNameStr[] = "filepicker";
+constexpr char wxFilePickerWidgetNameStr[] = "filepickerwidget";
+constexpr char wxDirPickerCtrlNameStr[] = "dirpicker";
+constexpr char wxDirPickerWidgetNameStr[] = "dirpickerwidget";
+constexpr char wxFilePickerWidgetLabel[] = wxTRANSLATE("Browse");
+constexpr char wxDirPickerWidgetLabel[] = wxTRANSLATE("Browse");
 
 // ----------------------------------------------------------------------------
 // wxFileDirPickerEvent: used by wxFilePickerCtrl and wxDirPickerCtrl only
@@ -112,19 +112,19 @@ protected:
 // NB: these styles must be defined to carefully-chosen values to
 //     avoid conflicts with wxButton's styles
 
-#define wxFLP_OPEN                    0x0400
-#define wxFLP_SAVE                    0x0800
-#define wxFLP_OVERWRITE_PROMPT        0x1000
-#define wxFLP_FILE_MUST_EXIST         0x2000
-#define wxFLP_CHANGE_DIR              0x4000
-#define wxFLP_SMALL                   wxPB_SMALL
+constexpr unsigned int wxFLP_OPEN                    = 0x0400;
+constexpr unsigned int wxFLP_SAVE                    = 0x0800;
+constexpr unsigned int wxFLP_OVERWRITE_PROMPT        = 0x1000;
+constexpr unsigned int wxFLP_FILE_MUST_EXIST         = 0x2000;
+constexpr unsigned int wxFLP_CHANGE_DIR              = 0x4000;
+constexpr unsigned int wxFLP_SMALL                   = wxPB_SMALL;
 
 // NOTE: wxMULTIPLE is not supported !
 
 
-#define wxDIRP_DIR_MUST_EXIST         0x0008
-#define wxDIRP_CHANGE_DIR             0x0010
-#define wxDIRP_SMALL                  wxPB_SMALL
+constexpr unsigned int wxDIRP_DIR_MUST_EXIST         = 0x0008;
+constexpr unsigned int wxDIRP_CHANGE_DIR             = 0x0010;
+constexpr unsigned int wxDIRP_SMALL                  = wxPB_SMALL;
 
 
 // map platform-dependent controls which implement the wxFileDirPickerWidgetBase
@@ -220,13 +220,13 @@ protected:
 // used, a textctrl next to it.
 // ----------------------------------------------------------------------------
 
-#define wxFLP_USE_TEXTCTRL            (wxPB_USE_TEXTCTRL)
+constexpr unsigned int wxFLP_USE_TEXTCTRL            = wxPB_USE_TEXTCTRL;
 
 #ifdef __WXGTK__
     // GTK apps usually don't have a textctrl next to the picker
-    #define wxFLP_DEFAULT_STYLE       (wxFLP_OPEN|wxFLP_FILE_MUST_EXIST)
+    constexpr unsigned int wxFLP_DEFAULT_STYLE       = wxFLP_OPEN|wxFLP_FILE_MUST_EXIST;
 #else
-    #define wxFLP_DEFAULT_STYLE       (wxFLP_USE_TEXTCTRL|wxFLP_OPEN|wxFLP_FILE_MUST_EXIST)
+    constexpr unsigned int wxFLP_DEFAULT_STYLE       = wxFLP_USE_TEXTCTRL|wxFLP_OPEN|wxFLP_FILE_MUST_EXIST;
 #endif
 
 class WXDLLIMPEXP_CORE wxFilePickerCtrl : public wxFileDirPickerCtrlBase
@@ -325,13 +325,13 @@ private:
 // (see wxDIRP_USE_TEXTCTRL) next to it.
 // ----------------------------------------------------------------------------
 
-#define wxDIRP_USE_TEXTCTRL            (wxPB_USE_TEXTCTRL)
+constexpr unsigned int wxDIRP_USE_TEXTCTRL            = wxPB_USE_TEXTCTRL;
 
 #ifdef __WXGTK__
     // GTK apps usually don't have a textctrl next to the picker
-    #define wxDIRP_DEFAULT_STYLE       (wxDIRP_DIR_MUST_EXIST)
+    constexpr unsigned int wxDIRP_DEFAULT_STYLE       = wxDIRP_DIR_MUST_EXIST;
 #else
-    #define wxDIRP_DEFAULT_STYLE       (wxDIRP_USE_TEXTCTRL|wxDIRP_DIR_MUST_EXIST)
+    constexpr unsigned int wxDIRP_DEFAULT_STYLE       = wxDIRP_USE_TEXTCTRL|wxDIRP_DIR_MUST_EXIST;
 #endif
 
 class WXDLLIMPEXP_CORE wxDirPickerCtrl : public wxFileDirPickerCtrlBase

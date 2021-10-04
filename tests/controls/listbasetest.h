@@ -566,7 +566,7 @@ struct ListBaseTest
         list->GetItemRect(0, rectIcon, wxLIST_RECT_ICON); // icon
         int y = rectSubItem0.GetTop() + (rectSubItem0.GetBottom() -
             rectSubItem0.GetTop()) / 2;
-        int flags = 0;
+        unsigned int flags = 0;
 
         // state icon (checkbox)
         int xCheckBox = rectSubItem0.GetLeft() + (rectIcon.GetLeft() -

@@ -39,7 +39,7 @@ wxGauge::wxGauge(wxWindow *parent,
         int range,
         const wxPoint& pos,
         const wxSize& size,
-        long style,
+        unsigned int style,
         const wxValidator& validator,
         const wxString& name)
 {
@@ -51,7 +51,7 @@ bool wxGauge::Create(wxWindow *parent,
             int range,
             const wxPoint& pos,
             const wxSize& size,
-            long style,
+            unsigned int style,
             const wxValidator& validator,
             const wxString& name)
 {

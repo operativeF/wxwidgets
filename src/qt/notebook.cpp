@@ -60,7 +60,7 @@ wxNotebook::wxNotebook(wxWindow *parent,
          wxWindowID id,
          const wxPoint& pos,
          const wxSize& size,
-         long style,
+         unsigned int style,
          const wxString& name)
 {
     Create( parent, id, pos, size, style, name );
@@ -70,7 +70,7 @@ bool wxNotebook::Create(wxWindow *parent,
           wxWindowID id,
           const wxPoint& pos,
           const wxSize& size,
-          long style,
+          unsigned int style,
           const wxString& name)
 {
     m_qtTabWidget = new wxQtTabWidget( parent, this );

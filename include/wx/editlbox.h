@@ -23,13 +23,13 @@ class WXDLLIMPEXP_FWD_CORE wxBitmapButton;
 class WXDLLIMPEXP_FWD_CORE wxListCtrl;
 class WXDLLIMPEXP_FWD_CORE wxListEvent;
 
-inline constexpr int wxEL_ALLOW_NEW     = 0x0100;
-inline constexpr int wxEL_ALLOW_EDIT    = 0x0200;
-inline constexpr int wxEL_ALLOW_DELETE  = 0x0400;
-inline constexpr int wxEL_NO_REORDER    = 0x0800;
-inline constexpr int wxEL_DEFAULT_STYLE = wxEL_ALLOW_NEW | wxEL_ALLOW_EDIT | wxEL_ALLOW_DELETE;
+constexpr unsigned int wxEL_ALLOW_NEW     = 0x0100;
+constexpr unsigned int wxEL_ALLOW_EDIT    = 0x0200;
+constexpr unsigned int wxEL_ALLOW_DELETE  = 0x0400;
+constexpr unsigned int wxEL_NO_REORDER    = 0x0800;
+constexpr unsigned int wxEL_DEFAULT_STYLE = wxEL_ALLOW_NEW | wxEL_ALLOW_EDIT | wxEL_ALLOW_DELETE;
 
-inline constexpr char wxEditableListBoxNameStr[] = "editableListBox";
+constexpr char wxEditableListBoxNameStr[] = "editableListBox";
 
 // This class provides a composite control that lets the
 // user easily enter list of strings
@@ -74,7 +74,7 @@ protected:
     wxBitmapButton *m_bEdit{nullptr};
     wxListCtrl *m_listCtrl{nullptr};
     int m_selection{0};
-    long m_style{0};
+    unsigned int m_style{};
 
     void OnItemSelected(wxListEvent& event);
     void OnEndLabelEdit(wxListEvent& event);

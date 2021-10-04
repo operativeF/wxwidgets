@@ -29,9 +29,9 @@ class WXDLLIMPEXP_FWD_CORE wxPalette;
  * Based on the JPEG quantization code. Reduces the number of colours in a wxImage.
  */
 
-inline constexpr int wxQUANTIZE_INCLUDE_WINDOWS_COLOURS = 0x01;
-inline constexpr int wxQUANTIZE_RETURN_8BIT_DATA        = 0x02;
-inline constexpr int wxQUANTIZE_FILL_DESTINATION_IMAGE  = 0x04;
+constexpr unsigned int wxQUANTIZE_INCLUDE_WINDOWS_COLOURS = 0x01;
+constexpr unsigned int wxQUANTIZE_RETURN_8BIT_DATA        = 0x02;
+constexpr unsigned int wxQUANTIZE_FILL_DESTINATION_IMAGE  = 0x04;
 
 class WXDLLIMPEXP_CORE wxQuantize: public wxObject
 {

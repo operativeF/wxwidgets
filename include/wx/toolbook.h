@@ -28,10 +28,10 @@ wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_TOOLBOOK_PAGE_CHANGING, wxBook
 
 
 // Use wxButtonToolBar
-inline constexpr int wxTBK_BUTTONBAR = 0x0100;
+constexpr unsigned int wxTBK_BUTTONBAR = 0x0100;
 
 // Use wxTB_HORZ_LAYOUT style for the controlling toolbar
-inline constexpr int wxTBK_HORZ_LAYOUT = 0x8000;
+constexpr unsigned int wxTBK_HORZ_LAYOUT = 0x8000;
 
 // ----------------------------------------------------------------------------
 // wxToolbook
@@ -81,7 +81,7 @@ wxToolbook(const wxToolbook&) = delete;
     void SetImageList(wxImageList *imageList) override;
 
     bool DeleteAllPages() override;
-    int HitTest(const wxPoint& pt, long *flags = nullptr) const override;
+    int HitTest(const wxPoint& pt, unsigned int* flags = nullptr) const override;
 
 
     // methods which are not part of base wxBookctrl API

@@ -110,7 +110,7 @@ struct WXDLLIMPEXP_AUI wxAuiTabContainerButton
     wxBitmap disBitmap;  // button's disabled bitmap
     wxRect rect;         // button's hit rectangle
     int id{};            // button's id
-    int curState{};      // current state (normal, hover, pressed, etc.)
+    unsigned int curState{}; // current state (normal, hover, pressed, etc.)
     int location{};      // buttons location (wxLEFT, wxRIGHT, or wxCENTER)
 };
 
@@ -341,7 +341,7 @@ public:
     //wxBookCtrlBase functions
 
     void SetPageSize (const wxSize &size) override;
-    int  HitTest (const wxPoint &pt, long *flags=nullptr) const override;
+    int  HitTest (const wxPoint &pt, unsigned int* flags=nullptr) const override;
 
     int GetPageImage(size_t n) const override;
     bool SetPageImage(size_t n, int imageId) override;

@@ -49,7 +49,7 @@ bool wxControl::Create(wxWindow *parent,
                        wxWindowID id,
                        const wxPoint& pos,
                        const wxSize& size,
-                       long style,
+                       unsigned int style,
                        const wxValidator& validator,
                        const wxString& name)
 {

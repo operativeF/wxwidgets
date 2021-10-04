@@ -53,12 +53,12 @@ enum
     wxFD_SHOW_HIDDEN       = 0x0400
 };
 
-inline constexpr int wxFD_DEFAULT_STYLE = wxFD_OPEN;
+constexpr unsigned int wxFD_DEFAULT_STYLE = wxFD_OPEN;
 
-inline constexpr char wxFileDialogNameStr[] = "filedlg";
-inline constexpr char wxFileSelectorPromptStr[] = "Select a file";
+constexpr char wxFileDialogNameStr[] = "filedlg";
+constexpr char wxFileSelectorPromptStr[] = "Select a file";
 
-inline constexpr char wxFileSelectorDefaultWildcardStr[] =
+constexpr char wxFileSelectorDefaultWildcardStr[] =
 #if defined(__WXMSW__)
     "*.*"
 #else // Unix/Mac
@@ -223,7 +223,7 @@ wxFileSelector(const wxString& message = wxASCII_STR(wxFileSelectorPromptStr),
                const wxString& default_filename = wxEmptyString,
                const wxString& default_extension = wxEmptyString,
                const wxString& wildcard = wxASCII_STR(wxFileSelectorDefaultWildcardStr),
-               int flags = 0,
+               unsigned int flags = 0,
                wxWindow *parent = nullptr,
                int x = wxDefaultCoord, int y = wxDefaultCoord);
 
@@ -234,7 +234,7 @@ wxFileSelectorEx(const wxString& message = wxASCII_STR(wxFileSelectorPromptStr),
                  const wxString& default_filename = wxEmptyString,
                  int *indexDefaultExtension = nullptr,
                  const wxString& wildcard = wxASCII_STR(wxFileSelectorDefaultWildcardStr),
-                 int flags = 0,
+                 unsigned int flags = 0,
                  wxWindow *parent = nullptr,
                  int x = wxDefaultCoord, int y = wxDefaultCoord);
 

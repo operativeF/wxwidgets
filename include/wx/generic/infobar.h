@@ -39,7 +39,7 @@ public:
     // ----------------------------
 
     void ShowMessage(const std::string& msg,
-                             int flags = wxICON_INFORMATION) override;
+                     unsigned int flags = wxICON_INFORMATION) override;
 
     void Dismiss() override;
 

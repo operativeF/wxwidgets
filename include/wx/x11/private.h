@@ -71,7 +71,7 @@ extern Window wxGetWindowParent(Window window);
 
 // Set the window manager decorations according to the
 // given wxWidgets style
-bool wxSetWMDecorations(Window w, long style);
+bool wxSetWMDecorations(Window w, unsigned int style);
 bool wxMWMIsRunning(Window w);
 
 #endif

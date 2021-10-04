@@ -19,7 +19,7 @@ public:
                     const wxBitmap& label,
                     const wxPoint& pos = wxDefaultPosition,
                     const wxSize& size = wxDefaultSize,
-                    long style = 0,
+                    unsigned int style = 0,
                     const wxString& name = wxASCII_STR(wxStaticBitmapNameStr) );
 
     bool Create( wxWindow *parent,
@@ -27,7 +27,7 @@ public:
                  const wxBitmap& label,
                  const wxPoint& pos = wxDefaultPosition,
                  const wxSize& size = wxDefaultSize,
-                 long style = 0,
+                 unsigned int style = 0,
                  const wxString& name = wxASCII_STR(wxStaticBitmapNameStr));
 
     void SetIcon(const wxIcon& icon) override;

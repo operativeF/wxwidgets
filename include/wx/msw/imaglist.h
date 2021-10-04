@@ -93,7 +93,7 @@ public:
   // colour to the background colour of the wxDC, to speed up
   // drawing by eliminating masked drawing where possible.
   bool Draw(int index, wxDC& dc, int x, int y,
-            int flags = wxIMAGELIST_DRAW_NORMAL,
+            unsigned int flags = wxIMAGELIST_DRAW_NORMAL,
             bool solidBackground = false);
 
   // Get a bitmap

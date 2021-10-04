@@ -26,7 +26,7 @@ public:
                         const wxString& title,
                         const wxPoint& pos = wxDefaultPosition,
                         const wxSize& size = wxDefaultSize,
-                        long style = wxDEFAULT_FRAME_STYLE,
+                        unsigned int style = wxDEFAULT_FRAME_STYLE,
                         const wxString& name = wxASCII_STR(wxFrameNameStr))
     {
         Init();
@@ -39,7 +39,7 @@ public:
                 const wxString& title,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = wxDEFAULT_FRAME_STYLE,
+                unsigned int style = wxDEFAULT_FRAME_STYLE,
                 const wxString& name = wxASCII_STR(wxFrameNameStr));
 
     virtual ~wxTopLevelWindowX11();
@@ -54,7 +54,7 @@ public:
 
     virtual bool Show( bool show = true );
 
-    virtual bool ShowFullScreen( bool show, long style = wxFULLSCREEN_ALL );
+    virtual bool ShowFullScreen( bool show, unsigned int style = wxFULLSCREEN_ALL );
     virtual bool IsFullScreen() const { return m_fsIsShowing; }
 
     virtual void SetTitle( const wxString& title);

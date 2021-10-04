@@ -345,7 +345,7 @@ enum wxPosixPermissions
             #define wxFtell ftello
         #endif
     #else
-        inline constexpr wxChar wxFileOffsetFmtSpec[] = wxT("");
+        constexpr wxChar wxFileOffsetFmtSpec[] = wxT("");
     #endif
     // functions
     #define   wxClose      close
@@ -421,7 +421,7 @@ inline int wxMkDir(const wxString& path, mode_t mode)
     #define wxO_BINARY 0
 #endif
 
-inline constexpr int wxInvalidOffset = -1;
+constexpr auto wxInvalidOffset = static_cast<unsigned int>(-1);
 
 // ----------------------------------------------------------------------------
 // functions
@@ -494,24 +494,24 @@ WXDLLIMPEXP_BASE bool wxIsExecutable(const wxString &path);
 // ----------------------------------------------------------------------------
 
 // between file name and extension
-inline constexpr wxChar wxFILE_SEP_EXT        = wxT('.');
+constexpr wxChar wxFILE_SEP_EXT        = wxT('.');
 
 // between drive/volume name and the path
-inline constexpr wxChar wxFILE_SEP_DSK        = wxT(':');
+constexpr wxChar wxFILE_SEP_DSK        = wxT(':');
 
 // between the path components
-inline constexpr wxChar wxFILE_SEP_PATH_DOS   = wxT('\\');
-inline constexpr wxChar wxFILE_SEP_PATH_UNIX  = wxT('/');
-inline constexpr wxChar wxFILE_SEP_PATH_MAC   = wxT(':');
-inline constexpr wxChar wxFILE_SEP_PATH_VMS   = wxT('.'); // VMS also uses '[' and ']'
+constexpr wxChar wxFILE_SEP_PATH_DOS   = wxT('\\');
+constexpr wxChar wxFILE_SEP_PATH_UNIX  = wxT('/');
+constexpr wxChar wxFILE_SEP_PATH_MAC   = wxT(':');
+constexpr wxChar wxFILE_SEP_PATH_VMS   = wxT('.'); // VMS also uses '[' and ']'
 
 // separator in the path list (as in PATH environment variable)
 // there is no PATH variable in Classic Mac OS so just use the
 // semicolon (it must be different from the file name separator)
 // NB: these are strings and not characters on purpose!
-inline constexpr wxChar wxPATH_SEP_DOS[]        = wxT(";");
-inline constexpr wxChar wxPATH_SEP_UNIX[]       = wxT(":");
-inline constexpr wxChar wxPATH_SEP_MAC[]        = wxT(";");
+constexpr wxChar wxPATH_SEP_DOS[]        = wxT(";");
+constexpr wxChar wxPATH_SEP_UNIX[]       = wxT(":");
+constexpr wxChar wxPATH_SEP_MAC[]        = wxT(";");
 
 // platform independent versions
 #if defined(__UNIX__)
@@ -567,7 +567,7 @@ WXDLLIMPEXP_BASE time_t wxFileModificationTime(const wxString& filename);
 // The arrays will contain an equal number of items found before the error.
 // wildCard is in the form:
 // "All files (*)|*|Image Files (*.jpeg *.png)|*.jpg;*.png"
-WXDLLIMPEXP_BASE int wxParseCommonDialogsFilter(const wxString& wildCard, std::vector<wxString>& descriptions, std::vector<wxString>& filters);
+WXDLLIMPEXP_BASE std::size_t wxParseCommonDialogsFilter(const wxString& wildCard, std::vector<wxString>& descriptions, std::vector<wxString>& filters);
 
 // ----------------------------------------------------------------------------
 // classes

@@ -20,9 +20,9 @@ class WXDLLIMPEXP_FWD_CORE wxSpinButton;
 // ----------------------------------------------------------------------------
 
 // change the page: to the next/previous/given one
-inline constexpr wxChar wxACTION_NOTEBOOK_NEXT[]      = wxT("nexttab");
-inline constexpr wxChar wxACTION_NOTEBOOK_PREV[]      = wxT("prevtab");
-inline constexpr wxChar wxACTION_NOTEBOOK_GOTO[]      = wxT("gototab");
+constexpr wxChar wxACTION_NOTEBOOK_NEXT[]      = wxT("nexttab");
+constexpr wxChar wxACTION_NOTEBOOK_PREV[]      = wxT("prevtab");
+constexpr wxChar wxACTION_NOTEBOOK_GOTO[]      = wxT("gototab");
 
 // ----------------------------------------------------------------------------
 // wxNotebook
@@ -40,7 +40,7 @@ public:
                wxWindowID id,
                const wxPoint& pos = wxDefaultPosition,
                const wxSize& size = wxDefaultSize,
-               long style = 0,
+               unsigned int style = 0,
                const wxString& name = wxASCII_STR(wxNotebookNameStr))
     {
         Init();
@@ -53,7 +53,7 @@ public:
                 wxWindowID id,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = 0,
+                unsigned int style = 0,
                 const wxString& name = wxASCII_STR(wxNotebookNameStr));
 
     ~wxNotebook();

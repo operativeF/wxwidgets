@@ -23,43 +23,43 @@ class WXDLLIMPEXP_FWD_CORE wxTextCtrlCommandProcessor;
 // ----------------------------------------------------------------------------
 
 // cursor movement and also selection and delete operations
-inline constexpr wxChar wxACTION_TEXT_GOTO[]          = wxT("goto");  // to pos in numArg
-inline constexpr wxChar wxACTION_TEXT_FIRST[]         = wxT("first"); // go to pos 0
-inline constexpr wxChar wxACTION_TEXT_LAST[]          = wxT("last");  // go to last pos
-inline constexpr wxChar wxACTION_TEXT_HOME[]          = wxT("home");
-inline constexpr wxChar wxACTION_TEXT_END[]           = wxT("end");
-inline constexpr wxChar wxACTION_TEXT_LEFT[]          = wxT("left");
-inline constexpr wxChar wxACTION_TEXT_RIGHT[]         = wxT("right");
-inline constexpr wxChar wxACTION_TEXT_UP[]            = wxT("up");
-inline constexpr wxChar wxACTION_TEXT_DOWN[]          = wxT("down");
-inline constexpr wxChar wxACTION_TEXT_WORD_LEFT[]     = wxT("wordleft");
-inline constexpr wxChar wxACTION_TEXT_WORD_RIGHT[]    = wxT("wordright");
-inline constexpr wxChar wxACTION_TEXT_PAGE_UP[]       = wxT("pageup");
-inline constexpr wxChar wxACTION_TEXT_PAGE_DOWN[]     = wxT("pagedown");
+constexpr wxChar wxACTION_TEXT_GOTO[]          = wxT("goto");  // to pos in numArg
+constexpr wxChar wxACTION_TEXT_FIRST[]         = wxT("first"); // go to pos 0
+constexpr wxChar wxACTION_TEXT_LAST[]          = wxT("last");  // go to last pos
+constexpr wxChar wxACTION_TEXT_HOME[]          = wxT("home");
+constexpr wxChar wxACTION_TEXT_END[]           = wxT("end");
+constexpr wxChar wxACTION_TEXT_LEFT[]          = wxT("left");
+constexpr wxChar wxACTION_TEXT_RIGHT[]         = wxT("right");
+constexpr wxChar wxACTION_TEXT_UP[]            = wxT("up");
+constexpr wxChar wxACTION_TEXT_DOWN[]          = wxT("down");
+constexpr wxChar wxACTION_TEXT_WORD_LEFT[]     = wxT("wordleft");
+constexpr wxChar wxACTION_TEXT_WORD_RIGHT[]    = wxT("wordright");
+constexpr wxChar wxACTION_TEXT_PAGE_UP[]       = wxT("pageup");
+constexpr wxChar wxACTION_TEXT_PAGE_DOWN[]     = wxT("pagedown");
 
 // clipboard operations
-inline constexpr wxChar wxACTION_TEXT_COPY[]          = wxT("copy");
-inline constexpr wxChar wxACTION_TEXT_CUT[]           = wxT("cut");
-inline constexpr wxChar wxACTION_TEXT_PASTE[]         = wxT("paste");
+constexpr wxChar wxACTION_TEXT_COPY[]          = wxT("copy");
+constexpr wxChar wxACTION_TEXT_CUT[]           = wxT("cut");
+constexpr wxChar wxACTION_TEXT_PASTE[]         = wxT("paste");
 
 // insert text at the cursor position: the text is in strArg of PerformAction
-inline constexpr wxChar wxACTION_TEXT_INSERT[]        = wxT("insert");
+constexpr wxChar wxACTION_TEXT_INSERT[]        = wxT("insert");
 
 // if the action starts with either of these prefixes and the rest of the
 // string is one of the movement commands, it means to select/delete text from
 // the current cursor position to the new one
-inline constexpr wxChar wxACTION_TEXT_PREFIX_SEL[]    = wxT("sel");
-inline constexpr wxChar wxACTION_TEXT_PREFIX_DEL[]    = wxT("del");
+constexpr wxChar wxACTION_TEXT_PREFIX_SEL[]    = wxT("sel");
+constexpr wxChar wxACTION_TEXT_PREFIX_DEL[]    = wxT("del");
 
 // mouse selection
-inline constexpr wxChar wxACTION_TEXT_ANCHOR_SEL[]    = wxT("anchorsel");
-inline constexpr wxChar wxACTION_TEXT_EXTEND_SEL[]    = wxT("extendsel");
-inline constexpr wxChar wxACTION_TEXT_SEL_WORD[]      = wxT("wordsel");
-inline constexpr wxChar wxACTION_TEXT_SEL_LINE[]      = wxT("linesel");
+constexpr wxChar wxACTION_TEXT_ANCHOR_SEL[]    = wxT("anchorsel");
+constexpr wxChar wxACTION_TEXT_EXTEND_SEL[]    = wxT("extendsel");
+constexpr wxChar wxACTION_TEXT_SEL_WORD[]      = wxT("wordsel");
+constexpr wxChar wxACTION_TEXT_SEL_LINE[]      = wxT("linesel");
 
 // undo or redo
-inline constexpr wxChar wxACTION_TEXT_UNDO[]          = wxT("undo");
-inline constexpr wxChar wxACTION_TEXT_REDO[]          = wxT("redo");
+constexpr wxChar wxACTION_TEXT_UNDO[]          = wxT("undo");
+constexpr wxChar wxACTION_TEXT_REDO[]          = wxT("redo");
 
 // ----------------------------------------------------------------------------
 // wxTextCtrl
@@ -79,7 +79,7 @@ public:
                const wxString& value = wxEmptyString,
                const wxPoint& pos = wxDefaultPosition,
                const wxSize& size = wxDefaultSize,
-               long style = 0,
+               unsigned int style = 0,
                const wxValidator& validator = wxDefaultValidator,
                const wxString& name = wxASCII_STR(wxTextCtrlNameStr))
         : wxScrollHelper(this)
@@ -94,7 +94,7 @@ public:
                 const wxString& value = wxEmptyString,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = 0,
+                unsigned int style = 0,
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxASCII_STR(wxTextCtrlNameStr));
 

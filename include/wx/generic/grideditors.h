@@ -197,7 +197,7 @@ class WXDLLIMPEXP_CORE wxGridCellFloatEditor : public wxGridCellTextEditor
 public:
     wxGridCellFloatEditor(int width = -1,
                           int precision = -1,
-                          int format = wxGRID_FLOAT_FORMAT_DEFAULT);
+                          unsigned int format = wxGRID_FLOAT_FORMAT_DEFAULT);
 
     void Create(wxWindow* parent,
                         wxWindowID id,
@@ -228,7 +228,7 @@ private:
         m_precision;
     double m_value;
 
-    int m_style;
+    unsigned int m_style;
     std::string m_format;
 
     wxGridCellFloatEditor(const wxGridCellFloatEditor&) = delete;

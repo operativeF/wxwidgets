@@ -95,7 +95,7 @@ wxListbook::Create(wxWindow *parent,
 // wxListCtrl flags
 // ----------------------------------------------------------------------------
 
-long wxListbook::GetListCtrlFlags() const
+unsigned int wxListbook::GetListCtrlFlags() const
 {
     // We'd like to always use wxLC_ICON mode but it doesn't work with the
     // native wxListCtrl under MSW unless we do have icons for all the items,
@@ -106,7 +106,7 @@ long wxListbook::GetListCtrlFlags() const
     // seem anything to do about it, so we have to use wxLC_REPORT mode in this
     // case there.
 
-    long flags = IsVertical() ? wxLC_ALIGN_LEFT : wxLC_ALIGN_TOP;
+    unsigned int flags = IsVertical() ? wxLC_ALIGN_LEFT : wxLC_ALIGN_TOP;
     if ( GetImageList() )
     {
         flags |= wxLC_ICON;
@@ -159,7 +159,7 @@ void wxListbook::OnSize(wxSizeEvent& event)
     event.Skip();
 }
 
-int wxListbook::HitTest(const wxPoint& pt, long *flags) const
+int wxListbook::HitTest(const wxPoint& pt, unsigned int* flags) const
 {
     int pagePos = wxNOT_FOUND;
 
@@ -173,7 +173,7 @@ int wxListbook::HitTest(const wxPoint& pt, long *flags) const
     // is the point inside list control?
     if ( wxRect(list->GetSize()).Contains(listPt) )
     {
-        int flagsList;
+        unsigned int flagsList{};
         pagePos = list->HitTest(listPt, flagsList);
 
         if ( flags )

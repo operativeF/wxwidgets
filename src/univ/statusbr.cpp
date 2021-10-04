@@ -45,7 +45,7 @@ void wxStatusBarUniv::Init()
 
 bool wxStatusBarUniv::Create(wxWindow *parent,
                              wxWindowID id,
-                             long style,
+                             unsigned int style,
                              const wxString& name)
 {
     if ( !wxWindow::Create(parent, id,

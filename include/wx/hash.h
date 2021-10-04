@@ -17,7 +17,7 @@
 class WXDLLIMPEXP_FWD_BASE wxObject;
 
 // the default size of the hash
-inline constexpr int wxHASH_SIZE_DEFAULT = 1000;
+constexpr unsigned int wxHASH_SIZE_DEFAULT = 1000;
 
 /*
  * A hash table is an array of user-definable size with lists

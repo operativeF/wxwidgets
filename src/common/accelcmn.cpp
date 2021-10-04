@@ -149,7 +149,7 @@ static int IsNumberedAccelKey(const wxString& str,
 
 /* static */
 bool
-wxAcceleratorEntry::ParseAccel(const std::string& text, int *flagsOut, int *keyOut)
+wxAcceleratorEntry::ParseAccel(const std::string& text, unsigned int* flagsOut, int *keyOut)
 {
     // the parser won't like trailing spaces
     std::string label = text;
@@ -167,7 +167,7 @@ wxAcceleratorEntry::ParseAccel(const std::string& text, int *flagsOut, int *keyO
         posTab++;
 
     // parse the accelerator string
-    int accelFlags = wxACCEL_NORMAL;
+    unsigned int accelFlags = wxACCEL_NORMAL;
     wxString current;
     for ( size_t n = (size_t)posTab; n < label.length(); n++ )
     {
@@ -303,8 +303,8 @@ std::optional<wxAcceleratorEntry> wxAcceleratorEntry::Create(const std::string& 
         return std::nullopt;
     }
 
-    int flags{0};
-    int keyCode{0};
+    unsigned int flags{};
+    int keyCode{};
     if ( !ParseAccel(accelStr, &flags, &keyCode) )
         return std::nullopt;
 
@@ -330,7 +330,7 @@ std::string wxAcceleratorEntry::AsPossiblyLocalizedString(bool localized) const
 {
     wxString text;
 
-    const int flags = GetFlags();
+    const unsigned int flags = GetFlags();
     if ( flags & wxACCEL_ALT )
         text += PossiblyLocalize(wxTRANSLATE("Alt+"), localized);
     if ( flags & wxACCEL_CTRL )

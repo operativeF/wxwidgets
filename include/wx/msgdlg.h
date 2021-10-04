@@ -22,7 +22,7 @@
 
 #include <fmt/core.h>
 
-inline constexpr char wxMessageBoxCaptionStr[] = "Message";
+constexpr char wxMessageBoxCaptionStr[] = "Message";
 
 // ----------------------------------------------------------------------------
 // wxMessageDialogBase: base class defining wxMessageDialog interface
@@ -149,7 +149,7 @@ public:
         m_dialogStyle = style;
     }
 
-    long GetMessageDialogStyle() const { return m_dialogStyle; }
+    unsigned int GetMessageDialogStyle() const { return m_dialogStyle; }
 
     // customization of the message box buttons
     virtual bool SetYesNoLabels(const ButtonLabel& yes,const ButtonLabel& no)
@@ -212,7 +212,7 @@ public:
     // based on message dialog style, returns exactly one of: wxICON_NONE,
     // wxICON_ERROR, wxICON_WARNING, wxICON_QUESTION, wxICON_INFORMATION,
     // wxICON_AUTH_NEEDED
-    virtual long GetEffectiveIcon() const
+    virtual unsigned int GetEffectiveIcon() const
     {
         if ( m_dialogStyle & wxICON_NONE )
             return wxICON_NONE;
@@ -257,7 +257,7 @@ private:
 
 // FIXME: Make protected variables private.
 protected:
-    long m_dialogStyle{0};
+    unsigned int m_dialogStyle{0};
 
     // this function is called by our public SetXXXLabels() and should assign
     // the value to var with possibly some transformation (e.g. Cocoa version

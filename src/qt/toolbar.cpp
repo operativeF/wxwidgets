@@ -158,7 +158,7 @@ wxToolBar::~wxToolBar()
 }
 
 bool wxToolBar::Create(wxWindow *parent, wxWindowID id, const wxPoint& pos,
-                       const wxSize& size, long style, const wxString& name)
+                       const wxSize& size, unsigned int style, const wxString& name)
 {
     m_qtToolBar = new wxQtToolbar( parent, this );
     m_qtToolBar->setWindowTitle( wxQtConvertString( name ) );
@@ -217,7 +217,7 @@ void wxToolBar::SetToolDisabledBitmap( int id, const wxBitmap& bitmap )
     }
 }
 
-void wxToolBar::SetWindowStyleFlag( long style )
+void wxToolBar::SetWindowStyleFlag( unsigned int style )
 {
     wxToolBarBase::SetWindowStyleFlag(style);
 

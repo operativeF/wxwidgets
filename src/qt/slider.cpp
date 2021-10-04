@@ -56,7 +56,7 @@ wxSlider::wxSlider(wxWindow *parent,
          int value, int minValue, int maxValue,
          const wxPoint& pos,
          const wxSize& size,
-         long style,
+         unsigned int style,
          const wxValidator& validator,
          const wxString& name)
 {
@@ -68,7 +68,7 @@ bool wxSlider::Create(wxWindow *parent,
             int WXUNUSED(value), int minValue, int maxValue,
             const wxPoint& pos,
             const wxSize& size,
-            long style,
+            unsigned int style,
             const wxValidator& validator,
             const wxString& name)
 {

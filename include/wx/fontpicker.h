@@ -23,8 +23,8 @@
 
 class WXDLLIMPEXP_FWD_CORE wxFontPickerEvent;
 
-inline constexpr char wxFontPickerCtrlNameStr[] = "fontpicker";
-inline constexpr char wxFontPickerWidgetNameStr[] = "fontpickerwidget";
+constexpr char wxFontPickerCtrlNameStr[] = "fontpicker";
+constexpr char wxFontPickerWidgetNameStr[] = "fontpickerwidget";
 
 // ----------------------------------------------------------------------------
 // wxFontPickerWidgetBase: a generic abstract interface which must be
@@ -64,13 +64,12 @@ protected:
 //      updates the wxFontButtonGeneric's label (overwriting any previous label)
 //      with the "Times New Roman, 10" text (only fontface + fontsize is displayed
 //      to avoid extralong labels).
-#define wxFNTP_FONTDESC_AS_LABEL      0x0008
+constexpr unsigned int wxFNTP_FONTDESC_AS_LABEL      = 0x0008;
 
 // uses the currently selected font to draw the label of the button
-#define wxFNTP_USEFONT_FOR_LABEL      0x0010
+constexpr unsigned int wxFNTP_USEFONT_FOR_LABEL      = 0x0010;
 
-#define wxFONTBTN_DEFAULT_STYLE \
-    (wxFNTP_FONTDESC_AS_LABEL | wxFNTP_USEFONT_FOR_LABEL)
+constexpr unsigned int wxFONTBTN_DEFAULT_STYLE = wxFNTP_FONTDESC_AS_LABEL | wxFNTP_USEFONT_FOR_LABEL;
 
 // native version currently only exists in wxGTK2
 #if defined(__WXGTK20__) && !defined(__WXUNIVERSAL__)
@@ -86,8 +85,8 @@ protected:
 // wxFontPickerCtrl specific flags
 // ----------------------------------------------------------------------------
 
-#define wxFNTP_USE_TEXTCTRL       (wxPB_USE_TEXTCTRL)
-#define wxFNTP_DEFAULT_STYLE      (wxFNTP_FONTDESC_AS_LABEL|wxFNTP_USEFONT_FOR_LABEL)
+constexpr unsigned int wxFNTP_USE_TEXTCTRL       = wxPB_USE_TEXTCTRL;
+constexpr unsigned int wxFNTP_DEFAULT_STYLE      = wxFNTP_FONTDESC_AS_LABEL|wxFNTP_USEFONT_FOR_LABEL;
 
 // not a style but rather the default value of the minimum/maximum pointsize allowed
 #define wxFNTP_MINPOINT_SIZE      0

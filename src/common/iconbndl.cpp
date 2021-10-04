@@ -249,7 +249,7 @@ void wxIconBundle::AddIcon(const std::string& resourceName, WXHINSTANCE module)
 
 #endif // defined(__WINDOWS__) && wxUSE_ICO_CUR
 
-wxIcon wxIconBundle::GetIcon(const wxSize& size, int flags) const
+wxIcon wxIconBundle::GetIcon(const wxSize& size, unsigned int flags) const
 {
     wxASSERT( size == wxDefaultSize || (size.x >= 0 && size.y > 0) );
 

@@ -30,23 +30,23 @@ class wxTextSizerWrapper;
 
 // Also see the bit summary table in wx/toplevel.h.
 
-inline constexpr int wxDIALOG_NO_PARENT = 0x00000020;  // Don't make owned by apps top window
+constexpr unsigned int wxDIALOG_NO_PARENT = 0x00000020;  // Don't make owned by apps top window
 
-inline constexpr int wxDEFAULT_DIALOG_STYLE = wxCAPTION | wxSYSTEM_MENU | wxCLOSE_BOX;
+constexpr unsigned int wxDEFAULT_DIALOG_STYLE = wxCAPTION | wxSYSTEM_MENU | wxCLOSE_BOX;
 
 // Layout adaptation levels, for SetLayoutAdaptationLevel
 
 // Don't do any layout adaptation
-inline constexpr int wxDIALOG_ADAPTATION_NONE = 0;
+constexpr unsigned int wxDIALOG_ADAPTATION_NONE = 0;
 
 // Only look for wxStdDialogButtonSizer for non-scrolling part
-inline constexpr int wxDIALOG_ADAPTATION_STANDARD_SIZER = 1;
+constexpr unsigned int wxDIALOG_ADAPTATION_STANDARD_SIZER = 1;
 
 // Also look for any suitable sizer for non-scrolling part
-inline constexpr int wxDIALOG_ADAPTATION_ANY_SIZER = 2;
+constexpr unsigned int wxDIALOG_ADAPTATION_ANY_SIZER = 2;
 
 // Also look for 'loose' standard buttons for non-scrolling part
-inline constexpr int wxDIALOG_ADAPTATION_LOOSE_BUTTONS = 3;
+constexpr unsigned int wxDIALOG_ADAPTATION_LOOSE_BUTTONS = 3;
 
 // Layout adaptation mode, for SetLayoutAdaptationMode
 enum class wxDialogLayoutAdaptationMode
@@ -63,7 +63,7 @@ enum class wxDialogModality
     AppModal
 };
 
-inline constexpr char wxDialogNameStr[] = "dialog";
+constexpr char wxDialogNameStr[] = "dialog";
 
 class WXDLLIMPEXP_CORE wxDialogBase : public wxNavigationEnabled<wxTopLevelWindow>
 {
@@ -153,10 +153,10 @@ public:
     //
     // this is just a combination of CreateButtonSizer() and
     // CreateSeparatedSizer()
-    wxSizer *CreateSeparatedButtonSizer(long flags);
+    wxSizer *CreateSeparatedButtonSizer(unsigned int flags);
 
 #if wxUSE_BUTTON
-    wxStdDialogButtonSizer *CreateStdDialogButtonSizer( long flags );
+    wxStdDialogButtonSizer *CreateStdDialogButtonSizer( unsigned int flags );
 #endif // wxUSE_BUTTON
 
     // Do layout adaptation

@@ -21,7 +21,7 @@
 class WXDLLIMPEXP_FWD_BASE wxString;
 
 // the error value returned by wxMBConv methods
-inline constexpr auto wxCONV_FAILED = std::numeric_limits<size_t>::max();
+constexpr auto wxCONV_FAILED = std::numeric_limits<size_t>::max();
 
 // ----------------------------------------------------------------------------
 // wxMBConv (abstract base class for conversions)

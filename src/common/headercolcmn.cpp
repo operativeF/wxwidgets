@@ -19,9 +19,9 @@
 // wxHeaderColumn implementation
 // ============================================================================
 
-int wxHeaderColumn::GetFromIndividualFlags() const
+unsigned int wxHeaderColumn::GetFromIndividualFlags() const
 {
-    int flags = 0;
+    unsigned int flags = 0;
 
     if ( IsResizeable() )
         flags |= wxCOL_RESIZABLE;
@@ -39,7 +39,7 @@ int wxHeaderColumn::GetFromIndividualFlags() const
 // wxSettableHeaderColumn implementation
 // ============================================================================
 
-void wxSettableHeaderColumn::SetIndividualFlags(int flags)
+void wxSettableHeaderColumn::SetIndividualFlags(unsigned int flags)
 {
     SetResizeable((flags & wxCOL_RESIZABLE) != 0);
     SetSortable((flags & wxCOL_SORTABLE) != 0);
@@ -47,27 +47,27 @@ void wxSettableHeaderColumn::SetIndividualFlags(int flags)
     SetHidden((flags & wxCOL_HIDDEN) != 0);
 }
 
-void wxSettableHeaderColumn::ChangeFlag(int flag, bool set)
+void wxSettableHeaderColumn::ChangeFlag(unsigned int flag, bool set)
 {
     if ( HasFlag(flag) != set )
         ToggleFlag(flag);
 }
 
-void wxSettableHeaderColumn::SetFlag(int flag)
+void wxSettableHeaderColumn::SetFlag(unsigned int flag)
 {
     const int flags = GetFlags();
     if ( !(flags & flag) )
         SetFlags(flags | flag);
 }
 
-void wxSettableHeaderColumn::ClearFlag(int flag)
+void wxSettableHeaderColumn::ClearFlag(unsigned int flag)
 {
     const int flags = GetFlags();
     if ( flags & flag )
         SetFlags(flags & ~flag);
 }
 
-void wxSettableHeaderColumn::ToggleFlag(int flag)
+void wxSettableHeaderColumn::ToggleFlag(unsigned int flag)
 {
     int flags = GetFlags();
     if ( flags & flag )

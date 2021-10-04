@@ -63,7 +63,7 @@ public:
                 wxWindowID id,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = 0,
+                unsigned int style = 0,
                 const wxString& name = wxASCII_STR(wxPanelNameStr));
 
     wxWindowQt (const  wxWindowQt &) = delete;
@@ -73,7 +73,7 @@ public:
                 wxWindowID id,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = 0,
+                unsigned int style = 0,
                 const wxString& name = wxASCII_STR(wxPanelNameStr));
 
     // Used by all window classes in the widget creation process.
@@ -126,7 +126,7 @@ public:
                                const wxRect* rect = NULL ) override;
 
     // Styles
-    void SetWindowStyleFlag( long style ) override;
+    void SetWindowStyleFlag( unsigned int style ) override;
     void SetExtraStyle( long exStyle ) override;
 
     bool SetBackgroundStyle(wxBackgroundStyle style) override;

@@ -22,7 +22,7 @@ class wxQtFileDialog : public wxQtEventSignalHandler< QFileDialog, wxDialog >
 public:
     wxQtFileDialog( wxWindow *parent, wxDialog *handler,
                     const wxString& message, const wxString& defaultDir,
-                    const wxString& defaultFile, const wxString& wildCard, long style )
+                    const wxString& defaultFile, const wxString& wildCard, unsigned int style )
         : wxQtEventSignalHandler<QFileDialog,wxDialog>(parent, handler)
     {
         setLabelText(QFileDialog::LookIn, wxQtConvertString(message));
@@ -76,7 +76,7 @@ wxFileDialog::wxFileDialog(wxWindow *parent,
                            const wxString& defaultDir,
                            const wxString& defaultFile,
                            const wxString& wildCard,
-                           long style,
+                           unsigned int style,
                            const wxPoint& pos,
                            const wxSize& sz,
                            const wxString& name)
@@ -90,7 +90,7 @@ bool wxFileDialog::Create(wxWindow *parent,
                           const wxString& defaultDir,
                           const wxString& defaultFile,
                           const wxString& wildCard,
-                          long style,
+                          unsigned int style,
                           const wxPoint& pos,
                           const wxSize& sz,
                           const wxString& name)
@@ -203,7 +203,7 @@ public:
                   wxDialog *handler,
                   const wxString& message,
                   const wxString& defaultPath,
-                  long style )
+                  unsigned int style )
 
         : wxQtFileDialog( parent, handler, message, defaultPath, "", "",
                           (style & wxDD_DIR_MUST_EXIST ? wxFD_FILE_MUST_EXIST : 0) |
@@ -219,7 +219,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxDirDialog, wxDialog);
 wxDirDialog::wxDirDialog(wxWindow *parent,
                          const wxString& message,
                          const wxString& defaultPath,
-                         long style,
+                         unsigned int style,
                          const wxPoint& pos,
                          const wxSize& size,
                          const wxString& name)
@@ -230,7 +230,7 @@ wxDirDialog::wxDirDialog(wxWindow *parent,
 bool wxDirDialog::Create(wxWindow *parent,
                          const wxString& message,
                          const wxString& defaultPath,
-                         long style,
+                         unsigned int style,
                          const wxPoint& pos,
                          const wxSize& size,
                          const wxString& name)

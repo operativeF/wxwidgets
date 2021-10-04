@@ -173,7 +173,7 @@ public:
     }
 
 
-    wxSizerFlags& Border(int direction, int borderInPixels)
+    wxSizerFlags& Border(unsigned int direction, int borderInPixels)
     {
         wxCHECK_MSG( !(direction & ~wxALL), *this,
                      wxS("direction must be a combination of wxDirection ")
@@ -187,7 +187,7 @@ public:
         return *this;
     }
 
-    wxSizerFlags& Border(int direction = wxALL)
+    wxSizerFlags& Border(unsigned int direction = wxALL)
     {
 #if wxUSE_BORDER_BY_DEFAULT
         return Border(direction, wxRound(GetDefaultBorderFractional()));
@@ -199,7 +199,7 @@ public:
 #endif
     }
 
-    wxSizerFlags& DoubleBorder(int direction = wxALL)
+    wxSizerFlags& DoubleBorder(unsigned int direction = wxALL)
     {
 #if wxUSE_BORDER_BY_DEFAULT
         return Border(direction, wxRound(2 * GetDefaultBorderFractional()));
@@ -210,7 +210,7 @@ public:
 #endif
     }
 
-    wxSizerFlags& TripleBorder(int direction = wxALL)
+    wxSizerFlags& TripleBorder(unsigned int direction = wxALL)
     {
 #if wxUSE_BORDER_BY_DEFAULT
         return Border(direction, wxRound(3 * GetDefaultBorderFractional()));
@@ -271,7 +271,7 @@ private:
 #endif // wxNEEDS_BORDER_IN_PX
 
     int m_proportion;
-    int m_flags;
+    unsigned int m_flags;
     int m_borderInPixels;
 };
 
@@ -414,9 +414,9 @@ public:
         { m_proportion = proportion; }
     int GetProportion() const
         { return m_proportion; }
-    void SetFlag( int flag )
+    void SetFlag( unsigned int flag )
         { m_flag = flag; }
-    int GetFlag() const
+    unsigned int GetFlag() const
         { return m_flag; }
     void SetBorder( int border )
         { m_border = border; }
@@ -515,7 +515,7 @@ protected:
 
     int          m_proportion{0};
     int          m_border{0};
-    int          m_flag{0};
+    unsigned int m_flag{};
     int          m_id{wxID_NONE};
 
     // Aspect ratio can always be calculated from m_size,

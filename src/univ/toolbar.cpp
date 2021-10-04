@@ -169,7 +169,7 @@ bool wxToolBar::Create(wxWindow *parent,
                        wxWindowID id,
                        const wxPoint& pos,
                        const wxSize& size,
-                       long style,
+                       unsigned int style,
                        const wxString& name)
 {
     if ( !wxToolBarBase::Create(parent, id, pos, size, style,
@@ -440,7 +440,7 @@ bool wxToolBar::Realize()
     return true;
 }
 
-void wxToolBar::SetWindowStyleFlag( long style )
+void wxToolBar::SetWindowStyleFlag( unsigned int style )
 {
     wxToolBarBase::SetWindowStyleFlag(style);
 

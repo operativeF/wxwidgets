@@ -27,7 +27,7 @@ typedef wxString wxControlAction;
 // the list of actions which apply to all controls (other actions are defined
 // in the controls headers)
 
-inline constexpr wxChar wxACTION_NONE[]    = wxT("");           // no action to perform
+constexpr wxChar wxACTION_NONE[]    = wxT("");           // no action to perform
 
 // ----------------------------------------------------------------------------
 // wxInputConsumer: mix-in class for handling wxControlActions (used by

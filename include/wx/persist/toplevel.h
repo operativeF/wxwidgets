@@ -21,7 +21,7 @@
 // we use just "Window" to keep configuration files and such short, there
 // should be no confusion with wxWindow itself as we don't have persistent
 // windows, just persistent controls which have their own specific kind strings
-inline constexpr char wxPERSIST_TLW_KIND[] = "Window";
+constexpr char wxPERSIST_TLW_KIND[] = "Window";
 
 // ----------------------------------------------------------------------------
 // wxPersistentTLW: supports saving/restoring window position and size as well

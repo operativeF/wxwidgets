@@ -85,7 +85,7 @@ public:
     // create a new event loop source wrapping the given file descriptor and
     // monitor it for events occurring on this descriptor in all event loops
     static wxEventLoopSource *
-      AddSourceForFD(int fd, wxEventLoopSourceHandler *handler, int flags);
+      AddSourceForFD(int fd, wxEventLoopSourceHandler *handler, unsigned int flags);
 #endif // wxUSE_EVENTLOOP_SOURCE
 
     // dispatch&processing

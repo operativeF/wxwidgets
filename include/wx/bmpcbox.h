@@ -33,7 +33,7 @@ class WXDLLIMPEXP_FWD_CORE wxItemContainer;
 class WXDLLIMPEXP_FWD_CORE wxDC;
 #endif
 
-inline constexpr char wxBitmapComboBoxNameStr[] = "bitmapComboBox";
+constexpr char wxBitmapComboBoxNameStr[] = "bitmapComboBox";
 
 
 class WXDLLIMPEXP_CORE wxBitmapComboBoxBase

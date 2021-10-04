@@ -31,7 +31,7 @@ enum
 class WXDLLEXPORT wxWrapSizer : public wxBoxSizer
 {
 public:
-    wxWrapSizer(int orient = wxHORIZONTAL, int flags = wxWRAPSIZER_DEFAULT_FLAGS);
+    wxWrapSizer(unsigned int orient = wxHORIZONTAL, unsigned int flags = wxWRAPSIZER_DEFAULT_FLAGS);
     ~wxWrapSizer();
 
     wxWrapSizer(const wxWrapSizer&) = delete;
@@ -80,7 +80,7 @@ protected:
     void FinishRow(size_t n, int rowMajor, int rowMinor, wxSizerItem *itemLast);
 
 
-    const int m_flags;       // Flags specified in the ctor
+    const unsigned int m_flags;       // Flags specified in the ctor
 
     int m_dirInform{0};         // Direction for size information
     int m_availSize{-1};         // Size available in m_dirInform direction

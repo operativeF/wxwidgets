@@ -61,7 +61,7 @@ class wxCrashReportImpl
 public:
     explicit wxCrashReportImpl(const wxChar *filename);
 
-    bool Generate(int flags, EXCEPTION_POINTERS *ep);
+    bool Generate(unsigned int flags, EXCEPTION_POINTERS *ep);
 
     ~wxCrashReportImpl()
     {
@@ -134,7 +134,7 @@ void wxCrashReportImpl::Output(const wxChar *format, ...)
     va_end(argptr);
 }
 
-bool wxCrashReportImpl::Generate(int flags, EXCEPTION_POINTERS *ep)
+bool wxCrashReportImpl::Generate(unsigned int flags, EXCEPTION_POINTERS *ep)
 {
     if ( m_hFile == INVALID_HANDLE_VALUE )
         return false;
@@ -162,7 +162,7 @@ bool wxCrashReportImpl::Generate(int flags, EXCEPTION_POINTERS *ep)
                         WXSIZEOF(envFlags)
                     );
 
-    int flagsEnv;
+    unsigned int flagsEnv;
     if ( dwLen && dwLen < WXSIZEOF(envFlags) &&
             wxSscanf(envFlags, wxT("%d"), &flagsEnv) == 1 )
     {

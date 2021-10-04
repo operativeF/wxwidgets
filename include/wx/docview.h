@@ -58,7 +58,7 @@ enum
 };
 
 // TODO: Should this be adjustable?
-inline constexpr int wxMAX_FILE_HISTORY = 9;
+constexpr unsigned int wxMAX_FILE_HISTORY = 9;
 
 using wxDocVector = std::vector<wxDocument *>;
 using wxViewVector = std::vector<wxView *>;

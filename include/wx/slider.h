@@ -27,23 +27,23 @@
 // wxSlider flags
 // ----------------------------------------------------------------------------
 
-inline constexpr int wxSL_HORIZONTAL = wxHORIZONTAL; /* 0x0004 */
-inline constexpr int wxSL_VERTICAL   = wxVERTICAL;   /* 0x0008 */
+constexpr unsigned int wxSL_HORIZONTAL = wxHORIZONTAL; /* 0x0004 */
+constexpr unsigned int wxSL_VERTICAL   = wxVERTICAL;   /* 0x0008 */
 
-inline constexpr int wxSL_TICKS           = 0x0010;
-inline constexpr int wxSL_AUTOTICKS       = wxSL_TICKS; // we don't support manual ticks
-inline constexpr int wxSL_LEFT            = 0x0040;
-inline constexpr int wxSL_TOP             = 0x0080;
-inline constexpr int wxSL_RIGHT           = 0x0100;
-inline constexpr int wxSL_BOTTOM          = 0x0200;
-inline constexpr int wxSL_BOTH            = 0x0400;
-inline constexpr int wxSL_SELRANGE        = 0x0800;
-inline constexpr int wxSL_INVERSE         = 0x1000;
-inline constexpr int wxSL_MIN_MAX_LABELS  = 0x2000;
-inline constexpr int wxSL_VALUE_LABEL     = 0x4000;
-inline constexpr int wxSL_LABELS          = wxSL_MIN_MAX_LABELS | wxSL_VALUE_LABEL;
+constexpr unsigned int wxSL_TICKS           = 0x0010;
+constexpr unsigned int wxSL_AUTOTICKS       = wxSL_TICKS; // we don't support manual ticks
+constexpr unsigned int wxSL_LEFT            = 0x0040;
+constexpr unsigned int wxSL_TOP             = 0x0080;
+constexpr unsigned int wxSL_RIGHT           = 0x0100;
+constexpr unsigned int wxSL_BOTTOM          = 0x0200;
+constexpr unsigned int wxSL_BOTH            = 0x0400;
+constexpr unsigned int wxSL_SELRANGE        = 0x0800;
+constexpr unsigned int wxSL_INVERSE         = 0x1000;
+constexpr unsigned int wxSL_MIN_MAX_LABELS  = 0x2000;
+constexpr unsigned int wxSL_VALUE_LABEL     = 0x4000;
+constexpr unsigned int wxSL_LABELS          = wxSL_MIN_MAX_LABELS | wxSL_VALUE_LABEL;
 
-inline constexpr char wxSliderNameStr[] = "slider";
+constexpr char wxSliderNameStr[] = "slider";
 
 // ----------------------------------------------------------------------------
 // wxSliderBase: define wxSlider interface

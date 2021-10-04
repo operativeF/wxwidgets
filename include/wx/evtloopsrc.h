@@ -23,7 +23,7 @@
 
 #if wxUSE_EVENTLOOP_SOURCE
 
-inline constexpr char wxTRACE_EVT_SOURCE[] = "EventSource";
+constexpr char wxTRACE_EVT_SOURCE[] = "EventSource";
 
 // handler used to process events on event loop sources
 class wxEventLoopSourceHandler
@@ -70,19 +70,19 @@ public:
     void SetHandler(wxEventLoopSourceHandler* handler) { m_handler = handler; }
     wxEventLoopSourceHandler* GetHandler() const { return m_handler; }
 
-    void SetFlags(int flags) { m_flags = flags; }
-    int GetFlags() const { return m_flags; }
+    void SetFlags(unsigned int flags) { m_flags = flags; }
+    unsigned int GetFlags() const { return m_flags; }
 
 protected:
     // ctor is only used by the derived classes
-    wxEventLoopSource(wxEventLoopSourceHandler *handler, int flags)
+    wxEventLoopSource(wxEventLoopSourceHandler *handler, unsigned int flags)
         : m_handler(handler),
           m_flags(flags)
     {
     }
 
     wxEventLoopSourceHandler* m_handler;
-    int m_flags;
+    unsigned int m_flags;
 };
 
 inline wxEventLoopSource::~wxEventLoopSource() { }

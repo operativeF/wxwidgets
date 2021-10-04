@@ -129,7 +129,7 @@ public:
     // empty) and flags, return true on success
     bool GetFirst(wxString *filename,
                   const wxString& filespec = wxEmptyString,
-                  int flags = wxDIR_DEFAULT) const;
+                  unsigned int flags = wxDIR_DEFAULT) const;
 
     // get next file in the enumeration started with GetFirst()
     bool GetNext(wxString *filename) const;

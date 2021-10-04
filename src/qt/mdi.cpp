@@ -47,7 +47,7 @@ wxMDIParentFrame::wxMDIParentFrame(wxWindow *parent,
                  const wxString& title,
                  const wxPoint& pos,
                  const wxSize& size,
-                 long style,
+                 unsigned int style,
                  const wxString& name)
 {
     (void)Create(parent, id, title, pos, size, style, name);
@@ -58,7 +58,7 @@ bool wxMDIParentFrame::Create(wxWindow *parent,
             const wxString& title,
             const wxPoint& pos,
             const wxSize& size,
-            long style,
+            unsigned int style,
             const wxString& name)
 {
     m_qtWindow = new wxQtMDIParentFrame( parent, this );
@@ -99,7 +99,7 @@ wxMDIChildFrame::wxMDIChildFrame(wxMDIParentFrame *parent,
                 const wxString& title,
                 const wxPoint& pos,
                 const wxSize& size,
-                long style,
+                unsigned int style,
                 const wxString& name)
 {
     Create(parent, id, title, pos, size, style, name);
@@ -110,7 +110,7 @@ bool wxMDIChildFrame::Create(wxMDIParentFrame *parent,
             const wxString& title,
             const wxPoint& pos,
             const wxSize& size,
-            long style,
+            unsigned int style,
             const wxString& name)
 {
     m_mdiParent = parent;

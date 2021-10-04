@@ -47,7 +47,7 @@ class WXDLLIMPEXP_CORE wxNumValidatorBase : public wxValidator
 {
 public:
     // Change the validator style. Usually it's specified during construction.
-    void SetStyle(int style) { m_style = style; }
+    void SetStyle(unsigned int style) { m_style = style; }
 
 
     // Override base class method to not do anything but always return success:
@@ -59,7 +59,7 @@ public:
     void SetWindow(wxWindow *win) override;
 
 protected:
-    wxNumValidatorBase(int style)
+    wxNumValidatorBase(unsigned int style)
     {
         m_style = style;
     }
@@ -83,7 +83,7 @@ protected:
 
     // Convert wxNUM_VAL_THOUSANDS_SEPARATOR and wxNUM_VAL_NO_TRAILING_ZEROES
     // bits of our style to the corresponding wxNumberFormatter::Style values.
-    int GetFormatFlags() const;
+    unsigned int GetFormatFlags() const;
 
     // Return the string which would result from inserting the given character
     // at the specified position.
@@ -127,7 +127,7 @@ private:
 
 
     // Combination of wxVAL_NUM_XXX values.
-    int m_style;
+    unsigned int m_style;
 
 
     wxDECLARE_EVENT_TABLE();

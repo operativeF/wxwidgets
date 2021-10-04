@@ -575,7 +575,7 @@ int wxMessageDialog::ShowModal()
     return ShowMessageBox();
 }
 
-long wxMessageDialog::GetEffectiveIcon() const
+unsigned int wxMessageDialog::GetEffectiveIcon() const
 {
     // only use the auth needed icon if available, otherwise fallback to the default logic
     if ( (m_dialogStyle & wxICON_AUTH_NEEDED) &&
@@ -587,7 +587,7 @@ long wxMessageDialog::GetEffectiveIcon() const
     return wxMessageDialogBase::GetEffectiveIcon();
 }
 
-void wxMessageDialog::DoCentre(int dir)
+void wxMessageDialog::DoCentre(unsigned int dir)
 {
 #ifdef wxHAS_MSW_TASKDIALOG
     // Task dialog is always centered on its parent window and trying to center

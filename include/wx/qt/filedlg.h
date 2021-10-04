@@ -19,7 +19,7 @@ public:
                  const wxString& defaultDir = wxEmptyString,
                  const wxString& defaultFile = wxEmptyString,
                  const wxString& wildCard = wxASCII_STR(wxFileSelectorDefaultWildcardStr),
-                 long style = wxFD_DEFAULT_STYLE,
+                 unsigned int style = wxFD_DEFAULT_STYLE,
                  const wxPoint& pos = wxDefaultPosition,
                  const wxSize& sz = wxDefaultSize,
                  const wxString& name = wxASCII_STR(wxFileDialogNameStr));
@@ -28,7 +28,7 @@ public:
                  const wxString& defaultDir = wxEmptyString,
                  const wxString& defaultFile = wxEmptyString,
                  const wxString& wildCard = wxASCII_STR(wxFileSelectorDefaultWildcardStr),
-                 long style = wxFD_DEFAULT_STYLE,
+                 unsigned int style = wxFD_DEFAULT_STYLE,
                  const wxPoint& pos = wxDefaultPosition,
                  const wxSize& sz = wxDefaultSize,
                  const wxString& name = wxASCII_STR(wxFileDialogNameStr));

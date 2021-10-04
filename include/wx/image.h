@@ -24,16 +24,16 @@
 #include <string>
 #include <vector>
 
-inline constexpr char wxIMAGE_OPTION_QUALITY[] =         "quality";
-inline constexpr char wxIMAGE_OPTION_FILENAME[] =        "FileName";
-inline constexpr char wxIMAGE_OPTION_RESOLUTION[] =      "Resolution";
-inline constexpr char wxIMAGE_OPTION_RESOLUTIONX[] =     "ResolutionX";
-inline constexpr char wxIMAGE_OPTION_RESOLUTIONY[] =     "ResolutionY";
-inline constexpr char wxIMAGE_OPTION_RESOLUTIONUNIT[] =  "ResolutionUnit";
-inline constexpr char wxIMAGE_OPTION_MAX_WIDTH[] =       "MaxWidth";
-inline constexpr char wxIMAGE_OPTION_MAX_HEIGHT[] =      "MaxHeight";
-inline constexpr char wxIMAGE_OPTION_ORIGINAL_WIDTH[] =  "OriginalWidth";
-inline constexpr char wxIMAGE_OPTION_ORIGINAL_HEIGHT[] = "OriginalHeight";
+constexpr char wxIMAGE_OPTION_QUALITY[] =         "quality";
+constexpr char wxIMAGE_OPTION_FILENAME[] =        "FileName";
+constexpr char wxIMAGE_OPTION_RESOLUTION[] =      "Resolution";
+constexpr char wxIMAGE_OPTION_RESOLUTIONX[] =     "ResolutionX";
+constexpr char wxIMAGE_OPTION_RESOLUTIONY[] =     "ResolutionY";
+constexpr char wxIMAGE_OPTION_RESOLUTIONUNIT[] =  "ResolutionUnit";
+constexpr char wxIMAGE_OPTION_MAX_WIDTH[] =       "MaxWidth";
+constexpr char wxIMAGE_OPTION_MAX_HEIGHT[] =      "MaxHeight";
+constexpr char wxIMAGE_OPTION_ORIGINAL_WIDTH[] =  "OriginalWidth";
+constexpr char wxIMAGE_OPTION_ORIGINAL_HEIGHT[] = "OriginalHeight";
 
 // constants used with wxIMAGE_OPTION_RESOLUTIONUNIT
 //
@@ -80,9 +80,9 @@ enum wxImageAlphaBlendMode
 // transparent pixels from opaque for a few functions dealing with alpha and
 // fully opaque
 
-inline constexpr unsigned char wxIMAGE_ALPHA_TRANSPARENT = 0;
-inline constexpr unsigned char wxIMAGE_ALPHA_THRESHOLD = 0x80;
-inline constexpr unsigned char wxIMAGE_ALPHA_OPAQUE = 0xff;
+constexpr unsigned char wxIMAGE_ALPHA_TRANSPARENT = 0;
+constexpr unsigned char wxIMAGE_ALPHA_THRESHOLD = 0x80;
+constexpr unsigned char wxIMAGE_ALPHA_OPAQUE = 0xff;
 
 //-----------------------------------------------------------------------------
 // classes

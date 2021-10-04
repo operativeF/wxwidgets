@@ -124,7 +124,7 @@ wxListBox::wxListBox(wxWindow *parent,
                      const wxPoint &pos,
                      const wxSize &size,
                      const wxArrayString& choices,
-                     long style,
+                     unsigned int style,
                      const wxValidator& validator,
                      const wxString &name)
           :wxScrollHelper(this)
@@ -139,7 +139,7 @@ bool wxListBox::Create(wxWindow *parent,
                        const wxPoint &pos,
                        const wxSize &size,
                        const wxArrayString& choices,
-                       long style,
+                       unsigned int style,
                        const wxValidator& validator,
                        const wxString &name)
 {
@@ -155,7 +155,7 @@ bool wxListBox::Create(wxWindow *parent,
                        const wxSize &size,
                        int n,
                        const wxString choices[],
-                       long style,
+                       unsigned int style,
                        const wxValidator& validator,
                        const wxString &name)
 {

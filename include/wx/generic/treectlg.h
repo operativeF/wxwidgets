@@ -311,7 +311,7 @@ protected:
                                        const wxString& text,
                                        int image = -1, int selImage = -1,
                                        wxTreeItemData *data = nullptr) override;
-    wxTreeItemId DoTreeHitTest(const wxPoint& point, int& flags) const override;
+    wxTreeItemId DoTreeHitTest(const wxPoint& point, unsigned int& flags) const override;
 
     // called by wxTextTreeCtrl when it marks itself for deletion
     void ResetTextControl();

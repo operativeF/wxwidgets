@@ -15,7 +15,7 @@
 // actions
 // ----------------------------------------------------------------------------
 
-inline constexpr wxChar wxACTION_CHECKLISTBOX_TOGGLE[] = wxT("toggle");
+constexpr wxChar wxACTION_CHECKLISTBOX_TOGGLE[] = wxT("toggle");
 
 // ----------------------------------------------------------------------------
 // wxCheckListBox
@@ -33,7 +33,7 @@ public:
                    const wxSize& size = wxDefaultSize,
                    int nStrings = 0,
                    const wxString choices[] = NULL,
-                   long style = 0,
+                   unsigned int style = 0,
                    const wxValidator& validator = wxDefaultValidator,
                    const wxString& name = wxASCII_STR(wxListBoxNameStr))
     {
@@ -46,7 +46,7 @@ public:
                    const wxPoint& pos,
                    const wxSize& size,
                    const wxArrayString& choices,
-                   long style = 0,
+                   unsigned int style = 0,
                    const wxValidator& validator = wxDefaultValidator,
                    const wxString& name = wxASCII_STR(wxListBoxNameStr));
 
@@ -56,7 +56,7 @@ public:
                 const wxSize& size = wxDefaultSize,
                 int nStrings = 0,
                 const wxString choices[] = (const wxString *) NULL,
-                long style = 0,
+                unsigned int style = 0,
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxASCII_STR(wxListBoxNameStr));
     bool Create(wxWindow *parent,
@@ -64,7 +64,7 @@ public:
                 const wxPoint& pos,
                 const wxSize& size,
                 const wxArrayString& choices,
-                long style = 0,
+                unsigned int style = 0,
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxASCII_STR(wxListBoxNameStr));
 

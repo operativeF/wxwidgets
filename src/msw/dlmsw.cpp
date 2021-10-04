@@ -56,11 +56,11 @@ static wxString GetFileVersion(const wxString& filename)
     const wxChar *pc = const_cast<wxChar *>((const wxChar*) filename.t_str());
 
     DWORD dummy;
-    const DWORD sizeVerInfo = ::GetFileVersionInfoSize(pc, &dummy);
+    const DWORD sizeVerInfo = ::GetFileVersionInfoSizeW(pc, &dummy);
     if ( sizeVerInfo )
     {
         wxCharBuffer buf(sizeVerInfo);
-        if ( ::GetFileVersionInfo(pc, 0, sizeVerInfo, buf.data()) )
+        if ( ::GetFileVersionInfoW(pc, 0, sizeVerInfo, buf.data()) )
         {
             void *pVer;
             UINT sizeInfo;
@@ -134,7 +134,7 @@ wxDynamicLibraryDetailsCreator::EnumModulesProc(const wxChar* name,
 
 wxDllType wxDynamicLibrary::GetProgramHandle()
 {
-    return (wxDllType)::GetModuleHandle(nullptr);
+    return (wxDllType)::GetModuleHandleW(nullptr);
 }
 
 // ----------------------------------------------------------------------------

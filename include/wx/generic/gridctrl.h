@@ -15,8 +15,8 @@
 
 #if wxUSE_GRID
 
-inline constexpr char wxGRID_VALUE_CHOICEINT[]    = "choiceint";
-inline constexpr char wxGRID_VALUE_DATETIME[]     = "datetime";
+constexpr char wxGRID_VALUE_CHOICEINT[]    = "choiceint";
+constexpr char wxGRID_VALUE_DATETIME[]     = "datetime";
 
 
 // the default renderer for the cells containing string data
@@ -100,8 +100,8 @@ public:
     void SetWidth(int width) { m_width = width; m_format.clear(); }
     int GetPrecision() const { return m_precision; }
     void SetPrecision(int precision) { m_precision = precision; m_format.clear(); }
-    int GetFormat() const { return m_style; }
-    void SetFormat(int format) { m_style = format; m_format.clear(); }
+    unsigned int GetFormat() const { return m_style; }
+    void SetFormat(unsigned int format) { m_style = format; m_format.clear(); }
 
     // draw the string right aligned with given width/precision
     void Draw(wxGrid& grid,
@@ -130,7 +130,7 @@ private:
     int m_width,
         m_precision;
 
-    int m_style;
+    unsigned int m_style;
     std::string m_format;
 };
 

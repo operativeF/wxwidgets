@@ -20,7 +20,7 @@ public:
             const wxPoint& pos = wxDefaultPosition,
             const wxSize& size = wxDefaultSize,
             int n = 0, const wxString choices[] = NULL,
-            long style = 0,
+            unsigned int style = 0,
             const wxValidator& validator = wxDefaultValidator,
             const wxString& name = wxASCII_STR(wxListBoxNameStr));
 
@@ -28,7 +28,7 @@ public:
             const wxPoint& pos,
             const wxSize& size,
             const wxArrayString& choices,
-            long style = 0,
+            unsigned int style = 0,
             const wxValidator& validator = wxDefaultValidator,
             const wxString& name = wxASCII_STR(wxListBoxNameStr));
 
@@ -38,14 +38,14 @@ public:
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 int n = 0, const wxString choices[] = NULL,
-                long style = 0,
+                unsigned int style = 0,
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxASCII_STR(wxListBoxNameStr));
     bool Create(wxWindow *parent, wxWindowID id,
                 const wxPoint& pos,
                 const wxSize& size,
                 const wxArrayString& choices,
-                long style = 0,
+                unsigned int style = 0,
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxASCII_STR(wxListBoxNameStr));
 
@@ -91,7 +91,7 @@ private:
     virtual void Init(); //common construction
 
     // Common part of both Create() overloads.
-    void DoCreate(wxWindow* parent, long style);
+    void DoCreate(wxWindow* parent, unsigned int style);
 
     void UnSelectAll();
 

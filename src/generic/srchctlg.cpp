@@ -120,7 +120,7 @@ protected:
     // at all.
     wxSize DoGetBestSize() const override
     {
-        const long flags = GetWindowStyleFlag();
+        const unsigned int flags = GetWindowStyleFlag();
         wxSearchTextCtrl* const self = const_cast<wxSearchTextCtrl*>(this);
 
         self->SetWindowStyleFlag((flags & ~wxBORDER_MASK) | wxBORDER_DEFAULT);

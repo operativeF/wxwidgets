@@ -2951,7 +2951,7 @@ int wxRibbonMSWArtProvider::GetTabCtrlHeight(
 wxSize wxRibbonMSWArtProvider::GetScrollButtonMinimumSize(
                         wxDC& WXUNUSED(dc),
                         wxWindow* WXUNUSED(wnd),
-                        long WXUNUSED(style))
+                        unsigned int WXUNUSED(style))
 {
     return {12, 12};
 }

@@ -612,7 +612,7 @@ public:
     void OnDrawItem( wxDC& dc,
                              const wxRect& rect,
                              int item,
-                             int flags ) const override
+                             unsigned int flags ) const override
     {
         wxPropertyGrid* pg = GetGrid();
 

@@ -21,9 +21,9 @@ class WXDLLIMPEXP_FWD_CORE wxListBox;
 // ----------------------------------------------------------------------------
 
 // choose the next/prev/specified (by numArg) item
-inline constexpr wxChar wxACTION_COMBOBOX_SELECT_NEXT[] = wxT("next");
-inline constexpr wxChar wxACTION_COMBOBOX_SELECT_PREV[] = wxT("prev");
-inline constexpr wxChar wxACTION_COMBOBOX_SELECT[]      = wxT("select");
+constexpr wxChar wxACTION_COMBOBOX_SELECT_NEXT[] = wxT("next");
+constexpr wxChar wxACTION_COMBOBOX_SELECT_PREV[] = wxT("prev");
+constexpr wxChar wxACTION_COMBOBOX_SELECT[]      = wxT("select");
 
 
 // ----------------------------------------------------------------------------
@@ -47,7 +47,7 @@ public:
                const wxSize& size = wxDefaultSize,
                int n = 0,
                const wxString choices[] = (const wxString *) NULL,
-               long style = 0,
+               unsigned int style = 0,
                const wxValidator& validator = wxDefaultValidator,
                const wxString& name = wxASCII_STR(wxComboBoxNameStr))
     {
@@ -62,7 +62,7 @@ public:
                const wxPoint& pos,
                const wxSize& size,
                const wxArrayString& choices,
-               long style = 0,
+               unsigned int style = 0,
                const wxValidator& validator = wxDefaultValidator,
                const wxString& name = wxASCII_STR(wxComboBoxNameStr));
 
@@ -73,7 +73,7 @@ public:
                 const wxSize& size = wxDefaultSize,
                 int n = 0,
                 const wxString choices[] = (const wxString *) NULL,
-                long style = 0,
+                unsigned int style = 0,
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxASCII_STR(wxComboBoxNameStr));
     bool Create(wxWindow *parent,
@@ -82,7 +82,7 @@ public:
                 const wxPoint& pos,
                 const wxSize& size,
                 const wxArrayString& choices,
-                long style = 0,
+                unsigned int style = 0,
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxASCII_STR(wxComboBoxNameStr));
 

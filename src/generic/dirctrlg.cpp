@@ -341,7 +341,7 @@ bool wxGenericDirCtrl::Create(wxWindow *parent,
     SetBackgroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_3DFACE));
     SetForegroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOWTEXT));
 
-    long treeStyle = wxTR_HAS_BUTTONS;
+    unsigned int treeStyle = wxTR_HAS_BUTTONS;
 
     treeStyle |= wxTR_HIDE_ROOT;
 
@@ -410,7 +410,7 @@ bool wxGenericDirCtrl::Create(wxWindow *parent,
     return true;
 }
 
-wxTreeCtrl* wxGenericDirCtrl::CreateTreeCtrl(wxWindow *parent, wxWindowID treeid, const wxPoint& pos, const wxSize& size, long treeStyle)
+wxTreeCtrl* wxGenericDirCtrl::CreateTreeCtrl(wxWindow *parent, wxWindowID treeid, const wxPoint& pos, const wxSize& size, unsigned int treeStyle)
 {
     return new wxTreeCtrl(parent, treeid, pos, size, treeStyle);
 }

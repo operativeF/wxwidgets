@@ -121,7 +121,7 @@ public:
                                    const wxBitmap& bitmap,
                                    const wxRect& rect,
                                    int flags = 0,
-                                   long style = 0,
+                                   unsigned int style = 0,
                                    int tbarStyle = 0);
 #endif // wxUSE_TOOLBAR
 
@@ -141,13 +141,13 @@ public:
                                  int lenThumb,
                                  wxOrientation orient,
                                  int flags = 0,
-                                 long style = 0,
+                                 unsigned int style = 0,
                                  wxRect *rectShaft = NULL);
     virtual void DrawSliderThumb(wxDC& dc,
                                  const wxRect& rect,
                                  wxOrientation orient,
                                  int flags = 0,
-                                 long style = 0);
+                                 unsigned int style = 0);
     virtual void DrawSliderTicks(wxDC& dc,
                                  const wxRect& rect,
                                  int lenThumb,
@@ -156,7 +156,7 @@ public:
                                  int end,
                                  int step = 1,
                                  int flags = 0,
-                                 long style = 0);
+                                 unsigned int style = 0);
 #endif // wxUSE_SLIDER
 
 #if wxUSE_MENUS
@@ -230,7 +230,7 @@ public:
     virtual wxRect GetSliderShaftRect(const wxRect& rect,
                                       int lenThumb,
                                       wxOrientation orient,
-                                      long style = 0) const;
+                                      unsigned int style = 0) const;
     virtual wxSize GetSliderThumbSize(const wxRect& rect,
                                       int lenThumb,
                                       wxOrientation orient) const;
@@ -298,7 +298,7 @@ protected:
     // Fill the arguments with true or false if this slider has labels on
     // left/right side (or top/bottom for horizontal sliders) respectively
     static
-    void GetSliderLabelsSides(wxOrientation orient, long style,
+    void GetSliderLabelsSides(wxOrientation orient, unsigned int style,
                               bool *left, bool *right)
     {
         // should we draw ticks at all?
@@ -1723,7 +1723,7 @@ void wxWin32Renderer::DrawToolBarButton(wxDC& dc,
                                         const wxBitmap& bitmap,
                                         const wxRect& rectOrig,
                                         int flags,
-                                        long style,
+                                        unsigned int style,
                                         int tbarStyle)
 {
     if (style == wxToolBarToolStyle::Button)
@@ -2003,7 +2003,7 @@ wxWin32Renderer::GetSliderThumbSize(const wxRect& WXUNUSED(rect),
 wxRect wxWin32Renderer::GetSliderShaftRect(const wxRect& rectOrig,
                                            int lenThumb,
                                            wxOrientation orient,
-                                           long style) const
+                                           unsigned int style) const
 {
     bool left, right;
     GetSliderLabelsSides(orient, style, &left, &right);
@@ -2057,7 +2057,7 @@ void wxWin32Renderer::DrawSliderShaft(wxDC& dc,
                                       int lenThumb,
                                       wxOrientation orient,
                                       int flags,
-                                      long style,
+                                      unsigned int style,
                                       wxRect *rectShaft)
 {
     /*    show shaft geometry
@@ -2092,7 +2092,7 @@ void wxWin32Renderer::DrawSliderThumb(wxDC& dc,
                                       const wxRect& rect,
                                       wxOrientation orient,
                                       int flags,
-                                      long style)
+                                      unsigned int style)
 {
     /*    show thumb geometry
 
@@ -2224,7 +2224,7 @@ void wxWin32Renderer::DrawSliderTicks(wxDC& dc,
                                       int end,
                                       int step,
                                       int WXUNUSED(flags),
-                                      long style)
+                                      unsigned int style)
 {
     /*    show ticks geometry
 

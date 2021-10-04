@@ -146,7 +146,7 @@ wxDataViewCtrl::wxDataViewCtrl()
 
 wxDataViewCtrl::wxDataViewCtrl( wxWindow *parent, wxWindowID id,
        const wxPoint& pos,
-       const wxSize& size, long style,
+       const wxSize& size, unsigned int style,
        const wxValidator& validator)
 {
 }
@@ -159,7 +159,7 @@ wxDataViewCtrl::~wxDataViewCtrl()
 
 bool wxDataViewCtrl::Create(wxWindow *parent, wxWindowID id,
        const wxPoint& pos,
-       const wxSize& size, long style,
+       const wxSize& size, unsigned int style,
        const wxValidator& validator)
 {
     return false;

@@ -1575,7 +1575,7 @@ void wxHtmlWidgetCell::Draw(wxDC& WXUNUSED(dc),
                             int WXUNUSED(view_y1), int WXUNUSED(view_y2),
                             wxHtmlRenderingInfo& WXUNUSED(info))
 {
-    int absx = 0, absy = 0, stx, sty;
+    int absx = 0, absy = 0;
     wxHtmlCell *c = this;
 
     while (c)

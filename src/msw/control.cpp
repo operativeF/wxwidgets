@@ -495,7 +495,7 @@ bool wxMSWOwnerDrawnButtonBase::MSWDrawButton(WXDRAWITEMSTRUCT *item)
     // shall we draw a focus rect?
     const bool isFocused = m_isPressed || m_win->HasFocus();
 
-    int flags = MSWGetButtonCheckedFlag();
+    unsigned int flags = MSWGetButtonCheckedFlag();
 
     if ( dis->itemState & ODS_SELECTED )
         flags |= wxCONTROL_SELECTED | wxCONTROL_PRESSED;

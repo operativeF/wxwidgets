@@ -218,7 +218,7 @@ void wxCheckBox::MSWOnButtonResetOwnerDrawn()
     DoSet3StateValue(m_state);
 }
 
-int wxCheckBox::MSWGetButtonCheckedFlag() const
+unsigned int wxCheckBox::MSWGetButtonCheckedFlag() const
 {
     switch ( Get3StateValue() )
     {
@@ -238,7 +238,7 @@ int wxCheckBox::MSWGetButtonCheckedFlag() const
     return 0;
 }
 
-void wxCheckBox::MSWDrawButtonBitmap(wxDC& dc, const wxRect& rect, int flags)
+void wxCheckBox::MSWDrawButtonBitmap(wxDC& dc, const wxRect& rect, unsigned int flags)
 {
     wxRendererNative::Get().DrawCheckBox(this, dc, rect, flags);
 }

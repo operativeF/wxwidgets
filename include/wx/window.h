@@ -106,7 +106,7 @@ enum wxWindowVariant
 };
 
 #if wxUSE_SYSTEM_OPTIONS
-    inline constexpr wxChar wxWINDOW_DEFAULT_VARIANT[] = wxT("window-default-variant");
+    constexpr wxChar wxWINDOW_DEFAULT_VARIANT[] = wxT("window-default-variant");
 #endif
 
 // valid values for Show/HideWithEffect()
@@ -323,7 +323,7 @@ public:
     void SetSize( wxSize sz )
         { DoSetSize( wxRect{wxDefaultCoord, wxDefaultCoord, sz.x, sz.y}, wxSIZE_USE_EXISTING ); }
 
-    void Move(wxPoint pos, int flags = wxSIZE_USE_EXISTING)
+    void Move(wxPoint pos, unsigned int flags = wxSIZE_USE_EXISTING)
         { DoSetSize( wxRect{pos.x, pos.y, wxDefaultCoord, wxDefaultCoord}, flags); }
 
     void SetPosition(const wxPoint& pt) { Move(pt); }
@@ -436,12 +436,12 @@ public:
         // the generic centre function - centers the window on parent by`
         // default or on screen if it doesn't have parent or
         // wxCENTER_ON_SCREEN flag is given
-    void Centre(int dir = wxBOTH) { DoCentre(dir); }
-    void Center(int dir = wxBOTH) { DoCentre(dir); }
+    void Centre(unsigned int dir = wxBOTH) { DoCentre(dir); }
+    void Center(unsigned int dir = wxBOTH) { DoCentre(dir); }
 
         // centre with respect to the parent window
-    void CentreOnParent(int dir = wxBOTH) { DoCentre(dir); }
-    void CenterOnParent(int dir = wxBOTH) { CentreOnParent(dir); }
+    void CentreOnParent(unsigned int dir = wxBOTH) { DoCentre(dir); }
+    void CenterOnParent(unsigned int dir = wxBOTH) { CentreOnParent(dir); }
 
         // set window size to wrap around its children
     virtual void Fit();
@@ -563,14 +563,14 @@ public:
     // by default the event is sent, i.e. processed immediately, but if flags
     // value includes wxSEND_EVENT_POST then it's posted, i.e. only schedule
     // for later processing
-    virtual void SendSizeEvent(int flags = 0);
+    virtual void SendSizeEvent(unsigned int flags = 0);
 
     // this is a safe wrapper for GetParent()->SendSizeEvent(): it checks that
     // we have a parent window and it's not in process of being deleted
     //
     // this is used by controls such as tool/status bars changes to which must
     // also result in parent re-layout
-    void SendSizeEventToParent(int flags = 0);
+    void SendSizeEventToParent(unsigned int flags = 0);
 
     // this is a more readable synonym for SendSizeEvent(wxSEND_EVENT_POST)
     void PostSizeEvent() { SendSizeEvent(wxSEND_EVENT_POST); }
@@ -674,7 +674,7 @@ public:
 
         // just some (somewhat shorter) synonyms
     void SetWindowStyle( unsigned int style ) { SetWindowStyleFlag(style); }
-    long wxGetWindowStyle() const { return GetWindowStyleFlag(); }
+    unsigned int wxGetWindowStyle() const { return GetWindowStyleFlag(); }
 
         // check if the flag is set
     bool HasFlag(unsigned int flag) const { return (m_windowStyle & flag) != 0; }
@@ -687,7 +687,7 @@ public:
         // extra style: the less often used style bits which can't be set with
         // SetWindowStyleFlag()
     virtual void SetExtraStyle(long exStyle) { m_exStyle = exStyle; }
-    long GetExtraStyle() const { return m_exStyle; }
+    unsigned int GetExtraStyle() const { return m_exStyle; }
 
     bool HasExtraStyle(int exFlag) const { return (m_exStyle & exFlag) != 0; }
 
@@ -772,12 +772,12 @@ public:
     virtual void EnableVisibleFocus(bool WXUNUSED(enabled)) { }
 
         // navigates inside this window
-    bool NavigateIn(int flags = wxNavigationKeyEvent::IsForward)
+    bool NavigateIn(unsigned int flags = wxNavigationKeyEvent::IsForward)
         { return DoNavigateIn(flags); }
 
         // navigates in the specified direction from this window, this is
         // equivalent to GetParent()->NavigateIn()
-    bool Navigate(int flags = wxNavigationKeyEvent::IsForward)
+    bool Navigate(unsigned int flags = wxNavigationKeyEvent::IsForward)
         { return m_parent && ((wxWindowBase *)m_parent)->DoNavigateIn(flags); }
 
     // this function will generate the appropriate call to Navigate() if the
@@ -1533,7 +1533,7 @@ public:
     // that we really need to use is not known until the window is actually
     // shown, as is the case for TLWs with recent GTK versions, as it will
     // update the size again when it does become known, if necessary.
-    virtual void WXSetInitialFittingClientSize(int flags);
+    virtual void WXSetInitialFittingClientSize(unsigned int flags);
 
         // get the handle of the window for the underlying window system: this
         // is only used for wxWin itself or for user code which wants to call
@@ -1643,7 +1643,7 @@ protected:
     virtual void DoMoveInTabOrder(wxWindow *win, WindowOrder move);
 
     // implementation of Navigate() and NavigateIn()
-    virtual bool DoNavigateIn(int flags);
+    virtual bool DoNavigateIn(unsigned int flags);
 
 #if wxUSE_CONSTRAINTS
     // satisfy the constraints for the windows but don't set the window sizes
@@ -1742,7 +1742,7 @@ protected:
     unsigned int m_freezeCount;
 
     unsigned int         m_windowStyle{0};
-    long                 m_exStyle;
+    unsigned int         m_exStyle;
 
     // the minimal allowed size for the window (no minimal size if variable(s)
     // contain(s) wxDefaultCoord)
@@ -1887,7 +1887,7 @@ protected:
     // centre the window in the specified direction on parent, note that
     // wxCENTRE_ON_SCREEN shouldn't be specified here, it only makes sense for
     // TLWs
-    virtual void DoCentre(int dir);
+    virtual void DoCentre(unsigned int dir);
 
 #if wxUSE_TOOLTIPS
     virtual void DoSetToolTipText( const std::string& tip );

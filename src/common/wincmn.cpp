@@ -572,7 +572,7 @@ bool wxWindowBase::DestroyChildren()
 // ----------------------------------------------------------------------------
 
 // centre the window with respect to its parent in either (or both) directions
-void wxWindowBase::DoCentre(int dir)
+void wxWindowBase::DoCentre(unsigned int dir)
 {
     wxCHECK_RET( !(dir & wxCENTRE_ON_SCREEN) && GetParent(),
                  wxT("this method only implements centering child windows") );
@@ -963,7 +963,7 @@ wxSize wxWindowBase::WindowToClientSize(const wxSize& size) const
             size.y == -1 ? -1 : size.y - diff.y};
 }
 
-void wxWindowBase::WXSetInitialFittingClientSize(int flags)
+void wxWindowBase::WXSetInitialFittingClientSize(unsigned int flags)
 {
     wxSizer* const sizer = GetSizer();
     if ( !sizer )
@@ -1067,7 +1067,7 @@ wxPoint wxWindowBase::DoGetScreenPosition() const
     return ClientToScreen(pt);
 }
 
-void wxWindowBase::SendSizeEvent(int flags)
+void wxWindowBase::SendSizeEvent(unsigned int flags)
 {
     wxSizeEvent event(GetSize(), GetId());
     event.SetEventObject(this);
@@ -1077,7 +1077,7 @@ void wxWindowBase::SendSizeEvent(int flags)
         HandleWindowEvent(event);
 }
 
-void wxWindowBase::SendSizeEventToParent(int flags)
+void wxWindowBase::SendSizeEventToParent(unsigned int flags)
 {
     wxWindow * const parent = GetParent();
     if ( parent && !parent->IsBeingDeleted() )
@@ -3425,7 +3425,7 @@ wxWindow *wxWindowBase::DoGetSibling(WindowOrder order) const
 // ----------------------------------------------------------------------------
 
 // Navigates in the specified direction inside this window
-bool wxWindowBase::DoNavigateIn(int flags)
+bool wxWindowBase::DoNavigateIn(unsigned int flags)
 {
 #ifdef wxHAS_NATIVE_TAB_TRAVERSAL
     // native code doesn't process our wxNavigationKeyEvents anyhow

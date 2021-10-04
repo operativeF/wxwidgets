@@ -32,7 +32,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxProcessEvent, wxEvent);
 // wxProcess creation
 // ----------------------------------------------------------------------------
 
-void wxProcess::Init(wxEvtHandler *parent, int id, int flags)
+void wxProcess::Init(wxEvtHandler *parent, int id, unsigned int flags)
 {
     if ( parent )
         SetNextHandler(parent);
@@ -50,7 +50,7 @@ void wxProcess::Init(wxEvtHandler *parent, int id, int flags)
 }
 
 /* static */
-wxProcess *wxProcess::Open(const wxString& cmd, int flags)
+wxProcess *wxProcess::Open(const wxString& cmd, unsigned int flags)
 {
     wxASSERT_MSG( !(flags & wxEXEC_SYNC), wxT("wxEXEC_SYNC should not be used." ));
     wxProcess *process = new wxProcess(wxPROCESS_REDIRECT);
@@ -138,7 +138,7 @@ bool wxProcess::IsErrorAvailable() const
 // ----------------------------------------------------------------------------
 
 /* static */
-wxKillError wxProcess::Kill(int pid, wxSignal sig, int flags)
+wxKillError wxProcess::Kill(int pid, wxSignal sig, unsigned int flags)
 {
     wxKillError rc;
     std::ignore = wxKill(pid, sig, &rc, flags);

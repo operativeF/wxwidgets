@@ -313,12 +313,12 @@ void wxRadioButton::MSWOnButtonResetOwnerDrawn()
                   m_isChecked ? BST_CHECKED : BST_UNCHECKED, 0);
 }
 
-int wxRadioButton::MSWGetButtonCheckedFlag() const
+unsigned int wxRadioButton::MSWGetButtonCheckedFlag() const
 {
     return m_isChecked ? wxCONTROL_CHECKED : wxCONTROL_NONE;
 }
 
-void wxRadioButton::MSWDrawButtonBitmap(wxDC& dc, const wxRect& rect, int flags)
+void wxRadioButton::MSWDrawButtonBitmap(wxDC& dc, const wxRect& rect, unsigned int flags)
 {
     wxRendererNative::Get().DrawRadioBitmap(this, dc, rect, flags);
 }

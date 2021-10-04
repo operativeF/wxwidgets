@@ -308,15 +308,15 @@ bool wxFileSystemWatcherBase::RemoveAll()
     return ret;
 }
 
-int wxFileSystemWatcherBase::GetWatchedPathsCount() const
+std::size_t wxFileSystemWatcherBase::GetWatchedPathsCount() const
 {
     return m_watches.size();
 }
 
 // TODO: Return a std::vector
-int wxFileSystemWatcherBase::GetWatchedPaths(std::vector<wxString>* paths) const
+std::size_t wxFileSystemWatcherBase::GetWatchedPaths(std::vector<wxString>* paths) const
 {
-    wxCHECK_MSG( paths != nullptr, -1, "Null array passed to retrieve paths");
+    wxCHECK_MSG( paths != nullptr, static_cast<std::size_t>(-1), "Null array passed to retrieve paths");
 
     wxFSWatchInfoMap::const_iterator it = m_watches.begin();
     for ( ; it != m_watches.end(); ++it)

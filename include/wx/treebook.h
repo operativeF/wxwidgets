@@ -136,7 +136,7 @@ public:
     bool SetPageImage(size_t n, int imageId) override;
     int SetSelection(size_t n) override { return DoSetSelection(n, SetSelection_SendEvent); }
     int ChangeSelection(size_t n) override { return DoSetSelection(n); }
-    int HitTest(const wxPoint& pt, long *flags = nullptr) const override;
+    int HitTest(const wxPoint& pt, unsigned int* flags = nullptr) const override;
     void SetImageList(wxImageList *imageList) override;
     virtual void AssignImageList(wxImageList *imageList);
     bool DeleteAllPages() override;
