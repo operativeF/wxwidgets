@@ -28,7 +28,7 @@ public:
                 wxWindowID id,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = wxTB_DEFAULT_STYLE,
+                unsigned int style = wxTB_DEFAULT_STYLE,
                 const std::string& name = wxToolBarNameStr)
     {
         Create(parent, id, pos, size, style, name);
@@ -43,7 +43,7 @@ public:
                 wxWindowID id,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = wxTB_DEFAULT_STYLE,
+                unsigned int style = wxTB_DEFAULT_STYLE,
                 const std::string& name = wxToolBarNameStr);
 
     ~wxToolBar();
@@ -66,7 +66,7 @@ public:
     // implementation only from now on
     // -------------------------------
 
-    void SetWindowStyleFlag(long style) override;
+    void SetWindowStyleFlag(unsigned int style) override;
 
     bool MSWCommand(WXUINT param, WXWORD id) override;
     bool MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result) override;
@@ -82,7 +82,7 @@ public:
     // override WndProc mainly to process WM_SIZE
     WXLRESULT MSWWindowProc(WXUINT nMsg, WXWPARAM wParam, WXLPARAM lParam) override;
 
-    WXDWORD MSWGetStyle(long style, WXDWORD *exstyle) const override;
+    DWORD MSWGetStyle(unsigned int style, DWORD *exstyle) const override;
 
     // returns true if the platform should explicitly apply a theme border
     bool CanApplyThemeBorder() const override { return false; }

@@ -142,9 +142,9 @@ protected:
     // Helper function to be called from derived classes Create()
     // implementations: it checks that the style doesn't contain any
     // incompatible bits and modifies it to be sane if it does.
-    static void WXValidateStyle(long *stylePtr)
+    static void WXValidateStyle(unsigned int* stylePtr)
     {
-        long& style = *stylePtr;
+        auto& style = *stylePtr;
 
         if ( !(style & (wxCHK_2STATE | wxCHK_3STATE)) )
         {

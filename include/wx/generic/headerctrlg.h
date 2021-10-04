@@ -30,7 +30,7 @@ public:
                  wxWindowID id = wxID_ANY,
                  const wxPoint& pos = wxDefaultPosition,
                  const wxSize& size = wxDefaultSize,
-                 long style = wxHD_DEFAULT_STYLE,
+                 unsigned int style = wxHD_DEFAULT_STYLE,
                  const std::string& name = wxHeaderCtrlNameStr)
     {
         Init();
@@ -45,7 +45,7 @@ public:
                 wxWindowID id = wxID_ANY,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = wxHD_DEFAULT_STYLE,
+                unsigned int style = wxHD_DEFAULT_STYLE,
                 const std::string& name = wxHeaderCtrlNameStr);
 
     ~wxHeaderCtrl();

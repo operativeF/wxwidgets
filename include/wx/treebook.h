@@ -45,7 +45,7 @@ public:
                wxWindowID id,
                const wxPoint& pos = wxDefaultPosition,
                const wxSize& size = wxDefaultSize,
-               long style = wxBK_DEFAULT,
+               unsigned int style = wxBK_DEFAULT,
                const std::string& name = {})
     {
         Create(parent, id, pos, size, style, name);
@@ -61,7 +61,7 @@ public:
                 wxWindowID id,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = wxBK_DEFAULT,
+                unsigned int style = wxBK_DEFAULT,
                 const std::string& name = {});
 
 

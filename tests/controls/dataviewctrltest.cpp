@@ -34,7 +34,7 @@
 class DataViewCtrlTestCase
 {
 public:
-    explicit DataViewCtrlTestCase(long style);
+    explicit DataViewCtrlTestCase(unsigned int style);
 
     DataViewCtrlTestCase(const DataViewCtrlTestCase&) = delete;
     DataViewCtrlTestCase& operator=(const DataViewCtrlTestCase&) = delete;
@@ -92,7 +92,7 @@ protected:
 // test initialization
 // ----------------------------------------------------------------------------
 
-DataViewCtrlTestCase::DataViewCtrlTestCase(long style)
+DataViewCtrlTestCase::DataViewCtrlTestCase(unsigned int style)
 {
     m_dvc = std::make_unique<wxDataViewTreeCtrl>(wxTheApp->GetTopWindow(),
                                    wxID_ANY,

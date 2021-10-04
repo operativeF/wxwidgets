@@ -41,15 +41,15 @@ bool wxRadioButton::Create(wxWindow *parent,
                            const std::string& label,
                            const wxPoint& pos,
                            const wxSize& size,
-                           long style,
+                           unsigned int style,
                            const wxValidator& validator,
                            const std::string& name)
 {
     if ( !CreateControl(parent, id, pos, size, style, validator, name) )
         return false;
 
-    WXDWORD exstyle = 0;
-    WXDWORD msStyle = MSWGetStyle(style, &exstyle);
+    DWORD exstyle = 0;
+    DWORD msStyle = MSWGetStyle(style, &exstyle);
 
     if ( !MSWCreateControl("BUTTON", msStyle, pos, size, label, exstyle) )
         return false;
@@ -272,9 +272,9 @@ wxSize wxRadioButton::DoGetBestSize() const
     return radioTextExtents;
 }
 
-WXDWORD wxRadioButton::MSWGetStyle(long style, WXDWORD *exstyle) const
+DWORD wxRadioButton::MSWGetStyle(unsigned int style, DWORD *exstyle) const
 {
-    WXDWORD msStyle = wxControl::MSWGetStyle(style, exstyle);
+    DWORD msStyle = wxControl::MSWGetStyle(style, exstyle);
 
     if ( HasFlag(wxRB_GROUP) )
         msStyle |= WS_GROUP;

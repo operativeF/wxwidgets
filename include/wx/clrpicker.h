@@ -109,7 +109,7 @@ public:
 
     wxColourPickerCtrl(wxWindow *parent, wxWindowID id,
         const wxColour& col = *wxBLACK, const wxPoint& pos = wxDefaultPosition,
-        const wxSize& size = wxDefaultSize, long style = wxCLRP_DEFAULT_STYLE,
+        const wxSize& size = wxDefaultSize, unsigned int style = wxCLRP_DEFAULT_STYLE,
         const wxValidator& validator = wxDefaultValidator,
         const std::string& name = wxColourPickerCtrlNameStr)
         { Create(parent, id, col, pos, size, style, validator, name); }
@@ -118,7 +118,7 @@ public:
            const wxColour& col = *wxBLACK,
            const wxPoint& pos = wxDefaultPosition,
            const wxSize& size = wxDefaultSize,
-           long style = wxCLRP_DEFAULT_STYLE,
+           unsigned int style = wxCLRP_DEFAULT_STYLE,
            const wxValidator& validator = wxDefaultValidator,
            const std::string& name = wxColourPickerCtrlNameStr);
 
@@ -143,7 +143,7 @@ public:
     void OnColourChange(wxColourPickerEvent &);
 
 protected:
-    long GetPickerStyle(long style) const override
+    long GetPickerStyle(unsigned int style) const override
         { return (style & (wxCLRP_SHOW_LABEL | wxCLRP_SHOW_ALPHA)); }
 
 private:

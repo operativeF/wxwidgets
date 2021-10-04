@@ -82,7 +82,7 @@ public:
                        const std::string& title,
                        const wxPoint& pos = wxDefaultPosition,
                        const wxSize& sz = wxDefaultSize,
-                       long style = wxDEFAULT_DIALOG_STYLE,
+                       unsigned int style = wxDEFAULT_DIALOG_STYLE,
                        const std::string& name = wxDialogNameStr)
     {
         Create(parent, id, title, pos, sz, style, name);
@@ -92,7 +92,7 @@ public:
                        const std::string& title,
                        const wxPoint& pos = wxDefaultPosition,
                        const wxSize& sz = wxDefaultSize,
-                       long style = wxDEFAULT_DIALOG_STYLE,
+                       unsigned int style = wxDEFAULT_DIALOG_STYLE,
                        const std::string& name = wxDialogNameStr);
 
 //// Accessors

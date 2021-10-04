@@ -51,7 +51,7 @@ enum wxTextValidatorStyle
 class WXDLLIMPEXP_CORE wxTextValidator: public wxValidator
 {
 public:
-    wxTextValidator(long style = wxFILTER_NONE, wxString *val = nullptr);
+    wxTextValidator(unsigned int style = wxFILTER_NONE, wxString *val = nullptr);
     wxTextValidator(const wxTextValidator& val);
 
     ~wxTextValidator() = default;
@@ -80,7 +80,7 @@ public:
 
     // ACCESSORS
     inline long GetStyle() const { return m_validatorStyle; }
-    void SetStyle(long style);
+    void SetStyle(unsigned int style);
 
     wxTextEntry *GetTextEntry();
 

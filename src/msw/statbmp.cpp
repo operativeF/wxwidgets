@@ -86,7 +86,7 @@ bool wxStaticBitmap::Create(wxWindow *parent,
                             const wxGDIImage& bitmap,
                             const wxPoint& pos,
                             const wxSize& size,
-                            long style,
+                            unsigned int style,
                             const std::string& name)
 {
     if ( !CreateControl(parent, id, pos, size, style, wxDefaultValidator, name) )
@@ -128,9 +128,9 @@ bool wxStaticBitmap::Create(wxWindow *parent,
     return true;
 }
 
-WXDWORD wxStaticBitmap::MSWGetStyle(long style, WXDWORD *exstyle) const
+DWORD wxStaticBitmap::MSWGetStyle(unsigned int style, DWORD *exstyle) const
 {
-    WXDWORD msStyle = wxControl::MSWGetStyle(style, exstyle);
+    DWORD msStyle = wxControl::MSWGetStyle(style, exstyle);
 
     // what kind of control are we?
     msStyle |= m_isIcon ? SS_ICON : SS_BITMAP;

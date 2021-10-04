@@ -107,7 +107,7 @@ wxBEGIN_EVENT_TABLE(MainWindow, wxFrame)
 wxEND_EVENT_TABLE()
 
 MainWindow::MainWindow(wxFrame *frame, wxWindowID id, const wxString& title,
-     const wxPoint& pos, const wxSize& size, long style):
+     const wxPoint& pos, const wxSize& size, unsigned int style):
      wxFrame(frame, id, title, pos, size, style)
 {
     m_corners[0] = m_corners[1] = m_corners[2] = m_corners[3] = NULL;

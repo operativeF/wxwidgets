@@ -111,7 +111,7 @@ wxGenericCalendarCtrl::wxGenericCalendarCtrl(wxWindow *parent,
                                              const wxDateTime& date,
                                              const wxPoint& pos,
                                              const wxSize& size,
-                                             long style,
+                                             unsigned int style,
                                              const std::string& name)
 {
     // FIXME: Can be done at compile time.
@@ -153,7 +153,7 @@ bool wxGenericCalendarCtrl::Create(wxWindow *parent,
                                    const wxDateTime& date,
                                    const wxPoint& pos,
                                    const wxSize& size,
-                                   long style,
+                                   unsigned int style,
                                    const std::string& name)
 {
     if ( !wxControl::Create(parent, id, pos, size,
@@ -216,7 +216,7 @@ wxGenericCalendarCtrl::~wxGenericCalendarCtrl()
     }
 }
 
-void wxGenericCalendarCtrl::SetWindowStyleFlag(long style)
+void wxGenericCalendarCtrl::SetWindowStyleFlag(unsigned int style)
 {
     // changing this style doesn't work because the controls are not
     // created/shown/hidden accordingly
@@ -380,7 +380,7 @@ void wxGenericCalendarCtrl::EnableYearChange(bool enable)
 {
     if ( enable != AllowYearChange() )
     {
-        long style = wxGetWindowStyle();
+        unsigned int style = wxGetWindowStyle();
         if ( enable )
             style &= ~wxCAL_NO_YEAR_CHANGE;
         else

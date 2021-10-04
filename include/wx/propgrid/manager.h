@@ -175,7 +175,7 @@ public:
     wxPropertyGridManager( wxWindow *parent, wxWindowID id = wxID_ANY,
                            const wxPoint& pos = wxDefaultPosition,
                            const wxSize& size = wxDefaultSize,
-                           long style = wxPGMAN_DEFAULT_STYLE,
+                           unsigned int style = wxPGMAN_DEFAULT_STYLE,
                            const wxString& name = wxASCII_STR(wxPropertyGridManagerNameStr) );
 
     // Destructor.
@@ -219,7 +219,7 @@ public:
     bool Create( wxWindow *parent, wxWindowID id = wxID_ANY,
                  const wxPoint& pos = wxDefaultPosition,
                  const wxSize& size = wxDefaultSize,
-                 long style = wxPGMAN_DEFAULT_STYLE,
+                 unsigned int style = wxPGMAN_DEFAULT_STYLE,
                  const wxString& name = wxASCII_STR(wxPropertyGridManagerNameStr) );
 
     // Enables or disables (shows/hides) categories according to parameter
@@ -505,7 +505,7 @@ public:
     void SetId( wxWindowID winid ) override;
     void SetExtraStyle ( long exStyle ) override;
     bool SetFont ( const wxFont& font ) override;
-    void SetWindowStyleFlag ( long style ) override;
+    void SetWindowStyleFlag ( unsigned int style ) override;
     bool Reparent( wxWindowBase *newParent ) override;
 
 protected:
@@ -591,7 +591,7 @@ protected:
     void Init2( int style );
 
 /*#ifdef __WXMSW__
-    virtual WXDWORD MSWGetStyle(long flags, WXDWORD *exstyle) const;
+    virtual DWORD MSWGetStyle(unsigned int flags, DWORD *exstyle) const;
 #endif*/
 
     bool ProcessEvent( wxEvent& event ) override;

@@ -24,7 +24,7 @@ public:
              const std::string& title,
              const wxPoint& pos = wxDefaultPosition,
              const wxSize& size = wxDefaultSize,
-             long style = wxDEFAULT_DIALOG_STYLE,
+             unsigned int style = wxDEFAULT_DIALOG_STYLE,
              const std::string& name = wxDialogNameStr)
     {
         Create(parent, id, title, pos, size, style, name);
@@ -41,7 +41,7 @@ public:
                 const std::string& title,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = wxDEFAULT_DIALOG_STYLE,
+                unsigned int style = wxDEFAULT_DIALOG_STYLE,
                 const std::string& name = wxDialogNameStr);
 
     // return true if we're showing the dialog modally
@@ -54,7 +54,7 @@ public:
     void EndModal(int retCode) override;
 
     bool Show(bool show = true) override;
-    void SetWindowStyleFlag(long style) override;
+    void SetWindowStyleFlag(unsigned int style) override;
 
     // Windows callbacks
     WXLRESULT MSWWindowProc(WXUINT message, WXWPARAM wParam, WXLPARAM lParam) override;

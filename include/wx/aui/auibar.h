@@ -481,7 +481,7 @@ public:
                  wxWindowID id = wxID_ANY,
                  const wxPoint& pos = wxDefaultPosition,
                  const wxSize& size = wxDefaultSize,
-                 long style = wxAUI_TB_DEFAULT_STYLE)
+                 unsigned int style = wxAUI_TB_DEFAULT_STYLE)
     {
         m_sizer = new wxBoxSizer(wxHORIZONTAL);
         m_art = new wxAuiDefaultToolBarArt;
@@ -497,9 +497,9 @@ public:
                 wxWindowID id = wxID_ANY,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = wxAUI_TB_DEFAULT_STYLE);
+                unsigned int style = wxAUI_TB_DEFAULT_STYLE);
 
-    void SetWindowStyleFlag(long style) override;
+    void SetWindowStyleFlag(unsigned int style) override;
 
     void SetArtProvider(wxAuiToolBarArt* art);
     wxAuiToolBarArt* GetArtProvider() const;
@@ -704,8 +704,8 @@ protected:
     bool m_overflowVisible{false};
 
     bool RealizeHelper(wxClientDC& dc, bool horizontal);
-    static bool IsPaneValid(long style, const wxAuiPaneInfo& pane);
-    bool IsPaneValid(long style) const;
+    static bool IsPaneValid(unsigned int style, const wxAuiPaneInfo& pane);
+    bool IsPaneValid(unsigned int style) const;
     void SetArtFlags() const;
     wxOrientation m_orientation{wxHORIZONTAL};
     wxSize m_horzHintSize;

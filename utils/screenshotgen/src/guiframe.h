@@ -33,7 +33,7 @@ class GUIFrame : public wxFrame
 {
 public:
 
-    GUIFrame( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("wxWidgets Control Screenshot Generator"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( -1,-1 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
+    GUIFrame( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("wxWidgets Control Screenshot Generator"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( -1,-1 ), unsigned int style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
     ~GUIFrame();
 
 protected:

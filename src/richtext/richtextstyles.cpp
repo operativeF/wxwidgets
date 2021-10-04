@@ -559,14 +559,14 @@ wxBEGIN_EVENT_TABLE(wxRichTextStyleListBox, wxHtmlListBox)
 wxEND_EVENT_TABLE()
 
 wxRichTextStyleListBox::wxRichTextStyleListBox(wxWindow* parent, wxWindowID id, const wxPoint& pos,
-    const wxSize& size, long style)
+    const wxSize& size, unsigned int style)
 {
     Init();
     Create(parent, id, pos, size, style);
 }
 
 bool wxRichTextStyleListBox::Create(wxWindow* parent, wxWindowID id, const wxPoint& pos,
-        const wxSize& size, long style)
+        const wxSize& size, unsigned int style)
 {
     return wxHtmlListBox::Create(parent, id, pos, size, style);
 }
@@ -1017,14 +1017,14 @@ wxBEGIN_EVENT_TABLE(wxRichTextStyleListCtrl, wxControl)
 wxEND_EVENT_TABLE()
 
 wxRichTextStyleListCtrl::wxRichTextStyleListCtrl(wxWindow* parent, wxWindowID id, const wxPoint& pos,
-    const wxSize& size, long style)
+    const wxSize& size, unsigned int style)
 {
     Init();
     Create(parent, id, pos, size, style);
 }
 
 bool wxRichTextStyleListCtrl::Create(wxWindow* parent, wxWindowID id, const wxPoint& pos,
-        const wxSize& size, long style)
+        const wxSize& size, unsigned int style)
 {
     if ((style & wxBORDER_MASK) == wxBORDER_DEFAULT)
         style |= wxBORDER_THEME;
@@ -1294,7 +1294,7 @@ wxBEGIN_EVENT_TABLE(wxRichTextStyleComboCtrl, wxComboCtrl)
 wxEND_EVENT_TABLE()
 
 bool wxRichTextStyleComboCtrl::Create(wxWindow* parent, wxWindowID id, const wxPoint& pos,
-        const wxSize& size, long style)
+        const wxSize& size, unsigned int style)
 {
     if (!wxComboCtrl::Create(parent, id, "", pos, size, style))
         return false;

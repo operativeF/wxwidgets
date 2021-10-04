@@ -41,7 +41,7 @@ public:
                  wxWindowID id = wxID_ANY,
                  const wxPoint& pos = wxDefaultPosition,
                  const wxSize& size = wxDefaultSize,
-                 long style = 0);
+                 unsigned int style = 0);
 
 protected:
     wxBorder GetDefaultBorder() const override { return wxBORDER_NONE; }
@@ -75,7 +75,7 @@ wxRibbonPageScrollButton::wxRibbonPageScrollButton(wxRibbonPage* sibling,
                  wxWindowID id,
                  const wxPoint& pos,
                  const wxSize& size,
-                 long style)
+                 unsigned int style)
     : wxRibbonControl(sibling->GetParent(), id, pos, size, wxBORDER_NONE),
       m_sibling(sibling),
       m_flags(style & wxRIBBON_SCROLL_BTN_DIRECTION_MASK | wxRIBBON_SCROLL_BTN_FOR_PAGE)

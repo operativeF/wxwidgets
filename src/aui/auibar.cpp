@@ -61,7 +61,7 @@ enum
     wxITEM_SPACER
 };
 
-wxOrientation GetOrientation(long style)
+wxOrientation GetOrientation(unsigned int style)
 {
     switch (style & wxAUI_ORIENTATION_MASK)
     {
@@ -827,7 +827,7 @@ bool wxAuiToolBar::Create(wxWindow* parent,
                            wxWindowID id,
                            const wxPoint& pos,
                            const wxSize& size,
-                           long style)
+                           unsigned int style)
 {
     style = style|wxBORDER_NONE;
 
@@ -864,7 +864,7 @@ wxAuiToolBar::~wxAuiToolBar()
     delete m_sizer;
 }
 
-void wxAuiToolBar::SetWindowStyleFlag(long style)
+void wxAuiToolBar::SetWindowStyleFlag(unsigned int style)
 {
     GetOrientation(style);      // assert if style is invalid
     wxCHECK_RET(IsPaneValid(style),
@@ -1668,7 +1668,7 @@ bool wxAuiToolBar::IsPaneValid(const wxAuiPaneInfo& pane) const
     return IsPaneValid(m_windowStyle, pane);
 }
 
-bool wxAuiToolBar::IsPaneValid(long style, const wxAuiPaneInfo& pane)
+bool wxAuiToolBar::IsPaneValid(unsigned int style, const wxAuiPaneInfo& pane)
 {
     if (style & wxAUI_TB_HORIZONTAL)
     {
@@ -1687,7 +1687,7 @@ bool wxAuiToolBar::IsPaneValid(long style, const wxAuiPaneInfo& pane)
     return true;
 }
 
-bool wxAuiToolBar::IsPaneValid(long style) const
+bool wxAuiToolBar::IsPaneValid(unsigned int style) const
 {
     wxAuiManager* manager = wxAuiManager::GetManager(const_cast<wxAuiToolBar*>(this));
     if (manager)

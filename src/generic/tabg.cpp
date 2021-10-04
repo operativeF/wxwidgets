@@ -499,7 +499,7 @@ bool wxTabControl::HitTest(int x, int y) const
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxTabView, wxObject);
 
-wxTabView::wxTabView(long style)
+wxTabView::wxTabView(unsigned int style)
 {
   m_noTabs = 0;
   m_tabStyle = style;
@@ -1214,7 +1214,7 @@ void wxTabbedPanel::OnPaint(wxPaintEvent& WXUNUSED(event) )
 
 wxIMPLEMENT_CLASS(wxPanelTabView, wxTabView);
 
-wxPanelTabView::wxPanelTabView(wxPanel *pan, long style)
+wxPanelTabView::wxPanelTabView(wxPanel *pan, unsigned int style)
     : wxTabView(style)
 {
   m_panel = pan;

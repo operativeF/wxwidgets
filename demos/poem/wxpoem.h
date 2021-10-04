@@ -50,7 +50,7 @@ class MainWindow: public wxFrame
 public:
     MyCanvas *canvas;
     MainWindow(wxFrame *frame, wxWindowID id, const wxString& title,
-               const wxPoint& pos, const wxSize& size, long style);
+               const wxPoint& pos, const wxSize& size, unsigned int style);
     virtual ~MainWindow();
 
     void OnCloseWindow(wxCloseEvent& event);

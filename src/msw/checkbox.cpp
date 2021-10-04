@@ -30,7 +30,7 @@ bool wxCheckBox::Create(wxWindow *parent,
                         wxWindowID id,
                         const std::string& label,
                         const wxPoint& pos,
-                        const wxSize& size, long style,
+                        const wxSize& size, unsigned int style,
                         const wxValidator& validator,
                         const std::string& name)
 {
@@ -40,18 +40,18 @@ bool wxCheckBox::Create(wxWindow *parent,
     if ( !CreateControl(parent, id, pos, size, style, validator, name) )
         return false;
 
-    WXDWORD exstyle;
-    WXDWORD msStyle = MSWGetStyle(style, &exstyle);
+    DWORD exstyle;
+    DWORD msStyle = MSWGetStyle(style, &exstyle);
 
     msStyle |= wxMSWButton::GetMultilineStyle(label);
 
     return MSWCreateControl("BUTTON", msStyle, pos, size, label, exstyle);
 }
 
-WXDWORD wxCheckBox::MSWGetStyle(long style, WXDWORD *exstyle) const
+DWORD wxCheckBox::MSWGetStyle(unsigned int style, DWORD *exstyle) const
 {
     // buttons never have an external border, they draw their own one
-    WXDWORD msStyle = wxControl::MSWGetStyle(style, exstyle);
+    DWORD msStyle = wxControl::MSWGetStyle(style, exstyle);
 
     if ( style & wxCHK_3STATE )
         msStyle |= BS_3STATE;

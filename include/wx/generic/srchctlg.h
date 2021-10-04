@@ -32,7 +32,7 @@ public:
                const std::string& value = {},
                const wxPoint& pos = wxDefaultPosition,
                const wxSize& size = wxDefaultSize,
-               long style = 0,
+               unsigned int style = 0,
                const wxValidator& validator = wxDefaultValidator,
                const std::string& name = wxSearchCtrlNameStr);
 
@@ -42,7 +42,7 @@ public:
                 const std::string& value = {},
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = 0,
+                unsigned int style = 0,
                 const wxValidator& validator = wxDefaultValidator,
                 const std::string& name = wxSearchCtrlNameStr);
 
@@ -178,7 +178,7 @@ public:
 #endif // wxUSE_MENUS
 
 protected:
-    void DoSetValue(const std::string& value, int flags) override;
+    void DoSetValue(const std::string& value, unsigned int flags) override;
     std::string DoGetValue() const override;
 
     bool DoLoadFile(const std::string& file, int fileType) override;

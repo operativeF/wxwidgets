@@ -28,7 +28,7 @@ public:
                         const wxFont &initial = wxNullFont,
                         const wxPoint& pos = wxDefaultPosition,
                         const wxSize& size = wxDefaultSize,
-                        long style = wxFONTBTN_DEFAULT_STYLE,
+                        unsigned int style = wxFONTBTN_DEFAULT_STYLE,
                         const wxValidator& validator = wxDefaultValidator,
                         const std::string& name = wxFontPickerWidgetNameStr)
     {
@@ -60,7 +60,7 @@ public:
                 const wxFont &initial = *wxNORMAL_FONT,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = wxFONTBTN_DEFAULT_STYLE,
+                unsigned int style = wxFONTBTN_DEFAULT_STYLE,
                 const wxValidator& validator = wxDefaultValidator,
                 const std::string& name = wxFontPickerWidgetNameStr);
 

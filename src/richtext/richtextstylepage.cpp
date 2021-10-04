@@ -42,7 +42,7 @@ wxRichTextStylePage::wxRichTextStylePage( )
     Init();
 }
 
-wxRichTextStylePage::wxRichTextStylePage( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size, long style )
+wxRichTextStylePage::wxRichTextStylePage( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size, unsigned int style )
 {
     Init();
     Create(parent, id, pos, size, style);
@@ -67,7 +67,7 @@ void wxRichTextStylePage::Init()
  * wxRichTextStylePage creator
  */
 
-bool wxRichTextStylePage::Create( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size, long style )
+bool wxRichTextStylePage::Create( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size, unsigned int style )
 {
 ////@begin wxRichTextStylePage creation
     wxRichTextDialogPage::Create( parent, id, pos, size, style );

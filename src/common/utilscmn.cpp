@@ -1261,7 +1261,7 @@ wxWindow* wxGenericFindWindowAtPoint(const wxPoint& pt)
 
 #if wxUSE_MSGDLG
 
-int wxMessageBox(const std::string& message, const std::string& caption, long style,
+int wxMessageBox(const std::string& message, const std::string& caption, unsigned int style,
                  wxWindow *parent, int WXUNUSED(x), int WXUNUSED(y) )
 {
     // add the appropriate icon unless this was explicitly disabled by use of
@@ -1362,7 +1362,7 @@ wxString wxGetTextFromUser(const wxString& message, const wxString& caption,
                         wxCoord x, wxCoord y, bool centre )
 {
     wxString str;
-    long style = wxTextEntryDialogStyle;
+    unsigned int style = wxTextEntryDialogStyle;
 
     if (centre)
         style |= wxCENTRE;
@@ -1386,7 +1386,7 @@ wxString wxGetPasswordFromUser(const wxString& message,
                                wxCoord x, wxCoord y, bool centre )
 {
     wxString str;
-    long style = wxTextEntryDialogStyle;
+    unsigned int style = wxTextEntryDialogStyle;
 
     if (centre)
         style |= wxCENTRE;

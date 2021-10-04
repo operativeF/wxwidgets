@@ -325,7 +325,7 @@ bool wxWindowBase::CreateBase(wxWindowBase *parent,
                               wxWindowID id,
                               const wxPoint& WXUNUSED(pos),
                               const wxSize& size,
-                              long style,
+                              unsigned int style,
                               const std::string& name)
 {
     // ids are limited to 16 bits under MSW so if you care about portability,
@@ -369,7 +369,7 @@ bool wxWindowBase::CreateBase(wxWindowBase *parent,
                               wxWindowID id,
                               const wxPoint& pos,
                               const wxSize& size,
-                              long style,
+                              unsigned int style,
                               const wxValidator& wxVALIDATOR_PARAM(validator),
                               const std::string& name)
 {
@@ -383,12 +383,13 @@ bool wxWindowBase::CreateBase(wxWindowBase *parent,
     return true;
 }
 
-bool wxWindowBase::ToggleWindowStyle(int flag)
+bool wxWindowBase::ToggleWindowStyle(unsigned int flag)
 {
     wxASSERT_MSG( flag, wxT("flags with 0 value can't be toggled") );
 
     bool rc;
-    long style = GetWindowStyleFlag();
+    unsigned int style = GetWindowStyleFlag();
+
     if ( style & flag )
     {
         style &= ~flag;

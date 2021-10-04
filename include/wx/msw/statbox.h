@@ -23,7 +23,7 @@ public:
                 const std::string& label,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = 0,
+                unsigned int style = 0,
                 const std::string& name = wxStaticBoxNameStr)
          
     {
@@ -34,7 +34,7 @@ public:
                 wxWindow* label,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = 0,
+                unsigned int style = 0,
                 const std::string &name = wxStaticBoxNameStr)
          
     {
@@ -50,14 +50,14 @@ public:
                 const std::string& label,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = 0,
+                unsigned int style = 0,
                 const std::string& name = wxStaticBoxNameStr);
 
     [[maybe_unused]] bool Create(wxWindow *parent, wxWindowID id,
                 wxWindow* label,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = 0,
+                unsigned int style = 0,
                 const std::string& name = wxStaticBoxNameStr);
 
     /// Implementation only
@@ -66,7 +66,7 @@ public:
     bool SetBackgroundColour(const wxColour& colour) override;
     bool SetFont(const wxFont& font) override;
 
-    WXDWORD MSWGetStyle(long style, WXDWORD *exstyle) const override;
+    DWORD MSWGetStyle(unsigned int style, DWORD *exstyle) const override;
 
     // returns true if the platform should explicitly apply a theme border
     bool CanApplyThemeBorder() const override { return false; }

@@ -2319,14 +2319,14 @@ wxBEGIN_EVENT_TABLE(wxDataViewListCtrl,wxDataViewCtrl)
 wxEND_EVENT_TABLE()
 
 wxDataViewListCtrl::wxDataViewListCtrl( wxWindow *parent, wxWindowID id,
-           const wxPoint& pos, const wxSize& size, long style,
+           const wxPoint& pos, const wxSize& size, unsigned int style,
            const wxValidator& validator )
 {
     Create( parent, id, pos, size, style, validator );
 }
 
 bool wxDataViewListCtrl::Create( wxWindow *parent, wxWindowID id,
-           const wxPoint& pos, const wxSize& size, long style,
+           const wxPoint& pos, const wxSize& size, unsigned int style,
            const wxValidator& validator )
 {
     if ( !wxDataViewCtrl::Create( parent, id, pos, size, style, validator ) )
@@ -2870,7 +2870,7 @@ wxBEGIN_EVENT_TABLE(wxDataViewTreeCtrl,wxDataViewCtrl)
 wxEND_EVENT_TABLE()
 
 bool wxDataViewTreeCtrl::Create( wxWindow *parent, wxWindowID id,
-           const wxPoint& pos, const wxSize& size, long style, const wxValidator& validator )
+           const wxPoint& pos, const wxSize& size, unsigned int style, const wxValidator& validator )
 {
     if ( !wxDataViewCtrl::Create( parent, id, pos, size, style, validator ) )
         return false;

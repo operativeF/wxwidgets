@@ -242,12 +242,12 @@ public:
     bool IsLoaded() const { return m_handle != nullptr; }
 
     // load the library with the given name (full or not), return true if ok
-    bool Load(const wxString& libname, int flags = wxDL_DEFAULT);
+    bool Load(const wxString& libname, unsigned int flags = wxDL_DEFAULT);
 
     // raw function for loading dynamic libs: always behaves as if
     // wxDL_VERBATIM were specified and doesn't log error message if the
     // library couldn't be loaded but simply returns NULL
-    static wxDllType RawLoad(const wxString& libname, int flags = wxDL_DEFAULT);
+    static wxDllType RawLoad(const wxString& libname, unsigned int flags = wxDL_DEFAULT);
 
     // attach to an existing handle
     void Attach(wxDllType h) { Unload(); m_handle = h; }

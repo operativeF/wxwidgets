@@ -111,7 +111,7 @@ public:
                      const wxFont& initial = wxNullFont,
                      const wxPoint& pos = wxDefaultPosition,
                      const wxSize& size = wxDefaultSize,
-                     long style = wxFNTP_DEFAULT_STYLE,
+                     unsigned int style = wxFNTP_DEFAULT_STYLE,
                      const wxValidator& validator = wxDefaultValidator,
                      const std::string& name = wxFontPickerCtrlNameStr)
         : m_nMinPointSize(wxFNTP_MINPOINT_SIZE), m_nMaxPointSize(wxFNTP_MAXPOINT_SIZE)
@@ -124,7 +124,7 @@ public:
                 const wxFont& initial = wxNullFont,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = wxFNTP_DEFAULT_STYLE,
+                unsigned int style = wxFNTP_DEFAULT_STYLE,
                 const wxValidator& validator = wxDefaultValidator,
                 const std::string& name = wxFontPickerCtrlNameStr);
 
@@ -167,7 +167,7 @@ public:
 protected:
 
     // extracts the style for our picker from wxFontPickerCtrl's style
-    long GetPickerStyle(long style) const override
+    long GetPickerStyle(unsigned int style) const override
         { return (style & (wxFNTP_FONTDESC_AS_LABEL|wxFNTP_USEFONT_FOR_LABEL)); }
 
 private:

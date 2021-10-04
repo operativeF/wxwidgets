@@ -145,7 +145,7 @@ public:
     // usual GENERIC_{READ,WRITE} as we don't want the file access time to
     // be changed when we open it because this class is used for setting
     // access time (see #10567)
-    wxFileHandle(const wxString& filename, OpenMode mode, int flags = 0)
+    wxFileHandle(const wxString& filename, OpenMode mode, unsigned int flags = 0)
         : m_hFile(::CreateFile
                     (
                      filename.t_str(),             // name
@@ -330,7 +330,7 @@ bool DoStatAny(wxStructStat& st, wxString path, bool dereference)
 // Overloads to use for a case when we don't have wxFileName object and when we
 // do have one.
 inline
-bool StatAny(wxStructStat& st, const wxString& path, int flags)
+bool StatAny(wxStructStat& st, const wxString& path, unsigned int flags)
 {
     return DoStatAny(st, path, !(flags & wxFILE_EXISTS_NO_FOLLOW));
 }
@@ -621,7 +621,7 @@ void RemoveTrailingSeparatorsFromPath(wxString& strPath)
 #endif // __WINDOWS_
 
 bool
-wxFileSystemObjectExists(const wxString& path, int flags)
+wxFileSystemObjectExists(const wxString& path, unsigned int flags)
 {
 
     // Should the existence of file/directory with this name be accepted, i.e.
@@ -683,7 +683,7 @@ wxFileSystemObjectExists(const wxString& path, int flags)
 
 bool wxFileName::FileExists() const
 {
-    int flags = wxFILE_EXISTS_REGULAR;
+    unsigned int flags = wxFILE_EXISTS_REGULAR;
     if ( !ShouldFollowLink() )
         flags |= wxFILE_EXISTS_NO_FOLLOW;
 
@@ -698,7 +698,7 @@ bool wxFileName::FileExists( const wxString &filePath )
 
 bool wxFileName::DirExists() const
 {
-    int flags = wxFILE_EXISTS_DIR;
+    unsigned int flags = wxFILE_EXISTS_DIR;
     if ( !ShouldFollowLink() )
         flags |= wxFILE_EXISTS_NO_FOLLOW;
 
@@ -711,7 +711,7 @@ bool wxFileName::DirExists( const wxString &dirPath )
     return wxFileSystemObjectExists(dirPath, wxFILE_EXISTS_DIR);
 }
 
-bool wxFileName::Exists(int flags) const
+bool wxFileName::Exists(unsigned int flags) const
 {
     // Notice that wxFILE_EXISTS_NO_FOLLOW may be specified in the flags even
     // if our DontFollowLink() hadn't been called and we do honour it then. But
@@ -724,7 +724,7 @@ bool wxFileName::Exists(int flags) const
 }
 
 /* static */
-bool wxFileName::Exists(const wxString& path, int flags)
+bool wxFileName::Exists(const wxString& path, unsigned int flags)
 {
     return wxFileSystemObjectExists(path, flags);
 }
@@ -1243,12 +1243,12 @@ wxString wxFileName::GetTempDir()
     return dir;
 }
 
-bool wxFileName::Mkdir( int perm, int flags ) const
+bool wxFileName::Mkdir( int perm, unsigned int flags ) const
 {
     return wxFileName::Mkdir(GetPath(), perm, flags);
 }
 
-bool wxFileName::Mkdir( const wxString& dir, int perm, int flags )
+bool wxFileName::Mkdir( const wxString& dir, int perm, unsigned int flags )
 {
     if ( flags & wxPATH_MKDIR_FULL )
     {
@@ -1287,12 +1287,12 @@ bool wxFileName::Mkdir( const wxString& dir, int perm, int flags )
     return ::wxMkdir( dir, perm );
 }
 
-bool wxFileName::Rmdir(int flags) const
+bool wxFileName::Rmdir(unsigned int flags) const
 {
     return wxFileName::Rmdir( GetPath(), flags );
 }
 
-bool wxFileName::Rmdir(const wxString& dir, int flags)
+bool wxFileName::Rmdir(const wxString& dir, unsigned int flags)
 {
 #ifdef __WINDOWS__
     if ( flags & wxPATH_RMDIR_RECURSIVE )
@@ -1387,7 +1387,7 @@ bool wxFileName::Rmdir(const wxString& dir, int flags)
 // path normalization
 // ----------------------------------------------------------------------------
 
-bool wxFileName::Normalize(int flags,
+bool wxFileName::Normalize(unsigned int flags,
                            const wxString& cwd,
                            wxPathFormat format)
 {
@@ -2041,7 +2041,7 @@ wxString wxFileName::GetFullName() const
     return fullname;
 }
 
-wxString wxFileName::GetPath( int flags, wxPathFormat format ) const
+wxString wxFileName::GetPath( unsigned int flags, wxPathFormat format ) const
 {
     format = GetFormat( format );
 
@@ -2286,7 +2286,7 @@ wxPathFormat wxFileName::GetFormat( wxPathFormat format )
 #ifdef wxHAS_FILESYSTEM_VOLUMES
 
 /* static */
-wxString wxFileName::GetVolumeString(char drive, int flags)
+wxString wxFileName::GetVolumeString(char drive, unsigned int flags)
 {
     wxASSERT_MSG( !(flags & ~wxPATH_GET_SEPARATOR), "invalid flag specified" );
 
@@ -2652,7 +2652,7 @@ bool wxFileName::SetTimes(const wxDateTime *dtAccess,
         ConvertWxToFileTime(&ftWrite, *dtMod);
 
     wxString path;
-    int flags;
+    unsigned int flags;
     if ( IsDir() )
     {
         path = GetPath();

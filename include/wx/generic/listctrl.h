@@ -44,7 +44,7 @@ public:
                 wxWindowID winid = wxID_ANY,
                 const wxPoint &pos = wxDefaultPosition,
                 const wxSize &size = wxDefaultSize,
-                long style = wxLC_ICON,
+                unsigned int style = wxLC_ICON,
                 const wxValidator& validator = wxDefaultValidator,
                 const std::string &name = wxListCtrlNameStr)
             : wxScrollHelper(this)
@@ -60,7 +60,7 @@ public:
                  wxWindowID winid = wxID_ANY,
                  const wxPoint &pos = wxDefaultPosition,
                  const wxSize &size = wxDefaultSize,
-                 long style = wxLC_ICON,
+                 unsigned int style = wxLC_ICON,
                  const wxValidator& validator = wxDefaultValidator,
                  const std::string &name = wxListCtrlNameStr);
 
@@ -115,8 +115,8 @@ public:
     bool IsItemChecked(long item) const override;
     void CheckItem(long item, bool check) override;
 
-    void SetSingleStyle( long style, bool add = true ) ;
-    void SetWindowStyleFlag( long style ) override;
+    void SetSingleStyle( unsigned int style, bool add = true ) ;
+    void SetWindowStyleFlag( unsigned int style ) override;
     void RecreateWindow() {}
     long GetNextItem( long item, int geometry = wxLIST_NEXT_ALL, int state = wxLIST_STATE_DONTCARE ) const;
     wxImageList *GetImageList( int which ) const override;
@@ -266,7 +266,7 @@ public:
     wxListCtrl(wxWindow *parent, wxWindowID winid = wxID_ANY,
                const wxPoint& pos = wxDefaultPosition,
                const wxSize& size = wxDefaultSize,
-               long style = wxLC_ICON,
+               unsigned int style = wxLC_ICON,
                const wxValidator &validator = wxDefaultValidator,
                const std::string &name = wxListCtrlNameStr)
     : wxGenericListCtrl(parent, winid, pos, size, style, validator, name)

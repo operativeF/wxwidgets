@@ -278,7 +278,7 @@ WXHWND wxToolTip::GetToolTipCtrl()
 {
     if ( !ms_hwndTT )
     {
-        WXDWORD exflags = 0;
+        DWORD exflags = 0;
         if ( wxApp::MSWGetDefaultLayout() == wxLayoutDirection::RightToLeft )
         {
             exflags |= WS_EX_LAYOUTRTL;

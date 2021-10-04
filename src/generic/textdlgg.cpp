@@ -52,7 +52,7 @@ bool wxTextEntryDialog::Create(wxWindow *parent,
                                      const std::string& message,
                                      const std::string& caption,
                                      const std::string& value,
-                                     long style,
+                                     unsigned int style,
                                      const wxPoint& pos)
 {
     // Do not pass style to GetParentForModalDialog() as wxDIALOG_NO_PARENT
@@ -197,7 +197,7 @@ bool wxPasswordEntryDialog::Create(wxWindow *parent,
                                    const std::string& message,
                                    const std::string& caption,
                                    const std::string& value,
-                                   long style,
+                                   unsigned int style,
                                    const wxPoint& pos)
 {
     // Only change from wxTextEntryDialog is the password style

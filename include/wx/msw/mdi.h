@@ -33,7 +33,7 @@ public:
                      const std::string& title,
                      const wxPoint& pos = wxDefaultPosition,
                      const wxSize& size = wxDefaultSize,
-                     long style = wxDEFAULT_FRAME_STYLE | wxVSCROLL | wxHSCROLL,
+                     unsigned int style = wxDEFAULT_FRAME_STYLE | wxVSCROLL | wxHSCROLL,
                      const std::string& name = wxFrameNameStr)
     {
         Create(parent, id, title, pos, size, style, name);
@@ -46,7 +46,7 @@ public:
                 const std::string& title,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = wxDEFAULT_FRAME_STYLE | wxVSCROLL | wxHSCROLL,
+                unsigned int style = wxDEFAULT_FRAME_STYLE | wxVSCROLL | wxHSCROLL,
                 const std::string& name = wxFrameNameStr);
 
     // override/implement base class [pure] virtual methods
@@ -178,7 +178,7 @@ public:
                     const std::string& title,
                     const wxPoint& pos = wxDefaultPosition,
                     const wxSize& size = wxDefaultSize,
-                    long style = wxDEFAULT_FRAME_STYLE,
+                    unsigned int style = wxDEFAULT_FRAME_STYLE,
                     const std::string& name = wxFrameNameStr)
     {
         Create(parent, id, title, pos, size, style, name);
@@ -194,7 +194,7 @@ public:
                 const std::string& title,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = wxDEFAULT_FRAME_STYLE,
+                unsigned int style = wxDEFAULT_FRAME_STYLE,
                 const std::string& name = wxFrameNameStr);
 
     ~wxMDIChildFrame();
@@ -264,7 +264,7 @@ public:
 
     // Note: this is virtual, to allow overridden behaviour.
     bool CreateClient(wxMDIParentFrame *parent,
-                              long style = wxVSCROLL | wxHSCROLL) override;
+                              unsigned int style = wxVSCROLL | wxHSCROLL) override;
 
     // Explicitly call default scroll behaviour
     void OnScroll(wxScrollEvent& event);

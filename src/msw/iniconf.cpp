@@ -47,7 +47,7 @@ wxIniConfig::wxIniConfig(const wxString& strAppName,
                          const wxString& strVendor,
                          const wxString& localFilename,
                          const wxString& globalFilename,
-                         long style)
+                         unsigned int style)
            : wxConfigBase(strAppName, strVendor, localFilename, globalFilename, style)
 
 #if 0 // This is too complex for some compilers, e.g. BC++ 5.01

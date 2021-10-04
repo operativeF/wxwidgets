@@ -31,7 +31,7 @@ public:
                     const std::string& url,
                     const wxPoint& pos = wxDefaultPosition,
                     const wxSize& size = wxDefaultSize,
-                    long style = wxHL_DEFAULT_STYLE,
+                    unsigned int style = wxHL_DEFAULT_STYLE,
                     const std::string& name = wxHyperlinkCtrlNameStr)
     {
         Create(parent, id, label, url, pos, size, style, name);
@@ -44,7 +44,7 @@ public:
                 const std::string& url,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = wxHL_DEFAULT_STYLE,
+                unsigned int style = wxHL_DEFAULT_STYLE,
                 const std::string& name = wxHyperlinkCtrlNameStr);
 
 
@@ -56,7 +56,7 @@ public:
     void SetLabel(const std::string& label) override;
 
 protected:
-    WXDWORD MSWGetStyle(long style, WXDWORD *exstyle) const override;
+    DWORD MSWGetStyle(unsigned int style, DWORD *exstyle) const override;
     wxSize DoGetBestClientSize() const override;
 
 private:

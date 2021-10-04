@@ -71,7 +71,7 @@ bool wxDialog::Create(wxWindow *parent,
                       const std::string& title,
                       const wxPoint& pos,
                       const wxSize& size,
-                      long style,
+                      unsigned int style,
                       const std::string& name)
 {
     SetExtraStyle(GetExtraStyle() | wxTOPLEVEL_EX_DIALOG);
@@ -186,7 +186,7 @@ void wxDialog::EndModal(int retCode)
 // wxDialog gripper handling
 // ----------------------------------------------------------------------------
 
-void wxDialog::SetWindowStyleFlag(long style)
+void wxDialog::SetWindowStyleFlag(unsigned int style)
 {
     wxDialogBase::SetWindowStyleFlag(style);
 

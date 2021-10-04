@@ -1668,7 +1668,7 @@ typedef void*       WXEVENTHANDLERCALLREF;
 typedef void*       WXAPPLEEVENTREF;
 
 typedef unsigned int    WXUINT;
-typedef unsigned long   WXDWORD;
+typedef unsigned long   DWORD;
 typedef unsigned short  WXWORD;
 
 typedef WX_OPAQUE_TYPE(PicHandle ) * WXHMETAFILE ;
@@ -1938,7 +1938,6 @@ typedef WXHINSTANCE WXHMODULE;
 #undef WX_MSW_DECLARE_HANDLE
 
 typedef unsigned int    WXUINT;
-typedef unsigned long   WXDWORD;
 typedef unsigned short  WXWORD;
 
 typedef unsigned long   WXCOLORREF;

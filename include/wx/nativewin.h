@@ -208,7 +208,7 @@ public:
     }
 
     bool ShowFullScreen(bool WXUNUSED(show),
-                                long WXUNUSED(style) = wxFULLSCREEN_ALL) override
+                        unsigned int WXUNUSED(style) = wxFULLSCREEN_ALL) override
     {
         wxFAIL_MSG( "not implemented for native windows" );
 

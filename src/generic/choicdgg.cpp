@@ -205,7 +205,7 @@ bool wxSingleChoiceDialog::Create( wxWindow *parent,
                                    const std::string& caption,
                                    const std::vector<std::string>& choices,
                                    void **clientData,
-                                   long style,
+                                   unsigned int style,
                                    const wxPoint& pos )
 {
     if ( !wxAnyChoiceDialog::Create(parent, message, caption,
@@ -265,7 +265,7 @@ bool wxMultiChoiceDialog::Create( wxWindow *parent,
                                   const std::string& message,
                                   const std::string& caption,
                                   const std::vector<std::string>& choices,
-                                  long style,
+                                  unsigned int style,
                                   const wxPoint& pos )
 {
     long styleLbox;

@@ -84,7 +84,7 @@ wxRegConfig::wxRegConfig(const wxString& appName,
                          const wxString& vendorName,
                          const wxString& strLocal,
                          const wxString& strGlobal,
-                         long style)
+                         unsigned int style)
            : wxConfigBase(appName, vendorName, strLocal, strGlobal, style)
 {
   wxString strRoot;

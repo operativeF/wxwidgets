@@ -55,10 +55,10 @@ class WXDLLIMPEXP_RICHTEXT wxRichTextBordersPage: public wxRichTextDialogPage
 public:
     /// Constructors
     wxRichTextBordersPage();
-    wxRichTextBordersPage( wxWindow* parent, wxWindowID id = SYMBOL_WXRICHTEXTBORDERSPAGE_IDNAME, const wxPoint& pos = SYMBOL_WXRICHTEXTBORDERSPAGE_POSITION, const wxSize& size = SYMBOL_WXRICHTEXTBORDERSPAGE_SIZE, long style = SYMBOL_WXRICHTEXTBORDERSPAGE_STYLE );
+    wxRichTextBordersPage( wxWindow* parent, wxWindowID id = SYMBOL_WXRICHTEXTBORDERSPAGE_IDNAME, const wxPoint& pos = SYMBOL_WXRICHTEXTBORDERSPAGE_POSITION, const wxSize& size = SYMBOL_WXRICHTEXTBORDERSPAGE_SIZE, unsigned int style = SYMBOL_WXRICHTEXTBORDERSPAGE_STYLE );
 
     /// Creation
-    bool Create( wxWindow* parent, wxWindowID id = SYMBOL_WXRICHTEXTBORDERSPAGE_IDNAME, const wxPoint& pos = SYMBOL_WXRICHTEXTBORDERSPAGE_POSITION, const wxSize& size = SYMBOL_WXRICHTEXTBORDERSPAGE_SIZE, long style = SYMBOL_WXRICHTEXTBORDERSPAGE_STYLE );
+    bool Create( wxWindow* parent, wxWindowID id = SYMBOL_WXRICHTEXTBORDERSPAGE_IDNAME, const wxPoint& pos = SYMBOL_WXRICHTEXTBORDERSPAGE_POSITION, const wxSize& size = SYMBOL_WXRICHTEXTBORDERSPAGE_SIZE, unsigned int style = SYMBOL_WXRICHTEXTBORDERSPAGE_STYLE );
 
     /// Destructor
     ~wxRichTextBordersPage();
@@ -286,7 +286,7 @@ public:
 class WXDLLIMPEXP_RICHTEXT wxRichTextBorderPreviewCtrl : public wxWindow
 {
 public:
-    wxRichTextBorderPreviewCtrl(wxWindow *parent, wxWindowID id = wxID_ANY, const wxPoint& pos = wxDefaultPosition, const wxSize& sz = wxDefaultSize, long style = 0);
+    wxRichTextBorderPreviewCtrl(wxWindow *parent, wxWindowID id = wxID_ANY, const wxPoint& pos = wxDefaultPosition, const wxSize& sz = wxDefaultSize, unsigned int style = 0);
 
     void SetAttributes(wxRichTextAttr* attr) { m_attributes = attr; }
     wxRichTextAttr* GetAttributes() const { return m_attributes; }

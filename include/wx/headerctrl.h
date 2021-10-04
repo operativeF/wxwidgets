@@ -66,14 +66,14 @@ public:
                  wxWindowID winid = wxID_ANY,
                  const wxPoint& pos = wxDefaultPosition,
                  const wxSize& size = wxDefaultSize,
-                 long style = wxHD_DEFAULT_STYLE,
+                 unsigned int style = wxHD_DEFAULT_STYLE,
                  const std::string& name = wxHeaderCtrlNameStr);
 
     bool Create(wxWindow *parent,
                 wxWindowID winid = wxID_ANY,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = wxHD_DEFAULT_STYLE,
+                unsigned int style = wxHD_DEFAULT_STYLE,
                 const std::string& name = wxHeaderCtrlNameStr);
      */
 
@@ -289,7 +289,7 @@ public:
                        wxWindowID winid = wxID_ANY,
                        const wxPoint& pos = wxDefaultPosition,
                        const wxSize& size = wxDefaultSize,
-                       long style = wxHD_DEFAULT_STYLE,
+                       unsigned int style = wxHD_DEFAULT_STYLE,
                        const std::string& name = wxHeaderCtrlNameStr)
     {
         

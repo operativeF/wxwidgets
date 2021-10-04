@@ -209,8 +209,6 @@ typedef wxUint16 wxWord;
     #error "Unknown 32 bit type"
 #endif
 
-typedef wxUint32 wxDword;
-
 #ifdef LLONG_MAX
     #define wxINT64_MIN LLONG_MIN
     #define wxINT64_MAX LLONG_MAX

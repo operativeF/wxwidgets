@@ -31,7 +31,7 @@ bool wxStaticText::Create(wxWindow *parent,
                           const std::string& label,
                           const wxPoint& pos,
                           const wxSize& size,
-                          long style,
+                          unsigned int style,
                           const std::string& name)
 {
     if ( !CreateControl(parent, id, pos, size, style, wxDefaultValidator, name) )
@@ -56,9 +56,9 @@ bool wxStaticText::Create(wxWindow *parent,
     return true;
 }
 
-WXDWORD wxStaticText::MSWGetStyle(long style, WXDWORD *exstyle) const
+DWORD wxStaticText::MSWGetStyle(unsigned int style, DWORD *exstyle) const
 {
-    WXDWORD msStyle = wxControl::MSWGetStyle(style, exstyle);
+    DWORD msStyle = wxControl::MSWGetStyle(style, exstyle);
 
     // translate the alignment flags to the Windows ones
     //

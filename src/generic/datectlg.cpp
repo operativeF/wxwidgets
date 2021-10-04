@@ -324,7 +324,7 @@ bool wxDatePickerCtrlGeneric::Create(wxWindow *parent,
                                      const wxDateTime& date,
                                      const wxPoint& pos,
                                      const wxSize& size,
-                                     long style,
+                                     unsigned int style,
                                      const wxValidator& validator,
                                      const std::string& name)
 {

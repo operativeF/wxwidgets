@@ -80,7 +80,7 @@ public:
                      const std::string& defaultDir = {},
                      const std::string& defaultFile = {},
                      const std::string& wildCard = wxFileSelectorDefaultWildcardStr,
-                     long style = wxFD_DEFAULT_STYLE,
+                     unsigned int style = wxFD_DEFAULT_STYLE,
                      const wxPoint& pos = wxDefaultPosition,
                      const wxSize& sz = wxDefaultSize,
                      const std::string& name = wxFileDialogNameStr)
@@ -101,12 +101,12 @@ public:
                 const std::string& defaultDir = {},
                 const std::string& defaultFile = {},
                 const std::string& wildCard = wxFileSelectorDefaultWildcardStr,
-                long style = wxFD_DEFAULT_STYLE,
+                unsigned int style = wxFD_DEFAULT_STYLE,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& sz = wxDefaultSize,
                 const std::string& name = wxFileDialogNameStr);
 
-    bool HasFdFlag(int flag) const { return HasFlag(flag); }
+    bool HasFdFlag(unsigned int flag) const { return HasFlag(flag); }
 
     virtual void SetMessage(const wxString& message) { m_message = message; }
     virtual void SetPath(const wxString& path);

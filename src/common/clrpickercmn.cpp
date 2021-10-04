@@ -39,7 +39,7 @@ bool wxColourPickerCtrl::Create( wxWindow *parent,
                         const wxColour &col,
                         const wxPoint &pos,
                         const wxSize &size,
-                        long style,
+                        unsigned int style,
                         const wxValidator& validator,
                         const std::string& name )
 {

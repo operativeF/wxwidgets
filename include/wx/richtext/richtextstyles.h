@@ -482,7 +482,7 @@ public:
         Init();
     }
     wxRichTextStyleListBox(wxWindow* parent, wxWindowID id = wxID_ANY, const wxPoint& pos = wxDefaultPosition,
-        const wxSize& size = wxDefaultSize, long style = 0);
+        const wxSize& size = wxDefaultSize, unsigned int style = 0);
 
     void Init()
     {
@@ -494,7 +494,7 @@ public:
     }
 
     bool Create(wxWindow* parent, wxWindowID id = wxID_ANY, const wxPoint& pos = wxDefaultPosition,
-        const wxSize& size = wxDefaultSize, long style = 0);
+        const wxSize& size = wxDefaultSize, unsigned int style = 0);
 
     /// Creates a suitable HTML fragment for a definition
     std::string CreateHTML(wxRichTextStyleDefinition* def) const;
@@ -586,7 +586,7 @@ public:
     }
 
     wxRichTextStyleListCtrl(wxWindow* parent, wxWindowID id = wxID_ANY, const wxPoint& pos = wxDefaultPosition,
-        const wxSize& size = wxDefaultSize, long style = 0);
+        const wxSize& size = wxDefaultSize, unsigned int style = 0);
 
     /// Member initialisation
     void Init()
@@ -598,7 +598,7 @@ public:
 
     /// Creates the windows
     bool Create(wxWindow* parent, wxWindowID id = wxID_ANY, const wxPoint& pos = wxDefaultPosition,
-        const wxSize& size = wxDefaultSize, long style = 0);
+        const wxSize& size = wxDefaultSize, unsigned int style = 0);
 
     /// Updates the style list box
     void UpdateStyles();
@@ -703,7 +703,7 @@ public:
     }
 
     wxRichTextStyleComboCtrl(wxWindow* parent, wxWindowID id = wxID_ANY, const wxPoint& pos = wxDefaultPosition,
-        const wxSize& size = wxDefaultSize, long style = wxCB_READONLY)
+        const wxSize& size = wxDefaultSize, unsigned int style = wxCB_READONLY)
     {
         Init();
         Create(parent, id, pos, size, style);
@@ -717,7 +717,7 @@ public:
     }
 
     bool Create(wxWindow* parent, wxWindowID id = wxID_ANY, const wxPoint& pos = wxDefaultPosition,
-        const wxSize& size = wxDefaultSize, long style = 0);
+        const wxSize& size = wxDefaultSize, unsigned int style = 0);
 
     /// Updates the list
     void UpdateStyles() { m_stylePopup->UpdateStyles(); }

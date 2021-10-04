@@ -29,7 +29,7 @@ public:
                         const std::string& note = {},
                         const wxPoint& pos = wxDefaultPosition,
                         const wxSize& size = wxDefaultSize,
-                        long style = 0,
+                        unsigned int style = 0,
                         const wxValidator& validator = wxDefaultValidator,
                         const std::string& name = wxButtonNameStr)
          
@@ -48,7 +48,7 @@ public:
                 const std::string& note = {},
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = 0,
+                unsigned int style = 0,
                 const wxValidator& validator = wxDefaultValidator,
                 const std::string& name = wxButtonNameStr);
 
@@ -61,7 +61,7 @@ public:
     void SetMainLabelAndNote(const std::string& mainLabel,
                              const std::string& note) override;
 
-    WXDWORD MSWGetStyle(long style, WXDWORD *exstyle) const override;
+    DWORD MSWGetStyle(unsigned int style, DWORD *exstyle) const override;
 
 protected:
     wxSize DoGetBestSize() const override;

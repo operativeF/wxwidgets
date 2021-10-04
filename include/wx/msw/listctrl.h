@@ -84,7 +84,7 @@ public:
                wxWindowID id = wxID_ANY,
                const wxPoint& pos = wxDefaultPosition,
                const wxSize& size = wxDefaultSize,
-               long style = wxLC_ICON,
+               unsigned int style = wxLC_ICON,
                const wxValidator& validator = wxDefaultValidator,
                const std::string& name = wxListCtrlNameStr)
     {
@@ -102,7 +102,7 @@ public:
                 wxWindowID id = wxID_ANY,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = wxLC_ICON,
+                unsigned int style = wxLC_ICON,
                 const wxValidator& validator = wxDefaultValidator,
                 const std::string& name = wxListCtrlNameStr);
 
@@ -237,10 +237,10 @@ public:
     long GetTopItem() const;
 
     // Add or remove a single window style
-    void SetSingleStyle(long style, bool add = true);
+    void SetSingleStyle(unsigned int style, bool add = true);
 
     // Set the whole window style
-    void SetWindowStyleFlag(long style) override;
+    void SetWindowStyleFlag(unsigned int style) override;
 
     // Searches for an item, starting from 'item'.
     // item can be -1 to find the first item that matches the
@@ -364,7 +364,7 @@ public:
     GetClassDefaultAttributes(wxWindowVariant variant = wxWINDOW_VARIANT_NORMAL);
 
     // convert our styles to Windows
-    WXDWORD MSWGetStyle(long style, WXDWORD *exstyle) const override;
+    DWORD MSWGetStyle(unsigned int style, DWORD *exstyle) const override;
 
     // special Windows message handling
     WXLRESULT MSWWindowProc(WXUINT nMsg,

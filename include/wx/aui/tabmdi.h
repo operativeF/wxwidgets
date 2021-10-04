@@ -45,7 +45,7 @@ public:
                         const std::string& title,
                         const wxPoint& pos = wxDefaultPosition,
                         const wxSize& size = wxDefaultSize,
-                        long style = wxDEFAULT_FRAME_STYLE | wxVSCROLL | wxHSCROLL,
+                        unsigned int style = wxDEFAULT_FRAME_STYLE | wxVSCROLL | wxHSCROLL,
                         const std::string& name = wxFrameNameStr);
 
     ~wxAuiMDIParentFrame();
@@ -55,7 +55,7 @@ public:
                 const std::string& title,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = wxDEFAULT_FRAME_STYLE | wxVSCROLL | wxHSCROLL,
+                unsigned int style = wxDEFAULT_FRAME_STYLE | wxVSCROLL | wxHSCROLL,
                 const std::string& name = wxFrameNameStr);
 
     void SetArtProvider(wxAuiTabArt* provider);
@@ -130,7 +130,7 @@ public:
                        const std::string& title,
                        const wxPoint& pos = wxDefaultPosition,
                        const wxSize& size = wxDefaultSize,
-                       long style = wxDEFAULT_FRAME_STYLE,
+                       unsigned int style = wxDEFAULT_FRAME_STYLE,
                        const std::string& name = wxFrameNameStr);
 
     ~wxAuiMDIChildFrame();
@@ -139,7 +139,7 @@ public:
                 const std::string& title,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = wxDEFAULT_FRAME_STYLE,
+                unsigned int style = wxDEFAULT_FRAME_STYLE,
                 const std::string& name = wxFrameNameStr);
 
 #if wxUSE_MENUS
@@ -195,10 +195,10 @@ class WXDLLIMPEXP_AUI wxAuiMDIClientWindow : public wxAuiNotebook
 {
 public:
     wxAuiMDIClientWindow() = default;
-    wxAuiMDIClientWindow(wxAuiMDIParentFrame *parent, long style = 0);
+    wxAuiMDIClientWindow(wxAuiMDIParentFrame *parent, unsigned int style = 0);
 
     virtual bool CreateClient(wxAuiMDIParentFrame *parent,
-                              long style = wxVSCROLL | wxHSCROLL);
+                              unsigned int style = wxVSCROLL | wxHSCROLL);
 
     virtual wxAuiMDIChildFrame* GetActiveChild();
     virtual void SetActiveChild(wxAuiMDIChildFrame* pChildFrame)

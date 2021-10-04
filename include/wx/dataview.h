@@ -1091,7 +1091,7 @@ public:
     wxDataViewListCtrl() = default;
     wxDataViewListCtrl( wxWindow *parent, wxWindowID id,
            const wxPoint& pos = wxDefaultPosition,
-           const wxSize& size = wxDefaultSize, long style = wxDV_ROW_LINES,
+           const wxSize& size = wxDefaultSize, unsigned int style = wxDV_ROW_LINES,
            const wxValidator& validator = wxDefaultValidator );
 
 	wxDataViewListCtrl& operator=(const wxDataViewListCtrl&) = delete;
@@ -1100,7 +1100,7 @@ public:
 
     [[maybe_unused]] bool Create( wxWindow *parent, wxWindowID id,
            const wxPoint& pos = wxDefaultPosition,
-           const wxSize& size = wxDefaultSize, long style = wxDV_ROW_LINES,
+           const wxSize& size = wxDefaultSize, unsigned int style = wxDV_ROW_LINES,
            const wxValidator& validator = wxDefaultValidator );
 
     wxDataViewListStore *GetStore()
@@ -1353,7 +1353,7 @@ public:
                        wxWindowID id,
                        const wxPoint& pos = wxDefaultPosition,
                        const wxSize& size = wxDefaultSize,
-                       long style = wxDV_NO_HEADER | wxDV_ROW_LINES,
+                       unsigned int style = wxDV_NO_HEADER | wxDV_ROW_LINES,
                        const wxValidator& validator = wxDefaultValidator)
     {
         Create(parent, id, pos, size, style, validator);
@@ -1365,7 +1365,7 @@ public:
                 wxWindowID id,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = wxDV_NO_HEADER | wxDV_ROW_LINES,
+                unsigned int style = wxDV_NO_HEADER | wxDV_ROW_LINES,
                 const wxValidator& validator = wxDefaultValidator);
 
     wxDataViewTreeStore *GetStore()

@@ -37,7 +37,7 @@ bool wxRearrangeList::Create(wxWindow *parent,
                              const wxSize& size,
                              const std::vector<int>& order,
                              const std::vector<std::string>& items,
-                             long style,
+                             unsigned int style,
                              const wxValidator& validator,
                              const std::string& name)
 {
@@ -243,7 +243,7 @@ wxRearrangeCtrl::Create(wxWindow *parent,
                         const wxSize& size,
                         const std::vector<int>& order,
                         const std::vector<std::string>& items,
-                        long style,
+                        unsigned int style,
                         const wxValidator& validator,
                         const std::string& name)
 {

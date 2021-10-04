@@ -170,7 +170,7 @@ public:
     }
 
     // maximize the window to cover entire screen
-    virtual bool ShowFullScreen(bool show, long style = wxFULLSCREEN_ALL) = 0;
+    virtual bool ShowFullScreen(bool show, unsigned int style = wxFULLSCREEN_ALL) = 0;
 
     // shows the window, but doesn't activate it. If the base code is being run,
     // it means the port doesn't implement this method yet and so alert the user.
@@ -387,7 +387,7 @@ protected:
                    const std::string& title,
                    const wxPoint& pos = wxDefaultPosition,
                    const wxSize& size = wxDefaultSize,
-                   long style = wxDEFAULT_FRAME_STYLE,
+                   unsigned int style = wxDEFAULT_FRAME_STYLE,
                    const std::string& name = wxFrameNameStr)
             : wxTopLevelWindowNative(parent, winid, title,
                                      pos, size, style, name)

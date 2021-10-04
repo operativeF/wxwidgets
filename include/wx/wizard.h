@@ -213,7 +213,7 @@ public:
                  const wxString& title = wxEmptyString,
                  const wxBitmap& bitmap = wxNullBitmap,
                  const wxPoint& pos = wxDefaultPosition,
-                 long style = wxDEFAULT_DIALOG_STYLE);
+                 unsigned int style = wxDEFAULT_DIALOG_STYLE);
     */
     wxWizardBase() = default;
 

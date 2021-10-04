@@ -63,9 +63,9 @@ wxStatusBar::wxStatusBar()
     m_windowId = 0;
 }
 
-WXDWORD wxStatusBar::MSWGetStyle(long style, WXDWORD *exstyle) const
+DWORD wxStatusBar::MSWGetStyle(unsigned int style, DWORD *exstyle) const
 {
-    WXDWORD msStyle = wxStatusBarBase::MSWGetStyle(style, exstyle);
+    DWORD msStyle = wxStatusBarBase::MSWGetStyle(style, exstyle);
 
     // wxSTB_SIZEGRIP is part of our default style but it doesn't make sense to
     // show size grip if this is the status bar of a non-resizable TLW so turn
@@ -96,7 +96,7 @@ WXDWORD wxStatusBar::MSWGetStyle(long style, WXDWORD *exstyle) const
 
 bool wxStatusBar::Create(wxWindow *parent,
                          wxWindowID id,
-                         long style,
+                         unsigned int style,
                          const std::string& name)
 {
     if ( !CreateControl(parent, id, wxDefaultPosition, wxDefaultSize,

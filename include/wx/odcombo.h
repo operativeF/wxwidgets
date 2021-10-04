@@ -253,7 +253,7 @@ public:
                          const wxSize& size,
                          int n,
                          const wxString choices[],
-                         long style = 0,
+                         unsigned int style = 0,
                          const wxValidator& validator = wxDefaultValidator,
                          const std::string& name = wxComboCtrlNameStr)
     {
@@ -269,7 +269,7 @@ public:
                 const wxString& value = wxEmptyString,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = 0,
+                unsigned int style = 0,
                 const wxValidator& validator = wxDefaultValidator,
                 const std::string& name = wxComboCtrlNameStr);
 
@@ -279,7 +279,7 @@ public:
                          const wxPoint& pos = wxDefaultPosition,
                          const wxSize& size = wxDefaultSize,
                          const std::vector<std::string>& choices = {},
-                         long style = 0,
+                         unsigned int style = 0,
                          const wxValidator& validator = wxDefaultValidator,
                          const std::string& name = wxComboCtrlNameStr);
 
@@ -290,7 +290,7 @@ public:
                 const wxSize& size,
                 int n,
                 const wxString choices[],
-                long style = 0,
+                unsigned int style = 0,
                 const wxValidator& validator = wxDefaultValidator,
                 const std::string& name = wxComboCtrlNameStr);
 
@@ -300,7 +300,7 @@ public:
                 const wxPoint& pos,
                 const wxSize& size,
                 const std::vector<std::string>& choices,
-                long style = 0,
+                unsigned int style = 0,
                 const wxValidator& validator = wxDefaultValidator,
                 const std::string& name = wxComboCtrlNameStr);
 

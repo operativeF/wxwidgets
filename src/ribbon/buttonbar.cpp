@@ -300,7 +300,7 @@ wxRibbonButtonBar::wxRibbonButtonBar(wxWindow* parent,
                   wxWindowID id,
                   const wxPoint& pos,
                   const wxSize& size,
-                  long style)
+                  unsigned int style)
     : wxRibbonControl(parent, id, pos, size, wxBORDER_NONE)
 {
     CommonInit(style);
@@ -331,7 +331,7 @@ bool wxRibbonButtonBar::Create(wxWindow* parent,
                 wxWindowID id,
                 const wxPoint& pos,
                 const wxSize& size,
-                long style)
+                unsigned int style)
 {
     if(!wxRibbonControl::Create(parent, id, pos, size, wxBORDER_NONE))
     {

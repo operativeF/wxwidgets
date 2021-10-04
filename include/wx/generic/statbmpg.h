@@ -21,7 +21,7 @@ public:
                           const wxBitmap& bitmap,
                           const wxPoint& pos = wxDefaultPosition,
                           const wxSize& size = wxDefaultSize,
-                          long style = 0,
+                          unsigned int style = 0,
                           const std::string& name = wxStaticBitmapNameStr)
     {
             Create(parent, id, bitmap, pos, size, style, name);
@@ -32,7 +32,7 @@ public:
                 const wxBitmap& bitmap,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = 0,
+                unsigned int style = 0,
                 const std::string& name = wxStaticBitmapNameStr);
 
     void SetBitmap(const wxBitmap& bitmap) override

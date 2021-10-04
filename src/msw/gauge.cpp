@@ -46,7 +46,7 @@ bool wxGauge::Create(wxWindow *parent,
                      int range,
                      const wxPoint& pos,
                      const wxSize& size,
-                     long style,
+                     unsigned int style,
                      const wxValidator& validator,
                      const std::string& name)
 {
@@ -63,9 +63,9 @@ bool wxGauge::Create(wxWindow *parent,
     return true;
 }
 
-WXDWORD wxGauge::MSWGetStyle(long style, WXDWORD *exstyle) const
+DWORD wxGauge::MSWGetStyle(unsigned int style, DWORD *exstyle) const
 {
-    WXDWORD msStyle = wxControl::MSWGetStyle(style, exstyle);
+    DWORD msStyle = wxControl::MSWGetStyle(style, exstyle);
 
     if ( style & wxGA_VERTICAL )
         msStyle |= PBS_VERTICAL;

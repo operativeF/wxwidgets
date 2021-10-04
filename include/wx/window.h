@@ -669,20 +669,20 @@ public:
 
         // get/set window style (setting style won't update the window and so
         // is only useful for internal usage)
-    virtual void SetWindowStyleFlag( long style ) { m_windowStyle = style; }
-    virtual long GetWindowStyleFlag() const { return m_windowStyle; }
+    virtual void SetWindowStyleFlag( unsigned int style ) { m_windowStyle = style; }
+    virtual unsigned int GetWindowStyleFlag() const { return m_windowStyle; }
 
         // just some (somewhat shorter) synonyms
-    void SetWindowStyle( long style ) { SetWindowStyleFlag(style); }
+    void SetWindowStyle( unsigned int style ) { SetWindowStyleFlag(style); }
     long wxGetWindowStyle() const { return GetWindowStyleFlag(); }
 
         // check if the flag is set
-    bool HasFlag(int flag) const { return (m_windowStyle & flag) != 0; }
+    bool HasFlag(unsigned int flag) const { return (m_windowStyle & flag) != 0; }
     virtual bool IsRetained() const { return HasFlag(wxRETAINED); }
 
         // turn the flag on if it had been turned off before and vice versa,
         // return true if the flag is currently turned on
-    bool ToggleWindowStyle(int flag);
+    bool ToggleWindowStyle(unsigned int flag);
 
         // extra style: the less often used style bits which can't be set with
         // SetWindowStyleFlag()
@@ -1615,7 +1615,7 @@ protected:
                     wxWindowID winid,
                     const wxPoint& pos = wxDefaultPosition,
                     const wxSize& size = wxDefaultSize,
-                    long style = 0,
+                    unsigned int style = 0,
                     const wxValidator& validator = wxDefaultValidator,
                     const std::string& name = wxPanelNameStr);
 
@@ -1623,7 +1623,7 @@ protected:
                     wxWindowID winid,
                     const wxPoint& pos,
                     const wxSize& size,
-                    long style,
+                    unsigned int style,
                     const std::string& name);
 
     // event handling specific to wxWindow
@@ -1741,7 +1741,7 @@ protected:
     // (i.e. not being updated) if it is positive
     unsigned int m_freezeCount;
 
-    long                 m_windowStyle{0};
+    unsigned int         m_windowStyle{0};
     long                 m_exStyle;
 
     // the minimal allowed size for the window (no minimal size if variable(s)

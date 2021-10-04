@@ -960,7 +960,7 @@ bool wxComboCtrlBase::Create(wxWindow *parent,
                              const std::string& value,
                              const wxPoint& pos,
                              const wxSize& size,
-                             long style,
+                             unsigned int style,
                              const wxValidator& validator,
                              const std::string& name)
 {
@@ -1512,7 +1512,7 @@ wxColour wxComboCtrlBase::GetBackgroundColour() const
 
 #if (!defined(__WXMSW__)) || defined(__WXUNIVERSAL__)
 // prepare combo box background on area in a way typical on platform
-void wxComboCtrlBase::PrepareBackground( wxDC& dc, const wxRect& rect, int flags ) const
+void wxComboCtrlBase::PrepareBackground( wxDC& dc, const wxRect& rect, unsigned int flags ) const
 {
     wxSize sz = GetClientSize();
     bool isEnabled;
@@ -1629,12 +1629,12 @@ void wxComboCtrlBase::PrepareBackground( wxDC& dc, const wxRect& rect, int flags
 }
 #else
 // Save the library size a bit for platforms that re-implement this.
-void wxComboCtrlBase::PrepareBackground( wxDC&, const wxRect&, int ) const
+void wxComboCtrlBase::PrepareBackground( wxDC&, const wxRect&, unsigned int ) const
 {
 }
 #endif
 
-void wxComboCtrlBase::DrawButton( wxDC& dc, const wxRect& rect, int flags )
+void wxComboCtrlBase::DrawButton( wxDC& dc, const wxRect& rect, unsigned int flags )
 {
     int drawState = m_btnState;
 
@@ -1765,7 +1765,7 @@ void wxComboCtrlBase::OnTextCtrlEvent(wxCommandEvent& event)
 
 // call if cursor is on button area or mouse is captured for the button
 bool wxComboCtrlBase::HandleButtonMouseEvent( wxMouseEvent& event,
-                                              int flags )
+                                              unsigned int flags )
 {
     int type = event.GetEventType();
 
@@ -1851,7 +1851,7 @@ bool wxComboCtrlBase::HandleButtonMouseEvent( wxMouseEvent& event,
 
 // returns true if event was consumed or filtered
 bool wxComboCtrlBase::PreprocessMouseEvent( wxMouseEvent& event,
-                                            int WXUNUSED(flags) )
+                                            unsigned int WXUNUSED(flags) )
 {
     const wxMilliClock_t t = ::wxGetLocalTimeMillis();
     const int evtType = event.GetEventType();
@@ -2395,13 +2395,13 @@ bool wxComboCtrlBase::AnimateShow( const wxRect& rect, int WXUNUSED(flags) )
     return true;
 }
 #else
-bool wxComboCtrlBase::AnimateShow( const wxRect& WXUNUSED(rect), int WXUNUSED(flags) )
+bool wxComboCtrlBase::AnimateShow( const wxRect& WXUNUSED(rect), unsigned int WXUNUSED(flags) )
 {
     return true;
 }
 #endif
 
-void wxComboCtrlBase::DoShowPopup( const wxRect& rect, int WXUNUSED(flags) )
+void wxComboCtrlBase::DoShowPopup( const wxRect& rect, unsigned int WXUNUSED(flags) )
 {
     wxWindow* winPopup = m_winPopup;
 
@@ -2782,7 +2782,7 @@ void wxComboCtrlBase::WriteText(const std::string& text)
     }
 }
 
-void wxComboCtrlBase::DoSetValue(const std::string& value, int flags)
+void wxComboCtrlBase::DoSetValue(const std::string& value, unsigned int flags)
 {
     if ( m_text )
     {

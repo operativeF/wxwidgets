@@ -184,7 +184,7 @@ void wxGenericAnimationCtrl::Init()
 
 bool wxGenericAnimationCtrl::Create(wxWindow *parent, wxWindowID id,
             const wxAnimation& animation, const wxPoint& pos,
-            const wxSize& size, long style, const std::string& name)
+            const wxSize& size, unsigned int style, const std::string& name)
 {
     m_timer.SetOwner(this);
 

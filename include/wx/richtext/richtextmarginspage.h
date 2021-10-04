@@ -51,10 +51,10 @@ class WXDLLIMPEXP_RICHTEXT wxRichTextMarginsPage: public wxRichTextDialogPage
 public:
     /// Constructors
     wxRichTextMarginsPage();
-    wxRichTextMarginsPage( wxWindow* parent, wxWindowID id = SYMBOL_WXRICHTEXTMARGINSPAGE_IDNAME, const wxPoint& pos = SYMBOL_WXRICHTEXTMARGINSPAGE_POSITION, const wxSize& size = SYMBOL_WXRICHTEXTMARGINSPAGE_SIZE, long style = SYMBOL_WXRICHTEXTMARGINSPAGE_STYLE );
+    wxRichTextMarginsPage( wxWindow* parent, wxWindowID id = SYMBOL_WXRICHTEXTMARGINSPAGE_IDNAME, const wxPoint& pos = SYMBOL_WXRICHTEXTMARGINSPAGE_POSITION, const wxSize& size = SYMBOL_WXRICHTEXTMARGINSPAGE_SIZE, unsigned int style = SYMBOL_WXRICHTEXTMARGINSPAGE_STYLE );
 
     /// Creation
-    bool Create( wxWindow* parent, wxWindowID id = SYMBOL_WXRICHTEXTMARGINSPAGE_IDNAME, const wxPoint& pos = SYMBOL_WXRICHTEXTMARGINSPAGE_POSITION, const wxSize& size = SYMBOL_WXRICHTEXTMARGINSPAGE_SIZE, long style = SYMBOL_WXRICHTEXTMARGINSPAGE_STYLE );
+    bool Create( wxWindow* parent, wxWindowID id = SYMBOL_WXRICHTEXTMARGINSPAGE_IDNAME, const wxPoint& pos = SYMBOL_WXRICHTEXTMARGINSPAGE_POSITION, const wxSize& size = SYMBOL_WXRICHTEXTMARGINSPAGE_SIZE, unsigned int style = SYMBOL_WXRICHTEXTMARGINSPAGE_STYLE );
 
     /// Destructor
     ~wxRichTextMarginsPage();

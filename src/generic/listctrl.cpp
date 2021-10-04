@@ -985,7 +985,7 @@ bool wxListHeaderWindow::Create( wxWindow *win,
                                  wxListMainWindow *owner,
                                  const wxPoint& pos,
                                  const wxSize& size,
-                                 long style,
+                                 unsigned int style,
                                  const wxString &name )
 {
     if ( !wxWindow::Create(win, id, pos, size, style, name) )
@@ -4944,7 +4944,7 @@ bool wxGenericListCtrl::Create(wxWindow *parent,
                         wxWindowID id,
                         const wxPoint &pos,
                         const wxSize &size,
-                        long style,
+                        unsigned int style,
                         const wxValidator &validator,
                         const wxString &name)
 {
@@ -5066,7 +5066,7 @@ bool wxGenericListCtrl::IsItemChecked(long item) const
     return m_mainWin->IsItemChecked(item);
 }
 
-void wxGenericListCtrl::SetSingleStyle( long style, bool add )
+void wxGenericListCtrl::SetSingleStyle( unsigned int style, bool add )
 {
     wxASSERT_MSG( !(style & wxLC_VIRTUAL),
                   wxT("wxLC_VIRTUAL can't be [un]set") );

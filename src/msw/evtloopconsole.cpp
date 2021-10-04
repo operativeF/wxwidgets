@@ -63,7 +63,7 @@ bool wxMSWEventLoopBase::MSWIsWakeUpRequested()
 
 #if wxUSE_THREADS
 
-WXDWORD wxMSWEventLoopBase::MSWWaitForThread(WXHANDLE hThread)
+DWORD wxMSWEventLoopBase::MSWWaitForThread(WXHANDLE hThread)
 {
     // The order is important here, the code using this function assumes that
     // WAIT_OBJECT_0 indicates the thread termination and anything else -- the

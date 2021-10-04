@@ -31,7 +31,7 @@ public:
                         const std::string& title,
                         const wxPoint& pos = wxDefaultPosition,
                         const wxSize& size = wxDefaultSize,
-                        long style = wxDEFAULT_FRAME_STYLE,
+                        unsigned int style = wxDEFAULT_FRAME_STYLE,
                         const std::string& name = wxFrameNameStr)
     {
         Create(parent, id, title, pos, size, style, name);
@@ -42,7 +42,7 @@ public:
                 const std::string& title,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = wxDEFAULT_FRAME_STYLE,
+                unsigned int style = wxDEFAULT_FRAME_STYLE,
                 const std::string& name = wxFrameNameStr);
 
     ~wxTopLevelWindowMSW();
@@ -70,7 +70,7 @@ public:
     void Raise() override;
 
     void ShowWithoutActivating() override;
-    bool ShowFullScreen(bool show, long style = wxFULLSCREEN_ALL) override;
+    bool ShowFullScreen(bool show, unsigned int style = wxFULLSCREEN_ALL) override;
     bool IsFullScreen() const override { return m_fsIsShowing; }
 
     // wxMSW only: EnableCloseButton(false) may be used to remove the "Close"
@@ -114,7 +114,7 @@ public:
     }
 
     // translate wxWidgets flags to Windows ones
-    WXDWORD MSWGetStyle(long flags, WXDWORD *exstyle) const override;
+    DWORD MSWGetStyle(unsigned int flags, DWORD *exstyle) const override;
 
     // choose the right parent to use with wxCreateWindow()
     WXHWND MSWGetParent() const override;

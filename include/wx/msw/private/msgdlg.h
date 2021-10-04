@@ -54,7 +54,7 @@ namespace wxMSWMessageDialog
         wxWindow *parent{nullptr};
 
         long iconId{0};
-        long style{0};
+        unsigned int style{0};
 
         bool useCustomLabels{false};
 

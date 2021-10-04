@@ -30,7 +30,7 @@ public:
                  wxWindowID id = wxID_ANY,
                  const wxPoint& pos = wxDefaultPosition,
                  const wxSize& size = wxDefaultSize,
-                 long style = wxHD_DEFAULT_STYLE,
+                 unsigned int style = wxHD_DEFAULT_STYLE,
                  const std::string& name = wxHeaderCtrlNameStr)
     {
         Create(parent, id, pos, size, style, name);
@@ -45,11 +45,11 @@ public:
                 wxWindowID id = wxID_ANY,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = wxHD_DEFAULT_STYLE,
+                unsigned int style = wxHD_DEFAULT_STYLE,
                 const std::string& name = wxHeaderCtrlNameStr);
 
     // Window style handling.
-    void SetWindowStyleFlag(long style) override;
+    void SetWindowStyleFlag(unsigned int style) override;
 
 protected:
     // Override wxWindow methods which must be implemented by a new control.

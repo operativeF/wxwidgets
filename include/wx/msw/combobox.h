@@ -30,7 +30,7 @@ public:
             const wxPoint& pos = wxDefaultPosition,
             const wxSize& size = wxDefaultSize,
             const std::vector<std::string>& choices = {},
-            long style = 0,
+            unsigned int style = 0,
             const wxValidator& validator = wxDefaultValidator,
             const std::string& name = wxComboBoxNameStr)
     {
@@ -48,7 +48,7 @@ public:
                 const wxPoint& pos,
                 const wxSize& size,
                 const std::vector<std::string>& choices,
-                long style = 0,
+                unsigned int style = 0,
                 const wxValidator& validator = wxDefaultValidator,
                 const std::string& name = wxComboBoxNameStr);
 
@@ -97,7 +97,7 @@ public:
     void OnUpdateDelete(wxUpdateUIEvent& event);
     void OnUpdateSelectAll(wxUpdateUIEvent& event);
 
-    WXDWORD MSWGetStyle(long style, WXDWORD *exstyle) const override;
+    DWORD MSWGetStyle(unsigned int style, DWORD *exstyle) const override;
 
 #if wxUSE_UXTHEME
     // override wxTextEntry method to work around Windows bug

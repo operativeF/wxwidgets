@@ -110,13 +110,13 @@ public:
         // Static accessors.
 
     static wxPluginLibrary    *wxLoadLibrary( const wxString &libname,
-                                            int flags = wxDL_DEFAULT );
+                                              unsigned int flags = wxDL_DEFAULT );
     static bool                UnloadLibrary(const wxString &libname);
 
         // Instance methods.
 
     wxPluginManager()  = default;
-    wxPluginManager(const wxString &libname, int flags = wxDL_DEFAULT)
+    wxPluginManager(const wxString &libname, unsigned int flags = wxDL_DEFAULT)
     {
         Load(libname, flags);
     }

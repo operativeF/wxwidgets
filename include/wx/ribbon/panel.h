@@ -39,7 +39,7 @@ public:
                   const wxBitmap& minimised_icon = wxNullBitmap,
                   const wxPoint& pos = wxDefaultPosition,
                   const wxSize& size = wxDefaultSize,
-                  long style = wxRIBBON_PANEL_DEFAULT_STYLE);
+                  unsigned int style = wxRIBBON_PANEL_DEFAULT_STYLE);
 
     bool Create(wxWindow* parent,
                 wxWindowID id = wxID_ANY,
@@ -47,7 +47,7 @@ public:
                 const wxBitmap& icon = wxNullBitmap,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = wxRIBBON_PANEL_DEFAULT_STYLE);
+                unsigned int style = wxRIBBON_PANEL_DEFAULT_STYLE);
 
     ~wxRibbonPanel();
 
@@ -114,7 +114,7 @@ protected:
     bool ShouldSendEventToDummy(wxEvent& evt);
     bool TryAfter(wxEvent& evt) override;
 
-    void CommonInit(const wxString& label, const wxBitmap& icon, long style);
+    void CommonInit(const wxString& label, const wxBitmap& icon, unsigned int style);
     static wxRect GetExpandedPosition(wxRect panel,
                                       wxSize expanded_size,
                                       wxDirection direction);

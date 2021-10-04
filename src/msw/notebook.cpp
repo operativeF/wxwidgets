@@ -123,7 +123,7 @@ wxNotebook::wxNotebook(wxWindow *parent,
                        wxWindowID id,
                        const wxPoint& pos,
                        const wxSize& size,
-                       long style,
+                       unsigned int style,
                        const std::string& name)
 {
   Create(parent, id, pos, size, style, name);
@@ -134,7 +134,7 @@ bool wxNotebook::Create(wxWindow *parent,
                         wxWindowID id,
                         const wxPoint& pos,
                         const wxSize& size,
-                        long style,
+                        unsigned int style,
                         const std::string& name)
 {
     if ( (style & wxBK_ALIGN_MASK) == wxBK_DEFAULT )
@@ -243,9 +243,9 @@ bool wxNotebook::Create(wxWindow *parent,
     return true;
 }
 
-WXDWORD wxNotebook::MSWGetStyle(long style, WXDWORD *exstyle) const
+DWORD wxNotebook::MSWGetStyle(unsigned int style, DWORD *exstyle) const
 {
-    WXDWORD tabStyle = wxControl::MSWGetStyle(style, exstyle);
+    DWORD tabStyle = wxControl::MSWGetStyle(style, exstyle);
 
     tabStyle |= WS_TABSTOP | TCS_TABS;
 

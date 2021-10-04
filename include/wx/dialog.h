@@ -114,7 +114,7 @@ public:
     // check whether it contains wxDIALOG_NO_PARENT bit.
     //
     // This function always returns a valid top level window or NULL.
-    wxWindow *GetParentForModalDialog(wxWindow *parent, long style) const;
+    wxWindow *GetParentForModalDialog(wxWindow *parent, unsigned int style) const;
 
     // This overload can only be used for already initialized windows, i.e. not
     // from the ctor. It uses the current window parent and style.

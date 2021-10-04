@@ -35,7 +35,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxGenericFontButton, wxButton);
 
 bool wxGenericFontButton::Create( wxWindow *parent, wxWindowID id,
                         const wxFont &initial, const wxPoint &pos,
-                        const wxSize &size, long style,
+                        const wxSize &size, unsigned int style,
                         const wxValidator& validator, const std::string& name)
 {
     wxString label = (style & wxFNTP_FONTDESC_AS_LABEL) ?

@@ -85,7 +85,7 @@ struct wxCmdLineEntryDesc
     const char *longName;
     const char *description;
     wxCmdLineParamType type;
-    int flags;
+    unsigned int flags;
 };
 
 // the list of wxCmdLineEntryDesc objects should be terminated with this one
@@ -259,10 +259,10 @@ public:
     // a switch: i.e. an option without value
     void AddSwitch(const wxString& name, const wxString& lng = wxEmptyString,
                    const wxString& desc = wxEmptyString,
-                   int flags = 0);
+                   unsigned int flags = 0);
     void AddLongSwitch(const wxString& lng,
                        const wxString& desc = wxEmptyString,
-                       int flags = 0)
+                       unsigned int flags = 0)
     {
         AddSwitch(wxString(), lng, desc, flags);
     }
@@ -271,11 +271,11 @@ public:
     void AddOption(const wxString& name, const wxString& lng = wxEmptyString,
                    const wxString& desc = wxEmptyString,
                    wxCmdLineParamType type = wxCmdLineParamType::String,
-                   int flags = 0);
+                   unsigned int flags = 0);
     void AddLongOption(const wxString& lng,
                        const wxString& desc = wxEmptyString,
                        wxCmdLineParamType type = wxCmdLineParamType::String,
-                       int flags = 0)
+                       unsigned int flags = 0)
     {
         AddOption(wxString(), lng, desc, type, flags);
     }
@@ -283,7 +283,7 @@ public:
     // a parameter
     void AddParam(const wxString& desc = wxEmptyString,
                   wxCmdLineParamType type = wxCmdLineParamType::String,
-                  int flags = 0);
+                  unsigned int flags = 0);
 
     // add an explanatory text to be shown to the user in help
     void AddUsageText(const wxString& text);

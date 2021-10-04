@@ -94,7 +94,7 @@ wxCONSTRUCTOR_7( wxHyperlinkCtrl, wxWindow*, Parent, wxWindowID, Id, std::string
 void
 wxHyperlinkCtrlBase::CheckParams(const std::string& label,
                                  const std::string& url,
-                                 long style)
+                                 unsigned int style)
 {
 #if wxDEBUG_LEVEL
     wxASSERT_MSG(!url.empty() || !label.empty(),

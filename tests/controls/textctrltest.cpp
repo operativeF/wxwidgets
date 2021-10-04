@@ -50,7 +50,7 @@ static std::unique_ptr<wxTextCtrl> CreateText(long extraStyles)
                             wxDefaultPosition, wxSize(400, h), extraStyles);
 }
 
-static void DoPositionToCoordsTestWithStyle(long style)
+static void DoPositionToCoordsTestWithStyle(unsigned int style)
 {
     auto m_entry = CreateText(style | wxTE_MULTILINE);
 
@@ -143,7 +143,7 @@ static void DoPositionToCoordsTestWithStyle(long style)
     CHECK(coords.y <= TEXT_HEIGHT);
 }
 
-static void DoPositionToXYMultiLine(long style)
+static void DoPositionToXYMultiLine(unsigned int style)
 {
     auto m_entry = CreateText(style | wxTE_MULTILINE | wxTE_DONTWRAP);
 
@@ -347,7 +347,7 @@ static void DoPositionToXYMultiLine(long style)
     CHECK_EQ(false, ok);
 }
 
-static void DoXYToPositionMultiLine(long style)
+static void DoXYToPositionMultiLine(unsigned int style)
 {
     auto m_entry = CreateText(style | wxTE_MULTILINE | wxTE_DONTWRAP);
 
@@ -1289,7 +1289,7 @@ TEST_CASE("wxTextCtrl::GetBestSize")
 // if the paste isn't done fast enough!
 TEST_CASE("wxTextCtrl::LongPaste")
 {
-    long style = 0;
+    unsigned int style = 0;
 
     SUBCASE("Plain")
     {
@@ -1384,7 +1384,7 @@ TEST_CASE("wxTextCtrl::InitialCanUndo")
 
     for ( size_t n = 0; n < WXSIZEOF(styles); n++ )
     {
-        const long style = styles[n];
+        const unsigned int style = styles[n];
 
 #ifdef __MINGW32_TOOLCHAIN__
         if ( style == wxTE_RICH2 )

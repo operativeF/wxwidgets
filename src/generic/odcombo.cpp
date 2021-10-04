@@ -893,7 +893,7 @@ bool wxOwnerDrawnComboBox::Create(wxWindow *parent,
                                   const wxString& value,
                                   const wxPoint& pos,
                                   const wxSize& size,
-                                  long style,
+                                  unsigned int style,
                                   const wxValidator& validator,
                                   const std::string& name)
 {
@@ -906,7 +906,7 @@ wxOwnerDrawnComboBox::wxOwnerDrawnComboBox(wxWindow *parent,
                                            const wxPoint& pos,
                                            const wxSize& size,
                                            const std::vector<std::string>& choices,
-                                           long style,
+                                           unsigned int style,
                                            const wxValidator& validator,
                                            const std::string& name)
 {
@@ -922,7 +922,7 @@ bool wxOwnerDrawnComboBox::Create(wxWindow *parent,
                                   const wxPoint& pos,
                                   const wxSize& size,
                                   const std::vector<std::string>& choices,
-                                  long style,
+                                  unsigned int style,
                                   const wxValidator& validator,
                                   const std::string& name)
 {
@@ -942,7 +942,7 @@ bool wxOwnerDrawnComboBox::Create(wxWindow *parent,
                                   const wxSize& size,
                                   int n,
                                   const wxString choices[],
-                                  long style,
+                                  unsigned int style,
                                   const wxValidator& validator,
                                   const std::string& name)
 {

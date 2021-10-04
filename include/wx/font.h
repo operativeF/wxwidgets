@@ -211,7 +211,7 @@ public:
         { m_encoding = encoding; return *this; }
 
     // Set all flags at once.
-    wxFontInfo& AllFlags(int flags)
+    wxFontInfo& AllFlags(unsigned int flags)
     {
         m_flags = flags;
 
@@ -315,7 +315,7 @@ private:
 
     wxFontFamily m_family;
     wxString m_faceName;
-    int m_flags;
+    unsigned int m_flags;
     int m_weight;
     wxFontEncoding m_encoding;
 };
@@ -380,7 +380,7 @@ public:
     // parameters for each flag
     static wxFont *New(int pointSize,
                        wxFontFamily family,
-                       int flags = wxFONTFLAG_DEFAULT,
+                       unsigned int flags = wxFONTFLAG_DEFAULT,
                        const wxString& face = wxEmptyString,
                        wxFontEncoding encoding = wxFONTENCODING_DEFAULT);
 
@@ -389,7 +389,7 @@ public:
     // parameters for each flag
     static wxFont *New(const wxSize& pixelSize,
                        wxFontFamily family,
-                       int flags = wxFONTFLAG_DEFAULT,
+                       unsigned int flags = wxFONTFLAG_DEFAULT,
                        const wxString& face = wxEmptyString,
                        wxFontEncoding encoding = wxFONTENCODING_DEFAULT);
 
@@ -496,7 +496,7 @@ protected:
 
     // Helper functions to recover wxFONTSTYLE/wxFONTWEIGHT and underlined flag
     // values from flags containing a combination of wxFONTFLAG_XXX.
-    static constexpr wxFontStyle GetStyleFromFlags(int flags) noexcept
+    static constexpr wxFontStyle GetStyleFromFlags(unsigned int flags) noexcept
     {
         return flags & wxFONTFLAG_ITALIC
                         ? wxFontStyle::Italic
@@ -505,7 +505,7 @@ protected:
                             : wxFontStyle::Normal;
     }
 
-    static constexpr wxFontWeight GetWeightFromFlags(int flags) noexcept
+    static constexpr wxFontWeight GetWeightFromFlags(unsigned int flags) noexcept
     {
         return flags & wxFONTFLAG_LIGHT
                         ? wxFONTWEIGHT_LIGHT
@@ -514,12 +514,12 @@ protected:
                             : wxFONTWEIGHT_NORMAL;
     }
 
-    static constexpr bool GetUnderlinedFromFlags(int flags) noexcept
+    static constexpr bool GetUnderlinedFromFlags(unsigned int flags) noexcept
     {
         return (flags & wxFONTFLAG_UNDERLINED) != 0;
     }
 
-    static constexpr bool GetStrikethroughFromFlags(int flags) noexcept
+    static constexpr bool GetStrikethroughFromFlags(unsigned int flags) noexcept
     {
         return (flags & wxFONTFLAG_STRIKETHROUGH) != 0;
     }

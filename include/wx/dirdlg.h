@@ -59,7 +59,7 @@ public:
     wxDirDialogBase(wxWindow *parent,
                     const std::string& title = wxDirSelectorPromptStr,
                     const std::string& defaultPath = {},
-                    long style = wxDD_DEFAULT_STYLE,
+                    unsigned int style = wxDD_DEFAULT_STYLE,
                     const wxPoint& pos = wxDefaultPosition,
                     const wxSize& sz = wxDefaultSize,
                     const std::string& name = wxDirDialogNameStr)
@@ -73,7 +73,7 @@ public:
     [[maybe_unused]] bool Create(wxWindow *parent,
                 const std::string& title = wxDirSelectorPromptStr,
                 const std::string& defaultPath = {},
-                long style = wxDD_DEFAULT_STYLE,
+                unsigned int style = wxDD_DEFAULT_STYLE,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& sz = wxDefaultSize,
                 const std::string& name = wxDirDialogNameStr)
@@ -140,7 +140,7 @@ protected:
 WXDLLIMPEXP_CORE wxString
 wxDirSelector(const wxString& message = wxASCII_STR(wxDirSelectorPromptStr),
               const wxString& defaultPath = wxEmptyString,
-              long style = wxDD_DEFAULT_STYLE,
+              unsigned int style = wxDD_DEFAULT_STYLE,
               const wxPoint& pos = wxDefaultPosition,
               wxWindow *parent = nullptr);
 

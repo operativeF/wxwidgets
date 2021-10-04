@@ -33,7 +33,7 @@ public:
                           const wxColour& col = *wxBLACK,
                           const wxPoint& pos = wxDefaultPosition,
                           const wxSize& size = wxDefaultSize,
-                          long style = wxCLRBTN_DEFAULT_STYLE,
+                          unsigned int style = wxCLRBTN_DEFAULT_STYLE,
                           const wxValidator& validator = wxDefaultValidator,
                           const std::string& name = wxColourPickerWidgetNameStr)
     {
@@ -59,7 +59,7 @@ public:
                 const wxColour& col = *wxBLACK,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = wxCLRBTN_DEFAULT_STYLE,
+                unsigned int style = wxCLRBTN_DEFAULT_STYLE,
                 const wxValidator& validator = wxDefaultValidator,
                 const std::string& name = wxColourPickerWidgetNameStr);
 

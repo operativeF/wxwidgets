@@ -43,7 +43,7 @@ public:
                 wxWindowID id,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = wxSB_HORIZONTAL,
+                unsigned int style = wxSB_HORIZONTAL,
                 const wxValidator& validator = wxDefaultValidator,
                 const std::string& name = wxScrollBarNameStr);
     */

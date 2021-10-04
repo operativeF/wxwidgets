@@ -232,7 +232,7 @@ public:
                         wxDC& dc,
                         wxWindow* wnd,
                         const wxRect& rect,
-                        long style) = 0;
+                        unsigned int style) = 0;
 
     virtual void DrawPanelBackground(
                         wxDC& dc,
@@ -318,7 +318,7 @@ public:
     virtual wxSize GetScrollButtonMinimumSize(
                         wxDC& dc,
                         wxWindow* wnd,
-                        long style) = 0;
+                        unsigned int style) = 0;
 
     virtual wxSize GetPanelSize(
                         wxDC& dc,
@@ -446,7 +446,7 @@ public:
                         wxDC& dc,
                         wxWindow* wnd,
                         const wxRect& rect,
-                        long style) override;
+                        unsigned int style) override;
 
     void DrawPanelBackground(
                         wxDC& dc,
@@ -526,7 +526,7 @@ public:
     wxSize GetScrollButtonMinimumSize(
                         wxDC& dc,
                         wxWindow* wnd,
-                        long style) override;
+                        unsigned int style) override;
 
     wxSize GetPanelSize(
                         wxDC& dc,
@@ -784,13 +784,13 @@ public:
     wxSize GetScrollButtonMinimumSize(
                         wxDC& dc,
                         wxWindow* wnd,
-                        long style) override;
+                        unsigned int style) override;
 
     void DrawScrollButton(
                         wxDC& dc,
                         wxWindow* wnd,
                         const wxRect& rect,
-                        long style) override;
+                        unsigned int style) override;
 
     wxSize GetPanelSize(
                         wxDC& dc,

@@ -36,7 +36,7 @@ public:
     void EnableEffects(bool flag) { m_enableEffects = flag; }
     bool GetEnableEffects() const { return m_enableEffects; }
 
-    void RestrictSelection(int flags) { m_restrictSelection = flags; }
+    void RestrictSelection(unsigned int flags) { m_restrictSelection = flags; }
     int  GetRestrictSelection() const { return m_restrictSelection; }
 
     void SetInitialFont(const wxFont& font) { m_initialFont = font; }

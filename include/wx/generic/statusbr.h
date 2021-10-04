@@ -27,7 +27,7 @@ public:
     wxStatusBarGeneric() { Init(); }
     wxStatusBarGeneric(wxWindow *parent,
                        wxWindowID winid = wxID_ANY,
-                       long style = wxSTB_DEFAULT_STYLE,
+                       unsigned int style = wxSTB_DEFAULT_STYLE,
                        const std::string& name = wxStatusBarNameStr)
     {
         Init();
@@ -41,7 +41,7 @@ public:
 	wxStatusBarGeneric& operator=(const wxStatusBarGeneric&) = delete;
 
     bool Create(wxWindow *parent, wxWindowID winid = wxID_ANY,
-                long style = wxSTB_DEFAULT_STYLE,
+                unsigned int style = wxSTB_DEFAULT_STYLE,
                 const std::string& name = wxStatusBarNameStr);
 
     // implement base class methods

@@ -73,7 +73,7 @@ bool wxFrame::Create(wxWindow *parent,
                      const std::string& title,
                      const wxPoint& pos,
                      const wxSize& size,
-                     long style,
+                     unsigned int style,
                      const std::string& name)
 {
     if ( !wxTopLevelWindow::Create(parent, id, title, pos, size, style, name) )
@@ -226,7 +226,7 @@ void wxFrame::SendSizeEvent(int flags)
 
 #if wxUSE_STATUSBAR
 wxStatusBar *wxFrame::OnCreateStatusBar(int number,
-                                        long style,
+                                        unsigned int style,
                                         wxWindowID id,
                                         const std::string& name)
 {
@@ -433,7 +433,7 @@ void wxFrame::OnSysColourChanged(wxSysColourChangedEvent& event)
 }
 
 // Pass true to show full screen, false to restore.
-bool wxFrame::ShowFullScreen(bool show, long style)
+bool wxFrame::ShowFullScreen(bool show, unsigned int style)
 {
     if ( IsFullScreen() == show )
         return false;
@@ -515,7 +515,7 @@ bool wxFrame::ShowFullScreen(bool show, long style)
 
 #if wxUSE_TOOLBAR
 
-wxToolBar* wxFrame::CreateToolBar(long style, wxWindowID id, const std::string& name)
+wxToolBar* wxFrame::CreateToolBar(unsigned int style, wxWindowID id, const std::string& name)
 {
     if ( wxFrameBase::CreateToolBar(style, id, name) )
     {

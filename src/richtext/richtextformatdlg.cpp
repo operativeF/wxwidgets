@@ -92,7 +92,7 @@ wxRichTextFormattingDialog::~wxRichTextFormattingDialog()
 }
 
 bool wxRichTextFormattingDialog::Create(long flags, wxWindow* parent, const std::string& title, wxWindowID id,
-        const wxPoint& pos, const wxSize& sz, long style)
+        const wxPoint& pos, const wxSize& sz, unsigned int style)
 {
     SetExtraStyle(wxDIALOG_EX_CONTEXTHELP|wxWS_EX_BLOCK_EVENTS);
 #ifdef __WXMAC__
@@ -468,7 +468,7 @@ wxBEGIN_EVENT_TABLE(wxRichTextFontPreviewCtrl, wxWindow)
     EVT_PAINT(wxRichTextFontPreviewCtrl::OnPaint)
 wxEND_EVENT_TABLE()
 
-wxRichTextFontPreviewCtrl::wxRichTextFontPreviewCtrl(wxWindow *parent, wxWindowID id, const wxPoint& pos, const wxSize& sz, long style)
+wxRichTextFontPreviewCtrl::wxRichTextFontPreviewCtrl(wxWindow *parent, wxWindowID id, const wxPoint& pos, const wxSize& sz, unsigned int style)
 {
     if ((style & wxBORDER_MASK) == wxBORDER_DEFAULT)
         style |= wxBORDER_THEME;
@@ -711,7 +711,7 @@ wxEND_EVENT_TABLE()
 
 wxIMPLEMENT_CLASS(wxRichTextColourSwatchCtrl, wxControl);
 
-wxRichTextColourSwatchCtrl::wxRichTextColourSwatchCtrl(wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size, long style)
+wxRichTextColourSwatchCtrl::wxRichTextColourSwatchCtrl(wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size, unsigned int style)
 {
     if ((style & wxBORDER_MASK) == wxBORDER_DEFAULT)
         style |= wxBORDER_THEME;
@@ -772,13 +772,13 @@ wxBEGIN_EVENT_TABLE(wxRichTextFontListBox, wxHtmlListBox)
 wxEND_EVENT_TABLE()
 
 wxRichTextFontListBox::wxRichTextFontListBox(wxWindow* parent, wxWindowID id, const wxPoint& pos,
-    const wxSize& size, long style)
+    const wxSize& size, unsigned int style)
 {
     Create(parent, id, pos, size, style);
 }
 
 bool wxRichTextFontListBox::Create(wxWindow* parent, wxWindowID id, const wxPoint& pos,
-        const wxSize& size, long style)
+        const wxSize& size, unsigned int style)
 {
     if ((style & wxBORDER_MASK) == wxBORDER_DEFAULT)
         style |= wxBORDER_THEME;

@@ -100,7 +100,6 @@ set(BASE_WIN32_HDR
     wx/msw/seh.h
     wx/msw/stackwalk.h
     wx/msw/stdpaths.h
-    wx/msw/winundef.h
     wx/msw/winver.h
     wx/msw/wrapcctl.h
     wx/msw/wrapcdlg.h
@@ -581,7 +580,6 @@ set(BASE_CMN_HDR
     wx/sharedptr.h
     wx/snglinst.h
     wx/sstream.h
-    wx/stack.h
     wx/stackwalk.h
     wx/stdpaths.h
     wx/stdstream.h

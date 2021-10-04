@@ -24,7 +24,7 @@ public:
                  wxWindowID id = wxID_ANY,
                  const wxPoint& pos = wxDefaultPosition,
                  const wxSize& size = wxDefaultSize,
-                 long style = wxSP_VERTICAL | wxSP_ARROW_KEYS,
+                 unsigned int style = wxSP_VERTICAL | wxSP_ARROW_KEYS,
                  const std::string& name = wxSPIN_BUTTON_NAME)
     {
         Create(parent, id, pos, size, style, name);
@@ -41,7 +41,7 @@ public:
                 wxWindowID id = wxID_ANY,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = wxSP_VERTICAL | wxSP_ARROW_KEYS,
+                unsigned int style = wxSP_VERTICAL | wxSP_ARROW_KEYS,
                 const std::string& name = wxSPIN_BUTTON_NAME);
 
 

@@ -63,7 +63,7 @@ public:
   [[maybe_unused]] bool Create(const wxString& fileName, bool bOverwrite = false,
               int access = wxS_DEFAULT);
   bool Open(const wxString& fileName, OpenMode mode = read,
-            int access = wxS_DEFAULT);
+            unsigned int access = wxS_DEFAULT);
   bool Close();  // Close is a NOP if not opened
 
   // assign an existing file descriptor and get it back from wxFile object

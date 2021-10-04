@@ -385,7 +385,7 @@ wxFSFile* wxArchiveFSHandler::OpenFile(
                         );
 }
 
-wxString wxArchiveFSHandler::FindFirst(const wxString& spec, int flags)
+wxString wxArchiveFSHandler::FindFirst(const wxString& spec, unsigned int flags)
 {
     wxString right = GetRightLocation(spec);
     wxString left = GetLeftLocation(spec);

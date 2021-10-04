@@ -82,7 +82,7 @@ public:
                          const std::string& caption,
                          const std::vector<std::string>& choices,
                          void **clientData = nullptr,
-                         long style = wxCHOICEDLG_STYLE,
+                         unsigned int style = wxCHOICEDLG_STYLE,
                          const wxPoint& pos = wxDefaultPosition)
     {
         Create(parent, message, caption, choices, clientData, style, pos);
@@ -96,7 +96,7 @@ public:
                 const std::string& caption,
                 const std::vector<std::string>& choices,
                 void **clientData = nullptr,
-                long style = wxCHOICEDLG_STYLE,
+                unsigned int style = wxCHOICEDLG_STYLE,
                 const wxPoint& pos = wxDefaultPosition);
 
     void SetSelection(int sel);
@@ -134,7 +134,7 @@ public:
                         const std::string& message,
                         const std::string& caption,
                         const std::vector<std::string>& choices,
-                        long style = wxCHOICEDLG_STYLE,
+                        unsigned int style = wxCHOICEDLG_STYLE,
                         const wxPoint& pos = wxDefaultPosition)
     {
         Create(parent, message, caption, choices, style, pos);
@@ -144,7 +144,7 @@ public:
                 const std::string& message,
                 const std::string& caption,
                 const std::vector<std::string>& choices,
-                long style = wxCHOICEDLG_STYLE,
+                unsigned int style = wxCHOICEDLG_STYLE,
                 const wxPoint& pos = wxDefaultPosition);
 
     void SetSelections(const std::vector<int>& selections);

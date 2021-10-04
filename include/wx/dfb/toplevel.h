@@ -24,7 +24,7 @@ public:
                         const wxString& title,
                         const wxPoint& pos = wxDefaultPosition,
                         const wxSize& size = wxDefaultSize,
-                        long style = wxDEFAULT_FRAME_STYLE,
+                        unsigned int style = wxDEFAULT_FRAME_STYLE,
                         const wxString& name = wxASCII_STR(wxFrameNameStr))
     {
         Init();
@@ -37,7 +37,7 @@ public:
                 const wxString& title,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = wxDEFAULT_FRAME_STYLE,
+                unsigned int style = wxDEFAULT_FRAME_STYLE,
                 const wxString& name = wxASCII_STR(wxFrameNameStr));
 
     
@@ -47,7 +47,7 @@ public:
     virtual bool IsIconized() const;
     virtual void Restore();
 
-    virtual bool ShowFullScreen(bool show, long style = wxFULLSCREEN_ALL);
+    virtual bool ShowFullScreen(bool show, unsigned int style = wxFULLSCREEN_ALL);
     virtual bool IsFullScreen() const { return m_fsIsShowing; }
 
     virtual bool CanSetTransparent() { return true; }

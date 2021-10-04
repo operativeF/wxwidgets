@@ -95,7 +95,7 @@ public:
     */
     wxStyledTextCtrl(wxWindow *parent, wxWindowID id=wxID_ANY,
                      const wxPoint& pos = wxDefaultPosition,
-                     const wxSize& size = wxDefaultSize, long style = 0,
+                     const wxSize& size = wxDefaultSize, unsigned int style = 0,
                      const wxString& name = wxSTCNameStr);
     /**
         Default ctor.
@@ -112,7 +112,7 @@ public:
     */
     bool Create(wxWindow *parent, wxWindowID id=wxID_ANY,
                 const wxPoint& pos = wxDefaultPosition,
-                const wxSize& size = wxDefaultSize, long style = 0,
+                const wxSize& size = wxDefaultSize, unsigned int style = 0,
                 const wxString& name = wxSTCNameStr);
 
     //@}

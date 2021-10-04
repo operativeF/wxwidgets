@@ -368,7 +368,7 @@ private:
 
 // translate the key or mouse event flags to the type of selection we're
 // dealing with
-static void EventFlagsToSelType(long style,
+static void EventFlagsToSelType(unsigned int style,
                                 bool shiftDown,
                                 bool ctrlDown,
                                 bool &is_multiple,
@@ -941,7 +941,7 @@ bool wxGenericTreeCtrl::Create(wxWindow *parent,
                                wxWindowID id,
                                const wxPoint& pos,
                                const wxSize& size,
-                               long style,
+                               unsigned int style,
                                const wxValidator& validator,
                                const std::string& name )
 {
@@ -1065,7 +1065,7 @@ wxGenericTreeCtrl::GetChildrenCount(const wxTreeItemId& item,
     return ((wxGenericTreeItem*) item.m_pItem)->GetChildrenCount(recursively);
 }
 
-void wxGenericTreeCtrl::SetWindowStyleFlag(long styles)
+void wxGenericTreeCtrl::SetWindowStyleFlag(unsigned int styles)
 {
     // Do not try to expand the root node if it hasn't been created yet
     if (m_anchor && !HasFlag(wxTR_HIDE_ROOT) && (styles & wxTR_HIDE_ROOT))

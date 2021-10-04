@@ -85,7 +85,7 @@ bool wxListBox::Create(wxWindow *parent,
                        const wxPoint& pos,
                        const wxSize& size,
                        const std::vector<std::string>& choices,
-                       long style,
+                       unsigned int style,
                        const wxValidator& validator,
                        const std::string& name)
 {
@@ -115,9 +115,9 @@ wxListBox::~wxListBox()
     Clear();
 }
 
-WXDWORD wxListBox::MSWGetStyle(long style, WXDWORD *exstyle) const
+DWORD wxListBox::MSWGetStyle(unsigned int style, DWORD *exstyle) const
 {
-    WXDWORD msStyle = wxControl::MSWGetStyle(style, exstyle);
+    DWORD msStyle = wxControl::MSWGetStyle(style, exstyle);
 
     // we always want to get the notifications
     msStyle |= LBS_NOTIFY;

@@ -134,7 +134,7 @@ wxFrame *wxFrameBase::New(wxWindow *parent,
                           const std::string& title,
                           const wxPoint& pos,
                           const wxSize& size,
-                          long style,
+                          unsigned int style,
                           const std::string& name)
 {
     return new wxFrame(parent, id, title, pos, size, style, name);
@@ -322,7 +322,7 @@ void wxFrameBase::OnInternalIdle()
 #if wxUSE_STATUSBAR
 
 wxStatusBar* wxFrameBase::CreateStatusBar(int number,
-                                          long style,
+                                          unsigned int style,
                                           wxWindowID id,
                                           const std::string& name)
 {
@@ -337,7 +337,7 @@ wxStatusBar* wxFrameBase::CreateStatusBar(int number,
 }
 
 wxStatusBar *wxFrameBase::OnCreateStatusBar(int number,
-                                            long style,
+                                            unsigned int style,
                                             wxWindowID id,
                                             const std::string& name)
 {
@@ -494,7 +494,7 @@ void wxFrameBase::DoGiveHelp(const wxString& help, bool show)
 
 #if wxUSE_TOOLBAR
 
-wxToolBar* wxFrameBase::CreateToolBar(long style,
+wxToolBar* wxFrameBase::CreateToolBar(unsigned int style,
                                       wxWindowID id,
                                       const std::string& name)
 {
@@ -520,7 +520,7 @@ wxToolBar* wxFrameBase::CreateToolBar(long style,
     return m_frameToolBar.get();
 }
 
-wxToolBar* wxFrameBase::OnCreateToolBar(long style,
+wxToolBar* wxFrameBase::OnCreateToolBar(unsigned int style,
                                         wxWindowID id,
                                         const std::string& name)
 {

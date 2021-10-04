@@ -106,7 +106,7 @@ wxRichTextListStylePage::wxRichTextListStylePage( )
     Init();
 }
 
-wxRichTextListStylePage::wxRichTextListStylePage( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size, long style )
+wxRichTextListStylePage::wxRichTextListStylePage( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size, unsigned int style )
 {
     Init();
     Create(parent, id, pos, size, style);
@@ -116,7 +116,7 @@ wxRichTextListStylePage::wxRichTextListStylePage( wxWindow* parent, wxWindowID i
  * wxRichTextListStylePage creator
  */
 
-bool wxRichTextListStylePage::Create( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size, long style )
+bool wxRichTextListStylePage::Create( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size, unsigned int style )
 {
 ////@begin wxRichTextListStylePage creation
     wxRichTextDialogPage::Create( parent, id, pos, size, style );

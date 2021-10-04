@@ -108,7 +108,7 @@ bool wxFile::Exists(const wxString& name)
 
 bool wxFile::Access(const wxString& name, OpenMode mode)
 {
-    const int how = [mode]()
+    const unsigned int how = [mode]()
     {
         switch ( mode )
         {
@@ -117,14 +117,14 @@ bool wxFile::Access(const wxString& name, OpenMode mode)
                 [[fallthrough]];
 
             case read:
-                return static_cast<int>(wxFilePermissions::R_OK);
+                return static_cast<unsigned int>(wxFilePermissions::R_OK);
 
             case write:
-                return static_cast<int>(wxFilePermissions::W_OK);
+                return static_cast<unsigned int>(wxFilePermissions::W_OK);
 
             case read_write:
-                return static_cast<int>(wxFilePermissions::R_OK) |
-                       static_cast<int>(wxFilePermissions::W_OK);
+                return static_cast<unsigned int>(wxFilePermissions::R_OK) |
+                       static_cast<unsigned int>(wxFilePermissions::W_OK);
         }
     }();
 
@@ -171,9 +171,9 @@ bool wxFile::Create(const wxString& fileName, bool bOverwrite, int accessMode)
 }
 
 // open the file
-bool wxFile::Open(const wxString& fileName, OpenMode mode, int accessMode)
+bool wxFile::Open(const wxString& fileName, OpenMode mode, unsigned int accessMode)
 {
-    int flags = O_BINARY;
+    unsigned int flags = O_BINARY;
 
     switch ( mode )
     {

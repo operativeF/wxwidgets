@@ -54,7 +54,7 @@ public:
                           const wxDateTime& date = wxDefaultDateTime,
                           const wxPoint& pos = wxDefaultPosition,
                           const wxSize& size = wxDefaultSize,
-                          long style = wxCAL_SHOW_HOLIDAYS,
+                          unsigned int style = wxCAL_SHOW_HOLIDAYS,
                           const std::string& name = wxCalendarNameStr);
 
     [[maybe_unused]] bool Create(wxWindow *parent,
@@ -62,7 +62,7 @@ public:
                 const wxDateTime& date = wxDefaultDateTime,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = wxCAL_SHOW_HOLIDAYS,
+                unsigned int style = wxCAL_SHOW_HOLIDAYS,
                 const std::string& name = wxCalendarNameStr);
 
     ~wxGenericCalendarCtrl();
@@ -173,7 +173,7 @@ public:
     bool Enable(bool enable = true) override;
     bool Show(bool show = true) override;
 
-    void SetWindowStyleFlag(long style) override;
+    void SetWindowStyleFlag(unsigned int style) override;
 
     wxVisualAttributes GetDefaultAttributes() const override
         { return GetClassDefaultAttributes(GetWindowVariant()); }

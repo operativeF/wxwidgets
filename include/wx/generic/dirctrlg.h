@@ -84,7 +84,7 @@ public:
               const std::string& dir = wxDirDialogDefaultFolderStr,
               const wxPoint& pos = wxDefaultPosition,
               const wxSize& size = wxDefaultSize,
-              long style = wxDIRCTRL_DEFAULT_STYLE,
+              unsigned int style = wxDIRCTRL_DEFAULT_STYLE,
               const std::string& filter = {},
               int defaultFilter = 0,
               const std::string& name = wxTreeCtrlNameStr)
@@ -99,7 +99,7 @@ public:
               const std::string& dir = wxDirDialogDefaultFolderStr,
               const wxPoint& pos = wxDefaultPosition,
               const wxSize& size = wxDefaultSize,
-              long style = wxDIRCTRL_DEFAULT_STYLE,
+              unsigned int style = wxDIRCTRL_DEFAULT_STYLE,
               const std::string& filter = {},
               int defaultFilter = 0,
               const std::string& name = wxTreeCtrlNameStr);
@@ -233,7 +233,7 @@ public:
     wxDirFilterListCtrl(wxGenericDirCtrl* parent, wxWindowID id = wxID_ANY,
               const wxPoint& pos = wxDefaultPosition,
               const wxSize& size = wxDefaultSize,
-              long style = 0)
+              unsigned int style = 0)
     {
         Create(parent, id, pos, size, style);
     }
@@ -244,7 +244,7 @@ public:
     bool Create(wxGenericDirCtrl* parent, wxWindowID id = wxID_ANY,
               const wxPoint& pos = wxDefaultPosition,
               const wxSize& size = wxDefaultSize,
-              long style = 0);
+              unsigned int style = 0);
 
     ~wxDirFilterListCtrl() = default;
 

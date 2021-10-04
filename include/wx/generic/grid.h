@@ -1475,7 +1475,7 @@ public:
             wxWindowID id,
             const wxPoint& pos = wxDefaultPosition,
             const wxSize& size = wxDefaultSize,
-            long style = wxWANTS_CHARS,
+            unsigned int style = wxWANTS_CHARS,
             const std::string& name = wxGridNameStr)
     {
         Init();
@@ -1487,7 +1487,7 @@ public:
                 wxWindowID id,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = wxWANTS_CHARS,
+                unsigned int style = wxWANTS_CHARS,
                 const std::string& name = wxGridNameStr);
 
     ~wxGrid();

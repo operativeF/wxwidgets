@@ -137,7 +137,7 @@ public:
                 bool showHidden,
                 const wxPoint &pos = wxDefaultPosition,
                 const wxSize &size = wxDefaultSize,
-                long style = wxLC_LIST,
+                unsigned int style = wxLC_LIST,
                 const wxValidator &validator = wxDefaultValidator,
                 const wxString &name = wxT("filelist") );
     ~wxFileListCtrl();
@@ -197,7 +197,7 @@ public:
                         const std::string& defaultDirectory = {},
                         const std::string& defaultFilename = {},
                         const std::string& wildCard = wxFileSelectorDefaultWildcardStr,
-                        long style = wxFC_DEFAULT_STYLE,
+                        unsigned int style = wxFC_DEFAULT_STYLE,
                         const wxPoint& pos = wxDefaultPosition,
                         const wxSize& size = wxDefaultSize,
                         const std::string& name = wxFileCtrlNameStr)
@@ -214,7 +214,7 @@ public:
                  const std::string& defaultDirectory = {},
                  const std::string& defaultFileName = {},
                  const std::string& wildCard = wxFileSelectorDefaultWildcardStr,
-                 long style = wxFC_DEFAULT_STYLE,
+                 unsigned int style = wxFC_DEFAULT_STYLE,
                  const wxPoint& pos = wxDefaultPosition,
                  const wxSize& size = wxDefaultSize,
                  const std::string& name = wxFileCtrlNameStr);

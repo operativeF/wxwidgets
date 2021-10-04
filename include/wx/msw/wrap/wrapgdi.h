@@ -30,7 +30,7 @@ static void winSetWindowPos(HWND hWnd, HWND hWndInsertAfter, wxPosition pos, wxS
 static HWND winCreateWindow(long exStyle,
                             const std::string& className,
                             const std::string& wndClass,
-                            long style,
+                            unsigned int style,
                             wxRect wndExtents,
                             HWND hParent,
                             HMENU hMenu,

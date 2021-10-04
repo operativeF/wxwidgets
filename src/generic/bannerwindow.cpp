@@ -37,7 +37,7 @@ wxBannerWindow::Create(wxWindow* parent,
                        wxDirection dir,
                        const wxPoint& pos,
                        const wxSize& size,
-                       long style,
+                       unsigned int style,
                        const std::string& name)
 {
     if ( !wxWindow::Create(parent, winid, pos, size, style, name) )

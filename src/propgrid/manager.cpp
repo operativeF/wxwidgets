@@ -204,7 +204,7 @@ class wxPGHeaderCtrl : public wxHeaderCtrl
 {
 public:
     wxPGHeaderCtrl(wxPropertyGridManager* manager, wxWindowID id, const wxPoint& pos,
-                   const wxSize& size, long style) :
+                   const wxSize& size, unsigned int style) :
         wxHeaderCtrl(manager, id, pos, size, style),
         m_manager(manager)
     {
@@ -418,7 +418,7 @@ wxPropertyGridManager::wxPropertyGridManager( wxWindow *parent,
                                               wxWindowID id,
                                               const wxPoint& pos,
                                               const wxSize& size,
-                                              long style,
+                                              unsigned int style,
                                               const wxString& name )
      
 {
@@ -432,7 +432,7 @@ bool wxPropertyGridManager::Create( wxWindow *parent,
                                     wxWindowID id,
                                     const wxPoint& pos,
                                     const wxSize& size,
-                                    long style,
+                                    unsigned int style,
                                     const wxString& name )
 {
     if ( !m_pPropGrid )
@@ -689,7 +689,7 @@ void wxPropertyGridManager::DoThaw()
 
 // -----------------------------------------------------------------------
 
-void wxPropertyGridManager::SetWindowStyleFlag( long style )
+void wxPropertyGridManager::SetWindowStyleFlag( unsigned int style )
 {
     long oldWindowStyle = GetWindowStyleFlag();
 

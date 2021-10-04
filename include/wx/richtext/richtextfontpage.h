@@ -59,13 +59,13 @@ class WXDLLIMPEXP_RICHTEXT wxRichTextFontPage: public wxRichTextDialogPage
 public:
     /// Constructors
     wxRichTextFontPage( );
-    wxRichTextFontPage( wxWindow* parent, wxWindowID id = wxID_ANY, const wxPoint& pos = SYMBOL_WXRICHTEXTFONTPAGE_POSITION, const wxSize& size = SYMBOL_WXRICHTEXTFONTPAGE_SIZE, long style = SYMBOL_WXRICHTEXTFONTPAGE_STYLE );
+    wxRichTextFontPage( wxWindow* parent, wxWindowID id = wxID_ANY, const wxPoint& pos = SYMBOL_WXRICHTEXTFONTPAGE_POSITION, const wxSize& size = SYMBOL_WXRICHTEXTFONTPAGE_SIZE, unsigned int style = SYMBOL_WXRICHTEXTFONTPAGE_STYLE );
 
     /// Initialise members
     void Init();
 
     /// Creation
-    bool Create( wxWindow* parent, wxWindowID id = wxID_ANY, const wxPoint& pos = SYMBOL_WXRICHTEXTFONTPAGE_POSITION, const wxSize& size = SYMBOL_WXRICHTEXTFONTPAGE_SIZE, long style = SYMBOL_WXRICHTEXTFONTPAGE_STYLE );
+    bool Create( wxWindow* parent, wxWindowID id = wxID_ANY, const wxPoint& pos = SYMBOL_WXRICHTEXTFONTPAGE_POSITION, const wxSize& size = SYMBOL_WXRICHTEXTFONTPAGE_SIZE, unsigned int style = SYMBOL_WXRICHTEXTFONTPAGE_STYLE );
 
     /// Creates the controls and sizers
     void CreateControls();

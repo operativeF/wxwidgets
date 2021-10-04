@@ -57,7 +57,7 @@ bool wxSlider::Create(wxWindow *parent,
                       int maxValue,
                       const wxPoint& pos,
                       const wxSize& size,
-                      long style,
+                      unsigned int style,
                       const wxValidator& validator,
                       const std::string& name)
 {
@@ -160,9 +160,9 @@ bool wxSlider::Create(wxWindow *parent,
     return true;
 }
 
-WXDWORD wxSlider::MSWGetStyle(long style, WXDWORD *exstyle) const
+DWORD wxSlider::MSWGetStyle(unsigned int style, DWORD *exstyle) const
 {
-    WXDWORD msStyle = wxControl::MSWGetStyle(style, exstyle);
+    DWORD msStyle = wxControl::MSWGetStyle(style, exstyle);
 
     // TBS_HORZ, TBS_RIGHT and TBS_BOTTOM are 0 but do include them for clarity
     msStyle |= style & wxSL_VERTICAL ? TBS_VERT : TBS_HORZ;

@@ -19,7 +19,7 @@ public:
     wxDirDialog(wxWindow *parent,
                 const std::string& message = wxDirSelectorPromptStr,
                 const std::string& defaultPath = {},
-                long style = wxDD_DEFAULT_STYLE,
+                unsigned int style = wxDD_DEFAULT_STYLE,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 const std::string& name = wxDirDialogNameStr);

@@ -60,7 +60,7 @@ wxTreebook::Create(wxWindow *parent,
                    wxWindowID id,
                    const wxPoint& pos,
                    const wxSize& size,
-                   long style,
+                   unsigned int style,
                    const std::string& name)
 {
     // Check the style flag to have either wxTBK_RIGHT or wxTBK_LEFT

@@ -71,7 +71,7 @@ wxFSFile* wxFilterFSHandler::OpenFile(
                        );
 }
 
-wxString wxFilterFSHandler::FindFirst(const wxString& WXUNUSED(spec), int WXUNUSED(flags))
+wxString wxFilterFSHandler::FindFirst(const wxString& WXUNUSED(spec), unsigned int WXUNUSED(flags))
 {
     return wxEmptyString;
 }

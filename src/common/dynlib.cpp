@@ -50,7 +50,7 @@ wxDllType wxDynamicLibrary::GetProgramHandle()
 #endif // __WINDOWS__ || __UNIX__
 
 
-bool wxDynamicLibrary::Load(const wxString& libnameOrig, int flags)
+bool wxDynamicLibrary::Load(const wxString& libnameOrig, unsigned int flags)
 {
     wxASSERT_MSG(m_handle == nullptr, wxT("Library already loaded."));
 

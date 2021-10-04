@@ -57,7 +57,7 @@ wxAuiMDIParentFrame::wxAuiMDIParentFrame(wxWindow *parent,
                                          const std::string& title,
                                          const wxPoint& pos,
                                          const wxSize& size,
-                                         long style,
+                                         unsigned int style,
                                          const std::string& name)
 {
     Init();
@@ -83,7 +83,7 @@ bool wxAuiMDIParentFrame::Create(wxWindow *parent,
                                  const std::string& title,
                                  const wxPoint& pos,
                                  const wxSize& size,
-                                 long style,
+                                 unsigned int style,
                                  const std::string& name)
 {
 #if wxUSE_MENUS
@@ -442,7 +442,7 @@ wxAuiMDIChildFrame::wxAuiMDIChildFrame(wxAuiMDIParentFrame *parent,
                                        const std::string& title,
                                        const wxPoint& WXUNUSED(pos),
                                        const wxSize& size,
-                                       long style,
+                                       unsigned int style,
                                        const std::string& name)
 {
     Init();
@@ -489,7 +489,7 @@ bool wxAuiMDIChildFrame::Create(wxAuiMDIParentFrame* parent,
                                 const std::string& title,
                                 const wxPoint& WXUNUSED(pos),
                                 const wxSize& size,
-                                long style,
+                                unsigned int style,
                                 const std::string& name)
 {
     wxAuiMDIClientWindow* pClientWindow = parent->GetClientWindow();
@@ -713,12 +713,12 @@ wxBEGIN_EVENT_TABLE(wxAuiMDIClientWindow, wxAuiNotebook)
     EVT_AUINOTEBOOK_PAGE_CLOSE(wxID_ANY, wxAuiMDIClientWindow::OnPageClose)
 wxEND_EVENT_TABLE()
 
-wxAuiMDIClientWindow::wxAuiMDIClientWindow(wxAuiMDIParentFrame* parent, long style)
+wxAuiMDIClientWindow::wxAuiMDIClientWindow(wxAuiMDIParentFrame* parent, unsigned int style)
 {
     CreateClient(parent, style);
 }
 
-bool wxAuiMDIClientWindow::CreateClient(wxAuiMDIParentFrame* parent, long style)
+bool wxAuiMDIClientWindow::CreateClient(wxAuiMDIParentFrame* parent, unsigned int style)
 {
     SetWindowStyleFlag(style);
 

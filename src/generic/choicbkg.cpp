@@ -47,7 +47,7 @@ wxChoicebook::Create(wxWindow *parent,
                      wxWindowID id,
                      const wxPoint& pos,
                      const wxSize& size,
-                     long style,
+                     unsigned int style,
                      const std::string& name)
 {
     if ( (style & wxBK_ALIGN_MASK) == wxBK_DEFAULT )

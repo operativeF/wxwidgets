@@ -31,7 +31,7 @@ public:
                  wxWindowID id = wxID_ANY,
                  const wxString& label = wxEmptyString,
                  const wxBitmap& icon = wxNullBitmap,
-                 long style = 0);
+                 unsigned int style = 0);
 
     ~wxRibbonPage();
 
@@ -39,7 +39,7 @@ public:
                 wxWindowID id = wxID_ANY,
                 const wxString& label = wxEmptyString,
                 const wxBitmap& icon = wxNullBitmap,
-                long style = 0);
+                unsigned int style = 0);
 
     void SetArtProvider(wxRibbonArtProvider* art) override;
 

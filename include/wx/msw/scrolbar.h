@@ -23,7 +23,7 @@ public:
     wxScrollBar(wxWindow *parent, wxWindowID id,
             const wxPoint& pos = wxDefaultPosition,
             const wxSize& size = wxDefaultSize,
-            long style = wxSB_HORIZONTAL,
+            unsigned int style = wxSB_HORIZONTAL,
             const wxValidator& validator = wxDefaultValidator,
             const std::string& name = wxScrollBarNameStr)
     {
@@ -38,7 +38,7 @@ public:
     [[maybe_unused]] bool Create(wxWindow *parent, wxWindowID id,
             const wxPoint& pos = wxDefaultPosition,
             const wxSize& size = wxDefaultSize,
-            long style = wxSB_HORIZONTAL,
+            unsigned int style = wxSB_HORIZONTAL,
             const wxValidator& validator = wxDefaultValidator,
             const std::string& name = wxScrollBarNameStr);
 
@@ -63,7 +63,7 @@ public:
     // override wxControl version to not use solid background here
     WXHBRUSH MSWControlColor(WXHDC pDC, WXHWND hWnd) override;
 
-    WXDWORD MSWGetStyle(long style, WXDWORD *exstyle) const override;
+    DWORD MSWGetStyle(unsigned int style, DWORD *exstyle) const override;
 
     // returns true if the platform should explicitly apply a theme border
     bool CanApplyThemeBorder() const override { return false; }

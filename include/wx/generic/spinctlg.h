@@ -53,7 +53,7 @@ public:
                 const std::string& value = {},
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = wxSP_ARROW_KEYS,
+                unsigned int style = wxSP_ARROW_KEYS,
                 double min = 0, double max = 100, double initial = 0,
                 double inc = 1,
                 const std::string& name = "wxSpinCtrl");
@@ -196,7 +196,7 @@ public:
                 const std::string& value = {},
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = wxSP_ARROW_KEYS,
+                unsigned int style = wxSP_ARROW_KEYS,
                 double min = 0, double max = 100, double initial = 0,
                 double inc = 1,
                 const std::string& name = wxT("wxSpinCtrl"))
@@ -291,7 +291,7 @@ public:
                const std::string& value = {},
                const wxPoint& pos = wxDefaultPosition,
                const wxSize& size = wxDefaultSize,
-               long style = wxSP_ARROW_KEYS,
+               unsigned int style = wxSP_ARROW_KEYS,
                int min = 0, int max = 100, int initial = 0,
                const std::string& name = wxT("wxSpinCtrl"))
     {
@@ -303,7 +303,7 @@ public:
                 const std::string& value = {},
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = wxSP_ARROW_KEYS,
+                unsigned int style = wxSP_ARROW_KEYS,
                 int min = 0, int max = 100, int initial = 0,
                 const std::string& name = wxT("wxSpinCtrl"))
     {
@@ -353,7 +353,7 @@ public:
                      const std::string& value = {},
                      const wxPoint& pos = wxDefaultPosition,
                      const wxSize& size = wxDefaultSize,
-                     long style = wxSP_ARROW_KEYS,
+                     unsigned int style = wxSP_ARROW_KEYS,
                      double min = 0, double max = 100, double initial = 0,
                      double inc = 1,
                      const std::string& name = "wxSpinCtrlDouble")
@@ -367,7 +367,7 @@ public:
                 const std::string& value = {},
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = wxSP_ARROW_KEYS,
+                unsigned int style = wxSP_ARROW_KEYS,
                 double min = 0, double max = 100, double initial = 0,
                 double inc = 1,
                 const std::string& name = "wxSpinCtrlDouble")

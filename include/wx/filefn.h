@@ -43,7 +43,7 @@
 // had already predefined it.
 #if defined(__VISUALC__) && !defined(wxHAS_MODE_T)
     #define wxHAS_MODE_T
-    using mode_t = int;
+    using mode_t = unsigned int;
 #endif
 
 // define off_t
@@ -393,7 +393,7 @@ inline int wxAccess(const wxString& path, mode_t mode)
     { return wxCRT_Access(path.fn_str(), mode); }
 inline int wxChmod(const wxString& path, mode_t mode)
     { return wxCRT_Chmod(path.fn_str(), mode); }
-inline int wxOpen(const wxString& path, int flags, mode_t mode)
+inline int wxOpen(const wxString& path, unsigned int flags, mode_t mode)
     { return wxCRT_Open(path.fn_str(), flags, mode); }
 
 #if defined(wxHAS_NATIVE_READLINK)
@@ -444,7 +444,7 @@ WXDLLIMPEXP_BASE wxString wxPathOnly(const wxString& path);
 // Flags are reserved for future use.
 #define wxFILE  1
 #define wxDIR   2
-WXDLLIMPEXP_BASE wxString wxFindFirstFile(const wxString& spec, int flags = wxFILE);
+WXDLLIMPEXP_BASE wxString wxFindFirstFile(const wxString& spec, unsigned int flags = wxFILE);
 WXDLLIMPEXP_BASE wxString wxFindNextFile();
 
 // Does the pattern contain wildcards?
@@ -478,7 +478,7 @@ WXDLLIMPEXP_BASE bool wxSetWorkingDirectory(const wxString& d);
 WXDLLIMPEXP_BASE bool wxMkdir(const wxString& dir, int perm = wxS_DIR_DEFAULT);
 
 // Remove directory. Flags reserved for future use.
-WXDLLIMPEXP_BASE bool wxRmdir(const wxString& dir, int flags = 0);
+WXDLLIMPEXP_BASE bool wxRmdir(const wxString& dir, unsigned int flags = 0);
 
 // Return the type of an open file
 WXDLLIMPEXP_BASE wxFileKind wxGetFileKind(int fd);

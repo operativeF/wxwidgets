@@ -43,7 +43,7 @@ public:
                       const std::string& label,
                       const wxPoint& pos = wxDefaultPosition,
                       const wxSize& size = wxDefaultSize,
-                      long style = wxEL_DEFAULT_STYLE,
+                      unsigned int style = wxEL_DEFAULT_STYLE,
                       const std::string& name = wxEditableListBoxNameStr)
     {
         Create(parent, id, label, pos, size, style, name);
@@ -53,7 +53,7 @@ public:
                 const std::string& label,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = wxEL_DEFAULT_STYLE,
+                unsigned int style = wxEL_DEFAULT_STYLE,
                 const std::string& name = wxEditableListBoxNameStr);
 
     void SetStrings(const std::vector<std::string>& strings);

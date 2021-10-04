@@ -36,7 +36,7 @@ public:
     bool Show(bool show = true) override;
 
     // return the style to be used for the popup windows
-    WXDWORD MSWGetStyle(long flags, WXDWORD *exstyle) const override;
+    DWORD MSWGetStyle(unsigned int flags, DWORD *exstyle) const override;
 
     // get the HWND to be used as parent of this window with CreateWindow()
     WXHWND MSWGetParent() const override;

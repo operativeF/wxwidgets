@@ -578,7 +578,7 @@ public:
                       wxWindowID id = wxID_ANY,
                       const wxPoint& pos = wxDefaultPosition,
                       const wxSize& size = wxDefaultSize,
-                      long style = 0,
+                      unsigned int style = 0,
                       const std::string& name = wxPanelNameStr)
     : wxVarVScrollLegacyAdaptor(this)
     {
@@ -598,7 +598,7 @@ public:
                 wxWindowID id = wxID_ANY,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = 0,
+                unsigned int style = 0,
                 const std::string& name = wxPanelNameStr)
     {
         return wxPanel::Create(parent, id, pos, size, style | wxVSCROLL, name);
@@ -649,7 +649,7 @@ public:
                       wxWindowID id = wxID_ANY,
                       const wxPoint& pos = wxDefaultPosition,
                       const wxSize& size = wxDefaultSize,
-                      long style = 0,
+                      unsigned int style = 0,
                       const std::string& name = wxPanelNameStr)
         : wxVarHScrollHelper(this)
     {
@@ -669,7 +669,7 @@ public:
                 wxWindowID id = wxID_ANY,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = 0,
+                unsigned int style = 0,
                 const std::string& name = wxPanelNameStr)
     {
         return wxPanel::Create(parent, id, pos, size, style | wxHSCROLL, name);
@@ -716,7 +716,7 @@ public:
                        wxWindowID id = wxID_ANY,
                        const wxPoint& pos = wxDefaultPosition,
                        const wxSize& size = wxDefaultSize,
-                       long style = 0,
+                       unsigned int style = 0,
                        const std::string& name = wxPanelNameStr)
         : 
           wxVarHVScrollHelper(this)
@@ -737,7 +737,7 @@ public:
                 wxWindowID id = wxID_ANY,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = 0,
+                unsigned int style = 0,
                 const std::string& name = wxPanelNameStr)
     {
         return wxPanel::Create(parent, id, pos, size,

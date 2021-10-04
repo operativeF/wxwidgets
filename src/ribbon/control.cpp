@@ -26,7 +26,7 @@ wxIMPLEMENT_CLASS(wxRibbonControl, wxControl);
 
 bool wxRibbonControl::Create(wxWindow *parent, wxWindowID id,
                     const wxPoint& pos,
-                    const wxSize& size, long style,
+                    const wxSize& size, unsigned int style,
                     const wxValidator& validator,
                     const wxString& name)
 {

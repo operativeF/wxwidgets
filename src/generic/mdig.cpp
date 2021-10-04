@@ -73,7 +73,7 @@ bool wxGenericMDIParentFrame::Create(wxWindow *parent,
                               const wxString& title,
                               const wxPoint& pos,
                               const wxSize& size,
-                              long style,
+                              unsigned int style,
                               const wxString& name)
 {
     // this style can be used to prevent a window from having the standard MDI

@@ -54,7 +54,7 @@ public:
                   wxWindowID id = wxID_ANY,
                   const wxPoint& pos = wxDefaultPosition,
                   const wxSize& size = wxDefaultSize,
-                  long style = 0,
+                  unsigned int style = 0,
                   const std::string& name = wxHtmlListBoxNameStr);
 
     wxHtmlListBox(const wxHtmlListBox&) = delete;
@@ -72,7 +72,7 @@ public:
                 wxWindowID id = wxID_ANY,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = 0,
+                unsigned int style = 0,
                 const std::string& name = wxHtmlListBoxNameStr);
 
     // destructor cleans up whatever resources we use
@@ -219,7 +219,7 @@ public:
                         const wxPoint& pos = wxDefaultPosition,
                         const wxSize& size = wxDefaultSize,
                         const std::vector<std::string>& choices = {},
-                        long style = wxHLB_DEFAULT_STYLE,
+                        unsigned int style = wxHLB_DEFAULT_STYLE,
                         const wxValidator& validator = wxDefaultValidator,
                         const std::string& name = wxSimpleHtmlListBoxNameStr)
     {
@@ -230,7 +230,7 @@ public:
                 const wxPoint& pos,
                 const wxSize& size,
                 const std::vector<std::string>& choices,
-                long style = wxHLB_DEFAULT_STYLE,
+                unsigned int style = wxHLB_DEFAULT_STYLE,
                 const wxValidator& validator = wxDefaultValidator,
                 const std::string& name = wxSimpleHtmlListBoxNameStr);
 

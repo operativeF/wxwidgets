@@ -88,7 +88,7 @@ public:
                 wxWindowID id,
                 const wxPoint& pos,
                 const wxSize& size,
-                long style,
+                unsigned int style,
                 const std::string& name);
 
     // Override to implement colours support via custom drawing.
@@ -114,7 +114,7 @@ protected:
 
 private:
     // override MSW-specific methods needed for new control
-    WXDWORD MSWGetStyle(long style, WXDWORD *exstyle) const override;
+    DWORD MSWGetStyle(unsigned int style, DWORD *exstyle) const override;
     bool MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result) override;
 
     // common part of all ctors
@@ -208,7 +208,7 @@ bool wxMSWHeaderCtrl::Create(wxWindow *parent,
                              wxWindowID id,
                              const wxPoint& pos,
                              const wxSize& size,
-                             long style,
+                             unsigned int style,
                              const std::string& name)
 {
     // notice that we don't need InitCommonControlsEx(ICC_LISTVIEW_CLASSES)
@@ -234,9 +234,9 @@ bool wxMSWHeaderCtrl::Create(wxWindow *parent,
     return true;
 }
 
-WXDWORD wxMSWHeaderCtrl::MSWGetStyle(long style, WXDWORD *exstyle) const
+DWORD wxMSWHeaderCtrl::MSWGetStyle(unsigned int style, DWORD *exstyle) const
 {
-    WXDWORD msStyle = wxControl::MSWGetStyle(style, exstyle);
+    DWORD msStyle = wxControl::MSWGetStyle(style, exstyle);
 
     if ( style & wxHD_ALLOW_REORDER )
         msStyle |= HDS_DRAGDROP;
@@ -1005,7 +1005,7 @@ bool wxHeaderCtrl::Create(wxWindow *parent,
                           wxWindowID id,
                           const wxPoint& pos,
                           const wxSize& size,
-                          long style,
+                          unsigned int style,
                           const std::string& name)
 {
     long newStyle = style | wxCLIP_CHILDREN | wxTAB_TRAVERSAL;
@@ -1100,7 +1100,7 @@ wxWindowList wxHeaderCtrl::GetCompositeWindowParts() const
     return parts;
 }
 
-void wxHeaderCtrl::SetWindowStyleFlag(long style)
+void wxHeaderCtrl::SetWindowStyleFlag(unsigned int style)
 {
     wxHeaderCtrlBase::SetWindowStyleFlag(style);
 

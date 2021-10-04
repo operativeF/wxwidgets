@@ -434,7 +434,7 @@ void wxGridCellTextEditor::Create(wxWindow* parent,
 void wxGridCellTextEditor::DoCreate(wxWindow* parent,
                                     wxWindowID id,
                                     wxEvtHandler* evtHandler,
-                                    long style)
+                                    unsigned int style)
 {
     style |= wxTE_PROCESS_ENTER | wxTE_PROCESS_TAB | wxNO_BORDER;
 
@@ -689,7 +689,7 @@ void wxGridCellNumberEditor::Create(wxWindow* parent,
 #if wxUSE_SPINCTRL
     if ( HasRange() )
     {
-        static constexpr long style = wxSP_ARROW_KEYS |
+        static constexpr unsigned int style = wxSP_ARROW_KEYS |
                                       wxTE_PROCESS_ENTER |
                                       wxTE_PROCESS_TAB;
 

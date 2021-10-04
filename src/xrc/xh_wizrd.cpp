@@ -35,7 +35,7 @@ wxObject *wxWizardXmlHandler::DoCreateResource()
     {
         XRC_MAKE_INSTANCE(wiz, wxWizard)
 
-        long style = GetStyle(wxT("exstyle"), 0);
+        unsigned int style = GetStyle(wxT("exstyle"), 0);
         if (style != 0)
             wiz->SetExtraStyle(style);
         wiz->Create(m_parentAsWindow,

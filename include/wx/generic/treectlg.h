@@ -45,7 +45,7 @@ public:
     wxGenericTreeCtrl(wxWindow *parent, wxWindowID id = wxID_ANY,
                const wxPoint& pos = wxDefaultPosition,
                const wxSize& size = wxDefaultSize,
-               long style = wxTR_DEFAULT_STYLE,
+               unsigned int style = wxTR_DEFAULT_STYLE,
                const wxValidator &validator = wxDefaultValidator,
                const std::string& name = wxTreeCtrlNameStr)
         : 
@@ -63,7 +63,7 @@ public:
     bool Create(wxWindow *parent, wxWindowID id = wxID_ANY,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = wxTR_DEFAULT_STYLE,
+                unsigned int style = wxTR_DEFAULT_STYLE,
                 const wxValidator &validator = wxDefaultValidator,
                 const std::string& name = wxTreeCtrlNameStr);
 
@@ -203,7 +203,7 @@ public:
     void Refresh(bool eraseBackground = true, const wxRect *rect = nullptr) override;
 
     bool SetFont( const wxFont &font ) override;
-    void SetWindowStyleFlag(long styles) override;
+    void SetWindowStyleFlag(unsigned int styles) override;
 
     // callbacks
     void OnPaint( wxPaintEvent &event );
@@ -397,7 +397,7 @@ public:
     wxTreeCtrl(wxWindow *parent, wxWindowID id = wxID_ANY,
                const wxPoint& pos = wxDefaultPosition,
                const wxSize& size = wxDefaultSize,
-               long style = wxTR_DEFAULT_STYLE,
+               unsigned int style = wxTR_DEFAULT_STYLE,
                const wxValidator &validator = wxDefaultValidator,
                const std::string& name = wxTreeCtrlNameStr)
     : wxGenericTreeCtrl(parent, id, pos, size, style, validator, name)

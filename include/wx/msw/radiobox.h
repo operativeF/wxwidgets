@@ -35,7 +35,7 @@ public:
                const wxSize& size = wxDefaultSize,
                const std::vector<std::string>& choices = {},
                int majorDim = 0,
-               long style = wxRA_SPECIFY_COLS,
+               unsigned int style = wxRA_SPECIFY_COLS,
                const wxValidator& val = wxDefaultValidator,
                const std::string& name = wxRadioBoxNameStr)
     {
@@ -57,7 +57,7 @@ public:
                 const wxSize& size,
                 const std::vector<std::string>& choices,
                 int majorDim = 0,
-                long style = wxRA_SPECIFY_COLS,
+                unsigned int style = wxRA_SPECIFY_COLS,
                 const wxValidator& val = wxDefaultValidator,
                 const std::string& name = wxRadioBoxNameStr);
 

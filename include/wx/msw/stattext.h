@@ -23,7 +23,7 @@ public:
                  const std::string& label,
                  const wxPoint& pos = wxDefaultPosition,
                  const wxSize& size = wxDefaultSize,
-                 long style = 0,
+                 unsigned int style = 0,
                  const std::string& name = wxStaticTextNameStr)
     {
         Create(parent, id, label, pos, size, style, name);
@@ -39,14 +39,14 @@ public:
                 const std::string& label,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = 0,
+                unsigned int style = 0,
                 const std::string& name = wxStaticTextNameStr);
 
     // override some methods to resize the window properly
     void SetLabel(const std::string& label) override;
     bool SetFont( const wxFont &font ) override;
 
-    WXDWORD MSWGetStyle(long flags, WXDWORD *exstyle = nullptr) const override;
+    DWORD MSWGetStyle(unsigned int flags, DWORD *exstyle = nullptr) const override;
 
 protected:
     // implement/override some base class virtuals

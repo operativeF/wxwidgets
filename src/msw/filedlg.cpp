@@ -211,7 +211,7 @@ wxFileDialog::wxFileDialog(wxWindow *parent,
                            const std::string& defaultDir,
                            const std::string& defaultFileName,
                            const std::string& wildCard,
-                           long style,
+                           unsigned int style,
                            const wxPoint& pos,
                            const wxSize& sz,
                            const std::string& name)
@@ -355,7 +355,7 @@ void wxFileDialog::MSWOnTypeChange(WXHWND WXUNUSED(hDlg), int nFilterIndex)
 // whether to show the "Save file" dialog (if it contains wxFD_SAVE bit) or
 // "Open file" one; returns true on success or false on failure in which case
 // err is filled with the CDERR_XXX constant
-static bool DoShowCommFileDialog(OPENFILENAME *of, long style, DWORD *err)
+static bool DoShowCommFileDialog(OPENFILENAME *of, unsigned int style, DWORD *err)
 {
     // Extra controls do not handle per-monitor DPI, fall back to system DPI
     // so entire file-dialog is resized.
@@ -374,7 +374,7 @@ static bool DoShowCommFileDialog(OPENFILENAME *of, long style, DWORD *err)
     return false;
 }
 
-static bool ShowCommFileDialog(OPENFILENAME *of, long style)
+static bool ShowCommFileDialog(OPENFILENAME *of, unsigned int style)
 {
     DWORD errCode;
     bool success = DoShowCommFileDialog(of, style, &errCode);
@@ -424,7 +424,7 @@ int wxFileDialog::ShowModal()
     *fileNameBuffer = wxT('\0');
     *titleBuffer    = wxT('\0');
 
-    long msw_flags = OFN_HIDEREADONLY;
+    unsigned int msw_flags = OFN_HIDEREADONLY;
 
     if ( HasFdFlag(wxFD_NO_FOLLOW) )
         msw_flags |= OFN_NODEREFERENCELINKS;
@@ -591,6 +591,7 @@ int wxFileDialog::ShowModal()
     // user types "foo" and the default extension is ".bar" we should force it
     // to check for "foo.bar" existence and not "foo")
     wxString defextBuffer; // we need it to be alive until GetSaveFileName()!
+    
     if (HasFdFlag(wxFD_SAVE))
     {
         const wxChar* extension = filterBuffer.t_str();

@@ -21,7 +21,7 @@ public:
                    const wxDateTime& date = wxDefaultDateTime,
                    const wxPoint& pos = wxDefaultPosition,
                    const wxSize& size = wxDefaultSize,
-                   long style = wxCAL_SHOW_HOLIDAYS,
+                   unsigned int style = wxCAL_SHOW_HOLIDAYS,
                    const std::string& name = wxCalendarNameStr)
     {
         Create(parent, id, date, pos, size, style, name);
@@ -37,7 +37,7 @@ public:
                 const wxDateTime& date = wxDefaultDateTime,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = wxCAL_SHOW_HOLIDAYS,
+                unsigned int style = wxCAL_SHOW_HOLIDAYS,
                 const std::string& name = wxCalendarNameStr);
 
     bool SetDate(const wxDateTime& date) override;
@@ -56,12 +56,12 @@ public:
                                             wxDateTime *date = nullptr,
                                             wxDateTime::WeekDay *wd = nullptr) override;
 
-    void SetWindowStyleFlag(long style) override;
+    void SetWindowStyleFlag(unsigned int style) override;
 
 protected:
     wxSize DoGetBestSize() const override;
 
-    WXDWORD MSWGetStyle(long style, WXDWORD *exstyle) const override;
+    DWORD MSWGetStyle(unsigned int style, DWORD *exstyle) const override;
 
     bool MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result) override;
 

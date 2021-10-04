@@ -26,7 +26,7 @@ public:
     wxRichMessageDialogBase( wxWindow *parent,
                              const std::string& message,
                              const std::string& caption,
-                             long style )
+                             unsigned int style )
         : wxGenericMessageDialog( parent, message, caption, style ),
           m_detailsExpanderCollapsedLabel( wxGetTranslation("&See details") ),
           m_detailsExpanderExpandedLabel( wxGetTranslation("&Hide details") )
@@ -92,7 +92,7 @@ private:
         wxRichMessageDialog( wxWindow *parent,
                              const std::string& message,
                              const std::string& caption = wxMessageBoxCaptionStr,
-                             long style = wxOK | wxCENTRE )
+                             unsigned int style = wxOK | wxCENTRE )
             : wxGenericRichMessageDialog( parent, message, caption, style )
             { }
 

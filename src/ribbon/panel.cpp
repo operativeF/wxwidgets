@@ -48,7 +48,7 @@ wxRibbonPanel::wxRibbonPanel(wxWindow* parent,
                   const wxBitmap& minimised_icon,
                   const wxPoint& pos,
                   const wxSize& size,
-                  long style)
+                  unsigned int style)
     : wxRibbonControl(parent, id, pos, size, wxBORDER_NONE)
 {
     CommonInit(label, minimised_icon, style);
@@ -69,7 +69,7 @@ bool wxRibbonPanel::Create(wxWindow* parent,
                 const wxBitmap& icon,
                 const wxPoint& pos,
                 const wxSize& size,
-                long style)
+                unsigned int style)
 {
     if(!wxRibbonControl::Create(parent, id, pos, size, wxBORDER_NONE))
     {
@@ -99,7 +99,7 @@ void wxRibbonPanel::SetArtProvider(wxRibbonArtProvider* art)
         m_expanded_panel->SetArtProvider(art);
 }
 
-void wxRibbonPanel::CommonInit(const wxString& label, const wxBitmap& icon, long style)
+void wxRibbonPanel::CommonInit(const wxString& label, const wxBitmap& icon, unsigned int style)
 {
     SetName(label);
     SetLabel(label);

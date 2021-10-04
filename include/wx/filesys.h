@@ -125,7 +125,7 @@ public:
     // Finds first/next file that matches spec wildcard. flags can be wxDIR for restricting
     // the query to directories or wxFILE for files only or 0 for either.
     // Returns filename or empty string if no more matching file exists
-    virtual wxString FindFirst(const wxString& spec, int flags = 0);
+    virtual wxString FindFirst(const wxString& spec, unsigned int flags = 0);
     virtual wxString FindNext();
 
     // Returns MIME type of the file - w/o need to open it
@@ -196,12 +196,12 @@ public:
     // It first tries to open the file in relative scope
     // (based on ChangePathTo()'s value) and then as an absolute
     // path.
-    wxFSFile* OpenFile(const wxString& location, int flags = wxFS_READ);
+    wxFSFile* OpenFile(const wxString& location, unsigned int flags = wxFS_READ);
 
     // Finds first/next file that matches spec wildcard. flags can be wxDIR for restricting
     // the query to directories or wxFILE for files only or 0 for either.
     // Returns filename or empty string if no more matching file exists
-    wxString FindFirst(const wxString& spec, int flags = 0);
+    wxString FindFirst(const wxString& spec, unsigned int flags = 0);
     wxString FindNext();
 
     // find a file in a list of directories, returns false if not found
@@ -278,7 +278,7 @@ class WXDLLIMPEXP_BASE wxLocalFSHandler : public wxFileSystemHandler
 public:
     bool CanOpen(const wxString& location) override;
     wxFSFile* OpenFile(wxFileSystem& fs, const wxString& location) override;
-    wxString FindFirst(const wxString& spec, int flags = 0) override;
+    wxString FindFirst(const wxString& spec, unsigned int flags = 0) override;
     wxString FindNext() override;
 
     // wxLocalFSHandler will prefix all filenames with 'root' before accessing
@@ -297,7 +297,7 @@ class WXDLLIMPEXP_BASE wxFSInputStream : public wxWrapperInputStream
 {
 public:
     // Notice that wxFS_READ is implied in flags.
-    wxFSInputStream(const wxString& filename, int flags = 0);
+    wxFSInputStream(const wxString& filename, unsigned int flags = 0);
     ~wxFSInputStream();
 
     wxFSInputStream(const wxFSInputStream&) = delete;

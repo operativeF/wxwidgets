@@ -78,7 +78,7 @@ public:
                 const wxString& fileName = wxEmptyString,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = 0,
+                unsigned int style = 0,
                 const wxString& szBackend = wxEmptyString,
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxT("mediaCtrl"))
@@ -90,7 +90,7 @@ public:
                 const wxURI& location,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = 0,
+                unsigned int style = 0,
                 const wxString& szBackend = wxEmptyString,
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxT("mediaCtrl"))
@@ -104,7 +104,7 @@ public:
                 const wxString& fileName = wxEmptyString,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = 0,
+                unsigned int style = 0,
                 const wxString& szBackend = wxEmptyString,
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxT("mediaCtrl"));
@@ -113,7 +113,7 @@ public:
                 const wxURI& location,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = 0,
+                unsigned int style = 0,
                 const wxString& szBackend = wxEmptyString,
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxT("mediaCtrl"));
@@ -122,7 +122,7 @@ public:
                 wxWindow* parent, wxWindowID winid,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = 0,
+                unsigned int style = 0,
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxT("mediaCtrl"));
 
@@ -194,7 +194,7 @@ public:
                                wxWindowID WXUNUSED(winid),
                                const wxPoint& WXUNUSED(pos),
                                const wxSize& WXUNUSED(size),
-                               long WXUNUSED(style),
+                               unsigned int WXUNUSED(style),
                                const wxValidator& WXUNUSED(validator),
                                const wxString& WXUNUSED(name))
     {   return false;                   }

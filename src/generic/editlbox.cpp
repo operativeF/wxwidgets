@@ -31,7 +31,7 @@ public:
                   wxWindowID id = wxID_ANY,
                   const wxPoint &pos = wxDefaultPosition,
                   const wxSize &size = wxDefaultSize,
-                  long style = wxLC_ICON,
+                  unsigned int style = wxLC_ICON,
                   const wxValidator& validator = wxDefaultValidator,
                   const std::string& name = wxListCtrlNameStr)
          : wxListCtrl(parent, id, pos, size, style, validator, name)
@@ -99,7 +99,7 @@ wxEND_EVENT_TABLE()
 bool wxEditableListBox::Create(wxWindow *parent, wxWindowID id,
                           const std::string& label,
                           const wxPoint& pos, const wxSize& size,
-                          long style,
+                          unsigned int style,
                           const std::string& name)
 {
     if (!wxPanel::Create(parent, id, pos, size, wxTAB_TRAVERSAL, name))

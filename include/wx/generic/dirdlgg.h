@@ -36,7 +36,7 @@ public:
     wxGenericDirDialog(wxWindow* parent,
                        const std::string& title = wxDirSelectorPromptStr,
                        const std::string& defaultPath = {},
-                       long style = wxDD_DEFAULT_STYLE,
+                       unsigned int style = wxDD_DEFAULT_STYLE,
                        const wxPoint& pos = wxDefaultPosition,
                        const wxSize& sz = wxDefaultSize,//Size(450, 550),
                        const std::string& name = wxDirDialogNameStr);
@@ -44,7 +44,7 @@ public:
     bool Create(wxWindow* parent,
                 const std::string& title = wxDirSelectorPromptStr,
                 const std::string& defaultPath = {},
-                long style = wxDD_DEFAULT_STYLE,
+                unsigned int style = wxDD_DEFAULT_STYLE,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& sz = wxDefaultSize,//Size(450, 550),
                 const std::string& name = wxDirDialogNameStr);

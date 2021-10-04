@@ -330,7 +330,7 @@ bool wxGenericDirCtrl::Create(wxWindow *parent,
                               const std::string& dir,
                               const wxPoint& pos,
                               const wxSize& size,
-                              long style,
+                              unsigned int style,
                               const std::string& filter,
                               int defaultFilter,
                               const std::string& name)
@@ -1211,7 +1211,7 @@ bool wxDirFilterListCtrl::Create(wxGenericDirCtrl* parent,
                                  wxWindowID treeid,
                                  const wxPoint& pos,
                                  const wxSize& size,
-                                 long style)
+                                 unsigned int style)
 {
     m_dirCtrl = parent;
     return wxChoice::Create(parent, treeid, pos, size, {}, style);

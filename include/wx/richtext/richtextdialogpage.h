@@ -26,7 +26,7 @@ class WXDLLIMPEXP_RICHTEXT wxRichTextDialogPage: public wxPanel
 public:
     wxDECLARE_CLASS(wxRichTextDialogPage);
     wxRichTextDialogPage() = default;
-    wxRichTextDialogPage(wxWindow* parent, wxWindowID id = wxID_ANY, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = 0)
+    wxRichTextDialogPage(wxWindow* parent, wxWindowID id = wxID_ANY, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, unsigned int style = 0)
     {
         Create(parent, id, pos, size, style);
     }

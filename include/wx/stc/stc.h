@@ -2830,14 +2830,14 @@ public:
 
     wxStyledTextCtrl(wxWindow *parent, wxWindowID id=wxID_ANY,
                      const wxPoint& pos = wxDefaultPosition,
-                     const wxSize& size = wxDefaultSize, long style = 0,
+                     const wxSize& size = wxDefaultSize, unsigned int style = 0,
                      const wxString& name = wxPySTCNameStr);
     %RenameCtor(PreStyledTextCtrl,  wxStyledTextCtrl());
 
 #else
     wxStyledTextCtrl(wxWindow *parent, wxWindowID id=wxID_ANY,
                      const wxPoint& pos = wxDefaultPosition,
-                     const wxSize& size = wxDefaultSize, long style = 0,
+                     const wxSize& size = wxDefaultSize, unsigned int style = 0,
                      const wxString& name = wxSTCNameStr);
     wxStyledTextCtrl() { m_swx = nullptr; }
     ~wxStyledTextCtrl();
@@ -2846,7 +2846,7 @@ public:
 
     bool Create(wxWindow *parent, wxWindowID id=wxID_ANY,
                 const wxPoint& pos = wxDefaultPosition,
-                const wxSize& size = wxDefaultSize, long style = 0,
+                const wxSize& size = wxDefaultSize, unsigned int style = 0,
                 const wxString& name = wxSTCNameStr);
 
 

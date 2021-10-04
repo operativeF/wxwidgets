@@ -61,11 +61,11 @@ public:
     /// Constructors
     wxSymbolPickerDialog( );
     wxSymbolPickerDialog( const wxString& symbol, const wxString& fontName, const wxString& normalTextFont,
-        wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& caption = SYMBOL_WXSYMBOLPICKERDIALOG_TITLE, const wxPoint& pos = SYMBOL_WXSYMBOLPICKERDIALOG_POSITION, const wxSize& size = SYMBOL_WXSYMBOLPICKERDIALOG_SIZE, long style = SYMBOL_WXSYMBOLPICKERDIALOG_STYLE );
+        wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& caption = SYMBOL_WXSYMBOLPICKERDIALOG_TITLE, const wxPoint& pos = SYMBOL_WXSYMBOLPICKERDIALOG_POSITION, const wxSize& size = SYMBOL_WXSYMBOLPICKERDIALOG_SIZE, unsigned int style = SYMBOL_WXSYMBOLPICKERDIALOG_STYLE );
 
     /// Creation
     bool Create( const wxString& symbol, const wxString& fontName, const wxString& normalTextFont,
-        wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& caption = SYMBOL_WXSYMBOLPICKERDIALOG_TITLE, const wxPoint& pos = SYMBOL_WXSYMBOLPICKERDIALOG_POSITION, const wxSize& size = SYMBOL_WXSYMBOLPICKERDIALOG_SIZE, long style = SYMBOL_WXSYMBOLPICKERDIALOG_STYLE );
+        wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& caption = SYMBOL_WXSYMBOLPICKERDIALOG_TITLE, const wxPoint& pos = SYMBOL_WXSYMBOLPICKERDIALOG_POSITION, const wxSize& size = SYMBOL_WXSYMBOLPICKERDIALOG_SIZE, unsigned int style = SYMBOL_WXSYMBOLPICKERDIALOG_STYLE );
 
     /// Initialises members variables
     void Init();
@@ -197,7 +197,7 @@ public:
                wxWindowID id = wxID_ANY,
                const wxPoint& pos = wxDefaultPosition,
                const wxSize& size = wxDefaultSize,
-               long style = 0,
+               unsigned int style = 0,
                const wxString& name = wxASCII_STR(wxPanelNameStr))
     {
         Init();
@@ -213,7 +213,7 @@ public:
                 wxWindowID id = wxID_ANY,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = 0,
+                unsigned int style = 0,
                 const wxString& name = wxASCII_STR(wxPanelNameStr));
 
     ~wxSymbolListCtrl();

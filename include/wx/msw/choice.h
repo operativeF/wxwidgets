@@ -34,7 +34,7 @@ public:
         const wxPoint& pos,
         const wxSize& size,
         const std::vector<std::string>& choices = {},
-        long style = 0,
+        unsigned int style = 0,
         const wxValidator& validator = wxDefaultValidator,
         const std::string& name = wxChoiceNameStr)
     {
@@ -51,7 +51,7 @@ public:
                 const wxPoint& pos,
                 const wxSize& size,
                 const std::vector<std::string>& choices,
-                long style = 0,
+                unsigned int style = 0,
                 const wxValidator& validator = wxDefaultValidator,
                 const std::string& name = wxChoiceNameStr);
 
@@ -81,7 +81,7 @@ public:
     WXLRESULT MSWWindowProc(WXUINT nMsg, WXWPARAM wParam, WXLPARAM lParam) override;
     WXHBRUSH MSWControlColor(WXHDC hDC, WXHWND hWnd) override;
     bool MSWShouldPreProcessMessage(WXMSG *pMsg) override;
-    WXDWORD MSWGetStyle(long style, WXDWORD *exstyle) const override;
+    DWORD MSWGetStyle(unsigned int style, DWORD *exstyle) const override;
 
     // returns true if the platform should explicitly apply a theme border
     bool CanApplyThemeBorder() const override { return false; }
@@ -122,7 +122,7 @@ protected:
                        const wxPoint& pos,
                        const wxSize& size,
                        const std::vector<std::string>& choices,
-                       long style,
+                       unsigned int style,
                        const wxValidator& validator,
                        const std::string& name);
 

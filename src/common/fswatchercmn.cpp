@@ -225,7 +225,7 @@ bool wxFileSystemWatcherBase::AddTree(const wxFileName& path, int events,
     dir.Traverse(traverser, filespec, flags);
 
     // Add the path itself explicitly as Traverse() doesn't return it.
-    AddAny(path.GetPathWithSep(), events, wxFSWPathType::Tree, filespec);
+    AddAny(path.GetFullPath(), events, wxFSWPathType::Tree, filespec);
 
     return true;
 }

@@ -28,7 +28,7 @@
 // Scrollbar
 bool wxScrollBar::Create(wxWindow *parent, wxWindowID id,
            const wxPoint& pos,
-           const wxSize& size, long style,
+           const wxSize& size, unsigned int style,
            const wxValidator& validator,
            const std::string& name)
 {
@@ -215,10 +215,10 @@ wxSize wxScrollBar::DoGetBestSize() const
     return {w, h};
 }
 
-WXDWORD wxScrollBar::MSWGetStyle(long style, WXDWORD *exstyle) const
+DWORD wxScrollBar::MSWGetStyle(unsigned int style, DWORD *exstyle) const
 {
     // we never have an external border
-    WXDWORD msStyle = wxControl::MSWGetStyle
+    DWORD msStyle = wxControl::MSWGetStyle
                       (
                         (style & ~wxBORDER_MASK) | wxBORDER_NONE, exstyle
                       );

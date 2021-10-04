@@ -26,7 +26,7 @@ public:
             int range,
             const wxPoint& pos = wxDefaultPosition,
             const wxSize& size = wxDefaultSize,
-            long style = wxGA_HORIZONTAL,
+            unsigned int style = wxGA_HORIZONTAL,
             const wxValidator& validator = wxDefaultValidator,
             const std::string& name = wxGaugeNameStr)
     {
@@ -45,7 +45,7 @@ public:
                 int range,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = wxGA_HORIZONTAL,
+                unsigned int style = wxGA_HORIZONTAL,
                 const wxValidator& validator = wxDefaultValidator,
                 const std::string& name = wxGaugeNameStr);
 
@@ -59,7 +59,7 @@ public:
 
     void Pulse() override;
 
-    WXDWORD MSWGetStyle(long style, WXDWORD *exstyle) const override;
+    DWORD MSWGetStyle(unsigned int style, DWORD *exstyle) const override;
 
     // returns true if the platform should explicitly apply a theme border
     bool CanApplyThemeBorder() const override { return false; }

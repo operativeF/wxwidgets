@@ -38,7 +38,7 @@ public:
                            const std::string& wildcard = wxFileSelectorDefaultWildcardStr,
                            const wxPoint& pos = wxDefaultPosition,
                            const wxSize& size = wxDefaultSize,
-                           long style = 0,
+                           unsigned int style = 0,
                            const wxValidator& validator = wxDefaultValidator,
                            const std::string& name = wxFilePickerWidgetNameStr)
     {
@@ -68,7 +68,7 @@ public:
            const std::string &wildcard = wxFileSelectorDefaultWildcardStr,
            const wxPoint& pos = wxDefaultPosition,
            const wxSize& size = wxDefaultSize,
-           long style = 0,
+           unsigned int style = 0,
            const wxValidator& validator = wxDefaultValidator,
            const std::string& name = wxFilePickerWidgetNameStr);
 
@@ -107,7 +107,7 @@ public:
                         const std::string &wildcard = wxFileSelectorDefaultWildcardStr,
                         const wxPoint& pos = wxDefaultPosition,
                         const wxSize& size = wxDefaultSize,
-                        long style = wxFILEBTN_DEFAULT_STYLE,
+                        unsigned int style = wxFILEBTN_DEFAULT_STYLE,
                         const wxValidator& validator = wxDefaultValidator,
                         const std::string& name = wxFilePickerWidgetNameStr)
     {
@@ -174,7 +174,7 @@ public:
                        const std::string &message = wxDirSelectorPromptStr,
                        const wxPoint& pos = wxDefaultPosition,
                        const wxSize& size = wxDefaultSize,
-                       long style = wxDIRBTN_DEFAULT_STYLE,
+                       unsigned int style = wxDIRBTN_DEFAULT_STYLE,
                        const wxValidator& validator = wxDefaultValidator,
                        const std::string& name = wxDirPickerWidgetNameStr)
     {

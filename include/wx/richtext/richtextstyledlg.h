@@ -87,10 +87,10 @@ class WXDLLIMPEXP_RICHTEXT wxRichTextStyleOrganiserDialog: public wxDialog
 public:
     /// Constructors
     wxRichTextStyleOrganiserDialog( );
-    wxRichTextStyleOrganiserDialog( int flags, wxRichTextStyleSheet* sheet, wxRichTextCtrl* ctrl, wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& caption = SYMBOL_WXRICHTEXTSTYLEORGANISERDIALOG_TITLE, const wxPoint& pos = SYMBOL_WXRICHTEXTSTYLEORGANISERDIALOG_POSITION, const wxSize& size = SYMBOL_WXRICHTEXTSTYLEORGANISERDIALOG_SIZE, long style = SYMBOL_WXRICHTEXTSTYLEORGANISERDIALOG_STYLE );
+    wxRichTextStyleOrganiserDialog( int flags, wxRichTextStyleSheet* sheet, wxRichTextCtrl* ctrl, wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& caption = SYMBOL_WXRICHTEXTSTYLEORGANISERDIALOG_TITLE, const wxPoint& pos = SYMBOL_WXRICHTEXTSTYLEORGANISERDIALOG_POSITION, const wxSize& size = SYMBOL_WXRICHTEXTSTYLEORGANISERDIALOG_SIZE, unsigned int style = SYMBOL_WXRICHTEXTSTYLEORGANISERDIALOG_STYLE );
 
     /// Creation
-    bool Create( int flags, wxRichTextStyleSheet* sheet, wxRichTextCtrl* ctrl, wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& caption = SYMBOL_WXRICHTEXTSTYLEORGANISERDIALOG_TITLE, const wxPoint& pos = SYMBOL_WXRICHTEXTSTYLEORGANISERDIALOG_POSITION, const wxSize& size = SYMBOL_WXRICHTEXTSTYLEORGANISERDIALOG_SIZE, long style = SYMBOL_WXRICHTEXTSTYLEORGANISERDIALOG_STYLE );
+    bool Create( int flags, wxRichTextStyleSheet* sheet, wxRichTextCtrl* ctrl, wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& caption = SYMBOL_WXRICHTEXTSTYLEORGANISERDIALOG_TITLE, const wxPoint& pos = SYMBOL_WXRICHTEXTSTYLEORGANISERDIALOG_POSITION, const wxSize& size = SYMBOL_WXRICHTEXTSTYLEORGANISERDIALOG_SIZE, unsigned int style = SYMBOL_WXRICHTEXTSTYLEORGANISERDIALOG_STYLE );
 
     /// Creates the controls and sizers
     void CreateControls();

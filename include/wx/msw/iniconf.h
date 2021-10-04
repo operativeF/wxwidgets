@@ -52,7 +52,7 @@ public:
               const std::string& strVendor = {},
               const std::string& localFilename = {},
               const std::string& globalFilename = {},
-              long style = wxCONFIG_USE_LOCAL_FILE);
+              unsigned int style = wxCONFIG_USE_LOCAL_FILE);
   ~wxIniConfig() = default;
 
   wxIniConfig(const wxIniConfig&) = delete;

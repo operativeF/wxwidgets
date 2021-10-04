@@ -241,7 +241,7 @@ wxPropertyGrid::wxPropertyGrid( wxWindow *parent,
                                 wxWindowID id,
                                 const wxPoint& pos,
                                 const wxSize& size,
-                                long style,
+                                unsigned int style,
                                 const wxString& name )
      
 {
@@ -255,7 +255,7 @@ bool wxPropertyGrid::Create( wxWindow *parent,
                              wxWindowID id,
                              const wxPoint& pos,
                              const wxSize& size,
-                             long style,
+                             unsigned int style,
                              const wxString& name )
 {
 
@@ -566,7 +566,7 @@ wxPropertyGridPageState* wxPropertyGrid::CreateState() const
 // wxPropertyGrid overridden wxWindow methods
 // -----------------------------------------------------------------------
 
-void wxPropertyGrid::SetWindowStyleFlag( long style )
+void wxPropertyGrid::SetWindowStyleFlag( unsigned int style )
 {
     long old_style = m_windowStyle;
 

@@ -31,7 +31,7 @@ bool wxStaticLine::Create(wxWindow *parent,
                           wxWindowID id,
                           const wxPoint& pos,
                           const wxSize& sizeOrig,
-                          long style,
+                          unsigned int style,
                           const std::string& name)
 {
     wxSize size = AdjustSize(sizeOrig);
@@ -42,13 +42,13 @@ bool wxStaticLine::Create(wxWindow *parent,
     return MSWCreateControl("STATIC", "", pos, size);
 }
 
-WXDWORD wxStaticLine::MSWGetStyle(long style, WXDWORD *exstyle) const
+DWORD wxStaticLine::MSWGetStyle(unsigned int style, DWORD *exstyle) const
 {
     // we never have border
     style &= ~wxBORDER_MASK;
     style |= wxBORDER_NONE;
 
-    WXDWORD msStyle = wxControl::MSWGetStyle(style, exstyle);
+    DWORD msStyle = wxControl::MSWGetStyle(style, exstyle);
 
     // add our default styles
     msStyle |= SS_SUNKEN | SS_NOTIFY | WS_CLIPSIBLINGS;

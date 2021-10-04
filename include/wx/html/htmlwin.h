@@ -243,7 +243,7 @@ public:
     wxHtmlWindow(wxWindow *parent, wxWindowID id = wxID_ANY,
                  const wxPoint& pos = wxDefaultPosition,
                  const wxSize& size = wxDefaultSize,
-                 long style = wxHW_DEFAULT_STYLE,
+                 unsigned int style = wxHW_DEFAULT_STYLE,
                  const std::string& name = "htmlWindow")
         : wxHtmlWindowMouseHelper(this)
     {
@@ -258,7 +258,7 @@ public:
     bool Create(wxWindow *parent, wxWindowID id = wxID_ANY,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = wxHW_SCROLLBAR_AUTO,
+                unsigned int style = wxHW_SCROLLBAR_AUTO,
                 const std::string& name = "htmlWindow");
 
     // Set HTML page and display it. !! source is HTML document itself,

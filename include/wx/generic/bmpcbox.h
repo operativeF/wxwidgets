@@ -41,7 +41,7 @@ public:
                      const wxSize& size = wxDefaultSize,
                      int n = 0,
                      const wxString choices[] = NULL,
-                     long style = 0,
+                     unsigned int style = 0,
                      const wxValidator& validator = wxDefaultValidator,
                      const std::string& name = wxBitmapComboBoxNameStr)
         : wxOwnerDrawnComboBox(),
@@ -59,7 +59,7 @@ public:
                      const wxPoint& pos,
                      const wxSize& size,
                      const wxArrayString& choices,
-                     long style,
+                     unsigned int style,
                      const wxValidator& validator = wxDefaultValidator,
                      const std::string& name = wxBitmapComboBoxNameStr);
 
@@ -70,7 +70,7 @@ public:
                 const wxSize& size,
                 int n,
                 const wxString choices[],
-                long style = 0,
+                unsigned int style = 0,
                 const wxValidator& validator = wxDefaultValidator,
                 const std::string& name = wxBitmapComboBoxNameStr);
 
@@ -80,7 +80,7 @@ public:
                 const wxPoint& pos,
                 const wxSize& size,
                 const wxArrayString& choices,
-                long style = 0,
+                unsigned int style = 0,
                 const wxValidator& validator = wxDefaultValidator,
                 const std::string& name = wxASCII_STR(wxBitmapComboBoxNameStr));
 

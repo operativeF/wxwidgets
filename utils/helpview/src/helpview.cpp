@@ -115,7 +115,7 @@ bool hvApp::OnInit()
         }
         else if ( argStr.Find( wxT("--Style") )  >= 0 )
         {
-            long style;
+            unsigned int style;
             wxString numb = argStr.AfterLast(wxT('e'));
             if ( !(numb.ToLong(&style) ) )
             {

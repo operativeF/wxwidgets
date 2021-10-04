@@ -68,7 +68,7 @@ wxRichTextSizePage::wxRichTextSizePage()
     Init();
 }
 
-wxRichTextSizePage::wxRichTextSizePage( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size, long style )
+wxRichTextSizePage::wxRichTextSizePage( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size, unsigned int style )
 {
     Init();
     Create(parent, id, pos, size, style);
@@ -79,7 +79,7 @@ wxRichTextSizePage::wxRichTextSizePage( wxWindow* parent, wxWindowID id, const w
  * wxRichTextSizePage creator
  */
 
-bool wxRichTextSizePage::Create( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size, long style )
+bool wxRichTextSizePage::Create( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size, unsigned int style )
 {
 ////@begin wxRichTextSizePage creation
     wxRichTextDialogPage::Create( parent, id, pos, size, style );

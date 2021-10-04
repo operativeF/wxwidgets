@@ -25,9 +25,9 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxTimePickerCtrl, wxControl);
 // wxTimePickerCtrl implementation
 // ============================================================================
 
-WXDWORD wxTimePickerCtrl::MSWGetStyle(long style, WXDWORD *exstyle) const
+DWORD wxTimePickerCtrl::MSWGetStyle(unsigned int style, DWORD *exstyle) const
 {
-    WXDWORD styleMSW = wxTimePickerCtrlBase::MSWGetStyle(style, exstyle);
+    DWORD styleMSW = wxTimePickerCtrlBase::MSWGetStyle(style, exstyle);
 
     styleMSW |= DTS_TIMEFORMAT;
 

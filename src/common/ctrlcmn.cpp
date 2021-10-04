@@ -34,7 +34,7 @@ bool wxControlBase::Create(wxWindow *parent,
                            wxWindowID id,
                            const wxPoint &pos,
                            const wxSize &size,
-                           long style,
+                           unsigned int style,
                            const wxValidator& wxVALIDATOR_PARAM(validator),
                            const std::string& name)
 {
@@ -52,7 +52,7 @@ bool wxControlBase::CreateControl(wxWindowBase *parent,
                                   wxWindowID id,
                                   const wxPoint& pos,
                                   const wxSize& size,
-                                  long style,
+                                  unsigned int style,
                                   const wxValidator& validator,
                                   const std::string& name)
 {
@@ -562,8 +562,8 @@ std::string DoEllipsizeSingleLine(const std::string& curLine, const wxDC& dc,
 
 /* static */
 std::string wxControlBase::Ellipsize(std::string_view label, const wxDC& dc,
-                                  wxEllipsizeMode mode, int maxFinalWidth,
-                                  int flags)
+                                     wxEllipsizeMode mode, int maxFinalWidth,
+                                     unsigned int flags)
 {
     if (mode == wxEllipsizeMode::None)
         return std::string(label);

@@ -161,7 +161,7 @@ protected:
                     const std::string& wildcard,
                     const wxPoint& pos,
                     const wxSize& size,
-                    long style,
+                    unsigned int style,
                     const wxValidator& validator,
                     const std::string& name);
 
@@ -241,7 +241,7 @@ public:
                      const std::string& wildcard = wxFileSelectorDefaultWildcardStr,
                      const wxPoint& pos = wxDefaultPosition,
                      const wxSize& size = wxDefaultSize,
-                     long style = wxFLP_DEFAULT_STYLE,
+                     unsigned int style = wxFLP_DEFAULT_STYLE,
                      const wxValidator& validator = wxDefaultValidator,
                      const std::string& name = wxFilePickerCtrlNameStr)
     {
@@ -256,7 +256,7 @@ public:
                 const std::string& wildcard = wxFileSelectorDefaultWildcardStr,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = wxFLP_DEFAULT_STYLE,
+                unsigned int style = wxFLP_DEFAULT_STYLE,
                 const wxValidator& validator = wxDefaultValidator,
                 const std::string& name = wxFilePickerCtrlNameStr);
 
@@ -299,7 +299,7 @@ protected:
     }
 
     // extracts the style for our picker from wxFileDirPickerCtrlBase's style
-    long GetPickerStyle(long style) const override
+    long GetPickerStyle(unsigned int style) const override
     {
         return style & (wxFLP_OPEN |
                         wxFLP_SAVE |
@@ -344,7 +344,7 @@ public:
                     const std::string& message = wxDirSelectorPromptStr,
                     const wxPoint& pos = wxDefaultPosition,
                     const wxSize& size = wxDefaultSize,
-                    long style = wxDIRP_DEFAULT_STYLE,
+                    unsigned int style = wxDIRP_DEFAULT_STYLE,
                     const wxValidator& validator = wxDefaultValidator,
                     const std::string& name = wxDirPickerCtrlNameStr)
     {
@@ -356,7 +356,7 @@ public:
                 const std::string& message = wxDirSelectorPromptStr,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = wxDIRP_DEFAULT_STYLE,
+                unsigned int style = wxDIRP_DEFAULT_STYLE,
                 const wxValidator& validator = wxDefaultValidator,
                 const std::string& name = wxDirPickerCtrlNameStr);
 
@@ -398,7 +398,7 @@ protected:
     }
 
     // extracts the style for our picker from wxFileDirPickerCtrlBase's style
-    long GetPickerStyle(long style) const override
+    long GetPickerStyle(unsigned int style) const override
     {
         return style & (wxDIRP_DIR_MUST_EXIST |
                         wxDIRP_CHANGE_DIR |

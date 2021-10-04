@@ -311,7 +311,7 @@ wxSymbolPickerDialog::wxSymbolPickerDialog( )
     Init();
 }
 
-wxSymbolPickerDialog::wxSymbolPickerDialog( const wxString& symbol, const wxString& fontName, const wxString& normalTextFont, wxWindow* parent, wxWindowID id, const wxString& caption, const wxPoint& pos, const wxSize& size, long style )
+wxSymbolPickerDialog::wxSymbolPickerDialog( const wxString& symbol, const wxString& fontName, const wxString& normalTextFont, wxWindow* parent, wxWindowID id, const wxString& caption, const wxPoint& pos, const wxSize& size, unsigned int style )
 {
     Init();
     Create(symbol, fontName, normalTextFont, parent, id, caption, pos, size, style);
@@ -321,7 +321,7 @@ wxSymbolPickerDialog::wxSymbolPickerDialog( const wxString& symbol, const wxStri
  * wxSymbolPickerDialog creator
  */
 
-bool wxSymbolPickerDialog::Create( const wxString& symbol, const wxString& fontName, const wxString& normalTextFont, wxWindow* parent, wxWindowID id, const wxString& caption, const wxPoint& pos, const wxSize& size, long style )
+bool wxSymbolPickerDialog::Create( const wxString& symbol, const wxString& fontName, const wxString& normalTextFont, wxWindow* parent, wxWindowID id, const wxString& caption, const wxPoint& pos, const wxSize& size, unsigned int style )
 {
     m_fontName = fontName;
     m_normalTextFontName = normalTextFont;
@@ -774,7 +774,7 @@ bool wxSymbolListCtrl::Create(wxWindow *parent,
                         wxWindowID id,
                         const wxPoint& pos,
                         const wxSize& size,
-                        long style,
+                        unsigned int style,
                         const wxString& name)
 {
     style |= wxWANTS_CHARS | wxFULL_REPAINT_ON_RESIZE;

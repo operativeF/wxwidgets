@@ -460,7 +460,7 @@ wxWindowMSW::~wxWindowMSW()
 
 }
 
-const std::string& wxWindowMSW::GetMSWClassName(long style)
+const std::string& wxWindowMSW::GetMSWClassName(unsigned int style)
 {
     return wxApp::GetRegisteredClassName
                   (
@@ -478,7 +478,7 @@ bool wxWindowMSW::CreateUsingMSWClass(const std::string& classname,
                                       wxWindowID id,
                                       const wxPoint& pos,
                                       const wxSize& size,
-                                      long style,
+                                      unsigned int style,
                                       const std::string& name)
 {
     wxCHECK_MSG( parent, false, wxT("can't create wxWindow without parent") );
@@ -488,7 +488,7 @@ bool wxWindowMSW::CreateUsingMSWClass(const std::string& classname,
 
     parent->AddChild(this);
 
-    WXDWORD exstyle;
+    DWORD exstyle;
     DWORD msflags = MSWGetCreateWindowFlags(&exstyle);
 
 #ifdef __WXUNIVERSAL__
@@ -1338,7 +1338,7 @@ bool wxCheckWindowWndProc(WXHWND hWnd, WXWNDPROC WXUNUSED(wndProc))
 // Style handling
 // ----------------------------------------------------------------------------
 
-void wxWindowMSW::SetWindowStyleFlag(long flags)
+void wxWindowMSW::SetWindowStyleFlag(unsigned int flags)
 {
     long flagsOld = GetWindowStyleFlag();
     if ( flags == flagsOld )
@@ -1374,8 +1374,8 @@ void wxWindowMSW::MSWUpdateStyle(long flagsOld, long exflagsOld)
     // we may need to call SetWindowPos() when we change some styles
     bool callSWP = false;
 
-    WXDWORD exstyle;
-    long style = MSWGetStyle(GetWindowStyleFlag(), &exstyle);
+    DWORD exstyle;
+    unsigned int style = MSWGetStyle(GetWindowStyleFlag(), &exstyle);
 
     // this is quite a horrible hack but we need it because MSWGetStyle()
     // doesn't take exflags as parameter but uses GetExtraStyle() internally
@@ -1384,7 +1384,7 @@ void wxWindowMSW::MSWUpdateStyle(long flagsOld, long exflagsOld)
     long exflagsNew = GetExtraStyle();
     wxWindowBase::SetExtraStyle(exflagsOld);
 
-    WXDWORD exstyleOld;
+    DWORD exstyleOld;
     long styleOld = MSWGetStyle(flagsOld, &exstyleOld);
 
     wxWindowBase::SetExtraStyle(exflagsNew);
@@ -1471,13 +1471,13 @@ wxBorder wxWindowMSW::TranslateBorder(wxBorder border) const
 }
 
 
-WXDWORD wxWindowMSW::MSWGetStyle(long flags, WXDWORD *exstyle) const
+DWORD wxWindowMSW::MSWGetStyle(unsigned int flags, DWORD *exstyle) const
 {
     // translate common wxWidgets styles to Windows ones
 
     // most of windows are child ones, those which are not (such as
     // wxTopLevelWindow) should remove WS_CHILD in their MSWGetStyle()
-    WXDWORD style = WS_CHILD;
+    DWORD style = WS_CHILD;
 
     if ( !IsThisEnabled() )
         style |= WS_DISABLED;
@@ -2530,7 +2530,7 @@ bool wxWindowMSW::MSWProcessMessage(WXMSG* pMsg)
                             // let IsDialogMessage() handle this for all
                             // buttons except the owner-drawn ones which it
                             // just seems to ignore
-                            long style = ::GetWindowLongPtrW(msg->hwnd, GWL_STYLE);
+                            unsigned int style = ::GetWindowLongPtrW(msg->hwnd, GWL_STYLE);
                             if ( (style & BS_OWNERDRAW) == BS_OWNERDRAW )
                             {
                                 btn = wxDynamicCast
@@ -3944,8 +3944,8 @@ bool wxWindowMSW::MSWCreate(const std::string& wclass,
                             const std::string& title,
                             const wxPoint& pos,
                             const wxSize& size,
-                            WXDWORD style,
-                            WXDWORD extendedStyle)
+                            DWORD style,
+                            DWORD extendedStyle)
 {
     // check a common bug in the user code: if the window is created with a
     // non-default ctor and Create() is called too, we'd create 2 HWND for a
@@ -3990,8 +3990,8 @@ bool wxWindowMSW::MSWCreate(const std::string& wclass,
     return true;
 }
 
-WXHWND wxWindowMSW::MSWCreateWindowAtAnyPosition(WXDWORD exStyle, const std::string& clName,
-                                                 const std::string& title, WXDWORD style,
+WXHWND wxWindowMSW::MSWCreateWindowAtAnyPosition(DWORD exStyle, const std::string& clName,
+                                                 const std::string& title, DWORD style,
                                                  wxRect boundary,
                                                  WXHWND parent, wxWindowID id)
 {
@@ -6073,7 +6073,7 @@ void wxWindowMSW::GenerateMouseLeave()
 
 bool wxWindowMSW::InitGestureEvent(wxGestureEvent& event,
                                    const wxPoint& pt,
-                                   WXDWORD flags)
+                                   DWORD flags)
 {
     event.SetEventObject(this);
     event.SetTimestamp(::GetMessageTime());
@@ -6088,7 +6088,7 @@ bool wxWindowMSW::InitGestureEvent(wxGestureEvent& event,
     return (flags & GF_BEGIN) != 0;
 }
 
-bool wxWindowMSW::HandlePanGesture(const wxPoint& pt, WXDWORD flags)
+bool wxWindowMSW::HandlePanGesture(const wxPoint& pt, DWORD flags)
 {
     // wxEVT_GESTURE_PAN
     wxPanGestureEvent event(GetId());
@@ -6113,8 +6113,8 @@ bool wxWindowMSW::HandlePanGesture(const wxPoint& pt, WXDWORD flags)
 }
 
 bool wxWindowMSW::HandleZoomGesture(const wxPoint& pt,
-                                    WXDWORD fingerDistance,
-                                    WXDWORD flags)
+                                    DWORD fingerDistance,
+                                    DWORD flags)
 {
     // wxEVT_GESTURE_ZOOM
     wxZoomGestureEvent event(GetId());
@@ -6151,8 +6151,8 @@ bool wxWindowMSW::HandleZoomGesture(const wxPoint& pt,
 }
 
 bool wxWindowMSW::HandleRotateGesture(const wxPoint& pt,
-                                      WXDWORD angleArgument,
-                                      WXDWORD flags)
+                                      DWORD angleArgument,
+                                      DWORD flags)
 {
     // wxEVT_GESTURE_ROTATE
     wxRotateGestureEvent event(GetId());
@@ -6184,7 +6184,7 @@ bool wxWindowMSW::HandleRotateGesture(const wxPoint& pt,
     return HandleWindowEvent(event);
 }
 
-bool wxWindowMSW::HandleTwoFingerTap(const wxPoint& pt, WXDWORD flags)
+bool wxWindowMSW::HandleTwoFingerTap(const wxPoint& pt, DWORD flags)
 {
     // wxEVT_TWO_FINGER_TAP
     wxTwoFingerTapEvent event(GetId());
@@ -6194,7 +6194,7 @@ bool wxWindowMSW::HandleTwoFingerTap(const wxPoint& pt, WXDWORD flags)
     return HandleWindowEvent(event);
 }
 
-bool wxWindowMSW::HandlePressAndTap(const wxPoint& pt, WXDWORD flags)
+bool wxWindowMSW::HandlePressAndTap(const wxPoint& pt, DWORD flags)
 {
     wxPressAndTapEvent event(GetId());
 

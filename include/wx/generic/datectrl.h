@@ -33,7 +33,7 @@ public:
                             const wxDateTime& date = wxDefaultDateTime,
                             const wxPoint& pos = wxDefaultPosition,
                             const wxSize& size = wxDefaultSize,
-                            long style = wxDP_DEFAULT | wxDP_SHOWCENTURY,
+                            unsigned int style = wxDP_DEFAULT | wxDP_SHOWCENTURY,
                             const wxValidator& validator = wxDefaultValidator,
                             const std::string& name = wxDatePickerCtrlNameStr)
     {
@@ -50,7 +50,7 @@ public:
                 const wxDateTime& date = wxDefaultDateTime,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = wxDP_DEFAULT | wxDP_SHOWCENTURY,
+                unsigned int style = wxDP_DEFAULT | wxDP_SHOWCENTURY,
                 const wxValidator& validator = wxDefaultValidator,
                 const std::string& name = wxDatePickerCtrlNameStr);
 

@@ -637,7 +637,7 @@ wxGLCanvas::wxGLCanvas(wxWindow *parent,
                        wxWindowID id,
                        const wxPoint& pos,
                        const wxSize& size,
-                       long style,
+                       unsigned int style,
                        const std::string& name,
                        const wxPalette& palette)
 {
@@ -649,7 +649,7 @@ wxGLCanvas::wxGLCanvas(wxWindow *parent,
                        const int *attribList,
                        const wxPoint& pos,
                        const wxSize& size,
-                       long style,
+                       unsigned int style,
                        const std::string& name,
                        const wxPalette& palette)
 {
@@ -667,7 +667,7 @@ bool wxGLCanvas::wxCreateWindow(wxWindow *parent,
                               wxWindowID id,
                               const wxPoint& pos,
                               const wxSize& size,
-                              long style,
+                              unsigned int style,
                               const std::string& name)
 {
     wxCHECK_MSG( parent, false, wxT("can't create wxWindow without parent") );
@@ -683,7 +683,7 @@ bool wxGLCanvas::wxCreateWindow(wxWindow *parent,
        You can find references about this within the knowledge base and most OpenGL
        books that contain the wgl function descriptions.
      */
-    WXDWORD exStyle = 0;
+    DWORD exStyle = 0;
     DWORD msflags = WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS | WS_CLIPCHILDREN;
     msflags |= MSWGetStyle(style, &exStyle);
 
@@ -699,7 +699,7 @@ bool wxGLCanvas::Create(wxWindow *parent,
                         wxWindowID id,
                         const wxPoint& pos,
                         const wxSize& size,
-                        long style,
+                        unsigned int style,
                         const std::string& name,
                         const int *attribList,
                         const wxPalette& palette)
@@ -718,7 +718,7 @@ bool wxGLCanvas::Create(wxWindow *parent,
                         wxWindowID id,
                         const wxPoint& pos,
                         const wxSize& size,
-                        long style,
+                        unsigned int style,
                         const std::string& name,
                         const wxPalette& palette)
 {

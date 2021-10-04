@@ -503,7 +503,7 @@ wxWebViewEdge::wxWebViewEdge(wxWindow* parent,
     const wxString& url,
     const wxPoint& pos,
     const wxSize& size,
-    long style,
+    unsigned int style,
     const wxString& name):
     m_impl(new wxWebViewEdgeImpl(this))
 {
@@ -523,7 +523,7 @@ bool wxWebViewEdge::Create(wxWindow* parent,
     const wxString& url,
     const wxPoint& pos,
     const wxSize& size,
-    long style,
+    unsigned int style,
     const wxString& name)
 {
     if (!wxWebViewEdgeImpl::Initialize())

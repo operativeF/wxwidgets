@@ -32,7 +32,7 @@ public:
                  const std::string& label,
                  const wxPoint& pos = wxDefaultPosition,
                  const wxSize& size = wxDefaultSize,
-                 long style = 0,
+                 unsigned int style = 0,
                  const std::string& name = wxStaticTextNameStr)
     {
         
@@ -52,7 +52,7 @@ public:
                 const std::string& label,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = 0,
+                unsigned int style = 0,
                 const std::string& name = wxStaticTextNameStr);
 
     ~wxGenericStaticText();

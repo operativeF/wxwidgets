@@ -257,7 +257,7 @@ static bool wxCanBeUTF8SequencePrefix(const char *src, size_t len)
     {
         if ( ++i == len )
             return true; // truncated sequence
-        if ( (src[i] & 0xC0) != 0x80 )
+        if ( (src[i] & 0xC0U) != 0x80U )
             return false; // invalid continuation byte
     }
     return false; // complete sequence

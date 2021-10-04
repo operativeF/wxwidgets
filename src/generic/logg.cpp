@@ -84,7 +84,7 @@ public:
                 const std::vector<int>& severity,
                 const std::vector<long>& timess,
                 const wxString& caption,
-                long style);
+                unsigned int style);
     ~wxLogDialog();
 
     wxLogDialog(const wxLogDialog&) = delete;
@@ -654,7 +654,7 @@ wxLogDialog::wxLogDialog(wxWindow *parent,
                          const std::vector<int>& severity,
                          const std::vector<long>& times,
                          const wxString& caption,
-                         long style)
+                         unsigned int style)
            : wxDialog(parent, wxID_ANY, caption,
                       wxDefaultPosition, wxDefaultSize,
                       wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER)

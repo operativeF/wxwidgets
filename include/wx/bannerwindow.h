@@ -65,7 +65,7 @@ public:
                    wxDirection dir = wxLEFT,
                    const wxPoint& pos = wxDefaultPosition,
                    const wxSize& size = wxDefaultSize,
-                   long style = 0,
+                   unsigned int style = 0,
                    const std::string& name = wxBannerWindowNameStr)
     {
         
@@ -89,7 +89,7 @@ public:
                 wxDirection dir = wxLEFT,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = 0,
+                unsigned int style = 0,
                 const std::string& name = wxBannerWindowNameStr);
 
 

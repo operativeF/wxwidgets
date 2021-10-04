@@ -23,7 +23,7 @@ public:
                      const wxDateTime& dt = wxDefaultDateTime,
                      const wxPoint& pos = wxDefaultPosition,
                      const wxSize& size = wxDefaultSize,
-                     long style = wxDP_DEFAULT | wxDP_SHOWCENTURY,
+                     unsigned int style = wxDP_DEFAULT | wxDP_SHOWCENTURY,
                      const wxValidator& validator = wxDefaultValidator,
                      const std::string& name = wxDatePickerCtrlNameStr)
     {
@@ -40,7 +40,7 @@ public:
                 const wxDateTime& dt = wxDefaultDateTime,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = wxDP_DEFAULT | wxDP_SHOWCENTURY,
+                unsigned int style = wxDP_DEFAULT | wxDP_SHOWCENTURY,
                 const wxValidator& validator = wxDefaultValidator,
                 const std::string& name = wxDatePickerCtrlNameStr);
 
@@ -53,7 +53,7 @@ public:
     bool GetRange(wxDateTime *dt1, wxDateTime *dt2) const override;
 
     // Override MSW-specific functions used during control creation.
-    WXDWORD MSWGetStyle(long style, WXDWORD *exstyle) const override;
+    DWORD MSWGetStyle(unsigned int style, DWORD *exstyle) const override;
 
 protected:
 #if wxUSE_INTL

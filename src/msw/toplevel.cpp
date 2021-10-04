@@ -84,11 +84,11 @@ wxEND_EVENT_TABLE()
 // wxTopLevelWindowMSW creation
 // ----------------------------------------------------------------------------
 
-WXDWORD wxTopLevelWindowMSW::MSWGetStyle(long style, WXDWORD *exflags) const
+DWORD wxTopLevelWindowMSW::MSWGetStyle(unsigned int style, DWORD *exflags) const
 {
     // let the base class deal with the common styles but fix the ones which
     // don't make sense for us (we also deal with the borders ourselves)
-    WXDWORD msflags = wxWindow::MSWGetStyle
+    DWORD msflags = wxWindow::MSWGetStyle
                       (
                         (style & ~wxBORDER_MASK) | wxBORDER_NONE, exflags
                       ) & ~WS_CHILD & ~WS_VISIBLE;
@@ -384,8 +384,8 @@ bool wxTopLevelWindowMSW::CreateFrame(const std::string& title,
                                       const wxPoint& pos,
                                       const wxSize& size)
 {
-    WXDWORD exflags;
-    WXDWORD flags = MSWGetCreateWindowFlags(&exflags);
+    DWORD exflags;
+    DWORD flags = MSWGetCreateWindowFlags(&exflags);
 
     const wxSize sz = IsAlwaysMaximized() ? wxDefaultSize : size;
 
@@ -400,7 +400,7 @@ bool wxTopLevelWindowMSW::Create(wxWindow *parent,
                                  const std::string& title,
                                  const wxPoint& pos,
                                  const wxSize& size,
-                                 long style,
+                                 unsigned int style,
                                  const std::string& name)
 {
     wxSize sizeReal = size;
@@ -448,7 +448,7 @@ bool wxTopLevelWindowMSW::Create(wxWindow *parent,
         // NB: we need a temporary variable as we can't pass pointer to
         //     dwExtendedStyle directly, it's not aligned correctly for 64 bit
         //     architectures
-        WXDWORD dwExtendedStyle;
+        DWORD dwExtendedStyle;
         dlgTemplate->style = MSWGetStyle(style, &dwExtendedStyle);
         dlgTemplate->dwExtendedStyle = dwExtendedStyle;
 
@@ -892,7 +892,7 @@ wxTopLevelWindowMSW::MSWGetCreateWindowCoords(const wxPoint& pos,
 // wxTopLevelWindowMSW fullscreen
 // ----------------------------------------------------------------------------
 
-bool wxTopLevelWindowMSW::ShowFullScreen(bool show, long style)
+bool wxTopLevelWindowMSW::ShowFullScreen(bool show, unsigned int style)
 {
     if ( show == IsFullScreen() )
     {

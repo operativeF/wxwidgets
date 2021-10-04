@@ -34,7 +34,7 @@ public:
                      const wxPoint& pos = wxDefaultPosition,
                      const wxSize& size = wxDefaultSize,
                      const std::vector<std::string>& choices = {},
-                     long style = 0,
+                     unsigned int style = 0,
                      const wxValidator& validator = wxDefaultValidator,
                      const std::string& name = wxBitmapComboBoxNameStr)
         
@@ -50,7 +50,7 @@ public:
                 const wxPoint& pos,
                 const wxSize& size,
                 const std::vector<std::string>& choices,
-                long style = 0,
+                unsigned int style = 0,
                 const wxValidator& validator = wxDefaultValidator,
                 const std::string& name = wxBitmapComboBoxNameStr);
 
@@ -76,7 +76,7 @@ public:
 
 protected:
 
-    WXDWORD MSWGetStyle(long style, WXDWORD *exstyle) const override;
+    DWORD MSWGetStyle(unsigned int style, DWORD *exstyle) const override;
     bool MSWOnDraw(WXDRAWITEMSTRUCT *item) override;
     bool MSWOnMeasure(WXMEASUREITEMSTRUCT *item) override;
     void MSWUpdateFontOnDPIChange(const wxSize& newDPI) override;

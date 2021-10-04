@@ -63,7 +63,7 @@ bool wxButton::Create(wxWindow *parent,
                       const std::string& lbl,
                       const wxPoint& pos,
                       const wxSize& size,
-                      long style,
+                      unsigned int style,
                       const wxValidator& validator,
                       const std::string& name)
 {
@@ -87,8 +87,8 @@ bool wxButton::Create(wxWindow *parent,
     if ( !CreateControl(parent, id, pos, size, style, validator, name) )
         return false;
 
-    WXDWORD exstyle;
-    WXDWORD msStyle = MSWGetStyle(style, &exstyle);
+    DWORD exstyle;
+    DWORD msStyle = MSWGetStyle(style, &exstyle);
 
     // if the label contains several lines we must explicitly tell the button
     // about it or it wouldn't draw it correctly ("\n"s would just appear as
@@ -114,10 +114,10 @@ wxButton::~wxButton()
 // flags
 // ----------------------------------------------------------------------------
 
-WXDWORD wxButton::MSWGetStyle(long style, WXDWORD *exstyle) const
+DWORD wxButton::MSWGetStyle(unsigned int style, DWORD *exstyle) const
 {
     // buttons never have an external border, they draw their own one
-    WXDWORD msStyle = wxControl::MSWGetStyle
+    DWORD msStyle = wxControl::MSWGetStyle
                       (
                         (style & ~wxBORDER_MASK) | wxBORDER_NONE, exstyle
                       );
@@ -338,7 +338,7 @@ wxButton::SetDefaultStyle(wxButton *btn, bool on)
     }
 
     // then also change the style as needed
-    long style = ::GetWindowLongPtrW(GetHwndOf(btn), GWL_STYLE);
+    unsigned int style = ::GetWindowLongPtrW(GetHwndOf(btn), GWL_STYLE);
     if ( !(style & BS_DEFPUSHBUTTON) == on )
     {
         // don't do it with the owner drawn buttons because it will

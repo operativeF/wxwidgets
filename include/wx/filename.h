@@ -227,8 +227,8 @@ public:
 
         // does anything at all with this name (i.e. file, directory or some
         // other file system object such as a device, socket, ...) exist?
-    bool Exists(int flags = wxFILE_EXISTS_ANY) const;
-    static bool Exists(const wxString& path, int flags = wxFILE_EXISTS_ANY);
+    bool Exists(unsigned int flags = wxFILE_EXISTS_ANY) const;
+    static bool Exists(const wxString& path, unsigned int flags = wxFILE_EXISTS_ANY);
 
 
         // checks on most common flags for files/directories;
@@ -331,12 +331,12 @@ public:
 #endif // wxUSE_FFILE
 
     // directory creation and removal.
-    bool Mkdir(int perm = wxS_DIR_DEFAULT, int flags = 0) const;
+    bool Mkdir(int perm = wxS_DIR_DEFAULT, unsigned int flags = 0) const;
     static bool Mkdir(const wxString &dir, int perm = wxS_DIR_DEFAULT,
-                      int flags = 0);
+                      unsigned int flags = 0);
 
-    bool Rmdir(int flags = 0) const;
-    static bool Rmdir(const wxString &dir, int flags = 0);
+    bool Rmdir(unsigned int flags = 0) const;
+    static bool Rmdir(const wxString &dir, unsigned int flags = 0);
 
     // operations on the path
 
@@ -345,7 +345,7 @@ public:
         // variables will be expanded in it
         //
         // this may be done using another (than current) value of cwd
-    bool Normalize(int flags = wxPATH_NORM_ALL,
+    bool Normalize(unsigned int flags = wxPATH_NORM_ALL,
                    const wxString& cwd = wxEmptyString,
                    wxPathFormat format = wxPATH_NATIVE);
 
@@ -504,7 +504,7 @@ public:
     const std::vector<wxString>& GetDirs() const        { return m_dirs; }
 
     // flags are combination of wxPATH_GET_XXX flags
-    wxString GetPath(int flags = wxPATH_GET_VOLUME,
+    wxString GetPath(unsigned int flags = wxPATH_GET_VOLUME,
                      wxPathFormat format = wxPATH_NATIVE) const;
 
     // Replace current path with this one
@@ -565,7 +565,7 @@ public:
 
 #ifdef wxHAS_FILESYSTEM_VOLUMES
         // return the string representing a file system volume, or drive
-    static wxString GetVolumeString(char drive, int flags = wxPATH_GET_SEPARATOR);
+    static wxString GetVolumeString(char drive, unsigned int flags = wxPATH_GET_SEPARATOR);
 #endif // wxHAS_FILESYSTEM_VOLUMES
 
     // File size
@@ -586,15 +586,6 @@ public:
                          int precision = 1,
                          wxSizeConvention conv = wxSIZE_CONV_TRADITIONAL);
 #endif // wxUSE_LONGLONG
-
-
-    // deprecated methods, don't use any more
-    // --------------------------------------
-
-    wxString GetPath( bool withSep, wxPathFormat format = wxPATH_NATIVE ) const
-        { return GetPath(withSep ? wxPATH_GET_SEPARATOR : 0, format); }
-    wxString GetPathWithSep(wxPathFormat format = wxPATH_NATIVE ) const
-        { return GetPath(wxPATH_GET_VOLUME | wxPATH_GET_SEPARATOR, format); }
 
 private:
     // check whether this dir is valid for Append/Prepend/InsertDir()

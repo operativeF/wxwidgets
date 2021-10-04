@@ -65,7 +65,7 @@ class WXDLLEXPORT wxNotebookTabView: public wxTabView
 {
     wxDECLARE_DYNAMIC_CLASS(wxNotebookTabView);
 public:
-    wxNotebookTabView(wxNotebook* notebook, long style = wxTAB_STYLE_DRAW_BOX | wxTAB_STYLE_COLOUR_INTERIOR);
+    wxNotebookTabView(wxNotebook* notebook, unsigned int style = wxTAB_STYLE_DRAW_BOX | wxTAB_STYLE_COLOUR_INTERIOR);
     virtual ~wxNotebookTabView(void);
 
     // Called when a tab is activated
@@ -113,7 +113,7 @@ wxNotebook::wxNotebook(wxWindow *parent,
                        wxWindowID id,
                        const wxPoint& pos,
                        const wxSize& size,
-                       long style,
+                       unsigned int style,
                        const wxString& name)
 {
     Init();
@@ -126,7 +126,7 @@ bool wxNotebook::Create(wxWindow *parent,
                         wxWindowID id,
                         const wxPoint& pos,
                         const wxSize& size,
-                        long style,
+                        unsigned int style,
                         const wxString& name)
 {
     // base init
@@ -664,7 +664,7 @@ wxRect wxNotebook::GetAvailableClientSize()
 
 wxIMPLEMENT_CLASS(wxNotebookTabView, wxTabView);
 
-wxNotebookTabView::wxNotebookTabView(wxNotebook *notebook, long style)
+wxNotebookTabView::wxNotebookTabView(wxNotebook *notebook, unsigned int style)
     : wxTabView(style), m_nextid(1)
 {
   m_notebook = notebook;

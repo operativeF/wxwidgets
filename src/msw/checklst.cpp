@@ -178,7 +178,7 @@ wxEND_EVENT_TABLE()
 wxCheckListBox::wxCheckListBox(wxWindow *parent, wxWindowID id,
                                const wxPoint& pos, const wxSize& size,
                                const std::vector<std::string>& choices,
-                               long style, const wxValidator& val,
+                               unsigned int style, const wxValidator& val,
                                const std::string& name)
 {
     Create(parent, id, pos, size, choices, style, val, name);
@@ -187,7 +187,7 @@ wxCheckListBox::wxCheckListBox(wxWindow *parent, wxWindowID id,
 bool wxCheckListBox::Create(wxWindow *parent, wxWindowID id,
                             const wxPoint& pos, const wxSize& size,
                             const std::vector<std::string>& choices,
-                            long style,
+                            unsigned int style,
                             const wxValidator& validator, const std::string& name)
 {
     return wxListBox::Create(parent, id, pos, size, choices,

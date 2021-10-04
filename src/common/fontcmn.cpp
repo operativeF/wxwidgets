@@ -160,7 +160,7 @@ wxFont *wxFontBase::New(const wxSize& pixelSize,
 /* static */
 wxFont *wxFontBase::New(int pointSize,
                         wxFontFamily family,
-                        int flags,
+                        unsigned int flags,
                         const wxString& face,
                         wxFontEncoding encoding)
 {
@@ -174,7 +174,7 @@ wxFont *wxFontBase::New(int pointSize,
 /* static */
 wxFont *wxFontBase::New(const wxSize& pixelSize,
                         wxFontFamily family,
-                        int flags,
+                        unsigned int flags,
                         const wxString& face,
                         wxFontEncoding encoding)
 {

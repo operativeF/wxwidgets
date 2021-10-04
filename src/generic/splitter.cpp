@@ -85,7 +85,7 @@ static bool IsLive(wxSplitterWindow* wnd)
 bool wxSplitterWindow::Create(wxWindow *parent, wxWindowID id,
                                    const wxPoint& pos,
                                    const wxSize& size,
-                                   long style,
+                                   unsigned int style,
                                    const std::string& name)
 {
     // allow TABbing from one window to the other

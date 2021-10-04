@@ -98,7 +98,7 @@ class WXDLLIMPEXP_CORE wxTabView: public wxObject
 {
     wxDECLARE_DYNAMIC_CLASS(wxTabView);
 public:
-  wxTabView(long style = wxTAB_STYLE_DRAW_BOX | wxTAB_STYLE_COLOUR_INTERIOR);
+  wxTabView(unsigned int style = wxTAB_STYLE_DRAW_BOX | wxTAB_STYLE_COLOUR_INTERIOR);
   ~wxTabView();
 
   inline int GetNumberOfLayers() const { return m_layers.GetCount(); }
@@ -156,7 +156,7 @@ public:
   // to fit the tabs exactly.
   int CalculateTabWidth(int noTabs, bool adjustView = false);
 
-  inline void SetTabStyle(long style) { m_tabStyle = style; }
+  inline void SetTabStyle(unsigned int style) { m_tabStyle = style; }
   inline long GetTabStyle(void) const { return m_tabStyle; }
 
   inline void SetTabSize(int w, int h) { m_tabWidth = w; m_tabHeight = h; }
@@ -332,7 +332,7 @@ class WXDLLIMPEXP_CORE wxPanelTabView : public wxTabView
     wxDECLARE_DYNAMIC_CLASS(wxPanelTabView);
 
 public:
-    wxPanelTabView(wxPanel *pan, long style = wxTAB_STYLE_DRAW_BOX | wxTAB_STYLE_COLOUR_INTERIOR);
+    wxPanelTabView(wxPanel *pan, unsigned int style = wxTAB_STYLE_DRAW_BOX | wxTAB_STYLE_COLOUR_INTERIOR);
     virtual ~wxPanelTabView(void);
 
     // Called when a tab is activated

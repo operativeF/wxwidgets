@@ -132,7 +132,7 @@ public:
 
     wxRichTextFormattingDialog(long flags, wxWindow* parent, const std::string& title = wxGetTranslation(wxT("Formatting")), wxWindowID id = wxID_ANY,
         const wxPoint& pos = wxDefaultPosition, const wxSize& sz = wxDefaultSize,
-        long style = wxDEFAULT_DIALOG_STYLE)
+        unsigned int style = wxDEFAULT_DIALOG_STYLE)
     {
         Create(flags, parent, title, id, pos, sz, style);
     }
@@ -141,7 +141,7 @@ public:
 
     bool Create(long flags, wxWindow* parent, const std::string& title = wxGetTranslation(wxT("Formatting")), wxWindowID id = wxID_ANY,
         const wxPoint& pos = wxDefaultPosition, const wxSize& sz = wxDefaultSize,
-        long style = wxDEFAULT_DIALOG_STYLE);
+        unsigned int style = wxDEFAULT_DIALOG_STYLE);
 
     /// Get attributes from the given range
     virtual bool GetStyle(wxRichTextCtrl* ctrl, const wxRichTextRange& range);
@@ -280,7 +280,7 @@ protected:
 class WXDLLIMPEXP_RICHTEXT wxRichTextFontPreviewCtrl : public wxWindow
 {
 public:
-    wxRichTextFontPreviewCtrl(wxWindow *parent, wxWindowID id = wxID_ANY, const wxPoint& pos = wxDefaultPosition, const wxSize& sz = wxDefaultSize, long style = 0);
+    wxRichTextFontPreviewCtrl(wxWindow *parent, wxWindowID id = wxID_ANY, const wxPoint& pos = wxDefaultPosition, const wxSize& sz = wxDefaultSize, unsigned int style = 0);
 
     void SetTextEffects(int effects) { m_textEffects = effects; }
     int GetTextEffects() const { return m_textEffects; }
@@ -300,7 +300,7 @@ class WXDLLIMPEXP_RICHTEXT wxRichTextColourSwatchCtrl: public wxControl
 {
     wxDECLARE_CLASS(wxRichTextColourSwatchCtrl);
 public:
-    wxRichTextColourSwatchCtrl(wxWindow* parent, wxWindowID id, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = 0);
+    wxRichTextColourSwatchCtrl(wxWindow* parent, wxWindowID id, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, unsigned int style = 0);
 
     void OnMouseEvent(wxMouseEvent& event);
 
@@ -330,10 +330,10 @@ public:
     wxRichTextFontListBox() = default;
 
     wxRichTextFontListBox(wxWindow* parent, wxWindowID id = wxID_ANY, const wxPoint& pos = wxDefaultPosition,
-        const wxSize& size = wxDefaultSize, long style = 0);
+        const wxSize& size = wxDefaultSize, unsigned int style = 0);
 
     bool Create(wxWindow* parent, wxWindowID id = wxID_ANY, const wxPoint& pos = wxDefaultPosition,
-        const wxSize& size = wxDefaultSize, long style = 0);
+        const wxSize& size = wxDefaultSize, unsigned int style = 0);
 
     /// Creates a suitable HTML fragment for a font
     std::string CreateHTML(const std::string& facename) const;

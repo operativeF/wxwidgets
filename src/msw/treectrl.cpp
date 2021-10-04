@@ -672,7 +672,7 @@ bool wxTreeCtrl::Create(wxWindow *parent,
                         wxWindowID id,
                         const wxPoint& pos,
                         const wxSize& size,
-                        long style,
+                        unsigned int style,
                         const wxValidator& validator,
                         const std::string& name)
 {
@@ -703,7 +703,7 @@ bool wxTreeCtrl::Create(wxWindow *parent,
     if ( !CreateControl(parent, id, pos, size, style, validator, name) )
         return false;
 
-    WXDWORD exStyle = 0;
+    DWORD exStyle = 0;
     DWORD wstyle = MSWGetStyle(m_windowStyle, & exStyle);
     wstyle |= WS_TABSTOP | TVS_SHOWSELALWAYS;
 

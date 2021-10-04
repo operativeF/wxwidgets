@@ -57,7 +57,7 @@ public:
                wxWindowID id = wxID_ANY,
                const wxPoint& pos = wxDefaultPosition,
                const wxSize& size = wxDefaultSize,
-               long style = 0,
+               unsigned int style = 0,
                const std::string& name = wxGLCanvasName,
                const wxPalette& palette = wxNullPalette);
 
@@ -67,7 +67,7 @@ public:
                const int *attribList = nullptr,
                const wxPoint& pos = wxDefaultPosition,
                const wxSize& size = wxDefaultSize,
-               long style = 0,
+               unsigned int style = 0,
                const std::string& name = wxGLCanvasName,
                const wxPalette& palette = wxNullPalette);
 
@@ -76,7 +76,7 @@ public:
                 wxWindowID id = wxID_ANY,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = 0,
+                unsigned int style = 0,
                 const std::string& name = wxGLCanvasName,
                 const wxPalette& palette = wxNullPalette);
 
@@ -84,7 +84,7 @@ public:
                 wxWindowID id = wxID_ANY,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = 0,
+                unsigned int style = 0,
                 const std::string& name = wxGLCanvasName,
                 const int *attribList = nullptr,
                 const wxPalette& palette = wxNullPalette);
@@ -126,7 +126,7 @@ protected:
                       wxWindowID id = wxID_ANY,
                       const wxPoint& pos = wxDefaultPosition,
                       const wxSize& size = wxDefaultSize,
-                      long style = 0,
+                      unsigned int style = 0,
                       const std::string& name = wxGLCanvasName);
 
     // set up the pixel format using the given attributes and palette

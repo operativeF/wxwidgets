@@ -33,7 +33,7 @@ public:
     bool CanOpen(const wxString& location) override;
     wxFSFile* OpenFile(wxFileSystem& fs, const wxString& location) override;
 
-    wxString FindFirst(const wxString& spec, int flags = 0) override;
+    wxString FindFirst(const wxString& spec, unsigned int flags = 0) override;
     wxString FindNext() override;
 };
 

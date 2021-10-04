@@ -24,7 +24,7 @@ public:
                   wxWindowID id = wxID_ANY,
                   const wxPoint& pos = wxDefaultPosition,
                   const wxSize& size = wxDefaultSize,
-                  long style = wxLI_HORIZONTAL,
+                  unsigned int style = wxLI_HORIZONTAL,
                   const std::string &name = wxStaticLineNameStr)
     {
         Create(parent, id, pos, size, style, name);
@@ -39,14 +39,14 @@ public:
                  wxWindowID id = wxID_ANY,
                  const wxPoint& pos = wxDefaultPosition,
                  const wxSize& size = wxDefaultSize,
-                 long style = wxLI_HORIZONTAL,
+                 unsigned int style = wxLI_HORIZONTAL,
                  const std::string& name = wxStaticLineNameStr);
 
     // overridden base class virtuals
     bool AcceptsFocus() const override { return false; }
 
     // usually overridden base class virtuals
-    WXDWORD MSWGetStyle(long style, WXDWORD *exstyle) const override;
+    DWORD MSWGetStyle(unsigned int style, DWORD *exstyle) const override;
 
 public:
 	wxClassInfo *wxGetClassInfo() const override;

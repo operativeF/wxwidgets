@@ -41,7 +41,7 @@ wxEND_EVENT_TABLE()
 
 wxSplashScreen::wxSplashScreen(const wxBitmap& bitmap, long splashStyle, std::chrono::milliseconds displayTime,
                                wxWindow* parent, wxWindowID id, const wxPoint& pos,
-                               const wxSize& size, long style)
+                               const wxSize& size, unsigned int style)
     : wxFrame(parent, id, "", wxPoint(0,0), wxSize(100, 100),
               style | wxFRAME_TOOL_WINDOW | wxFRAME_NO_TASKBAR),
       m_splashStyle(splashStyle),
@@ -125,7 +125,7 @@ wxEND_EVENT_TABLE()
 
 wxSplashScreenWindow::wxSplashScreenWindow(const wxBitmap& bitmap, wxWindow* parent,
                                            wxWindowID id, const wxPoint& pos,
-                                           const wxSize& size, long style)
+                                           const wxSize& size, unsigned int style)
     : wxWindow(parent, id, pos, size, style)
     , m_bitmap(bitmap)
 {

@@ -36,7 +36,7 @@ class WXDLLIMPEXP_CORE wxMenu : public wxMenuBase
 {
 public:
     // ctors & dtor
-    wxMenu(const std::string& title, long style = 0)
+    wxMenu(const std::string& title, unsigned int style = 0)
         : wxMenuBase(title, style)
     { 
         InitNoCreate();
@@ -57,7 +57,7 @@ public:
         }
     }
 
-    wxMenu(long style = 0) : wxMenuBase(style)
+    wxMenu(unsigned int style = 0) : wxMenuBase(style)
     { 
         InitNoCreate();
 
@@ -217,9 +217,9 @@ class WXDLLIMPEXP_CORE wxMenuBar : public wxMenuBarBase
 public:
     wxMenuBar();
         // FIXME: Unused under MSW
-    wxMenuBar(long style);
+    wxMenuBar(unsigned int style);
         // menubar takes ownership of the menus arrays but copies the titles
-    wxMenuBar(size_t n, wxMenu *menus[], const std::string titles[], long style = 0);
+    wxMenuBar(size_t n, wxMenu *menus[], const std::string titles[], unsigned int style = 0);
     ~wxMenuBar();
 
     wxMenuBar(const wxMenuBar&) = delete;

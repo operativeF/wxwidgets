@@ -1098,7 +1098,7 @@ void wxDC::CopyAttributes(const wxDC& dc)
 void wxDC::DrawLabel(std::string_view text,
                          const wxBitmap& bitmap,
                          const wxRect& rect,
-                         int alignment,
+                         unsigned int alignment,
                          int indexAccel,
                          wxRect *rectBounding)
 {

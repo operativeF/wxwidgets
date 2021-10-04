@@ -145,7 +145,7 @@ bool wxMDIParentFrame::Create(wxWindow *parent,
                               const std::string& title,
                               const wxPoint& pos,
                               const wxSize& size,
-                              long style,
+                              unsigned int style,
                               const std::string& name)
 {
   // this style can be used to prevent a window from having the standard MDI
@@ -178,8 +178,8 @@ bool wxMDIParentFrame::Create(wxWindow *parent,
   else
     m_windowId = NewControlId();
 
-  WXDWORD exflags;
-  WXDWORD msflags = MSWGetCreateWindowFlags(&exflags);
+  DWORD exflags;
+  DWORD msflags = MSWGetCreateWindowFlags(&exflags);
   msflags &= ~WS_VSCROLL;
   msflags &= ~WS_HSCROLL;
 
@@ -786,7 +786,7 @@ bool wxMDIChildFrame::Create(wxMDIParentFrame *parent,
                              const std::string& title,
                              const wxPoint& pos,
                              const wxSize& size,
-                             long style,
+                             unsigned int style,
                              const std::string& name)
 {
     m_mdiParent = parent;
@@ -1322,7 +1322,7 @@ bool wxMDIChildFrame::ResetWindowStyle(void *vrect)
 // contains the child frames
 // ===========================================================================
 
-bool wxMDIClientWindow::CreateClient(wxMDIParentFrame *parent, long style)
+bool wxMDIClientWindow::CreateClient(wxMDIParentFrame *parent, unsigned int style)
 {
     m_backgroundColour = wxSystemSettings::GetColour(wxSYS_COLOUR_APPWORKSPACE);
 

@@ -293,7 +293,7 @@ wxIMPLEMENT_ABSTRACT_CLASS(wxFileConfig, wxConfigBase);
 // constructor supports creation of wxFileConfig objects of any type
 wxFileConfig::wxFileConfig(const wxString& appName, const wxString& vendorName,
                            const wxString& strLocal, const wxString& strGlobal,
-                           long style,
+                           unsigned int style,
                            const wxMBConv& conv)
             : wxConfigBase(( !appName && wxTheApp ) ? wxTheApp->GetAppName() : appName,
                            vendorName,

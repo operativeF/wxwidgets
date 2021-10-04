@@ -75,7 +75,7 @@ wxRichTextMarginsPage::wxRichTextMarginsPage()
     Init();
 }
 
-wxRichTextMarginsPage::wxRichTextMarginsPage( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size, long style )
+wxRichTextMarginsPage::wxRichTextMarginsPage( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size, unsigned int style )
 {
     Init();
     Create(parent, id, pos, size, style);
@@ -86,7 +86,7 @@ wxRichTextMarginsPage::wxRichTextMarginsPage( wxWindow* parent, wxWindowID id, c
  * wxRichTextMarginsPage creator
  */
 
-bool wxRichTextMarginsPage::Create( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size, long style )
+bool wxRichTextMarginsPage::Create( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size, unsigned int style )
 {
 ////@begin wxRichTextMarginsPage creation
     wxRichTextDialogPage::Create( parent, id, pos, size, style );

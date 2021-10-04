@@ -318,7 +318,7 @@ std::string wxMenuItemBase::GetLabelText(const std::string& text)
 // wxMenu ctor and dtor
 // ----------------------------------------------------------------------------
 
-void wxMenuBase::Init(long style)
+void wxMenuBase::Init(unsigned int style)
 {
     m_menuBar = nullptr;
     m_menuParent = nullptr;

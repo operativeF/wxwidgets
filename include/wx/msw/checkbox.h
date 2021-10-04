@@ -27,7 +27,7 @@ public:
                const std::string& label,
                const wxPoint& pos = wxDefaultPosition,
                const wxSize& size = wxDefaultSize,
-               long style = 0,
+               unsigned int style = 0,
                const wxValidator& validator = wxDefaultValidator,
                const std::string& name = wxCheckBoxNameStr)
     {
@@ -44,7 +44,7 @@ public:
                 const std::string& label,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = 0,
+                unsigned int style = 0,
                 const wxValidator& validator = wxDefaultValidator,
                 const std::string& name = wxCheckBoxNameStr);
 
@@ -66,7 +66,7 @@ public:
     bool CanApplyThemeBorder() const override { return false; }
 
     // implementation only from now on
-    WXDWORD MSWGetStyle(long flags, WXDWORD *exstyle = nullptr) const override;
+    DWORD MSWGetStyle(unsigned int flags, DWORD *exstyle = nullptr) const override;
 
 protected:
     wxSize DoGetBestClientSize() const override;

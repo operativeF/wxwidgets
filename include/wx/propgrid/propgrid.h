@@ -633,7 +633,7 @@ public:
     wxPropertyGrid( wxWindow *parent, wxWindowID id = wxID_ANY,
                     const wxPoint& pos = wxDefaultPosition,
                     const wxSize& size = wxDefaultSize,
-                    long style = wxPG_DEFAULT_STYLE,
+                    unsigned int style = wxPG_DEFAULT_STYLE,
                     const wxString& name = wxASCII_STR(wxPropertyGridNameStr) );
 
     // Destructor
@@ -697,7 +697,7 @@ public:
     bool Create( wxWindow *parent, wxWindowID id = wxID_ANY,
                  const wxPoint& pos = wxDefaultPosition,
                  const wxSize& size = wxDefaultSize,
-                 long style = wxPG_DEFAULT_STYLE,
+                 unsigned int style = wxPG_DEFAULT_STYLE,
                  const wxString& name = wxASCII_STR(wxPropertyGridNameStr) );
 
     // Call when editor widget's contents is modified.
@@ -1330,7 +1330,7 @@ public:
     // property.
     bool UnfocusEditor();
 
-    void SetWindowStyleFlag( long style ) override;
+    void SetWindowStyleFlag( unsigned int style ) override;
 
     void DrawItems( const wxPGProperty* p1, const wxPGProperty* p2 );
 

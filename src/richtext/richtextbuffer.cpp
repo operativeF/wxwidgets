@@ -3758,7 +3758,7 @@ bool wxRichTextParagraphLayoutBox::DoGetStyle(long position, wxRichTextAttr& sty
     return false;
 }
 
-static bool wxHasStyle(long flags, long style)
+static bool wxHasStyle(long flags, unsigned int style)
 {
     return (flags & style) != 0;
 }

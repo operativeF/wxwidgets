@@ -37,7 +37,7 @@ bool wxFileDirPickerCtrlBase::CreateBase(wxWindow *parent,
                                          const std::string& wildcard,
                                          const wxPoint &pos,
                                          const wxSize &size,
-                                         long style,
+                                         unsigned int style,
                                          const wxValidator& validator,
                                          const std::string& name )
 {
@@ -163,7 +163,7 @@ bool wxFilePickerCtrl::Create(wxWindow *parent,
                               const std::string& wildcard,
                               const wxPoint& pos,
                               const wxSize& size,
-                              long style,
+                              unsigned int style,
                               const wxValidator& validator,
                               const std::string& name)
 {
@@ -203,7 +203,7 @@ bool wxDirPickerCtrl::Create(wxWindow *parent,
                              const std::string& message,
                              const wxPoint& pos,
                              const wxSize& size,
-                             long style,
+                             unsigned int style,
                              const wxValidator& validator,
                              const std::string& name)
 {

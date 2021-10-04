@@ -53,7 +53,7 @@ public:
 
     // return the next active (i.e. shown and not disabled) item above/below/to
     // the left/right of the given one
-    int GetNextItem(int item, wxDirection dir, long style) const;
+    int GetNextItem(int item, wxDirection dir, unsigned int style) const;
 
 #if wxUSE_TOOLTIPS
     // set the tooltip text for a radio item, empty string unsets any tooltip
@@ -99,7 +99,7 @@ protected:
     // sets m_majorDim and also updates m_numCols/Rows
     //
     // the style parameter should be the style of the radiobox itself
-    void SetMajorDim(unsigned int majorDim, long style);
+    void SetMajorDim(unsigned int majorDim, unsigned int style);
 
 #if wxUSE_TOOLTIPS
     // called from SetItemToolTip() to really set the tooltip for the specified

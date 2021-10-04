@@ -73,7 +73,7 @@ bool wxStaticBox::Create(wxWindow *parent,
                          const std::string& label,
                          const wxPoint& pos,
                          const wxSize& size,
-                         long style,
+                         unsigned int style,
                          const std::string& name)
 {
     if ( !CreateControl(parent, id, pos, size, style, wxDefaultValidator, name) )
@@ -99,7 +99,7 @@ bool wxStaticBox::Create(wxWindow* parent,
                          wxWindow* labelWin,
                          const wxPoint& pos,
                          const wxSize& size,
-                         long style,
+                         unsigned int style,
                          const std::string& name)
 {
     wxCHECK_MSG( labelWin, false, wxS("Label window can't be null") );
@@ -129,7 +129,7 @@ wxWindowList wxStaticBox::GetCompositeWindowParts() const
     return parts;
 }
 
-WXDWORD wxStaticBox::MSWGetStyle(long style, WXDWORD *exstyle) const
+DWORD wxStaticBox::MSWGetStyle(unsigned int style, DWORD *exstyle) const
 {
     long styleWin = wxStaticBoxBase::MSWGetStyle(style, exstyle);
 

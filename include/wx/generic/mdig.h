@@ -49,7 +49,7 @@ public:
                      const std::string& title,
                      const wxPoint& pos = wxDefaultPosition,
                      const wxSize& size = wxDefaultSize,
-                     long style = wxDEFAULT_FRAME_STYLE | wxVSCROLL | wxHSCROLL,
+                     unsigned int style = wxDEFAULT_FRAME_STYLE | wxVSCROLL | wxHSCROLL,
                      const std::string& name = wxFrameNameStr)
     {
         Init();
@@ -62,7 +62,7 @@ public:
                 const std::string& title,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = wxDEFAULT_FRAME_STYLE | wxVSCROLL | wxHSCROLL,
+                unsigned int style = wxDEFAULT_FRAME_STYLE | wxVSCROLL | wxHSCROLL,
                 const std::string& name = wxFrameNameStr);
 
     ~wxGenericMDIParentFrame();
@@ -143,7 +143,7 @@ public:
                            const std::string& title,
                            const wxPoint& pos = wxDefaultPosition,
                            const wxSize& size = wxDefaultSize,
-                           long style = wxDEFAULT_FRAME_STYLE,
+                           unsigned int style = wxDEFAULT_FRAME_STYLE,
                            const std::string& name = wxFrameNameStr)
     {
         Init();
@@ -156,7 +156,7 @@ public:
                 const std::string& title,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = wxDEFAULT_FRAME_STYLE,
+                unsigned int style = wxDEFAULT_FRAME_STYLE,
                 const std::string& name = wxFrameNameStr);
 
     ~wxGenericMDIChildFrame();

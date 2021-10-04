@@ -27,7 +27,7 @@ public:
                            const wxAnimation& anim = wxNullAnimation,
                            const wxPoint& pos = wxDefaultPosition,
                            const wxSize& size = wxDefaultSize,
-                           long style = wxAC_DEFAULT_STYLE,
+                           unsigned int style = wxAC_DEFAULT_STYLE,
                            const std::string& name = wxAnimationCtrlNameStr)
     {
         Init();
@@ -41,7 +41,7 @@ public:
                 const wxAnimation& anim = wxNullAnimation,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = wxAC_DEFAULT_STYLE,
+                unsigned int style = wxAC_DEFAULT_STYLE,
                 const std::string& name = wxAnimationCtrlNameStr);
 
     ~wxGenericAnimationCtrl();

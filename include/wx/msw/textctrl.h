@@ -26,7 +26,7 @@ public:
                const std::string& value = {},
                const wxPoint& pos = wxDefaultPosition,
                const wxSize& size = wxDefaultSize,
-               long style = 0,
+               unsigned int style = 0,
                const wxValidator& validator = wxDefaultValidator,
                const std::string& name = wxTextCtrlNameStr)
     {
@@ -44,7 +44,7 @@ public:
                 const std::string& value = {},
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = 0,
+                unsigned int style = 0,
                 const wxValidator& validator = wxDefaultValidator,
                 const std::string& name = wxTextCtrlNameStr);
 
@@ -123,7 +123,7 @@ public:
     void SetDropTarget(wxDropTarget *dropTarget) override;
 #endif // wxUSE_DRAG_AND_DROP && wxUSE_RICHEDIT
 
-    void SetWindowStyleFlag(long style) override;
+    void SetWindowStyleFlag(unsigned int style) override;
 
     void Command(wxCommandEvent& event) override;
     bool MSWCommand(WXUINT param, WXWORD id) override;
@@ -199,7 +199,7 @@ public:
                                   WXLPARAM lParam) override;
 
     bool MSWShouldPreProcessMessage(WXMSG* pMsg) override;
-    WXDWORD MSWGetStyle(long style, WXDWORD *exstyle) const override;
+    DWORD MSWGetStyle(unsigned int style, DWORD *exstyle) const override;
 
 protected:
     // creates the control of appropriate class (plain or rich edit) with the
@@ -211,7 +211,7 @@ protected:
                        const wxPoint& pos,
                        const wxSize& size);
 
-    void DoSetValue(const std::string& value, int flags = 0) override;
+    void DoSetValue(const std::string& value, unsigned int flags = 0) override;
 
     wxPoint DoPositionToCoords(long pos) const override;
 

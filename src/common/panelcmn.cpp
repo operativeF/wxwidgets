@@ -80,7 +80,7 @@ wxCONSTRUCTOR_6( wxPanel, wxWindow*, Parent, wxWindowID, Id, \
 bool wxPanelBase::Create(wxWindow *parent, wxWindowID id,
                          const wxPoint& pos,
                          const wxSize& size,
-                         long style,
+                         unsigned int style,
                          const std::string& name)
 {
     if ( !wxWindow::Create(parent, id, pos, size, style, name) )

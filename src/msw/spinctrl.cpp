@@ -264,7 +264,7 @@ bool wxSpinCtrl::Create(wxWindow *parent,
                         const std::string& value,
                         const wxPoint& pos,
                         const wxSize& size,
-                        long style,
+                        unsigned int style,
                         int min, int max, int initial,
                         const std::string& name)
 {
@@ -276,8 +276,8 @@ bool wxSpinCtrl::Create(wxWindow *parent,
 
     SetWindowStyle(style);
 
-    WXDWORD exStyle = 0;
-    WXDWORD msStyle = MSWGetStyle(wxGetWindowStyle(), & exStyle) ;
+    DWORD exStyle = 0;
+    DWORD msStyle = MSWGetStyle(wxGetWindowStyle(), & exStyle) ;
 
     // Scroll text automatically if there is not enough space to show all of
     // it, this is better than not allowing to enter more digits at all.

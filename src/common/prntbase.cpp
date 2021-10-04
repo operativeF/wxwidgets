@@ -388,7 +388,7 @@ wxPrintDialogBase::wxPrintDialogBase(wxWindow *parent,
                                      const std::string& title,
                                      const wxPoint &pos,
                                      const wxSize &size,
-                                     long style)
+                                     unsigned int style)
     : wxDialog( parent, id, title.empty() ? _("Print").ToStdString() : title,
                 pos, size, style )
 {
@@ -444,7 +444,7 @@ wxPageSetupDialogBase::wxPageSetupDialogBase(wxWindow *parent,
                                      const std::string& title,
                                      const wxPoint &pos,
                                      const wxSize &size,
-                                     long style)
+                                     unsigned int style)
     : wxDialog( parent, id, title.empty() ? _("Page setup").ToStdString() : title,
                 pos, size, style )
 {
@@ -492,7 +492,7 @@ wxPrintAbortDialog::wxPrintAbortDialog(wxWindow *parent,
                                        const wxString& documentTitle,
                                        const wxPoint& pos,
                                        const wxSize& size,
-                                       long style,
+                                       unsigned int style,
                                        const wxString& name)
     : wxDialog(parent, wxID_ANY, _("Printing"), pos, size, style, name)
 {
@@ -881,7 +881,7 @@ wxEND_EVENT_TABLE()
 //     really horrible flicker when resizing the preview frame, but without
 //     this style it simply doesn't work correctly at all...
 wxPreviewCanvas::wxPreviewCanvas(wxPrintPreviewBase *preview, wxWindow *parent,
-                                 const wxPoint& pos, const wxSize& size, long style, const wxString& name)
+                                 const wxPoint& pos, const wxSize& size, unsigned int style, const wxString& name)
     : wxScrolledWindow(parent, wxID_ANY, pos, size, style | wxFULL_REPAINT_ON_RESIZE, name),
       m_printPreview(preview)
 {
@@ -1257,7 +1257,7 @@ wxEND_EVENT_TABLE()
 
 wxPreviewControlBar::wxPreviewControlBar(wxPrintPreviewBase *preview, long buttons,
                                          wxWindow *parent, const wxPoint& pos, const wxSize& size,
-                                         long style, const wxString& name)
+                                         unsigned int style, const wxString& name)
     : wxPanel(parent, wxID_ANY, pos, size, style, name),
       m_printPreview(preview),
       m_buttonFlags(buttons)
@@ -1652,7 +1652,7 @@ wxPreviewFrame::wxPreviewFrame(wxPrintPreviewBase *preview,
                                const std::string& title,
                                const wxPoint& pos,
                                const wxSize& size,
-                               long style,
+                               unsigned int style,
                                const std::string& name)
     : wxFrame(parent, wxID_ANY, title, pos, size, style, name),
       m_printPreview(preview)

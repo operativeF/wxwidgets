@@ -27,7 +27,7 @@ public:
                               wxWindowID id = wxID_ANY,
                               const wxPoint& pos = wxDefaultPosition,
                               const wxSize& size = wxDefaultSize,
-                              long style = 0)
+                              unsigned int style = 0)
         // Always add the wxTAB_TRAVERSAL and wxNO_BORDER styles to what comes
         // from the XRC if anything.
         : wxPanel(parent, id, pos, size, style | wxTAB_TRAVERSAL | wxNO_BORDER,

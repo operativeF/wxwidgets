@@ -124,7 +124,7 @@ wxNumericPropertyValidator::
     wxNumericPropertyValidator( NumericType numericType, int base )
     : wxTextValidator(wxFILTER_INCLUDE_CHAR_LIST)
 {
-    long style = GetStyle();
+    unsigned int style = GetStyle();
 
     wxString allowedChars;
 
@@ -2201,7 +2201,7 @@ void wxPGArrayEditorDialog::Init()
 bool wxPGArrayEditorDialog::Create( wxWindow *parent,
                                   const wxString& message,
                                   const wxString& caption,
-                                  long style,
+                                  unsigned int style,
                                   const wxPoint& pos,
                                   const wxSize& sz )
 {

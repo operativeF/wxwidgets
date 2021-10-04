@@ -1703,7 +1703,7 @@ void wxRibbonMSWArtProvider::DrawScrollButton(
                         wxDC& dc,
                         wxWindow* WXUNUSED(wnd),
                         const wxRect& rect_,
-                        long style)
+                        unsigned int style)
 {
     wxRect rect(rect_);
 

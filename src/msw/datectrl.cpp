@@ -41,7 +41,7 @@ wxDatePickerCtrl::Create(wxWindow *parent,
                          const wxDateTime& dt,
                          const wxPoint& pos,
                          const wxSize& size,
-                         long style,
+                         unsigned int style,
                          const wxValidator& validator,
                          const std::string& name)
 {
@@ -54,9 +54,9 @@ wxDatePickerCtrl::Create(wxWindow *parent,
                                    validator, name);
 }
 
-WXDWORD wxDatePickerCtrl::MSWGetStyle(long style, WXDWORD *exstyle) const
+DWORD wxDatePickerCtrl::MSWGetStyle(unsigned int style, DWORD *exstyle) const
 {
-    WXDWORD styleMSW = wxDatePickerCtrlBase::MSWGetStyle(style, exstyle);
+    DWORD styleMSW = wxDatePickerCtrlBase::MSWGetStyle(style, exstyle);
 
     if ( style & wxDP_SPIN )
         styleMSW |= DTS_UPDOWN;

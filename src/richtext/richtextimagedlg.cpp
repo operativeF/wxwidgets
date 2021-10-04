@@ -53,7 +53,7 @@ wxEND_EVENT_TABLE()
  * wxRichTextObjectPropertiesDialog constructors
  */
 
-wxRichTextObjectPropertiesDialog::wxRichTextObjectPropertiesDialog( wxRichTextObject* obj, wxWindow* parent, wxWindowID id, const std::string& caption, const wxPoint& pos, const wxSize& size, long style )
+wxRichTextObjectPropertiesDialog::wxRichTextObjectPropertiesDialog( wxRichTextObject* obj, wxWindow* parent, wxWindowID id, const std::string& caption, const wxPoint& pos, const wxSize& size, unsigned int style )
 {
     Create(obj, parent, id, caption, pos, size, style);
 }
@@ -63,7 +63,7 @@ wxRichTextObjectPropertiesDialog::wxRichTextObjectPropertiesDialog( wxRichTextOb
  * wxRichTextImageDlg creator
  */
 
-bool wxRichTextObjectPropertiesDialog::Create( wxRichTextObject* obj, wxWindow* parent, wxWindowID id, const std::string& caption, const wxPoint& pos, const wxSize& size, long style )
+bool wxRichTextObjectPropertiesDialog::Create( wxRichTextObject* obj, wxWindow* parent, wxWindowID id, const std::string& caption, const wxPoint& pos, const wxSize& size, unsigned int style )
 {
     SetObject(obj);
     SetExtraStyle(wxDIALOG_EX_CONTEXTHELP);

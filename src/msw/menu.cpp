@@ -795,12 +795,12 @@ wxMenuBar::wxMenuBar()
     m_eventHandler = this;
 }
 
-wxMenuBar::wxMenuBar( long WXUNUSED(style) )
+wxMenuBar::wxMenuBar( unsigned int WXUNUSED(style) )
 {
     m_eventHandler = this;
 }
 
-wxMenuBar::wxMenuBar(size_t count, wxMenu *menus[], const std::string titles[], long WXUNUSED(style))
+wxMenuBar::wxMenuBar(size_t count, wxMenu *menus[], const std::string titles[], unsigned int WXUNUSED(style))
 {
     m_eventHandler = this;
 

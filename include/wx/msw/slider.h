@@ -30,7 +30,7 @@ public:
              int maxValue,
              const wxPoint& pos = wxDefaultPosition,
              const wxSize& size = wxDefaultSize,
-             long style = wxSL_HORIZONTAL,
+             unsigned int style = wxSL_HORIZONTAL,
              const wxValidator& validator = wxDefaultValidator,
              const std::string& name = wxSliderNameStr)
     {
@@ -49,7 +49,7 @@ public:
                 int minValue, int maxValue,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = wxSL_HORIZONTAL,
+                unsigned int style = wxSL_HORIZONTAL,
                 const wxValidator& validator = wxDefaultValidator,
                 const std::string& name = wxSliderNameStr);
 
@@ -101,7 +101,7 @@ public:
     bool SetForegroundColour(const wxColour& colour) override;
     bool SetBackgroundColour(const wxColour& colour) override;
 
-    WXDWORD MSWGetStyle(long flags, WXDWORD *exstyle = nullptr) const override;
+    DWORD MSWGetStyle(unsigned int flags, DWORD *exstyle = nullptr) const override;
 
 protected:
     // format an integer value as string

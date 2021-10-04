@@ -45,7 +45,7 @@ public:
                    const std::string& value = {},
                    const wxPoint& pos = wxDefaultPosition,
                    const wxSize& size = wxDefaultSize,
-                   long style = 0,
+                   unsigned int style = 0,
                    const wxValidator& validator = wxDefaultValidator,
                    const std::string& name = wxComboCtrlNameStr)
          
@@ -58,13 +58,13 @@ public:
                 const std::string& value = {},
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = 0,
+                unsigned int style = 0,
                 const wxValidator& validator = wxDefaultValidator,
                 const std::string& name = wxComboCtrlNameStr);
 
     ~wxComboCtrl() = default;
 
-    void PrepareBackground( wxDC& dc, const wxRect& rect, int flags ) const override;
+    void PrepareBackground( wxDC& dc, const wxRect& rect, unsigned int flags ) const override;
     bool IsKeyPopupToggle(const wxKeyEvent& event) const override;
 
     static int GetFeatures() { return wxComboCtrlFeatures::All; }
@@ -75,7 +75,7 @@ public:
 protected:
     void DoTimerEvent();
 
-    bool AnimateShow( const wxRect& rect, int flags ) override;
+    bool AnimateShow( const wxRect& rect, unsigned int flags ) override;
 #endif // wxUSE_COMBOCTRL_POPUP_ANIMATION
 
 protected:

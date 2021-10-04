@@ -28,7 +28,7 @@ public:
                             const std::string& url,
                             const wxPoint& pos = wxDefaultPosition,
                             const wxSize& size = wxDefaultSize,
-                            long style = wxHL_DEFAULT_STYLE,
+                            unsigned int style = wxHL_DEFAULT_STYLE,
                             const std::string& name = wxHyperlinkCtrlNameStr)
     {
         Create(parent, id, label, url, pos, size, style, name);
@@ -41,7 +41,7 @@ public:
                 const std::string& url,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = wxHL_DEFAULT_STYLE,
+                unsigned int style = wxHL_DEFAULT_STYLE,
                 const std::string& name = wxHyperlinkCtrlNameStr);
 
 

@@ -68,7 +68,7 @@ public:
 
     // provide access to the base class protected methods to wxSearchCtrl which
     // needs to forward to them
-    void DoSetValue(const std::string& value, int flags) override
+    void DoSetValue(const std::string& value, unsigned int flags) override
     {
         wxTextCtrl::DoSetValue(value, flags);
     }
@@ -274,7 +274,7 @@ wxSearchCtrl::wxSearchCtrl(wxWindow *parent, wxWindowID id,
            const std::string& value,
            const wxPoint& pos,
            const wxSize& size,
-           long style,
+           unsigned int style,
            const wxValidator& validator,
            const std::string& name)
 {
@@ -303,7 +303,7 @@ bool wxSearchCtrl::Create(wxWindow *parent, wxWindowID id,
             const std::string& value,
             const wxPoint& pos,
             const wxSize& size,
-            long style,
+            unsigned int style,
             const wxValidator& validator,
             const std::string& name)
 {
@@ -905,7 +905,7 @@ void wxSearchCtrl::ChangeValue(const std::string& value)
     m_text->ChangeValue(value);
 }
 
-void wxSearchCtrl::DoSetValue(const std::string& value, int flags)
+void wxSearchCtrl::DoSetValue(const std::string& value, unsigned int flags)
 {
     m_text->DoSetValue(value, flags);
 }

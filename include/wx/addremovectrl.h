@@ -65,7 +65,7 @@ public:
                     wxWindowID winid = wxID_ANY,
                     const wxPoint& pos = wxDefaultPosition,
                     const wxSize& size = wxDefaultSize,
-                    long style = 0,
+                    unsigned int style = 0,
                     const std::string& name = wxAddRemoveCtrlNameStr)
     {
         Create(parent, winid, pos, size, style, name);
@@ -80,7 +80,7 @@ public:
                 wxWindowID winid = wxID_ANY,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = 0,
+                unsigned int style = 0,
                 const std::string& name = wxAddRemoveCtrlNameStr);
 
     ~wxAddRemoveCtrl();

@@ -276,7 +276,7 @@ bool wxWizard::Create(wxWindow *parent,
                       const std::string& title,
                       const wxBitmap& bitmap,
                       const wxPoint& pos,
-                      long style)
+                      unsigned int style)
 {
     bool result = wxDialog::Create(parent,id,title,pos,wxDefaultSize,style);
 

@@ -38,14 +38,14 @@ public:
              wxWindowID id,
              const wxPoint& pos = wxDefaultPosition,
              const wxSize& size = wxDefaultSize,
-             long style = 0,
+             unsigned int style = 0,
              const std::string& name = wxNotebookNameStr);
     // Create() function
   [[maybe_unused]] bool Create(wxWindow *parent,
               wxWindowID id,
               const wxPoint& pos = wxDefaultPosition,
               const wxSize& size = wxDefaultSize,
-              long style = 0,
+              unsigned int style = 0,
               const std::string& name = wxNotebookNameStr);
   ~wxNotebook() = default;
 
@@ -157,7 +157,7 @@ public:
 #endif // wxUSE_UXTHEME
 
   // translate wxWin styles to the Windows ones
-  WXDWORD MSWGetStyle(long flags, WXDWORD *exstyle = nullptr) const override;
+  DWORD MSWGetStyle(unsigned int flags, DWORD *exstyle = nullptr) const override;
 
 protected:
   // hides the currently shown page and shows the given one (if not -1) and

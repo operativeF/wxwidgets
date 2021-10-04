@@ -45,7 +45,7 @@ public:
                    wxWindow* parent, wxWindowID id,
                    const wxPoint& pos = wxDefaultPosition,
                    const wxSize& size = wxDefaultSize,
-                   long style = wxSIMPLE_BORDER|wxFRAME_NO_TASKBAR|wxSTAY_ON_TOP);
+                   unsigned int style = wxSIMPLE_BORDER|wxFRAME_NO_TASKBAR|wxSTAY_ON_TOP);
 
     wxSplashScreen(const wxSplashScreen&) = delete;
     wxSplashScreen& operator=(const wxSplashScreen&) = delete;
@@ -87,7 +87,7 @@ public:
                          wxWindowID id,
                          const wxPoint& pos = wxDefaultPosition,
                          const wxSize& size = wxDefaultSize,
-                         long style = wxNO_BORDER);
+                         unsigned int style = wxNO_BORDER);
     
     wxSplashScreenWindow(const wxSplashScreenWindow&) = delete;
     wxSplashScreenWindow& operator=(const wxSplashScreenWindow&) = delete;

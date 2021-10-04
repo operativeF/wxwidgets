@@ -22,7 +22,7 @@ void winSetWindowPos(HWND hWnd, HWND hWndInsertAfter, wxPoint pos, wxSize sz, UI
 HWND winCreateWindow(long exStyle,
                      const std::string& className,
                      const std::string& wndClass,
-                     long style,
+                     unsigned int style,
                      wxRect wndExtents,
                      HWND hParent,
                      HMENU hMenu,

@@ -84,7 +84,7 @@ wxString wxDir::GetNameWithSep() const
 
 size_t wxDir::Traverse(wxDirTraverser& sink,
                        const wxString& filespec,
-                       int flags) const
+                       unsigned int flags) const
 {
     wxCHECK_MSG( IsOpened(), (size_t)-1,
                  wxT("dir must be opened before traversing it") );
@@ -229,7 +229,7 @@ private:
 size_t wxDir::GetAllFiles(const wxString& dirname,
                           std::vector<wxString>* files,
                           const wxString& filespec,
-                          int flags)
+                          unsigned int flags)
 {
     wxCHECK_MSG( files, (size_t)-1, wxT("NULL pointer in wxDir::GetAllFiles") );
 
@@ -284,7 +284,7 @@ private:
 /* static */
 wxString wxDir::FindFirst(const wxString& dirname,
                           const wxString& filespec,
-                          int flags)
+                          unsigned int flags)
 {
     wxDir dir(dirname);
     if ( dir.IsOpened() )
@@ -379,13 +379,13 @@ bool wxDir::Exists(const wxString& dir)
 }
 
 /* static */
-bool wxDir::Make(const wxString &dir, int perm, int flags)
+bool wxDir::Make(const wxString &dir, unsigned int perm, unsigned int flags)
 {
     return wxFileName::Mkdir(dir, perm, flags);
 }
 
 /* static */
-bool wxDir::Remove(const wxString &dir, int flags)
+bool wxDir::Remove(const wxString &dir, unsigned int flags)
 {
     return wxFileName::Rmdir(dir, flags);
 }

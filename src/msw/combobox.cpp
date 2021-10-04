@@ -455,7 +455,7 @@ bool wxComboBox::Create(wxWindow *parent, wxWindowID id,
                         const wxPoint& pos,
                         const wxSize& size,
                         const std::vector<std::string>& choices,
-                        long style,
+                        unsigned int style,
                         const wxValidator& validator,
                         const std::string& name)
 {
@@ -488,10 +488,10 @@ bool wxComboBox::Create(wxWindow *parent, wxWindowID id,
     return true;
 }
 
-WXDWORD wxComboBox::MSWGetStyle(long style, WXDWORD *exstyle) const
+DWORD wxComboBox::MSWGetStyle(unsigned int style, DWORD *exstyle) const
 {
     // we never have an external border
-    WXDWORD msStyle = wxChoice::MSWGetStyle
+    DWORD msStyle = wxChoice::MSWGetStyle
                       (
                         (style & ~wxBORDER_MASK) | wxBORDER_NONE, exstyle
                       );

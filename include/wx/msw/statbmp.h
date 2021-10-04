@@ -28,7 +28,7 @@ public:
                    const wxGDIImage& label,
                    const wxPoint& pos = wxDefaultPosition,
                    const wxSize& size = wxDefaultSize,
-                   long style = 0,
+                   unsigned int style = 0,
                    const std::string& name = wxStaticBitmapNameStr)
     {
         Create(parent, id, label, pos, size, style, name);
@@ -44,7 +44,7 @@ public:
                 const wxGDIImage& label,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = 0,
+                unsigned int style = 0,
                 const std::string& name = wxStaticBitmapNameStr);
 
     ~wxStaticBitmap() { Free(); }
@@ -54,7 +54,7 @@ public:
     wxBitmap GetBitmap() const override;
     wxIcon GetIcon() const override;
 
-    WXDWORD MSWGetStyle(long style, WXDWORD *exstyle) const override;
+    DWORD MSWGetStyle(unsigned int style, DWORD *exstyle) const override;
 
     // returns true if the platform should explicitly apply a theme border
     bool CanApplyThemeBorder() const override { return false; }

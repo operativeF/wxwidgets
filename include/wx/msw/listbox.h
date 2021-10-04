@@ -39,7 +39,7 @@ public:
             const wxPoint& pos = wxDefaultPosition,
             const wxSize& size = wxDefaultSize,
             const std::vector<std::string>& choices = {},
-            long style = 0,
+            unsigned int style = 0,
             const wxValidator& validator = wxDefaultValidator,
             const std::string& name = wxListBoxNameStr)
     {
@@ -50,7 +50,7 @@ public:
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 const std::vector<std::string>& choices = {},
-                long style = 0,
+                unsigned int style = 0,
                 const wxValidator& validator = wxDefaultValidator,
                 const std::string& name = wxListBoxNameStr);
 
@@ -126,7 +126,7 @@ public:
 
     // Windows callbacks
     bool MSWCommand(WXUINT param, WXWORD id) override;
-    WXDWORD MSWGetStyle(long style, WXDWORD *exstyle) const override;
+    DWORD MSWGetStyle(unsigned int style, DWORD *exstyle) const override;
 
     // under XP when using "transition effect for menus and tooltips" if we
     // return true for WM_PRINTCLIENT here then it causes noticeable slowdown

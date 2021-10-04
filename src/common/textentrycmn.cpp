@@ -225,7 +225,7 @@ void wxTextEntryBase::AppendText(const std::string& text)
     WriteText(text);
 }
 
-void wxTextEntryBase::DoSetValue(const std::string& value, int flags)
+void wxTextEntryBase::DoSetValue(const std::string& value, unsigned int flags)
 {
     if ( value != DoGetValue() )
     {

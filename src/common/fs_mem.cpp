@@ -109,7 +109,7 @@ wxFSFile * wxMemoryFSHandlerBase::OpenFile(wxFileSystem& WXUNUSED(fs),
                );
 }
 
-wxString wxMemoryFSHandlerBase::FindFirst(const wxString& url, int flags)
+wxString wxMemoryFSHandlerBase::FindFirst(const wxString& url, unsigned int flags)
 {
     // Make sure to reset the find iterator, so that calling FindNext() doesn't
     // reuse its value from the last search that could well be invalid.

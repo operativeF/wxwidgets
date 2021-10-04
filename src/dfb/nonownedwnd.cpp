@@ -97,7 +97,7 @@ bool wxNonOwnedWindow::Create(wxWindow *parent,
                                  wxWindowID id,
                                  const wxPoint& pos,
                                  const wxSize& size,
-                                 long style,
+                                 unsigned int style,
                                  const wxString &name)
 {
     wxCHECK_MSG( pos.x >= 0 && pos.y >= 0, false, "invalid position" );

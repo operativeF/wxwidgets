@@ -78,7 +78,7 @@ wxIMPLEMENT_CLASS(wxGenericMessageDialog, wxDialog);
 wxGenericMessageDialog::wxGenericMessageDialog( wxWindow *parent,
                                                 const std::string& message,
                                                 const std::string& caption,
-                                                long style,
+                                                unsigned int style,
                                                 const wxPoint& pos)
                       : wxMessageDialogBase(GetParentForModalDialog(parent, style),
                                             message,
@@ -249,7 +249,7 @@ void wxGenericMessageDialog::OnCancel(wxCommandEvent& WXUNUSED(event))
 {
     // Allow cancellation via ESC/Close button except if
     // only YES and NO are specified.
-    const long style = GetMessageDialogStyle();
+    const unsigned int style = GetMessageDialogStyle();
     if ( (style & wxYES_NO) != wxYES_NO || (style & wxCANCEL) )
     {
         EndModal( wxID_CANCEL );

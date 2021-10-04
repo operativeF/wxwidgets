@@ -30,7 +30,7 @@ public:
              const std::string& title = {},
              const wxBitmap& bitmap = wxNullBitmap,
              const wxPoint& pos = wxDefaultPosition,
-             long style = wxDEFAULT_DIALOG_STYLE)
+             unsigned int style = wxDEFAULT_DIALOG_STYLE)
     {
         Init();
         Create(parent, id, title, bitmap, pos, style);
@@ -44,7 +44,7 @@ public:
              const std::string& title = {},
              const wxBitmap& bitmap = wxNullBitmap,
              const wxPoint& pos = wxDefaultPosition,
-             long style = wxDEFAULT_DIALOG_STYLE);
+             unsigned int style = wxDEFAULT_DIALOG_STYLE);
     void Init();
     ~wxWizard();
 

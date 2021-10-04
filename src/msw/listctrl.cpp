@@ -245,7 +245,7 @@ bool wxListCtrl::Create(wxWindow *parent,
                         wxWindowID id,
                         const wxPoint& pos,
                         const wxSize& size,
-                        long style,
+                        unsigned int style,
                         const wxValidator& validator,
                         const std::string& name)
 {
@@ -308,9 +308,9 @@ void wxListCtrl::MSWSetExListStyles()
     ::SendMessageW(GetHwnd(), LVM_SETEXTENDEDLISTVIEWSTYLE, 0, exStyle);
 }
 
-WXDWORD wxListCtrl::MSWGetStyle(long style, WXDWORD *exstyle) const
+DWORD wxListCtrl::MSWGetStyle(unsigned int style, DWORD *exstyle) const
 {
-    WXDWORD wstyle = wxListCtrlBase::MSWGetStyle(style, exstyle);
+    DWORD wstyle = wxListCtrlBase::MSWGetStyle(style, exstyle);
 
     wstyle |= LVS_SHAREIMAGELISTS | LVS_SHOWSELALWAYS;
 
@@ -452,7 +452,7 @@ wxListCtrl::~wxListCtrl()
 // ----------------------------------------------------------------------------
 
 // Add or remove a single window style
-void wxListCtrl::SetSingleStyle(long style, bool add)
+void wxListCtrl::SetSingleStyle(unsigned int style, bool add)
 {
     long flag = GetWindowStyleFlag();
 
@@ -476,7 +476,7 @@ void wxListCtrl::SetSingleStyle(long style, bool add)
 }
 
 // Set the whole window style
-void wxListCtrl::SetWindowStyleFlag(long flag)
+void wxListCtrl::SetWindowStyleFlag(unsigned int flag)
 {
     if ( flag != m_windowStyle )
     {

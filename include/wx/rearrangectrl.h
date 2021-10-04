@@ -55,7 +55,7 @@ public:
                     const wxSize& size,
                     const std::vector<int>& order,
                     const std::vector<std::string>& items,
-                    long style = 0,
+                    unsigned int style = 0,
                     const wxValidator& validator = wxDefaultValidator,
                     const std::string& name = wxRearrangeListNameStr)
     {
@@ -75,7 +75,7 @@ public:
                 const wxSize& size,
                 const std::vector<int>& order,
                 const std::vector<std::string>& items,
-                long style = 0,
+                unsigned int style = 0,
                 const wxValidator& validator = wxDefaultValidator,
                 const std::string& name = wxRearrangeListNameStr);
 
@@ -135,7 +135,7 @@ public:
                     const wxSize& size,
                     const std::vector<int>& order,
                     const std::vector<std::string>& items,
-                    long style = 0,
+                    unsigned int style = 0,
                     const wxValidator& validator = wxDefaultValidator,
                     const std::string& name = wxRearrangeListNameStr)
     {
@@ -153,7 +153,7 @@ public:
                 const wxSize& size,
                 const std::vector<int>& order,
                 const std::vector<std::string>& items,
-                long style = 0,
+                unsigned int style = 0,
                 const wxValidator& validator = wxDefaultValidator,
                 const std::string& name = wxRearrangeListNameStr);
 

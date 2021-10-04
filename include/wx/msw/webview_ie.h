@@ -54,7 +54,7 @@ public:
            const std::string& url = wxWebViewDefaultURLStr,
            const wxPoint& pos = wxDefaultPosition,
            const wxSize& size = wxDefaultSize,
-           long style = 0,
+           unsigned int style = 0,
            const std::string& name = wxWebViewNameStr)
    {
        Create(parent, id, url, pos, size, style, name);
@@ -67,7 +67,7 @@ public:
            const std::string& url = wxWebViewDefaultURLStr,
            const wxPoint& pos = wxDefaultPosition,
            const wxSize& size = wxDefaultSize,
-           long style = 0,
+           unsigned int style = 0,
            const std::string& name = wxWebViewNameStr) override;
 
     void LoadURL(const wxString& url) override;
@@ -189,7 +189,7 @@ public:
                               const std::string& url = wxWebViewDefaultURLStr,
                               const wxPoint& pos = wxDefaultPosition,
                               const wxSize& size = wxDefaultSize,
-                              long style = 0,
+                              unsigned int style = 0,
                               const std::string& name = wxWebViewNameStr) override
     { return new wxWebViewIE(parent, id, url, pos, size, style, name); }
     wxVersionInfo GetVersionInfo() override;

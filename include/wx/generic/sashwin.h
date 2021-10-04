@@ -75,7 +75,7 @@ public:
                  wxWindowID id = wxID_ANY,
                  const wxPoint& pos = wxDefaultPosition,
                  const wxSize& size = wxDefaultSize,
-                 long style = wxSW_3D|wxCLIP_CHILDREN,
+                 unsigned int style = wxSW_3D|wxCLIP_CHILDREN,
                  const std::string& name = "sashWindow")
     {
         // Eventually, we'll respond to colour change messages
@@ -90,7 +90,7 @@ public:
     ~wxSashWindow();
 
     bool Create(wxWindow *parent, wxWindowID id = wxID_ANY, const wxPoint& pos = wxDefaultPosition,
-        const wxSize& size = wxDefaultSize, long style = wxSW_3D|wxCLIP_CHILDREN, const std::string& name = "sashWindow");
+        const wxSize& size = wxDefaultSize, unsigned int style = wxSW_3D|wxCLIP_CHILDREN, const std::string& name = "sashWindow");
 
     // Set whether there's a sash in this position
     void SetSashVisible(wxSashEdgePosition edge, bool sash);

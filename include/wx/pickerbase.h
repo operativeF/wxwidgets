@@ -49,7 +49,7 @@ public:
                     const std::string& text = {},
                     const wxPoint& pos = wxDefaultPosition,
                     const wxSize& size = wxDefaultSize,
-                    long style = 0,
+                    unsigned int style = 0,
                     const wxValidator& validator = wxDefaultValidator,
                     const std::string& name = wxPickerNameStr);
 
@@ -117,11 +117,11 @@ protected:
 
     // returns the set of styles for the attached wxTextCtrl
     // from given wxPickerBase's styles
-    virtual long GetTextCtrlStyle(long style) const
+    virtual long GetTextCtrlStyle(unsigned int style) const
         { return (style & wxWINDOW_STYLE_MASK); }
 
     // returns the set of styles for the m_picker
-    virtual long GetPickerStyle(long style) const
+    virtual long GetPickerStyle(unsigned int style) const
         { return (style & wxWINDOW_STYLE_MASK); }
 
 

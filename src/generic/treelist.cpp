@@ -816,7 +816,7 @@ bool wxTreeListCtrl::Create(wxWindow* parent,
                             wxWindowID id,
                             const wxPoint& pos,
                             const wxSize& size,
-                            long style,
+                            unsigned int style,
                             const std::string& name)
 {
     if ( style & wxTL_USER_3STATE )

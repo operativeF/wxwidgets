@@ -68,7 +68,7 @@ public:
     wxSplitterWindow(wxWindow *parent, wxWindowID id = wxID_ANY,
                      const wxPoint& pos = wxDefaultPosition,
                      const wxSize& size = wxDefaultSize,
-                     long style = wxSP_3D,
+                     unsigned int style = wxSP_3D,
                      const std::string& name = "splitter")
         : m_sashTrackerPen(std::make_unique<wxPen>(*wxBLACK, 2, wxPenStyle::Solid))
     {
@@ -81,7 +81,7 @@ public:
     bool Create(wxWindow *parent, wxWindowID id = wxID_ANY,
                      const wxPoint& pos = wxDefaultPosition,
                      const wxSize& size = wxDefaultSize,
-                     long style = wxSP_3D,
+                     unsigned int style = wxSP_3D,
                      const std::string& name = "splitter");
 
     // Gets the only or left/top pane

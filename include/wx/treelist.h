@@ -138,7 +138,7 @@ public:
                    wxWindowID id,
                    const wxPoint& pos = wxDefaultPosition,
                    const wxSize& size = wxDefaultSize,
-                   long style = wxTL_DEFAULT_STYLE,
+                   unsigned int style = wxTL_DEFAULT_STYLE,
                    const std::string& name = wxTreeListCtrlNameStr)
     {
         Create(parent, id, pos, size, style, name);
@@ -153,7 +153,7 @@ public:
                 wxWindowID id,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = wxTL_DEFAULT_STYLE,
+                unsigned int style = wxTL_DEFAULT_STYLE,
                 const std::string& name = wxTreeListCtrlNameStr);
 
 

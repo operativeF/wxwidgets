@@ -53,7 +53,7 @@ bool wxControl::Create(wxWindow *parent,
                        wxWindowID id,
                        const wxPoint& pos,
                        const wxSize& size,
-                       long style,
+                       unsigned int style,
                        const wxValidator& wxVALIDATOR_PARAM(validator),
                        const std::string& name)
 {
@@ -72,21 +72,21 @@ bool wxControl::MSWCreateControl(const std::string& classname,
                                  const wxPoint& pos,
                                  const wxSize& size)
 {
-    WXDWORD exstyle;
-    WXDWORD msStyle = MSWGetStyle(wxGetWindowStyle(), &exstyle);
+    DWORD exstyle;
+    DWORD msStyle = MSWGetStyle(wxGetWindowStyle(), &exstyle);
 
     return MSWCreateControl(classname, msStyle, pos, size, label, exstyle);
 }
 
 bool wxControl::MSWCreateControl(const std::string& classname,
-                                 WXDWORD style,
+                                 DWORD style,
                                  const wxPoint& pos,
                                  const wxSize& size,
                                  const std::string& label,
-                                 WXDWORD exstyle)
+                                 DWORD exstyle)
 {
     // if no extended style given, determine it ourselves
-    if ( exstyle == (WXDWORD)-1 )
+    if ( exstyle == (DWORD)-1 )
     {
         exstyle = 0;
         (void) MSWGetStyle(wxGetWindowStyle(), &exstyle);
@@ -180,7 +180,7 @@ bool wxControl::MSWCreateControl(const std::string& classname,
 // various accessors
 // ----------------------------------------------------------------------------
 
-WXDWORD wxControl::MSWGetStyle(long style, WXDWORD *exstyle) const
+DWORD wxControl::MSWGetStyle(unsigned int style, DWORD *exstyle) const
 {
     long msStyle = wxWindow::MSWGetStyle(style, exstyle);
 

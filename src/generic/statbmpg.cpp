@@ -27,7 +27,7 @@ bool wxGenericStaticBitmap::Create(wxWindow *parent,
                                    const wxBitmap& bitmap,
                                    const wxPoint& pos,
                                    const wxSize& size,
-                                   long style,
+                                   unsigned int style,
                                    const std::string& name)
 {
     if (! wxControl::Create(parent, id, pos, size, style,

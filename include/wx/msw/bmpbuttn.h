@@ -26,7 +26,7 @@ public:
                    const wxBitmap& bitmap,
                    const wxPoint& pos = wxDefaultPosition,
                    const wxSize& size = wxDefaultSize,
-                   long style = 0,
+                   unsigned int style = 0,
                    const wxValidator& validator = wxDefaultValidator,
                    const std::string& name = wxButtonNameStr)
     {
@@ -43,7 +43,7 @@ public:
                 const wxBitmap& bitmap,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = 0,
+                unsigned int style = 0,
                 const wxValidator& validator = wxDefaultValidator,
                 const std::string& name = wxButtonNameStr);
 

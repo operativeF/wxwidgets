@@ -109,7 +109,7 @@ wxRichTextBordersPage::wxRichTextBordersPage()
     Init();
 }
 
-wxRichTextBordersPage::wxRichTextBordersPage( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size, long style )
+wxRichTextBordersPage::wxRichTextBordersPage( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size, unsigned int style )
 {
     Init();
     Create(parent, id, pos, size, style);
@@ -119,7 +119,7 @@ wxRichTextBordersPage::wxRichTextBordersPage( wxWindow* parent, wxWindowID id, c
  * wxRichTextBordersPage creator
  */
 
-bool wxRichTextBordersPage::Create( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size, long style )
+bool wxRichTextBordersPage::Create( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size, unsigned int style )
 {
 ////@begin wxRichTextBordersPage creation
     wxRichTextDialogPage::Create( parent, id, pos, size, style );
@@ -1334,7 +1334,7 @@ wxBEGIN_EVENT_TABLE(wxRichTextBorderPreviewCtrl, wxWindow)
     EVT_PAINT(wxRichTextBorderPreviewCtrl::OnPaint)
 wxEND_EVENT_TABLE()
 
-wxRichTextBorderPreviewCtrl::wxRichTextBorderPreviewCtrl(wxWindow *parent, wxWindowID id, const wxPoint& pos, const wxSize& sz, long style)
+wxRichTextBorderPreviewCtrl::wxRichTextBorderPreviewCtrl(wxWindow *parent, wxWindowID id, const wxPoint& pos, const wxSize& sz, unsigned int style)
 {
     if ((style & wxBORDER_MASK) == wxBORDER_DEFAULT)
         style |= wxBORDER_THEME;

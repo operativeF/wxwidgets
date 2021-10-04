@@ -33,7 +33,7 @@ public:
                         const std::string& label,
                         const wxPoint& pos = wxDefaultPosition,
                         const wxSize& size = wxDefaultSize,
-                        long style = wxCP_DEFAULT_STYLE,
+                        unsigned int style = wxCP_DEFAULT_STYLE,
                         const wxValidator& val = wxDefaultValidator,
                         const std::string& name = wxCollapsiblePaneNameStr)
     {
@@ -47,7 +47,7 @@ public:
                 const std::string& label,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = wxCP_DEFAULT_STYLE,
+                unsigned int style = wxCP_DEFAULT_STYLE,
                 const wxValidator& val = wxDefaultValidator,
                 const std::string& name = wxCollapsiblePaneNameStr);
 

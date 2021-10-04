@@ -31,7 +31,7 @@ public:
                    const wxPoint& pos = wxDefaultPosition,
                    const wxSize& size = wxDefaultSize,
                    const std::vector<std::string>& choices = {},
-                   long style = 0,
+                   unsigned int style = 0,
                    const wxValidator& validator = wxDefaultValidator,
                    const std::string& name = wxListBoxNameStr);
 
@@ -44,7 +44,7 @@ public:
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 const std::vector<std::string>& choices = {},
-                long style = 0,
+                unsigned int style = 0,
                 const wxValidator& validator = wxDefaultValidator,
                 const std::string& name = wxListBoxNameStr);
 

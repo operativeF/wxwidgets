@@ -1109,12 +1109,12 @@ public:
     void DrawLabel(std::string_view text,
                            const wxBitmap& image,
                            const wxRect& rect,
-                           int alignment = wxALIGN_LEFT | wxALIGN_TOP,
+                           unsigned int alignment = wxALIGN_LEFT | wxALIGN_TOP,
                            int indexAccel = -1,
                            wxRect *rectBounding = nullptr);
 
     void DrawLabel(std::string_view text, const wxRect& rect,
-                   int alignment = wxALIGN_LEFT | wxALIGN_TOP,
+                   unsigned int alignment = wxALIGN_LEFT | wxALIGN_TOP,
                    int indexAccel = -1)
         { DrawLabel(text, wxNullBitmap, rect, alignment, indexAccel); }
 

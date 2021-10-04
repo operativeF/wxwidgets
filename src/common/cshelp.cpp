@@ -268,7 +268,7 @@ bool wxContextHelpButton::Create(wxWindow* parent,
                                          wxWindowID id,
                                          const wxPoint& pos,
                                          const wxSize& size,
-                                         long style)
+                                         unsigned int style)
 {
     return wxBitmapButton::Create(parent, id,
                                   wxBitmap(csquery_xpm),

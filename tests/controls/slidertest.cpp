@@ -24,7 +24,7 @@
 
 TEST_CASE("Slider control test")
 {
-    long style = wxSL_HORIZONTAL;
+    unsigned int style = wxSL_HORIZONTAL;
 
     auto m_slider = std::make_unique<wxSlider>(wxTheApp->GetTopWindow(), wxID_ANY,
                                           50, 0, 100,

@@ -82,7 +82,7 @@ public:
                 const wxString& title = wxEmptyString,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = wxDEFAULT_FRAME_STYLE,
+                unsigned int style = wxDEFAULT_FRAME_STYLE,
                 const wxString &name = wxT("frame"))
                     : wxFrame(parent, id, title, pos, size, style | wxFRAME_SHAPED, name)
     {
@@ -236,7 +236,7 @@ public:
                 const wxString& title = wxEmptyString,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = wxDEFAULT_FRAME_STYLE,
+                unsigned int style = wxDEFAULT_FRAME_STYLE,
                 const wxString &name = wxT("frame"))
     {
          if (!CreateBase( parent, id, pos, size, style, wxDefaultValidator, name ))
@@ -2561,7 +2561,7 @@ void wxAuiManager::Update()
                 }
 
                 // update whether the pane is resizable or not
-                long style = p.frame->GetWindowStyleFlag();
+                unsigned int style = p.frame->GetWindowStyleFlag();
                 if (p.IsFixed())
                     style &= ~wxRESIZE_BORDER;
                 else

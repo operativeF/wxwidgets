@@ -22,7 +22,7 @@
 
 wxString wxDirSelector(const wxString& message,
                        const wxString& defaultPath,
-                       long style,
+                       unsigned int style,
                        const wxPoint& pos,
                        wxWindow *parent)
 {

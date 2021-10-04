@@ -68,7 +68,7 @@ public:
                    wxWindowID winid,
                    const wxPoint& pos = wxDefaultPosition,
                    const wxSize& size = wxDefaultSize,
-                   long style = 0,
+                   unsigned int style = 0,
                    const std::string& name = {})
     {
         Create(parent, winid, pos, size, style, name);
@@ -84,7 +84,7 @@ public:
                 wxWindowID winid,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = 0,
+                unsigned int style = 0,
                 const std::string& name = {});
 
     virtual const std::vector<wxWindow*>& GetPages() const

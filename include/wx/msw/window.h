@@ -44,7 +44,7 @@ public:
                 wxWindowID id,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = 0,
+                unsigned int style = 0,
                 const std::string& name = wxPanelNameStr)
     {
         Create(parent, id, pos, size, style, name);
@@ -61,7 +61,7 @@ public:
                 wxWindowID id,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = 0,
+                unsigned int style = 0,
                 const std::string& name = wxPanelNameStr)
     {
         return CreateUsingMSWClass(GetMSWClassName(style),
@@ -77,7 +77,7 @@ public:
                              wxWindowID id,
                              const wxPoint& pos = wxDefaultPosition,
                              const wxSize& size = wxDefaultSize,
-                             long style = 0,
+                             unsigned int style = 0,
                              const std::string& name = wxPanelNameStr);
 
     
@@ -94,12 +94,12 @@ public:
 
     bool Show(bool show = true) override;
     bool ShowWithEffect(wxShowEffect effect,
-                                unsigned timeout = 0) override
+                        unsigned int timeout = 0) override
     {
         return MSWShowWithEffect(true, effect, timeout);
     }
     bool HideWithEffect(wxShowEffect effect,
-                                unsigned timeout = 0) override
+                        unsigned int timeout = 0) override
     {
         return MSWShowWithEffect(false, effect, timeout);
     }
@@ -120,7 +120,7 @@ public:
                           const wxRect *rect = (const wxRect *) nullptr ) override;
     void Update() override;
 
-    void SetWindowStyleFlag(long style) override;
+    void SetWindowStyleFlag(unsigned int style) override;
     void SetExtraStyle(long exStyle) override;
     bool SetCursor( const wxCursor &cursor ) override;
     bool SetFont( const wxFont &font ) override;
@@ -250,13 +250,13 @@ public:
     //
     // this is the function that should be overridden in the derived classes,
     // but you will mostly use MSWGetCreateWindowFlags() below
-    virtual WXDWORD MSWGetStyle(long flags, WXDWORD *exstyle = nullptr) const ;
+    virtual DWORD MSWGetStyle(unsigned int flags, DWORD *exstyle = nullptr) const;
 
     // get the MSW window flags corresponding to wxWidgets ones
     //
     // the functions returns the flags (WS_XXX) directly and puts the ext
     // (WS_EX_XXX) flags into the provided pointer if not NULL
-    WXDWORD MSWGetCreateWindowFlags(WXDWORD *exflags = nullptr) const
+    DWORD MSWGetCreateWindowFlags(DWORD *exflags = nullptr) const
         { return MSWGetStyle(wxGetWindowStyle(), exflags); }
 
     // update the real underlying window style flags to correspond to the
@@ -271,7 +271,7 @@ public:
     // object, taking into account wxFULL_REPAINT_ON_RESIZE style (if it's not
     // specified, the wxApp::GetNoRedrawClassSuffix()-suffixed version of the
     // class is used).
-    static const std::string& GetMSWClassName(long style);
+    static const std::string& GetMSWClassName(unsigned int style);
 
     // creates the window of specified Windows class with given style, extended
     // style, title and geometry (default values
@@ -281,8 +281,8 @@ public:
                    const std::string& title = {},
                    const wxPoint& pos = wxDefaultPosition,
                    const wxSize& size = wxDefaultSize,
-                   WXDWORD style = 0,
-                   WXDWORD exendedStyle = 0);
+                   DWORD style = 0,
+                   DWORD exendedStyle = 0);
 
     virtual bool MSWCommand(WXUINT param, WXWORD id);
 
@@ -383,13 +383,13 @@ public:
 
     // Common gesture event initialization, returns true if it is the initial
     // event (GF_BEGIN set in flags), false otherwise.
-    bool InitGestureEvent(wxGestureEvent& event, const wxPoint& pt, WXDWORD flags);
+    bool InitGestureEvent(wxGestureEvent& event, const wxPoint& pt, DWORD flags);
 
-    bool HandlePanGesture(const wxPoint& pt, WXDWORD flags);
-    bool HandleZoomGesture(const wxPoint& pt, WXDWORD fingerDistance, WXDWORD flags);
-    bool HandleRotateGesture(const wxPoint& pt, WXDWORD angleArgument, WXDWORD flags);
-    bool HandleTwoFingerTap(const wxPoint& pt, WXDWORD flags);
-    bool HandlePressAndTap(const wxPoint& pt, WXDWORD flags);
+    bool HandlePanGesture(const wxPoint& pt, DWORD flags);
+    bool HandleZoomGesture(const wxPoint& pt, DWORD fingerDistance, DWORD flags);
+    bool HandleRotateGesture(const wxPoint& pt, DWORD angleArgument, DWORD flags);
+    bool HandleTwoFingerTap(const wxPoint& pt, DWORD flags);
+    bool HandlePressAndTap(const wxPoint& pt, DWORD flags);
 
     bool HandleChar(WXWPARAM wParam, WXLPARAM lParam);
     bool HandleKeyDown(WXWPARAM wParam, WXLPARAM lParam);
@@ -797,8 +797,8 @@ private:
     }
 
 protected:
-    WXHWND MSWCreateWindowAtAnyPosition(WXDWORD exStyle, const std::string& clName,
-                                        const std::string& title, WXDWORD style,
+    WXHWND MSWCreateWindowAtAnyPosition(DWORD exStyle, const std::string& clName,
+                                        const std::string& title, DWORD style,
                                         wxRect boundary,
                                         WXHWND parent, wxWindowID id);
 

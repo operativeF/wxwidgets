@@ -397,7 +397,7 @@ template<class T>
 bool wxCreateScrolled(T* self,
                       wxWindow *parent, wxWindowID winid,
                       const wxPoint& pos, const wxSize& size,
-                      long style, const std::string& name)
+                      unsigned int style, const std::string& name)
 {
     return self->Create(parent, winid, pos, size, style, name);
 }
@@ -409,7 +409,7 @@ bool wxCreateScrolled(T* self,
 inline bool wxCreateScrolled(wxControl* self,
                      wxWindow *parent, wxWindowID winid,
                      const wxPoint& pos, const wxSize& size,
-                     long style, const std::string& name)
+                     unsigned int style, const std::string& name)
 {
      return self->Create(parent, winid, pos, size, style, wxDefaultValidator, name);
 }
@@ -426,7 +426,7 @@ public:
                wxWindowID winid = wxID_ANY,
                const wxPoint& pos = wxDefaultPosition,
                const wxSize& size = wxDefaultSize,
-               long style = wxScrolledWindowStyle,
+               unsigned int style = wxScrolledWindowStyle,
                const std::string& name = wxPanelNameStr)
         : wxScrollHelper(this)
     {
@@ -442,7 +442,7 @@ public:
                 wxWindowID winid,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = wxScrolledWindowStyle,
+                unsigned int style = wxScrolledWindowStyle,
                 const std::string& name = wxPanelNameStr)
     {
         m_targetWindow = this;
@@ -496,7 +496,7 @@ public:
                      wxWindowID winid = wxID_ANY,
                      const wxPoint& pos = wxDefaultPosition,
                      const wxSize& size = wxDefaultSize,
-                     long style = wxScrolledWindowStyle,
+                     unsigned int style = wxScrolledWindowStyle,
                      const std::string& name = wxPanelNameStr)
         : wxScrolled<wxPanel>(parent, winid, pos, size, style, name)
     {}

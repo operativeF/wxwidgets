@@ -26,7 +26,7 @@ public:
             const std::string& title,
             const wxPoint& pos = wxDefaultPosition,
             const wxSize& size = wxDefaultSize,
-            long style = wxDEFAULT_FRAME_STYLE,
+            unsigned int style = wxDEFAULT_FRAME_STYLE,
             const std::string& name = wxFrameNameStr)
     {
         Create(parent, id, title, pos, size, style, name);
@@ -42,30 +42,30 @@ public:
                 const std::string& title,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = wxDEFAULT_FRAME_STYLE,
+                unsigned int style = wxDEFAULT_FRAME_STYLE,
                 const std::string& name = wxFrameNameStr);
 
     ~wxFrame() = default;
 
     
-    bool ShowFullScreen(bool show, long style = wxFULLSCREEN_ALL) override;
+    bool ShowFullScreen(bool show, unsigned int style = wxFULLSCREEN_ALL) override;
 
     // event handlers
     void OnSysColourChanged(wxSysColourChangedEvent& event);
 
     // Toolbar
 #if wxUSE_TOOLBAR
-    wxToolBar* CreateToolBar(long style = -1,
-                                     wxWindowID id = wxID_ANY,
-                                     const std::string& name = "toolbar") override;
+    wxToolBar* CreateToolBar(unsigned int style = -1,
+                             wxWindowID id = wxID_ANY,
+                             const std::string& name = "toolbar") override;
 #endif // wxUSE_TOOLBAR
 
     // Status bar
 #if wxUSE_STATUSBAR
     wxStatusBar* OnCreateStatusBar(int number = 1,
-                                           long style = wxSTB_DEFAULT_STYLE,
-                                           wxWindowID id = 0,
-                                           const std::string& name = wxStatusLineNameStr) override;
+                                   unsigned int style = wxSTB_DEFAULT_STYLE,
+                                   wxWindowID id = 0,
+                                   const std::string& name = wxStatusLineNameStr) override;
 
     // Hint to tell framework which status bar to use: the default is to use
     // native one for the platforms which support it (Win32), the generic one

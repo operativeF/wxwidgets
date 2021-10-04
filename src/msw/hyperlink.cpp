@@ -74,7 +74,7 @@ bool wxHyperlinkCtrl::Create(wxWindow *parent,
                              const std::string& url,
                              const wxPoint& pos,
                              const wxSize& size,
-                             long style,
+                             unsigned int style,
                              const std::string& name)
 {
     if ( !HasNativeHyperlinkCtrl() )
@@ -92,8 +92,8 @@ bool wxHyperlinkCtrl::Create(wxWindow *parent,
     SetURL( url );
     SetVisited( false );
 
-    WXDWORD exstyle;
-    WXDWORD msStyle = MSWGetStyle(style, &exstyle);
+    DWORD exstyle;
+    DWORD msStyle = MSWGetStyle(style, &exstyle);
 
     // "SysLink" would be WC_LINK but it's a wide-string
     if ( !MSWCreateControl("SysLink", msStyle, pos, size,
@@ -111,9 +111,9 @@ bool wxHyperlinkCtrl::Create(wxWindow *parent,
     return true;
 }
 
-WXDWORD wxHyperlinkCtrl::MSWGetStyle(long style, WXDWORD *exstyle) const
+DWORD wxHyperlinkCtrl::MSWGetStyle(unsigned int style, DWORD *exstyle) const
 {
-    WXDWORD msStyle = wxControl::MSWGetStyle( style, exstyle );
+    DWORD msStyle = wxControl::MSWGetStyle( style, exstyle );
 
     if ( style & wxHL_ALIGN_RIGHT )
         msStyle |= LWS_RIGHT;

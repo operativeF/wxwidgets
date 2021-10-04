@@ -54,7 +54,7 @@ constexpr int SPINCTRLBUT_MAX = 32000; // large to avoid wrap around trouble
 class wxSpinCtrlTextGeneric : public wxTextCtrl
 {
 public:
-    wxSpinCtrlTextGeneric(wxSpinCtrlGenericBase *spin, const wxString& value, long style=0)
+    wxSpinCtrlTextGeneric(wxSpinCtrlGenericBase *spin, const wxString& value, unsigned int style=0)
         : wxTextCtrl(spin, wxID_ANY, value, wxDefaultPosition, wxDefaultSize,
                      // This is tricky: we want to honour all alignment flags
                      // except wxALIGN_CENTER_VERTICAL because it's the same
@@ -183,7 +183,7 @@ bool wxSpinCtrlGenericBase::Create(wxWindow *parent,
                                    wxWindowID id,
                                    const std::string& value,
                                    const wxPoint& pos, const wxSize& size,
-                                   long style,
+                                   unsigned int style,
                                    double min, double max, double initial,
                                    double increment,
                                    const std::string& name)

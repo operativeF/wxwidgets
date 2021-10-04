@@ -39,7 +39,7 @@ bool wxTopLevelWindowDFB::Create(wxWindow *parent,
                                  const wxString& title,
                                  const wxPoint& posOrig,
                                  const wxSize& sizeOrig,
-                                 long style,
+                                 unsigned int style,
                                  const wxString &name)
 {
     // always create a frame of some reasonable, even if arbitrary, size (at
@@ -73,7 +73,7 @@ bool wxTopLevelWindowDFB::Create(wxWindow *parent,
 // showing and hiding
 // ----------------------------------------------------------------------------
 
-bool wxTopLevelWindowDFB::ShowFullScreen(bool show, long style)
+bool wxTopLevelWindowDFB::ShowFullScreen(bool show, unsigned int style)
 {
     if ( show == m_fsIsShowing )
         return true;

@@ -34,7 +34,7 @@ public:
                   wxWindowID id = wxID_ANY,
                   const wxPoint& pos = wxDefaultPosition,
                   const wxSize& size = wxDefaultSize,
-                  long style = 0);
+                  unsigned int style = 0);
 
     ~wxRibbonButtonBar();
 
@@ -42,7 +42,7 @@ public:
                 wxWindowID id = wxID_ANY,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = 0);
+                unsigned int style = 0);
 
     virtual wxRibbonButtonBarButtonBase* AddButton(
                 int button_id,
@@ -185,7 +185,7 @@ protected:
     wxSize DoGetNextLargerSize(wxOrientation direction,
                                      wxSize relative_to) const override;
 
-    void CommonInit(long style);
+    void CommonInit(unsigned int style);
     void MakeLayouts();
     void TryCollapseLayout(wxRibbonButtonBarLayout* original,
                      size_t first_btn, size_t* last_button,

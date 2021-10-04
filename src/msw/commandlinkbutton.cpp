@@ -58,7 +58,7 @@ bool wxCommandLinkButton::Create(wxWindow *parent,
                                  const std::string& note,
                                  const wxPoint& pos,
                                  const wxSize& size,
-                                 long style,
+                                 unsigned int style,
                                  const wxValidator& validator,
                                  const std::string& name)
 {
@@ -100,9 +100,9 @@ wxCommandLinkButton::SetMainLabelAndNote(const std::string& mainLabel,
     }
 }
 
-WXDWORD wxCommandLinkButton::MSWGetStyle(long style, WXDWORD *exstyle) const
+DWORD wxCommandLinkButton::MSWGetStyle(unsigned int style, DWORD *exstyle) const
 {
-    WXDWORD ret = wxButton::MSWGetStyle(style, exstyle);
+    DWORD ret = wxButton::MSWGetStyle(style, exstyle);
     if ( HasNativeCommandLinkButton() )
         ret |= BS_COMMANDLINK;
 

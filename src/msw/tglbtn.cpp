@@ -50,7 +50,7 @@ bool wxBitmapToggleButton::Create(wxWindow *parent,
                                   const wxBitmap& label,
                                   const wxPoint& pos,
                                   const wxSize& size,
-                                  long style,
+                                  unsigned int style,
                                   const wxValidator& validator,
                                   const std::string& name )
 {
@@ -84,7 +84,7 @@ bool wxToggleButton::Create(wxWindow *parent,
                             wxWindowID id,
                             const std::string& label,
                             const wxPoint& pos,
-                            const wxSize& size, long style,
+                            const wxSize& size, unsigned int style,
                             const wxValidator& validator,
                             const std::string& name)
 {
@@ -97,16 +97,16 @@ bool wxToggleButton::Create(wxWindow *parent,
     //
     // NB: we do it here and not in MSWGetStyle() because we need the label
     //     value and the label is not set yet when MSWGetStyle() is called
-    WXDWORD exstyle;
-    WXDWORD msStyle = MSWGetStyle(style, &exstyle);
+    DWORD exstyle;
+    DWORD msStyle = MSWGetStyle(style, &exstyle);
     msStyle |= wxMSWButton::GetMultilineStyle(label);
 
     return MSWCreateControl("BUTTON", msStyle, pos, size, label, exstyle);
 }
 
-WXDWORD wxToggleButton::MSWGetStyle(long style, WXDWORD *exstyle) const
+DWORD wxToggleButton::MSWGetStyle(unsigned int style, DWORD *exstyle) const
 {
-    WXDWORD msStyle = wxControl::MSWGetStyle(style, exstyle);
+    DWORD msStyle = wxControl::MSWGetStyle(style, exstyle);
 
     msStyle |= BS_AUTOCHECKBOX | BS_PUSHLIKE | WS_TABSTOP;
 

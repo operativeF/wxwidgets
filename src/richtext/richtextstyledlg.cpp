@@ -70,7 +70,7 @@ wxRichTextStyleOrganiserDialog::wxRichTextStyleOrganiserDialog( )
     Init();
 }
 
-wxRichTextStyleOrganiserDialog::wxRichTextStyleOrganiserDialog( int flags, wxRichTextStyleSheet* sheet, wxRichTextCtrl* ctrl, wxWindow* parent, wxWindowID id, const wxString& caption, const wxPoint& pos, const wxSize& size, long style )
+wxRichTextStyleOrganiserDialog::wxRichTextStyleOrganiserDialog( int flags, wxRichTextStyleSheet* sheet, wxRichTextCtrl* ctrl, wxWindow* parent, wxWindowID id, const wxString& caption, const wxPoint& pos, const wxSize& size, unsigned int style )
 {
     Init();
     Create(flags, sheet, ctrl, parent, id, caption, pos, size, style);
@@ -115,7 +115,7 @@ void wxRichTextStyleOrganiserDialog::Init()
  * wxRichTextStyleOrganiserDialog creator
  */
 
-bool wxRichTextStyleOrganiserDialog::Create( int flags, wxRichTextStyleSheet* sheet, wxRichTextCtrl* ctrl, wxWindow* parent, wxWindowID id, const wxString& caption, const wxPoint& pos, const wxSize& size, long style )
+bool wxRichTextStyleOrganiserDialog::Create( int flags, wxRichTextStyleSheet* sheet, wxRichTextCtrl* ctrl, wxWindow* parent, wxWindowID id, const wxString& caption, const wxPoint& pos, const wxSize& size, unsigned int style )
 {
     m_richTextStyleSheet = sheet;
     m_richTextCtrl = ctrl;

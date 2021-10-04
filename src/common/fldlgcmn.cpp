@@ -35,7 +35,7 @@ bool wxFileDialogBase::Create(wxWindow *parent,
                               const std::string& defaultDir,
                               const std::string& defaultFile,
                               const std::string& wildCard,
-                              long style,
+                              unsigned int style,
                               const wxPoint& WXUNUSED(pos),
                               const wxSize& WXUNUSED(sz),
                               const std::string& WXUNUSED(name))

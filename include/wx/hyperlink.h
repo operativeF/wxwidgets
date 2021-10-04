@@ -74,7 +74,7 @@ protected:
     wxBorder GetDefaultBorder() const override { return wxBORDER_NONE; }
 
     // checks for validity some of the ctor/Create() function parameters
-    void CheckParams(const std::string& label, const std::string& url, long style);
+    void CheckParams(const std::string& label, const std::string& url, unsigned int style);
 
 public:
     // Send wxHyperlinkEvent and open our link in the default browser if it
@@ -162,7 +162,7 @@ typedef void (wxEvtHandler::*wxHyperlinkEventFunction)(wxHyperlinkEvent&);
                         const std::string& url,
                         const wxPoint& pos = wxDefaultPosition,
                         const wxSize& size = wxDefaultSize,
-                        long style = wxHL_DEFAULT_STYLE,
+                        unsigned int style = wxHL_DEFAULT_STYLE,
                         const std::string& name = wxHyperlinkCtrlNameStr)
             : wxGenericHyperlinkCtrl(parent, id, label, url, pos, size,
                                      style, name)

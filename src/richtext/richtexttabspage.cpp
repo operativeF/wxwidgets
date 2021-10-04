@@ -49,7 +49,7 @@ wxRichTextTabsPage::wxRichTextTabsPage( )
     Init();
 }
 
-wxRichTextTabsPage::wxRichTextTabsPage( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size, long style )
+wxRichTextTabsPage::wxRichTextTabsPage( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size, unsigned int style )
 {
     Init();
     Create(parent, id, pos, size, style);
@@ -73,7 +73,7 @@ void wxRichTextTabsPage::Init()
  * wxRichTextTabsPage creator
  */
 
-bool wxRichTextTabsPage::Create( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size, long style )
+bool wxRichTextTabsPage::Create( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size, unsigned int style )
 {
 ////@begin wxRichTextTabsPage creation
     wxRichTextDialogPage::Create( parent, id, pos, size, style );

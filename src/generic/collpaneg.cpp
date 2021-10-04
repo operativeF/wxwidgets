@@ -53,7 +53,7 @@ bool wxGenericCollapsiblePane::Create(wxWindow *parent,
                                       const std::string& label,
                                       const wxPoint& pos,
                                       const wxSize& size,
-                                      long style,
+                                      unsigned int style,
                                       const wxValidator& val,
                                       const std::string& name)
 {

@@ -40,7 +40,7 @@ public:
                             const std::string& note = {},
                             const wxPoint& pos = wxDefaultPosition,
                             const wxSize& size = wxDefaultSize,
-                            long style = 0,
+                            unsigned int style = 0,
                             const wxValidator& validator =
                                 wxDefaultValidator,
                             const std::string& name = wxButtonNameStr)
@@ -104,7 +104,7 @@ public:
                                const std::string& note = {},
                                const wxPoint& pos = wxDefaultPosition,
                                const wxSize& size = wxDefaultSize,
-                               long style = 0,
+                               unsigned int style = 0,
                                const wxValidator& validator = wxDefaultValidator,
                                const std::string& name = wxButtonNameStr)
          
@@ -121,7 +121,7 @@ public:
                 const std::string& note = {},
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = 0,
+                unsigned int style = 0,
                 const wxValidator& validator = wxDefaultValidator,
                 const std::string& name = wxButtonNameStr);
 
@@ -149,7 +149,7 @@ private:
                             const std::string& note = {},
                             const wxPoint& pos = wxDefaultPosition,
                             const wxSize& size = wxDefaultSize,
-                            long style = 0,
+                            unsigned int style = 0,
                             const wxValidator& validator = wxDefaultValidator,
                             const std::string& name = wxButtonNameStr)
             : wxGenericCommandLinkButton(parent,

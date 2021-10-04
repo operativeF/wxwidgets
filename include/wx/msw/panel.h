@@ -26,7 +26,7 @@ struct WXDLLIMPEXP_CORE wxPanel : public wxPanelBase
             wxWindowID winid = wxID_ANY,
             const wxPoint& pos = wxDefaultPosition,
             const wxSize& size = wxDefaultSize,
-            long style = wxTAB_TRAVERSAL | wxNO_BORDER,
+            unsigned int style = wxTAB_TRAVERSAL | wxNO_BORDER,
             const std::string& name = wxPanelNameStr)
     {
         Create(parent, winid, pos, size, style, name);

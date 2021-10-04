@@ -28,7 +28,7 @@ public:
 
     wxRibbonControl(wxWindow *parent, wxWindowID id,
                     const wxPoint& pos = wxDefaultPosition,
-                    const wxSize& size = wxDefaultSize, long style = 0,
+                    const wxSize& size = wxDefaultSize, unsigned int style = 0,
                     const wxValidator& validator = wxDefaultValidator,
                     const wxString& name = wxASCII_STR(wxControlNameStr))
     {
@@ -39,7 +39,7 @@ public:
 
     bool Create(wxWindow *parent, wxWindowID id,
             const wxPoint& pos = wxDefaultPosition,
-            const wxSize& size = wxDefaultSize, long style = 0,
+            const wxSize& size = wxDefaultSize, unsigned int style = 0,
             const wxValidator& validator = wxDefaultValidator,
             const wxString& name = wxASCII_STR(wxControlNameStr));
 

@@ -56,10 +56,10 @@ class WXDLLIMPEXP_RICHTEXT wxRichTextIndentsSpacingPage: public wxRichTextDialog
 public:
     /// Constructors
     wxRichTextIndentsSpacingPage( );
-    wxRichTextIndentsSpacingPage( wxWindow* parent, wxWindowID id = wxID_ANY, const wxPoint& pos = SYMBOL_WXRICHTEXTINDENTSSPACINGPAGE_POSITION, const wxSize& size = SYMBOL_WXRICHTEXTINDENTSSPACINGPAGE_SIZE, long style = SYMBOL_WXRICHTEXTINDENTSSPACINGPAGE_STYLE );
+    wxRichTextIndentsSpacingPage( wxWindow* parent, wxWindowID id = wxID_ANY, const wxPoint& pos = SYMBOL_WXRICHTEXTINDENTSSPACINGPAGE_POSITION, const wxSize& size = SYMBOL_WXRICHTEXTINDENTSSPACINGPAGE_SIZE, unsigned int style = SYMBOL_WXRICHTEXTINDENTSSPACINGPAGE_STYLE );
 
     /// Creation
-    bool Create( wxWindow* parent, wxWindowID id = wxID_ANY, const wxPoint& pos = SYMBOL_WXRICHTEXTINDENTSSPACINGPAGE_POSITION, const wxSize& size = SYMBOL_WXRICHTEXTINDENTSSPACINGPAGE_SIZE, long style = SYMBOL_WXRICHTEXTINDENTSSPACINGPAGE_STYLE );
+    bool Create( wxWindow* parent, wxWindowID id = wxID_ANY, const wxPoint& pos = SYMBOL_WXRICHTEXTINDENTSSPACINGPAGE_POSITION, const wxSize& size = SYMBOL_WXRICHTEXTINDENTSSPACINGPAGE_SIZE, unsigned int style = SYMBOL_WXRICHTEXTINDENTSSPACINGPAGE_STYLE );
 
     /// Initialise members
     void Init();

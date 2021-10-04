@@ -145,21 +145,21 @@ public:
     // return the number of files found
     size_t Traverse(wxDirTraverser& sink,
                     const wxString& filespec = wxEmptyString,
-                    int flags = wxDIR_DEFAULT) const;
+                    unsigned int flags = wxDIR_DEFAULT) const;
 
     // simplest version of Traverse(): get the names of all files under this
     // directory into filenames array, return the number of files
     static size_t GetAllFiles(const wxString& dirname,
                               std::vector<wxString>* files,
                               const wxString& filespec = wxEmptyString,
-                              int flags = wxDIR_DEFAULT);
+                              unsigned int flags = wxDIR_DEFAULT);
 
     // check if there any files matching the given filespec under the given
     // directory (i.e. searches recursively), return the file path if found or
     // empty string otherwise
     static wxString FindFirst(const wxString& dirname,
                               const wxString& filespec,
-                              int flags = wxDIR_DEFAULT);
+                              unsigned int flags = wxDIR_DEFAULT);
 
 #if wxUSE_LONGLONG
     // returns the size of all directories recursively found in given path
@@ -174,10 +174,10 @@ public:
     // test for existence of a directory with the given name
     static bool Exists(const wxString& dir);
 
-    static bool Make(const wxString &dir, int perm = wxS_DIR_DEFAULT,
-                     int flags = 0);
+    static bool Make(const wxString &dir, unsigned int perm = wxS_DIR_DEFAULT,
+                     unsigned int flags = 0);
 
-    static bool Remove(const wxString &dir, int flags = 0);
+    static bool Remove(const wxString &dir, unsigned int flags = 0);
 
 
 private:

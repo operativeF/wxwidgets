@@ -39,7 +39,7 @@ bool wxGenericFileDirButton::Create(wxWindow *parent,
                                     const std::string& wildcard,
                                     const wxPoint& pos,
                                     const wxSize& size,
-                                    long style,
+                                    unsigned int style,
                                     const wxValidator& validator,
                                     const std::string& name)
 {

@@ -97,7 +97,7 @@ wxEND_PROPERTIES_TABLE()
 // wxRadioBoxBase
 // ----------------------------------------------------------------------------
 
-void wxRadioBoxBase::SetMajorDim(unsigned int majorDim, long style)
+void wxRadioBoxBase::SetMajorDim(unsigned int majorDim, unsigned int style)
 {
     wxCHECK_RET( majorDim != 0, wxT("major radiobox dimension can't be 0") );
 
@@ -117,7 +117,7 @@ void wxRadioBoxBase::SetMajorDim(unsigned int majorDim, long style)
     }
 }
 
-int wxRadioBoxBase::GetNextItem(int item, wxDirection dir, long style) const
+int wxRadioBoxBase::GetNextItem(int item, wxDirection dir, unsigned int style) const
 {
     const int itemStart = item;
 

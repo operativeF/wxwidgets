@@ -199,7 +199,7 @@ public:
                  wxWindowID id = wxID_ANY,
                  const wxPoint& pos = wxDefaultPosition,
                  const wxSize& size = wxDefaultSize,
-                 long style = 0);
+                 unsigned int style = 0);
 
     bool IsDragging() const { return m_isDragging; }
 
@@ -256,7 +256,7 @@ public:
                   wxWindowID id = wxID_ANY,
                   const wxPoint& pos = wxDefaultPosition,
                   const wxSize& size = wxDefaultSize,
-                  long style = wxAUI_NB_DEFAULT_STYLE)
+                  unsigned int style = wxAUI_NB_DEFAULT_STYLE)
     {
         Init();
         Create(parent, id, pos, size, style);
@@ -268,9 +268,9 @@ public:
                 wxWindowID id = wxID_ANY,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = 0);
+                unsigned int style = 0);
 
-    void SetWindowStyleFlag(long style) override;
+    void SetWindowStyleFlag(unsigned int style) override;
     void SetArtProvider(wxAuiTabArt* art);
     wxAuiTabArt* GetArtProvider() const;
 
@@ -388,7 +388,7 @@ protected:
 protected:
 
     void DoSizing();
-    void InitNotebook(long style);
+    void InitNotebook(unsigned int style);
     wxWindow* GetTabFrameFromTabCtrl(wxWindow* tabCtrl);
     void RemoveEmptyTabFrames();
     void UpdateHintWindowSize();

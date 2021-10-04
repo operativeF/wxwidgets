@@ -117,7 +117,7 @@ public:
                const std::string& vendorName = {},
                const std::string& localFilename = {},
                const std::string& globalFilename = {},
-               long style = 0);
+               unsigned int style = 0);
 
     // empty but ensures that dtor of all derived classes is virtual
   ~wxConfigBase() = default;
@@ -377,7 +377,7 @@ public:
   void SetAppName(const wxString& appName) { m_appName = appName; }
   void SetVendorName(const wxString& vendorName) { m_vendorName = vendorName; }
 
-  void SetStyle(long style) { m_style = style; }
+  void SetStyle(unsigned int style) { m_style = style; }
   long GetStyle() const { return m_style; }
 
 protected:

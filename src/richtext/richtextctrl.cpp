@@ -227,7 +227,7 @@ wxRichTextCtrl::wxRichTextCtrl(wxWindow* parent,
                                const std::string& value,
                                const wxPoint& pos,
                                const wxSize& size,
-                               long style,
+                               unsigned int style,
                                const wxValidator& validator,
                                const std::string& name)
               : wxScrollHelper(this)
@@ -238,7 +238,7 @@ wxRichTextCtrl::wxRichTextCtrl(wxWindow* parent,
 }
 
 /// Creation
-bool wxRichTextCtrl::Create( wxWindow* parent, wxWindowID id, const std::string& value, const wxPoint& pos, const wxSize& size, long style,
+bool wxRichTextCtrl::Create( wxWindow* parent, wxWindowID id, const std::string& value, const wxPoint& pos, const wxSize& size, unsigned int style,
                              const wxValidator& validator, const std::string& name)
 {
     style |= wxVSCROLL;
@@ -3251,7 +3251,7 @@ std::string wxRichTextCtrl::GetRange(long from, long to) const
     return GetFocusObject()->GetTextForRange(wxRichTextRange(from, to-1));
 }
 
-void wxRichTextCtrl::DoSetValue(const std::string& value, int flags)
+void wxRichTextCtrl::DoSetValue(const std::string& value, unsigned int flags)
 {
     // Don't call Clear here, since it always sends a text updated event
     m_buffer.ResetAndClearCommands();

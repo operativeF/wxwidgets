@@ -621,7 +621,7 @@ bool wxMkdir(const wxString& dir, int perm)
     return true;
 }
 
-bool wxRmdir(const wxString& dir, int WXUNUSED(flags))
+bool wxRmdir(const wxString& dir, unsigned int WXUNUSED(flags))
 {
 #if defined(__VMS__)
     return false; //to be changed since rmdir exists in VMS7.x
@@ -647,7 +647,7 @@ bool wxDirExists(const wxString& pathName)
 static std::unique_ptr<wxDir> gs_dir;
 static wxString gs_dirPath;
 
-wxString wxFindFirstFile(const wxString& spec, int flags)
+wxString wxFindFirstFile(const wxString& spec, unsigned int flags)
 {
     wxFileName::SplitPath(spec, &gs_dirPath, nullptr, nullptr);
     if ( gs_dirPath.empty() )

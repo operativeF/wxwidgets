@@ -130,7 +130,7 @@ public:
                const wxString& vendorName = wxEmptyString,
                const wxString& localFilename = wxEmptyString,
                const wxString& globalFilename = wxEmptyString,
-               long style = wxCONFIG_USE_LOCAL_FILE | wxCONFIG_USE_GLOBAL_FILE,
+               unsigned int style = wxCONFIG_USE_LOCAL_FILE | wxCONFIG_USE_GLOBAL_FILE,
                const wxMBConv& conv = wxConvAuto());
 
 #if wxUSE_STREAMS

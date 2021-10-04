@@ -229,7 +229,7 @@ protected:
         SetValue_SelectionOnly = 2
     };
 
-    virtual void DoSetValue(const std::string& value, int flags);
+    virtual void DoSetValue(const std::string& value, unsigned int flags);
     virtual std::string DoGetValue() const = 0;
 
     // override this to return the associated window, it will be used for event

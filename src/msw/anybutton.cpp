@@ -1231,7 +1231,7 @@ void wxAnyButton::MakeOwnerDrawn()
 
 bool wxAnyButton::IsOwnerDrawn() const
 {
-    long style = ::GetWindowLongPtrW(GetHwnd(), GWL_STYLE);
+    unsigned int style = ::GetWindowLongPtrW(GetHwnd(), GWL_STYLE);
     return ( (style & BS_OWNERDRAW) == BS_OWNERDRAW );
 }
 

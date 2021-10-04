@@ -131,7 +131,7 @@ public:
                   wxWindowID id = wxID_ANY,
                   const wxPoint& pos = wxDefaultPosition,
                   const wxSize& size = wxDefaultSize,
-                  long style = wxRIBBON_BAR_DEFAULT_STYLE);
+                  unsigned int style = wxRIBBON_BAR_DEFAULT_STYLE);
 
     ~wxRibbonBar();
 
@@ -139,7 +139,7 @@ public:
                 wxWindowID id = wxID_ANY,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = wxRIBBON_BAR_DEFAULT_STYLE);
+                unsigned int style = wxRIBBON_BAR_DEFAULT_STYLE);
 
     void SetTabCtrlMargins(int left, int right);
 
@@ -172,7 +172,7 @@ public:
 
     bool HasMultiplePages() const override { return true; }
 
-    void SetWindowStyleFlag(long style) override;
+    void SetWindowStyleFlag(unsigned int style) override;
     long GetWindowStyleFlag() const override;
     bool Realize() override;
 
@@ -194,7 +194,7 @@ protected:
     wxRibbonPageTabInfo* HitTestTabs(wxPoint position, int* index = nullptr);
     void HitTestRibbonButton(const wxRect& rect, const wxPoint& position, bool &hover_flag);
 
-    void CommonInit(long style);
+    void CommonInit(unsigned int style);
     void AddPage(wxRibbonPage *page);
     void RecalculateTabSizes();
     void RecalculateMinSize();

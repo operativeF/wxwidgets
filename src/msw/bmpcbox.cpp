@@ -53,7 +53,7 @@ bool wxBitmapComboBox::Create(wxWindow *parent,
                               const wxPoint& pos,
                               const wxSize& size,
                               const std::vector<std::string>& choices,
-                              long style,
+                              unsigned int style,
                               const wxValidator& validator,
                               const std::string& name)
 {
@@ -66,7 +66,7 @@ bool wxBitmapComboBox::Create(wxWindow *parent,
     return true;
 }
 
-WXDWORD wxBitmapComboBox::MSWGetStyle(long style, WXDWORD *exstyle) const
+DWORD wxBitmapComboBox::MSWGetStyle(unsigned int style, DWORD *exstyle) const
 {
     return wxComboBox::MSWGetStyle(style, exstyle) | CBS_OWNERDRAWFIXED | CBS_HASSTRINGS;
 }

@@ -245,7 +245,7 @@ wxString wxFileSystemHandler::GetAnchor(const wxString& location)
 
 
 wxString wxFileSystemHandler::FindFirst(const wxString& WXUNUSED(spec),
-                                        int WXUNUSED(flags))
+                                        unsigned int WXUNUSED(flags))
 {
     return wxEmptyString;
 }
@@ -300,7 +300,7 @@ wxFSFile* wxLocalFSHandler::OpenFile(wxFileSystem& WXUNUSED(fs), const wxString&
 }
 
 // TODO: Lambda
-wxString wxLocalFSHandler::FindFirst(const wxString& spec, int flags)
+wxString wxLocalFSHandler::FindFirst(const wxString& spec, unsigned int flags)
 {
     wxFileName fn = wxFileName::URLToFileName(GetRightLocation(spec));
     wxString found = wxFindFirstFile(ms_root + fn.GetFullPath(), flags);
@@ -450,13 +450,13 @@ wxFileSystemHandler *wxFileSystem::MakeLocal(wxFileSystemHandler *h)
 
 
 
-wxFSFile* wxFileSystem::OpenFile(const wxString& location, int flags)
+wxFSFile* wxFileSystem::OpenFile(const wxString& location, unsigned int flags)
 {
     if ((flags & wxFS_READ) == 0)
         return nullptr;
 
     wxString loc = MakeCorrectPath(location);
-    unsigned i;
+    unsigned int i;
     wxFSFile *s = nullptr;
     wxList::compatibility_iterator node;
 
@@ -520,7 +520,7 @@ wxFSFile* wxFileSystem::OpenFile(const wxString& location, int flags)
 
 
 
-wxString wxFileSystem::FindFirst(const wxString& spec, int flags)
+wxString wxFileSystem::FindFirst(const wxString& spec, unsigned int flags)
 {
     wxList::compatibility_iterator node;
     wxString spec2(spec);
@@ -681,7 +681,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxFileSystemModule, wxModule);
 
 //// wxFSInputStream
 
-wxFSInputStream::wxFSInputStream(const wxString& filename, int flags)
+wxFSInputStream::wxFSInputStream(const wxString& filename, unsigned int flags)
 {
     wxFileSystem fs;
     m_file = fs.OpenFile(filename, flags | wxFS_READ);

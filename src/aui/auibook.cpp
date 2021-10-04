@@ -988,7 +988,7 @@ wxAuiTabCtrl::wxAuiTabCtrl(wxWindow* parent,
                            wxWindowID id,
                            const wxPoint& pos,
                            const wxSize& size,
-                           long style) : wxControl(parent, id, pos, size, style)
+                           unsigned int style) : wxControl(parent, id, pos, size, style)
 {
     SetName("wxAuiTabCtrl");
     m_clickPt = wxDefaultPosition;
@@ -1693,7 +1693,7 @@ bool wxAuiNotebook::Create(wxWindow* parent,
                            wxWindowID id,
                            const wxPoint& pos,
                            const wxSize& size,
-                           long style)
+                           unsigned int style)
 {
     if (!wxControl::Create(parent, id, pos, size, style))
         return false;
@@ -1705,7 +1705,7 @@ bool wxAuiNotebook::Create(wxWindow* parent,
 
 // InitNotebook() contains common initialization
 // code called by all constructors
-void wxAuiNotebook::InitNotebook(long style)
+void wxAuiNotebook::InitNotebook(unsigned int style)
 {
     SetName("wxAuiNotebook");
     m_curPage = -1;
@@ -1910,7 +1910,7 @@ wxAuiTabArt* wxAuiNotebook::GetArtProvider() const
     return m_tabs.GetArtProvider();
 }
 
-void wxAuiNotebook::SetWindowStyleFlag(long style)
+void wxAuiNotebook::SetWindowStyleFlag(unsigned int style)
 {
     wxControl::SetWindowStyleFlag(style);
 

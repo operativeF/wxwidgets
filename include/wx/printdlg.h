@@ -36,7 +36,7 @@ public:
                       const std::string &title = {},
                       const wxPoint &pos = wxDefaultPosition,
                       const wxSize &size = wxDefaultSize,
-                      long style = wxDEFAULT_DIALOG_STYLE);
+                      unsigned int style = wxDEFAULT_DIALOG_STYLE);
 
     wxPrintDialogBase(const wxPrintDialogBase&) = delete;
     wxPrintDialogBase& operator=(const wxPrintDialogBase&) = delete;
@@ -90,7 +90,7 @@ public:
                       const std::string& title = {},
                       const wxPoint &pos = wxDefaultPosition,
                       const wxSize &size = wxDefaultSize,
-                      long style = wxDEFAULT_DIALOG_STYLE);
+                      unsigned int style = wxDEFAULT_DIALOG_STYLE);
 
     wxPageSetupDialogBase(const wxPageSetupDialogBase&) = delete;
     wxPageSetupDialogBase& operator=(const wxPageSetupDialogBase&) = delete;

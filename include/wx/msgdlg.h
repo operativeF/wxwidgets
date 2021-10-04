@@ -81,7 +81,7 @@ public:
     wxMessageDialogBase(wxWindow *parent,
                         const std::string& message,
                         const std::string& caption,
-                        long style)
+                        unsigned int style)
         : m_message(message),
           m_caption(caption)
     {
@@ -119,7 +119,7 @@ public:
     const std::string& GetExtendedMessage() const { return m_extendedMessage; }
 
     // change the dialog style flag
-    void SetMessageDialogStyle(long style)
+    void SetMessageDialogStyle(unsigned int style)
     {
         wxASSERT_MSG( ((style & wxYES_NO) == wxYES_NO) || !(style & wxYES_NO),
                       "wxYES and wxNO may only be used together" );
@@ -314,7 +314,7 @@ private:
 
 int WXDLLIMPEXP_CORE wxMessageBox(const std::string& message,
                              const std::string& caption = wxMessageBoxCaptionStr,
-                             long style = wxOK | wxCENTRE,
+                             unsigned int style = wxOK | wxCENTRE,
                              wxWindow *parent = nullptr,
                              int x = wxDefaultCoord, int y = wxDefaultCoord);
 

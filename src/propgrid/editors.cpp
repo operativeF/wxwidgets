@@ -580,7 +580,7 @@ public:
                 const wxPoint& pos,
                 const wxSize& size,
                 const std::vector<std::string>& choices,
-                long style = 0,
+                unsigned int style = 0,
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxS("wxOwnerDrawnComboBox"))
     {
@@ -2147,7 +2147,7 @@ class wxPGEditorBitmapButton : public wxBitmapButton
 public:
     wxPGEditorBitmapButton(wxWindow *parent, wxWindowID id,
                      const wxBitmap& bitmap, const wxPoint& pos,
-                     const wxSize& size, long style = 0)
+                     const wxSize& size, unsigned int style = 0)
         : wxBitmapButton(parent, id, bitmap, pos, size, style)
     {
 #if defined(__WXGTK3__)

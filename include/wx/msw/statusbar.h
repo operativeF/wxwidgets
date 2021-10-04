@@ -26,7 +26,7 @@ public:
     wxStatusBar();
     wxStatusBar(wxWindow *parent,
                 wxWindowID id = wxID_ANY,
-                long style = wxSTB_DEFAULT_STYLE,
+                unsigned int style = wxSTB_DEFAULT_STYLE,
                 const std::string& name = wxStatusBarNameStr)
     {
         Create(parent, id, style, name);
@@ -34,7 +34,7 @@ public:
 
     [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id = wxID_ANY,
-                long style = wxSTB_DEFAULT_STYLE,
+                unsigned int style = wxSTB_DEFAULT_STYLE,
                 const std::string& name = wxStatusBarNameStr);
 
     ~wxStatusBar();
@@ -66,7 +66,7 @@ protected:
     void DoUpdateStatusText(int number) override;
 
     // override some base class virtuals
-    WXDWORD MSWGetStyle(long flags, WXDWORD *exstyle = nullptr) const override;
+    DWORD MSWGetStyle(unsigned int flags, DWORD *exstyle = nullptr) const override;
     wxSize DoGetBestSize() const override;
     void DoMoveWindow(wxRect boundary) override;
 #if wxUSE_TOOLTIPS

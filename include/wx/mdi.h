@@ -45,7 +45,7 @@ public:
                 const std::string& title,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = wxDEFAULT_FRAME_STYLE | wxVSCROLL | wxHSCROLL,
+                unsigned int style = wxDEFAULT_FRAME_STYLE | wxVSCROLL | wxHSCROLL,
                 const std::string& name = wxFrameNameStr);
      */
 
@@ -140,7 +140,7 @@ public:
                 const std::string& title,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = wxDEFAULT_FRAME_STYLE,
+                unsigned int style = wxDEFAULT_FRAME_STYLE,
                 const std::string& name = wxFrameNameStr);
 
         And setting m_mdiParent to parent parameter.
@@ -205,7 +205,7 @@ public:
     //
     // TODO: MDI children should have their own status bars, why not?
     wxStatusBar* CreateStatusBar(int WXUNUSED(number) = 1,
-                                 long WXUNUSED(style) = 1,
+                                 unsigned int WXUNUSED(style) = 1,
                                  wxWindowID WXUNUSED(id) = 1,
                                  const std::string& WXUNUSED(name) = "") override
       { return nullptr; }
@@ -224,7 +224,7 @@ public:
     // no toolbar
     //
     // TODO: again, it should be possible to have tool bars
-    wxToolBar *CreateToolBar(long WXUNUSED(style),
+    wxToolBar *CreateToolBar(unsigned int WXUNUSED(style),
                              wxWindowID WXUNUSED(id),
                              const std::string& WXUNUSED(name)) override
         { return nullptr; }
@@ -247,7 +247,7 @@ public:
     void Restore() override { }
 
     bool ShowFullScreen(bool WXUNUSED(show),
-                        long WXUNUSED(style)) override { return false; }
+                        unsigned int WXUNUSED(style)) override { return false; }
     bool IsFullScreen() const override { return false; }
 
 
@@ -262,7 +262,7 @@ public:
 
     // extra platform-specific hacks
 #ifdef __WXMSW__
-    WXDWORD MSWGetStyle(long flags, WXDWORD *exstyle = nullptr) const override
+    DWORD MSWGetStyle(unsigned int flags, DWORD *exstyle = nullptr) const override
     {
         return wxWindow::MSWGetStyle(flags, exstyle);
     }
@@ -332,7 +332,7 @@ public:
     // Can be overridden in the derived classes but the base class version must
     // be usually called first to really create the client window.
     virtual bool CreateClient(wxMDIParentFrame *parent,
-                              long style = wxVSCROLL | wxHSCROLL) = 0;
+                              unsigned int style = wxVSCROLL | wxHSCROLL) = 0;
 };
 
 // ----------------------------------------------------------------------------

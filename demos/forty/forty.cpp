@@ -298,7 +298,7 @@ FortyFrame::ToggleCardSize(wxCommandEvent& event)
 //----------------------------------------------------------------------------
 
 FortyAboutDialog::FortyAboutDialog( wxWindow *parent, wxWindowID id, const wxString &title,
-    const wxPoint &position, const wxSize& size, long style ) :
+    const wxPoint &position, const wxSize& size, unsigned int style ) :
     wxDialog( parent, id, title, position, size, style )
 {
     AddControls(this);

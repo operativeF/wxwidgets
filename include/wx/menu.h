@@ -38,11 +38,11 @@ class WXDLLIMPEXP_CORE wxMenuBase : public wxEvtHandler
 {
 public:
     // create a menu
-    static wxMenu *New(const std::string& title = {}, long style = 0);
+    static wxMenu *New(const std::string& title = {}, unsigned int style = 0);
 
-    wxMenuBase(const std::string& title, long style = 0) : m_title(title)
+    wxMenuBase(const std::string& title, unsigned int style = 0) : m_title(title)
         { Init(style); }
-    wxMenuBase(long style = 0)
+    wxMenuBase(unsigned int style = 0)
         { Init(style); }
 
     // dtor deletes all the menu items we own
@@ -375,7 +375,7 @@ protected:
     // -------
 
     // common part of all ctors
-    void Init(long style);
+    void Init(unsigned int style);
 
     // associate the submenu with this menu
     void AddSubMenu(wxMenu *submenu);

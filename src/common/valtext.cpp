@@ -56,7 +56,7 @@ wxBEGIN_EVENT_TABLE(wxTextValidator, wxValidator)
     EVT_CHAR(wxTextValidator::OnChar)
 wxEND_EVENT_TABLE()
 
-wxTextValidator::wxTextValidator(long style, wxString *val)
+wxTextValidator::wxTextValidator(unsigned int style, wxString *val)
     : m_stringValue(val)
 {
     SetStyle(style);
@@ -68,7 +68,7 @@ wxTextValidator::wxTextValidator(const wxTextValidator& val)
     Copy(val);
 }
 
-void wxTextValidator::SetStyle(long style)
+void wxTextValidator::SetStyle(unsigned int style)
 {
     m_validatorStyle = style;
 }

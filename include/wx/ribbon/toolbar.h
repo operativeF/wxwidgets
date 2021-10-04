@@ -48,7 +48,7 @@ public:
                   wxWindowID id = wxID_ANY,
                   const wxPoint& pos = wxDefaultPosition,
                   const wxSize& size = wxDefaultSize,
-                  long style = 0);
+                  unsigned int style = 0);
 
     ~wxRibbonToolBar();
 
@@ -56,7 +56,7 @@ public:
                 wxWindowID id = wxID_ANY,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = 0);
+                unsigned int style = 0);
 
     virtual wxRibbonToolBarToolBase* AddTool(
                 int tool_id,
@@ -178,7 +178,7 @@ protected:
     wxSize DoGetNextLargerSize(wxOrientation direction,
                                      wxSize relative_to) const override;
 
-    void CommonInit(long style);
+    void CommonInit(unsigned int style);
     void AppendGroup();
     wxRibbonToolBarToolGroup* InsertGroup(size_t pos);
     void UpdateWindowUI(long flags) override;

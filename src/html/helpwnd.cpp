@@ -105,7 +105,7 @@ class wxHtmlHelpHtmlWindow : public wxHtmlWindow
 {
 public:
     wxHtmlHelpHtmlWindow(wxHtmlHelpWindow *win, wxWindow *parent, wxWindowID id = wxID_ANY,
-                         const wxPoint& pos = wxDefaultPosition, const wxSize& sz = wxDefaultSize, long style = wxHW_DEFAULT_STYLE)
+                         const wxPoint& pos = wxDefaultPosition, const wxSize& sz = wxDefaultSize, unsigned int style = wxHW_DEFAULT_STYLE)
         : wxHtmlWindow(parent, id, pos, sz, style), m_Window(win)
     {
         SetStandardFonts();

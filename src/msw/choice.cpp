@@ -32,7 +32,7 @@ bool wxChoice::Create(wxWindow *parent,
                       const wxPoint& pos,
                       const wxSize& size,
                       const std::vector<std::string>& choices,
-                      long style,
+                      unsigned int style,
                       const wxValidator& validator,
                       const std::string& name)
 {
@@ -53,7 +53,7 @@ bool wxChoice::CreateAndInit(wxWindow *parent,
                              const wxPoint& pos,
                              const wxSize& size,
                              const std::vector<std::string>& choices,
-                             long style,
+                             unsigned int style,
                              const wxValidator& validator,
                              const std::string& name)
 {
@@ -107,10 +107,10 @@ bool wxChoice::MSWShouldPreProcessMessage(WXMSG *pMsg)
     return wxControl::MSWShouldPreProcessMessage(pMsg);
 }
 
-WXDWORD wxChoice::MSWGetStyle(long style, WXDWORD *exstyle) const
+DWORD wxChoice::MSWGetStyle(unsigned int style, DWORD *exstyle) const
 {
     // we never have an external border
-    WXDWORD msStyle = wxControl::MSWGetStyle
+    DWORD msStyle = wxControl::MSWGetStyle
                       (
                         (style & ~wxBORDER_MASK) | wxBORDER_NONE, exstyle
                       );

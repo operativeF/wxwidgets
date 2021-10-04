@@ -64,13 +64,13 @@ bool wxComboCtrl::Create(wxWindow *parent,
                             const std::string& value,
                             const wxPoint& pos,
                             const wxSize& size,
-                            long style,
+                            unsigned int style,
                             const wxValidator& validator,
                             const std::string& name)
 {
 
     // Set border
-    long border = style & wxBORDER_MASK;
+    unsigned int border = style & wxBORDER_MASK;
 
     if ( !border )
     {
@@ -166,7 +166,7 @@ static void wxMSWDrawFocusRect( wxDC& dc, const wxRect& rect )
 
 // draw focus background on area in a way typical on platform
 void
-wxComboCtrl::PrepareBackground( wxDC& dc, const wxRect& rect, int flags ) const
+wxComboCtrl::PrepareBackground( wxDC& dc, const wxRect& rect, unsigned int flags ) const
 {
 #if wxUSE_UXTHEME
     wxUxThemeHandle hTheme(this, L"COMBOBOX");
@@ -664,7 +664,7 @@ void wxComboCtrl::DoTimerEvent()
 #endif
 
 #if wxUSE_COMBOCTRL_POPUP_ANIMATION
-bool wxComboCtrl::AnimateShow( const wxRect& rect, int flags )
+bool wxComboCtrl::AnimateShow( const wxRect& rect, unsigned int flags )
 {
     if ( GetUserPreferencesMask() & wxMSW_DESKTOP_USERPREFERENCESMASK_COMBOBOXANIM )
     {

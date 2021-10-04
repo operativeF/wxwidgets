@@ -374,7 +374,7 @@ public:
                     wxWindow *parent,
                     const wxPoint& pos = wxDefaultPosition,
                     const wxSize& size = wxDefaultSize,
-                    long style = 0,
+                    unsigned int style = 0,
                     const wxString& name = wxT("canvas"));
     ~wxPreviewCanvas() = default;
 
@@ -418,7 +418,7 @@ public:
                    const std::string& title = wxGetTranslation("Print Preview"),
                    const wxPoint& pos = wxDefaultPosition,
                    const wxSize& size = wxDefaultSize,
-                   long style = wxDEFAULT_FRAME_STYLE | wxFRAME_FLOAT_ON_PARENT,
+                   unsigned int style = wxDEFAULT_FRAME_STYLE | wxFRAME_FLOAT_ON_PARENT,
                    const std::string& name = wxFrameNameStr);
     ~wxPreviewFrame();
 
@@ -511,7 +511,7 @@ public:
                         wxWindow *parent,
                         const wxPoint& pos = wxDefaultPosition,
                         const wxSize& size = wxDefaultSize,
-                        long style = wxTAB_TRAVERSAL,
+                        unsigned int style = wxTAB_TRAVERSAL,
                         const wxString& name = wxT("panel"));
     ~wxPreviewControlBar() = default;
 
@@ -775,7 +775,7 @@ public:
                        const wxString& documentTitle,
                        const wxPoint& pos = wxDefaultPosition,
                        const wxSize& size = wxDefaultSize,
-                       long style = wxDEFAULT_DIALOG_STYLE,
+                       unsigned int style = wxDEFAULT_DIALOG_STYLE,
                        const wxString& name = wxT("dialog"));
 
     wxPrintAbortDialog(const wxPrintAbortDialog&) = delete;

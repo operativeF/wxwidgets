@@ -57,7 +57,7 @@ wxCalendarCtrl::Create(wxWindow *parent,
                        const wxDateTime& dt,
                        const wxPoint& pos,
                        const wxSize& size,
-                       long style,
+                       unsigned int style,
                        const std::string& name)
 {
     if ( !wxMSWDateControls::CheckInitialization() )
@@ -111,9 +111,9 @@ wxCalendarCtrl::Create(wxWindow *parent,
     return true;
 }
 
-WXDWORD wxCalendarCtrl::MSWGetStyle(long style, WXDWORD *exstyle) const
+DWORD wxCalendarCtrl::MSWGetStyle(unsigned int style, DWORD *exstyle) const
 {
-    WXDWORD styleMSW = wxCalendarCtrlBase::MSWGetStyle(style, exstyle);
+    DWORD styleMSW = wxCalendarCtrlBase::MSWGetStyle(style, exstyle);
 
     // right now we don't support all native styles but we should add wx styles
     // corresponding to MCS_NOTODAY and MCS_NOTODAYCIRCLE probably (TODO)
@@ -131,7 +131,7 @@ WXDWORD wxCalendarCtrl::MSWGetStyle(long style, WXDWORD *exstyle) const
     return styleMSW;
 }
 
-void wxCalendarCtrl::SetWindowStyleFlag(long style)
+void wxCalendarCtrl::SetWindowStyleFlag(unsigned int style)
 {
     const bool hadMondayFirst = WeekStartsOnMonday();
 

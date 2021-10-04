@@ -251,7 +251,7 @@ void wxPluginLibrary::UnregisterModules()
 }
 
 wxPluginLibrary *
-wxPluginManager::wxLoadLibrary(const wxString &libname, int flags)
+wxPluginManager::wxLoadLibrary(const wxString &libname, unsigned int flags)
 {
     wxString realname(libname);
 

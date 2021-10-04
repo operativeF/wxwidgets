@@ -60,7 +60,7 @@ wxRichTextBackgroundPage::wxRichTextBackgroundPage()
     Init();
 }
 
-wxRichTextBackgroundPage::wxRichTextBackgroundPage( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size, long style )
+wxRichTextBackgroundPage::wxRichTextBackgroundPage( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size, unsigned int style )
 {
     Init();
     Create(parent, id, pos, size, style);
@@ -71,7 +71,7 @@ wxRichTextBackgroundPage::wxRichTextBackgroundPage( wxWindow* parent, wxWindowID
  * wxRichTextBackgroundPage creator
  */
 
-bool wxRichTextBackgroundPage::Create( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size, long style )
+bool wxRichTextBackgroundPage::Create( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size, unsigned int style )
 {
 ////@begin wxRichTextBackgroundPage creation
     wxRichTextDialogPage::Create( parent, id, pos, size, style );

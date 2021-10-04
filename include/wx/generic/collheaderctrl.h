@@ -23,7 +23,7 @@ public:
         const std::string& label,
         const wxPoint& pos = wxDefaultPosition,
         const wxSize& size = wxDefaultSize,
-        long style = wxBORDER_NONE,
+        unsigned int style = wxBORDER_NONE,
         const wxValidator& validator = wxDefaultValidator,
         const std::string& name = wxCollapsibleHeaderCtrlNameStr)
     {
@@ -38,7 +38,7 @@ public:
         const std::string& label,
         const wxPoint& pos = wxDefaultPosition,
         const wxSize& size = wxDefaultSize,
-        long style = wxBORDER_NONE,
+        unsigned int style = wxBORDER_NONE,
         const wxValidator& validator = wxDefaultValidator,
         const std::string& name = wxCollapsibleHeaderCtrlNameStr);
 

@@ -142,7 +142,7 @@ struct wxCmdLineOption: public wxCmdLineArgImpl
                     const wxString& lng,
                     const wxString& desc,
                     wxCmdLineParamType typ,
-                    int fl)
+                    unsigned int fl)
         : wxCmdLineArgImpl(k, shrt, lng, typ),
           description(desc),
           flags(fl)
@@ -150,14 +150,14 @@ struct wxCmdLineOption: public wxCmdLineArgImpl
     }
 
     wxString description;
-    int flags;
+    unsigned int flags;
 };
 
 struct wxCmdLineParam
 {
     wxCmdLineParam(const wxString& desc,
                    wxCmdLineParamType typ,
-                   int fl)
+                   unsigned int fl)
         : description(desc),
           type(typ),
           flags(fl)
@@ -616,7 +616,7 @@ void wxCmdLineParser::SetDesc(const wxCmdLineEntryDesc *desc)
 void wxCmdLineParser::AddSwitch(const wxString& shortName,
                                 const wxString& longName,
                                 const wxString& desc,
-                                int flags)
+                                unsigned int flags)
 {
     wxASSERT_MSG( m_data->FindOption(shortName) == wxNOT_FOUND,
                   wxT("duplicate switch") );
@@ -632,7 +632,7 @@ void wxCmdLineParser::AddOption(const wxString& shortName,
                                 const wxString& longName,
                                 const wxString& desc,
                                 wxCmdLineParamType type,
-                                int flags)
+                                unsigned int flags)
 {
     wxASSERT_MSG( m_data->FindOption(shortName) == wxNOT_FOUND,
                   wxT("duplicate option") );
@@ -646,7 +646,7 @@ void wxCmdLineParser::AddOption(const wxString& shortName,
 
 void wxCmdLineParser::AddParam(const wxString& desc,
                                wxCmdLineParamType type,
-                               int flags)
+                               unsigned int flags)
 {
     // do some consistency checks: a required parameter can't follow an
     // optional one and nothing should follow a parameter with MULTIPLE flag

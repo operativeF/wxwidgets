@@ -33,7 +33,7 @@ public:
               const wxString& vendorName = {},
               const wxString& localFilename = {},
               const wxString& globalFilename = {},
-              long style = wxCONFIG_USE_GLOBAL_FILE);
+              unsigned int style = wxCONFIG_USE_GLOBAL_FILE);
 
     // dtor will save unsaved data
   ~wxRegConfig() = default;

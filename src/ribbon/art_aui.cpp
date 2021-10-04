@@ -598,7 +598,7 @@ void wxRibbonAUIArtProvider::DrawScrollButton(
                         wxDC& dc,
                         wxWindow* WXUNUSED(wnd),
                         const wxRect& rect,
-                        long style)
+                        unsigned int style)
 {
     wxRect true_rect(rect);
     wxPoint arrow_points[3];

@@ -70,7 +70,7 @@ wxRichTextBulletsPage::wxRichTextBulletsPage( )
     Init();
 }
 
-wxRichTextBulletsPage::wxRichTextBulletsPage( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size, long style )
+wxRichTextBulletsPage::wxRichTextBulletsPage( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size, unsigned int style )
 {
     Init();
     Create(parent, id, pos, size, style);
@@ -105,7 +105,7 @@ void wxRichTextBulletsPage::Init()
  * wxRichTextBulletsPage creator
  */
 
-bool wxRichTextBulletsPage::Create( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size, long style )
+bool wxRichTextBulletsPage::Create( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size, unsigned int style )
 {
 ////@begin wxRichTextBulletsPage creation
     wxRichTextDialogPage::Create( parent, id, pos, size, style );

@@ -56,10 +56,10 @@ wxPopupWindow::~wxPopupWindow()
         wxCurrentPopupWindow = nullptr;
 }
 
-WXDWORD wxPopupWindow::MSWGetStyle(long flags, WXDWORD *exstyle) const
+DWORD wxPopupWindow::MSWGetStyle(unsigned int flags, DWORD *exstyle) const
 {
     // we only honour the border flags, the others don't make sense for us
-    WXDWORD style = wxWindow::MSWGetStyle(flags & wxBORDER_MASK, exstyle);
+    DWORD style = wxWindow::MSWGetStyle(flags & wxBORDER_MASK, exstyle);
 
     // wxMSW uses 2 rather different implementations of wxPopupWindow
     // internally, each one with its own limitations, so we allow specifying

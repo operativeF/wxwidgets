@@ -56,7 +56,7 @@ wxBitmapComboBox::wxBitmapComboBox(wxWindow *parent,
                                   const wxPoint& pos,
                                   const wxSize& size,
                                   const wxArrayString& choices,
-                                  long style,
+                                  unsigned int style,
                                   const wxValidator& validator,
                                   const wxString& name)
     : wxOwnerDrawnComboBox(),
@@ -71,7 +71,7 @@ bool wxBitmapComboBox::Create(wxWindow *parent,
                               const wxPoint& pos,
                               const wxSize& size,
                               const wxArrayString& choices,
-                              long style,
+                              unsigned int style,
                               const wxValidator& validator,
                               const wxString& name)
 {
@@ -95,7 +95,7 @@ bool wxBitmapComboBox::Create(wxWindow *parent,
                               const wxSize& size,
                               int n,
                               const wxString choices[],
-                              long style,
+                              unsigned int style,
                               const wxValidator& validator,
                               const wxString& name)
 {

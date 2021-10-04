@@ -59,7 +59,7 @@ wxBEGIN_EVENT_TABLE(wxGenericDirDialog, wxDialog)
 wxEND_EVENT_TABLE()
 
 wxGenericDirDialog::wxGenericDirDialog(wxWindow* parent, const wxString& title,
-                                       const wxString& defaultPath, long style,
+                                       const wxString& defaultPath, unsigned int style,
                                        const wxPoint& pos, const wxSize& sz,
                                        const wxString& name)
 {
@@ -68,7 +68,7 @@ wxGenericDirDialog::wxGenericDirDialog(wxWindow* parent, const wxString& title,
 
 bool wxGenericDirDialog::Create(wxWindow* parent,
                                 const wxString& title,
-                                const wxString& defaultPath, long style,
+                                const wxString& defaultPath, unsigned int style,
                                 const wxPoint& pos,
                                 const wxSize& sz,
                                 const wxString& name)

@@ -29,7 +29,7 @@ public:
                   const std::string& label,
                   const wxPoint& pos = wxDefaultPosition,
                   const wxSize& size = wxDefaultSize,
-                  long style = 0,
+                  unsigned int style = 0,
                   const wxValidator& validator = wxDefaultValidator,
                   const std::string& name = wxRadioButtonNameStr)
     {
@@ -47,7 +47,7 @@ public:
                 const std::string& label,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = 0,
+                unsigned int style = 0,
                 const wxValidator& validator = wxDefaultValidator,
                 const std::string& name = wxRadioButtonNameStr);
 
@@ -61,7 +61,7 @@ public:
 
     bool HasTransparentBackground() override { return true; }
 
-    WXDWORD MSWGetStyle(long style, WXDWORD *exstyle) const override;
+    DWORD MSWGetStyle(unsigned int style, DWORD *exstyle) const override;
 
 protected:
     wxBorder GetDefaultBorder() const override { return wxBORDER_NONE; }

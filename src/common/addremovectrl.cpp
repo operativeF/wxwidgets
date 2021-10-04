@@ -30,7 +30,7 @@ wxAddRemoveCtrl::Create(wxWindow* parent,
                         wxWindowID winid,
                         const wxPoint& pos,
                         const wxSize& size,
-                        long style,
+                        unsigned int style,
                         const std::string& name)
 {
     if ( !wxPanel::Create(parent, winid, pos, size, style, name) )

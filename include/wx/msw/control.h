@@ -22,7 +22,7 @@ public:
     ~wxControl() = default;
     wxControl(wxWindow *parent, wxWindowID id,
               const wxPoint& pos = wxDefaultPosition,
-              const wxSize& size = wxDefaultSize, long style = 0,
+              const wxSize& size = wxDefaultSize, unsigned int style = 0,
               const wxValidator& validator = wxDefaultValidator,
               const std::string& name = wxControlNameStr)
     {
@@ -36,7 +36,7 @@ public:
 
     [[maybe_unused]] bool Create(wxWindow *parent, wxWindowID id,
             const wxPoint& pos = wxDefaultPosition,
-            const wxSize& size = wxDefaultSize, long style = 0,
+            const wxSize& size = wxDefaultSize, unsigned int style = 0,
             const wxValidator& validator = wxDefaultValidator,
             const std::string& name = wxControlNameStr);
 
@@ -69,7 +69,7 @@ public:
     virtual WXHBRUSH MSWControlColor(WXHDC pDC, WXHWND hWnd);
 
     // default style for the control include WS_TABSTOP if it AcceptsFocus()
-    WXDWORD MSWGetStyle(long style, WXDWORD *exstyle) const override;
+    DWORD MSWGetStyle(unsigned int style, DWORD *exstyle) const override;
 
 protected:
     // Hook for common controls for which we don't want to set the default font
@@ -108,11 +108,11 @@ protected:
     // extended style is determined from the style and the app 3D settings
     // automatically if it's not specified explicitly.
     bool MSWCreateControl(const std::string& classname,
-                          WXDWORD style,
+                          DWORD style,
                           const wxPoint& pos = wxDefaultPosition,
                           const wxSize& size = wxDefaultSize,
                           const std::string& label = {},
-                          WXDWORD exstyle = (WXDWORD)-1);
+                          DWORD exstyle = (DWORD)-1);
 
     // call this from the derived class MSWControlColor() if you want to show
     // the control greyed out (and opaque)

@@ -128,7 +128,7 @@ public:
                               const std::string& url = wxWebViewDefaultURLStr,
                               const wxPoint& pos = wxDefaultPosition,
                               const wxSize& size = wxDefaultSize,
-                              long style = 0,
+                              unsigned int style = 0,
                               const std::string& name = wxWebViewNameStr) = 0;
     virtual bool IsAvailable() { return true; }
     virtual wxVersionInfo GetVersionInfo() { return wxVersionInfo(); }
@@ -152,7 +152,7 @@ public:
            const std::string& url = wxWebViewDefaultURLStr,
            const wxPoint& pos = wxDefaultPosition,
            const wxSize& size = wxDefaultSize,
-           long style = 0,
+           unsigned int style = 0,
            const std::string& name = wxWebViewNameStr) = 0;
 
     // Factory methods allowing the use of custom factories registered with
@@ -164,7 +164,7 @@ public:
                           const wxPoint& pos = wxDefaultPosition,
                           const wxSize& size = wxDefaultSize,
                           const std::string& backend = wxWebViewBackendDefault,
-                          long style = 0,
+                          unsigned int style = 0,
                           const std::string& name = wxWebViewNameStr);
 
     static void RegisterFactory(const wxString& backend,

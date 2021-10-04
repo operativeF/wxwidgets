@@ -28,7 +28,7 @@ public:
                   wxWindowID id = wxID_ANY,
                   const wxPoint &pos = wxDefaultPosition,
                   const wxSize &size = wxDefaultSize,
-                  long style = wxLI_HORIZONTAL,
+                  unsigned int style = wxLI_HORIZONTAL,
                   const std::string &name = wxStaticLineNameStr)
     {
         Create(parent, id, pos, size, style, name);
@@ -40,7 +40,7 @@ public:
                  wxWindowID id = wxID_ANY,
                  const wxPoint &pos = wxDefaultPosition,
                  const wxSize &size = wxDefaultSize,
-                 long style = wxLI_HORIZONTAL,
+                 unsigned int style = wxLI_HORIZONTAL,
                  const std::string &name = wxStaticLineNameStr);
 
     // it's necessary to override this wxWindow function because we

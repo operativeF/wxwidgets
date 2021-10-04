@@ -46,7 +46,7 @@ public:
                       const std::string& message,
                       const std::string& caption = wxGetTextFromUserPromptStr,
                       const std::string& value = {},
-                      long style = wxTextEntryDialogStyle,
+                      unsigned int style = wxTextEntryDialogStyle,
                       const wxPoint& pos = wxDefaultPosition)
     {
         Create(parent, message, caption, value, style, pos);
@@ -56,7 +56,7 @@ public:
                 const std::string& message,
                 const std::string& caption = wxGetTextFromUserPromptStr,
                 const std::string& value = {},
-                long style = wxTextEntryDialogStyle,
+                unsigned int style = wxTextEntryDialogStyle,
                 const wxPoint& pos = wxDefaultPosition);
 
     void SetValue(const std::string& val);
@@ -102,7 +102,7 @@ public:
                       const std::string& message,
                       const std::string& caption = wxGetPasswordFromUserPromptStr,
                       const std::string& value = {},
-                      long style = wxTextEntryDialogStyle,
+                      unsigned int style = wxTextEntryDialogStyle,
                       const wxPoint& pos = wxDefaultPosition)
     {
         Create(parent, message, caption, value, style, pos);
@@ -112,7 +112,7 @@ public:
                 const std::string& message,
                 const std::string& caption = wxGetPasswordFromUserPromptStr,
                 const std::string& value = {},
-                long style = wxTextEntryDialogStyle,
+                unsigned int style = wxTextEntryDialogStyle,
                 const wxPoint& pos = wxDefaultPosition);
 
 

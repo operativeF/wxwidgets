@@ -64,7 +64,7 @@ bool wxAppTraits::SafeMessageBox(const std::string& text,
 }
 
 #if wxUSE_THREADS
-WXDWORD wxAppTraits::DoSimpleWaitForThread(WXHANDLE hThread)
+DWORD wxAppTraits::DoSimpleWaitForThread(WXHANDLE hThread)
 {
     return ::WaitForSingleObject((HANDLE)hThread, INFINITE);
 }
@@ -92,7 +92,7 @@ bool wxConsoleAppTraits::DoMessageFromThreadWait()
     return true;
 }
 
-WXDWORD wxConsoleAppTraits::WaitForThread(WXHANDLE hThread, int WXUNUSED(flags))
+DWORD wxConsoleAppTraits::WaitForThread(WXHANDLE hThread, int WXUNUSED(flags))
 {
     return DoSimpleWaitForThread(hThread);
 }

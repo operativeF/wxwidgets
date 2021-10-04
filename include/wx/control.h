@@ -48,7 +48,7 @@ public:
     [[maybe_unused]] bool Create(wxWindow *parent, wxWindowID id,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = 0,
+                unsigned int style = 0,
                 const wxValidator& validator = wxDefaultValidator,
                 const std::string& name = wxControlNameStr);
 
@@ -150,7 +150,7 @@ public:
     // replaces parts of the given (multiline) string with an ellipsis if needed
     static std::string Ellipsize(std::string_view label, const wxDC& dc,
                               wxEllipsizeMode mode, int maxWidth,
-                              int flags = wxELLIPSIZE_FLAGS_DEFAULT);
+                              unsigned int flags = wxELLIPSIZE_FLAGS_DEFAULT);
 
     // return the accel index in the string or -1 if none and puts the modified
     // string into second parameter if non NULL
@@ -174,7 +174,7 @@ protected:
                        wxWindowID id,
                        const wxPoint& pos,
                        const wxSize& size,
-                       long style,
+                       unsigned int style,
                        const wxValidator& validator,
                        const std::string& name);
 

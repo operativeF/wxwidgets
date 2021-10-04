@@ -29,7 +29,7 @@ public:
                  const std::string& defaultDir = {},
                  const std::string& defaultFile = {},
                  const std::string& wildCard = wxFileSelectorDefaultWildcardStr,
-                 long style = wxFD_DEFAULT_STYLE,
+                 unsigned int style = wxFD_DEFAULT_STYLE,
                  const wxPoint& pos = wxDefaultPosition,
                  const wxSize& sz = wxDefaultSize,
                  const std::string& name = wxFileDialogNameStr);

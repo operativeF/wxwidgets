@@ -168,7 +168,7 @@ void wxDynamicLibrary::ReportError(const wxString& message, const wxString& name
 
 /* static */
 wxDllType
-wxDynamicLibrary::RawLoad(const wxString& libname, int flags)
+wxDynamicLibrary::RawLoad(const wxString& libname, unsigned int flags)
 {
     if (flags & wxDL_GET_LOADED)
         return ::GetModuleHandleW(libname.t_str());

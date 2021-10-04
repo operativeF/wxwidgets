@@ -80,9 +80,9 @@ protected:
 
     void DoSetItemBitmap(unsigned int n, const wxBitmap& bitmap);
 
-    void DrawBackground(wxDC& dc, const wxRect& rect, int item, int flags) const;
+    void DrawBackground(wxDC& dc, const wxRect& rect, int item, unsigned int flags) const;
     void DrawItem(wxDC& dc, const wxRect& rect, int item, const std::string& text,
-                  int flags) const;
+                  unsigned int flags) const;
     wxCoord MeasureItem(size_t item) const;
 
     // Returns true if image size was affected

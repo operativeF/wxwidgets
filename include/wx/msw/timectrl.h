@@ -27,7 +27,7 @@ public:
                      const wxDateTime& dt = wxDefaultDateTime,
                      const wxPoint& pos = wxDefaultPosition,
                      const wxSize& size = wxDefaultSize,
-                     long style = wxTP_DEFAULT,
+                     unsigned int style = wxTP_DEFAULT,
                      const wxValidator& validator = wxDefaultValidator,
                      const std::string& name = wxTimePickerCtrlNameStr)
     {
@@ -44,7 +44,7 @@ public:
                 const wxDateTime& dt = wxDefaultDateTime,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                long style = wxTP_DEFAULT,
+                unsigned int style = wxTP_DEFAULT,
                 const wxValidator& validator = wxDefaultValidator,
                 const std::string& name = wxTimePickerCtrlNameStr)
     {
@@ -54,7 +54,7 @@ public:
     }
 
     // Override MSW-specific functions used during control creation.
-    WXDWORD MSWGetStyle(long style, WXDWORD *exstyle) const override;
+    DWORD MSWGetStyle(unsigned int style, DWORD *exstyle) const override;
 
 protected:
 #if wxUSE_INTL

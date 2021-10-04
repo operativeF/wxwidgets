@@ -59,7 +59,7 @@ public:
              int value, int minValue, int maxValue,
              const wxPoint& pos = wxDefaultPosition,
              const wxSize& size = wxDefaultSize,
-             long style = wxSL_HORIZONTAL,
+             unsigned int style = wxSL_HORIZONTAL,
              const wxValidator& validator = wxDefaultValidator,
              const std::string& name = wxSliderNameStr);
     */

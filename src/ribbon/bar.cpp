@@ -145,7 +145,7 @@ void wxRibbonBar::ShowPanels(bool show)
     ShowPanels( show ? wxRIBBON_BAR_PINNED : wxRIBBON_BAR_MINIMIZED );
 }
 
-void wxRibbonBar::SetWindowStyleFlag(long style)
+void wxRibbonBar::SetWindowStyleFlag(unsigned int style)
 {
     m_flags = style;
     if(m_art)
@@ -726,7 +726,7 @@ wxRibbonBar::wxRibbonBar(wxWindow* parent,
                          wxWindowID id,
                          const wxPoint& pos,
                          const wxSize& size,
-                         long style)
+                         unsigned int style)
     : wxRibbonControl(parent, id, pos, size, wxBORDER_NONE)
 {
     CommonInit(style);
@@ -746,7 +746,7 @@ bool wxRibbonBar::Create(wxWindow* parent,
                 wxWindowID id,
                 const wxPoint& pos,
                 const wxSize& size,
-                long style)
+                unsigned int style)
 {
     if(!wxRibbonControl::Create(parent, id, pos, size, wxBORDER_NONE))
         return false;
@@ -756,7 +756,7 @@ bool wxRibbonBar::Create(wxWindow* parent,
     return true;
 }
 
-void wxRibbonBar::CommonInit(long style)
+void wxRibbonBar::CommonInit(unsigned int style)
 {
     SetName("wxRibbonBar");
 

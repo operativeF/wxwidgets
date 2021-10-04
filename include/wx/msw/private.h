@@ -923,13 +923,13 @@ extern WXDLLIMPEXP_CORE
 bool wxCheckWindowWndProc(WXHWND hWnd, WXWNDPROC wndProc = nullptr);
 
 // Does this window style specify any border?
-constexpr bool wxStyleHasBorder(long style)
+constexpr bool wxStyleHasBorder(unsigned int style)
 {
     return (style & (wxSIMPLE_BORDER | wxRAISED_BORDER |
                      wxSUNKEN_BORDER | wxDOUBLE_BORDER)) != 0;
 }
 
-inline bool wxHasWindowExStyle(const wxWindowMSW *win, long style)
+inline bool wxHasWindowExStyle(const wxWindowMSW *win, unsigned int style)
 {
     return (::GetWindowLongPtrW(GetHwndOf(win), GWL_EXSTYLE) & style) != 0;
 }

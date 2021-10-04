@@ -19,26 +19,26 @@
 // ----------------------------------------------------------------------------
 
 // These flags affect label alignment
-#define wxBU_LEFT            0x0040
-#define wxBU_TOP             0x0080
-#define wxBU_RIGHT           0x0100
-#define wxBU_BOTTOM          0x0200
-#define wxBU_ALIGN_MASK      ( wxBU_LEFT | wxBU_TOP | wxBU_RIGHT | wxBU_BOTTOM )
+constexpr unsigned int wxBU_LEFT            = 0x0040;
+constexpr unsigned int wxBU_TOP             = 0x0080;
+constexpr unsigned int wxBU_RIGHT           = 0x0100;
+constexpr unsigned int wxBU_BOTTOM          = 0x0200;
+constexpr unsigned int wxBU_ALIGN_MASK      = ( wxBU_LEFT | wxBU_TOP | wxBU_RIGHT | wxBU_BOTTOM );
 
 // These two flags are obsolete and have no effect any longer.
-#define wxBU_NOAUTODRAW      0x0000
-#define wxBU_AUTODRAW        0x0004
+constexpr unsigned int wxBU_NOAUTODRAW      = 0x0000;
+constexpr unsigned int wxBU_AUTODRAW        = 0x0004;
 
 // by default, the buttons will be created with some (system dependent)
 // minimal size to make them look nicer, giving this style will make them as
 // small as possible
-#define wxBU_EXACTFIT        0x0001
+constexpr unsigned int wxBU_EXACTFIT        = 0x0001;
 
 // this flag can be used to disable using the text label in the button: it is
 // mostly useful when creating buttons showing bitmap and having stock id as
 // without it both the standard label corresponding to the stock id and the
 // bitmap would be shown
-#define wxBU_NOTEXT          0x0002
+constexpr unsigned int wxBU_NOTEXT          = 0x0002;
 
 
 #include "wx/bitmap.h"

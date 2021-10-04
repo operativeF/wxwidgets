@@ -168,7 +168,7 @@ public:
                 const std::string& value,
                 const wxPoint& pos,
                 const wxSize& size,
-                long style,
+                unsigned int style,
                 const wxValidator& validator,
                 const std::string& name);
 
@@ -415,7 +415,7 @@ public:
     // flags: wxRendererNative flags: wxCONTROL_ISSUBMENU: is drawing a list item instead of combo control
     //                                wxCONTROL_SELECTED: list item is selected
     //                                wxCONTROL_DISABLED: control/item is disabled
-    virtual void PrepareBackground( wxDC& dc, const wxRect& rect, int flags ) const;
+    virtual void PrepareBackground( wxDC& dc, const wxRect& rect, unsigned int flags ) const;
 
     // Returns true if focus indicator should be drawn in the control.
     bool ShouldDrawFocus() const
@@ -475,7 +475,7 @@ public:
 protected:
 
     // Returns true if hint text should be drawn in the control
-    bool ShouldUseHintText(int flags = 0) const
+    bool ShouldUseHintText(unsigned int flags = 0) const
     {
         return ( !m_text &&
                  !(flags & wxCONTROL_ISSUBMENU) &&
@@ -518,14 +518,14 @@ protected:
 
     // Draws dropbutton. Using wxRenderer or bitmaps, as appropriate.
     // Flags are defined above.
-    virtual void DrawButton( wxDC& dc, const wxRect& rect, int flags = Button_PaintBackground );
+    virtual void DrawButton( wxDC& dc, const wxRect& rect, unsigned int flags = Button_PaintBackground );
 
     // Call if cursor is on button area or mouse is captured for the button.
     //bool HandleButtonMouseEvent( wxMouseEvent& event, bool isInside );
-    bool HandleButtonMouseEvent( wxMouseEvent& event, int flags );
+    bool HandleButtonMouseEvent( wxMouseEvent& event, unsigned int flags );
 
     // returns true if event was consumed or filtered (event type is also set to 0 in this case)
-    bool PreprocessMouseEvent( wxMouseEvent& event, int flags );
+    bool PreprocessMouseEvent( wxMouseEvent& event, unsigned int flags );
 
     //
     // This will handle left_down and left_dclick events outside button in a Windows-like manner.
@@ -587,20 +587,20 @@ protected:
     };
 
     // Shows and positions the popup.
-    virtual void DoShowPopup( const wxRect& rect, int flags );
+    virtual void DoShowPopup( const wxRect& rect, unsigned int flags );
 
     // Implement in derived class to create a drop-down animation.
     // Return true if finished immediately. Otherwise popup is only
     // shown when the derived class call DoShowPopup.
     // Flags are same as for DoShowPopup.
-    virtual bool AnimateShow( const wxRect& rect, int flags );
+    virtual bool AnimateShow( const wxRect& rect, unsigned int flags );
 
 #if wxUSE_TOOLTIPS
     void DoSetToolTip( wxToolTip *tip ) override;
 #endif
 
     // protected wxTextEntry methods
-    void DoSetValue(const std::string& value, int flags) override;
+    void DoSetValue(const std::string& value, unsigned int flags) override;
     std::string DoGetValue() const override;
     wxWindow *GetEditableWindow() override { return this; }
 

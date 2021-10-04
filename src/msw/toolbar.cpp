@@ -355,7 +355,7 @@ bool wxToolBar::Create(wxWindow *parent,
                        wxWindowID id,
                        const wxPoint& pos,
                        const wxSize& size,
-                       long style,
+                       unsigned int style,
                        const std::string& name)
 {
     // common initialisation
@@ -631,11 +631,11 @@ wxSize wxToolBar::DoGetBestSize() const
     return sizeBest;
 }
 
-WXDWORD wxToolBar::MSWGetStyle(long style, WXDWORD *exstyle) const
+DWORD wxToolBar::MSWGetStyle(unsigned int style, DWORD *exstyle) const
 {
     // toolbars never have border, giving one to them results in broken
     // appearance
-    WXDWORD msStyle = wxControl::MSWGetStyle
+    DWORD msStyle = wxControl::MSWGetStyle
                       (
                         (style & ~wxBORDER_MASK) | wxBORDER_NONE, exstyle
                       );
@@ -1746,7 +1746,7 @@ long wxToolBar::GetMSWToolbarStyle() const
     return ::SendMessageW(GetHwnd(), TB_GETSTYLE, 0, 0L);
 }
 
-void wxToolBar::SetWindowStyleFlag(long style)
+void wxToolBar::SetWindowStyleFlag(unsigned int style)
 {
     // the style bits whose changes force us to recreate the toolbar
     static const long MASK_NEEDS_RECREATE = wxTB_TEXT | wxTB_NOICONS;

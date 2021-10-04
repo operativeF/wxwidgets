@@ -358,7 +358,7 @@ bool wxTextCtrl::Create(wxWindow *parent,
                         const std::string& value,
                         const wxPoint& pos,
                         const wxSize& size,
-                        long style,
+                        unsigned int style,
                         const wxValidator& validator,
                         const std::string& name)
 {
@@ -398,7 +398,7 @@ bool wxTextCtrl::MSWCreateText(const std::string& value,
                                const wxSize& size)
 {
     // translate wxWin style flags to MSW ones
-    WXDWORD msStyle = MSWGetCreateWindowFlags();
+    DWORD msStyle = MSWGetCreateWindowFlags();
 
     // do create the control - either an EDIT or RICHEDIT
     std::string windowClass = "EDIT";
@@ -689,7 +689,7 @@ void wxTextCtrl::AdoptAttributesFromHWND()
     wxWindow::AdoptAttributesFromHWND();
 
     HWND hWnd = GetHwnd();
-    long style = ::GetWindowLongPtrW(hWnd, GWL_STYLE);
+    unsigned int style = ::GetWindowLongPtrW(hWnd, GWL_STYLE);
 
     // retrieve the style to see whether this is an edit or richedit ctrl
 #if wxUSE_RICHEDIT
@@ -725,7 +725,7 @@ void wxTextCtrl::AdoptAttributesFromHWND()
         m_windowStyle |= wxTE_RIGHT;
 }
 
-WXDWORD wxTextCtrl::MSWGetStyle(long style, WXDWORD *exstyle) const
+DWORD wxTextCtrl::MSWGetStyle(unsigned int style, DWORD *exstyle) const
 {
     long msStyle = wxControl::MSWGetStyle(style, exstyle);
 
@@ -791,7 +791,7 @@ WXDWORD wxTextCtrl::MSWGetStyle(long style, WXDWORD *exstyle) const
     return msStyle;
 }
 
-void wxTextCtrl::SetWindowStyleFlag(long style)
+void wxTextCtrl::SetWindowStyleFlag(unsigned int style)
 {
     // changing the alignment of the control dynamically works under Win2003
     // (but not older Windows version: it seems to work under some versions of
@@ -962,7 +962,7 @@ std::string wxTextCtrl::GetRange(long from, long to) const
     return str;
 }
 
-void wxTextCtrl::DoSetValue(const std::string& value, int flags)
+void wxTextCtrl::DoSetValue(const std::string& value, unsigned int flags)
 {
     // if the text is long enough, it's faster to just set it instead of first
     // comparing it with the old one (chances are that it will be different
@@ -1242,7 +1242,7 @@ void wxTextCtrl::DoSetSelection(long from, long to, int flags)
         // ES_DISABLENOSCROLL
         //
         // this is very ugly but I don't see any other way to make this work
-        long style = 0;
+        unsigned int style = 0;
         if ( GetRichVersion() > 1 )
         {
             if ( !HasFlag(wxTE_NOHIDESEL) )
