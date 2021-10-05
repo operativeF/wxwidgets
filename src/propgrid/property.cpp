@@ -1221,7 +1221,7 @@ wxSize wxPGProperty::OnMeasureImage( int WXUNUSED(item) ) const
             }
         }
 
-        return {wxRound(scale*m_valueBitmap->GetWidth()), wxDefaultCoord};
+        return {std::lround(scale*m_valueBitmap->GetWidth()), wxDefaultCoord};
     }
 
     return {0, 0};

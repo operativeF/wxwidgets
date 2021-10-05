@@ -3314,9 +3314,9 @@ RGBValue wxImage::HSVtoRGB(const HSVValue& hsv)
         }
     }
 
-    return {(unsigned char)wxRound(red * 255.0),
-            (unsigned char)wxRound(green * 255.0),
-            (unsigned char)wxRound(blue * 255.0)};
+    return {(unsigned char)std::lround(red * 255.0),
+            (unsigned char)std::lround(green * 255.0),
+            (unsigned char)std::lround(blue * 255.0)};
 }
 
 // TODO-C++11: Replace with a lambda function.
@@ -3773,22 +3773,22 @@ wxImage wxImage::Rotate(double angle,
 
                     if (0 < src.x && src.x < w - 1)
                     {
-                        x1 = wxRound(std::floor(src.x));
-                        x2 = wxRound(std::ceil(src.x));
+                        x1 = std::lround(std::floor(src.x));
+                        x2 = std::lround(std::ceil(src.x));
                     }
                     else    // else means that x is near one of the borders (0 or width-1)
                     {
-                        x1 = x2 = wxRound (src.x);
+                        x1 = x2 = std::lround(src.x);
                     }
 
                     if (0 < src.y && src.y < h - 1)
                     {
-                        y1 = wxRound(std::floor(src.y));
-                        y2 = wxRound(std::ceil(src.y));
+                        y1 = std::lround(std::floor(src.y));
+                        y2 = std::lround(std::ceil(src.y));
                     }
                     else
                     {
-                        y1 = y2 = wxRound (src.y);
+                        y1 = y2 = std::lround(src.y);
                     }
 
                     // get four points and the distances (square of the distance,
@@ -3910,8 +3910,8 @@ wxImage wxImage::Rotate(double angle,
             {
                 wxRealPoint src = wxRotatePoint (x + x1a, y + y1a, cos_angle, -sin_angle, p0);
 
-                const int xs = wxRound (src.x);      // wxRound rounds to the
-                const int ys = wxRound (src.y);      // closest integer
+                const int xs = std::lround(src.x);      // wxRound rounds to the
+                const int ys = std::lround(src.y);      // closest integer
 
                 if (0 <= xs && xs < w && 0 <= ys && ys < h)
                 {

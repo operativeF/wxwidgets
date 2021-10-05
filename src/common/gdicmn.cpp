@@ -713,8 +713,8 @@ wxSize wxGetDisplaySizeMM()
         return {0, 0};
 
     const wxSize pixels = wxGetDisplaySize();
-    return {wxRound(pixels.x * inches2mm / ppi.x),
-            wxRound(pixels.y * inches2mm / ppi.y)};
+    return {std::lround(pixels.x * inches2mm / ppi.x),
+            std::lround(pixels.y * inches2mm / ppi.y)};
 }
 
 wxSize wxGetDisplayPPI()

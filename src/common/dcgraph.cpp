@@ -309,10 +309,10 @@ void wxGCDCImpl::UpdateClipBox()
             m_clipping = true;
     }
 
-    m_clipX1 = wxRound(x);
-    m_clipY1 = wxRound(y);
-    m_clipX2 = wxRound(x+w);
-    m_clipY2 = wxRound(y+h);
+    m_clipX1 = std::lround(x);
+    m_clipY1 = std::lround(y);
+    m_clipX2 = std::lround(x+w);
+    m_clipY2 = std::lround(y+h);
     m_isClipBoxValid = true;
 }
 
@@ -440,7 +440,7 @@ wxSize wxGCDCImpl::GetPPI() const
     {
         double x, y;
         m_graphicContext->GetDPI(&x, &y);
-        return {wxRound(x), wxRound(y)};
+        return {std::lround(x), std::lround(y)};
     }
 
     // This is the same value that wxGraphicsContext::GetDPI() returns by
@@ -589,7 +589,7 @@ wxPoint wxGCDCImpl::DeviceToLogical(wxCoord x, wxCoord y) const
     double px = x;
     double py = y;
     m_matrixCurrentInv.TransformPoint(&px, &py);
-    return {wxRound(px), wxRound(py)};
+    return {std::lround(px), std::lround(py)};
 }
 
 wxPoint wxGCDCImpl::LogicalToDevice(wxCoord x, wxCoord y) const
@@ -597,7 +597,7 @@ wxPoint wxGCDCImpl::LogicalToDevice(wxCoord x, wxCoord y) const
     double px = x;
     double py = y;
     m_matrixCurrent.TransformPoint(&px, &py);
-    return {wxRound(px), wxRound(py)};
+    return {std::lround(px), std::lround(py)};
 }
 
 wxSize wxGCDCImpl::DeviceToLogicalRel(int x, int y) const
@@ -605,7 +605,7 @@ wxSize wxGCDCImpl::DeviceToLogicalRel(int x, int y) const
     double dx = x;
     double dy = y;
     m_matrixCurrentInv.TransformDistance(&dx, &dy);
-    return {wxRound(dx), wxRound(dy)};
+    return {std::lround(dx), std::lround(dy)};
 }
 
 wxSize wxGCDCImpl::LogicalToDeviceRel(int x, int y) const
@@ -613,7 +613,7 @@ wxSize wxGCDCImpl::LogicalToDeviceRel(int x, int y) const
     double dx = x;
     double dy = y;
     m_matrixCurrent.TransformDistance(&dx, &dy);
-    return {wxRound(dx), wxRound(dy)};
+    return {std::lround(dx), std::lround(dy)};
 }
 
 bool wxGCDCImpl::DoFloodFill(wxCoord WXUNUSED(x), wxCoord WXUNUSED(y),
@@ -707,9 +707,9 @@ void wxGCDCImpl::DoDrawArc( wxCoord x1, wxCoord y1,
     m_graphicContext->DrawPath(path);
 
     const wxRect2DDouble box = path.GetBox();
-    CalcBoundingBox(wxRound(box.m_x), wxRound(box.m_y));
-    CalcBoundingBox(wxRound(box.m_x + box.m_width),
-                    wxRound(box.m_y + box.m_height));
+    CalcBoundingBox(std::lround(box.m_x), std::lround(box.m_y));
+    CalcBoundingBox(std::lround(box.m_x + box.m_width),
+                    std::lround(box.m_y + box.m_height));
 }
 
 void wxGCDCImpl::DoDrawEllipticArc( wxCoord x, wxCoord y, wxCoord w, wxCoord h,
@@ -759,9 +759,9 @@ void wxGCDCImpl::DoDrawEllipticArc( wxCoord x, wxCoord y, wxCoord w, wxCoord h,
     box.m_x += dx;
     box.m_y += dy;
 
-    CalcBoundingBox(wxRound(box.m_x), wxRound(box.m_y));
-    CalcBoundingBox(wxRound(box.m_x + box.m_width),
-                    wxRound(box.m_y + box.m_height));
+    CalcBoundingBox(std::lround(box.m_x), std::lround(box.m_y));
+    CalcBoundingBox(std::lround(box.m_x + box.m_width),
+                    std::lround(box.m_y + box.m_height));
 
     m_graphicContext->PopState();
 }
@@ -865,9 +865,9 @@ void wxGCDCImpl::DoDrawSpline(const wxPointList *points)
     m_graphicContext->StrokePath( path );
 
     const wxRect2DDouble box = path.GetBox();
-    CalcBoundingBox(wxRound(box.m_x), wxRound(box.m_y));
-    CalcBoundingBox(wxRound(box.m_x + box.m_width),
-                    wxRound(box.m_y + box.m_height));
+    CalcBoundingBox(std::lround(box.m_x), std::lround(box.m_y));
+    CalcBoundingBox(std::lround(box.m_x + box.m_width),
+                    std::lround(box.m_y + box.m_height));
 }
 #endif // wxUSE_SPLINES
 
@@ -946,9 +946,9 @@ void wxGCDCImpl::DoDrawPolyPolygon(int n,
     m_graphicContext->DrawPath( path , fillStyle);
 
     wxRect2DDouble box = path.GetBox();
-    CalcBoundingBox(wxRound(box.m_x), wxRound(box.m_y));
-    CalcBoundingBox(wxRound(box.m_x + box.m_width),
-                    wxRound(box.m_y + box.m_height));
+    CalcBoundingBox(std::lround(box.m_x), std::lround(box.m_y));
+    CalcBoundingBox(std::lround(box.m_x + box.m_width),
+                    std::lround(box.m_y + box.m_height));
 }
 
 void wxGCDCImpl::DoDrawRectangle(wxCoord x, wxCoord y, wxCoord w, wxCoord h)
@@ -1166,9 +1166,9 @@ void wxGCDCImpl::DoDrawRotatedText(std::string_view text, wxPoint pt,
         // Calculate origin for each line to avoid accumulation of
         // rounding errors.
         if ( m_backgroundMode == wxBrushStyle::Transparent )
-            m_graphicContext->wxDrawText( line, pt.x + wxRound(lineNum*dx), pt.y + wxRound(lineNum*dy), wxDegToRad(angle ));
+            m_graphicContext->wxDrawText( line, pt.x + std::lround(lineNum*dx), pt.y + std::lround(lineNum*dy), wxDegToRad(angle ));
         else
-            m_graphicContext->wxDrawText( line, pt.x + wxRound(lineNum*dx), pt.y + wxRound(lineNum*dy), wxDegToRad(angle ), m_graphicContext->CreateBrush(m_textBackgroundColour) );
+            m_graphicContext->wxDrawText( line, pt.x + std::lround(lineNum*dx), pt.y + std::lround(lineNum*dy), wxDegToRad(angle ), m_graphicContext->CreateBrush(m_textBackgroundColour) );
 
         ++lineNum;
    }
@@ -1257,16 +1257,16 @@ wxSize wxGCDCImpl::DoGetTextExtent( std::string_view str,
                       );
 
     if ( descent )
-        *descent = (wxCoord)wxRound(d);
+        *descent = (wxCoord)std::lround(d);
     if ( externalLeading )
-        *externalLeading = (wxCoord)wxRound(e);
+        *externalLeading = (wxCoord)std::lround(e);
 
     if ( theFont )
     {
         m_graphicContext->SetFont( m_font, m_textForegroundColour );
     }
 
-    return { wxRound(width), wxRound(height) };
+    return { std::lround(width), std::lround(height) };
 }
 
 std::vector<int> wxGCDCImpl::DoGetPartialTextExtents(std::string_view text) const
@@ -1277,7 +1277,7 @@ std::vector<int> wxGCDCImpl::DoGetPartialTextExtents(std::string_view text) cons
     std::vector<double> widthsD = m_graphicContext->GetPartialTextExtents(text);
 
     std::vector<int> widths(widthsD.size());
-    std::transform(widthsD.begin(), widthsD.end(), widths.begin(), [](auto width){ return wxRound(width); });
+    std::transform(widthsD.begin(), widthsD.end(), widths.begin(), [](auto width){ return std::lround(width); });
 
 
     return widths;
@@ -1322,7 +1322,7 @@ wxSize wxGCDCImpl::DoGetSize() const
     //wxCHECK_RET( IsOk(), wxT("wxGCDC(cg)::DoGetSize - invalid DC") );
     const wxRealPoint sz = m_graphicContext->GetSize();
 
-    return {wxRound(sz.x), wxRound(sz.y)};
+    return {std::lround(sz.x), std::lround(sz.y)};
 }
 
 void wxGCDCImpl::DoGradientFillLinear(const wxRect& rect,

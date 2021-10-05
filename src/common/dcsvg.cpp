@@ -578,15 +578,15 @@ wxSVGFileDCImpl::~wxSVGFileDCImpl()
 void wxSVGFileDCImpl::DoGetSizeMM(int* width, int* height) const
 {
     if (width)
-        *width = wxRound( (double)m_width / GetMMToPXx() );
+        *width = std::lround( (double)m_width / GetMMToPXx() );
 
     if (height)
-        *height = wxRound( (double)m_height / GetMMToPXy() );
+        *height = std::lround( (double)m_height / GetMMToPXy() );
 }
 
 wxSize wxSVGFileDCImpl::GetPPI() const
 {
-    return {wxRound(m_dpi), wxRound(m_dpi)};
+    return {std::lround(m_dpi), std::lround(m_dpi)};
 }
 
 void wxSVGFileDCImpl::Clear()

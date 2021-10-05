@@ -403,7 +403,7 @@ double wxNativeFontInfo::GetPointSizeAtPPI(int lfHeight, int ppi)
 /* static */
 int wxNativeFontInfo::GetLogFontHeightAtPPI(double size, int ppi)
 {
-    return -wxRound(size * ppi / 72.0);
+    return -(std::lround(size * ppi / 72.0));
 }
 
 void wxNativeFontInfo::Init()

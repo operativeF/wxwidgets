@@ -35,24 +35,6 @@ constexpr double mm2pt = METRIC_CONVERSION_CONSTANT * 72;
 
 constexpr double pt2mm = 1 / mm2pt;
 
-inline int wxRound(double x)
-{
-    wxASSERT_MSG(x > double(INT_MIN) - 0.5 && x < double(INT_MAX) + 0.5,
-        "argument out of supported range");
-
-    return int(std::lround(x));
-}
-
-inline int wxRound(float x)
-{
-    wxASSERT_MSG(x > float(INT_MIN) && x < float(INT_MAX),
-        "argument out of supported range");
-
-    return int(std::lround(x));
-}
-
-inline int wxRound(long double x) { return wxRound(double(x)); }
-
 // Convert between degrees and radians.
 static constexpr double wxDegToRad(double deg) { return (deg * std::numbers::pi) / 180.0; }
 static constexpr double wxRadToDeg(double rad) { return (rad * 180.0) / std::numbers::pi; }
@@ -60,7 +42,7 @@ static constexpr double wxRadToDeg(double rad) { return (rad * 180.0) / std::num
 #if defined(__WINDOWS__)
     #define wxMulDivInt32( a , b , c ) ::MulDiv( a , b , c )
 #else
-    #define wxMulDivInt32( a , b , c ) (wxRound((a)*(((double)b)/((double)c))))
+    #define wxMulDivInt32( a , b , c ) (std::lround((a)*(((double)b)/((double)c))))
 #endif
 
 #endif /* _WX_MATH_H_ */

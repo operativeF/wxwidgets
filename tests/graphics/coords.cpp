@@ -326,14 +326,14 @@ static void UserScaleChanged(wxDC* dc)
     wxPoint posLog;
     posLog.x = dc->DeviceToLogicalX(s_posDev.x);
     posLog.y = dc->DeviceToLogicalY(s_posDev.y);
-    CHECK(posLog.x == wxRound(s_posDev.x / sx));
-    CHECK(posLog.y == wxRound(s_posDev.y / sy));
+    CHECK(posLog.x == std::lround(s_posDev.x / sx));
+    CHECK(posLog.y == std::lround(s_posDev.y / sy));
 
     wxSize dimLog;
     dimLog.x = dc->DeviceToLogicalXRel(s_dimDev.x);
     dimLog.y = dc->DeviceToLogicalYRel(s_dimDev.y);
-    CHECK(dimLog.x == wxRound(s_dimDev.x / sx));
-    CHECK(dimLog.y == wxRound(s_dimDev.y / sy));
+    CHECK(dimLog.x == std::lround(s_dimDev.x / sx));
+    CHECK(dimLog.y == std::lround(s_dimDev.y / sy));
 
     // And next back from logical to device coordinates
     wxPoint posDev;
@@ -359,13 +359,13 @@ static void UserScaleChangedEx(wxDC * dc)
     // First convert from device to logical coordinates
     wxPoint posLog;
     posLog = dc->DeviceToLogical(s_posDev);
-    CHECK(posLog.x == wxRound(s_posDev.x / sx));
-    CHECK(posLog.y == wxRound(s_posDev.y / sy));
+    CHECK(posLog.x == std::lround(s_posDev.x / sx));
+    CHECK(posLog.y == std::lround(s_posDev.y / sy));
 
     wxSize dimLog;
     dimLog = dc->DeviceToLogicalRel(s_dimDev);
-    CHECK(dimLog.x == wxRound(s_dimDev.x / sx));
-    CHECK(dimLog.y == wxRound(s_dimDev.y / sy));
+    CHECK(dimLog.x == std::lround(s_dimDev.x / sx));
+    CHECK(dimLog.y == std::lround(s_dimDev.y / sy));
 
     // And next back from logical to device coordinates
     wxPoint posDev;
@@ -390,14 +390,14 @@ static void LogicalScaleChanged(wxDC* dc)
     wxPoint posLog;
     posLog.x = dc->DeviceToLogicalX(s_posDev.x);
     posLog.y = dc->DeviceToLogicalY(s_posDev.y);
-    CHECK(posLog.x == wxRound(s_posDev.x / sx));
-    CHECK(posLog.y == wxRound(s_posDev.y / sy));
+    CHECK(posLog.x == std::lround(s_posDev.x / sx));
+    CHECK(posLog.y == std::lround(s_posDev.y / sy));
 
     wxSize dimLog;
     dimLog.x = dc->DeviceToLogicalXRel(s_dimDev.x);
     dimLog.y = dc->DeviceToLogicalYRel(s_dimDev.y);
-    CHECK(dimLog.x == wxRound(s_dimDev.x / sx));
-    CHECK(dimLog.y == wxRound(s_dimDev.y / sy));
+    CHECK(dimLog.x == std::lround(s_dimDev.x / sx));
+    CHECK(dimLog.y == std::lround(s_dimDev.y / sy));
 
     // And next back from logical to device coordinates
     wxPoint posDev;
@@ -423,13 +423,13 @@ static void LogicalScaleChangedEx(wxDC * dc)
     // First convert from device to logical coordinates
     wxPoint posLog;
     posLog = dc->DeviceToLogical(s_posDev);
-    CHECK(posLog.x == wxRound(s_posDev.x / sx));
-    CHECK(posLog.y == wxRound(s_posDev.y / sy));
+    CHECK(posLog.x == std::lround(s_posDev.x / sx));
+    CHECK(posLog.y == std::lround(s_posDev.y / sy));
 
     wxSize dimLog;
     dimLog = dc->DeviceToLogicalRel(s_dimDev);
-    CHECK(dimLog.x == wxRound(s_dimDev.x / sx));
-    CHECK(dimLog.y == wxRound(s_dimDev.y / sy));
+    CHECK(dimLog.x == std::lround(s_dimDev.x / sx));
+    CHECK(dimLog.y == std::lround(s_dimDev.y / sy));
 
     // And next back from logical to device coordinates
     wxPoint posDev;
@@ -529,8 +529,8 @@ static void TransformedWithMatrix(wxDC* dc)
         wxPoint posLog;
         posLog.x = dc->DeviceToLogicalX(s_posDev.x);
         posLog.y = dc->DeviceToLogicalY(s_posDev.y);
-        CHECK_FALSE(posLog.x == wxRound(posLogRef.x));
-        CHECK_FALSE(posLog.y == wxRound(posLogRef.y));
+        CHECK_FALSE(posLog.x == std::lround(posLogRef.x));
+        CHECK_FALSE(posLog.y == std::lround(posLogRef.y));
         CHECK(posLog.x == s_posDev.x);
         CHECK(posLog.y == s_posDev.y);
 
@@ -538,8 +538,8 @@ static void TransformedWithMatrix(wxDC* dc)
         wxSize dimLog;
         dimLog.x = dc->DeviceToLogicalXRel(s_dimDev.x);
         dimLog.y = dc->DeviceToLogicalYRel(s_dimDev.y);
-        CHECK_FALSE(dimLog.x == wxRound(dimLogRef.x));
-        CHECK_FALSE(dimLog.y == wxRound(dimLogRef.y));
+        CHECK_FALSE(dimLog.x == std::lround(dimLogRef.x));
+        CHECK_FALSE(dimLog.y == std::lround(dimLogRef.y));
         CHECK(dimLog.x == s_dimDev.x);
         CHECK(dimLog.y == s_dimDev.y);
 
@@ -576,14 +576,14 @@ static void TransformedWithMatrixEx(wxDC * dc)
         wxPoint2DDouble posLogRef = m.TransformPoint(wxPoint2DDouble(s_posDev.x, s_posDev.y));
         wxPoint posLog;
         posLog = dc->DeviceToLogical(s_posDev);
-        CHECK(posLog.x == wxRound(posLogRef.x));
-        CHECK(posLog.y == wxRound(posLogRef.y));
+        CHECK(posLog.x == std::lround(posLogRef.x));
+        CHECK(posLog.y == std::lround(posLogRef.y));
 
         wxPoint2DDouble dimLogRef = m.TransformDistance(wxPoint2DDouble(s_dimDev.x, s_dimDev.y));
         wxSize dimLog;
         dimLog = dc->DeviceToLogicalRel(s_dimDev);
-        CHECK(dimLog.x == wxRound(dimLogRef.x));
-        CHECK(dimLog.y == wxRound(dimLogRef.y));
+        CHECK(dimLog.x == std::lround(dimLogRef.x));
+        CHECK(dimLog.y == std::lround(dimLogRef.y));
 
         // And next back from logical to device coordinates
         wxPoint posDev;
@@ -629,15 +629,15 @@ static void TransformedWithMatrixAndStd(wxDC* dc)
         wxPoint posLog;
         posLog.x = dc->DeviceToLogicalX(s_posDev.x);
         posLog.y = dc->DeviceToLogicalY(s_posDev.y);
-        CHECK_FALSE(posLog.x == wxRound(posLogRef.x));
-        CHECK_FALSE(posLog.y == wxRound(posLogRef.y));
+        CHECK_FALSE(posLog.x == std::lround(posLogRef.x));
+        CHECK_FALSE(posLog.y == std::lround(posLogRef.y));
 
         wxPoint2DDouble dimLogRef = m1.TransformDistance(wxPoint2DDouble(s_dimDev.x, s_dimDev.y));
         wxSize dimLog;
         dimLog.x = dc->DeviceToLogicalXRel(s_dimDev.x);
         dimLog.y = dc->DeviceToLogicalYRel(s_dimDev.y);
-        CHECK_FALSE(dimLog.x == wxRound(dimLogRef.x));
-        CHECK_FALSE(dimLog.y == wxRound(dimLogRef.y));
+        CHECK_FALSE(dimLog.x == std::lround(dimLogRef.x));
+        CHECK_FALSE(dimLog.y == std::lround(dimLogRef.y));
 
         // And next back from logical to device coordinates
         wxPoint posDev;
@@ -682,14 +682,14 @@ static void TransformedWithMatrixAndStdEx(wxDC * dc)
         wxPoint2DDouble posLogRef = m1.TransformPoint(wxPoint2DDouble(s_posDev.x, s_posDev.y));
         wxPoint posLog;
         posLog = dc->DeviceToLogical(s_posDev);
-        CHECK(posLog.x == wxRound(posLogRef.x));
-        CHECK(posLog.y == wxRound(posLogRef.y));
+        CHECK(posLog.x == std::lround(posLogRef.x));
+        CHECK(posLog.y == std::lround(posLogRef.y));
 
         wxPoint2DDouble dimLogRef = m1.TransformDistance(wxPoint2DDouble(s_dimDev.x, s_dimDev.y));
         wxSize dimLog;
         dimLog = dc->DeviceToLogicalRel(s_dimDev);
-        CHECK(dimLog.x == wxRound(dimLogRef.x));
-        CHECK(dimLog.y == wxRound(dimLogRef.y));
+        CHECK(dimLog.x == std::lround(dimLogRef.x));
+        CHECK(dimLog.y == std::lround(dimLogRef.y));
 
         // And next back from logical to device coordinates
         wxPoint posDev;
@@ -725,8 +725,8 @@ static void RotatedWithMatrix(wxDC* dc)
         wxPoint posLog;
         posLog.x = dc->DeviceToLogicalX(s_posDev.x);
         posLog.y = dc->DeviceToLogicalY(s_posDev.y);
-        CHECK_FALSE(posLog.x == wxRound(posLogRef.x));
-        CHECK_FALSE(posLog.y == wxRound(posLogRef.y));
+        CHECK_FALSE(posLog.x == std::lround(posLogRef.x));
+        CHECK_FALSE(posLog.y == std::lround(posLogRef.y));
         CHECK(posLog.x == s_posDev.x);
         CHECK(posLog.y == s_posDev.y);
 
@@ -734,8 +734,8 @@ static void RotatedWithMatrix(wxDC* dc)
         wxSize dimLog;
         dimLog.x = dc->DeviceToLogicalXRel(s_dimDev.x);
         dimLog.y = dc->DeviceToLogicalYRel(s_dimDev.y);
-        CHECK_FALSE(dimLog.x == wxRound(dimLogRef.x));
-        CHECK_FALSE(dimLog.y == wxRound(dimLogRef.y));
+        CHECK_FALSE(dimLog.x == std::lround(dimLogRef.x));
+        CHECK_FALSE(dimLog.y == std::lround(dimLogRef.y));
         CHECK(dimLog.x == s_dimDev.x);
         CHECK(dimLog.y == s_dimDev.y);
 
@@ -772,14 +772,14 @@ static void RotatedWithMatrixEx(wxDC * dc)
         wxPoint2DDouble posLogRef = m.TransformPoint(wxPoint2DDouble(s_posDev.x, s_posDev.y));
         wxPoint posLog;
         posLog = dc->DeviceToLogical(s_posDev);
-        CHECK(posLog.x == wxRound(posLogRef.x));
-        CHECK(posLog.y == wxRound(posLogRef.y));
+        CHECK(posLog.x == std::lround(posLogRef.x));
+        CHECK(posLog.y == std::lround(posLogRef.y));
 
         wxPoint2DDouble dimLogRef = m.TransformDistance(wxPoint2DDouble(s_dimDev.x, s_dimDev.y));
         wxSize dimLog;
         dimLog = dc->DeviceToLogicalRel(s_dimDev);
-        CHECK(dimLog.x == wxRound(dimLogRef.x));
-        CHECK(dimLog.y == wxRound(dimLogRef.y));
+        CHECK(dimLog.x == std::lround(dimLogRef.x));
+        CHECK(dimLog.y == std::lround(dimLogRef.y));
 
         // And next back from logical to device coordinates
         wxPoint posDev;

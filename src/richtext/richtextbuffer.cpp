@@ -692,9 +692,9 @@ bool wxRichTextObject::DrawBoxAttributes(wxDC& dc, wxRichTextBuffer* buffer, con
             // Let's pretend our background is always white. Calculate a colour value
             // from this and the opacity.
             double p = attr.GetTextBoxAttr().GetShadow().GetOpacity().GetValue() / 100.0;
-            shadowColour.Set(wxRound((1.0 - p)*255 + p*shadowColour.Red()),
-                             wxRound((1.0 - p)*255 + p*shadowColour.Green()),
-                             wxRound((1.0 - p)*255 + p*shadowColour.Blue()));
+            shadowColour.Set(std::lround((1.0 - p)*255 + p*shadowColour.Red()),
+                             std::lround((1.0 - p)*255 + p*shadowColour.Green()),
+                             std::lround((1.0 - p)*255 + p*shadowColour.Blue()));
         }
         wxRect shadowRect = borderRect;
         if (attr.GetTextBoxAttr().GetShadow().GetOffsetX().IsValid())

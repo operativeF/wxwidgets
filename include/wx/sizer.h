@@ -147,7 +147,7 @@ public:
     // default border size used by Border() below
     static int GetDefaultBorder()
     {
-        return wxRound(GetDefaultBorderFractional());
+        return std::lround(GetDefaultBorderFractional());
     }
 
     static float GetDefaultBorderFractional()
@@ -190,7 +190,7 @@ public:
     wxSizerFlags& Border(unsigned int direction = wxALL)
     {
 #if wxUSE_BORDER_BY_DEFAULT
-        return Border(direction, wxRound(GetDefaultBorderFractional()));
+        return Border(direction, std::lround(GetDefaultBorderFractional()));
 #else
         // no borders by default on limited size screen
         wxUnusedVar(direction);
@@ -202,7 +202,7 @@ public:
     wxSizerFlags& DoubleBorder(unsigned int direction = wxALL)
     {
 #if wxUSE_BORDER_BY_DEFAULT
-        return Border(direction, wxRound(2 * GetDefaultBorderFractional()));
+        return Border(direction, std::lround(2 * GetDefaultBorderFractional()));
 #else
         wxUnusedVar(direction);
 
@@ -213,7 +213,7 @@ public:
     wxSizerFlags& TripleBorder(unsigned int direction = wxALL)
     {
 #if wxUSE_BORDER_BY_DEFAULT
-        return Border(direction, wxRound(3 * GetDefaultBorderFractional()));
+        return Border(direction, std::lround(3 * GetDefaultBorderFractional()));
 #else
         wxUnusedVar(direction);
 
@@ -224,7 +224,7 @@ public:
     wxSizerFlags& HorzBorder()
     {
 #if wxUSE_BORDER_BY_DEFAULT
-        return Border(wxLEFT | wxRIGHT, wxRound(GetDefaultBorderFractional()));
+        return Border(wxLEFT | wxRIGHT, std::lround(GetDefaultBorderFractional()));
 #else
         return *this;
 #endif
@@ -233,7 +233,7 @@ public:
     wxSizerFlags& DoubleHorzBorder()
     {
 #if wxUSE_BORDER_BY_DEFAULT
-        return Border(wxLEFT | wxRIGHT, wxRound(2 * GetDefaultBorderFractional()));
+        return Border(wxLEFT | wxRIGHT, std::lround(2 * GetDefaultBorderFractional()));
 #else
         return *this;
 #endif

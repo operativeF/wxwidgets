@@ -3469,8 +3469,8 @@ wxCairoRenderer::CreateSubBitmap(const wxGraphicsBitmap& bitmap,
     int srcWidth = cairo_image_surface_get_width(srcSurface);
     int srcHeight = cairo_image_surface_get_height(srcSurface);
 
-    int dstWidth = wxRound(w);
-    int dstHeight = wxRound(h);
+    int dstWidth = std::lround(w);
+    int dstHeight = std::lround(h);
 
     wxCHECK_MSG( x >= 0.0 && y >= 0.0 && dstWidth > 0 && dstHeight > 0 &&
                  x + dstWidth <= srcWidth && y + dstHeight <= srcHeight,

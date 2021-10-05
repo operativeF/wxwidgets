@@ -13,8 +13,6 @@
 
 #include "wx/defs.h"
 
-#include "wx/math.h"
-
 // just some classes using wxRTTI for wxStaticCast() test
 #include "wx/tarstrm.h"
 #include "wx/zipstrm.h"
@@ -74,14 +72,4 @@ TEST_CASE("Delete")
 static bool IsNull(void *p)
 {
     return p == nullptr;
-}
-
-TEST_CASE("wxRound")
-{
-    CHECK( wxRound(2.3) == 2 );
-    CHECK( wxRound(3.7) == 4 );
-    CHECK( wxRound(-0.5f) == -1 );
-
-    CHECK_THROWS( wxRound(2.0*INT_MAX) );
-    CHECK_THROWS( wxRound(1.1*INT_MIN) );
 }

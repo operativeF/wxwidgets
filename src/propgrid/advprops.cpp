@@ -253,7 +253,7 @@ wxPGWindowList wxPGSpinCtrlEditor::CreateControls( wxPropertyGrid* propgrid, wxP
         int butWidth = butSz.x;
 #else
         double sc = (double)sz.y / butSz.y;
-        int butWidth = std::max(18, wxRound(sc*butSz.x));
+        int butWidth = std::max(18, static_cast<int>(std::lround(sc * butSz.x)));
 #endif
         tcSz.Set(sz.x - butWidth - margin, sz.y);
         wnd2->SetSize(wxRect{pos.x + tcSz.x + margin, pos.y, butWidth, sz.y});

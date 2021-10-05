@@ -468,8 +468,8 @@ void TransformMatrixTestCaseDCBase::CompareToGraphicsContext()
         matrixA1.TransformPoint(&pointA1.m_x, &pointA1.m_y);
         matrixA1.TransformDistance(&pointA2.m_x, &pointA2.m_y);
 
-        dc.DrawLine(wxRound(pointA1.m_x), wxRound(pointA1.m_y),
-            wxRound(pointA1.m_x + pointA2.m_x), wxRound(pointA1.m_x + pointA2.m_y));
+        dc.DrawLine(std::lround(pointA1.m_x), std::lround(pointA1.m_y),
+            std::lround(pointA1.m_x + pointA2.m_x), std::lround(pointA1.m_x + pointA2.m_y));
     }
 
 
@@ -526,8 +526,8 @@ void TransformMatrixTestCaseDCBase::CompareToGraphicsContext()
         matrixG1.TransformPoint(&pointG1.m_x, &pointG1.m_y);
         matrixG1.TransformDistance(&pointG2.m_x, &pointG2.m_y);
 
-        dc.DrawLine(wxRound(pointG1.m_x), wxRound(pointG1.m_y),
-            wxRound(pointG1.m_x + pointG2.m_x), wxRound(pointG1.m_x + pointG2.m_y));
+        dc.DrawLine(std::lround(pointG1.m_x), std::lround(pointG1.m_y),
+            std::lround(pointG1.m_x + pointG2.m_x), std::lround(pointG1.m_x + pointG2.m_y));
     }
 
 

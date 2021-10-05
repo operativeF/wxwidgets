@@ -20,7 +20,6 @@
 #include "wx/fontenc.h"     // the font encoding constants
 #include "wx/gdiobj.h"      // the base class
 #include "wx/gdicmn.h"      // for wxGDIObjListBase
-#include "wx/math.h"        // for wxRound()
 
 // ----------------------------------------------------------------------------
 // forward declarations
@@ -229,7 +228,7 @@ public:
 
     bool IsUsingSizeInPixels() const { return m_pixelSize != wxDefaultSize; }
     double GetFractionalPointSize() const { return m_pointSize; }
-    int GetPointSize() const { return wxRound(m_pointSize); }
+    int GetPointSize() const { return std::lround(m_pointSize); }
     wxSize GetPixelSize() const { return m_pixelSize; }
 
     // If face name is not empty, it has priority, otherwise use family.

@@ -149,7 +149,7 @@ public:
     [[maybe_unused]] virtual bool Create(wxSize sz, const wxDC& dc);
     [[maybe_unused]] virtual bool Create(const void* data, wxBitmapType type, wxSize sz, int depth = 1);
     virtual bool CreateScaled(int w, int h, int d, double logicalScale)
-        { return Create(wxSize{wxRound(w*logicalScale), wxRound(h*logicalScale)}, d); }
+        { return Create(wxSize{std::lround(w*logicalScale), std::lround(h*logicalScale)}, d); }
 
     virtual bool LoadFile(const std::string& name, wxBitmapType type = wxBITMAP_DEFAULT_TYPE);
     virtual bool SaveFile(const std::string& name, wxBitmapType type, const wxPalette *cmap = nullptr) const;
@@ -180,7 +180,7 @@ public:
     virtual double GetScaledWidth() const { return GetWidth() / GetScaleFactor(); }
     virtual double GetScaledHeight() const { return GetHeight() / GetScaleFactor(); }
     virtual wxSize GetScaledSize() const
-        { return wxSize(wxRound(GetScaledWidth()), wxRound(GetScaledHeight())); }
+        { return wxSize(std::lround(GetScaledWidth()), std::lround(GetScaledHeight())); }
 
     // implementation only from now on
     // -------------------------------

@@ -235,7 +235,7 @@ int wxFontBase::GetNumericWeightOf(wxFontWeight weight_)
 
 int wxFontBase::GetPointSize() const
 {
-    return wxRound(GetFractionalPointSize());
+    return std::lround(GetFractionalPointSize());
 }
 
 
@@ -602,7 +602,7 @@ int wxFontBase::AdjustToSymbolicSize(wxFontSymbolicSize size, int base)
         "Wrong font size / factors size."
     );
 
-    return wxRound(factors[size - wxFONTSIZE_XX_SMALL]*base);
+    return std::lround(factors[size - wxFONTSIZE_XX_SMALL]*base);
 }
 
 wxFont& wxFont::MakeBold()
@@ -709,7 +709,7 @@ void wxNativeFontInfo::SetFaceName(const std::vector<wxString>& facenames)
 
 int wxNativeFontInfo::GetPointSize() const
 {
-    return wxRound(GetFractionalPointSize());
+    return std::lround(GetFractionalPointSize());
 }
 
 void wxNativeFontInfo::SetPointSize(int pointsize)

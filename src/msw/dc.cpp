@@ -1569,7 +1569,7 @@ void wxMSWDCImpl::DoDrawRotatedText(std::string_view text,
         // Calculate origin for each line to avoid accumulation of
         // rounding errors.
         DrawAnyText(line,
-                    wxPoint{pt.x + wxRound(lineNum*dx), pt.y + wxRound(lineNum*dy)});
+                    wxPoint{pt.x + std::lround(lineNum*dx), pt.y + std::lround(lineNum*dy)});
         ++lineNum;
     }
 
@@ -1943,8 +1943,8 @@ void ApplyEffectiveScale(double scale, int sign, int *device, int *logical)
         scale = MIN_LOGICAL_SCALE;
     }
 
-    *device = wxRound(physExtent);
-    *logical = sign*wxRound(VIEWPORT_EXTENT/scale);
+    *device = std::lround(physExtent);
+    *logical = sign*std::lround(VIEWPORT_EXTENT/scale);
 }
 
 } // anonymous namespace

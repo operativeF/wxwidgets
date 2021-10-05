@@ -459,7 +459,7 @@ void wxPostScriptDCImpl::DoDrawArc (wxCoord x1, wxCoord y1, wxCoord x2, wxCoord 
     while (alpha1 > 360)  alpha1 -= 360; // 0 and 360 degree
     while (alpha2 > 360)  alpha2 -= 360;
 
-    int i_radius = wxRound( radius );
+    int i_radius = std::lround( radius );
 
     // Draw the arc (open)
     wxString buffer;
@@ -1405,8 +1405,8 @@ void wxPostScriptDCImpl::DoDrawRotatedText( const wxString& text, const wxPoint&
     GetOwner()->GetTextExtent(text, nullptr, nullptr, &text_descent);
     int size = m_font.GetPointSize();
     double rad = wxDegToRad(angle);
-    wxCoord bx = wxRound(pt.x + (size - text_descent) * std::sin(rad));
-    wxCoord by = wxRound(pt.y + (size - text_descent) * std::cos(rad));
+    wxCoord bx = std::lround(pt.x + (size - text_descent) * std::sin(rad));
+    wxCoord by = std::lround(pt.y + (size - text_descent) * std::cos(rad));
 
     wxString buffer;
     buffer.Printf( "%f %f moveto\n", XLOG2DEV(bx), YLOG2DEV(by));
@@ -1470,8 +1470,8 @@ void wxPostScriptDCImpl::DoDrawSpline( const wxPointList *points )
     buffer.Printf( "newpath\n"
                    "%f %f moveto\n"
                    "%f %f lineto\n",
-            XLOG2DEV(wxRound(x1)), YLOG2DEV(wxRound(y1)),
-            XLOG2DEV(wxRound(x3)), YLOG2DEV(wxRound(y3)) );
+            XLOG2DEV(std::lround(x1)), YLOG2DEV(std::lround(y1)),
+            XLOG2DEV(std::lround(x3)), YLOG2DEV(std::lround(y3)) );
     buffer.Replace( ",", "." );
     PsPrint( buffer );
 
@@ -1493,9 +1493,9 @@ void wxPostScriptDCImpl::DoDrawSpline( const wxPointList *points )
         y3 = (double)(y2 + d) / 2;
 
         buffer.Printf( "%f %f %f %f %f %f DrawSplineSection\n",
-            XLOG2DEV(wxRound(x1)), YLOG2DEV(wxRound(y1)),
-            XLOG2DEV(wxRound(x2)), YLOG2DEV(wxRound(y2)),
-            XLOG2DEV(wxRound(x3)), YLOG2DEV(wxRound(y3)) );
+            XLOG2DEV(std::lround(x1)), YLOG2DEV(std::lround(y1)),
+            XLOG2DEV(std::lround(x2)), YLOG2DEV(std::lround(y2)),
+            XLOG2DEV(std::lround(x3)), YLOG2DEV(std::lround(y3)) );
         buffer.Replace( ",", "." );
         PsPrint( buffer );
 
@@ -1510,7 +1510,7 @@ void wxPostScriptDCImpl::DoDrawSpline( const wxPointList *points )
        next-to-last and last point respectively, in the point list
      */
 
-    buffer.Printf( "%f %f lineto\nstroke\n", XLOG2DEV(wxRound(c)), YLOG2DEV(wxRound(d)) );
+    buffer.Printf( "%f %f lineto\nstroke\n", XLOG2DEV(std::lround(c)), YLOG2DEV(std::lround(d)) );
     buffer.Replace( ",", "." );
     PsPrint( buffer );
 }
@@ -1581,7 +1581,7 @@ wxSize wxPostScriptDCImpl::DoGetSize() const
         std::swap(w, h);
     }
 
-    return { wxRound(w * PS2DEV), wxRound(h * PS2DEV) };
+    return { std::lround(w * PS2DEV), std::lround(h * PS2DEV) };
 }
 
 void wxPostScriptDCImpl::DoGetSizeMM(int *width, int *height) const

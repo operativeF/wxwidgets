@@ -1792,8 +1792,8 @@ bool wxPropertyGrid::IsSmallScreen()
 wxBitmap wxPropertyGrid::RescaleBitmap(const wxBitmap& srcBmp,
                                        double scaleX, double scaleY)
 {
-    int w = wxRound(srcBmp.GetWidth()*scaleX);
-    int h = wxRound(srcBmp.GetHeight()*scaleY);
+    int w = std::lround(srcBmp.GetWidth()*scaleX);
+    int h = std::lround(srcBmp.GetHeight()*scaleY);
 
 #if wxUSE_IMAGE
     // Here we use high-quality wxImage scaling functions available

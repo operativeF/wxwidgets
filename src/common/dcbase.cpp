@@ -392,42 +392,42 @@ bool wxDCImpl::DoGetClippingRect(wxRect& rect) const
 
 wxCoord wxDCImpl::DeviceToLogicalX(wxCoord x) const
 {
-    return wxRound( (double)((x - m_deviceOrigin.x - m_deviceLocalOrigin.x) * m_signX) / m_scale.x ) + m_logicalOrigin.x ;
+    return std::lround( (double)((x - m_deviceOrigin.x - m_deviceLocalOrigin.x) * m_signX) / m_scale.x ) + m_logicalOrigin.x ;
 }
 
 wxCoord wxDCImpl::DeviceToLogicalY(wxCoord y) const
 {
-    return wxRound( (double)((y - m_deviceOrigin.y - m_deviceLocalOrigin.y) * m_signY) / m_scale.y ) + m_logicalOrigin.y ;
+    return std::lround( (double)((y - m_deviceOrigin.y - m_deviceLocalOrigin.y) * m_signY) / m_scale.y ) + m_logicalOrigin.y ;
 }
 
 wxCoord wxDCImpl::DeviceToLogicalXRel(wxCoord x) const
 {
-    return wxRound((double)(x) / m_scale.x);
+    return std::lround((double)(x) / m_scale.x);
 }
 
 wxCoord wxDCImpl::DeviceToLogicalYRel(wxCoord y) const
 {
-    return wxRound((double)(y) / m_scale.y);
+    return std::lround((double)(y) / m_scale.y);
 }
 
 wxCoord wxDCImpl::LogicalToDeviceX(wxCoord x) const
 {
-    return wxRound( (double)((x - m_logicalOrigin.x) * m_signX) * m_scale.x) + m_deviceOrigin.x + m_deviceLocalOrigin.x;
+    return std::lround( (double)((x - m_logicalOrigin.x) * m_signX) * m_scale.x) + m_deviceOrigin.x + m_deviceLocalOrigin.x;
 }
 
 wxCoord wxDCImpl::LogicalToDeviceY(wxCoord y) const
 {
-    return wxRound( (double)((y - m_logicalOrigin.y) * m_signY) * m_scale.y) + m_deviceOrigin.y + m_deviceLocalOrigin.y;
+    return std::lround( (double)((y - m_logicalOrigin.y) * m_signY) * m_scale.y) + m_deviceOrigin.y + m_deviceLocalOrigin.y;
 }
 
 wxCoord wxDCImpl::LogicalToDeviceXRel(wxCoord x) const
 {
-    return wxRound((double)(x) * m_scale.x);
+    return std::lround((double)(x) * m_scale.x);
 }
 
 wxCoord wxDCImpl::LogicalToDeviceYRel(wxCoord y) const
 {
-    return wxRound((double)(y) * m_scale.y);
+    return std::lround((double)(y) * m_scale.y);
 }
 
 wxPoint wxDCImpl::DeviceToLogical(wxCoord x, wxCoord y) const
@@ -817,7 +817,7 @@ int wx_spline_pop(double *x1, double *y1, double *x2, double *y2,
 
 static bool wx_spline_add_point(double x, double y)
 {
-    wxPoint *point = new wxPoint( wxRound(x), wxRound(y) );
+    wxPoint *point = new wxPoint( std::lround(x), std::lround(y) );
     wx_spline_point_list.Append(point );
     return true;
 }

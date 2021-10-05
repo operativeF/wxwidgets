@@ -821,10 +821,10 @@ void ClippingBoxTestCaseDCBase::InitialStateWithRotatedDC()
         x2 = std::max(x2, x);
         y2 = std::max(y2, y);
 
-        clipX = wxRound(x1);
-        clipY = wxRound(y1);
-        clipW = wxRound(x2)-wxRound(x1);
-        clipH = wxRound(y2)-wxRound(y1);
+        clipX = std::lround(x1);
+        clipY = std::lround(y1);
+        clipW = std::lround(x2)-std::lround(x1);
+        clipH = std::lround(y2)-std::lround(y1);
     }
     else
     {
@@ -1483,10 +1483,10 @@ void ClippingBoxTestCaseGCDC::InitialStateWithRotatedGCForDC()
     x2 = std::max(x2, x);
     y2 = std::max(y2, y);
 
-    clipX = wxRound(x1);
-    clipY = wxRound(y1);
-    clipW = wxRound(x2)-wxRound(x1);
-    clipH = wxRound(y2)-wxRound(y1);
+    clipX = std::lround(x1);
+    clipY = std::lround(y1);
+    clipW = std::lround(x2)-std::lround(x1);
+    clipH = std::lround(y2)-std::lround(y1);
 
     CheckClipBox(clipX, clipY, clipW, clipH,
                  0, 0, s_dcSize.GetWidth(), s_dcSize.GetHeight());
@@ -1746,7 +1746,7 @@ void ClippingBoxTestCaseGCBase::CheckClipPos(int x, int y, int width, int height
     double clipX, clipY, clipW, clipH;
     m_gc->GetClipBox(&clipX, &clipY, &clipW, &clipH);
 
-    CheckBoxPosition(wxRound(clipX), wxRound(clipY), wxRound(clipW), wxRound(clipH),
+    CheckBoxPosition(std::lround(clipX), std::lround(clipY), std::lround(clipW), std::lround(clipH),
                      x, y, width, height, posTolerance);
 }
 
@@ -1756,7 +1756,7 @@ void ClippingBoxTestCaseGCBase::CheckClipBox(int x, int y, int width, int height
     double clipX, clipY, clipW, clipH;
     m_gc->GetClipBox(&clipX, &clipY, &clipW, &clipH);
 
-    CheckBoxPosition(wxRound(clipX), wxRound(clipY), wxRound(clipW), wxRound(clipH),
+    CheckBoxPosition(std::lround(clipX), std::lround(clipY), std::lround(clipW), std::lround(clipH),
                      x, y, width, height);
 
     // We will examine pixels directly in the underlying bitmap
@@ -1775,7 +1775,7 @@ void ClippingBoxTestCaseGCBase::CheckClipBox(int x, int y, int width, int height
     // We check whether diagonal corners
     // of the rectangular clipping box are actually
     // drawn at the edge of the clipping region.
-    CheckClipRect(wxRound(xdev), wxRound(ydev), wxRound(wdev), wxRound(hdev));
+    CheckClipRect(std::lround(xdev), std::lround(ydev), std::lround(wdev), std::lround(hdev));
 #endif // wxUSE_IMAGE
 }
 
@@ -1828,7 +1828,7 @@ void ClippingBoxTestCaseGCBase::InitialStateWithTransformedGC()
     double w = s_dcSize.GetWidth();
     double h = s_dcSize.GetHeight();
     m.TransformDistance(&w, &h);
-    CheckClipBox(wxRound(x), wxRound(y), wxRound(w), wxRound(h));
+    CheckClipBox(std::lround(x), std::lround(y), std::lround(w), std::lround(h));
 }
 
 void ClippingBoxTestCaseGCBase::OneRegion()
@@ -1922,7 +1922,7 @@ void ClippingBoxTestCaseGCBase::OneRegionWithTransformedGC()
     double w = s_dcSize.GetWidth();
     double h = s_dcSize.GetHeight();
     m.TransformDistance(&w, &h);
-    wxRect r2(wxRound(x), wxRound(y), wxRound(w), wxRound(h));
+    wxRect r2(std::lround(x), std::lround(y), std::lround(w), std::lround(h));
     wxRect r = r1.Intersect(r2);
     wxASSERT( !r.IsEmpty() );
     CheckClipBox(r.GetLeft(), r.GetTop(),

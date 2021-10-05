@@ -141,7 +141,7 @@ bool wxColourBase::FromString(const wxString& str)
             if ( !alphaStr.ToCDouble(&a) )
                 return false;
 
-            alpha = wxRound(a * 255);
+            alpha = std::lround(a * 255);
         }
         else // no 'a' following "rgb"
         {
@@ -307,7 +307,7 @@ void wxColourBase::MakeGrey(unsigned char* r, unsigned char* g, unsigned char* b
                             double weight_r, double weight_g, double weight_b)
 {
     double luma = (*r) * weight_r + (*g) * weight_g + (*b) * weight_b;
-    *r = *g = *b = (wxByte)wxRound(luma);
+    *r = *g = *b = (wxByte)std::lround(luma);
 }
 
 // static
