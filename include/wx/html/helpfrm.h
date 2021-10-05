@@ -59,13 +59,13 @@ public:
     wxHtmlHelpFrame(wxHtmlHelpData* data = nullptr) { Init(data); }
     wxHtmlHelpFrame(wxWindow* parent, wxWindowID id,
                     const wxString& title = wxEmptyString,
-                    int style = wxHF_DEFAULT_STYLE, wxHtmlHelpData* data = nullptr
+                    unsigned int style = wxHF_DEFAULT_STYLE, wxHtmlHelpData* data = nullptr
 #if wxUSE_CONFIG
                     , wxConfigBase *config=nullptr, const wxString& rootpath = wxEmptyString
 #endif // wxUSE_CONFIG
                     );
     bool Create(wxWindow* parent, wxWindowID id, const wxString& title = wxEmptyString,
-                int style = wxHF_DEFAULT_STYLE
+                unsigned int style = wxHF_DEFAULT_STYLE
 #if wxUSE_CONFIG
                 , wxConfigBase *config=nullptr, const wxString& rootpath = wxEmptyString
 #endif // wxUSE_CONFIG
@@ -101,7 +101,7 @@ public:
     void AddGrabIfNeeded();
 
     // Override to add custom buttons to the toolbar
-    virtual void AddToolbarButtons(wxToolBar* WXUNUSED(toolBar), int WXUNUSED(style)) {}
+    virtual void AddToolbarButtons(wxToolBar* WXUNUSED(toolBar), unsigned int WXUNUSED(style)) {}
 
     void SetShouldPreventAppExit(bool enable);
 

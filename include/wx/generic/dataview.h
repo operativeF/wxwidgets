@@ -464,7 +464,7 @@ public:
 
     wxAccStatus GetRole(int childId, wxAccSystemRole* role) override;
 
-    wxAccStatus GetState(int childId, long* state) override;
+    wxAccStatus GetState(int childId, unsigned int* state) override;
 
     wxAccStatus GetValue(int childId, std::string* strValue) override;
 

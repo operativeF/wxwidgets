@@ -68,7 +68,7 @@ protected:
         SetSel_NoScroll = 0,    // don't do anything special
         SetSel_Scroll = 1       // default: scroll to make the selection visible
     };
-    virtual void DoSetSelection(long from, long to, int flags = SetSel_Scroll);
+    virtual void DoSetSelection(long from, long to, unsigned int flags = SetSel_Scroll);
 
     // margins functions
     bool DoSetMargins(const wxPoint& pt) override;
@@ -79,7 +79,7 @@ protected:
 #if wxUSE_OLE
     bool DoAutoCompleteStrings(const std::vector<std::string>& choices) override;
 #if wxUSE_DYNLIB_CLASS
-    bool DoAutoCompleteFileNames(int flags) override;
+    bool DoAutoCompleteFileNames(unsigned int flags) override;
 #endif // wxUSE_DYNLIB_CLASS
     bool DoAutoCompleteCustom(wxTextCompleter *completer) override;
 #endif // wxUSE_OLE

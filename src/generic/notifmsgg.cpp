@@ -474,7 +474,7 @@ void wxGenericNotificationMessageImpl::SetParent(wxWindow *WXUNUSED(parent))
 
 }
 
-void wxGenericNotificationMessageImpl::SetFlags(int flags)
+void wxGenericNotificationMessageImpl::SetFlags(unsigned int flags)
 {
     m_window->SetMessageIcon( wxArtProvider::GetMessageBoxIcon(flags) );
 }

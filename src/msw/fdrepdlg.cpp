@@ -48,7 +48,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxFindReplaceDialog, wxDialog);
 class WXDLLEXPORT wxFindReplaceDialogImpl
 {
 public:
-    wxFindReplaceDialogImpl(wxFindReplaceDialog *dialog, int flagsWX);
+    wxFindReplaceDialogImpl(wxFindReplaceDialog *dialog, unsigned int flagsWX);
     ~wxFindReplaceDialogImpl();
 
     wxFindReplaceDialogImpl(const wxFindReplaceDialogImpl&) = delete;
@@ -94,7 +94,7 @@ private:
 // ----------------------------------------------------------------------------
 
 wxFindReplaceDialogImpl::wxFindReplaceDialogImpl(wxFindReplaceDialog *dialog,
-                                                 int flagsWX)
+                                                 unsigned int flagsWX)
 {
     // get the identifier for the find dialog message if we don't have it yet
     if ( !ms_msgFindDialog )
@@ -118,9 +118,9 @@ wxFindReplaceDialogImpl::wxFindReplaceDialogImpl(wxFindReplaceDialog *dialog,
     // translate the flags: first the dialog creation flags
 
     // always set this to be able to set the title
-    int flags = FR_ENABLEHOOK;
+    unsigned int flags = FR_ENABLEHOOK;
 
-    int flagsDialog = dialog->wxGetWindowStyle();
+    unsigned int flagsDialog = dialog->wxGetWindowStyle();
     if ( flagsDialog & wxFR_NOMATCHCASE)
         flags |= FR_NOMATCHCASE;
     if ( flagsDialog & wxFR_NOWHOLEWORD)
@@ -197,6 +197,7 @@ wxFindReplaceDialogImpl::FindMessageHandler(wxWindow * WXUNUSED(win),
     wxEventType evtType;
 
     bool replace = false;
+
     if ( pFR->Flags & FR_DIALOGTERM )
     {
         // we have to notify the dialog that it's being closed by user and
@@ -229,7 +230,8 @@ wxFindReplaceDialogImpl::FindMessageHandler(wxWindow * WXUNUSED(win),
         return false;
     }
 
-    std::uint32_t flags = 0;
+    unsigned int flags{};
+
     if ( pFR->Flags & FR_DOWN )
         flags |= wxFR_DOWN;
     if ( pFR->Flags & FR_WHOLEWORD )
@@ -238,6 +240,7 @@ wxFindReplaceDialogImpl::FindMessageHandler(wxWindow * WXUNUSED(win),
         flags |= wxFR_MATCHCASE;
 
     wxFindDialogEvent event(evtType, dialog->GetId());
+
     event.SetEventObject(dialog);
     event.SetFlags(flags);
     event.SetFindString(boost::nowide::narrow(pFR->lpstrFindWhat));
@@ -282,7 +285,7 @@ wxFindReplaceDialogHookProc(HWND hwnd,
 wxFindReplaceDialog::wxFindReplaceDialog(wxWindow *parent,
                                          wxFindReplaceData *data,
                                          const std::string &title,
-                                         int flags)
+                                         unsigned int flags)
                    : wxFindReplaceDialogBase(parent, data, title, flags)
 {
     (void)Create(parent, data, title, flags);
@@ -318,7 +321,7 @@ wxFindReplaceDialog::~wxFindReplaceDialog()
 bool wxFindReplaceDialog::Create(wxWindow *parent,
                                  wxFindReplaceData *data,
                                  const std::string &title,
-                                 int flags)
+                                 unsigned int flags)
 {
     m_windowStyle = flags;
     m_FindReplaceData = data;

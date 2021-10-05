@@ -189,7 +189,7 @@ public:
     wxFindReplaceDialog(wxWindow* parent,
                         wxFindReplaceData* data,
                         const wxString& title,
-                        int style = 0);
+                        unsigned int style = 0);
 
     /**
         Destructor.
@@ -202,7 +202,7 @@ public:
         The @a parent and @a data parameters must be non-@NULL.
     */
     bool Create(wxWindow* parent, wxFindReplaceData* data,
-                const wxString& title, int style = 0);
+                const wxString& title, unsigned int style = 0);
 
     /**
         Get the wxFindReplaceData object used by this dialog.

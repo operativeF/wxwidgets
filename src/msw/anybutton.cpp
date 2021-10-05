@@ -380,7 +380,7 @@ void wxMSWButton::UpdateMultilineStyle(HWND hwnd, std::string_view label)
 
 wxSize wxMSWButton::GetFittingSize(wxWindow *win,
                                    const wxSize& sizeLabel,
-                                   int flags)
+                                   unsigned int flags)
 {
     wxSize sizeBtn = sizeLabel;
 
@@ -404,7 +404,7 @@ wxSize wxMSWButton::GetFittingSize(wxWindow *win,
     return sizeBtn;
 }
 
-wxSize wxMSWButton::ComputeBestFittingSize(wxControl *btn, int flags)
+wxSize wxMSWButton::ComputeBestFittingSize(wxControl *btn, unsigned int flags)
 {
     wxClientDC dc(btn);
 
@@ -583,7 +583,7 @@ wxSize wxAnyButton::DoGetBestSize() const
         // Account for the text part if we have it.
         if ( ShowsLabel() )
         {
-            int flags = 0;
+            unsigned int flags{};
             if ( HasFlag(wxBU_EXACTFIT) )
                 flags |= wxMSWButton::Size_ExactFit;
             if ( DoGetAuthNeeded() )
@@ -868,7 +868,7 @@ wxAnyButton::State GetButtonState(wxAnyButton *btn, UINT state)
 void DrawButtonText(HDC hdc,
                     RECT *pRect,
                     wxAnyButton *btn,
-                    int flags)
+                    unsigned int flags)
 {
     const std::string text = btn->GetLabel();
 
@@ -1012,7 +1012,7 @@ void DrawButtonText(HDC hdc,
             rc.right = rc.left+w;
             rc.bottom = rc.top+h;
 
-            ::DrawText(hdc, boost::nowide::widen(text).c_str(), text.length(), &rc, flags);
+            ::DrawTextW(hdc, boost::nowide::widen(text).c_str(), text.length(), &rc, flags);
         }
         else // single line label
         {

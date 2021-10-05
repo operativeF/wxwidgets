@@ -38,7 +38,7 @@ wxBEGIN_EVENT_TABLE(wxHtmlHelpDialog, wxDialog)
 wxEND_EVENT_TABLE()
 
 wxHtmlHelpDialog::wxHtmlHelpDialog(wxWindow* parent, wxWindowID id, const wxString& title,
-                                 int style, wxHtmlHelpData* data)
+                                   unsigned int style, wxHtmlHelpData* data)
 {
     Init(data);
     Create(parent, id, title, style);
@@ -54,7 +54,7 @@ void wxHtmlHelpDialog::Init(wxHtmlHelpData* data)
 
 // Create: builds the GUI components.
 bool wxHtmlHelpDialog::Create(wxWindow* parent, wxWindowID id,
-                             const wxString& WXUNUSED(title), int style)
+                             const wxString& WXUNUSED(title), unsigned int style)
 {
     m_HtmlHelpWin = new wxHtmlHelpWindow(m_Data);
 

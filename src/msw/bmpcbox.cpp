@@ -432,7 +432,7 @@ bool wxBitmapComboBox::MSWOnDraw(WXDRAWITEMSTRUCT *item)
     if ( pos == -1 )
         return false;
 
-    int flags = 0;
+    unsigned int flags{};
     if ( lpDrawItem->itemState & ODS_COMBOBOXEDIT )
         flags |= wxODCB_PAINTING_CONTROL;
     if ( lpDrawItem->itemState & ODS_SELECTED )

@@ -191,7 +191,7 @@ wxSizer *wxDialogBase::CreateTextSizer(const std::string& message,
 
 #endif // wxUSE_STATTEXT
 
-wxSizer *wxDialogBase::CreateButtonSizer(long flags)
+wxSizer *wxDialogBase::CreateButtonSizer(unsigned int flags)
 {
 #if wxUSE_BUTTON
 

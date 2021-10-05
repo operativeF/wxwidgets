@@ -117,11 +117,11 @@ protected:
 
     // returns the set of styles for the attached wxTextCtrl
     // from given wxPickerBase's styles
-    virtual long GetTextCtrlStyle(unsigned int style) const
+    virtual unsigned int GetTextCtrlStyle(unsigned int style) const
         { return (style & wxWINDOW_STYLE_MASK); }
 
     // returns the set of styles for the m_picker
-    virtual long GetPickerStyle(unsigned int style) const
+    virtual unsigned int GetPickerStyle(unsigned int style) const
         { return (style & wxWINDOW_STYLE_MASK); }
 
 

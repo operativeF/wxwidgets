@@ -234,7 +234,7 @@ bool wxTextAttr::operator== (const wxTextAttr& attr) const
 // Partial equality test. Only returns false if an attribute doesn't match.
 bool wxTextAttr::EqPartial(const wxTextAttr& attr, bool weakTest) const
 {
-    int flags = attr.GetFlags();
+    unsigned int flags = attr.GetFlags();
 
     if (!weakTest &&
         ((!HasTextColour() && attr.HasTextColour()) ||
@@ -794,14 +794,14 @@ bool wxTextAttr::TabsEq(const std::vector<int>& tabs1, const std::vector<int>& t
 // Remove attributes
 bool wxTextAttr::RemoveStyle(wxTextAttr& destStyle, const wxTextAttr& style)
 {
-    int flags = style.GetFlags();
-    const int destFlags = destStyle.GetFlags();
+    unsigned int flags = style.GetFlags();
+    const unsigned int destFlags = destStyle.GetFlags();
 
     // We must treat text effects specially, since we must remove only some.
     if (style.HasTextEffects() && (style.GetTextEffectFlags() != 0))
     {
-        const int newTextEffectFlags = destStyle.GetTextEffectFlags() & ~style.GetTextEffectFlags();
-        const int newTextEffects = destStyle.GetTextEffects() & ~style.GetTextEffectFlags();
+        const unsigned int newTextEffectFlags = destStyle.GetTextEffectFlags() & ~style.GetTextEffectFlags();
+        const unsigned int newTextEffects = destStyle.GetTextEffects() & ~style.GetTextEffectFlags();
         destStyle.SetTextEffects(newTextEffects);
         destStyle.SetTextEffectFlags(newTextEffectFlags);
 

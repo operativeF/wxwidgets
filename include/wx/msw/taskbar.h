@@ -59,7 +59,7 @@ public:
     bool ShowBalloon(const std::string& title,
                      const std::string& text,
                      std::chrono::milliseconds timeoutDuration = 0ms,
-                     int flags = 0,
+                     unsigned int flags = 0,
                      const wxIcon& icon = wxNullIcon);
 #endif // wxUSE_TASKBARICON_BALLOONS
 

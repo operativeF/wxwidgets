@@ -402,7 +402,7 @@ void wxVListBox::OnDrawBackground(wxDC& dc, const wxRect& rect, size_t n) const
     // use wxRendererNative for more native look unless we use custom bg colour
     if ( !DoDrawSolidBackground(m_colBgSel, dc, rect, n) )
     {
-        int flags = 0;
+        unsigned int flags = 0;
         if ( IsSelected(n) )
             flags |= wxCONTROL_SELECTED;
         if ( IsCurrent(n) )
@@ -575,7 +575,7 @@ void wxVListBox::DoHandleItemClick(int item, unsigned int flags)
 void wxVListBox::OnKeyDown(wxKeyEvent& event)
 {
     // flags for DoHandleItemClick()
-    int flags = ItemClick_Kbd;
+    unsigned int flags = ItemClick_Kbd;
 
     int current;
     switch ( event.GetKeyCode() )

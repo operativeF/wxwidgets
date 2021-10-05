@@ -76,7 +76,7 @@ wxExtHelpController::~wxExtHelpController()
     DeleteList();
 }
 
-void wxExtHelpController::SetViewer(const std::string& viewer, long flags)
+void wxExtHelpController::SetViewer(const std::string& viewer, unsigned int flags)
 {
     m_BrowserName = viewer;
     m_BrowserIsNetscape = (flags & wxHELP_NETSCAPE) != 0;

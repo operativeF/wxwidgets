@@ -167,13 +167,13 @@ public:
     int AppendColumn(const wxString& title,
                      int width = wxCOL_WIDTH_AUTOSIZE,
                      wxAlignment align = wxALIGN_LEFT,
-                     int flags = wxCOL_RESIZABLE)
+                     unsigned int flags = wxCOL_RESIZABLE)
     {
         return DoInsertColumn(title, -1, width, align, flags);
     }
 
     // Return the total number of columns.
-    unsigned GetColumnCount() const;
+    unsigned int GetColumnCount() const;
 
     // Delete the column with the given index, returns false if index is
     // invalid or deleting the column failed for some other reason.
@@ -414,7 +414,7 @@ private:
                        int pos,     // May be -1 meaning "append".
                        int width,
                        wxAlignment align,
-                       int flags);
+                       unsigned int flags);
 
     // Common part of {Append,Insert,Prepend}Item().
     wxTreeListItem DoInsertItem(wxTreeListItem parent,

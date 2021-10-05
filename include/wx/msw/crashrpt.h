@@ -105,14 +105,14 @@ struct WXDLLIMPEXP_BASE wxCrashReport
     //
     // if ep pointer is NULL, the global exception info which is valid only
     // inside wxApp::OnFatalException() is used
-    static bool Generate(int flags = wxCRASH_REPORT_DEFAULT,
+    static bool Generate(unsigned int flags = wxCRASH_REPORT_DEFAULT,
                          _EXCEPTION_POINTERS *ep = nullptr);
 
 
     // generate a crash report from outside of wxApp::OnFatalException(), this
     // can be used to take "snapshots" of the program in wxApp::OnAssert() for
     // example
-    static bool GenerateNow(int flags = wxCRASH_REPORT_DEFAULT);
+    static bool GenerateNow(unsigned int flags = wxCRASH_REPORT_DEFAULT);
 };
 
 #endif // wxUSE_CRASHREPORT

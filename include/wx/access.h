@@ -310,7 +310,7 @@ public:
          { return wxAccStatus::NotImplemented; }
 
         // Returns a state constant.
-    virtual wxAccStatus GetState(int WXUNUSED(childId), long* WXUNUSED(state))
+    virtual wxAccStatus GetState(int WXUNUSED(childId), unsigned int* WXUNUSED(state))
          { return wxAccStatus::NotImplemented; }
 
         // Returns a localized string representing the value for the object

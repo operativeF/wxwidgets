@@ -27,7 +27,7 @@ struct WXDLLIMPEXP_BASE wxConsoleAppTraits : public wxConsoleAppTraitsBase
 #endif // wxUSE_TIMER
 #if wxUSE_THREADS
     bool DoMessageFromThreadWait() override;
-    DWORD WaitForThread(WXHANDLE hThread, int flags) override;
+    DWORD WaitForThread(WXHANDLE hThread, unsigned int flags) override;
 #endif // wxUSE_THREADS
     bool CanUseStderr() override { return true; }
     bool WriteToStderr(const std::string& text) override;
@@ -48,7 +48,7 @@ struct WXDLLIMPEXP_CORE wxGUIAppTraits : public wxGUIAppTraitsBase
 #endif // wxUSE_TIMER
 #if wxUSE_THREADS
     bool DoMessageFromThreadWait() override;
-    DWORD WaitForThread(WXHANDLE hThread, int flags) override;
+    DWORD WaitForThread(WXHANDLE hThread, unsigned int flags) override;
 #endif // wxUSE_THREADS
     wxPortId GetToolkitVersion(int *majVer = nullptr,
                                int *minVer = nullptr,

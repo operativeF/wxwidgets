@@ -635,7 +635,7 @@ public:
     bool IsPaneValid(const wxAuiPaneInfo& pane) const;
 
     // Override to call DoIdleUpdate().
-    void UpdateWindowUI(long flags = wxUPDATE_UI_NONE) override;
+    void UpdateWindowUI(unsigned int flags = wxUPDATE_UI_NONE) override;
 
 protected:
     virtual void OnCustomRender(wxDC& WXUNUSED(dc),

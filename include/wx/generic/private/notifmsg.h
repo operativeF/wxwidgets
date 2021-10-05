@@ -31,7 +31,7 @@ public:
 
     void SetParent(wxWindow *parent) override;
 
-    void SetFlags(int flags) override;
+    void SetFlags(unsigned int flags) override;
 
     void SetIcon(const wxIcon& icon) override;
 

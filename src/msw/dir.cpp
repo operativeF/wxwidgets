@@ -159,7 +159,7 @@ public:
 	wxDirData& operator=(const wxDirData&) = delete;
 
     void SetFileSpec(const wxString& filespec) { m_filespec = filespec; }
-    void SetFlags(int flags) { m_flags = flags; }
+    void SetFlags(unsigned int flags) { m_flags = flags; }
 
     void Close();
     void Rewind();
@@ -173,7 +173,7 @@ private:
 
     FIND_DATA m_finddata;
 
-    int      m_flags{0};
+    unsigned int      m_flags{};
 };
 
 // ============================================================================

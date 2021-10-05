@@ -55,7 +55,7 @@ public:
     // Get a dispatch pointer from the current object associated
     // with a ProgID, such as "Excel.Application"
     bool GetInstance(const wxString& progId,
-                     int flags = wxAutomationInstance_CreateIfNeeded) const;
+                     unsigned int flags = wxAutomationInstance_CreateIfNeeded) const;
 
     // Get a dispatch pointer from a new instance of the class
     bool CreateInstance(const wxString& progId) const;

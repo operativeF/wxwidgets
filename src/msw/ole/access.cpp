@@ -34,13 +34,13 @@
 int wxConvertToWindowsRole(wxAccSystemRole wxrole);
 
 // Convert to Windows state
-LONG wxConvertToWindowsState(long wxstate);
+LONG wxConvertToWindowsState(unsigned int wxstate);
 
 // Convert to Windows selection flag
 int wxConvertToWindowsSelFlag(wxAccSelectionFlags sel);
 
 // Convert from Windows selection flag
-wxAccSelectionFlags wxConvertFromWindowsSelFlag(int sel);
+wxAccSelectionFlags wxConvertFromWindowsSelFlag(unsigned int sel);
 
 #if wxUSE_VARIANT
 // ----------------------------------------------------------------------------
@@ -1306,9 +1306,9 @@ STDMETHODIMP wxIAccessible::get_accState ( VARIANT varID, VARIANT* pVarState)
         return E_INVALIDARG;
     }
 
-    long wxstate = 0;
+    unsigned int wxstate{};
 
-    wxAccStatus status = m_pAccessible->GetState(varID.lVal, & wxstate);
+    wxAccStatus status = m_pAccessible->GetState(varID.lVal, &wxstate);
     if (status == wxAccStatus::Fail)
         return E_FAIL;
     if (status == wxAccStatus::InvalidArg)
@@ -1964,7 +1964,7 @@ int wxConvertToWindowsRole(wxAccSystemRole wxrole)
 }
 
 // Convert to Windows state
-LONG wxConvertToWindowsState(long wxstate)
+LONG wxConvertToWindowsState(unsigned int wxstate)
 {
     LONG state = 0;
     if (wxstate & wxACC_STATE_SYSTEM_ALERT_HIGH)
@@ -2067,7 +2067,7 @@ int wxConvertToWindowsSelFlag(wxAccSelectionFlags wxsel)
 }
 
 // Convert from Windows selection flag
-wxAccSelectionFlags wxConvertFromWindowsSelFlag(int sel)
+wxAccSelectionFlags wxConvertFromWindowsSelFlag(unsigned int sel)
 {
     int wxsel = 0;
 

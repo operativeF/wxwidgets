@@ -44,8 +44,8 @@ class WXDLLIMPEXP_HTML wxHtmlHelpController : public wxHelpControllerBase // wxE
     wxDECLARE_DYNAMIC_CLASS(wxHtmlHelpController);
 
 public:
-    wxHtmlHelpController(int style = wxHF_DEFAULT_STYLE, wxWindow* parentWindow = nullptr);
-    wxHtmlHelpController(wxWindow* parentWindow, int style = wxHF_DEFAULT_STYLE);
+    wxHtmlHelpController(unsigned int style = wxHF_DEFAULT_STYLE, wxWindow* parentWindow = nullptr);
+    wxHtmlHelpController(wxWindow* parentWindow, unsigned int style = wxHF_DEFAULT_STYLE);
 
     ~wxHtmlHelpController();
 
@@ -86,7 +86,7 @@ public:
 
     bool Initialize(const std::string& file, int WXUNUSED(server) ) override { return Initialize(file); }
     bool Initialize(const std::string& file) override;
-    void SetViewer(const std::string& WXUNUSED(viewer), long WXUNUSED(flags) = 0) override {}
+    void SetViewer(const std::string& WXUNUSED(viewer), unsigned int WXUNUSED(flags) = 0) override {}
     bool LoadFile(const std::string& file = {}) override;
     bool DisplaySection(int sectionNo) override;
     bool DisplaySection(const std::string& section) override { return Display(section); }
@@ -119,7 +119,7 @@ public:
     wxWindow* FindTopLevelWindow();
 
 protected:
-    void Init(int style);
+    void Init(unsigned int style);
 
     virtual wxWindow* CreateHelpWindow();
     virtual wxHtmlHelpFrame* CreateHelpFrame(wxHtmlHelpData *data);
@@ -133,7 +133,7 @@ protected:
     wxString            m_ConfigRoot;
 #endif // wxUSE_CONFIG
     wxString            m_titleFormat;
-    int                 m_FrameStyle;
+    unsigned int        m_FrameStyle;
     wxHtmlHelpFrame*    m_helpFrame;
     wxHtmlHelpDialog*   m_helpDialog;
 
@@ -157,7 +157,7 @@ class WXDLLIMPEXP_HTML wxHtmlModalHelp
 {
 public:
     wxHtmlModalHelp(wxWindow* parent, const std::string& helpFile, const std::string& topic = {},
-        int style = wxHF_DEFAULT_STYLE | wxHF_DIALOG | wxHF_MODAL);
+        unsigned int style = wxHF_DEFAULT_STYLE | wxHF_DIALOG | wxHF_MODAL);
 };
 
 #endif // wxUSE_WXHTML_HELP

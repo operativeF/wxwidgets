@@ -299,7 +299,7 @@ protected:
     }
 
     // extracts the style for our picker from wxFileDirPickerCtrlBase's style
-    long GetPickerStyle(unsigned int style) const override
+    unsigned int GetPickerStyle(unsigned int style) const override
     {
         return style & (wxFLP_OPEN |
                         wxFLP_SAVE |
@@ -398,7 +398,7 @@ protected:
     }
 
     // extracts the style for our picker from wxFileDirPickerCtrlBase's style
-    long GetPickerStyle(unsigned int style) const override
+    unsigned int GetPickerStyle(unsigned int style) const override
     {
         return style & (wxDIRP_DIR_MUST_EXIST |
                         wxDIRP_CHANGE_DIR |

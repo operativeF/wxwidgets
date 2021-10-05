@@ -141,7 +141,7 @@ public:
     // notice that the returned sizer can be NULL if no buttons are put in the
     // sizer (this mostly happens under smart phones and other atypical
     // platforms which have hardware buttons replacing OK/Cancel and such)
-    wxSizer *CreateButtonSizer(long flags);
+    wxSizer *CreateButtonSizer(unsigned int flags);
 
     // returns a sizer containing the given one and a static line separating it
     // from the preceding elements if it's appropriate for the current platform

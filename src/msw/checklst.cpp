@@ -132,7 +132,7 @@ bool wxCheckListBoxItem::OnDrawItem(wxDC& dc, const wxRect& rc,
     {
         SelectInHDC selBmp(hdcMem, hBmpCheck.get());
 
-        int flags = wxCONTROL_FLAT;
+        unsigned int flags = wxCONTROL_FLAT;
         if ( IsChecked() )
             flags |= wxCONTROL_CHECKED;
 

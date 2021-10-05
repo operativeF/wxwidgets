@@ -1467,7 +1467,7 @@ bool wxQuantize::Quantize(const wxImage& src, wxImage& dest,
                           wxPalette** pPalette,
                           int desiredNoColours,
                           unsigned char** eightBitData,
-                          int flags)
+                          unsigned int flags)
 
 {
     int i;
@@ -1602,7 +1602,7 @@ bool wxQuantize::Quantize(const wxImage& src,
                           wxImage& dest,
                           int desiredNoColours,
                           unsigned char** eightBitData,
-                          int flags)
+                          unsigned int flags)
 {
     wxPalette* palette = nullptr;
     if ( !Quantize(src, dest, & palette, desiredNoColours, eightBitData, flags) )

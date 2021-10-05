@@ -35,7 +35,7 @@ wxPopupWindow* wxCurrentPopupWindow = nullptr;
 // wxPopupWindow
 // ----------------------------------------------------------------------------
 
-bool wxPopupWindow::Create(wxWindow *parent, int flags)
+bool wxPopupWindow::Create(wxWindow *parent, unsigned int flags)
 {
     // popup windows are created hidden by default
     Hide();

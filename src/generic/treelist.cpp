@@ -879,7 +879,7 @@ wxTreeListCtrl::DoInsertColumn(const std::string& title,
                                int pos,
                                int width,
                                wxAlignment align,
-                               int flags)
+                               unsigned int flags)
 {
     wxCHECK_MSG( m_view, wxNOT_FOUND, "Must Create() first" );
 

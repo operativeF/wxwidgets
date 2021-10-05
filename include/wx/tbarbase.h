@@ -518,7 +518,7 @@ public:
     // -------------------------------
 
     // Do the toolbar button updates (check for EVT_UPDATE_UI handlers)
-    void UpdateWindowUI(long flags = wxUPDATE_UI_NONE) override ;
+    void UpdateWindowUI(unsigned int flags = wxUPDATE_UI_NONE) override ;
 
     // don't want toolbars to accept the focus
     bool AcceptsFocus() const override { return false; }

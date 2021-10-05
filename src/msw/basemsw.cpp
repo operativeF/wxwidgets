@@ -92,7 +92,7 @@ bool wxConsoleAppTraits::DoMessageFromThreadWait()
     return true;
 }
 
-DWORD wxConsoleAppTraits::WaitForThread(WXHANDLE hThread, int WXUNUSED(flags))
+DWORD wxConsoleAppTraits::WaitForThread(WXHANDLE hThread, unsigned int WXUNUSED(flags))
 {
     return DoSimpleWaitForThread(hThread);
 }

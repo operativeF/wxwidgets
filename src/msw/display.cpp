@@ -400,13 +400,12 @@ bool wxDisplayMSW::ChangeMode(const wxVideoMode& mode)
     DEVMODE dm;
     DEVMODE *pDevMode;
 
-    int flags;
+    unsigned int flags{};
 
     if ( mode == wxDefaultVideoMode )
     {
         // reset the video mode to default
         pDevMode = nullptr;
-        flags = 0;
     }
     else // change to the given mode
     {

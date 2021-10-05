@@ -112,14 +112,14 @@ public:
   // where file is the basename of szFile, ext is its extension
   // or .conf (Unix) or .ini (Win) if it has none
   static wxFileName GetGlobalFile(const wxString& szFile);
-  static wxFileName GetLocalFile(const wxString& szFile, int style = 0);
+  static wxFileName GetLocalFile(const wxString& szFile, unsigned int style = 0);
 
   static wxString GetGlobalFileName(const wxString& szFile)
   {
       return GetGlobalFile(szFile).GetFullPath();
   }
 
-  static wxString GetLocalFileName(const wxString& szFile, int style = 0)
+  static wxString GetLocalFileName(const wxString& szFile, unsigned int style = 0)
   {
       return GetLocalFile(szFile, style).GetFullPath();
   }
@@ -213,7 +213,7 @@ protected:
 private:
   // GetXXXFileName helpers: return ('/' terminated) directory names
   static wxString GetGlobalDir();
-  static wxString GetLocalDir(int style = 0);
+  static wxString GetLocalDir(unsigned int style = 0);
 
   // common part of from dtor and DeleteAll
   void CleanUp();

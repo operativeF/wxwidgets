@@ -87,14 +87,14 @@ public:
     wxHtmlHelpWindow(wxWindow* parent, wxWindowID id,
                     const wxPoint& pos = wxDefaultPosition,
                     const wxSize& size = wxDefaultSize,
-                    int style = wxTAB_TRAVERSAL|wxNO_BORDER,
-                    int helpStyle = wxHF_DEFAULT_STYLE,
+                    unsigned int style = wxTAB_TRAVERSAL|wxNO_BORDER,
+                    unsigned int helpStyle = wxHF_DEFAULT_STYLE,
                     wxHtmlHelpData* data = nullptr);
     bool Create(wxWindow* parent, wxWindowID id,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                int style = wxTAB_TRAVERSAL|wxNO_BORDER,
-                int helpStyle = wxHF_DEFAULT_STYLE);
+                unsigned int style = wxTAB_TRAVERSAL|wxNO_BORDER,
+                unsigned int helpStyle = wxHF_DEFAULT_STYLE);
     ~wxHtmlHelpWindow();
 
     wxHtmlHelpWindow(const wxHtmlHelpWindow&) = delete;
@@ -187,7 +187,7 @@ protected:
     void UpdateMergedIndex();
 
     // Add custom buttons to toolbar
-    virtual void AddToolbarButtons(wxToolBar *toolBar, int style);
+    virtual void AddToolbarButtons(wxToolBar *toolBar, unsigned int style);
 
     // Displays options dialog (fonts etc.)
     virtual void OptionsDialog();
@@ -262,7 +262,7 @@ protected:
     wxHashTable *m_PagesHash;
     wxHtmlHelpController* m_helpController;
 
-    int m_hfStyle;
+    unsigned int m_hfStyle;
 
 private:
     void DoIndexFind();

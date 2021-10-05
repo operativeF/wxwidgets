@@ -27,7 +27,7 @@ public:
     wxFindReplaceDialog(wxWindow *parent,
                         wxFindReplaceData *data,
                         const std::string &title,
-                        int style = 0);
+                        unsigned int style = 0);
 
     wxFindReplaceDialog(const wxFindReplaceDialog&) = delete;
     wxFindReplaceDialog& operator=(const wxFindReplaceDialog&) = delete;
@@ -37,7 +37,7 @@ public:
     [[maybe_unused]] bool Create(wxWindow *parent,
                 wxFindReplaceData *data,
                 const std::string &title,
-                int style = 0);
+                unsigned int style = 0);
 
     ~wxFindReplaceDialog();
 

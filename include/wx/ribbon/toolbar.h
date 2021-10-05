@@ -181,7 +181,7 @@ protected:
     void CommonInit(unsigned int style);
     void AppendGroup();
     wxRibbonToolBarToolGroup* InsertGroup(size_t pos);
-    void UpdateWindowUI(long flags) override;
+    void UpdateWindowUI(unsigned int flags) override;
 
     static wxBitmap MakeDisabledBitmap(const wxBitmap& original);
 

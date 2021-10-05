@@ -692,7 +692,7 @@ void wxToolBarBase::OnMouseEnter(int toolid)
 // ----------------------------------------------------------------------------
 
 // Do the toolbar button updates (check for EVT_UPDATE_UI handlers)
-void wxToolBarBase::UpdateWindowUI(long flags)
+void wxToolBarBase::UpdateWindowUI(unsigned int flags)
 {
     wxWindowBase::UpdateWindowUI(flags);
 

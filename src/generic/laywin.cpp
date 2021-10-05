@@ -74,7 +74,7 @@ void wxSashLayoutWindow::OnCalculateLayout(wxCalculateLayoutEvent& event)
 {
     wxRect clientSize(event.GetRect());
 
-    const int flags = event.GetFlags();
+    const unsigned int flags = event.GetFlags();
 
     if (!IsShown())
         return;

@@ -179,7 +179,7 @@ static unsigned GetBasicFlags(const wxChar* filename)
 // Notes: - See GetBasicFlags for remarks about the Mounted flag.
 //=============================================================================
 static bool FilteredAdd(std::vector<wxString>& list, const wxChar* filename,
-                        unsigned flagsSet, unsigned flagsUnset)
+                        unsigned int flagsSet, unsigned int flagsUnset)
 {
     bool accept = true;
     const unsigned flags = GetBasicFlags(filename);
@@ -389,7 +389,7 @@ static bool BuildRemoteList(std::vector<wxString>& list, NETRESOURCE* pResSrc,
 // Purpose: Generate and return a list of all volumes (drives) available.
 // Notes:
 //=============================================================================
-std::vector<wxString> wxFSVolumeBase::GetVolumes(int flagsSet, int flagsUnset)
+std::vector<wxString> wxFSVolumeBase::GetVolumes(unsigned int flagsSet, unsigned int flagsUnset)
 {
     ::InterlockedExchange(&s_cancelSearch, FALSE);     // reset
 

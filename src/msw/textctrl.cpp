@@ -998,7 +998,7 @@ void wxTextCtrl::WriteText(const std::string& value)
     DoWriteText(value);
 }
 
-void wxTextCtrl::DoWriteText(const std::string& value, int flags)
+void wxTextCtrl::DoWriteText(const std::string& value, unsigned int flags)
 {
     bool selectionOnly = (flags & SetValue_SelectionOnly) != 0;
     std::string valueDos;
@@ -1195,7 +1195,7 @@ void wxTextCtrl::GetSelection(long *from, long *to) const
 // selection
 // ----------------------------------------------------------------------------
 
-void wxTextCtrl::DoSetSelection(long from, long to, int flags)
+void wxTextCtrl::DoSetSelection(long from, long to, unsigned int flags)
 {
     HWND hWnd = GetHwnd();
 
@@ -1336,7 +1336,7 @@ bool wxTextCtrl::PositionToXY(long pos, long *x, long *y) const
     HWND hWnd = GetHwnd();
 
     // This gets the line number containing the character
-    long lineNo;
+    LRESULT lineNo;
 #if wxUSE_RICHEDIT
     if ( IsRich() )
     {
@@ -1915,11 +1915,11 @@ void wxTextCtrl::OnChar(wxKeyEvent& event)
             {
                 if ( ::GetFocus() == GetHwnd() )
                 {
-                    int flags = wxNavigationKeyEvent::FromTab;
+                    unsigned int flags = wxNavigationKeyEvent::FromTab;
                     if (!event.ShiftDown())
-                        flags |= wxNavigationKeyEvent::IsForward ;
+                        flags |= wxNavigationKeyEvent::IsForward;
                     if (event.ControlDown())
-                        flags |= wxNavigationKeyEvent::WinChange ;
+                        flags |= wxNavigationKeyEvent::WinChange;
                     if (Navigate(flags))
                         return;
                 }

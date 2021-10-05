@@ -52,7 +52,7 @@ public:
     // Construct a wxBufferedDC using a user supplied buffer.
     wxBufferedDC(wxDC *dc,
                  wxBitmap& buffer = wxNullBitmap,
-                 int style = wxBUFFER_CLIENT_AREA)
+                 unsigned int style = wxBUFFER_CLIENT_AREA)
         : m_dc(nullptr), m_buffer(nullptr)
     {
         Init(dc, buffer, style);
@@ -152,7 +152,7 @@ class WXDLLIMPEXP_CORE wxBufferedPaintDC : public wxBufferedDC
 {
 public:
     // If no bitmap is supplied by the user, a temporary one will be created.
-    wxBufferedPaintDC(wxWindow *window, wxBitmap& buffer, int style = wxBUFFER_CLIENT_AREA)
+    wxBufferedPaintDC(wxWindow *window, wxBitmap& buffer, unsigned int style = wxBUFFER_CLIENT_AREA)
         : m_paintdc(window)
     {
         SetWindow(window);
@@ -168,7 +168,7 @@ public:
     }
 
     // If no bitmap is supplied by the user, a temporary one will be created.
-    wxBufferedPaintDC(wxWindow *window, int style = wxBUFFER_CLIENT_AREA)
+    wxBufferedPaintDC(wxWindow *window, unsigned int style = wxBUFFER_CLIENT_AREA)
         : m_paintdc(window)
     {
         SetWindow(window);
@@ -197,7 +197,7 @@ public:
 protected:
     // return the size needed by the buffer: this depends on whether we're
     // buffering just the currently shown part or the total (scrolled) window
-    static wxSize GetBufferedSize(wxWindow *window, int style)
+    static wxSize GetBufferedSize(wxWindow *window, unsigned int style)
     {
         return style & wxBUFFER_VIRTUAL_AREA ? window->GetVirtualSize()
                                              : window->GetClientSize();

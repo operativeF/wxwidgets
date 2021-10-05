@@ -2644,7 +2644,7 @@ wxCoord wxComboCtrlBase::GetNativeTextIndent() const
     return DEFAULT_TEXT_INDENT;
 }
 
-void wxComboCtrlBase::SetTextCtrlStyle( int style )
+void wxComboCtrlBase::SetTextCtrlStyle( unsigned int style )
 {
     m_textCtrlStyle = style;
 

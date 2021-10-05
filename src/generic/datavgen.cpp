@@ -7003,13 +7003,13 @@ wxAccStatus wxDataViewCtrlAccessible::GetRole(int childId, wxAccSystemRole* role
 }
 
 // Returns a state constant.
-wxAccStatus wxDataViewCtrlAccessible::GetState(int childId, long* state)
+wxAccStatus wxDataViewCtrlAccessible::GetState(int childId, unsigned int* state)
 {
     wxDataViewCtrl* dvCtrl = wxDynamicCast(GetWindow(), wxDataViewCtrl);
     wxCHECK( dvCtrl, wxAccStatus::Fail );
     wxDataViewMainWindow* dvWnd = wxDynamicCast(dvCtrl->GetMainWindow(), wxDataViewMainWindow);
 
-    long st = 0;
+    unsigned int st{};
     // State flags common to the object and its children.
     if ( !dvWnd->IsEnabled() )
         st |= wxACC_STATE_SYSTEM_UNAVAILABLE;

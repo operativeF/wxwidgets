@@ -516,7 +516,7 @@ void *DoCreateInstance(const wxString& progId, const CLSID& clsId)
 
 // Get a dispatch pointer from the current object associated
 // with a ProgID
-bool wxAutomationObject::GetInstance(const wxString& progId, int flags) const
+bool wxAutomationObject::GetInstance(const wxString& progId, unsigned int flags) const
 {
     if (m_dispatchPtr)
         return false;

@@ -143,7 +143,7 @@ public:
     void OnColourChange(wxColourPickerEvent &);
 
 protected:
-    long GetPickerStyle(unsigned int style) const override
+    unsigned int GetPickerStyle(unsigned int style) const override
         { return (style & (wxCLRP_SHOW_LABEL | wxCLRP_SHOW_ALPHA)); }
 
 private:

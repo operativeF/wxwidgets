@@ -1629,7 +1629,7 @@ public:
                  const wxSize& size = wxDefaultSize,
                  const wxGridCellCoords& topLeft = wxGridCellCoords(-1, -1),
                  const wxGridCellCoords& bottomRight = wxGridCellCoords(-1, -1),
-                 int style = wxGRID_DRAW_DEFAULT );
+                 unsigned int style = wxGRID_DRAW_DEFAULT );
 
     // Split a string containing newline characters into an array of
     // strings and return the number of lines

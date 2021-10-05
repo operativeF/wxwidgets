@@ -522,7 +522,7 @@ bool wxDocument::RemoveView(wxView *view)
     return true;
 }
 
-bool wxDocument::OnCreate(const std::string& WXUNUSED(path), long flags)
+bool wxDocument::OnCreate(const std::string& WXUNUSED(path), unsigned int flags)
 {
     return GetDocumentTemplate()->CreateView(this, flags) != nullptr;
 }
@@ -746,7 +746,7 @@ wxDocTemplate::wxDocTemplate(wxDocManager *manager,
                              const std::string& viewTypeName,
                              wxClassInfo *docClassInfo,
                              wxClassInfo *viewClassInfo,
-                             long flags)
+                             unsigned int flags)
     : m_fileFilter(filter)
     , m_directory(dir)
     , m_description(descr)
@@ -767,7 +767,7 @@ wxDocTemplate::~wxDocTemplate()
 }
 
 // Tries to dynamically construct an object of the right class.
-wxDocument *wxDocTemplate::CreateDocument(const std::string& path, long flags)
+wxDocument *wxDocTemplate::CreateDocument(const std::string& path, unsigned int flags)
 {
     // InitDocument() is supposed to delete the document object if its
     // initialization fails so don't use wxScopedPtr<> here: this is fragile
@@ -782,7 +782,7 @@ wxDocument *wxDocTemplate::CreateDocument(const std::string& path, long flags)
 }
 
 bool
-wxDocTemplate::InitDocument(wxDocument* doc, const std::string& path, long flags)
+wxDocTemplate::InitDocument(wxDocument* doc, const std::string& path, unsigned int flags)
 {
     try
     {
@@ -812,7 +812,7 @@ wxDocTemplate::InitDocument(wxDocument* doc, const std::string& path, long flags
     }
 }
 
-wxView *wxDocTemplate::CreateView(wxDocument *doc, long flags)
+wxView *wxDocTemplate::CreateView(wxDocument *doc, unsigned int flags)
 {
     std::unique_ptr<wxView> view(DoCreateView());
     if ( !view )
@@ -901,7 +901,7 @@ wxBEGIN_EVENT_TABLE(wxDocManager, wxEvtHandler)
 #endif // wxUSE_PRINTING_ARCHITECTURE
 wxEND_EVENT_TABLE()
 
-wxDocManager::wxDocManager(long WXUNUSED(flags), bool initialize)
+wxDocManager::wxDocManager(unsigned int WXUNUSED(flags), bool initialize)
 {
     sm_docManager = this;
 
@@ -1372,7 +1372,7 @@ wxDocument* wxDocManager::FindDocumentByPath(const std::string& path) const
     return nullptr;
 }
 
-wxDocument *wxDocManager::CreateDocument(const std::string& pathOrig, long flags)
+wxDocument *wxDocManager::CreateDocument(const std::string& pathOrig, unsigned int flags)
 {
     // this ought to be const but SelectDocumentType/Path() are not
     // const-correct and can't be changed as, being virtual, this risks
@@ -1475,7 +1475,7 @@ wxDocument *wxDocManager::CreateDocument(const std::string& pathOrig, long flags
     return docNew;
 }
 
-wxView *wxDocManager::CreateView(wxDocument *doc, long flags)
+wxView *wxDocManager::CreateView(wxDocument *doc, unsigned int flags)
 {
     wxDocTemplateVector templates(GetVisibleTemplates(m_templates));
     const size_t numTemplates = templates.size();
@@ -1498,7 +1498,7 @@ wxView *wxDocManager::CreateView(wxDocument *doc, long flags)
 
 // Not yet implemented
 void
-wxDocManager::DeleteTemplate(wxDocTemplate *WXUNUSED(temp), long WXUNUSED(flags))
+wxDocManager::DeleteTemplate(wxDocTemplate *WXUNUSED(temp), unsigned int WXUNUSED(flags))
 {
 }
 
@@ -1648,7 +1648,7 @@ wxDocTemplate *wxDocManager::FindTemplateForPath(const std::string& path)
 wxDocTemplate *wxDocManager::SelectDocumentPath(wxDocTemplate **templates,
                                                 int noTemplates,
                                                 std::string& path,
-                                                long WXUNUSED(flags),
+                                                unsigned int WXUNUSED(flags),
                                                 bool WXUNUSED(save))
 {
 #ifdef wxHAS_MULTIPLE_FILEDLG_FILTERS

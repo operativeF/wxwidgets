@@ -1047,7 +1047,7 @@ long wxExecute(const wxString& cmd, unsigned int flags, wxProcess *handler,
 }
 
 template <typename CharType>
-long wxExecuteImpl(const CharType* const* argv, int flags, wxProcess* handler,
+long wxExecuteImpl(const CharType* const* argv, unsigned int flags, wxProcess* handler,
                    const wxExecuteEnv *env)
 {
     wxString command;

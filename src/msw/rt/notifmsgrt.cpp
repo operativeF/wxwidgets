@@ -145,7 +145,7 @@ public:
 
     }
 
-    void SetFlags(int WXUNUSED(flags)) override
+    void SetFlags(unsigned int WXUNUSED(flags)) override
     {
 
     }

@@ -217,7 +217,7 @@ bool
 wxTaskBarIcon::ShowBalloon(const std::string& title,
                            const std::string& text,
                            std::chrono::milliseconds timeoutDuration,
-                           int flags,
+                           unsigned int flags,
                            const wxIcon& icon)
 {
     wxCHECK_MSG( m_iconAdded, false,

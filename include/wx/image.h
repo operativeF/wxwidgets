@@ -451,11 +451,11 @@ public:
         Load_Verbose = 1
     };
 
-    static void SetDefaultLoadFlags(int flags);
-    static int GetDefaultLoadFlags();
+    static void SetDefaultLoadFlags(unsigned int flags);
+    static unsigned int GetDefaultLoadFlags();
 
-    void SetLoadFlags(int flags);
-    int GetLoadFlags() const;
+    void SetLoadFlags(unsigned int flags);
+    unsigned int GetLoadFlags() const;
 
     static bool CanRead( const std::string& name );
     static int GetImageCount( const std::string& name, wxBitmapType type = wxBitmapType::Any );

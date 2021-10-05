@@ -80,11 +80,11 @@ struct wxImageRefData: public wxObjectRefData
     // alpha channel data, may be nullptr for the formats without alpha support
     unsigned char* m_alpha{ nullptr };
 
-    static int      sm_defaultLoadFlags;
+    static unsigned int  sm_defaultLoadFlags;
 
     int             m_width{0};
     int             m_height{0};
-    int             m_loadFlags{ sm_defaultLoadFlags };
+    unsigned int    m_loadFlags{ sm_defaultLoadFlags };
 
     unsigned char   m_maskRed{0};
     unsigned char   m_maskGreen{0};
@@ -106,7 +106,7 @@ struct wxImageRefData: public wxObjectRefData
 };
 
 // For compatibility, if nothing else, loading is verbose by default.
-int wxImageRefData::sm_defaultLoadFlags = wxImage::Load_Verbose;
+unsigned int wxImageRefData::sm_defaultLoadFlags = wxImage::Load_Verbose;
 
 wxImageRefData::~wxImageRefData()
 {
@@ -2534,25 +2534,25 @@ bool wxImage::HasOption(const std::string& name) const
 // ----------------------------------------------------------------------------
 
 /* static */
-void wxImage::SetDefaultLoadFlags(int flags)
+void wxImage::SetDefaultLoadFlags(unsigned int flags)
 {
     wxImageRefData::sm_defaultLoadFlags = flags;
 }
 
 /* static */
-int wxImage::GetDefaultLoadFlags()
+unsigned int wxImage::GetDefaultLoadFlags()
 {
     return wxImageRefData::sm_defaultLoadFlags;
 }
 
-void wxImage::SetLoadFlags(int flags)
+void wxImage::SetLoadFlags(unsigned int flags)
 {
     AllocExclusive();
 
     M_IMGDATA->m_loadFlags = flags;
 }
 
-int wxImage::GetLoadFlags() const
+unsigned int wxImage::GetLoadFlags() const
 {
     return M_IMGDATA ? M_IMGDATA->m_loadFlags : wxImageRefData::sm_defaultLoadFlags;
 }

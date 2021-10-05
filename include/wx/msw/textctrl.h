@@ -222,10 +222,10 @@ protected:
     // replace the contents of the selection or of the entire control with the
     // given text
     void DoWriteText(const std::string& text,
-                     int flags = SetValue_SendEvent | SetValue_SelectionOnly);
+                     unsigned int flags = SetValue_SendEvent | SetValue_SelectionOnly);
 
     // set the selection (possibly without scrolling the caret into view)
-    void DoSetSelection(long from, long to, int flags) override;
+    void DoSetSelection(long from, long to, unsigned int flags) override;
 
     // get the length of the line containing the character at the given
     // position

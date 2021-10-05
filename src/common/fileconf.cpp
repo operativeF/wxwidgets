@@ -245,7 +245,7 @@ wxString wxFileConfig::GetGlobalDir()
     return wxStandardPaths::Get().GetConfigDir();
 }
 
-wxString wxFileConfig::GetLocalDir(int style)
+wxString wxFileConfig::GetLocalDir(unsigned int style)
 {
     wxUnusedVar(style);
 
@@ -264,7 +264,7 @@ wxFileName wxFileConfig::GetGlobalFile(const wxString& szFile)
     return {GetGlobalDir(), stdp.MakeConfigFileName(szFile)};
 }
 
-wxFileName wxFileConfig::GetLocalFile(const wxString& szFile, int style)
+wxFileName wxFileConfig::GetLocalFile(const wxString& szFile, unsigned int style)
 {
     const wxStandardPathsBase& stdp = wxStandardPaths::Get();
 

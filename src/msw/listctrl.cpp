@@ -65,7 +65,7 @@
 #endif
 
 // convert our state and mask flags to LV_ITEM constants
-static void wxConvertToMSWFlags(long state, long mask, LV_ITEM& lvItem);
+static void wxConvertToMSWFlags(unsigned int state, unsigned int mask, LV_ITEM& lvItem);
 
 // convert wxListItem to LV_ITEM
 static void wxConvertToMSWListItem(const wxListCtrl *ctrl,
@@ -94,7 +94,7 @@ namespace
 // rectangle of the first subitem using this function, in particular notice
 // that the index is *not* 1-based, in spite of what MSDN says
 inline bool
-wxGetListCtrlSubItemRect(HWND hwnd, int item, int subitem, int flags, RECT& rect)
+wxGetListCtrlSubItemRect(HWND hwnd, int item, int subitem, unsigned int flags, RECT& rect)
 {
     rect.top = subitem;
     rect.left = flags;
@@ -102,7 +102,7 @@ wxGetListCtrlSubItemRect(HWND hwnd, int item, int subitem, int flags, RECT& rect
 }
 
 inline bool
-wxGetListCtrlItemRect(HWND hwnd, int item, int flags, RECT& rect)
+wxGetListCtrlItemRect(HWND hwnd, int item, unsigned int flags, RECT& rect)
 {
     return wxGetListCtrlSubItemRect(hwnd, item, 0, flags, rect);
 }
@@ -817,7 +817,7 @@ bool wxListCtrl::GetItem(wxListItem& info) const
 
     // If no mask is specified, get everything: this is compatible with the
     // generic version and conforms to the principle of least surprise.
-    const long mask = info.m_mask ? info.m_mask : -1;
+    const unsigned int mask = info.m_mask ? info.m_mask : static_cast<unsigned int>(-1);
 
     if ( mask & wxLIST_MASK_TEXT )
     {
@@ -977,7 +977,7 @@ bool wxListCtrl::SetItem(long index, int col, const wxString& label, int imageId
 
 
 // Gets the item state
-int wxListCtrl::GetItemState(long item, long stateMask) const
+int wxListCtrl::GetItemState(long item, unsigned int stateMask) const
 {
     wxCHECK_MSG( item >= 0 && item < GetItemCount(), 0,
                  wxS("invalid list control item index in GetItemState()") );
@@ -995,7 +995,7 @@ int wxListCtrl::GetItemState(long item, long stateMask) const
 }
 
 // Sets the item state
-bool wxListCtrl::SetItemState(long item, long state, long stateMask)
+bool wxListCtrl::SetItemState(long item, unsigned int state, unsigned int stateMask)
 {
     // NB: don't use SetItem() here as it doesn't work with the virtual list
     //     controls
@@ -3443,7 +3443,7 @@ static void wxConvertFromMSWListItem(HWND hwndListCtrl,
     lvItem.mask = oldMask;
 }
 
-static void wxConvertToMSWFlags(long state, long stateMask, LV_ITEM& lvItem)
+static void wxConvertToMSWFlags(unsigned int state, unsigned int stateMask, LV_ITEM& lvItem)
 {
     if (stateMask & wxLIST_STATE_CUT)
     {

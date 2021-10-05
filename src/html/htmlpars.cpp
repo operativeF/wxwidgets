@@ -808,7 +808,7 @@ wxChar wxHtmlEntitiesParser::GetEntityChar(const wxString& entity) const
 wxFSFile *wxHtmlParser::OpenURL(wxHtmlURLType type,
                                 const wxString& url) const
 {
-    int flags = wxFS_READ;
+    unsigned int flags = wxFS_READ;
     if (type == wxHTML_URL_IMAGE)
         flags |= wxFS_SEEKABLE;
 

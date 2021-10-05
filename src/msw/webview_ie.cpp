@@ -765,7 +765,7 @@ long wxWebViewIE::Find(const wxString& text, unsigned int flags)
     return m_impl->Find(text, flags);
 }
 
-long wxWebViewIEImpl::Find(const wxString& text, int flags)
+long wxWebViewIEImpl::Find(const wxString& text, unsigned int flags)
 {
     //If the text is empty then we clear.
     if(text.IsEmpty())
@@ -1207,9 +1207,9 @@ bool wxWebViewIEImpl::IsElementVisible(wxCOMPtr<IHTMLElement> elm)
     return is_visible;
 }
 
-void wxWebViewIEImpl::FindInternal(const wxString& text, int flags, int internal_flag)
+void wxWebViewIEImpl::FindInternal(const wxString& text, unsigned int flags, unsigned int internal_flag)
 {
-    long find_flag = 0;
+    unsigned int find_flag{};
     wxCOMPtr<wxIMarkupServices> pIMS;
     wxCOMPtr<IHTMLDocument2> document = GetDocument();
 

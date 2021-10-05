@@ -228,7 +228,7 @@ public:
     // window creation by overriding it in the derived classes)
     virtual bool CreateGenericClient(wxWindow *parent);
     virtual bool CreateClient(wxMDIParentFrame *parent,
-                              long WXUNUSED(style) = wxVSCROLL | wxHSCROLL)
+                              unsigned int WXUNUSED(style) = wxVSCROLL | wxHSCROLL)
     {
         return CreateGenericClient(parent);
     }

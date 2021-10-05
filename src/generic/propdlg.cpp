@@ -77,7 +77,7 @@ bool wxPropertySheetDialog::Create(wxWindow* parent, wxWindowID id, const std::s
 
 
 // Layout the dialog, to be called after pages have been created
-void wxPropertySheetDialog::LayoutDialog(int centreFlags)
+void wxPropertySheetDialog::LayoutDialog(unsigned int centreFlags)
 {
     GetSizer()->Fit(this);
     GetSizer()->SetSizeHints(this);
@@ -86,7 +86,7 @@ void wxPropertySheetDialog::LayoutDialog(int centreFlags)
 }
 
 // Creates the buttons, if any
-void wxPropertySheetDialog::CreateButtons(int flags)
+void wxPropertySheetDialog::CreateButtons(unsigned int flags)
 {
     wxSizer *buttonSizer = CreateButtonSizer(flags);
     if( buttonSizer )

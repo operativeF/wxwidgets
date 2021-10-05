@@ -220,7 +220,7 @@ wxEND_EVENT_TABLE()
 wxHtmlHelpWindow::wxHtmlHelpWindow(wxWindow* parent, wxWindowID id,
                                     const wxPoint& pos,
                                     const wxSize& size,
-                                    int style, int helpStyle, wxHtmlHelpData* data)
+                                    unsigned int style, unsigned int helpStyle, wxHtmlHelpData* data)
 {
     Init(data);
     Create(parent, id, pos, size, style, helpStyle);
@@ -304,7 +304,7 @@ void wxHtmlHelpWindow::Init(wxHtmlHelpData* data)
 
 bool wxHtmlHelpWindow::Create(wxWindow* parent, wxWindowID id,
                              const wxPoint& pos, const wxSize& size,
-                             int style, int helpStyle)
+                             unsigned int style, unsigned int helpStyle)
 {
     m_hfStyle = helpStyle;
 
@@ -625,7 +625,7 @@ void wxHtmlHelpWindow::SetController(wxHtmlHelpController* controller)
 }
 
 #if wxUSE_TOOLBAR
-void wxHtmlHelpWindow::AddToolbarButtons(wxToolBar *toolBar, int style)
+void wxHtmlHelpWindow::AddToolbarButtons(wxToolBar *toolBar, unsigned int style)
 {
     wxBitmap wpanelBitmap =
         wxArtProvider::GetBitmap(wxART_HELP_SIDE_PANEL, wxART_TOOLBAR);

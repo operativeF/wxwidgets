@@ -2313,7 +2313,7 @@ void wxAuiToolBar::OnIdle(wxIdleEvent& evt)
     evt.Skip();
 }
 
-void wxAuiToolBar::UpdateWindowUI(long flags)
+void wxAuiToolBar::UpdateWindowUI(unsigned int flags)
 {
     if ( flags & wxUPDATE_UI_FROMIDLE )
     {

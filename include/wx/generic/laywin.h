@@ -123,8 +123,8 @@ public:
     }
 
     // Read by the app
-    void SetFlags(int flags) { m_flags = flags; }
-    int GetFlags() const { return m_flags; }
+    void SetFlags(unsigned int flags) { m_flags = flags; }
+    unsigned int GetFlags() const { return m_flags; }
 
     // Set by the app
     void SetRect(const wxRect& rect) { m_rect = rect; }
@@ -133,7 +133,7 @@ public:
     wxEvent *Clone() const override { return new wxCalculateLayoutEvent(*this); }
 
 protected:
-    int                     m_flags;
+    unsigned int            m_flags;
     wxRect                  m_rect;
 
 private:

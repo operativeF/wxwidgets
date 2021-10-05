@@ -166,7 +166,7 @@ public:
 protected:
 
     // extracts the style for our picker from wxFontPickerCtrl's style
-    long GetPickerStyle(unsigned int style) const override
+    unsigned int GetPickerStyle(unsigned int style) const override
         { return (style & (wxFNTP_FONTDESC_AS_LABEL|wxFNTP_USEFONT_FOR_LABEL)); }
 
 private:

@@ -46,7 +46,7 @@ public:
     virtual bool Initialize(const std::string& WXUNUSED(file)) { return false; }
 
     // Set viewer: only relevant to some kinds of controller
-    virtual void SetViewer(const std::string& WXUNUSED(viewer), long WXUNUSED(flags) = 0) {}
+    virtual void SetViewer(const std::string& WXUNUSED(viewer), unsigned int WXUNUSED(flags) = 0) {}
 
     // If file is "", reloads file given  in Initialize
     virtual bool LoadFile(const std::string& file = {}) = 0;

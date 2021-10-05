@@ -33,7 +33,7 @@ public:
     wxGenericProgressDialog(const std::string& title, const std::string& message,
                             int maximum = 100,
                             wxWindow *parent = nullptr,
-                            int style = wxPD_APP_MODAL | wxPD_AUTO_HIDE);
+                            unsigned int style = wxPD_APP_MODAL | wxPD_AUTO_HIDE);
 
     wxGenericProgressDialog(const wxGenericProgressDialog&) = delete;
     wxGenericProgressDialog& operator=(const wxGenericProgressDialog&) = delete;
@@ -44,7 +44,7 @@ public:
                 const std::string& message,
                 int maximum = 100,
                 wxWindow *parent = nullptr,
-                int style = wxPD_APP_MODAL | wxPD_AUTO_HIDE);
+                unsigned int style = wxPD_APP_MODAL | wxPD_AUTO_HIDE);
 
     virtual bool Update(int value, const std::string& newmsg = {}, bool *skip = nullptr);
     virtual bool Pulse(const std::string& newmsg = {}, bool *skip = nullptr);
@@ -97,8 +97,8 @@ protected:
     bool HasPDFlag(int flag) const { return (m_pdStyle & flag) != 0; }
 
     // Return the progress dialog style. Prefer to use HasPDFlag() if possible.
-    int GetPDStyle() const { return m_pdStyle; }
-    void SetPDStyle(int pdStyle) { m_pdStyle = pdStyle; }
+    unsigned int GetPDStyle() const { return m_pdStyle; }
+    void SetPDStyle(unsigned int pdStyle) { m_pdStyle = pdStyle; }
 
     // Updates estimated times from a given progress bar value and stores the
     // results in provided arguments.
@@ -178,7 +178,7 @@ private:
     // wxPD_XXX constants clash with the existing TLW styles so to be sure we
     // don't have any conflicts we just use a separate variable for storing
     // them.
-    int m_pdStyle{0};
+    unsigned int m_pdStyle{};
 
 protected:
     // the maximum value

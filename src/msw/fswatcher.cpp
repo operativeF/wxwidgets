@@ -319,8 +319,8 @@ void wxIOCPThread::ProcessNativeEvents(std::vector<wxEventProcessingData>& event
         wxLogTrace( wxTRACE_FSWATCHER, "[iocp] %s",
                     FileNotifyInformationToString(e));
 
-        const int nativeFlags = e.Action;
-        const int flags = Native2WatcherFlags(nativeFlags);
+        const unsigned int nativeFlags = e.Action;
+        const unsigned int flags = Native2WatcherFlags(nativeFlags);
         if (flags & wxFSW_EVENT_WARNING || flags & wxFSW_EVENT_ERROR)
         {
             wxFileSystemWatcherEvent

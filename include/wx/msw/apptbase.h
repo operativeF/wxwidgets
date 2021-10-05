@@ -40,7 +40,7 @@ public:
 
     // wait for the handle to be signaled, return WAIT_OBJECT_0 if it is or, in
     // the GUI code, WAIT_OBJECT_0 + 1 if a Windows message arrived
-    virtual DWORD WaitForThread(WXHANDLE hThread, int flags) = 0;
+    virtual DWORD WaitForThread(WXHANDLE hThread, unsigned int flags) = 0;
 #endif // wxUSE_THREADS
 
 

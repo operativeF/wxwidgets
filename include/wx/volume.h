@@ -59,8 +59,8 @@ public:
     // only the volumes with the flags such that
     //  (flags & flagsSet) == flagsSet && !(flags & flagsUnset)
     // are returned (by default, all mounted ones)
-    static std::vector<wxString> GetVolumes(int flagsSet = wxFS_VOL_MOUNTED,
-                                    int flagsUnset = 0);
+    static std::vector<wxString> GetVolumes(unsigned int flagsSet = wxFS_VOL_MOUNTED,
+                                            unsigned int flagsUnset = 0);
 
     // stop execution of GetVolumes() called previously (should be called from
     // another thread, of course)

@@ -53,7 +53,7 @@ public:
 
     //We store find flag, results and position.
     std::vector<wxFindPointers> m_findPointers;
-    int m_findFlags;
+    unsigned int m_findFlags;
     wxString m_findText;
     int m_findPosition;
 
@@ -63,8 +63,8 @@ public:
     wxCOMPtr<IHTMLDocument2> GetDocument() const;
     bool IsElementVisible(wxCOMPtr<IHTMLElement> elm);
     //Find helper functions.
-    long Find(const wxString& text, int flags = wxWEBVIEW_FIND_DEFAULT);
-    void FindInternal(const wxString& text, int flags, int internal_flag);
+    long Find(const wxString& text, unsigned int flags = wxWEBVIEW_FIND_DEFAULT);
+    void FindInternal(const wxString& text, unsigned int flags, unsigned int internal_flag);
     long FindNext(int direction = 1);
     void FindClear();
     //Toggles control features see INTERNETFEATURELIST for values.

@@ -1279,7 +1279,7 @@ public:
     wxBorder GetBorder() const { return GetBorder(GetWindowStyleFlag()); }
 
     // send wxUpdateUIEvents to this window, and children if recurse is true
-    virtual void UpdateWindowUI(long flags = wxUPDATE_UI_NONE);
+    virtual void UpdateWindowUI(unsigned int flags = wxUPDATE_UI_NONE);
 
     // do the window-specific processing after processing the update event
     virtual void DoUpdateWindowUI(wxUpdateUIEvent& event) ;
@@ -2126,7 +2126,7 @@ public:
     wxAccStatus GetRole(int childId, wxAccSystemRole* role) override;
 
         // Returns a state constant.
-    wxAccStatus GetState(int childId, long* state) override;
+    wxAccStatus GetState(int childId, unsigned int* state) override;
 
         // Returns a localized string representing the value for the object
         // or child.

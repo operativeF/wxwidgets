@@ -527,7 +527,7 @@ void wxMenuItem::Check(bool check)
 
     if ( m_parentMenu )
     {
-        int flags = check ? MF_CHECKED : MF_UNCHECKED;
+        unsigned int flags = check ? MF_CHECKED : MF_UNCHECKED;
         HMENU hmenu = GetHMenuOf(m_parentMenu);
 
         if ( GetKind() == wxITEM_RADIO )
@@ -983,7 +983,7 @@ bool wxMenuItem::OnDrawItem(wxDC& dc, const wxRect& rc,
         // item text name with mnemonic
         auto text = wx::utils::BeforeFirst(GetItemLabel(), '\t');
 
-        int flags = DST_PREFIXTEXT;
+        unsigned int flags = DST_PREFIXTEXT;
         // themes menu is using specified color for disabled labels
         if ( MenuDrawData::MenuLayout() == MenuDrawData::Classic &&
              (stat & wxODDisabled) && !(stat & wxODSelected) )

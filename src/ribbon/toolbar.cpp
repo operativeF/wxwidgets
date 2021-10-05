@@ -1198,7 +1198,7 @@ void wxRibbonToolBar::OnMouseEnter(wxMouseEvent& evt)
     }
 }
 
-void wxRibbonToolBar::UpdateWindowUI(long flags)
+void wxRibbonToolBar::UpdateWindowUI(unsigned int flags)
 {
     wxWindowBase::UpdateWindowUI(flags);
 

@@ -2709,7 +2709,7 @@ void wxWindowBase::AdjustForParentClientOrigin(int& x, int& y, unsigned int size
 // Update UI processing
 // ----------------------------------------------------------------------------
 
-void wxWindowBase::UpdateWindowUI(long flags)
+void wxWindowBase::UpdateWindowUI(unsigned int flags)
 {
     wxUpdateUIEvent event(GetId());
     event.SetEventObject(this);
@@ -3904,7 +3904,7 @@ wxAccStatus wxWindowAccessible::GetRole(int childId, wxAccSystemRole* role)
 }
 
 // Returns a state constant.
-wxAccStatus wxWindowAccessible::GetState(int childId, long* state)
+wxAccStatus wxWindowAccessible::GetState(int childId, unsigned int* state)
 {
     wxCHECK( GetWindow() != nullptr, wxAccStatus::Fail );
 

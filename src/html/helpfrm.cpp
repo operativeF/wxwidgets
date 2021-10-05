@@ -59,7 +59,7 @@ wxBEGIN_EVENT_TABLE(wxHtmlHelpFrame, wxFrame)
 wxEND_EVENT_TABLE()
 
 wxHtmlHelpFrame::wxHtmlHelpFrame(wxWindow* parent, wxWindowID id, const wxString& title,
-                                 int style, wxHtmlHelpData* data
+                                 unsigned int style, wxHtmlHelpData* data
 #if wxUSE_CONFIG
                                  , wxConfigBase *config, const wxString& rootpath
 #endif // wxUSE_CONFIG
@@ -91,7 +91,7 @@ void wxHtmlHelpFrame::SetController(wxHtmlHelpController* controller)
 
 // Create: builds the GUI components.
 bool wxHtmlHelpFrame::Create(wxWindow* parent, wxWindowID id,
-                             const wxString& WXUNUSED(title), int style
+                             const wxString& WXUNUSED(title), unsigned int style
 #if wxUSE_CONFIG
                              , wxConfigBase *config, const wxString& rootpath
 #endif // wxUSE_CONFIG

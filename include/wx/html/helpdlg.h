@@ -36,14 +36,14 @@ public:
     wxHtmlHelpDialog(wxHtmlHelpData* data = nullptr) { Init(data); }
     wxHtmlHelpDialog(wxWindow* parent, wxWindowID wxWindowID,
                     const wxString& title = wxEmptyString,
-                    int style = wxHF_DEFAULT_STYLE, wxHtmlHelpData* data = nullptr);
+                    unsigned int style = wxHF_DEFAULT_STYLE, wxHtmlHelpData* data = nullptr);
     ~wxHtmlHelpDialog() = default;
 
     wxHtmlHelpDialog(const wxHtmlHelpDialog&) = delete;
 	wxHtmlHelpDialog& operator=(const wxHtmlHelpDialog&) = delete;
 
     bool Create(wxWindow* parent, wxWindowID id, const wxString& title = wxEmptyString,
-                int style = wxHF_DEFAULT_STYLE);
+                unsigned int style = wxHF_DEFAULT_STYLE);
 
     /// Returns the data associated with this dialog.
     wxHtmlHelpData* GetData() { return m_Data; }

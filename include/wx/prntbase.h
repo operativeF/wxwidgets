@@ -507,7 +507,7 @@ class WXDLLIMPEXP_CORE wxPreviewControlBar: public wxPanel
 
 public:
     wxPreviewControlBar(wxPrintPreviewBase *preview,
-                        long buttons,
+                        unsigned int buttons,
                         wxWindow *parent,
                         const wxPoint& pos = wxDefaultPosition,
                         const wxSize& size = wxDefaultSize,
@@ -568,7 +568,7 @@ protected:
     wxPrintPageTextCtrl*  m_currentPageText{nullptr};
     wxPrintPageMaxCtrl*   m_maxPageText{nullptr};
 
-    long                  m_buttonFlags;
+    unsigned int          m_buttonFlags;
 
 private:
     void DoGotoPage(int page);

@@ -230,7 +230,7 @@ public:
     }
 
 protected:
-    wxNumValidator(ValueType *value, int style)
+    wxNumValidator(ValueType *value, unsigned int style)
         : BaseValidator(style),
           m_value(value)
     {
@@ -294,7 +294,7 @@ protected:
     using ULongestValueType = unsigned long;
 #endif
 
-    wxIntegerValidatorBase(int style)
+    wxIntegerValidatorBase(unsigned int style)
         : wxNumValidatorBase(style)
     {
         wxASSERT_MSG( !(style & wxNUM_VAL_NO_TRAILING_ZEROES),
@@ -330,7 +330,7 @@ public:
     //
     // Sets the range appropriately for the type, including setting 0 as the
     // minimal value for the unsigned types.
-    wxIntegerValidator(ValueType *value = nullptr, int style = wxNUM_VAL_DEFAULT)
+    wxIntegerValidator(ValueType *value = nullptr, unsigned int style = wxNUM_VAL_DEFAULT)
         : Base(value, style)
     {
         this->SetMin(std::numeric_limits<ValueType>::min());
@@ -364,7 +364,7 @@ public:
 // explicitly specifying the type as it deduces it from its parameter.
 template <typename T>
 inline wxIntegerValidator<T>
-wxMakeIntegerValidator(T *value, int style = wxNUM_VAL_DEFAULT)
+wxMakeIntegerValidator(T *value, unsigned int style = wxNUM_VAL_DEFAULT)
 {
     return wxIntegerValidator<T>(value, style);
 }
@@ -394,7 +394,7 @@ protected:
     // float).
     using LongestValueType = double;
 
-    wxFloatingPointValidatorBase(int style)
+    wxFloatingPointValidatorBase(unsigned int style)
         : wxNumValidatorBase(style)
     {
         m_factor = 1.0;
@@ -413,7 +413,7 @@ protected:
 
 private:
     // Maximum number of decimals digits after the decimal separator.
-    unsigned m_precision;
+    unsigned int m_precision;
 
     // Factor applied for the displayed the value.
     double m_factor;
@@ -433,7 +433,7 @@ public:
 
     // Ctor using implicit (maximal) precision for this type.
     wxFloatingPointValidator(ValueType *value = NULL,
-                             int style = wxNUM_VAL_DEFAULT)
+                             unsigned int style = wxNUM_VAL_DEFAULT)
         : Base(value, style)
     {
         DoSetMinMax();
@@ -444,7 +444,7 @@ public:
     // Ctor specifying an explicit precision.
     wxFloatingPointValidator(int precision,
                       ValueType *value = nullptr,
-                      int style = wxNUM_VAL_DEFAULT)
+                      unsigned int style = wxNUM_VAL_DEFAULT)
         : Base(value, style)
     {
         DoSetMinMax();
@@ -482,14 +482,14 @@ private:
 //     do need two different functions.
 template <typename T>
 inline wxFloatingPointValidator<T>
-wxMakeFloatingPointValidator(T *value, int style = wxNUM_VAL_DEFAULT)
+wxMakeFloatingPointValidator(T *value, unsigned int style = wxNUM_VAL_DEFAULT)
 {
     return wxFloatingPointValidator<T>(value, style);
 }
 
 template <typename T>
 inline wxFloatingPointValidator<T>
-wxMakeFloatingPointValidator(int precision, T *value, int style = wxNUM_VAL_DEFAULT)
+wxMakeFloatingPointValidator(int precision, T *value, unsigned int style = wxNUM_VAL_DEFAULT)
 {
     return wxFloatingPointValidator<T>(precision, value, style);
 }

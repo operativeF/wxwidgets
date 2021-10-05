@@ -52,11 +52,11 @@ enum
 // Compute the button size (as if wxBU_EXACTFIT were specified, i.e. without
 // adjusting it to be of default size if it's smaller) for the given label size
 WXDLLIMPEXP_CORE wxSize
-GetFittingSize(wxWindow *win, const wxSize& sizeLabel, int flags = 0);
+GetFittingSize(wxWindow *win, const wxSize& sizeLabel, unsigned int flags = 0);
 
 // Compute the button size (as if wxBU_EXACTFIT were specified) by computing
 // its label size and then calling GetFittingSize().
-wxSize ComputeBestFittingSize(wxControl *btn, int flags = 0);
+wxSize ComputeBestFittingSize(wxControl *btn, unsigned int flags = 0);
 
 // Increase the size passed as parameter to be at least the standard button
 // size if the control doesn't have wxBU_EXACTFIT style and also cache it as
@@ -65,7 +65,7 @@ wxSize ComputeBestFittingSize(wxControl *btn, int flags = 0);
 wxSize IncreaseToStdSizeAndCache(wxControl *btn, const wxSize& size);
 
 // helper of wxToggleButton::DoGetBestSize()
-inline wxSize ComputeBestSize(wxControl *btn, int flags = 0)
+inline wxSize ComputeBestSize(wxControl *btn, unsigned int flags = 0)
 {
     return IncreaseToStdSizeAndCache(btn, ComputeBestFittingSize(btn, flags));
 }

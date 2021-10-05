@@ -175,7 +175,7 @@ public:
 #endif // wxUSE_MENUS
 
     // do the UI update processing for this window
-    void UpdateWindowUI(long flags = wxUPDATE_UI_NONE) override;
+    void UpdateWindowUI(unsigned int flags = wxUPDATE_UI_NONE) override;
 
     // Implement internal behaviour (menu updating on some platforms)
     void OnInternalIdle() override;

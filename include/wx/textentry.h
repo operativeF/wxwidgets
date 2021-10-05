@@ -246,7 +246,7 @@ protected:
     // the other one(s)
     virtual bool DoAutoCompleteStrings(const std::vector<std::string>& WXUNUSED(choices))
         { return false; }
-    virtual bool DoAutoCompleteFileNames(int WXUNUSED(flags)) // wxFILE | wxDIR
+    virtual bool DoAutoCompleteFileNames(unsigned int WXUNUSED(flags)) // wxFILE | wxDIR
         { return false; }
     virtual bool DoAutoCompleteCustom(wxTextCompleter *completer);
 

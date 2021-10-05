@@ -242,7 +242,7 @@ bool wxComboBox::MSWProcessEditSpecialKey(WXWPARAM vkey)
             // unless we also have wxTE_PROCESS_TAB style.
             if ( !HasFlag(wxTE_PROCESS_TAB) )
             {
-                int flags = 0;
+                unsigned int flags{};
                 if ( !wxIsShiftDown() )
                     flags |= wxNavigationKeyEvent::IsForward;
                 if ( wxIsCtrlDown() )

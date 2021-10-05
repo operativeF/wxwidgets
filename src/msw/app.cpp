@@ -77,7 +77,7 @@ extern void wxSetKeyboardHook(bool doIt);
 // see http://article.gmane.org/gmane.comp.lib.wxwidgets.devel/110282
 struct ClassRegInfo
 {
-    ClassRegInfo(const std::string& name, int flags)
+    ClassRegInfo(const std::string& name, unsigned int flags)
     {
         if ( (flags & wxApp::RegClass_OnlyNR) == wxApp::RegClass_OnlyNR )
         {
@@ -97,7 +97,7 @@ struct ClassRegInfo
 
     // Return the appropriate string depending on the presence of
     // RegClass_ReturnNR bit in the flags.
-    const std::string& GetRequestedName(int flags) const
+    const std::string& GetRequestedName(unsigned int flags) const
     {
         return flags & wxApp::RegClass_ReturnNR ? regnameNR : regname;
     }
@@ -239,7 +239,7 @@ bool wxGUIAppTraits::DoMessageFromThreadWait()
     return evtLoop->Dispatch();
 }
 
-DWORD wxGUIAppTraits::WaitForThread(WXHANDLE hThread, int flags)
+DWORD wxGUIAppTraits::WaitForThread(WXHANDLE hThread, unsigned int flags)
 {
     // We only ever dispatch messages from the main thread and, additionally,
     // even from the main thread we shouldn't wait for the message if we don't
@@ -623,7 +623,7 @@ bool wxApp::Initialize(int& argc_, wxChar **argv_)
 const std::string& wxApp::GetRegisteredClassName(const std::string& name,
                                             int bgBrushCol,
                                             int extraStyles,
-                                            int flags)
+                                            unsigned int flags)
 {
     const size_t count = gs_regClassesInfo.size();
     for ( size_t n = 0; n < count; n++ )

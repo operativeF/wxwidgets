@@ -29,16 +29,16 @@ public:
     // used, specify Style_None to prevent this. For floating point numbers,
     // precision can also be specified.
     static wxString ToString(long val,
-                             int style = Style_WithThousandsSep);
+                             unsigned int style = Style_WithThousandsSep);
 #ifdef wxHAS_LONG_LONG_T_DIFFERENT_FROM_LONG
     static wxString ToString(wxLongLong_t val,
-                             int style = Style_WithThousandsSep);
+                             unsigned int style = Style_WithThousandsSep);
 #endif // wxHAS_LONG_LONG_T_DIFFERENT_FROM_LONG
     static wxString ToString(wxULongLong_t val,
-                             int style = Style_WithThousandsSep);
+                             unsigned int style = Style_WithThousandsSep);
     static wxString ToString(double val,
                              int precision,
-                             int style = Style_WithThousandsSep);
+                             unsigned int style = Style_WithThousandsSep);
 
     // Parse a string representing a number, possibly with thousands separator.
     //
@@ -63,7 +63,7 @@ public:
 
 private:
     // Post-process the string representing an integer.
-    static wxString PostProcessIntString(wxString s, int style);
+    static wxString PostProcessIntString(wxString s, unsigned int style);
 
     // Add the thousands separators to a string representing a number without
     // the separators. This is used by ToString(Style_WithThousandsSep).

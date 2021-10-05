@@ -79,7 +79,7 @@ wxAcceleratorTable::wxAcceleratorTable(std::span<wxAcceleratorEntry> entries)
 
     for ( size_t i = 0; i < entries.size(); ++i )
     {
-        int flags = entries[i].GetFlags();
+        unsigned int flags = entries[i].GetFlags();
 
         BYTE fVirt = FVIRTKEY;
         if ( flags & wxACCEL_ALT )

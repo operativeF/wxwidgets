@@ -2830,11 +2830,11 @@ enum
 // Which button is down?
 enum
 {
-    wxJOY_BUTTON_ANY = -1,
     wxJOY_BUTTON1    = 1,
     wxJOY_BUTTON2    = 2,
     wxJOY_BUTTON3    = 4,
-    wxJOY_BUTTON4    = 8
+    wxJOY_BUTTON4    = 8,
+    wxJOY_BUTTON_ANY = wxJOY_BUTTON1 | wxJOY_BUTTON2 | wxJOY_BUTTON3 | wxJOY_BUTTON4
 };
 
 class WXDLLIMPEXP_CORE wxJoystickEvent : public wxEvent
@@ -2844,12 +2844,12 @@ protected:
     unsigned int m_buttonChange;   // Which button changed?
 
     int          m_zPosition{0};
-    int          m_buttonState;    // Which buttons are down?
+    unsigned int m_buttonState;    // Which buttons are down?
     int          m_joyStick;       // Which joystick?
 
 public:
     wxJoystickEvent(wxEventType type = wxEVT_NULL,
-                    int state = 0,
+                    unsigned int state = 0,
                     int joystick = wxJOYSTICK1,
                     unsigned int change = 0)
         : wxEvent(0, type),
@@ -2889,17 +2889,17 @@ public:
     bool IsZMove() const { return (GetEventType() == wxEVT_JOY_ZMOVE); }
 
     // Was it a down event from button 1, 2, 3, 4 or any?
-    bool ButtonDown(int but = wxJOY_BUTTON_ANY) const
+    bool ButtonDown(unsigned int but = wxJOY_BUTTON_ANY) const
     { return ((GetEventType() == wxEVT_JOY_BUTTON_DOWN) &&
             ((but == wxJOY_BUTTON_ANY) || (but == m_buttonChange))); }
 
     // Was it a up event from button 1, 2, 3 or any?
-    bool ButtonUp(int but = wxJOY_BUTTON_ANY) const
+    bool ButtonUp(unsigned int but = wxJOY_BUTTON_ANY) const
     { return ((GetEventType() == wxEVT_JOY_BUTTON_UP) &&
             ((but == wxJOY_BUTTON_ANY) || (but == m_buttonChange))); }
 
     // Was the given button 1,2,3,4 or any in Down state?
-    bool ButtonIsDown(int but =  wxJOY_BUTTON_ANY) const
+    bool ButtonIsDown(unsigned int but =  wxJOY_BUTTON_ANY) const
     { return (((but == wxJOY_BUTTON_ANY) && (m_buttonState != 0)) ||
             ((m_buttonState & but) == but)); }
 
@@ -3278,7 +3278,7 @@ public:
     void SetCurrentFocus(wxWindow *win) { m_focus = win; }
 
     // Set flags
-    void SetFlags(long flags) { m_flags = flags; }
+    void SetFlags(unsigned int flags) { m_flags = flags; }
 
     wxEvent *Clone() const override { return new wxNavigationKeyEvent(*this); }
 
@@ -3292,7 +3292,7 @@ public:
 
     wxWindow *m_focus{nullptr};
 
-    long m_flags;
+    unsigned int m_flags;
 
 public:
 	wxClassInfo *wxGetClassInfo() const override ;

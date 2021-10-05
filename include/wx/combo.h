@@ -434,7 +434,7 @@ public:
 
     // Set custom style flags for embedded wxTextCtrl. Usually must be used
     // with two-step creation, before Create() call.
-    void SetTextCtrlStyle( int style );
+    void SetTextCtrlStyle( unsigned int style );
 
     // Return internal flags
     std::uint32_t GetInternalFlags() const { return m_iFlags; }
@@ -705,7 +705,7 @@ protected:
     wxSize                  m_btnSize;
 
     // custom style for m_text
-    int                     m_textCtrlStyle{0};
+    unsigned int            m_textCtrlStyle{};
 
     // is the popup window currently shown?
     wxByte                  m_popupWinState{Hidden};

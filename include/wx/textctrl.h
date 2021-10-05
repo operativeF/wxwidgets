@@ -332,7 +332,7 @@ public:
     // Set font
     void SetFont(const wxFont& font, unsigned int flags = (wxTEXT_ATTR_FONT & ~wxTEXT_ATTR_FONT_PIXEL_SIZE)) { GetFontAttributes(font, flags); }
 
-    void SetFlags(long flags) { m_flags = flags; }
+    void SetFlags(unsigned int flags) { m_flags = flags; }
 
     void SetCharacterStyleName(const wxString& name) { m_characterStyleName = name; m_flags |= wxTEXT_ATTR_CHARACTER_STYLE_NAME; }
     void SetParagraphStyleName(const wxString& name) { m_paragraphStyleName = name; m_flags |= wxTEXT_ATTR_PARAGRAPH_STYLE_NAME; }
@@ -340,7 +340,7 @@ public:
     void SetParagraphSpacingAfter(int spacing) { m_paragraphSpacingAfter = spacing; m_flags |= wxTEXT_ATTR_PARA_SPACING_AFTER; }
     void SetParagraphSpacingBefore(int spacing) { m_paragraphSpacingBefore = spacing; m_flags |= wxTEXT_ATTR_PARA_SPACING_BEFORE; }
     void SetLineSpacing(int spacing) { m_lineSpacing = spacing; m_flags |= wxTEXT_ATTR_LINE_SPACING; }
-    void SetBulletStyle(int style) { m_bulletStyle = style; m_flags |= wxTEXT_ATTR_BULLET_STYLE; }
+    void SetBulletStyle(unsigned int style) { m_bulletStyle = style; m_flags |= wxTEXT_ATTR_BULLET_STYLE; }
     void SetBulletNumber(int n) { m_bulletNumber = n; m_flags |= wxTEXT_ATTR_BULLET_NUMBER; }
     void SetBulletText(const wxString& text) { m_bulletText = text; m_flags |= wxTEXT_ATTR_BULLET_TEXT; }
     void SetBulletFont(const wxString& bulletFont) { m_bulletFont = bulletFont; }
@@ -358,7 +358,7 @@ public:
     long GetLeftIndent() const { return m_leftIndent; }
     long GetLeftSubIndent() const { return m_leftSubIndent; }
     long GetRightIndent() const { return m_rightIndent; }
-    long GetFlags() const { return m_flags; }
+    unsigned int GetFlags() const { return m_flags; }
 
     int GetFontSize() const { return m_fontSize; }
     wxFontStyle GetFontStyle() const { return m_fontStyle; }
@@ -380,7 +380,7 @@ public:
     int GetParagraphSpacingBefore() const { return m_paragraphSpacingBefore; }
 
     int GetLineSpacing() const { return m_lineSpacing; }
-    int GetBulletStyle() const { return m_bulletStyle; }
+    unsigned int GetBulletStyle() const { return m_bulletStyle; }
     int GetBulletNumber() const { return m_bulletNumber; }
     const wxString& GetBulletText() const { return m_bulletText; }
     const wxString& GetBulletFont() const { return m_bulletFont; }
@@ -424,9 +424,9 @@ public:
     bool HasTextEffect(int effect) const { return HasFlag(wxTEXT_ATTR_EFFECTS) && ((GetTextEffectFlags() & effect) != 0); }
     bool HasOutlineLevel() const { return HasFlag(wxTEXT_ATTR_OUTLINE_LEVEL); }
 
-    bool HasFlag(long flag) const { return (m_flags & flag) != 0; }
-    void RemoveFlag(long flag) { m_flags &= ~flag; }
-    void AddFlag(long flag) { m_flags |= flag; }
+    bool HasFlag(unsigned int flag) const { return (m_flags & flag) != 0; }
+    void RemoveFlag(unsigned int flag) { m_flags &= ~flag; }
+    void AddFlag(unsigned int flag) { m_flags |= flag; }
 
     // Is this a character style?
     bool IsCharacterStyle() const { return HasFlag(wxTEXT_ATTR_CHARACTER); }
@@ -505,7 +505,7 @@ private:
     // Paragraph styles
     std::vector<int>    m_tabs; // array of int: tab stops in 1/10 mm
 
-    long                m_flags{0};
+    unsigned int        m_flags{};
 
     int                 m_leftIndent{0}; // left indent in 1/10 mm
     int                 m_leftSubIndent{0}; // left indent for all but the first
@@ -516,7 +516,7 @@ private:
     int                 m_paragraphSpacingAfter{0};
     int                 m_paragraphSpacingBefore{0};
     int                 m_lineSpacing{0};
-    int                 m_bulletStyle{wxTEXT_ATTR_BULLET_STYLE_NONE};
+    unsigned int        m_bulletStyle{wxTEXT_ATTR_BULLET_STYLE_NONE};
     int                 m_bulletNumber{0};
     int                 m_textEffects{wxTEXT_ATTR_EFFECT_NONE};
     int                 m_textEffectFlags{wxTEXT_ATTR_EFFECT_NONE};

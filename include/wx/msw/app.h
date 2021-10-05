@@ -90,7 +90,7 @@ public:
     static const std::string& GetRegisteredClassName(const std::string& name,
                                                 int bgBrushCol = -1,
                                                 int extraStyles = 0,
-                                                int flags = RegClass_Default);
+                                                unsigned int flags = RegClass_Default);
 
     // return true if this name corresponds to one of the classes we registered
     // in the previous GetRegisteredClassName() calls

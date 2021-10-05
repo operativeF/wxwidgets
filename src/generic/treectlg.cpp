@@ -2584,7 +2584,7 @@ void wxGenericTreeCtrl::PaintItem(wxGenericTreeItem *item, wxDC& dc)
         }
         else
         {
-            int flags = wxCONTROL_SELECTED;
+            unsigned int flags = wxCONTROL_SELECTED;
             if (m_hasFocus)
                 flags |= wxCONTROL_FOCUSED;
             if ((item == m_current) && (m_hasFocus))
@@ -2612,7 +2612,7 @@ void wxGenericTreeCtrl::PaintItem(wxGenericTreeItem *item, wxDC& dc)
             rect.x -= 1;
             rect.width += 2;
 
-            int flags = wxCONTROL_SELECTED;
+            unsigned int flags = wxCONTROL_SELECTED;
             if (m_hasFocus)
                 flags |= wxCONTROL_FOCUSED;
             if ((item == m_current) && (m_hasFocus))
@@ -2639,7 +2639,7 @@ void wxGenericTreeCtrl::PaintItem(wxGenericTreeItem *item, wxDC& dc)
                 rect.x -= 1;
                 rect.width += 2;
 
-                int flags = wxCONTROL_SELECTED;
+                unsigned int flags = wxCONTROL_SELECTED;
                 if (m_hasFocus)
                     flags |= wxCONTROL_FOCUSED;
                 if ((item == m_current) && (m_hasFocus))

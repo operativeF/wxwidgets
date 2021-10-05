@@ -23,7 +23,7 @@ public:
                      const std::string& message,
                      int maximum = 100,
                      wxWindow *parent = nullptr,
-                     int style = wxPD_APP_MODAL | wxPD_AUTO_HIDE);
+                     unsigned int style = wxPD_APP_MODAL | wxPD_AUTO_HIDE);
 
     ~wxProgressDialog();
 

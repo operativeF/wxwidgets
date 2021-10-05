@@ -48,7 +48,7 @@ public:
         return GetValue() ? State_Pressed : State_Normal;
     }
 
-    void UpdateWindowUI(long flags) override
+    void UpdateWindowUI(unsigned int flags) override
     {
         wxControl::UpdateWindowUI(flags);
 

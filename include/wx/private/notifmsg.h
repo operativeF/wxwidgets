@@ -32,7 +32,7 @@ public:
 
     virtual void SetParent(wxWindow *parent) = 0;
 
-    virtual void SetFlags(int flags) = 0;
+    virtual void SetFlags(unsigned int flags) = 0;
 
     virtual void SetIcon(const wxIcon& icon) = 0;
 

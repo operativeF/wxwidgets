@@ -70,7 +70,7 @@ public:
         m_parent = parent;
     }
 
-    void SetFlags(int flags) override
+    void SetFlags(unsigned int flags) override
     {
         m_flags = flags;
     }

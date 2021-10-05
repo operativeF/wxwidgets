@@ -769,7 +769,7 @@ long wxTextEntry::GetLastPosition() const
     return ::SendMessageW(GetEditHwnd(), EM_LINELENGTH, 0, 0);
 }
 
-void wxTextEntry::DoSetSelection(long from, long to, int WXUNUSED(flags))
+void wxTextEntry::DoSetSelection(long from, long to, unsigned int WXUNUSED(flags))
 {
     // if from and to are both -1, it means (in wxWidgets) that all text should
     // be selected, translate this into Windows convention
@@ -802,7 +802,7 @@ void wxTextEntry::GetSelection(long *from, long *to) const
 
 #if wxUSE_DYNLIB_CLASS
 
-bool wxTextEntry::DoAutoCompleteFileNames(int flags)
+bool wxTextEntry::DoAutoCompleteFileNames(unsigned int flags)
 {
     DWORD dwFlags = 0;
     if ( flags & wxFILE )
@@ -913,7 +913,7 @@ bool wxTextEntry::DoAutoCompleteCustom(wxTextCompleter *completer)
 
 // We still need to define stubs as we declared these overrides in the header.
 
-bool wxTextEntry::DoAutoCompleteFileNames(int flags)
+bool wxTextEntry::DoAutoCompleteFileNames(unsigned int flags)
 {
     return wxTextEntryBase::DoAutoCompleteFileNames(flags);
 }

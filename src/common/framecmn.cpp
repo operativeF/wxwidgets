@@ -246,7 +246,7 @@ bool wxFrameBase::ProcessCommand(wxMenuItem *item)
 // Do the UI update processing for this window. This is
 // provided for the application to call if it wants to
 // force a UI update, particularly for the menus and toolbar.
-void wxFrameBase::UpdateWindowUI(long flags)
+void wxFrameBase::UpdateWindowUI(unsigned int flags)
 {
     wxWindowBase::UpdateWindowUI(flags);
 

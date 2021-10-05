@@ -881,7 +881,7 @@ wxSize wxRibbonButtonBar::DoGetNextLargerSize(wxOrientation direction,
     return result;
 }
 
-void wxRibbonButtonBar::UpdateWindowUI(long flags)
+void wxRibbonButtonBar::UpdateWindowUI(unsigned int flags)
 {
     wxWindowBase::UpdateWindowUI(flags);
 

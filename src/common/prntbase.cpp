@@ -1255,7 +1255,7 @@ wxBEGIN_EVENT_TABLE(wxPreviewControlBar, wxPanel)
 
 wxEND_EVENT_TABLE()
 
-wxPreviewControlBar::wxPreviewControlBar(wxPrintPreviewBase *preview, long buttons,
+wxPreviewControlBar::wxPreviewControlBar(wxPrintPreviewBase *preview, unsigned int buttons,
                                          wxWindow *parent, const wxPoint& pos, const wxSize& size,
                                          unsigned int style, const wxString& name)
     : wxPanel(parent, wxID_ANY, pos, size, style, name),
@@ -1763,7 +1763,7 @@ void wxPreviewFrame::CreateCanvas()
 
 void wxPreviewFrame::CreateControlBar()
 {
-    long buttons = wxPREVIEW_DEFAULT;
+    unsigned int buttons = wxPREVIEW_DEFAULT;
     if (m_printPreview->GetPrintoutForPrinting())
         buttons |= wxPREVIEW_PRINT;
 

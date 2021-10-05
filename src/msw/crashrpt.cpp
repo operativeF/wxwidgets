@@ -255,7 +255,7 @@ wxString wxCrashReport::GetFileName()
 }
 
 /* static */
-bool wxCrashReport::Generate(int flags, EXCEPTION_POINTERS *ep)
+bool wxCrashReport::Generate(unsigned int flags, EXCEPTION_POINTERS *ep)
 {
     wxCrashReportImpl impl(gs_reportFilename);
 
@@ -263,7 +263,7 @@ bool wxCrashReport::Generate(int flags, EXCEPTION_POINTERS *ep)
 }
 
 /* static */
-bool wxCrashReport::GenerateNow(int flags)
+bool wxCrashReport::GenerateNow(unsigned int flags)
 {
     bool rc = false;
 

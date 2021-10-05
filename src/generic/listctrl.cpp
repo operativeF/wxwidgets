@@ -739,7 +739,7 @@ void wxListLineData::ApplyAttributes(wxDC *dc,
     {
         // Use the renderer method to ensure that the selected items use the
         // native look.
-        int flags = wxCONTROL_SELECTED;
+        unsigned int flags = wxCONTROL_SELECTED;
         if ( hasFocus )
             flags |= wxCONTROL_FOCUSED;
         if (current)
@@ -815,7 +815,7 @@ void wxListLineData::DrawInReportMode( wxDC *dc,
         wxRect rr(wxPoint(x, rect.y + yOffset), cbSize);
         rr.x += MARGIN_AROUND_CHECKBOX;
 
-        int flags = 0;
+        unsigned int flags{};
         if (m_checked)
             flags |= wxCONTROL_CHECKED;
         wxRendererNative::Get().DrawCheckBox(m_owner, *dc, rr, flags);
@@ -1081,7 +1081,7 @@ void wxListHeaderWindow::OnPaint( wxPaintEvent &WXUNUSED(event) )
         int cw = wCol;
         int ch = cliSize.y;
 
-        int flags = 0;
+        unsigned int flags{};
         if (!m_parent->IsEnabled())
             flags |= wxCONTROL_DISABLED;
 
@@ -2207,7 +2207,7 @@ void wxListMainWindow::OnPaint( wxPaintEvent &WXUNUSED(event) )
 #ifndef __WXMAC__
     if ( HasCurrent() )
     {
-        int flags = 0;
+        unsigned int flags{};
         if ( IsHighlighted(m_current) )
             flags |= wxCONTROL_SELECTED;
 

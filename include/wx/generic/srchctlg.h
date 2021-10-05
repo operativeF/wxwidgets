@@ -161,7 +161,7 @@ public:
 
     // Autocomplete
     bool DoAutoCompleteStrings(const std::vector<std::string> &choices) override;
-    bool DoAutoCompleteFileNames(int flags) override;
+    bool DoAutoCompleteFileNames(unsigned int flags) override;
     bool DoAutoCompleteCustom(wxTextCompleter *completer) override;
 
     bool ShouldInheritColours() const override;

@@ -30,19 +30,19 @@
 FORCE_LINK(wxhtml_chm_support)
 #endif
 
-wxHtmlHelpController::wxHtmlHelpController(int style, wxWindow* parentWindow):
+wxHtmlHelpController::wxHtmlHelpController(unsigned int style, wxWindow* parentWindow):
     wxHelpControllerBase(parentWindow)
 {
     Init(style);
 }
 
-wxHtmlHelpController::wxHtmlHelpController(wxWindow* parentWindow, int style):
+wxHtmlHelpController::wxHtmlHelpController(wxWindow* parentWindow, unsigned int style):
     wxHelpControllerBase(parentWindow)
 {
     Init(style);
 }
 
-void wxHtmlHelpController::Init(int style)
+void wxHtmlHelpController::Init(unsigned int style)
 {
     m_helpWindow = nullptr;
     m_helpFrame = nullptr;
@@ -444,7 +444,7 @@ bool wxHtmlHelpController::KeywordSearch(const std::string& keyword,
  * wxHtmlModalHelp help(parent, helpFile, topic);
  */
 
-wxHtmlModalHelp::wxHtmlModalHelp(wxWindow* parent, const std::string& helpFile, const std::string& topic, int style)
+wxHtmlModalHelp::wxHtmlModalHelp(wxWindow* parent, const std::string& helpFile, const std::string& topic, unsigned int style)
 {
     // Force some mandatory styles
     style |= wxHF_DIALOG | wxHF_MODAL;

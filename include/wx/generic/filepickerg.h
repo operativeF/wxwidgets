@@ -117,7 +117,7 @@ public:
 
 public:     // overridable
 
-    virtual long GetDialogStyle() const
+    virtual unsigned int GetDialogStyle() const
     {
         // the derived class must initialize it if it doesn't use the
         // non-default wxGenericFileDirButton ctor
@@ -125,8 +125,8 @@ public:     // overridable
                       "forgot to initialize m_pickerStyle?" );
 
 
-        long filedlgstyle = 0;
-
+        unsigned int filedlgstyle = 0;
+        // FIXME: signed / unsigned bitwise
         if ( m_pickerStyle & wxFLP_OPEN )
             filedlgstyle |= wxFD_OPEN;
         if ( m_pickerStyle & wxFLP_SAVE )
@@ -184,9 +184,9 @@ public:
 
 public:     // overridable
 
-    virtual long GetDialogStyle() const
+    virtual unsigned int GetDialogStyle() const
     {
-        long dirdlgstyle = wxDD_DEFAULT_STYLE;
+        unsigned int dirdlgstyle = wxDD_DEFAULT_STYLE;
 
         if ( m_pickerStyle & wxDIRP_DIR_MUST_EXIST )
             dirdlgstyle |= wxDD_DIR_MUST_EXIST;

@@ -123,10 +123,10 @@ public:
 /// Operations
 
     // Creates the buttons
-    virtual void CreateButtons(int flags = wxOK|wxCANCEL);
+    virtual void CreateButtons(unsigned int flags = wxOK|wxCANCEL);
 
     // Lay out the dialog, to be called after pages have been created
-    virtual void LayoutDialog(int centreFlags = wxBOTH);
+    virtual void LayoutDialog(unsigned int centreFlags = wxBOTH);
 
 /// Implementation
 

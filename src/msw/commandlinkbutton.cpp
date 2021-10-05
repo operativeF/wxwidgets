@@ -135,7 +135,7 @@ wxSize wxCommandLinkButton::DoGetBestSize() const
     // zero size)
     if ( ShowsLabel() || !m_imageData )
     {
-        int flags = 0;
+        unsigned int flags{};
         if ( GetAuthNeeded() )
             flags |= wxMSWButton::Size_AuthNeeded;
 

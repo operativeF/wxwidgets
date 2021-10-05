@@ -191,7 +191,7 @@ class wxMarkupParserRenderLabelOutput : public wxMarkupParserRenderOutput
 public:
     wxMarkupParserRenderLabelOutput(wxDC& dc,
                                     const wxRect& rect,
-                                    int flags)
+                                    unsigned int flags)
         : wxMarkupParserRenderOutput(dc, rect, flags)
     {
     }

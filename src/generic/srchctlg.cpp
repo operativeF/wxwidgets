@@ -827,7 +827,7 @@ bool wxSearchCtrl::DoAutoCompleteStrings(const std::vector<std::string> &choices
     return m_text->AutoComplete( choices );
 }
 
-bool wxSearchCtrl::DoAutoCompleteFileNames(int flags)
+bool wxSearchCtrl::DoAutoCompleteFileNames(unsigned int flags)
 {
     return flags == wxFILE ? m_text->AutoCompleteFileNames() : m_text->AutoCompleteDirectories();
 }

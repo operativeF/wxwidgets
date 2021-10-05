@@ -33,7 +33,7 @@ public:
 
     // Set viewer: new name for SetBrowser
     void SetViewer(const std::string& viewer = {},
-                            long flags = wxHELP_NETSCAPE) override;
+                   unsigned int flags = wxHELP_NETSCAPE) override;
 
     bool Initialize(const std::string& dir, int WXUNUSED(server)) override
         { return Initialize(dir); }

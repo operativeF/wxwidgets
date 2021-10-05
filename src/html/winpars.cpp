@@ -280,7 +280,7 @@ wxFSFile *wxHtmlWinParser::OpenURL(wxHtmlURLType type,
     if ( status == wxHTML_BLOCK )
         return nullptr;
 
-    int flags = wxFS_READ;
+    unsigned int flags = wxFS_READ;
     if (type == wxHTML_URL_IMAGE)
         flags |= wxFS_SEEKABLE;
 

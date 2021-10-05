@@ -41,7 +41,7 @@ class WXDLLIMPEXP_CORE wxSplashScreen: public wxFrame,
 public:
     // for RTTI macros only
     wxSplashScreen() { wxEvtHandler::AddFilter(this); }
-    wxSplashScreen(const wxBitmap& bitmap, long splashStyle, std::chrono::milliseconds displayTime,
+    wxSplashScreen(const wxBitmap& bitmap, unsigned int splashStyle, std::chrono::milliseconds displayTime,
                    wxWindow* parent, wxWindowID id,
                    const wxPoint& pos = wxDefaultPosition,
                    const wxSize& size = wxDefaultSize,
@@ -55,7 +55,7 @@ public:
     void OnCloseWindow(wxCloseEvent& event);
     void OnNotify(wxTimerEvent& event);
 
-    long GetSplashStyle() const { return m_splashStyle; }
+    unsigned int GetSplashStyle() const { return m_splashStyle; }
     wxSplashScreenWindow* GetSplashWindow() const { return m_window; }
     std::chrono::milliseconds GetTimeout() const { return m_displayTime; }
 
@@ -67,7 +67,7 @@ protected:
     void Init();
 
     wxSplashScreenWindow*   m_window{nullptr};
-    long                    m_splashStyle{wxSPLASH_NO_TIMEOUT}; // TODO: Correct default style?
+    unsigned int            m_splashStyle{wxSPLASH_NO_TIMEOUT}; // TODO: Correct default style?
     std::chrono::milliseconds m_displayTime{};
     wxTimer                 m_timer;
 

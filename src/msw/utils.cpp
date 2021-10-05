@@ -813,7 +813,7 @@ bool wxShell(const wxString& command)
 }
 
 // Shutdown or reboot the PC
-bool wxShutdown(int flags)
+bool wxShutdown(unsigned int flags)
 {
     // Get a token for this process.
     HANDLE hToken;

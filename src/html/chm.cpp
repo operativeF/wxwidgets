@@ -761,7 +761,7 @@ public:
     /// Open a file
     wxFSFile* OpenFile(wxFileSystem& fs, const wxString& location) override;
     /// Find first occurrence of spec
-    wxString FindFirst(const wxString& spec, int flags = 0) override;
+    wxString FindFirst(const wxString& spec, unsigned int flags = 0) override;
     /// Find next occurrence of spec
     wxString FindNext() override;
 
@@ -854,7 +854,7 @@ wxFSFile* wxChmFSHandler::OpenFile(wxFileSystem& WXUNUSED(fs),
 /**
  * Doku see wxFileSystemHandler
  */
-wxString wxChmFSHandler::FindFirst(const wxString& spec, int WXUNUSED(flags))
+wxString wxChmFSHandler::FindFirst(const wxString& spec, unsigned int WXUNUSED(flags))
 {
     wxString right = GetRightLocation(spec);
     wxString left = GetLeftLocation(spec);

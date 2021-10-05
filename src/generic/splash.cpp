@@ -39,7 +39,8 @@ wxEND_EVENT_TABLE()
  * slightly too small.
  */
 
-wxSplashScreen::wxSplashScreen(const wxBitmap& bitmap, long splashStyle, std::chrono::milliseconds displayTime,
+wxSplashScreen::wxSplashScreen(const wxBitmap& bitmap, unsigned int splashStyle,
+                               std::chrono::milliseconds displayTime,
                                wxWindow* parent, wxWindowID id, const wxPoint& pos,
                                const wxSize& size, unsigned int style)
     : wxFrame(parent, id, "", wxPoint(0,0), wxSize(100, 100),

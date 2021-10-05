@@ -162,10 +162,10 @@ public:
     bool SetItem(long index, int col, const wxString& label, int imageId = -1);
 
     // Gets the item state
-    int  GetItemState(long item, long stateMask) const;
+    int  GetItemState(long item, unsigned int stateMask) const;
 
     // Sets the item state
-    bool SetItemState(long item, long state, long stateMask);
+    bool SetItemState(long item, unsigned int state, unsigned int stateMask);
 
     // Sets the item image
     bool SetItemImage(long item, int image, int selImage = -1);

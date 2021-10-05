@@ -456,13 +456,12 @@ wxFSFile* wxFileSystem::OpenFile(const wxString& location, unsigned int flags)
         return nullptr;
 
     wxString loc = MakeCorrectPath(location);
-    unsigned int i;
     wxFSFile *s = nullptr;
     wxList::compatibility_iterator node;
 
-    unsigned int ln = loc.length();
+    auto ln = loc.length();
     wxChar meta = 0;
-    for (i = 0; i < ln; i++)
+    for (std::size_t i{}; i != ln; i++)
     {
         switch ( loc[i].GetValue() )
         {

@@ -2262,7 +2262,7 @@ void wxGrid::Render( wxDC& dc,
                      const wxSize& size,
                      const wxGridCellCoords& topLeft,
                      const wxGridCellCoords& bottomRight,
-                     int style )
+                     unsigned int style )
 {
     wxCHECK_RET( bottomRight.GetCol() < GetNumberCols(),
                  "Invalid right column" );

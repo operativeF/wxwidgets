@@ -123,7 +123,7 @@ public:
     // Called by framework if created automatically by the default document
     // manager: gives document a chance to initialise and (usually) create a
     // view
-    virtual bool OnCreate(const std::string& path, long flags);
+    virtual bool OnCreate(const std::string& path, unsigned int flags);
 
     // By default, creates a base wxCommandProcessor.
     virtual std::unique_ptr<wxCommandProcessor> OnCreateCommandProcessor();
@@ -244,7 +244,7 @@ public:
 
     // Called by framework if created automatically by the default document
     // manager class: gives view a chance to initialise
-    virtual bool OnCreate(wxDocument *WXUNUSED(doc), long WXUNUSED(flags))
+    virtual bool OnCreate(wxDocument *WXUNUSED(doc), unsigned int WXUNUSED(flags))
         { return true; }
 
     // Checks if the view is the last one for the document; if so, asks user
@@ -308,7 +308,7 @@ public:
                   const std::string& viewTypeName,
                   wxClassInfo *docClassInfo = nullptr,
                   wxClassInfo *viewClassInfo = nullptr,
-                  long flags = wxDEFAULT_TEMPLATE_FLAGS);
+                  unsigned int flags = wxDEFAULT_TEMPLATE_FLAGS);
 
     ~wxDocTemplate();
 
@@ -320,14 +320,14 @@ public:
     // By default, these two member functions dynamically creates document and
     // view using dynamic instance construction. Override these if you need a
     // different method of construction.
-    virtual wxDocument *CreateDocument(const std::string& path, long flags = 0);
-    virtual wxView *CreateView(wxDocument *doc, long flags = 0);
+    virtual wxDocument *CreateDocument(const std::string& path, unsigned int flags = 0);
+    virtual wxView *CreateView(wxDocument *doc, unsigned int flags = 0);
 
     // Helper method for CreateDocument; also allows you to do your own document
     // creation
     virtual bool InitDocument(wxDocument* doc,
                               const std::string& path,
-                              long flags = 0);
+                              unsigned int flags = 0);
 
     std::string GetDefaultExtension() const { return m_defaultExt; }
     std::string GetDescription() const { return m_description; }
@@ -336,7 +336,7 @@ public:
     void SetDocumentManager(wxDocManager *manager)
         { m_documentManager = manager; }
     std::string GetFileFilter() const { return m_fileFilter; }
-    long GetFlags() const { return m_flags; }
+    unsigned int GetFlags() const { return m_flags; }
     virtual std::string GetViewName() const { return m_viewTypeName; }
     virtual std::string GetDocumentName() const { return m_docTypeName; }
 
@@ -344,7 +344,7 @@ public:
     void SetDirectory(const std::string& dir) { m_directory = dir; }
     void SetDescription(const std::string& descr) { m_description = descr; }
     void SetDefaultExtension(const std::string& ext) { m_defaultExt = ext; }
-    void SetFlags(long flags) { m_flags = flags; }
+    void SetFlags(unsigned int flags) { m_flags = flags; }
 
     bool IsVisible() const { return (m_flags & wxTEMPLATE_VISIBLE) != 0; }
 
@@ -354,18 +354,20 @@ public:
     virtual bool FileMatchesTemplate(const std::string& path);
 
 protected:
-    long              m_flags;
     std::string          m_fileFilter;
     std::string          m_directory;
     std::string          m_description;
     std::string          m_defaultExt;
     std::string          m_docTypeName;
     std::string          m_viewTypeName;
+
     wxDocManager*     m_documentManager;
 
     // For dynamic creation of appropriate instances.
     wxClassInfo*      m_docClassInfo;
     wxClassInfo*      m_viewClassInfo;
+
+    unsigned int         m_flags;
 
     // Called by CreateDocument and CreateView to create the actual
     // document/view object.
@@ -385,7 +387,7 @@ class WXDLLIMPEXP_CORE wxDocManager: public wxEvtHandler
 {
 public:
     // NB: flags are unused, don't pass wxDOC_XXX to this ctor
-    wxDocManager(long flags = 0, bool initialize = true);
+    wxDocManager(unsigned int flags = 0, bool initialize = true);
     ~wxDocManager();
 
     wxDocManager(const wxDocManager&) = delete;
@@ -426,18 +428,18 @@ public:
     // something in this case
     virtual void OnOpenFileFailure() { }
 
-    virtual wxDocument *CreateDocument(const std::string& path, long flags = 0);
+    virtual wxDocument *CreateDocument(const std::string& path, unsigned int flags = 0);
 
     // wrapper around CreateDocument() with a more clear name
     wxDocument *CreateNewDocument()
         { return CreateDocument("", wxDOC_NEW); }
 
-    virtual wxView *CreateView(wxDocument *doc, long flags = 0);
-    virtual void DeleteTemplate(wxDocTemplate *temp, long flags = 0);
+    virtual wxView *CreateView(wxDocument *doc, unsigned int flags = 0);
+    virtual void DeleteTemplate(wxDocTemplate *temp, unsigned int flags = 0);
     virtual bool FlushDoc(wxDocument *doc);
     virtual wxDocTemplate *MatchTemplate(const std::string& path);
     virtual wxDocTemplate *SelectDocumentPath(wxDocTemplate **templates,
-            int noTemplates, std::string& path, long flags, bool save = false);
+            int noTemplates, std::string& path, unsigned int flags, bool save = false);
     virtual wxDocTemplate *SelectDocumentType(wxDocTemplate **templates,
             int noTemplates, bool sort = false);
     virtual wxDocTemplate *SelectViewType(wxDocTemplate **templates,

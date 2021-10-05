@@ -42,7 +42,7 @@ wxVersionInfo wxGetZlibVersionInfo()
 {
     VersionNumbering versioning;
 
-    if ( sscanf(zlibVersion(), "%d.%d.%d", &versioning.major, &versioning.minor, &versioning.micro) != 3 )
+    if ( sscanf(zlibVersion(), "%d.%d.%d", &versioning.major, &versioning.minor, &versioning.micro.value()) != 3 )
     {
         versioning = {0, 0, 0};
     }
