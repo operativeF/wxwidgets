@@ -51,12 +51,13 @@ public:
        virtual void Concat( const wxGraphicsMatrixData *t ) = 0;
 
        // sets the matrix to the respective values
-       virtual void Set(double a=1.0, double b=0.0, double c=0.0, double d=1.0,
-           double tx=0.0, double ty=0.0) = 0;
+       virtual void Set(float a, float b,
+                        float c, float d,
+                        float tx, float ty) = 0;
 
        // gets the component values of the matrix
-       virtual void Get(double* a=nullptr, double* b=nullptr,  double* c=nullptr,
-                        double* d=nullptr, double* tx=nullptr, double* ty=nullptr) const = 0;
+       virtual void Get(float* a, float* b,  float* c,
+                        float* d, float* tx, float* ty) const = 0;
 
        // makes this the inverse matrix
        virtual void Invert() = 0;
@@ -72,26 +73,26 @@ public:
        //
 
        // add the translation to this matrix
-       virtual void Translate( double dx , double dy ) = 0;
+       virtual void Translate( float dx , float dy ) = 0;
 
        // add the scale to this matrix
-       virtual void Scale( double xScale , double yScale ) = 0;
+       virtual void Scale( float xScale , float yScale ) = 0;
 
        // add the rotation to this matrix (radians)
-       virtual void Rotate( double angle ) = 0;
+       virtual void Rotate( float angle ) = 0;
 
        //
        // apply the transforms
        //
 
        // applies that matrix to the point
-       virtual void TransformPoint( double *x, double *y ) const = 0;
+       virtual void TransformPoint( float *x, float *y ) const = 0;
 
        // applies the matrix except for translations
-       virtual void TransformDistance( double *dx, double *dy ) const =0;
+       virtual void TransformDistance( float *dx, float *dy ) const = 0;
 
        // returns the native representation
-       virtual void * GetNativeMatrix() const = 0;
+       virtual void* GetNativeMatrix() const = 0;
 } ;
 
 class WXDLLIMPEXP_CORE wxGraphicsPathData : public wxGraphicsObjectRefData
@@ -105,13 +106,13 @@ public :
     //
 
     // begins a new subpath at (x,y)
-    virtual void MoveToPoint( double x, double y ) = 0;
+    virtual void MoveToPoint( float x, float y ) = 0;
 
     // adds a straight line from the current point to (x,y)
-    virtual void AddLineToPoint( double x, double y ) = 0;
+    virtual void AddLineToPoint( float x, float y ) = 0;
 
     // adds a cubic Bezier curve from the current point, using two control points and an end point
-    virtual void AddCurveToPoint( double cx1, double cy1, double cx2, double cy2, double x, double y ) = 0;
+    virtual void AddCurveToPoint( float cx1, float cy1, float cx2, float cy2, float x, float y ) = 0;
 
     // adds another path
     virtual void AddPath( const wxGraphicsPathData* path ) =0;
@@ -120,10 +121,10 @@ public :
     virtual void CloseSubpath() = 0;
 
     // gets the last point of the current path, (0,0) if not yet set
-    virtual void GetCurrentPoint( double* x, double* y) const = 0;
+    virtual void GetCurrentPoint( float* x, float* y) const = 0;
 
     // adds an arc of a circle centering at (x,y) with radius (r) from startAngle to endAngle
-    virtual void AddArc( double x, double y, double r, double startAngle, double endAngle, bool clockwise ) = 0;
+    virtual void AddArc( float x, float y, float r, float startAngle, float endAngle, bool clockwise ) = 0;
 
     //
     // These are convenience functions which - if not available natively will be assembled
@@ -131,22 +132,22 @@ public :
     //
 
     // adds a quadratic Bezier curve from the current point, using a control point and an end point
-    virtual void AddQuadCurveToPoint( double cx, double cy, double x, double y );
+    virtual void AddQuadCurveToPoint( float cx, float cy, float x, float y );
 
     // appends a rectangle as a new closed subpath
-    virtual void AddRectangle( double x, double y, double w, double h );
+    virtual void AddRectangle( float x, float y, float w, float h );
 
     // appends an ellipsis as a new closed subpath fitting the passed rectangle
-    virtual void AddCircle( double x, double y, double r );
+    virtual void AddCircle( float x, float y, float r );
 
     // appends a an arc to two tangents connecting (current) to (x1,y1) and (x1,y1) to (x2,y2), also a straight line from (current) to (x1,y1)
-    virtual void AddArcToPoint( double x1, double y1 , double x2, double y2, double r ) ;
+    virtual void AddArcToPoint( float x1, float y1 , float x2, float y2, float r ) ;
 
     // appends an ellipse
-    virtual void AddEllipse( double x, double y, double w, double h);
+    virtual void AddEllipse( float x, float y, float w, float h);
 
     // appends a rounded rectangle
-    virtual void AddRoundedRectangle( double x, double y, double w, double h, double radius);
+    virtual void AddRoundedRectangle( float x, float y, float w, float h, float radius);
 
     // returns the native path
     virtual void * GetNativePath() const = 0;
@@ -158,9 +159,9 @@ public :
     virtual void Transform( const wxGraphicsMatrixData* matrix ) =0;
 
     // gets the bounding box enclosing all points (possibly including control points)
-    virtual void GetBox(double *x, double *y, double *w, double *h) const=0;
+    virtual void GetBox(float *x, float *y, float *w, float *h) const=0;
 
-    virtual bool Contains( double x, double y, wxPolygonFillMode fillStyle = wxPolygonFillMode::OddEven) const=0;
+    virtual bool Contains( float x, float y, wxPolygonFillMode fillStyle = wxPolygonFillMode::OddEven) const=0;
 };
 
 #endif

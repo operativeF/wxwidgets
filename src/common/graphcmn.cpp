@@ -125,16 +125,16 @@ void wxGraphicsMatrix::Concat( const wxGraphicsMatrix *t )
 }
 
 // sets the matrix to the respective values
-void wxGraphicsMatrix::Set(double a, double b, double c, double d,
-                           double tx, double ty)
+void wxGraphicsMatrix::Set(float a, float b, float c, float d,
+                           float tx, float ty)
 {
     AllocExclusive();
     GetMatrixData()->Set(a,b,c,d,tx,ty);
 }
 
 // gets the component valuess of the matrix
-void wxGraphicsMatrix::Get(double* a, double* b,  double* c,
-                           double* d, double* tx, double* ty) const
+void wxGraphicsMatrix::Get(float* a, float* b,  float* c,
+                           float* d, float* tx, float* ty) const
 {
     GetMatrixData()->Get(a, b, c, d, tx, ty);
 }
@@ -159,21 +159,21 @@ bool wxGraphicsMatrix::IsIdentity() const
 }
 
 // add the translation to this matrix
-void wxGraphicsMatrix::Translate( double dx , double dy )
+void wxGraphicsMatrix::Translate( float dx , float dy )
 {
     AllocExclusive();
     GetMatrixData()->Translate(dx,dy);
 }
 
 // add the scale to this matrix
-void wxGraphicsMatrix::Scale( double xScale , double yScale )
+void wxGraphicsMatrix::Scale( float xScale , float yScale )
 {
     AllocExclusive();
     GetMatrixData()->Scale(xScale,yScale);
 }
 
 // add the rotation to this matrix (radians)
-void wxGraphicsMatrix::Rotate( double angle )
+void wxGraphicsMatrix::Rotate( float angle )
 {
     AllocExclusive();
     GetMatrixData()->Rotate(angle);
@@ -184,13 +184,13 @@ void wxGraphicsMatrix::Rotate( double angle )
 //
 
 // applies that matrix to the point
-void wxGraphicsMatrix::TransformPoint( double *x, double *y ) const
+void wxGraphicsMatrix::TransformPoint( float *x, float *y ) const
 {
     GetMatrixData()->TransformPoint(x,y);
 }
 
 // applies the matrix except for translations
-void wxGraphicsMatrix::TransformDistance( double *dx, double *dy ) const
+void wxGraphicsMatrix::TransformDistance( float *dx, float *dy ) const
 {
     GetMatrixData()->TransformDistance(dx,dy);
 }
@@ -208,43 +208,43 @@ void * wxGraphicsMatrix::GetNativeMatrix() const
 wxIMPLEMENT_DYNAMIC_CLASS(wxGraphicsPath, wxGraphicsObject);
 WXDLLIMPEXP_DATA_CORE(wxGraphicsPath) wxNullGraphicsPath;
 
-// convenience functions, for using wxPoint2DDouble etc
+// convenience functions, for using wxPoint2DFloat etc
 
-wxPoint2DDouble wxGraphicsPath::GetCurrentPoint() const
+wxPoint2DFloat wxGraphicsPath::GetCurrentPoint() const
 {
-    double x,y;
+    float x,y;
     GetCurrentPoint(&x,&y);
     return {x, y};
 }
 
-void wxGraphicsPath::MoveToPoint( const wxPoint2DDouble& p)
+void wxGraphicsPath::MoveToPoint( const wxPoint2DFloat& p)
 {
     MoveToPoint( p.x , p.y);
 }
 
-void wxGraphicsPath::AddLineToPoint( const wxPoint2DDouble& p)
+void wxGraphicsPath::AddLineToPoint( const wxPoint2DFloat& p)
 {
     AddLineToPoint( p.x , p.y);
 }
 
-void wxGraphicsPath::AddCurveToPoint( const wxPoint2DDouble& c1, const wxPoint2DDouble& c2, const wxPoint2DDouble& e)
+void wxGraphicsPath::AddCurveToPoint( const wxPoint2DFloat& c1, const wxPoint2DFloat& c2, const wxPoint2DFloat& e)
 {
     AddCurveToPoint(c1.x, c1.y, c2.x, c2.y, e.x, e.y);
 }
 
-void wxGraphicsPath::AddArc( const wxPoint2DDouble& c, double r, double startAngle, double endAngle, bool clockwise)
+void wxGraphicsPath::AddArc( const wxPoint2DFloat& c, float r, float startAngle, float endAngle, bool clockwise)
 {
     AddArc(c.x, c.y, r, startAngle, endAngle, clockwise);
 }
 
 wxRect2DDouble wxGraphicsPath::GetBox() const
 {
-    double x,y,w,h;
+    float x,y,w,h;
     GetBox(&x,&y,&w,&h);
     return { x, y, w, h };
 }
 
-bool wxGraphicsPath::Contains( const wxPoint2DDouble& c, wxPolygonFillMode fillStyle ) const
+bool wxGraphicsPath::Contains( const wxPoint2DFloat& c, wxPolygonFillMode fillStyle ) const
 {
     return Contains( c.x, c.y, fillStyle);
 }
@@ -252,21 +252,21 @@ bool wxGraphicsPath::Contains( const wxPoint2DDouble& c, wxPolygonFillMode fillS
 // true redirections
 
 // begins a new subpath at (x,y)
-void wxGraphicsPath::MoveToPoint( double x, double y )
+void wxGraphicsPath::MoveToPoint( float x, float y )
 {
     AllocExclusive();
     GetPathData()->MoveToPoint(x,y);
 }
 
 // adds a straight line from the current point to (x,y)
-void wxGraphicsPath::AddLineToPoint( double x, double y )
+void wxGraphicsPath::AddLineToPoint( float x, float y )
 {
     AllocExclusive();
     GetPathData()->AddLineToPoint(x,y);
 }
 
 // adds a cubic Bezier curve from the current point, using two control points and an end point
-void wxGraphicsPath::AddCurveToPoint( double cx1, double cy1, double cx2, double cy2, double x, double y )
+void wxGraphicsPath::AddCurveToPoint( float cx1, float cy1, float cx2, float cy2, float x, float y )
 {
     AllocExclusive();
     GetPathData()->AddCurveToPoint(cx1,cy1,cx2,cy2,x,y);
@@ -287,13 +287,13 @@ void wxGraphicsPath::CloseSubpath()
 }
 
 // gets the last point of the current path, (0,0) if not yet set
-void wxGraphicsPath::GetCurrentPoint( double* x, double* y) const
+void wxGraphicsPath::GetCurrentPoint( float* x, float* y) const
 {
     GetPathData()->GetCurrentPoint(x,y);
 }
 
 // adds an arc of a circle centering at (x,y) with radius (r) from startAngle to endAngle
-void wxGraphicsPath::AddArc( double x, double y, double r, double startAngle, double endAngle, bool clockwise )
+void wxGraphicsPath::AddArc( float x, float y, float r, float startAngle, float endAngle, bool clockwise )
 {
     AllocExclusive();
     GetPathData()->AddArc(x,y,r,startAngle,endAngle,clockwise);
@@ -305,41 +305,41 @@ void wxGraphicsPath::AddArc( double x, double y, double r, double startAngle, do
 //
 
 // adds a quadratic Bezier curve from the current point, using a control point and an end point
-void wxGraphicsPath::AddQuadCurveToPoint( double cx, double cy, double x, double y )
+void wxGraphicsPath::AddQuadCurveToPoint( float cx, float cy, float x, float y )
 {
     AllocExclusive();
     GetPathData()->AddQuadCurveToPoint(cx,cy,x,y);
 }
 
 // appends a rectangle as a new closed subpath
-void wxGraphicsPath::AddRectangle( double x, double y, double w, double h )
+void wxGraphicsPath::AddRectangle( float x, float y, float w, float h )
 {
     AllocExclusive();
     GetPathData()->AddRectangle(x,y,w,h);
 }
 
 // appends an ellipsis as a new closed subpath fitting the passed rectangle
-void wxGraphicsPath::AddCircle( double x, double y, double r )
+void wxGraphicsPath::AddCircle( float x, float y, float r )
 {
     AllocExclusive();
     GetPathData()->AddCircle(x,y,r);
 }
 
 // appends a an arc to two tangents connecting (current) to (x1,y1) and (x1,y1) to (x2,y2), also a straight line from (current) to (x1,y1)
-void wxGraphicsPath::AddArcToPoint( double x1, double y1 , double x2, double y2, double r )
+void wxGraphicsPath::AddArcToPoint( float x1, float y1 , float x2, float y2, float r )
 {
     GetPathData()->AddArcToPoint(x1,y1,x2,y2,r);
 }
 
 // appends an ellipse
-void wxGraphicsPath::AddEllipse( double x, double y, double w, double h)
+void wxGraphicsPath::AddEllipse( float x, float y, float w, float h)
 {
     AllocExclusive();
     GetPathData()->AddEllipse(x,y,w,h);
 }
 
 // appends a rounded rectangle
-void wxGraphicsPath::AddRoundedRectangle( double x, double y, double w, double h, double radius)
+void wxGraphicsPath::AddRoundedRectangle( float x, float y, float w, float h, float radius)
 {
     AllocExclusive();
     GetPathData()->AddRoundedRectangle(x,y,w,h,radius);
@@ -365,12 +365,12 @@ void wxGraphicsPath::Transform( const wxGraphicsMatrix& matrix )
 }
 
 // gets the bounding box enclosing all points (possibly including control points)
-void wxGraphicsPath::GetBox(double *x, double *y, double *w, double *h) const
+void wxGraphicsPath::GetBox(float *x, float *y, float *w, float *h) const
 {
     GetPathData()->GetBox(x,y,w,h);
 }
 
-bool wxGraphicsPath::Contains( double x, double y, wxPolygonFillMode fillStyle ) const
+bool wxGraphicsPath::Contains( float x, float y, wxPolygonFillMode fillStyle ) const
 {
     return GetPathData()->Contains(x,y,fillStyle);
 }
@@ -379,22 +379,22 @@ bool wxGraphicsPath::Contains( double x, double y, wxPolygonFillMode fillStyle )
 // Emulations, these mus be implemented in the ...Data classes in order to allow for proper overrides
 //
 
-void wxGraphicsPathData::AddQuadCurveToPoint( double cx, double cy, double x, double y )
+void wxGraphicsPathData::AddQuadCurveToPoint( float cx, float cy, float x, float y )
 {
     // calculate using degree elevation to a cubic bezier
-    wxPoint2DDouble c1;
-    wxPoint2DDouble c2;
+    wxPoint2DFloat c1;
+    wxPoint2DFloat c2;
 
-    wxPoint2DDouble start;
+    wxPoint2DFloat start;
     GetCurrentPoint(&start.x,&start.y);
-    const wxPoint2DDouble end(x,y);
-    const wxPoint2DDouble c(cx,cy);
+    const wxPoint2DFloat end(x,y);
+    const wxPoint2DFloat c(cx,cy);
     c1 = double(1/3.0) * start + double(2/3.0) * c;
     c2 = double(2/3.0) * c + double(1/3.0) * end;
     AddCurveToPoint(c1.x,c1.y,c2.x,c2.y,x,y);
 }
 
-void wxGraphicsPathData::AddRectangle( double x, double y, double w, double h )
+void wxGraphicsPathData::AddRectangle( float x, float y, float w, float h )
 {
     MoveToPoint(x,y);
     AddLineToPoint(x,y+h);
@@ -403,22 +403,22 @@ void wxGraphicsPathData::AddRectangle( double x, double y, double w, double h )
     CloseSubpath();
 }
 
-void wxGraphicsPathData::AddCircle( double x, double y, double r )
+void wxGraphicsPathData::AddCircle( float x, float y, float r )
 {
     MoveToPoint(x+r,y);
     AddArc( x,y,r,0, 2.0 * std::numbers::pi, false);
     CloseSubpath();
 }
 
-void wxGraphicsPathData::AddEllipse( double x, double y, double w, double h)
+void wxGraphicsPathData::AddEllipse( float x, float y, float w, float h)
 {
     if (w <= 0. || h <= 0.)
       return;
 
-    const double rw = w/2;
-    const double rh = h/2;
-    const double xc = x + rw;
-    const double yc = y + rh;
+    const float rw = w/2;
+    const float rh = h/2;
+    const float xc = x + rw;
+    const float yc = y + rh;
     wxGraphicsMatrix m = GetRenderer()->CreateMatrix();
     m.Translate(xc,yc);
     m.Scale(rw/rh,1.0);
@@ -428,39 +428,39 @@ void wxGraphicsPathData::AddEllipse( double x, double y, double w, double h)
     AddPath(p.GetPathData());
 }
 
-void wxGraphicsPathData::AddRoundedRectangle( double x, double y, double w, double h, double radius)
+void wxGraphicsPathData::AddRoundedRectangle( float x, float y, float w, float h, float radius)
 {
     if ( radius == 0 )
         AddRectangle(x,y,w,h);
     else
     {
         MoveToPoint(x+w, y+h/2);
-        AddArc(x+w-radius, y+h-radius, radius, 0.0, std::numbers::pi / 2.0, true);
-        AddArc(x+radius, y+h-radius, radius, std::numbers::pi / 2.0, std::numbers::pi, true);
-        AddArc(x+radius, y+radius, radius, std::numbers::pi, 3.0 * std::numbers::pi /2.0, true);
-        AddArc(x+w-radius, y+radius, radius, 3.0 * std::numbers::pi /2.0, 2.0 * std::numbers::pi, true);
+        AddArc(x+w-radius, y+h-radius, radius, 0.0F, std::numbers::pi / 2.0F, true);
+        AddArc(x+radius, y+h-radius, radius, std::numbers::pi_v<float> / 2.0F, std::numbers::pi_v<float>, true);
+        AddArc(x+radius, y+radius, radius, std::numbers::pi_v<float>, 3.0F * std::numbers::pi_v<float> / 2.0F, true);
+        AddArc(x+w-radius, y+radius, radius, 3.0F * std::numbers::pi_v<float> / 2.0F, 2.0F * std::numbers::pi_v<float>, true);
         CloseSubpath();
     }
 }
 
 // draws a an arc to two tangents connecting (current) to (x1,y1) and (x1,y1) to (x2,y2), also a straight line from (current) to (x1,y1)
-void wxGraphicsPathData::AddArcToPoint( double x1, double y1 , double x2, double y2, double r )
+void wxGraphicsPathData::AddArcToPoint( float x1, float y1 , float x2, float y2, float r )
 {
-    wxPoint2DDouble current;
+    wxPoint2DFloat current;
     GetCurrentPoint(&current.x, &current.y);
-    if ( current == wxPoint2DDouble{0, 0} )
+    if ( current == wxPoint2DFloat{0, 0} )
     {
         // (0, 0) is returned by GetCurrentPoint() also when the last point is not yet actually set,
         // so we should reposition it to (0, 0) to be sure that a last point is initially set.
         MoveToPoint(0, 0);
     }
 
-    const wxPoint2DDouble p1(x1, y1);
-    const wxPoint2DDouble p2(x2, y2);
+    const wxPoint2DFloat p1(x1, y1);
+    const wxPoint2DFloat p2(x2, y2);
 
-    wxPoint2DDouble v1 = current - p1;
+    wxPoint2DFloat v1 = current - p1;
     const double v1Length = GetVectorLength(v1);
-    wxPoint2DDouble v2 = p2 - p1;
+    wxPoint2DFloat v2 = p2 - p1;
     const double v2Length = GetVectorLength(v2);
 
     double alpha = GetVectorAngle(v1) - GetVectorAngle(v2);
@@ -491,19 +491,19 @@ void wxGraphicsPathData::AddArcToPoint( double x1, double y1 , double x2, double
     // Calculate tangential points
     Normalize(v1);
     Normalize(v2);
-    const wxPoint2DDouble t1 = distT*v1 + p1;
-    const wxPoint2DDouble t2 = distT*v2 + p1;
+    const wxPoint2DFloat t1 = distT*v1 + p1;
+    const wxPoint2DFloat t2 = distT*v2 + p1;
     // Calculate the angle bisector vector
     // (because central point is located on the bisector).
-    wxPoint2DDouble v = v1 + v2;
+    wxPoint2DFloat v = v1 + v2;
     if ( GetVectorLength(v) > 0 )
         Normalize(v);
     // Calculate center of the arc
-    const wxPoint2DDouble c = distC*v + p1;
+    const wxPoint2DFloat c = distC*v + p1;
     // Calculate normal vectors at tangential points
     // (with inverted directions to make angle calculations easier).
-    const wxPoint2DDouble nv1 = t1 - c;
-    const wxPoint2DDouble nv2 = t2 - c;
+    const wxPoint2DFloat nv1 = t1 - c;
+    const wxPoint2DFloat nv2 = t2 - c;
     // Calculate start and end angle of the arc.
     const double a1 = GetVectorAngle(nv1);
     const double a2 = GetVectorAngle(nv2);
@@ -581,8 +581,8 @@ void wxGraphicsContext::EndDoc()
 {
 }
 
-void wxGraphicsContext::StartPage(double WXUNUSED(width),
-                                  double WXUNUSED(height))
+void wxGraphicsContext::StartPage(float WXUNUSED(width),
+                                  float WXUNUSED(height))
 {
 }
 
@@ -599,24 +599,24 @@ void wxGraphicsContext::EnableOffset(bool enable)
     m_enableOffset = enable;
 }
 
-void wxGraphicsContext::SetContentScaleFactor(double contentScaleFactor)
+void wxGraphicsContext::SetContentScaleFactor(float contentScaleFactor)
 {
     m_enableOffset = true;
     m_contentScaleFactor = contentScaleFactor;
 }
 
 #if 0
-void wxGraphicsContext::SetAlpha( double WXUNUSED(alpha) )
+void wxGraphicsContext::SetAlpha( float WXUNUSED(alpha) )
 {
 }
 
-double wxGraphicsContext::GetAlpha() const
+float wxGraphicsContext::GetAlpha() const
 {
     return 1.0;
 }
 #endif
 
-void wxGraphicsContext::GetDPI( double* dpiX, double* dpiY) const
+void wxGraphicsContext::GetDPI( float* dpiX, float* dpiY) const
 {
     if ( m_window )
     {
@@ -692,9 +692,9 @@ void wxGraphicsContext::DrawPath( const wxGraphicsPath& path, wxPolygonFillMode 
 
 void
 wxGraphicsContext::DoDrawRotatedText(std::string_view str,
-                                     double x,
-                                     double y,
-                                     double angle)
+                                     float x,
+                                     float y,
+                                     float angle)
 {
     Translate(x,y);
     Rotate( -angle );
@@ -705,15 +705,15 @@ wxGraphicsContext::DoDrawRotatedText(std::string_view str,
 
 void
 wxGraphicsContext::DoDrawFilledText(std::string_view str,
-                                    double x,
-                                    double y,
+                                    float x,
+                                    float y,
                                     const wxGraphicsBrush& backgroundBrush)
 {
     wxGraphicsBrush formerBrush = m_brush;
     wxGraphicsPen formerPen = m_pen;
 
-    double descent;
-    double externalLeading;
+    float descent;
+    float externalLeading;
     auto [width, height] = GetTextExtent( str, &descent, &externalLeading );
     SetBrush( backgroundBrush );
     // to make sure our 'OffsetToPixelBoundaries' doesn't move the fill shape
@@ -728,15 +728,15 @@ wxGraphicsContext::DoDrawFilledText(std::string_view str,
 
 void
 wxGraphicsContext::DoDrawRotatedFilledText(std::string_view str,
-                                           double x, double y,
-                                           double angle,
+                                           float x, float y,
+                                           float angle,
                                            const wxGraphicsBrush& backgroundBrush)
 {
     wxGraphicsBrush formerBrush = m_brush;
     wxGraphicsPen formerPen = m_pen;
 
-    double descent;
-    double externalLeading;
+    float descent;
+    float externalLeading;
 
     auto [width, height] = GetTextExtent( str, &descent, &externalLeading );
     SetBrush( backgroundBrush );
@@ -756,7 +756,7 @@ wxGraphicsContext::DoDrawRotatedFilledText(std::string_view str,
     SetPen( formerPen );
 }
 
-void wxGraphicsContext::StrokeLine( double x1, double y1, double x2, double y2)
+void wxGraphicsContext::StrokeLine( float x1, float y1, float x2, float y2)
 {
     wxGraphicsPath path = CreatePath();
     path.MoveToPoint(x1, y1);
@@ -764,33 +764,33 @@ void wxGraphicsContext::StrokeLine( double x1, double y1, double x2, double y2)
     StrokePath( path );
 }
 
-void wxGraphicsContext::DrawRectangle( double x, double y, double w, double h)
+void wxGraphicsContext::DrawRectangle( float x, float y, float w, float h)
 {
     wxGraphicsPath path = CreatePath();
     path.AddRectangle( x , y , w , h );
     DrawPath( path );
 }
 
-void wxGraphicsContext::ClearRectangle( double WXUNUSED(x), double WXUNUSED(y), double WXUNUSED(w), double WXUNUSED(h))
+void wxGraphicsContext::ClearRectangle( float WXUNUSED(x), float WXUNUSED(y), float WXUNUSED(w), float WXUNUSED(h))
 {
 
 }
 
-void wxGraphicsContext::DrawEllipse( double x, double y, double w, double h)
+void wxGraphicsContext::DrawEllipse( float x, float y, float w, float h)
 {
     wxGraphicsPath path = CreatePath();
     path.AddEllipse(x,y,w,h);
     DrawPath(path);
 }
 
-void wxGraphicsContext::DrawRoundedRectangle( double x, double y, double w, double h, double radius)
+void wxGraphicsContext::DrawRoundedRectangle( float x, float y, float w, float h, float radius)
 {
     wxGraphicsPath path = CreatePath();
     path.AddRoundedRectangle(x,y,w,h,radius);
     DrawPath(path);
 }
 
-void wxGraphicsContext::StrokeLines( size_t n, const wxPoint2DDouble *points)
+void wxGraphicsContext::StrokeLines( size_t n, const wxPoint2DFloat *points)
 {
     wxASSERT(n > 1);
     wxGraphicsPath path = CreatePath();
@@ -800,7 +800,7 @@ void wxGraphicsContext::StrokeLines( size_t n, const wxPoint2DDouble *points)
     StrokePath( path );
 }
 
-void wxGraphicsContext::DrawLines( size_t n, const wxPoint2DDouble *points, wxPolygonFillMode fillStyle)
+void wxGraphicsContext::DrawLines( size_t n, const wxPoint2DFloat *points, wxPolygonFillMode fillStyle)
 {
     wxASSERT(n > 1);
     wxGraphicsPath path = CreatePath();
@@ -810,7 +810,7 @@ void wxGraphicsContext::DrawLines( size_t n, const wxPoint2DDouble *points, wxPo
     DrawPath( path , fillStyle);
 }
 
-void wxGraphicsContext::StrokeLines( size_t n, const wxPoint2DDouble *beginPoints, const wxPoint2DDouble *endPoints)
+void wxGraphicsContext::StrokeLines( size_t n, const wxPoint2DFloat *beginPoints, const wxPoint2DFloat *endPoints)
 {
     wxASSERT(n > 0);
     wxGraphicsPath path = CreatePath();
@@ -823,8 +823,8 @@ void wxGraphicsContext::StrokeLines( size_t n, const wxPoint2DDouble *beginPoint
 }
 
 // create a 'native' matrix corresponding to these values
-wxGraphicsMatrix wxGraphicsContext::CreateMatrix( double a, double b, double c, double d,
-    double tx, double ty) const
+wxGraphicsMatrix wxGraphicsContext::CreateMatrix( float a, float b, float c, float d,
+    float tx, float ty) const
 {
     return GetRenderer()->CreateMatrix(a,b,c,d,tx,ty);
 }
@@ -875,8 +875,8 @@ wxGraphicsBrush wxGraphicsContext::CreateBrush(const wxBrush& brush ) const
 
 wxGraphicsBrush
 wxGraphicsContext::CreateLinearGradientBrush(
-    double x1, double y1,
-    double x2, double y2,
+    float x1, float y1,
+    float x2, float y2,
     const wxColour& c1, const wxColour& c2,
     const wxGraphicsMatrix& matrix) const
 {
@@ -891,8 +891,8 @@ wxGraphicsContext::CreateLinearGradientBrush(
 
 wxGraphicsBrush
 wxGraphicsContext::CreateLinearGradientBrush(
-    double x1, double y1,
-    double x2, double y2,
+    float x1, float y1,
+    float x2, float y2,
     const wxGraphicsGradientStops& gradientStops,
     const wxGraphicsMatrix& matrix) const
 {
@@ -907,8 +907,8 @@ wxGraphicsContext::CreateLinearGradientBrush(
 
 wxGraphicsBrush
 wxGraphicsContext::CreateRadialGradientBrush(
-        double startX, double startY,
-        double endX, double endY, double radius,
+        float startX, float startY,
+        float endX, float endY, float radius,
         const wxColour &oColor, const wxColour &cColor,
         const wxGraphicsMatrix& matrix) const
 {
@@ -923,8 +923,8 @@ wxGraphicsContext::CreateRadialGradientBrush(
 
 wxGraphicsBrush
 wxGraphicsContext::CreateRadialGradientBrush(
-        double startX, double startY,
-        double endX, double endY, double radius,
+        float startX, float startY,
+        float endX, float endY, float radius,
         const wxGraphicsGradientStops& gradientStops,
         const wxGraphicsMatrix& matrix) const
 {
@@ -939,13 +939,13 @@ wxGraphicsContext::CreateRadialGradientBrush(
 
 wxGraphicsFont wxGraphicsContext::wxCreateFont( const wxFont &font , const wxColour &col ) const
 {
-    wxRealPoint dpi;
+    wxPoint2DFloat dpi;
     GetDPI(&dpi.x, &dpi.y);
     return GetRenderer()->CreateFontAtDPI(font, dpi, col);
 }
 
 wxGraphicsFont
-wxGraphicsContext::wxCreateFont(double sizeInPixels,
+wxGraphicsContext::wxCreateFont(float sizeInPixels,
                               const std::string& facename,
                               unsigned int flags,
                               const wxColour& col) const
@@ -965,7 +965,7 @@ wxGraphicsBitmap wxGraphicsContext::CreateBitmapFromImage(const wxImage& image) 
 }
 #endif // wxUSE_IMAGE
 
-wxGraphicsBitmap wxGraphicsContext::CreateSubBitmap( const wxGraphicsBitmap &bmp, double x, double y, double w, double h   ) const
+wxGraphicsBitmap wxGraphicsContext::CreateSubBitmap( const wxGraphicsBitmap &bmp, float x, float y, float w, float h   ) const
 {
     return GetRenderer()->CreateSubBitmap(bmp,x,y,w,h);
 }

@@ -119,20 +119,20 @@ public :
     //
 
     // begins a new subpath at (x,y)
-    void MoveToPoint( double x, double y ) override;
+    void MoveToPoint( float x, float y ) override;
 
     // adds a straight line from the current point to (x,y)
-    void AddLineToPoint( double x, double y ) override;
+    void AddLineToPoint( float x, float y ) override;
 
     // adds a cubic Bezier curve from the current point, using two control points and an end point
-    void AddCurveToPoint( double cx1, double cy1, double cx2, double cy2, double x, double y ) override;
+    void AddCurveToPoint( float cx1, float cy1, float cx2, float cy2, float x, float y ) override;
 
 
     // adds an arc of a circle centering at (x,y) with radius (r) from startAngle to endAngle
-    void AddArc( double x, double y, double r, double startAngle, double endAngle, bool clockwise ) override;
+    void AddArc( float x, float y, float r, float startAngle, float endAngle, bool clockwise ) override;
 
     // gets the last point of the current path, (0,0) if not yet set
-    void GetCurrentPoint( double* x, double* y) const override;
+    void GetCurrentPoint( float* x, float* y) const override;
 
     // adds another path
     void AddPath( const wxGraphicsPathData* path ) override;
@@ -146,17 +146,17 @@ public :
     //
 
     // appends a rectangle as a new closed subpath
-    void AddRectangle(double x, double y, double w, double h) override;
+    void AddRectangle(float x, float y, float w, float h) override;
 
     // appends a circle as a new closed subpath
-    void AddCircle(double x, double y, double r) override;
+    void AddCircle(float x, float y, float r) override;
 
     // appends an ellipse as a new closed subpath fitting the passed rectangle
-    void AddEllipse(double x, double y, double w, double h) override;
+    void AddEllipse(float x, float y, float w, float h) override;
 
     /*
     // draws a an arc to two tangents connecting (current) to (x1,y1) and (x1,y1) to (x2,y2), also a straight line from (current) to (x1,y1)
-    virtual void AddArcToPoint( double x1, double y1 , double x2, double y2, double r )  ;
+    virtual void AddArcToPoint( float x1, float y1 , float x2, float y2, float r )  ;
     */
 
     // returns the native path
@@ -169,9 +169,9 @@ public :
     void Transform( const wxGraphicsMatrixData* matrix ) override;
 
     // gets the bounding box enclosing all points (possibly including control points)
-    void GetBox(double *x, double *y, double *w, double *h) const override;
+    void GetBox(float *x, float *y, float *w, float *h) const override;
 
-    bool Contains( double x, double y, wxPolygonFillMode fillStyle = wxPolygonFillMode::OddEven) const override;
+    bool Contains( float x, float y, wxPolygonFillMode fillStyle = wxPolygonFillMode::OddEven) const override;
 
 private :
     std::unique_ptr<GraphicsPath> m_path;
@@ -194,12 +194,13 @@ public :
     void Concat( const wxGraphicsMatrixData *t ) override;
 
     // sets the matrix to the respective values
-    void Set(double a=1.0, double b=0.0, double c=0.0, double d=1.0,
-        double tx=0.0, double ty=0.0) override;
+    void Set(float a = 1.0F, float b = 0.0F,
+             float c = 0.0F, float d = 1.0F,
+             float tx = 0.0F, float ty = 0.0F) override;
 
     // gets the component valuess of the matrix
-    void Get(double* a=nullptr, double* b=nullptr,  double* c=nullptr,
-                     double* d=nullptr, double* tx=nullptr, double* ty=nullptr) const override;
+    void Get(float* a = nullptr, float* b = nullptr,  float* c = nullptr,
+                     float* d = nullptr, float* tx = nullptr, float* ty = nullptr) const override;
 
     // makes this the inverse matrix
     void Invert() override;
@@ -215,23 +216,23 @@ public :
     //
 
     // add the translation to this matrix
-    void Translate( double dx , double dy ) override;
+    void Translate( float dx , float dy ) override;
 
     // add the scale to this matrix
-    void Scale( double xScale , double yScale ) override;
+    void Scale( float xScale , float yScale ) override;
 
     // add the rotation to this matrix (radians)
-    void Rotate( double angle ) override;
+    void Rotate( float angle ) override;
 
     //
     // apply the transforms
     //
 
     // applies that matrix to the point
-    void TransformPoint( double *x, double *y ) const override;
+    void TransformPoint( float *x, float *y ) const override;
 
     // applies the matrix except for translations
-    void TransformDistance( double *dx, double *dy ) const override;
+    void TransformDistance( float *dx, float *dy ) const override;
 
     // returns the native representation
     void * GetNativeMatrix() const override;
@@ -246,13 +247,13 @@ class wxGDIPlusPenBrushBaseData : public wxGraphicsObjectRefData
 public:
     explicit wxGDIPlusPenBrushBaseData(wxGraphicsRenderer* renderer);
 
-    void CreateLinearGradientBrush(double x1, double y1,
-                                   double x2, double y2,
+    void CreateLinearGradientBrush(float x1, float y1,
+                                   float x2, float y2,
                                    const wxGraphicsGradientStops& stops,
                                    const wxGraphicsMatrix& matrix = wxNullGraphicsMatrix);
-    void CreateRadialGradientBrush(double startX, double startY,
-                                   double endX, double endY,
-                                   double radius,
+    void CreateRadialGradientBrush(float startX, float startY,
+                                   float endX, float endY,
+                                   float radius,
                                    const wxGraphicsGradientStops& stops,
                                    const wxGraphicsMatrix& matrix = wxNullGraphicsMatrix);
 protected:
@@ -277,12 +278,12 @@ class wxGDIPlusPenData : public wxGDIPlusPenBrushBaseData
 public:
     wxGDIPlusPenData( wxGraphicsRenderer* renderer, const wxGraphicsPenInfo &info );
 
-    virtual double GetWidth() { return m_width; }
+    virtual float GetWidth() { return m_width; }
     virtual Pen* GetGDIPlusPen() { return m_pen.get(); }
 
 protected :
     std::unique_ptr<Pen> m_pen;
-    double m_width{0.0};
+    float m_width{};
 };
 
 
@@ -320,7 +321,7 @@ class wxGDIPlusFontData : public wxGraphicsObjectRefData
 public:
     wxGDIPlusFontData( wxGraphicsRenderer* renderer,
                        const wxFont &font,
-                       const wxRealPoint& dpi,
+                       const wxPoint2DFloat& dpi,
                        const wxColour& col );
     wxGDIPlusFontData(wxGraphicsRenderer* renderer,
                       const std::string& name,
@@ -374,7 +375,7 @@ class wxGDIPlusContext : public wxGraphicsContext
 {
 public:
     wxGDIPlusContext( wxGraphicsRenderer* renderer, const wxDC& dc );
-    wxGDIPlusContext( wxGraphicsRenderer* renderer, HDC hdc, double width, double height );
+    wxGDIPlusContext( wxGraphicsRenderer* renderer, HDC hdc, float width, float height );
     wxGDIPlusContext( wxGraphicsRenderer* renderer, HWND hwnd, wxWindow* window = nullptr);
     wxGDIPlusContext( wxGraphicsRenderer* renderer, Graphics* gr);
     explicit wxGDIPlusContext(wxGraphicsRenderer* renderer);
@@ -386,33 +387,33 @@ public:
 
     void Clip( const wxRegion &region ) override;
     // clips drawings to the rect
-    void Clip( double x, double y, double w, double h ) override;
+    void Clip( float x, float y, float w, float h ) override;
 
     // resets the clipping to original extent
     void ResetClip() override;
 
     // returns bounding box of the clipping region
-    void GetClipBox(double* x, double* y, double* w, double* h) override;
+    void GetClipBox(float* x, float* y, float* w, float* h) override;
 
     void * GetNativeContext() override;
 
     void StrokePath( const wxGraphicsPath& p ) override;
     void FillPath( const wxGraphicsPath& p , wxPolygonFillMode fillStyle = wxPolygonFillMode::OddEven ) override;
 
-    void DrawRectangle( double x, double y, double w, double h ) override;
+    void DrawRectangle( float x, float y, float w, float h ) override;
 
     // stroke lines connecting each of the points
-    void StrokeLines( size_t n, const wxPoint2DDouble *points) override;
+    void StrokeLines( size_t n, const wxPoint2DFloat *points) override;
 
     // We don't have any specific implementation for this one in wxMSW but
     // override it just to avoid warnings about hiding the base class virtual.
-    void StrokeLines( size_t n, const wxPoint2DDouble *beginPoints, const wxPoint2DDouble *endPoints) override
+    void StrokeLines( size_t n, const wxPoint2DFloat *beginPoints, const wxPoint2DFloat *endPoints) override
     {
         wxGraphicsContext::StrokeLines(n, beginPoints, endPoints);
     }
 
     // draws a polygon
-    void DrawLines( size_t n, const wxPoint2DDouble *points, wxPolygonFillMode fillStyle = wxPolygonFillMode::OddEven ) override;
+    void DrawLines( size_t n, const wxPoint2DFloat *points, wxPolygonFillMode fillStyle = wxPolygonFillMode::OddEven ) override;
 
     bool SetAntialiasMode(wxAntialiasMode antialias) override;
 
@@ -420,13 +421,13 @@ public:
 
     bool SetCompositionMode(wxCompositionMode op) override;
 
-    void BeginLayer(double opacity) override;
+    void BeginLayer(float opacity) override;
 
     void EndLayer() override;
 
-    void Translate( double dx , double dy ) override;
-    void Scale( double xScale , double yScale ) override;
-    void Rotate( double angle ) override;
+    void Translate( float dx , float dy ) override;
+    void Scale( float xScale , float yScale ) override;
+    void Rotate( float angle ) override;
 
     // concatenates this transform with the current transform of this context
     void ConcatTransform( const wxGraphicsMatrix& matrix ) override;
@@ -437,18 +438,18 @@ public:
     // gets the matrix of this context
     wxGraphicsMatrix GetTransform() const override;
 
-    void DrawBitmap( const wxGraphicsBitmap &bmp, double x, double y, double w, double h ) override;
-    void DrawBitmap( const wxBitmap &bmp, double x, double y, double w, double h ) override;
-    void DrawIcon( const wxIcon &icon, double x, double y, double w, double h ) override;
+    void DrawBitmap( const wxGraphicsBitmap &bmp, float x, float y, float w, float h ) override;
+    void DrawBitmap( const wxBitmap &bmp, float x, float y, float w, float h ) override;
+    void DrawIcon( const wxIcon &icon, float x, float y, float w, float h ) override;
     void PushState() override;
     void PopState() override;
 
-    std::pair<double, double> GetTextExtent( std::string_view str,
-        double *descent, double *externalLeading ) const override;
-    std::vector<double> GetPartialTextExtents(std::string_view text) const override;
+    std::pair<float, float> GetTextExtent( std::string_view str,
+        float *descent, float *externalLeading ) const override;
+    std::vector<float> GetPartialTextExtents(std::string_view text) const override;
     bool ShouldOffset() const override;
-    virtual void GetSize( double* width, double *height );
-    void GetDPI(double* dpiX, double* dpiY) const override;
+    virtual void GetSize( float* width, float *height );
+    void GetDPI(float* dpiX, float* dpiY) const override;
 
     Graphics* GetGraphics() const { return m_context.get(); }
 
@@ -458,7 +459,7 @@ protected:
     void Init(Graphics* graphics, int width, int height);
 
 private:
-    void DoDrawText(std::string_view str, double x, double y) override;
+    void DoDrawText(std::string_view str, float x, float y) override;
 
     std::unique_ptr<Graphics> m_context;
     std::stack<GraphicsState> m_stateStack;
@@ -525,7 +526,7 @@ class wxGDIPlusPrintingContext : public wxGDIPlusContext
 public:
     wxGDIPlusPrintingContext( wxGraphicsRenderer* renderer, const wxDC& dc );
 
-    void GetDPI(double* dpiX, double* dpiY) const override;
+    void GetDPI(float* dpiX, float* dpiY) const override;
 };
 
 //-----------------------------------------------------------------------------
@@ -581,8 +582,8 @@ public :
 
     // Matrix
 
-    wxGraphicsMatrix CreateMatrix( double a=1.0, double b=0.0, double c=0.0, double d=1.0,
-        double tx=0.0, double ty=0.0) override;
+    wxGraphicsMatrix CreateMatrix( float a = 1.0F, float b = 0.0F, float c = 0.0F, float d = 1.0F,
+        float tx = 0.0F, float ty = 0.0F) override;
 
 
     wxGraphicsPen CreatePen(const wxGraphicsPenInfo& pen) override;
@@ -590,15 +591,15 @@ public :
     wxGraphicsBrush CreateBrush(const wxBrush& brush ) override;
 
     wxGraphicsBrush
-    CreateLinearGradientBrush(double x1, double y1,
-                              double x2, double y2,
+    CreateLinearGradientBrush(float x1, float y1,
+                              float x2, float y2,
                               const wxGraphicsGradientStops& stops,
                               const wxGraphicsMatrix& matrix = wxNullGraphicsMatrix) override;
 
     wxGraphicsBrush
-    CreateRadialGradientBrush(double startX, double startY,
-                              double endX, double endY,
-                              double radius,
+    CreateRadialGradientBrush(float startX, float startY,
+                              float endX, float endY,
+                              float radius,
                               const wxGraphicsGradientStops& stops,
                               const wxGraphicsMatrix& matrix = wxNullGraphicsMatrix) override;
 
@@ -612,20 +613,20 @@ public :
     wxGraphicsFont wxCreateFont( const wxFont& font,
                                        const wxColour& col) override;
 
-    wxGraphicsFont wxCreateFont(double sizeInPixels,
+    wxGraphicsFont wxCreateFont(float sizeInPixels,
                                       const std::string& facename,
                                       unsigned int flags = wxFONTFLAG_DEFAULT,
                                       const wxColour& col = *wxBLACK) override;
 
     wxGraphicsFont CreateFontAtDPI(const wxFont& font,
-                                           const wxRealPoint& dpi,
+                                           const wxPoint2DFloat& dpi,
                                            const wxColour& col) override;
 
     // create a graphics bitmap from a native bitmap
     wxGraphicsBitmap CreateBitmapFromNativeBitmap( void* bitmap ) override;
 
     // create a subimage from a native image representation
-    wxGraphicsBitmap CreateSubBitmap( const wxGraphicsBitmap &bitmap, double x, double y, double w, double h  ) override;
+    wxGraphicsBitmap CreateSubBitmap( const wxGraphicsBitmap &bitmap, float x, float y, float w, float h  ) override;
 
     std::string GetName() const override;
     void GetVersion(int *major, int *minor, int *micro) const override;
@@ -698,8 +699,8 @@ wxGDIPlusPenBrushBaseData::SetGradientStops(T *brush,
 
 void
 wxGDIPlusPenBrushBaseData::CreateLinearGradientBrush(
-    double x1, double y1,
-    double x2, double y2,
+    float x1, float y1,
+    float x2, float y2,
     const wxGraphicsGradientStops& stops,
     const wxGraphicsMatrix& matrix)
 {
@@ -724,15 +725,15 @@ wxGDIPlusPenBrushBaseData::CreateLinearGradientBrush(
 
 void
 wxGDIPlusPenBrushBaseData::CreateRadialGradientBrush(
-    double startX, double startY,
-    double endX, double endY,
-    double radius,
+    float startX, float startY,
+    float endX, float endY,
+    float radius,
     const wxGraphicsGradientStops& stops,
     const wxGraphicsMatrix& matrix)
 {
     m_brushPath = std::make_unique<GraphicsPath>();
-    m_brushPath->AddEllipse( (REAL)(endX-radius), (REAL)(endY-radius),
-                             (REAL)(2*radius), (REAL)(2*radius));
+    m_brushPath->AddEllipse( endX - radius, endY - radius,
+                             2 * radius, 2 * radius);
 
     auto brush = std::make_unique<PathGradientBrush>(m_brushPath.get());
     brush->SetCenterPoint(PointF(startX, startY));
@@ -1070,7 +1071,7 @@ wxGDIPlusFontData::Init(const std::string& name,
 
 wxGDIPlusFontData::wxGDIPlusFontData( wxGraphicsRenderer* renderer,
                                       const wxFont &font,
-                                      const wxRealPoint& dpi,
+                                      const wxPoint2DFloat& dpi,
                                       const wxColour& col )
     : wxGraphicsObjectRefData( renderer )
 {
@@ -1365,18 +1366,18 @@ wxGraphicsObjectRefData* wxGDIPlusPathData::Clone() const
 // The Primitives
 //
 
-void wxGDIPlusPathData::MoveToPoint( double x , double y )
+void wxGDIPlusPathData::MoveToPoint( float x , float y )
 {
     m_path->StartFigure();
     m_figureOpened = true;
-    m_figureStart = PointF((REAL)x, (REAL)y);
+    m_figureStart = PointF(x, y);
     // Since native current point is not updated in any way
     // we have to maintain current point location on our own in this case.
     m_logCurrentPoint = m_figureStart;
     m_logCurrentPointSet = true;
 }
 
-void wxGDIPlusPathData::AddLineToPoint( double x , double y )
+void wxGDIPlusPathData::AddLineToPoint( float x , float y )
 {
     PointF start;
     if ( m_logCurrentPointSet )
@@ -1394,7 +1395,7 @@ void wxGDIPlusPathData::AddLineToPoint( double x , double y )
             return;
         }
     }
-    m_path->AddLine(start.X, start.Y, (REAL)x, (REAL)y);
+    m_path->AddLine(start.X, start.Y, x, y);
     // After calling AddLine() the native current point will be updated and can be used.
     m_logCurrentPointSet = false;
 }
@@ -1416,7 +1417,7 @@ void wxGDIPlusPathData::CloseSubpath()
     }
 }
 
-void wxGDIPlusPathData::AddCurveToPoint( double cx1, double cy1, double cx2, double cy2, double x, double y )
+void wxGDIPlusPathData::AddCurveToPoint( float cx1, float cy1, float cx2, float cy2, float x, float y )
 {
     PointF c1(cx1,cy1);
     PointF c2(cx2,cy2);
@@ -1442,7 +1443,7 @@ void wxGDIPlusPathData::AddCurveToPoint( double cx1, double cy1, double cx2, dou
 }
 
 // gets the last point of the current path, (0,0) if not yet set
-void wxGDIPlusPathData::GetCurrentPoint( double* x, double* y) const
+void wxGDIPlusPathData::GetCurrentPoint( float* x, float* y) const
 {
     PointF start;
     if ( m_logCurrentPointSet )
@@ -1454,9 +1455,9 @@ void wxGDIPlusPathData::GetCurrentPoint( double* x, double* y) const
     *y = start.Y ;
 }
 
-void wxGDIPlusPathData::AddArc( double x, double y, double r, double startAngle, double endAngle, bool clockwise )
+void wxGDIPlusPathData::AddArc( float x, float y, float r, float startAngle, float endAngle, bool clockwise )
 {
-    double angle;
+    float angle;
 
     // For the sake of compatibility normalize angles the same way
     // as it is done in Cairo.
@@ -1468,7 +1469,7 @@ void wxGDIPlusPathData::AddArc( double x, double y, double r, double startAngle,
         {
             while ( endAngle <= startAngle )
             {
-                endAngle += 2.0 * std::numbers::pi;
+                endAngle += 2.0F * std::numbers::pi_v<float>;
             }
         }
 
@@ -1482,7 +1483,7 @@ void wxGDIPlusPathData::AddArc( double x, double y, double r, double startAngle,
         {
             while ( endAngle >= startAngle )
             {
-                endAngle -= 2.0 * std::numbers::pi;
+                endAngle -= 2.0F * std::numbers::pi_v<float>;
             }
         }
 
@@ -1503,9 +1504,9 @@ void wxGDIPlusPathData::AddArc( double x, double y, double r, double startAngle,
         return;
     }
 
-    const REAL x0 = (REAL)(x-r);
-    const REAL y0 = (REAL)(y-r);
-    const REAL dim = (REAL)(2*r);
+    const REAL x0 = (x-r);
+    const REAL y0 = (y-r);
+    const REAL dim = (2*r);
     if ( angle >= 2.0 * std::numbers::pi)
     {
         // In addition to arc we need to draw full circle(s).
@@ -1537,7 +1538,7 @@ void wxGDIPlusPathData::AddArc( double x, double y, double r, double startAngle,
    m_logCurrentPointSet = false;
 }
 
-void wxGDIPlusPathData::AddRectangle( double x, double y, double w, double h )
+void wxGDIPlusPathData::AddRectangle( float x, float y, float w, float h )
 {
     m_path->AddRectangle(RectF(x,y,w,h));
     // Drawn rectangle is an intrinsically closed shape but native
@@ -1547,16 +1548,16 @@ void wxGDIPlusPathData::AddRectangle( double x, double y, double w, double h )
     MoveToPoint(x, y);
 }
 
-void wxGDIPlusPathData::AddCircle(double x, double y, double r)
+void wxGDIPlusPathData::AddCircle(float x, float y, float r)
 {
-    m_path->AddEllipse((REAL)(x-r), (REAL)(y-r), (REAL)(2.0*r), (REAL)(2.0*r));
+    m_path->AddEllipse(x-r, y-r, 2.0F * r, 2.0F * r);
     // After calling AddEllipse() the native current point will be updated and can be used.
     m_logCurrentPointSet = false;
 }
 
-void wxGDIPlusPathData::AddEllipse(double x, double y, double w, double h)
+void wxGDIPlusPathData::AddEllipse(float x, float y, float w, float h)
 {
-    m_path->AddEllipse((REAL)x, (REAL)y, (REAL)w, (REAL)h);
+    m_path->AddEllipse(x, y, w, h);
     // After calling AddEllipse() the native current point will be updated and can be used.
     m_logCurrentPointSet = false;
 }
@@ -1590,7 +1591,7 @@ void wxGDIPlusPathData::Transform( const wxGraphicsMatrixData* matrix )
 }
 
 // gets the bounding box enclosing all points (possibly including control points)
-void wxGDIPlusPathData::GetBox(double *x, double *y, double *w, double *h) const
+void wxGDIPlusPathData::GetBox(float *x, float *y, float *w, float *h) const
 {
     RectF bounds;
     m_path->GetBounds( &bounds, nullptr, nullptr) ;
@@ -1600,7 +1601,7 @@ void wxGDIPlusPathData::GetBox(double *x, double *y, double *w, double *h) const
     *h = bounds.Height;
 }
 
-bool wxGDIPlusPathData::Contains( double x, double y, wxPolygonFillMode fillStyle ) const
+bool wxGDIPlusPathData::Contains( float x, float y, wxPolygonFillMode fillStyle ) const
 {
     m_path->SetFillMode( fillStyle == wxPolygonFillMode::OddEven ? FillModeAlternate : FillModeWinding);
     return m_path->IsVisible( (FLOAT) x,(FLOAT) y) == TRUE ;
@@ -1631,17 +1632,18 @@ void wxGDIPlusMatrixData::Concat( const wxGraphicsMatrixData *t )
 }
 
 // sets the matrix to the respective values
-void wxGDIPlusMatrixData::Set(double a, double b, double c, double d,
-                 double tx, double ty)
+void wxGDIPlusMatrixData::Set(float a, float b,
+                              float c, float d,
+                              float tx, float ty)
 {
     m_matrix->SetElements(a,b,c,d,tx,ty);
 }
 
 // gets the component valuess of the matrix
-void wxGDIPlusMatrixData::Get(double* a, double* b,  double* c,
-                              double* d, double* tx, double* ty) const
+void wxGDIPlusMatrixData::Get(float* a, float* b,  float* c,
+                              float* d, float* tx, float* ty) const
 {
-    REAL elements[6];
+    float elements[6];
     m_matrix->GetElements(elements);
     if (a)  *a = elements[0];
     if (b)  *b = elements[1];
@@ -1674,19 +1676,19 @@ bool wxGDIPlusMatrixData::IsIdentity() const
 //
 
 // add the translation to this matrix
-void wxGDIPlusMatrixData::Translate( double dx , double dy )
+void wxGDIPlusMatrixData::Translate( float dx , float dy )
 {
     m_matrix->Translate(dx,dy);
 }
 
 // add the scale to this matrix
-void wxGDIPlusMatrixData::Scale( double xScale , double yScale )
+void wxGDIPlusMatrixData::Scale( float xScale , float yScale )
 {
     m_matrix->Scale(xScale,yScale);
 }
 
 // add the rotation to this matrix (radians)
-void wxGDIPlusMatrixData::Rotate( double angle )
+void wxGDIPlusMatrixData::Rotate( float angle )
 {
     m_matrix->Rotate( wxRadToDeg(angle) );
 }
@@ -1696,7 +1698,7 @@ void wxGDIPlusMatrixData::Rotate( double angle )
 //
 
 // applies that matrix to the point
-void wxGDIPlusMatrixData::TransformPoint( double *x, double *y ) const
+void wxGDIPlusMatrixData::TransformPoint( float *x, float *y ) const
 {
     PointF pt(*x,*y);
     m_matrix->TransformPoints(&pt);
@@ -1705,7 +1707,7 @@ void wxGDIPlusMatrixData::TransformPoint( double *x, double *y ) const
 }
 
 // applies the matrix except for translations
-void wxGDIPlusMatrixData::TransformDistance( double *dx, double *dy ) const
+void wxGDIPlusMatrixData::TransformDistance( float *dx, float *dy ) const
 {
     PointF pt(*dx,*dy);
     m_matrix->TransformVectors(&pt);
@@ -1726,7 +1728,7 @@ void* wxGDIPlusMatrixData::GetNativeMatrix() const
 class wxGDIPlusOffsetHelper
 {
 public :
-    wxGDIPlusOffsetHelper(Graphics* gr, double scaleFactor, bool offset)
+    wxGDIPlusOffsetHelper(Graphics* gr, float scaleFactor, bool offset)
         : m_gr(gr)
     {
         if (offset)
@@ -1751,7 +1753,7 @@ public :
     float m_offset{0.0F};
 } ;
 
-wxGDIPlusContext::wxGDIPlusContext( wxGraphicsRenderer* renderer, HDC hdc, double width, double height   )
+wxGDIPlusContext::wxGDIPlusContext( wxGraphicsRenderer* renderer, HDC hdc, float width, float height   )
     : wxGraphicsContext(renderer)
 {
     Init(new Graphics(hdc), width, height);
@@ -1823,7 +1825,7 @@ void wxGDIPlusContext::Clip( const wxRegion &region )
     m_context->SetClip(&rgn,CombineModeIntersect);
 }
 
-void wxGDIPlusContext::Clip( double x, double y, double w, double h )
+void wxGDIPlusContext::Clip( float x, float y, float w, float h )
 {
     m_context->SetClip(RectF(x,y,w,h),CombineModeIntersect);
 }
@@ -1833,7 +1835,7 @@ void wxGDIPlusContext::ResetClip()
     m_context->ResetClip();
 }
 
-void wxGDIPlusContext::GetClipBox(double* x, double* y, double* w, double* h)
+void wxGDIPlusContext::GetClipBox(float* x, float* y, float* w, float* h)
 {
     RectF r;
     m_context->SetPixelOffsetMode(PixelOffsetModeNone);
@@ -1853,7 +1855,7 @@ void wxGDIPlusContext::GetClipBox(double* x, double* y, double* w, double* h)
         *h = r.Height;
 }
 
-void wxGDIPlusContext::DrawRectangle( double x, double y, double w, double h )
+void wxGDIPlusContext::DrawRectangle( float x, float y, float w, float h )
 {
     if (m_composition == wxCOMPOSITION_DEST)
         return;
@@ -1881,16 +1883,16 @@ void wxGDIPlusContext::DrawRectangle( double x, double y, double w, double h )
         REAL offset = 0;
         if ( pen )
              offset = pen->GetWidth();
-        m_context->FillRectangle( brush, (REAL)x + offset/2, (REAL)y + offset/2, (REAL)w - offset, (REAL)h - offset);
+        m_context->FillRectangle( brush, x + offset/2, y + offset/2, w - offset, h - offset);
     }
 
     if ( pen )
     {
-        m_context->DrawRectangle( pen, (REAL)x, (REAL)y, (REAL)w, (REAL)h );
+        m_context->DrawRectangle( pen, x, y, w, h );
     }
 }
 
-void wxGDIPlusContext::StrokeLines( size_t n, const wxPoint2DDouble *points)
+void wxGDIPlusContext::StrokeLines( size_t n, const wxPoint2DFloat *points)
 {
    if (m_composition == wxCOMPOSITION_DEST)
         return;
@@ -1912,7 +1914,7 @@ void wxGDIPlusContext::StrokeLines( size_t n, const wxPoint2DDouble *points)
    }
 }
 
-void wxGDIPlusContext::DrawLines( size_t n, const wxPoint2DDouble *points, wxPolygonFillMode fillStyle )
+void wxGDIPlusContext::DrawLines( size_t n, const wxPoint2DFloat *points, wxPolygonFillMode fillStyle )
 {
    if (m_composition == wxCOMPOSITION_DEST)
         return;
@@ -2064,7 +2066,7 @@ bool wxGDIPlusContext::SetCompositionMode(wxCompositionMode op)
     return true;
 }
 
-void wxGDIPlusContext::BeginLayer(double /* opacity */)
+void wxGDIPlusContext::BeginLayer(float /* opacity */)
 {
     // TODO
 }
@@ -2074,17 +2076,17 @@ void wxGDIPlusContext::EndLayer()
     // TODO
 }
 
-void wxGDIPlusContext::Rotate( double angle )
+void wxGDIPlusContext::Rotate( float angle )
 {
     m_context->RotateTransform( wxRadToDeg(angle) );
 }
 
-void wxGDIPlusContext::Translate( double dx , double dy )
+void wxGDIPlusContext::Translate( float dx , float dy )
 {
     m_context->TranslateTransform( dx , dy );
 }
 
-void wxGDIPlusContext::Scale( double xScale , double yScale )
+void wxGDIPlusContext::Scale( float xScale , float yScale )
 {
     m_context->ScaleTransform(xScale,yScale);
 }
@@ -2104,7 +2106,7 @@ void wxGDIPlusContext::PopState()
     m_context->Restore(state);
 }
 
-void wxGDIPlusContext::DrawBitmap( const wxGraphicsBitmap &bmp, double x, double y, double w, double h )
+void wxGDIPlusContext::DrawBitmap( const wxGraphicsBitmap &bmp, float x, float y, float w, float h )
 {
    if (m_composition == wxCOMPOSITION_DEST)
         return;
@@ -2114,23 +2116,23 @@ void wxGDIPlusContext::DrawBitmap( const wxGraphicsBitmap &bmp, double x, double
     {
         if( image->GetWidth() != (UINT) w || image->GetHeight() != (UINT) h )
         {
-            Rect drawRect((REAL) x, (REAL)y, (REAL)w, (REAL)h);
+            Rect drawRect(x, y, w, h);
             m_context->SetPixelOffsetMode( PixelOffsetModeNone );
             m_context->DrawImage(image, drawRect, 0 , 0 , image->GetWidth(), image->GetHeight(), UnitPixel ) ;
             m_context->SetPixelOffsetMode( PixelOffsetModeHalf );
         }
         else
-            m_context->DrawImage(image,(REAL) x,(REAL) y,(REAL) w,(REAL) h) ;
+            m_context->DrawImage(image, x, y, w, h) ;
     }
 }
 
-void wxGDIPlusContext::DrawBitmap( const wxBitmap &bmp, double x, double y, double w, double h )
+void wxGDIPlusContext::DrawBitmap( const wxBitmap &bmp, float x, float y, float w, float h )
 {
     wxGraphicsBitmap bitmap = GetRenderer()->CreateBitmap(bmp);
     DrawBitmap(bitmap, x, y, w, h);
 }
 
-void wxGDIPlusContext::DrawIcon( const wxIcon &icon, double x, double y, double w, double h )
+void wxGDIPlusContext::DrawIcon( const wxIcon &icon, float x, float y, float w, float h )
 {
    if (m_composition == wxCOMPOSITION_DEST)
         return;
@@ -2186,13 +2188,13 @@ void wxGDIPlusContext::DrawIcon( const wxIcon &icon, double x, double y, double 
         interim.UnlockBits(&data);
     }
 
-    m_context->DrawImage(image,(REAL) x,(REAL) y,(REAL) w,(REAL) h) ;
+    m_context->DrawImage(image, x, y, w, h) ;
 
     delete image ;
 }
 
 void wxGDIPlusContext::DoDrawText(std::string_view str,
-                                        double x, double y )
+                                        float x, float y )
 {
    if (m_composition == wxCOMPOSITION_DEST)
         return;
@@ -2217,15 +2219,15 @@ void wxGDIPlusContext::DoDrawText(std::string_view str,
                );
 }
 
-std::pair<double, double> wxGDIPlusContext::GetTextExtent(std::string_view str,
-                                     double *descent, double *externalLeading ) const
+std::pair<float, float> wxGDIPlusContext::GetTextExtent(std::string_view str,
+                                     float *descent, float *externalLeading ) const
 {
-    // FIXME: Must return std::pair<double, double>
+    // FIXME: Must return std::pair<float, float>
     //wxCHECK_RET( !m_font.IsNull(), wxT("wxGDIPlusContext::GetTextExtent - no valid font set") );
 
     Font* f = ((wxGDIPlusFontData*)m_font.GetRefData())->GetGDIPlusFont();
 
-    std::pair<double, double> textExtents;
+    std::pair<float, float> textExtents;
 
     // Get the font metrics if we actually need them.
     if ( descent || externalLeading || str.empty() )
@@ -2287,7 +2289,7 @@ std::pair<double, double> wxGDIPlusContext::GetTextExtent(std::string_view str,
 }
 
 // FIXME: This function is a total mess and probably broken.
-std::vector<double> wxGDIPlusContext::GetPartialTextExtents(std::string_view text) const
+std::vector<float> wxGDIPlusContext::GetPartialTextExtents(std::string_view text) const
 {
     //wxCHECK_RET( !m_font.IsNull(), wxT("wxGDIPlusContext::GetPartialTextExtents - no valid font set") );
 
@@ -2308,7 +2310,7 @@ std::vector<double> wxGDIPlusContext::GetPartialTextExtents(std::string_view tex
     CharacterRange* ranges = new CharacterRange[maxSpan] ;
     Region* regions = new Region[maxSpan];
 
-    std::vector<double> widths;
+    std::vector<float> widths;
 
     while( remainder > 0 )
     {
@@ -2343,7 +2345,7 @@ bool wxGDIPlusContext::ShouldOffset() const
     if (!m_enableOffset || m_pen.IsNull())
         return false;
 
-    double width = dynamic_cast<wxGDIPlusPenData*>(m_pen.GetRefData())->GetWidth();
+    float width = dynamic_cast<wxGDIPlusPenData*>(m_pen.GetRefData())->GetWidth();
 
     // always offset for 1-pixel width
     if (width <= 0)
@@ -2351,7 +2353,7 @@ bool wxGDIPlusContext::ShouldOffset() const
 
     // no offset if overall scale is not odd integer
     const wxGraphicsMatrix matrix(GetTransform());
-    double x = GetContentScaleFactor(), y = x;
+    float x = GetContentScaleFactor(), y = x;
     matrix.TransformDistance(&x, &y);
     // FIXME: Double equality
     if (!(std::fmod(std::min(std::fabs(x), std::fabs(y)), 2.0) == 1.0))
@@ -2387,13 +2389,13 @@ wxGraphicsMatrix wxGDIPlusContext::GetTransform() const
     return matrix;
 }
 
-void wxGDIPlusContext::GetSize( double* width, double *height )
+void wxGDIPlusContext::GetSize( float* width, float *height )
 {
     *width = m_width;
     *height = m_height;
 }
 
-void wxGDIPlusContext::GetDPI(double* dpiX, double* dpiY) const
+void wxGDIPlusContext::GetDPI(float* dpiX, float* dpiY) const
 {
     if ( GetWindow() )
     {
@@ -2435,7 +2437,7 @@ wxGDIPlusPrintingContext::wxGDIPlusPrintingContext( wxGraphicsRenderer* renderer
     context->SetPageScale(dpiRatio);
 }
 
-void wxGDIPlusPrintingContext::GetDPI(double* dpiX, double* dpiY) const
+void wxGDIPlusPrintingContext::GetDPI(float* dpiX, float* dpiY) const
 {
     // override to use same scaling as wxWindowsPrintPreview::DetermineScaling
 
@@ -2684,8 +2686,8 @@ wxGraphicsPath wxGDIPlusRenderer::CreatePath()
 
 // Matrix
 
-wxGraphicsMatrix wxGDIPlusRenderer::CreateMatrix( double a, double b, double c, double d,
-                                                           double tx, double ty)
+wxGraphicsMatrix wxGDIPlusRenderer::CreateMatrix( float a, float b, float c, float d,
+                                                           float tx, float ty)
 
 {
     ENSURE_LOADED_OR_RETURN(wxNullGraphicsMatrix);
@@ -2723,8 +2725,8 @@ wxGraphicsBrush wxGDIPlusRenderer::CreateBrush(const wxBrush& brush )
 }
 
 wxGraphicsBrush
-wxGDIPlusRenderer::CreateLinearGradientBrush(double x1, double y1,
-                                             double x2, double y2,
+wxGDIPlusRenderer::CreateLinearGradientBrush(float x1, float y1,
+                                             float x2, float y2,
                                              const wxGraphicsGradientStops& stops,
                                              const wxGraphicsMatrix& matrix)
 {
@@ -2737,9 +2739,9 @@ wxGDIPlusRenderer::CreateLinearGradientBrush(double x1, double y1,
  }
 
 wxGraphicsBrush
-wxGDIPlusRenderer::CreateRadialGradientBrush(double startX, double startY,
-                                             double endX, double endY,
-                                             double radius,
+wxGDIPlusRenderer::CreateRadialGradientBrush(float startX, float startY,
+                                             float endX, float endY,
+                                             float radius,
                                              const wxGraphicsGradientStops& stops,
                                              const wxGraphicsMatrix& matrix)
 {
@@ -2755,11 +2757,11 @@ wxGraphicsFont
 wxGDIPlusRenderer::wxCreateFont( const wxFont &font,
                                const wxColour &col )
 {
-    return CreateFontAtDPI(font, wxRealPoint(), col);
+    return CreateFontAtDPI(font, wxPoint2DFloat{}, col);
 }
 
 wxGraphicsFont
-wxGDIPlusRenderer::wxCreateFont(double sizeInPixels,
+wxGDIPlusRenderer::wxCreateFont(float sizeInPixels,
                               const std::string& facename,
                               unsigned int flags,
                               const wxColour& col)
@@ -2785,7 +2787,7 @@ wxGDIPlusRenderer::wxCreateFont(double sizeInPixels,
 
 wxGraphicsFont
 wxGDIPlusRenderer::CreateFontAtDPI(const wxFont& font,
-                                   const wxRealPoint& dpi,
+                                   const wxPoint2DFloat& dpi,
                                    const wxColour& col)
 {
     ENSURE_LOADED_OR_RETURN(wxNullGraphicsFont);
@@ -2853,7 +2855,7 @@ wxGraphicsBitmap wxGDIPlusRenderer::CreateBitmapFromNativeBitmap( void *bitmap )
         return wxNullGraphicsBitmap;
 }
 
-wxGraphicsBitmap wxGDIPlusRenderer::CreateSubBitmap( const wxGraphicsBitmap &bitmap, double x, double y, double w, double h  )
+wxGraphicsBitmap wxGDIPlusRenderer::CreateSubBitmap( const wxGraphicsBitmap &bitmap, float x, float y, float w, float h  )
 {
     ENSURE_LOADED_OR_RETURN(wxNullGraphicsBitmap);
 
@@ -2867,7 +2869,7 @@ wxGraphicsBitmap wxGDIPlusRenderer::CreateSubBitmap( const wxGraphicsBitmap &bit
                      wxNullGraphicsBitmap, wxS("Invalid bitmap region"));
 
         wxGraphicsBitmap p;
-        p.SetRefData(new wxGDIPlusBitmapData( this , image->Clone( (REAL) x , (REAL) y , (REAL) w , (REAL) h , image->GetPixelFormat()) ));
+        p.SetRefData(new wxGDIPlusBitmapData( this , image->Clone( x, y, w, h, image->GetPixelFormat()) ));
         return p;
     }
     else

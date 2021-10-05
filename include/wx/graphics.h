@@ -17,6 +17,7 @@
 
 #include "wx/affinematrix2d.h"
 #include "wx/geometry.h"
+#include "wx/geometry/point.h"
 #include "wx/colour.h"
 #include "wx/font.h"
 #include "wx/image.h"
@@ -213,12 +214,12 @@ public:
     void Concat( const wxGraphicsMatrix &t ) { Concat( &t ); }
 
     // sets the matrix to the respective values
-    virtual void Set(double a=1.0, double b=0.0, double c=0.0, double d=1.0,
-        double tx=0.0, double ty=0.0);
+    virtual void Set(float a=1.0, float b=0.0, float c=0.0, float d=1.0,
+        float tx=0.0, float ty=0.0);
 
     // gets the component values of the matrix
-    virtual void Get(double* a=nullptr, double* b=nullptr,  double* c=nullptr,
-                     double* d=nullptr, double* tx=nullptr, double* ty=nullptr) const;
+    virtual void Get(float* a=nullptr, float* b=nullptr,  float* c=nullptr,
+                     float* d=nullptr, float* tx=nullptr, float* ty=nullptr) const;
 
     // makes this the inverse matrix
     virtual void Invert();
@@ -235,23 +236,23 @@ public:
     //
 
     // add the translation to this matrix
-    virtual void Translate( double dx , double dy );
+    virtual void Translate( float dx , float dy );
 
     // add the scale to this matrix
-    virtual void Scale( double xScale , double yScale );
+    virtual void Scale( float xScale , float yScale );
 
     // add the rotation to this matrix (radians)
-    virtual void Rotate( double angle );
+    virtual void Rotate( float angle );
 
     //
     // apply the transforms
     //
 
     // applies that matrix to the point
-    virtual void TransformPoint( double *x, double *y ) const;
+    virtual void TransformPoint( float *x, float *y ) const;
 
     // applies the matrix except for translations
-    virtual void TransformDistance( double *dx, double *dy ) const;
+    virtual void TransformDistance( float *dx, float *dy ) const;
 
     // returns the native representation
     virtual void * GetNativeMatrix() const;
@@ -356,7 +357,7 @@ class wxGraphicsPenInfo : public wxPenInfoBase<wxGraphicsPenInfo>
 {
 public:
     explicit wxGraphicsPenInfo(const wxColour& colour = wxColour(),
-                               double width = 1.0,
+                               float width = 1.0F,
                                wxPenStyle style = wxPenStyle::Solid)
         : wxPenInfoBase<wxGraphicsPenInfo>(colour, style)
     {
@@ -366,11 +367,11 @@ public:
 
     // Setters
 
-    wxGraphicsPenInfo& Width(double width)
+    wxGraphicsPenInfo& Width(float width)
     { m_width = width; return *this; }
 
     wxGraphicsPenInfo&
-    LinearGradient(double x1, double y1, double x2, double y2,
+    LinearGradient(float x1, float y1, float x2, float y2,
                    const wxColour& c1, const wxColour& c2,
                    const wxGraphicsMatrix& matrix = wxNullGraphicsMatrix)
     {
@@ -386,7 +387,7 @@ public:
     }
 
     wxGraphicsPenInfo&
-    LinearGradient(double x1, double y1, double x2, double y2,
+    LinearGradient(float x1, float y1, float x2, float y2,
                    const wxGraphicsGradientStops& stops,
                    const wxGraphicsMatrix& matrix = wxNullGraphicsMatrix)
     {
@@ -401,8 +402,8 @@ public:
     }
 
     wxGraphicsPenInfo&
-    RadialGradient(double startX, double startY,
-                   double endX, double endY, double radius,
+    RadialGradient(float startX, float startY,
+                   float endX, float endY, float radius,
                    const wxColour& oColor, const wxColour& cColor,
                    const wxGraphicsMatrix& matrix = wxNullGraphicsMatrix)
     {
@@ -419,9 +420,9 @@ public:
     }
 
     wxGraphicsPenInfo&
-    RadialGradient(double startX, double startY,
-                   double endX, double endY,
-                   double radius, const wxGraphicsGradientStops& stops,
+    RadialGradient(float startX, float startY,
+                   float endX, float endY,
+                   float radius, const wxGraphicsGradientStops& stops,
                    const wxGraphicsMatrix& matrix = wxNullGraphicsMatrix)
     {
         m_gradientType = wxGradientType::Radial;
@@ -437,29 +438,29 @@ public:
 
     // Accessors
 
-    double GetWidth() const { return m_width; }
+    float GetWidth() const { return m_width; }
     wxGradientType GetGradientType() const { return m_gradientType; }
-    double GetX1() const { return m_x1; }
-    double GetY1() const { return m_y1; }
-    double GetX2() const { return m_x2; }
-    double GetY2() const { return m_y2; }
-    double GetStartX() const { return m_x1; }
-    double GetStartY() const { return m_y1; }
-    double GetEndX() const { return m_x2; }
-    double GetEndY() const { return m_y2; }
-    double GetRadius() const { return m_radius; }
+    float GetX1() const { return m_x1; }
+    float GetY1() const { return m_y1; }
+    float GetX2() const { return m_x2; }
+    float GetY2() const { return m_y2; }
+    float GetStartX() const { return m_x1; }
+    float GetStartY() const { return m_y1; }
+    float GetEndX() const { return m_x2; }
+    float GetEndY() const { return m_y2; }
+    float GetRadius() const { return m_radius; }
     const wxGraphicsGradientStops& GetStops() const { return m_stops; }
     const wxGraphicsMatrix& GetMatrix() const { return m_matrix; }
 
 private:
     wxGraphicsGradientStops m_stops;
     wxGraphicsMatrix m_matrix;
-    double m_width;
-    double m_x1{0.0};
-    double m_y1{0.0};
-    double m_x2{0.0};
-    double m_y2{0.0}; // also used for m_xo, m_yo, m_xc, m_yc
-    double m_radius{0.0};
+    float m_width;
+    float m_x1{};
+    float m_y1{};
+    float m_x2{};
+    float m_y2{}; // also used for m_xo, m_yo, m_xc, m_yc
+    float m_radius{};
     wxGradientType m_gradientType;
 };
 
@@ -473,16 +474,16 @@ public:
     //
 
     // begins a new subpath at (x,y)
-    virtual void MoveToPoint( double x, double y );
-    void MoveToPoint( const wxPoint2DDouble& p);
+    virtual void MoveToPoint( float x, float y );
+    void MoveToPoint( const wxPoint2DFloat& p);
 
     // adds a straight line from the current point to (x,y)
-    virtual void AddLineToPoint( double x, double y );
-    void AddLineToPoint( const wxPoint2DDouble& p);
+    virtual void AddLineToPoint( float x, float y );
+    void AddLineToPoint( const wxPoint2DFloat& p);
 
     // adds a cubic Bezier curve from the current point, using two control points and an end point
-    virtual void AddCurveToPoint( double cx1, double cy1, double cx2, double cy2, double x, double y );
-    void AddCurveToPoint( const wxPoint2DDouble& c1, const wxPoint2DDouble& c2, const wxPoint2DDouble& e);
+    virtual void AddCurveToPoint( float cx1, float cy1, float cx2, float cy2, float x, float y );
+    void AddCurveToPoint( const wxPoint2DFloat& c1, const wxPoint2DFloat& c2, const wxPoint2DFloat& e);
 
     // adds another path
     virtual void AddPath( const wxGraphicsPath& path );
@@ -491,12 +492,12 @@ public:
     virtual void CloseSubpath();
 
     // gets the last point of the current path, (0,0) if not yet set
-    virtual void GetCurrentPoint( double* x, double* y) const;
-    wxPoint2DDouble GetCurrentPoint() const;
+    virtual void GetCurrentPoint( float* x, float* y) const;
+    wxPoint2DFloat GetCurrentPoint() const;
 
     // adds an arc of a circle centering at (x,y) with radius (r) from startAngle to endAngle
-    virtual void AddArc( double x, double y, double r, double startAngle, double endAngle, bool clockwise );
-    void AddArc( const wxPoint2DDouble& c, double r, double startAngle, double endAngle, bool clockwise);
+    virtual void AddArc( float x, float y, float r, float startAngle, float endAngle, bool clockwise );
+    void AddArc( const wxPoint2DFloat& c, float r, float startAngle, float endAngle, bool clockwise);
 
     //
     // These are convenience functions which - if not available natively will be assembled
@@ -504,22 +505,22 @@ public:
     //
 
     // adds a quadratic Bezier curve from the current point, using a control point and an end point
-    virtual void AddQuadCurveToPoint( double cx, double cy, double x, double y );
+    virtual void AddQuadCurveToPoint( float cx, float cy, float x, float y );
 
     // appends a rectangle as a new closed subpath
-    virtual void AddRectangle( double x, double y, double w, double h );
+    virtual void AddRectangle( float x, float y, float w, float h );
 
     // appends an ellipsis as a new closed subpath fitting the passed rectangle
-    virtual void AddCircle( double x, double y, double r );
+    virtual void AddCircle( float x, float y, float r );
 
     // appends a an arc to two tangents connecting (current) to (x1,y1) and (x1,y1) to (x2,y2), also a straight line from (current) to (x1,y1)
-    virtual void AddArcToPoint( double x1, double y1 , double x2, double y2, double r );
+    virtual void AddArcToPoint( float x1, float y1 , float x2, float y2, float r );
 
     // appends an ellipse
-    virtual void AddEllipse( double x, double y, double w, double h);
+    virtual void AddEllipse( float x, float y, float w, float h);
 
     // appends a rounded rectangle
-    virtual void AddRoundedRectangle( double x, double y, double w, double h, double radius);
+    virtual void AddRoundedRectangle( float x, float y, float w, float h, float radius);
 
     // returns the native path
     virtual void * GetNativePath() const;
@@ -531,11 +532,11 @@ public:
     virtual void Transform( const wxGraphicsMatrix& matrix );
 
     // gets the bounding box enclosing all points (possibly including control points)
-    virtual void GetBox(double *x, double *y, double *w, double *h)const;
+    virtual void GetBox(float *x, float *y, float *w, float *h)const;
     wxRect2DDouble GetBox()const;
 
-    virtual bool Contains( double x, double y, wxPolygonFillMode fillStyle = wxPolygonFillMode::OddEven)const;
-    bool Contains( const wxPoint2DDouble& c, wxPolygonFillMode fillStyle = wxPolygonFillMode::OddEven)const;
+    virtual bool Contains( float x, float y, wxPolygonFillMode fillStyle = wxPolygonFillMode::OddEven)const;
+    bool Contains( const wxPoint2DFloat& c, wxPolygonFillMode fillStyle = wxPolygonFillMode::OddEven)const;
 
     const wxGraphicsPathData* GetPathData() const
     { return (const wxGraphicsPathData*) GetRefData(); }
@@ -606,7 +607,7 @@ public:
 
     // opens a new page  (relevant only for printing / pdf etc) with the given size in points
     // (if both are null the default page size will be used)
-    virtual void StartPage( double width = 0, double height = 0 );
+    virtual void StartPage( float width = 0, float height = 0 );
 
     // ends the current page  (relevant only for printing / pdf etc)
     virtual void EndPage();
@@ -626,13 +627,13 @@ public:
     // sets the brush to a linear gradient, starting at (x1,y1) and ending at
     // (x2,y2) with the given boundary colours or the specified stops
     wxGraphicsBrush
-    CreateLinearGradientBrush(double x1, double y1,
-                              double x2, double y2,
+    CreateLinearGradientBrush(float x1, float y1,
+                              float x2, float y2,
                               const wxColour& c1, const wxColour& c2,
                               const wxGraphicsMatrix& matrix = wxNullGraphicsMatrix) const;
     wxGraphicsBrush
-    CreateLinearGradientBrush(double x1, double y1,
-                              double x2, double y2,
+    CreateLinearGradientBrush(float x1, float y1,
+                              float x2, float y2,
                               const wxGraphicsGradientStops& stops,
                               const wxGraphicsMatrix& matrix = wxNullGraphicsMatrix) const;
 
@@ -640,20 +641,20 @@ public:
     // on a circle around (xc,yc) with the given radius; the colours may be
     // specified by just the two extremes or the full array of gradient stops
     wxGraphicsBrush
-    CreateRadialGradientBrush(double startX, double startY,
-                              double endX, double endY, double radius,
+    CreateRadialGradientBrush(float startX, float startY,
+                              float endX, float endY, float radius,
                               const wxColour& oColor, const wxColour& cColor,
                               const wxGraphicsMatrix& matrix = wxNullGraphicsMatrix) const;
 
     wxGraphicsBrush
-    CreateRadialGradientBrush(double startX, double startY,
-                              double endX, double endY, double radius,
+    CreateRadialGradientBrush(float startX, float startY,
+                              float endX, float endY, float radius,
                               const wxGraphicsGradientStops& stops,
                               const wxGraphicsMatrix& matrix = wxNullGraphicsMatrix) const;
 
     // creates a font
     virtual wxGraphicsFont wxCreateFont( const wxFont &font , const wxColour &col = *wxBLACK ) const;
-    virtual wxGraphicsFont wxCreateFont(double sizeInPixels,
+    virtual wxGraphicsFont wxCreateFont(float sizeInPixels,
                                       const std::string& facename,
                                       unsigned int flags = wxFONTFLAG_DEFAULT,
                                       const wxColour& col = *wxBLACK) const;
@@ -665,16 +666,16 @@ public:
 #endif // wxUSE_IMAGE
 
     // create a native bitmap representation
-    virtual wxGraphicsBitmap CreateSubBitmap( const wxGraphicsBitmap &bitmap, double x, double y, double w, double h  ) const;
+    virtual wxGraphicsBitmap CreateSubBitmap( const wxGraphicsBitmap &bitmap, float x, float y, float w, float h  ) const;
 
     // create a 'native' matrix corresponding to these values
-    virtual wxGraphicsMatrix CreateMatrix( double a=1.0, double b=0.0, double c=0.0, double d=1.0,
-        double tx=0.0, double ty=0.0) const;
+    virtual wxGraphicsMatrix CreateMatrix( float a = 1.0F, float b = 0.0F, float c = 0.0F, float d = 1.0F,
+        float tx = 0.0F, float ty = 0.0F) const;
 
     wxGraphicsMatrix CreateMatrix( const wxAffineMatrix2DBase& mat ) const
     {
         wxMatrix2D mat2D;
-        wxPoint2DDouble tr;
+        wxPoint2DFloat tr;
         mat.Get(&mat2D, &tr);
 
         return CreateMatrix(mat2D.m_11, mat2D.m_12, mat2D.m_21, mat2D.m_22,
@@ -691,13 +692,13 @@ public:
     virtual void Clip( const wxRegion &region ) = 0;
 
     // clips drawings to the rect intersected with the current clipping region
-    virtual void Clip( double x, double y, double w, double h ) = 0;
+    virtual void Clip( float x, float y, float w, float h ) = 0;
 
     // resets the clipping to original extent
     virtual void ResetClip() = 0;
 
     // returns bounding box of the clipping region
-    virtual void GetClipBox(double* x, double* y, double* w, double* h) = 0;
+    virtual void GetClipBox(float* x, float* y, float* w, float* h) = 0;
 
     // returns the native context
     virtual void * GetNativeContext() = 0;
@@ -722,24 +723,24 @@ public:
 
     // returns the size of the graphics context in device coordinates
     // FIXME: Point returned for size.
-    wxRealPoint GetSize() const
+    wxPoint2DFloat GetSize() const
     {
         return {m_width, m_height};
     }
 
     // returns the resolution of the graphics context in device points per inch
-    virtual void GetDPI( double* dpiX, double* dpiY) const;
+    virtual void GetDPI( float* dpiX, float* dpiY) const;
 
 #if 0
     // sets the current alpha on this context
-    virtual void SetAlpha( double alpha );
+    virtual void SetAlpha( float alpha );
 
     // returns the alpha on this context
-    virtual double GetAlpha() const;
+    virtual float GetAlpha() const;
 #endif
 
     // all rendering is done into a fully transparent temporary context
-    virtual void BeginLayer(double opacity) = 0;
+    virtual void BeginLayer(float opacity) = 0;
 
     // composites back the drawings into the context with the opacity given at
     // the BeginLayer call
@@ -750,13 +751,13 @@ public:
     //
 
     // translate
-    virtual void Translate( double dx , double dy ) = 0;
+    virtual void Translate( float dx , float dy ) = 0;
 
     // scale
-    virtual void Scale( double xScale , double yScale ) = 0;
+    virtual void Scale( float xScale , float yScale ) = 0;
 
     // rotate (radians)
-    virtual void Rotate( double angle ) = 0;
+    virtual void Rotate( float angle ) = 0;
 
     // concatenates this transform with the current transform of this context
     virtual void ConcatTransform( const wxGraphicsMatrix& matrix ) = 0;
@@ -796,67 +797,67 @@ public:
     virtual void DrawPath( const wxGraphicsPath& path, wxPolygonFillMode fillStyle = wxPolygonFillMode::OddEven );
 
     // paints a transparent rectangle (only useful for bitmaps or windows)
-    virtual void ClearRectangle(double x, double y, double w, double h);
+    virtual void ClearRectangle(float x, float y, float w, float h);
 
     //
     // text
     //
 
-    void wxDrawText(std::string_view str, double x, double y )
+    void wxDrawText(std::string_view str, float x, float y )
         { DoDrawText(str, x, y); }
 
-    void wxDrawText(std::string_view str, double x, double y, double angle )
+    void wxDrawText(std::string_view str, float x, float y, float angle )
         { DoDrawRotatedText(str, x, y, angle); }
 
-    void wxDrawText(std::string_view str, double x, double y,
+    void wxDrawText(std::string_view str, float x, float y,
                    const wxGraphicsBrush& backgroundBrush )
         { DoDrawFilledText(str, x, y, backgroundBrush); }
 
-    void wxDrawText(std::string_view str, double x, double y,
-                   double angle, const wxGraphicsBrush& backgroundBrush )
+    void wxDrawText(std::string_view str, float x, float y,
+                   float angle, const wxGraphicsBrush& backgroundBrush )
         { DoDrawRotatedFilledText(str, x, y, angle, backgroundBrush); }
 
-    virtual std::pair<double, double> GetTextExtent(std::string_view text,
-        double *descent = nullptr, double *externalLeading = nullptr ) const  = 0;
+    virtual std::pair<float, float> GetTextExtent(std::string_view text,
+        float *descent = nullptr, float *externalLeading = nullptr ) const  = 0;
 
-    virtual std::vector<double> GetPartialTextExtents(std::string_view text) const = 0;
+    virtual std::vector<float> GetPartialTextExtents(std::string_view text) const = 0;
 
     //
     // image support
     //
 
-    virtual void DrawBitmap( const wxGraphicsBitmap &bmp, double x, double y, double w, double h ) = 0;
+    virtual void DrawBitmap( const wxGraphicsBitmap &bmp, float x, float y, float w, float h ) = 0;
 
-    virtual void DrawBitmap( const wxBitmap &bmp, double x, double y, double w, double h ) = 0;
+    virtual void DrawBitmap( const wxBitmap &bmp, float x, float y, float w, float h ) = 0;
 
-    virtual void DrawIcon( const wxIcon &icon, double x, double y, double w, double h ) = 0;
+    virtual void DrawIcon( const wxIcon &icon, float x, float y, float w, float h ) = 0;
 
     //
     // convenience methods
     //
 
     // strokes a single line
-    virtual void StrokeLine( double x1, double y1, double x2, double y2);
+    virtual void StrokeLine( float x1, float y1, float x2, float y2);
 
     // stroke lines connecting each of the points
-    virtual void StrokeLines( size_t n, const wxPoint2DDouble *points);
+    virtual void StrokeLines( size_t n, const wxPoint2DFloat *points);
 
     // stroke disconnected lines from begin to end points
-    virtual void StrokeLines( size_t n, const wxPoint2DDouble *beginPoints, const wxPoint2DDouble *endPoints);
+    virtual void StrokeLines( size_t n, const wxPoint2DFloat *beginPoints, const wxPoint2DFloat *endPoints);
 
     // draws a polygon
-    virtual void DrawLines( size_t n, const wxPoint2DDouble *points, wxPolygonFillMode fillStyle = wxPolygonFillMode::OddEven );
+    virtual void DrawLines( size_t n, const wxPoint2DFloat *points, wxPolygonFillMode fillStyle = wxPolygonFillMode::OddEven );
 
     // draws a rectangle
-    virtual void DrawRectangle( double x, double y, double w, double h);
+    virtual void DrawRectangle( float x, float y, float w, float h);
 
     // draws an ellipse
-    virtual void DrawEllipse( double x, double y, double w, double h);
+    virtual void DrawEllipse( float x, float y, float w, float h);
 
     // draws a rounded rectangle
-    virtual void DrawRoundedRectangle( double x, double y, double w, double h, double radius);
+    virtual void DrawRoundedRectangle( float x, float y, float w, float h, float radius);
 
-     // wrappers using wxPoint2DDouble TODO
+     // wrappers using wxPoint2DFloat TODO
 
     // helper to determine if a 0.5 offset should be applied for the drawing operation
     virtual bool ShouldOffset() const { return false; }
@@ -868,8 +869,8 @@ public:
     void DisableOffset() { EnableOffset(false); }
     bool OffsetEnabled() const { return m_enableOffset; }
 
-    void SetContentScaleFactor(double contentScaleFactor);
-    double GetContentScaleFactor() const { return m_contentScaleFactor; }
+    void SetContentScaleFactor(float contentScaleFactor);
+    float GetContentScaleFactor() const { return m_contentScaleFactor; }
 
 protected:
     wxGraphicsPen m_pen;
@@ -881,12 +882,12 @@ private:
     // Create() or the associated window of the wxDC this context was created
     // from.
     wxWindow* const m_window;
-    double m_contentScaleFactor{};
+    float m_contentScaleFactor{};
 
 protected:
     // These fields must be initialized in the derived class ctors.
-    double m_width{};
-    double m_height{};
+    float m_width{};
+    float m_height{};
 
     wxAntialiasMode m_antialias;
     wxCompositionMode m_composition{wxCOMPOSITION_OVER};
@@ -899,14 +900,14 @@ protected:
     // classes
     virtual wxGraphicsPen DoCreatePen(const wxGraphicsPenInfo& info) const;
 
-    virtual void DoDrawText(std::string_view str, double x, double y) = 0;
-    virtual void DoDrawRotatedText(std::string_view str, double x, double y,
-                                   double angle);
-    virtual void DoDrawFilledText(std::string_view str, double x, double y,
+    virtual void DoDrawText(std::string_view str, float x, float y) = 0;
+    virtual void DoDrawRotatedText(std::string_view str, float x, float y,
+                                   float angle);
+    virtual void DoDrawFilledText(std::string_view str, float x, float y,
                                   const wxGraphicsBrush& backgroundBrush);
     virtual void DoDrawRotatedFilledText(std::string_view str,
-                                         double x, double y,
-                                         double angle,
+                                         float x, float y,
+                                         float angle,
                                          const wxGraphicsBrush& backgroundBrush);
 
 private:
@@ -1017,8 +1018,8 @@ public:
 
     // Matrix
 
-    virtual wxGraphicsMatrix CreateMatrix( double a=1.0, double b=0.0, double c=0.0, double d=1.0,
-        double tx=0.0, double ty=0.0) = 0;
+    virtual wxGraphicsMatrix CreateMatrix( float a = 1.0F, float b = 0.0F, float c = 0.0F, float d = 1.0F,
+        float tx = 0.0F, float ty = 0.0F) = 0;
 
     // Paints
 
@@ -1030,26 +1031,26 @@ public:
     // stops and use just its boundary colours (this is currently the case
     // under OS X)
     virtual wxGraphicsBrush
-    CreateLinearGradientBrush(double x1, double y1,
-                              double x2, double y2,
+    CreateLinearGradientBrush(float x1, float y1,
+                              float x2, float y2,
                               const wxGraphicsGradientStops& stops,
                               const wxGraphicsMatrix& matrix = wxNullGraphicsMatrix) = 0;
 
     virtual wxGraphicsBrush
-    CreateRadialGradientBrush(double startX, double startY,
-                              double endX, double endY,
-                              double radius,
+    CreateRadialGradientBrush(float startX, float startY,
+                              float endX, float endY,
+                              float radius,
                               const wxGraphicsGradientStops& stops,
                               const wxGraphicsMatrix& matrix = wxNullGraphicsMatrix) = 0;
 
     // sets the font
     virtual wxGraphicsFont wxCreateFont( const wxFont &font , const wxColour &col = *wxBLACK ) = 0;
-    virtual wxGraphicsFont wxCreateFont(double sizeInPixels,
+    virtual wxGraphicsFont wxCreateFont(float sizeInPixels,
                                       const std::string& facename,
                                       unsigned int flags = wxFONTFLAG_DEFAULT,
                                       const wxColour& col = *wxBLACK) = 0;
     virtual wxGraphicsFont CreateFontAtDPI(const wxFont& font,
-                                           const wxRealPoint& dpi,
+                                           const wxPoint2DFloat& dpi,
                                            const wxColour& col = *wxBLACK) = 0;
 
     // create a native bitmap representation
@@ -1063,7 +1064,7 @@ public:
     virtual wxGraphicsBitmap CreateBitmapFromNativeBitmap( void* bitmap ) = 0;
 
     // create a subimage from a native image representation
-    virtual wxGraphicsBitmap CreateSubBitmap( const wxGraphicsBitmap &bitmap, double x, double y, double w, double h  ) = 0;
+    virtual wxGraphicsBitmap CreateSubBitmap( const wxGraphicsBitmap &bitmap, float x, float y, float w, float h  ) = 0;
 
     virtual std::string GetName() const = 0;
     virtual void

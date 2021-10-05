@@ -147,12 +147,12 @@ TEST_CASE("wxGC::GetTextExtent")
     wxFont font(12, wxFontFamily::Default, wxFontStyle::Normal, wxFONTWEIGHT_NORMAL);
     REQUIRE(font.IsOk());
     context->SetFont(font, *wxBLACK);
-    double descent, externalLeading = 0.0;
+    float descent, externalLeading = 0.0F;
     auto [width, height] = context->GetTextExtent("x", &descent, &externalLeading);
 
     // TODO: Determine a way to make these tests more robust.
-    CHECK(width > 0.0);
-    CHECK(height > 0.0);
+    CHECK(width > 0.0F);
+    CHECK(height > 0.0F);
 
 }
 

@@ -294,7 +294,10 @@ void wxGCDCImpl::Flush()
 void wxGCDCImpl::UpdateClipBox()
 {
     // TODO: Return rect
-    double x, y, w, h;
+    float x{};
+    float y{};
+    float w{};
+    float h{};
     m_graphicContext->GetClipBox(&x, &y, &w, &h);
 
     // We shouldn't reset m_clipping if the clipping region that we set happens
@@ -437,7 +440,8 @@ wxSize wxGCDCImpl::GetPPI() const
 {
     if ( m_graphicContext )
     {
-        double x, y;
+        float x{};
+        float y{};
         m_graphicContext->GetDPI(&x, &y);
         return {std::lround(x), std::lround(y)};
     }
@@ -576,7 +580,7 @@ wxAffineMatrix2D wxGCDCImpl::GetTransformMatrix() const
 void wxGCDCImpl::ResetTransformMatrix()
 {
     // Reset affine transfrom matrix (extended) to identity matrix.
-    m_matrixExtTransform.Set(wxMatrix2D(), wxPoint2DDouble());
+    m_matrixExtTransform.Set(wxMatrix2D(), wxPoint2DFloat());
     ComputeScaleAndOrigin();
 }
 
@@ -585,32 +589,32 @@ void wxGCDCImpl::ResetTransformMatrix()
 // coordinates conversions and transforms
 wxPoint wxGCDCImpl::DeviceToLogical(wxCoord x, wxCoord y) const
 {
-    double px = x;
-    double py = y;
+    float px = x;
+    float py = y;
     m_matrixCurrentInv.TransformPoint(&px, &py);
     return {std::lround(px), std::lround(py)};
 }
 
 wxPoint wxGCDCImpl::LogicalToDevice(wxCoord x, wxCoord y) const
 {
-    double px = x;
-    double py = y;
+    float px = x;
+    float py = y;
     m_matrixCurrent.TransformPoint(&px, &py);
     return {std::lround(px), std::lround(py)};
 }
 
 wxSize wxGCDCImpl::DeviceToLogicalRel(int x, int y) const
 {
-    double dx = x;
-    double dy = y;
+    float dx = x;
+    float dy = y;
     m_matrixCurrentInv.TransformDistance(&dx, &dy);
     return {std::lround(dx), std::lround(dy)};
 }
 
 wxSize wxGCDCImpl::LogicalToDeviceRel(int x, int y) const
 {
-    double dx = x;
-    double dy = y;
+    float dx = x;
+    float dy = y;
     m_matrixCurrent.TransformDistance(&dx, &dy);
     return {std::lround(dx), std::lround(dy)};
 }
@@ -795,7 +799,7 @@ void wxGCDCImpl::DoDrawLines(int n, const wxPoint points[],
     int maxX = minX;
     int maxY = minY;
 
-    std::vector<wxPoint2DDouble> pointsD(n);
+    std::vector<wxPoint2DFloat> pointsD(n);
 
     for( int i = 0; i < n; ++i)
     {
@@ -892,7 +896,7 @@ void wxGCDCImpl::DoDrawPolygon( int n, const wxPoint points[],
     int maxX = minX;
     int maxY = minY;
 
-    std::vector<wxPoint2DDouble> pointsD(n + (closeIt ? 1 : 0));
+    std::vector<wxPoint2DFloat> pointsD(n + (closeIt ? 1 : 0));
 
     for( int i = 0; i < n; ++i)
     {
@@ -1243,8 +1247,8 @@ wxSize wxGCDCImpl::DoGetTextExtent( std::string_view str,
         m_graphicContext->SetFont( *theFont, m_textForegroundColour );
     }
 
-    double   d wxDUMMY_INITIALIZE(0),
-             e wxDUMMY_INITIALIZE(0);
+    float   d wxDUMMY_INITIALIZE(0),
+            e wxDUMMY_INITIALIZE(0);
 
     // Don't pass non-NULL pointers for the parts we don't need, this could
     // result in doing extra unnecessary work inside GetTextExtent().
@@ -1273,7 +1277,7 @@ std::vector<int> wxGCDCImpl::DoGetPartialTextExtents(std::string_view text) cons
     if ( text.empty() )
         return {};
 
-    std::vector<double> widthsD = m_graphicContext->GetPartialTextExtents(text);
+    std::vector<float> widthsD = m_graphicContext->GetPartialTextExtents(text);
 
     std::vector<int> widths(widthsD.size());
     std::transform(widthsD.begin(), widthsD.end(), widths.begin(), [](auto width){ return std::lround(width); });
@@ -1306,7 +1310,7 @@ void wxGCDCImpl::Clear()
     const wxCompositionMode formerMode = m_graphicContext->GetCompositionMode();
     m_graphicContext->SetCompositionMode(wxCOMPOSITION_SOURCE);
 
-    double x, y, w, h;
+    float x, y, w, h;
     m_graphicContext->GetClipBox(&x, &y, &w, &h);
     m_graphicContext->DrawRectangle(x, y, w, h);
 
@@ -1319,7 +1323,7 @@ wxSize wxGCDCImpl::DoGetSize() const
 {
     // FIXME: Return value?
     //wxCHECK_RET( IsOk(), wxT("wxGCDC(cg)::DoGetSize - invalid DC") );
-    const wxRealPoint sz = m_graphicContext->GetSize();
+    const wxPoint2DFloat sz = m_graphicContext->GetSize();
 
     return {std::lround(sz.x), std::lround(sz.y)};
 }
@@ -1418,8 +1422,8 @@ wxRect wxGCDCImpl::MSWApplyGDIPlusTransform(const wxRect& r) const
 {
     wxCHECK_MSG( IsOk(), r, wxS("Invalid wxGCDC") );
 
-    double x = 0,
-           y = 0;
+    float x{};
+    float y{};
     m_graphicContext->GetTransform().TransformPoint(&x, &y);
 
     wxRect rect(r);

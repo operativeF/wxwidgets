@@ -1002,10 +1002,10 @@ D2D1_BITMAP_INTERPOLATION_MODE wxD2DConvertBitmapInterpolationMode(wxInterpolati
 
 D2D1_RECT_F wxD2DConvertRect(const wxRect& rect)
 {
-    return D2D1::RectF(gsl::narrow_cast<float>(rect.GetLeft()),
-                       gsl::narrow_cast<float>(rect.GetTop()),
-                       gsl::narrow_cast<float>(rect.GetRight()),
-                       gsl::narrow_cast<float>(rect.GetBottom()));
+    return D2D1::RectF(rect.GetLeft(),
+                       rect.GetTop(),
+                       rect.GetRight(),
+                       rect.GetBottom());
 }
 
 wxCOMPtr<ID2D1Geometry> wxD2DConvertRegionToGeometry(ID2D1Factory* direct2dFactory, const wxRegion& region)
@@ -1081,16 +1081,16 @@ public:
         if (m_context->ShouldOffset())
         {
             const wxGraphicsMatrix matrix(m_context->GetTransform());
-            double x = m_context->GetContentScaleFactor(), y = x;
+            float x = m_context->GetContentScaleFactor(), y = x;
             matrix.TransformDistance(&x, &y);
-            m_offset = 0.5 / std::min(std::fabs(x), std::fabs(y));
+            m_offset = 0.5F / std::min(std::fabs(x), std::fabs(y));
             m_context->Translate(m_offset, m_offset);
         }
     }
 
     ~wxD2DOffsetHelper()
     {
-        if (m_offset > 0.0)
+        if (m_offset > 0.0F)
         {
             m_context->Translate(-m_offset, -m_offset);
         }
@@ -1098,7 +1098,7 @@ public:
 
 private:
     wxGraphicsContext* m_context;
-    double m_offset{0.0};
+    float m_offset{0.0F};
 };
 
 bool operator==(const D2D1::Matrix3x2F& lhs, const D2D1::Matrix3x2F& rhs)
@@ -1123,11 +1123,11 @@ public:
 
     void Concat(const wxGraphicsMatrixData* t) override;
 
-    void Set(double a = 1.0, double b = 0.0, double c = 0.0, double d = 1.0,
-        double tx = 0.0, double ty = 0.0) override;
+    void Set(float a = 1.0, float b = 0.0, float c = 0.0, float d = 1.0,
+        float tx = 0.0, float ty = 0.0) override;
 
-    void Get(double* a = nullptr, double* b = nullptr,  double* c = nullptr,
-        double* d = nullptr, double* tx = nullptr, double* ty = nullptr) const override;
+    void Get(float* a = nullptr, float* b = nullptr,  float* c = nullptr,
+        float* d = nullptr, float* tx = nullptr, float* ty = nullptr) const override;
 
     void Invert() override;
 
@@ -1135,15 +1135,15 @@ public:
 
     bool IsIdentity() const override;
 
-    void Translate(double dx, double dy) override;
+    void Translate(float dx, float dy) override;
 
-    void Scale(double xScale, double yScale) override;
+    void Scale(float xScale, float yScale) override;
 
-    void Rotate(double angle) override;
+    void Rotate(float angle) override;
 
-    void TransformPoint(double* x, double* y) const override;
+    void TransformPoint(float* x, float* y) const override;
 
-    void TransformDistance(double* dx, double* dy) const override;
+    void TransformDistance(float* dx, float* dy) const override;
 
     void* GetNativeMatrix() const override;
 
@@ -1182,24 +1182,24 @@ void wxD2DMatrixData::Concat(const wxGraphicsMatrixData* t)
     m_matrix.SetProduct(m1, m2);
 }
 
-void wxD2DMatrixData::Set(double a, double b, double c, double d, double tx, double ty)
+void wxD2DMatrixData::Set(float a, float b, float c, float d, float tx, float ty)
 {
-    m_matrix._11 = gsl::narrow_cast<float>(a);
-    m_matrix._12 = gsl::narrow_cast<float>(b);
-    m_matrix._21 = gsl::narrow_cast<float>(c);
-    m_matrix._22 = gsl::narrow_cast<float>(d);
-    m_matrix._31 = gsl::narrow_cast<float>(tx);
-    m_matrix._32 = gsl::narrow_cast<float>(ty);
+    m_matrix._11 = a;
+    m_matrix._12 = b;
+    m_matrix._21 = c;
+    m_matrix._22 = d;
+    m_matrix._31 = tx;
+    m_matrix._32 = ty;
 }
 
-void wxD2DMatrixData::Get(double* a, double* b,  double* c, double* d, double* tx, double* ty) const
+void wxD2DMatrixData::Get(float* a, float* b,  float* c, float* d, float* tx, float* ty) const
 {
-    *a =  static_cast<double>(m_matrix._11);
-    *b =  static_cast<double>(m_matrix._12);
-    *c =  static_cast<double>(m_matrix._21);
-    *d =  static_cast<double>(m_matrix._22);
-    *tx = static_cast<double>(m_matrix._31);
-    *ty = static_cast<double>(m_matrix._32);
+    *a =  m_matrix._11;
+    *b =  m_matrix._12;
+    *c =  m_matrix._21;
+    *d =  m_matrix._22;
+    *tx = m_matrix._31;
+    *ty = m_matrix._32;
 }
 
 void wxD2DMatrixData::Invert()
@@ -1217,38 +1217,36 @@ bool wxD2DMatrixData::IsIdentity() const
     return m_matrix.IsIdentity();
 }
 
-void wxD2DMatrixData::Translate(double dx, double dy)
+void wxD2DMatrixData::Translate(float dx, float dy)
 {
-    m_matrix = D2D1::Matrix3x2F::Translation(gsl::narrow_cast<float>(dx), gsl::narrow_cast<float>(dy)) * m_matrix;
+    m_matrix = D2D1::Matrix3x2F::Translation(dx, dy) * m_matrix;
 }
 
-void wxD2DMatrixData::Scale(double xScale, double yScale)
+void wxD2DMatrixData::Scale(float xScale, float yScale)
 {
-    m_matrix = D2D1::Matrix3x2F::Scale(gsl::narrow_cast<float>(xScale), gsl::narrow_cast<float>(yScale)) * m_matrix;
+    m_matrix = D2D1::Matrix3x2F::Scale(xScale, yScale) * m_matrix;
 }
 
-void wxD2DMatrixData::Rotate(double angle)
+void wxD2DMatrixData::Rotate(float angle)
 {
-    m_matrix = D2D1::Matrix3x2F::Rotation(gsl::narrow_cast<float>(wxRadToDeg(angle))) * m_matrix;
+    m_matrix = D2D1::Matrix3x2F::Rotation(wxRadToDeg(angle)) * m_matrix;
 }
 
-void wxD2DMatrixData::TransformPoint(double* x, double* y) const
+void wxD2DMatrixData::TransformPoint(float* x, float* y) const
 {
-    D2D1_POINT_2F result = m_matrix.TransformPoint(D2D1::Point2F(gsl::narrow_cast<float>(*x),
-                                                                 gsl::narrow_cast<float>(*y)));
-    *x = static_cast<double>(result.x);
-    *y = static_cast<double>(result.y);
+    D2D1_POINT_2F result = m_matrix.TransformPoint(D2D1::Point2F(*x, *y));
+    *x = result.x;
+    *y = result.y;
 }
 
-void wxD2DMatrixData::TransformDistance(double* dx, double* dy) const
+void wxD2DMatrixData::TransformDistance(float* dx, float* dy) const
 {
     D2D1::Matrix3x2F noTranslationMatrix = m_matrix;
     noTranslationMatrix._31 = 0;
     noTranslationMatrix._32 = 0;
-    D2D1_POINT_2F result = noTranslationMatrix.TransformPoint(D2D1::Point2F(gsl::narrow_cast<float>(*dx),
-                                                                            gsl::narrow_cast<float>(*dy)));
-    *dx = static_cast<double>(result.x);
-    *dy = static_cast<double>(result.y);
+    D2D1_POINT_2F result = noTranslationMatrix.TransformPoint(D2D1::Point2F(*dx, *dy));
+    *dx = result.x;
+    *dy = result.y;
 }
 
 void* wxD2DMatrixData::GetNativeMatrix() const
@@ -1307,19 +1305,19 @@ public :
     wxGraphicsObjectRefData* Clone() const override;
 
     // begins a new subpath at (x,y)
-    void MoveToPoint(double x, double y) override;
+    void MoveToPoint(float x, float y) override;
 
     // adds a straight line from the current point to (x,y)
-    void AddLineToPoint(double x, double y) override;
+    void AddLineToPoint(float x, float y) override;
 
     // adds a cubic Bezier curve from the current point, using two control points and an end point
-    void AddCurveToPoint(double cx1, double cy1, double cx2, double cy2, double x, double y) override;
+    void AddCurveToPoint(float cx1, float cy1, float cx2, float cy2, float x, float y) override;
 
     // adds an arc of a circle centering at (x,y) with radius (r) from startAngle to endAngle
-    void AddArc(double x, double y, double r, double startAngle, double endAngle, bool clockwise) override;
+    void AddArc(float x, float y, float r, float startAngle, float endAngle, bool clockwise) override;
 
     // gets the last point of the current path, (0,0) if not yet set
-    void GetCurrentPoint(double* x, double* y) const override;
+    void GetCurrentPoint(float* x, float* y) const override;
 
     // adds another path
     void AddPath(const wxGraphicsPathData* path) override;
@@ -1337,15 +1335,15 @@ public :
     void Transform(const wxGraphicsMatrixData* matrix) override;
 
     // gets the bounding box enclosing all points (possibly including control points)
-    void GetBox(double* x, double* y, double* w, double *h) const override;
+    void GetBox(float* x, float* y, float* w, float* h) const override;
 
-    bool Contains(double x, double y, wxPolygonFillMode fillStyle = wxPolygonFillMode::OddEven) const override;
+    bool Contains(float x, float y, wxPolygonFillMode fillStyle = wxPolygonFillMode::OddEven) const override;
 
     // appends an ellipsis as a new closed subpath fitting the passed rectangle
-    void AddCircle(double x, double y, double r) override;
+    void AddCircle(float x, float y, float r) override;
 
     // appends an ellipse
-    void AddEllipse(double x, double y, double w, double h) override;
+    void AddEllipse(float x, float y, float w, float h) override;
 
 private:
     void EnsureGeometryOpen();
@@ -1404,11 +1402,11 @@ wxD2DPathData::wxD2DPathData(wxGraphicsRenderer* renderer, ID2D1Factory* d2dFact
     wxGraphicsPathData(renderer),
     m_direct2dfactory(d2dFactory),
     m_currentPointSet(false),
-    m_currentPoint(D2D1::Point2F(0.0f, 0.0f)),
+    m_currentPoint(D2D1::Point2F(0.0F, 0.0F)),
     m_figureOpened(false),
-    m_figureStart(D2D1::Point2F(0.0f, 0.0f)),
+    m_figureStart(D2D1::Point2F(0.0F, 0.0F)),
     m_figureLogStartSet(false),
-    m_figureLogStart(D2D1::Point2F(0.0f, 0.0f)),
+    m_figureLogStart(D2D1::Point2F(0.0F, 0.0F)),
     m_geometryWritable(true),
     m_fillMode(D2D1_FILL_MODE_ALTERNATE)
 {
@@ -1666,17 +1664,17 @@ void wxD2DPathData::RestoreGeometryState(const GeometryStateData& data)
                 data.m_currentPoint : D2D1::Point2F(0.0F, 0.0F);
 }
 
-void wxD2DPathData::MoveToPoint(double x, double y)
+void wxD2DPathData::MoveToPoint(float x, float y)
 {
     // Close current sub-path (leaving the figure as is).
     EndFigure(D2D1_FIGURE_END_OPEN);
     // Store new current point
-    m_currentPoint = D2D1::Point2F(gsl::narrow_cast<float>(x), gsl::narrow_cast<float>(y));
+    m_currentPoint = D2D1::Point2F(x, y);
     m_currentPointSet = true;
 }
 
 // adds a straight line from the current point to (x,y)
-void wxD2DPathData::AddLineToPoint(double x, double y)
+void wxD2DPathData::AddLineToPoint(float x, float y)
 {
     // If current point is not yet set then
     // this function should behave as MoveToPoint.
@@ -1686,8 +1684,8 @@ void wxD2DPathData::AddLineToPoint(double x, double y)
         return;
     }
 
-    const auto xf = gsl::narrow_cast<float>(x);
-    const auto yf = gsl::narrow_cast<float>(y);
+    const auto xf = x;
+    const auto yf = y;
 
     EnsureFigureOpen(m_currentPoint);
     m_geometrySink->AddLine(D2D1::Point2F(xf, yf));
@@ -1696,7 +1694,7 @@ void wxD2DPathData::AddLineToPoint(double x, double y)
 }
 
 // adds a cubic Bezier curve from the current point, using two control points and an end point
-void wxD2DPathData::AddCurveToPoint(double cx1, double cy1, double cx2, double cy2, double x, double y)
+void wxD2DPathData::AddCurveToPoint(float cx1, float cy1, float cx2, float cy2, float x, float y)
 {
     // If no current point is set then this function should behave
     // as if preceded by a call to MoveToPoint(cx1, cy1).
@@ -1706,18 +1704,18 @@ void wxD2DPathData::AddCurveToPoint(double cx1, double cy1, double cx2, double c
     EnsureFigureOpen(m_currentPoint);
 
     D2D1_BEZIER_SEGMENT bezierSegment = {
-        { gsl::narrow_cast<float>(cx1), gsl::narrow_cast<float>(cy1) },
-        { gsl::narrow_cast<float>(cx2), gsl::narrow_cast<float>(cy2) },
-        { gsl::narrow_cast<float>(x),   gsl::narrow_cast<float>(y) } };
+        { cx1, cy1 },
+        { cx2, cy2 },
+        { x,   y } };
     m_geometrySink->AddBezier(bezierSegment);
 
-    m_currentPoint = D2D1::Point2F(gsl::narrow_cast<float>(x), gsl::narrow_cast<float>(y));
+    m_currentPoint = D2D1::Point2F(x, y);
 }
 
 // adds an arc of a circle centering at (x,y) with radius (r) from startAngle to endAngle
-void wxD2DPathData::AddArc(double x, double y, double r, double startAngle, double endAngle, bool clockwise)
+void wxD2DPathData::AddArc(float x, float y, float r, float startAngle, float endAngle, bool clockwise)
 {
-    double angle;
+    float angle;
 
     // For the sake of compatibility normalize angles the same way
     // as it is done in Cairo.
@@ -1729,7 +1727,7 @@ void wxD2DPathData::AddArc(double x, double y, double r, double startAngle, doub
         {
             while ( endAngle <= startAngle )
             {
-                endAngle += 2.0 * std::numbers::pi;
+                endAngle += 2.0F * std::numbers::pi_v<float>;
             }
         }
 
@@ -1743,15 +1741,15 @@ void wxD2DPathData::AddArc(double x, double y, double r, double startAngle, doub
         {
             while ( endAngle >= startAngle )
             {
-                endAngle -= 2.0 * std::numbers::pi;
+                endAngle -= 2.0F * std::numbers::pi_v<float>;
             }
         }
 
         angle = startAngle - endAngle;
     }
 
-    const auto start = wxPoint2DDouble(std::cos(startAngle) * r, std::sin(startAngle) * r);
-    const auto end = wxPoint2DDouble(std::cos(endAngle) * r, std::sin(endAngle) * r);
+    const auto start = wxPoint2DFloat(std::cos(startAngle) * r, std::sin(startAngle) * r);
+    const auto end = wxPoint2DFloat(std::cos(endAngle) * r, std::sin(endAngle) * r);
 
     // To ensure compatibility with Cairo an initial
     // line segment to the beginning of the arc needs
@@ -1773,7 +1771,7 @@ void wxD2DPathData::AddArc(double x, double y, double r, double startAngle, doub
 
     const D2D1_SWEEP_DIRECTION sweepDirection = clockwise ?
        D2D1_SWEEP_DIRECTION_CLOCKWISE : D2D1_SWEEP_DIRECTION_COUNTER_CLOCKWISE;
-    const D2D1_SIZE_F size = D2D1::SizeF(gsl::narrow_cast<FLOAT>(r), gsl::narrow_cast<FLOAT>(r));
+    const D2D1_SIZE_F size = D2D1::SizeF(r, r);
 
     if ( angle >= 2.0 * std::numbers::pi)
     {
@@ -1789,7 +1787,7 @@ void wxD2DPathData::AddArc(double x, double y, double r, double startAngle, doub
         // the circle from two halves.
         D2D1_ARC_SEGMENT circleSegment1 =
         {
-            D2D1::Point2(gsl::narrow_cast<float>(x - start.x), gsl::narrow_cast<float>(y - start.y)),  // end point
+            D2D1::Point2(x - start.x, y - start.y),  // end point
             size,                     // size
             0.0f,                     // rotation
             sweepDirection,           // sweep direction
@@ -1797,7 +1795,7 @@ void wxD2DPathData::AddArc(double x, double y, double r, double startAngle, doub
         };
         D2D1_ARC_SEGMENT circleSegment2 =
         {
-            D2D1::Point2(gsl::narrow_cast<float>(x + start.x), gsl::narrow_cast<float>(y + start.y)),  // end point
+            D2D1::Point2(x + start.x, y + start.y),  // end point
             size,                     // size
             0.0f,                     // rotation
             sweepDirection,           // sweep direction
@@ -1819,13 +1817,13 @@ void wxD2DPathData::AddArc(double x, double y, double r, double startAngle, doub
     const D2D1_ARC_SIZE arcSize = angle > std::numbers::pi ?
        D2D1_ARC_SIZE_LARGE : D2D1_ARC_SIZE_SMALL;
     const D2D1_POINT_2F endPoint =
-       D2D1::Point2(gsl::narrow_cast<float>(end.x + x), gsl::narrow_cast<float>(end.y + y));
+       D2D1::Point2(end.x + x, end.y + y);
 
     D2D1_ARC_SEGMENT arcSegment =
     {
         endPoint,                     // end point
         size,                         // size
-        0.0f,                         // rotation
+        0.0F,                         // rotation
         sweepDirection,               // sweep direction
         arcSize                       // arc size
     };
@@ -1836,20 +1834,20 @@ void wxD2DPathData::AddArc(double x, double y, double r, double startAngle, doub
 }
 
 // appends an ellipsis as a new closed subpath fitting the passed rectangle
-void wxD2DPathData::AddCircle(double x, double y, double r)
+void wxD2DPathData::AddCircle(float x, float y, float r)
 {
     AddEllipse(x - r, y - r, r * 2, r * 2);
 }
 
 // appends an ellipse
-void wxD2DPathData::AddEllipse(double x, double y, double w, double h)
+void wxD2DPathData::AddEllipse(float x, float y, float w, float h)
 {
-    if ( w <= 0.0 || h <= 0.0 )
+    if ( w <= 0.0F || h <= 0.0F )
       return;
 
     // Calculate radii
-    const double rx = w / 2.0;
-    const double ry = h / 2.0;
+    const float rx = w / 2.0F;
+    const float ry = h / 2.0F;
 
     MoveToPoint(x + w, y + ry);
     // Open new subpath
@@ -1857,9 +1855,9 @@ void wxD2DPathData::AddEllipse(double x, double y, double w, double h)
 
     D2D1_ARC_SEGMENT arcSegmentLower =
     {
-        D2D1::Point2((FLOAT)(x), (FLOAT)(y + ry)),     // end point
-        D2D1::SizeF((FLOAT)(rx), (FLOAT)(ry)),         // size
-        0.0f,
+        D2D1::Point2(x, y + ry),     // end point
+        D2D1::SizeF(rx, ry),         // size
+        0.0F,
         D2D1_SWEEP_DIRECTION_CLOCKWISE,
         D2D1_ARC_SIZE_SMALL
     };
@@ -1867,9 +1865,9 @@ void wxD2DPathData::AddEllipse(double x, double y, double w, double h)
 
     D2D1_ARC_SEGMENT arcSegmentUpper =
     {
-        D2D1::Point2((FLOAT)(x + w), (FLOAT)(y + ry)), // end point
-        D2D1::SizeF((FLOAT)(rx), (FLOAT)(ry)),         // size
-        0.0f,
+        D2D1::Point2(x + w, y + ry), // end point
+        D2D1::SizeF(rx, ry),         // size
+        0.0F,
         D2D1_SWEEP_DIRECTION_CLOCKWISE,
         D2D1_ARC_SIZE_SMALL
     };
@@ -1879,7 +1877,7 @@ void wxD2DPathData::AddEllipse(double x, double y, double w, double h)
 }
 
 // gets the last point of the current path, (0,0) if not yet set
-void wxD2DPathData::GetCurrentPoint(double* x, double* y) const
+void wxD2DPathData::GetCurrentPoint(float* x, float* y) const
 {
     if (x != nullptr) *x = m_currentPoint.x;
     if (y != nullptr) *y = m_currentPoint.y;
@@ -2044,7 +2042,7 @@ void wxD2DPathData::Transform(const wxGraphicsMatrixData* matrix)
     HRESULT hr;
     ID2D1TransformedGeometry* pTransformedGeometry;
     // Apply given transformation to all previously stored geometries too.
-    for( size_t i = 0; i < m_pTransformedGeometries.size(); i++ )
+    for( size_t i{}; i < m_pTransformedGeometries.size(); i++ )
     {
         pTransformedGeometry = nullptr;
         hr = m_direct2dfactory->CreateTransformedGeometry(m_pTransformedGeometries[i], m, &pTransformedGeometry);
@@ -2073,7 +2071,7 @@ void wxD2DPathData::Transform(const wxGraphicsMatrixData* matrix)
     RestoreGeometryState(curState);
 }
 
-void wxD2DPathData::GetBox(double* x, double* y, double* w, double *h) const
+void wxD2DPathData::GetBox(float* x, float* y, float* w, float *h) const
 {
     D2D1_RECT_F bounds;
     ID2D1Geometry *curGeometry = GetFullGeometry(GetFillMode());
@@ -2090,13 +2088,13 @@ void wxD2DPathData::GetBox(double* x, double* y, double* w, double *h) const
     if (h) *h = bounds.bottom - bounds.top;
 }
 
-bool wxD2DPathData::Contains(double x, double y, wxPolygonFillMode fillStyle) const
+bool wxD2DPathData::Contains(float x, float y, wxPolygonFillMode fillStyle) const
 {
     const D2D1_FILL_MODE fillMode = (fillStyle == wxPolygonFillMode::OddEven) ? D2D1_FILL_MODE_ALTERNATE : D2D1_FILL_MODE_WINDING;
     ID2D1Geometry *curGeometry = GetFullGeometry(fillMode);
 
     BOOL result;
-    curGeometry->FillContainsPoint(D2D1::Point2F(gsl::narrow_cast<float>(x), gsl::narrow_cast<float>(y)), D2D1::Matrix3x2F::Identity(), &result);
+    curGeometry->FillContainsPoint(D2D1::Point2F(x, y), D2D1::Matrix3x2F::Identity(), &result);
     return result != FALSE;
 }
 
@@ -2151,7 +2149,7 @@ wxCOMPtr<IWICBitmapSource> wxCreateWICBitmap(const WXHBITMAP sourceBitmap, bool 
     hr = converter->Initialize(
         wicBitmap,
         pixelFormat,
-        WICBitmapDitherTypeNone, nullptr, 0.f,
+        WICBitmapDitherTypeNone, nullptr, 0.0F,
         WICBitmapPaletteTypeMedianCut);
     wxCHECK2_HRESULT_RET(hr, wxCOMPtr<IWICBitmapSource>(nullptr));
 
@@ -2780,21 +2778,22 @@ class wxD2DLinearGradientBrushResourceHolder : public wxD2DResourceHolder<ID2D1L
 {
 public:
     struct LinearGradientInfo {
-        const double x1;
-        const double y1;
-        const double x2;
-        const double y2;
+        const float x1;
+        const float y1;
+        const float x2;
+        const float y2;
+
         const wxGraphicsGradientStops stops;
         const wxGraphicsMatrix matrix;
-        LinearGradientInfo(double& x1_, double& y1_,
-                           double& x2_, double& y2_,
+        LinearGradientInfo(float& x1_, float& y1_,
+                           float& x2_, float& y2_,
                            const wxGraphicsGradientStops& stops_,
                            const wxGraphicsMatrix& matrix_)
             : x1(x1_), y1(y1_), x2(x2_), y2(y2_), stops(stops_), matrix(matrix_) {}
     };
 
-    wxD2DLinearGradientBrushResourceHolder(double& x1, double& y1,
-                                           double& x2, double& y2,
+    wxD2DLinearGradientBrushResourceHolder(float& x1, float& y1,
+                                           float& x2, float& y2,
                                            const wxGraphicsGradientStops& stops,
                                            const wxGraphicsMatrix& matrix)
         : m_linearGradientInfo(x1, y1, x2, y2, stops, matrix) {}
@@ -2807,8 +2806,8 @@ protected:
 
         HRESULT hr = GetContext()->CreateLinearGradientBrush(
             D2D1::LinearGradientBrushProperties(
-                D2D1::Point2F(gsl::narrow_cast<float>(m_linearGradientInfo.x1), gsl::narrow_cast<float>(m_linearGradientInfo.y1)),
-                D2D1::Point2F(gsl::narrow_cast<float>(m_linearGradientInfo.x2), gsl::narrow_cast<float>(m_linearGradientInfo.y2))),
+                D2D1::Point2F(m_linearGradientInfo.x1, m_linearGradientInfo.y1),
+                D2D1::Point2F(m_linearGradientInfo.x2, m_linearGradientInfo.y2)),
             helper.GetD2DResource(),
             &m_nativeResource);
         wxCHECK_HRESULT_RET(hr);
@@ -2828,25 +2827,25 @@ class wxD2DRadialGradientBrushResourceHolder : public wxD2DResourceHolder<ID2D1R
 {
 public:
     struct RadialGradientInfo {
-        const double x1;
-        const double y1;
-        const double x2;
-        const double y2;
-        const double radius;
+        const float x1;
+        const float y1;
+        const float x2;
+        const float y2;
+        const float radius;
         const wxGraphicsGradientStops stops;
         const wxGraphicsMatrix matrix;
 
-        RadialGradientInfo(double x1_, double y1_,
-                           double x2_, double y2_,
-                           double r,
+        RadialGradientInfo(float x1_, float y1_,
+                           float x2_, float y2_,
+                           float r,
                            const wxGraphicsGradientStops& stops_,
                            const wxGraphicsMatrix& matrix_)
             : x1(x1_), y1(y1_), x2(x2_), y2(y2_), radius(r), stops(stops_), matrix(matrix_) {}
     };
 
-    wxD2DRadialGradientBrushResourceHolder(double& x1, double& y1,
-                                           double& x2, double& y2,
-                                           double& r,
+    wxD2DRadialGradientBrushResourceHolder(float& x1, float& y1,
+                                           float& x2, float& y2,
+                                           float& r,
                                            const wxGraphicsGradientStops& stops,
                                            const wxGraphicsMatrix& matrix)
         : m_radialGradientInfo(x1, y1, x2, y2, r, stops, matrix) {}
@@ -2857,15 +2856,15 @@ protected:
         wxD2DGradientStopsHelper helper(m_radialGradientInfo.stops);
         helper.Bind(GetManager());
 
-        const auto xo = gsl::narrow_cast<float>(m_radialGradientInfo.x1 - m_radialGradientInfo.x2);
-        const auto yo = gsl::narrow_cast<float>(m_radialGradientInfo.y1 - m_radialGradientInfo.y2);
+        const auto xo = m_radialGradientInfo.x1 - m_radialGradientInfo.x2;
+        const auto yo = m_radialGradientInfo.y1 - m_radialGradientInfo.y2;
 
         HRESULT hr = GetContext()->CreateRadialGradientBrush(
             D2D1::RadialGradientBrushProperties(
-                D2D1::Point2F(gsl::narrow_cast<float>(m_radialGradientInfo.x1), gsl::narrow_cast<float>(m_radialGradientInfo.y1)),
+                D2D1::Point2F(m_radialGradientInfo.x1, m_radialGradientInfo.y1),
                 D2D1::Point2F(xo, yo),
-                gsl::narrow_cast<float>(m_radialGradientInfo.radius),
-                gsl::narrow_cast<float>(m_radialGradientInfo.radius)),
+                m_radialGradientInfo.radius,
+                m_radialGradientInfo.radius),
             helper.GetD2DResource(),
             &m_nativeResource);
         wxCHECK_HRESULT_RET(hr);
@@ -2893,14 +2892,14 @@ public:
 
     explicit wxD2DBrushData(wxGraphicsRenderer* renderer);
 
-    void CreateLinearGradientBrush(double x1, double y1,
-                                   double x2, double y2,
+    void CreateLinearGradientBrush(float x1, float y1,
+                                   float x2, float y2,
                                    const wxGraphicsGradientStops& stops,
                                    const wxGraphicsMatrix& matrix = wxNullGraphicsMatrix);
 
-    void CreateRadialGradientBrush(double startX, double startY,
-                                   double endX, double endY,
-                                   double radius,
+    void CreateRadialGradientBrush(float startX, float startY,
+                                   float endX, float endY,
+                                   float radius,
                                    const wxGraphicsGradientStops& stops,
                                    const wxGraphicsMatrix& matrix = wxNullGraphicsMatrix);
 
@@ -2945,8 +2944,8 @@ wxD2DBrushData::wxD2DBrushData(wxGraphicsRenderer* renderer)
 }
 
 void wxD2DBrushData::CreateLinearGradientBrush(
-    double x1, double y1,
-    double x2, double y2,
+    float x1, float y1,
+    float x2, float y2,
     const wxGraphicsGradientStops& stops,
     const wxGraphicsMatrix& matrix)
 {
@@ -2955,9 +2954,9 @@ void wxD2DBrushData::CreateLinearGradientBrush(
 }
 
 void wxD2DBrushData::CreateRadialGradientBrush(
-    double startX, double startY,
-    double endX, double endY,
-    double radius,
+    float startX, float startY,
+    float endX, float endY,
+    float radius,
     const wxGraphicsGradientStops& stops,
     const wxGraphicsMatrix& matrix)
 {
@@ -3048,7 +3047,7 @@ wxD2DPenData::wxD2DPenData(
     const wxGraphicsPenInfo& info)
     : wxGraphicsObjectRefData(renderer),
       m_penInfo(info),
-      m_width(gsl::narrow_cast<float>(info.GetWidth()))
+      m_width(info.GetWidth())
 {
     CreateStrokeStyle(direct2dFactory);
 
@@ -3117,7 +3116,7 @@ void wxD2DPenData::CreateStrokeStyle(ID2D1Factory* const direct2dfactory)
     }
 
     direct2dfactory->CreateStrokeStyle(
-        D2D1::StrokeStyleProperties(capStyle, capStyle, capStyle, lineJoin, 0, dashStyle, 0.0f),
+        D2D1::StrokeStyleProperties(capStyle, capStyle, capStyle, lineJoin, 0, dashStyle, 0.0F),
         dashes.get(), dashCount,
         &m_strokeStyle);
 }
@@ -3127,9 +3126,9 @@ void wxD2DPenData::SetWidth(const wxGraphicsContext* context)
     if (m_penInfo.GetWidth() <= 0)
     {
         const wxGraphicsMatrix matrix(context->GetTransform());
-        double x = context->GetContentScaleFactor(), y = x;
+        float x = context->GetContentScaleFactor(), y = x;
         matrix.TransformDistance(&x, &y);
-        m_width = gsl::narrow_cast<float>(1.0 / std::min(std::fabs(x), std::fabs(y)));
+        m_width = 1.0F / std::min(std::fabs(x), std::fabs(y));
     }
 }
 
@@ -3145,7 +3144,7 @@ FLOAT wxD2DPenData::GetWidth()
 
 bool wxD2DPenData::IsZeroWidth() const
 {
-    return m_penInfo.GetWidth() <= 0.0;
+    return m_penInfo.GetWidth() <= 0.0F;
 }
 
 ID2D1StrokeStyle* wxD2DPenData::GetStrokeStyle()
@@ -3161,7 +3160,7 @@ wxD2DPenData* wxGetD2DPenData(const wxGraphicsPen& pen)
 class wxD2DFontData : public wxGraphicsObjectRefData
 {
 public:
-    wxD2DFontData(wxGraphicsRenderer* renderer, const wxFont& font, const wxRealPoint& dpi, const wxColor& color);
+    wxD2DFontData(wxGraphicsRenderer* renderer, const wxFont& font, const wxPoint2DFloat& dpi, const wxColor& color);
 
     wxCOMPtr<IDWriteTextLayout> CreateTextLayout(std::string_view text) const;
 
@@ -3186,7 +3185,7 @@ private:
     bool m_strikethrough;
 };
 
-wxD2DFontData::wxD2DFontData(wxGraphicsRenderer* renderer, const wxFont& font, const wxRealPoint& dpi, const wxColor& color) :
+wxD2DFontData::wxD2DFontData(wxGraphicsRenderer* renderer, const wxFont& font, const wxPoint2DFloat& dpi, const wxColor& color) :
     wxGraphicsObjectRefData(renderer), m_brushData(renderer, wxBrush(color)),
     m_underlined(font.GetUnderlined()), m_strikethrough(font.GetStrikethrough())
 {
@@ -3204,7 +3203,7 @@ wxD2DFontData::wxD2DFontData(wxGraphicsRenderer* renderer, const wxFont& font, c
         // The length of the font name must not exceed LF_FACESIZE TCHARs,
         // including the terminating NULL.
         std::wstring name = font.GetFaceName().substr(0, WXSIZEOF(logfont.lfFaceName)-1);
-        for(std::size_t i{0}; auto&& ch : name)
+        for(std::size_t i{}; auto&& ch : name)
         {
             logfont.lfFaceName[i] = ch;
             ++i;
@@ -3741,7 +3740,7 @@ protected:
         hr = renderTarget->BindDC(m_hdc, &r);
         wxCHECK_HRESULT_RET(hr);
         renderTarget->SetTransform(
-                       D2D1::Matrix3x2F::Translation(gsl::narrow_cast<float>(-r.left), gsl::narrow_cast<float>(-r.top)));
+                       D2D1::Matrix3x2F::Translation(-r.left, -r.top));
 
         m_nativeResource = renderTarget;
     }
@@ -3765,35 +3764,35 @@ class wxNullContext : public wxGraphicsContext
 {
 public:
     explicit wxNullContext(wxGraphicsRenderer* renderer) : wxGraphicsContext(renderer) {}
-    std::pair<double, double> GetTextExtent(std::string_view, double*, double*) const override { return {}; }
-    std::vector<double> GetPartialTextExtents(std::string_view) const override { return {}; }
+    std::pair<float, float> GetTextExtent(std::string_view, float*, float*) const override { return {}; }
+    std::vector<float> GetPartialTextExtents(std::string_view) const override { return {}; }
     void Clip(const wxRegion&) override {}
-    void Clip(double, double, double, double) override {}
+    void Clip(float, float, float, float) override {}
     void ResetClip() override {}
-    void GetClipBox(double*, double*, double*, double*) override {}
+    void GetClipBox(float*, float*, float*, float*) override {}
     void* GetNativeContext() override { return nullptr; }
     bool SetAntialiasMode(wxAntialiasMode) override { return false; }
     bool SetInterpolationQuality(wxInterpolationQuality) override { return false; }
     bool SetCompositionMode(wxCompositionMode) override { return false; }
-    void BeginLayer(double) override {}
+    void BeginLayer(float) override {}
     void EndLayer() override {}
-    void Translate(double, double) override {}
-    void Scale(double, double) override {}
-    void Rotate(double) override {}
+    void Translate(float, float) override {}
+    void Scale(float, float) override {}
+    void Rotate(float) override {}
     void ConcatTransform(const wxGraphicsMatrix&) override {}
     void SetTransform(const wxGraphicsMatrix&) override {}
     wxGraphicsMatrix GetTransform() const override { return wxNullGraphicsMatrix; }
     void StrokePath(const wxGraphicsPath&) override {}
     void FillPath(const wxGraphicsPath&, wxPolygonFillMode) override {}
-    void DrawBitmap(const wxGraphicsBitmap&, double, double, double, double) override {}
-    void DrawBitmap(const wxBitmap&, double, double, double, double) override {}
-    void DrawIcon(const wxIcon&, double, double, double, double) override {}
+    void DrawBitmap(const wxGraphicsBitmap&, float, float, float, float) override {}
+    void DrawBitmap(const wxBitmap&, float, float, float, float) override {}
+    void DrawIcon(const wxIcon&, float, float, float, float) override {}
     void PushState() override {}
     void PopState() override {}
     void Flush() override {}
 
 protected:
-    void DoDrawText(std::string_view, double, double) override {}
+    void DoDrawText(std::string_view, float, float) override {}
 };
 
 class wxD2DMeasuringContext : public wxNullContext
@@ -3801,19 +3800,19 @@ class wxD2DMeasuringContext : public wxNullContext
 public:
     explicit wxD2DMeasuringContext(wxGraphicsRenderer* renderer) : wxNullContext(renderer) {}
 
-    std::pair<double, double> GetTextExtent(std::string_view str, double* descent, double* externalLeading) const override
+    std::pair<float, float> GetTextExtent(std::string_view str, float* descent, float* externalLeading) const override
     {
         return GetTextExtent(wxGetD2DFontData(m_font), str, descent, externalLeading);
     }
 
-    std::vector<double> GetPartialTextExtents(std::string_view text) const override
+    std::vector<float> GetPartialTextExtents(std::string_view text) const override
     {
         return GetPartialTextExtents(wxGetD2DFontData(m_font), text);
     }
 
-    static std::vector<double> GetPartialTextExtents(wxD2DFontData* fontData, std::string_view text)
+    static std::vector<float> GetPartialTextExtents(wxD2DFontData* fontData, std::string_view text)
     {
-        std::vector<double> widths;
+        std::vector<float> widths;
 
         for (unsigned int i = 0; i < text.length(); ++i)
         {
@@ -3824,7 +3823,7 @@ public:
         return widths;
     }
 
-    static std::pair<double, double> GetTextExtent(wxD2DFontData* fontData, std::string_view str, double* descent, double* externalLeading)
+    static std::pair<float, float> GetTextExtent(wxD2DFontData* fontData, std::string_view str, float* descent, float* externalLeading)
     {
         wxCOMPtr<IDWriteTextLayout> textLayout = fontData->CreateTextLayout(str);
         wxCOMPtr<IDWriteFont> font = fontData->GetFont();
@@ -3838,7 +3837,7 @@ public:
         FLOAT ratio = fontData->GetTextFormat()->GetFontSize() / (FLOAT)fontMetrics.designUnitsPerEm;
 
         if (descent != nullptr) *descent = fontMetrics.descent * ratio;
-        if (externalLeading != nullptr) *externalLeading = std::max(0.0f, (fontMetrics.ascent + fontMetrics.descent) * ratio - textMetrics.height);
+        if (externalLeading != nullptr) *externalLeading = std::max(0.0F, (fontMetrics.ascent + fontMetrics.descent) * ratio - textMetrics.height);
 
         return { textMetrics.widthIncludingTrailingWhitespace, textMetrics.height };
     }
@@ -3879,11 +3878,11 @@ public:
 
     void Clip(const wxRegion& region) override;
 
-    void Clip(double x, double y, double w, double h) override;
+    void Clip(float x, float y, float w, float h) override;
 
     void ResetClip() override;
 
-    void GetClipBox(double* x, double* y, double* w, double* h) override;
+    void GetClipBox(float* x, float* y, float* w, float* h) override;
 
     // The native context used by wxD2DContext is a Direct2D render target.
     void* GetNativeContext() override;
@@ -3894,15 +3893,15 @@ public:
 
     bool SetCompositionMode(wxCompositionMode op) override;
 
-    void BeginLayer(double opacity) override;
+    void BeginLayer(float opacity) override;
 
     void EndLayer() override;
 
-    void Translate(double dx, double dy) override;
+    void Translate(float dx, float dy) override;
 
-    void Scale(double xScale, double yScale) override;
+    void Scale(float xScale, float yScale) override;
 
-    void Rotate(double angle) override;
+    void Rotate(float angle) override;
 
     void ConcatTransform(const wxGraphicsMatrix& matrix) override;
 
@@ -3914,28 +3913,28 @@ public:
 
     void FillPath(const wxGraphicsPath& p , wxPolygonFillMode fillStyle = wxPolygonFillMode::OddEven) override;
 
-    void DrawRectangle(double x, double y, double w, double h) override;
+    void DrawRectangle(float x, float y, float w, float h) override;
 
-    void DrawRoundedRectangle(double x, double y, double w, double h, double radius) override;
+    void DrawRoundedRectangle(float x, float y, float w, float h, float radius) override;
 
-    void DrawEllipse(double x, double y, double w, double h) override;
+    void DrawEllipse(float x, float y, float w, float h) override;
 
-    void DrawBitmap(const wxGraphicsBitmap& bmp, double x, double y, double w, double h) override;
+    void DrawBitmap(const wxGraphicsBitmap& bmp, float x, float y, float w, float h) override;
 
-    void DrawBitmap(const wxBitmap& bmp, double x, double y, double w, double h) override;
+    void DrawBitmap(const wxBitmap& bmp, float x, float y, float w, float h) override;
 
-    void DrawIcon(const wxIcon& icon, double x, double y, double w, double h) override;
+    void DrawIcon(const wxIcon& icon, float x, float y, float w, float h) override;
 
     void PushState() override;
 
     void PopState() override;
 
-    std::pair<double, double> GetTextExtent(
+    std::pair<float, float> GetTextExtent(
         std::string_view str,
-        double* descent,
-        double* externalLeading) const override;
+        float* descent,
+        float* externalLeading) const override;
 
-    std::vector<double> GetPartialTextExtents(std::string_view text) const override;
+    std::vector<float> GetPartialTextExtents(std::string_view text) const override;
 
     bool ShouldOffset() const override;
 
@@ -3943,7 +3942,7 @@ public:
 
     void Flush() override;
 
-    void GetDPI(double* dpiX, double* dpiY) const override;
+    void GetDPI(float* dpiX, float* dpiY) const override;
 
     wxD2DContextSupplier::ContextType GetContext() override
     {
@@ -3951,7 +3950,7 @@ public:
     }
 
 private:
-    void DoDrawText(std::string_view str, double x, double y) override;
+    void DoDrawText(std::string_view str, float x, float y) override;
 
     void EnsureInitialized();
 
@@ -4003,10 +4002,10 @@ private:
     ID2D1Factory* m_direct2dFactory;
     ID2D1RenderTarget* m_cachedRenderTarget{nullptr};
 
-    double m_clipX1{0.0};
-    double m_clipY1{0.0};
-    double m_clipX2{0.0};
-    double m_clipY2{0.0};
+    float m_clipX1{};
+    float m_clipY1{};
+    float m_clipX2{};
+    float m_clipY2{};
 
     // Clipping box
     bool m_isClipBoxValid{ false };
@@ -4111,14 +4110,14 @@ void wxD2DContext::Clip(const wxRegion& region)
     SetClipLayer(clipGeometry);
 }
 
-void wxD2DContext::Clip(double x, double y, double w, double h)
+void wxD2DContext::Clip(float x, float y, float w, float h)
 {
     wxCOMPtr<ID2D1RectangleGeometry> clipGeometry;
     HRESULT hr = m_direct2dFactory->CreateRectangleGeometry(
-                        D2D1::RectF(gsl::narrow_cast<float>(x),
-                                    gsl::narrow_cast<float>(y),
-                                    gsl::narrow_cast<float>(x + w),
-                                    gsl::narrow_cast<float>(y + h)), &clipGeometry);
+                        D2D1::RectF(x,
+                                    y,
+                                    x + w,
+                                    y + h), &clipGeometry);
     wxCHECK_HRESULT_RET(hr);
 
     SetClipLayer(clipGeometry);
@@ -4194,7 +4193,7 @@ void wxD2DContext::ResetClip()
     m_isClipBoxValid = false;
 }
 
-void wxD2DContext::GetClipBox(double* x, double* y, double* w, double* h)
+void wxD2DContext::GetClipBox(float* x, float* y, float* w, float* h)
 {
     if ( !m_isClipBoxValid )
     {
@@ -4407,7 +4406,7 @@ bool wxD2DContext::SetCompositionMode(wxCompositionMode compositionMode)
     return false;
 }
 
-void wxD2DContext::BeginLayer(double opacity)
+void wxD2DContext::BeginLayer(float opacity)
 {
     EnsureInitialized();
 
@@ -4420,7 +4419,7 @@ void wxD2DContext::BeginLayer(double opacity)
     ld.params = D2D1::LayerParameters(D2D1::InfiniteRect(),
                         nullptr,
                         D2D1_ANTIALIAS_MODE_PER_PRIMITIVE,
-                        D2D1::IdentityMatrix(), gsl::narrow_cast<float>(opacity));
+                        D2D1::IdentityMatrix(), opacity);
     ld.layer = layer;
     // We need to store CTM to be able to re-apply
     // the layer at the original position later on.
@@ -4488,21 +4487,21 @@ void wxD2DContext::EndLayer()
     GetRenderTarget()->SetTransform(&currTransform);
 }
 
-void wxD2DContext::Translate(double dx, double dy)
+void wxD2DContext::Translate(float dx, float dy)
 {
     wxGraphicsMatrix translationMatrix = CreateMatrix();
     translationMatrix.Translate(dx, dy);
     ConcatTransform(translationMatrix);
 }
 
-void wxD2DContext::Scale(double xScale, double yScale)
+void wxD2DContext::Scale(float xScale, float yScale)
 {
     wxGraphicsMatrix scaleMatrix = CreateMatrix();
     scaleMatrix.Scale(xScale, yScale);
     ConcatTransform(scaleMatrix);
 }
 
-void wxD2DContext::Rotate(double angle)
+void wxD2DContext::Rotate(float angle)
 {
     wxGraphicsMatrix rotationMatrix = CreateMatrix();
     rotationMatrix.Rotate(angle);
@@ -4565,7 +4564,7 @@ wxGraphicsMatrix wxD2DContext::GetTransform() const
     return matrix;
 }
 
-void wxD2DContext::DrawBitmap(const wxGraphicsBitmap& bmp, double x, double y, double w, double h)
+void wxD2DContext::DrawBitmap(const wxGraphicsBitmap& bmp, float x, float y, float w, float h)
 {
     if (m_composition == wxCOMPOSITION_DEST)
         return;
@@ -4576,22 +4575,22 @@ void wxD2DContext::DrawBitmap(const wxGraphicsBitmap& bmp, double x, double y, d
 
     m_renderTargetHolder->DrawBitmap(
         bitmapData->GetD2DBitmap(),
-        D2D1::RectF(0.0F, 0.0F, gsl::narrow_cast<float>(bmpSize.x), gsl::narrow_cast<float>(bmpSize.y)),
-        D2D1::RectF(gsl::narrow_cast<float>(x),
-                    gsl::narrow_cast<float>(y),
-                    gsl::narrow_cast<float>(x + w),
-                    gsl::narrow_cast<float>(y + h)),
+        D2D1::RectF(0.0F, 0.0F, bmpSize.x, bmpSize.y),
+        D2D1::RectF(x,
+                    y,
+                    x + w,
+                    y + h),
         GetInterpolationQuality(),
         GetCompositionMode());
 }
 
-void wxD2DContext::DrawBitmap(const wxBitmap& bmp, double x, double y, double w, double h)
+void wxD2DContext::DrawBitmap(const wxBitmap& bmp, float x, float y, float w, float h)
 {
     wxGraphicsBitmap graphicsBitmap = CreateBitmap(bmp);
     DrawBitmap(graphicsBitmap, x, y, w, h);
 }
 
-void wxD2DContext::DrawIcon(const wxIcon& icon, double x, double y, double w, double h)
+void wxD2DContext::DrawIcon(const wxIcon& icon, float x, float y, float w, float h)
 {
     DrawBitmap(wxBitmap(icon), x, y, w, h);
 }
@@ -4658,10 +4657,10 @@ void wxD2DContext::PopState()
     m_isClipBoxValid = false;
 }
 
-std::pair<double, double> wxD2DContext::GetTextExtent(
+std::pair<float, float> wxD2DContext::GetTextExtent(
     std::string_view str,
-    double* descent,
-    double* externalLeading) const
+    float* descent,
+    float* externalLeading) const
 {
     // FIXME: Does not return wxSize.
     //wxCHECK_RET(!m_font.IsNull(),
@@ -4671,7 +4670,7 @@ std::pair<double, double> wxD2DContext::GetTextExtent(
         wxGetD2DFontData(m_font), str, descent, externalLeading);
 }
 
-std::vector<double> wxD2DContext::GetPartialTextExtents(std::string_view text) const
+std::vector<float> wxD2DContext::GetPartialTextExtents(std::string_view text) const
 {
     //wxCHECK_RET(!m_font.IsNull(),
     //    wxS("wxD2DContext::GetPartialTextExtents - no valid font set"));
@@ -4692,19 +4691,19 @@ bool wxD2DContext::ShouldOffset() const
 
     // no offset if overall scale is not odd integer
     const wxGraphicsMatrix matrix(GetTransform());
-    double x = GetContentScaleFactor();
-    double y = x;
+    float x = GetContentScaleFactor();
+    float y = x;
     matrix.TransformDistance(&x, &y);
     // FIXME: Double equality
-    if (!(std::fmod(std::min(std::fabs(x), std::fabs(y)), 2.0) == 1.0))
+    if (!(std::fmod(std::min(std::fabs(x), std::fabs(y)), 2.0F) == 1.0F))
         return false;
 
     // offset if pen width is odd integer
     // FIXME: Double equality
-    return std::fmod(static_cast<double>(penData->GetWidth()), 2.0) == 1.0;
+    return std::fmod(penData->GetWidth(), 2.0F) == 1.0F;
 }
 
-void wxD2DContext::DoDrawText(std::string_view str, double x, double y)
+void wxD2DContext::DoDrawText(std::string_view str, float x, float y)
 {
     wxCHECK_RET(!m_font.IsNull(),
         wxS("wxD2DContext::wxDrawText - no valid font set"));
@@ -4719,7 +4718,7 @@ void wxD2DContext::DoDrawText(std::string_view str, double x, double y)
 
     // Render the text
     GetRenderTarget()->DrawTextLayout(
-        D2D1::Point2F(gsl::narrow_cast<float>(x), gsl::narrow_cast<float>(y)),
+        D2D1::Point2F(x, y),
         textLayout,
         fontData->GetBrushData().GetBrush());
 }
@@ -4773,7 +4772,7 @@ void wxD2DContext::ReleaseDeviceDependentResources()
     ReleaseResources();
 }
 
-void wxD2DContext::DrawRectangle(double x, double y, double w, double h)
+void wxD2DContext::DrawRectangle(float x, float y, float w, float h)
 {
     if (m_composition == wxCOMPOSITION_DEST)
         return;
@@ -4802,7 +4801,7 @@ void wxD2DContext::DrawRectangle(double x, double y, double w, double h)
     }
 }
 
-void wxD2DContext::DrawRoundedRectangle(double x, double y, double w, double h, double radius)
+void wxD2DContext::DrawRoundedRectangle(float x, float y, float w, float h, float radius)
 {
     if (m_composition == wxCOMPOSITION_DEST)
         return;
@@ -4832,7 +4831,7 @@ void wxD2DContext::DrawRoundedRectangle(double x, double y, double w, double h, 
     }
 }
 
-void wxD2DContext::DrawEllipse(double x, double y, double w, double h)
+void wxD2DContext::DrawEllipse(float x, float y, float w, float h)
 {
     if (m_composition == wxCOMPOSITION_DEST)
         return;
@@ -4910,7 +4909,7 @@ void wxD2DContext::Flush()
     GetRenderTarget()->SetTransform(&currTransform);
 }
 
-void wxD2DContext::GetDPI(double* dpiX, double* dpiY) const
+void wxD2DContext::GetDPI(float* dpiX, float* dpiY) const
 {
     if ( GetWindow() )
     {
@@ -4976,23 +4975,23 @@ public :
     wxGraphicsPath CreatePath() override;
 
     wxGraphicsMatrix CreateMatrix(
-        double a = 1.0, double b = 0.0, double c = 0.0, double d = 1.0,
-        double tx = 0.0, double ty = 0.0) override;
+        float a = 1.0F, float b = 0.0F, float c = 0.0F, float d = 1.0F,
+        float tx = 0.0F, float ty = 0.0F) override;
 
     wxGraphicsPen CreatePen(const wxGraphicsPenInfo& info) override;
 
     wxGraphicsBrush CreateBrush(const wxBrush& brush) override;
 
     wxGraphicsBrush CreateLinearGradientBrush(
-        double x1, double y1,
-        double x2, double y2,
+        float x1, float y1,
+        float x2, float y2,
         const wxGraphicsGradientStops& stops,
         const wxGraphicsMatrix& matrix = wxNullGraphicsMatrix) override;
 
     wxGraphicsBrush CreateRadialGradientBrush(
-        double startX, double startY,
-        double endX, double endY,
-        double radius,
+        float startX, float startY,
+        float endX, float endY,
+        float radius,
         const wxGraphicsGradientStops& stops,
         const wxGraphicsMatrix& matrix = wxNullGraphicsMatrix) override;
 
@@ -5006,20 +5005,20 @@ public :
 
     wxGraphicsFont wxCreateFont(const wxFont& font, const wxColour& col) override;
 
-    wxGraphicsFont wxCreateFont(double sizeInPixels,
+    wxGraphicsFont wxCreateFont(float sizeInPixels,
                                 const std::string& facename,
                                 unsigned int flags = wxFONTFLAG_DEFAULT,
                                 const wxColour& col = *wxBLACK) override;
 
     wxGraphicsFont CreateFontAtDPI(const wxFont& font,
-                                           const wxRealPoint& dpi,
-                                           const wxColour& col) override;
+                                   const wxPoint2DFloat& dpi,
+                                   const wxColour& col) override;
 
     // create a graphics bitmap from a native bitmap
     wxGraphicsBitmap CreateBitmapFromNativeBitmap(void* bitmap) override;
 
     // create a sub-image from a native image representation
-    wxGraphicsBitmap CreateSubBitmap(const wxGraphicsBitmap& bitmap, double x, double y, double w, double h) override;
+    wxGraphicsBitmap CreateSubBitmap(const wxGraphicsBitmap& bitmap, float x, float y, float w, float h) override;
 
     std::string GetName() const override;
     void GetVersion(int* major, int* minor, int* micro) const override;
@@ -5141,8 +5140,8 @@ wxGraphicsPath wxD2DRenderer::CreatePath()
 }
 
 wxGraphicsMatrix wxD2DRenderer::CreateMatrix(
-    double a, double b, double c, double d,
-    double tx, double ty)
+    float a, float b, float c, float d,
+    float tx, float ty)
 {
     wxD2DMatrixData* matrixData = new wxD2DMatrixData(this);
     matrixData->Set(a, b, c, d, tx, ty);
@@ -5183,8 +5182,8 @@ wxGraphicsBrush wxD2DRenderer::CreateBrush(const wxBrush& brush)
 }
 
 wxGraphicsBrush wxD2DRenderer::CreateLinearGradientBrush(
-    double x1, double y1,
-    double x2, double y2,
+    float x1, float y1,
+    float x2, float y2,
     const wxGraphicsGradientStops& stops,
     const wxGraphicsMatrix& matrix)
 {
@@ -5198,9 +5197,9 @@ wxGraphicsBrush wxD2DRenderer::CreateLinearGradientBrush(
 }
 
 wxGraphicsBrush wxD2DRenderer::CreateRadialGradientBrush(
-    double startX, double startY,
-    double endX, double endY,
-    double radius,
+    float startX, float startY,
+    float endX, float endY,
+    float radius,
     const wxGraphicsGradientStops& stops,
     const wxGraphicsMatrix& matrix)
 {
@@ -5255,10 +5254,10 @@ wxImage wxD2DRenderer::CreateImageFromBitmap(const wxGraphicsBitmap& bmp)
 
 wxGraphicsFont wxD2DRenderer::wxCreateFont(const wxFont& font, const wxColour& col)
 {
-    return CreateFontAtDPI(font, wxRealPoint(), col);
+    return CreateFontAtDPI(font, wxPoint2DFloat(), col);
 }
 
-wxGraphicsFont wxD2DRenderer::wxCreateFont(double sizeInPixels,
+wxGraphicsFont wxD2DRenderer::wxCreateFont(float sizeInPixels,
                                          const std::string& facename,
                                          unsigned int flags,
                                          const wxColour& col)
@@ -5267,8 +5266,9 @@ wxGraphicsFont wxD2DRenderer::wxCreateFont(double sizeInPixels,
     // Use the same DPI as wxFont will use in SetPixelSize, so these cancel
     // each other out and we are left with the actual pixel size.
     unique_dcwnd hdc{::GetDC(nullptr)};
-    wxRealPoint dpi(::GetDeviceCaps(hdc.get(), LOGPIXELSX),
-                    ::GetDeviceCaps(hdc.get(), LOGPIXELSY));
+    // FIXME: Why is this float?
+    wxPoint2DFloat dpi(::GetDeviceCaps(hdc.get(), LOGPIXELSX),
+                       ::GetDeviceCaps(hdc.get(), LOGPIXELSY));
 
     return CreateFontAtDPI(
         wxFontInfo(wxSize(sizeInPixels, sizeInPixels)).AllFlags(flags).FaceName(facename),
@@ -5276,7 +5276,7 @@ wxGraphicsFont wxD2DRenderer::wxCreateFont(double sizeInPixels,
 }
 
 wxGraphicsFont wxD2DRenderer::CreateFontAtDPI(const wxFont& font,
-                                              const wxRealPoint& dpi,
+                                              const wxPoint2DFloat& dpi,
                                               const wxColour& col)
 {
     auto fontData = std::make_unique<wxD2DFontData>(this, font, dpi, col);
@@ -5294,7 +5294,7 @@ wxGraphicsFont wxD2DRenderer::CreateFontAtDPI(const wxFont& font,
 }
 
 // create a sub-image from a native image representation
-wxGraphicsBitmap wxD2DRenderer::CreateSubBitmap(const wxGraphicsBitmap& bitmap, double x, double y, double w, double h)
+wxGraphicsBitmap wxD2DRenderer::CreateSubBitmap(const wxGraphicsBitmap& bitmap, float x, float y, float w, float h)
 {
     using NativeBitmap = wxD2DBitmapData::NativeType*;
 

@@ -22,22 +22,22 @@ class WXDLLIMPEXP_CORE wxAffineMatrix2D : public wxAffineMatrix2DBase
 {
 public:
     // Implement base class pure virtual methods.
-    void Set(const wxMatrix2D& mat2D, const wxPoint2DDouble& tr) override;
-    void Get(wxMatrix2D* mat2D, wxPoint2DDouble* tr) const override;
+    void Set(const wxMatrix2D& mat2D, const wxPoint2DFloat& tr) override;
+    void Get(wxMatrix2D* mat2D, wxPoint2DFloat* tr) const override;
     void Concat(const wxAffineMatrix2DBase& t) override;
     bool Invert() override;
     bool IsIdentity() const override;
     bool IsEqual(const wxAffineMatrix2DBase& t) const override;
-    void Translate(double dx, double dy) override;
-    void Scale(double xScale, double yScale) override;
-    void Rotate(double cRadians) override;
+    void Translate(float dx, float dy) override;
+    void Scale(float xScale, float yScale) override;
+    void Rotate(float cRadians) override;
 
 protected:
-    wxPoint2DDouble DoTransformPoint(const wxPoint2DDouble& p) const override;
-    wxPoint2DDouble DoTransformDistance(const wxPoint2DDouble& p) const override;
+    wxPoint2DFloat DoTransformPoint(const wxPoint2DFloat& p) const override;
+    wxPoint2DFloat DoTransformDistance(const wxPoint2DFloat& p) const override;
 
 private:
-    double m_11{1}, m_12{0}, m_21{0}, m_22{1}, m_tx{0}, m_ty{0};
+    float m_11{1.0F}, m_12{0.0F}, m_21{0.0F}, m_22{1.0F}, m_tx{0.0F}, m_ty{0.0F};
 };
 
 #endif // wxUSE_GEOMETRY

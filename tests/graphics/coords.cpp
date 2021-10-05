@@ -525,7 +525,7 @@ static void TransformedWithMatrix(wxDC* dc)
         // Results should be nagative because legacy functions
         // don't take affine transformation into account.
         m.Invert();
-        wxPoint2DDouble posLogRef = m.TransformPoint(wxPoint2DDouble(s_posDev.x, s_posDev.y));
+        wxPoint2DFloat posLogRef = m.TransformPoint(wxPoint2DFloat(s_posDev.x, s_posDev.y));
         wxPoint posLog;
         posLog.x = dc->DeviceToLogicalX(s_posDev.x);
         posLog.y = dc->DeviceToLogicalY(s_posDev.y);
@@ -534,7 +534,7 @@ static void TransformedWithMatrix(wxDC* dc)
         CHECK(posLog.x == s_posDev.x);
         CHECK(posLog.y == s_posDev.y);
 
-        wxPoint2DDouble dimLogRef = m.TransformDistance(wxPoint2DDouble(s_dimDev.x, s_dimDev.y));
+        wxPoint2DFloat dimLogRef = m.TransformDistance(wxPoint2DFloat(s_dimDev.x, s_dimDev.y));
         wxSize dimLog;
         dimLog.x = dc->DeviceToLogicalXRel(s_dimDev.x);
         dimLog.y = dc->DeviceToLogicalYRel(s_dimDev.y);
@@ -573,13 +573,13 @@ static void TransformedWithMatrixEx(wxDC * dc)
 
         // First convert from device to logical coordinates
         m.Invert();
-        wxPoint2DDouble posLogRef = m.TransformPoint(wxPoint2DDouble(s_posDev.x, s_posDev.y));
+        wxPoint2DFloat posLogRef = m.TransformPoint(wxPoint2DFloat(s_posDev.x, s_posDev.y));
         wxPoint posLog;
         posLog = dc->DeviceToLogical(s_posDev);
         CHECK(posLog.x == std::lround(posLogRef.x));
         CHECK(posLog.y == std::lround(posLogRef.y));
 
-        wxPoint2DDouble dimLogRef = m.TransformDistance(wxPoint2DDouble(s_dimDev.x, s_dimDev.y));
+        wxPoint2DFloat dimLogRef = m.TransformDistance(wxPoint2DFloat(s_dimDev.x, s_dimDev.y));
         wxSize dimLog;
         dimLog = dc->DeviceToLogicalRel(s_dimDev);
         CHECK(dimLog.x == std::lround(dimLogRef.x));
@@ -625,14 +625,14 @@ static void TransformedWithMatrixAndStd(wxDC* dc)
         m1.Concat(m);
         m1.Invert();
 
-        wxPoint2DDouble posLogRef = m1.TransformPoint(wxPoint2DDouble(s_posDev.x, s_posDev.y));
+        wxPoint2DFloat posLogRef = m1.TransformPoint(wxPoint2DFloat(s_posDev.x, s_posDev.y));
         wxPoint posLog;
         posLog.x = dc->DeviceToLogicalX(s_posDev.x);
         posLog.y = dc->DeviceToLogicalY(s_posDev.y);
         CHECK_FALSE(posLog.x == std::lround(posLogRef.x));
         CHECK_FALSE(posLog.y == std::lround(posLogRef.y));
 
-        wxPoint2DDouble dimLogRef = m1.TransformDistance(wxPoint2DDouble(s_dimDev.x, s_dimDev.y));
+        wxPoint2DFloat dimLogRef = m1.TransformDistance(wxPoint2DFloat(s_dimDev.x, s_dimDev.y));
         wxSize dimLog;
         dimLog.x = dc->DeviceToLogicalXRel(s_dimDev.x);
         dimLog.y = dc->DeviceToLogicalYRel(s_dimDev.y);
@@ -679,13 +679,13 @@ static void TransformedWithMatrixAndStdEx(wxDC * dc)
         m1.Concat(m);
         m1.Invert();
 
-        wxPoint2DDouble posLogRef = m1.TransformPoint(wxPoint2DDouble(s_posDev.x, s_posDev.y));
+        wxPoint2DFloat posLogRef = m1.TransformPoint(wxPoint2DFloat(s_posDev.x, s_posDev.y));
         wxPoint posLog;
         posLog = dc->DeviceToLogical(s_posDev);
         CHECK(posLog.x == std::lround(posLogRef.x));
         CHECK(posLog.y == std::lround(posLogRef.y));
 
-        wxPoint2DDouble dimLogRef = m1.TransformDistance(wxPoint2DDouble(s_dimDev.x, s_dimDev.y));
+        wxPoint2DFloat dimLogRef = m1.TransformDistance(wxPoint2DFloat(s_dimDev.x, s_dimDev.y));
         wxSize dimLog;
         dimLog = dc->DeviceToLogicalRel(s_dimDev);
         CHECK(dimLog.x == std::lround(dimLogRef.x));
@@ -712,16 +712,16 @@ static void RotatedWithMatrix(wxDC* dc)
     if ( dc->CanUseTransformMatrix() )
     {
         wxAffineMatrix2D m = dc->GetTransformMatrix();
-        m.Rotate(6.0 * std::numbers::pi / 180.0);
-        m.Translate(10, 15);
-        m.Scale(2.0, 3.0);
+        m.Rotate(6.0F * std::numbers::pi_v<float> / 180.0F);
+        m.Translate(10.0F, 15.0F);
+        m.Scale(2.0F, 3.0F);
         dc->SetTransformMatrix(m);
 
         // First convert from device to logical coordinates
         // Results should be nagative because legacy functions
         // don't take affine transformation into account.
         m.Invert();
-        wxPoint2DDouble posLogRef = m.TransformPoint(wxPoint2DDouble(s_posDev.x, s_posDev.y));
+        wxPoint2DFloat posLogRef = m.TransformPoint(wxPoint2DFloat(s_posDev.x, s_posDev.y));
         wxPoint posLog;
         posLog.x = dc->DeviceToLogicalX(s_posDev.x);
         posLog.y = dc->DeviceToLogicalY(s_posDev.y);
@@ -730,7 +730,7 @@ static void RotatedWithMatrix(wxDC* dc)
         CHECK(posLog.x == s_posDev.x);
         CHECK(posLog.y == s_posDev.y);
 
-        wxPoint2DDouble dimLogRef = m.TransformDistance(wxPoint2DDouble(s_dimDev.x, s_dimDev.y));
+        wxPoint2DFloat dimLogRef = m.TransformDistance(wxPoint2DFloat(s_dimDev.x, s_dimDev.y));
         wxSize dimLog;
         dimLog.x = dc->DeviceToLogicalXRel(s_dimDev.x);
         dimLog.y = dc->DeviceToLogicalYRel(s_dimDev.y);
@@ -762,20 +762,20 @@ static void RotatedWithMatrixEx(wxDC * dc)
     if ( dc->CanUseTransformMatrix() )
     {
         wxAffineMatrix2D m = dc->GetTransformMatrix();
-        m.Rotate(6.0 * std::numbers::pi / 180.0);
-        m.Translate(10, 15);
-        m.Scale(2.0, 3.0);
+        m.Rotate(6.0F * std::numbers::pi_v<float> / 180.0F);
+        m.Translate(10.0F, 15.0F);
+        m.Scale(2.0F, 3.0F);
         dc->SetTransformMatrix(m);
 
         // First convert from device to logical coordinates
         m.Invert();
-        wxPoint2DDouble posLogRef = m.TransformPoint(wxPoint2DDouble(s_posDev.x, s_posDev.y));
+        wxPoint2DFloat posLogRef = m.TransformPoint(wxPoint2DFloat(s_posDev.x, s_posDev.y));
         wxPoint posLog;
         posLog = dc->DeviceToLogical(s_posDev);
         CHECK(posLog.x == std::lround(posLogRef.x));
         CHECK(posLog.y == std::lround(posLogRef.y));
 
-        wxPoint2DDouble dimLogRef = m.TransformDistance(wxPoint2DDouble(s_dimDev.x, s_dimDev.y));
+        wxPoint2DFloat dimLogRef = m.TransformDistance(wxPoint2DFloat(s_dimDev.x, s_dimDev.y));
         wxSize dimLog;
         dimLog = dc->DeviceToLogicalRel(s_dimDev);
         CHECK(dimLog.x == std::lround(dimLogRef.x));

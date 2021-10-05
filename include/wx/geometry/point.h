@@ -251,6 +251,7 @@ constexpr wxPoint2D<NumericalT>  operator/(wxPoint2D<NumericalT> vec, ScalarT va
 
 using wxPoint2DInt = wxPoint2D<int>;
 using wxPoint2DDouble = wxPoint2D<double>;
+using wxPoint2DFloat = wxPoint2D<float>;
 
 using wxPoint = wxPoint2D<int>;
 using wxRealPoint = wxPoint2DDouble;

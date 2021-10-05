@@ -383,7 +383,7 @@ private:
 
         // Points defining the tip shape (in clockwise order as we must end at
         // tipPoints[0] after drawing the rectangle outline in this order).
-        wxPoint2DDouble tipPoints[3];
+        wxPoint2DFloat tipPoints[3];
 
         switch ( tipKind )
         {
@@ -397,9 +397,9 @@ private:
                 yBase = tipSize;
                 dy = tipSize;
 
-                tipPoints[0] = wxPoint2DDouble(x, yBase);
-                tipPoints[1] = wxPoint2DDouble(x, yApex);
-                tipPoints[2] = wxPoint2DDouble(x + tipSize, yBase);
+                tipPoints[0] = wxPoint2DFloat(x, yBase);
+                tipPoints[1] = wxPoint2DFloat(x, yApex);
+                tipPoints[2] = wxPoint2DFloat(x + tipSize, yBase);
 
                 pointStart = RectPoint_TopRight;
                 break;
@@ -410,9 +410,9 @@ private:
                 yBase = tipSize;
                 dy = tipSize;
 
-                tipPoints[0] = wxPoint2DDouble(x - tipSize, yBase);
-                tipPoints[1] = wxPoint2DDouble(x, yApex);
-                tipPoints[2] = wxPoint2DDouble(x, yBase);
+                tipPoints[0] = wxPoint2DFloat(x - tipSize, yBase);
+                tipPoints[1] = wxPoint2DFloat(x, yApex);
+                tipPoints[2] = wxPoint2DFloat(x, yBase);
 
                 pointStart = RectPoint_TopRight;
                 break;
@@ -423,9 +423,9 @@ private:
                 yBase = size.y;
                 dy = 0;
 
-                tipPoints[0] = wxPoint2DDouble(x + tipSize, yBase);
-                tipPoints[1] = wxPoint2DDouble(x, yApex);
-                tipPoints[2] = wxPoint2DDouble(x, yBase);
+                tipPoints[0] = wxPoint2DFloat(x + tipSize, yBase);
+                tipPoints[1] = wxPoint2DFloat(x, yApex);
+                tipPoints[2] = wxPoint2DFloat(x, yBase);
 
                 pointStart = RectPoint_BotLeft;
                 break;
@@ -436,9 +436,9 @@ private:
                 yBase = size.y;
                 dy = 0;
 
-                tipPoints[0] = wxPoint2DDouble(x, yBase);
-                tipPoints[1] = wxPoint2DDouble(x, yApex);
-                tipPoints[2] = wxPoint2DDouble(x - tipSize, yBase);
+                tipPoints[0] = wxPoint2DFloat(x, yBase);
+                tipPoints[1] = wxPoint2DFloat(x, yApex);
+                tipPoints[2] = wxPoint2DFloat(x - tipSize, yBase);
 
                 pointStart = RectPoint_BotLeft;
                 break;
@@ -454,9 +454,9 @@ private:
                     // divided by sqrt(3) (in our case inverse of sqrt(3))
                     const double halfside = tipSize * std::numbers::inv_sqrt3;
 
-                    tipPoints[0] = wxPoint2DDouble(x - halfside, yBase);
-                    tipPoints[1] = wxPoint2DDouble(x, yApex);
-                    tipPoints[2] = wxPoint2DDouble(x + halfside, yBase);
+                    tipPoints[0] = wxPoint2DFloat(x - halfside, yBase);
+                    tipPoints[1] = wxPoint2DFloat(x, yApex);
+                    tipPoints[2] = wxPoint2DFloat(x + halfside, yBase);
                 }
 
                 pointStart = RectPoint_TopRight;
@@ -471,9 +471,9 @@ private:
                 {
                     const double halfside = tipSize * std::numbers::inv_sqrt3;
 
-                    tipPoints[0] = wxPoint2DDouble(x + halfside, yBase);
-                    tipPoints[1] = wxPoint2DDouble(x, yApex);
-                    tipPoints[2] = wxPoint2DDouble(x - halfside, yBase);
+                    tipPoints[0] = wxPoint2DFloat(x + halfside, yBase);
+                    tipPoints[1] = wxPoint2DFloat(x, yApex);
+                    tipPoints[2] = wxPoint2DFloat(x - halfside, yBase);
                 }
 
                 pointStart = RectPoint_BotLeft;
@@ -533,7 +533,7 @@ private:
 
             // Last one wraps to the first point of the tip.
             const wxPoint2DDouble& pt1 = rectPoints[n];
-            const wxPoint2DDouble& pt2 = tipPoints[0];
+            const wxPoint2DFloat& pt2 = tipPoints[0];
 
             path.AddArcToPoint(pt1.x, pt1.y, pt2.x, pt2.y, RADIUS);
 

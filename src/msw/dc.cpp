@@ -2151,17 +2151,17 @@ bool wxMSWDCImpl::SetTransformMatrix(const wxAffineMatrix2D &matrix)
     }
 
     wxMatrix2D mat;
-    wxPoint2DDouble tr;
+    wxPoint2DFloat tr;
     matrix.Get(&mat, &tr);
 
     XFORM xform
     {
-        .eM11 = gsl::narrow_cast<float>(mat.m_11),
-        .eM12 = gsl::narrow_cast<float>(mat.m_12),
-        .eM21 = gsl::narrow_cast<float>(mat.m_21),
-        .eM22 = gsl::narrow_cast<float>(mat.m_22),
-        .eDx  = gsl::narrow_cast<float>(tr.x),
-        .eDy  = gsl::narrow_cast<float>(tr.y)
+        .eM11 = mat.m_11,
+        .eM12 = mat.m_12,
+        .eM21 = mat.m_21,
+        .eM22 = mat.m_22,
+        .eDx  = tr.x,
+        .eDy  = tr.y
     };
 
     if ( !::SetWorldTransform(GetHdc(), &xform) )
@@ -2186,7 +2186,7 @@ wxAffineMatrix2D wxMSWDCImpl::GetTransformMatrix() const
     }
 
     wxMatrix2D m(xform.eM11, xform.eM12, xform.eM21, xform.eM22);
-    wxPoint2DDouble p(xform.eDx, xform.eDy);
+    wxPoint2DFloat p(xform.eDx, xform.eDy);
     transform.Set(m, p);
 
     return transform;
