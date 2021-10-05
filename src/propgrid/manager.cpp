@@ -802,7 +802,7 @@ void wxPropertyGridManager::SelectPage( int index )
 
 // -----------------------------------------------------------------------
 
-int wxPropertyGridManager::GetPageByName( const wxString& name ) const
+gsl::index wxPropertyGridManager::GetPageByName( const wxString& name ) const
 {
     for ( size_t i = 0; i < GetPageCount(); i++ )
     {
