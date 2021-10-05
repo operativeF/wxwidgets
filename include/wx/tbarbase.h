@@ -413,13 +413,13 @@ public:
     virtual void SetMargins(int x, int y);
     void SetMargins(const wxSize& size)
         { SetMargins((int) size.x, (int) size.y); }
-    virtual void SetToolPacking(int packing)
+    virtual void SetToolPacking(unsigned int packing)
         { m_toolPacking = packing; }
     virtual void SetToolSeparation(int separation)
         { m_toolSeparation = separation; }
 
     virtual wxSize GetToolMargins() const { return wxSize(m_xMargin, m_yMargin); }
-    virtual int GetToolPacking() const { return m_toolPacking; }
+    virtual unsigned int GetToolPacking() const { return m_toolPacking; }
     virtual int GetToolSeparation() const { return m_toolSeparation; }
 
     // toolbar geometry
@@ -609,7 +609,7 @@ protected:
     int m_maxCols{0};
 
     // the tool packing and separation
-    int m_toolPacking{0};
+    unsigned int m_toolPacking{0};
     int m_toolSeparation{0};
 
     // FIXME: Should we still do it like this?

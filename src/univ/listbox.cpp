@@ -805,7 +805,7 @@ void wxListBox::DoSetFirstItem(int n)
 
 void wxListBox::DoSetSize(int x, int y,
                           int width, int height,
-                          int sizeFlags)
+                          unsigned int sizeFlags)
 {
     if ( wxGetWindowStyle() & wxLB_INT_HEIGHT )
     {

@@ -45,7 +45,7 @@
 #endif // no CLR_INVALID
 
 // ROP which doesn't have standard name
-constexpr int DSTERASE = 0x00220326;     // dest = (NOT src) AND dest
+constexpr unsigned int DSTERASE = 0x00220326;     // dest = (NOT src) AND dest
 
 // ----------------------------------------------------------------------------
 // wxBitmapRefData

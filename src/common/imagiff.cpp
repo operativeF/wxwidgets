@@ -57,12 +57,12 @@ enum
 // internal class for storing IFF image data
 struct IFFImage
 {
+    unsigned char *p{nullptr};               /* bitmap */
+    unsigned char *pal{nullptr};             /* palette */
     unsigned int w{0};                 /* width */
     unsigned int h{0};                 /* height */
     int transparent{-1};                /* transparent color (-1 = none) */
     int colors{0};                     /* number of colors */
-    unsigned char *p{nullptr};               /* bitmap */
-    unsigned char *pal{nullptr};             /* palette */
 
     IFFImage()  = default;
     ~IFFImage() { delete [] p; delete [] pal; }

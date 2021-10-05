@@ -507,7 +507,7 @@ wxSize wxChoice::DoGetSize() const
     return ctrl_sz;
 }
 
-void wxChoice::DoSetSize(wxRect boundary, int sizeFlags)
+void wxChoice::DoSetSize(wxRect boundary, unsigned int sizeFlags)
 {
     if ( boundary.height == GetBestSize().y )
     {

@@ -1256,7 +1256,7 @@ void wxNotebook::DoMoveWindow(int x, int y, int width, int height)
 
 void wxNotebook::DoSetSize(int x, int y,
                            int width, int height,
-                           int sizeFlags)
+                           unsigned int sizeFlags)
 {
     wxSize old_client_size = GetClientSize();
 

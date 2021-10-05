@@ -104,7 +104,7 @@ protected:
     // MSW implementation
     wxSize DoGetBestSize() const override;
     wxSize DoGetSize() const override;
-    void DoSetSize(wxRect chsize, int sizeFlags = wxSIZE_AUTO) override;
+    void DoSetSize(wxRect chsize, unsigned int sizeFlags = wxSIZE_AUTO) override;
     wxSize DoGetSizeFromTextSize(int xlen, int ylen = -1) const override;
 
     // Show or hide the popup part of the control.

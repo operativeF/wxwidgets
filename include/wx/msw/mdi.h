@@ -229,7 +229,7 @@ public:
 protected:
     wxPoint DoGetScreenPosition() const override;
     wxPoint DoGetPosition() const override;
-    void DoSetSize(wxRect boundary, int sizeFlags) override;
+    void DoSetSize(wxRect boundary, unsigned int sizeFlags) override;
     void DoSetClientSize(int width, int height) override;
     void InternalSetMenuBar() override;
     bool IsMDIChild() const override { return true; }
@@ -270,7 +270,7 @@ public:
     void OnScroll(wxScrollEvent& event);
 
 protected:
-    void DoSetSize(wxRect boundary, int sizeFlags = wxSIZE_AUTO) override;
+    void DoSetSize(wxRect boundary, unsigned int sizeFlags = wxSIZE_AUTO) override;
 
     int m_scrollX{0};
     int m_scrollY{0};

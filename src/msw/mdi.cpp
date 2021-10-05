@@ -931,7 +931,7 @@ bool wxMDIChildFrame::Show(bool show)
 }
 
 void
-wxMDIChildFrame::DoSetSize(wxRect boundary, int sizeFlags)
+wxMDIChildFrame::DoSetSize(wxRect boundary, unsigned int sizeFlags)
 {
     // we need to disable client area origin adjustments used for the child
     // windows for the frame itself
@@ -1384,7 +1384,7 @@ void wxMDIClientWindow::OnScroll(wxScrollEvent& event)
     event.Skip();
 }
 
-void wxMDIClientWindow::DoSetSize(wxRect boundary, int sizeFlags)
+void wxMDIClientWindow::DoSetSize(wxRect boundary, unsigned int sizeFlags)
 {
     // Try to fix a problem whereby if you show an MDI child frame, then reposition the
     // client area, you can end up with a non-refreshed portion in the client window

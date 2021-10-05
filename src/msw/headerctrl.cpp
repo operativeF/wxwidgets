@@ -109,7 +109,7 @@ public:
 protected:
     // override wxWindow methods which must be implemented by a new control
     wxSize DoGetBestSize() const override;
-    void DoSetSize(wxRect boundary, int sizeFlags = wxSIZE_AUTO) override;
+    void DoSetSize(wxRect boundary, unsigned int sizeFlags = wxSIZE_AUTO) override;
     void MSWUpdateFontOnDPIChange(const wxSize& newDPI) override;
 
 private:
@@ -256,7 +256,7 @@ DWORD wxMSWHeaderCtrl::MSWGetStyle(unsigned int style, DWORD *exstyle) const
 // ----------------------------------------------------------------------------
 
 void wxMSWHeaderCtrl::DoSetSize(wxRect boundary,
-                                int sizeFlags)
+                                unsigned int sizeFlags)
 {
     wxControl::DoSetSize(wxRect{boundary.x + m_scrollOffset,
                                 boundary.y,

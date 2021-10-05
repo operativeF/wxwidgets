@@ -568,7 +568,7 @@ wxPropertyGridPageState* wxPropertyGrid::CreateState() const
 
 void wxPropertyGrid::SetWindowStyleFlag( unsigned int style )
 {
-    long old_style = m_windowStyle;
+    unsigned int old_style = m_windowStyle;
 
     if ( m_iFlags & wxPG_FL_INITIALIZED )
     {
@@ -1074,7 +1074,7 @@ void wxPropertyGrid::DoEndLabelEdit( bool commit, int selFlags )
 
 // -----------------------------------------------------------------------
 
-void wxPropertyGrid::SetExtraStyle( long exStyle )
+void wxPropertyGrid::SetExtraStyle( unsigned int exStyle )
 {
     if ( exStyle & wxPG_EX_ENABLE_TLP_TRACKING )
         OnTLPChanging(::wxGetTopLevelParent(this));

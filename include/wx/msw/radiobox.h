@@ -127,7 +127,7 @@ protected:
     // Adjust all the buttons to the new window size.
     void PositionAllButtons(wxRect boundary);
 
-    void DoSetSize(wxRect boundary, int sizeFlags = wxSIZE_AUTO) override;
+    void DoSetSize(wxRect boundary, unsigned int sizeFlags = wxSIZE_AUTO) override;
     void DoMoveWindow(wxRect boundary) override;
     wxSize DoGetBestSize() const override;
 

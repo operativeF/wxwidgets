@@ -404,7 +404,7 @@ bool wxToolBar::MSWCreateToolbar(const wxPoint& pos, const wxSize& size)
 #endif
 
     // Retrieve or apply/restore tool packing value.
-    if ( m_toolPacking <= 0 )
+    if ( m_toolPacking == 0 )
     {
         // Retrieve packing value if it hasn't been yet set with SetToolPacking.
         const auto padding = ::SendMessageW(GetHwnd(), TB_GETPADDING, 0, 0);
@@ -424,7 +424,7 @@ bool wxToolBar::MSWCreateToolbar(const wxPoint& pos, const wxSize& size)
     HWND hwndTTip = (HWND)::SendMessageW(GetHwnd(), TB_GETTOOLTIPS, 0, 0);
     if ( hwndTTip )
     {
-        long styleTTip = ::GetWindowLongPtrW(hwndTTip, GWL_STYLE);
+        auto styleTTip = ::GetWindowLongPtrW(hwndTTip, GWL_STYLE);
         styleTTip |= TTS_NOPREFIX;
         ::SetWindowLongW(hwndTTip, GWL_STYLE, styleTTip);
     }
@@ -1749,7 +1749,7 @@ long wxToolBar::GetMSWToolbarStyle() const
 void wxToolBar::SetWindowStyleFlag(unsigned int style)
 {
     // the style bits whose changes force us to recreate the toolbar
-    static const long MASK_NEEDS_RECREATE = wxTB_TEXT | wxTB_NOICONS;
+    static constexpr unsigned int MASK_NEEDS_RECREATE = wxTB_TEXT | wxTB_NOICONS;
 
     const long styleOld = wxGetWindowStyle();
 
@@ -1835,9 +1835,9 @@ void wxToolBar::SetToolDisabledBitmap( int id, const wxBitmap& bitmap )
     }
 }
 
-void wxToolBar::SetToolPacking(int packing)
+void wxToolBar::SetToolPacking(unsigned int packing)
 {
-    if ( packing > 0 && packing != m_toolPacking )
+    if ( packing != m_toolPacking )
     {
         m_toolPacking = packing;
         if ( GetHwnd() )

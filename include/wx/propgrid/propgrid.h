@@ -1391,7 +1391,7 @@ public:
     void Refresh( bool eraseBackground = true,
                           const wxRect *rect = (const wxRect *) nullptr ) override;
     bool SetFont( const wxFont& font ) override;
-    void SetExtraStyle( long exStyle ) override;
+    void SetExtraStyle( unsigned int exStyle ) override;
     bool Reparent( wxWindowBase *newParent ) override;
     void ScrollWindow(int dx, int dy, const wxRect* rect) override;
     void SetScrollbars(int pixelsPerUnitX, int pixelsPerUnitY,

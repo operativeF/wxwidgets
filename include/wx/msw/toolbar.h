@@ -61,7 +61,7 @@ public:
     void SetToolNormalBitmap(int id, const wxBitmap& bitmap) override;
     void SetToolDisabledBitmap(int id, const wxBitmap& bitmap) override;
 
-    void SetToolPacking(int packing) override;
+    void SetToolPacking(unsigned int packing) override;
 
     // implementation only from now on
     // -------------------------------

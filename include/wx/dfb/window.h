@@ -115,7 +115,7 @@ protected:
     virtual wxSize DoGetClientSize() const;
     virtual void DoSetSize(int x, int y,
                            int width, int height,
-                           int sizeFlags = wxSIZE_AUTO);
+                           unsigned int sizeFlags = wxSIZE_AUTO);
     virtual void DoSetClientSize(int width, int height);
 
     virtual void DoCaptureMouse();

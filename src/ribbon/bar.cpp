@@ -522,7 +522,7 @@ void wxRibbonBar::RecalculateTabSizes()
     if(width >= m_tabs_total_width_ideal)
     {
         // Simple case: everything at ideal width
-        for(size_t i = 0; i < numtabs; ++i)
+        for(size_t i = 0; i != numtabs; ++i)
         {
             wxRibbonPageTabInfo& info = m_pages.Item(i);
             if (!info.shown)
@@ -541,7 +541,7 @@ void wxRibbonBar::RecalculateTabSizes()
     else if(width < m_tabs_total_width_minimum)
     {
         // Simple case: everything minimum with scrollbar
-        for(size_t i = 0; i < numtabs; ++i)
+        for(size_t i = 0; i != numtabs; ++i)
         {
             wxRibbonPageTabInfo& info = m_pages.Item(i);
             if (!info.shown)
@@ -583,7 +583,7 @@ void wxRibbonBar::RecalculateTabSizes()
             m_tab_scroll_right_button_rect.SetX(m_tab_scroll_right_button_rect.GetX() + m_tab_scroll_right_button_rect.GetWidth());
             m_tab_scroll_right_button_rect.SetWidth(0);
         }
-        for(size_t i = 0; i < numtabs; ++i)
+        for(size_t i = 0; i != numtabs; ++i)
         {
             wxRibbonPageTabInfo& info = m_pages.Item(i);
             if (!info.shown)
@@ -606,7 +606,7 @@ void wxRibbonBar::RecalculateTabSizes()
         int smallest_tab_width = INT_MAX;
         int total_small_width = tabsep * (numtabs - 1);
 
-        for(size_t i = 0; i < numtabs; ++i)
+        for(size_t i = 0; i != numtabs; ++i)
         {
             wxRibbonPageTabInfo& info = m_pages.Item(i);
             if (!info.shown)
@@ -624,7 +624,7 @@ void wxRibbonBar::RecalculateTabSizes()
             total_small_width -= tabsep * (numtabs - 1);
             width -= tabsep * (numtabs - 1);
 
-            for(size_t i = 0; i < numtabs; ++i)
+            for(size_t i = 0; i != numtabs; ++i)
             {
                 wxRibbonPageTabInfo& info = m_pages.Item(i);
                 if (!info.shown)
@@ -644,7 +644,7 @@ void wxRibbonBar::RecalculateTabSizes()
         else
         {
             total_small_width = tabsep * (numtabs - 1);
-            for(size_t i = 0; i < numtabs; ++i)
+            for(size_t i = 0; i != numtabs; ++i)
             {
                 wxRibbonPageTabInfo& info = m_pages.Item(i);
                 if (!info.shown)
@@ -663,12 +663,12 @@ void wxRibbonBar::RecalculateTabSizes()
                 // Do (2)
                 std::vector<PageComparedBySmallWidthAsc> sorted_pages;
                 sorted_pages.reserve(numtabs);
-                for (size_t i = 0; i < numtabs; ++i )
+                for (size_t i = 0; i != numtabs; ++i )
                     sorted_pages.push_back(PageComparedBySmallWidthAsc(&m_pages.Item(i)));
 
                 std::sort(sorted_pages.begin(), sorted_pages.end());
                 width -= tabsep * (numtabs - 1);
-                for(size_t i = 0; i < numtabs; ++i)
+                for(size_t i = 0; i != numtabs; ++i)
                 {
                     wxRibbonPageTabInfo* info = sorted_pages[i].m_page;
                     if (!info->shown)
@@ -683,7 +683,7 @@ void wxRibbonBar::RecalculateTabSizes()
                     }
                     width -= info->rect.width;
                 }
-                for(size_t i = 0; i < numtabs; ++i)
+                for(size_t i = 0; i != numtabs; ++i)
                 {
                     wxRibbonPageTabInfo& info = m_pages.Item(i);
                     if (!info.shown)

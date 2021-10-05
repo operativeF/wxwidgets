@@ -488,7 +488,7 @@ void wxRibbonPage::SetSizeWithScrollButtonAdjustment(int x, int y, int width, in
     SetSize(wxRect{x, y, width, height});
 }
 
-void wxRibbonPage::DoSetSize(wxRect boundary, int sizeFlags)
+void wxRibbonPage::DoSetSize(wxRect boundary, unsigned int sizeFlags)
 {
     // When a resize triggers the scroll buttons to become visible, the page is resized.
     // This resize from within a resize event can cause (MSW) wxWidgets some confusion,

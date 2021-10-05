@@ -558,7 +558,7 @@ struct BoxPrecalc
 
 void ResampleBoxPrecalc(std::vector<BoxPrecalc>& boxes, int oldDim)
 {
-    const int newDim = boxes.size();
+    const auto newDim = boxes.size();
     wxASSERT( oldDim > 0 && newDim > 0 );
 
     // We need to map pixel values in the range [-0.5 .. (newDim-1)+0.5]
@@ -593,9 +593,9 @@ void ResampleBoxPrecalc(std::vector<BoxPrecalc>& boxes, int oldDim)
     for ( int dst = 0; dst < newDim; dst++ )
     {
         BoxPrecalc& precalc = boxes[dst];
-        precalc.boxStart = v/newDim;
+        precalc.boxStart = v / newDim;
         v += oldDim;
-        precalc.boxEnd = v%newDim != 0 ? v/newDim : (v/newDim)-1;
+        precalc.boxEnd = v % newDim != 0 ? v / newDim : (v / newDim) - 1;
     }
 }
 
@@ -734,14 +734,14 @@ inline void DoCalc(BilinearPrecalc& precalc, double srcpix, int srcpixmax)
 
 void ResampleBilinearPrecalc(std::vector<BilinearPrecalc>& precalcs, int oldDim)
 {
-    const int newDim = precalcs.size();
+    const auto newDim = precalcs.size();
     wxASSERT( oldDim > 0 && newDim > 0 );
     const int srcpixmax = oldDim - 1;
     if ( newDim > 1 )
     {
         // We want to map pixels in the range [0..newDim-1]
         // to the range [0..oldDim-1]
-        const double scale_factor = double(oldDim-1) / (newDim-1);
+        const double scale_factor = double(oldDim - 1) / (newDim - 1);
 
         for ( int dsty = 0; dsty < newDim; dsty++ )
         {
@@ -754,7 +754,7 @@ void ResampleBilinearPrecalc(std::vector<BilinearPrecalc>& precalcs, int oldDim)
     else
     {
         // Let's take the pixel from the center of the source image.
-        const double srcpix = (double)srcpixmax / 2.0;
+        const double srcpix = static_cast<double>(srcpixmax) / 2.0;
 
         DoCalc(precalcs[0], srcpix, srcpixmax);
     }
@@ -886,14 +886,14 @@ inline void DoCalc(BicubicPrecalc& precalc, double srcpixd, int oldDim)
 
 void ResampleBicubicPrecalc(std::vector<BicubicPrecalc> &aWeight, int oldDim)
 {
-    const int newDim = aWeight.size();
+    const auto newDim = aWeight.size();
     wxASSERT( oldDim > 0 && newDim > 0 );
 
     if ( newDim > 1 )
     {
         // We want to map pixels in the range [0..newDim-1]
         // to the range [0..oldDim-1]
-        const double scale_factor = static_cast<double>(oldDim-1) / (newDim-1);
+        const double scale_factor = static_cast<double>(oldDim - 1) / (newDim - 1);
 
         for ( int dstd = 0; dstd < newDim; dstd++ )
         {

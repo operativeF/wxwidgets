@@ -128,21 +128,21 @@ public:
         { return true; }
 
     // implemented in colourcmn.cpp
-    virtual wxString GetAsString(long flags = wxC2S_NAME | wxC2S_CSS_SYNTAX) const;
+    virtual wxString GetAsString(unsigned int flags = wxC2S_NAME | wxC2S_CSS_SYNTAX) const;
 
     void SetRGB(std::uint32_t colRGB)
     {
-        Set((ChannelType)(0xFF & colRGB),
-            (ChannelType)(0xFF & (colRGB >> 8)),
-            (ChannelType)(0xFF & (colRGB >> 16)));
+        Set((ChannelType)(0xFFU & colRGB),
+            (ChannelType)(0xFFU & (colRGB >> 8)),
+            (ChannelType)(0xFFU & (colRGB >> 16)));
     }
 
     void SetRGBA(std::uint32_t colRGBA)
     {
-        Set((ChannelType)(0xFF & colRGBA),
-            (ChannelType)(0xFF & (colRGBA >> 8)),
-            (ChannelType)(0xFF & (colRGBA >> 16)),
-            (ChannelType)(0xFF & (colRGBA >> 24)));
+        Set((ChannelType)(0xFFU & colRGBA),
+            (ChannelType)(0xFFU & (colRGBA >> 8)),
+            (ChannelType)(0xFFU & (colRGBA >> 16)),
+            (ChannelType)(0xFFU & (colRGBA >> 24)));
     }
 
     std::uint32_t GetRGB() const
@@ -174,7 +174,7 @@ public:
     static void          ChangeLightness(unsigned char* r, unsigned char* g, unsigned char* b, int ialpha);
 
     wxColour ChangeLightness(int ialpha) const;
-    wxColour& MakeDisabled(unsigned char brightness = 255);
+    wxColour& MakeDisabled(unsigned char brightness = 0xFFU);
 
 protected:
     // Some ports need Init() and while we don't, provide a stub so that the

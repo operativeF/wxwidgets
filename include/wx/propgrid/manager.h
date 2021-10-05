@@ -324,7 +324,7 @@ public:
 
     // Returns index for a page name.
     // If no match is found, wxNOT_FOUND is returned.
-    int GetPageByName( const wxString& name ) const;
+    gsl::index GetPageByName( const wxString& name ) const;
 
     // Returns index for a relevant propertygrid state.
     // If no match is found, wxNOT_FOUND is returned.
@@ -503,7 +503,7 @@ public:
     //
 
     void SetId( wxWindowID winid ) override;
-    void SetExtraStyle ( long exStyle ) override;
+    void SetExtraStyle ( unsigned int exStyle ) override;
     bool SetFont ( const wxFont& font ) override;
     void SetWindowStyleFlag ( unsigned int style ) override;
     bool Reparent( wxWindowBase *newParent ) override;

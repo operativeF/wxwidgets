@@ -1225,12 +1225,12 @@ void wxWindow::DoGetClientSize(int *x, int *y) const
     if(y) *y = yy;
 }
 
-void wxWindow::DoSetSize(wxRect boundary, int sizeFlags)
+void wxWindow::DoSetSize(wxRect boundary, unsigned int sizeFlags)
 {
     DoSetSizeIntr(boundary, sizeFlags, false);
 }
 
-void wxWindow::DoSetSizeIntr(wxRect boundary, int sizeFlags, bool fromCtor)
+void wxWindow::DoSetSizeIntr(wxRect boundary, unsigned int sizeFlags, bool fromCtor)
 {
     // A bit of optimization to help sort out the flickers.
     int oldX = -1, oldY = -1, oldW = -1, oldH = -1;

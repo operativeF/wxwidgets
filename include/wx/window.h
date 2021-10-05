@@ -317,7 +317,7 @@ public:
 
         // set the window size and/or position
     void SetSize( wxRect boundary,
-                  int sizeFlags = wxSIZE_AUTO )
+                  unsigned int sizeFlags = wxSIZE_AUTO )
         {  DoSetSize(boundary, sizeFlags); }
 
     void SetSize( wxSize sz )
@@ -686,7 +686,7 @@ public:
 
         // extra style: the less often used style bits which can't be set with
         // SetWindowStyleFlag()
-    virtual void SetExtraStyle(long exStyle) { m_exStyle = exStyle; }
+    virtual void SetExtraStyle(unsigned int exStyle) { m_exStyle = exStyle; }
     unsigned int GetExtraStyle() const { return m_exStyle; }
 
     bool HasExtraStyle(int exFlag) const { return (m_exStyle & exFlag) != 0; }
@@ -1856,7 +1856,7 @@ protected:
     // this is the virtual function to be overridden in any derived class which
     // wants to change how SetSize() or Move() works - it is called by all
     // versions of these functions in the base class
-    virtual void DoSetSize(wxRect boundary, int sizeFlags = wxSIZE_AUTO) = 0;
+    virtual void DoSetSize(wxRect boundary, unsigned int sizeFlags = wxSIZE_AUTO) = 0;
 
     // same as DoSetSize() for the client size
     virtual void DoSetClientSize(int x, int y) = 0;
@@ -1902,7 +1902,7 @@ protected:
     // parents client area, e.g. if the parent is a frame with a toolbar, its
     // (0, 0) is just below the toolbar
     virtual void AdjustForParentClientOrigin(int& x, int& y,
-                                             int sizeFlags = 0) const;
+                                             unsigned int sizeFlags = 0) const;
 
     // implements the window variants
     virtual void DoSetWindowVariant( wxWindowVariant variant ) ;

@@ -50,7 +50,7 @@ public:
 
 protected:
     // implement/override some base class virtuals
-    void DoSetSize(wxRect boundary, int sizeFlags = wxSIZE_AUTO) override;
+    void DoSetSize(wxRect boundary, unsigned int sizeFlags = wxSIZE_AUTO) override;
     wxSize DoGetBestClientSize() const override;
 
     std::string WXGetVisibleLabel() const override;

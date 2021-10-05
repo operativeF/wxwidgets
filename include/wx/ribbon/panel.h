@@ -97,7 +97,7 @@ protected:
     wxSize DoGetNextLargerSize(wxOrientation direction,
                                      wxSize relative_to) const override;
 
-    void DoSetSize(wxRect boundary, int sizeFlags = wxSIZE_AUTO) override;
+    void DoSetSize(wxRect boundary, unsigned int sizeFlags = wxSIZE_AUTO) override;
     void OnSize(wxSizeEvent& evt);
     void OnEraseBackground(wxEraseEvent& evt);
     void OnPaint(wxPaintEvent& evt);

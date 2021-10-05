@@ -246,7 +246,7 @@ void wxRibbonPanel::OnSize(wxSizeEvent& evt)
     evt.Skip();
 }
 
-void wxRibbonPanel::DoSetSize(wxRect boundary, int sizeFlags)
+void wxRibbonPanel::DoSetSize(wxRect boundary, unsigned int sizeFlags)
 {
     // At least on MSW, changing the size of a window will cause GetSize() to
     // report the new size, but a size event may not be handled immediately.

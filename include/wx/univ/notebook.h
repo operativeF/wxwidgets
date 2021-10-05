@@ -131,7 +131,7 @@ protected:
     void DoMoveWindow(int x, int y, int width, int height) override;
     virtual void DoSetSize(int x, int y,
                            int width, int height,
-                           int sizeFlags = wxSIZE_AUTO) override;
+                           unsigned int sizeFlags = wxSIZE_AUTO) override;
 
     int DoSetSelection(size_t nPage, int flags = 0) override;
 

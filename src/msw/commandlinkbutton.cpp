@@ -27,11 +27,11 @@
 
 
 #ifndef BCM_SETNOTE
-constexpr int BCM_SETNOTE = 0x1609;
+constexpr unsigned int BCM_SETNOTE = 0x1609;
 #endif
 
 #ifndef BS_COMMANDLINK
-constexpr int BS_COMMANDLINK = 0xE;
+constexpr unsigned int BS_COMMANDLINK = 0xE;
 #endif
 
 // ----------------------------------------------------------------------------

@@ -566,7 +566,7 @@ wxSize wxRadioBox::DoGetBestSize() const
     return GetTotalButtonSize(GetMaxButtonSize());
 }
 
-void wxRadioBox::DoSetSize(wxRect boundary, int sizeFlags)
+void wxRadioBox::DoSetSize(wxRect boundary, unsigned int sizeFlags)
 {
     if ( (boundary.width == wxDefaultCoord && (sizeFlags & wxSIZE_AUTO_WIDTH)) ||
             (boundary.height == wxDefaultCoord && (sizeFlags & wxSIZE_AUTO_HEIGHT)) )

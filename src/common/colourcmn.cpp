@@ -170,10 +170,10 @@ bool wxColourBase::FromString(const wxString& str)
                 [[fallthrough]];
 
             case 8: // #rrggbbaa
-                Set((unsigned char)((tmp >> 24) & 0xFF),
-                    (unsigned char)((tmp >> 16) & 0xFF),
-                    (unsigned char)((tmp >> 8)  & 0xFF),
-                    (unsigned char)( tmp        & 0xFF));
+                Set((unsigned char)((tmp >> 24) & 0xFFU),
+                    (unsigned char)((tmp >> 16) & 0xFFU),
+                    (unsigned char)((tmp >> 8)  & 0xFFU),
+                    (unsigned char)( tmp        & 0xFFU));
                 break;
 
             case 3: // #rgb
@@ -181,10 +181,10 @@ bool wxColourBase::FromString(const wxString& str)
                 [[fallthrough]];
 
             case 4: // #rgba
-                Set((unsigned char)(((tmp >> 12) & 0xF) * 0x11),
-                    (unsigned char)(((tmp >> 8)  & 0xF) * 0x11),
-                    (unsigned char)(((tmp >> 4)  & 0xF) * 0x11),
-                    (unsigned char)(( tmp        & 0xF) * 0x11));
+                Set((unsigned char)(((tmp >> 12) & 0xFU) * 0x11U),
+                    (unsigned char)(((tmp >> 8)  & 0xFU) * 0x11U),
+                    (unsigned char)(((tmp >> 4)  & 0xFU) * 0x11U),
+                    (unsigned char)(( tmp        & 0xFU) * 0x11U));
                 break;
 
             default:
@@ -213,7 +213,7 @@ bool wxColourBase::FromString(const wxString& str)
     return true;
 }
 
-wxString wxColourBase::GetAsString(long flags) const
+wxString wxColourBase::GetAsString(unsigned int flags) const
 {
     if ( !IsOk() )
         return {};

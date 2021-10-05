@@ -2694,7 +2694,7 @@ wxPoint wxWindowBase::GetPositionConstraint() const
 
 #endif // wxUSE_CONSTRAINTS
 
-void wxWindowBase::AdjustForParentClientOrigin(int& x, int& y, int sizeFlags) const
+void wxWindowBase::AdjustForParentClientOrigin(int& x, int& y, unsigned int sizeFlags) const
 {
     wxWindow *parent = GetParent();
     if ( !(sizeFlags & wxSIZE_NO_ADJUSTMENTS) && parent )

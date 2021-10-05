@@ -202,7 +202,7 @@ protected:
     // retrieve the position/size of the window
     wxPoint DoGetPosition() const override;
 
-    void DoSetSize(int x, int y, int width, int height, int sizeFlags = wxSIZE_AUTO) override;
+    void DoSetSize(int x, int y, int width, int height, unsigned int sizeFlags = wxSIZE_AUTO) override;
     wxSize DoGetSize() const override;
 
     // same as DoSetSize() for the client size

@@ -284,7 +284,7 @@ protected:
         return wxWindow::DoGetSize();
     }
 
-    void DoSetSize(wxRect boundary, int sizeFlags) override
+    void DoSetSize(wxRect boundary, unsigned int sizeFlags) override
     {
         wxWindow::DoSetSize(boundary, sizeFlags);
     }

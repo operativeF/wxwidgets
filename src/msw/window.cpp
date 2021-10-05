@@ -1340,7 +1340,7 @@ bool wxCheckWindowWndProc(WXHWND hWnd, WXWNDPROC WXUNUSED(wndProc))
 
 void wxWindowMSW::SetWindowStyleFlag(unsigned int flags)
 {
-    long flagsOld = GetWindowStyleFlag();
+    unsigned int flagsOld = GetWindowStyleFlag();
     if ( flags == flagsOld )
         return;
 
@@ -1351,9 +1351,9 @@ void wxWindowMSW::SetWindowStyleFlag(unsigned int flags)
     MSWUpdateStyle(flagsOld, GetExtraStyle());
 }
 
-void wxWindowMSW::SetExtraStyle(long exflags)
+void wxWindowMSW::SetExtraStyle(unsigned int exflags)
 {
-    long exflagsOld = GetExtraStyle();
+    unsigned int exflagsOld = GetExtraStyle();
     if ( exflags == exflagsOld )
         return;
 
@@ -1385,7 +1385,7 @@ void wxWindowMSW::MSWUpdateStyle(long flagsOld, long exflagsOld)
     wxWindowBase::SetExtraStyle(exflagsOld);
 
     DWORD exstyleOld;
-    long styleOld = MSWGetStyle(flagsOld, &exstyleOld);
+    unsigned int styleOld = MSWGetStyle(flagsOld, &exstyleOld);
 
     wxWindowBase::SetExtraStyle(exflagsNew);
 
@@ -1402,12 +1402,12 @@ void wxWindowMSW::MSWUpdateStyle(long flagsOld, long exflagsOld)
         // we need to call SetWindowPos() if any of the styles affecting the
         // frame appearance have changed
         callSWP = ((styleOld ^ style ) & (WS_BORDER |
-                                      WS_THICKFRAME |
-                                      WS_CAPTION |
-                                      WS_DLGFRAME |
-                                      WS_MAXIMIZEBOX |
-                                      WS_MINIMIZEBOX |
-                                      WS_SYSMENU) ) != 0;
+                                          WS_THICKFRAME |
+                                          WS_CAPTION |
+                                          WS_DLGFRAME |
+                                          WS_MAXIMIZEBOX |
+                                          WS_MINIMIZEBOX |
+                                          WS_SYSMENU) ) != 0;
     }
 
     // There is one extra complication with the extended style: we must never
@@ -2056,7 +2056,7 @@ void wxWindowMSW::DoMoveWindow(wxRect boundary)
 // If sizeFlags contains wxSIZE_AUTO_WIDTH/HEIGHT flags (default), we calculate
 // the width/height to best suit our contents, otherwise we reuse the current
 // width/height
-void wxWindowMSW::DoSetSize(wxRect boundary, int sizeFlags)
+void wxWindowMSW::DoSetSize(wxRect boundary, unsigned int sizeFlags)
 {
     wxPoint currentPos = GetPosition();
     wxSize currentSz = GetSize();

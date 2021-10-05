@@ -148,7 +148,7 @@ bool wxGenericStaticText::SetFont(const wxFont &font)
 }
 
 void wxGenericStaticText::DoSetSize(wxRect boundary,
-                                    int sizeFlags)
+                                    unsigned int sizeFlags)
 {
     wxStaticTextBase::DoSetSize(boundary, sizeFlags);
     UpdateLabel();

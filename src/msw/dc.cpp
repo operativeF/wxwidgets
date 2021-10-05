@@ -92,7 +92,7 @@ constexpr int VIEWPORT_EXTENT = 134217727;
 
 // ROPs which don't have standard names (see "Ternary Raster Operations" in the
 // MSDN docs for how this and other numbers in wxDC::Blit() are obtained)
-constexpr int DSTCOPY = 0x00AA0029;      // a.k.a. NOP operation
+constexpr unsigned int DSTCOPY = 0x00AA0029;      // a.k.a. NOP operation
 
 // ----------------------------------------------------------------------------
 // macros for logical <-> device coords conversion

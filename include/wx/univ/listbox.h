@@ -197,7 +197,7 @@ protected:
     wxSize DoGetBestClientSize() const override;
     virtual void DoSetSize(int x, int y,
                            int width, int height,
-                           int sizeFlags = wxSIZE_AUTO) override;
+                           unsigned int sizeFlags = wxSIZE_AUTO) override;
 
     void DoDraw(wxControlRenderer *renderer) override;
     wxBorder GetDefaultBorder() const override;

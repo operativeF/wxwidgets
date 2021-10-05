@@ -60,7 +60,7 @@ WXWidget wxStaticLine::GetMainWidget() const
     return m_statbox->GetMainWidget();
 }
 
-void wxStaticLine::DoSetSize(int x, int y, int width, int height, int sizeFlags)
+void wxStaticLine::DoSetSize(int x, int y, int width, int height, unsigned int sizeFlags)
 {
     m_statbox->SetSize(x, y, width, height, sizeFlags);
 }

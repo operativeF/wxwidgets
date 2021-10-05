@@ -1061,7 +1061,7 @@ void wxRibbonAUIArtProvider::DrawButtonBarButton(
                         wxWindow* WXUNUSED(wnd),
                         const wxRect& rect,
                         wxRibbonButtonKind kind,
-                        long state,
+                        unsigned int state,
                         const std::string& label,
                         const wxBitmap& bitmap_large,
                         const wxBitmap& bitmap_small)
@@ -1174,7 +1174,7 @@ void wxRibbonAUIArtProvider::DrawTool(
             const wxRect& rect,
             const wxBitmap& bitmap,
             wxRibbonButtonKind kind,
-            long state)
+            unsigned int state)
 {
     if(kind == wxRIBBON_BUTTON_TOGGLE)
     {

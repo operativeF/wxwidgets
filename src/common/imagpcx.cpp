@@ -95,14 +95,14 @@ void RLEdecode(unsigned char *p, unsigned int size, wxInputStream& s)
         // byte. Else, it is a counter (cont = val & 0x3F) and the
         // next byte is the data byte.
 
-        if ((data & 0xC0) != 0xC0)
+        if ((data & 0xC0U) != 0xC0U)
         {
             *(p++) = (unsigned char)data;
             size--;
         }
         else
         {
-            unsigned int cont = data & 0x3F;
+            unsigned int cont = data & 0x3FU;
             if (cont > size) // can happen only if the file is malformed
                 break;
             data = (unsigned char)s.GetC();

@@ -252,7 +252,7 @@ wxSize wxStatusBarUniv::DoGetBestSize() const
 
 void wxStatusBarUniv::DoSetSize(int x, int y,
                                 int width, int WXUNUSED(height),
-                                int sizeFlags)
+                                unsigned int sizeFlags)
 {
     wxStatusBarBase::DoSetSize(x, y, width, GetHeight(), sizeFlags);
 }

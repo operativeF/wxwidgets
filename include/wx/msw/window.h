@@ -121,7 +121,7 @@ public:
     void Update() override;
 
     void SetWindowStyleFlag(unsigned int style) override;
-    void SetExtraStyle(long exStyle) override;
+    void SetExtraStyle(unsigned int exStyle) override;
     bool SetCursor( const wxCursor &cursor ) override;
     bool SetFont( const wxFont &font ) override;
 
@@ -676,7 +676,7 @@ protected:
     wxPoint DoGetPosition() const override;
     wxSize DoGetSize() const override;
     wxSize DoGetClientSize() const override;
-    void DoSetSize(wxRect boundary, int sizeFlags = wxSIZE_AUTO) override;
+    void DoSetSize(wxRect boundary, unsigned int sizeFlags = wxSIZE_AUTO) override;
     void DoSetClientSize(int width, int height) override;
 
     wxSize DoGetBorderSize() const override;

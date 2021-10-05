@@ -1512,7 +1512,7 @@ public:
     }
 
 protected:
-    void DoSetSize(wxRect boundary, int WXUNUSED(sizeFlags = wxSIZE_AUTO)) override
+    void DoSetSize(wxRect boundary, unsigned int WXUNUSED(sizeFlags = wxSIZE_AUTO)) override
     {
         m_rect = boundary;
         DoSizing();

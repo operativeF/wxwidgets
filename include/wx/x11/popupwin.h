@@ -35,7 +35,7 @@ protected:
     virtual void DoMoveWindow(int x, int y, int width, int height);
     virtual void DoSetSize(int x, int y,
                            int width, int height,
-                           int sizeFlags = wxSIZE_AUTO);
+                           unsigned int sizeFlags = wxSIZE_AUTO);
 
 private:
     wxDECLARE_EVENT_TABLE();

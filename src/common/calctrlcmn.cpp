@@ -108,7 +108,7 @@ wxCalendarDateAttr wxCalendarDateAttr::m_mark(wxCAL_BORDER_SQUARE);
 
 bool wxCalendarCtrlBase::EnableMonthChange(bool enable)
 {
-    const long styleOrig = wxGetWindowStyle();
+    const unsigned int styleOrig = wxGetWindowStyle();
     unsigned int style = enable ? styleOrig & ~wxCAL_NO_MONTH_CHANGE
                         : styleOrig | wxCAL_NO_MONTH_CHANGE;
     if ( style == styleOrig )

@@ -191,8 +191,8 @@ public:
     virtual ~wxRibbonArtProvider() = default;
 
     virtual wxRibbonArtProvider* Clone() const = 0;
-    virtual void SetFlags(long flags) = 0;
-    virtual long GetFlags() const = 0;
+    virtual void SetFlags(unsigned int flags) = 0;
+    virtual unsigned int GetFlags() const = 0;
 
     virtual int GetMetric(int id)  const = 0;
     virtual void SetMetric(int id, int new_val) = 0;
@@ -266,7 +266,7 @@ public:
                         wxWindow* wnd,
                         const wxRect& rect,
                         wxRibbonButtonKind kind,
-                        long state,
+                        unsigned int state,
                         const std::string& label,
                         const wxBitmap& bitmap_large,
                         const wxBitmap& bitmap_small) = 0;
@@ -287,7 +287,7 @@ public:
                         const wxRect& rect,
                         const wxBitmap& bitmap,
                         wxRibbonButtonKind kind,
-                        long state) = 0;
+                        unsigned int state) = 0;
 
     virtual void DrawToggleButton(
                         wxDC& dc,
@@ -401,8 +401,8 @@ public:
     wxRibbonMSWArtProvider(bool set_colour_scheme = true);
 
     wxRibbonArtProvider* Clone() const override;
-    void SetFlags(long flags) override;
-    long GetFlags() const override;
+    void SetFlags(unsigned int flags) override;
+    unsigned int GetFlags() const override;
 
     int GetMetric(int id) const override;
     void SetMetric(int id, int new_val) override;
@@ -480,7 +480,7 @@ public:
                         wxWindow* wnd,
                         const wxRect& rect,
                         wxRibbonButtonKind kind,
-                        long state,
+                        unsigned int state,
                         const std::string& label,
                         const wxBitmap& bitmap_large,
                         const wxBitmap& bitmap_small) override;
@@ -501,7 +501,7 @@ public:
                 const wxRect& rect,
                 const wxBitmap& bitmap,
                 wxRibbonButtonKind kind,
-                long state) override;
+                unsigned int state) override;
 
     void DrawToggleButton(
                         wxDC& dc,
@@ -620,7 +620,7 @@ protected:
                         wxDC& dc,
                         const wxRect& rect,
                         wxRibbonButtonKind kind,
-                        long state,
+                        unsigned int state,
                         const std::string& label,
                         const wxBitmap& bitmap_large,
                         const wxBitmap& bitmap_small);
@@ -749,7 +749,7 @@ protected:
     wxPen m_ribbon_toggle_pen;
 
     double m_cached_tab_separator_visibility;
-    long m_flags{0};
+    unsigned int m_flags{0};
 
     int m_tab_separation_size;
     int m_page_border_left;
@@ -876,7 +876,7 @@ public:
                         wxWindow* wnd,
                         const wxRect& rect,
                         wxRibbonButtonKind kind,
-                        long state,
+                        unsigned int state,
                         const std::string& label,
                         const wxBitmap& bitmap_large,
                         const wxBitmap& bitmap_small) override;
@@ -897,7 +897,7 @@ public:
                 const wxRect& rect,
                 const wxBitmap& bitmap,
                 wxRibbonButtonKind kind,
-                long state) override;
+                unsigned int state) override;
 
 protected:
     void DrawPartialPanelBackground(wxDC& dc, wxWindow* wnd,

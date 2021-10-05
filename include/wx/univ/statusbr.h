@@ -67,7 +67,7 @@ protected:
     // override DoSetSize() to prevent the status bar height from changing
     virtual void DoSetSize(int x, int y,
                            int width, int height,
-                           int sizeFlags = wxSIZE_AUTO) override;
+                           unsigned int sizeFlags = wxSIZE_AUTO) override;
 
     // get the (fixed) status bar height
     wxCoord GetHeight() const;

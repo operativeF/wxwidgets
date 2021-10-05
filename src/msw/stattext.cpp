@@ -115,7 +115,7 @@ wxSize wxStaticText::DoGetBestClientSize() const
     return {widthTextMax, heightTextTotal};
 }
 
-void wxStaticText::DoSetSize(wxRect boundary, int sizeFlags)
+void wxStaticText::DoSetSize(wxRect boundary, unsigned int sizeFlags)
 {
     // Keep track of the size before so we can see if it changed
     const wxSize sizeBefore = GetSize();

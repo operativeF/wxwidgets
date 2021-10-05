@@ -649,7 +649,7 @@ bool wxPropertyGridManager::SetFont( const wxFont& font )
 // Which flags can affect the toolbar
 #define wxPG_EX_WINDOW_TOOLBAR_STYLE_MASK  (wxPG_EX_NO_FLAT_TOOLBAR|wxPG_EX_MODE_BUTTONS|wxPG_EX_NO_TOOLBAR_DIVIDER)
 
-void wxPropertyGridManager::SetExtraStyle( long exStyle )
+void wxPropertyGridManager::SetExtraStyle( unsigned int exStyle )
 {
     // Pass only relevant flags to wxPropertyGrid.
     m_pPropGrid->SetExtraStyle(exStyle & wxPG_EX_WINDOW_PG_STYLE_MASK);
@@ -691,7 +691,7 @@ void wxPropertyGridManager::DoThaw()
 
 void wxPropertyGridManager::SetWindowStyleFlag( unsigned int style )
 {
-    long oldWindowStyle = GetWindowStyleFlag();
+    unsigned int oldWindowStyle = GetWindowStyleFlag();
 
     wxWindow::SetWindowStyleFlag( style );
     m_pPropGrid->SetWindowStyleFlag( (m_pPropGrid->GetWindowStyleFlag()&~(wxPG_MAN_PASS_FLAGS_MASK)) |

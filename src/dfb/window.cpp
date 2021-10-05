@@ -452,7 +452,7 @@ void wxWindowDFB::DoMoveWindow(int x, int y, int width, int height)
 // If sizeFlags contains wxSIZE_AUTO_WIDTH/HEIGHT flags (default), we calculate
 // the width/height to best suit our contents, otherwise we reuse the current
 // width/height
-void wxWindowDFB::DoSetSize(int x, int y, int width, int height, int sizeFlags)
+void wxWindowDFB::DoSetSize(int x, int y, int width, int height, unsigned int sizeFlags)
 {
     // get the current size and position...
     int currentX, currentY;

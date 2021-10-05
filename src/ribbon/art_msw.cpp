@@ -619,12 +619,12 @@ void wxRibbonMSWArtProvider::CloneTo(wxRibbonMSWArtProvider* copy) const
     copy->m_gallery_bitmap_padding_bottom_size = m_gallery_bitmap_padding_bottom_size;
 }
 
-long wxRibbonMSWArtProvider::GetFlags() const
+unsigned int wxRibbonMSWArtProvider::GetFlags() const
 {
     return m_flags;
 }
 
-void wxRibbonMSWArtProvider::SetFlags(long flags)
+void wxRibbonMSWArtProvider::SetFlags(unsigned int flags)
 {
     if((flags ^ m_flags) & wxRIBBON_BAR_FLOW_VERTICAL)
     {
@@ -2465,7 +2465,7 @@ void wxRibbonMSWArtProvider::DrawButtonBarButton(
                         wxWindow* WXUNUSED(wnd),
                         const wxRect& rect,
                         wxRibbonButtonKind kind,
-                        long state,
+                        unsigned int state,
                         const std::string& label,
                         const wxBitmap& bitmap_large,
                         const wxBitmap& bitmap_small)
@@ -2592,7 +2592,7 @@ void wxRibbonMSWArtProvider::DrawButtonBarButtonForeground(
                         wxDC& dc,
                         const wxRect& rect,
                         wxRibbonButtonKind kind,
-                        long state,
+                        unsigned int state,
                         const std::string& label,
                         const wxBitmap& bitmap_large,
                         const wxBitmap& bitmap_small)
@@ -2715,7 +2715,7 @@ void wxRibbonMSWArtProvider::DrawTool(
                 const wxRect& rect,
                 const wxBitmap& bitmap,
                 wxRibbonButtonKind kind,
-                long state)
+                unsigned int state)
 {
     if(kind == wxRIBBON_BUTTON_TOGGLE)
     {
