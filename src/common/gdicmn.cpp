@@ -11,6 +11,13 @@
 // For compilers that support precompilation, includes "wx.h".
 #include "wx/wxprec.h"
 
+#ifndef WX_PRECOMP
+    #include <cmath>
+#endif
+
+#include "wx/geometry/size.h"
+#include "wx/geometry/point.h"
+#include "wx/geometry/rect.h"
 
 #include "wx/display.h"
 #include "wx/bitmap.h"
@@ -23,13 +30,9 @@
 #include "wx/icon.h"
 #include "wx/iconbndl.h"
 #include "wx/log.h"
-#include "wx/math.h"
 #include "wx/palette.h"
 #include "wx/pen.h"
 #include "wx/settings.h"
-#include "wx/geometry/size.h"
-#include "wx/geometry/point.h"
-
 
 wxIMPLEMENT_ABSTRACT_CLASS(wxGDIObject, wxObject);
 

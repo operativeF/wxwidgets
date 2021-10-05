@@ -16,7 +16,6 @@
 #include "wx/log.h"
 #include "wx/hash.h"
 #include "wx/utils.h"
-#include "wx/math.h"
 #include "wx/module.h"
 #include "wx/palette.h"
 #include "wx/intl.h"
@@ -25,6 +24,7 @@
 
 #ifndef WX_PRECOMP
     #include <algorithm>
+    #include <cmath>
     #include <cstring> // For memcpy
     #include <gsl/gsl>
 #endif

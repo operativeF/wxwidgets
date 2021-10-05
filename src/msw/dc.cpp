@@ -16,6 +16,7 @@
     #include "wx/msw/wrapcdlg.h"
     #include "wx/msw/wrap/utils.h"
 
+    #include <cmath>
     #include <numeric>
 
     #include <boost/nowide/convert.hpp>
@@ -28,7 +29,6 @@
 #include "wx/bitmap.h"
 #include "wx/dcmemory.h"
 #include "wx/log.h"
-#include "wx/math.h"
 #include "wx/icon.h"
 #include "wx/module.h"
 #include "wx/stringutils.h"

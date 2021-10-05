@@ -18,7 +18,6 @@
 #include "wx/dcclient.h"
 #include "wx/dcmemory.h"
 #include "wx/dcscreen.h"
-#include "wx/math.h"
 #include "wx/module.h"
 #include "wx/window.h"
 

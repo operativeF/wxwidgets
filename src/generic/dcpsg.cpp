@@ -14,16 +14,14 @@
 #if wxUSE_PRINTING_ARCHITECTURE && wxUSE_POSTSCRIPT
 
 #include "wx/generic/dcpsg.h"
+#include "wx/intl.h"
+#include "wx/log.h"
+#include "wx/utils.h"
+#include "wx/dcmemory.h"
+#include "wx/image.h"
+#include "wx/icon.h"
 
 #ifndef WX_PRECOMP
-    #include "wx/intl.h"
-    #include "wx/log.h"
-    #include "wx/utils.h"
-    #include "wx/dcmemory.h"
-    #include "wx/math.h"
-    #include "wx/image.h"
-    #include "wx/icon.h"
-
     #include <cmath>
     #include <numbers>
     #include <string_view>

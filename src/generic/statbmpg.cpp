@@ -16,10 +16,13 @@
 
 #if wxUSE_GRAPHICS_CONTEXT
     #include "wx/graphics.h"
-    
 #else
     #include "wx/image.h"
     #include "wx/math.h"
+#endif
+
+#ifndef WX_PRECOMP
+    #include <cmath>
 #endif
 
 bool wxGenericStaticBitmap::Create(wxWindow *parent,

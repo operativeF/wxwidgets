@@ -20,7 +20,6 @@
 #include "wx/dcscreen.h"
 #include "wx/icon.h"
 #include "wx/image.h"
-#include "wx/math.h"
 #include "wx/base64.h"
 #include "wx/dcsvg.h"
 #include "wx/wfstream.h"

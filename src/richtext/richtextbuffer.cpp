@@ -14,6 +14,10 @@
 
 #if wxUSE_RICHTEXT
 
+#ifndef WX_PRECOMP
+    #include <cmath>
+#endif
+
 #include "wx/richtext/richtextbuffer.h"
 
 #include "wx/dc.h"
@@ -31,7 +35,6 @@
 #include "wx/textfile.h"
 #include "wx/hashmap.h"
 #include "wx/dynarray.h"
-#include "wx/math.h"
 
 #include "wx/richtext/richtextctrl.h"
 #include "wx/richtext/richtextstyles.h"

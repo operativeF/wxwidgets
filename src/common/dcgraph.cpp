@@ -24,7 +24,6 @@
 #include "wx/dcclient.h"
 #include "wx/dcmemory.h"
 #include "wx/graphics.h"
-#include "wx/math.h"
 #include "wx/geometry.h"
 #include "wx/stringutils.h"
 

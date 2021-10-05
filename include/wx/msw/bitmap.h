@@ -12,11 +12,11 @@
 #define _WX_BITMAP_H_
 
 #include "wx/msw/gdiimage.h"
-#include "wx/math.h"
 #include "wx/palette.h"
 
 #include "wx/msw/wrap/utils.h"
 
+#include <cmath>
 #include <string>
 
 class WXDLLIMPEXP_FWD_CORE wxBitmap;
