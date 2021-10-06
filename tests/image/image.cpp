@@ -1998,6 +1998,8 @@ TEST_CASE("wxImage::Clipboard")
         REQUIRE(wxTheClipboard->SetData(dobj1) == true);
     }
 
+    wxYield();
+
     wxImageDataObject dobj2;
     {
         wxClipboardLocker lockClip;

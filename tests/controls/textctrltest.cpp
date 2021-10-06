@@ -1327,8 +1327,6 @@ TEST_CASE("wxTextCtrl::LongPaste")
     // the default maximum length under MSW) number here.
     const int NUM_LINES = 10000;
 
-    wxClipboardLocker lock;
-
     // Build a longish string.
     wxString s;
     s.reserve(NUM_LINES * 5 + 10);
@@ -1338,6 +1336,8 @@ TEST_CASE("wxTextCtrl::LongPaste")
     }
 
     s += "THE END";
+
+    wxClipboardLocker lock;
 
     wxTheClipboard->AddData(new wxTextDataObject(s));
 

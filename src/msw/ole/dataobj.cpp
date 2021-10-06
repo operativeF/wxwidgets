@@ -1013,7 +1013,7 @@ const wxChar *wxDataObject::GetFormatName(wxDataFormat format)
         case CF_HDROP:        return wxT("CF_HDROP");
 
         default:
-            if ( !::GetClipboardFormatName(format, s_szBuf, WXSIZEOF(s_szBuf)) )
+            if ( !::GetClipboardFormatNameW(format, s_szBuf, WXSIZEOF(s_szBuf)) )
             {
                 // it must be a new predefined format we don't know the name of
                 wxSprintf(s_szBuf, wxT("unknown CF (0x%04x)"), format.GetFormatId());

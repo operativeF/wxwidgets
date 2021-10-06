@@ -53,15 +53,17 @@ void wxClipboardEvent::AddFormat(const wxDataFormat& format)
 // wxClipboardBase
 // ---------------------------------------------------------
 
-static wxClipboard *gs_clipboard = nullptr;
+// FIXME: Global unique_ptr
+static std::unique_ptr<wxClipboard> gs_clipboard;
 
 /*static*/ wxClipboard *wxClipboardBase::Get()
 {
     if ( !gs_clipboard )
     {
-        gs_clipboard = new wxClipboard;
+        gs_clipboard = std::make_unique<wxClipboard>();
     }
-    return gs_clipboard;
+
+    return gs_clipboard.get();
 }
 
 bool wxClipboardBase::IsSupportedAsync( wxEvtHandler *sink )
@@ -86,7 +88,7 @@ class wxClipboardModule : public wxModule
 {
 public:
     bool OnInit() override { return true; }
-    void OnExit() override { wxDELETE(gs_clipboard); }
+    void OnExit() override {}
 
 private:
     wxDECLARE_DYNAMIC_CLASS(wxClipboardModule);

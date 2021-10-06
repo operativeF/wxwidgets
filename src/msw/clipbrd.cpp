@@ -61,8 +61,8 @@
 // ---------------------------------------------------------------------------
 
 static bool gs_wxClipboardIsOpen = false;
-static int gs_htmlcfid = 0;
-static int gs_pngcfid = 0;
+static int gs_htmlcfid{};
+static int gs_pngcfid{};
 
 bool wxOpenClipboard()
 {
@@ -520,15 +520,17 @@ bool wxClipboard::Flush()
 
 bool wxClipboard::Open()
 {
-    // Get clipboard id for HTML and PNG formats...
-    if(!gs_htmlcfid)
-        gs_htmlcfid = RegisterClipboardFormatW(wxT("HTML Format"));
-    if ( !gs_pngcfid )
-        gs_pngcfid = ::RegisterClipboardFormatW(wxT("PNG"));
-
     // OLE opens clipboard for us
     m_isOpened = true;
+
+    // Get clipboard id for HTML and PNG formats...
+    if(!gs_htmlcfid)
+        gs_htmlcfid = ::RegisterClipboardFormatW(L"HTML Format");
+    if ( !gs_pngcfid )
+        gs_pngcfid = ::RegisterClipboardFormatW(L"PNG");
+
 #if wxUSE_OLE_CLIPBOARD
+
     return true;
 #else
     return wxOpenClipboard();
@@ -708,7 +710,7 @@ bool wxClipboard::GetData( wxDataObject& data )
 
 #if wxUSE_OLE_CLIPBOARD
     IDataObject *pDataObject = nullptr;
-    HRESULT hr = OleGetClipboard(&pDataObject);
+    HRESULT hr = ::OleGetClipboard(&pDataObject);
     if ( FAILED(hr) || !pDataObject )
     {
         wxLogSysError(hr, _("Failed to get data from the clipboard"));
@@ -718,20 +720,10 @@ bool wxClipboard::GetData( wxDataObject& data )
 
     // build the list of supported formats
     size_t nFormats = data.GetFormatCount(wxDataObject::Set);
-    wxDataFormat format;
-    wxDataFormat *formats;
-    if ( nFormats == 1 )
-    {
-        // the most common case
-        formats = &format;
-    }
-    else
-    {
-        // bad luck, need to alloc mem
-        formats = new wxDataFormat[nFormats];
-    }
 
-    data.GetAllFormats(formats, wxDataObject::Set);
+    auto formats = std::make_unique<wxDataFormat[]>(nFormats);
+
+    data.GetAllFormats(formats.get(), wxDataObject::Set);
 
     // get the data for the given formats
     FORMATETC formatEtc;
@@ -778,7 +770,7 @@ bool wxClipboard::GetData( wxDataObject& data )
 
     STGMEDIUM medium;
     // stop at the first valid format found on the clipboard
-    for ( size_t n = 0; !result && (n < nFormats); n++ )
+    for ( size_t n = 0; !result && (n != nFormats); n++ )
     {
         // convert to NativeFormat Id
         cf = formats[n].GetFormatId();
@@ -846,11 +838,6 @@ bool wxClipboard::GetData( wxDataObject& data )
             }
         }
         //else: unsupported tymed?
-    }
-
-    if ( formats != &format )
-    {
-        delete [] formats;
     }
     //else: we didn't allocate any memory
 
