@@ -709,6 +709,8 @@ bool wxClipboard::GetData( wxDataObject& data )
         return false;
 
 #if wxUSE_OLE_CLIPBOARD
+    // FIXME: Can fail if the clipboard cannot be opened at the time.
+    // This should probably be coroutined.
     IDataObject *pDataObject = nullptr;
     HRESULT hr = ::OleGetClipboard(&pDataObject);
     if ( FAILED(hr) || !pDataObject )

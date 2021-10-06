@@ -1284,43 +1284,11 @@ TEST_CASE("wxTextCtrl::GetBestSize")
 
 #if wxUSE_CLIPBOARD
 
-// FIXME: This test relies on pasting speed, and should be
-// refactored to be independent of this! The test can fail
-// if the paste isn't done fast enough!
-TEST_CASE("wxTextCtrl::LongPaste")
+static void LongPasteTest(unsigned int style)
 {
-    unsigned int style = 0;
-
-    SUBCASE("Plain")
-    {
-        style = wxTE_MULTILINE;
-    }
-
-    // wxTE_RICH[2] style only makes any different under MSW, so don't bother
-    // testing it under the other platforms.
-#ifdef __WXMSW__
-    SUBCASE("Rich")
-    {
-        style = wxTE_MULTILINE | wxTE_RICH;
-    }
-
-    SUBCASE("Rich v2")
-    {
-        style = wxTE_MULTILINE | wxTE_RICH2;
-    }
-#endif // __WXMSW__
-
-    if ( !style )
-    {
-        // This can happen when explicitly selecting just a single SUBCASE to
-        // execute -- this code still runs even if the corresponding SUBCASE is
-        // skipped, so we have to explicitly skip it too in this case.
-        return;
-    }
-
     std::unique_ptr<wxTextCtrl>
-        text(new wxTextCtrl(wxTheApp->GetTopWindow(), wxID_ANY, wxString(),
-                            wxDefaultPosition, wxDefaultSize, style));
+        text(new wxTextCtrl(wxTheApp->GetTopWindow(), wxID_ANY, std::string{},
+            wxDefaultPosition, wxDefaultSize, style));
 
     // This could actually be much higher, but it makes the test proportionally
     // slower, so use a relatively small (but still requiring more space than
@@ -1328,11 +1296,11 @@ TEST_CASE("wxTextCtrl::LongPaste")
     const int NUM_LINES = 10000;
 
     // Build a longish string.
-    wxString s;
+    std::string s;
     s.reserve(NUM_LINES * 5 + 10);
-    for ( int n = 0; n < NUM_LINES; ++n )
+    for (int n = 0; n != NUM_LINES; ++n)
     {
-        s += wxString::Format("%04d\n", n);
+        s += fmt::format("{:04d}\n", n);
     }
 
     s += "THE END";
@@ -1352,9 +1320,30 @@ TEST_CASE("wxTextCtrl::LongPaste")
 
     const int numLines = text->GetNumberOfLines();
 
-    CHECK( numLines == NUM_LINES + 2 );
-    CHECK( text->GetLineText(numLines - 1) == "THE END" );
+    CHECK(numLines == NUM_LINES + 2);
+    CHECK(text->GetLineText(numLines - 1) == "THE END");
 }
+
+TEST_CASE("wxTextCtrl::LongPaste: Plain")
+{
+    LongPasteTest(wxTE_MULTILINE);
+}
+
+// wxTE_RICH[2] style only makes any different under MSW, so don't bother
+// testing it under the other platforms.
+
+#ifdef __WXMSW__
+
+TEST_CASE("wxTextCtrl::LongPaste: Rich")
+{
+    LongPasteTest(wxTE_MULTILINE | wxTE_RICH);
+}
+
+TEST_CASE("Rich v2")
+{
+    LongPasteTest(wxTE_MULTILINE | wxTE_RICH2);
+}
+#endif // __WXMSW__
 
 #endif // wxUSE_CLIPBOARD
 

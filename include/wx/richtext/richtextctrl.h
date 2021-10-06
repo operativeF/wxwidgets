@@ -255,7 +255,7 @@ public:
     /**
         Returns the text for the given line.
     */
-    std::string GetLineText(long lineNo) const override ;
+    std::string GetLineText(int lineNo) const override ;
 
     /**
         Returns the number of lines in the buffer.

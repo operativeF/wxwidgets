@@ -566,7 +566,7 @@ int wxSearchCtrl::GetLineLength(long lineNo) const
 {
     return m_text->GetLineLength(lineNo);
 }
-std::string wxSearchCtrl::GetLineText(long lineNo) const
+std::string wxSearchCtrl::GetLineText(int lineNo) const
 {
     return m_text->GetLineText(lineNo);
 }

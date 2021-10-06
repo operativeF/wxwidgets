@@ -1631,7 +1631,7 @@ int wxTextCtrl::GetLineLength(long lineNo) const
     return GetLengthOfLineContainingPos(pos);
 }
 
-std::string wxTextCtrl::GetLineText(long lineNo) const
+std::string wxTextCtrl::GetLineText(int lineNo) const
 {
     size_t len = (size_t)GetLineLength(lineNo) + 1;
 

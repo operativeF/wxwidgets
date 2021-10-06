@@ -70,7 +70,7 @@ constexpr unsigned int wxTE_CENTRE         = wxTE_CENTER;
 
 // this style means to use RICHEDIT control and does something only under wxMSW
 // and Win32 and is silently ignored under all other platforms
-constexpr unsigned int wxTE_RICH = 0x0080;
+constexpr unsigned int wxTE_RICH           = 0x0080;
 
 constexpr unsigned int wxTE_PROCESS_ENTER  = 0x0400;
 constexpr unsigned int wxTE_PASSWORD       = 0x0800;
@@ -552,7 +552,7 @@ public:
     // ------------
 
     virtual int GetLineLength(long lineNo) const = 0;
-    virtual std::string GetLineText(long lineNo) const = 0;
+    virtual std::string GetLineText(int lineNo) const = 0;
     virtual int GetNumberOfLines() const = 0;
 
 

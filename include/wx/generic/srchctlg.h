@@ -65,7 +65,7 @@ public:
     std::string GetRange(long from, long to) const override;
 
     int GetLineLength(long lineNo) const override;
-    std::string GetLineText(long lineNo) const override;
+    std::string GetLineText(int lineNo) const override;
     int GetNumberOfLines() const override;
 
     bool IsModified() const override;
