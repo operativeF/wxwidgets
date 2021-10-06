@@ -63,14 +63,8 @@ IMPLEMENT_HELP_PROVISION(wxRichTextSizePage)
  * wxRichTextSizePage constructors
  */
 
-wxRichTextSizePage::wxRichTextSizePage()
-{
-    Init();
-}
-
 wxRichTextSizePage::wxRichTextSizePage( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size, unsigned int style )
 {
-    Init();
     Create(parent, id, pos, size, style);
 }
 
@@ -115,81 +109,6 @@ wxRichTextSizePage::~wxRichTextSizePage()
 ////@begin wxRichTextSizePage destruction
 ////@end wxRichTextSizePage destruction
 }
-
-
-/*!
- * Member initialisation
- */
-
-void wxRichTextSizePage::Init()
-{
-////@begin wxRichTextSizePage member initialisation
-    m_positionMode = 0;
-    m_parentSizer = nullptr;
-    m_floatingAlignmentSizer = nullptr;
-    m_floatingSizer = nullptr;
-    m_float = nullptr;
-    m_alignmentSizer = nullptr;
-    m_verticalAlignmentCheckbox = nullptr;
-    m_verticalAlignmentComboBox = nullptr;
-    m_sizeSizer = nullptr;
-    m_widthSizer = nullptr;
-    m_widthCheckbox = nullptr;
-    m_widthLabel = nullptr;
-    m_width = nullptr;
-    m_unitsW = nullptr;
-    m_heightSizer = nullptr;
-    m_heightCheckbox = nullptr;
-    m_heightLabel = nullptr;
-    m_height = nullptr;
-    m_unitsH = nullptr;
-    m_minWidthCheckbox = nullptr;
-    m_minWidthSizer = nullptr;
-    m_minWidth = nullptr;
-    m_unitsMinW = nullptr;
-    m_minHeightCheckbox = nullptr;
-    m_minHeightSizer = nullptr;
-    m_minHeight = nullptr;
-    m_unitsMinH = nullptr;
-    m_maxWidthCheckbox = nullptr;
-    m_maxWidthSizer = nullptr;
-    m_maxWidth = nullptr;
-    m_unitsMaxW = nullptr;
-    m_maxHeightCheckbox = nullptr;
-    m_maxHeightSizer = nullptr;
-    m_maxHeight = nullptr;
-    m_unitsMaxH = nullptr;
-    m_positionControls = nullptr;
-    m_moveObjectParentSizer = nullptr;
-    m_positionModeSizer = nullptr;
-    m_positionModeCtrl = nullptr;
-    m_positionGridSizer = nullptr;
-    m_leftSizer = nullptr;
-    m_positionLeftCheckbox = nullptr;
-    m_leftLabel = nullptr;
-    m_left = nullptr;
-    m_unitsLeft = nullptr;
-    m_topSizer = nullptr;
-    m_positionTopCheckbox = nullptr;
-    m_topLabel = nullptr;
-    m_top = nullptr;
-    m_unitsTop = nullptr;
-    m_rightSizer = nullptr;
-    m_positionRightCheckbox = nullptr;
-    m_rightLabel = nullptr;
-    m_rightPositionSizer = nullptr;
-    m_right = nullptr;
-    m_unitsRight = nullptr;
-    m_bottomSizer = nullptr;
-    m_positionBottomCheckbox = nullptr;
-    m_bottomLabel = nullptr;
-    m_bottomPositionSizer = nullptr;
-    m_bottom = nullptr;
-    m_unitsBottom = nullptr;
-    m_moveObjectSizer = nullptr;
-////@end wxRichTextSizePage member initialisation
-}
-
 
 /*!
  * Control creation for wxRichTextSizePage

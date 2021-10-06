@@ -48,14 +48,11 @@ class WXDLLIMPEXP_RICHTEXT wxRichTextListStylePage: public wxRichTextDialogPage
 
 public:
     /// Constructors
-    wxRichTextListStylePage( );
+    wxRichTextListStylePage() = default;
     wxRichTextListStylePage( wxWindow* parent, wxWindowID id = wxID_ANY, const wxPoint& pos = SYMBOL_WXRICHTEXTLISTSTYLEPAGE_POSITION, const wxSize& size = SYMBOL_WXRICHTEXTLISTSTYLEPAGE_SIZE, unsigned int style = SYMBOL_WXRICHTEXTLISTSTYLEPAGE_STYLE );
 
     /// Creation
     bool Create( wxWindow* parent, wxWindowID id = wxID_ANY, const wxPoint& pos = SYMBOL_WXRICHTEXTLISTSTYLEPAGE_POSITION, const wxSize& size = SYMBOL_WXRICHTEXTLISTSTYLEPAGE_SIZE, unsigned int style = SYMBOL_WXRICHTEXTLISTSTYLEPAGE_STYLE );
-
-    /// Initialises member variables
-    void Init();
 
     /// Creates the controls and sizers
     void CreateControls();
@@ -216,27 +213,27 @@ public:
     static bool ShowToolTips();
 
 ////@begin wxRichTextListStylePage member variables
-    wxSpinCtrl* m_levelCtrl;
-    wxListBox* m_styleListBox;
-    wxCheckBox* m_periodCtrl;
-    wxCheckBox* m_parenthesesCtrl;
-    wxCheckBox* m_rightParenthesisCtrl;
-    wxComboBox* m_bulletAlignmentCtrl;
-    wxComboBox* m_symbolCtrl;
-    wxComboBox* m_symbolFontCtrl;
-    wxComboBox* m_bulletNameCtrl;
-    wxRadioButton* m_alignmentLeft;
-    wxRadioButton* m_alignmentRight;
-    wxRadioButton* m_alignmentJustified;
-    wxRadioButton* m_alignmentCentred;
-    wxRadioButton* m_alignmentIndeterminate;
-    wxTextCtrl* m_indentLeft;
-    wxTextCtrl* m_indentLeftFirst;
-    wxTextCtrl* m_indentRight;
-    wxTextCtrl* m_spacingBefore;
-    wxTextCtrl* m_spacingAfter;
-    wxComboBox* m_spacingLine;
-    wxRichTextCtrl* m_previewCtrl;
+    wxSpinCtrl* m_levelCtrl{nullptr};
+    wxListBox* m_styleListBox{nullptr};
+    wxCheckBox* m_periodCtrl{nullptr};
+    wxCheckBox* m_parenthesesCtrl{nullptr};
+    wxCheckBox* m_rightParenthesisCtrl{nullptr};
+    wxComboBox* m_bulletAlignmentCtrl{nullptr};
+    wxComboBox* m_symbolCtrl{nullptr};
+    wxComboBox* m_symbolFontCtrl{nullptr};
+    wxComboBox* m_bulletNameCtrl{nullptr};
+    wxRadioButton* m_alignmentLeft{nullptr};
+    wxRadioButton* m_alignmentRight{nullptr};
+    wxRadioButton* m_alignmentJustified{nullptr};
+    wxRadioButton* m_alignmentCentred{nullptr};
+    wxRadioButton* m_alignmentIndeterminate{nullptr};
+    wxTextCtrl* m_indentLeft{nullptr};
+    wxTextCtrl* m_indentLeftFirst{nullptr};
+    wxTextCtrl* m_indentRight{nullptr};
+    wxTextCtrl* m_spacingBefore{nullptr};
+    wxTextCtrl* m_spacingAfter{nullptr};
+    wxComboBox* m_spacingLine{nullptr};
+    wxRichTextCtrl* m_previewCtrl{nullptr};
     /// Control identifiers
     enum {
         ID_RICHTEXTLISTSTYLEPAGE = 10616,
@@ -271,8 +268,8 @@ public:
     };
 ////@end wxRichTextListStylePage member variables
 
-    bool m_dontUpdate;
-    int m_currentLevel;
+    int m_currentLevel{1};
+    bool m_dontUpdate{false};
 };
 
 #endif

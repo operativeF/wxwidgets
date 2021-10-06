@@ -32,6 +32,7 @@ static wxRichTextTable* GetCurrentTableInstance(wxRichTextParagraph* para)
     return table;
 }
 
+// TODO: Refactor into smaller pieces so it fits in stack better.
 TEST_CASE("Richtext control test")
 {
     auto m_rich = std::make_unique<wxRichTextCtrl>(wxTheApp->GetTopWindow(),

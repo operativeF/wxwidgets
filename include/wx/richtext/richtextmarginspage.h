@@ -50,17 +50,11 @@ class WXDLLIMPEXP_RICHTEXT wxRichTextMarginsPage: public wxRichTextDialogPage
 
 public:
     /// Constructors
-    wxRichTextMarginsPage();
+    wxRichTextMarginsPage() = default;
     wxRichTextMarginsPage( wxWindow* parent, wxWindowID id = SYMBOL_WXRICHTEXTMARGINSPAGE_IDNAME, const wxPoint& pos = SYMBOL_WXRICHTEXTMARGINSPAGE_POSITION, const wxSize& size = SYMBOL_WXRICHTEXTMARGINSPAGE_SIZE, unsigned int style = SYMBOL_WXRICHTEXTMARGINSPAGE_STYLE );
 
     /// Creation
     bool Create( wxWindow* parent, wxWindowID id = SYMBOL_WXRICHTEXTMARGINSPAGE_IDNAME, const wxPoint& pos = SYMBOL_WXRICHTEXTMARGINSPAGE_POSITION, const wxSize& size = SYMBOL_WXRICHTEXTMARGINSPAGE_SIZE, unsigned int style = SYMBOL_WXRICHTEXTMARGINSPAGE_STYLE );
-
-    /// Destructor
-    ~wxRichTextMarginsPage();
-
-    /// Initialises member variables
-    void Init();
 
     /// Creates the controls and sizers
     void CreateControls();
@@ -113,30 +107,30 @@ public:
     static bool ShowToolTips();
 
 ////@begin wxRichTextMarginsPage member variables
-    wxCheckBox* m_leftMarginCheckbox;
-    wxTextCtrl* m_marginLeft;
-    wxComboBox* m_unitsMarginLeft;
-    wxCheckBox* m_rightMarginCheckbox;
-    wxTextCtrl* m_marginRight;
-    wxComboBox* m_unitsMarginRight;
-    wxCheckBox* m_topMarginCheckbox;
-    wxTextCtrl* m_marginTop;
-    wxComboBox* m_unitsMarginTop;
-    wxCheckBox* m_bottomMarginCheckbox;
-    wxTextCtrl* m_marginBottom;
-    wxComboBox* m_unitsMarginBottom;
-    wxCheckBox* m_leftPaddingCheckbox;
-    wxTextCtrl* m_paddingLeft;
-    wxComboBox* m_unitsPaddingLeft;
-    wxCheckBox* m_rightPaddingCheckbox;
-    wxTextCtrl* m_paddingRight;
-    wxComboBox* m_unitsPaddingRight;
-    wxCheckBox* m_topPaddingCheckbox;
-    wxTextCtrl* m_paddingTop;
-    wxComboBox* m_unitsPaddingTop;
-    wxCheckBox* m_bottomPaddingCheckbox;
-    wxTextCtrl* m_paddingBottom;
-    wxComboBox* m_unitsPaddingBottom;
+    wxCheckBox* m_leftMarginCheckbox{nullptr};
+    wxTextCtrl* m_marginLeft{nullptr};
+    wxComboBox* m_unitsMarginLeft{nullptr};
+    wxCheckBox* m_rightMarginCheckbox{nullptr};
+    wxTextCtrl* m_marginRight{nullptr};
+    wxComboBox* m_unitsMarginRight{nullptr};
+    wxCheckBox* m_topMarginCheckbox{nullptr};
+    wxTextCtrl* m_marginTop{nullptr};
+    wxComboBox* m_unitsMarginTop{nullptr};
+    wxCheckBox* m_bottomMarginCheckbox{nullptr};
+    wxTextCtrl* m_marginBottom{nullptr};
+    wxComboBox* m_unitsMarginBottom{nullptr};
+    wxCheckBox* m_leftPaddingCheckbox{nullptr};
+    wxTextCtrl* m_paddingLeft{nullptr};
+    wxComboBox* m_unitsPaddingLeft{nullptr};
+    wxCheckBox* m_rightPaddingCheckbox{nullptr};
+    wxTextCtrl* m_paddingRight{nullptr};
+    wxComboBox* m_unitsPaddingRight{nullptr};
+    wxCheckBox* m_topPaddingCheckbox{nullptr};
+    wxTextCtrl* m_paddingTop{nullptr};
+    wxComboBox* m_unitsPaddingTop{nullptr};
+    wxCheckBox* m_bottomPaddingCheckbox{nullptr};
+    wxTextCtrl* m_paddingBottom{nullptr};
+    wxComboBox* m_unitsPaddingBottom{nullptr};
     /// Control identifiers
     enum {
         ID_WXRICHTEXTMARGINSPAGE = 10750,
@@ -167,7 +161,7 @@ public:
     };
 ////@end wxRichTextMarginsPage member variables
 
-    bool    m_ignoreUpdates;
+    bool    m_ignoreUpdates{false};
 };
 
 #endif

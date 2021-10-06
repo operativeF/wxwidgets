@@ -65,40 +65,9 @@ IMPLEMENT_HELP_PROVISION(wxRichTextBulletsPage)
  * wxRichTextBulletsPage constructors
  */
 
-wxRichTextBulletsPage::wxRichTextBulletsPage( )
-{
-    Init();
-}
-
 wxRichTextBulletsPage::wxRichTextBulletsPage( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size, unsigned int style )
 {
-    Init();
     Create(parent, id, pos, size, style);
-}
-
-/*!
- * Initialise members
- */
-
-void wxRichTextBulletsPage::Init()
-{
-    m_hasBulletStyle = false;
-    m_hasBulletNumber = false;
-    m_hasBulletSymbol = false;
-    m_dontUpdate = false;
-
-////@begin wxRichTextBulletsPage member initialisation
-    m_styleListBox = nullptr;
-    m_periodCtrl = nullptr;
-    m_parenthesesCtrl = nullptr;
-    m_rightParenthesisCtrl = nullptr;
-    m_bulletAlignmentCtrl = nullptr;
-    m_symbolCtrl = nullptr;
-    m_symbolFontCtrl = nullptr;
-    m_bulletNameCtrl = nullptr;
-    m_numberCtrl = nullptr;
-    m_previewCtrl = nullptr;
-////@end wxRichTextBulletsPage member initialisation
 }
 
 /*!

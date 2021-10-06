@@ -55,10 +55,6 @@
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxRichTextXMLHandler, wxRichTextFileHandler);
 
-void wxRichTextXMLHandler::Init()
-{
-}
-
 #if wxUSE_STREAMS
 bool wxRichTextXMLHandler::DoLoadFile(wxRichTextBuffer *buffer, wxInputStream& stream)
 {
@@ -1040,16 +1036,6 @@ bool wxRichTextTable::ExportXML(wxXmlNode* parent, wxRichTextXMLHandler* handler
 wxRichTextXMLHelper::~wxRichTextXMLHelper()
 {
     Clear();
-}
-
-void wxRichTextXMLHelper::Init()
-{
-#if wxRICHTEXT_HAVE_DIRECT_OUTPUT
-    m_deleteConvFile = false;
-    m_convMem = nullptr;
-    m_convFile = nullptr;
-#endif
-    m_flags = 0;
 }
 
 void wxRichTextXMLHelper::Clear()

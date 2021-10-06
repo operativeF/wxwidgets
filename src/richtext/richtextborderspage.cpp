@@ -104,14 +104,8 @@ IMPLEMENT_HELP_PROVISION(wxRichTextBordersPage)
  * wxRichTextBordersPage constructors
  */
 
-wxRichTextBordersPage::wxRichTextBordersPage()
-{
-    Init();
-}
-
 wxRichTextBordersPage::wxRichTextBordersPage( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size, unsigned int style )
 {
-    Init();
     Create(parent, id, pos, size, style);
 }
 
@@ -132,74 +126,6 @@ bool wxRichTextBordersPage::Create( wxWindow* parent, wxWindowID id, const wxPoi
     Centre();
 ////@end wxRichTextBordersPage creation
     return true;
-}
-
-/*!
- * wxRichTextBordersPage destructor
- */
-
-wxRichTextBordersPage::~wxRichTextBordersPage()
-{
-////@begin wxRichTextBordersPage destruction
-////@end wxRichTextBordersPage destruction
-}
-
-/*!
- * Member initialisation
- */
-
-void wxRichTextBordersPage::Init()
-{
-    m_ignoreUpdates = false;
-
-////@begin wxRichTextBordersPage member initialisation
-    m_leftBorderCheckbox = nullptr;
-    m_leftBorderWidth = nullptr;
-    m_leftBorderWidthUnits = nullptr;
-    m_leftBorderStyle = nullptr;
-    m_leftBorderColour = nullptr;
-    m_rightBorderCheckbox = nullptr;
-    m_rightBorderWidth = nullptr;
-    m_rightBorderWidthUnits = nullptr;
-    m_rightBorderStyle = nullptr;
-    m_rightBorderColour = nullptr;
-    m_topBorderCheckbox = nullptr;
-    m_topBorderWidth = nullptr;
-    m_topBorderWidthUnits = nullptr;
-    m_topBorderStyle = nullptr;
-    m_topBorderColour = nullptr;
-    m_bottomBorderCheckbox = nullptr;
-    m_bottomBorderWidth = nullptr;
-    m_bottomBorderWidthUnits = nullptr;
-    m_bottomBorderStyle = nullptr;
-    m_bottomBorderColour = nullptr;
-    m_borderSyncCtrl = nullptr;
-    m_leftOutlineCheckbox = nullptr;
-    m_leftOutlineWidth = nullptr;
-    m_leftOutlineWidthUnits = nullptr;
-    m_leftOutlineStyle = nullptr;
-    m_leftOutlineColour = nullptr;
-    m_rightOutlineCheckbox = nullptr;
-    m_rightOutlineWidth = nullptr;
-    m_rightOutlineWidthUnits = nullptr;
-    m_rightOutlineStyle = nullptr;
-    m_rightOutlineColour = nullptr;
-    m_topOutlineCheckbox = nullptr;
-    m_topOutlineWidth = nullptr;
-    m_topOutlineWidthUnits = nullptr;
-    m_topOutlineStyle = nullptr;
-    m_topOutlineColour = nullptr;
-    m_bottomOutlineCheckbox = nullptr;
-    m_bottomOutlineWidth = nullptr;
-    m_bottomOutlineWidthUnits = nullptr;
-    m_bottomOutlineStyle = nullptr;
-    m_bottomOutlineColour = nullptr;
-    m_outlineSyncCtrl = nullptr;
-    m_cornerRadiusCheckBox = nullptr;
-    m_cornerRadiusText = nullptr;
-    m_cornerRadiusUnits = nullptr;
-    m_borderPreviewCtrl = nullptr;
-////@end wxRichTextBordersPage member initialisation
 }
 
 /*!

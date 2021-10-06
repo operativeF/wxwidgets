@@ -70,14 +70,8 @@ IMPLEMENT_HELP_PROVISION(wxRichTextMarginsPage)
  * wxRichTextMarginsPage constructors
  */
 
-wxRichTextMarginsPage::wxRichTextMarginsPage()
-{
-    Init();
-}
-
 wxRichTextMarginsPage::wxRichTextMarginsPage( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size, unsigned int style )
 {
-    Init();
     Create(parent, id, pos, size, style);
 }
 
@@ -100,55 +94,6 @@ bool wxRichTextMarginsPage::Create( wxWindow* parent, wxWindowID id, const wxPoi
 ////@end wxRichTextMarginsPage creation
     return true;
 }
-
-
-/*!
- * wxRichTextMarginsPage destructor
- */
-
-wxRichTextMarginsPage::~wxRichTextMarginsPage()
-{
-////@begin wxRichTextMarginsPage destruction
-////@end wxRichTextMarginsPage destruction
-}
-
-
-/*!
- * Member initialisation
- */
-
-void wxRichTextMarginsPage::Init()
-{
-    m_ignoreUpdates = false;
-
-////@begin wxRichTextMarginsPage member initialisation
-    m_leftMarginCheckbox = nullptr;
-    m_marginLeft = nullptr;
-    m_unitsMarginLeft = nullptr;
-    m_rightMarginCheckbox = nullptr;
-    m_marginRight = nullptr;
-    m_unitsMarginRight = nullptr;
-    m_topMarginCheckbox = nullptr;
-    m_marginTop = nullptr;
-    m_unitsMarginTop = nullptr;
-    m_bottomMarginCheckbox = nullptr;
-    m_marginBottom = nullptr;
-    m_unitsMarginBottom = nullptr;
-    m_leftPaddingCheckbox = nullptr;
-    m_paddingLeft = nullptr;
-    m_unitsPaddingLeft = nullptr;
-    m_rightPaddingCheckbox = nullptr;
-    m_paddingRight = nullptr;
-    m_unitsPaddingRight = nullptr;
-    m_topPaddingCheckbox = nullptr;
-    m_paddingTop = nullptr;
-    m_unitsPaddingTop = nullptr;
-    m_bottomPaddingCheckbox = nullptr;
-    m_paddingBottom = nullptr;
-    m_unitsPaddingBottom = nullptr;
-////@end wxRichTextMarginsPage member initialisation
-}
-
 
 /*!
  * Control creation for wxRichTextMarginsPage

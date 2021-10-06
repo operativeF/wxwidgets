@@ -59,16 +59,13 @@ class WXDLLIMPEXP_RICHTEXT wxSymbolPickerDialog: public wxDialog
 
 public:
     /// Constructors
-    wxSymbolPickerDialog( );
+    wxSymbolPickerDialog() = default;
     wxSymbolPickerDialog( const wxString& symbol, const wxString& fontName, const wxString& normalTextFont,
         wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& caption = SYMBOL_WXSYMBOLPICKERDIALOG_TITLE, const wxPoint& pos = SYMBOL_WXSYMBOLPICKERDIALOG_POSITION, const wxSize& size = SYMBOL_WXSYMBOLPICKERDIALOG_SIZE, unsigned int style = SYMBOL_WXSYMBOLPICKERDIALOG_STYLE );
 
     /// Creation
     bool Create( const wxString& symbol, const wxString& fontName, const wxString& normalTextFont,
         wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& caption = SYMBOL_WXSYMBOLPICKERDIALOG_TITLE, const wxPoint& pos = SYMBOL_WXSYMBOLPICKERDIALOG_POSITION, const wxSize& size = SYMBOL_WXSYMBOLPICKERDIALOG_SIZE, unsigned int style = SYMBOL_WXSYMBOLPICKERDIALOG_STYLE );
-
-    /// Initialises members variables
-    void Init();
 
     /// Creates the controls and sizers
     void CreateControls();
@@ -154,21 +151,23 @@ public:
 ////@end wxSymbolPickerDialog member function declarations
 
 ////@begin wxSymbolPickerDialog member variables
-    wxComboBox* m_fontCtrl;
-#if defined(__UNICODE__)
-    wxComboBox* m_subsetCtrl;
-#endif
-    wxSymbolListCtrl* m_symbolsCtrl;
-    wxStaticText* m_symbolStaticCtrl;
-    wxTextCtrl* m_characterCodeCtrl;
-#if defined(__UNICODE__)
-    wxComboBox* m_fromUnicodeCtrl;
-#endif
-    wxStdDialogButtonSizer* m_stdButtonSizer;
-    std::string m_fontName;
-    bool m_fromUnicode;
     wxString m_normalTextFontName;
     wxString m_symbol;
+
+    std::string m_fontName;
+
+    wxComboBox* m_fontCtrl{nullptr};
+#if defined(__UNICODE__)
+    wxComboBox* m_subsetCtrl{nullptr};
+#endif
+    wxSymbolListCtrl* m_symbolsCtrl{nullptr};
+    wxStaticText* m_symbolStaticCtrl{nullptr};
+    wxTextCtrl* m_characterCodeCtrl{nullptr};
+#if defined(__UNICODE__)
+    wxComboBox* m_fromUnicodeCtrl{nullptr};
+#endif
+    wxStdDialogButtonSizer* m_stdButtonSizer{nullptr};
+
     /// Control identifiers
     enum {
         ID_SYMBOLPICKERDIALOG = 10600,
@@ -179,8 +178,8 @@ public:
         ID_SYMBOLPICKERDIALOG_FROM = 10603
     };
 ////@end wxSymbolPickerDialog member variables
-
-    bool m_dontUpdate;
+    bool m_fromUnicode{true};
+    bool m_dontUpdate{false};
     inline static bool             sm_showToolTips{false};
 };
 
@@ -191,7 +190,7 @@ public:
 class WXDLLIMPEXP_RICHTEXT wxSymbolListCtrl : public wxVScrolledWindow
 {
 public:
-    wxSymbolListCtrl() { Init(); }
+    wxSymbolListCtrl() = default;
 
     wxSymbolListCtrl(wxWindow *parent,
                wxWindowID id = wxID_ANY,
@@ -200,8 +199,6 @@ public:
                unsigned int style = 0,
                const wxString& name = wxASCII_STR(wxPanelNameStr))
     {
-        Init();
-
         Create(parent, id, pos, size, style, name);
     }
 
@@ -216,7 +213,8 @@ public:
                 unsigned int style = 0,
                 const wxString& name = wxASCII_STR(wxPanelNameStr));
 
-    ~wxSymbolListCtrl();
+    wxSymbolListCtrl(const wxSymbolListCtrl&) = delete;
+	wxSymbolListCtrl& operator=(const wxSymbolListCtrl&) = delete;
 
     // set the current font
     bool SetFont(const wxFont& font) override;
@@ -293,9 +291,6 @@ protected:
     void OnLeftDown(wxMouseEvent& event);
     void OnLeftDClick(wxMouseEvent& event);
 
-    // common part of all ctors
-    void Init();
-
     // send the wxEVT_LISTBOX event
     void SendSelectedEvent();
 
@@ -327,36 +322,34 @@ protected:
     int HitTest(const wxPoint& pt);
 
 private:
-    // the current item or wxNOT_FOUND
-    int m_current;
+    // the selection bg colour
+    wxColour    m_colBgSel;
+
+    // cell size
+    wxSize      m_cellSize{40, 40};
 
     // margins
     wxPoint     m_ptMargins;
 
-    // the selection bg colour
-    wxColour    m_colBgSel;
-
     // double buffer
-    wxBitmap*   m_doubleBuffer;
+    std::unique_ptr<wxBitmap>   m_doubleBuffer;
 
-    // cell size
-    wxSize      m_cellSize;
-
-    // minimum and maximum symbol value
-    int         m_minSymbolValue;
+    // the current item or wxNOT_FOUND
+    int m_current{wxNOT_FOUND};
 
     // minimum and maximum symbol value
-    int         m_maxSymbolValue;
+    int         m_minSymbolValue{0};
+
+    // minimum and maximum symbol value
+    int         m_maxSymbolValue{255};
 
     // number of items per line
-    int         m_symbolsPerLine;
+    int         m_symbolsPerLine{0};
 
     // Unicode/ASCII mode
-    bool        m_unicodeMode;
+    bool        m_unicodeMode{false};
 
     wxDECLARE_EVENT_TABLE();
-    wxSymbolListCtrl(const wxSymbolListCtrl&) = delete;
-	wxSymbolListCtrl& operator=(const wxSymbolListCtrl&) = delete;
     wxDECLARE_ABSTRACT_CLASS(wxSymbolListCtrl);
 };
 

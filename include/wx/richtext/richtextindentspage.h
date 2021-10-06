@@ -55,14 +55,11 @@ class WXDLLIMPEXP_RICHTEXT wxRichTextIndentsSpacingPage: public wxRichTextDialog
 
 public:
     /// Constructors
-    wxRichTextIndentsSpacingPage( );
+    wxRichTextIndentsSpacingPage() = default;
     wxRichTextIndentsSpacingPage( wxWindow* parent, wxWindowID id = wxID_ANY, const wxPoint& pos = SYMBOL_WXRICHTEXTINDENTSSPACINGPAGE_POSITION, const wxSize& size = SYMBOL_WXRICHTEXTINDENTSSPACINGPAGE_SIZE, unsigned int style = SYMBOL_WXRICHTEXTINDENTSSPACINGPAGE_STYLE );
 
     /// Creation
     bool Create( wxWindow* parent, wxWindowID id = wxID_ANY, const wxPoint& pos = SYMBOL_WXRICHTEXTINDENTSSPACINGPAGE_POSITION, const wxSize& size = SYMBOL_WXRICHTEXTINDENTSSPACINGPAGE_SIZE, unsigned int style = SYMBOL_WXRICHTEXTINDENTSSPACINGPAGE_STYLE );
-
-    /// Initialise members
-    void Init();
 
     /// Creates the controls and sizers
     void CreateControls();
@@ -130,20 +127,20 @@ public:
     static bool ShowToolTips();
 
 ////@begin wxRichTextIndentsSpacingPage member variables
-    wxRadioButton* m_alignmentLeft;
-    wxRadioButton* m_alignmentRight;
-    wxRadioButton* m_alignmentJustified;
-    wxRadioButton* m_alignmentCentred;
-    wxRadioButton* m_alignmentIndeterminate;
-    wxTextCtrl* m_indentLeft;
-    wxTextCtrl* m_indentLeftFirst;
-    wxTextCtrl* m_indentRight;
-    wxComboBox* m_outlineLevelCtrl;
-    wxTextCtrl* m_spacingBefore;
-    wxTextCtrl* m_spacingAfter;
-    wxComboBox* m_spacingLine;
-    wxCheckBox* m_pageBreakCtrl;
-    wxRichTextCtrl* m_previewCtrl;
+    wxRadioButton* m_alignmentLeft{nullptr};
+    wxRadioButton* m_alignmentRight{nullptr};
+    wxRadioButton* m_alignmentJustified{nullptr};
+    wxRadioButton* m_alignmentCentred{nullptr};
+    wxRadioButton* m_alignmentIndeterminate{nullptr};
+    wxTextCtrl* m_indentLeft{nullptr};
+    wxTextCtrl* m_indentLeftFirst{nullptr};
+    wxTextCtrl* m_indentRight{nullptr};
+    wxComboBox* m_outlineLevelCtrl{nullptr};
+    wxTextCtrl* m_spacingBefore{nullptr};
+    wxTextCtrl* m_spacingAfter{nullptr};
+    wxComboBox* m_spacingLine{nullptr};
+    wxCheckBox* m_pageBreakCtrl{nullptr};
+    wxRichTextCtrl* m_previewCtrl{nullptr};
     /// Control identifiers
     enum {
         ID_RICHTEXTINDENTSSPACINGPAGE = 10100,
@@ -164,7 +161,7 @@ public:
     };
 ////@end wxRichTextIndentsSpacingPage member variables
 
-    bool m_dontUpdate;
+    bool m_dontUpdate{false};
 };
 
 #endif

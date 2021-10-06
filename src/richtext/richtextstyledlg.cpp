@@ -65,50 +65,9 @@ IMPLEMENT_HELP_PROVISION(wxRichTextStyleOrganiserDialog)
  * wxRichTextStyleOrganiserDialog constructors
  */
 
-wxRichTextStyleOrganiserDialog::wxRichTextStyleOrganiserDialog( )
-{
-    Init();
-}
-
 wxRichTextStyleOrganiserDialog::wxRichTextStyleOrganiserDialog( int flags, wxRichTextStyleSheet* sheet, wxRichTextCtrl* ctrl, wxWindow* parent, wxWindowID id, const wxString& caption, const wxPoint& pos, const wxSize& size, unsigned int style )
 {
-    Init();
     Create(flags, sheet, ctrl, parent, id, caption, pos, size, style);
-}
-
-/*!
- * Member initialisation for wxSymbolPickerDialog
- */
-
-void wxRichTextStyleOrganiserDialog::Init()
-{
-    m_richTextStyleSheet = nullptr;
-    m_richTextCtrl = nullptr;
-    m_dontUpdate = false;
-    m_flags = 0;
-    m_restartNumbering = true;
-
-////@begin wxRichTextStyleOrganiserDialog member initialisation
-    m_innerSizer = nullptr;
-    m_buttonSizerParent = nullptr;
-    m_stylesListBox = nullptr;
-    m_previewCtrl = nullptr;
-    m_buttonSizer = nullptr;
-    m_newCharacter = nullptr;
-    m_newParagraph = nullptr;
-    m_newList = nullptr;
-    m_newBox = nullptr;
-    m_applyStyle = nullptr;
-    m_renameStyle = nullptr;
-    m_editStyle = nullptr;
-    m_deleteStyle = nullptr;
-    m_closeButton = nullptr;
-    m_bottomButtonSizer = nullptr;
-    m_restartNumberingCtrl = nullptr;
-    m_stdButtonSizer = nullptr;
-    m_okButton = nullptr;
-    m_cancelButton = nullptr;
-////@end wxRichTextStyleOrganiserDialog member initialisation
 }
 
 /*!

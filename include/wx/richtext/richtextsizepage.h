@@ -59,7 +59,7 @@ class WXDLLIMPEXP_RICHTEXT wxRichTextSizePage: public wxRichTextDialogPage
 
 public:
     /// Constructors
-    wxRichTextSizePage();
+    wxRichTextSizePage() = default;
     wxRichTextSizePage( wxWindow* parent, wxWindowID id = SYMBOL_WXRICHTEXTSIZEPAGE_IDNAME, const wxPoint& pos = SYMBOL_WXRICHTEXTSIZEPAGE_POSITION, const wxSize& size = SYMBOL_WXRICHTEXTSIZEPAGE_SIZE, unsigned int style = SYMBOL_WXRICHTEXTSIZEPAGE_STYLE );
 
     /// Creation
@@ -67,9 +67,6 @@ public:
 
     /// Destructor
     ~wxRichTextSizePage();
-
-    /// Initialises member variables
-    void Init();
 
     /// Creates the controls and sizers
     void CreateControls();
@@ -188,69 +185,69 @@ public:
     static bool ShowToolTips();
 
 ////@begin wxRichTextSizePage member variables
-    wxBoxSizer* m_parentSizer;
-    wxBoxSizer* m_floatingAlignmentSizer;
-    wxBoxSizer* m_floatingSizer;
-    wxChoice* m_float;
-    wxBoxSizer* m_alignmentSizer;
-    wxCheckBox* m_verticalAlignmentCheckbox;
-    wxChoice* m_verticalAlignmentComboBox;
-    wxFlexGridSizer* m_sizeSizer;
-    wxBoxSizer* m_widthSizer;
-    wxCheckBox* m_widthCheckbox;
-    wxStaticText* m_widthLabel;
-    wxTextCtrl* m_width;
-    wxComboBox* m_unitsW;
-    wxBoxSizer* m_heightSizer;
-    wxCheckBox* m_heightCheckbox;
-    wxStaticText* m_heightLabel;
-    wxTextCtrl* m_height;
-    wxComboBox* m_unitsH;
-    wxCheckBox* m_minWidthCheckbox;
-    wxBoxSizer* m_minWidthSizer;
-    wxTextCtrl* m_minWidth;
-    wxComboBox* m_unitsMinW;
-    wxCheckBox* m_minHeightCheckbox;
-    wxBoxSizer* m_minHeightSizer;
-    wxTextCtrl* m_minHeight;
-    wxComboBox* m_unitsMinH;
-    wxCheckBox* m_maxWidthCheckbox;
-    wxBoxSizer* m_maxWidthSizer;
-    wxTextCtrl* m_maxWidth;
-    wxComboBox* m_unitsMaxW;
-    wxCheckBox* m_maxHeightCheckbox;
-    wxBoxSizer* m_maxHeightSizer;
-    wxTextCtrl* m_maxHeight;
-    wxComboBox* m_unitsMaxH;
-    wxBoxSizer* m_positionControls;
-    wxBoxSizer* m_moveObjectParentSizer;
-    wxBoxSizer* m_positionModeSizer;
-    wxChoice* m_positionModeCtrl;
-    wxFlexGridSizer* m_positionGridSizer;
-    wxBoxSizer* m_leftSizer;
-    wxCheckBox* m_positionLeftCheckbox;
-    wxStaticText* m_leftLabel;
-    wxTextCtrl* m_left;
-    wxComboBox* m_unitsLeft;
-    wxBoxSizer* m_topSizer;
-    wxCheckBox* m_positionTopCheckbox;
-    wxStaticText* m_topLabel;
-    wxTextCtrl* m_top;
-    wxComboBox* m_unitsTop;
-    wxBoxSizer* m_rightSizer;
-    wxCheckBox* m_positionRightCheckbox;
-    wxStaticText* m_rightLabel;
-    wxBoxSizer* m_rightPositionSizer;
-    wxTextCtrl* m_right;
-    wxComboBox* m_unitsRight;
-    wxBoxSizer* m_bottomSizer;
-    wxCheckBox* m_positionBottomCheckbox;
-    wxStaticText* m_bottomLabel;
-    wxBoxSizer* m_bottomPositionSizer;
-    wxTextCtrl* m_bottom;
-    wxComboBox* m_unitsBottom;
-    wxBoxSizer* m_moveObjectSizer;
-    int m_positionMode;
+    wxBoxSizer* m_parentSizer{nullptr};
+    wxBoxSizer* m_floatingAlignmentSizer{nullptr};
+    wxBoxSizer* m_floatingSizer{nullptr};
+    wxChoice* m_float{nullptr};
+    wxBoxSizer* m_alignmentSizer{nullptr};
+    wxCheckBox* m_verticalAlignmentCheckbox{nullptr};
+    wxChoice* m_verticalAlignmentComboBox{nullptr};
+    wxFlexGridSizer* m_sizeSizer{nullptr};
+    wxBoxSizer* m_widthSizer{nullptr};
+    wxCheckBox* m_widthCheckbox{nullptr};
+    wxStaticText* m_widthLabel{nullptr};
+    wxTextCtrl* m_width{nullptr};
+    wxComboBox* m_unitsW{nullptr};
+    wxBoxSizer* m_heightSizer{nullptr};
+    wxCheckBox* m_heightCheckbox{nullptr};
+    wxStaticText* m_heightLabel{nullptr};
+    wxTextCtrl* m_height{nullptr};
+    wxComboBox* m_unitsH{nullptr};
+    wxCheckBox* m_minWidthCheckbox{nullptr};
+    wxBoxSizer* m_minWidthSizer{nullptr};
+    wxTextCtrl* m_minWidth{nullptr};
+    wxComboBox* m_unitsMinW{nullptr};
+    wxCheckBox* m_minHeightCheckbox{nullptr};
+    wxBoxSizer* m_minHeightSizer{nullptr};
+    wxTextCtrl* m_minHeight{nullptr};
+    wxComboBox* m_unitsMinH{nullptr};
+    wxCheckBox* m_maxWidthCheckbox{nullptr};
+    wxBoxSizer* m_maxWidthSizer{nullptr};
+    wxTextCtrl* m_maxWidth{nullptr};
+    wxComboBox* m_unitsMaxW{nullptr};
+    wxCheckBox* m_maxHeightCheckbox{nullptr};
+    wxBoxSizer* m_maxHeightSizer{nullptr};
+    wxTextCtrl* m_maxHeight{nullptr};
+    wxComboBox* m_unitsMaxH{nullptr};
+    wxBoxSizer* m_positionControls{nullptr};
+    wxBoxSizer* m_moveObjectParentSizer{nullptr};
+    wxBoxSizer* m_positionModeSizer{nullptr};
+    wxChoice* m_positionModeCtrl{nullptr};
+    wxFlexGridSizer* m_positionGridSizer{nullptr};
+    wxBoxSizer* m_leftSizer{nullptr};
+    wxCheckBox* m_positionLeftCheckbox{nullptr};
+    wxStaticText* m_leftLabel{nullptr};
+    wxTextCtrl* m_left{nullptr};
+    wxComboBox* m_unitsLeft{nullptr};
+    wxBoxSizer* m_topSizer{nullptr};
+    wxCheckBox* m_positionTopCheckbox{nullptr};
+    wxStaticText* m_topLabel{nullptr};
+    wxTextCtrl* m_top{nullptr};
+    wxComboBox* m_unitsTop{nullptr};
+    wxBoxSizer* m_rightSizer{nullptr};
+    wxCheckBox* m_positionRightCheckbox{nullptr};
+    wxStaticText* m_rightLabel{nullptr};
+    wxBoxSizer* m_rightPositionSizer{nullptr};
+    wxTextCtrl* m_right{nullptr};
+    wxComboBox* m_unitsRight{nullptr};
+    wxBoxSizer* m_bottomSizer{nullptr};
+    wxCheckBox* m_positionBottomCheckbox{nullptr};
+    wxStaticText* m_bottomLabel{nullptr};
+    wxBoxSizer* m_bottomPositionSizer{nullptr};
+    wxTextCtrl* m_bottom{nullptr};
+    wxComboBox* m_unitsBottom{nullptr};
+    wxBoxSizer* m_moveObjectSizer{nullptr};
+    int m_positionMode{};
     /// Control identifiers
     enum {
         ID_WXRICHTEXTSIZEPAGE = 10700,

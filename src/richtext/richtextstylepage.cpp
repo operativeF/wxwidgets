@@ -37,30 +37,9 @@ IMPLEMENT_HELP_PROVISION(wxRichTextStylePage)
  * wxRichTextStylePage constructors
  */
 
-wxRichTextStylePage::wxRichTextStylePage( )
-{
-    Init();
-}
-
 wxRichTextStylePage::wxRichTextStylePage( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size, unsigned int style )
 {
-    Init();
     Create(parent, id, pos, size, style);
-}
-
-/*!
- * Initialise members
- */
-
-void wxRichTextStylePage::Init()
-{
-    m_nameIsEditable = false;
-    
-////@begin wxRichTextStylePage member initialisation
-    m_styleName = nullptr;
-    m_basedOn = nullptr;
-    m_nextStyle = nullptr;
-////@end wxRichTextStylePage member initialisation
 }
 
 /*!

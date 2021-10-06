@@ -96,12 +96,12 @@ public:
     // ctors
     // -----
         // default - use Create()
-    wxRichTextCaret(): m_timer(this)  { Init(); }
+    wxRichTextCaret(): m_timer(this)  {}
         // creates a block caret associated with the given window
     wxRichTextCaret(wxRichTextCtrl *window, int width, int height)
-        : wxCaret(window, width, height), m_timer(this) { Init(); m_richTextCtrl = window; }
+        : wxCaret(window, width, height), m_timer(this) { m_richTextCtrl = window; }
     wxRichTextCaret(wxRichTextCtrl *window, const wxSize& size)
-        : wxCaret(window, size), m_timer(this) { Init(); m_richTextCtrl = window; }
+        : wxCaret(window, size), m_timer(this) { m_richTextCtrl = window; }
 
     ~wxRichTextCaret();
 
@@ -137,18 +137,19 @@ protected:
     void Refresh();
 
 private:
-    void Init();
-
-    int           m_xOld,
-                  m_yOld;
-    bool          m_hasFocus;       // true => our window has focus
-    bool          m_needsUpdate;    // must be repositioned
-    bool          m_flashOn;
-    wxRichTextCaretTimer m_timer;
-    wxRichTextCtrl* m_richTextCtrl;
-    bool          m_refreshEnabled;
     wxPen         m_caretPen;
     wxBrush       m_caretBrush;
+    wxRichTextCaretTimer m_timer;
+
+    wxRichTextCtrl* m_richTextCtrl{nullptr};
+
+    int           m_xOld{-1};
+    int           m_yOld{-1};
+    bool          m_hasFocus{true};       // true => our window has focus
+    bool          m_needsUpdate{false};    // must be repositioned
+    bool          m_flashOn{false};
+
+    bool          m_refreshEnabled{true};
 };
 #endif
 
@@ -5277,18 +5278,6 @@ void wxRichTextCtrl::OnTimer(wxTimerEvent& event)
 // ----------------------------------------------------------------------------
 // initialization and destruction
 // ----------------------------------------------------------------------------
-
-void wxRichTextCaret::Init()
-{
-    m_hasFocus = true;
-    m_refreshEnabled = true;
-
-    m_xOld =
-    m_yOld = -1;
-    m_richTextCtrl = NULL;
-    m_needsUpdate = false;
-    m_flashOn = true;
-}
 
 wxRichTextCaret::~wxRichTextCaret()
 {

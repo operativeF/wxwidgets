@@ -44,29 +44,9 @@ IMPLEMENT_HELP_PROVISION(wxRichTextTabsPage)
  * wxRichTextTabsPage constructors
  */
 
-wxRichTextTabsPage::wxRichTextTabsPage( )
-{
-    Init();
-}
-
 wxRichTextTabsPage::wxRichTextTabsPage( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size, unsigned int style )
 {
-    Init();
     Create(parent, id, pos, size, style);
-}
-
-/*!
- * Initialise members
- */
-
-void wxRichTextTabsPage::Init()
-{
-    m_tabsPresent = false;
-
-////@begin wxRichTextTabsPage member initialisation
-    m_tabEditCtrl = nullptr;
-    m_tabListCtrl = nullptr;
-////@end wxRichTextTabsPage member initialisation
 }
 
 /*!

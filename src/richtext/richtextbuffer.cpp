@@ -1917,7 +1917,6 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxRichTextParagraphLayoutBox, wxRichTextCompositeObjec
 wxRichTextParagraphLayoutBox::wxRichTextParagraphLayoutBox(wxRichTextObject* parent):
     wxRichTextCompositeObject(parent)
 {
-    Init();
 }
 
 wxRichTextParagraphLayoutBox::~wxRichTextParagraphLayoutBox()
@@ -1927,21 +1926,6 @@ wxRichTextParagraphLayoutBox::~wxRichTextParagraphLayoutBox()
         delete m_floatCollector;
         m_floatCollector = nullptr;
     }
-}
-
-/// Initialize the object.
-void wxRichTextParagraphLayoutBox::Init()
-{
-    m_ctrl = nullptr;
-
-    // For now, assume is the only box and has no initial size.
-    m_range = wxRichTextRange(0, -1);
-    m_ownRange = wxRichTextRange(0, -1);
-
-    m_invalidRange = wxRICHTEXT_ALL;
-
-    m_partialParagraph = false;
-    m_floatCollector = nullptr;
 }
 
 void wxRichTextParagraphLayoutBox::Clear()
@@ -4769,8 +4753,6 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxRichTextParagraph, wxRichTextCompositeObject);
 wxRichTextParagraph::wxRichTextParagraph(wxRichTextObject* parent, wxRichTextAttr* style):
     wxRichTextCompositeObject(parent)
 {
-    Init();
-
     if (style)
         SetAttributes(*style);
 }
@@ -4778,17 +4760,10 @@ wxRichTextParagraph::wxRichTextParagraph(wxRichTextObject* parent, wxRichTextAtt
 wxRichTextParagraph::wxRichTextParagraph(const wxString& text, wxRichTextObject* parent, wxRichTextAttr* paraStyle, wxRichTextAttr* charStyle):
     wxRichTextCompositeObject(parent)
 {
-    Init();
-
     if (paraStyle)
         SetAttributes(*paraStyle);
 
     AppendChild(new wxRichTextPlainText(text, this, charStyle));
-}
-
-void wxRichTextParagraph::Init()
-{
-    m_impactedByFloatingObjects = -1;
 }
 
 wxRichTextParagraph::~wxRichTextParagraph()
@@ -7696,6 +7671,7 @@ long wxRichTextPlainText::GetFirstLineBreakPosition(long pos)
             return i + m_range.GetStart();
         }
     }
+
     return -1;
 }
 
@@ -7705,22 +7681,6 @@ long wxRichTextPlainText::GetFirstLineBreakPosition(long pos)
  */
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxRichTextBuffer, wxRichTextParagraphLayoutBox);
-
-/// Initialisation
-void wxRichTextBuffer::Init()
-{
-    m_commandProcessor = new wxCommandProcessor;
-    m_styleSheet = nullptr;
-    m_modified = false;
-    m_batchedCommandDepth = 0;
-    m_batchedCommand = nullptr;
-    m_suppressUndo = 0;
-    m_handlerFlags = 0;
-    m_scale = 1.0;
-    m_dimensionScale = 1.0;
-    m_fontScale = 1.0;
-    SetMargins(4);
-}
 
 /// Initialisation
 wxRichTextBuffer::~wxRichTextBuffer()
@@ -9485,8 +9445,6 @@ wxIMPLEMENT_CLASS(wxRichTextFieldTypeStandard, wxRichTextFieldType);
 
 wxRichTextFieldTypeStandard::wxRichTextFieldTypeStandard(const wxString& name, const wxString& label, int displayStyle)
 {
-    Init();
-
     SetName(name);
     SetLabel(label);
     SetDisplayStyle(displayStyle);
@@ -9494,24 +9452,9 @@ wxRichTextFieldTypeStandard::wxRichTextFieldTypeStandard(const wxString& name, c
 
 wxRichTextFieldTypeStandard::wxRichTextFieldTypeStandard(const wxString& name, const wxBitmap& bitmap, int displayStyle)
 {
-    Init();
-
     SetName(name);
     SetBitmap(bitmap);
     SetDisplayStyle(displayStyle);
-}
-
-void wxRichTextFieldTypeStandard::Init()
-{
-    m_displayStyle = wxRICHTEXT_FIELD_STYLE_RECTANGLE;
-    m_font = wxFont(6, wxFontFamily::Swiss, wxFontStyle::Normal, wxFONTWEIGHT_NORMAL);
-    m_textColour = *wxWHITE;
-    m_borderColour = *wxBLACK;
-    m_backgroundColour = *wxBLACK;
-    m_verticalPadding = 1;
-    m_horizontalPadding = 3;
-    m_horizontalMargin = 2;
-    m_verticalMargin = 0;
 }
 
 void wxRichTextFieldTypeStandard::Copy(const wxRichTextFieldTypeStandard& field)
@@ -12457,7 +12400,6 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxRichTextImage, wxRichTextObject);
 wxRichTextImage::wxRichTextImage(const wxImage& image, wxRichTextObject* parent, wxRichTextAttr* charStyle):
     wxRichTextObject(parent)
 {
-    Init();
     m_imageBlock.MakeImageBlockDefaultQuality(image, wxBitmapType::PNG);
     if (charStyle)
         SetAttributes(*charStyle);
@@ -12467,15 +12409,8 @@ wxRichTextImage::wxRichTextImage(const wxRichTextImageBlock& imageBlock, wxRichT
     wxRichTextObject(parent),
     m_imageBlock(imageBlock)
 {
-    Init();
     if (charStyle)
         SetAttributes(*charStyle);
-}
-
-void wxRichTextImage::Init()
-{
-    m_originalImageSize = wxSize(-1, -1);
-    m_imageState = ImageState_Unloaded;
 }
 
 /// Create a cached image at the required size
@@ -13086,27 +13021,14 @@ bool wxRichTextPlainTextHandler::DoSaveFile(wxRichTextBuffer *buffer, wxOutputSt
  * Stores information about an image, in binary in-memory form
  */
 
-wxRichTextImageBlock::wxRichTextImageBlock()
-{
-    Init();
-}
-
 wxRichTextImageBlock::wxRichTextImageBlock(const wxRichTextImageBlock& block)
 {
-    Init();
     Copy(block);
 }
 
 wxRichTextImageBlock::~wxRichTextImageBlock()
 {
     wxDELETEA(m_data);
-}
-
-void wxRichTextImageBlock::Init()
-{
-    m_data = nullptr;
-    m_dataSize = 0;
-    m_imageType = wxBitmapType::Invalid;
 }
 
 void wxRichTextImageBlock::Clear()
@@ -15424,8 +15346,6 @@ wxIMPLEMENT_CLASS(wxRichTextDrawingContext, wxObject);
 
 wxRichTextDrawingContext::wxRichTextDrawingContext(wxRichTextBuffer* buffer) : m_buffer(buffer)
 {
-    Init();
-
     if (m_buffer && m_buffer->GetRichTextCtrl())
     {
         EnableVirtualAttributes(m_buffer->GetRichTextCtrl()->GetVirtualAttributesEnabled());

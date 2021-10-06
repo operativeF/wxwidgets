@@ -44,35 +44,53 @@ class WXDLLIMPEXP_FWD_CORE wxCheckBox;
  * Control identifiers
  */
 
-#define SYMBOL_WXRICHTEXTSTYLEORGANISERDIALOG_STYLE wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER|wxSYSTEM_MENU|wxCLOSE_BOX
+enum {
+    ID_RICHTEXTSTYLEORGANISERDIALOG = 10500,
+    ID_RICHTEXTSTYLEORGANISERDIALOG_STYLES = 10501,
+    ID_RICHTEXTSTYLEORGANISERDIALOG_CURRENT_STYLE = 10510,
+    ID_RICHTEXTSTYLEORGANISERDIALOG_PREVIEW = 10509,
+    ID_RICHTEXTSTYLEORGANISERDIALOG_NEW_CHAR = 10504,
+    ID_RICHTEXTSTYLEORGANISERDIALOG_NEW_PARA = 10505,
+    ID_RICHTEXTSTYLEORGANISERDIALOG_NEW_LIST = 10508,
+    ID_RICHTEXTSTYLEORGANISERDIALOG_NEW_BOX = 10512,
+    ID_RICHTEXTSTYLEORGANISERDIALOG_APPLY = 10503,
+    ID_RICHTEXTSTYLEORGANISERDIALOG_RENAME = 10502,
+    ID_RICHTEXTSTYLEORGANISERDIALOG_EDIT = 10506,
+    ID_RICHTEXTSTYLEORGANISERDIALOG_DELETE = 10507,
+    ID_RICHTEXTSTYLEORGANISERDIALOG_RESTART_NUMBERING = 10511
+};
+
+
 #define SYMBOL_WXRICHTEXTSTYLEORGANISERDIALOG_TITLE wxGetTranslation(wxASCII_STR("Style Organiser"))
-#define SYMBOL_WXRICHTEXTSTYLEORGANISERDIALOG_IDNAME ID_RICHTEXTSTYLEORGANISERDIALOG
-#define SYMBOL_WXRICHTEXTSTYLEORGANISERDIALOG_SIZE wxSize(400, 300)
-#define SYMBOL_WXRICHTEXTSTYLEORGANISERDIALOG_POSITION wxDefaultPosition
+
+constexpr unsigned int SYMBOL_WXRICHTEXTSTYLEORGANISERDIALOG_STYLE = wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER|wxSYSTEM_MENU|wxCLOSE_BOX;
+constexpr unsigned int SYMBOL_WXRICHTEXTSTYLEORGANISERDIALOG_IDNAME = ID_RICHTEXTSTYLEORGANISERDIALOG;
+constexpr wxSize SYMBOL_WXRICHTEXTSTYLEORGANISERDIALOG_SIZE = {400, 300};
+constexpr wxPoint SYMBOL_WXRICHTEXTSTYLEORGANISERDIALOG_POSITION = wxDefaultPosition;
 
 /*!
  * Flags for specifying permitted operations
  */
 
-#define wxRICHTEXT_ORGANISER_DELETE_STYLES  0x0001
-#define wxRICHTEXT_ORGANISER_CREATE_STYLES  0x0002
-#define wxRICHTEXT_ORGANISER_APPLY_STYLES   0x0004
-#define wxRICHTEXT_ORGANISER_EDIT_STYLES    0x0008
-#define wxRICHTEXT_ORGANISER_RENAME_STYLES  0x0010
-#define wxRICHTEXT_ORGANISER_OK_CANCEL      0x0020
-#define wxRICHTEXT_ORGANISER_RENUMBER       0x0040
+constexpr unsigned int wxRICHTEXT_ORGANISER_DELETE_STYLES  = 0x0001;
+constexpr unsigned int wxRICHTEXT_ORGANISER_CREATE_STYLES  = 0x0002;
+constexpr unsigned int wxRICHTEXT_ORGANISER_APPLY_STYLES   = 0x0004;
+constexpr unsigned int wxRICHTEXT_ORGANISER_EDIT_STYLES    = 0x0008;
+constexpr unsigned int wxRICHTEXT_ORGANISER_RENAME_STYLES  = 0x0010;
+constexpr unsigned int wxRICHTEXT_ORGANISER_OK_CANCEL      = 0x0020;
+constexpr unsigned int wxRICHTEXT_ORGANISER_RENUMBER       = 0x0040;
 
 // The permitted style types to show
-#define wxRICHTEXT_ORGANISER_SHOW_CHARACTER 0x0100
-#define wxRICHTEXT_ORGANISER_SHOW_PARAGRAPH 0x0200
-#define wxRICHTEXT_ORGANISER_SHOW_LIST      0x0400
-#define wxRICHTEXT_ORGANISER_SHOW_BOX       0x0800
-#define wxRICHTEXT_ORGANISER_SHOW_ALL       0x1000
+constexpr unsigned int wxRICHTEXT_ORGANISER_SHOW_CHARACTER = 0x0100;
+constexpr unsigned int wxRICHTEXT_ORGANISER_SHOW_PARAGRAPH = 0x0200;
+constexpr unsigned int wxRICHTEXT_ORGANISER_SHOW_LIST      = 0x0400;
+constexpr unsigned int wxRICHTEXT_ORGANISER_SHOW_BOX       = 0x0800;
+constexpr unsigned int wxRICHTEXT_ORGANISER_SHOW_ALL       = 0x1000;
 
 // Common combinations
-#define wxRICHTEXT_ORGANISER_ORGANISE (wxRICHTEXT_ORGANISER_SHOW_ALL|wxRICHTEXT_ORGANISER_DELETE_STYLES|wxRICHTEXT_ORGANISER_CREATE_STYLES|wxRICHTEXT_ORGANISER_APPLY_STYLES|wxRICHTEXT_ORGANISER_EDIT_STYLES|wxRICHTEXT_ORGANISER_RENAME_STYLES)
-#define wxRICHTEXT_ORGANISER_BROWSE (wxRICHTEXT_ORGANISER_SHOW_ALL|wxRICHTEXT_ORGANISER_OK_CANCEL)
-#define wxRICHTEXT_ORGANISER_BROWSE_NUMBERING (wxRICHTEXT_ORGANISER_SHOW_LIST|wxRICHTEXT_ORGANISER_OK_CANCEL|wxRICHTEXT_ORGANISER_RENUMBER)
+constexpr unsigned int wxRICHTEXT_ORGANISER_ORGANISE = (wxRICHTEXT_ORGANISER_SHOW_ALL|wxRICHTEXT_ORGANISER_DELETE_STYLES|wxRICHTEXT_ORGANISER_CREATE_STYLES|wxRICHTEXT_ORGANISER_APPLY_STYLES|wxRICHTEXT_ORGANISER_EDIT_STYLES|wxRICHTEXT_ORGANISER_RENAME_STYLES);
+constexpr unsigned int wxRICHTEXT_ORGANISER_BROWSE = (wxRICHTEXT_ORGANISER_SHOW_ALL|wxRICHTEXT_ORGANISER_OK_CANCEL);
+constexpr unsigned int wxRICHTEXT_ORGANISER_BROWSE_NUMBERING = (wxRICHTEXT_ORGANISER_SHOW_LIST|wxRICHTEXT_ORGANISER_OK_CANCEL|wxRICHTEXT_ORGANISER_RENUMBER);
 
 /*!
  * wxRichTextStyleOrganiserDialog class declaration
@@ -86,7 +104,7 @@ class WXDLLIMPEXP_RICHTEXT wxRichTextStyleOrganiserDialog: public wxDialog
 
 public:
     /// Constructors
-    wxRichTextStyleOrganiserDialog( );
+    wxRichTextStyleOrganiserDialog() = default;
     wxRichTextStyleOrganiserDialog( int flags, wxRichTextStyleSheet* sheet, wxRichTextCtrl* ctrl, wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& caption = SYMBOL_WXRICHTEXTSTYLEORGANISERDIALOG_TITLE, const wxPoint& pos = SYMBOL_WXRICHTEXTSTYLEORGANISERDIALOG_POSITION, const wxSize& size = SYMBOL_WXRICHTEXTSTYLEORGANISERDIALOG_SIZE, unsigned int style = SYMBOL_WXRICHTEXTSTYLEORGANISERDIALOG_STYLE );
 
     /// Creation
@@ -94,9 +112,6 @@ public:
 
     /// Creates the controls and sizers
     void CreateControls();
-
-    /// Initialise member variables
-    void Init();
 
     /// Transfer data from/to window
     bool TransferDataFromWindow() override;
@@ -205,52 +220,37 @@ public:
 ////@end wxRichTextStyleOrganiserDialog member function declarations
 
 ////@begin wxRichTextStyleOrganiserDialog member variables
-    wxBoxSizer* m_innerSizer;
-    wxBoxSizer* m_buttonSizerParent;
-    wxRichTextStyleListCtrl* m_stylesListBox;
-    wxRichTextCtrl* m_previewCtrl;
-    wxBoxSizer* m_buttonSizer;
-    wxButton* m_newCharacter;
-    wxButton* m_newParagraph;
-    wxButton* m_newList;
-    wxButton* m_newBox;
-    wxButton* m_applyStyle;
-    wxButton* m_renameStyle;
-    wxButton* m_editStyle;
-    wxButton* m_deleteStyle;
-    wxButton* m_closeButton;
-    wxBoxSizer* m_bottomButtonSizer;
-    wxCheckBox* m_restartNumberingCtrl;
-    wxStdDialogButtonSizer* m_stdButtonSizer;
-    wxButton* m_okButton;
-    wxButton* m_cancelButton;
-    /// Control identifiers
-    enum {
-        ID_RICHTEXTSTYLEORGANISERDIALOG = 10500,
-        ID_RICHTEXTSTYLEORGANISERDIALOG_STYLES = 10501,
-        ID_RICHTEXTSTYLEORGANISERDIALOG_CURRENT_STYLE = 10510,
-        ID_RICHTEXTSTYLEORGANISERDIALOG_PREVIEW = 10509,
-        ID_RICHTEXTSTYLEORGANISERDIALOG_NEW_CHAR = 10504,
-        ID_RICHTEXTSTYLEORGANISERDIALOG_NEW_PARA = 10505,
-        ID_RICHTEXTSTYLEORGANISERDIALOG_NEW_LIST = 10508,
-        ID_RICHTEXTSTYLEORGANISERDIALOG_NEW_BOX = 10512,
-        ID_RICHTEXTSTYLEORGANISERDIALOG_APPLY = 10503,
-        ID_RICHTEXTSTYLEORGANISERDIALOG_RENAME = 10502,
-        ID_RICHTEXTSTYLEORGANISERDIALOG_EDIT = 10506,
-        ID_RICHTEXTSTYLEORGANISERDIALOG_DELETE = 10507,
-        ID_RICHTEXTSTYLEORGANISERDIALOG_RESTART_NUMBERING = 10511
-    };
-////@end wxRichTextStyleOrganiserDialog member variables
+    wxBoxSizer* m_innerSizer{nullptr};
+    wxBoxSizer* m_buttonSizerParent{nullptr};
+    wxRichTextStyleListCtrl* m_stylesListBox{nullptr};
+    wxRichTextCtrl* m_previewCtrl{nullptr};
+    wxBoxSizer* m_buttonSizer{nullptr};
+    wxButton* m_newCharacter{nullptr};
+    wxButton* m_newParagraph{nullptr};
+    wxButton* m_newList{nullptr};
+    wxButton* m_newBox{nullptr};
+    wxButton* m_applyStyle{nullptr};
+    wxButton* m_renameStyle{nullptr};
+    wxButton* m_editStyle{nullptr};
+    wxButton* m_deleteStyle{nullptr};
+    wxButton* m_closeButton{nullptr};
+    wxBoxSizer* m_bottomButtonSizer{nullptr};
+    wxCheckBox* m_restartNumberingCtrl{nullptr};
+    wxStdDialogButtonSizer* m_stdButtonSizer{nullptr};
+    wxButton* m_okButton{nullptr};
+    wxButton* m_cancelButton{nullptr};
 
 private:
 
-    wxRichTextCtrl*         m_richTextCtrl;
-    wxRichTextStyleSheet*   m_richTextStyleSheet;
+    wxRichTextCtrl*         m_richTextCtrl{nullptr};
+    wxRichTextStyleSheet*   m_richTextStyleSheet{nullptr};
 
-    bool                    m_dontUpdate;
-    int                     m_flags;
+    unsigned int            m_flags{};
+
+    bool                    m_dontUpdate{false};
+    bool                    m_restartNumbering{true};
+
     inline static bool      sm_showToolTips{false};
-    bool                    m_restartNumbering;
 };
 
 #endif

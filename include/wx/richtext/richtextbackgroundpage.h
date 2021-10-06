@@ -53,7 +53,7 @@ class WXDLLIMPEXP_RICHTEXT wxRichTextBackgroundPage: public wxRichTextDialogPage
 
 public:
     /// Constructors
-    wxRichTextBackgroundPage();
+    wxRichTextBackgroundPage() = default;
     wxRichTextBackgroundPage( wxWindow* parent, wxWindowID id = SYMBOL_WXRICHTEXTBACKGROUNDPAGE_IDNAME, const wxPoint& pos = SYMBOL_WXRICHTEXTBACKGROUNDPAGE_POSITION, const wxSize& size = SYMBOL_WXRICHTEXTBACKGROUNDPAGE_SIZE, unsigned int style = SYMBOL_WXRICHTEXTBACKGROUNDPAGE_STYLE );
 
     /// Creation
@@ -61,9 +61,6 @@ public:
 
     /// Destructor
     ~wxRichTextBackgroundPage();
-
-    /// Initialises member variables
-    void Init();
 
     /// Creates the controls and sizers
     void CreateControls();
@@ -110,24 +107,24 @@ public:
     static bool ShowToolTips();
 
 ////@begin wxRichTextBackgroundPage member variables
-    wxCheckBox* m_backgroundColourCheckBox;
-    wxRichTextColourSwatchCtrl* m_backgroundColourSwatch;
-    wxBoxSizer* m_shadowBox;
-    wxCheckBox* m_useShadow;
-    wxTextCtrl* m_offsetX;
-    wxComboBox* m_unitsHorizontalOffset;
-    wxTextCtrl* m_offsetY;
-    wxComboBox* m_unitsVerticalOffset;
-    wxCheckBox* m_shadowColourCheckBox;
-    wxRichTextColourSwatchCtrl* m_shadowColourSwatch;
-    wxCheckBox* m_useShadowSpread;
-    wxTextCtrl* m_spread;
-    wxComboBox* m_unitsShadowSpread;
-    wxCheckBox* m_useBlurDistance;
-    wxTextCtrl* m_blurDistance;
-    wxComboBox* m_unitsBlurDistance;
-    wxCheckBox* m_useShadowOpacity;
-    wxTextCtrl* m_opacity;
+    wxCheckBox* m_backgroundColourCheckBox{nullptr};
+    wxRichTextColourSwatchCtrl* m_backgroundColourSwatch{nullptr};
+    wxBoxSizer* m_shadowBox{nullptr};
+    wxCheckBox* m_useShadow{nullptr};
+    wxTextCtrl* m_offsetX{nullptr};
+    wxComboBox* m_unitsHorizontalOffset{nullptr};
+    wxTextCtrl* m_offsetY{nullptr};
+    wxComboBox* m_unitsVerticalOffset{nullptr};
+    wxCheckBox* m_shadowColourCheckBox{nullptr};
+    wxRichTextColourSwatchCtrl* m_shadowColourSwatch{nullptr};
+    wxCheckBox* m_useShadowSpread{nullptr};
+    wxTextCtrl* m_spread{nullptr};
+    wxComboBox* m_unitsShadowSpread{nullptr};
+    wxCheckBox* m_useBlurDistance{nullptr};
+    wxTextCtrl* m_blurDistance{nullptr};
+    wxComboBox* m_unitsBlurDistance{nullptr};
+    wxCheckBox* m_useShadowOpacity{nullptr};
+    wxTextCtrl* m_opacity{nullptr};
     /// Control identifiers
     enum {
         ID_RICHTEXTBACKGROUNDPAGE = 10845,

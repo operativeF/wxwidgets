@@ -59,53 +59,9 @@ IMPLEMENT_HELP_PROVISION(wxRichTextFontPage)
  * wxRichTextFontPage constructors
  */
 
-wxRichTextFontPage::wxRichTextFontPage( )
-{
-    Init();
-}
-
 wxRichTextFontPage::wxRichTextFontPage( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size, unsigned int style )
 {
-    Init();
     Create(parent, id, pos, size, style);
-}
-
-/*!
- * Initialise members
- */
-
-void wxRichTextFontPage::Init()
-{
-    m_dontUpdate = false;
-    m_colourPresent = false;
-    m_bgColourPresent = false;
-
-////@begin wxRichTextFontPage member initialisation
-    m_innerSizer = nullptr;
-    m_faceTextCtrl = nullptr;
-    m_sizeTextCtrl = nullptr;
-    m_fontSizeSpinButtons = nullptr;
-    m_sizeUnitsCtrl = nullptr;
-    m_fontListBoxParent = nullptr;
-    m_faceListBox = nullptr;
-    m_sizeListBox = nullptr;
-    m_styleCtrl = nullptr;
-    m_weightCtrl = nullptr;
-    m_underliningCtrl = nullptr;
-    m_textColourLabel = nullptr;
-    m_colourCtrl = nullptr;
-    m_bgColourLabel = nullptr;
-    m_bgColourCtrl = nullptr;
-    m_strikethroughCtrl = nullptr;
-    m_capitalsCtrl = nullptr;
-    m_smallCapitalsCtrl = nullptr;
-    m_superscriptCtrl = nullptr;
-    m_subscriptCtrl = nullptr;
-    m_rtlParentSizer = nullptr;
-    m_rtlCtrl = nullptr;
-    m_suppressHyphenationCtrl = nullptr;
-    m_previewCtrl = nullptr;
-////@end wxRichTextFontPage member initialisation
 }
 
 /*!

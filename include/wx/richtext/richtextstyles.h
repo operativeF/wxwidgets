@@ -282,8 +282,6 @@ public:
 
     /// Clones the object
     wxRichTextStyleDefinition* Clone() const override { return new wxRichTextBoxStyleDefinition(*this); }
-
-protected:
 };
 
 /*!
@@ -297,16 +295,12 @@ class WXDLLIMPEXP_RICHTEXT wxRichTextStyleSheet: public wxObject
 public:
     /// Constructors
     wxRichTextStyleSheet(const wxRichTextStyleSheet& sheet)
-     
     {
-        Init();
         Copy(sheet);
     }
-    wxRichTextStyleSheet() { Init(); }
-    ~wxRichTextStyleSheet();
 
-    /// Initialisation
-    void Init();
+    wxRichTextStyleSheet() = default;
+    ~wxRichTextStyleSheet();
 
     /// Copy
     void Copy(const wxRichTextStyleSheet& sheet);
@@ -445,14 +439,15 @@ protected:
     std::string                m_description;
     std::string                m_name;
 
+    wxRichTextProperties    m_properties;
+
     wxList                  m_characterStyleDefinitions;
     wxList                  m_paragraphStyleDefinitions;
     wxList                  m_listStyleDefinitions;
     wxList                  m_boxStyleDefinitions;
 
-    wxRichTextStyleSheet*   m_previousSheet;
-    wxRichTextStyleSheet*   m_nextSheet;
-    wxRichTextProperties    m_properties;
+    wxRichTextStyleSheet*   m_previousSheet{nullptr};
+    wxRichTextStyleSheet*   m_nextSheet{nullptr};
 };
 
 #if wxUSE_HTML
@@ -477,21 +472,10 @@ public:
         wxRICHTEXT_STYLE_BOX
     };
 
-    wxRichTextStyleListBox()
-    {
-        Init();
-    }
+    wxRichTextStyleListBox() = default;
+
     wxRichTextStyleListBox(wxWindow* parent, wxWindowID id = wxID_ANY, const wxPoint& pos = wxDefaultPosition,
         const wxSize& size = wxDefaultSize, unsigned int style = 0);
-
-    void Init()
-    {
-        m_styleSheet = nullptr;
-        m_richTextCtrl = nullptr;
-        m_applyOnSelection = false;
-        m_styleType = wxRICHTEXT_STYLE_PARAGRAPH;
-        m_autoSetSelection = true;
-    }
 
     bool Create(wxWindow* parent, wxWindowID id = wxID_ANY, const wxPoint& pos = wxDefaultPosition,
         const wxSize& size = wxDefaultSize, unsigned int style = 0);
@@ -555,13 +539,15 @@ protected:
     std::string OnGetItem(size_t n) const override;
 
 private:
-
-    wxRichTextStyleSheet*   m_styleSheet;
-    wxRichTextCtrl*         m_richTextCtrl;
-    bool                    m_applyOnSelection; // if true, applies style on selection
-    wxRichTextStyleType     m_styleType; // style type to display
-    bool                    m_autoSetSelection;
     wxArrayString           m_styleNames;
+
+    wxRichTextStyleSheet*   m_styleSheet{nullptr};
+    wxRichTextCtrl*         m_richTextCtrl{nullptr};
+
+    wxRichTextStyleType     m_styleType{wxRICHTEXT_STYLE_PARAGRAPH}; // style type to display
+
+    bool                    m_autoSetSelection{true};
+    bool                    m_applyOnSelection{false}; // if true, applies style on selection
 };
 
 /*!
@@ -570,7 +556,7 @@ private:
  * style types.
  */
 
-#define wxRICHTEXTSTYLELIST_HIDE_TYPE_SELECTOR     0x1000
+constexpr unsigned int wxRICHTEXTSTYLELIST_HIDE_TYPE_SELECTOR     = 0x1000;
 
 class WXDLLIMPEXP_RICHTEXT wxRichTextStyleListCtrl: public wxControl
 {
@@ -580,21 +566,10 @@ class WXDLLIMPEXP_RICHTEXT wxRichTextStyleListCtrl: public wxControl
 public:
 
     /// Constructors
-    wxRichTextStyleListCtrl()
-    {
-        Init();
-    }
+    wxRichTextStyleListCtrl() = default;
 
     wxRichTextStyleListCtrl(wxWindow* parent, wxWindowID id = wxID_ANY, const wxPoint& pos = wxDefaultPosition,
         const wxSize& size = wxDefaultSize, unsigned int style = 0);
-
-    /// Member initialisation
-    void Init()
-    {
-        m_styleListBox = nullptr;
-        m_styleChoice = nullptr;
-        m_dontUpdate = false;
-    }
 
     /// Creates the windows
     bool Create(wxWindow* parent, wxWindowID id = wxID_ANY, const wxPoint& pos = wxDefaultPosition,
@@ -635,9 +610,9 @@ public:
 
 private:
 
-    wxRichTextStyleListBox* m_styleListBox;
-    wxChoice*               m_styleChoice;
-    bool                    m_dontUpdate;
+    wxRichTextStyleListBox* m_styleListBox{nullptr};
+    wxChoice*               m_styleChoice{nullptr};
+    bool                    m_dontUpdate{false};
 };
 
 #if wxUSE_COMBOCTRL

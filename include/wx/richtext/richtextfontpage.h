@@ -58,11 +58,8 @@ class WXDLLIMPEXP_RICHTEXT wxRichTextFontPage: public wxRichTextDialogPage
 
 public:
     /// Constructors
-    wxRichTextFontPage( );
+    wxRichTextFontPage() = default;
     wxRichTextFontPage( wxWindow* parent, wxWindowID id = wxID_ANY, const wxPoint& pos = SYMBOL_WXRICHTEXTFONTPAGE_POSITION, const wxSize& size = SYMBOL_WXRICHTEXTFONTPAGE_SIZE, unsigned int style = SYMBOL_WXRICHTEXTFONTPAGE_STYLE );
-
-    /// Initialise members
-    void Init();
 
     /// Creation
     bool Create( wxWindow* parent, wxWindowID id = wxID_ANY, const wxPoint& pos = SYMBOL_WXRICHTEXTFONTPAGE_POSITION, const wxSize& size = SYMBOL_WXRICHTEXTFONTPAGE_SIZE, unsigned int style = SYMBOL_WXRICHTEXTFONTPAGE_STYLE );
@@ -151,30 +148,31 @@ public:
     static bool ShowToolTips();
 
 ////@begin wxRichTextFontPage member variables
-    wxBoxSizer* m_innerSizer;
-    wxTextCtrl* m_faceTextCtrl;
-    wxTextCtrl* m_sizeTextCtrl;
-    wxSpinButton* m_fontSizeSpinButtons;
-    wxChoice* m_sizeUnitsCtrl;
-    wxBoxSizer* m_fontListBoxParent;
-    wxRichTextFontListBox* m_faceListBox;
-    wxListBox* m_sizeListBox;
-    wxComboBox* m_styleCtrl;
-    wxComboBox* m_weightCtrl;
-    wxComboBox* m_underliningCtrl;
-    wxCheckBox* m_textColourLabel;
-    wxRichTextColourSwatchCtrl* m_colourCtrl;
-    wxCheckBox* m_bgColourLabel;
-    wxRichTextColourSwatchCtrl* m_bgColourCtrl;
-    wxCheckBox* m_strikethroughCtrl;
-    wxCheckBox* m_capitalsCtrl;
-    wxCheckBox* m_smallCapitalsCtrl;
-    wxCheckBox* m_superscriptCtrl;
-    wxCheckBox* m_subscriptCtrl;
-    wxBoxSizer* m_rtlParentSizer;
-    wxCheckBox* m_rtlCtrl;
-    wxCheckBox* m_suppressHyphenationCtrl;
-    wxRichTextFontPreviewCtrl* m_previewCtrl;
+    wxBoxSizer* m_innerSizer{nullptr};
+    wxTextCtrl* m_faceTextCtrl{nullptr};
+    wxTextCtrl* m_sizeTextCtrl{nullptr};
+    wxSpinButton* m_fontSizeSpinButtons{nullptr};
+    wxChoice* m_sizeUnitsCtrl{nullptr};
+    wxBoxSizer* m_fontListBoxParent{nullptr};
+    wxRichTextFontListBox* m_faceListBox{nullptr};
+    wxListBox* m_sizeListBox{nullptr};
+    wxComboBox* m_styleCtrl{nullptr};
+    wxComboBox* m_weightCtrl{nullptr};
+    wxComboBox* m_underliningCtrl{nullptr};
+    wxCheckBox* m_textColourLabel{nullptr};
+    wxRichTextColourSwatchCtrl* m_colourCtrl{nullptr};
+    wxCheckBox* m_bgColourLabel{nullptr};
+    wxRichTextColourSwatchCtrl* m_bgColourCtrl{nullptr};
+    wxCheckBox* m_strikethroughCtrl{nullptr};
+    wxCheckBox* m_capitalsCtrl{nullptr};
+    wxCheckBox* m_smallCapitalsCtrl{nullptr};
+    wxCheckBox* m_superscriptCtrl{nullptr};
+    wxCheckBox* m_subscriptCtrl{nullptr};
+    wxBoxSizer* m_rtlParentSizer{nullptr};
+    wxCheckBox* m_rtlCtrl{nullptr};
+    wxCheckBox* m_suppressHyphenationCtrl{nullptr};
+    wxRichTextFontPreviewCtrl* m_previewCtrl{nullptr};
+
     /// Control identifiers
     enum {
         ID_RICHTEXTFONTPAGE = 10000,
@@ -202,9 +200,10 @@ public:
     };
 ////@end wxRichTextFontPage member variables
 
-    bool m_dontUpdate;
-    bool m_colourPresent;
-    bool m_bgColourPresent;
+    bool m_dontUpdate{false};
+    bool m_colourPresent{false};
+    bool m_bgColourPresent{false};
+
     inline static int sm_allowedTextEffects{0xFFFF & ~(wxTEXT_ATTR_EFFECT_SUPPRESS_HYPHENATION|wxTEXT_ATTR_EFFECT_RTL)};
 };
 

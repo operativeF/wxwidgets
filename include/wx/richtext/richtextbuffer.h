@@ -2404,9 +2404,6 @@ public:
     */
     wxRichTextDrawingContext(wxRichTextBuffer* buffer);
 
-    void Init()
-    { m_buffer = nullptr; m_enableVirtualAttributes = true; m_enableImages = true; m_layingOut = false; m_enableDelayedImageLoading = false; }
-
     /**
         Does this object have virtual attributes?
         Virtual attributes can be provided for visual cues without
@@ -2505,11 +2502,12 @@ public:
 
     wxRichTextBuffer* GetBuffer() const { return m_buffer; }
 
-    wxRichTextBuffer*   m_buffer;
-    bool                m_enableVirtualAttributes;
-    bool                m_enableImages;
-    bool                m_enableDelayedImageLoading;
-    bool                m_layingOut;
+    wxRichTextBuffer*   m_buffer{nullptr};
+
+    bool                m_enableVirtualAttributes{true};
+    bool                m_enableImages{true};
+    bool                m_enableDelayedImageLoading{false};
+    bool                m_layingOut{false};
 };
 
 /**
@@ -3085,10 +3083,10 @@ protected:
     wxRichTextObject*       m_parent;
 
     // The range of this object (start position to end position)
-    wxRichTextRange         m_range;
+    wxRichTextRange         m_range{0, -1};
 
     // The internal range of this object, if it's a top-level object with its own range space
-    wxRichTextRange         m_ownRange;
+    wxRichTextRange         m_ownRange{0, -1};
 
     // Attributes
     wxRichTextAttr          m_attributes;
@@ -3237,7 +3235,7 @@ public:
 // Constructors
 
     wxRichTextParagraphLayoutBox(wxRichTextObject* parent = nullptr);
-    wxRichTextParagraphLayoutBox(const wxRichTextParagraphLayoutBox& obj) { Init(); Copy(obj); }
+    wxRichTextParagraphLayoutBox(const wxRichTextParagraphLayoutBox& obj) { Copy(obj); }
     ~wxRichTextParagraphLayoutBox();
 
 // Overridables
@@ -3811,17 +3809,16 @@ public:
     bool GetFloatingObjects(wxRichTextObjectList& objects) const;
 
 protected:
-    wxRichTextCtrl* m_ctrl;
+   // The floating layout state
+    wxRichTextFloatCollector* m_floatCollector{nullptr};
+    wxRichTextCtrl* m_ctrl{nullptr};
     wxRichTextAttr  m_defaultAttributes;
 
     // The invalidated range that will need full layout
-    wxRichTextRange m_invalidRange;
+    wxRichTextRange m_invalidRange{wxRICHTEXT_ALL};
 
     // Is the last paragraph partial or complete?
-    bool            m_partialParagraph;
-
-    // The floating layout state
-    wxRichTextFloatCollector* m_floatCollector;
+    bool            m_partialParagraph{false};
 };
 
 /**
@@ -3872,8 +3869,6 @@ public:
     wxRichTextObject* Clone() const override { return new wxRichTextBox(*this); }
 
     void Copy(const wxRichTextBox& obj);
-
-protected:
 };
 
 /**
@@ -3980,8 +3975,6 @@ public:
     wxRichTextObject* Clone() const override { return new wxRichTextField(*this); }
 
     void Copy(const wxRichTextField& obj);
-
-protected:
 };
 
 /**
@@ -4160,11 +4153,7 @@ public:
     */
     wxRichTextFieldTypeStandard(const wxString& name, const wxBitmap& bitmap, int displayStyle = wxRICHTEXT_FIELD_STYLE_NO_BORDER);
 
-    /**
-        The default constructor.
-
-    */
-    wxRichTextFieldTypeStandard() { Init(); }
+    wxRichTextFieldTypeStandard() = default;
 
     /**
         The copy constructor.
@@ -4173,11 +4162,6 @@ public:
     wxRichTextFieldTypeStandard(const wxRichTextFieldTypeStandard& field)
         : wxRichTextFieldType(field)
     { Copy(field); }
-
-    /**
-        Initialises the object.
-    */
-    void Init();
 
     /**
         Copies the object.
@@ -4330,18 +4314,21 @@ public:
     int GetVerticalMargin() const { return m_verticalMargin; }
 
 protected:
-
     wxString    m_label;
-    int         m_displayStyle;
-    wxFont      m_font;
-    wxColour    m_textColour;
-    wxColour    m_borderColour;
-    wxColour    m_backgroundColour;
-    int         m_verticalPadding;
-    int         m_horizontalPadding;
-    int         m_horizontalMargin;
-    int         m_verticalMargin;
+
+    wxColour    m_textColour{*wxWHITE};
+    wxColour    m_borderColour{*wxBLACK};
+    wxColour    m_backgroundColour{*wxBLACK};
+
+    wxFont      m_font{6, wxFontFamily::Swiss, wxFontStyle::Normal, wxFONTWEIGHT_NORMAL};
+
     wxBitmap    m_bitmap;
+
+    int         m_displayStyle{wxRICHTEXT_FIELD_STYLE_RECTANGLE};
+    int         m_verticalPadding{1};
+    int         m_horizontalPadding{3};
+    int         m_horizontalMargin{2};
+    int         m_verticalMargin{0};
 };
 
 /**
@@ -4508,8 +4495,6 @@ public:
     ~wxRichTextParagraph();
     wxRichTextParagraph(const wxRichTextParagraph& obj) { Copy(obj); }
 
-    void Init();
-
 // Overridables
 
     bool Draw(wxDC& dc, wxRichTextDrawingContext& context, const wxRichTextRange& range, const wxRichTextSelection& selection, const wxRect& rect, int descent, unsigned int style) override;
@@ -4654,17 +4639,16 @@ public:
     void SetImpactedByFloatingObjects(int i) { m_impactedByFloatingObjects = i; }
 
 protected:
-
     // The lines that make up the wrapped paragraph
     wxRichTextLineList  m_cachedLines;
 
     // Whether the paragraph is impacted by floating objects from above
-    int                 m_impactedByFloatingObjects;
+    int                 m_impactedByFloatingObjects{-1};
 
     // Default tabstops
     inline static std::vector<int>  sm_defaultTabs;
 
-friend class wxRichTextFloatCollector;
+    friend class wxRichTextFloatCollector;
 };
 
 /**
@@ -4787,21 +4771,10 @@ protected:
 class WXDLLIMPEXP_RICHTEXT wxRichTextImageBlock: public wxObject
 {
 public:
-    /**
-        Constructor.
-    */
-    wxRichTextImageBlock();
+    wxRichTextImageBlock() = default;
 
-    /**
-        Copy constructor.
-    */
     wxRichTextImageBlock(const wxRichTextImageBlock& block);
     ~wxRichTextImageBlock();
-
-    /**
-        Initialises the block.
-    */
-    void Init();
 
     /**
         Clears the block.
@@ -4933,9 +4906,9 @@ public:
 protected:
     // Size in bytes of the image stored.
     // This is in the raw, original form such as a JPEG file.
-    unsigned char*      m_data;
-    size_t              m_dataSize;
-    wxBitmapType        m_imageType;
+    unsigned char*      m_data{nullptr};
+    std::size_t         m_dataSize{};
+    wxBitmapType        m_imageType{wxBitmapType::Invalid};
 };
 
 /**
@@ -4955,7 +4928,7 @@ class WXDLLIMPEXP_RICHTEXT wxRichTextImage: public wxRichTextObject
 public:
     enum { ImageState_Unloaded, ImageState_Loaded, ImageState_Bad };
 
-    wxRichTextImage(wxRichTextObject* parent = nullptr): wxRichTextObject(parent) { Init(); }
+    wxRichTextImage(wxRichTextObject* parent = nullptr): wxRichTextObject(parent) {}
 
     // Creates a wxRichTextImage from a wxImage.
     wxRichTextImage(const wxImage& image, wxRichTextObject* parent = nullptr, wxRichTextAttr* charStyle = nullptr);
@@ -4966,11 +4939,6 @@ public:
     wxRichTextImage(const wxRichTextImage& obj): wxRichTextObject(obj) { Copy(obj); }
 
     ~wxRichTextImage() = default;
-
-    /**
-        Initialisation.
-    */
-    void Init();
 
 // Overridables
 
@@ -5078,9 +5046,11 @@ public:
 
 protected:
     wxRichTextImageBlock    m_imageBlock;
+
     wxBitmap                m_imageCache;
-    wxSize                  m_originalImageSize;
-    int                     m_imageState;
+    wxSize                  m_originalImageSize{-1, -1};
+
+    int                     m_imageState{ImageState_Unloaded};
 };
 
 class WXDLLIMPEXP_FWD_RICHTEXT wxRichTextCommand;
@@ -5102,18 +5072,11 @@ class WXDLLIMPEXP_RICHTEXT wxRichTextBuffer: public wxRichTextParagraphLayoutBox
     wxDECLARE_DYNAMIC_CLASS(wxRichTextBuffer);
 public:
 // Constructors
+    wxRichTextBuffer() { SetMargins(4); };
 
-    /**
-        Default constructor.
-    */
-    wxRichTextBuffer() { Init(); }
+    wxRichTextBuffer(const wxRichTextBuffer& obj) { SetMargins(4); Copy(obj); }
 
-    /**
-        Copy constructor.
-    */
-    wxRichTextBuffer(const wxRichTextBuffer& obj) { Init(); Copy(obj); }
-
-    ~wxRichTextBuffer() ;
+    ~wxRichTextBuffer();
 
 // Accessors
 
@@ -5192,11 +5155,6 @@ public:
     double GetDimensionScale() const { return m_dimensionScale; }
 
 // Operations
-
-    /**
-        Initialisation.
-    */
-    void Init();
 
     /**
         Clears the buffer, adds an empty paragraph, and clears the command processor.
@@ -5840,28 +5798,19 @@ public:
 protected:
 
     /// Command processor
-    wxCommandProcessor*     m_commandProcessor;
+    wxCommandProcessor*     m_commandProcessor{new wxCommandProcessor};
 
     /// Table storing fonts
     wxRichTextFontTable     m_fontTable;
-
-    /// Has been modified?
-    bool                    m_modified;
-
-    /// Collapsed command stack
-    int                     m_batchedCommandDepth;
 
     /// Name for collapsed command
     wxString                m_batchedCommandsName;
 
     /// Current collapsed command accumulating actions
-    wxRichTextCommand*      m_batchedCommand;
-
-    /// Whether to suppress undo
-    int                     m_suppressUndo;
+    wxRichTextCommand*      m_batchedCommand{nullptr};
 
     /// Style sheet, if any
-    wxRichTextStyleSheet*   m_styleSheet;
+    wxRichTextStyleSheet*   m_styleSheet{nullptr};
 
     /// List of event handlers that will be notified of events
     wxList                  m_eventHandlers;
@@ -5869,8 +5818,26 @@ protected:
     /// Stack of attributes for convenience functions
     wxList                  m_attributeStack;
 
+    /// Scaling factor in use: needed to calculate correct dimensions when printing
+    double                  m_scale{1.0};
+
+    /// Font scale for adjusting the text size when editing
+    double                  m_fontScale{1.0};
+
+    /// Dimension scale for reducing redundant whitespace when editing
+    double                  m_dimensionScale{1.0};
+
+    /// Whether to suppress undo
+    int                     m_suppressUndo{};
+
+    /// Collapsed command stack
+    int                     m_batchedCommandDepth{};
+
     /// Flags to be passed to handlers
-    unsigned int                     m_handlerFlags;
+    unsigned int            m_handlerFlags{};
+
+    /// Has been modified?
+    bool                    m_modified{false};
 
     /// File handlers
     inline static wxList           sm_handlers;
@@ -5892,15 +5859,6 @@ protected:
 
     /// Floating layout mode, @true by default
     inline static bool             sm_floatingLayoutMode{true};
-
-    /// Scaling factor in use: needed to calculate correct dimensions when printing
-    double                  m_scale;
-
-    /// Font scale for adjusting the text size when editing
-    double                  m_fontScale;
-
-    /// Dimension scale for reducing redundant whitespace when editing
-    double                  m_dimensionScale;
 };
 
 /**

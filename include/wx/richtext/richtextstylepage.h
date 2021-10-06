@@ -13,16 +13,26 @@
 
 #include "wx/richtext/richtextdialogpage.h"
 
+#include "wx/geometry/point.h"
+#include "wx/geometry/size.h"
+
 /*!
  * Control identifiers
  */
 
+enum {
+    ID_RICHTEXTSTYLEPAGE = 10403,
+    ID_RICHTEXTSTYLEPAGE_STYLE_NAME = 10404,
+    ID_RICHTEXTSTYLEPAGE_BASED_ON = 10405,
+    ID_RICHTEXTSTYLEPAGE_NEXT_STYLE = 10406
+};
+
 ////@begin control identifiers
-#define SYMBOL_WXRICHTEXTSTYLEPAGE_STYLE wxRESIZE_BORDER|wxTAB_TRAVERSAL
-#define SYMBOL_WXRICHTEXTSTYLEPAGE_TITLE wxEmptyString
-#define SYMBOL_WXRICHTEXTSTYLEPAGE_IDNAME ID_RICHTEXTSTYLEPAGE
-#define SYMBOL_WXRICHTEXTSTYLEPAGE_SIZE wxSize(400, 300)
-#define SYMBOL_WXRICHTEXTSTYLEPAGE_POSITION wxDefaultPosition
+constexpr unsigned int SYMBOL_WXRICHTEXTSTYLEPAGE_STYLE = wxRESIZE_BORDER|wxTAB_TRAVERSAL;
+constexpr char SYMBOL_WXRICHTEXTSTYLEPAGE_TITLE[] = "";
+constexpr unsigned int SYMBOL_WXRICHTEXTSTYLEPAGE_IDNAME = ID_RICHTEXTSTYLEPAGE;
+constexpr wxSize SYMBOL_WXRICHTEXTSTYLEPAGE_SIZE = {400, 300};
+constexpr wxPoint SYMBOL_WXRICHTEXTSTYLEPAGE_POSITION = wxDefaultPosition;
 ////@end control identifiers
 
 /*!
@@ -37,14 +47,11 @@ class WXDLLIMPEXP_RICHTEXT wxRichTextStylePage: public wxRichTextDialogPage
 
 public:
     /// Constructors
-    wxRichTextStylePage( );
+    wxRichTextStylePage() = default;
     wxRichTextStylePage( wxWindow* parent, wxWindowID id = wxID_ANY, const wxPoint& pos = SYMBOL_WXRICHTEXTSTYLEPAGE_POSITION, const wxSize& size = SYMBOL_WXRICHTEXTSTYLEPAGE_SIZE, unsigned int style = SYMBOL_WXRICHTEXTSTYLEPAGE_STYLE );
 
     /// Creation
     bool Create( wxWindow* parent, wxWindowID id = wxID_ANY, const wxPoint& pos = SYMBOL_WXRICHTEXTSTYLEPAGE_POSITION, const wxSize& size = SYMBOL_WXRICHTEXTSTYLEPAGE_SIZE, unsigned int style = SYMBOL_WXRICHTEXTSTYLEPAGE_STYLE );
-
-    /// Initialise members
-    void Init();
 
     /// Creates the controls and sizers
     void CreateControls();
@@ -80,19 +87,13 @@ public:
     static bool ShowToolTips();
 
 ////@begin wxRichTextStylePage member variables
-    wxTextCtrl* m_styleName;
-    wxComboBox* m_basedOn;
-    wxComboBox* m_nextStyle;
-    /// Control identifiers
-    enum {
-        ID_RICHTEXTSTYLEPAGE = 10403,
-        ID_RICHTEXTSTYLEPAGE_STYLE_NAME = 10404,
-        ID_RICHTEXTSTYLEPAGE_BASED_ON = 10405,
-        ID_RICHTEXTSTYLEPAGE_NEXT_STYLE = 10406
-    };
+    wxTextCtrl* m_styleName{nullptr};
+    wxComboBox* m_basedOn{nullptr};
+    wxComboBox* m_nextStyle{nullptr};
+
 ////@end wxRichTextStylePage member variables
 
-    bool m_nameIsEditable;
+    bool m_nameIsEditable{false};
 };
 
 #endif

@@ -55,14 +55,8 @@ IMPLEMENT_HELP_PROVISION(wxRichTextBackgroundPage)
  * wxRichTextBackgroundPage constructors
  */
 
-wxRichTextBackgroundPage::wxRichTextBackgroundPage()
-{
-    Init();
-}
-
 wxRichTextBackgroundPage::wxRichTextBackgroundPage( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size, unsigned int style )
 {
-    Init();
     Create(parent, id, pos, size, style);
 }
 
@@ -96,36 +90,6 @@ wxRichTextBackgroundPage::~wxRichTextBackgroundPage()
 ////@begin wxRichTextBackgroundPage destruction
 ////@end wxRichTextBackgroundPage destruction
 }
-
-
-/*!
- * Member initialisation
- */
-
-void wxRichTextBackgroundPage::Init()
-{
-////@begin wxRichTextBackgroundPage member initialisation
-    m_backgroundColourCheckBox = nullptr;
-    m_backgroundColourSwatch = nullptr;
-    m_shadowBox = nullptr;
-    m_useShadow = nullptr;
-    m_offsetX = nullptr;
-    m_unitsHorizontalOffset = nullptr;
-    m_offsetY = nullptr;
-    m_unitsVerticalOffset = nullptr;
-    m_shadowColourCheckBox = nullptr;
-    m_shadowColourSwatch = nullptr;
-    m_useShadowSpread = nullptr;
-    m_spread = nullptr;
-    m_unitsShadowSpread = nullptr;
-    m_useBlurDistance = nullptr;
-    m_blurDistance = nullptr;
-    m_unitsBlurDistance = nullptr;
-    m_useShadowOpacity = nullptr;
-    m_opacity = nullptr;
-////@end wxRichTextBackgroundPage member initialisation
-}
-
 
 /*!
  * Control creation for wxRichTextBackgroundPage

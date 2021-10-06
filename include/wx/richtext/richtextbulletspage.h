@@ -51,14 +51,11 @@ class WXDLLIMPEXP_RICHTEXT wxRichTextBulletsPage: public wxRichTextDialogPage
 
 public:
     /// Constructors
-    wxRichTextBulletsPage( );
+    wxRichTextBulletsPage() = default;
     wxRichTextBulletsPage( wxWindow* parent, wxWindowID id = wxID_ANY, const wxPoint& pos = SYMBOL_WXRICHTEXTBULLETSPAGE_POSITION, const wxSize& size = SYMBOL_WXRICHTEXTBULLETSPAGE_SIZE, unsigned int style = SYMBOL_WXRICHTEXTBULLETSPAGE_STYLE );
 
     /// Creation
     bool Create( wxWindow* parent, wxWindowID id = wxID_ANY, const wxPoint& pos = SYMBOL_WXRICHTEXTBULLETSPAGE_POSITION, const wxSize& size = SYMBOL_WXRICHTEXTBULLETSPAGE_SIZE, unsigned int style = SYMBOL_WXRICHTEXTBULLETSPAGE_STYLE );
-
-    /// Initialise members
-    void Init();
 
     /// Creates the controls and sizers
     void CreateControls();
@@ -180,16 +177,16 @@ public:
     static bool ShowToolTips();
 
 ////@begin wxRichTextBulletsPage member variables
-    wxListBox* m_styleListBox;
-    wxCheckBox* m_periodCtrl;
-    wxCheckBox* m_parenthesesCtrl;
-    wxCheckBox* m_rightParenthesisCtrl;
-    wxComboBox* m_bulletAlignmentCtrl;
-    wxComboBox* m_symbolCtrl;
-    wxComboBox* m_symbolFontCtrl;
-    wxComboBox* m_bulletNameCtrl;
-    wxSpinCtrl* m_numberCtrl;
-    wxRichTextCtrl* m_previewCtrl;
+    wxListBox* m_styleListBox{nullptr};
+    wxCheckBox* m_periodCtrl{nullptr};
+    wxCheckBox* m_parenthesesCtrl{nullptr};
+    wxCheckBox* m_rightParenthesisCtrl{nullptr};
+    wxComboBox* m_bulletAlignmentCtrl{nullptr};
+    wxComboBox* m_symbolCtrl{nullptr};
+    wxComboBox* m_symbolFontCtrl{nullptr};
+    wxComboBox* m_bulletNameCtrl{nullptr};
+    wxSpinCtrl* m_numberCtrl{nullptr};
+    wxRichTextCtrl* m_previewCtrl{nullptr};
     /// Control identifiers
     enum {
         ID_RICHTEXTBULLETSPAGE = 10300,
@@ -210,10 +207,10 @@ public:
     };
 ////@end wxRichTextBulletsPage member variables
 
-    bool m_hasBulletStyle;
-    bool m_hasBulletNumber;
-    bool m_hasBulletSymbol;
-    bool m_dontUpdate;
+    bool m_hasBulletStyle{false};
+    bool m_hasBulletNumber{false};
+    bool m_hasBulletSymbol{false};
+    bool m_dontUpdate{false};
 };
 
 #endif

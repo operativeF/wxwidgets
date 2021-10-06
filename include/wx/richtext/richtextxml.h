@@ -30,11 +30,9 @@
 class WXDLLIMPEXP_RICHTEXT wxRichTextXMLHelper: public wxObject
 {
 public:
-    wxRichTextXMLHelper() { Init(); }
-    wxRichTextXMLHelper(const wxString& enc) { Init(); SetupForSaving(enc); }
+    wxRichTextXMLHelper() = default;
+    wxRichTextXMLHelper(const wxString& enc) { SetupForSaving(enc); }
     ~wxRichTextXMLHelper();
-
-    void Init();
 
     void SetupForSaving(const wxString& enc);
 
@@ -149,16 +147,16 @@ public:
 #endif
 
 public:
+    wxString     m_fileEncoding;
+
+    unsigned int m_flags{};
 
 #if wxRICHTEXT_HAVE_DIRECT_OUTPUT
     // Used during saving
-    wxMBConv*   m_convMem;
-    wxMBConv*   m_convFile;
-    bool        m_deleteConvFile;
+    wxMBConv*   m_convMem{nullptr};
+    wxMBConv*   m_convFile{nullptr};
+    bool        m_deleteConvFile{false};
 #endif
-
-    wxString    m_fileEncoding;
-    int         m_flags;
 };
 
 /*!
@@ -179,9 +177,7 @@ class WXDLLIMPEXP_RICHTEXT wxRichTextXMLHandler: public wxRichTextFileHandler
 public:
     wxRichTextXMLHandler(const wxString& name = wxT("XML"), const wxString& ext = wxT("xml"), int type = wxRICHTEXT_TYPE_XML)
         : wxRichTextFileHandler(name, ext, type)
-        { Init(); }
-
-    void Init();
+    {}
 
 #if wxUSE_STREAMS
 

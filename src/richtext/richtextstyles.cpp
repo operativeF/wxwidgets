@@ -302,13 +302,6 @@ wxRichTextStyleSheet::~wxRichTextStyleSheet()
     m_nextSheet = nullptr;
 }
 
-/// Initialisation
-void wxRichTextStyleSheet::Init()
-{
-    m_previousSheet = nullptr;
-    m_nextSheet = nullptr;
-}
-
 /// Add a definition to one of the style lists
 bool wxRichTextStyleSheet::AddStyle(wxList& list, wxRichTextStyleDefinition* def)
 {
@@ -561,7 +554,6 @@ wxEND_EVENT_TABLE()
 wxRichTextStyleListBox::wxRichTextStyleListBox(wxWindow* parent, wxWindowID id, const wxPoint& pos,
     const wxSize& size, unsigned int style)
 {
-    Init();
     Create(parent, id, pos, size, style);
 }
 
@@ -1019,7 +1011,6 @@ wxEND_EVENT_TABLE()
 wxRichTextStyleListCtrl::wxRichTextStyleListCtrl(wxWindow* parent, wxWindowID id, const wxPoint& pos,
     const wxSize& size, unsigned int style)
 {
-    Init();
     Create(parent, id, pos, size, style);
 }
 

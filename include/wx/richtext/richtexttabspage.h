@@ -51,7 +51,7 @@ class WXDLLIMPEXP_RICHTEXT wxRichTextTabsPage: public wxRichTextDialogPage
 
 public:
     /// Constructors
-    wxRichTextTabsPage( );
+    wxRichTextTabsPage() = default;
     wxRichTextTabsPage( wxWindow* parent, wxWindowID id = wxID_ANY, const wxPoint& pos = SYMBOL_WXRICHTEXTTABSPAGE_POSITION, const wxSize& size = SYMBOL_WXRICHTEXTTABSPAGE_SIZE, unsigned int style = SYMBOL_WXRICHTEXTTABSPAGE_STYLE );
 
     /// Creation
@@ -59,9 +59,6 @@ public:
 
     /// Creates the controls and sizers
     void CreateControls();
-
-    /// Initialise members
-    void Init();
 
     /// Transfer data from/to window
     bool TransferDataFromWindow() override;
@@ -111,8 +108,8 @@ public:
     static bool ShowToolTips();
 
 ////@begin wxRichTextTabsPage member variables
-    wxTextCtrl* m_tabEditCtrl;
-    wxListBox* m_tabListCtrl;
+    wxTextCtrl* m_tabEditCtrl{nullptr};
+    wxListBox* m_tabListCtrl{nullptr};
     /// Control identifiers
     enum {
         ID_RICHTEXTTABSPAGE = 10200,
@@ -124,7 +121,7 @@ public:
     };
 ////@end wxRichTextTabsPage member variables
 
-    bool m_tabsPresent;
+    bool m_tabsPresent{false};
 };
 
 #endif

@@ -306,14 +306,8 @@ IMPLEMENT_HELP_PROVISION(wxSymbolPickerDialog)
  * wxSymbolPickerDialog constructors
  */
 
-wxSymbolPickerDialog::wxSymbolPickerDialog( )
-{
-    Init();
-}
-
 wxSymbolPickerDialog::wxSymbolPickerDialog( const wxString& symbol, const wxString& fontName, const wxString& normalTextFont, wxWindow* parent, wxWindowID id, const wxString& caption, const wxPoint& pos, const wxSize& size, unsigned int style )
 {
-    Init();
     Create(symbol, fontName, normalTextFont, parent, id, caption, pos, size, style);
 }
 
@@ -339,29 +333,6 @@ bool wxSymbolPickerDialog::Create( const wxString& symbol, const wxString& fontN
     Centre();
 ////@end wxSymbolPickerDialog creation
     return true;
-}
-
-/*!
- * Member initialisation for wxSymbolPickerDialog
- */
-
-void wxSymbolPickerDialog::Init()
-{
-////@begin wxSymbolPickerDialog member initialisation
-    m_fromUnicode = true;
-    m_fontCtrl = nullptr;
-#if defined(__UNICODE__)
-    m_subsetCtrl = nullptr;
-#endif
-    m_symbolsCtrl = nullptr;
-    m_symbolStaticCtrl = nullptr;
-    m_characterCodeCtrl = nullptr;
-#if defined(__UNICODE__)
-    m_fromUnicodeCtrl = nullptr;
-#endif
-    m_stdButtonSizer = nullptr;
-////@end wxSymbolPickerDialog member initialisation
-    m_dontUpdate = false;
 }
 
 /*!
@@ -759,17 +730,6 @@ wxIMPLEMENT_ABSTRACT_CLASS(wxSymbolListCtrl, wxVScrolledWindow);
 // wxSymbolListCtrl creation
 // ----------------------------------------------------------------------------
 
-void wxSymbolListCtrl::Init()
-{
-    m_current = wxNOT_FOUND;
-    m_doubleBuffer = nullptr;
-    m_cellSize = wxSize(40, 40);
-    m_minSymbolValue = 0;
-    m_maxSymbolValue = 255;
-    m_symbolsPerLine = 0;
-    m_unicodeMode = false;
-}
-
 bool wxSymbolListCtrl::Create(wxWindow *parent,
                         wxWindowID id,
                         const wxPoint& pos,
@@ -800,11 +760,6 @@ bool wxSymbolListCtrl::Create(wxWindow *parent,
     SetInitialSize(size);
 
     return true;
-}
-
-wxSymbolListCtrl::~wxSymbolListCtrl()
-{
-    delete m_doubleBuffer;
 }
 
 // ----------------------------------------------------------------------------
@@ -965,8 +920,7 @@ void wxSymbolListCtrl::OnPaint(wxPaintEvent& WXUNUSED(event))
          clientSize.x > m_doubleBuffer->GetWidth() ||
          clientSize.y > m_doubleBuffer->GetHeight() )
     {
-        delete m_doubleBuffer;
-        m_doubleBuffer = new wxBitmap(wxSize{clientSize.x + 25, clientSize.y + 25});
+        m_doubleBuffer = std::make_unique<wxBitmap>(wxSize{clientSize.x + 25, clientSize.y + 25});
     }
 
     wxBufferedPaintDC dc(this,*m_doubleBuffer);

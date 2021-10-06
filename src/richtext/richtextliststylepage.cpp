@@ -101,14 +101,8 @@ IMPLEMENT_HELP_PROVISION(wxRichTextListStylePage)
  * wxRichTextListStylePage constructors
  */
 
-wxRichTextListStylePage::wxRichTextListStylePage( )
-{
-    Init();
-}
-
 wxRichTextListStylePage::wxRichTextListStylePage( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size, unsigned int style )
 {
-    Init();
     Create(parent, id, pos, size, style);
 }
 
@@ -129,40 +123,6 @@ bool wxRichTextListStylePage::Create( wxWindow* parent, wxWindowID id, const wxP
     Centre();
 ////@end wxRichTextListStylePage creation
     return true;
-}
-
-/*!
- * Member initialisation
- */
-
-void wxRichTextListStylePage::Init()
-{
-    m_dontUpdate = false;
-    m_currentLevel = 1;
-
-////@begin wxRichTextListStylePage member initialisation
-    m_levelCtrl = nullptr;
-    m_styleListBox = nullptr;
-    m_periodCtrl = nullptr;
-    m_parenthesesCtrl = nullptr;
-    m_rightParenthesisCtrl = nullptr;
-    m_bulletAlignmentCtrl = nullptr;
-    m_symbolCtrl = nullptr;
-    m_symbolFontCtrl = nullptr;
-    m_bulletNameCtrl = nullptr;
-    m_alignmentLeft = nullptr;
-    m_alignmentRight = nullptr;
-    m_alignmentJustified = nullptr;
-    m_alignmentCentred = nullptr;
-    m_alignmentIndeterminate = nullptr;
-    m_indentLeft = nullptr;
-    m_indentLeftFirst = nullptr;
-    m_indentRight = nullptr;
-    m_spacingBefore = nullptr;
-    m_spacingAfter = nullptr;
-    m_spacingLine = nullptr;
-    m_previewCtrl = nullptr;
-////@end wxRichTextListStylePage member initialisation
 }
 
 /*!

@@ -43,46 +43,9 @@ wxEND_EVENT_TABLE()
 
 IMPLEMENT_HELP_PROVISION(wxRichTextIndentsSpacingPage)
 
-/*!
- * wxRichTextIndentsSpacingPage constructors
- */
-
-wxRichTextIndentsSpacingPage::wxRichTextIndentsSpacingPage( )
-{
-    Init();
-}
-
 wxRichTextIndentsSpacingPage::wxRichTextIndentsSpacingPage( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size, unsigned int style )
 {
-    Init();
     Create(parent, id, pos, size, style);
-}
-
-/*!
- * Initialise members
- */
-
-void wxRichTextIndentsSpacingPage::Init()
-{
-    m_dontUpdate = false;
-
-////@begin wxRichTextIndentsSpacingPage member initialisation
-    m_alignmentLeft = nullptr;
-    m_alignmentRight = nullptr;
-    m_alignmentJustified = nullptr;
-    m_alignmentCentred = nullptr;
-    m_alignmentIndeterminate = nullptr;
-    m_indentLeft = nullptr;
-    m_indentLeftFirst = nullptr;
-    m_indentRight = nullptr;
-    m_outlineLevelCtrl = nullptr;
-    m_spacingBefore = nullptr;
-    m_spacingAfter = nullptr;
-    m_spacingLine = nullptr;
-    m_pageBreakCtrl = nullptr;
-    m_previewCtrl = nullptr;
-////@end wxRichTextIndentsSpacingPage member initialisation
-
 }
 
 /*!

@@ -54,17 +54,11 @@ class WXDLLIMPEXP_RICHTEXT wxRichTextBordersPage: public wxRichTextDialogPage
 
 public:
     /// Constructors
-    wxRichTextBordersPage();
+    wxRichTextBordersPage() = default;
     wxRichTextBordersPage( wxWindow* parent, wxWindowID id = SYMBOL_WXRICHTEXTBORDERSPAGE_IDNAME, const wxPoint& pos = SYMBOL_WXRICHTEXTBORDERSPAGE_POSITION, const wxSize& size = SYMBOL_WXRICHTEXTBORDERSPAGE_SIZE, unsigned int style = SYMBOL_WXRICHTEXTBORDERSPAGE_STYLE );
 
     /// Creation
     bool Create( wxWindow* parent, wxWindowID id = SYMBOL_WXRICHTEXTBORDERSPAGE_IDNAME, const wxPoint& pos = SYMBOL_WXRICHTEXTBORDERSPAGE_POSITION, const wxSize& size = SYMBOL_WXRICHTEXTBORDERSPAGE_SIZE, unsigned int style = SYMBOL_WXRICHTEXTBORDERSPAGE_STYLE );
-
-    /// Destructor
-    ~wxRichTextBordersPage();
-
-    /// Initialises member variables
-    void Init();
 
     /// Creates the controls and sizers
     void CreateControls();
@@ -176,52 +170,56 @@ public:
     static bool ShowToolTips();
 
 ////@begin wxRichTextBordersPage member variables
-    wxCheckBox* m_leftBorderCheckbox;
-    wxTextCtrl* m_leftBorderWidth;
-    wxComboBox* m_leftBorderWidthUnits;
-    wxComboBox* m_leftBorderStyle;
-    wxRichTextColourSwatchCtrl* m_leftBorderColour;
-    wxCheckBox* m_rightBorderCheckbox;
-    wxTextCtrl* m_rightBorderWidth;
-    wxComboBox* m_rightBorderWidthUnits;
-    wxComboBox* m_rightBorderStyle;
-    wxRichTextColourSwatchCtrl* m_rightBorderColour;
-    wxCheckBox* m_topBorderCheckbox;
-    wxTextCtrl* m_topBorderWidth;
-    wxComboBox* m_topBorderWidthUnits;
-    wxComboBox* m_topBorderStyle;
-    wxRichTextColourSwatchCtrl* m_topBorderColour;
-    wxCheckBox* m_bottomBorderCheckbox;
-    wxTextCtrl* m_bottomBorderWidth;
-    wxComboBox* m_bottomBorderWidthUnits;
-    wxComboBox* m_bottomBorderStyle;
-    wxRichTextColourSwatchCtrl* m_bottomBorderColour;
-    wxCheckBox* m_borderSyncCtrl;
-    wxCheckBox* m_leftOutlineCheckbox;
-    wxTextCtrl* m_leftOutlineWidth;
-    wxComboBox* m_leftOutlineWidthUnits;
-    wxComboBox* m_leftOutlineStyle;
-    wxRichTextColourSwatchCtrl* m_leftOutlineColour;
-    wxCheckBox* m_rightOutlineCheckbox;
-    wxTextCtrl* m_rightOutlineWidth;
-    wxComboBox* m_rightOutlineWidthUnits;
-    wxComboBox* m_rightOutlineStyle;
-    wxRichTextColourSwatchCtrl* m_rightOutlineColour;
-    wxCheckBox* m_topOutlineCheckbox;
-    wxTextCtrl* m_topOutlineWidth;
-    wxComboBox* m_topOutlineWidthUnits;
-    wxComboBox* m_topOutlineStyle;
-    wxRichTextColourSwatchCtrl* m_topOutlineColour;
-    wxCheckBox* m_bottomOutlineCheckbox;
-    wxTextCtrl* m_bottomOutlineWidth;
-    wxComboBox* m_bottomOutlineWidthUnits;
-    wxComboBox* m_bottomOutlineStyle;
-    wxRichTextColourSwatchCtrl* m_bottomOutlineColour;
-    wxCheckBox* m_outlineSyncCtrl;
-    wxCheckBox* m_cornerRadiusCheckBox;
-    wxTextCtrl* m_cornerRadiusText;
-    wxComboBox* m_cornerRadiusUnits;
-    wxRichTextBorderPreviewCtrl* m_borderPreviewCtrl;
+
+    std::vector<int> m_borderStyles;
+    std::vector<std::string> m_borderStyleNames;
+
+    wxCheckBox* m_leftBorderCheckbox{nullptr};
+    wxTextCtrl* m_leftBorderWidth{nullptr};
+    wxComboBox* m_leftBorderWidthUnits{nullptr};
+    wxComboBox* m_leftBorderStyle{nullptr};
+    wxRichTextColourSwatchCtrl* m_leftBorderColour{nullptr};
+    wxCheckBox* m_rightBorderCheckbox{nullptr};
+    wxTextCtrl* m_rightBorderWidth{nullptr};
+    wxComboBox* m_rightBorderWidthUnits{nullptr};
+    wxComboBox* m_rightBorderStyle{nullptr};
+    wxRichTextColourSwatchCtrl* m_rightBorderColour{nullptr};
+    wxCheckBox* m_topBorderCheckbox{nullptr};
+    wxTextCtrl* m_topBorderWidth{nullptr};
+    wxComboBox* m_topBorderWidthUnits{nullptr};
+    wxComboBox* m_topBorderStyle{nullptr};
+    wxRichTextColourSwatchCtrl* m_topBorderColour{nullptr};
+    wxCheckBox* m_bottomBorderCheckbox{nullptr};
+    wxTextCtrl* m_bottomBorderWidth{nullptr};
+    wxComboBox* m_bottomBorderWidthUnits{nullptr};
+    wxComboBox* m_bottomBorderStyle{nullptr};
+    wxRichTextColourSwatchCtrl* m_bottomBorderColour{nullptr};
+    wxCheckBox* m_borderSyncCtrl{nullptr};
+    wxCheckBox* m_leftOutlineCheckbox{nullptr};
+    wxTextCtrl* m_leftOutlineWidth{nullptr};
+    wxComboBox* m_leftOutlineWidthUnits{nullptr};
+    wxComboBox* m_leftOutlineStyle{nullptr};
+    wxRichTextColourSwatchCtrl* m_leftOutlineColour{nullptr};
+    wxCheckBox* m_rightOutlineCheckbox{nullptr};
+    wxTextCtrl* m_rightOutlineWidth{nullptr};
+    wxComboBox* m_rightOutlineWidthUnits{nullptr};
+    wxComboBox* m_rightOutlineStyle{nullptr};
+    wxRichTextColourSwatchCtrl* m_rightOutlineColour{nullptr};
+    wxCheckBox* m_topOutlineCheckbox{nullptr};
+    wxTextCtrl* m_topOutlineWidth{nullptr};
+    wxComboBox* m_topOutlineWidthUnits{nullptr};
+    wxComboBox* m_topOutlineStyle{nullptr};
+    wxRichTextColourSwatchCtrl* m_topOutlineColour{nullptr};
+    wxCheckBox* m_bottomOutlineCheckbox{nullptr};
+    wxTextCtrl* m_bottomOutlineWidth{nullptr};
+    wxComboBox* m_bottomOutlineWidthUnits{nullptr};
+    wxComboBox* m_bottomOutlineStyle{nullptr};
+    wxRichTextColourSwatchCtrl* m_bottomOutlineColour{nullptr};
+    wxCheckBox* m_outlineSyncCtrl{nullptr};
+    wxCheckBox* m_cornerRadiusCheckBox{nullptr};
+    wxTextCtrl* m_cornerRadiusText{nullptr};
+    wxComboBox* m_cornerRadiusUnits{nullptr};
+    wxRichTextBorderPreviewCtrl* m_borderPreviewCtrl{nullptr};
     /// Control identifiers
     enum {
         ID_RICHTEXTBORDERSPAGE = 10800,
@@ -276,11 +274,10 @@ public:
         ID_RICHTEXTBORDERSPAGE_CORNER_UNITS = 10850,
         ID_RICHTEXT_BORDER_PREVIEW = 10844
     };
-////@end wxRichTextBordersPage member variables
 
-    std::vector<int> m_borderStyles;
-    std::vector<std::string> m_borderStyleNames;
-    bool m_ignoreUpdates;
+    bool m_ignoreUpdates{false};
+    
+    ////@end wxRichTextBordersPage member variables
 };
 
 class WXDLLIMPEXP_RICHTEXT wxRichTextBorderPreviewCtrl : public wxWindow
