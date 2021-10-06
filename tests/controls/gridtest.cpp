@@ -341,13 +341,13 @@ protected:
 
     // Temporary/scratch grid filled with expected content, used when
     // comparing against m_grid.
-    std::unique_ptr<TestableGrid> m_tempGrid;
+    std::unique_ptr<TestableGrid> m_tempGrid{};
 
     GridTestCase(const GridTestCase&) = delete;
     GridTestCase& operator=(const GridTestCase&) = delete;
 };
 
-GridTestCase::GridTestCase() : m_tempGrid(nullptr)
+GridTestCase::GridTestCase()
 {
     m_grid = std::make_unique<TestableGrid>(wxTheApp->GetTopWindow());
     m_grid->CreateGrid(10, 2);
@@ -377,44 +377,10 @@ GridTestCase::~GridTestCase()
         win->ReleaseMouse();
 }
 
-TEST_CASE_FIXTURE(GridTestCase, "Grid::CellEdit")
-{
-    // TODO on OSX when running the grid test suite solo this works
-    // but not when running it together with other tests
-#if wxUSE_UIACTIONSIMULATOR && !defined(__WXOSX__)
-    if ( !EnableUITests() )
-        return;
-
-    EventCounter changing(m_grid.get(), wxEVT_GRID_CELL_CHANGING);
-    EventCounter changed(m_grid.get(), wxEVT_GRID_CELL_CHANGED);
-    EventCounter created(m_grid.get(), wxEVT_GRID_EDITOR_CREATED);
-
-    wxUIActionSimulator sim;
-
-    m_grid->SetFocus();
-    m_grid->SetGridCursor(1, 1);
-
-    wxYield();
-
-    sim.Text("cbab");
-
-    wxYield();
-
-    sim.Char(WXK_RETURN);
-
-    wxYield();
-
-    CHECK(m_grid->GetCellValue(1, 1) == "cbab");
-
-    CHECK(created.GetCount() == 1);
-    CHECK(changing.GetCount() == 1);
-    CHECK(changed.GetCount() == 1);
-#endif
-}
+#if wxUSE_UIACTIONSIMULATOR
 
 TEST_CASE_FIXTURE(GridTestCase, "Grid::CellClick")
 {
-#if wxUSE_UIACTIONSIMULATOR
     EventCounter lclick(m_grid.get(), wxEVT_GRID_CELL_LEFT_CLICK);
     EventCounter ldclick(m_grid.get(), wxEVT_GRID_CELL_LEFT_DCLICK);
     EventCounter rclick(m_grid.get(), wxEVT_GRID_CELL_RIGHT_CLICK);
@@ -457,8 +423,8 @@ TEST_CASE_FIXTURE(GridTestCase, "Grid::CellClick")
 
     CHECK(rclick.GetCount() == 1);
     CHECK(rdclick.GetCount() == 1);
-#endif
 }
+#endif
 
 TEST_CASE_FIXTURE(GridTestCase, "Grid::ReorderedColumnsCellClick")
 {
@@ -486,6 +452,40 @@ TEST_CASE_FIXTURE(GridTestCase, "Grid::ReorderedColumnsCellClick")
     CHECK(click.GetCount() == 1);
 #endif
 }
+
+#if wxUSE_UIACTIONSIMULATOR && !defined(__WXOSX__)
+TEST_CASE_FIXTURE(GridTestCase, "Grid::CellEdit")
+{
+    // TODO on OSX when running the grid test suite solo this works
+    // but not when running it together with other tests
+    if (!EnableUITests())
+        return;
+
+    EventCounter changing(m_grid.get(), wxEVT_GRID_CELL_CHANGING);
+    EventCounter changed(m_grid.get(), wxEVT_GRID_CELL_CHANGED);
+    EventCounter created(m_grid.get(), wxEVT_GRID_EDITOR_CREATED);
+
+    wxUIActionSimulator sim;
+
+    m_grid->SetFocus();
+    m_grid->SetGridCursor(1, 1);
+    m_grid->EnableCellEditControl();
+
+    sim.Text("cbab");
+
+    wxYield();
+
+    sim.Char(WXK_RETURN);
+
+    wxYield();
+
+    CHECK(m_grid->GetCellValue(1 , 1) == "cbab");
+
+    CHECK(created.GetCount() == 1);
+    CHECK(changing.GetCount() == 1);
+    CHECK(changed.GetCount() == 1);
+}
+#endif
 
 TEST_CASE_FIXTURE(GridTestCase, "Grid::CellSelect")
 {

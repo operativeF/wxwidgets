@@ -122,7 +122,7 @@ std::string WXDLLEXPORT wxGetWindowText(WXHWND hWnd)
     {
         std::wstring windowText;
 
-        const int len = GetWindowTextLengthW((HWND)hWnd) + 1;
+        const int len = ::GetWindowTextLengthW((HWND)hWnd) + 1;
 
         windowText.resize(len);
 
@@ -134,7 +134,7 @@ std::string WXDLLEXPORT wxGetWindowText(WXHWND hWnd)
         return boost::nowide::narrow(windowText);
     }
 
-    return "";
+    return {};
 }
 
 wxString WXDLLEXPORT wxGetWindowClass(WXHWND hWnd)

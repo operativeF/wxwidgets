@@ -81,7 +81,7 @@ bool wxUIActionSimulatorMSWImpl::MouseDown(int button)
     // FIXME: Return cursor pos
     POINT p;
     wxGetCursorPosMSW(&p);
-    mouse_event(EventTypeForMouseButton(button, true), p.x, p.y, 0, 0);
+    ::mouse_event(EventTypeForMouseButton(button, true), p.x, p.y, 0, 0);
     return true;
 }
 
@@ -96,7 +96,7 @@ bool wxUIActionSimulatorMSWImpl::MouseMove(long x, long y)
     // size, so there is no danger of overflow.
     DWORD scaledx = static_cast<DWORD>(std::ceil(x * 65535.0 / (displayx-1)));
     DWORD scaledy = static_cast<DWORD>(std::ceil(y * 65535.0 / (displayy-1)));
-    mouse_event(MOUSEEVENTF_ABSOLUTE | MOUSEEVENTF_MOVE, scaledx, scaledy, 0, 0);
+    ::mouse_event(MOUSEEVENTF_ABSOLUTE | MOUSEEVENTF_MOVE, scaledx, scaledy, 0, 0);
 
     return true;
 }
@@ -122,7 +122,7 @@ wxUIActionSimulatorMSWImpl::DoKey(int keycode, int WXUNUSED(modifiers), bool isD
     if ( !isDown )
         flags |= KEYEVENTF_KEYUP;
 
-    keybd_event(vkkeycode, 0, flags, 0);
+    ::keybd_event(vkkeycode, 0, flags, 0);
 
     return true;
 }
