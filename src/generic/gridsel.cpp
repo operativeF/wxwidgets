@@ -777,7 +777,7 @@ std::vector<int> wxGridSelection::GetRowSelection() const
 {
     if ( m_selectionMode == wxGrid::wxGridSelectColumns ||
             m_selectionMode == wxGrid::wxGridSelectNone )
-        return std::vector<int>();
+        return {};
 
     wxIntSortedArray uniqueRows;
     const size_t count = m_selection.size();
@@ -809,7 +809,7 @@ std::vector<int> wxGridSelection::GetColSelection() const
 {
     if ( m_selectionMode == wxGrid::wxGridSelectRows ||
             m_selectionMode == wxGrid::wxGridSelectNone )
-        return std::vector<int>();
+        return {};
 
     wxIntSortedArray uniqueCols;
     const size_t count = m_selection.size();
@@ -833,6 +833,7 @@ std::vector<int> wxGridSelection::GetColSelection() const
     {
         result.push_back(uniqueCols[i]);
     }
+
     return result;
 }
 

@@ -875,8 +875,8 @@ TEST_CASE_FIXTURE(GridTestCase, "Grid::SelectEmptyGrid")
     CHECK( m_grid->GetSelectedCells().Count() == 0 );
     CHECK( m_grid->GetSelectionBlockTopLeft().Count() == 0 );
     CHECK( m_grid->GetSelectionBlockBottomRight().Count() == 0 );
-    CHECK( m_grid->GetSelectedRows().size() == 0 );
-    CHECK( m_grid->GetSelectedCols().size() == 0 );
+    CHECK( m_grid->GetSelectedRows().empty());
+    CHECK( m_grid->GetSelectedCols().empty());
 }
 
 TEST_CASE_FIXTURE(GridTestCase, "Grid::ScrollWhenSelect")

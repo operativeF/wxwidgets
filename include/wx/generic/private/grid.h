@@ -53,8 +53,8 @@ public:
     int GetMinWidth() const override { return m_grid->GetColMinimalWidth(m_col); }
     wxAlignment GetAlignment() const override
     {
-        int horz,
-            vert;
+        int horz;
+        int vert;
         m_grid->GetColLabelAlignment(&horz, &vert);
 
         return static_cast<wxAlignment>(horz);
@@ -105,8 +105,10 @@ public:
                        (owner->CanHideColumns() ? wxHD_ALLOW_HIDE : 0) |
                        (owner->CanDragColMove() ? wxHD_ALLOW_REORDER : 0))
     {
-        m_inResizing = 0;
     }
+
+    wxGridHeaderCtrl(const wxGridHeaderCtrl&) = delete;
+	wxGridHeaderCtrl& operator=(const wxGridHeaderCtrl&) = delete;
 
     // Special method to call from wxGrid::DoSetColSize(), see comments there.
     void UpdateIfNotResizing(unsigned int idx)
@@ -256,11 +258,9 @@ private:
     std::vector<wxGridHeaderColumn> m_columns;
 
     // The count of OnResizing() call nesting, 0 if not inside it.
-    int m_inResizing;
+    int m_inResizing{};
 
     wxDECLARE_EVENT_TABLE();
-    wxGridHeaderCtrl(const wxGridHeaderCtrl&) = delete;
-	wxGridHeaderCtrl& operator=(const wxGridHeaderCtrl&) = delete;
 };
 
 // common base class for various grid subwindows
@@ -273,10 +273,13 @@ public:
         : wxWindow(owner, wxID_ANY,
                    wxDefaultPosition, wxDefaultSize,
                    wxBORDER_NONE | additionalStyle,
-                   name)
+                   name),
+          m_owner{owner}
     {
-        m_owner = owner;
     }
+
+    wxGridSubwindow(const wxGridSubwindow&) = delete;
+	wxGridSubwindow& operator=(const wxGridSubwindow&) = delete;
 
     wxWindow *GetMainWindowOfCompositeControl() override { return m_owner; }
 
@@ -290,8 +293,6 @@ protected:
     wxGrid *m_owner;
 
     wxDECLARE_EVENT_TABLE();
-    wxGridSubwindow(const wxGridSubwindow&) = delete;
-	wxGridSubwindow& operator=(const wxGridSubwindow&) = delete;
 };
 
 class WXDLLIMPEXP_CORE wxGridRowLabelWindow : public wxGridSubwindow
@@ -302,6 +303,9 @@ public:
     {
     }
 
+    wxGridRowLabelWindow(const wxGridRowLabelWindow&) = delete;
+	wxGridRowLabelWindow& operator=(const wxGridRowLabelWindow&) = delete;
+
     virtual bool IsFrozen() const { return false; }
 
 private:
@@ -310,8 +314,6 @@ private:
     void OnMouseWheel( wxMouseEvent& event );
 
     wxDECLARE_EVENT_TABLE();
-    wxGridRowLabelWindow(const wxGridRowLabelWindow&) = delete;
-	wxGridRowLabelWindow& operator=(const wxGridRowLabelWindow&) = delete;
 };
 
 
@@ -335,6 +337,9 @@ public:
     {
     }
 
+    wxGridColLabelWindow(const wxGridColLabelWindow&) = delete;
+	wxGridColLabelWindow& operator=(const wxGridColLabelWindow&) = delete;
+
     virtual bool IsFrozen() const { return false; }
 
 private:
@@ -343,8 +348,6 @@ private:
     void OnMouseWheel( wxMouseEvent& event );
 
     wxDECLARE_EVENT_TABLE();
-    wxGridColLabelWindow(const wxGridColLabelWindow&) = delete;
-	wxGridColLabelWindow& operator=(const wxGridColLabelWindow&) = delete;
 };
 
 
@@ -368,14 +371,15 @@ public:
     {
     }
 
+    wxGridCornerLabelWindow(const wxGridCornerLabelWindow&) = delete;
+	wxGridCornerLabelWindow& operator=(const wxGridCornerLabelWindow&) = delete;
+
 private:
     void OnMouseEvent( wxMouseEvent& event );
     void OnMouseWheel( wxMouseEvent& event );
     void OnPaint( wxPaintEvent& event );
 
     wxDECLARE_EVENT_TABLE();
-    wxGridCornerLabelWindow(const wxGridCornerLabelWindow&) = delete;
-	wxGridCornerLabelWindow& operator=(const wxGridCornerLabelWindow&) = delete;
 };
 
 class WXDLLIMPEXP_CORE wxGridWindow : public wxGridSubwindow
@@ -395,11 +399,13 @@ public:
         : wxGridSubwindow(parent,
                           wxWANTS_CHARS | wxCLIP_CHILDREN,
                           "GridWindow"),
-          m_type(type)
+          m_type{type}
     {
         SetBackgroundStyle(wxBG_STYLE_PAINT);
     }
 
+    wxGridWindow(const wxGridWindow&) = delete;
+	wxGridWindow& operator=(const wxGridWindow&) = delete;
 
     void ScrollWindow( int dx, int dy, const wxRect *rect ) override;
 
@@ -419,8 +425,6 @@ private:
     void OnFocus( wxFocusEvent& );
 
     wxDECLARE_EVENT_TABLE();
-    wxGridWindow(const wxGridWindow&) = delete;
-	wxGridWindow& operator=(const wxGridWindow&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -464,12 +468,11 @@ private:
 
 // NB: this is just a wrapper around 3 objects: one which stores cell
 //     attributes, and 2 others for row/col ones
-class WXDLLIMPEXP_CORE wxGridCellAttrProviderData
+struct WXDLLIMPEXP_CORE wxGridCellAttrProviderData
 {
-public:
-    wxGridCellAttrData m_cellAttrs;
-    wxGridRowOrColAttrData m_rowAttrs,
-                           m_colAttrs;
+    wxGridCellAttrData     m_cellAttrs;
+    wxGridRowOrColAttrData m_rowAttrs;
+    wxGridRowOrColAttrData m_colAttrs;
 };
 
 // ----------------------------------------------------------------------------
@@ -791,8 +794,8 @@ class wxGridDirectionOperations
 public:
     // The oper parameter to ctor selects whether we work with rows or columns
     wxGridDirectionOperations(wxGrid *grid, const wxGridOperations& oper)
-        : m_grid(grid),
-          m_oper(oper)
+        : m_grid{grid},
+          m_oper{oper}
     {
     }
 
@@ -867,7 +870,6 @@ protected:
     {
         return m_oper.GetLineSize(m_grid, line) != 0;
     }
-
 
     wxGrid * const m_grid;
     const wxGridOperations& m_oper;
@@ -996,12 +998,12 @@ struct wxGridDataTypeInfo
         wxSafeDecRef(m_editor);
     }
 
-    std::string            m_typeName;
-    wxGridCellRenderer* m_renderer;
-    wxGridCellEditor*   m_editor;
-
     wxGridDataTypeInfo(const wxGridDataTypeInfo&) = delete;
 	wxGridDataTypeInfo& operator=(const wxGridDataTypeInfo&) = delete;
+
+    std::string         m_typeName;
+    wxGridCellRenderer* m_renderer;
+    wxGridCellEditor*   m_editor;
 };
 
 
