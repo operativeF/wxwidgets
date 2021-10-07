@@ -10,7 +10,7 @@
 #ifndef _WX_PRIVATE_REFCOUNTERMT_H_
 #define _WX_PRIVATE_REFCOUNTERMT_H_
 
-#include "wx/atomic.h"
+#include <atomic>
 
 // ----------------------------------------------------------------------------
 // Version of wxRefCounter with MT-safe count
@@ -19,25 +19,24 @@
 class wxRefCounterMT
 {
 public:
-    wxRefCounterMT() { m_count = 1; }
+    wxRefCounterMT() = default;
 
-    void IncRef() { wxAtomicInc(m_count); }
+    void IncRef() { ++m_count; }
     void DecRef()
     {
-        if ( wxAtomicDec(m_count) == 0 )
+        if ( (--m_count) == 0 )
             delete this;
     }
 
+    wxRefCounterMT(const wxRefCounterMT&) = delete;
+	wxRefCounterMT& operator=(const wxRefCounterMT&) = delete;
 protected:
     virtual ~wxRefCounterMT() = default;
 
 private:
     // Ref count is atomic to allow IncRef() and DecRef() to be concurrently
     // called from different threads.
-    wxAtomicInt m_count;
-
-    wxRefCounterMT(const wxRefCounterMT&) = delete;
-	wxRefCounterMT& operator=(const wxRefCounterMT&) = delete;
+    std::atomic_int m_count{1};
 };
 
 #endif // _WX_PRIVATE_REFCOUNTERMT_H_

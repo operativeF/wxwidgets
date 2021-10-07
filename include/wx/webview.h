@@ -16,7 +16,6 @@
 #include "wx/control.h"
 #include "wx/event.h"
 #include "wx/sstream.h"
-#include "wx/sharedptr.h"
 #include "wx/versioninfo.h"
 
 #if defined(__WXOSX__)

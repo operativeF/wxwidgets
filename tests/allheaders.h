@@ -32,7 +32,6 @@
 #include <wx/archive.h>
 #include <wx/arrstr.h>
 #include <wx/artprov.h>
-#include <wx/atomic.h>
 #include <wx/bannerwindow.h>
 #include <wx/base64.h>
 #include <wx/bitmap.h>
@@ -266,7 +265,6 @@
 #include <wx/progdlg.h>
 #include <wx/propdlg.h>
 #include <wx/ptr_scpd.h>
-#include <wx/ptr_shrd.h>
 #include <wx/quantize.h>
 #include <wx/radiobox.h>
 #include <wx/radiobut.h>
@@ -291,7 +289,6 @@
 #include <wx/secretstore.h>
 #include <wx/selstore.h>
 #include <wx/settings.h>
-#include <wx/sharedptr.h>
 #include <wx/simplebook.h>
 #include <wx/geometry/size.h>
 #include <wx/sizer.h>

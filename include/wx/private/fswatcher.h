@@ -10,8 +10,6 @@
 #ifndef WX_PRIVATE_FSWATCHER_H_
 #define WX_PRIVATE_FSWATCHER_H_
 
-#include "wx/sharedptr.h"
-
 #ifdef wxHAS_INOTIFY
     class wxFSWatchEntryUnix;
     #define wxFSWatchEntry wxFSWatchEntryUnix

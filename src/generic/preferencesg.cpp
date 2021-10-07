@@ -26,8 +26,6 @@
 
 #include "wx/notebook.h"
 #include "wx/sizer.h"
-#include "wx/sharedptr.h"
-
 #include "wx/scopeguard.h"
 
 namespace

@@ -17,7 +17,8 @@
 #endif
 
 #include "wx/power.h"
-#include "wx/atomic.h"
+
+#include <atomic>
 
 // ----------------------------------------------------------------------------
 // wxPowerResource
@@ -26,8 +27,8 @@
 namespace
 {
 
-wxAtomicInt g_powerResourceScreenRefCount = 0;
-wxAtomicInt g_powerResourceSystemRefCount = 0;
+std::atomic_int g_powerResourceScreenRefCount{};
+std::atomic_int g_powerResourceSystemRefCount{};
 
 bool UpdatePowerResourceExecutionState()
 {
@@ -56,11 +57,11 @@ wxPowerResource::Acquire(wxPowerResourceKind kind,
     switch ( kind )
     {
         case wxPOWER_RESOURCE_SCREEN:
-            wxAtomicInc(g_powerResourceScreenRefCount);
+            ++g_powerResourceScreenRefCount;
             break;
 
         case wxPOWER_RESOURCE_SYSTEM:
-            wxAtomicInc(g_powerResourceSystemRefCount);
+            ++g_powerResourceSystemRefCount;
             break;
     }
 
@@ -74,7 +75,7 @@ void wxPowerResource::Release(wxPowerResourceKind kind)
         case wxPOWER_RESOURCE_SCREEN:
             if ( g_powerResourceScreenRefCount > 0 )
             {
-                wxAtomicDec(g_powerResourceScreenRefCount);
+                --g_powerResourceScreenRefCount;
             }
             else
             {
@@ -85,7 +86,7 @@ void wxPowerResource::Release(wxPowerResourceKind kind)
         case wxPOWER_RESOURCE_SYSTEM:
             if ( g_powerResourceSystemRefCount > 0 )
             {
-                wxAtomicDec(g_powerResourceSystemRefCount);
+                --g_powerResourceSystemRefCount;
             }
             else
             {

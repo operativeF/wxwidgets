@@ -22,7 +22,6 @@
 
 #include "wx/tls.h"
 #include "wx/thread.h"
-#include "wx/sharedptr.h"
 
 namespace
 {
