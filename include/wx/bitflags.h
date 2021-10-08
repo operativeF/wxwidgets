@@ -86,6 +86,12 @@ public:
         m_fields |= bitmask(e);
     }
 
+    template<typename... Enums> requires(BitfieldCompatible<Enums> && ...)
+    constexpr void set(const Enums&... es) noexcept
+    {
+        m_fields |= (bitmask(es), ...);
+    }
+
     constexpr void reset(const Enum& e) noexcept
     {
         m_fields &= ~bitmask(e);

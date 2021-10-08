@@ -1,9 +1,9 @@
 ///////////////////////////////////////////////////////////////////////////////
-// Name:        tests/misc/environ.cpp
-// Purpose:     Test wxGet/SetEnv
-// Author:      Francesco Montorsi (extracted from console sample)
-// Created:     2010-06-13
-// Copyright:   (c) 2010 wxWidgets team
+// Name:        tests/misc/bitflagstest.cpp
+// Purpose:     Test Bitfield class
+// Author:      Thomas Figueroa
+// Created:     2021-10-07
+// Copyright:   (c) 2021 Thomas Figueroa
 ///////////////////////////////////////////////////////////////////////////////
 
 #include "doctest.h"
@@ -102,7 +102,7 @@ TEST_CASE("Bitflags")
             styles |= Styles::Bold;
             styles |= Styles::Strikethrough;
 
-            CHECK(styles.as_value() == (StyleFlags::bitmask(Styles::Bold) | StyleFlags::bitmask(Styles::Strikethrough)));
+            CHECK(styles.as_value() == StyleFlags::bitmask(Styles::Bold, Styles::Strikethrough));
 
             styles.clear();
         }
@@ -112,11 +112,11 @@ TEST_CASE("Bitflags")
     {
         SUBCASE("& operator")
         {
-            styles |= Styles::Strikethrough;
+            styles.set(Styles::Strikethrough, Styles::Bold);
 
-            auto resultStyle = styles & Styles::Strikethrough & Styles::Bold;
+            auto resultStyle = styles & Styles::Bold;
 
-            CHECK(resultStyle.as_value() == (StyleFlags::bitmask(Styles::Strikethrough) | StyleFlags::bitmask(Styles::Bold)));
+            CHECK(resultStyle.as_value() == StyleFlags::bitmask(Styles::Bold));
         }
 
         SUBCASE("| operator")
