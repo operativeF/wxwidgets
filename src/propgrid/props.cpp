@@ -2297,7 +2297,7 @@ int wxPGArrayEditorDialog::GetSelection() const
 {
     wxListCtrl* lc = m_elb->GetListCtrl();
 
-    int index = lc->GetNextItem(-1, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED);
+    int index = lc->GetNextItem(-1, wxLIST_NEXT_ALL, ListStates::Selected);
     if ( index == -1 )
         return wxNOT_FOUND;
 

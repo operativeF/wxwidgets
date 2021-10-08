@@ -18,6 +18,7 @@
 #include "wx/control.h"
 #include "wx/itemattr.h"
 #include "wx/systhemectrl.h"
+#include "wx/bitflags.h"
 
 #include <vector>
 
@@ -71,39 +72,56 @@ constexpr unsigned int wxLC_USER_TEXT       = wxLC_VIRTUAL;
 // #define wxLC_OWNERDRAW_FIXED
 // #define wxLC_SHOW_SEL_ALWAYS
 
-// Mask flags to tell app/GUI what fields of wxListItem are valid
-constexpr unsigned int wxLIST_MASK_STATE           = 0x0001;
-constexpr unsigned int wxLIST_MASK_TEXT            = 0x0002;
-constexpr unsigned int wxLIST_MASK_IMAGE           = 0x0004;
-constexpr unsigned int wxLIST_MASK_DATA            = 0x0008;
-constexpr unsigned int wxLIST_SET_ITEM             = 0x0010;
-constexpr unsigned int wxLIST_MASK_WIDTH           = 0x0020;
-constexpr unsigned int wxLIST_MASK_FORMAT          = 0x0040;
+enum class ListMasks
+{
+    State,
+    Text,
+    Image,
+    Data,
+    SetItem,
+    Width,
+    Format,
+    _max_size
+};
 
-// State flags for indicating the state of an item
-constexpr unsigned int wxLIST_STATE_DONTCARE       = 0x0000;
-constexpr unsigned int wxLIST_STATE_DROPHILITED    = 0x0001;      // MSW only
-constexpr unsigned int wxLIST_STATE_FOCUSED        = 0x0002;
-constexpr unsigned int wxLIST_STATE_SELECTED       = 0x0004;
-constexpr unsigned int wxLIST_STATE_CUT            = 0x0008;      // MSW only
-constexpr unsigned int wxLIST_STATE_DISABLED       = 0x0010;      // Not used
-constexpr unsigned int wxLIST_STATE_FILTERED       = 0x0020;      // Not used
-constexpr unsigned int wxLIST_STATE_INUSE          = 0x0040;      // Not used
-constexpr unsigned int wxLIST_STATE_PICKED         = 0x0080;      // Not used
-constexpr unsigned int wxLIST_STATE_SOURCE         = 0x0100;      // Not used
+using ListMaskFlags = InclBitfield<ListMasks>;
+
+enum class ListStates
+{
+    Nil,
+#ifdef __WXMSW__
+    DropHiLited,
+#endif
+    Focused,
+    Selected,
+#ifdef __WXMSW__
+    Cut,
+#endif
+    Disabled,   // Unused
+    Filtered,   // Unused
+    InUse,      // Unused
+    Picked,     // Unused
+    Source,     // Unused
+    _max_size
+};
+
+using ListStateFlags = InclBitfield<ListStates>;
 
 // Hit test flags, used in HitTest
-constexpr unsigned int wxLIST_HITTEST_ABOVE            = 0x0001;  // Above the control's client area.
-constexpr unsigned int wxLIST_HITTEST_BELOW            = 0x0002;  // Below the control's client area.
-constexpr unsigned int wxLIST_HITTEST_NOWHERE          = 0x0004;  // Inside the control's client area but not over an item.
-constexpr unsigned int wxLIST_HITTEST_ONITEMICON       = 0x0020;  // Over an item's icon.
-constexpr unsigned int wxLIST_HITTEST_ONITEMLABEL      = 0x0080;  // Over an item's text.
-constexpr unsigned int wxLIST_HITTEST_ONITEMRIGHT      = 0x0100;  // Not used
-constexpr unsigned int wxLIST_HITTEST_ONITEMSTATEICON  = 0x0200;  // Over the checkbox of an item.
-constexpr unsigned int wxLIST_HITTEST_TOLEFT           = 0x0400;  // To the left of the control's client area.
-constexpr unsigned int wxLIST_HITTEST_TORIGHT          = 0x0800;  // To the right of the control's client area.
+enum class ListHitTest
+{
+    Above,              // Above the control's client area.
+    Below,              // Below the control's client area.
+    Nowhere,            // Inside the control's client area but not over an item.
+    OnItemIcon,         // Over an item's icon.
+    OnItemLabel,        // Over an item's text.
+    OnItemStateIcon,    // Over the checkbox of an item.
+    ToLeft,             // To the left of the control's client area.
+    ToRight,            // To the right of the control's client area.
+    _max_size
+};
 
-constexpr unsigned int wxLIST_HITTEST_ONITEM = wxLIST_HITTEST_ONITEMICON | wxLIST_HITTEST_ONITEMLABEL | wxLIST_HITTEST_ONITEMSTATEICON;
+using ListHitTestFlags = InclBitfield<ListHitTest>;
 
 // GetSubItemRect constants
 constexpr long wxLIST_GETSUBITEMRECT_WHOLEITEM = -1L;
@@ -217,11 +235,11 @@ public:
     // resetting
     void Clear()
     {
-        m_mask = 0;
+        m_mask.clear();
         m_itemId = -1;
         m_col = 0;
-        m_state = 0;
-        m_stateMask = 0;
+        m_state.clear();
+        m_stateMask.clear();
         m_image = -1;
         m_data = 0;
 
@@ -233,29 +251,29 @@ public:
     void ClearAttributes() { if ( m_attr ) { delete m_attr; m_attr = nullptr; } }
 
     // setters
-    void SetMask(unsigned int mask)
+    void SetMask(ListMaskFlags mask)
         { m_mask = mask; }
     void SetId(long id)
         { m_itemId = id; }
     void SetColumn(int col)
         { m_col = col; }
-    void SetState(unsigned int state)
-        { m_mask |= wxLIST_MASK_STATE; m_state = state; m_stateMask |= state; }
-    void SetStateMask(unsigned int stateMask)
+    void SetState(ListStateFlags state)
+        { m_mask |= ListMasks::State; m_state = state; m_stateMask |= state; }
+    void SetStateMask(ListStateFlags stateMask)
         { m_stateMask = stateMask; }
     void SetText(const wxString& text)
-        { m_mask |= wxLIST_MASK_TEXT; m_text = text; }
+        { m_mask |= ListMasks::Text; m_text = text; }
     void SetImage(int image)
-        { m_mask |= wxLIST_MASK_IMAGE; m_image = image; }
+        { m_mask |= ListMasks::Image; m_image = image; }
     void SetData(long data)
-        { m_mask |= wxLIST_MASK_DATA; m_data = data; }
+        { m_mask |= ListMasks::Data; m_data = data; }
     void SetData(void *data)
-        { m_mask |= wxLIST_MASK_DATA; m_data = wxPtrToUInt(data); }
+        { m_mask |= ListMasks::Data; m_data = wxPtrToUInt(data); }
 
     void SetWidth(int width)
-        { m_mask |= wxLIST_MASK_WIDTH; m_width = width; }
+        { m_mask |= ListMasks::Width; m_width = width; }
     void SetAlign(wxListColumnFormat align)
-        { m_mask |= wxLIST_MASK_FORMAT; m_format = align; }
+        { m_mask |= ListMasks::Format; m_format = align; }
 
     void SetTextColour(const wxColour& colText)
         { Attributes().SetTextColour(colText); }
@@ -264,10 +282,10 @@ public:
     void SetFont(const wxFont& font)
         { Attributes().SetFont(font); }
 
-    unsigned int GetMask() const { return m_mask; }
+    ListMaskFlags GetMask() const { return m_mask; }
     long GetId() const { return m_itemId; }
     int GetColumn() const { return m_col; }
-    unsigned int GetState() const { return m_state & m_stateMask; }
+    ListStateFlags GetState() const { return m_state & m_stateMask; }
     const wxString& GetText() const { return m_text; }
     int GetImage() const { return m_image; }
     wxUIntPtr GetData() const { return m_data; }
@@ -295,10 +313,10 @@ public:
 
     wxUIntPtr       m_data{0};     // App-defined data
 
-    unsigned int    m_mask{};     // Indicates what fields are valid
+    ListMaskFlags   m_mask{};     // Indicates what fields are valid
     long            m_itemId{-1};   // The zero-based item position
-    unsigned int    m_state{0};    // The state of the item
-    unsigned int    m_stateMask{};// Which flags of m_state are valid (uses same flags)
+    ListStateFlags  m_state{};    // The state of the item
+    ListStateFlags  m_stateMask{};// Which flags of m_state are valid (uses same flags)
     int             m_image{-1};    // The zero-based index into an image list
     int             m_col{0};      // Zero-based column, if in report mode
 
@@ -491,7 +509,7 @@ public:
     const wxString& GetText() const { return m_item.m_text; }
     int GetImage() const { return m_item.m_image; }
     wxUIntPtr GetData() const { return m_item.m_data; }
-    long GetMask() const { return m_item.m_mask; }
+    ListMaskFlags GetMask() const { return m_item.m_mask; }
     const wxListItem& GetItem() const { return m_item; }
 
     void SetKeyCode(int code) { m_code = code; }

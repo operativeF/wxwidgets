@@ -1091,7 +1091,7 @@ void wxListHeaderWindow::OnPaint( wxPaintEvent &WXUNUSED(event) )
 // other platforms, please go ahead and revise or remove the #ifdef.
 #ifdef __WXMAC__
         if ( !m_owner->IsVirtual() && (item.m_mask & wxLIST_MASK_STATE) &&
-                (item.m_state & wxLIST_STATE_SELECTED) )
+                (item.m_state & ListStates::Selected) )
             flags |= wxCONTROL_SELECTED;
 #endif
 
@@ -1310,9 +1310,9 @@ void wxListHeaderWindow::OnMouse( wxMouseEvent &event )
                         m_owner->GetColumn(i, colItem);
                         long state = colItem.GetState();
                         if (i == m_column)
-                            colItem.SetState(state | wxLIST_STATE_SELECTED);
+                            colItem.SetState(state | ListStates::Selected);
                         else
-                            colItem.SetState(state & ~wxLIST_STATE_SELECTED);
+                            colItem.SetState(state & ~ListStates::Selected);
                         m_owner->SetColumn(i, colItem);
                     }
                 }
@@ -3201,8 +3201,8 @@ void wxListMainWindow::OnChar( wxKeyEvent &event )
                     // Select the found item and go to it.
                     HighlightAll(false);
                     SetItemState(item,
-                                 wxLIST_STATE_FOCUSED | wxLIST_STATE_SELECTED,
-                                 wxLIST_STATE_FOCUSED | wxLIST_STATE_SELECTED);
+                                 ListStates::Focused | ListStates::Selected,
+                                 ListStates::Focused | ListStates::Selected);
                     EnsureVisible(item);
 
                     // Reset the bell flag if it had been temporarily disabled
@@ -3593,21 +3593,21 @@ void wxListMainWindow::SetItemStateAll(long state, long stateMask)
         return;
 
     // first deal with selection
-    if ( stateMask & wxLIST_STATE_SELECTED )
+    if ( stateMask & ListStates::Selected )
     {
         // set/clear select state
         if ( IsVirtual() )
         {
             // optimized version for virtual listctrl.
-            m_selStore.SelectRange(0, GetItemCount() - 1, state == wxLIST_STATE_SELECTED);
+            m_selStore.SelectRange(0, GetItemCount() - 1, state == ListStates::Selected);
             Refresh();
         }
-        else if ( state & wxLIST_STATE_SELECTED )
+        else if ( state & ListStates::Selected )
         {
             const long count = GetItemCount();
             for( long i = 0; i <  count; i++ )
             {
-                SetItemState( i, wxLIST_STATE_SELECTED, wxLIST_STATE_SELECTED );
+                SetItemState( i, ListStates::Selected, ListStates::Selected );
             }
 
         }
@@ -3615,14 +3615,14 @@ void wxListMainWindow::SetItemStateAll(long state, long stateMask)
         {
             // clear for non virtual (somewhat optimized by using GetNextItem())
             long i = -1;
-            while ( (i = GetNextItem(i, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED)) != -1 )
+            while ( (i = GetNextItem(i, wxLIST_NEXT_ALL, ListStates::Selected)) != -1 )
             {
-                SetItemState( i, 0, wxLIST_STATE_SELECTED );
+                SetItemState( i, 0, ListStates::Selected );
             }
         }
     }
 
-    if ( HasCurrent() && (state == 0) && (stateMask & wxLIST_STATE_FOCUSED) )
+    if ( HasCurrent() && (state == 0) && (stateMask & ListStates::Focused) )
     {
         // unfocus all: only one item can be focussed, so clearing focus for
         // all items is simply clearing focus of the focussed item.
@@ -3646,9 +3646,9 @@ void wxListMainWindow::SetItemState( long litem, long state, long stateMask )
     size_t item = (size_t)litem;    // safe because of the check above
 
     // do we need to change the focus?
-    if ( stateMask & wxLIST_STATE_FOCUSED )
+    if ( stateMask & ListStates::Focused )
     {
-        if ( state & wxLIST_STATE_FOCUSED )
+        if ( state & ListStates::Focused )
         {
             // don't do anything if this item is already focused
             if ( item != m_current )
@@ -3689,9 +3689,9 @@ void wxListMainWindow::SetItemState( long litem, long state, long stateMask )
     }
 
     // do we need to change the selection state?
-    if ( stateMask & wxLIST_STATE_SELECTED )
+    if ( stateMask & ListStates::Selected )
     {
-        bool on = (state & wxLIST_STATE_SELECTED) != 0;
+        bool on = (state & ListStates::Selected) != 0;
 
         if ( IsSingleSel() )
         {
@@ -3730,18 +3730,18 @@ int wxListMainWindow::GetItemState( long item, long stateMask ) const
     wxCHECK_MSG( item >= 0 && (size_t)item < GetItemCount(), 0,
                  wxT("invalid list ctrl item index in GetItemState()") );
 
-    int ret = wxLIST_STATE_DONTCARE;
+    int ret = ListStates::Nil;
 
-    if ( stateMask & wxLIST_STATE_FOCUSED )
+    if ( stateMask & ListStates::Focused )
     {
         if ( (size_t)item == m_current )
-            ret |= wxLIST_STATE_FOCUSED;
+            ret |= ListStates::Focused;
     }
 
-    if ( stateMask & wxLIST_STATE_SELECTED )
+    if ( stateMask & ListStates::Selected )
     {
         if ( IsHighlighted(item) )
-            ret |= wxLIST_STATE_SELECTED;
+            ret |= ListStates::Selected;
     }
 
     return ret;
@@ -3757,8 +3757,8 @@ void wxListMainWindow::GetItem( wxListItem &item ) const
 
     // Get item state if user wants it
     if ( item.m_mask & wxLIST_MASK_STATE )
-        item.m_state = GetItemState( item.m_itemId, wxLIST_STATE_SELECTED |
-                                                 wxLIST_STATE_FOCUSED );
+        item.m_state = GetItemState( item.m_itemId, ListStates::Selected |
+                                                 ListStates::Focused );
 }
 
 // ----------------------------------------------------------------------------
@@ -4254,10 +4254,10 @@ long wxListMainWindow::GetNextItem( long item,
     size_t count = GetItemCount();
     for ( size_t line = (size_t)ret; line < count; line++ )
     {
-        if ( (state & wxLIST_STATE_FOCUSED) && (line == m_current) )
+        if ( (state & ListStates::Focused) && (line == m_current) )
             return line;
 
-        if ( (state & wxLIST_STATE_SELECTED) && IsHighlighted(line) )
+        if ( (state & ListStates::Selected) && IsHighlighted(line) )
             return line;
     }
 

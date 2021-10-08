@@ -266,7 +266,7 @@ struct EllipsizeCalculator
                         const wxDC& dc,
                         int maxFinalWidthPx,
                         int replacementWidthPx,
-                        int flags)
+                        EllipsizeFlags flags)
         :
           m_initialCharToRemove(0),
           m_nCharsToRemove(0),
@@ -282,7 +282,7 @@ struct EllipsizeCalculator
         // affect the overall width of the string and must be removed from the
         // measurement. Nonetheless, we need to keep them in the string and
         // have a corresponding entry in m_charOffsetsPx.
-        if ( flags & wxELLIPSIZE_FLAGS_PROCESS_MNEMONICS )
+        if ( flags & wxEllipsizeFlags::ProcessMnemonics )
         {
             // Create a copy of the string with the ampersands removed to get
             // the correct widths.
@@ -445,7 +445,7 @@ struct EllipsizeCalculator
 
 std::string DoEllipsizeSingleLine(const std::string& curLine, const wxDC& dc,
                                wxEllipsizeMode mode, int maxFinalWidthPx,
-                               int replacementWidthPx, int flags)
+                               int replacementWidthPx, EllipsizeFlags flags)
 {
     wxASSERT_MSG(replacementWidthPx > 0, "Invalid parameters");
     wxASSERT_LEVEL_2_MSG(!curLine.Contains('\n'),
@@ -563,7 +563,7 @@ std::string DoEllipsizeSingleLine(const std::string& curLine, const wxDC& dc,
 /* static */
 std::string wxControlBase::Ellipsize(std::string_view label, const wxDC& dc,
                                      wxEllipsizeMode mode, int maxFinalWidth,
-                                     unsigned int flags)
+                                     EllipsizeFlags flags)
 {
     if (mode == wxEllipsizeMode::None)
         return std::string(label);
@@ -597,7 +597,7 @@ std::string wxControlBase::Ellipsize(std::string_view label, const wxDC& dc,
             curLine.clear();
         }
         // we need also to expand tabs to properly calc their size
-        else if ( ch == '\t' && (flags & wxELLIPSIZE_FLAGS_EXPAND_TABS) )
+        else if ( ch == '\t' && (flags & wxEllipsizeFlags::ExpandTabs) )
         {
             // Windows natively expands the TABs to 6 spaces. Do the same:
             curLine += "      ";

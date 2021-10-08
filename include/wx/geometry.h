@@ -17,6 +17,9 @@
 
 #include "wx/utils.h"
 #include "wx/geometry/point.h"
+#include "wx/geometry/size.h"
+#include "wx/geometry/rect.h"
+#include "wx/bitflags.h"
 
 #include <cstdint>
 
@@ -25,14 +28,17 @@ class WXDLLIMPEXP_FWD_BASE wxDataOutputStream;
 
 // clipping from Cohen-Sutherland
 
-enum wxOutCode
+enum class wxOutCode
 {
-    wxInside = 0x00 ,
-    wxOutLeft = 0x01 ,
-    wxOutRight = 0x02 ,
-    wxOutTop = 0x08 ,
-    wxOutBottom = 0x04
+    Inside,
+    Left,
+    Right,
+    Top,
+    Bottom,
+    _max_size
 };
+
+using OutCodeFlags = InclBitfield<wxOutCode>;
 
 // wxRect2Ds are a axis-aligned rectangles, each side of the rect is parallel to the x- or m_y- axis. The rectangle is either defined by the
 // top left and bottom right corner, or by the top left corner and size. A point is contained within the rectangle if
@@ -103,15 +109,25 @@ public:
         { MoveCentreTo( pt ); }    // since this is impossible without moving...
     inline void MoveCentreTo( const wxPoint2DDouble &pt )
         { m_x += pt.x - (m_x+m_width/2); m_y += pt.y -(m_y+m_height/2); }
-    inline wxOutCode GetOutCode( const wxPoint2DDouble &pt ) const
-        { return (wxOutCode) (( ( pt.x < m_x ) ? wxOutLeft : 0 ) +
-                     ( ( pt.x > m_x + m_width ) ? wxOutRight : 0 ) +
-                     ( ( pt.y < m_y ) ? wxOutTop : 0 )  +
-                     ( ( pt.y > m_y + m_height ) ? wxOutBottom : 0 )); }
-    inline wxOutCode GetOutcode(const wxPoint2DDouble &pt) const
+    inline OutCodeFlags GetOutCode( const wxPoint2DDouble &pt ) const
+    {
+        OutCodeFlags flags{};
+
+        if(pt.x < m_x)
+            flags |= wxOutCode::Left;
+        if(pt.x > m_x + m_width)
+            flags |= wxOutCode::Right;
+        if(pt.y < m_y)
+            flags |= wxOutCode::Top;
+        if(pt.y > m_y + m_height)
+            flags |= wxOutCode::Bottom;
+
+        return flags;
+    }
+    inline OutCodeFlags GetOutcode(const wxPoint2DDouble &pt) const
         { return GetOutCode(pt) ; }
     inline bool Contains( const wxPoint2DDouble &pt ) const
-        { return  GetOutCode( pt ) == wxInside; }
+        { return  GetOutCode( pt ) == wxOutCode::Inside; }
     inline bool Contains( const wxRect2DDouble &rect ) const
         { return ( ( ( m_x <= rect.m_x ) && ( rect.m_x + rect.m_width <= m_x + m_width ) ) &&
                 ( ( m_y <= rect.m_y ) && ( rect.m_y + rect.m_height <= m_y + m_height ) ) ); }
@@ -216,15 +232,24 @@ public:
         inline wxPoint2DInt GetCentre() const { return wxPoint2DInt( m_x+m_width/2 , m_y+m_height/2 ); }
         inline void SetCentre( const wxPoint2DInt &pt ) { MoveCentreTo( pt ); }    // since this is impossible without moving...
         inline void MoveCentreTo( const wxPoint2DInt &pt ) { m_x += pt.x - (m_x+m_width/2); m_y += pt.y -(m_y+m_height/2); }
-        inline wxOutCode GetOutCode( const wxPoint2DInt &pt ) const
-            { return (wxOutCode) (( ( pt.x < m_x ) ? wxOutLeft : 0 ) +
-                     ( ( pt.x >= m_x + m_width ) ? wxOutRight : 0 ) +
-                     ( ( pt.y < m_y ) ? wxOutTop : 0 )  +
-                     ( ( pt.y >= m_y + m_height ) ? wxOutBottom : 0 )); }
-        inline wxOutCode GetOutcode( const wxPoint2DInt &pt ) const
+        inline OutCodeFlags GetOutCode( const wxPoint2DInt &pt ) const
+        {
+            OutCodeFlags flags{};
+            if(pt.x < m_x)
+                flags |= wxOutCode::Left;
+            if(pt.x >= m_x + m_width)
+                flags |= wxOutCode::Right;
+            if(pt.y < m_y)
+                flags |= wxOutCode::Top;
+            if(pt.y >= m_y + m_height)
+                flags |= wxOutCode::Bottom;
+
+            return flags;
+        }
+        inline OutCodeFlags GetOutcode( const wxPoint2DInt &pt ) const
             { return GetOutCode( pt ) ; }
         inline bool Contains( const wxPoint2DInt &pt ) const
-            { return  GetOutCode( pt ) == wxInside; }
+            { return  GetOutCode( pt ) == wxOutCode::Inside; }
         inline bool Contains( const wxRect2DInt &rect ) const
             { return ( ( ( m_x <= rect.m_x ) && ( rect.m_x + rect.m_width <= m_x + m_width ) ) &&
                 ( ( m_y <= rect.m_y ) && ( rect.m_y + rect.m_height <= m_y + m_height ) ) ); }

@@ -47,6 +47,11 @@ public:
         return value_type{1} << static_cast<value_type>(e);
     }
 
+    constexpr explicit operator bool() const noexcept
+    {
+        return m_fields != value_type{0};
+    }
+
     template<typename... Enums> requires(BitfieldCompatible<Enums> && ...)
     static constexpr value_type bitmask(const Enums&... es) noexcept
     {
@@ -58,6 +63,20 @@ public:
     constexpr auto& operator|=(const Enum& e) noexcept
     {
         m_fields |= bitmask(e);
+
+        return *this;
+    }
+
+    constexpr auto& operator|=(const Bitfield& otherBf) noexcept
+    {
+        m_fields |= otherBf.as_value();
+
+        return *this;
+    }
+
+    constexpr auto& operator&=(const Bitfield& otherBf) noexcept
+    {
+        m_fields &= otherBf.as_value();
 
         return *this;
     }
@@ -74,6 +93,11 @@ public:
         m_fields ^= bitmask(e);
 
         return *this;
+    }
+
+    constexpr bool empty() const noexcept
+    {
+        return m_fields == value_type{0};
     }
 
     constexpr auto clear() noexcept
@@ -135,6 +159,19 @@ constexpr auto operator&(InclBitfield<Enum> bf, const Enum& e) noexcept
 {
     bf &= e;
     return bf;
+}
+
+template<typename Enum> requires(BitfieldCompatible<Enum>)
+constexpr auto operator&(InclBitfield<Enum> bf, const InclBitfield<Enum>& otherBf) noexcept
+{
+    bf &= otherBf;
+    return bf;
+}
+
+template<typename Enum> requires(BitfieldCompatible<Enum>)
+constexpr auto operator&(const Enum& e, InclBitfield<Enum> bf) noexcept
+{
+    return bf & e;
 }
 
 template<typename Enum> requires(BitfieldCompatible<Enum>)

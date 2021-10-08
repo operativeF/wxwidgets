@@ -144,13 +144,13 @@ wxListCtrlBase::InsertColumn(long col,
                              int width)
 {
     wxListItem item;
-    item.m_mask = wxLIST_MASK_TEXT | wxLIST_MASK_FORMAT;
+    item.m_mask = {ListMasks::Text, ListMasks::Format};
     item.m_text = heading;
     if ( width >= 0
             || width == wxLIST_AUTOSIZE
                 || width == wxLIST_AUTOSIZE_USEHEADER )
     {
-        item.m_mask |= wxLIST_MASK_WIDTH;
+        item.m_mask |= ListMasks::Width;
         item.m_width = width;
     }
     item.m_format = format;

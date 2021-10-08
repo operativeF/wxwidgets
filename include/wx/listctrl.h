@@ -67,31 +67,31 @@ public:
     // [de]select an item
     void Select(long n, bool on = true)
     {
-        SetItemState(n, on ? wxLIST_STATE_SELECTED : 0, wxLIST_STATE_SELECTED);
+        SetItemState(n, on ? ListStateFlags{ListStates::Selected} : ListStateFlags{}, ListStateFlags{ListStates::Selected});
     }
 
     // focus and show the given item
     void Focus(long index)
     {
-        SetItemState(index, wxLIST_STATE_FOCUSED, wxLIST_STATE_FOCUSED);
+        SetItemState(index, ListStates::Focused, ListStates::Focused);
         EnsureVisible(index);
     }
 
     // get the currently focused item or -1 if none
     long GetFocusedItem() const
     {
-        return GetNextItem(-1, wxLIST_NEXT_ALL, wxLIST_STATE_FOCUSED);
+        return GetNextItem(-1, wxLIST_NEXT_ALL, ListStates::Focused);
     }
 
     // get first and subsequent selected items, return -1 when no more
     long GetNextSelected(long item) const
-        { return GetNextItem(item, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED); }
+        { return GetNextItem(item, wxLIST_NEXT_ALL, ListStates::Selected); }
     long GetFirstSelected() const
         { return GetNextSelected(-1); }
 
     // return true if the item is selected
     bool IsSelected(long index) const
-        { return GetItemState(index, wxLIST_STATE_SELECTED) != 0; }
+        { return !GetItemState(index, ListStates::Selected).empty(); }
 
     // columns
     // -------
@@ -99,7 +99,7 @@ public:
     void SetColumnImage(int col, int image)
     {
         wxListItem item;
-        item.SetMask(wxLIST_MASK_IMAGE);
+        item.SetMask(ListMaskFlags{ListMasks::Image});
         item.SetImage(image);
         SetColumn(col, item);
     }

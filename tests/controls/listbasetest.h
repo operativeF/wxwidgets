@@ -34,7 +34,7 @@ struct ListBaseTest
 
         int n;
         wxListItem li;
-        li.SetMask(wxLIST_MASK_TEXT);
+        li.SetMask(ListMaskFlags{ListMasks::Text});
 
         // first set up some columns
         static const int NUM_COLS = 3;
@@ -566,28 +566,29 @@ struct ListBaseTest
         list->GetItemRect(0, rectIcon, wxLIST_RECT_ICON); // icon
         int y = rectSubItem0.GetTop() + (rectSubItem0.GetBottom() -
             rectSubItem0.GetTop()) / 2;
-        unsigned int flags = 0;
+
+        ListHitTestFlags flags{};
 
         // state icon (checkbox)
         int xCheckBox = rectSubItem0.GetLeft() + (rectIcon.GetLeft() -
             rectSubItem0.GetLeft()) / 2;
         list->HitTest(wxPoint(xCheckBox, y), flags);
-        CHECK_MESSAGE(wxLIST_HITTEST_ONITEMSTATEICON == flags,
-            "Expected wxLIST_HITTEST_ONITEMSTATEICON");
+        CHECK_MESSAGE((ListHitTest::OnItemStateIcon & flags),
+                      "Expected ListHitTest::OnItemStateIcon");
 
         // icon
         int xIcon = rectIcon.GetLeft() + (rectIcon.GetRight() - rectIcon.GetLeft()) / 2;
         list->HitTest(wxPoint(xIcon, y), flags);
-        CHECK_MESSAGE(wxLIST_HITTEST_ONITEMICON == flags,
-            "Expected wxLIST_HITTEST_ONITEMICON");
+        CHECK_MESSAGE((ListHitTest::OnItemIcon & flags),
+                      "Expected ListHitTest::OnItemIcon");
 
         // label, beyond column 0
         wxRect rectItem;
         list->GetItemRect(0, rectItem); // entire item
         int xHit = rectSubItem0.GetRight() + (rectItem.GetRight() - rectSubItem0.GetRight()) / 2;
         list->HitTest(wxPoint(xHit, y), flags);
-        CHECK_MESSAGE(wxLIST_HITTEST_ONITEMLABEL == flags,
-            "Expected wxLIST_HITTEST_ONITEMLABEL");
+        CHECK_MESSAGE((ListHitTest::OnItemLabel & flags),
+            "Expected ListHitTest::OnItemLabel");
 #endif // __WXMSW__
     }
 

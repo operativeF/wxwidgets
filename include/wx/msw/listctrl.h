@@ -162,10 +162,10 @@ public:
     bool SetItem(long index, int col, const wxString& label, int imageId = -1);
 
     // Gets the item state
-    int  GetItemState(long item, unsigned int stateMask) const;
+    ListStateFlags GetItemState(long item, ListStateFlags stateMask) const;
 
     // Sets the item state
-    bool SetItemState(long item, unsigned int state, unsigned int stateMask);
+    bool SetItemState(long item, ListStateFlags state, ListStateFlags stateMask);
 
     // Sets the item image
     bool SetItemImage(long item, int image, int selImage = -1);
@@ -246,7 +246,7 @@ public:
     // item can be -1 to find the first item that matches the
     // specified flags.
     // Returns the item or -1 if unsuccessful.
-    long GetNextItem(long item, int geometry = wxLIST_NEXT_ALL, int state = wxLIST_STATE_DONTCARE) const;
+    long GetNextItem(long item, int geometry = wxLIST_NEXT_ALL, ListStateFlags state = ListStates::Nil) const;
 
     // Gets one of the three image lists
     wxImageList *GetImageList(int which) const override;
@@ -299,9 +299,9 @@ public:
     long FindItem(long start, const wxPoint& pt, int direction);
 
     // Determines which item (if any) is at the specified point,
-    // giving details in 'flags' (see wxLIST_HITTEST_... flags above)
+    // giving details in 'flags' (see ListHitTestFlags above)
     // Request the subitem number as well at the given coordinate.
-    long HitTest(const wxPoint& point, unsigned int& flags, long* ptrSubItem = nullptr) const;
+    long HitTest(const wxPoint& point, ListHitTestFlags& flags, long* ptrSubItem = nullptr) const;
 
     // Inserts an item, returning the index of the new item if successful,
     // -1 otherwise.

@@ -458,7 +458,7 @@ wxRendererGeneric::DrawHeaderButtonContents(wxWindow *win,
                                          dc,
                                          wxEllipsizeMode::End,
                                          availWidth,
-                                         wxELLIPSIZE_FLAGS_NONE);
+                                         wxEllipsizeFlags::None);
             textSize.x = dc.GetTextExtent(label).x;
         }
         else // enough space, we can respect alignment
@@ -988,7 +988,7 @@ wxRendererGeneric::DrawItemText(wxWindow* WXUNUSED(win),
     const std::string paintText = wxControl::Ellipsize(text, dc,
                                                     ellipsizeMode,
                                                     rect.GetWidth(),
-                                                    wxELLIPSIZE_FLAGS_NONE);
+                                                    wxEllipsizeFlags::None);
 
     // Draw text taking care not to change its colour if it had been set by the
     // caller for a normal item to allow having items in non-default colours.

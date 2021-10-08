@@ -40,12 +40,12 @@ TEST_CASE("Ellipsization::NormalCase")
         "\t\n&", "a\t\n&string\t\n&with\t\n&many\t\n&chars"
     };
 
-    static constexpr int flagsToTest[] =
+    static constexpr EllipsizeFlags flagsToTest[] =
     {
-        0,
-        wxELLIPSIZE_FLAGS_PROCESS_MNEMONICS,
-        wxELLIPSIZE_FLAGS_EXPAND_TABS,
-        wxELLIPSIZE_FLAGS_PROCESS_MNEMONICS | wxELLIPSIZE_FLAGS_EXPAND_TABS
+        EllipsizeFlags{},
+        EllipsizeFlags{wxEllipsizeFlags::ProcessMnemonics},
+        EllipsizeFlags{wxEllipsizeFlags::ExpandTabs},
+        EllipsizeFlags{wxEllipsizeFlags::Default}
     };
 
     static constexpr wxEllipsizeMode modesToTest[] =
@@ -81,7 +81,7 @@ TEST_CASE("Ellipsization::NormalCase")
                     // will be rendered, and when mnemonics are used, this
                     // means we have to remove them first.
                     const std::string
-                        displayed = flagsToTest[f] & wxELLIPSIZE_FLAGS_PROCESS_MNEMONICS
+                        displayed = flagsToTest[f] & wxEllipsizeFlags::ProcessMnemonics
                                         ? wxControl::RemoveMnemonics(ret)
                                         : ret;
                     const int

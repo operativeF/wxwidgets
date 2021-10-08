@@ -498,7 +498,7 @@ void wxGenericPrintSetupDialog::Init(wxPrintData* data)
         item2.SetImage( 0 );
         m_printerListCtrl->SetItem( item2 );
         // also select item
-        m_printerListCtrl->SetItemState( item.GetId(), wxLIST_STATE_SELECTED, wxLIST_STATE_SELECTED );
+        m_printerListCtrl->SetItemState( item.GetId(), ListStates::Selected, ListStates::Selected );
     }
 
     item.SetId( 1+ item.GetId() );
@@ -536,7 +536,7 @@ void wxGenericPrintSetupDialog::Init(wxPrintData* data)
                 item2.SetImage( 0 );
                 m_printerListCtrl->SetItem( item2 );
                 // also select item
-                m_printerListCtrl->SetItemState( item.GetId(), wxLIST_STATE_SELECTED, wxLIST_STATE_SELECTED );
+                m_printerListCtrl->SetItemState( item.GetId(), ListStates::Selected, ListStates::Selected );
             }
 
             wxString command = wxT("lpstat -p ");
@@ -710,7 +710,7 @@ bool wxGenericPrintSetupDialog::TransferDataFromWindow()
         (wxPostScriptPrintNativeData *) m_printData.GetNativeData();
 
     // find selected printer
-    long id = m_printerListCtrl->GetNextItem( -1, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED );
+    long id = m_printerListCtrl->GetNextItem( -1, wxLIST_NEXT_ALL, ListStates::Selected );
     if (id == 0)
     {
         m_printData.SetPrinterName( wxEmptyString );

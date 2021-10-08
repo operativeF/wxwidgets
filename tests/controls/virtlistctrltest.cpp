@@ -49,10 +49,10 @@ TEST_CASE("Virtual list control test.")
         m_list->SetItemCount(10);
         CHECK_EQ( 0, m_list->GetSelectedItemCount() );
 
-        m_list->SetItemState(7, wxLIST_STATE_SELECTED, wxLIST_STATE_SELECTED);
+        m_list->SetItemState(7, ListStates::Selected, ListStates::Selected);
         CHECK_EQ( 1, m_list->GetSelectedItemCount() );
 
-        m_list->SetItemState(0, wxLIST_STATE_SELECTED, wxLIST_STATE_SELECTED);
+        m_list->SetItemState(0, ListStates::Selected, ListStates::Selected);
         CHECK_EQ( 2, m_list->GetSelectedItemCount() );
 
         // The item 7 is now invalid and so shouldn't be counted as selected any

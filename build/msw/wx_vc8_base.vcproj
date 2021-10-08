@@ -1832,10 +1832,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\wx\atomic.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\include\wx\base64.h"
 				>
 			</File>

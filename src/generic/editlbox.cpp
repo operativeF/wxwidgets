@@ -184,7 +184,7 @@ void wxEditableListBox::SetStrings(const std::vector<std::string>& strings)
         m_listCtrl->InsertItem(i, strings[i]);
 
     m_listCtrl->InsertItem(strings.size(), "");
-    m_listCtrl->SetItemState(0, wxLIST_STATE_SELECTED, wxLIST_STATE_SELECTED);
+    m_listCtrl->SetItemState(0, ListStates::Selected, ListStates::Selected);
 }
 
 // FIXME: Just return a vector.
@@ -214,7 +214,7 @@ void wxEditableListBox::OnItemSelected(wxListEvent& event)
 void wxEditableListBox::OnNewItem(wxCommandEvent& WXUNUSED(event))
 {
     m_listCtrl->SetItemState(m_listCtrl->GetItemCount()-1,
-                             wxLIST_STATE_SELECTED, wxLIST_STATE_SELECTED);
+                             ListStates::Selected, ListStates::Selected);
     m_listCtrl->EditLabel(m_selection);
 }
 
@@ -240,7 +240,7 @@ void wxEditableListBox::OnDelItem(wxCommandEvent& WXUNUSED(event))
 {
     m_listCtrl->DeleteItem(m_selection);
     m_listCtrl->SetItemState(m_selection,
-                             wxLIST_STATE_SELECTED, wxLIST_STATE_SELECTED);
+                             ListStates::Selected, ListStates::Selected);
 }
 
 void wxEditableListBox::OnEditItem(wxCommandEvent& WXUNUSED(event))
@@ -268,14 +268,14 @@ void wxEditableListBox::OnUpItem(wxCommandEvent& WXUNUSED(event))
 {
     SwapItems(m_selection - 1, m_selection);
     m_listCtrl->SetItemState(m_selection - 1,
-                             wxLIST_STATE_SELECTED, wxLIST_STATE_SELECTED);
+                             ListStates::Selected, ListStates::Selected);
 }
 
 void wxEditableListBox::OnDownItem(wxCommandEvent& WXUNUSED(event))
 {
     SwapItems(m_selection + 1, m_selection);
     m_listCtrl->SetItemState(m_selection + 1,
-                             wxLIST_STATE_SELECTED, wxLIST_STATE_SELECTED);
+                             ListStates::Selected, ListStates::Selected);
 }
 
 #endif // wxUSE_EDITABLELISTBOX

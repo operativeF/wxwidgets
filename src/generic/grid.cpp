@@ -7015,7 +7015,7 @@ void wxGrid::DrawTextRectangle(wxDC& dc,
                                          dc,
                                          attr.GetFitMode().GetEllipsizeMode(),
                                          rect.GetWidth() - 2 * GRID_TEXT_MARGIN,
-                                         wxELLIPSIZE_FLAGS_NONE
+                                         wxEllipsizeFlags::None
                                      );
 
     DrawTextRectangle(dc, ellipsizedText, rect, hAlign, vAlign);

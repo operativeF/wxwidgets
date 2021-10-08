@@ -426,7 +426,7 @@ void wxFileListCtrl::ShowHidden( bool show )
 long wxFileListCtrl::Add( wxFileData *fd, wxListItem &item )
 {
     long ret = -1;
-    item.m_mask = wxLIST_MASK_TEXT + wxLIST_MASK_DATA + wxLIST_MASK_IMAGE;
+    item.m_mask.set(ListMasks::Text, ListMasks::Data, ListMasks::Image);
     fd->MakeItem( item );
     unsigned int my_style = GetWindowStyleFlag();
     if (my_style & wxLC_REPORT)
@@ -658,7 +658,7 @@ void wxFileListCtrl::GoToParentDir()
         long id = FindItem( 0, fname );
         if (id != wxNOT_FOUND)
         {
-            SetItemState( id, wxLIST_STATE_SELECTED, wxLIST_STATE_SELECTED );
+            SetItemState( id, ListStates::Selected, ListStates::Selected );
             EnsureVisible( id );
         }
     }
@@ -677,7 +677,7 @@ void wxFileListCtrl::GoToDir( const wxString &dir )
     m_dirName = dir;
     UpdateFiles();
 
-    SetItemState( 0, wxLIST_STATE_SELECTED, wxLIST_STATE_SELECTED );
+    SetItemState( 0, ListStates::Selected, ListStates::Selected );
 
     EnsureVisible( 0 );
 }
@@ -706,7 +706,7 @@ void wxFileListCtrl::OnListDeleteAllItems( wxListEvent & WXUNUSED(event) )
 void wxFileListCtrl::FreeAllItemsData()
 {
     wxListItem item;
-    item.m_mask = wxLIST_MASK_DATA;
+    item.m_mask.set(ListMasks::Data);
 
     item.m_itemId = GetNextItem( -1, wxLIST_NEXT_ALL );
     while ( item.m_itemId != -1 )
@@ -750,7 +750,7 @@ void wxFileListCtrl::OnListEndLabelEdit( wxListEvent &event )
     {
         fd->SetNewName( new_name, event.GetLabel() );
 
-        SetItemState( event.GetItem(), wxLIST_STATE_SELECTED, wxLIST_STATE_SELECTED );
+        SetItemState( event.GetItem(), ListStates::Selected, ListStates::Selected );
 
         UpdateItem( event.GetItem() );
         EnsureVisible( event.GetItem() );
@@ -1017,7 +1017,7 @@ wxFileName wxGenericFileCtrl::DoGetFileName() const
         // nothing in the text control, get the selected file from the list
         wxListItem item;
         item.m_itemId = m_list->GetNextItem(-1, wxLIST_NEXT_ALL,
-                                            wxLIST_STATE_SELECTED);
+                                            ListStates::Selected);
 
         // ... if anything is selected in the list
         if ( item.m_itemId != wxNOT_FOUND )
@@ -1063,12 +1063,12 @@ std::vector<wxString> wxGenericFileCtrl::DoGetFilenames(bool fullPath) const
     filenames.reserve(numSel);
 
     wxListItem item;
-    item.m_mask = wxLIST_MASK_TEXT;
+    item.m_mask = ListMasks::Text;
     item.m_itemId = -1;
     for ( ;; )
     {
         item.m_itemId = m_list->GetNextItem(item.m_itemId, wxLIST_NEXT_ALL,
-                                            wxLIST_STATE_SELECTED);
+                                            ListStates::Selected);
 
         if ( item.m_itemId == -1 )
             break;
@@ -1114,11 +1114,11 @@ bool wxGenericFileCtrl::SetFilename( const wxString& name )
 
             for ( ;; )
             {
-                itemIndex = m_list->GetNextItem( itemIndex, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED );
+                itemIndex = m_list->GetNextItem( itemIndex, wxLIST_NEXT_ALL, ListStates::Selected );
                 if ( itemIndex == wxNOT_FOUND )
                     break;
 
-                m_list->SetItemState( itemIndex, 0, wxLIST_STATE_SELECTED );
+                m_list->SetItemState( itemIndex, ListStateFlags{}, ListStates::Selected );
             }
         }
     }
@@ -1128,7 +1128,7 @@ bool wxGenericFileCtrl::SetFilename( const wxString& name )
 
     if ( item != wxNOT_FOUND )
     {
-        m_list->SetItemState( item, wxLIST_STATE_SELECTED, wxLIST_STATE_SELECTED );
+        m_list->SetItemState( item, ListStates::Selected, ListStates::Selected );
         m_list->EnsureVisible( item );
     }
 
@@ -1223,11 +1223,11 @@ void wxGenericFileCtrl::OnTextChange( wxCommandEvent &WXUNUSED( event ) )
         if ( m_list->GetSelectedItemCount() > 0 )
         {
             long item = m_list->GetNextItem( -1, wxLIST_NEXT_ALL,
-                                             wxLIST_STATE_SELECTED );
+                                             ListStates::Selected );
             while ( item != -1 )
             {
-                m_list->SetItemState( item, 0, wxLIST_STATE_SELECTED );
-                item = m_list->GetNextItem( item, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED );
+                m_list->SetItemState( item, ListStateFlags{}, ListStates::Selected );
+                item = m_list->GetNextItem( item, wxLIST_NEXT_ALL, ListStates::Selected );
             }
         }
     }

@@ -24,6 +24,7 @@
 #include "wx/fontenc.h"
 #include "wx/hashmap.h"
 #include "wx/math.h"
+#include "wx/bitflags.h"
 
 #include <cstdint>
 
@@ -163,15 +164,16 @@ enum wxStockCursor
 // Ellipsize() constants
 // ----------------------------------------------------------------------------
 
-enum wxEllipsizeFlags
+enum class wxEllipsizeFlags
 {
-    wxELLIPSIZE_FLAGS_NONE = 0,
-    wxELLIPSIZE_FLAGS_PROCESS_MNEMONICS = 1,
-    wxELLIPSIZE_FLAGS_EXPAND_TABS = 2,
-
-    wxELLIPSIZE_FLAGS_DEFAULT = wxELLIPSIZE_FLAGS_PROCESS_MNEMONICS |
-    wxELLIPSIZE_FLAGS_EXPAND_TABS
+    None,
+    ProcessMnemonics,
+    ExpandTabs,
+    Default,
+    _max_size
 };
+
+using EllipsizeFlags = InclBitfield<wxEllipsizeFlags>;
 
 // NB: Don't change the order of these values, they're the same as in
 //     PangoEllipsizeMode enum.

@@ -42,14 +42,15 @@ wxListCtrlXmlHandler::wxListCtrlXmlHandler()
     XRC_ADD_STYLE(wxLIST_FORMAT_LEFT);
     XRC_ADD_STYLE(wxLIST_FORMAT_RIGHT);
     XRC_ADD_STYLE(wxLIST_FORMAT_CENTRE);
-    XRC_ADD_STYLE(wxLIST_MASK_STATE);
-    XRC_ADD_STYLE(wxLIST_MASK_TEXT);
-    XRC_ADD_STYLE(wxLIST_MASK_IMAGE);
-    XRC_ADD_STYLE(wxLIST_MASK_DATA);
-    XRC_ADD_STYLE(wxLIST_MASK_WIDTH);
-    XRC_ADD_STYLE(wxLIST_MASK_FORMAT);
-    XRC_ADD_STYLE(wxLIST_STATE_FOCUSED);
-    XRC_ADD_STYLE(wxLIST_STATE_SELECTED);
+    // FIXME: ListMasks are no longer int
+    //XRC_ADD_STYLE(ListMasks::State);
+    //XRC_ADD_STYLE(ListMasks::Text);
+    //XRC_ADD_STYLE(ListMasks::Image);
+    //XRC_ADD_STYLE(ListMasks::Data);
+    //XRC_ADD_STYLE(ListMasks::Width);
+    //XRC_ADD_STYLE(ListMasks::Format);
+    //XRC_ADD_STYLE(ListStates::Focused);
+    //XRC_ADD_STYLE(ListStates::Selected);
 
     // wxListCtrl styles
     XRC_ADD_STYLE(wxLC_LIST);
@@ -148,7 +149,7 @@ void wxListCtrlXmlHandler::HandleListItem()
     if (HasParam(wxT("font")))
         item.SetFont(GetFont(wxT("font"), list));
     if (HasParam(wxT("state")))
-        item.SetState(GetStyle(wxT("state")));
+        item.SetState(ListStateFlags{GetStyle(wxT("state"))});
     if (HasParam(wxT("textcolour")))
         item.SetTextColour(GetColour(wxT("textcolour")));
     if (HasParam(wxT("textcolor")))

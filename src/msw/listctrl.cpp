@@ -65,7 +65,7 @@
 #endif
 
 // convert our state and mask flags to LV_ITEM constants
-static void wxConvertToMSWFlags(unsigned int state, unsigned int mask, LV_ITEM& lvItem);
+static void wxConvertToMSWFlags(ListStateFlags state, ListStateFlags mask, LV_ITEM& lvItem);
 
 // convert wxListItem to LV_ITEM
 static void wxConvertToMSWListItem(const wxListCtrl *ctrl,
@@ -620,19 +620,19 @@ bool wxListCtrl::GetColumn(int col, wxListItem& item) const
 
     lvCol.mask = LVCF_WIDTH;
 
-    if ( item.m_mask & wxLIST_MASK_TEXT )
+    if ( item.m_mask & ListMasks::Text )
     {
         lvCol.mask |= LVCF_TEXT;
         lvCol.pszText = new wxChar[513];
         lvCol.cchTextMax = 512;
     }
 
-    if ( item.m_mask & wxLIST_MASK_FORMAT )
+    if ( item.m_mask & ListMasks::Format )
     {
         lvCol.mask |= LVCF_FMT;
     }
 
-    if ( item.m_mask & wxLIST_MASK_IMAGE )
+    if ( item.m_mask & ListMasks::Image )
     {
         lvCol.mask |= LVCF_IMAGE;
     }
@@ -642,13 +642,13 @@ bool wxListCtrl::GetColumn(int col, wxListItem& item) const
     //  item.m_subItem = lvCol.iSubItem;
     item.m_width = lvCol.cx;
 
-    if ( (item.m_mask & wxLIST_MASK_TEXT) && lvCol.pszText )
+    if ( (item.m_mask & ListMasks::Text) && lvCol.pszText )
     {
         item.m_text = lvCol.pszText;
         delete[] lvCol.pszText;
     }
 
-    if ( item.m_mask & wxLIST_MASK_FORMAT )
+    if ( item.m_mask & ListMasks::Format )
     {
         switch (lvCol.fmt & LVCFMT_JUSTIFYMASK) {
             case LVCFMT_LEFT:
@@ -666,7 +666,7 @@ bool wxListCtrl::GetColumn(int col, wxListItem& item) const
         }
     }
 
-    if ( item.m_mask & wxLIST_MASK_IMAGE )
+    if ( item.m_mask & ListMasks::Image )
     {
         item.m_image = lvCol.iImage;
     }
@@ -817,9 +817,9 @@ bool wxListCtrl::GetItem(wxListItem& info) const
 
     // If no mask is specified, get everything: this is compatible with the
     // generic version and conforms to the principle of least surprise.
-    const unsigned int mask = info.m_mask ? info.m_mask : static_cast<unsigned int>(-1);
+    const auto mask = info.m_mask ? info.m_mask : ListMaskFlags{ListMaskFlags::AllFlagsSet};
 
-    if ( mask & wxLIST_MASK_TEXT )
+    if ( mask & ListMasks::Text )
     {
         lvItem.mask |= LVIF_TEXT;
         lvItem.pszText = new wxChar[513];
@@ -830,16 +830,16 @@ bool wxListCtrl::GetItem(wxListItem& info) const
         lvItem.pszText = nullptr;
     }
 
-    if ( mask & wxLIST_MASK_DATA )
+    if ( mask & ListMasks::Data )
         lvItem.mask |= LVIF_PARAM;
 
-    if ( mask & wxLIST_MASK_IMAGE )
+    if ( mask & ListMasks::Image )
         lvItem.mask |= LVIF_IMAGE;
 
-    if ( mask & wxLIST_MASK_STATE )
+    if ( mask & ListMasks::State )
     {
         lvItem.mask |= LVIF_STATE;
-        wxConvertToMSWFlags(0, info.m_stateMask, lvItem);
+        wxConvertToMSWFlags(ListStateFlags{}, info.m_stateMask, lvItem);
     }
 
     bool success = ListView_GetItem((HWND)GetHWND(), &lvItem) != 0;
@@ -894,7 +894,7 @@ bool wxListCtrl::SetItem(wxListItem& info)
     item.mask &= ~LVIF_PARAM;
 
     // check if setting attributes or lParam
-    if ( info.HasAttributes() || (info.m_mask & wxLIST_MASK_DATA) )
+    if ( info.HasAttributes() || (info.m_mask & ListMasks::Data) )
     {
         // get internal item data
         wxMSWListItemData *data = MSWGetItemData(id);
@@ -910,7 +910,7 @@ bool wxListCtrl::SetItem(wxListItem& info)
 
 
         // user data
-        if ( info.m_mask & wxLIST_MASK_DATA )
+        if ( info.m_mask & ListMasks::Data )
             data->lParam = info.m_data;
 
         // attributes
@@ -940,7 +940,7 @@ bool wxListCtrl::SetItem(wxListItem& info)
     }
 
     // we need to update the item immediately to show the new image
-    bool updateNow = (info.m_mask & wxLIST_MASK_IMAGE) != 0;
+    bool updateNow{info.m_mask & ListMasks::Image};
 
     // check whether it has any custom attributes
     if ( info.HasAttributes() )
@@ -964,38 +964,38 @@ bool wxListCtrl::SetItem(long index, int col, const wxString& label, int imageId
 {
     wxListItem info;
     info.m_text = label;
-    info.m_mask = wxLIST_MASK_TEXT;
+    info.m_mask = ListMasks::Text;
     info.m_itemId = index;
     info.m_col = col;
     if ( imageId > -1 )
     {
         info.m_image = imageId;
-        info.m_mask |= wxLIST_MASK_IMAGE;
+        info.m_mask |= ListMasks::Image;
     }
     return SetItem(info);
 }
 
 
 // Gets the item state
-int wxListCtrl::GetItemState(long item, unsigned int stateMask) const
+ListStateFlags wxListCtrl::GetItemState(long item, ListStateFlags stateMask) const
 {
-    wxCHECK_MSG( item >= 0 && item < GetItemCount(), 0,
+    wxCHECK_MSG( item >= 0 && item < GetItemCount(), {},
                  wxS("invalid list control item index in GetItemState()") );
 
     wxListItem info;
 
-    info.m_mask = wxLIST_MASK_STATE;
+    info.m_mask = ListMaskFlags{ListMasks::State};
     info.m_stateMask = stateMask;
     info.m_itemId = item;
 
     if (!GetItem(info))
-        return 0;
+        return {};
 
     return info.m_state;
 }
 
 // Sets the item state
-bool wxListCtrl::SetItemState(long item, unsigned int state, unsigned int stateMask)
+bool wxListCtrl::SetItemState(long item, ListStateFlags state, ListStateFlags stateMask)
 {
     // NB: don't use SetItem() here as it doesn't work with the virtual list
     //     controls
@@ -1004,8 +1004,8 @@ bool wxListCtrl::SetItemState(long item, unsigned int state, unsigned int stateM
 
     wxConvertToMSWFlags(state, stateMask, lvItem);
 
-    const bool changingFocus = (stateMask & wxLIST_STATE_FOCUSED) &&
-                                    (state & wxLIST_STATE_FOCUSED);
+    const bool changingFocus = (stateMask & ListStates::Focused) &&
+                               (state & ListStates::Focused);
 
     // for the virtual list controls we need to refresh the previously focused
     // item manually when changing focus without changing selection
@@ -1014,7 +1014,7 @@ bool wxListCtrl::SetItemState(long item, unsigned int state, unsigned int stateM
     long focusOld;
     if ( IsVirtual() && changingFocus )
     {
-        focusOld = GetNextItem(-1, wxLIST_NEXT_ALL, wxLIST_STATE_FOCUSED);
+        focusOld = GetNextItem(-1, wxLIST_NEXT_ALL, ListStates::Focused);
     }
     else
     {
@@ -1034,7 +1034,7 @@ bool wxListCtrl::SetItemState(long item, unsigned int state, unsigned int stateM
         // no need to refresh the item if it was previously selected, it would
         // only result in annoying flicker
         if ( !(GetItemState(focusOld,
-                            wxLIST_STATE_SELECTED) & wxLIST_STATE_SELECTED) )
+                            ListStates::Selected) & ListStates::Selected) )
         {
             RefreshItem(focusOld);
         }
@@ -1064,7 +1064,7 @@ bool wxListCtrl::SetItemColumnImage(long item, long column, int image)
 {
     wxListItem info;
 
-    info.m_mask = wxLIST_MASK_IMAGE;
+    info.m_mask = ListMasks::Image;
     info.m_image = image == -1 ? I_IMAGENONE : image;
     info.m_itemId = item;
     info.m_col = column;
@@ -1077,7 +1077,7 @@ wxString wxListCtrl::GetItemText(long item, int col) const
 {
     wxListItem info;
 
-    info.m_mask = wxLIST_MASK_TEXT;
+    info.m_mask = ListMasks::Text;
     info.m_itemId = item;
     info.m_col = col;
 
@@ -1091,7 +1091,7 @@ void wxListCtrl::SetItemText(long item, const std::string& str)
 {
     wxListItem info;
 
-    info.m_mask = wxLIST_MASK_TEXT;
+    info.m_mask = ListMasks::Text;
     info.m_itemId = item;
     info.m_text = str;
 
@@ -1116,7 +1116,7 @@ wxUIntPtr wxListCtrl::GetItemData(long item) const
 {
     wxListItem info;
 
-    info.m_mask = wxLIST_MASK_DATA;
+    info.m_mask = ListMasks::Data;
     info.m_itemId = item;
 
     if (!GetItem(info))
@@ -1129,7 +1129,7 @@ bool wxListCtrl::SetItemPtrData(long item, wxUIntPtr data)
 {
     wxListItem info;
 
-    info.m_mask = wxLIST_MASK_DATA;
+    info.m_mask = ListMasks::Data;
     info.m_itemId = item;
     info.m_data = data;
 
@@ -1393,11 +1393,11 @@ long wxListCtrl::GetTopItem() const
 // 'geometry' is one of
 // wxLIST_NEXT_ABOVE/ALL/BELOW/LEFT/RIGHT.
 // 'state' is a state bit flag, one or more of
-// wxLIST_STATE_DROPHILITED/FOCUSED/SELECTED/CUT.
+// ListStates::DropHiLited/FOCUSED/SELECTED/CUT.
 // item can be -1 to find the first item that matches the
 // specified flags.
 // Returns the item or -1 if unsuccessful.
-long wxListCtrl::GetNextItem(long item, int geom, int state) const
+long wxListCtrl::GetNextItem(long item, int geom, ListStateFlags state) const
 {
     long flags = 0;
 
@@ -1412,13 +1412,13 @@ long wxListCtrl::GetNextItem(long item, int geom, int state) const
     if ( geom == wxLIST_NEXT_RIGHT )
         flags |= LVNI_TORIGHT;
 
-    if ( state & wxLIST_STATE_CUT )
+    if ( state & ListStates::Cut )
         flags |= LVNI_CUT;
-    if ( state & wxLIST_STATE_DROPHILITED )
+    if ( state & ListStates::DropHiLited )
         flags |= LVNI_DROPHILITED;
-    if ( state & wxLIST_STATE_FOCUSED )
+    if ( state & ListStates::Focused )
         flags |= LVNI_FOCUSED;
-    if ( state & wxLIST_STATE_SELECTED )
+    if ( state & ListStates::Selected )
         flags |= LVNI_SELECTED;
 
     return (long) ListView_GetNextItem(GetHwnd(), item, flags);
@@ -1791,7 +1791,7 @@ long wxListCtrl::FindItem(long start, const wxPoint& pt, int direction)
 // Determines which item (if any) is at the specified point,
 // giving details in 'flags' (see wxLIST_HITTEST_... flags above)
 long
-wxListCtrl::HitTest(const wxPoint& point, unsigned int& flags, long *ptrSubItem) const
+wxListCtrl::HitTest(const wxPoint& point, ListHitTestFlags& flags, long *ptrSubItem) const
 {
     LV_HITTESTINFO hitTestInfo;
     hitTestInfo.pt.x = (int) point.x;
@@ -1810,12 +1810,12 @@ wxListCtrl::HitTest(const wxPoint& point, unsigned int& flags, long *ptrSubItem)
         item = ListView_HitTest(GetHwnd(), &hitTestInfo);
     }
 
-    flags = 0;
+    flags.clear();
 
     // test whether an actual item was hit or not
     if ( hitTestInfo.flags == LVHT_ONITEMICON )
     {
-        flags = wxLIST_HITTEST_ONITEMICON;
+        flags = ListHitTest::OnItemIcon;
     }
     // note a bug in comctl32.dll:
     // 1) in report mode, when there are 2 or more columns, if you click to the
@@ -1823,7 +1823,7 @@ wxListCtrl::HitTest(const wxPoint& point, unsigned int& flags, long *ptrSubItem)
     //    (LVHT_ONITEMICON|LVHT_ONITEMLABEL|LVHT_ONITEMSTATEICON).
     else if ( hitTestInfo.flags & LVHT_ONITEMLABEL )
     {
-        flags = wxLIST_HITTEST_ONITEMLABEL;
+        flags = ListHitTest::OnItemLabel;
     }
     // note another bug in comctl32.dll:
     // 2) LVHT_ONITEMSTATEICON and LVHT_ABOVE have the same value. However, the
@@ -1832,11 +1832,11 @@ wxListCtrl::HitTest(const wxPoint& point, unsigned int& flags, long *ptrSubItem)
     //    area") can only occur when y < 0.
     else if ( (hitTestInfo.flags == LVHT_ONITEMSTATEICON) && point.y >= 0 )
     {
-        flags = wxLIST_HITTEST_ONITEMSTATEICON;
+        flags = ListHitTest::OnItemStateIcon;
     }
     else if ( hitTestInfo.flags == LVHT_NOWHERE )
     {
-        flags = wxLIST_HITTEST_NOWHERE;
+        flags = ListHitTest::Nowhere;
     }
 
     if ( flags ) // any flags found so far couldn't be combined with others
@@ -1845,20 +1845,20 @@ wxListCtrl::HitTest(const wxPoint& point, unsigned int& flags, long *ptrSubItem)
     // outside an item, values could be combined
     if ( (hitTestInfo.flags & LVHT_ABOVE) && point.y < 0 ) // see second MS bug
     {
-        flags = wxLIST_HITTEST_ABOVE;
+        flags = ListHitTest::Above;
     }
     else if ( hitTestInfo.flags & LVHT_BELOW )
     {
-        flags = wxLIST_HITTEST_BELOW;
+        flags = ListHitTest::Below;
     }
 
     if ( hitTestInfo.flags & LVHT_TOLEFT )
     {
-        flags |= wxLIST_HITTEST_TOLEFT;
+        flags |= ListHitTest::ToLeft;
     }
     else if ( hitTestInfo.flags & LVHT_TORIGHT )
     {
-        flags |= wxLIST_HITTEST_TORIGHT;
+        flags |= ListHitTest::ToRight;
     }
 
     return item;
@@ -1882,7 +1882,7 @@ long wxListCtrl::InsertItem(const wxListItem& info)
     item.mask &= ~LVIF_PARAM;
 
     // check whether we need to allocate our internal data
-    bool needInternalData = (info.m_mask & wxLIST_MASK_DATA) ||
+    bool needInternalData = (info.m_mask & ListMasks::Data) ||
                                 info.HasAttributes();
     if ( needInternalData )
     {
@@ -1892,7 +1892,7 @@ long wxListCtrl::InsertItem(const wxListItem& info)
         m_internalData.push_back(data);
         item.lParam = (LPARAM)data;
 
-        if ( info.m_mask & wxLIST_MASK_DATA )
+        if ( info.m_mask & ListMasks::Data )
             data->lParam = info.m_data;
 
         // check whether it has any custom attributes
@@ -1913,7 +1913,7 @@ long wxListCtrl::InsertItem(long index, const wxString& label)
 {
     wxListItem info;
     info.m_text = label;
-    info.m_mask = wxLIST_MASK_TEXT;
+    info.m_mask = ListMasks::Text;
     info.m_itemId = index;
     return InsertItem(info);
 }
@@ -1923,7 +1923,7 @@ long wxListCtrl::InsertItem(long index, int imageIndex)
 {
     wxListItem info;
     info.m_image = imageIndex;
-    info.m_mask = wxLIST_MASK_IMAGE;
+    info.m_mask = ListMasks::Image;
     info.m_itemId = index;
     return InsertItem(info);
 }
@@ -1934,7 +1934,7 @@ long wxListCtrl::InsertItem(long index, const wxString& label, int imageIndex)
     wxListItem info;
     info.m_image = imageIndex == -1 ? I_IMAGENONE : imageIndex;
     info.m_text = label;
-    info.m_mask = wxLIST_MASK_TEXT | wxLIST_MASK_IMAGE;
+    info.m_mask = ListMaskFlags{ListMasks::Text, ListMasks::Image};
     info.m_itemId = index;
     return InsertItem(info);
 }
@@ -1971,7 +1971,7 @@ long wxListCtrl::DoInsertColumn(long col, const wxListItem& item)
     m_colCount++;
 
     // Now adjust the new column size.
-    if ( (item.GetMask() & wxLIST_MASK_WIDTH) &&
+    if ( (item.GetMask() & ListMasks::Width) &&
             (item.GetWidth() == wxLIST_AUTOSIZE_USEHEADER) )
     {
         SetColumnWidth(n, wxLIST_AUTOSIZE_USEHEADER);
@@ -2386,9 +2386,9 @@ bool wxListCtrl::MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result)
                     {
 
                         event.m_item.SetId(iItem);
-                        event.m_item.SetMask(wxLIST_MASK_TEXT |
-                                             wxLIST_MASK_IMAGE |
-                                             wxLIST_MASK_DATA);
+                        event.m_item.SetMask(ListMaskFlags{ListMasks::Text,
+                                                           ListMasks::Image,
+                                                           ListMasks::Data});
                         if (iItem != -1)
                             GetItem(event.m_item);
 
@@ -2464,7 +2464,7 @@ bool wxListCtrl::MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result)
                     // get the current selection
                     long lItem = GetNextItem(-1,
                                              wxLIST_NEXT_ALL,
-                                             wxLIST_STATE_SELECTED);
+                                             ListStates::Selected);
 
                     // <Enter> or <Space> activate the selected item if any (but
                     // not with any modifiers as they have a predefined meaning
@@ -2705,8 +2705,8 @@ bool wxListCtrl::MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result)
                     }
 
                     SetItemState(*result,
-                                 wxLIST_STATE_SELECTED | wxLIST_STATE_FOCUSED,
-                                 wxLIST_STATE_SELECTED | wxLIST_STATE_FOCUSED);
+                                 ListStateFlags{ListStates::Selected, ListStates::Focused},
+                                 ListStateFlags{ListStates::Selected, ListStates::Focused});
                     EnsureVisible(*result);
                     return true;
                 }
@@ -2783,7 +2783,7 @@ bool wxListCtrl::MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result)
         wxListItem& item = event.m_item;
 
         item.SetId(event.m_itemIndex);
-        item.SetMask(wxLIST_MASK_TEXT | wxLIST_MASK_IMAGE | wxLIST_MASK_DATA);
+        item.SetMask(ListMaskFlags{ListMasks::Text, ListMasks::Image, ListMasks::Data});
         GetItem(item);
     }
 
@@ -3368,9 +3368,9 @@ static void wxConvertFromMSWListItem(HWND hwndListCtrl,
     if (internaldata)
         info.m_data = internaldata->lParam;
 
-    info.m_mask = 0;
-    info.m_state = 0;
-    info.m_stateMask = 0;
+    info.m_mask.clear();
+    info.m_state.clear();
+    info.m_stateMask.clear();
     info.m_itemId = lvItem.iItem;
 
     long oldMask = lvItem.mask;
@@ -3391,48 +3391,48 @@ static void wxConvertFromMSWListItem(HWND hwndListCtrl,
 
     if ( lvItem.mask & LVIF_STATE )
     {
-        info.m_mask |= wxLIST_MASK_STATE;
+        info.m_mask |= ListMasks::State;
 
         if ( lvItem.stateMask & LVIS_CUT)
         {
-            info.m_stateMask |= wxLIST_STATE_CUT;
+            info.m_stateMask |= ListStates::Cut;
             if ( lvItem.state & LVIS_CUT )
-                info.m_state |= wxLIST_STATE_CUT;
+                info.m_state |= ListStates::Cut;
         }
         if ( lvItem.stateMask & LVIS_DROPHILITED)
         {
-            info.m_stateMask |= wxLIST_STATE_DROPHILITED;
+            info.m_stateMask |= ListStates::DropHiLited;
             if ( lvItem.state & LVIS_DROPHILITED )
-                info.m_state |= wxLIST_STATE_DROPHILITED;
+                info.m_state |= ListStates::DropHiLited;
         }
         if ( lvItem.stateMask & LVIS_FOCUSED)
         {
-            info.m_stateMask |= wxLIST_STATE_FOCUSED;
+            info.m_stateMask |= ListStates::Focused;
             if ( lvItem.state & LVIS_FOCUSED )
-                info.m_state |= wxLIST_STATE_FOCUSED;
+                info.m_state |= ListStates::Focused;
         }
         if ( lvItem.stateMask & LVIS_SELECTED)
         {
-            info.m_stateMask |= wxLIST_STATE_SELECTED;
+            info.m_stateMask |= ListStates::Selected;
             if ( lvItem.state & LVIS_SELECTED )
-                info.m_state |= wxLIST_STATE_SELECTED;
+                info.m_state |= ListStates::Selected;
         }
     }
 
     if ( lvItem.mask & LVIF_TEXT )
     {
-        info.m_mask |= wxLIST_MASK_TEXT;
+        info.m_mask |= ListMasks::Text;
         info.m_text = lvItem.pszText;
     }
     if ( lvItem.mask & LVIF_IMAGE )
     {
-        info.m_mask |= wxLIST_MASK_IMAGE;
+        info.m_mask |= ListMasks::Image;
         info.m_image = lvItem.iImage;
     }
     if ( lvItem.mask & LVIF_PARAM )
-        info.m_mask |= wxLIST_MASK_DATA;
+        info.m_mask |= ListMasks::Data;
     if ( lvItem.mask & LVIF_DI_SETITEM )
-        info.m_mask |= wxLIST_SET_ITEM;
+        info.m_mask |= ListMasks::SetItem;
     info.m_col = lvItem.iSubItem;
 
     if (needText)
@@ -3443,30 +3443,30 @@ static void wxConvertFromMSWListItem(HWND hwndListCtrl,
     lvItem.mask = oldMask;
 }
 
-static void wxConvertToMSWFlags(unsigned int state, unsigned int stateMask, LV_ITEM& lvItem)
+static void wxConvertToMSWFlags(ListStateFlags state, ListStateFlags stateMask, LV_ITEM& lvItem)
 {
-    if (stateMask & wxLIST_STATE_CUT)
+    if (stateMask & ListStates::Cut)
     {
         lvItem.stateMask |= LVIS_CUT;
-        if (state & wxLIST_STATE_CUT)
+        if (state & ListStates::Cut)
             lvItem.state |= LVIS_CUT;
     }
-    if (stateMask & wxLIST_STATE_DROPHILITED)
+    if (stateMask & ListStates::DropHiLited)
     {
         lvItem.stateMask |= LVIS_DROPHILITED;
-        if (state & wxLIST_STATE_DROPHILITED)
+        if (state & ListStates::DropHiLited)
             lvItem.state |= LVIS_DROPHILITED;
     }
-    if (stateMask & wxLIST_STATE_FOCUSED)
+    if (stateMask & ListStates::Focused)
     {
         lvItem.stateMask |= LVIS_FOCUSED;
-        if (state & wxLIST_STATE_FOCUSED)
+        if (state & ListStates::Focused)
             lvItem.state |= LVIS_FOCUSED;
     }
-    if (stateMask & wxLIST_STATE_SELECTED)
+    if (stateMask & ListStates::Selected)
     {
         lvItem.stateMask |= LVIS_SELECTED;
-        if (state & wxLIST_STATE_SELECTED)
+        if (state & ListStates::Selected)
             lvItem.state |= LVIS_SELECTED;
     }
 }
@@ -3493,14 +3493,14 @@ static void wxConvertToMSWListItem(const wxListCtrl *ctrl,
     lvItem.mask = 0;
     lvItem.iSubItem = info.m_col;
 
-    if (info.m_mask & wxLIST_MASK_STATE)
+    if (info.m_mask & ListMasks::State)
     {
         lvItem.mask |= LVIF_STATE;
 
         wxConvertToMSWFlags(info.m_state, info.m_stateMask, lvItem);
     }
 
-    if (info.m_mask & wxLIST_MASK_TEXT)
+    if (info.m_mask & ListMasks::Text)
     {
         lvItem.mask |= LVIF_TEXT;
         if ( ctrl->HasFlag(wxLC_USER_TEXT) )
@@ -3517,7 +3517,7 @@ static void wxConvertToMSWListItem(const wxListCtrl *ctrl,
                 lvItem.cchTextMax = 0;
         }
     }
-    if (info.m_mask & wxLIST_MASK_IMAGE)
+    if (info.m_mask & ListMasks::Image)
         lvItem.mask |= LVIF_IMAGE;
 }
 
@@ -3528,13 +3528,13 @@ static void wxConvertToMSWListCol(HWND hwndList,
 {
     wxZeroMemory(lvCol);
 
-    if ( item.m_mask & wxLIST_MASK_TEXT )
+    if ( item.m_mask & ListMasks::Text )
     {
         lvCol.mask |= LVCF_TEXT;
         lvCol.pszText = wxMSW_CONV_LPTSTR(item.m_text);
     }
 
-    if ( item.m_mask & wxLIST_MASK_FORMAT )
+    if ( item.m_mask & ListMasks::Format )
     {
         lvCol.mask |= LVCF_FMT;
 
@@ -3546,7 +3546,7 @@ static void wxConvertToMSWListCol(HWND hwndList,
             lvCol.fmt = LVCFMT_CENTER;
     }
 
-    if ( item.m_mask & wxLIST_MASK_WIDTH )
+    if ( item.m_mask & ListMasks::Width )
     {
         lvCol.mask |= LVCF_WIDTH;
         if ( item.m_width == wxLIST_AUTOSIZE)
@@ -3557,7 +3557,7 @@ static void wxConvertToMSWListCol(HWND hwndList,
             lvCol.cx = item.m_width;
     }
 
-    if ( item.m_mask & wxLIST_MASK_IMAGE )
+    if ( item.m_mask & ListMasks::Image )
     {
         // as we're going to overwrite the format field, get its
         // current value first -- unless we want to overwrite it anyhow

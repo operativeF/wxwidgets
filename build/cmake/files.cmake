@@ -489,7 +489,6 @@ set(BASE_CMN_HDR
     wx/archive.h
     wx/arrimpl.cpp
     wx/arrstr.h
-    wx/atomic.h
     wx/base64.h
     wx/buffer.h
     wx/build.h
@@ -569,7 +568,6 @@ set(BASE_CMN_HDR
     wx/power.h
     wx/process.h
     wx/ptr_scpd.h
-    wx/ptr_shrd.h
     wx/recguard.h
     wx/regex.h
     wx/rtti.h
@@ -577,7 +575,6 @@ set(BASE_CMN_HDR
     wx/scopedptr.h
     wx/scopeguard.h
     wx/secretstore.h
-    wx/sharedptr.h
     wx/snglinst.h
     wx/sstream.h
     wx/stackwalk.h

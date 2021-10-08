@@ -150,7 +150,7 @@ public:
     // replaces parts of the given (multiline) string with an ellipsis if needed
     static std::string Ellipsize(std::string_view label, const wxDC& dc,
                               wxEllipsizeMode mode, int maxWidth,
-                              unsigned int flags = wxELLIPSIZE_FLAGS_DEFAULT);
+                              EllipsizeFlags flags = wxEllipsizeFlags::Default);
 
     // return the accel index in the string or -1 if none and puts the modified
     // string into second parameter if non NULL

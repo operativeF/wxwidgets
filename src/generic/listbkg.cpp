@@ -173,7 +173,8 @@ int wxListbook::HitTest(const wxPoint& pt, unsigned int* flags) const
     // is the point inside list control?
     if ( wxRect(list->GetSize()).Contains(listPt) )
     {
-        unsigned int flagsList{};
+        ListHitTestFlags flagsList{};
+
         pagePos = list->HitTest(listPt, flagsList);
 
         if ( flags )
@@ -181,11 +182,10 @@ int wxListbook::HitTest(const wxPoint& pt, unsigned int* flags) const
             if ( pagePos != wxNOT_FOUND )
                 *flags = 0;
 
-            if ( flagsList & (wxLIST_HITTEST_ONITEMICON |
-                              wxLIST_HITTEST_ONITEMSTATEICON ) )
+            if ( flagsList & ListHitTest::OnItemIcon & ListHitTest::OnItemStateIcon )
                 *flags |= wxBK_HITTEST_ONICON;
 
-            if ( flagsList & wxLIST_HITTEST_ONITEMLABEL )
+            if ( flagsList & ListHitTest::OnItemLabel )
                 *flags |= wxBK_HITTEST_ONLABEL;
         }
     }
@@ -226,7 +226,7 @@ int wxListbook::GetPageImage(size_t n) const
 {
     wxListItem item;
     item.SetId(n);
-    item.SetMask(wxLIST_MASK_IMAGE);
+    item.SetMask(ListMaskFlags{ListMasks::Image});
 
     if (GetListView()->GetItem(item))
     {

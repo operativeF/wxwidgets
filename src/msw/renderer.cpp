@@ -1116,7 +1116,7 @@ void wxRendererXP::DrawItemText(wxWindow* win,
                 drawText = &ellipsizedText;
                 ellipsizedText = wxControl::Ellipsize(text, dc, ellipsizeMode,
                                                       rect.width,
-                                                      wxELLIPSIZE_FLAGS_NONE);
+                                                      wxEllipsizeFlags::None);
                 break;
 
             case wxEllipsizeMode::End:
