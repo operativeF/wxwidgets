@@ -87,37 +87,21 @@ enum wxFontSymbolicSize
 };
 
 // the font flag bits for the new font ctor accepting one combined flags word
-enum wxFontFlag
+enum class wxFontFlags
 {
-    // no special flags: font with default weight/slant/anti-aliasing
-    wxFONTFLAG_DEFAULT          = 0,
-
-    // slant flags (default: no slant)
-    wxFONTFLAG_ITALIC           = 1 << 0,
-    wxFONTFLAG_SLANT            = 1 << 1,
-
-    // weight flags (default: medium):
-    wxFONTFLAG_LIGHT            = 1 << 2,
-    wxFONTFLAG_BOLD             = 1 << 3,
-
-    // anti-aliasing flag: force on or off (default: the current system default)
-    wxFONTFLAG_ANTIALIASED      = 1 << 4,
-    wxFONTFLAG_NOT_ANTIALIASED  = 1 << 5,
-
-    // underlined/strikethrough flags (default: no lines)
-    wxFONTFLAG_UNDERLINED       = 1 << 6,
-    wxFONTFLAG_STRIKETHROUGH    = 1 << 7,
-
-    // the mask of all currently used flags
-    wxFONTFLAG_MASK = wxFONTFLAG_ITALIC             |
-                      wxFONTFLAG_SLANT              |
-                      wxFONTFLAG_LIGHT              |
-                      wxFONTFLAG_BOLD               |
-                      wxFONTFLAG_ANTIALIASED        |
-                      wxFONTFLAG_NOT_ANTIALIASED    |
-                      wxFONTFLAG_UNDERLINED         |
-                      wxFONTFLAG_STRIKETHROUGH
+    Default,
+    Italic,
+    Slant,
+    Light,
+    Bold,
+    Antialiased,
+    NotAntialiased,
+    Underlined,
+    Strikethrough,
+    _max_size
 };
+
+using FontFlags = InclBitfield<wxFontFlags>;
 
 // ----------------------------------------------------------------------------
 // wxFontInfo describes a wxFont
@@ -128,13 +112,10 @@ class wxFontInfo
 public:
     // Default ctor uses the default font size appropriate for the current
     // platform.
-    wxFontInfo()
-        : 
-         m_pixelSize(wxDefaultSize)
-    {
-        
+    wxFontInfo() : 
+        m_pixelSize(wxDefaultSize)
+    {    
         m_family = wxFontFamily::Default;
-        m_flags = wxFONTFLAG_DEFAULT;
         m_weight = wxFONTWEIGHT_NORMAL;
         m_encoding = wxFONTENCODING_DEFAULT;
     
@@ -147,7 +128,6 @@ public:
     {
         
         m_family = wxFontFamily::Default;
-        m_flags = wxFONTFLAG_DEFAULT;
         m_weight = wxFONTWEIGHT_NORMAL;
         m_encoding = wxFONTENCODING_DEFAULT;
 
@@ -163,7 +143,6 @@ public:
     {
         
         m_family = wxFontFamily::Default;
-        m_flags = wxFONTFLAG_DEFAULT;
         m_weight = wxFONTWEIGHT_NORMAL;
         m_encoding = wxFONTENCODING_DEFAULT;
     
@@ -185,9 +164,9 @@ public:
         { return Weight(light ? wxFONTWEIGHT_LIGHT : wxFONTWEIGHT_NORMAL); }
 
     wxFontInfo& Italic(bool italic = true)
-        { SetFlag(wxFONTFLAG_ITALIC, italic); return *this; }
+        { SetFlag(wxFontFlags::Italic, italic); return *this; }
     wxFontInfo& Slant(bool slant = true)
-        { SetFlag(wxFONTFLAG_SLANT, slant); return *this; }
+        { SetFlag(wxFontFlags::Slant, slant); return *this; }
     wxFontInfo& Style(wxFontStyle style)
     {
         if ( style == wxFontStyle::Italic )
@@ -200,23 +179,23 @@ public:
     }
 
     wxFontInfo& AntiAliased(bool antiAliased = true)
-        { SetFlag(wxFONTFLAG_ANTIALIASED, antiAliased); return *this; }
+        { SetFlag(wxFontFlags::Antialiased, antiAliased); return *this; }
     wxFontInfo& Underlined(bool underlined = true)
-        { SetFlag(wxFONTFLAG_UNDERLINED, underlined); return *this; }
+        { SetFlag(wxFontFlags::Underlined, underlined); return *this; }
     wxFontInfo& Strikethrough(bool strikethrough = true)
-        { SetFlag(wxFONTFLAG_STRIKETHROUGH, strikethrough); return *this; }
+        { SetFlag(wxFontFlags::Strikethrough, strikethrough); return *this; }
 
     wxFontInfo& Encoding(wxFontEncoding encoding)
         { m_encoding = encoding; return *this; }
 
     // Set all flags at once.
-    wxFontInfo& AllFlags(unsigned int flags)
+    wxFontInfo& AllFlags(FontFlags flags)
     {
         m_flags = flags;
 
-        m_weight = m_flags & wxFONTFLAG_BOLD
+        m_weight = m_flags & wxFontFlags::Bold
                         ? wxFONTWEIGHT_BOLD
-                        : m_flags & wxFONTFLAG_LIGHT
+                        : m_flags & wxFontFlags::Light
                             ? wxFONTWEIGHT_LIGHT
                             : wxFONTWEIGHT_NORMAL;
 
@@ -238,9 +217,9 @@ public:
 
     wxFontStyle GetStyle() const
     {
-        return m_flags & wxFONTFLAG_ITALIC
+        return (m_flags & wxFontFlags::Italic)
                         ? wxFontStyle::Italic
-                        : m_flags & wxFONTFLAG_SLANT
+                        : (m_flags & wxFontFlags::Slant)
                             ? wxFontStyle::Slant
                             : wxFontStyle::Normal;
     }
@@ -257,17 +236,17 @@ public:
 
     bool IsAntiAliased() const
     {
-        return (m_flags & wxFONTFLAG_ANTIALIASED) != 0;
+        return m_flags.is_set(wxFontFlags::Antialiased);
     }
 
     bool IsUnderlined() const
     {
-        return (m_flags & wxFONTFLAG_UNDERLINED) != 0;
+        return m_flags.is_set(wxFontFlags::Underlined);
     }
 
     bool IsStrikethrough() const
     {
-        return (m_flags & wxFONTFLAG_STRIKETHROUGH) != 0;
+        return m_flags.is_set(wxFontFlags::Strikethrough);
     }
 
     wxFontEncoding GetEncoding() const { return m_encoding; }
@@ -294,16 +273,14 @@ public:
     }
 
 private:
-    
-
     // Turn on or off the given bit in m_flags depending on the value of the
     // boolean argument.
-    void SetFlag(int flag, bool on)
+    void SetFlag(wxFontFlags flag, bool on)
     {
         if ( on )
-            m_flags |= flag;
+            m_flags.set(flag);
         else
-            m_flags &= ~flag;
+            m_flags.reset(flag);
     }
 
     // The size information: if m_pixelSize is valid (!= wxDefaultSize), then
@@ -314,7 +291,7 @@ private:
 
     wxFontFamily m_family;
     wxString m_faceName;
-    unsigned int m_flags;
+    FontFlags m_flags{wxFontFlags::Default};
     int m_weight;
     wxFontEncoding m_encoding;
 };
@@ -379,7 +356,7 @@ public:
     // parameters for each flag
     static wxFont *New(int pointSize,
                        wxFontFamily family,
-                       unsigned int flags = wxFONTFLAG_DEFAULT,
+                       FontFlags flags = wxFontFlags::Default,
                        const wxString& face = wxEmptyString,
                        wxFontEncoding encoding = wxFONTENCODING_DEFAULT);
 
@@ -388,7 +365,7 @@ public:
     // parameters for each flag
     static wxFont *New(const wxSize& pixelSize,
                        wxFontFamily family,
-                       unsigned int flags = wxFONTFLAG_DEFAULT,
+                       FontFlags flags = wxFontFlags::Default,
                        const wxString& face = wxEmptyString,
                        wxFontEncoding encoding = wxFONTENCODING_DEFAULT);
 
@@ -494,33 +471,33 @@ protected:
 
 
     // Helper functions to recover wxFONTSTYLE/wxFONTWEIGHT and underlined flag
-    // values from flags containing a combination of wxFONTFLAG_XXX.
-    static constexpr wxFontStyle GetStyleFromFlags(unsigned int flags) noexcept
+    // values from flags containing a combination of wxFontFlags.
+    static constexpr wxFontStyle GetStyleFromFlags(FontFlags flags) noexcept
     {
-        return flags & wxFONTFLAG_ITALIC
+        return (flags & wxFontFlags::Italic)
                         ? wxFontStyle::Italic
-                        : flags & wxFONTFLAG_SLANT
+                        : (flags & wxFontFlags::Slant)
                             ? wxFontStyle::Slant
                             : wxFontStyle::Normal;
     }
 
-    static constexpr wxFontWeight GetWeightFromFlags(unsigned int flags) noexcept
+    static constexpr wxFontWeight GetWeightFromFlags(FontFlags flags) noexcept
     {
-        return flags & wxFONTFLAG_LIGHT
+        return (flags & wxFontFlags::Light)
                         ? wxFONTWEIGHT_LIGHT
-                        : flags & wxFONTFLAG_BOLD
+                        : (flags & wxFontFlags::Bold)
                             ? wxFONTWEIGHT_BOLD
                             : wxFONTWEIGHT_NORMAL;
     }
 
-    static constexpr bool GetUnderlinedFromFlags(unsigned int flags) noexcept
+    static constexpr bool GetUnderlinedFromFlags(FontFlags flags) noexcept
     {
-        return (flags & wxFONTFLAG_UNDERLINED) != 0;
+        return flags.is_set(wxFontFlags::Underlined);
     }
 
-    static constexpr bool GetStrikethroughFromFlags(unsigned int flags) noexcept
+    static constexpr bool GetStrikethroughFromFlags(FontFlags flags) noexcept
     {
-        return (flags & wxFONTFLAG_STRIKETHROUGH) != 0;
+        return flags.is_set(wxFontFlags::Strikethrough);
     }
 
     // Create wxFontInfo object from the parameters passed to the legacy wxFont

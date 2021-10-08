@@ -67,6 +67,13 @@ public:
         return *this;
     }
 
+    constexpr bool is_set(const Enum& e) const noexcept
+    {
+        auto fields = m_fields;
+        fields &= bitmask(e);
+        return fields != value_type{0};
+    }
+
     constexpr auto& operator|=(const Bitfield& otherBf) noexcept
     {
         m_fields |= otherBf.as_value();

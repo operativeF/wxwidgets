@@ -3154,7 +3154,7 @@ public :
     wxGraphicsFont wxCreateFont( const wxFont &font , const wxColour &col = *wxBLACK ) override ;
     virtual wxGraphicsFont wxCreateFont(double sizeInPixels,
                                       const wxString& facename,
-                                      int flags = wxFONTFLAG_DEFAULT,
+                                      FontFlags flags = wxFontFlags::Default,
                                       const wxColour& col = *wxBLACK) override;
     virtual wxGraphicsFont CreateFontAtDPI(const wxFont& font,
                                            const wxRealPoint& dpi,

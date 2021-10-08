@@ -15,6 +15,7 @@
 
 #if wxUSE_FINDREPLDLG
 
+#include "wx/bitflags.h"
 #include "wx/dialog.h"
 
 #include <cstdint>
@@ -30,17 +31,15 @@ class WXDLLIMPEXP_FWD_CORE wxFindReplaceDialogImpl;
 // ----------------------------------------------------------------------------
 
 // flags used by wxFindDialogEvent::GetFlags()
-enum wxFindReplaceFlags
+enum class wxFindReplaceFlags
 {
-    // downward search/replace selected (otherwise - upwards)
-    wxFR_DOWN       = 1,
-
-    // whole word search/replace selected
-    wxFR_WHOLEWORD  = 2,
-
-    // case sensitive search/replace selected (otherwise - case insensitive)
-    wxFR_MATCHCASE  = 4
+    Down,      // downward search/replace selected (otherwise - upwards)
+    WholeWord, // whole word search/replace selected
+    MatchCase, // case sensitive search/replace selected (otherwise - case insensitive)
+    _max_size
 };
+
+using FindReplaceFlags = InclBitfield<wxFindReplaceFlags>;
 
 // these flags can be specified in wxFindReplaceDialog ctor or Create()
 enum wxFindReplaceDialogStyles
@@ -66,24 +65,25 @@ class WXDLLIMPEXP_CORE wxFindReplaceData
 {
 public:
     wxFindReplaceData() = default;
-    wxFindReplaceData(std::uint32_t flags) { SetFlags(flags); }
+    wxFindReplaceData(FindReplaceFlags flags) { SetFlags(flags); }
 
     const std::string& GetFindString() const { return m_FindWhat; }
     const std::string& GetReplaceString() const { return m_ReplaceWith; }
 
-    int GetFlags() const { return m_Flags; }
+    FindReplaceFlags GetFlags() const { return m_flags; }
 
     // setters: may only be called before showing the dialog, no effect later
     // FIXME: Then get rid of this and put it in the constructor.
-    void SetFlags(std::uint32_t flags) { m_Flags = flags; }
+    void SetFlags(FindReplaceFlags flags) { m_flags = flags; }
 
     void SetFindString(const std::string& str) { m_FindWhat = str; }
     void SetReplaceString(const std::string& str) { m_ReplaceWith = str; }
 
 private:
-    std::uint32_t m_Flags {0};
-    std::string m_FindWhat;
-    std::string m_ReplaceWith;
+    std::string      m_FindWhat;
+    std::string      m_ReplaceWith;
+
+    FindReplaceFlags m_flags{};
 
     friend class wxFindReplaceDialogBase;
 };
@@ -156,7 +156,7 @@ public:
         { return wxStaticCast(GetEventObject(), wxFindReplaceDialog); }
 
     // implementation only
-    void SetFlags(unsigned int flags) { SetInt(flags); }
+    void SetFlags(FindReplaceFlags flags) { SetInt(flags.as_value()); }
     void SetFindString(const std::string& str) { SetString(str); }
     void SetReplaceString(const std::string& str) { m_strReplace = str; }
 

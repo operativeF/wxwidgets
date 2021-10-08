@@ -169,16 +169,7 @@ enum wxBackgroundStyle
         Indicates that the window background is not erased, letting the parent
         window show through.
      */
-    wxBG_STYLE_TRANSPARENT,
-
-    /* this style is deprecated and doesn't do anything, don't use */
-    wxBG_STYLE_COLOUR,
-
-    /*
-        this style is deprecated and is synonymous with
-        wxBG_STYLE_PAINT, use the new name
-     */
-    wxBG_STYLE_CUSTOM = wxBG_STYLE_PAINT
+    wxBG_STYLE_TRANSPARENT
 };
 
 

@@ -36,7 +36,7 @@ void wxFindReplaceDialogBase::Send(wxFindDialogEvent& event)
 {
     // we copy the data to dialog->GetData() as well
 
-    m_FindReplaceData->m_Flags = event.GetFlags();
+    m_FindReplaceData->m_flags = FindReplaceFlags{event.GetFlags()};
     m_FindReplaceData->m_FindWhat = event.GetFindString();
     if ( HasFlag(wxFR_REPLACEDIALOG) &&
          (event.GetEventType() == wxEVT_FIND_REPLACE ||

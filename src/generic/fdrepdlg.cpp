@@ -164,15 +164,15 @@ bool wxGenericFindReplaceDialog::Create(wxWindow *parent,
     topsizer->Add(leftsizer, 1, wxALL, isPda ? 0 : 5);
     topsizer->Add(bttnsizer, 0, wxALL, isPda ? 0 : 5);
 
-    int flags = m_FindReplaceData->GetFlags();
+    auto flags = m_FindReplaceData->GetFlags();
 
-    if ( flags & wxFR_MATCHCASE )
+    if ( flags & wxFindReplaceFlags::MatchCase )
         m_chkCase->SetValue(true);
 
-    if ( flags & wxFR_WHOLEWORD )
+    if ( flags & wxFindReplaceFlags::WholeWord )
         m_chkWord->SetValue(true);
 
-    m_radioDir->SetSelection( flags & wxFR_DOWN );
+    m_radioDir->SetSelection( flags & wxFindReplaceFlags::Down );
 
     if ( style & wxFR_NOMATCHCASE )
         m_chkCase->Enable(false);
@@ -210,17 +210,17 @@ void wxGenericFindReplaceDialog::SendEvent(const wxEventType& evtType)
         event.SetReplaceString(m_textRepl->GetValue());
     }
 
-    int flags = 0;
+    FindReplaceFlags flags{};
 
     if ( m_chkCase->GetValue() )
-        flags |= wxFR_MATCHCASE;
+        flags |= wxFindReplaceFlags::MatchCase;
 
     if ( m_chkWord->GetValue() )
-        flags |= wxFR_WHOLEWORD;
+        flags |= wxFindReplaceFlags::WholeWord;
 
     if ( !m_radioDir || m_radioDir->GetSelection() == 1 )
     {
-        flags |= wxFR_DOWN;
+        flags |= wxFindReplaceFlags::Down;
     }
 
     event.SetFlags(flags);

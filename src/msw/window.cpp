@@ -5331,7 +5331,6 @@ bool wxWindowMSW::HandleEraseBkgnd(WXHDC hdc)
     switch ( GetBackgroundStyle() )
     {
         case wxBG_STYLE_ERASE:
-        case wxBG_STYLE_COLOUR:
             // we need to generate an erase background event
             {
                 wxDCTemp dc(hdc, GetClientSize());

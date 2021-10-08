@@ -5007,7 +5007,7 @@ public :
 
     wxGraphicsFont wxCreateFont(float sizeInPixels,
                                 const std::string& facename,
-                                unsigned int flags = wxFONTFLAG_DEFAULT,
+                                FontFlags flags = wxFontFlags::Default,
                                 const wxColour& col = *wxBLACK) override;
 
     wxGraphicsFont CreateFontAtDPI(const wxFont& font,
@@ -5259,7 +5259,7 @@ wxGraphicsFont wxD2DRenderer::wxCreateFont(const wxFont& font, const wxColour& c
 
 wxGraphicsFont wxD2DRenderer::wxCreateFont(float sizeInPixels,
                                          const std::string& facename,
-                                         unsigned int flags,
+                                         FontFlags flags,
                                          const wxColour& col)
 {
     using msw::utils::unique_dcwnd;

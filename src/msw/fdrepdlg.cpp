@@ -48,7 +48,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxFindReplaceDialog, wxDialog);
 class WXDLLEXPORT wxFindReplaceDialogImpl
 {
 public:
-    wxFindReplaceDialogImpl(wxFindReplaceDialog *dialog, unsigned int flagsWX);
+    wxFindReplaceDialogImpl(wxFindReplaceDialog *dialog, FindReplaceFlags flagsWX);
     ~wxFindReplaceDialogImpl();
 
     wxFindReplaceDialogImpl(const wxFindReplaceDialogImpl&) = delete;
@@ -94,7 +94,7 @@ private:
 // ----------------------------------------------------------------------------
 
 wxFindReplaceDialogImpl::wxFindReplaceDialogImpl(wxFindReplaceDialog *dialog,
-                                                 unsigned int flagsWX)
+                                                 FindReplaceFlags flagsWX)
 {
     // get the identifier for the find dialog message if we don't have it yet
     if ( !ms_msgFindDialog )
@@ -129,11 +129,11 @@ wxFindReplaceDialogImpl::wxFindReplaceDialogImpl(wxFindReplaceDialog *dialog,
         flags |= FR_NOUPDOWN;
 
     // and now the flags governing the initial values of the dialogs controls
-    if ( flagsWX & wxFR_DOWN)
+    if ( flagsWX & wxFindReplaceFlags::Down)
         flags |= FR_DOWN;
-    if ( flagsWX & wxFR_MATCHCASE)
+    if ( flagsWX & wxFindReplaceFlags::MatchCase)
         flags |= FR_MATCHCASE;
-    if ( flagsWX & wxFR_WHOLEWORD )
+    if ( flagsWX & wxFindReplaceFlags::WholeWord )
         flags |= FR_WHOLEWORD;
 
     m_findReplace.lStructSize = sizeof(FINDREPLACE);
@@ -230,14 +230,14 @@ wxFindReplaceDialogImpl::FindMessageHandler(wxWindow * WXUNUSED(win),
         return false;
     }
 
-    unsigned int flags{};
+    FindReplaceFlags flags{};
 
     if ( pFR->Flags & FR_DOWN )
-        flags |= wxFR_DOWN;
+        flags |= wxFindReplaceFlags::Down;
     if ( pFR->Flags & FR_WHOLEWORD )
-        flags |= wxFR_WHOLEWORD;
+        flags |= wxFindReplaceFlags::WholeWord;
     if ( pFR->Flags & FR_MATCHCASE )
-        flags |= wxFR_MATCHCASE;
+        flags |= wxFindReplaceFlags::MatchCase;
 
     wxFindDialogEvent event(evtType, dialog->GetId());
 
