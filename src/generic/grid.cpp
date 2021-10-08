@@ -108,7 +108,6 @@ struct DefaultHeaderRenderers
 // constants
 // ----------------------------------------------------------------------------
 
-wxGridCellCoords wxGridNoCellCoords( -1, -1 );
 wxGridBlockCoords wxGridNoBlockCoords( -1, -1, -1, -1 );
 wxRect wxGridNoCellRect( -1, -1, -1, -1 );
 
