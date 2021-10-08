@@ -7,7 +7,6 @@ template<typename Enum>
 concept BitfieldCompatible =  requires
 {
     requires(std::is_enum_v<Enum>);
-    requires(std::unsigned_integral<std::underlying_type_t<Enum>>);
     {Enum::_max_size};
 };
 
@@ -24,8 +23,9 @@ template<typename Enum, typename Tag> requires(BitfieldCompatible<Enum>)
 class Bitfield
 {
 public:
-    // TODO: Specialize based on the number of bits.
     using value_type = std::underlying_type_t<Enum>;
+
+    constexpr Bitfield() {}
 
     explicit constexpr Bitfield(value_type bits) : m_fields{bits}
     {
@@ -36,9 +36,44 @@ public:
         set(e);
     }
 
+    template<typename... Enums> requires(BitfieldCompatible<Enums> && ...)
+    constexpr Bitfield(const Enums&... es)
+    {
+        (set(es), ...);
+    }
+
     static constexpr value_type bitmask(const Enum& e) noexcept
     {
-        return value_type{1} << static_cast<std::size_t>(e);
+        return value_type{1} << static_cast<value_type>(e);
+    }
+
+    template<typename... Enums> requires(BitfieldCompatible<Enums> && ...)
+    static constexpr value_type bitmask(const Enums&... es) noexcept
+    {
+        return ((value_type{ 1 } << static_cast<value_type>(es)) | ...);
+    }
+
+    static constexpr value_type AllFlagsSet = bitmask(Enum::_max_size) - value_type{1};
+
+    constexpr auto& operator|=(const Enum& e) noexcept
+    {
+        m_fields |= bitmask(e);
+
+        return *this;
+    }
+
+    constexpr auto& operator&=(const Enum& e) noexcept
+    {
+        m_fields &= bitmask(e);
+
+        return *this;
+    }
+
+    constexpr auto& operator^=(const Enum& e) noexcept
+    {
+        m_fields ^= bitmask(e);
+
+        return *this;
     }
 
     constexpr auto clear() noexcept
@@ -66,14 +101,9 @@ public:
         m_fields = (value_type{1} << static_cast<value_type>(Enum::_max_size)) - value_type{1};
     }
 
-    constexpr auto operator|=(const Enum& e) noexcept
+    constexpr void toggle_all() noexcept
     {
-        m_fields |= static_cast<std::size_t>(e);
-    }
-
-    constexpr auto operator&=(const Enum& e) noexcept
-    {
-        m_fields &= static_cast<std::size_t>(e);
+        m_fields ^= AllFlagsSet;
     }
 
     constexpr auto as_value() const noexcept
@@ -84,9 +114,28 @@ public:
     auto operator<=>(const Bitfield&) const noexcept = default;
 
 private:
-    value_type m_fields;
+    value_type m_fields{};
 };
 
+template<typename Enum> requires(BitfieldCompatible<Enum>)
+constexpr auto operator|(InclBitfield<Enum> bf, const Enum& e) noexcept
+{
+    bf |= e;
+    return bf;
+}
 
+template<typename Enum> requires(BitfieldCompatible<Enum>)
+constexpr auto operator&(InclBitfield<Enum> bf, const Enum& e) noexcept
+{
+    bf &= e;
+    return bf;
+}
+
+template<typename Enum> requires(BitfieldCompatible<Enum>)
+constexpr auto operator^(InclBitfield<Enum> bf, const Enum& e) noexcept
+{
+    bf ^= e;
+    return bf;
+}
 
 #endif // _BITFLAGS_H_
