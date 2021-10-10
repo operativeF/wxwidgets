@@ -221,7 +221,7 @@ class WXDLLIMPEXP_FWD_CORE wxMDIParentFrame;
 class WXDLLIMPEXP_FWD_CORE wxFrame;
 
 // This class implements the layout algorithm
-class WXDLLIMPEXP_CORE wxLayoutAlgorithm: public wxObject
+class WXDLLIMPEXP_CORE wxLayoutAlgorithm
 {
 public:
     wxLayoutAlgorithm() = default;

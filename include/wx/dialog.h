@@ -289,7 +289,7 @@ private:
  * a help mechanism.
  */
 
-class WXDLLIMPEXP_CORE wxDialogLayoutAdapter: public wxObject
+class WXDLLIMPEXP_CORE wxDialogLayoutAdapter
 {
     wxDECLARE_CLASS(wxDialogLayoutAdapter);
 public:

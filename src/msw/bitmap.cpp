@@ -151,7 +151,6 @@ private:
 // ----------------------------------------------------------------------------
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxBitmap, wxGDIObject);
-wxIMPLEMENT_DYNAMIC_CLASS(wxMask, wxObject);
 
 
 // ============================================================================

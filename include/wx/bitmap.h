@@ -44,7 +44,7 @@ DECLARE_VARIANT_OBJECT_EXPORTED(wxBitmap,WXDLLIMPEXP_CORE)
 
 // TODO: all implementation of wxMask, except the generic one,
 //       do not derive from wxMaskBase,,, they should
-class WXDLLIMPEXP_CORE wxMaskBase : public wxObject
+class WXDLLIMPEXP_CORE wxMaskBase
 {
 public:
     // create the mask from bitmap pixels of the given colour

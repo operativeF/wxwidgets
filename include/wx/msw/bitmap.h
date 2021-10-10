@@ -233,7 +233,7 @@ private:
 
 using msw::utils::unique_bitmap;
 
-class WXDLLIMPEXP_CORE wxMask : public wxObject
+class WXDLLIMPEXP_CORE wxMask
 {
 public:
     wxMask();
@@ -269,8 +269,6 @@ public:
 
 protected:
     unique_bitmap m_maskBitmap;
-
-    wxDECLARE_DYNAMIC_CLASS(wxMask);
 };
 
 

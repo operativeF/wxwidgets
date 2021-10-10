@@ -39,8 +39,6 @@ WX_DEFINE_LIST(wxToolBarToolsList)
 // wxToolBarToolBase
 // ----------------------------------------------------------------------------
 
-wxIMPLEMENT_DYNAMIC_CLASS(wxToolBarToolBase, wxObject);
-
 wxToolBarToolBase::~wxToolBarToolBase()
 {
 #if wxUSE_MENUS

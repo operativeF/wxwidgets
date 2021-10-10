@@ -51,7 +51,7 @@ enum class wxToolBarToolStyle
 // for the applications status bar.
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxToolBarToolBase : public wxObject
+class WXDLLIMPEXP_CORE wxToolBarToolBase
 {
 public:
 
@@ -234,11 +234,6 @@ protected:
     // tool state
     bool m_toggled{false};
     bool m_enabled{true};
-
-public:
-	wxClassInfo *wxGetClassInfo() const override;
-	static wxClassInfo ms_classInfo;
-	static wxObject* wxCreateObject();
 };
 
 // a list of toolbar tools
