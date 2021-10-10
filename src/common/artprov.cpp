@@ -14,7 +14,7 @@
 
 
 #include "wx/artprov.h"
-#include "wx/dialogflags.h"
+
 #include "wx/list.h"
 #include "wx/log.h"
 #include "wx/hashmap.h"
@@ -340,24 +340,24 @@ wxIcon wxArtProvider::GetIcon(const wxArtID& id,
 }
 
 /* static */
-wxArtID wxArtProvider::GetMessageBoxIconId(wxDialogIconFlags flags)
+wxArtID wxArtProvider::GetMessageBoxIconId(unsigned int flags)
 {
-    switch ( flags )
+    switch ( flags & wxICON_MASK )
     {
         default:
             wxFAIL_MSG("incorrect message box icon flags");
             [[fallthrough]];
 
-        case wxDialogIconFlags::Error:
+        case wxICON_ERROR:
             return wxART_ERROR;
 
-        case wxDialogIconFlags::Information:
+        case wxICON_INFORMATION:
             return wxART_INFORMATION;
 
-        case wxDialogIconFlags::Warning:
+        case wxICON_WARNING:
             return wxART_WARNING;
 
-        case wxDialogIconFlags::Question:
+        case wxICON_QUESTION:
             return wxART_QUESTION;
     }
 }

@@ -295,7 +295,7 @@ void wxEmulatorFrame::OnAbout(wxCommandEvent& WXUNUSED(event))
     wxString msg;
     msg.Printf( wxT("wxEmulator is an environment for testing embedded X11 apps.\n"));
 
-    wxMessageBox(msg, wxT("About wxEmulator"), DialogFlags{wxDialogFlags::OK, wxDialogIconFlags::Information}, this);
+    wxMessageBox(msg, wxT("About wxEmulator"), wxOK | wxICON_INFORMATION, this);
 }
 
 void wxEmulatorFrame::OnCloseWindow(wxCloseEvent& WXUNUSED(event))

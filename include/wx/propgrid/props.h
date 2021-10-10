@@ -784,7 +784,7 @@ wxValidator* PROPNAME::DoGetValidator () const \
 #include "wx/editlbox.h"
 
 #define wxAEDIALOG_STYLE \
-    (wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER | wxDialogFlags::OK | wxDialogFlags::Cancel | wxCENTRE)
+    (wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER | wxOK | wxCANCEL | wxCENTRE)
 
 class WXDLLIMPEXP_PROPGRID wxPGArrayEditorDialog : public wxDialog
 {

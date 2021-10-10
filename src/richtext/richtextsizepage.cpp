@@ -123,37 +123,37 @@ void wxRichTextSizePage::CreateControls()
     itemRichTextDialogPage1->SetSizer(itemBoxSizer2);
 
     m_parentSizer = new wxBoxSizer(wxVERTICAL);
-    itemBoxSizer2->Add(m_parentSizer, 0, wxStretch::Grow|wxDirection::All, 5);
+    itemBoxSizer2->Add(m_parentSizer, 0, wxGROW|wxALL, 5);
 
     m_floatingAlignmentSizer = new wxBoxSizer(wxHORIZONTAL);
-    m_parentSizer->Add(m_floatingAlignmentSizer, 0, wxStretch::Grow, 5);
+    m_parentSizer->Add(m_floatingAlignmentSizer, 0, wxGROW, 5);
 
     m_floatingSizer = new wxBoxSizer(wxHORIZONTAL);
-    m_floatingAlignmentSizer->Add(m_floatingSizer, 1, wxAlignment::CenterVertical, 5);
+    m_floatingAlignmentSizer->Add(m_floatingSizer, 1, wxALIGN_CENTER_VERTICAL, 5);
 
     wxBoxSizer* itemBoxSizer6 = new wxBoxSizer(wxVERTICAL);
-    m_floatingSizer->Add(itemBoxSizer6, 0, wxAlignment::CenterVertical, 5);
+    m_floatingSizer->Add(itemBoxSizer6, 0, wxALIGN_CENTER_VERTICAL, 5);
 
     wxBoxSizer* itemBoxSizer7 = new wxBoxSizer(wxHORIZONTAL);
-    itemBoxSizer6->Add(itemBoxSizer7, 0, wxStretch::Grow, 5);
+    itemBoxSizer6->Add(itemBoxSizer7, 0, wxGROW, 5);
 
     wxStaticText* itemStaticText8 = new wxStaticText( itemRichTextDialogPage1, wxID_STATIC, _("Floating"), wxDefaultPosition, wxDefaultSize, 0 );
     itemStaticText8->SetFont(wxFont(wxSystemSettings::GetFont(wxSYS_DEFAULT_GUI_FONT).GetPointSize(), wxSystemSettings::GetFont(wxSYS_DEFAULT_GUI_FONT).GetFamily(), wxSystemSettings::GetFont(wxSYS_DEFAULT_GUI_FONT).GetStyle(), wxFONTWEIGHT_BOLD));
-    itemBoxSizer7->Add(itemStaticText8, 0, wxAlignment::CenterVertical|wxDirection::All, 5);
+    itemBoxSizer7->Add(itemStaticText8, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5);
 
     wxStaticLine* itemStaticLine9 = new wxStaticLine( itemRichTextDialogPage1, wxID_STATIC, wxDefaultPosition, wxDefaultSize, wxLI_HORIZONTAL );
-    itemBoxSizer7->Add(itemStaticLine9, 1, wxAlignment::CenterVertical|wxDirection::All, 5);
+    itemBoxSizer7->Add(itemStaticLine9, 1, wxALIGN_CENTER_VERTICAL|wxALL, 5);
 
     wxBoxSizer* itemBoxSizer10 = new wxBoxSizer(wxHORIZONTAL);
-    itemBoxSizer6->Add(itemBoxSizer10, 0, wxStretch::Grow, 5);
+    itemBoxSizer6->Add(itemBoxSizer10, 0, wxGROW, 5);
 
-    itemBoxSizer10->Add(5, 5, 0, wxAlignment::CenterVertical|wxDirection::All, 5);
+    itemBoxSizer10->Add(5, 5, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5);
 
     wxFlexGridSizer* itemFlexGridSizer12 = new wxFlexGridSizer(0, 2, 0, 0);
-    itemBoxSizer10->Add(itemFlexGridSizer12, 0, wxAlignment::CenterVertical|wxDirection::Right, 5);
+    itemBoxSizer10->Add(itemFlexGridSizer12, 0, wxALIGN_CENTER_VERTICAL|wxRIGHT, 5);
 
     wxStaticText* itemStaticText13 = new wxStaticText( itemRichTextDialogPage1, wxID_STATIC, _("&Floating mode:"), wxDefaultPosition, wxDefaultSize, 0 );
-    itemFlexGridSizer12->Add(itemStaticText13, 0, wxAlignment::Right|wxAlignment::CenterVertical|wxDirection::All, 5);
+    itemFlexGridSizer12->Add(itemStaticText13, 0, wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
 
     std::vector<std::string> m_floatStrings;
     m_floatStrings.push_back("None");
@@ -164,34 +164,34 @@ void wxRichTextSizePage::CreateControls()
     m_float->SetHelpText(_("How the object will float relative to the text."));
     if (wxRichTextSizePage::ShowToolTips())
         m_float->SetToolTip(_("How the object will float relative to the text."));
-    itemFlexGridSizer12->Add(m_float, 0, wxAlignment::Left|wxAlignment::CenterVertical|wxDirection::All, 5);
+    itemFlexGridSizer12->Add(m_float, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
 
-    m_floatingSizer->Add(0, 0, 1, wxAlignment::CenterVertical, 5);
+    m_floatingSizer->Add(0, 0, 1, wxALIGN_CENTER_VERTICAL, 5);
 
     m_alignmentSizer = new wxBoxSizer(wxVERTICAL);
-    m_floatingAlignmentSizer->Add(m_alignmentSizer, 0, wxAlignment::CenterVertical, 5);
+    m_floatingAlignmentSizer->Add(m_alignmentSizer, 0, wxALIGN_CENTER_VERTICAL, 5);
 
     wxBoxSizer* itemBoxSizer17 = new wxBoxSizer(wxHORIZONTAL);
-    m_alignmentSizer->Add(itemBoxSizer17, 0, wxStretch::Grow, 5);
+    m_alignmentSizer->Add(itemBoxSizer17, 0, wxGROW, 5);
 
     wxStaticText* itemStaticText18 = new wxStaticText( itemRichTextDialogPage1, wxID_STATIC, _("Alignment"), wxDefaultPosition, wxDefaultSize, 0 );
     itemStaticText18->SetFont(wxFont(wxSystemSettings::GetFont(wxSYS_DEFAULT_GUI_FONT).GetPointSize(), wxSystemSettings::GetFont(wxSYS_DEFAULT_GUI_FONT).GetFamily(), wxSystemSettings::GetFont(wxSYS_DEFAULT_GUI_FONT).GetStyle(), wxFONTWEIGHT_BOLD));
-    itemBoxSizer17->Add(itemStaticText18, 0, wxAlignment::CenterVertical|wxDirection::All, 5);
+    itemBoxSizer17->Add(itemStaticText18, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5);
 
     wxStaticLine* itemStaticLine19 = new wxStaticLine( itemRichTextDialogPage1, wxID_STATIC, wxDefaultPosition, wxDefaultSize, wxLI_HORIZONTAL );
-    itemBoxSizer17->Add(itemStaticLine19, 1, wxAlignment::CenterVertical|wxDirection::All, 5);
+    itemBoxSizer17->Add(itemStaticLine19, 1, wxALIGN_CENTER_VERTICAL|wxALL, 5);
 
     wxBoxSizer* itemBoxSizer20 = new wxBoxSizer(wxHORIZONTAL);
-    m_alignmentSizer->Add(itemBoxSizer20, 0, wxStretch::Grow, 5);
+    m_alignmentSizer->Add(itemBoxSizer20, 0, wxGROW, 5);
 
-    itemBoxSizer20->Add(5, 5, 0, wxAlignment::CenterVertical|wxDirection::All, 5);
+    itemBoxSizer20->Add(5, 5, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5);
 
     m_verticalAlignmentCheckbox = new wxCheckBox( itemRichTextDialogPage1, ID_RICHTEXT_VERTICAL_ALIGNMENT_CHECKBOX, _("&Vertical alignment:"), wxDefaultPosition, wxDefaultSize, 0 );
     m_verticalAlignmentCheckbox->SetValue(false);
     m_verticalAlignmentCheckbox->SetHelpText(_("Enable vertical alignment."));
     if (wxRichTextSizePage::ShowToolTips())
         m_verticalAlignmentCheckbox->SetToolTip(_("Enable vertical alignment."));
-    itemBoxSizer20->Add(m_verticalAlignmentCheckbox, 0, wxAlignment::CenterVertical|wxDirection::All, 5);
+    itemBoxSizer20->Add(m_verticalAlignmentCheckbox, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5);
 
     std::vector<std::string> m_verticalAlignmentComboBoxStrings;
     m_verticalAlignmentComboBoxStrings.push_back("Top");
@@ -202,228 +202,228 @@ void wxRichTextSizePage::CreateControls()
     m_verticalAlignmentComboBox->SetHelpText(_("Vertical alignment."));
     if (wxRichTextSizePage::ShowToolTips())
         m_verticalAlignmentComboBox->SetToolTip(_("Vertical alignment."));
-    itemBoxSizer20->Add(m_verticalAlignmentComboBox, 0, wxAlignment::CenterVertical|wxDirection::All, 5);
+    itemBoxSizer20->Add(m_verticalAlignmentComboBox, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5);
 
     wxBoxSizer* itemBoxSizer24 = new wxBoxSizer(wxHORIZONTAL);
-    m_parentSizer->Add(itemBoxSizer24, 0, wxStretch::Grow, 5);
+    m_parentSizer->Add(itemBoxSizer24, 0, wxGROW, 5);
 
     wxStaticText* itemStaticText25 = new wxStaticText( itemRichTextDialogPage1, wxID_STATIC, _("Size"), wxDefaultPosition, wxDefaultSize, 0 );
     itemStaticText25->SetFont(wxFont(wxSystemSettings::GetFont(wxSYS_DEFAULT_GUI_FONT).GetPointSize(), wxSystemSettings::GetFont(wxSYS_DEFAULT_GUI_FONT).GetFamily(), wxSystemSettings::GetFont(wxSYS_DEFAULT_GUI_FONT).GetStyle(), wxFONTWEIGHT_BOLD));
-    itemBoxSizer24->Add(itemStaticText25, 0, wxAlignment::CenterVertical|wxDirection::All, 5);
+    itemBoxSizer24->Add(itemStaticText25, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5);
 
     wxStaticLine* itemStaticLine26 = new wxStaticLine( itemRichTextDialogPage1, wxID_STATIC, wxDefaultPosition, wxDefaultSize, wxLI_HORIZONTAL );
-    itemBoxSizer24->Add(itemStaticLine26, 1, wxAlignment::CenterVertical|wxDirection::All, 5);
+    itemBoxSizer24->Add(itemStaticLine26, 1, wxALIGN_CENTER_VERTICAL|wxALL, 5);
 
     wxBoxSizer* itemBoxSizer27 = new wxBoxSizer(wxHORIZONTAL);
-    m_parentSizer->Add(itemBoxSizer27, 0, wxStretch::Grow, 5);
+    m_parentSizer->Add(itemBoxSizer27, 0, wxGROW, 5);
 
-    itemBoxSizer27->Add(5, 5, 0, wxAlignment::CenterVertical|wxDirection::All, 5);
+    itemBoxSizer27->Add(5, 5, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5);
 
     m_sizeSizer = new wxFlexGridSizer(0, 4, 0, 0);
-    itemBoxSizer27->Add(m_sizeSizer, 0, wxAlignment::CenterVertical, 5);
+    itemBoxSizer27->Add(m_sizeSizer, 0, wxALIGN_CENTER_VERTICAL, 5);
 
     m_widthSizer = new wxBoxSizer(wxHORIZONTAL);
-    m_sizeSizer->Add(m_widthSizer, 0, wxAlignment::Left|wxAlignment::CenterVertical, 5);
+    m_sizeSizer->Add(m_widthSizer, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, 5);
 
     m_widthCheckbox = new wxCheckBox( itemRichTextDialogPage1, ID_RICHTEXT_WIDTH_CHECKBOX, _("&Width:"), wxDefaultPosition, wxDefaultSize, 0 );
     m_widthCheckbox->SetValue(false);
     m_widthCheckbox->SetHelpText(_("Enable the width value."));
     if (wxRichTextSizePage::ShowToolTips())
         m_widthCheckbox->SetToolTip(_("Enable the width value."));
-    m_widthSizer->Add(m_widthCheckbox, 0, wxAlignment::CenterVertical|wxDirection::Left|wxDirection::Top|wxDirection::Bottom, 5);
+    m_widthSizer->Add(m_widthCheckbox, 0, wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
 
     m_widthLabel = new wxStaticText( itemRichTextDialogPage1, wxID_STATIC, _("&Width:"), wxDefaultPosition, wxDefaultSize, 0 );
     m_widthLabel->Show(false);
-    m_widthSizer->Add(m_widthLabel, 0, wxAlignment::CenterVertical|wxDirection::All, 5);
+    m_widthSizer->Add(m_widthLabel, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5);
 
     wxBoxSizer* itemBoxSizer33 = new wxBoxSizer(wxHORIZONTAL);
-    m_sizeSizer->Add(itemBoxSizer33, 0, wxAlignment::Left|wxAlignment::CenterVertical, 5);
+    m_sizeSizer->Add(itemBoxSizer33, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, 5);
 
     m_width = new wxTextCtrl( itemRichTextDialogPage1, ID_RICHTEXT_WIDTH, "", wxDefaultPosition, wxSize(60, -1), 0 );
     m_width->SetHelpText(_("The object width."));
     if (wxRichTextSizePage::ShowToolTips())
         m_width->SetToolTip(_("The object width."));
-    itemBoxSizer33->Add(m_width, 0, wxAlignment::CenterVertical|wxDirection::Left|wxDirection::Top|wxDirection::Bottom, 5);
+    itemBoxSizer33->Add(m_width, 0, wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
 
     std::vector<std::string> m_unitsWStrings;
     m_unitsWStrings.push_back("px");
     m_unitsWStrings.push_back("cm");
     m_unitsWStrings.push_back("%");
-    m_unitsW = new wxComboBox( itemRichTextDialogPage1, ID_RICHTEXT_UNITS_W, _("px"), wxDefaultPosition, wxSize(60, -1), m_unitsWStrings, ComboStyles::ReadOnly );
+    m_unitsW = new wxComboBox( itemRichTextDialogPage1, ID_RICHTEXT_UNITS_W, _("px"), wxDefaultPosition, wxSize(60, -1), m_unitsWStrings, wxCB_READONLY );
     m_unitsW->SetStringSelection(_("px"));
     m_unitsW->SetHelpText(_("Units for the object width."));
     if (wxRichTextSizePage::ShowToolTips())
         m_unitsW->SetToolTip(_("Units for the object width."));
-    itemBoxSizer33->Add(m_unitsW, 0, wxAlignment::CenterVertical|wxDirection::All, 5);
+    itemBoxSizer33->Add(m_unitsW, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5);
 
     m_heightSizer = new wxBoxSizer(wxHORIZONTAL);
-    m_sizeSizer->Add(m_heightSizer, 0, wxAlignment::Left|wxAlignment::CenterVertical, 5);
+    m_sizeSizer->Add(m_heightSizer, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, 5);
 
     m_heightCheckbox = new wxCheckBox( itemRichTextDialogPage1, ID_RICHTEXT_HEIGHT_CHECKBOX, _("&Height:"), wxDefaultPosition, wxDefaultSize, 0 );
     m_heightCheckbox->SetValue(false);
     m_heightCheckbox->SetHelpText(_("Enable the height value."));
     if (wxRichTextSizePage::ShowToolTips())
         m_heightCheckbox->SetToolTip(_("Enable the height value."));
-    m_heightSizer->Add(m_heightCheckbox, 0, wxAlignment::CenterVertical|wxDirection::Left|wxDirection::Top|wxDirection::Bottom, 5);
+    m_heightSizer->Add(m_heightCheckbox, 0, wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
 
     m_heightLabel = new wxStaticText( itemRichTextDialogPage1, wxID_STATIC, _("&Height:"), wxDefaultPosition, wxDefaultSize, 0 );
     m_heightLabel->Show(false);
-    m_heightSizer->Add(m_heightLabel, 0, wxAlignment::CenterVertical|wxDirection::All, 5);
+    m_heightSizer->Add(m_heightLabel, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5);
 
     wxBoxSizer* itemBoxSizer39 = new wxBoxSizer(wxHORIZONTAL);
-    m_sizeSizer->Add(itemBoxSizer39, 0, wxAlignment::Left|wxAlignment::CenterVertical, 5);
+    m_sizeSizer->Add(itemBoxSizer39, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, 5);
 
     m_height = new wxTextCtrl( itemRichTextDialogPage1, ID_RICHTEXT_HEIGHT, "", wxDefaultPosition, wxSize(60, -1), 0 );
     m_height->SetHelpText(_("The object height."));
     if (wxRichTextSizePage::ShowToolTips())
         m_height->SetToolTip(_("The object height."));
-    itemBoxSizer39->Add(m_height, 0, wxAlignment::CenterVertical|wxDirection::Left|wxDirection::Top|wxDirection::Bottom, 5);
+    itemBoxSizer39->Add(m_height, 0, wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
 
     std::vector<std::string> m_unitsHStrings;
     m_unitsHStrings.push_back("px");
     m_unitsHStrings.push_back("cm");
     m_unitsHStrings.push_back("%");
-    m_unitsH = new wxComboBox( itemRichTextDialogPage1, ID_RICHTEXT_UNITS_H, _("px"), wxDefaultPosition, wxSize(60, -1), m_unitsHStrings, ComboStyles::ReadOnly );
+    m_unitsH = new wxComboBox( itemRichTextDialogPage1, ID_RICHTEXT_UNITS_H, _("px"), wxDefaultPosition, wxSize(60, -1), m_unitsHStrings, wxCB_READONLY );
     m_unitsH->SetStringSelection(_("px"));
     m_unitsH->SetHelpText(_("Units for the object height."));
     if (wxRichTextSizePage::ShowToolTips())
         m_unitsH->SetToolTip(_("Units for the object height."));
-    itemBoxSizer39->Add(m_unitsH, 0, wxAlignment::CenterVertical|wxDirection::All, 5);
+    itemBoxSizer39->Add(m_unitsH, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5);
 
     m_minWidthCheckbox = new wxCheckBox( itemRichTextDialogPage1, ID_RICHTEXT_MIN_WIDTH_CHECKBOX, _("Min width:"), wxDefaultPosition, wxDefaultSize, 0 );
     m_minWidthCheckbox->SetValue(false);
     m_minWidthCheckbox->SetHelpText(_("Enable the minimum width value."));
     if (wxRichTextSizePage::ShowToolTips())
         m_minWidthCheckbox->SetToolTip(_("Enable the minimum width value."));
-    m_sizeSizer->Add(m_minWidthCheckbox, 0, wxAlignment::Left|wxAlignment::CenterVertical|wxDirection::Left|wxDirection::Top|wxDirection::Bottom, 5);
+    m_sizeSizer->Add(m_minWidthCheckbox, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
 
     m_minWidthSizer = new wxBoxSizer(wxHORIZONTAL);
-    m_sizeSizer->Add(m_minWidthSizer, 0, wxAlignment::Left|wxAlignment::CenterVertical, 5);
+    m_sizeSizer->Add(m_minWidthSizer, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, 5);
 
     m_minWidth = new wxTextCtrl( itemRichTextDialogPage1, ID_RICHTEXT_MIN_WIDTH, "", wxDefaultPosition, wxSize(60, -1), 0 );
     m_minWidth->SetHelpText(_("The object minimum width."));
     if (wxRichTextSizePage::ShowToolTips())
         m_minWidth->SetToolTip(_("The object minimum width."));
-    m_minWidthSizer->Add(m_minWidth, 0, wxAlignment::CenterVertical|wxDirection::Left|wxDirection::Top|wxDirection::Bottom, 5);
+    m_minWidthSizer->Add(m_minWidth, 0, wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
 
     std::vector<std::string> m_unitsMinWStrings;
     m_unitsMinWStrings.push_back("px");
     m_unitsMinWStrings.push_back("cm");
     m_unitsMinWStrings.push_back("%");
-    m_unitsMinW = new wxComboBox( itemRichTextDialogPage1, ID_RICHTEXT_UNITS_MIN_W, _("px"), wxDefaultPosition, wxSize(60, -1), m_unitsMinWStrings, ComboStyles::ReadOnly );
+    m_unitsMinW = new wxComboBox( itemRichTextDialogPage1, ID_RICHTEXT_UNITS_MIN_W, _("px"), wxDefaultPosition, wxSize(60, -1), m_unitsMinWStrings, wxCB_READONLY );
     m_unitsMinW->SetStringSelection(_("px"));
     m_unitsMinW->SetHelpText(_("Units for the minimum object width."));
     if (wxRichTextSizePage::ShowToolTips())
         m_unitsMinW->SetToolTip(_("Units for the minimum object width."));
-    m_minWidthSizer->Add(m_unitsMinW, 0, wxAlignment::CenterVertical|wxDirection::All, 5);
+    m_minWidthSizer->Add(m_unitsMinW, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5);
 
     m_minHeightCheckbox = new wxCheckBox( itemRichTextDialogPage1, ID_RICHTEXT_MIN_HEIGHT_CHECKBOX, _("Min height:"), wxDefaultPosition, wxDefaultSize, 0 );
     m_minHeightCheckbox->SetValue(false);
     m_minHeightCheckbox->SetHelpText(_("Enable the minimum height value."));
     if (wxRichTextSizePage::ShowToolTips())
         m_minHeightCheckbox->SetToolTip(_("Enable the minimum height value."));
-    m_sizeSizer->Add(m_minHeightCheckbox, 0, wxAlignment::Left|wxAlignment::CenterVertical|wxDirection::Left|wxDirection::Top|wxDirection::Bottom, 5);
+    m_sizeSizer->Add(m_minHeightCheckbox, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
 
     m_minHeightSizer = new wxBoxSizer(wxHORIZONTAL);
-    m_sizeSizer->Add(m_minHeightSizer, 0, wxAlignment::Left|wxAlignment::CenterVertical, 5);
+    m_sizeSizer->Add(m_minHeightSizer, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, 5);
 
     m_minHeight = new wxTextCtrl( itemRichTextDialogPage1, ID_RICHTEXT_MIN_HEIGHT, "", wxDefaultPosition, wxSize(60, -1), 0 );
     m_minHeight->SetHelpText(_("The object minimum height."));
     if (wxRichTextSizePage::ShowToolTips())
         m_minHeight->SetToolTip(_("The object minimum height."));
-    m_minHeightSizer->Add(m_minHeight, 0, wxAlignment::CenterVertical|wxDirection::Left|wxDirection::Top|wxDirection::Bottom, 5);
+    m_minHeightSizer->Add(m_minHeight, 0, wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
 
     std::vector<std::string> m_unitsMinHStrings;
     m_unitsMinHStrings.push_back("px");
     m_unitsMinHStrings.push_back("cm");
     m_unitsMinHStrings.push_back("%");
-    m_unitsMinH = new wxComboBox( itemRichTextDialogPage1, ID_RICHTEXT_UNITS_MIN_H, _("px"), wxDefaultPosition, wxSize(60, -1), m_unitsMinHStrings, ComboStyles::ReadOnly );
+    m_unitsMinH = new wxComboBox( itemRichTextDialogPage1, ID_RICHTEXT_UNITS_MIN_H, _("px"), wxDefaultPosition, wxSize(60, -1), m_unitsMinHStrings, wxCB_READONLY );
     m_unitsMinH->SetStringSelection(_("px"));
     m_unitsMinH->SetHelpText(_("Units for the minimum object height."));
     if (wxRichTextSizePage::ShowToolTips())
         m_unitsMinH->SetToolTip(_("Units for the minimum object height."));
-    m_minHeightSizer->Add(m_unitsMinH, 0, wxAlignment::CenterVertical|wxDirection::All, 5);
+    m_minHeightSizer->Add(m_unitsMinH, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5);
 
     m_maxWidthCheckbox = new wxCheckBox( itemRichTextDialogPage1, ID_RICHTEXT_MAX_WIDTH_CHECKBOX, _("Max width:"), wxDefaultPosition, wxDefaultSize, 0 );
     m_maxWidthCheckbox->SetValue(false);
     m_maxWidthCheckbox->SetHelpText(_("Enable the maximum width value."));
     if (wxRichTextSizePage::ShowToolTips())
         m_maxWidthCheckbox->SetToolTip(_("Enable the maximum width value."));
-    m_sizeSizer->Add(m_maxWidthCheckbox, 0, wxAlignment::Left|wxAlignment::CenterVertical|wxDirection::Left|wxDirection::Top|wxDirection::Bottom, 5);
+    m_sizeSizer->Add(m_maxWidthCheckbox, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
 
     m_maxWidthSizer = new wxBoxSizer(wxHORIZONTAL);
-    m_sizeSizer->Add(m_maxWidthSizer, 0, wxAlignment::Left|wxAlignment::CenterVertical, 5);
+    m_sizeSizer->Add(m_maxWidthSizer, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, 5);
 
     m_maxWidth = new wxTextCtrl( itemRichTextDialogPage1, ID_RICHTEXT_MAX_WIDTH, "", wxDefaultPosition, wxSize(60, -1), 0 );
     m_maxWidth->SetHelpText(_("The object maximum width."));
     if (wxRichTextSizePage::ShowToolTips())
         m_maxWidth->SetToolTip(_("The object maximum width."));
-    m_maxWidthSizer->Add(m_maxWidth, 0, wxAlignment::CenterVertical|wxDirection::Left|wxDirection::Top|wxDirection::Bottom, 5);
+    m_maxWidthSizer->Add(m_maxWidth, 0, wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
 
     std::vector<std::string> m_unitsMaxWStrings;
     m_unitsMaxWStrings.push_back("px");
     m_unitsMaxWStrings.push_back("cm");
     m_unitsMaxWStrings.push_back("%");
-    m_unitsMaxW = new wxComboBox( itemRichTextDialogPage1, ID_RICHTEXT_UNITS_MAX_W, _("px"), wxDefaultPosition, wxSize(60, -1), m_unitsMaxWStrings, ComboStyles::ReadOnly );
+    m_unitsMaxW = new wxComboBox( itemRichTextDialogPage1, ID_RICHTEXT_UNITS_MAX_W, _("px"), wxDefaultPosition, wxSize(60, -1), m_unitsMaxWStrings, wxCB_READONLY );
     m_unitsMaxW->SetStringSelection(_("px"));
     m_unitsMaxW->SetHelpText(_("Units for the maximum object width."));
     if (wxRichTextSizePage::ShowToolTips())
         m_unitsMaxW->SetToolTip(_("Units for the maximum object width."));
-    m_maxWidthSizer->Add(m_unitsMaxW, 0, wxAlignment::CenterVertical|wxDirection::All, 5);
+    m_maxWidthSizer->Add(m_unitsMaxW, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5);
 
     m_maxHeightCheckbox = new wxCheckBox( itemRichTextDialogPage1, ID_RICHTEXT_MAX_HEIGHT_CHECKBOX, _("Max height:"), wxDefaultPosition, wxDefaultSize, 0 );
     m_maxHeightCheckbox->SetValue(false);
     m_maxHeightCheckbox->SetHelpText(_("Enable the height value."));
     if (wxRichTextSizePage::ShowToolTips())
         m_maxHeightCheckbox->SetToolTip(_("Enable the height value."));
-    m_sizeSizer->Add(m_maxHeightCheckbox, 0, wxAlignment::Left|wxAlignment::CenterVertical|wxDirection::Left|wxDirection::Top|wxDirection::Bottom, 5);
+    m_sizeSizer->Add(m_maxHeightCheckbox, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
 
     m_maxHeightSizer = new wxBoxSizer(wxHORIZONTAL);
-    m_sizeSizer->Add(m_maxHeightSizer, 0, wxAlignment::Left|wxAlignment::CenterVertical, 5);
+    m_sizeSizer->Add(m_maxHeightSizer, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, 5);
 
     m_maxHeight = new wxTextCtrl( itemRichTextDialogPage1, ID_RICHTEXT_MAX_HEIGHT, "", wxDefaultPosition, wxSize(60, -1), 0 );
     m_maxHeight->SetHelpText(_("The object maximum height."));
     if (wxRichTextSizePage::ShowToolTips())
         m_maxHeight->SetToolTip(_("The object maximum height."));
-    m_maxHeightSizer->Add(m_maxHeight, 0, wxAlignment::CenterVertical|wxDirection::Left|wxDirection::Top|wxDirection::Bottom, 5);
+    m_maxHeightSizer->Add(m_maxHeight, 0, wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
 
     std::vector<std::string> m_unitsMaxHStrings;
     m_unitsMaxHStrings.push_back("px");
     m_unitsMaxHStrings.push_back("cm");
     m_unitsMaxHStrings.push_back("%");
-    m_unitsMaxH = new wxComboBox( itemRichTextDialogPage1, ID_RICHTEXT_UNITS_MAX_H, _("px"), wxDefaultPosition, wxSize(60, -1), m_unitsMaxHStrings, ComboStyles::ReadOnly );
+    m_unitsMaxH = new wxComboBox( itemRichTextDialogPage1, ID_RICHTEXT_UNITS_MAX_H, _("px"), wxDefaultPosition, wxSize(60, -1), m_unitsMaxHStrings, wxCB_READONLY );
     m_unitsMaxH->SetStringSelection(_("px"));
     m_unitsMaxH->SetHelpText(_("Units for the maximum object height."));
     if (wxRichTextSizePage::ShowToolTips())
         m_unitsMaxH->SetToolTip(_("Units for the maximum object height."));
-    m_maxHeightSizer->Add(m_unitsMaxH, 0, wxAlignment::CenterVertical|wxDirection::All, 5);
+    m_maxHeightSizer->Add(m_unitsMaxH, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5);
 
     m_positionControls = new wxBoxSizer(wxVERTICAL);
-    m_parentSizer->Add(m_positionControls, 0, wxStretch::Grow, 5);
+    m_parentSizer->Add(m_positionControls, 0, wxGROW, 5);
 
     wxBoxSizer* itemBoxSizer59 = new wxBoxSizer(wxHORIZONTAL);
-    m_positionControls->Add(itemBoxSizer59, 0, wxStretch::Grow, 5);
+    m_positionControls->Add(itemBoxSizer59, 0, wxGROW, 5);
 
     wxStaticText* itemStaticText60 = new wxStaticText( itemRichTextDialogPage1, wxID_STATIC, _("Position"), wxDefaultPosition, wxDefaultSize, 0 );
     itemStaticText60->SetFont(wxFont(wxSystemSettings::GetFont(wxSYS_DEFAULT_GUI_FONT).GetPointSize(), wxSystemSettings::GetFont(wxSYS_DEFAULT_GUI_FONT).GetFamily(), wxSystemSettings::GetFont(wxSYS_DEFAULT_GUI_FONT).GetStyle(), wxFONTWEIGHT_BOLD));
-    itemBoxSizer59->Add(itemStaticText60, 0, wxAlignment::CenterVertical|wxDirection::All, 5);
+    itemBoxSizer59->Add(itemStaticText60, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5);
 
     wxStaticLine* itemStaticLine61 = new wxStaticLine( itemRichTextDialogPage1, wxID_STATIC, wxDefaultPosition, wxDefaultSize, wxLI_HORIZONTAL );
-    itemBoxSizer59->Add(itemStaticLine61, 1, wxAlignment::CenterVertical|wxDirection::All, 5);
+    itemBoxSizer59->Add(itemStaticLine61, 1, wxALIGN_CENTER_VERTICAL|wxALL, 5);
 
     wxBoxSizer* itemBoxSizer62 = new wxBoxSizer(wxHORIZONTAL);
-    m_positionControls->Add(itemBoxSizer62, 0, wxStretch::Grow, 5);
+    m_positionControls->Add(itemBoxSizer62, 0, wxGROW, 5);
 
-    itemBoxSizer62->Add(5, 5, 0, wxAlignment::CenterVertical|wxDirection::All, 5);
+    itemBoxSizer62->Add(5, 5, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5);
 
     m_moveObjectParentSizer = new wxBoxSizer(wxVERTICAL);
-    itemBoxSizer62->Add(m_moveObjectParentSizer, 0, wxAlignment::Top, 5);
+    itemBoxSizer62->Add(m_moveObjectParentSizer, 0, wxALIGN_TOP, 5);
 
     m_positionModeSizer = new wxBoxSizer(wxHORIZONTAL);
-    m_moveObjectParentSizer->Add(m_positionModeSizer, 0, wxAlignment::Left, 5);
+    m_moveObjectParentSizer->Add(m_positionModeSizer, 0, wxALIGN_LEFT, 5);
 
     wxStaticText* itemStaticText66 = new wxStaticText( itemRichTextDialogPage1, wxID_STATIC, _("&Position mode:"), wxDefaultPosition, wxDefaultSize, 0 );
-    m_positionModeSizer->Add(itemStaticText66, 0, wxAlignment::CenterVertical|wxDirection::All, 5);
+    m_positionModeSizer->Add(itemStaticText66, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5);
 
     std::vector<std::string> m_positionModeCtrlStrings;
     m_positionModeCtrlStrings.push_back("Static");
@@ -432,168 +432,168 @@ void wxRichTextSizePage::CreateControls()
     m_positionModeCtrlStrings.push_back("Fixed");
     m_positionModeCtrl = new wxChoice( itemRichTextDialogPage1, ID_RICHTEXT_POSITION_MODE, wxDefaultPosition, wxDefaultSize, m_positionModeCtrlStrings, 0 );
     m_positionModeCtrl->SetStringSelection(_("Static"));
-    m_positionModeSizer->Add(m_positionModeCtrl, 0, wxAlignment::CenterVertical|wxDirection::All, 5);
+    m_positionModeSizer->Add(m_positionModeCtrl, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5);
 
     m_positionGridSizer = new wxFlexGridSizer(0, 4, 0, 0);
-    m_moveObjectParentSizer->Add(m_positionGridSizer, 0, wxStretch::Grow, 5);
+    m_moveObjectParentSizer->Add(m_positionGridSizer, 0, wxGROW, 5);
 
     m_leftSizer = new wxBoxSizer(wxHORIZONTAL);
-    m_positionGridSizer->Add(m_leftSizer, 0, wxAlignment::Left|wxAlignment::CenterVertical, 5);
+    m_positionGridSizer->Add(m_leftSizer, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, 5);
 
     m_positionLeftCheckbox = new wxCheckBox( itemRichTextDialogPage1, ID_RICHTEXT_LEFT_CHECKBOX, _("&Left:"), wxDefaultPosition, wxDefaultSize, 0 );
     m_positionLeftCheckbox->SetValue(false);
     m_positionLeftCheckbox->SetHelpText(_("The left position."));
     if (wxRichTextSizePage::ShowToolTips())
         m_positionLeftCheckbox->SetToolTip(_("The left position."));
-    m_leftSizer->Add(m_positionLeftCheckbox, 0, wxAlignment::CenterVertical|wxDirection::Left|wxDirection::Top|wxDirection::Bottom, 5);
+    m_leftSizer->Add(m_positionLeftCheckbox, 0, wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
 
     m_leftLabel = new wxStaticText( itemRichTextDialogPage1, wxID_STATIC, _("&Left:"), wxDefaultPosition, wxDefaultSize, 0 );
     m_leftLabel->Show(false);
-    m_leftSizer->Add(m_leftLabel, 0, wxAlignment::CenterVertical|wxDirection::All, 5);
+    m_leftSizer->Add(m_leftLabel, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5);
 
     wxBoxSizer* itemBoxSizer72 = new wxBoxSizer(wxHORIZONTAL);
-    m_positionGridSizer->Add(itemBoxSizer72, 0, wxStretch::Grow|wxAlignment::CenterVertical, 5);
+    m_positionGridSizer->Add(itemBoxSizer72, 0, wxGROW|wxALIGN_CENTER_VERTICAL, 5);
 
     m_left = new wxTextCtrl( itemRichTextDialogPage1, ID_RICHTEXT_LEFT, "", wxDefaultPosition, wxSize(65, -1), 0 );
     m_left->SetMaxLength(10);
     m_left->SetHelpText(_("The left position."));
     if (wxRichTextSizePage::ShowToolTips())
         m_left->SetToolTip(_("The left position."));
-    itemBoxSizer72->Add(m_left, 0, wxAlignment::CenterVertical|wxDirection::Left|wxDirection::Top|wxDirection::Bottom, 5);
+    itemBoxSizer72->Add(m_left, 0, wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
 
     std::vector<std::string> m_unitsLeftStrings;
     m_unitsLeftStrings.push_back("px");
     m_unitsLeftStrings.push_back("cm");
     m_unitsLeftStrings.push_back("%");
-    m_unitsLeft = new wxComboBox( itemRichTextDialogPage1, ID_RICHTEXT_LEFT_UNITS, _("px"), wxDefaultPosition, wxSize(60, -1), m_unitsLeftStrings, ComboStyles::ReadOnly );
+    m_unitsLeft = new wxComboBox( itemRichTextDialogPage1, ID_RICHTEXT_LEFT_UNITS, _("px"), wxDefaultPosition, wxSize(60, -1), m_unitsLeftStrings, wxCB_READONLY );
     m_unitsLeft->SetStringSelection(_("px"));
     m_unitsLeft->SetHelpText(_("Units for the left position."));
     if (wxRichTextSizePage::ShowToolTips())
         m_unitsLeft->SetToolTip(_("Units for the left position."));
-    itemBoxSizer72->Add(m_unitsLeft, 0, wxAlignment::CenterVertical|wxDirection::All, 5);
+    itemBoxSizer72->Add(m_unitsLeft, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5);
 
     m_topSizer = new wxBoxSizer(wxHORIZONTAL);
-    m_positionGridSizer->Add(m_topSizer, 0, wxAlignment::Left|wxAlignment::CenterVertical, 5);
+    m_positionGridSizer->Add(m_topSizer, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, 5);
 
     m_positionTopCheckbox = new wxCheckBox( itemRichTextDialogPage1, ID_RICHTEXT_TOP_CHECKBOX, _("&Top:"), wxDefaultPosition, wxDefaultSize, 0 );
     m_positionTopCheckbox->SetValue(false);
     m_positionTopCheckbox->SetHelpText(_("The top position."));
     if (wxRichTextSizePage::ShowToolTips())
         m_positionTopCheckbox->SetToolTip(_("The top position."));
-    m_topSizer->Add(m_positionTopCheckbox, 0, wxAlignment::CenterVertical|wxDirection::Left|wxDirection::Top|wxDirection::Bottom, 5);
+    m_topSizer->Add(m_positionTopCheckbox, 0, wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
 
     m_topLabel = new wxStaticText( itemRichTextDialogPage1, wxID_STATIC, _("&Top:"), wxDefaultPosition, wxDefaultSize, 0 );
     m_topLabel->Show(false);
-    m_topSizer->Add(m_topLabel, 0, wxAlignment::CenterVertical|wxDirection::All, 5);
+    m_topSizer->Add(m_topLabel, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5);
 
     wxBoxSizer* itemBoxSizer78 = new wxBoxSizer(wxHORIZONTAL);
-    m_positionGridSizer->Add(itemBoxSizer78, 0, wxStretch::Grow|wxAlignment::CenterVertical, 5);
+    m_positionGridSizer->Add(itemBoxSizer78, 0, wxGROW|wxALIGN_CENTER_VERTICAL, 5);
 
     m_top = new wxTextCtrl( itemRichTextDialogPage1, ID_RICHTEXT_TOP, "", wxDefaultPosition, wxSize(65, -1), 0 );
     m_top->SetMaxLength(10);
     m_top->SetHelpText(_("The top position."));
     if (wxRichTextSizePage::ShowToolTips())
         m_top->SetToolTip(_("The top position."));
-    itemBoxSizer78->Add(m_top, 0, wxAlignment::CenterVertical|wxDirection::Left|wxDirection::Top|wxDirection::Bottom, 5);
+    itemBoxSizer78->Add(m_top, 0, wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
 
     std::vector<std::string> m_unitsTopStrings;
     m_unitsTopStrings.push_back("px");
     m_unitsTopStrings.push_back("cm");
     m_unitsTopStrings.push_back("%");
-    m_unitsTop = new wxComboBox( itemRichTextDialogPage1, ID_RICHTEXT_TOP_UNITS, _("px"), wxDefaultPosition, wxSize(60, -1), m_unitsTopStrings, ComboStyles::ReadOnly );
+    m_unitsTop = new wxComboBox( itemRichTextDialogPage1, ID_RICHTEXT_TOP_UNITS, _("px"), wxDefaultPosition, wxSize(60, -1), m_unitsTopStrings, wxCB_READONLY );
     m_unitsTop->SetStringSelection(_("px"));
     m_unitsTop->SetHelpText(_("Units for the top position."));
     if (wxRichTextSizePage::ShowToolTips())
         m_unitsTop->SetToolTip(_("Units for the top position."));
-    itemBoxSizer78->Add(m_unitsTop, 0, wxAlignment::CenterVertical|wxDirection::All, 5);
+    itemBoxSizer78->Add(m_unitsTop, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5);
 
     m_rightSizer = new wxBoxSizer(wxHORIZONTAL);
-    m_positionGridSizer->Add(m_rightSizer, 0, wxAlignment::Left|wxAlignment::CenterVertical, 5);
+    m_positionGridSizer->Add(m_rightSizer, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, 5);
 
     m_positionRightCheckbox = new wxCheckBox( itemRichTextDialogPage1, ID_RICHTEXT_RIGHT_CHECKBOX, _("&Right:"), wxDefaultPosition, wxDefaultSize, 0 );
     m_positionRightCheckbox->SetValue(false);
     m_positionRightCheckbox->SetHelpText(_("The right position."));
     if (wxRichTextSizePage::ShowToolTips())
         m_positionRightCheckbox->SetToolTip(_("The right position."));
-    m_rightSizer->Add(m_positionRightCheckbox, 0, wxAlignment::CenterVertical|wxDirection::Left|wxDirection::Top|wxDirection::Bottom, 5);
+    m_rightSizer->Add(m_positionRightCheckbox, 0, wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
 
     m_rightLabel = new wxStaticText( itemRichTextDialogPage1, wxID_STATIC, _("&Right:"), wxDefaultPosition, wxDefaultSize, 0 );
     m_rightLabel->Show(false);
-    m_rightSizer->Add(m_rightLabel, 0, wxAlignment::CenterVertical|wxDirection::All, 5);
+    m_rightSizer->Add(m_rightLabel, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5);
 
     m_rightPositionSizer = new wxBoxSizer(wxHORIZONTAL);
-    m_positionGridSizer->Add(m_rightPositionSizer, 0, wxStretch::Grow|wxAlignment::CenterVertical, 5);
+    m_positionGridSizer->Add(m_rightPositionSizer, 0, wxGROW|wxALIGN_CENTER_VERTICAL, 5);
 
     m_right = new wxTextCtrl( itemRichTextDialogPage1, ID_RICHTEXT_RIGHT, "", wxDefaultPosition, wxSize(65, -1), 0 );
     m_right->SetMaxLength(10);
     m_right->SetHelpText(_("The right position."));
     if (wxRichTextSizePage::ShowToolTips())
         m_right->SetToolTip(_("The right position."));
-    m_rightPositionSizer->Add(m_right, 0, wxAlignment::CenterVertical|wxDirection::Left|wxDirection::Top|wxDirection::Bottom, 5);
+    m_rightPositionSizer->Add(m_right, 0, wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
 
     std::vector<std::string> m_unitsRightStrings;
     m_unitsRightStrings.push_back("px");
     m_unitsRightStrings.push_back("cm");
     m_unitsRightStrings.push_back("%");
-    m_unitsRight = new wxComboBox( itemRichTextDialogPage1, ID_RICHTEXT_RIGHT_UNITS, _("px"), wxDefaultPosition, wxSize(60, -1), m_unitsRightStrings, ComboStyles::ReadOnly );
+    m_unitsRight = new wxComboBox( itemRichTextDialogPage1, ID_RICHTEXT_RIGHT_UNITS, _("px"), wxDefaultPosition, wxSize(60, -1), m_unitsRightStrings, wxCB_READONLY );
     m_unitsRight->SetStringSelection(_("px"));
     m_unitsRight->SetHelpText(_("Units for the right position."));
     if (wxRichTextSizePage::ShowToolTips())
         m_unitsRight->SetToolTip(_("Units for the right position."));
-    m_rightPositionSizer->Add(m_unitsRight, 0, wxAlignment::CenterVertical|wxDirection::All, 5);
+    m_rightPositionSizer->Add(m_unitsRight, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5);
 
     m_bottomSizer = new wxBoxSizer(wxHORIZONTAL);
-    m_positionGridSizer->Add(m_bottomSizer, 0, wxAlignment::Left|wxAlignment::CenterVertical, 5);
+    m_positionGridSizer->Add(m_bottomSizer, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, 5);
 
     m_positionBottomCheckbox = new wxCheckBox( itemRichTextDialogPage1, ID_RICHTEXT_BOTTOM_CHECKBOX, _("&Bottom:"), wxDefaultPosition, wxDefaultSize, 0 );
     m_positionBottomCheckbox->SetValue(false);
     m_positionBottomCheckbox->SetHelpText(_("The bottom position."));
     if (wxRichTextSizePage::ShowToolTips())
         m_positionBottomCheckbox->SetToolTip(_("The bottom position."));
-    m_bottomSizer->Add(m_positionBottomCheckbox, 0, wxAlignment::CenterVertical|wxDirection::Left|wxDirection::Top|wxDirection::Bottom, 5);
+    m_bottomSizer->Add(m_positionBottomCheckbox, 0, wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
 
     m_bottomLabel = new wxStaticText( itemRichTextDialogPage1, wxID_STATIC, _("&Bottom:"), wxDefaultPosition, wxDefaultSize, 0 );
     m_bottomLabel->Show(false);
-    m_bottomSizer->Add(m_bottomLabel, 0, wxAlignment::CenterVertical|wxDirection::All, 5);
+    m_bottomSizer->Add(m_bottomLabel, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5);
 
     m_bottomPositionSizer = new wxBoxSizer(wxHORIZONTAL);
-    m_positionGridSizer->Add(m_bottomPositionSizer, 0, wxStretch::Grow|wxAlignment::CenterVertical, 5);
+    m_positionGridSizer->Add(m_bottomPositionSizer, 0, wxGROW|wxALIGN_CENTER_VERTICAL, 5);
 
     m_bottom = new wxTextCtrl( itemRichTextDialogPage1, ID_RICHTEXT_BOTTOM, "", wxDefaultPosition, wxSize(65, -1), 0 );
     m_bottom->SetMaxLength(10);
     m_bottom->SetHelpText(_("The bottom position."));
     if (wxRichTextSizePage::ShowToolTips())
         m_bottom->SetToolTip(_("The bottom position."));
-    m_bottomPositionSizer->Add(m_bottom, 0, wxAlignment::CenterVertical|wxDirection::Left|wxDirection::Top|wxDirection::Bottom, 5);
+    m_bottomPositionSizer->Add(m_bottom, 0, wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
 
     std::vector<std::string> m_unitsBottomStrings;
     m_unitsBottomStrings.push_back("px");
     m_unitsBottomStrings.push_back("cm");
     m_unitsBottomStrings.push_back("%");
-    m_unitsBottom = new wxComboBox( itemRichTextDialogPage1, ID_RICHTEXT_BOTTOM_UNITS, _("px"), wxDefaultPosition, wxSize(60, -1), m_unitsBottomStrings, ComboStyles::ReadOnly );
+    m_unitsBottom = new wxComboBox( itemRichTextDialogPage1, ID_RICHTEXT_BOTTOM_UNITS, _("px"), wxDefaultPosition, wxSize(60, -1), m_unitsBottomStrings, wxCB_READONLY );
     m_unitsBottom->SetStringSelection(_("px"));
     m_unitsBottom->SetHelpText(_("Units for the bottom position."));
     if (wxRichTextSizePage::ShowToolTips())
         m_unitsBottom->SetToolTip(_("Units for the bottom position."));
-    m_bottomPositionSizer->Add(m_unitsBottom, 0, wxAlignment::CenterVertical|wxDirection::All, 5);
+    m_bottomPositionSizer->Add(m_unitsBottom, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5);
 
     m_moveObjectSizer = new wxBoxSizer(wxHORIZONTAL);
-    m_moveObjectParentSizer->Add(m_moveObjectSizer, 0, wxStretch::Grow, 5);
+    m_moveObjectParentSizer->Add(m_moveObjectSizer, 0, wxGROW, 5);
 
     wxStaticText* itemStaticText94 = new wxStaticText( itemRichTextDialogPage1, wxID_STATIC, _("&Move the object to:"), wxDefaultPosition, wxDefaultSize, 0 );
-    m_moveObjectSizer->Add(itemStaticText94, 0, wxAlignment::CenterVertical|wxDirection::All, 5);
+    m_moveObjectSizer->Add(itemStaticText94, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5);
 
     wxButton* itemButton95 = new wxButton( itemRichTextDialogPage1, ID_RICHTEXT_PARA_UP, _("&Previous Paragraph"), wxDefaultPosition, wxDefaultSize, 0 );
     itemButton95->SetHelpText(_("Moves the object to the previous paragraph."));
     if (wxRichTextSizePage::ShowToolTips())
         itemButton95->SetToolTip(_("Moves the object to the previous paragraph."));
-    m_moveObjectSizer->Add(itemButton95, 0, wxAlignment::CenterVertical|wxDirection::All, 5);
+    m_moveObjectSizer->Add(itemButton95, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5);
 
     wxButton* itemButton96 = new wxButton( itemRichTextDialogPage1, ID_RICHTEXT_PARA_DOWN, _("&Next Paragraph"), wxDefaultPosition, wxDefaultSize, 0 );
     itemButton96->SetHelpText(_("Moves the object to the next paragraph."));
     if (wxRichTextSizePage::ShowToolTips())
         itemButton96->SetToolTip(_("Moves the object to the next paragraph."));
-    m_moveObjectSizer->Add(itemButton96, 0, wxAlignment::CenterVertical|wxDirection::Right|wxDirection::Top|wxDirection::Bottom, 5);
+    m_moveObjectSizer->Add(itemButton96, 0, wxALIGN_CENTER_VERTICAL|wxRIGHT|wxTOP|wxBOTTOM, 5);
 
 #if wxUSE_VALIDATORS
     // Set validators

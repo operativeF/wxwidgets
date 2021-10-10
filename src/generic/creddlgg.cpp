@@ -62,7 +62,7 @@ void wxGenericCredentialEntryDialog::Init(const std::string& message,
                                         wxTE_PASSWORD);
     topsizer->Add(m_passwordTextCtrl, wxSizerFlags().Expand().Border());
 
-    topsizer->Add(CreateStdDialogButtonSizer(DialogFlags{wxDialogFlags::OK, wxDialogFlags::Cancel}), wxSizerFlags().Expand().Border());
+    topsizer->Add(CreateStdDialogButtonSizer(wxOK | wxCANCEL), wxSizerFlags().Expand().Border());
     SetSizerAndFit(topsizer);
 
     m_userTextCtrl->SetFocus();

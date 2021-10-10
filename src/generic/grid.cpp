@@ -256,8 +256,8 @@ void wxGridHeaderLabelsRenderer::DrawLabel(const wxGrid& grid,
                                          wxDC& dc,
                                          std::string_view value,
                                          const wxRect& rect,
-                                         wxAlignment horizAlign,
-                                         wxAlignment vertAlign,
+                                         int horizAlign,
+                                         int vertAlign,
                                          int textOrientation) const
 {
     dc.SetBackgroundMode(wxBrushStyle::Transparent);
@@ -309,7 +309,7 @@ void wxGridRowHeaderRendererDefault::DrawBorder(const wxGrid& grid,
     // any border, otherwise they would compound with the outer border which
     // looks bad.
     int ofs = 0;
-    if ( grid.GetBorder() == wxBorder::None )
+    if ( grid.GetBorder() == wxBORDER_NONE )
     {
         dc.DrawLine(rect.GetLeft(), rect.GetTop(),
                     rect.GetLeft(), rect.GetBottom());
@@ -338,7 +338,7 @@ void wxGridColumnHeaderRendererDefault::DrawBorder(const wxGrid& grid,
 
     // As above, don't draw the outer border if the control has its own one.
     int ofs = 0;
-    if ( grid.GetBorder() == wxBorder::None )
+    if ( grid.GetBorder() == wxBORDER_NONE )
     {
         dc.DrawLine(rect.GetLeft(), rect.GetTop(),
                     rect.GetRight(), rect.GetTop());
@@ -368,7 +368,7 @@ void wxGridCornerHeaderRendererDefault::DrawBorder(const wxGrid& grid,
     // As above, don't draw either of outer border if there is already a border
     // around the entire window.
     int ofs = 0;
-    if ( grid.GetBorder() == wxBorder::None )
+    if ( grid.GetBorder() == wxBORDER_NONE )
     {
         dc.DrawLine(rect.GetLeft(), rect.GetTop(),
                     rect.GetRight(), rect.GetTop());
@@ -538,7 +538,7 @@ const wxFont& wxGridCellAttr::GetFont() const
     }
 }
 
-void wxGridCellAttr::GetAlignment(wxAlignment* hAlign, wxAlignment* vAlign) const
+void wxGridCellAttr::GetAlignment(int *hAlign, int *vAlign) const
 {
     if (HasAlignment())
     {
@@ -557,7 +557,7 @@ void wxGridCellAttr::GetAlignment(wxAlignment* hAlign, wxAlignment* vAlign) cons
     }
 }
 
-void wxGridCellAttr::GetNonDefaultAlignment(wxAlignment* hAlign, wxAlignment* vAlign) const
+void wxGridCellAttr::GetNonDefaultAlignment(int *hAlign, int *vAlign) const
 {
     // The logic here is tricky but necessary to handle all the cases: if we
     // have non-default alignment on input, we should only override it if this
@@ -568,13 +568,13 @@ void wxGridCellAttr::GetNonDefaultAlignment(wxAlignment* hAlign, wxAlignment* vA
     // First of all, never dereference null pointer.
     if ( hAlign )
     {
-        if ( this != m_defGridAttr && m_hAlign != wxAlignment::Invalid )
+        if ( this != m_defGridAttr && m_hAlign != wxALIGN_INVALID )
         {
             // This attribute has its own alignment, which should always
             // override the input alignment value.
             *hAlign = m_hAlign;
         }
-        else if ( *hAlign == wxAlignment::Invalid )
+        else if ( *hAlign == wxALIGN_INVALID )
         {
             // No input alignment specified, fill it with the default alignment
             // (note that we know that this attribute itself doesn't have any
@@ -588,9 +588,9 @@ void wxGridCellAttr::GetNonDefaultAlignment(wxAlignment* hAlign, wxAlignment* vA
     // This is exactly the same logic as above.
     if ( vAlign )
     {
-        if ( this != m_defGridAttr && m_vAlign != wxAlignment::Invalid )
+        if ( this != m_defGridAttr && m_vAlign != wxALIGN_INVALID )
             *vAlign = m_vAlign;
-        else if ( *vAlign == wxAlignment::Invalid )
+        else if ( *vAlign == wxALIGN_INVALID )
             *vAlign = m_defGridAttr->m_vAlign;
     }
 }
@@ -629,10 +629,10 @@ bool wxGridCellAttr::CanOverflow() const
     // But if it is enabled, we still don't use it for right-aligned or
     // centered cells because it's not really clear how it should work for
     // them.
-    int hAlign = wxAlignment::Left;
+    int hAlign = wxALIGN_LEFT;
     GetNonDefaultAlignment(&hAlign, nullptr);
 
-    return hAlign == wxAlignment::Left;
+    return hAlign == wxALIGN_LEFT;
 }
 
 // GetRenderer and GetEditor use a slightly different decision path about
@@ -2674,7 +2674,7 @@ void wxGrid::Create()
     m_defaultCellAttr->SetDefAttr(m_defaultCellAttr);
     m_defaultCellAttr->SetKind(wxGridCellAttr::Default);
     m_defaultCellAttr->SetFont(GetFont());
-    m_defaultCellAttr->SetAlignment(wxAlignment::Left, wxAlignment::Top);
+    m_defaultCellAttr->SetAlignment(wxALIGN_LEFT, wxALIGN_TOP);
     m_defaultCellAttr->SetRenderer(new wxGridCellStringRenderer);
     m_defaultCellAttr->SetEditor(new wxGridCellTextEditor);
     m_defaultCellAttr->SetFitMode(wxGridFitMode::Overflow());
@@ -6733,8 +6733,7 @@ void wxGrid::DrawRowLabel( wxDC& dc, int row )
     wxRect rect(0, GetRowTop(row), m_rowLabelWidth, GetRowHeight(row));
     rend.DrawBorder(*this, dc, rect);
 
-    wxAlignment hAlign;
-    wxAlignment vAlign;
+    int hAlign, vAlign;
     GetRowLabelAlignment(&hAlign, &vAlign);
 
     rend.DrawLabel(*this, dc, GetRowLabelValue(row),
@@ -6826,8 +6825,7 @@ void wxGrid::DrawCornerLabel(wxDC& dc)
     std::string label = GetCornerLabelValue();
     if( !label.empty() )
     {
-        wxAlignment hAlign;
-        wxAlignment vAlign;
+        int hAlign, vAlign;
         GetCornerLabelAlignment(&hAlign, &vAlign);
         const int orient = GetCornerLabelTextOrientation();
 
@@ -6879,8 +6877,7 @@ void wxGrid::DrawColLabel(wxDC& dc, int col)
         rend.DrawBorder(*this, dc, rect);
     }
 
-    wxAlignment hAlign;
-    wxAlignment vAlign;
+    int hAlign, vAlign;
     GetColLabelAlignment(&hAlign, &vAlign);
     const int orient = GetColLabelTextOrientation();
 
@@ -6892,8 +6889,8 @@ void wxGrid::DrawColLabel(wxDC& dc, int col)
 void wxGrid::DrawTextRectangle( wxDC& dc,
                                 std::string_view value,
                                 const wxRect& rect,
-                                wxAlignment horizAlign,
-                                wxAlignment vertAlign,
+                                int horizAlign,
+                                int vertAlign,
                                 int textOrientation ) const
 {
     std::vector<std::string> lines;
@@ -6906,8 +6903,8 @@ void wxGrid::DrawTextRectangle( wxDC& dc,
 void wxGrid::DrawTextRectangle(wxDC& dc,
                                const std::vector<std::string>& lines,
                                const wxRect& rect,
-                               wxAlignment horizAlign,
-                               wxAlignment vertAlign,
+                               int horizAlign,
+                               int vertAlign,
                                int textOrientation) const
 {
     if ( lines.empty() )
@@ -6927,21 +6924,21 @@ void wxGrid::DrawTextRectangle(wxDC& dc,
 
     switch ( vertAlign )
     {
-        case wxAlignment::Bottom:
+        case wxALIGN_BOTTOM:
             if ( textOrientation == wxHORIZONTAL )
                 y = rect.y + (rect.height - textSize.y - GRID_TEXT_MARGIN);
             else
                 x = rect.x + (rect.width - textSize.x - GRID_TEXT_MARGIN);
             break;
 
-        case wxAlignment::Center:
+        case wxALIGN_CENTRE:
             if ( textOrientation == wxHORIZONTAL )
                 y = rect.y + ((rect.height - textSize.y) / 2);
             else
                 x = rect.x + ((rect.width - textSize.x) / 2);
             break;
 
-        case wxAlignment::Top:
+        case wxALIGN_TOP:
         default:
             if ( textOrientation == wxHORIZONTAL )
                 y = rect.y + GRID_TEXT_MARGIN;
@@ -6966,21 +6963,21 @@ void wxGrid::DrawTextRectangle(wxDC& dc,
 
         switch ( horizAlign )
         {
-            case wxAlignment::Right:
+            case wxALIGN_RIGHT:
                 if ( textOrientation == wxHORIZONTAL )
                     x = rect.x + (rect.width - lineSize.x - GRID_TEXT_MARGIN);
                 else
                     y = rect.y + lineSize.x + GRID_TEXT_MARGIN;
                 break;
 
-            case wxAlignment::Center:
+            case wxALIGN_CENTRE:
                 if ( textOrientation == wxHORIZONTAL )
                     x = rect.x + ((rect.width - lineSize.x) / 2);
                 else
                     y = rect.y + rect.height - ((rect.height - lineSize.x) / 2);
                 break;
 
-            case wxAlignment::Left:
+            case wxALIGN_LEFT:
             default:
                 if ( textOrientation == wxHORIZONTAL )
                     x = rect.x + GRID_TEXT_MARGIN;
@@ -7006,8 +7003,8 @@ void wxGrid::DrawTextRectangle(wxDC& dc,
                                std::string_view text,
                                const wxRect& rect,
                                const wxGridCellAttr& attr,
-                               wxAlignment hAlign,
-                               wxAlignment vAlign) const
+                               int hAlign,
+                               int vAlign) const
 {
     attr.GetNonDefaultAlignment(&hAlign, &vAlign);
 
@@ -8402,7 +8399,7 @@ bool wxGrid::MoveCursorRightBlock( bool expandSelection )
 // ------ Label values and formatting
 //
 
-void wxGrid::GetRowLabelAlignment( wxAlignment* horiz, wxAlignment* vert ) const
+void wxGrid::GetRowLabelAlignment( int *horiz, int *vert ) const
 {
     if ( horiz )
         *horiz = m_rowLabelHorizAlign;
@@ -8410,7 +8407,7 @@ void wxGrid::GetRowLabelAlignment( wxAlignment* horiz, wxAlignment* vert ) const
         *vert  = m_rowLabelVertAlign;
 }
 
-void wxGrid::GetColLabelAlignment( wxAlignment* horiz, wxAlignment* vert ) const
+void wxGrid::GetColLabelAlignment( int *horiz, int *vert ) const
 {
     if ( horiz )
         *horiz = m_colLabelHorizAlign;
@@ -8423,7 +8420,7 @@ int wxGrid::GetColLabelTextOrientation() const
     return m_colLabelTextOrientation;
 }
 
-void wxGrid::GetCornerLabelAlignment( wxAlignment *horiz, wxAlignment *vert ) const
+void wxGrid::GetCornerLabelAlignment( int *horiz, int *vert ) const
 {
     if ( horiz )
         *horiz = m_cornerLabelHorizAlign;
@@ -8598,14 +8595,29 @@ void wxGrid::SetLabelFont( const wxFont& font )
     }
 }
 
-void wxGrid::SetRowLabelAlignment( wxAlignment horiz, wxAlignment vert )
+void wxGrid::SetRowLabelAlignment( int horiz, int vert )
 {
-    if ( horiz == wxAlignment::Left || horiz == wxAlignment::Center || horiz == wxAlignment::Right )
+    // allow old (incorrect) defs to be used
+    switch ( horiz )
+    {
+        case wxLEFT:   horiz = wxALIGN_LEFT; break;
+        case wxRIGHT:  horiz = wxALIGN_RIGHT; break;
+        case wxCENTRE: horiz = wxALIGN_CENTRE; break;
+    }
+
+    switch ( vert )
+    {
+        case wxTOP:    vert = wxALIGN_TOP;    break;
+        case wxBOTTOM: vert = wxALIGN_BOTTOM; break;
+        case wxCENTRE: vert = wxALIGN_CENTRE; break;
+    }
+
+    if ( horiz == wxALIGN_LEFT || horiz == wxALIGN_CENTRE || horiz == wxALIGN_RIGHT )
     {
         m_rowLabelHorizAlign = horiz;
     }
 
-    if ( vert == wxAlignment::Top || vert == wxAlignment::Center || vert == wxAlignment::Bottom )
+    if ( vert == wxALIGN_TOP || vert == wxALIGN_CENTRE || vert == wxALIGN_BOTTOM )
     {
         m_rowLabelVertAlign = vert;
     }
@@ -8616,14 +8628,29 @@ void wxGrid::SetRowLabelAlignment( wxAlignment horiz, wxAlignment vert )
     }
 }
 
-void wxGrid::SetColLabelAlignment( wxAlignment horiz, wxAlignment vert )
+void wxGrid::SetColLabelAlignment( int horiz, int vert )
 {
-    if ( horiz == wxAlignment::Left || horiz == wxAlignment::Center || horiz == wxAlignment::Right )
+    // allow old (incorrect) defs to be used
+    switch ( horiz )
+    {
+        case wxLEFT:   horiz = wxALIGN_LEFT; break;
+        case wxRIGHT:  horiz = wxALIGN_RIGHT; break;
+        case wxCENTRE: horiz = wxALIGN_CENTRE; break;
+    }
+
+    switch ( vert )
+    {
+        case wxTOP:    vert = wxALIGN_TOP;    break;
+        case wxBOTTOM: vert = wxALIGN_BOTTOM; break;
+        case wxCENTRE: vert = wxALIGN_CENTRE; break;
+    }
+
+    if ( horiz == wxALIGN_LEFT || horiz == wxALIGN_CENTRE || horiz == wxALIGN_RIGHT )
     {
         m_colLabelHorizAlign = horiz;
     }
 
-    if ( vert == wxAlignment::Top || vert == wxAlignment::Center || vert == wxAlignment::Bottom )
+    if ( vert == wxALIGN_TOP || vert == wxALIGN_CENTRE || vert == wxALIGN_BOTTOM )
     {
         m_colLabelVertAlign = vert;
     }
@@ -8634,14 +8661,29 @@ void wxGrid::SetColLabelAlignment( wxAlignment horiz, wxAlignment vert )
     }
 }
 
-void wxGrid::SetCornerLabelAlignment( wxAlignment horiz, wxAlignment vert )
+void wxGrid::SetCornerLabelAlignment( int horiz, int vert )
 {
-    if ( horiz == wxAlignment::Left || horiz == wxAlignment::Center || horiz == wxAlignment::Right )
+    // allow old (incorrect) defs to be used
+    switch ( horiz )
+    {
+        case wxLEFT:   horiz = wxALIGN_LEFT; break;
+        case wxRIGHT:  horiz = wxALIGN_RIGHT; break;
+        case wxCENTRE: horiz = wxALIGN_CENTRE; break;
+    }
+
+    switch ( vert )
+    {
+        case wxTOP:    vert = wxALIGN_TOP;    break;
+        case wxBOTTOM: vert = wxALIGN_BOTTOM; break;
+        case wxCENTRE: vert = wxALIGN_CENTRE; break;
+    }
+
+    if ( horiz == wxALIGN_LEFT || horiz == wxALIGN_CENTRE || horiz == wxALIGN_RIGHT )
     {
         m_cornerLabelHorizAlign = horiz;
     }
 
-    if ( vert == wxAlignment::Top || vert == wxAlignment::Center || vert == wxAlignment::Bottom )
+    if ( vert == wxALIGN_TOP || vert == wxALIGN_CENTRE || vert == wxALIGN_BOTTOM )
     {
         m_cornerLabelVertAlign = vert;
     }
@@ -8923,7 +8965,7 @@ void wxGrid::SetDefaultCellTextColour( const wxColour& col )
     m_defaultCellAttr->SetTextColour(col);
 }
 
-void wxGrid::SetDefaultCellAlignment( wxAlignment horiz, wxAlignment vert )
+void wxGrid::SetDefaultCellAlignment( int horiz, int vert )
 {
     m_defaultCellAttr->SetAlignment(horiz, vert);
 }
@@ -8976,7 +9018,7 @@ wxFont wxGrid::GetDefaultCellFont() const
     return m_defaultCellAttr->GetFont();
 }
 
-void wxGrid::GetDefaultCellAlignment( wxAlignment* horiz, wxAlignment* vert ) const
+void wxGrid::GetDefaultCellAlignment( int *horiz, int *vert ) const
 {
     m_defaultCellAttr->GetAlignment(horiz, vert);
 }
@@ -9015,7 +9057,7 @@ wxFont wxGrid::GetCellFont( int row, int col ) const
     return  GetCellAttrPtr(row, col)->GetFont();
 }
 
-void wxGrid::GetCellAlignment( int row, int col, wxAlignment* horiz, wxAlignment* vert ) const
+void wxGrid::GetCellAlignment( int row, int col, int *horiz, int *vert ) const
 {
     return  GetCellAttrPtr(row, col)->GetAlignment(horiz, vert);
 }
@@ -9286,7 +9328,7 @@ void wxGrid::SetCellFont( int row, int col, const wxFont& font )
     }
 }
 
-void wxGrid::SetCellAlignment( int row, int col, wxAlignment horiz, wxAlignment vert )
+void wxGrid::SetCellAlignment( int row, int col, int horiz, int vert )
 {
     if ( CanHaveAttributes() )
     {
@@ -11058,8 +11100,8 @@ wxGridCellEditor* wxGridTypeRegistry::GetEditor(int index)
 wxRect
 wxGetContentRect(wxSize contentSize,
                  const wxRect& cellRect,
-                 wxAlignment hAlign,
-                 wxAlignment vAlign)
+                 int hAlign,
+                 int vAlign)
 {
     // Keep square aspect ratio for the checkbox, but ensure that it fits into
     // the available space, even if it's smaller than the standard size.
@@ -11074,30 +11116,30 @@ wxGetContentRect(wxSize contentSize,
 
     wxRect contentRect(contentSize);
 
-    if ( hAlign & wxAlignment::CenterHorizontal )
+    if ( hAlign & wxALIGN_CENTER_HORIZONTAL )
     {
         contentRect = contentRect.CentreIn(cellRect, wxHORIZONTAL);
     }
-    else if ( hAlign & wxAlignment::Right )
+    else if ( hAlign & wxALIGN_RIGHT )
     {
         contentRect.SetX(cellRect.x + cellRect.width
                           - contentSize.x - GRID_CELL_CHECKBOX_MARGIN);
     }
-    else // ( hAlign == wxAlignment::Left ) an invalid alignment value
+    else // ( hAlign == wxALIGN_LEFT ) and invalid alignment value
     {
         contentRect.SetX(cellRect.x + GRID_CELL_CHECKBOX_MARGIN);
     }
 
-    if ( vAlign & wxAlignment::CenterVertical )
+    if ( vAlign & wxALIGN_CENTER_VERTICAL )
     {
         contentRect = contentRect.CentreIn(cellRect, wxVERTICAL);
     }
-    else if ( vAlign & wxAlignment::Bottom )
+    else if ( vAlign & wxALIGN_BOTTOM )
     {
         contentRect.SetY(cellRect.y + cellRect.height
                           - contentSize.y - GRID_CELL_CHECKBOX_MARGIN);
     }
-    else // wxAlignment::Top
+    else // wxALIGN_TOP
     {
         contentRect.SetY(cellRect.y + GRID_CELL_CHECKBOX_MARGIN);
     }

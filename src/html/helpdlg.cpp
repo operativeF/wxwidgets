@@ -63,7 +63,7 @@ bool wxHtmlHelpDialog::Create(wxWindow* parent, wxWindowID id,
                     wxSize(m_HtmlHelpWin->GetCfgData().w, m_HtmlHelpWin->GetCfgData().h),
                     wxDEFAULT_FRAME_STYLE|wxRESIZE_BORDER, "wxHtmlHelp");
     m_HtmlHelpWin->Create(this, wxID_ANY, wxDefaultPosition, GetClientSize(),
-        wxTAB_TRAVERSAL|wxBorder::None, style);
+        wxTAB_TRAVERSAL|wxNO_BORDER, style);
 
     m_HtmlHelpWin->GetCfgData().x = GetPosition().x;
     m_HtmlHelpWin->GetCfgData().y = GetPosition().y;
@@ -76,18 +76,18 @@ bool wxHtmlHelpDialog::Create(wxWindow* parent, wxWindowID id,
     item1->SetAutoLayout(true);
 
     wxWindow* item3 = m_HtmlHelpWin;
-    item2->Add(item3, 1, wxStretch::Grow|wxDirection::All, 5);
+    item2->Add(item3, 1, wxGROW|wxALL, 5);
 
     wxBoxSizer* item4 = new wxBoxSizer(wxHORIZONTAL);
-    item2->Add(item4, 0, wxStretch::Grow, 5);
+    item2->Add(item4, 0, wxGROW, 5);
 
-    item4->Add(5, 5, 1, wxAlignment::CenterVertical|wxDirection::All, 5);
+    item4->Add(5, 5, 1, wxALIGN_CENTER_VERTICAL|wxALL, 5);
 
     wxButton* item6 = new wxButton(item1, wxID_OK, _("Close"), wxDefaultPosition, wxDefaultSize, 0);
-    item4->Add(item6, 0, wxAlignment::CenterVertical|wxDirection::All, 10);
+    item4->Add(item6, 0, wxALIGN_CENTER_VERTICAL|wxALL, 10);
 #ifdef __WXMAC__
     // Add some space for the resize handle
-    item4->Add(5, 5, 0, wxAlignment::CenterVertical, 0);
+    item4->Add(5, 5, 0, wxALIGN_CENTER_VERTICAL, 0);
 #endif
 
     Layout();

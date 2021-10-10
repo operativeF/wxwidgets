@@ -13,7 +13,6 @@
 
 #if wxUSE_ABOUTDLG
 
-#include "wx/dialogflags.h"
 #include "wx/msgdlg.h"
 #include "wx/aboutdlg.h"
 #include "wx/generic/aboutdlgg.h"
@@ -50,7 +49,7 @@ void wxAboutBox(const wxAboutDialogInfo& info, wxWindow* parent)
         // add everything remaining
         msg << info.GetDescriptionAndCredits();
 
-        wxMessageBox(msg, wxString::Format(_("About %s"), name), DialogFlags{wxDialogFlags::OK, wxDialogFlags::Centered}, parent);
+        wxMessageBox(msg, wxString::Format(_("About %s"), name), wxOK | wxCENTRE, parent);
     }
     else // simple "native" version is not enough
     {

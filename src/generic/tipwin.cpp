@@ -212,7 +212,7 @@ void wxTipWindow::Close()
 wxTipWindowView::wxTipWindowView(wxWindow *parent)
     : wxWindow(parent, wxID_ANY,
                 wxDefaultPosition, wxDefaultSize,
-                wxBorder::None),
+                wxNO_BORDER),
       m_parent((wxTipWindow*)parent)
 {
     // set colours

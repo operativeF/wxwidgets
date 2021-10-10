@@ -161,7 +161,7 @@ PenStyleComboBox * PenStyleComboBox::CreateSample(wxWindow* parent)
     odc->Create(parent,wxID_ANY,wxEmptyString,
                 wxDefaultPosition, wxDefaultSize,
                 arrItems,
-                ComboStyles::ReadOnly //wxBorder::None | ComboStyles::ReadOnly
+                wxCB_READONLY //wxNO_BORDER | wxCB_READONLY
                );
 
 

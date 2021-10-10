@@ -484,7 +484,7 @@ bool wxGUIAppTraitsBase::ShowAssertDialog(const wxString& msg)
         // "No" button means to continue execution, so it should be the default
         // action as leaving the "Yes" button the default one would mean that
         // accidentally pressing Space or Enter would trap and kill the program.
-        static constexpr DialogFlags flags = {wxDialogFlags::Yes_No, wxDialogDefaultFlags::No, wxDialogIconFlags::Stop};
+        static constexpr unsigned int flags = wxYES_NO | wxNO_DEFAULT | wxICON_STOP;
 
 #if wxUSE_STACKWALKER
         const wxString stackTrace = GetAssertStackTrace();
@@ -573,7 +573,7 @@ bool wxGUIAppTraitsBase::SafeMessageBox(const wxString& text,
     if ( !wxModule::AreInitialized() )
         return false;
 
-    wxMessageBox(text, title, DialogFlags{wxDialogFlags::OK, wxDialogIconFlags::Error});
+    wxMessageBox(text, title, wxOK | wxICON_ERROR);
 
     return true;
 }

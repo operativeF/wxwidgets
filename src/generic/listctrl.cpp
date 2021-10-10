@@ -1613,7 +1613,7 @@ wxListMainWindow::wxListMainWindow( wxWindow *parent,
                                     const wxPoint& pos,
                                     const wxSize& size )
                 : wxWindow( parent, id, pos, size,
-                            wxWANTS_CHARS | wxBorder::None )
+                            wxWANTS_CHARS | wxBORDER_NONE )
 {
     Init();
 
@@ -4930,7 +4930,7 @@ void wxGenericListCtrl::CreateOrDestroyHeaderWindowAsNeeded()
         m_headerWin->SetFont( font );
 #endif
 
-        GetSizer()->Prepend( m_headerWin, 0, wxStretch::Grow );
+        GetSizer()->Prepend( m_headerWin, 0, wxGROW );
     }
     else
     {
@@ -4969,7 +4969,7 @@ bool wxGenericListCtrl::Create(wxWindow *parent,
     DisableKeyboardScrolling();
 
     wxBoxSizer *sizer = new wxBoxSizer( wxVERTICAL );
-    sizer->Add( m_mainWin, 1, wxStretch::Grow );
+    sizer->Add( m_mainWin, 1, wxGROW );
     SetSizer( sizer );
 
     CreateOrDestroyHeaderWindowAsNeeded();
@@ -4991,7 +4991,7 @@ void wxGenericListCtrl::ExtendRulesAndAlternateColour(bool state)
 
 wxBorder wxGenericListCtrl::GetDefaultBorder() const
 {
-    return wxBorder::Theme;
+    return wxBORDER_THEME;
 }
 
 #if defined(__WXMSW__) && !defined(__WXUNIVERSAL__)

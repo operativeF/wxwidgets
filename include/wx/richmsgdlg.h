@@ -10,9 +10,10 @@
 #ifndef _WX_RICHMSGDLG_H_BASE_
 #define _WX_RICHMSGDLG_H_BASE_
 
+#include "wx/defs.h"
+
 #if wxUSE_RICHMSGDLG
 
-#include "wx/dialogflags.h"
 #include "wx/msgdlg.h"
 
 #include <string>
@@ -25,7 +26,7 @@ public:
     wxRichMessageDialogBase( wxWindow *parent,
                              const std::string& message,
                              const std::string& caption,
-                             DialogFlags style )
+                             unsigned int style )
         : wxGenericMessageDialog( parent, message, caption, style ),
           m_detailsExpanderCollapsedLabel( wxGetTranslation("&See details") ),
           m_detailsExpanderExpandedLabel( wxGetTranslation("&Hide details") )
@@ -91,7 +92,7 @@ private:
         wxRichMessageDialog( wxWindow *parent,
                              const std::string& message,
                              const std::string& caption = wxMessageBoxCaptionStr,
-                             DialogFlags style = {wxDialogFlags::OK, wxDialogFlags::Centered} )
+                             unsigned int style = wxOK | wxCENTRE )
             : wxGenericRichMessageDialog( parent, message, caption, style )
             { }
 

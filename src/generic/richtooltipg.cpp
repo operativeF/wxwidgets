@@ -64,7 +64,7 @@ public:
         if ( icon.IsOk() )
         {
             sizerTitle->Add(new wxStaticBitmap(this, wxID_ANY, icon),
-                            wxSizerFlags().Centre().Border(wxDirection::Right));
+                            wxSizerFlags().Centre().Border(wxRIGHT));
         }
         //else: Simply don't show any icon.
 
@@ -114,7 +114,7 @@ public:
 
         wxBoxSizer* const sizerTop = new wxBoxSizer(wxVERTICAL);
         sizerTop->Add(sizerTitle,
-                        wxSizerFlags().DoubleBorder(wxDirection::Left|wxDirection::Right|wxDirection::Top));
+                        wxSizerFlags().DoubleBorder(wxLEFT|wxRIGHT|wxTOP));
 
         // Use a spacer as we don't want to have a double border between the
         // elements, just a simple one will do.
@@ -131,13 +131,13 @@ public:
             wxBoxSizer* const sizerTextIndent = new wxBoxSizer(wxHORIZONTAL);
             sizerTextIndent->AddSpacer(icon.GetWidth());
             sizerTextIndent->Add(sizerText,
-                                    wxSizerFlags().Border(wxDirection::Left).Centre());
+                                    wxSizerFlags().Border(wxLEFT).Centre());
 
             sizerText = sizerTextIndent;
         }
 #endif // HAVE_MSW_THEME
         sizerTop->Add(sizerText,
-                        wxSizerFlags().DoubleBorder(wxDirection::Left|wxDirection::Right|wxDirection::Bottom)
+                        wxSizerFlags().DoubleBorder(wxLEFT|wxRIGHT|wxBOTTOM)
                                       .Centre());
 
         SetSizer(sizerTop);
@@ -206,7 +206,7 @@ public:
             {
                 wxMemoryDC dc(bmp);
                 dc.Clear();
-                dc.GradientFillLinear(size, colStart, colEnd, wxDirection::Down);
+                dc.GradientFillLinear(size, colStart, colEnd, wxDOWN);
             }
 
             SetBackgroundBitmap(bmp);
@@ -614,9 +614,9 @@ void wxRichToolTipGenericImpl::SetStandardIcon(int icon)
 {
     switch ( icon & wxICON_MASK )
     {
-        case wxDialogIconFlags::Warning:
-        case wxDialogIconFlags::Error:
-        case wxDialogIconFlags::Information:
+        case wxICON_WARNING:
+        case wxICON_ERROR:
+        case wxICON_INFORMATION:
             // Although we don't use this icon in a list, we need a smallish
             // icon here and not an icon of a typical message box size so use
             // wxART_LIST to get it.
@@ -627,11 +627,11 @@ void wxRichToolTipGenericImpl::SetStandardIcon(int icon)
                      );
             break;
 
-        case wxDialogIconFlags::Question:
+        case wxICON_QUESTION:
             wxFAIL_MSG("Question icon doesn't make sense for a tooltip");
             break;
 
-        case wxDialogIconFlags::None:
+        case wxICON_NONE:
             m_icon = wxNullIcon;
             break;
     }

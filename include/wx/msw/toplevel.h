@@ -31,7 +31,7 @@ public:
                         const std::string& title,
                         const wxPoint& pos = wxDefaultPosition,
                         const wxSize& size = wxDefaultSize,
-                        WindowFlags style = wxDEFAULT_FRAME_STYLE,
+                        unsigned int style = wxDEFAULT_FRAME_STYLE,
                         const std::string& name = wxFrameNameStr)
     {
         Create(parent, id, title, pos, size, style, name);
@@ -42,7 +42,7 @@ public:
                 const std::string& title,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                WindowFlags style = wxDEFAULT_FRAME_STYLE,
+                unsigned int style = wxDEFAULT_FRAME_STYLE,
                 const std::string& name = wxFrameNameStr);
 
     ~wxTopLevelWindowMSW();

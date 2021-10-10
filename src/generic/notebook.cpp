@@ -137,7 +137,7 @@ bool wxNotebook::Create(wxWindow *parent,
 
     m_windowId = id == wxID_ANY ? NewControlId() : id;
 
-    if (!wxControl::Create(parent, id, pos, size, style|wxBorder::None, wxDefaultValidator, name))
+    if (!wxControl::Create(parent, id, pos, size, style|wxNO_BORDER, wxDefaultValidator, name))
         return false;
 
     SetTabView(new wxNotebookTabView(this));

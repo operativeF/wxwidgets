@@ -36,7 +36,7 @@ constexpr char wxDirSelectorPromptStr[] = "Select a directory";
     #define wxMAXIMIZE              0x00002000
     #define wxCLOSE_BOX             0x00001000
     #define wxSYSTEM_MENU           0x00000800
-    wxBorder::None   =               0x00200000
+    wxBORDER_NONE   =               0x00200000
     #define wxRESIZE_BORDER         0x00000040
     #define wxDIALOG_NO_PARENT      0x00000020
 */

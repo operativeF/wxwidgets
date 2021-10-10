@@ -12,7 +12,6 @@
 #ifndef _WX_WINDOW_H_
 #define _WX_WINDOW_H_
 
-#include "wx/borderflags.h"
 #include "wx/geometry/point.h"
 #include "wx/geometry/size.h"
 
@@ -121,7 +120,7 @@ public:
                           const wxRect *rect = (const wxRect *) nullptr ) override;
     void Update() override;
 
-    void SetWindowStyleFlag(WindowFlags style) override;
+    void SetWindowStyleFlag(unsigned int style) override;
     void SetExtraStyle(unsigned int exStyle) override;
     bool SetCursor( const wxCursor &cursor ) override;
     bool SetFont( const wxFont &font ) override;
@@ -251,7 +250,7 @@ public:
     //
     // this is the function that should be overridden in the derived classes,
     // but you will mostly use MSWGetCreateWindowFlags() below
-    virtual DWORD MSWGetStyle(WindowFlags flags, DWORD *exstyle = nullptr) const;
+    virtual DWORD MSWGetStyle(unsigned int flags, DWORD *exstyle = nullptr) const;
 
     // get the MSW window flags corresponding to wxWidgets ones
     //
@@ -625,7 +624,7 @@ protected:
     // choose the default border for this window
     wxBorder GetDefaultBorder() const override;
 
-    // Translate wxBorder::Theme (and other border styles if necessary to the value
+    // Translate wxBORDER_THEME (and other border styles if necessary to the value
     // that makes most sense for this Windows environment
     virtual wxBorder TranslateBorder(wxBorder border) const;
 

@@ -45,36 +45,35 @@ wxSizerXmlHandler::wxSizerXmlHandler()
     XRC_ADD_STYLE(wxHORIZONTAL);
     XRC_ADD_STYLE(wxVERTICAL);
 
-    // FIXME: Flags not compatible in this construct.
     // and flags
-    //XRC_ADD_STYLE(wxDirection::Left);
-    //XRC_ADD_STYLE(wxDirection::Right);
-    //XRC_ADD_STYLE(wxDirection::Top);
-    //XRC_ADD_STYLE(wxDirection::Bottom);
-    //XRC_ADD_STYLE(wxDirection::North);
-    //XRC_ADD_STYLE(wxDirection::South);
-    //XRC_ADD_STYLE(wxDirection::East);
-    //XRC_ADD_STYLE(wxDirection::West);
-    //XRC_ADD_STYLE(wxDirection::All);
+    XRC_ADD_STYLE(wxLEFT);
+    XRC_ADD_STYLE(wxRIGHT);
+    XRC_ADD_STYLE(wxTOP);
+    XRC_ADD_STYLE(wxBOTTOM);
+    XRC_ADD_STYLE(wxNORTH);
+    XRC_ADD_STYLE(wxSOUTH);
+    XRC_ADD_STYLE(wxEAST);
+    XRC_ADD_STYLE(wxWEST);
+    XRC_ADD_STYLE(wxALL);
 
-    //XRC_ADD_STYLE(wxStretch::Grow);
-    //XRC_ADD_STYLE(wxStretch::Expand);
-    //XRC_ADD_STYLE(wxStretch::Shaped);
-    //XRC_ADD_STYLE(wxStretch::None);
+    XRC_ADD_STYLE(wxGROW);
+    XRC_ADD_STYLE(wxEXPAND);
+    XRC_ADD_STYLE(wxSHAPED);
+    XRC_ADD_STYLE(wxSTRETCH_NOT);
 
-    //XRC_ADD_STYLE(wxAlignment::Centerenter);
-    //XRC_ADD_STYLE(wxAlignment::Center);
-    //XRC_ADD_STYLE(wxAlignment::Left);
-    //XRC_ADD_STYLE(wxAlignment::Top);
-    //XRC_ADD_STYLE(wxAlignment::Right);
-    //XRC_ADD_STYLE(wxAlignment::Bottom);
-    //XRC_ADD_STYLE(wxAlignment::CenterHorizontal);
-    //XRC_ADD_STYLE(wxAlignment::CenterHorizontal);
-    //XRC_ADD_STYLE(wxAlignment::CenterVertical);
-    //XRC_ADD_STYLE(wxAlignment::CenterVertical);
+    XRC_ADD_STYLE(wxALIGN_CENTER);
+    XRC_ADD_STYLE(wxALIGN_CENTRE);
+    XRC_ADD_STYLE(wxALIGN_LEFT);
+    XRC_ADD_STYLE(wxALIGN_TOP);
+    XRC_ADD_STYLE(wxALIGN_RIGHT);
+    XRC_ADD_STYLE(wxALIGN_BOTTOM);
+    XRC_ADD_STYLE(wxALIGN_CENTER_HORIZONTAL);
+    XRC_ADD_STYLE(wxALIGN_CENTRE_HORIZONTAL);
+    XRC_ADD_STYLE(wxALIGN_CENTER_VERTICAL);
+    XRC_ADD_STYLE(wxALIGN_CENTRE_VERTICAL);
 
-    //XRC_ADD_STYLE(wxSizerFlagBits::FixedMinSize);
-    //XRC_ADD_STYLE(wxSizerFlagBits::ReserveSpaceEvenIfHidden);
+    XRC_ADD_STYLE(wxFIXED_MINSIZE);
+    XRC_ADD_STYLE(wxRESERVE_SPACE_EVEN_IF_HIDDEN);
 
     // this flag doesn't do anything any more but we can just ignore its
     // occurrences in the old resource files instead of raising a fuss because
@@ -593,8 +592,8 @@ int wxSizerXmlHandler::GetSizerFlags()
     // doing it here allows us to give the exact line number at which the
     // offending line numbers are given, which is very valuable.
     //
-    // We also can detect invalid flags combinations involving wxAlignment::Left and
-    // wxAlignment::Top here, while this is impossible at wxSizer level as both of
+    // We also can detect invalid flags combinations involving wxALIGN_LEFT and
+    // wxALIGN_TOP here, while this is impossible at wxSizer level as both of
     // these flags have value of 0.
 
 
@@ -614,11 +613,11 @@ int wxSizerXmlHandler::GetSizerFlags()
     // none have been seen yet.
     wxString alignFlagIn[] = { wxString(), wxString() };
 
-    // Either "wxStretch::Expand" or "wxStretch::Grow" depending on the string used in the input,
+    // Either "wxEXPAND" or "wxGROW" depending on the string used in the input,
     // or empty string if none is specified.
     wxString expandFlag;
 
-    // Either "wxAlignment::Center" or "wxAlignment::Centerenter" if either flag was found or
+    // Either "wxALIGN_CENTRE" or "wxALIGN_CENTER" if either flag was found or
     // empty string.
     wxString centreFlag;
 
@@ -662,35 +661,35 @@ int wxSizerXmlHandler::GetSizerFlags()
 
         // Flag description is the string that appears in the error messages,
         // the main difference from the flag name is that it can indicate that
-        // wxAlignment::Center_XXX flag could have been encountered as part of
-        // wxAlignment::Center which should make the error message more clear as
-        // seeing references to e.g. wxAlignment::CenterVertical when it's never
+        // wxALIGN_CENTRE_XXX flag could have been encountered as part of
+        // wxALIGN_CENTRE which should make the error message more clear as
+        // seeing references to e.g. wxALIGN_CENTRE_VERTICAL when it's never
         // used could be confusing.
         wxString flagDesc = wxS('"') + flagName + wxS('"');
 
-        SizerFlags flag = m_styleValues[n];
+        int flag = m_styleValues[n];
 
         bool flagSpecifiesAlignIn[] = { false, false };
 
         switch ( flag )
         {
-            case wxAlignment::CenterHorizontal:
-            case wxAlignment::Right:
+            case wxALIGN_CENTRE_HORIZONTAL:
+            case wxALIGN_RIGHT:
                 flagSpecifiesAlignIn[Orient_Horz] = true;
                 break;
 
-            case wxAlignment::CenterVertical:
-            case wxAlignment::Bottom:
+            case wxALIGN_CENTRE_VERTICAL:
+            case wxALIGN_BOTTOM:
                 flagSpecifiesAlignIn[Orient_Vert] = true;
                 break;
 
-            case wxStretch::Expand:
+            case wxEXPAND:
                 expandFlag = flagName;
                 break;
 
-            case wxAlignment::Center:
-                // wxAlignment::Center is a combination of wxAlignment::CenterHorizontal
-                // and wxAlignment::CenterVertical but we also handle it as just
+            case wxALIGN_CENTRE:
+                // wxALIGN_CENTRE is a combination of wxALIGN_CENTRE_HORIZONTAL
+                // and wxALIGN_CENTRE_VERTICAL but we also handle it as just
                 // one of those flags if alignment in the other direction is
                 // not allowed for both compatibility and convenience reasons.
                 switch ( orientSizer )
@@ -699,20 +698,20 @@ int wxSizerXmlHandler::GetSizerFlags()
                         flagSpecifiesAlignIn[Orient_Vert] = true;
                         flagDesc.Printf
                         (
-                             "\"wxAlignment::CenterVertical\" (as part of %s)",
+                             "\"wxALIGN_CENTRE_VERTICAL\" (as part of %s)",
                              flagName
                         );
-                        flag = wxAlignment::CenterVertical;
+                        flag = wxALIGN_CENTRE_VERTICAL;
                         break;
 
                     case Orient_Vert:
                         flagSpecifiesAlignIn[Orient_Horz] = true;
                         flagDesc.Printf
                         (
-                            "\"wxAlignment::CenterHorizontal\" (as part of %s)",
+                            "\"wxALIGN_CENTRE_HORIZONTAL\" (as part of %s)",
                             flagName
                         );
-                        flag = wxAlignment::CenterHorizontal;
+                        flag = wxALIGN_CENTRE_HORIZONTAL;
                         break;
 
                     case Orient_Max:
@@ -725,12 +724,12 @@ int wxSizerXmlHandler::GetSizerFlags()
                 break;
 
             case 0:
-                // This is a special case: both wxAlignment::Left and wxAlignment::Top
+                // This is a special case: both wxALIGN_LEFT and wxALIGN_TOP
                 // have value of 0, so we need to examine the name of the flag
                 // and not just its value.
-                if ( flagName == wxS("wxAlignment::Left") )
+                if ( flagName == wxS("wxALIGN_LEFT") )
                     flagSpecifiesAlignIn[Orient_Horz] = true;
-                else if ( flagName == wxS("wxAlignment::Top") )
+                else if ( flagName == wxS("wxALIGN_TOP") )
                     flagSpecifiesAlignIn[Orient_Vert] = true;
                 break;
         }
@@ -788,7 +787,7 @@ int wxSizerXmlHandler::GetSizerFlags()
         flags |= flag;
     }
 
-    // Now that we know all the alignment flags we can interpret wxAlignment::Center
+    // Now that we know all the alignment flags we can interpret wxALIGN_CENTRE
     // for the 2D sizers ("centreFlag" is only set in the 2D case).
     if ( !centreFlag.empty() )
     {
@@ -805,15 +804,15 @@ int wxSizerXmlHandler::GetSizerFlags()
                 )
             );
         }
-        else // !wxStretch::Expand
+        else // !wxEXPAND
         {
             int flagsCentre = 0;
 
             if ( alignFlagIn[Orient_Horz].empty() )
-                flagsCentre |= wxAlignment::CenterHorizontal;
+                flagsCentre |= wxALIGN_CENTRE_HORIZONTAL;
 
             if ( alignFlagIn[Orient_Vert].empty() )
-                flagsCentre |= wxAlignment::CenterVertical;
+                flagsCentre |= wxALIGN_CENTRE_VERTICAL;
 
             if ( !flagsCentre )
             {
@@ -836,7 +835,7 @@ int wxSizerXmlHandler::GetSizerFlags()
         }
     }
 
-    // Finally check that the alignment flags are compatible with wxStretch::Expand.
+    // Finally check that the alignment flags are compatible with wxEXPAND.
     if ( !expandFlag.empty() )
     {
         if ( orientSizer != Orient_Max )
@@ -861,9 +860,9 @@ int wxSizerXmlHandler::GetSizerFlags()
                     )
                 );
 
-                // Just as with the alignment flags above, ignore wxStretch::Expand
+                // Just as with the alignment flags above, ignore wxEXPAND
                 // completely to avoid asserts from wxSizer code.
-                flags &= ~wxStretch::Expand;
+                flags &= ~wxEXPAND;
             }
         }
         else // 2D sizer
@@ -885,7 +884,7 @@ int wxSizerXmlHandler::GetSizerFlags()
                     )
                 );
 
-                flags &= ~wxStretch::Expand;
+                flags &= ~wxEXPAND;
             }
         }
     }

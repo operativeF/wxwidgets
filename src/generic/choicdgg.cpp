@@ -134,13 +134,12 @@ bool wxAnyChoiceDialog::Create(wxWindow *parent,
                                const std::string& message,
                                const std::string& caption,
                                const std::vector<std::string>& choices,
-                               DialogFlags styleDlg,
+                               long styleDlg,
                                const wxPoint& pos,
                                long styleLbox)
 {
-    // FIXME: Can be done more efficiently now.
     // extract the buttons styles from the dialog one and remove them from it
-    const DialogFlags styleBtns = styleDlg & DialogFlags{wxDialogFlags::OK, wxDialogFlags::Cancel};
+    const long styleBtns = styleDlg & (wxOK | wxCANCEL);
     styleDlg &= ~styleBtns;
 
     if ( !wxDialog::Create(GetParentForModalDialog(parent, styleDlg), wxID_ANY, caption, pos, wxDefaultSize, styleDlg) )
@@ -159,7 +158,7 @@ bool wxAnyChoiceDialog::Create(wxWindow *parent,
         m_listbox->SetSelection(0);
 
     topsizer->
-        Add(m_listbox, wxSizerFlags().Expand().Proportion(1).TripleBorder(wxDirection::Left | wxDirection::Right));
+        Add(m_listbox, wxSizerFlags().Expand().Proportion(1).TripleBorder(wxLEFT | wxRIGHT));
 
     // 3) buttons if any
     wxSizer *

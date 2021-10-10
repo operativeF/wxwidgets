@@ -232,7 +232,7 @@ void wxAuiGenericToolBarArt::DrawBackground(
     wxColour startColour = m_baseColour.ChangeLightness(startLightness);
     wxColour endColour = m_baseColour.ChangeLightness(endLightness);
 
-    dc.GradientFillLinear(rect, startColour, endColour, wxDirection::South);
+    dc.GradientFillLinear(rect, startColour, endColour, wxSOUTH);
 }
 
 void wxAuiGenericToolBarArt::DrawPlainBackground(wxDC& dc,
@@ -653,7 +653,7 @@ void wxAuiGenericToolBarArt::DrawSeparator(
 
     wxColour startColour = m_baseColour.ChangeLightness(80);
     wxColour endColour = m_baseColour.ChangeLightness(80);
-    dc.GradientFillLinear(rect, startColour, endColour, horizontal ? wxDirection::South : wxDirection::East);
+    dc.GradientFillLinear(rect, startColour, endColour, horizontal ? wxSOUTH : wxEAST);
 }
 
 void wxAuiGenericToolBarArt::DrawGripper(wxDC& dc,
@@ -829,7 +829,7 @@ bool wxAuiToolBar::Create(wxWindow* parent,
                            const wxSize& size,
                            unsigned int style)
 {
-    style = style|wxBorder::None;
+    style = style|wxBORDER_NONE;
 
     if (!wxControl::Create(parent, id, pos, size, style))
         return false;
@@ -1845,9 +1845,9 @@ bool wxAuiToolBar::RealizeHelper(wxClientDC& dc, bool horizontal)
     if (gripperSize > 0 && m_gripperVisible)
     {
         if (horizontal)
-            m_gripperSizerItem = sizer->Add(gripperSize, 1, 0, wxStretch::Expand);
+            m_gripperSizerItem = sizer->Add(gripperSize, 1, 0, wxEXPAND);
         else
-            m_gripperSizerItem = sizer->Add(1, gripperSize, 0, wxStretch::Expand);
+            m_gripperSizerItem = sizer->Add(1, gripperSize, 0, wxEXPAND);
     }
     else
     {
@@ -1906,9 +1906,9 @@ bool wxAuiToolBar::RealizeHelper(wxClientDC& dc, bool horizontal)
             case wxITEM_SEPARATOR:
             {
                 if (horizontal)
-                    sizerItem = sizer->Add(separatorSize, 1, 0, wxStretch::Expand);
+                    sizerItem = sizer->Add(separatorSize, 1, 0, wxEXPAND);
                 else
-                    sizerItem = sizer->Add(1, separatorSize, 0, wxStretch::Expand);
+                    sizerItem = sizer->Add(1, separatorSize, 0, wxEXPAND);
 
                 // add tool packing
                 if (i+1 < count)
@@ -1932,7 +1932,7 @@ bool wxAuiToolBar::RealizeHelper(wxClientDC& dc, bool horizontal)
 
                 wxBoxSizer* vert_sizer = new wxBoxSizer(wxVERTICAL);
                 vert_sizer->AddStretchSpacer(1);
-                ctrl_m_sizerItem = vert_sizer->Add(item.m_window, 0, wxStretch::Expand);
+                ctrl_m_sizerItem = vert_sizer->Add(item.m_window, 0, wxEXPAND);
                 vert_sizer->AddStretchSpacer(1);
                 if ( (m_windowStyle & wxAUI_TB_TEXT) &&
                      m_toolTextOrientation == wxAUI_TBTOOL_TEXT_BOTTOM &&
@@ -1943,7 +1943,7 @@ bool wxAuiToolBar::RealizeHelper(wxClientDC& dc, bool horizontal)
                 }
 
 
-                sizerItem = sizer->Add(vert_sizer, item.m_proportion, wxStretch::Expand);
+                sizerItem = sizer->Add(vert_sizer, item.m_proportion, wxEXPAND);
 
                 wxSize min_size = item.m_minSize;
 
@@ -1990,9 +1990,9 @@ bool wxAuiToolBar::RealizeHelper(wxClientDC& dc, bool horizontal)
         if (overflow_size > 0 && m_overflowVisible)
         {
             if (horizontal)
-                m_overflowSizerItem = sizer->Add(overflow_size, 1, 0, wxStretch::Expand);
+                m_overflowSizerItem = sizer->Add(overflow_size, 1, 0, wxEXPAND);
             else
-                m_overflowSizerItem = sizer->Add(1, overflow_size, 0, wxStretch::Expand);
+                m_overflowSizerItem = sizer->Add(1, overflow_size, 0, wxEXPAND);
             m_overflowSizerItem->SetMinSize(m_overflowSizerItem->GetSize());
         }
         else
@@ -2015,7 +2015,7 @@ bool wxAuiToolBar::RealizeHelper(wxClientDC& dc, bool horizontal)
     }
 
     // add the sizer that contains all of the toolbar elements
-    outside_sizer->Add(sizer, 1, wxStretch::Expand);
+    outside_sizer->Add(sizer, 1, wxEXPAND);
 
     // add "bottom" padding
     if (m_bottomPadding > 0)

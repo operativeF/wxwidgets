@@ -205,7 +205,7 @@ void wxAuiMSWTabArt::DrawTab(wxDC& dc,
 
     dc.SetFont(wnd->GetFont());
     dc.SetTextForeground(wxSystemSettings::GetColour(wxSYS_COLOUR_BTNTEXT));
-    dc.DrawLabel(page.caption, page.bitmap, textRect, wxAlignment::Center);
+    dc.DrawLabel(page.caption, page.bitmap, textRect, wxALIGN_CENTRE);
 
     // draw focus rectangle
     if ( page.active && (wxWindow::FindFocus() == wnd) )
@@ -374,7 +374,7 @@ void wxAuiMSWTabArt::DrawButton(wxDC& dc,
 
     wxRect rect = in_rect;
 
-    if ( orientation == wxDirection::Left )
+    if ( orientation == wxLEFT )
     {
         rect.SetX(in_rect.x);
         rect.SetY(((in_rect.y + in_rect.height) / 2) - (m_closeBtnSize.y / 2));

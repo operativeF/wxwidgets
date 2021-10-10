@@ -28,9 +28,9 @@ public:
                               const wxPoint& pos = wxDefaultPosition,
                               const wxSize& size = wxDefaultSize,
                               unsigned int style = 0)
-        // Always add the wxTAB_TRAVERSAL and wxBorder::None styles to what comes
+        // Always add the wxTAB_TRAVERSAL and wxNO_BORDER styles to what comes
         // from the XRC if anything.
-        : wxPanel(parent, id, pos, size, style | wxTAB_TRAVERSAL | wxBorder::None,
+        : wxPanel(parent, id, pos, size, style | wxTAB_TRAVERSAL | wxNO_BORDER,
                   controlName + wxT("_container")),
           m_controlName(controlName),
           m_control(nullptr)

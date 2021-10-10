@@ -33,16 +33,6 @@ constexpr char wxListBoxNameStr[] = "listBox";
 /*
  * Styles for wxListBox
  */
-
-enum class ListBoxStyles
-{
-    Sort,
-    Single,
-    Multiple,
-    Extended,
-    _max_size
-};
-
 constexpr unsigned int wxLB_SORT           = 0x0010;
 constexpr unsigned int wxLB_SINGLE         = 0x0020;
 constexpr unsigned int wxLB_MULTIPLE       = 0x0040;

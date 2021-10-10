@@ -59,7 +59,7 @@ public:
 
 protected:
     // choose the default border for this window
-    wxBorder GetDefaultBorder() const override { return wxBorder::None; }
+    wxBorder GetDefaultBorder() const override { return wxBORDER_NONE; }
 
     wxSize DoGetBestSize() const override;
 };

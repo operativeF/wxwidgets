@@ -44,7 +44,7 @@ public:
                  unsigned int style = 0);
 
 protected:
-    wxBorder GetDefaultBorder() const override { return wxBorder::None; }
+    wxBorder GetDefaultBorder() const override { return wxBORDER_NONE; }
 
     void OnEraseBackground(wxEraseEvent& evt);
     void OnPaint(wxPaintEvent& evt);
@@ -76,7 +76,7 @@ wxRibbonPageScrollButton::wxRibbonPageScrollButton(wxRibbonPage* sibling,
                  const wxPoint& pos,
                  const wxSize& size,
                  unsigned int style)
-    : wxRibbonControl(sibling->GetParent(), id, pos, size, wxBorder::None),
+    : wxRibbonControl(sibling->GetParent(), id, pos, size, wxBORDER_NONE),
       m_sibling(sibling),
       m_flags(style & wxRIBBON_SCROLL_BTN_DIRECTION_MASK | wxRIBBON_SCROLL_BTN_FOR_PAGE)
 {
@@ -151,7 +151,7 @@ wxRibbonPage::wxRibbonPage(wxRibbonBar* parent,
                    const wxString& label,
                    const wxBitmap& icon,
                    unsigned int WXUNUSED(style))
-    : wxRibbonControl(parent, id, wxDefaultPosition, wxDefaultSize, wxBorder::None)
+    : wxRibbonControl(parent, id, wxDefaultPosition, wxDefaultSize, wxBORDER_NONE)
 {
     CommonInit(label, icon);
 }
@@ -169,7 +169,7 @@ bool wxRibbonPage::Create(wxRibbonBar* parent,
                 const wxBitmap& icon,
                 unsigned int WXUNUSED(style))
 {
-    if(!wxRibbonControl::Create(parent, id, wxDefaultPosition, wxDefaultSize, wxBorder::None))
+    if(!wxRibbonControl::Create(parent, id, wxDefaultPosition, wxDefaultSize, wxBORDER_NONE))
         return false;
 
     CommonInit(label, icon);

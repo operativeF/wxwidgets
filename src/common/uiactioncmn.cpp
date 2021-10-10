@@ -207,7 +207,7 @@ bool wxUIActionSimulator::Select(std::string_view text)
 
     // We prefer to exactly emulate what a (keyboard) user would do, so prefer
     // to emulate selecting the first item of the control if possible (this
-    // works with wxChoice, wxListBox and wxComboBox with ComboStyles::ReadOnly style
+    // works with wxChoice, wxListBox and wxComboBox with wxCB_READONLY style
     // under MSW).
     if ( container->GetSelection() != 0 )
     {

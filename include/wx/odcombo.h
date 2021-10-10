@@ -29,9 +29,9 @@ class WXDLLIMPEXP_FWD_CORE wxRect;
 //
 // New window styles for wxOwnerDrawnComboBox
 //
-enum class OwnerDrawnCCStyles
+enum
 {
-    // Double-clicking cycles item if ComboStyles::ReadOnly is also used.
+    // Double-clicking cycles item if wxCB_READONLY is also used.
     wxODCB_DCLICK_CYCLES            = wxCC_SPECIAL_DCLICK,
 
     // If used, control itself is not custom paint using callback.
@@ -344,7 +344,7 @@ public:
     // Return the index of the widest item (recalculating it if necessary)
     virtual int GetWidestItem() { EnsurePopupControl(); return GetVListBoxComboPopup()->GetWidestItem(); }
 
-    bool IsSorted() const override { return GetComboStyles().is_set(ComboStyles::Sort); }
+    bool IsSorted() const override { return HasFlag(wxCB_SORT); }
 
 protected:
     void DoClear() override;

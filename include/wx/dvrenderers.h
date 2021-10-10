@@ -181,7 +181,7 @@ public:
 
     // NOTE: Set/GetAlignment do not take/return a wxAlignment enum but
     //       rather an "int"; that's because for rendering cells it's allowed
-    //       to combine alignment flags (e.g. wxAlignment::Left|wxAlignment::Bottom)
+    //       to combine alignment flags (e.g. wxALIGN_LEFT|wxALIGN_BOTTOM)
     virtual void SetAlignment( int align ) = 0;
     virtual int GetAlignment() const = 0;
 
@@ -220,13 +220,13 @@ public:
     // the column it is used for otherwise.
     //
     // Unlike GetAlignment(), this always returns a valid combination of
-    // wxALIGN_XXX flags (although possibly wxAlignment::None) and never returns
+    // wxALIGN_XXX flags (although possibly wxALIGN_NOT) and never returns
     // wxDVR_DEFAULT_ALIGNMENT.
-    wxAlignment GetEffectiveAlignment() const;
+    int GetEffectiveAlignment() const;
 
     // Like GetEffectiveAlignment(), but returns wxDVR_DEFAULT_ALIGNMENT if
     // the owner isn't set and GetAlignment() is default.
-    wxAlignment GetEffectiveAlignmentIfKnown() const;
+    int GetEffectiveAlignmentIfKnown() const;
 
     // Send wxEVT_DATAVIEW_ITEM_EDITING_STARTED event.
     void NotifyEditingStarted(const wxDataViewItem& item);
@@ -258,7 +258,7 @@ protected:
     bool DoHandleEditingDone(wxVariant* value);
 
 
-    std::string             m_variantType;
+    std::string                m_variantType;
     wxDataViewColumn       *m_owner{nullptr};
     wxWeakRef<wxWindow>     m_editorCtrl;
     wxDataViewItem          m_item; // Item being currently edited, if valid.

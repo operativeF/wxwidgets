@@ -15,9 +15,10 @@
 // headers
 // ----------------------------------------------------------------------------
 
+#include "wx/defs.h"
+
 #if wxUSE_AUI
 
-#include "wx/directionflags.h"
 #include "wx/dynarray.h"
 #include "wx/geometry/point.h"
 #include "wx/geometry/rect.h"
@@ -440,7 +441,7 @@ public:
                  const wxPoint& dropPos);
 
     bool AddPane(wxWindow* window,
-                 int direction = wxDirection::Left,
+                 int direction = wxLEFT,
                  const wxString& caption = wxEmptyString);
 
     bool InsertPane(wxWindow* window,

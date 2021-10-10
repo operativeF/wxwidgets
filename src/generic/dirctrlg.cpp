@@ -356,7 +356,7 @@ bool wxGenericDirCtrl::Create(wxWindow *parent,
         treeStyle |= wxTR_MULTIPLE;
 
     if ((style & wxDIRCTRL_3D_INTERNAL) == 0)
-        treeStyle |= wxBorder::None;
+        treeStyle |= wxNO_BORDER;
 
     m_treeCtrl = CreateTreeCtrl(this, wxID_TREECTRL,
                                 wxPoint(0,0), GetClientSize(), treeStyle);
@@ -506,7 +506,7 @@ void wxGenericDirCtrl::OnEndEditItem(wxTreeEvent &event)
         (event.GetLabel().Find(wxT('\\')) != wxNOT_FOUND) ||
         (event.GetLabel().Find(wxT('|')) != wxNOT_FOUND))
     {
-        wxMessageDialog dialog(this, _("Illegal directory name."), _("Error"), DialogFlags{wxDialogFlags::OK, wxDialogIconFlags::Error} );
+        wxMessageDialog dialog(this, _("Illegal directory name."), _("Error"), wxOK | wxICON_ERROR );
         dialog.ShowModal();
         event.Veto();
         return;
@@ -524,7 +524,7 @@ void wxGenericDirCtrl::OnEndEditItem(wxTreeEvent &event)
 
     if (wxFileExists(new_name))
     {
-        wxMessageDialog dialog(this, _("File name exists already."), _("Error"), DialogFlags{wxDialogFlags::OK, wxDialogIconFlags::Error} );
+        wxMessageDialog dialog(this, _("File name exists already."), _("Error"), wxOK | wxICON_ERROR );
         dialog.ShowModal();
         event.Veto();
     }
@@ -535,7 +535,7 @@ void wxGenericDirCtrl::OnEndEditItem(wxTreeEvent &event)
     }
     else
     {
-        wxMessageDialog dialog(this, _("Operation not permitted."), _("Error"), DialogFlags{wxDialogFlags::OK, wxDialogIconFlags::Error} );
+        wxMessageDialog dialog(this, _("Operation not permitted."), _("Error"), wxOK | wxICON_ERROR );
         dialog.ShowModal();
         event.Veto();
     }

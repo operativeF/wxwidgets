@@ -72,10 +72,9 @@ static void AddSpinCtrlStyles(wxXmlResourceHandler& handler)
     handler.XRC_ADD_STYLE(wxSP_VERTICAL);
     handler.XRC_ADD_STYLE(wxSP_ARROW_KEYS);
     handler.XRC_ADD_STYLE(wxSP_WRAP);
-    // FIXME: Fix for enum class.
-    //handler.XRC_ADD_STYLE(wxAlignment::Left);
-    //handler.XRC_ADD_STYLE(wxAlignment::Center);
-    //handler.XRC_ADD_STYLE(wxAlignment::Right);
+    handler.XRC_ADD_STYLE(wxALIGN_LEFT);
+    handler.XRC_ADD_STYLE(wxALIGN_CENTER);
+    handler.XRC_ADD_STYLE(wxALIGN_RIGHT);
 }
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxSpinCtrlXmlHandler, wxXmlResourceHandler);

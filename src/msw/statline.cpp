@@ -46,7 +46,7 @@ DWORD wxStaticLine::MSWGetStyle(unsigned int style, DWORD *exstyle) const
 {
     // we never have border
     style &= ~wxBORDER_MASK;
-    style |= wxBorder::None;
+    style |= wxBORDER_NONE;
 
     DWORD msStyle = wxControl::MSWGetStyle(style, exstyle);
 

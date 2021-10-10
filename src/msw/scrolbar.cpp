@@ -220,7 +220,7 @@ DWORD wxScrollBar::MSWGetStyle(unsigned int style, DWORD *exstyle) const
     // we never have an external border
     DWORD msStyle = wxControl::MSWGetStyle
                       (
-                        (style & ~wxBORDER_MASK) | wxBorder::None, exstyle
+                        (style & ~wxBORDER_MASK) | wxBORDER_NONE, exstyle
                       );
 
     // SBS_HORZ is 0 anyhow, but do mention it explicitly for clarity

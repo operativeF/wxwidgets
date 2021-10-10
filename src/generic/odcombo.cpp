@@ -58,7 +58,7 @@ bool wxVListBoxComboPopup::Create(wxWindow* parent)
                              wxID_ANY,
                              wxDefaultPosition,
                              wxDefaultSize,
-                             wxBorder::Simple | wxLB_INT_HEIGHT | wxWANTS_CHARS) )
+                             wxBORDER_SIMPLE | wxLB_INT_HEIGHT | wxWANTS_CHARS) )
         return false;
 
     m_useFont = m_combo->GetFont();
@@ -108,7 +108,7 @@ bool wxVListBoxComboPopup::LazyCreate()
 // paint the control itself
 void wxVListBoxComboPopup::PaintComboControl( wxDC& dc, const wxRect& rect )
 {
-    if ( !(m_combo->GetComboStyles() & wxODCB_STD_CONTROL_PAINT) )
+    if ( !(m_combo->wxGetWindowStyle() & wxODCB_STD_CONTROL_PAINT) )
     {
         unsigned int flags = wxODCB_PAINTING_CONTROL;
 
@@ -260,7 +260,7 @@ bool wxVListBoxComboPopup::HandleKey( int keycode, bool saturate, wxChar keychar
         return false;
 
     int value = m_value;
-    auto comboStyle = m_combo->GetComboStyles();
+    int comboStyle = m_combo->wxGetWindowStyle();
 
     if ( keychar > 0 )
     {
@@ -270,7 +270,7 @@ bool wxVListBoxComboPopup::HandleKey( int keycode, bool saturate, wxChar keychar
             keychar = 0;
     }
 
-    const bool readOnly = (comboStyle & ComboStyles::ReadOnly) != 0;
+    const bool readOnly = (comboStyle & wxCB_READONLY) != 0;
 
     if ( keycode == WXK_DOWN || keycode == WXK_NUMPAD_DOWN || ( keycode == WXK_RIGHT && readOnly ) )
     {
@@ -482,7 +482,7 @@ void wxVListBoxComboPopup::OnKey(wxKeyEvent& event)
 
 void wxVListBoxComboPopup::OnChar(wxKeyEvent& event)
 {
-    if ( m_combo->GetComboStyles() & ComboStyles::ReadOnly )
+    if ( m_combo->wxGetWindowStyle() & wxCB_READONLY )
     {
         // Process partial completion key codes here, but not the arrow keys as
         // the base class will do that for us
@@ -526,7 +526,7 @@ int wxVListBoxComboPopup::Append(const wxString& item)
 {
     int pos = (int)m_strings.size();
 
-    if ( m_combo->GetComboStyles() & ComboStyles::Sort )
+    if ( m_combo->wxGetWindowStyle() & wxCB_SORT )
     {
         // Find position
         // TODO: Could be optimized with binary search
@@ -869,7 +869,7 @@ void wxVListBoxComboPopup::Populate( const std::vector<std::string>& choices )
         wxVListBox::SetItemCount(n);
 
     // Sort the initial choices
-    if ( m_combo->GetComboStyles() & ComboStyles::Sort )
+    if ( m_combo->wxGetWindowStyle() & wxCB_SORT )
         std::sort(m_strings.begin(), m_strings.end());
     // Find initial selection
     wxString strValue = m_combo->GetValue();
@@ -994,7 +994,7 @@ void wxOwnerDrawnComboBox::DoClear()
 
     GetVListBoxComboPopup()->Clear();
 
-    // There is no text entry when using ComboStyles::ReadOnly style, so test for it.
+    // There is no text entry when using wxCB_READONLY style, so test for it.
     if ( GetTextCtrl() )
         wxTextEntry::Clear();
 }
@@ -1099,7 +1099,7 @@ int wxOwnerDrawnComboBox::DoInsertItems(const std::vector<std::string>& items,
 
     const unsigned int count = items.size();
 
-    if ( HasFlag(ComboStyles::Sort) )
+    if ( HasFlag(wxCB_SORT) )
     {
         int n = pos;
 
@@ -1205,7 +1205,7 @@ void wxOwnerDrawnComboBox::OnDrawBackground(wxDC& dc,
     // always when painting the control so that clipping is done properly.
 
     if ( (flags & wxODCB_PAINTING_SELECTED) ||
-         ((flags & wxODCB_PAINTING_CONTROL) && HasFlag(ComboStyles::ReadOnly)) )
+         ((flags & wxODCB_PAINTING_CONTROL) && HasFlag(wxCB_READONLY)) )
     {
         int bgFlags = wxCONTROL_SELECTED;
 

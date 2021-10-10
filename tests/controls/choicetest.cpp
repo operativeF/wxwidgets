@@ -27,7 +27,7 @@ TEST_CASE_FIXTURE(ChoiceControlTest, "Choice control test.")
 {
     m_container = std::make_unique<wxChoice>(wxTheApp->GetTopWindow(),
                                              wxID_ANY, wxDefaultPosition,
-                                             wxDefaultSize, std::vector<std::string>{}, ComboStyles::Sort);
+                                             wxDefaultSize, std::vector<std::string>{}, wxCB_SORT);
 #if !defined(__WXOSX__)
     SUBCASE("Sort")
     {

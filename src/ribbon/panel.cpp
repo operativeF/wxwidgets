@@ -17,7 +17,6 @@
 #include "wx/ribbon/art.h"
 #include "wx/ribbon/bar.h"
 #include "wx/dcbuffer.h"
-#include "wx/directionflags.h"
 #include "wx/display.h"
 #include "wx/sizer.h"
 #include "wx/frame.h"
@@ -50,7 +49,7 @@ wxRibbonPanel::wxRibbonPanel(wxWindow* parent,
                   const wxPoint& pos,
                   const wxSize& size,
                   unsigned int style)
-    : wxRibbonControl(parent, id, pos, size, wxBorder::None)
+    : wxRibbonControl(parent, id, pos, size, wxBORDER_NONE)
 {
     CommonInit(label, minimised_icon, style);
 }
@@ -72,7 +71,7 @@ bool wxRibbonPanel::Create(wxWindow* parent,
                 const wxSize& size,
                 unsigned int style)
 {
-    if(!wxRibbonControl::Create(parent, id, pos, size, wxBorder::None))
+    if(!wxRibbonControl::Create(parent, id, pos, size, wxBORDER_NONE))
     {
         return false;
     }
@@ -107,7 +106,7 @@ void wxRibbonPanel::CommonInit(const wxString& label, const wxBitmap& icon, unsi
 
     m_minimised_size = wxDefaultSize; // Unknown / none
     m_smallest_unminimised_size = wxDefaultSize;// Unknown / none for IsFullySpecified()
-    m_preferred_expand_direction = wxDirection::South;
+    m_preferred_expand_direction = wxSOUTH;
     m_expanded_dummy = nullptr;
     m_expanded_panel = nullptr;
     m_flags = style;
@@ -812,7 +811,7 @@ bool wxRibbonPanel::ShowExpanded()
 
     // Need a top-level frame to contain the expanded panel
     wxFrame *container = new wxFrame(nullptr, wxID_ANY, GetLabel(),
-        pos, size, wxFRAME_NO_TASKBAR | wxBorder::None);
+        pos, size, wxFRAME_NO_TASKBAR | wxBORDER_NONE);
 
     m_expanded_panel = new wxRibbonPanel(container, wxID_ANY,
         GetLabel(), m_minimised_icon, wxPoint(0, 0), size, (m_flags /* & ~wxRIBBON_PANEL_FLEXIBLE */));
@@ -999,24 +998,24 @@ wxRect wxRibbonPanel::GetExpandedPosition(wxRect panel,
     int secondary_y = 0;
     switch(direction)
     {
-    case wxDirection::North:
+    case wxNORTH:
         pos.x = panel.GetX() + (panel.GetWidth() - expanded_size.x) / 2;
         pos.y = panel.GetY() - expanded_size.y;
         primary_x = true;
         secondary_y = 1;
         break;
-    case wxDirection::East:
+    case wxEAST:
         pos.x = panel.GetRight();
         pos.y = panel.GetY() + (panel.GetHeight() - expanded_size.y) / 2;
         secondary_x = -1;
         break;
-    case wxDirection::South:
+    case wxSOUTH:
         pos.x = panel.GetX() + (panel.GetWidth() - expanded_size.x) / 2;
         pos.y = panel.GetBottom();
         primary_x = true;
         secondary_y = -1;
         break;
-    case wxDirection::West:
+    case wxWEST:
     default:
         pos.x = panel.GetX() - expanded_size.x;
         pos.y = panel.GetY() + (panel.GetHeight() - expanded_size.y) / 2;

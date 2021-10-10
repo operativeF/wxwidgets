@@ -137,7 +137,7 @@ bool wxTextValidator::Validate(wxWindow *parent)
     {
         m_validatorWindow->SetFocus();
         wxMessageBox(errormsg, _("Validation conflict"),
-                     DialogFlags{wxDialogFlags::OK, wxDialogIconFlags::Exclamation}, parent);
+                     wxOK | wxICON_EXCLAMATION, parent);
 
         return false;
     }

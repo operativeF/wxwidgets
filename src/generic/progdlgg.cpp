@@ -136,7 +136,7 @@ bool wxGenericProgressDialog::Create( const std::string& title,
     wxSizer * const sizerTop = new wxBoxSizer(wxVERTICAL);
 
     m_msg = new wxStaticText(this, wxID_ANY, message);
-    sizerTop->Add(m_msg, 0, wxDirection::Left | wxDirection::Right | wxDirection::Top, 2*LAYOUT_MARGIN);
+    sizerTop->Add(m_msg, 0, wxLEFT | wxRIGHT | wxTOP, 2*LAYOUT_MARGIN);
 
     int gauge_style = wxGA_HORIZONTAL;
     if ( style & wxPD_SMOOTH )
@@ -158,7 +158,7 @@ bool wxGenericProgressDialog::Create( const std::string& title,
                     gauge_style
                   );
 
-    sizerTop->Add(m_gauge, 0, SizerFlags{wxDirection::Left, wxDirection::Right, wxDirection::Top, wxStretch::Expand}, 2*LAYOUT_MARGIN);
+    sizerTop->Add(m_gauge, 0, wxLEFT | wxRIGHT | wxTOP | wxEXPAND, 2*LAYOUT_MARGIN);
     m_gauge->SetValue(0);
 
     // also count how many labels we really have
@@ -186,11 +186,11 @@ bool wxGenericProgressDialog::Create( const std::string& title,
 
         m_remaining = CreateLabel(GetRemainingLabel(), sizerLabels);
     }
-    sizerTop->Add(sizerLabels, 0, SizerFlags{wxAlignment::CenterHorizontal, wxDirection::Top}, LAYOUT_MARGIN);
+    sizerTop->Add(sizerLabels, 0, wxALIGN_CENTER_HORIZONTAL | wxTOP, LAYOUT_MARGIN);
 
     wxStdDialogButtonSizer *buttonSizer = wxDialog::CreateStdDialogButtonSizer(0);
 
-    static constexpr int borderFlags = wxDirection::All;
+    static constexpr int borderFlags = wxALL;
 
     wxSizerFlags sizerFlags =
         wxSizerFlags().Border(borderFlags, LAYOUT_MARGIN);
@@ -326,12 +326,12 @@ wxGenericProgressDialog::CreateLabel(const std::string& text, wxSizer *sizer)
     // select placement most native or nice on target GUI
 #if defined(__WXMSW__) || defined(__WXMAC__) || defined(__WXGTK20__)
     // value and time centered in one row
-    sizer->Add(label, 1, wxAlignment::Right | wxDirection::Top | wxDirection::Right, LAYOUT_MARGIN);
-    sizer->Add(value, 1, wxAlignment::Left | wxDirection::Top, LAYOUT_MARGIN);
+    sizer->Add(label, 1, wxALIGN_RIGHT | wxTOP | wxRIGHT, LAYOUT_MARGIN);
+    sizer->Add(value, 1, wxALIGN_LEFT | wxTOP, LAYOUT_MARGIN);
 #else
     // value and time to the right in one row
     sizer->Add(label);
-    sizer->Add(value, 0, wxDirection::Left, LAYOUT_MARGIN);
+    sizer->Add(value, 0, wxLEFT, LAYOUT_MARGIN);
 #endif
 
     return value;

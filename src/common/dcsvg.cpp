@@ -18,7 +18,6 @@
 
 #include "wx/dcmemory.h"
 #include "wx/dcscreen.h"
-#include "wx/directionflags.h"
 #include "wx/icon.h"
 #include "wx/image.h"
 #include "wx/base64.h"
@@ -1053,10 +1052,10 @@ void wxSVGFileDCImpl::DoGradientFillLinear(const wxRect& rect,
     wxString initCol = Col2SVG(initialColour, &initOpacity);
     wxString destCol = Col2SVG(destColour, &destOpacity);
 
-    const int x1 = ((nDirection & wxDirection::Left) > 0) ? 100 : 0;
-    const int y1 = ((nDirection & wxDirection::Up) > 0) ? 100 : 0;
-    const int x2 = ((nDirection & wxDirection::Right) > 0) ? 100 : 0;
-    const int y2 = ((nDirection & wxDirection::Down) > 0) ? 100 : 0;
+    const int x1 = ((nDirection & wxLEFT) > 0) ? 100 : 0;
+    const int y1 = ((nDirection & wxUP) > 0) ? 100 : 0;
+    const int x2 = ((nDirection & wxRIGHT) > 0) ? 100 : 0;
+    const int y2 = ((nDirection & wxDOWN) > 0) ? 100 : 0;
 
     wxString s;
     s += wxS("  <defs>\n");

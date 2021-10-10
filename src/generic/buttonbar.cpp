@@ -374,7 +374,7 @@ void wxButtonToolBar::DoLayout()
             if (!tool->GetButton())
             {
                 wxBitmapButton* bmpButton = new wxBitmapButton(this, tool->GetId(), tool->GetNormalBitmap(), wxPoint(tool->m_x, tool->m_y), wxDefaultSize,
-                                                               wxBorder::None);
+                                                               wxBORDER_NONE);
                 if (!tool->GetShortHelp().empty())
                     bmpButton->SetLabel(tool->GetShortHelp());
 

@@ -83,7 +83,7 @@ bool wxNumberEntryDialog::Create(wxWindow *parent,
     wxBoxSizer *topsizer = new wxBoxSizer( wxVERTICAL );
 #if wxUSE_STATTEXT
     // 1) text message
-    topsizer->Add( CreateTextSizer( message ), 0, wxDirection::All, 10 );
+    topsizer->Add( CreateTextSizer( message ), 0, wxALL, 10 );
 #endif
 
     // 2) prompt and text ctrl
@@ -92,7 +92,7 @@ bool wxNumberEntryDialog::Create(wxWindow *parent,
 #if wxUSE_STATTEXT
     // prompt if any
     if (!prompt.empty())
-        inputsizer->Add( new wxStaticText( this, wxID_ANY, prompt ), 0, wxCENTER | wxDirection::Left, 10 );
+        inputsizer->Add( new wxStaticText( this, wxID_ANY, prompt ), 0, wxCENTER | wxLEFT, 10 );
 #endif
 
     // spin ctrl
@@ -103,12 +103,12 @@ bool wxNumberEntryDialog::Create(wxWindow *parent,
 #else
     m_spinctrl = new wxTextCtrl(this, wxID_ANY, valStr, wxDefaultPosition, wxSize( 140, wxDefaultCoord ));
 #endif
-    inputsizer->Add( m_spinctrl, 1, wxCENTER | wxDirection::Left | wxDirection::Right, 10 );
+    inputsizer->Add( m_spinctrl, 1, wxCENTER | wxLEFT | wxRIGHT, 10 );
     // add both
-    topsizer->Add( inputsizer, 0, wxStretch::Expand | wxDirection::Left|wxDirection::Right, 5 );
+    topsizer->Add( inputsizer, 0, wxEXPAND | wxLEFT|wxRIGHT, 5 );
 
     // 3) buttons if any
-    wxSizer *buttonSizer = CreateSeparatedButtonSizer(DialogFlags{wxDialogFlags::OK, wxDialogFlags::Cancel});
+    wxSizer *buttonSizer = CreateSeparatedButtonSizer(wxOK | wxCANCEL);
     if ( buttonSizer )
     {
         topsizer->Add(buttonSizer, wxSizerFlags().Expand().DoubleBorder());

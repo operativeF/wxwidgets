@@ -38,19 +38,19 @@ wxDEFINE_FLAGS( wxStaticTextStyle )
 wxBEGIN_FLAGS( wxStaticTextStyle )
 // new style border flags, we put them first to
 // use them for streaming out
-wxFLAGS_MEMBER(wxBorder::Simple)
-wxFLAGS_MEMBER(wxBorder::Sunken)
+wxFLAGS_MEMBER(wxBORDER_SIMPLE)
+wxFLAGS_MEMBER(wxBORDER_SUNKEN)
 wxFLAGS_MEMBER(wxBORDER_DOUBLE)
-wxFLAGS_MEMBER(wxBorder::Raised)
-wxFLAGS_MEMBER(wxBorder::Static)
-wxFLAGS_MEMBER(wxBorder::None)
+wxFLAGS_MEMBER(wxBORDER_RAISED)
+wxFLAGS_MEMBER(wxBORDER_STATIC)
+wxFLAGS_MEMBER(wxBORDER_NONE)
 
 // old style border flags
-wxFLAGS_MEMBER(wxBorder::Simple)
-wxFLAGS_MEMBER(wxBorder::Sunken)
+wxFLAGS_MEMBER(wxSIMPLE_BORDER)
+wxFLAGS_MEMBER(wxSUNKEN_BORDER)
 wxFLAGS_MEMBER(wxDOUBLE_BORDER)
-wxFLAGS_MEMBER(wxBorder::Raised)
-wxFLAGS_MEMBER(wxBorder::Static)
+wxFLAGS_MEMBER(wxRAISED_BORDER)
+wxFLAGS_MEMBER(wxSTATIC_BORDER)
 wxFLAGS_MEMBER(wxBORDER)
 
 // standard window styles
@@ -64,9 +64,9 @@ wxFLAGS_MEMBER(wxVSCROLL)
 wxFLAGS_MEMBER(wxHSCROLL)
 
 wxFLAGS_MEMBER(wxST_NO_AUTORESIZE)
-wxFLAGS_MEMBER(wxAlignment::Left)
-wxFLAGS_MEMBER(wxAlignment::Right)
-wxFLAGS_MEMBER(wxAlignment::Center)
+wxFLAGS_MEMBER(wxALIGN_LEFT)
+wxFLAGS_MEMBER(wxALIGN_RIGHT)
+wxFLAGS_MEMBER(wxALIGN_CENTRE)
 wxEND_FLAGS( wxStaticTextStyle )
 
 wxIMPLEMENT_DYNAMIC_CLASS_XTI(wxStaticText, wxControl, "wx/stattext.h");

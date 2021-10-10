@@ -925,8 +925,8 @@ bool wxCheckWindowWndProc(WXHWND hWnd, WXWNDPROC wndProc = nullptr);
 // Does this window style specify any border?
 constexpr bool wxStyleHasBorder(unsigned int style)
 {
-    return (style & (wxBorder::Simple | wxBorder::Raised |
-                     wxBorder::Sunken | wxDOUBLE_BORDER)) != 0;
+    return (style & (wxSIMPLE_BORDER | wxRAISED_BORDER |
+                     wxSUNKEN_BORDER | wxDOUBLE_BORDER)) != 0;
 }
 
 inline bool wxHasWindowExStyle(const wxWindowMSW *win, unsigned int style)

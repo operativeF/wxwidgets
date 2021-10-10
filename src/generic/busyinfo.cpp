@@ -35,7 +35,7 @@ void wxBusyInfo::Init(const wxBusyInfoFlags& flags)
 {
     m_InfoFrame = new wxFrame(flags.m_parent, wxID_ANY, "",
                               wxDefaultPosition, wxDefaultSize,
-                              wxBorder::Simple |
+                              wxSIMPLE_BORDER |
                               wxFRAME_TOOL_WINDOW |
                               wxSTAY_ON_TOP);
 
@@ -55,7 +55,7 @@ void wxBusyInfo::Init(const wxBusyInfoFlags& flags)
         title = new wxStaticTextWithMarkupSupport(panel, wxID_ANY, "",
                                                   wxDefaultPosition,
                                                   wxDefaultSize,
-                                                  wxAlignment::Center);
+                                                  wxALIGN_CENTRE);
         title->SetFont(title->GetFont().Scaled(2));
 #if wxUSE_MARKUP
         title->SetLabelMarkup(flags.m_title);
@@ -77,7 +77,7 @@ void wxBusyInfo::Init(const wxBusyInfoFlags& flags)
     m_text = new wxStaticTextWithMarkupSupport(panel, wxID_ANY, "",
                                                wxDefaultPosition,
                                                wxDefaultSize,
-                                               wxAlignment::Center);
+                                               wxALIGN_CENTRE);
     if ( !flags.m_text.empty() )
         m_text->SetLabelMarkup(flags.m_text);
     else

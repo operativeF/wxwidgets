@@ -133,19 +133,19 @@ wxBEGIN_FLAGS( wxWindowStyle )
 // new style border flags, we put them first to
 // use them for streaming out
 
-wxFLAGS_MEMBER(wxBorder::Simple)
-wxFLAGS_MEMBER(wxBorder::Sunken)
+wxFLAGS_MEMBER(wxBORDER_SIMPLE)
+wxFLAGS_MEMBER(wxBORDER_SUNKEN)
 wxFLAGS_MEMBER(wxBORDER_DOUBLE)
-wxFLAGS_MEMBER(wxBorder::Raised)
-wxFLAGS_MEMBER(wxBorder::Static)
-wxFLAGS_MEMBER(wxBorder::None)
+wxFLAGS_MEMBER(wxBORDER_RAISED)
+wxFLAGS_MEMBER(wxBORDER_STATIC)
+wxFLAGS_MEMBER(wxBORDER_NONE)
 
 // old style border flags
-wxFLAGS_MEMBER(wxBorder::Simple)
-wxFLAGS_MEMBER(wxBorder::Sunken)
+wxFLAGS_MEMBER(wxSIMPLE_BORDER)
+wxFLAGS_MEMBER(wxSUNKEN_BORDER)
 wxFLAGS_MEMBER(wxDOUBLE_BORDER)
-wxFLAGS_MEMBER(wxBorder::Raised)
-wxFLAGS_MEMBER(wxBorder::Static)
+wxFLAGS_MEMBER(wxRAISED_BORDER)
+wxFLAGS_MEMBER(wxSTATIC_BORDER)
 wxFLAGS_MEMBER(wxBORDER)
 
 // standard window styles
@@ -797,18 +797,18 @@ wxSize wxWindowBase::GetWindowBorderSize() const
 
     switch ( GetBorder() )
     {
-        case wxBorder::None:
+        case wxBORDER_NONE:
             // nothing to do, size is already (0, 0)
             break;
 
-        case wxBorder::Simple:
-        case wxBorder::Static:
+        case wxBORDER_SIMPLE:
+        case wxBORDER_STATIC:
             size.x = wxGetMetricOrDefault(wxSYS_BORDER_X, this);
             size.y = wxGetMetricOrDefault(wxSYS_BORDER_Y, this);
             break;
 
-        case wxBorder::Sunken:
-        case wxBorder::Raised:
+        case wxBORDER_SUNKEN:
+        case wxBORDER_RAISED:
             size.x = std::max(wxGetMetricOrDefault(wxSYS_EDGE_X, this),
                            wxGetMetricOrDefault(wxSYS_BORDER_X, this));
             size.y = std::max(wxGetMetricOrDefault(wxSYS_EDGE_Y, this),
@@ -859,7 +859,7 @@ wxSize wxWindowBase::GetEffectiveMinSize() const
 wxSize wxWindowBase::DoGetBorderSize() const
 {
     // there is one case in which we can implement it for all ports easily
-    if ( GetBorder() == wxBorder::None )
+    if ( GetBorder() == wxBORDER_NONE )
         return {0, 0};
 
     // otherwise use the difference between the real size and the client size
@@ -3163,11 +3163,11 @@ WX_DEFINE_LIST(wxWindowList)
 wxBorder wxWindowBase::GetBorder(long flags) const
 {
     wxBorder border = (wxBorder)(flags & wxBORDER_MASK);
-    if ( border == wxBorder::Default )
+    if ( border == wxBORDER_DEFAULT )
     {
         border = GetDefaultBorder();
     }
-    else if ( border == wxBorder::Theme )
+    else if ( border == wxBORDER_THEME )
     {
         border = GetDefaultBorderForControl();
     }
@@ -3177,7 +3177,7 @@ wxBorder wxWindowBase::GetBorder(long flags) const
 
 wxBorder wxWindowBase::GetDefaultBorder() const
 {
-    return wxBorder::None;
+    return wxBORDER_NONE;
 }
 
 // ----------------------------------------------------------------------------

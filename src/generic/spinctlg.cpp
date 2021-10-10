@@ -57,7 +57,7 @@ public:
     wxSpinCtrlTextGeneric(wxSpinCtrlGenericBase *spin, const wxString& value, unsigned int style=0)
         : wxTextCtrl(spin, wxID_ANY, value, wxDefaultPosition, wxDefaultSize,
                      // This is tricky: we want to honour all alignment flags
-                     // except wxAlignment::CenterVertical because it's the same
+                     // except wxALIGN_CENTER_VERTICAL because it's the same
                      // as wxTE_PASSWORD and we definitely don't want to show
                      // asterisks in spin control. We also want to respect
                      // wxTE_PROCESS and the border flags as well.
@@ -192,7 +192,7 @@ bool wxSpinCtrlGenericBase::Create(wxWindow *parent,
     // the text control borders (but we might want to use style border bits to
     // select the text control style)
     if ( !wxControl::Create(parent, id, wxDefaultPosition, wxDefaultSize,
-                            (style & ~wxBORDER_MASK) | wxBorder::None,
+                            (style & ~wxBORDER_MASK) | wxBORDER_NONE,
                             wxDefaultValidator, name) )
     {
         return false;

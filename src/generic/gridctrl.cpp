@@ -215,7 +215,7 @@ void wxGridCellDateRenderer::Draw(wxGrid& grid,
 
     // draw the text right aligned by default
     grid.DrawTextRectangle(dc, GetString(grid, row, col), rect, attr,
-                           wxAlignment::Right);
+                           wxALIGN_RIGHT);
 }
 
 wxSize wxGridCellDateRenderer::GetBestSize(wxGrid& grid,
@@ -353,7 +353,7 @@ void wxGridCellEnumRenderer::Draw(wxGrid& grid,
 
     // draw the text right aligned by default
     grid.DrawTextRectangle(dc, GetString(grid, row, col), rect, attr,
-                           wxAlignment::Right);
+                           wxALIGN_RIGHT);
 }
 
 wxSize wxGridCellEnumRenderer::GetBestSize(wxGrid& grid,
@@ -383,8 +383,7 @@ wxGridCellAutoWrapStringRenderer::Draw(wxGrid& grid,
     // now we only have to draw the text
     SetTextColoursAndFont(grid, attr, dc, isSelected);
 
-    wxAlignment horizAlign;
-    wxAlignment vertAlign;
+    int horizAlign, vertAlign;
     attr.GetAlignment(&horizAlign, &vertAlign);
 
     wxRect rect = rectCell;
@@ -640,8 +639,7 @@ void wxGridCellStringRenderer::Draw(wxGrid& grid,
 
     if ( attr.CanOverflow() )
     {
-        wxAlignment hAlign;
-        wxAlignment vAlign;
+        int hAlign, vAlign;
         attr.GetAlignment(&hAlign, &vAlign);
 
         int overflowCols = 0;
@@ -689,7 +687,7 @@ void wxGridCellStringRenderer::Draw(wxGrid& grid,
 
         if (overflowCols > 0) // redraw overflow cells w/ proper hilight
         {
-            hAlign = wxAlignment::Left; // if oveflowed then it's left aligned
+            hAlign = wxALIGN_LEFT; // if oveflowed then it's left aligned
             wxRect clip = rect;
             clip.x += rectCell.width;
             // draw each overflow cell individually
@@ -760,7 +758,7 @@ void wxGridCellNumberRenderer::Draw(wxGrid& grid,
 
     // draw the text right aligned by default
     grid.DrawTextRectangle(dc, GetString(grid, row, col), rect, attr,
-                           wxAlignment::Right);
+                           wxALIGN_RIGHT);
 }
 
 wxSize wxGridCellNumberRenderer::GetBestSize(wxGrid& grid,
@@ -904,7 +902,7 @@ void wxGridCellFloatRenderer::Draw(wxGrid& grid,
 
     // draw the text right aligned by default
     grid.DrawTextRectangle(dc, GetString(grid, row, col), rect, attr,
-                           wxAlignment::Right);
+                           wxALIGN_RIGHT);
 }
 
 wxSize wxGridCellFloatRenderer::GetBestSize(wxGrid& grid,
@@ -1020,8 +1018,8 @@ void wxGridCellBoolRenderer::Draw(wxGrid& grid,
 {
     wxGridCellRenderer::Draw(grid, attr, dc, rect, row, col, isSelected);
 
-    auto hAlign = wxAlignment::Left;
-    auto vAlign = wxAlignment::CenterVertical;
+    int hAlign = wxALIGN_LEFT;
+    int vAlign = wxALIGN_CENTRE_VERTICAL;
     attr.GetNonDefaultAlignment(&hAlign, &vAlign);
 
     const wxRect checkBoxRect =

@@ -15,7 +15,6 @@
 #include "wx/defs.h"
 
 #include "wx/bitmap.h"
-#include "wx/directionflags.h"
 #include "wx/event.h"
 #include "wx/window.h"
 
@@ -34,14 +33,13 @@ constexpr char wxBannerWindowNameStr[] = "bannerwindow";
 class WXDLLIMPEXP_CORE wxBannerWindow : public wxWindow
 {
 public:
-
-    using enum wxDirection;
     // Default constructor, use Create() later.
-    wxBannerWindow()
-    { 
-        m_colStart = *wxWHITE;
-        m_colEnd = *wxBLUE;
-    }
+    wxBannerWindow() { 
+    m_direction = wxLEFT;
+
+    m_colStart = *wxWHITE;
+    m_colEnd = *wxBLUE;
+ }
 
     // Convenient constructor that should be used in the majority of cases.
     //
@@ -49,11 +47,14 @@ public:
     // defines where is the bitmap truncated if it's too big to fit but doesn't
     // do anything for the banner position, this is supposed to be taken care
     // of in the usual way, e.g. using sizers.
-    wxBannerWindow(wxWindow* parent, wxDirection dir = Left)
-        : m_direction{dir}
+    wxBannerWindow(wxWindow* parent, wxDirection dir = wxLEFT)
     {
-        m_colStart = *wxWHITE;
-        m_colEnd = *wxBLUE;
+        
+    m_direction = wxLEFT;
+
+    m_colStart = *wxWHITE;
+    m_colEnd = *wxBLUE;
+
 
         Create(parent, wxID_ANY, dir);
     }
@@ -61,14 +62,18 @@ public:
     // Full constructor provided for consistency with the other classes only.
     wxBannerWindow(wxWindow* parent,
                    wxWindowID winid,
-                   wxDirection dir = Left,
+                   wxDirection dir = wxLEFT,
                    const wxPoint& pos = wxDefaultPosition,
                    const wxSize& size = wxDefaultSize,
                    unsigned int style = 0,
                    const std::string& name = wxBannerWindowNameStr)
     {
-        m_colStart = *wxWHITE;
-        m_colEnd = *wxBLUE;
+        
+    m_direction = wxLEFT;
+
+    m_colStart = *wxWHITE;
+    m_colEnd = *wxBLUE;
+
 
         Create(parent, winid, dir, pos, size, style, name);
     }
@@ -81,16 +86,16 @@ public:
     // Can be only called on objects created with the default constructor.
     [[maybe_unused]] bool Create(wxWindow* parent,
                 wxWindowID winid,
-                wxDirection dir = Left,
+                wxDirection dir = wxLEFT,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = 0,
                 const std::string& name = wxBannerWindowNameStr);
 
 
-    // Provide an existing bitmap to show. For wxDirection::Left orientation the bitmap is
-    // truncated from the top, for wxDirection::Top and wxDirection::Bottom -- from the right and for
-    // wxDirection::Right -- from the bottom, so put the most important part of the bitmap
+    // Provide an existing bitmap to show. For wxLEFT orientation the bitmap is
+    // truncated from the top, for wxTOP and wxBOTTOM -- from the right and for
+    // wxRIGHT -- from the bottom, so put the most important part of the bitmap
     // information in the opposite direction.
     void SetBitmap(const wxBitmap& bmp);
 
@@ -145,7 +150,7 @@ private:
     wxBitmap m_bitmap;
 
     // The window side along which the banner is laid out.
-    wxDirection m_direction{Left};
+    wxDirection m_direction;
 
     wxDECLARE_EVENT_TABLE();
 };

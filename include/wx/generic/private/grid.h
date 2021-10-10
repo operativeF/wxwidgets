@@ -272,7 +272,7 @@ public:
                     const std::string& name = wxPanelNameStr)
         : wxWindow(owner, wxID_ANY,
                    wxDefaultPosition, wxDefaultSize,
-                   wxBorder::None | additionalStyle,
+                   wxBORDER_NONE | additionalStyle,
                    name),
           m_owner{owner}
     {
@@ -1048,8 +1048,8 @@ private:
 wxRect
 wxGetContentRect(wxSize contentSize,
                  const wxRect& cellRect,
-                 wxAlignment hAlign,
-                 wxAlignment vAlign);
+                 int hAlign,
+                 int vAlign);
 
 namespace wxGridPrivate
 {

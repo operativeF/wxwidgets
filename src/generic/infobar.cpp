@@ -198,11 +198,11 @@ void wxInfoBarGeneric::DoShow()
     ShowWithEffect(GetShowEffect(), GetEffectDuration());
 }
 
-void wxInfoBarGeneric::ShowMessage(const std::string& msg, DialogFlags flags)
+void wxInfoBarGeneric::ShowMessage(const std::string& msg, unsigned int flags)
 {
     // first update the controls
     const auto icon = flags & wxICON_MASK;
-    if ( !icon || (icon == wxDialogIconFlags::None) )
+    if ( !icon || (icon == wxICON_NONE) )
     {
         m_icon->Hide();
     }

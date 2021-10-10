@@ -11,11 +11,12 @@
 #ifndef _WX_GAUGE_H_BASE_
 #define _WX_GAUGE_H_BASE_
 
+#include "wx/defs.h"
+
 #if wxUSE_GAUGE
 
 #include "wx/appprogress.h"
 #include "wx/control.h"
-#include "wx/directionflags.h"
 
 #include <memory>
 #include <string>
@@ -54,7 +55,7 @@ class WXDLLIMPEXP_CORE wxGaugeBase : public wxControl
 public:
     wxGaugeBase() : m_rangeMax(0), m_gaugePos(0),
 #if wxGAUGE_EMULATE_INDETERMINATE_MODE
-        m_nDirection(wxDirection::Right),
+        m_nDirection(wxRIGHT),
 #endif
         m_appProgressIndicator{nullptr} { }
 
@@ -93,7 +94,7 @@ public:
     bool AcceptsFocus() const override { return false; }
 
 protected:
-    wxBorder GetDefaultBorder() const override { return wxBorder::None; }
+    wxBorder GetDefaultBorder() const override { return wxBORDER_NONE; }
 
     // Initialize m_appProgressIndicator if necessary, i.e. if this object has
     // wxGA_PROGRESS style. This method is supposed to be called from the
@@ -109,7 +110,7 @@ protected:
 
 #if wxGAUGE_EMULATE_INDETERMINATE_MODE
     // in case we need to emulate indeterminate mode...
-    wxDirection m_nDirection{wxDirection::Right};       // can be wxDirection::Right or wxDirection::Left
+    int m_nDirection{wxRIGHT};       // can be wxRIGHT or wxLEFT
 #endif
 
     std::unique_ptr<wxAppProgressIndicator> m_appProgressIndicator;

@@ -16,7 +16,6 @@
 #include "wx/button.h"
 #include "wx/dcclient.h"
 #include "wx/dialog.h"
-#include "wx/dialogflags.h"
 #include "wx/intl.h"
 #include "wx/settings.h"
 #include "wx/stattext.h"
@@ -40,20 +39,20 @@ wxDEFINE_FLAGS( wxDialogStyle )
 wxBEGIN_FLAGS( wxDialogStyle )
 // new style border flags, we put them first to
 // use them for streaming out
-wxFLAGS_MEMBER(wxBorder::Simple)
-wxFLAGS_MEMBER(wxBorder::Sunken)
+wxFLAGS_MEMBER(wxBORDER_SIMPLE)
+wxFLAGS_MEMBER(wxBORDER_SUNKEN)
 wxFLAGS_MEMBER(wxBORDER_DOUBLE)
-wxFLAGS_MEMBER(wxBorder::Raised)
-wxFLAGS_MEMBER(wxBorder::Static)
-wxFLAGS_MEMBER(wxBorder::None)
+wxFLAGS_MEMBER(wxBORDER_RAISED)
+wxFLAGS_MEMBER(wxBORDER_STATIC)
+wxFLAGS_MEMBER(wxBORDER_NONE)
 
 // old style border flags
-wxFLAGS_MEMBER(wxBorder::Simple)
-wxFLAGS_MEMBER(wxBorder::Sunken)
+wxFLAGS_MEMBER(wxSIMPLE_BORDER)
+wxFLAGS_MEMBER(wxSUNKEN_BORDER)
 wxFLAGS_MEMBER(wxDOUBLE_BORDER)
-wxFLAGS_MEMBER(wxBorder::Raised)
-wxFLAGS_MEMBER(wxBorder::Static)
-wxFLAGS_MEMBER(wxBorder::None)
+wxFLAGS_MEMBER(wxRAISED_BORDER)
+wxFLAGS_MEMBER(wxSTATIC_BORDER)
+wxFLAGS_MEMBER(wxNO_BORDER)
 
 // standard window styles
 wxFLAGS_MEMBER(wxTAB_TRAVERSAL)
@@ -142,7 +141,7 @@ wxWindow *wxDialogBase::CheckIfCanBeUsedAsParent(wxWindow *parent) const
 }
 
 wxWindow *
-wxDialogBase::GetParentForModalDialog(wxWindow *parent, DialogFlags style) const
+wxDialogBase::GetParentForModalDialog(wxWindow *parent, unsigned int style) const
 {
     // creating a parent-less modal dialog will result (under e.g. wxGTK2)
     // in an unfocused dialog, so try to find a valid parent for it unless we
@@ -192,7 +191,7 @@ wxSizer *wxDialogBase::CreateTextSizer(const std::string& message,
 
 #endif // wxUSE_STATTEXT
 
-wxSizer *wxDialogBase::CreateButtonSizer(DialogFlags flags)
+wxSizer *wxDialogBase::CreateButtonSizer(unsigned int flags)
 {
 #if wxUSE_BUTTON
 
@@ -212,7 +211,7 @@ wxSizer *wxDialogBase::CreateSeparatedSizer(wxSizer *sizer)
 #if wxUSE_STATLINE && !defined(__WXMAC__)
     wxBoxSizer *topsizer = new wxBoxSizer(wxVERTICAL);
     topsizer->Add(new wxStaticLine(this),
-                   wxSizerFlags().Expand().DoubleBorder(wxDirection::Bottom));
+                   wxSizerFlags().Expand().DoubleBorder(wxBOTTOM));
     topsizer->Add(sizer, wxSizerFlags().Expand());
     sizer = topsizer;
 #endif // wxUSE_STATLINE
@@ -220,7 +219,7 @@ wxSizer *wxDialogBase::CreateSeparatedSizer(wxSizer *sizer)
     return sizer;
 }
 
-wxSizer *wxDialogBase::CreateSeparatedButtonSizer(DialogFlags flags)
+wxSizer *wxDialogBase::CreateSeparatedButtonSizer(unsigned int flags)
 {
     wxSizer *sizer = CreateButtonSizer(flags);
     if ( !sizer )
@@ -231,7 +230,7 @@ wxSizer *wxDialogBase::CreateSeparatedButtonSizer(DialogFlags flags)
 
 #if wxUSE_BUTTON
 
-wxStdDialogButtonSizer *wxDialogBase::CreateStdDialogButtonSizer( DialogFlags flags )
+wxStdDialogButtonSizer *wxDialogBase::CreateStdDialogButtonSizer( unsigned int flags )
 {
     wxStdDialogButtonSizer *sizer = new wxStdDialogButtonSizer();
 
@@ -239,49 +238,49 @@ wxStdDialogButtonSizer *wxDialogBase::CreateStdDialogButtonSizer( DialogFlags fl
     wxButton *yes = nullptr;
     wxButton *no = nullptr;
 
-    if (flags & wxDialogFlags::OK)
+    if (flags & wxOK)
     {
         ok = new wxButton(this, wxID_OK);
         sizer->AddButton(ok);
     }
 
-    if (flags & wxDialogFlags::Cancel)
+    if (flags & wxCANCEL)
     {
         wxButton *cancel = new wxButton(this, wxID_CANCEL);
         sizer->AddButton(cancel);
     }
 
-    if (flags & wxDialogFlags::Yes)
+    if (flags & wxYES)
     {
         yes = new wxButton(this, wxID_YES);
         sizer->AddButton(yes);
     }
 
-    if (flags & wxDialogFlags::No)
+    if (flags & wxNO)
     {
         no = new wxButton(this, wxID_NO);
         sizer->AddButton(no);
     }
 
-    if (flags & wxDialogFlags::Apply)
+    if (flags & wxAPPLY)
     {
         wxButton *apply = new wxButton(this, wxID_APPLY);
         sizer->AddButton(apply);
     }
 
-    if (flags & wxDialogFlags::Close)
+    if (flags & wxCLOSE)
     {
         wxButton *close = new wxButton(this, wxID_CLOSE);
         sizer->AddButton(close);
     }
 
-    if (flags & wxDialogFlags::Help)
+    if (flags & wxHELP)
     {
         wxButton *help = new wxButton(this, wxID_HELP);
         sizer->AddButton(help);
     }
 
-    if (flags & wxDialogDefaultFlags::No)
+    if (flags & wxNO_DEFAULT)
     {
         if (no)
         {
@@ -303,11 +302,11 @@ wxStdDialogButtonSizer *wxDialogBase::CreateStdDialogButtonSizer( DialogFlags fl
         }
     }
 
-    if (flags & wxDialogFlags::OK)
+    if (flags & wxOK)
         SetAffirmativeId(wxID_OK);
-    else if (flags & wxDialogFlags::Yes)
+    else if (flags & wxYES)
         SetAffirmativeId(wxID_YES);
-    else if (flags & wxDialogFlags::Close)
+    else if (flags & wxCLOSE)
         SetAffirmativeId(wxID_CLOSE);
 
     sizer->Realize();
@@ -618,7 +617,7 @@ bool wxStandardDialogLayoutAdapter::DoLayoutAdaptation(wxDialog* dialog)
                     wxSizer* oldSizer = page->GetSizer();
 
                     wxSizer* newSizer = new wxBoxSizer(wxVERTICAL);
-                    newSizer->Add(scrolledWindow,1, wxStretch::Expand, 0);
+                    newSizer->Add(scrolledWindow,1, wxEXPAND, 0);
 
                     page->SetSizer(newSizer, false /* don't delete the old sizer */);
 
@@ -675,9 +674,9 @@ bool wxStandardDialogLayoutAdapter::DoLayoutAdaptation(wxDialog* dialog)
 
             dialog->SetSizer(newTopSizer, false /* don't delete old sizer */);
 
-            newTopSizer->Add(scrolledWindow, 1, SizerFlags{wxStretch::Expand, wxDirection::All}, 0);
+            newTopSizer->Add(scrolledWindow, 1, wxEXPAND|wxALL, 0);
             if (buttonSizer)
-                newTopSizer->Add(buttonSizer, 0, SizerFlags{wxStretch::Expand, wxDirection::All}, buttonSizerBorder);
+                newTopSizer->Add(buttonSizer, 0, wxEXPAND|wxALL, buttonSizerBorder);
 
             scrolledWindow->SetSizer(oldSizer);
 
@@ -693,7 +692,7 @@ bool wxStandardDialogLayoutAdapter::DoLayoutAdaptation(wxDialog* dialog)
 // Create the scrolled window
 wxScrolledWindow* wxStandardDialogLayoutAdapter::CreateScrolledWindow(wxWindow* parent)
 {
-    wxScrolledWindow* scrolledWindow = new wxScrolledWindow(parent, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL|wxVSCROLL|wxHSCROLL|wxBorder::None);
+    wxScrolledWindow* scrolledWindow = new wxScrolledWindow(parent, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL|wxVSCROLL|wxHSCROLL|wxBORDER_NONE);
     return scrolledWindow;
 }
 
@@ -711,7 +710,7 @@ wxSizer* wxStandardDialogLayoutAdapter::FindButtonSizer(bool stdButtonSizer, wxD
         if ( childSizer )
         {
             int newBorder = accumlatedBorder;
-            if (item->GetFlag() & wxDirection::All)
+            if (item->GetFlag() & wxALL)
                 newBorder += item->GetBorder();
 
             if (stdButtonSizer) // find wxStdDialogButtonSizer

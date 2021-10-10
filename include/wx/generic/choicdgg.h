@@ -11,12 +11,7 @@
 #ifndef _WX_GENERIC_CHOICDGG_H_
 #define _WX_GENERIC_CHOICDGG_H_
 
-
-
-#include "wx/dialogflags.h"
-
 #include "wx/arrstr.h"
-#include "wx/bitflags.h"
 #include "wx/dynarray.h"
 #include "wx/dialog.h"
 
@@ -32,15 +27,8 @@ class WXDLLIMPEXP_FWD_CORE wxListBoxBase;
 constexpr int wxCHOICE_HEIGHT = 150;
 constexpr int wxCHOICE_WIDTH  = 200;
 
-using ChoiceDlgFlags = CombineBitfield<wxDialogFlags, wxWindowFlags>;
-
-constexpr ChoiceDlgFlags wxCHOICEDLG_STYLE = {wxWindowFlags::Caption,
-                                              wxWindowFlags::SystemMenu,
-                                              wxWindowFlags::CloseBox,
-                                              wxWindowFlags::ResizeBorder,
-                                              wxDialogFlags::OK,
-                                              wxDialogFlags::Cancel,
-                                              wxDialogFlags::Centered };
+#define wxCHOICEDLG_STYLE \
+    (wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER | wxOK | wxCANCEL | wxCENTRE)
 
 // ----------------------------------------------------------------------------
 // wxAnyChoiceDialog: a base class for dialogs containing a listbox
@@ -55,7 +43,7 @@ public:
                       const std::string& message,
                       const std::string& caption,
                       const std::vector<std::string>& choices,
-                      ChoiceDlgFlags styleDlg = wxCHOICEDLG_STYLE,
+                      long styleDlg = wxCHOICEDLG_STYLE,
                       const wxPoint& pos = wxDefaultPosition,
                       long styleLbox = wxLB_ALWAYS_SB)
     {
@@ -67,7 +55,7 @@ public:
                 const std::string& message,
                 const std::string& caption,
                 const std::vector<std::string>& choices,
-                ChoiceDlgFlags styleDlg = wxCHOICEDLG_STYLE,
+                long styleDlg = wxCHOICEDLG_STYLE,
                 const wxPoint& pos = wxDefaultPosition,
                 long styleLbox = wxLB_ALWAYS_SB);
 
@@ -94,7 +82,7 @@ public:
                          const std::string& caption,
                          const std::vector<std::string>& choices,
                          void **clientData = nullptr,
-                         ChoiceDlgFlags style = wxCHOICEDLG_STYLE,
+                         unsigned int style = wxCHOICEDLG_STYLE,
                          const wxPoint& pos = wxDefaultPosition)
     {
         Create(parent, message, caption, choices, clientData, style, pos);
@@ -108,7 +96,7 @@ public:
                 const std::string& caption,
                 const std::vector<std::string>& choices,
                 void **clientData = nullptr,
-                ChoiceDlgFlags style = wxCHOICEDLG_STYLE,
+                unsigned int style = wxCHOICEDLG_STYLE,
                 const wxPoint& pos = wxDefaultPosition);
 
     void SetSelection(int sel);
@@ -146,7 +134,7 @@ public:
                         const std::string& message,
                         const std::string& caption,
                         const std::vector<std::string>& choices,
-                        ChoiceDlgFlags style = wxCHOICEDLG_STYLE,
+                        unsigned int style = wxCHOICEDLG_STYLE,
                         const wxPoint& pos = wxDefaultPosition)
     {
         Create(parent, message, caption, choices, style, pos);
@@ -156,7 +144,7 @@ public:
                 const std::string& message,
                 const std::string& caption,
                 const std::vector<std::string>& choices,
-                ChoiceDlgFlags style = wxCHOICEDLG_STYLE,
+                unsigned int style = wxCHOICEDLG_STYLE,
                 const wxPoint& pos = wxDefaultPosition);
 
     void SetSelections(const std::vector<int>& selections);

@@ -25,7 +25,7 @@ public:
     wxGenericNotificationMessage(const std::string& title,
                                  const std::string& message = {},
                                  wxWindow *parent = nullptr,
-                                 wxDialogIconFlags flags = wxDialogIconFlags::Information)
+                                 int flags = wxICON_INFORMATION)
     {
         Init();
         Create(title, message, parent, flags);

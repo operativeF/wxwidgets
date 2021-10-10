@@ -166,5 +166,5 @@ void MyFrame::OnAbout(wxCommandEvent& WXUNUSED(event))
     msg.Printf( wxT("This is the About dialog of the minimal sample.\n")
                 wxT("Welcome to %s"), wxVERSION_STRING);
 
-    wxMessageBox(msg, wxT("About Minimal"), DialogFlags{wxDialogFlags::OK, wxDialogIconFlags::Information}, this);
+    wxMessageBox(msg, wxT("About Minimal"), wxOK | wxICON_INFORMATION, this);
 }

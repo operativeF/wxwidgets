@@ -35,12 +35,12 @@ TEST_CASE("MessageDialog")
 
     wxTEST_DIALOG
     (
-        rc = wxMessageBox("Should I fail?", "Question", DialogFlags{wxDialogFlags::Yes, wxDialogFlags::No}),
-        wxExpectModal<wxMessageDialog>(wxDialogFlags::No)
+        rc = wxMessageBox("Should I fail?", "Question", wxYES|wxNO),
+        wxExpectModal<wxMessageDialog>(wxNO)
         FILE_DIALOG_TEST
     );
 
-    CHECK_EQ(wxDialogFlags::No, rc);
+    CHECK_EQ(wxNO, rc);
 }
 
 #if wxUSE_FILEDLG

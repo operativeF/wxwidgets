@@ -21,8 +21,6 @@
     #include <boost/nowide/stackstring.hpp>
 #endif
 
-#include "wx/dialogflags.h"
-
 #include "wx/msgdlg.h"
 #include "wx/app.h"
 #include "wx/intl.h"
@@ -429,7 +427,7 @@ int wxMessageDialog::ShowMessageBox()
     wxLocale * const loc = wxGetLocale();
     if ( loc && loc->GetLanguage() != wxLocale::GetSystemLanguage() )
     {
-        if ( m_dialogStyle & wxDialogFlags::Yes_No &&
+        if ( m_dialogStyle & wxYES_NO &&
                 (GetCustomYesLabel().empty() && GetCustomNoLabel().empty()) )
 
         {
@@ -441,7 +439,7 @@ int wxMessageDialog::ShowMessageBox()
         // we may or not have the Ok/Cancel buttons but either we do have them
         // or we already made the labels custom because we called
         // SetYesNoLabels() above so doing this does no harm -- and is
-        // necessary in wxDialogFlags::Yes_No | wxDialogFlags::Cancel case
+        // necessary in wxYES_NO | wxCANCEL case
         //
         // note that we don't use mnemonics here for consistency with the
         // native message box (which probably doesn't use them because
@@ -455,25 +453,25 @@ int wxMessageDialog::ShowMessageBox()
     // translate wx style in MSW
     unsigned int msStyle;
     const long wxStyle = GetMessageDialogStyle();
-    if ( wxStyle & wxDialogFlags::Yes_No )
+    if ( wxStyle & wxYES_NO )
     {
-        if ( wxStyle & wxDialogFlags::Cancel )
+        if ( wxStyle & wxCANCEL )
             msStyle = MB_YESNOCANCEL;
         else
             msStyle = MB_YESNO;
 
-        if ( wxStyle & wxDialogDefaultFlags::No )
+        if ( wxStyle & wxNO_DEFAULT )
             msStyle |= MB_DEFBUTTON2;
-        else if ( wxStyle & wxDialogDefaultFlags::Cancel )
+        else if ( wxStyle & wxCANCEL_DEFAULT )
             msStyle |= MB_DEFBUTTON3;
     }
     else // without Yes/No we're going to have an OK button
     {
-        if ( wxStyle & wxDialogFlags::Cancel )
+        if ( wxStyle & wxCANCEL )
         {
             msStyle = MB_OKCANCEL;
 
-            if ( wxStyle & wxDialogDefaultFlags::Cancel )
+            if ( wxStyle & wxCANCEL_DEFAULT )
                 msStyle |= MB_DEFBUTTON2;
         }
         else // just "OK"
@@ -482,7 +480,7 @@ int wxMessageDialog::ShowMessageBox()
         }
     }
 
-    if ( wxStyle & wxDialogFlags::Help )
+    if ( wxStyle & wxHELP )
     {
         msStyle |= MB_HELP;
     }
@@ -490,19 +488,19 @@ int wxMessageDialog::ShowMessageBox()
     // set the icon style
     switch ( GetEffectiveIcon() )
     {
-        case wxDialogIconFlags::Error:
+        case wxICON_ERROR:
             msStyle |= MB_ICONHAND;
             break;
 
-        case wxDialogIconFlags::Warning:
+        case wxICON_WARNING:
             msStyle |= MB_ICONEXCLAMATION;
             break;
 
-        case wxDialogIconFlags::Question:
+        case wxICON_QUESTION:
             msStyle |= MB_ICONQUESTION;
             break;
 
-        case wxDialogIconFlags::Information:
+        case wxICON_INFORMATION:
             msStyle |= MB_ICONINFORMATION;
             break;
     }
@@ -565,7 +563,7 @@ int wxMessageDialog::ShowModal()
         // results in msAns being IDCANCEL while we want IDOK (just like
         // how the native MessageBox function does with only an "OK" button).
         if ( (msAns == IDCANCEL)
-            && !(GetMessageDialogStyle() & DialogFlags{wxDialogFlags::Yes_No, wxDialogFlags::Cancel}) )
+            && !(GetMessageDialogStyle() & (wxYES_NO|wxCANCEL)) )
         {
             msAns = IDOK;
         }
@@ -580,10 +578,10 @@ int wxMessageDialog::ShowModal()
 unsigned int wxMessageDialog::GetEffectiveIcon() const
 {
     // only use the auth needed icon if available, otherwise fallback to the default logic
-    if ( (m_dialogStyle & wxDialogIconFlags::AuthNeeded) &&
+    if ( (m_dialogStyle & wxICON_AUTH_NEEDED) &&
         wxMSWMessageDialog::HasNativeTaskDialog() )
     {
-        return wxDialogIconFlags::AuthNeeded;
+        return wxICON_AUTH_NEEDED;
     }
 
     return wxMessageDialogBase::GetEffectiveIcon();
@@ -691,19 +689,19 @@ void wxMSWTaskDialogConfig::MSWCommonTaskDialogInit(TASKDIALOGCONFIG &tdc)
     // set an icon to be used, if possible
     switch ( iconId )
     {
-        case wxDialogIconFlags::Error:
+        case wxICON_ERROR:
             tdc.pszMainIcon = TD_ERROR_ICON;
             break;
 
-        case wxDialogIconFlags::Warning:
+        case wxICON_WARNING:
             tdc.pszMainIcon = TD_WARNING_ICON;
             break;
 
-        case wxDialogIconFlags::Information:
+        case wxICON_INFORMATION:
             tdc.pszMainIcon = TD_INFORMATION_ICON;
             break;
 
-        case wxDialogIconFlags::AuthNeeded:
+        case wxICON_AUTH_NEEDED:
             tdc.pszMainIcon = TD_SHIELD_ICON;
             break;
     }
@@ -711,29 +709,29 @@ void wxMSWTaskDialogConfig::MSWCommonTaskDialogInit(TASKDIALOGCONFIG &tdc)
     // custom label button array that can hold all buttons in use
     tdc.pButtons = buttons.get();
 
-    if ( style & wxDialogFlags::Yes_No )
+    if ( style & wxYES_NO )
     {
         AddTaskDialogButton(tdc, IDYES, TDCBF_YES_BUTTON, btnYesLabel);
         AddTaskDialogButton(tdc, IDNO,  TDCBF_NO_BUTTON,  btnNoLabel);
 
-        if (style & wxDialogFlags::Cancel)
+        if (style & wxCANCEL)
             AddTaskDialogButton(tdc, IDCANCEL,
                                 TDCBF_CANCEL_BUTTON, btnCancelLabel);
 
-        if ( style & wxDialogDefaultFlags::No )
+        if ( style & wxNO_DEFAULT )
             tdc.nDefaultButton = IDNO;
-        else if ( style & wxDialogDefaultFlags::Cancel )
+        else if ( style & wxCANCEL_DEFAULT )
             tdc.nDefaultButton = IDCANCEL;
     }
     else // without Yes/No we're going to have an OK button
     {
-        if ( style & wxDialogFlags::Cancel )
+        if ( style & wxCANCEL )
         {
             AddTaskDialogButton(tdc, IDOK, TDCBF_OK_BUTTON, btnOKLabel);
             AddTaskDialogButton(tdc, IDCANCEL,
                                 TDCBF_CANCEL_BUTTON, btnCancelLabel);
 
-            if ( style & wxDialogDefaultFlags::Cancel )
+            if ( style & wxCANCEL_DEFAULT )
                 tdc.nDefaultButton = IDCANCEL;
         }
         else // Only "OK"
@@ -752,7 +750,7 @@ void wxMSWTaskDialogConfig::MSWCommonTaskDialogInit(TASKDIALOGCONFIG &tdc)
         }
     }
 
-    if ( style & wxDialogFlags::Help )
+    if ( style & wxHELP )
     {
         // There is no support for "Help" button in the task dialog, it can
         // only show "Retry" or "Close" ones.

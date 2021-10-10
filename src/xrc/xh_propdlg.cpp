@@ -21,7 +21,6 @@
     #include "wx/frame.h"
 #endif
 
-#include "wx/dialogflags.h"
 #include "wx/bookctrl.h"
 #include "wx/propdlg.h"
 #include "wx/imaglist.h"
@@ -128,13 +127,13 @@ wxObject *wxPropertySheetDialogXmlHandler::DoCreateResource()
         wxString buttons = GetText(wxT("buttons"));
         if (!buttons.IsEmpty())
         {
-            DialogFlags flags{};
-            if (buttons.Find(wxT("wxDialogFlags::OK"))         != wxNOT_FOUND) flags |= wxDialogFlags::OK;
-            if (buttons.Find(wxT("wxDialogFlags::Cancel"))     != wxNOT_FOUND) flags |= wxDialogFlags::Cancel;
-            if (buttons.Find(wxT("wxDialogFlags::Yes"))        != wxNOT_FOUND) flags |= wxDialogFlags::Yes;
-            if (buttons.Find(wxT("wxDialogFlags::No"))         != wxNOT_FOUND) flags |= wxDialogFlags::No;
-            if (buttons.Find(wxT("wxDialogFlags::Help"))       != wxNOT_FOUND) flags |= wxDialogFlags::Help;
-            if (buttons.Find(wxT("wxDialogDefaultFlags::No")) != wxNOT_FOUND) flags |= wxDialogDefaultFlags::No;
+            int flags = 0;
+            if (buttons.Find(wxT("wxOK"))         != wxNOT_FOUND) flags |= wxOK;
+            if (buttons.Find(wxT("wxCANCEL"))     != wxNOT_FOUND) flags |= wxCANCEL;
+            if (buttons.Find(wxT("wxYES"))        != wxNOT_FOUND) flags |= wxYES;
+            if (buttons.Find(wxT("wxNO"))         != wxNOT_FOUND) flags |= wxNO;
+            if (buttons.Find(wxT("wxHELP"))       != wxNOT_FOUND) flags |= wxHELP;
+            if (buttons.Find(wxT("wxNO_DEFAULT")) != wxNOT_FOUND) flags |= wxNO_DEFAULT;
             dlg->CreateButtons(flags);
         }
 

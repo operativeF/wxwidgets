@@ -93,8 +93,8 @@ wxDumpPreviewDlg::wxDumpPreviewDlg(wxWindow *parent,
 
     sizerBtns->Add(btnClose, 0, 0, 1);
 
-    sizerTop->Add(m_text, 1, wxStretch::Expand);
-    sizerTop->Add(sizerBtns, 0, wxAlignment::Right | wxDirection::Top | wxDirection::Bottom | wxDirection::Right, 1);
+    sizerTop->Add(m_text, 1, wxEXPAND);
+    sizerTop->Add(sizerBtns, 0, wxALIGN_RIGHT | wxTOP | wxBOTTOM | wxRIGHT, 1);
 
     // set the sizer &c
     // ----------------
@@ -181,7 +181,7 @@ wxDumpOpenExternalDlg::wxDumpOpenExternalDlg(wxWindow *parent,
 #endif
                               );
     sizerH->Add(command,
-                    wxSizerFlags(1).Align(wxAlignment::CenterVertical));
+                    wxSizerFlags(1).Align(wxALIGN_CENTER_VERTICAL));
 
 #if wxUSE_FILEDLG
 
@@ -189,7 +189,7 @@ wxDumpOpenExternalDlg::wxDumpOpenExternalDlg(wxWindow *parent,
                                     wxDefaultPosition, wxDefaultSize,
                                     wxBU_EXACTFIT);
     sizerH->Add(browse,
-                wxSizerFlags(0).Align(wxAlignment::CenterVertical). Border(wxDirection::Left));
+                wxSizerFlags(0).Align(wxALIGN_CENTER_VERTICAL). Border(wxLEFT));
 
 #endif // wxUSE_FILEDLG
 
@@ -197,8 +197,8 @@ wxDumpOpenExternalDlg::wxDumpOpenExternalDlg(wxWindow *parent,
 
     sizerTop->Add(new wxStaticLine(this), wxSizerFlags().Expand().Border());
 
-    sizerTop->Add(CreateStdDialogButtonSizer(DialogFlags{wxDialogFlags::OK, wxDialogFlags::Cancel}),
-                      wxSizerFlags().Align(wxAlignment::Right).Border());
+    sizerTop->Add(CreateStdDialogButtonSizer(wxOK | wxCANCEL),
+                      wxSizerFlags().Align(wxALIGN_RIGHT).Border());
 
     // set the sizer &c
     // ----------------
@@ -254,7 +254,7 @@ private:
     void OnOpen(wxCommandEvent& );
 
 
-    // small helper: add wxStretch::Expand and wxDirection::All flags
+    // small helper: add wxEXPAND and wxALL flags
     static wxSizerFlags SizerFlags(int proportion)
     {
         return wxSizerFlags(proportion).Expand().Border();
@@ -333,9 +333,9 @@ wxDebugReportDialog::wxDebugReportDialog(wxDebugReport& dbgrpt)
     wxSizer *sizerFileBtns = new wxBoxSizer(wxVERTICAL);
     sizerFileBtns->AddStretchSpacer(1);
     sizerFileBtns->Add(new wxButton(this, wxID_VIEW_DETAILS, _("&View...")),
-                        wxSizerFlags().Border(wxDirection::Bottom));
+                        wxSizerFlags().Border(wxBOTTOM));
     sizerFileBtns->Add(new wxButton(this, wxID_OPEN, _("&Open...")),
-                        wxSizerFlags().Border(wxDirection::Top));
+                        wxSizerFlags().Border(wxTOP));
     sizerFileBtns->AddStretchSpacer(1);
 
 #if wxUSE_OWNER_DRAWN
@@ -368,7 +368,7 @@ wxDebugReportDialog::wxDebugReportDialog(wxDebugReport& dbgrpt)
     sizerTop->Add(sizerPreview, flagsExpand2);
     sizerTop->AddSpacer(5);
     sizerTop->Add(sizerNotes, flagsExpand);
-    sizerTop->Add(CreateStdDialogButtonSizer(DialogFlags{wxDialogFlags::OK, wxDialogFlags::Cancel}), flagsFixed);
+    sizerTop->Add(CreateStdDialogButtonSizer(wxOK | wxCANCEL), flagsFixed);
 
     SetSizerAndFit(sizerTop);
     Layout();

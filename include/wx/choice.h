@@ -58,7 +58,7 @@ public:
     void Command(wxCommandEvent& event) override;
 
     // override wxItemContainer::IsSorted
-    bool IsSorted() const override { return HasFlag(ComboStyles::Sort); }
+    bool IsSorted() const override { return HasFlag(wxCB_SORT); }
 
 protected:
     // The generic implementation doesn't determine the height correctly and

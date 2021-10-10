@@ -72,7 +72,7 @@ public:
     void EnsureVisible(const wxRibbonGalleryItem* item);
 
 protected:
-    wxBorder GetDefaultBorder() const override { return wxBorder::None; }
+    wxBorder GetDefaultBorder() const override { return wxBORDER_NONE; }
     void CommonInit(unsigned int style);
     void CalculateMinSize();
     bool TestButtonHover(const wxRect& rect, wxPoint pos,

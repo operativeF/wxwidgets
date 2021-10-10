@@ -62,11 +62,11 @@ DWORD wxStaticText::MSWGetStyle(unsigned int style, DWORD *exstyle) const
 
     // translate the alignment flags to the Windows ones
     //
-    // note that both wxAlignment::Left and SS_LEFT are equal to 0 so we shouldn't
+    // note that both wxALIGN_LEFT and SS_LEFT are equal to 0 so we shouldn't
     // test for them using & operator
-    if ( style & wxAlignment::CenterHorizontal )
+    if ( style & wxALIGN_CENTRE_HORIZONTAL )
         msStyle |= SS_CENTER;
-    else if ( style & wxAlignment::Right )
+    else if ( style & wxALIGN_RIGHT )
         msStyle |= SS_RIGHT;
     else
         msStyle |= SS_LEFT;

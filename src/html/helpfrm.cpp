@@ -112,7 +112,7 @@ bool wxHtmlHelpFrame::Create(wxWindow* parent, wxWindowID id,
     CreateStatusBar();
 #endif
     m_HtmlHelpWin->Create(this, wxID_ANY, wxDefaultPosition, wxDefaultSize,
-        wxTAB_TRAVERSAL|wxBorder::None, style);
+        wxTAB_TRAVERSAL|wxNO_BORDER, style);
 
     m_HtmlHelpWin->GetCfgData().x = GetPosition().x;
     m_HtmlHelpWin->GetCfgData().y = GetPosition().y;

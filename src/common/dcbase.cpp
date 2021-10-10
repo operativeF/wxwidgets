@@ -12,7 +12,6 @@
 #include "wx/wxprec.h"
 
 #include "wx/dcprint.h"
-#include "wx/directionflags.h"
 #include "wx/prntbase.h"
 #include "wx/scopeguard.h"
 #include "wx/dc.h"
@@ -908,7 +907,7 @@ void wxDCImpl::DoGradientFillLinear(const wxRect& rect,
     std::uint8_t nB2 = destColour.Blue();
     std::uint8_t nR, nG, nB;
 
-    if ( nDirection == wxDirection::East || nDirection == wxDirection::West )
+    if ( nDirection == wxEAST || nDirection == wxWEST )
     {
         std::int32_t x = rect.GetWidth();
         std::int32_t w = x;              // width of area to shade
@@ -937,15 +936,15 @@ void wxDCImpl::DoGradientFillLinear(const wxRect& rect,
             wxColour colour(nR,nG,nB);
             SetPen(wxPen(colour, 1, wxPenStyle::Solid));
             SetBrush(wxBrush(colour));
-            if(nDirection == wxDirection::East)
+            if(nDirection == wxEAST)
                 DoDrawRectangle(rect.GetRight()-x-xDelta+1, rect.GetTop(),
                         xDelta, rect.GetHeight());
-            else //nDirection == wxDirection::West
+            else //nDirection == wxWEST
                 DoDrawRectangle(rect.GetLeft()+x, rect.GetTop(),
                         xDelta, rect.GetHeight());
         }
     }
-    else  // nDirection == wxDirection::North || nDirection == wxDirection::South
+    else  // nDirection == wxNORTH || nDirection == wxSOUTH
     {
         std::int32_t y = rect.GetHeight();
         std::int32_t w = y;              // height of area to shade
@@ -974,10 +973,10 @@ void wxDCImpl::DoGradientFillLinear(const wxRect& rect,
             wxColour colour(nR,nG,nB);
             SetPen(wxPen(colour, 1, wxPenStyle::Solid));
             SetBrush(wxBrush(colour));
-            if(nDirection == wxDirection::North)
+            if(nDirection == wxNORTH)
                 DoDrawRectangle(rect.GetLeft(), rect.GetTop()+y,
                         rect.GetWidth(), yDelta);
-            else //nDirection == wxDirection::South
+            else //nDirection == wxSOUTH
                 DoDrawRectangle(rect.GetLeft(), rect.GetBottom()-y-yDelta+1,
                         rect.GetWidth(), yDelta);
         }
@@ -1119,28 +1118,28 @@ void wxDC::DrawLabel(std::string_view text,
     }
 
     wxCoord x, y;
-    if ( alignment & wxAlignment::Right )
+    if ( alignment & wxALIGN_RIGHT )
     {
         x = rect.GetRight() - width;
     }
-    else if ( alignment & wxAlignment::CenterHorizontal )
+    else if ( alignment & wxALIGN_CENTRE_HORIZONTAL )
     {
         x = (rect.GetLeft() + rect.GetRight() + 1 - width) / 2;
     }
-    else // alignment & wxAlignment::Left
+    else // alignment & wxALIGN_LEFT
     {
         x = rect.GetLeft();
     }
 
-    if ( alignment & wxAlignment::Bottom )
+    if ( alignment & wxALIGN_BOTTOM )
     {
         y = rect.GetBottom() - height;
     }
-    else if ( alignment & wxAlignment::CenterVertical )
+    else if ( alignment & wxALIGN_CENTRE_VERTICAL )
     {
         y = (rect.GetTop() + rect.GetBottom() + 1 - height) / 2;
     }
-    else // alignment & wxAlignment::Top
+    else // alignment & wxALIGN_TOP
     {
         y = rect.GetTop();
     }
@@ -1182,17 +1181,17 @@ void wxDC::DrawLabel(std::string_view text,
 
             if ( !curLine.empty() )
             {
-                // NB: can't test for !(alignment & wxAlignment::Left) because
-                //     wxAlignment::Left is 0
-                if ( alignment & (wxAlignment::Right | wxAlignment::CenterHorizontal) )
+                // NB: can't test for !(alignment & wxALIGN_LEFT) because
+                //     wxALIGN_LEFT is 0
+                if ( alignment & (wxALIGN_RIGHT | wxALIGN_CENTRE_HORIZONTAL) )
                 {
                     wxCoord widthLine = GetTextExtent(curLine).x;
 
-                    if ( alignment & wxAlignment::Right )
+                    if ( alignment & wxALIGN_RIGHT )
                     {
                         xRealStart += width - widthLine;
                     }
-                    else // if ( alignment & wxAlignment::CenterHorizontal )
+                    else // if ( alignment & wxALIGN_CENTRE_HORIZONTAL )
                     {
                         xRealStart += (width - widthLine) / 2;
                     }

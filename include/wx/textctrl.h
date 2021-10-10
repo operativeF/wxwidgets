@@ -56,17 +56,6 @@ static constexpr wxTextCoord wxInvalidTextCoord    = -2;
 // wxTextCtrl style flags
 // ----------------------------------------------------------------------------
 
-enum class TextCtrlStyles
-{
-    NoVScroll,
-    ReadOnly,
-    Multiline,
-    ProcessTab,
-    _max_size
-};
-
-using TextCtrlFlags = CombineBitfield<TextCtrlStyles>;
-
 constexpr unsigned int wxTE_NO_VSCROLL     = 0x0002;
 
 constexpr unsigned int wxTE_READONLY       = 0x0010;
@@ -74,12 +63,10 @@ constexpr unsigned int wxTE_MULTILINE      = 0x0020;
 constexpr unsigned int wxTE_PROCESS_TAB    = 0x0040;
 
 // alignment flags
-enum class TextEditorAlignment
-{
-    Left,
-    Center,
-    Right
-};
+constexpr unsigned int wxTE_LEFT           = 0x0000;                    // 0x0000
+constexpr unsigned int wxTE_CENTER         = wxALIGN_CENTER_HORIZONTAL; // 0x0100
+constexpr unsigned int wxTE_RIGHT          = wxALIGN_RIGHT;             // 0x0200
+constexpr unsigned int wxTE_CENTRE         = wxTE_CENTER;
 
 // this style means to use RICHEDIT control and does something only under wxMSW
 // and Win32 and is silently ignored under all other platforms
@@ -102,16 +89,6 @@ constexpr unsigned int wxTE_NOHIDESEL =      0x2000;
 // position and wxTE_WORDWRAP to wrap at words boundary
 //
 // if no wrapping style is given at all, the control wraps at word boundary
-
-enum class WrapStyle
-{
-    None,
-    Char,
-    Word,
-    Best,
-    _max_size
-};
-
 constexpr unsigned int wxTE_DONTWRAP       = wxHSCROLL;
 constexpr unsigned int wxTE_CHARWRAP       = 0x4000;  // wrap at any position
 constexpr unsigned int wxTE_WORDWRAP       = 0x0001;  // wrap only at words boundaries
@@ -716,7 +693,7 @@ public:
    wxTextCtrlBase& operator=(wxTextCtrlBase&&) = default;
 
     // more readable flag testing methods
-    bool IsSingleLine() const { return !m_teFlags.is_set(TextCtrlStyles::Multiline); }
+    bool IsSingleLine() const { return !HasFlag(wxTE_MULTILINE); }
     bool IsMultiLine() const { return !IsSingleLine(); }
 
     // stream-like insertion operators: these are always available, whether we
@@ -758,8 +735,6 @@ public:
     bool SetStyle(long start, long end, const wxTextAttr& style) override;
     bool GetStyle(long position, wxTextAttr& style) override;
     bool SetDefaultStyle(const wxTextAttr& style) override;
-
-    TextCtrlFlags GetStyleFlags() const { return m_teFlags; }
 
     // wxTextAreaBase overrides
     std::string GetValue() const override
@@ -806,9 +781,6 @@ protected:
     wxWindow *GetEditableWindow() override { return this; }
 
     wxDECLARE_ABSTRACT_CLASS(wxTextCtrlBase);
-
-private:
-    TextCtrlFlags  m_teFlags;
 };
 
 // ----------------------------------------------------------------------------

@@ -77,11 +77,11 @@ bool wxComboCtrl::Create(wxWindow *parent,
         if ( wxUxThemeIsActive() )
         {
             // For XP, have 1-width custom border, for older version use sunken
-            border = wxBorder::None;
+            border = wxBORDER_NONE;
             m_widthCustomBorder = 1;
         }
         else
-            border = wxBorder::Sunken;
+            border = wxBORDER_SUNKEN;
 
         style = (style & ~(wxBORDER_MASK)) | border;
     }
@@ -110,7 +110,7 @@ bool wxComboCtrl::Create(wxWindow *parent,
         SetBackgroundStyle( wxBG_STYLE_PAINT );
 
     // Create textctrl, if necessary
-    CreateTextCtrl( wxBorder::None );
+    CreateTextCtrl( wxNO_BORDER );
 
     // Add keyboard input handlers for main control and textctrl
     InstallInputHandlers();
@@ -393,7 +393,7 @@ void wxComboCtrl::OnPaintEvent( wxPaintEvent& WXUNUSED(event) )
             // Draw the entire control as a single button?
             if ( !isNonStdButton )
             {
-                if ( GetComboStyles().is_set(ComboStyles::ReadOnly) )
+                if ( HasFlag(wxCB_READONLY) )
                     drawFullButton = true;
             }
 
@@ -463,7 +463,7 @@ void wxComboCtrl::OnPaintEvent( wxPaintEvent& WXUNUSED(event) )
                         butState = CBXS_NORMAL;
                 }
 
-                if ( m_btnSide == wxDirection::Right )
+                if ( m_btnSide == wxRIGHT )
                     butPart = CP_DROPDOWNBUTTONRIGHT;
                 else
                     butPart = CP_DROPDOWNBUTTONLEFT;
@@ -522,7 +522,7 @@ void wxComboCtrl::OnMouseEvent( wxMouseEvent& event )
     if ( PreprocessMouseEvent(event,isOnButtonArea) )
         return;
 
-    if ( (m_windowStyle & (wxCC_SPECIAL_DCLICK|ComboStyles::ReadOnly)) == ComboStyles::ReadOnly )
+    if ( (m_windowStyle & (wxCC_SPECIAL_DCLICK|wxCB_READONLY)) == wxCB_READONLY )
     {
         // if no textctrl and no special double-click, then the entire control acts
         // as a button

@@ -60,7 +60,7 @@ public:
 protected:      // functions required for wxST_ELLIPSIZE_* support
 
     // choose the default border for this window
-    wxBorder GetDefaultBorder() const override { return wxBorder::None; }
+    wxBorder GetDefaultBorder() const override { return wxBORDER_NONE; }
 
     // Calls Ellipsize() on the real label if necessary. Unlike GetLabelText(),
     // keeps the mnemonics instead of removing them.

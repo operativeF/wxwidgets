@@ -11,10 +11,11 @@
 #ifndef _WX_RADIOBOX_H_BASE_
 #define _WX_RADIOBOX_H_BASE_
 
+#include "wx/defs.h"
+
 #if wxUSE_RADIOBOX
 
 #include "wx/ctrlsub.h"
-#include "wx/directionflags.h"
 
 #if wxUSE_TOOLTIPS
 
@@ -89,7 +90,7 @@ public:
 protected:
     wxRadioBoxBase() = default;
     
-    virtual wxBorder GetDefaultBorder() const { return wxBorder::None; }
+    virtual wxBorder GetDefaultBorder() const { return wxBORDER_NONE; }
 
     // return the number of items in major direction (which depends on whether
     // we have wxRA_SPECIFY_COLS or wxRA_SPECIFY_ROWS style)

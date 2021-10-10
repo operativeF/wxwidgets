@@ -28,7 +28,7 @@ public:
                 wxWindowID id,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                ToolBarStyleFlags style = wxTB_DEFAULT_STYLE,
+                unsigned int style = wxTB_DEFAULT_STYLE,
                 const std::string& name = wxToolBarNameStr)
     {
         Create(parent, id, pos, size, style, name);
@@ -43,7 +43,7 @@ public:
                 wxWindowID id,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                ToolBarStyleFlags style = wxTB_DEFAULT_STYLE,
+                unsigned int style = wxTB_DEFAULT_STYLE,
                 const std::string& name = wxToolBarNameStr);
 
     ~wxToolBar();
@@ -76,8 +76,6 @@ public:
     void OnEraseBackground(wxEraseEvent& event);
 
     void SetFocus() override {}
-
-    ToolBarStyleFlags GetToolBarFlags() const { return m_tbFlags; }
 
     static WXHBITMAP MapBitmap(WXHBITMAP bitmap, int width, int height);
 
@@ -186,7 +184,7 @@ private:
     // text is shown for the other buttons is too inconsistent to be useful.
     bool AreControlLabelsShown() const
     {
-        return m_tbFlags.is_set(wxToolBarStyleFlags::Text) && m_tbFlags.is_set(wxToolBarStyleFlags::NoIcons);
+        return HasFlag(wxTB_TEXT) && !HasFlag(wxTB_NOICONS);
     }
 
     // Return the size required to accommodate the given tool which must be of

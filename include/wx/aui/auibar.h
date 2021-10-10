@@ -127,7 +127,7 @@ public:
         m_dropDown = true;
         m_sticky = true;
         m_userData = 0;
-        m_alignment = wxAlignment::Center;
+        m_alignment = wxALIGN_CENTER;
     }
 
     void Assign(const wxAuiToolBarItem& c)
@@ -243,7 +243,7 @@ private:
     bool m_dropDown;             // true if the item has a dropdown button
     bool m_sticky;               // overrides button states if true (always active)
     long m_userData;            // user-specified data
-    int m_alignment;             // sizer alignment flag, defaults to wxCENTER, may be wxStretch::Expand or any other
+    int m_alignment;             // sizer alignment flag, defaults to wxCENTER, may be wxEXPAND or any other
 };
 
 #ifndef SWIG

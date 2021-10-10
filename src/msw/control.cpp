@@ -531,7 +531,7 @@ bool wxMSWOwnerDrawnButtonBase::MSWDrawButton(WXDRAWITEMSTRUCT *item)
     rectButton.top = rect.top + (rect.bottom - rect.top - buttonSize) / 2;
     rectButton.bottom = rectButton.top + buttonSize;
 
-    const bool isRightAligned = m_win->HasFlag(wxAlignment::Right);
+    const bool isRightAligned = m_win->HasFlag(wxALIGN_RIGHT);
     if ( isRightAligned )
     {
         rectButton.right = rect.right;

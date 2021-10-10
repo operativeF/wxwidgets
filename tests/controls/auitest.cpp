@@ -58,21 +58,21 @@ TEST_CASE( "wxAuiNotebook::DoGetBestSize")
         p = new wxPanel(nb);
         p->SetMinSize(wxSize(25, 0));
         nb->AddPage(p, "Left Pane");
-        nb->Split(nb->GetPageCount()-1, wxDirection::Left);
+        nb->Split(nb->GetPageCount()-1, wxLEFT);
 
         CHECK( nb->GetBestSize() == wxSize(125, 100 + tabHeight) );
 
         p = new wxPanel(nb);
         p->SetMinSize(wxSize(50, 0));
         nb->AddPage(p, "Right Pane 1");
-        nb->Split(nb->GetPageCount()-1, wxDirection::Right);
+        nb->Split(nb->GetPageCount()-1, wxRIGHT);
 
         CHECK( nb->GetBestSize() == wxSize(175, 100 + tabHeight) );
 
         p = new wxPanel(nb);
         p->SetMinSize(wxSize(100, 0));
         nb->AddPage(p, "Right Pane 2");
-        nb->Split(nb->GetPageCount()-1, wxDirection::Right);
+        nb->Split(nb->GetPageCount()-1, wxRIGHT);
 
         CHECK( nb->GetBestSize() == wxSize(275, 100 + tabHeight) );
     }
@@ -82,19 +82,19 @@ TEST_CASE( "wxAuiNotebook::DoGetBestSize")
         p = new wxPanel(nb);
         p->SetMinSize(wxSize(0, 100));
         nb->AddPage(p, "Top Pane 1");
-        nb->Split(nb->GetPageCount()-1, wxDirection::Top);
+        nb->Split(nb->GetPageCount()-1, wxTOP);
 
         p = new wxPanel(nb);
         p->SetMinSize(wxSize(0, 50));
         nb->AddPage(p, "Top Pane 2");
-        nb->Split(nb->GetPageCount()-1, wxDirection::Top);
+        nb->Split(nb->GetPageCount()-1, wxTOP);
 
         CHECK( nb->GetBestSize() == wxSize(100, 250 + 3*tabHeight) );
 
         p = new wxPanel(nb);
         p->SetMinSize(wxSize(0, 25));
         nb->AddPage(p, "Bottom Pane");
-        nb->Split(nb->GetPageCount()-1, wxDirection::Bottom);
+        nb->Split(nb->GetPageCount()-1, wxBOTTOM);
 
         CHECK( nb->GetBestSize() == wxSize(100, 275 + 4*tabHeight) );
     }
@@ -104,22 +104,22 @@ TEST_CASE( "wxAuiNotebook::DoGetBestSize")
         p = new wxPanel(nb);
         p->SetMinSize(wxSize(50, 25));
         nb->AddPage(p, "Bottom Pane");
-        nb->Split(nb->GetPageCount()-1, wxDirection::Bottom);
+        nb->Split(nb->GetPageCount()-1, wxBOTTOM);
 
         p = new wxPanel(nb);
         p->SetMinSize(wxSize(50, 120));
         nb->AddPage(p, "Right Pane");
-        nb->Split(nb->GetPageCount()-1, wxDirection::Right);
+        nb->Split(nb->GetPageCount()-1, wxRIGHT);
 
         p = new wxPanel(nb);
         p->SetMinSize(wxSize(225, 50));
         nb->AddPage(p, "Top Pane");
-        nb->Split(nb->GetPageCount()-1, wxDirection::Top);
+        nb->Split(nb->GetPageCount()-1, wxTOP);
 
         p = new wxPanel(nb);
         p->SetMinSize(wxSize(25, 105));
         nb->AddPage(p, "Left Pane");
-        nb->Split(nb->GetPageCount()-1, wxDirection::Left);
+        nb->Split(nb->GetPageCount()-1, wxLEFT);
 
         CHECK( nb->GetBestSize() == wxSize(250, 175 + 3*tabHeight) );
     }

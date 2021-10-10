@@ -105,16 +105,16 @@ bool wxGenericComboCtrl::Create(wxWindow *parent,
                                 const wxString& name)
 {
     //
-    // Note that technically we only support 'default' border and wxBorder::None.
+    // Note that technically we only support 'default' border and wxNO_BORDER.
     long border = style & wxBORDER_MASK;
-    int tcBorder = wxBorder::None;
+    int tcBorder = wxNO_BORDER;
 
 #if defined(__WXUNIVERSAL__)
     if ( !border )
-        border = wxBorder::Simple;
+        border = wxBORDER_SIMPLE;
 #elif defined(__WXMSW__)
     if ( !border )
-        border = wxBorder::Sunken;
+        border = wxBORDER_SUNKEN;
 #else
 
     //
@@ -125,7 +125,7 @@ bool wxGenericComboCtrl::Create(wxWindow *parent,
 
     if ( !border )
     {
-        if ( style & ComboStyles::ReadOnly )
+        if ( style & wxCB_READONLY )
         {
             m_widthCustomBorder = 1;
         }
@@ -142,8 +142,8 @@ bool wxGenericComboCtrl::Create(wxWindow *parent,
     }
 
     // Because we are going to have button outside the border,
-    // let's use wxBorder::None for the whole control.
-    border = wxBorder::None;
+    // let's use wxBORDER_NONE for the whole control.
+    border = wxBORDER_NONE;
 
     Customize( wxCC_BUTTON_OUTSIDE_BORDER |
                wxCC_NO_TEXT_AUTO_SELECT |
@@ -336,7 +336,7 @@ void wxGenericComboCtrl::OnMouseEvent( wxMouseEvent& event )
     const bool ctrlIsButton = wxPlatformIs(wxOS_WINDOWS);
 
     if ( ctrlIsButton &&
-         (m_windowStyle & (wxCC_SPECIAL_DCLICK|ComboStyles::ReadOnly)) == ComboStyles::ReadOnly )
+         (m_windowStyle & (wxCC_SPECIAL_DCLICK|wxCB_READONLY)) == wxCB_READONLY )
     {
         // if no textctrl and no special double-click, then the entire control acts
         // as a button
@@ -376,7 +376,7 @@ void wxGenericComboCtrl::SetCustomPaintWidth( int width )
     // If starting/stopping to show an image in front
     // of a writable text-field, then re-create textctrl
     // with different kind of border (because we can't
-    // assume that textctrl fully supports wxBorder::None).
+    // assume that textctrl fully supports wxNO_BORDER).
     //
     wxTextCtrl* tc = GetTextCtrl();
 
@@ -388,16 +388,16 @@ void wxGenericComboCtrl::SetCustomPaintWidth( int width )
         if ( width > 0 )
         {
             // Re-create textctrl with no border
-            if ( borderType != wxBorder::None )
+            if ( borderType != wxNO_BORDER )
             {
                 m_widthCustomBorder = 1;
-                tcCreateStyle = wxBorder::None;
+                tcCreateStyle = wxNO_BORDER;
             }
         }
         else if ( width == 0 )
         {
             // Re-create textctrl with normal border
-            if ( borderType == wxBorder::None )
+            if ( borderType == wxNO_BORDER )
             {
                 m_widthCustomBorder = 0;
                 tcCreateStyle = 0;

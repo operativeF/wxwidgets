@@ -178,7 +178,7 @@ WXLRESULT wxComboBox::MSWWindowProc(WXUINT nMsg, WXWPARAM wParam, WXLPARAM lPara
                 // resized, but we don't want this to happen as it doesn't seem
                 // to make any sense, so we forcefully restore the old text
                 std::string textOld;
-                if ( !GetComboStyles().is_set(ComboStyles::ReadOnly) && GetCurrentSelection() == -1 )
+                if ( !HasFlag(wxCB_READONLY) && GetCurrentSelection() == -1 )
                     textOld = GetValue();
 
                 // eliminate flickering during following hacks
@@ -410,7 +410,7 @@ WXHWND wxComboBox::GetEditHWNDIfAvailable() const
     if ( ::GetComboBoxInfo(GetHwnd(), &info) )
         return info.hwndItem;
 
-    if (HasFlag(ComboStyles::Simple))
+    if (HasFlag(wxCB_SIMPLE))
     {
         POINT pt
         {
@@ -427,9 +427,9 @@ WXHWND wxComboBox::GetEditHWNDIfAvailable() const
 
 WXHWND wxComboBox::GetEditHWND() const
 {
-    // this function should not be called for ComboStyles::ReadOnly controls, it is
+    // this function should not be called for wxCB_READONLY controls, it is
     // the callers responsibility to check this
-    wxASSERT_MSG( !HasFlag(ComboStyles::ReadOnly),
+    wxASSERT_MSG( !HasFlag(wxCB_READONLY),
                   wxT("read-only combobox doesn't have any edit control") );
 
     WXHWND hWndEdit = GetEditHWNDIfAvailable();
@@ -440,7 +440,7 @@ WXHWND wxComboBox::GetEditHWND() const
 
 wxWindow *wxComboBox::GetEditableWindow()
 {
-    wxASSERT_MSG( !HasFlag(ComboStyles::ReadOnly),
+    wxASSERT_MSG( !HasFlag(wxCB_READONLY),
                   wxT("read-only combobox doesn't have any edit control") );
 
     return this;
@@ -477,7 +477,7 @@ bool wxComboBox::Create(wxWindow *parent, wxWindowID id,
     // a (not read only) combobox is, in fact, 2 controls: the combobox itself
     // and an edit control inside it and if we want to catch events from this
     // edit control, we must subclass it as well
-    if ( !(style & ComboStyles::ReadOnly) )
+    if ( !(style & wxCB_READONLY) )
     {
         gs_wndprocEdit = wxSetWindowProc((HWND)GetEditHWND(), wxComboEditWndProc);
     }
@@ -493,7 +493,7 @@ DWORD wxComboBox::MSWGetStyle(unsigned int style, DWORD *exstyle) const
     // we never have an external border
     DWORD msStyle = wxChoice::MSWGetStyle
                       (
-                        (style & ~wxBORDER_MASK) | wxBorder::None, exstyle
+                        (style & ~wxBORDER_MASK) | wxBORDER_NONE, exstyle
                       );
 
     // usually WS_TABSTOP is added by wxControl::MSWGetStyle() but as we're
@@ -504,9 +504,9 @@ DWORD wxComboBox::MSWGetStyle(unsigned int style, DWORD *exstyle) const
     // remove the style always added by wxChoice
     msStyle &= ~CBS_DROPDOWNLIST;
 
-    if ( style & ComboStyles::ReadOnly )
+    if ( style & wxCB_READONLY )
         msStyle |= CBS_DROPDOWNLIST;
-    else if ( style & ComboStyles::Simple )
+    else if ( style & wxCB_SIMPLE )
         msStyle |= CBS_SIMPLE; // A list (shown always) and edit control
     else
         msStyle |= CBS_DROPDOWN;
@@ -525,13 +525,13 @@ DWORD wxComboBox::MSWGetStyle(unsigned int style, DWORD *exstyle) const
 
 std::string wxComboBox::GetValue() const
 {
-    return HasFlag(ComboStyles::ReadOnly) ? GetStringSelection()
+    return HasFlag(wxCB_READONLY) ? GetStringSelection()
                                   : wxTextEntry::GetValue();
 }
 
 void wxComboBox::SetValue(const std::string& value)
 {
-    if ( HasFlag(ComboStyles::ReadOnly) )
+    if ( HasFlag(wxCB_READONLY) )
         SetStringSelection(value);
     else
         wxTextEntry::SetValue(value);
@@ -540,7 +540,7 @@ void wxComboBox::SetValue(const std::string& value)
 void wxComboBox::Clear()
 {
     wxChoice::Clear();
-    if ( !HasFlag(ComboStyles::ReadOnly) )
+    if ( !HasFlag(wxCB_READONLY) )
         wxTextEntry::Clear();
 }
 
@@ -551,7 +551,7 @@ bool wxComboBox::ContainsHWND(WXHWND hWnd) const
 
 void wxComboBox::GetSelection(long *from, long *to) const
 {
-    if ( !HasFlag(ComboStyles::ReadOnly) )
+    if ( !HasFlag(wxCB_READONLY) )
     {
         wxTextEntry::GetSelection(from, to);
     }
@@ -566,7 +566,7 @@ void wxComboBox::GetSelection(long *from, long *to) const
 
 bool wxComboBox::IsEditable() const
 {
-    return !HasFlag(ComboStyles::ReadOnly) && wxTextEntry::IsEditable();
+    return !HasFlag(wxCB_READONLY) && wxTextEntry::IsEditable();
 }
 
 // ----------------------------------------------------------------------------
@@ -649,7 +649,7 @@ void wxComboBox::DoSetToolTip(wxToolTip *tip)
 {
     wxChoice::DoSetToolTip(tip);
 
-    if ( tip && !HasFlag(ComboStyles::ReadOnly) )
+    if ( tip && !HasFlag(wxCB_READONLY) )
         tip->AddOtherWindow(GetEditHWND());
 }
 
@@ -677,7 +677,7 @@ wxSize wxComboBox::DoGetSizeFromTextSize(int xlen, int ylen) const
 {
     wxSize tsize( wxChoice::DoGetSizeFromTextSize(xlen, ylen) );
 
-    if ( !HasFlag(ComboStyles::ReadOnly) )
+    if ( !HasFlag(wxCB_READONLY) )
     {
         // Add the margins we have previously set
         wxPoint marg( GetMargins() );
@@ -715,7 +715,7 @@ void wxComboBox::SetLayoutDirection(wxLayoutDirection dir)
     // extended style flags), so its layout direction should be set using the
     // same extended flag as for ordinary window but reset simply with
     // alignment flags.
-    if ( !HasFlag(ComboStyles::ReadOnly) )
+    if ( !HasFlag(wxCB_READONLY) )
     {
         if ( dir == wxLayoutDirection::RightToLeft )
         {

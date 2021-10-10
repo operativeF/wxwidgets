@@ -10,7 +10,7 @@
 #ifndef __GENERICDATAVIEWCTRLH__
 #define __GENERICDATAVIEWCTRLH__
 
-#include "wx/alignmentflags.h"
+#include "wx/defs.h"
 #include "wx/object.h"
 #include "wx/control.h"
 #include "wx/scrolwin.h"
@@ -39,7 +39,7 @@ public:
                      wxDataViewRenderer *renderer,
                      unsigned int model_column,
                      int width = wxDVC_DEFAULT_WIDTH,
-                     wxAlignment align = wxAlignment::Center,
+                     wxAlignment align = wxALIGN_CENTER,
                      unsigned int flags = wxDATAVIEW_COL_RESIZABLE)
         : wxDataViewColumnBase(renderer, model_column),
           m_title(title)
@@ -51,7 +51,7 @@ public:
                      wxDataViewRenderer *renderer,
                      unsigned int model_column,
                      int width = wxDVC_DEFAULT_WIDTH,
-                     wxAlignment align = wxAlignment::Center,
+                     wxAlignment align = wxALIGN_CENTER,
                      unsigned int flags = wxDATAVIEW_COL_RESIZABLE)
         : wxDataViewColumnBase(bitmap, renderer, model_column)
     {

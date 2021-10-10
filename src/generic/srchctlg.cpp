@@ -51,7 +51,7 @@ class wxSearchTextCtrl : public wxTextCtrl
 public:
     wxSearchTextCtrl(wxSearchCtrl *search, const std::string& value, int style)
         : wxTextCtrl(search, wxID_ANY, value, wxDefaultPosition, wxDefaultSize,
-                     (style & ~wxBORDER_MASK) | wxBorder::None | wxTE_PROCESS_ENTER),
+                     (style & ~wxBORDER_MASK) | wxNO_BORDER | wxTE_PROCESS_ENTER),
           m_search(search)
     {
         SetHint(_("Search"));
@@ -123,12 +123,12 @@ protected:
         const unsigned int flags = GetWindowStyleFlag();
         wxSearchTextCtrl* const self = const_cast<wxSearchTextCtrl*>(this);
 
-        self->SetWindowStyleFlag((flags & ~wxBORDER_MASK) | wxBorder::Default);
+        self->SetWindowStyleFlag((flags & ~wxBORDER_MASK) | wxBORDER_DEFAULT);
         wxSize size = wxTextCtrl::DoGetBestSize();
 
         // The calculation for no external borders in wxTextCtrl::DoGetSizeFromTextSize also
         // removes any padding around the value, which is wrong for this situation. So we
-        // can't use wxBorder::None to calculate a good height, in which case we just have to
+        // can't use wxBORDER_NONE to calculate a good height, in which case we just have to
         // assume a border in the code above and then subtract the space that would be taken up
         // by a themed border (the thin blue border and the white internal border).
         // Don't use FromDIP(4), this seems not needed.
@@ -160,7 +160,7 @@ class wxSearchButton : public wxControl
 {
 public:
     wxSearchButton(wxSearchCtrl *search, int eventType, const wxBitmap& bmp)
-        : wxControl(search, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxBorder::None),
+        : wxControl(search, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxNO_BORDER),
           m_search(search),
           m_eventType(eventType),
           m_bmp(bmp)

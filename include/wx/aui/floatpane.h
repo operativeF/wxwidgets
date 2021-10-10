@@ -15,7 +15,7 @@
 // headers
 // ----------------------------------------------------------------------------
 
-#include "wx/directionflags.h"
+#include "wx/defs.h"
 #include "wx/geometry/rect.h"
 
 #include "wx/weakref.h"

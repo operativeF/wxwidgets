@@ -93,7 +93,7 @@ public:
     int Append(const std::string& item, const wxBitmap& bitmap, void *clientData);
     int Append(const std::string& item, const wxBitmap& bitmap, wxClientData *clientData);
 
-    // Inserts item with image into the list before pos. Not valid for ComboStyles::Sort
+    // Inserts item with image into the list before pos. Not valid for wxCB_SORT
     // styles, use Append instead.
     int Insert(const std::string& item, const wxBitmap& bitmap, unsigned int pos);
     int Insert(const std::string& item, const wxBitmap& bitmap,

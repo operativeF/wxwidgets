@@ -12,7 +12,6 @@
 
 #if wxUSE_HTML && wxUSE_PRINTING_ARCHITECTURE && wxUSE_STREAMS
 
-#include "wx/dialogflags.h"
 #include "wx/log.h"
 #include "wx/intl.h"
 #include "wx/dc.h"
@@ -251,7 +250,7 @@ wxHtmlPrintout::CheckFit(const wxSize& pageArea, const wxSize& docArea) const
              (
               _("This document doesn't fit on the page horizontally and "
                 "will be truncated when it is printed."),
-              wxDialogIconFlags::Warning
+              wxICON_WARNING
              );
 #endif // wxUSE_INFOBAR
     }
@@ -272,7 +271,7 @@ wxHtmlPrintout::CheckFit(const wxSize& pageArea, const wxSize& docArea) const
                  GetTitle()
                 ),
                 _("Printing"),
-                DialogFlags{wxDialogFlags::OK, wxDialogFlags::Cancel, wxDialogDefaultFlags::Cancel, wxDialogIconFlags::Question}
+                wxOK | wxCANCEL | wxCANCEL_DEFAULT | wxICON_QUESTION
             );
         dlg.SetExtendedMessage
             (

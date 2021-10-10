@@ -530,7 +530,7 @@ public:
 
 protected:
     // choose the default border for this window
-    wxBorder GetDefaultBorder() const override { return wxBorder::None; }
+    wxBorder GetDefaultBorder() const override { return wxBORDER_NONE; }
 
     // to implement in derived classes
     // -------------------------------
@@ -620,8 +620,6 @@ protected:
     // wxToolBarBase::AdjustToolBitmapSize()
     wxCoord m_defaultWidth{16};
     wxCoord m_defaultHeight{15};
-
-    ToolBarStyleFlags m_tbFlags;
 
 private:
     wxDECLARE_EVENT_TABLE();

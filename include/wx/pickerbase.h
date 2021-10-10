@@ -74,14 +74,14 @@ public:     // public API
         { return GetPickerCtrlItem()->GetProportion(); }
 
     bool IsTextCtrlGrowable() const
-        { return GetTextCtrlItem()->GetFlag().is_set(wxStretch::Grow); }
+        { return (GetTextCtrlItem()->GetFlag() & wxGROW) != 0; }
     void SetTextCtrlGrowable(bool grow = true)
     {
         DoSetGrowableFlagFor(GetTextCtrlItem(), grow);
     }
 
     bool IsPickerCtrlGrowable() const
-        { return GetPickerCtrlItem()->GetFlag().is_set(wxStretch::Grow); }
+        { return (GetPickerCtrlItem()->GetFlag() & wxGROW) != 0; }
     void SetPickerCtrlGrowable(bool grow = true)
     {
         DoSetGrowableFlagFor(GetPickerCtrlItem(), grow);

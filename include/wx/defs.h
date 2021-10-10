@@ -696,6 +696,34 @@ inline void *wxUIntToPtr(wxUIntPtr p)
 /*  Geometric flags */
 /*  ---------------------------------------------------------------------------- */
 
+/*
+    In C++20 operations on the elements of different enums are deprecated and
+    many compilers (clang 10+, gcc 11+, MSVS 2019) warn about combining them,
+    as a lot of existing code using them does, so we provide explicit operators
+    for doing this, that do the same thing as would happen without them, but
+    without the warnings.
+ */
+#if defined(__cplusplus) && (__cplusplus >= 202002L)
+    #define wxALLOW_COMBINING_ENUMS_IMPL(en1, en2)                            \
+        inline int operator|(en1 v1, en2 v2)                                  \
+            { return static_cast<int>(v1) | static_cast<int>(v2); }           \
+        inline int operator+(en1 v1, en2 v2)                                  \
+            { return static_cast<int>(v1) + static_cast<int>(v2); }
+
+    #define wxALLOW_COMBINING_ENUMS(en1, en2)                                 \
+        wxALLOW_COMBINING_ENUMS_IMPL(en1, en2)                                \
+        wxALLOW_COMBINING_ENUMS_IMPL(en2, en1)
+#else /* !C++ 20 */
+    /* Don't bother doing anything in this case. */
+    #define wxALLOW_COMBINING_ENUMS(en1, en2)
+#endif /* C++ 20 */
+
+enum wxGeometryCentre
+{
+    wxCENTRE                  = 0x0001,
+    wxCENTER                  = wxCENTRE
+};
+
 /*  centering into frame rather than screen (obsolete) */
 #define wxCENTER_FRAME          0x0000
 /*  centre on screen rather than parent */
@@ -714,8 +742,83 @@ enum wxOrientation
     wxORIENTATION_MASK        = wxBOTH
 };
 
+enum wxDirection
+{
+    wxLEFT                    = 0x0010,
+    wxRIGHT                   = 0x0020,
+    wxUP                      = 0x0040,
+    wxDOWN                    = 0x0080,
+
+    wxTOP                     = wxUP,
+    wxBOTTOM                  = wxDOWN,
+
+    wxNORTH                   = wxUP,
+    wxSOUTH                   = wxDOWN,
+    wxWEST                    = wxLEFT,
+    wxEAST                    = wxRIGHT,
+
+    wxALL                     = (wxUP | wxDOWN | wxRIGHT | wxLEFT),
+
+    /*  a mask to extract direction from the combination of flags */
+    wxDIRECTION_MASK           = wxALL
+};
+
+enum wxAlignment
+{
+    /*
+        0 is a valid wxAlignment value (both wxALIGN_LEFT and wxALIGN_TOP
+        use it) so define a symbolic name for an invalid alignment value
+        which can be assumed to be different from anything else
+     */
+    wxALIGN_INVALID           = -1,
+
+    wxALIGN_NOT               = 0x0000,
+    wxALIGN_CENTER_HORIZONTAL = 0x0100,
+    wxALIGN_CENTRE_HORIZONTAL = wxALIGN_CENTER_HORIZONTAL,
+    wxALIGN_LEFT              = wxALIGN_NOT,
+    wxALIGN_TOP               = wxALIGN_NOT,
+    wxALIGN_RIGHT             = 0x0200,
+    wxALIGN_BOTTOM            = 0x0400,
+    wxALIGN_CENTER_VERTICAL   = 0x0800,
+    wxALIGN_CENTRE_VERTICAL   = wxALIGN_CENTER_VERTICAL,
+
+    wxALIGN_CENTER            = (wxALIGN_CENTER_HORIZONTAL | wxALIGN_CENTER_VERTICAL),
+    wxALIGN_CENTRE            = wxALIGN_CENTER,
+
+    /*  a mask to extract alignment from the combination of flags */
+    wxALIGN_MASK              = 0x0f00
+};
+
+/*  border flags: the values are chosen for backwards compatibility */
+enum wxBorder
+{
+    /*  this is different from wxBORDER_NONE as by default the controls do have */
+    /*  border */
+    wxBORDER_DEFAULT = 0,
+
+    wxBORDER_NONE   = 0x00200000,
+    wxBORDER_STATIC = 0x01000000,
+    wxBORDER_SIMPLE = 0x02000000,
+    wxBORDER_RAISED = 0x04000000,
+    wxBORDER_SUNKEN = 0x08000000,
+    wxBORDER_DOUBLE = 0x10000000, /* deprecated */
+    wxBORDER_THEME  = wxBORDER_DOUBLE,
+
+    /*  a mask to extract border style from the combination of flags */
+    wxBORDER_MASK   = 0x1f200000
+};
+
 /* This makes it easier to specify a 'normal' border for a control */
 #define wxDEFAULT_CONTROL_BORDER    wxBORDER_SUNKEN
+
+/*
+    Elements of these enums can be combined with each other when using
+    wxSizer::Add() overload not using wxSizerFlags.
+ */
+wxALLOW_COMBINING_ENUMS(wxAlignment, wxDirection)
+wxALLOW_COMBINING_ENUMS(wxAlignment, wxGeometryCentre)
+
+wxALLOW_COMBINING_ENUMS(wxDirection, wxGeometryCentre)
 
 /*  ---------------------------------------------------------------------------- */
 /*  Window style flags */
@@ -762,11 +865,33 @@ enum wxOrientation
     wxLB_SORT has a different value -- and this is just fine).
  */
 
+/*
+ * Window (Frame/dialog/subwindow/panel item) style flags
+ */
+
+#define wxVSCROLL               0x80000000
+#define wxHSCROLL               0x40000000
+#define wxCAPTION               0x20000000
+
+/*  New styles (border styles are now in their own enum) */
+#define wxDOUBLE_BORDER         wxBORDER_DOUBLE
+#define wxSUNKEN_BORDER         wxBORDER_SUNKEN
+#define wxRAISED_BORDER         wxBORDER_RAISED
+#define wxBORDER                wxBORDER_SIMPLE
+#define wxSIMPLE_BORDER         wxBORDER_SIMPLE
+#define wxSTATIC_BORDER         wxBORDER_STATIC
+#define wxNO_BORDER             wxBORDER_NONE
+
 /*  wxALWAYS_SHOW_SB: instead of hiding the scrollbar when it is not needed, */
 /*  disable it - but still show (see also wxLB_ALWAYS_SB style) */
 /*  */
 /*  NB: as this style is only supported by wxUniversal and wxMSW so far */
 #define wxALWAYS_SHOW_SB        0x00800000
+
+/*  Clip children when painting, which reduces flicker in e.g. frames and */
+/*  splitter windows, but can't be used in a panel where a static box must be */
+/*  'transparent' (panel paints the background for it) */
+#define wxCLIP_CHILDREN         0x00400000
 
 /*  Note we're reusing the wxCAPTION style because we won't need captions */
 /*  for subwindows/controls */
@@ -891,6 +1016,14 @@ enum wxOrientation
 #define wxLB_INT_HEIGHT     0x0800
 
 /*
+ * wxComboBox style flags
+ */
+#define wxCB_SIMPLE         0x0004
+#define wxCB_SORT           0x0008
+#define wxCB_READONLY       0x0010
+#define wxCB_DROPDOWN       0x0020
+
+/*
  * wxRadioBox style flags
  * These styles are not used in any port.
  */
@@ -910,6 +1043,48 @@ enum wxOrientation
  */
 #define wxSB_HORIZONTAL      wxHORIZONTAL
 #define wxSB_VERTICAL        wxVERTICAL
+
+/*
+ * extended dialog specifiers. these values are stored in a different
+ * flag and thus do not overlap with other style flags. note that these
+ * values do not correspond to the return values of the dialogs (for
+ * those values, look at the wxID_XXX defines).
+ */
+
+/*  wxCENTRE already defined as  0x00000001 */
+#define wxYES                   0x00000002
+#define wxOK                    0x00000004
+#define wxNO                    0x00000008
+#define wxYES_NO                (wxYES | wxNO)
+#define wxCANCEL                0x00000010
+#define wxAPPLY                 0x00000020
+#define wxCLOSE                 0x00000040
+
+#define wxOK_DEFAULT            0x00000000  /* has no effect (default) */
+#define wxYES_DEFAULT           0x00000000  /* has no effect (default) */
+#define wxNO_DEFAULT            0x00000080  /* only valid with wxYES_NO */
+#define wxCANCEL_DEFAULT        0x80000000  /* only valid with wxCANCEL */
+
+#define wxICON_WARNING          0x00000100
+#define wxICON_ERROR            0x00000200
+#define wxICON_QUESTION         0x00000400
+#define wxICON_INFORMATION      0x00000800
+#define wxICON_EXCLAMATION      wxICON_WARNING
+#define wxICON_HAND             wxICON_ERROR
+#define wxICON_STOP             wxICON_ERROR
+#define wxICON_ASTERISK         wxICON_INFORMATION
+
+#define wxHELP                  0x00001000
+#define wxFORWARD               0x00002000
+#define wxBACKWARD              0x00004000
+#define wxRESET                 0x00008000
+#define wxMORE                  0x00010000
+#define wxSETUP                 0x00020000
+#define wxICON_NONE             0x00040000
+#define wxICON_AUTH_NEEDED      0x00080000
+
+#define wxICON_MASK \
+    (wxICON_EXCLAMATION|wxICON_HAND|wxICON_QUESTION|wxICON_INFORMATION|wxICON_NONE|wxICON_AUTH_NEEDED)
 
 /*
  * Key types used by (old style) lists and hashes.

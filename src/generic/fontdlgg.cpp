@@ -352,51 +352,51 @@ void wxGenericFontDialog::CreateWidgets()
     this->SetAutoLayout(true);
 
     wxBoxSizer* itemBoxSizer3 = new wxBoxSizer(wxVERTICAL);
-    itemBoxSizer2->Add(itemBoxSizer3, 1, wxStretch::Grow|wxDirection::All, 5);
+    itemBoxSizer2->Add(itemBoxSizer3, 1, wxGROW|wxALL, 5);
 
     wxFlexGridSizer* itemGridSizer4 = new wxFlexGridSizer(noRows, noCols, 0, 0);
-    itemBoxSizer3->Add(itemGridSizer4, 0, wxStretch::Grow, 5);
+    itemBoxSizer3->Add(itemGridSizer4, 0, wxGROW, 5);
 
     wxBoxSizer* itemBoxSizer5 = new wxBoxSizer(wxVERTICAL);
-    itemGridSizer4->Add(itemBoxSizer5, 0, wxAlignment::CenterHorizontal|wxStretch::Grow, 5);
+    itemGridSizer4->Add(itemBoxSizer5, 0, wxALIGN_CENTER_HORIZONTAL|wxGROW, 5);
     wxStaticText* itemStaticText6 = new wxStaticText( this, wxID_STATIC, _("&Font family:"), wxDefaultPosition, wxDefaultSize, 0 );
-    itemBoxSizer5->Add(itemStaticText6, 0, wxAlignment::Left|wxDirection::Left|wxDirection::Right|wxDirection::Top, 5);
+    itemBoxSizer5->Add(itemStaticText6, 0, wxALIGN_LEFT|wxLEFT|wxRIGHT|wxTOP, 5);
 
     m_familyChoice = new wxChoice( this, wxID_FONT_FAMILY, wxDefaultPosition, wxDefaultSize, 5, families, 0 );
     m_familyChoice->SetHelpText(_("The font family."));
     if (ShowToolTips())
         m_familyChoice->SetToolTip(_("The font family."));
-    itemBoxSizer5->Add(m_familyChoice, 0, wxAlignment::Left|wxDirection::All, 5);
+    itemBoxSizer5->Add(m_familyChoice, 0, wxALIGN_LEFT|wxALL, 5);
 
     wxBoxSizer* itemBoxSizer8 = new wxBoxSizer(wxVERTICAL);
-    itemGridSizer4->Add(itemBoxSizer8, 0, wxAlignment::CenterHorizontal|wxStretch::Grow, 5);
+    itemGridSizer4->Add(itemBoxSizer8, 0, wxALIGN_CENTER_HORIZONTAL|wxGROW, 5);
     wxStaticText* itemStaticText9 = new wxStaticText( this, wxID_STATIC, _("&Style:"), wxDefaultPosition, wxDefaultSize, 0 );
-    itemBoxSizer8->Add(itemStaticText9, 0, wxAlignment::Left|wxDirection::Left|wxDirection::Right|wxDirection::Top, 5);
+    itemBoxSizer8->Add(itemStaticText9, 0, wxALIGN_LEFT|wxLEFT|wxRIGHT|wxTOP, 5);
 
     m_styleChoice = new wxChoice( this, wxID_FONT_STYLE, wxDefaultPosition, wxDefaultSize, 3, styles, 0 );
     m_styleChoice->SetHelpText(_("The font style."));
     if (ShowToolTips())
         m_styleChoice->SetToolTip(_("The font style."));
-    itemBoxSizer8->Add(m_styleChoice, 0, wxAlignment::Left|wxDirection::All, 5);
+    itemBoxSizer8->Add(m_styleChoice, 0, wxALIGN_LEFT|wxALL, 5);
 
     wxBoxSizer* itemBoxSizer11 = new wxBoxSizer(wxVERTICAL);
-    itemGridSizer4->Add(itemBoxSizer11, 0, wxAlignment::CenterHorizontal|wxStretch::Grow, 5);
+    itemGridSizer4->Add(itemBoxSizer11, 0, wxALIGN_CENTER_HORIZONTAL|wxGROW, 5);
     wxStaticText* itemStaticText12 = new wxStaticText( this, wxID_STATIC, _("&Weight:"), wxDefaultPosition, wxDefaultSize, 0 );
-    itemBoxSizer11->Add(itemStaticText12, 0, wxAlignment::Left|wxDirection::Left|wxDirection::Right|wxDirection::Top, 5);
+    itemBoxSizer11->Add(itemStaticText12, 0, wxALIGN_LEFT|wxLEFT|wxRIGHT|wxTOP, 5);
 
     m_weightChoice = new wxChoice( this, wxID_FONT_WEIGHT, wxDefaultPosition, wxDefaultSize, 3, weights, 0 );
     m_weightChoice->SetHelpText(_("The font weight."));
     if (ShowToolTips())
         m_weightChoice->SetToolTip(_("The font weight."));
-    itemBoxSizer11->Add(m_weightChoice, 0, wxAlignment::Left|wxDirection::All, 5);
+    itemBoxSizer11->Add(m_weightChoice, 0, wxALIGN_LEFT|wxALL, 5);
 
     wxBoxSizer* itemBoxSizer14 = new wxBoxSizer(wxVERTICAL);
-    itemGridSizer4->Add(itemBoxSizer14, 0, wxAlignment::CenterHorizontal|wxStretch::Grow, 5);
+    itemGridSizer4->Add(itemBoxSizer14, 0, wxALIGN_CENTER_HORIZONTAL|wxGROW, 5);
     m_colourChoice = NULL;
     if (m_fontData.GetEnableEffects())
     {
         wxStaticText* itemStaticText15 = new wxStaticText( this, wxID_STATIC, _("C&olour:"), wxDefaultPosition, wxDefaultSize, 0 );
-        itemBoxSizer14->Add(itemStaticText15, 0, wxAlignment::Left|wxDirection::Left|wxDirection::Right|wxDirection::Top, 5);
+        itemBoxSizer14->Add(itemStaticText15, 0, wxALIGN_LEFT|wxLEFT|wxRIGHT|wxTOP, 5);
 
         wxSize colourSize = wxDefaultSize;
         if (is_pda)
@@ -406,81 +406,81 @@ void wxGenericFontDialog::CreateWidgets()
         m_colourChoice->SetHelpText(_("The font colour."));
         if (ShowToolTips())
             m_colourChoice->SetToolTip(_("The font colour."));
-        itemBoxSizer14->Add(m_colourChoice, 0, wxAlignment::Left|wxDirection::All, 5);
+        itemBoxSizer14->Add(m_colourChoice, 0, wxALIGN_LEFT|wxALL, 5);
     }
 
     wxBoxSizer* itemBoxSizer17 = new wxBoxSizer(wxVERTICAL);
-    itemGridSizer4->Add(itemBoxSizer17, 0, wxAlignment::CenterHorizontal|wxStretch::Grow, 5);
+    itemGridSizer4->Add(itemBoxSizer17, 0, wxALIGN_CENTER_HORIZONTAL|wxGROW, 5);
     wxStaticText* itemStaticText18 = new wxStaticText( this, wxID_STATIC, _("&Point size:"), wxDefaultPosition, wxDefaultSize, 0 );
-    itemBoxSizer17->Add(itemStaticText18, 0, wxAlignment::Left|wxDirection::Left|wxDirection::Right|wxDirection::Top, 5);
+    itemBoxSizer17->Add(itemStaticText18, 0, wxALIGN_LEFT|wxLEFT|wxRIGHT|wxTOP, 5);
 
 #if USE_SPINCTRL_FOR_POINT_SIZE
     m_pointSizeSpin = new wxSpinCtrl(this, wxID_FONT_SIZE, wxT("12"), wxDefaultPosition, wxSize(80, wxDefaultCoord), wxSP_ARROW_KEYS, 1, 500, 12);
     m_pointSizeSpin->SetHelpText(_("The font point size."));
     if (ShowToolTips())
         m_pointSizeSpin->SetToolTip(_("The font point size."));
-    itemBoxSizer17->Add(m_pointSizeSpin, 0, wxAlignment::Left|wxDirection::All, 5);
+    itemBoxSizer17->Add(m_pointSizeSpin, 0, wxALIGN_LEFT|wxALL, 5);
 #else
     m_pointSizeChoice = new wxChoice( this, wxID_FONT_SIZE, wxDefaultPosition, wxDefaultSize, 40, pointSizes, 0 );
     m_pointSizeChoice->SetHelpText(_("The font point size."));
     if (ShowToolTips())
         m_pointSizeChoice->SetToolTip(_("The font point size."));
-    itemBoxSizer17->Add(m_pointSizeChoice, 0, wxAlignment::Left|wxDirection::All, 5);
+    itemBoxSizer17->Add(m_pointSizeChoice, 0, wxALIGN_LEFT|wxALL, 5);
 #endif
 
     m_underLineCheckBox = NULL;
     if (m_fontData.GetEnableEffects())
     {
         wxBoxSizer* itemBoxSizer20 = new wxBoxSizer(wxVERTICAL);
-        itemGridSizer4->Add(itemBoxSizer20, 0, wxAlignment::Left|wxAlignment::CenterVertical, 5);
+        itemGridSizer4->Add(itemBoxSizer20, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, 5);
         m_underLineCheckBox = new wxCheckBox( this, wxID_FONT_UNDERLINE, _("&Underline"), wxDefaultPosition, wxDefaultSize, 0 );
         m_underLineCheckBox->SetValue(false);
         m_underLineCheckBox->SetHelpText(_("Whether the font is underlined."));
         if (ShowToolTips())
             m_underLineCheckBox->SetToolTip(_("Whether the font is underlined."));
-        itemBoxSizer20->Add(m_underLineCheckBox, 0, wxAlignment::Left|wxDirection::All, 5);
+        itemBoxSizer20->Add(m_underLineCheckBox, 0, wxALIGN_LEFT|wxALL, 5);
     }
 
     if (!is_pda)
-        itemBoxSizer3->Add(5, 5, 0, wxAlignment::CenterHorizontal|wxDirection::All, 5);
+        itemBoxSizer3->Add(5, 5, 0, wxALIGN_CENTER_HORIZONTAL|wxALL, 5);
 
     wxStaticText* itemStaticText23 = new wxStaticText( this, wxID_STATIC, _("Preview:"), wxDefaultPosition, wxDefaultSize, 0 );
-    itemBoxSizer3->Add(itemStaticText23, 0, wxAlignment::Left|wxDirection::Left|wxDirection::Right|wxDirection::Top, 5);
+    itemBoxSizer3->Add(itemStaticText23, 0, wxALIGN_LEFT|wxLEFT|wxRIGHT|wxTOP, 5);
 
     m_previewer = new wxFontPreviewer( this );
     m_previewer->SetHelpText(_("Shows the font preview."));
     if (ShowToolTips())
         m_previewer->SetToolTip(_("Shows the font preview."));
-    itemBoxSizer3->Add(m_previewer, 1, wxStretch::Grow|wxDirection::All, 5);
+    itemBoxSizer3->Add(m_previewer, 1, wxGROW|wxALL, 5);
 
     wxBoxSizer* itemBoxSizer25 = new wxBoxSizer(wxHORIZONTAL);
-    itemBoxSizer3->Add(itemBoxSizer25, 0, wxStretch::Grow, 5);
-    itemBoxSizer25->Add(5, 5, 1, wxStretch::Grow|wxDirection::All, 5);
+    itemBoxSizer3->Add(itemBoxSizer25, 0, wxGROW, 5);
+    itemBoxSizer25->Add(5, 5, 1, wxGROW|wxALL, 5);
 
 #ifdef __WXMAC__
     wxButton* itemButton28 = new wxButton( this, wxID_CANCEL, _("&Cancel"), wxDefaultPosition, wxDefaultSize, 0 );
     if (ShowToolTips())
         itemButton28->SetToolTip(_("Click to cancel the font selection."));
-    itemBoxSizer25->Add(itemButton28, 0, wxAlignment::CenterVertical|wxDirection::All, 5);
+    itemBoxSizer25->Add(itemButton28, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5);
 
     wxButton* itemButton27 = new wxButton( this, wxID_OK, _("&OK"), wxDefaultPosition, wxDefaultSize, 0 );
     itemButton27->SetDefault();
     itemButton27->SetHelpText(_("Click to confirm the font selection."));
     if (ShowToolTips())
         itemButton27->SetToolTip(_("Click to confirm the font selection."));
-    itemBoxSizer25->Add(itemButton27, 0, wxAlignment::CenterVertical|wxDirection::All, 5);
+    itemBoxSizer25->Add(itemButton27, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5);
 #else
     wxButton* itemButton27 = new wxButton( this, wxID_OK, _("&OK"), wxDefaultPosition, wxDefaultSize, 0 );
     itemButton27->SetDefault();
     itemButton27->SetHelpText(_("Click to confirm the font selection."));
     if (ShowToolTips())
         itemButton27->SetToolTip(_("Click to confirm the font selection."));
-    itemBoxSizer25->Add(itemButton27, 0, wxAlignment::CenterVertical|wxDirection::All, 5);
+    itemBoxSizer25->Add(itemButton27, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5);
 
     wxButton* itemButton28 = new wxButton( this, wxID_CANCEL, _("&Cancel"), wxDefaultPosition, wxDefaultSize, 0 );
     if (ShowToolTips())
         itemButton28->SetToolTip(_("Click to cancel the font selection."));
-    itemBoxSizer25->Add(itemButton28, 0, wxAlignment::CenterVertical|wxDirection::All, 5);
+    itemBoxSizer25->Add(itemButton28, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5);
 #endif
 
     m_familyChoice->SetStringSelection( wxFontFamilyIntToString(m_dialogFont.GetFamily()) );

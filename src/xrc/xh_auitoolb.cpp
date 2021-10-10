@@ -182,9 +182,9 @@ wxObject *wxAuiToolBarXmlHandler::DoCreateResource()
 
     else /*<object class="wxAuiToolBar">*/
     {
-        int style = GetStyle(wxS("style"), wxBorder::None | wxTB_HORIZONTAL);
+        int style = GetStyle(wxS("style"), wxNO_BORDER | wxTB_HORIZONTAL);
 #ifdef __WXMSW__
-        if (!(style & wxBorder::None)) style |= wxBorder::None;
+        if (!(style & wxNO_BORDER)) style |= wxNO_BORDER;
 #endif
 
         XRC_MAKE_INSTANCE(toolbar, wxAuiToolBar)

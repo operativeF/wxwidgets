@@ -81,53 +81,53 @@ void wxRichTextTabsPage::CreateControls()
     itemRichTextDialogPage1->SetSizer(itemBoxSizer2);
 
     wxBoxSizer* itemBoxSizer3 = new wxBoxSizer(wxVERTICAL);
-    itemBoxSizer2->Add(itemBoxSizer3, 1, wxStretch::Grow|wxDirection::All, 5);
+    itemBoxSizer2->Add(itemBoxSizer3, 1, wxGROW|wxALL, 5);
 
     wxBoxSizer* itemBoxSizer4 = new wxBoxSizer(wxHORIZONTAL);
-    itemBoxSizer3->Add(itemBoxSizer4, 1, wxStretch::Grow, 5);
+    itemBoxSizer3->Add(itemBoxSizer4, 1, wxGROW, 5);
 
     wxBoxSizer* itemBoxSizer5 = new wxBoxSizer(wxVERTICAL);
-    itemBoxSizer4->Add(itemBoxSizer5, 0, wxStretch::Grow, 5);
+    itemBoxSizer4->Add(itemBoxSizer5, 0, wxGROW, 5);
 
     wxStaticText* itemStaticText6 = new wxStaticText( itemRichTextDialogPage1, wxID_STATIC, _("&Position (tenths of a mm):"), wxDefaultPosition, wxDefaultSize, 0 );
-    itemBoxSizer5->Add(itemStaticText6, 0, wxAlignment::Left|wxDirection::Left|wxDirection::Right|wxDirection::Top, 5);
+    itemBoxSizer5->Add(itemStaticText6, 0, wxALIGN_LEFT|wxLEFT|wxRIGHT|wxTOP, 5);
 
     m_tabEditCtrl = new wxTextCtrl( itemRichTextDialogPage1, ID_RICHTEXTTABSPAGE_TABEDIT, "", wxDefaultPosition, wxDefaultSize, 0 );
     m_tabEditCtrl->SetHelpText(_("The tab position."));
     if (wxRichTextTabsPage::ShowToolTips())
         m_tabEditCtrl->SetToolTip(_("The tab position."));
-    itemBoxSizer5->Add(m_tabEditCtrl, 0, wxStretch::Grow|wxDirection::All, 5);
+    itemBoxSizer5->Add(m_tabEditCtrl, 0, wxGROW|wxALL, 5);
 
     std::vector<std::string> m_tabListCtrlStrings;
     m_tabListCtrlStrings.push_back("The tab positions.");
     m_tabListCtrl = new wxListBox( itemRichTextDialogPage1, ID_RICHTEXTTABSPAGE_TABLIST, wxDefaultPosition, wxSize(80, 200), m_tabListCtrlStrings, wxLB_SINGLE );
-    itemBoxSizer5->Add(m_tabListCtrl, 1, wxStretch::Grow|wxDirection::Left|wxDirection::Right|wxDirection::Bottom, 5);
+    itemBoxSizer5->Add(m_tabListCtrl, 1, wxGROW|wxLEFT|wxRIGHT|wxBOTTOM, 5);
 
-    itemBoxSizer4->Add(2, 1, 0, wxAlignment::CenterVertical|wxDirection::Top|wxDirection::Bottom, 5);
+    itemBoxSizer4->Add(2, 1, 0, wxALIGN_CENTER_VERTICAL|wxTOP|wxBOTTOM, 5);
 
     wxBoxSizer* itemBoxSizer10 = new wxBoxSizer(wxVERTICAL);
-    itemBoxSizer4->Add(itemBoxSizer10, 0, wxStretch::Grow, 5);
+    itemBoxSizer4->Add(itemBoxSizer10, 0, wxGROW, 5);
 
     wxStaticText* itemStaticText11 = new wxStaticText( itemRichTextDialogPage1, wxID_STATIC, "", wxDefaultPosition, wxDefaultSize, 0 );
-    itemBoxSizer10->Add(itemStaticText11, 0, wxAlignment::CenterHorizontal|wxDirection::Bottom, 5);
+    itemBoxSizer10->Add(itemStaticText11, 0, wxALIGN_CENTER_HORIZONTAL|wxBOTTOM, 5);
 
     wxButton* itemButton12 = new wxButton( itemRichTextDialogPage1, ID_RICHTEXTTABSPAGE_NEW_TAB, _("&New"), wxDefaultPosition, wxDefaultSize, 0 );
     itemButton12->SetHelpText(_("Click to create a new tab position."));
     if (wxRichTextTabsPage::ShowToolTips())
         itemButton12->SetToolTip(_("Click to create a new tab position."));
-    itemBoxSizer10->Add(itemButton12, 0, wxStretch::Grow|wxDirection::All, 5);
+    itemBoxSizer10->Add(itemButton12, 0, wxGROW|wxALL, 5);
 
     wxButton* itemButton13 = new wxButton( itemRichTextDialogPage1, ID_RICHTEXTTABSPAGE_DELETE_TAB, _("&Delete"), wxDefaultPosition, wxDefaultSize, 0 );
     itemButton13->SetHelpText(_("Click to delete the selected tab position."));
     if (wxRichTextTabsPage::ShowToolTips())
         itemButton13->SetToolTip(_("Click to delete the selected tab position."));
-    itemBoxSizer10->Add(itemButton13, 0, wxStretch::Grow|wxDirection::Left|wxDirection::Right|wxDirection::Bottom, 5);
+    itemBoxSizer10->Add(itemButton13, 0, wxGROW|wxLEFT|wxRIGHT|wxBOTTOM, 5);
 
     wxButton* itemButton14 = new wxButton( itemRichTextDialogPage1, ID_RICHTEXTTABSPAGE_DELETE_ALL_TABS, _("Delete A&ll"), wxDefaultPosition, wxDefaultSize, 0 );
     itemButton14->SetHelpText(_("Click to delete all tab positions."));
     if (wxRichTextTabsPage::ShowToolTips())
         itemButton14->SetToolTip(_("Click to delete all tab positions."));
-    itemBoxSizer10->Add(itemButton14, 0, wxStretch::Grow|wxDirection::Left|wxDirection::Right|wxDirection::Bottom, 5);
+    itemBoxSizer10->Add(itemButton14, 0, wxGROW|wxLEFT|wxRIGHT|wxBOTTOM, 5);
 
 ////@end wxRichTextTabsPage content construction
 }

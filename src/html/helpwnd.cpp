@@ -334,14 +334,14 @@ bool wxHtmlHelpWindow::Create(wxWindow* parent, wxWindowID id,
     if (helpStyle & (wxHF_TOOLBAR | wxHF_FLAT_TOOLBAR))
     {
         wxToolBar *toolBar = new wxToolBar(this, wxID_ANY, wxDefaultPosition, wxDefaultSize,
-                                           wxBorder::None | wxTB_HORIZONTAL |
+                                           wxNO_BORDER | wxTB_HORIZONTAL |
                                            wxTB_DOCKABLE | wxTB_NODIVIDER |
                                            (helpStyle & wxHF_FLAT_TOOLBAR ? wxTB_FLAT : 0));
         toolBar->SetMargins( 2, 2 );
         toolBar->SetToolBitmapSize( wxSize(22,22) );
         AddToolbarButtons(toolBar, helpStyle);
         toolBar->Realize();
-        topWindowSizer->Add(toolBar, 0, wxStretch::Expand);
+        topWindowSizer->Add(toolBar, 0, wxEXPAND);
         m_toolBar = toolBar;
     }
 #endif //wxUSE_TOOLBAR
@@ -349,9 +349,9 @@ bool wxHtmlHelpWindow::Create(wxWindow* parent, wxWindowID id,
     wxSizer *navigSizer = nullptr;
 
 #ifdef __WXMSW__
-    wxBorder htmlWindowBorder = wxBorder::Theme;
+    wxBorder htmlWindowBorder = wxBORDER_THEME;
 #else
-    wxBorder htmlWindowBorder = wxBorder::Sunken;
+    wxBorder htmlWindowBorder = wxBORDER_SUNKEN;
 #endif
 
     if (helpStyle & (wxHF_CONTENTS | wxHF_INDEX | wxHF_SEARCH))
@@ -366,7 +366,7 @@ bool wxHtmlHelpWindow::Create(wxWindow* parent, wxWindowID id,
 #endif
         m_Splitter = new wxSplitterWindow(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, splitterStyle);
 
-        topWindowSizer->Add(m_Splitter, 1, wxStretch::Expand);
+        topWindowSizer->Add(m_Splitter, 1, wxEXPAND);
 
         m_HtmlWin = new wxHtmlHelpHtmlWindow(this, m_Splitter, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxHW_DEFAULT_STYLE|htmlWindowBorder);
         m_NavigPan = new wxPanel(m_Splitter, wxID_ANY);
@@ -377,7 +377,7 @@ bool wxHtmlHelpWindow::Create(wxWindow* parent, wxWindowID id,
 #endif
 
         navigSizer = new wxBoxSizer(wxVERTICAL);
-        navigSizer->Add(m_NavigNotebook, 1, wxStretch::Expand);
+        navigSizer->Add(m_NavigNotebook, 1, wxEXPAND);
 
         m_NavigPan->SetSizer(navigSizer);
     }
@@ -385,7 +385,7 @@ bool wxHtmlHelpWindow::Create(wxWindow* parent, wxWindowID id,
     {
         // only html window, no notebook with index,contents etc
         m_HtmlWin = new wxHtmlWindow(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxHW_DEFAULT_STYLE|htmlWindowBorder);
-        topWindowSizer->Add(m_HtmlWin, 1, wxStretch::Expand);
+        topWindowSizer->Add(m_HtmlWin, 1, wxEXPAND);
     }
 
 #if wxUSE_CONFIG
@@ -405,10 +405,10 @@ bool wxHtmlHelpWindow::Create(wxWindow* parent, wxWindowID id,
 
         if ( helpStyle & wxHF_BOOKMARKS )
         {
-            long comboStyle = ComboStyles::ReadOnly;
+            long comboStyle = wxCB_READONLY;
 #ifndef __WXMAC__
             // Not supported on OSX/Cocoa presently
-            comboStyle |= ComboStyles::Sort;
+            comboStyle |= wxCB_SORT;
 
 #endif
             m_Bookmarks = new wxComboBox(dummy, wxID_HTML_BOOKMARKSLIST,
@@ -434,21 +434,21 @@ bool wxHtmlHelpWindow::Create(wxWindow* parent, wxWindowID id,
 
             wxSizer *sizer = new wxBoxSizer(wxHORIZONTAL);
 
-            sizer->Add(m_Bookmarks, 1, SizerFlags{wxAlignment::CenterVertical, wxDirection::Right}, 5);
-            sizer->Add(bmpbt1, 0, SizerFlags{wxAlignment::CenterVertical, wxDirection::Right}, 2);
-            sizer->Add(bmpbt2, 0, wxAlignment::CenterVertical, 0);
+            sizer->Add(m_Bookmarks, 1, wxALIGN_CENTRE_VERTICAL | wxRIGHT, 5);
+            sizer->Add(bmpbt1, 0, wxALIGN_CENTRE_VERTICAL | wxRIGHT, 2);
+            sizer->Add(bmpbt2, 0, wxALIGN_CENTRE_VERTICAL, 0);
 
-            topsizer->Add(sizer, 0, SizerFlags{wxStretch::Expand, wxDirection::Left, wxDirection::Bottom, wxDirection::Right}, 10);
+            topsizer->Add(sizer, 0, wxEXPAND | wxLEFT | wxBOTTOM | wxRIGHT, 10);
         }
 
         m_ContentsBox = new wxTreeCtrl(dummy, wxID_HTML_TREECTRL,
                                        wxDefaultPosition, wxDefaultSize,
 #if defined(__WXGTK20__) || defined(__WXMAC__)
-                                       wxBorder::Sunken |
+                                       wxSUNKEN_BORDER |
                                        wxTR_HAS_BUTTONS | wxTR_HIDE_ROOT |
                                        wxTR_NO_LINES
 #else
-                                       wxBorder::Sunken |
+                                       wxSUNKEN_BORDER |
                                        wxTR_HAS_BUTTONS | wxTR_HIDE_ROOT |
                                        wxTR_LINES_AT_ROOT
 #endif
@@ -468,7 +468,7 @@ bool wxHtmlHelpWindow::Create(wxWindow* parent, wxWindowID id,
         m_ContentsBox->AssignImageList(ContentsImageList);
 
         topsizer->Add(m_ContentsBox, 1,
-                      wxStretch::Expand | wxDirection::Left | wxDirection::Bottom | wxDirection::Right,
+                      wxEXPAND | wxLEFT | wxBOTTOM | wxRIGHT,
                       2);
 
         m_NavigNotebook->AddPage(dummy, _("Contents"));
@@ -492,7 +492,7 @@ bool wxHtmlHelpWindow::Create(wxWindow* parent, wxWindowID id,
         m_IndexCountInfo = new wxStaticText(dummy, wxID_HTML_COUNTINFO,
                                             "", wxDefaultPosition,
                                             wxDefaultSize,
-                                            wxAlignment::Right | wxST_NO_AUTORESIZE);
+                                            wxALIGN_RIGHT | wxST_NO_AUTORESIZE);
         m_IndexList = new wxListBox(dummy, wxID_HTML_INDEXLIST,
                                     wxDefaultPosition, wxDefaultSize,
                                     {}, wxLB_SINGLE);
@@ -502,14 +502,14 @@ bool wxHtmlHelpWindow::Create(wxWindow* parent, wxWindowID id,
         m_IndexButtonAll->SetToolTip(_("Show all items in index"));
 #endif //wxUSE_TOOLTIPS
 
-        topsizer->Add(m_IndexText, 0, wxStretch::Expand | wxDirection::All, 10);
+        topsizer->Add(m_IndexText, 0, wxEXPAND | wxALL, 10);
         wxSizer *btsizer = new wxBoxSizer(wxHORIZONTAL);
-        btsizer->Add(m_IndexButton, 0, wxDirection::Right, 2);
+        btsizer->Add(m_IndexButton, 0, wxRIGHT, 2);
         btsizer->Add(m_IndexButtonAll);
         topsizer->Add(btsizer, 0,
-                      SizerFlags{wxAlignment::Right, wxDirection::Left, wxDirection::Right, wxDirection::Bottom}, 10);
-        topsizer->Add(m_IndexCountInfo, 0, SizerFlags{wxStretch::Expand, wxDirection::Left, wxDirection::Right}, 2);
-        topsizer->Add(m_IndexList, 1, SizerFlags{wxStretch::Expand, wxDirection::All}, 2);
+                      wxALIGN_RIGHT | wxLEFT | wxRIGHT | wxBOTTOM, 10);
+        topsizer->Add(m_IndexCountInfo, 0, wxEXPAND | wxLEFT | wxRIGHT, 2);
+        topsizer->Add(m_IndexList, 1, wxEXPAND | wxALL, 2);
 
         m_NavigNotebook->AddPage(dummy, _("Index"));
         m_IndexPage = notebook_page++;
@@ -539,12 +539,12 @@ bool wxHtmlHelpWindow::Create(wxWindow* parent, wxWindowID id,
                                      wxDefaultPosition, wxDefaultSize,
                                      {}, wxLB_SINGLE);
 
-        sizer->Add(m_SearchText, 0, wxStretch::Expand | wxDirection::All, 10);
-        sizer->Add(m_SearchChoice, 0, wxStretch::Expand | wxDirection::Left | wxDirection::Right | wxDirection::Bottom, 10);
-        sizer->Add(m_SearchCaseSensitive, 0, wxDirection::Left | wxDirection::Right, 10);
-        sizer->Add(m_SearchWholeWords, 0, wxDirection::Left | wxDirection::Right, 10);
-        sizer->Add(m_SearchButton, 0, wxDirection::All | wxAlignment::Right, 8);
-        sizer->Add(m_SearchList, 1, wxDirection::All | wxStretch::Expand, 2);
+        sizer->Add(m_SearchText, 0, wxEXPAND | wxALL, 10);
+        sizer->Add(m_SearchChoice, 0, wxEXPAND | wxLEFT | wxRIGHT | wxBOTTOM, 10);
+        sizer->Add(m_SearchCaseSensitive, 0, wxLEFT | wxRIGHT, 10);
+        sizer->Add(m_SearchWholeWords, 0, wxLEFT | wxRIGHT, 10);
+        sizer->Add(m_SearchButton, 0, wxALL | wxALIGN_RIGHT, 8);
+        sizer->Add(m_SearchList, 1, wxALL | wxEXPAND, 2);
 
         m_NavigNotebook->AddPage(dummy, _("Search"));
         m_SearchPage = notebook_page;
@@ -1208,32 +1208,32 @@ public:
 
         sizer->Add(NormalFont = new wxComboBox(this, wxID_ANY, "", wxDefaultPosition,
                       wxSize(200, wxDefaultCoord),
-                      {}, ComboStyles::DropDown | ComboStyles::ReadOnly));
+                      {}, wxCB_DROPDOWN | wxCB_READONLY));
 
         sizer->Add(FixedFont = new wxComboBox(this, wxID_ANY, "", wxDefaultPosition,
                       wxSize(200, wxDefaultCoord),
-                      {}, ComboStyles::DropDown | ComboStyles::ReadOnly));
+                      {}, wxCB_DROPDOWN | wxCB_READONLY));
 
         sizer->Add(FontSize = new wxSpinCtrl(this, wxID_ANY, "", wxDefaultPosition,
                       wxDefaultSize, wxSP_ARROW_KEYS, 2, 100, 2, "wxSpinCtrl"));
 
-        topsizer->Add(sizer, 0, wxDirection::Left|wxDirection::Right|wxDirection::Top, 10);
+        topsizer->Add(sizer, 0, wxLEFT|wxRIGHT|wxTOP, 10);
 
         topsizer->Add(new wxStaticText(this, wxID_ANY, _("Preview:")),
-                        0, wxDirection::Left | wxDirection::Top, 10);
+                        0, wxLEFT | wxTOP, 10);
 
         topsizer->AddSpacer(5);
 
         topsizer->Add(TestWin = new wxHtmlWindow(this, wxID_ANY, wxDefaultPosition, wxSize(20, 150),
-                                                 wxHW_SCROLLBAR_AUTO|wxBorder::Theme),
-                        1, wxStretch::Expand | wxDirection::Left | wxDirection::Right, 10);
+                                                 wxHW_SCROLLBAR_AUTO|wxBORDER_THEME),
+                        1, wxEXPAND | wxLEFT | wxRIGHT, 10);
 
         wxBoxSizer *sizer2 = new wxBoxSizer(wxHORIZONTAL);
         wxButton *ok;
-        sizer2->Add(ok = new wxButton(this, wxID_OK), 0, wxDirection::All, 10);
+        sizer2->Add(ok = new wxButton(this, wxID_OK), 0, wxALL, 10);
         ok->SetDefault();
-        sizer2->Add(new wxButton(this, wxID_CANCEL), 0, wxDirection::All, 10);
-        topsizer->Add(sizer2, 0, wxAlignment::Right);
+        sizer2->Add(new wxButton(this, wxID_CANCEL), 0, wxALL, 10);
+        topsizer->Add(sizer2, 0, wxALIGN_RIGHT);
 
         SetSizer(topsizer);
         topsizer->Fit(this);

@@ -235,7 +235,7 @@ TEST_CASE("Bounding box tests.")
     SUBCASE("GradientFillLinear")
     {
         wxRect rect(16, 16, 30, 40);
-        m_gcdc->GradientFillLinear(rect, *wxWHITE, *wxBLACK, wxDirection::North);
+        m_gcdc->GradientFillLinear(rect, *wxWHITE, *wxBLACK, wxNORTH);
         AssertBox(m_gcdc.get(), 16, 16, 30, 40);
     }
 

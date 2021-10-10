@@ -39,19 +39,19 @@ WX_DEFINE_FLAGS( wxRadioBoxStyle )
 wxBEGIN_FLAGS( wxRadioBoxStyle )
     // new style border flags, we put them first to
     // use them for streaming out
-    wxFLAGS_MEMBER(wxBorder::Simple)
-    wxFLAGS_MEMBER(wxBorder::Sunken)
+    wxFLAGS_MEMBER(wxBORDER_SIMPLE)
+    wxFLAGS_MEMBER(wxBORDER_SUNKEN)
     wxFLAGS_MEMBER(wxBORDER_DOUBLE)
-    wxFLAGS_MEMBER(wxBorder::Raised)
-    wxFLAGS_MEMBER(wxBorder::Static)
-    wxFLAGS_MEMBER(wxBorder::None)
+    wxFLAGS_MEMBER(wxBORDER_RAISED)
+    wxFLAGS_MEMBER(wxBORDER_STATIC)
+    wxFLAGS_MEMBER(wxBORDER_NONE)
 
     // old style border flags
-    wxFLAGS_MEMBER(wxBorder::Simple)
-    wxFLAGS_MEMBER(wxBorder::Sunken)
+    wxFLAGS_MEMBER(wxSIMPLE_BORDER)
+    wxFLAGS_MEMBER(wxSUNKEN_BORDER)
     wxFLAGS_MEMBER(wxDOUBLE_BORDER)
-    wxFLAGS_MEMBER(wxBorder::Raised)
-    wxFLAGS_MEMBER(wxBorder::Static)
+    wxFLAGS_MEMBER(wxRAISED_BORDER)
+    wxFLAGS_MEMBER(wxSTATIC_BORDER)
     wxFLAGS_MEMBER(wxBORDER)
 
     // standard window styles
@@ -777,26 +777,26 @@ wxRadioBtnWndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
                 switch ( wParam )
                 {
                     case VK_UP:
-                        dir = wxDirection::Up;
+                        dir = wxUP;
                         break;
 
                     case VK_LEFT:
-                        dir = wxDirection::Left;
+                        dir = wxLEFT;
                         break;
 
                     case VK_DOWN:
-                        dir = wxDirection::Down;
+                        dir = wxDOWN;
                         break;
 
                     case VK_RIGHT:
-                        dir = wxDirection::Right;
+                        dir = wxRIGHT;
                         break;
 
                     default:
                         processed = false;
 
                         // just to suppress the compiler warning
-                        dir = wxDirection::All;
+                        dir = wxALL;
                 }
 
                 if ( processed )

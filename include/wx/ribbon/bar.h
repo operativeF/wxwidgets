@@ -190,7 +190,7 @@ protected:
     friend class wxRibbonPage;
 
     wxSize DoGetBestSize() const override;
-    wxBorder GetDefaultBorder() const override { return wxBorder::None; }
+    wxBorder GetDefaultBorder() const override { return wxBORDER_NONE; }
     wxRibbonPageTabInfo* HitTestTabs(wxPoint position, int* index = nullptr);
     void HitTestRibbonButton(const wxRect& rect, const wxPoint& position, bool &hover_flag);
 

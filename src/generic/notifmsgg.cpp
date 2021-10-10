@@ -115,7 +115,7 @@ wxEND_EVENT_TABLE()
 wxNotificationMessageWindow::wxNotificationMessageWindow(wxGenericNotificationMessageImpl* notificationImpl)
     : wxFrame(nullptr, wxID_ANY, _("Notice"),
                 wxDefaultPosition, wxDefaultSize,
-                wxBorder::None | wxFRAME_TOOL_WINDOW | wxSTAY_ON_TOP /* no caption, no border styles */),
+                wxBORDER_NONE | wxFRAME_TOOL_WINDOW | wxSTAY_ON_TOP /* no caption, no border styles */),
         m_timer(this),
         m_mouseActiveCount(0),
         m_notificationImpl(notificationImpl)
@@ -133,7 +133,7 @@ wxNotificationMessageWindow::wxNotificationMessageWindow(wxGenericNotificationMe
         (
         m_messagePanel,
         wxID_ANY,
-        wxArtProvider::GetMessageBoxIcon(wxDialogIconFlags::Information)
+        wxArtProvider::GetMessageBoxIcon(wxICON_INFORMATION)
         );
     m_messageBmp->Hide();
     PrepareNotificationControl(m_messageBmp);
@@ -149,19 +149,19 @@ wxNotificationMessageWindow::wxNotificationMessageWindow(wxGenericNotificationMe
     PrepareNotificationControl(m_messageTitle);
 
     m_messageText = new wxStaticText(m_messagePanel, wxID_ANY, wxString());
-    textSizer->Add(m_messageText, wxSizerFlags(0).Border(wxDirection::Left | wxDirection::Right | wxDirection::Bottom));
+    textSizer->Add(m_messageText, wxSizerFlags(0).Border(wxLEFT | wxRIGHT | wxBOTTOM));
     PrepareNotificationControl(m_messageText);
 
     msgSizer->Add(textSizer, wxSizerFlags(1).Center());
 
     // Add a single close button if no actions are specified
     m_closeBtn = wxBitmapButton::NewCloseButton(m_messagePanel, wxID_ANY);
-    msgSizer->Add(m_closeBtn, wxSizerFlags(0).Border(wxDirection::All, 3).Top());
+    msgSizer->Add(m_closeBtn, wxSizerFlags(0).Border(wxALL, 3).Top());
     m_closeBtn->Bind(wxEVT_BUTTON, &wxNotificationMessageWindow::OnCloseClicked, this);
     PrepareNotificationControl(m_closeBtn, false);
 
     wxSizer * const sizerTop = new wxBoxSizer(wxHORIZONTAL);
-    sizerTop->Add(m_messagePanel, wxSizerFlags().Border(wxDirection::All, FromDIP(1)));
+    sizerTop->Add(m_messagePanel, wxSizerFlags().Border(wxALL, FromDIP(1)));
     SetSizer(sizerTop);
 }
 
@@ -211,7 +211,7 @@ bool wxNotificationMessageWindow::AddAction(wxWindowID actionid, const std::stri
     wxButton* actionButton = new wxButton(m_messagePanel, actionid, label);
     actionButton->Bind(wxEVT_BUTTON, &wxNotificationMessageWindow::OnActionButtonClicked, this);
     PrepareNotificationControl(actionButton, false);
-    wxDirection borderDir = (m_buttonSizer->GetChildren().empty()) ? wxDirection{} : wxDirection::Top; // TODO: Is this even valid?
+    int borderDir = (m_buttonSizer->GetChildren().empty()) ? 0 : wxTOP;
     m_buttonSizer->Add(actionButton, wxSizerFlags(0).Border(borderDir).Expand());
 
     return true;
@@ -474,7 +474,7 @@ void wxGenericNotificationMessageImpl::SetParent(wxWindow *WXUNUSED(parent))
 
 }
 
-void wxGenericNotificationMessageImpl::SetFlags(wxDialogIconFlags flags)
+void wxGenericNotificationMessageImpl::SetFlags(unsigned int flags)
 {
     m_window->SetMessageIcon( wxArtProvider::GetMessageBoxIcon(flags) );
 }

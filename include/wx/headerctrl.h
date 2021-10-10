@@ -225,7 +225,7 @@ protected:
 
 protected:
     // this window doesn't look nice with the border so don't use it by default
-    wxBorder GetDefaultBorder() const override { return wxBorder::None; }
+    wxBorder GetDefaultBorder() const override { return wxBORDER_NONE; }
 
 private:
     // methods implementing our public API and defined in platform-specific

@@ -51,7 +51,7 @@ void wxGenericRichMessageDialog::AddMessageDialogCheckBox(wxSizer *sizer)
         m_checkBox = new wxCheckBox(this, wxID_ANY, m_checkBoxText);
         m_checkBox->SetValue(m_checkBoxValue);
 
-        sizer->Add(m_checkBox, wxSizerFlags().Left().Border(wxDirection::Left|wxDirection::Top, 10));
+        sizer->Add(m_checkBox, wxSizerFlags().Left().Border(wxLEFT|wxTOP, 10));
     }
 }
 
@@ -71,7 +71,7 @@ void wxGenericRichMessageDialog::AddMessageDialogDetails(wxSizer *sizer)
         windowPane->SetSizer( sizerPane );
 
         sizerDetails->Add( m_detailsPane, wxSizerFlags().Expand() );
-        sizer->Add( sizerDetails, 0, wxDirection::Top|wxDirection::Left|wxDirection::Right | wxAlignment::Left, 10 );
+        sizer->Add( sizerDetails, 0, wxTOP|wxLEFT|wxRIGHT | wxALIGN_LEFT, 10 );
     }
 
     if ( !m_footerText.empty() )
@@ -87,7 +87,7 @@ void wxGenericRichMessageDialog::AddMessageDialogDetails(wxSizer *sizer)
                 wxArtProvider::GetIcon(wxArtProvider::GetMessageBoxIconId(m_footerIcon),
                 wxART_MESSAGE_BOX, iconSize));
             footerSizer->Add( footerIcon,
-                wxSizerFlags().Border(wxDirection::Left|wxDirection::Right).CenterVertical() );
+                wxSizerFlags().Border(wxLEFT|wxRIGHT).CenterVertical() );
         }
         footerSizer->Add( new wxStaticText(this, wxID_ANY, m_footerText),
             wxSizerFlags().CenterVertical() );

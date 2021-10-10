@@ -580,7 +580,7 @@ wxTimePickerCtrlGeneric::Create(wxWindow *parent,
     // The text control we use already has a border, so we don't need one
     // ourselves.
     style &= ~wxBORDER_MASK;
-    style |= wxBorder::None;
+    style |= wxBORDER_NONE;
 
     if ( !Base::Create(parent, id, pos, size, style, validator, name) )
         return false;

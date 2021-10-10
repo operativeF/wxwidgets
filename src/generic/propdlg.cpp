@@ -66,7 +66,7 @@ bool wxPropertySheetDialog::Create(wxWindow* parent, wxWindowID id, const std::s
     // This gives more space around the edges
     m_innerSizer = new wxBoxSizer( wxVERTICAL );
 
-    topSizer->Add(m_innerSizer, 1, wxStretch::Grow|wxDirection::All, m_sheetOuterBorder);
+    topSizer->Add(m_innerSizer, 1, wxGROW|wxALL, m_sheetOuterBorder);
 
     m_bookCtrl = CreateBookCtrl();
     AddBookCtrl(m_innerSizer);
@@ -91,7 +91,7 @@ void wxPropertySheetDialog::CreateButtons(unsigned int flags)
     wxSizer *buttonSizer = CreateButtonSizer(flags);
     if( buttonSizer )
     {
-        m_innerSizer->Add( buttonSizer, wxSizerFlags().Expand().Border(wxDirection::All, 2) );
+        m_innerSizer->Add( buttonSizer, wxSizerFlags().Expand().Border(wxALL, 2) );
         m_innerSizer->AddSpacer(2);
     }
 }
@@ -140,7 +140,7 @@ wxBookCtrlBase* wxPropertySheetDialog::CreateBookCtrl()
 // Adds the book control to the inner sizer.
 void wxPropertySheetDialog::AddBookCtrl(wxSizer* sizer)
 {
-    sizer->Add( m_bookCtrl, wxSizerFlags(1).Expand().Border(wxDirection::All, m_sheetInnerBorder) );
+    sizer->Add( m_bookCtrl, wxSizerFlags(1).Expand().Border(wxALL, m_sheetInnerBorder) );
 }
 
 // Resize dialog if necessary

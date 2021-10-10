@@ -24,7 +24,7 @@ wxCheckBoxXmlHandler::wxCheckBoxXmlHandler()
     XRC_ADD_STYLE(wxCHK_2STATE);
     XRC_ADD_STYLE(wxCHK_3STATE);
     XRC_ADD_STYLE(wxCHK_ALLOW_3RD_STATE_FOR_USER);
-    XRC_ADD_STYLE(wxAlignment::Right);
+    XRC_ADD_STYLE(wxALIGN_RIGHT);
     AddWindowStyles();
 }
 

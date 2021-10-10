@@ -27,9 +27,6 @@
 #include "wx/region.h"
 #include "wx/affinematrix2d.h"
 
-#include "wx/alignmentflags.h"
-#include "wx/directionflags.h"
-
 #include "wx/geometry/point.h"
 #include "wx/geometry/rect.h"
 #include "wx/geometry/size.h"
@@ -454,7 +451,7 @@ public:
     virtual void DoGradientFillLinear(const wxRect& rect,
                                       const wxColour& initialColour,
                                       const wxColour& destColour,
-                                      wxDirection nDirection = wxDirection::East);
+                                      wxDirection nDirection = wxEAST);
 
     virtual void DoGradientFillConcentric(const wxRect& rect,
                                         const wxColour& initialColour,
@@ -999,7 +996,7 @@ public:
     void GradientFillLinear(const wxRect& rect,
                             const wxColour& initialColour,
                             const wxColour& destColour,
-                            wxDirection nDirection = wxDirection::East)
+                            wxDirection nDirection = wxEAST)
         { m_pimpl->DoGradientFillLinear(rect, initialColour, destColour, nDirection); }
 
     bool GetPixel(wxCoord x, wxCoord y, wxColour *col) const
@@ -1112,12 +1109,12 @@ public:
     void DrawLabel(std::string_view text,
                            const wxBitmap& image,
                            const wxRect& rect,
-                           AlignmentFlags alignment = AlignmentFlags{wxAlignment::Left, wxAlignment::Top},
+                           unsigned int alignment = wxALIGN_LEFT | wxALIGN_TOP,
                            int indexAccel = -1,
                            wxRect *rectBounding = nullptr);
 
     void DrawLabel(std::string_view text, const wxRect& rect,
-                   AlignmentFlags alignment = AlignmentFlags{wxAlignment::Left, wxAlignment::Top},
+                   unsigned int alignment = wxALIGN_LEFT | wxALIGN_TOP,
                    int indexAccel = -1)
         { DrawLabel(text, wxNullBitmap, rect, alignment, indexAccel); }
 

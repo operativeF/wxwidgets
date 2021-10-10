@@ -492,7 +492,7 @@ void wxPropertyGridManager::Init1()
 // -----------------------------------------------------------------------
 
 // These flags are always used in wxPropertyGrid integrated in wxPropertyGridManager.
-#define wxPG_MAN_PROPGRID_FORCED_FLAGS (  wxBorder::Theme | \
+#define wxPG_MAN_PROPGRID_FORCED_FLAGS (  wxBORDER_THEME | \
                                           wxCLIP_CHILDREN)
 
 // Which flags can be passed to underlying wxPropertyGrid.
@@ -542,11 +542,11 @@ void wxPropertyGridManager::Init2( int style )
    long pgManExStyle = 0;
    if ((style & wxPG_NO_INTERNAL_BORDER) == 0)
    {
-       propGridFlags |= wxBorder::Theme;
+       propGridFlags |= wxBORDER_THEME;
    }
    else
    {
-       propGridFlags |= wxBorder::None;
+       propGridFlags |= wxBORDER_NONE;
        pgManExStyle |= wxPG_EX_TOOLBAR_SEPARATOR;
    }
 
@@ -1644,7 +1644,7 @@ void wxPropertyGridManager::RecreateControls()
                                                  "",
                                                  wxDefaultPosition,
                                                  wxDefaultSize,
-                                                 wxAlignment::Left|wxST_NO_AUTORESIZE);
+                                                 wxALIGN_LEFT|wxST_NO_AUTORESIZE);
             m_pTxtHelpCaption->SetFont(m_pPropGrid->GetCaptionFont());
             m_pTxtHelpCaption->SetCursor( *wxSTANDARD_CURSOR );
         }
@@ -1655,7 +1655,7 @@ void wxPropertyGridManager::RecreateControls()
                                                  "",
                                                  wxDefaultPosition,
                                                  wxDefaultSize,
-                                                 wxAlignment::Left|wxST_NO_AUTORESIZE);
+                                                 wxALIGN_LEFT|wxST_NO_AUTORESIZE);
             m_pTxtHelpContent->SetCursor( *wxSTANDARD_CURSOR );
         }
 

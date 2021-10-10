@@ -142,7 +142,7 @@ int wxBitmapComboBox::DoInsertItems(const wxArrayStringsAdapter & items,
     const unsigned int numItems = items.GetCount();
     const unsigned int countNew = GetCount() + numItems;
 
-    wxASSERT( numItems == 1 || !HasFlag(ComboStyles::Sort) );  // Sanity check
+    wxASSERT( numItems == 1 || !HasFlag(wxCB_SORT) );  // Sanity check
 
     m_bitmaps.Alloc(countNew);
 
@@ -162,7 +162,7 @@ int wxBitmapComboBox::DoInsertItems(const wxArrayStringsAdapter & items,
     else if ( ((unsigned int)index) != pos )
     {
         // Move pre-inserted empty bitmap into correct position
-        // (usually happens when combo box has ComboStyles::Sort style)
+        // (usually happens when combo box has wxCB_SORT style)
         wxBitmap* bmp = static_cast<wxBitmap*>(m_bitmaps[pos]);
         m_bitmaps.RemoveAt(pos);
         m_bitmaps.Insert(bmp, index);
@@ -258,7 +258,7 @@ wxSize wxBitmapComboBox::DoGetBestSize() const
 {
     wxSize sz = wxOwnerDrawnComboBox::DoGetBestSize();
 
-    if ( GetComboStyles().is_set(ComboStyles::ReadOnly) )
+    if ( HasFlag(wxCB_READONLY) )
     {
         // Scale control to match height of highest image.
         int h2 = m_usedImgSize.y + IMAGE_SPACING_CTRL_VERTICAL;
@@ -319,7 +319,7 @@ void wxBitmapComboBox::OnDrawItem(wxDC& dc,
     if ( flags & wxODCB_PAINTING_CONTROL )
     {
         text = GetValue();
-        if ( !HasFlag(ComboStyles::ReadOnly) )
+        if ( !HasFlag(wxCB_READONLY) )
             text.clear();
     }
     else

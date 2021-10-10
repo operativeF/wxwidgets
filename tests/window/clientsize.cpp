@@ -41,7 +41,7 @@ TEST_CASE("wxWindow::MinClientSize")
 {
     std::unique_ptr<wxWindow> w(new wxWindow(wxTheApp->GetTopWindow(), wxID_ANY,
                                          wxDefaultPosition, wxDefaultSize,
-                                         wxBorder::Theme));
+                                         wxBORDER_THEME));
     w->SetSize(wxSize(1,1));
     const wxSize szw = w->GetClientSize();
     CHECK(szw.GetWidth() >= 0);

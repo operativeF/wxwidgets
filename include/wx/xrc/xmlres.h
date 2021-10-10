@@ -479,8 +479,6 @@ private:
 class WXDLLIMPEXP_XRC wxXmlResourceHandlerImpl : public wxXmlResourceHandlerImplBase
 {
 public:
-    using enum wxDirection;
-
     // Constructor.
     wxXmlResourceHandlerImpl(wxXmlResourceHandler *handler);
 
@@ -573,7 +571,7 @@ public:
     wxSize GetPairInts(const wxString& param) override;
 
     // Gets a direction, complains if the value is invalid.
-    wxDirection GetDirection(const wxString& param, wxDirection dirDefault = Left) override;
+    wxDirection GetDirection(const wxString& param, wxDirection dirDefault = wxLEFT) override;
 
     // Gets a bitmap.
     wxBitmap GetBitmap(const wxString& param = wxT("bitmap"),

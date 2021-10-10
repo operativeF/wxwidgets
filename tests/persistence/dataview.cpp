@@ -55,12 +55,12 @@ static wxDataViewCtrl* CreatePersistenceTestDVC()
 
     // Add some columns to the DVC.
     list->AppendTextColumn(DVC_COL "1",
-                                wxDATAVIEW_CELL_INERT, -1, wxAlignment::Left,
+                                wxDATAVIEW_CELL_INERT, -1, wxALIGN_LEFT,
                                 wxDATAVIEW_COL_RESIZABLE |
                                 wxDATAVIEW_COL_REORDERABLE |
                                 wxDATAVIEW_COL_SORTABLE);
     list->AppendTextColumn(DVC_COL "2",
-                                wxDATAVIEW_CELL_INERT, -1, wxAlignment::Left,
+                                wxDATAVIEW_CELL_INERT, -1, wxALIGN_LEFT,
                                 wxDATAVIEW_COL_RESIZABLE |
                                 wxDATAVIEW_COL_REORDERABLE |
                                 wxDATAVIEW_COL_SORTABLE);

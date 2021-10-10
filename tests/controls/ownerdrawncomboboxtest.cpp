@@ -76,7 +76,7 @@ TEST_CASE_FIXTURE(OwnerDrawnComboBoxTest, "Owner-drawn combo box test")
                                            wxID_ANY, "",
                                            wxDefaultPosition, wxDefaultSize,
                                            0, nullptr,
-                                           ComboStyles::Sort);
+                                           wxCB_SORT);
 
         m_container->Append("aaa");
         m_container->Append("Aaa");
@@ -105,7 +105,7 @@ TEST_CASE_FIXTURE(OwnerDrawnComboBoxTest, "Owner-drawn combo box test")
                                                              wxID_ANY, "",
                                                              wxDefaultPosition, wxDefaultSize,
                                                              testitems,
-                                                             ComboStyles::ReadOnly);
+                                                             wxCB_READONLY);
 
         m_container->SetValue("item 1");
 

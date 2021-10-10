@@ -613,7 +613,7 @@ void wxFileListCtrl::MakeDir()
     wxLogNull log;
     if (!wxMkdir(path))
     {
-        wxMessageDialog dialog(this, _("Operation not permitted."), _("Error"), DialogFlags{wxDialogFlags::OK, wxDialogIconFlags::Error} );
+        wxMessageDialog dialog(this, _("Operation not permitted."), _("Error"), wxOK | wxICON_ERROR );
         dialog.ShowModal();
         return;
     }
@@ -727,7 +727,7 @@ void wxFileListCtrl::OnListEndLabelEdit( wxListEvent &event )
         (event.GetLabel() == wxT("..")) ||
         (event.GetLabel().find( wxFILE_SEP_PATH ) != std::string::npos))
     {
-        wxMessageDialog dialog(this, _("Illegal directory name."), _("Error"), DialogFlags{wxDialogFlags::OK, wxDialogIconFlags::Error} );
+        wxMessageDialog dialog(this, _("Illegal directory name."), _("Error"), wxOK | wxICON_ERROR );
         dialog.ShowModal();
         event.Veto();
         return;
@@ -741,7 +741,7 @@ void wxFileListCtrl::OnListEndLabelEdit( wxListEvent &event )
 
     if (wxFileExists(new_name))
     {
-        wxMessageDialog dialog(this, _("File name exists already."), _("Error"), DialogFlags{wxDialogFlags::OK, wxDialogIconFlags::Error} );
+        wxMessageDialog dialog(this, _("File name exists already."), _("Error"), wxOK | wxICON_ERROR );
         dialog.ShowModal();
         event.Veto();
     }
@@ -757,7 +757,7 @@ void wxFileListCtrl::OnListEndLabelEdit( wxListEvent &event )
     }
     else
     {
-        wxMessageDialog dialog(this, _("Operation not permitted."), _("Error"), DialogFlags{wxDialogFlags::OK, wxDialogIconFlags::Error} );
+        wxMessageDialog dialog(this, _("Operation not permitted."), _("Error"), wxOK | wxICON_ERROR );
         dialog.ShowModal();
         event.Veto();
     }
@@ -912,7 +912,7 @@ bool wxGenericFileCtrl::Create( wxWindow *parent,
     wxBoxSizer *staticsizer = new wxBoxSizer( wxHORIZONTAL );
     if ( is_pda )
         staticsizer->Add( new wxStaticText( this, wxID_ANY, _( "Current directory:" ) ),
-                          wxSizerFlags().DoubleBorder(wxDirection::Right) );
+                          wxSizerFlags().DoubleBorder(wxRIGHT) );
     m_static = new wxStaticText( this, wxID_ANY, m_dir );
     staticsizer->Add( m_static, 1 );
     mainsizer->Add( staticsizer, wxSizerFlags().Expand().Border());
@@ -921,7 +921,7 @@ bool wxGenericFileCtrl::Create( wxWindow *parent,
     if ( !( m_style & wxFC_MULTIPLE ) )
         style2 |= wxLC_SINGLE_SEL;
 
-    style2 |= wxBorder::Sunken;
+    style2 |= wxSUNKEN_BORDER;
 
     m_list = new wxFileListCtrl( this, ID_FILELIST_CTRL,
                                  wxEmptyString, false,
@@ -955,7 +955,7 @@ bool wxGenericFileCtrl::Create( wxWindow *parent,
         if ( !( m_style & wxFC_NOSHOWHIDDEN ) )
         {
             m_check = new wxCheckBox( this, ID_CHECK, _( "Show &hidden files" ) );
-            choicesizer->Add( m_check, wxSizerFlags().Centre().DoubleBorder(wxDirection::Left) );
+            choicesizer->Add( m_check, wxSizerFlags().Centre().DoubleBorder(wxLEFT) );
         }
 
         mainsizer->Add( choicesizer, wxSizerFlags().Expand().Border() );
@@ -1335,7 +1335,7 @@ void wxGenericFileCtrl::HandleAction( const wxString &fn )
             if ( filename.Find( wxFILE_SEP_PATH ) != wxNOT_FOUND )
             {
                 wxMessageBox( _( "Illegal file specification." ),
-                              _( "Error" ), DialogFlags{wxDialogFlags::OK, wxDialogIconFlags::Error}, this );
+                              _( "Error" ), wxOK | wxICON_ERROR, this );
                 return;
             }
             m_list->SetWild( filename );
@@ -1367,7 +1367,7 @@ void wxGenericFileCtrl::HandleAction( const wxString &fn )
     if ( want_dir )
     {
         wxMessageBox( _( "Directory doesn't exist." ), _( "Error" ),
-                      DialogFlags{wxDialogFlags::OK, wxDialogIconFlags::Error}, this );
+                      wxOK | wxICON_ERROR, this );
         return;
     }
 

@@ -78,7 +78,7 @@ public:
     // Set the small icon to show: either one of the standard information/
     // warning/error ones (the question icon doesn't make sense for a tooltip)
     // or a custom icon.
-    void SetIcon(wxDialogIconFlags icon = wxDialogIconFlags::Information);
+    void SetIcon(int icon = wxICON_INFORMATION);
     void SetIcon(const wxIcon& icon);
 
     // Set timeout after which the tooltip should disappear, in milliseconds.

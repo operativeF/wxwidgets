@@ -34,19 +34,19 @@ wxDEFINE_FLAGS( wxComboBoxStyle )
 wxBEGIN_FLAGS( wxComboBoxStyle )
 // new style border flags, we put them first to
 // use them for streaming out
-wxFLAGS_MEMBER(wxBorder::Simple)
-wxFLAGS_MEMBER(wxBorder::Sunken)
+wxFLAGS_MEMBER(wxBORDER_SIMPLE)
+wxFLAGS_MEMBER(wxBORDER_SUNKEN)
 wxFLAGS_MEMBER(wxBORDER_DOUBLE)
-wxFLAGS_MEMBER(wxBorder::Raised)
-wxFLAGS_MEMBER(wxBorder::Static)
-wxFLAGS_MEMBER(wxBorder::None)
+wxFLAGS_MEMBER(wxBORDER_RAISED)
+wxFLAGS_MEMBER(wxBORDER_STATIC)
+wxFLAGS_MEMBER(wxBORDER_NONE)
 
 // old style border flags
-wxFLAGS_MEMBER(wxBorder::Simple)
-wxFLAGS_MEMBER(wxBorder::Sunken)
+wxFLAGS_MEMBER(wxSIMPLE_BORDER)
+wxFLAGS_MEMBER(wxSUNKEN_BORDER)
 wxFLAGS_MEMBER(wxDOUBLE_BORDER)
-wxFLAGS_MEMBER(wxBorder::Raised)
-wxFLAGS_MEMBER(wxBorder::Static)
+wxFLAGS_MEMBER(wxRAISED_BORDER)
+wxFLAGS_MEMBER(wxSTATIC_BORDER)
 wxFLAGS_MEMBER(wxBORDER)
 
 // standard window styles
@@ -59,10 +59,10 @@ wxFLAGS_MEMBER(wxALWAYS_SHOW_SB )
 wxFLAGS_MEMBER(wxVSCROLL)
 wxFLAGS_MEMBER(wxHSCROLL)
 
-wxFLAGS_MEMBER(ComboStyles::Simple)
-wxFLAGS_MEMBER(ComboStyles::Sort)
+wxFLAGS_MEMBER(wxCB_SIMPLE)
+wxFLAGS_MEMBER(wxCB_SORT)
 wxFLAGS_MEMBER(wxCB_READONLY)
-wxFLAGS_MEMBER(ComboStyles::DropDown)
+wxFLAGS_MEMBER(wxCB_DROPDOWN)
 
 wxEND_FLAGS( wxComboBoxStyle )
 
@@ -615,7 +615,7 @@ wxSize wxComboPopup::GetAdjustedSize( int minWidth,
 void wxComboPopup::DefaultPaintComboControl( wxComboCtrlBase* combo,
                                              wxDC& dc, const wxRect& rect )
 {
-    if ( combo->GetComboStyles() & ComboStyles::ReadOnly ) // ie. no textctrl
+    if ( combo->wxGetWindowStyle() & wxCB_READONLY ) // ie. no textctrl
     {
         combo->PrepareBackground(dc,rect,0);
 
@@ -1005,7 +1005,7 @@ void wxComboCtrlBase::InstallInputHandlers()
 void
 wxComboCtrlBase::CreateTextCtrl(int style)
 {
-    if ( !(m_comboFlags & ComboStyles::ReadOnly) )
+    if ( !(m_windowStyle & wxCB_READONLY) )
     {
         if ( m_text )
             m_text->Destroy();
@@ -1209,12 +1209,12 @@ void wxComboCtrlBase::CalculateAreas( int btnWidth )
     m_btnSize.x = butWidth;
     m_btnSize.y = butHeight;
 
-    m_btnArea.x = ( m_btnSide==wxDirection::Right ? sz.x - butAreaWid - btnBorder : btnBorder );
+    m_btnArea.x = ( m_btnSide==wxRIGHT ? sz.x - butAreaWid - btnBorder : btnBorder );
     m_btnArea.y = btnBorder + FOCUS_RING;
     m_btnArea.width = butAreaWid;
     m_btnArea.height = sz.y - ((btnBorder+FOCUS_RING)*2);
 
-    m_tcArea.x = ( m_btnSide==wxDirection::Right ? 0 : butAreaWid ) + customBorder;
+    m_tcArea.x = ( m_btnSide==wxRIGHT ? 0 : butAreaWid ) + customBorder;
     m_tcArea.y = customBorder + FOCUS_RING;
     m_tcArea.width = sz.x - butAreaWid - (customBorder*2) - FOCUS_RING;
     m_tcArea.height = sz.y - ((customBorder+FOCUS_RING)*2);
@@ -1236,7 +1236,7 @@ void wxComboCtrlBase::PositionTextCtrl( int textCtrlXAdjust, int textCtrlYAdjust
     wxSize sz = GetClientSize();
 
     int customBorder = m_widthCustomBorder;
-    if ( (m_text->GetWindowStyleFlag() & wxBORDER_MASK) == wxBorder::None )
+    if ( (m_text->GetWindowStyleFlag() & wxBORDER_MASK) == wxNO_BORDER )
     {
         int x;
 
@@ -1355,9 +1355,9 @@ wxSize wxComboCtrlBase::DoGetSizeFromTextSize(int xlen, int ylen) const
 /*
     // Add border
     int border = m_windowStyle & wxBORDER_MASK;
-    if ( border == wxBorder::Simple )
+    if ( border == wxSIMPLE_BORDER )
         fhei += 2;
-    else if ( border == wxBorder::None )
+    else if ( border == wxNO_BORDER )
         fhei += (m_widthCustomBorder*2);
     else
         // Sunken etc.
@@ -1883,7 +1883,7 @@ void wxComboCtrlBase::HandleNormalMouseEvent( wxMouseEvent& event )
     const auto evtType = event.GetEventType();
 
     if ( (evtType == wxEVT_LEFT_DOWN || evtType == wxEVT_LEFT_DCLICK) &&
-         (m_comboFlags & CombStyles::ReadOnly) )
+         (m_windowStyle & wxCB_READONLY) )
     {
         if ( GetPopupWindowState() >= Animating )
         {
@@ -1976,7 +1976,7 @@ void wxComboCtrlBase::OnKeyEvent(wxKeyEvent& event)
 
         const int keycode = event.GetKeyCode();
 
-        if ( (m_comboFlags & ComboStyles::ReadOnly) ||
+        if ( (wxGetWindowStyle() & wxCB_READONLY) ||
              (keycode != WXK_RIGHT && keycode != WXK_LEFT) )
         {
             popupInterface->OnComboKeyEvent(event);
@@ -2063,9 +2063,9 @@ void wxComboCtrlBase::CreatePopup()
         if ( m_iFlags & wxCC_IFLAG_USE_ALT_POPUP )
         {
         #if !USES_GENERICTLW
-            m_winPopup = new wxComboPopupWindowBase2( this, wxBorder::None );
+            m_winPopup = new wxComboPopupWindowBase2( this, wxNO_BORDER );
         #else
-            int tlwFlags = wxBorder::None;
+            int tlwFlags = wxNO_BORDER;
           #ifdef wxCC_GENERIC_TLW_IS_FRAME
             tlwFlags |= wxFRAME_NO_TASKBAR;
           #endif
@@ -2085,7 +2085,7 @@ void wxComboCtrlBase::CreatePopup()
         else
 #endif // wxComboPopupWindowBase2
         {
-            m_winPopup = new wxComboPopupWindow( this, wxBorder::None );
+            m_winPopup = new wxComboPopupWindow( this, wxNO_BORDER );
             m_popupWinType = PRIMARY_POPUP_TYPE;
         }
         m_popupWinEvtHandler = new wxComboPopupWindowEvtHandler(this);
@@ -2285,10 +2285,10 @@ void wxComboCtrlBase::ShowPopup()
     int popupX;
     int popupY = scrPos.y + ctrlSz.y;
 
-    // Default anchor is wxDirection::Left
+    // Default anchor is wxLEFT
     int anchorSide = m_anchorSide;
     if ( !anchorSide )
-        anchorSide = wxDirection::Left;
+        anchorSide = wxLEFT;
 
     const int rightX = scrPos.x + ctrlSz.x + m_extRight - szp.x;
     int leftX = scrPos.x - m_extLeft;
@@ -2300,12 +2300,12 @@ void wxComboCtrlBase::ShowPopup()
 
     // If there is not enough horizontal space, anchor on the other side.
     // If there is no space even then, place the popup at x 0.
-    if ( anchorSide == wxDirection::Right )
+    if ( anchorSide == wxRIGHT )
     {
         if ( rightX < 0 )
         {
             if ( (leftX+szp.x) < screenWidth )
-                anchorSide = wxDirection::Left;
+                anchorSide = wxLEFT;
             else
                 anchorSide = 0;
         }
@@ -2315,16 +2315,16 @@ void wxComboCtrlBase::ShowPopup()
         if ( (leftX+szp.x) >= screenWidth )
         {
             if ( rightX >= 0 )
-                anchorSide = wxDirection::Right;
+                anchorSide = wxRIGHT;
             else
                 anchorSide = 0;
         }
     }
 
     // Select x coordinate according to the anchor side
-    if ( anchorSide == wxDirection::Right )
+    if ( anchorSide == wxRIGHT )
         popupX = rightX;
-    else if ( anchorSide == wxDirection::Left )
+    else if ( anchorSide == wxLEFT )
         popupX = leftX;
     else
         popupX = 0;
@@ -2675,7 +2675,7 @@ void wxComboCtrlBase::OnSetValue(const std::string& value)
 
         // Conform to wxComboBox behaviour: read-only control can only accept
         // valid list items and empty string
-        if ( m_popupInterface && m_comboFlags.is_set(ComboStyles::ReadOnly) && value.length() )
+        if ( m_popupInterface && HasFlag(wxCB_READONLY) && value.length() )
         {
             found = m_popupInterface->FindItem(value,
                                                &trueValue);

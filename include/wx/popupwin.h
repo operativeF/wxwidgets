@@ -45,7 +45,7 @@ public:
     // create the popup window
     //
     // style may only contain border flags
-    [[maybe_unused]] bool Create(wxWindow *parent, unsigned int style = wxBorder::None);
+    [[maybe_unused]] bool Create(wxWindow *parent, unsigned int style = wxBORDER_NONE);
 
     // move the popup window to the right position, i.e. such that it is
     // entirely visible
@@ -133,7 +133,7 @@ class WXDLLIMPEXP_CORE wxPopupTransientWindow : public wxPopupTransientWindowBas
 {
 public:
     wxPopupTransientWindow() = default;
-    wxPopupTransientWindow(wxWindow *parent, int style = wxBorder::None)
+    wxPopupTransientWindow(wxWindow *parent, int style = wxBORDER_NONE)
         { Create(parent, style); }
 
     wxPopupTransientWindow(const wxPopupTransientWindow&) = delete;
@@ -168,7 +168,7 @@ class WXDLLIMPEXP_CORE wxPopupTransientWindow : public wxPopupTransientWindowBas
 {
 public:
     wxPopupTransientWindow() { Init(); }
-    wxPopupTransientWindow(wxWindow *parent, int style = wxBorder::None);
+    wxPopupTransientWindow(wxWindow *parent, int style = wxBORDER_NONE);
 
     ~wxPopupTransientWindow();
 

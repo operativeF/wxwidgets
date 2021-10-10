@@ -88,7 +88,7 @@ TEST_CASE_FIXTURE(wxComboBoxTest, "Combo box test")
                                                    wxID_ANY, "",
                                                    wxDefaultPosition, wxDefaultSize,
                                                    std::vector<std::string>{},
-                                                   ComboStyles::Sort);
+                                                   wxCB_SORT);
 
         m_container->Append("aaa");
         m_container->Append("Aaa");
@@ -120,7 +120,7 @@ TEST_CASE_FIXTURE(wxComboBoxTest, "Combo box test")
         m_container = std::make_unique<wxComboBox>(wxTheApp->GetTopWindow(),
                                                    wxID_ANY, "",
                                                    wxDefaultPosition, wxDefaultSize,
-                                                   testitems, ComboStyles::ReadOnly);
+                                                   testitems, wxCB_READONLY);
 
         m_container->SetValue("item 1");
 

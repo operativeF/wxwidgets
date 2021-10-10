@@ -62,13 +62,13 @@ bool wxToolbook::Create(wxWindow *parent,
 
     // no border for this control
     style &= ~wxBORDER_MASK;
-    style |= wxBorder::None;
+    style |= wxBORDER_NONE;
 
     if ( !wxControl::Create(parent, id, pos, size, style,
                             wxDefaultValidator, name) )
         return false;
 
-    int tbFlags = wxTB_TEXT | wxTB_FLAT | wxBorder::None;
+    int tbFlags = wxTB_TEXT | wxTB_FLAT | wxBORDER_NONE;
     if ( (style & (wxBK_LEFT | wxBK_RIGHT)) != 0 )
         tbFlags |= wxTB_VERTICAL;
     else

@@ -260,12 +260,12 @@ wxRearrangeCtrl::Create(wxWindow *parent,
 
     // arrange them in a sizer
     wxSizer * const sizerBtns = new wxBoxSizer(wxVERTICAL);
-    sizerBtns->Add(btnUp, wxSizerFlags().Centre().Border(wxDirection::Bottom));
-    sizerBtns->Add(btnDown, wxSizerFlags().Centre().Border(wxDirection::Top));
+    sizerBtns->Add(btnUp, wxSizerFlags().Centre().Border(wxBOTTOM));
+    sizerBtns->Add(btnDown, wxSizerFlags().Centre().Border(wxTOP));
 
     wxSizer * const sizerTop = new wxBoxSizer(wxHORIZONTAL);
-    sizerTop->Add(m_list, wxSizerFlags(1).Expand().Border(wxDirection::Right));
-    sizerTop->Add(sizerBtns, wxSizerFlags(0).Centre().Border(wxDirection::Left));
+    sizerTop->Add(m_list, wxSizerFlags(1).Expand().Border(wxRIGHT));
+    sizerTop->Add(sizerBtns, wxSizerFlags(0).Centre().Border(wxLEFT));
     SetSizer(sizerTop);
 
     m_list->SetFocus();
@@ -339,7 +339,7 @@ bool wxRearrangeDialog::Create(wxWindow *parent,
 
     sizerTop->Add(m_ctrl,
                   wxSizerFlags(1).Expand().Border());
-    sizerTop->Add(CreateSeparatedButtonSizer(DialogFlags{wxDialogFlags::OK, wxDialogFlags::Cancel}),
+    sizerTop->Add(CreateSeparatedButtonSizer(wxOK | wxCANCEL),
                   wxSizerFlags().Expand().Border());
     SetSizerAndFit(sizerTop);
 

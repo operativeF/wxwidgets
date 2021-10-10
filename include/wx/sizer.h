@@ -11,9 +11,8 @@
 #ifndef __WXSIZER_H__
 #define __WXSIZER_H__
 
-#include "wx/bitflags.h"
-#include "wx/alignmentflags.h"
-#include "wx/directionflags.h"
+#include "wx/defs.h"
+
 #include "wx/geometry/rect.h"
 
 #include "wx/window.h"
@@ -38,30 +37,28 @@ class WXDLLIMPEXP_FWD_CORE wxSizer;
 // wxSizerFlags: flags used for an item in the sizer
 // ----------------------------------------------------------------------------
 
-enum class wxStretch
+enum wxStretch
 {
-    None,
-    Shrink,
-    Grow,
-    Expand = Grow,
-    Shaped,
-    Tile, /* wxSHAPED | wxFIXED_MINSIZE */
-    _max_size
+    wxSTRETCH_NOT             = 0x0000,
+    wxSHRINK                  = 0x1000,
+    wxGROW                    = 0x2000,
+    wxEXPAND                  = wxGROW,
+    wxSHAPED                  = 0x4000,
+    wxTILE                    = 0xc000, /* wxSHAPED | wxFIXED_MINSIZE */
+
+    /*  a mask to extract stretch from the combination of flags */
+    wxSTRETCH_MASK            = 0x7000 /* sans wxTILE */
 };
 
 /* misc. flags for wxSizer items */
-enum class wxSizerFlagBits
+enum wxSizerFlagBits
 {
-    FixedMinSize,
-    ReserveSpaceEvenIfHidden,
-    _max_size
+    wxFIXED_MINSIZE                = 0x8000,
+    wxRESERVE_SPACE_EVEN_IF_HIDDEN = 0x0002,
+
+    /*  a mask to extract wxSizerFlagBits from combination of flags */
+    wxSIZER_FLAG_BITS_MASK         = 0x8002
 };
-
-
-using DirectionFlags  = InclBitfield<wxDirection>;
-using StretchFlags    = InclBitfield<wxStretch>;
-
-using SizerFlags   = CombineBitfield<wxAlignment, wxStretch, wxDirection, wxSizerFlagBits>;
 
 class WXDLLIMPEXP_CORE wxSizerFlags
 {
@@ -70,6 +67,7 @@ public:
     // default)
     wxSizerFlags(int proportion = 0) : m_proportion(proportion)
     {
+        m_flags = 0;
         m_borderInPixels = 0;
     }
 
@@ -84,61 +82,64 @@ public:
 
     wxSizerFlags& Expand()
     {
-        m_flags |= wxStretch::Expand;
+        m_flags |= wxEXPAND;
         return *this;
     }
 
     // notice that Align() replaces the current alignment flags, use specific
     // methods below such as Top(), Left() &c if you want to set just the
     // vertical or horizontal alignment
-    wxSizerFlags& Align(AlignmentFlags alignments) // combination of wxAlignment values
+    wxSizerFlags& Align(int alignment) // combination of wxAlignment values
     {
-        // FIXME: Need anymore?
-        //m_flags &= ~wxALIGN_MASK;
-        // FIXME: Need to set all the alignment flags at once. Requires retooling CombineBitfield
-        //m_flags;
+        m_flags &= ~wxALIGN_MASK;
+        m_flags |= alignment;
 
         return *this;
     }
 
     // this is just a shortcut for Align()
-    wxSizerFlags& Center() { return Align(wxAlignment::Center); }
+    wxSizerFlags& Centre() { return Align(wxALIGN_CENTRE); }
+    wxSizerFlags& Center() { return Centre(); }
 
     // but all the remaining methods turn on the corresponding alignment flag
     // without affecting the existing ones
-    wxSizerFlags& CenterVertical()
+    wxSizerFlags& CentreVertical()
     {
-        m_flags.set(wxAlignment::CenterVertical);
+        m_flags = (m_flags & ~wxALIGN_BOTTOM) | wxALIGN_CENTRE_VERTICAL;
         return *this;
     }
 
-    wxSizerFlags& CenterHorizontal()
+    wxSizerFlags& CenterVertical() { return CentreVertical(); }
+
+    wxSizerFlags& CentreHorizontal()
     {
-        m_flags.set(wxAlignment::CenterHorizontal);
+        m_flags = (m_flags & ~wxALIGN_RIGHT) | wxALIGN_CENTRE_HORIZONTAL;
         return *this;
     }
+
+    wxSizerFlags& CenterHorizontal() { return CentreHorizontal(); }
 
     wxSizerFlags& Top()
     {
-        m_flags.set(wxAlignment::Top);
+        m_flags &= ~(wxALIGN_BOTTOM | wxALIGN_CENTRE_VERTICAL);
         return *this;
     }
 
     wxSizerFlags& Left()
     {
-        m_flags.set(wxAlignment::Left);
+        m_flags &= ~(wxALIGN_RIGHT | wxALIGN_CENTRE_HORIZONTAL);
         return *this;
     }
 
     wxSizerFlags& Right()
     {
-        m_flags.set(wxAlignment::Right);
+        m_flags = (m_flags & ~wxALIGN_CENTRE_HORIZONTAL) | wxALIGN_RIGHT;
         return *this;
     }
 
     wxSizerFlags& Bottom()
     {
-        m_flags.set(wxAlignment::Bottom);
+        m_flags = (m_flags & ~wxALIGN_CENTRE_VERTICAL) | wxALIGN_BOTTOM;
         return *this;
     }
 
@@ -172,19 +173,21 @@ public:
     }
 
 
-    wxSizerFlags& Border(DirectionFlags direction, int borderInPixels)
+    wxSizerFlags& Border(unsigned int direction, int borderInPixels)
     {
-        // TODO: Necessary to do below anymore?
-        //m_flags &= ~wxDirection::All;
-        // FIXME: Requires retooling CombineBitfield
-        //m_flags |= direction;
+        wxCHECK_MSG( !(direction & ~wxALL), *this,
+                     wxS("direction must be a combination of wxDirection ")
+                     wxS("enum values.") );
+
+        m_flags &= ~wxALL;
+        m_flags |= direction;
 
         m_borderInPixels = borderInPixels;
 
         return *this;
     }
 
-    wxSizerFlags& Border(wxDirection direction = wxDirection::All)
+    wxSizerFlags& Border(unsigned int direction = wxALL)
     {
 #if wxUSE_BORDER_BY_DEFAULT
         return Border(direction, std::lround(GetDefaultBorderFractional()));
@@ -196,7 +199,7 @@ public:
 #endif
     }
 
-    wxSizerFlags& DoubleBorder(wxDirection direction = wxDirection::All)
+    wxSizerFlags& DoubleBorder(unsigned int direction = wxALL)
     {
 #if wxUSE_BORDER_BY_DEFAULT
         return Border(direction, std::lround(2 * GetDefaultBorderFractional()));
@@ -207,7 +210,7 @@ public:
 #endif
     }
 
-    wxSizerFlags& TripleBorder(wxDirection direction = wxDirection::All)
+    wxSizerFlags& TripleBorder(unsigned int direction = wxALL)
     {
 #if wxUSE_BORDER_BY_DEFAULT
         return Border(direction, std::lround(3 * GetDefaultBorderFractional()));
@@ -221,7 +224,7 @@ public:
     wxSizerFlags& HorzBorder()
     {
 #if wxUSE_BORDER_BY_DEFAULT
-        return Border(DirectionFlags{wxDirection::Left, wxDirection::Right}, std::lround(GetDefaultBorderFractional()));
+        return Border(wxLEFT | wxRIGHT, std::lround(GetDefaultBorderFractional()));
 #else
         return *this;
 #endif
@@ -230,7 +233,7 @@ public:
     wxSizerFlags& DoubleHorzBorder()
     {
 #if wxUSE_BORDER_BY_DEFAULT
-        return Border(DirectionFlags{wxDirection::Left, wxDirection::Right}, std::lround(2 * GetDefaultBorderFractional()));
+        return Border(wxLEFT | wxRIGHT, std::lround(2 * GetDefaultBorderFractional()));
 #else
         return *this;
 #endif
@@ -239,14 +242,14 @@ public:
     // setters for the others flags
     wxSizerFlags& Shaped()
     {
-        m_flags |= wxStretch::Shaped;
+        m_flags |= wxSHAPED;
 
         return *this;
     }
 
     wxSizerFlags& FixedMinSize()
     {
-        m_flags |= wxSizerFlagBits::FixedMinSize;
+        m_flags |= wxFIXED_MINSIZE;
 
         return *this;
     }
@@ -254,21 +257,21 @@ public:
     // makes the item ignore window's visibility status
     wxSizerFlags& ReserveSpaceEvenIfHidden()
     {
-        m_flags |= wxSizerFlagBits::ReserveSpaceEvenIfHidden;
+        m_flags |= wxRESERVE_SPACE_EVEN_IF_HIDDEN;
         return *this;
     }
 
     int GetProportion() const { return m_proportion; }
-    SizerFlags GetFlags() const { return m_flags; }
+    int GetFlags() const { return m_flags; }
     int GetBorderInPixels() const { return m_borderInPixels; }
 
 private:
 #ifdef wxNEEDS_BORDER_IN_PX
     static float DoGetDefaultBorderInPx();
 #endif // wxNEEDS_BORDER_IN_PX
-    SizerFlags m_flags;
 
     int m_proportion;
+    unsigned int m_flags;
     int m_borderInPixels;
 };
 
@@ -411,9 +414,9 @@ public:
         { m_proportion = proportion; }
     int GetProportion() const
         { return m_proportion; }
-    void SetFlag( SizerFlags flag )
+    void SetFlag( unsigned int flag )
         { m_flag = flag; }
-    SizerFlags GetFlag() const
+    unsigned int GetFlag() const
         { return m_flag; }
     void SetBorder( int border )
         { m_border = border; }
@@ -445,7 +448,7 @@ public:
     // used in algorithms that depend on knowing the size in one direction
     // before the min size in the other direction can be known.
     // Returns true if it made use of the information (and min size was changed).
-    bool InformFirstDirection( wxDirection direction, int size, int availableOtherDir=-1 );
+    bool InformFirstDirection( int direction, int size, int availableOtherDir=-1 );
 
     // these functions delete the current contents of the item if it's a sizer
     // or a spacer but not if it is a window
@@ -512,7 +515,7 @@ protected:
 
     int          m_proportion{0};
     int          m_border{0};
-    SizerFlags   m_flag{};
+    unsigned int m_flag{};
     int          m_id{wxID_NONE};
 
     // Aspect ratio can always be calculated from m_size,
@@ -995,8 +998,8 @@ public:
     void RepositionChildren(wxSize minSize) override;
 
     bool InformFirstDirection(int direction,
-                              int size,
-                              int availableOtherDir) override;
+                                      int size,
+                                      int availableOtherDir) override;
 
 protected:
     // Only overridden to perform extra debugging checks.

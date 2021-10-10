@@ -727,7 +727,7 @@ wxRibbonBar::wxRibbonBar(wxWindow* parent,
                          const wxPoint& pos,
                          const wxSize& size,
                          unsigned int style)
-    : wxRibbonControl(parent, id, pos, size, wxBorder::None)
+    : wxRibbonControl(parent, id, pos, size, wxBORDER_NONE)
 {
     CommonInit(style);
 }
@@ -748,7 +748,7 @@ bool wxRibbonBar::Create(wxWindow* parent,
                 const wxSize& size,
                 unsigned int style)
 {
-    if(!wxRibbonControl::Create(parent, id, pos, size, wxBorder::None))
+    if(!wxRibbonControl::Create(parent, id, pos, size, wxBORDER_NONE))
         return false;
 
     CommonInit(style);

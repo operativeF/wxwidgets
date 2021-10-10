@@ -405,7 +405,7 @@ public:
     {
         wxSizer* const sizer = new wxBoxSizer(wxVERTICAL);
         sizer->Add(m_control, wxSizerFlags().Expand());
-        sizer->Add(CreateStdDialogButtonSizer(wxDialogFlags::OK));
+        sizer->Add(CreateStdDialogButtonSizer(wxOK));
         SetSizerAndFit(sizer);
 
         CallAfter(&TestDialog::SimulateEnter);

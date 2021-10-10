@@ -540,10 +540,10 @@ bool wxICOResourceHandler::wxLoadIcon(wxIcon *icon,
             LPWSTR id;
         } stdIcons[] =
         {
-            { "wxDialogIconFlags::Question",          IDI_QUESTION    },
-            { "wxDialogIconFlags::Warning",           IDI_EXCLAMATION },
-            { "wxDialogIconFlags::Error",             IDI_HAND        },
-            { "wxDialogIconFlags::Information",       IDI_ASTERISK    },
+            { "wxICON_QUESTION",          IDI_QUESTION    },
+            { "wxICON_WARNING",           IDI_EXCLAMATION },
+            { "wxICON_ERROR",             IDI_HAND        },
+            { "wxICON_INFORMATION",       IDI_ASTERISK    },
         };
 
         for ( size_t nIcon = 0; !hicon && nIcon < WXSIZEOF(stdIcons); nIcon++ )

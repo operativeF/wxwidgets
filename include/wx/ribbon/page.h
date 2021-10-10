@@ -65,7 +65,7 @@ public:
 
 protected:
     wxSize DoGetBestSize() const override;
-    wxBorder GetDefaultBorder() const override { return wxBorder::None; }
+    wxBorder GetDefaultBorder() const override { return wxBORDER_NONE; }
 
     void DoSetSize(wxRect boundary, unsigned int sizeFlags = wxSIZE_AUTO) override;
     bool DoActualLayout();

@@ -1221,10 +1221,7 @@ TEST_CASE_FIXTURE(GridTestCase, "Grid::SelectionMode")
 TEST_CASE_FIXTURE(GridTestCase, "Grid::CellFormatting")
 {
     //Check that initial alignment is default
-    wxAlignment horiz;
-    wxAlignment cellhoriz;
-    wxAlignment vert;
-    wxAlignment cellvert;
+    int horiz, cellhoriz, vert, cellvert;
 
     m_grid->GetDefaultCellAlignment(&horiz, &vert);
     m_grid->GetCellAlignment(0, 0, &cellhoriz, &cellvert);
@@ -1241,11 +1238,11 @@ TEST_CASE_FIXTURE(GridTestCase, "Grid::CellFormatting")
 
     CHECK(m_grid->GetCellTextColour(0, 0) == text);
 
-    m_grid->SetCellAlignment(0, 0, wxAlignment::Left, wxAlignment::Bottom);
+    m_grid->SetCellAlignment(0, 0, wxALIGN_LEFT, wxALIGN_BOTTOM);
     m_grid->GetCellAlignment(0, 0, &cellhoriz, &cellvert);
 
-    CHECK(cellhoriz == wxAlignment::Left);
-    CHECK(cellvert == wxAlignment::Bottom);
+    CHECK(cellhoriz == wxALIGN_LEFT);
+    CHECK(cellvert == wxALIGN_BOTTOM);
 
     m_grid->SetCellTextColour(0, 0, *wxGREEN);
     CHECK(m_grid->GetCellTextColour(0,0) == *wxGREEN);
@@ -1257,8 +1254,8 @@ TEST_CASE_FIXTURE(GridTestCase, "Grid::GetNonDefaultAlignment")
     // preferred alignment, so check that if we don't reset the alignment
     // explicitly, it doesn't override the alignment used by default.
     wxGridCellAttrPtr attr;
-    wxAlignment hAlign = wxAlignment::Right;
-    wxAlignment vAlign = wxAlignment::Invalid;
+    int hAlign = wxALIGN_RIGHT;
+    int vAlign = wxALIGN_INVALID;
 
     attr = m_grid->CallGetCellAttr(0, 0);
     REQUIRE( attr );
@@ -1266,27 +1263,27 @@ TEST_CASE_FIXTURE(GridTestCase, "Grid::GetNonDefaultAlignment")
     // Check that the specified alignment is preserved, while the unspecified
     // component is filled with the default value (which is "top" by default).
     attr->GetNonDefaultAlignment(&hAlign, &vAlign);
-    CHECK( hAlign == wxAlignment::Right );
-    CHECK( vAlign == wxAlignment::Top );
+    CHECK( hAlign == wxALIGN_RIGHT );
+    CHECK( vAlign == wxALIGN_TOP );
 
     // Now change the defaults and check that the unspecified alignment
     // component is filled with the new default.
-    m_grid->SetDefaultCellAlignment(wxAlignment::CenterHorizontal,
-                                    wxAlignment::CenterVertical);
+    m_grid->SetDefaultCellAlignment(wxALIGN_CENTRE_HORIZONTAL,
+                                    wxALIGN_CENTRE_VERTICAL);
 
-    vAlign = wxAlignment::Invalid;
+    vAlign = wxALIGN_INVALID;
 
     attr = m_grid->CallGetCellAttr(0, 0);
     REQUIRE( attr );
 
     attr->GetNonDefaultAlignment(&hAlign, &vAlign);
-    CHECK( hAlign == wxAlignment::Right );
-    CHECK( vAlign == wxAlignment::CenterVertical );
+    CHECK( hAlign == wxALIGN_RIGHT );
+    CHECK( vAlign == wxALIGN_CENTRE_VERTICAL );
 
     // This is only indirectly related, but test here for CanOverflow() working
     // correctly for the cells with non-default alignment, as this used to be
     // broken.
-    m_grid->SetCellAlignment(0, 0, wxAlignment::Invalid, wxAlignment::Center);
+    m_grid->SetCellAlignment(0, 0, wxALIGN_INVALID, wxALIGN_CENTRE);
     attr = m_grid->CallGetCellAttr(0, 0);
     REQUIRE( attr );
     CHECK( attr->CanOverflow() );

@@ -56,7 +56,7 @@ public:
     {
         return wxListView::Create(parent,1,
                                   wxPoint(0,0),wxDefaultSize,
-                                  wxLC_LIST|wxLC_VRULES|wxBorder::Theme);
+                                  wxLC_LIST|wxLC_VRULES|wxBORDER_THEME);
     }
 
     virtual wxWindow *GetControl()
@@ -141,7 +141,7 @@ public:
         return wxTreeCtrl::Create(parent,1,
                                   wxPoint(0,0),wxDefaultSize,
                                   wxTR_HAS_BUTTONS|wxTR_SINGLE|
-                                  wxTR_LINES_AT_ROOT|wxBorder::Theme);
+                                  wxTR_LINES_AT_ROOT|wxBORDER_THEME);
     }
 
     virtual void OnShow()

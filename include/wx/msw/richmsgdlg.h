@@ -18,7 +18,7 @@ public:
     wxRichMessageDialog(wxWindow *parent,
                         const std::string& message,
                         const std::string& caption = wxMessageBoxCaptionStr,
-                        DialogFlags style = DialogFlags{wxDialogFlags::OK, wxDialogFlags::Centered})
+                        unsigned int style = wxOK | wxCENTRE)
         : wxGenericRichMessageDialog(parent, message, caption, style)
     {}
 

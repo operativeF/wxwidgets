@@ -94,7 +94,7 @@ bool wxGenericDirDialog::Create(wxWindow* parent,
     wxBitmapButton* homeButton =
         new wxBitmapButton(this, ID_GO_HOME,
                            wxArtProvider::GetBitmap(wxART_GO_HOME, wxART_BUTTON));
-    buttonsizer->Add( homeButton, 0, wxDirection::Left|wxDirection::Right, 10 );
+    buttonsizer->Add( homeButton, 0, wxLEFT|wxRIGHT, 10 );
 
     // I'm not convinced we need a New button, and we tend to get annoying
     // accidental-editing with label editing enabled.
@@ -103,7 +103,7 @@ bool wxGenericDirDialog::Create(wxWindow* parent,
         wxBitmapButton* newButton =
             new wxBitmapButton(this, ID_NEW,
                             wxArtProvider::GetBitmap(wxART_NEW_DIR, wxART_BUTTON));
-        buttonsizer->Add( newButton, 0, wxDirection::Right, 10 );
+        buttonsizer->Add( newButton, 0, wxRIGHT, 10 );
 #if wxUSE_TOOLTIPS
         newButton->SetToolTip(_("Create new directory"));
 #endif
@@ -113,7 +113,7 @@ bool wxGenericDirDialog::Create(wxWindow* parent,
     homeButton->SetToolTip(_("Go to home directory"));
 #endif
 
-    topsizer->Add( buttonsizer, 0, wxDirection::Top | wxAlignment::Right, 10 );
+    topsizer->Add( buttonsizer, 0, wxTOP | wxALIGN_RIGHT, 10 );
 
     // 1) dir ctrl
     m_dirCtrl = NULL; // this is necessary, event handler called from
@@ -135,7 +135,7 @@ bool wxGenericDirDialog::Create(wxWindow* parent,
                                      dirStyle);
 
     wxSizerFlags flagsBorder2;
-    flagsBorder2.DoubleBorder(wxDirection::Top | wxDirection::Left | wxDirection::Right);
+    flagsBorder2.DoubleBorder(wxTOP | wxLEFT | wxRIGHT);
 
     topsizer->Add(m_dirCtrl, wxSizerFlags(flagsBorder2).Proportion(1).Expand());
 
@@ -149,7 +149,7 @@ bool wxGenericDirDialog::Create(wxWindow* parent,
     topsizer->Add(m_input, wxSizerFlags(flagsBorder2).Expand());
 
     // 3) buttons if any
-    wxSizer *buttonSizer = CreateSeparatedButtonSizer(DialogFlags{wxDialogFlags::OK, wxDialogFlags::Cancel});
+    wxSizer *buttonSizer = CreateSeparatedButtonSizer(wxOK | wxCANCEL);
     if ( buttonSizer )
     {
         topsizer->Add(buttonSizer, wxSizerFlags().Expand().DoubleBorder());
@@ -199,7 +199,7 @@ void wxGenericDirDialog::OnOK(wxCommandEvent& WXUNUSED(event))
     msg.Printf(_("The directory '%s' does not exist\nCreate it now?"),
                m_path.c_str());
     wxMessageDialog dialog(this, msg, _("Directory does not exist"),
-                           DialogFlags{wxDialogFlags::Yes_No, wxDialogIconFlags::Warning});
+                           wxYES_NO | wxICON_WARNING);
 
     if ( dialog.ShowModal() == wxID_YES )
     {
@@ -216,7 +216,7 @@ void wxGenericDirDialog::OnOK(wxCommandEvent& WXUNUSED(event))
             // Trouble...
             msg.Printf(_("Failed to create directory '%s'\n(Do you have the required permissions?)"),
                        m_path.c_str());
-            wxMessageDialog errmsg(this, msg, _("Error creating directory"), DialogFlags{wxDialogFlags::OK, wxDialogIconFlags::Error});
+            wxMessageDialog errmsg(this, msg, _("Error creating directory"), wxOK | wxICON_ERROR);
             errmsg.ShowModal();
             // We still don't have a valid dir. Back to the main dialog.
         }
@@ -282,7 +282,7 @@ void wxGenericDirDialog::OnNew( wxCommandEvent& WXUNUSED(event) )
         (m_dirCtrl->GetTreeCtrl()->GetItemParent(id) == m_dirCtrl->GetTreeCtrl()->GetRootItem()))
     {
         wxMessageDialog msg(this, _("You cannot add a new directory to this section."),
-                            _("Create directory"), DialogFlags{wxDialogFlags::OK, wxDialogIconFlags::Information} );
+                            _("Create directory"), wxOK | wxICON_INFORMATION );
         msg.ShowModal();
         return;
     }
@@ -317,7 +317,7 @@ void wxGenericDirDialog::OnNew( wxCommandEvent& WXUNUSED(event) )
     wxLogNull log;
     if (!wxMkdir(path))
     {
-        wxMessageDialog dialog(this, _("Operation not permitted."), _("Error"), DialogFlags{wxDialogFlags::OK, wxDialogIconFlags::Error} );
+        wxMessageDialog dialog(this, _("Operation not permitted."), _("Error"), wxOK | wxICON_ERROR );
         dialog.ShowModal();
         return;
     }

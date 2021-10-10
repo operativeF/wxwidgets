@@ -119,7 +119,7 @@ DWORD wxButton::MSWGetStyle(unsigned int style, DWORD *exstyle) const
     // buttons never have an external border, they draw their own one
     DWORD msStyle = wxControl::MSWGetStyle
                       (
-                        (style & ~wxBORDER_MASK) | wxBorder::None, exstyle
+                        (style & ~wxBORDER_MASK) | wxBORDER_NONE, exstyle
                       );
 
     // we must use WS_CLIPSIBLINGS with the buttons or they would draw over
@@ -138,7 +138,7 @@ DWORD wxButton::MSWGetStyle(unsigned int style, DWORD *exstyle) const
     if ( style & wxBU_BOTTOM )
         msStyle |= BS_BOTTOM;
     // flat 2d buttons
-    if ( style & wxBorder::None )
+    if ( style & wxNO_BORDER )
         msStyle |= BS_FLAT;
 
     return msStyle;

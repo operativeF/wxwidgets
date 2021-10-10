@@ -25,7 +25,6 @@
 #include "wx/aui/framemanager.h"
 #include "wx/bookctrl.h"
 #include "wx/containr.h"
-#include "wx/directionflags.h"
 #include "wx/geometry/rect.h"
 
 #include <string>
@@ -33,33 +32,34 @@
 class wxAuiNotebook;
 
 
-enum class wxAuiNotebookOption
+enum wxAuiNotebookOption
 {
-    Top,
-    Left,  // not implemented yet
-    Right,  // not implemented yet
-    Bottom,
-    TabSplit,
-    TabMove,
-    TabExternalMove,
-    TabFixedWidth,
-    ScrollButtons,
-    WindowListButton,
-    CloseButton,
-    CloseOnActiveTab,
-    CloseOnAllTabs,
-    MiddleClickClose,
-    _max_size
+    wxAUI_NB_TOP                 = 1 << 0,
+    wxAUI_NB_LEFT                = 1 << 1,  // not implemented yet
+    wxAUI_NB_RIGHT               = 1 << 2,  // not implemented yet
+    wxAUI_NB_BOTTOM              = 1 << 3,
+    wxAUI_NB_TAB_SPLIT           = 1 << 4,
+    wxAUI_NB_TAB_MOVE            = 1 << 5,
+    wxAUI_NB_TAB_EXTERNAL_MOVE   = 1 << 6,
+    wxAUI_NB_TAB_FIXED_WIDTH     = 1 << 7,
+    wxAUI_NB_SCROLL_BUTTONS      = 1 << 8,
+    wxAUI_NB_WINDOWLIST_BUTTON   = 1 << 9,
+    wxAUI_NB_CLOSE_BUTTON        = 1 << 10,
+    wxAUI_NB_CLOSE_ON_ACTIVE_TAB = 1 << 11,
+    wxAUI_NB_CLOSE_ON_ALL_TABS   = 1 << 12,
+    wxAUI_NB_MIDDLE_CLICK_CLOSE  = 1 << 13,
+
+    wxAUI_NB_DEFAULT_STYLE = wxAUI_NB_TOP |
+                             wxAUI_NB_TAB_SPLIT |
+                             wxAUI_NB_TAB_MOVE |
+                             wxAUI_NB_SCROLL_BUTTONS |
+                             wxAUI_NB_CLOSE_ON_ACTIVE_TAB |
+                             wxAUI_NB_MIDDLE_CLICK_CLOSE
 };
 
-using AuiNotebookOptionFlags = CombineBitfield<wxAuiNotebookOption, wxBorder>;
+wxALLOW_COMBINING_ENUMS(wxAuiNotebookOption, wxBorder)
 
-constexpr AuiNotebookOptionFlags wxAUI_NB_DEFAULT_STYLE = {wxAuiNotebookOption::Top,
-                                                           wxAuiNotebookOption::TabSplit,
-                                                           wxAuiNotebookOption::TabMove,
-                                                           wxAuiNotebookOption::ScrollButtons,
-                                                           wxAuiNotebookOption::CloseOnActiveTab,
-                                                           wxAuiNotebookOption::MiddleClickClose};
+
 
 // aui notebook event class
 
@@ -111,7 +111,7 @@ struct WXDLLIMPEXP_AUI wxAuiTabContainerButton
     wxRect rect;         // button's hit rectangle
     int id{};            // button's id
     unsigned int curState{}; // current state (normal, hover, pressed, etc.)
-    int location{};      // buttons location (wxDirection::Left, wxDirection::Right, or wxDirection::Center)
+    int location{};      // buttons location (wxLEFT, wxRIGHT, or wxCENTER)
 };
 
 
@@ -205,7 +205,7 @@ public:
 
 protected:
     // choose the default border for this window
-    wxBorder GetDefaultBorder() const override { return wxBorder::None; }
+    wxBorder GetDefaultBorder() const override { return wxBORDER_NONE; }
 
     void OnPaint(wxPaintEvent& evt);
     void OnEraseBackground(wxEraseEvent& evt);
@@ -307,7 +307,7 @@ public:
     int SetSelection(size_t newPage) override;
     int GetSelection() const override;
 
-    virtual void Split(size_t page, wxDirection direction);
+    virtual void Split(size_t page, int direction);
 
     const wxAuiManager& GetAuiManager() const { return m_mgr; }
 
@@ -365,7 +365,7 @@ protected:
     void Init();
 
     // choose the default border for this window
-    wxBorder GetDefaultBorder() const override { return wxBorder::None; }
+    wxBorder GetDefaultBorder() const override { return wxBORDER_NONE; }
 
     // Redo sizing after thawing
     void DoThaw() override;
