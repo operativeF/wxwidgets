@@ -104,7 +104,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxToolBar, wxControl);
             radio (bool)
             toggle (bool)
         separator
-        style ( wxNO_BORDER | wxTB_HORIZONTAL)
+        style ( wxBorder::None | wxTB_HORIZONTAL)
         bitmapsize
         margins
         packing
@@ -637,7 +637,7 @@ DWORD wxToolBar::MSWGetStyle(unsigned int style, DWORD *exstyle) const
     // appearance
     DWORD msStyle = wxControl::MSWGetStyle
                       (
-                        (style & ~wxBORDER_MASK) | wxBORDER_NONE, exstyle
+                        (style & ~wxBORDER_MASK) | wxBorder::None, exstyle
                       );
 
     if ( !(style & wxTB_NO_TOOLTIPS) )

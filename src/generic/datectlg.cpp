@@ -55,7 +55,7 @@ public:
         if ( !wxCalendarCtrl::Create(parent, wxID_ANY, wxDefaultDateTime,
                               wxPoint(0, 0), wxDefaultSize,
                               wxCAL_SEQUENTIAL_MONTH_SELECTION
-                              | wxCAL_SHOW_HOLIDAYS | wxBORDER_SUNKEN) )
+                              | wxCAL_SHOW_HOLIDAYS | wxBorder::Sunken) )
             return false;
 
         SetFormat(GetLocaleDateFormat());
@@ -332,7 +332,7 @@ bool wxDatePickerCtrlGeneric::Create(wxWindow *parent,
                   wxT("wxDP_SPIN style not supported, use wxDP_DEFAULT") );
 
     if ( !wxControl::Create(parent, id, pos, size,
-                            style | wxCLIP_CHILDREN | wxWANTS_CHARS | wxBORDER_NONE,
+                            style | wxCLIP_CHILDREN | wxWANTS_CHARS | wxBorder::None,
                             validator, name) )
     {
         return false;

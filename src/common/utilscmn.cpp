@@ -1261,14 +1261,14 @@ wxWindow* wxGenericFindWindowAtPoint(const wxPoint& pt)
 
 #if wxUSE_MSGDLG
 
-int wxMessageBox(const std::string& message, const std::string& caption, unsigned int style,
+wxDialogFlags wxMessageBox(const std::string& message, const std::string& caption, DialogFlags style,
                  wxWindow *parent, int WXUNUSED(x), int WXUNUSED(y) )
 {
     // add the appropriate icon unless this was explicitly disabled by use of
-    // wxICON_NONE
-    if ( !(style & wxICON_NONE) && !(style & wxICON_MASK) )
+    // wxDialogIconFlags::None
+    if ( !(style & wxDialogIconFlags::None) && !(style & wxICON_MASK) )
     {
-        style |= style & wxYES ? wxICON_QUESTION : wxICON_INFORMATION;
+        style |= style & wxDialogFlags::Yes ? wxDialogIconFlags::Question : wxDialogIconFlags::Information;
     }
 
     wxMessageDialog dialog(parent, message, caption, style);
@@ -1277,20 +1277,20 @@ int wxMessageBox(const std::string& message, const std::string& caption, unsigne
     switch ( ans )
     {
         case wxID_OK:
-            return wxOK;
+            return wxDialogFlags::OK;
         case wxID_YES:
-            return wxYES;
+            return wxDialogFlags::Yes;
         case wxID_NO:
-            return wxNO;
+            return wxDialogFlags::No;
         case wxID_CANCEL:
-            return wxCANCEL;
+            return wxDialogFlags::Cancel;
         case wxID_HELP:
-            return wxHELP;
+            return wxDialogFlags::Help;
     }
 
     wxFAIL_MSG( wxT("unexpected return code from wxMessageDialog") );
 
-    return wxCANCEL;
+    return wxDialogFlags::Cancel;
 }
 
 wxVersionInfo wxGetLibraryVersionInfo()
@@ -1349,7 +1349,7 @@ void wxInfoMessageBox(wxWindow* parent)
     msg += '\n' + info.GetCopyright();
 
     wxMessageBox(msg, "wxWidgets information",
-                 wxICON_INFORMATION | wxOK,
+                 DialogFlags{wxDialogIconFlags::Information, wxDialogFlags::OK},
                  parent);
 }
 
@@ -1362,12 +1362,12 @@ wxString wxGetTextFromUser(const wxString& message, const wxString& caption,
                         wxCoord x, wxCoord y, bool centre )
 {
     wxString str;
-    unsigned int style = wxTextEntryDialogStyle;
+    DialogFlags style = wxTextEntryDialogStyle;
 
     if (centre)
-        style |= wxCENTRE;
+        style |= wxDialogFlags::Centered;
     else
-        style &= ~wxCENTRE;
+        style &= ~wxDialogFlags::Centered;
 
     wxTextEntryDialog dialog(parent, message, caption, defaultValue, style, wxPoint(x, y));
 
@@ -1386,12 +1386,13 @@ wxString wxGetPasswordFromUser(const wxString& message,
                                wxCoord x, wxCoord y, bool centre )
 {
     wxString str;
-    unsigned int style = wxTextEntryDialogStyle;
+    DialogFlags style = wxTextEntryDialogStyle;
 
+    // FIXME: More efficient now.
     if (centre)
-        style |= wxCENTRE;
+        style |= wxDialogFlags::Centered;
     else
-        style &= ~wxCENTRE;
+        style &= ~wxDialogFlags::Centered;
 
     wxPasswordEntryDialog dialog(parent, message, caption, defaultValue,
                              style, wxPoint(x, y));

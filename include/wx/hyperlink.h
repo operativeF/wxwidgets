@@ -27,7 +27,7 @@ constexpr unsigned int wxHL_CONTEXTMENU        = 0x0001;
 constexpr unsigned int wxHL_ALIGN_LEFT         = 0x0002;
 constexpr unsigned int wxHL_ALIGN_RIGHT        = 0x0004;
 constexpr unsigned int wxHL_ALIGN_CENTRE       = 0x0008;
-constexpr unsigned int wxHL_DEFAULT_STYLE      = wxHL_CONTEXTMENU | wxNO_BORDER | wxHL_ALIGN_CENTRE;
+constexpr unsigned int wxHL_DEFAULT_STYLE      = wxHL_CONTEXTMENU | wxBorder::None | wxHL_ALIGN_CENTRE;
 
 constexpr char wxHyperlinkCtrlNameStr[] = "hyperlink";
 
@@ -71,7 +71,7 @@ public:
     bool HasTransparentBackground() override { return true; }
 
 protected:
-    wxBorder GetDefaultBorder() const override { return wxBORDER_NONE; }
+    wxBorder GetDefaultBorder() const override { return wxBorder::None; }
 
     // checks for validity some of the ctor/Create() function parameters
     void CheckParams(const std::string& label, const std::string& url, unsigned int style);

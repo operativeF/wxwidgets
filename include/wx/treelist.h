@@ -10,10 +10,9 @@
 #ifndef _WX_TREELIST_H_
 #define _WX_TREELIST_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_TREELISTCTRL
 
+#include "wx/alignmentflags.h"
 #include "wx/checkbox.h"
 #include "wx/compositewin.h"
 #include "wx/containr.h"
@@ -166,7 +165,7 @@ public:
     // the new column or -1 on failure.
     int AppendColumn(const wxString& title,
                      int width = wxCOL_WIDTH_AUTOSIZE,
-                     wxAlignment align = wxALIGN_LEFT,
+                     wxAlignment align = wxAlignment::Left,
                      unsigned int flags = wxCOL_RESIZABLE)
     {
         return DoInsertColumn(title, -1, width, align, flags);

@@ -1041,7 +1041,7 @@ bool wxAMMediaBackend::CreateControl(wxControl* ctrl, wxWindow* parent,
     // backends, we don't need wxCLIP_CHILDREN
     //
     if ( !ctrl->wxControl::Create(parent, id, pos, size,
-                            (style & ~wxBORDER_MASK) | wxBORDER_NONE,
+                            (style & ~wxBORDER_MASK) | wxBorder::None,
                             validator, name) )
         return false;
 

@@ -90,7 +90,7 @@ bool wxTopLevelWindowDFB::ShowFullScreen(bool show, unsigned int style)
         if ( style & wxFULLSCREEN_NOCAPTION )
             m_windowStyle &= ~wxCAPTION;
         if ( style & wxFULLSCREEN_NOBORDER )
-            m_windowStyle = wxSIMPLE_BORDER;
+            m_windowStyle = wxBorder::Simple;
 
         int x, y;
         wxDisplaySize(&x, &y);

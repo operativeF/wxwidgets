@@ -88,7 +88,7 @@ namespace wxMSWMessageDialog
     bool HasNativeTaskDialog();
 
     // Translates standard MSW button IDs like IDCANCEL into an equivalent
-    // wx constant such as wxCANCEL.
+    // wx constant such as wxDialogFlags::Cancel.
     int MSWTranslateReturnCode(int msAns);
 }; // namespace wxMSWMessageDialog
 

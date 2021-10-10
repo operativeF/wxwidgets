@@ -60,7 +60,7 @@ public:
 
 protected:
     // choose the default border for this window
-    wxBorder GetDefaultBorder() const override { return wxBORDER_NONE; }
+    wxBorder GetDefaultBorder() const override { return wxBorder::None; }
 
     // set the right size for the right dimension
     wxSize AdjustSize(const wxSize& size) const

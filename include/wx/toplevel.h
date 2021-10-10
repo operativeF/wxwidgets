@@ -58,35 +58,24 @@ constexpr char wxFrameNameStr[] = "frame";
 
 
     Notice that the 8 lower bits overlap with wxCENTRE and the button selection
-    bits (wxYES, wxOK wxNO, wxCANCEL, wxAPPLY, wxCLOSE and wxNO_DEFAULT) which
+    bits (wxDialogFlags::Yes, wxDialogFlags::OK wxDialogFlags::No, wxDialogFlags::Cancel, wxDialogFlags::Apply, wxDialogFlags::Close and wxDialogDefaultFlags::No) which
     can be combined with the dialog style for several standard dialogs and
     hence shouldn't overlap with any styles which can be used for the dialogs.
     Additionally, wxCENTRE can be used with frames also.
  */
 
-// style common to both wxFrame and wxDialog
-constexpr unsigned int wxSTAY_ON_TOP = 0x8000;
-constexpr unsigned int wxICONIZE     = 0x4000;
-constexpr unsigned int wxMINIMIZE    = wxICONIZE;
-constexpr unsigned int wxMAXIMIZE    = 0x2000;
-constexpr unsigned int wxCLOSE_BOX   = 0x1000;  // == wxHELP so can't be used with it
+//constexpr unsigned int wxSTAY_ON_TOP = 0x8000;
+//constexpr unsigned int wxICONIZE     = 0x4000;
+//constexpr unsigned int wxMINIMIZE    = wxICONIZE;
+//constexpr unsigned int wxMAXIMIZE    = 0x2000;
+//constexpr unsigned int wxCLOSE_BOX   = 0x1000;  // == wxDialogFlags::Help so can't be used with it
 
-constexpr unsigned int wxSYSTEM_MENU  = 0x0800;
-constexpr unsigned int wxMINIMIZE_BOX = 0x0400;
-constexpr unsigned int wxMAXIMIZE_BOX = 0x0200;
+//constexpr unsigned int wxSYSTEM_MENU  = 0x0800;
+//constexpr unsigned int wxMINIMIZE_BOX = 0x0400;
+//constexpr unsigned int wxMAXIMIZE_BOX = 0x0200;
 
-constexpr unsigned int wxTINY_CAPTION  = 0x0080;  // clashes with wxNO_DEFAULT
-constexpr unsigned int wxRESIZE_BORDER = 0x0040;  // == wxCLOSE
-
-// default style
-constexpr unsigned int wxDEFAULT_FRAME_STYLE =
-             wxSYSTEM_MENU |
-             wxRESIZE_BORDER |
-             wxMINIMIZE_BOX |
-             wxMAXIMIZE_BOX |
-             wxCLOSE_BOX |
-             wxCAPTION |
-             wxCLIP_CHILDREN;
+//constexpr unsigned int wxTINY_CAPTION  = 0x0080;  // clashes with wxDialogDefaultFlags::No
+//constexpr unsigned int wxRESIZE_BORDER = 0x0040;  // == wxDialogFlags::Close
 
 
 // Dialogs are created in a special way
@@ -387,7 +376,7 @@ protected:
                    const std::string& title,
                    const wxPoint& pos = wxDefaultPosition,
                    const wxSize& size = wxDefaultSize,
-                   unsigned int style = wxDEFAULT_FRAME_STYLE,
+                   WindowFlags style = wxDEFAULT_FRAME_STYLE,
                    const std::string& name = wxFrameNameStr)
             : wxTopLevelWindowNative(parent, winid, title,
                                      pos, size, style, name)

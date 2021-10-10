@@ -17,6 +17,7 @@
     #include <string>
 #endif
 
+#include "wx/dialogflags.h"
 #include "wx/utils.h"
 #include "wx/dialog.h"
 #include "wx/button.h"
@@ -78,7 +79,7 @@ wxIMPLEMENT_CLASS(wxGenericMessageDialog, wxDialog);
 wxGenericMessageDialog::wxGenericMessageDialog( wxWindow *parent,
                                                 const std::string& message,
                                                 const std::string& caption,
-                                                unsigned int style,
+                                                DialogFlags style,
                                                 const wxPoint& pos)
                       : wxMessageDialogBase(GetParentForModalDialog(parent, style),
                                             message,
@@ -96,23 +97,23 @@ wxSizer *wxGenericMessageDialog::CreateMsgDlgButtonSizer()
 
         wxButton *btnDef = nullptr;
 
-        if ( m_dialogStyle & wxOK )
+        if ( m_dialogStyle & wxDialogFlags::OK )
         {
             btnDef = new wxButton(this, wxID_OK, GetCustomOKLabel());
             sizerStd->AddButton(btnDef);
         }
 
-        if ( m_dialogStyle & wxCANCEL )
+        if ( m_dialogStyle & wxDialogFlags::Cancel )
         {
             wxButton * const
                 cancel = new wxButton(this, wxID_CANCEL, GetCustomCancelLabel());
             sizerStd->AddButton(cancel);
 
-            if ( m_dialogStyle & wxCANCEL_DEFAULT )
+            if ( m_dialogStyle & wxDialogDefaultFlags::Cancel )
                 btnDef = cancel;
         }
 
-        if ( m_dialogStyle & wxYES_NO )
+        if ( m_dialogStyle & wxDialogFlags::Yes_No )
         {
             wxButton * const
                 yes = new wxButton(this, wxID_YES, GetCustomYesLabel());
@@ -121,13 +122,13 @@ wxSizer *wxGenericMessageDialog::CreateMsgDlgButtonSizer()
             wxButton * const
                 no = new wxButton(this, wxID_NO, GetCustomNoLabel());
             sizerStd->AddButton(no);
-            if ( m_dialogStyle & wxNO_DEFAULT )
+            if ( m_dialogStyle & wxDialogDefaultFlags::No )
                 btnDef = no;
             else if ( !btnDef )
                 btnDef = yes;
         }
 
-        if ( m_dialogStyle & wxHELP )
+        if ( m_dialogStyle & wxDialogFlags::Help )
         {
             wxButton * const
                 help = new wxButton(this, wxID_HELP, GetCustomHelpLabel());
@@ -148,8 +149,8 @@ wxSizer *wxGenericMessageDialog::CreateMsgDlgButtonSizer()
     // Use standard labels for all buttons
     return CreateSeparatedButtonSizer
            (
-                m_dialogStyle & (wxOK | wxCANCEL | wxHELP | wxYES_NO |
-                                 wxNO_DEFAULT | wxCANCEL_DEFAULT)
+                m_dialogStyle & DialogFlags{wxDialogFlags::OK, wxDialogFlags::Cancel, wxDialogFlags::Help, wxDialogFlags::Yes_No,
+                                            wxDialogDefaultFlags::No, wxDialogDefaultFlags::Cancel})
            );
 }
 
@@ -172,9 +173,9 @@ void wxGenericMessageDialog::DoCreateMsgdialog()
                                     wxArtProvider::GetMessageBoxIcon(m_dialogStyle)
                                    );
         if ( wxSystemSettings::GetScreenType() <= wxSYS_SCREEN_PDA )
-            topsizer->Add( icon, 0, wxTOP|wxLEFT|wxRIGHT | wxALIGN_LEFT, 10 );
+            topsizer->Add( icon, 0, wxDirection::Top|wxDirection::Left|wxDirection::Right | wxAlignment::Left, 10 );
         else
-            icon_text->Add(icon, wxSizerFlags().Top().Border(wxRIGHT, 20));
+            icon_text->Add(icon, wxSizerFlags().Top().Border(wxDirection::Right, 20));
     }
 #endif // wxUSE_STATBMP
 
@@ -191,7 +192,7 @@ void wxGenericMessageDialog::DoCreateMsgdialog()
     {
         wxTitleTextWrapper titleWrapper(this);
         textsizer->Add(CreateTextSizer(wxGetMessage(), titleWrapper),
-                       wxSizerFlags().Border(wxBOTTOM, 20));
+                       wxSizerFlags().Border(wxDirection::Bottom, 20));
 
         lowerMessage = GetExtendedMessage();
     }
@@ -202,8 +203,8 @@ void wxGenericMessageDialog::DoCreateMsgdialog()
 
     textsizer->Add(CreateTextSizer(lowerMessage));
 
-    icon_text->Add(textsizer, 0, wxALIGN_CENTER, 10);
-    topsizer->Add( icon_text, 1, wxLEFT|wxRIGHT|wxTOP, 10 );
+    icon_text->Add(textsizer, 0, SizerFlags{wxAlignment::Center}, 10);
+    topsizer->Add( icon_text, 1, SizerFlags{wxDirection::Left, wxDirection::Right, wxDirection::Top}, 10 );
 #endif // wxUSE_STATTEXT
 
     // 3) optional checkbox and detailed text
@@ -213,7 +214,7 @@ void wxGenericMessageDialog::DoCreateMsgdialog()
     // 4) buttons
     wxSizer *sizerBtn = CreateMsgDlgButtonSizer();
     if ( sizerBtn )
-        topsizer->Add(sizerBtn, 0, wxEXPAND | wxALL, 10 );
+        topsizer->Add(sizerBtn, 0, SizerFlags{wxStretch::Expand, wxDirection::All}, 10 );
 
     SetAutoLayout( true );
     SetSizer( topsizer );
@@ -249,8 +250,8 @@ void wxGenericMessageDialog::OnCancel(wxCommandEvent& WXUNUSED(event))
 {
     // Allow cancellation via ESC/Close button except if
     // only YES and NO are specified.
-    const unsigned int style = GetMessageDialogStyle();
-    if ( (style & wxYES_NO) != wxYES_NO || (style & wxCANCEL) )
+    const auto style = GetMessageDialogStyle();
+    if ( (style & wxDialogFlags::Yes_No) != wxDialogFlags::Yes_No || (style & wxDialogFlags::Cancel) )
     {
         EndModal( wxID_CANCEL );
     }

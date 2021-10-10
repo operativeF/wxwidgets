@@ -11,13 +11,12 @@
 #ifndef _WX_GENERIC_GRID_H_
 #define _WX_GENERIC_GRID_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_GRID
 
 #include "wx/generic/gridcoord.h"
 #include "wx/generic/gridevt.h"
 
+#include "wx/alignmentflags.h"
 #include "wx/arrstr.h"
 #include "wx/hashmap.h"
 #include "wx/scrolwin.h"
@@ -502,8 +501,8 @@ protected:
     // the best compromise when the editor control doesn't fit into the cell.
     void DoPositionEditor(const wxSize& size,
                           const wxRect& rectCell,
-                          int hAlign = wxALIGN_LEFT,
-                          int vAlign = wxALIGN_CENTRE_VERTICAL);
+                          wxAlignment hAlign = wxAlignment::Left,
+                          wxAlignment vAlign = wxAlignment::CenterVertical);
 
 
     // the actual window we show on screen (this variable should actually be
@@ -576,8 +575,8 @@ public:
                            wxDC& dc,
                            std::string_view value,
                            const wxRect& rect,
-                           int horizAlign,
-                           int vertAlign,
+                           wxAlignment horizAlign,
+                           wxAlignment vertAlign,
                            int textOrientation) const;
 };
 
@@ -725,8 +724,8 @@ public:
     wxGridCellAttr(const wxColour& colText,
                    const wxColour& colBack,
                    const wxFont& font,
-                   int hAlign,
-                   int vAlign)
+                   wxAlignment hAlign,
+                   wxAlignment vAlign)
         : m_colText(colText), m_colBack(colBack), m_font(font)
     {
         SetAlignment(hAlign, vAlign);
@@ -744,7 +743,7 @@ public:
     void SetTextColour(const wxColour& colText) { m_colText = colText; }
     void SetBackgroundColour(const wxColour& colBack) { m_colBack = colBack; }
     void SetFont(const wxFont& font) { m_font = font; }
-    void SetAlignment(int hAlign, int vAlign)
+    void SetAlignment(wxAlignment hAlign, wxAlignment vAlign)
     {
         m_hAlign = hAlign;
         m_vAlign = vAlign;
@@ -769,7 +768,7 @@ public:
     bool HasFont() const { return m_font.IsOk(); }
     bool HasAlignment() const
     {
-        return m_hAlign != wxALIGN_INVALID || m_vAlign != wxALIGN_INVALID;
+        return m_hAlign != wxAlignment::Invalid || m_vAlign != wxAlignment::Invalid;
     }
     bool HasRenderer() const { return m_renderer != nullptr; }
     bool HasEditor() const { return m_editor != nullptr; }
@@ -780,7 +779,7 @@ public:
     const wxColour& GetTextColour() const;
     const wxColour& GetBackgroundColour() const;
     const wxFont& GetFont() const;
-    void GetAlignment(int *hAlign, int *vAlign) const;
+    void GetAlignment(wxAlignment* hAlign, wxAlignment* vAlign) const;
 
     // unlike GetAlignment() which always overwrites its output arguments with
     // the alignment values to use, falling back on default alignment if this
@@ -788,7 +787,7 @@ public:
     // parameters on entry if the corresponding alignment is not set in this
     // attribute meaning that they can be initialized to default alignment (and
     // also that they must be initialized, unlike with GetAlignment())
-    void GetNonDefaultAlignment(int *hAlign, int *vAlign) const;
+    void GetNonDefaultAlignment(wxAlignment* hAlign, wxAlignment* vAlign) const;
 
     void GetSize(int *num_rows, int *num_cols) const;
     wxGridFitMode GetFitMode() const;
@@ -841,8 +840,8 @@ private:
     wxGridCellEditor*   m_editor{nullptr};
     wxGridCellAttr*     m_defGridAttr;
 
-    int      m_hAlign{wxALIGN_INVALID};
-    int      m_vAlign{wxALIGN_INVALID};
+    wxAlignment      m_hAlign{wxAlignment::Invalid};
+    wxAlignment      m_vAlign{wxAlignment::Invalid};
     int      m_sizeRows{1};
     int      m_sizeCols{1};
 
@@ -1595,21 +1594,21 @@ public:
     // ------ Cell text drawing functions
     //
     void DrawTextRectangle( wxDC& dc, std::string_view value, const wxRect&,
-                            int horizontalAlignment = wxALIGN_LEFT,
-                            int verticalAlignment = wxALIGN_TOP,
+                            wxAlignment horizontalAlignment = wxAlignment::Left,
+                            wxAlignment verticalAlignment = wxAlignment::Top,
                             int textOrientation = wxHORIZONTAL ) const;
 
     void DrawTextRectangle( wxDC& dc, const std::vector<std::string>& lines, const wxRect&,
-                            int horizontalAlignment = wxALIGN_LEFT,
-                            int verticalAlignment = wxALIGN_TOP,
+                            wxAlignment horizontalAlignment = wxAlignment::Left,
+                            wxAlignment verticalAlignment = wxAlignment::Top,
                             int textOrientation = wxHORIZONTAL ) const;
 
     void DrawTextRectangle(wxDC& dc,
                            std::string_view text,
                            const wxRect& rect,
                            const wxGridCellAttr& attr,
-                           int defaultHAlign = wxALIGN_INVALID,
-                           int defaultVAlign = wxALIGN_INVALID) const;
+                           wxAlignment defaultHAlign = wxAlignment::Invalid,
+                           wxAlignment defaultVAlign = wxAlignment::Invalid) const;
 
     // ------ grid render function for printing
     //
@@ -1788,9 +1787,9 @@ public:
     wxColour GetLabelBackgroundColour() const { return m_labelBackgroundColour; }
     wxColour GetLabelTextColour() const { return m_labelTextColour; }
     wxFont   GetLabelFont() const { return m_labelFont; }
-    void     GetRowLabelAlignment( int *horiz, int *vert ) const;
-    void     GetColLabelAlignment( int *horiz, int *vert ) const;
-    void     GetCornerLabelAlignment( int *horiz, int *vert ) const;
+    void     GetRowLabelAlignment( wxAlignment* horiz, wxAlignment* vert ) const;
+    void     GetColLabelAlignment( wxAlignment* horiz, wxAlignment* vert ) const;
+    void     GetCornerLabelAlignment( wxAlignment* horiz, wxAlignment* vert ) const;
     int      GetColLabelTextOrientation() const;
     int      GetCornerLabelTextOrientation() const;
     std::string GetRowLabelValue( int row ) const;
@@ -1817,9 +1816,9 @@ public:
     void     SetLabelBackgroundColour( const wxColour& );
     void     SetLabelTextColour( const wxColour& );
     void     SetLabelFont( const wxFont& );
-    void     SetRowLabelAlignment( int horiz, int vert );
-    void     SetColLabelAlignment( int horiz, int vert );
-    void     SetCornerLabelAlignment( int horiz, int vert );
+    void     SetRowLabelAlignment( wxAlignment horiz, wxAlignment vert );
+    void     SetColLabelAlignment( wxAlignment horiz, wxAlignment vert );
+    void     SetCornerLabelAlignment( wxAlignment horiz, wxAlignment vert );
     void     SetColLabelTextOrientation( int textOrientation );
     void     SetCornerLabelTextOrientation( int textOrientation );
     void     SetRowLabelValue( int row, const std::string& );
@@ -1971,8 +1970,8 @@ public:
     wxColour GetCellTextColour( int row, int col ) const;
     wxFont   GetDefaultCellFont() const;
     wxFont   GetCellFont( int row, int col ) const;
-    void     GetDefaultCellAlignment( int *horiz, int *vert ) const;
-    void     GetCellAlignment( int row, int col, int *horiz, int *vert ) const;
+    void     GetDefaultCellAlignment( wxAlignment* horiz, wxAlignment* vert ) const;
+    void     GetCellAlignment( int row, int col, wxAlignment* horiz, wxAlignment* vert ) const;
 
     wxGridFitMode GetDefaultCellFitMode() const;
     wxGridFitMode GetCellFitMode(int row, int col) const;
@@ -2128,7 +2127,7 @@ public:
     void     SetDefaultCellFont( const wxFont& );
     void     SetCellFont( int row, int col, const wxFont& );
     void     SetDefaultCellAlignment( int horiz, int vert );
-    void     SetCellAlignment( int row, int col, int horiz, int vert );
+    void     SetCellAlignment( int row, int col, wxAlignment horiz, wxAlignment vert );
 
     void     SetDefaultCellFitMode(wxGridFitMode fitMode);
     void     SetCellFitMode(int row, int col, wxGridFitMode fitMode);
@@ -2436,13 +2435,13 @@ protected:
     int        m_extraWidth{};
     int        m_extraHeight{};
 
-    int        m_rowLabelHorizAlign{wxALIGN_CENTRE};
-    int        m_rowLabelVertAlign{wxALIGN_CENTRE};
-    int        m_colLabelHorizAlign{wxALIGN_CENTRE};
-    int        m_colLabelVertAlign{wxALIGN_CENTRE};
+    wxAlignment        m_rowLabelHorizAlign{wxAlignment::Center};
+    wxAlignment        m_rowLabelVertAlign{wxAlignment::Center};
+    wxAlignment        m_colLabelHorizAlign{wxAlignment::Center};
+    wxAlignment        m_colLabelVertAlign{wxAlignment::Center};
     int        m_colLabelTextOrientation{wxHORIZONTAL};
-    int        m_cornerLabelHorizAlign{wxALIGN_CENTRE};
-    int        m_cornerLabelVertAlign{wxALIGN_CENTRE};
+    wxAlignment        m_cornerLabelHorizAlign{wxAlignment::Center};
+    wxAlignment        m_cornerLabelVertAlign{wxAlignment::Center};
     int        m_cornerLabelTextOrientation{wxHORIZONTAL};
     int        m_cellHighlightPenWidth{2};
     int        m_cellHighlightROPenWidth{1};

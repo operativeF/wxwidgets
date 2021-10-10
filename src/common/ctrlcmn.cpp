@@ -212,7 +212,7 @@ int wxControlBase::FindAccelIndex(const std::string& label, std::string* labelOn
 
 wxBorder wxControlBase::GetDefaultBorder() const
 {
-    return wxBORDER_THEME;
+    return wxBorder::Theme;
 }
 
 /* static */ wxVisualAttributes

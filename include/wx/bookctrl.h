@@ -241,7 +241,7 @@ protected:
     };
 
     // choose the default border for this window
-    wxBorder GetDefaultBorder() const override { return wxBORDER_NONE; }
+    wxBorder GetDefaultBorder() const override { return wxBorder::None; }
 
     // After the insertion of the page in the method InsertPage, calling this
     // method sets the selection to the given page or the first one if there is

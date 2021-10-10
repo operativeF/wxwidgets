@@ -10,10 +10,9 @@
 #ifndef _WX_XRC_XMLRESHANDLER_H_
 #define _WX_XRC_XMLRESHANDLER_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_XRC
 
+#include "wx/directionflags.h"
 #include "wx/string.h"
 #include "wx/artprov.h"
 #include "wx/colour.h"
@@ -84,7 +83,7 @@ public:
     virtual wxCoord GetDimension(const wxString& param, wxCoord defaultv = 0,
                                  wxWindow *windowToUse = nullptr) = 0;
     virtual wxSize GetPairInts(const wxString& param) = 0;
-    virtual wxDirection GetDirection(const wxString& param, wxDirection dir = wxLEFT) = 0;
+    virtual wxDirection GetDirection(const wxString& param, wxDirection dir = wxDirection::Left) = 0;
     virtual wxBitmap GetBitmap(const wxString& param = wxT("bitmap"),
                                const wxArtClient& defaultArtClient = wxASCII_STR(wxART_OTHER),
                                wxSize size = wxDefaultSize) = 0;
@@ -317,7 +316,7 @@ protected:
     {
         return GetImpl()->GetPairInts(param);
     }
-    wxDirection GetDirection(const wxString& param, wxDirection dir = wxLEFT)
+    wxDirection GetDirection(const wxString& param, wxDirection dir = wxDirection::Left)
     {
         return GetImpl()->GetDirection(param, dir);
     }

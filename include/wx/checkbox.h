@@ -129,7 +129,7 @@ public:
 
 protected:
     // choose the default border for this window
-    wxBorder GetDefaultBorder() const override { return wxBORDER_NONE; }
+    wxBorder GetDefaultBorder() const override { return wxBorder::None; }
 
     virtual void DoSet3StateValue(wxCheckBoxState WXUNUSED(state)) { wxFAIL; }
 

@@ -54,7 +54,7 @@
             : wxFrame(NULL, wxID_ANY, wxT("systray icon"),
                       wxDefaultPosition, wxDefaultSize,
                       wxDEFAULT_FRAME_STYLE | wxFRAME_NO_TASKBAR |
-                      wxSIMPLE_BORDER | wxFRAME_SHAPED) {}
+                      wxBorder::Simple | wxFRAME_SHAPED) {}
 
         static bool IsProtocolSupported() { return false; }
     };

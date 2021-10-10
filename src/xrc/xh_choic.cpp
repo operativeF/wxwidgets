@@ -23,7 +23,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxChoiceXmlHandler, wxXmlResourceHandler);
 wxChoiceXmlHandler::wxChoiceXmlHandler()
   
 {
-    XRC_ADD_STYLE(wxCB_SORT);
+    XRC_ADD_STYLE(ComboStyles::Sort);
     AddWindowStyles();
 }
 

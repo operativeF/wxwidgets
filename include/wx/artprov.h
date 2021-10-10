@@ -12,6 +12,7 @@
 #define _WX_ARTPROV_H_
 
 #include "wx/bitmap.h"
+#include "wx/dialogflags.h"
 #include "wx/icon.h"
 #include "wx/iconbndl.h"
 
@@ -160,14 +161,14 @@ public:
                           const wxSize& size = wxDefaultSize);
 
     // Helper used by GetMessageBoxIcon(): return the art id corresponding to
-    // the standard wxICON_INFORMATION/WARNING/ERROR/QUESTION flags (only one
+    // the standard wxDialogIconFlags::Information/WARNING/ERROR/QUESTION flags (only one
     // can be set)
-    static wxArtID GetMessageBoxIconId(unsigned int flags);
+    static wxArtID GetMessageBoxIconId(wxDialogIconFlags flags);
 
     // Helper used by several generic classes: return the icon corresponding to
-    // the standard wxICON_INFORMATION/WARNING/ERROR/QUESTION flags (only one
+    // the standard wxDialogIconFlags::Information/Warning/Error/Question flags (only one
     // can be set)
-    static wxIcon GetMessageBoxIcon(unsigned int flags)
+    static wxIcon GetMessageBoxIcon(wxDialogIconFlags flags)
     {
         return GetIcon(GetMessageBoxIconId(flags), wxASCII_STR(wxART_MESSAGE_BOX));
     }

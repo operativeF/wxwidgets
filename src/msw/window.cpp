@@ -1338,7 +1338,7 @@ bool wxCheckWindowWndProc(WXHWND hWnd, WXWNDPROC WXUNUSED(wndProc))
 // Style handling
 // ----------------------------------------------------------------------------
 
-void wxWindowMSW::SetWindowStyleFlag(unsigned int flags)
+void wxWindowMSW::SetWindowStyleFlag(WindowFlags flags)
 {
     unsigned int flagsOld = GetWindowStyleFlag();
     if ( flags == flagsOld )
@@ -1444,7 +1444,7 @@ void wxWindowMSW::MSWUpdateStyle(long flagsOld, long exflagsOld)
 
 constexpr wxBorder wxWindowMSW::GetDefaultBorderForControl() const noexcept
 {
-    return wxBORDER_THEME;
+    return wxBorder::Theme;
 }
 
 wxBorder wxWindowMSW::GetDefaultBorder() const
@@ -1452,26 +1452,26 @@ wxBorder wxWindowMSW::GetDefaultBorder() const
     return wxWindowBase::GetDefaultBorder();
 }
 
-// Translate wxBORDER_THEME (and other border styles if necessary) to the value
+// Translate wxBorder::Theme (and other border styles if necessary) to the value
 // that makes most sense for this Windows environment
 wxBorder wxWindowMSW::TranslateBorder(wxBorder border) const
 {
 #if wxUSE_UXTHEME
-    if (border == wxBORDER_THEME)
+    if (border == wxBorder::Theme)
     {
         if (CanApplyThemeBorder())
         {
             if ( wxUxThemeIsActive() )
-                return wxBORDER_THEME;
+                return wxBorder::Theme;
         }
-        return wxBORDER_SUNKEN;
+        return wxBorder::Sunken;
     }
 #endif
     return border;
 }
 
 
-DWORD wxWindowMSW::MSWGetStyle(unsigned int flags, DWORD *exstyle) const
+DWORD wxWindowMSW::MSWGetStyle(WindowFlags flags, DWORD *exstyle) const
 {
     // translate common wxWidgets styles to Windows ones
 
@@ -1488,7 +1488,7 @@ DWORD wxWindowMSW::MSWGetStyle(unsigned int flags, DWORD *exstyle) const
     // optionally allow the old code to continue to use it provided a special
     // system option is turned on
     if ( !wxSystemOptions::GetOptionInt(wxT("msw.window.no-clip-children"))
-            || (flags & wxCLIP_CHILDREN) )
+            || (flags & wxWindowFlags::ClipChildren) )
         style |= WS_CLIPCHILDREN;
 
     // it doesn't seem useful to use WS_CLIPSIBLINGS here as we officially
@@ -1497,10 +1497,10 @@ DWORD wxWindowMSW::MSWGetStyle(unsigned int flags, DWORD *exstyle) const
     // regions), so avoid it altogether
 
 
-    if ( flags & wxVSCROLL )
+    if ( flags & wxWindowFlags::VScroll )
         style |= WS_VSCROLL;
 
-    if ( flags & wxHSCROLL )
+    if ( flags & wxWindowFlags::HScroll )
         style |= WS_HSCROLL;
 
     const wxBorder border = TranslateBorder(GetBorder(flags));
@@ -1508,8 +1508,8 @@ DWORD wxWindowMSW::MSWGetStyle(unsigned int flags, DWORD *exstyle) const
     // After translation, border is now optimized for the specific version of Windows
     // and theme engine presence.
 
-    // WS_BORDER is only required for wxBORDER_SIMPLE
-    if ( border == wxBORDER_SIMPLE )
+    // WS_BORDER is only required for wxBorder::Simple
+    if ( border == wxBorder::Simple )
         style |= WS_BORDER;
 
     // now deal with ext style if the caller wants it
@@ -1523,24 +1523,24 @@ DWORD wxWindowMSW::MSWGetStyle(unsigned int flags, DWORD *exstyle) const
         switch ( border )
         {
             default:
-            case wxBORDER_DEFAULT:
+            case wxBorder::Default:
                 wxFAIL_MSG( wxT("unknown border style") );
                 [[fallthrough]];
 
-            case wxBORDER_NONE:
-            case wxBORDER_SIMPLE:
-            case wxBORDER_THEME:
+            case wxBorder::None:
+            case wxBorder::Simple:
+            case wxBorder::Theme:
                 break;
 
-            case wxBORDER_STATIC:
+            case wxBorder::Static:
                 *exstyle |= WS_EX_STATICEDGE;
                 break;
 
-            case wxBORDER_RAISED:
+            case wxBorder::Raised:
                 *exstyle |= WS_EX_DLGMODALFRAME;
                 break;
 
-            case wxBORDER_SUNKEN:
+            case wxBorder::Sunken:
                 *exstyle |= WS_EX_CLIENTEDGE;
                 style &= ~WS_BORDER;
                 break;
@@ -2207,17 +2207,17 @@ wxSize wxWindowMSW::DoGetBorderSize() const
     wxCoord border;
     switch ( GetBorder() )
     {
-        case wxBORDER_STATIC:
-        case wxBORDER_SIMPLE:
+        case wxBorder::Static:
+        case wxBorder::Simple:
             border = 1;
             break;
 
-        case wxBORDER_SUNKEN:
-        case wxBORDER_THEME:
+        case wxBorder::Sunken:
+        case wxBorder::Theme:
             border = 2;
             break;
 
-        case wxBORDER_RAISED:
+        case wxBorder::Raised:
             border = 3;
             break;
 
@@ -2225,7 +2225,7 @@ wxSize wxWindowMSW::DoGetBorderSize() const
             wxFAIL_MSG( wxT("unknown border style") );
             [[fallthrough]];
 
-        case wxBORDER_NONE:
+        case wxBorder::None:
             border = 0;
     }
 
@@ -3699,7 +3699,7 @@ wxWindowMSW::MSWHandleMessage(WXLRESULT *result,
         case WM_NCCALCSIZE:
             {
                 const wxBorder border = TranslateBorder(GetBorder());
-                if (wxUxThemeIsActive() && border == wxBORDER_THEME)
+                if (wxUxThemeIsActive() && border == wxBorder::Theme)
                 {
                     // first ask the widget to calculate the border size
                     rc.result = MSWDefWindowProc(message, wParam, lParam);
@@ -3760,7 +3760,7 @@ wxWindowMSW::MSWHandleMessage(WXLRESULT *result,
         case WM_NCPAINT:
             {
                 const wxBorder border = TranslateBorder(GetBorder());
-                if (wxUxThemeIsActive() && border == wxBORDER_THEME)
+                if (wxUxThemeIsActive() && border == wxBorder::Theme)
                 {
                     // first ask the widget to paint its non-client area, such as scrollbars, etc.
                     rc.result = MSWDefWindowProc(message, wParam, lParam);

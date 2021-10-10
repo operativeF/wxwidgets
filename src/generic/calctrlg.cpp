@@ -176,11 +176,11 @@ bool wxGenericCalendarCtrl::Create(wxWindow *parent,
         CreateYearSpinCtrl();
         m_staticYear = new wxStaticText(GetParent(), wxID_ANY, m_date.Format(wxT("%Y")),
                                         wxDefaultPosition, wxDefaultSize,
-                                        wxALIGN_CENTRE);
+                                        wxAlignment::Center);
         CreateMonthComboBox();
         m_staticMonth = new wxStaticText(GetParent(), wxID_ANY, m_date.Format(wxT("%B")),
                                          wxDefaultPosition, wxDefaultSize,
-                                         wxALIGN_CENTRE);
+                                         wxAlignment::Center);
     }
 
     ShowCurrentControls();
@@ -242,7 +242,7 @@ void wxGenericCalendarCtrl::CreateMonthComboBox()
                                   wxDefaultPosition,
                                   wxDefaultSize,
                                   {},
-                                  wxCB_READONLY | wxCLIP_SIBLINGS);
+                                  ComboStyles::ReadOnly | wxCLIP_SIBLINGS);
 
     wxDateTime::Month m;
     for ( m = wxDateTime::Jan; m < wxDateTime::Inv_Month; wxNextMonth(m) )
@@ -682,7 +682,7 @@ wxSize wxGenericCalendarCtrl::DoGetBestSize() const
     }
 
     wxSize best(width, height);
-    if ( !HasFlag(wxBORDER_NONE) )
+    if ( !HasFlag(wxBorder::None) )
     {
         best += GetWindowBorderSize();
     }

@@ -205,7 +205,7 @@ void wxAuiFloatingFrame::OnMoveEvent(wxMoveEvent& event)
         if (!isMouseDown())
             return;
         OnMoveStart();
-        OnMoving(event.GetRect(), wxNORTH);
+        OnMoving(event.GetRect(), wxDirection::North);
         m_moving = true;
         return;
     }
@@ -257,7 +257,7 @@ void wxAuiFloatingFrame::OnMoveEvent(wxMoveEvent& event)
         return;
     }
 
-    wxDirection dir = wxALL;
+    wxDirection dir = wxDirection::All;
 
     int horiz_dist = std::abs(winRect.x - m_last3Rect.x);
     int vert_dist = std::abs(winRect.y - m_last3Rect.y);
@@ -265,16 +265,16 @@ void wxAuiFloatingFrame::OnMoveEvent(wxMoveEvent& event)
     if (vert_dist >= horiz_dist)
     {
         if (winRect.y < m_last3Rect.y)
-            dir = wxNORTH;
+            dir = wxDirection::North;
         else
-            dir = wxSOUTH;
+            dir = wxDirection::South;
     }
     else
     {
         if (winRect.x < m_last3Rect.x)
-            dir = wxWEST;
+            dir = wxDirection::West;
         else
-            dir = wxEAST;
+            dir = wxDirection::East;
     }
 
     m_last3Rect = m_last2Rect;

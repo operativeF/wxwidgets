@@ -697,8 +697,8 @@ bool wxTreeCtrl::Create(wxWindow *parent,
     gs_expandEvents[IDX_EXPAND][IDX_DOING] = wxEVT_TREE_ITEM_EXPANDING;
 
 
-    if ( (style & wxBORDER_MASK) == wxBORDER_DEFAULT )
-        style |= wxBORDER_SUNKEN;
+    if ( (style & wxBORDER_MASK) == wxBorder::Default )
+        style |= wxBorder::Sunken;
 
     if ( !CreateControl(parent, id, pos, size, style, validator, name) )
         return false;

@@ -72,7 +72,7 @@ wxTreebook::Create(wxWindow *parent,
 
     // no border for this control, it doesn't look nice together with the tree
     style &= ~wxBORDER_MASK;
-    style |= wxBORDER_NONE;
+    style |= wxBorder::None;
 
     if ( !wxControl::Create(parent, id, pos, size,
                             style, wxDefaultValidator, name) )
@@ -84,7 +84,7 @@ wxTreebook::Create(wxWindow *parent,
                     wxID_ANY,
                     wxDefaultPosition,
                     wxDefaultSize,
-                    wxBORDER_THEME |
+                    wxBorder::Theme |
                     wxTR_DEFAULT_STYLE |
                     wxTR_HIDE_ROOT |
                     wxTR_SINGLE

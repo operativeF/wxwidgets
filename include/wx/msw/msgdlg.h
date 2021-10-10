@@ -19,7 +19,7 @@ public:
     wxMessageDialog(wxWindow *parent,
                     const std::string& message,
                     const std::string& caption = wxMessageBoxCaptionStr,
-                    unsigned int style = wxOK|wxCENTRE,
+                    DialogFlags style = DialogFlags{wxDialogFlags::OK, wxDialogFlags::Centered},
                     const wxPoint& WXUNUSED(pos) = wxDefaultPosition)
         : wxMessageDialogBase(parent, message, caption, style)
     {

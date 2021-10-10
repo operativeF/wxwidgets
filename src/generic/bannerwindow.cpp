@@ -17,6 +17,7 @@
 #include "wx/bitmap.h"
 #include "wx/colour.h"
 #include "wx/dcbuffer.h"
+#include "wx/directionflags.h"
 #include "wx/stringutils.h"
 
 // Some constants for banner layout, currently they're hard coded but we could
@@ -45,7 +46,7 @@ wxBannerWindow::Create(wxWindow* parent,
 
     wxASSERT_MSG
     (
-        dir == wxLEFT || dir == wxRIGHT || dir == wxTOP || dir == wxBOTTOM,
+        dir == wxDirection::Left || dir == wxDirection::Right || dir == wxDirection::Top || dir == wxDirection::Bottom,
         wxS("Invalid banner direction")
     );
 
@@ -110,7 +111,7 @@ wxSize wxBannerWindow::DoGetBestClientSize() const
         wxSize sizeWin(std::max(sizeTitle.x, sizeText.x), sizeTitle.y + sizeText.y);
 
         // If we draw the text vertically width and height are swapped.
-        if ( m_direction == wxLEFT || m_direction == wxRIGHT )
+        if ( m_direction == wxDirection::Left || m_direction == wxDirection::Right )
             std::swap(sizeWin.x, sizeWin.y);
 
         sizeWin += 2*wxSize(MARGIN_X, MARGIN_Y);
@@ -147,17 +148,18 @@ void wxBannerWindow::OnPaint(wxPaintEvent& WXUNUSED(event))
         else // Draw gradient background.
         {
             wxDirection gradientDir;
-            if ( m_direction == wxLEFT )
+
+            if ( m_direction == wxDirection::Left )
             {
-                gradientDir = wxTOP;
+                gradientDir = wxDirection::Top;
             }
-            else if ( m_direction == wxRIGHT )
+            else if ( m_direction == wxDirection::Right )
             {
-                gradientDir = wxBOTTOM;
+                gradientDir = wxDirection::Bottom;
             }
-            else // For both wxTOP and wxBOTTOM.
+            else // For both wxDirection::Top and wxDirection::Bottom.
             {
-                gradientDir = wxRIGHT;
+                gradientDir = wxDirection::Right;
             }
 
             dc.GradientFillLinear(GetClientRect(), m_colStart, m_colEnd,
@@ -202,20 +204,20 @@ wxColour wxBannerWindow::GetBitmapBg()
 
     switch ( m_direction )
     {
-        case wxTOP:
-        case wxBOTTOM:
+        case wxDirection::Top:
+        case wxDirection::Bottom:
             // The bitmap will be extended to the right.
             p.x = size.x;
             p.y = 0;
             break;
 
-        case wxLEFT:
+        case wxDirection::Left:
             // The bitmap will be extended from the top.
             p.x = 0;
             p.y = 0;
             break;
 
-        case wxRIGHT:
+        case wxDirection::Right:
             // The bitmap will be extended to the bottom.
             p.x = 0;
             p.y = size.y;
@@ -223,7 +225,7 @@ wxColour wxBannerWindow::GetBitmapBg()
 
         // This case is there only to prevent g++ warnings about not handling
         // some enum elements in the switch, it can't really happen.
-        case wxALL:
+        case wxDirection::All:
             wxFAIL_MSG( wxS("Unreachable") );
     }
 
@@ -245,8 +247,8 @@ void wxBannerWindow::DrawBitmapBackground(wxDC& dc)
 
     switch ( m_direction )
     {
-        case wxTOP:
-        case wxBOTTOM:
+        case wxDirection::Top:
+        case wxDirection::Bottom:
             // Draw the bitmap at the origin, its rightmost could be truncated,
             // as it's meant to be.
             dc.DrawBitmap(m_bitmap, 0, 0);
@@ -256,7 +258,7 @@ void wxBannerWindow::DrawBitmapBackground(wxDC& dc)
             rectSolid.height = size.y;
             break;
 
-        case wxLEFT:
+        case wxDirection::Left:
             // The top most part of the bitmap may be truncated but its bottom
             // must be always visible so intentionally draw it possibly partly
             // outside of the window.
@@ -265,7 +267,7 @@ void wxBannerWindow::DrawBitmapBackground(wxDC& dc)
             dc.DrawBitmap(m_bitmap, 0, rectSolid.height);
             break;
 
-        case wxRIGHT:
+        case wxDirection::Right:
             // Draw the bitmap at the origin, possibly truncating its
             // bottommost part.
             dc.DrawBitmap(m_bitmap, 0, 0);
@@ -277,7 +279,7 @@ void wxBannerWindow::DrawBitmapBackground(wxDC& dc)
 
         // This case is there only to prevent g++ warnings about not handling
         // some enum elements in the switch, it can't really happen.
-        case wxALL:
+        case wxDirection::All:
             wxFAIL_MSG( wxS("Unreachable") );
     }
 
@@ -296,25 +298,25 @@ wxBannerWindow::DrawBannerTextLine(wxDC& dc,
 {
     switch ( m_direction )
     {
-        case wxTOP:
-        case wxBOTTOM:
+        case wxDirection::Top:
+        case wxDirection::Bottom:
             // The simple case: we just draw the text normally.
             dc.wxDrawText(str, pos);
             break;
 
-        case wxLEFT:
+        case wxDirection::Left:
             // We draw the text vertically and start from the lower left
             // corner and not the upper left one as usual.
             dc.DrawRotatedText(str, wxPoint{pos.y, GetClientSize().y - pos.x}, 90);
             break;
 
-        case wxRIGHT:
+        case wxDirection::Right:
             // We also draw the text vertically but now we start from the upper
             // right corner and draw it from top to bottom.
             dc.DrawRotatedText(str, wxPoint{GetClientSize().x - pos.y, pos.x}, -90);
             break;
 
-        case wxALL:
+        case wxDirection::All:
             wxFAIL_MSG("Unreachable");
     }
 }

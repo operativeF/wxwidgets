@@ -36,12 +36,10 @@
    instead it is just a mix-in.
  */
 
-
-#include "wx/defs.h"
-
 #if wxUSE_COMBOCTRL
 
 #include "wx/control.h"
+#include "wx/directionflags.h"
 #include "wx/renderer.h" // this is needed for wxCONTROL_XXX flags
 #include "wx/bitmap.h" // wxBitmap used by-value
 #include "wx/textentry.h"
@@ -139,7 +137,7 @@ struct wxComboCtrlFeatures
         PaintWritable       = 0x0020, // A variable-width area in front of writable
                                       // combo control's textctrl can be custom
                                       // painted
-        Borderless          = 0x0040, // wxNO_BORDER window style works
+        Borderless          = 0x0040, // wxBorder::None window style works
 
         // There are no feature flags for...
         // PushButtonBitmapBackground - if its in wxRendererNative, then it should be
@@ -151,6 +149,21 @@ struct wxComboCtrlFeatures
                               Borderless
     };
 };
+
+/*
+ * wxComboBox style flags
+ */
+
+enum class ComboStyles
+{
+    Simple,
+    Sort,
+    ReadOnly,
+    DropDown,
+    _max_size
+};
+
+using ComboBoxFlags = InclBitfield<ComboStyles>;
 
 constexpr char wxComboCtrlNameStr[] = "comboCtrl";
 
@@ -244,6 +257,11 @@ public:
     std::string GetRange(long from, long to) const override
         { return wxTextEntryBase::GetRange(from, to); }
 
+    ComboBoxFlags GetComboStyles() const
+    {
+        return m_comboFlags;
+    }
+
     // Replace() and DoSetValue() need to be fully re-implemented since
     // EventSuppressor utility class does not work with the way
     // wxComboCtrl is implemented.
@@ -323,7 +341,7 @@ public:
     int GetCustomPaintWidth() const { return m_widthCustomPaint; }
 
     // Set side of the control to which the popup will align itself.
-    // Valid values are wxLEFT, wxRIGHT and 0. The default value 0 wmeans
+    // Valid values are wxDirection::Left, wxDirection::Right and 0. The default value 0 wmeans
     // that the side of the button will be used.
     void SetPopupAnchor( int anchorSide )
     {
@@ -333,13 +351,13 @@ public:
     // Set position of dropdown button.
     //   width: button width. <= 0 for default.
     //   height: button height. <= 0 for default.
-    //   side: wxLEFT or wxRIGHT, indicates on which side the button will be placed.
+    //   side: wxDirection::Left or wxDirection::Right, indicates on which side the button will be placed.
     //   spacingX: empty space on sides of the button. Default is 0.
     // Remarks:
     //   There is no spacingY - the button will be centred vertically.
     void SetButtonPosition( int width = -1,
                             int height = -1,
-                            int side = wxRIGHT,
+                            int side = wxDirection::Right,
                             int spacingX = 0 );
 
     // Returns current size of the dropdown button.
@@ -423,7 +441,7 @@ public:
         const wxWindow* curFocus = FindFocus();
         return ( IsPopupWindowState(Hidden) &&
                  (curFocus == m_mainCtrlWnd || (m_btn && curFocus == m_btn)) &&
-                 (m_windowStyle & wxCB_READONLY) );
+                 (m_comboFlags & ComboStyles::ReadOnly) );
     }
 
     // These methods return references to appropriate dropbutton bitmaps
@@ -692,7 +710,7 @@ protected:
     // button position
     int                     m_btnWid{-1};
     int                     m_btnHei{-1};
-    int                     m_btnSide{wxRIGHT};
+    wxDirection             m_btnSide{wxDirection::Right};
     int                     m_btnSpacingX{0};
 
     // last default button width
@@ -703,6 +721,8 @@ protected:
 
     // area used by the button
     wxSize                  m_btnSize;
+
+    ComboBoxFlags           m_comboFlags;
 
     // custom style for m_text
     unsigned int            m_textCtrlStyle{};

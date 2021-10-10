@@ -10,6 +10,8 @@
 #ifndef _WX_GENERIC_INFOBAR_H_
 #define _WX_GENERIC_INFOBAR_H_
 
+#include "wx/dialogflags.h"
+
 class WXDLLIMPEXP_FWD_CORE wxBitmapButton;
 class WXDLLIMPEXP_FWD_CORE wxStaticBitmap;
 class WXDLLIMPEXP_FWD_CORE wxStaticText;
@@ -39,7 +41,7 @@ public:
     // ----------------------------
 
     void ShowMessage(const std::string& msg,
-                     unsigned int flags = wxICON_INFORMATION) override;
+                     wxDialogIconFlags flags = wxDialogIconFlags::Information) override;
 
     void Dismiss() override;
 
@@ -90,7 +92,7 @@ public:
 protected:
     // info bar shouldn't have any border by default, the colour difference
     // between it and the main window separates it well enough
-    wxBorder GetDefaultBorder() const override { return wxBORDER_NONE; }
+    wxBorder GetDefaultBorder() const override { return wxBorder::None; }
 
 
     // update the parent to take our new or changed size into account (notably

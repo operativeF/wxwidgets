@@ -181,7 +181,7 @@ public:
 
     void Init( wxPropertyGridPageState* state,
                int flags,
-               int startPos = wxTOP,
+               int startPos = wxDirection::Top,
                int dir = 0 );
 
     // Iterate to the next property.

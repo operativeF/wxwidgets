@@ -962,7 +962,7 @@ wxWindow* wxPGChoiceEditor::CreateControlsBase( wxPropertyGrid* propGrid,
     si.x -= wxPG_CHOICEXADJUST;
     wxWindow* ctrlParent = propGrid->GetPanel();
 
-    int odcbFlags = extraStyle | wxBORDER_NONE | wxTE_PROCESS_ENTER;
+    int odcbFlags = extraStyle | wxBorder::None | wxTE_PROCESS_ENTER;
 
     if ( property->HasFlag(wxPG_PROP_USE_DCC) &&
          wxDynamicCast(property, wxBoolProperty) )
@@ -1009,7 +1009,7 @@ wxWindow* wxPGChoiceEditor::CreateControlsBase( wxPropertyGrid* propGrid,
     // Under OSX default button seems to look fine
     // so there is no need to change it.
 #ifndef __WXOSX__
-    cb->SetButtonPosition(si.y,0,wxRIGHT);
+    cb->SetButtonPosition(si.y,0,wxDirection::Right);
 #endif // !__WXOSX__
     cb->SetMargins(wxPG_XBEFORETEXT-1);
 
@@ -1027,7 +1027,7 @@ wxWindow* wxPGChoiceEditor::CreateControlsBase( wxPropertyGrid* propGrid,
         if ( !defString.empty() )
             cb->SetText( defString );
     }
-    else if ( !(extraStyle & wxCB_READONLY) && !defString.empty() )
+    else if ( !(extraStyle & ComboStyles::ReadOnly) && !defString.empty() )
     {
         propGrid->SetupTextCtrlValue(defString);
         cb->SetValue( defString );
@@ -1057,7 +1057,7 @@ void wxPGChoiceEditor::UpdateControl( wxPGProperty* property, wxWindow* ctrl ) c
 wxPGWindowList wxPGChoiceEditor::CreateControls( wxPropertyGrid* propGrid, wxPGProperty* property,
         const wxPoint& pos, const wxSize& sz ) const
 {
-    return CreateControlsBase(propGrid,property,pos,sz,wxCB_READONLY);
+    return CreateControlsBase(propGrid,property,pos,sz,ComboStyles::ReadOnly);
 }
 
 
@@ -1115,7 +1115,7 @@ bool wxPGChoiceEditor::OnEvent( wxPropertyGrid* propGrid, wxPGProperty* property
                 if ( !property->IsValueUnspecified() )
                     propGrid->SetInternalFlag(wxPG_FL_VALUE_CHANGE_IN_EVENT);
                 property->SetValueToUnspecified();
-                if ( !cb->HasFlag(wxCB_READONLY) )
+                if ( !cb->HasFlag(ComboStyles::ReadOnly) )
                 {
                     wxString unspecValueText;
                     unspecValueText = propGrid->GetUnspecifiedValueText();
@@ -1173,7 +1173,7 @@ void wxPGChoiceEditor::SetValueToUnspecified( wxPGProperty* WXUNUSED(property),
 {
     wxOwnerDrawnComboBox* cb = (wxOwnerDrawnComboBox*)ctrl;
 
-    if ( cb->HasFlag(wxCB_READONLY) )
+    if ( cb->HasFlag(ComboStyles::ReadOnly) )
         cb->SetSelection(-1);
 }
 
@@ -1474,7 +1474,7 @@ public:
                       wxWindowID id,
                       const wxPoint& pos = wxDefaultPosition,
                       const wxSize& size = wxDefaultSize )
-        : wxControl(parent,id,pos,size,wxBORDER_NONE|wxWANTS_CHARS)
+        : wxControl(parent,id,pos,size,wxBorder::None|wxWANTS_CHARS)
     {
         // Due to SetOwnFont stuff necessary for GTK+ 1.2, we need to have this
         SetFont( parent->GetFont() );
@@ -1895,7 +1895,7 @@ wxWindow* wxPropertyGrid::GenerateEditorTextCtrl( const wxPoint& pos,
     wxWindow* ctrlParent = GetPanel();
 
     if ( !hasSpecialSize )
-        tcFlags |= wxBORDER_NONE;
+        tcFlags |= wxBorder::None;
 
     wxTextCtrl* tc = new wxTextCtrl();
 

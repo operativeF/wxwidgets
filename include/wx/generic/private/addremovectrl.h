@@ -24,10 +24,10 @@ public:
     {
         m_btnAdd = new wxButton(parent, wxID_ADD, GetAddButtonLabel(),
                                 wxDefaultPosition, wxDefaultSize,
-                                wxBU_EXACTFIT | wxBORDER_NONE);
+                                wxBU_EXACTFIT | wxBorder::None);
         m_btnRemove = new wxButton(parent, wxID_REMOVE, GetRemoveButtonLabel(),
                                    wxDefaultPosition, wxDefaultSize,
-                                   wxBU_EXACTFIT | wxBORDER_NONE);
+                                   wxBU_EXACTFIT | wxBorder::None);
 
         wxSizer* const sizerBtns = new wxBoxSizer(wxVERTICAL);
         sizerBtns->Add(m_btnAdd, wxSizerFlags().Expand());
@@ -35,7 +35,7 @@ public:
 
         wxSizer* const sizerTop = new wxBoxSizer(wxHORIZONTAL);
         sizerTop->Add(ctrlItems, wxSizerFlags(1).Expand());
-        sizerTop->Add(sizerBtns, wxSizerFlags().Centre().Border(wxLEFT));
+        sizerTop->Add(sizerBtns, wxSizerFlags().Centre().Border(wxDirection::Left));
         parent->SetSizer(sizerTop);
 
         SetUpEvents();

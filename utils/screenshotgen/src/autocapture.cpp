@@ -201,7 +201,7 @@ bool AutoCaptureMechanism::Capture(wxBitmap* bitmap, Control& ctrl)
         ctrl.name = ctrl.ctrl->wxGetClassInfo()->wxGetClassName();
     }
 
-    int choice = wxNO;
+    wxDialogFlags choice{wxDialogFlags::No};
 
     wxRect rect = GetRect(ctrl.ctrl, ctrl.flag);
 
@@ -213,9 +213,9 @@ bool AutoCaptureMechanism::Capture(wxBitmap* bitmap, Control& ctrl)
             wxString::Format(_("Do you wish to capture the drop-down list of '%s' ?\n\n If YES, please drop down the list of '%s' in 5 seconds after closing this message box.\n If NO, the screenshot for this control won't contain its drop-down list."),
                              ctrl.name, ctrl.name);
 
-        choice = wxMessageBox(msg, caption, wxYES_NO, m_notebook);
+        choice = wxMessageBox(msg, caption, wxDialogFlags::Yes_No, m_notebook);
 
-        if (choice == wxYES)
+        if (choice == wxDialogFlags::Yes)
         {
             //A little hint
             ctrl.ctrl->SetCursor(wxCursor(wxCURSOR_HAND));
@@ -234,9 +234,9 @@ bool AutoCaptureMechanism::Capture(wxBitmap* bitmap, Control& ctrl)
     ctrl.name.MakeLower();
 
     // take the screenshot
-    Capture(bitmap, rect, (choice == wxYES)?5:0);
+    Capture(bitmap, rect, (choice == wxDialogFlags::Yes) ? 5 : 0);
 
-    if (choice == wxYES) ctrl.ctrl->SetCursor(wxNullCursor);
+    if (choice == wxDialogFlags::Yes) ctrl.ctrl->SetCursor(wxNullCursor);
 
     if (ctrl.flag & AJ_RegionAdjust)
         PutBack(ctrl.ctrl);
@@ -309,7 +309,7 @@ wxRect AutoCaptureMechanism::GetRect(wxWindow* ctrl, int flag)
         m_grid->Add(new wxStaticText(parent, wxID_ANY, wxT(" ")));
         m_grid->Add(l[1]);
         m_grid->Add(new wxStaticText(parent, wxID_ANY, wxT(" ")));
-        m_grid->Add(ctrl, 1, wxEXPAND);
+        m_grid->Add(ctrl, 1, wxStretch::Expand);
         m_grid->Add(new wxStaticText(parent, wxID_ANY, wxT(" ")));
         m_grid->Add(l[2]);
         m_grid->Add(new wxStaticText(parent, wxID_ANY, wxT(" ")));

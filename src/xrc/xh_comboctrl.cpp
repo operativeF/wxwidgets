@@ -26,8 +26,8 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxComboCtrlXmlHandler, wxXmlResourceHandler);
 wxComboCtrlXmlHandler::wxComboCtrlXmlHandler()
                       
 {
-    XRC_ADD_STYLE(wxCB_SORT);
-    XRC_ADD_STYLE(wxCB_READONLY);
+    XRC_ADD_STYLE(ComboStyles::Sort);
+    XRC_ADD_STYLE(ComboStyles::ReadOnly);
     XRC_ADD_STYLE(wxTE_PROCESS_ENTER);
     XRC_ADD_STYLE(wxCC_SPECIAL_DCLICK);
     XRC_ADD_STYLE(wxCC_STD_BUTTON);

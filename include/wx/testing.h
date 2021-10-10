@@ -190,23 +190,23 @@ class wxExpectDismissableModal
     : public wxExpectModalBase<T, wxExpectDismissableModal<T> >
 {
 public:
-    explicit wxExpectDismissableModal(int id)
+    explicit wxExpectDismissableModal(wxDialogFlags id)
     {
         switch ( id )
         {
-            case wxYES:
+            case wxDialogFlags::Yes:
                 m_id = wxID_YES;
                 break;
-            case wxNO:
+            case wxDialogFlags::No:
                 m_id = wxID_NO;
                 break;
-            case wxCANCEL:
+            case wxDialogFlags::Cancel:
                 m_id = wxID_CANCEL;
                 break;
-            case wxOK:
+            case wxDialogFlags::OK:
                 m_id = wxID_OK;
                 break;
-            case wxHELP:
+            case wxDialogFlags::Help:
                 m_id = wxID_HELP;
                 break;
             default:
@@ -244,15 +244,15 @@ protected:
         {
             case wxID_YES:
             case wxID_NO:
-                details = wxASCII_STR("wxYES_NO style");
+                details = wxASCII_STR("wxDialogFlags::Yes_No style");
                 break;
 
             case wxID_CANCEL:
-                details = wxASCII_STR("wxCANCEL style");
+                details = wxASCII_STR("wxDialogFlags::Cancel style");
                 break;
 
             case wxID_OK:
-                details = wxASCII_STR("wxOK style");
+                details = wxASCII_STR("wxDialogFlags::OK style");
                 break;
 
             default:
@@ -471,8 +471,8 @@ private:
     wxTEST_DIALOG
     (
         RunSomeFunction(),
-        wxExpectModal<wxMessageDialog>(wxNO),
-        wxExpectModal<MyConfirmationDialog>(wxYES),
+        wxExpectModal<wxMessageDialog>(wxDialogFlags::No),
+        wxExpectModal<MyConfirmationDialog>(wxDialogFlags::Yes),
         wxExpectModal<wxFileDialog>(wxGetCwd() + "/test.txt")
     );
     @endcode
@@ -486,7 +486,7 @@ private:
     wxTEST_DIALOG
     (
         RunSomeFunction(),
-        wxExpectModal<wxMessageDialog>(wxNO),
+        wxExpectModal<wxMessageDialog>(wxDialogFlags::No),
         wxExpectModal<wxFileDialog>(wxGetCwd() + "/test.txt").Optional()
     );
     @endcode

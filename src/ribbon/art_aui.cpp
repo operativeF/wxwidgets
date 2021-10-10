@@ -329,7 +329,7 @@ void wxRibbonAUIArtProvider::DrawTabCtrlBackground(
     wxRect gradient_rect(rect);
     gradient_rect.height--;
     dc.GradientFillLinear(gradient_rect, m_tab_ctrl_background_colour,
-        m_tab_ctrl_background_gradient_colour, wxSOUTH);
+        m_tab_ctrl_background_gradient_colour, wxDirection::South);
     dc.SetPen(m_tab_border_pen);
     dc.DrawLine(rect.x, rect.GetBottom(), rect.GetRight()+1, rect.GetBottom());
 }
@@ -397,12 +397,12 @@ void wxRibbonAUIArtProvider::DrawTab(wxDC& dc,
             grad_rect.y - tab.rect.y - 3);
         if(tab.highlight)
         {
-            dc.GradientFillLinear(grad_rect, m_tab_highlight_top_colour, m_tab_highlight_top_gradient_colour, wxSOUTH);
+            dc.GradientFillLinear(grad_rect, m_tab_highlight_top_colour, m_tab_highlight_top_gradient_colour, wxDirection::South);
         }
         else
         {
             dc.GradientFillLinear(grad_rect, m_tab_active_background_colour,
-                m_tab_active_background_gradient_colour, wxSOUTH);
+                m_tab_active_background_gradient_colour, wxDirection::South);
         }
     }
     else
@@ -420,7 +420,7 @@ void wxRibbonAUIArtProvider::DrawTab(wxDC& dc,
         grad_rect.y += 3;
         grad_rect.height = btm_rect.y - grad_rect.y;
         dc.GradientFillLinear(grad_rect, m_tab_hover_background_top_colour,
-            m_tab_hover_background_top_gradient_colour, wxSOUTH);
+            m_tab_hover_background_top_gradient_colour, wxDirection::South);
     }
 
     wxPoint border_points[5];
@@ -778,9 +778,9 @@ void wxRibbonAUIArtProvider::DrawPanelBackground(
     }
     dc.GradientFillLinear(label_rect,
 #ifdef __WXMAC__
-        label_bg_grad_colour, label_bg_colour, wxSOUTH);
+        label_bg_grad_colour, label_bg_colour, wxDirection::South);
 #else
-        label_bg_colour, label_bg_grad_colour, wxSOUTH);
+        label_bg_colour, label_bg_grad_colour, wxDirection::South);
 #endif
     dc.SetFont(m_panel_label_font);
     dc.wxDrawText(wnd->GetLabel(), wxPoint{label_rect.x + 3, label_rect.y + 2});
@@ -797,7 +797,7 @@ void wxRibbonAUIArtProvider::DrawPanelBackground(
         wxColour colour = m_page_hover_background_colour;
         wxColour gradient = m_page_hover_background_gradient_colour;
 #endif
-        dc.GradientFillLinear(gradient_rect, colour, gradient, wxSOUTH);
+        dc.GradientFillLinear(gradient_rect, colour, gradient, wxDirection::South);
     }
 
     if(wnd->HasExtButton())
@@ -846,7 +846,7 @@ void wxRibbonAUIArtProvider::DrawMinimisedPanel(
             colour = gradient;
             gradient = temp;
         }
-        dc.GradientFillLinear(true_rect, colour, gradient, wxSOUTH);
+        dc.GradientFillLinear(true_rect, colour, gradient, wxDirection::South);
     }
 
     wxRect preview;
@@ -863,17 +863,17 @@ void wxRibbonAUIArtProvider::DrawMinimisedPanel(
 #ifdef __WXMAC__
     dc.GradientFillLinear(preview_caption_rect,
         m_panel_hover_label_background_gradient_colour,
-        m_panel_hover_label_background_colour, wxSOUTH);
+        m_panel_hover_label_background_colour, wxDirection::South);
     dc.GradientFillLinear(preview,
         m_page_hover_background_gradient_colour,
-        m_page_hover_background_colour, wxSOUTH);
+        m_page_hover_background_colour, wxDirection::South);
 #else
     dc.GradientFillLinear(preview_caption_rect,
         m_panel_hover_label_background_colour,
-        m_panel_hover_label_background_gradient_colour, wxSOUTH);
+        m_panel_hover_label_background_gradient_colour, wxDirection::South);
     dc.GradientFillLinear(preview,
         m_page_hover_background_colour,
-        m_page_hover_background_gradient_colour, wxSOUTH);
+        m_page_hover_background_gradient_colour, wxDirection::South);
 #endif
 
     if(bitmap.IsOk())
@@ -941,7 +941,7 @@ void wxRibbonAUIArtProvider::DrawPartialPanelBackground(wxDC& dc,
         paint_rect.x -= offset.x;
         paint_rect.y -= offset.y;
         dc.GradientFillLinear(paint_rect, starting_colour, ending_colour
-            , wxSOUTH);
+            , wxDirection::South);
     }
 }
 
@@ -999,7 +999,7 @@ void wxRibbonAUIArtProvider::DrawGalleryButton(wxDC& dc, wxRect rect,
     case wxRIBBON_GALLERY_BUTTON_NORMAL:
         dc.GradientFillLinear(reduced_rect,
             m_gallery_button_background_colour,
-            m_gallery_button_background_gradient_colour, wxSOUTH);
+            m_gallery_button_background_gradient_colour, wxDirection::South);
         btn_bitmap = bitmaps[0];
         break;
     case wxRIBBON_GALLERY_BUTTON_HOVERED:
@@ -1165,7 +1165,7 @@ void wxRibbonAUIArtProvider::DrawToolGroupBackground(
     wxRect bg_rect(rect);
     bg_rect.Deflate(1);
     dc.GradientFillLinear(bg_rect, m_tool_background_colour,
-        m_tool_background_gradient_colour, wxSOUTH);
+        m_tool_background_gradient_colour, wxDirection::South);
 }
 
 void wxRibbonAUIArtProvider::DrawTool(

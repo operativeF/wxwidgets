@@ -57,7 +57,7 @@ public:
     bool CanApplyThemeBorder() const override { return false; }
 
 protected:
-    wxBorder GetDefaultBorder() const override { return wxBORDER_NONE; }
+    wxBorder GetDefaultBorder() const override { return wxBorder::None; }
 
     DWORD MSWGetStyle(unsigned int flags, DWORD *exstyle = nullptr) const override;
 

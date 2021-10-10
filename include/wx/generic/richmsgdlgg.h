@@ -23,7 +23,7 @@ public:
     wxGenericRichMessageDialog(wxWindow *parent,
                                const std::string& message,
                                const std::string& caption = wxMessageBoxCaptionStr,
-                               unsigned int style = wxOK | wxCENTRE)
+                               DialogFlags style = DialogFlags{wxDialogFlags::OK, wxDialogFlags::Centered})
         : wxRichMessageDialogBase( parent, message, caption, style ),
           m_checkBox(nullptr),
           m_detailsPane(nullptr)

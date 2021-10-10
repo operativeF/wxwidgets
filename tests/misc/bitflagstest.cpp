@@ -14,16 +14,6 @@
 
 TEST_CASE("Bitflags")
 {
-    // Exclusive bitflag example
-    enum class Borders
-    {
-        Single,
-        Double,
-        Triple,
-        Raised,
-        _max_size
-    };
-
     // Combinable bitflag example
     enum class Styles
     {
@@ -132,5 +122,50 @@ TEST_CASE("Bitflags")
 
         newStyles.set(Styles::Bold);
         CHECK(styles != newStyles);
+    }
+}
+
+TEST_CASE("Combinable Bitfields")
+{
+    enum class Borders
+    {
+        Single,
+        Double,
+        Triple,
+        Raised,
+        _max_size
+    };
+
+    enum class Alignment
+    {
+        Top,
+        Left,
+        Bottom,
+        Right,
+        _max_size
+    };
+
+    CombineBitfield<Borders, Alignment> cb_field{};
+
+    SUBCASE("Toggle All")
+    {
+        CHECK(cb_field.empty());
+
+        cb_field.toggle_all();
+
+        CHECK(cb_field.as_value() == 0xFF);
+
+        cb_field.clear();
+    }
+
+    SUBCASE("Set All")
+    {
+        CHECK(cb_field.empty());
+
+        cb_field.set_all();
+
+        CHECK(cb_field.as_value() == 0xFF);
+
+        cb_field.clear();
     }
 }

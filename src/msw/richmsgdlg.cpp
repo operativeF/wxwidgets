@@ -60,16 +60,16 @@ int wxRichMessageDialog::ShowModal()
             tdc.pszFooter = m_footerText.t_str();
             switch ( m_footerIcon )
             {
-                case wxICON_INFORMATION:
+                case wxDialogIconFlags::Information:
                     tdc.pszFooterIcon = TD_INFORMATION_ICON;
                     break;
-                case wxICON_WARNING:
+                case wxDialogIconFlags::Warning:
                     tdc.pszFooterIcon = TD_WARNING_ICON;
                     break;
-                case wxICON_ERROR:
+                case wxDialogIconFlags::Error:
                     tdc.pszFooterIcon = TD_ERROR_ICON;
                     break;
-                case wxICON_AUTH_NEEDED:
+                case wxDialogIconFlags::AuthNeeded:
                     tdc.pszFooterIcon = TD_SHIELD_ICON;
                     break;
             }
@@ -95,7 +95,7 @@ int wxRichMessageDialog::ShowModal()
         // results in msAns being IDCANCEL while we want IDOK (just like
         // how the native MessageBox function does with only an "OK" button).
         if ( (msAns == IDCANCEL)
-            && !(GetMessageDialogStyle() & (wxYES_NO|wxCANCEL)) )
+            && !(GetMessageDialogStyle() & DialogFlags{wxDialogFlags::Yes_No, wxDialogFlags::Cancel}) )
         {
             msAns = IDOK;
         }

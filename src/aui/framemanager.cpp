@@ -10,7 +10,6 @@
 
 #include "wx/wxprec.h"
 
-
 #if wxUSE_AUI
 
 #ifndef WX_PRECOMP
@@ -30,6 +29,7 @@
 #include "wx/app.h"
 #include "wx/dcclient.h"
 #include "wx/dcscreen.h"
+#include "wx/directionflags.h"
 #include "wx/toolbar.h"
 #include "wx/image.h"
 #include "wx/statusbr.h"
@@ -824,7 +824,7 @@ void wxAuiManager::UpdateHintWindowConfig()
                                          wxFRAME_TOOL_WINDOW |
                                          wxFRAME_FLOAT_ON_PARENT |
                                          wxFRAME_NO_TASKBAR |
-                                         wxNO_BORDER);
+                                         wxBorder::None);
 
             m_hintWnd->SetBackgroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_ACTIVECAPTION));
         #elif defined(__WXMAC__)
@@ -862,7 +862,7 @@ void wxAuiManager::UpdateHintWindowConfig()
                                                             wxFRAME_TOOL_WINDOW |
                                                             wxFRAME_FLOAT_ON_PARENT |
                                                             wxFRAME_NO_TASKBAR |
-                                                            wxNO_BORDER);
+                                                            wxBorder::None);
             m_hintFadeMax = 128;
         }
     }
@@ -1091,18 +1091,18 @@ bool wxAuiManager::AddPane(wxWindow* window, const wxAuiPaneInfo& paneInfo)
 }
 
 bool wxAuiManager::AddPane(wxWindow* window,
-                           int direction,
+                           wxDirection direction,
                            const wxString& caption)
 {
     wxAuiPaneInfo pinfo;
     pinfo.Caption(caption);
     switch (direction)
     {
-        case wxTOP:    pinfo.Top(); break;
-        case wxBOTTOM: pinfo.Bottom(); break;
-        case wxLEFT:   pinfo.Left(); break;
-        case wxRIGHT:  pinfo.Right(); break;
-        case wxCENTER: pinfo.CenterPane(); break;
+        case wxDirection::Top:    pinfo.Top(); break;
+        case wxDirection::Bottom: pinfo.Bottom(); break;
+        case wxDirection::Left:   pinfo.Left(); break;
+        case wxDirection::Right:  pinfo.Right(); break;
+        case wxDirection::Center: pinfo.CenterPane(); break;
     }
     return AddPane(window, pinfo);
 }
@@ -1727,9 +1727,9 @@ void wxAuiManager::LayoutAddPane(wxSizer* cont,
     if (pane.HasGripper())
     {
         if (pane.HasGripperTop())
-            sizer_item = vert_pane_sizer ->Add(1, gripperSize, 0, wxEXPAND);
+            sizer_item = vert_pane_sizer ->Add(1, gripperSize, 0, wxStretch::Expand);
         else
-            sizer_item = horz_pane_sizer ->Add(gripperSize, 1, 0, wxEXPAND);
+            sizer_item = horz_pane_sizer ->Add(gripperSize, 1, 0, wxStretch::Expand);
 
         part.type = wxAuiDockUIPart::typeGripper;
         part.dock = &dock;
@@ -1746,7 +1746,7 @@ void wxAuiManager::LayoutAddPane(wxSizer* cont,
         // create the caption sizer
         wxBoxSizer* caption_sizer = new wxBoxSizer(wxHORIZONTAL);
 
-        sizer_item = caption_sizer->Add(1, caption_size, 1, wxEXPAND);
+        sizer_item = caption_sizer->Add(1, caption_size, 1, wxStretch::Expand);
 
         part.type = wxAuiDockUIPart::typeCaption;
         part.dock = &dock;
@@ -1778,7 +1778,7 @@ void wxAuiManager::LayoutAddPane(wxSizer* cont,
             {
                 sizer_item = caption_sizer->Add(pane_button_size,
                     caption_size,
-                    0, wxEXPAND);
+                    0, wxStretch::Expand);
 
                 part.type = wxAuiDockUIPart::typePaneButton;
                 part.dock = &dock;
@@ -1800,7 +1800,7 @@ void wxAuiManager::LayoutAddPane(wxSizer* cont,
         }
 
         // add the caption sizer
-        sizer_item = vert_pane_sizer->Add(caption_sizer, 0, wxEXPAND);
+        sizer_item = vert_pane_sizer->Add(caption_sizer, 0, wxStretch::Expand);
 
         uiparts.Item(caption_part_idx).sizer_item = sizer_item;
     }
@@ -1808,11 +1808,11 @@ void wxAuiManager::LayoutAddPane(wxSizer* cont,
     // add the pane window itself
     if (spacer_only)
     {
-        sizer_item = vert_pane_sizer->Add(1, 1, 1, wxEXPAND);
+        sizer_item = vert_pane_sizer->Add(1, 1, 1, wxStretch::Expand);
     }
     else
     {
-        sizer_item = vert_pane_sizer->Add(pane.window, 1, wxEXPAND);
+        sizer_item = vert_pane_sizer->Add(pane.window, 1, wxStretch::Expand);
         // Don't do this because it breaks the pane size in floating windows
         // BIW: Right now commenting this out is causing problems with
         // an mdi client window as the center pane.
@@ -1853,7 +1853,7 @@ void wxAuiManager::LayoutAddPane(wxSizer* cont,
 
     // add the vertical sizer (caption, pane window) to the
     // horizontal sizer (gripper, vertical sizer)
-    horz_pane_sizer->Add(vert_pane_sizer, 1, wxEXPAND);
+    horz_pane_sizer->Add(vert_pane_sizer, 1, wxStretch::Expand);
 
     // finally, add the pane sizer to the dock sizer
 
@@ -1861,7 +1861,7 @@ void wxAuiManager::LayoutAddPane(wxSizer* cont,
     {
         // allowing space for the pane's border
         sizer_item = cont->Add(horz_pane_sizer, pane_proportion,
-                               wxEXPAND | wxALL, pane_borderSize);
+                               wxStretch::Expand | wxDirection::All, pane_borderSize);
 
         part.type = wxAuiDockUIPart::typePaneBorder;
         part.dock = &dock;
@@ -1874,7 +1874,7 @@ void wxAuiManager::LayoutAddPane(wxSizer* cont,
     }
     else
     {
-        cont->Add(horz_pane_sizer, pane_proportion, wxEXPAND);
+        cont->Add(horz_pane_sizer, pane_proportion, wxStretch::Expand);
     }
 }
 
@@ -1893,7 +1893,7 @@ void wxAuiManager::LayoutAddDock(wxSizer* cont,
     if (!m_hasMaximized && !dock.fixed && (dock.dock_direction == wxAUI_DOCK_BOTTOM ||
                         dock.dock_direction == wxAUI_DOCK_RIGHT))
     {
-        sizer_item = cont->Add(sashSize, sashSize, 0, wxEXPAND);
+        sizer_item = cont->Add(sashSize, sashSize, 0, wxStretch::Expand);
 
         part.type = wxAuiDockUIPart::typeDockSizer;
         part.orientation = orientation;
@@ -1935,9 +1935,9 @@ void wxAuiManager::LayoutAddDock(wxSizer* cont,
             if (amount > 0)
             {
                 if (dock.IsVertical())
-                    sizer_item = dock_sizer->Add(1, amount, 0, wxEXPAND);
+                    sizer_item = dock_sizer->Add(1, amount, 0, wxStretch::Expand);
                 else
-                    sizer_item = dock_sizer->Add(amount, 1, 0, wxEXPAND);
+                    sizer_item = dock_sizer->Add(amount, 1, 0, wxStretch::Expand);
 
                 part.type = wxAuiDockUIPart::typeBackground;
                 part.dock = &dock;
@@ -1957,7 +1957,7 @@ void wxAuiManager::LayoutAddDock(wxSizer* cont,
         }
 
         // at the end add a very small stretchable background area
-        sizer_item = dock_sizer->Add(0,0, 1, wxEXPAND);
+        sizer_item = dock_sizer->Add(0,0, 1, wxStretch::Expand);
 
         part.type = wxAuiDockUIPart::typeBackground;
         part.dock = &dock;
@@ -1981,7 +1981,7 @@ void wxAuiManager::LayoutAddDock(wxSizer* cont,
             // we need to add a pane sizer
             if (!m_hasMaximized && pane_i > 0)
             {
-                sizer_item = dock_sizer->Add(sashSize, sashSize, 0, wxEXPAND);
+                sizer_item = dock_sizer->Add(sashSize, sashSize, 0, wxStretch::Expand);
 
                 part.type = wxAuiDockUIPart::typePaneSizer;
                 part.dock = &dock;
@@ -1998,9 +1998,9 @@ void wxAuiManager::LayoutAddDock(wxSizer* cont,
     }
 
     if (dock.dock_direction == wxAUI_DOCK_CENTER || has_maximized_pane)
-        sizer_item = cont->Add(dock_sizer, 1, wxEXPAND);
+        sizer_item = cont->Add(dock_sizer, 1, wxStretch::Expand);
     else
-        sizer_item = cont->Add(dock_sizer, 0, wxEXPAND);
+        sizer_item = cont->Add(dock_sizer, 0, wxStretch::Expand);
 
     part.type = wxAuiDockUIPart::typeDock;
     part.dock = &dock;
@@ -2022,7 +2022,7 @@ void wxAuiManager::LayoutAddDock(wxSizer* cont,
           (dock.dock_direction == wxAUI_DOCK_TOP ||
            dock.dock_direction == wxAUI_DOCK_LEFT))
     {
-        sizer_item = cont->Add(sashSize, sashSize, 0, wxEXPAND);
+        sizer_item = cont->Add(sashSize, sashSize, 0, wxStretch::Expand);
 
         part.type = wxAuiDockUIPart::typeDockSizer;
         part.dock = &dock;
@@ -2361,7 +2361,7 @@ wxSizer* wxAuiManager::LayoutAll(wxAuiPaneInfoArray& panes,
             else if (!m_hasMaximized)
             {
                 // there are no center docks, add a background area
-                wxSizerItem* sizer_item = middle->Add(1,1, 1, wxEXPAND);
+                wxSizerItem* sizer_item = middle->Add(1,1, 1, wxStretch::Expand);
                 wxAuiDockUIPart part;
                 part.type = wxAuiDockUIPart::typeBackground;
                 part.pane = nullptr;
@@ -2374,7 +2374,7 @@ wxSizer* wxAuiManager::LayoutAll(wxAuiPaneInfoArray& panes,
         }
         else
         {
-            middle->Add(old_cont, 1, wxEXPAND);
+            middle->Add(old_cont, 1, wxStretch::Expand);
         }
 
         // find any right docks in this layer
@@ -2386,7 +2386,7 @@ wxSizer* wxAuiManager::LayoutAll(wxAuiPaneInfoArray& panes,
         }
 
         if (middle->GetChildren().GetCount() > 0)
-            cont->Add(middle, 1, wxEXPAND);
+            cont->Add(middle, 1, wxStretch::Expand);
              else
             delete middle;
 
@@ -2407,7 +2407,7 @@ wxSizer* wxAuiManager::LayoutAll(wxAuiPaneInfoArray& panes,
         // no sizer available, because there are no docks,
         // therefore we will create a simple background area
         cont = new wxBoxSizer(wxVERTICAL);
-        wxSizerItem* sizer_item = cont->Add(1,1, 1, wxEXPAND);
+        wxSizerItem* sizer_item = cont->Add(1,1, 1, wxStretch::Expand);
         wxAuiDockUIPart part;
         part.type = wxAuiDockUIPart::typeBackground;
         part.pane = nullptr;
@@ -2418,7 +2418,7 @@ wxSizer* wxAuiManager::LayoutAll(wxAuiPaneInfoArray& panes,
         uiparts.Add(part);
     }
 
-    container->Add(cont, 1, wxEXPAND);
+    container->Add(cont, 1, wxStretch::Expand);
     return container;
 }
 
@@ -2679,19 +2679,19 @@ void wxAuiManager::DoFrameLayout()
         part.rect = part.sizer_item->GetRect();
         int flag = part.sizer_item->GetFlag();
         int border = part.sizer_item->GetBorder();
-        if (flag & wxTOP)
+        if (flag & wxDirection::Top)
         {
             part.rect.y -= border;
             part.rect.height += border;
         }
-        if (flag & wxLEFT)
+        if (flag & wxDirection::Left)
         {
             part.rect.x -= border;
             part.rect.width += border;
         }
-        if (flag & wxBOTTOM)
+        if (flag & wxDirection::Bottom)
             part.rect.height += border;
-        if (flag & wxRIGHT)
+        if (flag & wxDirection::Right)
             part.rect.width += border;
 
 
@@ -3556,7 +3556,7 @@ void wxAuiManager::OnFloatingPaneMoving(wxWindow* wnd, wxDirection dir)
 
 #if 0
     // Adapt pt to direction
-    if (dir == wxNORTH)
+    if (dir == wxDirection::North)
     {
         // move to pane's upper border
         wxPoint pos( 0,0 );
@@ -3565,21 +3565,21 @@ void wxAuiManager::OnFloatingPaneMoving(wxWindow* wnd, wxDirection dir)
         // and some more pixels for the title bar
         pt.y -= wnd->FromDIP(5);
     }
-    else if (dir == wxWEST)
+    else if (dir == wxDirection::West)
     {
         // move to pane's left border
         wxPoint pos( 0,0 );
         pos = wnd->ClientToScreen( pos );
         pt.x = pos.x;
     }
-    else if (dir == wxEAST)
+    else if (dir == wxDirection::East)
     {
         // move to pane's right border
         wxPoint pos( wnd->GetSize().x, 0 );
         pos = wnd->ClientToScreen( pos );
         pt.x = pos.x;
     }
-    else if (dir == wxSOUTH)
+    else if (dir == wxDirection::South)
     {
         // move to pane's bottom border
         wxPoint pos( 0, wnd->GetSize().y );
@@ -3659,7 +3659,7 @@ void wxAuiManager::OnFloatingPaneMoved(wxWindow* wnd, wxDirection dir)
 
 #if 0
     // Adapt pt to direction
-    if (dir == wxNORTH)
+    if (dir == wxDirection::North)
     {
         // move to pane's upper border
         wxPoint pos( 0,0 );
@@ -3668,21 +3668,21 @@ void wxAuiManager::OnFloatingPaneMoved(wxWindow* wnd, wxDirection dir)
         // and some more pixels for the title bar
         pt.y -= wnd->FromDIP(10);
     }
-    else if (dir == wxWEST)
+    else if (dir == wxDirection::West)
     {
         // move to pane's left border
         wxPoint pos( 0,0 );
         pos = wnd->ClientToScreen( pos );
         pt.x = pos.x;
     }
-    else if (dir == wxEAST)
+    else if (dir == wxDirection::East)
     {
         // move to pane's right border
         wxPoint pos( wnd->GetSize().x, 0 );
         pos = wnd->ClientToScreen( pos );
         pt.x = pos.x;
     }
-    else if (dir == wxSOUTH)
+    else if (dir == wxDirection::South)
     {
         // move to pane's bottom border
         wxPoint pos( 0, wnd->GetSize().y );

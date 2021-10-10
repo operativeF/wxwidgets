@@ -31,19 +31,19 @@ wxDEFINE_FLAGS( wxCalendarCtrlStyle )
 wxBEGIN_FLAGS( wxCalendarCtrlStyle )
 // new style border flags, we put them first to
 // use them for streaming out
-wxFLAGS_MEMBER(wxBORDER_SIMPLE)
-wxFLAGS_MEMBER(wxBORDER_SUNKEN)
+wxFLAGS_MEMBER(wxBorder::Simple)
+wxFLAGS_MEMBER(wxBorder::Sunken)
 wxFLAGS_MEMBER(wxBORDER_DOUBLE)
-wxFLAGS_MEMBER(wxBORDER_RAISED)
-wxFLAGS_MEMBER(wxBORDER_STATIC)
-wxFLAGS_MEMBER(wxBORDER_NONE)
+wxFLAGS_MEMBER(wxBorder::Raised)
+wxFLAGS_MEMBER(wxBorder::Static)
+wxFLAGS_MEMBER(wxBorder::None)
 
 // old style border flags
-wxFLAGS_MEMBER(wxSIMPLE_BORDER)
-wxFLAGS_MEMBER(wxSUNKEN_BORDER)
+wxFLAGS_MEMBER(wxBorder::Simple)
+wxFLAGS_MEMBER(wxBorder::Sunken)
 wxFLAGS_MEMBER(wxDOUBLE_BORDER)
-wxFLAGS_MEMBER(wxRAISED_BORDER)
-wxFLAGS_MEMBER(wxSTATIC_BORDER)
+wxFLAGS_MEMBER(wxBorder::Raised)
+wxFLAGS_MEMBER(wxBorder::Static)
 wxFLAGS_MEMBER(wxBORDER)
 
 // standard window styles

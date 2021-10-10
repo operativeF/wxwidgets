@@ -24,6 +24,7 @@
     #include <boost/nowide/convert.hpp>
 #endif
 
+#include "wx/dialogflags.h"
 #include "wx/frame.h"
 #include "wx/utils.h"
 #include "wx/menu.h"
@@ -217,7 +218,7 @@ bool
 wxTaskBarIcon::ShowBalloon(const std::string& title,
                            const std::string& text,
                            std::chrono::milliseconds timeoutDuration,
-                           unsigned int flags,
+                           wxDialogIconFlags flags,
                            const wxIcon& icon)
 {
     wxCHECK_MSG( m_iconAdded, false,
@@ -255,11 +256,11 @@ wxTaskBarIcon::ShowBalloon(const std::string& title,
     }
     else
 #endif
-    if ( flags & wxICON_INFORMATION )
+    if ( flags & wxDialogIconFlags::Information )
         notifyData.dwInfoFlags |= NIIF_INFO;
-    else if ( flags & wxICON_WARNING )
+    else if ( flags & wxDialogIconFlags::Warning )
         notifyData.dwInfoFlags |= NIIF_WARNING;
-    else if ( flags & wxICON_ERROR )
+    else if ( flags & wxDialogIconFlags::Error )
         notifyData.dwInfoFlags |= NIIF_ERROR;
 
     bool ok = ::Shell_NotifyIconW(NIM_MODIFY, &notifyData) != 0;

@@ -28,6 +28,7 @@ class WXDLLIMPEXP_FWD_CORE wxDC;
 class WXDLLIMPEXP_FWD_CORE wxRect;
 class WXDLLIMPEXP_FWD_CORE wxWindow;
 
+#include "wx/alignmentflags.h"
 #include "wx/geometry/point.h"
 #include "wx/geometry/size.h"
 #include "wx/colour.h"
@@ -120,13 +121,13 @@ struct WXDLLIMPEXP_CORE wxSplitterRenderParams
 // extra optional parameters for DrawHeaderButton
 struct WXDLLIMPEXP_CORE wxHeaderButtonParams
 {
-    wxColour    m_arrowColour;
-    wxColour    m_selectionColour;
-    wxString    m_labelText;
-    wxFont      m_labelFont;
-    wxColour    m_labelColour;
-    wxBitmap    m_labelBitmap;
-    int         m_labelAlignment{wxALIGN_LEFT};
+    wxColour     m_arrowColour;
+    wxColour     m_selectionColour;
+    wxString     m_labelText;
+    wxFont       m_labelFont;
+    wxColour     m_labelColour;
+    wxBitmap     m_labelBitmap;
+    wxAlignment  m_labelAlignment{wxAlignment::Left};
 };
 
 enum class wxHeaderSortIconType
@@ -362,7 +363,7 @@ public:
                               wxDC& dc,
                               const std::string& text,
                               const wxRect& rect,
-                              unsigned int align = wxALIGN_LEFT | wxALIGN_TOP,
+                              AlignmentFlags align = AlignmentFlags{wxAlignment::Left, wxAlignment::Top},
                               unsigned int flags = 0,
                               wxEllipsizeMode ellipsizeMode = wxEllipsizeMode::End) = 0;
 
@@ -581,7 +582,7 @@ public:
                       wxDC& dc,
                       const std::string& text,
                       const wxRect& rect,
-                      unsigned int align = wxALIGN_LEFT | wxALIGN_TOP,
+                      AlignmentFlags align = AlignmentFlags{wxAlignment::Left, wxAlignment::Top},
                       unsigned int flags = 0,
                       wxEllipsizeMode ellipsizeMode = wxEllipsizeMode::End) override
         { m_rendererNative.DrawItemText(win, dc, text, rect, align, flags, ellipsizeMode); }

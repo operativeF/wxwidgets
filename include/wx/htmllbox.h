@@ -202,7 +202,7 @@ private:
 // wxSimpleHtmlListBox
 // ----------------------------------------------------------------------------
 
-constexpr unsigned int wxHLB_DEFAULT_STYLE     = wxBORDER_SUNKEN;
+constexpr unsigned int wxHLB_DEFAULT_STYLE     = wxBorder::Sunken;
 constexpr unsigned int wxHLB_MULTIPLE          = wxLB_MULTIPLE;
 
 class WXDLLIMPEXP_HTML wxSimpleHtmlListBox :

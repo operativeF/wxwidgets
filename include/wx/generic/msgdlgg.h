@@ -19,7 +19,7 @@ public:
     wxGenericMessageDialog(wxWindow *parent,
                            const std::string& message,
                            const std::string& caption = wxMessageBoxCaptionStr,
-                           unsigned int style = wxOK|wxCENTRE,
+                           DialogFlags style = DialogFlags{wxDialogFlags::OK, wxDialogFlags::Centered},
                            const wxPoint& pos = wxDefaultPosition);
 
     int ShowModal() override;

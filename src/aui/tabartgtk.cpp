@@ -126,7 +126,7 @@ wxRect DrawCloseButton(wxDC& dc,
 
     wxRect out_rect;
 
-    if (orientation == wxLEFT)
+    if (orientation == wxDirection::Left)
         out_rect.x = in_rect.x - ythickness;
     else
         out_rect.x = in_rect.x + in_rect.width - button_size - ythickness;
@@ -361,7 +361,7 @@ void wxAuiGtkTabArt::DrawTab(wxDC& dc, wxWindow* wnd, const wxAuiNotebookPage& p
             else
                 rect.y -= style_notebook->ythickness / 2;
         }
-        *out_button_rect = DrawCloseButton(dc, widget, close_button_state, rect, wxRIGHT, &area);
+        *out_button_rect = DrawCloseButton(dc, widget, close_button_state, rect, wxDirection::Right, &area);
     }
 
     if ( clip_width < tab_rect.width )
@@ -390,7 +390,7 @@ wxRect DrawSimpleArrow(wxDC& dc,
 
     wxRect out_rect;
 
-    if (orientation == wxLEFT)
+    if (orientation == wxDirection::Left)
         out_rect.x = in_rect.x;
     else
         out_rect.x = in_rect.x + in_rect.width - scroll_arrow_hlength;

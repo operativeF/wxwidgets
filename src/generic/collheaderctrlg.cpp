@@ -185,7 +185,7 @@ void wxGenericCollapsibleHeaderCtrl::OnPaint(wxPaintEvent& WXUNUSED(event))
     wxRect textRect(wxPoint(btnSize.x + FromDIP(2), 0), textSize);
     textRect = textRect.CenterIn(rect, wxVERTICAL);
 
-    dc.DrawLabel(text, textRect, wxALIGN_CENTRE_VERTICAL, indexAccel);
+    dc.DrawLabel(text, textRect, wxAlignment::CenterVertical, indexAccel);
 
 #ifdef __WXMSW__
     if ( HasFocus() )

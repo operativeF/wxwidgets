@@ -14,6 +14,7 @@
 #if wxUSE_BUTTON
 
 #include "wx/button.h"
+#include "wx/directionflags.h"
 #include "wx/toplevel.h"
 
 // ----------------------------------------------------------------------------
@@ -24,19 +25,19 @@ wxDEFINE_FLAGS( wxButtonStyle )
 wxBEGIN_FLAGS( wxButtonStyle )
 // new style border flags, we put them first to
 // use them for streaming out
-wxFLAGS_MEMBER(wxBORDER_SIMPLE)
-wxFLAGS_MEMBER(wxBORDER_SUNKEN)
+wxFLAGS_MEMBER(wxBorder::Simple)
+wxFLAGS_MEMBER(wxBorder::Sunken)
 wxFLAGS_MEMBER(wxBORDER_DOUBLE)
-wxFLAGS_MEMBER(wxBORDER_RAISED)
-wxFLAGS_MEMBER(wxBORDER_STATIC)
-wxFLAGS_MEMBER(wxBORDER_NONE)
+wxFLAGS_MEMBER(wxBorder::Raised)
+wxFLAGS_MEMBER(wxBorder::Static)
+wxFLAGS_MEMBER(wxBorder::None)
 
 // old style border flags
-wxFLAGS_MEMBER(wxSIMPLE_BORDER)
-wxFLAGS_MEMBER(wxSUNKEN_BORDER)
+wxFLAGS_MEMBER(wxBorder::Simple)
+wxFLAGS_MEMBER(wxBorder::Sunken)
 wxFLAGS_MEMBER(wxDOUBLE_BORDER)
-wxFLAGS_MEMBER(wxRAISED_BORDER)
-wxFLAGS_MEMBER(wxSTATIC_BORDER)
+wxFLAGS_MEMBER(wxBorder::Raised)
+wxFLAGS_MEMBER(wxBorder::Static)
 wxFLAGS_MEMBER(wxBORDER)
 
 // standard window styles
@@ -91,17 +92,8 @@ wxWindow *wxButtonBase::SetDefault()
     return tlw->SetDefaultItem(this);
 }
 
-// FIXME: wxDirection should be enum class.
 void wxAnyButtonBase::SetBitmapPosition(wxDirection dir)
 {
-    wxASSERT_MSG( !(dir & ~wxDIRECTION_MASK), "non-direction flag used" );
-    wxASSERT_MSG( !!(dir & wxLEFT) +
-                    !!(dir & wxRIGHT) +
-                      !!(dir & wxTOP) +
-                       !!(dir & wxBOTTOM) == 1,
-                   "exactly one direction flag must be set" );
-
     DoSetBitmapPosition(dir);
-
 }
 #endif // wxUSE_BUTTON

@@ -383,7 +383,7 @@ void wxGenericColourDialog::CreateWidgets()
                      wxSizerFlags().DoubleHorzBorder());
 
     // then the standard buttons
-    wxSizer *buttonsizer = CreateSeparatedButtonSizer(wxOK | wxCANCEL);
+    wxSizer *buttonsizer = CreateSeparatedButtonSizer(DialogFlags{wxDialogFlags::OK, wxDialogFlags::Cancel});
     if ( buttonsizer )
     {
         topSizer->Add(buttonsizer, wxSizerFlags().Expand().DoubleBorder());

@@ -29,8 +29,8 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxBitmapComboBoxXmlHandler, wxXmlResourceHandler);
 wxBitmapComboBoxXmlHandler::wxBitmapComboBoxXmlHandler()
                      
 {
-    XRC_ADD_STYLE(wxCB_SORT);
-    XRC_ADD_STYLE(wxCB_READONLY);
+    XRC_ADD_STYLE(ComboStyles::Sort);
+    XRC_ADD_STYLE(ComboStyles::ReadOnly);
     AddWindowStyles();
 }
 

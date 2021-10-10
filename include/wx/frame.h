@@ -73,7 +73,7 @@ public:
                  const std::string& title,
                  const wxPoint& pos = wxDefaultPosition,
                  const wxSize& size = wxDefaultSize,
-                 unsigned int style = wxDEFAULT_FRAME_STYLE,
+                 WindowFlags style = wxDEFAULT_FRAME_STYLE,
                  const std::string& name = wxFrameNameStr);
 
     // frame state

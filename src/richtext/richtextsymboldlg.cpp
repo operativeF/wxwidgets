@@ -352,67 +352,67 @@ void wxSymbolPickerDialog::CreateControls()
     itemDialog1->SetSizer(itemBoxSizer2);
 
     wxBoxSizer* itemBoxSizer3 = new wxBoxSizer(wxVERTICAL);
-    itemBoxSizer2->Add(itemBoxSizer3, 1, wxGROW|wxALL, 5);
+    itemBoxSizer2->Add(itemBoxSizer3, 1, wxStretch::Grow|wxDirection::All, 5);
 
     wxBoxSizer* itemBoxSizer4 = new wxBoxSizer(wxHORIZONTAL);
-    itemBoxSizer3->Add(itemBoxSizer4, 0, wxGROW, 5);
+    itemBoxSizer3->Add(itemBoxSizer4, 0, wxStretch::Grow, 5);
 
     wxBoxSizer* itemBoxSizer5 = new wxBoxSizer(wxHORIZONTAL);
-    itemBoxSizer4->Add(itemBoxSizer5, 1, wxGROW, 5);
+    itemBoxSizer4->Add(itemBoxSizer5, 1, wxStretch::Grow, 5);
 
     wxStaticText* itemStaticText6 = new wxStaticText( itemDialog1, wxID_STATIC, _("&Font:"), wxDefaultPosition, wxDefaultSize, 0 );
-    itemBoxSizer5->Add(itemStaticText6, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5);
+    itemBoxSizer5->Add(itemStaticText6, 0, wxAlignment::CenterVertical|wxDirection::All, 5);
 
     std::vector<std::string> m_fontCtrlStrings;
-    m_fontCtrl = new wxComboBox( itemDialog1, ID_SYMBOLPICKERDIALOG_FONT, "", wxDefaultPosition, wxSize(240, -1), m_fontCtrlStrings, wxCB_READONLY );
+    m_fontCtrl = new wxComboBox( itemDialog1, ID_SYMBOLPICKERDIALOG_FONT, "", wxDefaultPosition, wxSize(240, -1), m_fontCtrlStrings, ComboStyles::ReadOnly );
     m_fontCtrl->SetHelpText(_("The font from which to take the symbol."));
     if (wxSymbolPickerDialog::ShowToolTips())
         m_fontCtrl->SetToolTip(_("The font from which to take the symbol."));
-    itemBoxSizer5->Add(m_fontCtrl, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5);
+    itemBoxSizer5->Add(m_fontCtrl, 0, wxAlignment::CenterVertical|wxDirection::All, 5);
 
-    itemBoxSizer5->Add(5, 5, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5);
+    itemBoxSizer5->Add(5, 5, 0, wxAlignment::CenterVertical|wxDirection::All, 5);
 
 #if defined(__UNICODE__)
     wxStaticText* itemStaticText9 = new wxStaticText( itemDialog1, wxID_STATIC, _("&Subset:"), wxDefaultPosition, wxDefaultSize, 0 );
-    itemBoxSizer5->Add(itemStaticText9, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5);
+    itemBoxSizer5->Add(itemStaticText9, 0, wxAlignment::CenterVertical|wxDirection::All, 5);
 
 #endif
 
 #if defined(__UNICODE__)
     std::vector<std::string> m_subsetCtrlStrings;
-    m_subsetCtrl = new wxComboBox( itemDialog1, ID_SYMBOLPICKERDIALOG_SUBSET, "", wxDefaultPosition, wxDefaultSize, m_subsetCtrlStrings, wxCB_READONLY );
+    m_subsetCtrl = new wxComboBox( itemDialog1, ID_SYMBOLPICKERDIALOG_SUBSET, "", wxDefaultPosition, wxDefaultSize, m_subsetCtrlStrings, ComboStyles::ReadOnly );
     m_subsetCtrl->SetHelpText(_("Shows a Unicode subset."));
     if (wxSymbolPickerDialog::ShowToolTips())
         m_subsetCtrl->SetToolTip(_("Shows a Unicode subset."));
-    itemBoxSizer5->Add(m_subsetCtrl, 1, wxALIGN_CENTER_VERTICAL|wxALL, 5);
+    itemBoxSizer5->Add(m_subsetCtrl, 1, wxAlignment::CenterVertical|wxDirection::All, 5);
 
 #endif
 
     m_symbolsCtrl = new wxSymbolListCtrl( itemDialog1, ID_SYMBOLPICKERDIALOG_LISTCTRL, wxDefaultPosition, wxSize(500, 200), 0 );
-    itemBoxSizer3->Add(m_symbolsCtrl, 1, wxGROW|wxALL, 5);
+    itemBoxSizer3->Add(m_symbolsCtrl, 1, wxStretch::Grow|wxDirection::All, 5);
 
     wxBoxSizer* itemBoxSizer12 = new wxBoxSizer(wxHORIZONTAL);
-    itemBoxSizer3->Add(itemBoxSizer12, 0, wxGROW, 5);
+    itemBoxSizer3->Add(itemBoxSizer12, 0, wxStretch::Grow, 5);
 
-    m_symbolStaticCtrl = new wxStaticText( itemDialog1, wxID_STATIC, _("xxxx"), wxDefaultPosition, wxSize(40, -1), wxALIGN_CENTRE );
-    itemBoxSizer12->Add(m_symbolStaticCtrl, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5);
+    m_symbolStaticCtrl = new wxStaticText( itemDialog1, wxID_STATIC, _("xxxx"), wxDefaultPosition, wxSize(40, -1), wxAlignment::Center );
+    itemBoxSizer12->Add(m_symbolStaticCtrl, 0, wxAlignment::CenterVertical|wxDirection::All, 5);
 
-    itemBoxSizer12->Add(5, 5, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5);
+    itemBoxSizer12->Add(5, 5, 0, wxAlignment::CenterVertical|wxDirection::All, 5);
 
     wxStaticText* itemStaticText15 = new wxStaticText( itemDialog1, wxID_STATIC, _("&Character code:"), wxDefaultPosition, wxDefaultSize, 0 );
-    itemBoxSizer12->Add(itemStaticText15, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5);
+    itemBoxSizer12->Add(itemStaticText15, 0, wxAlignment::CenterVertical|wxDirection::All, 5);
 
     m_characterCodeCtrl = new wxTextCtrl( itemDialog1, ID_SYMBOLPICKERDIALOG_CHARACTERCODE, "", wxDefaultPosition, wxSize(140, -1), wxTE_READONLY|wxTE_CENTRE );
     m_characterCodeCtrl->SetHelpText(_("The character code."));
     if (wxSymbolPickerDialog::ShowToolTips())
         m_characterCodeCtrl->SetToolTip(_("The character code."));
-    itemBoxSizer12->Add(m_characterCodeCtrl, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5);
+    itemBoxSizer12->Add(m_characterCodeCtrl, 0, wxAlignment::CenterVertical|wxDirection::All, 5);
 
-    itemBoxSizer12->Add(5, 5, 1, wxALIGN_CENTER_VERTICAL|wxALL, 5);
+    itemBoxSizer12->Add(5, 5, 1, wxAlignment::CenterVertical|wxDirection::All, 5);
 
 #if defined(__UNICODE__)
     wxStaticText* itemStaticText18 = new wxStaticText( itemDialog1, wxID_STATIC, _("&From:"), wxDefaultPosition, wxDefaultSize, 0 );
-    itemBoxSizer12->Add(itemStaticText18, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5);
+    itemBoxSizer12->Add(itemStaticText18, 0, wxAlignment::CenterVertical|wxDirection::All, 5);
 
 #endif
 
@@ -420,18 +420,18 @@ void wxSymbolPickerDialog::CreateControls()
     std::vector<std::string> m_fromUnicodeCtrlStrings;
     m_fromUnicodeCtrlStrings.push_back("ASCII");
     m_fromUnicodeCtrlStrings.push_back("Unicode");
-    m_fromUnicodeCtrl = new wxComboBox( itemDialog1, ID_SYMBOLPICKERDIALOG_FROM, _("Unicode"), wxDefaultPosition, wxDefaultSize, m_fromUnicodeCtrlStrings, wxCB_READONLY );
+    m_fromUnicodeCtrl = new wxComboBox( itemDialog1, ID_SYMBOLPICKERDIALOG_FROM, _("Unicode"), wxDefaultPosition, wxDefaultSize, m_fromUnicodeCtrlStrings, ComboStyles::ReadOnly );
     m_fromUnicodeCtrl->SetStringSelection(_("Unicode"));
     m_fromUnicodeCtrl->SetHelpText(_("The range to show."));
     if (wxSymbolPickerDialog::ShowToolTips())
         m_fromUnicodeCtrl->SetToolTip(_("The range to show."));
-    itemBoxSizer12->Add(m_fromUnicodeCtrl, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5);
+    itemBoxSizer12->Add(m_fromUnicodeCtrl, 0, wxAlignment::CenterVertical|wxDirection::All, 5);
 
 #endif
 
     m_stdButtonSizer = new wxStdDialogButtonSizer;
 
-    itemBoxSizer3->Add(m_stdButtonSizer, 0, wxGROW|wxTOP|wxBOTTOM, 5);
+    itemBoxSizer3->Add(m_stdButtonSizer, 0, wxStretch::Grow|wxDirection::Top|wxDirection::Bottom, 5);
     wxButton* itemButton21 = new wxButton( itemDialog1, wxID_OK, _("Insert"), wxDefaultPosition, wxDefaultSize, 0 );
     itemButton21->SetDefault();
     m_stdButtonSizer->AddButton(itemButton21);
@@ -739,8 +739,8 @@ bool wxSymbolListCtrl::Create(wxWindow *parent,
 {
     style |= wxWANTS_CHARS | wxFULL_REPAINT_ON_RESIZE;
 
-    if ((style & wxBORDER_MASK) == wxBORDER_DEFAULT)
-        style |= wxBORDER_THEME;
+    if ((style & wxBORDER_MASK) == wxBorder::Default)
+        style |= wxBorder::Theme;
 
     if ( !wxVScrolledWindow::Create(parent, id, pos, size, style, name) )
         return false;

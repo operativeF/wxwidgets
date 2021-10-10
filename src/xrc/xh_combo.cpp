@@ -27,10 +27,10 @@ wxComboBoxXmlHandler::wxComboBoxXmlHandler()
                      
                      
 {
-    XRC_ADD_STYLE(wxCB_SIMPLE);
-    XRC_ADD_STYLE(wxCB_SORT);
-    XRC_ADD_STYLE(wxCB_READONLY);
-    XRC_ADD_STYLE(wxCB_DROPDOWN);
+    XRC_ADD_STYLE(ComboStyles::Simple);
+    XRC_ADD_STYLE(ComboStyles::Sort);
+    XRC_ADD_STYLE(ComboStyles::ReadOnly);
+    XRC_ADD_STYLE(ComboStyles::DropDown);
     XRC_ADD_STYLE(wxTE_PROCESS_ENTER);
     AddWindowStyles();
 }

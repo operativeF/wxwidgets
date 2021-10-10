@@ -11,11 +11,10 @@
 #ifndef _WX_TEXTDLGG_H_
 #define _WX_TEXTDLGG_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_TEXTDLG
 
 #include "wx/dialog.h"
+#include "wx/dialogflags.h"
 
 #if wxUSE_VALIDATORS
 #include "wx/valtext.h"
@@ -27,7 +26,7 @@ class WXDLLIMPEXP_FWD_CORE wxTextCtrl;
 constexpr char wxGetTextFromUserPromptStr[] = "Input Text";
 constexpr char wxGetPasswordFromUserPromptStr[] = "Enter Password";
 
-#define wxTextEntryDialogStyle (wxOK | wxCANCEL | wxCENTRE)
+constexpr DialogFlags wxTextEntryDialogStyle = {wxDialogFlags::OK, wxDialogFlags::Cancel, wxDialogFlags::Centered};
 
 // ----------------------------------------------------------------------------
 // wxTextEntryDialog: a dialog with text control, [ok] and [cancel] buttons
@@ -39,14 +38,13 @@ public:
     wxTextEntryDialog()
     {
         m_textctrl = nullptr;
-        m_dialogStyle = 0;
     }
 
     wxTextEntryDialog(wxWindow *parent,
                       const std::string& message,
                       const std::string& caption = wxGetTextFromUserPromptStr,
                       const std::string& value = {},
-                      unsigned int style = wxTextEntryDialogStyle,
+                      DialogFlags style = wxTextEntryDialogStyle,
                       const wxPoint& pos = wxDefaultPosition)
     {
         Create(parent, message, caption, value, style, pos);
@@ -56,7 +54,7 @@ public:
                 const std::string& message,
                 const std::string& caption = wxGetTextFromUserPromptStr,
                 const std::string& value = {},
-                unsigned int style = wxTextEntryDialogStyle,
+                DialogFlags style = wxTextEntryDialogStyle,
                 const wxPoint& pos = wxDefaultPosition);
 
     void SetValue(const std::string& val);
@@ -79,9 +77,9 @@ public:
     void OnOK(wxCommandEvent& event);
 
 protected:
-    wxTextCtrl *m_textctrl;
+    wxTextCtrl     *m_textctrl;
     std::string    m_value;
-    long        m_dialogStyle;
+    DialogFlags    m_dialogStyle;
 
 private:
     wxDECLARE_EVENT_TABLE();
@@ -102,7 +100,7 @@ public:
                       const std::string& message,
                       const std::string& caption = wxGetPasswordFromUserPromptStr,
                       const std::string& value = {},
-                      unsigned int style = wxTextEntryDialogStyle,
+                      DialogFlags style = wxTextEntryDialogStyle,
                       const wxPoint& pos = wxDefaultPosition)
     {
         Create(parent, message, caption, value, style, pos);
@@ -112,7 +110,7 @@ public:
                 const std::string& message,
                 const std::string& caption = wxGetPasswordFromUserPromptStr,
                 const std::string& value = {},
-                unsigned int style = wxTextEntryDialogStyle,
+                DialogFlags style = wxTextEntryDialogStyle,
                 const wxPoint& pos = wxDefaultPosition);
 
 

@@ -68,7 +68,7 @@ bool wxGenericCollapsiblePane::Create(wxWindow *parent,
     m_pButton = new wxCollapsibleHeaderCtrl(this, wxID_ANY, label, wxPoint(0, 0),
                              wxDefaultSize);
 
-    m_sz->Add(m_pButton, wxSizerFlags().Border(wxALL, GetBorder()));
+    m_sz->Add(m_pButton, wxSizerFlags().Border(wxDirection::All, GetBorder()));
 
     // FIXME: at least under wxGTK1 the background is black if we don't do
     //        this, no idea why...
@@ -78,7 +78,7 @@ bool wxGenericCollapsiblePane::Create(wxWindow *parent,
 
     // do not set sz as our sizers since we handle the pane window without using sizers
     m_pPane = new wxPanel(this, wxID_ANY, wxDefaultPosition, wxDefaultSize,
-                          wxTAB_TRAVERSAL|wxNO_BORDER, "wxCollapsiblePanePane");
+                          wxTAB_TRAVERSAL|wxBorder::None, "wxCollapsiblePanePane");
 
     // start as collapsed:
     m_pPane->Hide();

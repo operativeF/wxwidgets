@@ -2477,7 +2477,7 @@ wxSize wxTextCtrl::DoGetSizeFromTextSize(int xlen, int ylen) const
     // and are often used as a sort of copyable to the clipboard label so it's
     // important that they have the same height as the normal labels to not
     // stand out).
-    if ( !HasFlag(wxBORDER_NONE) )
+    if ( !HasFlag(wxBorder::None) )
     {
         wText += FromDIP(9); // borders and inner margins
 

@@ -413,11 +413,11 @@ void wxAuiMDIParentFrame::Tile(wxOrientation orient)
 
     if (orient == wxVERTICAL)
     {
-        client_window->Split(cur_idx, wxLEFT);
+        client_window->Split(cur_idx, wxDirection::Left);
     }
     else if (orient == wxHORIZONTAL)
     {
-        client_window->Split(cur_idx, wxTOP);
+        client_window->Split(cur_idx, wxDirection::Top);
     }
 }
 
@@ -505,7 +505,7 @@ bool wxAuiMDIChildFrame::Create(wxAuiMDIParentFrame* parent,
                     id,
                     wxDefaultPosition,
                     size,
-                    wxNO_BORDER, name);
+                    wxBorder::None, name);
 
     SetMDIParentFrame(parent);
 
@@ -726,7 +726,7 @@ bool wxAuiMDIClientWindow::CreateClient(wxAuiMDIParentFrame* parent, unsigned in
                                wxID_ANY,
                                wxPoint(0,0),
                                parent->FromDIP(wxSize(100, 100)),
-                               wxAUI_NB_DEFAULT_STYLE | wxNO_BORDER))
+                               wxAUI_NB_DEFAULT_STYLE | wxBorder::None))
     {
         return false;
     }

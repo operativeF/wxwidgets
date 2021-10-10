@@ -14,6 +14,8 @@
 
 #include "wx/defs.h"
 
+#include "wx/directionflags.h"
+
 // ----------------------------------------------------------------------------
 // wxAnyButton specific flags
 // ----------------------------------------------------------------------------
@@ -51,16 +53,18 @@ constexpr unsigned int wxBU_NOTEXT          = 0x0002;
 class WXDLLIMPEXP_CORE wxAnyButtonBase : public wxControl
 {
 public:
+    using enum wxDirection;
+
     wxAnyButtonBase() = default;
 
-   wxAnyButtonBase(const wxAnyButtonBase&) = delete;
-   wxAnyButtonBase& operator=(const wxAnyButtonBase&) = delete;
-   wxAnyButtonBase(wxAnyButtonBase&&) = default;
-   wxAnyButtonBase& operator=(wxAnyButtonBase&&) = default;
+    wxAnyButtonBase(const wxAnyButtonBase&) = delete;
+    wxAnyButtonBase& operator=(const wxAnyButtonBase&) = delete;
+    wxAnyButtonBase(wxAnyButtonBase&&) = default;
+    wxAnyButtonBase& operator=(wxAnyButtonBase&&) = default;
     
     // show the image in the button in addition to the label: this method is
     // supported on all (major) platforms
-    void SetBitmap(const wxBitmap& bitmap, wxDirection dir = wxLEFT)
+    void SetBitmap(const wxBitmap& bitmap, wxDirection dir = Left)
     {
         SetBitmapLabel(bitmap);
         SetBitmapPosition(dir);
@@ -99,7 +103,7 @@ public:
     void SetBitmapMargins(const wxSize& sz) { DoSetBitmapMargins(sz.x, sz.y); }
     wxSize GetBitmapMargins() { return DoGetBitmapMargins(); }
 
-    // set the image position relative to the text, i.e. wxLEFT means that the
+    // set the image position relative to the text, i.e. wxDirection::Left means that the
     // image is to the left of the text (this is the default)
     void SetBitmapPosition(wxDirection dir);
 
@@ -156,7 +160,7 @@ public:
 
 protected:
     // choose the default border for this window
-    wxBorder GetDefaultBorder() const override { return wxBORDER_NONE; }
+    wxBorder GetDefaultBorder() const override { return wxBorder::None; }
 
     virtual wxBitmap DoGetBitmap(State WXUNUSED(which)) const
         { return wxBitmap(); }

@@ -11,12 +11,11 @@
 #ifndef _WX_RIBBON_ART_H_
 #define _WX_RIBBON_ART_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_RIBBON
 
 #include "wx/brush.h"
 #include "wx/colour.h"
+#include "wx/directionflags.h"
 #include "wx/font.h"
 #include "wx/pen.h"
 #include "wx/bitmap.h"

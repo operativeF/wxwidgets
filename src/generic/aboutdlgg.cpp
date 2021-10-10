@@ -183,7 +183,7 @@ bool wxGenericAboutDialog::Create(const wxAboutDialogInfo& info, wxWindow* paren
     if ( icon.IsOk() )
     {
         sizerIconAndText->Add(new wxStaticBitmap(this, wxID_ANY, icon),
-                                wxSizerFlags().Border(wxRIGHT));
+                                wxSizerFlags().Border(wxDirection::Right));
     }
 #endif // wxUSE_STATBMP
     sizerIconAndText->Add(m_sizerText, wxSizerFlags(1).Expand());
@@ -193,7 +193,7 @@ bool wxGenericAboutDialog::Create(const wxAboutDialogInfo& info, wxWindow* paren
 
 // Mac typically doesn't use OK buttons just for dismissing dialogs.
 #if !defined(__WXMAC__)
-    wxSizer *sizerBtns = CreateButtonSizer(wxOK);
+    wxSizer *sizerBtns = CreateButtonSizer(wxDialogFlags::OK);
     if ( sizerBtns )
     {
         sizerTop->Add(sizerBtns, wxSizerFlags().Expand().Border());
@@ -222,7 +222,7 @@ void wxGenericAboutDialog::AddControl(wxWindow *win, const wxSizerFlags& flags)
 
 void wxGenericAboutDialog::AddControl(wxWindow *win)
 {
-    AddControl(win, wxSizerFlags().Border(wxDOWN).Centre());
+    AddControl(win, wxSizerFlags().Border(wxDirection::Down).Centre());
 }
 
 void wxGenericAboutDialog::AddText(const std::string& text)
@@ -239,7 +239,7 @@ void wxGenericAboutDialog::AddCollapsiblePane(const std::string& title,
     wxWindow * const paneContents = pane->GetPane();
     wxStaticText *txt = new wxStaticText(paneContents, wxID_ANY, text,
                                          wxDefaultPosition, wxDefaultSize,
-                                         wxALIGN_CENTRE);
+                                         wxAlignment::Center);
 
     // don't make the text unreasonably wide
     static const int maxWidth = wxGetDisplaySize().x/3;
@@ -252,7 +252,7 @@ void wxGenericAboutDialog::AddCollapsiblePane(const std::string& title,
     paneContents->SetSizer(sizerPane);
 
     // NB: all the wxCollapsiblePanes must be added with a null proportion value
-    m_sizerText->Add(pane, wxSizerFlags(0).Expand().Border(wxBOTTOM));
+    m_sizerText->Add(pane, wxSizerFlags(0).Expand().Border(wxDirection::Bottom));
 }
 #endif
 

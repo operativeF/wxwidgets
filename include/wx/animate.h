@@ -89,7 +89,7 @@ constexpr unsigned int wxAC_NO_AUTORESIZE       = 0x0010;
 
 // default style does not include wxAC_NO_AUTORESIZE, that is, the control
 // auto-resizes by default to fit the new animation when SetAnimation() is called
-constexpr unsigned int wxAC_DEFAULT_STYLE       = wxBORDER_NONE;
+constexpr unsigned int wxAC_DEFAULT_STYLE       = wxBorder::None;
 
 class WXDLLIMPEXP_CORE wxAnimationCtrlBase : public wxControl
 {

@@ -64,7 +64,7 @@ public:
     DWORD MSWGetStyle(unsigned int style, DWORD *exstyle) const override;
 
 protected:
-    wxBorder GetDefaultBorder() const override { return wxBORDER_NONE; }
+    wxBorder GetDefaultBorder() const override { return wxBorder::None; }
     wxSize DoGetBestSize() const override;
 
     // Implement wxMSWOwnerDrawnButtonBase methods.

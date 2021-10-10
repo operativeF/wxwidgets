@@ -11,6 +11,7 @@
 #ifndef _WX_DIALOG_H_BASE_
 #define _WX_DIALOG_H_BASE_
 
+#include "wx/dialogflags.h"
 #include "wx/toplevel.h"
 #include "wx/containr.h"
 
@@ -31,8 +32,6 @@ class wxTextSizerWrapper;
 // Also see the bit summary table in wx/toplevel.h.
 
 constexpr unsigned int wxDIALOG_NO_PARENT = 0x00000020;  // Don't make owned by apps top window
-
-constexpr unsigned int wxDEFAULT_DIALOG_STYLE = wxCAPTION | wxSYSTEM_MENU | wxCLOSE_BOX;
 
 // Layout adaptation levels, for SetLayoutAdaptationLevel
 
@@ -114,7 +113,7 @@ public:
     // check whether it contains wxDIALOG_NO_PARENT bit.
     //
     // This function always returns a valid top level window or NULL.
-    wxWindow *GetParentForModalDialog(wxWindow *parent, unsigned int style) const;
+    wxWindow *GetParentForModalDialog(wxWindow *parent, DialogFlags style) const;
 
     // This overload can only be used for already initialized windows, i.e. not
     // from the ctor. It uses the current window parent and style.
@@ -141,7 +140,7 @@ public:
     // notice that the returned sizer can be NULL if no buttons are put in the
     // sizer (this mostly happens under smart phones and other atypical
     // platforms which have hardware buttons replacing OK/Cancel and such)
-    wxSizer *CreateButtonSizer(unsigned int flags);
+    wxSizer *CreateButtonSizer(DialogFlags flags);
 
     // returns a sizer containing the given one and a static line separating it
     // from the preceding elements if it's appropriate for the current platform
@@ -153,10 +152,10 @@ public:
     //
     // this is just a combination of CreateButtonSizer() and
     // CreateSeparatedSizer()
-    wxSizer *CreateSeparatedButtonSizer(unsigned int flags);
+    wxSizer *CreateSeparatedButtonSizer(DialogFlags flags);
 
 #if wxUSE_BUTTON
-    wxStdDialogButtonSizer *CreateStdDialogButtonSizer( unsigned int flags );
+    wxStdDialogButtonSizer *CreateStdDialogButtonSizer( DialogFlags flags );
 #endif // wxUSE_BUTTON
 
     // Do layout adaptation

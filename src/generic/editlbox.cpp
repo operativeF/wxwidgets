@@ -110,11 +110,11 @@ bool wxEditableListBox::Create(wxWindow *parent, wxWindowID id,
     wxSizer *sizer = new wxBoxSizer(wxVERTICAL);
 
     wxPanel *subp = new wxPanel(this, wxID_ANY, wxDefaultPosition, wxDefaultSize,
-                                wxSUNKEN_BORDER | wxTAB_TRAVERSAL);
+                                wxBorder::Sunken | wxTAB_TRAVERSAL);
     wxSizer *subsizer = new wxBoxSizer(wxHORIZONTAL);
 
     subsizer->Add(new wxStaticText(subp, wxID_ANY, label),
-                  wxSizerFlags(1).Center().Border(wxLEFT));
+                  wxSizerFlags(1).Center().Border(wxDirection::Left));
 
     const wxSizerFlags flagsCentered = wxSizerFlags().Center();
 
@@ -160,7 +160,7 @@ bool wxEditableListBox::Create(wxWindow *parent, wxWindowID id,
 
     sizer->Add(subp, wxSizerFlags().Expand());
 
-    unsigned int st = wxLC_REPORT | wxLC_NO_HEADER | wxLC_SINGLE_SEL | wxSUNKEN_BORDER;
+    unsigned int st = wxLC_REPORT | wxLC_NO_HEADER | wxLC_SINGLE_SEL | wxBorder::Sunken;
     if ( style & wxEL_ALLOW_EDIT )
          st |= wxLC_EDIT_LABELS;
     m_listCtrl = new CleverListCtrl(this, wxID_ELB_LISTCTRL,

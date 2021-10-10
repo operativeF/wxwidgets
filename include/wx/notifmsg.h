@@ -32,7 +32,7 @@ public:
     wxNotificationMessageBase(const std::string& title,
                               const std::string& message = {},
                               wxWindow *parent = nullptr,
-                              unsigned int flags = wxICON_INFORMATION)
+                              wxDialogIconFlags flags = wxDialogIconFlags::Information)
     {
         Create(title, message, parent, flags);
     }
@@ -59,9 +59,9 @@ public:
     void SetParent(wxWindow *parent);
 
     // this method can currently be used to choose a standard icon to use: the
-    // parameter may be one of wxICON_INFORMATION, wxICON_WARNING or
-    // wxICON_ERROR only (but not wxICON_QUESTION)
-    void SetFlags(unsigned int flags);
+    // parameter may be one of wxDialogIconFlags::Information, wxDialogIconFlags::Warning or
+    // wxDialogIconFlags::Error only (but not wxDialogIconFlags::Question)
+    void SetFlags(wxDialogIconFlags flags);
 
     // set a custom icon to use instead of the system provided specified via SetFlags
     virtual void SetIcon(const wxIcon& icon);
@@ -96,7 +96,7 @@ protected:
     void Create(const std::string& title = {},
                 const std::string& message = {},
                 wxWindow *parent = nullptr,
-                unsigned int flags = wxICON_INFORMATION)
+                wxDialogIconFlags flags = wxDialogIconFlags::Information)
     {
         SetTitle(title);
         SetMessage(message);
@@ -144,7 +144,7 @@ public:
     wxNotificationMessage(const std::string& title,
                           const std::string& message = {},
                           wxWindow* parent = nullptr,
-                          unsigned int flags = wxICON_INFORMATION);
+                          wxDialogIconFlags flags = wxDialogIconFlags::Information);
 
     wxNotificationMessage(const wxNotificationMessage&) = delete;
     wxNotificationMessage& operator=(const wxNotificationMessage&) = delete;

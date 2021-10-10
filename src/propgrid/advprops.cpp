@@ -409,7 +409,7 @@ wxPGWindowList wxPGDatePickerCtrlEditor::CreateControls( wxPropertyGrid* propgri
                  dateValue,
                  pos,
                  useSz,
-                 prop->GetDatePickerStyle() | wxNO_BORDER);
+                 prop->GetDatePickerStyle() | wxBorder::None);
 
 #ifdef __WXMSW__
     ctrl->Show();

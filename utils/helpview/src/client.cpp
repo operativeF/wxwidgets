@@ -250,9 +250,9 @@ MyModalDialog::MyModalDialog(wxWindow *parent)
     m_main = new wxButton(this, wxID_ANY, "Main");
     m_book1 = new wxButton(this, wxID_ANY, "Book1");
     m_book2 = new wxButton(this, wxID_ANY, "Book2");
-    sizerTop->Add(m_main, 0, wxALIGN_CENTER | wxALL, 5);
-    sizerTop->Add(m_book1, 0, wxALIGN_CENTER | wxALL, 5);
-    sizerTop->Add(m_book2, 0, wxALIGN_CENTER | wxALL, 5);
+    sizerTop->Add(m_main, 0, wxAlignment::Center | wxDirection::All, 5);
+    sizerTop->Add(m_book1, 0, wxAlignment::Center | wxDirection::All, 5);
+    sizerTop->Add(m_book2, 0, wxAlignment::Center | wxDirection::All, 5);
 
     SetSizer(sizerTop);
 

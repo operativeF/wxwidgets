@@ -43,7 +43,7 @@ public:
                 wxWindowID winid = wxID_ANY,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                unsigned int style = wxTAB_TRAVERSAL | wxNO_BORDER,
+                unsigned int style = wxTAB_TRAVERSAL | wxBorder::None,
                 const std::string& name = wxPanelNameStr);
     */
 
@@ -52,7 +52,7 @@ public:
                 wxWindowID winid = wxID_ANY,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                unsigned int style = wxTAB_TRAVERSAL | wxNO_BORDER,
+                unsigned int style = wxTAB_TRAVERSAL | wxBorder::None,
                 const std::string& name = wxPanelNameStr);
 
 

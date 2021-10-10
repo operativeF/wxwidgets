@@ -46,7 +46,7 @@ public:
     // by the derived classes.
     explicit wxBalloonNotifMsgImpl(wxNotificationMessageBase* notification) :
         wxNotificationMessageImpl(notification),
-        m_flags(wxICON_INFORMATION),
+        m_flags(wxDialogIconFlags::Information),
         m_parent(nullptr)
     {
     }

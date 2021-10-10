@@ -203,7 +203,7 @@ bool wxRemoteHtmlHelpController::DoConnection()
             if( nsleep > 4 ) {
                 if ( wxMessageBox( wxT("Failed to make connection to Help server.\nRetry?") ,
                                    wxT("wxRemoteHtmlHelpController Error"),
-                                   wxICON_ERROR | wxYES_NO | wxCANCEL ) != wxYES )
+                                   DialogFlags{wxDialogIconFlags::Error, wxDialogFlags::Yes_No, wxDialogFlags::Cancel} ) != wxDialogFlags::Yes )
                 {
                     // no server
                     return false;

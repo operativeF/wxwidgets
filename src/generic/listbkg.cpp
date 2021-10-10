@@ -66,7 +66,7 @@ wxListbook::Create(wxWindow *parent,
     // no border for this control, it doesn't look nice together with
     // wxListCtrl border
     style &= ~wxBORDER_MASK;
-    style |= wxBORDER_NONE;
+    style |= wxBorder::None;
 
     if ( !wxControl::Create(parent, id, pos, size, style,
                             wxDefaultValidator, name) )

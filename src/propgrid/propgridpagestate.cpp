@@ -57,12 +57,12 @@ void wxPropertyGridIteratorBase::Init( wxPropertyGridPageState* state, int flags
 {
     wxPGProperty* property = nullptr;
 
-    if ( startPos == wxTOP )
+    if ( startPos == wxDirection::Top )
     {
         if ( dir == 0 )
             dir = 1;
     }
-    else if ( startPos == wxBOTTOM )
+    else if ( startPos == wxDirection::Bottom )
     {
         property = state->GetLastItem(flags);
         if ( dir == 0 )
@@ -70,7 +70,7 @@ void wxPropertyGridIteratorBase::Init( wxPropertyGridPageState* state, int flags
     }
     else
     {
-        wxFAIL_MSG("Only supported starting positions are wxTOP and wxBOTTOM");
+        wxFAIL_MSG("Only supported starting positions are wxDirection::Top and wxDirection::Bottom");
     }
 
     Init( state, flags, property, dir );

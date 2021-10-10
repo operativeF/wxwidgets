@@ -90,7 +90,7 @@ DWORD wxTopLevelWindowMSW::MSWGetStyle(unsigned int style, DWORD *exflags) const
     // don't make sense for us (we also deal with the borders ourselves)
     DWORD msflags = wxWindow::MSWGetStyle
                       (
-                        (style & ~wxBORDER_MASK) | wxBORDER_NONE, exflags
+                        (style & ~wxBORDER_MASK) | wxBorder::None, exflags
                       ) & ~WS_CHILD & ~WS_VISIBLE;
 
     // first select the kind of window being created
@@ -103,9 +103,9 @@ DWORD wxTopLevelWindowMSW::MSWGetStyle(unsigned int style, DWORD *exflags) const
     // border and caption styles
     if ( ( style & wxRESIZE_BORDER ) && !IsAlwaysMaximized())
         msflags |= WS_THICKFRAME;
-    else if ( exflags && ((style & wxBORDER_DOUBLE) || (style & wxBORDER_RAISED)) )
+    else if ( exflags && ((style & wxBORDER_DOUBLE) || (style & wxBorder::Raised)) )
         *exflags |= WS_EX_DLGMODALFRAME;
-    else if ( !(style & wxBORDER_NONE) )
+    else if ( !(style & wxBorder::None) )
         msflags |= WS_BORDER;
     else
         msflags |= WS_POPUP;

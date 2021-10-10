@@ -344,9 +344,9 @@ void wxGridCellEditor::DoPositionEditor(const wxSize& size,
 
     if ( size.x < rectCell.width )
     {
-        if ( hAlign == wxALIGN_CENTER_HORIZONTAL )
+        if ( hAlign == wxAlignment::CenterHorizontal )
             centerDir |= wxHORIZONTAL;
-        else if ( hAlign == wxALIGN_RIGHT )
+        else if ( hAlign == wxAlignment::Right )
             rect.x = rectCell.x + rectCell.width - rect.width;
         //else: nothing to do for the left alignment
     }
@@ -357,9 +357,9 @@ void wxGridCellEditor::DoPositionEditor(const wxSize& size,
 
     if ( size.y < rectCell.height )
     {
-        if ( vAlign == wxALIGN_CENTRE_VERTICAL )
+        if ( vAlign == wxAlignment::CenterVertical )
             centerDir |= wxVERTICAL;
-        else if ( vAlign == wxALIGN_BOTTOM )
+        else if ( vAlign == wxAlignment::Bottom )
             rect.y = rectCell.y + rectCell.height - rect.height;
         //else: nothing to do for the top alignment
     }
@@ -436,7 +436,7 @@ void wxGridCellTextEditor::DoCreate(wxWindow* parent,
                                     wxEvtHandler* evtHandler,
                                     unsigned int style)
 {
-    style |= wxTE_PROCESS_ENTER | wxTE_PROCESS_TAB | wxNO_BORDER;
+    style |= wxTE_PROCESS_ENTER | wxTE_PROCESS_TAB | wxBorder::None;
 
     wxTextCtrl* const text = new wxTextCtrl(parent, id, "",
                                             wxDefaultPosition, wxDefaultSize,
@@ -1293,15 +1293,15 @@ void wxGridCellBoolEditor::Create(wxWindow* parent,
 {
     m_control = new wxCheckBox(parent, id, "",
                                wxDefaultPosition, wxDefaultSize,
-                               wxNO_BORDER);
+                               wxBorder::None);
 
     wxGridCellEditor::Create(parent, id, evtHandler);
 }
 
 void wxGridCellBoolEditor::SetSize(const wxRect& r)
 {
-    int hAlign = wxALIGN_LEFT;
-    int vAlign = wxALIGN_CENTRE_VERTICAL;
+    int hAlign = wxAlignment::Left;
+    int vAlign = wxAlignment::CenterVertical;
     if (GetCellAttr())
         GetCellAttr()->GetNonDefaultAlignment(&hAlign, &vAlign);
 
@@ -1514,10 +1514,10 @@ void wxGridCellChoiceEditor::Create(wxWindow* parent,
 {
     int style = wxTE_PROCESS_ENTER |
                 wxTE_PROCESS_TAB |
-                wxBORDER_NONE;
+                wxBorder::None;
 
     if ( !m_allowOthers )
-        style |= wxCB_READONLY;
+        style |= ComboStyles::ReadOnly;
     m_control = new wxComboBox(parent, id, "",
                                wxDefaultPosition, wxDefaultSize,
                                m_choices,
@@ -1886,7 +1886,7 @@ void wxGridCellDateEditor::SetSize(const wxRect& r)
     }
 
     // Use right alignment by default for consistency with the date renderer.
-    DoPositionEditor(size, r, wxALIGN_RIGHT);
+    DoPositionEditor(size, r, wxAlignment::Right);
 }
 
 void wxGridCellDateEditor::BeginEdit(int row, int col, wxGrid* grid)

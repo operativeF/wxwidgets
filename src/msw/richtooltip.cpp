@@ -21,6 +21,7 @@
     #include <memory>
 #endif // WX_PRECOMP
 
+#include "wx/dialogflags.h"
 #include "wx/treectrl.h"
 
 #include "wx/private/richtooltip.h"
@@ -87,31 +88,31 @@ public:
         wxRichToolTipGenericImpl::SetCustomIcon(icon);
     }
 
-    void SetStandardIcon(int icon) override
+    void SetStandardIcon(wxDialogIconFlags icon) override
     {
         wxRichToolTipGenericImpl::SetStandardIcon(icon);
         if ( !m_canUseNative )
             return;
 
-        switch ( icon & wxICON_MASK )
+        switch ( icon )
         {
-            case wxICON_WARNING:
+            case wxDialogIconFlags::Warning:
                 m_ttiIcon = TTI_WARNING;
                 break;
 
-            case wxICON_ERROR:
+            case wxDialogIconFlags::Error:
                 m_ttiIcon = TTI_ERROR;
                 break;
 
-            case wxICON_INFORMATION:
+            case wxDialogIconFlags::Information:
                 m_ttiIcon = TTI_INFO;
                 break;
 
-            case wxICON_QUESTION:
+            case wxDialogIconFlags::Question:
                 wxFAIL_MSG("Question icon doesn't make sense for a tooltip");
                 break;
 
-            case wxICON_NONE:
+            case wxDialogIconFlags::None:
                 m_ttiIcon = TTI_NONE;
                 break;
         }

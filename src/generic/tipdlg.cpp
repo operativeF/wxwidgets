@@ -236,27 +236,27 @@ wxTipDialog::wxTipDialog(wxWindow *parent,
     wxBoxSizer *topsizer = new wxBoxSizer( wxVERTICAL );
 
     wxBoxSizer *icon_text = new wxBoxSizer( wxHORIZONTAL );
-    icon_text->Add( bmp, 0, wxCENTER );
-    icon_text->Add( text, 1, wxCENTER | wxLEFT, 20 );
-    topsizer->Add( icon_text, 0, wxEXPAND | wxALL, 10 );
+    icon_text->Add( bmp, 0, SizerFlags{wxAlignment::Center} );
+    icon_text->Add( text, 1, SizerFlags{wxDirection::Center, wxDirection::Left}, 20 );
+    topsizer->Add( icon_text, 0, SizerFlags{wxStretch::Expand, wxDirection::All}, 10 );
 
-    topsizer->Add( m_text, 1, wxEXPAND | wxLEFT|wxRIGHT, 10 );
+    topsizer->Add( m_text, 1, SizerFlags{wxStretch::Expand, wxDirection::Left, wxDirection::Right}, 10 );
 
     wxBoxSizer *bottom = new wxBoxSizer( wxHORIZONTAL );
     if (isPda)
-        topsizer->Add( m_checkbox, 0, wxCENTER|wxTOP );
+        topsizer->Add( m_checkbox, 0, SizerFlags{wxDirection::Center, wxDirection::Top} );
     else
-        bottom->Add( m_checkbox, 0, wxCENTER );
+        bottom->Add( m_checkbox, 0, SizerFlags{wxDirection::Center} );
 
     if (!isPda)
         bottom->Add( 10,10,1 );
-    bottom->Add( btnNext, 0, wxCENTER | wxLEFT, 10 );
-    bottom->Add( btnClose, 0, wxCENTER | wxLEFT, 10 );
+    bottom->Add( btnNext, 0, SizerFlags{wxAlignment::Center, wxDirection::Left}, 10 );
+    bottom->Add( btnClose, 0, SizerFlags{wxAlignment::Center, wxDirection::Left}, 10 );
 
     if (isPda)
-        topsizer->Add( bottom, 0, wxCENTER | wxALL, 5 );
+        topsizer->Add( bottom, 0, SizerFlags{wxAlignment::Center, wxDirection::All}, 5 );
     else
-        topsizer->Add( bottom, 0, wxEXPAND | wxALL, 10 );
+        topsizer->Add( bottom, 0, SizerFlags{wxStretch::Expand, wxDirection::All}, 10 );
 
     SetTipText();
 

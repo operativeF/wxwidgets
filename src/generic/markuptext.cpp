@@ -218,7 +218,7 @@ public:
 
         wxRect bounds;
         m_dc.DrawLabel(text, wxBitmap(),
-                       rect, wxALIGN_LEFT | wxALIGN_TOP,
+                       rect, AlignmentFlags{wxAlignment::Left, wxAlignment::Top},
                        indexAccel,
                        &bounds);
 
@@ -279,7 +279,7 @@ public:
                                  m_dc,
                                  text,
                                  rect,
-                                 wxALIGN_LEFT | wxALIGN_CENTRE_VERTICAL,
+                                 AlignmentFlags{wxAlignment::Left, wxAlignment::CenterVertical},
                                  m_rendererFlags,
                                  m_ellipsizeMode);
 

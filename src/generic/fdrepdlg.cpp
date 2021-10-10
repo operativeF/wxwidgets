@@ -88,42 +88,42 @@ bool wxGenericFindReplaceDialog::Create(wxWindow *parent,
     sizer2Col->Add(new wxStaticText(this, wxID_ANY, _("Search for:"),
                                     wxDefaultPosition, wxSize(80, wxDefaultCoord)),
                                     0,
-                                    wxALIGN_CENTRE_VERTICAL | wxALIGN_RIGHT);
+                                    wxAlignment::CenterVertical | wxAlignment::Right);
 
     sizer2Col->Add(10, 0);
 
     m_textFind = new wxTextCtrl(this, wxID_ANY, m_FindReplaceData->GetFindString());
-    sizer2Col->Add(m_textFind, 1, wxALIGN_CENTRE_VERTICAL | wxEXPAND);
+    sizer2Col->Add(m_textFind, 1, wxAlignment::CenterVertical | wxStretch::Expand);
 
     if ( style & wxFR_REPLACEDIALOG )
     {
         sizer2Col->Add(new wxStaticText(this, wxID_ANY, _("Replace with:"),
                                         wxDefaultPosition, wxSize(80, wxDefaultCoord)),
                                         0,
-                                        wxALIGN_CENTRE_VERTICAL |
-                                        wxALIGN_RIGHT | wxTOP, 5);
+                                        wxAlignment::CenterVertical |
+                                        wxAlignment::Right | wxDirection::Top, 5);
 
         sizer2Col->Add(isPda ? 2 : 10, 0);
 
         m_textRepl = new wxTextCtrl(this, wxID_ANY,
                                     m_FindReplaceData->GetReplaceString());
         sizer2Col->Add(m_textRepl, 1,
-                       wxALIGN_CENTRE_VERTICAL | wxEXPAND | wxTOP, 5);
+                       wxAlignment::CenterVertical | wxStretch::Expand | wxDirection::Top, 5);
     }
 
-    leftsizer->Add(sizer2Col, 0, wxEXPAND | wxALL, 5);
+    leftsizer->Add(sizer2Col, 0, wxStretch::Expand | wxDirection::All, 5);
 
     wxBoxSizer *optsizer = new wxBoxSizer( isPda ? wxVERTICAL : wxHORIZONTAL );
 
     wxBoxSizer *chksizer = new wxBoxSizer( wxVERTICAL);
 
     m_chkWord = new wxCheckBox(this, wxID_ANY, _("Whole word"));
-    chksizer->Add(m_chkWord, 0, wxALL, 3);
+    chksizer->Add(m_chkWord, 0, wxDirection::All, 3);
 
     m_chkCase = new wxCheckBox(this, wxID_ANY, _("Match case"));
-    chksizer->Add(m_chkCase, 0, wxALL, 3);
+    chksizer->Add(m_chkCase, 0, wxDirection::All, 3);
 
-    optsizer->Add(chksizer, 0, wxALL, 10);
+    optsizer->Add(chksizer, 0, wxDirection::All, 10);
 
     static const wxString searchDirections[] = {_("Up"), _("Down")};
     int majorDimension = 0;
@@ -138,7 +138,7 @@ bool wxGenericFindReplaceDialog::Create(wxWindow *parent,
                                 WXSIZEOF(searchDirections), searchDirections,
                                 majorDimension, rbStyle);
 
-    optsizer->Add(m_radioDir, 0, wxALL, isPda ? 5 : 10);
+    optsizer->Add(m_radioDir, 0, wxDirection::All, isPda ? 5 : 10);
 
     leftsizer->Add(optsizer);
 
@@ -146,23 +146,23 @@ bool wxGenericFindReplaceDialog::Create(wxWindow *parent,
 
     wxButton* btn = new wxButton(this, wxID_FIND);
     btn->SetDefault();
-    bttnsizer->Add(btn, 0, wxALL, 3);
+    bttnsizer->Add(btn, 0, wxDirection::All, 3);
 
-    bttnsizer->Add(new wxButton(this, wxID_CANCEL), 0, wxALL, 3);
+    bttnsizer->Add(new wxButton(this, wxID_CANCEL), 0, wxDirection::All, 3);
 
     if ( style & wxFR_REPLACEDIALOG )
     {
         bttnsizer->Add(new wxButton(this, wxID_REPLACE, _("&Replace")),
-                                    0, wxALL, 3);
+                                    0, wxDirection::All, 3);
 
         bttnsizer->Add(new wxButton(this, wxID_REPLACE_ALL, _("Replace &all")),
-                                    0, wxALL, 3);
+                                    0, wxDirection::All, 3);
     }
 
     wxBoxSizer *topsizer = new wxBoxSizer( wxHORIZONTAL );
 
-    topsizer->Add(leftsizer, 1, wxALL, isPda ? 0 : 5);
-    topsizer->Add(bttnsizer, 0, wxALL, isPda ? 0 : 5);
+    topsizer->Add(leftsizer, 1, wxDirection::All, isPda ? 0 : 5);
+    topsizer->Add(bttnsizer, 0, wxDirection::All, isPda ? 0 : 5);
 
     auto flags = m_FindReplaceData->GetFlags();
 

@@ -10,11 +10,10 @@
 #ifndef _WX_RIBBON_PANEL_H_
 #define _WX_RIBBON_PANEL_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_RIBBON
 
 #include "wx/bitmap.h"
+#include "wx/directionflags.h"
 #include "wx/ribbon/control.h"
 
 enum wxRibbonPanelOption
@@ -89,7 +88,7 @@ protected:
     wxSize DoGetBestSize() const override;
     virtual wxSize GetPanelSizerBestSize() const;
     wxSize  GetPanelSizerMinSize() const;
-    wxBorder GetDefaultBorder() const override { return wxBORDER_NONE; }
+    wxBorder GetDefaultBorder() const override { return wxBorder::None; }
     wxSize GetMinNotMinimisedSize() const;
 
     wxSize DoGetNextSmallerSize(wxOrientation direction,

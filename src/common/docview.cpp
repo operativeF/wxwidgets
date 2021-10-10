@@ -424,9 +424,9 @@ bool wxDocument::Revert()
          (
             _("Discard changes and reload the last saved version?").ToStdString(),
             wxTheApp->GetAppDisplayName().ToStdString(),
-            wxYES_NO | wxCANCEL | wxICON_QUESTION,
+            DialogFlags{wxDialogFlags::Yes_No, wxDialogFlags::Cancel, wxDialogIconFlags::Question},
             GetDocumentWindow()
-          ) != wxYES )
+          ) != wxDialogFlags::Yes )
         return false;
 
     if ( !DoOpenDocument(GetFilename()) )
@@ -479,18 +479,18 @@ bool wxDocument::OnSaveModified()
                      GetUserReadableName()
                     ).ToStdString(),
                     wxTheApp->GetAppDisplayName().ToStdString(),
-                    wxYES_NO | wxCANCEL | wxICON_QUESTION | wxCENTRE,
+                    DialogFlags{wxDialogFlags::Yes_No, wxDialogFlags::Cancel, wxDialogIconFlags::Question, wxDialogFlags::Centered},
                     GetDocumentWindow()
                  ) )
         {
-            case wxNO:
+            case wxDialogFlags::No:
                 Modify(false);
                 break;
 
-            case wxYES:
+            case wxDialogFlags::Yes:
                 return Save();
 
-            case wxCANCEL:
+            case wxDialogFlags::Cancel:
                 return false;
         }
     }
@@ -1694,7 +1694,7 @@ wxDocTemplate *wxDocManager::SelectDocumentPath(wxDocTemplate **templates,
 
             wxMessageBox(_("Sorry, could not open this file.").ToStdString(),
                          msgTitle.ToStdString(),
-                         wxOK | wxICON_EXCLAMATION | wxCENTRE);
+                         DialogFlags{wxDialogFlags::OK, wxDialogIconFlags::Exclamation, wxDialogFlags::Centered});
 
             path.clear();
             return nullptr;
@@ -1728,7 +1728,7 @@ wxDocTemplate *wxDocManager::SelectDocumentPath(wxDocTemplate **templates,
             // allowed templates in runtime.
             wxMessageBox(_("Sorry, the format for this file is unknown.").ToStdString(),
                          _("Open File").ToStdString(),
-                         wxOK | wxICON_EXCLAMATION | wxCENTRE);
+                         DialogFlags{wxDialogFlags::OK, wxDialogIconFlags::Exclamation, wxDialogFlags::Centered});
         }
     }
     else

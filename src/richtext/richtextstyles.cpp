@@ -1017,8 +1017,8 @@ wxRichTextStyleListCtrl::wxRichTextStyleListCtrl(wxWindow* parent, wxWindowID id
 bool wxRichTextStyleListCtrl::Create(wxWindow* parent, wxWindowID id, const wxPoint& pos,
         const wxSize& size, unsigned int style)
 {
-    if ((style & wxBORDER_MASK) == wxBORDER_DEFAULT)
-        style |= wxBORDER_THEME;
+    if ((style & wxBORDER_MASK) == wxBorder::Default)
+        style |= wxBorder::Theme;
 
     wxControl::Create(parent, id, pos, size, style);
 
@@ -1030,9 +1030,9 @@ bool wxRichTextStyleListCtrl::Create(wxWindow* parent, wxWindowID id, const wxPo
 
     wxBorder listBoxStyle;
     if (showSelector)
-        listBoxStyle = wxBORDER_THEME;
+        listBoxStyle = wxBorder::Theme;
     else
-        listBoxStyle = wxBORDER_NONE;
+        listBoxStyle = wxBorder::None;
 
     m_styleListBox = new wxRichTextStyleListBox(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, listBoxStyle);
 
@@ -1049,12 +1049,12 @@ bool wxRichTextStyleListCtrl::Create(wxWindow* parent, wxWindowID id, const wxPo
 
         m_styleChoice = new wxChoice(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, choices);
 
-        boxSizer->Add(m_styleListBox, 1, wxALL|wxEXPAND, 5);
-        boxSizer->Add(m_styleChoice, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, 5);
+        boxSizer->Add(m_styleListBox, 1, wxDirection::All|wxStretch::Expand, 5);
+        boxSizer->Add(m_styleChoice, 0, wxDirection::Left|wxDirection::Right|wxDirection::Bottom|wxStretch::Expand, 5);
     }
     else
     {
-        boxSizer->Add(m_styleListBox, 1, wxALL|wxEXPAND, 0);
+        boxSizer->Add(m_styleListBox, 1, wxDirection::All|wxStretch::Expand, 0);
     }
 
     SetSizer(boxSizer);
@@ -1216,8 +1216,8 @@ wxEND_EVENT_TABLE()
 bool wxRichTextStyleComboPopup::Create( wxWindow* parent )
 {
     int borderStyle = GetDefaultBorder();
-    if (borderStyle == wxBORDER_SUNKEN || borderStyle == wxBORDER_NONE)
-        borderStyle = wxBORDER_THEME;
+    if (borderStyle == wxBorder::Sunken || borderStyle == wxBorder::None)
+        borderStyle = wxBorder::Theme;
 
     return wxRichTextStyleListBox::Create(parent, wxID_ANY,
                                   wxPoint(0,0), wxDefaultSize,

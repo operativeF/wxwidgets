@@ -261,7 +261,7 @@ bool wxPropertyGrid::Create( wxWindow *parent,
 
     if (!(style&wxBORDER_MASK))
     {
-        style |= wxBORDER_THEME;
+        style |= wxBorder::Theme;
     }
 
     style |= wxVSCROLL;
@@ -2182,8 +2182,8 @@ int wxPropertyGrid::DoDrawItems( wxDC& dc,
 
         // Is this or its parent themed?
         bool suppressMarginEdge = (wxGetWindowStyle() & wxPG_HIDE_MARGIN) &&
-            (((wxGetWindowStyle() & wxBORDER_MASK) == wxBORDER_THEME) ||
-            (((wxGetWindowStyle() & wxBORDER_MASK) == wxBORDER_NONE) && ((GetParent()->wxGetWindowStyle() & wxBORDER_MASK) == wxBORDER_THEME)));
+            (((wxGetWindowStyle() & wxBORDER_MASK) == wxBorder::Theme) ||
+            (((wxGetWindowStyle() & wxBORDER_MASK) == wxBorder::None) && ((GetParent()->wxGetWindowStyle() & wxBORDER_MASK) == wxBorder::Theme)));
         if (suppressMarginEdge)
         {
             // Blank out the margin edge
@@ -4039,7 +4039,7 @@ bool wxPropertyGrid::DoSelectProperty( wxPGProperty* p, unsigned int flags )
                 {
                     // Validation has failed, so we can't exit the previous editor
                     //::wxMessageBox(_("Please correct the value or press ESC to cancel the edit."),
-                    //               _("Invalid Value"),wxOK|wxICON_ERROR);
+                    //               _("Invalid Value"),wxDialogFlags::OK|wxDialogIconFlags::Error);
                     return false;
                 }
             }

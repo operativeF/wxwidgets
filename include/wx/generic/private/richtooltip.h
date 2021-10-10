@@ -10,6 +10,7 @@
 #ifndef _WX_GENERIC_PRIVATE_RICHTOOLTIP_H_
 #define _WX_GENERIC_PRIVATE_RICHTOOLTIP_H_
 
+#include "wx/dialogflags.h"
 #include "wx/icon.h"
 #include "wx/colour.h"
 
@@ -39,7 +40,7 @@ public:
     void SetBackgroundColour(const wxColour& col,
                                      const wxColour& colEnd) override;
     void SetCustomIcon(const wxIcon& icon) override;
-    void SetStandardIcon(int icon) override;
+    void SetStandardIcon(wxDialogIconFlags icon) override;
     void SetTimeout(std::chrono::milliseconds timeout,
                     std::chrono::milliseconds delay = 0ms) override;
     void SetTipKind(wxTipKind tipKind) override;

@@ -53,7 +53,7 @@ public:
 
 protected:
     // choose the default border for this window
-    wxBorder GetDefaultBorder() const override { return wxBORDER_NONE; }
+    wxBorder GetDefaultBorder() const override { return wxBorder::None; }
 
     // If non-null, the window used as our label. This window is owned by the
     // static box and will be deleted when it is.

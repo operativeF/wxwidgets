@@ -58,7 +58,7 @@ wxChoicebook::Create(wxWindow *parent,
     // no border for this control, it doesn't look nice together with
     // wxChoice border
     style &= ~wxBORDER_MASK;
-    style |= wxBORDER_NONE;
+    style |= wxBorder::None;
 
     if ( !wxControl::Create(parent, id, pos, size, style,
                             wxDefaultValidator, name) )
@@ -75,7 +75,7 @@ wxChoicebook::Create(wxWindow *parent,
     wxSizer* mainSizer = new wxBoxSizer(IsVertical() ? wxVERTICAL : wxHORIZONTAL);
 
     if (style & wxBK_RIGHT || style & wxBK_BOTTOM)
-        mainSizer->Add(0, 0, 1, wxEXPAND, 0);
+        mainSizer->Add(0, 0, 1, wxStretch::Expand, 0);
 
     m_controlSizer = new wxBoxSizer(IsVertical() ? wxHORIZONTAL : wxVERTICAL);
     m_controlSizer->Add(m_bookctrl, wxSizerFlags(1).Expand());
@@ -84,7 +84,7 @@ wxChoicebook::Create(wxWindow *parent,
         flags.Expand();
     else
         flags.CentreVertical();
-    mainSizer->Add(m_controlSizer, flags.Border(wxALL, m_controlMargin));
+    mainSizer->Add(m_controlSizer, flags.Border(wxDirection::All, m_controlMargin));
     SetSizer(mainSizer);
     return true;
 }

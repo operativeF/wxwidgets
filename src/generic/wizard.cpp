@@ -303,11 +303,11 @@ void wxWizard::AddBitmapRow(wxBoxSizer *mainColumn)
     mainColumn->Add(
         m_sizerBmpAndPage,
         1, // Vertically stretchable
-        wxEXPAND // Horizontal stretching, no border
+        SizerFlags{wxStretch::Expand} // Horizontal stretching, no border
     );
     mainColumn->Add(0,5,
         0, // No vertical stretching
-        wxEXPAND // No border, (mostly useless) horizontal stretching
+        SizerFlags{wxStretch::Expand} // No border, (mostly useless) horizontal stretching
     );
 
 #if wxUSE_STATBMP
@@ -321,13 +321,13 @@ void wxWizard::AddBitmapRow(wxBoxSizer *mainColumn)
         m_sizerBmpAndPage->Add(
             m_statbmp,
             0, // No horizontal stretching
-            wxALL, // Border all around, top alignment
+            SizerFlags{wxDirection::All}, // Border all around, top alignment
             5 // Border width
         );
         m_sizerBmpAndPage->Add(
             5,0,
             0, // No horizontal stretching
-            wxEXPAND // No border, (mostly useless) vertical stretching
+            SizerFlags{wxStretch::Expand} // No border, (mostly useless) vertical stretching
         );
     }
 #endif
@@ -342,12 +342,12 @@ void wxWizard::AddStaticLine(wxBoxSizer *mainColumn)
     mainColumn->Add(
         new wxStaticLine(this, wxID_ANY),
         0, // Vertically unstretchable
-        wxEXPAND | wxALL, // Border all around, horizontally stretchable
+        SizerFlags{wxStretch::Expand, wxDirection::All}, // Border all around, horizontally stretchable
         5 // Border width
     );
     mainColumn->Add(0,5,
         0, // No vertical stretching
-        wxEXPAND // No border, (mostly useless) horizontal stretching
+        SizerFlags{wxStretch::Expand} // No border, (mostly useless) horizontal stretching
     );
 #else
     (void)mainColumn;
@@ -364,14 +364,14 @@ void wxWizard::AddBackNextPair(wxBoxSizer *buttonRow)
     buttonRow->Add(
         backNextPair,
         0, // No horizontal stretching
-        wxALL, // Border all around
+        SizerFlags{wxDirection::All}, // Border all around
         5 // Border width
     );
 
     backNextPair->Add(m_btnPrev);
     backNextPair->Add(10, 0,
         0, // No horizontal stretching
-        wxEXPAND // No border, (mostly useless) vertical stretching
+        SizerFlags{wxStretch::Expand} // No border, (mostly useless) vertical stretching
     );
     backNextPair->Add(m_btnNext);
 }
@@ -397,14 +397,14 @@ void wxWizard::AddButtonRow(wxBoxSizer *mainColumn)
         mainColumn->Add(
             buttonRow,
             0, // Vertically unstretchable
-            wxEXPAND
+            wxStretch::Expand
             );
     else
 #endif
     mainColumn->Add(
         buttonRow,
         0, // Vertically unstretchable
-        wxALIGN_RIGHT // Right aligned, no border
+        SizerFlags{wxAlignment::Right} // Right aligned, no border
     );
 
     // Desired TAB order is 'next', 'cancel', 'help', 'back'. This makes the 'back' button the last control on the page.
@@ -431,12 +431,12 @@ void wxWizard::AddButtonRow(wxBoxSizer *mainColumn)
         buttonRow->Add(
             btnHelp,
             0, // Horizontally unstretchable
-            wxALL, // Border all around, top aligned
+            SizerFlags{wxDirection::All}, // Border all around, top aligned
             5 // Border width
             );
 #ifdef __WXMAC__
         // Put stretchable space between help button and others
-        buttonRow->Add(0, 0, 1, wxALIGN_CENTRE, 0);
+        buttonRow->Add(0, 0, 1, wxAlignment::Center, 0);
 #endif
     }
 
@@ -445,7 +445,7 @@ void wxWizard::AddButtonRow(wxBoxSizer *mainColumn)
     buttonRow->Add(
         btnCancel,
         0, // Horizontally unstretchable
-        wxALL, // Border all around, top aligned
+        wxDirection::All, // Border all around, top aligned
         5 // Border width
     );
 }
@@ -459,7 +459,7 @@ void wxWizard::DoCreateControls()
     bool isPda = (wxSystemSettings::GetScreenType() <= wxSYS_SCREEN_PDA);
 
     // Horizontal stretching, and if not PDA, border all around
-    int mainColumnSizerFlags = isPda ? wxEXPAND : wxALL|wxEXPAND ;
+    SizerFlags mainColumnSizerFlags = isPda ? wxStretch::Expand : SizerFlags{wxDirection::All, wxStretch::Expand};
 
     // wxWindow::SetSizer will be called at end
     wxBoxSizer *windowSizer = new wxBoxSizer(wxVERTICAL);
@@ -507,7 +507,7 @@ bool wxWizard::ShowPage(wxWizardPage *page, bool goingForward)
     wxASSERT_MSG( page != m_page, wxT("this is useless") );
 
     wxSizerFlags flags(1);
-    flags.Border(wxALL, m_border).Expand();
+    flags.Border(wxDirection::All, m_border).Expand();
 
     if ( !m_started )
     {
@@ -891,11 +891,11 @@ bool wxWizard::DoLayoutAdaptation()
                     if (!pages.Find(page) && page->GetSizer())
                     {
                         // Create a scrolled window and reparent
-                        wxScrolledWindow* scrolledWindow = new wxScrolledWindow(page, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL|wxVSCROLL|wxHSCROLL|wxBORDER_NONE);
+                        wxScrolledWindow* scrolledWindow = new wxScrolledWindow(page, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL|wxVSCROLL|wxHSCROLL|wxBorder::None);
                         wxSizer* oldSizer = page->GetSizer();
 
                         wxSizer* newSizer = new wxBoxSizer(wxVERTICAL);
-                        newSizer->Add(scrolledWindow,1, wxEXPAND, 0);
+                        newSizer->Add(scrolledWindow,1, wxStretch::Expand, 0);
 
                         page->SetSizer(newSizer, false /* don't delete the old sizer */);
 

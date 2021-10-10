@@ -407,10 +407,10 @@ bool wxFontMapper::GetAltForEncoding(wxFontEncoding encoding,
 
         // the question is different in 2 cases so the answer has to be
         // interpreted differently as well
-        const int answer = foundEquivEncoding ? wxNO : wxYES;
+        const wxDialogFlags answer = foundEquivEncoding ? wxDialogFlags::No : wxDialogFlags::Yes;
 
         if ( wxMessageBox(msg, title,
-                          wxICON_QUESTION | wxYES_NO,
+                          DialogFlags{wxDialogIconFlags::Question, wxDialogFlags::Yes_No},
                           m_windowParent) == answer )
         {
             wxFontData data;

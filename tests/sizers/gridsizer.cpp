@@ -165,6 +165,6 @@ TEST_CASE_FIXTURE(GridSizerTestCase,
     CHECK_THROWS_MESSAGE
     (
         m_sizer->Add(10, 10, wxSizerFlags().Expand().Centre()),
-        "Combining wxEXPAND and wxCENTRE should assert"
+        "Combining wxStretch::Expand and wxCENTRE should assert"
     );
 }

@@ -2093,14 +2093,14 @@ bool wxLongStringProperty::DisplayEditorDialog(wxPropertyGrid* pg, wxVariant& va
     if ( m_maxLen > 0 )
         ed->SetMaxLength(m_maxLen);
 
-    rowsizer->Add(ed, wxSizerFlags(1).Expand().Border(wxALL, spacing));
+    rowsizer->Add(ed, wxSizerFlags(1).Expand().Border(wxDirection::All, spacing));
     topsizer->Add(rowsizer, wxSizerFlags(1).Expand());
 
-    long btnSizerFlags = wxCANCEL;
+    DialogFlags btnSizerFlags{wxDialogFlags::Cancel};
     if ( !HasFlag(wxPG_PROP_READONLY) )
-        btnSizerFlags |= wxOK;
+        btnSizerFlags |= wxDialogFlags::OK;
     wxStdDialogButtonSizer* buttonSizer = dlg->CreateStdDialogButtonSizer(btnSizerFlags);
-    topsizer->Add(buttonSizer, wxSizerFlags(0).Right().Border(wxBOTTOM|wxRIGHT, spacing));
+    topsizer->Add(buttonSizer, wxSizerFlags(0).Right().Border(wxDirection::Bottom|wxDirection::Right, spacing));
 
     dlg->SetSizer( topsizer );
     topsizer->SetSizeHints( dlg );
@@ -2227,7 +2227,7 @@ bool wxPGArrayEditorDialog::Create( wxWindow *parent,
     // Message
     if ( !message.empty() )
         topsizer->Add( new wxStaticText(this, wxID_ANY, message),
-            wxSizerFlags(0).Left().Border(wxALL, spacing) );
+            wxSizerFlags(0).Left().Border(wxDirection::All, spacing) );
 
     m_elb = new wxEditableListBox(this, wxID_ANY, message,
                                   wxDefaultPosition,
@@ -2271,8 +2271,8 @@ bool wxPGArrayEditorDialog::Create( wxWindow *parent,
     topsizer->Add(m_elb, wxSizerFlags(1).Expand().Border(0, spacing));
 
     // Standard dialog buttons
-    wxStdDialogButtonSizer* buttonSizer = CreateStdDialogButtonSizer(wxOK | wxCANCEL);
-    topsizer->Add(buttonSizer, wxSizerFlags(0).Right().Border(wxALL, spacing));
+    wxStdDialogButtonSizer* buttonSizer = CreateStdDialogButtonSizer(DialogFlags{wxDialogFlags::OK, wxDialogFlags::Cancel});
+    topsizer->Add(buttonSizer, wxSizerFlags(0).Right().Border(wxDirection::All, spacing));
 
     m_elb->SetFocus();
 

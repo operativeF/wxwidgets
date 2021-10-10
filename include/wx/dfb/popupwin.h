@@ -19,10 +19,10 @@ class WXDLLIMPEXP_CORE wxPopupWindow : public wxPopupWindowBase
 public:
     wxPopupWindow() {}
 
-    wxPopupWindow(wxWindow *parent, int flags = wxBORDER_NONE)
+    wxPopupWindow(wxWindow *parent, int flags = wxBorder::None)
         { Create(parent, flags); }
 
-    bool Create(wxWindow *parent, int flags = wxBORDER_NONE)
+    bool Create(wxWindow *parent, int flags = wxBorder::None)
     {
         if ( !wxPopupWindowBase::Create(parent) )
             return false;

@@ -13,8 +13,8 @@
 
 #if wxUSE_NOTIFICATION_MESSAGE
 
+#include "wx/dialogflags.h"
 #include "wx/notifmsg.h"
-
 #include "wx/private/notifmsg.h"
 
 #ifndef wxHAS_NATIVE_NOTIFICATION_MESSAGE
@@ -59,11 +59,11 @@ void wxNotificationMessageBase::SetParent(wxWindow *parent)
     m_impl->SetParent(parent);
 }
 
-void wxNotificationMessageBase::SetFlags(unsigned int flags)
+void wxNotificationMessageBase::SetFlags(wxDialogIconFlags flags)
 {
-    wxASSERT_MSG(flags == wxICON_INFORMATION ||
-        flags == wxICON_WARNING || flags == wxICON_ERROR ||
-        flags == 0,
+    wxASSERT_MSG(flags == wxDialogIconFlags::Information ||
+        flags == wxDialogIconFlags::Warning || flags == wxDialogIconFlags::Error ||
+        flags == wxDialogIconFlags::None, // TODO: Valid to say none here?
         "Invalid icon flags specified");
 
     m_impl->SetFlags(flags);

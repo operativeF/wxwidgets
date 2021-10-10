@@ -27,6 +27,7 @@
     #include <boost/nowide/convert.hpp>
 #endif
 
+#include "wx/alignmentflags.h"
 #include "wx/hashmap.h"
 #include "wx/event.h"
 #include "wx/textctrl.h"
@@ -271,8 +272,8 @@ bool wxSpinCtrl::Create(wxWindow *parent,
     // set style for the base class
     style |= wxSP_VERTICAL;
 
-    if ( (style & wxBORDER_MASK) == wxBORDER_DEFAULT )
-        style |= wxBORDER_SUNKEN;
+    if ( (style & wxBORDER_MASK) == wxBorder::Default )
+        style |= wxBorder::Sunken;
 
     SetWindowStyle(style);
 
@@ -284,9 +285,9 @@ bool wxSpinCtrl::Create(wxWindow *parent,
     msStyle |= ES_AUTOHSCROLL;
 
     // propagate text alignment style to text ctrl
-    if ( style & wxALIGN_RIGHT )
+    if ( style & wxAlignment::Right )
         msStyle |= ES_RIGHT;
-    else if ( style & wxALIGN_CENTER )
+    else if ( style & wxAlignment::Center )
         msStyle |= ES_CENTER;
 
     // we must create the text control before the spin button for the purpose

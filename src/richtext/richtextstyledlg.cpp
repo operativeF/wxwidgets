@@ -143,113 +143,113 @@ void wxRichTextStyleOrganiserDialog::CreateControls()
     itemDialog1->SetSizer(itemBoxSizer2);
 
     m_innerSizer = new wxBoxSizer(wxVERTICAL);
-    itemBoxSizer2->Add(m_innerSizer, 1, wxGROW|wxALL, 5);
+    itemBoxSizer2->Add(m_innerSizer, 1, wxStretch::Grow|wxDirection::All, 5);
 
     m_buttonSizerParent = new wxBoxSizer(wxHORIZONTAL);
-    m_innerSizer->Add(m_buttonSizerParent, 1, wxGROW, 5);
+    m_innerSizer->Add(m_buttonSizerParent, 1, wxStretch::Grow, 5);
 
     wxBoxSizer* itemBoxSizer5 = new wxBoxSizer(wxVERTICAL);
-    m_buttonSizerParent->Add(itemBoxSizer5, 1, wxGROW, 5);
+    m_buttonSizerParent->Add(itemBoxSizer5, 1, wxStretch::Grow, 5);
 
     wxStaticText* itemStaticText6 = new wxStaticText( itemDialog1, wxID_STATIC, _("&Styles:"), wxDefaultPosition, wxDefaultSize, 0 );
-    itemBoxSizer5->Add(itemStaticText6, 0, wxALIGN_LEFT|wxLEFT|wxRIGHT|wxTOP, 5);
+    itemBoxSizer5->Add(itemStaticText6, 0, wxAlignment::Left|wxDirection::Left|wxDirection::Right|wxDirection::Top, 5);
 
     m_stylesListBox = new wxRichTextStyleListCtrl( itemDialog1, ID_RICHTEXTSTYLEORGANISERDIALOG_STYLES, wxDefaultPosition, wxSize(280, 260), listCtrlStyle );
     m_stylesListBox->SetHelpText(_("The available styles."));
     if (wxRichTextStyleOrganiserDialog::ShowToolTips())
         m_stylesListBox->SetToolTip(_("The available styles."));
-    itemBoxSizer5->Add(m_stylesListBox, 1, wxGROW|wxALL, 5);
+    itemBoxSizer5->Add(m_stylesListBox, 1, wxStretch::Grow|wxDirection::All, 5);
 
     wxBoxSizer* itemBoxSizer8 = new wxBoxSizer(wxVERTICAL);
-    m_buttonSizerParent->Add(itemBoxSizer8, 0, wxGROW, 5);
+    m_buttonSizerParent->Add(itemBoxSizer8, 0, wxStretch::Grow, 5);
 
     wxStaticText* itemStaticText9 = new wxStaticText( itemDialog1, ID_RICHTEXTSTYLEORGANISERDIALOG_CURRENT_STYLE, _(" "), wxDefaultPosition, wxDefaultSize, 0 );
-    itemBoxSizer8->Add(itemStaticText9, 0, wxGROW|wxLEFT|wxRIGHT|wxTOP, 5);
+    itemBoxSizer8->Add(itemStaticText9, 0, wxStretch::Grow|wxDirection::Left|wxDirection::Right|wxDirection::Top, 5);
 
-    m_previewCtrl = new wxRichTextCtrl( itemDialog1, ID_RICHTEXTSTYLEORGANISERDIALOG_PREVIEW, "", wxDefaultPosition, wxSize(250, 200), wxBORDER_THEME|wxVSCROLL|wxTE_READONLY );
+    m_previewCtrl = new wxRichTextCtrl( itemDialog1, ID_RICHTEXTSTYLEORGANISERDIALOG_PREVIEW, "", wxDefaultPosition, wxSize(250, 200), wxBorder::Theme|wxVSCROLL|wxTE_READONLY );
     m_previewCtrl->SetHelpText(_("The style preview."));
     if (wxRichTextStyleOrganiserDialog::ShowToolTips())
         m_previewCtrl->SetToolTip(_("The style preview."));
-    itemBoxSizer8->Add(m_previewCtrl, 1, wxGROW|wxALL, 5);
+    itemBoxSizer8->Add(m_previewCtrl, 1, wxStretch::Grow|wxDirection::All, 5);
 
     m_buttonSizer = new wxBoxSizer(wxVERTICAL);
-    m_buttonSizerParent->Add(m_buttonSizer, 0, wxGROW, 5);
+    m_buttonSizerParent->Add(m_buttonSizer, 0, wxStretch::Grow, 5);
 
     wxStaticText* itemStaticText12 = new wxStaticText( itemDialog1, wxID_STATIC, _(" "), wxDefaultPosition, wxDefaultSize, 0 );
-    m_buttonSizer->Add(itemStaticText12, 0, wxALIGN_LEFT|wxLEFT|wxRIGHT|wxTOP, 5);
+    m_buttonSizer->Add(itemStaticText12, 0, wxAlignment::Left|wxDirection::Left|wxDirection::Right|wxDirection::Top, 5);
 
     m_newCharacter = new wxButton( itemDialog1, ID_RICHTEXTSTYLEORGANISERDIALOG_NEW_CHAR, _("New &Character Style..."), wxDefaultPosition, wxDefaultSize, 0 );
     m_newCharacter->SetHelpText(_("Click to create a new character style."));
     if (wxRichTextStyleOrganiserDialog::ShowToolTips())
         m_newCharacter->SetToolTip(_("Click to create a new character style."));
-    m_buttonSizer->Add(m_newCharacter, 0, wxGROW|wxALL, 5);
+    m_buttonSizer->Add(m_newCharacter, 0, wxStretch::Grow|wxDirection::All, 5);
 
     m_newParagraph = new wxButton( itemDialog1, ID_RICHTEXTSTYLEORGANISERDIALOG_NEW_PARA, _("New &Paragraph Style..."), wxDefaultPosition, wxDefaultSize, 0 );
     m_newParagraph->SetHelpText(_("Click to create a new paragraph style."));
     if (wxRichTextStyleOrganiserDialog::ShowToolTips())
         m_newParagraph->SetToolTip(_("Click to create a new paragraph style."));
-    m_buttonSizer->Add(m_newParagraph, 0, wxGROW|wxLEFT|wxRIGHT|wxBOTTOM, 5);
+    m_buttonSizer->Add(m_newParagraph, 0, wxStretch::Grow|wxDirection::Left|wxDirection::Right|wxDirection::Bottom, 5);
 
     m_newList = new wxButton( itemDialog1, ID_RICHTEXTSTYLEORGANISERDIALOG_NEW_LIST, _("New &List Style..."), wxDefaultPosition, wxDefaultSize, 0 );
     m_newList->SetHelpText(_("Click to create a new list style."));
     if (wxRichTextStyleOrganiserDialog::ShowToolTips())
         m_newList->SetToolTip(_("Click to create a new list style."));
-    m_buttonSizer->Add(m_newList, 0, wxGROW|wxLEFT|wxRIGHT|wxBOTTOM, 5);
+    m_buttonSizer->Add(m_newList, 0, wxStretch::Grow|wxDirection::Left|wxDirection::Right|wxDirection::Bottom, 5);
 
     m_newBox = new wxButton( itemDialog1, ID_RICHTEXTSTYLEORGANISERDIALOG_NEW_BOX, _("New &Box Style..."), wxDefaultPosition, wxDefaultSize, 0 );
     m_newBox->SetHelpText(_("Click to create a new box style."));
     if (wxRichTextStyleOrganiserDialog::ShowToolTips())
         m_newBox->SetToolTip(_("Click to create a new box style."));
-    m_buttonSizer->Add(m_newBox, 0, wxGROW|wxLEFT|wxRIGHT|wxBOTTOM, 5);
+    m_buttonSizer->Add(m_newBox, 0, wxStretch::Grow|wxDirection::Left|wxDirection::Right|wxDirection::Bottom, 5);
 
-    m_buttonSizer->Add(5, 5, 1, wxALIGN_CENTER_HORIZONTAL|wxALL, 5);
+    m_buttonSizer->Add(5, 5, 1, wxAlignment::CenterHorizontal|wxDirection::All, 5);
 
     m_applyStyle = new wxButton( itemDialog1, ID_RICHTEXTSTYLEORGANISERDIALOG_APPLY, _("&Apply Style"), wxDefaultPosition, wxDefaultSize, 0 );
     m_applyStyle->SetHelpText(_("Click to apply the selected style."));
     if (wxRichTextStyleOrganiserDialog::ShowToolTips())
         m_applyStyle->SetToolTip(_("Click to apply the selected style."));
-    m_buttonSizer->Add(m_applyStyle, 0, wxGROW|wxALL, 5);
+    m_buttonSizer->Add(m_applyStyle, 0, wxStretch::Grow|wxDirection::All, 5);
 
     m_renameStyle = new wxButton( itemDialog1, ID_RICHTEXTSTYLEORGANISERDIALOG_RENAME, _("&Rename Style..."), wxDefaultPosition, wxDefaultSize, 0 );
     m_renameStyle->SetHelpText(_("Click to rename the selected style."));
     if (wxRichTextStyleOrganiserDialog::ShowToolTips())
         m_renameStyle->SetToolTip(_("Click to rename the selected style."));
-    m_buttonSizer->Add(m_renameStyle, 0, wxGROW|wxLEFT|wxRIGHT|wxBOTTOM, 5);
+    m_buttonSizer->Add(m_renameStyle, 0, wxStretch::Grow|wxDirection::Left|wxDirection::Right|wxDirection::Bottom, 5);
 
     m_editStyle = new wxButton( itemDialog1, ID_RICHTEXTSTYLEORGANISERDIALOG_EDIT, _("&Edit Style..."), wxDefaultPosition, wxDefaultSize, 0 );
     m_editStyle->SetHelpText(_("Click to edit the selected style."));
     if (wxRichTextStyleOrganiserDialog::ShowToolTips())
         m_editStyle->SetToolTip(_("Click to edit the selected style."));
-    m_buttonSizer->Add(m_editStyle, 0, wxGROW|wxLEFT|wxRIGHT|wxBOTTOM, 5);
+    m_buttonSizer->Add(m_editStyle, 0, wxStretch::Grow|wxDirection::Left|wxDirection::Right|wxDirection::Bottom, 5);
 
     m_deleteStyle = new wxButton( itemDialog1, ID_RICHTEXTSTYLEORGANISERDIALOG_DELETE, _("&Delete Style..."), wxDefaultPosition, wxDefaultSize, 0 );
     m_deleteStyle->SetHelpText(_("Click to delete the selected style."));
     if (wxRichTextStyleOrganiserDialog::ShowToolTips())
         m_deleteStyle->SetToolTip(_("Click to delete the selected style."));
-    m_buttonSizer->Add(m_deleteStyle, 0, wxGROW|wxLEFT|wxRIGHT|wxBOTTOM, 5);
+    m_buttonSizer->Add(m_deleteStyle, 0, wxStretch::Grow|wxDirection::Left|wxDirection::Right|wxDirection::Bottom, 5);
 
-    m_buttonSizer->Add(5, 5, 1, wxALIGN_CENTER_HORIZONTAL|wxALL, 5);
+    m_buttonSizer->Add(5, 5, 1, wxAlignment::CenterHorizontal|wxDirection::All, 5);
 
     m_closeButton = new wxButton( itemDialog1, wxID_CANCEL, _("Close"), wxDefaultPosition, wxDefaultSize, 0 );
     m_closeButton->SetDefault();
     m_closeButton->SetHelpText(_("Click to close this window."));
     if (wxRichTextStyleOrganiserDialog::ShowToolTips())
         m_closeButton->SetToolTip(_("Click to close this window."));
-    m_buttonSizer->Add(m_closeButton, 0, wxGROW|wxALL, 5);
+    m_buttonSizer->Add(m_closeButton, 0, wxStretch::Grow|wxDirection::All, 5);
 
     m_bottomButtonSizer = new wxBoxSizer(wxHORIZONTAL);
-    m_innerSizer->Add(m_bottomButtonSizer, 0, wxGROW, 5);
+    m_innerSizer->Add(m_bottomButtonSizer, 0, wxStretch::Grow, 5);
 
     m_restartNumberingCtrl = new wxCheckBox( itemDialog1, ID_RICHTEXTSTYLEORGANISERDIALOG_RESTART_NUMBERING, _("&Restart numbering"), wxDefaultPosition, wxDefaultSize, 0 );
     m_restartNumberingCtrl->SetValue(false);
     m_restartNumberingCtrl->SetHelpText(_("Check to restart numbering."));
     if (wxRichTextStyleOrganiserDialog::ShowToolTips())
         m_restartNumberingCtrl->SetToolTip(_("Check to restart numbering."));
-    m_bottomButtonSizer->Add(m_restartNumberingCtrl, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5);
+    m_bottomButtonSizer->Add(m_restartNumberingCtrl, 0, wxAlignment::CenterVertical|wxDirection::All, 5);
 
     m_stdButtonSizer = new wxStdDialogButtonSizer;
 
-    m_bottomButtonSizer->Add(m_stdButtonSizer, 1, wxALIGN_CENTER_VERTICAL|wxALL, 5);
+    m_bottomButtonSizer->Add(m_stdButtonSizer, 1, wxAlignment::CenterVertical|wxDirection::All, 5);
     m_okButton = new wxButton( itemDialog1, wxID_OK, _("OK"), wxDefaultPosition, wxDefaultSize, 0 );
     m_stdButtonSizer->AddButton(m_okButton);
 
@@ -564,7 +564,7 @@ void wxRichTextStyleOrganiserDialog::OnNewCharClick( wxCommandEvent& WXUNUSED(ev
     {
         if (GetStyleSheet()->FindCharacterStyle(styleName))
         {
-            wxMessageBox(_("Sorry, that name is taken. Please choose another."), _("New Style"), wxICON_EXCLAMATION|wxOK, this);
+            wxMessageBox(_("Sorry, that name is taken. Please choose another."), _("New Style"), DialogFlags{wxDialogIconFlags::Exclamation, wxDialogFlags::OK}, this);
             return;
         }
 
@@ -612,7 +612,7 @@ void wxRichTextStyleOrganiserDialog::OnNewParaClick( wxCommandEvent& WXUNUSED(ev
     {
         if (GetStyleSheet()->FindParagraphStyle(styleName))
         {
-            wxMessageBox(_("Sorry, that name is taken. Please choose another."), _("New Style"), wxICON_EXCLAMATION|wxOK, this);
+            wxMessageBox(_("Sorry, that name is taken. Please choose another."), _("New Style"), DialogFlags{wxDialogIconFlags::Exclamation, wxDialogFlags::OK}, this);
             return;
         }
 
@@ -735,7 +735,7 @@ void wxRichTextStyleOrganiserDialog::OnDeleteClick( wxCommandEvent& WXUNUSED(eve
     {
         wxRichTextStyleDefinition* def = m_stylesListBox->GetStyleListBox()->GetStyle(sel);
         wxString name(def->GetName());
-        if (wxYES == wxMessageBox(wxString::Format(_("Delete style %s?"), name), _("Delete Style"), wxYES_NO|wxICON_QUESTION, this))
+        if (wxDialogFlags::Yes == wxMessageBox(wxString::Format(_("Delete style %s?"), name), _("Delete Style"), DialogFlags{wxDialogFlags::Yes_No, wxDialogIconFlags::Question}, this))
         {
             m_stylesListBox->GetStyleListBox()->SetItemCount(0);
 
@@ -778,7 +778,7 @@ void wxRichTextStyleOrganiserDialog::OnNewListClick( wxCommandEvent& WXUNUSED(ev
     {
         if (GetStyleSheet()->FindListStyle(styleName))
         {
-            wxMessageBox(_("Sorry, that name is taken. Please choose another."), _("New Style"), wxICON_EXCLAMATION|wxOK, this);
+            wxMessageBox(_("Sorry, that name is taken. Please choose another."), _("New Style"), DialogFlags{wxDialogIconFlags::Exclamation, wxDialogFlags::OK}, this);
             return;
         }
 
@@ -854,7 +854,7 @@ void wxRichTextStyleOrganiserDialog::OnRenameClick( wxCommandEvent& WXUNUSED(eve
 
         if (GetStyleSheet()->FindParagraphStyle(styleName) || GetStyleSheet()->FindCharacterStyle(styleName) || GetStyleSheet()->FindListStyle(styleName) || GetStyleSheet()->FindBoxStyle(styleName))
         {
-            wxMessageBox(_("Sorry, that name is taken. Please choose another."), _("New Style"), wxICON_EXCLAMATION|wxOK, this);
+            wxMessageBox(_("Sorry, that name is taken. Please choose another."), _("New Style"), DialogFlags{wxDialogIconFlags::Exclamation, wxDialogFlags::OK}, this);
             return;
         }
 
@@ -892,7 +892,7 @@ void wxRichTextStyleOrganiserDialog::OnNewBoxClick( wxCommandEvent& WXUNUSED(eve
     {
         if (GetStyleSheet()->FindBoxStyle(styleName))
         {
-            wxMessageBox(_("Sorry, that name is taken. Please choose another."), _("New Style"), wxICON_EXCLAMATION|wxOK, this);
+            wxMessageBox(_("Sorry, that name is taken. Please choose another."), _("New Style"), DialogFlags{wxDialogIconFlags::Exclamation, wxDialogFlags::OK}, this);
             return;
         }
 

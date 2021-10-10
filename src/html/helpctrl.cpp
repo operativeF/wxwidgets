@@ -218,7 +218,7 @@ wxWindow* wxHtmlHelpController::CreateHelpWindow()
     else if ((m_FrameStyle & wxHF_EMBEDDED) && m_parentWindow)
     {
         m_helpWindow = new wxHtmlHelpWindow(m_parentWindow, -1, wxDefaultPosition, wxDefaultSize,
-            wxTAB_TRAVERSAL|wxNO_BORDER, m_FrameStyle, &m_helpData);
+            wxTAB_TRAVERSAL|wxBorder::None, m_FrameStyle, &m_helpData);
     }
     else // wxHF_FRAME
     {

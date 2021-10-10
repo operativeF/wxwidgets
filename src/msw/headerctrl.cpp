@@ -450,19 +450,19 @@ void wxMSWHeaderCtrl::DoInsertItem(const wxHeaderColumn& col, unsigned int idx)
         hdi.iImage = m_imageList->GetImageCount() - 1;
     }
 
-    if ( col.GetAlignment() != wxALIGN_NOT )
+    if ( col.GetAlignment() != wxAlignment::None )
     {
         hdi.mask |= HDI_FORMAT;
 
-        // wxALIGN_LEFT is the same as wxALIGN_NOT
+        // wxAlignment::Left is the same as wxAlignment::None
         switch ( col.GetAlignment() )
         {
-            case wxALIGN_CENTER:
-            case wxALIGN_CENTER_HORIZONTAL:
+            case wxAlignment::Center:
+            case wxAlignment::CenterHorizontal:
                 hdi.fmt |= HDF_CENTER;
                 break;
 
-            case wxALIGN_RIGHT:
+            case wxAlignment::Right:
                 hdi.fmt |= HDF_RIGHT;
                 break;
 
@@ -1017,7 +1017,7 @@ bool wxHeaderCtrl::Create(wxWindow *parent,
                                   wxID_ANY,
                                   wxDefaultPosition,
                                   wxDefaultSize,
-                                  wxNO_BORDER,
+                                  wxBorder::None,
                                   wxMSWHeaderCtrlNameStr) )
         return false;
 

@@ -163,7 +163,7 @@ void wxBitmapComboBox::RecreateControl()
     ::SendMessageW(GetHwnd(), CB_SETITEMHEIGHT, 0, MeasureItem(0));
 
     // Revert the old string value
-    if ( !HasFlag(wxCB_READONLY) )
+    if ( !GetComboStyles().is_set(ComboStyles::ReadOnly) )
         ChangeValue(value);
     else if ( selection != wxNOT_FOUND )
         SetSelection(selection);
@@ -269,7 +269,7 @@ int wxBitmapComboBox::DoInsertItems(const std::vector<std::string>& items,
     const unsigned int numItems = items.size();
 
     int index;
-    if ( HasFlag(wxCB_SORT) )
+    if ( HasFlag(ComboStyles::Sort) )
     {
         // Since we don't know at what positions new elements will be actually inserted
         // we need to add them one by one, check for each one the position it was added at
@@ -447,7 +447,7 @@ bool wxBitmapComboBox::MSWOnDraw(WXDRAWITEMSTRUCT *item)
     if ( flags & wxODCB_PAINTING_CONTROL )
     {
         // Don't draw anything in the editable selection field.
-        if ( !HasFlag(wxCB_READONLY) )
+        if ( !HasFlag(ComboStyles::ReadOnly) )
             return true;
 
         pos = GetSelection();

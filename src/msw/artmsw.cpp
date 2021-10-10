@@ -277,13 +277,13 @@ wxBitmap wxWindowsArtProvider::CreateBitmap(const wxArtID& id,
         // as special cases via wxICOResourceHandler::LoadIcon):
         const char *name = nullptr;
         if ( id == wxART_ERROR )
-            name = "wxICON_ERROR";
+            name = "wxDialogIconFlags::Error";
         else if ( id == wxART_INFORMATION )
-            name = "wxICON_INFORMATION";
+            name = "wxDialogIconFlags::Information";
         else if ( id == wxART_WARNING )
-            name = "wxICON_WARNING";
+            name = "wxDialogIconFlags::Warning";
         else if ( id == wxART_QUESTION )
-            name = "wxICON_QUESTION";
+            name = "wxDialogIconFlags::Question";
 
         if ( name )
             return CreateFromStdIcon(name, client);

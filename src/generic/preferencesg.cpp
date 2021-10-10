@@ -46,10 +46,10 @@ public:
 
 #ifdef __WXGTK__
         SetEscapeId(wxID_CLOSE);
-        sizer->Add(CreateButtonSizer(wxCLOSE), wxSizerFlags().Expand().DoubleBorder(wxBOTTOM));
+        sizer->Add(CreateButtonSizer(wxDialogFlags::Close), wxSizerFlags().Expand().DoubleBorder(wxDirection::Bottom));
 #else
-        sizer->Add(CreateButtonSizer(wxOK | wxCANCEL),
-                   wxSizerFlags().Expand().DoubleBorder(wxLEFT|wxRIGHT|wxBOTTOM));
+        sizer->Add(CreateButtonSizer(DialogFlags{wxDialogFlags::OK, wxDialogFlags::Cancel}),
+                   wxSizerFlags().Expand().DoubleBorder(wxDirection::Left|wxDirection::Right|wxDirection::Bottom));
 #endif
         SetSizer(sizer);
     }

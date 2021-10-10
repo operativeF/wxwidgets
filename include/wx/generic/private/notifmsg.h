@@ -12,6 +12,8 @@
 
 #include "wx/private/notifmsg.h"
 
+#include "wx/dialogflags.h"
+
 #include <string>
 
 class wxGenericNotificationMessageImpl : public wxNotificationMessageImpl
@@ -31,7 +33,7 @@ public:
 
     void SetParent(wxWindow *parent) override;
 
-    void SetFlags(unsigned int flags) override;
+    void SetFlags(wxDialogIconFlags flags) override;
 
     void SetIcon(const wxIcon& icon) override;
 

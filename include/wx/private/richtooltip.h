@@ -10,6 +10,7 @@
 #ifndef _WX_PRIVATE_RICHTOOLTIP_H_
 #define _WX_PRIVATE_RICHTOOLTIP_H_
 
+#include "wx/dialogflags.h"
 #include "wx/richtooltip.h"
 
 #include <chrono>
@@ -30,7 +31,7 @@ public:
     virtual void SetBackgroundColour(const wxColour& col,
                                      const wxColour& colEnd) = 0;
     virtual void SetCustomIcon(const wxIcon& icon) = 0;
-    virtual void SetStandardIcon(int icon) = 0;
+    virtual void SetStandardIcon(wxDialogIconFlags icon) = 0;
     virtual void SetTimeout(std::chrono::milliseconds timeout,
                             std::chrono::milliseconds showdelay = {}) = 0;
     virtual void SetTipKind(wxTipKind tipKind) = 0;

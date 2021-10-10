@@ -312,7 +312,7 @@ wxPrintAbortDialog *wxPrinterBase::CreateAbortWindow(wxWindow *parent, wxPrintou
 
 void wxPrinterBase::ReportError(wxWindow *parent, wxPrintout *WXUNUSED(printout), const wxString& message)
 {
-    wxMessageBox(message, _("Printing Error"), wxOK, parent);
+    wxMessageBox(message, _("Printing Error"), wxDialogFlags::OK, parent);
 }
 
 wxPrintDialogData& wxPrinterBase::GetPrintDialogData() const
@@ -508,9 +508,9 @@ wxPrintAbortDialog::wxPrintAbortDialog(wxWindow *parent,
     m_progress = new wxStaticText(this, wxID_ANY, _("Preparing"));
     m_progress->SetMinSize(wxSize(250, -1));
     gridSizer->Add(m_progress);
-    mainSizer->Add(gridSizer, wxSizerFlags().Expand().DoubleBorder(wxLEFT | wxRIGHT));
+    mainSizer->Add(gridSizer, wxSizerFlags().Expand().DoubleBorder(wxDirection::Left | wxDirection::Right));
 
-    mainSizer->Add(CreateStdDialogButtonSizer(wxCANCEL),
+    mainSizer->Add(CreateStdDialogButtonSizer(wxDialogFlags::Cancel),
                    wxSizerFlags().Expand().DoubleBorder());
 
     SetSizerAndFit(mainSizer);
@@ -1072,7 +1072,7 @@ public:
                          parent->GetTextExtent(MaxAsString(MAX_PAGE_NUMBER)).x,
                          wxDefaultCoord
                         ),
-                        wxST_NO_AUTORESIZE | wxALIGN_CENTRE
+                        wxST_NO_AUTORESIZE | wxAlignment::Center
                       )
     {
     }
@@ -1460,7 +1460,7 @@ public:
         m_hasContents = true;
 
         m_sizer->Add(win,
-                     wxSizerFlags().Border(wxLEFT | wxTOP | wxBOTTOM).Center());
+                     wxSizerFlags().Border(wxDirection::Left | wxDirection::Top | wxDirection::Bottom).Center());
     }
 
     // Add a button with the specified id, bitmap and tooltip.
@@ -1484,7 +1484,7 @@ public:
     {
         m_sizer->AddStretchSpacer();
         m_sizer->Add(win,
-                     wxSizerFlags().Border(wxTOP | wxBOTTOM | wxRIGHT).Center());
+                     wxSizerFlags().Border(wxDirection::Top | wxDirection::Bottom | wxDirection::Right).Center());
     }
 
     // Indicates the end of a group of buttons, a separator will be added after
@@ -1987,7 +1987,7 @@ bool wxPrintPreviewBase::RenderPageIntoDC(wxDC& dc, int pageNum)
 
     if (!m_previewPrintout->OnBeginDocument(m_printDialogData.GetFromPage(), m_printDialogData.GetToPage()))
     {
-        wxMessageBox(_("Could not start document preview."), _("Print Preview Failure"), wxOK);
+        wxMessageBox(_("Could not start document preview."), _("Print Preview Failure"), wxDialogFlags::OK);
         return false;
     }
 
@@ -2029,7 +2029,7 @@ bool wxPrintPreviewBase::RenderPage(int pageNum)
         if (!m_previewBitmap || !m_previewBitmap->IsOk())
         {
             InvalidatePreviewBitmap();
-            wxMessageBox(_("Sorry, not enough memory to create a preview."), _("Print Preview Failure"), wxOK);
+            wxMessageBox(_("Sorry, not enough memory to create a preview."), _("Print Preview Failure"), wxDialogFlags::OK);
             return false;
         }
     }
@@ -2037,7 +2037,7 @@ bool wxPrintPreviewBase::RenderPage(int pageNum)
     if ( !RenderPageIntoBitmap(*m_previewBitmap, pageNum) )
     {
         InvalidatePreviewBitmap();
-        wxMessageBox(_("Sorry, not enough memory to create a preview."), _("Print Preview Failure"), wxOK);
+        wxMessageBox(_("Sorry, not enough memory to create a preview."), _("Print Preview Failure"), wxDialogFlags::OK);
         return false;
     }
 

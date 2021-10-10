@@ -45,7 +45,7 @@ bool wxPickerBase::CreateBase(wxWindow *parent,
     // invisible (user styles must be set on the textctrl or the platform-dependent picker)
     style &= ~wxBORDER_MASK;
 
-    if (!wxControl::Create(parent, id, pos, size, style | wxNO_BORDER | wxTAB_TRAVERSAL,
+    if (!wxControl::Create(parent, id, pos, size, style | wxBorder::None | wxTAB_TRAVERSAL,
                            validator, name))
         return false;
 
@@ -82,7 +82,7 @@ bool wxPickerBase::CreateBase(wxWindow *parent,
         m_text->Bind(wxEVT_DESTROY, &wxPickerBase::OnTextCtrlDelete, this);
 
         m_sizer->Add(m_text,
-                     wxSizerFlags(1).CentreVertical().Border(wxRIGHT));
+                     wxSizerFlags(1).CentreVertical().Border(wxDirection::Right));
     }
 
     return true;
@@ -138,19 +138,19 @@ void wxPickerBase::DoSetToolTip(wxToolTip *tip)
 
 void wxPickerBase::DoSetGrowableFlagFor(wxSizerItem* item, bool grow)
 {
-    // We assume that our controls use either wxALIGN_CENTER_VERTICAL or wxGROW
+    // We assume that our controls use either wxAlignment::CenterVertical or wxStretch::Grow
     // style, this code would need to be changed in the unlikely event any
     // other style is used for them.
     int f = item->GetFlag();
     if ( grow )
     {
-        f &= ~wxALIGN_CENTER_VERTICAL;
-        f |= wxGROW;
+        f &= ~wxAlignment::CenterVertical;
+        f |= wxStretch::Grow;
     }
     else
     {
-        f &= ~wxGROW;
-        f |= wxALIGN_CENTER_VERTICAL;
+        f &= ~wxStretch::Grow;
+        f |= wxAlignment::CenterVertical;
     }
 
     item->SetFlag(f);

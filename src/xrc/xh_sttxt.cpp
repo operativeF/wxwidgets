@@ -21,13 +21,14 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxStaticTextXmlHandler, wxXmlResourceHandler);
 wxStaticTextXmlHandler::wxStaticTextXmlHandler()
  
 {
+    // FIXME: Flags not compatible in this construct.
     XRC_ADD_STYLE(wxST_NO_AUTORESIZE);
-    XRC_ADD_STYLE(wxALIGN_LEFT);
-    XRC_ADD_STYLE(wxALIGN_RIGHT);
-    XRC_ADD_STYLE(wxALIGN_CENTER);
-    XRC_ADD_STYLE(wxALIGN_CENTRE);
-    XRC_ADD_STYLE(wxALIGN_CENTER_HORIZONTAL);
-    XRC_ADD_STYLE(wxALIGN_CENTRE_HORIZONTAL);
+    //XRC_ADD_STYLE(wxAlignment::Left);
+    //XRC_ADD_STYLE(wxAlignment::Right);
+    //XRC_ADD_STYLE(wxAlignment::Center);
+    //XRC_ADD_STYLE(wxAlignment::Center);
+    //XRC_ADD_STYLE(wxAlignment::CenterHorizontal);
+    //XRC_ADD_STYLE(wxAlignment::CenterHorizontal);
     XRC_ADD_STYLE(wxST_ELLIPSIZE_START);
     XRC_ADD_STYLE(wxST_ELLIPSIZE_MIDDLE);
     XRC_ADD_STYLE(wxST_ELLIPSIZE_END);

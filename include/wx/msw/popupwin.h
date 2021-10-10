@@ -20,7 +20,7 @@ class WXDLLIMPEXP_CORE wxPopupWindow : public wxPopupWindowBase
 public:
     wxPopupWindow() = default;
 
-    wxPopupWindow(wxWindow *parent, unsigned int flags = wxBORDER_NONE)
+    wxPopupWindow(wxWindow *parent, unsigned int flags = wxBorder::None)
         { Create(parent, flags); }
 
     wxPopupWindow(const wxPopupWindow&) = delete;
@@ -28,7 +28,7 @@ public:
     wxPopupWindow(wxPopupWindow&&) = default;
     wxPopupWindow& operator=(wxPopupWindow&&) = default;
 
-    [[maybe_unused]] bool Create(wxWindow *parent, unsigned int flags = wxBORDER_NONE);
+    [[maybe_unused]] bool Create(wxWindow *parent, unsigned int flags = wxBorder::None);
 
     ~wxPopupWindow();
 

@@ -11,11 +11,10 @@
 #ifndef _WX_MSGDLG_H_BASE_
 #define _WX_MSGDLG_H_BASE_
 
-#include "wx/defs.h"
-
 #if wxUSE_MSGDLG
 
 #include "wx/dialog.h"
+#include "wx/dialogflags.h"
 #include "wx/stockitem.h"
 
 #include <string>
@@ -81,7 +80,7 @@ public:
     wxMessageDialogBase(wxWindow *parent,
                         const std::string& message,
                         const std::string& caption,
-                        unsigned int style)
+                        DialogFlags style)
         : m_message(message),
           m_caption(caption)
     {
@@ -119,37 +118,34 @@ public:
     const std::string& GetExtendedMessage() const { return m_extendedMessage; }
 
     // change the dialog style flag
-    void SetMessageDialogStyle(unsigned int style)
+    void SetMessageDialogStyle(DialogFlags style)
     {
-        wxASSERT_MSG( ((style & wxYES_NO) == wxYES_NO) || !(style & wxYES_NO),
-                      "wxYES and wxNO may only be used together" );
+        wxASSERT_MSG( ((style & wxDialogFlags::Yes_No) == wxDialogFlags::Yes_No) || !(style & wxDialogFlags::Yes_No),
+                      "wxDialogFlags::Yes and wxDialogFlags::No may only be used together" );
 
-        wxASSERT_MSG( !(style & wxYES) || !(style & wxOK),
-                      "wxOK and wxYES/wxNO can't be used together" );
+        wxASSERT_MSG( !(style & wxDialogFlags::Yes) || !(style & wxDialogFlags::OK),
+                      "wxDialogFlags::OK and wxDialogFlags::Yes/wxDialogFlags::No can't be used together" );
 
-        // It is common to specify just the icon, without wxOK, in the existing
+        // It is common to specify just the icon, without wxDialogFlags::OK, in the existing
         // code, especially one written by Windows programmers as MB_OK is 0
-        // and so they're used to omitting wxOK. Don't complain about it but
-        // just add wxOK implicitly for compatibility.
-        if ( !(style & wxYES) && !(style & wxOK) )
-            style |= wxOK;
+        // and so they're used to omitting wxDialogFlags::OK. Don't complain about it but
+        // just add wxDialogFlags::OK implicitly for compatibility.
+        if ( !(style & wxDialogFlags::Yes) && !(style & wxDialogFlags::OK) )
+            style |= wxDialogFlags::OK;
 
-        wxASSERT_MSG( (style & wxID_OK) != wxID_OK,
-                      "wxMessageBox: Did you mean wxOK (and not wxID_OK)?" );
+        wxASSERT_MSG( !(style & wxDialogDefaultFlags::No) || (style & wxDialogFlags::No),
+                      "wxDialogDefaultFlags::No is invalid without wxDialogFlags::No" );
 
-        wxASSERT_MSG( !(style & wxNO_DEFAULT) || (style & wxNO),
-                      "wxNO_DEFAULT is invalid without wxNO" );
+        wxASSERT_MSG( !(style & wxDialogDefaultFlags::Cancel) || (style & wxDialogFlags::Cancel),
+                      "wxDialogDefaultFlags::Cancel is invalid without wxDialogFlags::Cancel" );
 
-        wxASSERT_MSG( !(style & wxCANCEL_DEFAULT) || (style & wxCANCEL),
-                      "wxCANCEL_DEFAULT is invalid without wxCANCEL" );
-
-        wxASSERT_MSG( !(style & wxCANCEL_DEFAULT) || !(style & wxNO_DEFAULT),
+        wxASSERT_MSG( !(style & wxDialogDefaultFlags::Cancel) || !(style & wxDialogDefaultFlags::No),
                       "only one default button can be specified" );
 
         m_dialogStyle = style;
     }
 
-    unsigned int GetMessageDialogStyle() const { return m_dialogStyle; }
+    DialogFlags GetMessageDialogStyle() const { return m_dialogStyle; }
 
     // customization of the message box buttons
     virtual bool SetYesNoLabels(const ButtonLabel& yes,const ButtonLabel& no)
@@ -209,25 +205,25 @@ public:
     std::string GetHelpLabel() const
         { return m_help.empty() ? GetDefaultHelpLabel() : m_help; }
 
-    // based on message dialog style, returns exactly one of: wxICON_NONE,
-    // wxICON_ERROR, wxICON_WARNING, wxICON_QUESTION, wxICON_INFORMATION,
-    // wxICON_AUTH_NEEDED
-    virtual unsigned int GetEffectiveIcon() const
+    // based on message dialog style, returns exactly one of: wxDialogIconFlags::None,
+    // wxDialogIconFlags::Error, wxDialogIconFlags::Warning, wxDialogIconFlags::Question, wxDialogIconFlags::Information,
+    // wxDialogIconFlags::AuthNeeded
+    virtual wxDialogIconFlags GetEffectiveIcon() const
     {
-        if ( m_dialogStyle & wxICON_NONE )
-            return wxICON_NONE;
-        else if ( m_dialogStyle & wxICON_ERROR )
-            return wxICON_ERROR;
-        else if ( m_dialogStyle & wxICON_WARNING )
-            return wxICON_WARNING;
-        else if ( m_dialogStyle & wxICON_QUESTION )
-            return wxICON_QUESTION;
-        else if ( m_dialogStyle & wxICON_INFORMATION )
-            return wxICON_INFORMATION;
-        else if ( m_dialogStyle & wxYES )
-            return wxICON_QUESTION;
+        if ( m_dialogStyle & wxDialogIconFlags::None )
+            return wxDialogIconFlags::None;
+        else if ( m_dialogStyle & wxDialogIconFlags::Error )
+            return wxDialogIconFlags::Error;
+        else if ( m_dialogStyle & wxDialogIconFlags::Warning )
+            return wxDialogIconFlags::Warning;
+        else if ( m_dialogStyle & wxDialogIconFlags::Question )
+            return wxDialogIconFlags::Question;
+        else if ( m_dialogStyle & wxDialogIconFlags::Information )
+            return wxDialogIconFlags::Information;
+        else if ( m_dialogStyle & wxDialogFlags::Yes )
+            return wxDialogIconFlags::Question;
         else
-            return wxICON_INFORMATION;
+            return wxDialogIconFlags::Information;
     }
 
 protected:
@@ -257,7 +253,7 @@ private:
 
 // FIXME: Make protected variables private.
 protected:
-    unsigned int m_dialogStyle{0};
+    DialogFlags m_dialogStyle{};
 
     // this function is called by our public SetXXXLabels() and should assign
     // the value to var with possibly some transformation (e.g. Cocoa version
@@ -312,9 +308,9 @@ private:
 // wxMessageBox: the simplest way to use wxMessageDialog
 // ----------------------------------------------------------------------------
 
-int WXDLLIMPEXP_CORE wxMessageBox(const std::string& message,
+wxDialogFlags WXDLLIMPEXP_CORE wxMessageBox(const std::string& message,
                              const std::string& caption = wxMessageBoxCaptionStr,
-                             unsigned int style = wxOK | wxCENTRE,
+                             DialogFlags style = {wxDialogFlags::OK, wxDialogFlags::Centered},
                              wxWindow *parent = nullptr,
                              int x = wxDefaultCoord, int y = wxDefaultCoord);
 

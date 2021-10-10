@@ -678,7 +678,7 @@ public:
     }
 
     wxRichTextStyleComboCtrl(wxWindow* parent, wxWindowID id = wxID_ANY, const wxPoint& pos = wxDefaultPosition,
-        const wxSize& size = wxDefaultSize, unsigned int style = wxCB_READONLY)
+        const wxSize& size = wxDefaultSize, ComboBoxFlags style = ComboStyles::ReadOnly)
     {
         Init();
         Create(parent, id, pos, size, style);

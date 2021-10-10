@@ -439,50 +439,6 @@ enum wxBorder
 #define wxLI_HORIZONTAL         wxHORIZONTAL
 #define wxLI_VERTICAL           wxVERTICAL
 
-
-/*
- * extended dialog specifiers. these values are stored in a different
- * flag and thus do not overlap with other style flags. note that these
- * values do not correspond to the return values of the dialogs (for
- * those values, look at the wxID_XXX defines).
- */
-
-/*  wxCENTRE already defined as  0x00000001 */
-#define wxYES                   0x00000002
-#define wxOK                    0x00000004
-#define wxNO                    0x00000008
-#define wxYES_NO                (wxYES | wxNO)
-#define wxCANCEL                0x00000010
-#define wxAPPLY                 0x00000020
-#define wxCLOSE                 0x00000040
-
-#define wxOK_DEFAULT            0x00000000  /* has no effect (default) */
-#define wxYES_DEFAULT           0x00000000  /* has no effect (default) */
-#define wxNO_DEFAULT            0x00000080  /* only valid with wxYES_NO */
-#define wxCANCEL_DEFAULT        0x80000000  /* only valid with wxCANCEL */
-
-#define wxICON_EXCLAMATION      0x00000100
-#define wxICON_HAND             0x00000200
-#define wxICON_WARNING          wxICON_EXCLAMATION
-#define wxICON_ERROR            wxICON_HAND
-#define wxICON_QUESTION         0x00000400
-#define wxICON_INFORMATION      0x00000800
-#define wxICON_STOP             wxICON_HAND
-#define wxICON_ASTERISK         wxICON_INFORMATION
-
-#define wxHELP                  0x00001000
-#define wxFORWARD               0x00002000
-#define wxBACKWARD              0x00004000
-#define wxRESET                 0x00008000
-#define wxMORE                  0x00010000
-#define wxSETUP                 0x00020000
-#define wxICON_NONE             0x00040000
-#define wxICON_AUTH_NEEDED      0x00080000
-
-#define wxICON_MASK \
-    (wxICON_EXCLAMATION|wxICON_HAND|wxICON_QUESTION|wxICON_INFORMATION|wxICON_NONE)
-
-
 /*  symbolic constant used by all Find()-like functions returning positive */
 /*  integer on success as failure indicator */
 #define wxNOT_FOUND       (-1)

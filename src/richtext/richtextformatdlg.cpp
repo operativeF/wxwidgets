@@ -412,9 +412,9 @@ bool wxRichTextFormattingDialogFactory::SetSheetStyle(wxRichTextFormattingDialog
 /// Create the main dialog buttons
 bool wxRichTextFormattingDialogFactory::CreateButtons(wxRichTextFormattingDialog* dialog)
 {
-    int flags = wxOK|wxCANCEL;
+    DialogFlags flags{wxDialogFlags::OK, wxDialogFlags::Cancel};
     if (dialog->GetWindowStyleFlag() & wxRICHTEXT_FORMAT_HELP_BUTTON)
-        flags |= wxHELP;
+        flags |= wxDialogFlags::Help;
 
     // If using a toolbook, also follow Mac style and don't create buttons
 #if !wxRICHTEXT_USE_TOOLBOOK
@@ -470,8 +470,8 @@ wxEND_EVENT_TABLE()
 
 wxRichTextFontPreviewCtrl::wxRichTextFontPreviewCtrl(wxWindow *parent, wxWindowID id, const wxPoint& pos, const wxSize& sz, unsigned int style)
 {
-    if ((style & wxBORDER_MASK) == wxBORDER_DEFAULT)
-        style |= wxBORDER_THEME;
+    if ((style & wxBORDER_MASK) == wxBorder::Default)
+        style |= wxBorder::Theme;
 
     wxWindow::Create(parent, id, pos, sz, style);
 
@@ -713,8 +713,8 @@ wxIMPLEMENT_CLASS(wxRichTextColourSwatchCtrl, wxControl);
 
 wxRichTextColourSwatchCtrl::wxRichTextColourSwatchCtrl(wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size, unsigned int style)
 {
-    if ((style & wxBORDER_MASK) == wxBORDER_DEFAULT)
-        style |= wxBORDER_THEME;
+    if ((style & wxBORDER_MASK) == wxBorder::Default)
+        style |= wxBorder::Theme;
 
     wxControl::Create(parent, id, pos, size, style);
 
@@ -780,8 +780,8 @@ wxRichTextFontListBox::wxRichTextFontListBox(wxWindow* parent, wxWindowID id, co
 bool wxRichTextFontListBox::Create(wxWindow* parent, wxWindowID id, const wxPoint& pos,
         const wxSize& size, unsigned int style)
 {
-    if ((style & wxBORDER_MASK) == wxBORDER_DEFAULT)
-        style |= wxBORDER_THEME;
+    if ((style & wxBORDER_MASK) == wxBorder::Default)
+        style |= wxBorder::Theme;
 
     return wxHtmlListBox::Create(parent, id, pos, size, style);
 }

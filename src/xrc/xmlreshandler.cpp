@@ -37,14 +37,14 @@ void wxXmlResourceHandler::AddWindowStyles()
     XRC_ADD_STYLE(wxCLIP_CHILDREN);
 
     // the border styles all have the old and new names, recognize both for now
-    XRC_ADD_STYLE(wxSIMPLE_BORDER); XRC_ADD_STYLE(wxBORDER_SIMPLE);
-    XRC_ADD_STYLE(wxSUNKEN_BORDER); XRC_ADD_STYLE(wxBORDER_SUNKEN);
+    XRC_ADD_STYLE(wxBorder::Simple); XRC_ADD_STYLE(wxBorder::Simple);
+    XRC_ADD_STYLE(wxBorder::Sunken); XRC_ADD_STYLE(wxBorder::Sunken);
     XRC_ADD_STYLE(wxDOUBLE_BORDER); XRC_ADD_STYLE(wxBORDER_DOUBLE); // deprecated
-    XRC_ADD_STYLE(wxBORDER_THEME);
-    XRC_ADD_STYLE(wxRAISED_BORDER); XRC_ADD_STYLE(wxBORDER_RAISED);
-    XRC_ADD_STYLE(wxSTATIC_BORDER); XRC_ADD_STYLE(wxBORDER_STATIC);
-    XRC_ADD_STYLE(wxNO_BORDER);     XRC_ADD_STYLE(wxBORDER_NONE);
-    XRC_ADD_STYLE(wxBORDER_DEFAULT);
+    XRC_ADD_STYLE(wxBorder::Theme);
+    XRC_ADD_STYLE(wxBorder::Raised); XRC_ADD_STYLE(wxBorder::Raised);
+    XRC_ADD_STYLE(wxBorder::Static); XRC_ADD_STYLE(wxBorder::Static);
+    XRC_ADD_STYLE(wxBorder::None);     XRC_ADD_STYLE(wxBorder::None);
+    XRC_ADD_STYLE(wxBorder::Default);
 
     XRC_ADD_STYLE(wxTRANSPARENT_WINDOW);
     XRC_ADD_STYLE(wxWANTS_CHARS);

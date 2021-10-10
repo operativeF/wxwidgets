@@ -30,6 +30,7 @@
     #include <vector>
 #endif
 
+#include "wx/alignmentflags.h"
 #include "wx/app.h"          // GetRegisteredClassName()
 #include "wx/sizer.h"
 #include "wx/log.h"
@@ -1690,7 +1691,7 @@ public:
                                         wxFRAME_TOOL_WINDOW |
                                         wxFRAME_FLOAT_ON_PARENT |
                                         wxFRAME_NO_TASKBAR |
-                                        wxNO_BORDER );
+                                        wxBorder::None );
             new wxBitmapCanvas( m_hint, ib, ib.GetSize() );
             m_hint->Show();
         }
@@ -2055,10 +2056,10 @@ wxDataViewMainWindow::wxDataViewMainWindow( wxDataViewCtrl *parent, wxWindowID i
                   0, // no special styles neither
                   wxApp::RegClass_OnlyNR
              ),
-      parent, id, pos, size, wxWANTS_CHARS|wxBORDER_NONE, name
+      parent, id, pos, size, wxWANTS_CHARS|wxBorder::None, name
     );
 #else
-    Create( parent, id, pos, size, wxWANTS_CHARS|wxBORDER_NONE, name );
+    Create( parent, id, pos, size, wxWANTS_CHARS|wxBorder::None, name );
 #endif
 
     SetOwner( parent );
@@ -2886,7 +2887,7 @@ void wxDataViewMainWindow::OnPaint( wxPaintEvent &WXUNUSED(event) )
                 indent += expSize.x;
 
                 // force the expander column to left-center align
-                cell->SetAlignment( wxALIGN_CENTER_VERTICAL );
+                cell->SetAlignment( wxAlignment::CenterVertical );
 
 #if wxUSE_DRAG_AND_DROP
                 if (item == m_dropItemInfo.m_row)
@@ -5348,26 +5349,26 @@ void wxDataViewMainWindow::OnMouse( wxMouseEvent &event )
             // see #12270.
 
             // adjust the rectangle ourselves to account for the alignment
-            const int align = cell->GetEffectiveAlignment();
+            const wxAlignment align = cell->GetEffectiveAlignment();
 
             wxRect rectItem = cell_rect;
             const wxSize size = cell->GetSize();
             if ( size.x >= 0 && size.x < cell_rect.width )
             {
-                if ( align & wxALIGN_CENTER_HORIZONTAL )
+                if ( align & wxAlignment::CenterHorizontal )
                     rectItem.x += (cell_rect.width - size.x)/2;
-                else if ( align & wxALIGN_RIGHT )
+                else if ( align & wxAlignment::Right )
                     rectItem.x += cell_rect.width - size.x;
-                // else: wxALIGN_LEFT is the default
+                // else: wxAlignment::Left is the default
             }
 
             if ( size.y >= 0 && size.y < cell_rect.height )
             {
-                if ( align & wxALIGN_CENTER_VERTICAL )
+                if ( align & wxAlignment::CenterVertical )
                     rectItem.y += (cell_rect.height - size.y)/2;
-                else if ( align & wxALIGN_BOTTOM )
+                else if ( align & wxAlignment::Bottom )
                     rectItem.y += cell_rect.height - size.y;
-                // else: wxALIGN_TOP is the default
+                // else: wxAlignment::Top is the default
             }
 
             wxMouseEvent event2(event);
@@ -5556,7 +5557,7 @@ bool wxDataViewCtrl::Create(wxWindow *parent,
                             const std::string& name)
 {
 //    if ( (style & wxBORDER_MASK) == 0)
-//        style |= wxBORDER_SUNKEN;
+//        style |= wxBorder::Sunken;
 
     Init();
 
@@ -5586,8 +5587,8 @@ bool wxDataViewCtrl::Create(wxWindow *parent,
 
     wxBoxSizer *sizer = new wxBoxSizer( wxVERTICAL );
     if (m_headerArea)
-        sizer->Add( m_headerArea, 0, wxGROW );
-    sizer->Add( m_clientArea, 1, wxGROW );
+        sizer->Add( m_headerArea, 0, wxStretch::Grow );
+    sizer->Add( m_clientArea, 1, wxStretch::Grow );
     SetSizer( sizer );
 
     EnableSystemThemeByDefault();
@@ -5601,7 +5602,7 @@ bool wxDataViewCtrl::Create(wxWindow *parent,
 
 wxBorder wxDataViewCtrl::GetDefaultBorder() const
 {
-    return wxBORDER_THEME;
+    return wxBorder::Theme;
 }
 
 wxHeaderCtrl* wxDataViewCtrl::GenericGetHeader() const

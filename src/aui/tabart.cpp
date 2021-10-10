@@ -294,7 +294,7 @@ void wxAuiGenericTabArt::DrawBackground(wxDC& dc,
    else //for wxAUI_NB_TOP
        r = wxRect(rect.x, rect.y, rect.width+2, rect.height-3);
 
-    dc.GradientFillLinear(r, top_color, bottom_color, wxSOUTH);
+    dc.GradientFillLinear(r, top_color, bottom_color, wxDirection::South);
 
 
    // draw base lines
@@ -476,7 +476,7 @@ void wxAuiGenericTabArt::DrawTab(wxDC& dc,
         // draw gradient background
         wxColor top_color = gradient;
         wxColor bottom_color = m_activeColour;
-        dc.GradientFillLinear(r, bottom_color, top_color, wxNORTH);
+        dc.GradientFillLinear(r, bottom_color, top_color, wxDirection::North);
     }
     else
     {
@@ -503,7 +503,7 @@ void wxAuiGenericTabArt::DrawTab(wxDC& dc,
             bottom_color = m_baseColour;
         }
 
-        dc.GradientFillLinear(r, bottom_color, top_color, wxNORTH);
+        dc.GradientFillLinear(r, bottom_color, top_color, wxDirection::North);
 
         r.y += r.height;
         r.y--;
@@ -511,7 +511,7 @@ void wxAuiGenericTabArt::DrawTab(wxDC& dc,
         // -- draw bottom fill for glossy look
         top_color = m_baseColour;
         bottom_color = m_baseColour;
-        dc.GradientFillLinear(r, top_color, bottom_color, wxSOUTH);
+        dc.GradientFillLinear(r, top_color, bottom_color, wxDirection::South);
     }
 
     // draw tab outline
@@ -749,7 +749,7 @@ void wxAuiGenericTabArt::DrawButton(wxDC& dc,
 
     rect = in_rect;
 
-    if (orientation == wxLEFT)
+    if (orientation == wxDirection::Left)
     {
         rect.SetX(in_rect.x);
         rect.SetY(((in_rect.y + in_rect.height)/2) - std::lround(bmp.GetScaledHeight()/2));
@@ -1264,7 +1264,7 @@ void wxAuiSimpleTabArt::DrawButton(wxDC& dc,
 
     rect = in_rect;
 
-    if (orientation == wxLEFT)
+    if (orientation == wxDirection::Left)
     {
         rect.SetX(in_rect.x);
         rect.SetY(((in_rect.y + in_rect.height)/2) - std::lround(bmp.GetScaledHeight()/2));

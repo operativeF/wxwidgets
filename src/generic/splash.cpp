@@ -47,7 +47,7 @@ wxSplashScreen::wxSplashScreen(const wxBitmap& bitmap, unsigned int splashStyle,
               style | wxFRAME_TOOL_WINDOW | wxFRAME_NO_TASKBAR),
       m_splashStyle(splashStyle),
       m_displayTime(displayTime),
-      m_window(new wxSplashScreenWindow(bitmap, this, wxID_ANY, pos, size, wxNO_BORDER))
+      m_window(new wxSplashScreenWindow(bitmap, this, wxID_ANY, pos, size, wxBorder::None))
 {
     wxEvtHandler::AddFilter(this);
 

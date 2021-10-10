@@ -2277,14 +2277,14 @@ wxXmlResourceHandlerImpl::GetDirection(const wxString& param, wxDirection dirDef
     const wxString dirstr = GetParamValue(param);
     if ( dirstr.empty() )
         dir = dirDefault;
-    else if ( dirstr == "wxLEFT" )
-        dir = wxLEFT;
-    else if ( dirstr == "wxRIGHT" )
-        dir = wxRIGHT;
-    else if ( dirstr == "wxTOP" )
-        dir = wxTOP;
-    else if ( dirstr == "wxBOTTOM" )
-        dir = wxBOTTOM;
+    else if ( dirstr == "wxDirection::Left" )
+        dir = wxDirection::Left;
+    else if ( dirstr == "wxDirection::Right" )
+        dir = wxDirection::Right;
+    else if ( dirstr == "wxDirection::Top" )
+        dir = wxDirection::Top;
+    else if ( dirstr == "wxDirection::Bottom" )
+        dir = wxDirection::Bottom;
     else
     {
         ReportError
@@ -2293,7 +2293,7 @@ wxXmlResourceHandlerImpl::GetDirection(const wxString& param, wxDirection dirDef
             wxString::Format
             (
                 "Invalid direction \"%s\": must be one of "
-                "wxLEFT|wxRIGHT|wxTOP|wxBOTTOM.",
+                "wxDirection::Left|wxDirection::Right|wxDirection::Top|wxDirection::Bottom.",
                 dirstr
             )
         );

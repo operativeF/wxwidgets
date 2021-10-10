@@ -58,7 +58,7 @@ DWORD wxCheckBox::MSWGetStyle(unsigned int style, DWORD *exstyle) const
     else
         msStyle |= BS_CHECKBOX;
 
-    if ( style & wxALIGN_RIGHT )
+    if ( style & wxAlignment::Right )
     {
         msStyle |= BS_LEFTTEXT | BS_RIGHT;
     }

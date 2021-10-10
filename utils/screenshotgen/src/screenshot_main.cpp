@@ -84,7 +84,7 @@ void ScreenshotFrame::OnCaptureFullScreen(wxCommandEvent& WXUNUSED(event))
 
     wxMessageBox(_("A screenshot of the entire screen was saved as:\n\n  ")
                 + AutoCaptureMechanism::GetDefaultDirectoryAbsPath() + wxT("fullscreen.png"),
-                 _("Full screen capture"), wxICON_INFORMATION|wxOK, this);
+                 _("Full screen capture"), DialogFlags{wxDialogIconFlags::Information, wxDialogFlags::OK}, this);
 }
 
 void ScreenshotFrame::OnCaptureAllControls(wxCommandEvent& WXUNUSED(event))
@@ -97,11 +97,11 @@ void ScreenshotFrame::OnCaptureAllControls(wxCommandEvent& WXUNUSED(event))
         int choice = wxMessageBox(
             _("It seems that you have already generated some screenshots.\n\nClick YES to delete them all (recommended) or NO to preserve them.\nClick CANCEL to cancel this auto-capture operation."),
             _("Delete existing screenshots?"),
-            wxYES_NO | wxCANCEL | wxICON_QUESTION, this);
+            DialogFlags{wxDialogFlags::Yes_No, wxDialogFlags::Cancel, wxDialogIconFlags::Question}, this);
 
         switch(choice)
         {
-            case wxYES:
+            case wxDialogFlags::Yes:
             {
                 wxArrayString files;
                 wxDir::GetAllFiles(dir, &files, wxT("*.png"), wxDIR_FILES);
@@ -113,8 +113,8 @@ void ScreenshotFrame::OnCaptureAllControls(wxCommandEvent& WXUNUSED(event))
             }
             break;
 
-            case wxNO: break;
-            case wxCANCEL: return;
+            case wxDialogFlags::No: break;
+            case wxDialogFlags::Cancel: return;
         }
     }
 
@@ -182,5 +182,5 @@ void ScreenshotFrame::OnCaptureAllControls(wxCommandEvent& WXUNUSED(event))
     auto_cap.CaptureAll();
 
     wxMessageBox(_("All screenshots were generated successfully in the folder:\n  ") + dir,
-                 _("Success"), wxOK|wxICON_INFORMATION, this);
+                 _("Success"), DialogFlags{wxDialogFlags::OK, wxDialogIconFlags::Information}, this);
 }

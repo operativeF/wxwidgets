@@ -36,7 +36,7 @@ public:
     bool MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result) override;
 
 protected:
-    wxBorder GetDefaultBorder() const override { return wxBORDER_NONE; }
+    wxBorder GetDefaultBorder() const override { return wxBorder::None; }
     wxSize DoGetBestSize() const override;
 
     // Helper for the derived classes Create(): creates a native control with

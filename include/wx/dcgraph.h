@@ -14,6 +14,7 @@
 #if wxUSE_GRAPHICS_CONTEXT
 
 #include "wx/dc.h"
+#include "wx/directionflags.h"
 #include "wx/geometry.h"
 #include "wx/graphics.h"
 
@@ -62,6 +63,8 @@ private:
 class WXDLLIMPEXP_CORE wxGCDCImpl: public wxDCImpl
 {
 public:
+    using enum wxDirection;
+    
     wxGCDCImpl( wxDC *owner, const wxWindowDC& dc );
     wxGCDCImpl( wxDC *owner, const wxMemoryDC& dc );
 #if wxUSE_PRINTING_ARCHITECTURE
@@ -146,7 +149,7 @@ public:
     void DoGradientFillLinear(const wxRect& rect,
         const wxColour& initialColour,
         const wxColour& destColour,
-        wxDirection nDirection = wxEAST) override;
+        wxDirection nDirection = East) override;
 
     void DoGradientFillConcentric(const wxRect& rect,
         const wxColour& initialColour,

@@ -10,9 +10,10 @@
 #ifndef _WX_HEADERCOL_H_
 #define _WX_HEADERCOL_H_
 
-#include "wx/bitmap.h"
-
 #if wxUSE_HEADERCTRL
+
+#include "wx/alignmentflags.h"
+#include "wx/bitmap.h"
 
 #include <string>
 
@@ -65,11 +66,11 @@ public:
        directly to methods such wxHeaderCtrl::AppendColumn()):
     wxHeaderColumn(const std::string& title,
                    int width = wxCOL_WIDTH_DEFAULT,
-                   wxAlignment align = wxALIGN_NOT,
+                   wxAlignment align = wxAlignment::None,
                    int flags = wxCOL_DEFAULT_FLAGS);
     wxHeaderColumn(const wxBitmap &bitmap,
                    int width = wxDVC_DEFAULT_WIDTH,
-                   wxAlignment align = wxALIGN_CENTER,
+                   wxAlignment align = wxAlignment::Center,
                    int flags = wxCOL_DEFAULT_FLAGS);
     */
 
@@ -102,7 +103,7 @@ public:
     // below the specified size (set to 0 to remove)
     virtual int GetMinWidth() const = 0;
 
-    // alignment of the text: wxALIGN_CENTRE, wxALIGN_LEFT or wxALIGN_RIGHT
+    // alignment of the text: wxAlignment::Center, wxAlignment::Left or wxAlignment::Right
     virtual wxAlignment GetAlignment() const = 0;
 
 
@@ -213,7 +214,7 @@ public:
     // ctors and dtor
     wxHeaderColumnSimple(const std::string& title,
                          int width = wxCOL_WIDTH_DEFAULT,
-                         wxAlignment align = wxALIGN_NOT,
+                         wxAlignment align = wxAlignment::None,
                          unsigned int flags = wxCOL_DEFAULT_FLAGS)
         : m_title(title),
           m_width(width),
@@ -229,7 +230,7 @@ public:
 
     wxHeaderColumnSimple(const wxBitmap& bitmap,
                          int width = wxCOL_WIDTH_DEFAULT,
-                         wxAlignment align = wxALIGN_CENTER,
+                         wxAlignment align = wxAlignment::Center,
                          unsigned int flags = wxCOL_DEFAULT_FLAGS)
         : m_bitmap(bitmap),
           m_width(width),
@@ -276,12 +277,12 @@ public:
 private:
     std::string m_title;
     wxBitmap m_bitmap;
-    int m_width,
-        m_minWidth;
-    wxAlignment m_align;
+    int m_width;
+    int m_minWidth;
     unsigned int m_flags;
-    bool m_sort,
-         m_sortAscending;
+    wxAlignment m_align;
+    bool m_sort;
+    bool m_sortAscending;
 };
 
 #endif // wxUSE_HEADERCTRL

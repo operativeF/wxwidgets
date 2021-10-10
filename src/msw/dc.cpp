@@ -23,6 +23,7 @@
     #include <gsl/gsl>
 #endif
 
+#include "wx/directionflags.h"
 #include "wx/window.h"
 #include "wx/utils.h"
 #include "wx/app.h"
@@ -2814,7 +2815,7 @@ void wxMSWDCImpl::DoGradientFillLinear (const wxRect& rect,
 
     // invert colours direction if not filling from left-to-right or
     // top-to-bottom
-    const int firstVertex = nDirection == wxNORTH || nDirection == wxWEST ? 1 : 0;
+    const int firstVertex = nDirection == wxDirection::North || nDirection == wxDirection::West ? 1 : 0;
 
     // one vertex for upper left and one for upper-right
     TRIVERTEX vertices[2];
@@ -2840,7 +2841,7 @@ void wxMSWDCImpl::DoGradientFillLinear (const wxRect& rect,
             WXSIZEOF(vertices),
             &grect,
             1,
-            nDirection == wxWEST || nDirection == wxEAST
+            nDirection == wxDirection::West || nDirection == wxDirection::East
                 ? GRADIENT_FILL_RECT_H
                 : GRADIENT_FILL_RECT_V
          ) )

@@ -20,6 +20,7 @@
 #endif
 
 #include "wx/dcgraph.h"
+#include "wx/directionflags.h"
 #include "wx/icon.h"
 #include "wx/dcclient.h"
 #include "wx/dcmemory.h"
@@ -1340,22 +1341,22 @@ void wxGCDCImpl::DoGradientFillLinear(const wxRect& rect,
     wxPoint end;
     switch( nDirection)
     {
-    case wxWEST :
+    case wxDirection::West :
         start = rect.GetRightBottom();
         start.x++;
         end = rect.GetLeftBottom();
         break;
-    case wxEAST :
+    case wxDirection::East :
         start = rect.GetLeftBottom();
         end = rect.GetRightBottom();
         end.x++;
         break;
-    case wxNORTH :
+    case wxDirection::North :
         start = rect.GetLeftBottom();
         start.y++;
         end = rect.GetLeftTop();
         break;
-    case wxSOUTH :
+    case wxDirection::South :
         start = rect.GetLeftTop();
         end = rect.GetLeftBottom();
         end.y++;

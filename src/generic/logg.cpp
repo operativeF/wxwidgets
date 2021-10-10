@@ -198,9 +198,9 @@ void wxLogGui::Clear()
 
 unsigned int wxLogGui::GetSeverityIcon() const
 {
-    return m_bErrors ? wxICON_STOP
-                     : m_bWarnings ? wxICON_EXCLAMATION
-                                   : wxICON_INFORMATION;
+    return m_bErrors ? wxDialogIconFlags::Stop
+                     : m_bWarnings ? wxDialogIconFlags::Exclamation
+                                   : wxDialogIconFlags::Information;
 }
 
 wxString wxLogGui::GetTitle() const
@@ -208,11 +208,11 @@ wxString wxLogGui::GetTitle() const
     wxString titleFormat;
     switch ( GetSeverityIcon() )
     {
-        case wxICON_STOP:
+        case wxDialogIconFlags::Stop:
             titleFormat = _("%s Error");
             break;
 
-        case wxICON_EXCLAMATION:
+        case wxDialogIconFlags::Exclamation:
             titleFormat = _("%s Warning");
             break;
 
@@ -220,7 +220,7 @@ wxString wxLogGui::GetTitle() const
             wxFAIL_MSG( "unexpected icon severity" );
             [[fallthrough]];
 
-        case wxICON_INFORMATION:
+        case wxDialogIconFlags::Information:
             titleFormat = _("%s Information");
     }
 
@@ -230,9 +230,9 @@ wxString wxLogGui::GetTitle() const
 void
 wxLogGui::DoShowSingleLogMessage(const wxString& message,
                                  const wxString& title,
-                                 unsigned int style)
+                                 wxDialogFlags style) // TODO: Mult param?
 {
-    wxMessageBox(message, title, wxOK | style);
+    wxMessageBox(message, title, DialogFlags{wxDialogFlags::OK, style});
 }
 
 void
@@ -712,7 +712,7 @@ wxLogDialog::wxLogDialog(wxWindow *parent,
     wxSizer *szText = CreateTextSizer(message);
     szText->SetMinSize(wxSize{std::min(300, wxGetDisplaySize().x / 3), -1});
 
-    sizerAll->Add(szText, wxSizerFlags(1).Centre().Border(wxLEFT | wxRIGHT));
+    sizerAll->Add(szText, wxSizerFlags(1).Centre().Border(wxDirection::Left | wxDirection::Right));
 
     wxButton *btnOk = new wxButton(this, wxID_OK);
     sizerAll->Add(btnOk, wxSizerFlags().Centre());
@@ -729,19 +729,19 @@ wxLogDialog::wxLogDialog(wxWindow *parent,
     wxWindow *win = collpane->GetPane();
 #else
     wxPanel* win = new wxPanel(this, wxID_ANY, wxDefaultPosition, wxDefaultSize,
-                               wxBORDER_NONE);
+                               wxBorder::None);
 #endif
     wxSizer * const paneSz = new wxBoxSizer(wxVERTICAL);
 
     CreateDetailsControls(win);
 
-    paneSz->Add(m_listctrl, wxSizerFlags(1).Expand().Border(wxTOP));
+    paneSz->Add(m_listctrl, wxSizerFlags(1).Expand().Border(wxDirection::Top));
 
 #if wxUSE_CLIPBOARD || CAN_SAVE_FILES
     wxBoxSizer * const btnSizer = new wxBoxSizer(wxHORIZONTAL);
 
     wxSizerFlags flagsBtn;
-    flagsBtn.Border(wxLEFT);
+    flagsBtn.Border(wxDirection::Left);
 
 #if wxUSE_CLIPBOARD
     btnSizer->Add(new wxButton(win, wxID_COPY), flagsBtn);
@@ -751,7 +751,7 @@ wxLogDialog::wxLogDialog(wxWindow *parent,
     btnSizer->Add(new wxButton(win, wxID_SAVE), flagsBtn);
 #endif // CAN_SAVE_FILES
 
-    paneSz->Add(btnSizer, wxSizerFlags().Right().Border(wxTOP|wxBOTTOM));
+    paneSz->Add(btnSizer, wxSizerFlags().Right().Border(wxDirection::Top|wxDirection::Bottom));
 #endif // wxUSE_CLIPBOARD || CAN_SAVE_FILES
 
     win->SetSizer(paneSz);
@@ -777,7 +777,7 @@ void wxLogDialog::CreateDetailsControls(wxWindow *parent)
     // create the list ctrl now
     m_listctrl = new wxListCtrl(parent, wxID_ANY,
                                 wxDefaultPosition, wxDefaultSize,
-                                wxBORDER_SIMPLE |
+                                wxBorder::Simple |
                                 wxLC_REPORT |
                                 wxLC_NO_HEADER |
                                 wxLC_SINGLE_SEL);
@@ -895,7 +895,7 @@ void wxLogDialog::OnListItemActivated(wxListEvent& event)
 
     // wxMessageBox will nicely handle the '\n' in the string (if any)
     // and supports long strings
-    wxMessageBox(str, "Log message", wxOK, this);
+    wxMessageBox(str, "Log message", wxDialogFlags::OK, this);
 }
 
 void wxLogDialog::OnOk(wxCommandEvent& WXUNUSED(event))
@@ -1000,16 +1000,16 @@ static int OpenLogFile(wxFile& file, wxString *pFilename, wxWindow *parent)
         strMsg.Printf(_("Append log to file '%s' (choosing [No] will overwrite it)?"),
                       filename.c_str());
         switch ( wxMessageBox(strMsg, _("Question"),
-                              wxICON_QUESTION | wxYES_NO | wxCANCEL) ) {
-            case wxYES:
+                              DialogFlags{wxDialogIconFlags::Question, wxDialogFlags::Yes_No, wxDialogFlags::Cancel}) ) {
+            case wxDialogFlags::Yes:
                 bAppend = true;
                 break;
 
-            case wxNO:
+            case wxDialogFlags::No:
                 bAppend = false;
                 break;
 
-            case wxCANCEL:
+            case wxDialogFlags::Cancel:
                 return -1;
 
             default:

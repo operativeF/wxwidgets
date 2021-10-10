@@ -20,6 +20,7 @@
 #include "wx/ribbon/toolbar.h"
 
 #include "wx/dcmemory.h"
+#include "wx/directionflags.h"
 
 #ifndef WX_PRECOMP
     #ifdef __WXMSW__
@@ -1359,7 +1360,7 @@ void wxRibbonMSWArtProvider::DrawTab(
             background.height -= 2;
 
             dc.GradientFillLinear(background, m_tab_active_background_colour,
-                m_tab_active_background_gradient_colour, wxSOUTH);
+                m_tab_active_background_gradient_colour, wxDirection::South);
 
             // TODO: active and hovered
         }
@@ -1375,12 +1376,12 @@ void wxRibbonMSWArtProvider::DrawTab(
             background.height /= 2;
             dc.GradientFillLinear(background,
                 m_tab_hover_background_top_colour,
-                m_tab_hover_background_top_gradient_colour, wxSOUTH);
+                m_tab_hover_background_top_gradient_colour, wxDirection::South);
 
             background.y += background.height;
             background.height = h - background.height;
             dc.GradientFillLinear(background, m_tab_hover_background_colour,
-                m_tab_hover_background_gradient_colour, wxSOUTH);
+                m_tab_hover_background_gradient_colour, wxDirection::South);
         }
         else if(tab.highlight)
         {
@@ -1393,12 +1394,12 @@ void wxRibbonMSWArtProvider::DrawTab(
             int h = background.height;
             background.height /= 2;
 
-            dc.GradientFillLinear(background, m_tab_highlight_top_colour, m_tab_highlight_top_gradient_colour, wxSOUTH);
+            dc.GradientFillLinear(background, m_tab_highlight_top_colour, m_tab_highlight_top_gradient_colour, wxDirection::South);
 
             background.y += background.height;
             background.height = h - background.height;
 
-            dc.GradientFillLinear(background, m_tab_highlight_colour, m_tab_highlight_gradient_colour, wxSOUTH);
+            dc.GradientFillLinear(background, m_tab_highlight_colour, m_tab_highlight_gradient_colour, wxDirection::South);
         }
 
         wxPoint border_points[6];
@@ -1626,7 +1627,7 @@ void wxRibbonMSWArtProvider::DrawPartialPageBackground(wxDC& dc,
         wxColour ending_colour(wxRibbonInterpolateColour(bg_top, bg_top_grad,
             paint_rect.y + paint_rect.height, upper_rect.y,
             upper_rect.y + upper_rect.height));
-        dc.GradientFillLinear(rect, starting_colour, ending_colour, wxSOUTH);
+        dc.GradientFillLinear(rect, starting_colour, ending_colour, wxDirection::South);
     }
 
     if(paint_rect.Intersects(lower_rect))
@@ -1640,7 +1641,7 @@ void wxRibbonMSWArtProvider::DrawPartialPageBackground(wxDC& dc,
         wxColour ending_colour(wxRibbonInterpolateColour(bg_btm, bg_btm_grad,
             paint_rect.y + paint_rect.height,
             lower_rect.y, lower_rect.y + lower_rect.height));
-        dc.GradientFillLinear(rect, starting_colour, ending_colour, wxSOUTH);
+        dc.GradientFillLinear(rect, starting_colour, ending_colour, wxDirection::South);
     }
 }
 
@@ -1675,12 +1676,12 @@ void wxRibbonMSWArtProvider::DrawPageBackground(
 
         background.height /= 5;
         dc.GradientFillLinear(background, m_page_background_top_colour,
-            m_page_background_top_gradient_colour, wxSOUTH);
+            m_page_background_top_gradient_colour, wxDirection::South);
 
         background.y += background.height;
         background.height = rect.height - 2 - background.height;
         dc.GradientFillLinear(background, m_page_background_colour,
-            m_page_background_gradient_colour, wxSOUTH);
+            m_page_background_gradient_colour, wxDirection::South);
     }
 
     {
@@ -1751,12 +1752,12 @@ void wxRibbonMSWArtProvider::DrawScrollButton(
         else
             background.height /= 5;
         dc.GradientFillLinear(background, m_page_background_top_colour,
-            m_page_background_top_gradient_colour, wxSOUTH);
+            m_page_background_top_gradient_colour, wxDirection::South);
 
         background.y += background.height;
         background.height = rect.height - 2 - background.height;
         dc.GradientFillLinear(background, m_page_background_colour,
-            m_page_background_gradient_colour, wxSOUTH);
+            m_page_background_gradient_colour, wxDirection::South);
     }
 
     {
@@ -2137,7 +2138,7 @@ void wxRibbonMSWArtProvider::DrawGalleryButton(wxDC& dc,
     wxRect lower(rect);
     lower.height = (lower.height + 1) / 2;
     lower.y += rect.height - lower.height;
-    dc.GradientFillLinear(lower, btn_colour, btn_grad_colour, wxSOUTH);
+    dc.GradientFillLinear(lower, btn_colour, btn_grad_colour, wxDirection::South);
 
     dc.DrawBitmap(btn_bitmap, rect.x + rect.width / 2 - 2, lower.y - 2, true);
 }
@@ -2189,7 +2190,7 @@ void wxRibbonMSWArtProvider::DrawGalleryItemBackground(
     wxRect lower(upper);
     lower.y += lower.height;
     lower.height = rect.height - 2 - lower.height;
-    dc.GradientFillLinear(lower, bg_colour, bg_gradient_colour, wxSOUTH);
+    dc.GradientFillLinear(lower, bg_colour, bg_gradient_colour, wxDirection::South);
 }
 
 void wxRibbonMSWArtProvider::DrawPanelBorder(wxDC& dc, const wxRect& rect,
@@ -2254,13 +2255,13 @@ void wxRibbonMSWArtProvider::DrawMinimisedPanel(
         client_rect.height = (rect.y + rect.height / 5) - client_rect.x;
         dc.GradientFillLinear(client_rect,
             m_panel_active_background_top_colour,
-            m_panel_active_background_top_gradient_colour, wxSOUTH);
+            m_panel_active_background_top_gradient_colour, wxDirection::South);
 
         client_rect.y += client_rect.height;
         client_rect.height = (true_rect.y + true_rect.height) - client_rect.y;
         dc.GradientFillLinear(client_rect,
             m_panel_active_background_colour,
-            m_panel_active_background_gradient_colour, wxSOUTH);
+            m_panel_active_background_gradient_colour, wxDirection::South);
     }
     else if(wnd->IsHovered())
     {
@@ -2292,13 +2293,13 @@ void wxRibbonMSWArtProvider::DrawMinimisedPanel(
         {
             dc.GradientFillLinear(full_rect,
                 m_page_hover_background_colour,
-                m_page_hover_background_gradient_colour, wxSOUTH);
+                m_page_hover_background_gradient_colour, wxDirection::South);
         }
         else
         {
             dc.GradientFillLinear(full_rect,
                 m_page_hover_background_top_colour,
-                m_page_hover_background_top_gradient_colour, wxSOUTH);
+                m_page_hover_background_top_gradient_colour, wxDirection::South);
         }
     }
     else
@@ -2310,14 +2311,14 @@ void wxRibbonMSWArtProvider::DrawMinimisedPanel(
         top_rect.height = mid_pos;
         dc.GradientFillLinear(top_rect,
             m_page_hover_background_top_colour,
-            m_page_hover_background_top_gradient_colour, wxSOUTH);
+            m_page_hover_background_top_gradient_colour, wxDirection::South);
 
         wxRect btm_rect(top_rect);
         btm_rect.y = preview.y + mid_pos;
         btm_rect.height = preview.y + preview.height - 7 - btm_rect.y;
         dc.GradientFillLinear(btm_rect,
             m_page_hover_background_colour,
-            m_page_hover_background_gradient_colour, wxSOUTH);
+            m_page_hover_background_gradient_colour, wxDirection::South);
     }
 
     if(bitmap.IsOk())
@@ -2550,19 +2551,19 @@ void wxRibbonMSWArtProvider::DrawButtonBarButton(
         {
             dc.GradientFillLinear(bg_rect_top,
                 m_button_bar_active_background_top_colour,
-                m_button_bar_active_background_top_gradient_colour, wxSOUTH);
+                m_button_bar_active_background_top_gradient_colour, wxDirection::South);
             dc.GradientFillLinear(bg_rect,
                 m_button_bar_active_background_colour,
-                m_button_bar_active_background_gradient_colour, wxSOUTH);
+                m_button_bar_active_background_gradient_colour, wxDirection::South);
         }
         else
         {
             dc.GradientFillLinear(bg_rect_top,
                 m_button_bar_hover_background_top_colour,
-                m_button_bar_hover_background_top_gradient_colour, wxSOUTH);
+                m_button_bar_hover_background_top_gradient_colour, wxDirection::South);
             dc.GradientFillLinear(bg_rect,
                 m_button_bar_hover_background_colour,
-                m_button_bar_hover_background_gradient_colour, wxSOUTH);
+                m_button_bar_hover_background_gradient_colour, wxDirection::South);
         }
 
         wxPoint border_points[9];
@@ -2754,8 +2755,8 @@ void wxRibbonMSWArtProvider::DrawTool(
         bg_colour = m_tool_hover_background_colour;
         bg_grad_colour = m_tool_hover_background_gradient_colour;
     }
-    dc.GradientFillLinear(bg_rect_top, bg_top_colour, bg_top_grad_colour, wxSOUTH);
-    dc.GradientFillLinear(bg_rect_btm, bg_colour, bg_grad_colour, wxSOUTH);
+    dc.GradientFillLinear(bg_rect_top, bg_top_colour, bg_top_grad_colour, wxDirection::South);
+    dc.GradientFillLinear(bg_rect_btm, bg_colour, bg_grad_colour, wxDirection::South);
     if(is_split_hybrid)
     {
         wxRect nonrect(bg_rect);
@@ -3309,9 +3310,9 @@ wxSize wxRibbonMSWArtProvider::GetMinimisedPanelMinimumSize(
     if(expanded_panel_direction != nullptr)
     {
         if(m_flags & wxRIBBON_BAR_FLOW_VERTICAL)
-            *expanded_panel_direction = wxEAST;
+            *expanded_panel_direction = wxDirection::East;
         else
-            *expanded_panel_direction = wxSOUTH;
+            *expanded_panel_direction = wxDirection::South;
     }
     wxSize base_size(42, 42);
 

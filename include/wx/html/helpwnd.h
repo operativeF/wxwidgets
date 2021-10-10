@@ -87,13 +87,13 @@ public:
     wxHtmlHelpWindow(wxWindow* parent, wxWindowID id,
                     const wxPoint& pos = wxDefaultPosition,
                     const wxSize& size = wxDefaultSize,
-                    unsigned int style = wxTAB_TRAVERSAL|wxNO_BORDER,
+                    unsigned int style = wxTAB_TRAVERSAL|wxBorder::None,
                     unsigned int helpStyle = wxHF_DEFAULT_STYLE,
                     wxHtmlHelpData* data = nullptr);
     bool Create(wxWindow* parent, wxWindowID id,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                unsigned int style = wxTAB_TRAVERSAL|wxNO_BORDER,
+                unsigned int style = wxTAB_TRAVERSAL|wxBorder::None,
                 unsigned int helpStyle = wxHF_DEFAULT_STYLE);
     ~wxHtmlHelpWindow();
 

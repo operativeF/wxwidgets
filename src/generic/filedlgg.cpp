@@ -212,7 +212,7 @@ bool wxGenericFileDialog::Create( wxWindow *parent,
         mainsizer->Add( buttonsizer, wxSizerFlags().Expand() );
     else
         mainsizer->Add( buttonsizer, wxSizerFlags().Expand()
-                                                   .Border( wxLEFT | wxRIGHT | wxTOP ) );
+                                                   .Border( wxDirection::Left | wxDirection::Right | wxDirection::Top ) );
 
     long style2 = 0;
     if ( HasFdFlag(wxFD_MULTIPLE) )
@@ -238,7 +238,7 @@ bool wxGenericFileDialog::Create( wxWindow *parent,
 
     mainsizer->Add(m_filectrl, wxSizerFlags(1).Expand().HorzBorder());
 
-    wxSizer *bsizer = CreateButtonSizer(wxOK | wxCANCEL);
+    wxSizer *bsizer = CreateButtonSizer(DialogFlags{wxDialogFlags::OK, wxDialogFlags::Cancel});
     if ( bsizer )
     {
         if (is_pda)
@@ -343,15 +343,15 @@ void wxGenericFileDialog::OnOk( wxCommandEvent &WXUNUSED(event) )
                     path
                 ),
                 _("Confirm"),
-                wxYES_NO
-             ) != wxYES)
+                wxDialogFlags::Yes_No
+             ) != wxDialogFlags::Yes)
             return;
     }
     else if ( HasFdFlag(wxFD_OPEN) && HasFdFlag(wxFD_FILE_MUST_EXIST) &&
                     !wxFileExists(path) )
     {
         wxMessageBox(_("Please choose an existing file."), _("Error"),
-                     wxOK | wxICON_ERROR );
+                     DialogFlags{wxDialogFlags::OK, wxDialogIconFlags::Error} );
         return;
     }
 

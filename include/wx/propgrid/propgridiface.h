@@ -285,8 +285,8 @@ public:
     // Returns iterator class instance.
     // flags - See wxPG_ITERATOR_FLAGS. Value wxPG_ITERATE_DEFAULT causes
     //   iteration over everything except private child properties.
-    // startPos - Either wxTOP or wxBOTTOM. wxTOP will indicate that iterations start
-    //   from the first property from the top, and wxBOTTOM means that the
+    // startPos - Either wxDirection::Top or wxDirection::Bottom. wxDirection::Top will indicate that iterations start
+    //   from the first property from the top, and wxDirection::Bottom means that the
     //   iteration will instead begin from bottommost valid item.
     wxPropertyGridIterator GetIterator( int flags, int startPos )
     {

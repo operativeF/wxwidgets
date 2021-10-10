@@ -52,7 +52,7 @@ bool wxTextEntryDialog::Create(wxWindow *parent,
                                      const std::string& message,
                                      const std::string& caption,
                                      const std::string& value,
-                                     unsigned int style,
+                                     DialogFlags style,
                                      const wxPoint& pos)
 {
     // Do not pass style to GetParentForModalDialog() as wxDIALOG_NO_PARENT
@@ -92,10 +92,10 @@ bool wxTextEntryDialog::Create(wxWindow *parent,
     topsizer->Add(m_textctrl,
                   wxSizerFlags(style & wxTE_MULTILINE ? 1 : 0).
                     Expand().
-                    TripleBorder(wxLEFT | wxRIGHT));
+                    TripleBorder(wxDirection::Left | wxDirection::Right));
 
     // 3) buttons if any
-    wxSizer *buttonSizer = CreateSeparatedButtonSizer(style & (wxOK | wxCANCEL));
+    wxSizer *buttonSizer = CreateSeparatedButtonSizer(style & DialogFlags{wxDialogFlags::OK, wxDialogFlags::Cancel}));
     if ( buttonSizer )
     {
         topsizer->Add(buttonSizer, wxSizerFlags(flagsBorder2).Expand());

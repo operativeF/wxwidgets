@@ -16,13 +16,15 @@
 // ----------------------------------------------------------------------------
 
 #include "wx/event.h"           // the base class
-
+#include "wx/windowflags.h"
+#include "wx/borderflags.h"
 #include "wx/list.h"            // defines wxWindowList
 
 #include "wx/geometry/point.h"
 #include "wx/geometry/rect.h"
 
 #include "wx/cursor.h"          // we have member variables of these classes
+#include "wx/dialogflags.h"
 #include "wx/font.h"            // so we can't do without them
 #include "wx/colour.h"
 #include "wx/region.h"
@@ -660,15 +662,15 @@ public:
 
         // get/set window style (setting style won't update the window and so
         // is only useful for internal usage)
-    virtual void SetWindowStyleFlag( unsigned int style ) { m_windowStyle = style; }
-    virtual unsigned int GetWindowStyleFlag() const { return m_windowStyle; }
+    virtual void SetWindowStyleFlag( WindowFlags style ) { m_windowStyle = style; }
+    virtual WindowFlags GetWindowStyleFlag() const { return m_windowStyle; }
 
         // just some (somewhat shorter) synonyms
-    void SetWindowStyle( unsigned int style ) { SetWindowStyleFlag(style); }
-    unsigned int wxGetWindowStyle() const { return GetWindowStyleFlag(); }
+    void SetWindowStyle( WindowFlags style ) { SetWindowStyleFlag(style); }
+    WindowFlags wxGetWindowStyle() const { return GetWindowStyleFlag(); }
 
         // check if the flag is set
-    bool HasFlag(unsigned int flag) const { return (m_windowStyle & flag) != 0; }
+    bool HasFlag(wxWindowFlags flag) const { return m_windowStyle.is_set(flag); }
     virtual bool IsRetained() const { return HasFlag(wxRETAINED); }
 
         // turn the flag on if it had been turned off before and vice versa,
@@ -1263,8 +1265,8 @@ public:
 
     // get the window border style from the given flags: this is different from
     // simply doing flags & wxBORDER_MASK because it uses GetDefaultBorder() to
-    // translate wxBORDER_DEFAULT to something reasonable
-    wxBorder GetBorder(long flags) const;
+    // translate wxBorder::Default to something reasonable
+    wxBorder GetBorder(WindowFlags flags) const;
 
     // get border for the flags of this window
     wxBorder GetBorder() const { return GetBorder(GetWindowStyleFlag()); }
@@ -1732,7 +1734,7 @@ protected:
     // (i.e. not being updated) if it is positive
     unsigned int m_freezeCount;
 
-    unsigned int         m_windowStyle{0};
+    WindowFlags          m_windowStyle{};
     unsigned int         m_exStyle;
 
     // the minimal allowed size for the window (no minimal size if variable(s)
@@ -1785,7 +1787,7 @@ protected:
     // this allows you to implement standard control borders without
     // repeating the code in different classes that are not derived from
     // wxControl
-    virtual wxBorder GetDefaultBorderForControl() const noexcept { return wxBORDER_THEME; }
+    virtual wxBorder GetDefaultBorderForControl() const noexcept { return wxBorder::Theme; }
 
     // Get the default size for the new window if no explicit size given. TLWs
     // have their own default size so this is just for non top-level windows.

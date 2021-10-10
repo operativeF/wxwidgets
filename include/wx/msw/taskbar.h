@@ -12,6 +12,7 @@
 #ifndef _WX_TASKBAR_H_
 #define _WX_TASKBAR_H_
 
+#include "wx/dialogflags.h"
 #include "wx/icon.h"
 
 #include <chrono>
@@ -51,7 +52,7 @@ public:
     // title and text are limited to 63 and 255 characters respectively, msec
     // is the timeout, in milliseconds, before the balloon disappears (will be
     // clamped down to the allowed 10-30s range by Windows if it's outside it)
-    // and flags can include wxICON_ERROR/INFO/WARNING to show a corresponding
+    // and flags can include wxDialogIconFlags::Error/INFO/WARNING to show a corresponding
     // icon
     //
     // return true if balloon was shown, false on error (incorrect parameters
@@ -59,7 +60,7 @@ public:
     bool ShowBalloon(const std::string& title,
                      const std::string& text,
                      std::chrono::milliseconds timeoutDuration = 0ms,
-                     unsigned int flags = 0,
+                     wxDialogIconFlags flags = wxDialogIconFlags::None,
                      const wxIcon& icon = wxNullIcon);
 #endif // wxUSE_TASKBARICON_BALLOONS
 

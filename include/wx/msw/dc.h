@@ -13,6 +13,7 @@
 
 #include "wx/defs.h"
 #include "wx/dc.h"
+#include "wx/directionflags.h"
 #include "wx/geometry/rect.h"
 
 #include "wx/msw/wrap/utils.h"
@@ -48,6 +49,8 @@ struct wxDCCacheEntry: public wxObject
 class WXDLLIMPEXP_CORE wxMSWDCImpl: public wxDCImpl
 {
 public:
+    using enum wxDirection;
+    
     wxMSWDCImpl(wxDC *owner, WXHDC hDC);
     ~wxMSWDCImpl();
 
@@ -183,7 +186,7 @@ public:
     void DoGradientFillLinear(const wxRect& rect,
                                       const wxColour& initialColour,
                                       const wxColour& destColour,
-                                      wxDirection nDirection = wxEAST) override;
+                                      wxDirection nDirection = East) override;
 
     bool DoGetPixel(wxCoord x, wxCoord y, wxColour *col) const override;
 

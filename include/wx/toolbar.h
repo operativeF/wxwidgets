@@ -11,57 +11,58 @@
 #ifndef _WX_TOOLBAR_H_BASE_
 #define _WX_TOOLBAR_H_BASE_
 
-#include "wx/defs.h"
+#include "wx/borderflags.h"
 
 // ----------------------------------------------------------------------------
 // wxToolBar style flags
 // ----------------------------------------------------------------------------
 
-enum wxToolBarStyleFlags
+enum class wxToolBarStyleFlags
 {
     // lay out the toolbar horizontally
-    wxTB_HORIZONTAL  = wxHORIZONTAL,    // == 0x0004
-    wxTB_TOP         = wxTB_HORIZONTAL,
+    Horizontal,    // == 0x0004
+    Top = Horizontal,
 
     // lay out the toolbar vertically
-    wxTB_VERTICAL    = wxVERTICAL,      // == 0x0008
-    wxTB_LEFT        = wxTB_VERTICAL,
+    Vertical,      // == 0x0008
+    Left = Vertical,
 
     // "flat" buttons (Win32/GTK only)
-    wxTB_FLAT        = 0x0020,
+    Flat,
 
     // dockable toolbar (GTK only)
-    wxTB_DOCKABLE    = 0x0040,
+    Dockable,
 
     // don't show the icons (they're shown by default)
-    wxTB_NOICONS     = 0x0080,
+    NoIcons,
 
     // show the text (not shown by default)
-    wxTB_TEXT        = 0x0100,
+    Text,
 
     // don't show the divider between toolbar and the window (Win32 only)
-    wxTB_NODIVIDER   = 0x0200,
+    NoDivider,
 
     // no automatic alignment (Win32 only, useless)
-    wxTB_NOALIGN     = 0x0400,
+    NoAlign,
 
     // show the text and the icons alongside, not vertically stacked (Win32/GTK)
-    wxTB_HORZ_LAYOUT = 0x0800,
-    wxTB_HORZ_TEXT   = wxTB_HORZ_LAYOUT | wxTB_TEXT,
+    HorzLayout,
 
     // don't show the toolbar short help tooltips
-    wxTB_NO_TOOLTIPS = 0x1000,
+    NoTooltips,
 
     // lay out toolbar at the bottom of the window
-    wxTB_BOTTOM       = 0x2000,
+    Bottom,
 
     // lay out toolbar at the right edge of the window
-    wxTB_RIGHT        = 0x4000,
+    Right,
 
-    wxTB_DEFAULT_STYLE = wxTB_HORIZONTAL
+    _max_size
 };
 
-wxALLOW_COMBINING_ENUMS(wxToolBarStyleFlags, wxBorder)
+using ToolBarStyleFlags = CombineBitfield<wxToolBarStyleFlags, wxBorder>;
+
+constexpr wxToolBarStyleFlags wxTB_DEFAULT_STYLE = wxToolBarStyleFlags::Horizontal;
 
 #if wxUSE_TOOLBAR
     #include "wx/tbarbase.h"     // the base class for all toolbars

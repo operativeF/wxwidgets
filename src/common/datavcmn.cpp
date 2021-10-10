@@ -20,6 +20,7 @@
     #include <gsl/gsl>
 #endif
 
+#include "wx/alignmentflags.h"
 #include "wx/dc.h"
 #include "wx/settings.h"
 #include "wx/log.h"
@@ -902,9 +903,9 @@ wxDataViewRendererBase::PrepareForItem(const wxDataViewModel *model,
 }
 
 
-int wxDataViewRendererBase::GetEffectiveAlignment() const
+wxAlignment wxDataViewRendererBase::GetEffectiveAlignment() const
 {
-    int alignment = GetEffectiveAlignmentIfKnown();
+    wxAlignment alignment = GetEffectiveAlignmentIfKnown();
     wxASSERT( alignment != wxDVR_DEFAULT_ALIGNMENT );
     return alignment;
 }
@@ -912,7 +913,7 @@ int wxDataViewRendererBase::GetEffectiveAlignment() const
 
 int wxDataViewRendererBase::GetEffectiveAlignmentIfKnown() const
 {
-    int alignment = GetAlignment();
+    wxAlignment alignment = GetAlignment();
 
     if ( alignment == wxDVR_DEFAULT_ALIGNMENT )
     {
@@ -920,7 +921,7 @@ int wxDataViewRendererBase::GetEffectiveAlignmentIfKnown() const
         {
             // if we don't have an explicit alignment ourselves, use that of the
             // column in horizontal direction and default vertical alignment
-            alignment = GetOwner()->GetAlignment() | wxALIGN_CENTRE_VERTICAL;
+            alignment = GetOwner()->GetAlignment() | wxAlignment::CenterVertical;
         }
     }
 
@@ -964,22 +965,22 @@ wxDataViewCustomRendererBase::WXCallRender(wxRect rectCell, wxDC *dc, int state)
 
     if ( size.x >= 0 && size.x < rectCell.width )
     {
-        if ( align & wxALIGN_CENTER_HORIZONTAL )
+        if ( align & wxAlignment::CenterHorizontal )
             rectItem.x += (rectCell.width - size.x)/2;
-        else if ( align & wxALIGN_RIGHT )
+        else if ( align & wxAlignment::Right )
             rectItem.x += rectCell.width - size.x;
-        // else: wxALIGN_LEFT is the default
+        // else: wxAlignment::Left is the default
 
         rectItem.width = size.x;
     }
 
     if ( size.y >= 0 && size.y < rectCell.height )
     {
-        if ( align & wxALIGN_CENTER_VERTICAL )
+        if ( align & wxAlignment::CenterVertical )
             rectItem.y += (rectCell.height - size.y)/2;
-        else if ( align & wxALIGN_BOTTOM )
+        else if ( align & wxAlignment::Bottom )
             rectItem.y += rectCell.height - size.y;
-        // else: wxALIGN_TOP is the default
+        // else: wxAlignment::Top is the default
 
         rectItem.height = size.y;
     }
@@ -1049,7 +1050,7 @@ wxDataViewCustomRendererBase::RenderText(const std::string& text,
         *dc,
         text,
         rectText,
-        wxALIGN_NOT,
+        wxAlignment::None,
         flags,
         GetEllipsizeMode());
 }
@@ -1323,9 +1324,9 @@ CreateColumnWithRenderer(const LabelType& label,
                          wxAlignment align,
                          unsigned int flags)
 {
-    // For compatibility reason, handle wxALIGN_NOT as wxDVR_DEFAULT_ALIGNMENT
+    // For compatibility reason, handle wxAlignment::None as wxDVR_DEFAULT_ALIGNMENT
     // when creating the renderer here because a lot of existing code,
-    // including our own dataview sample, uses wxALIGN_NOT just because it's
+    // including our own dataview sample, uses wxAlignment::None just because it's
     // the default value of the alignment argument in AppendXXXColumn()
     // methods, but this doesn't mean that it actually wants to top-align the
     // column text.
@@ -1340,9 +1341,9 @@ CreateColumnWithRenderer(const LabelType& label,
                     label,
                     RendererFactory<Renderer>::New(
                         mode,
-                        align & wxALIGN_BOTTOM
+                        align & wxAlignment::Bottom
                             ? align
-                            : align | wxALIGN_CENTRE_VERTICAL
+                            : align | wxAlignment::CenterVertical
                     ),
                     model_column,
                     width,
@@ -2886,7 +2887,7 @@ bool wxDataViewTreeCtrl::Create( wxWindow *parent, wxWindowID id,
         0,                          // the only model column
         wxDATAVIEW_CELL_EDITABLE,
         -1,                         // default width
-        wxALIGN_NOT,                //  and alignment
+        wxAlignment::None,                //  and alignment
         0                           // not resizable
     );
 

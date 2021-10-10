@@ -162,7 +162,7 @@ public:
 protected:
     friend class wxRibbonToolBarEvent;
     wxSize DoGetBestSize() const override;
-    wxBorder GetDefaultBorder() const override { return wxBORDER_NONE; }
+    wxBorder GetDefaultBorder() const override { return wxBorder::None; }
 
     void OnEraseBackground(wxEraseEvent& evt);
     void OnMouseDown(wxMouseEvent& evt);

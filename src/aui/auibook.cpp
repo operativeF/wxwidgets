@@ -71,10 +71,10 @@ wxAuiTabContainer::wxAuiTabContainer()
     m_flags = 0;
     m_art = new wxAuiDefaultTabArt;
 
-    AddButton(wxAUI_BUTTON_LEFT, wxLEFT);
-    AddButton(wxAUI_BUTTON_RIGHT, wxRIGHT);
-    AddButton(wxAUI_BUTTON_WINDOWLIST, wxRIGHT);
-    AddButton(wxAUI_BUTTON_CLOSE, wxRIGHT);
+    AddButton(wxAUI_BUTTON_LEFT, wxDirection::Left);
+    AddButton(wxAUI_BUTTON_RIGHT, wxDirection::Right);
+    AddButton(wxAUI_BUTTON_WINDOWLIST, wxDirection::Right);
+    AddButton(wxAUI_BUTTON_CLOSE, wxDirection::Right);
 }
 
 wxAuiTabContainer::~wxAuiTabContainer()
@@ -111,18 +111,18 @@ void wxAuiTabContainer::SetFlags(unsigned int flags)
 
     if (flags & wxAUI_NB_SCROLL_BUTTONS)
     {
-        AddButton(wxAUI_BUTTON_LEFT, wxLEFT);
-        AddButton(wxAUI_BUTTON_RIGHT, wxRIGHT);
+        AddButton(wxAUI_BUTTON_LEFT, wxDirection::Left);
+        AddButton(wxAUI_BUTTON_RIGHT, wxDirection::Right);
     }
 
     if (flags & wxAUI_NB_WINDOWLIST_BUTTON)
     {
-        AddButton(wxAUI_BUTTON_WINDOWLIST, wxRIGHT);
+        AddButton(wxAUI_BUTTON_WINDOWLIST, wxDirection::Right);
     }
 
     if (flags & wxAUI_NB_CLOSE_BUTTON)
     {
-        AddButton(wxAUI_BUTTON_CLOSE, wxRIGHT);
+        AddButton(wxAUI_BUTTON_CLOSE, wxDirection::Right);
     }
 
     if (m_art)
@@ -538,7 +538,7 @@ void wxAuiTabContainer::Render(wxDC* raw_dc, wxWindow* wnd)
     {
         wxAuiTabContainerButton& button = m_buttons.Item(button_count - i - 1);
 
-        if (button.location != wxRIGHT)
+        if (button.location != wxDirection::Right)
             continue;
         if (button.curState & wxAUI_BUTTON_STATE_HIDDEN)
             continue;
@@ -552,7 +552,7 @@ void wxAuiTabContainer::Render(wxDC* raw_dc, wxWindow* wnd)
                           button_rect,
                           button.id,
                           button.curState,
-                          wxRIGHT,
+                          wxDirection::Right,
                           &button.rect);
 
         offset -= button.rect.GetWidth();
@@ -569,7 +569,7 @@ void wxAuiTabContainer::Render(wxDC* raw_dc, wxWindow* wnd)
     {
         wxAuiTabContainerButton& button = m_buttons.Item(button_count - i - 1);
 
-        if (button.location != wxLEFT)
+        if (button.location != wxDirection::Left)
             continue;
         if (button.curState & wxAUI_BUTTON_STATE_HIDDEN)
             continue;
@@ -581,7 +581,7 @@ void wxAuiTabContainer::Render(wxDC* raw_dc, wxWindow* wnd)
                           button_rect,
                           button.id,
                           button.curState,
-                          wxLEFT,
+                          wxDirection::Left,
                           &button.rect);
 
         offset += button.rect.GetWidth();
@@ -752,7 +752,7 @@ bool wxAuiTabContainer::IsTabVisible(int tabPage, int tabOffset, wxDC* dc, wxWin
     {
         wxAuiTabContainerButton& button = m_buttons.Item(button_count - i - 1);
 
-        if (button.location != wxRIGHT)
+        if (button.location != wxDirection::Right)
             continue;
         if (button.curState & wxAUI_BUTTON_STATE_HIDDEN)
             continue;
@@ -768,7 +768,7 @@ bool wxAuiTabContainer::IsTabVisible(int tabPage, int tabOffset, wxDC* dc, wxWin
     {
         wxAuiTabContainerButton& button = m_buttons.Item(button_count - i - 1);
 
-        if (button.location != wxLEFT)
+        if (button.location != wxDirection::Left)
             continue;
         if (button.curState & wxAUI_BUTTON_STATE_HIDDEN)
             continue;
@@ -2348,7 +2348,7 @@ wxAuiTabCtrl* wxAuiNotebook::GetActiveTabCtrl()
                                         m_tabIdCounter++,
                                         wxDefaultPosition,
                                         wxDefaultSize,
-                                        wxNO_BORDER|wxWANTS_CHARS);
+                                        wxBorder::None|wxWANTS_CHARS);
     tabframe->m_tabs->SetFlags(m_flags);
     tabframe->m_tabs->SetArtProvider(m_tabs.GetArtProvider()->Clone());
     m_mgr.AddPane(tabframe,
@@ -2385,7 +2385,7 @@ bool wxAuiNotebook::FindTab(wxWindow* page, wxAuiTabCtrl** ctrl, int* idx)
     return false;
 }
 
-void wxAuiNotebook::Split(size_t page, int direction)
+void wxAuiNotebook::Split(size_t page, wxDirection direction)
 {
     wxSize cli_size = GetClientSize();
 
@@ -2431,7 +2431,7 @@ void wxAuiNotebook::Split(size_t page, int direction)
                                         m_tabIdCounter++,
                                         wxDefaultPosition,
                                         wxDefaultSize,
-                                        wxNO_BORDER|wxWANTS_CHARS);
+                                        wxBorder::None|wxWANTS_CHARS);
     new_tabs->m_tabs->SetArtProvider(m_tabs.GetArtProvider()->Clone());
     new_tabs->m_tabs->SetFlags(m_flags);
     dest_tabs = new_tabs->m_tabs;
@@ -2441,22 +2441,22 @@ void wxAuiNotebook::Split(size_t page, int direction)
     wxAuiPaneInfo paneInfo = wxAuiPaneInfo().Bottom().CaptionVisible(false);
     wxPoint mouse_pt;
 
-    if (direction == wxLEFT)
+    if (direction == wxDirection::Left)
     {
         paneInfo.Left();
         mouse_pt = wxPoint(0, cli_size.y/2);
     }
-    else if (direction == wxRIGHT)
+    else if (direction == wxDirection::Right)
     {
         paneInfo.Right();
         mouse_pt = wxPoint(cli_size.x, cli_size.y/2);
     }
-    else if (direction == wxTOP)
+    else if (direction == wxDirection::Top)
     {
         paneInfo.Top();
         mouse_pt = wxPoint(cli_size.x/2, 0);
     }
-    else if (direction == wxBOTTOM)
+    else if (direction == wxDirection::Bottom)
     {
         paneInfo.Bottom();
         mouse_pt = wxPoint(cli_size.x/2, cli_size.y);
@@ -2847,7 +2847,7 @@ void wxAuiNotebook::OnTabEndDrag(wxAuiNotebookEvent& evt)
                                                 m_tabIdCounter++,
                                                 wxDefaultPosition,
                                                 wxDefaultSize,
-                                                wxNO_BORDER|wxWANTS_CHARS);
+                                                wxBorder::None|wxWANTS_CHARS);
             new_tabs->m_tabs->SetArtProvider(m_tabs.GetArtProvider()->Clone());
             new_tabs->m_tabs->SetFlags(m_flags);
 

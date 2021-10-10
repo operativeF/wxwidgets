@@ -11,9 +11,10 @@
 // for compilers that support precompilation, includes "wx.h".
 #include "wx/wxprec.h"
 
-
 #include "wx/renderer.h"
 
+#include "wx/alignmentflags.h"
+#include "wx/directionflags.h"
 #include "wx/dc.h"
 #include "wx/settings.h"
 #include "wx/geometry/point.h"
@@ -142,7 +143,7 @@ public:
                               wxDC& dc,
                               const std::string& text,
                               const wxRect& rect,
-                              unsigned int align = wxALIGN_LEFT | wxALIGN_TOP,
+                              AlignmentFlags align = AlignmentFlags{wxAlignment::Left, wxAlignment::Top},
                               unsigned int flags = 0,
                               wxEllipsizeMode ellipsizeMode = wxEllipsizeMode::End) override;
 
@@ -409,14 +410,14 @@ wxRendererGeneric::DrawHeaderButtonContents(wxWindow *win,
             switch (params->m_labelAlignment)
             {
                 default:
-                case wxALIGN_LEFT:
+                case wxAlignment::Left:
                     break;
 
-                case wxALIGN_CENTER:
+                case wxAlignment::Center:
                     x += extraSpace/2;
                     break;
 
-                case wxALIGN_RIGHT:
+                case wxAlignment::Right:
                     x += extraSpace;
                     break;
             }
@@ -467,14 +468,14 @@ wxRendererGeneric::DrawHeaderButtonContents(wxWindow *win,
             switch (params->m_labelAlignment)
             {
                 default:
-                case wxALIGN_LEFT:
+                case wxAlignment::Left:
                     break;
 
-                case wxALIGN_CENTER:
+                case wxAlignment::Center:
                     x += (availWidth - textSize.x)/2;
                     break;
 
-                case wxALIGN_RIGHT:
+                case wxAlignment::Right:
                     x += availWidth - textSize.x;
                     break;
             }
@@ -968,7 +969,7 @@ wxRendererGeneric::DrawItemText(wxWindow* WXUNUSED(win),
                                 wxDC& dc,
                                 const std::string& text,
                                 const wxRect& rect,
-                                unsigned int align,
+                                AlignmentFlags align,
                                 unsigned int flags,
                                 wxEllipsizeMode ellipsizeMode)
 {

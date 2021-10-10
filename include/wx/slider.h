@@ -111,7 +111,7 @@ protected:
     virtual void DoSetTickFreq(int WXUNUSED(freq)) { /* unsupported by default */ }
 
     // choose the default border for this window
-    wxBorder GetDefaultBorder() const override { return wxBORDER_NONE; }
+    wxBorder GetDefaultBorder() const override { return wxBorder::None; }
 
     // adjust value according to wxSL_INVERSE style
     virtual int ValueInvertOrNot(int value) const

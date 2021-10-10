@@ -32,18 +32,10 @@ bool wxChoice::Create(wxWindow *parent,
                       const wxPoint& pos,
                       const wxSize& size,
                       const std::vector<std::string>& choices,
-                      unsigned int style,
+                      ChoiceDlgFlags style,
                       const wxValidator& validator,
                       const std::string& name)
 {
-    // Experience shows that wxChoice vs. wxComboBox distinction confuses
-    // quite a few people - try to help them
-    wxASSERT_MSG( !(style & wxCB_DROPDOWN) &&
-                  !(style & wxCB_READONLY) &&
-                  !(style & wxCB_SIMPLE),
-                  wxT("this style flag is ignored by wxChoice, you ")
-                  wxT("probably want to use a wxComboBox") );
-
     return CreateAndInit(parent, id, pos, size, choices, style,
                          validator, name);
 }
@@ -53,7 +45,7 @@ bool wxChoice::CreateAndInit(wxWindow *parent,
                              const wxPoint& pos,
                              const wxSize& size,
                              const std::vector<std::string>& choices,
-                             unsigned int style,
+                             ChoiceDlgFlags style,
                              const wxValidator& validator,
                              const std::string& name)
 {
@@ -112,7 +104,7 @@ DWORD wxChoice::MSWGetStyle(unsigned int style, DWORD *exstyle) const
     // we never have an external border
     DWORD msStyle = wxControl::MSWGetStyle
                       (
-                        (style & ~wxBORDER_MASK) | wxBORDER_NONE, exstyle
+                        (style & ~wxBORDER_MASK) | wxBorder::None, exstyle
                       );
 
     // WS_CLIPSIBLINGS is useful with wxChoice and doesn't seem to result in
@@ -121,7 +113,7 @@ DWORD wxChoice::MSWGetStyle(unsigned int style, DWORD *exstyle) const
 
     // wxChoice-specific styles
     msStyle |= CBS_DROPDOWNLIST | WS_HSCROLL | WS_VSCROLL;
-    if ( style & wxCB_SORT )
+    if ( style & ComboStyles::Sort )
         msStyle |= CBS_SORT;
 
     return msStyle;
@@ -178,7 +170,7 @@ int wxChoice::DoInsertItems(const std::vector<std::string>& items,
     const bool append = pos == GetCount();
 
     // use CB_ADDSTRING when appending at the end to make sure the control is
-    // resorted if it has wxCB_SORT style
+    // resorted if it has ComboStyles::Sort style
     const unsigned msg = append ? CB_ADDSTRING : CB_INSERTSTRING;
 
     if ( append )
@@ -467,7 +459,7 @@ void wxChoice::DoMoveWindow(wxRect boundary)
     // don't make the drop down list too tall, arbitrarily limit it to 30
     // items max and also don't make it too small if it's currently empty
     size_t nItems = GetCount();
-    if (!HasFlag(wxCB_SIMPLE))
+    if (!HasFlag(ComboStyles::Simple))
     {
         if (!nItems)
             nItems = 9;
@@ -476,7 +468,7 @@ void wxChoice::DoMoveWindow(wxRect boundary)
     }
 
     int heightWithItems = 0;
-    if (!HasFlag(wxCB_SIMPLE))
+    if (!HasFlag(ComboStyles::Simple))
     {
         // The extra item (" + 1") is required to prevent a vertical
         // scrollbar from appearing with comctl32.dll versions earlier
@@ -590,7 +582,7 @@ wxSize wxChoice::DoGetSizeFromTextSize(int xlen, int ylen) const
     }
 
     // set height on our own
-    if( HasFlag( wxCB_SIMPLE ) )
+    if( HasFlag( ComboStyles::Simple ) )
         tsize.y = SetHeightSimpleComboBox(GetCount());
     else
         tsize.y = EDIT_HEIGHT_FROM_CHAR_HEIGHT(cHeight);
@@ -608,7 +600,7 @@ wxSize wxChoice::DoGetSizeFromTextSize(int xlen, int ylen) const
 
 void wxChoice::MSWDoPopupOrDismiss(bool show)
 {
-    wxASSERT_MSG( !HasFlag(wxCB_SIMPLE),
+    wxASSERT_MSG( !HasFlag(ComboStyles::Simple),
                   wxT("can't popup/dismiss the list for simple combo box") );
 
     // we *must* set focus to the combobox before showing or hiding the drop

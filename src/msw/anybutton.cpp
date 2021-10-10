@@ -123,6 +123,8 @@ namespace
 class wxODButtonImageData : public wxButtonImageData
 {
 public:
+    using enum wxDirection;
+
     wxODButtonImageData(wxAnyButton *btn, const wxBitmap& bitmap)
     {
         SetBitmap(bitmap, wxAnyButton::State_Normal);
@@ -176,7 +178,7 @@ private:
     // from the drawing code
     wxBitmap m_bitmaps[wxAnyButton::State_Max];
     wxSize m_margin;
-    wxDirection m_dir{wxLEFT};
+    wxDirection m_dir{Left};
 };
 
 #if wxUSE_UXTHEME
@@ -273,16 +275,16 @@ public:
                 [[fallthrough]];
 
             case BUTTON_IMAGELIST_ALIGN_LEFT:
-                return wxLEFT;
+                return wxDirection::Left;
 
             case BUTTON_IMAGELIST_ALIGN_RIGHT:
-                return wxRIGHT;
+                return wxDirection::Right;
 
             case BUTTON_IMAGELIST_ALIGN_TOP:
-                return wxTOP;
+                return wxDirection::Top;
 
             case BUTTON_IMAGELIST_ALIGN_BOTTOM:
-                return wxBOTTOM;
+                return wxDirection::Bottom;
         }
     }
 
@@ -295,19 +297,19 @@ public:
                 wxFAIL_MSG( "invalid direction" );
                 [[fallthrough]];
 
-            case wxLEFT:
+            case wxDirection::Left:
                 alignNew = BUTTON_IMAGELIST_ALIGN_LEFT;
                 break;
 
-            case wxRIGHT:
+            case wxDirection::Right:
                 alignNew = BUTTON_IMAGELIST_ALIGN_RIGHT;
                 break;
 
-            case wxTOP:
+            case wxDirection::Top:
                 alignNew = BUTTON_IMAGELIST_ALIGN_TOP;
                 break;
 
-            case wxBOTTOM:
+            case wxDirection::Bottom:
                 alignNew = BUTTON_IMAGELIST_ALIGN_BOTTOM;
                 break;
         }
@@ -347,7 +349,7 @@ private:
 // mode a do the job on our own.
 static inline bool NeedsOwnerDrawnForImageLayout(wxDirection dir, int margH, int margV)
 {
-    return (dir == wxRIGHT && margH != 0) || (dir == wxBOTTOM && margV != 0);
+    return (dir == wxDirection::Right && margH != 0) || (dir == wxDirection::Bottom && margV != 0);
 }
 
 } // anonymous namespace
@@ -495,8 +497,10 @@ void wxAnyButton::AdjustForBitmapSize(wxSize &size) const
     // account for the bitmap size, including the user-specified margins
     const wxSize sizeBmp = m_imageData->GetBitmap(State_Normal).GetSize()
                                 + 2*m_imageData->GetBitmapMargins();
+
     const wxDirection dirBmp = m_imageData->GetBitmapPosition();
-    if ( dirBmp == wxLEFT || dirBmp == wxRIGHT )
+
+    if ( dirBmp == wxDirection::Left || dirBmp == wxDirection::Right )
     {
         size.x += sizeBmp.x;
         if ( sizeBmp.y > size.y )
@@ -522,7 +526,7 @@ void wxAnyButton::AdjustForBitmapMargins(wxSize& size) const
     // and also for the margins we always add internally (unless we have no
     // border at all in which case the button has exactly the same size as
     // bitmap and so no margins should be used)
-    if ( !HasFlag(wxBORDER_NONE) )
+    if ( !HasFlag(wxBorder::None) )
     {
         int marginH = 0,
             marginV = 0;
@@ -1316,7 +1320,7 @@ bool wxAnyButton::MSWOnDraw(WXDRAWITEMSTRUCT *wxdis)
     CopyRect(&rectBtn, &lpDIS->rcItem);
 
     // draw the button background
-    if ( !HasFlag(wxBORDER_NONE) )
+    if ( !HasFlag(wxBorder::None) )
     {
 #if wxUSE_UXTHEME
         if ( wxUxThemeIsActive() )
@@ -1397,24 +1401,24 @@ bool wxAnyButton::MSWOnDraw(WXDRAWITEMSTRUCT *wxdis)
                     wxFAIL_MSG( "invalid direction" );
                     [[fallthrough]];
 
-                case wxLEFT:
+                case wxDirection::Left:
                     rectBitmap.x = rectButton.x + margin.x;
                     rectButton.x += sizeBmpWithMargins.x;
                     rectButton.width -= sizeBmpWithMargins.x;
                     break;
 
-                case wxRIGHT:
+                case wxDirection::Right:
                     rectBitmap.x = rectButton.GetRight() - sizeBmp.x - margin.x;
                     rectButton.width -= sizeBmpWithMargins.x;
                     break;
 
-                case wxTOP:
+                case wxDirection::Top:
                     rectBitmap.y = rectButton.y + margin.y;
                     rectButton.y += sizeBmpWithMargins.y;
                     rectButton.height -= sizeBmpWithMargins.y;
                     break;
 
-                case wxBOTTOM:
+                case wxDirection::Bottom:
                     rectBitmap.y = rectButton.GetBottom() - sizeBmp.y - margin.y;
                     rectButton.height -= sizeBmpWithMargins.y;
                     break;

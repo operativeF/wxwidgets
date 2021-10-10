@@ -14,6 +14,7 @@
 
 #if wxUSE_RADIOBOX
 
+#include "wx/directionflags.h"
 #include "wx/radiobox.h"
 
 #ifndef WX_PRECOMP    
@@ -43,19 +44,19 @@ wxDEFINE_FLAGS( wxRadioBoxStyle )
 wxBEGIN_FLAGS( wxRadioBoxStyle )
 // new style border flags, we put them first to
 // use them for streaming out
-wxFLAGS_MEMBER(wxBORDER_SIMPLE)
-wxFLAGS_MEMBER(wxBORDER_SUNKEN)
+wxFLAGS_MEMBER(wxBorder::Simple)
+wxFLAGS_MEMBER(wxBorder::Sunken)
 wxFLAGS_MEMBER(wxBORDER_DOUBLE)
-wxFLAGS_MEMBER(wxBORDER_RAISED)
-wxFLAGS_MEMBER(wxBORDER_STATIC)
-wxFLAGS_MEMBER(wxBORDER_NONE)
+wxFLAGS_MEMBER(wxBorder::Raised)
+wxFLAGS_MEMBER(wxBorder::Static)
+wxFLAGS_MEMBER(wxBorder::None)
 
 // old style border flags
-wxFLAGS_MEMBER(wxSIMPLE_BORDER)
-wxFLAGS_MEMBER(wxSUNKEN_BORDER)
+wxFLAGS_MEMBER(wxBorder::Simple)
+wxFLAGS_MEMBER(wxBorder::Sunken)
 wxFLAGS_MEMBER(wxDOUBLE_BORDER)
-wxFLAGS_MEMBER(wxRAISED_BORDER)
-wxFLAGS_MEMBER(wxSTATIC_BORDER)
+wxFLAGS_MEMBER(wxBorder::Raised)
+wxFLAGS_MEMBER(wxBorder::Static)
 wxFLAGS_MEMBER(wxBORDER)
 
 // standard window styles
@@ -131,7 +132,7 @@ int wxRadioBoxBase::GetNextItem(int item, wxDirection dir, unsigned int style) c
     {
         switch ( dir )
         {
-            case wxUP:
+            case wxDirection::Up:
                 if ( horz )
                 {
                     item -= numCols;
@@ -143,7 +144,7 @@ int wxRadioBoxBase::GetNextItem(int item, wxDirection dir, unsigned int style) c
                 }
                 break;
 
-            case wxLEFT:
+            case wxDirection::Left:
                 if ( horz )
                 {
                     if ( !item-- )
@@ -155,7 +156,7 @@ int wxRadioBoxBase::GetNextItem(int item, wxDirection dir, unsigned int style) c
                 }
                 break;
 
-            case wxDOWN:
+            case wxDirection::Down:
                 if ( horz )
                 {
                     item += numCols;
@@ -167,7 +168,7 @@ int wxRadioBoxBase::GetNextItem(int item, wxDirection dir, unsigned int style) c
                 }
                 break;
 
-            case wxRIGHT:
+            case wxDirection::Right:
                 if ( horz )
                 {
                     if ( ++item == count )

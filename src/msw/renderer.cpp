@@ -304,7 +304,7 @@ public:
                               wxDC& dc,
                               const std::string& text,
                               const wxRect& rect,
-                              unsigned int align = wxALIGN_LEFT | wxALIGN_TOP,
+                              unsigned int align = wxAlignment::Left | wxAlignment::Top,
                               unsigned int flags = 0,
                               wxEllipsizeMode ellipsizeMode = wxEllipsizeMode::End) override;
 
@@ -1082,9 +1082,9 @@ void wxRendererXP::DrawItemText(wxWindow* win,
         }
 
         DWORD textFlags = DT_NOPREFIX;
-        if ( align & wxALIGN_CENTER_HORIZONTAL )
+        if ( align & wxAlignment::CenterHorizontal )
             textFlags |= DT_CENTER;
-        else if ( align & wxALIGN_RIGHT )
+        else if ( align & wxAlignment::Right )
         {
             textFlags |= DT_RIGHT;
             rc.right--; // Alignment is inconsistent with DrawLabel otherwise
@@ -1092,9 +1092,9 @@ void wxRendererXP::DrawItemText(wxWindow* win,
         else
             textFlags |= DT_LEFT;
 
-        if ( align & wxALIGN_BOTTOM )
+        if ( align & wxAlignment::Bottom )
             textFlags |= DT_BOTTOM;
-        else if ( align & wxALIGN_CENTER_VERTICAL )
+        else if ( align & wxAlignment::CenterVertical )
             textFlags |= DT_VCENTER;
         else
             textFlags |= DT_TOP;

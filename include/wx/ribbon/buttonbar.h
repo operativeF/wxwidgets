@@ -169,7 +169,7 @@ public:
 protected:
     friend class wxRibbonButtonBarEvent;
     wxSize DoGetBestSize() const override;
-    wxBorder GetDefaultBorder() const override { return wxBORDER_NONE; }
+    wxBorder GetDefaultBorder() const override { return wxBorder::None; }
 
     void OnEraseBackground(wxEraseEvent& evt);
     void OnPaint(wxPaintEvent& evt);

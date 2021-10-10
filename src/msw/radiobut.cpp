@@ -290,7 +290,7 @@ DWORD wxRadioButton::MSWGetStyle(unsigned int style, DWORD *exstyle) const
 
     if ( style & wxCLIP_SIBLINGS )
         msStyle |= WS_CLIPSIBLINGS;
-    if ( style & wxALIGN_RIGHT )
+    if ( style & wxAlignment::Right )
         msStyle |= BS_LEFTTEXT | BS_RIGHT;
 
 

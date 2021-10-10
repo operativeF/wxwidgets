@@ -212,7 +212,7 @@ protected:
             wxWindow::DoSetToolTip(tip);
         }
 #endif // wxUSE_TOOLTIPS
-    wxBorder GetDefaultBorder() const override { return wxBORDER_NONE; }
+    wxBorder GetDefaultBorder() const override { return wxBorder::None; }
 
 
     // internal helpers & data:

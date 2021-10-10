@@ -11,11 +11,10 @@
 #ifndef _WX_PROPDLG_H_
 #define _WX_PROPDLG_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_BOOKCTRL
 
 #include "wx/dialog.h"
+#include "wx/dialogflags.h"
 
 class WXDLLIMPEXP_FWD_CORE wxBookCtrlBase;
 
@@ -123,7 +122,7 @@ public:
 /// Operations
 
     // Creates the buttons
-    virtual void CreateButtons(unsigned int flags = wxOK|wxCANCEL);
+    virtual void CreateButtons(DialogFlags flags = DialogFlags{wxDialogFlags::OK, wxDialogFlags::Cancel});
 
     // Lay out the dialog, to be called after pages have been created
     virtual void LayoutDialog(unsigned int centreFlags = wxBOTH);
