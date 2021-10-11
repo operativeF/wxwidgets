@@ -114,20 +114,20 @@ bool wxGIFHandler::LoadFile(wxImage *image, wxInputStream& stream,
     wxGIFDecoder decod;
     switch ( decod.LoadGIF(stream) )
     {
-        case wxGIF_OK:
+        case wxGIFErrorCode::OK:
             break;
 
-        case wxGIF_INVFORMAT:
+        case wxGIFErrorCode::InvFormat:
             if ( verbose )
                 wxLogError(_("GIF: error in GIF image format."));
             return false;
 
-        case wxGIF_MEMERR:
+        case wxGIFErrorCode::MemErr:
             if ( verbose )
                 wxLogError(_("GIF: not enough memory."));
             return false;
 
-        case wxGIF_TRUNCATED:
+        case wxGIFErrorCode::Truncated:
             if ( verbose )
                 wxLogError(_("GIF: data stream seems to be truncated."));
 
@@ -169,7 +169,7 @@ int wxGIFHandler::DoGetImageCount( wxInputStream& stream )
 {
     wxGIFDecoder decod;
     wxGIFErrorCode error = decod.LoadGIF(stream);
-    if ( (error != wxGIF_OK) && (error != wxGIF_TRUNCATED) )
+    if ( (error != wxGIFErrorCode::OK) && (error != wxGIFErrorCode::Truncated) )
         return -1;
 
     // NOTE: this function modifies the current stream position but it's ok

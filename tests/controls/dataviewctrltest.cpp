@@ -118,9 +118,9 @@ MultiColumnsDataViewCtrlTestCase::MultiColumnsDataViewCtrlTestCase()
     m_dvc = std::make_unique<wxDataViewListCtrl>(wxTheApp->GetTopWindow(), wxID_ANY);
 
     m_firstColumn =
-        m_dvc->AppendTextColumn(wxString(), wxDATAVIEW_CELL_INERT, m_firstColumnWidth);
+        m_dvc->AppendTextColumn(wxString(), wxDataViewCellMode::Inert, m_firstColumnWidth);
     m_lastColumn =
-        m_dvc->AppendTextColumn(wxString(), wxDATAVIEW_CELL_INERT);
+        m_dvc->AppendTextColumn(wxString(), wxDataViewCellMode::Inert);
 
     // Set size after columns appending to extend size of the last column.
     m_dvc->SetSize(m_size);

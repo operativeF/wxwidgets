@@ -2884,7 +2884,7 @@ bool wxDataViewTreeCtrl::Create( wxWindow *parent, wxWindowID id,
     (
         "",                 // no label (header is not shown anyhow)
         0,                          // the only model column
-        wxDATAVIEW_CELL_EDITABLE,
+        wxDataViewCellMode::Editable,
         -1,                         // default width
         wxALIGN_NOT,                //  and alignment
         0                           // not resizable

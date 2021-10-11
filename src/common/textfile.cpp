@@ -56,11 +56,11 @@ bool wxTextFile::OnOpen(const std::string& strBufferName, wxTextBufferOpenMode o
 
     switch ( openMode )
     {
-        case ReadAccess:
+        case wxTextBufferOpenMode::ReadAccess:
             fileOpenMode = wxFile::read;
             break;
 
-        case WriteAccess:
+        case wxTextBufferOpenMode::WriteAccess:
             fileOpenMode = wxFile::write;
             break;
     }

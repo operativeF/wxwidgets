@@ -63,7 +63,7 @@ bool wxDynamicLibrary::Load(const wxString& libnameOrig, unsigned int flags)
         wxFileName::SplitPath(libname, nullptr, nullptr, &ext);
         if ( ext.empty() )
         {
-            libname += GetDllExt(wxDL_MODULE);
+            libname += GetDllExt(wxDynamicLibraryCategory::Module);
         }
     }
 
@@ -116,9 +116,9 @@ wxString wxDynamicLibrary::GetDllExt(wxDynamicLibraryCategory cat)
 #elif defined(__DARWIN__)
     switch ( cat )
     {
-        case wxDL_LIBRARY:
+        case wxDynamicLibraryCategory::Library:
             return ".dylib";
-        case wxDL_MODULE:
+        case wxDynamicLibraryCategory::Module:
             return ".bundle";
     }
     wxFAIL_MSG("unreachable");
@@ -139,11 +139,11 @@ wxDynamicLibrary::CanonicalizeName(const wxString& name,
 #if defined(__UNIX__)
     switch ( cat )
     {
-        case wxDL_LIBRARY:
+        case wxDynamicLibraryCategory::Library:
             // Library names should start with "lib" under Unix.
             nameCanonic = "lib";
             break;
-        case wxDL_MODULE:
+        case wxDynamicLibraryCategory::Module:
             // Module names are arbitrary and should have no prefix added.
             break;
     }
@@ -159,7 +159,7 @@ wxString wxDynamicLibrary::CanonicalizePluginName(const wxString& name,
                                                   wxPluginCategory cat)
 {
     wxString suffix;
-    if ( cat == wxDL_PLUGIN_GUI )
+    if ( cat == wxPluginCategory::Gui )
     {
         suffix = wxPlatformInfo::Get().GetPortIdShortName();
     }
@@ -200,7 +200,7 @@ wxString wxDynamicLibrary::CanonicalizePluginName(const wxString& name,
     #endif
 #endif
 
-    return CanonicalizeName(name + suffix, wxDL_MODULE);
+    return CanonicalizeName(name + suffix, wxDynamicLibraryCategory::Module);
 }
 
 /*static*/

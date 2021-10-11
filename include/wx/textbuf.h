@@ -185,7 +185,7 @@ public:
                const wxMBConv& conv = wxConvAuto());
 
 protected:
-    enum wxTextBufferOpenMode { ReadAccess, WriteAccess };
+    enum class wxTextBufferOpenMode { ReadAccess, WriteAccess };
 
     // Must implement these in derived classes.
     virtual bool OnExists() const = 0;

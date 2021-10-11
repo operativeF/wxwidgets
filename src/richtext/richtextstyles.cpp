@@ -611,22 +611,22 @@ void wxRichTextStyleListBox::UpdateStyles()
         m_styleNames.Clear();
 
         size_t i;
-        if (GetStyleType() == wxRICHTEXT_STYLE_ALL || GetStyleType() == wxRICHTEXT_STYLE_PARAGRAPH)
+        if (GetStyleType() == wxRichTextStyleType::All || GetStyleType() == wxRichTextStyleType::Paragraph)
         {
             for (i = 0; i < GetStyleSheet()->GetParagraphStyleCount(); i++)
                 m_styleNames.Add(GetStyleSheet()->GetParagraphStyle(i)->GetName() + wxT("|P"));
         }
-        if (GetStyleType() == wxRICHTEXT_STYLE_ALL || GetStyleType() == wxRICHTEXT_STYLE_CHARACTER)
+        if (GetStyleType() == wxRichTextStyleType::All || GetStyleType() == wxRichTextStyleType::Character)
         {
             for (i = 0; i < GetStyleSheet()->GetCharacterStyleCount(); i++)
                 m_styleNames.Add(GetStyleSheet()->GetCharacterStyle(i)->GetName() + wxT("|C"));
         }
-        if (GetStyleType() == wxRICHTEXT_STYLE_ALL || GetStyleType() == wxRICHTEXT_STYLE_LIST)
+        if (GetStyleType() == wxRichTextStyleType::All || GetStyleType() == wxRichTextStyleType::List)
         {
             for (i = 0; i < GetStyleSheet()->GetListStyleCount(); i++)
                 m_styleNames.Add(GetStyleSheet()->GetListStyle(i)->GetName() + wxT("|L"));
         }
-        if (GetStyleType() == wxRICHTEXT_STYLE_ALL || GetStyleType() == wxRICHTEXT_STYLE_BOX)
+        if (GetStyleType() == wxRichTextStyleType::All || GetStyleType() == wxRichTextStyleType::Box)
         {
             for (i = 0; i < GetStyleSheet()->GetBoxStyleCount(); i++)
                 m_styleNames.Add(GetStyleSheet()->GetBoxStyle(i)->GetName() + wxT("|B"));
@@ -662,13 +662,13 @@ void wxRichTextStyleListBox::UpdateStyles()
 int wxRichTextStyleListBox::GetIndexForStyle(const std::string& name) const
 {
     std::string s{name};
-    if (GetStyleType() == wxRICHTEXT_STYLE_PARAGRAPH)
+    if (GetStyleType() == wxRichTextStyleType::Paragraph)
         s += "|P";
-    else if (GetStyleType() == wxRICHTEXT_STYLE_CHARACTER)
+    else if (GetStyleType() == wxRichTextStyleType::Character)
         s += "|C";
-    else if (GetStyleType() == wxRICHTEXT_STYLE_LIST)
+    else if (GetStyleType() == wxRichTextStyleType::List)
         s += "|L";
-    else if (GetStyleType() == wxRICHTEXT_STYLE_BOX)
+    else if (GetStyleType() == wxRichTextStyleType::Box)
         s += "|B";
     else
     {
@@ -924,34 +924,34 @@ std::string wxRichTextStyleListBox::GetStyleToShowInIdleTime(wxRichTextCtrl* ctr
     {
         wxRichTextApplyStyle(attr, ctrl->GetDefaultStyleEx());
 
-        if ((styleType == wxRICHTEXT_STYLE_ALL || styleType == wxRICHTEXT_STYLE_CHARACTER) &&
+        if ((styleType == wxRichTextStyleType::All || styleType == wxRichTextStyleType::Character) &&
                           !attr.GetCharacterStyleName().IsEmpty())
             styleName = attr.GetCharacterStyleName();
-        else if ((styleType == wxRICHTEXT_STYLE_ALL || styleType == wxRICHTEXT_STYLE_PARAGRAPH) &&
+        else if ((styleType == wxRichTextStyleType::All || styleType == wxRichTextStyleType::Paragraph) &&
                           !attr.GetParagraphStyleName().IsEmpty())
             styleName = attr.GetParagraphStyleName();
-        else if ((styleType == wxRICHTEXT_STYLE_ALL || styleType == wxRICHTEXT_STYLE_LIST) &&
+        else if ((styleType == wxRichTextStyleType::All || styleType == wxRichTextStyleType::List) &&
                           !attr.GetListStyleName().IsEmpty())
             styleName = attr.GetListStyleName();
         // TODO: when we have a concept of focused object (text box), we'll
         // use the paragraph style name of the focused object as the frame style name.
 #if 0
-        else if ((styleType == wxRICHTEXT_STYLE_ALL || styleType == wxRICHTEXT_STYLE_BOX) &&
+        else if ((styleType == wxRichTextStyleType::All || styleType == wxRichTextStyleType::Box) &&
                           !attr.GetBoxStyleName().IsEmpty())
             styleName = attr.GetBoxStyleName();
 #endif
     }
-    else if ((styleType == wxRICHTEXT_STYLE_ALL || styleType == wxRICHTEXT_STYLE_CHARACTER) &&
+    else if ((styleType == wxRichTextStyleType::All || styleType == wxRichTextStyleType::Character) &&
              !attr.GetCharacterStyleName().IsEmpty())
     {
         styleName = attr.GetCharacterStyleName();
     }
-    else if ((styleType == wxRICHTEXT_STYLE_ALL || styleType == wxRICHTEXT_STYLE_PARAGRAPH) &&
+    else if ((styleType == wxRichTextStyleType::All || styleType == wxRichTextStyleType::Paragraph) &&
              !attr.GetParagraphStyleName().IsEmpty())
     {
         styleName = attr.GetParagraphStyleName();
     }
-    else if ((styleType == wxRICHTEXT_STYLE_ALL || styleType == wxRICHTEXT_STYLE_LIST) &&
+    else if ((styleType == wxRichTextStyleType::All || styleType == wxRichTextStyleType::List) &&
              !attr.GetListStyleName().IsEmpty())
     {
         styleName = attr.GetListStyleName();
@@ -1099,23 +1099,23 @@ void wxRichTextStyleListCtrl::OnSize(wxSizeEvent& WXUNUSED(event))
 /// Get the choice index for style type
 int wxRichTextStyleListCtrl::StyleTypeToIndex(wxRichTextStyleListBox::wxRichTextStyleType styleType)
 {
-    if (styleType == wxRichTextStyleListBox::wxRICHTEXT_STYLE_ALL)
+    if (styleType == wxRichTextStyleListBox::wxRichTextStyleType::All)
     {
         return 0;
     }
-    else if (styleType == wxRichTextStyleListBox::wxRICHTEXT_STYLE_PARAGRAPH)
+    else if (styleType == wxRichTextStyleListBox::wxRichTextStyleType::Paragraph)
     {
         return 1;
     }
-    else if (styleType == wxRichTextStyleListBox::wxRICHTEXT_STYLE_CHARACTER)
+    else if (styleType == wxRichTextStyleListBox::wxRichTextStyleType::Character)
     {
         return 2;
     }
-    else if (styleType == wxRichTextStyleListBox::wxRICHTEXT_STYLE_LIST)
+    else if (styleType == wxRichTextStyleListBox::wxRichTextStyleType::List)
     {
         return 3;
     }
-    else if (styleType == wxRichTextStyleListBox::wxRICHTEXT_STYLE_BOX)
+    else if (styleType == wxRichTextStyleListBox::wxRichTextStyleType::Box)
     {
         return 4;
     }
@@ -1126,15 +1126,15 @@ int wxRichTextStyleListCtrl::StyleTypeToIndex(wxRichTextStyleListBox::wxRichText
 wxRichTextStyleListBox::wxRichTextStyleType wxRichTextStyleListCtrl::StyleIndexToType(int i)
 {
     if (i == 1)
-        return wxRichTextStyleListBox::wxRICHTEXT_STYLE_PARAGRAPH;
+        return wxRichTextStyleListBox::wxRichTextStyleType::Paragraph;
     else if (i == 2)
-        return wxRichTextStyleListBox::wxRICHTEXT_STYLE_CHARACTER;
+        return wxRichTextStyleListBox::wxRichTextStyleType::Character;
     else if (i == 3)
-        return wxRichTextStyleListBox::wxRICHTEXT_STYLE_LIST;
+        return wxRichTextStyleListBox::wxRichTextStyleType::List;
     else if (i == 4)
-        return wxRichTextStyleListBox::wxRICHTEXT_STYLE_BOX;
+        return wxRichTextStyleListBox::wxRichTextStyleType::Box;
 
-    return wxRichTextStyleListBox::wxRICHTEXT_STYLE_ALL;
+    return wxRichTextStyleListBox::wxRichTextStyleType::All;
 }
 
 /// Associates the control with a style manager
@@ -1191,7 +1191,7 @@ wxRichTextStyleListBox::wxRichTextStyleType wxRichTextStyleListCtrl::GetStyleTyp
     if (m_styleListBox)
         return m_styleListBox->GetStyleType();
     else
-        return wxRichTextStyleListBox::wxRICHTEXT_STYLE_ALL;
+        return wxRichTextStyleListBox::wxRichTextStyleType::All;
 }
 
 /// Updates the style list box

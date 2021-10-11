@@ -19,13 +19,14 @@
 #include "wx/print.h"
 #include "wx/printdlg.h"
 
-#define wxRICHTEXT_PRINT_MAX_PAGES 99999
+constexpr auto wxRICHTEXT_PRINT_MAX_PAGES = 99999;
 
 // Header/footer page identifiers
-enum wxRichTextOddEvenPage {
-    wxRICHTEXT_PAGE_ODD,
-    wxRICHTEXT_PAGE_EVEN,
-    wxRICHTEXT_PAGE_ALL
+enum class wxRichTextOddEvenPage
+{
+    Odd,
+    Even,
+    All
 };
 
 // Header/footer text locations
@@ -43,11 +44,8 @@ enum class wxRichTextPageLocation {
 class WXDLLIMPEXP_RICHTEXT wxRichTextHeaderFooterData: public wxObject
 {
 public:
-    wxRichTextHeaderFooterData() { Init(); }
+    wxRichTextHeaderFooterData() = default;
     wxRichTextHeaderFooterData(const wxRichTextHeaderFooterData& data) { Copy(data); }
-
-    /// Initialise
-    void Init() { m_headerMargin = 20; m_footerMargin = 20; m_showOnFirstPage = true; }
 
     /// Copy
     void Copy(const wxRichTextHeaderFooterData& data);
@@ -55,13 +53,13 @@ public:
     /// Assignment
     void operator= (const wxRichTextHeaderFooterData& data) { Copy(data); }
 
-    /// Set/get header text, e.g. wxRICHTEXT_PAGE_ODD, wxRichTextPageLocation::Left
-    void SetHeaderText(const wxString& text, wxRichTextOddEvenPage page = wxRICHTEXT_PAGE_ALL, wxRichTextPageLocation location = wxRichTextPageLocation::Centre);
-    wxString GetHeaderText(wxRichTextOddEvenPage page = wxRICHTEXT_PAGE_EVEN, wxRichTextPageLocation location = wxRichTextPageLocation::Centre) const;
+    /// Set/get header text, e.g. wxRichTextOddEvenPage::Odd, wxRichTextPageLocation::Left
+    void SetHeaderText(const wxString& text, wxRichTextOddEvenPage page = wxRichTextOddEvenPage::All, wxRichTextPageLocation location = wxRichTextPageLocation::Centre);
+    wxString GetHeaderText(wxRichTextOddEvenPage page = wxRichTextOddEvenPage::Even, wxRichTextPageLocation location = wxRichTextPageLocation::Centre) const;
 
-    /// Set/get footer text, e.g. wxRICHTEXT_PAGE_ODD, wxRichTextPageLocation::Left
-    void SetFooterText(const wxString& text, wxRichTextOddEvenPage page = wxRICHTEXT_PAGE_ALL, wxRichTextPageLocation location = wxRichTextPageLocation::Centre);
-    wxString GetFooterText(wxRichTextOddEvenPage page = wxRICHTEXT_PAGE_EVEN, wxRichTextPageLocation location = wxRichTextPageLocation::Centre) const;
+    /// Set/get footer text, e.g. wxRichTextOddEvenPage::Odd, wxRichTextPageLocation::Left
+    void SetFooterText(const wxString& text, wxRichTextOddEvenPage page = wxRichTextOddEvenPage::All, wxRichTextPageLocation location = wxRichTextPageLocation::Centre);
+    wxString GetFooterText(wxRichTextOddEvenPage page = wxRichTextOddEvenPage::Even, wxRichTextPageLocation location = wxRichTextPageLocation::Centre) const;
 
     /// Set/get text
     void SetText(const wxString& text, int headerFooter, wxRichTextOddEvenPage page, wxRichTextPageLocation location);
@@ -95,9 +93,9 @@ private:
     wxString    m_text[12];
     wxFont      m_font;
     wxColour    m_colour;
-    int         m_headerMargin;
-    int         m_footerMargin;
-    bool        m_showOnFirstPage;
+    int         m_headerMargin{20};
+    int         m_footerMargin{20};
+    bool        m_showOnFirstPage{true};
 };
 
 /*!
@@ -184,13 +182,13 @@ public:
     void SetHeaderFooterData(const wxRichTextHeaderFooterData& data) { m_headerFooterData = data; }
     const wxRichTextHeaderFooterData& GetHeaderFooterData() const { return m_headerFooterData; }
 
-    /// Set/get header text, e.g. wxRICHTEXT_PAGE_ODD, wxRichTextPageLocation::Left
-    void SetHeaderText(const wxString& text, wxRichTextOddEvenPage page = wxRICHTEXT_PAGE_ALL, wxRichTextPageLocation location = wxRichTextPageLocation::Centre);
-    wxString GetHeaderText(wxRichTextOddEvenPage page = wxRICHTEXT_PAGE_EVEN, wxRichTextPageLocation location = wxRichTextPageLocation::Centre) const;
+    /// Set/get header text, e.g. wxRichTextOddEvenPage::Odd, wxRichTextPageLocation::Left
+    void SetHeaderText(const wxString& text, wxRichTextOddEvenPage page = wxRichTextOddEvenPage::All, wxRichTextPageLocation location = wxRichTextPageLocation::Centre);
+    wxString GetHeaderText(wxRichTextOddEvenPage page = wxRichTextOddEvenPage::Even, wxRichTextPageLocation location = wxRichTextPageLocation::Centre) const;
 
-    /// Set/get footer text, e.g. wxRICHTEXT_PAGE_ODD, wxRichTextPageLocation::Left
-    void SetFooterText(const wxString& text, wxRichTextOddEvenPage page = wxRICHTEXT_PAGE_ALL, wxRichTextPageLocation location = wxRichTextPageLocation::Centre);
-    wxString GetFooterText(wxRichTextOddEvenPage page = wxRICHTEXT_PAGE_EVEN, wxRichTextPageLocation location = wxRichTextPageLocation::Centre) const;
+    /// Set/get footer text, e.g. wxRichTextOddEvenPage::Odd, wxRichTextPageLocation::Left
+    void SetFooterText(const wxString& text, wxRichTextOddEvenPage page = wxRichTextOddEvenPage::All, wxRichTextPageLocation location = wxRichTextPageLocation::Centre);
+    wxString GetFooterText(wxRichTextOddEvenPage page = wxRichTextOddEvenPage::Even, wxRichTextPageLocation location = wxRichTextPageLocation::Centre) const;
 
     /// Show header/footer on first page, or not
     void SetShowOnFirstPage(bool show) { m_headerFooterData.SetShowOnFirstPage(show); }

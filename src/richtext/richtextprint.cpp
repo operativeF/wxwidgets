@@ -194,7 +194,7 @@ void wxRichTextPrintout::RenderPage(wxDC *dc, int page)
         dc->SetBackgroundMode(wxBrushStyle::Transparent);
 
         // Draw header, if any
-        wxRichTextOddEvenPage oddEven = ((page % 2) == 1) ? wxRICHTEXT_PAGE_ODD : wxRICHTEXT_PAGE_EVEN;
+        wxRichTextOddEvenPage oddEven = ((page % 2) == 1) ? wxRichTextOddEvenPage::Odd : wxRichTextOddEvenPage::Even;
 
         std::string headerTextCentre = m_headerFooterData.GetHeaderText(oddEven, wxRichTextPageLocation::Centre);
         std::string headerTextLeft = m_headerFooterData.GetHeaderText(oddEven, wxRichTextPageLocation::Left);
@@ -352,13 +352,13 @@ void wxRichTextPrintout::CalculateScaling(wxDC* dc, wxRect& textRect, wxRect& he
 
     headerRect = wxRect(0, 0, 0, 0);
 
-    if (!m_headerFooterData.GetHeaderText(wxRICHTEXT_PAGE_ODD, wxRichTextPageLocation::Left).IsEmpty() ||
-        !m_headerFooterData.GetHeaderText(wxRICHTEXT_PAGE_ODD, wxRichTextPageLocation::Centre).IsEmpty() ||
-        !m_headerFooterData.GetHeaderText(wxRICHTEXT_PAGE_ODD, wxRichTextPageLocation::Right).IsEmpty() ||
+    if (!m_headerFooterData.GetHeaderText(wxRichTextOddEvenPage::Odd, wxRichTextPageLocation::Left).IsEmpty() ||
+        !m_headerFooterData.GetHeaderText(wxRichTextOddEvenPage::Odd, wxRichTextPageLocation::Centre).IsEmpty() ||
+        !m_headerFooterData.GetHeaderText(wxRichTextOddEvenPage::Odd, wxRichTextPageLocation::Right).IsEmpty() ||
 
-        !m_headerFooterData.GetHeaderText(wxRICHTEXT_PAGE_EVEN, wxRichTextPageLocation::Left).IsEmpty() ||
-        !m_headerFooterData.GetHeaderText(wxRICHTEXT_PAGE_EVEN, wxRichTextPageLocation::Centre).IsEmpty() ||
-        !m_headerFooterData.GetHeaderText(wxRICHTEXT_PAGE_EVEN, wxRichTextPageLocation::Right).IsEmpty())
+        !m_headerFooterData.GetHeaderText(wxRichTextOddEvenPage::Even, wxRichTextPageLocation::Left).IsEmpty() ||
+        !m_headerFooterData.GetHeaderText(wxRichTextOddEvenPage::Even, wxRichTextPageLocation::Centre).IsEmpty() ||
+        !m_headerFooterData.GetHeaderText(wxRichTextOddEvenPage::Even, wxRichTextPageLocation::Right).IsEmpty())
     {
         if (m_headerFooterData.GetFont().IsOk())
             dc->SetFont(m_headerFooterData.GetFont());
@@ -377,13 +377,13 @@ void wxRichTextPrintout::CalculateScaling(wxDC* dc, wxRect& textRect, wxRect& he
 
     footerRect = wxRect(0, 0, 0, 0);
 
-    if (!m_headerFooterData.GetFooterText(wxRICHTEXT_PAGE_ODD, wxRichTextPageLocation::Left).IsEmpty() ||
-        !m_headerFooterData.GetFooterText(wxRICHTEXT_PAGE_ODD, wxRichTextPageLocation::Centre).IsEmpty() ||
-        !m_headerFooterData.GetFooterText(wxRICHTEXT_PAGE_ODD, wxRichTextPageLocation::Right).IsEmpty() ||
+    if (!m_headerFooterData.GetFooterText(wxRichTextOddEvenPage::Odd, wxRichTextPageLocation::Left).IsEmpty() ||
+        !m_headerFooterData.GetFooterText(wxRichTextOddEvenPage::Odd, wxRichTextPageLocation::Centre).IsEmpty() ||
+        !m_headerFooterData.GetFooterText(wxRichTextOddEvenPage::Odd, wxRichTextPageLocation::Right).IsEmpty() ||
 
-        !m_headerFooterData.GetFooterText(wxRICHTEXT_PAGE_EVEN, wxRichTextPageLocation::Left).IsEmpty() ||
-        !m_headerFooterData.GetFooterText(wxRICHTEXT_PAGE_EVEN, wxRichTextPageLocation::Centre).IsEmpty() ||
-        !m_headerFooterData.GetFooterText(wxRICHTEXT_PAGE_EVEN, wxRichTextPageLocation::Right).IsEmpty())
+        !m_headerFooterData.GetFooterText(wxRichTextOddEvenPage::Even, wxRichTextPageLocation::Left).IsEmpty() ||
+        !m_headerFooterData.GetFooterText(wxRichTextOddEvenPage::Even, wxRichTextPageLocation::Centre).IsEmpty() ||
+        !m_headerFooterData.GetFooterText(wxRichTextOddEvenPage::Even, wxRichTextPageLocation::Right).IsEmpty())
     {
         if (m_headerFooterData.GetFont().IsOk())
             dc->SetFont(m_headerFooterData.GetFont());
@@ -621,7 +621,7 @@ wxRichTextPrintout *wxRichTextPrinting::CreatePrintout()
     return p;
 }
 
-/// Set/get header text, e.g. wxRICHTEXT_PAGE_ODD, wxRichTextPageLocation::Left
+/// Set/get header text, e.g. wxRichTextOddEvenPage::Odd, wxRichTextPageLocation::Left
 void wxRichTextPrinting::SetHeaderText(const wxString& text, wxRichTextOddEvenPage page, wxRichTextPageLocation location)
 {
     m_headerFooterData.SetHeaderText(text, page, location);
@@ -632,7 +632,7 @@ wxString wxRichTextPrinting::GetHeaderText(wxRichTextOddEvenPage page, wxRichTex
     return m_headerFooterData.GetHeaderText(page, location);
 }
 
-/// Set/get footer text, e.g. wxRICHTEXT_PAGE_ODD, wxRichTextPageLocation::Left
+/// Set/get footer text, e.g. wxRichTextOddEvenPage::Odd, wxRichTextPageLocation::Left
 void wxRichTextPrinting::SetFooterText(const wxString& text, wxRichTextOddEvenPage page, wxRichTextPageLocation location)
 {
     m_headerFooterData.SetFooterText(text, page, location);
@@ -683,13 +683,13 @@ wxString wxRichTextHeaderFooterData::GetText(int headerFooter, wxRichTextOddEven
         return {};
 }
 
-/// Set/get header text, e.g. wxRICHTEXT_PAGE_ODD, wxRichTextPageLocation::Left
+/// Set/get header text, e.g. wxRichTextOddEvenPage::Odd, wxRichTextPageLocation::Left
 void wxRichTextHeaderFooterData::SetHeaderText(const wxString& text, wxRichTextOddEvenPage page, wxRichTextPageLocation location)
 {
-    if (page == wxRICHTEXT_PAGE_ALL)
+    if (page == wxRichTextOddEvenPage::All)
     {
-        SetText(text, 0, wxRICHTEXT_PAGE_ODD, location);
-        SetText(text, 0, wxRICHTEXT_PAGE_EVEN, location);
+        SetText(text, 0, wxRichTextOddEvenPage::Odd, location);
+        SetText(text, 0, wxRichTextOddEvenPage::Even, location);
     }
     else
         SetText(text, 0, page, location);
@@ -700,13 +700,13 @@ wxString wxRichTextHeaderFooterData::GetHeaderText(wxRichTextOddEvenPage page, w
     return GetText(0, page, location);
 }
 
-/// Set/get footer text, e.g. wxRICHTEXT_PAGE_ODD, wxRichTextPageLocation::Left
+/// Set/get footer text, e.g. wxRichTextOddEvenPage::Odd, wxRichTextPageLocation::Left
 void wxRichTextHeaderFooterData::SetFooterText(const wxString& text, wxRichTextOddEvenPage page, wxRichTextPageLocation location)
 {
-    if (page == wxRICHTEXT_PAGE_ALL)
+    if (page == wxRichTextOddEvenPage::All)
     {
-        SetText(text, 1, wxRICHTEXT_PAGE_ODD, location);
-        SetText(text, 1, wxRICHTEXT_PAGE_EVEN, location);
+        SetText(text, 1, wxRichTextOddEvenPage::Odd, location);
+        SetText(text, 1, wxRichTextOddEvenPage::Even, location);
     }
     else
         SetText(text, 1, page, location);

@@ -489,7 +489,7 @@ protected:
     wxSize AddBorderToSize(wxSize size) const;
 
     // discriminated union: depending on m_kind one of the fields is valid
-    enum ItemKind
+    enum class ItemKind
     {
         None,
         Window,

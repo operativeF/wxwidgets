@@ -107,11 +107,11 @@ DECLARE_VARIANT_OBJECT_EXPORTED(wxDataViewCheckIconText, WXDLLIMPEXP_CORE)
 // wxDataViewRendererBase
 // ----------------------------------------------------------------------------
 
-enum wxDataViewCellMode
+enum class wxDataViewCellMode
 {
-    wxDATAVIEW_CELL_INERT,
-    wxDATAVIEW_CELL_ACTIVATABLE,
-    wxDATAVIEW_CELL_EDITABLE
+    Inert,
+    Activatable,
+    Editable
 };
 
 enum wxDataViewCellRenderState
@@ -136,7 +136,7 @@ class WXDLLIMPEXP_CORE wxDataViewRendererBase: public wxObject
 {
 public:
     wxDataViewRendererBase( const std::string &varianttype,
-                            wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT,
+                            wxDataViewCellMode mode = wxDataViewCellMode::Inert,
                             int alignment = wxDVR_DEFAULT_ALIGNMENT );
     ~wxDataViewRendererBase();
 
@@ -315,7 +315,7 @@ public:
     // Constructor must specify the usual renderer parameters which we simply
     // pass to the base class
     wxDataViewCustomRendererBase(const std::string& varianttype = "string",
-                                 wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT,
+                                 wxDataViewCellMode mode = wxDataViewCellMode::Inert,
                                  int align = wxDVR_DEFAULT_ALIGNMENT)
         : wxDataViewCustomRendererRealBase(varianttype, mode, align)
     {
@@ -423,7 +423,7 @@ class WXDLLIMPEXP_CORE wxDataViewSpinRenderer: public wxDataViewCustomRenderer
 {
 public:
     wxDataViewSpinRenderer( int min, int max,
-                            wxDataViewCellMode mode = wxDATAVIEW_CELL_EDITABLE,
+                            wxDataViewCellMode mode = wxDataViewCellMode::Editable,
                             int alignment = wxDVR_DEFAULT_ALIGNMENT );
     bool HasEditorCtrl() const override { return true; }
     wxWindow* CreateEditorCtrl( wxWindow *parent, wxRect labelRect, const wxVariant &value ) override;
@@ -454,7 +454,7 @@ class WXDLLIMPEXP_CORE wxDataViewChoiceRenderer: public wxDataViewCustomRenderer
 {
 public:
     wxDataViewChoiceRenderer( const std::vector<std::string>& choices,
-                            wxDataViewCellMode mode = wxDATAVIEW_CELL_EDITABLE,
+                            wxDataViewCellMode mode = wxDataViewCellMode::Editable,
                             int alignment = wxDVR_DEFAULT_ALIGNMENT );
     bool HasEditorCtrl() const override { return true; }
     wxWindow* CreateEditorCtrl( wxWindow *parent, wxRect labelRect, const wxVariant &value ) override;
@@ -483,7 +483,7 @@ class WXDLLIMPEXP_CORE wxDataViewChoiceByIndexRenderer: public wxDataViewChoiceR
 {
 public:
     wxDataViewChoiceByIndexRenderer( const std::vector<std::string> &choices,
-                              wxDataViewCellMode mode = wxDATAVIEW_CELL_EDITABLE,
+                              wxDataViewCellMode mode = wxDataViewCellMode::Editable,
                               int alignment = wxDVR_DEFAULT_ALIGNMENT );
 
     wxWindow* CreateEditorCtrl( wxWindow *parent, wxRect labelRect, const wxVariant &value ) override;
@@ -512,7 +512,7 @@ public:
     static std::string GetDefaultType() { return "datetime"; }
 
     wxDataViewDateRenderer(const std::string &varianttype = GetDefaultType(),
-                           wxDataViewCellMode mode = wxDATAVIEW_CELL_EDITABLE,
+                           wxDataViewCellMode mode = wxDataViewCellMode::Editable,
                            int align = wxDVR_DEFAULT_ALIGNMENT);
 
     bool HasEditorCtrl() const override { return true; }
@@ -549,7 +549,7 @@ public:
 
     explicit wxDataViewCheckIconTextRenderer
              (
-                  wxDataViewCellMode mode = wxDATAVIEW_CELL_ACTIVATABLE,
+                  wxDataViewCellMode mode = wxDataViewCellMode::Activatable,
                   int align = wxDVR_DEFAULT_ALIGNMENT
              );
 

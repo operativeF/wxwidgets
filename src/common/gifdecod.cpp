@@ -330,7 +330,7 @@ int wxGIFDecoder::getcode(wxInputStream& stream, int bits, int ab_fin)
 // dgif:
 //  GIF decoding function. The initial code size (aka root size)
 //  is 'bits'. Supports interlaced images (interl == 1).
-//  Returns wxGIF_OK (== 0) on success, or an error code if something
+//  Returns wxGIFErrorCode::OK (== 0) on success, or an error code if something
 // fails (see header file for details)
 wxGIFErrorCode
 wxGIFDecoder::dgif(wxInputStream& stream, GIFImage *img, int interl, int bits)
@@ -412,11 +412,11 @@ wxGIFDecoder::dgif(wxInputStream& stream, GIFImage *img, int interl, int bits)
             // GIF files, the allocSize of 4096+1 is enough. This
             // will only happen with badly formed GIFs.
             if (pos >= allocSize)
-                return wxGIF_INVFORMAT;
+                return wxGIFErrorCode::InvFormat;
         }
 
         if (pos >= allocSize)
-            return wxGIF_INVFORMAT;
+            return wxGIFErrorCode::InvFormat;
 
         decomp_stack[pos] = code;              // push last code into the decomp_stack
         abcabca    = code;              // save for special case
@@ -429,7 +429,7 @@ wxGIFDecoder::dgif(wxInputStream& stream, GIFImage *img, int interl, int bits)
             // to reset it. This checks whether we really got it, otherwise
             // the GIF is damaged.
             if (ab_free > ab_max)
-                return wxGIF_INVFORMAT;
+                return wxGIFErrorCode::InvFormat;
 
             // This assert seems unnecessary since the condition above
             // eliminates the only case in which it went false. But I really
@@ -569,7 +569,7 @@ as an End of Information itself)
     }
     while (code != ab_fin);
 
-    return wxGIF_OK;
+    return wxGIFErrorCode::OK;
 }
 
 
@@ -594,7 +594,7 @@ bool wxGIFDecoder::DoCanRead(wxInputStream &stream) const
 //  animated GIF support is enabled. Can read GIFs with any bit
 //  size (color depth), but the output images are always expanded
 //  to 8 bits per pixel. Also, the image palettes always contain
-//  256 colors, although some of them may be unused. Returns wxGIF_OK
+//  256 colors, although some of them may be unused. Returns wxGIFErrorCode::OK
 //  (== 0) on success, or an error code if something fails (see
 //  header file for details)
 //
@@ -611,7 +611,7 @@ wxGIFErrorCode wxGIFDecoder::LoadGIF(wxInputStream& stream)
 
     // check GIF signature
     if (!CanRead(stream))
-        return wxGIF_INVFORMAT;
+        return wxGIFErrorCode::InvFormat;
 
     // check for animated GIF support (ver. >= 89a)
 
@@ -619,7 +619,7 @@ wxGIFErrorCode wxGIFDecoder::LoadGIF(wxInputStream& stream)
     stream.Read(buf, headerSize);
     if (stream.LastRead() != headerSize)
     {
-        return wxGIF_INVFORMAT;
+        return wxGIFErrorCode::InvFormat;
     }
 
     if (memcmp(buf + 3, "89a", 3) < 0)
@@ -632,7 +632,7 @@ wxGIFErrorCode wxGIFDecoder::LoadGIF(wxInputStream& stream)
     stream.Read(buf, lsdbSize);
     if (stream.LastRead() != lsdbSize)
     {
-        return wxGIF_INVFORMAT;
+        return wxGIFErrorCode::InvFormat;
     }
 
     m_szAnimation.x = buf[0] + 256 * buf[1];
@@ -640,7 +640,7 @@ wxGIFErrorCode wxGIFDecoder::LoadGIF(wxInputStream& stream)
 
     if (anim && ((m_szAnimation.x == 0) || (m_szAnimation.y == 0)))
     {
-        return wxGIF_INVFORMAT;
+        return wxGIFErrorCode::InvFormat;
     }
 
     // load global color map if available
@@ -653,7 +653,7 @@ wxGIFErrorCode wxGIFDecoder::LoadGIF(wxInputStream& stream)
         stream.Read(pal, numBytes);
         if (stream.LastRead() != numBytes)
         {
-            return wxGIF_INVFORMAT;
+            return wxGIFErrorCode::InvFormat;
         }
 
         m_background.Set(pal[backgroundColIndex*3 + 0],
@@ -677,7 +677,7 @@ wxGIFErrorCode wxGIFDecoder::LoadGIF(wxInputStream& stream)
         (GIF_MARKER_ENDOFDATA) hasn't been encountered yet, exit the loop. (Without this
         check the while loop would loop endlessly.) Later on, in the next while
         loop, the file will be treated as being truncated (But still
-        be decoded as far as possible). returning wxGIF_TRUNCATED is not
+        be decoded as far as possible). returning wxGIFErrorCode::Truncated is not
         possible here since some init code is done after this loop.
         */
         if (stream.Eof())// || !stream.IsOk())
@@ -686,7 +686,7 @@ wxGIFErrorCode wxGIFDecoder::LoadGIF(wxInputStream& stream)
             type is set to some bogus value, so there's no
             need to continue evaluating it.
             */
-            break; // Alternative : "return wxGIF_INVFORMAT;"
+            break; // Alternative : "return wxGIFErrorCode::InvFormat;"
         }
 
         switch (type)
@@ -706,7 +706,7 @@ wxGIFErrorCode wxGIFDecoder::LoadGIF(wxInputStream& stream)
                         if (stream.LastRead() != gceSize)
                         {
                             Destroy();
-                            return wxGIF_INVFORMAT;
+                            return wxGIFErrorCode::InvFormat;
                         }
 
                         // read delay and convert from 1/100 of a second to ms
@@ -768,13 +768,13 @@ wxGIFErrorCode wxGIFDecoder::LoadGIF(wxInputStream& stream)
                 wxScopeGuard guardDestroy = wxMakeObjGuard(*this, &wxGIFDecoder::Destroy);
 
                 if ( !pimg.get() )
-                    return wxGIF_MEMERR;
+                    return wxGIFErrorCode::MemErr;
 
                 // fill in the data
                 static constexpr unsigned int idbSize = (2 + 2 + 2 + 2 + 1);
                 stream.Read(buf, idbSize);
                 if (stream.LastRead() != idbSize)
-                    return wxGIF_INVFORMAT;
+                    return wxGIFErrorCode::InvFormat;
 
                 pimg->comment = comment;
                 comment.clear();
@@ -807,7 +807,7 @@ wxGIFErrorCode wxGIFDecoder::LoadGIF(wxInputStream& stream)
                             wxLogError(_("Incorrect GIF frame size (%u, %d) for "
                                          "the frame #%u"),
                                        pimg->w, pimg->h, m_nFrames);
-                            return wxGIF_INVFORMAT;
+                            return wxGIFErrorCode::InvFormat;
                         }
                     }
                 }
@@ -824,7 +824,7 @@ wxGIFErrorCode wxGIFDecoder::LoadGIF(wxInputStream& stream)
                 pimg->pal = (unsigned char *) malloc(768);
 
                 if (pimg->p.empty() || (!pimg->pal))
-                    return wxGIF_MEMERR;
+                    return wxGIFErrorCode::MemErr;
 
                 // load local color map if available, else use global map
                 if ((buf[8] & 0x80) == 0x80)
@@ -834,7 +834,7 @@ wxGIFErrorCode wxGIFDecoder::LoadGIF(wxInputStream& stream)
                     stream.Read(pimg->pal, numBytes);
                     pimg->ncolours = local_ncolors;
                     if (stream.LastRead() != numBytes)
-                        return wxGIF_INVFORMAT;
+                        return wxGIFErrorCode::InvFormat;
                 }
                 else
                 {
@@ -845,11 +845,11 @@ wxGIFErrorCode wxGIFDecoder::LoadGIF(wxInputStream& stream)
                 // get initial code size from first byte in raster data
                 bits = stream.GetC();
                 if (bits == 0)
-                    return wxGIF_INVFORMAT;
+                    return wxGIFErrorCode::InvFormat;
 
                 // decode image
                 const wxGIFErrorCode result = dgif(stream, pimg.get(), interl, bits);
-                if (result != wxGIF_OK)
+                if (result != wxGIFErrorCode::OK)
                     return result;
 
                 guardDestroy.Dismiss();
@@ -869,14 +869,14 @@ wxGIFErrorCode wxGIFDecoder::LoadGIF(wxInputStream& stream)
     if (m_nFrames == 0)
     {
         Destroy();
-        return wxGIF_INVFORMAT;
+        return wxGIFErrorCode::InvFormat;
     }
 
     // try to read to the end of the stream
     while (type != GIF_MARKER_ENDOFDATA)
     {
         if (!stream.IsOk())
-            return wxGIF_TRUNCATED;
+            return wxGIFErrorCode::Truncated;
 
         type = stream.GetC();
 
@@ -893,7 +893,7 @@ wxGIFErrorCode wxGIFDecoder::LoadGIF(wxInputStream& stream)
                         stream.SeekI(i, wxSeekMode::FromCurrent) == wxInvalidOffset)
                     {
                         Destroy();
-                        return wxGIF_INVFORMAT;
+                        return wxGIFErrorCode::InvFormat;
                     }
                 }
                 break;
@@ -905,7 +905,7 @@ wxGIFErrorCode wxGIFDecoder::LoadGIF(wxInputStream& stream)
                 if (stream.LastRead() != idbSize)
                 {
                     Destroy();
-                    return wxGIF_INVFORMAT;
+                    return wxGIFErrorCode::InvFormat;
                 }
 
                 // local color map
@@ -916,7 +916,7 @@ wxGIFErrorCode wxGIFDecoder::LoadGIF(wxInputStream& stream)
                     if (stream.SeekI(numBytes, wxSeekMode::FromCurrent) == wxInvalidOffset)
                     {
                         Destroy();
-                        return wxGIF_INVFORMAT;
+                        return wxGIFErrorCode::InvFormat;
                     }
                 }
 
@@ -925,7 +925,7 @@ wxGIFErrorCode wxGIFDecoder::LoadGIF(wxInputStream& stream)
                 if (stream.Eof() || (stream.LastRead() == 0))
                 {
                     Destroy();
-                    return wxGIF_INVFORMAT;
+                    return wxGIFErrorCode::InvFormat;
                 }
 
                 // skip all data
@@ -935,7 +935,7 @@ wxGIFErrorCode wxGIFDecoder::LoadGIF(wxInputStream& stream)
                         stream.SeekI(i, wxSeekMode::FromCurrent) == wxInvalidOffset)
                     {
                         Destroy();
-                        return wxGIF_INVFORMAT;
+                        return wxGIFErrorCode::InvFormat;
                     }
                 }
                 break;
@@ -944,13 +944,13 @@ wxGIFErrorCode wxGIFDecoder::LoadGIF(wxInputStream& stream)
                 if ((type != GIF_MARKER_ENDOFDATA) && (type != 00)) // testing
                 {
                     // images are OK, but couldn't read to the end of the stream
-                    return wxGIF_TRUNCATED;
+                    return wxGIFErrorCode::Truncated;
                 }
                 break;
         }
     }
 
-    return wxGIF_OK;
+    return wxGIFErrorCode::OK;
 }
 
 #endif // wxUSE_STREAMS && wxUSE_GIF

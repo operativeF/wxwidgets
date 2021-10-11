@@ -256,7 +256,7 @@ wxPluginManager::wxLoadLibrary(const wxString &libname, unsigned int flags)
     wxString realname(libname);
 
     if( !(flags & wxDL_VERBATIM) )
-        realname += wxDynamicLibrary::GetDllExt(wxDL_MODULE);
+        realname += wxDynamicLibrary::GetDllExt(wxDynamicLibraryCategory::Module);
 
     wxPluginLibrary *entry;
 
@@ -315,7 +315,7 @@ bool wxPluginManager::UnloadLibrary(const wxString& libname)
 
     if ( !entry )
     {
-        realname += wxDynamicLibrary::GetDllExt(wxDL_MODULE);
+        realname += wxDynamicLibrary::GetDllExt(wxDynamicLibraryCategory::Module);
 
         entry = FindByName(realname);
     }

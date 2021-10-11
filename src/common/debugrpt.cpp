@@ -446,7 +446,7 @@ bool wxDebugReport::AddContext(wxDebugReport::Context ctx)
     wxXmlNode *nodeRoot = new wxXmlNode(wxXML_ELEMENT_NODE, wxT("report"));
     xmldoc.SetRoot(nodeRoot);
     nodeRoot->AddAttribute(wxT("version"), wxT("1.0"));
-    nodeRoot->AddAttribute(wxT("kind"), ctx == Context_Current ? wxT("user")
+    nodeRoot->AddAttribute(wxT("kind"), ctx == Context::Current ? wxT("user")
                                                              : wxT("exception"));
 
     // add system information
@@ -465,7 +465,7 @@ bool wxDebugReport::AddContext(wxDebugReport::Context ctx)
 
     // add CPU context information: this only makes sense for exceptions as our
     // current context is not very interesting otherwise
-    if ( ctx == Context_Exception )
+    if ( ctx == Context::Exception )
     {
         wxXmlNode *nodeContext = new wxXmlNode(wxXML_ELEMENT_NODE, wxT("context"));
         if ( DoAddExceptionInfo(nodeContext) )
@@ -479,7 +479,7 @@ bool wxDebugReport::AddContext(wxDebugReport::Context ctx)
     wxXmlNode *nodeStack = new wxXmlNode(wxXML_ELEMENT_NODE, wxT("stack"));
     XmlStackWalker sw(nodeStack);
 #if wxUSE_ON_FATAL_EXCEPTION
-    if ( ctx == Context_Exception )
+    if ( ctx == Context::Exception )
     {
         sw.WalkFromException();
     }
@@ -525,7 +525,7 @@ bool wxDebugReport::AddDump(Context ctx)
     wxFileName fn(m_dir, GetReportName(), wxT("dmp"));
     wxCrashReport::SetFileName(fn.GetFullPath());
 
-    if ( !(ctx == Context_Exception ? wxCrashReport::Generate()
+    if ( !(ctx == Context::Exception ? wxCrashReport::Generate()
                                     : wxCrashReport::GenerateNow()) )
             return false;
 

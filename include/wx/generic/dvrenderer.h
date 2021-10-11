@@ -21,7 +21,7 @@ class WXDLLIMPEXP_CORE wxDataViewRenderer: public wxDataViewCustomRendererBase
 {
 public:
     wxDataViewRenderer( const wxString &varianttype,
-                        wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT,
+                        wxDataViewCellMode mode = wxDataViewCellMode::Inert,
                         int align = wxDVR_DEFAULT_ALIGNMENT );
     ~wxDataViewRenderer();
 

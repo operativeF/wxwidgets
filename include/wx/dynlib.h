@@ -69,16 +69,16 @@ enum wxDLFlags
     wxDL_DEFAULT    = wxDL_NOW      // default flags correspond to Win32
 };
 
-enum wxDynamicLibraryCategory
+enum class wxDynamicLibraryCategory
 {
-    wxDL_LIBRARY,       // standard library
-    wxDL_MODULE         // loadable module/plugin
+    Library,       // standard library
+    Module         // loadable module/plugin
 };
 
-enum wxPluginCategory
+enum class wxPluginCategory
 {
-    wxDL_PLUGIN_GUI,    // plugin that uses GUI classes
-    wxDL_PLUGIN_BASE    // wxBase-only plugin
+    Gui,    // plugin that uses GUI classes
+    Base    // wxBase-only plugin
 };
 
 // ----------------------------------------------------------------------------
@@ -218,7 +218,7 @@ public:
     static wxDllType         GetProgramHandle();
 
     // return the platform standard DLL extension (with leading dot)
-    static wxString GetDllExt(wxDynamicLibraryCategory cat = wxDL_LIBRARY);
+    static wxString GetDllExt(wxDynamicLibraryCategory cat = wxDynamicLibraryCategory::Library);
 
     wxDynamicLibrary()  = default;
     wxDynamicLibrary(const wxString& libname, int flags = wxDL_DEFAULT)
@@ -324,13 +324,13 @@ public:
     // return platform-specific name of dynamic library with proper extension
     // and prefix (e.g. "foo.dll" on Windows or "libfoo.so" on Linux)
     static wxString CanonicalizeName(const wxString& name,
-                                     wxDynamicLibraryCategory cat = wxDL_LIBRARY);
+                                     wxDynamicLibraryCategory cat = wxDynamicLibraryCategory::Library);
 
     // return name of wxWidgets plugin (adds compiler and version info
     // to the filename):
     static wxString
     CanonicalizePluginName(const wxString& name,
-                           wxPluginCategory cat = wxDL_PLUGIN_GUI);
+                           wxPluginCategory cat = wxPluginCategory::Gui);
 
     // return plugin directory on platforms where it makes sense and empty
     // string on others:

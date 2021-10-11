@@ -25,11 +25,11 @@ class WXDLLIMPEXP_FWD_CORE wxMenu;
 class WXDLLIMPEXP_FWD_BASE wxConfigBase;
 class WXDLLIMPEXP_FWD_BASE wxFileName;
 
-enum wxFileHistoryMenuPathStyle
+enum class wxFileHistoryMenuPathStyle
 {
-    wxFH_PATH_SHOW_IF_DIFFERENT,
-    wxFH_PATH_SHOW_NEVER,
-    wxFH_PATH_SHOW_ALWAYS
+    ShowIfDifferent,
+    ShowNever,
+    ShowAlways
 };
 
 // ----------------------------------------------------------------------------
@@ -87,7 +87,7 @@ protected:
     size_t                      m_fileMaxFiles;
 
     // Style of the paths in the menu labels
-    wxFileHistoryMenuPathStyle m_menuPathStyle{wxFH_PATH_SHOW_IF_DIFFERENT};
+    wxFileHistoryMenuPathStyle m_menuPathStyle{wxFileHistoryMenuPathStyle::ShowIfDifferent};
 
 private:
     void DoRefreshLabels();

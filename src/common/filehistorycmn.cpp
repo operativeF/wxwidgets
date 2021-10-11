@@ -146,17 +146,17 @@ void wxFileHistoryBase::DoRefreshLabels()
         const wxString pathInMenu = [this, currFn, firstPath]() {
             switch ( m_menuPathStyle )
             {
-                case wxFH_PATH_SHOW_IF_DIFFERENT:
+                case wxFileHistoryMenuPathStyle::ShowIfDifferent:
                     if ( currFn.HasName() && currFn.GetPath() == firstPath )
                         return currFn.GetFullName();
                     else
                         return currFn.GetFullPath();
 
-                case wxFH_PATH_SHOW_NEVER:
+                case wxFileHistoryMenuPathStyle::ShowNever:
                     // Only show the filename + extension and not the path.
                     return currFn.GetFullName();
 
-                case wxFH_PATH_SHOW_ALWAYS:
+                case wxFileHistoryMenuPathStyle::ShowAlways:
                     // Always show full path.
                     return currFn.GetFullPath();
             }

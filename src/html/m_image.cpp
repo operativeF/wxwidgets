@@ -393,7 +393,7 @@ wxHtmlImageCell::wxHtmlImageCell(wxHtmlWindowInterface *windowIface,
                       input->GetLocation().Matches(wxT("*.GIF"))) )
                 {
                     m_gifDecoder = new wxGIFDecoder();
-                    if ( m_gifDecoder->LoadGIF(*s) == wxGIF_OK )
+                    if ( m_gifDecoder->LoadGIF(*s) == wxGIFErrorCode::OK )
                     {
                         wxImage img;
                         if ( m_gifDecoder->ConvertToImage(0, &img) )

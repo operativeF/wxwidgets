@@ -81,10 +81,10 @@ namespace
 {
 
 // Flags for Walker() function defined below.
-enum WalkFlags
+enum class WalkFlags
 {
-    Walk_All,               // Visit all items.
-    Walk_ExpandedOnly       // Visit only expanded items.
+    All,               // Visit all items.
+    ExpandedOnly       // Visit only expanded items.
 };
 
 // The column is either the index of the column to be used for sorting or one
@@ -879,7 +879,7 @@ public:
     // Some useful functions for row and item mapping
     wxDataViewItem GetItemByRow( unsigned int row ) const;
     int GetRowByItem( const wxDataViewItem & item,
-                      WalkFlags flags = Walk_All ) const;
+                      WalkFlags flags = WalkFlags::All ) const;
 
     wxDataViewTreeNode * GetTreeNodeByRow( unsigned int row ) const;
     // We did not need this temporarily
@@ -947,7 +947,7 @@ public:
     void FinishEditing();
     bool HasEditableColumn(const wxDataViewItem& item) const
     {
-        return FindColumnForEditing(item, wxDATAVIEW_CELL_EDITABLE) != nullptr;
+        return FindColumnForEditing(item, wxDataViewCellMode::Editable) != nullptr;
     }
 
 private:
@@ -1412,7 +1412,7 @@ bool wxDataViewToggleRenderer::Render( wxRect cell, wxDC *dc, int WXUNUSED(state
     int flags = 0;
     if (m_toggle)
         flags |= wxCONTROL_CHECKED;
-    if (GetMode() != wxDATAVIEW_CELL_ACTIVATABLE ||
+    if (GetMode() != wxDataViewCellMode::Activatable ||
         !(GetOwner()->GetOwner()->IsEnabled() && GetEnabled()))
         flags |= wxCONTROL_DISABLED;
 
@@ -2995,7 +2995,7 @@ wxDataViewMainWindow::StartEditing(const wxDataViewItem& item,
                                    const wxDataViewColumn* col)
 {
     wxDataViewRenderer* renderer = col->GetRenderer();
-    if ( !IsCellEditableInMode(item, col, wxDATAVIEW_CELL_EDITABLE) )
+    if ( !IsCellEditableInMode(item, col, wxDataViewCellMode::Editable) )
         return;
 
     const wxRect itemRect = GetItemRect(item, col);
@@ -3049,7 +3049,7 @@ public:
 };
 
 bool
-Walker(wxDataViewTreeNode * node, DoJob & func, WalkFlags flags = Walk_All)
+Walker(wxDataViewTreeNode * node, DoJob & func, WalkFlags flags = WalkFlags::All)
 {
     wxCHECK_MSG( node, false, "can't walk NULL node" );
 
@@ -3063,7 +3063,7 @@ Walker(wxDataViewTreeNode * node, DoJob & func, WalkFlags flags = Walk_All)
             break;
     }
 
-    if ( node->HasChildren() && (flags != Walk_ExpandedOnly || node->IsOpen()) )
+    if ( node->HasChildren() && (flags != WalkFlags::ExpandedOnly || node->IsOpen()) )
     {
         const wxDataViewTreeNodes& nodes = node->GetChildNodes();
 
@@ -4207,7 +4207,7 @@ wxRect wxDataViewMainWindow::GetItemRect( const wxDataViewItem & item,
         xpos = 0;
     }
 
-    const int row = GetRowByItem(item, Walk_ExpandedOnly);
+    const int row = GetRowByItem(item, WalkFlags::ExpandedOnly);
     if ( row == -1 )
     {
         // This means the row is currently not visible at all.
@@ -4402,7 +4402,7 @@ wxDataViewMainWindow::FindColumnForEditing(const wxDataViewItem& item, wxDataVie
     // Edit the current column editable in 'mode'. If no column is focused
     // (typically because the user has full row selected), try to find the
     // first editable column (this would typically be a checkbox for
-    // wxDATAVIEW_CELL_ACTIVATABLE and we don't want to force the user to set
+    // wxDataViewCellMode::Activatable and we don't want to force the user to set
     // focus on the checkbox column; or on the only editable text column).
 
     wxDataViewColumn *candidate = m_currentCol;
@@ -4579,7 +4579,7 @@ void wxDataViewMainWindow::OnChar( wxKeyEvent &event )
                 // because the user has full row selected), try to find the first activatable
                 // column (this would typically be a checkbox and we don't want to force the user
                 // to set focus on the checkbox column).
-                wxDataViewColumn *activatableCol = FindColumnForEditing(item, wxDATAVIEW_CELL_ACTIVATABLE);
+                wxDataViewColumn *activatableCol = FindColumnForEditing(item, wxDataViewCellMode::Activatable);
 
                 if ( activatableCol )
                 {
@@ -4626,7 +4626,7 @@ void wxDataViewMainWindow::OnChar( wxKeyEvent &event )
                     // Edit the current column. If no column is focused
                     // (typically because the user has full row selected), try
                     // to find the first editable column.
-                    wxDataViewColumn *editableCol = FindColumnForEditing(item, wxDATAVIEW_CELL_EDITABLE);
+                    wxDataViewColumn *editableCol = FindColumnForEditing(item, wxDataViewCellMode::Editable);
 
                     if ( editableCol )
                         GetOwner()->EditItem(item, editableCol);
@@ -5181,7 +5181,7 @@ void wxDataViewMainWindow::OnMouse( wxMouseEvent &event )
         if (m_lastOnSame && !ignore_other_columns)
         {
             if ((col == m_currentCol) && (current == m_currentRow) &&
-                IsCellEditableInMode(item, col, wxDATAVIEW_CELL_EDITABLE) )
+                IsCellEditableInMode(item, col, wxDataViewCellMode::Editable) )
             {
                 m_renameTimer->Start( 100ms, true );
             }
@@ -5321,7 +5321,7 @@ void wxDataViewMainWindow::OnMouse( wxMouseEvent &event )
                         HasFocus();
 
         // Call ActivateCell() after everything else as under GTK+
-        if ( IsCellEditableInMode(item, col, wxDATAVIEW_CELL_ACTIVATABLE) )
+        if ( IsCellEditableInMode(item, col, wxDataViewCellMode::Activatable) )
         {
             // notify cell about click
 
@@ -5430,7 +5430,7 @@ void wxDataViewMainWindow::OnColumnsCountChanged()
         wxDataViewColumn *c = GetOwner()->GetColumnAt(i);
         if ( c->IsHidden() )
             continue;
-        if ( c->GetRenderer()->GetMode() != wxDATAVIEW_CELL_INERT )
+        if ( c->GetRenderer()->GetMode() != wxDataViewCellMode::Inert )
             editableCount++;
     }
 

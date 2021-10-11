@@ -463,13 +463,13 @@ class WXDLLIMPEXP_RICHTEXT wxRichTextStyleListBox: public wxHtmlListBox
 
 public:
     /// Which type of style definition is currently showing?
-    enum wxRichTextStyleType
+    enum class wxRichTextStyleType
     {
-        wxRICHTEXT_STYLE_ALL,
-        wxRICHTEXT_STYLE_PARAGRAPH,
-        wxRICHTEXT_STYLE_CHARACTER,
-        wxRICHTEXT_STYLE_LIST,
-        wxRICHTEXT_STYLE_BOX
+        All,
+        Paragraph,
+        Character,
+        List,
+        Box
     };
 
     wxRichTextStyleListBox() = default;
@@ -544,7 +544,7 @@ private:
     wxRichTextStyleSheet*   m_styleSheet{nullptr};
     wxRichTextCtrl*         m_richTextCtrl{nullptr};
 
-    wxRichTextStyleType     m_styleType{wxRICHTEXT_STYLE_PARAGRAPH}; // style type to display
+    wxRichTextStyleType     m_styleType{wxRichTextStyleType::Paragraph}; // style type to display
 
     bool                    m_autoSetSelection{true};
     bool                    m_applyOnSelection{false}; // if true, applies style on selection

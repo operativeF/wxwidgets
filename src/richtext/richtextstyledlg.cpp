@@ -105,26 +105,26 @@ void wxRichTextStyleOrganiserDialog::CreateControls()
 #endif
 
     bool hideTypeSelector = false;
-    wxRichTextStyleListBox::wxRichTextStyleType typesToShow = wxRichTextStyleListBox::wxRICHTEXT_STYLE_ALL;
+    wxRichTextStyleListBox::wxRichTextStyleType typesToShow = wxRichTextStyleListBox::wxRichTextStyleType::All;
 
     if ((m_flags & wxRICHTEXT_ORGANISER_SHOW_CHARACTER) != 0)
     {
-        typesToShow = wxRichTextStyleListBox::wxRICHTEXT_STYLE_CHARACTER;
+        typesToShow = wxRichTextStyleListBox::wxRichTextStyleType::Character;
         hideTypeSelector = true;
     }
     else if ((m_flags & wxRICHTEXT_ORGANISER_SHOW_PARAGRAPH) != 0)
     {
-        typesToShow = wxRichTextStyleListBox::wxRICHTEXT_STYLE_PARAGRAPH;
+        typesToShow = wxRichTextStyleListBox::wxRichTextStyleType::Paragraph;
         hideTypeSelector = true;
     }
     else if ((m_flags & wxRICHTEXT_ORGANISER_SHOW_BOX) != 0)
     {
-        typesToShow = wxRichTextStyleListBox::wxRICHTEXT_STYLE_BOX;
+        typesToShow = wxRichTextStyleListBox::wxRichTextStyleType::Box;
         hideTypeSelector = true;
     }
     else if ((m_flags & wxRICHTEXT_ORGANISER_SHOW_LIST) != 0)
     {
-        typesToShow = wxRichTextStyleListBox::wxRICHTEXT_STYLE_LIST;
+        typesToShow = wxRichTextStyleListBox::wxRichTextStyleType::List;
         hideTypeSelector = true;
     }
     else

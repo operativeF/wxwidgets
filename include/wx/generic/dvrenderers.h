@@ -21,7 +21,7 @@ public:
     inline static constexpr char DefaultType[] = "string";
 
     wxDataViewCustomRenderer( const std::string& varianttype = DefaultType,
-                              wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT,
+                              wxDataViewCellMode mode = wxDataViewCellMode::Inert,
                               int align = wxDVR_DEFAULT_ALIGNMENT );
 
 
@@ -60,7 +60,7 @@ public:
     inline static constexpr char DefaultType[] = "string";
 
     wxDataViewTextRenderer( const std::string& varianttype = DefaultType,
-                            wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT,
+                            wxDataViewCellMode mode = wxDataViewCellMode::Inert,
                             int align = wxDVR_DEFAULT_ALIGNMENT );
     ~wxDataViewTextRenderer();
 
@@ -110,7 +110,7 @@ public:
     inline static constexpr char DefaultType[] = "wxBitmap";
 
     wxDataViewBitmapRenderer( const wxString &varianttype = DefaultType,
-                              wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT,
+                              wxDataViewCellMode mode = wxDataViewCellMode::Inert,
                               int align = wxDVR_DEFAULT_ALIGNMENT );
 
 	wxDataViewBitmapRenderer(const wxDataViewBitmapRenderer&) = delete;
@@ -145,7 +145,7 @@ public:
     inline static constexpr char DefaultType[] = "bool";
 
     wxDataViewToggleRenderer( const std::string& varianttype = DefaultType,
-                              wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT,
+                              wxDataViewCellMode mode = wxDataViewCellMode::Inert,
                               int align = wxDVR_DEFAULT_ALIGNMENT );
 
 	wxDataViewToggleRenderer(const wxDataViewToggleRenderer&) = delete;
@@ -189,7 +189,7 @@ public:
 
     wxDataViewProgressRenderer( const std::string& label = {},
                                 const std::string& varianttype = DefaultType,
-                                wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT,
+                                wxDataViewCellMode mode = wxDataViewCellMode::Inert,
                                 int align = wxDVR_DEFAULT_ALIGNMENT );
 
 	wxDataViewProgressRenderer(const wxDataViewProgressRenderer&) = delete;
@@ -224,7 +224,7 @@ public:
     inline static constexpr char DefaultType[] = "wxDataViewIconText";
 
     wxDataViewIconTextRenderer( const std::string& varianttype = DefaultType,
-                                wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT,
+                                wxDataViewCellMode mode = wxDataViewCellMode::Inert,
                                 int align = wxDVR_DEFAULT_ALIGNMENT );
 
 	wxDataViewIconTextRenderer(const wxDataViewIconTextRenderer&) = delete;

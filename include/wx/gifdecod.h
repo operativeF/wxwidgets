@@ -31,17 +31,17 @@ class WXDLLIMPEXP_FWD_CORE wxImage;
 // --------------------------------------------------------------------------
 
 // Error codes:
-//  Note that the error code wxGIF_TRUNCATED means that the image itself
+//  Note that the error code wxGIFErrorCode::Truncated means that the image itself
 //  is most probably OK, but the decoder didn't reach the end of the data
 //  stream; this means that if it was not reading directly from file,
 //  the stream will not be correctly positioned.
 //
-enum wxGIFErrorCode
+enum class wxGIFErrorCode
 {
-    wxGIF_OK = 0,                   // everything was OK
-    wxGIF_INVFORMAT,                // error in GIF header
-    wxGIF_MEMERR,                   // error allocating memory
-    wxGIF_TRUNCATED                 // file appears to be truncated
+    OK,                   // everything was OK
+    InvFormat,            // error in GIF header
+    MemErr,               // error allocating memory
+    Truncated             // file appears to be truncated
 };
 
 // --------------------------------------------------------------------------
@@ -83,7 +83,7 @@ public:
 
     // implementation of wxAnimationDecoder's pure virtuals
     bool Load( wxInputStream& stream ) override
-        { return LoadGIF(stream) == wxGIF_OK; }
+        { return LoadGIF(stream) == wxGIFErrorCode::OK; }
 
     bool ConvertToImage(unsigned int frame, wxImage *image) const override;
 

@@ -32,7 +32,7 @@ class WXDLLIMPEXP_QA wxDebugReport
 public:
     // this is used for the functions which may report either the current state
     // or the state during the last (fatal) exception
-    enum Context { Context_Current, Context_Exception };
+    enum class Context { Current, Exception };
 
 
     // ctor creates a temporary directory where we create the files which will
@@ -71,20 +71,20 @@ public:
 #if wxUSE_STACKWALKER
     // add an XML file containing the current or exception context and the
     // stack trace
-    bool AddCurrentContext() { return AddContext(Context_Current); }
-    bool AddExceptionContext() { return AddContext(Context_Exception); }
+    bool AddCurrentContext() { return AddContext(Context::Current); }
+    bool AddExceptionContext() { return AddContext(Context::Exception); }
     virtual bool AddContext(Context ctx);
 #endif
 
 #if wxUSE_CRASHREPORT
     // add a file with crash report
-    bool AddCurrentDump() { return AddDump(Context_Current); }
-    bool AddExceptionDump() { return AddDump(Context_Exception); }
+    bool AddCurrentDump() { return AddDump(Context::Current); }
+    bool AddExceptionDump() { return AddDump(Context::Exception); }
     virtual bool AddDump(Context ctx);
 #endif // wxUSE_CRASHREPORT
 
     // add all available information to the report
-    void AddAll(Context context = Context_Exception);
+    void AddAll(Context context = Context::Exception);
 
 
     // process this report: the base class simply notifies the user that the
