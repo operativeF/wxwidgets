@@ -23,19 +23,13 @@
 class WXDLLIMPEXP_CORE wxColourDialog : public wxDialog
 {
 public:
-    wxColourDialog()
-    {
-
-        s_rectDialog.x = 0;
-        s_rectDialog.y = 0;
-    }
+    wxColourDialog() = default;
     wxColourDialog(wxWindow *parent, const wxColourData *data = nullptr)
     {
         // reset to zero, otherwise the wx routines won't size the window the
         // second time the dialog is shown, because they would believe it already
         // has the requested size/position
-        s_rectDialog.x = 0;
-        s_rectDialog.y = 0;
+        // It's defaulted to zero.
 
         Create(parent, data);
     }

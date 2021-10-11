@@ -25,7 +25,7 @@ public:
     wxBestHelpController(wxWindow* parentWindow = nullptr,
                          unsigned int style = wxHF_DEFAULT_STYLE)
         : wxHelpControllerBase(parentWindow),
-          m_style(style)
+          m_style{style}
     {
     }
 

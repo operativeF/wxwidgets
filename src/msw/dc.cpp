@@ -2154,9 +2154,7 @@ bool wxMSWDCImpl::SetTransformMatrix(const wxAffineMatrix2D &matrix)
         return false;
     }
 
-    wxMatrix2D mat;
-    wxPoint2DFloat tr;
-    matrix.Get(&mat, &tr);
+    auto [mat, tr] = matrix.Get();
 
     XFORM xform
     {

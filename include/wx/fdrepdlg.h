@@ -96,13 +96,13 @@ class WXDLLIMPEXP_CORE wxFindReplaceDialogBase : public wxDialog
 {
 public:
     
-    wxFindReplaceDialogBase() { m_FindReplaceData = nullptr; }
+    wxFindReplaceDialogBase() = default;
     wxFindReplaceDialogBase(wxWindow * WXUNUSED(parent),
                             wxFindReplaceData *data,
                             const std::string& WXUNUSED(title),
                             int WXUNUSED(style) = 0)
+        : m_FindReplaceData{data}
     {
-        m_FindReplaceData = data;
     }
 
     ~wxFindReplaceDialogBase() = default;

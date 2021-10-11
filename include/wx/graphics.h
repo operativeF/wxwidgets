@@ -672,11 +672,9 @@ public:
     virtual wxGraphicsMatrix CreateMatrix( float a = 1.0F, float b = 0.0F, float c = 0.0F, float d = 1.0F,
         float tx = 0.0F, float ty = 0.0F) const;
 
-    wxGraphicsMatrix CreateMatrix( const wxAffineMatrix2DBase& mat ) const
+    wxGraphicsMatrix CreateMatrix( const wxAffineMatrix2D& mat ) const
     {
-        wxMatrix2D mat2D;
-        wxPoint2DFloat tr;
-        mat.Get(&mat2D, &tr);
+        auto [mat2D, tr] = mat.Get();
 
         return CreateMatrix(mat2D.m_11, mat2D.m_12, mat2D.m_21, mat2D.m_22,
                             tr.x, tr.y);

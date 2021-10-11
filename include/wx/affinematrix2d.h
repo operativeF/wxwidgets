@@ -14,30 +14,55 @@
 
 #if wxUSE_GEOMETRY
 
-#include "wx/affinematrix2dbase.h"
+#include "wx/geometry.h"
+#include "wx/geometry/point.h"
 
-// A simple implementation of wxAffineMatrix2DBase interface done entirely in
-// wxWidgets.
-class WXDLLIMPEXP_CORE wxAffineMatrix2D : public wxAffineMatrix2DBase
+struct wxMatrix2D
+{
+    constexpr wxMatrix2D() {};
+
+    constexpr wxMatrix2D(float v11,
+                         float v12,
+                         float v21,
+                         float v22)
+        : m_11{v11},
+          m_12{v12},
+          m_21{v21},
+          m_22{v22}
+    {
+    }
+
+    float m_11{};
+    float m_12{};
+    float m_21{};
+    float m_22{};
+};
+
+// A simple implementation of 2-dimensional float affine matrix.
+
+class WXDLLIMPEXP_CORE wxAffineMatrix2D
 {
 public:
     // Implement base class pure virtual methods.
-    void Set(const wxMatrix2D& mat2D, const wxPoint2DFloat& tr) override;
-    void Get(wxMatrix2D* mat2D, wxPoint2DFloat* tr) const override;
-    void Concat(const wxAffineMatrix2DBase& t) override;
-    bool Invert() override;
-    bool IsIdentity() const override;
-    bool IsEqual(const wxAffineMatrix2DBase& t) const override;
-    void Translate(float dx, float dy) override;
-    void Scale(float xScale, float yScale) override;
-    void Rotate(float cRadians) override;
+    constexpr void Set(const wxMatrix2D& mat2D, const wxPoint2DFloat& tr);
+    constexpr std::pair<wxMatrix2D, wxPoint2DFloat> Get() const;
+    constexpr void Concat(const wxAffineMatrix2D& t);
+    constexpr bool Invert();
+    constexpr bool IsIdentity() const;
+    constexpr void Translate(float dx, float dy);
+    constexpr void Scale(float xScale, float yScale);
+    void Rotate(float cRadians);
 
-protected:
-    wxPoint2DFloat DoTransformPoint(const wxPoint2DFloat& p) const override;
-    wxPoint2DFloat DoTransformDistance(const wxPoint2DFloat& p) const override;
+    constexpr wxPoint2DFloat DoTransformPoint(const wxPoint2DFloat& p) const;
+    constexpr wxPoint2DFloat DoTransformDistance(const wxPoint2DFloat& p) const;
 
 private:
-    float m_11{1.0F}, m_12{0.0F}, m_21{0.0F}, m_22{1.0F}, m_tx{0.0F}, m_ty{0.0F};
+    float m_11{1.0F};
+    float m_12{0.0F};
+    float m_21{0.0F};
+    float m_22{1.0F};
+    float m_tx{0.0F};
+    float m_ty{0.0F};
 };
 
 #endif // wxUSE_GEOMETRY

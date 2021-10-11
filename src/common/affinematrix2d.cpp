@@ -15,7 +15,7 @@
 #include "wx/affinematrix2d.h"
 
 // sets the matrix to the respective values
-void wxAffineMatrix2D::Set(const wxMatrix2D &mat2D, const wxPoint2DFloat &tr)
+constexpr void wxAffineMatrix2D::Set(const wxMatrix2D &mat2D, const wxPoint2DFloat &tr)
 {
     m_11 = mat2D.m_11;
     m_12 = mat2D.m_12;
@@ -26,35 +26,26 @@ void wxAffineMatrix2D::Set(const wxMatrix2D &mat2D, const wxPoint2DFloat &tr)
 }
 
 // gets the component valuess of the matrix
-void wxAffineMatrix2D::Get(wxMatrix2D *mat2D, wxPoint2DFloat *tr) const
+constexpr std::pair<wxMatrix2D, wxPoint2DFloat> wxAffineMatrix2D::Get() const
 {
-    mat2D->m_11 = m_11;
-    mat2D->m_12 = m_12;
-    mat2D->m_21 = m_21;
-    mat2D->m_22 = m_22;
-
-    if ( tr )
-    {
-        tr->x = m_tx;
-        tr->y = m_ty;
-    }
+    return {wxMatrix2D{m_11, m_12, m_21, m_22}, wxPoint2DFloat{m_tx, m_ty}};
 }
 
 // concatenates the matrix
 // | t.m_11  t.m_12  0 |   | m_11  m_12   0 |
 // | t.m_21  t.m_22  0 | x | m_21  m_22   0 |
 // | t.m_tx  t.m_ty  1 |   | m_tx  m_ty   1 |
-void wxAffineMatrix2D::Concat(const wxAffineMatrix2DBase &t)
+constexpr void wxAffineMatrix2D::Concat(const wxAffineMatrix2D &t)
 {
-    wxMatrix2D mat;
-    wxPoint2DFloat tr;
-    t.Get(&mat, &tr);
+    auto [mat, tr] = t.Get();
 
     m_tx += tr.x*m_11 + tr.y*m_21;
     m_ty += tr.x*m_12 + tr.y*m_22;
+
     float e11 = mat.m_11*m_11 + mat.m_12*m_21;
     float e12 = mat.m_11*m_12 + mat.m_12*m_22;
     float e21 = mat.m_21*m_11 + mat.m_22*m_21;
+
     m_22 = mat.m_21*m_12 + mat.m_22*m_22;
     m_11 = e11;
     m_12 = e12;
@@ -66,7 +57,7 @@ void wxAffineMatrix2D::Concat(const wxAffineMatrix2DBase &t)
 // | m_11  m_12   0 |
 // | m_21  m_22   0 |
 // | m_tx  m_ty   1 |
-bool wxAffineMatrix2D::Invert()
+constexpr bool wxAffineMatrix2D::Invert()
 {
     const float det = m_11*m_22 - m_12*m_21;
 
@@ -85,18 +76,6 @@ bool wxAffineMatrix2D::Invert()
     return true;
 }
 
-// returns true if the elements of the transformation matrix are equal
-bool wxAffineMatrix2D::IsEqual(const wxAffineMatrix2DBase& t) const
-{
-    wxMatrix2D mat;
-    wxPoint2DFloat tr;
-    t.Get(&mat, &tr);
-
-    return m_11 == mat.m_11 && m_12 == mat.m_12 &&
-           m_21 == mat.m_21 && m_22 == mat.m_22 &&
-           m_tx == tr.x && m_ty == tr.y;
-}
-
 //
 // transformations
 //
@@ -105,7 +84,7 @@ bool wxAffineMatrix2D::IsEqual(const wxAffineMatrix2DBase& t) const
 // |  1   0   0 |   | m_11  m_12   0 |
 // |  0   1   0 | x | m_21  m_22   0 |
 // | dx  dy   1 |   | m_tx  m_ty   1 |
-void wxAffineMatrix2D::Translate(float dx, float dy)
+constexpr void wxAffineMatrix2D::Translate(float dx, float dy)
 {
     m_tx += m_11 * dx + m_21 * dy;
     m_ty += m_12 * dx + m_22 * dy;
@@ -115,7 +94,7 @@ void wxAffineMatrix2D::Translate(float dx, float dy)
 // | xScale   0      0 |   | m_11  m_12   0 |
 // |   0    yScale   0 | x | m_21  m_22   0 |
 // |   0      0      1 |   | m_tx  m_ty   1 |
-void wxAffineMatrix2D::Scale(float xScale, float yScale)
+constexpr void wxAffineMatrix2D::Scale(float xScale, float yScale)
 {
     m_11 *= xScale;
     m_12 *= xScale;
@@ -129,13 +108,14 @@ void wxAffineMatrix2D::Scale(float xScale, float yScale)
 // |  0      0    1 |   | m_tx  m_ty   1 |
 void wxAffineMatrix2D::Rotate(float cRadians)
 {
-    float c = std::cos(cRadians);
-    float s = std::sin(cRadians);
+    const float c = std::cos(cRadians);
+    const float s = std::sin(cRadians);
 
-    float e11 = c*m_11 + s*m_21;
-    float e12 = c*m_12 + s*m_22;
-    m_21 = c*m_21 - s*m_11;
-    m_22 = c*m_22 - s*m_12;
+    const float e11 = c * m_11 + s * m_21;
+    const float e12 = c * m_12 + s * m_22;
+
+    m_21 = c * m_21 - s * m_11;
+    m_22 = c * m_22 - s * m_12;
     m_11 = e11;
     m_12 = e12;
 }
@@ -148,8 +128,7 @@ void wxAffineMatrix2D::Rotate(float cRadians)
 //                           | m_11  m_12   0 |
 // | src.m_x  src._my  1 | x | m_21  m_22   0 |
 //                           | m_tx  m_ty   1 |
-wxPoint2DFloat
-wxAffineMatrix2D::DoTransformPoint(const wxPoint2DFloat& src) const
+constexpr wxPoint2DFloat wxAffineMatrix2D::DoTransformPoint(const wxPoint2DFloat& src) const
 {
     if ( IsIdentity() )
         return src;
@@ -162,8 +141,7 @@ wxAffineMatrix2D::DoTransformPoint(const wxPoint2DFloat& src) const
 //                           | m_11  m_12   0 |
 // | src.m_x  src._my  0 | x | m_21  m_22   0 |
 //                           | m_tx  m_ty   1 |
-wxPoint2DFloat
-wxAffineMatrix2D::DoTransformDistance(const wxPoint2DFloat& src) const
+constexpr wxPoint2DFloat wxAffineMatrix2D::DoTransformDistance(const wxPoint2DFloat& src) const
 {
     if ( IsIdentity() )
         return src;
@@ -172,7 +150,7 @@ wxAffineMatrix2D::DoTransformDistance(const wxPoint2DFloat& src) const
             src.x * m_12 + src.y * m_22};
 }
 
-bool wxAffineMatrix2D::IsIdentity() const
+constexpr bool wxAffineMatrix2D::IsIdentity() const
 {
     return m_11 == 1 && m_12 == 0 &&
            m_21 == 0 && m_22 == 1 &&

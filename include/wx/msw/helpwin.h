@@ -29,7 +29,7 @@ public:
     bool Initialize(const std::string& file) override;
     bool Initialize(const std::string& file, int WXUNUSED(server) ) override { return Initialize( file ); }
 
-    // If file is "", reloads file given in Initialize
+    // If file is empty, reloads file given in Initialize
     bool LoadFile(const std::string& file = {}) override;
     bool DisplayContents() override;
     bool DisplaySection(int sectionNo) override;
@@ -40,7 +40,7 @@ public:
                                wxHelpSearchMode mode = wxHelpSearchMode::All) override;
     bool Quit() override;
 
-    inline std::string GetHelpFile() const { return m_helpFile; }
+    std::string GetHelpFile() const { return m_helpFile; }
 
 protected:
     // Append extension if necessary.

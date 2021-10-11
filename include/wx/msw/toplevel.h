@@ -137,9 +137,9 @@ protected:
     // create a new dialog using the given dialog template from resources,
     // return false if it couldn't be created
     bool wxCreateDialog(const void *dlgTemplate,
-                      const std::string& title,
-                      const wxPoint& pos,
-                      const wxSize& size);
+                        const std::string& title,
+                        const wxPoint& pos,
+                        const wxSize& size);
 
     // Just a wrapper around MSW ShowWindow().
     void DoShowWindow(int nShowCmd);
@@ -164,9 +164,9 @@ protected:
 
     // override wxWindow virtual method to use CW_USEDEFAULT if necessary
     void MSWGetCreateWindowCoords(const wxPoint& pos,
-                                          const wxSize& size,
-                                          int& x, int& y,
-                                          int& w, int& h) const override;
+                                  const wxSize& size,
+                                  int& x, int& y,
+                                  int& w, int& h) const override;
     // The last focused child: we remember it when we're deactivated and
     // restore focus to it when we're activated (this is done here) or restored
     // from iconic state (done by wxFrame).
