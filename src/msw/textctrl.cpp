@@ -618,7 +618,7 @@ bool wxTextCtrl::MSWCreateText(const std::string& value,
 
     // Without this, if we pass the size in the constructor and then don't change it,
     // the themed borders will be drawn incorrectly.
-    SetWindowPos(GetHwnd(), nullptr, 0, 0, 0, 0,
+    ::SetWindowPos(GetHwnd(), nullptr, 0, 0, 0, 0,
                 SWP_NOZORDER|SWP_NOMOVE|SWP_NOSIZE|SWP_NOACTIVATE|
                 SWP_FRAMECHANGED);
 
@@ -911,7 +911,7 @@ std::string wxTextCtrl::GetRange(long from, long to) const
                 std::wstring tmp;
                 wchar_t* p = &tmp[0];
 
-                TEXTRANGE textRange;
+                TEXTRANGEW textRange;
                 textRange.chrg.cpMin = from;
                 textRange.chrg.cpMax = to;
                 textRange.lpstrText = p;

@@ -1374,9 +1374,6 @@
 // Use wxHTML-based help controller?
 #define wxUSE_WXHTML_HELP 1
 
-#define wxUSE_CONSTRAINTS 1
-                                // 0 for no window layout constraint system
-
 #define wxUSE_SPLINES     1
                                 // 0 for no splines
 

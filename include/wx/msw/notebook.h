@@ -128,11 +128,6 @@ public:
   bool MSWOnScroll(int orientation, WXWORD nSBCode,
                            WXWORD pos, WXHWND control) override;
 
-#if wxUSE_CONSTRAINTS
-  void SetConstraintSizes(bool recurse = true) override;
-  bool DoPhase(int nPhase) override;
-#endif // wxUSE_CONSTRAINTS
-
   // Attempts to get colour for UX theme page background
   wxColour GetThemeBackgroundColour() const override;
 
