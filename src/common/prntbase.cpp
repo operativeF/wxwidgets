@@ -30,6 +30,7 @@
 #include "wx/dc.h"
 #include "wx/app.h"
 #include "wx/msgdlg.h"
+#include "wx/layout.h"
 #include "wx/choice.h"
 #include "wx/button.h"
 #include "wx/bmpbuttn.h"
@@ -1685,17 +1686,17 @@ void wxPreviewFrame::OnCloseWindow(wxCloseEvent& WXUNUSED(event))
     // Initialize().
     switch ( m_modalityKind )
     {
-        case wxPreviewFrameModalityKind::AppModal:
+        case wxPreviewFrame_AppModal:
             delete m_windowDisabler;
             m_windowDisabler = nullptr;
             break;
 
-        case wxPreviewFrameModalityKind::WindowModal:
+        case wxPreviewFrame_WindowModal:
             if ( GetParent() )
                 GetParent()->Enable();
             break;
 
-        case wxPreviewFrameModalityKind::NonModal:
+        case wxPreviewFrame_NonModal:
             break;
     }
 
@@ -1724,23 +1725,23 @@ void wxPreviewFrame::InitializeWithModality(wxPreviewFrameModalityKind kind)
     m_modalityKind = kind;
     switch ( m_modalityKind )
     {
-        case wxPreviewFrameModalityKind::AppModal:
+        case wxPreviewFrame_AppModal:
             // Disable everything.
             m_windowDisabler = new wxWindowDisabler( this );
             break;
 
-        case wxPreviewFrameModalityKind::WindowModal:
+        case wxPreviewFrame_WindowModal:
             // Disable our parent if we have one.
             if ( GetParent() )
                 GetParent()->Disable();
             break;
 
-        case wxPreviewFrameModalityKind::NonModal:
+        case wxPreviewFrame_NonModal:
             // Nothing to do, we don't need to disable any windows.
             break;
     }
 
-    if ( m_modalityKind != wxPreviewFrameModalityKind::NonModal )
+    if ( m_modalityKind != wxPreviewFrame_NonModal )
     {
         // Behave like modal dialogs, don't show in taskbar. This implies
         // removing the minimize box, because minimizing windows without

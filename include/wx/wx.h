@@ -79,6 +79,7 @@
 #include "wx/dirdlg.h"
 #include "wx/filedlg.h"
 #include "wx/gauge.h"
+#include "wx/layout.h"
 #include "wx/listbox.h"
 #include "wx/radiobox.h"
 #include "wx/radiobut.h"

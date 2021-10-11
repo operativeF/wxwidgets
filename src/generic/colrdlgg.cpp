@@ -22,6 +22,7 @@
     #include "wx/listbox.h"
     #include "wx/button.h"
     #include "wx/stattext.h"
+    #include "wx/layout.h"
     #include "wx/dcclient.h"
     #include "wx/sizer.h"
     #include "wx/slider.h"

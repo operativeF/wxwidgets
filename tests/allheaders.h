@@ -197,6 +197,7 @@
 #include <wx/joystick.h>
 #include <wx/kbdstate.h>
 #include <wx/language.h>
+#include <wx/layout.h>
 #include <wx/laywin.h>
 #include <wx/link.h>
 #include <wx/listbase.h>

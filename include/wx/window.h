@@ -1421,8 +1421,37 @@ public:
 
 #endif // wxUSE_DRAG_AND_DROP
 
-    // sizers
+    // constraints and sizers
     // ----------------------
+#if wxUSE_CONSTRAINTS
+        // set the constraints for this window or retrieve them (may be NULL)
+    void SetConstraints( wxLayoutConstraints *constraints );
+    wxLayoutConstraints *GetConstraints() const { return m_constraints; }
+
+        // implementation only
+    void UnsetConstraints(wxLayoutConstraints *c);
+    wxWindowList *GetConstraintsInvolvedIn() const
+        { return m_constraintsInvolvedIn; }
+    void AddConstraintReference(wxWindowBase *otherWin);
+    void RemoveConstraintReference(wxWindowBase *otherWin);
+    void DeleteRelatedConstraints();
+    void ResetConstraints();
+
+        // these methods may be overridden for special layout algorithms
+    virtual void SetConstraintSizes(bool recurse = true);
+    virtual bool LayoutPhase1(int *noChanges);
+    virtual bool LayoutPhase2(int *noChanges);
+    virtual bool DoPhase(int phase);
+
+        // these methods are virtual but normally won't be overridden
+    virtual void SetSizeConstraint(int x, int y, int w, int h);
+    virtual void MoveConstraint(int x, int y);
+    virtual wxSize GetSizeConstraint() const ;
+    virtual wxSize GetClientSizeConstraint() const ;
+    virtual wxPoint GetPositionConstraint() const ;
+
+#endif // wxUSE_CONSTRAINTS
+
         // when using constraints or sizers, it makes sense to update
         // children positions automatically whenever the window is resized
         // - this is done if autoLayout is on
@@ -1607,6 +1636,11 @@ protected:
     // implementation of Navigate() and NavigateIn()
     virtual bool DoNavigateIn(unsigned int flags);
 
+#if wxUSE_CONSTRAINTS
+    // satisfy the constraints for the windows but don't set the window sizes
+    void SatisfyConstraints();
+#endif // wxUSE_CONSTRAINTS
+
     // Send the wxWindowDestroyEvent if not done yet and sets m_isBeingDeleted
     // to true
     void SendDestroyEvent();
@@ -1658,7 +1692,14 @@ protected:
     wxToolTip           *m_tooltip;
 #endif // wxUSE_TOOLTIPS
 
-    // sizers
+    // constraints and sizers
+#if wxUSE_CONSTRAINTS
+    // the constraints for this window or NULL
+    wxLayoutConstraints *m_constraints;
+
+    // constraints this window is involved in
+    wxWindowList        *m_constraintsInvolvedIn;
+#endif // wxUSE_CONSTRAINTS
 
     // this window's sizer
     wxSizer             *m_windowSizer;
