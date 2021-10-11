@@ -333,12 +333,12 @@ public:
     // wxTL_CHECKBOX style.
 
     // Simple set, unset or query the checked state.
-    void CheckItem(wxTreeListItem item, wxCheckBoxState state = wxCHK_CHECKED);
-    void UncheckItem(wxTreeListItem item) { CheckItem(item, wxCHK_UNCHECKED); }
+    void CheckItem(wxTreeListItem item, wxCheckBoxState state = wxCheckBoxState::Checked);
+    void UncheckItem(wxTreeListItem item) { CheckItem(item, wxCheckBoxState::Unchecked); }
 
     // The same but do it recursively for this item itself and its children.
     void CheckItemRecursively(wxTreeListItem item,
-                              wxCheckBoxState state = wxCHK_CHECKED);
+                              wxCheckBoxState state = wxCheckBoxState::Checked);
 
     // Update the parent of this item recursively: if this item and all its
     // siblings are checked, the parent will become checked as well. If this
@@ -470,7 +470,7 @@ public:
     wxTreeListEvent() { 
         m_column = gsl::narrow_cast<unsigned>(-1);
 
-        m_oldCheckedState = wxCHK_UNDETERMINED;
+        m_oldCheckedState = wxCheckBoxState::Indeterminate;
      }
 
     // The item affected by the event. Valid for all events except
@@ -502,7 +502,7 @@ private:
         
         m_column = gsl::narrow_cast<unsigned>(-1);
 
-        m_oldCheckedState = wxCHK_UNDETERMINED;
+        m_oldCheckedState = wxCheckBoxState::Indeterminate;
     
     }
 

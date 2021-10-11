@@ -34,7 +34,7 @@ bool wxCheckBox::Create(wxWindow *parent,
                         const wxValidator& validator,
                         const std::string& name)
 {
-    m_state = wxCHK_UNCHECKED;
+    m_state = wxCheckBoxState::Unchecked;
 
     WXValidateStyle(&style);
     if ( !CreateControl(parent, id, pos, size, style, validator, name) )
@@ -131,29 +131,24 @@ void wxCheckBox::SetLabel(const std::string& label)
 
 void wxCheckBox::SetValue(bool val)
 {
-    Set3StateValue(val ? wxCHK_CHECKED : wxCHK_UNCHECKED);
+    Set3StateValue(val ? wxCheckBoxState::Checked : wxCheckBoxState::Unchecked);
 }
 
 bool wxCheckBox::GetValue() const
 {
-    return Get3StateValue() != wxCHK_UNCHECKED;
+    return Get3StateValue() != wxCheckBoxState::Unchecked;
 }
 
 void wxCheckBox::Command(wxCommandEvent& event)
 {
-    int state = event.GetInt();
-    wxCHECK_RET( (state == wxCHK_UNCHECKED) || (state == wxCHK_CHECKED)
-        || (state == wxCHK_UNDETERMINED),
+    auto state = static_cast<wxCheckBoxState>(event.GetInt());
+    wxCHECK_RET( (state == wxCheckBoxState::Unchecked) || (state == wxCheckBoxState::Checked)
+        || (state == wxCheckBoxState::Indeterminate),
         wxT("event.GetInt() returned an invalid checkbox state") );
 
-    Set3StateValue((wxCheckBoxState) state);
+    Set3StateValue(state);
     ProcessCommand(event);
 }
-
-static_assert(wxCHK_UNCHECKED == BST_UNCHECKED
-              && wxCHK_CHECKED == BST_CHECKED
-              && wxCHK_UNDETERMINED == BST_INDETERMINATE,
-              "Enum values incorrect");
 
 void wxCheckBox::DoSet3StateValue(wxCheckBoxState state)
 {
@@ -182,12 +177,12 @@ bool wxCheckBox::MSWCommand(WXUINT cmd, WXWORD WXUNUSED(id))
     wxCheckBoxState state;
     if ( Is3rdStateAllowedForUser() )
     {
-        state = (wxCheckBoxState)((m_state + 1) % 3);
+        state = (wxCheckBoxState)((static_cast<int>(m_state) + 1) % 3);
     }
     else // 2 state checkbox (at least from users point of view)
     {
-        // note that wxCHK_UNDETERMINED also becomes unchecked when clicked
-        state = m_state == wxCHK_UNCHECKED ? wxCHK_CHECKED : wxCHK_UNCHECKED;
+        // note that wxCheckBoxState::Indeterminate also becomes unchecked when clicked
+        state = m_state == wxCheckBoxState::Unchecked ? wxCheckBoxState::Checked : wxCheckBoxState::Unchecked;
     }
 
     DoSet3StateValue(state);
@@ -196,7 +191,7 @@ bool wxCheckBox::MSWCommand(WXUINT cmd, WXWORD WXUNUSED(id))
     // generate the event
     wxCommandEvent event(wxEVT_CHECKBOX, m_windowId);
 
-    event.SetInt(state);
+    event.SetInt(static_cast<int>(state));
     event.SetEventObject(this);
     ProcessCommand(event);
 
@@ -222,13 +217,13 @@ unsigned int wxCheckBox::MSWGetButtonCheckedFlag() const
 {
     switch ( Get3StateValue() )
     {
-        case wxCHK_CHECKED:
+        case wxCheckBoxState::Checked:
             return wxCONTROL_CHECKED;
 
-        case wxCHK_UNDETERMINED:
+        case wxCheckBoxState::Indeterminate:
             return wxCONTROL_UNDETERMINED;
 
-        case wxCHK_UNCHECKED:
+        case wxCheckBoxState::Unchecked:
             // no extra styles needed
             return wxCONTROL_NONE;
     }

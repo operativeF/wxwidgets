@@ -2020,15 +2020,15 @@ std::string wxDataViewCheckIconTextRenderer::GetAccessibleDescription() const
 
     switch ( m_value.GetCheckedState() )
     {
-        case wxCHK_CHECKED:
+        case wxCheckBoxState::Checked:
             /* TRANSLATORS: Checkbox state name */
             text += _("checked");
             break;
-        case wxCHK_UNCHECKED:
+        case wxCheckBoxState::Unchecked:
             /* TRANSLATORS: Checkbox state name */
             text += _("unchecked");
             break;
-        case wxCHK_UNDETERMINED:
+        case wxCheckBoxState::Indeterminate:
             /* TRANSLATORS: Checkbox state name */
             text += _("undetermined");
             break;
@@ -2075,14 +2075,14 @@ bool wxDataViewCheckIconTextRenderer::Render(wxRect cell, wxDC* dc, int state)
     int renderFlags = 0;
     switch ( m_value.GetCheckedState() )
     {
-        case wxCHK_UNCHECKED:
+        case wxCheckBoxState::Unchecked:
             break;
 
-        case wxCHK_CHECKED:
+        case wxCheckBoxState::Checked:
             renderFlags |= wxCONTROL_CHECKED;
             break;
 
-        case wxCHK_UNDETERMINED:
+        case wxCheckBoxState::Indeterminate:
             renderFlags |= wxCONTROL_UNDETERMINED;
             break;
     }
@@ -2144,19 +2144,19 @@ wxDataViewCheckIconTextRenderer::ActivateCell(const wxRect& WXUNUSED(cell),
     wxCheckBoxState checkedState = m_value.GetCheckedState();
     switch ( checkedState )
     {
-        case wxCHK_CHECKED:
-            checkedState = m_allow3rdStateForUser ? wxCHK_UNDETERMINED
-                                                  : wxCHK_UNCHECKED;
+        case wxCheckBoxState::Checked:
+            checkedState = m_allow3rdStateForUser ? wxCheckBoxState::Indeterminate
+                                                  : wxCheckBoxState::Unchecked;
             break;
 
-        case wxCHK_UNDETERMINED:
+        case wxCheckBoxState::Indeterminate:
             // Whether 3rd state is user-settable or not, the next state is
             // unchecked.
-            checkedState = wxCHK_UNCHECKED;
+            checkedState = wxCheckBoxState::Unchecked;
             break;
 
-        case wxCHK_UNCHECKED:
-            checkedState = wxCHK_CHECKED;
+        case wxCheckBoxState::Unchecked:
+            checkedState = wxCheckBoxState::Checked;
             break;
     }
 

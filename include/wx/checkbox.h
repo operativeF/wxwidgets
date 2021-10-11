@@ -46,11 +46,11 @@ constexpr char wxCheckBoxNameStr[] = "check";
  * The possible states of a 3-state checkbox (Compatible
  * with the 2-state checkbox).
  */
-enum wxCheckBoxState
+enum class wxCheckBoxState
 {
-    wxCHK_UNCHECKED,
-    wxCHK_CHECKED,
-    wxCHK_UNDETERMINED /* 3-state checkbox only */
+    Unchecked,
+    Checked,
+    Indeterminate /* 3-state checkbox only */
 };
 
 // ----------------------------------------------------------------------------
@@ -81,13 +81,13 @@ public:
     {
         wxCheckBoxState state = DoGet3StateValue();
 
-        if ( state == wxCHK_UNDETERMINED && !Is3State() )
+        if ( state == wxCheckBoxState::Indeterminate && !Is3State() )
         {
             // Undetermined state with a 2-state checkbox??
             wxFAIL_MSG( wxT("DoGet3StateValue() says the 2-state checkbox is ")
                 wxT("in an undetermined/third state") );
 
-            state = wxCHK_UNCHECKED;
+            state = wxCheckBoxState::Unchecked;
         }
 
         return state;
@@ -95,10 +95,10 @@ public:
 
     void Set3StateValue(wxCheckBoxState state)
     {
-        if ( state == wxCHK_UNDETERMINED && !Is3State() )
+        if ( state == wxCheckBoxState::Indeterminate && !Is3State() )
         {
             wxFAIL_MSG(wxT("Setting a 2-state checkbox to undetermined state"));
-            state = wxCHK_UNCHECKED;
+            state = wxCheckBoxState::Unchecked;
         }
 
         DoSet3StateValue(state);
@@ -136,7 +136,7 @@ protected:
     virtual wxCheckBoxState DoGet3StateValue() const
     {
         wxFAIL;
-        return wxCHK_UNCHECKED;
+        return wxCheckBoxState::Unchecked;
     }
 
     // Helper function to be called from derived classes Create()

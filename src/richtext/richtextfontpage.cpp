@@ -409,11 +409,11 @@ bool wxRichTextFontPage::TransferDataFromWindow()
     else
         attr->SetFlags(attr->GetFlags() & (~ wxTEXT_ATTR_BACKGROUND_COLOUR));
 
-    if (m_strikethroughCtrl->Get3StateValue() != wxCHK_UNDETERMINED)
+    if (m_strikethroughCtrl->Get3StateValue() != wxCheckBoxState::Indeterminate)
     {
         attr->SetTextEffectFlags(attr->GetTextEffectFlags() | wxTEXT_ATTR_EFFECT_STRIKETHROUGH);
 
-        if (m_strikethroughCtrl->Get3StateValue() == wxCHK_CHECKED)
+        if (m_strikethroughCtrl->Get3StateValue() == wxCheckBoxState::Checked)
             attr->SetTextEffects(attr->GetTextEffects() | wxTEXT_ATTR_EFFECT_STRIKETHROUGH);
         else
             attr->SetTextEffects(attr->GetTextEffects() & ~wxTEXT_ATTR_EFFECT_STRIKETHROUGH);
@@ -424,11 +424,11 @@ bool wxRichTextFontPage::TransferDataFromWindow()
         attr->SetTextEffects(attr->GetTextEffects() & ~wxTEXT_ATTR_EFFECT_STRIKETHROUGH);
     }
 
-    if (m_capitalsCtrl->Get3StateValue() != wxCHK_UNDETERMINED)
+    if (m_capitalsCtrl->Get3StateValue() != wxCheckBoxState::Indeterminate)
     {
         attr->SetTextEffectFlags(attr->GetTextEffectFlags() | wxTEXT_ATTR_EFFECT_CAPITALS);
 
-        if (m_capitalsCtrl->Get3StateValue() == wxCHK_CHECKED)
+        if (m_capitalsCtrl->Get3StateValue() == wxCheckBoxState::Checked)
             attr->SetTextEffects(attr->GetTextEffects() | wxTEXT_ATTR_EFFECT_CAPITALS);
         else
             attr->SetTextEffects(attr->GetTextEffects() & ~wxTEXT_ATTR_EFFECT_CAPITALS);
@@ -439,11 +439,11 @@ bool wxRichTextFontPage::TransferDataFromWindow()
         attr->SetTextEffects(attr->GetTextEffects() & ~wxTEXT_ATTR_EFFECT_CAPITALS);
     }
 
-    if (m_smallCapitalsCtrl->Get3StateValue() != wxCHK_UNDETERMINED)
+    if (m_smallCapitalsCtrl->Get3StateValue() != wxCheckBoxState::Indeterminate)
     {
         attr->SetTextEffectFlags(attr->GetTextEffectFlags() | wxTEXT_ATTR_EFFECT_SMALL_CAPITALS);
 
-        if (m_smallCapitalsCtrl->Get3StateValue() == wxCHK_CHECKED)
+        if (m_smallCapitalsCtrl->Get3StateValue() == wxCheckBoxState::Checked)
             attr->SetTextEffects(attr->GetTextEffects() | wxTEXT_ATTR_EFFECT_SMALL_CAPITALS);
         else
             attr->SetTextEffects(attr->GetTextEffects() & ~wxTEXT_ATTR_EFFECT_SMALL_CAPITALS);
@@ -454,13 +454,13 @@ bool wxRichTextFontPage::TransferDataFromWindow()
         attr->SetTextEffects(attr->GetTextEffects() & ~wxTEXT_ATTR_EFFECT_SMALL_CAPITALS);
     }
 
-    if (m_superscriptCtrl->Get3StateValue() == wxCHK_CHECKED)
+    if (m_superscriptCtrl->Get3StateValue() == wxCheckBoxState::Checked)
     {
         attr->SetTextEffectFlags(attr->GetTextEffectFlags() | wxTEXT_ATTR_EFFECT_SUPERSCRIPT);
         attr->SetTextEffects(attr->GetTextEffects() | wxTEXT_ATTR_EFFECT_SUPERSCRIPT);
         attr->SetTextEffects(attr->GetTextEffects() & ~wxTEXT_ATTR_EFFECT_SUBSCRIPT);
     }
-    else if (m_subscriptCtrl->Get3StateValue() == wxCHK_CHECKED)
+    else if (m_subscriptCtrl->Get3StateValue() == wxCheckBoxState::Checked)
     {
         attr->SetTextEffectFlags(attr->GetTextEffectFlags() | wxTEXT_ATTR_EFFECT_SUBSCRIPT);
         attr->SetTextEffects(attr->GetTextEffects() | wxTEXT_ATTR_EFFECT_SUBSCRIPT);
@@ -476,11 +476,11 @@ bool wxRichTextFontPage::TransferDataFromWindow()
 
     if (GetAllowedTextEffects() & wxTEXT_ATTR_EFFECT_RTL)
     {
-        if (m_rtlCtrl->Get3StateValue() != wxCHK_UNDETERMINED)
+        if (m_rtlCtrl->Get3StateValue() != wxCheckBoxState::Indeterminate)
         {
             attr->SetTextEffectFlags(attr->GetTextEffectFlags() | wxTEXT_ATTR_EFFECT_RTL);
 
-            if (m_rtlCtrl->Get3StateValue() == wxCHK_CHECKED)
+            if (m_rtlCtrl->Get3StateValue() == wxCheckBoxState::Checked)
                 attr->SetTextEffects(attr->GetTextEffects() | wxTEXT_ATTR_EFFECT_RTL);
             else
                 attr->SetTextEffects(attr->GetTextEffects() & ~wxTEXT_ATTR_EFFECT_RTL);
@@ -494,11 +494,11 @@ bool wxRichTextFontPage::TransferDataFromWindow()
 
     if (GetAllowedTextEffects() & wxTEXT_ATTR_EFFECT_SUPPRESS_HYPHENATION)
     {
-        if (m_suppressHyphenationCtrl->Get3StateValue() != wxCHK_UNDETERMINED)
+        if (m_suppressHyphenationCtrl->Get3StateValue() != wxCheckBoxState::Indeterminate)
         {
             attr->SetTextEffectFlags(attr->GetTextEffectFlags() | wxTEXT_ATTR_EFFECT_SUPPRESS_HYPHENATION);
 
-            if (m_suppressHyphenationCtrl->Get3StateValue() == wxCHK_CHECKED)
+            if (m_suppressHyphenationCtrl->Get3StateValue() == wxCheckBoxState::Checked)
                 attr->SetTextEffects(attr->GetTextEffects() | wxTEXT_ATTR_EFFECT_SUPPRESS_HYPHENATION);
             else
                 attr->SetTextEffects(attr->GetTextEffects() & ~wxTEXT_ATTR_EFFECT_SUPPRESS_HYPHENATION);
@@ -622,55 +622,55 @@ bool wxRichTextFontPage::TransferDataToWindow()
         if (attr->GetTextEffectFlags() & wxTEXT_ATTR_EFFECT_STRIKETHROUGH)
         {
             if (attr->GetTextEffects() & wxTEXT_ATTR_EFFECT_STRIKETHROUGH)
-                m_strikethroughCtrl->Set3StateValue(wxCHK_CHECKED);
+                m_strikethroughCtrl->Set3StateValue(wxCheckBoxState::Checked);
             else
-                m_strikethroughCtrl->Set3StateValue(wxCHK_UNCHECKED);
+                m_strikethroughCtrl->Set3StateValue(wxCheckBoxState::Unchecked);
         }
         else
-            m_strikethroughCtrl->Set3StateValue(wxCHK_UNDETERMINED);
+            m_strikethroughCtrl->Set3StateValue(wxCheckBoxState::Indeterminate);
 
         if (attr->GetTextEffectFlags() & wxTEXT_ATTR_EFFECT_CAPITALS)
         {
             if (attr->GetTextEffects() & wxTEXT_ATTR_EFFECT_CAPITALS)
-                m_capitalsCtrl->Set3StateValue(wxCHK_CHECKED);
+                m_capitalsCtrl->Set3StateValue(wxCheckBoxState::Checked);
             else
-                m_capitalsCtrl->Set3StateValue(wxCHK_UNCHECKED);
+                m_capitalsCtrl->Set3StateValue(wxCheckBoxState::Unchecked);
         }
         else
-            m_capitalsCtrl->Set3StateValue(wxCHK_UNDETERMINED);
+            m_capitalsCtrl->Set3StateValue(wxCheckBoxState::Indeterminate);
 
         if (attr->GetTextEffectFlags() & wxTEXT_ATTR_EFFECT_SMALL_CAPITALS)
         {
             if (attr->GetTextEffects() & wxTEXT_ATTR_EFFECT_SMALL_CAPITALS)
-                m_smallCapitalsCtrl->Set3StateValue(wxCHK_CHECKED);
+                m_smallCapitalsCtrl->Set3StateValue(wxCheckBoxState::Checked);
             else
-                m_smallCapitalsCtrl->Set3StateValue(wxCHK_UNCHECKED);
+                m_smallCapitalsCtrl->Set3StateValue(wxCheckBoxState::Unchecked);
         }
         else
-            m_smallCapitalsCtrl->Set3StateValue(wxCHK_UNDETERMINED);
+            m_smallCapitalsCtrl->Set3StateValue(wxCheckBoxState::Indeterminate);
 
         if ( attr->GetTextEffectFlags() & (wxTEXT_ATTR_EFFECT_SUPERSCRIPT | wxTEXT_ATTR_EFFECT_SUBSCRIPT) )
         {
             if (attr->GetTextEffects() & wxTEXT_ATTR_EFFECT_SUPERSCRIPT)
             {
-                m_superscriptCtrl->Set3StateValue(wxCHK_CHECKED);
-                m_subscriptCtrl->Set3StateValue(wxCHK_UNCHECKED);
+                m_superscriptCtrl->Set3StateValue(wxCheckBoxState::Checked);
+                m_subscriptCtrl->Set3StateValue(wxCheckBoxState::Unchecked);
             }
             else if (attr->GetTextEffects() & wxTEXT_ATTR_EFFECT_SUBSCRIPT)
             {
-                m_superscriptCtrl->Set3StateValue(wxCHK_UNCHECKED);
-                m_subscriptCtrl->Set3StateValue(wxCHK_CHECKED);
+                m_superscriptCtrl->Set3StateValue(wxCheckBoxState::Unchecked);
+                m_subscriptCtrl->Set3StateValue(wxCheckBoxState::Checked);
             }
             else
             {
-                m_superscriptCtrl->Set3StateValue(wxCHK_UNCHECKED);
-                m_subscriptCtrl->Set3StateValue(wxCHK_UNCHECKED);
+                m_superscriptCtrl->Set3StateValue(wxCheckBoxState::Unchecked);
+                m_subscriptCtrl->Set3StateValue(wxCheckBoxState::Unchecked);
             }
         }
         else
         {
-            m_superscriptCtrl->Set3StateValue(wxCHK_UNDETERMINED);
-            m_subscriptCtrl->Set3StateValue(wxCHK_UNDETERMINED);
+            m_superscriptCtrl->Set3StateValue(wxCheckBoxState::Indeterminate);
+            m_subscriptCtrl->Set3StateValue(wxCheckBoxState::Indeterminate);
         }
 
         if (GetAllowedTextEffects() & wxTEXT_ATTR_EFFECT_RTL)
@@ -678,12 +678,12 @@ bool wxRichTextFontPage::TransferDataToWindow()
             if (attr->GetTextEffectFlags() & wxTEXT_ATTR_EFFECT_RTL)
             {
                 if (attr->GetTextEffects() & wxTEXT_ATTR_EFFECT_RTL)
-                    m_rtlCtrl->Set3StateValue(wxCHK_CHECKED);
+                    m_rtlCtrl->Set3StateValue(wxCheckBoxState::Checked);
                 else
-                    m_rtlCtrl->Set3StateValue(wxCHK_UNCHECKED);
+                    m_rtlCtrl->Set3StateValue(wxCheckBoxState::Unchecked);
             }
             else
-                m_rtlCtrl->Set3StateValue(wxCHK_UNDETERMINED);        
+                m_rtlCtrl->Set3StateValue(wxCheckBoxState::Indeterminate);        
         }
 
         if (GetAllowedTextEffects() & wxTEXT_ATTR_EFFECT_SUPPRESS_HYPHENATION)
@@ -691,23 +691,23 @@ bool wxRichTextFontPage::TransferDataToWindow()
             if (attr->GetTextEffectFlags() & wxTEXT_ATTR_EFFECT_SUPPRESS_HYPHENATION)
             {
                 if (attr->GetTextEffects() & wxTEXT_ATTR_EFFECT_SUPPRESS_HYPHENATION)
-                    m_suppressHyphenationCtrl->Set3StateValue(wxCHK_CHECKED);
+                    m_suppressHyphenationCtrl->Set3StateValue(wxCheckBoxState::Checked);
                 else
-                    m_suppressHyphenationCtrl->Set3StateValue(wxCHK_UNCHECKED);
+                    m_suppressHyphenationCtrl->Set3StateValue(wxCheckBoxState::Unchecked);
             }
             else
-                m_suppressHyphenationCtrl->Set3StateValue(wxCHK_UNDETERMINED);        
+                m_suppressHyphenationCtrl->Set3StateValue(wxCheckBoxState::Indeterminate);        
         }
     }
     else
     {
-        m_strikethroughCtrl->Set3StateValue(wxCHK_UNDETERMINED);
-        m_capitalsCtrl->Set3StateValue(wxCHK_UNDETERMINED);
-        m_smallCapitalsCtrl->Set3StateValue(wxCHK_UNDETERMINED);
-        m_superscriptCtrl->Set3StateValue(wxCHK_UNDETERMINED);
-        m_subscriptCtrl->Set3StateValue(wxCHK_UNDETERMINED);
-        m_rtlCtrl->Set3StateValue(wxCHK_UNDETERMINED);
-        m_suppressHyphenationCtrl->Set3StateValue(wxCHK_UNDETERMINED);
+        m_strikethroughCtrl->Set3StateValue(wxCheckBoxState::Indeterminate);
+        m_capitalsCtrl->Set3StateValue(wxCheckBoxState::Indeterminate);
+        m_smallCapitalsCtrl->Set3StateValue(wxCheckBoxState::Indeterminate);
+        m_superscriptCtrl->Set3StateValue(wxCheckBoxState::Indeterminate);
+        m_subscriptCtrl->Set3StateValue(wxCheckBoxState::Indeterminate);
+        m_rtlCtrl->Set3StateValue(wxCheckBoxState::Indeterminate);
+        m_suppressHyphenationCtrl->Set3StateValue(wxCheckBoxState::Indeterminate);
     }
 
     UpdatePreview();
@@ -803,24 +803,24 @@ void wxRichTextFontPage::UpdatePreview()
 
     int textEffects = 0;
 
-    if (m_strikethroughCtrl->Get3StateValue() == wxCHK_CHECKED)
+    if (m_strikethroughCtrl->Get3StateValue() == wxCheckBoxState::Checked)
     {
         textEffects |= wxTEXT_ATTR_EFFECT_STRIKETHROUGH;
     }
 
-    if (m_capitalsCtrl->Get3StateValue() == wxCHK_CHECKED)
+    if (m_capitalsCtrl->Get3StateValue() == wxCheckBoxState::Checked)
     {
         textEffects |= wxTEXT_ATTR_EFFECT_CAPITALS;
     }
 
-    if (m_smallCapitalsCtrl->Get3StateValue() == wxCHK_CHECKED)
+    if (m_smallCapitalsCtrl->Get3StateValue() == wxCheckBoxState::Checked)
     {
         textEffects |= wxTEXT_ATTR_EFFECT_SMALL_CAPITALS;
     }
 
-    if ( m_superscriptCtrl->Get3StateValue() == wxCHK_CHECKED )
+    if ( m_superscriptCtrl->Get3StateValue() == wxCheckBoxState::Checked )
         textEffects |= wxTEXT_ATTR_EFFECT_SUPERSCRIPT;
-    else if ( m_subscriptCtrl->Get3StateValue() == wxCHK_CHECKED )
+    else if ( m_subscriptCtrl->Get3StateValue() == wxCheckBoxState::Checked )
         textEffects |= wxTEXT_ATTR_EFFECT_SUBSCRIPT;
 
     wxFont font = attr.GetFont();
@@ -1059,8 +1059,8 @@ void wxRichTextFontPage::OnRichtextfontpageSuperscriptClick( wxCommandEvent& WXU
     if (m_dontUpdate)
         return;
 
-    if ( m_superscriptCtrl->Get3StateValue() == wxCHK_CHECKED)
-        m_subscriptCtrl->Set3StateValue( wxCHK_UNCHECKED );
+    if ( m_superscriptCtrl->Get3StateValue() == wxCheckBoxState::Checked)
+        m_subscriptCtrl->Set3StateValue( wxCheckBoxState::Unchecked );
 
     UpdatePreview();
 }
@@ -1074,8 +1074,8 @@ void wxRichTextFontPage::OnRichtextfontpageSubscriptClick( wxCommandEvent& WXUNU
     if (m_dontUpdate)
         return;
 
-    if ( m_subscriptCtrl->Get3StateValue() == wxCHK_CHECKED)
-        m_superscriptCtrl->Set3StateValue( wxCHK_UNCHECKED );
+    if ( m_subscriptCtrl->Get3StateValue() == wxCheckBoxState::Checked)
+        m_superscriptCtrl->Set3StateValue( wxCheckBoxState::Unchecked );
 
     UpdatePreview();
 }

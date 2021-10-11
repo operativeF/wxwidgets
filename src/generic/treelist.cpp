@@ -52,7 +52,7 @@ public:
         m_imageClosed = imageClosed;
         m_imageOpened = imageOpened;
 
-        m_checkedState = wxCHK_UNCHECKED;
+        m_checkedState = wxCheckBoxState::Unchecked;
 
         m_data = data;
 
@@ -1275,7 +1275,7 @@ void wxTreeListCtrl::UpdateItemParentStateRecursively(wxTreeListItem item)
         const wxCheckBoxState stateItem = GetCheckedState(item);
         CheckItem(parent, AreAllChildrenInState(parent, stateItem)
                             ? stateItem
-                            : wxCHK_UNDETERMINED);
+                            : wxCheckBoxState::Indeterminate);
 
         // And do the same thing with the parent's parent too.
         item = parent;
@@ -1284,7 +1284,7 @@ void wxTreeListCtrl::UpdateItemParentStateRecursively(wxTreeListItem item)
 
 wxCheckBoxState wxTreeListCtrl::GetCheckedState(wxTreeListItem item) const
 {
-    wxCHECK_MSG( item.IsOk(), wxCHK_UNDETERMINED, "Invalid item" );
+    wxCHECK_MSG( item.IsOk(), wxCheckBoxState::Indeterminate, "Invalid item" );
 
     return item->m_checkedState;
 }

@@ -86,7 +86,7 @@ class WXDLLIMPEXP_CORE wxDataViewCheckIconText : public wxDataViewIconText
 public:
     wxDataViewCheckIconText(const std::string& text = std::string(),
                             const wxIcon& icon = wxNullIcon,
-                            wxCheckBoxState checkedState = wxCHK_UNDETERMINED)
+                            wxCheckBoxState checkedState = wxCheckBoxState::Indeterminate)
         : wxDataViewIconText(text, icon),
           m_checkedState(checkedState)
     {
@@ -559,7 +559,7 @@ public:
     wxDataViewCheckIconTextRenderer& operator=(wxDataViewCheckIconTextRenderer&&) = default;
 
     // This renderer can always display the 3rd ("indeterminate") checkbox
-    // state if the model contains cells with wxCHK_UNDETERMINED value, but it
+    // state if the model contains cells with wxCheckBoxState::Indeterminate value, but it
     // doesn't allow the user to set it by default. Call this method to allow
     // this to happen.
     void Allow3rdStateForUser(bool allow = true);

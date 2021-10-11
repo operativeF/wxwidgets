@@ -133,32 +133,32 @@ TEST_CASE_FIXTURE(TreeListCtrlTest, "Tree list control test")
     // Test checking and unchecking items.
     SUBCASE("ItemCheck")
     {
-        CHECK_EQ( wxCHK_UNCHECKED,
+        CHECK_EQ( wxCheckBoxState::Unchecked,
                               m_treelist->GetCheckedState(m_code) );
 
         m_treelist->CheckItemRecursively(m_code);
-        CHECK_EQ( wxCHK_CHECKED,
+        CHECK_EQ( wxCheckBoxState::Checked,
                               m_treelist->GetCheckedState(m_code) );
-        CHECK_EQ( wxCHK_CHECKED,
+        CHECK_EQ( wxCheckBoxState::Checked,
                               m_treelist->GetCheckedState(m_code_osx) );
-        CHECK_EQ( wxCHK_CHECKED,
+        CHECK_EQ( wxCheckBoxState::Checked,
                               m_treelist->GetCheckedState(m_code_osx_cocoa) );
 
         m_treelist->UncheckItem(m_code_osx_cocoa);
-        CHECK_EQ( wxCHK_UNCHECKED,
+        CHECK_EQ( wxCheckBoxState::Unchecked,
                               m_treelist->GetCheckedState(m_code_osx_cocoa) );
 
         m_treelist->UpdateItemParentStateRecursively(m_code_osx_cocoa);
-        CHECK_EQ( wxCHK_UNDETERMINED,
+        CHECK_EQ( wxCheckBoxState::Indeterminate,
                               m_treelist->GetCheckedState(m_code_osx) );
-        CHECK_EQ( wxCHK_UNDETERMINED,
+        CHECK_EQ( wxCheckBoxState::Indeterminate,
                               m_treelist->GetCheckedState(m_code) );
 
-        m_treelist->CheckItemRecursively(m_code_osx, wxCHK_UNCHECKED);
+        m_treelist->CheckItemRecursively(m_code_osx, wxCheckBoxState::Unchecked);
         m_treelist->UpdateItemParentStateRecursively(m_code_osx_cocoa);
-        CHECK_EQ( wxCHK_UNCHECKED,
+        CHECK_EQ( wxCheckBoxState::Unchecked,
                               m_treelist->GetCheckedState(m_code_osx) );
-        CHECK_EQ( wxCHK_UNDETERMINED,
+        CHECK_EQ( wxCheckBoxState::Indeterminate,
                               m_treelist->GetCheckedState(m_code) );
     }
 }

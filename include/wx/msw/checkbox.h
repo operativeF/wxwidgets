@@ -83,7 +83,7 @@ protected:
 
 private:    
     // current state of the checkbox
-    wxCheckBoxState m_state{wxCHK_UNCHECKED};
+    wxCheckBoxState m_state{wxCheckBoxState::Unchecked};
 
 public:
 	wxClassInfo *wxGetClassInfo() const override;

@@ -671,7 +671,7 @@ bool wxRichTextBordersPage::TransferDataToWindow()
     // Corner radius
     if (!GetAttributes()->GetTextBoxAttr().HasCornerRadius())
     {
-        m_cornerRadiusCheckBox->Set3StateValue(wxCHK_UNDETERMINED);
+        m_cornerRadiusCheckBox->Set3StateValue(wxCheckBoxState::Indeterminate);
         m_cornerRadiusText->SetValue("0");
         m_cornerRadiusUnits->SetSelection(0);
     }
@@ -687,9 +687,9 @@ bool wxRichTextBordersPage::TransferDataToWindow()
             & units);
 
         if (GetAttributes()->GetTextBoxAttr().GetCornerRadius().GetValue() == 0)
-            m_cornerRadiusCheckBox->Set3StateValue(wxCHK_UNCHECKED);
+            m_cornerRadiusCheckBox->Set3StateValue(wxCheckBoxState::Unchecked);
         else
-            m_cornerRadiusCheckBox->Set3StateValue(wxCHK_CHECKED);
+            m_cornerRadiusCheckBox->Set3StateValue(wxCheckBoxState::Checked);
     }
 
     m_ignoreUpdates = false;
@@ -724,13 +724,13 @@ bool wxRichTextBordersPage::TransferDataFromWindow()
         wxRichTextFormattingDialog::GetDimensionValue(GetAttributes()->GetTextBoxAttr().GetCornerRadius(), m_cornerRadiusText, m_cornerRadiusUnits, nullptr,
             & units);
 
-        if (m_cornerRadiusCheckBox->Get3StateValue() == wxCHK_UNDETERMINED)
+        if (m_cornerRadiusCheckBox->Get3StateValue() == wxCheckBoxState::Indeterminate)
         {
             // When we apply the attributes, we won't apply this one, to leave the original unchanged.
             GetAttributes()->GetTextBoxAttr().GetCornerRadius().Reset();
             GetAttributes()->GetTextBoxAttr().RemoveFlag(wxTEXT_BOX_ATTR_CORNER_RADIUS);
         }
-        else if (m_cornerRadiusCheckBox->Get3StateValue() == wxCHK_UNCHECKED)
+        else if (m_cornerRadiusCheckBox->Get3StateValue() == wxCheckBoxState::Unchecked)
         {
             GetAttributes()->GetTextBoxAttr().GetCornerRadius().SetValue(0);
             GetAttributes()->GetTextBoxAttr().AddFlag(wxTEXT_BOX_ATTR_CORNER_RADIUS);
@@ -750,7 +750,7 @@ void wxRichTextBordersPage::SetBorderValue(wxTextAttrBorder& border, wxTextCtrl*
 {
     if (!border.IsValid())
     {
-        checkBox->Set3StateValue(wxCHK_UNDETERMINED);
+        checkBox->Set3StateValue(wxCheckBoxState::Indeterminate);
         widthValueCtrl->SetValue("0");
         widthUnitsCtrl->SetSelection(0);
         colourCtrl->SetColour(*wxBLACK);
@@ -778,9 +778,9 @@ void wxRichTextBordersPage::SetBorderValue(wxTextAttrBorder& border, wxTextCtrl*
         colourCtrl->SetColour(border.GetColour());
         
         if (sel == std::begin(borderStyles))
-            checkBox->Set3StateValue(wxCHK_UNCHECKED);
+            checkBox->Set3StateValue(wxCheckBoxState::Unchecked);
         else
-            checkBox->Set3StateValue(wxCHK_CHECKED);
+            checkBox->Set3StateValue(wxCheckBoxState::Checked);
     }
 }
 
@@ -800,12 +800,12 @@ void wxRichTextBordersPage::GetBorderValue(wxTextAttrBorder& border, wxTextCtrl*
     int sel = styleCtrl->GetSelection();
     border.SetColour(colourCtrl->GetColour());
 
-    if (checkBox->Get3StateValue() == wxCHK_UNDETERMINED)
+    if (checkBox->Get3StateValue() == wxCheckBoxState::Indeterminate)
     {
         // When we apply the attributes, we won't apply this one, to leave the original unchanged.
         border.Reset();
     }
-    else if (checkBox->Get3StateValue() == wxCHK_UNCHECKED)
+    else if (checkBox->Get3StateValue() == wxCheckBoxState::Unchecked)
     {
         border.SetStyle(wxTEXT_BOX_ATTR_BORDER_NONE);
         border.GetWidth().SetValue(0);
@@ -849,7 +849,7 @@ wxIcon wxRichTextBordersPage::GetIconResource( const std::string& name )
 
 void wxRichTextBordersPage::OnRichtextBorderLeftUpdate( wxUpdateUIEvent& event )
 {
-    event.Enable(m_leftBorderCheckbox->Get3StateValue() == wxCHK_CHECKED);
+    event.Enable(m_leftBorderCheckbox->Get3StateValue() == wxCheckBoxState::Checked);
 }
 
 /*!
@@ -858,7 +858,7 @@ void wxRichTextBordersPage::OnRichtextBorderLeftUpdate( wxUpdateUIEvent& event )
 
 void wxRichTextBordersPage::OnRichtextBorderRightUpdate( wxUpdateUIEvent& event )
 {
-    event.Enable(m_rightBorderCheckbox->Get3StateValue() == wxCHK_CHECKED && !m_borderSyncCtrl->GetValue());
+    event.Enable(m_rightBorderCheckbox->Get3StateValue() == wxCheckBoxState::Checked && !m_borderSyncCtrl->GetValue());
 }
 
 /*!
@@ -867,7 +867,7 @@ void wxRichTextBordersPage::OnRichtextBorderRightUpdate( wxUpdateUIEvent& event 
 
 void wxRichTextBordersPage::OnRichtextBorderTopUpdate( wxUpdateUIEvent& event )
 {
-    event.Enable(m_topBorderCheckbox->Get3StateValue() == wxCHK_CHECKED && !m_borderSyncCtrl->GetValue());
+    event.Enable(m_topBorderCheckbox->Get3StateValue() == wxCheckBoxState::Checked && !m_borderSyncCtrl->GetValue());
 }
 
 /*!
@@ -876,7 +876,7 @@ void wxRichTextBordersPage::OnRichtextBorderTopUpdate( wxUpdateUIEvent& event )
 
 void wxRichTextBordersPage::OnRichtextBorderBottomUpdate( wxUpdateUIEvent& event )
 {
-    event.Enable(m_bottomBorderCheckbox->Get3StateValue() == wxCHK_CHECKED && !m_borderSyncCtrl->GetValue());
+    event.Enable(m_bottomBorderCheckbox->Get3StateValue() == wxCheckBoxState::Checked && !m_borderSyncCtrl->GetValue());
 }
 
 /*!
@@ -885,7 +885,7 @@ void wxRichTextBordersPage::OnRichtextBorderBottomUpdate( wxUpdateUIEvent& event
 
 void wxRichTextBordersPage::OnRichtextOutlineLeftUpdate( wxUpdateUIEvent& event )
 {
-    event.Enable(m_leftOutlineCheckbox->Get3StateValue() == wxCHK_CHECKED);
+    event.Enable(m_leftOutlineCheckbox->Get3StateValue() == wxCheckBoxState::Checked);
 }
 
 /*!
@@ -894,7 +894,7 @@ void wxRichTextBordersPage::OnRichtextOutlineLeftUpdate( wxUpdateUIEvent& event 
 
 void wxRichTextBordersPage::OnRichtextOutlineRightUpdate( wxUpdateUIEvent& event )
 {
-    event.Enable(m_rightOutlineCheckbox->Get3StateValue() == wxCHK_CHECKED && !m_outlineSyncCtrl->GetValue());
+    event.Enable(m_rightOutlineCheckbox->Get3StateValue() == wxCheckBoxState::Checked && !m_outlineSyncCtrl->GetValue());
 }
 
 /*!
@@ -903,7 +903,7 @@ void wxRichTextBordersPage::OnRichtextOutlineRightUpdate( wxUpdateUIEvent& event
 
 void wxRichTextBordersPage::OnRichtextOutlineTopUpdate( wxUpdateUIEvent& event )
 {
-    event.Enable(m_topOutlineCheckbox->Get3StateValue() == wxCHK_CHECKED && !m_outlineSyncCtrl->GetValue());
+    event.Enable(m_topOutlineCheckbox->Get3StateValue() == wxCheckBoxState::Checked && !m_outlineSyncCtrl->GetValue());
 }
 
 /*!
@@ -912,7 +912,7 @@ void wxRichTextBordersPage::OnRichtextOutlineTopUpdate( wxUpdateUIEvent& event )
 
 void wxRichTextBordersPage::OnRichtextOutlineBottomUpdate( wxUpdateUIEvent& event )
 {
-    event.Enable(m_bottomOutlineCheckbox->Get3StateValue() == wxCHK_CHECKED && !m_outlineSyncCtrl->GetValue());
+    event.Enable(m_bottomOutlineCheckbox->Get3StateValue() == wxCheckBoxState::Checked && !m_outlineSyncCtrl->GetValue());
 }
 
 
@@ -922,7 +922,7 @@ void wxRichTextBordersPage::OnRichtextOutlineBottomUpdate( wxUpdateUIEvent& even
 
 void wxRichTextBordersPage::OnRichtextborderspageCornerUpdate( wxUpdateUIEvent& event )
 {
-    event.Enable(m_cornerRadiusCheckBox->Get3StateValue() == wxCHK_CHECKED);
+    event.Enable(m_cornerRadiusCheckBox->Get3StateValue() == wxCheckBoxState::Checked);
 }
 
 /*!
@@ -980,7 +980,7 @@ void wxRichTextBordersPage::OnRichtextBorderCheckboxClick( wxCommandEvent& event
     
     if (checkBox && comboBox)
     {
-        if (checkBox->Get3StateValue() == wxCHK_UNCHECKED || checkBox->Get3StateValue() == wxCHK_UNDETERMINED)
+        if (checkBox->Get3StateValue() == wxCheckBoxState::Unchecked || checkBox->Get3StateValue() == wxCheckBoxState::Indeterminate)
             comboBox->SetSelection(0);
         else
             comboBox->SetSelection(1);

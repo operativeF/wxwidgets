@@ -45,11 +45,11 @@ TEST_CASE("Check")
 
     CHECK(!m_check->IsChecked());
 
-    m_check->Set3StateValue(wxCHK_CHECKED);
+    m_check->Set3StateValue(wxCheckBoxState::Checked);
 
     CHECK(m_check->IsChecked());
 
-    m_check->Set3StateValue(wxCHK_UNCHECKED);
+    m_check->Set3StateValue(wxCheckBoxState::Unchecked);
 
     CHECK(!m_check->IsChecked());
 
@@ -63,17 +63,17 @@ TEST_CASE("ThirdState")
     auto m_check = std::make_unique<wxCheckBox>(wxTheApp->GetTopWindow(), wxID_ANY, "Check box",
                                             wxDefaultPosition, wxDefaultSize, wxCHK_3STATE);
 
-    CHECK_EQ(wxCHK_UNCHECKED, m_check->Get3StateValue());
+    CHECK_EQ(wxCheckBoxState::Unchecked, m_check->Get3StateValue());
     CHECK(m_check->Is3State());
     CHECK(!m_check->Is3rdStateAllowedForUser());
 
     m_check->SetValue(true);
 
-    CHECK_EQ(wxCHK_CHECKED, m_check->Get3StateValue());
+    CHECK_EQ(wxCheckBoxState::Checked, m_check->Get3StateValue());
 
-    m_check->Set3StateValue(wxCHK_UNDETERMINED);
+    m_check->Set3StateValue(wxCheckBoxState::Indeterminate);
 
-    CHECK_EQ(wxCHK_UNDETERMINED, m_check->Get3StateValue());
+    CHECK_EQ(wxCheckBoxState::Indeterminate, m_check->Get3StateValue());
 }
 
 TEST_CASE("ThirdStateUser")
@@ -81,17 +81,17 @@ TEST_CASE("ThirdStateUser")
     auto m_check = std::make_unique<wxCheckBox>(wxTheApp->GetTopWindow(), wxID_ANY, "Check box",
         wxDefaultPosition, wxDefaultSize, wxCHK_3STATE | wxCHK_ALLOW_3RD_STATE_FOR_USER);
 
-    CHECK_EQ(wxCHK_UNCHECKED, m_check->Get3StateValue());
+    CHECK_EQ(wxCheckBoxState::Unchecked, m_check->Get3StateValue());
     CHECK(m_check->Is3State());
     CHECK(m_check->Is3rdStateAllowedForUser());
 
     m_check->SetValue(true);
 
-    CHECK_EQ(wxCHK_CHECKED, m_check->Get3StateValue());
+    CHECK_EQ(wxCheckBoxState::Checked, m_check->Get3StateValue());
 
-    m_check->Set3StateValue(wxCHK_UNDETERMINED);
+    m_check->Set3StateValue(wxCheckBoxState::Indeterminate);
 
-    CHECK_EQ(wxCHK_UNDETERMINED, m_check->Get3StateValue());
+    CHECK_EQ(wxCheckBoxState::Indeterminate, m_check->Get3StateValue());
 }
 
 TEST_CASE("InvalidStyles")
