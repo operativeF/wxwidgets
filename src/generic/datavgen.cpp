@@ -6937,7 +6937,7 @@ wxAccStatus wxDataViewCtrlAccessible::GetHelpText(int childId, std::string* help
         {
             wxDataViewMainWindow* dvWnd = wxDynamicCast(dvCtrl->GetMainWindow(), wxDataViewMainWindow);
             wxRect rect = dvWnd->GetItemRect(item, nullptr);
-            *helpText = dvWnd->GetHelpTextAtPoint(rect.GetPosition(), wxHelpEvent::Origin_Keyboard);
+            *helpText = dvWnd->GetHelpTextAtPoint(rect.GetPosition(), wxHelpEvent::Origin::Keyboard);
         }
         else
         {

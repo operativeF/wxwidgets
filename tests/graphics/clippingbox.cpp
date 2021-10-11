@@ -1799,7 +1799,7 @@ void ClippingBoxTestCaseGCBase::Clear()
     m_gc->GetClipBox(&x, &y, &w, &h);
     m_gc->SetBrush(wxBrush(s_fgColour, wxBrushStyle::Solid));
     m_gc->SetPen(*wxTRANSPARENT_PEN);
-    m_gc->SetCompositionMode(wxCOMPOSITION_SOURCE);
+    m_gc->SetCompositionMode(wxCompositionMode::Source);
     m_gc->DrawRectangle(x, y, w, h);
 }
 

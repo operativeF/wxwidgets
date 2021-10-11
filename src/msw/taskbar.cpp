@@ -136,7 +136,7 @@ wxTaskBarIcon::~wxTaskBarIcon()
 bool wxTaskBarIcon::SetIcon(const wxIcon& icon, const std::string& tooltip)
 {
     if ( !DoSetIcon(icon, tooltip,
-                    m_iconAdded ? Operation_Modify : Operation_Add) )
+                    m_iconAdded ? Operation::Modify : Operation::Add) )
     {
         return false;
     }
@@ -182,7 +182,7 @@ wxTaskBarIcon::DoSetIcon(const wxIcon& icon,
 
     switch ( operation )
     {
-        case Operation_Add:
+        case Operation::Add:
             if ( !::Shell_NotifyIconW(NIM_ADD, &notifyData) )
             {
                 wxLogLastError("Shell_NotifyIcon(NIM_ADD)");
@@ -190,7 +190,7 @@ wxTaskBarIcon::DoSetIcon(const wxIcon& icon,
             }
             break;
 
-        case Operation_Modify:
+        case Operation::Modify:
             if ( !::Shell_NotifyIconW(NIM_MODIFY, &notifyData) )
             {
                 wxLogLastError("Shell_NotifyIcon(NIM_MODIFY)");
@@ -198,7 +198,7 @@ wxTaskBarIcon::DoSetIcon(const wxIcon& icon,
             }
             break;
 
-        case Operation_TryBoth:
+        case Operation::TryBoth:
             if ( !::Shell_NotifyIconW(NIM_ADD, &notifyData) &&
                     !::Shell_NotifyIconW(NIM_MODIFY, &notifyData) )
             {
@@ -359,7 +359,7 @@ long wxTaskBarIcon::WindowProc(unsigned int msg,
         // in which case we need to add our icon anew, or if it just needs to
         // be refreshed, in which case the existing icon just needs to be
         // updated, so try doing both in DoSetIcon().
-        DoSetIcon(m_icon, m_strTooltip, Operation_TryBoth);
+        DoSetIcon(m_icon, m_strTooltip, Operation::TryBoth);
         return 0;
     }
 

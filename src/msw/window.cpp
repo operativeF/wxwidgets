@@ -4232,8 +4232,8 @@ bool wxWindowMSW::HandleActivate(int state,
                           (state == WA_ACTIVE) || (state == WA_CLICKACTIVE),
                           m_windowId,
                           state == WA_CLICKACTIVE
-                            ? wxActivateEvent::Reason_Mouse
-                            : wxActivateEvent::Reason_Unknown);
+                            ? wxActivateEvent::Reason::Mouse
+                            : wxActivateEvent::Reason::Unknown);
     event.SetEventObject(this);
 
     return HandleWindowEvent(event);

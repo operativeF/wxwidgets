@@ -179,7 +179,7 @@ public:
         { return GetClassDefaultAttributes(GetWindowVariant()); }
 
     static wxVisualAttributes
-    GetClassDefaultAttributes(wxWindowVariant variant = wxWINDOW_VARIANT_NORMAL);
+    GetClassDefaultAttributes(wxWindowVariant variant = wxWindowVariant::Normal);
 
     void OnSysColourChanged(wxSysColourChangedEvent& event);
 

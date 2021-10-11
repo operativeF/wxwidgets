@@ -531,7 +531,7 @@ void wxPropertyGridManager::Init2( int style )
 
 #ifdef __WXMAC__
    // Smaller controls on Mac
-   SetWindowVariant(wxWINDOW_VARIANT_SMALL);
+   SetWindowVariant(wxWindowVariant::Small);
 #endif
 
    long propGridFlags = (m_windowStyle&wxPG_MAN_PASS_FLAGS_MASK)

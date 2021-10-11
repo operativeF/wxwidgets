@@ -328,17 +328,17 @@ std::string wxRadioBoxBase::DoGetHelpTextAtPoint(const wxWindow *derived,
     const int item = [this, pt, origin]() {
         switch ( origin )
         {
-            case wxHelpEvent::Origin_HelpButton:
+            case wxHelpEvent::Origin::HelpButton:
                 return GetItemFromPoint(pt);
 
-            case wxHelpEvent::Origin_Keyboard:
+            case wxHelpEvent::Origin::Keyboard:
                 return GetSelection();
 
             default:
                 wxFAIL_MSG( "unknown help even origin" );
                 [[fallthrough]];
 
-            case wxHelpEvent::Origin_Unknown:
+            case wxHelpEvent::Origin::Unknown:
                 // this value is used when we're called from GetHelpText() for the
                 // radio box itself, so don't return item-specific text in this case
                 return wxNOT_FOUND;

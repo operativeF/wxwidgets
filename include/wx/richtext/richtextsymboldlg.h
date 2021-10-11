@@ -268,7 +268,7 @@ public:
     }
 
     static wxVisualAttributes
-    GetClassDefaultAttributes(wxWindowVariant variant = wxWINDOW_VARIANT_NORMAL);
+    GetClassDefaultAttributes(wxWindowVariant variant = wxWindowVariant::Normal);
 
     // Get min/max symbol values
     int GetMinSymbolValue() const { return m_minSymbolValue; }

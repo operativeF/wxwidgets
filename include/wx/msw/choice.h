@@ -74,7 +74,7 @@ public:
     }
 
     static wxVisualAttributes
-    GetClassDefaultAttributes(wxWindowVariant variant = wxWINDOW_VARIANT_NORMAL);
+    GetClassDefaultAttributes(wxWindowVariant variant = wxWindowVariant::Normal);
 
     // MSW only
     bool MSWCommand(WXUINT param, WXWORD id) override;

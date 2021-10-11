@@ -54,22 +54,22 @@ class wxPrintPageTextCtrl;
 
 enum class wxPrinterError
 {
-    NoError = 0,
+    NoError,
     Cancelled,
     Error
 };
 
 // Preview frame modality kind used with wxPreviewFrame::Initialize()
-enum wxPreviewFrameModalityKind
+enum class wxPreviewFrameModalityKind
 {
     // Disable all the other top level windows while the preview is shown.
-    wxPreviewFrame_AppModal,
+    AppModal,
 
     // Disable only the parent window while the preview is shown.
-    wxPreviewFrame_WindowModal,
+    WindowModal,
 
     // Don't disable any windows.
-    wxPreviewFrame_NonModal
+    NonModal
 };
 
 //----------------------------------------------------------------------------
@@ -438,7 +438,7 @@ public:
     // g++ with -Woverloaded-virtual).
     virtual void Initialize()
     {
-        InitializeWithModality(wxPreviewFrame_AppModal);
+        InitializeWithModality(wxPreviewFrameModalityKind::AppModal);
     }
 
     // Also note that this method is not virtual as it doesn't need to be
@@ -458,7 +458,7 @@ protected:
     wxPrintPreviewBase*   m_printPreview{nullptr};
     wxWindowDisabler*     m_windowDisabler{nullptr};
 
-    wxPreviewFrameModalityKind m_modalityKind{wxPreviewFrame_NonModal};
+    wxPreviewFrameModalityKind m_modalityKind{wxPreviewFrameModalityKind::NonModal};
 
 
 private:

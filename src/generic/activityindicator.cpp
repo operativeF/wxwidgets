@@ -223,23 +223,23 @@ wxSize wxActivityIndicatorGeneric::DoGetBestClientSize() const
     int size = 0;
     switch ( GetWindowVariant() )
     {
-        case wxWINDOW_VARIANT_MAX:
+        case wxWindowVariant::Max:
             wxFAIL_MSG(wxS("Invalid window variant"));
             [[fallthrough]];
 
-        case wxWINDOW_VARIANT_NORMAL:
+        case wxWindowVariant::Normal:
             size = 24;
             break;
 
-        case wxWINDOW_VARIANT_SMALL:
+        case wxWindowVariant::Small:
             size = 16;
             break;
 
-        case wxWINDOW_VARIANT_MINI:
+        case wxWindowVariant::Mini:
             size = 12;
             break;
 
-        case wxWINDOW_VARIANT_LARGE:
+        case wxWindowVariant::Large:
             size = 32;
             break;
     }

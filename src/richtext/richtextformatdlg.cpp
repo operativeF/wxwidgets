@@ -96,7 +96,7 @@ bool wxRichTextFormattingDialog::Create(long flags, wxWindow* parent, const std:
 {
     SetExtraStyle(wxDIALOG_EX_CONTEXTHELP|wxWS_EX_BLOCK_EVENTS);
 #ifdef __WXMAC__
-    SetWindowVariant(wxWINDOW_VARIANT_SMALL);
+    SetWindowVariant(wxWindowVariant::Small);
 #endif
 
     GetFormattingDialogFactory()->SetSheetStyle(this);

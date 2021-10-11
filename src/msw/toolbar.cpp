@@ -980,7 +980,7 @@ bool wxToolBar::Realize()
             // conversion, e.g. antialiased lines would be subtly, but
             // noticeably misrendered.
             hBitmap = wxDIB(bitmap.ConvertToImage(),
-                            wxDIB::PixelFormat_NotPreMultiplied).Detach();
+                            wxDIB::PixelFormat::NotPreMultiplied).Detach();
         }
         else
 #endif

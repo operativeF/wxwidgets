@@ -39,12 +39,12 @@ enum wxMediaCtrlPlayerControls
                     wxMEDIACTRLPLAYERCONTROLS_VOLUME
 };
 
-constexpr wxChar wxMEDIABACKEND_DIRECTSHOW[]   = wxT("wxAMMediaBackend");
-constexpr wxChar wxMEDIABACKEND_MCI[]          = wxT("wxMCIMediaBackend");
-constexpr wxChar wxMEDIABACKEND_QUICKTIME[]    = wxT("wxQTMediaBackend");
-constexpr wxChar wxMEDIABACKEND_GSTREAMER[]    = wxT("wxGStreamerMediaBackend");
-constexpr wxChar wxMEDIABACKEND_REALPLAYER[]   = wxT("wxRealPlayerMediaBackend");
-constexpr wxChar wxMEDIABACKEND_WMP10[]        = wxT("wxWMP10MediaBackend");
+constexpr char wxMEDIABACKEND_DIRECTSHOW[]   = "wxAMMediaBackend";
+constexpr char wxMEDIABACKEND_MCI[]          = "wxMCIMediaBackend";
+constexpr char wxMEDIABACKEND_QUICKTIME[]    = "wxQTMediaBackend";
+constexpr char wxMEDIABACKEND_GSTREAMER[]    = "wxGStreamerMediaBackend";
+constexpr char wxMEDIABACKEND_REALPLAYER[]   = "wxRealPlayerMediaBackend";
+constexpr char wxMEDIABACKEND_WMP10[]        = "wxWMP10MediaBackend";
 
 class WXDLLIMPEXP_MEDIA wxMediaEvent : public wxNotifyEvent
 {

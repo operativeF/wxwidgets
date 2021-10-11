@@ -38,10 +38,7 @@ public:
         Event_Processed = 1
     };
 
-    wxEventFilter()
-    {
-        m_next = nullptr;
-    }
+    wxEventFilter() = default;
 
     virtual ~wxEventFilter()
     {
@@ -65,7 +62,7 @@ public:
 private:
     // Objects of this class are made to be stored in a linked list in
     // wxEvtHandler so put the next node pointer directly in the class itself.
-    wxEventFilter* m_next;
+    wxEventFilter* m_next{nullptr};
 
     // And provide access to it for wxEvtHandler [only].
     friend class wxEvtHandler;

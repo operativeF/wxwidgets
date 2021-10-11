@@ -252,7 +252,7 @@ void wxInfoBarGeneric::AddButton(wxWindowID btnid, const std::string& label)
 
 #ifdef __WXMAC__
     // smaller buttons look better in the (narrow) info bar under OS X
-    button->SetWindowVariant(wxWINDOW_VARIANT_SMALL);
+    button->SetWindowVariant(wxWindowVariant::Small);
 #endif // __WXMAC__
 
     sizer->Add(button, wxSizerFlags().Centre().DoubleBorder());

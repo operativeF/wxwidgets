@@ -342,7 +342,7 @@ bool wxSymbolPickerDialog::Create( const wxString& symbol, const wxString& fontN
 void wxSymbolPickerDialog::CreateControls()
 {
 #ifdef __WXMAC__
-    SetWindowVariant(wxWINDOW_VARIANT_SMALL);
+    SetWindowVariant(wxWindowVariant::Small);
 #endif
 
 ////@begin wxSymbolPickerDialog content construction

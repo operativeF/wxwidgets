@@ -229,7 +229,7 @@ public:
     }
 
     static wxVisualAttributes
-    GetClassDefaultAttributes(wxWindowVariant variant = wxWINDOW_VARIANT_NORMAL);
+    GetClassDefaultAttributes(wxWindowVariant variant = wxWindowVariant::Normal);
 
 
     WXLRESULT MSWWindowProc(WXUINT nMsg, WXWPARAM wParam, WXLPARAM lParam) override;

@@ -1857,7 +1857,7 @@ void wxGDIPlusContext::GetClipBox(float* x, float* y, float* w, float* h)
 
 void wxGDIPlusContext::DrawRectangle( float x, float y, float w, float h )
 {
-    if (m_composition == wxCOMPOSITION_DEST)
+    if (m_composition == wxCompositionMode::Dest)
         return;
 
     wxGDIPlusOffsetHelper helper(m_context.get(), GetContentScaleFactor(), ShouldOffset());
@@ -1894,7 +1894,7 @@ void wxGDIPlusContext::DrawRectangle( float x, float y, float w, float h )
 
 void wxGDIPlusContext::StrokeLines( size_t n, const wxPoint2DFloat *points)
 {
-   if (m_composition == wxCOMPOSITION_DEST)
+   if (m_composition == wxCompositionMode::Dest)
         return;
 
    if ( !m_pen.IsNull() )
@@ -1916,7 +1916,7 @@ void wxGDIPlusContext::StrokeLines( size_t n, const wxPoint2DFloat *points)
 
 void wxGDIPlusContext::DrawLines( size_t n, const wxPoint2DFloat *points, wxPolygonFillMode fillStyle )
 {
-   if (m_composition == wxCOMPOSITION_DEST)
+   if (m_composition == wxCompositionMode::Dest)
         return;
 
     wxGDIPlusOffsetHelper helper(m_context.get(), GetContentScaleFactor(), ShouldOffset());
@@ -1937,7 +1937,7 @@ void wxGDIPlusContext::DrawLines( size_t n, const wxPoint2DFloat *points, wxPoly
 
 void wxGDIPlusContext::StrokePath( const wxGraphicsPath& path )
 {
-   if (m_composition == wxCOMPOSITION_DEST)
+   if (m_composition == wxCompositionMode::Dest)
         return;
 
     if ( !m_pen.IsNull() )
@@ -1949,7 +1949,7 @@ void wxGDIPlusContext::StrokePath( const wxGraphicsPath& path )
 
 void wxGDIPlusContext::FillPath( const wxGraphicsPath& path , wxPolygonFillMode fillStyle )
 {
-   if (m_composition == wxCOMPOSITION_DEST)
+   if (m_composition == wxCompositionMode::Dest)
         return;
 
     if ( !m_brush.IsNull() )
@@ -2046,16 +2046,16 @@ bool wxGDIPlusContext::SetCompositionMode(wxCompositionMode op)
 
     m_composition = op;
 
-    if (m_composition == wxCOMPOSITION_DEST)
+    if (m_composition == wxCompositionMode::Dest)
         return true;
 
     CompositingMode cop;
     switch (op)
     {
-        case wxCOMPOSITION_SOURCE:
+        case wxCompositionMode::Source:
             cop = CompositingModeSourceCopy;
             break;
-        case wxCOMPOSITION_OVER:
+        case wxCompositionMode::Over:
             cop = CompositingModeSourceOver;
             break;
         default:
@@ -2108,7 +2108,7 @@ void wxGDIPlusContext::PopState()
 
 void wxGDIPlusContext::DrawBitmap( const wxGraphicsBitmap &bmp, float x, float y, float w, float h )
 {
-   if (m_composition == wxCOMPOSITION_DEST)
+   if (m_composition == wxCompositionMode::Dest)
         return;
 
     Bitmap* image = dynamic_cast<wxGDIPlusBitmapData*>(bmp.GetRefData())->GetGDIPlusBitmap();
@@ -2134,7 +2134,7 @@ void wxGDIPlusContext::DrawBitmap( const wxBitmap &bmp, float x, float y, float 
 
 void wxGDIPlusContext::DrawIcon( const wxIcon &icon, float x, float y, float w, float h )
 {
-   if (m_composition == wxCOMPOSITION_DEST)
+   if (m_composition == wxCompositionMode::Dest)
         return;
 
     // the built-in conversion fails when there is alpha in the HICON (eg XP style icons), we can only
@@ -2196,7 +2196,7 @@ void wxGDIPlusContext::DrawIcon( const wxIcon &icon, float x, float y, float w, 
 void wxGDIPlusContext::DoDrawText(std::string_view str,
                                         float x, float y )
 {
-   if (m_composition == wxCOMPOSITION_DEST)
+   if (m_composition == wxCompositionMode::Dest)
         return;
 
     wxCHECK_RET( !m_font.IsNull(),

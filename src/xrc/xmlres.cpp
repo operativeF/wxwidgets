@@ -2585,13 +2585,13 @@ void wxXmlResourceHandlerImpl::SetupWindow(wxWindow *wnd)
     if (!variant.empty())
     {
         if (variant == wxS("normal"))
-            wnd->SetWindowVariant(wxWINDOW_VARIANT_NORMAL);
+            wnd->SetWindowVariant(wxWindowVariant::Normal);
         else if (variant == wxS("small"))
-            wnd->SetWindowVariant(wxWINDOW_VARIANT_SMALL);
+            wnd->SetWindowVariant(wxWindowVariant::Small);
         else if (variant == wxS("mini"))
-            wnd->SetWindowVariant(wxWINDOW_VARIANT_MINI);
+            wnd->SetWindowVariant(wxWindowVariant::Mini);
         else if (variant == wxS("large"))
-            wnd->SetWindowVariant(wxWINDOW_VARIANT_LARGE);
+            wnd->SetWindowVariant(wxWindowVariant::Large);
         else
         {
             ReportParamError

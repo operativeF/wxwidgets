@@ -301,7 +301,7 @@ wxWindowBase::wxWindowBase()
 
     m_scrollHelper = nullptr;
 
-    m_windowVariant = wxWINDOW_VARIANT_NORMAL;
+    m_windowVariant = wxWindowVariant::Normal;
 #if wxUSE_SYSTEM_OPTIONS
     if ( wxSystemOptions::HasOption(wxWINDOW_DEFAULT_VARIANT) )
     {
@@ -1000,18 +1000,18 @@ void wxWindowBase::DoSetWindowVariant( wxWindowVariant variant )
     double size = font.GetFractionalPointSize();
     switch ( variant )
     {
-        case wxWINDOW_VARIANT_NORMAL:
+        case wxWindowVariant::Normal:
             break;
 
-        case wxWINDOW_VARIANT_SMALL:
+        case wxWindowVariant::Small:
             size /= 1.2;
             break;
 
-        case wxWINDOW_VARIANT_MINI:
+        case wxWindowVariant::Mini:
             size /= 1.2 * 1.2;
             break;
 
-        case wxWINDOW_VARIANT_LARGE:
+        case wxWindowVariant::Large:
             size *= 1.2;
             break;
 
@@ -2166,7 +2166,7 @@ void wxWindowBase::OnHelp(wxHelpEvent& event)
     {
         wxPoint pos = event.GetPosition();
         const wxHelpEvent::Origin origin = event.GetOrigin();
-        if ( origin == wxHelpEvent::Origin_Keyboard )
+        if ( origin == wxHelpEvent::Origin::Keyboard )
         {
             // if the help event was generated from keyboard it shouldn't
             // appear at the mouse position (which is still the only position
@@ -3834,7 +3834,7 @@ wxAccStatus wxWindowAccessible::GetDescription(int WXUNUSED(childId), std::strin
     // FIXME: Make this more optional.
     std::ignore = description;
 #if wxUSE_HELP
-    std::string ht(GetWindow()->GetHelpTextAtPoint(wxDefaultPosition, wxHelpEvent::Origin_Keyboard));
+    std::string ht(GetWindow()->GetHelpTextAtPoint(wxDefaultPosition, wxHelpEvent::Origin::Keyboard));
     if (!ht.empty())
     {
         *description = ht;
@@ -3853,7 +3853,7 @@ wxAccStatus wxWindowAccessible::GetHelpText(int WXUNUSED(childId), std::string* 
 
     std::ignore = helpText;
 #if wxUSE_HELP
-    std::string ht(GetWindow()->GetHelpTextAtPoint(wxDefaultPosition, wxHelpEvent::Origin_Keyboard));
+    std::string ht(GetWindow()->GetHelpTextAtPoint(wxDefaultPosition, wxHelpEvent::Origin::Keyboard));
     if (!ht.empty())
     {
         *helpText = ht;

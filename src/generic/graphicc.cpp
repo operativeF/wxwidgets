@@ -3021,43 +3021,43 @@ bool wxCairoContext::SetCompositionMode(wxCompositionMode op)
     cairo_operator_t cop;
     switch (op)
     {
-        case wxCOMPOSITION_CLEAR:
+        case wxCompositionMode::Clear:
             cop = CAIRO_OPERATOR_CLEAR;
             break;
-        case wxCOMPOSITION_SOURCE:
+        case wxCompositionMode::Source:
             cop = CAIRO_OPERATOR_SOURCE;
             break;
-        case wxCOMPOSITION_OVER:
+        case wxCompositionMode::Over:
             cop = CAIRO_OPERATOR_OVER;
             break;
-        case wxCOMPOSITION_IN:
+        case wxCompositionMode::In:
             cop = CAIRO_OPERATOR_IN;
             break;
-        case wxCOMPOSITION_OUT:
+        case wxCompositionMode::Out:
             cop = CAIRO_OPERATOR_OUT;
             break;
-        case wxCOMPOSITION_ATOP:
+        case wxCompositionMode::Atop:
             cop = CAIRO_OPERATOR_ATOP;
             break;
-        case wxCOMPOSITION_DEST:
+        case wxCompositionMode::Dest:
             cop = CAIRO_OPERATOR_DEST;
             break;
-        case wxCOMPOSITION_DEST_OVER:
+        case wxCompositionMode::DestOver:
             cop = CAIRO_OPERATOR_DEST_OVER;
             break;
-        case wxCOMPOSITION_DEST_IN:
+        case wxCompositionMode::DestIn:
             cop = CAIRO_OPERATOR_DEST_IN;
             break;
-        case wxCOMPOSITION_DEST_OUT:
+        case wxCompositionMode::DestOut:
             cop = CAIRO_OPERATOR_DEST_OUT;
             break;
-        case wxCOMPOSITION_DEST_ATOP:
+        case wxCompositionMode::DestAtop:
             cop = CAIRO_OPERATOR_DEST_ATOP;
             break;
-        case wxCOMPOSITION_XOR:
+        case wxCompositionMode::Xor:
             cop = CAIRO_OPERATOR_XOR;
             break;
-        case wxCOMPOSITION_ADD:
+        case wxCompositionMode::Add:
             cop = CAIRO_OPERATOR_ADD;
             break;
         default:

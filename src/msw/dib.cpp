@@ -710,7 +710,7 @@ bool wxDIB::Create(const wxImage& image, PixelFormat pf, int dstDepth)
         {
             switch ( pf )
             {
-                case PixelFormat_PreMultiplied:
+                case PixelFormat::PreMultiplied:
                     // Pre-multiply pixel values so that the DIB could be used
                     // with ::AlphaBlend().
                     for ( int x = 0; x < sz.x; x++ )
@@ -724,7 +724,7 @@ bool wxDIB::Create(const wxImage& image, PixelFormat pf, int dstDepth)
                     }
                     break;
 
-                case PixelFormat_NotPreMultiplied:
+                case PixelFormat::NotPreMultiplied:
                     // Just copy pixel data without changing it.
                     for ( int x = 0; x < sz.x; x++ )
                     {
@@ -890,7 +890,7 @@ wxImage wxDIB::ConvertToImage(ConversionFlags flags) const
     if ( hasOpaque && hasTransparent )
         hasAlpha = true;
 
-    if ( !hasAlpha && image.HasAlpha() && flags == Convert_AlphaAuto )
+    if ( !hasAlpha && image.HasAlpha() && flags == ConversionFlags::AlphaAuto )
         image.ClearAlpha();
 
     return image;

@@ -873,11 +873,11 @@ wxChildFocusEvent::wxChildFocusEvent(wxWindow *win)
 /* static */
 wxHelpEvent::Origin wxHelpEvent::GuessOrigin(Origin origin)
 {
-    if ( origin == Origin_Unknown )
+    if ( origin == Origin::Unknown )
     {
         // assume that the event comes from the help button if it's not from
         // keyboard and that pressing F1 always results in the help event
-        origin = wxGetKeyState(WXK_F1) ? Origin_Keyboard : Origin_HelpButton;
+        origin = wxGetKeyState(WXK_F1) ? Origin::Keyboard : Origin::HelpButton;
     }
 
     return origin;

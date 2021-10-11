@@ -373,7 +373,7 @@ bool wxHtmlHelpWindow::Create(wxWindow* parent, wxWindowID id,
         m_NavigNotebook = new wxNotebook(m_NavigPan, wxID_HTML_NOTEBOOK,
                                          wxDefaultPosition, wxDefaultSize);
 #ifdef __WXMAC__
-        m_NavigNotebook->SetWindowVariant(wxWINDOW_VARIANT_SMALL);
+        m_NavigNotebook->SetWindowVariant(wxWindowVariant::Small);
 #endif
 
         navigSizer = new wxBoxSizer(wxVERTICAL);

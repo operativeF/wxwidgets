@@ -79,7 +79,7 @@ public:
     static wxStandardPaths& Get();
 
     // return the path (directory+filename) of the running executable or
-    // {} if it couldn't be determined.
+    // wxEmptyString if it couldn't be determined.
     // The path is returned as an absolute path whenever possible.
     // Default implementation only try to use wxApp->argv[0].
     virtual wxString GetExecutablePath() const;

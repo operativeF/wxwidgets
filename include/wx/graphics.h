@@ -44,7 +44,7 @@ enum class wxInterpolationQuality
     Best      // best quality, not suited for interactivity
 };
 
-enum wxCompositionMode
+enum class wxCompositionMode
 {
     // R = Result, S = Source, D = Destination, premultiplied with alpha
     // Ra, Sa, Da their alpha components
@@ -52,23 +52,23 @@ enum wxCompositionMode
     // classic Porter-Duff compositions
     // http://keithp.com/~keithp/porterduff/p253-porter.pdf
 
-    wxCOMPOSITION_INVALID = -1, /* indicates invalid/unsupported mode */
-    wxCOMPOSITION_CLEAR, /* R = 0 */
-    wxCOMPOSITION_SOURCE, /* R = S */
-    wxCOMPOSITION_OVER, /* R = S + D*(1 - Sa) */
-    wxCOMPOSITION_IN, /* R = S*Da */
-    wxCOMPOSITION_OUT, /* R = S*(1 - Da) */
-    wxCOMPOSITION_ATOP, /* R = S*Da + D*(1 - Sa) */
+    Invalid, /* indicates invalid/unsupported mode */
+    Clear, /* R = 0 */
+    Source, /* R = S */
+    Over, /* R = S + D*(1 - Sa) */
+    In, /* R = S*Da */
+    Out, /* R = S*(1 - Da) */
+    Atop, /* R = S*Da + D*(1 - Sa) */
 
-    wxCOMPOSITION_DEST, /* R = D, essentially a noop */
-    wxCOMPOSITION_DEST_OVER, /* R = S*(1 - Da) + D */
-    wxCOMPOSITION_DEST_IN, /* R = D*Sa */
-    wxCOMPOSITION_DEST_OUT, /* R = D*(1 - Sa) */
-    wxCOMPOSITION_DEST_ATOP, /* R = S*(1 - Da) + D*Sa */
-    wxCOMPOSITION_XOR, /* R = S*(1 - Da) + D*(1 - Sa) */
+    Dest, /* R = D, essentially a noop */
+    DestOver, /* R = S*(1 - Da) + D */
+    DestIn, /* R = D*Sa */
+    DestOut, /* R = D*(1 - Sa) */
+    DestAtop, /* R = S*(1 - Da) + D*Sa */
+    Xor, /* R = S*(1 - Da) + D*(1 - Sa) */
 
     // mathematical compositions
-    wxCOMPOSITION_ADD /* R = S + D */
+    Add /* R = S + D */
 };
 
 enum class wxGradientType
@@ -888,7 +888,7 @@ protected:
     float m_height{};
 
     wxAntialiasMode m_antialias;
-    wxCompositionMode m_composition{wxCOMPOSITION_OVER};
+    wxCompositionMode m_composition{wxCompositionMode::Over};
     wxInterpolationQuality m_interpolation;
     
     bool m_enableOffset{true};

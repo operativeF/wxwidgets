@@ -367,7 +367,7 @@ void wxPropertyGrid::Init2()
 
 #ifdef __WXMAC__
    // Smaller controls on Mac
-   SetWindowVariant(wxWINDOW_VARIANT_SMALL);
+   SetWindowVariant(wxWindowVariant::Small);
 #endif
 
     // Now create state, if one didn't exist already

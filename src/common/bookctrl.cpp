@@ -298,7 +298,7 @@ void wxBookCtrlBase::OnHelp(wxHelpEvent& event)
         // corresponding page
         wxWindow *page = nullptr;
 
-        if ( event.GetOrigin() == wxHelpEvent::Origin_HelpButton )
+        if ( event.GetOrigin() == wxHelpEvent::Origin::HelpButton )
         {
             // show help for the page under the mouse
             const int pagePos = HitTest(ScreenToClient(event.GetPosition()));

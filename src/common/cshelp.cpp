@@ -225,7 +225,7 @@ bool wxContextHelp::DispatchEvent(wxWindow* win, const wxPoint& pt)
     //wxCHECK_MSG( win, false, "win parameter can't be NULL" );
 
     wxHelpEvent helpEvent(wxEVT_HELP, win->GetId(), pt,
-                          wxHelpEvent::Origin_HelpButton);
+                          wxHelpEvent::Origin::HelpButton);
     helpEvent.SetEventObject(win);
 
     return win->GetEventHandler()->ProcessEvent(helpEvent);
@@ -305,7 +305,7 @@ void wxHelpProvider::RemoveHelp(wxWindowBase* WXUNUSED(window))
 std::string wxHelpProvider::GetHelpTextMaybeAtPoint(wxWindowBase *window)
 {
     if ( m_helptextAtPoint != wxDefaultPosition ||
-            m_helptextOrigin != wxHelpEvent::Origin_Unknown )
+            m_helptextOrigin != wxHelpEvent::Origin::Unknown )
     {
         // TODO: If it can't be null, take a reference
         //wxCHECK_MSG( window, "", wxT("window must not be NULL") );
@@ -314,7 +314,7 @@ std::string wxHelpProvider::GetHelpTextMaybeAtPoint(wxWindowBase *window)
         const wxHelpEvent::Origin origin = m_helptextOrigin;
 
         m_helptextAtPoint = wxDefaultPosition;
-        m_helptextOrigin = wxHelpEvent::Origin_Unknown;
+        m_helptextOrigin = wxHelpEvent::Origin::Unknown;
 
         return window->GetHelpTextAtPoint(pt, origin);
     }

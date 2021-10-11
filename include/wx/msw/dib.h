@@ -151,10 +151,10 @@ public:
 
 #if wxUSE_IMAGE
     // Possible formats for DIBs created by the functions below.
-    enum PixelFormat
+    enum class PixelFormat
     {
-        PixelFormat_PreMultiplied = 0,
-        PixelFormat_NotPreMultiplied = 1
+        PreMultiplied,
+        NotPreMultiplied
     };
 
     // Create a DIB from the given image, the DIB will be either 24 or 32 (if
@@ -164,27 +164,27 @@ public:
     // can be used with ::AlphaBlend() but it is also possible to disable
     // pre-multiplication for the DIB to be usable with ImageList_Draw() which
     // does pre-multiplication internally.
-    wxDIB(const wxImage& image, PixelFormat pf = PixelFormat_PreMultiplied, int depth = -1)
+    wxDIB(const wxImage& image, PixelFormat pf = PixelFormat::PreMultiplied, int depth = -1)
     {
         Create(image, pf, depth);
     }
     
     // same as the above ctor but with the return code
-    [[maybe_unused]] bool Create(const wxImage& image, PixelFormat pf = PixelFormat_PreMultiplied, int depth = -1);
+    [[maybe_unused]] bool Create(const wxImage& image, PixelFormat pf = PixelFormat::PreMultiplied, int depth = -1);
 
     // create wxImage having the same data as this DIB
 
     // Possible options of conversion to wxImage
-    enum ConversionFlags
+    enum class ConversionFlags
     {
         // Determine whether 32bpp DIB contains real alpha channel
         // and return wxImage with or without alpha channel values.
-        Convert_AlphaAuto,
+        AlphaAuto,
         // Assume that 32bpp DIB contains valid alpha channel and always
         // return wxImage with alpha channel values in this case.
-        Convert_AlphaAlwaysIf32bpp
+        AlphaAlwaysIf32bpp
     };
-    wxImage ConvertToImage(ConversionFlags flags = Convert_AlphaAuto) const;
+    wxImage ConvertToImage(ConversionFlags flags = ConversionFlags::AlphaAuto) const;
 #endif // wxUSE_IMAGE
 
 

@@ -564,7 +564,7 @@ wxGraphicsContext::wxGraphicsContext(wxGraphicsRenderer* renderer,
                                      wxWindow* window)
     : wxGraphicsObject(renderer),
       m_antialias(wxAntialiasMode::Default),
-      m_composition(wxCOMPOSITION_OVER),
+      m_composition(wxCompositionMode::Over),
       m_interpolation(wxInterpolationQuality::Default),
       m_enableOffset(false),
       m_window(window),

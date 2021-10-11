@@ -53,9 +53,7 @@ public:
     HKCU,       // current user
     HKLM,       // local machine
     HKUSR,      // users
-    HKPD,       // (obsolete under XP and later)
     HKCC,       // current config
-    HKDD,       // (obsolete under XP and later)
     HKMAX
   };
 

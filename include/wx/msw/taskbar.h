@@ -75,11 +75,11 @@ private:
     wxIcon               m_icon;
     std::string          m_strTooltip;
 
-    enum Operation
+    enum class Operation
     {
-        Operation_Add,
-        Operation_Modify,
-        Operation_TryBoth
+        Add,
+        Modify,
+        TryBoth
     };
 
     // Implementation of the public SetIcon() which may also be used when we

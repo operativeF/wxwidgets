@@ -194,7 +194,7 @@ protected:
 
     // parameters of the last ShowHelpAtPoint() call, used by ShowHelp()
     wxPoint m_helptextAtPoint;
-    wxHelpEvent::Origin m_helptextOrigin{wxHelpEvent::Origin_Unknown};
+    wxHelpEvent::Origin m_helptextOrigin{wxHelpEvent::Origin::Unknown};
 
 private:
     inline static wxHelpProvider *ms_helpProvider{nullptr};

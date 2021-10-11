@@ -96,13 +96,13 @@ struct WXDLLIMPEXP_CORE wxVisualAttributes
 
 // different window variants, on platforms like e.g. mac uses different
 // rendering sizes
-enum wxWindowVariant
+enum class wxWindowVariant
 {
-    wxWINDOW_VARIANT_NORMAL,  // Normal size
-    wxWINDOW_VARIANT_SMALL,   // Smaller size (about 25 % smaller than normal)
-    wxWINDOW_VARIANT_MINI,    // Mini size (about 33 % smaller than normal)
-    wxWINDOW_VARIANT_LARGE,   // Large size (about 25 % larger than normal)
-    wxWINDOW_VARIANT_MAX
+    Normal,  // Normal size
+    Small,   // Smaller size (about 25 % smaller than normal)
+    Mini,    // Mini size (about 33 % smaller than normal)
+    Large,   // Large size (about 25 % larger than normal)
+    Max
 };
 
 #if wxUSE_SYSTEM_OPTIONS
@@ -1130,7 +1130,7 @@ public:
     }
 
     static wxVisualAttributes
-    GetClassDefaultAttributes(wxWindowVariant variant = wxWINDOW_VARIANT_NORMAL);
+    GetClassDefaultAttributes(wxWindowVariant variant = wxWindowVariant::Normal);
 
         // set/retrieve the window colours (system defaults are used by
         // default): SetXXX() functions return true if colour was changed,
@@ -1363,7 +1363,7 @@ public:
         // returns the position-independent help text
     std::string GetHelpText() const
     {
-        return GetHelpTextAtPoint(wxDefaultPosition, wxHelpEvent::Origin_Unknown);
+        return GetHelpTextAtPoint(wxDefaultPosition, wxHelpEvent::Origin::Unknown);
     }
 
 #else // !wxUSE_HELP

@@ -130,7 +130,7 @@ void GetImageListBitmaps(const wxBitmap& bitmap, const wxBitmap& mask, bool useM
             // The bitmap isn't drawn correctly if we use both.
             wxImage img = bitmap.ConvertToImage();
             img.ClearAlpha();
-            hbmp = wxDIB(img, wxDIB::PixelFormat_NotPreMultiplied).Detach();
+            hbmp = wxDIB(img, wxDIB::PixelFormat::NotPreMultiplied).Detach();
             hbmpRelease = unique_bitmap(hbmp);
         }
         else
@@ -155,7 +155,7 @@ void GetImageListBitmaps(const wxBitmap& bitmap, const wxBitmap& mask, bool useM
                 bmp.MSWBlendMaskWithAlpha();
             }
             wxImage img = bmp.ConvertToImage();
-            hbmp = wxDIB(img, wxDIB::PixelFormat_NotPreMultiplied).Detach();
+            hbmp = wxDIB(img, wxDIB::PixelFormat::NotPreMultiplied).Detach();
             hbmpRelease = unique_bitmap(hbmp);
         }
         else
@@ -170,7 +170,7 @@ void GetImageListBitmaps(const wxBitmap& bitmap, const wxBitmap& mask, bool useM
                 }
                 wxImage img = bmp.ConvertToImage();
                 img.InitAlpha();
-                hbmp = wxDIB(img, wxDIB::PixelFormat_NotPreMultiplied).Detach();
+                hbmp = wxDIB(img, wxDIB::PixelFormat::NotPreMultiplied).Detach();
                 hbmpRelease = unique_bitmap(hbmp);
             }
             else

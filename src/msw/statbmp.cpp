@@ -290,7 +290,7 @@ void wxStaticBitmap::SetImageNoCopy( wxGDIImage* image)
             // For bitmap with alpha channel create temporary DIB with
             // not-premultiplied alpha values.
             handle = wxDIB(bmp.ConvertToImage(),
-                           wxDIB::PixelFormat_NotPreMultiplied).Detach();
+                           wxDIB::PixelFormat::NotPreMultiplied).Detach();
         }
     }
 #endif // wxUSE_WXDIB

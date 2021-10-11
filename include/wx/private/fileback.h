@@ -26,7 +26,7 @@
 class WXDLLIMPEXP_BASE wxBackingFile
 {
 public:
-    enum { DefaultBufSize = 16384 };
+    static constexpr std::size_t DefaultBufSize = 16384;
 
     // Takes ownership of stream. If the stream is smaller than bufsize, the
     // backing file is never created and the backing is done with memory.

@@ -836,7 +836,7 @@ bool wxBitmap::CreateFromImage(const wxImage& image, int depth, WXHDC hdc)
     const int h = image.GetHeight();
     const int w = image.GetWidth();
 
-    wxDIB dib(image, wxDIB::PixelFormat_PreMultiplied, depth);
+    wxDIB dib(image, wxDIB::PixelFormat::PreMultiplied, depth);
     if ( !dib.IsOk() )
         return false;
 
@@ -951,7 +951,7 @@ wxImage wxBitmap::ConvertToImage() const
     // if the user had explicitly called UseAlpha(), then we consider
     // that the resulting image should really have the alpha channel too.
     wxImage image = dib.ConvertToImage(HasAlpha() ?
-               wxDIB::Convert_AlphaAlwaysIf32bpp : wxDIB::Convert_AlphaAuto);
+               wxDIB::ConversionFlags::AlphaAlwaysIf32bpp : wxDIB::ConversionFlags::AlphaAuto);
     if ( !image.IsOk() )
     {
         return wxNullImage;
@@ -1764,7 +1764,7 @@ HICON wxBitmapToIconOrCursor(const wxBitmap& bmp,
         // a special DIB in such format to pass to it. This is inefficient but
         // better than creating an icon with wrong colours.
         hbmp = wxDIB(curBmp.ConvertToImage(),
-                     wxDIB::PixelFormat_NotPreMultiplied).Detach();
+                     wxDIB::PixelFormat::NotPreMultiplied).Detach();
 
         auto hbmpRelease = unique_bitmap(hbmp);
 #else // !(wxUSE_WXDIB && wxUSE_IMAGE)

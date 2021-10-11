@@ -2547,14 +2547,14 @@ class WXDLLIMPEXP_CORE wxActivateEvent : public wxEvent
 public:
     // Type of activation. For now we can only detect if it was by mouse or by
     // some other method and even this is only available under wxMSW.
-    enum Reason
+    enum class Reason
     {
-        Reason_Mouse,
-        Reason_Unknown
+        Mouse,
+        Unknown
     };
 
     wxActivateEvent(wxEventType type = wxEVT_NULL, bool active = true,
-                    int Id = 0, Reason activationReason = Reason_Unknown)
+                    int Id = 0, Reason activationReason = Reason::Unknown)
         : wxEvent(Id, type),
         m_activationReason(activationReason)
     {
@@ -3352,17 +3352,17 @@ class WXDLLIMPEXP_CORE wxHelpEvent : public wxCommandEvent
 {
 public:
     // how was this help event generated?
-    enum Origin
+    enum class Origin
     {
-        Origin_Unknown,    // unrecognized event source
-        Origin_Keyboard,   // event generated from F1 key press
-        Origin_HelpButton  // event from [?] button on the title bar (Windows)
+        Unknown,    // unrecognized event source
+        Keyboard,   // event generated from F1 key press
+        HelpButton  // event from [?] button on the title bar (Windows)
     };
 
     wxHelpEvent(wxEventType type = wxEVT_NULL,
                 wxWindowID winid = 0,
                 const wxPoint& pt = wxDefaultPosition,
-                Origin origin = Origin_Unknown)
+                Origin origin = Origin::Unknown)
         : wxCommandEvent(type, winid),
           m_pos(pt),
           m_origin(GuessOrigin(origin))

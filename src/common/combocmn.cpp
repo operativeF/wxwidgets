@@ -1368,14 +1368,14 @@ wxSize wxComboCtrlBase::DoGetSizeFromTextSize(int xlen, int ylen) const
     // these are the numbers from the HIG:
     switch ( m_windowVariant )
     {
-        case wxWINDOW_VARIANT_NORMAL:
+        case wxWindowVariant::Normal:
         default :
             fhei = 22;
             break;
-        case wxWINDOW_VARIANT_SMALL:
+        case wxWindowVariant::Small:
             fhei = 19;
             break;
-        case wxWINDOW_VARIANT_MINI:
+        case wxWindowVariant::Mini:
             fhei = 15;
             break;
     }

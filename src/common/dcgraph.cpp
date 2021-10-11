@@ -39,19 +39,19 @@ static wxCompositionMode TranslateRasterOp(wxRasterOperationMode function)
         case wxRasterOperationMode::Copy: // src
             // since we are supporting alpha, _OVER is closer to the intention than _SOURCE
             // since the latter would overwrite even when alpha is not set to opaque
-            return wxCOMPOSITION_OVER;
+            return wxCompositionMode::Over;
 
         case wxRasterOperationMode::Or:         // src OR dst
-            return wxCOMPOSITION_ADD;
+            return wxCompositionMode::Add;
 
         case wxRasterOperationMode::NoOp:      // dst
-            return wxCOMPOSITION_DEST; // ignore the source
+            return wxCompositionMode::Dest; // ignore the source
 
         case wxRasterOperationMode::Clear:      // 0
-            return wxCOMPOSITION_CLEAR;// clear dst
+            return wxCompositionMode::Clear;// clear dst
 
         case wxRasterOperationMode::Xor:        // src XOR dst
-            return wxCOMPOSITION_XOR;
+            return wxCompositionMode::Xor;
 
         case wxRasterOperationMode::And:        // src AND dst
         case wxRasterOperationMode::AndInvert: // (NOT src) AND dst
@@ -67,7 +67,7 @@ static wxCompositionMode TranslateRasterOp(wxRasterOperationMode function)
             break;
     }
 
-    return wxCOMPOSITION_INVALID;
+    return wxCompositionMode::Invalid;
 }
 
 //-----------------------------------------------------------------------------
@@ -542,7 +542,7 @@ void wxGCDCImpl::SetLogicalFunction( wxRasterOperationMode function )
     m_logicalFunction = function;
 
     wxCompositionMode mode = TranslateRasterOp( function );
-    m_logicalFunctionSupported = mode != wxCOMPOSITION_INVALID;
+    m_logicalFunctionSupported = mode != wxCompositionMode::Invalid;
     if (m_logicalFunctionSupported)
         m_logicalFunctionSupported = m_graphicContext->SetCompositionMode(mode);
 
@@ -1047,7 +1047,7 @@ bool wxGCDCImpl::DoStretchBlit(
         return true;
 
     const wxCompositionMode mode = TranslateRasterOp(logical_func);
-    if ( mode == wxCOMPOSITION_INVALID )
+    if ( mode == wxCompositionMode::Invalid )
     {
         // Do *not* assert here, this function is often call from wxEVT_PAINT
         // handler and asserting will just result in a reentrant call to the
@@ -1076,7 +1076,7 @@ bool wxGCDCImpl::DoStretchBlit(
     if (m_graphicContext->SetCompositionMode(mode))
     {
         const wxAntialiasMode formerAa = m_graphicContext->GetAntialiasMode();
-        if (mode == wxCOMPOSITION_XOR)
+        if (mode == wxCompositionMode::Xor)
         {
             m_graphicContext->SetAntialiasMode(wxAntialiasMode::None);
         }
@@ -1114,7 +1114,7 @@ bool wxGCDCImpl::DoStretchBlit(
             retval = false;
         }
 
-        if (mode == wxCOMPOSITION_XOR)
+        if (mode == wxCompositionMode::Xor)
         {
             m_graphicContext->SetAntialiasMode(formerAa);
         }
@@ -1211,10 +1211,10 @@ void wxGCDCImpl::DoDrawText(std::string_view str, wxPoint pt)
 
     // Text drawing shouldn't be affected by the raster operation
     // mode set by SetLogicalFunction() and should be always done
-    // in the default wxRasterOperationMode::Copy mode (which is wxCOMPOSITION_OVER
+    // in the default wxRasterOperationMode::Copy mode (which is wxCompositionMode::Over
     // composition mode).
     const wxCompositionMode curMode = m_graphicContext->GetCompositionMode();
-    m_graphicContext->SetCompositionMode(wxCOMPOSITION_OVER);
+    m_graphicContext->SetCompositionMode(wxCompositionMode::Over);
 
     if ( m_backgroundMode == wxBrushStyle::Transparent )
         m_graphicContext->wxDrawText( str, pt.x, pt.y);
@@ -1307,7 +1307,7 @@ void wxGCDCImpl::Clear()
     wxPen p = *wxTRANSPARENT_PEN;
     m_graphicContext->SetPen( p );
     const wxCompositionMode formerMode = m_graphicContext->GetCompositionMode();
-    m_graphicContext->SetCompositionMode(wxCOMPOSITION_SOURCE);
+    m_graphicContext->SetCompositionMode(wxCompositionMode::Source);
 
     float x, y, w, h;
     m_graphicContext->GetClipBox(&x, &y, &w, &h);

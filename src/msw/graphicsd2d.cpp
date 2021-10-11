@@ -911,42 +911,42 @@ D2D1_COLOR_F wxD2DConvertColour(wxColour colour)
 #if wxD2D_DEVICE_CONTEXT_SUPPORTED
 bool wxD2DCompositionModeSupported(wxCompositionMode compositionMode)
 {
-    return (compositionMode != wxCOMPOSITION_CLEAR) || (compositionMode != wxCOMPOSITION_INVALID);
+    return (compositionMode != wxCompositionMode::Clear) || (compositionMode != wxCompositionMode::Invalid);
 }
 
 D2D1_COMPOSITE_MODE wxD2DConvertCompositionMode(wxCompositionMode compositionMode)
 {
     switch (compositionMode)
     {
-    case wxCOMPOSITION_SOURCE:
+    case wxCompositionMode::Source:
         return D2D1_COMPOSITE_MODE_SOURCE_COPY;
-    case wxCOMPOSITION_OVER:
+    case wxCompositionMode::Over:
         return D2D1_COMPOSITE_MODE_SOURCE_OVER;
-    case wxCOMPOSITION_IN:
+    case wxCompositionMode::In:
         return D2D1_COMPOSITE_MODE_SOURCE_IN;
-    case wxCOMPOSITION_OUT:
+    case wxCompositionMode::Out:
         return D2D1_COMPOSITE_MODE_SOURCE_OUT;
-    case wxCOMPOSITION_ATOP:
+    case wxCompositionMode::Atop:
         return D2D1_COMPOSITE_MODE_SOURCE_ATOP;
-    case wxCOMPOSITION_DEST_OVER:
+    case wxCompositionMode::DestOver:
         return D2D1_COMPOSITE_MODE_DESTINATION_OVER;
-    case wxCOMPOSITION_DEST_IN:
+    case wxCompositionMode::DestIn:
         return D2D1_COMPOSITE_MODE_DESTINATION_IN;
-    case wxCOMPOSITION_DEST_OUT:
+    case wxCompositionMode::DestOut:
         return D2D1_COMPOSITE_MODE_DESTINATION_OUT;
-    case wxCOMPOSITION_DEST_ATOP:
+    case wxCompositionMode::DestAtop:
         return D2D1_COMPOSITE_MODE_DESTINATION_ATOP;
-    case wxCOMPOSITION_XOR:
+    case wxCompositionMode::Xor:
         return D2D1_COMPOSITE_MODE_XOR;
-    case wxCOMPOSITION_ADD:
+    case wxCompositionMode::Add:
         return D2D1_COMPOSITE_MODE_PLUS;
 
     // unsupported composition modes
-    case wxCOMPOSITION_DEST:
+    case wxCompositionMode::Dest:
         [[fallthrough]];
-    case wxCOMPOSITION_CLEAR:
+    case wxCompositionMode::Clear:
         [[fallthrough]];
-    case wxCOMPOSITION_INVALID:
+    case wxCompositionMode::Invalid:
         [[fallthrough]];
     default: // FIXME: Unknown should never happen. Fix with enum class.
         wxFAIL_MSG("unknown / unsupported composition mode");
@@ -3397,14 +3397,14 @@ public:
     }
 
     // Composition is not supported at in D2D 1.0, and we only allow for:
-    // wxCOMPOSITION_DEST - which is essentially a no-op and is handled
+    // wxCompositionMode::Dest - which is essentially a no-op and is handled
     //                      externally by preventing any draw calls.
-    // wxCOMPOSITION_OVER - which copies the source over the destination using
+    // wxCompositionMode::Over - which copies the source over the destination using
     //                      alpha blending. This is the default way D2D 1.0
     //                      draws images.
     virtual bool SetCompositionMode(wxCompositionMode compositionMode)
     {
-        return compositionMode == wxCOMPOSITION_DEST || compositionMode == wxCOMPOSITION_OVER;
+        return compositionMode == wxCompositionMode::Dest || compositionMode == wxCompositionMode::Over;
     }
 };
 
@@ -4306,7 +4306,7 @@ void* wxD2DContext::GetNativeContext()
 
 void wxD2DContext::StrokePath(const wxGraphicsPath& p)
 {
-    if (m_composition == wxCOMPOSITION_DEST)
+    if (m_composition == wxCompositionMode::Dest)
         return;
 
     wxD2DOffsetHelper helper(this);
@@ -4329,7 +4329,7 @@ void wxD2DContext::StrokePath(const wxGraphicsPath& p)
 
 void wxD2DContext::FillPath(const wxGraphicsPath& p , wxPolygonFillMode fillStyle)
 {
-    if (m_composition == wxCOMPOSITION_DEST)
+    if (m_composition == wxCompositionMode::Dest)
         return;
 
     EnsureInitialized();
@@ -4566,7 +4566,7 @@ wxGraphicsMatrix wxD2DContext::GetTransform() const
 
 void wxD2DContext::DrawBitmap(const wxGraphicsBitmap& bmp, float x, float y, float w, float h)
 {
-    if (m_composition == wxCOMPOSITION_DEST)
+    if (m_composition == wxCompositionMode::Dest)
         return;
 
     wxD2DBitmapData* bitmapData = wxGetD2DBitmapData(bmp);
@@ -4708,7 +4708,7 @@ void wxD2DContext::DoDrawText(std::string_view str, float x, float y)
     wxCHECK_RET(!m_font.IsNull(),
         wxS("wxD2DContext::wxDrawText - no valid font set"));
 
-    if (m_composition == wxCOMPOSITION_DEST)
+    if (m_composition == wxCompositionMode::Dest)
         return;
 
     wxD2DFontData* fontData = wxGetD2DFontData(m_font);
@@ -4774,7 +4774,7 @@ void wxD2DContext::ReleaseDeviceDependentResources()
 
 void wxD2DContext::DrawRectangle(float x, float y, float w, float h)
 {
-    if (m_composition == wxCOMPOSITION_DEST)
+    if (m_composition == wxCompositionMode::Dest)
         return;
 
     wxD2DOffsetHelper helper(this);
@@ -4803,7 +4803,7 @@ void wxD2DContext::DrawRectangle(float x, float y, float w, float h)
 
 void wxD2DContext::DrawRoundedRectangle(float x, float y, float w, float h, float radius)
 {
-    if (m_composition == wxCOMPOSITION_DEST)
+    if (m_composition == wxCompositionMode::Dest)
         return;
 
     wxD2DOffsetHelper helper(this);
@@ -4833,7 +4833,7 @@ void wxD2DContext::DrawRoundedRectangle(float x, float y, float w, float h, floa
 
 void wxD2DContext::DrawEllipse(float x, float y, float w, float h)
 {
-    if (m_composition == wxCOMPOSITION_DEST)
+    if (m_composition == wxCompositionMode::Dest)
         return;
 
     wxD2DOffsetHelper helper(this);
