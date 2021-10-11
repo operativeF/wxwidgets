@@ -35,7 +35,7 @@ public:
 
     wxRibbonPanel(wxWindow* parent,
                   wxWindowID id = wxID_ANY,
-                  const wxString& label = wxEmptyString,
+                  const wxString& label = {},
                   const wxBitmap& minimised_icon = wxNullBitmap,
                   const wxPoint& pos = wxDefaultPosition,
                   const wxSize& size = wxDefaultSize,
@@ -43,7 +43,7 @@ public:
 
     bool Create(wxWindow* parent,
                 wxWindowID id = wxID_ANY,
-                const wxString& label = wxEmptyString,
+                const wxString& label = {},
                 const wxBitmap& icon = wxNullBitmap,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,

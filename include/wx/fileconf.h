@@ -126,10 +126,10 @@ public:
 
     // New constructor: one size fits all. Specify wxCONFIG_USE_LOCAL_FILE or
     // wxCONFIG_USE_GLOBAL_FILE to say which files should be used.
-  wxFileConfig(const wxString& appName = wxEmptyString,
-               const wxString& vendorName = wxEmptyString,
-               const wxString& localFilename = wxEmptyString,
-               const wxString& globalFilename = wxEmptyString,
+  wxFileConfig(const wxString& appName = {},
+               const wxString& vendorName = {},
+               const wxString& localFilename = {},
+               const wxString& globalFilename = {},
                unsigned int style = wxCONFIG_USE_LOCAL_FILE | wxCONFIG_USE_GLOBAL_FILE,
                const wxMBConv& conv = wxConvAuto());
 

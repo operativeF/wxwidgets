@@ -245,7 +245,7 @@ bool wxPGDefaultRenderer::Render( wxDC& dc, const wxRect& rect,
             // Add units string?
             if ( propertyGrid->GetColumnCount() <= 2 )
             {
-                wxString unitsString = property->GetAttribute(wxPG_ATTR_UNITS, wxEmptyString);
+                wxString unitsString = property->GetAttribute(wxPG_ATTR_UNITS, {});
                 if ( !unitsString.empty() )
                     text = wxString::Format(wxS("%s %s"), text, unitsString );
             }
@@ -740,7 +740,7 @@ void wxPGProperty::GetDisplayInfo( unsigned int column,
             else if ( column == 1 )
                 *pString = GetDisplayedString();
             else if ( column == 2 )
-                *pString = GetAttribute(wxPG_ATTR_UNITS, wxEmptyString);
+                *pString = GetAttribute(wxPG_ATTR_UNITS, {});
         }
     }
     else
@@ -787,7 +787,7 @@ wxString wxPGProperty::GetColumnText( unsigned int col, int choiceIndex ) const
             else if ( col == 1 )
                 return GetDisplayedString();
             else if ( col == 2 )
-                return GetAttribute(wxPG_ATTR_UNITS, wxEmptyString);
+                return GetAttribute(wxPG_ATTR_UNITS, {});
         }
     }
     else
@@ -796,7 +796,7 @@ wxString wxPGProperty::GetColumnText( unsigned int col, int choiceIndex ) const
         return m_choices.GetLabel(choiceIndex);
     }
 
-    return wxEmptyString;
+    return {};
 }
 */
 
@@ -924,7 +924,7 @@ wxString wxPGProperty::ValueToString( wxVariant& WXUNUSED(value),
                                       int argFlags ) const
 {
     wxCHECK_MSG( GetChildCount() > 0,
-                 wxEmptyString,
+                 {},
                  wxS("If user property does not have any children, it must ")
                  wxS("override GetValueAsString") );
 
@@ -941,7 +941,7 @@ wxString wxPGProperty::ValueToString( wxVariant& WXUNUSED(value),
 wxString wxPGProperty::GetValueAsString( int argFlags ) const
 {
     wxPropertyGrid* pg = GetGrid();
-    wxCHECK_MSG( pg, wxEmptyString,
+    wxCHECK_MSG( pg, {},
                  wxS("Cannot get valid value for detached property") );
 
     if ( IsValueUnspecified() )
@@ -2688,7 +2688,7 @@ wxString wxPGProperty::GetHintText() const
     if ( !vHintText.IsNull() )
         return vHintText.GetString();
 
-    return wxEmptyString;
+    return {};
 }
 
 int wxPGProperty::GetDisplayedCommonValueCount() const
@@ -2762,14 +2762,14 @@ wxString wxPropertyCategory::ValueToString( wxVariant& WXUNUSED(value),
 {
     if ( m_value.IsType(wxPG_VARIANT_TYPE_STRING) )
         return m_value.GetString();
-    return wxEmptyString;
+    return {};
 }
 
 wxString wxPropertyCategory::GetValueAsString( int argFlags ) const
 {
     // Unspecified value is always empty string
     if ( IsValueUnspecified() )
-        return wxEmptyString;
+        return {};
 
     return wxPGProperty::GetValueAsString(argFlags);
 }

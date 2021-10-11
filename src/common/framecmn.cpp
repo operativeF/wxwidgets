@@ -297,7 +297,7 @@ void wxFrameBase::OnMenuClose(wxMenuEvent& event)
 {
     event.Skip();
 
-    DoGiveHelp(wxEmptyString, false);
+    DoGiveHelp({}, false);
 }
 
 #endif // wxUSE_STATUSBAR

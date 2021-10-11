@@ -53,7 +53,7 @@ public:
     // file). It is used to determine path for loading images, for example.
     // isdir is false if basepath is filename, true if it is directory name
     // (see wxFileSystem for detailed explanation)
-    void SetHtmlText(const wxString& html, const wxString& basepath = wxEmptyString, bool isdir = true);
+    void SetHtmlText(const wxString& html, const wxString& basepath = {}, bool isdir = true);
 
     // Sets the HTML cell that will be rendered: this is more efficient than
     // using text as it allows to parse it only once. Note that the cell will
@@ -66,8 +66,8 @@ public:
     // Sets font sizes to be relative to the given size or the system
     // default size; use either specified or default font
     void SetStandardFonts(int size = -1,
-                          const wxString& normal_face = wxEmptyString,
-                          const wxString& fixed_face = wxEmptyString);
+                          const wxString& normal_face = {},
+                          const wxString& fixed_face = {});
 
     // Finds the next page break after the specified (vertical) position.
     // Returns wxNOT_FOUND if passed in position is the last page break.
@@ -119,7 +119,7 @@ public:
     wxHtmlPrintout(const wxHtmlPrintout&) = delete;
     wxHtmlPrintout& operator=(const wxHtmlPrintout&) = delete;
 
-    void SetHtmlText(const wxString& html, const wxString &basepath = wxEmptyString, bool isdir = true);
+    void SetHtmlText(const wxString& html, const wxString &basepath = {}, bool isdir = true);
             // prepares the class for printing this html document.
             // Must be called before using the class, in fact just after constructor
             //
@@ -147,8 +147,8 @@ public:
     // Sets font sizes to be relative to the given size or the system
     // default size; use either specified or default font
     void SetStandardFonts(int size = -1,
-                          const wxString& normal_face = wxEmptyString,
-                          const wxString& fixed_face = wxEmptyString);
+                          const wxString& normal_face = {},
+                          const wxString& fixed_face = {});
 
     void SetMargins(float top = 25.2f, float bottom = 25.2f, float left = 25.2f, float right = 25.2f,
                     float spaces = 5);
@@ -240,13 +240,13 @@ public:
     wxHtmlEasyPrinting& operator=(const wxHtmlEasyPrinting&) = delete;
 
     bool PreviewFile(const wxString &htmlfile);
-    bool PreviewText(const wxString &htmltext, const wxString& basepath = wxEmptyString);
+    bool PreviewText(const wxString &htmltext, const wxString& basepath = {});
             // Preview file / html-text for printing
             // (and offers printing)
             // basepath is base directory for opening subsequent files (e.g. from <img> tag)
 
     bool PrintFile(const wxString &htmlfile);
-    bool PrintText(const wxString &htmltext, const wxString& basepath = wxEmptyString);
+    bool PrintText(const wxString &htmltext, const wxString& basepath = {});
             // Print file / html-text w/o preview
 
     void PageSetup();
@@ -268,8 +268,8 @@ public:
     // Sets font sizes to be relative to the given size or the system
     // default size; use either specified or default font
     void SetStandardFonts(int size = -1,
-                          const wxString& normal_face = wxEmptyString,
-                          const wxString& fixed_face = wxEmptyString);
+                          const wxString& normal_face = {},
+                          const wxString& fixed_face = {});
 
     wxPrintData *GetPrintData();
     wxPageSetupDialogData *GetPageSetupData() {return m_PageSetupData;}

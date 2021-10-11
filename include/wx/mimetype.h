@@ -282,7 +282,7 @@ public:
     public:
         MessageParameters() = default;
         MessageParameters(const wxString& filename,
-                          const wxString& mimetype = wxEmptyString)
+                          const wxString& mimetype = {})
             : m_filename(filename), m_mimetype(mimetype) { }
 
         // accessors (called by GetOpenCommand)
@@ -293,7 +293,7 @@ public:
 
         // override this function in derived class
         virtual wxString GetParamValue(const wxString& WXUNUSED(name)) const
-            { return wxEmptyString; }
+            { return {}; }
 
         // virtual dtor as in any base class
         virtual ~MessageParameters() = default;
@@ -342,7 +342,7 @@ public:
     bool SetCommand(const wxString& cmd, const wxString& verb,
         bool overwriteprompt = true);
 
-    bool SetDefaultIcon(const wxString& cmd = wxEmptyString, int index = 0);
+    bool SetDefaultIcon(const wxString& cmd = {}, int index = 0);
 
 
     // remove the association for this filetype from the system MIME database:
@@ -434,7 +434,7 @@ public:
     // use the extraDir parameter if you want to look for files in another
     // directory
     void Initialize(int mailcapStyle = wxMAILCAP_ALL,
-                    const wxString& extraDir = wxEmptyString);
+                    const wxString& extraDir = {});
 
     // and this function clears all the data from the manager
     void ClearData();

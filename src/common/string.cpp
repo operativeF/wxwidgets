@@ -1036,7 +1036,7 @@ wxString wxString::Mid(size_t nFirst, size_t nCount) const
     if ( nFirst > nLen )
     {
         // AllocCopy() will return empty string
-        return wxEmptyString;
+        return {};
     }
 
     if ( nCount > nLen - nFirst )

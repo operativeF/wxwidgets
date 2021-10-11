@@ -176,7 +176,7 @@ wxString wxGetInstallPrefix()
 #ifdef wxINSTALL_PREFIX
     return wxT(wxINSTALL_PREFIX);
 #else
-    return wxEmptyString;
+    return {};
 #endif
 }
 
@@ -481,7 +481,7 @@ wxString wxGetCurrentDir()
             {
                 wxLogSysError(wxT("Failed to get current directory"));
 
-                return wxEmptyString;
+                return {};
             }
             else
             {

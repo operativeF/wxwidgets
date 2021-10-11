@@ -44,7 +44,7 @@ wxHtmlWinParser::wxHtmlWinParser(wxHtmlWindowInterface *wndIface)
                             m_FontsTable[i][j][k][l][m] = nullptr;
                         }
 
-        SetFonts(wxEmptyString, wxEmptyString, nullptr);
+        SetFonts({}, {}, nullptr);
     }
 
     // fill in wxHtmlParser's tables:
@@ -173,7 +173,7 @@ void wxHtmlWinParser::InitParser(const wxString& source)
     m_CharHeight = textExtents.y;
 
     m_UseLink = false;
-    m_Link = wxHtmlLinkInfo( wxEmptyString );
+    m_Link = wxHtmlLinkInfo( {} );
     m_LinkColor.Set(0, 0, 0xFF);
     m_ActualColor.Set(0, 0, 0);
     const wxColour windowColour = wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOW) ;

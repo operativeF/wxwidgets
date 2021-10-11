@@ -282,7 +282,7 @@ public:
 
     wxImageFileProperty( const wxString& label= wxPG_LABEL,
                          const wxString& name = wxPG_LABEL,
-                         const wxString& value = wxEmptyString);
+                         const wxString& value = {});
     ~wxImageFileProperty();
 
     void OnSetValue() override;

@@ -32,7 +32,7 @@ bool wxNativeEncodingInfo::FromString(const wxString& WXUNUSED(s))
 
 wxString wxNativeEncodingInfo::ToString() const
 {
-    return wxEmptyString;
+    return {};
 }
 
 bool wxTestFontEncoding(const wxNativeEncodingInfo& WXUNUSED(info))

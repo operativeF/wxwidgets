@@ -52,7 +52,7 @@ public:
 /* static */ inline
 wxString wxSystemOptions::GetOption(const wxString& WXUNUSED(name))
 {
-    return wxEmptyString;
+    return {};
 }
 
 /* static */ inline

@@ -53,7 +53,7 @@ static void tearDown()
 
 static std::vector<wxString> DirEnumHelper(wxDir& dir,
                                            int flags = wxDIR_DEFAULT,
-                                           const wxString& filespec = wxEmptyString)
+                                           const wxString& filespec = {})
 {
     std::vector<wxString> ret;
     CHECK( dir.IsOpened() );
@@ -129,7 +129,7 @@ TEST_CASE("Directory Tests")
         // enum again with custom traverser
         wxDir dir(DIRTEST_FOLDER);
         TestDirTraverser traverser;
-        dir.Traverse(traverser, wxEmptyString, wxDIR_DIRS | wxDIR_HIDDEN);
+        dir.Traverse(traverser, {}, wxDIR_DIRS | wxDIR_HIDDEN);
         CHECK_EQ(6, traverser.dirs.size());
     }
 

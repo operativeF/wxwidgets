@@ -80,7 +80,7 @@ TEST_CASE_FIXTURE(WebViewTestCase, "WebView")
 
     SUBCASE("Title")
     {
-        CHECK(m_browser->GetCurrentTitle() == "");
+        CHECK(m_browser->GetCurrentTitle().empty());
 
         //Test title after loading raw html
         m_browser->SetPage("<html><title>Title</title><body>Text</body></html>", "");
@@ -89,7 +89,7 @@ TEST_CASE_FIXTURE(WebViewTestCase, "WebView")
 
         //Test title after loading a url, we yield to let events process
         LoadUrl();
-        CHECK(m_browser->GetCurrentTitle() == "");
+        CHECK(m_browser->GetCurrentTitle().empty());
     }
 
     SUBCASE("URL")

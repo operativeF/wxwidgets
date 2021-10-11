@@ -42,8 +42,7 @@
 // static data
 // ----------------------------------------------------------------------------
 
-// FIXME-UTF8: get rid of this, have only one wxEmptyString
+// FIXME-UTF8: get rid of this, have only one {}
 #if wxUSE_UNICODE_UTF8
-const wxStringCharType WXDLLIMPEXP_BASE *wxEmptyStringImpl = "";
+const wxStringCharType WXDLLIMPEXP_BASE *{}Impl = "";
 #endif
-const wxChar WXDLLIMPEXP_BASE *wxEmptyString = wxT("");

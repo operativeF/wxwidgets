@@ -305,7 +305,7 @@ void GUIFrame::AddPanel_3()
     m_textCtrl2->SetToolTip( _("wxTextCtrl") );
     bSizer2->Add( m_textCtrl2, 0, wxBOTTOM|wxRIGHT|wxLEFT, 20 );
 
-    m_richText1 = new wxRichTextCtrl( m_panel3, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( -1,-1 ), 0|wxVSCROLL|wxHSCROLL|wxNO_BORDER|wxWANTS_CHARS );
+    m_richText1 = new wxRichTextCtrl( m_panel3, wxID_ANY, {}, wxDefaultPosition, wxSize( -1,-1 ), 0|wxVSCROLL|wxHSCROLL|wxNO_BORDER|wxWANTS_CHARS );
     m_richText1->LoadFile(wxT("richtext.xml"));
     m_richText1->SetToolTip( _("wxRichTextCtrl") );
     m_richText1->SetMinSize( wxSize( 200,200 ) );
@@ -336,7 +336,7 @@ void GUIFrame::AddPanel_4()
     m_fontPicker1->SetToolTip( _("wxFontPickerCtrl") );
     fgSizer5->Add( m_fontPicker1, 0, wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL|wxALL, 20 );
 
-    m_filePicker1 = new wxFilePickerCtrl( m_panel4, wxID_ANY, wxEmptyString, _("Select a file"), wxT("*.*"), wxDefaultPosition, wxDefaultSize, wxFLP_DEFAULT_STYLE, wxDefaultValidator, wxT("_FilePickerCtrl") );
+    m_filePicker1 = new wxFilePickerCtrl( m_panel4, wxID_ANY, {}, _("Select a file"), wxT("*.*"), wxDefaultPosition, wxDefaultSize, wxFLP_DEFAULT_STYLE, wxDefaultValidator, wxT("_FilePickerCtrl") );
     #if defined(__WXMSW__)
          const wxString a_file = "C:\\Windows\\explorer.exe";
     #else
@@ -356,13 +356,13 @@ void GUIFrame::AddPanel_4()
     m_datePicker1->SetToolTip( _("wxDatePickerCtrl") );
     fgSizer5->Add( m_datePicker1, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 20 );
 
-    m_genericDirCtrl1 = new wxGenericDirCtrl( m_panel4, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxDIRCTRL_3D_INTERNAL|wxSUNKEN_BORDER, wxEmptyString, 0, wxT("_GenericDirCtrl") );
+    m_genericDirCtrl1 = new wxGenericDirCtrl( m_panel4, wxID_ANY, {}, wxDefaultPosition, wxDefaultSize, wxDIRCTRL_3D_INTERNAL|wxSUNKEN_BORDER, {}, 0, wxT("_GenericDirCtrl") );
     m_genericDirCtrl1->ShowHidden( false );
     m_genericDirCtrl1->SetToolTip( _("wxGenericDirCtrl") );
     m_genericDirCtrl1->SetMinSize( wxSize( -1,150 ) );
     fgSizer5->Add(m_genericDirCtrl1, m_commonExpandFlags);
 
-    m_dirPicker1 = new wxDirPickerCtrl( m_panel4, wxID_ANY, wxEmptyString, _("Select a folder"), wxDefaultPosition, wxDefaultSize, wxDIRP_DEFAULT_STYLE, wxDefaultValidator, wxT("_DirPickerCtrl") );
+    m_dirPicker1 = new wxDirPickerCtrl( m_panel4, wxID_ANY, {}, _("Select a folder"), wxDefaultPosition, wxDefaultSize, wxDIRP_DEFAULT_STYLE, wxDefaultValidator, wxT("_DirPickerCtrl") );
     #if defined(__WXMSW__)
         const wxString a_dir = "C:\\Windows";
     #else
@@ -436,7 +436,7 @@ void GUIFrame::AddPanel_5()
     fgSizer4->Add( 0, 90, 1, wxEXPAND, 5 );
 
     //wxComboCtrl 1
-        m_comboCtrl1 = new wxComboCtrl(m_panel5,wxID_ANY,wxEmptyString);
+        m_comboCtrl1 = new wxComboCtrl(m_panel5,wxID_ANY,{});
         // first of all, set the popup control!
         ListViewComboPopup* popupList = new ListViewComboPopup();
         m_comboCtrl1->SetPopupControl(popupList);
@@ -458,7 +458,7 @@ void GUIFrame::AddPanel_5()
         fgSizer4->Add(m_comboCtrl1, m_commonExpandFlags);
 
     //wxComboCtrl 2
-        m_comboCtrl2 = new wxComboCtrl(m_panel5,wxID_ANY,wxEmptyString);
+        m_comboCtrl2 = new wxComboCtrl(m_panel5,wxID_ANY,{});
         // first of all, set the popup control!
         TreeCtrlComboPopup* popupTree = new TreeCtrlComboPopup();
         m_comboCtrl2->SetPopupControl(popupTree);

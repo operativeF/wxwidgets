@@ -158,7 +158,7 @@ TEST_CASE("wxRegEx::Replace", "[regex][replace]")
 
 TEST_CASE("wxRegEx::QuoteMeta", "[regex][meta]")
 {
-    CHECK( wxRegEx::QuoteMeta("") == "" );
+    CHECK( wxRegEx::QuoteMeta("").empty() );
     CHECK( wxRegEx::QuoteMeta("a") == "a" );
     CHECK( wxRegEx::QuoteMeta("?") == "\\?" );
     CHECK( wxRegEx::QuoteMeta("\\") == "\\\\" );

@@ -343,7 +343,7 @@ static wxString wxDefaultFileSelector(bool load,
         wild = wxFileSelectorDefaultWildcardStr;
     }
 
-    return wxFileSelector(prompt, wxEmptyString, default_name, ext, wild,
+    return wxFileSelector(prompt, {}, default_name, ext, wild,
                           load ? (wxFD_OPEN | wxFD_FILE_MUST_EXIST) : wxFD_SAVE,
                           parent);
 }

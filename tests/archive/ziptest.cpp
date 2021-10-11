@@ -28,8 +28,8 @@ class ZipTestCase : public ArchiveTestCase<wxZipClassFactory>
 public:
     ZipTestCase(string name,
                 int options,
-                const wxString& archiver = wxEmptyString,
-                const wxString& unarchiver = wxEmptyString)
+                const wxString& archiver = {},
+                const wxString& unarchiver = {})
     :
         ArchiveTestCase<wxZipClassFactory>(name, new wxZipClassFactory,
                                            options, archiver, unarchiver),

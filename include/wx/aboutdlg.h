@@ -46,7 +46,7 @@ public:
     // generic and gtk native: use short version only, as a suffix to the
     // program name msw and osx native: use long version
     void SetVersion(const wxString& version,
-                    const wxString& longVersion = wxString());
+                    const wxString& longVersion = {});
 
     bool HasVersion() const { return !m_version.empty(); }
     const wxString& GetVersion() const { return m_version; }
@@ -75,7 +75,7 @@ public:
 
     // web site for the program and its description (defaults to URL itself if
     // empty)
-    void SetWebSite(const wxString& url, const wxString& desc = wxEmptyString)
+    void SetWebSite(const wxString& url, const wxString& desc = {})
     {
         m_url = url;
         m_urlDesc = desc.empty() ? url : desc;

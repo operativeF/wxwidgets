@@ -881,7 +881,7 @@ public:
     static wxPGEditor* RegisterEditorClass( wxPGEditor* editor,
                                             bool noDefCheck = false )
     {
-        return DoRegisterEditorClass(editor, wxEmptyString, noDefCheck);
+        return DoRegisterEditorClass(editor, {}, noDefCheck);
     }
 
     static wxPGEditor* DoRegisterEditorClass( wxPGEditor* editorClass,

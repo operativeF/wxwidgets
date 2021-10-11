@@ -158,7 +158,7 @@ PenStyleComboBox * PenStyleComboBox::CreateSample(wxWindow* parent)
     // to use two-stage creation (or redefine the common wx
     // constructor).
     odc = new PenStyleComboBox();
-    odc->Create(parent,wxID_ANY,wxEmptyString,
+    odc->Create(parent,wxID_ANY,{},
                 wxDefaultPosition, wxDefaultSize,
                 arrItems,
                 wxCB_READONLY //wxNO_BORDER | wxCB_READONLY

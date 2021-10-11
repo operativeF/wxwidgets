@@ -81,7 +81,7 @@ enum {
 static wxString ReadString(wxInputStream& stream, std::uint16_t len, wxMBConv& conv)
 {
     if (len == 0)
-        return wxEmptyString;
+        return {};
 
     wxCharBuffer buf(len);
     stream.Read(buf.data(), len);
@@ -724,7 +724,7 @@ wxZipEntry *wxZipWeakLinks::GetEntry(wxFileOffset key) const
 // ZipEntry
 
 wxZipEntry::wxZipEntry(
-    const wxString& name /*=wxEmptyString*/,
+    const wxString& name /*={}*/,
     const wxDateTime& dt /*=wxDateTime::Now()*/,
     wxFileOffset size    /*=wxInvalidOffset*/)
   :
@@ -1623,7 +1623,7 @@ wxString wxZipInputStream::GetComment()
 {
     if (m_position == wxInvalidOffset)
         if (!LoadEndRecord())
-            return wxEmptyString;
+            return {};
 
     if (!m_parentSeekable && Eof() && m_signature) {
         m_lasterror = wxSTREAM_NO_ERROR;

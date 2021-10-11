@@ -139,8 +139,8 @@ bool hvApp::OnInit()
     {
         wxString s = wxFileSelector( wxT("Open help file"),
             wxGetCwd(),
-            wxEmptyString,
-            wxEmptyString,
+            {},
+            {},
             wxT("Help books (*.htb)|*.htb|Help books (*.zip)|*.zip|HTML Help Project (*.hhp)|*.hhp"),
             wxFD_OPEN | wxFD_FILE_MUST_EXIST,
             NULL);
@@ -250,8 +250,8 @@ bool hvApp::OpenBook(wxHtmlHelpController* controller)
 {
     wxString s = wxFileSelector(_("Open help file"),
         wxGetCwd(),
-        wxEmptyString,
-        wxEmptyString,
+        {},
+        {},
         _(
         "Help books (*.htb)|*.htb|Help books (*.zip)|*.zip|\
         HTML Help Project (*.hhp)|*.hhp"),

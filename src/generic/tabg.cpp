@@ -642,7 +642,7 @@ wxString wxTabView::GetTabText(int id) const
 {
     wxTabControl* control = FindTabControlForId(id);
     if (!control)
-      return wxEmptyString;
+      return {};
     else
       return control->GetLabel();
 }

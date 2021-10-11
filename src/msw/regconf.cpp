@@ -147,7 +147,7 @@ wxRegConfig::wxRegConfig(const wxString& appName,
     m_keyGlobal.ReserveMemoryForName(MEMORY_PREALLOC);
 
     m_keyGlobalRoot.SetName(wxRegKey::HKLM, SOFTWARE_KEY + str);
-    m_keyGlobal.SetName(m_keyGlobalRoot, wxEmptyString);
+    m_keyGlobal.SetName(m_keyGlobalRoot, {});
   }
 
   // Create() will Open() if key already exists

@@ -257,23 +257,23 @@ public:
     void SetDesc(const wxCmdLineEntryDesc *desc);
 
     // a switch: i.e. an option without value
-    void AddSwitch(const wxString& name, const wxString& lng = wxEmptyString,
-                   const wxString& desc = wxEmptyString,
+    void AddSwitch(const wxString& name, const wxString& lng = {},
+                   const wxString& desc = {},
                    unsigned int flags = 0);
     void AddLongSwitch(const wxString& lng,
-                       const wxString& desc = wxEmptyString,
+                       const wxString& desc = {},
                        unsigned int flags = 0)
     {
         AddSwitch(wxString(), lng, desc, flags);
     }
 
     // an option taking a value of the given type
-    void AddOption(const wxString& name, const wxString& lng = wxEmptyString,
-                   const wxString& desc = wxEmptyString,
+    void AddOption(const wxString& name, const wxString& lng = {},
+                   const wxString& desc = {},
                    wxCmdLineParamType type = wxCmdLineParamType::String,
                    unsigned int flags = 0);
     void AddLongOption(const wxString& lng,
-                       const wxString& desc = wxEmptyString,
+                       const wxString& desc = {},
                        wxCmdLineParamType type = wxCmdLineParamType::String,
                        unsigned int flags = 0)
     {
@@ -281,7 +281,7 @@ public:
     }
 
     // a parameter
-    void AddParam(const wxString& desc = wxEmptyString,
+    void AddParam(const wxString& desc = {},
                   wxCmdLineParamType type = wxCmdLineParamType::String,
                   unsigned int flags = 0);
 

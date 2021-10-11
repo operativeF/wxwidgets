@@ -431,7 +431,7 @@ wxString wxJoystick::GetProductName() const
 #ifndef __WINE__
     JOYCAPS joyCaps;
     if (joyGetDevCaps(m_joystick, &joyCaps, sizeof(joyCaps)) != JOYERR_NOERROR)
-        return wxEmptyString;
+        return {};
 
     wxRegKey key1(wxString::Format(wxT("HKEY_LOCAL_MACHINE\\%s\\%s\\%s"),
                    REGSTR_PATH_JOYCONFIG, joyCaps.szRegKey, REGSTR_KEY_JOYCURR));

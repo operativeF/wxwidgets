@@ -250,19 +250,19 @@ void FileNameTestCase::TestConstruction()
     wxFileName fn;
 
     // empty strings
-    fn.AssignDir(wxEmptyString);
+    fn.AssignDir({});
     CPPUNIT_ASSERT( !fn.IsOk() );
 
-    fn.Assign(wxEmptyString);
+    fn.Assign({});
     CPPUNIT_ASSERT( !fn.IsOk() );
 
-    fn.Assign(wxEmptyString, wxEmptyString);
+    fn.Assign({}, {});
     CPPUNIT_ASSERT( !fn.IsOk() );
 
-    fn.Assign(wxEmptyString, wxEmptyString, wxEmptyString);
+    fn.Assign({}, {}, {});
     CPPUNIT_ASSERT( !fn.IsOk() );
 
-    fn.Assign(wxEmptyString, wxEmptyString, wxEmptyString, wxEmptyString);
+    fn.Assign({}, {}, {}, {});
     CPPUNIT_ASSERT( !fn.IsOk() );
 }
 

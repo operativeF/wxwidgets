@@ -1089,7 +1089,7 @@ void wxGenericTreeCtrl::SetWindowStyleFlag(unsigned int styles)
 
 wxString wxGenericTreeCtrl::GetItemText(const wxTreeItemId& item) const
 {
-    wxCHECK_MSG( item.IsOk(), wxEmptyString, wxT("invalid tree item") );
+    wxCHECK_MSG( item.IsOk(), {}, wxT("invalid tree item") );
 
     return ((wxGenericTreeItem*) item.m_pItem)->GetText();
 }

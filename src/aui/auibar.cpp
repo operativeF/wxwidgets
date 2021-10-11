@@ -920,7 +920,7 @@ wxAuiToolBarItem* wxAuiToolBar::AddTool(int tool_id,
             wxNullBitmap,
             kind,
             shortHelp_string,
-            wxEmptyString,
+            {},
             nullptr);
 }
 
@@ -1028,7 +1028,7 @@ wxAuiToolBarItem* wxAuiToolBar::AddSeparator()
 {
     wxAuiToolBarItem item;
     item.m_window = nullptr;
-    item.m_label = "";
+    item.m_label = {};
     item.m_bitmap = wxNullBitmap;
     item.m_disabledBitmap = wxNullBitmap;
     item.m_active = true;
@@ -1050,7 +1050,7 @@ wxAuiToolBarItem* wxAuiToolBar::AddSpacer(int pixels)
 {
     wxAuiToolBarItem item;
     item.m_window = nullptr;
-    item.m_label = "";
+    item.m_label = {};
     item.m_bitmap = wxNullBitmap;
     item.m_disabledBitmap = wxNullBitmap;
     item.m_active = true;
@@ -1073,7 +1073,7 @@ wxAuiToolBarItem* wxAuiToolBar::AddStretchSpacer(int proportion)
 {
     wxAuiToolBarItem item;
     item.m_window = nullptr;
-    item.m_label = "";
+    item.m_label = {};
     item.m_bitmap = wxNullBitmap;
     item.m_disabledBitmap = wxNullBitmap;
     item.m_active = true;
@@ -1568,7 +1568,7 @@ wxString wxAuiToolBar::GetToolLabel(int tool_id) const
     wxAuiToolBarItem* tool = FindTool(tool_id);
     wxASSERT_MSG(tool, wxT("can't find tool in toolbar item array"));
     if (!tool)
-        return wxEmptyString;
+        return {};
 
     return tool->m_label;
 }
@@ -1606,7 +1606,7 @@ wxString wxAuiToolBar::GetToolShortHelp(int tool_id) const
     wxAuiToolBarItem* tool = FindTool(tool_id);
     wxASSERT_MSG(tool, wxT("can't find tool in toolbar item array"));
     if (!tool)
-        return wxEmptyString;
+        return {};
 
     return tool->m_shortHelp;
 }
@@ -1625,7 +1625,7 @@ wxString wxAuiToolBar::GetToolLongHelp(int tool_id) const
     wxAuiToolBarItem* tool = FindTool(tool_id);
     wxASSERT_MSG(tool, wxT("can't find tool in toolbar item array"));
     if (!tool)
-        return wxEmptyString;
+        return {};
 
     return tool->m_longHelp;
 }

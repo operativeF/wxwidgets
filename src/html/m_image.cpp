@@ -282,7 +282,7 @@ public:
                     int w = wxDefaultCoord, bool wpercent = false,
                     int h = wxDefaultCoord, bool hpresent = false,
                     double scale = 1.0, int align = wxHTML_ALIGN_BOTTOM,
-                    const wxString& mapname = wxEmptyString);
+                    const wxString& mapname = {});
     ~wxHtmlImageCell();
 
     wxHtmlImageCell(const wxHtmlImageCell&) = delete;

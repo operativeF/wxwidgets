@@ -29,7 +29,7 @@ public:
 
     // like Create() but no error checking (dangerous!)
     wxSingleInstanceChecker(const wxString& name,
-                            const wxString& path = wxEmptyString)
+                            const wxString& path = {})
     {
         Create(name, path);
     }
@@ -50,7 +50,7 @@ public:
     //
     // returns false if initialization failed, it doesn't mean that another
     // instance is running - use IsAnotherRunning() to check it
-    [[maybe_unused]] bool Create(const wxString& name, const wxString& path = wxEmptyString);
+    [[maybe_unused]] bool Create(const wxString& name, const wxString& path = {});
 
     // use the default name, which is a combination of wxTheApp->GetAppName()
     // and wxGetUserId() for mutex/lock file

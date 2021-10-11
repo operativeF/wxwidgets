@@ -168,7 +168,7 @@ wxHtmlHelpFrame* wxHtmlHelpController::CreateHelpFrame(wxHtmlHelpData *data)
     wxHtmlHelpFrame* frame = new wxHtmlHelpFrame(data);
     frame->SetController(this);
     frame->SetTitleFormat(m_titleFormat);
-    frame->Create(m_parentWindow, -1, wxEmptyString, m_FrameStyle
+    frame->Create(m_parentWindow, -1, {}, m_FrameStyle
 #if wxUSE_CONFIG
         , m_Config, m_ConfigRoot
 #endif // wxUSE_CONFIG
@@ -183,7 +183,7 @@ wxHtmlHelpDialog* wxHtmlHelpController::CreateHelpDialog(wxHtmlHelpData *data)
     wxHtmlHelpDialog* dialog = new wxHtmlHelpDialog(data);
     dialog->SetController(this);
     dialog->SetTitleFormat(m_titleFormat);
-    dialog->Create(m_parentWindow, -1, wxEmptyString, m_FrameStyle);
+    dialog->Create(m_parentWindow, -1, {}, m_FrameStyle);
     m_helpDialog = dialog;
     return dialog;
 }

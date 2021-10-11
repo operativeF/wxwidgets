@@ -366,7 +366,7 @@ class WXDLLIMPEXP_CORE wxHTMLDataObject : public wxDataObjectSimple
 public:
     // ctor: you can specify the text here or in SetText(), or override
     // GetText()
-    wxHTMLDataObject(const wxString& html = wxEmptyString)
+    wxHTMLDataObject(const wxString& html = {})
         : wxDataObjectSimple(wxDF_HTML),
           m_html(html)
         {
@@ -629,7 +629,7 @@ public:
     class WXDLLIMPEXP_CORE wxURLDataObject : public wxTextDataObject
     {
     public:
-        wxURLDataObject(const wxString& url = wxEmptyString)
+        wxURLDataObject(const wxString& url = {})
             : wxTextDataObject(url)
         {
         }

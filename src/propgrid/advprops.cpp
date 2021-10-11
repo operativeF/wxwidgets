@@ -1370,7 +1370,7 @@ bool wxSystemColourProperty::StringToValue( wxVariant& value, const wxString& te
         if ( colStr.Find(wxS("(")) == 0 )
         {
             // Eliminate whitespace
-            colStr.Replace(wxS(" "), wxEmptyString);
+            colStr.Replace(wxS(" "), {});
 
             int commaCount = colStr.Freq(wxS(','));
             if ( commaCount == 2 )

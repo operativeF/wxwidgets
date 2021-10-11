@@ -152,7 +152,7 @@ class wxDataOutputStream;
 class WXDLLIMPEXP_BASE wxZipEntry : public wxArchiveEntry
 {
 public:
-    wxZipEntry(const wxString& name = wxEmptyString,
+    wxZipEntry(const wxString& name = {},
                const wxDateTime& dt = wxDateTime::Now(),
                wxFileOffset size = wxInvalidOffset);
     ~wxZipEntry();

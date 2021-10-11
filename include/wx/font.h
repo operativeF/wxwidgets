@@ -317,14 +317,14 @@ public:
            wxFontStyle style,
            wxFontWeight weight,
            bool underlined = false,
-           const wxString& face = wxEmptyString,
+           const wxString& face = {},
            wxFontEncoding encoding = wxFONTENCODING_DEFAULT);
     wxFont(const wxSize& pixelSize,
            wxFontFamily family,
            wxFontStyle style,
            wxFontWeight weight,
            bool underlined = false,
-           const wxString& face = wxEmptyString,
+           const wxString& face = {},
            wxFontEncoding encoding = wxFONTENCODING_DEFAULT);
     */
 
@@ -339,7 +339,7 @@ public:
         wxFontStyle style,          // see wxFontStyle enum
         wxFontWeight weight,        // see wxFontWeight enum
         bool underlined = false,    // not underlined by default
-        const wxString& face = wxEmptyString,              // facename
+        const wxString& face = {},              // facename
         wxFontEncoding encoding = wxFONTENCODING_DEFAULT); // ISO8859-X, ...
 
     // from the font components
@@ -349,7 +349,7 @@ public:
         wxFontStyle style,          // see wxFontStyle enum
         wxFontWeight weight,        // see wxFontWeight enum
         bool underlined = false,    // not underlined by default
-        const wxString& face = wxEmptyString,              // facename
+        const wxString& face = {},              // facename
         wxFontEncoding encoding = wxFONTENCODING_DEFAULT); // ISO8859-X, ...
 
     // from the font components but using the font flags instead of separate
@@ -357,7 +357,7 @@ public:
     static wxFont *New(int pointSize,
                        wxFontFamily family,
                        FontFlags flags = wxFontFlags::Default,
-                       const wxString& face = wxEmptyString,
+                       const wxString& face = {},
                        wxFontEncoding encoding = wxFONTENCODING_DEFAULT);
 
 
@@ -366,7 +366,7 @@ public:
     static wxFont *New(const wxSize& pixelSize,
                        wxFontFamily family,
                        FontFlags flags = wxFontFlags::Default,
-                       const wxString& face = wxEmptyString,
+                       const wxString& face = {},
                        wxFontEncoding encoding = wxFONTENCODING_DEFAULT);
 
     // from the (opaque) native font description object
@@ -580,7 +580,7 @@ public:
                              wxFontStyle style,
                              wxFontWeight weight,
                              bool underline = false,
-                             const wxString& face = wxEmptyString,
+                             const wxString& face = {},
                              wxFontEncoding encoding = wxFONTENCODING_DEFAULT);
 
     wxFont *FindOrCreateFont(const wxFontInfo& fontInfo)

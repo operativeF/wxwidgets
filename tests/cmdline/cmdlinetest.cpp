@@ -195,11 +195,11 @@ TEST_CASE("ArgumentsCollection")
     wxCmdLineParser p;
 
     p.AddLongSwitch ("verbose");
-    p.AddOption ("l", "long", wxEmptyString, wxCmdLineParamType::Number);
-    p.AddOption ("d", "date", wxEmptyString, wxCmdLineParamType::Date);
-    p.AddOption ("f", "double", wxEmptyString, wxCmdLineParamType::Double);
-    p.AddOption ("s", "string", wxEmptyString, wxCmdLineParamType::String);
-    p.AddParam (wxEmptyString, wxCmdLineParamType::String, wxCMD_LINE_PARAM_MULTIPLE);
+    p.AddOption ("l", "long", {}, wxCmdLineParamType::Number);
+    p.AddOption ("d", "date", {}, wxCmdLineParamType::Date);
+    p.AddOption ("f", "double", {}, wxCmdLineParamType::Double);
+    p.AddOption ("s", "string", {}, wxCmdLineParamType::String);
+    p.AddParam ({}, wxCmdLineParamType::String, wxCMD_LINE_PARAM_MULTIPLE);
 
     wxDateTime wasNow = wxDateTime::Now().GetDateOnly();
     p.SetCmdLine (wxString::Format ("--verbose param1 -l 22 -d \"%s\" -f 50.12e-1 param2 --string \"some string\"",

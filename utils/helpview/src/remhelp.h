@@ -60,9 +60,9 @@ public:
     void SetTitleFormat(const wxString& format);
 
     //dummies - config is in server
-    void UseConfig(wxConfigBase* config, const wxString& rootpath = wxEmptyString) {};
-    void ReadCustomization(wxConfigBase* cfg, wxString path = wxEmptyString) {};
-    void WriteCustomization(wxConfigBase* cfg, wxString path = wxEmptyString) {};
+    void UseConfig(wxConfigBase* config, const wxString& rootpath = {}) {};
+    void ReadCustomization(wxConfigBase* cfg, wxString path = {}) {};
+    void WriteCustomization(wxConfigBase* cfg, wxString path = {}) {};
 
     //virtuals from wxHelpControllerBase - not in wxHtmlHelpController
     //won't compile without these

@@ -210,7 +210,7 @@ public:
 
         wxWizard(wxWindow *parent,
                  int id = wxID_ANY,
-                 const wxString& title = wxEmptyString,
+                 const wxString& title = {},
                  const wxBitmap& bitmap = wxNullBitmap,
                  const wxPoint& pos = wxDefaultPosition,
                  unsigned int style = wxDEFAULT_DIALOG_STYLE);

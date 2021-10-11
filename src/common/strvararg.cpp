@@ -57,7 +57,7 @@ wxArgNormalizerWchar<const wxCStrData&>::wxArgNormalizerWchar(
 wxString wxArgNormalizedString::GetString() const
 {
     if ( !IsValid() )
-        return wxEmptyString;
+        return {};
 
 #if wxUSE_UTF8_LOCALE_ONLY
     return wxString(reinterpret_cast<const char*>(m_ptr));

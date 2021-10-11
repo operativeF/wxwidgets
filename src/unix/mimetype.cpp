@@ -98,7 +98,7 @@ public:
     wxString GetVerb(size_t i)
     {
         if (i > GetLineCount() )
-            return wxEmptyString;
+            return {};
 
         wxString sTmp = GetLine(i).BeforeFirst(wxT('='));
         return sTmp;
@@ -107,7 +107,7 @@ public:
     wxString GetCmd(size_t i)
     {
         if (i > GetLineCount() )
-            return wxEmptyString;
+            return {};
 
         wxString sTmp = GetLine(i).AfterFirst(wxT('='));
         return sTmp;
@@ -227,10 +227,10 @@ void wxMimeTypesManagerImpl::LoadXDGAppsFilesFromDir(const wxString& dirname)
     }
 
     // Recurse into subdirs, which on KDE may hold most of the .desktop files
-    cont = dir.GetFirst(&filename, wxEmptyString, wxDIR_DIRS);
+    cont = dir.GetFirst(&filename, {}, wxDIR_DIRS);
     while (cont)
     {
-        wxFileName p(dirname, wxEmptyString);
+        wxFileName p(dirname, {});
         p.AppendDir(filename);
         LoadXDGAppsFilesFromDir( p.GetPath() );
         cont = dir.GetNext(&filename);
@@ -261,7 +261,7 @@ void wxMimeTypesManagerImpl::LoadXDGGlobs(const wxString& filename)
 
        wxString icon = GetIconFromMimeType(mime);
 
-       AddToMimeData(mime, icon, NULL, exts, wxEmptyString, true );
+       AddToMimeData(mime, icon, NULL, exts, {}, true );
     }
 }
 
@@ -757,7 +757,7 @@ int wxMimeTypesManagerImpl::AddToMimeData(const wxString& strType,
            m_aEntries.Add(entry ? entry : new wxMimeTypeCommands);
 
            // change nIndex so we can use it below to add the extensions
-           m_aExtensions.Add(wxEmptyString);
+           m_aExtensions.Add({});
            nIndex = m_aExtensions.size() - 1;
 
            m_aDescriptions.Add(strDesc);
@@ -770,7 +770,7 @@ int wxMimeTypesManagerImpl::AddToMimeData(const wxString& strType,
            m_aEntries.Insert(entry ? entry : new wxMimeTypeCommands,0);
 
            // change nIndex so we can use it below to add the extensions
-           m_aExtensions.Insert(wxEmptyString,0);
+           m_aExtensions.Insert({},0);
            nIndex = 0;
 
            m_aDescriptions.Insert(strDesc,0);

@@ -73,12 +73,12 @@ wxFSFile* wxFilterFSHandler::OpenFile(
 
 wxString wxFilterFSHandler::FindFirst(const wxString& WXUNUSED(spec), unsigned int WXUNUSED(flags))
 {
-    return wxEmptyString;
+    return {};
 }
 
 wxString wxFilterFSHandler::FindNext()
 {
-    return wxEmptyString;
+    return {};
 }
 
 #endif //wxUSE_FILESYSTEM

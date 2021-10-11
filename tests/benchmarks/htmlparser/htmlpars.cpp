@@ -395,7 +395,7 @@ void wx28HtmlParser::SetSourceAndSaveState(const wxString& src)
     m_Tags = NULL;
     m_TextPieces = NULL;
     m_CurTextPiece = 0;
-    m_Source = wxEmptyString;
+    m_Source = {};
 
     SetSource(src);
 }

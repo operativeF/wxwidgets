@@ -57,7 +57,7 @@ wxString wxHtmlFilterPlainText::ReadFile(const wxFSFile& file) const
     wxInputStream *s = file.GetStream();
     wxString doc, doc2;
 
-    if (s == nullptr) return wxEmptyString;
+    if (s == nullptr) return {};
     ReadString(doc, s, wxConvISO8859_1);
 
     doc.Replace(wxT("&"), wxT("&amp;"), true);
@@ -132,7 +132,7 @@ wxString wxHtmlFilterHTML::ReadFile(const wxFSFile& file) const
     if (s == nullptr)
     {
         wxLogError(_("Cannot open HTML document: %s"), file.GetLocation().c_str());
-        return wxEmptyString;
+        return {};
     }
 
     // NB: We convert input file to wchar_t here in Unicode mode, based on

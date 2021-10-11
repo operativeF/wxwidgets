@@ -67,23 +67,23 @@ public:
     virtual wxRibbonToolBarToolBase* AddDropdownTool(
                 int tool_id,
                 const wxBitmap& bitmap,
-                const wxString& help_string = wxEmptyString);
+                const wxString& help_string = {});
 
     virtual wxRibbonToolBarToolBase* AddHybridTool(
                 int tool_id,
                 const wxBitmap& bitmap,
-                const wxString& help_string = wxEmptyString);
+                const wxString& help_string = {});
 
     virtual wxRibbonToolBarToolBase* AddToggleTool(
                 int tool_id,
                 const wxBitmap& bitmap,
-                const wxString& help_string = wxEmptyString);
+                const wxString& help_string = {});
 
     virtual wxRibbonToolBarToolBase* AddTool(
                 int tool_id,
                 const wxBitmap& bitmap,
                 const wxBitmap& bitmap_disabled = wxNullBitmap,
-                const wxString& help_string = wxEmptyString,
+                const wxString& help_string = {},
                 wxRibbonButtonKind kind = wxRIBBON_BUTTON_NORMAL,
                 wxObject* client_data = nullptr);
 
@@ -100,26 +100,26 @@ public:
                 size_t pos,
                 int tool_id,
                 const wxBitmap& bitmap,
-                const wxString& help_string = wxEmptyString);
+                const wxString& help_string = {});
 
     virtual wxRibbonToolBarToolBase* InsertHybridTool(
                 size_t pos,
                 int tool_id,
                 const wxBitmap& bitmap,
-                const wxString& help_string = wxEmptyString);
+                const wxString& help_string = {});
 
     virtual wxRibbonToolBarToolBase* InsertToggleTool(
                 size_t pos,
                 int tool_id,
                 const wxBitmap& bitmap,
-                const wxString& help_string = wxEmptyString);
+                const wxString& help_string = {});
 
     virtual wxRibbonToolBarToolBase* InsertTool(
                 size_t pos,
                 int tool_id,
                 const wxBitmap& bitmap,
                 const wxBitmap& bitmap_disabled = wxNullBitmap,
-                const wxString& help_string = wxEmptyString,
+                const wxString& help_string = {},
                 wxRibbonButtonKind kind = wxRIBBON_BUTTON_NORMAL,
                 wxObject* client_data = nullptr);
 

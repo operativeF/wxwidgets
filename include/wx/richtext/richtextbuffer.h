@@ -2625,7 +2625,7 @@ public:
     /**
         Returns any text in this object for the given range.
     */
-    virtual wxString GetTextForRange(const wxRichTextRange& WXUNUSED(range)) const { return wxEmptyString; }
+    virtual wxString GetTextForRange(const wxRichTextRange& WXUNUSED(range)) const { return {}; }
 
     /**
         Returns @true if this object can merge itself with the given one.
@@ -2668,7 +2668,7 @@ public:
     /**
         Returns the label to be used for the properties context menu item.
     */
-    virtual wxString GetPropertiesMenuLabel() const { return wxEmptyString; }
+    virtual wxString GetPropertiesMenuLabel() const { return {}; }
 
     /**
         Returns @true if objects of this class can accept the focus, i.e. a call to SetFocusObject
@@ -3922,7 +3922,7 @@ public:
         Default constructor; optionally pass the parent object.
     */
 
-    wxRichTextField(const wxString& fieldType = wxEmptyString, wxRichTextObject* parent = nullptr);
+    wxRichTextField(const wxString& fieldType = {}, wxRichTextObject* parent = nullptr);
 
     /**
         Copy constructor.
@@ -4001,7 +4001,7 @@ public:
     /**
         Creates a field type definition.
     */
-    wxRichTextFieldType(const wxString& name = wxEmptyString)
+    wxRichTextFieldType(const wxString& name = {})
         : m_name(name)
         { }
 
@@ -4047,7 +4047,7 @@ public:
     /**
         Returns the label to be used for the properties context menu item.
     */
-    virtual wxString GetPropertiesMenuLabel(wxRichTextField* WXUNUSED(obj)) const { return wxEmptyString; }
+    virtual wxString GetPropertiesMenuLabel(wxRichTextField* WXUNUSED(obj)) const { return {}; }
 
     /**
         Update the field. This would typically expand the field to its value,
@@ -4671,7 +4671,7 @@ public:
     /**
         Constructor.
     */
-    wxRichTextPlainText(const wxString& text = wxEmptyString, wxRichTextObject* parent = nullptr, wxRichTextAttr* style = nullptr);
+    wxRichTextPlainText(const wxString& text = {}, wxRichTextObject* parent = nullptr, wxRichTextAttr* style = nullptr);
 
     /**
         Copy constructor.
@@ -5509,7 +5509,7 @@ public:
         Pass a URL and optionally, a character style to apply, since it is common
         to mark a URL with a familiar style such as blue text with underlining.
     */
-    bool BeginURL(const wxString& url, const wxString& characterStyle = wxEmptyString);
+    bool BeginURL(const wxString& url, const wxString& characterStyle = {});
 
     /**
         Ends URL.
@@ -6627,7 +6627,7 @@ public:
     /**
         Creates a file handler object.
     */
-    wxRichTextFileHandler(const wxString& name = wxEmptyString, const wxString& ext = wxEmptyString, int type = 0)
+    wxRichTextFileHandler(const wxString& name = {}, const wxString& ext = {}, int type = 0)
         : m_name(name), m_extension(ext), m_type(type) 
         { }
 
@@ -6819,7 +6819,7 @@ public:
     /**
         Creates a drawing handler object.
     */
-    wxRichTextDrawingHandler(const wxString& name = wxEmptyString)
+    wxRichTextDrawingHandler(const wxString& name = {})
         : m_name(name)
         { }
 

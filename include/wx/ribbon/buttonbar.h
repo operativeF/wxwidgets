@@ -58,19 +58,19 @@ public:
                 int button_id,
                 const wxString& label,
                 const wxBitmap& bitmap,
-                const wxString& help_string = wxEmptyString);
+                const wxString& help_string = {});
 
     virtual wxRibbonButtonBarButtonBase* AddHybridButton(
                 int button_id,
                 const wxString& label,
                 const wxBitmap& bitmap,
-                const wxString& help_string = wxEmptyString);
+                const wxString& help_string = {});
 
     virtual wxRibbonButtonBarButtonBase* AddToggleButton(
                 int button_id,
                 const wxString& label,
                 const wxBitmap& bitmap,
-                const wxString& help_string = wxEmptyString);
+                const wxString& help_string = {});
 
     virtual wxRibbonButtonBarButtonBase* AddButton(
                 int button_id,
@@ -80,7 +80,7 @@ public:
                 const wxBitmap& bitmap_disabled = wxNullBitmap,
                 const wxBitmap& bitmap_small_disabled = wxNullBitmap,
                 wxRibbonButtonKind kind = wxRIBBON_BUTTON_NORMAL,
-                const wxString& help_string = wxEmptyString);
+                const wxString& help_string = {});
 
     virtual wxRibbonButtonBarButtonBase* InsertButton(
                 size_t pos,
@@ -95,21 +95,21 @@ public:
                 int button_id,
                 const wxString& label,
                 const wxBitmap& bitmap,
-                const wxString& help_string = wxEmptyString);
+                const wxString& help_string = {});
 
     virtual wxRibbonButtonBarButtonBase* InsertHybridButton(
                 size_t pos,
                 int button_id,
                 const wxString& label,
                 const wxBitmap& bitmap,
-                const wxString& help_string = wxEmptyString);
+                const wxString& help_string = {});
 
     virtual wxRibbonButtonBarButtonBase* InsertToggleButton(
                 size_t pos,
                 int button_id,
                 const wxString& label,
                 const wxBitmap& bitmap,
-                const wxString& help_string = wxEmptyString);
+                const wxString& help_string = {});
 
     virtual wxRibbonButtonBarButtonBase* InsertButton(
                 size_t pos,
@@ -120,7 +120,7 @@ public:
                 const wxBitmap& bitmap_disabled = wxNullBitmap,
                 const wxBitmap& bitmap_small_disabled = wxNullBitmap,
                 wxRibbonButtonKind kind = wxRIBBON_BUTTON_NORMAL,
-                const wxString& help_string = wxEmptyString);
+                const wxString& help_string = {});
 
     void SetItemClientObject(wxRibbonButtonBarButtonBase* item, wxClientData* data);
     wxClientData* GetItemClientObject(const wxRibbonButtonBarButtonBase* item) const;

@@ -242,7 +242,7 @@ wxString wxFileData::GetFileType() const
     else if (m_fileName.Find(wxT('.'), true) != wxNOT_FOUND)
         return m_fileName.AfterLast(wxT('.'));
 
-    return wxEmptyString;
+    return {};
 }
 
 wxString wxFileData::GetModificationTime() const
@@ -542,7 +542,7 @@ void wxFileListCtrl::UpdateFiles()
             wxString f;
 
             // Get the directories first (not matched against wildcards):
-            cont = dir.GetFirst(&f, wxEmptyString, wxDIR_DIRS | hiddenFlag);
+            cont = dir.GetFirst(&f, {}, wxDIR_DIRS | hiddenFlag);
             while (cont)
             {
                 wxFileData *fd = new wxFileData(dirPrefix + f, f, wxFileData::is_dir, wxFileIconsTable::folder);
@@ -924,7 +924,7 @@ bool wxGenericFileCtrl::Create( wxWindow *parent,
     style2 |= wxSUNKEN_BORDER;
 
     m_list = new wxFileListCtrl( this, ID_FILELIST_CTRL,
-                                 wxEmptyString, false,
+                                 {}, false,
                                  wxDefaultPosition, wxSize( 400, 140 ),
                                  style2 );
 

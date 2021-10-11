@@ -510,7 +510,7 @@ public:
     wxAuiToolBarItem* AddTool(int toolId,
                  const wxString& label,
                  const wxBitmap& bitmap,
-                 const wxString& shortHelpString = wxEmptyString,
+                 const wxString& shortHelpString = {},
                  wxItemKind kind = wxITEM_NORMAL);
 
     wxAuiToolBarItem* AddTool(int toolId,
@@ -527,11 +527,11 @@ public:
                  const wxBitmap& disabledBitmap,
                  bool toggle = false,
                  wxObject* clientData = nullptr,
-                 const wxString& shortHelpString = wxEmptyString,
-                 const wxString& longHelpString = wxEmptyString)
+                 const wxString& shortHelpString = {},
+                 const wxString& longHelpString = {})
     {
         return AddTool(toolId,
-                wxEmptyString,
+                {},
                 bitmap,
                 disabledBitmap,
                 toggle ? wxITEM_CHECK : wxITEM_NORMAL,
@@ -541,10 +541,10 @@ public:
     }
 
     wxAuiToolBarItem* AddLabel(int toolId,
-                  const wxString& label = wxEmptyString,
+                  const wxString& label = {},
                   const int width = -1);
     wxAuiToolBarItem* AddControl(wxControl* control,
-                    const wxString& label = wxEmptyString);
+                    const wxString& label = {});
     wxAuiToolBarItem* AddSeparator();
     wxAuiToolBarItem* AddSpacer(int pixels);
     wxAuiToolBarItem* AddStretchSpacer(int proportion = 1);

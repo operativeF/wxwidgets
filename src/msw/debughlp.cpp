@@ -1077,7 +1077,7 @@ extern "C" void DumpTI(ULONG ti)
     }
 
     OutputDebugString(wxString::Format(wxT("tag=%s%s"),
-                      nested ? wxT("nested ") : wxEmptyString,
+                      nested ? wxT("nested ") : {},
                       TagString(tag).c_str()));
     if ( tag == wxDbgHelpDLL::SYMBOL_TAG_UDT )
     {

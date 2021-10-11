@@ -88,7 +88,7 @@ class wxArgumentType : public wxType
 public:
     wxArgumentType() {}
     wxArgumentType(const wxString& type, const wxString& defVal,
-                   const wxString& argName = wxEmptyString)
+                   const wxString& argName = {})
         { SetTypeFromString(type); SetDefaultValue(defVal); m_strArgName = argName; }
 
     void SetArgumentName(const wxString& name)
@@ -97,7 +97,7 @@ public:
         { return m_strArgName; }
 
     void SetDefaultValue(const wxString& defval,
-                         const wxString& defvalForCmp = wxEmptyString);
+                         const wxString& defvalForCmp = {});
     wxString GetDefaultValue() const
         { return m_strDefaultValue; }
 

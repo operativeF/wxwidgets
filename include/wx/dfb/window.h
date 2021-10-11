@@ -58,7 +58,7 @@ public:
     // -------------------------------------------
 
     virtual void SetLabel( const wxString &WXUNUSED(label) ) {}
-    virtual wxString GetLabel() const { return wxEmptyString; }
+    virtual wxString GetLabel() const { return {}; }
 
     virtual void Raise();
     virtual void Lower();

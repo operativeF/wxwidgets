@@ -76,8 +76,8 @@ public:
     // Sets font sizes to be relative to the given size or the system
     // default size; use either specified or default font
     void SetStandardFonts(int size = -1,
-                          const wxString& normal_face = wxEmptyString,
-                          const wxString& fixed_face = wxEmptyString);
+                          const wxString& normal_face = {},
+                          const wxString& fixed_face = {});
 
     // Adds tags module. see wxHtmlTagsModule for details.
     static void AddModule(wxHtmlTagsModule *module);

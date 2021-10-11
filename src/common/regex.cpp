@@ -645,7 +645,7 @@ wxString wxRegEx::GetMatch(const wxString& text, size_t index) const
 {
     size_t start, len;
     if ( !GetMatch(&start, &len, index) )
-        return wxEmptyString;
+        return {};
 
     return text.Mid(start, len);
 }

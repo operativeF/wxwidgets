@@ -249,7 +249,7 @@ wxString wxListCtrlBase::OnGetItemText(long WXUNUSED(item), long WXUNUSED(col)) 
     // because the controls which are not virtual don't need to implement it
     wxFAIL_MSG("wxListCtrl::OnGetItemText not supposed to be called");
 
-    return wxEmptyString;
+    return {};
 }
 
 bool wxListCtrlBase::OnGetItemIsChecked(long WXUNUSED(item)) const

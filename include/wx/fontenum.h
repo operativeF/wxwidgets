@@ -52,7 +52,7 @@ public:
     // enumerate the different encodings either for given font facename or for
     // all facenames - will result in OnFontEncoding() being called for each
     // available (facename, encoding) couple
-    virtual bool EnumerateEncodings(const std::string& facename = "");
+    virtual bool EnumerateEncodings(const std::string& facename = {});
 
     // callbacks which are called after one of EnumerateXXX() functions from
     // above is invoked - all of them may return false to stop enumeration or
@@ -75,7 +75,7 @@ public:
                  bool fixedWidthOnly = false);
 
     // convenience function that returns array of all available encodings.
-    static std::vector<std::string> GetEncodings(const std::string& facename = "");
+    static std::vector<std::string> GetEncodings(const std::string& facename = {});
 
     // convenience function that returns true if the given face name exist
     // in the user's system

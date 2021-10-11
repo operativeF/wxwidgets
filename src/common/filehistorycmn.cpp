@@ -268,7 +268,7 @@ void wxFileHistoryBase::Save(wxConfigBase& config)
         if (i < m_fileHistory.size())
             config.Write(buf, wxString(m_fileHistory[i]));
         else
-            config.Write(buf, wxEmptyString);
+            config.Write(buf, wxString{});
     }
 }
 #endif // wxUSE_CONFIG

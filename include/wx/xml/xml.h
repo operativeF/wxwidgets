@@ -93,7 +93,7 @@ public:
     wxXmlNode() = default;
 
     wxXmlNode(wxXmlNode *parent, wxXmlNodeType type,
-              const wxString& name, const wxString& content = wxEmptyString,
+              const wxString& name, const wxString& content = {},
               wxXmlAttribute *attrs = nullptr, wxXmlNode *next = nullptr,
               int lineNo = -1);
 
@@ -108,7 +108,7 @@ public:
 
     // user-friendly creation:
     wxXmlNode(wxXmlNodeType type, const wxString& name,
-              const wxString& content = wxEmptyString,
+              const wxString& content = {},
               int lineNo = -1);
     virtual void AddChild(wxXmlNode *child);
     virtual bool InsertChild(wxXmlNode *child, wxXmlNode *followingNode);
@@ -183,9 +183,9 @@ class WXDLLIMPEXP_XML wxXmlDoctype
 {
 public:
     explicit
-    wxXmlDoctype(const wxString& rootName = wxString(),
-                 const wxString& systemId = wxString(),
-                 const wxString& publicId = wxString())
+    wxXmlDoctype(const wxString& rootName = {},
+                 const wxString& systemId = {},
+                 const wxString& publicId = {})
                  : m_rootName(rootName),
                    m_systemId(systemId),
                    m_publicId(publicId)

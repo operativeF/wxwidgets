@@ -57,7 +57,7 @@ public:
     static wxXmlNode *GetParamNode(wxXmlNode* node, const wxString& param);
     static wxString GetNodeContent(wxXmlNode *node);
     static wxString GetParamValue(wxXmlNode *node, const wxString& param);
-    static wxString GetText(wxXmlNode *node, const wxString& param = wxEmptyString);
+    static wxString GetText(wxXmlNode *node, const wxString& param = {});
     static wxXmlNode* FindNode(wxXmlNode* node, const wxString& name);
 
     static wxString AttributeToXML(const wxString& str);

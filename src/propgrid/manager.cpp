@@ -1844,7 +1844,7 @@ void wxPropertyGridManager::SetDescribedProperty( wxPGProperty* p )
         }
         else
         {
-            SetDescription( wxEmptyString, wxEmptyString );
+            SetDescription( {}, {} );
         }
     }
 }

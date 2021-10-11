@@ -719,7 +719,7 @@ int NameArrayIndexFromFlag(wxDateTime::NameFlags flags)
 /* static */
 wxString wxDateTime::GetEnglishMonthName(Month month, NameFlags flags)
 {
-    wxCHECK_MSG( month != Inv_Month, wxEmptyString, "invalid month" );
+    wxCHECK_MSG( month != Inv_Month, {}, "invalid month" );
 
     static const char *const monthNames[2][MONTHS_IN_YEAR] =
     {
@@ -741,7 +741,7 @@ wxString wxDateTime::GetMonthName(wxDateTime::Month month,
                                   wxDateTime::NameFlags flags)
 {
 #ifdef wxHAS_STRFTIME
-    wxCHECK_MSG( month != Inv_Month, wxEmptyString, wxT("invalid month") );
+    wxCHECK_MSG( month != Inv_Month, {}, wxT("invalid month") );
 
     // notice that we must set all the fields to avoid confusing libc (GNU one
     // gets confused to a crash if we don't do this)
@@ -758,7 +758,7 @@ wxString wxDateTime::GetMonthName(wxDateTime::Month month,
 /* static */
 wxString wxDateTime::GetEnglishWeekDayName(WeekDay wday, NameFlags flags)
 {
-    wxCHECK_MSG( wday != Inv_WeekDay, wxEmptyString, wxT("invalid weekday") );
+    wxCHECK_MSG( wday != Inv_WeekDay, {}, wxT("invalid weekday") );
 
     static const char *const weekdayNames[2][DAYS_PER_WEEK] =
     {
@@ -779,7 +779,7 @@ wxString wxDateTime::GetWeekDayName(wxDateTime::WeekDay wday,
                                     wxDateTime::NameFlags flags)
 {
 #ifdef wxHAS_STRFTIME
-    wxCHECK_MSG( wday != Inv_WeekDay, wxEmptyString, wxT("invalid weekday") );
+    wxCHECK_MSG( wday != Inv_WeekDay, {}, wxT("invalid weekday") );
 
     // take some arbitrary Sunday (but notice that the day should be such that
     // after adding wday to it below we still have a valid date, e.g. don't
@@ -822,7 +822,7 @@ void wxDateTime::GetAmPmStrings(wxString *am, wxString *pm)
         if (wxStrftime(buffer, WXSIZEOF(buffer), wxT("%p"), &tm) > 0)
             *am = wxString(buffer);
         else
-            *am = wxString();
+            *am = wxString{};
     }
     if ( pm )
     {
@@ -830,7 +830,7 @@ void wxDateTime::GetAmPmStrings(wxString *am, wxString *pm)
         if (wxStrftime(buffer, WXSIZEOF(buffer), wxT("%p"), &tm) > 0)
             *pm = wxString(buffer);
         else
-            *pm = wxString();
+            *pm = wxString{};
     }
 }
 

@@ -320,7 +320,7 @@ void XmlResApp::ParseParams(const wxCmdLineParser& cmdline)
     if (!cmdline.Found("o", &parOutput))
     {
         if (flagGettext)
-            parOutput = wxEmptyString;
+            parOutput = {};
         else
         {
             if (flagCPP)
@@ -481,7 +481,7 @@ static bool NodeContainsFilename(wxXmlNode *node)
    // wxBitmap or wxIcon toplevel resources:
    if ( name == wxT("object") )
    {
-       wxString klass = node->GetAttribute(wxT("class"), wxEmptyString);
+       wxString klass = node->GetAttribute(wxT("class"), {});
        if (klass == wxT("wxBitmap") ||
                klass == wxT("wxIcon") ||
                 klass == wxT("data") )

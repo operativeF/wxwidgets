@@ -3367,7 +3367,7 @@ wxRichTextBox* wxRichTextCtrl::WriteTextBox(const wxRichTextAttr& textAttr)
     wxRichTextBox* textBox = new wxRichTextBox;
     textBox->SetAttributes(textAttr);
     textBox->SetParent(& GetBuffer()); // set parent temporarily for AddParagraph to use correct style
-    textBox->AddParagraph(wxEmptyString);
+    textBox->AddParagraph({});
     textBox->SetParent(nullptr);
 
     // If the box has an invalid foreground colour, its text will mimic any upstream value (see #15224)

@@ -68,7 +68,7 @@ public:
                     const wxString& verb,
                     bool overwriteprompt = true);
 
-    bool SetDefaultIcon(const wxString& cmd = wxEmptyString, int index = 0);
+    bool SetDefaultIcon(const wxString& cmd = {}, int index = 0);
 
     // this is called  by Associate
     bool SetDescription (const wxString& desc);

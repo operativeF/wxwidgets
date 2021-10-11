@@ -104,7 +104,7 @@ public:
 
     bool IsPeerVerifyDisabled() const { return m_peerVerifyDisabled; }
 
-    void SetState(wxWebRequest::State state, const wxString& failMsg = wxString());
+    void SetState(wxWebRequest::State state, const wxString& failMsg = {});
 
     void ReportDataReceived(size_t sizeReceived);
 

@@ -79,7 +79,7 @@ const wxChar *wxEnumData::GetEnumMemberName(int value) const
         if (value == m_members[i].m_value)
             return m_members[i].m_name;
 
-    return wxEmptyString;
+    return {};
 }
 
 int wxEnumData::GetEnumMemberValueByIndex( int idx ) const
@@ -353,7 +353,7 @@ wxClassTypeInfo::wxClassTypeInfo( wxTypeKind kind, wxClassInfo* classInfo,
 wxEventSourceTypeInfo::wxEventSourceTypeInfo( int eventType, wxClassInfo* eventClass,
                                         wxVariant2StringFnc to,
                                         wxString2VariantFnc from ) :
-    wxTypeInfo ( wxT_DELEGATE, to, from, wxEmptyString )
+    wxTypeInfo ( wxT_DELEGATE, to, from, {} )
 {
     m_eventClass = eventClass;
     m_eventType = eventType;
@@ -364,7 +364,7 @@ wxEventSourceTypeInfo::wxEventSourceTypeInfo( int eventType, int lastEventType,
                                         wxClassInfo* eventClass,
                                         wxVariant2StringFnc to,
                                         wxString2VariantFnc from ) :
-    wxTypeInfo ( wxT_DELEGATE, to, from, wxEmptyString )
+    wxTypeInfo ( wxT_DELEGATE, to, from, {} )
 {
     m_eventClass = eventClass;
     m_eventType = eventType;

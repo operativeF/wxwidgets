@@ -426,7 +426,7 @@ WXDLLIMPEXP_BASE int wxKill(long pid,
 
 // Execute a command in an interactive shell window (always synchronously)
 // If no command then just the shell
-WXDLLIMPEXP_BASE bool wxShell(const wxString& command = wxEmptyString);
+WXDLLIMPEXP_BASE bool wxShell(const wxString& command = {});
 
 // As wxShell(), but must give a (non interactive) command and its output will
 // be returned in output array
@@ -504,7 +504,7 @@ WXDLLIMPEXP_BASE const wxChar* wxGetHomeDir(wxString *pstr);
 
 // Get the user's (by default use the current user name) home dir,
 // return empty string on error
-WXDLLIMPEXP_BASE wxString wxGetUserHome(const wxString& user = wxEmptyString);
+WXDLLIMPEXP_BASE wxString wxGetUserHome(const wxString& user = {});
 
 
 #if wxUSE_LONGLONG

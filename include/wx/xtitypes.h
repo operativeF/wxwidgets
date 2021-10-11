@@ -309,7 +309,7 @@ public:
 
     wxTypeInfo(wxTypeKind kind,
                wxVariant2StringFnc to = NULL, wxString2VariantFnc from = NULL,
-               const wxString &name = wxEmptyString):
+               const wxString &name = {}):
             m_toString(to), m_fromString(from), m_kind(kind), m_name(name)
     {
         Register();
@@ -389,7 +389,7 @@ class WXDLLIMPEXP_BASE wxBuiltInTypeInfo : public wxTypeInfo
 public:
     wxBuiltInTypeInfo( wxTypeKind kind, wxVariant2StringFnc to = NULL,
                        wxString2VariantFnc from = NULL,
-                       const wxString &name = wxEmptyString ) :
+                       const wxString &name = {} ) :
             wxTypeInfo( kind, to, from, name )
        { wxASSERT_MSG( GetKind() < wxT_SET, wxT("Illegal Kind for Base Type") ); }
 };
@@ -451,7 +451,7 @@ class WXDLLIMPEXP_BASE wxClassTypeInfo : public wxTypeInfo
 public:
     wxClassTypeInfo( wxTypeKind kind, wxClassInfo* classInfo,
                      wxVariant2StringFnc to = NULL, wxString2VariantFnc from = NULL,
-                     const wxString &name = wxEmptyString);
+                     const wxString &name = {});
 
     const wxClassInfo *wxGetClassInfo() const { return m_classInfo; }
 

@@ -162,7 +162,7 @@ public:
         wxUnusedVar(names);
         wxUnusedVar(desc);
 
-        return wxEmptyString;
+        return {};
     }
 
 
@@ -232,7 +232,7 @@ public:
     }
 
     bool IsUsingUniversalWidgets() const override { return false; }
-    wxString GetDesktopEnvironment() const override { return wxEmptyString; }
+    wxString GetDesktopEnvironment() const override { return {}; }
 };
 
 #if wxUSE_GUI
@@ -268,7 +268,7 @@ public:
     #endif
     }
 
-    wxString GetDesktopEnvironment() const override { return wxEmptyString; }
+    wxString GetDesktopEnvironment() const override { return {}; }
 };
 
 #endif // wxUSE_GUI

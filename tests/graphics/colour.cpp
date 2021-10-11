@@ -142,7 +142,7 @@ TEST_CASE("wxColour::FromString", "[colour][string]")
 
 TEST_CASE("wxColour::GetAsString", "[colour][string]")
 {
-    CHECK( wxColour().GetAsString() == "" );
+    CHECK( wxColour().GetAsString().empty() );
 
     wxColour red("red");
     CHECK( red.GetAsString() == "red" );

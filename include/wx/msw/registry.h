@@ -158,7 +158,7 @@ public:
     // copy value to another key possibly changing its name (by default it will
     // remain the same)
   bool  CopyValue(const wxString& szValue, wxRegKey& keyDst,
-                  const wxString& szNewName = wxEmptyString);
+                  const wxString& szNewName = {});
 
     // copy the entire contents of the key recursively to another location
   bool  Copy(const wxString& szNewName);
@@ -183,7 +183,7 @@ public:
 
     // assignment operators set the default value of the key
   wxRegKey& operator=(const wxString& strValue)
-    { SetValue(wxEmptyString, strValue); return *this; }
+    { SetValue({}, strValue); return *this; }
 
     // query the default value of the key: implicitly or explicitly
   wxString QueryDefaultValue() const;

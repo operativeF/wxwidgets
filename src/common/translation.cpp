@@ -1668,7 +1668,7 @@ wxString wxTranslations::GetHeaderValue(const wxString& header,
                                         const wxString& domain) const
 {
     if ( header.empty() )
-        return wxEmptyString;
+        return {};
 
     const wxString *trans = nullptr;
 
@@ -1678,27 +1678,27 @@ wxString wxTranslations::GetHeaderValue(const wxString& header,
 
         // does the catalog exist?
         if ( pMsgCat == nullptr )
-            return wxEmptyString;
+            return {};
 
-        trans = pMsgCat->GetString(wxEmptyString, std::numeric_limits<unsigned int>::max());
+        trans = pMsgCat->GetString({}, std::numeric_limits<unsigned int>::max());
     }
     else
     {
         // search in all domains
         for ( wxMsgCatalog* pMsgCat = m_pMsgCat; pMsgCat != nullptr; pMsgCat = pMsgCat->m_pNext )
         {
-            trans = pMsgCat->GetString(wxEmptyString, std::numeric_limits<unsigned int>::max());
+            trans = pMsgCat->GetString({}, std::numeric_limits<unsigned int>::max());
             if ( trans != nullptr )   // take the first found
                 break;
         }
     }
 
     if ( !trans || trans->empty() )
-        return wxEmptyString;
+        return {};
 
     size_t found = trans->find(header + wxS(": "));
     if ( found == wxString::npos )
-        return wxEmptyString;
+        return {};
 
     found += header.length() + 2 /* ': ' */;
 

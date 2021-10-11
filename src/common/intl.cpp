@@ -1171,7 +1171,7 @@ wxString wxLocale::GetHeaderValue(const wxString& header,
 {
     wxTranslations *t = wxTranslations::Get();
     if ( !t )
-        return wxEmptyString;
+        return {};
     return t->GetHeaderValue(header, domain);
 }
 

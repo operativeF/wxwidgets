@@ -79,7 +79,7 @@ class wxPseudoTransparentFrame : public wxFrame
 public:
     explicit wxPseudoTransparentFrame(wxWindow* parent = nullptr,
                 wxWindowID id = wxID_ANY,
-                const wxString& title = wxEmptyString,
+                const wxString& title = {},
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = wxDEFAULT_FRAME_STYLE,
@@ -233,7 +233,7 @@ class wxPseudoTransparentFrame: public wxFrame
 public:
     wxPseudoTransparentFrame(wxWindow* parent = NULL,
                 wxWindowID id = wxID_ANY,
-                const wxString& title = wxEmptyString,
+                const wxString& title = {},
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = wxDEFAULT_FRAME_STYLE,
@@ -830,7 +830,7 @@ void wxAuiManager::UpdateHintWindowConfig()
         #elif defined(__WXMAC__)
             // Using a miniframe with float and tool styles keeps the parent
             // frame activated and highlighted as such...
-            m_hintWnd = new wxMiniFrame(m_frame, wxID_ANY, wxEmptyString,
+            m_hintWnd = new wxMiniFrame(m_frame, wxID_ANY, {},
                                          wxDefaultPosition, wxSize(1,1),
                                          wxFRAME_FLOAT_ON_PARENT
                                          | wxFRAME_TOOL_WINDOW );
@@ -856,7 +856,7 @@ void wxAuiManager::UpdateHintWindowConfig()
             // blinds effect was explicitly requested
             m_hintWnd = new wxPseudoTransparentFrame(m_frame,
                                                       wxID_ANY,
-                                                      wxEmptyString,
+                                                      {},
                                                       wxDefaultPosition,
                                                       wxSize(1,1),
                                                             wxFRAME_TOOL_WINDOW |

@@ -36,7 +36,7 @@ wxObject* wxVariantOfPtrToObjectConverterwxObject ( const wxAny &data )
  wxAny wxObjectToVariantConverterwxObject ( wxObject *data )
  { return wxAny( dynamic_cast<wxObject*> (data)  ) ; }
 
- wxClassInfo wxObject::ms_classInfo(ms_classParents , wxEmptyString , wxT("wxObject"),
+ wxClassInfo wxObject::ms_classInfo(ms_classParents , {} , wxT("wxObject"),
             (int) sizeof(wxObject),                              \
             (wxObjectConstructorFn) 0   ,
             NULL,NULL,0 , 0 ,

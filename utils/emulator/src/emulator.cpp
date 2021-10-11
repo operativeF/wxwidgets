@@ -444,7 +444,7 @@ bool wxEmulatorInfo::Load(const wxString& appDir)
 
     {
         wxFileConfig config(wxT("wxEmulator"), wxT("wxWidgets"),
-            absoluteConfigPath, wxEmptyString, wxCONFIG_USE_LOCAL_FILE);
+            absoluteConfigPath, {}, wxCONFIG_USE_LOCAL_FILE);
 
         config.Read(wxT("/General/title"), & m_emulatorTitle);
         config.Read(wxT("/General/description"), & m_emulatorDescription);
@@ -591,6 +591,6 @@ wxString wxFindAppPath(const wxString& argv0, const wxString& cwd, const wxStrin
         return wxPathOnly(str);
 
     // Failed
-    return wxEmptyString;
+    return {};
 }
 

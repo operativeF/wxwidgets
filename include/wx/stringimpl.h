@@ -38,11 +38,9 @@
 // global data
 // ----------------------------------------------------------------------------
 
-// global pointer to empty string
-extern WXDLLIMPEXP_DATA_BASE(const wxChar*) wxEmptyString;
 #if wxUSE_UNICODE_UTF8
-// FIXME-UTF8: we should have only one wxEmptyString
-extern WXDLLIMPEXP_DATA_BASE(const wxStringCharType*) wxEmptyStringImpl;
+// FIXME-UTF8: we should have only one {}
+extern WXDLLIMPEXP_DATA_BASE(const wxStringCharType*) {}
 #endif
 
 

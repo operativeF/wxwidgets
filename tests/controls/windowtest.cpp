@@ -188,7 +188,7 @@ TEST_CASE_FIXTURE(WindowTestCase, "Window::Properties")
 TEST_CASE_FIXTURE(WindowTestCase, "Window::ToolTip")
 {
     CHECK(!m_window->GetToolTip());
-    CHECK( m_window->GetToolTipText() == "" );
+    CHECK( m_window->GetToolTipText().empty() );
 
     m_window->SetToolTip("text tip");
 
@@ -197,7 +197,7 @@ TEST_CASE_FIXTURE(WindowTestCase, "Window::ToolTip")
     m_window->UnsetToolTip();
 
     CHECK(!m_window->GetToolTip());
-    CHECK( m_window->GetToolTipText() == "" );
+    CHECK( m_window->GetToolTipText().empty() );
 
     wxToolTip* tip = new wxToolTip("other tip");
 
@@ -213,7 +213,7 @@ TEST_CASE_FIXTURE(WindowTestCase, "Window::Help")
 #if wxUSE_HELP
     wxHelpProvider::Set(new wxSimpleHelpProvider());
 
-    CHECK( m_window->GetHelpText() == "" );
+    CHECK( m_window->GetHelpText().empty() );
 
     m_window->SetHelpText("helptext");
 

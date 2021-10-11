@@ -99,7 +99,7 @@ public:
                                           wxItemKind kind = wxITEM_NORMAL,
                                           wxObject *clientData = nullptr,
                                           const std::string& shortHelp = {},
-                                          const std::string& longHelp = "") override;
+                                          const std::string& longHelp = {}) override;
 
     wxToolBarToolBase *CreateTool(wxControl *control,
                                           const std::string& label) override;

@@ -725,7 +725,7 @@ class WXDLLIMPEXP_HTML wxHtmlLinkInfo : public wxObject
 public:
     wxHtmlLinkInfo()
         { m_Event = nullptr; m_Cell = nullptr; }
-    wxHtmlLinkInfo(const wxString& href, const wxString& target = wxString())
+    wxHtmlLinkInfo(const wxString& href, const wxString& target = {})
         : m_Href(href)
         , m_Target(target)
         { m_Event = nullptr; m_Cell = nullptr; }

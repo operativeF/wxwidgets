@@ -45,7 +45,7 @@ public:
   bool Close();
 
   // assign an existing file descriptor and get it back from wxFFile object
-  void Attach(FILE *lfp, const wxString& name = wxEmptyString)
+  void Attach(FILE *lfp, const wxString& name = {})
     { Close(); m_fp = lfp; m_name = name; }
   FILE* Detach() { FILE* fpOld = m_fp; m_fp = nullptr; return fpOld; }
   FILE *fp() const { return m_fp; }

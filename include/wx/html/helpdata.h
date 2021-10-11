@@ -138,7 +138,7 @@ public:
     // title of the book to search. By default, all books are searched.
     wxHtmlSearchStatus(wxHtmlHelpData* base, const wxString& keyword,
                        bool case_sensitive, bool whole_words_only,
-                       const wxString& book = wxEmptyString);
+                       const wxString& book = {});
 
     ~wxHtmlSearchStatus() = default;
     wxHtmlSearchStatus(const wxHtmlSearchStatus&) = delete;
@@ -188,9 +188,9 @@ public:
     bool AddBookParam(const wxFSFile& bookfile,
                       wxFontEncoding encoding,
                       const wxString& title, const wxString& contfile,
-                      const wxString& indexfile = wxEmptyString,
-                      const wxString& deftopic = wxEmptyString,
-                      const wxString& path = wxEmptyString);
+                      const wxString& indexfile = {},
+                      const wxString& deftopic = {},
+                      const wxString& path = {});
 
     // Some accessing stuff:
 

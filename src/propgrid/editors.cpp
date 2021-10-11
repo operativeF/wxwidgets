@@ -1000,7 +1000,7 @@ wxWindow* wxPGChoiceEditor::CreateControlsBase( wxPropertyGrid* propGrid,
 #endif
     cb->Create(ctrlParent,
                wxID_ANY,
-               wxEmptyString,
+               {},
                po,
                si,
                labelVec,

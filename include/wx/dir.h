@@ -128,30 +128,30 @@ public:
     // start enumerating all files matching filespec (or all files if it is
     // empty) and flags, return true on success
     bool GetFirst(wxString *filename,
-                  const wxString& filespec = wxEmptyString,
+                  const wxString& filespec = {},
                   unsigned int flags = wxDIR_DEFAULT) const;
 
     // get next file in the enumeration started with GetFirst()
     bool GetNext(wxString *filename) const;
 
     // return true if this directory has any files in it
-    bool HasFiles(const wxString& spec = wxEmptyString) const;
+    bool HasFiles(const wxString& spec = {}) const;
 
     // return true if this directory has any subdirectories
-    bool HasSubDirs(const wxString& spec = wxEmptyString) const;
+    bool HasSubDirs(const wxString& spec = {}) const;
 
     // enumerate all files in this directory and its subdirectories
     //
     // return the number of files found
     size_t Traverse(wxDirTraverser& sink,
-                    const wxString& filespec = wxEmptyString,
+                    const wxString& filespec = {},
                     unsigned int flags = wxDIR_DEFAULT) const;
 
     // simplest version of Traverse(): get the names of all files under this
     // directory into filenames array, return the number of files
     static size_t GetAllFiles(const wxString& dirname,
                               std::vector<wxString>* files,
-                              const wxString& filespec = wxEmptyString,
+                              const wxString& filespec = {},
                               unsigned int flags = wxDIR_DEFAULT);
 
     // check if there any files matching the given filespec under the given

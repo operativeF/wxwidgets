@@ -53,7 +53,7 @@
 #if wxDEBUG_LEVEL
     static const wxChar *GetTymedName(DWORD tymed);
 #else // !wxDEBUG_LEVEL
-    #define GetTymedName(tymed) wxEmptyString
+    #define GetTymedName(tymed) {}
 #endif // wxDEBUG_LEVEL/!wxDEBUG_LEVEL
 
 #endif // wxUSE_OLE
@@ -399,7 +399,7 @@ wxString wxDataFormat::GetId() const
     if ( !len )
     {
         wxLogError(_("The clipboard format '%d' doesn't exist."), m_format);
-        return wxEmptyString;
+        return {};
     }
 
     return s;

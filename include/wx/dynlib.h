@@ -362,7 +362,7 @@ protected:
 
     // log the error after an OS dynamic library function failure
     static void ReportError(const wxString& msg,
-                            const wxString& name = wxString());
+                            const wxString& name = {});
 
     // the handle to DLL or NULL
     wxDllType m_handle{nullptr};

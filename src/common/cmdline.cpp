@@ -456,7 +456,7 @@ void wxCmdLineParserData::SetArguments(const wxString& cmdLine)
     if(wxTheApp && wxTheApp->argc > 0)
         m_arguments.push_back(wxTheApp->argv[0]);
     else
-        m_arguments.push_back(wxEmptyString);
+        m_arguments.push_back({});
 
     std::vector<wxString> args = wxCmdLineParser::ConvertStringToArgs(cmdLine);
 
@@ -676,7 +676,7 @@ void wxCmdLineParser::AddUsageText(const wxString& text)
     wxASSERT_MSG( !text.empty(), wxT("text can't be empty") );
 
     wxCmdLineOption *option = new wxCmdLineOption(wxCmdLineEntryType::UsageText,
-                                                  wxEmptyString, wxEmptyString,
+                                                  {}, {},
                                                   text, wxCmdLineParamType::None, 0);
 
     m_data->m_options.Add(option);
@@ -768,7 +768,7 @@ size_t wxCmdLineParser::GetParamCount() const
 
 wxString wxCmdLineParser::GetParam(size_t n) const
 {
-    wxCHECK_MSG( n < GetParamCount(), wxEmptyString, wxT("invalid param index") );
+    wxCHECK_MSG( n < GetParamCount(), {}, wxT("invalid param index") );
 
     return m_data->m_parameters[n];
 }

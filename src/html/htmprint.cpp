@@ -556,8 +556,8 @@ wxString wxHtmlPrintout::TranslateHeader(const wxString& instr, int page)
     r.Replace(wxT("@DATE@"), now.FormatDate());
     r.Replace(wxT("@TIME@"), now.FormatTime());
 #else
-    r.Replace(wxT("@DATE@"), wxEmptyString);
-    r.Replace(wxT("@TIME@"), wxEmptyString);
+    r.Replace(wxT("@DATE@"), {});
+    r.Replace(wxT("@TIME@"), {});
 #endif
 
     r.Replace(wxT("@TITLE@"), GetTitle());

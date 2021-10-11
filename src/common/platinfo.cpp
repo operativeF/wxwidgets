@@ -238,7 +238,7 @@ wxString wxPlatformInfo::GetOperatingSystemIdName(wxOperatingSystemId os)
 {
     const unsigned idx = wxGetIndexFromEnumValue(os);
 
-    wxCHECK_MSG( idx < WXSIZEOF(wxOperatingSystemIdNames), wxEmptyString,
+    wxCHECK_MSG( idx < WXSIZEOF(wxOperatingSystemIdNames), {},
                  wxT("invalid OS id") );
 
     return wxOperatingSystemIdNames[idx];

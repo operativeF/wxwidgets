@@ -89,7 +89,7 @@ TextElement(wxXmlNode *node, const wxChar *name, const wxString& value)
 {
     wxXmlNode *nodeChild = new wxXmlNode(wxXML_ELEMENT_NODE, name);
     node->AddChild(nodeChild);
-    nodeChild->AddChild(new wxXmlNode(wxXML_TEXT_NODE, wxEmptyString, value));
+    nodeChild->AddChild(new wxXmlNode(wxXML_TEXT_NODE, {}, value));
 }
 
 #if wxUSE_CRASHREPORT && defined(__INTEL__)

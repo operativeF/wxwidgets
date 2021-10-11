@@ -55,7 +55,7 @@ public:
     // Generic FTP interface
 
     // FTP doesn't know the MIME type of the last downloaded/uploaded file
-    wxString GetContentType() const override { return wxEmptyString; }
+    wxString GetContentType() const override { return {}; }
 
     // the last FTP server reply
     const wxString& GetLastResult() const { return m_lastResult; }
@@ -100,7 +100,7 @@ public:
     // get the list of full filenames, the format is fixed: one file name per
     // line
     bool GetFilesList(std::vector<wxString>& files,
-                      const wxString& wildcard = wxEmptyString)
+                      const wxString& wildcard = {})
     {
         return GetList(files, wildcard, false);
     }
@@ -108,21 +108,21 @@ public:
     // get a directory list in server dependent format - this can be shown
     // directly to the user
     bool GetDirList(std::vector<wxString>& files,
-                    const wxString& wildcard = wxEmptyString)
+                    const wxString& wildcard = {})
     {
         return GetList(files, wildcard, true);
     }
 
     // equivalent to either GetFilesList() (default) or GetDirList()
     bool GetList(std::vector<wxString>& files,
-                 const wxString& wildcard = wxEmptyString,
+                 const wxString& wildcard = {},
                  bool details = false);
 
 protected:
     // this executes a simple ftp command with the given argument and returns
     // true if it its return code starts with '2'
     bool DoSimpleCommand(const wxChar *command,
-                         const wxString& arg = wxEmptyString);
+                         const wxString& arg = {});
 
     // get the server reply, return the first character of the reply code,
     // '1'..'5' for normal FTP replies, 0 (*not* '0') if an error occurred

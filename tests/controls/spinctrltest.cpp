@@ -282,7 +282,7 @@ TEST_CASE_FIXTURE(SpinCtrlTestCase2, "SpinCtrl::Value")
     CHECK(updatedText.GetCount() == 0);
 
     m_spin->SetValue("");
-    CHECK( m_spin->GetTextValue() == "" );
+    CHECK( m_spin->GetTextValue().empty() );
     CHECK( m_spin->GetValue() == 0 );
 
     CHECK(updatedSpin.GetCount() == 0);

@@ -209,7 +209,7 @@ wxString wxDynamicLibrary::GetPluginsDirectory()
 #ifdef __UNIX__
     wxString format = wxGetInstallPrefix();
     if ( format.empty() )
-        return wxEmptyString;
+        return {};
     wxString dir;
     format << wxFILE_SEP_PATH
            << wxT("lib") << wxFILE_SEP_PATH
@@ -225,7 +225,7 @@ wxString wxDynamicLibrary::GetPluginsDirectory()
     return dir;
 
 #else // ! __UNIX__
-    return wxEmptyString;
+    return {};
 #endif
 }
 

@@ -50,7 +50,7 @@ wxString wxXmlGetContentFromNode( wxXmlNode *node )
     if ( node->GetChildren() )
         return node->GetChildren()->GetContent();
     else
-        return wxEmptyString;
+        return {};
 }
 
 struct wxObjectXmlWriter::wxObjectXmlWriterInternal

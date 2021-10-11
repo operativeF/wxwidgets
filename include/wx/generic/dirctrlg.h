@@ -62,7 +62,7 @@ public:
     void SetNewDirName(const wxString& path);
 
     bool HasSubDirs() const;
-    bool HasFiles(const wxString& spec = wxEmptyString) const;
+    bool HasFiles(const wxString& spec = {}) const;
 
     wxString m_path, m_name;
     bool m_isHidden{false};
@@ -298,7 +298,7 @@ public:
         executable
     };
 
-    int GetIconID(const wxString& extension, const wxString& mime = wxEmptyString);
+    int GetIconID(const wxString& extension, const wxString& mime = {});
     wxImageList *GetSmallImageList();
 
     const wxSize& GetSize() const { return m_size; }

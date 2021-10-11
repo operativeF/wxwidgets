@@ -1066,7 +1066,7 @@ bool wxXmlGccInterface::Parse(const wxString& filename)
                     newtype = newtype + "[]";
 
                 // add the resolved type to the list of "primary" types
-                if (newtype.Contains("TOFIX") && typedefs[id] != "")
+                if (newtype.Contains("TOFIX") && !typedefs[id].empty())
                     types[id] = typedefs[id];       // better use a typedef for this type!
                 else
                     types[id] = newtype;

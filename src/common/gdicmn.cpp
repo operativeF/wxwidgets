@@ -278,7 +278,7 @@ wxString wxColourDatabase::FindName(const wxColour& colour) const
             return it->first;
     }
 
-    return wxEmptyString;
+    return {};
 }
 
 // ============================================================================

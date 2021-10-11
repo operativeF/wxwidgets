@@ -350,7 +350,7 @@ wxString wxRichTextStyleOrganiserDialog::GetSelectedStyle() const
     if (def)
         return def->GetName();
     else
-        return wxEmptyString;
+        return {};
 }
 
 wxRichTextStyleDefinition* wxRichTextStyleOrganiserDialog::GetSelectedStyleDefinition() const
@@ -454,7 +454,7 @@ iaculis malesuada. Donec bibendum ipsum ut ante porta fringilla.\n";
         m_previewCtrl->SetFocusObject(textBox);
         m_previewCtrl->BeginStyle(cellParaAttr);
         wxString text(s_para2);
-        text.Replace(wxT("\n"), wxEmptyString);
+        text.Replace(wxT("\n"), {});
         m_previewCtrl->WriteText(text);
         m_previewCtrl->EndStyle();
         m_previewCtrl->SetFocusObject(nullptr); // Set the focus back to the main buffer

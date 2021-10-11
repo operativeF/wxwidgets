@@ -25,7 +25,7 @@ class WXDLLIMPEXP_FWD_CORE wxMenu;
 class WXDLLIMPEXP_CORE wxCommand : public wxObject
 {
 public:
-    wxCommand(bool canUndoIt = false, const wxString& name = wxEmptyString);
+    wxCommand(bool canUndoIt = false, const wxString& name = {});
     ~wxCommand() = default;
 
     // Override this to perform a command

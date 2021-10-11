@@ -20,7 +20,7 @@
 class wxWebCredentials
 {
 public:
-    wxWebCredentials(const wxString& user = wxString(),
+    wxWebCredentials(const wxString& user = {},
                      const wxSecretValue& password = wxSecretValue())
         : m_user(user), m_password(password)
     {
@@ -219,7 +219,7 @@ public:
     // factory functions to get access to them.
     static wxWebSession& GetDefault();
 
-    static wxWebSession New(const wxString& backend = wxString());
+    static wxWebSession New(const wxString& backend = {});
 
     // Can be used to check if the given backend is available without actually
     // creating a session using it.
@@ -259,7 +259,7 @@ public:
                       int id = wxID_ANY,
                       wxWebRequest::State state = wxWebRequest::State_Idle,
                       const wxWebResponse& response = wxWebResponse(),
-                      const wxString& errorDesc = wxString())
+                      const wxString& errorDesc = {})
         : wxEvent(id, type),
         m_state(state), m_response(response),
         m_errorDescription(errorDesc)

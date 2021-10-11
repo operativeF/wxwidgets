@@ -233,7 +233,7 @@ TEST_CASE("To String")
         s2 = a.ToString();
         CHECK( s1 == s2 );
 
-        s2 = wxEmptyString;
+        s2 = {};
         s2 << a;
         CHECK( s1 == s2 );
 

@@ -2375,7 +2375,7 @@ wxWindowMSW::HandleMenuSelect(WXWORD nItem, WXWORD flags, WXHMENU hMenu)
     {
         wxFrame *frame = wxDynamicCast(wxGetTopLevelParent(this), wxFrame);
         if ( frame )
-            frame->DoGiveHelp(wxEmptyString, true);
+            frame->DoGiveHelp({}, true);
     }
 
     return false;

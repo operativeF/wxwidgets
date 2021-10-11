@@ -75,11 +75,11 @@ public:
     wxMediaCtrl() = default;
 
     wxMediaCtrl(wxWindow* parent, wxWindowID winid,
-                const wxString& fileName = wxEmptyString,
+                const wxString& fileName = {},
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = 0,
-                const wxString& szBackend = wxEmptyString,
+                const wxString& szBackend = {},
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxT("mediaCtrl"))
                 : m_imp(nullptr), m_bLoaded(false)
@@ -91,7 +91,7 @@ public:
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = 0,
-                const wxString& szBackend = wxEmptyString,
+                const wxString& szBackend = {},
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxT("mediaCtrl"))
                 : m_imp(nullptr), m_bLoaded(false)
@@ -101,11 +101,11 @@ public:
     ~wxMediaCtrl();
 
     [[maybe_unused]] bool Create(wxWindow* parent, wxWindowID winid,
-                const wxString& fileName = wxEmptyString,
+                const wxString& fileName = {},
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = 0,
-                const wxString& szBackend = wxEmptyString,
+                const wxString& szBackend = {},
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxT("mediaCtrl"));
 
@@ -114,7 +114,7 @@ public:
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = 0,
-                const wxString& szBackend = wxEmptyString,
+                const wxString& szBackend = {},
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxT("mediaCtrl"));
 

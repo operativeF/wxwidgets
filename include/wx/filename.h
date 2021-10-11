@@ -292,8 +292,8 @@ public:
     // various file/dir operations
 
         // retrieve the value of the current working directory
-    void AssignCwd(const wxString& volume = wxEmptyString);
-    static wxString GetCwd(const wxString& volume = wxEmptyString);
+    void AssignCwd(const wxString& volume = {});
+    static wxString GetCwd(const wxString& volume = {});
 
         // change the current working directory
     bool SetCwd() const;
@@ -346,7 +346,7 @@ public:
         //
         // this may be done using another (than current) value of cwd
     bool Normalize(unsigned int flags = wxPATH_NORM_ALL,
-                   const wxString& cwd = wxEmptyString,
+                   const wxString& cwd = {},
                    wxPathFormat format = wxPATH_NATIVE);
 
         // get a path path relative to the given base directory, i.e. opposite
@@ -357,13 +357,13 @@ public:
         // returns true if the file name was modified, false if we failed to do
         // anything with it (happens when the file is on a different volume,
         // for example)
-    bool MakeRelativeTo(const wxString& pathBase = wxEmptyString,
+    bool MakeRelativeTo(const wxString& pathBase = {},
                         wxPathFormat format = wxPATH_NATIVE);
 
         // make the path absolute
         //
         // this may be done using another (than current) value of cwd
-    bool MakeAbsolute(const wxString& cwd = wxEmptyString,
+    bool MakeAbsolute(const wxString& cwd = {},
                       wxPathFormat format = wxPATH_NATIVE)
         { return Normalize(wxPATH_NORM_DOTS | wxPATH_NORM_ABSOLUTE |
                            wxPATH_NORM_TILDE, cwd, format); }

@@ -30,7 +30,7 @@ public:
 
 
     bool Abort() override { return true; }
-    wxString GetContentType() const override { return wxEmptyString; }
+    wxString GetContentType() const override { return {}; }
 
     wxInputStream *GetInputStream(const wxString& path) override;
 

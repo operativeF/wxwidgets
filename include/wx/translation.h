@@ -96,7 +96,7 @@ public:
     wxString GetDomain() const { return m_domain; }
 
     // get the translated string: returns NULL if not found
-    const wxString *GetString(const wxString& sz, unsigned n = UINT_MAX, const wxString& ct = wxEmptyString) const;
+    const wxString *GetString(const wxString& sz, unsigned n = UINT_MAX, const wxString& ct = {}) const;
 
 protected:
     wxMsgCatalog(const wxString& domain)
@@ -157,15 +157,15 @@ public:
 
     // access to translations
     const wxString *GetTranslatedString(const wxString& origString,
-                                        const wxString& domain = wxEmptyString,
-                                        const wxString& context = wxEmptyString) const;
+                                        const wxString& domain = {},
+                                        const wxString& context = {}) const;
     const wxString *GetTranslatedString(const wxString& origString,
                                         unsigned n,
-                                        const wxString& domain = wxEmptyString,
-                                        const wxString& context = wxEmptyString) const;
+                                        const wxString& domain = {},
+                                        const wxString& context = {}) const;
 
     wxString GetHeaderValue(const wxString& header,
-                            const wxString& domain = wxEmptyString) const;
+                            const wxString& domain = {}) const;
 
     // this is hack to work around a problem with wxGetTranslation() which
     // returns const wxString& and not wxString, so when it returns untranslated
@@ -252,8 +252,8 @@ protected:
 
 // get the translation of the string in the current locale
 inline const wxString& wxGetTranslation(const wxString& str,
-                                        const wxString& domain = wxString(),
-                                        const wxString& context = wxString())
+                                        const wxString& domain = {},
+                                        const wxString& context = {})
 {
     wxTranslations *trans = wxTranslations::Get();
     const wxString *transStr = trans ? trans->GetTranslatedString(str, domain, context)
@@ -269,8 +269,8 @@ inline const wxString& wxGetTranslation(const wxString& str,
 inline const wxString& wxGetTranslation(const wxString& str1,
                                         const wxString& str2,
                                         unsigned n,
-                                        const wxString& domain = wxString(),
-                                        const wxString& context = wxString())
+                                        const wxString& domain = {},
+                                        const wxString& context = {})
 {
     wxTranslations *trans = wxTranslations::Get();
     const wxString *transStr = trans ? trans->GetTranslatedString(str1, n, domain, context)
@@ -292,8 +292,8 @@ inline const wxString& wxGetTranslation(const wxString& str1,
  * char* arguments.
  */
 inline const wxString& wxGetTranslation(const char *str,
-                                        const char *domain = "",
-                                        const char *context = "") {
+                                        const char *domain = {},
+                                        const char *context = {}) {
     const wxMBConv &conv = wxConvWhateverWorks;
     return wxGetTranslation(wxString(str, conv), wxString(domain, conv),
                             wxString(context, conv));
@@ -302,8 +302,8 @@ inline const wxString& wxGetTranslation(const char *str,
 inline const wxString& wxGetTranslation(const char *str1,
                                         const char *str2,
                                         unsigned n,
-                                        const char *domain = "",
-                                        const char *context = "") {
+                                        const char *domain = {},
+                                        const char *context = {}) {
     const wxMBConv &conv = wxConvWhateverWorks;
     return wxGetTranslation(wxString(str1, conv), wxString(str2, conv), n,
                             wxString(domain, conv),

@@ -64,7 +64,7 @@ public:
                       wxItemKind kind = wxITEM_NORMAL,
                       wxObject *clientData = nullptr,
                       const std::string& shortHelpString = {},
-                      const std::string& longHelpString = "")
+                      const std::string& longHelpString = {})
         : m_tbar(tbar),
           m_label(label),
           m_shortHelpString(shortHelpString),
@@ -333,11 +333,11 @@ public:
     // the label is optional and, if specified, will be shown near the control
     // NB: the control should have toolbar as its parent
     virtual wxToolBarToolBase *
-    AddControl(wxControl *control, const std::string& label = "");
+    AddControl(wxControl *control, const std::string& label = {});
 
     virtual wxToolBarToolBase *
     InsertControl(size_t pos, wxControl *control,
-                  const std::string& label = "");
+                  const std::string& label = {});
 
     // get the control with the given id or return NULL
     virtual wxControl *FindControl( int toolid );
@@ -488,11 +488,11 @@ public:
     virtual wxToolBarToolBase *CreateTool(int toolid,
                                           const std::string& label,
                                           const wxBitmap& bmpNormal,
-                                          const wxBitmap& bmpDisabled = wxNullBitmap,
-                                          wxItemKind kind = wxITEM_NORMAL,
-                                          wxObject *clientData = nullptr,
-                                          const std::string& shortHelp = {},
-                                          const std::string& longHelp = "") = 0;
+                                          const wxBitmap& bmpDisabled,
+                                          wxItemKind kind,
+                                          wxObject *clientData,
+                                          const std::string& shortHelp,
+                                          const std::string& longHelp) = 0;
 
     virtual wxToolBarToolBase *CreateTool(wxControl *control,
                                           const std::string& label) = 0;

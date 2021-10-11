@@ -103,7 +103,7 @@ public:
     wxVariant() = default;
 
     wxVariant(const wxVariant& variant);
-    wxVariant(wxVariantData* data, const wxString& name = wxEmptyString);
+    wxVariant(wxVariantData* data, const wxString& name = {});
 #if wxUSE_ANY
     wxVariant(const wxAny& any);
 #endif
@@ -161,7 +161,7 @@ public:
 #endif
 
     // double
-    wxVariant(double val, const wxString& name = wxEmptyString);
+    wxVariant(double val, const wxString& name = {});
     bool operator== (double value) const;
     bool operator!= (double value) const;
     void operator= (double value) ;
@@ -170,9 +170,9 @@ public:
     double GetDouble() const;
 
     // long
-    wxVariant(long val, const wxString& name = wxEmptyString);
-    wxVariant(int val, const wxString& name = wxEmptyString);
-    wxVariant(short val, const wxString& name = wxEmptyString);
+    wxVariant(long val, const wxString& name = {});
+    wxVariant(int val, const wxString& name = {});
+    wxVariant(short val, const wxString& name = {});
     bool operator== (long value) const;
     bool operator!= (long value) const;
     void operator= (long value) ;
@@ -181,7 +181,7 @@ public:
     long GetLong() const;
 
     // bool
-    wxVariant(bool val, const wxString& name = wxEmptyString);
+    wxVariant(bool val, const wxString& name = {});
     bool operator== (bool value) const;
     bool operator!= (bool value) const;
     void operator= (bool value) ;
@@ -190,7 +190,7 @@ public:
 
     // wxDateTime
 #if wxUSE_DATETIME
-    wxVariant(const wxDateTime& val, const wxString& name = wxEmptyString);
+    wxVariant(const wxDateTime& val, const wxString& name = {});
     bool operator== (const wxDateTime& value) const;
     bool operator!= (const wxDateTime& value) const;
     void operator= (const wxDateTime& value) ;
@@ -199,14 +199,14 @@ public:
 #endif
 
     // wxString
-    wxVariant(const wxString& val, const wxString& name = wxEmptyString);
+    wxVariant(const wxString& val, const wxString& name = {});
     // these overloads are necessary to prevent the compiler from using bool
     // version instead of wxString one:
-    wxVariant(const char* val, const wxString& name = wxEmptyString);
-    wxVariant(const wchar_t* val, const wxString& name = wxEmptyString);
-    wxVariant(const wxCStrData& val, const wxString& name = wxEmptyString);
-    wxVariant(const wxScopedCharBuffer& val, const wxString& name = wxEmptyString);
-    wxVariant(const wxScopedWCharBuffer& val, const wxString& name = wxEmptyString);
+    wxVariant(const char* val, const wxString& name = {});
+    wxVariant(const wchar_t* val, const wxString& name = {});
+    wxVariant(const wxCStrData& val, const wxString& name = {});
+    wxVariant(const wxScopedCharBuffer& val, const wxString& name = {});
+    wxVariant(const wxScopedWCharBuffer& val, const wxString& name = {});
 
     bool operator== (const wxString& value) const;
     bool operator!= (const wxString& value) const;
@@ -229,7 +229,7 @@ public:
     wxString GetString() const;
 
 #ifndef wxNO_IMPLICIT_WXSTRING_ENCODING
-    wxVariant(const std::string& val, const wxString& name = wxEmptyString);
+    wxVariant(const std::string& val, const wxString& name = {});
     bool operator==(const std::string& value) const
         { return operator==(wxString(value)); }
     bool operator!=(const std::string& value) const
@@ -239,7 +239,7 @@ public:
     operator std::string() const { return (operator wxString()).ToStdString(); }
 #endif // wxNO_IMPLICIT_WXSTRING_ENCODING
 
-    wxVariant(const wxStdWideString& val, const wxString& name = wxEmptyString);
+    wxVariant(const wxStdWideString& val, const wxString& name = {});
     bool operator==(const wxStdWideString& value) const
         { return operator==(wxString(value)); }
     bool operator!=(const wxStdWideString& value) const
@@ -249,10 +249,10 @@ public:
     operator wxStdWideString() const { return (operator wxString()).ToStdWstring(); }
 
     // wxUniChar
-    wxVariant(const wxUniChar& val, const wxString& name = wxEmptyString);
-    wxVariant(const wxUniCharRef& val, const wxString& name = wxEmptyString);
-    wxVariant(char val, const wxString& name = wxEmptyString);
-    wxVariant(wchar_t val, const wxString& name = wxEmptyString);
+    wxVariant(const wxUniChar& val, const wxString& name = {});
+    wxVariant(const wxUniCharRef& val, const wxString& name = {});
+    wxVariant(char val, const wxString& name = {});
+    wxVariant(wchar_t val, const wxString& name = {});
     bool operator==(const wxUniChar& value) const;
     bool operator==(const wxUniCharRef& value) const { return *this == wxUniChar(value); }
     bool operator==(char value) const { return *this == wxUniChar(value); }
@@ -271,7 +271,7 @@ public:
     wxUniChar GetChar() const;
 
     // std::vector<wxString>
-    wxVariant(const std::vector<wxString>& val, const wxString& name = wxEmptyString);
+    wxVariant(const std::vector<wxString>& val, const wxString& name = {});
     bool operator== (const std::vector<wxString>& value) const;
     bool operator!= (const std::vector<wxString>& value) const;
     void operator= (const std::vector<wxString>& value);
@@ -279,7 +279,7 @@ public:
     std::vector<wxString> GetArrayString() const;
 
     // void*
-    wxVariant(void* ptr, const wxString& name = wxEmptyString);
+    wxVariant(void* ptr, const wxString& name = {});
     bool operator== (void* value) const;
     bool operator!= (void* value) const;
     void operator= (void* value);
@@ -287,7 +287,7 @@ public:
     void* GetVoidPtr() const;
 
     // wxObject*
-    wxVariant(wxObject* ptr, const wxString& name = wxEmptyString);
+    wxVariant(wxObject* ptr, const wxString& name = {});
     bool operator== (wxObject* value) const;
     bool operator!= (wxObject* value) const;
     void operator= (wxObject* value);
@@ -295,7 +295,7 @@ public:
 
 #if wxUSE_LONGLONG
     // wxLongLong
-    wxVariant(wxLongLong, const wxString& name = wxEmptyString);
+    wxVariant(wxLongLong, const wxString& name = {});
     bool operator==(wxLongLong value) const;
     bool operator!=(wxLongLong value) const;
     void operator=(wxLongLong value);
@@ -303,7 +303,7 @@ public:
     wxLongLong GetLongLong() const;
 
     // wxULongLong
-    wxVariant(wxULongLong, const wxString& name = wxEmptyString);
+    wxVariant(wxULongLong, const wxString& name = {});
     bool operator==(wxULongLong value) const;
     bool operator!=(wxULongLong value) const;
     void operator=(wxULongLong value);
@@ -315,7 +315,7 @@ public:
     // list operations
     // ------------------------------
 
-    wxVariant(const wxVariantList& val, const wxString& name = wxEmptyString); // List of variants
+    wxVariant(const wxVariantList& val, const wxString& name = {}); // List of variants
     bool operator== (const wxVariantList& value) const;
     bool operator!= (const wxVariantList& value) const;
     void operator= (const wxVariantList& value) ;

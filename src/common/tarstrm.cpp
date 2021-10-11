@@ -439,7 +439,7 @@ static inline wxFileOffset GetDataSize(const wxTarEntry& entry)
 // Tar Entry
 // Holds all the meta-data for a file in the tar
 
-wxTarEntry::wxTarEntry(const wxString& name /*=wxEmptyString*/,
+wxTarEntry::wxTarEntry(const wxString& name /*={}*/,
                        const wxDateTime& dt /*=wxDateTime::Now()*/,
                        wxFileOffset size    /*=0*/)
   : 
@@ -796,7 +796,7 @@ wxString wxTarInputStream::GetExtendedHeader(const wxString& key) const
             return wxString(it->second.wc_str(wxConvUTF8), GetConv());
     }
 
-    return wxEmptyString;
+    return {};
 }
 
 wxString wxTarInputStream::GetHeaderPath() const

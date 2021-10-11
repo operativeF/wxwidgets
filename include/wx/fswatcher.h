@@ -96,7 +96,7 @@ public:
     // Constructor for the error or warning events.
     wxFileSystemWatcherEvent(int changeType,
                              wxFSWWarningType warningType,
-                             const wxString& errorMsg = wxString(),
+                             const wxString& errorMsg = {},
                              int watchid = wxID_ANY) :
         wxEvent(watchid, wxEVT_FSWATCHER),
         m_changeType(changeType),
@@ -237,7 +237,7 @@ public:
     wxFSWatchInfo(const wxString& path,
                   int events,
                   wxFSWPathType type,
-                  const wxString& filespec = wxString()) :
+                  const wxString& filespec = {}) :
         m_path(path), m_filespec(filespec), m_events(events), m_type(type),
         m_refcount(1)
     {
@@ -317,7 +317,7 @@ public:
      * of particular type.
      */
     virtual bool AddTree(const wxFileName& path, int events = wxFSW_EVENT_ALL,
-                         const wxString& filespec = wxEmptyString);
+                         const wxString& filespec = {});
 
     /**
      * Removes path from the list of watched paths.
@@ -368,7 +368,7 @@ public:
     // Delegates the real work of adding the path to wxFSWatcherImpl::Add() and
     // updates m_watches if the new path was successfully added.
     bool AddAny(const wxFileName& path, int events, wxFSWPathType type,
-                const wxString& filespec = wxString());
+                const wxString& filespec = {});
 
 protected:
 
@@ -379,7 +379,7 @@ protected:
         {
             wxFAIL_MSG(wxString::Format(wxASCII_STR("Unable to normalize path '%s'"),
                                          path.GetFullPath()));
-            return wxEmptyString;
+            return {};
         }
 
         return path_copy.GetFullPath();

@@ -58,7 +58,7 @@ public:
 
     /// Find a file in the archive
     const wxString Find(const wxString& pattern,
-                        const wxString& startfrom = wxEmptyString);
+                        const wxString& startfrom = {});
 
     /// Extract a file in the archive into a file
     size_t Extract(const wxString& pattern, const wxString& filename);
@@ -232,7 +232,7 @@ const wxString wxChmTools::Find(const wxString& pattern,
         }
     }
 
-    return wxEmptyString;
+    return {};
 }
 
 
@@ -840,7 +840,7 @@ wxFSFile* wxChmFSHandler::OpenFile(wxFileSystem& WXUNUSED(fs),
     {
         return new wxFSFile(s,
                             left + wxT("#chm:") + right,
-                            wxEmptyString,
+                            {},
                             GetAnchor(location),
                             wxDateTime(leftFilename.GetModificationTime()));
     }
@@ -863,7 +863,7 @@ wxString wxChmFSHandler::FindFirst(const wxString& spec, unsigned int WXUNUSED(f
     if ( GetProtocol(left) != wxT("file") )
     {
         wxLogError(_("CHM handler currently supports only local files!"));
-        return wxEmptyString;
+        return {};
     }
 
     m_chm = new wxChmTools(wxFileName(nativename));
@@ -889,7 +889,7 @@ wxString wxChmFSHandler::FindFirst(const wxString& spec, unsigned int WXUNUSED(f
 wxString wxChmFSHandler::FindNext()
 {
     if (m_pattern.empty())
-        return wxEmptyString;
+        return {};
     else
         return m_chm->Find(m_pattern, m_found);
 }

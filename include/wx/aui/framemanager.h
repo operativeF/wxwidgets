@@ -442,7 +442,7 @@ public:
 
     bool AddPane(wxWindow* window,
                  int direction = wxLEFT,
-                 const wxString& caption = wxEmptyString);
+                 const wxString& caption = {});
 
     bool InsertPane(wxWindow* window,
                  const wxAuiPaneInfo& insertLocation,

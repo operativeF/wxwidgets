@@ -73,7 +73,7 @@ public:
     {
         if ( m_value >= 0 )
             return wxListView::GetItemText(m_value);
-        return wxEmptyString;
+        return {};
     }
 
     //
@@ -201,7 +201,7 @@ public:
     {
         if ( m_value.IsOk() )
             return wxTreeCtrl::GetItemText(m_value);
-        return wxEmptyString;
+        return {};
     }
 
     //

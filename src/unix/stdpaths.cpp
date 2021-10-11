@@ -327,7 +327,7 @@ wxString
 wxStandardPaths::MakeConfigFileName(const wxString& basename,
                                     ConfigFileConv conv) const
 {
-    wxFileName fn(wxEmptyString, basename);
+    wxFileName fn({}, basename);
 
     bool addExt = false;
 

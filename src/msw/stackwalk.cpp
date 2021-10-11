@@ -85,7 +85,7 @@ wxStackFrame::GetParam(size_t n,
 
 void wxStackFrame::OnParam(wxSYMBOL_INFO *pSymInfo)
 {
-    m_paramTypes.push_back(wxEmptyString);
+    m_paramTypes.push_back({});
     m_paramNames.push_back(pSymInfo->Name);
 
     wxString value;

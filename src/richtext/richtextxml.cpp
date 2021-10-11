@@ -1137,7 +1137,7 @@ wxXmlNode *wxRichTextXMLHelper::GetParamNode(wxXmlNode* node, const wxString& pa
 wxString wxRichTextXMLHelper::GetNodeContent(wxXmlNode *node)
 {
     wxXmlNode *n = node;
-    if (n == nullptr) return wxEmptyString;
+    if (n == nullptr) return {};
     n = n->GetChildren();
 
     while (n)
@@ -1147,7 +1147,7 @@ wxString wxRichTextXMLHelper::GetNodeContent(wxXmlNode *node)
             return n->GetContent();
         n = n->GetNext();
     }
-    return wxEmptyString;
+    return {};
 }
 
 wxString wxRichTextXMLHelper::GetParamValue(wxXmlNode *node, const wxString& param)
@@ -2466,7 +2466,7 @@ bool wxRichTextXMLHelper::ExportStyleDefinition(wxXmlNode* parent, wxRichTextSty
     wxString baseStyle = def->GetBaseStyle();
     wxString descr = def->GetDescription();
 
-    wxXmlNode* defNode = new wxXmlNode(wxXML_ELEMENT_NODE, wxEmptyString);
+    wxXmlNode* defNode = new wxXmlNode(wxXML_ELEMENT_NODE, {});
     parent->AddChild(defNode);
     if (!baseStyle.empty())
         defNode->AddAttribute(wxT("basestyle"), baseStyle);

@@ -213,7 +213,7 @@ wxString wxNotebook::GetPageText(size_t nPage) const
     if (page)
         return m_tabView->GetTabText(GetPageId(m_tabView, page));
     else
-        return wxEmptyString;
+        return {};
 }
 
 int wxNotebook::GetPageImage(size_t WXUNUSED_UNLESS_DEBUG(nPage)) const

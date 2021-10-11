@@ -156,8 +156,8 @@ public:
     ArchiveTestCase(std::string name,
                     ClassFactoryT *factory,
                     int options,
-                    const wxString& archiver = wxEmptyString,
-                    const wxString& unarchiver = wxEmptyString);
+                    const wxString& archiver = {},
+                    const wxString& unarchiver = {});
 
     ~ArchiveTestCase();
 
@@ -269,8 +269,8 @@ protected:
     std::string Description(const wxString& type,
                             int options,
                             bool genericInterface = false,
-                            const wxString& archiver = wxEmptyString,
-                            const wxString& unarchiver = wxEmptyString);
+                            const wxString& archiver = {},
+                            const wxString& unarchiver = {});
 
 private:
     wxString m_name;

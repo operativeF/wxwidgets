@@ -758,7 +758,7 @@ wxString wxHtmlHelpData::FindPageByName(const wxString& x)
             return m_index[i].GetFullPath();
     }
 
-    return wxEmptyString;
+    return {};
 }
 
 wxString wxHtmlHelpData::FindPageById(int id)
@@ -772,7 +772,7 @@ wxString wxHtmlHelpData::FindPageById(int id)
         }
     }
 
-    return wxEmptyString;
+    return {};
 }
 
 

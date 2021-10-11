@@ -275,7 +275,7 @@ wxDateTime
 ParseFormatAt(wxString::const_iterator& p,
               const wxString::const_iterator& end,
               const wxString& fmt,
-              const wxString& fmtAlt = wxString())
+              const wxString& fmtAlt = {})
 {
     const wxString str(p, end);
     wxString::const_iterator endParse;
@@ -304,7 +304,7 @@ ParseFormatAt(wxString::const_iterator& p,
 
 wxString wxDateTime::Format(const wxString& formatp, const TimeZone& tz) const
 {
-    wxCHECK_MSG( !formatp.empty(), wxEmptyString,
+    wxCHECK_MSG( !formatp.empty(), {},
                  wxT("NULL format in wxDateTime::Format") );
 
     wxString format = formatp;

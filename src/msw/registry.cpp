@@ -156,7 +156,7 @@ const size_t wxRegKey::nStdKeys = WXSIZEOF(aStdKeys);
 const wxChar *wxRegKey::GetStdKeyName(size_t key)
 {
   // return empty string if key is invalid
-  wxCHECK_MSG( key < nStdKeys, wxEmptyString, wxT("invalid key in wxRegKey::GetStdKeyName") );
+  wxCHECK_MSG( key < nStdKeys, {}, wxT("invalid key in wxRegKey::GetStdKeyName") );
 
   return aStdKeys[key].szName;
 }
@@ -164,7 +164,7 @@ const wxChar *wxRegKey::GetStdKeyName(size_t key)
 const wxChar *wxRegKey::GetStdKeyShortName(size_t key)
 {
   // return empty string if key is invalid
-  wxCHECK( key < nStdKeys, wxEmptyString );
+  wxCHECK( key < nStdKeys, {} );
 
   return aStdKeys[key].szShortName;
 }
@@ -1118,7 +1118,7 @@ bool wxRegKey::SetValue(const wxString& szValue, const wxString& strValue)
 wxString wxRegKey::QueryDefaultValue() const
 {
   wxString str;
-  QueryValue(wxEmptyString, str, false);
+  QueryValue({}, str, false);
   return str;
 }
 

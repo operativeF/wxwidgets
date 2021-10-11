@@ -100,7 +100,7 @@ public:
     //              expand environment variables for paths
     //              (such as bitmaps or icons).
     wxXmlResource(int flags = wxXRC_USE_LOCALE,
-                  const wxString& domain = wxEmptyString);
+                  const wxString& domain = {});
 
     // Constructor.
     // Flags: wxXRC_USE_LOCALE
@@ -116,7 +116,7 @@ public:
     //              expand environment variables for paths
     //              (such as bitmaps or icons).
     wxXmlResource(const wxString& filemask, int flags = wxXRC_USE_LOCALE,
-                  const wxString& domain = wxEmptyString);
+                  const wxString& domain = {});
 
     // Destructor.
     ~wxXmlResource();
@@ -136,7 +136,7 @@ public:
     // The name argument is only used to Unload() the document later here and
     // doesn't need to be an existing filename at all (but should be unique if
     // specified, otherwise it's just synthesized internally).
-    bool LoadDocument(wxXmlDocument* doc, const wxString& name = wxString());
+    bool LoadDocument(wxXmlDocument* doc, const wxString& name = {});
 
     // Unload resource from the given XML file (wildcards not allowed)
     bool Unload(const wxString& filename);

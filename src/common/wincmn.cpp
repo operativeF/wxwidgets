@@ -176,7 +176,7 @@ wxPROPERTY( Size,wxSize, SetSize, GetSize, wxDefaultSize, 0 /*flags*/, \
            wxT("Helpstring"), wxT("group")) // size
 wxPROPERTY( WindowStyle, long, SetWindowStyleFlag, GetWindowStyleFlag, \
            wxEMPTY_PARAMETER_VALUE, 0 /*flags*/, wxT("Helpstring"), wxT("group")) // style
-wxPROPERTY( Name,wxString, SetName, GetName, wxEmptyString, 0 /*flags*/, \
+wxPROPERTY( Name,wxString, SetName, GetName, {}, 0 /*flags*/, \
            wxT("Helpstring"), wxT("group") )
 
 // Then all relations of the object graph
@@ -200,9 +200,9 @@ wxPROPERTY( Shown, bool, Show, IsShown, wxAny((bool)true), 0 /*flags*/, \
 
 #if 0
 // possible property candidates (not in xrc) or not valid in all subclasses
-wxPROPERTY( Title,wxString, SetTitle, GetTitle, wxEmptyString )
+wxPROPERTY( Title,wxString, SetTitle, GetTitle, {} )
 wxPROPERTY( Font, wxFont, SetFont, GetWindowFont , )
-wxPROPERTY( Label,wxString, SetLabel, GetLabel, wxEmptyString )
+wxPROPERTY( Label,wxString, SetLabel, GetLabel, {} )
 // MaxHeight, Width, MinHeight, Width
 // TODO switch label to control and title to toplevels
 
@@ -1950,7 +1950,7 @@ wxWindowBase::FindWindowByName(const wxString& title, const wxWindow *parent)
 wxWindow *
 wxWindowBase::FindWindowById( long id, const wxWindow* parent )
 {
-    return wxFindWindowHelper(parent, wxEmptyString, id, wxFindWindowCmpIds);
+    return wxFindWindowHelper(parent, {}, id, wxFindWindowCmpIds);
 }
 
 // ----------------------------------------------------------------------------

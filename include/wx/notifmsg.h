@@ -154,7 +154,7 @@ public:
 #if defined(__WXMSW__) && defined(wxHAS_NATIVE_NOTIFICATION_MESSAGE)
     static bool MSWUseToasts(
         const std::string& shortcutPath = {},
-        const std::string& appId = "");
+        const std::string& appId = {});
 
     // returns the task bar icon which was used previously (may be NULL)
     static wxTaskBarIcon *UseTaskBarIcon(wxTaskBarIcon *icon);

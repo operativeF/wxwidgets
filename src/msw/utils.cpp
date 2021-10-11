@@ -301,7 +301,7 @@ error:
 #else  // !USE_NET_API
     // Could use NIS, MS-Mail or other site specific programs
     // Use wxWidgets configuration data
-    bool ok = ::GetProfileStringW(WX_SECTION, eUSERNAME, wxEmptyString, buf, maxSize - 1) != 0;
+    bool ok = ::GetProfileStringW(WX_SECTION, eUSERNAME, {}, buf, maxSize - 1) != 0;
     if ( !ok )
     {
         ok = wxGetUserId(buf, maxSize);

@@ -669,7 +669,7 @@ void wxGenericDirCtrl::PopulateNode(wxTreeItemId parentId)
     {
         int style = wxDIR_DIRS;
         if (m_showHidden) style |= wxDIR_HIDDEN;
-        if (d.GetFirst(& eachFilename, wxEmptyString, style))
+        if (d.GetFirst(& eachFilename, {}, style))
         {
             do
             {
@@ -947,7 +947,7 @@ wxString wxGenericDirCtrl::GetPath() const
             return GetPath(treeid);
         }
 
-        return wxEmptyString;
+        return {};
     }
 
     wxTreeItemId treeid = m_treeCtrl->GetSelection();
@@ -956,7 +956,7 @@ wxString wxGenericDirCtrl::GetPath() const
         return GetPath(treeid);
     }
     else
-        return wxEmptyString;
+        return {};
 }
 
 std::vector<wxString> wxGenericDirCtrl::GetPaths() const
@@ -981,12 +981,12 @@ wxString wxGenericDirCtrl::GetFilePath() const
     {
         wxDirItemData* data = (wxDirItemData*) m_treeCtrl->GetItemData(treeid);
         if (data->m_isDir)
-            return wxEmptyString;
+            return {};
         else
             return data->m_path;
     }
     else
-        return wxEmptyString;
+        return {};
 }
 
 void wxGenericDirCtrl::GetFilePaths(wxArrayString& paths) const
@@ -1435,7 +1435,7 @@ void wxFileIconsTable::Create(const wxSize& sz)
                                                    wxART_CMN_DIALOG,
                                                    sz));
     // executable
-    if (GetIconID(wxEmptyString, wxT("application/x-executable")) == file)
+    if (GetIconID({}, wxT("application/x-executable")) == file)
     {
         m_smallImageList->Add(wxArtProvider::GetBitmap(wxART_EXECUTABLE_FILE,
                                                        wxART_CMN_DIALOG,

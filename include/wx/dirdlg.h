@@ -139,7 +139,7 @@ protected:
 
 WXDLLIMPEXP_CORE wxString
 wxDirSelector(const wxString& message = wxASCII_STR(wxDirSelectorPromptStr),
-              const wxString& defaultPath = wxEmptyString,
+              const wxString& defaultPath = {},
               unsigned int style = wxDD_DEFAULT_STYLE,
               const wxPoint& pos = wxDefaultPosition,
               wxWindow *parent = nullptr);

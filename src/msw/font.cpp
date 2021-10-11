@@ -1033,7 +1033,7 @@ bool wxFont::GetStrikethrough() const
 
 wxString wxFont::GetFaceName() const
 {
-    wxCHECK_MSG( IsOk(), wxEmptyString, wxT("invalid font") );
+    wxCHECK_MSG( IsOk(), {}, wxT("invalid font") );
 
     return M_FONTDATA->GetFaceName();
 }

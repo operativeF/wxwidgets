@@ -587,12 +587,12 @@ bool wxNativeFontInfo::HasElements() const
 
 wxString wxNativeFontInfo::GetXFontComponent(wxXLFDField field) const
 {
-    wxCHECK_MSG( field < wxXLFD_MAX, wxEmptyString, wxT("invalid XLFD field") );
+    wxCHECK_MSG( field < wxXLFD_MAX, {}, wxT("invalid XLFD field") );
 
     if ( !HasElements() )
     {
         if ( !const_cast<wxNativeFontInfo *>(this)->FromXFontName(xFontName) )
-            return wxEmptyString;
+            return {};
     }
 
     return fontElements[field];
@@ -1169,7 +1169,7 @@ wxNativeFont wxLoadQueryNearestFont(double pointSize,
             {
                 font = wxLoadQueryFont(120, wxFontFamily::Default,
                                        wxFontStyle::Normal, wxFONTWEIGHT_NORMAL,
-                                       underlined, wxEmptyString,
+                                       underlined, {},
                                        info.xregistry, info.xencoding,
                                        xFontName);
 
@@ -1181,7 +1181,7 @@ wxNativeFont wxLoadQueryNearestFont(double pointSize,
                 {
                     font = wxLoadQueryFont(-1, wxFontFamily::Default,
                                            wxFontStyle::Normal, wxFONTWEIGHT_NORMAL,
-                                           false, wxEmptyString,
+                                           false, {},
                                            info.xregistry, info.xencoding,
                                            xFontName);
 
@@ -1194,7 +1194,7 @@ wxNativeFont wxLoadQueryNearestFont(double pointSize,
 
                         font = wxLoadQueryFont(-1, wxFontFamily::Default,
                                                wxFontStyle::Normal, wxFONTWEIGHT_NORMAL,
-                                               false, wxEmptyString,
+                                               false, {},
                                                wxT("*"), wxT("*"),
                                                xFontName);
                     }

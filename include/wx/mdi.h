@@ -207,7 +207,7 @@ public:
     wxStatusBar* CreateStatusBar(int WXUNUSED(number) = 1,
                                  unsigned int WXUNUSED(style) = 1,
                                  wxWindowID WXUNUSED(id) = 1,
-                                 const std::string& WXUNUSED(name) = "") override
+                                 const std::string& WXUNUSED(name) = {}) override
       { return nullptr; }
 
     wxStatusBar *GetStatusBar() const override

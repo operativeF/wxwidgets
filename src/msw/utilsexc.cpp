@@ -525,7 +525,7 @@ wxExecuteDDE(const wxString& ddeServer,
 
     wxDDEClient client;
     wxConnectionBase *
-        conn = client.MakeConnection(wxEmptyString, ddeServer, ddeTopic);
+        conn = client.MakeConnection({}, ddeServer, ddeTopic);
     if ( !conn )
     {
         ok = false;

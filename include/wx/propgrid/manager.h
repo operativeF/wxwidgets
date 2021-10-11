@@ -192,7 +192,7 @@ public:
     // If toolbar is used, it is highly recommended that the pages are
     // added when the toolbar is not turned off using window style flag
     // switching.
-    wxPropertyGridPage* AddPage( const wxString& label = wxEmptyString,
+    wxPropertyGridPage* AddPage( const wxString& label = {},
                                  const wxBitmap& bmp = wxNullBitmap,
                                  wxPropertyGridPage* pageObj = nullptr )
     {

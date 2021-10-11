@@ -173,7 +173,7 @@ wxObject* wxVariantOfPtrToObjectConverter##name ( const wxAny &data )        \
 
 #define wxIMPLEMENT_DYNAMIC_CLASS_NO_WXOBJECT_NO_BASE_XTI( name, unit )         \
     const wxClassInfo* name::ms_classParents[] = { NULL };                      \
-    wxClassInfo name::ms_classInfo(name::ms_classParents, wxEmptyString,        \
+    wxClassInfo name::ms_classInfo(name::ms_classParents, {},        \
     wxT(#name), (int) sizeof(name), (wxObjectConstructorFn) 0,          \
     name::GetPropertiesStatic,name::GetHandlersStatic, 0, 0,        \
     0, 0, 0 );                                                          \
@@ -183,7 +183,7 @@ wxObject* wxVariantOfPtrToObjectConverter##name ( const wxAny &data )        \
 
 #define wxIMPLEMENT_DYNAMIC_CLASS_NO_WXOBJECT_XTI( name, basename, unit )           \
     const wxClassInfo* name::ms_classParents[] = { &basename::ms_classInfo, NULL }; \
-    wxClassInfo name::ms_classInfo(name::ms_classParents, wxEmptyString,            \
+    wxClassInfo name::ms_classInfo(name::ms_classParents, {},            \
     wxT(#name), (int) sizeof(name), (wxObjectConstructorFn) 0,              \
     name::GetPropertiesStatic,name::GetHandlersStatic, 0, 0,            \
     0, 0, 0 );                                                              \
@@ -229,7 +229,7 @@ wxObject* wxVariantOfPtrToObjectConverter##name ( const wxAny &data )        \
     \
     const wxClassInfo* name::ms_classParents[] =                                \
 { &basename::ms_classInfo,NULL };                                       \
-    wxClassInfo name::ms_classInfo(name::ms_classParents, wxEmptyString,        \
+    wxClassInfo name::ms_classInfo(name::ms_classParents, {},        \
     wxT(#name), (int) sizeof(name), (wxObjectConstructorFn) 0,              \
     name::GetPropertiesStatic,name::GetHandlersStatic, 0, 0,            \
     0, wxVariantOfPtrToObjectConverter##name,0, \

@@ -417,8 +417,8 @@ bool wxRichTextPrintout::SubstituteKeywords(std::string& str, const std::string&
     wx::utils::ReplaceAll(str, "@DATE@", now.FormatDate().ToStdString());
     wx::utils::ReplaceAll(str, "@TIME@", now.FormatTime().ToStdString());
 #else
-    str.Replace(wxT("@DATE@"), wxEmptyString);
-    str.Replace(wxT("@TIME@"), wxEmptyString);
+    str.Replace(wxT("@DATE@"), {});
+    str.Replace(wxT("@TIME@"), {});
 #endif
 
     wx::utils::ReplaceAll(str, "@TITLE@", title);
@@ -680,7 +680,7 @@ wxString wxRichTextHeaderFooterData::GetText(int headerFooter, wxRichTextOddEven
     if (idx >= 0 && idx < 12)
         return m_text[idx];
     else
-        return wxEmptyString;
+        return {};
 }
 
 /// Set/get header text, e.g. wxRICHTEXT_PAGE_ODD, wxRichTextPageLocation::Left

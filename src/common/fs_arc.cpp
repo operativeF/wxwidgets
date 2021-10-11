@@ -377,7 +377,7 @@ wxFSFile* wxArchiveFSHandler::OpenFile(
 
     return new wxFSFile(s,
                         key + right,
-                        wxEmptyString,
+                        {},
                         GetAnchor(location)
 #if wxUSE_DATETIME
                         , entry->GetDateTime()
@@ -399,14 +399,14 @@ wxString wxArchiveFSHandler::FindFirst(const wxString& spec, unsigned int flags)
 
     const wxArchiveClassFactory* factory = wxArchiveClassFactory::Find(protocol);
     if (!factory)
-        return wxEmptyString;
+        return {};
 
     m_Archive = m_cache->Get(key);
     if (!m_Archive)
     {
         wxFSFile *leftFile = m_fs.OpenFile(left);
         if (!leftFile)
-            return wxEmptyString;
+            return {};
         m_Archive = m_cache->Add(key, *factory, leftFile->DetachStream());
         delete leftFile;
     }
@@ -441,12 +441,12 @@ wxString wxArchiveFSHandler::FindFirst(const wxString& spec, unsigned int flags)
         }
         return DoFind();
     }
-    return wxEmptyString;
+    return {};
 }
 
 wxString wxArchiveFSHandler::FindNext()
 {
-    if (!m_Archive) return wxEmptyString;
+    if (!m_Archive) return {};
     return DoFind();
 }
 

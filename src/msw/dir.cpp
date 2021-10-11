@@ -420,7 +420,7 @@ wxGetDirectoryTimes(const wxString& dirname,
                   wxT("incorrect directory name format in wxGetDirectoryTimes") );
 
     FIND_STRUCT fs;
-    FIND_DATA fd = FindFirst(dirname, wxEmptyString, &fs);
+    FIND_DATA fd = FindFirst(dirname, {}, &fs);
     if ( !IsFindDataOk(fd) )
     {
         return false;

@@ -441,7 +441,7 @@ public:
     #else
                        : wxComboPopupWindowBase(parent,
                                                 wxID_ANY,
-                                                wxEmptyString,
+                                                {},
                                                 wxPoint(-21,-21),
                                                 wxSize(20,20),
                                                 style)

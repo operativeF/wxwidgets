@@ -154,8 +154,8 @@ public:
 
         // the ctor has a side effect of changing current locale
     wxLocale(const wxString& name,                               // name (for messages)
-             const wxString& shortName = wxEmptyString,      // dir prefix (for msg files)
-             const wxString& locale = wxEmptyString,     // locale (for setlocale)
+             const wxString& shortName = {},      // dir prefix (for msg files)
+             const wxString& locale = {},     // locale (for setlocale)
              bool bLoadDefault = true                            // preload wxstd.mo?
              )
         {
@@ -179,8 +179,8 @@ public:
 
         // the same as a function (returns true on success)
     bool Init(const wxString& name,
-              const wxString& shortName = wxEmptyString,
-              const wxString& locale = wxEmptyString,
+              const wxString& shortName = {},
+              const wxString& locale = {},
               bool bLoadDefault = true
               );
 
@@ -299,7 +299,7 @@ public:
     // domains are searched in the last to first order, i.e. catalogs
     // added later override those added before.
     const wxString& GetString(const wxString& origString,
-                              const wxString& domain = wxEmptyString) const
+                              const wxString& domain = {}) const
     {
         return wxGetTranslation(origString, domain);
     }
@@ -307,7 +307,7 @@ public:
     const wxString& GetString(const wxString& origString,
                               const wxString& origString2,
                               unsigned n,
-                              const wxString& domain = wxEmptyString) const
+                              const wxString& domain = {}) const
     {
         return wxGetTranslation(origString, origString2, n, domain);
     }
@@ -317,7 +317,7 @@ public:
 
     // return the contents of .po file header
     wxString GetHeaderValue(const wxString& header,
-                            const wxString& domain = wxEmptyString) const;
+                            const wxString& domain = {}) const;
 
     // These two methods are for internal use only. First one creates
     // ms_languagesDB if it doesn't already exist, second one destroys

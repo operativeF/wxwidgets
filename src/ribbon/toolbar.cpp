@@ -482,7 +482,7 @@ bool wxRibbonToolBar::GetToolEnabled(int tool_id)const
 wxString wxRibbonToolBar::GetToolHelpString(int tool_id)const
 {
     wxRibbonToolBarToolBase* tool = FindById(tool_id);
-    wxCHECK_MSG(tool != nullptr , wxEmptyString, "Invalid tool id");
+    wxCHECK_MSG(tool != nullptr , {}, "Invalid tool id");
     return tool->help_string;
 }
 

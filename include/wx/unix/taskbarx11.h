@@ -24,7 +24,7 @@ public:
     bool IsIconInstalled() const;
 
     // Operations:
-    bool SetIcon(const wxIcon& icon, const wxString& tooltip = wxEmptyString) override;
+    bool SetIcon(const wxIcon& icon, const wxString& tooltip = {}) override;
     bool RemoveIcon() override;
     bool PopupMenu(wxMenu *menu) override;
 

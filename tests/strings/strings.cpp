@@ -116,8 +116,8 @@ static void DoCStrDataTernaryOperator(bool cond)
     CHECK(CheckStr(s, (cond ? "foo" : s.c_str())));
 
     wxString empty("");
-    CHECK(CheckStr(empty, (cond ? empty.c_str() : wxEmptyString)));
-    CHECK(CheckStr(empty, (cond ? wxEmptyString : empty.c_str())));
+    CHECK(CheckStr(empty, (cond ? empty.c_str() : {})));
+    CHECK(CheckStr(empty, (cond ? {} : empty.c_str())));
 }
 
 bool CheckStrChar(const wxString& expected, char* s)

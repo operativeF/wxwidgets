@@ -94,7 +94,7 @@ protected:
 // cancelled
 WXDLLIMPEXP_CORE wxFont wxGetFontFromUser(wxWindow *parent = nullptr,
                                           const wxFont& fontInit = wxNullFont,
-                                          const std::string& caption = "");
+                                          const std::string& caption = {});
 
 #endif // wxUSE_FONTDLG
 

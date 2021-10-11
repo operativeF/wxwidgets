@@ -74,7 +74,7 @@ enum IPCCode
 // get the address object for the given server name, the caller must delete it
 static wxSockAddress *
 GetAddressFromName(const wxString& serverName,
-                   const wxString& host = wxEmptyString)
+                   const wxString& host = {})
 {
     // we always use INET sockets under non-Unix systems
 #if defined(__UNIX__) && !defined(__WINDOWS__) && !defined(__WINE__)

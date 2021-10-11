@@ -99,7 +99,7 @@ size_t wxDir::Traverse(wxDirTraverser& sink,
     if ( flags & wxDIR_DIRS )
     {
         wxString dirname;
-        for ( bool cont = GetFirst(&dirname, wxEmptyString,
+        for ( bool cont = GetFirst(&dirname, {},
                                    (flags & ~(wxDIR_FILES | wxDIR_DOTDOT))
                                    | wxDIR_DIRS);
               cont;
@@ -295,7 +295,7 @@ wxString wxDir::FindFirst(const wxString& dirname,
         return traverser.GetFile();
     }
 
-    return wxEmptyString;
+    return {};
 }
 
 

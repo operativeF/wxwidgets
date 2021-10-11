@@ -266,7 +266,7 @@ public:
 
     [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,
-                const wxString& value = wxEmptyString,
+                const wxString& value = {},
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = 0,
@@ -275,7 +275,7 @@ public:
 
     wxOwnerDrawnComboBox(wxWindow *parent,
                          wxWindowID id,
-                         const wxString& value = wxEmptyString,
+                         const wxString& value = {},
                          const wxPoint& pos = wxDefaultPosition,
                          const wxSize& size = wxDefaultSize,
                          const std::vector<std::string>& choices = {},

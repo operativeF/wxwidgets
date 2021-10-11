@@ -585,8 +585,8 @@ bool wxDebugContext::Dump()
 
   TraverseList ((PmSFV)&wxMemStruct::Dump, (checkPoint ? checkPoint->m_next : NULL));
 
-  OutputDumpLine(wxEmptyString);
-  OutputDumpLine(wxEmptyString);
+  OutputDumpLine({});
+  OutputDumpLine({});
 
   return true;
 }
@@ -692,7 +692,7 @@ bool wxDebugContext::PrintStatistics(bool detailed)
       list = old->next;
       free((char *)old);
     }
-    OutputDumpLine(wxEmptyString);
+    OutputDumpLine({});
   }
 
   SetDebugMode(currentMode);
@@ -700,8 +700,8 @@ bool wxDebugContext::PrintStatistics(bool detailed)
   OutputDumpLine(wxT("Number of object items: %ld"), noObjectNodes);
   OutputDumpLine(wxT("Number of non-object items: %ld"), noNonObjectNodes);
   OutputDumpLine(wxT("Total allocated size: %ld"), totalSize);
-  OutputDumpLine(wxEmptyString);
-  OutputDumpLine(wxEmptyString);
+  OutputDumpLine({});
+  OutputDumpLine({});
 
   return true;
 }
@@ -751,10 +751,10 @@ bool wxDebugContext::PrintClasses()
     }
     n ++;
   }
-  wxLogMessage(wxEmptyString);
+  wxLogMessage({});
   wxLogMessage(wxT("There are %d classes derived from wxObject."), n);
-  wxLogMessage(wxEmptyString);
-  wxLogMessage(wxEmptyString);
+  wxLogMessage({});
+  wxLogMessage({});
   return true;
 }
 

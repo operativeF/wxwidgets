@@ -63,7 +63,7 @@ wxString wxFileSystemHandler::GetMimeTypeFromExt(const wxString& location)
             break;
         }
         if ( (c == wxT('/')) || (c == wxT('\\')) || (c == wxT(':')) )
-            return wxEmptyString;
+            return {};
     }
 
 #if wxUSE_MIMETYPE
@@ -80,28 +80,28 @@ wxString wxFileSystemHandler::GetMimeTypeFromExt(const wxString& location)
             static const wxFileTypeInfo fallbacks[] =
             {
                 wxFileTypeInfo(wxT("image/jpeg"),
-                    wxEmptyString,
-                    wxEmptyString,
+                    wxString{},
+                    wxString{},
                     wxT("JPEG image (from fallback)"),
                     wxT("jpg"), wxT("jpeg"), wxT("JPG"), wxT("JPEG"), nullptr),
                 wxFileTypeInfo(wxT("image/gif"),
-                    wxEmptyString,
-                    wxEmptyString,
+                    wxString{},
+                    wxString{},
                     wxT("GIF image (from fallback)"),
                     wxT("gif"), wxT("GIF"), nullptr),
                 wxFileTypeInfo(wxT("image/png"),
-                    wxEmptyString,
-                    wxEmptyString,
+                    wxString{},
+                    wxString{},
                     wxT("PNG image (from fallback)"),
                     wxT("png"), wxT("PNG"), nullptr),
                 wxFileTypeInfo(wxT("image/bmp"),
-                    wxEmptyString,
-                    wxEmptyString,
+                    wxString{},
+                    wxString{},
                     wxT("windows bitmap image (from fallback)"),
                     wxT("bmp"), wxT("BMP"), nullptr),
                 wxFileTypeInfo(wxT("text/html"),
-                    wxEmptyString,
-                    wxEmptyString,
+                    wxString{},
+                    wxString{},
                     wxT("HTML document (from fallback)"),
                     wxT("htm"), wxT("html"), wxT("HTM"), wxT("HTML"), nullptr),
                 // must terminate the table with this!
@@ -172,7 +172,7 @@ wxString wxFileSystemHandler::GetLeftLocation(const wxString& location)
         }
     }
 
-    return wxEmptyString;
+    return {};
 }
 
 /* static */
@@ -195,7 +195,7 @@ wxString wxFileSystemHandler::GetRightLocation(const wxString& location)
         // Could be the protocol
         break;
     }
-    if (i == 0) return wxEmptyString;
+    if (i == 0) return {};
 
     const static wxString protocol(wxT("file:"));
     if (i < (int)protocol.length() - 1 || location.compare(0, i + 1, protocol))
@@ -240,19 +240,19 @@ wxString wxFileSystemHandler::GetAnchor(const wxString& location)
         else if ((c == wxT('/')) || (c == wxT('\\')) || (c == wxT(':')))
             break;
     }
-    return wxEmptyString;
+    return {};
 }
 
 
 wxString wxFileSystemHandler::FindFirst(const wxString& WXUNUSED(spec),
                                         unsigned int WXUNUSED(flags))
 {
-    return wxEmptyString;
+    return {};
 }
 
 wxString wxFileSystemHandler::FindNext()
 {
-    return wxEmptyString;
+    return {};
 }
 
 //--------------------------------------------------------------------------------
@@ -291,7 +291,7 @@ wxFSFile* wxLocalFSHandler::OpenFile(wxFileSystem& WXUNUSED(fs), const wxString&
 
     return new wxFSFile(is,
                         location,
-                        wxEmptyString,
+                        {},
                         GetAnchor(location)
 #if wxUSE_DATETIME
                         ,wxDateTime(wxFileModificationTime(fullpath))
@@ -553,14 +553,14 @@ wxString wxFileSystem::FindFirst(const wxString& spec, unsigned int flags)
         node = node->GetNext();
     }
 
-    return wxEmptyString;
+    return {};
 }
 
 
 
 wxString wxFileSystem::FindNext()
 {
-    if (m_FindFileHandler == nullptr) return wxEmptyString;
+    if (m_FindFileHandler == nullptr) return {};
     else return m_FindFileHandler -> FindNext();
 }
 

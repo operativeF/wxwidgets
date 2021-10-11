@@ -275,7 +275,7 @@ wx28HtmlTag::wx28HtmlTag(wx28HtmlTag *parent,
                 if (state == ST_BEFORE_EQ || state == ST_NAME)
                 {
                     m_ParamNames.Add(pname);
-                    m_ParamValues.Add(wxEmptyString);
+                    m_ParamValues.Add({});
                 }
                 else if (state == ST_VALUE && quote == 0)
                 {
@@ -310,7 +310,7 @@ wx28HtmlTag::wx28HtmlTag(wx28HtmlTag *parent,
                     else if (!IS_WHITE(c))
                     {
                         m_ParamNames.Add(pname);
-                        m_ParamValues.Add(wxEmptyString);
+                        m_ParamValues.Add({});
                         pname = c;
                         state = ST_NAME;
                     }
@@ -319,7 +319,7 @@ wx28HtmlTag::wx28HtmlTag(wx28HtmlTag *parent,
                     if (!IS_WHITE(c))
                     {
                         if (c == wxT('"') || c == wxT('\''))
-                            quote = c, pvalue = wxEmptyString;
+                            quote = c, pvalue = {};
                         else
                             quote = 0, pvalue = c;
                         state = ST_VALUE;
@@ -378,7 +378,7 @@ wxString wx28HtmlTag::GetParam(const wxString& par, bool with_commas) const
 {
     int index = m_ParamNames.Index(par, false);
     if (index == wxNOT_FOUND)
-        return wxEmptyString;
+        return {};
     if (with_commas)
     {
         // VS: backward compatibility, seems to be never used by wxHTML...

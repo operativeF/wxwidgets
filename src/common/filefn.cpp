@@ -153,7 +153,7 @@ wxString wxPathList::FindValidPath (const wxString& file) const
     //     the existence checks...
     // NB: we don't use wxPATH_NORM_DOTS here, too (see wxPathList::Add for more info)
     if (!fn.Normalize(wxPATH_NORM_TILDE|wxPATH_NORM_LONG|wxPATH_NORM_ENV_VARS))
-        return wxEmptyString;
+        return {};
 
     wxASSERT_MSG(!fn.IsDir(), wxT("Cannot search for directories; only for files"));
     if (fn.IsAbsolute())
@@ -171,7 +171,7 @@ wxString wxPathList::FindValidPath (const wxString& file) const
             return strstart + strend;        // Found!
     }
 
-    return wxEmptyString;                    // Not found
+    return {};                    // Not found
 }
 
 wxString wxPathList::FindAbsoluteValidPath (const wxString& file) const
@@ -660,7 +660,7 @@ wxString wxFindFirstFile(const wxString& spec, unsigned int flags)
     if ( !gs_dir->IsOpened() )
     {
         wxLogSysError(_("Cannot enumerate files '%s'"), spec);
-        return wxEmptyString;
+        return {};
     }
 
     int dirFlags;
@@ -880,7 +880,7 @@ std::size_t WXDLLIMPEXP_BASE wxParseCommonDialogsFilter(const wxString& filterSt
             // string as filter and make description empty for later autocompletion
             if ( filters.empty() )
             {
-                descriptions.push_back(wxEmptyString);
+                descriptions.push_back({});
                 filters.push_back(filterStr);
             }
             else

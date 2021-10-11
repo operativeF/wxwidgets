@@ -309,8 +309,8 @@ public:
                    wxPropertyAccessor *accessor,
                    wxAny dv,
                    wxPropertyInfoFlags flags = 0,
-                   const wxString& helpString = wxEmptyString,
-                   const wxString& groupString = wxEmptyString) :
+                   const wxString& helpString = {},
+                   const wxString& groupString = {}) :
                    m_itsClass(itsClass),
            m_name(name),
            m_typeInfo(NULL),
@@ -332,8 +332,8 @@ public:
                    wxPropertyAccessor *accessor,
                    wxAny dv,
                    wxPropertyInfoFlags flags = 0,
-                   const wxString& helpString = wxEmptyString,
-                   const wxString& groupString = wxEmptyString) :
+                   const wxString& helpString = {},
+                   const wxString& groupString = {}) :
            m_itsClass(itsClass),
            m_name(name),
            m_typeInfo(type),
@@ -353,8 +353,8 @@ public:
                     const wxString& elementTypeName,
                     wxPropertyAccessor *accessor,
                     wxPropertyInfoFlags flags = 0,
-                    const wxString& helpString = wxEmptyString,
-                    const wxString& groupString = wxEmptyString) :
+                    const wxString& helpString = {},
+                    const wxString& groupString = {}) :
         m_itsClass(itsClass),
         m_name(name),
         m_typeInfo(NULL),
@@ -466,7 +466,7 @@ class WXDLLIMPEXP_FWD_BASE wxStringToAnyHashMap : public wxStringToAnyHashMapBas
 #define wxHIDE_PROPERTY( pname )                                                      \
     static wxPropertyInfo _propertyInfo##pname( first, class_t::GetClassInfoStatic(), \
             wxT(#pname), typeid(void).name(), NULL, wxAny(), wxPROP_DONT_STREAM, \
-            wxEmptyString, wxEmptyString );
+            {}, {} );
 
 #define wxPROPERTY( pname, type, setter, getter, defaultValue, flags, help, group)    \
     wxPROPERTY_SETTER( pname, class_t, type, setter )                                 \

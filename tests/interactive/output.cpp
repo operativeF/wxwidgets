@@ -108,7 +108,7 @@ void InteractiveOutputTestCase::TestDllListLoaded()
         wxPrintf(" %s\n", details.GetVersion());
     }
 
-    wxPuts(wxEmptyString);
+    wxPuts({});
 #endif // TEST_DYNLIB
 }
 
@@ -160,7 +160,7 @@ void InteractiveOutputTestCase::TestMimeEnum()
         wxPrintf(wxT("   %s: %s (%s)\n"), mimetypes[n], desc, extsAll);
     }
 
-    wxPuts(wxEmptyString);
+    wxPuts({});
 #endif // TEST_MIME
 }
 
@@ -194,7 +194,7 @@ void InteractiveOutputTestCase::TestMimeFilename()
 
             wxString cmd;
             if ( !ft->GetOpenCommand(&cmd,
-                                     wxFileType::MessageParameters(fname, wxEmptyString)) )
+                                     wxFileType::MessageParameters(fname, {})) )
                 cmd = wxT("<no command available>");
             else
                 cmd = wxString(wxT('"')) + cmd + wxT('"');
@@ -205,7 +205,7 @@ void InteractiveOutputTestCase::TestMimeFilename()
         }
     }
 
-    wxPuts(wxEmptyString);
+    wxPuts({});
 #endif // TEST_MIME
 }
 
@@ -231,7 +231,7 @@ void InteractiveOutputTestCase::TestMimeAssociate()
         delete ft;
     }
 
-    wxPuts(wxEmptyString);
+    wxPuts({});
 #endif // TEST_MIME
 }
 
@@ -257,7 +257,7 @@ void InteractiveOutputTestCase::TestOsInfo()
     wxPrintf(wxT("Host name is %s (%s).\n"),
              wxGetHostName(), wxGetFullHostName());
 
-    wxPuts(wxEmptyString);
+    wxPuts({});
 #endif // TEST_INFO_FUNCTIONS
 }
 
@@ -276,7 +276,7 @@ void InteractiveOutputTestCase::TestPlatformInfo()
     wxPrintf(wxT("Architecture bitness is: %s\n"), plat.GetBitnessName());
     wxPrintf(wxT("Endianness is: %s\n"), plat.GetEndiannessName());
 
-    wxPuts(wxEmptyString);
+    wxPuts({});
 #endif // TEST_INFO_FUNCTIONS
 }
 
@@ -290,7 +290,7 @@ void InteractiveOutputTestCase::TestUserInfo()
     wxPrintf(wxT("Home dir is:\t%s\n"), wxGetHomeDir());
     wxPrintf(wxT("Email address:\t%s\n"), wxGetEmailAddress());
 
-    wxPuts(wxEmptyString);
+    wxPuts({});
 #endif // TEST_INFO_FUNCTIONS
 }
 

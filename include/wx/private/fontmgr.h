@@ -206,7 +206,7 @@ public:
                   wxFontStyle style = wxFontStyle::Normal,
                   int weight = wxFONTWEIGHT_NORMAL,
                   bool underlined = false,
-                  const wxString& faceName = wxEmptyString,
+                  const wxString& faceName = {},
                   wxFontEncoding encoding = wxFONTENCODING_DEFAULT);
     wxFontMgrFontRefData(const wxFontMgrFontRefData& data);
     ~wxFontMgrFontRefData();

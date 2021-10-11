@@ -135,7 +135,7 @@ public:
                        wxHelpSearchMode mode = wxHelpSearchMode::All);
 
 #if wxUSE_CONFIG
-    void UseConfig(wxConfigBase *config, const wxString& rootpath = wxEmptyString)
+    void UseConfig(wxConfigBase *config, const wxString& rootpath = {})
         {
             m_Config = config;
             m_ConfigRoot = rootpath;
@@ -145,8 +145,8 @@ public:
     // Saves custom settings into cfg config. it will use the path 'path'
     // if given, otherwise it will save info into currently selected path.
     // saved values : things set by SetFonts, SetBorders.
-    void ReadCustomization(wxConfigBase *cfg, const wxString& path = wxEmptyString);
-    void WriteCustomization(wxConfigBase *cfg, const wxString& path = wxEmptyString);
+    void ReadCustomization(wxConfigBase *cfg, const wxString& path = {});
+    void WriteCustomization(wxConfigBase *cfg, const wxString& path = {});
 #endif // wxUSE_CONFIG
 
     // call this to let wxHtmlHelpWindow know page changed

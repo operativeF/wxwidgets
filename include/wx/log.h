@@ -484,7 +484,7 @@ public:
     static void SetTimestamp(const wxString& ts) { ms_timestamp = ts; }
 
     // disable time stamping of log messages
-    static void DisableTimestamp() { SetTimestamp(wxEmptyString); }
+    static void DisableTimestamp() { SetTimestamp({}); }
 
 
     // get the current timestamp format string (maybe empty)
@@ -1300,10 +1300,10 @@ public:
 // Dummy macros to replace some functions.
 #define wxSysErrorCode() (unsigned long)0
 #define wxSysErrorMsg( X ) (const wxChar*)NULL
-#define wxSysErrorMsgStr( X ) wxEmptyString
+#define wxSysErrorMsgStr( X ) {}
 
 // Fake symbolic trace masks... for those that are used frequently
-#define wxTRACE_OleCalls wxEmptyString // OLE interface calls
+#define wxTRACE_OleCalls {} // OLE interface calls
 
 #endif // wxUSE_LOG/!wxUSE_LOG
 

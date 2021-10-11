@@ -127,7 +127,7 @@ public:
     static wxString GetOpenedPageWithAnchor(wxHtmlWindow *win)
     {
         if(!win)
-            return wxEmptyString;
+            return {};
 
         wxString an = win->GetOpenedAnchor();
         wxString pg = win->GetOpenedPage();
@@ -1554,9 +1554,9 @@ void wxHtmlHelpWindow::OnToolbar(wxCommandEvent& event)
 #endif
                     wxALL_FILES;
                 wxString s = wxFileSelector(_("Open HTML document"),
-                                            wxEmptyString,
-                                            wxEmptyString,
-                                            wxEmptyString,
+                                            {},
+                                            {},
+                                            {},
                                             filemask,
                                             wxFD_OPEN | wxFD_FILE_MUST_EXIST,
                                             this);

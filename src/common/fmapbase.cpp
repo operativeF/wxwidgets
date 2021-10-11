@@ -553,7 +553,7 @@ wxFontMapperBase::NonInteractiveCharsetToEncoding(const std::string& charset)
     // with string_view.
 
     // TODO: Make sure that this is correct; returning default with empty string.
-    if(charset == "")
+    if(charset.empty())
         return wxFONTENCODING_DEFAULT;
 
     wxFontEncoding encoding = wxFONTENCODING_SYSTEM;

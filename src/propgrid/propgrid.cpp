@@ -3819,7 +3819,7 @@ wxPropertyGrid::GetUnspecifiedValueText( int argFlags ) const
          !(argFlags & wxPG_EDITABLE_VALUE) )
         return ua.GetText();
 
-    return wxEmptyString;
+    return {};
 }
 
 // -----------------------------------------------------------------------
@@ -5032,7 +5032,7 @@ bool wxPropertyGrid::HandleMouseMove( int x, unsigned int y,
                             tipString = m_propHover->GetValueAsString();
                             if ( GetColumnCount() <= 2 )
                             {
-                                wxString unitsString = m_propHover->GetAttribute(wxPG_ATTR_UNITS, wxEmptyString);
+                                wxString unitsString = m_propHover->GetAttribute(wxPG_ATTR_UNITS, {});
                                 if ( !unitsString.empty() )
                                     tipString = wxString::Format(wxS("%s %s"), tipString, unitsString );
                             }

@@ -293,7 +293,7 @@ wxString wxPrintPaperDatabase::ConvertIdToName(wxPaperSize paperId) const
     if (type)
         return type->GetName();
     else
-        return wxEmptyString;
+        return {};
 }
 
 // Get the paper size

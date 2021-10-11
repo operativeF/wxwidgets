@@ -60,8 +60,8 @@ TEST_CASE("wxFileConfig::Path")
     wxStringInputStream sis(testconfig);
     wxFileConfig fc(sis);
 
-    CHECK( ChangePath(fc, "") == "" );
-    CHECK( ChangePath(fc, "/") == "" );
+    CHECK( ChangePath(fc, "").empty() );
+    CHECK( ChangePath(fc, "/").empty() );
     CHECK( ChangePath(fc, "root") == "/root" );
     CHECK( ChangePath(fc, "/root") == "/root" );
     CHECK( ChangePath(fc, "/root/group1/subgroup") == "/root/group1/subgroup" );

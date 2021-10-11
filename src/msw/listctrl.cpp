@@ -1082,7 +1082,7 @@ wxString wxListCtrl::GetItemText(long item, int col) const
     info.m_col = col;
 
     if (!GetItem(info))
-        return wxEmptyString;
+        return {};
     return info.m_text;
 }
 

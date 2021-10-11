@@ -215,7 +215,7 @@ TEST_CASE("wxFileSystem::MemoryFSHandler")
         FAIL("Unexpected filename: " << filename);
 
     CHECK( fs.FindFirst(url) == url );
-    CHECK( fs.FindNext() == "" );
+    CHECK( fs.FindNext().empty() );
 }
 
 #endif // wxUSE_FILESYSTEM

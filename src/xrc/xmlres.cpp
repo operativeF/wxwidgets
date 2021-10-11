@@ -246,7 +246,7 @@ GetFileNameFromNode(const wxXmlNode *node, const wxXmlResourceDataRecords& files
         }
     }
 
-    return wxEmptyString; // not found
+    return {}; // not found
 }
 
 } // anonymous namespace
@@ -1028,7 +1028,7 @@ wxXmlResource::DoCreateResFromNode(wxXmlNode& node,
     if ( node.GetName() == wxT("object_ref") )
     {
         wxString refName = node.GetAttribute("ref", "");
-        wxXmlNode* refNode = wxFindResource(refName, wxEmptyString, true);
+        wxXmlNode* refNode = wxFindResource(refName, {}, true);
 
         if ( !refNode )
         {
@@ -2087,7 +2087,7 @@ bool wxXmlResourceHandlerImpl::IsObjectNode(const wxXmlNode *node) const
 wxString wxXmlResourceHandlerImpl::GetNodeContent(const wxXmlNode *node)
 {
     const wxXmlNode *n = node;
-    if (n == nullptr) return wxEmptyString;
+    if (n == nullptr) return {};
     n = n->GetChildren();
 
     while (n)
@@ -2097,7 +2097,7 @@ wxString wxXmlResourceHandlerImpl::GetNodeContent(const wxXmlNode *node)
             return n->GetContent();
         n = n->GetNext();
     }
-    return wxEmptyString;
+    return {};
 }
 
 wxXmlNode *wxXmlResourceHandlerImpl::GetNodeParent(const wxXmlNode *node) const

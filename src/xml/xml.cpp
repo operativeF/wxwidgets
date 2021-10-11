@@ -365,7 +365,7 @@ wxString wxXmlNode::GetNodeContent() const
             return n->GetContent();
         n = n->GetNext();
     }
-    return wxEmptyString;
+    return {};
 }
 
 int wxXmlNode::GetDepth(wxXmlNode *grandparent) const
@@ -584,7 +584,7 @@ void wxXmlDocument::SetRoot(wxXmlNode *root)
     }
     else
     {
-        m_docNode = new wxXmlNode(wxXML_DOCUMENT_NODE, wxEmptyString);
+        m_docNode = new wxXmlNode(wxXML_DOCUMENT_NODE, {});
         m_docNode->SetChildren(root);
     }
     if (root)
@@ -600,7 +600,7 @@ void wxXmlDocument::SetFileType(wxTextFileType fileType)
 void wxXmlDocument::AppendToProlog(wxXmlNode *node)
 {
     if (!m_docNode)
-        m_docNode = new wxXmlNode(wxXML_DOCUMENT_NODE, wxEmptyString);
+        m_docNode = new wxXmlNode(wxXML_DOCUMENT_NODE, {});
     if (IsOk())
         m_docNode->InsertChild( node, GetRoot() );
     else
@@ -659,7 +659,7 @@ static void StartElementHnd(void *userData, const char *name, const char **atts)
     wxXmlParsingContext *ctx = (wxXmlParsingContext*)userData;
     wxXmlNode *node = new wxXmlNode(wxXML_ELEMENT_NODE,
                                     CharToString(ctx->conv, name),
-                                    wxEmptyString,
+                                    {},
                                     XML_GetCurrentLineNumber(ctx->parser));
     const char **a = atts;
 
@@ -849,7 +849,7 @@ bool wxXmlDocument::Load(wxInputStream& stream, const wxString& encoding, int fl
     wxXmlParsingContext ctx;
     bool done;
     XML_Parser parser = XML_ParserCreate(nullptr);
-    wxXmlNode *root = new wxXmlNode(wxXML_DOCUMENT_NODE, wxEmptyString);
+    wxXmlNode *root = new wxXmlNode(wxXML_DOCUMENT_NODE, {});
 
     ctx.encoding = wxS("UTF-8"); // default in absence of encoding=""
     ctx.conv = nullptr;

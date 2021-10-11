@@ -169,7 +169,7 @@ size_t wxFileTypeImpl::GetAllCommands(std::vector<wxString> *verbs,
         // get it from the registry
         wxFileTypeImpl *self = const_cast<wxFileTypeImpl *>(this);
         wxRegKey rkey(wxRegKey::HKCR, m_ext);
-        if ( !rkey.Exists() || !rkey.QueryValue(wxEmptyString, self->m_strFileType) )
+        if ( !rkey.Exists() || !rkey.QueryValue({}, self->m_strFileType) )
         {
             wxLogDebug(wxT("Can't get the filetype for extension '%s'."),
                        m_ext.c_str());
@@ -233,7 +233,7 @@ bool wxFileTypeImpl::EnsureExtKeyExists()
     wxRegKey rkey(wxRegKey::HKCU, CLASSES_ROOT_KEY + m_ext);
     if ( !rkey.Exists() )
     {
-        if ( !rkey.Create() || !rkey.SetValue(wxEmptyString, m_strFileType) )
+        if ( !rkey.Create() || !rkey.SetValue({}, m_strFileType) )
         {
             wxLogError(_("Failed to create registry entry for '%s' files."),
                        m_ext.c_str());
@@ -256,7 +256,7 @@ bool wxFileTypeImpl::EnsureExtKeyExists()
 static
 wxString wxAssocQueryString(ASSOCSTR assoc,
                             wxString ext,
-                            const wxString& verb = wxString())
+                            const wxString& verb = {})
 {
     DWORD dwSize = MAX_PATH;
     TCHAR bufOut[MAX_PATH] = { 0 };
@@ -443,7 +443,7 @@ bool wxFileTypeImpl::GetDescription(wxString *desc) const
 
     if ( key.Open(wxRegKey::Read) ) {
         // it's the default value of the key
-        if ( key.QueryValue(wxEmptyString, *desc) ) {
+        if ( key.QueryValue({}, *desc) ) {
             return true;
         }
     }
@@ -480,7 +480,7 @@ wxMimeTypesManagerImpl::GetFileTypeFromExtension(const wxString& ext)
     wxRegKey key(wxRegKey::HKCR, str);
     if ( key.Open(wxRegKey::Read) ) {
         // it's the default value of the key
-        if ( key.QueryValue(wxEmptyString, strFileType) ) {
+        if ( key.QueryValue({}, strFileType) ) {
             // create the new wxFileType object
             return CreateFileType(strFileType, ext);
         }
@@ -498,7 +498,7 @@ wxMimeTypesManagerImpl::GetFileTypeFromExtension(const wxString& ext)
         return nullptr;
     }
 
-    return CreateFileType(wxEmptyString, ext);
+    return CreateFileType({}, ext);
 }
 
 // MIME type -> extension -> file type
@@ -587,7 +587,7 @@ wxFileType *wxMimeTypesManagerImpl::Associate(const wxFileTypeInfo& ftInfo)
                 filetype = filetypeOrig;
             }
 
-            key.SetValue(wxEmptyString, filetype);
+            key.SetValue({}, filetype);
         }
     }
     else
@@ -596,11 +596,11 @@ wxFileType *wxMimeTypesManagerImpl::Associate(const wxFileTypeInfo& ftInfo)
         if (!filetypeOrig.empty())
         {
             filetype = filetypeOrig;
-            key.SetValue(wxEmptyString, filetype);
+            key.SetValue({}, filetype);
         }
         else
         {
-            key.QueryValue(wxEmptyString, filetype);
+            key.QueryValue({}, filetype);
         }
     }
 
@@ -640,7 +640,7 @@ wxFileType *wxMimeTypesManagerImpl::Associate(const wxFileTypeInfo& ftInfo)
         wxRegKey key2(wxRegKey::HKCU, CLASSES_ROOT_KEY + extWithDot);
         if ( !key2.Exists() )
             key2.Create();
-        key2.SetValue(wxEmptyString, filetype);
+        key2.SetValue({}, filetype);
 
         // now set any mimetypes we may have, but ignore it if none
         const wxString& mimetype2 = ftInfo.GetMimeType();
@@ -705,7 +705,7 @@ bool wxFileTypeImpl::SetCommand(const wxString& cmd,
     // TODO:
     // 1. translate '%s' to '%1' instead of always adding it
     // 2. create DDEExec value if needed (undo GetCommand)
-    bool result = rkey.Create() && rkey.SetValue(wxEmptyString, cmd + wxT(" \"%1\"") );
+    bool result = rkey.Create() && rkey.SetValue({}, cmd + wxT(" \"%1\"") );
 
     if ( result )
         MSWNotifyShell();
@@ -727,7 +727,7 @@ bool wxFileTypeImpl::SetDefaultIcon(const wxString& cmd, int index)
                   CLASSES_ROOT_KEY + m_strFileType + wxT("\\DefaultIcon"));
 
     bool result = rkey.Create() &&
-           rkey.SetValue(wxEmptyString,
+           rkey.SetValue({},
                          fmt::format("{:s},{:d}", cmd.c_str(), index));
 
     if ( result )
@@ -747,7 +747,7 @@ bool wxFileTypeImpl::SetDescription (const wxString& desc)
     wxRegKey rkey(wxRegKey::HKCU, CLASSES_ROOT_KEY + m_strFileType );
 
     return rkey.Create() &&
-           rkey.SetValue(wxEmptyString, desc);
+           rkey.SetValue({}, desc);
 }
 
 // ----------------------------------------------------------------------------

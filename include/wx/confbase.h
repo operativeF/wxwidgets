@@ -229,7 +229,7 @@ public:
 
   // convenience functions returning directly the value
   wxString Read(const wxString& key,
-                const wxString& defVal = wxEmptyString) const
+                const wxString& defVal = {}) const
     { wxString s; Read(key, &s, defVal); return s; }
 
   // we have to provide a separate version for C strings as otherwise the

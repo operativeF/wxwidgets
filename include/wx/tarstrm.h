@@ -62,7 +62,7 @@ public:
 class WXDLLIMPEXP_BASE wxTarEntry : public wxArchiveEntry
 {
 public:
-    wxTarEntry(const wxString& name = wxEmptyString,
+    wxTarEntry(const wxString& name = {},
                const wxDateTime& dt = wxDateTime::Now(),
                wxFileOffset size = wxInvalidOffset);
 

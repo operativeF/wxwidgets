@@ -58,16 +58,16 @@ class WXDLLIMPEXP_HTML wxHtmlHelpFrame : public wxFrame
 public:
     wxHtmlHelpFrame(wxHtmlHelpData* data = nullptr) { Init(data); }
     wxHtmlHelpFrame(wxWindow* parent, wxWindowID id,
-                    const wxString& title = wxEmptyString,
+                    const wxString& title = {},
                     unsigned int style = wxHF_DEFAULT_STYLE, wxHtmlHelpData* data = nullptr
 #if wxUSE_CONFIG
-                    , wxConfigBase *config=nullptr, const wxString& rootpath = wxEmptyString
+                    , wxConfigBase *config=nullptr, const wxString& rootpath = {}
 #endif // wxUSE_CONFIG
                     );
-    bool Create(wxWindow* parent, wxWindowID id, const wxString& title = wxEmptyString,
+    bool Create(wxWindow* parent, wxWindowID id, const wxString& title = {},
                 unsigned int style = wxHF_DEFAULT_STYLE
 #if wxUSE_CONFIG
-                , wxConfigBase *config=nullptr, const wxString& rootpath = wxEmptyString
+                , wxConfigBase *config=nullptr, const wxString& rootpath = {}
 #endif // wxUSE_CONFIG
                 );
     ~wxHtmlHelpFrame() = default;
@@ -93,7 +93,7 @@ public:
 
 #if wxUSE_CONFIG
     // For compatibility
-    void UseConfig(wxConfigBase *config, const wxString& rootpath = wxEmptyString);
+    void UseConfig(wxConfigBase *config, const wxString& rootpath = {});
 #endif // wxUSE_CONFIG
 
     // Make the help controller's frame 'modal' if

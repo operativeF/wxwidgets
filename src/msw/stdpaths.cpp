@@ -291,7 +291,7 @@ wxString
 wxStandardPaths::MakeConfigFileName(const wxString& basename,
                                     ConfigFileConv WXUNUSED(conv)) const
 {
-    wxFileName fn(wxEmptyString, basename);
+    wxFileName fn({}, basename);
     fn.SetExt(wxT("ini"));
     return fn.GetFullName();
 }

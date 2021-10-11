@@ -219,9 +219,9 @@ private:
 // File selector - backward compatibility
 WXDLLIMPEXP_CORE wxString
 wxFileSelector(const wxString& message = wxASCII_STR(wxFileSelectorPromptStr),
-               const wxString& default_path = wxEmptyString,
-               const wxString& default_filename = wxEmptyString,
-               const wxString& default_extension = wxEmptyString,
+               const wxString& default_path = {},
+               const wxString& default_filename = {},
+               const wxString& default_extension = {},
                const wxString& wildcard = wxASCII_STR(wxFileSelectorDefaultWildcardStr),
                unsigned int flags = 0,
                wxWindow *parent = nullptr,
@@ -230,8 +230,8 @@ wxFileSelector(const wxString& message = wxASCII_STR(wxFileSelectorPromptStr),
 // An extended version of wxFileSelector
 WXDLLIMPEXP_CORE wxString
 wxFileSelectorEx(const wxString& message = wxASCII_STR(wxFileSelectorPromptStr),
-                 const wxString& default_path = wxEmptyString,
-                 const wxString& default_filename = wxEmptyString,
+                 const wxString& default_path = {},
+                 const wxString& default_filename = {},
                  int *indexDefaultExtension = nullptr,
                  const wxString& wildcard = wxASCII_STR(wxFileSelectorDefaultWildcardStr),
                  unsigned int flags = 0,
@@ -242,14 +242,14 @@ wxFileSelectorEx(const wxString& message = wxASCII_STR(wxFileSelectorPromptStr),
 WXDLLIMPEXP_CORE wxString
 wxLoadFileSelector(const wxString& what,
                    const wxString& extension,
-                   const wxString& default_name = wxEmptyString,
+                   const wxString& default_name = {},
                    wxWindow *parent = nullptr);
 
 // Ask for filename to save
 WXDLLIMPEXP_CORE wxString
 wxSaveFileSelector(const wxString& what,
                    const wxString& extension,
-                   const wxString& default_name = wxEmptyString,
+                   const wxString& default_name = {},
                    wxWindow *parent = nullptr);
 
 

@@ -90,7 +90,7 @@ wxTreebook::Create(wxWindow *parent,
                     wxTR_SINGLE
                  );
     GetTreeCtrl()->SetQuickBestSize(false); // do full size calculation
-    GetTreeCtrl()->AddRoot(wxEmptyString); // label doesn't matter, it's hidden
+    GetTreeCtrl()->AddRoot({}); // label doesn't matter, it's hidden
 
 #ifdef __WXMSW__
     // We need to add dummy size event to force possible scrollbar hiding

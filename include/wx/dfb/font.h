@@ -46,7 +46,7 @@ public:
            wxFontStyle style,
            wxFontWeight weight,
            bool underlined = false,
-           const wxString& face = wxEmptyString,
+           const wxString& face = {}
            wxFontEncoding encoding = wxFONTENCODING_DEFAULT)
     {
         Create(size, family, style, weight, underlined, face, encoding);
@@ -57,7 +57,7 @@ public:
            wxFontStyle style,
            wxFontWeight weight,
            bool underlined = false,
-           const wxString& face = wxEmptyString,
+           const wxString& face = {}
            wxFontEncoding encoding = wxFONTENCODING_DEFAULT)
     {
         Create(10, family, style, weight, underlined, face, encoding);
@@ -69,7 +69,7 @@ public:
                 wxFontStyle style,
                 wxFontWeight weight,
                 bool underlined = false,
-                const wxString& face = wxEmptyString,
+                const wxString& face = {}
                 wxFontEncoding encoding = wxFONTENCODING_DEFAULT);
     bool Create(const wxNativeFontInfo& fontinfo);
 

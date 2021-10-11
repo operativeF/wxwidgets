@@ -2760,7 +2760,7 @@ wxRichTextRange wxRichTextParagraphLayoutBox::AddParagraphs(const wxString& text
     size_t i = 0;
     size_t len = text.length();
     wxString line;
-    wxRichTextParagraph* para = new wxRichTextParagraph(wxEmptyString, this, pStyle, cStyle);
+    wxRichTextParagraph* para = new wxRichTextParagraph({}, this, pStyle, cStyle);
     para->GetAttributes().GetTextBoxAttr().Reset();
 
     AppendChild(para);
@@ -2778,7 +2778,7 @@ wxRichTextRange wxRichTextParagraphLayoutBox::AddParagraphs(const wxString& text
                 wxRichTextPlainText* plainText = (wxRichTextPlainText*) para->GetChildren().GetFirst()->GetData();
                 plainText->SetText(line);
 
-                para = new wxRichTextParagraph(wxEmptyString, this, pStyle, cStyle);
+                para = new wxRichTextParagraph({}, this, pStyle, cStyle);
                 para->GetAttributes().GetTextBoxAttr().Reset();
 
                 AppendChild(para);
@@ -2993,7 +2993,7 @@ bool wxRichTextParagraphLayoutBox::InsertFragment(long position, wxRichTextParag
                 // Ensure there's at least one object
                 if (finalPara->GetChildCount() == 0)
                 {
-                    wxRichTextPlainText* text = new wxRichTextPlainText(wxEmptyString);
+                    wxRichTextPlainText* text = new wxRichTextPlainText({});
                     text->SetAttributes(emptyParagraphAttributes);
 
                     finalPara->AppendChild(text);
@@ -3297,7 +3297,7 @@ bool wxRichTextParagraphLayoutBox::DeleteRange(const wxRichTextRange& range)
                     // Avoid empty paragraphs
                     if (firstPara && firstPara->GetChildren().GetCount() == 0)
                     {
-                        wxRichTextPlainText* text = new wxRichTextPlainText(wxEmptyString);
+                        wxRichTextPlainText* text = new wxRichTextPlainText({});
                         firstPara->AppendChild(text);
                     }
 
@@ -3379,7 +3379,7 @@ wxString wxRichTextParagraphLayoutBox::GetParagraphText(long paragraphNumber) co
     if (para)
         return para->GetTextForRange(para->GetRange());
     else
-        return wxEmptyString;
+        return {};
 }
 
 /// Convert zero-based line column and paragraph number to a position.
@@ -4099,7 +4099,7 @@ void wxRichTextParagraphLayoutBox::Reset()
         buffer->SendEvent(event, true);
     }
 
-    AddParagraph(wxEmptyString);
+    AddParagraph({});
 
     PrepareContent(*this);
 
@@ -4390,9 +4390,9 @@ bool wxRichTextParagraphLayoutBox::SetListStyle(const wxRichTextRange& range, wx
                     // if def is NULL, remove list style, applying any associated paragraph style
                     // to restore the attributes
 
-                    newPara->GetAttributes().SetListStyleName(wxEmptyString);
+                    newPara->GetAttributes().SetListStyleName({});
                     newPara->GetAttributes().SetLeftIndent(0, 0);
-                    newPara->GetAttributes().SetBulletText(wxEmptyString);
+                    newPara->GetAttributes().SetBulletText({});
                     newPara->GetAttributes().SetBulletStyle(0);
 
                     // Eliminate the main list-related attributes
@@ -6425,7 +6425,7 @@ wxString wxRichTextParagraph::GetBulletText()
 {
     if (GetAttributes().GetBulletStyle() == wxTEXT_ATTR_BULLET_STYLE_NONE ||
         (GetAttributes().GetBulletStyle() & wxTEXT_ATTR_BULLET_STYLE_BITMAP))
-        return wxEmptyString;
+        return {};
 
     int number = GetAttributes().GetBulletNumber();
 
@@ -7840,7 +7840,7 @@ bool wxRichTextParagraphLayoutBox::InsertNewlineWithUndo(wxRichTextBuffer* buffe
     // Don't include box attributes such as margins
     attr.GetTextBoxAttr().Reset();
 
-    wxRichTextParagraph* newPara = new wxRichTextParagraph(wxEmptyString, this, & attr);
+    wxRichTextParagraph* newPara = new wxRichTextParagraph({}, this, & attr);
     action->GetNewParagraphs().AppendChild(newPara);
     action->GetNewParagraphs().UpdateRanges();
     action->GetNewParagraphs().SetPartialParagraph(false);
@@ -9418,7 +9418,7 @@ wxString wxRichTextField::GetPropertiesMenuLabel() const
     if (fieldType)
         return fieldType->GetPropertiesMenuLabel(const_cast<wxRichTextField*>(this));
 
-    return wxEmptyString;
+    return {};
 }
 
 bool wxRichTextField::UpdateField(wxRichTextBuffer* buffer)
@@ -11055,7 +11055,7 @@ bool wxRichTextTable::CreateTable(int rows, int cols)
             cell->GetAttributes() = cellattr;
 
             AppendChild(cell);
-            cell->AddParagraph(wxEmptyString);
+            cell->AddParagraph({});
 
             colArray.Add(cell);
         }
@@ -11376,7 +11376,7 @@ bool wxRichTextTable::AddRows(int startRow, int noRows, const wxRichTextAttr& at
             cell->GetAttributes() = cellattr;
 
             AppendChild(cell);
-            cell->AddParagraph(wxEmptyString);
+            cell->AddParagraph({});
             colArray.Add(cell);
         }
     }
@@ -11427,7 +11427,7 @@ bool wxRichTextTable::AddColumns(int startCol, int noCols, const wxRichTextAttr&
             cell->GetAttributes() = cellattr;
 
             AppendChild(cell);
-            cell->AddParagraph(wxEmptyString);
+            cell->AddParagraph({});
 
             if (startCol == m_colCount)
                 colArray.Add(cell);
@@ -12882,7 +12882,7 @@ wxString wxRichTextDecimalToRoman(long n)
     {
         decimalNumbers.clear();
         romanNumbers.Clear();
-        return wxEmptyString;
+        return {};
     }
 
     if (decimalNumbers.size() == 0)
@@ -13296,7 +13296,7 @@ wxString wxRichTextImageBlock::GetExtension() const
     if (handler)
         return handler->GetExtension();
     else
-        return wxEmptyString;
+        return {};
 }
 
 #if wxUSE_DATAOBJ
@@ -13736,7 +13736,7 @@ bool wxTextBoxAttr::RemoveStyle(const wxTextBoxAttr& attr)
 
     if (attr.HasBoxStyleName())
     {
-        SetBoxStyleName(wxEmptyString);
+        SetBoxStyleName({});
         RemoveFlag(wxTEXT_BOX_ATTR_BOX_STYLE_NAME);
     }
 

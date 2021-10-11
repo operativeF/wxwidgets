@@ -28,7 +28,7 @@ public:
 
     // load all data into memory - done when it is needed for the first time
     void Initialize(int mailcapStyles = wxMAILCAP_ALL,
-                    const wxString& extraDir = wxEmptyString);
+                    const wxString& extraDir = {});
 
     // and delete the data here
     void ClearData();
@@ -154,7 +154,7 @@ public:
     // set an arbitrary command, ask confirmation if it already exists and
     // overwriteprompt is TRUE
     bool SetCommand(const wxString& cmd, const wxString& verb, bool overwriteprompt = true);
-    bool SetDefaultIcon(const wxString& strIcon = wxEmptyString, int index = 0);
+    bool SetDefaultIcon(const wxString& strIcon = {}, int index = 0);
 
     wxString
     GetExpandedCommand(const wxString & verb,

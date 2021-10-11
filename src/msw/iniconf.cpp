@@ -79,7 +79,7 @@ wxIniConfig::wxIniConfig(const wxString& strAppName,
     }
 
     // set root path
-    SetPath(wxEmptyString);
+    SetPath({});
 }
 
 // ----------------------------------------------------------------------------

@@ -176,9 +176,9 @@ void wxFontsManager::AddAllFonts()
               (
                 _("Default font"),
                 BUILTIN_DFB_FONT_FILENAME,
-                wxEmptyString,
-                wxEmptyString,
-                wxEmptyString,
+                {},
+                {},
+                {},
                 false // IsFixed
               )
         );
@@ -199,8 +199,8 @@ void wxFontsManager::AddFontsFromDir(const wxString& indexFile)
 
     wxLogTrace("font", "adding fonts from %s", dir.c_str());
 
-    wxFileConfig cfg(wxEmptyString, wxEmptyString,
-                     indexFile, wxEmptyString,
+    wxFileConfig cfg({}, {},
+                     indexFile, {},
                      wxCONFIG_USE_LOCAL_FILE);
 
     long i;
@@ -219,7 +219,7 @@ void wxFontsManager::AddFontsFromDir(const wxString& indexFile)
 static wxString
 ReadFilePath(const wxString& name, const wxString& dir, wxFileConfig& cfg)
 {
-    wxString p = cfg.Read(name, wxEmptyString);
+    wxString p = cfg.Read(name, {});
 
     if ( p.empty() || wxFileName(p).IsAbsolute() )
         return p;

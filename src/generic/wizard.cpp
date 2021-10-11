@@ -412,7 +412,7 @@ void wxWizard::AddButtonRow(wxBoxSizer *mainColumn)
     wxButton *btnHelp=nullptr;
 #ifdef __WXMAC__
     if (GetExtraStyle() & wxWIZARD_EX_HELPBUTTON)
-        btnHelp=new wxButton(this, wxID_HELP, wxEmptyString, wxDefaultPosition, wxDefaultSize, buttonStyle);
+        btnHelp=new wxButton(this, wxID_HELP, {}, wxDefaultPosition, wxDefaultSize, buttonStyle);
 #endif
 
     m_nextLabel = _("&Next >").ToStdString();

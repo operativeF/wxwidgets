@@ -555,7 +555,7 @@ void wxFileName::Assign(const wxString& pathOrig,
 
 void wxFileName::AssignDir(const wxString& dir, wxPathFormat format)
 {
-    Assign(dir, wxEmptyString, format);
+    Assign(dir, {}, format);
 }
 
 void wxFileName::Clear()

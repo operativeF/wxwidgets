@@ -147,10 +147,10 @@ class WXDLLIMPEXP_BASE wxVariantBase
 public:
     wxVariantBase();
     wxVariantBase(const wxVariantBase& variant);
-    wxVariantBase(wxVariantData* data, const wxString& name = wxEmptyString);
+    wxVariantBase(wxVariantData* data, const wxString& name = {});
 
     template<typename T>
-        wxVariantBase(const T& data, const wxString& name = wxEmptyString) :
+        wxVariantBase(const T& data, const wxString& name = {}) :
             m_data(new wxVariantDataT<T>(data)), m_name(name) {}
 
     virtual ~wxVariantBase();

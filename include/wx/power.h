@@ -112,7 +112,7 @@ class WXDLLIMPEXP_BASE wxPowerResource
 {
 public:
     static bool Acquire(wxPowerResourceKind kind,
-                        const wxString& reason = wxString());
+                        const wxString& reason = {});
     static void Release(wxPowerResourceKind kind);
 };
 
@@ -120,7 +120,7 @@ class wxPowerResourceBlocker
 {
 public:
     explicit wxPowerResourceBlocker(wxPowerResourceKind kind,
-                                    const wxString& reason = wxString())
+                                    const wxString& reason = {})
         : m_kind(kind),
           m_acquired(wxPowerResource::Acquire(kind, reason))
     {

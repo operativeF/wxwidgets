@@ -1787,7 +1787,7 @@ bool wxGridStringTable::AppendRows( size_t numRows )
     // if ( m_numCols > 0 )
     // {
     //     sa.reserve( m_numCols );
-    //     sa.insert( std::begin(sa), m_numCols, wxEmptyString );
+    //     sa.insert( std::begin(sa), m_numCols, {} );
     // }
 
     m_data.insert( m_data.end(), numRows, sa );
@@ -5202,7 +5202,7 @@ bool wxGrid::ProcessTableMessage( wxGridTableMessage& msg )
 
 // The behaviour of this function depends on the grid table class
 // Clear() function. For the default wxGridStringTable class the
-// behaviour is to replace all cell contents with wxEmptyString but
+// behaviour is to replace all cell contents with {} but
 // not to change the number of rows or cols.
 //
 void wxGrid::ClearGrid()

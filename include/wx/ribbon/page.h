@@ -29,7 +29,7 @@ public:
 
     wxRibbonPage(wxRibbonBar* parent,
                  wxWindowID id = wxID_ANY,
-                 const wxString& label = wxEmptyString,
+                 const wxString& label = {},
                  const wxBitmap& icon = wxNullBitmap,
                  unsigned int style = 0);
 
@@ -37,7 +37,7 @@ public:
 
     bool Create(wxRibbonBar* parent,
                 wxWindowID id = wxID_ANY,
-                const wxString& label = wxEmptyString,
+                const wxString& label = {},
                 const wxBitmap& icon = wxNullBitmap,
                 unsigned int style = 0);
 

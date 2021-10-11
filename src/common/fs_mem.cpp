@@ -192,7 +192,7 @@ void wxMemoryFSHandlerBase::AddFileWithMimeType(const wxString& filename,
 void wxMemoryFSHandlerBase::AddFile(const wxString& filename,
                                     const wxString& textdata)
 {
-    AddFileWithMimeType(filename, textdata, wxEmptyString);
+    AddFileWithMimeType(filename, textdata, {});
 }
 
 
@@ -200,7 +200,7 @@ void wxMemoryFSHandlerBase::AddFile(const wxString& filename,
 void wxMemoryFSHandlerBase::AddFile(const wxString& filename,
                                     const void *binarydata, size_t size)
 {
-    AddFileWithMimeType(filename, binarydata, size, wxEmptyString);
+    AddFileWithMimeType(filename, binarydata, size, {});
 }
 
 

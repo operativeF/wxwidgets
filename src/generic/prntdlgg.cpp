@@ -713,7 +713,7 @@ bool wxGenericPrintSetupDialog::TransferDataFromWindow()
     long id = m_printerListCtrl->GetNextItem( -1, wxLIST_NEXT_ALL, ListStates::Selected );
     if (id == 0)
     {
-        m_printData.SetPrinterName( wxEmptyString );
+        m_printData.SetPrinterName( {} );
     }
     else
     {

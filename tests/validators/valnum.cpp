@@ -189,7 +189,7 @@ TEST_CASE_FIXTURE(NumValidatorTestCase, "ValNum::ZeroAsBlank")
     wxValidator * const val = m_text->GetValidator();
 
     CHECK( val->TransferToWindow() );
-    CHECK( m_text->GetValue() == "" );
+    CHECK( m_text->GetValue().empty() );
 
     value++;
     CHECK( val->TransferFromWindow() );
@@ -248,12 +248,12 @@ TEST_CASE_FIXTURE(NumValidatorTestCase, "ValNum::Interactive")
     m_text->SetFocus();
     sim.Char('-');
     wxYield();
-    CHECK( m_text->GetValue() == "" );
+    CHECK( m_text->GetValue().empty() );
 
     // Neither is entering '.' or any non-digit character.
     sim.Text(".a+/");
     wxYield();
-    CHECK( m_text->GetValue() == "" );
+    CHECK( m_text->GetValue().empty() );
 
     // Entering digits should work though and after leaving the control the
     // contents should be normalized.

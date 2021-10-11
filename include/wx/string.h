@@ -1554,7 +1554,7 @@ public:
     static wxString FromUTF8Unchecked(const char *utf8)
     {
       if ( !utf8 )
-          return wxEmptyString;
+          return {};
 
       wxASSERT( wxStringOperations::IsValidUtf8String(utf8) );
       return FromImpl(wxStringImpl(utf8));
@@ -1562,7 +1562,7 @@ public:
     static wxString FromUTF8Unchecked(const char *utf8, size_t len)
     {
       if ( !utf8 )
-          return wxEmptyString;
+          return {};
       if ( len == npos )
           return FromUTF8Unchecked(utf8);
 

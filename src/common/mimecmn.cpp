@@ -475,7 +475,7 @@ bool wxFileType::SetDefaultIcon(const wxString& cmd, int index)
     // VZ: should we do this?
     // chris elliott : only makes sense in MS windows
     if ( sTmp.empty() )
-        GetOpenCommand(&sTmp, wxFileType::MessageParameters(wxEmptyString, wxEmptyString));
+        GetOpenCommand(&sTmp, wxFileType::MessageParameters({}, {}));
 #endif
     wxCHECK_MSG( !sTmp.empty(), false, wxT("need the icon file") );
 

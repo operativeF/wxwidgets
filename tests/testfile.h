@@ -48,7 +48,7 @@ private:
 class TempFile
 {
 public:
-    explicit TempFile(const wxString& name = wxString()) : m_name(name) { }
+    explicit TempFile(const wxString& name = {}) : m_name(name) { }
 
     void Assign(const wxString& name) { m_name = name; }
 

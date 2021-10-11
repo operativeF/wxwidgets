@@ -402,7 +402,7 @@ TEST_CASE("File Functions")
 
         wxString pathOnly = wxPathOnly(filename.GetFullPath());
         if ( !wxDirExists(pathOnly) )
-            CHECK( pathOnly == wxString() );
+            CHECK( pathOnly.empty() );
     }
 
     // Unit tests for Mkdir and Rmdir doesn't cover non-ASCII directory names.
