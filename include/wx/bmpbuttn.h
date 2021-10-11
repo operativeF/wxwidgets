@@ -72,7 +72,7 @@ public:
 
     bool CreateCloseButton(wxWindow* parent,
                            wxWindowID winid,
-                           const wxString& name = {});
+                           const std::string& name = {});
 
         which is used used by NewCloseButton(), and, as Create(), must be
         called on default-constructed wxBitmapButton object.

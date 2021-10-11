@@ -31,15 +31,17 @@ public:
         // has the requested size/position
         // It's defaulted to zero.
 
-        Create(parent, data);
+        m_parent = parent;
+        
+        if (data)
+            m_colourData = *data;
+
     }
 
     wxColourDialog(const wxColourDialog&) = delete;
     wxColourDialog& operator=(const wxColourDialog&) = delete;
     wxColourDialog(wxColourDialog&&) = default;
     wxColourDialog& operator=(wxColourDialog&&) = default;
-
-    [[maybe_unused]] bool Create(wxWindow *parent, const wxColourData *data = nullptr);
 
     wxColourData& GetColourData() { return m_colourData; }
 

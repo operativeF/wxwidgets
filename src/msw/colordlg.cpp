@@ -137,15 +137,6 @@ wxColourDialogHookProc(HWND hwnd,
 // wxColourDialog
 // ----------------------------------------------------------------------------
 
-bool wxColourDialog::Create(wxWindow *parent, const wxColourData *data)
-{
-    m_parent = parent;
-    if (data)
-        m_colourData = *data;
-
-    return true;
-}
-
 int wxColourDialog::ShowModal()
 {
     WX_HOOK_MODAL_DIALOG();
@@ -154,8 +145,9 @@ int wxColourDialog::ShowModal()
     WXHWND hWndParent = parent ? GetHwndOf(parent) : nullptr;
 
     // and transfer data from m_colourData to it
-    COLORREF custColours[16];
-    for ( size_t i = 0; i < WXSIZEOF(custColours); i++ )
+    std::array<COLORREF, 16> custColours;
+
+    for ( std::size_t i{}; i != custColours.size(); i++ )
     {
         if ( m_colourData.GetCustomColour(i).IsOk() )
             custColours[i] = wxColourToRGB(m_colourData.GetCustomColour(i));
@@ -172,7 +164,7 @@ int wxColourDialog::ShowModal()
         .hwndOwner = hWndParent,
         .hInstance = {}, // Ignored
         .rgbResult = m_currentCol,
-        .lpCustColors = custColours,
+        .lpCustColors = custColours.data(),
         .Flags = CC_RGBINIT | CC_ENABLEHOOK,
         .lCustData = (LPARAM)this,
         .lpfnHook = wxColourDialogHookProc,
@@ -204,7 +196,7 @@ int wxColourDialog::ShowModal()
 
 
     // transfer the values chosen by user back into m_colourData
-    for ( size_t i = 0; i < WXSIZEOF(custColours); i++ )
+    for ( size_t i{}; i != custColours.size(); i++ )
     {
       wxRGBToColour(m_colourData.m_custColours[i], custColours[i]);
     }

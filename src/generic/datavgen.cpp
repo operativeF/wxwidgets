@@ -1305,8 +1305,7 @@ wxSize wxDataViewTextRenderer::GetSize() const
         return GetTextExtent(m_text);
     }
     else
-        return GetView()->FromDIP(wxSize(wxDVC_DEFAULT_RENDERER_SIZE,
-                                         wxDVC_DEFAULT_RENDERER_SIZE));
+        return GetView()->FromDIP(wxDVC_DEFAULT_RENDERER_SIZE);
 }
 
 // ---------------------------------------------------------
@@ -1369,8 +1368,7 @@ wxSize wxDataViewBitmapRenderer::GetSize() const
     else if (m_icon.IsOk())
         return { m_icon.GetWidth(), m_icon.GetHeight() };
 
-    return GetView()->FromDIP(wxSize(wxDVC_DEFAULT_RENDERER_SIZE,
-                                     wxDVC_DEFAULT_RENDERER_SIZE));
+    return GetView()->FromDIP(wxDVC_DEFAULT_RENDERER_SIZE);
 }
 
 // ---------------------------------------------------------

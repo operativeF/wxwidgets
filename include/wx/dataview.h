@@ -73,7 +73,7 @@ constexpr char wxDataViewCtrlNameStr[] = "dataviewCtrl";
 // ----------------------------------------------------------------------------
 
 // size of a wxDataViewRenderer without contents:
-constexpr unsigned int wxDVC_DEFAULT_RENDERER_SIZE = 20;
+constexpr wxSize wxDVC_DEFAULT_RENDERER_SIZE = {20, 20};
 
 // the default width of new (text) columns:
 constexpr unsigned int wxDVC_DEFAULT_WIDTH = 80;

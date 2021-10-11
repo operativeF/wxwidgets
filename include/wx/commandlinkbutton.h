@@ -97,7 +97,6 @@ class WXDLLIMPEXP_CORE wxGenericCommandLinkButton
 public:
     wxGenericCommandLinkButton()  = default;
 
-
     wxGenericCommandLinkButton(wxWindow *parent,
                                wxWindowID id,
                                const std::string& mainLabel = {},

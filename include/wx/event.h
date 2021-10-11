@@ -265,7 +265,7 @@ class wxObjectEventFunctor : public wxEventFunctor
 public:
     wxObjectEventFunctor(wxObjectEventFunction method, wxEvtHandler *handler)
         : m_handler( handler ), m_method( method )
-        { }
+    {}
 
     void operator()(wxEvtHandler *handler, wxEvent& event) override;
 

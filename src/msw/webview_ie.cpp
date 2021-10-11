@@ -1611,7 +1611,7 @@ void wxWebViewIE::onActiveXEvent(wxActiveXEvent& evt)
                 navFlags = wxWEBVIEW_NAV_ACTION_USER;
 
             wxWebViewEvent event(wxEVT_WEBVIEW_NEWWINDOW,
-                                 GetId(), url, {}, navFlags);
+                                 GetId(), url, "", navFlags);
             event.SetEventObject(this);
             HandleWindowEvent(event);
 

@@ -10,7 +10,7 @@
 
 #include "testprec.h"
 
-
+#include "wx/affinematrix2d.h"
 #include "wx/bitmap.h"
 #include "wx/dcgraph.h"
 #include "wx/dcmemory.h"
@@ -34,7 +34,6 @@ public:
     CoordinatesDCTestCaseBase()
     {
         m_bmp.Create(s_dcSize);
-        m_dc = nullptr;
     }
 
     virtual ~CoordinatesDCTestCaseBase()
@@ -44,7 +43,7 @@ public:
 
 protected:
     wxBitmap m_bmp;
-    wxDC* m_dc;
+    wxDC* m_dc{nullptr};
 };
 
 // ===========
