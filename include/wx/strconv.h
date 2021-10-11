@@ -388,7 +388,7 @@ private:
 class WXDLLIMPEXP_BASE wxMBConvUTF16Base : public wxMBConv
 {
 public:
-    enum { BYTES_PER_CHAR = 2 };
+    static constexpr auto BYTES_PER_CHAR = 2;
 
     size_t GetMBNulLen() const override { return BYTES_PER_CHAR; }
 
@@ -437,7 +437,7 @@ public:
 class WXDLLIMPEXP_BASE wxMBConvUTF32Base : public wxMBConv
 {
 public:
-    enum { BYTES_PER_CHAR = 4 };
+    static constexpr auto BYTES_PER_CHAR = 4;
 
     size_t GetMBNulLen() const override { return BYTES_PER_CHAR; }
 

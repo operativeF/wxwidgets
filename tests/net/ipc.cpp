@@ -67,7 +67,7 @@ class EventThread : public wxThread
 {
 public:
     EventThread()
-        : wxThread(wxTHREAD_JOINABLE)
+        : wxThread( wxThreadKind::Joinable)
     {
         Create();
         Run();

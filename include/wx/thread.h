@@ -25,56 +25,56 @@
 // constants
 // ----------------------------------------------------------------------------
 
-enum wxMutexError
+enum class wxMutexError
 {
-    wxMUTEX_NO_ERROR = 0,   // operation completed successfully
-    wxMUTEX_INVALID,        // mutex hasn't been initialized
-    wxMUTEX_DEAD_LOCK,      // mutex is already locked by the calling thread
-    wxMUTEX_BUSY,           // mutex is already locked by another thread
-    wxMUTEX_UNLOCKED,       // attempt to unlock a mutex which is not locked
-    wxMUTEX_TIMEOUT,        // LockTimeout() has timed out
-    wxMUTEX_MISC_ERROR      // any other error
+    None = 0,   // operation completed successfully
+    Invalid,        // mutex hasn't been initialized
+    DeadLock,      // mutex is already locked by the calling thread
+    Busy,           // mutex is already locked by another thread
+    Unlocked,       // attempt to unlock a mutex which is not locked
+    Timeout,        // LockTimeout() has timed out
+    MiscError      // any other error
 };
 
-enum wxCondError
+enum class wxCondError
 {
-    wxCOND_NO_ERROR = 0,
-    wxCOND_INVALID,
-    wxCOND_TIMEOUT,         // WaitTimeout() has timed out
-    wxCOND_MISC_ERROR
+    None,
+    Invalid,
+    Timeout,         // WaitTimeout() has timed out
+    MiscError
 };
 
-enum wxSemaError
+enum class wxSemaError
 {
-    wxSEMA_NO_ERROR = 0,
-    wxSEMA_INVALID,         // semaphore hasn't been initialized successfully
-    wxSEMA_BUSY,            // returned by TryWait() if Wait() would block
-    wxSEMA_TIMEOUT,         // returned by WaitTimeout()
-    wxSEMA_OVERFLOW,        // Post() would increase counter past the max
-    wxSEMA_MISC_ERROR
+    None,
+    Invalid,         // semaphore hasn't been initialized successfully
+    Busy,            // returned by TryWait() if Wait() would block
+    Timeout,         // returned by WaitTimeout()
+    Overflow,        // Post() would increase counter past the max
+    MiscError
 };
 
-enum wxThreadError
+enum class wxThreadError
 {
-    wxTHREAD_NO_ERROR = 0,      // No error
-    wxTHREAD_NO_RESOURCE,       // No resource left to create a new thread
-    wxTHREAD_RUNNING,           // The thread is already running
-    wxTHREAD_NOT_RUNNING,       // The thread isn't running
-    wxTHREAD_KILLED,            // Thread we waited for had to be killed
-    wxTHREAD_MISC_ERROR         // Some other error
+    None,             // No error
+    NoResource,       // No resource left to create a new thread
+    Running,          // The thread is already running
+    NotRunning,       // The thread isn't running
+    Killed,           // Thread we waited for had to be killed
+    MiscError         // Some other error
 };
 
-enum wxThreadKind
+enum class wxThreadKind
 {
-    wxTHREAD_DETACHED,
-    wxTHREAD_JOINABLE
+     Detached,
+     Joinable
 };
 
-enum wxThreadWait
+enum class wxThreadWait
 {
-    wxTHREAD_WAIT_BLOCK,
-    wxTHREAD_WAIT_YIELD,       // process events while waiting; MSW only
-    wxTHREAD_WAIT_DEFAULT = wxTHREAD_WAIT_BLOCK
+    Block,
+    Yield,       // process events while waiting; MSW only
+    Default = Block
 };
 
 // There are 2 types of mutexes: normal mutexes and recursive ones. The attempt
@@ -96,10 +96,10 @@ enum wxThreadWait
 enum wxMutexType
 {
     // normal mutex: try to always use this one
-    wxMUTEX_DEFAULT,
+    Default,
 
     // recursive mutex: don't use these ones with wxCondition
-    wxMUTEX_RECURSIVE
+    Recursive
 };
 
 // forward declarations
@@ -125,7 +125,7 @@ public:
     // ------------------------
 
     // create either default (always safe) or recursive mutex
-    wxMutex(wxMutexType mutexType = wxMUTEX_DEFAULT);
+    wxMutex(wxMutexType mutexType = wxMutexType::Default);
 
     // destroys the mutex kernel object
     ~wxMutex();
@@ -145,10 +145,10 @@ public:
     // The result of locking a mutex already locked by the current thread
     // depend on the mutex type.
     //
-    // The caller must call Unlock() later if Lock() returned wxMUTEX_NO_ERROR.
+    // The caller must call Unlock() later if Lock() returned wxMutexError::None.
     wxMutexError Lock();
 
-    // Same as Lock() but return wxMUTEX_TIMEOUT if the mutex can't be locked
+    // Same as Lock() but return wxMutexError::Timeout if the mutex can't be locked
     // during the given number of milliseconds
     wxMutexError LockTimeout(unsigned long ms);
 
@@ -174,7 +174,7 @@ public:
     // lock the mutex in the ctor
     wxMutexLocker(wxMutex& mutex)
         : m_mutex(mutex)
-        { m_isOk = ( m_mutex.Lock() == wxMUTEX_NO_ERROR ); }
+        { m_isOk = ( m_mutex.Lock() == wxMutexError::None ); }
 
     wxMutexLocker(const wxMutexLocker&) = delete;
     wxMutexLocker& operator=(const wxMutexLocker&) = delete;
@@ -275,11 +275,11 @@ private:
 #if wxCRITSECT_IS_MUTEX
     // implement wxCriticalSection using mutexes
     inline wxCriticalSection::wxCriticalSection( wxCriticalSectionType critSecType )
-       : m_mutex( critSecType == wxCRITSEC_DEFAULT ? wxMUTEX_RECURSIVE : wxMUTEX_DEFAULT )  { }
+       : m_mutex( critSecType == wxCRITSEC_DEFAULT ? wxMutexType::Recursive : wxMutexType::Default )  { }
     inline wxCriticalSection::~wxCriticalSection() { }
 
     inline void wxCriticalSection::Enter() { (void)m_mutex.Lock(); }
-    inline bool wxCriticalSection::TryEnter() { return m_mutex.TryLock() == wxMUTEX_NO_ERROR; }
+    inline bool wxCriticalSection::TryEnter() { return m_mutex.TryLock() == wxMutexError::None; }
     inline void wxCriticalSection::Leave() { (void)m_mutex.Unlock(); }
 #endif // wxCRITSECT_IS_MUTEX
 
@@ -348,16 +348,16 @@ public:
         while ( !predicate() )
         {
             wxCondError e = Wait();
-            if ( e != wxCOND_NO_ERROR )
+            if ( e != wxCondError::None )
                 return e;
         }
-        return wxCOND_NO_ERROR;
+        return wxCondError::None;
     }
 
     // exactly as Wait() except that it may also return if the specified
     // timeout elapses even if the condition hasn't been signalled: in this
-    // case, the return value is wxCOND_TIMEOUT, otherwise (i.e. in case of a
-    // normal return) it is wxCOND_NO_ERROR.
+    // case, the return value is wxCondError::Timeout, otherwise (i.e. in case of a
+    // normal return) it is wxCondError::None.
     //
     // the timeout parameter specifies an interval that needs to be waited for
     // in milliseconds
@@ -411,12 +411,12 @@ public:
     // Acquire())
     wxSemaError Wait();
 
-    // same as Wait(), but does not block, returns wxSEMA_NO_ERROR if
-    // successful and wxSEMA_BUSY if the count is currently zero
+    // same as Wait(), but does not block, returns wxSemaError::None if
+    // successful and wxSemaError::Busy if the count is currently zero
     wxSemaError TryWait();
 
-    // same as Wait(), but as a timeout limit, returns wxSEMA_NO_ERROR if the
-    // semaphore was acquired and wxSEMA_TIMEOUT if the timeout has elapsed
+    // same as Wait(), but as a timeout limit, returns wxSemaError::None if the
+    // semaphore was acquired and wxSemaError::Timeout if the timeout has elapsed
     wxSemaError WaitTimeout(unsigned long milliseconds);
 
     // increments the semaphore count and signals one of the waiting threads
@@ -503,7 +503,7 @@ public:
 
     // constructor only creates the C++ thread object and doesn't create (or
     // start) the real thread
-    wxThread(wxThreadKind kind = wxTHREAD_DETACHED);
+    wxThread(wxThreadKind kind =  wxThreadKind::Detached);
 
     // functions that change the thread state: all these can only be called
     // from _another_ thread (typically the thread that created this one, e.g.
@@ -529,13 +529,13 @@ public:
         //
         // will fill the rc pointer with the thread exit code if it's !NULL
     wxThreadError Delete(ExitCode *rc = nullptr,
-                         wxThreadWait waitMode = wxTHREAD_WAIT_DEFAULT);
+                         wxThreadWait waitMode = wxThreadWait::Default);
 
         // waits for a joinable thread to finish and returns its exit code
         //
         // Returns (ExitCode)-1 on error (for example, if the thread is not
         // joinable)
-    ExitCode Wait(wxThreadWait waitMode = wxTHREAD_WAIT_DEFAULT);
+    ExitCode Wait(wxThreadWait waitMode = wxThreadWait::Default);
 
         // kills the thread without giving it any chance to clean up - should
         // not be used under normal circumstances, use Delete() instead.
@@ -583,7 +583,7 @@ public:
 #endif // __WINDOWS__
 
     wxThreadKind GetKind() const
-        { return m_isDetached ? wxTHREAD_DETACHED : wxTHREAD_JOINABLE; }
+        { return m_isDetached ?  wxThreadKind::Detached :  wxThreadKind::Joinable; }
 
     // Returns true if the thread was asked to terminate: this function should
     // be called by the thread from time to time, otherwise the main thread
@@ -690,7 +690,7 @@ private:
         {
             m_thread->Kill();
 
-            if ( m_kind == wxTHREAD_JOINABLE )
+            if ( m_kind ==  wxThreadKind::Joinable )
               delete m_thread;
 
             m_thread = nullptr;
@@ -699,7 +699,7 @@ private:
 
 public:
     // constructor only initializes m_thread to NULL
-    wxThreadHelper(wxThreadKind kind = wxTHREAD_JOINABLE)
+    wxThreadHelper(wxThreadKind kind =  wxThreadKind::Joinable)
         :  m_kind(kind) { }
 
     // destructor deletes m_thread
@@ -707,7 +707,7 @@ public:
 
     // create a new thread (and optionally set the stack size on platforms that
     // support/need that), call Run() to start it
-    wxThreadError CreateThread(wxThreadKind kind = wxTHREAD_JOINABLE,
+    wxThreadError CreateThread(wxThreadKind kind =  wxThreadKind::Joinable,
                                unsigned int stackSize = 0)
     {
         KillThread();
@@ -751,7 +751,7 @@ inline void *wxThreadHelperThread::Entry()
     // wxThreadHelper::GetThread will not return an invalid pointer.
     // And that wxThreadHelper::KillThread will not try to kill
     // an already deleted thread
-    if ( m_owner.m_kind == wxTHREAD_DETACHED )
+    if ( m_owner.m_kind ==  wxThreadKind::Detached )
         m_owner.m_thread = nullptr;
 
     return result;

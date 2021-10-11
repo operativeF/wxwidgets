@@ -1347,7 +1347,7 @@ wxThread::wxThread(wxThreadKind kind)
 
     m_internal = new wxThreadInternal();
 
-    m_isDetached = kind == wxTHREAD_DETACHED;
+    m_isDetached = kind ==  wxThreadKind::Detached;
 }
 
 wxThreadError wxThread::Create(unsigned int stackSize)

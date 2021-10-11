@@ -55,7 +55,7 @@ public:
     // port is the port to listen on and function will be called on each
     // accepted socket
     SocketServerThread(int port, void (*accept)(wxSocketBase&))
-        : wxThread(wxTHREAD_JOINABLE),
+        : wxThread( wxThreadKind::Joinable),
           m_port(port),
           m_accept(accept)
     {
@@ -191,11 +191,11 @@ void socketStream::setUp()
 
         m_writeThread =
             new SocketServerThread(TEST_PORT_READ, &socketStream::WriteSocket);
-        CPPUNIT_ASSERT_EQUAL( wxCOND_NO_ERROR, gs_cond.Wait() );
+        CPPUNIT_ASSERT_EQUAL( wxCondError::None, gs_cond.Wait() );
 
         m_readThread =
             new SocketServerThread(TEST_PORT_WRITE, &socketStream::ReadSocket);
-        CPPUNIT_ASSERT_EQUAL( wxCOND_NO_ERROR, gs_cond.Wait() );
+        CPPUNIT_ASSERT_EQUAL( wxCondError::None, gs_cond.Wait() );
     }
 
     m_readSocket = new wxSocketClient(ms_flags);

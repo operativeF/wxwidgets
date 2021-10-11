@@ -239,14 +239,14 @@ bool wxGUIAppTraits::DoMessageFromThreadWait()
     return evtLoop->Dispatch();
 }
 
-DWORD wxGUIAppTraits::WaitForThread(WXHANDLE hThread, unsigned int flags)
+DWORD wxGUIAppTraits::WaitForThread(WXHANDLE hThread, wxThreadWait flags)
 {
     // We only ever dispatch messages from the main thread and, additionally,
     // even from the main thread we shouldn't wait for the message if we don't
     // have a running event loop as we would never remove them from the message
     // queue then and so we would enter an infinite loop as
     // MsgWaitForMultipleObjects() keeps returning WAIT_OBJECT_0 + 1.
-    if ( flags == wxTHREAD_WAIT_YIELD && wxIsMainThread() )
+    if ( flags == wxThreadWait::Yield && wxIsMainThread() )
     {
         auto* const evtLoop = dynamic_cast<wxMSWEventLoopBase *>(wxEventLoop::GetActive());
 

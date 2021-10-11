@@ -26,7 +26,7 @@ enum wxFDIODispatcherEntryFlags
 class WXDLLIMPEXP_BASE wxFDIODispatcher
 {
 public:
-    enum { TIMEOUT_INFINITE = -1 };
+    static constexpr auto TIMEOUT_INFINITE = -1;
 
     // return the global dispatcher to be used for IO events, can be NULL only
     // if wxSelectDispatcher wasn't compiled into the library at all as

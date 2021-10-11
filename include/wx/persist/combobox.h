@@ -36,7 +36,7 @@ public:
     // Notice that we must have some limit, as otherwise the length of the
     // items string in the config would be unbounded, which certainly wouldn't
     // be a good idea.
-    enum { MaxSavedItemsCount = 10 };
+    static constexpr auto MaxSavedItemsCount = 10;
 
     explicit wxPersistentComboBox(wxComboBox* combobox)
         : wxPersistentWindow<wxComboBox>(combobox)

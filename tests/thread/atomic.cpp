@@ -44,7 +44,7 @@ enum class ETestType
 class AtomicThread : public wxThread
 {
 public:
-    AtomicThread(std::atomic_int& operateOn, ETestType testType) : wxThread(wxTHREAD_JOINABLE),
+    AtomicThread(std::atomic_int& operateOn, ETestType testType) : wxThread( wxThreadKind::Joinable),
         m_operateOn(operateOn), m_testType(testType) {}
 
     // thread execution starts here
@@ -76,7 +76,7 @@ static void TestWithThreads(int count, ETestType testType)
 
         AtomicThread* thread = new AtomicThread(int1, actualThreadType);
 
-        if (thread->Create() != wxTHREAD_NO_ERROR)
+        if (thread->Create() != wxThreadError::None)
         {
             wxLogError(wxT("Can't create thread!"));
             delete thread;

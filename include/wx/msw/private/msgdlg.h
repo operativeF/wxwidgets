@@ -30,7 +30,7 @@ namespace wxMSWMessageDialog
     class wxMSWTaskDialogConfig
     {
     public:
-        enum { MAX_BUTTONS = 4  };
+        static constexpr auto MAX_BUTTONS = 4;
 
         wxMSWTaskDialogConfig()
             : buttons(new TASKDIALOG_BUTTON[MAX_BUTTONS])

@@ -217,18 +217,18 @@ wxMutexError wxMutexInternal::TryLock()
     const wxMutexError rc = LockTimeout(0);
 
     // we have a special return code for timeout in this case
-    return rc == wxMUTEX_TIMEOUT ? wxMUTEX_BUSY : rc;
+    return rc == wxMutexError::Timeout ? wxMutexError::Busy : rc;
 }
 
 wxMutexError wxMutexInternal::LockTimeout(DWORD milliseconds)
 {
-    if (m_type == wxMUTEX_DEFAULT)
+    if (m_type == wxMutexType::Default)
     {
         // Don't allow recursive
         if (m_owningThread != 0)
         {
             if (m_owningThread == wxThread::GetCurrentId())
-                return wxMUTEX_DEAD_LOCK;
+                return wxMutexError::DeadLock;
         }
     }
 
@@ -246,7 +246,7 @@ wxMutexError wxMutexInternal::LockTimeout(DWORD milliseconds)
             break;
 
         case WAIT_TIMEOUT:
-            return wxMUTEX_TIMEOUT;
+            return wxMutexError::Timeout;
 
         default:
             wxFAIL_MSG(wxT("impossible return value in wxMutex::Lock"));
@@ -254,16 +254,16 @@ wxMutexError wxMutexInternal::LockTimeout(DWORD milliseconds)
 
         case WAIT_FAILED:
             wxLogLastError(wxT("WaitForSingleObject(mutex)"));
-            return wxMUTEX_MISC_ERROR;
+            return wxMutexError::MiscError;
     }
 
-    if (m_type == wxMUTEX_DEFAULT)
+    if (m_type == wxMutexType::Default)
     {
         // required for checking recursiveness
         m_owningThread = wxThread::GetCurrentId();
     }
 
-    return wxMUTEX_NO_ERROR;
+    return wxMutexError::None;
 }
 
 wxMutexError wxMutexInternal::Unlock()
@@ -275,10 +275,10 @@ wxMutexError wxMutexInternal::Unlock()
     {
         wxLogLastError(wxT("ReleaseMutex()"));
 
-        return wxMUTEX_MISC_ERROR;
+        return wxMutexError::MiscError;
     }
 
-    return wxMUTEX_NO_ERROR;
+    return wxMutexError::None;
 }
 
 // --------------------------------------------------------------------------
@@ -302,8 +302,8 @@ public:
     wxSemaError TryWait()
     {
         wxSemaError rc = WaitTimeout(0);
-        if ( rc == wxSEMA_TIMEOUT )
-            rc = wxSEMA_BUSY;
+        if ( rc == wxSemaError::Timeout )
+            rc = wxSemaError::Busy;
 
         return rc;
     }
@@ -355,16 +355,16 @@ wxSemaError wxSemaphoreInternal::WaitTimeout(unsigned long milliseconds)
     switch ( rc )
     {
         case WAIT_OBJECT_0:
-           return wxSEMA_NO_ERROR;
+           return wxSemaError::None;
 
         case WAIT_TIMEOUT:
-           return wxSEMA_TIMEOUT;
+           return wxSemaError::Timeout;
 
         default:
             wxLogLastError(wxT("WaitForSingleObject(semaphore)"));
     }
 
-    return wxSEMA_MISC_ERROR;
+    return wxSemaError::MiscError;
 }
 
 wxSemaError wxSemaphoreInternal::Post()
@@ -373,16 +373,16 @@ wxSemaError wxSemaphoreInternal::Post()
     {
         if ( GetLastError() == ERROR_TOO_MANY_POSTS )
         {
-            return wxSEMA_OVERFLOW;
+            return wxSemaError::Overflow;
         }
         else
         {
             wxLogLastError(wxT("ReleaseSemaphore"));
-            return wxSEMA_MISC_ERROR;
+            return wxSemaError::MiscError;
         }
     }
 
-    return wxSEMA_NO_ERROR;
+    return wxSemaError::None;
 }
 
 // ----------------------------------------------------------------------------
@@ -677,12 +677,12 @@ wxThreadError wxThreadInternal::Kill()
     {
         wxLogSysError(_("Couldn't terminate thread"));
 
-        return wxTHREAD_MISC_ERROR;
+        return wxThreadError::MiscError;
     }
 
     Free();
 
-    return wxTHREAD_NO_ERROR;
+    return wxThreadError::None;
 }
 
 wxThreadError
@@ -787,7 +787,7 @@ wxThreadInternal::WaitForTerminate(wxCriticalSection& cs,
                 // error
                 wxLogSysError(_("Cannot wait for thread termination"));
                 Kill();
-                return wxTHREAD_KILLED;
+                return wxThreadError::Killed;
 
             case WAIT_OBJECT_0:
                 // thread we're waiting for terminated
@@ -810,7 +810,7 @@ wxThreadInternal::WaitForTerminate(wxCriticalSection& cs,
                         // WM_QUIT received: kill the thread
                         Kill();
 
-                        return wxTHREAD_KILLED;
+                        return wxThreadError::Killed;
                     }
                 }
                 break;
@@ -855,7 +855,7 @@ wxThreadInternal::WaitForTerminate(wxCriticalSection& cs,
     Free();
 
 
-    return rc == THREAD_ERROR_EXIT ? wxTHREAD_MISC_ERROR : wxTHREAD_NO_ERROR;
+    return rc == THREAD_ERROR_EXIT ? wxThreadError::MiscError : wxThreadError::None;
 }
 
 bool wxThreadInternal::Suspend()
@@ -1024,7 +1024,7 @@ wxThread::wxThread(wxThreadKind kind)
 {
     m_internal = new wxThreadInternal(this);
 
-    m_isDetached = kind == wxTHREAD_DETACHED;
+    m_isDetached = kind ==  wxThreadKind::Detached;
 }
 
 wxThread::~wxThread()
@@ -1040,9 +1040,9 @@ wxThreadError wxThread::Create(unsigned int stackSize)
     wxCriticalSectionLocker lock(m_critsect);
 
     if ( !m_internal->Create(this, stackSize) )
-        return wxTHREAD_NO_RESOURCE;
+        return wxThreadError::NoResource;
 
-    return wxTHREAD_NO_ERROR;
+    return wxThreadError::None;
 }
 
 wxThreadError wxThread::Run()
@@ -1054,10 +1054,10 @@ wxThreadError wxThread::Run()
     if ( !m_internal->GetHandle() )
     {
         if ( !m_internal->Create(this, 0) )
-            return wxTHREAD_NO_RESOURCE;
+            return wxThreadError::NoResource;
     }
 
-    wxCHECK_MSG( m_internal->GetState() == STATE_NEW, wxTHREAD_RUNNING,
+    wxCHECK_MSG( m_internal->GetState() == STATE_NEW, wxThreadError::Running,
              wxT("thread may only be started once after Create()") );
 
     // the thread has just been created and is still suspended - let it run
@@ -1071,14 +1071,14 @@ wxThreadError wxThread::Pause()
 {
     wxCriticalSectionLocker lock(m_critsect);
 
-    return m_internal->Suspend() ? wxTHREAD_NO_ERROR : wxTHREAD_MISC_ERROR;
+    return m_internal->Suspend() ? wxThreadError::None : wxThreadError::MiscError;
 }
 
 wxThreadError wxThread::Resume()
 {
     wxCriticalSectionLocker lock(m_critsect);
 
-    return m_internal->Resume() ? wxTHREAD_NO_ERROR : wxTHREAD_MISC_ERROR;
+    return m_internal->Resume() ? wxThreadError::None : wxThreadError::MiscError;
 }
 
 // stopping thread
@@ -1106,7 +1106,7 @@ wxThreadError wxThread::Delete(ExitCode *pRc, wxThreadWait waitMode)
 wxThreadError wxThread::Kill()
 {
     if ( !IsRunning() )
-        return wxTHREAD_NOT_RUNNING;
+        return wxThreadError::NotRunning;
 
     const wxThreadError rc = m_internal->Kill();
 

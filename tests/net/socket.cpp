@@ -257,7 +257,7 @@ void SocketTestCase::ReadAnotherThread()
     {
     public:
         SocketThread()
-            : wxThread(wxTHREAD_JOINABLE)
+            : wxThread( wxThreadKind::Joinable)
         {
         }
 

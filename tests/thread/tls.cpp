@@ -48,7 +48,7 @@ class TLSTestThread : public wxThread
 {
 public:
     // ctor both creates and starts the thread
-    TLSTestThread() : wxThread(wxTHREAD_JOINABLE) { Create(); Run(); }
+    TLSTestThread() : wxThread( wxThreadKind::Joinable) { Create(); Run(); }
 
     void *Entry() override
     {

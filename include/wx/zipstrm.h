@@ -216,7 +216,7 @@ public:
 
 protected:
     // Internal attributes
-    enum { TEXT_ATTR = 1 };
+    static constexpr auto TEXT_ATTR = 1;
 
     // protected Get accessors
     int GetVersionNeeded() const                { return m_VersionNeeded; }

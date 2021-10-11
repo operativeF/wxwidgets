@@ -75,7 +75,7 @@ public:
 private:
     // Currently this is just a constant, we could make it a template parameter
     // if we wanted.
-    enum { MAX_NAME_LEN = 1024 };
+    static constexpr auto MAX_NAME_LEN = 1024;
 
     BYTE m_buffer[sizeof(T) + MAX_NAME_LEN*sizeof(TCHAR)];
 };

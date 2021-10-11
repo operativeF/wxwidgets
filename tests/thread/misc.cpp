@@ -26,7 +26,7 @@ static wxSemaphore gs_cond;
 class MyJoinableThread : public wxThread
 {
 public:
-    MyJoinableThread(size_t n) : wxThread(wxTHREAD_JOINABLE)
+    MyJoinableThread(size_t n) : wxThread( wxThreadKind::Joinable)
         { m_n = n; Create(); }
 
     // thread execution starts here
@@ -151,7 +151,7 @@ class MySemaphoreThread : public wxThread
 {
 public:
     MySemaphoreThread(int i, wxSemaphore *sem)
-        : wxThread(wxTHREAD_JOINABLE),
+        : wxThread( wxThreadKind::Joinable),
           m_sem(sem),
           m_i(i)
     {
@@ -237,7 +237,7 @@ void MiscThreadTestCase::TestJoinable()
 {
     // calc 10! in the background
     MyJoinableThread thread(10);
-    CPPUNIT_ASSERT_EQUAL( wxTHREAD_NO_ERROR, thread.Run() );
+    CPPUNIT_ASSERT_EQUAL( wxThreadError::None, thread.Run() );
     CPPUNIT_ASSERT_EQUAL( 362880, (wxUIntPtr)thread.Wait() );
 }
 
@@ -257,11 +257,11 @@ void MiscThreadTestCase::TestDetached()
 
     for ( n = 0; n < nThreads; n++ )
     {
-        CPPUNIT_ASSERT_EQUAL( wxTHREAD_NO_ERROR, threads[n]->Run() );
+        CPPUNIT_ASSERT_EQUAL( wxThreadError::None, threads[n]->Run() );
     }
 
     // wait until all threads terminate
-    CPPUNIT_ASSERT_EQUAL( wxSEMA_NO_ERROR, gs_cond.Wait() );
+    CPPUNIT_ASSERT_EQUAL( wxSemaError::None, gs_cond.Wait() );
 }
 
 void MiscThreadTestCase::TestSemaphore()
@@ -274,7 +274,7 @@ void MiscThreadTestCase::TestSemaphore()
     for ( int i = 0; i < 3*SEM_LIMIT; i++ )
     {
         threads.Add(new MySemaphoreThread(i, &sem));
-        CPPUNIT_ASSERT_EQUAL( wxTHREAD_NO_ERROR, threads.Last()->Run() );
+        CPPUNIT_ASSERT_EQUAL( wxThreadError::None, threads.Last()->Run() );
     }
 
     for ( size_t n = 0; n < threads.GetCount(); n++ )
@@ -288,7 +288,7 @@ void MiscThreadTestCase::TestThreadSuspend()
 {
     MyDetachedThread *thread = new MyDetachedThread(15, 'X');
 
-    CPPUNIT_ASSERT_EQUAL( wxTHREAD_NO_ERROR, thread->Run() );
+    CPPUNIT_ASSERT_EQUAL( wxThreadError::None, thread->Run() );
 
     // this is for this demo only, in a real life program we'd use another
     // condition variable which would be signaled from wxThread::Entry() to
@@ -308,11 +308,11 @@ void MiscThreadTestCase::TestThreadSuspend()
             wxMilliSleep(300);
         }
 
-        CPPUNIT_ASSERT_EQUAL( wxTHREAD_NO_ERROR, thread->Resume() );
+        CPPUNIT_ASSERT_EQUAL( wxThreadError::None, thread->Resume() );
     }
 
     // wait until the thread terminates
-    CPPUNIT_ASSERT_EQUAL( wxSEMA_NO_ERROR, gs_cond.Wait() );
+    CPPUNIT_ASSERT_EQUAL( wxSemaError::None, gs_cond.Wait() );
 }
 
 void MiscThreadTestCase::TestThreadDelete()
@@ -324,38 +324,38 @@ void MiscThreadTestCase::TestThreadDelete()
     // terminated will lead to a crash!
 
     MyDetachedThread *thread0 = new MyDetachedThread(30, 'W');
-    CPPUNIT_ASSERT_EQUAL( wxTHREAD_MISC_ERROR, thread0->Delete() );
+    CPPUNIT_ASSERT_EQUAL( wxThreadError::MiscError, thread0->Delete() );
         // delete a thread which didn't start to run yet.
 
     MyDetachedThread *thread1 = new MyDetachedThread(30, 'Y');
-    CPPUNIT_ASSERT_EQUAL( wxTHREAD_NO_ERROR, thread1->Run() );
+    CPPUNIT_ASSERT_EQUAL( wxThreadError::None, thread1->Run() );
     wxMilliSleep(300);
-    CPPUNIT_ASSERT_EQUAL( wxTHREAD_NO_ERROR, thread1->Delete() );
+    CPPUNIT_ASSERT_EQUAL( wxThreadError::None, thread1->Delete() );
         // delete a running thread
 
     MyDetachedThread *thread2 = new MyDetachedThread(30, 'Z');
-    CPPUNIT_ASSERT_EQUAL( wxTHREAD_NO_ERROR, thread2->Run() );
+    CPPUNIT_ASSERT_EQUAL( wxThreadError::None, thread2->Run() );
     wxMilliSleep(300);
-    CPPUNIT_ASSERT_EQUAL( wxTHREAD_NO_ERROR, thread2->Pause() );
-    CPPUNIT_ASSERT_EQUAL( wxTHREAD_NO_ERROR, thread2->Delete() );
+    CPPUNIT_ASSERT_EQUAL( wxThreadError::None, thread2->Pause() );
+    CPPUNIT_ASSERT_EQUAL( wxThreadError::None, thread2->Delete() );
         // delete a sleeping thread
 
     MyJoinableThread thread3(20);
-    CPPUNIT_ASSERT_EQUAL( wxTHREAD_NO_ERROR, thread3.Run() );
-    CPPUNIT_ASSERT_EQUAL( wxTHREAD_NO_ERROR, thread3.Delete() );
+    CPPUNIT_ASSERT_EQUAL( wxThreadError::None, thread3.Run() );
+    CPPUNIT_ASSERT_EQUAL( wxThreadError::None, thread3.Delete() );
         // delete a joinable running thread
 
     MyJoinableThread thread4(2);
-    CPPUNIT_ASSERT_EQUAL( wxTHREAD_NO_ERROR, thread4.Run() );
+    CPPUNIT_ASSERT_EQUAL( wxThreadError::None, thread4.Run() );
     wxMilliSleep(300);
-    CPPUNIT_ASSERT_EQUAL( wxTHREAD_NO_ERROR, thread4.Delete() );
+    CPPUNIT_ASSERT_EQUAL( wxThreadError::None, thread4.Delete() );
         // delete a joinable thread which already terminated
 }
 
 void MiscThreadTestCase::TestThreadRun()
 {
     MyJoinableThread thread1(2);
-    CPPUNIT_ASSERT_EQUAL( wxTHREAD_NO_ERROR, thread1.Run() );
+    CPPUNIT_ASSERT_EQUAL( wxThreadError::None, thread1.Run() );
     thread1.Wait();     // wait until the thread ends
 
     // verify that running twice the same thread fails
@@ -383,7 +383,7 @@ void MiscThreadTestCase::TestThreadConditions()
 
     for ( n = 0; n < WXSIZEOF(threads); n++ )
     {
-        CPPUNIT_ASSERT_EQUAL( wxTHREAD_NO_ERROR, threads[n]->Run() );
+        CPPUNIT_ASSERT_EQUAL( wxThreadError::None, threads[n]->Run() );
     }
 
     // wait until all threads run
@@ -391,7 +391,7 @@ void MiscThreadTestCase::TestThreadConditions()
     size_t nRunning = 0;
     while ( nRunning < WXSIZEOF(threads) )
     {
-        CPPUNIT_ASSERT_EQUAL( wxSEMA_NO_ERROR, gs_cond.Wait() );
+        CPPUNIT_ASSERT_EQUAL( wxSemaError::None, gs_cond.Wait() );
 
         nRunning++;
 
@@ -402,13 +402,13 @@ void MiscThreadTestCase::TestThreadConditions()
 
 #if 1
     // now wake one of them up
-    CPPUNIT_ASSERT_EQUAL( wxCOND_NO_ERROR, condition.Signal() );
+    CPPUNIT_ASSERT_EQUAL( wxCondError::None, condition.Signal() );
 #endif
 
     wxMilliSleep(200);
 
     // wake all the (remaining) threads up, so that they can exit
-    CPPUNIT_ASSERT_EQUAL( wxCOND_NO_ERROR, condition.Broadcast() );
+    CPPUNIT_ASSERT_EQUAL( wxCondError::None, condition.Broadcast() );
 
     // give them time to terminate (dirty!)
     wxMilliSleep(500);

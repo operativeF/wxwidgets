@@ -418,7 +418,8 @@ class wxListFindTimer: public wxTimer
 {
 public:
     // reset the current prefix after half a second of inactivity
-    enum { DELAY = 500 };
+    // FIXME: Use milliseconds
+    static constexpr auto DELAY = 500;
 
     wxListFindTimer( wxListMainWindow *owner )
         : m_owner(owner)

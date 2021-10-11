@@ -435,7 +435,7 @@ public:
 	wxMemoryBufferData& operator=(const wxMemoryBufferData&) = delete;
     
     // the initial size and also the size added by ResizeIfNeeded()
-    enum { DefBufSize = 1024 };
+    static constexpr auto DefBufSize = 1024;
 
     friend class wxMemoryBuffer;
 

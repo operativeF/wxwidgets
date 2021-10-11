@@ -102,10 +102,10 @@ public:
         {
             wxCondError result = m_conditionNotEmpty.WaitTimeout(timeout);
 
-            if ( result == wxCOND_NO_ERROR )
+            if ( result == wxCondError::None )
                 continue;
 
-            wxCHECK( result == wxCOND_TIMEOUT, wxMessageQueueError::Misc );
+            wxCHECK( result == wxCondError::Timeout, wxMessageQueueError::Misc );
 
             const wxMilliClock_t now = wxGetLocalTimeMillis();
 
@@ -136,7 +136,7 @@ public:
         {
             wxCondError result = m_conditionNotEmpty.Wait();
 
-            wxCHECK( result == wxCOND_NO_ERROR, wxMessageQueueError::Misc );
+            wxCHECK( result == wxCondError::None, wxMessageQueueError::Misc );
         }
 
         msg = m_messages.front();

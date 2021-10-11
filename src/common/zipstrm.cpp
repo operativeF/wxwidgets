@@ -491,7 +491,7 @@ private:
     wxFileOffset m_pos;
     wxTeeInputStream *m_tee;
 
-    enum { BUFSIZE = 8192 };
+    static constexpr auto BUFSIZE = 8192;
     wxCharBuffer m_dummy;
 };
 

@@ -138,7 +138,7 @@ class wxProgressDialogTaskRunner : public wxThread
 {
 public:
     wxProgressDialogTaskRunner()
-        : wxThread(wxTHREAD_JOINABLE)
+        : wxThread( wxThreadKind::Joinable)
     {}
 
     wxProgressDialogSharedData* GetSharedDataObject()
@@ -932,13 +932,13 @@ bool wxProgressDialog::Show(bool show)
         }
 
         // Do launch the thread.
-        if ( m_taskDialogRunner->Create() != wxTHREAD_NO_ERROR )
+        if ( m_taskDialogRunner->Create() != wxThreadError::None )
         {
             wxLogError( "Unable to create thread!" );
             return false;
         }
 
-        if ( m_taskDialogRunner->Run() != wxTHREAD_NO_ERROR )
+        if ( m_taskDialogRunner->Run() != wxThreadError::None )
         {
             wxLogError( "Unable to start thread!" );
             return false;

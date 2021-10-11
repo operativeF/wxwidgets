@@ -39,7 +39,7 @@ class MyThread : public wxThread
 {
 public:
     MyThread(WaitTestType type, MyThread* next, int maxMsgCount)
-        : wxThread(wxTHREAD_JOINABLE),
+        : wxThread( wxThreadKind::Joinable),
         m_type(type), m_nextThread(next), m_maxMsgCount(maxMsgCount)
     {}
 
@@ -80,7 +80,7 @@ TEST_CASE("TestReceive")
         MyThread *thread =
             new MyThread(WaitInfinitlyLong, previousThread, msgCount);
 
-        CHECK_EQ ( thread->Create(), wxTHREAD_NO_ERROR );
+        CHECK_EQ ( thread->Create(), wxThreadError::None );
         threads.Add(thread);
     }
 
@@ -117,8 +117,8 @@ TEST_CASE("TestReceiveTimeout")
     MyThread* thread1 = new MyThread(WaitWithTimeout, nullptr, 2);
     MyThread* thread2 = new MyThread(WaitWithTimeout, nullptr, 2);
 
-    CHECK_EQ ( thread1->Create(), wxTHREAD_NO_ERROR );
-    CHECK_EQ ( thread2->Create(), wxTHREAD_NO_ERROR );
+    CHECK_EQ ( thread1->Create(), wxThreadError::None );
+    CHECK_EQ ( thread2->Create(), wxThreadError::None );
 
     thread1->Run();
     thread2->Run();
