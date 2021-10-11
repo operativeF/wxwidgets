@@ -627,32 +627,39 @@ void wxStaticBox::OnPaint(wxPaintEvent& WXUNUSED(event))
         // more similarly to a plain text label.
         const int gap = FromDIP(LABEL_HORZ_BORDER);
 
-        dc.Blit(border, 0,
-                labelRect.GetLeft() - gap - border,
-                borderTop,
-                &memdc, border, 0);
-        dc.Blit(labelRect.GetRight() + gap, 0,
-                rc.right - (labelRect.GetRight() + gap),
-                borderTop,
-                &memdc, border, 0);
+        dc.Blit(wxPoint{border, 0},
+                wxSize{labelRect.GetLeft() - gap - border, borderTop},
+                &memdc,
+                wxPoint{border, 0});
+        dc.Blit(wxPoint{labelRect.GetRight() + gap, 0},
+                wxSize{rc.right - (labelRect.GetRight() + gap), borderTop},
+                &memdc,
+                wxPoint{border, 0});
     }
     else
     {
-        dc.Blit(border, 0, rc.right - border, borderTop,
-                &memdc, border, 0);
+        dc.Blit(wxPoint{border, 0},
+                wxSize{rc.right - border, borderTop},
+                &memdc,
+                wxPoint{border, 0});
     }
 
     // bottom
-    dc.Blit(border, rc.bottom - border, rc.right - border, border,
-            &memdc, border, rc.bottom - border);
+    dc.Blit(wxPoint{border, rc.bottom - border},
+            wxSize{rc.right - border, border},
+            &memdc,
+            wxPoint{border, rc.bottom - border});
     // left
-    dc.Blit(0, 0, border, rc.bottom,
-            &memdc, 0, 0);
+    dc.Blit(wxPoint{0, 0},
+            wxSize{border, rc.bottom},
+            &memdc,
+            wxPoint{0, 0});
     // right (note that upper and bottom right corners were already part of the
-    // first two blits so we shouldn't overwrite them here to avoi flicker)
-    dc.Blit(rc.right - border, borderTop,
-            border, rc.bottom - borderTop - border,
-            &memdc, rc.right - border, borderTop);
+    // first two blits so we shouldn't overwrite them here to avoid flicker)
+    dc.Blit(wxPoint{rc.right - border, borderTop},
+            wxSize{border, rc.bottom - borderTop - border},
+            &memdc,
+            wxPoint{rc.right - border, borderTop});
 
 
     // create the region excluding box children

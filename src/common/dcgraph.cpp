@@ -1025,20 +1025,20 @@ bool wxGCDCImpl::CanDrawBitmap() const
 
 bool wxGCDCImpl::DoBlit(
     wxCoord xdest, wxCoord ydest, wxCoord width, wxCoord height,
-    wxDC *source, wxCoord xsrc, wxCoord ysrc,
+    wxDC *source, wxPoint src,
     wxRasterOperationMode logical_func , bool useMask,
-    wxCoord xsrcMask, wxCoord ysrcMask )
+    wxPoint srcMask )
 {
     return DoStretchBlit( xdest, ydest, width, height,
-        source, xsrc, ysrc, width, height, logical_func, useMask,
-        xsrcMask,ysrcMask );
+        source, src, width, height, logical_func, useMask,
+        srcMask );
 }
 
 bool wxGCDCImpl::DoStretchBlit(
     wxCoord xdest, wxCoord ydest, wxCoord dstWidth, wxCoord dstHeight,
-    wxDC *source, wxCoord xsrc, wxCoord ysrc, wxCoord srcWidth, wxCoord srcHeight,
+    wxDC *source, wxPoint src, wxCoord srcWidth, wxCoord srcHeight,
     wxRasterOperationMode logical_func , bool useMask,
-    wxCoord xsrcMask, wxCoord ysrcMask )
+    wxPoint srcMask )
 {
     wxCHECK_MSG( IsOk(), false, wxT("wxGCDC(cg)::DoStretchBlit - invalid DC") );
     wxCHECK_MSG( source->IsOk(), false, wxT("wxGCDC(cg)::DoStretchBlit - invalid source DC") );
@@ -1055,8 +1055,8 @@ bool wxGCDCImpl::DoStretchBlit(
         return false;
     }
 
-    wxRect subrect(source->LogicalToDeviceX(xsrc),
-                   source->LogicalToDeviceY(ysrc),
+    wxRect subrect(source->LogicalToDeviceX(src.x),
+                   source->LogicalToDeviceY(src.y),
                    source->LogicalToDeviceXRel(srcWidth),
                    source->LogicalToDeviceYRel(srcHeight));
     const wxRect subrectOrig = subrect;
@@ -1081,10 +1081,9 @@ bool wxGCDCImpl::DoStretchBlit(
             m_graphicContext->SetAntialiasMode(wxAntialiasMode::None);
         }
 
-        if (xsrcMask == -1 && ysrcMask == -1)
+        if(srcMask == wxDefaultPosition)
         {
-            xsrcMask = xsrc;
-            ysrcMask = ysrc;
+            srcMask = src;
         }
 
         wxBitmap blit = source->GetAsBitmap( &subrect );
@@ -1206,7 +1205,7 @@ void wxGCDCImpl::DoDrawText(std::string_view str, wxPoint pt)
     // only so there won't be any infinite recursion here.
     if ( str.find('\n') != std::string_view::npos )
     {
-        GetOwner()->DrawLabel(str, wxRect(pt.x, pt.y, 0, 0));
+        GetOwner()->DrawLabel(str, wxRect{pt.x, pt.y, 0, 0});
         return;
     }
 

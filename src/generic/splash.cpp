@@ -160,7 +160,7 @@ static void wxDrawSplashBitmap(wxDC& dc, const wxBitmap& bitmap, int WXUNUSED(x)
 #endif // USE_PALETTE_IN_SPLASH
 
     dcMem.SelectObjectAsSource(bitmap);
-    dc.Blit(0, 0, std::lround(bitmap.GetScaledWidth()), std::lround(bitmap.GetScaledHeight()), &dcMem, 0, 0, wxRasterOperationMode::Copy,
+    dc.Blit(wxPoint{0, 0}, wxSize{std::lround(bitmap.GetScaledWidth()), std::lround(bitmap.GetScaledHeight())}, &dcMem, wxPoint{0, 0}, wxRasterOperationMode::Copy,
             true /* use mask */);
     dcMem.SelectObject(wxNullBitmap);
 

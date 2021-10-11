@@ -205,16 +205,16 @@ protected:
 
     bool DoBlit(wxCoord xdest, wxCoord ydest,
                         wxCoord w, wxCoord h,
-                        wxDC *source, wxCoord xsrc, wxCoord ysrc,
+                        wxDC *source, wxPoint src,
                         wxRasterOperationMode rop = wxRasterOperationMode::Copy,
                         bool useMask = false,
-                        wxCoord xsrcMask = wxDefaultCoord, wxCoord ysrcMask = wxDefaultCoord) override
+                        wxPoint srcMask = wxDefaultPosition) override
     {
         return m_dc.DoBlit(GetX(xdest, ydest), GetY(xdest, ydest),
                            GetX(w, h), GetY(w, h),
-                           source, GetX(xsrc, ysrc), GetY(xsrc, ysrc),
+                           source, wxPoint{GetX(src.x, src.y), GetY(src.x, src.y)},
                            rop, useMask,
-                           GetX(xsrcMask, ysrcMask), GetX(xsrcMask, ysrcMask));
+                           wxPoint{GetX(srcMask.x, srcMask.y), GetX(srcMask.x, srcMask.y)});
     }
 
     wxSize DoGetSize() const override

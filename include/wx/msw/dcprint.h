@@ -51,9 +51,9 @@ protected:
                               bool useMask = false) override;
     bool DoBlit(wxCoord xdest, wxCoord ydest,
                         wxCoord width, wxCoord height,
-                        wxDC *source, wxCoord xsrc, wxCoord ysrc,
+                        wxDC *source, wxPoint src,
                         wxRasterOperationMode rop = wxRasterOperationMode::Copy, bool useMask = false,
-                        wxCoord xsrcMask = wxDefaultCoord, wxCoord ysrcMask = wxDefaultCoord) override;
+                        wxPoint srcMask = wxDefaultPosition) override;
     wxSize DoGetSize() const override
     {
         return GetDeviceSize();

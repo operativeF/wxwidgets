@@ -571,12 +571,11 @@ bool
 wxDCImpl::DoStretchBlit(wxCoord xdest, wxCoord ydest,
                         wxCoord dstWidth, wxCoord dstHeight,
                         wxDC *source,
-                        wxCoord xsrc, wxCoord ysrc,
+                        wxPoint src,
                         wxCoord srcWidth, wxCoord srcHeight,
                         wxRasterOperationMode rop,
                         bool useMask,
-                        wxCoord xsrcMask,
-                        wxCoord ysrcMask)
+                        wxPoint srcMask)
 {
     wxCHECK_MSG( srcWidth && srcHeight && dstWidth && dstHeight, false,
                  wxT("invalid blit size") );
@@ -604,7 +603,7 @@ wxDCImpl::DoStretchBlit(wxCoord xdest, wxCoord ydest,
 
     const bool rc = DoBlit(0, 0, srcWidth, srcHeight,
                      source,
-                     xsrc, ysrc, rop, useMask, xsrcMask, ysrcMask);
+                     src, rop, useMask, srcMask);
 
     m_deviceOrigin.x = deviceOriginX;
     m_deviceOrigin.y = deviceOriginY;

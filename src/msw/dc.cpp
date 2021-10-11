@@ -365,9 +365,13 @@ BOOL GradientFill(HDC, PTRIVERTEX, ULONG, PVOID, ULONG, ULONG)
 // return true if we could draw the bitmap in one way or the other, false
 // otherwise
 static bool AlphaBlt(wxMSWDCImpl* dcSrc,
-                     int x, int y, int dstWidth, int dstHeight,
-                     int srcX, int srcY,
-                     int srcWidth, int srcHeight,
+                     int x, 
+                     int y, 
+                     int dstWidth, 
+                     int dstHeight,
+                     wxPoint src,
+                     int srcWidth, 
+                     int srcHeight,
                      HDC hdcSrc,
                      const wxBitmap& bmpSrc);
 
@@ -1342,7 +1346,7 @@ void wxMSWDCImpl::DoDrawBitmap( const wxBitmap &bmp, wxCoord x, wxCoord y, bool 
         MemoryHDC hdcMem;
         SelectInHDC select(hdcMem, GetHbitmapOf(curBmp));
 
-        if ( AlphaBlt(this, x, y, width, height, 0, 0, width, height, hdcMem, curBmp) )
+        if ( AlphaBlt(this, x, y, width, height, wxPoint{0, 0}, width, height, hdcMem, curBmp) )
         {
             CalcBoundingBox(x, y);
             CalcBoundingBox(x + bmp.GetWidth(), y + bmp.GetHeight());
@@ -1419,7 +1423,7 @@ void wxMSWDCImpl::DoDrawBitmap( const wxBitmap &bmp, wxCoord x, wxCoord y, bool 
             memDC.SetLayoutDirection(GetLayoutDirection());
             memDC.SelectObjectAsSource(bmp);
 
-            GetOwner()->Blit(x, y, width, height, &memDC, 0, 0, wxRasterOperationMode::Copy, useMask);
+            GetOwner()->Blit(wxPoint{x, y}, wxSize{width, height}, &memDC, wxPoint{0, 0}, wxRasterOperationMode::Copy, useMask);
         }
     }
     else // no mask, just use BitBlt()
@@ -2208,20 +2212,20 @@ void wxMSWDCImpl::ResetTransformMatrix()
 bool wxMSWDCImpl::DoBlit(wxCoord dstX, wxCoord dstY,
                   wxCoord dstWidth, wxCoord dstHeight,
                   wxDC *source,
-                  wxCoord srcX, wxCoord srcY,
+                  wxPoint src,
                   wxRasterOperationMode rop, bool useMask,
-                  wxCoord srcMaskX, wxCoord srcMaskY)
+                  wxPoint srcMask)
 {
-    return DoStretchBlit(dstX, dstY, dstWidth, dstHeight, source, srcX, srcY, dstWidth, dstHeight, rop, useMask, srcMaskX, srcMaskY);
+    return DoStretchBlit(dstX, dstY, dstWidth, dstHeight, source, src, dstWidth, dstHeight, rop, useMask, srcMask);
 }
 
 bool wxMSWDCImpl::DoStretchBlit(wxCoord xdest, wxCoord ydest,
                          wxCoord dstWidth, wxCoord dstHeight,
                          wxDC *source,
-                         wxCoord xsrc, wxCoord ysrc,
+                         wxPoint src,
                          wxCoord srcWidth, wxCoord srcHeight,
                          wxRasterOperationMode rop, bool useMask,
-                         wxCoord xsrcMask, wxCoord ysrcMask)
+                         wxPoint srcMask)
 {
     wxCHECK_MSG( source, false, wxT("wxMSWDCImpl::Blit(): NULL wxDC pointer") );
 
@@ -2241,7 +2245,7 @@ bool wxMSWDCImpl::DoStretchBlit(wxCoord xdest, wxCoord ydest,
             (m_selectedBitmap.IsOk() && m_selectedBitmap.HasAlpha())) )
     {
         if ( AlphaBlt(this, xdest, ydest, dstWidth, dstHeight,
-                      xsrc, ysrc, srcWidth, srcHeight, hdcSrc, bmpSrc) )
+                      src, srcWidth, srcHeight, hdcSrc, bmpSrc) )
         {
             CalcBoundingBox(xdest, ydest);
             CalcBoundingBox(xdest + dstWidth, ydest + dstHeight);
@@ -2262,9 +2266,9 @@ bool wxMSWDCImpl::DoStretchBlit(wxCoord xdest, wxCoord ydest,
         }
     }
 
-    if (xsrcMask == -1 && ysrcMask == -1)
+    if (srcMask == wxDefaultPosition)
     {
-        xsrcMask = xsrc; ysrcMask = ysrc;
+        srcMask = src;
     }
 
     wxTextColoursChanger textCol(GetHdc(), *this);
@@ -2327,9 +2331,9 @@ bool wxMSWDCImpl::DoStretchBlit(wxCoord xdest, wxCoord ydest,
                             GetHdc(),
                             xdest, ydest, dstWidth, dstHeight,
                             hdcSrc,
-                            xsrc, ysrc,
+                            src.x, src.y,
                             (HBITMAP)mask->GetMaskBitmap(),
-                            xsrcMask, ysrcMask,
+                            srcMask.x, srcMask.y,
                             MAKEROP4(dwRop, DSTCOPY)
                             ) != 0;
             }
@@ -2374,7 +2378,7 @@ bool wxMSWDCImpl::DoStretchBlit(wxCoord xdest, wxCoord ydest,
 
             // copy src to buffer using selected raster op
             if ( !::StretchBlt(dc_buffer, 0, 0, dstWidth, dstHeight,
-                               hdcSrc, xsrc, ysrc, srcWidth, srcHeight, dwRop) )
+                               hdcSrc, src.x, src.y, srcWidth, srcHeight, dwRop) )
             {
                 wxLogLastError(wxT("StretchBlt"));
             }
@@ -2383,7 +2387,7 @@ bool wxMSWDCImpl::DoStretchBlit(wxCoord xdest, wxCoord ydest,
             {
                 wxTextColoursChanger textCol2(GetHdc(), *wxBLACK, *wxWHITE);
                 if ( !::StretchBlt(dc_buffer, 0, 0, dstWidth, dstHeight,
-                                   dc_mask, xsrcMask, ysrcMask,
+                                   dc_mask, srcMask.x, srcMask.y,
                                    srcWidth, srcHeight, SRCAND) )
                 {
                     wxLogLastError(wxT("StretchBlt"));
@@ -2393,7 +2397,7 @@ bool wxMSWDCImpl::DoStretchBlit(wxCoord xdest, wxCoord ydest,
                 ::SetBkColor(GetHdc(), RGB(0, 0, 0));
                 ::SetTextColor(GetHdc(), RGB(255, 255, 255));
                 if ( !::StretchBlt(GetHdc(), xdest, ydest, dstWidth, dstHeight,
-                                   dc_mask, xsrcMask, ysrcMask,
+                                   dc_mask, srcMask.x, srcMask.y,
                                    srcWidth, srcHeight, SRCAND) )
                 {
                     wxLogLastError(wxT("StretchBlt"));
@@ -2446,8 +2450,8 @@ bool wxMSWDCImpl::DoStretchBlit(wxCoord xdest, wxCoord ydest,
                 // automatically as it doesn't even work with the source HDC.
                 // So do this manually to ensure that the coordinates are
                 // interpreted in the same way here as in all the other cases.
-                xsrc = source->LogicalToDeviceX(xsrc);
-                ysrc = source->LogicalToDeviceY(ysrc);
+                src.x = source->LogicalToDeviceX(src.x);
+                src.y = source->LogicalToDeviceY(src.y);
                 srcWidth = source->LogicalToDeviceXRel(srcWidth);
                 srcHeight = source->LogicalToDeviceYRel(srcHeight);
 
@@ -2457,13 +2461,13 @@ bool wxMSWDCImpl::DoStretchBlit(wxCoord xdest, wxCoord ydest,
                 if ( hDIB > 0 )
                 {
                     // reflect ysrc
-                    ysrc = hDIB - (ysrc + srcHeight);
+                    src.y = hDIB - (src.y + srcHeight);
                 }
 
                 if ( ::StretchDIBits(GetHdc(),
                                      xdest, ydest,
                                      dstWidth, dstHeight,
-                                     xsrc, ysrc,
+                                     src.x, src.y,
                                      srcWidth, srcHeight,
                                      ds.dsBm.bmBits,
                                      (LPBITMAPINFO)&ds.dsBmih,
@@ -2489,7 +2493,7 @@ bool wxMSWDCImpl::DoStretchBlit(wxCoord xdest, wxCoord ydest,
                         GetHdc(),
                         xdest, ydest, dstWidth, dstHeight,
                         hdcSrc,
-                        xsrc, ysrc, srcWidth, srcHeight,
+                        src.x, src.y, srcWidth, srcHeight,
                         dwRop
                     ) )
             {
@@ -2504,7 +2508,7 @@ bool wxMSWDCImpl::DoStretchBlit(wxCoord xdest, wxCoord ydest,
         if ( !success )
         {
             if ( !::BitBlt(GetHdc(), xdest, ydest, dstWidth, dstHeight,
-                           hdcSrc, xsrc, ysrc, dwRop) )
+                           hdcSrc, src.x, src.y, dwRop) )
             {
                 wxLogLastError(wxT("BitBlt"));
             }
@@ -2708,9 +2712,13 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxDCModule, wxModule);
 // ----------------------------------------------------------------------------
 
 static bool AlphaBlt(wxMSWDCImpl* dcDst,
-                     int x, int y, int dstWidth, int dstHeight,
-                     int srcX, int srcY,
-                     int srcWidth, int srcHeight,
+                     int x,
+                     int y,
+                     int dstWidth,
+                     int dstHeight,
+                     wxPoint src,
+                     int srcWidth,
+                     int srcHeight,
                      HDC hdcSrc,
                      const wxBitmap& WXUNUSED_UNLESS_DEBUG(bmpSrc))
 {
@@ -2727,7 +2735,7 @@ static bool AlphaBlt(wxMSWDCImpl* dcDst,
     if ( !wxDynLoadWrappers::AlphaBlend
           (
             GetHdcOf(*dcDst), x, y, dstWidth, dstHeight,
-            hdcSrc, srcX, srcY, srcWidth, srcHeight,
+            hdcSrc, src.x, src.y, srcWidth, srcHeight,
             bf
           ) )
     {

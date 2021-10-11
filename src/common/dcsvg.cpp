@@ -1288,10 +1288,10 @@ void wxSVGFileDCImpl::SetFont(const wxFont& font)
 bool wxSVGFileDCImpl::DoBlit(wxCoord xdest, wxCoord ydest,
                              wxCoord width, wxCoord height,
                              wxDC* source,
-                             wxCoord xsrc, wxCoord ysrc,
+                             wxPoint src,
                              wxRasterOperationMode rop,
                              bool useMask,
-                             wxCoord WXUNUSED(xsrcMask), wxCoord WXUNUSED(ysrcMask))
+                             wxPoint WXUNUSED(srcMask))
 {
     if (rop != wxRasterOperationMode::Copy)
     {
@@ -1306,7 +1306,7 @@ bool wxSVGFileDCImpl::DoBlit(wxCoord xdest, wxCoord ydest,
     wxBitmap myBitmap(wxSize{width, height});
     wxMemoryDC memDC;
     memDC.SelectObject(myBitmap);
-    memDC.Blit(0, 0, width, height, source, xsrc, ysrc);
+    memDC.Blit(wxPoint{0, 0}, wxSize{width, height}, source, src);
     memDC.SelectObject(wxNullBitmap);
     DoDrawBitmap(myBitmap, xdest, ydest);
     return false;

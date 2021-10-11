@@ -491,21 +491,19 @@ public:
     virtual bool DoBlit(wxCoord xdest, wxCoord ydest,
                         wxCoord width, wxCoord height,
                         wxDC *source,
-                        wxCoord xsrc, wxCoord ysrc,
+                        wxPoint src,
                         wxRasterOperationMode rop = wxRasterOperationMode::Copy,
                         bool useMask = false,
-                        wxCoord xsrcMask = wxDefaultCoord,
-                        wxCoord ysrcMask = wxDefaultCoord) = 0;
+                        wxPoint srcMask = wxDefaultPosition) = 0;
 
     virtual bool DoStretchBlit(wxCoord xdest, wxCoord ydest,
                                wxCoord dstWidth, wxCoord dstHeight,
                                wxDC *source,
-                               wxCoord xsrc, wxCoord ysrc,
+                               wxPoint src,
                                wxCoord srcWidth, wxCoord srcHeight,
                                wxRasterOperationMode rop = wxRasterOperationMode::Copy,
                                bool useMask = false,
-                               wxCoord xsrcMask = wxDefaultCoord,
-                               wxCoord ysrcMask = wxDefaultCoord);
+                               wxPoint srcMask = wxDefaultPosition);
 
     virtual wxBitmap DoGetAsBitmap(const wxRect *WXUNUSED(subrect)) const
         { return wxNullBitmap; }
@@ -1118,41 +1116,22 @@ public:
                    int indexAccel = -1)
         { DrawLabel(text, wxNullBitmap, rect, alignment, indexAccel); }
 
-    bool Blit(wxCoord xdest, wxCoord ydest, wxCoord width, wxCoord height,
-              wxDC *source, wxCoord xsrc, wxCoord ysrc,
-              wxRasterOperationMode rop = wxRasterOperationMode::Copy, bool useMask = false,
-              wxCoord xsrcMask = wxDefaultCoord, wxCoord ysrcMask = wxDefaultCoord)
-    {
-        return m_pimpl->DoBlit(xdest, ydest, width, height,
-                      source, xsrc, ysrc, rop, useMask, xsrcMask, ysrcMask);
-    }
     bool Blit(const wxPoint& destPt, const wxSize& sz,
               wxDC *source, const wxPoint& srcPt,
               wxRasterOperationMode rop = wxRasterOperationMode::Copy, bool useMask = false,
               const wxPoint& srcPtMask = wxDefaultPosition)
     {
         return m_pimpl->DoBlit(destPt.x, destPt.y, sz.x, sz.y,
-                      source, srcPt.x, srcPt.y, rop, useMask, srcPtMask.x, srcPtMask.y);
+                      source, srcPt, rop, useMask, srcPtMask);
     }
 
-    bool StretchBlit(wxCoord dstX, wxCoord dstY,
-                     wxCoord dstWidth, wxCoord dstHeight,
-                     wxDC *source,
-                     wxCoord srcX, wxCoord srcY,
-                     wxCoord srcWidth, wxCoord srcHeight,
-                     wxRasterOperationMode rop = wxRasterOperationMode::Copy, bool useMask = false,
-                     wxCoord srcMaskX = wxDefaultCoord, wxCoord srcMaskY = wxDefaultCoord)
-    {
-        return m_pimpl->DoStretchBlit(dstX, dstY, dstWidth, dstHeight,
-                      source, srcX, srcY, srcWidth, srcHeight, rop, useMask, srcMaskX, srcMaskY);
-    }
     bool StretchBlit(const wxPoint& dstPt, const wxSize& dstSize,
                      wxDC *source, const wxPoint& srcPt, const wxSize& srcSize,
                      wxRasterOperationMode rop = wxRasterOperationMode::Copy, bool useMask = false,
                      const wxPoint& srcMaskPt = wxDefaultPosition)
     {
         return m_pimpl->DoStretchBlit(dstPt.x, dstPt.y, dstSize.x, dstSize.y,
-                      source, srcPt.x, srcPt.y, srcSize.x, srcSize.y, rop, useMask, srcMaskPt.x, srcMaskPt.y);
+                      source, srcPt, srcSize.x, srcSize.y, rop, useMask, srcMaskPt);
     }
 
     wxBitmap GetAsBitmap(const wxRect *subrect = (const wxRect *) nullptr) const

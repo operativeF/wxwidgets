@@ -363,8 +363,8 @@ bool wxGenericDragImage::Show()
 bool wxGenericDragImage::UpdateBackingFromWindow(wxDC& windowDC, wxMemoryDC& destDC,
     const wxRect& sourceRect, const wxRect& destRect) const
 {
-    return destDC.Blit(destRect.x, destRect.y, destRect.width, destRect.height, & windowDC,
-        sourceRect.x, sourceRect.y);
+    return destDC.Blit(destRect.GetPosition(), destRect.GetSize(), & windowDC,
+        sourceRect.GetPosition());
 }
 
 bool wxGenericDragImage::Hide()
@@ -451,7 +451,7 @@ bool wxGenericDragImage::RedrawImage(const wxPoint& oldPos,
     // So subtract this when we're blitting from the backing bitmap
     // (translate from screen to backing-bitmap coords).
 
-    memDCTemp.Blit(0, 0, fullRect.GetWidth(), fullRect.GetHeight(), & memDC, fullRect.x - m_boundingRect.x, fullRect.y - m_boundingRect.y);
+    memDCTemp.Blit(wxPoint{0, 0}, fullRect.GetSize(), & memDC, wxPoint{fullRect.x - m_boundingRect.x, fullRect.y - m_boundingRect.y});
 
     // If drawing, draw the image onto the mem DC
     if (drawNew)
@@ -462,7 +462,7 @@ bool wxGenericDragImage::RedrawImage(const wxPoint& oldPos,
 
     // Now blit to the window
     // Finally, blit the temp mem DC to the window.
-    m_windowDC->Blit(fullRect.x, fullRect.y, fullRect.width, fullRect.height, & memDCTemp, 0, 0);
+    m_windowDC->Blit(fullRect.GetPosition(), fullRect.GetSize(), & memDCTemp, wxPoint{0, 0});
 
     memDCTemp.SelectObject(wxNullBitmap);
     memDC.SelectObject(wxNullBitmap);

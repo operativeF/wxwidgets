@@ -195,7 +195,7 @@ TEST_CASE("Bounding box tests.")
 
         wxMemoryDC dc(bitmap);
 
-        m_gcdc->Blit(20, 10, 12, 7, &dc, 0, 0);
+        m_gcdc->Blit(wxPoint{20, 10}, wxSize{12, 7}, &dc, wxPoint{0, 0});
         AssertBox(m_gcdc.get(), 20, 10, 12, 7);
 
         dc.SelectObject(wxNullBitmap);
@@ -207,7 +207,7 @@ TEST_CASE("Bounding box tests.")
 
         wxMemoryDC dc(bitmap);
 
-        m_gcdc->StretchBlit(30, 50, 5, 5, &dc, 0, 0, 12, 4);
+        m_gcdc->StretchBlit(wxPoint{30, 50}, wxSize{5, 5}, &dc, wxPoint{0, 0}, wxSize{12, 4});
         AssertBox(m_gcdc.get(), 30, 50, 5, 5);
 
         dc.SelectObject(wxNullBitmap);

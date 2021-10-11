@@ -324,7 +324,7 @@ void wxPrinterDCImpl::DoDrawBitmap(const wxBitmap& bmp,
 
         memDC.SelectObjectAsSource(bmp);
 
-        GetOwner()->Blit(x, y, width, height, &memDC, 0, 0, wxRasterOperationMode::Copy, useMask);
+        GetOwner()->Blit(wxPoint{x, y}, wxSize{width, height}, &memDC, wxPoint{0, 0}, wxRasterOperationMode::Copy, useMask);
 
         memDC.SelectObject(wxNullBitmap);
     }
@@ -333,9 +333,9 @@ void wxPrinterDCImpl::DoDrawBitmap(const wxBitmap& bmp,
 bool wxPrinterDCImpl::DoBlit(wxCoord xdest, wxCoord ydest,
                          wxCoord width, wxCoord height,
                          wxDC *source,
-                         wxCoord WXUNUSED(xsrc), wxCoord WXUNUSED(ysrc),
+                         wxPoint WXUNUSED(src),
                          wxRasterOperationMode WXUNUSED(rop), bool useMask,
-                         wxCoord WXUNUSED(xsrcMask), wxCoord WXUNUSED(ysrcMask))
+                         wxPoint WXUNUSED(srcMask))
 {
     wxDCImpl *impl = source->GetImpl();
     wxMSWDCImpl *msw_impl = wxDynamicCast(impl, wxMSWDCImpl);

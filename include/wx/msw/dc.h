@@ -216,17 +216,17 @@ public:
     void DoDrawRotatedText(std::string_view text, wxPoint pt, double angle) override;
 
     bool DoBlit(wxCoord xdest, wxCoord ydest, wxCoord width, wxCoord height,
-                        wxDC *source, wxCoord xsrc, wxCoord ysrc,
+                        wxDC *source, wxPoint src,
                         wxRasterOperationMode rop = wxRasterOperationMode::Copy, bool useMask = false,
-                        wxCoord xsrcMask = wxDefaultCoord, wxCoord ysrcMask = wxDefaultCoord) override;
+                        wxPoint srcMask = wxDefaultPosition) override;
 
     bool DoStretchBlit(wxCoord xdest, wxCoord ydest,
                                wxCoord dstWidth, wxCoord dstHeight,
                                wxDC *source,
-                               wxCoord xsrc, wxCoord ysrc,
+                               wxPoint src,
                                wxCoord srcWidth, wxCoord srcHeight,
                                wxRasterOperationMode rop = wxRasterOperationMode::Copy, bool useMask = false,
-                               wxCoord xsrcMask = wxDefaultCoord, wxCoord ysrcMask = wxDefaultCoord) override;
+                               wxPoint srcMask = wxDefaultPosition) override;
 
     void DoSetClippingRegion(wxCoord x, wxCoord y,
                                      wxCoord width, wxCoord height) override;

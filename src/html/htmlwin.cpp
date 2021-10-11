@@ -1181,10 +1181,10 @@ void wxHtmlWindow::OnPaint(wxPaintEvent& WXUNUSED(event))
     if ( dc != &dcPaint )
     {
         dc->SetDeviceOrigin({0, 0});
-        dcPaint.Blit(0, rect.GetTop(),
-                     sz.x, rect.GetBottom() - rect.GetTop() + 1,
+        dcPaint.Blit(wxPoint{0, rect.GetTop()},
+                     wxSize{sz.x, rect.GetBottom() - rect.GetTop() + 1},
                      dc,
-                     0, rect.GetTop());
+                     wxPoint{0, rect.GetTop()});
     }
 }
 

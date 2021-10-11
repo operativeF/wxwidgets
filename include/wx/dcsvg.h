@@ -174,11 +174,10 @@ private:
     bool DoBlit(wxCoord xdest, wxCoord ydest,
                         wxCoord width, wxCoord height,
                         wxDC* source,
-                        wxCoord xsrc, wxCoord ysrc,
+                        wxPoint src,
                         wxRasterOperationMode rop,
                         bool useMask = false,
-                        wxCoord xsrcMask = wxDefaultCoord,
-                        wxCoord ysrcMask = wxDefaultCoord) override;
+                        wxPoint srcMask = wxDefaultPosition) override;
 
     void DoCrossHair(wxCoord WXUNUSED(x), wxCoord WXUNUSED(y)) override
     {

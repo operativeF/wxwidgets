@@ -654,7 +654,7 @@ TEST_CASE("BitmapTestCase::OverlappingBlit")
 
         // Scroll down one line.
 
-        dc.Blit( 0, 1, 10, 9, &dc, 0, 0 );
+        dc.Blit(wxPoint{0, 1}, wxSize{10, 9}, &dc, wxPoint{0, 0} );
     } // Select the bitmap out of the memory DC before using it directly.
     // Now, lines 0 and 1 should be red, lines 2++ should still be white.
 

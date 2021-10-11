@@ -136,8 +136,8 @@ void wxOverlayImpl::Init( wxDC* dc, wxRect boundary )
     m_y = boundary.y;
     m_width = boundary.width;
     m_height = boundary.height;
-    dcMem.Blit(0, 0, m_width, m_height,
-        dc, boundary.x, boundary.y);
+    dcMem.Blit(wxPoint{0, 0}, wxSize{m_width, m_height},
+        dc, boundary.GetPosition());
     dcMem.SelectObject( wxNullBitmap );
 }
 
@@ -145,7 +145,7 @@ void wxOverlayImpl::Clear(wxDC* dc)
 {
     wxMemoryDC dcMem ;
     dcMem.SelectObject( m_bmpSaved );
-    dc->Blit( m_x, m_y, m_width, m_height , &dcMem , 0 , 0 );
+    dc->Blit( wxPoint{m_x, m_y}, wxSize{m_width, m_height}, &dcMem , wxPoint{0, 0} );
     dcMem.SelectObject( wxNullBitmap );
 }
 

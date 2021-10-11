@@ -150,7 +150,7 @@ void wxBufferedDC::UnMask()
     }
 
     const wxPoint origin = GetLogicalOrigin();
-    m_dc->Blit(-origin.x, -origin.y, width, height, this, -DOrigin.x, -DOrigin.y);
+    m_dc->Blit(-origin, wxSize{width, height}, this, -DOrigin);
     m_dc = nullptr;
 
     if ( m_style & wxBUFFER_USES_SHARED_BUFFER )

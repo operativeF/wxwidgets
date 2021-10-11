@@ -1934,8 +1934,8 @@ bool wxPrintPreviewBase::PaintPage(wxPreviewCanvas *canvas, wxDC& dc)
     wxMemoryDC temp_dc;
     temp_dc.SelectObject(*m_previewBitmap);
 
-    dc.Blit(pageRect.x, pageRect.y,
-        m_previewBitmap->GetWidth(), m_previewBitmap->GetHeight(), &temp_dc, 0, 0);
+    dc.Blit(pageRect.GetPosition(),
+        m_previewBitmap->GetSize(), &temp_dc, wxPoint{0, 0});
 
     temp_dc.SelectObject(wxNullBitmap);
     return true;

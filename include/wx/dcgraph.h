@@ -189,17 +189,18 @@ public:
     void DoDrawRotatedText(std::string_view text, wxPoint pt, double angle) override;
 
     bool DoBlit(wxCoord xdest, wxCoord ydest, wxCoord width, wxCoord height,
-                        wxDC *source, wxCoord xsrc, wxCoord ysrc,
+                        wxDC *source, 
+                        wxPoint src,
                         wxRasterOperationMode rop = wxRasterOperationMode::Copy, bool useMask = false,
-                        wxCoord xsrcMask = -1, wxCoord ysrcMask = -1) override;
+                        wxPoint srcMask = wxDefaultPosition) override;
 
     bool DoStretchBlit(wxCoord xdest, wxCoord ydest,
                                wxCoord dstWidth, wxCoord dstHeight,
                                wxDC *source,
-                               wxCoord xsrc, wxCoord ysrc,
+                               wxPoint src,
                                wxCoord srcWidth, wxCoord srcHeight,
                                wxRasterOperationMode = wxRasterOperationMode::Copy, bool useMask = false,
-                               wxCoord xsrcMask = wxDefaultCoord, wxCoord ysrcMask = wxDefaultCoord) override;
+                               wxPoint srcMask = wxDefaultPosition) override;
 
     wxSize DoGetSize() const override;
     void DoGetSizeMM(int* width, int* height) const override;

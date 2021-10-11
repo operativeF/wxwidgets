@@ -701,9 +701,9 @@ void wxAuiTabContainer::Render(wxDC* raw_dc, wxWindow* wnd)
     }
 
 
-    raw_dc->Blit(m_rect.x, m_rect.y,
-                 m_rect.GetWidth(), m_rect.GetHeight(),
-                 &dc, 0, 0);
+    raw_dc->Blit(m_rect.GetPosition(),
+                 m_rect.GetSize(),
+                 &dc, wxPoint{0, 0});
 }
 
 // Is the tab visible?

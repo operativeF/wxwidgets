@@ -990,7 +990,7 @@ bool wxWizard::TileBitmap(const wxRect& rect, wxDC& dc, const wxBitmap& bitmap)
     for (int i = rect.x; i < rect.x + rect.width; i += w)
     {
         for (int j = rect.y; j < rect.y + rect.height; j+= h)
-            dc.Blit(i, j, std::lround(bitmap.GetScaledWidth()), std::lround(bitmap.GetScaledHeight()), & dcMem, 0, 0);
+            dc.Blit(wxPoint{i, j}, wxSize{std::lround(bitmap.GetScaledWidth()), std::lround(bitmap.GetScaledHeight())}, & dcMem, wxPoint{0, 0});
     }
     
     dcMem.SelectObject(wxNullBitmap);
