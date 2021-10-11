@@ -432,13 +432,6 @@ void wxChoice::MSWEndDeferWindowPos()
 void wxChoice::MSWUpdateDropDownHeight()
 {
     unsigned int flags = wxSIZE_USE_EXISTING;
-    if ( wxApp::GetComCtl32Version() < 600 )
-    {
-        // Make sure our DoMoveWindow() will get called to update the dropdown
-        // height, this happens automatically with comctl32.dll v6, but not
-        // with earlier versions.
-        flags |= wxSIZE_FORCE;
-    }
 
     // be careful to not change the width here
     DoSetSize(wxRect{wxDefaultCoord, wxDefaultCoord, wxDefaultCoord, GetSize().y}, flags);

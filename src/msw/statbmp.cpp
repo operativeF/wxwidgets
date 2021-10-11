@@ -115,16 +115,7 @@ bool wxStaticBitmap::Create(wxWindow *parent,
 
     // GetBestSize will work properly now, so set the best size if needed
     SetInitialSize(size);
-
-    // if the application has no manifest and so the old comctl32.dll is
-    // used, the images with alpha channel are not correctly drawn so we need
-    // to draw them ourselves and it's easier to just always do it rather than
-    // check if we have an image with alpha or not
-    if ( wxTheApp->GetComCtl32Version() < 600 )
-    {
-        Bind(wxEVT_PAINT, &wxStaticBitmap::DoPaintManually, this);
-    }
-
+    
     return true;
 }
 

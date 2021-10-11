@@ -21,7 +21,6 @@
 #include "wx/utils.h"
 #include "wx/dialog.h"
 #include "wx/log.h"
-#include "wx/app.h"     // for GetComCtl32Version()
 #include "wx/stringutils.h"
 
 #ifndef WX_PRECOMP
@@ -199,8 +198,6 @@ int wxDirDialog::ShowSHBrowseForFolder(WXHWND owner)
         .lParam         = reinterpret_cast<LPARAM>(boost::nowide::widen(m_path).c_str()) // param for the callback
     };
 
-    static const int verComCtl32 = wxApp::GetComCtl32Version();
-
     // we always add the edit box (it doesn't hurt anybody, does it?)
     bi.ulFlags |= BIF_EDITBOX;
 
@@ -210,21 +207,11 @@ int wxDirDialog::ShowSHBrowseForFolder(WXHWND owner)
     const bool needNewDir = !HasFlag(wxDD_DIR_MUST_EXIST);
     if ( needNewDir || HasFlag(wxRESIZE_BORDER) )
     {
-        if (needNewDir)
+        bi.ulFlags |= BIF_NEWDIALOGSTYLE;
+
+        if (!needNewDir)
         {
-            bi.ulFlags |= BIF_NEWDIALOGSTYLE;
-        }
-        else
-        {
-            // Versions < 600 doesn't support BIF_NONEWFOLDERBUTTON
-            // The only way to get rid of the Make New Folder button is use
-            // the old dialog style which doesn't have the button thus we
-            // simply don't set the New Dialog Style for such comctl versions.
-            if (verComCtl32 >= 600)
-            {
-                bi.ulFlags |= BIF_NEWDIALOGSTYLE;
-                bi.ulFlags |= BIF_NONEWFOLDERBUTTON;
-            }
+            bi.ulFlags |= BIF_NONEWFOLDERBUTTON;
         }
     }
 

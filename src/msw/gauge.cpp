@@ -172,21 +172,13 @@ void wxGauge::SetDeterminateMode()
 
 void wxGauge::Pulse()
 {
-    if (wxApp::GetComCtl32Version() >= 600)
-    {
-        // switch to indeterminate mode if required
-        SetIndeterminateMode();
+    // switch to indeterminate mode if required
+    SetIndeterminateMode();
 
-        ::SendMessageW(GetHwnd(), PBM_STEPIT, 0, 0);
+    ::SendMessageW(GetHwnd(), PBM_STEPIT, 0, 0);
 
-        if ( m_appProgressIndicator )
-            m_appProgressIndicator->Pulse();
-    }
-    else
-    {
-        // emulate indeterminate mode
-        wxGaugeBase::Pulse();
-    }
+    if ( m_appProgressIndicator )
+        m_appProgressIndicator->Pulse();
 }
 
 #endif // wxUSE_GAUGE

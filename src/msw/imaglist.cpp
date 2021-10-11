@@ -62,7 +62,7 @@ bool wxImageList::Create(int width, int height, bool mask, int initial)
     flags |= ILC_COLOR32;
 
     // For comctl32.dll < 6 always use masks as it doesn't support alpha.
-    if ( mask || wxApp::GetComCtl32Version() < 600 )
+    if ( mask )
         flags |= ILC_MASK;
 
     // Grow by 1, I guess this is reasonable behaviour most of the time
@@ -231,19 +231,6 @@ int wxImageList::Add(const wxBitmap& bitmap, const wxColour& maskColour)
 // Adds a bitmap and mask from an icon.
 int wxImageList::Add(const wxIcon& icon)
 {
-    // ComCtl32 prior 6.0 doesn't support images with alpha
-    // channel so if we have 32-bit icon with transparency
-    // we need to add it as a wxBitmap via dedicated method
-    // where alpha channel will be converted to the mask.
-    if ( wxApp::GetComCtl32Version() < 600 )
-    {
-        wxBitmap bmp(icon);
-        if ( bmp.HasAlpha() )
-        {
-            return Add(bmp);
-        }
-    }
-
     int index = ImageList_AddIcon(GetHImageList(), GetHiconOf(icon));
     if ( index == -1 )
     {
@@ -277,19 +264,6 @@ bool wxImageList::Replace(int index,
 // Replaces a bitmap and mask from an icon.
 bool wxImageList::Replace(int i, const wxIcon& icon)
 {
-    // ComCtl32 prior 6.0 doesn't support images with alpha
-    // channel so if we have 32-bit icon with transparency
-    // we need to replace it as a wxBitmap via dedicated method
-    // where alpha channel will be converted to the mask.
-    if ( wxApp::GetComCtl32Version() < 600 )
-    {
-        wxBitmap bmp(icon);
-        if ( bmp.HasAlpha() )
-        {
-            return Replace(i, bmp);
-        }
-    }
-
     bool ok = ImageList_ReplaceIcon(GetHImageList(), i, GetHiconOf(icon)) != -1;
     if ( !ok )
     {

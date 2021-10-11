@@ -765,25 +765,20 @@ void wxTreeCtrl::SetDoubleBuffered(bool on)
     if ( !GetHwnd() )
         return;
 
-    // TVS_EX_DOUBLEBUFFER is only supported since Vista, don't try to set it
-    // under XP, who knows what could this do.
-    if ( wxApp::GetComCtl32Version() >= 610 )
+    const HRESULT hr = ::SendMessageW(GetHwnd(),
+                                        TVM_SETEXTENDEDSTYLE,
+                                        TVS_EX_DOUBLEBUFFER,
+                                        on ? TVS_EX_DOUBLEBUFFER : 0);
+    if ( hr == S_OK )
     {
-        const HRESULT hr = ::SendMessageW(GetHwnd(),
-                                         TVM_SETEXTENDEDSTYLE,
-                                         TVS_EX_DOUBLEBUFFER,
-                                         on ? TVS_EX_DOUBLEBUFFER : 0);
-        if ( hr == S_OK )
-        {
-            // There is no need to erase background for a double-buffered
-            // window, so disable it when enabling double buffering and restore
-            // the default background style value when disabling it.
-            SetBackgroundStyle(on ? wxBG_STYLE_PAINT : wxBG_STYLE_ERASE);
-        }
-        else
-        {
-            wxLogApiError("TreeView_SetExtendedStyle(TVS_EX_DOUBLEBUFFER)", hr);
-        }
+        // There is no need to erase background for a double-buffered
+        // window, so disable it when enabling double buffering and restore
+        // the default background style value when disabling it.
+        SetBackgroundStyle(on ? wxBG_STYLE_PAINT : wxBG_STYLE_ERASE);
+    }
+    else
+    {
+        wxLogApiError("TreeView_SetExtendedStyle(TVS_EX_DOUBLEBUFFER)", hr);
     }
 }
 
@@ -3811,22 +3806,19 @@ bool wxTreeCtrl::MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result)
 
                 if ( tv->action == TVE_COLLAPSE )
                 {
-                    if ( wxApp::GetComCtl32Version() >= 600 )
-                    {
-                        // for some reason the item selection rectangle depends
-                        // on whether it is expanded or collapsed (at least
-                        // with comctl32.dll v6): it is wider (by 3 pixels) in
-                        // the expanded state, so when the item collapses and
-                        // then is deselected the rightmost 3 pixels of the
-                        // previously drawn selection are left on the screen
-                        //
-                        // it's not clear if it's a bug in comctl32.dll or in
-                        // our code (because it does not happen in Explorer but
-                        // OTOH we don't do anything which could result in this
-                        // AFAICS) but we do need to work around it to avoid
-                        // ugly artifacts
-                        RefreshItem(id);
-                    }
+                    // for some reason the item selection rectangle depends
+                    // on whether it is expanded or collapsed (at least
+                    // with comctl32.dll v6): it is wider (by 3 pixels) in
+                    // the expanded state, so when the item collapses and
+                    // then is deselected the rightmost 3 pixels of the
+                    // previously drawn selection are left on the screen
+                    //
+                    // it's not clear if it's a bug in comctl32.dll or in
+                    // our code (because it does not happen in Explorer but
+                    // OTOH we don't do anything which could result in this
+                    // AFAICS) but we do need to work around it to avoid
+                    // ugly artifacts
+                    RefreshItem(id);
                 }
                 else // expand
                 {

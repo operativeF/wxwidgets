@@ -11,8 +11,18 @@
 #define _WX_MSW_HYPERLINK_H_
 
 #include "wx/generic/hyperlink.h"
+#include "wx/app.h"
 
 #include <string>
+
+static std::string GetLabelForSysLink(const std::string& text, const std::string& url)
+{
+    // Any "&"s in the text should appear on the screen and not be (mis)
+    // interpreted as mnemonics.
+    return fmt::format("<A HREF=\"{:s}\">{:s}</A>",
+        url,
+        wxControl::EscapeMnemonics(text));
+}
 
 // ----------------------------------------------------------------------------
 // wxHyperlinkCtrl
@@ -34,19 +44,23 @@ public:
                     unsigned int style = wxHL_DEFAULT_STYLE,
                     const std::string& name = wxHyperlinkCtrlNameStr)
     {
-        Create(parent, id, label, url, pos, size, style, name);
+        CreateControl(parent, id, pos, size, style, wxDefaultValidator, name);
+
+        SetURL( url );
+        SetVisited( false );
+
+        DWORD exstyle;
+        DWORD msStyle = MSWGetStyle(style, &exstyle);
+
+        // "SysLink" would be WC_LINK but it's a wide-string
+        MSWCreateControl("SysLink", msStyle, pos, size, GetLabelForSysLink( label, url ), exstyle);
+
+        // Make sure both the label and URL are non-empty strings.
+        SetURL(url.empty() ? label : url);
+        SetLabel(label.empty() ? url : label);
+
+        ConnectMenuHandlers();
     }
-
-    // Creation function (for two-step construction).
-    [[maybe_unused]] bool Create(wxWindow *parent,
-                wxWindowID id,
-                const std::string& label,
-                const std::string& url,
-                const wxPoint& pos = wxDefaultPosition,
-                const wxSize& size = wxDefaultSize,
-                unsigned int style = wxHL_DEFAULT_STYLE,
-                const std::string& name = wxHyperlinkCtrlNameStr);
-
 
     // overridden base class methods
     // -----------------------------

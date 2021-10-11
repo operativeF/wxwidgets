@@ -293,17 +293,14 @@ void wxListCtrl::MSWSetExListStyles()
     if ( !GetToolTip() )
         exStyle |= LVS_EX_LABELTIP;
 
-    if ( wxApp::GetComCtl32Version() >= 600 )
-    {
-        // We must enable double buffering when using the system theme to avoid
-        // various display glitches and it should be harmless to just always do
-        // it when using comctl32.dll v6.
-        exStyle |= LVS_EX_DOUBLEBUFFER;
+    // We must enable double buffering when using the system theme to avoid
+    // various display glitches and it should be harmless to just always do
+    // it when using comctl32.dll v6.
+    exStyle |= LVS_EX_DOUBLEBUFFER;
 
-        // When using LVS_EX_DOUBLEBUFFER, we don't need to erase our
-        // background and doing it only results in flicker.
-        SetBackgroundStyle(wxBG_STYLE_PAINT);
-    }
+    // When using LVS_EX_DOUBLEBUFFER, we don't need to erase our
+    // background and doing it only results in flicker.
+    SetBackgroundStyle(wxBG_STYLE_PAINT);
 
     ::SendMessageW(GetHwnd(), LVM_SETEXTENDEDLISTVIEWSTYLE, 0, exStyle);
 }
@@ -405,7 +402,7 @@ void wxListCtrl::OnDPIChanged(wxDPIChangedEvent &event)
 bool wxListCtrl::IsDoubleBuffered() const
 {
     // LVS_EX_DOUBLEBUFFER is turned on for comctl32 v6+.
-    return wxApp::GetComCtl32Version() >= 600;
+    return true;
 }
 
 void wxListCtrl::SetDoubleBuffered(bool WXUNUSED(on))
@@ -1467,18 +1464,6 @@ void wxListCtrl::SetImageList(wxImageList *imageList, int which)
         m_ownsImageListState = false;
     }
     (void) ListView_SetImageList(GetHwnd(), (HIMAGELIST) imageList ? imageList->GetHIMAGELIST() : nullptr, flags);
-
-    // For ComCtl32 prior 6.0 we need to re-assign all existing
-    // text labels in order to position them correctly.
-    if ( wxApp::GetComCtl32Version() < 600 )
-    {
-        const int n = GetItemCount();
-        for( int i = 0; i < n; i++ )
-        {
-            wxString text = GetItemText(i);
-            SetItemText(i, text);
-        }
-    }
 }
 
 void wxListCtrl::AssignImageList(wxImageList *imageList, int which)
@@ -2797,9 +2782,7 @@ bool wxListCtrl::MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result)
             // Always let the default handling of this event take place when
             // using comctl32.dll v6, as otherwise the selected items are not
             // redrawn to correspond to the new column widths, see #18032.
-            if ( wxApp::GetComCtl32Version() >= 600 )
-                return false;
-            break;
+            return false;
 
         case LVN_DELETEALLITEMS:
             // always return true to suppress all additional LVN_DELETEITEM
@@ -3239,18 +3222,7 @@ void wxListCtrl::OnPaint(wxPaintEvent& event)
                 to 2 (not 0).
             */
 
-            static const bool useDrawFix = wxApp::GetComCtl32Version() < 600;
-
-            static const int gap = useDrawFix ? 2 : 0;
-
-            if (useDrawFix)
-            {
-                wxDCPenChanger changePen(dc, *wxTRANSPARENT_PEN);
-                wxDCBrushChanger changeBrush(dc, GetBackgroundColour());
-
-                dc.DrawRectangle(0, topItemRect.GetY() - gap,
-                                 clientSize.x, gap);
-            }
+            static const int gap = 0;
 
             const int numCols = GetColumnCount();
             std::vector<int> indexArray(numCols);

@@ -226,10 +226,8 @@ bool wxMSWHeaderCtrl::Create(wxWindow *parent,
     // column width is just about right to show it together with the sort
     // indicator, so reduce it to a smaller value (in principle we could even
     // use 0 here but this starts to look ugly)
-    if ( wxApp::GetComCtl32Version() >= 600 )
-    {
-        std::ignore = Header_SetBitmapMargin(GetHwnd(), wxGetSystemMetrics(SM_CXEDGE, parent));
-    }
+
+    std::ignore = Header_SetBitmapMargin(GetHwnd(), wxGetSystemMetrics(SM_CXEDGE, parent));
 
     return true;
 }
