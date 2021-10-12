@@ -853,7 +853,7 @@ bool wxAuiToolBar::Create(wxWindow* parent,
     SetExtraStyle(wxWS_EX_PROCESS_IDLE);
     if (style & wxAUI_TB_HORZ_LAYOUT)
         SetToolTextOrientation(wxAUI_TBTOOL_TEXT_RIGHT);
-    SetBackgroundStyle(wxBG_STYLE_PAINT);
+    SetBackgroundStyle(wxBackgroundStyle::Paint);
 
     return true;
 }

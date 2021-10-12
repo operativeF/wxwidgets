@@ -148,10 +148,10 @@ public:
     // creates font depending on m_Font* members.
     virtual wxFont* CreateCurrentFont();
 
-    enum WhitespaceMode
+    enum class WhitespaceMode
     {
-        Whitespace_Normal,  // normal mode, collapse whitespace
-        Whitespace_Pre      // inside <pre>, keep whitespace as-is
+        Normal,  // normal mode, collapse whitespace
+        Pre      // inside <pre>, keep whitespace as-is
     };
 
     // change the current whitespace handling mode
@@ -218,7 +218,7 @@ private:
             // html font sizes and faces of fixed and proportional fonts
 
     // current whitespace handling mode
-    WhitespaceMode m_whitespaceMode{Whitespace_Normal};
+    WhitespaceMode m_whitespaceMode{WhitespaceMode::Normal};
 
     wxHtmlWordCell *m_lastWordCell{nullptr};
 

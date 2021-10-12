@@ -2098,7 +2098,7 @@ wxDataViewMainWindow::wxDataViewMainWindow( wxDataViewCtrl *parent, wxWindowID i
 
     SetBackgroundColour( *wxWHITE );
 
-    SetBackgroundStyle(wxBG_STYLE_PAINT);
+    SetBackgroundStyle(wxBackgroundStyle::Paint);
 
     m_penRule = wxPen(GetRuleColour());
 

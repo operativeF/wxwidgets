@@ -230,8 +230,8 @@ public:
     wxAutoBufferedPaintDC(wxWindow* win)
         : wxAutoBufferedPaintDCBase(win)
     {
-        wxASSERT_MSG( win->GetBackgroundStyle() == wxBG_STYLE_PAINT,
-            "You need to call SetBackgroundStyle(wxBG_STYLE_PAINT) in ctor, "
+        wxASSERT_MSG( win->GetBackgroundStyle() == wxBackgroundStyle::Paint,
+            "You need to call SetBackgroundStyle(wxBackgroundStyle::Paint) in ctor, "
             "and also, if needed, paint the background in wxEVT_PAINT handler."
         );
     }

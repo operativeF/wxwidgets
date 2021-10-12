@@ -1240,16 +1240,16 @@ wxGridCellBoolEditor::TryActivate(int row, int col, wxGrid* grid,
 
     switch ( actSource.GetOrigin() )
     {
-        case wxGridActivationSource::Program:
+        case wxGridActivationSource::Origin::Program:
             // It's not really clear what should happen in this case, so for
             // now show the editor interactively to avoid making the choice.
             return wxGridActivationResult::DoEdit();
 
-        case wxGridActivationSource::Mouse:
+        case wxGridActivationSource::Origin::Mouse:
             m_value = !m_value;
             return wxGridActivationResult::DoChange(GetStringValue());
 
-        case wxGridActivationSource::Key:
+        case wxGridActivationSource::Origin::Key:
             switch ( actSource.GetKeyEvent().GetKeyCode() )
             {
                 // Handle F2 as space here because we must handle it somehow,

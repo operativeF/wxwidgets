@@ -397,8 +397,8 @@ bool wxTopLevelWindowBase::IsTopNavigationDomain(NavigationKind kind) const
     // relax this however).
     switch ( kind )
     {
-        case Navigation_Tab:
-        case Navigation_Accel:
+        case NavigationKind::Tab:
+        case NavigationKind::Accel:
             break;
     }
 

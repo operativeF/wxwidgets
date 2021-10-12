@@ -33,6 +33,7 @@ class WXDLLIMPEXP_FWD_CORE wxFileSystem;
 class WXDLLIMPEXP_FWD_CORE wxWindow;
 
 // wxHtmlWindow flags:
+// FIXME: Bitfield
 #define wxHW_SCROLLBAR_NEVER    0x0002
 #define wxHW_SCROLLBAR_AUTO     0x0004
 #define wxHW_NO_SELECTION       0x0008
@@ -40,14 +41,11 @@ class WXDLLIMPEXP_FWD_CORE wxWindow;
 #define wxHW_DEFAULT_STYLE      wxHW_SCROLLBAR_AUTO
 
 /// Enum for wxHtmlWindow::OnOpeningURL and wxHtmlWindowInterface::OnOpeningURL
-enum wxHtmlOpeningStatus
+enum class wxHtmlOpeningStatus
 {
-    /// Open the requested URL
-    wxHTML_OPEN,
-    /// Do not open the URL
-    wxHTML_BLOCK,
-    /// Redirect to another URL (returned from OnOpeningURL)
-    wxHTML_REDIRECT
+    Open,     /// Open the requested URL
+    Block,    /// Do not open the URL
+    Redirect  /// Redirect to another URL (returned from OnOpeningURL)
 };
 
 /**
@@ -79,7 +77,7 @@ public:
 
         @param type     Type of the URL request (e.g. image)
         @param url      URL the parser wants to open
-        @param redirect If the return value is wxHTML_REDIRECT, then the
+        @param redirect If the return value is wxHtmlOpeningStatus::Redirect, then the
                         URL to redirect to will be stored in this variable
                         (the pointer must never be NULL)
 
@@ -366,12 +364,12 @@ public:
 
     // Called when wxHtmlWindow wants to fetch data from an URL (e.g. when
     // loading a page or loading an image). The data are downloaded if and only if
-    // OnOpeningURL returns true. If OnOpeningURL returns wxHTML_REDIRECT,
+    // OnOpeningURL returns true. If OnOpeningURL returns wxHtmlOpeningStatus::Redirect,
     // it must set *redirect to the new URL
     virtual wxHtmlOpeningStatus OnOpeningURL(wxHtmlURLType WXUNUSED(type),
                                              const std::string& WXUNUSED(url),
                                              std::string *WXUNUSED(redirect)) const
-        { return wxHTML_OPEN; }
+        { return wxHtmlOpeningStatus::Open; }
 
 #if wxUSE_CLIPBOARD
     // Helper functions to select parts of page:
@@ -433,7 +431,7 @@ protected:
     // and wxHW_NO_SELECTION not used)
     bool IsSelectionEnabled() const;
 
-    enum ClipboardType
+    enum class ClipboardType
     {
         Primary,
         Secondary
@@ -442,7 +440,7 @@ protected:
     // Copies selection to clipboard if the clipboard support is available
     //
     // returns true if anything was copied to clipboard, false otherwise
-    bool CopySelection(ClipboardType t = Secondary);
+    bool CopySelection(ClipboardType t = ClipboardType::Secondary);
 
 #if wxUSE_CLIPBOARD
     // Automatic scrolling during selection:

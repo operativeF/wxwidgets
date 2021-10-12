@@ -315,7 +315,7 @@ TAG_HANDLER_BEGIN(BODY, "BODY")
         wxString bg;
         if (tag.GetParamAsString(wxT("BACKGROUND"), &bg))
         {
-            wxFSFile *fileBgImage = m_WParser->OpenURL(wxHTML_URL_IMAGE, bg);
+            wxFSFile *fileBgImage = m_WParser->OpenURL(wxHtmlURLType::Image, bg);
             if ( fileBgImage )
             {
                 wxInputStream *is = fileBgImage->GetStream();

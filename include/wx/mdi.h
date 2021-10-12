@@ -170,10 +170,10 @@ public:
     {
         switch ( kind )
         {
-            case Navigation_Tab:
+            case NavigationKind::Tab:
                 return true;
 
-            case Navigation_Accel:
+            case NavigationKind::Accel:
                 // Parent frame accelerators should work inside MDI child, so
                 // don't block their processing by returning true for them.
                 break;

@@ -3615,7 +3615,7 @@ void wxListMainWindow::SetItemStateAll(long state, long stateMask)
         {
             // clear for non virtual (somewhat optimized by using GetNextItem())
             long i = -1;
-            while ( (i = GetNextItem(i, wxLIST_NEXT_ALL, ListStates::Selected)) != -1 )
+            while ( (i = GetNextItem(i, wxListGetNextItem::All, ListStates::Selected)) != -1 )
             {
                 SetItemState( i, 0, ListStates::Selected );
             }

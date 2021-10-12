@@ -643,7 +643,7 @@ int wxSizerXmlHandler::GetSizerFlags()
 
     int flags = 0;
 
-    wxStringTokenizer tkn(s, wxS("| \t\n"), wxTOKEN_STRTOK);
+    wxStringTokenizer tkn(s, wxS("| \t\n"), wxStringTokenizerMode::StrTok);
     while ( tkn.HasMoreTokens() )
     {
         // TODO: Verify this.

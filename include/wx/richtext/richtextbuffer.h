@@ -4926,7 +4926,7 @@ class WXDLLIMPEXP_RICHTEXT wxRichTextImage: public wxRichTextObject
 {
     wxDECLARE_DYNAMIC_CLASS(wxRichTextImage);
 public:
-    enum { ImageState_Unloaded, ImageState_Loaded, ImageState_Bad };
+    enum class ImageState { Unloaded, Loaded, Bad };
 
     wxRichTextImage(wxRichTextObject* parent = nullptr): wxRichTextObject(parent) {}
 
@@ -4990,12 +4990,12 @@ public:
     /**
         Sets the image cache.
     */
-    void SetImageCache(const wxBitmap& bitmap) { m_imageCache = bitmap; m_originalImageSize = wxSize(bitmap.GetWidth(), bitmap.GetHeight()); m_imageState = ImageState_Loaded; }
+    void SetImageCache(const wxBitmap& bitmap) { m_imageCache = bitmap; m_originalImageSize = wxSize(bitmap.GetWidth(), bitmap.GetHeight()); m_imageState = ImageState::Loaded; }
 
     /**
         Resets the image cache.
     */
-    void ResetImageCache() { m_imageCache = wxNullBitmap; m_originalImageSize = wxSize(-1, -1); m_imageState = ImageState_Unloaded; }
+    void ResetImageCache() { m_imageCache = wxNullBitmap; m_originalImageSize = wxSize(-1, -1); m_imageState = ImageState::Unloaded; }
 
     /**
         Returns the image block containing the raw data.
@@ -5037,12 +5037,12 @@ public:
     /**
         Gets the image state.
     */
-    int GetImageState() const { return m_imageState; }
+    ImageState GetImageState() const { return m_imageState; }
 
     /**
         Sets the image state.
     */
-    void SetImageState(int state) { m_imageState = state; }
+    void SetImageState(ImageState state) { m_imageState = state; }
 
 protected:
     wxRichTextImageBlock    m_imageBlock;
@@ -5050,7 +5050,7 @@ protected:
     wxBitmap                m_imageCache;
     wxSize                  m_originalImageSize{-1, -1};
 
-    int                     m_imageState{ImageState_Unloaded};
+    ImageState              m_imageState{ImageState::Unloaded};
 };
 
 class WXDLLIMPEXP_FWD_RICHTEXT wxRichTextCommand;

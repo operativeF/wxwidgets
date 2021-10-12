@@ -33,47 +33,47 @@ static constexpr struct TokenizerTestData
 }
 gs_testData[] =
 {
-    { wxT(""),                   wxT(" "),              wxTOKEN_DEFAULT,       0 },
-    { wxT(""),                   wxT(" "),              wxTOKEN_RET_EMPTY,     0 },
-    { wxT(""),                   wxT(" "),              wxTOKEN_RET_EMPTY_ALL, 0 },
-    { wxT(""),                   wxT(" "),              wxTOKEN_RET_DELIMS,    0 },
-    { wxT(":"),                  wxT(":"),              wxTOKEN_RET_EMPTY,     1 },
-    { wxT(":"),                  wxT(":"),              wxTOKEN_RET_DELIMS,    1 },
-    { wxT(":"),                  wxT(":"),              wxTOKEN_RET_EMPTY_ALL, 2 },
-    { wxT("::"),                 wxT(":"),              wxTOKEN_RET_EMPTY,     1 },
-    { wxT("::"),                 wxT(":"),              wxTOKEN_RET_DELIMS,    1 },
-    { wxT("::"),                 wxT(":"),              wxTOKEN_RET_EMPTY_ALL, 3 },
+    { wxT(""),                   wxT(" "),              wxStringTokenizerMode::Default,       0 },
+    { wxT(""),                   wxT(" "),              wxStringTokenizerMode::RetEmpty,     0 },
+    { wxT(""),                   wxT(" "),              wxStringTokenizerMode::RetEmptyAll, 0 },
+    { wxT(""),                   wxT(" "),              wxStringTokenizerMode::RetDelims,    0 },
+    { wxT(":"),                  wxT(":"),              wxStringTokenizerMode::RetEmpty,     1 },
+    { wxT(":"),                  wxT(":"),              wxStringTokenizerMode::RetDelims,    1 },
+    { wxT(":"),                  wxT(":"),              wxStringTokenizerMode::RetEmptyAll, 2 },
+    { wxT("::"),                 wxT(":"),              wxStringTokenizerMode::RetEmpty,     1 },
+    { wxT("::"),                 wxT(":"),              wxStringTokenizerMode::RetDelims,    1 },
+    { wxT("::"),                 wxT(":"),              wxStringTokenizerMode::RetEmptyAll, 3 },
 
-    { wxT("Hello, world"),       wxT(" "),              wxTOKEN_DEFAULT,       2 },
-    { wxT("Hello,   world  "),   wxT(" "),              wxTOKEN_DEFAULT,       2 },
-    { wxT("Hello, world"),       wxT(","),              wxTOKEN_DEFAULT,       2 },
-    { wxT("Hello, world!"),      wxT(",!"),             wxTOKEN_DEFAULT,       2 },
-    { wxT("Hello,, world!"),     wxT(",!"),             wxTOKEN_DEFAULT,       3 },
-    { wxT("Hello,, world!"),     wxT(",!"),             wxTOKEN_STRTOK,        2 },
-    { wxT("Hello, world!"),      wxT(",!"),             wxTOKEN_RET_EMPTY_ALL, 3 },
+    { wxT("Hello, world"),       wxT(" "),              wxStringTokenizerMode::Default,       2 },
+    { wxT("Hello,   world  "),   wxT(" "),              wxStringTokenizerMode::Default,       2 },
+    { wxT("Hello, world"),       wxT(","),              wxStringTokenizerMode::Default,       2 },
+    { wxT("Hello, world!"),      wxT(",!"),             wxStringTokenizerMode::Default,       2 },
+    { wxT("Hello,, world!"),     wxT(",!"),             wxStringTokenizerMode::Default,       3 },
+    { wxT("Hello,, world!"),     wxT(",!"),             wxStringTokenizerMode::StrTok,        2 },
+    { wxT("Hello, world!"),      wxT(",!"),             wxStringTokenizerMode::RetEmptyAll, 3 },
 
     { wxT("username:password:uid:gid:gecos:home:shell"),
-                                wxT(":"),              wxTOKEN_DEFAULT,       7 },
+                                wxT(":"),              wxStringTokenizerMode::Default,       7 },
 
-    { wxT("1:2::3:"),            wxT(":"),              wxTOKEN_DEFAULT,       4 },
-    { wxT("1:2::3:"),            wxT(":"),              wxTOKEN_RET_EMPTY,     4 },
-    { wxT("1:2::3:"),            wxT(":"),              wxTOKEN_RET_EMPTY_ALL, 5 },
-    { wxT("1:2::3:"),            wxT(":"),              wxTOKEN_RET_DELIMS,    4 },
-    { wxT("1:2::3:"),            wxT(":"),              wxTOKEN_STRTOK,        3 },
+    { wxT("1:2::3:"),            wxT(":"),              wxStringTokenizerMode::Default,       4 },
+    { wxT("1:2::3:"),            wxT(":"),              wxStringTokenizerMode::RetEmpty,     4 },
+    { wxT("1:2::3:"),            wxT(":"),              wxStringTokenizerMode::RetEmptyAll, 5 },
+    { wxT("1:2::3:"),            wxT(":"),              wxStringTokenizerMode::RetDelims,    4 },
+    { wxT("1:2::3:"),            wxT(":"),              wxStringTokenizerMode::StrTok,        3 },
 
-    { wxT("1:2::3::"),           wxT(":"),              wxTOKEN_DEFAULT,       4 },
-    { wxT("1:2::3::"),           wxT(":"),              wxTOKEN_RET_EMPTY,     4 },
-    { wxT("1:2::3::"),           wxT(":"),              wxTOKEN_RET_EMPTY_ALL, 6 },
-    { wxT("1:2::3::"),           wxT(":"),              wxTOKEN_RET_DELIMS,    4 },
-    { wxT("1:2::3::"),           wxT(":"),              wxTOKEN_STRTOK,        3 },
+    { wxT("1:2::3::"),           wxT(":"),              wxStringTokenizerMode::Default,       4 },
+    { wxT("1:2::3::"),           wxT(":"),              wxStringTokenizerMode::RetEmpty,     4 },
+    { wxT("1:2::3::"),           wxT(":"),              wxStringTokenizerMode::RetEmptyAll, 6 },
+    { wxT("1:2::3::"),           wxT(":"),              wxStringTokenizerMode::RetDelims,    4 },
+    { wxT("1:2::3::"),           wxT(":"),              wxStringTokenizerMode::StrTok,        3 },
 
-    { wxT("1 \t3\t4  6   "),     wxDEFAULT_DELIMITERS, wxTOKEN_DEFAULT,       4 },
-    { wxT("1 \t3\t4  6   "),     wxDEFAULT_DELIMITERS, wxTOKEN_STRTOK,        4 },
-    { wxT("1 \t3\t4  6   "),     wxDEFAULT_DELIMITERS, wxTOKEN_RET_EMPTY,     6 },
-    { wxT("1 \t3\t4  6   "),     wxDEFAULT_DELIMITERS, wxTOKEN_RET_EMPTY_ALL, 9 },
+    { wxT("1 \t3\t4  6   "),     wxDEFAULT_DELIMITERS, wxStringTokenizerMode::Default,       4 },
+    { wxT("1 \t3\t4  6   "),     wxDEFAULT_DELIMITERS, wxStringTokenizerMode::StrTok,        4 },
+    { wxT("1 \t3\t4  6   "),     wxDEFAULT_DELIMITERS, wxStringTokenizerMode::RetEmpty,     6 },
+    { wxT("1 \t3\t4  6   "),     wxDEFAULT_DELIMITERS, wxStringTokenizerMode::RetEmptyAll, 9 },
 
-    { wxT("01/02/99"),           wxT("/-"),             wxTOKEN_DEFAULT,       3 },
-    { wxT("01-02/99"),           wxT("/-"),             wxTOKEN_RET_DELIMS,    3 },
+    { wxT("01/02/99"),           wxT("/-"),             wxStringTokenizerMode::Default,       3 },
+    { wxT("01-02/99"),           wxT("/-"),             wxStringTokenizerMode::RetDelims,    3 },
 };
 
 // helper function returning the string showing the index for which the test
@@ -205,7 +205,7 @@ TEST_CASE("StrtokCompat")
     for ( size_t n = 0; n < WXSIZEOF(gs_testData); n++ )
     {
         const TokenizerTestData& ttd = gs_testData[n];
-        if ( ttd.mode != wxTOKEN_STRTOK )
+        if ( ttd.mode != wxStringTokenizerMode::StrTok )
             continue;
 
         wxWCharBuffer buf(ttd.str);

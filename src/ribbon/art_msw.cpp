@@ -2091,25 +2091,25 @@ void wxRibbonMSWArtProvider::DrawGalleryButton(wxDC& dc,
     wxColour btn_grad_colour;
     switch(state)
     {
-    case wxRIBBON_GALLERY_BUTTON_NORMAL:
+    case wxRibbonGalleryButtonState::Normal:
         btn_top_brush = m_gallery_button_background_top_brush;
         btn_colour = m_gallery_button_background_colour;
         btn_grad_colour = m_gallery_button_background_gradient_colour;
         btn_bitmap = bitmaps[0];
         break;
-    case wxRIBBON_GALLERY_BUTTON_HOVERED:
+    case wxRibbonGalleryButtonState::Hovered:
         btn_top_brush = m_gallery_button_hover_background_top_brush;
         btn_colour = m_gallery_button_hover_background_colour;
         btn_grad_colour = m_gallery_button_hover_background_gradient_colour;
         btn_bitmap = bitmaps[1];
         break;
-    case wxRIBBON_GALLERY_BUTTON_ACTIVE:
+    case wxRibbonGalleryButtonState::Active:
         btn_top_brush = m_gallery_button_active_background_top_brush;
         btn_colour = m_gallery_button_active_background_colour;
         btn_grad_colour = m_gallery_button_active_background_gradient_colour;
         btn_bitmap = bitmaps[2];
         break;
-    case wxRIBBON_GALLERY_BUTTON_DISABLED:
+    case wxRibbonGalleryButtonState::Disabled:
         btn_top_brush = m_gallery_button_disabled_background_top_brush;
         btn_colour = m_gallery_button_disabled_background_colour;
         btn_grad_colour = m_gallery_button_disabled_background_gradient_colour;

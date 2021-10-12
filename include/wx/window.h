@@ -110,20 +110,20 @@ enum class wxWindowVariant
 #endif
 
 // valid values for Show/HideWithEffect()
-enum wxShowEffect
+enum class wxShowEffect
 {
-    wxSHOW_EFFECT_NONE,
-    wxSHOW_EFFECT_ROLL_TO_LEFT,
-    wxSHOW_EFFECT_ROLL_TO_RIGHT,
-    wxSHOW_EFFECT_ROLL_TO_TOP,
-    wxSHOW_EFFECT_ROLL_TO_BOTTOM,
-    wxSHOW_EFFECT_SLIDE_TO_LEFT,
-    wxSHOW_EFFECT_SLIDE_TO_RIGHT,
-    wxSHOW_EFFECT_SLIDE_TO_TOP,
-    wxSHOW_EFFECT_SLIDE_TO_BOTTOM,
-    wxSHOW_EFFECT_BLEND,
-    wxSHOW_EFFECT_EXPAND,
-    wxSHOW_EFFECT_MAX
+    None,
+    RollToLeft,
+    RollToRight,
+    RollToTop,
+    RollToBottom,
+    SlideToLeft,
+    SlideToRight,
+    SlideToTop,
+    SlideToBottom,
+    Blend,
+    Expand,
+    Max
 };
 
 // Values for EnableTouchEvents() mask.
@@ -143,33 +143,33 @@ enum
 /*
  * Background styles. See wxWindow::SetBackgroundStyle
  */
-enum wxBackgroundStyle
+enum class wxBackgroundStyle
 {
     /*
         background is erased in the EVT_ERASE_BACKGROUND handler or using
         the system default background if no such handler is defined (this
         is the default style)
      */
-    wxBG_STYLE_ERASE,
+    Erase,
 
     /*
         background is erased by the system, no EVT_ERASE_BACKGROUND event
         is generated at all
      */
-    wxBG_STYLE_SYSTEM,
+    System,
 
     /*
         background is erased in EVT_PAINT handler and not erased at all
         before it, this should be used if the paint handler paints over
         the entire window to avoid flicker
      */
-    wxBG_STYLE_PAINT,
+    Paint,
 
     /*
         Indicates that the window background is not erased, letting the parent
         window show through.
      */
-    wxBG_STYLE_TRANSPARENT
+    Transparent
 };
 
 
@@ -779,9 +779,9 @@ public:
         // move this window just before/after the specified one in tab order
         // (the other window must be our sibling!)
     void MoveBeforeInTabOrder(wxWindow *win)
-        { DoMoveInTabOrder(win, OrderBefore); }
+        { DoMoveInTabOrder(win, WindowOrder::Before); }
     void MoveAfterInTabOrder(wxWindow *win)
-        { DoMoveInTabOrder(win, OrderAfter); }
+        { DoMoveInTabOrder(win, WindowOrder::After); }
 
 
     // parent/children relations
@@ -796,8 +796,8 @@ public:
 
         // get the window before/after this one in the parents children list,
         // returns NULL if this is the first/last window
-    wxWindow *wxGetPrevSibling() const { return DoGetSibling(OrderBefore); }
-    wxWindow *wxGetNextSibling() const { return DoGetSibling(OrderAfter); }
+    wxWindow *wxGetPrevSibling() const { return DoGetSibling(WindowOrder::Before); }
+    wxWindow *wxGetNextSibling() const { return DoGetSibling(WindowOrder::After); }
 
         // get the parent or the parent of the parent
     wxWindow *GetParent() const { return m_parent; }
@@ -1183,7 +1183,7 @@ public:
     virtual bool HasTransparentBackground() { return false; }
 
         // Returns true if background transparency is supported for this
-        // window, i.e. if calling SetBackgroundStyle(wxBG_STYLE_TRANSPARENT)
+        // window, i.e. if calling SetBackgroundStyle(wxBackgroundStyle::Transparent)
         // has a chance of succeeding. If reason argument is non-NULL, returns a
         // user-readable explanation of why it isn't supported if the return
         // value is false.
@@ -1577,10 +1577,10 @@ public:
     virtual wxWindow *GetMainWindowOfCompositeControl()
         { return (wxWindow*)this; }
 
-    enum NavigationKind
+    enum class NavigationKind
     {
-        Navigation_Tab,
-        Navigation_Accel
+        Tab,
+        Accel
     };
 
     // If this function returns true, keyboard events of the given kind can't
@@ -1621,10 +1621,10 @@ protected:
     bool TryBefore(wxEvent& event) override;
     bool TryAfter(wxEvent& event) override;
 
-    enum WindowOrder
+    enum class WindowOrder
     {
-        OrderBefore,     // insert before the given window
-        OrderAfter       // insert after the given window
+        Before,     // insert before the given window
+        After       // insert after the given window
     };
 
     // common part of GetPrev/NextSibling()

@@ -113,7 +113,7 @@ bool wxSplitterWindow::Create(wxWindow *parent, wxWindowID id,
 #if !defined(__WXGTK__) || defined(__WXGTK20__)
         // don't erase the splitter background, it's pointless as we overwrite it
         // anyhow
-        SetBackgroundStyle(wxBG_STYLE_PAINT);
+        SetBackgroundStyle(wxBackgroundStyle::Paint);
 #endif
     }
 
@@ -152,7 +152,7 @@ void wxSplitterWindow::OnLeaveSash()
 
 void wxSplitterWindow::SetResizeCursor()
 {
-    SetCursor(m_splitMode == wxSPLIT_VERTICAL ? m_sashCursorWE
+    SetCursor(m_splitMode == wxSplitMode::Vertical ? m_sashCursorWE
                                               : m_sashCursorNS);
 }
 
@@ -218,7 +218,7 @@ void wxSplitterWindow::OnMouseEvent(wxMouseEvent& event)
         if ( SashHitTest(wxPoint{x, y}) )
         {
             // Start the drag now
-            m_dragMode = wxSPLIT_DRAG_DRAGGING;
+            m_dragMode = wxSplitDragMode::Dragging;
 
             // Capture mouse and set the cursor
             CaptureMouse();
@@ -230,8 +230,8 @@ void wxSplitterWindow::OnMouseEvent(wxMouseEvent& event)
                 // shadow sash
                 m_sashPositionCurrent = m_sashPosition;
 
-                m_oldX = (m_splitMode == wxSPLIT_VERTICAL ? m_sashPositionCurrent : x);
-                m_oldY = (m_splitMode != wxSPLIT_VERTICAL ? m_sashPositionCurrent : y);
+                m_oldX = (m_splitMode == wxSplitMode::Vertical ? m_sashPositionCurrent : x);
+                m_oldY = (m_splitMode != wxSplitMode::Vertical ? m_sashPositionCurrent : y);
                 DrawSashTracker(m_oldX, m_oldY);
             }
 
@@ -240,10 +240,10 @@ void wxSplitterWindow::OnMouseEvent(wxMouseEvent& event)
             return;
         }
     }
-    else if (event.LeftUp() && m_dragMode == wxSPLIT_DRAG_DRAGGING)
+    else if (event.LeftUp() && m_dragMode == wxSplitDragMode::Dragging)
     {
         // We can stop dragging now and see what we've got.
-        m_dragMode = wxSPLIT_DRAG_NONE;
+        m_dragMode = wxSplitDragMode::None;
 
         // Release mouse and unset the cursor
         ReleaseMouse();
@@ -264,7 +264,7 @@ void wxSplitterWindow::OnMouseEvent(wxMouseEvent& event)
         // the position of the click doesn't exactly correspond to
         // m_sashPosition, rather it changes it by the distance by which the
         // mouse has moved
-        int diff = m_splitMode == wxSPLIT_VERTICAL ? x - m_ptStart.x : y - m_ptStart.y;
+        int diff = m_splitMode == wxSplitMode::Vertical ? x - m_ptStart.x : y - m_ptStart.y;
 
         int posSashNew = OnSashPositionChanging(m_sashStart + diff);
         if ( posSashNew == -1 )
@@ -311,16 +311,16 @@ void wxSplitterWindow::OnMouseEvent(wxMouseEvent& event)
 
         SizeWindows();
     }  // left up && dragging
-    else if ((event.Moving() || event.Leaving() || event.Entering()) && (m_dragMode == wxSPLIT_DRAG_NONE))
+    else if ((event.Moving() || event.Leaving() || event.Entering()) && (m_dragMode == wxSplitDragMode::None))
     {
         if ( event.Leaving() || !SashHitTest(wxPoint{x, y}) )
             OnLeaveSash();
         else
             OnEnterSash();
     }
-    else if (event.Dragging() && (m_dragMode == wxSPLIT_DRAG_DRAGGING))
+    else if (event.Dragging() && (m_dragMode == wxSplitDragMode::Dragging))
     {
-        int diff = m_splitMode == wxSPLIT_VERTICAL ? x - m_ptStart.x : y - m_ptStart.y;
+        int diff = m_splitMode == wxSplitMode::Vertical ? x - m_ptStart.x : y - m_ptStart.y;
 
         int posSashNew = OnSashPositionChanging(m_sashStart + diff);
         if ( posSashNew == -1 )
@@ -339,8 +339,8 @@ void wxSplitterWindow::OnMouseEvent(wxMouseEvent& event)
             // Erase old tracker
             DrawSashTracker(m_oldX, m_oldY);
 
-            m_oldX = (m_splitMode == wxSPLIT_VERTICAL ? m_sashPositionCurrent : x);
-            m_oldY = (m_splitMode != wxSPLIT_VERTICAL ? m_sashPositionCurrent : y);
+            m_oldX = (m_splitMode == wxSplitMode::Vertical ? m_sashPositionCurrent : x);
+            m_oldY = (m_splitMode != wxSplitMode::Vertical ? m_sashPositionCurrent : y);
 
 #ifdef __WXMSW__
             // As we captured the mouse, we may get the mouse events from outside
@@ -382,10 +382,10 @@ void wxSplitterWindow::OnMouseEvent(wxMouseEvent& event)
 
 void wxSplitterWindow::OnMouseCaptureLost(wxMouseCaptureLostEvent& WXUNUSED(event))
 {
-    if (m_dragMode != wxSPLIT_DRAG_DRAGGING)
+    if (m_dragMode != wxSplitDragMode::Dragging)
         return;
 
-    m_dragMode = wxSPLIT_DRAG_NONE;
+    m_dragMode = wxSplitDragMode::None;
 
     SetCursor(* wxSTANDARD_CURSOR);
 
@@ -434,9 +434,9 @@ void wxSplitterWindow::OnSize(wxSizeEvent& event)
     // modified it before this happens.
     if ( m_windowTwo && m_requestedSashPosition == std::numeric_limits<int>::max() )
     {
-        int size = m_splitMode == wxSPLIT_VERTICAL ? curSize.x : curSize.y;
+        int size = m_splitMode == wxSplitMode::Vertical ? curSize.x : curSize.y;
 
-        int old_size = m_splitMode == wxSPLIT_VERTICAL ? m_lastSize.x : m_lastSize.y;
+        int old_size = m_splitMode == wxSplitMode::Vertical ? m_lastSize.x : m_lastSize.y;
 
         // Don't do anything if the size didn't really change.
         if ( size != old_size )
@@ -479,7 +479,7 @@ bool wxSplitterWindow::SashHitTest(wxPoint pt)
     if ( m_windowTwo == nullptr || m_sashPosition == 0)
         return false; // No sash
 
-    int z = m_splitMode == wxSPLIT_VERTICAL ? pt.x : pt.y;
+    int z = m_splitMode == wxSplitMode::Vertical ? pt.x : pt.y;
     int hitMax = m_sashPosition + GetSashSize() - 1;
 
     return z >= m_sashPosition && z <= hitMax;
@@ -531,7 +531,7 @@ void wxSplitterWindow::DrawSash(wxDC& dc)
                                 dc,
                                 GetClientSize(),
                                 m_sashPosition,
-                                m_splitMode == wxSPLIT_VERTICAL ? wxVERTICAL
+                                m_splitMode == wxSplitMode::Vertical ? wxVERTICAL
                                                                 : wxHORIZONTAL,
                                 m_isHot ? (int)wxCONTROL_CURRENT : 0
                             );
@@ -546,7 +546,7 @@ void wxSplitterWindow::DrawSashTracker(int x, int y)
     int x1, y1;
     int x2, y2;
 
-    if ( m_splitMode == wxSPLIT_VERTICAL )
+    if ( m_splitMode == wxSplitMode::Vertical )
     {
         x1 = x2 = std::clamp(x, 0, client_size.x) + m_sashTrackerPen->GetWidth()/2;
         y1 = 2;
@@ -575,7 +575,7 @@ int wxSplitterWindow::GetWindowSize() const
 {
     wxSize size = GetClientSize();
 
-    return m_splitMode == wxSPLIT_VERTICAL ? size.x : size.y;
+    return m_splitMode == wxSplitMode::Vertical ? size.x : size.y;
 }
 
 int wxSplitterWindow::AdjustSashPosition(int sashPos) const
@@ -587,7 +587,7 @@ int wxSplitterWindow::AdjustSashPosition(int sashPos) const
     {
         // the window shouldn't be smaller than its own minimal size nor
         // smaller than the minimual pane size specified for this splitter
-        int minSize = m_splitMode == wxSPLIT_VERTICAL ? win->GetMinWidth()
+        int minSize = m_splitMode == wxSplitMode::Vertical ? win->GetMinWidth()
                                                       : win->GetMinHeight();
 
         if ( minSize == -1 || m_minimumPaneSize > minSize )
@@ -602,7 +602,7 @@ int wxSplitterWindow::AdjustSashPosition(int sashPos) const
     win = GetWindow2();
     if ( win )
     {
-        int minSize = m_splitMode == wxSPLIT_VERTICAL ? win->GetMinWidth()
+        int minSize = m_splitMode == wxSplitMode::Vertical ? win->GetMinWidth()
                                                       : win->GetMinHeight();
 
         if ( minSize == -1 || m_minimumPaneSize > minSize )
@@ -687,7 +687,7 @@ void wxSplitterWindow::SizeWindows()
             size2 = GetSashPosition() + sash;
 
         int x2, y2, w1, h1, w2, h2;
-        if ( GetSplitMode() == wxSPLIT_VERTICAL )
+        if ( GetSplitMode() == wxSplitMode::Vertical )
         {
             w1 = size1;
             w2 = client_size.x - 2*border - sash - w1;
@@ -891,7 +891,7 @@ wxSize wxSplitterWindow::DoGetBestSize() const
     // pSash points to the size component to which sash size must be added
     int *pSash;
     wxSize sizeBest;
-    if ( m_splitMode == wxSPLIT_VERTICAL )
+    if ( m_splitMode == wxSplitMode::Vertical )
     {
         sizeBest.y = std::max(size1.y, size2.y);
         sizeBest.x = std::max(size1.x, m_minimumPaneSize) +
@@ -899,7 +899,7 @@ wxSize wxSplitterWindow::DoGetBestSize() const
 
         pSash = &sizeBest.x;
     }
-    else // wxSPLIT_HORIZONTAL
+    else // wxSplitMode::Horizontal
     {
         sizeBest.x = std::max(size1.x, size2.x);
         sizeBest.y = std::max(size1.y, m_minimumPaneSize) +

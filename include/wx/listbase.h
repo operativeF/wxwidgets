@@ -128,14 +128,14 @@ using ListHitTestFlags = InclBitfield<ListHitTest>;
 // GetSubItemRect constants
 constexpr long wxLIST_GETSUBITEMRECT_WHOLEITEM = -1L;
 
-// Flags for GetNextItem (MSW only except wxLIST_NEXT_ALL)
-enum
+// Flags for GetNextItem (MSW only except wxListGetNextItem::All)
+enum class wxListGetNextItem
 {
-    wxLIST_NEXT_ABOVE,          // Searches for an item above the specified item
-    wxLIST_NEXT_ALL,            // Searches for subsequent item by index
-    wxLIST_NEXT_BELOW,          // Searches for an item below the specified item
-    wxLIST_NEXT_LEFT,           // Searches for an item to the left of the specified item
-    wxLIST_NEXT_RIGHT           // Searches for an item to the right of the specified item
+    Above,          // Searches for an item above the specified item
+    All,            // Searches for subsequent item by index
+    Below,          // Searches for an item below the specified item
+    Left,           // Searches for an item to the left of the specified item
+    Right           // Searches for an item to the right of the specified item
 };
 
 // Alignment flags for Arrange (MSW only except wxListAlignment::Left)

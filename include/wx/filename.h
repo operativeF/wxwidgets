@@ -55,11 +55,11 @@ enum wxPathFormat
 };
 
 // different conventions that may be used with GetHumanReadableSize()
-enum wxSizeConvention
+enum class wxSizeConvention
 {
-    wxSIZE_CONV_TRADITIONAL,  // 1024 bytes = 1 KB
-    wxSIZE_CONV_IEC,          // 1024 bytes = 1 KiB
-    wxSIZE_CONV_SI            // 1000 bytes = 1 KB
+    Traditional,  // 1024 bytes = 1 KB
+    IEC,          // 1024 bytes = 1 KiB
+    SI            // 1000 bytes = 1 KB
 };
 
 // the kind of normalization to do with the file name: these values can be
@@ -579,12 +579,12 @@ public:
     wxString
     GetHumanReadableSize(const wxString& nullsize = wxGetTranslation(wxASCII_STR("Not available")),
                          int precision = 1,
-                         wxSizeConvention conv = wxSIZE_CONV_TRADITIONAL) const;
+                         wxSizeConvention conv = wxSizeConvention::Traditional) const;
     static wxString
     GetHumanReadableSize(const wxULongLong& sz,
                          const wxString& nullsize = wxGetTranslation(wxASCII_STR("Not available")),
                          int precision = 1,
-                         wxSizeConvention conv = wxSIZE_CONV_TRADITIONAL);
+                         wxSizeConvention conv = wxSizeConvention::Traditional);
 #endif // wxUSE_LONGLONG
 
 private:

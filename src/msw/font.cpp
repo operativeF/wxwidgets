@@ -652,7 +652,7 @@ bool wxNativeFontInfo::FromString(const wxString& s)
 {
     long l;
 
-    wxStringTokenizer tokenizer(s, wxS(";"), wxTOKEN_RET_EMPTY_ALL);
+    wxStringTokenizer tokenizer(s, wxS(";"), wxStringTokenizerMode::RetEmptyAll);
 
     // first the version
     wxString token = tokenizer.GetNextToken();

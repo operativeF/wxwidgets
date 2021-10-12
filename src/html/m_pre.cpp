@@ -88,7 +88,7 @@ TAG_HANDLER_BEGIN(PRE, "PRE")
             m_WParser->GetWhitespaceMode();
 
         wxHtmlContainerCell *c = m_WParser->GetContainer();
-        m_WParser->SetWhitespaceMode(wxHtmlWinParser::Whitespace_Pre);
+        m_WParser->SetWhitespaceMode(wxHtmlWinParser::WhitespaceMode::Pre);
         m_WParser->SetFontUnderlined(false);
         m_WParser->SetFontBold(false);
         m_WParser->SetFontItalic(false);
@@ -105,7 +105,7 @@ TAG_HANDLER_BEGIN(PRE, "PRE")
 
         wxString srcMid = m_WParser->GetInnerSource(tag);
 
-        // setting Whitespace_Pre mode takes care of spaces and TABs, but
+        // setting WhitespaceMode::Pre mode takes care of spaces and TABs, but
         // not linebreaks, so we have to translate them into <br> by
         // calling HtmlizeLinebreaks() here
         ParseInnerSource(HtmlizeLinebreaks(srcMid));

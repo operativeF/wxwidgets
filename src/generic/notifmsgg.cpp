@@ -224,7 +224,7 @@ bool wxNotificationMessageWindow::Hide()
         m_timer.Stop();
 
     RemoveVisibleNotification(this);
-    return wxFrame::HideWithEffect(wxSHOW_EFFECT_BLEND);
+    return wxFrame::HideWithEffect(wxShowEffect::Blend);
 }
 
 void wxNotificationMessageWindow::Set(int timeout)
@@ -442,7 +442,7 @@ bool wxGenericNotificationMessageImpl::Show(int timeout)
     SetActive(true);
     m_window->Set(timeout);
 
-    m_window->ShowWithEffect(wxSHOW_EFFECT_BLEND);
+    m_window->ShowWithEffect(wxShowEffect::Blend);
 
     return true;
 }

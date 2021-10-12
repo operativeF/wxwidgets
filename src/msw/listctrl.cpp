@@ -300,7 +300,7 @@ void wxListCtrl::MSWSetExListStyles()
 
     // When using LVS_EX_DOUBLEBUFFER, we don't need to erase our
     // background and doing it only results in flicker.
-    SetBackgroundStyle(wxBG_STYLE_PAINT);
+    SetBackgroundStyle(wxBackgroundStyle::Paint);
 
     ::SendMessageW(GetHwnd(), LVM_SETEXTENDEDLISTVIEWSTYLE, 0, exStyle);
 }
@@ -1009,7 +1009,7 @@ bool wxListCtrl::SetItemState(long item, ListStateFlags state, ListStateFlags st
     long focusOld;
     if ( IsVirtual() && changingFocus )
     {
-        focusOld = GetNextItem(-1, wxLIST_NEXT_ALL, ListStates::Focused);
+        focusOld = GetNextItem(-1, wxListGetNextItem::All, ListStates::Focused);
     }
     else
     {
@@ -1386,25 +1386,25 @@ long wxListCtrl::GetTopItem() const
 
 // Searches for an item, starting from 'item'.
 // 'geometry' is one of
-// wxLIST_NEXT_ABOVE/ALL/BELOW/LEFT/RIGHT.
+// wxListGetNextItem::Above/All/Below/Left/Right.
 // 'state' is a state bit flag, one or more of
-// ListStates::DropHiLited/FOCUSED/SELECTED/CUT.
+// ListStates::DropHiLited/Focused/Selected/Cut.
 // item can be -1 to find the first item that matches the
 // specified flags.
 // Returns the item or -1 if unsuccessful.
-long wxListCtrl::GetNextItem(long item, int geom, ListStateFlags state) const
+long wxListCtrl::GetNextItem(long item, wxListGetNextItem geom, ListStateFlags state) const
 {
     long flags = 0;
 
-    if ( geom == wxLIST_NEXT_ABOVE )
+    if ( geom == wxListGetNextItem::Above )
         flags |= LVNI_ABOVE;
-    if ( geom == wxLIST_NEXT_ALL )
+    if ( geom == wxListGetNextItem::All )
         flags |= LVNI_ALL;
-    if ( geom == wxLIST_NEXT_BELOW )
+    if ( geom == wxListGetNextItem::Below )
         flags |= LVNI_BELOW;
-    if ( geom == wxLIST_NEXT_LEFT )
+    if ( geom == wxListGetNextItem::Left )
         flags |= LVNI_TOLEFT;
-    if ( geom == wxLIST_NEXT_RIGHT )
+    if ( geom == wxListGetNextItem::Right )
         flags |= LVNI_TORIGHT;
 
     if ( state & ListStates::Cut )
@@ -2465,7 +2465,7 @@ bool wxListCtrl::MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result)
 
                     // get the current selection
                     long lItem = GetNextItem(-1,
-                                             wxLIST_NEXT_ALL,
+                                             wxListGetNextItem::All,
                                              ListStates::Selected);
 
                     // <Enter> or <Space> activate the selected item if any (but

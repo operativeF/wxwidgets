@@ -189,7 +189,7 @@ std::vector<wxString> wxSplit(const wxString& str, const wxChar sep, const wxCha
     if ( escape == wxT('\0') )
     {
         // simple case: we don't need to honour the escape character
-        return wxStringTokenize(str, sep, wxTOKEN_RET_EMPTY_ALL);
+        return wxStringTokenize(str, sep, wxStringTokenizerMode::RetEmptyAll);
     }
 
     std::vector<wxString> ret;

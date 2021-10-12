@@ -246,7 +246,7 @@ public:
     // item can be -1 to find the first item that matches the
     // specified flags.
     // Returns the item or -1 if unsuccessful.
-    long GetNextItem(long item, int geometry = wxLIST_NEXT_ALL, ListStateFlags state = ListStates::Nil) const;
+    long GetNextItem(long item, wxListGetNextItem geometry = wxListGetNextItem::All, ListStateFlags state = ListStates::Nil) const;
 
     // Gets one of the three image lists
     wxImageList *GetImageList(int which) const override;

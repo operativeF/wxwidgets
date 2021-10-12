@@ -22,20 +22,20 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxInfoBarXmlHandler, wxXmlResourceHandler);
 
 #define XRC_ADD_SHOW_EFFECT(style) m_effectNames[style] = #style;
 
-wxInfoBarXmlHandler::wxInfoBarXmlHandler()
-      
+wxInfoBarXmlHandler::wxInfoBarXmlHandler()     
 {
-    XRC_ADD_SHOW_EFFECT(wxSHOW_EFFECT_NONE);
-    XRC_ADD_SHOW_EFFECT(wxSHOW_EFFECT_ROLL_TO_LEFT);
-    XRC_ADD_SHOW_EFFECT(wxSHOW_EFFECT_ROLL_TO_RIGHT);
-    XRC_ADD_SHOW_EFFECT(wxSHOW_EFFECT_ROLL_TO_TOP);
-    XRC_ADD_SHOW_EFFECT(wxSHOW_EFFECT_ROLL_TO_BOTTOM);
-    XRC_ADD_SHOW_EFFECT(wxSHOW_EFFECT_SLIDE_TO_LEFT);
-    XRC_ADD_SHOW_EFFECT(wxSHOW_EFFECT_SLIDE_TO_RIGHT);
-    XRC_ADD_SHOW_EFFECT(wxSHOW_EFFECT_SLIDE_TO_TOP);
-    XRC_ADD_SHOW_EFFECT(wxSHOW_EFFECT_SLIDE_TO_BOTTOM);
-    XRC_ADD_SHOW_EFFECT(wxSHOW_EFFECT_BLEND);
-    XRC_ADD_SHOW_EFFECT(wxSHOW_EFFECT_EXPAND);
+    // FIXME: Doesn't work with enum class.
+    //XRC_ADD_SHOW_EFFECT(wxShowEffect::None);
+    //XRC_ADD_SHOW_EFFECT(wxShowEffect::RollToLeft);
+    //XRC_ADD_SHOW_EFFECT(wxShowEffect::RollToRight);
+    //XRC_ADD_SHOW_EFFECT(wxShowEffect::RollToTop);
+    //XRC_ADD_SHOW_EFFECT(wxShowEffect::RollToBottom);
+    //XRC_ADD_SHOW_EFFECT(wxShowEffect::SlideToLeft);
+    //XRC_ADD_SHOW_EFFECT(wxShowEffect::SlideToRight);
+    //XRC_ADD_SHOW_EFFECT(wxShowEffect::SlideToTop);
+    //XRC_ADD_SHOW_EFFECT(wxShowEffect::SlideToBottom);
+    //XRC_ADD_SHOW_EFFECT(wxShowEffect::Blend);
+    //XRC_ADD_SHOW_EFFECT(wxShowEffect::Expand);
 }
 
 wxObject *wxInfoBarXmlHandler::DoCreateResource()
@@ -51,7 +51,7 @@ wxObject *wxInfoBarXmlHandler::DoCreateResource()
         wxShowEffect showEffect = GetShowEffect("showeffect");
         wxShowEffect hideEffect = GetShowEffect("hideeffect");
 
-        if ( showEffect != wxSHOW_EFFECT_NONE || hideEffect != wxSHOW_EFFECT_NONE )
+        if ( showEffect != wxShowEffect::None || hideEffect != wxShowEffect::None )
             control->SetShowHideEffects(showEffect, hideEffect);
 
         if ( HasParam("effectduration") )
@@ -86,11 +86,12 @@ bool wxInfoBarXmlHandler::CanHandle(wxXmlNode *node)
 wxShowEffect wxInfoBarXmlHandler::GetShowEffect(wxString const& param)
 {
     if ( !HasParam(param) )
-        return wxSHOW_EFFECT_NONE;
+        return wxShowEffect::None;
 
     wxString const& value = GetParamValue(param);
 
-    for ( int i = 0; i < wxSHOW_EFFECT_MAX; ++i )
+    // FIXME: Don't do this.
+    for ( int i = 0; i != static_cast<int>(wxShowEffect::Max); ++i )
     {
         if ( value == m_effectNames[i] )
             return static_cast<wxShowEffect>(i);
@@ -102,7 +103,7 @@ wxShowEffect wxInfoBarXmlHandler::GetShowEffect(wxString const& param)
         wxString::Format("unknown show effect \"%s\"", value)
     );
 
-    return wxSHOW_EFFECT_NONE;
+    return wxShowEffect::None;
 }
 
 #endif // wxUSE_XRC && wxUSE_INFOBAR

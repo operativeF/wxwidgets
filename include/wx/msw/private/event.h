@@ -30,9 +30,11 @@ public:
         Nonsignaled
     };
 
-    Event()
-    = default;
+    Event() = default;
 
+    Event(const Event&) = delete;
+	Event& operator=(const Event&) = delete;
+    
     // Wrappers around {Create,Set,Reset}Event() Windows API functions, with
     // the same semantics.
     [[maybe_unused]] bool Create(Kind kind = AutomaticReset,
@@ -40,10 +42,6 @@ public:
                 const wxChar* name = nullptr);
     bool Set();
     bool Reset();
-
-private:
-    Event(const Event&) = delete;
-	Event& operator=(const Event&) = delete;
 };
 
 } // namespace wxWinAPI

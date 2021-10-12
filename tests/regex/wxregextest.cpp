@@ -88,7 +88,7 @@ CheckMatch(const char* pattern,
         REQUIRE( ok );
 
         wxStringTokenizer tkz(wxString(expected, *wxConvCurrent),
-                              wxT("\t"), wxTOKEN_RET_EMPTY);
+                              wxT("\t"), wxStringTokenizerMode::RetEmpty);
         size_t i;
 
         for (i = 0; i < re.GetMatchCount() && tkz.HasMoreTokens(); i++) {

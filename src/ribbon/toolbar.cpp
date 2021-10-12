@@ -104,7 +104,7 @@ void wxRibbonToolBar::CommonInit(unsigned int WXUNUSED(style))
     m_nrows_min = 1;
     m_nrows_max = 1;
     m_sizes = new wxSize[1];
-    SetBackgroundStyle(wxBG_STYLE_PAINT);
+    SetBackgroundStyle(wxBackgroundStyle::Paint);
 }
 
 wxRibbonToolBar::~wxRibbonToolBar()

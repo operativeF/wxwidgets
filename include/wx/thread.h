@@ -93,7 +93,7 @@ enum class wxThreadWait
 // idea to avoid using recursive mutexes at all. Also, the last problem with
 // them is that some (older) Unix versions don't support this at all -- which
 // results in a configure warning when building and a deadlock when using them.
-enum wxMutexType
+enum class wxMutexType
 {
     // normal mutex: try to always use this one
     Default,

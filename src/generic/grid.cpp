@@ -7241,7 +7241,7 @@ bool wxGrid::DoShowCellEditControl(const wxGridActivationSource& actSource)
         res = editor->TryActivate(row, col, this, actSource);
     switch ( res.GetAction() )
     {
-        case wxGridActivationResult::Change:
+        case wxGridActivationResult::Action::Change:
             // This is somewhat similar to what DoSaveEditControlValue() does.
             // but we don't allow vetoing CHANGED event here as this code is
             // new and shouldn't have to support this obsolete usage.
@@ -7268,11 +7268,11 @@ bool wxGrid::DoShowCellEditControl(const wxGridActivationSource& actSource)
             }
             [[fallthrough]];
 
-        case wxGridActivationResult::Ignore:
+        case wxGridActivationResult::Action::Ignore:
             // In any case, don't start editing normally.
             return false;
 
-        case wxGridActivationResult::ShowEditor:
+        case wxGridActivationResult::Action::ShowEditor:
             // Continue normally.
             break;
     }

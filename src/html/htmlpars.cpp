@@ -809,7 +809,7 @@ wxFSFile *wxHtmlParser::OpenURL(wxHtmlURLType type,
                                 const wxString& url) const
 {
     unsigned int flags = wxFS_READ;
-    if (type == wxHTML_URL_IMAGE)
+    if (type == wxHtmlURLType::Image)
         flags |= wxFS_SEEKABLE;
 
     return m_FS ? m_FS->OpenFile(url, flags) : nullptr;

@@ -24,14 +24,14 @@
 constexpr wxChar wxDEFAULT_DELIMITERS[] = wxT(" \t\r\n");
 
 // wxStringTokenizer mode flags which determine its behaviour
-enum wxStringTokenizerMode
+enum class wxStringTokenizerMode
 {
-    wxTOKEN_INVALID = -1,   // set by def ctor until SetString() is called
-    wxTOKEN_DEFAULT,        // strtok() for whitespace delims, RET_EMPTY else
-    wxTOKEN_RET_EMPTY,      // return empty token in the middle of the string
-    wxTOKEN_RET_EMPTY_ALL,  // return trailing empty tokens too
-    wxTOKEN_RET_DELIMS,     // return the delim with token (implies RET_EMPTY)
-    wxTOKEN_STRTOK          // behave exactly like strtok(3)
+    Invalid,   // set by def ctor until SetString() is called
+    Default,        // strtok() for whitespace delims, RET_EMPTY else
+    RetEmpty,      // return empty token in the middle of the string
+    RetEmptyAll,  // return trailing empty tokens too
+    RetDelims,     // return the delim with token (implies RET_EMPTY)
+    StrTok          // behave exactly like strtok(3)
 };
 
 // ----------------------------------------------------------------------------
@@ -47,7 +47,7 @@ public:
         // ctor which gives us the string
     wxStringTokenizer(const wxString& str,
                       const wxString& delims = wxDEFAULT_DELIMITERS,
-                      wxStringTokenizerMode mode = wxTOKEN_DEFAULT);
+                      wxStringTokenizerMode mode = wxStringTokenizerMode::Default);
         // copy ctor and assignment operator
     wxStringTokenizer(const wxStringTokenizer& src);
     wxStringTokenizer& operator=(const wxStringTokenizer& src);
@@ -55,7 +55,7 @@ public:
         // args are same as for the non default ctor above
     void SetString(const wxString& str,
                    const wxString& delims = wxDEFAULT_DELIMITERS,
-                   wxStringTokenizerMode mode = wxTOKEN_DEFAULT);
+                   wxStringTokenizerMode mode = wxStringTokenizerMode::Default);
 
         // reinitialize the tokenizer with the same delimiters/mode
     void Reinit(const wxString& str);
@@ -84,10 +84,10 @@ public:
 
     // misc
         // get the current mode - can be different from the one passed to the
-        // ctor if it was wxTOKEN_DEFAULT
+        // ctor if it was wxStringTokenizerMode::Default
     wxStringTokenizerMode GetMode() const { return m_mode; }
         // do we return empty tokens?
-    bool AllowEmpty() const { return m_mode != wxTOKEN_STRTOK; }
+    bool AllowEmpty() const { return m_mode != wxStringTokenizerMode::StrTok; }
 
 
     // backwards compatibility section from now on
@@ -101,7 +101,7 @@ public:
                    const wxString& delims,
                    bool WXUNUSED(ret_delim))
     {
-        SetString(to_tokenize, delims, wxTOKEN_RET_DELIMS);
+        SetString(to_tokenize, delims, wxStringTokenizerMode::RetDelims);
     }
 
     wxStringTokenizer(const wxString& to_tokenize,
@@ -112,17 +112,17 @@ public:
     }
 
 protected:
-    bool IsOk() const { return m_mode != wxTOKEN_INVALID; }
+    bool IsOk() const { return m_mode != wxStringTokenizerMode::Invalid; }
 
     bool DoHasMoreTokens() const;
 
     void DoCopyFrom(const wxStringTokenizer& src);
 
-    enum MoreTokensState
+    enum class MoreTokensState
     {
-        MoreTokens_Unknown,
-        MoreTokens_Yes,
-        MoreTokens_No
+        Unknown,
+        Yes,
+        No
     };
 
     wxString m_string;              // the string we tokenize
@@ -137,7 +137,7 @@ protected:
 
     MoreTokensState m_hasMoreTokens;
 
-    wxStringTokenizerMode m_mode{wxTOKEN_INVALID}; // see wxTOKEN_XXX values
+    wxStringTokenizerMode m_mode{wxStringTokenizerMode::Invalid}; // see wxTOKEN_XXX values
 
     wxChar   m_lastDelim;           // delimiter after last token or '\0'
 };
@@ -151,6 +151,6 @@ protected:
 std::vector<wxString> WXDLLIMPEXP_BASE
 wxStringTokenize(const wxString& str,
                  const wxString& delims = wxDEFAULT_DELIMITERS,
-                 wxStringTokenizerMode mode = wxTOKEN_DEFAULT);
+                 wxStringTokenizerMode mode = wxStringTokenizerMode::Default);
 
 #endif // _WX_TOKENZRH

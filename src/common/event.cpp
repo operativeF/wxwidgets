@@ -537,7 +537,7 @@ wxMouseEvent::wxMouseEvent(wxEventType commandType)
 
     m_clickCount = -1;
 
-    m_wheelAxis = wxMOUSE_WHEEL_VERTICAL;
+    m_wheelAxis = wxMouseWheelAxis::Vertical;
     m_wheelRotation = 0;
     m_wheelDelta = 0;
     m_wheelInverted = false;

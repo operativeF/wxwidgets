@@ -80,12 +80,12 @@ public:
     // get the currently focused item or -1 if none
     long GetFocusedItem() const
     {
-        return GetNextItem(-1, wxLIST_NEXT_ALL, ListStates::Focused);
+        return GetNextItem(-1, wxListGetNextItem::All, ListStates::Focused);
     }
 
     // get first and subsequent selected items, return -1 when no more
     long GetNextSelected(long item) const
-        { return GetNextItem(item, wxLIST_NEXT_ALL, ListStates::Selected); }
+        { return GetNextItem(item, wxListGetNextItem::All, ListStates::Selected); }
     long GetFirstSelected() const
         { return GetNextSelected(-1); }
 

@@ -1540,7 +1540,7 @@ int wxXmlResourceHandlerImpl::GetStyle(const wxString& param, int defaults)
 
     if (!s) return defaults;
 
-    wxStringTokenizer tkn(s, wxT("| \t\n"), wxTOKEN_STRTOK);
+    wxStringTokenizer tkn(s, wxT("| \t\n"), wxStringTokenizerMode::StrTok);
     int style = 0;
 
     wxString fl;

@@ -364,11 +364,11 @@ TEST_CASE_FIXTURE(WindowTestCase, "Window::Show")
 
     CHECK_FALSE(m_window->IsShown());
 
-    m_window->ShowWithEffect(wxSHOW_EFFECT_BLEND);
+    m_window->ShowWithEffect(wxShowEffect::Blend);
 
     CHECK(m_window->IsShown());
 
-    m_window->HideWithEffect(wxSHOW_EFFECT_BLEND);
+    m_window->HideWithEffect(wxShowEffect::Blend);
 
     CHECK_FALSE(m_window->IsShown());
 }

@@ -694,7 +694,7 @@ TAG_HANDLER_BEGIN(IMG, "IMG,MAP,AREA")
                         wxString ext = tmp.AfterLast('.');
                         wxString rest = tmp.BeforeLast('.');
                         wxString hiDPIFilename = rest + "@2x." + ext;
-                        str = m_WParser->OpenURL(wxHTML_URL_IMAGE, hiDPIFilename);
+                        str = m_WParser->OpenURL(wxHtmlURLType::Image, hiDPIFilename);
                         if (str)
                         {
                             scaleHDPI = 2.0;
@@ -703,7 +703,7 @@ TAG_HANDLER_BEGIN(IMG, "IMG,MAP,AREA")
                 }                    
 #endif
                 if (!str)
-                    str = m_WParser->OpenURL(wxHTML_URL_IMAGE, tmp);
+                    str = m_WParser->OpenURL(wxHtmlURLType::Image, tmp);
 
                 if (tag.GetParamAsIntOrPercent(wxT("WIDTH"), &w, wpercent))
                 {

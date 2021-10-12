@@ -334,7 +334,7 @@ TEST_CASE("Image test")
             wxURL url(testData[i].url);
             CHECK_MESSAGE
             (
-                wxURL_NOERR == url.GetError(),
+                wxURLError::None == url.GetError(),
                 ("Constructing URL \"%s\" failed.", testData[i].url)
             );
 

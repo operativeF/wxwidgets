@@ -161,10 +161,10 @@ bool wxAuiFloatingFrame::IsTopNavigationDomain(NavigationKind kind) const
 {
     switch ( kind )
     {
-        case Navigation_Tab:
+        case NavigationKind::Tab:
             break;
 
-        case Navigation_Accel:
+        case NavigationKind::Accel:
             // Floating frames are often used as tool palettes and it's
             // convenient for the accelerators defined in the parent frame to
             // work in them, so don't block their propagation.

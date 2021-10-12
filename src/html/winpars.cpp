@@ -271,17 +271,17 @@ wxFSFile *wxHtmlWinParser::OpenURL(wxHtmlURLType type,
 
         std::string redirect;
         status = m_windowInterface->OnHTMLOpeningURL(type, myfullurl, &redirect);
-        if ( status != wxHTML_REDIRECT )
+        if ( status != wxHtmlOpeningStatus::Redirect )
             break;
 
         myurl = redirect;
     }
 
-    if ( status == wxHTML_BLOCK )
+    if ( status == wxHtmlOpeningStatus::Block )
         return nullptr;
 
     unsigned int flags = wxFS_READ;
-    if (type == wxHTML_URL_IMAGE)
+    if (type == wxHtmlURLType::Image)
         flags |= wxFS_SEEKABLE;
 
     return GetFS()->OpenFile(myurl, flags);
@@ -292,7 +292,7 @@ wxFSFile *wxHtmlWinParser::OpenURL(wxHtmlURLType type,
 
 void wxHtmlWinParser::AddText(const wxString& txt)
 {
-    if ( m_whitespaceMode == Whitespace_Normal )
+    if ( m_whitespaceMode == WhitespaceMode::Normal )
     {
         int templen = 0;
 
@@ -352,12 +352,12 @@ void wxHtmlWinParser::AddText(const wxString& txt)
             m_tmpLastWasSpace = false;
         }
     }
-    else // m_whitespaceMode == Whitespace_Pre
+    else // m_whitespaceMode == WhitespaceMode::Pre
     {
         if ( txt.find(CUR_NBSP_VALUE) != wxString::npos )
         {
             // we need to substitute spaces for &nbsp; here just like we
-            // did in the Whitespace_Normal branch above
+            // did in the WhitespaceMode::Normal branch above
             wxString txt2(txt);
             txt2.Replace(CUR_NBSP_VALUE, ' ');
             AddPreBlock(txt2);

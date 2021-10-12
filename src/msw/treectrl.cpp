@@ -774,7 +774,7 @@ void wxTreeCtrl::SetDoubleBuffered(bool on)
         // There is no need to erase background for a double-buffered
         // window, so disable it when enabling double buffering and restore
         // the default background style value when disabling it.
-        SetBackgroundStyle(on ? wxBG_STYLE_PAINT : wxBG_STYLE_ERASE);
+        SetBackgroundStyle(on ? wxBackgroundStyle::Paint : wxBackgroundStyle::Erase);
     }
     else
     {

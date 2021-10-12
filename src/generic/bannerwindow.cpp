@@ -51,7 +51,7 @@ wxBannerWindow::Create(wxWindow* parent,
 
     m_direction = dir;
 
-    SetBackgroundStyle(wxBG_STYLE_PAINT);
+    SetBackgroundStyle(wxBackgroundStyle::Paint);
 
     return true;
 }

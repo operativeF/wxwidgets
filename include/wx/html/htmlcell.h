@@ -83,11 +83,11 @@ private:
 
 
 
-enum wxHtmlSelectionState
+enum class wxHtmlSelectionState
 {
-    wxHTML_SEL_OUT,     // currently rendered cell is outside the selection
-    wxHTML_SEL_IN,      // ... is inside selection
-    wxHTML_SEL_CHANGING // ... is the cell on which selection state changes
+    Out,     // currently rendered cell is outside the selection
+    In,      // ... is inside selection
+    Changing // ... is the cell on which selection state changes
 };
 
 // Selection state is passed to wxHtmlCell::Draw so that it can render itself
@@ -106,7 +106,7 @@ public:
     wxBrushStyle GetBgMode() const { return m_bgMode; }
 
 private:
-    wxHtmlSelectionState  m_selState{wxHTML_SEL_OUT};
+    wxHtmlSelectionState  m_selState{wxHtmlSelectionState::Out};
     wxColour              m_fgColour;
     wxColour              m_bgColour;
     wxBrushStyle          m_bgMode{wxBrushStyle::Solid};

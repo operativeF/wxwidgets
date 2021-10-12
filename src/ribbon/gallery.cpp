@@ -116,12 +116,12 @@ void wxRibbonGallery::CommonInit(unsigned int WXUNUSED(style))
     m_item_separation_y = 0;
     m_scroll_amount = 0;
     m_scroll_limit = 0;
-    m_up_button_state = wxRIBBON_GALLERY_BUTTON_DISABLED;
-    m_down_button_state = wxRIBBON_GALLERY_BUTTON_NORMAL;
-    m_extension_button_state = wxRIBBON_GALLERY_BUTTON_NORMAL;
+    m_up_button_state = wxRibbonGalleryButtonState::Disabled;
+    m_down_button_state = wxRibbonGalleryButtonState::Normal;
+    m_extension_button_state = wxRibbonGalleryButtonState::Normal;
     m_hovered = false;
 
-    SetBackgroundStyle(wxBG_STYLE_PAINT);
+    SetBackgroundStyle(wxBackgroundStyle::Paint);
 }
 
 void wxRibbonGallery::OnMouseEnter(wxMouseEvent& evt)
@@ -197,19 +197,19 @@ void wxRibbonGallery::OnMouseMove(wxMouseEvent& evt)
 bool wxRibbonGallery::TestButtonHover(const wxRect& rect, wxPoint pos,
         wxRibbonGalleryButtonState* state)
 {
-    if(*state == wxRIBBON_GALLERY_BUTTON_DISABLED)
+    if(*state == wxRibbonGalleryButtonState::Disabled)
         return false;
 
     wxRibbonGalleryButtonState new_state;
     if(rect.Contains(pos))
     {
         if(m_mouse_active_rect == &rect)
-            new_state = wxRIBBON_GALLERY_BUTTON_ACTIVE;
+            new_state = wxRibbonGalleryButtonState::Active;
         else
-            new_state = wxRIBBON_GALLERY_BUTTON_HOVERED;
+            new_state = wxRibbonGalleryButtonState::Hovered;
     }
     else
-        new_state = wxRIBBON_GALLERY_BUTTON_NORMAL;
+        new_state = wxRibbonGalleryButtonState::Normal;
 
     if(new_state != *state)
     {
@@ -226,12 +226,12 @@ void wxRibbonGallery::OnMouseLeave(wxMouseEvent& WXUNUSED(evt))
 {
     m_hovered = false;
     m_active_item = nullptr;
-    if(m_up_button_state != wxRIBBON_GALLERY_BUTTON_DISABLED)
-        m_up_button_state = wxRIBBON_GALLERY_BUTTON_NORMAL;
-    if(m_down_button_state != wxRIBBON_GALLERY_BUTTON_DISABLED)
-        m_down_button_state = wxRIBBON_GALLERY_BUTTON_NORMAL;
-    if(m_extension_button_state != wxRIBBON_GALLERY_BUTTON_DISABLED)
-        m_extension_button_state = wxRIBBON_GALLERY_BUTTON_NORMAL;
+    if(m_up_button_state != wxRibbonGalleryButtonState::Disabled)
+        m_up_button_state = wxRibbonGalleryButtonState::Normal;
+    if(m_down_button_state != wxRibbonGalleryButtonState::Disabled)
+        m_down_button_state = wxRibbonGalleryButtonState::Normal;
+    if(m_extension_button_state != wxRibbonGalleryButtonState::Disabled)
+        m_extension_button_state = wxRibbonGalleryButtonState::Normal;
     if(m_hovered_item != nullptr)
     {
         m_hovered_item = nullptr;
@@ -273,26 +273,26 @@ void wxRibbonGallery::OnMouseDown(wxMouseEvent& evt)
     }
     else if(m_scroll_up_button_rect.Contains(pos))
     {
-        if(m_up_button_state != wxRIBBON_GALLERY_BUTTON_DISABLED)
+        if(m_up_button_state != wxRibbonGalleryButtonState::Disabled)
         {
             m_mouse_active_rect = &m_scroll_up_button_rect;
-            m_up_button_state = wxRIBBON_GALLERY_BUTTON_ACTIVE;
+            m_up_button_state = wxRibbonGalleryButtonState::Active;
         }
     }
     else if(m_scroll_down_button_rect.Contains(pos))
     {
-        if(m_down_button_state != wxRIBBON_GALLERY_BUTTON_DISABLED)
+        if(m_down_button_state != wxRibbonGalleryButtonState::Disabled)
         {
             m_mouse_active_rect = &m_scroll_down_button_rect;
-            m_down_button_state = wxRIBBON_GALLERY_BUTTON_ACTIVE;
+            m_down_button_state = wxRibbonGalleryButtonState::Active;
         }
     }
     else if(m_extension_button_rect.Contains(pos))
     {
-        if(m_extension_button_state != wxRIBBON_GALLERY_BUTTON_DISABLED)
+        if(m_extension_button_state != wxRibbonGalleryButtonState::Disabled)
         {
             m_mouse_active_rect = &m_extension_button_rect;
-            m_extension_button_state = wxRIBBON_GALLERY_BUTTON_ACTIVE;
+            m_extension_button_state = wxRibbonGalleryButtonState::Active;
         }
     }
     if(m_mouse_active_rect != nullptr)
@@ -315,17 +315,17 @@ void wxRibbonGallery::OnMouseUp(wxMouseEvent& evt)
         {
             if(m_mouse_active_rect == &m_scroll_up_button_rect)
             {
-                m_up_button_state = wxRIBBON_GALLERY_BUTTON_HOVERED;
+                m_up_button_state = wxRibbonGalleryButtonState::Hovered;
                 ScrollLines(-1);
             }
             else if(m_mouse_active_rect == &m_scroll_down_button_rect)
             {
-                m_down_button_state = wxRIBBON_GALLERY_BUTTON_HOVERED;
+                m_down_button_state = wxRibbonGalleryButtonState::Hovered;
                 ScrollLines(1);
             }
             else if(m_mouse_active_rect == &m_extension_button_rect)
             {
-                m_extension_button_state = wxRIBBON_GALLERY_BUTTON_HOVERED;
+                m_extension_button_state = wxRibbonGalleryButtonState::Hovered;
                 wxCommandEvent notification(wxEVT_BUTTON,
                     GetId());
                 notification.SetEventObject(this);
@@ -421,12 +421,12 @@ bool wxRibbonGallery::ScrollPixels(int pixels)
             if(m_scroll_amount <= 0)
             {
                 m_scroll_amount = 0;
-                m_up_button_state = wxRIBBON_GALLERY_BUTTON_DISABLED;
+                m_up_button_state = wxRibbonGalleryButtonState::Disabled;
             }
-            else if(m_up_button_state == wxRIBBON_GALLERY_BUTTON_DISABLED)
-                m_up_button_state = wxRIBBON_GALLERY_BUTTON_NORMAL;
-            if(m_down_button_state == wxRIBBON_GALLERY_BUTTON_DISABLED)
-                m_down_button_state = wxRIBBON_GALLERY_BUTTON_NORMAL;
+            else if(m_up_button_state == wxRibbonGalleryButtonState::Disabled)
+                m_up_button_state = wxRibbonGalleryButtonState::Normal;
+            if(m_down_button_state == wxRibbonGalleryButtonState::Disabled)
+                m_down_button_state = wxRibbonGalleryButtonState::Normal;
             return true;
         }
     }
@@ -438,12 +438,12 @@ bool wxRibbonGallery::ScrollPixels(int pixels)
             if(m_scroll_amount >= m_scroll_limit)
             {
                 m_scroll_amount = m_scroll_limit;
-                m_down_button_state = wxRIBBON_GALLERY_BUTTON_DISABLED;
+                m_down_button_state = wxRibbonGalleryButtonState::Disabled;
             }
-            else if(m_down_button_state == wxRIBBON_GALLERY_BUTTON_DISABLED)
-                m_down_button_state = wxRIBBON_GALLERY_BUTTON_NORMAL;
-            if(m_up_button_state == wxRIBBON_GALLERY_BUTTON_DISABLED)
-                m_up_button_state = wxRIBBON_GALLERY_BUTTON_NORMAL;
+            else if(m_down_button_state == wxRibbonGalleryButtonState::Disabled)
+                m_down_button_state = wxRibbonGalleryButtonState::Normal;
+            if(m_up_button_state == wxRibbonGalleryButtonState::Disabled)
+                m_up_button_state = wxRibbonGalleryButtonState::Normal;
             return true;
         }
     }
@@ -670,18 +670,18 @@ bool wxRibbonGallery::Layout()
     if(m_scroll_amount >= m_scroll_limit)
     {
         m_scroll_amount = m_scroll_limit;
-        m_down_button_state = wxRIBBON_GALLERY_BUTTON_DISABLED;
+        m_down_button_state = wxRibbonGalleryButtonState::Disabled;
     }
-    else if(m_down_button_state == wxRIBBON_GALLERY_BUTTON_DISABLED)
-        m_down_button_state = wxRIBBON_GALLERY_BUTTON_NORMAL;
+    else if(m_down_button_state == wxRibbonGalleryButtonState::Disabled)
+        m_down_button_state = wxRibbonGalleryButtonState::Normal;
 
     if(m_scroll_amount <= 0)
     {
         m_scroll_amount = 0;
-        m_up_button_state = wxRIBBON_GALLERY_BUTTON_DISABLED;
+        m_up_button_state = wxRibbonGalleryButtonState::Disabled;
     }
-    else if(m_up_button_state == wxRIBBON_GALLERY_BUTTON_DISABLED)
-        m_up_button_state = wxRIBBON_GALLERY_BUTTON_NORMAL;
+    else if(m_up_button_state == wxRibbonGalleryButtonState::Disabled)
+        m_up_button_state = wxRibbonGalleryButtonState::Normal;
 
     return true;
 }

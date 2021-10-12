@@ -165,7 +165,7 @@ public:
           m_eventType(eventType),
           m_bmp(bmp)
     {
-        SetBackgroundStyle(wxBG_STYLE_PAINT);
+        SetBackgroundStyle(wxBackgroundStyle::Paint);
     }
 
     void SetBitmapLabel(const wxBitmap& label)

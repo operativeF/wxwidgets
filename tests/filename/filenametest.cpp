@@ -539,12 +539,12 @@ void FileNameTestCase::TestGetHumanReadable()
         wxSizeConvention conv;
     } testData[] =
     {
-        { "NA",             0, 1, wxSIZE_CONV_TRADITIONAL },
-        { "2.0 KB",      2000, 1, wxSIZE_CONV_TRADITIONAL },
-        { "1.953 KiB",   2000, 3, wxSIZE_CONV_IEC         },
-        { "2.000 KB",    2000, 3, wxSIZE_CONV_SI          },
-        { "297 KB",    304351, 0, wxSIZE_CONV_TRADITIONAL },
-        { "304 KB",    304351, 0, wxSIZE_CONV_SI          },
+        { "NA",             0, 1, wxSizeConvention::Traditional },
+        { "2.0 KB",      2000, 1, wxSizeConvention::Traditional },
+        { "1.953 KiB",   2000, 3, wxSizeConvention::IEC         },
+        { "2.000 KB",    2000, 3, wxSizeConvention::SI          },
+        { "297 KB",    304351, 0, wxSizeConvention::Traditional },
+        { "304 KB",    304351, 0, wxSizeConvention::SI          },
     };
 
     CLocaleSetter loc;      // we want to use "C" locale for LC_NUMERIC

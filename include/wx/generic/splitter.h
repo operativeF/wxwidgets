@@ -23,17 +23,17 @@ class WXDLLIMPEXP_FWD_CORE wxSplitterEvent;
 // splitter constants
 // ---------------------------------------------------------------------------
 
-enum wxSplitMode
+enum class wxSplitMode
 {
-    wxSPLIT_HORIZONTAL = 1,
-    wxSPLIT_VERTICAL
+    Horizontal,
+    Vertical
 };
 
-enum
+enum class wxSplitDragMode
 {
-    wxSPLIT_DRAG_NONE,
-    wxSPLIT_DRAG_DRAGGING,
-    wxSPLIT_DRAG_LEFT_DOWN
+    None,
+    Dragging,
+    LeftDown
 };
 
 // ---------------------------------------------------------------------------
@@ -91,9 +91,9 @@ public:
     wxWindow *GetWindow2() const { return m_windowTwo; }
 
     // Sets the split mode
-    void SetSplitMode(int mode)
+    void SetSplitMode(wxSplitMode mode)
     {
-        wxASSERT_MSG( mode == wxSPLIT_VERTICAL || mode == wxSPLIT_HORIZONTAL,
+        wxASSERT_MSG( mode == wxSplitMode::Vertical || mode == wxSplitMode::Horizontal,
                       wxT("invalid split mode") );
 
         m_splitMode = (wxSplitMode)mode;
@@ -114,11 +114,11 @@ public:
     virtual bool SplitVertically(wxWindow *window1,
                                  wxWindow *window2,
                                  int sashPosition = 0)
-        { return DoSplit(wxSPLIT_VERTICAL, window1, window2, sashPosition); }
+        { return DoSplit(wxSplitMode::Vertical, window1, window2, sashPosition); }
     virtual bool SplitHorizontally(wxWindow *window1,
                                    wxWindow *window2,
                                    int sashPosition = 0)
-        { return DoSplit(wxSPLIT_HORIZONTAL, window1, window2, sashPosition); }
+        { return DoSplit(wxSplitMode::Horizontal, window1, window2, sashPosition); }
 
     // Removes the specified (or second) window from the view
     // Doesn't actually delete the window.
@@ -289,7 +289,7 @@ protected:
     
     double      m_sashGravity{0.0};
 
-    int         m_dragMode{wxSPLIT_DRAG_NONE};
+    wxSplitDragMode m_dragMode{wxSplitDragMode::None};
     int         m_oldX{0};         // current tracker position if not live mode
     int         m_oldY{0};         // current tracker position if not live mode
     int         m_sashPosition{0}; // Number of pixels from left or top
@@ -298,7 +298,7 @@ protected:
     int         m_sashStart{0};    // sash position when dragging started
     int         m_minimumPaneSize{0};
 
-    wxSplitMode m_splitMode{wxSPLIT_VERTICAL};
+    wxSplitMode m_splitMode{wxSplitMode::Vertical};
 
     // when in live mode, set this to true to resize children in idle
     bool        m_needUpdating{false};

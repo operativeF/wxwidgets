@@ -863,7 +863,7 @@ bool wxWMP10MediaBackend::CreateControl(wxControl* ctrl, wxWindow* parent,
 
     // don't erase the background of our control window so that resizing is a
     // bit smoother
-    m_ctrl->SetBackgroundStyle(wxBG_STYLE_PAINT);
+    m_ctrl->SetBackgroundStyle(wxBackgroundStyle::Paint);
 
     // success
     return true;

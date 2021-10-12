@@ -96,10 +96,11 @@ private:
     bool m_ownsCells{false};
 };
 
-enum {
-    wxPAGE_ODD,
-    wxPAGE_EVEN,
-    wxPAGE_ALL
+enum class wxHeaderFooterPaging
+{
+    EveryOdd,
+    EveryEven,
+    All
 };
 
 
@@ -131,14 +132,14 @@ public:
     void SetHtmlFile(const wxString &htmlfile);
             // same as SetHtmlText except that it takes regular file as the parameter
 
-    void SetHeader(const wxString& header, int pg = wxPAGE_ALL);
-    void SetFooter(const wxString& footer, int pg = wxPAGE_ALL);
+    void SetHeader(const wxString& header, wxHeaderFooterPaging pg = wxHeaderFooterPaging::All);
+    void SetFooter(const wxString& footer, wxHeaderFooterPaging pg = wxHeaderFooterPaging::All);
             // sets header/footer for the document. The argument is interpreted as HTML document.
             // You can use macros in it:
             //   @PAGENUM@ is replaced by page number
             //   @PAGESCNT@ is replaced by total number of pages
             //
-            // pg is one of wxPAGE_ODD, wxPAGE_EVEN and wx_PAGE_ALL constants.
+            // pg is one of wxHeaderFooterPaging::EveryOdd, wxHeaderFooterPaging::EveryEven and wx_PAGE_ALL constants.
             // You can set different header/footer for odd and even pages
 
     // Sets fonts to be used when displaying HTML page. (if size null then default sizes used).
@@ -252,14 +253,14 @@ public:
     void PageSetup();
             // pop up printer or page setup dialog
 
-    void SetHeader(const wxString& header, int pg = wxPAGE_ALL);
-    void SetFooter(const wxString& footer, int pg = wxPAGE_ALL);
+    void SetHeader(const wxString& header, wxHeaderFooterPaging pg = wxHeaderFooterPaging::All);
+    void SetFooter(const wxString& footer, wxHeaderFooterPaging pg = wxHeaderFooterPaging::All);
             // sets header/footer for the document. The argument is interpreted as HTML document.
             // You can use macros in it:
             //   @PAGENUM@ is replaced by page number
             //   @PAGESCNT@ is replaced by total number of pages
             //
-            // pg is one of wxPAGE_ODD, wxPAGE_EVEN and wx_PAGE_ALL constants.
+            // pg is one of wxHeaderFooterPaging::EveryOdd, wxHeaderFooterPaging::EveryEven and wx_PAGE_ALL constants.
             // You can set different header/footer for odd and even pages
 
     void SetFonts(const wxString& normal_face, const wxString& fixed_face, const int* sizes = nullptr);
@@ -287,11 +288,11 @@ public:
             // set the printout name
 
     // Controls showing the dialog when printing: by default, always shown.
-    enum PromptMode
+    enum class PromptMode
     {
-        Prompt_Never,
-        Prompt_Once,
-        Prompt_Always
+        Never,
+        Once,
+        Always
     };
 
     void SetPromptMode(PromptMode promptMode) { m_promptMode = promptMode; }
@@ -310,10 +311,10 @@ private:
     wxString m_FontFaceFixed;
     wxString m_FontFaceNormal;
 
-    enum FontMode
+    enum class FontMode
     {
-        FontMode_Explicit,
-        FontMode_Standard
+        Explicit,
+        Standard
     };
     
     FontMode m_fontMode;
@@ -322,7 +323,7 @@ private:
     wxString m_Footers[2];
     wxWindow* m_ParentWindow;
 
-    PromptMode m_promptMode{Prompt_Always};
+    PromptMode m_promptMode{PromptMode::Always};
 };
 
 

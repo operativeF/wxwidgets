@@ -58,7 +58,7 @@ wxGLCanvasBase::wxGLCanvasBase()
 {
     // we always paint background entirely ourselves so prevent wx from erasing
     // it to avoid flicker
-    SetBackgroundStyle(wxBG_STYLE_PAINT);
+    SetBackgroundStyle(wxBackgroundStyle::Paint);
 }
 
 bool wxGLCanvasBase::SetCurrent(const wxGLContext& context) const

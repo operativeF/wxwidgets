@@ -401,7 +401,7 @@ public:
                           "GridWindow"),
           m_type{type}
     {
-        SetBackgroundStyle(wxBG_STYLE_PAINT);
+        SetBackgroundStyle(wxBackgroundStyle::Paint);
     }
 
     wxGridWindow(const wxGridWindow&) = delete;

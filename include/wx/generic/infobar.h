@@ -55,7 +55,7 @@ public:
     // --------------------------------
 
     // set the effect(s) to use when showing/hiding the bar, may be
-    // wxSHOW_EFFECT_NONE to disable any effects entirely
+    // wxShowEffect::None to disable any effects entirely
     //
     // by default, slide to bottom/top is used when it's positioned on the top
     // of the window for showing/hiding it and top/bottom when it's positioned
@@ -125,8 +125,8 @@ private:
     // the effects to use when showing/hiding and duration for them: by default
     // the effect is determined by the info bar automatically depending on its
     // position and the default duration is used
-    wxShowEffect m_showEffect{wxSHOW_EFFECT_MAX};
-    wxShowEffect m_hideEffect{wxSHOW_EFFECT_MAX};
+    wxShowEffect m_showEffect{wxShowEffect::Max};
+    wxShowEffect m_hideEffect{wxShowEffect::Max};
     
     int m_effectDuration{0};
 

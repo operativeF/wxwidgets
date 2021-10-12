@@ -88,7 +88,7 @@ bool wxStaticBox::Create(wxWindow *parent,
 
         // Our OnPaint() completely erases our background, so don't do it in
         // WM_ERASEBKGND too to avoid flicker.
-        SetBackgroundStyle(wxBG_STYLE_PAINT);
+        SetBackgroundStyle(wxBackgroundStyle::Paint);
     }
 
     return true;

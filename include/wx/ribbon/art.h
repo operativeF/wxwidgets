@@ -168,12 +168,12 @@ enum wxRibbonButtonBarButtonState
     wxRIBBON_BUTTONBAR_BUTTON_STATE_MASK        = 0x1F8
 };
 
-enum wxRibbonGalleryButtonState
+enum class wxRibbonGalleryButtonState
 {
-    wxRIBBON_GALLERY_BUTTON_NORMAL,
-    wxRIBBON_GALLERY_BUTTON_HOVERED,
-    wxRIBBON_GALLERY_BUTTON_ACTIVE,
-    wxRIBBON_GALLERY_BUTTON_DISABLED
+    Normal,
+    Hovered,
+    Active,
+    Disabled
 };
 
 class wxRibbonBar;

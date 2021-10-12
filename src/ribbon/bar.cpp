@@ -782,7 +782,7 @@ void wxRibbonBar::CommonInit(unsigned int style)
     {
         SetArtProvider(new wxRibbonDefaultArtProvider);
     }
-    SetBackgroundStyle(wxBG_STYLE_PAINT);
+    SetBackgroundStyle(wxBackgroundStyle::Paint);
 
     m_toggle_button_hovered = false;
     m_bar_hovered = false;

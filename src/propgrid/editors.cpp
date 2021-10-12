@@ -1480,7 +1480,7 @@ public:
         SetFont( parent->GetFont() );
 
         SetBoxHeight(12);
-        SetBackgroundStyle( wxBG_STYLE_PAINT );
+        SetBackgroundStyle( wxBackgroundStyle::Paint );
     }
 
     void SetBoxHeight(int height)

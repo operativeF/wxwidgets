@@ -125,7 +125,7 @@ void wxRibbonPanel::CommonInit(const wxString& label, const wxBitmap& icon, unsi
     }
 
     SetAutoLayout(true);
-    SetBackgroundStyle(wxBG_STYLE_PAINT);
+    SetBackgroundStyle(wxBackgroundStyle::Paint);
     SetMinSize(wxSize(20, 20));
 }
 

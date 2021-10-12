@@ -708,12 +708,12 @@ void wxFileListCtrl::FreeAllItemsData()
     wxListItem item;
     item.m_mask.set(ListMasks::Data);
 
-    item.m_itemId = GetNextItem( -1, wxLIST_NEXT_ALL );
+    item.m_itemId = GetNextItem( -1, wxListGetNextItem::All );
     while ( item.m_itemId != -1 )
     {
         GetItem( item );
         FreeItemData(item);
-        item.m_itemId = GetNextItem( item.m_itemId, wxLIST_NEXT_ALL );
+        item.m_itemId = GetNextItem( item.m_itemId, wxListGetNextItem::All );
     }
 }
 
@@ -1016,7 +1016,7 @@ wxFileName wxGenericFileCtrl::DoGetFileName() const
     {
         // nothing in the text control, get the selected file from the list
         wxListItem item;
-        item.m_itemId = m_list->GetNextItem(-1, wxLIST_NEXT_ALL,
+        item.m_itemId = m_list->GetNextItem(-1, wxListGetNextItem::All,
                                             ListStates::Selected);
 
         // ... if anything is selected in the list
@@ -1067,7 +1067,7 @@ std::vector<wxString> wxGenericFileCtrl::DoGetFilenames(bool fullPath) const
     item.m_itemId = -1;
     for ( ;; )
     {
-        item.m_itemId = m_list->GetNextItem(item.m_itemId, wxLIST_NEXT_ALL,
+        item.m_itemId = m_list->GetNextItem(item.m_itemId, wxListGetNextItem::All,
                                             ListStates::Selected);
 
         if ( item.m_itemId == -1 )
@@ -1114,7 +1114,7 @@ bool wxGenericFileCtrl::SetFilename( const wxString& name )
 
             for ( ;; )
             {
-                itemIndex = m_list->GetNextItem( itemIndex, wxLIST_NEXT_ALL, ListStates::Selected );
+                itemIndex = m_list->GetNextItem( itemIndex, wxListGetNextItem::All, ListStates::Selected );
                 if ( itemIndex == wxNOT_FOUND )
                     break;
 
@@ -1222,12 +1222,12 @@ void wxGenericFileCtrl::OnTextChange( wxCommandEvent &WXUNUSED( event ) )
         // not get the file whose name they typed.
         if ( m_list->GetSelectedItemCount() > 0 )
         {
-            long item = m_list->GetNextItem( -1, wxLIST_NEXT_ALL,
+            long item = m_list->GetNextItem( -1, wxListGetNextItem::All,
                                              ListStates::Selected );
             while ( item != -1 )
             {
                 m_list->SetItemState( item, ListStateFlags{}, ListStates::Selected );
-                item = m_list->GetNextItem( item, wxLIST_NEXT_ALL, ListStates::Selected );
+                item = m_list->GetNextItem( item, wxListGetNextItem::All, ListStates::Selected );
             }
         }
     }

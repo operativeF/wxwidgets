@@ -1774,10 +1774,10 @@ public:
  wxEVT_RIGHT_DCLICK
 */
 
-enum wxMouseWheelAxis
+enum class wxMouseWheelAxis
 {
-    wxMOUSE_WHEEL_VERTICAL,
-    wxMOUSE_WHEEL_HORIZONTAL
+    Vertical,
+    Horizontal
 };
 
 class WXDLLIMPEXP_CORE wxMouseEvent : public wxEvent,
@@ -1873,8 +1873,8 @@ public:
     // Preferences? Currently false on all other OS's.
     bool IsWheelInverted() const { return m_wheelInverted; }
 
-    // Gets the axis the wheel operation concerns; wxMOUSE_WHEEL_VERTICAL
-    // (most common case) or wxMOUSE_WHEEL_HORIZONTAL (for horizontal scrolling
+    // Gets the axis the wheel operation concerns; wxMouseWheelAxis::Vertical
+    // (most common case) or wxMouseWheelAxis::Horizontal (for horizontal scrolling
     // using e.g. a trackpad).
     wxMouseWheelAxis GetWheelAxis() const { return m_wheelAxis; }
 

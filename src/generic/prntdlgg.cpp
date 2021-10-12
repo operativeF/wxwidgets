@@ -710,7 +710,7 @@ bool wxGenericPrintSetupDialog::TransferDataFromWindow()
         (wxPostScriptPrintNativeData *) m_printData.GetNativeData();
 
     // find selected printer
-    long id = m_printerListCtrl->GetNextItem( -1, wxLIST_NEXT_ALL, ListStates::Selected );
+    long id = m_printerListCtrl->GetNextItem( -1, wxListGetNextItem::All, ListStates::Selected );
     if (id == 0)
     {
         m_printData.SetPrinterName( {} );

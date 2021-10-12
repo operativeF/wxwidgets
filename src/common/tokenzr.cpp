@@ -90,10 +90,10 @@ void wxStringTokenizer::SetString(const wxString& str,
                                   const wxString& delims,
                                   wxStringTokenizerMode mode)
 {
-    if ( mode == wxTOKEN_DEFAULT )
+    if ( mode == wxStringTokenizerMode::Default )
     {
         // by default, we behave like strtok() if the delimiters are only
-        // whitespace characters and as wxTOKEN_RET_EMPTY otherwise (for
+        // whitespace characters and as wxStringTokenizerMode::RetEmpty otherwise (for
         // whitespace delimiters, strtok() behaviour is better because we want
         // to count consecutive spaces as one delimiter)
         wxString::const_iterator p;
@@ -106,12 +106,12 @@ void wxStringTokenizer::SetString(const wxString& str,
         if ( p != delims.end() )
         {
             // not whitespace char in delims
-            mode = wxTOKEN_RET_EMPTY;
+            mode = wxStringTokenizerMode::RetEmpty;
         }
         else
         {
             // only whitespaces
-            mode = wxTOKEN_STRTOK;
+            mode = wxStringTokenizerMode::StrTok;
         }
     }
 
@@ -132,7 +132,7 @@ void wxStringTokenizer::Reinit(const wxString& str)
     m_stringEnd = m_string.end();
     m_pos = m_string.begin();
     m_lastDelim = wxT('\0');
-    m_hasMoreTokens = MoreTokens_Unknown;
+    m_hasMoreTokens = MoreTokensState::Unknown;
 }
 
 void wxStringTokenizer::DoCopyFrom(const wxStringTokenizer& src)
@@ -159,15 +159,15 @@ bool wxStringTokenizer::HasMoreTokens() const
     //     while ( HasMoreTokens() )
     //        GetNextToken();
     // We optimize this case by caching HasMoreTokens() return value here:
-    if ( m_hasMoreTokens == MoreTokens_Unknown )
+    if ( m_hasMoreTokens == MoreTokensState::Unknown )
     {
         const bool r = DoHasMoreTokens();
         const_cast<wxStringTokenizer *>(this)->m_hasMoreTokens =
-            r ? MoreTokens_Yes : MoreTokens_No;
+            r ? MoreTokensState::Yes : MoreTokensState::No;
         return r;
     }
     else
-        return m_hasMoreTokens == MoreTokens_Yes;
+        return m_hasMoreTokens == MoreTokensState::Yes;
 }
 
 bool wxStringTokenizer::DoHasMoreTokens() const
@@ -183,14 +183,14 @@ bool wxStringTokenizer::DoHasMoreTokens() const
 
     switch ( m_mode )
     {
-        case wxTOKEN_RET_EMPTY:
-        case wxTOKEN_RET_DELIMS:
-            // special hack for wxTOKEN_RET_EMPTY: we should return the initial
+        case wxStringTokenizerMode::RetEmpty:
+        case wxStringTokenizerMode::RetDelims:
+            // special hack for wxStringTokenizerMode::RetEmpty: we should return the initial
             // empty token even if there are only delimiters after it
             return !m_string.empty() && m_pos == m_string.begin();
 
-        case wxTOKEN_RET_EMPTY_ALL:
-            // special hack for wxTOKEN_RET_EMPTY_ALL: we can know if we had
+        case wxStringTokenizerMode::RetEmptyAll:
+            // special hack for wxStringTokenizerMode::RetEmptyAll: we can know if we had
             // already returned the trailing empty token after the last
             // delimiter by examining m_lastDelim: it is set to NUL if we run
             // up to the end of the string in GetNextToken(), but if it is not
@@ -198,12 +198,12 @@ bool wxStringTokenizer::DoHasMoreTokens() const
             // already at m_string.length()
             return m_pos < m_stringEnd || m_lastDelim != wxT('\0');
 
-        case wxTOKEN_INVALID:
-        case wxTOKEN_DEFAULT:
+        case wxStringTokenizerMode::Invalid:
+        case wxStringTokenizerMode::Default:
             wxFAIL_MSG( wxT("unexpected tokenizer mode") );
             [[fallthrough]];
 
-        case wxTOKEN_STRTOK:
+        case wxStringTokenizerMode::StrTok:
             // never return empty delimiters
             break;
     }
@@ -247,7 +247,7 @@ wxString wxStringTokenizer::GetNextToken()
             break;
         }
 
-        m_hasMoreTokens = MoreTokens_Unknown;
+        m_hasMoreTokens = MoreTokensState::Unknown;
 
         // find the end of this token
         wxString::const_iterator pos =
@@ -268,10 +268,10 @@ wxString wxStringTokenizer::GetNextToken()
         }
         else // we found a delimiter at pos
         {
-            // in wxTOKEN_RET_DELIMS mode we return the delimiter character
+            // in wxStringTokenizerMode::RetDelims mode we return the delimiter character
             // with token, otherwise leave it out
             wxString::const_iterator tokenEnd(pos);
-            if ( m_mode == wxTOKEN_RET_DELIMS )
+            if ( m_mode == wxStringTokenizerMode::RetDelims )
                 ++tokenEnd;
 
             token.assign(m_pos, tokenEnd);

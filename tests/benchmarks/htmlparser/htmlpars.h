@@ -27,9 +27,9 @@ class wx28HtmlParserState;
 
 enum wx28HtmlURLType
 {
-    wxHTML_URL_PAGE,
-    wxHTML_URL_IMAGE,
-    wxHTML_URL_OTHER
+    wxHtmlURLType::Page,
+    wxHtmlURLType::Image,
+    wxHtmlURLType::Other
 };
 
 // This class handles generic parsing of HTML document : it scans

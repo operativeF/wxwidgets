@@ -175,7 +175,7 @@ bool wxGenericComboCtrl::Create(wxWindow *parent,
     // Set background style for double-buffering, when needed
     // (cannot use when system draws background automatically)
     if ( !HasTransparentBackground() )
-        SetBackgroundStyle( wxBG_STYLE_PAINT );
+        SetBackgroundStyle( wxBackgroundStyle::Paint );
 
     // SetInitialSize should be called last
     SetInitialSize(size);

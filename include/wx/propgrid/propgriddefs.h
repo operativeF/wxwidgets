@@ -621,7 +621,7 @@ template<> inline wxVariant WXVARIANT( const wxColour& value )
 
 // TOKENIZER1 can be done with wxStringTokenizer
 #define WX_PG_TOKENIZER1_BEGIN(WXSTRING,DELIMITER) \
-    wxStringTokenizer tkz(WXSTRING,DELIMITER,wxTOKEN_RET_EMPTY); \
+    wxStringTokenizer tkz(WXSTRING,DELIMITER,wxStringTokenizerMode::RetEmpty); \
     while ( tkz.HasMoreTokens() ) \
     { \
         wxString token = tkz.GetNextToken(); \

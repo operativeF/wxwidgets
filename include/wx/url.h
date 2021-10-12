@@ -24,14 +24,15 @@
 
 #include <string>
 
-enum wxURLError {
-  wxURL_NOERR = 0,
-  wxURL_SNTXERR,
-  wxURL_NOPROTO,
-  wxURL_NOHOST,
-  wxURL_NOPATH,
-  wxURL_CONNERR,
-  wxURL_PROTOERR
+enum class wxURLError
+{
+  None,
+  SyntaxErr,
+  NoProto,
+  NoHost,
+  NoPath,
+  ConnErr,
+  ProtoErr
 };
 
 #if wxUSE_URL_NATIVE
@@ -65,7 +66,7 @@ public:
         { *this = url; return m_error; }
 
     bool IsOk() const
-        { return m_error == wxURL_NOERR; }
+        { return m_error == wxURLError::None; }
 
     wxInputStream *GetInputStream();
 

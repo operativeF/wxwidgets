@@ -39,11 +39,12 @@ struct wxHtmlCacheItem
     // Tag type
     enum Type
     {
-        Type_Normal, // normal tag with a matching ending tag
-        Type_NoMatchingEndingTag, // there's no ending tag for this tag
-        Type_EndingTag // this is ending tag </..>
+        Normal, // normal tag with a matching ending tag
+        NoMatchingEndingTag, // there's no ending tag for this tag
+        EndingTag // this is ending tag </..>
     };
-    Type type{Type_Normal};
+
+    Type type{Type::Normal};
 
     // end positions for the tag:
     // end1 is '<' of ending tag,
@@ -124,13 +125,13 @@ wxHtmlTagsCache::wxHtmlTagsCache(const wxString& source)
 
         if ((stpos+1) < end && *(stpos+1) == wxT('/')) // ending tag:
         {
-            Cache()[tg].type = wxHtmlCacheItem::Type_EndingTag;
+            Cache()[tg].type = wxHtmlCacheItem::Type::EndingTag;
             // find matching begin tag:
             for (i = tg; i >= 0; i--)
             {
-                if ((Cache()[i].type == wxHtmlCacheItem::Type_NoMatchingEndingTag) && (wxStrcmp(Cache()[i].Name, tagBuffer+1) == 0))
+                if ((Cache()[i].type == wxHtmlCacheItem::Type::NoMatchingEndingTag) && (wxStrcmp(Cache()[i].Name, tagBuffer+1) == 0))
                 {
-                    Cache()[i].type = wxHtmlCacheItem::Type_Normal;
+                    Cache()[i].type = wxHtmlCacheItem::Type::Normal;
                     Cache()[i].End1 = stpos;
                     Cache()[i].End2 = pos + 1;
                     break;
@@ -139,7 +140,7 @@ wxHtmlTagsCache::wxHtmlTagsCache(const wxString& source)
         }
         else
         {
-            Cache()[tg].type = wxHtmlCacheItem::Type_NoMatchingEndingTag;
+            Cache()[tg].type = wxHtmlCacheItem::Type::NoMatchingEndingTag;
 
             if (wxIsCDATAElement(tagBuffer))
             {
@@ -263,17 +264,17 @@ void wxHtmlTagsCache::QueryTag(const wxString::const_iterator& at,
 
     switch ( Cache()[m_CachePos].type )
     {
-        case wxHtmlCacheItem::Type_Normal:
+        case wxHtmlCacheItem::Type::Normal:
             *end1 = Cache()[m_CachePos].End1;
             *end2 = Cache()[m_CachePos].End2;
             *hasEnding = true;
             break;
 
-        case wxHtmlCacheItem::Type_EndingTag:
+        case wxHtmlCacheItem::Type::EndingTag:
             wxFAIL_MSG("QueryTag called for ending tag - can't be");
             [[fallthrough]];// but if it does happen, fall through, better than crashing
 
-        case wxHtmlCacheItem::Type_NoMatchingEndingTag:
+        case wxHtmlCacheItem::Type::NoMatchingEndingTag:
             // If input HTML is invalid and there's no closing tag for this
             // one, pretend that it runs all the way to the end of input
             *end1 = inputEnd;

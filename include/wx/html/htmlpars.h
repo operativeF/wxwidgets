@@ -36,11 +36,11 @@ WX_DECLARE_STRING_HASH_MAP_WITH_DECL(wxHtmlTagHandler*,
                                      class WXDLLIMPEXP_HTML);
 
 
-enum wxHtmlURLType
+enum class wxHtmlURLType
 {
-    wxHTML_URL_PAGE,
-    wxHTML_URL_IMAGE,
-    wxHTML_URL_OTHER
+    Page,
+    Image,
+    Other
 };
 
 // This class handles generic parsing of HTML document : it scans

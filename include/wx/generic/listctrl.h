@@ -118,7 +118,7 @@ public:
     void SetSingleStyle( unsigned int style, bool add = true ) ;
     void SetWindowStyleFlag( unsigned int style ) override;
     void RecreateWindow() {}
-    long GetNextItem( long item, int geometry = wxLIST_NEXT_ALL, int state = ListStates::Nil ) const;
+    long GetNextItem( long item, int geometry = wxListGetNextItem::All, int state = ListStates::Nil ) const;
     wxImageList *GetImageList( int which ) const override;
     void SetImageList( wxImageList *imageList, int which ) override;
     void AssignImageList( wxImageList *imageList, int which ) override;

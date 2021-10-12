@@ -80,7 +80,7 @@ wxRibbonPageScrollButton::wxRibbonPageScrollButton(wxRibbonPage* sibling,
       m_sibling(sibling),
       m_flags(style & wxRIBBON_SCROLL_BTN_DIRECTION_MASK | wxRIBBON_SCROLL_BTN_FOR_PAGE)
 {
-    SetBackgroundStyle(wxBG_STYLE_PAINT);
+    SetBackgroundStyle(wxBackgroundStyle::Paint);
 }
 
 void wxRibbonPageScrollButton::OnEraseBackground(wxEraseEvent& WXUNUSED(evt))
@@ -190,7 +190,7 @@ void wxRibbonPage::CommonInit(const wxString& label, const wxBitmap& icon)
     m_scroll_amount = 0;
     m_scroll_buttons_visible = false;
 
-    SetBackgroundStyle(wxBG_STYLE_PAINT);
+    SetBackgroundStyle(wxBackgroundStyle::Paint);
 
     wxDynamicCast(GetParent(), wxRibbonBar)->AddPage(this);
 }

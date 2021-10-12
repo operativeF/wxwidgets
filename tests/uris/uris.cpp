@@ -308,7 +308,7 @@ TEST_CASE("URL Compat")
 {
     wxURL url("http://user:password@wxwidgets.org");
 
-    CHECK( url.GetError() == wxURL_NOERR );
+    CHECK( url.GetError() == wxURLError::None );
     CHECK( url == wxURL("http://user:password@wxwidgets.org") );
 
     wxURI uri("http://user:password@wxwidgets.org");
@@ -344,7 +344,7 @@ TEST_CASE("URL Compat")
     for ( size_t i = 0; i < WXSIZEOF(pszProblemUrls); ++i )
     {
         wxURL urlProblem(pszProblemUrls[i]);
-        CPPUNIT_ASSERT(urlProblem.GetError() == wxURL_NOERR);
+        CPPUNIT_ASSERT(urlProblem.GetError() == wxURLError::None);
 
         wxInputStream* is = urlProblem.GetInputStream();
         CPPUNIT_ASSERT(is != NULL);

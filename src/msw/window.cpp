@@ -648,7 +648,7 @@ wxWindowMSW::MSWShowWithEffect(bool show,
                                unsigned timeout)
 {
 #if wxUSE_DYNLIB_CLASS
-    if ( effect == wxSHOW_EFFECT_NONE ||
+    if ( effect == wxShowEffect::None ||
             (GetParent() && !GetParent()->IsShownOnScreen()) )
         return Show(show);
 
@@ -669,48 +669,48 @@ wxWindowMSW::MSWShowWithEffect(bool show,
 
     switch ( effect )
     {
-        case wxSHOW_EFFECT_ROLL_TO_LEFT:
+        case wxShowEffect::RollToLeft:
             dwFlags |= AW_HOR_NEGATIVE;
             break;
 
-        case wxSHOW_EFFECT_ROLL_TO_RIGHT:
+        case wxShowEffect::RollToRight:
             dwFlags |= AW_HOR_POSITIVE;
             break;
 
-        case wxSHOW_EFFECT_ROLL_TO_TOP:
+        case wxShowEffect::RollToTop:
             dwFlags |= AW_VER_NEGATIVE;
             break;
 
-        case wxSHOW_EFFECT_ROLL_TO_BOTTOM:
+        case wxShowEffect::RollToBottom:
             dwFlags |= AW_VER_POSITIVE;
             break;
 
-        case wxSHOW_EFFECT_SLIDE_TO_LEFT:
+        case wxShowEffect::SlideToLeft:
             dwFlags |= AW_SLIDE | AW_HOR_NEGATIVE;
             break;
 
-        case wxSHOW_EFFECT_SLIDE_TO_RIGHT:
+        case wxShowEffect::SlideToRight:
             dwFlags |= AW_SLIDE | AW_HOR_POSITIVE;
             break;
 
-        case wxSHOW_EFFECT_SLIDE_TO_TOP:
+        case wxShowEffect::SlideToTop:
             dwFlags |= AW_SLIDE | AW_VER_NEGATIVE;
             break;
 
-        case wxSHOW_EFFECT_SLIDE_TO_BOTTOM:
+        case wxShowEffect::SlideToBottom:
             dwFlags |= AW_SLIDE | AW_VER_POSITIVE;
             break;
 
-        case wxSHOW_EFFECT_BLEND:
+        case wxShowEffect::Blend:
             dwFlags |= AW_BLEND;
             break;
 
-        case wxSHOW_EFFECT_EXPAND:
+        case wxShowEffect::Expand:
             dwFlags |= AW_CENTER;
             break;
 
 
-        case wxSHOW_EFFECT_MAX:
+        case wxShowEffect::Max:
             wxFAIL_MSG( wxT("invalid window show effect") );
             return false;
 
@@ -3090,11 +3090,11 @@ wxWindowMSW::MSWHandleMessage(WXLRESULT *result,
 
 #if wxUSE_MOUSEWHEEL
         case WM_MOUSEWHEEL:
-            processed = HandleMouseWheel(wxMOUSE_WHEEL_VERTICAL, wParam, lParam);
+            processed = HandleMouseWheel(wxMouseWheelAxis::Vertical, wParam, lParam);
             break;
 
         case WM_MOUSEHWHEEL:
-            processed = HandleMouseWheel(wxMOUSE_WHEEL_HORIZONTAL, wParam, lParam);
+            processed = HandleMouseWheel(wxMouseWheelAxis::Horizontal, wParam, lParam);
             break;
 #endif // wxUSE_MOUSEWHEEL
 
@@ -5330,7 +5330,7 @@ bool wxWindowMSW::HandleEraseBkgnd(WXHDC hdc)
 
     switch ( GetBackgroundStyle() )
     {
-        case wxBG_STYLE_ERASE:
+        case wxBackgroundStyle::Erase:
             // we need to generate an erase background event
             {
                 wxDCTemp dc(hdc, GetClientSize());
@@ -5355,7 +5355,7 @@ bool wxWindowMSW::HandleEraseBkgnd(WXHDC hdc)
             }
             [[fallthrough]];
 
-        case wxBG_STYLE_SYSTEM:
+        case wxBackgroundStyle::System:
             if ( !DoEraseBackground(hdc) )
             {
                 // let the default processing to take place if we didn't erase
@@ -5364,8 +5364,8 @@ bool wxWindowMSW::HandleEraseBkgnd(WXHDC hdc)
             }
             break;
 
-        case wxBG_STYLE_PAINT:
-        case wxBG_STYLE_TRANSPARENT:
+        case wxBackgroundStyle::Paint:
+        case wxBackgroundStyle::Transparent:
             // no need to do anything here at all, background will be entirely
             // redrawn in WM_PAINT handler
             break;

@@ -66,7 +66,7 @@ wxURL::wxURL(const wxURL& url) : wxURI(url)
 void wxURL::Init(const std::string& url)
 {
     m_protocol = nullptr;
-    m_error = wxURL_NOERR;
+    m_error = wxURLError::None;
     m_url = url;
 #if wxUSE_URL_NATIVE
     m_nativeImp = CreateNativeImpObject();
@@ -147,14 +147,14 @@ bool wxURL::ParseURL()
         // Make sure we have a protocol/scheme
         if (!HasScheme())
         {
-            m_error = wxURL_SNTXERR;
+            m_error = wxURLError::SyntaxErr;
             return false;
         }
 
         // Find and create the protocol object
         if (!FetchProtocol())
         {
-            m_error = wxURL_NOPROTO;
+            m_error = wxURLError::NoProto;
             return false;
         }
 
@@ -164,7 +164,7 @@ bool wxURL::ParseURL()
             //  Make sure we have one, then
             if (!HasServer())
             {
-                m_error = wxURL_SNTXERR;
+                m_error = wxURLError::SyntaxErr;
                 return false;
             }
         }
@@ -185,7 +185,7 @@ bool wxURL::ParseURL()
     }
 #endif // wxUSE_PROTOCOL_HTTP
 
-    m_error = wxURL_NOERR;
+    m_error = wxURLError::None;
     return true;
 }
 
@@ -256,11 +256,11 @@ wxInputStream *wxURL::GetInputStream()
 {
     if (!m_protocol)
     {
-        m_error = wxURL_NOPROTO;
+        m_error = wxURLError::NoProto;
         return nullptr;
     }
 
-    m_error = wxURL_NOERR;
+    m_error = wxURLError::None;
     if (HasUserInfo())
     {
         size_t dwPasswordPos = m_userinfo.find(':');
@@ -299,7 +299,7 @@ wxInputStream *wxURL::GetInputStream()
     {
         if (!addr.Hostname(m_server))
         {
-            m_error = wxURL_NOHOST;
+            m_error = wxURLError::NoHost;
             return nullptr;
         }
 
@@ -307,7 +307,7 @@ wxInputStream *wxURL::GetInputStream()
 
         if (!m_protocol->Connect(addr))
         {
-            m_error = wxURL_CONNERR;
+            m_error = wxURLError::ConnErr;
             return nullptr;
         }
     }
@@ -336,7 +336,7 @@ wxInputStream *wxURL::GetInputStream()
 
     if (!the_i_stream)
     {
-        m_error = wxURL_PROTOERR;
+        m_error = wxURLError::ProtoErr;
         return nullptr;
     }
 

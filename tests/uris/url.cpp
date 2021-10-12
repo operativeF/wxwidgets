@@ -38,7 +38,7 @@ TEST_CASE("URL Tests")
         }
 
         wxURL url("http://www.wxwidgets.org/assets/img/header-logo.png");
-        CHECK_EQ(wxURL_NOERR, url.GetError());
+        CHECK_EQ(wxURLError::None, url.GetError());
 
         std::unique_ptr<wxInputStream> in_stream(url.GetInputStream());
         if ( !in_stream && IsAutomaticTest() )

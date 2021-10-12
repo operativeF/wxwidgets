@@ -450,21 +450,21 @@ void wxHtmlPrintout::SetHtmlFile(const wxString& htmlfile)
 
 
 
-void wxHtmlPrintout::SetHeader(const wxString& header, int pg)
+void wxHtmlPrintout::SetHeader(const wxString& header, wxHeaderFooterPaging pg)
 {
-    if (pg == wxPAGE_ALL || pg == wxPAGE_EVEN)
+    if (pg == wxHeaderFooterPaging::All || pg == wxHeaderFooterPaging::EveryEven)
         m_Headers[0] = header;
-    if (pg == wxPAGE_ALL || pg == wxPAGE_ODD)
+    if (pg == wxHeaderFooterPaging::All || pg == wxHeaderFooterPaging::EveryOdd)
         m_Headers[1] = header;
 }
 
 
 
-void wxHtmlPrintout::SetFooter(const wxString& footer, int pg)
+void wxHtmlPrintout::SetFooter(const wxString& footer, wxHeaderFooterPaging pg)
 {
-    if (pg == wxPAGE_ALL || pg == wxPAGE_EVEN)
+    if (pg == wxHeaderFooterPaging::All || pg == wxHeaderFooterPaging::EveryEven)
         m_Footers[0] = footer;
-    if (pg == wxPAGE_ALL || pg == wxPAGE_ODD)
+    if (pg == wxHeaderFooterPaging::All || pg == wxHeaderFooterPaging::EveryOdd)
         m_Footers[1] = footer;
 }
 
@@ -706,10 +706,10 @@ bool wxHtmlEasyPrinting::DoPrint(wxHtmlPrintout *printout)
     wxPrintDialogData printDialogData(*GetPrintData());
     wxPrinter printer(&printDialogData);
 
-    const bool prompt = m_promptMode != Prompt_Never;
-    if (m_promptMode == Prompt_Once)
+    const bool prompt = m_promptMode != PromptMode::Never;
+    if (m_promptMode == PromptMode::Once)
     {
-        m_promptMode = Prompt_Never;
+        m_promptMode = PromptMode::Never;
     }
 
     if (!printer.Print(m_ParentWindow, printout, prompt))
@@ -744,21 +744,21 @@ void wxHtmlEasyPrinting::PageSetup()
 
 
 
-void wxHtmlEasyPrinting::SetHeader(const wxString& header, int pg)
+void wxHtmlEasyPrinting::SetHeader(const wxString& header, wxHeaderFooterPaging pg)
 {
-    if (pg == wxPAGE_ALL || pg == wxPAGE_EVEN)
+    if (pg == wxHeaderFooterPaging::All || pg == wxHeaderFooterPaging::EveryEven)
         m_Headers[0] = header;
-    if (pg == wxPAGE_ALL || pg == wxPAGE_ODD)
+    if (pg == wxHeaderFooterPaging::All || pg == wxHeaderFooterPaging::EveryOdd)
         m_Headers[1] = header;
 }
 
 
 
-void wxHtmlEasyPrinting::SetFooter(const wxString& footer, int pg)
+void wxHtmlEasyPrinting::SetFooter(const wxString& footer, wxHeaderFooterPaging pg)
 {
-    if (pg == wxPAGE_ALL || pg == wxPAGE_EVEN)
+    if (pg == wxHeaderFooterPaging::All || pg == wxHeaderFooterPaging::EveryEven)
         m_Footers[0] = footer;
-    if (pg == wxPAGE_ALL || pg == wxPAGE_ODD)
+    if (pg == wxHeaderFooterPaging::All || pg == wxHeaderFooterPaging::EveryOdd)
         m_Footers[1] = footer;
 }
 
@@ -766,7 +766,7 @@ void wxHtmlEasyPrinting::SetFooter(const wxString& footer, int pg)
 void wxHtmlEasyPrinting::SetFonts(const wxString& normal_face, const wxString& fixed_face,
                                   const int *sizes)
 {
-    m_fontMode = FontMode_Explicit;
+    m_fontMode = FontMode::Explicit;
     m_FontFaceNormal = normal_face;
     m_FontFaceFixed = fixed_face;
 
@@ -783,7 +783,7 @@ void wxHtmlEasyPrinting::SetStandardFonts(int size,
                                           const wxString& normal_face,
                                           const wxString& fixed_face)
 {
-    m_fontMode = FontMode_Standard;
+    m_fontMode = FontMode::Standard;
     m_FontFaceNormal = normal_face;
     m_FontFaceFixed = fixed_face;
     m_FontsSizesArr[0] = size;
@@ -794,20 +794,20 @@ wxHtmlPrintout *wxHtmlEasyPrinting::CreatePrintout()
 {
     wxHtmlPrintout *p = new wxHtmlPrintout(m_Name);
 
-    if (m_fontMode == FontMode_Explicit)
+    if (m_fontMode == FontMode::Explicit)
     {
         p->SetFonts(m_FontFaceNormal, m_FontFaceFixed, m_FontsSizes);
     }
-    else // FontMode_Standard
+    else // FontMode::Standard
     {
         p->SetStandardFonts(m_FontsSizesArr[0],
                             m_FontFaceNormal, m_FontFaceFixed);
     }
 
-    p->SetHeader(m_Headers[0], wxPAGE_EVEN);
-    p->SetHeader(m_Headers[1], wxPAGE_ODD);
-    p->SetFooter(m_Footers[0], wxPAGE_EVEN);
-    p->SetFooter(m_Footers[1], wxPAGE_ODD);
+    p->SetHeader(m_Headers[0], wxHeaderFooterPaging::EveryEven);
+    p->SetHeader(m_Headers[1], wxHeaderFooterPaging::EveryOdd);
+    p->SetFooter(m_Footers[0], wxHeaderFooterPaging::EveryEven);
+    p->SetFooter(m_Footers[1], wxHeaderFooterPaging::EveryOdd);
 
     p->SetMargins(*m_PageSetupData);
 

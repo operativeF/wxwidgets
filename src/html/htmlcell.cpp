@@ -449,7 +449,7 @@ void wxHtmlWordCell::Draw(wxDC& dc, int x, int y,
 
     bool drawSelectionAfterCell = false;
 
-    if ( info.GetState().GetSelectionState() == wxHTML_SEL_CHANGING )
+    if ( info.GetState().GetSelectionState() == wxHtmlSelectionState::Changing )
     {
         // Selection changing, we must draw the word piecewise:
         wxHtmlSelection *s = info.GetSelection();
@@ -494,7 +494,7 @@ void wxHtmlWordCell::Draw(wxDC& dc, int x, int y,
     {
         wxHtmlSelectionState selstate = info.GetState().GetSelectionState();
         // Not changing selection state, draw the word in single mode:
-        SwitchSelState(dc, info, selstate != wxHTML_SEL_OUT);
+        SwitchSelState(dc, info, selstate != wxHtmlSelectionState::Out);
 
         // This is a quite horrible hack but it fixes a nasty user-visible
         // problem: when drawing underlined text, which is common in wxHTML as
@@ -515,7 +515,7 @@ void wxHtmlWordCell::Draw(wxDC& dc, int x, int y,
         info.SetCurrentUnderlined(thisUnderlined);
 
         dc.wxDrawText(m_Word, wxPoint{x + m_PosX, y + m_PosY});
-        drawSelectionAfterCell = (selstate != wxHTML_SEL_OUT);
+        drawSelectionAfterCell = (selstate != wxHtmlSelectionState::Out);
     }
 
     // NB: If the text is justified then there is usually some free space
@@ -996,7 +996,7 @@ void wxHtmlContainerCell::UpdateRenderingStatePre(wxHtmlRenderingInfo& info,
     if (!s) return;
     if (s->GetFromCell() == cell || s->GetToCell() == cell)
     {
-        info.GetState().SetSelectionState(wxHTML_SEL_CHANGING);
+        info.GetState().SetSelectionState(wxHtmlSelectionState::Changing);
     }
 }
 
@@ -1006,9 +1006,9 @@ void wxHtmlContainerCell::UpdateRenderingStatePost(wxHtmlRenderingInfo& info,
     wxHtmlSelection *s = info.GetSelection();
     if (!s) return;
     if (s->GetToCell() == cell)
-        info.GetState().SetSelectionState(wxHTML_SEL_OUT);
+        info.GetState().SetSelectionState(wxHtmlSelectionState::Out);
     else if (s->GetFromCell() == cell)
-        info.GetState().SetSelectionState(wxHTML_SEL_IN);
+        info.GetState().SetSelectionState(wxHtmlSelectionState::In);
 }
 
 #define mMin(a, b) (((a) < (b)) ? (a) : (b))
@@ -1488,7 +1488,7 @@ void wxHtmlColourCell::DrawInvisible(wxDC& dc,
     if (m_Flags & wxHTML_CLR_FOREGROUND)
     {
         state.SetFgColour(m_Colour);
-        if (state.GetSelectionState() != wxHTML_SEL_IN)
+        if (state.GetSelectionState() != wxHtmlSelectionState::In)
             dc.SetTextForeground(m_Colour);
         else
             dc.SetTextForeground(
@@ -1498,7 +1498,7 @@ void wxHtmlColourCell::DrawInvisible(wxDC& dc,
     {
         state.SetBgColour(m_Colour);
         state.SetBgMode(wxBrushStyle::Solid);
-        const wxColour c = state.GetSelectionState() == wxHTML_SEL_IN
+        const wxColour c = state.GetSelectionState() == wxHtmlSelectionState::In
                          ? info.GetStyle().GetSelectedTextBgColour(m_Colour)
                          : m_Colour;
         dc.SetTextBackground(c);
@@ -1509,7 +1509,7 @@ void wxHtmlColourCell::DrawInvisible(wxDC& dc,
     {
         state.SetBgColour(m_Colour);
         state.SetBgMode(wxBrushStyle::Transparent);
-        const wxColour c = state.GetSelectionState() == wxHTML_SEL_IN
+        const wxColour c = state.GetSelectionState() == wxHtmlSelectionState::In
                          ? info.GetStyle().GetSelectedTextBgColour(m_Colour)
                          : m_Colour;
         dc.SetTextBackground(c);

@@ -390,7 +390,7 @@ void wxTypeInfo::Unregister()
 
 void wxSetStringToArray( const wxString &s, wxArrayString &array )
 {
-    wxStringTokenizer tokenizer(s, wxT("| \t\n"), wxTOKEN_STRTOK);
+    wxStringTokenizer tokenizer(s, wxT("| \t\n"), wxStringTokenizerMode::StrTok);
     wxString flag;
     array.Clear();
     while (tokenizer.HasMoreTokens())

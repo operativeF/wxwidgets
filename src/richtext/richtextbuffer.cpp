@@ -12418,7 +12418,7 @@ bool wxRichTextImage::LoadImageCache(wxDC& dc, wxRichTextDrawingContext& context
 {
     if (!m_imageBlock.IsOk())
     {
-        m_imageState = ImageState_Bad;
+        m_imageState = ImageState::Bad;
         return false;
     }
 
@@ -12438,7 +12438,7 @@ bool wxRichTextImage::LoadImageCache(wxDC& dc, wxRichTextDrawingContext& context
         {
             wxBitmap bitmap(image_placeholder24x24_xpm);
             m_imageCache = bitmap;
-            m_imageState = ImageState_Loaded;
+            m_imageState = ImageState::Loaded;
         }
         retImageSize = wxSize(std::lround(m_imageCache.GetScaledWidth()), std::lround(m_imageCache.GetScaledHeight()));
         return true;
@@ -12452,14 +12452,14 @@ bool wxRichTextImage::LoadImageCache(wxDC& dc, wxRichTextDrawingContext& context
     if (resetCache || m_originalImageSize.x <= 0 || m_originalImageSize.y <= 0)
     {
         m_imageCache = wxNullBitmap;
-        m_imageState = ImageState_Unloaded;
+        m_imageState = ImageState::Unloaded;
 
         if (!m_imageBlock.Load(image) || !image.IsOk())
         {
             wxBitmap bitmap(image_placeholder24x24_xpm);
             m_imageCache = bitmap;
             m_originalImageSize = wxSize(std::lround(bitmap.GetScaledWidth()), std::lround(bitmap.GetScaledHeight()));
-            m_imageState = ImageState_Bad;
+            m_imageState = ImageState::Bad;
             retImageSize = m_originalImageSize;
             return false;
         }
@@ -12603,7 +12603,7 @@ bool wxRichTextImage::LoadAndScaleImageCache(wxImage& image, const wxSize& sz, w
         {
             if (m_imageCache.IsOk())
                 m_imageCache = wxNullBitmap;
-            m_imageState = ImageState_Unloaded;
+            m_imageState = ImageState::Unloaded;
             return true;
         }
 
@@ -12614,7 +12614,7 @@ bool wxRichTextImage::LoadAndScaleImageCache(wxImage& image, const wxSize& sz, w
                 wxBitmap bitmap(image_placeholder24x24_xpm);
                 m_imageCache = bitmap;
                 m_originalImageSize = wxSize(bitmap.GetWidth(), bitmap.GetHeight());
-                m_imageState = ImageState_Bad;
+                m_imageState = ImageState::Bad;
                 return false;
             }
         }
@@ -12649,9 +12649,9 @@ bool wxRichTextImage::LoadAndScaleImageCache(wxImage& image, const wxSize& sz, w
     }
 
     if (m_imageCache.IsOk())
-        m_imageState = ImageState_Loaded;
+        m_imageState = ImageState::Loaded;
     else
-        m_imageState = ImageState_Bad;
+        m_imageState = ImageState::Bad;
 
     return m_imageCache.IsOk();
 }

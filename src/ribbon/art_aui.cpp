@@ -996,27 +996,27 @@ void wxRibbonAUIArtProvider::DrawGalleryButton(wxDC& dc, wxRect rect,
     wxBitmap btn_bitmap;
     switch(state)
     {
-    case wxRIBBON_GALLERY_BUTTON_NORMAL:
+    case wxRibbonGalleryButtonState::Normal:
         dc.GradientFillLinear(reduced_rect,
             m_gallery_button_background_colour,
             m_gallery_button_background_gradient_colour, wxSOUTH);
         btn_bitmap = bitmaps[0];
         break;
-    case wxRIBBON_GALLERY_BUTTON_HOVERED:
+    case wxRibbonGalleryButtonState::Hovered:
         dc.SetPen(m_gallery_item_border_pen);
         dc.SetBrush(m_gallery_button_hover_background_brush);
         dc.DrawRectangle(rect.x, rect.y, rect.width + extra_width,
             rect.height + extra_height);
         btn_bitmap = bitmaps[1];
         break;
-    case wxRIBBON_GALLERY_BUTTON_ACTIVE:
+    case wxRibbonGalleryButtonState::Active:
         dc.SetPen(m_gallery_item_border_pen);
         dc.SetBrush(m_gallery_button_active_background_brush);
         dc.DrawRectangle(rect.x, rect.y, rect.width + extra_width,
             rect.height + extra_height);
         btn_bitmap = bitmaps[2];
         break;
-    case wxRIBBON_GALLERY_BUTTON_DISABLED:
+    case wxRibbonGalleryButtonState::Disabled:
         dc.SetPen(*wxTRANSPARENT_PEN);
         dc.SetBrush(m_gallery_button_disabled_background_brush);
         dc.DrawRectangle(reduced_rect.x, reduced_rect.y, reduced_rect.width,

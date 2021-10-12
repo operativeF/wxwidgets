@@ -390,7 +390,7 @@ void wxHtmlListBox::OnDrawItem(wxDC& dc, const wxRect& rect, size_t n) const
         htmlSel.Set(wxPoint(0,0), cell, wxPoint(std::numeric_limits<int>::max(), std::numeric_limits<int>::max()), cell);
         htmlRendInfo.SetSelection(&htmlSel);
         htmlRendInfo.SetStyle(m_htmlRendStyle);
-        htmlRendInfo.GetState().SetSelectionState(wxHTML_SEL_IN);
+        htmlRendInfo.GetState().SetSelectionState(wxHtmlSelectionState::In);
     }
     //else: normal item or selected item with default colours, its background
     //      was already taken care of in the base class
@@ -445,7 +445,7 @@ wxHtmlListBox::OnHTMLOpeningURL(wxHtmlURLType WXUNUSED(type),
                                 const std::string& WXUNUSED(url),
                                 std::string *WXUNUSED(redirect)) const
 {
-    return wxHTML_OPEN;
+    return wxHtmlOpeningStatus::Open;
 }
 
 wxPoint wxHtmlListBox::HTMLCoordsToWindow(wxHtmlCell *cell,

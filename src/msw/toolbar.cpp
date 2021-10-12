@@ -373,7 +373,7 @@ bool wxToolBar::Create(wxWindow *parent,
     // in WM_ERASEBKGND too (by default this won't be done but if the toolbar
     // has a non default background colour, then it would be used in both
     // places resulting in flicker)
-    SetBackgroundStyle(wxBG_STYLE_PAINT);
+    SetBackgroundStyle(wxBackgroundStyle::Paint);
 
     return true;
 }

@@ -265,7 +265,7 @@ wxWindowBase::wxWindowBase()
     m_exStyle =
     m_windowStyle = 0;
 
-    m_backgroundStyle = wxBG_STYLE_ERASE;
+    m_backgroundStyle = wxBackgroundStyle::Erase;
 
 #if wxUSE_CONSTRAINTS
     // no constraints whatsoever
@@ -1596,16 +1596,16 @@ bool wxWindowBase::SetBackgroundStyle(wxBackgroundStyle style)
 
     // Transparent background style can be only set before creation because of
     // wxGTK limitation.
-    wxCHECK_MSG( (style != wxBG_STYLE_TRANSPARENT) || !GetHandle(),
+    wxCHECK_MSG( (style != wxBackgroundStyle::Transparent) || !GetHandle(),
                  false,
-                 "wxBG_STYLE_TRANSPARENT style can only be set before "
+                 "wxBackgroundStyle::Transparent style can only be set before "
                  "Create()-ing the window." );
 
-    // And once it is set, wxBG_STYLE_TRANSPARENT can't be unset.
-    wxCHECK_MSG( (m_backgroundStyle != wxBG_STYLE_TRANSPARENT) ||
-                 (style == wxBG_STYLE_TRANSPARENT),
+    // And once it is set, wxBackgroundStyle::Transparent can't be unset.
+    wxCHECK_MSG( (m_backgroundStyle != wxBackgroundStyle::Transparent) ||
+                 (style == wxBackgroundStyle::Transparent),
                  false,
-                 "wxBG_STYLE_TRANSPARENT can't be unset once it was set." );
+                 "wxBackgroundStyle::Transparent can't be unset once it was set." );
 
     m_backgroundStyle = style;
 
@@ -3412,9 +3412,9 @@ wxWindow *wxWindowBase::DoGetSibling(WindowOrder order) const
     wxWindowList::compatibility_iterator i = siblings.Find(dynamic_cast<const wxWindow*>(this));
     wxCHECK_MSG( i, nullptr, wxT("window not a child of its parent?") );
 
-    if ( order == OrderBefore )
+    if ( order == WindowOrder::Before )
         i = i->GetPrevious();
-    else // OrderAfter
+    else // WindowOrder::After
         i = i->GetNext();
 
     return i ? i->GetData() : nullptr;
@@ -3480,7 +3480,7 @@ void wxWindowBase::DoMoveInTabOrder(wxWindow *win, WindowOrder move)
     // implemented so we can't just move the node around
     wxWindow *self = (wxWindow *)this;
     siblings.DeleteObject(self);
-    if ( move == OrderAfter )
+    if ( move == WindowOrder::After )
     {
         i = i->GetNext();
     }
@@ -3489,7 +3489,7 @@ void wxWindowBase::DoMoveInTabOrder(wxWindow *win, WindowOrder move)
     {
         siblings.Insert(i, self);
     }
-    else // OrderAfter and win was the last sibling
+    else // WindowOrder::After and win was the last sibling
     {
         siblings.Append(self);
     }

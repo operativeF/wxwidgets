@@ -74,7 +74,7 @@ bool wxVListBox::Create(wxWindow *parent,
     m_colBgSel = wxNullColour;
 
     // flicker-free drawing requires this
-    SetBackgroundStyle(wxBG_STYLE_PAINT);
+    SetBackgroundStyle(wxBackgroundStyle::Paint);
 
     return true;
 }

@@ -251,7 +251,7 @@ using wxGridCellRendererPtr = wxObjectDataPtr<wxGridCellRenderer>;
 class wxGridActivationSource
 {
 public:
-    enum Origin
+    enum class Origin
     {
         Program,
         Key,
@@ -261,17 +261,17 @@ public:
     // Factory functions, only used by the library itself.
     static wxGridActivationSource FromProgram()
     {
-        return wxGridActivationSource(Program, nullptr);
+        return wxGridActivationSource(Origin::Program, nullptr);
     }
 
     static wxGridActivationSource From(const wxKeyEvent& event)
     {
-        return wxGridActivationSource(Key, &event);
+        return wxGridActivationSource(Origin::Key, &event);
     }
 
     static wxGridActivationSource From(const wxMouseEvent& event)
     {
-        return wxGridActivationSource(Mouse, &event);
+        return wxGridActivationSource(Origin::Mouse, &event);
     }
 
     // Accessors allowing to retrieve information about the source.
@@ -282,7 +282,7 @@ public:
     // Can be called for objects with Key origin only.
     const wxKeyEvent& GetKeyEvent() const
     {
-        wxASSERT( m_origin == Key );
+        wxASSERT( m_origin == Origin::Key );
 
         return *dynamic_cast<const wxKeyEvent*>(m_event);
     }
@@ -290,7 +290,7 @@ public:
     // Can be called for objects with Mouse origin only.
     const wxMouseEvent& GetMouseEvent() const
     {
-        wxASSERT( m_origin == Mouse );
+        wxASSERT( m_origin == Origin::Mouse );
 
         return *dynamic_cast<const wxMouseEvent*>(m_event);
     }
@@ -313,7 +313,7 @@ private:
 class wxGridActivationResult
 {
 public:
-    enum Action
+    enum class Action
     {
         Ignore,
         Change,
@@ -323,17 +323,17 @@ public:
     // Factory functions, only used by the library itself.
     static wxGridActivationResult DoNothing()
     {
-        return wxGridActivationResult(Ignore);
+        return wxGridActivationResult(Action::Ignore);
     }
 
     static wxGridActivationResult DoChange(const std::string& newval)
     {
-        return wxGridActivationResult(Change, newval);
+        return wxGridActivationResult(Action::Change, newval);
     }
 
     static wxGridActivationResult DoEdit()
     {
-        return wxGridActivationResult(ShowEditor);
+        return wxGridActivationResult(Action::ShowEditor);
     }
 
     // Accessors allowing to retrieve information about the result.
@@ -344,7 +344,7 @@ public:
     // Can be called for objects with Change action type only.
     const std::string& GetNewValue() const
     {
-        wxASSERT( m_action == Change );
+        wxASSERT( m_action == Action::Change );
 
         return m_newval;
     }
@@ -352,8 +352,8 @@ public:
 private:
     explicit
     wxGridActivationResult(Action action, const std::string& newval = {})
-        : m_action(action),
-          m_newval(newval)
+        : m_action{action},
+          m_newval{newval}
     {
     }
 

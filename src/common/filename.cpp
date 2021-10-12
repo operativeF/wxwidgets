@@ -2852,16 +2852,16 @@ wxString wxFileName::GetHumanReadableSize(const wxULongLong &bs,
 
     switch ( conv )
     {
-        case wxSIZE_CONV_TRADITIONAL:
+        case wxSizeConvention::Traditional:
             // nothing to do, this corresponds to the default values of both
             // the multiplier and infix string
             break;
 
-        case wxSIZE_CONV_IEC:
+        case wxSizeConvention::IEC:
             biInfix = "i";
             break;
 
-        case wxSIZE_CONV_SI:
+        case wxSizeConvention::SI:
             multiplier = 1000;
             break;
     }

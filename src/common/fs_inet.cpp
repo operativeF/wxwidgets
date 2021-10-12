@@ -100,7 +100,7 @@ bool wxInternetFSHandler::CanOpen(const wxString& location)
     if ((p == wxT("http")) || (p == wxT("ftp")))
     {
         wxURL url(p + ":" + StripProtocolAnchor(location));
-        return (url.GetError() == wxURL_NOERR);
+        return (url.GetError() == wxURLError::None);
     }
 #endif
     return false;
@@ -117,7 +117,7 @@ wxFSFile* wxInternetFSHandler::OpenFile(wxFileSystem& WXUNUSED(fs),
         GetProtocol(location) + ":" + StripProtocolAnchor(location);
 
     wxURL url(right);
-    if (url.GetError() == wxURL_NOERR)
+    if (url.GetError() == wxURLError::None)
     {
         wxInputStream *s = url.GetInputStream();
         if (s)

@@ -119,45 +119,45 @@ wxInfoBarGeneric::BarPlacement wxInfoBarGeneric::GetBarPlacement() const
 
 wxShowEffect wxInfoBarGeneric::GetShowEffect() const
 {
-    if ( m_showEffect != wxSHOW_EFFECT_MAX )
+    if ( m_showEffect != wxShowEffect::Max )
         return m_showEffect;
 
     switch ( GetBarPlacement() )
     {
         case BarPlacement_Top:
-            return wxSHOW_EFFECT_SLIDE_TO_BOTTOM;
+            return wxShowEffect::SlideToBottom;
 
         case BarPlacement_Bottom:
-            return wxSHOW_EFFECT_SLIDE_TO_TOP;
+            return wxShowEffect::SlideToTop;
 
         default:
             wxFAIL_MSG( "unknown info bar placement" );
             [[fallthrough]];
 
         case BarPlacement_Unknown:
-            return wxSHOW_EFFECT_NONE;
+            return wxShowEffect::None;
     }
 }
 
 wxShowEffect wxInfoBarGeneric::GetHideEffect() const
 {
-    if ( m_hideEffect != wxSHOW_EFFECT_MAX )
+    if ( m_hideEffect != wxShowEffect::Max )
         return m_hideEffect;
 
     switch ( GetBarPlacement() )
     {
         case BarPlacement_Top:
-            return wxSHOW_EFFECT_SLIDE_TO_TOP;
+            return wxShowEffect::SlideToTop;
 
         case BarPlacement_Bottom:
-            return wxSHOW_EFFECT_SLIDE_TO_BOTTOM;
+            return wxShowEffect::SlideToBottom;
 
         default:
             wxFAIL_MSG( "unknown info bar placement" );
             [[fallthrough]];
 
         case BarPlacement_Unknown:
-            return wxSHOW_EFFECT_NONE;
+            return wxShowEffect::None;
     }
 }
 

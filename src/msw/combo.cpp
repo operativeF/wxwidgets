@@ -107,7 +107,7 @@ bool wxComboCtrl::Create(wxWindow *parent,
     // support, whichever is possible.
     SetDoubleBuffered(true);
     if ( !IsDoubleBuffered() )
-        SetBackgroundStyle( wxBG_STYLE_PAINT );
+        SetBackgroundStyle( wxBackgroundStyle::Paint );
 
     // Create textctrl, if necessary
     CreateTextCtrl( wxNO_BORDER );

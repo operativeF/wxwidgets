@@ -1076,7 +1076,7 @@ bool wxNativeFontInfo::FromUserString(const wxString& s)
     // a single token:
 
     // parse a more or less free form string
-    wxStringTokenizer tokenizer(s, wxT(";, "), wxTOKEN_STRTOK);
+    wxStringTokenizer tokenizer(s, wxT(";, "), wxStringTokenizerMode::StrTok);
 
     wxString face;
     unsigned long size;

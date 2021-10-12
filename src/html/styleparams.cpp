@@ -46,7 +46,7 @@ wxHtmlStyleParams::wxHtmlStyleParams(const wxHtmlTag& tag)
     // Should now have a semi-colon delimited list of options
     // Each option is a name and a value separated by a colon
     // Split the list into names and values
-    wxStringTokenizer tkz(wd, wxT(";"), wxTOKEN_STRTOK);
+    wxStringTokenizer tkz(wd, wxT(";"), wxStringTokenizerMode::StrTok);
     while ( tkz.HasMoreTokens() )
     {
         wxString token = tkz.GetNextToken();

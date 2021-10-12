@@ -28,7 +28,8 @@ private:
 
     bool m_insideBar{false};
 
-    wxString m_effectNames[wxSHOW_EFFECT_MAX];
+    // FIXME: Don't do this.
+    wxString m_effectNames[static_cast<int>(wxShowEffect::Max)];
 };
 
 #endif // wxUSE_XRC && wxUSE_INFOBAR

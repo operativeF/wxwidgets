@@ -214,8 +214,8 @@ protected:
 private:
     std::vector<std::string> m_pageTexts;
 
-    wxShowEffect m_showEffect{wxSHOW_EFFECT_NONE};
-    wxShowEffect m_hideEffect{wxSHOW_EFFECT_NONE};
+    wxShowEffect m_showEffect{wxShowEffect::None};
+    wxShowEffect m_hideEffect{wxShowEffect::None};
 
     unsigned int m_showTimeout{0};
     unsigned int m_hideTimeout{0};
