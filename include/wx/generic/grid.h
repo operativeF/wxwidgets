@@ -65,10 +65,10 @@ constexpr auto wxGRID_VALUE_LONG         = wxGRID_VALUE_NUMBER;
 
 // many wxGrid methods work either with columns or rows, this enum is used for
 // the parameter indicating which one should it be
-enum wxGridDirection
+enum class wxGridDirection
 {
-    wxGRID_COLUMN,
-    wxGRID_ROW
+    Column,
+    Row
 };
 
 // Flags used with wxGrid::Render() to select parts of the grid to draw.
@@ -2080,9 +2080,9 @@ public:
     // setAsMin is true, this optimal width will also be set as minimal width
     // for this column
     void     AutoSizeColumn( int col, bool setAsMin = true )
-        { AutoSizeColOrRow(col, setAsMin, wxGRID_COLUMN); }
+        { AutoSizeColOrRow(col, setAsMin, wxGridDirection::Column); }
     void     AutoSizeRow( int row, bool setAsMin = true )
-        { AutoSizeColOrRow(row, setAsMin, wxGRID_ROW); }
+        { AutoSizeColOrRow(row, setAsMin, wxGridDirection::Row); }
 
     // auto size all columns (very ineffective for big grids!)
     void     AutoSizeColumns( bool setAsMin = true );
@@ -2461,25 +2461,25 @@ protected:
     // or -1 if there is no resize operation in progress.
     int     m_dragRowOrCol{-1};
 
-    enum CursorMode
+    enum class CursorMode
     {
-        WXGRID_CURSOR_SELECT_CELL,
-        WXGRID_CURSOR_RESIZE_ROW,
-        WXGRID_CURSOR_RESIZE_COL,
-        WXGRID_CURSOR_SELECT_ROW,
-        WXGRID_CURSOR_SELECT_COL,
-        WXGRID_CURSOR_MOVE_COL
+        SelectCell,
+        ResizeRow,
+        ResizeCol,
+        SelectRow,
+        SelectCol,
+        MoveCol
     };
 
     // this variable is used not for finding the correct current cursor but
     // mainly for finding out what is going to happen if the mouse starts being
     // dragged right now
     //
-    // by default it is WXGRID_CURSOR_SELECT_CELL meaning that nothing else is
+    // by default it is CursorMode::SelectCell meaning that nothing else is
     // going on, and it is set to one of RESIZE/SELECT/MOVE values while the
     // corresponding operation will be started if the user starts dragging the
     // mouse from the current position
-    CursorMode   m_cursorMode{WXGRID_CURSOR_SELECT_CELL};
+    CursorMode   m_cursorMode{CursorMode::SelectCell};
 
     TabBehaviour m_tabBehaviour{Tab_Stop};        // determines how the TAB key behaves
 
@@ -2724,7 +2724,7 @@ private:
     // event handlers and their helpers
     // --------------------------------
 
-    // process mouse drag event in WXGRID_CURSOR_SELECT_CELL mode
+    // process mouse drag event in CursorMode::SelectCell mode
     bool DoGridCellDrag(wxMouseEvent& event,
                         const wxGridCellCoords& coords,
                         bool isFirstDrag);

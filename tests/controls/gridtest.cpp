@@ -86,7 +86,7 @@ struct EditInfo
 
     EditInfo(int pos = 0,
              int count = 0,
-             wxGridDirection direction = wxGRID_COLUMN)
+             wxGridDirection direction = wxGridDirection::Column)
         : pos(pos), count(count), direction(direction) { }
 };
 
@@ -224,22 +224,22 @@ public:
 protected:
     void InsertRows(int pos = 0, int count = 1)
     {
-        m_grid->DoEdit(EditInfo(pos, count, wxGRID_ROW));
+        m_grid->DoEdit(EditInfo(pos, count, wxGridDirection::Row));
     }
 
     void InsertCols(int pos = 0, int count = 1)
     {
-        m_grid->DoEdit(EditInfo(pos, count, wxGRID_COLUMN));
+        m_grid->DoEdit(EditInfo(pos, count, wxGridDirection::Column));
     }
 
     void DeleteRows(int pos = 0, int count = 1)
     {
-        m_grid->DoEdit(EditInfo(pos, -count, wxGRID_ROW));
+        m_grid->DoEdit(EditInfo(pos, -count, wxGridDirection::Row));
     }
 
     void DeleteCols(int pos = 0, int count = 1)
     {
-        m_grid->DoEdit(EditInfo(pos, -count, wxGRID_COLUMN));
+        m_grid->DoEdit(EditInfo(pos, -count, wxGridDirection::Column));
     }
 
     // The helper function to determine the width of the column label depending
@@ -2230,14 +2230,14 @@ void TestableGrid::DoEdit(const EditInfo& edit)
 
     switch ( edit.direction )
     {
-    case wxGRID_COLUMN:
+    case wxGridDirection::Column:
         if ( edit.count < 0 )
             DeleteCols(edit.pos, -edit.count);
         else
             InsertCols(edit.pos, edit.count);
         break;
 
-    case wxGRID_ROW:
+    case wxGridDirection::Row:
         if ( edit.count < 0 )
             DeleteRows(edit.pos, -edit.count);
         else
@@ -2319,7 +2319,7 @@ wxString TestableGrid::ToString() const
         }
 
         // If applicable draw annotated row edits.
-        if ( m_edit.count && m_edit.direction == wxGRID_ROW
+        if ( m_edit.count && m_edit.direction == wxGridDirection::Row
              && row >= m_edit.pos && row < m_edit.pos + absEditCount)
         {
             s += (m_edit.count < 0 ? " ^" : " v");
@@ -2332,7 +2332,7 @@ wxString TestableGrid::ToString() const
     }
 
     // Draw annotated footer if columns edited.
-    if ( m_edit.count && m_edit.direction == wxGRID_COLUMN )
+    if ( m_edit.count && m_edit.direction == wxGridDirection::Column )
     {
         s += leftIndent;
 
