@@ -1,6 +1,8 @@
 #ifndef _WX_WXSTRINGUTILS_H__
 #define _WX_WXSTRINGUTILS_H__
 
+#include <gsl/gsl>
+
 #include <algorithm>
 #include <cctype>
 #include <string>
@@ -64,13 +66,13 @@ constexpr void TrimTrailingSpace(std::string& str)
 // FIXME: Not valid for unicode strings.
 inline void ToUpper(std::string& str)
 {
-    std::transform(str.begin(), str.end(), str.begin(), [](unsigned char c) noexcept { return std::toupper(c); });
+    std::transform(str.begin(), str.end(), str.begin(), [](unsigned char c) noexcept { return gsl::narrow_cast<char>(std::toupper(c)); });
 }
 
 // FIXME: Not valid for unicode strings.
 inline void ToLower(std::string& str)
 {
-    std::transform(str.begin(), str.end(), str.begin(), [](unsigned char c) noexcept { return std::tolower(c); });
+    std::transform(str.begin(), str.end(), str.begin(), [](unsigned char c) noexcept { return gsl::narrow_cast<char>(std::tolower(c)); });
 }
 
 // FIXME: Not valid for unicode strings.
@@ -79,7 +81,7 @@ inline void ToLower(std::string& str)
     std::string out;
     out.resize(str.size());
 
-    std::transform(str.begin(), str.end(), out.begin(), [](unsigned char c) noexcept { return std::toupper(c); });
+    std::transform(str.begin(), str.end(), out.begin(), [](unsigned char c) noexcept { return gsl::narrow_cast<char>(std::toupper(c)); });
 
     return out;
 }
@@ -90,7 +92,7 @@ inline void ToLower(std::string& str)
     std::string out;
     out.resize(str.size());
 
-    std::transform(str.begin(), str.end(), out.begin(), [](unsigned char c) noexcept { return std::tolower(c); });
+    std::transform(str.begin(), str.end(), out.begin(), [](unsigned char c) noexcept { return gsl::narrow_cast<char>(std::tolower(c)); });
 
     return out;
 }
@@ -172,8 +174,8 @@ inline void ToLower(std::string& str)
     std::string strA(nA, '0');
     std::string strB(nA, '0');
 
-    std::transform(strViewA.begin(), strViewA.end(), strA.begin(), [](unsigned char c) noexcept { return std::tolower(c); });
-    std::transform(strViewB.begin(), strViewB.end(), strB.begin(), [](unsigned char c) noexcept { return std::tolower(c); });
+    std::transform(strViewA.begin(), strViewA.end(), strA.begin(), [](unsigned char c) noexcept { return gsl::narrow_cast<char>(std::tolower(c)); });
+    std::transform(strViewB.begin(), strViewB.end(), strB.begin(), [](unsigned char c) noexcept { return gsl::narrow_cast<char>(std::tolower(c)); });
 
     return strA.compare(strB);
 }
