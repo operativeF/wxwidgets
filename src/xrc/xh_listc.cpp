@@ -39,9 +39,10 @@ wxListCtrlXmlHandler::wxListCtrlXmlHandler()
      
 {
     // wxListItem styles
-    XRC_ADD_STYLE(wxLIST_FORMAT_LEFT);
-    XRC_ADD_STYLE(wxLIST_FORMAT_RIGHT);
-    XRC_ADD_STYLE(wxLIST_FORMAT_CENTRE);
+    // FIXME: No longer ints
+    //XRC_ADD_STYLE(wxListColumnFormat::Left);
+    //XRC_ADD_STYLE(wxListColumnFormat::Right);
+    //XRC_ADD_STYLE(wxListColumnFormat::Center);
     // FIXME: ListMasks are no longer int
     //XRC_ADD_STYLE(ListMasks::State);
     //XRC_ADD_STYLE(ListMasks::Text);

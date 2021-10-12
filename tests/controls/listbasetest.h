@@ -100,9 +100,9 @@ struct ListBaseTest
         wxListCtrl* const list = GetList();
 
         // set up for the test
-        list->InsertColumn(0, "Column 0", wxLIST_FORMAT_LEFT, 60);
-        list->InsertColumn(1, "Column 1", wxLIST_FORMAT_LEFT, 50);
-        list->InsertColumn(2, "Column 2", wxLIST_FORMAT_LEFT, 40);
+        list->InsertColumn(0, "Column 0", wxListColumnFormat::Left, 60);
+        list->InsertColumn(1, "Column 1", wxListColumnFormat::Left, 50);
+        list->InsertColumn(2, "Column 2", wxListColumnFormat::Left, 40);
 
         list->InsertItem(0, "Item 0");
         list->SetItem(0, 1, "first column");
@@ -290,9 +290,9 @@ struct ListBaseTest
 
         wxListCtrl* const list = GetList();
 
-        list->InsertColumn(0, "Column 0", wxLIST_FORMAT_LEFT, 60);
-        list->InsertColumn(1, "Column 1", wxLIST_FORMAT_LEFT, 50);
-        list->InsertColumn(2, "Column 2", wxLIST_FORMAT_LEFT, 40);
+        list->InsertColumn(0, "Column 0", wxListColumnFormat::Left, 60);
+        list->InsertColumn(1, "Column 1", wxListColumnFormat::Left, 50);
+        list->InsertColumn(2, "Column 2", wxListColumnFormat::Left, 40);
 
         list->InsertItem(0, "Item 0");
         list->SetItem(0, 1, "first column");
@@ -370,9 +370,9 @@ struct ListBaseTest
         EventCounter deleteall(list, wxEVT_LIST_DELETE_ALL_ITEMS);
 
 
-        list->InsertColumn(0, "Column 0", wxLIST_FORMAT_LEFT, 60);
-        list->InsertColumn(1, "Column 1", wxLIST_FORMAT_LEFT, 50);
-        list->InsertColumn(2, "Column 2", wxLIST_FORMAT_LEFT, 40);
+        list->InsertColumn(0, "Column 0", wxListColumnFormat::Left, 60);
+        list->InsertColumn(1, "Column 1", wxListColumnFormat::Left, 50);
+        list->InsertColumn(2, "Column 2", wxListColumnFormat::Left, 40);
 
         list->InsertItem(0, "Item 0");
         list->InsertItem(1, "Item 1");
@@ -406,7 +406,7 @@ struct ListBaseTest
 
         EventCounter insert(list, wxEVT_LIST_INSERT_ITEM);
 
-        list->InsertColumn(0, "Column 0", wxLIST_FORMAT_LEFT, 60);
+        list->InsertColumn(0, "Column 0", wxListColumnFormat::Left, 60);
 
         wxListItem item;
         item.SetId(0);
@@ -563,7 +563,7 @@ struct ListBaseTest
         // get coordinates
         wxRect rectSubItem0, rectIcon;
         list->GetSubItemRect(0, 0, rectSubItem0); // column 0
-        list->GetItemRect(0, rectIcon, wxLIST_RECT_ICON); // icon
+        list->GetItemRect(0, rectIcon, wxListRectFlags::Icon); // icon
         int y = rectSubItem0.GetTop() + (rectSubItem0.GetBottom() -
             rectSubItem0.GetTop()) / 2;
 

@@ -37,6 +37,7 @@ int (wxCALLBACK *wxListCtrlCompare)(wxIntPtr item1, wxIntPtr item2, wxIntPtr sor
 // ----------------------------------------------------------------------------
 
 // style flags
+// FIXME: Bitfield
 constexpr unsigned int wxLC_VRULES          = 0x0001;
 constexpr unsigned int wxLC_HRULES          = 0x0002;
 
@@ -62,6 +63,7 @@ constexpr unsigned int wxLC_MASK_SORT       = wxLC_SORT_ASCENDING | wxLC_SORT_DE
 // for compatibility only
 constexpr unsigned int wxLC_USER_TEXT       = wxLC_VIRTUAL;
 
+// FIXME: Bitfields
 // Omitted because
 //  (a) too much detail
 //  (b) not enough style flags
@@ -136,22 +138,21 @@ enum
     wxLIST_NEXT_RIGHT           // Searches for an item to the right of the specified item
 };
 
-// Alignment flags for Arrange (MSW only except wxLIST_ALIGN_LEFT)
-enum
+// Alignment flags for Arrange (MSW only except wxListAlignment::Left)
+enum class wxListAlignment
 {
-    wxLIST_ALIGN_DEFAULT,
-    wxLIST_ALIGN_LEFT,
-    wxLIST_ALIGN_TOP,
-    wxLIST_ALIGN_SNAP_TO_GRID
+    Default,
+    Left,
+    Top,
+    SnapToGrid
 };
 
-// Column format (MSW only except wxLIST_FORMAT_LEFT)
-enum wxListColumnFormat
+// Column format (MSW only except wxListColumnFormat::Left)
+enum class wxListColumnFormat
 {
-    wxLIST_FORMAT_LEFT,
-    wxLIST_FORMAT_RIGHT,
-    wxLIST_FORMAT_CENTRE,
-    wxLIST_FORMAT_CENTER = wxLIST_FORMAT_CENTRE
+    Left,
+    Right,
+    Center
 };
 
 // Autosize values for SetColumnWidth
@@ -162,20 +163,20 @@ enum
 };
 
 // Flag values for GetItemRect
-enum
+enum class wxListRectFlags
 {
-    wxLIST_RECT_BOUNDS,
-    wxLIST_RECT_ICON,
-    wxLIST_RECT_LABEL
+    Bounds,
+    Icon,
+    Label
 };
 
 // Flag values for FindItem (MSW only)
-enum
+enum class wxListFind
 {
-    wxLIST_FIND_UP,
-    wxLIST_FIND_DOWN,
-    wxLIST_FIND_LEFT,
-    wxLIST_FIND_RIGHT
+    Up,
+    Down,
+    Left,
+    Right
 };
 
 // For compatibility, define the old name for this class. There is no need to
@@ -243,7 +244,7 @@ public:
         m_image = -1;
         m_data = 0;
 
-        m_format = wxLIST_FORMAT_CENTRE;
+        m_format = wxListColumnFormat::Center;
         m_width = 0;
         m_text.clear();
         ClearAttributes();
@@ -321,7 +322,7 @@ public:
     int             m_col{0};      // Zero-based column, if in report mode
 
     // For columns only
-    int             m_format{wxLIST_FORMAT_CENTRE};   // left, right, centre
+    wxListColumnFormat m_format{wxListColumnFormat::Center};   // left, right, centre
     int             m_width{0};    // width of column
 
 protected:
@@ -378,7 +379,7 @@ public:
     //
     // Returns the index of the newly inserted column or -1 on error.
     long AppendColumn(const wxString& heading,
-                      wxListColumnFormat format = wxLIST_FORMAT_LEFT,
+                      wxListColumnFormat format = wxListColumnFormat::Left,
                       int width = -1);
 
     // Add a new column to the control at the position "col".
@@ -387,7 +388,7 @@ public:
     long InsertColumn(long col, const wxListItem& info);
     long InsertColumn(long col,
                       const wxString& heading,
-                      int format = wxLIST_FORMAT_LEFT,
+                      wxListColumnFormat format = wxListColumnFormat::Left,
                       int width = wxLIST_AUTOSIZE);
 
     // Delete the given or all columns.

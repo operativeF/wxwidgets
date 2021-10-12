@@ -91,8 +91,8 @@ public:
     wxUIntPtr GetItemData( long item ) const;
     bool SetItemPtrData(long item, wxUIntPtr data);
     bool SetItemData(long item, long data) { return SetItemPtrData(item, data); }
-    bool GetItemRect( long item, wxRect& rect, int code = wxLIST_RECT_BOUNDS ) const;
-    bool GetSubItemRect( long item, long subItem, wxRect& rect, int code = wxLIST_RECT_BOUNDS ) const;
+    bool GetItemRect( long item, wxRect& rect, wxListRectFlags code = wxListRectFlags::Bounds ) const;
+    bool GetSubItemRect( long item, long subItem, wxRect& rect, wxListRectFlags code = wxListRectFlags::Bounds ) const;
     bool GetItemPosition( long item, wxPoint& pos ) const;
     bool SetItemPosition( long item, const wxPoint& pos ); // not supported in wxGLC
     int GetItemCount() const override;
@@ -122,7 +122,7 @@ public:
     wxImageList *GetImageList( int which ) const override;
     void SetImageList( wxImageList *imageList, int which ) override;
     void AssignImageList( wxImageList *imageList, int which ) override;
-    bool Arrange( int flag = wxLIST_ALIGN_DEFAULT ); // always wxLIST_ALIGN_LEFT in wxGLC
+    bool Arrange( int flag = wxListAlignment::Default ); // always wxListAlignment::Left in wxGLC
 
     void ClearAll();
     bool DeleteItem( long item );

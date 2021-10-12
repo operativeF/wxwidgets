@@ -648,17 +648,15 @@ bool wxListCtrl::GetColumn(int col, wxListItem& item) const
     if ( item.m_mask & ListMasks::Format )
     {
         switch (lvCol.fmt & LVCFMT_JUSTIFYMASK) {
-            case LVCFMT_LEFT:
-                item.m_format = wxLIST_FORMAT_LEFT;
-                break;
             case LVCFMT_RIGHT:
-                item.m_format = wxLIST_FORMAT_RIGHT;
+                item.m_format = wxListColumnFormat::Right;
                 break;
             case LVCFMT_CENTER:
-                item.m_format = wxLIST_FORMAT_CENTRE;
+                item.m_format = wxListColumnFormat::Center;
                 break;
+            case LVCFMT_LEFT:
             default:
-                item.m_format = -1;  // Unknown?
+                item.m_format = wxListColumnFormat::Left;  // Default to left
                 break;
         }
     }
@@ -1174,12 +1172,12 @@ wxRect wxListCtrl::GetViewRect() const
 }
 
 // Gets the item rectangle
-bool wxListCtrl::GetItemRect(long item, wxRect& rect, int code) const
+bool wxListCtrl::GetItemRect(long item, wxRect& rect, wxListRectFlags code) const
 {
     return GetSubItemRect( item, wxLIST_GETSUBITEMRECT_WHOLEITEM, rect, code) ;
 }
 
-bool wxListCtrl::GetSubItemRect(long item, long subItem, wxRect& rect, int code) const
+bool wxListCtrl::GetSubItemRect(long item, long subItem, wxRect& rect, wxListRectFlags code) const
 {
     // ListView_GetSubItemRect() doesn't do subItem error checking and returns
     // true even for the out of range values of it (even if the results are
@@ -1195,11 +1193,11 @@ bool wxListCtrl::GetSubItemRect(long item, long subItem, wxRect& rect, int code)
     int codeWin;
     switch ( code )
     {
-        case wxLIST_RECT_BOUNDS:
+        case wxListRectFlags::Bounds:
             codeWin = LVIR_BOUNDS;
             break;
 
-        case wxLIST_RECT_ICON:
+        case wxListRectFlags::Icon:
             // Only the first subitem can have an icon, so it doesn't make
             // sense to query the native control for the other ones --
             // especially because it returns a nonsensical non-empty icon
@@ -1213,7 +1211,7 @@ bool wxListCtrl::GetSubItemRect(long item, long subItem, wxRect& rect, int code)
             codeWin = LVIR_ICON;
             break;
 
-        case wxLIST_RECT_LABEL:
+        case wxListRectFlags::Label:
             codeWin = LVIR_LABEL;
             break;
 
@@ -1240,7 +1238,7 @@ bool wxListCtrl::GetSubItemRect(long item, long subItem, wxRect& rect, int code)
     // there is no way to retrieve the first sub item bounding rectangle using
     // wxGetListCtrlSubItemRect() as 0 means the whole item, so we need to
     // truncate it at first column ourselves
-    if ( subItem == 0 && code == wxLIST_RECT_BOUNDS )
+    if ( subItem == 0 && code == wxListRectFlags::Bounds )
         rect.width = GetColumnWidth(0);
 
     return true;
@@ -1513,17 +1511,28 @@ wxSize wxListCtrl::MSWGetBestViewRect(int x, int y) const
 // ----------------------------------------------------------------------------
 
 // Arranges the items
-bool wxListCtrl::Arrange(int flag)
+bool wxListCtrl::Arrange(wxListAlignment flag)
 {
-    UINT code = 0;
-    if ( flag == wxLIST_ALIGN_LEFT )
-        code = LVA_ALIGNLEFT;
-    else if ( flag == wxLIST_ALIGN_TOP )
-        code = LVA_ALIGNTOP;
-    else if ( flag == wxLIST_ALIGN_DEFAULT )
-        code = LVA_DEFAULT;
-    else if ( flag == wxLIST_ALIGN_SNAP_TO_GRID )
-        code = LVA_SNAPTOGRID;
+    using enum wxListAlignment;
+
+    UINT code{};
+
+    switch(flag)
+    {
+        case Top:
+            code = LVA_ALIGNTOP;
+            break;
+        case Default:
+            code = LVA_DEFAULT;
+            break;
+        case SnapToGrid:
+            code = LVA_SNAPTOGRID;
+            break;
+        case Left:
+        default:
+            code = LVA_ALIGNLEFT;
+            break;
+    };
 
     return (ListView_Arrange(GetHwnd(), code) != 0);
 }
@@ -1752,7 +1761,7 @@ long wxListCtrl::FindItem(long start, wxUIntPtr data)
 
 // Find an item nearest this position in the specified direction, starting from
 // the item after 'start' or the beginning if 'start' is -1.
-long wxListCtrl::FindItem(long start, const wxPoint& pt, int direction)
+long wxListCtrl::FindItem(long start, const wxPoint& pt, wxListFind direction)
 {
     LV_FINDINFO findInfo;
 
@@ -1761,14 +1770,22 @@ long wxListCtrl::FindItem(long start, const wxPoint& pt, int direction)
     findInfo.pt.y = pt.y;
     findInfo.vkDirection = VK_RIGHT;
 
-    if ( direction == wxLIST_FIND_UP )
-        findInfo.vkDirection = VK_UP;
-    else if ( direction == wxLIST_FIND_DOWN )
-        findInfo.vkDirection = VK_DOWN;
-    else if ( direction == wxLIST_FIND_LEFT )
-        findInfo.vkDirection = VK_LEFT;
-    else if ( direction == wxLIST_FIND_RIGHT )
-        findInfo.vkDirection = VK_RIGHT;
+    switch(direction)
+    {
+        case wxListFind::Up:
+            findInfo.vkDirection = VK_UP;
+            break;
+        case wxListFind::Down:
+            findInfo.vkDirection = VK_DOWN;
+            break;
+        case wxListFind::Left:
+            findInfo.vkDirection = VK_LEFT;
+            break;
+        case wxListFind::Right: // Default to right?
+        default:
+            findInfo.vkDirection = VK_RIGHT;
+            break;
+    }
 
     return ListView_FindItem(GetHwnd(), start, &findInfo);
 }
@@ -3510,11 +3527,11 @@ static void wxConvertToMSWListCol(HWND hwndList,
     {
         lvCol.mask |= LVCF_FMT;
 
-        if ( item.m_format == wxLIST_FORMAT_LEFT )
+        if ( item.m_format == wxListColumnFormat::Left )
             lvCol.fmt = LVCFMT_LEFT;
-        else if ( item.m_format == wxLIST_FORMAT_RIGHT )
+        else if ( item.m_format == wxListColumnFormat::Right )
             lvCol.fmt = LVCFMT_RIGHT;
-        else if ( item.m_format == wxLIST_FORMAT_CENTRE )
+        else if ( item.m_format == wxListColumnFormat::Center )
             lvCol.fmt = LVCFMT_CENTER;
     }
 

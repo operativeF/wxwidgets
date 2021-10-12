@@ -663,7 +663,7 @@ public:
         return GetSubItemRect(item, wxLIST_GETSUBITEMRECT_WHOLEITEM, rect);
     }
     bool GetSubItemRect( long item, long subItem, wxRect& rect,
-                         int code = wxLIST_RECT_BOUNDS ) const;
+                         wxListRectFlags code = wxListRectFlags::Bounds ) const;
     wxRect GetViewRect() const;
     bool GetItemPosition( long item, wxPoint& pos ) const;
     int GetSelectedItemCount() const;

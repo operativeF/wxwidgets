@@ -95,7 +95,7 @@ void DelAttr(wxCalendarDateAttr *self, const wxCalendarDateAttr &attr)
     if (attr.HasFont())
         self->SetFont(wxNullFont);
     if (attr.HasBorder())
-        self->SetBorder(wxCAL_BORDER_NONE);
+        self->SetBorder(wxCalendarDateBorder::None);
     if (attr.IsHoliday())
         self->SetHoliday(false);
 }
@@ -1019,12 +1019,12 @@ void wxGenericCalendarCtrl::OnPaint(wxPaintEvent& WXUNUSED(event))
 
                     switch ( attr->GetBorder() )
                     {
-                        case wxCAL_BORDER_SQUARE:
+                        case wxCalendarDateBorder::Square:
                             dc.DrawRectangle(x - 2, y,
                                              width + 4, m_heightRow);
                             break;
 
-                        case wxCAL_BORDER_ROUND:
+                        case wxCalendarDateBorder::Round:
                             dc.DrawEllipse(x - 2, y,
                                            width + 4, m_heightRow);
                             break;
@@ -1304,21 +1304,21 @@ void wxGenericCalendarCtrl::OnDClick(wxMouseEvent& event)
     wxDateTime date;
     switch ( HitTest(event.GetPosition(), &date) )
     {
-        case wxCAL_HITTEST_DAY:
+        case wxCalendarHitTestResult::Day:
             GenerateEvent(wxEVT_CALENDAR_DOUBLECLICKED);
             break;
 
-        case wxCAL_HITTEST_DECMONTH:
-        case wxCAL_HITTEST_INCMONTH:
+        case wxCalendarHitTestResult::DecMonth:
+        case wxCalendarHitTestResult::IncMonth:
             // Consecutive simple clicks result in a series of simple and
             // double click events, so handle them in the same way.
             SetDateAndNotify(date);
             break;
 
-        case wxCAL_HITTEST_WEEK:
-        case wxCAL_HITTEST_HEADER:
-        case wxCAL_HITTEST_SURROUNDING_WEEK:
-        case wxCAL_HITTEST_NOWHERE:
+        case wxCalendarHitTestResult::Week:
+        case wxCalendarHitTestResult::Header:
+        case wxCalendarHitTestResult::SurroundingWeek:
+        case wxCalendarHitTestResult::Nowhere:
             event.Skip();
             break;
     }
@@ -1330,7 +1330,7 @@ void wxGenericCalendarCtrl::OnClick(wxMouseEvent& event)
     wxDateTime::WeekDay wday;
     switch ( HitTest(event.GetPosition(), &date, &wday) )
     {
-        case wxCAL_HITTEST_DAY:
+        case wxCalendarHitTestResult::Day:
             if ( IsDateInRange(date) )
             {
                 ChangeDay(date);
@@ -1344,14 +1344,14 @@ void wxGenericCalendarCtrl::OnClick(wxMouseEvent& event)
             }
             break;
 
-        case wxCAL_HITTEST_WEEK:
+        case wxCalendarHitTestResult::Week:
             {
                 wxCalendarEvent send( this, date, wxEVT_CALENDAR_WEEK_CLICKED );
                 HandleWindowEvent( send );
             }
             break;
 
-        case wxCAL_HITTEST_HEADER:
+        case wxCalendarHitTestResult::Header:
             {
                 wxCalendarEvent eventWd(this, GetDate(),
                                         wxEVT_CALENDAR_WEEKDAY_CLICKED);
@@ -1360,9 +1360,9 @@ void wxGenericCalendarCtrl::OnClick(wxMouseEvent& event)
             }
             break;
 
-        case wxCAL_HITTEST_DECMONTH:
-        case wxCAL_HITTEST_INCMONTH:
-        case wxCAL_HITTEST_SURROUNDING_WEEK:
+        case wxCalendarHitTestResult::DecMonth:
+        case wxCalendarHitTestResult::IncMonth:
+        case wxCalendarHitTestResult::SurroundingWeek:
             SetDateAndNotify(date); // we probably only want to refresh the control. No notification.. (maybe as an option?)
             break;
 
@@ -1370,7 +1370,7 @@ void wxGenericCalendarCtrl::OnClick(wxMouseEvent& event)
             wxFAIL_MSG(wxT("unknown hittest code"));
             [[fallthrough]];
 
-        case wxCAL_HITTEST_NOWHERE:
+        case wxCalendarHitTestResult::Nowhere:
             event.Skip();
             break;
     }
@@ -1409,7 +1409,7 @@ wxCalendarHitTestResult wxGenericCalendarCtrl::HitTest(const wxPoint& pos,
                 }
             }
 
-            return wxCAL_HITTEST_DECMONTH;
+            return wxCalendarHitTestResult::DecMonth;
         }
 
         if ( m_rightArrowRect.Contains(pos) )
@@ -1426,7 +1426,7 @@ wxCalendarHitTestResult wxGenericCalendarCtrl::HitTest(const wxPoint& pos,
                 }
             }
 
-            return wxCAL_HITTEST_INCMONTH;
+            return wxCalendarHitTestResult::IncMonth;
         }
     }
 
@@ -1441,16 +1441,16 @@ wxCalendarHitTestResult wxGenericCalendarCtrl::HitTest(const wxPoint& pos,
             }
             if ( wd )
                 *wd = GetWeekStart();
-            return wxCAL_HITTEST_WEEK;
+            return wxCalendarHitTestResult::Week;
         }
         else    // early exit -> the rest of the function checks for clicks on days
-            return wxCAL_HITTEST_NOWHERE;
+            return wxCalendarHitTestResult::Nowhere;
     }
 
     // header: week days
     int wday = (pos.x - x0) / m_widthCol;
     if ( wday > 6 )
-        return wxCAL_HITTEST_NOWHERE;
+        return wxCalendarHitTestResult::Nowhere;
     if ( pos.y < (m_heightRow + m_rowOffset))
     {
         if ( pos.y > m_rowOffset )
@@ -1465,18 +1465,18 @@ wxCalendarHitTestResult wxGenericCalendarCtrl::HitTest(const wxPoint& pos,
                 *wd = (wxDateTime::WeekDay)wday;
             }
 
-            return wxCAL_HITTEST_HEADER;
+            return wxCalendarHitTestResult::Header;
         }
         else
         {
-            return wxCAL_HITTEST_NOWHERE;
+            return wxCalendarHitTestResult::Nowhere;
         }
     }
 
     int week = (pos.y - (m_heightRow + m_rowOffset)) / m_heightRow;
     if ( week >= 6 || wday >= 7 )
     {
-        return wxCAL_HITTEST_NOWHERE;
+        return wxCalendarHitTestResult::Nowhere;
     }
 
     wxDateTime dt = GetStartDate() + wxDateSpan::Days(7*week + wday);
@@ -1489,16 +1489,16 @@ wxCalendarHitTestResult wxGenericCalendarCtrl::HitTest(const wxPoint& pos,
         if ( dt.GetMonth() == m_date.GetMonth() )
         {
 
-            return wxCAL_HITTEST_DAY;
+            return wxCalendarHitTestResult::Day;
         }
         else
         {
-            return wxCAL_HITTEST_SURROUNDING_WEEK;
+            return wxCalendarHitTestResult::SurroundingWeek;
         }
     }
     else
     {
-        return wxCAL_HITTEST_NOWHERE;
+        return wxCalendarHitTestResult::Nowhere;
     }
 }
 

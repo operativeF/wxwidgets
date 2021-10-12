@@ -58,23 +58,23 @@ enum
 // ----------------------------------------------------------------------------
 
 // return values for the HitTest() method
-enum wxCalendarHitTestResult
+enum class wxCalendarHitTestResult
 {
-    wxCAL_HITTEST_NOWHERE,      // outside of anything
-    wxCAL_HITTEST_HEADER,       // on the header (weekdays)
-    wxCAL_HITTEST_DAY,          // on a day in the calendar
-    wxCAL_HITTEST_INCMONTH,
-    wxCAL_HITTEST_DECMONTH,
-    wxCAL_HITTEST_SURROUNDING_WEEK,
-    wxCAL_HITTEST_WEEK
+    Nowhere,      // outside of anything
+    Header,       // on the header (weekdays)
+    Day,          // on a day in the calendar
+    IncMonth,
+    DecMonth,
+    SurroundingWeek,
+    Week
 };
 
 // border types for a date
-enum wxCalendarDateBorder
+enum class wxCalendarDateBorder
 {
-    wxCAL_BORDER_NONE,          // no border (default)
-    wxCAL_BORDER_SQUARE,        // a rectangular border
-    wxCAL_BORDER_ROUND          // a round border
+    None,          // no border (default)
+    Square,        // a rectangular border
+    Round          // a round border
 };
 
 // ----------------------------------------------------------------------------
@@ -89,7 +89,7 @@ public:
                        const wxColour& colBack = wxNullColour,
                        const wxColour& colBorder = wxNullColour,
                        const wxFont& font = wxNullFont,
-                       wxCalendarDateBorder border = wxCAL_BORDER_NONE)
+                       wxCalendarDateBorder border = wxCalendarDateBorder::None)
         : m_colText(colText), m_colBack(colBack),
           m_colBorder(colBorder), m_font(font)
     {
@@ -113,7 +113,7 @@ public:
     bool HasBackgroundColour() const { return m_colBack.IsOk(); }
     bool HasBorderColour() const { return m_colBorder.IsOk(); }
     bool HasFont() const { return m_font.IsOk(); }
-    bool HasBorder() const { return m_border != wxCAL_BORDER_NONE; }
+    bool HasBorder() const { return m_border != wxCalendarDateBorder::None; }
 
     bool IsHoliday() const { return m_holiday; }
 
@@ -130,7 +130,7 @@ public:
 
 protected:
     // FIXME: Protected Init with params
-    void Init(wxCalendarDateBorder border = wxCAL_BORDER_NONE)
+    void Init(wxCalendarDateBorder border = wxCalendarDateBorder::None)
     {
         m_border = border;
         m_holiday = false;
@@ -232,7 +232,7 @@ public:
             wxDateTime* WXUNUSED(date) = nullptr,
             wxDateTime::WeekDay* WXUNUSED(wd) = nullptr)
     {
-        return wxCAL_HITTEST_NOWHERE;
+        return wxCalendarHitTestResult::Nowhere;
     }
 
     // allow or disable changing the current month (and year), return true if

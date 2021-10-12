@@ -884,15 +884,15 @@ void wxListLineData::DrawTextFormatted(wxDC *dc,
         m_owner->GetColumn(col, item);
         switch ( item.GetAlign() )
         {
-            case wxLIST_FORMAT_LEFT:
+            case wxListColumnFormat::Left:
                 // nothing to do
                 break;
 
-            case wxLIST_FORMAT_RIGHT:
+            case wxListColumnFormat::Right:
                 x += width - w;
                 break;
 
-            case wxLIST_FORMAT_CENTER:
+            case wxListColumnFormat::Center:
                 x += (width - w) / 2;
                 break;
 
@@ -1134,21 +1134,21 @@ void wxListHeaderWindow::OnPaint( wxPaintEvent &WXUNUSED(event) )
 
         // ignore alignment if there is not enough space anyhow
         int xAligned;
-        switch ( wLabel < cw ? item.GetAlign() : wxLIST_FORMAT_LEFT )
+        switch ( wLabel < cw ? item.GetAlign() : wxListColumnFormat::Left )
         {
             default:
                 wxFAIL_MSG( wxT("unknown list item format") );
                 [[fallthrough]];
 
-            case wxLIST_FORMAT_LEFT:
+            case wxListColumnFormat::Left:
                 xAligned = x;
                 break;
 
-            case wxLIST_FORMAT_RIGHT:
+            case wxListColumnFormat::Right:
                 xAligned = x + cw - wLabel;
                 break;
 
-            case wxLIST_FORMAT_CENTER:
+            case wxListColumnFormat::Center:
                 xAligned = x + (cw - wLabel) / 2;
                 break;
         }
@@ -3845,7 +3845,7 @@ wxRect wxListMainWindow::GetViewRect() const
 
 bool
 wxListMainWindow::GetSubItemRect(long item, long subItem, wxRect& rect,
-                                 int code) const
+                                 wxListRectFlags code) const
 {
     wxCHECK_MSG( subItem == wxLIST_GETSUBITEMRECT_WHOLEITEM || InReportView(),
                  false,
@@ -3876,12 +3876,12 @@ wxListMainWindow::GetSubItemRect(long item, long subItem, wxRect& rect,
 
         switch ( code )
         {
-            case wxLIST_RECT_BOUNDS:
+            case wxListRectFlags::Bounds:
                 // Nothing to do.
                 break;
 
-            case wxLIST_RECT_ICON:
-            case wxLIST_RECT_LABEL:
+            case wxListRectFlags::Icon:
+            case wxListRectFlags::Label:
                 // Note: this needs to be kept in sync with DrawInReportMode().
                 {
                     rect.x += ICON_OFFSET_X;
@@ -3895,11 +3895,11 @@ wxListMainWindow::GetSubItemRect(long item, long subItem, wxRect& rect,
 
                         const int iconWidth = ix + IMAGE_MARGIN_IN_REPORT_MODE;
 
-                        if ( code == wxLIST_RECT_ICON )
+                        if ( code == wxListRectFlags::Icon )
                         {
                             rect.width = iconWidth;
                         }
-                        else // wxLIST_RECT_LABEL
+                        else // wxListRectFlags::Label
                         {
                             rect.x += iconWidth;
                             rect.width -= iconWidth;
@@ -3907,7 +3907,7 @@ wxListMainWindow::GetSubItemRect(long item, long subItem, wxRect& rect,
                     }
                     else // No icon
                     {
-                        if ( code == wxLIST_RECT_ICON )
+                        if ( code == wxListRectFlags::Icon )
                             rect = wxRect();
                         //else: label rect is the same as the full one
                     }

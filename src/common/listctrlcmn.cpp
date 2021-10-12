@@ -140,7 +140,7 @@ wxListCtrlBase::AppendColumn(const wxString& heading,
 long
 wxListCtrlBase::InsertColumn(long col,
                              const wxString& heading,
-                             int format,
+                             wxListColumnFormat format,
                              int width)
 {
     wxListItem item;

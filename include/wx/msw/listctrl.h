@@ -185,10 +185,10 @@ public:
     bool SetItemData(long item, long data) { return SetItemPtrData(item, data); }
 
     // Gets the item rectangle
-    bool GetItemRect(long item, wxRect& rect, int code = wxLIST_RECT_BOUNDS) const;
+    bool GetItemRect(long item, wxRect& rect, wxListRectFlags code = wxListRectFlags::Bounds) const;
 
     // Gets the subitem rectangle in report mode
-    bool GetSubItemRect(long item, long subItem, wxRect& rect, int code = wxLIST_RECT_BOUNDS) const;
+    bool GetSubItemRect(long item, long subItem, wxRect& rect, wxListRectFlags code = wxListRectFlags::Bounds) const;
 
     // Gets the item position
     bool GetItemPosition(long item, wxPoint& pos) const;
@@ -260,7 +260,7 @@ public:
     void RefreshItems(long itemFrom, long itemTo);
 
     // Arranges the items
-    bool Arrange(int flag = wxLIST_ALIGN_DEFAULT);
+    bool Arrange(wxListAlignment flag = wxListAlignment::Default);
 
     // Deletes an item
     bool DeleteItem(long item);
@@ -296,7 +296,7 @@ public:
 
     // Find an item nearest this position in the specified direction, starting from
     // the item after 'start' or the beginning if 'start' is -1.
-    long FindItem(long start, const wxPoint& pt, int direction);
+    long FindItem(long start, const wxPoint& pt, wxListFind direction);
 
     // Determines which item (if any) is at the specified point,
     // giving details in 'flags' (see ListHitTestFlags above)

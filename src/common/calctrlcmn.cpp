@@ -104,7 +104,7 @@ wxDEFINE_EVENT( wxEVT_CALENDAR_MONTH_CHANGED, wxCalendarEvent );
 wxDEFINE_EVENT( wxEVT_CALENDAR_YEAR_CHANGED, wxCalendarEvent );
 
 
-wxCalendarDateAttr wxCalendarDateAttr::m_mark(wxCAL_BORDER_SQUARE);
+wxCalendarDateAttr wxCalendarDateAttr::m_mark(wxCalendarDateBorder::Square);
 
 bool wxCalendarCtrlBase::EnableMonthChange(bool enable)
 {

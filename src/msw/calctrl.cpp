@@ -186,12 +186,12 @@ wxCalendarCtrl::HitTest(const wxPoint& pos,
         case MCHT_TITLEBK:
         case MCHT_TITLEMONTH:
         case MCHT_TITLEYEAR:
-            return wxCAL_HITTEST_NOWHERE;
+            return wxCalendarHitTestResult::Nowhere;
 
         case MCHT_CALENDARDATE:
             if ( date )
                 date->SetFromMSWSysDate(hti.st);
-            return wxCAL_HITTEST_DAY;
+            return wxCalendarHitTestResult::Day;
 
         case MCHT_CALENDARDAY:
             if ( wd )
@@ -217,17 +217,17 @@ wxCalendarCtrl::HitTest(const wxPoint& pos,
 
                 *wd = static_cast<wxDateTime::WeekDay>(day);
             }
-            return wxCAL_HITTEST_HEADER;
+            return wxCalendarHitTestResult::Header;
 
         case MCHT_TITLEBTNNEXT:
-            return wxCAL_HITTEST_INCMONTH;
+            return wxCalendarHitTestResult::IncMonth;
 
         case MCHT_TITLEBTNPREV:
-            return wxCAL_HITTEST_DECMONTH;
+            return wxCalendarHitTestResult::DecMonth;
 
         case MCHT_CALENDARDATENEXT:
         case MCHT_CALENDARDATEPREV:
-            return wxCAL_HITTEST_SURROUNDING_WEEK;
+            return wxCalendarHitTestResult::SurroundingWeek;
     }
 }
 
@@ -482,7 +482,7 @@ bool wxCalendarCtrl::MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result)
 
 void wxCalendarCtrl::MSWOnDoubleClick(wxMouseEvent& event)
 {
-    if ( HitTest(event.GetPosition()) == wxCAL_HITTEST_DAY )
+    if ( HitTest(event.GetPosition()) == wxCalendarHitTestResult::Day )
     {
         if ( GenerateEvent(wxEVT_CALENDAR_DOUBLECLICKED) )
             return; // skip event.Skip() below

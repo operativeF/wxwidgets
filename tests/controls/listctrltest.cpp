@@ -63,9 +63,9 @@ TEST_CASE_FIXTURE(ListCtrlTest, "List control test")
 
         // First check a subitem with an icon: it should have a valid icon
         // rectangle and the label rectangle should be adjacent to it.
-        m_listctrl->GetSubItemRect(1, 0, rectItem, wxLIST_RECT_BOUNDS);
-        m_listctrl->GetSubItemRect(1, 0, rectIcon, wxLIST_RECT_ICON);
-        m_listctrl->GetSubItemRect(1, 0, rectLabel, wxLIST_RECT_LABEL);
+        m_listctrl->GetSubItemRect(1, 0, rectItem, wxListRectFlags::Bounds);
+        m_listctrl->GetSubItemRect(1, 0, rectIcon, wxListRectFlags::Icon);
+        m_listctrl->GetSubItemRect(1, 0, rectLabel, wxListRectFlags::Label);
 
         CHECK(!rectIcon.IsEmpty());
         // Note that we can't use "==" here, in the native MSW version there is a
@@ -76,9 +76,9 @@ TEST_CASE_FIXTURE(ListCtrlTest, "List control test")
 
         // For a subitem without an icon, label rectangle is the same one as the
         // entire item one and the icon rectangle should be empty.
-        m_listctrl->GetSubItemRect(1, 1, rectItem, wxLIST_RECT_BOUNDS);
-        m_listctrl->GetSubItemRect(1, 1, rectIcon, wxLIST_RECT_ICON);
-        m_listctrl->GetSubItemRect(1, 1, rectLabel, wxLIST_RECT_LABEL);
+        m_listctrl->GetSubItemRect(1, 1, rectItem, wxListRectFlags::Bounds);
+        m_listctrl->GetSubItemRect(1, 1, rectIcon, wxListRectFlags::Icon);
+        m_listctrl->GetSubItemRect(1, 1, rectLabel, wxListRectFlags::Label);
 
         CHECK(rectIcon.IsEmpty());
         // Here we can't check for exact equality neither as there can be a margin.
@@ -128,7 +128,7 @@ TEST_CASE_FIXTURE(ListCtrlTest, "List control test")
         EventCounter colrclick(m_listctrl.get(), wxEVT_LIST_COL_RIGHT_CLICK);
 
 
-        m_listctrl->InsertColumn(0, "Column 0", wxLIST_FORMAT_LEFT, 60);
+        m_listctrl->InsertColumn(0, "Column 0", wxListColumnFormat::Left, 60);
 
         wxUIActionSimulator sim;
 

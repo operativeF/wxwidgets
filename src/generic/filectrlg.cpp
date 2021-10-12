@@ -395,16 +395,16 @@ void wxFileListCtrl::ChangeToReportMode()
     std::string txt = dt.FormatDate() + wxT("22") + dt.Format(wxT("%I:%M:%S %p"));
     GetTextExtent(txt, &w, &h);
 
-    InsertColumn( 0, _("Name"), wxLIST_FORMAT_LEFT, w );
-    InsertColumn( 1, _("Size"), wxLIST_FORMAT_RIGHT, w/2 );
-    InsertColumn( 2, _("Type"), wxLIST_FORMAT_LEFT, w/2 );
-    InsertColumn( 3, _("Modified"), wxLIST_FORMAT_LEFT, w );
+    InsertColumn( 0, _("Name"), wxListColumnFormat::Left, w );
+    InsertColumn( 1, _("Size"), wxListColumnFormat::Right, w/2 );
+    InsertColumn( 2, _("Type"), wxListColumnFormat::Left, w/2 );
+    InsertColumn( 3, _("Modified"), wxListColumnFormat::Left, w );
 #if defined(__UNIX__)
     GetTextExtent(wxT("Permissions 2"), &w, &h);
-    InsertColumn( 4, _("Permissions"), wxLIST_FORMAT_LEFT, w );
+    InsertColumn( 4, _("Permissions"), wxListColumnFormat::Left, w );
 #elif defined(__WIN32__)
     GetTextExtent("Attributes 2", &w, &h);
-    InsertColumn( 4, _("Attributes"), wxLIST_FORMAT_LEFT, w );
+    InsertColumn( 4, _("Attributes"), wxListColumnFormat::Left, w );
 #endif
 
     UpdateFiles();

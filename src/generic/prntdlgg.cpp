@@ -479,10 +479,10 @@ void wxGenericPrintSetupDialog::Init(wxPrintData* data)
     image_list->Add( wxBitmap(check_xpm) );
     m_printerListCtrl->AssignImageList( image_list, wxIMAGE_LIST_SMALL );
 
-    m_printerListCtrl->InsertColumn( 0, wxT(" "), wxLIST_FORMAT_LEFT, 20 );
-    m_printerListCtrl->InsertColumn( 1, wxT("Printer"), wxLIST_FORMAT_LEFT, 150 );
-    m_printerListCtrl->InsertColumn( 2, wxT("Device"), wxLIST_FORMAT_LEFT, 150 );
-    m_printerListCtrl->InsertColumn( 3, wxT("Status"), wxLIST_FORMAT_LEFT, 80 );
+    m_printerListCtrl->InsertColumn( 0, wxT(" "), wxListColumnFormat::Left, 20 );
+    m_printerListCtrl->InsertColumn( 1, wxT("Printer"), wxListColumnFormat::Left, 150 );
+    m_printerListCtrl->InsertColumn( 2, wxT("Device"), wxListColumnFormat::Left, 150 );
+    m_printerListCtrl->InsertColumn( 3, wxT("Status"), wxListColumnFormat::Left, 80 );
 
     wxListItem item;
     item.SetMask( wxLIST_MASK_TEXT );
