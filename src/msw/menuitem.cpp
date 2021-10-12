@@ -231,7 +231,7 @@ public:
 
     bool AlwaysShowCues;        // must keyboard cues always be shown?
 
-    bool Theme;                 // is data initialized for FullTheme?
+    bool Theme;                 // is data initialized for MenuLayoutType::FullTheme?
 
     static const MenuDrawData* Get(wxMenu* menu)
     {
@@ -246,7 +246,7 @@ public:
         }
 
     #if wxUSE_UXTHEME
-        const bool theme = MenuLayout() == FullTheme;
+        const bool theme = MenuLayout() == MenuLayoutType::FullTheme;
         if ( ms_instance->Theme != theme )
         {
             ms_instance->Init(window);
@@ -274,14 +274,14 @@ public:
     static bool IsUxThemeActive()
     {
     #if wxUSE_UXTHEME
-        if ( MenuLayout() == FullTheme )
+        if ( MenuLayout() == MenuLayoutType::FullTheme )
             return true;
     #endif // wxUSE_UXTHEME
         return false;
     }
 
 
-    enum MenuLayoutType
+    enum class MenuLayoutType
     {
         FullTheme,      // full menu themes (Vista or new)
         PseudoTheme,    // pseudo menu themes (on XP)
@@ -290,15 +290,15 @@ public:
 
     static MenuLayoutType MenuLayout()
     {
-        MenuLayoutType menu = Classic;
+        MenuLayoutType menu = MenuLayoutType::Classic;
     #if wxUSE_UXTHEME
         if ( wxUxThemeIsActive() )
         {
             static wxWinVersion ver = wxGetWinVersion();
             if ( ver >= wxWinVersion_Vista )
-                menu = FullTheme;
+                menu = MenuLayoutType::FullTheme;
             else if ( ver == wxWinVersion_XP )
-                menu = PseudoTheme;
+                menu = MenuLayoutType::PseudoTheme;
         }
     #endif // wxUSE_UXTHEME
         return menu;
@@ -899,7 +899,7 @@ bool wxMenuItem::OnDrawItem(wxDC& dc, const wxRect& rc,
 
         // we draw the text label vertically centered, but this results in it
         // being 1px too low compared to native menus for some reason, fix it
-        if ( MenuDrawData::MenuLayout() != MenuDrawData::FullTheme )
+        if ( MenuDrawData::MenuLayout() != MenuDrawData::MenuLayoutType::FullTheme )
             rcText.top--;
 
 #if wxUSE_UXTHEME
@@ -985,7 +985,7 @@ bool wxMenuItem::OnDrawItem(wxDC& dc, const wxRect& rc,
 
         unsigned int flags = DST_PREFIXTEXT;
         // themes menu is using specified color for disabled labels
-        if ( MenuDrawData::MenuLayout() == MenuDrawData::Classic &&
+        if ( MenuDrawData::MenuLayout() == MenuDrawData::MenuLayoutType::Classic &&
              (stat & wxODDisabled) && !(stat & wxODSelected) )
             flags |= DSS_DISABLED;
 
@@ -1011,7 +1011,7 @@ bool wxMenuItem::OnDrawItem(wxDC& dc, const wxRect& rc,
 
             flags = DST_TEXT;
             // themes menu is using specified color for disabled labels
-            if ( MenuDrawData::MenuLayout() == MenuDrawData::Classic &&
+            if ( MenuDrawData::MenuLayout() == MenuDrawData::MenuLayoutType::Classic &&
                  (stat & wxODDisabled) && !(stat & wxODSelected) )
                 flags |= DSS_DISABLED;
 
@@ -1019,8 +1019,8 @@ bool wxMenuItem::OnDrawItem(wxDC& dc, const wxRect& rc,
                                  - data->ArrowSize.cx
                                  - data->ArrowBorder;
 
-            // right align accel on FullTheme menu, left otherwise
-            if ( MenuDrawData::MenuLayout() == MenuDrawData::FullTheme)
+            // right align accel on MenuLayoutType::FullTheme menu, left otherwise
+            if ( MenuDrawData::MenuLayout() == MenuDrawData::MenuLayoutType::FullTheme)
                 x -= accelSize.cx;
             else
                 x -= m_parentMenu->GetMaxAccelWidth();
@@ -1321,7 +1321,7 @@ HBITMAP wxMenuItem::GetHBitmapForMenu(BitmapKind kind) const
     // support HBMMENU_CALLBACK.
     //
     // However under Vista using HBMMENU_CALLBACK causes the entire menu to be
-    // drawn using the classic theme instead of the current one and it does
+    // drawn using the MenuLayoutType::Classic theme instead of the current one and it does
     // handle transparency just fine so do use the real bitmap there
 #if wxUSE_IMAGE
     if ( wxGetWinVersion() >= wxWinVersion_Vista )

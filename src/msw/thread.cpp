@@ -77,13 +77,13 @@ constexpr THREAD_RETVAL THREAD_ERROR_EXIT = (THREAD_RETVAL)-1;
 
 // the possible states of the thread ("=>" shows all possible transitions from
 // this state)
-enum wxThreadState
+enum class wxThreadState
 {
-    STATE_NEW,          // didn't start execution yet (=> RUNNING)
-    STATE_RUNNING,      // thread is running (=> PAUSED, CANCELED)
-    STATE_PAUSED,       // thread is temporarily suspended (=> RUNNING)
-    STATE_CANCELED,     // thread should terminate a.s.a.p. (=> EXITED)
-    STATE_EXITED        // thread is terminating
+    New,          // didn't start execution yet (=> RUNNING)
+    Running,      // thread is running (=> PAUSED, CANCELED)
+    Paused,       // thread is temporarily suspended (=> RUNNING)
+    Canceled,     // thread should terminate a.s.a.p. (=> EXITED)
+    Exited        // thread is terminating
 };
 
 // ----------------------------------------------------------------------------
@@ -396,12 +396,8 @@ class wxThreadInternal
 {
 public:
     explicit wxThreadInternal(wxThread *thread)
+        : m_thread{thread}
     {
-        m_thread = thread;
-        m_hThread = nullptr;
-        m_state = STATE_NEW;
-        m_priority = wxPRIORITY_DEFAULT;
-        m_nRef = 1;
     }
 
     ~wxThreadInternal()
@@ -441,7 +437,7 @@ public:
     // suspend/resume/terminate
     bool Suspend();
     bool Resume();
-    void Cancel() { m_state = STATE_CANCELED; }
+    void Cancel() { m_state = wxThreadState::Canceled; }
 
     // thread state
     void SetState(wxThreadState state) { m_state = state; }
@@ -481,14 +477,14 @@ private:
     // the thread we're associated with
     wxThread *m_thread;
 
-    HANDLE        m_hThread;    // handle of the thread
-    wxThreadState m_state;      // state, see wxThreadState enum
-    unsigned int  m_priority;   // thread priority in "wx" units
+    HANDLE        m_hThread{nullptr};    // handle of the thread
+    wxThreadState m_state{wxThreadState::New};      // state, see wxThreadState enum
+    unsigned int  m_priority{wxPRIORITY_DEFAULT};   // thread priority in "wx" units
     DWORD         m_tid;        // thread id
 
     // number of threads which need this thread to remain alive, when the count
     // reaches 0 we kill the owning wxThread -- and die ourselves with it
-    LONG m_nRef;
+    LONG m_nRef{1};
 };
 
 // small class which keeps a thread alive during its lifetime
@@ -557,7 +553,7 @@ THREAD_RETVAL THREAD_CALLCONV wxThreadInternal::WinThreadStart(void *param)
     // first of all, check whether we hadn't been cancelled already and don't
     // start the user code at all then
     thread->m_critsect.Enter();
-    const bool hasExited = thread->m_internal->GetState() == STATE_EXITED;
+    const bool hasExited = thread->m_internal->GetState() == wxThreadState::Exited;
     thread->m_critsect.Leave();
 
     // run the thread function itself inside a SEH try/except block
@@ -572,12 +568,12 @@ THREAD_RETVAL THREAD_CALLCONV wxThreadInternal::WinThreadStart(void *param)
 
 
     // save IsDetached because thread object can be deleted by joinable
-    // threads after state is changed to STATE_EXITED.
+    // threads after state is changed to wxThreadState::Exited.
     const bool isDetached = thread->IsDetached();
     if ( !hasExited )
     {
         thread->m_critsect.Enter();
-        thread->m_internal->SetState(STATE_EXITED);
+        thread->m_internal->SetState(wxThreadState::Exited);
         thread->m_critsect.Leave();
     }
 
@@ -626,7 +622,7 @@ void wxThreadInternal::SetPriority(unsigned int priority)
 
 bool wxThreadInternal::Create(wxThread *thread, unsigned int stackSize)
 {
-    wxASSERT_MSG( m_state == STATE_NEW && !m_hThread,
+    wxASSERT_MSG( m_state == wxThreadState::New && !m_hThread,
                     wxT("Create()ing thread twice?") );
 
     // for compilers which have it, we should use C RTL function for thread
@@ -710,17 +706,17 @@ wxThreadInternal::WaitForTerminate(wxCriticalSection& cs,
     {
         wxCriticalSectionLocker lock(cs);
 
-        if ( m_state == STATE_NEW )
+        if ( m_state == wxThreadState::New )
         {
             if ( shouldDelete )
             {
                 // WinThreadStart() will see it and terminate immediately, no
                 // need to cancel the thread -- but we still need to resume it
                 // to let it run
-                m_state = STATE_EXITED;
+                m_state = wxThreadState::Exited;
 
                 // we must call Resume() as the thread hasn't been initially
-                // resumed yet (and as Resume() it knows about STATE_EXITED
+                // resumed yet (and as Resume() it knows about wxThreadState::Exited
                 // special case, it won't touch it and WinThreadStart() will
                 // just exit immediately)
                 shouldResume = true;
@@ -731,7 +727,7 @@ wxThreadInternal::WaitForTerminate(wxCriticalSection& cs,
         }
         else // running, paused, cancelled or even exited
         {
-            shouldResume = m_state == STATE_PAUSED;
+            shouldResume = m_state == wxThreadState::Paused;
         }
     }
 
@@ -883,7 +879,7 @@ bool wxThreadInternal::Suspend()
         wxLogLastError(wxS("GetThreadContext"));
     }
 
-    m_state = STATE_PAUSED;
+    m_state = wxThreadState::Paused;
 
     return true;
 }
@@ -899,12 +895,12 @@ bool wxThreadInternal::Resume()
         return false;
     }
 
-    // don't change the state from STATE_EXITED because it's special and means
+    // don't change the state from wxThreadState::Exited because it's special and means
     // we are going to terminate without running any user code - if we did it,
     // the code in WaitForTerminate() wouldn't work
-    if ( m_state != STATE_EXITED )
+    if ( m_state != wxThreadState::Exited )
     {
-        m_state = STATE_RUNNING;
+        m_state = wxThreadState::Running;
     }
 
     return true;
@@ -1057,7 +1053,7 @@ wxThreadError wxThread::Run()
             return wxThreadError::NoResource;
     }
 
-    wxCHECK_MSG( m_internal->GetState() == STATE_NEW, wxThreadError::Running,
+    wxCHECK_MSG( m_internal->GetState() == wxThreadState::New, wxThreadError::Running,
              wxT("thread may only be started once after Create()") );
 
     // the thread has just been created and is still suspended - let it run
@@ -1118,7 +1114,7 @@ wxThreadError wxThread::Kill()
     {
         // update the status of the joinable thread
         wxCriticalSectionLocker lock(m_critsect);
-        m_internal->SetState(STATE_EXITED);
+        m_internal->SetState(wxThreadState::Exited);
     }
 
     return rc;
@@ -1138,7 +1134,7 @@ void wxThread::Exit(ExitCode status)
     {
         // update the status of the joinable thread
         wxCriticalSectionLocker lock(m_critsect);
-        m_internal->SetState(STATE_EXITED);
+        m_internal->SetState(wxThreadState::Exited);
     }
 
 #ifdef wxUSE_BEGIN_THREAD
@@ -1185,29 +1181,29 @@ bool wxThread::IsRunning() const
 {
     wxCriticalSectionLocker lock(const_cast<wxCriticalSection &>(m_critsect));
 
-    return m_internal->GetState() == STATE_RUNNING;
+    return m_internal->GetState() == wxThreadState::Running;
 }
 
 bool wxThread::IsAlive() const
 {
     wxCriticalSectionLocker lock(const_cast<wxCriticalSection &>(m_critsect));
 
-    return (m_internal->GetState() == STATE_RUNNING) ||
-           (m_internal->GetState() == STATE_PAUSED);
+    return (m_internal->GetState() == wxThreadState::Running) ||
+           (m_internal->GetState() == wxThreadState::Paused);
 }
 
 bool wxThread::IsPaused() const
 {
     wxCriticalSectionLocker lock(const_cast<wxCriticalSection &>(m_critsect));
 
-    return m_internal->GetState() == STATE_PAUSED;
+    return m_internal->GetState() == wxThreadState::Paused;
 }
 
 bool wxThread::TestDestroy()
 {
     wxCriticalSectionLocker lock(const_cast<wxCriticalSection &>(m_critsect));
 
-    return m_internal->GetState() == STATE_CANCELED;
+    return m_internal->GetState() == wxThreadState::Canceled;
 }
 
 // ----------------------------------------------------------------------------
