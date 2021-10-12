@@ -15,12 +15,12 @@
 
 #if wxUSE_TASKBARBUTTON
 
+#include "wx/geometry/rect.h"
 #include "wx/icon.h"
 
 #include <string>
 #include <vector>
 
-class WXDLLIMPEXP_FWD_CORE wxRect;
 class WXDLLIMPEXP_FWD_CORE wxTaskBarButton;
 class WXDLLIMPEXP_FWD_CORE wxTaskBarJumpListCategory;
 class WXDLLIMPEXP_FWD_CORE wxTaskBarJumpList;

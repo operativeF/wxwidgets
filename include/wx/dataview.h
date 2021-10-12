@@ -15,6 +15,7 @@
 
 #if wxUSE_DATAVIEWCTRL
 
+#include "wx/geometry/rect.h"
 #include "wx/headercol.h"
 #include "wx/variant.h"
 #include "wx/dnd.h"             // For wxDragResult declaration only.
@@ -33,7 +34,6 @@
 class WXDLLIMPEXP_FWD_CORE wxImageList;
 class wxItemAttr;
 class WXDLLIMPEXP_FWD_CORE wxHeaderCtrl;
-class WXDLLIMPEXP_FWD_CORE wxRect;
 
 #if wxUSE_NATIVE_DATAVIEWCTRL && !defined(__WXUNIVERSAL__)
     #if defined(__WXGTK20__) || defined(__WXOSX__)

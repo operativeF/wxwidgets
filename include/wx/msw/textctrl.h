@@ -11,9 +11,9 @@
 #ifndef _WX_TEXTCTRL_H_
 #define _WX_TEXTCTRL_H_
 
-#include <string>
+#include "wx/geometry/rect.h"
 
-class WXDLLIMPEXP_FWD_CORE wxRect;
+#include <string>
 
 class WXDLLIMPEXP_CORE wxTextCtrl : public wxTextCtrlBase
 {

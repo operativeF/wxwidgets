@@ -22,7 +22,7 @@
     #define wxUSE_COMBOCTRL_POPUP_ANIMATION     1
 #endif
 
-class WXDLLIMPEXP_FWD_CORE wxRect;
+#include "wx/geometry/rect.h"
 
 #include <string>
 

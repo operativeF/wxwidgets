@@ -10,11 +10,12 @@
 #ifndef _WX_PROGDLG_H_
 #define _WX_PROGDLG_H_
 
+#include "wx/geometry/rect.h"
+
 #include <string>
 
 class wxProgressDialogTaskRunner;
 struct wxProgressDialogSharedData;
-class WXDLLIMPEXP_FWD_CORE wxRect;
 
 class WXDLLIMPEXP_CORE wxProgressDialog : public wxGenericProgressDialog
 {

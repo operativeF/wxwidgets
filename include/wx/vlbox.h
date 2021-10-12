@@ -12,11 +12,11 @@
 #define _WX_VLBOX_H_
 
 #include "wx/vscroll.h"         // base class
+#include "wx/geometry/rect.h"
 #include "wx/bitmap.h"
 
 #include <string>
 
-class WXDLLIMPEXP_FWD_CORE wxRect;
 class WXDLLIMPEXP_FWD_CORE wxSelectionStore;
 
 constexpr char wxVListBoxNameStr[] = "wxVListBox";

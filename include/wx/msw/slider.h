@@ -11,11 +11,12 @@
 #ifndef _WX_SLIDER_H_
 #define _WX_SLIDER_H_
 
+#include "wx/geometry/rect.h"
+
 #include <string>
 
 #include <fmt/core.h>
 
-class WXDLLIMPEXP_FWD_CORE wxRect;
 class WXDLLIMPEXP_FWD_CORE wxSubwindows;
 
 class WXDLLIMPEXP_CORE wxSlider : public wxSliderBase

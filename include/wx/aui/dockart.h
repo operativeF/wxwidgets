@@ -23,8 +23,8 @@
 #include "wx/brush.h"
 #include "wx/bitmap.h"
 #include "wx/colour.h"
+#include "wx/geometry/rect.h"
 
-class WXDLLIMPEXP_FWD_CORE wxRect;
 
 // dock art provider code - a dock provider provides all drawing
 // functionality to the wxAui dock manager.  This allows the dock

@@ -11,12 +11,13 @@
 #ifndef _WX_CHOICE_H_
 #define _WX_CHOICE_H_
 
+#include "wx/geometry/rect.h"
+
 #include <string>
 #include <string_view>
 #include <vector>
 
 struct tagCOMBOBOXINFO;
-class WXDLLIMPEXP_FWD_CORE wxRect;
 
 // ----------------------------------------------------------------------------
 // Choice item

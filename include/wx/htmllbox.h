@@ -19,6 +19,7 @@
 #include "wx/vlbox.h"               // base class
 #include "wx/html/htmlwin.h"
 #include "wx/ctrlsub.h"
+#include "wx/geometry/rect.h"
 
 #if wxUSE_FILESYSTEM
     #include "wx/filesys.h"
@@ -31,7 +32,6 @@ class WXDLLIMPEXP_FWD_HTML wxHtmlCell;
 class WXDLLIMPEXP_FWD_HTML wxHtmlWinParser;
 class WXDLLIMPEXP_FWD_HTML wxHtmlListBoxCache;
 class WXDLLIMPEXP_FWD_HTML wxHtmlListBoxStyle;
-class WXDLLIMPEXP_FWD_CORE wxRect;
 
 
 constexpr char wxHtmlListBoxNameStr[] = "htmlListBox";

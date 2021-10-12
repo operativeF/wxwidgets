@@ -11,7 +11,7 @@
 #ifndef _WX_MSW_FDREPDLG_H_
 #define _WX_MSW_FDREPDLG_H_
 
-class WXDLLIMPEXP_FWD_CORE wxRect;
+#include "wx/geometry/rect.h"
 
 #include <string>
 

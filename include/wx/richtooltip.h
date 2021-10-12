@@ -15,13 +15,13 @@
 #if wxUSE_RICHTOOLTIP
 
 #include "wx/colour.h"
+#include "wx/geometry/rect.h"
 
 #include <chrono>
 #include <string>
 
 class WXDLLIMPEXP_FWD_CORE wxFont;
 class WXDLLIMPEXP_FWD_CORE wxIcon;
-class WXDLLIMPEXP_FWD_CORE wxRect;
 class WXDLLIMPEXP_FWD_CORE wxWindow;
 
 class wxRichToolTipImpl;

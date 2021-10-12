@@ -19,6 +19,7 @@
 
 #include "wx/list.h"
 #include "wx/geometry/point.h"
+#include "wx/geometry/rect.h"
 #include "wx/geometry/size.h"
 #include "wx/string.h"
 #include "wx/fontenc.h"
@@ -40,7 +41,6 @@ class  WXDLLIMPEXP_FWD_CORE wxFont;
 class  WXDLLIMPEXP_FWD_CORE wxIcon;
 class  WXDLLIMPEXP_FWD_CORE wxPalette;
 class  WXDLLIMPEXP_FWD_CORE wxPen;
-class  WXDLLIMPEXP_FWD_CORE wxRect;
 class  WXDLLIMPEXP_FWD_CORE wxRegion;
 class  WXDLLIMPEXP_FWD_CORE wxIconBundle;
 

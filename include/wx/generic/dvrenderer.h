@@ -15,7 +15,7 @@
 // wxDataViewRenderer
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_FWD_CORE wxRect;
+#include "wx/geometry/rect.h"
 
 class WXDLLIMPEXP_CORE wxDataViewRenderer: public wxDataViewCustomRendererBase
 {

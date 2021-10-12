@@ -17,11 +17,11 @@
 
 #include "wx/font.h"
 #include "wx/colour.h"
+#include "wx/geometry/rect.h"
 
 #include <string>
 
 class WXDLLIMPEXP_FWD_CORE wxDC;
-class WXDLLIMPEXP_FWD_CORE wxRect;
 
 // ----------------------------------------------------------------------------
 // wxOwnerDrawn - a mix-in base class, derive from it to implement owner-drawn

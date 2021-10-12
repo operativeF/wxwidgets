@@ -17,11 +17,10 @@
 
 #include "wx/control.h"
 #include "wx/dynarray.h"
+#include "wx/geometry/rect.h"
 
 #include <string>
 #include <vector>
-
-class WXDLLIMPEXP_FWD_CORE wxRect;
 
 constexpr char wxStatusBarNameStr[] = "statusBar";
 

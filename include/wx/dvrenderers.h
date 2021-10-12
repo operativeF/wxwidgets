@@ -12,6 +12,7 @@
 #define _WX_DVRENDERERS_H_
 
 #include "wx/checkbox.h"
+#include "wx/geometry/rect.h"
 
 #include <string>
 #include <vector>
@@ -33,7 +34,6 @@
  */
 
 class WXDLLIMPEXP_FWD_CORE wxDataViewCustomRenderer;
-class WXDLLIMPEXP_FWD_CORE wxRect;
 
 // ----------------------------------------------------------------------------
 // wxDataViewIconText: helper class used by wxDataViewIconTextRenderer

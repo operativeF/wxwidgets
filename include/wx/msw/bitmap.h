@@ -13,6 +13,7 @@
 
 #include "wx/msw/gdiimage.h"
 #include "wx/palette.h"
+#include "wx/geometry/rect.h"
 
 #include "wx/msw/wrap/utils.h"
 
@@ -32,8 +33,6 @@ class WXDLLIMPEXP_FWD_CORE wxIcon;
 class WXDLLIMPEXP_FWD_CORE wxMask;
 class WXDLLIMPEXP_FWD_CORE wxPalette;
 class WXDLLIMPEXP_FWD_CORE wxPixelDataBase;
-class WXDLLIMPEXP_FWD_CORE wxRect;
-
 
 // What kind of transparency should a bitmap copied from an icon or cursor
 // have?

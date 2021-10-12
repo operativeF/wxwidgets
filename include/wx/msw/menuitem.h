@@ -17,6 +17,8 @@
 
 #include "wx/bitmap.h"
 
+#include "wx/geometry/rect.h"
+
 #if wxUSE_OWNER_DRAWN
     #include "wx/ownerdrw.h"
 
@@ -24,8 +26,6 @@
 #endif
 
 #include <string>
-
-class WXDLLIMPEXP_FWD_CORE wxRect;
 
 // ----------------------------------------------------------------------------
 // wxMenuItem: an item in the menu, optionally implements owner-drawn behaviour

@@ -15,6 +15,7 @@
 
 #include "wx/dc.h"
 #include "wx/geometry.h"
+#include "wx/geometry/rect.h"
 #include "wx/graphics.h"
 
 #include <memory>
@@ -23,8 +24,6 @@
 #include <vector>
 
 class WXDLLIMPEXP_FWD_CORE wxWindowDC;
-class WXDLLIMPEXP_FWD_CORE wxRect;
-
 
 class WXDLLIMPEXP_CORE wxGCDC: public wxDC
 {

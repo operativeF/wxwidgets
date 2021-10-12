@@ -228,7 +228,6 @@ constexpr unsigned int wxACC_EVENT_OBJECT_ACCELERATORCHANGE      = 0x8012;
 
 class  WXDLLIMPEXP_FWD_CORE wxAccessible;
 class  WXDLLIMPEXP_FWD_CORE wxWindow;
-class  WXDLLIMPEXP_FWD_CORE wxRect;
 
 class WXDLLIMPEXP_CORE wxAccessibleBase
 {

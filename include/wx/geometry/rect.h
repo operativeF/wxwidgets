@@ -4,14 +4,18 @@
 #include "wx/geometry/point.h"
 #include "wx/geometry/size.h"
 
-class WXDLLIMPEXP_CORE wxRect
+template<typename T>
+struct wxRect2D
 {
-public:
-    constexpr wxRect() noexcept {};
-    constexpr wxRect(int xx, int yy, int ww, int hh) noexcept
-        : x(xx), y(yy), width(ww), height(hh)
-        { }
-    constexpr wxRect(const wxPoint& topLeft, const wxPoint& bottomRight) noexcept
+    using value_type = T;
+
+    constexpr wxRect2D() noexcept {}
+
+    constexpr wxRect2D(T xx, T yy, T ww, T hh) noexcept
+        : x{xx}, y{yy}, width{ww}, height{hh}
+    {}
+
+    constexpr wxRect2D(const wxPoint2D<T>& topLeft, const wxPoint2D<T>& bottomRight) noexcept
     {
         x = topLeft.x;
         y = topLeft.y;
@@ -32,67 +36,99 @@ public:
         }
         height++;
     }
-    constexpr wxRect(const wxPoint& pt, const wxSize& size) noexcept
-        : x(pt.x), y(pt.y), width(size.x), height(size.y)
-        { }
-    constexpr wxRect(const wxSize& size) noexcept
-        : x(0), y(0), width(size.x), height(size.y)
-        { }
 
-    // default copy ctor and assignment operators ok
+    constexpr wxRect2D(const wxPoint2D<T>& pt, const wxSize& size) noexcept
+        : x{pt.x}, y{pt.y}, width{size.x}, height{size.y}
+    {}
 
-    constexpr int GetX() const { return x; }
-    constexpr void SetX(int xx) { x = xx; }
+    constexpr wxRect2D(const wxSize& size) noexcept
+        : x{0}, y{0}, width{size.x}, height{size.y}
+    {}
 
-    constexpr int GetY() const { return y; }
-    constexpr void SetY(int yy) { y = yy; }
+    // like Union() but don't ignore empty rectangles
+    constexpr wxRect2D& operator+=(const wxRect2D& otherRect) noexcept
+    {
+        const T x1 = std::min(x, otherRect.x);
+        const T y1 = std::min(y, otherRect.y);
+        const T y2 = std::max(y + height, otherRect.height + otherRect.y);
+        const T x2 = std::max(x + width, otherRect.width + otherRect.x);
 
-    constexpr int GetWidth() const { return width; }
-    constexpr void SetWidth(int w) { width = w; }
+        x = x1;
+        y = y1;
+        width = x2 - x1;
+        height = y2 - y1;
 
-    constexpr int GetHeight() const { return height; }
-    constexpr void SetHeight(int h) { height = h; }
+        return *this;
+    }
 
-    constexpr wxPoint GetPosition() const { return wxPoint{x, y}; }
-    constexpr void SetPosition( const wxPoint &p ) { x = p.x; y = p.y; }
+    // intersections of two rectrangles not testing for empty rectangles
+    constexpr wxRect2D& operator*=(const wxRect2D& otherRect) noexcept
+    {
+        const T x1 = std::max(x, otherRect.x);
+        const T y1 = std::max(y, otherRect.y);
+        const T y2 = std::min(y + height, otherRect.height + otherRect.y);
+        const T x2 = std::min(x + width, otherRect.width + otherRect.x);
 
-    constexpr wxSize GetSize() const { return wxSize{width, height}; }
-    constexpr void SetSize( const wxSize &s ) { width = s.x; height = s.y; }
+        x = x1;
+        y = y1;
+        width = x2 - x1;
+        height = y2 - y1;
 
-    constexpr bool IsEmpty() const { return (width <= 0) || (height <= 0); }
+        return *this;
+    }
 
-    constexpr int GetLeft()   const { return x; }
-    constexpr int GetTop()    const { return y; }
-    constexpr int GetBottom() const { return y + height - 1; }
-    constexpr int GetRight()  const { return x + width - 1; }
+    constexpr T GetX() const noexcept { return x; }
+    constexpr void SetX(T xx) noexcept { x = xx; }
 
-    constexpr void SetLeft(int left) { x = left; }
-    constexpr void SetRight(int right) { width = right - x + 1; }
-    constexpr void SetTop(int top) { y = top; }
-    constexpr void SetBottom(int bottom) { height = bottom - y + 1; }
+    constexpr T GetY() const noexcept { return y; }
+    constexpr void SetY(T yy) noexcept { y = yy; }
 
-    constexpr wxPoint GetTopLeft() const { return GetPosition(); }
-    constexpr wxPoint GetLeftTop() const { return GetTopLeft(); }
-    constexpr void SetTopLeft(const wxPoint &p) { SetPosition(p); }
-    constexpr void SetLeftTop(const wxPoint &p) { SetTopLeft(p); }
+    constexpr int GetWidth() const noexcept { return width; }
+    constexpr void SetWidth(int w) noexcept { width = w; }
 
-    constexpr wxPoint GetBottomRight() const { return wxPoint(GetRight(), GetBottom()); }
-    constexpr wxPoint GetRightBottom() const { return GetBottomRight(); }
-    constexpr void SetBottomRight(const wxPoint &p) { SetRight(p.x); SetBottom(p.y); }
-    constexpr void SetRightBottom(const wxPoint &p) { SetBottomRight(p); }
+    constexpr int GetHeight() const noexcept { return height; }
+    constexpr void SetHeight(T h) noexcept { height = h; }
 
-    constexpr wxPoint GetTopRight() const { return wxPoint(GetRight(), GetTop()); }
-    constexpr wxPoint GetRightTop() const { return GetTopRight(); }
-    constexpr void SetTopRight(const wxPoint &p) { SetRight(p.x); SetTop(p.y); }
-    constexpr void SetRightTop(const wxPoint &p) { SetTopRight(p); }
+    constexpr wxPoint GetPosition() const noexcept { return wxPoint{x, y}; }
+    constexpr void SetPosition( const wxPoint &p ) noexcept { x = p.x; y = p.y; }
 
-    constexpr wxPoint GetBottomLeft() const { return wxPoint(GetLeft(), GetBottom()); }
-    constexpr wxPoint GetLeftBottom() const { return GetBottomLeft(); }
-    constexpr void SetBottomLeft(const wxPoint &p) { SetLeft(p.x); SetBottom(p.y); }
-    constexpr void SetLeftBottom(const wxPoint &p) { SetBottomLeft(p); }
+    constexpr wxSize GetSize() const noexcept { return wxSize{width, height}; }
+    constexpr void SetSize( const wxSize &s ) noexcept { width = s.x; height = s.y; }
+
+    constexpr bool IsEmpty() const noexcept { return (width <= value_type{0}) || (height <= value_type{0}); }
+
+    constexpr T GetLeft()   const noexcept { return x; }
+    constexpr T GetTop()    const noexcept { return y; }
+    constexpr T GetBottom() const noexcept { return y + height - 1; }
+    constexpr T GetRight()  const noexcept { return x + width - 1; }
+
+    constexpr void SetLeft(T left) noexcept { x = left; }
+    constexpr void SetRight(T right) noexcept { width = right - x + 1; }
+    constexpr void SetTop(T top) noexcept { y = top; }
+    constexpr void SetBottom(T bottom) noexcept { height = bottom - y + 1; }
+
+    constexpr wxPoint2D<T> GetTopLeft() const noexcept { return GetPosition(); }
+    constexpr wxPoint2D<T> GetLeftTop() const noexcept { return GetTopLeft(); }
+    constexpr void SetTopLeft(const wxPoint2D<T>& p) noexcept { SetPosition(p); }
+    constexpr void SetLeftTop(const wxPoint2D<T>& p) noexcept { SetTopLeft(p); }
+
+    constexpr wxPoint2D<T> GetBottomRight() const { return {GetRight(), GetBottom()}; }
+    constexpr wxPoint2D<T> GetRightBottom() const { return GetBottomRight(); }
+    constexpr void SetBottomRight(const wxPoint2D<T>& p) { SetRight(p.x); SetBottom(p.y); }
+    constexpr void SetRightBottom(const wxPoint2D<T>& p) { SetBottomRight(p); }
+
+    constexpr wxPoint2D<T> GetTopRight() const noexcept { return {GetRight(), GetTop()}; }
+    constexpr wxPoint2D<T> GetRightTop() const noexcept { return GetTopRight(); }
+    constexpr void SetTopRight(const wxPoint2D<T>& p) noexcept { SetRight(p.x); SetTop(p.y); }
+    constexpr void SetRightTop(const wxPoint2D<T>& p) noexcept { SetTopRight(p); }
+
+    constexpr wxPoint2D<T> GetBottomLeft() const noexcept { return {GetLeft(), GetBottom()}; }
+    constexpr wxPoint2D<T> GetLeftBottom() const noexcept { return GetBottomLeft(); }
+    constexpr void SetBottomLeft(const wxPoint2D<T>& p) noexcept { SetLeft(p.x); SetBottom(p.y); }
+    constexpr void SetLeftBottom(const wxPoint2D<T>& p) noexcept { SetBottomLeft(p); }
 
     // operations with rect
-    constexpr wxRect& Inflate(wxCoord dx, wxCoord dy)
+    constexpr wxRect2D& Inflate(T dx, T dy) noexcept
     {
         if (-2*dx>width)
         {
@@ -125,32 +161,32 @@ public:
         return *this;
     }
 
-    constexpr wxRect& Inflate(const wxSize& d) { return Inflate(d.x, d.y); }
-    constexpr wxRect& Inflate(wxCoord d) { return Inflate(d, d); }
-    constexpr wxRect Inflate(wxCoord dx, wxCoord dy) const
+    constexpr wxRect2D& Inflate(const wxSize& d) noexcept { return Inflate(d.x, d.y); }
+    constexpr wxRect2D& Inflate(T d) noexcept { return Inflate(d, d); }
+    constexpr wxRect2D Inflate(T dx, T dy) const noexcept 
     {
-        wxRect r = *this;
+        wxRect2D r = *this;
         r.Inflate(dx, dy);
         return r;
     }
 
-    constexpr wxRect& Deflate(wxCoord dx, wxCoord dy) { return Inflate(-dx, -dy); }
-    constexpr wxRect& Deflate(const wxSize& d) { return Inflate(-d.x, -d.y); }
-    constexpr wxRect& Deflate(wxCoord d) { return Inflate(-d); }
-    constexpr wxRect Deflate(wxCoord dx, wxCoord dy) const
+    constexpr wxRect2D& Deflate(T dx, T dy) noexcept { return Inflate(-dx, -dy); }
+    constexpr wxRect2D& Deflate(const wxSize& d) noexcept { return Inflate(value_type{-d.x}, value_type{-d.y}); }
+    constexpr wxRect2D& Deflate(T d) noexcept { return Inflate(-d); }
+    constexpr wxRect2D Deflate(T dx, T dy) const noexcept
     {
-        wxRect r = *this;
+        wxRect2D r = *this;
         r.Deflate(dx, dy);
         return r;
     }
 
-    constexpr void Offset(wxCoord dx, wxCoord dy) { x += dx; y += dy; }
-    constexpr void Offset(const wxPoint& pt) { Offset(pt.x, pt.y); }
+    constexpr void Offset(T dx, T dy) noexcept { x += dx; y += dy; }
+    constexpr void Offset(const wxPoint2D<T>& pt) noexcept { Offset(pt.x, pt.y); }
 
-    constexpr wxRect& Intersect(const wxRect& rect)
+    constexpr wxRect2D& Intersect(const wxRect2D& rect) noexcept
     {
-        int x2 = GetRight(),
-            y2 = GetBottom();
+        T x2 = GetRight();
+        T y2 = GetBottom();
 
         if ( x < rect.x )
             x = rect.x;
@@ -164,36 +200,36 @@ public:
         width = x2 - x + 1;
         height = y2 - y + 1;
 
-        if ( width <= 0 || height <= 0 )
+        if ( width <= value_type{0} || height <= value_type{0} )
         {
-            width =
-            height = 0;
+            width = value_type{0};
+            height = value_type{0};
         }
 
         return *this;
     }
 
-    constexpr wxRect Intersect(const wxRect& rect) const
+    constexpr wxRect2D Intersect(const wxRect2D& rect) const noexcept
     {
-        wxRect r = *this;
+        wxRect2D r = *this;
         r.Intersect(rect);
         return r;
     }
 
-    constexpr wxRect& Union(const wxRect& rect)
+    constexpr wxRect2D& Union(const wxRect2D& rect) noexcept
     {
         // ignore empty rectangles: union with an empty rectangle shouldn't extend
         // this one to (0, 0)
-        if ( !width || !height )
+        if ( width == value_type{0} || height == value_type{0} )
         {
             *this = rect;
         }
         else if ( rect.width && rect.height )
         {
-            const int x1 = std::min(x, rect.x);
-            const int y1 = std::min(y, rect.y);
-            const int y2 = std::max(y + height, rect.height + rect.y);
-            const int x2 = std::max(x + width, rect.width + rect.x);
+            const T x1 = std::min(x, rect.x);
+            const T y1 = std::min(y, rect.y);
+            const T y2 = std::max(y + height, rect.height + rect.y);
+            const T x2 = std::max(x + width, rect.width + rect.x);
 
             x = x1;
             y = y1;
@@ -205,107 +241,89 @@ public:
         return *this;
     }
 
-    constexpr wxRect Union(const wxRect& rect) const
+    constexpr wxRect2D Union(const wxRect2D& rect) const noexcept
     {
-        wxRect r = *this;
+        wxRect2D r = *this;
         r.Union(rect);
         return r;
     }
 
     // return true if the point is (not strictly) inside the rect
-    constexpr bool Contains(int cx, int cy) const
+    constexpr bool Contains(T cx, T cy) const noexcept
     {
         return ( (cx >= x) && (cy >= y)
-          && ((cy - y) < height)
-          && ((cx - x) < width)
-          );
+              && ((cy - y) < height)
+              && ((cx - x) < width)
+              );
     }
 
-    constexpr bool Contains(const wxPoint& pt) const { return Contains(pt.x, pt.y); }
+    constexpr bool Contains(const wxPoint2D<T>& pt) const noexcept { return Contains(pt.x, pt.y); }
     // return true if the rectangle 'rect' is (not strictly) inside this rect
-    constexpr bool Contains(const wxRect& rect) const
+    constexpr bool Contains(const wxRect2D& rect) const noexcept
     {
         return Contains(rect.GetTopLeft()) && Contains(rect.GetBottomRight());
     }
 
     // return true if the rectangles have a non empty intersection
-    constexpr bool Intersects(const wxRect& rect) const
+    constexpr bool Intersects(const wxRect2D& rect) const noexcept
     {
-        const wxRect r = Intersect(rect);
+        const auto r = Intersect(rect);
 
         // if there is no intersection, both width and height are 0
-        return r.width != 0;
+        return r.width != value_type{0};
     }
-
-    // like Union() but don't ignore empty rectangles
-    constexpr wxRect& operator+=(const wxRect& rect);
-
-    // intersections of two rectrangles not testing for empty rectangles
-    constexpr wxRect& operator*=(const wxRect& rect);
 
     // centre this rectangle in the given (usually, but not necessarily,
     // larger) one
-    constexpr wxRect CentreIn(const wxRect& r, int dir = wxBOTH) const
+    constexpr wxRect2D CentreIn(const wxRect2D& r, int dir = wxBOTH) const noexcept
     {
-        return wxRect(dir & wxHORIZONTAL ? r.x + (r.width - width)/2 : x,
-                      dir & wxVERTICAL ? r.y + (r.height - height)/2 : y,
-                      width, height);
+        return {dir & wxHORIZONTAL ? r.x + (r.width - width) / value_type{2} : x,
+                dir & wxVERTICAL ? r.y + (r.height - height) / value_type{2} : y,
+                width,
+                height};
     }
 
-    constexpr wxRect CenterIn(const wxRect& r, int dir = wxBOTH) const
+    constexpr wxRect2D CenterIn(const wxRect2D& r, int dir = wxBOTH) const noexcept
     {
         return CentreIn(r, dir);
     }
 
-public:
-    int x{0}, y{0}, width{0}, height{0};
+    T x{};
+    T y{};
+    T width{};
+    T height{};
 };
 
+template<typename T>
+constexpr wxRect2D<T> operator+(wxRect2D<T> rect, const wxRect2D<T>& otherRect) noexcept
+{
+    rect += otherRect;
+    return rect;
+}
+
+template<typename T>
+constexpr wxRect2D<T> operator*(wxRect2D<T> rect, const wxRect2D<T>& otherRect) noexcept
+{
+    rect *= otherRect;
+    return rect;
+}
 
 // compare rectangles
-constexpr bool operator==(const wxRect& r1, const wxRect& r2)
+template<typename T>
+constexpr bool operator==(const wxRect2D<T>& r1, const wxRect2D<T>& r2) noexcept
 {
     return (r1.x == r2.x) && (r1.y == r2.y) &&
            (r1.width == r2.width) && (r1.height == r2.height);
 }
 
-constexpr bool operator!=(const wxRect& r1, const wxRect& r2)
+template<typename T>
+constexpr bool operator!=(const wxRect2D<T>& r1, const wxRect2D<T>& r2) noexcept
 {
     return !(r1 == r2);
 }
 
-// like Union() but don't treat empty rectangles specifically
-constexpr WXDLLIMPEXP_CORE wxRect operator+(const wxRect& r1, const wxRect& r2)
-{
-    const int x1 = std::min(r1.x, r2.x);
-    const int y1 = std::min(r1.y, r2.y);
-    const int y2 = std::max(r1.y+r1.height, r2.height+r2.y);
-    const int x2 = std::max(r1.x+r1.width, r2.width+r2.x);
-
-    return {x1, y1, x2 - x1, y2 - y1};
-}
-
-// intersections of two rectangles
-constexpr WXDLLIMPEXP_CORE wxRect operator*(const wxRect& r1, const wxRect& r2)
-{
-    const int x1 = std::max(r1.x, r2.x);
-    const int y1 = std::max(r1.y, r2.y);
-    const int y2 = std::min(r1.y+r1.height, r2.height+r2.y);
-    const int x2 = std::min(r1.x+r1.width, r2.width+r2.x);
-
-    return {x1, y1, x2 - x1, y2 - y1};
-}
-
-constexpr wxRect& wxRect::operator+=(const wxRect& rect)
-{
-    *this = *this + rect;
-    return *this;
-}
-
-constexpr wxRect& wxRect::operator*=(const wxRect& rect)
-{
-    *this = *this * rect;
-    return *this;
-}
+using wxRect       = wxRect2D<int>;
+using wxRectDouble = wxRect2D<double>;
+using wxRectFloat  = wxRect2D<float>;
 
 #endif // _WX_GEOMETRY_RECT_H

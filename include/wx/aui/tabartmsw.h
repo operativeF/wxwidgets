@@ -10,13 +10,12 @@
 #ifndef _WX_AUI_TABARTMSW_H_
 #define _WX_AUI_TABARTMSW_H_
 
-#include <string>
+#include "wx/geometry/rect.h"
 
-class WXDLLIMPEXP_FWD_CORE wxRect;
+#include <string>
 
 class WXDLLIMPEXP_AUI wxAuiMSWTabArt : public wxAuiGenericTabArt
 {
-
 public:
 
     wxAuiMSWTabArt();

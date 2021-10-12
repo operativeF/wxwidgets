@@ -12,10 +12,9 @@
 #define _WX_CHECKBOX_H_
 
 #include "wx/msw/ownerdrawnbutton.h"
+#include "wx/geometry/rect.h"
 
 #include <string>
-
-class WXDLLIMPEXP_FWD_CORE wxRect;
 
 // Checkbox item (single checkbox)
 class WXDLLIMPEXP_CORE wxCheckBox : public wxMSWOwnerDrawnButton<wxCheckBoxBase>

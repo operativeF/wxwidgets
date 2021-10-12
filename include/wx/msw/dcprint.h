@@ -16,10 +16,10 @@
 #include "wx/dcprint.h"
 #include "wx/cmndata.h"
 #include "wx/msw/dc.h"
+#include "wx/geometry/rect.h"
 
 #include <string>
 
-class WXDLLIMPEXP_FWD_CORE wxRect;
 class WXDLLIMPEXP_FWD_CORE wxPrintData;
 
 // ------------------------------------------------------------------------

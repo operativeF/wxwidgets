@@ -11,7 +11,7 @@
 #ifndef _WX_STATTEXT_H_
 #define _WX_STATTEXT_H_
 
-class WXDLLIMPEXP_FWD_CORE wxRect;
+#include "wx/geometry/rect.h"
 
 class WXDLLIMPEXP_CORE wxStaticText : public wxStaticTextBase
 {

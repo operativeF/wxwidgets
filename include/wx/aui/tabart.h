@@ -25,12 +25,12 @@
 #include "wx/pen.h"
 #include "wx/brush.h"
 #include "wx/bitmap.h"
+#include "wx/geometry/rect.h"
 
 #include <string>
 
 class wxAuiNotebookPage;
 class wxAuiNotebookPageArray;
-class WXDLLIMPEXP_FWD_CORE wxRect;
 struct WXDLLIMPEXP_FWD_CORE wxSize;
 class wxWindow;
 class wxDC;

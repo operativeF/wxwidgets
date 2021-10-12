@@ -13,6 +13,7 @@
 #include "wx/defs.h"
 #include "wx/geometry/size.h"
 #include "wx/geometry/point.h"
+#include "wx/geometry/rect.h"
 
 // NB: no #if wxUSE_DISPLAY here, the display geometry part of this class (but
 //     not the video mode stuff) is always available but if wxUSE_DISPLAY == 0
@@ -32,7 +33,6 @@
 #include <memory>
 
 class  WXDLLIMPEXP_FWD_CORE wxWindow;
-class  WXDLLIMPEXP_FWD_CORE wxRect;
 class  WXDLLIMPEXP_FWD_BASE wxString;
 
 

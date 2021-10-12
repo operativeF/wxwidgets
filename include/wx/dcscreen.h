@@ -13,8 +13,7 @@
 
 #include "wx/defs.h"
 #include "wx/dc.h"
-
-class WXDLLIMPEXP_FWD_CORE wxRect;
+#include "wx/geometry/rect.h"
 
 class WXDLLIMPEXP_CORE wxScreenDC : public wxDC
 {

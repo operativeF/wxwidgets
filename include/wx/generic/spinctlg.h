@@ -22,8 +22,8 @@
 #if wxUSE_SPINBTN
 
 #include "wx/compositewin.h"
+#include "wx/geometry/rect.h"
 
-class WXDLLIMPEXP_FWD_CORE wxRect;
 class WXDLLIMPEXP_FWD_CORE wxSpinButton;
 class WXDLLIMPEXP_FWD_CORE wxTextCtrl;
 

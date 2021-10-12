@@ -19,12 +19,11 @@
 #include "wx/ctrlsub.h"
 #include "wx/vlbox.h"
 #include "wx/timer.h"
+#include "wx/geometry/rect.h"
 
 #include <string>
 #include <string_view>
 #include <vector>
-
-class WXDLLIMPEXP_FWD_CORE wxRect;
 
 //
 // New window styles for wxOwnerDrawnComboBox

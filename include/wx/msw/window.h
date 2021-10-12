@@ -13,12 +13,12 @@
 #define _WX_WINDOW_H_
 
 #include "wx/geometry/point.h"
+#include "wx/geometry/rect.h"
 #include "wx/geometry/size.h"
 
 #include <string_view>
 
 class WXDLLIMPEXP_FWD_CORE wxButton;
-class WXDLLIMPEXP_FWD_CORE wxRect;
 
 enum wxSystemColour : unsigned int;
 

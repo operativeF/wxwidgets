@@ -17,14 +17,13 @@
 
 #include "wx/dc.h"
 #include "wx/gdiobj.h"
+#include "wx/geometry/rect.h"
 
 #if wxUSE_DATAOBJ
     #include "wx/dataobj.h"
 #endif
 
 #include <string>
-
-class WXDLLIMPEXP_FWD_CORE wxRect;
 
 
 // ----------------------------------------------------------------------------

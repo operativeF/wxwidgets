@@ -14,11 +14,11 @@
 
 #include "wx/bmpbuttn.h"
 #include "wx/toolbar.h"
+#include "wx/geometry/rect.h"
 
 #include <string>
 
 class WXDLLIMPEXP_FWD_CORE wxButtonToolBarTool;
-class WXDLLIMPEXP_FWD_CORE wxRect;
 
 
 // ----------------------------------------------------------------------------

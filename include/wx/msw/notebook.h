@@ -13,15 +13,13 @@
 #if wxUSE_NOTEBOOK
 
 #include "wx/control.h"
+#include "wx/geometry/rect.h"
 
 #include "wx/msw/wrap/utils.h"
 
 #include <string>
 
 using msw::utils::unique_brush;
-
-class WXDLLIMPEXP_FWD_CORE wxRect;
-
 
 // you can set USE_NOTEBOOK_ANTIFLICKER to 0 for desktop Windows versions too
 // to disable code whih results in flicker-less notebook redrawing at the

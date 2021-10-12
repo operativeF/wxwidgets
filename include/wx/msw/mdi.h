@@ -12,11 +12,12 @@
 #ifndef _WX_MSW_MDI_H_
 #define _WX_MSW_MDI_H_
 
+#include "wx/geometry/rect.h"
+
 #include <memory>
 #include <string>
 
 class WXDLLIMPEXP_FWD_CORE wxAcceleratorTable;
-class WXDLLIMPEXP_FWD_CORE wxRect;
 
 
 // ---------------------------------------------------------------------------

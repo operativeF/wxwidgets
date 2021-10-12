@@ -22,12 +22,13 @@
 #include "wx/control.h"
 #include "wx/withimages.h"
 
+#include "wx/geometry/rect.h"
+
 #include <string>
 #include <vector>
 
 class WXDLLIMPEXP_FWD_CORE wxImageList;
 class WXDLLIMPEXP_FWD_CORE wxBookCtrlEvent;
-class WXDLLIMPEXP_FWD_CORE wxRect;
 
 // ----------------------------------------------------------------------------
 // constants

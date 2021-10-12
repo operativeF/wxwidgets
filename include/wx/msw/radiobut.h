@@ -12,10 +12,9 @@
 #define _WX_RADIOBUT_H_
 
 #include "wx/msw/ownerdrawnbutton.h"
+#include "wx/geometry/rect.h"
 
 #include <string>
-
-class WXDLLIMPEXP_FWD_CORE wxRect;
 
 
 class WXDLLIMPEXP_CORE wxRadioButton : public wxMSWOwnerDrawnButton<wxRadioButtonBase>

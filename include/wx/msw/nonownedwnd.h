@@ -10,8 +10,9 @@
 #ifndef _WX_MSW_NONOWNEDWND_H_
 #define _WX_MSW_NONOWNEDWND_H_
 
+#include "wx/geometry/rect.h"
+
 class wxNonOwnedWindowShapeImpl;
-class WXDLLIMPEXP_FWD_CORE wxRect;
 
 // ----------------------------------------------------------------------------
 // wxNonOwnedWindow

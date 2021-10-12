@@ -16,7 +16,7 @@
 
 #include "wx/odcombo.h"
 
-class WXDLLIMPEXP_FWD_CORE wxRect;
+#include "wx/geometry/rect.h"
 
 // ----------------------------------------------------------------------------
 // wxBitmapComboBox: a wxComboBox that allows images to be shown

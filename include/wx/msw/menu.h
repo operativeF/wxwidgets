@@ -13,6 +13,7 @@
 
 #include "wx/log.h"
 #include "wx/private/menuradio.h"
+#include "wx/geometry/rect.h"
 
 #if wxUSE_ACCEL
     #include "wx/accel.h"
@@ -25,7 +26,6 @@
 #include <string>
 
 class WXDLLIMPEXP_FWD_CORE wxFrame;
-class WXDLLIMPEXP_FWD_CORE wxRect;
 
 
 // ----------------------------------------------------------------------------

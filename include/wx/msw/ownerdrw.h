@@ -13,7 +13,7 @@
 
 #if wxUSE_OWNER_DRAWN
 
-class WXDLLIMPEXP_FWD_CORE wxRect;
+#include "wx/geometry/rect.h"
 
 struct WXDLLIMPEXP_CORE wxOwnerDrawn : public wxOwnerDrawnBase
 {

@@ -13,6 +13,8 @@
 
 #if wxUSE_LISTBOX
 
+#include "wx/geometry/rect.h"
+
 #include <memory>
 #include <string>
 #include <string_view>
@@ -26,9 +28,6 @@
 
   using wxListBoxItemsArray = std::vector<std::unique_ptr<wxOwnerDrawn>>;
 #endif // wxUSE_OWNER_DRAWN
-
-class WXDLLIMPEXP_FWD_CORE wxRect;
-
 
 class WXDLLIMPEXP_CORE wxListBox : public wxListBoxBase
 {

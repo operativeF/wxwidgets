@@ -13,13 +13,13 @@
 
 #if wxUSE_SPINCTRL
 
+#include "wx/geometry/rect.h"
 #include "wx/spinbutt.h"    // the base class
 
 #include <limits>
 #include <string>
 #include <vector>
 
-class WXDLLIMPEXP_FWD_CORE wxRect;
 class WXDLLIMPEXP_FWD_CORE wxSpinCtrl;
 
 using wxArraySpins = std::vector<wxSpinCtrl*>;

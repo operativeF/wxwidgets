@@ -20,6 +20,7 @@
 #include "wx/dynarray.h"
 #include "wx/treebase.h"
 #include "wx/hashmap.h"
+#include "wx/geometry/rect.h"
 
 #include <string>
 
@@ -32,7 +33,6 @@
 // fwd decl
 class  WXDLLIMPEXP_FWD_CORE wxImageList;
 class  WXDLLIMPEXP_FWD_CORE wxDragImage;
-class WXDLLIMPEXP_FWD_CORE wxRect;
 struct WXDLLIMPEXP_FWD_CORE wxTreeViewItem;
 class WXDLLIMPEXP_FWD_CORE wxTextCtrl;
 

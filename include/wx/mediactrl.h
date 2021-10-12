@@ -16,9 +16,9 @@
 #if wxUSE_MEDIACTRL
 
 #include "wx/control.h"
+#include "wx/geometry/rect.h"
 #include "wx/uri.h"
 
-class WXDLLIMPEXP_FWD_CORE wxRect;
 
 enum class wxMediaState
 {

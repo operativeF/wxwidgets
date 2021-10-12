@@ -21,6 +21,8 @@
     // don't define wxHAS_NATIVE_OVERLAY
 #endif
 
+#include "wx/geometry/rect.h"
+
 #include "wx/private/overlay.h"
 
 #include <memory>
@@ -32,7 +34,6 @@
 // ----------------------------------------------------------------------------
 
 class WXDLLIMPEXP_FWD_CORE wxDC;
-class WXDLLIMPEXP_FWD_CORE wxRect;
 
 class WXDLLIMPEXP_CORE wxOverlay
 {

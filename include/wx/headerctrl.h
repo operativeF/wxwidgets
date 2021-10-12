@@ -15,6 +15,7 @@
 #if wxUSE_HEADERCTRL
 
 #include "wx/headercol.h"
+#include "wx/geometry/rect.h"
 
 #include <string>
 #include <vector>
@@ -26,7 +27,6 @@
 // although currently they're only used by wxGrid which is in wxAdv because we
 // plan to use it in wxListCtrl which is in core too in the future
 class WXDLLIMPEXP_FWD_CORE wxHeaderCtrlEvent;
-class WXDLLIMPEXP_FWD_CORE wxRect;
 
 
 // ----------------------------------------------------------------------------

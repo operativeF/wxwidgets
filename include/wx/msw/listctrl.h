@@ -12,13 +12,13 @@
 #define _WX_LISTCTRL_H_
 
 #include "wx/textctrl.h"
+#include "wx/geometry/rect.h"
 
 #include <string>
 #include <vector>
 
 struct wxMSWListItemData;
 class wxMSWListHeaderCustomDraw;
-class WXDLLIMPEXP_FWD_CORE wxRect;
 
 
 // define this symbol to indicate the availability of SetColumnsOrder() and

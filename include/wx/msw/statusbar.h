@@ -13,10 +13,11 @@
 
 #if wxUSE_NATIVE_STATUSBAR
 
+#include "wx/geometry/rect.h"
+
 #include <vector>
 
 class WXDLLIMPEXP_FWD_CORE wxClientDC;
-class WXDLLIMPEXP_FWD_CORE wxRect;
 class WXDLLIMPEXP_FWD_CORE wxToolTip;
 
 class WXDLLIMPEXP_CORE wxStatusBar : public wxStatusBarBase
