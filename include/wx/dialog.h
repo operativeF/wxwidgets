@@ -293,6 +293,8 @@ class WXDLLIMPEXP_CORE wxDialogLayoutAdapter
 {
     wxDECLARE_CLASS(wxDialogLayoutAdapter);
 public:
+    virtual ~wxDialogLayoutAdapter() = default;
+
     // Override this function to indicate that adaptation should be done
     virtual bool CanDoLayoutAdaptation(wxDialog* dialog) = 0;
 
