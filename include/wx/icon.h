@@ -15,7 +15,7 @@
 
 
 // a more readable way to tell
-constexpr auto wxICON_SCREEN_DEPTH = static_cast<unsigned int>(-1);
+constexpr auto wxICON_SCREEN_DEPTH = gsl::narrow_cast<unsigned int>(-1);
 
 
 // the wxICON_DEFAULT_TYPE (the wxIcon equivalent of wxBITMAP_DEFAULT_TYPE)

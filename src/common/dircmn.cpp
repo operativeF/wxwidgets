@@ -168,7 +168,7 @@ size_t wxDir::Traverse(wxDirTraverser& sink,
 
                 case wxDirTraverseResult::Ignore:
                     // nothing to do
-                    ;
+                    [[fallthrough]];
             }
         }
     }

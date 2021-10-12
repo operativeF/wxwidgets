@@ -157,6 +157,7 @@ void wxFileHistoryBase::DoRefreshLabels()
                     return currFn.GetFullName();
 
                 case wxFileHistoryMenuPathStyle::ShowAlways:
+                default: // Default to just showing the full path.
                     // Always show full path.
                     return currFn.GetFullPath();
             }

@@ -370,6 +370,7 @@ bool wxMarkupParser::Parse(const wxString& text)
 
             default:
                 current += *it;
+                [[fallthrough]];
         }
     }
 

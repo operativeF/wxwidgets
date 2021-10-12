@@ -1562,7 +1562,7 @@ long GetMSWViewFlags(wxRegKey::WOW64ViewMode viewMode)
         case wxRegKey::WOW64ViewMode_Default:
             // Use default registry view for the current application,
             // i.e. 32 bits for 32 bit ones and 64 bits for 64 bit apps
-            ;
+            [[fallthrough]];
     }
 
     return samWOW64ViewMode;

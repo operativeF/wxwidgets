@@ -122,7 +122,7 @@ wxBase64Decode(void *dst_, size_t dstLen,
     const char *p;
     for ( p = src; srcLen; p++, srcLen-- )
     {
-        const unsigned char c = decode[static_cast<unsigned char>(*p)];
+        const unsigned char c = decode[gsl::narrow_cast<unsigned char>(*p)];
         switch ( c )
         {
             case WSP:

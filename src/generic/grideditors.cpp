@@ -600,7 +600,7 @@ void wxGridCellTextEditor::StartingKey(wxKeyEvent& event)
 
         default:
             if ( isPrintable ) // TODO: Possible to just to_string from int char?
-                tc->WriteText(std::to_string(static_cast<char>(ch)));
+                tc->WriteText(std::to_string(gsl::narrow_cast<char>(ch)));
             break;
     }
 }

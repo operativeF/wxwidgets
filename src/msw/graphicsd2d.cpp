@@ -1014,7 +1014,7 @@ wxCOMPtr<ID2D1Geometry> wxD2DConvertRegionToGeometry(ID2D1Factory* direct2dFacto
     // Build the array of geometries
     HRESULT hr;
     std::vector<ID2D1Geometry*> geometries;
-    int rectCount;
+    std::size_t rectCount{};
     if ( region.IsEmpty() )
     {
         // Empty region is skipped by iterator
@@ -1031,7 +1031,6 @@ wxCOMPtr<ID2D1Geometry> wxD2DConvertRegionToGeometry(ID2D1Factory* direct2dFacto
     {
         // Count the number of rectangles which compose the region
         wxRegionIterator regionIterator(region);
-        std::size_t rectCount{0};
 
         // FIXME: Isn't it better just to get m_numRect instead of iterating?
         while(regionIterator++)

@@ -6176,7 +6176,7 @@ void wxDataViewCtrl::DoSetCurrentItem(const wxDataViewItem& item)
     const int row = m_clientArea->GetRowByItem(item);
 
     const unsigned oldCurrent = m_clientArea->GetCurrentRow();
-    if ( static_cast<unsigned>(row) != oldCurrent )
+    if ( gsl::narrow_cast<unsigned int>(row) != oldCurrent )
     {
         m_clientArea->ChangeCurrentRow(row);
         m_clientArea->RefreshRow(oldCurrent);
@@ -6250,7 +6250,7 @@ void wxDataViewCtrl::SetSelections( const wxDataViewItemArray & sel )
         last_parent = parent;
         int row = m_clientArea->GetRowByItem( item );
         if( row >= 0 )
-            m_clientArea->SelectRow(static_cast<unsigned int>(row), true);
+            m_clientArea->SelectRow(gsl::narrow_cast<unsigned int>(row), true);
     }
 
     // Also make the last item as current item

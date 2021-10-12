@@ -938,6 +938,7 @@ bool wxStandardDialogLayoutAdapter::DoFitWithScrolling(wxDialog* dialog, wxWindo
 
 class wxDialogLayoutAdapterModule: public wxModule
 {
+    virtual ~wxDialogLayoutAdapterModule() = default;
     wxDECLARE_DYNAMIC_CLASS(wxDialogLayoutAdapterModule);
 public:
     void OnExit() override { delete wxDialogBase::SetLayoutAdapter(nullptr); }

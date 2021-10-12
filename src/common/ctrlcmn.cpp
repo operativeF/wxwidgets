@@ -92,7 +92,7 @@ void wxControlBase::InitCommandEvent(wxCommandEvent& event) const
 
         case wxClientDataType::None:
             // nothing to do
-            ;
+            [[fallthrough]];
     }
 }
 
