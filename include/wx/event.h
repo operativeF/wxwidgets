@@ -653,9 +653,10 @@ wxNewEventTableFunctor(const EventTag&, void (Class::*method)(EventArg&))
 // many, but not all, standard event types
 
     // some generic events
+constexpr wxEventType wxEVT_FIRST = 10000;
+constexpr wxEventType wxEVT_USER_FIRST = wxEVT_FIRST + 2000;
+
 extern WXDLLIMPEXP_BASE const wxEventType wxEVT_NULL;
-extern WXDLLIMPEXP_BASE const wxEventType wxEVT_FIRST;
-extern WXDLLIMPEXP_BASE const wxEventType wxEVT_USER_FIRST;
 
     // Need events declared to do this
 class WXDLLIMPEXP_FWD_BASE wxIdleEvent;
