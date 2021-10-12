@@ -701,7 +701,6 @@ set(GUI_CMN_SRC
     src/common/accelcmn.cpp
     src/common/accesscmn.cpp
     src/common/anidecod.cpp
-    src/common/affinematrix2d.cpp
     src/common/appcmn.cpp
     src/common/artprov.cpp
     src/common/artstd.cpp
@@ -902,7 +901,6 @@ set(GUI_CMN_SRC
 )
 
 set(GUI_CMN_HDR
-    wx/affinematrix2dbase.h
     wx/affinematrix2d.h
     wx/anybutton.h
     wx/bmpbuttn.h

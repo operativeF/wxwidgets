@@ -18,7 +18,6 @@
 #include <wx/access.h>
 #include <wx/activityindicator.h>
 #include <wx/addremovectrl.h>
-#include <wx/affinematrix2dbase.h>
 #include <wx/affinematrix2d.h>
 #include <wx/anidecod.h>
 #include <wx/animate.h>

@@ -116,7 +116,7 @@ static void TestCurrentPoint(wxGraphicsContext* gc)
         const double x = 100;
         const double y = 150;
         const double r = 40;
-        path.AddArc(x, y, r, 0, std::numbers::pi / 2.0, true);
+        path.AddArc(x, y, r, 0, std::numbers::pi_v<float> / 2.0, true);
         wxPoint2DFloat cp = path.GetCurrentPoint();
         WX_CHECK_POINT(cp, wxPoint2DFloat(x, y + r), 1E-3);
     }
@@ -127,7 +127,7 @@ static void TestCurrentPoint(wxGraphicsContext* gc)
         const double x = 200;
         const double y = 50;
         const double r = 40;
-        path.AddArc(x, y, r, 0, std::numbers::pi / 2.0, true);
+        path.AddArc(x, y, r, 0, std::numbers::pi_v<float> / 2.0, true);
         wxPoint2DFloat cp = path.GetCurrentPoint();
         WX_CHECK_POINT(cp, wxPoint2DFloat(x, y + r), 1E-3);
     }
@@ -140,7 +140,7 @@ static void TestCurrentPoint(wxGraphicsContext* gc)
         const double y2 = y1;
         const double r = 20;
         wxASSERT(x1 == y1 && y2 == y1); // alpha = 45 deg
-        double d = r / std::tan(45 / 180.0 * std::numbers::pi / 2.0);
+        double d = r / std::tan(45 / 180.0 * std::numbers::pi_v<float> / 2.0);
         path.AddArcToPoint(x1, y1, x2, y2, r);
         wxPoint2DFloat cp = path.GetCurrentPoint();
         WX_CHECK_POINT(cp, wxPoint2DFloat(x1 - d, y2), 1E-3);
@@ -432,7 +432,7 @@ static void TestBox(wxGraphicsContext* gc)
         const double x = 100;
         const double y = 150;
         const double r = 40;
-        path.AddArc(x, y, r, 0, std::numbers::pi / 2.0, true);
+        path.AddArc(x, y, r, 0, std::numbers::pi_v<float> / 2.0, true);
         wxRect2DDouble b = path.GetBox();
         WX_CHECK_BOX(b, wxRect2DDouble(x, y, r, r), 1E-3);
     }
@@ -445,7 +445,7 @@ static void TestBox(wxGraphicsContext* gc)
         const double x = 200;
         const double y = 50;
         const double r = 40;
-        path.AddArc(x, y, r, 0, std::numbers::pi / 2.0, true);
+        path.AddArc(x, y, r, 0, std::numbers::pi_v<float> / 2.0, true);
         const double x2 = x + r;
         const double y2 = y + r;
         wxRect2DDouble b = path.GetBox();
@@ -823,7 +823,7 @@ static void TestBox(wxGraphicsContext* gc)
     {
         gc->PushState();
         gc->Translate(5, 15);
-        gc->Rotate(10.0 * std::numbers::pi / 180.0);
+        gc->Rotate(10.0 * std::numbers::pi_v<float> / 180.0);
         wxGraphicsPath path = gc->CreatePath();
         path.MoveToPoint(50, 60);
         const double x = 100;

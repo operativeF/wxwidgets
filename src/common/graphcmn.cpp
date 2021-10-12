@@ -406,7 +406,7 @@ void wxGraphicsPathData::AddRectangle( float x, float y, float w, float h )
 void wxGraphicsPathData::AddCircle( float x, float y, float r )
 {
     MoveToPoint(x+r,y);
-    AddArc( x,y,r,0, 2.0 * std::numbers::pi, false);
+    AddArc( x,y,r,0, 2.0 * std::numbers::pi_v<float>, false);
     CloseSubpath();
 }
 
@@ -435,7 +435,7 @@ void wxGraphicsPathData::AddRoundedRectangle( float x, float y, float w, float h
     else
     {
         MoveToPoint(x+w, y+h/2);
-        AddArc(x+w-radius, y+h-radius, radius, 0.0F, std::numbers::pi / 2.0F, true);
+        AddArc(x+w-radius, y+h-radius, radius, 0.0F, std::numbers::pi_v<float> / 2.0F, true);
         AddArc(x+radius, y+h-radius, radius, std::numbers::pi_v<float> / 2.0F, std::numbers::pi_v<float>, true);
         AddArc(x+radius, y+radius, radius, std::numbers::pi_v<float>, 3.0F * std::numbers::pi_v<float> / 2.0F, true);
         AddArc(x+w-radius, y+radius, radius, 3.0F * std::numbers::pi_v<float> / 2.0F, 2.0F * std::numbers::pi_v<float>, true);
@@ -509,7 +509,7 @@ void wxGraphicsPathData::AddArcToPoint( float x1, float y1 , float x2, float y2,
     const double a2 = GetVectorAngle(nv2);
 
     AddLineToPoint(t1.x, t1.y);
-    AddArc(c.x, c.y, r, wxDegToRad(a1), wxDegToRad(a2), drawClockwiseArc);
+    AddArc(c.x, c.y, r, gsl::narrow_cast<float>(wxDegToRad(a1)), gsl::narrow_cast<float>(wxDegToRad(a2)), drawClockwiseArc);
 }
 
 //-----------------------------------------------------------------------------
@@ -568,7 +568,7 @@ wxGraphicsContext::wxGraphicsContext(wxGraphicsRenderer* renderer,
       m_interpolation(wxInterpolationQuality::Default),
       m_enableOffset(false),
       m_window(window),
-      m_contentScaleFactor(window ? window->GetContentScaleFactor() : 1.0)
+      m_contentScaleFactor(window ? gsl::narrow_cast<float>(window->GetContentScaleFactor()) : 1.0F)
 {
 }
 
@@ -621,8 +621,8 @@ void wxGraphicsContext::GetDPI( float* dpiX, float* dpiY) const
     if ( m_window )
     {
         const wxSize ppi = m_window->GetDPI();
-        *dpiX = ppi.x;
-        *dpiY = ppi.y;
+        *dpiX = gsl::narrow_cast<float>(ppi.x);
+        *dpiY = gsl::narrow_cast<float>(ppi.y);
     }
     else
     {
@@ -745,11 +745,11 @@ wxGraphicsContext::DoDrawRotatedFilledText(std::string_view str,
 
     wxGraphicsPath path = CreatePath();
     path.MoveToPoint( x , y );
-    path.AddLineToPoint( (int) (x + std::sin(angle) * height) , (int) (y + std::cos(angle) * height) );
+    path.AddLineToPoint(x + std::sin(angle) * height, y + std::cos(angle) * height);
     path.AddLineToPoint(
-        (int) (x + std::sin(angle) * height + std::cos(angle) * width) ,
-        (int) (y + std::cos(angle) * height - std::sin(angle) * width));
-    path.AddLineToPoint((int) (x + std::cos(angle) * width) , (int) (y - std::sin(angle) * width) );
+        x + std::sin(angle) * height + std::cos(angle) * width,
+        y + std::cos(angle) * height - std::sin(angle) * width);
+    path.AddLineToPoint(x + std::cos(angle) * width, y - std::sin(angle) * width);
     FillPath( path );
     wxDrawText( str, x ,y, angle);
     SetBrush( formerBrush );
@@ -841,7 +841,7 @@ wxGraphicsPen wxGraphicsContext::CreatePen(const wxPen& pen) const
 
     wxGraphicsPenInfo info = wxGraphicsPenInfo()
                                 .Colour(pen.GetColour())
-                                .Width(pen.GetWidth())
+                                .Width(gsl::narrow_cast<float>(pen.GetWidth()))
                                 .Style(pen.GetStyle())
                                 .Join(pen.GetJoin())
                                 .Cap(pen.GetCap())

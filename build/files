@@ -723,7 +723,6 @@ GUI_CMN_SRC =
     src/common/accelcmn.cpp
     src/common/accesscmn.cpp
     src/common/addremovectrl.cpp
-    src/common/affinematrix2d.cpp
     src/common/anidecod.cpp
     src/common/animatecmn.cpp
     src/common/appcmn.cpp
