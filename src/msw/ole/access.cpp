@@ -34,7 +34,89 @@
 int wxConvertToWindowsRole(wxAccSystemRole wxrole);
 
 // Convert to Windows state
-LONG wxConvertToWindowsState(unsigned int wxstate);
+constexpr LONG wxConvertToWindowsState(unsigned int wxstate)
+{
+    LONG state = 0;
+    if (wxstate & wxACC_STATE_SYSTEM_ALERT_HIGH)
+        state |= STATE_SYSTEM_ALERT_HIGH;
+
+    if (wxstate & wxACC_STATE_SYSTEM_ALERT_MEDIUM)
+        state |= STATE_SYSTEM_ALERT_MEDIUM;
+
+    if (wxstate & wxACC_STATE_SYSTEM_ALERT_LOW)
+        state |= STATE_SYSTEM_ALERT_LOW;
+
+    if (wxstate & wxACC_STATE_SYSTEM_ANIMATED)
+        state |= STATE_SYSTEM_ANIMATED;
+
+    if (wxstate & wxACC_STATE_SYSTEM_BUSY)
+        state |= STATE_SYSTEM_BUSY;
+
+    if (wxstate & wxACC_STATE_SYSTEM_CHECKED)
+        state |= STATE_SYSTEM_CHECKED;
+
+    if (wxstate & wxACC_STATE_SYSTEM_COLLAPSED)
+        state |= STATE_SYSTEM_COLLAPSED;
+
+    if (wxstate & wxACC_STATE_SYSTEM_DEFAULT)
+        state |= STATE_SYSTEM_DEFAULT;
+
+    if (wxstate & wxACC_STATE_SYSTEM_EXPANDED)
+        state |= STATE_SYSTEM_EXPANDED;
+
+    if (wxstate & wxACC_STATE_SYSTEM_EXTSELECTABLE)
+        state |= STATE_SYSTEM_EXTSELECTABLE;
+
+    if (wxstate & wxACC_STATE_SYSTEM_FLOATING)
+        state |= STATE_SYSTEM_FLOATING;
+
+    if (wxstate & wxACC_STATE_SYSTEM_FOCUSABLE)
+        state |= STATE_SYSTEM_FOCUSABLE;
+
+    if (wxstate & wxACC_STATE_SYSTEM_FOCUSED)
+        state |= STATE_SYSTEM_FOCUSED;
+
+    if (wxstate & wxACC_STATE_SYSTEM_HOTTRACKED)
+        state |= STATE_SYSTEM_HOTTRACKED;
+
+    if (wxstate & wxACC_STATE_SYSTEM_INVISIBLE)
+        state |= STATE_SYSTEM_INVISIBLE;
+
+    if (wxstate & wxACC_STATE_SYSTEM_MARQUEED)
+        state |= STATE_SYSTEM_MARQUEED;
+
+    if (wxstate & wxACC_STATE_SYSTEM_MIXED)
+        state |= STATE_SYSTEM_MIXED;
+
+    if (wxstate & wxACC_STATE_SYSTEM_MULTISELECTABLE)
+        state |= STATE_SYSTEM_MULTISELECTABLE;
+
+    if (wxstate & wxACC_STATE_SYSTEM_OFFSCREEN)
+        state |= STATE_SYSTEM_OFFSCREEN;
+
+    if (wxstate & wxACC_STATE_SYSTEM_PRESSED)
+        state |= STATE_SYSTEM_PRESSED;
+
+    //    if (wxstate & wxACC_STATE_SYSTEM_PROTECTED)
+    //        state |= STATE_SYSTEM_PROTECTED;
+
+    if (wxstate & wxACC_STATE_SYSTEM_READONLY)
+        state |= STATE_SYSTEM_READONLY;
+
+    if (wxstate & wxACC_STATE_SYSTEM_SELECTABLE)
+        state |= STATE_SYSTEM_SELECTABLE;
+
+    if (wxstate & wxACC_STATE_SYSTEM_SELECTED)
+        state |= STATE_SYSTEM_SELECTED;
+
+    if (wxstate & wxACC_STATE_SYSTEM_SELFVOICING)
+        state |= STATE_SYSTEM_SELFVOICING;
+
+    if (wxstate & wxACC_STATE_SYSTEM_UNAVAILABLE)
+        state |= STATE_SYSTEM_UNAVAILABLE;
+
+    return state;
+}
 
 // Convert to Windows selection flag
 int wxConvertToWindowsSelFlag(wxAccSelectionFlags sel);
@@ -1961,91 +2043,6 @@ int wxConvertToWindowsRole(wxAccSystemRole wxrole)
         return ROLE_SYSTEM_WINDOW;
     }
     return 0;
-}
-
-// Convert to Windows state
-LONG wxConvertToWindowsState(unsigned int wxstate)
-{
-    LONG state = 0;
-    if (wxstate & wxACC_STATE_SYSTEM_ALERT_HIGH)
-        state |= STATE_SYSTEM_ALERT_HIGH;
-
-    if (wxstate & wxACC_STATE_SYSTEM_ALERT_MEDIUM)
-        state |= STATE_SYSTEM_ALERT_MEDIUM;
-
-    if (wxstate & wxACC_STATE_SYSTEM_ALERT_LOW)
-        state |= STATE_SYSTEM_ALERT_LOW;
-
-    if (wxstate & wxACC_STATE_SYSTEM_ANIMATED)
-        state |= STATE_SYSTEM_ANIMATED;
-
-    if (wxstate & wxACC_STATE_SYSTEM_BUSY)
-        state |= STATE_SYSTEM_BUSY;
-
-    if (wxstate & wxACC_STATE_SYSTEM_CHECKED)
-        state |= STATE_SYSTEM_CHECKED;
-
-    if (wxstate & wxACC_STATE_SYSTEM_COLLAPSED)
-        state |= STATE_SYSTEM_COLLAPSED;
-
-    if (wxstate & wxACC_STATE_SYSTEM_DEFAULT)
-        state |= STATE_SYSTEM_DEFAULT;
-
-    if (wxstate & wxACC_STATE_SYSTEM_EXPANDED)
-        state |= STATE_SYSTEM_EXPANDED;
-
-    if (wxstate & wxACC_STATE_SYSTEM_EXTSELECTABLE)
-        state |= STATE_SYSTEM_EXTSELECTABLE;
-
-    if (wxstate & wxACC_STATE_SYSTEM_FLOATING)
-        state |= STATE_SYSTEM_FLOATING;
-
-    if (wxstate & wxACC_STATE_SYSTEM_FOCUSABLE)
-        state |= STATE_SYSTEM_FOCUSABLE;
-
-    if (wxstate & wxACC_STATE_SYSTEM_FOCUSED)
-        state |= STATE_SYSTEM_FOCUSED;
-
-    if (wxstate & wxACC_STATE_SYSTEM_HOTTRACKED)
-        state |= STATE_SYSTEM_HOTTRACKED;
-
-    if (wxstate & wxACC_STATE_SYSTEM_INVISIBLE)
-        state |= STATE_SYSTEM_INVISIBLE;
-
-    if (wxstate & wxACC_STATE_SYSTEM_MARQUEED)
-        state |= STATE_SYSTEM_MARQUEED;
-
-    if (wxstate & wxACC_STATE_SYSTEM_MIXED)
-        state |= STATE_SYSTEM_MIXED;
-
-    if (wxstate & wxACC_STATE_SYSTEM_MULTISELECTABLE)
-        state |= STATE_SYSTEM_MULTISELECTABLE;
-
-    if (wxstate & wxACC_STATE_SYSTEM_OFFSCREEN)
-        state |= STATE_SYSTEM_OFFSCREEN;
-
-    if (wxstate & wxACC_STATE_SYSTEM_PRESSED)
-        state |= STATE_SYSTEM_PRESSED;
-
-//    if (wxstate & wxACC_STATE_SYSTEM_PROTECTED)
-//        state |= STATE_SYSTEM_PROTECTED;
-
-    if (wxstate & wxACC_STATE_SYSTEM_READONLY)
-        state |= STATE_SYSTEM_READONLY;
-
-    if (wxstate & wxACC_STATE_SYSTEM_SELECTABLE)
-        state |= STATE_SYSTEM_SELECTABLE;
-
-    if (wxstate & wxACC_STATE_SYSTEM_SELECTED)
-        state |= STATE_SYSTEM_SELECTED;
-
-    if (wxstate & wxACC_STATE_SYSTEM_SELFVOICING)
-        state |= STATE_SYSTEM_SELFVOICING;
-
-    if (wxstate & wxACC_STATE_SYSTEM_UNAVAILABLE)
-        state |= STATE_SYSTEM_UNAVAILABLE;
-
-    return state;
 }
 
 // Convert to Windows selection flag

@@ -386,7 +386,15 @@ struct WXDLLIMPEXP_CORE wxScrolledT_Helper
                                  const wxScrollHelper *helper,
                                  const wxSize& origBest);
 #ifdef __WXMSW__
-    static WXLRESULT FilterMSWWindowProc(WXUINT nMsg, WXLRESULT origResult);
+    static constexpr WXLRESULT FilterMSWWindowProc(WXUINT nMsg, WXLRESULT origResult)
+    {
+        // we need to process arrows ourselves for scrolling
+        if (nMsg == WM_GETDLGCODE)
+        {
+            origResult |= DLGC_WANTARROWS;
+        }
+        return origResult;
+    }
 #endif
 };
 

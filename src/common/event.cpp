@@ -1278,7 +1278,7 @@ void wxEvtHandler::ProcessPendingEvents()
                  "should have pending events if called" );
 
     wxList::compatibility_iterator node = m_pendingEvents->GetFirst();
-    wxEvent* pEvent = static_cast<wxEvent *>(node->GetData());
+    auto* pEvent = dynamic_cast<wxEvent *>(node->GetData());
 
     // find the first event which can be processed now:
     wxEventLoopBase* evtLoop = wxEventLoopBase::GetActive();

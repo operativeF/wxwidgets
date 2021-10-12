@@ -316,7 +316,7 @@ bool wxTarHeaderBlock::SetPath(const wxString& name, wxMBConv& conv)
 /////////////////////////////////////////////////////////////////////////////
 // Some helpers
 
-static wxFileOffset RoundUpSize(wxFileOffset size, int factor = 1)
+constexpr wxFileOffset RoundUpSize(wxFileOffset size, int factor = 1)
 {
     wxFileOffset chunk = TAR_BLOCKSIZE * factor;
     return ((size + chunk - 1) / chunk) * chunk;

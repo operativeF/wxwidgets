@@ -279,7 +279,7 @@ using wxComboCtrlGenericTLW =   wxFrame;
 
 // Returns true if given popup window type can be classified as perfect
 // on this platform.
-static inline bool IsPopupWinTypePerfect( wxByte popupWinType )
+constexpr bool IsPopupWinTypePerfect( wxByte popupWinType )
 {
 #if POPUPWIN_IS_PERFECT && TRANSIENT_POPUPWIN_IS_PERFECT
     wxUnusedVar(popupWinType);

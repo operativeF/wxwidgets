@@ -32,10 +32,9 @@
 // ----------------------------------------------------------------------------
 
 // is the pixel with this value of alpha a fully opaque one?
-static inline
-bool IsOpaque(unsigned char a)
+constexpr bool IsOpaque(unsigned char a)
 {
-    return a == 0xff;
+    return a == 0xFF;
 }
 
 // ============================================================================

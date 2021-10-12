@@ -6561,8 +6561,7 @@ namespace
 
 // use the "extended" bit of lParam to distinguish extended keys from normal
 // keys as the same virtual key code is sent for both by Windows
-inline
-int ChooseNormalOrExtended(int lParam, int keyNormal, int keyExtended)
+constexpr int ChooseNormalOrExtended(int lParam, int keyNormal, int keyExtended)
 {
     // except that if lParam is 0, it means we don't have real lParam from
     // WM_KEYDOWN but are just translating just a VK constant (e.g. done from

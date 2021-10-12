@@ -13,6 +13,12 @@
 namespace wxSpinCtrlImpl
 {
 
+constexpr bool IsBaseCompatibleWithRange(int minVal, int maxVal, int base)
+{
+    // Negative values in the range are allowed only if base == 10
+    return base == 10 || (minVal >= 0 && maxVal >= 0);
+}
+
 // This is an internal helper function currently used by all ports: return the
 // string containing hexadecimal representation of the given number.
 extern wxString FormatAsHex(long val, long maxVal);
@@ -26,8 +32,6 @@ extern int GetMaxValueLength(int minVal, int maxVal, int base);
 // of wxSpinCtrl is derived from wxSpinButton but uses the same algorithm.
 extern wxSize GetBestSize(const wxControl* spin, int minVal, int maxVal, int base);
 
-// Helper function to check if given combination of range and base is valid.
-extern bool IsBaseCompatibleWithRange(int minVal, int maxVal, int base);
 } // namespace wxSpinCtrlImpl
 
 #endif // _WX_PRIVATE_SPINCTRL_H_

@@ -1529,18 +1529,6 @@ wxSize wxScrolledT_Helper::FilterBestSize(const wxWindow *win,
     return best;
 }
 
-#ifdef __WXMSW__
-WXLRESULT wxScrolledT_Helper::FilterMSWWindowProc(WXUINT nMsg, WXLRESULT rc)
-{
-    // we need to process arrows ourselves for scrolling
-    if ( nMsg == WM_GETDLGCODE )
-    {
-        rc |= DLGC_WANTARROWS;
-    }
-    return rc;
-}
-#endif // __WXMSW__
-
 // NB: skipping wxScrolled<T> in wxRTTI information because being a template,
 //     it doesn't and can't implement wxRTTI support
 wxIMPLEMENT_DYNAMIC_CLASS(wxScrolledWindow, wxPanel);

@@ -1308,7 +1308,7 @@ size_t wxMBConvUTF8::ToWChar(wchar_t *buf, size_t n,
     return len;
 }
 
-static inline bool isoctal(wchar_t wch)
+constexpr bool isoctal(wchar_t wch)
 {
     return L'0' <= wch && wch <= L'7';
 }

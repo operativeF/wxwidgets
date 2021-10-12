@@ -101,7 +101,7 @@ bool wxGBSizerItem::SetSpan( const wxGBSpan& span )
 }
 
 
-inline bool InRange(int val, int min, int max)
+constexpr bool InRange(int val, int min, int max)
 {
     return (val >= min && val <= max);
 }

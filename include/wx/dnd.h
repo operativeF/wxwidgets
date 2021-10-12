@@ -48,7 +48,10 @@ enum class wxDragResult
 
 // return true if res indicates that something was done during a dnd operation,
 // i.e. is neither error nor none nor cancel
-WXDLLIMPEXP_CORE bool wxIsDragResultOk(wxDragResult res);
+constexpr bool wxIsDragResultOk(wxDragResult res)
+{
+    return res == wxDragResult::Copy || res == wxDragResult::Move || res == wxDragResult::Link;
+}
 
 // ----------------------------------------------------------------------------
 // wxDropSource is the object you need to create (and call DoDragDrop on it)

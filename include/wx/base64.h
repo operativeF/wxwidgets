@@ -70,7 +70,7 @@ enum class wxBase64DecodeMode
 
 // return the buffer size necessary for decoding a base64 string of the given
 // length
-inline size_t wxBase64DecodedSize(size_t srcLen) { return 3*srcLen/4; }
+constexpr std::size_t wxBase64DecodedSize(std::size_t srcLen) { return 3 * srcLen / 4; }
 
 // raw decoding function which decodes the contents of the string of specified
 // length (or NUL-terminated by default) into the provided buffer of the given

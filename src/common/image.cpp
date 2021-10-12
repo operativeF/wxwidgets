@@ -845,7 +845,7 @@ wxImage wxImage::ResampleBilinear(int width, int height) const
 
 // The following two local functions are for the B-spline weighting of the
 // bicubic sampling algorithm
-static inline double spline_cube(double value)
+constexpr double spline_cube(double value)
 {
     return value <= 0.0 ? 0.0 : value * value * value;
 }

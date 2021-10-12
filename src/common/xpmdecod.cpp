@@ -497,9 +497,10 @@ constexpr rgbRecord theRGBRecords[] =
 
 constexpr int numTheRGBRecords = 235;
 
-static unsigned char ParseHexadecimal(char digit1, char digit2)
+constexpr unsigned char ParseHexadecimal(char digit1, char digit2)
 {
-    unsigned char i1, i2;
+    unsigned char i1;
+    unsigned char i2;
 
     if (digit1 >= 'a')
         i1 = (unsigned char)(digit1 - 'a' + 0x0A);
@@ -507,12 +508,14 @@ static unsigned char ParseHexadecimal(char digit1, char digit2)
         i1 = (unsigned char)(digit1 - 'A' + 0x0A);
     else
         i1 = (unsigned char)(digit1 - '0');
+
     if (digit2 >= 'a')
         i2 = (unsigned char)(digit2 - 'a' + 0x0A);
     else if (digit2 >= 'A')
         i2 = (unsigned char)(digit2 - 'A' + 0x0A);
     else
         i2 = (unsigned char)(digit2 - '0');
+
     return (unsigned char)(0x10 * i1 + i2);
 }
 
