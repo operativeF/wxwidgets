@@ -1098,15 +1098,19 @@ bool wxPGChoiceEditor::OnEvent( wxPropertyGrid* propGrid, wxPGProperty* property
     if ( event.GetEventType() == wxEVT_COMBOBOX )
     {
         wxPGComboBox* cb = (wxPGComboBox*)ctrl;
-        int index = cb->GetSelection();
-        int cmnValIndex = -1;
-        int cmnVals = property->GetDisplayedCommonValueCount();
-        int items = cb->GetCount();
 
-        if ( index >= (items-cmnVals) )
+        const auto index = cb->GetSelection();
+
+        int cmnValIndex = -1;
+
+        const auto cmnVals = property->GetDisplayedCommonValueCount();
+
+        const auto items = cb->GetCount();
+
+        if ( index >= (items - cmnVals) )
         {
             // Yes, a common value is being selected
-            cmnValIndex = index - (items-cmnVals);
+            cmnValIndex = index - (items - cmnVals);
             property->SetCommonValue( cmnValIndex );
 
             // Truly set value to unspecified?

@@ -6543,9 +6543,9 @@ void wxGrid::DrawAllGridWindowLines(wxDC& dc, const wxRegion & WXUNUSED(reg), wx
 
     int top, bottom, left, right;
 
-    wxPoint gridOffset = GetGridWindowOffset(gridWindow);
+    const wxPoint gridOffset = GetGridWindowOffset(gridWindow);
 
-    wxSize client_size = gridWindow->GetClientSize();
+    const wxSize client_size = gridWindow->GetClientSize();
 
     CalcGridWindowUnscrolledPosition( gridOffset.x, gridOffset.y, &left, &top, gridWindow );
     CalcGridWindowUnscrolledPosition( client_size.x + gridOffset.x, client_size.y + gridOffset.y, &right, &bottom, gridWindow );
@@ -6572,10 +6572,10 @@ void wxGrid::DrawAllGridWindowLines(wxDC& dc, const wxRegion & WXUNUSED(reg), wx
     }
 
     // no gridlines inside multicells, clip them out
-    int leftCol = GetColPos( internalXToCol(left, gridWindow) );
-    int topRow = internalYToRow(top, gridWindow);
-    int rightCol = GetColPos( internalXToCol(right, gridWindow) );
-    int bottomRow = internalYToRow(bottom, gridWindow);
+    const int leftCol = GetColPos( internalXToCol(left, gridWindow) );
+    const int topRow = internalYToRow(top, gridWindow);
+    const int rightCol = GetColPos( internalXToCol(right, gridWindow) );
+    const int bottomRow = internalYToRow(bottom, gridWindow);
 
     if ( gridWindow == m_gridWin )
     {
@@ -6668,7 +6668,7 @@ wxGrid::DoDrawGridLines(wxDC& dc,
     // horizontal grid lines
     for ( int i = topRow; i < bottomRow; i++ )
     {
-        int bot = GetRowBottom(i) - 1;
+        const int bot = GetRowBottom(i) - 1;
 
         if ( bot > bottom )
             break;
@@ -6777,8 +6777,7 @@ void wxGrid::SetUseNativeColLabels( bool native )
     m_nativeColumnLabels = native;
     if (native)
     {
-        int height = wxRendererNative::Get().GetHeaderButtonHeight( this );
-        SetColLabelSize( height );
+        SetColLabelSize(wxRendererNative::Get().GetHeaderButtonHeight(this));
     }
 
     GetColLabelWindow()->Refresh();
@@ -6838,9 +6837,7 @@ void wxGrid::DrawColLabel(wxDC& dc, int col)
     if ( GetColWidth(col) <= 0 || m_colLabelHeight <= 0 )
         return;
 
-    int colLeft = GetColLeft(col);
-
-    wxRect rect(colLeft, 0, GetColWidth(col), m_colLabelHeight);
+    wxRect rect{GetColLeft(col), 0, GetColWidth(col), m_colLabelHeight};
     wxGridCellAttrProvider * const
         attrProvider = m_table ? m_table->GetAttrProvider() : nullptr;
     const wxGridColumnHeaderRenderer&
@@ -6948,18 +6945,15 @@ void wxGrid::DrawTextRectangle(wxDC& dc,
     }
 
     // Align each line of a multi-line label
-    size_t nLines = lines.size();
-    for ( size_t l = 0; l < nLines; l++ )
+    for (const auto& line : lines)
     {
-        const std::string& line = lines[l];
-
         if ( line.empty() )
         {
             *(textOrientation == wxHORIZONTAL ? &y : &x) += dc.GetCharHeight();
             continue;
         }
 
-        auto lineSize = dc.GetTextExtent(line);
+        const auto lineSize = dc.GetTextExtent(line);
 
         switch ( horizAlign )
         {

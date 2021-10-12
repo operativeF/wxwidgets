@@ -208,6 +208,7 @@ bool HP_TagHandler::HandleTag(const wxHtmlTag& tag)
         if (tag.GetParam(wxT("TYPE")) == wxT("text/sitemap"))
         {
             wxHtmlHelpDataItem *item = new wxHtmlHelpDataItem();
+
             item->parent = m_parentItem;
             item->level = m_level;
             item->id = m_id;
@@ -320,8 +321,11 @@ inline static std::int32_t CacheReadInt32(wxInputStream *f)
 inline static void CacheWriteString(wxOutputStream *f, const wxString& str)
 {
     const wxWX2MBbuf mbstr = str.mb_str(wxConvUTF8);
-    size_t len = strlen((const char*)mbstr)+1;
+
+    const auto len = std::strlen((const char*)mbstr) + 1;
+
     CacheWriteInt32(f, len);
+
     f->Write((const char*)mbstr, len);
 }
 
@@ -367,11 +371,13 @@ bool wxHtmlHelpData::LoadCachedBook(wxHtmlBookRecord *book, wxInputStream *f)
     for (i = st; i < newsize; i++)
     {
         wxHtmlHelpDataItem *item = new wxHtmlHelpDataItem;
+
         item->level = CacheReadInt32(f);
         item->id = CacheReadInt32(f);
         item->name = CacheReadString(f);
         item->page = CacheReadString(f);
         item->book = book;
+
         m_contents.Add(item);
     }
 
@@ -382,11 +388,13 @@ bool wxHtmlHelpData::LoadCachedBook(wxHtmlBookRecord *book, wxInputStream *f)
     for (i = st; i < newsize; i++)
     {
         wxHtmlHelpDataItem *item = new wxHtmlHelpDataItem;
+
         item->name = CacheReadString(f);
         item->page = CacheReadString(f);
         item->level = CacheReadInt32(f);
         item->book = book;
-        int parentShift = CacheReadInt32(f);
+
+        const auto parentShift = CacheReadInt32(f);
         if (parentShift != 0)
             item->parent = &m_index[m_index.size() - parentShift];
         m_index.Add(item);
@@ -498,14 +506,14 @@ bool wxHtmlHelpData::AddBookParam(const wxFSFile& bookfile,
     wxFSFile *fi;
     wxHtmlBookRecord *bookr;
 
-    int IndexOld = m_index.size(),
-        ContentsOld = m_contents.size();
+    const auto IndexOld = m_index.size();
+    const auto ContentsOld = m_contents.size();
 
     if (!path.empty())
         fsys.ChangePathTo(path, true);
 
-    size_t booksCnt = m_bookRecords.GetCount();
-    for (size_t i = 0; i < booksCnt; i++)
+    const auto booksCnt = m_bookRecords.GetCount();
+    for (std::size_t i{}; i != booksCnt; i++)
     {
         if ( m_bookRecords[i].GetBookFile() == bookfile.GetLocation() )
             return true; // book is (was) loaded
@@ -530,7 +538,7 @@ bool wxHtmlHelpData::AddBookParam(const wxFSFile& bookfile,
     bookitem->book = bookr;
 
     // store the contents index for later
-    int cont_start = m_contents.size();
+    const auto cont_start = m_contents.size();
 
     m_contents.Add(bookitem);
 
@@ -578,14 +586,16 @@ bool wxHtmlHelpData::AddBookParam(const wxFSFile& bookfile,
     if (encoding != wxFONTENCODING_SYSTEM)
     {
         wxCSConv conv(encoding);
-        size_t IndexCnt = m_index.size();
-        size_t ContentsCnt = m_contents.size();
-        size_t i;
-        for (i = IndexOld; i < IndexCnt; i++)
+
+        const auto IndexCnt = m_index.size();
+        const auto ContentsCnt = m_contents.size();
+
+        for (auto i = IndexOld; i != IndexCnt; i++)
         {
             CORRECT_STR(m_index[i].name, conv);
         }
-        for (i = ContentsOld; i < ContentsCnt; i++)
+
+        for (auto i = ContentsOld; i != ContentsCnt; i++)
         {
             CORRECT_STR(m_contents[i].name, conv);
         }
@@ -787,11 +797,14 @@ wxHtmlSearchStatus::wxHtmlSearchStatus(wxHtmlHelpData* data, const wxString& key
 {
     m_Data = data;
     wxHtmlBookRecord* bookr = nullptr;
+
     if (!book.empty())
     {
         // we have to search in a specific book. Find it first
-        int i, cnt = data->m_bookRecords.GetCount();
-        for (i = 0; i < cnt; i++)
+        const auto cnt = data->m_bookRecords.GetCount();
+
+        for (std::size_t i{}; i != cnt; i++)
+        {
             if (data->m_bookRecords[i].GetTitle() == book)
             {
                 bookr = &(data->m_bookRecords[i]);
@@ -799,16 +812,20 @@ wxHtmlSearchStatus::wxHtmlSearchStatus(wxHtmlHelpData* data, const wxString& key
                 m_MaxIndex = bookr->GetContentsEnd();
                 break;
             }
+        }
         // check; we won't crash if the book doesn't exist, but it's Bad Anyway.
         wxASSERT(bookr);
     }
-    if (! bookr)
+
+    if (!bookr)
     {
         // no book specified; search all books
         m_CurIndex = 0;
         m_MaxIndex = m_Data->m_contents.size();
     }
+
     m_Engine.LookFor(keyword, case_sensitive, whole_words_only);
+
     m_Active = (m_CurIndex < m_MaxIndex);
 }
 

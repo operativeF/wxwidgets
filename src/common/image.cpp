@@ -3257,7 +3257,9 @@ wxImage::HSVValue wxImage::RGBtoHSV(const RGBValue& rgb)
 
 RGBValue wxImage::HSVtoRGB(const HSVValue& hsv)
 {
-    double red, green, blue;
+    double red{};
+    double green{};
+    double blue{};
 
     // FIXME: Double equality
     if ( hsv.saturation == 0.0 )
@@ -3269,10 +3271,10 @@ RGBValue wxImage::HSVtoRGB(const HSVValue& hsv)
     }
     else // not grey
     {
-        double hue = hsv.hue * 6.0;      // sector 0 to 5
-        int i = (int)std::floor(hue);
-        double f = hue - i;          // fractional part of h
-        double p = hsv.value * (1.0 - hsv.saturation);
+        const double hue = hsv.hue * 6.0;      // sector 0 to 5
+        const auto i = gsl::narrow_cast<int>(std::floor(hue));
+        const double f = hue - i;          // fractional part of h
+        const double p = hsv.value * (1.0 - hsv.saturation);
 
         switch (i)
         {
@@ -3314,9 +3316,9 @@ RGBValue wxImage::HSVtoRGB(const HSVValue& hsv)
         }
     }
 
-    return {(unsigned char)std::lround(red * 255.0),
-            (unsigned char)std::lround(green * 255.0),
-            (unsigned char)std::lround(blue * 255.0)};
+    return {gsl::narrow_cast<unsigned char>(std::lround(red * 255.0)),
+            gsl::narrow_cast<unsigned char>(std::lround(green * 255.0)),
+            gsl::narrow_cast<unsigned char>(std::lround(blue * 255.0))};
 }
 
 // TODO-C++11: Replace with a lambda function.
@@ -3585,21 +3587,18 @@ unsigned long wxImage::CountColours( unsigned long stopafter ) const
 {
     wxHashTable h;
     wxObject dummy;
-    unsigned char *p;
-    unsigned long size, nentries;
+    unsigned char *p = GetData();
 
-    p = GetData();
-    size = gsl::narrow_cast<unsigned long>(GetWidth()) * GetHeight();
-    nentries = 0;
+    auto size = gsl::narrow_cast<unsigned long>(GetWidth()) * GetHeight();
+    unsigned long nentries = 0;
 
     for (unsigned long j = 0; (j < size) && (nentries <= stopafter) ; j++)
     {
-        unsigned char r, g, b;
-        unsigned long key;
-        r = *(p++);
-        g = *(p++);
-        b = *(p++);
-        key = wxImageHistogram::MakeKey(r, g, b);
+        const auto r = *(p++);
+        const auto g = *(p++);
+        const auto b = *(p++);
+
+        const auto key = wxImageHistogram::MakeKey(r, g, b);
 
         if (h.Get(key) == nullptr)
         {
@@ -3623,10 +3622,9 @@ unsigned long wxImage::ComputeHistogram( wxImageHistogram &h ) const
 
     for ( unsigned long n = 0; n < size; n++ )
     {
-        unsigned char r, g, b;
-        r = *p++;
-        g = *p++;
-        b = *p++;
+        unsigned char r = *p++;
+        unsigned char g = *p++;
+        unsigned char b = *p++;
 
         wxImageHistogramEntry& entry = h[wxImageHistogram::MakeKey(r, g, b)];
 
@@ -3705,10 +3703,10 @@ wxImage wxImage::Rotate(double angle,
 
     const wxRealPoint p0(centre_of_rotation.x, centre_of_rotation.y);
 
-    wxRealPoint p1 = wxRotatePoint (0, 0, cos_angle, sin_angle, p0);
-    wxRealPoint p2 = wxRotatePoint (0, h, cos_angle, sin_angle, p0);
-    wxRealPoint p3 = wxRotatePoint (w, 0, cos_angle, sin_angle, p0);
-    wxRealPoint p4 = wxRotatePoint (w, h, cos_angle, sin_angle, p0);
+    const wxRealPoint p1 = wxRotatePoint (0, 0, cos_angle, sin_angle, p0);
+    const wxRealPoint p2 = wxRotatePoint (0, h, cos_angle, sin_angle, p0);
+    const wxRealPoint p3 = wxRotatePoint (w, 0, cos_angle, sin_angle, p0);
+    const wxRealPoint p4 = wxRotatePoint (w, h, cos_angle, sin_angle, p0);
 
     int x1a = (int) std::floor(std::min (std::min(p1.x, p2.x), std::min(p3.x, p4.x)));
     int y1a = (int) std::floor(std::min (std::min(p1.y, p2.y), std::min(p3.y, p4.y)));

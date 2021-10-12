@@ -805,9 +805,9 @@ bool wxRichTextImage::ExportXML(wxXmlNode* parent, wxRichTextXMLHandler* handler
         {
             if (stream.GetSize() > 0)
             {
-                int size = stream.GetSize();
+                const auto size = stream.GetSize();
 #ifdef __WXDEBUG__
-                int size2 = stream.GetOutputStreamBuffer()->GetIntPosition();
+                const auto size2 = stream.GetOutputStreamBuffer()->GetIntPosition();
                 wxASSERT(size == size2);
 #endif
                 unsigned char* data = new unsigned char[size];

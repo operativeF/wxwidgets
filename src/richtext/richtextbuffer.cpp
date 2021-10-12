@@ -10509,13 +10509,11 @@ bool wxRichTextTable::Layout(wxDC& dc, wxRichTextDrawingContext& context, const 
     GetTotalMargin(dc, buffer, attr, totalLeftMargin, totalRightMargin, totalTopMargin, totalBottomMargin);
 
     // Internal table width - the area for content
-    int internalTableWidth = tableWidth - totalLeftMargin - totalRightMargin;
+    const int internalTableWidth = tableWidth - totalLeftMargin - totalRightMargin;
 
-    int rowCount = m_cells.GetCount();
-
-    if (m_colCount == 0 || rowCount == 0)
+    if (m_colCount == 0 || m_cells.GetCount() == 0)
     {
-        wxRect overallRect(rect.x, rect.y, totalLeftMargin + totalRightMargin, totalTopMargin + totalBottomMargin);
+        const wxRect overallRect{rect.x, rect.y, totalLeftMargin + totalRightMargin, totalTopMargin + totalBottomMargin};
         SetCachedSize(overallRect.GetSize());
 
         // Zero content size

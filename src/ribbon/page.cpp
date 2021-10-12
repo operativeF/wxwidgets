@@ -649,9 +649,11 @@ bool wxRibbonPage::DoActualLayout()
 {
     wxPoint origin(m_art->GetMetric(wxRIBBON_ART_PAGE_BORDER_LEFT_SIZE), m_art->GetMetric(wxRIBBON_ART_PAGE_BORDER_TOP_SIZE));
     wxOrientation major_axis = GetMajorAxis();
-    int gap;
-    int minor_axis_size;
-    int available_space;
+
+    int gap{};
+    int minor_axis_size{};
+    int available_space{};
+
     if(major_axis == wxHORIZONTAL)
     {
         gap = m_art->GetMetric(wxRIBBON_ART_PANEL_X_SEPARATION_SIZE);

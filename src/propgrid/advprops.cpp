@@ -924,12 +924,11 @@ wxColourPropertyValue wxSystemColourProperty::GetVal( const wxVariant* pVariant 
 
         if ( arr.size() >= 3 )
         {
-            int r, g, b;
             int a = 255;
 
-            r = arr[0];
-            g = arr[1];
-            b = arr[2];
+            int r = arr[0];
+            int g = arr[1];
+            int b = arr[2];
             if ( arr.size() >= 4 )
                 a = arr[3];
 

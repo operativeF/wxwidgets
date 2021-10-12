@@ -589,9 +589,9 @@ public:
         int sum = 0;
 
         const wxDataViewTreeNodes& nodes = m_branchData->children;
-        const int len = nodes.size();
-        for ( int i = 0;i < len; i ++)
-            sum += 1 + nodes[i]->GetSubTreeCount();
+
+        for (const auto& node : nodes)
+            sum += 1 + node->GetSubTreeCount();
 
         if (m_branchData->open)
         {
@@ -1877,12 +1877,15 @@ void wxDataViewTreeNode::InsertChild(wxDataViewMainWindow* window,
     if ( insertSorted )
     {
         // Use binary search to find the correct position to insert at.
-        wxGenericTreeModelNodeCmp cmp(window, sortOrder);
-        int lo = 0, hi = m_branchData->children.size();
+        const wxGenericTreeModelNodeCmp cmp{window, sortOrder};
+        std::size_t lo{};
+        std::size_t hi = m_branchData->children.size();
+
         while ( lo < hi )
         {
-            int mid = lo + (hi - lo) / 2;
-            int r = cmp.Compare(node, m_branchData->children[mid]);
+            const std::size_t mid = lo + (hi - lo) / 2;
+            const int r = cmp.Compare(node, m_branchData->children[mid]);
+
             if ( r < 0 )
                 hi = mid;
             else if ( r > 0 )
@@ -1926,7 +1929,7 @@ void wxDataViewTreeNode::Resort(wxDataViewMainWindow* window)
         }
 
         // There may be open child nodes that also need a resort.
-        int len = nodes.size();
+        const auto len = nodes.size();
         for ( int i = 0; i < len; i++ )
         {
             if ( nodes[i]->HasChildren() )
@@ -1961,9 +1964,11 @@ wxDataViewTreeNode::PutChildInSortOrder(wxDataViewMainWindow* window,
     wxASSERT(m_branchData->sortOrder == window->GetSortOrder());
 
     // First find the node in the current child list
-    int hi = nodes.size();
+    auto hi = nodes.size();
+
     int oldLocation = wxNOT_FOUND;
-    for ( int index = 0; index < hi; ++index )
+
+    for ( std::size_t index{}; index != hi; ++index )
     {
         if ( nodes[index] == childNode )
         {
@@ -1971,6 +1976,7 @@ wxDataViewTreeNode::PutChildInSortOrder(wxDataViewMainWindow* window,
             break;
         }
     }
+
     wxCHECK_RET( oldLocation >= 0, "not our child?" );
 
     wxGenericTreeModelNodeCmp cmp(window, m_branchData->sortOrder);
@@ -3113,7 +3119,7 @@ bool wxDataViewMainWindow::ItemAdded(const wxDataViewItem & parent, const wxData
             GetModel()->GetChildren(parent, modelSiblings);
             const int modelSiblingsSize = modelSiblings.size();
 
-            int posInModel = std::distance(modelSiblings.cbegin(), std::find(modelSiblings.cbegin(), modelSiblings.cend(), item));
+            gsl::index posInModel = std::distance(modelSiblings.cbegin(), std::find(modelSiblings.cbegin(), modelSiblings.cend(), item));
 
             if((posInModel + modelSiblings.cbegin()) == modelSiblings.cend())
             {
@@ -3127,7 +3133,7 @@ bool wxDataViewMainWindow::ItemAdded(const wxDataViewItem & parent, const wxData
             const wxDataViewTreeNodes& nodeSiblings = parentNode->GetChildNodes();
             const int nodeSiblingsSize = nodeSiblings.size();
 
-            int nodePos = 0;
+            gsl::index nodePos{};
 
             if ( posInModel == modelSiblingsSize - 1 )
             {
@@ -3150,11 +3156,11 @@ bool wxDataViewMainWindow::ItemAdded(const wxDataViewItem & parent, const wxData
                 // append to the end if we won't find a better position:
                 nodePos = nodeSiblingsSize;
 
-                for ( int nextItemPos = posInModel + 1;
+                for ( gsl::index nextItemPos = posInModel + 1;
                      nextItemPos < modelSiblingsSize;
                      nextItemPos++ )
                 {
-                    int nextNodePos = parentNode->FindChildByItem(modelSiblings[nextItemPos]);
+                    const int nextNodePos = parentNode->FindChildByItem(modelSiblings[nextItemPos]);
                     if ( nextNodePos != wxNOT_FOUND )
                     {
                         nodePos = nextNodePos;

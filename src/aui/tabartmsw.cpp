@@ -221,7 +221,7 @@ void wxAuiMSWTabArt::DrawTab(wxDC& dc,
     {
         wxUxThemeHandle hToolTipTheme(wnd, L"TOOLTIP");
 
-        int btnState;
+        int btnState{};
         if ( close_button_state == wxAUI_BUTTON_STATE_HOVER )
             btnState = TTCS_HOT;
         else if ( close_button_state == wxAUI_BUTTON_STATE_PRESSED )
