@@ -575,7 +575,7 @@ wxSize wxToolBar::DoGetBestSize() const
                                            toolIndex++ )
     {
         wxToolBarTool * const
-            tool = static_cast<wxToolBarTool *>(node->GetData());
+            tool = dynamic_cast<wxToolBarTool *>(node->GetData());
 
         if ( tool->IsControl() )
         {
@@ -682,7 +682,7 @@ bool wxToolBar::DoInsertTool(size_t WXUNUSED(pos),
     // We might be inserting back a tool previously removed from the toolbar,
     // make sure to reset its "to be deleted" flag to ensure that we do take it
     // into account during our layout even in this case.
-    static_cast<wxToolBarTool*>(tool)->ToBeDeleted(false);
+    dynamic_cast<wxToolBarTool*>(tool)->ToBeDeleted(false);
 
     // nothing special to do here - we really create the toolbar buttons in
     // Realize() later
@@ -708,7 +708,7 @@ bool wxToolBar::DoDeleteTool(size_t pos, wxToolBarToolBase *tool)
         return false;
     }
 
-    static_cast<wxToolBarTool*>(tool)->ToBeDeleted();
+    dynamic_cast<wxToolBarTool*>(tool)->ToBeDeleted();
 
     // and finally rearrange the tools:
 
@@ -716,7 +716,7 @@ bool wxToolBar::DoDeleteTool(size_t pos, wxToolBarToolBase *tool)
     wxToolBarToolsList::compatibility_iterator node;
     for ( node = m_tools.Find(tool); node; node = node->GetNext() )
     {
-        wxToolBarTool * const ctool = static_cast<wxToolBarTool*>(node->GetData());
+        auto * const ctool = dynamic_cast<wxToolBarTool*>(node->GetData());
 
         if ( ctool->IsToBeDeleted() )
             continue;
@@ -1074,7 +1074,7 @@ bool wxToolBar::Realize()
     int i = 0;
     for ( node = m_tools.GetFirst(); node; node = node->GetNext() )
     {
-        wxToolBarTool *tool = static_cast<wxToolBarTool *>(node->GetData());
+        auto* tool = dynamic_cast<wxToolBarTool *>(node->GetData());
 
         TBBUTTON& button = buttons[i];
 
@@ -1781,7 +1781,7 @@ void wxToolBar::DoEnableTool(wxToolBarToolBase *tool, bool enable)
     }
     else if ( tool->IsControl() )
     {
-        wxToolBarTool* tbTool = static_cast<wxToolBarTool*>(tool);
+        wxToolBarTool* tbTool = dynamic_cast<wxToolBarTool*>(tool);
 
         tbTool->GetControl()->Enable(enable);
         wxStaticText* text = tbTool->GetStaticText();
@@ -1809,7 +1809,8 @@ void wxToolBar::DoSetToggle(wxToolBarToolBase *WXUNUSED(tool), bool WXUNUSED(tog
 
 void wxToolBar::SetToolNormalBitmap( int id, const wxBitmap& bitmap )
 {
-    wxToolBarTool* tool = static_cast<wxToolBarTool*>(FindById(id));
+    auto* tool = dynamic_cast<wxToolBarTool*>(FindById(id));
+
     if ( tool )
     {
         wxCHECK_RET( tool->IsButton(), wxT("Can only set bitmap on button tools."));
@@ -1821,7 +1822,8 @@ void wxToolBar::SetToolNormalBitmap( int id, const wxBitmap& bitmap )
 
 void wxToolBar::SetToolDisabledBitmap( int id, const wxBitmap& bitmap )
 {
-    wxToolBarTool* tool = static_cast<wxToolBarTool*>(FindById(id));
+    wxToolBarTool* tool = dynamic_cast<wxToolBarTool*>(FindById(id));
+
     if ( tool )
     {
         wxCHECK_RET( tool->IsButton(), wxT("Can only set bitmap on button tools."));
@@ -1918,7 +1920,7 @@ void wxToolBar::OnDPIChanged(wxDPIChangedEvent& event)
     wxToolBarToolsList::compatibility_iterator node;
     for ( node = m_tools.GetFirst(); node; node = node->GetNext() )
     {
-        wxToolBarTool* const tool = static_cast<wxToolBarTool*>(node->GetData());
+        auto* const tool = dynamic_cast<wxToolBarTool*>(node->GetData());
         if ( !tool->IsControl() )
             continue;
 
@@ -1985,8 +1987,7 @@ bool wxToolBar::HandlePaint(WXWPARAM wParam, WXLPARAM lParam)
           node;
           node = node->GetNext(), toolIndex++ )
     {
-        wxToolBarTool * const
-            tool = static_cast<wxToolBarTool *>(node->GetData());
+        wxToolBarTool * const tool = dynamic_cast<wxToolBarTool *>(node->GetData());
 
         if ( tool->IsToBeDeleted() )
             continue;
