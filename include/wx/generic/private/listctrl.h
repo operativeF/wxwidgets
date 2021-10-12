@@ -528,7 +528,7 @@ public:
     // (which is too slow if a lot of items are selected) we send only one notification
     // for all of them which is the wxMSW behaviour. Currently done for virtual
     // list controls and for deselection only.
-    enum SendEvent { SendEvent_None, SendEvent_Normal };
+    enum SendEvent { SendEvent::None, SendEvent_Normal };
 
     // change the line "selected" state, return true if it really changed
     bool HighlightLine( size_t line, bool highlight = true,

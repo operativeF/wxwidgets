@@ -73,13 +73,13 @@ public:
 class WXDLLIMPEXP_CORE wxStockPreferencesPage : public wxPreferencesPage
 {
 public:
-    enum Kind
+    enum class Kind
     {
-        Kind_General,
-        Kind_Advanced
+        General,
+        Advanced
     };
 
-    wxStockPreferencesPage(Kind kind) : m_kind(kind) {}
+    wxStockPreferencesPage(Kind kind) : m_kind{kind} {}
     Kind GetKind() const { return m_kind; }
 
     wxString GetName() const override;

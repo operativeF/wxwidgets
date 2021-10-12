@@ -37,39 +37,39 @@ class wxFSFile;
 class wxFileSystem;
 class wxWebView;
 
-enum wxWebViewZoom
+enum class wxWebViewZoom
 {
-    wxWEBVIEW_ZOOM_TINY,
-    wxWEBVIEW_ZOOM_SMALL,
-    wxWEBVIEW_ZOOM_MEDIUM,
-    wxWEBVIEW_ZOOM_LARGE,
-    wxWEBVIEW_ZOOM_LARGEST
+    Tiny,
+    Small,
+    Medium,
+    Large,
+    Largest
 };
 
-enum wxWebViewZoomType
+enum class wxWebViewZoomType
 {
     //Scales entire page, including images
-    wxWEBVIEW_ZOOM_TYPE_LAYOUT,
-    wxWEBVIEW_ZOOM_TYPE_TEXT
+    Layout,
+    Text
 };
 
-enum wxWebViewNavigationError
+enum class wxWebViewNavigationError
 {
-    wxWEBVIEW_NAV_ERR_CONNECTION,
-    wxWEBVIEW_NAV_ERR_CERTIFICATE,
-    wxWEBVIEW_NAV_ERR_AUTH,
-    wxWEBVIEW_NAV_ERR_SECURITY,
-    wxWEBVIEW_NAV_ERR_NOT_FOUND,
-    wxWEBVIEW_NAV_ERR_REQUEST,
-    wxWEBVIEW_NAV_ERR_USER_CANCELLED,
-    wxWEBVIEW_NAV_ERR_OTHER
+    Connection,
+    Certificate,
+    Auth,
+    Security,
+    NotFound,
+    Request,
+    Cancelled,
+    Other
 };
 
-enum wxWebViewReloadFlags
+enum class wxWebViewReloadFlags
 {
     //Default, may access cache
-    wxWEBVIEW_RELOAD_DEFAULT,
-    wxWEBVIEW_RELOAD_NO_CACHE
+    Default,
+    NoCache
 };
 
 enum wxWebViewFindFlags
@@ -82,17 +82,17 @@ enum wxWebViewFindFlags
     wxWEBVIEW_FIND_DEFAULT =          0
 };
 
-enum wxWebViewNavigationActionFlags
+enum class wxWebViewNavigationActionFlags
 {
-    wxWEBVIEW_NAV_ACTION_NONE,
-    wxWEBVIEW_NAV_ACTION_USER,
-    wxWEBVIEW_NAV_ACTION_OTHER
+    None,
+    User,
+    Other
 };
 
-enum wxWebViewUserScriptInjectionTime
+enum class wxWebViewUserScriptInjectionTime
 {
-    wxWEBVIEW_INJECT_AT_DOCUMENT_START,
-    wxWEBVIEW_INJECT_AT_DOCUMENT_END
+    DocStart,
+    DocEnd
 };
 
 //Base class for custom scheme handlers
@@ -189,7 +189,7 @@ public:
     virtual void LoadURL(const wxString& url) = 0;
     virtual void Print() = 0;
     virtual void RegisterHandler(std::shared_ptr<wxWebViewHandler> handler) = 0;
-    virtual void Reload(wxWebViewReloadFlags flags = wxWEBVIEW_RELOAD_DEFAULT) = 0;
+    virtual void Reload(wxWebViewReloadFlags flags = wxWebViewReloadFlags::Default) = 0;
     virtual bool SetUserAgent(const wxString& userAgent) { wxUnusedVar(userAgent); return false; }
     virtual wxString GetUserAgent() const;
 
@@ -200,7 +200,7 @@ public:
     virtual bool RemoveScriptMessageHandler(const wxString& name)
     { wxUnusedVar(name); return false; }
     virtual bool AddUserScript(const wxString& javascript,
-        wxWebViewUserScriptInjectionTime injectionTime = wxWEBVIEW_INJECT_AT_DOCUMENT_START)
+        wxWebViewUserScriptInjectionTime injectionTime = wxWebViewUserScriptInjectionTime::DocStart)
     {  wxUnusedVar(javascript); wxUnusedVar(injectionTime); return false; }
     virtual void RemoveAllUserScripts() {}
 
@@ -291,7 +291,7 @@ public:
     wxWebViewEvent() = default;
     wxWebViewEvent(wxEventType type, int id, const wxString& url,
                    const wxString target,
-                   wxWebViewNavigationActionFlags flags = wxWEBVIEW_NAV_ACTION_NONE,
+                   wxWebViewNavigationActionFlags flags = wxWebViewNavigationActionFlags::None,
                    const wxString& messageHandler = wxString())
         : wxNotifyEvent(type, id), m_url(url), m_target(target),
           m_actionFlags(flags), m_messageHandler(messageHandler)

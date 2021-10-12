@@ -60,22 +60,22 @@ wxWebViewZoom wxWebView::GetZoom() const
     // arbitrary way to map float zoom to our common zoom enum
     if (zoom <= 0.55f)
     {
-        return wxWEBVIEW_ZOOM_TINY;
+        return wxWebViewZoom::Tiny;
     }
     if (zoom <= 0.85f)
     {
-        return wxWEBVIEW_ZOOM_SMALL;
+        return wxWebViewZoom::Small;
     }
     if (zoom <= 1.15f)
     {
-        return wxWEBVIEW_ZOOM_MEDIUM;
+        return wxWebViewZoom::Medium;
     }
     if (zoom <= 1.45f)
     {
-        return wxWEBVIEW_ZOOM_LARGE;
+        return wxWebViewZoom::Large;
     }
 
-    return wxWEBVIEW_ZOOM_LARGEST;
+    return wxWebViewZoom::Largest;
 }
 
 void wxWebView::SetZoom(wxWebViewZoom zoom)
@@ -83,23 +83,23 @@ void wxWebView::SetZoom(wxWebViewZoom zoom)
     // arbitrary way to map our common zoom enum to float zoom
     switch (zoom)
     {
-        case wxWEBVIEW_ZOOM_TINY:
+        case wxWebViewZoom::Tiny:
             SetZoomFactor(0.4f);
             break;
 
-        case wxWEBVIEW_ZOOM_SMALL:
+        case wxWebViewZoom::Small:
             SetZoomFactor(0.7f);
             break;
 
-        case wxWEBVIEW_ZOOM_MEDIUM:
+        case wxWebViewZoom::Medium:
             SetZoomFactor(1.0f);
             break;
 
-        case wxWEBVIEW_ZOOM_LARGE:
+        case wxWebViewZoom::Large:
             SetZoomFactor(1.3f);
             break;
 
-        case wxWEBVIEW_ZOOM_LARGEST:
+        case wxWebViewZoom::Largest:
             SetZoomFactor(1.6f);
             break;
     }

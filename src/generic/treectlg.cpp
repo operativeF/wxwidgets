@@ -931,7 +931,7 @@ void wxGenericTreeCtrl::Init()
 
     m_dropEffectAboveItem = false;
 
-    m_dndEffect = NoEffect;
+    m_dndEffect = DNDEffect::None;
     m_dndEffectItem = nullptr;
 
     m_lastOnSame = false;
@@ -2690,7 +2690,7 @@ void wxGenericTreeCtrl::PaintItem(wxGenericTreeItem *item, wxDC& dc)
         // DnD visual effects
         switch (m_dndEffect)
         {
-            case BorderEffect:
+            case DNDEffect::Border:
             {
                 dc.SetBrush(*wxTRANSPARENT_BRUSH);
                 int w = item->GetWidth() + 2;
@@ -2698,14 +2698,14 @@ void wxGenericTreeCtrl::PaintItem(wxGenericTreeItem *item, wxDC& dc)
                 dc.DrawRectangle( item->GetX() - 1, item->GetY() - 1, w, h);
                 break;
             }
-            case AboveEffect:
+            case DNDEffect::Above:
             {
                 int x = item->GetX(),
                     y = item->GetY();
                 dc.DrawLine( x, y, x + item->GetWidth(), y);
                 break;
             }
-            case BelowEffect:
+            case DNDEffect::Below:
             {
                 int x = item->GetX(),
                     y = item->GetY();
@@ -2713,7 +2713,7 @@ void wxGenericTreeCtrl::PaintItem(wxGenericTreeItem *item, wxDC& dc)
                 dc.DrawLine( x, y, x + item->GetWidth(), y);
                 break;
             }
-            case NoEffect:
+            case DNDEffect::None:
                 break;
         }
     }
@@ -2948,14 +2948,14 @@ void wxGenericTreeCtrl::DrawBorder(const wxTreeItemId &item)
 
     wxGenericTreeItem *i = (wxGenericTreeItem*) item.m_pItem;
 
-    if (m_dndEffect == NoEffect)
+    if (m_dndEffect == DNDEffect::None)
     {
-        m_dndEffect = BorderEffect;
+        m_dndEffect = DNDEffect::Border;
         m_dndEffectItem = i;
     }
     else
     {
-        m_dndEffect = NoEffect;
+        m_dndEffect = DNDEffect::None;
         m_dndEffectItem = nullptr;
     }
 
@@ -2970,17 +2970,17 @@ void wxGenericTreeCtrl::DrawLine(const wxTreeItemId &item, bool below)
 
     wxGenericTreeItem *i = (wxGenericTreeItem*) item.m_pItem;
 
-    if (m_dndEffect == NoEffect)
+    if (m_dndEffect == DNDEffect::None)
     {
         if (below)
-            m_dndEffect = BelowEffect;
+            m_dndEffect = DNDEffect::Below;
         else
-            m_dndEffect = AboveEffect;
+            m_dndEffect = DNDEffect::Above;
         m_dndEffectItem = i;
     }
     else
     {
-        m_dndEffect = NoEffect;
+        m_dndEffect = DNDEffect::None;
         m_dndEffectItem = nullptr;
     }
 

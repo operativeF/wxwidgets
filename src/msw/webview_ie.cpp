@@ -77,7 +77,7 @@ wxVersionInfo wxWebViewFactoryIE::GetVersionInfo()
 #define WX_ERROR_CASE(error, wxerror) \
         case error: \
             event.SetString(#error); \
-            event.SetInt(wxerror); \
+            event.SetInt(static_cast<int>(wxerror)); \
             break;
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxWebViewIE, wxWebView);
@@ -125,7 +125,7 @@ bool wxWebViewIEImpl::Create()
     m_historyLoadingFromList = false;
     m_historyEnabled = true;
     m_historyPosition = -1;
-    m_zoomType = wxWEBVIEW_ZOOM_TYPE_TEXT;
+    m_zoomType = wxWebViewZoomType::Text;
     FindClear();
 
     if (::CoCreateInstance(CLSID_WebBrowser, nullptr,
@@ -291,47 +291,47 @@ wxWebViewZoom wxWebViewIE::GetZoom() const
 {
     switch( m_impl->m_zoomType )
     {
-        case wxWEBVIEW_ZOOM_TYPE_LAYOUT:
+        case wxWebViewZoomType::Layout:
             return GetIEOpticalZoom();
-        case wxWEBVIEW_ZOOM_TYPE_TEXT:
+        case wxWebViewZoomType::Text:
             return GetIETextZoom();
         default:
             wxFAIL;
     }
 
     //Dummy return to stop compiler warnings
-    return wxWEBVIEW_ZOOM_MEDIUM;
+    return wxWebViewZoom::Medium;
 
 }
 
 float wxWebViewIE::GetZoomFactor() const
 {
-    wxWebViewZoom level = wxWEBVIEW_ZOOM_MEDIUM;
+    wxWebViewZoom level = wxWebViewZoom::Medium;
     float zoomFactor = 1.0;
 
-    if (m_impl->m_zoomType == wxWEBVIEW_ZOOM_TYPE_LAYOUT)
+    if (m_impl->m_zoomType == wxWebViewZoomType::Layout)
     {
         zoomFactor = (float)GetIEOpticalZoomFactor();
         zoomFactor /= 100;
     }
-    else if (m_impl->m_zoomType == wxWEBVIEW_ZOOM_TYPE_TEXT)
+    else if (m_impl->m_zoomType == wxWebViewZoomType::Text)
     {
         level = GetIETextZoom();
         switch(level)
         {
-            case wxWEBVIEW_ZOOM_TINY:
+            case wxWebViewZoom::Tiny:
                 zoomFactor = 0.6f;
                 break;
-            case wxWEBVIEW_ZOOM_SMALL:
+            case wxWebViewZoom::Small:
                 zoomFactor = 0.8f;
                 break;
-            case wxWEBVIEW_ZOOM_MEDIUM:
+            case wxWebViewZoom::Medium:
                 zoomFactor = 1.0f;
                 break;
-            case wxWEBVIEW_ZOOM_LARGE:
+            case wxWebViewZoom::Large:
                 zoomFactor = 1.3f;
                 break;
-            case wxWEBVIEW_ZOOM_LARGEST:
+            case wxWebViewZoom::Largest:
                 zoomFactor = 1.6f;
                 break;
             default:
@@ -346,10 +346,10 @@ void wxWebViewIE::SetZoom(wxWebViewZoom zoom)
 {
     switch( m_impl->m_zoomType )
     {
-        case wxWEBVIEW_ZOOM_TYPE_LAYOUT:
+        case wxWebViewZoomType::Layout:
             SetIEOpticalZoom(zoom);
             break;
-        case wxWEBVIEW_ZOOM_TYPE_TEXT:
+        case wxWebViewZoomType::Text:
             SetIETextZoom(zoom);
             break;
         default:
@@ -359,34 +359,34 @@ void wxWebViewIE::SetZoom(wxWebViewZoom zoom)
 
 void wxWebViewIE::SetZoomFactor(float zoom)
 {
-    wxWebViewZoom level = wxWEBVIEW_ZOOM_MEDIUM;
+    wxWebViewZoom level = wxWebViewZoom::Medium;
 
-    if (m_impl->m_zoomType == wxWEBVIEW_ZOOM_TYPE_LAYOUT)
+    if (m_impl->m_zoomType == wxWebViewZoomType::Layout)
     {
         SetIEOpticalZoomFactor(zoom * 100.0F);
     }
-    else if (m_impl->m_zoomType == wxWEBVIEW_ZOOM_TYPE_TEXT)
+    else if (m_impl->m_zoomType == wxWebViewZoomType::Text)
     {
         //We make a somewhat arbitray map here, taken from values used by webkit
         if (zoom <= 65.0F)
         {
-            level = wxWEBVIEW_ZOOM_TINY;
+            level = wxWebViewZoom::Tiny;
         }
         else if (zoom > 65.0F && zoom <= 90.0F)
         {
-            level = wxWEBVIEW_ZOOM_SMALL;
+            level = wxWebViewZoom::Small;
         }
         else if (zoom > 90.0F && zoom <= 115.0F)
         {
-            level = wxWEBVIEW_ZOOM_MEDIUM;
+            level = wxWebViewZoom::Medium;
         }
         else if (zoom > 115.0F && zoom <= 145.0F)
         {
-            level = wxWEBVIEW_ZOOM_LARGE;
+            level = wxWebViewZoom::Large;
         }
         else
         {
-            level = wxWEBVIEW_ZOOM_LARGEST;
+            level = wxWebViewZoom::Largest;
         }
         SetIETextZoom(level);
     }
@@ -400,7 +400,7 @@ void wxWebViewIE::SetIETextZoom(wxWebViewZoom level)
     VARIANT zoomVariant;
     VariantInit (&zoomVariant);
     V_VT(&zoomVariant) = VT_I4;
-    V_I4(&zoomVariant) = level;
+    V_I4(&zoomVariant) = static_cast<int>(level);
 
 #if wxDEBUG_LEVEL
     HRESULT result =
@@ -436,19 +436,19 @@ void wxWebViewIE::SetIEOpticalZoom(wxWebViewZoom level)
     //We make a somewhat arbitray map here, taken from values used by webkit
     switch(level)
     {
-        case wxWEBVIEW_ZOOM_TINY:
+        case wxWebViewZoom::Tiny:
             zoom = 60;
             break;
-        case wxWEBVIEW_ZOOM_SMALL:
+        case wxWebViewZoom::Small:
             zoom = 80;
             break;
-        case wxWEBVIEW_ZOOM_MEDIUM:
+        case wxWebViewZoom::Medium:
             zoom = 100;
             break;
-        case wxWEBVIEW_ZOOM_LARGE:
+        case wxWebViewZoom::Large:
             zoom = 130;
             break;
-        case wxWEBVIEW_ZOOM_LARGEST:
+        case wxWebViewZoom::Largest:
             zoom = 160;
             break;
         default:
@@ -483,23 +483,23 @@ wxWebViewZoom wxWebViewIE::GetIEOpticalZoom() const
     //We make a somewhat arbitray map here, taken from values used by webkit
     if (zoom <= 65)
     {
-        return wxWEBVIEW_ZOOM_TINY;
+        return wxWebViewZoom::Tiny;
     }
     else if (zoom > 65 && zoom <= 90)
     {
-        return wxWEBVIEW_ZOOM_SMALL;
+        return wxWebViewZoom::Small;
     }
     else if (zoom > 90 && zoom <= 115)
     {
-        return wxWEBVIEW_ZOOM_MEDIUM;
+        return wxWebViewZoom::Medium;
     }
     else if (zoom > 115 && zoom <= 145)
     {
-        return wxWEBVIEW_ZOOM_LARGE;
+        return wxWebViewZoom::Large;
     }
     else /*if (zoom > 145) */ //Using else removes a compiler warning
     {
-        return wxWEBVIEW_ZOOM_LARGEST;
+        return wxWebViewZoom::Largest;
     }
 }
 
@@ -541,7 +541,7 @@ bool wxWebViewIE::CanSetZoomType(wxWebViewZoomType type) const
     key.QueryValue("Version", value);
 
     long version = wxAtoi(value.Left(1));
-    return !(version <= 6 && type == wxWEBVIEW_ZOOM_TYPE_LAYOUT);
+    return !(version <= 6 && type == wxWebViewZoomType::Layout);
 }
 
 void wxWebViewIE::Print()
@@ -643,10 +643,10 @@ void wxWebViewIE::Reload(wxWebViewReloadFlags flags)
 
     switch(flags)
     {
-        case wxWEBVIEW_RELOAD_DEFAULT:
+        case wxWebViewReloadFlags::Default:
             V_I2(&level) = REFRESH_NORMAL;
             break;
-        case wxWEBVIEW_RELOAD_NO_CACHE:
+        case wxWebViewReloadFlags::NoCache:
             V_I2(&level) = REFRESH_COMPLETELY;
             break;
         default:
@@ -1544,58 +1544,58 @@ void wxWebViewIE::onActiveXEvent(wxActiveXEvent& evt)
             switch (evt[3].GetLong())
             {
                 // 400 Error codes
-                WX_ERROR_CASE(HTTP_STATUS_BAD_REQUEST, wxWEBVIEW_NAV_ERR_REQUEST)
-                WX_ERROR_CASE(HTTP_STATUS_DENIED, wxWEBVIEW_NAV_ERR_AUTH)
-                WX_ERROR_CASE(HTTP_STATUS_PAYMENT_REQ, wxWEBVIEW_NAV_ERR_OTHER)
-                WX_ERROR_CASE(HTTP_STATUS_FORBIDDEN, wxWEBVIEW_NAV_ERR_AUTH)
-                WX_ERROR_CASE(HTTP_STATUS_NOT_FOUND, wxWEBVIEW_NAV_ERR_NOT_FOUND)
-                WX_ERROR_CASE(HTTP_STATUS_BAD_METHOD, wxWEBVIEW_NAV_ERR_REQUEST)
-                WX_ERROR_CASE(HTTP_STATUS_NONE_ACCEPTABLE, wxWEBVIEW_NAV_ERR_OTHER)
-                WX_ERROR_CASE(HTTP_STATUS_PROXY_AUTH_REQ, wxWEBVIEW_NAV_ERR_AUTH)
-                WX_ERROR_CASE(HTTP_STATUS_REQUEST_TIMEOUT, wxWEBVIEW_NAV_ERR_CONNECTION)
-                WX_ERROR_CASE(HTTP_STATUS_CONFLICT, wxWEBVIEW_NAV_ERR_REQUEST)
-                WX_ERROR_CASE(HTTP_STATUS_GONE, wxWEBVIEW_NAV_ERR_NOT_FOUND)
-                WX_ERROR_CASE(HTTP_STATUS_LENGTH_REQUIRED, wxWEBVIEW_NAV_ERR_REQUEST)
-                WX_ERROR_CASE(HTTP_STATUS_PRECOND_FAILED, wxWEBVIEW_NAV_ERR_REQUEST)
-                WX_ERROR_CASE(HTTP_STATUS_REQUEST_TOO_LARGE, wxWEBVIEW_NAV_ERR_REQUEST)
-                WX_ERROR_CASE(HTTP_STATUS_URI_TOO_LONG, wxWEBVIEW_NAV_ERR_REQUEST)
-                WX_ERROR_CASE(HTTP_STATUS_UNSUPPORTED_MEDIA, wxWEBVIEW_NAV_ERR_REQUEST)
-                WX_ERROR_CASE(HTTP_STATUS_RETRY_WITH, wxWEBVIEW_NAV_ERR_OTHER)
+                WX_ERROR_CASE(HTTP_STATUS_BAD_REQUEST, wxWebViewNavigationError::Request)
+                WX_ERROR_CASE(HTTP_STATUS_DENIED, wxWebViewNavigationError::Auth)
+                WX_ERROR_CASE(HTTP_STATUS_PAYMENT_REQ, wxWebViewNavigationError::Other)
+                WX_ERROR_CASE(HTTP_STATUS_FORBIDDEN, wxWebViewNavigationError::Auth)
+                WX_ERROR_CASE(HTTP_STATUS_NOT_FOUND, wxWebViewNavigationError::NotFound)
+                WX_ERROR_CASE(HTTP_STATUS_BAD_METHOD, wxWebViewNavigationError::Request)
+                WX_ERROR_CASE(HTTP_STATUS_NONE_ACCEPTABLE, wxWebViewNavigationError::Other)
+                WX_ERROR_CASE(HTTP_STATUS_PROXY_AUTH_REQ, wxWebViewNavigationError::Auth)
+                WX_ERROR_CASE(HTTP_STATUS_REQUEST_TIMEOUT, wxWebViewNavigationError::Connection)
+                WX_ERROR_CASE(HTTP_STATUS_CONFLICT, wxWebViewNavigationError::Request)
+                WX_ERROR_CASE(HTTP_STATUS_GONE, wxWebViewNavigationError::NotFound)
+                WX_ERROR_CASE(HTTP_STATUS_LENGTH_REQUIRED, wxWebViewNavigationError::Request)
+                WX_ERROR_CASE(HTTP_STATUS_PRECOND_FAILED, wxWebViewNavigationError::Request)
+                WX_ERROR_CASE(HTTP_STATUS_REQUEST_TOO_LARGE, wxWebViewNavigationError::Request)
+                WX_ERROR_CASE(HTTP_STATUS_URI_TOO_LONG, wxWebViewNavigationError::Request)
+                WX_ERROR_CASE(HTTP_STATUS_UNSUPPORTED_MEDIA, wxWebViewNavigationError::Request)
+                WX_ERROR_CASE(HTTP_STATUS_RETRY_WITH, wxWebViewNavigationError::Other)
 
                 // 500 - Error codes
-                WX_ERROR_CASE(HTTP_STATUS_SERVER_ERROR, wxWEBVIEW_NAV_ERR_CONNECTION)
-                WX_ERROR_CASE(HTTP_STATUS_NOT_SUPPORTED, wxWEBVIEW_NAV_ERR_CONNECTION)
-                WX_ERROR_CASE(HTTP_STATUS_BAD_GATEWAY, wxWEBVIEW_NAV_ERR_CONNECTION)
-                WX_ERROR_CASE(HTTP_STATUS_SERVICE_UNAVAIL, wxWEBVIEW_NAV_ERR_CONNECTION)
-                WX_ERROR_CASE(HTTP_STATUS_GATEWAY_TIMEOUT, wxWEBVIEW_NAV_ERR_CONNECTION)
-                WX_ERROR_CASE(HTTP_STATUS_VERSION_NOT_SUP, wxWEBVIEW_NAV_ERR_REQUEST)
+                WX_ERROR_CASE(HTTP_STATUS_SERVER_ERROR, wxWebViewNavigationError::Connection)
+                WX_ERROR_CASE(HTTP_STATUS_NOT_SUPPORTED, wxWebViewNavigationError::Connection)
+                WX_ERROR_CASE(HTTP_STATUS_BAD_GATEWAY, wxWebViewNavigationError::Connection)
+                WX_ERROR_CASE(HTTP_STATUS_SERVICE_UNAVAIL, wxWebViewNavigationError::Connection)
+                WX_ERROR_CASE(HTTP_STATUS_GATEWAY_TIMEOUT, wxWebViewNavigationError::Connection)
+                WX_ERROR_CASE(HTTP_STATUS_VERSION_NOT_SUP, wxWebViewNavigationError::Request)
 
                 // URL Moniker error codes
-                WX_ERROR_CASE(INET_E_INVALID_URL, wxWEBVIEW_NAV_ERR_REQUEST)
-                WX_ERROR_CASE(INET_E_NO_SESSION, wxWEBVIEW_NAV_ERR_CONNECTION)
-                WX_ERROR_CASE(INET_E_CANNOT_CONNECT, wxWEBVIEW_NAV_ERR_CONNECTION)
-                WX_ERROR_CASE(INET_E_RESOURCE_NOT_FOUND, wxWEBVIEW_NAV_ERR_NOT_FOUND)
-                WX_ERROR_CASE(INET_E_OBJECT_NOT_FOUND, wxWEBVIEW_NAV_ERR_NOT_FOUND)
-                WX_ERROR_CASE(INET_E_DATA_NOT_AVAILABLE, wxWEBVIEW_NAV_ERR_NOT_FOUND)
-                WX_ERROR_CASE(INET_E_DOWNLOAD_FAILURE, wxWEBVIEW_NAV_ERR_CONNECTION)
-                WX_ERROR_CASE(INET_E_AUTHENTICATION_REQUIRED, wxWEBVIEW_NAV_ERR_AUTH)
-                WX_ERROR_CASE(INET_E_NO_VALID_MEDIA, wxWEBVIEW_NAV_ERR_REQUEST)
-                WX_ERROR_CASE(INET_E_CONNECTION_TIMEOUT, wxWEBVIEW_NAV_ERR_CONNECTION)
-                WX_ERROR_CASE(INET_E_INVALID_REQUEST, wxWEBVIEW_NAV_ERR_REQUEST)
-                WX_ERROR_CASE(INET_E_UNKNOWN_PROTOCOL, wxWEBVIEW_NAV_ERR_REQUEST)
-                WX_ERROR_CASE(INET_E_SECURITY_PROBLEM, wxWEBVIEW_NAV_ERR_SECURITY)
-                WX_ERROR_CASE(INET_E_CANNOT_LOAD_DATA, wxWEBVIEW_NAV_ERR_OTHER)
-                WX_ERROR_CASE(INET_E_REDIRECT_FAILED, wxWEBVIEW_NAV_ERR_OTHER)
-                WX_ERROR_CASE(INET_E_REDIRECT_TO_DIR, wxWEBVIEW_NAV_ERR_REQUEST)
-                WX_ERROR_CASE(INET_E_CANNOT_LOCK_REQUEST, wxWEBVIEW_NAV_ERR_OTHER)
-                WX_ERROR_CASE(INET_E_USE_EXTEND_BINDING, wxWEBVIEW_NAV_ERR_OTHER)
-                WX_ERROR_CASE(INET_E_TERMINATED_BIND, wxWEBVIEW_NAV_ERR_OTHER)
-                WX_ERROR_CASE(INET_E_INVALID_CERTIFICATE, wxWEBVIEW_NAV_ERR_CERTIFICATE)
-                WX_ERROR_CASE(INET_E_CODE_DOWNLOAD_DECLINED, wxWEBVIEW_NAV_ERR_USER_CANCELLED)
-                WX_ERROR_CASE(INET_E_RESULT_DISPATCHED, wxWEBVIEW_NAV_ERR_OTHER)
-                WX_ERROR_CASE(INET_E_CANNOT_REPLACE_SFP_FILE, wxWEBVIEW_NAV_ERR_SECURITY)
-                WX_ERROR_CASE(INET_E_CODE_INSTALL_BLOCKED_BY_HASH_POLICY, wxWEBVIEW_NAV_ERR_SECURITY)
-                WX_ERROR_CASE(INET_E_CODE_INSTALL_SUPPRESSED, wxWEBVIEW_NAV_ERR_SECURITY)
+                WX_ERROR_CASE(INET_E_INVALID_URL, wxWebViewNavigationError::Request)
+                WX_ERROR_CASE(INET_E_NO_SESSION, wxWebViewNavigationError::Connection)
+                WX_ERROR_CASE(INET_E_CANNOT_CONNECT, wxWebViewNavigationError::Connection)
+                WX_ERROR_CASE(INET_E_RESOURCE_NOT_FOUND, wxWebViewNavigationError::NotFound)
+                WX_ERROR_CASE(INET_E_OBJECT_NOT_FOUND, wxWebViewNavigationError::NotFound)
+                WX_ERROR_CASE(INET_E_DATA_NOT_AVAILABLE, wxWebViewNavigationError::NotFound)
+                WX_ERROR_CASE(INET_E_DOWNLOAD_FAILURE, wxWebViewNavigationError::Connection)
+                WX_ERROR_CASE(INET_E_AUTHENTICATION_REQUIRED, wxWebViewNavigationError::Auth)
+                WX_ERROR_CASE(INET_E_NO_VALID_MEDIA, wxWebViewNavigationError::Request)
+                WX_ERROR_CASE(INET_E_CONNECTION_TIMEOUT, wxWebViewNavigationError::Connection)
+                WX_ERROR_CASE(INET_E_INVALID_REQUEST, wxWebViewNavigationError::Request)
+                WX_ERROR_CASE(INET_E_UNKNOWN_PROTOCOL, wxWebViewNavigationError::Request)
+                WX_ERROR_CASE(INET_E_SECURITY_PROBLEM, wxWebViewNavigationError::Security)
+                WX_ERROR_CASE(INET_E_CANNOT_LOAD_DATA, wxWebViewNavigationError::Other)
+                WX_ERROR_CASE(INET_E_REDIRECT_FAILED, wxWebViewNavigationError::Other)
+                WX_ERROR_CASE(INET_E_REDIRECT_TO_DIR, wxWebViewNavigationError::Request)
+                WX_ERROR_CASE(INET_E_CANNOT_LOCK_REQUEST, wxWebViewNavigationError::Other)
+                WX_ERROR_CASE(INET_E_USE_EXTEND_BINDING, wxWebViewNavigationError::Other)
+                WX_ERROR_CASE(INET_E_TERMINATED_BIND, wxWebViewNavigationError::Other)
+                WX_ERROR_CASE(INET_E_INVALID_CERTIFICATE, wxWebViewNavigationError::Certificate)
+                WX_ERROR_CASE(INET_E_CODE_DOWNLOAD_DECLINED, wxWebViewNavigationError::Cancelled)
+                WX_ERROR_CASE(INET_E_RESULT_DISPATCHED, wxWebViewNavigationError::Other)
+                WX_ERROR_CASE(INET_E_CANNOT_REPLACE_SFP_FILE, wxWebViewNavigationError::Security)
+                WX_ERROR_CASE(INET_E_CODE_INSTALL_BLOCKED_BY_HASH_POLICY, wxWebViewNavigationError::Security)
+                WX_ERROR_CASE(INET_E_CODE_INSTALL_SUPPRESSED, wxWebViewNavigationError::Security)
             }
             HandleWindowEvent(event);
             break;
@@ -1605,10 +1605,10 @@ void wxWebViewIE::onActiveXEvent(wxActiveXEvent& evt)
             wxString url = evt[4].GetString();
             long flags = evt[2].GetLong();
 
-            wxWebViewNavigationActionFlags navFlags = wxWEBVIEW_NAV_ACTION_OTHER;
+            wxWebViewNavigationActionFlags navFlags = wxWebViewNavigationActionFlags::Other;
 
             if(flags & wxNWMF_USERINITED || flags & wxNWMF_USERREQUESTED)
-                navFlags = wxWEBVIEW_NAV_ACTION_USER;
+                navFlags = wxWebViewNavigationActionFlags::User;
 
             wxWebViewEvent event(wxEVT_WEBVIEW_NEWWINDOW,
                                  GetId(), url, "", navFlags);

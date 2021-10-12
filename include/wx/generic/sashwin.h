@@ -47,6 +47,7 @@ struct WXDLLIMPEXP_CORE wxSashEdge
  * wxSashWindow flags
  */
 
+// FIXME: Bitfield
 #define wxSW_NOBORDER         0x0000
 //#define wxSW_3D               0x0010
 #define wxSW_BORDER           0x0020
@@ -199,10 +200,10 @@ class WXDLLIMPEXP_FWD_CORE wxSashEvent;
 
 wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_SASH_DRAGGED, wxSashEvent );
 
-enum wxSashDragStatus
+enum class wxSashDragStatus
 {
-    wxSASH_STATUS_OK,
-    wxSASH_STATUS_OUT_OF_RANGE
+    OK,
+    OutOfRange
 };
 
 class WXDLLIMPEXP_CORE wxSashEvent: public wxCommandEvent

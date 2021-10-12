@@ -233,22 +233,22 @@ HRESULT wxWebViewEdgeImpl::OnNavigationCompleted(ICoreWebView2* WXUNUSED(sender)
         {
             switch (status)
             {
-                WX_ERROR2_CASE(COREWEBVIEW2_WEB_ERROR_STATUS_UNKNOWN, wxWEBVIEW_NAV_ERR_OTHER)
-                WX_ERROR2_CASE(COREWEBVIEW2_WEB_ERROR_STATUS_CERTIFICATE_COMMON_NAME_IS_INCORRECT, wxWEBVIEW_NAV_ERR_CERTIFICATE)
-                WX_ERROR2_CASE(COREWEBVIEW2_WEB_ERROR_STATUS_CERTIFICATE_EXPIRED, wxWEBVIEW_NAV_ERR_CERTIFICATE)
-                WX_ERROR2_CASE(COREWEBVIEW2_WEB_ERROR_STATUS_CLIENT_CERTIFICATE_CONTAINS_ERRORS, wxWEBVIEW_NAV_ERR_CERTIFICATE)
-                WX_ERROR2_CASE(COREWEBVIEW2_WEB_ERROR_STATUS_CERTIFICATE_REVOKED, wxWEBVIEW_NAV_ERR_CERTIFICATE)
-                WX_ERROR2_CASE(COREWEBVIEW2_WEB_ERROR_STATUS_CERTIFICATE_IS_INVALID, wxWEBVIEW_NAV_ERR_CERTIFICATE)
-                WX_ERROR2_CASE(COREWEBVIEW2_WEB_ERROR_STATUS_SERVER_UNREACHABLE, wxWEBVIEW_NAV_ERR_CONNECTION)
-                WX_ERROR2_CASE(COREWEBVIEW2_WEB_ERROR_STATUS_TIMEOUT, wxWEBVIEW_NAV_ERR_CONNECTION)
-                WX_ERROR2_CASE(COREWEBVIEW2_WEB_ERROR_STATUS_ERROR_HTTP_INVALID_SERVER_RESPONSE, wxWEBVIEW_NAV_ERR_CONNECTION)
-                WX_ERROR2_CASE(COREWEBVIEW2_WEB_ERROR_STATUS_CONNECTION_ABORTED, wxWEBVIEW_NAV_ERR_CONNECTION)
-                WX_ERROR2_CASE(COREWEBVIEW2_WEB_ERROR_STATUS_CONNECTION_RESET, wxWEBVIEW_NAV_ERR_CONNECTION)
-                WX_ERROR2_CASE(COREWEBVIEW2_WEB_ERROR_STATUS_DISCONNECTED, wxWEBVIEW_NAV_ERR_CONNECTION)
-                WX_ERROR2_CASE(COREWEBVIEW2_WEB_ERROR_STATUS_CANNOT_CONNECT, wxWEBVIEW_NAV_ERR_CONNECTION)
-                WX_ERROR2_CASE(COREWEBVIEW2_WEB_ERROR_STATUS_HOST_NAME_NOT_RESOLVED, wxWEBVIEW_NAV_ERR_CONNECTION)
-                WX_ERROR2_CASE(COREWEBVIEW2_WEB_ERROR_STATUS_REDIRECT_FAILED, wxWEBVIEW_NAV_ERR_OTHER)
-                WX_ERROR2_CASE(COREWEBVIEW2_WEB_ERROR_STATUS_UNEXPECTED_ERROR, wxWEBVIEW_NAV_ERR_OTHER)
+                WX_ERROR2_CASE(COREWEBVIEW2_WEB_ERROR_STATUS_UNKNOWN, wxWebViewNavigationError::Other)
+                WX_ERROR2_CASE(COREWEBVIEW2_WEB_ERROR_STATUS_CERTIFICATE_COMMON_NAME_IS_INCORRECT, wxWebViewNavigationError::Certificate)
+                WX_ERROR2_CASE(COREWEBVIEW2_WEB_ERROR_STATUS_CERTIFICATE_EXPIRED, wxWebViewNavigationError::Certificate)
+                WX_ERROR2_CASE(COREWEBVIEW2_WEB_ERROR_STATUS_CLIENT_CERTIFICATE_CONTAINS_ERRORS, wxWebViewNavigationError::Certificate)
+                WX_ERROR2_CASE(COREWEBVIEW2_WEB_ERROR_STATUS_CERTIFICATE_REVOKED, wxWebViewNavigationError::Certificate)
+                WX_ERROR2_CASE(COREWEBVIEW2_WEB_ERROR_STATUS_CERTIFICATE_IS_INVALID, wxWebViewNavigationError::Certificate)
+                WX_ERROR2_CASE(COREWEBVIEW2_WEB_ERROR_STATUS_SERVER_UNREACHABLE, wxWebViewNavigationError::Connection)
+                WX_ERROR2_CASE(COREWEBVIEW2_WEB_ERROR_STATUS_TIMEOUT, wxWebViewNavigationError::Connection)
+                WX_ERROR2_CASE(COREWEBVIEW2_WEB_ERROR_STATUS_ERROR_HTTP_INVALID_SERVER_RESPONSE, wxWebViewNavigationError::Connection)
+                WX_ERROR2_CASE(COREWEBVIEW2_WEB_ERROR_STATUS_CONNECTION_ABORTED, wxWebViewNavigationError::Connection)
+                WX_ERROR2_CASE(COREWEBVIEW2_WEB_ERROR_STATUS_CONNECTION_RESET, wxWebViewNavigationError::Connection)
+                WX_ERROR2_CASE(COREWEBVIEW2_WEB_ERROR_STATUS_DISCONNECTED, wxWebViewNavigationError::Connection)
+                WX_ERROR2_CASE(COREWEBVIEW2_WEB_ERROR_STATUS_CANNOT_CONNECT, wxWebViewNavigationError::Connection)
+                WX_ERROR2_CASE(COREWEBVIEW2_WEB_ERROR_STATUS_HOST_NAME_NOT_RESOLVED, wxWebViewNavigationError::Connection)
+                WX_ERROR2_CASE(COREWEBVIEW2_WEB_ERROR_STATUS_REDIRECT_FAILED, wxWebViewNavigationError::Other)
+                WX_ERROR2_CASE(COREWEBVIEW2_WEB_ERROR_STATUS_UNEXPECTED_ERROR, wxWebViewNavigationError::Other)
             case COREWEBVIEW2_WEB_ERROR_STATUS_OPERATION_CANCELED:
                 // This status is triggered by vetoing a wxEVT_WEBVIEW_NAVIGATING event
                 ignoreStatus = true;
@@ -290,11 +290,11 @@ HRESULT wxWebViewEdgeImpl::OnNewWindowRequested(ICoreWebView2* WXUNUSED(sender),
     wxString evtURL;
     if (SUCCEEDED(args->get_Uri(&uri)))
         evtURL = wxString(uri);
-    wxWebViewNavigationActionFlags navFlags = wxWEBVIEW_NAV_ACTION_OTHER;
+    wxWebViewNavigationActionFlags navFlags = wxWebViewNavigationActionFlags::Other;
 
     BOOL isUserInitiated;
     if (SUCCEEDED(args->get_IsUserInitiated(&isUserInitiated)) && isUserInitiated)
-        navFlags = wxWEBVIEW_NAV_ACTION_USER;
+        navFlags = wxWebViewNavigationActionFlags::User;
 
     wxWebViewEvent evt(wxEVT_WEBVIEW_NEWWINDOW, m_ctrl->GetId(), evtURL, wxString(), navFlags);
     m_ctrl->HandleWindowEvent(evt);
@@ -352,7 +352,7 @@ wxWebViewEdgeImpl::OnWebMessageReceived(ICoreWebView2* WXUNUSED(sender),
 
     wxWebViewEvent event(wxEVT_WEBVIEW_SCRIPT_MESSAGE_RECEIVED, m_ctrl->GetId(),
         m_ctrl->GetCurrentURL(), wxString(),
-        wxWEBVIEW_NAV_ACTION_NONE, m_scriptMsgHandlerName);
+        wxWebViewNavigationActionFlags::None, m_scriptMsgHandlerName);
     event.SetEventObject(m_ctrl);
 
     // Try to decode JSON string or return original
@@ -686,17 +686,17 @@ wxString wxWebViewEdge::GetCurrentTitle() const
 
 void wxWebViewEdge::SetZoomType(wxWebViewZoomType)
 {
-    // only wxWEBVIEW_ZOOM_TYPE_LAYOUT is supported
+    // only wxWebViewZoomType::Layout is supported
 }
 
 wxWebViewZoomType wxWebViewEdge::GetZoomType() const
 {
-    return wxWEBVIEW_ZOOM_TYPE_LAYOUT;
+    return wxWebViewZoomType::Layout;
 }
 
 bool wxWebViewEdge::CanSetZoomType(wxWebViewZoomType type) const
 {
-    return (type == wxWEBVIEW_ZOOM_TYPE_LAYOUT);
+    return (type == wxWebViewZoomType::Layout);
 }
 
 void wxWebViewEdge::Print()
@@ -918,7 +918,7 @@ bool wxWebViewEdge::AddUserScript(const wxString& javascript,
     wxWebViewUserScriptInjectionTime injectionTime)
 {
     // Currently only AT_DOCUMENT_START is supported
-    if (injectionTime != wxWEBVIEW_INJECT_AT_DOCUMENT_START)
+    if (injectionTime != wxWebViewUserScriptInjectionTime::DocStart)
         return false;
 
     if (m_impl->m_webView)

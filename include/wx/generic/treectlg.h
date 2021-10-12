@@ -262,7 +262,16 @@ protected:
     wxGenericTreeItem   *m_oldSelection;
     wxGenericTreeItem   *m_underMouse; // for visual effects
 
-    enum { NoEffect, BorderEffect, AboveEffect, BelowEffect } m_dndEffect;
+    enum class DNDEffect
+    {
+        None,
+        Border,
+        Above,
+        Below
+    };
+    
+    DNDEffect m_dndEffect;
+    
     wxGenericTreeItem   *m_dndEffectItem;
 
     wxTreeTextCtrl      *m_textCtrl;

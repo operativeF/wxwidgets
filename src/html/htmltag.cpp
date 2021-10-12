@@ -37,7 +37,7 @@ struct wxHtmlCacheItem
     wxString::const_iterator Key;
 
     // Tag type
-    enum Type
+    enum class Type
     {
         Normal, // normal tag with a matching ending tag
         NoMatchingEndingTag, // there's no ending tag for this tag

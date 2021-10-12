@@ -25,10 +25,10 @@ wxString wxStockPreferencesPage::GetName() const
     wxString name;
     switch ( m_kind )
     {
-        case Kind_General:
+        case Kind::General:
             name = _("General");
             break;
-        case Kind_Advanced:
+        case Kind::Advanced:
             name = _("Advanced");
             break;
     }

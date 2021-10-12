@@ -135,7 +135,7 @@ namespace
 class wxFileHandle
 {
 public:
-    enum OpenMode
+    enum class OpenMode
     {
         ReadAttr,
         WriteAttr
@@ -149,7 +149,7 @@ public:
         : m_hFile(::CreateFile
                     (
                      filename.t_str(),             // name
-                     mode == ReadAttr ? FILE_READ_ATTRIBUTES    // access mask
+                     mode == OpenMode::ReadAttr ? FILE_READ_ATTRIBUTES    // access mask
                                       : FILE_WRITE_ATTRIBUTES,
                      FILE_SHARE_READ |              // sharing mode
                      FILE_SHARE_WRITE,              // (allow everything)
@@ -161,7 +161,7 @@ public:
     {
         if ( m_hFile == INVALID_HANDLE_VALUE )
         {
-            if ( mode == ReadAttr )
+            if ( mode == OpenMode::ReadAttr )
             {
                 wxLogSysError(_("Failed to open '%s' for reading"),
                               filename.c_str());
@@ -2664,7 +2664,7 @@ bool wxFileName::SetTimes(const wxDateTime *dtAccess,
         flags = 0;
     }
 
-    wxFileHandle fh(path, wxFileHandle::WriteAttr, flags);
+    wxFileHandle fh(path, wxFileHandle::OpenMode::WriteAttr, flags);
     if ( fh.IsOk() )
     {
         if ( ::SetFileTime(fh,
@@ -2748,7 +2748,7 @@ bool wxFileName::GetTimes(wxDateTime *dtAccess,
     }
     else // file
     {
-        wxFileHandle fh(GetFullPath(), wxFileHandle::ReadAttr);
+        wxFileHandle fh(GetFullPath(), wxFileHandle::OpenMode::ReadAttr);
         if ( fh.IsOk() )
         {
             ok = ::GetFileTime(fh,
@@ -2817,7 +2817,7 @@ wxULongLong wxFileName::GetSize(const wxString &filename)
         return wxInvalidSize;
 
 #if defined(__WIN32__)
-    wxFileHandle f(filename, wxFileHandle::ReadAttr);
+    wxFileHandle f(filename, wxFileHandle::OpenMode::ReadAttr);
     if (!f.IsOk())
         return wxInvalidSize;
 

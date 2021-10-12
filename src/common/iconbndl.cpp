@@ -249,14 +249,14 @@ void wxIconBundle::AddIcon(const std::string& resourceName, WXHINSTANCE module)
 
 #endif // defined(__WINDOWS__) && wxUSE_ICO_CUR
 
-wxIcon wxIconBundle::GetIcon(const wxSize& size, unsigned int flags) const
+wxIcon wxIconBundle::GetIcon(const wxSize& size, IconFallback flags) const
 {
     wxASSERT( size == wxDefaultSize || (size.x >= 0 && size.y > 0) );
 
-    // We need the standard system icon size when using FALLBACK_SYSTEM.
+    // We need the standard system icon size when using IconFallback::System.
     wxCoord sysX = 0,
             sysY = 0;
-    if ( flags & FALLBACK_SYSTEM )
+    if ( flags == IconFallback::System )
     {
         wxWindow* win = wxApp::GetMainTopWindow();
         sysX = wxSystemSettings::GetMetric(wxSYS_ICON_X, win);
@@ -268,8 +268,8 @@ wxIcon wxIconBundle::GetIcon(const wxSize& size, unsigned int flags) const
     wxCoord sizeY = size.y;
     if ( size == wxDefaultSize )
     {
-        wxASSERT_MSG( flags == FALLBACK_SYSTEM,
-                      wxS("Must have valid size if not using FALLBACK_SYSTEM") );
+        wxASSERT_MSG( flags == IconFallback::System,
+                      wxS("Must have valid size if not using IconFallback::System") );
 
         sizeX = sysX;
         sizeY = sysY;
@@ -279,12 +279,12 @@ wxIcon wxIconBundle::GetIcon(const wxSize& size, unsigned int flags) const
         if ( sizeX == -1 && sizeY == -1 )
         {
             sizeX = sizeY = 32;
-            flags |= FALLBACK_NEAREST_LARGER;
+            flags = IconFallback::NearestLarger;
         }
     }
 
     // Iterate over all icons searching for the exact match or the closest icon
-    // for FALLBACK_NEAREST_LARGER.
+    // for IconFallback::NearestLarger.
     wxIcon iconBest;
     int bestDiff = 0;
     bool bestIsLarger = false;
@@ -308,7 +308,7 @@ wxIcon wxIconBundle::GetIcon(const wxSize& size, unsigned int flags) const
             break;
         }
 
-        if ( flags & FALLBACK_SYSTEM )
+        if ( flags == IconFallback::System )
         {
             if ( sx == sysX && sy == sysY )
             {
@@ -318,7 +318,7 @@ wxIcon wxIconBundle::GetIcon(const wxSize& size, unsigned int flags) const
             }
         }
 
-        if ( !bestIsSystem && (flags & FALLBACK_NEAREST_LARGER) )
+        if ( !bestIsSystem && (flags == IconFallback::NearestLarger) )
         {
             const bool iconLarger = (sx >= sizeX) && (sy >= sizeY);
             const int iconDiff = std::abs(sx - sizeX) + std::abs(sy - sizeY);
@@ -344,7 +344,7 @@ wxIcon wxIconBundle::GetIcon(const wxSize& size, unsigned int flags) const
 
 wxIcon wxIconBundle::GetIconOfExactSize(const wxSize& size) const
 {
-    return GetIcon(size, FALLBACK_NONE);
+    return GetIcon(size, IconFallback::None);
 }
 
 void wxIconBundle::AddIcon(const wxIcon& icon)

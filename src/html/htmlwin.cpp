@@ -204,7 +204,7 @@ void wxHtmlWindowMouseHelper::HandleIdle(wxHtmlCell *rootCell,
             cur = cell->GetMouseCursorAt(m_interface, pos);
         else
             cur = m_interface->GetHTMLCursor(
-                        wxHtmlWindowInterface::HTMLCursor_Default);
+                        wxHtmlWindowInterface::HTMLCursor::Default);
 
         m_interface->GetHTMLWindow()->SetCursor(cur);
 
@@ -1855,17 +1855,17 @@ wxCursor wxHtmlWindow::GetDefaultHTMLCursor(HTMLCursor type)
 {
     switch (type)
     {
-        case HTMLCursor_Link:
+        case HTMLCursor::Link:
             if ( !ms_cursorLink )
                 ms_cursorLink = new wxCursor(wxCURSOR_HAND);
             return *ms_cursorLink;
 
-        case HTMLCursor_Text:
+        case HTMLCursor::Text:
             if ( !ms_cursorText )
                 ms_cursorText = new wxCursor(wxCURSOR_IBEAM);
             return *ms_cursorText;
 
-        case HTMLCursor_Default:
+        case HTMLCursor::Default:
         default:
             if ( !ms_cursorDefault )
                 ms_cursorDefault = new wxCursor(wxCURSOR_ARROW);
@@ -1883,17 +1883,17 @@ void wxHtmlWindow::SetDefaultHTMLCursor(HTMLCursor type, const wxCursor& cursor)
 {
     switch (type)
     {
-        case HTMLCursor_Link:
+        case HTMLCursor::Link:
             delete ms_cursorLink;
             ms_cursorLink = new wxCursor(cursor);
             return;
 
-        case HTMLCursor_Text:
+        case HTMLCursor::Text:
             delete ms_cursorText;
             ms_cursorText = new wxCursor(cursor);
             return;
 
-        case HTMLCursor_Default:
+        case HTMLCursor::Default:
         default:
             delete ms_cursorText;
             ms_cursorDefault = new wxCursor(cursor);

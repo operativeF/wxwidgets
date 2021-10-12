@@ -1001,7 +1001,7 @@ bool wxTopLevelWindowMSW::DoSelectAndSetIcon(const wxIconBundle& icons,
 {
     const wxSize size(wxGetSystemMetrics(smX, this), wxGetSystemMetrics(smY, this));
 
-    wxIcon icon = icons.GetIcon(size, wxIconBundle::FALLBACK_NEAREST_LARGER);
+    wxIcon icon = icons.GetIcon(size, wxIconBundle::IconFallback::NearestLarger);
 
     if ( !icon.IsOk() )
         return false;

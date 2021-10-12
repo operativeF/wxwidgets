@@ -29,19 +29,19 @@ class WXDLLIMPEXP_CORE wxIconBundle : public wxGDIObject
 public:
     // Flags that determine what happens if GetIcon() doesn't find the icon of
     // exactly the requested size.
-    enum
+    enum class IconFallback
     {
         // Return invalid icon if exact size is not found.
-        FALLBACK_NONE = 0,
+        None,
 
         // Return the icon of the system icon size if exact size is not found.
         // May be combined with other non-NONE enum elements to determine what
         // happens if the system icon size is not found neither.
-        FALLBACK_SYSTEM = 1,
+        System,
 
         // Return the icon of closest larger size or, if there is no icon of
         // larger size in the bundle, the closest icon of smaller size.
-        FALLBACK_NEAREST_LARGER = 2
+        NearestLarger
     };
 
     wxIconBundle() = default;
@@ -86,11 +86,11 @@ public:
 
     // returns the icon with the given size; if no such icon exists,
     // behavior is specified by the flags.
-    wxIcon GetIcon(const wxSize& size, unsigned int flags = FALLBACK_SYSTEM) const;
+    wxIcon GetIcon(const wxSize& size, IconFallback flags = IconFallback::System) const;
 
     // equivalent to GetIcon(wxSize(size, size))
     wxIcon GetIcon(wxCoord size = wxDefaultCoord,
-                   unsigned int flags = FALLBACK_SYSTEM) const
+                   IconFallback flags = IconFallback::System) const
         { return GetIcon(wxSize(size, size), flags); }
 
     // returns the icon exactly of the specified size or wxNullIcon if no icon

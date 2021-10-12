@@ -55,7 +55,7 @@ public:
     void ClearHistory() override;
     void EnableHistory(bool enable = true) override;
     void Stop() override;
-    void Reload(wxWebViewReloadFlags flags = wxWEBVIEW_RELOAD_DEFAULT) override;
+    void Reload(wxWebViewReloadFlags flags = wxWebViewReloadFlags::Default) override;
 
     bool IsBusy() const override;
     wxString GetCurrentURL() const override;
@@ -92,7 +92,7 @@ public:
     bool AddScriptMessageHandler(const wxString& name) override;
     bool RemoveScriptMessageHandler(const wxString& name) override;
     virtual bool AddUserScript(const wxString& javascript,
-        wxWebViewUserScriptInjectionTime injectionTime = wxWEBVIEW_INJECT_AT_DOCUMENT_START) override;
+        wxWebViewUserScriptInjectionTime injectionTime = wxWebViewUserScriptInjectionTime::DocStart) override;
     void RemoveAllUserScripts() override;
 
     void RegisterHandler(std::shared_ptr<wxWebViewHandler> handler) override;

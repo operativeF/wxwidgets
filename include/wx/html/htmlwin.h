@@ -110,14 +110,14 @@ public:
     virtual void SetHTMLStatusText(const std::string& text) = 0;
 
     /// Type of mouse cursor
-    enum HTMLCursor
+    enum class HTMLCursor
     {
         /// Standard mouse cursor (typically an arrow)
-        HTMLCursor_Default,
+        Default,
         /// Cursor shown over links
-        HTMLCursor_Link,
+        Link,
         /// Cursor shown over selectable text
-        HTMLCursor_Text
+        Text
     };
 
     /**

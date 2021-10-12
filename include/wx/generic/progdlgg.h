@@ -69,11 +69,11 @@ public:
 
     // This enum is an implementation detail and should not be used
     // by user code.
-    enum State
+    enum class State
     {
-        Uncancelable = -1,   // dialog can't be canceled
-        Canceled,            // can be cancelled and, in fact, was
-        Continue,            // can be cancelled but wasn't
+        Uncancelable,   // dialog can't be canceled
+        Canceled,       // can be cancelled and, in fact, was
+        Continue,       // can be cancelled but wasn't
         Finished,            // finished, waiting to be removed from screen
         Dismissed            // was closed by user after finishing
     };
@@ -199,7 +199,7 @@ protected:
     unsigned long m_break{0};
 
     // continue processing or not (return value for Update())
-    State m_state{Uncancelable};
+    State m_state{State::Uncancelable};
 
 private:
     // skip some portion

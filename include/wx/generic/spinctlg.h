@@ -115,10 +115,10 @@ protected:
     void DoEnable(bool enable) override;
 #endif // __WXMSW__
 
-    enum SendEvent
+    enum class SendEvent
     {
-        SendEvent_None,
-        SendEvent_Text
+        None,
+        Text
     };
 
     // generic double valued functions
@@ -208,7 +208,7 @@ public:
 
         bool ok = wxTextCtrl::Create(parent, id, value, pos, size, style,
                                      wxDefaultValidator, name);
-        DoSetValue(initial, SendEvent_None);
+        DoSetValue(initial, SendEvent::None);
 
         return ok;
     }
@@ -248,11 +248,11 @@ protected:
         wxString str(wxString::Format(m_format, val));
         switch ( sendEvent )
         {
-            case SendEvent_None:
+            case SendEvent::None:
                 wxTextCtrl::ChangeValue(str);
                 break;
 
-            case SendEvent_Text:
+            case SendEvent::Text:
                 wxTextCtrl::SetValue(str);
                 break;
         }
@@ -318,7 +318,7 @@ public:
 
     void SetValue(const wxString& value) override
         { wxSpinCtrlGenericBase::SetValue(value); }
-    void SetValue( int value )              { DoSetValue(value, SendEvent_None); }
+    void SetValue( int value )              { DoSetValue(value, SendEvent::None); }
     void SetRange( int minVal, int maxVal ) { DoSetRange(minVal, maxVal); }
     void SetIncrement(int inc) { DoSetIncrement(inc); }
 
@@ -387,7 +387,7 @@ public:
     // operations
     void SetValue(const wxString& value) override
         { wxSpinCtrlGenericBase::SetValue(value); }
-    void SetValue(double value)                 { DoSetValue(value, SendEvent_None); }
+    void SetValue(double value)                 { DoSetValue(value, SendEvent::None); }
     void SetRange(double minVal, double maxVal) { DoSetRange(minVal, maxVal); }
     void SetIncrement(double inc)               { DoSetIncrement(inc); }
     void SetDigits(unsigned digits);

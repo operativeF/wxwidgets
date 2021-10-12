@@ -230,25 +230,25 @@ TEST_CASE_FIXTURE(WebViewTestCase, "WebView")
 
     SUBCASE("Zoom")
     {
-        if(m_browser->CanSetZoomType(wxWEBVIEW_ZOOM_TYPE_LAYOUT))
+        if(m_browser->CanSetZoomType(wxWebViewZoomType::Layout))
         {
-            m_browser->SetZoomType(wxWEBVIEW_ZOOM_TYPE_LAYOUT);
-            CHECK(m_browser->GetZoomType() == wxWEBVIEW_ZOOM_TYPE_LAYOUT);
+            m_browser->SetZoomType(wxWebViewZoomType::Layout);
+            CHECK(m_browser->GetZoomType() == wxWebViewZoomType::Layout);
 
-            m_browser->SetZoom(wxWEBVIEW_ZOOM_TINY);
-            CHECK(m_browser->GetZoom() == wxWEBVIEW_ZOOM_TINY);
+            m_browser->SetZoom(wxWebViewZoom::Tiny);
+            CHECK(m_browser->GetZoom() == wxWebViewZoom::Tiny);
         }
 
         //Reset the zoom level
-        m_browser->SetZoom(wxWEBVIEW_ZOOM_MEDIUM);
+        m_browser->SetZoom(wxWebViewZoom::Medium);
 
-        if(m_browser->CanSetZoomType(wxWEBVIEW_ZOOM_TYPE_TEXT))
+        if(m_browser->CanSetZoomType(wxWebViewZoomType::Text))
         {
-            m_browser->SetZoomType(wxWEBVIEW_ZOOM_TYPE_TEXT);
-            CHECK(m_browser->GetZoomType() == wxWEBVIEW_ZOOM_TYPE_TEXT);
+            m_browser->SetZoomType(wxWebViewZoomType::Text);
+            CHECK(m_browser->GetZoomType() == wxWebViewZoomType::Text);
 
-            m_browser->SetZoom(wxWEBVIEW_ZOOM_TINY);
-            CHECK(m_browser->GetZoom() == wxWEBVIEW_ZOOM_TINY);
+            m_browser->SetZoom(wxWebViewZoom::Tiny);
+            CHECK(m_browser->GetZoom() == wxWebViewZoom::Tiny);
         }
     }
 

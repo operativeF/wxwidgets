@@ -32,6 +32,7 @@
 class wxAuiNotebook;
 
 
+// FIXME: Bitfield
 enum wxAuiNotebookOption
 {
     wxAUI_NB_TOP                 = 1 << 0,

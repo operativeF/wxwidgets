@@ -150,7 +150,7 @@ void wxSashWindow::OnMouseEvent(wxMouseEvent& event)
         m_draggingEdge = wxSASH_NONE;
 
         wxRect dragRect;
-        wxSashDragStatus status = wxSASH_STATUS_OK;
+        wxSashDragStatus status = wxSashDragStatus::OK;
 
         // the new height and width of the window - if -1, it didn't change
         int newHeight = wxDefaultCoord,
@@ -169,7 +169,7 @@ void wxSashWindow::OnMouseEvent(wxMouseEvent& event)
                 if ( pos.y > pt.y + sz.y )
                 {
                     // top sash shouldn't get below the bottom one
-                    status = wxSASH_STATUS_OUT_OF_RANGE;
+                    status = wxSashDragStatus::OutOfRange;
                 }
                 else
                 {
@@ -181,7 +181,7 @@ void wxSashWindow::OnMouseEvent(wxMouseEvent& event)
                 if ( pos.y < pt.y )
                 {
                     // bottom sash shouldn't get above the top one
-                    status = wxSASH_STATUS_OUT_OF_RANGE;
+                    status = wxSashDragStatus::OutOfRange;
                 }
                 else
                 {
@@ -193,7 +193,7 @@ void wxSashWindow::OnMouseEvent(wxMouseEvent& event)
                 if ( pos.x > pt.x + sz.x )
                 {
                     // left sash shouldn't get beyond the right one
-                    status = wxSASH_STATUS_OUT_OF_RANGE;
+                    status = wxSashDragStatus::OutOfRange;
                 }
                 else
                 {
@@ -206,7 +206,7 @@ void wxSashWindow::OnMouseEvent(wxMouseEvent& event)
                 {
                     // and the right sash, finally, shouldn't be beyond the
                     // left one
-                    status = wxSASH_STATUS_OUT_OF_RANGE;
+                    status = wxSashDragStatus::OutOfRange;
                 }
                 else
                 {

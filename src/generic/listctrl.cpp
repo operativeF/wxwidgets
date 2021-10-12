@@ -2262,7 +2262,7 @@ void wxListMainWindow::HighlightOnly( size_t line, size_t oldLine )
         // something has been deselected. Notice that to be fully compatible with
         // wxMSW behaviour, _line_ shouldn't be deselected if it was selected.
 
-        const SendEvent sendEvent = IsVirtual() ? SendEvent_None : SendEvent_Normal;
+        const SendEvent sendEvent = IsVirtual() ? SendEvent::None : SendEvent_Normal;
 
         size_t lineFrom = 0,
                lineTo   = GetItemCount() - 1;
@@ -2279,7 +2279,7 @@ void wxListMainWindow::HighlightOnly( size_t line, size_t oldLine )
         }
 
         // If we didn't send the event for individual items above, send it for all of them now.
-        if ( sendEvent == SendEvent_None )
+        if ( sendEvent == SendEvent::None )
             SendNotify((size_t)-1, wxEVT_LIST_ITEM_DESELECTED);
     }
 

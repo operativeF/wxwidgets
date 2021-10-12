@@ -130,7 +130,7 @@ bool wxGenericProgressDialog::Create( const std::string& title,
     }
 #endif // wxMSW
 
-    m_state = HasPDFlag(wxPD_CAN_ABORT) ? Continue : Uncancelable;
+    m_state = HasPDFlag(wxPD_CAN_ABORT) ? State::Continue : State::Uncancelable;
 
     // top-level sizerTop
     wxSizer * const sizerTop = new wxBoxSizer(wxVERTICAL);
@@ -372,7 +372,7 @@ wxGenericProgressDialog::Update(int value, const std::string& newmsg, bool *skip
 
     if ( value == m_maximum )
     {
-        if ( m_state == Finished )
+        if ( m_state == State::Finished )
         {
             // ignore multiple calls to Update(m_maximum): it may sometimes be
             // troublesome to ensure that Update() is not called twice with the
@@ -383,7 +383,7 @@ wxGenericProgressDialog::Update(int value, const std::string& newmsg, bool *skip
 
         // so that we return true below and that out [Cancel] handler knew what
         // to do
-        m_state = Finished;
+        m_state = State::Finished;
         if( !HasPDFlag(wxPD_AUTO_HIDE) )
         {
             EnableClose();
@@ -426,7 +426,7 @@ wxGenericProgressDialog::Update(int value, const std::string& newmsg, bool *skip
     // update the display in case yielding above didn't do it
     Update();
 
-    return m_state != Canceled;
+    return m_state != State::Canceled;
 }
 
 bool wxGenericProgressDialog::Pulse(const std::string& newmsg, bool *skip)
@@ -452,7 +452,7 @@ bool wxGenericProgressDialog::Pulse(const std::string& newmsg, bool *skip)
 
     DoAfterUpdate();
 
-    return m_state != Canceled;
+    return m_state != State::Canceled;
 }
 
 bool wxGenericProgressDialog::DoBeforeUpdate(bool *skip)
@@ -472,7 +472,7 @@ bool wxGenericProgressDialog::DoBeforeUpdate(bool *skip)
         EnableSkip();
     }
 
-    return m_state != Canceled;
+    return m_state != State::Canceled;
 }
 
 void wxGenericProgressDialog::DoAfterUpdate()
@@ -485,7 +485,7 @@ void wxGenericProgressDialog::DoAfterUpdate()
 
 void wxGenericProgressDialog::Resume()
 {
-    m_state = Continue;
+    m_state = State::Continue;
     m_ctdelay = m_delay; // force an update of the elapsed/estimated/remaining time
     m_break += wxGetCurrentTime()-m_timeStop;
 
@@ -548,7 +548,7 @@ void wxGenericProgressDialog::SetMaximum(int maximum)
 
 bool wxGenericProgressDialog::WasCancelled() const
 {
-    return HasPDFlag(wxPD_CAN_ABORT) && m_state == Canceled;
+    return HasPDFlag(wxPD_CAN_ABORT) && m_state == State::Canceled;
 }
 
 bool wxGenericProgressDialog::WasSkipped() const
@@ -584,7 +584,7 @@ void wxGenericProgressDialog::SetTimeLabel(unsigned long val,
 
 void wxGenericProgressDialog::OnCancel(wxCommandEvent& event)
 {
-    if ( m_state == Finished )
+    if ( m_state == State::Finished )
     {
         // this means that the count down is already finished and we're being
         // shown as a modal dialog - so just let the default handler do the job
@@ -594,7 +594,7 @@ void wxGenericProgressDialog::OnCancel(wxCommandEvent& event)
     {
         // request to cancel was received, the next time Update() is called we
         // will handle it
-        m_state = Canceled;
+        m_state = State::Canceled;
 
         // update the buttons state immediately so that the user knows that the
         // request has been noticed
@@ -614,12 +614,12 @@ void wxGenericProgressDialog::OnSkip(wxCommandEvent& WXUNUSED(event))
 
 void wxGenericProgressDialog::OnClose(wxCloseEvent& event)
 {
-    if ( m_state == Uncancelable )
+    if ( m_state == State::Uncancelable )
     {
         // can't close this dialog
         event.Veto();
     }
-    else if ( m_state == Finished )
+    else if ( m_state == State::Finished )
     {
         // let the default handler close the window as we already terminated
         event.Skip();
@@ -627,7 +627,7 @@ void wxGenericProgressDialog::OnClose(wxCloseEvent& event)
     else
     {
         // next Update() will notice it
-        m_state = Canceled;
+        m_state = State::Canceled;
         DisableAbort();
         DisableSkip();
 

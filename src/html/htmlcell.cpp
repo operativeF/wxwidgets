@@ -138,11 +138,11 @@ wxHtmlCell::GetMouseCursorAt(wxHtmlWindowInterface *window,
 
     if ( GetLink(relPos.x, relPos.y) )
     {
-        return window->GetHTMLCursor(wxHtmlWindowInterface::HTMLCursor_Link);
+        return window->GetHTMLCursor(wxHtmlWindowInterface::HTMLCursor::Link);
     }
     else
     {
-        return window->GetHTMLCursor(wxHtmlWindowInterface::HTMLCursor_Default);
+        return window->GetHTMLCursor(wxHtmlWindowInterface::HTMLCursor::Default);
     }
 }
 
@@ -547,7 +547,7 @@ wxCursor wxHtmlWordCell::GetMouseCursor(wxHtmlWindowInterface *window) const
 {
     if ( !GetLink() )
     {
-        return window->GetHTMLCursor(wxHtmlWindowInterface::HTMLCursor_Text);
+        return window->GetHTMLCursor(wxHtmlWindowInterface::HTMLCursor::Text);
     }
     else
     {

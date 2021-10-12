@@ -82,7 +82,7 @@ public:
     void ClearHistory() override;
     void EnableHistory(bool enable = true) override;
     void Stop() override;
-    void Reload(wxWebViewReloadFlags flags = wxWEBVIEW_RELOAD_DEFAULT) override;
+    void Reload(wxWebViewReloadFlags flags = wxWebViewReloadFlags::Default) override;
 
     wxString GetPageSource() const override;
     wxString GetPageText() const override;
