@@ -10,7 +10,7 @@
 #ifndef _WX_MSW_BMPCBOX_H_
 #define _WX_MSW_BMPCBOX_H_
 
-
+#include "wx/bitmap.h"
 #include "wx/combobox.h"
 
 #include <string>

@@ -39,6 +39,8 @@ public:
     #include "wx/qt/palette.h"
 #endif
 
+inline const WXDLLIMPEXP_DATA_CORE(wxPalette)    wxNullPalette;
+
 #endif // wxUSE_PALETTE
 
 #endif // _WX_PALETTE_H_BASE_

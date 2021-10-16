@@ -314,4 +314,7 @@ ConvertToDisabled(unsigned char brightness) const
     #include "wx/generic/mask.h"
 #endif
 
+inline WXDLLIMPEXP_DATA_CORE(wxBitmap)     wxNullBitmap;
+
+
 #endif // _WX_BITMAP_H_BASE_

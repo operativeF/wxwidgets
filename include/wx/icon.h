@@ -67,6 +67,7 @@ constexpr auto wxICON_SCREEN_DEPTH = gsl::narrow_cast<unsigned int>(-1);
 DECLARE_VARIANT_OBJECT_EXPORTED(wxIcon,WXDLLIMPEXP_CORE)
 #endif
 
+inline const WXDLLIMPEXP_DATA_CORE(wxIcon)       wxNullIcon;
 
 #endif
     // _WX_ICON_H_BASE_

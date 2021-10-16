@@ -24,8 +24,6 @@
 #include "wx/crt.h"
 #include "wx/stringutils.h"
 
-wxAcceleratorTable wxNullAcceleratorTable;
-
 // ============================================================================
 // wxAcceleratorEntry implementation
 // ============================================================================
