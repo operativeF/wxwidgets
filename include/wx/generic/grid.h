@@ -91,7 +91,7 @@ enum wxGridRenderStyle
 
 class WXDLLIMPEXP_FWD_CORE wxGrid;
 class WXDLLIMPEXP_FWD_CORE wxGridCellAttr;
-class WXDLLIMPEXP_FWD_CORE wxGridCellAttrProviderData;
+struct WXDLLIMPEXP_FWD_CORE wxGridCellAttrProviderData;
 class WXDLLIMPEXP_FWD_CORE wxGridColLabelWindow;
 class WXDLLIMPEXP_FWD_CORE wxGridCornerLabelWindow;
 class WXDLLIMPEXP_FWD_CORE wxGridEvent;
