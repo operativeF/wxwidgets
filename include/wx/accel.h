@@ -160,8 +160,7 @@ private:
     #include "wx/qt/accel.h"
 #endif
 
-inline const WXDLLIMPEXP_DATA_CORE(wxAcceleratorTable) wxNullAcceleratorTable;
-
+extern WXDLLIMPEXP_DATA_CORE(wxAcceleratorTable) wxNullAcceleratorTable;
 
 #endif // wxUSE_ACCEL
 

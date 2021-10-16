@@ -75,8 +75,6 @@ public:
     #include "wx/qt/cursor.h"
 #endif
 
-inline WXDLLIMPEXP_DATA_CORE(wxCursor)     wxNullCursor;
-
 #include "wx/utils.h"
 
 /* This is a small class which can be used by all ports

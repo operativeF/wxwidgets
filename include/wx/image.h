@@ -640,7 +640,7 @@ private:
 
 extern void WXDLLIMPEXP_CORE wxInitAllImageHandlers();
 
-inline WXDLLIMPEXP_DATA_CORE(wxImage)    wxNullImage;
+extern WXDLLIMPEXP_DATA_CORE(wxImage)    wxNullImage;
 
 //-----------------------------------------------------------------------------
 // wxImage handlers

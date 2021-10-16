@@ -41,7 +41,6 @@ class  WXDLLIMPEXP_FWD_CORE wxFont;
 class  WXDLLIMPEXP_FWD_CORE wxIcon;
 class  WXDLLIMPEXP_FWD_CORE wxPalette;
 class  WXDLLIMPEXP_FWD_CORE wxPen;
-class  WXDLLIMPEXP_FWD_CORE wxPenList;
 class  WXDLLIMPEXP_FWD_CORE wxRegion;
 class  WXDLLIMPEXP_FWD_CORE wxIconBundle;
 
@@ -439,7 +438,18 @@ protected:
 #define wxHOURGLASS_CURSOR  wxStockGDI::GetCursor(wxStockGDI::CURSOR_HOURGLASS)
 #define wxSTANDARD_CURSOR   wxStockGDI::GetCursor(wxStockGDI::CURSOR_STANDARD)
 
-inline WXDLLIMPEXP_DATA_CORE(wxColourDatabase*)  wxTheColourDatabase;
+// 'Null' objects
+extern WXDLLIMPEXP_DATA_CORE(wxBitmap)     wxNullBitmap;
+extern WXDLLIMPEXP_DATA_CORE(wxIcon)       wxNullIcon;
+extern WXDLLIMPEXP_DATA_CORE(wxCursor)     wxNullCursor;
+extern WXDLLIMPEXP_DATA_CORE(wxPen)        wxNullPen;
+extern WXDLLIMPEXP_DATA_CORE(wxBrush)      wxNullBrush;
+extern WXDLLIMPEXP_DATA_CORE(wxPalette)    wxNullPalette;
+extern WXDLLIMPEXP_DATA_CORE(wxFont)       wxNullFont;
+extern WXDLLIMPEXP_DATA_CORE(wxColour)     wxNullColour;
+extern WXDLLIMPEXP_DATA_CORE(wxIconBundle) wxNullIconBundle;
+
+extern WXDLLIMPEXP_DATA_CORE(wxColourDatabase*)  wxTheColourDatabase;
 
 constexpr char wxPanelNameStr[] = "panel";
 

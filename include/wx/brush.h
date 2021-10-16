@@ -90,8 +90,7 @@ public:
                                wxBrushStyle style = wxBrushStyle::Solid);
 };
 
-inline const WXDLLIMPEXP_DATA_CORE(wxBrush)        wxNullBrush;
-inline WXDLLIMPEXP_DATA_CORE(wxBrushList*)         wxTheBrushList;
+extern WXDLLIMPEXP_DATA_CORE(wxBrushList*)   wxTheBrushList;
 
 // provide comparison operators to allow code such as
 //

@@ -233,6 +233,4 @@ WXDLLIMPEXP_CORE bool wxFromString(const wxString& str, wxColourBase* col);
 
 #define wxColor wxColour
 
-inline const WXDLLIMPEXP_DATA_CORE(wxColour)     wxNullColour;
-
 #endif // _WX_COLOUR_H_BASE_

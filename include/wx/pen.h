@@ -123,7 +123,6 @@ public:
                            wxPenStyle style = wxPenStyle::Solid);
 };
 
-inline const WXDLLIMPEXP_DATA_CORE(wxPen)        wxNullPen;
-inline WXDLLIMPEXP_DATA_CORE(wxPenList*)         wxThePenList;
+extern WXDLLIMPEXP_DATA_CORE(wxPenList*)   wxThePenList;
 
 #endif // _WX_PEN_H_BASE_
