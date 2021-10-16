@@ -13,12 +13,24 @@
 /out
 /.vs
 /tests/.vs
+/.vscode/*
+
 # /build/
 /build/.ninja*
 /build/build.ninja
 /build/CMakeCache.txt
 /build/cmake_install.cmake
 /build/x64
+/build/.vs*
+*.obj
+*.db
+*.log
+*.lib
+*.recipe
+*.tlog
+*.vcxproj.filters
+*.stamp.*
+*/compile_commands.json
 
 # /build/autoconf_prepend-include/autoconf/
 /build/autoconf_prepend-include/autoconf/autoconf.m4f
