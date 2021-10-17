@@ -149,7 +149,7 @@ public:
         // by default the display name is the same as app name or a capitalized
         // version of the program if app name was not set neither but it's
         // usually better to set it explicitly to something nicer
-    wxString GetAppDisplayName() const;
+    std::string GetAppDisplayName() const;
 
     void SetAppDisplayName(const wxString& name) { m_appDisplayName = name; }
 

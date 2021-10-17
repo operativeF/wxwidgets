@@ -13,6 +13,8 @@
 #include "wx/filename.h"
 #include "wx/msw/private.h"
 
+#include <boost/nowide/convert.hpp>
+
 #include <vector>
 
 // ============================================================================
@@ -76,9 +78,9 @@ public:
 private:
     // opens dir with all flags, attributes etc. necessary to be later
     // asynchronous watched with ReadDirectoryChangesW
-    static HANDLE OpenDir(const wxString& path)
+    static HANDLE OpenDir(const std::string& path)
     {
-        HANDLE handle = ::CreateFileW(path.t_str(),
+        HANDLE handle = ::CreateFileW(boost::nowide::widen(path).c_str(),
                                       FILE_LIST_DIRECTORY,
                                       FILE_SHARE_READ |
                                       FILE_SHARE_WRITE |

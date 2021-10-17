@@ -172,7 +172,7 @@ public:
     void SetFilterIndexFromExt(const wxString& ext);
 
 protected:
-    wxString      m_message;
+    std::string      m_message;
     wxString      m_dir;
     wxString      m_path;       // Full path
     wxString      m_fileName;

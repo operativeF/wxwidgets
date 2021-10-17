@@ -17,6 +17,8 @@
         #include  "wx/msw/wrapwin.h"  // includes windows.h for MessageBox()
     #endif
 
+    #include <boost/nowide/convert.hpp>
+
     #include <clocale>
     
     #ifdef HAS_EXCEPTION_PTR
@@ -98,18 +100,18 @@
 // ----------------------------------------------------------------------------
 
 #if wxDEBUG_LEVEL
-    // really just show the assert dialog
-    static bool DoShowAssertDialog(const wxString& msg);
+// really just show the assert dialog
+static bool DoShowAssertDialog(const std::string& msg);
 
-    // prepare for showing the assert dialog, use the given traits or
-    // DoShowAssertDialog() as last fallback to really show it
-    static
-    void ShowAssertDialog(const wxString& file,
-                          int line,
-                          const wxString& func,
-                          const wxString& cond,
-                          const wxString& msg,
-                          wxAppTraits *traits = nullptr);
+// prepare for showing the assert dialog, use the given traits or
+// DoShowAssertDialog() as last fallback to really show it
+static
+void ShowAssertDialog(const wxString& file,
+                        int line,
+                        const wxString& func,
+                        const wxString& cond,
+                        const wxString& msg,
+                        wxAppTraits *traits = nullptr);
 #endif // wxDEBUG_LEVEL
 
 #ifdef __WXDEBUG__
@@ -201,7 +203,7 @@ wxString wxAppConsoleBase::GetAppName() const
     return name;
 }
 
-wxString wxAppConsoleBase::GetAppDisplayName() const
+std::string wxAppConsoleBase::GetAppDisplayName() const
 {
     // use the explicitly provided display name, if any
     if ( !m_appDisplayName.empty() )
@@ -1234,8 +1236,8 @@ void wxOnAssert(const char *file,
 static void SetTraceMasks()
 {
 #if wxUSE_LOG
-    wxString mask;
-    if ( wxGetEnv(wxT("WXTRACE"), &mask) )
+    std::string mask;
+    if ( wxGetEnv("WXTRACE", &mask) )
     {
         wxStringTokenizer tkn(mask, wxT(",;:"));
         while ( tkn.HasMoreTokens() )
@@ -1251,20 +1253,20 @@ static void SetTraceMasks()
 bool wxTrapInAssert = false;
 
 static
-bool DoShowAssertDialog(const wxString& msg)
+bool DoShowAssertDialog(const std::string& msg)
 {
     // under Windows we can show the dialog even in the console mode
 #if defined(__WINDOWS__)
-    wxString msgDlg(msg);
+    std::string msgDlg = msg;
 
     // this message is intentionally not translated -- it is for developers
     // only -- and the less code we use here, less is the danger of recursively
     // asserting and dying
-    msgDlg += wxT("\nDo you want to stop the program?\n")
-              wxT("You can also choose [Cancel] to suppress ")
-              wxT("further warnings.");
+    msgDlg += "\nDo you want to stop the program?\n"
+              "You can also choose [Cancel] to suppress "
+              "further warnings.";
 
-    switch ( ::MessageBox(nullptr, msgDlg.t_str(), wxT("wxWidgets Debug Alert"),
+    switch ( ::MessageBoxW(nullptr, boost::nowide::widen(msgDlg).c_str(), wxT("wxWidgets Debug Alert"),
                           MB_YESNOCANCEL | MB_DEFBUTTON2 | MB_ICONSTOP ) )
     {
         case IDYES:

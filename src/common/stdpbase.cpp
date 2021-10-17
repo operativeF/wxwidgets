@@ -48,7 +48,7 @@ wxStandardPaths& wxStandardPathsBase::Get()
     return traits->GetStandardPaths();
 }
 
-wxString wxStandardPathsBase::GetExecutablePath() const
+std::string wxStandardPathsBase::GetExecutablePath() const
 {
     if ( !wxTheApp || !wxTheApp->argv )
         return {};

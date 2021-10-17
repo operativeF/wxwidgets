@@ -474,7 +474,7 @@ wxString wxExpandEnvVars(const wxString& str)
           // NB: use wxGetEnv instead of wxGetenv as otherwise variables
           //     set through wxSetEnv may not be read correctly!
           bool expanded = false;
-          wxString tmp;
+          std::string tmp;
           if (wxGetEnv(strVarName, &tmp))
           {
               strResult += tmp;

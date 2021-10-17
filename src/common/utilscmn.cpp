@@ -47,6 +47,8 @@
     #include <string>
     #include <vector>
     #include <utility>
+
+    #include <fmt/core.h>
 #endif // WX_PRECOMP
 
 #include "wx/app.h"
@@ -166,24 +168,24 @@ wxString wxNow()
     return wxString::FromAscii(date);
 }
 
-wxString wxGetInstallPrefix()
+std::string wxGetInstallPrefix()
 {
-    wxString prefix;
+    std::string prefix;
 
-    if ( wxGetEnv(wxT("WXPREFIX"), &prefix) )
+    if ( wxGetEnv("WXPREFIX", &prefix) )
         return prefix;
 
 #ifdef wxINSTALL_PREFIX
-    return wxT(wxINSTALL_PREFIX);
+    return wxINSTALL_PREFIX;
 #else
     return {};
 #endif
 }
 
-wxString wxGetDataDir()
+std::string wxGetDataDir()
 {
-    wxString dir = wxGetInstallPrefix();
-    dir <<  wxFILE_SEP_PATH << wxT("share") << wxFILE_SEP_PATH << wxT("wx");
+    std::string dir = wxGetInstallPrefix();
+    dir += fmt::format("{}share{}wx", wxFILE_SEP_PATH);
     return dir;
 }
 
@@ -1009,7 +1011,7 @@ bool wxDoLaunchDefaultBrowser(const wxLaunchBrowserParams& params)
 }
 #endif
 
-static bool DoLaunchDefaultBrowserHelper(const wxString& url, unsigned int flags)
+static bool DoLaunchDefaultBrowserHelper(const std::string& url, unsigned int flags)
 {
     wxLaunchBrowserParams params(flags);
 
@@ -1032,7 +1034,7 @@ static bool DoLaunchDefaultBrowserHelper(const wxString& url, unsigned int flags
             params.scheme = "http";
         }
 
-        params.url << params.scheme << wxS("://") << url;
+        params.url = fmt::format("{}://{}", params.scheme, url);
     }
     else if ( hasValidScheme )
     {

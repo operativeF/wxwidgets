@@ -78,7 +78,7 @@ void MDISetMenu(wxWindow *win, HMENU hmenuFrame, HMENU hmenuWindow);
 
 // insert the window menu (subMenu) into menu just before "Help" submenu or at
 // the very end if not found
-void MDIInsertWindowMenu(wxWindow *win, WXHMENU hMenu, HMENU subMenu, const wxString& windowMenuLabelTranslated);
+void MDIInsertWindowMenu(wxWindow *win, WXHMENU hMenu, HMENU subMenu, const std::string& windowMenuLabelTranslated);
 
 // Remove the window menu
 void MDIRemoveWindowMenu(wxWindow *win, WXHMENU hMenu, const wxString& windowMenuLabelTranslated);
@@ -808,9 +808,9 @@ bool wxMDIChildFrame::Create(wxMDIParentFrame *parent,
   int width = size.x;
   int height = size.y;
 
-  MDICREATESTRUCT mcs;
+  MDICREATESTRUCTW mcs;
 
-  wxString className = wxApp::GetRegisteredClassName(
+  std::string className = wxApp::GetRegisteredClassName(
                                "wxMDIChildFrame", COLOR_WINDOW, 0,
                                (style & wxFULL_REPAINT_ON_RESIZE) ? wxApp::RegClass_Default
                                                                   : wxApp::RegClass_ReturnNR
@@ -818,7 +818,7 @@ bool wxMDIChildFrame::Create(wxMDIParentFrame *parent,
 
   boost::nowide::wstackstring stackTitle(title.c_str());
 
-  mcs.szClass = className.t_str();
+  mcs.szClass = boost::nowide::widen(className).c_str();
   mcs.szTitle = stackTitle.get();
   mcs.hOwner = wxGetInstance();
   if (x != wxDefaultCoord)
@@ -1528,7 +1528,7 @@ private:
     WinStruct<MENUITEMINFO> m_mii;
 };
 
-void MDIInsertWindowMenu(wxWindow *win, WXHMENU hMenu, HMENU menuWin, const wxString& windowMenuLabelTranslated)
+void MDIInsertWindowMenu(wxWindow *win, WXHMENU hMenu, HMENU menuWin, const std::string& windowMenuLabelTranslated)
 {
     HMENU hmenu = (HMENU)hMenu;
 
@@ -1547,7 +1547,7 @@ void MDIInsertWindowMenu(wxWindow *win, WXHMENU hMenu, HMENU menuWin, const wxSt
                 ::InsertMenuW(hmenu, it.GetPos(),
                              MF_BYPOSITION | MF_POPUP | MF_STRING,
                              (UINT_PTR)menuWin,
-                             windowMenuLabelTranslated.t_str());
+                             boost::nowide::widen(windowMenuLabelTranslated).c_str());
                 break;
             }
         }
@@ -1556,7 +1556,7 @@ void MDIInsertWindowMenu(wxWindow *win, WXHMENU hMenu, HMENU menuWin, const wxSt
         {
             ::AppendMenuW(hmenu, MF_POPUP,
                          (UINT_PTR)menuWin,
-                         windowMenuLabelTranslated.t_str());
+                         boost::nowide::widen(windowMenuLabelTranslated).c_str());
         }
     }
 

@@ -634,7 +634,7 @@ const std::string& wxApp::GetRegisteredClassName(const std::string& name,
     }
 
     // we need to register this class
-    WNDCLASS wndclass;
+    WNDCLASSW wndclass;
     wxZeroMemory(wndclass);
     
     wndclass.lpfnWndProc   = (WNDPROC)wxWndProc;

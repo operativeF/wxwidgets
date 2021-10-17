@@ -111,9 +111,9 @@ WXDLLIMPEXP_BASE wxLinuxDistributionInfo wxGetLinuxDistributionInfo();
 WXDLLIMPEXP_BASE wxString wxNow();
 
 // Return path where wxWidgets is installed (mostly useful in Unices)
-WXDLLIMPEXP_BASE wxString wxGetInstallPrefix();
+WXDLLIMPEXP_BASE std::string wxGetInstallPrefix();
 // Return path to wxWin data (/usr/share/wx/%{version}) (Unices)
-WXDLLIMPEXP_BASE wxString wxGetDataDir();
+WXDLLIMPEXP_BASE std::string wxGetDataDir();
 
 #if wxUSE_GUI
 
@@ -460,10 +460,10 @@ WXDLLIMPEXP_BASE bool wxHandleFatalExceptions(bool doit = true);
 
 // returns true if variable exists (value may be NULL if you just want to check
 // for this)
-WXDLLIMPEXP_BASE bool wxGetEnv(const wxString& var, wxString *value);
+WXDLLIMPEXP_BASE bool wxGetEnv(const std::string& var, std::string* value);
 
 // set the env var name to the given value, return true on success
-WXDLLIMPEXP_BASE bool wxSetEnv(const wxString& var, const wxString& value);
+WXDLLIMPEXP_BASE bool wxSetEnv(const std::string& var, const std::string& value);
 
 // remove the env var from environment
 WXDLLIMPEXP_BASE bool wxUnsetEnv(const wxString& var);
@@ -514,7 +514,7 @@ WXDLLIMPEXP_BASE wxString wxGetUserHome(const wxString& user = {});
 #endif
 
 // get number of total/free bytes on the disk where path belongs
-WXDLLIMPEXP_BASE bool wxGetDiskSpace(const wxString& path,
+WXDLLIMPEXP_BASE bool wxGetDiskSpace(const std::string& path,
                                      wxDiskspaceSize_t *pTotal = nullptr,
                                      wxDiskspaceSize_t *pFree = nullptr);
 
@@ -554,7 +554,7 @@ enum
 WXDLLIMPEXP_CORE bool wxLaunchDefaultBrowser(const wxString& url, unsigned int flags = 0);
 
 // Launch document in the user's default application
-WXDLLIMPEXP_CORE bool wxLaunchDefaultApplication(const wxString& path, unsigned int flags = 0);
+WXDLLIMPEXP_CORE bool wxLaunchDefaultApplication(const std::string& path, unsigned int flags = 0);
 
 // ----------------------------------------------------------------------------
 // Menu accelerators related things
@@ -772,7 +772,7 @@ WXDLLIMPEXP_CORE bool wxYieldIfNeeded();
     WXDLLIMPEXP_BASE bool
     wxLoadUserResource(const void **outData,
                        size_t *outLen,
-                       const wxString& resourceName,
+                       const std::string& resourceName,
                        const wxChar* resourceType = wxUserResourceStr,
                        WXHINSTANCE module = nullptr);
 

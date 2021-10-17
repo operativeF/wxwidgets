@@ -39,7 +39,7 @@ public:
 
     // called by DoPrintf() to output formatted string but can also be called
     // directly if no formatting is needed
-    virtual void Output(const wxString& str) = 0;
+    virtual void Output(const std::string& str) = 0;
 
 protected:
 #if !wxUSE_UTF8_LOCALE_ONLY
@@ -98,7 +98,7 @@ public:
     wxMessageOutputStderr(wxMessageOutputStderr&&) = default;
     wxMessageOutputStderr& operator=(wxMessageOutputStderr&&) = default;
 
-    void Output(const wxString& str) override;
+    void Output(const std::string& str) override;
 
 protected:
     FILE *m_fp;
@@ -122,7 +122,7 @@ public:
     wxMessageOutputBest(wxMessageOutputFlags flags)
         : m_flags(flags) { }
 
-    void Output(const wxString& str) override;
+    void Output(const std::string& str) override;
 
 private:
     wxMessageOutputFlags m_flags{wxMessageOutputFlags::StdErr};
@@ -139,7 +139,7 @@ class WXDLLIMPEXP_CORE wxMessageOutputMessageBox : public wxMessageOutput
 public:
     wxMessageOutputMessageBox() = default;
 
-    void Output(const wxString& str) override;
+    void Output(const std::string& str) override;
 };
 
 #endif // wxUSE_GUI && wxUSE_MSGDLG
@@ -153,7 +153,7 @@ class WXDLLIMPEXP_BASE wxMessageOutputDebug : public wxMessageOutputStderr
 public:
     wxMessageOutputDebug() = default;
 
-    void Output(const wxString& str) override;
+    void Output(const std::string& str) override;
 };
 
 // ----------------------------------------------------------------------------
@@ -165,7 +165,7 @@ class WXDLLIMPEXP_BASE wxMessageOutputLog : public wxMessageOutput
 public:
     wxMessageOutputLog() = default;
 
-    void Output(const wxString& str) override;
+    void Output(const std::string& str) override;
 };
 
 #endif // _WX_MSGOUT_H_

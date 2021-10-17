@@ -158,13 +158,13 @@ wxRect wxPrinterDCImpl::GetPaperRect() const
 #if !wxUSE_PS_PRINTING
 
 // Returns default device and port names
-static bool wxGetDefaultDeviceName(wxString& deviceName, wxString& portName)
+static bool wxGetDefaultDeviceName(std::string& deviceName, std::string& portName)
 {
     deviceName.clear();
 
     LPDEVNAMES  lpDevNames;
-    LPTSTR      lpszDeviceName;
-    LPTSTR      lpszPortName;
+    LPWSTR      lpszDeviceName;
+    LPWSTR      lpszPortName;
 
     PRINTDLG    pd;
     memset(&pd, 0, sizeof(PRINTDLG));
@@ -191,11 +191,11 @@ static bool wxGetDefaultDeviceName(wxString& deviceName, wxString& portName)
             GlobalPtrLock ptr(pd.hDevNames);
 
             lpDevNames = (LPDEVNAMES)ptr.Get();
-            lpszDeviceName = (LPTSTR)lpDevNames + lpDevNames->wDeviceOffset;
-            lpszPortName   = (LPTSTR)lpDevNames + lpDevNames->wOutputOffset;
+            lpszDeviceName = (LPWSTR)lpDevNames + lpDevNames->wDeviceOffset;
+            lpszPortName   = (LPWSTR)lpDevNames + lpDevNames->wOutputOffset;
 
-            deviceName = lpszDeviceName;
-            portName = lpszPortName;
+            deviceName = boost::nowide::narrow(lpszDeviceName);
+            portName = boost::nowide::narrow(lpszPortName);
         } // unlock pd.hDevNames
 
         GlobalFree(pd.hDevNames);
@@ -225,11 +225,11 @@ WXHDC WXDLLEXPORT wxGetPrinterDC(const wxPrintData& printDataConst)
 
     data->TransferFrom( printDataConst );
 
-    wxString deviceName = printDataConst.GetPrinterName();
+    std::string deviceName = printDataConst.GetPrinterName();
     if ( deviceName.empty() )
     {
         // Retrieve the default device name
-        wxString portName;
+        std::string portName;
         if ( !wxGetDefaultDeviceName(deviceName, portName) )
         {
             return nullptr; // Could not get default device name
@@ -242,10 +242,10 @@ WXHDC WXDLLEXPORT wxGetPrinterDC(const wxPrintData& printDataConst)
     if ( devMode )
         lockDevMode.Init(devMode);
 
-    HDC hDC = ::CreateDC
+    HDC hDC = ::CreateDCW
                 (
                     nullptr,               // no driver name as we use device name
-                    deviceName.t_str(),
+                    boost::nowide::widen(deviceName).c_str(),
                     nullptr,               // unused
                     static_cast<DEVMODE *>(lockDevMode.Get())
                 );

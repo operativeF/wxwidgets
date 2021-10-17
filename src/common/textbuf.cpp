@@ -7,12 +7,7 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-// ============================================================================
-// headers
-// ============================================================================
-
 #include  "wx/wxprec.h"
-
 
 #include "wx/string.h"
 #include "wx/intl.h"
@@ -41,7 +36,7 @@ std::string wxTextBuffer::GetEOL(wxTextFileType type)
     }
 }
 
-wxString wxTextBuffer::Translate(const wxString& text, wxTextFileType type)
+std::string wxTextBuffer::Translate(const std::string& text, wxTextFileType type)
 {
     // don't do anything if there is nothing to do
     if ( type == wxTextFileType::None )
@@ -51,38 +46,38 @@ wxString wxTextBuffer::Translate(const wxString& text, wxTextFileType type)
     if ( text.empty() )
         return text;
 
-    wxString eol = GetEOL(type), result;
+    std::string eol = GetEOL(type);
+    std::string result;
 
     // optimization: we know that the length of the new string will be about
     // the same as the length of the old one, so prealloc memory to avoid
     // unnecessary relocations
-    result.Alloc(text.Len());
+    result.reserve(text.size());
 
-    wxChar chLast = 0;
-    for ( wxString::const_iterator i = text.begin(); i != text.end(); ++i )
+    char chLast{};
+    for ( auto ch : text )
     {
-        wxChar ch = *i;
         switch ( ch ) {
-            case wxT('\n'):
+            case '\n':
                 // Dos/Unix line termination
                 result += eol;
                 chLast = 0;
                 break;
 
-            case wxT('\r'):
-                if ( chLast == wxT('\r') ) {
+            case '\r':
+                if ( chLast == '\r' ) {
                     // Mac empty line
                     result += eol;
                 }
                 else {
                     // just remember it: we don't know whether it is just "\r"
                     // or "\r\n" yet
-                    chLast = wxT('\r');
+                    chLast = '\r';
                 }
                 break;
 
             default:
-                if ( chLast == wxT('\r') ) {
+                if ( chLast == '\r' ) {
                     // Mac line termination
                     result += eol;
 

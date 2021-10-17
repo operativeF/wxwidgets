@@ -68,9 +68,9 @@ protected:
     const wxString m_detailsExpanderCollapsedLabel;
     const wxString m_detailsExpanderExpandedLabel;
 
-    wxString m_checkBoxText;
-    wxString m_detailedText;
-    wxString m_footerText;
+    std::string m_checkBoxText;
+    std::string m_detailedText;
+    std::string m_footerText;
     int m_footerIcon{0};
     bool m_checkBoxValue{false};
 

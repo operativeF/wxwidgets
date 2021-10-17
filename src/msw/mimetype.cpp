@@ -255,22 +255,22 @@ bool wxFileTypeImpl::EnsureExtKeyExists()
 // Returns empty string if the association is not found.
 static
 wxString wxAssocQueryString(ASSOCSTR assoc,
-                            wxString ext,
-                            const wxString& verb = {})
+                            std::string ext,
+                            const std::string& verb = {})
 {
     DWORD dwSize = MAX_PATH;
-    TCHAR bufOut[MAX_PATH] = { 0 };
+    wchar_t bufOut[MAX_PATH] = { 0 };
 
     if ( ext.empty() || ext[0] != '.' )
-        ext.Prepend('.');
+        ext.insert(0, ".");
 
     HRESULT hr = ::AssocQueryStringW
                  (
                     wxASSOCF_NOTRUNCATE,// Fail if buffer is too small.
                     assoc,              // The association to retrieve.
-                    ext.t_str(),        // The extension to retrieve it for.
+                    boost::nowide::widen(ext).c_str(), // The extension to retrieve it for.
                     verb.empty() ? nullptr
-                                 : static_cast<const TCHAR*>(verb.t_str()),
+                                 : boost::nowide::widen(verb).c_str(),
                     bufOut,             // The buffer for output value.
                     &dwSize             // And its size
                  );
@@ -293,7 +293,7 @@ wxString wxAssocQueryString(ASSOCSTR assoc,
         return {};
     }
 
-    return wxString(bufOut);
+    return boost::nowide::narrow(bufOut);
 }
 
 

@@ -1703,14 +1703,14 @@ bool wxListCtrl::EnsureVisible(long item)
 
 // Find an item whose label matches this string, starting from the item after 'start'
 // or the beginning if 'start' is -1.
-long wxListCtrl::FindItem(long start, const wxString& str, bool partial)
+long wxListCtrl::FindItem(long start, const std::string& str, bool partial)
 {
     LV_FINDINFO findInfo;
 
     findInfo.flags = LVFI_STRING;
     if ( partial )
         findInfo.flags |= LVFI_PARTIAL;
-    findInfo.psz = str.t_str();
+    findInfo.psz = boost::nowide::widen(str).c_str();
 
     // ListView_FindItem() excludes the first item from search and to look
     // through all the items you need to start from -1 which is unnatural and

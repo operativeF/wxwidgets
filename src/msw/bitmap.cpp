@@ -199,29 +199,15 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxBitmap, wxGDIObject);
 
 
 wxBitmapRefData::wxBitmapRefData(const wxBitmapRefData& data)
-               : wxGDIImageRefData(data)
+               : wxGDIImageRefData(data),
+                 m_hasAlpha{data.m_hasAlpha}
 {
-    
-#if wxDEBUG_LEVEL
-    m_selectedInto = nullptr;
-#endif
-    m_bitmapMask = nullptr;
-
     m_hBitmap = (WXHBITMAP) nullptr;
-#if wxUSE_WXDIB
-    m_dib = nullptr;
-#endif
-
-    m_isDIB =
-    m_hasAlpha = false;
-
 
 #if wxUSE_WXDIB
     wxASSERT_MSG( !data.m_dib,
                     wxT("can't copy bitmap locked for raw access!") );
 #endif // wxUSE_WXDIB
-
-    m_hasAlpha = data.m_hasAlpha;
 
 #if wxUSE_WXDIB
     // copy the other bitmap

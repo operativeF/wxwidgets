@@ -21,7 +21,7 @@ class WXDLLIMPEXP_BASE wxStandardPaths : public wxStandardPathsBase
 {
 public:
     
-    wxString GetExecutablePath() const override;
+    std::string GetExecutablePath() const override;
     wxString GetConfigDir() const override;
     wxString GetUserConfigDir() const override;
     wxString GetDataDir() const override;

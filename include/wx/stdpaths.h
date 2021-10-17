@@ -82,7 +82,7 @@ public:
     // wxEmptyString if it couldn't be determined.
     // The path is returned as an absolute path whenever possible.
     // Default implementation only try to use wxApp->argv[0].
-    virtual wxString GetExecutablePath() const;
+    virtual std::string GetExecutablePath() const;
 
     // return the directory with system config files:
     // /etc under Unix, c:\Documents and Settings\All Users\Application Data
@@ -244,7 +244,7 @@ public:
     void SetInstallPrefix(const wxString& prefix) { m_prefix = prefix; }
     wxString GetInstallPrefix() const { return m_prefix; }
 
-    virtual wxString GetExecutablePath() const { return m_prefix; }
+    virtual std::string GetExecutablePath() const { return m_prefix; }
     virtual wxString GetConfigDir() const { return m_prefix; }
     virtual wxString GetUserConfigDir() const { return m_prefix; }
     virtual wxString GetDataDir() const { return m_prefix; }
@@ -266,7 +266,7 @@ protected:
     wxStandardPaths() { }
 
 private:
-    wxString m_prefix;
+    std::string m_prefix;
 };
 #endif // !wxHAS_NATIVE_STDPATHS
 

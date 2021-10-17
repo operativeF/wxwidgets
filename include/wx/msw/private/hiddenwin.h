@@ -25,6 +25,6 @@
   registers the class, pclassname will be set to classname.
  */
 extern "C" WXDLLIMPEXP_BASE HWND
-wxCreateHiddenWindow(LPCTSTR *pclassname, LPCTSTR classname, WNDPROC wndproc);
+wxCreateHiddenWindow(LPCWSTR *pclassname, LPCWSTR classname, WNDPROC wndproc);
 
 #endif // _WX_MSW_PRIVATE_HIDDENWIN_H_

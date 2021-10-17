@@ -123,7 +123,7 @@ public:
     virtual wxSize GetPPI() const { return wxDisplay::GetStdPPI()*GetScaleFactor(); }
 
     // return the name (may be empty)
-    virtual wxString GetName() const { return {}; }
+    virtual std::string GetName() const { return {}; }
 
     // return the index of this display
     unsigned GetIndex() const { return m_index; }

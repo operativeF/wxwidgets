@@ -459,7 +459,7 @@ WXDLLIMPEXP_BASE bool wxMatchWild(const wxString& pattern,  const wxString& text
 WXDLLIMPEXP_BASE bool wxConcatFiles(const wxString& src1, const wxString& src2, const wxString& dest);
 
 // Copy file
-WXDLLIMPEXP_BASE bool wxCopyFile(const wxString& src, const wxString& dest,
+WXDLLIMPEXP_BASE bool wxCopyFile(const std::string& src, const std::string& dest,
                                  bool overwrite = true);
 
 // Remove file
@@ -472,7 +472,7 @@ WXDLLIMPEXP_BASE bool wxRenameFile(const wxString& oldpath, const wxString& newp
 WXDLLIMPEXP_BASE wxString wxGetCwd();
 
 // Set working directory
-WXDLLIMPEXP_BASE bool wxSetWorkingDirectory(const wxString& d);
+WXDLLIMPEXP_BASE bool wxSetWorkingDirectory(const std::string& d);
 
 // Make directory
 WXDLLIMPEXP_BASE bool wxMkdir(const wxString& dir, int perm = wxS_DIR_DEFAULT);

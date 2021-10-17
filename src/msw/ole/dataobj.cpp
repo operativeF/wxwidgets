@@ -376,9 +376,9 @@ bool wxDataFormat::operator!=(NativeFormat format) const
     return !(*this == format);
 }
 
-void wxDataFormat::SetId(const wxString& format)
+void wxDataFormat::SetId(const std::string& format)
 {
-    m_format = (wxDataFormat::NativeFormat)::RegisterClipboardFormat(format.t_str());
+    m_format = (wxDataFormat::NativeFormat)::RegisterClipboardFormatW(boost::nowide::widen(format).c_str());
     if ( !m_format )
     {
         wxLogError(_("Couldn't register clipboard format '%s'."), format);
@@ -1346,7 +1346,7 @@ bool wxFileDataObject::GetDataHere(void *pData) const
     {
         // copy filename to pbuf and add null terminator
         size_t len = m_filenames[i].length();
-        memcpy(pbuf, m_filenames[i].t_str(), len*sizeOfChar);
+        std::memcpy(pbuf, m_filenames[i].t_str(), len*sizeOfChar);
 
         pbuf += len*sizeOfChar;
 
@@ -1373,7 +1373,7 @@ bool wxFileDataObject::GetDataHere(void *pData) const
 class CFSTR_SHELLURLDataObject : public wxCustomDataObject
 {
 public:
-    CFSTR_SHELLURLDataObject() : wxCustomDataObject(CFSTR_SHELLURL) {}
+    CFSTR_SHELLURLDataObject() : wxCustomDataObject(boost::nowide::narrow(CFSTR_SHELLURL)) {}
 
     size_t GetBufferOffset( const wxDataFormat& WXUNUSED(format) ) override
     {
@@ -1464,7 +1464,7 @@ void wxURLDataObject::SetURL(const wxString& url)
         // however CFSTR_SHELLURLDataObject doesn't append NUL automatically
         // but we probably still want to have it on the clipboard (just to be
         // safe), so do append it
-        SetData(wxDataFormat(CFSTR_SHELLURL), len + 1, urlMB);
+        SetData(wxDataFormat(boost::nowide::narrow(CFSTR_SHELLURL)), len + 1, urlMB);
     }
 
     SetData(wxDF_UNICODETEXT, url.length()*sizeof(wxChar), url.wc_str());

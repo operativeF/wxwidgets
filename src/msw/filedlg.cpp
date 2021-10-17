@@ -475,7 +475,7 @@ int wxFileDialog::ShowModal()
 
     of.lStructSize       = sizeof(OPENFILENAME);
     of.hwndOwner         = hWndParent;
-    of.lpstrTitle        = m_message.t_str();
+    of.lpstrTitle        = boost::nowide::widen(m_message).c_str();
     of.lpstrFileTitle    = titleBuffer;
     of.nMaxFileTitle     = wxMAXFILE + 1 + wxMAXEXT;
 
@@ -558,24 +558,25 @@ int wxFileDialog::ShowModal()
 
     wxASSERT_MSG( items > 0 , wxT("empty wildcard list") );
 
-    wxString filterBuffer;
+    std::string filterBuffer;
 
+    // FIXME: Use fmt lib
     for (size_t i = 0; i < items ; i++)
     {
         filterBuffer += wildDescriptions[i];
-        filterBuffer += wxT("|");
+        filterBuffer += "|";
         filterBuffer += wildFilters[i];
-        filterBuffer += wxT("|");
+        filterBuffer += "|";
     }
 
     // Replace | with \0
     for (size_t i = 0; i < filterBuffer.length(); i++ ) {
-        if ( filterBuffer.GetChar(i) == wxT('|') ) {
-            filterBuffer[i] = wxT('\0');
+        if ( filterBuffer[i] == '|' ) {
+            filterBuffer[i] = '\0';
         }
     }
 
-    of.lpstrFilter  = filterBuffer.t_str();
+    of.lpstrFilter  = boost::nowide::widen(filterBuffer).c_str();
     of.nFilterIndex = m_filterIndex + 1;
     m_currentlySelectedFilterIndex = m_filterIndex;
 
@@ -594,7 +595,7 @@ int wxFileDialog::ShowModal()
     
     if (HasFdFlag(wxFD_SAVE))
     {
-        const wxChar* extension = filterBuffer.t_str();
+        const char* extension = filterBuffer.c_str();
         int maxFilter = (int)(of.nFilterIndex*2L) - 1;
 
         for( int j = 0; j < maxFilter; j++ )           // get extension
@@ -667,7 +668,7 @@ int wxFileDialog::ShowModal()
         if ( !of.nFileExtension || fileNameBuffer[of.nFileExtension] == wxT('\0') )
         {
             // User has typed a filename without an extension:
-            const wxChar* extension = filterBuffer.t_str();
+            const char* extension = filterBuffer.c_str();
             int   maxFilter = (int)(of.nFilterIndex*2L) - 1;
 
             for( int j = 0; j < maxFilter; j++ )           // get extension

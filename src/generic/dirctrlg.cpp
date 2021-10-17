@@ -635,7 +635,7 @@ void wxGenericDirCtrl::PopulateNode(wxTreeItemId parentId)
 
     wxString path;
 
-    wxString dirName(data->m_path);
+    wxString dirName = data->m_path;
 
 #if defined(__WINDOWS__)
     // Check if this is a root directory and if so,
@@ -669,7 +669,7 @@ void wxGenericDirCtrl::PopulateNode(wxTreeItemId parentId)
     {
         int style = wxDIR_DIRS;
         if (m_showHidden) style |= wxDIR_HIDDEN;
-        if (d.GetFirst(& eachFilename, {}, style))
+        if (d.GetFirst(&eachFilename, {}, style))
         {
             do
             {

@@ -90,7 +90,7 @@ LRESULT CALLBACK MainWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 
 bool RegisterMainClass()
 {
-    WNDCLASS wc;
+    WNDCLASSW wc;
     ZeroMemory(&wc, sizeof(wc));
     wc.style         = CS_DBLCLKS | CS_HREDRAW | CS_VREDRAW;
     wc.lpfnWndProc   = MainWndProc;

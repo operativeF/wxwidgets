@@ -15,6 +15,8 @@
 #ifndef WX_PRECOMP
     #include "wx/msw/private.h"     // includes <windows.h>
 
+    #include <boost/nowide/convert.hpp>
+
     #include <tuple>
 #endif  //WX_PRECOMP
 
@@ -124,6 +126,7 @@ bool wxGetHostName(wxChar *buf, int maxSize)
     return true;
 }
 
+// FIXME: Use GetComputerNameExW
 // get full hostname (with domain name if possible)
 bool wxGetFullHostName(wxChar *buf, int maxSize)
 {
@@ -135,7 +138,7 @@ bool wxGetFullHostName(wxChar *buf, int maxSize)
     // missing, we handle this)
     wxLogNull noLog;
 
-    wxDynamicLibrary dllWinsock(wxT("ws2_32.dll"), wxDL_VERBATIM);
+    wxDynamicLibrary dllWinsock("ws2_32.dll", wxDL_VERBATIM);
     if ( dllWinsock.IsLoaded() )
     {
         using WSAStartup_t = int (PASCAL*)(WORD, WSADATA *);
@@ -146,7 +149,7 @@ bool wxGetFullHostName(wxChar *buf, int maxSize)
 
         #define LOAD_WINSOCK_FUNC(func)                                       \
             func ## _t                                                        \
-                pfn ## func = (func ## _t)dllWinsock.GetSymbol(wxT(#func))
+                pfn ## func = (func ## _t)dllWinsock.GetSymbol(#func)
 
         LOAD_WINSOCK_FUNC(WSAStartup);
 
@@ -414,7 +417,7 @@ wxString wxGetUserHome(const wxString& user)
     return home;
 }
 
-bool wxGetDiskSpace(const wxString& path,
+bool wxGetDiskSpace(const std::string& path,
                     wxDiskspaceSize_t *pTotal,
                     wxDiskspaceSize_t *pFree)
 {
@@ -424,7 +427,7 @@ bool wxGetDiskSpace(const wxString& path,
     ULARGE_INTEGER bytesFree, bytesTotal;
 
     // may pass the path as is, GetDiskFreeSpaceEx() is smart enough
-    if ( !::GetDiskFreeSpaceExW(path.t_str(),
+    if ( !::GetDiskFreeSpaceExW(boost::nowide::widen(path).c_str(),
                                &bytesFree,
                                &bytesTotal,
                                nullptr) )
@@ -462,11 +465,11 @@ bool wxGetDiskSpace(const wxString& path,
 // env vars
 // ----------------------------------------------------------------------------
 
-bool wxGetEnv(const wxString& var,
-              wxString *value)
+bool wxGetEnv(const std::string& var,
+              std::string* value)
 {
     // first get the size of the buffer
-    DWORD dwRet = ::GetEnvironmentVariableW(var.t_str(), nullptr, 0);
+    DWORD dwRet = ::GetEnvironmentVariableW(boost::nowide::widen(var).c_str(), nullptr, 0);
     if ( !dwRet )
     {
         // this means that there is no such variable
@@ -475,15 +478,21 @@ bool wxGetEnv(const wxString& var,
 
     if ( value )
     {
-        std::ignore = ::GetEnvironmentVariableW(var.t_str(),
-                                       wxStringBuffer(*value, dwRet),
+        std::wstring strBuffer;
+
+        strBuffer.resize(dwRet);
+
+        std::ignore = ::GetEnvironmentVariableW(boost::nowide::widen(var).c_str(),
+                                       &strBuffer[0],
                                        dwRet);
+
+        *value = boost::nowide::narrow(strBuffer);
     }
 
     return true;
 }
 
-bool wxDoSetEnv(const wxString& var, const wxChar *value)
+bool wxDoSetEnv(const std::string& var, const std::string& value)
 {
     // update the CRT environment if possible as people expect getenv() to also
     // work and it is not affected by Win32 SetEnvironmentVariable() call (OTOH
@@ -498,14 +507,14 @@ bool wxDoSetEnv(const wxString& var, const wxChar *value)
     // string instead of using it as part of environment so we can safely call
     // it here without going through all the troubles with wxSetEnvModule as in
     // src/unix/utilsunx.cpp
-    wxString envstr = var;
-    envstr += '=';
-    if ( value )
+    std::string envstr = var + '=';
+
+    if ( !value.empty() )
         envstr += value;
-    if ( _tputenv(envstr.t_str()) != 0 )
+    if ( _wputenv(boost::nowide::widen(envstr).c_str()) != 0 )
         return false;
 #else // other compiler
-    if ( !::SetEnvironmentVariable(var.t_str(), value) )
+    if ( !::SetEnvironmentVariableW(boost::nowide::widen(var).c_str(), value) )
     {
         wxLogLastError(wxT("SetEnvironmentVariable"));
 
@@ -516,14 +525,14 @@ bool wxDoSetEnv(const wxString& var, const wxChar *value)
     return true;
 }
 
-bool wxSetEnv(const wxString& variable, const wxString& value)
+bool wxSetEnv(const std::string& variable, const std::string& value)
 {
-    return wxDoSetEnv(variable, value.t_str());
+    return wxDoSetEnv(variable, value);
 }
 
-bool wxUnsetEnv(const wxString& variable)
+bool wxUnsetEnv(const std::string& variable)
 {
-    return wxDoSetEnv(variable, nullptr);
+    return wxDoSetEnv(variable, "");
 }
 
 // ----------------------------------------------------------------------------
@@ -915,15 +924,15 @@ bool wxIsDebuggerRunning()
 bool
 wxLoadUserResource(const void **outData,
                    size_t *outLen,
-                   const wxString& resourceName,
+                   const std::string& resourceName,
                    const wxChar* resourceType,
                    WXHINSTANCE instance)
 {
     wxCHECK_MSG( outData && outLen, false, "output pointers can't be NULL" );
 
     HRSRC hResource = ::FindResourceW(instance,
-                                     resourceName.t_str(),
-                                     resourceType);
+                                      boost::nowide::widen(resourceName).c_str(),
+                                      resourceType);
     if ( !hResource )
         return false;
 
@@ -1528,7 +1537,7 @@ wxCreateHiddenWindow(LPCWSTR *pclassname, LPCWSTR classname, WNDPROC wndproc)
     // register the class fi we need to first
     if ( *pclassname == nullptr )
     {
-        WNDCLASS wndclass;
+        WNDCLASSW wndclass;
         wxZeroMemory(wndclass);
 
         wndclass.lpfnWndProc   = wndproc;
@@ -1546,7 +1555,7 @@ wxCreateHiddenWindow(LPCWSTR *pclassname, LPCWSTR classname, WNDPROC wndproc)
     }
 
     // next create the window
-    HWND hwnd = ::CreateWindow
+    HWND hwnd = ::CreateWindowW
                   (
                     *pclassname,
                     nullptr,

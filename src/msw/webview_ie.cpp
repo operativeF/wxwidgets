@@ -24,6 +24,7 @@
 #include "wx/dynlib.h"
 #include "wx/scopeguard.h"
 #include "wx/tokenzr.h"
+#include "wx/stringutils.h"
 
 #include "wx/msw/private/webview_ie.h"
 #include "wx/private/jsscriptwrapper.h"
@@ -157,8 +158,8 @@ wxWebViewIE::~wxWebViewIE()
 
 wxWebViewIEImpl::~wxWebViewIEImpl()
 {
-    wxDynamicLibrary urlMon(wxT("urlmon.dll"));
-    if(urlMon.HasSymbol(wxT("CoInternetGetSession")))
+    wxDynamicLibrary urlMon("urlmon.dll");
+    if(urlMon.HasSymbol("CoInternetGetSession"))
     {
         using CoInternetGetSession_t = HRESULT (WINAPI*)(DWORD,
                                                          wxIInternetSession**,
@@ -998,7 +999,7 @@ bool wxWebViewIE::MSWSetEmulationLevel(wxWebViewIE_EmulationLevel level)
         return false;
     }
 
-    const wxString programName = wxGetFullModuleName().AfterLast('\\');
+    const std::string programName = wx::utils::AfterLast(wxGetFullModuleName(), '\\');
     if ( level != wxWEBVIEWIE_EMU_DEFAULT )
     {
         if ( !key.SetValue(programName, level) )
@@ -1082,8 +1083,8 @@ bool wxWebViewIE::RunScript(const wxString& javascript, wxString* output) const
 
 void wxWebViewIE::RegisterHandler(std::shared_ptr<wxWebViewHandler> handler)
 {
-    wxDynamicLibrary urlMon(wxT("urlmon.dll"));
-    if(urlMon.HasSymbol(wxT("CoInternetGetSession")))
+    wxDynamicLibrary urlMon("urlmon.dll");
+    if(urlMon.HasSymbol("CoInternetGetSession"))
     {
         typedef HRESULT (WINAPI *CoInternetGetSession_t)(DWORD, wxIInternetSession**, DWORD);
         wxDYNLIB_FUNCTION(CoInternetGetSession_t, CoInternetGetSession, urlMon);
@@ -1378,7 +1379,7 @@ bool wxWebViewIEImpl::EnableControlFeature(long flag, bool enable)
 {
 #if wxUSE_DYNLIB_CLASS
 
-    wxDynamicLibrary urlMon(wxT("urlmon.dll"));
+    wxDynamicLibrary urlMon("urlmon.dll");
     if( urlMon.IsLoaded() &&
         urlMon.HasSymbol("CoInternetSetFeatureEnabled") &&
         urlMon.HasSymbol("CoInternetIsFeatureEnabled"))

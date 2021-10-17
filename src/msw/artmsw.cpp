@@ -15,6 +15,8 @@
 #ifndef WX_PRECOMP
     #include "wx/msw/private.h"
     #include "wx/msw/wrapwin.h"
+
+    #include <boost/nowide/convert.hpp>
 #endif
 
 #include "wx/artprov.h"
@@ -32,7 +34,7 @@ namespace
 {
 
 #ifdef SHDefExtractIcon
-    #define MSW_SHDefExtractIcon SHDefExtractIcon
+    #define MSW_SHDefExtractIconW SHDefExtractIconW
 #else // !defined(SHDefExtractIcon)
 
 // MinGW doesn't provide SHDefExtractIcon() up to at least the 5.3 version, so
@@ -117,10 +119,10 @@ MSW_SHGetStockIconInfo(SHSTOCKICONID siid,
 
 // Wrapper for SHDefExtractIcon().
 wxBitmap
-MSWGetBitmapFromIconLocation(const TCHAR* path, int index, const wxSize& size)
+MSWGetBitmapFromIconLocation(const WCHAR* path, int index, const wxSize& size)
 {
     HICON hIcon = nullptr;
-    if ( MSW_SHDefExtractIcon(path, index, 0, &hIcon, nullptr, size.x) != S_OK )
+    if ( MSW_SHDefExtractIconW(path, index, 0, &hIcon, nullptr, size.x) != S_OK )
         return wxNullBitmap;
 
     // Note that using "size.x" twice here is not a typo: normally size.y is
@@ -135,14 +137,14 @@ MSWGetBitmapFromIconLocation(const TCHAR* path, int index, const wxSize& size)
 }
 
 wxBitmap
-MSWGetBitmapForPath(const wxString& path, const wxSize& size, DWORD uFlags = 0)
+MSWGetBitmapForPath(const std::string& path, const wxSize& size, DWORD uFlags = 0)
 {
     SHFILEINFO fi;
     wxZeroMemory(fi);
 
     uFlags |= SHGFI_USEFILEATTRIBUTES | SHGFI_ICONLOCATION;
 
-    if ( !::SHGetFileInfoW(path.t_str(),
+    if ( !::SHGetFileInfoW(boost::nowide::widen(path).c_str(),
                            FILE_ATTRIBUTE_DIRECTORY,
                            &fi,
                            sizeof(SHFILEINFO),

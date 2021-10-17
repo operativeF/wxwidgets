@@ -1559,7 +1559,7 @@ bool wxFileName::ReplaceEnvVariable(const wxString& envname,
                                     wxPathFormat format)
 {
     // look into stringForm for the contents of the given environment variable
-    wxString val;
+    std::string val;
     if (envname.empty() ||
         !wxGetEnv(envname, &val))
         return false;

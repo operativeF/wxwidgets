@@ -231,7 +231,7 @@ void wxMessageDialog::ReplaceStaticWithEdit()
     HWND hwndEdit = ::CreateWindowW
                       (
                         L"EDIT",
-                        wxTextBuffer::Translate(text).t_str(),
+                        boost::nowide::widen(wxTextBuffer::Translate(text)).c_str(),
                         WS_CHILD | WS_VSCROLL | WS_VISIBLE |
                         ES_MULTILINE | ES_READONLY | ES_AUTOVSCROLL,
                         rc.left, rc.top,

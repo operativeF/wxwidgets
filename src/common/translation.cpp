@@ -1902,7 +1902,7 @@ std::vector<wxString> wxFileTranslationsLoader::GetAvailableTranslations(const w
             continue;
 
         wxString lang;
-        for ( bool ok = dir.GetFirst(&lang, wxString(), wxDIR_DIRS);
+        for ( bool ok = dir.GetFirst(&lang, "", wxDIR_DIRS);
               ok;
               ok = dir.GetNext(&lang) )
         {

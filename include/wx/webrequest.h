@@ -219,7 +219,7 @@ public:
     // factory functions to get access to them.
     static wxWebSession& GetDefault();
 
-    static wxWebSession New(const wxString& backend = {});
+    static wxWebSession New(const std::string& backend = {});
 
     // Can be used to check if the given backend is available without actually
     // creating a session using it.

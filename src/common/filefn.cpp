@@ -15,6 +15,8 @@
 #include "wx/filefn.h"
 
 #ifndef WX_PRECOMP
+    #include <boost/nowide/convert.hpp>
+
     #include <algorithm>
     #include <array>
     #include <vector>
@@ -122,7 +124,7 @@ void wxPathList::AddEnvList (const wxString& envVariable)
         wxT(":;");
 #endif
 
-    wxString val;
+    std::string val;
     if ( wxGetEnv(envVariable, &val) )
     {
         // split into an array of string the value of the env var
@@ -438,14 +440,14 @@ wxDoCopyFile(wxFile& fileIn,
 
 // Copy files
 bool
-wxCopyFile (const wxString& file1, const wxString& file2, bool overwrite)
+wxCopyFile (const std::string& file1, const std::string& file2, bool overwrite)
 {
 #if defined(__WIN32__)
     // CopyFile() copies file attributes and modification time too, so use it
     // instead of our code if available
     //
     // NB: 3rd parameter is bFailIfExists i.e. the inverse of overwrite
-    if ( !::CopyFile(file1.t_str(), file2.t_str(), !overwrite) )
+    if ( !::CopyFileW(boost::nowide::widen(file1).c_str(), boost::nowide::widen(file2).c_str(), !overwrite) )
     {
         wxLogSysError(_("Failed to copy the file '%s' to '%s'"),
                       file1.c_str(), file2.c_str());
@@ -772,13 +774,13 @@ wxString wxGetCwd()
     return str;
 }
 
-bool wxSetWorkingDirectory(const wxString& d)
+bool wxSetWorkingDirectory(const std::string& d)
 {
     bool success = false;
 #if defined(__UNIX__) || defined(__WXMAC__)
     success = (chdir(d.fn_str()) == 0);
 #elif defined(__WINDOWS__)
-    success = (SetCurrentDirectory(d.t_str()) != 0);
+    success = (::SetCurrentDirectoryW(boost::nowide::widen(d).c_str()) != 0);
 #endif
     if ( !success )
     {
@@ -793,7 +795,7 @@ wxString wxGetOSDirectory()
 {
 #if defined(__WINDOWS__)
     wxChar buf[MAX_PATH];
-    if ( !GetWindowsDirectory(buf, MAX_PATH) )
+    if ( !::GetWindowsDirectoryW(buf, MAX_PATH) )
     {
         wxLogLastError(wxS("GetWindowsDirectory"));
     }
@@ -968,20 +970,20 @@ std::size_t WXDLLIMPEXP_BASE wxParseCommonDialogsFilter(const wxString& filterSt
 }
 
 #if defined(__WINDOWS__) && !defined(__UNIX__)
-static bool wxCheckWin32Permission(const wxString& path, DWORD access)
+static bool wxCheckWin32Permission(const std::string& path, DWORD access)
 {
     // quoting the MSDN: "To obtain a handle to a directory, call the
     // CreateFile function with the FILE_FLAG_BACKUP_SEMANTICS flag"
-    const DWORD dwAttr = ::GetFileAttributes(path.t_str());
+    const DWORD dwAttr = ::GetFileAttributesW(boost::nowide::widen(path).c_str());
     if ( dwAttr == INVALID_FILE_ATTRIBUTES )
     {
         // file probably doesn't exist at all
         return false;
     }
 
-    const HANDLE h = ::CreateFile
+    const HANDLE h = ::CreateFileW
                  (
-                    path.t_str(),
+                    boost::nowide::widen(path).c_str(),
                     access,
                     FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE,
                     nullptr,

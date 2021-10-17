@@ -48,6 +48,7 @@ std::string wxTheCurrentTestClass, wxTheCurrentTestMethod;
 #include "wx/log.h"
 #include "wx/socket.h"
 #include "wx/evtloop.h"
+#include "wx/stringutils.h"
 
 using namespace std;
 
@@ -371,20 +372,20 @@ extern bool IsAutomaticTest()
     {
         // Allow setting an environment variable to emulate buildslave user for
         // testing.
-        wxString username;
-        if ( !wxGetEnv(wxASCII_STR("WX_TEST_USER"), &username) )
+        std::string username;
+        if ( !wxGetEnv("WX_TEST_USER", &username) )
             username = wxGetUserId();
 
-        username.MakeLower();
-        s_isAutomatic = username == wxASCII_STR("buildbot") ||
-                            username.Matches(wxASCII_STR("sandbox*"));
+        wx::utils::ToLower(username);
+        s_isAutomatic = username == "buildbot" ||
+                        username == "sandbox*";
 
         // Also recognize various CI environments.
         if ( !s_isAutomatic )
         {
-            s_isAutomatic = wxGetEnv(wxASCII_STR("TRAVIS"), nullptr) ||
-                              wxGetEnv(wxASCII_STR("GITHUB_ACTIONS"), nullptr) ||
-                                wxGetEnv(wxASCII_STR("APPVEYOR"), nullptr);
+            s_isAutomatic = wxGetEnv("TRAVIS", nullptr) ||
+                              wxGetEnv("GITHUB_ACTIONS", nullptr) ||
+                                wxGetEnv("APPVEYOR", nullptr);
         }
     }
 
@@ -396,8 +397,8 @@ extern bool IsRunningUnderXVFB()
     static int s_isRunningUnderXVFB = -1;
     if ( s_isRunningUnderXVFB == -1 )
     {
-        wxString value;
-        s_isRunningUnderXVFB = wxGetEnv(wxASCII_STR("wxUSE_XVFB"), &value) && value == wxASCII_STR("1");
+        std::string value;
+        s_isRunningUnderXVFB = wxGetEnv("wxUSE_XVFB", &value) && value == "1";
     }
 
     return s_isRunningUnderXVFB == 1;
@@ -426,12 +427,12 @@ bool EnableUITests()
     {
         // Allow explicitly configuring this via an environment variable under
         // all platforms.
-        wxString enabled;
+        std::string enabled;
         if ( wxGetEnv(wxASCII_STR("WX_UI_TESTS"), &enabled) )
         {
-            if ( enabled == wxASCII_STR("1") )
+            if ( enabled == "1" )
                 s_enabled = 1;
-            else if ( enabled == wxASCII_STR("0") )
+            else if ( enabled == "0" )
                 s_enabled = 0;
             else
                 wxFprintf(stderr, wxASCII_STR("Unknown \"WX_UI_TESTS\" value \"%s\" ignored.\n"), enabled);

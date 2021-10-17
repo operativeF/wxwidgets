@@ -6350,7 +6350,7 @@ int wxWindowMSW::HandleMenuChar(int chAccel,
 {
     const HMENU hmenu = (HMENU)lParam;
 
-    WinStruct<MENUITEMINFO> mii;
+    WinStruct<MENUITEMINFOW> mii;
 
     // use MIIM_FTYPE to know if the item is ownerdrawn or not
     mii.fMask = MIIM_FTYPE | MIIM_DATA;

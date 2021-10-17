@@ -169,9 +169,9 @@ bool wxNotebook::Create(wxWindow *parent,
         if ( !s_clsNotebook.IsInitialized() )
         {
             // get a copy of standard class and modify it
-            WNDCLASS wc;
+            WNDCLASSW wc;
 
-            if ( ::GetClassInfo(nullptr, WC_TABCONTROL, &wc) )
+            if ( ::GetClassInfoW(nullptr, WC_TABCONTROL, &wc) )
             {
                 gs_wndprocNotebook = wc.lpfnWndProc;
                 wc.lpszClassName = L"_wx_SysTabCtl32";

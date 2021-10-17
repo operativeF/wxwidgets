@@ -25,6 +25,7 @@
 #include <string>
 
 #include <boost/nowide/convert.hpp>
+#include <boost/nowide/stackstring.hpp>
 
 class WXDLLIMPEXP_FWD_CORE wxFont;
 struct WXDLLIMPEXP_FWD_CORE wxSize;
@@ -715,7 +716,7 @@ public:
     bool IsRegistered() const { return m_registered == 1; }
 
     // try to register the class if not done yet, return true on success
-    bool Register(const WNDCLASS& wc)
+    bool Register(const WNDCLASSW& wc)
     {
         // we should only be called if we hadn't been initialized yet
         wxASSERT_MSG( m_registered == -1,
@@ -809,24 +810,27 @@ private:
 // ---------------------------------------------------------------------------
 
 // return the full path of the given module
-inline wxString wxGetFullModuleName(HMODULE hmod)
+inline std::string wxGetFullModuleName(HMODULE hmod)
 {
-    wxString fullname;
+    std::wstring fullname;
+
+    fullname.resize(MAX_PATH);
+
     if ( !::GetModuleFileNameW
             (
                 hmod,
-                wxStringBuffer(fullname, MAX_PATH),
+                &fullname[0],
                 MAX_PATH
             ) )
     {
         wxLogLastError(wxT("GetModuleFileName"));
     }
 
-    return fullname;
+    return boost::nowide::narrow(fullname);
 }
 
 // return the full path of the program file
-inline wxString wxGetFullModuleName()
+inline std::string wxGetFullModuleName()
 {
     return wxGetFullModuleName((HMODULE)wxGetInstance());
 }

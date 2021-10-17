@@ -1006,10 +1006,10 @@ bool wxAMMediaBackend::CreateControl(wxControl* ctrl, wxWindow* parent,
     // First get the AMGetErrorText procedure in debug
     // mode for more meaningful messages
 #if wxDEBUG_LEVEL
-    if ( m_dllQuartz.Load(wxT("quartz.dll"), wxDL_VERBATIM) )
+    if ( m_dllQuartz.Load("quartz.dll", wxDL_VERBATIM) )
     {
         m_lpAMGetErrorText = (LPAMGETERRORTEXT)
-                                m_dllQuartz.GetSymbolAorW(wxT("AMGetErrorText"));
+                                m_dllQuartz.GetSymbolAorW("AMGetErrorText");
     }
 #endif // wxDEBUG_LEVEL
 

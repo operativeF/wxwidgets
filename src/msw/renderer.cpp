@@ -1049,7 +1049,7 @@ void wxRendererXP::DrawItemText(wxWindow* win,
     {
         if (wxGetWinVersion() >= wxWinVersion_Vista)
         {
-            wxLoadedDLL dllUxTheme(wxS("uxtheme.dll"));
+            wxLoadedDLL dllUxTheme("uxtheme.dll");
             wxDL_INIT_FUNC(s_, DrawThemeTextEx, dllUxTheme);
         }
 

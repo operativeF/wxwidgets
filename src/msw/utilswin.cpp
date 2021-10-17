@@ -25,12 +25,12 @@
 // Launch document with default app
 // ----------------------------------------------------------------------------
 
-bool wxLaunchDefaultApplication(const wxString& document, unsigned int flags)
+bool wxLaunchDefaultApplication(const std::string& document, unsigned int flags)
 {
     wxUnusedVar(flags);
 
-    WinStruct<SHELLEXECUTEINFO> sei;
-    sei.lpFile = document.t_str();
+    WinStruct<SHELLEXECUTEINFOW> sei;
+    sei.lpFile = boost::nowide::widen(document).c_str();
     sei.nShow = SW_SHOWDEFAULT;
 
     // avoid Windows message box in case of error for consistency with
@@ -131,9 +131,9 @@ bool wxDoLaunchDefaultBrowser(const wxLaunchBrowserParams& params)
     }
 #endif // wxUSE_IPC
 
-    WinStruct<SHELLEXECUTEINFO> sei;
-    sei.lpFile = params.GetPathOrURL().t_str();
-    sei.lpVerb = wxT("open");
+    WinStruct<SHELLEXECUTEINFOW> sei;
+    sei.lpFile = boost::nowide::widen(params.GetPathOrURL()).c_str();
+    sei.lpVerb = L"open";
     sei.nShow = SW_SHOWNORMAL;
     sei.fMask = SEE_MASK_FLAG_NO_UI; // we give error message ourselves
 

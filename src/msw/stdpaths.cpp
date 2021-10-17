@@ -247,7 +247,7 @@ wxStandardPaths::wxStandardPaths()
     IgnoreAppBuildSubDirs();
 }
 
-wxString wxStandardPaths::GetExecutablePath() const
+std::string wxStandardPaths::GetExecutablePath() const
 {
     return wxGetFullModuleName();
 }

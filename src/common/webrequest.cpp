@@ -911,12 +911,12 @@ wxWebSession& wxWebSession::GetDefault()
 }
 
 // static
-wxWebSession wxWebSession::New(const wxString& backendOrig)
+wxWebSession wxWebSession::New(const std::string& backendOrig)
 {
     if ( gs_factoryMap.empty() )
         InitFactoryMap();
 
-    wxString backend = backendOrig;
+    std::string backend = backendOrig;
     if ( backend.empty() )
     {
         if ( !wxGetEnv("WXWEBREQUEST_BACKEND", &backend) )

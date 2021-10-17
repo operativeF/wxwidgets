@@ -8815,7 +8815,7 @@ bool wxRichTextBuffer::PasteFromClipboard(long position)
     {
         if (wxTheClipboard->Open())
         {
-            if (wxTheClipboard->IsSupported(wxDataFormat(wxRichTextBufferDataObject::GetRichTextBufferFormatId())))
+            if (wxTheClipboard->IsSupported(wxDataFormat(wxRichTextBufferDataObject::ms_richTextBufferFormatId)))
             {
                 wxRichTextBufferDataObject data;
                 wxTheClipboard->GetData(data);
@@ -8901,7 +8901,7 @@ bool wxRichTextBuffer::CanPasteFromClipboard() const
     {
         if (wxTheClipboard->IsSupported(wxDF_TEXT)
             || wxTheClipboard->IsSupported(wxDF_UNICODETEXT)
-            || wxTheClipboard->IsSupported(wxDataFormat(wxRichTextBufferDataObject::GetRichTextBufferFormatId())) ||
+            || wxTheClipboard->IsSupported(wxDataFormat(wxRichTextBufferDataObject::ms_richTextBufferFormatId)) ||
             wxTheClipboard->IsSupported(wxDF_BITMAP))
         {
             canPaste = true;
@@ -13303,14 +13303,12 @@ wxString wxRichTextImageBlock::GetExtension() const
  * The data object for a wxRichTextBuffer
  */
 
-const wxChar *wxRichTextBufferDataObject::ms_richTextBufferFormatId = wxT("wxRichText");
-
 wxRichTextBufferDataObject::wxRichTextBufferDataObject(wxRichTextBuffer* richTextBuffer)
     : m_richTextBuffer(richTextBuffer)
 {
     // this string should uniquely identify our format, but is otherwise
     // arbitrary
-    m_formatRichTextBuffer.SetId(GetRichTextBufferFormatId());
+    m_formatRichTextBuffer.SetId(ms_richTextBufferFormatId);
 
     SetFormat(m_formatRichTextBuffer);
 }

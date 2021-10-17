@@ -378,7 +378,7 @@ public:
     // Load the font from the given file and return true on success or false on
     // error (an error message will be logged in this case).
 #if wxUSE_PRIVATE_FONTS
-    static bool AddPrivateFont(const wxString& filename);
+    static bool AddPrivateFont(const std::string& filename);
 #endif // wxUSE_PRIVATE_FONTS
 
     bool operator==(const wxFontBase& font) const;

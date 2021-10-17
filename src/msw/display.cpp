@@ -17,6 +17,8 @@
     #include "wx/msw/wrapwin.h"
     #include "wx/msw/wrap/utils.h"
 
+    #include <boost/nowide/convert.hpp>
+
     #include <memory>
 #endif
 
@@ -132,7 +134,7 @@ public:
     wxSize GetPPI() const override;
     double GetScaleFactor() const override;
 
-    wxString GetName() const override;
+    std::string GetName() const override;
     bool IsPrimary() const override;
 
     wxVideoMode GetCurrentMode() const override;
@@ -318,9 +320,9 @@ double wxDisplayMSW::GetScaleFactor() const
     return ppi ? ppi / (double)wxDisplay::GetStdPPIValue() : 1.0;
 }
 
-wxString wxDisplayMSW::GetName() const
+std::string wxDisplayMSW::GetName() const
 {
-    return m_info.monInfo.szDevice;
+    return boost::nowide::narrow(m_info.monInfo.szDevice);
 }
 
 bool wxDisplayMSW::IsPrimary() const
@@ -440,7 +442,7 @@ bool wxDisplayMSW::ChangeMode(const wxVideoMode& mode)
     // do change the mode
     switch ( ::ChangeDisplaySettingsExW
              (
-                GetName().t_str(),  // display name
+                boost::nowide::widen(GetName()).c_str(),  // display name
                 pDevMode,           // dev mode or NULL to reset
                 wxRESERVED_PARAM,
                 flags,

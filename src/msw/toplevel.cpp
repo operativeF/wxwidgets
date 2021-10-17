@@ -1348,7 +1348,7 @@ HWND wxTLWHiddenParentModule::GetHWND()
         {
             static constexpr wchar_t HIDDEN_PARENT_CLASS[] = L"wxTLWHiddenParent";
 
-            WNDCLASS wndclass;
+            WNDCLASSW wndclass;
             wxZeroMemory(wndclass);
 
             wndclass.lpfnWndProc   = DefWindowProcW;

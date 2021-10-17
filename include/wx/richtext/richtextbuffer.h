@@ -6902,11 +6902,6 @@ public:
     */
     wxRichTextBuffer* GetRichTextBuffer();
 
-    /**
-        Returns the id for the new data format.
-    */
-    static const wxChar* GetRichTextBufferFormatId() { return ms_richTextBufferFormatId; }
-
     // base class pure virtuals
 
     wxDataFormat GetPreferredFormat(Direction dir) const override;
@@ -6920,10 +6915,11 @@ public:
     bool GetDataHere(const wxDataFormat&, void *buf) const override { return GetDataHere(buf); }
     bool SetData(const wxDataFormat&, size_t len, const void *buf) override { return SetData(len, buf); }
 
+    inline static constexpr char ms_richTextBufferFormatId[] = "wxRichText";  // our format id
+
 protected:
     wxDataFormat            m_formatRichTextBuffer;     // our custom format
     wxRichTextBuffer*       m_richTextBuffer;           // our data
-    static const wxChar*    ms_richTextBufferFormatId;  // our format id
 };
 
 #endif

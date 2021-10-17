@@ -539,6 +539,7 @@ void wxFileListCtrl::UpdateFiles()
             int hiddenFlag = m_showHidden ? wxDIR_HIDDEN : 0;
 
             bool cont;
+
             wxString f;
 
             // Get the directories first (not matched against wildcards):

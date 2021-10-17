@@ -1108,9 +1108,9 @@ private:
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxPrivateFontsListModule, wxModule);
 
-bool wxFontBase::AddPrivateFont(const wxString& filename)
+bool wxFontBase::AddPrivateFont(const std::string& filename)
 {
-    if ( !::AddFontResourceExW(filename.t_str(), FR_PRIVATE, nullptr) )
+    if ( !::AddFontResourceExW(boost::nowide::widen(filename).c_str(), FR_PRIVATE, nullptr) )
     {
         wxLogSysError(_("Font file \"%s\" couldn't be loaded"), filename);
         return false;

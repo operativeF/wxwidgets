@@ -80,8 +80,8 @@ public:
     // except that the line terminator characters are changed to correspond the
     // given type. Called with the default argument, the function translates
     // the string to the native format (Unix for Unix, DOS for Windows, ...).
-    static wxString Translate(const wxString& text,
-                            wxTextFileType type = typeDefault);
+    static std::string Translate(const std::string& text,
+                                 wxTextFileType type = typeDefault);
 
     // get the buffer termination string
     static std::string GetEOL(wxTextFileType type = typeDefault);
