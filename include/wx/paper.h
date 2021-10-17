@@ -36,29 +36,31 @@ public:
     // platformId is a platform-specific id, such as in Windows, DMPAPER_...
     wxPrintPaperType(wxPaperSize paperId, int platformId, const wxString& name, int w, int h);
 
-    inline wxString GetName() const { return wxGetTranslation(m_paperName); }
-    inline wxPaperSize GetId() const { return m_paperId; }
-    inline int GetPlatformId() const { return m_platformId; }
+    wxString GetName() const { return wxGetTranslation(m_paperName); }
+    wxPaperSize GetId() const { return m_paperId; }
+    int GetPlatformId() const { return m_platformId; }
 
     // Get width and height in tenths of a millimetre
-    inline int GetWidth() const { return m_width; }
-    inline int GetHeight() const { return m_height; }
+    int GetWidth() const { return m_width; }
+    int GetHeight() const { return m_height; }
 
     // Get size in tenths of a millimetre
-    inline wxSize GetSize() const { return wxSize(m_width, m_height); }
+    wxSize GetSize() const { return wxSize(m_width, m_height); }
 
     // Get size in a millimetres
-    inline wxSize GetSizeMM() const { return wxSize(m_width/10, m_height/10); }
+    wxSize GetSizeMM() const { return wxSize(m_width/10, m_height/10); }
 
     // Get width and height in device units (1/72th of an inch)
     wxSize GetSizeDeviceUnits() const ;
 
 public:
-    wxPaperSize m_paperId{wxPaperSize::None};
+    wxString    m_paperName;
+
     int         m_platformId{0};
     int         m_width{0};  // In tenths of a millimetre
     int         m_height{0}; // In tenths of a millimetre
-    wxString    m_paperName;
+
+    wxPaperSize m_paperId{wxPaperSize::None};
 };
 
 WX_DECLARE_STRING_HASH_MAP(wxPrintPaperType*, wxStringToPrintPaperTypeHashMap);

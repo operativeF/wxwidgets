@@ -35,11 +35,7 @@ class WXDLLIMPEXP_FWD_CORE wxDC;
 class WXDLLIMPEXP_CORE wxOwnerDrawnBase
 {
 public:
-    wxOwnerDrawnBase()
-    {
-        m_ownerDrawn = false;
-        m_margin = ms_defaultMargin;
-    }
+    wxOwnerDrawnBase() = default;
 
     virtual ~wxOwnerDrawnBase() = default;
 
@@ -126,11 +122,11 @@ private:
 
     wxFont      m_font;             // font to use for drawing
 
-    int         m_margin;           // space occupied by bitmap to the left of the item
-
-    bool        m_ownerDrawn;       // true if something is non standard
-
     inline static int  ms_defaultMargin{3};
+
+    int         m_margin{ms_defaultMargin}; // space occupied by bitmap to the left of the item
+
+    bool        m_ownerDrawn{false};       // true if something is non standard
 };
 
 // ----------------------------------------------------------------------------

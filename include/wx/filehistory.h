@@ -19,6 +19,7 @@
 #include "wx/list.h"
 #include "wx/string.h"
 
+#include <filesystem>
 #include <vector>
 
 class WXDLLIMPEXP_FWD_CORE wxMenu;
@@ -31,6 +32,8 @@ enum class wxFileHistoryMenuPathStyle
     ShowNever,
     ShowAlways
 };
+
+namespace fs = std::filesystem;
 
 // ----------------------------------------------------------------------------
 // File history management
@@ -47,7 +50,7 @@ public:
     virtual ~wxFileHistoryBase() = default;
 
     // Operations
-    virtual void AddFileToHistory(const wxString& file);
+    virtual void AddFileToHistory(const fs::path& file);
     virtual void RemoveFileFromHistory(size_t i);
     virtual int GetMaxFiles() const { return (int)m_fileMaxFiles; }
     virtual void UseMenu(wxMenu *menu);
@@ -64,7 +67,7 @@ public:
     virtual void AddFilesToMenu(wxMenu* menu); // Single menu
 
     // Accessors
-    virtual wxString GetHistoryFile(size_t i) const { return m_fileHistory[i]; }
+    virtual fs::path GetHistoryFile(size_t i) const { return m_fileHistory[i]; }
     virtual size_t GetCount() const { return m_fileHistory.size(); }
 
     const wxList& GetMenus() const { return m_fileMenus; }
@@ -78,7 +81,7 @@ public:
 
 protected:
     // Last n files
-    std::vector<wxString>       m_fileHistory;
+    std::vector<fs::path>       m_fileHistory;
 
     // Menus to maintain (may need several for an MDI app)
     wxList                      m_fileMenus;

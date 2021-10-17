@@ -57,6 +57,7 @@
 #include "wx/except.h"
 
 #include <fstream>
+#include <filesystem>
 
 // ----------------------------------------------------------------------------
 // wxWidgets macros
@@ -78,18 +79,16 @@ wxIMPLEMENT_CLASS(wxDocParentFrame, wxFrame);
 // private helpers
 // ----------------------------------------------------------------------------
 
+namespace fs = std::filesystem;
+
 namespace
 {
 
-std::string FindExtension(const std::string& path)
+std::string FindExtension(const fs::path& path)
 {
-    wxString ext;
-    wxFileName::SplitPath(path, nullptr, nullptr, &ext);
-
     // VZ: extensions are considered not case sensitive - is this really a good
     //     idea?
-    // FIXME: Use string
-    return ext.MakeLower().ToStdString();
+    return wx::utils::ToLowerCopy(path.extension().string());
 }
 
 } // anonymous namespace
@@ -271,7 +270,7 @@ bool wxDocument::OnNewDocument()
 
     const std::string name = GetDocumentManager()->MakeNewDocumentName().ToStdString();
     SetTitle(name);
-    SetFilename(name, true);
+    SetFilename(fs::path{name}, true);
 
     return true;
 }
@@ -331,17 +330,19 @@ bool wxDocument::SaveAs()
     std::string filter = docTemplate->GetFileFilter() ;
 #endif
 
-    wxString defaultDir = docTemplate->GetDirectory();
+    fs::path defaultDir = docTemplate->GetDirectory();
     if ( defaultDir.empty() )
     {
-        defaultDir = wxPathOnly(GetFilename());
+        defaultDir = GetFilename().relative_path();
+
         if ( defaultDir.empty() )
             defaultDir = GetDocumentManager()->GetLastDirectory();
     }
 
+    // TODO: Make wxFileSelector use paths
     std::string fileName = wxFileSelector(_("Save As").ToStdString(),
-            defaultDir,
-            wxFileNameFromPath(GetFilename()),
+            defaultDir.string(),
+            wxFileNameFromPath(GetFilename().string()),
             docTemplate->GetDefaultExtension(),
             filter,
             wxFD_SAVE | wxFD_OVERWRITE_PROMPT,
@@ -369,7 +370,7 @@ bool wxDocument::SaveAs()
     return true;
 }
 
-bool wxDocument::OnSaveDocument(const std::string& file)
+bool wxDocument::OnSaveDocument(const fs::path& file)
 {
     if ( file.empty() )
         return false;
@@ -386,7 +387,7 @@ bool wxDocument::OnSaveDocument(const std::string& file)
     return true;
 }
 
-bool wxDocument::OnOpenDocument(const std::string& file)
+bool wxDocument::OnOpenDocument(const fs::path& file)
 {
     // notice that there is no need to check the modified flag here for the
     // reasons explained in OnNewDocument()
@@ -449,7 +450,7 @@ std::string wxDocument::DoGetUserReadableName() const
         return m_documentTitle;
 
     if ( !m_documentFile.empty() )
-        return wxFileNameFromPath(m_documentFile).ToStdString();
+        return m_documentFile.filename().string();
 
     return _("unnamed").ToStdString();
 }
@@ -522,7 +523,7 @@ bool wxDocument::RemoveView(wxView *view)
     return true;
 }
 
-bool wxDocument::OnCreate(const std::string& WXUNUSED(path), unsigned int flags)
+bool wxDocument::OnCreate(const fs::path& WXUNUSED(path), unsigned int flags)
 {
     return GetDocumentTemplate()->CreateView(this, flags) != nullptr;
 }
@@ -559,9 +560,9 @@ void wxDocument::NotifyClosing()
     }
 }
 
-void wxDocument::SetFilename(const std::string& filename, bool notifyViews)
+void wxDocument::SetFilename(const fs::path& filename, bool notifyViews)
 {
-    m_documentFile = filename;
+    m_documentFile.replace_filename(filename);
     OnChangeFilename(notifyViews);
 }
 
@@ -580,39 +581,38 @@ void wxDocument::OnChangeFilename(bool notifyViews)
     }
 }
 
-bool wxDocument::DoSaveDocument(const std::string& file)
+bool wxDocument::DoSaveDocument(const fs::path& file)
 {
-    // FIXME: Replace with fmt ofstream
     std::ofstream store(file, std::ios::binary);
     if ( !store )
     {
-        wxLogError(_("File \"%s\" could not be opened for writing."), file);
+        wxLogError(_("File \"%s\" could not be opened for writing."), file.string());
         return false;
     }
 
     if (!SaveObject(store))
     {
-        wxLogError(_("Failed to save document to the file \"%s\"."), file);
+        wxLogError(_("Failed to save document to the file \"%s\"."), file.string());
         return false;
     }
 
     return true;
 }
 
-bool wxDocument::DoOpenDocument(const std::string& file)
+bool wxDocument::DoOpenDocument(const fs::path& file)
 {
     // FIXME: Replace with fmt ifstream
     std::ifstream store(file, std::ios::binary);
     if ( !store )
     {
-        wxLogError(_("File \"%s\" could not be opened for reading."), file);
+        wxLogError(_("File \"%s\" could not be opened for reading."), file.string());
         return false;
     }
 
     LoadObject(store);
     if ( !store )
     {
-        wxLogError(_("Failed to read document from the file \"%s\"."), file);
+        wxLogError(_("Failed to read document from the file \"%s\"."), file.string());
         return false;
     }
 
@@ -767,7 +767,7 @@ wxDocTemplate::~wxDocTemplate()
 }
 
 // Tries to dynamically construct an object of the right class.
-wxDocument *wxDocTemplate::CreateDocument(const std::string& path, unsigned int flags)
+wxDocument *wxDocTemplate::CreateDocument(const fs::path& path, unsigned int flags)
 {
     // InitDocument() is supposed to delete the document object if its
     // initialization fails so don't use wxScopedPtr<> here: this is fragile
@@ -782,7 +782,7 @@ wxDocument *wxDocTemplate::CreateDocument(const std::string& path, unsigned int 
 }
 
 bool
-wxDocTemplate::InitDocument(wxDocument* doc, const std::string& path, unsigned int flags)
+wxDocTemplate::InitDocument(wxDocument* doc, const fs::path& path, unsigned int flags)
 {
     try
     {
@@ -827,19 +827,20 @@ wxView *wxDocTemplate::CreateView(wxDocument *doc, unsigned int flags)
 
 // The default (very primitive) format detection: check is the extension is
 // that of the template
-bool wxDocTemplate::FileMatchesTemplate(const std::string& path)
+bool wxDocTemplate::FileMatchesTemplate(const fs::path& path)
 {
     wxStringTokenizer parser (GetFileFilter(), wxT(";"));
-    wxString anything = wxT ("*");
+    std::string anything = "*";
     while (parser.HasMoreTokens())
     {
         wxString filter = parser.GetNextToken();
-        wxString filterExt = FindExtension (filter.ToStdString());
-        if ( filter.IsSameAs (anything)    ||
-             filterExt.IsSameAs (anything) ||
-             filterExt.IsSameAs (FindExtension (path)) )
+        std::string filterExt = FindExtension(std::filesystem::path{filter.ToStdString()});
+        if ( filter.IsSameAs(anything)    ||
+             wx::utils::IsSameAsCase(filterExt, anything) ||
+             wx::utils::IsSameAsCase(filterExt, FindExtension(path)) )
             return true;
     }
+    
     return wx::utils::IsSameAsNoCase(GetDefaultExtension(), FindExtension(path));
 }
 
@@ -980,7 +981,7 @@ bool wxDocManager::Initialize()
     return true;
 }
 
-wxString wxDocManager::GetLastDirectory() const
+fs::path wxDocManager::GetLastDirectory() const
 {
     // if we haven't determined the last used directory yet, do it now
     if ( m_lastDirectory.empty() )
@@ -995,11 +996,11 @@ wxString wxDocManager::GetLastDirectory() const
         // the last file he used
         if ( m_fileHistory && m_fileHistory->GetCount() )
         {
-            const std::string lastOpened = m_fileHistory->GetHistoryFile(0).ToStdString();
-            const wxFileName fn(lastOpened);
-            if ( fn.DirExists() )
+            const fs::path lastOpened = m_fileHistory->GetHistoryFile(0);
+            if ( fs::exists(lastOpened) )
             {
-                self->m_lastDirectory = fn.GetPath().ToStdString();
+                // TODO: Is this correct for getting the volume as well?
+                self->m_lastDirectory = lastOpened.relative_path();
             }
             //else: should we try the next one?
         }
@@ -1009,7 +1010,7 @@ wxString wxDocManager::GetLastDirectory() const
         // system-dependent default location for the document files
         if ( m_lastDirectory.empty() )
         {
-            self->m_lastDirectory = wxStandardPaths::Get().GetAppDocumentsDir().ToStdString();
+            self->m_lastDirectory = fs::path{wxStandardPaths::Get().GetAppDocumentsDir().ToStdString()};
         }
     }
 
@@ -1091,11 +1092,11 @@ void wxDocManager::OnMRUFile(wxCommandEvent& event)
 
 void wxDocManager::DoOpenMRUFile(unsigned n)
 {
-    std::string filename(GetHistoryFile(n));
+    auto filename = GetHistoryFile(n);
     if ( filename.empty() )
         return;
 
-    if ( wxFile::Exists(filename) )
+    if ( fs::exists(filename) )
     {
         // Try to open it but don't give an error if it failed: this could be
         // normal, e.g. because the user cancelled opening it, and we don't
@@ -1111,7 +1112,7 @@ void wxDocManager::DoOpenMRUFile(unsigned n)
     }
 }
 
-void wxDocManager::OnMRUFileNotExist(unsigned n, const std::string& filename)
+void wxDocManager::OnMRUFileNotExist(unsigned n, const fs::path& filename)
 {
     // remove the file which we can't open from the MRU list
     RemoveFileFromHistory(n);
@@ -1119,7 +1120,7 @@ void wxDocManager::OnMRUFileNotExist(unsigned n, const std::string& filename)
     // and tell the user about it
     wxLogError(_("The file '%s' doesn't exist and couldn't be opened.\n"
                  "It has been removed from the most recently used files list."),
-               filename);
+               filename.string());
 }
 
 #if wxUSE_PRINTING_ARCHITECTURE
@@ -1359,20 +1360,20 @@ void wxDocument::Activate()
         win->Raise();
 }
 
-wxDocument* wxDocManager::FindDocumentByPath(const std::string& path) const
+wxDocument* wxDocManager::FindDocumentByPath(const fs::path& path) const
 {
-    const wxFileName fileName(path);
+    const fs::path& fileName = path;
     for ( wxList::const_iterator i = m_docs.begin(); i != m_docs.end(); ++i )
     {
         wxDocument * const doc = wxStaticCast(*i, wxDocument);
 
-        if ( fileName == wxFileName(doc->GetFilename()) )
+        if ( fileName == doc->GetFilename() )
             return doc;
     }
     return nullptr;
 }
 
-wxDocument *wxDocManager::CreateDocument(const std::string& pathOrig, unsigned int flags)
+wxDocument *wxDocManager::CreateDocument(const fs::path& pathOrig, unsigned int flags)
 {
     // this ought to be const but SelectDocumentType/Path() are not
     // const-correct and can't be changed as, being virtual, this risks
@@ -1388,7 +1389,7 @@ wxDocument *wxDocManager::CreateDocument(const std::string& pathOrig, unsigned i
 
     // normally user should select the template to use but wxDOC_SILENT flag we
     // choose one ourselves
-    std::string path = pathOrig;   // may be modified below
+    fs::path path = pathOrig;   // may be modified below
     wxDocTemplate *temp;
     if ( flags & wxDOC_SILENT )
     {
@@ -1399,7 +1400,7 @@ wxDocument *wxDocManager::CreateDocument(const std::string& pathOrig, unsigned i
         if ( !temp )
         {
             wxLogWarning(_("The format of file '%s' couldn't be determined."),
-                         path);
+                         path.string());
         }
     }
     else // not silent, ask the user
@@ -1537,7 +1538,9 @@ wxString wxDocManager::MakeNewDocumentName()
 std::string wxDocManager::MakeFrameTitle(wxDocument* doc)
 {
     std::string appName = wxTheApp->GetAppDisplayName();
+
     std::string title;
+    
     if (!doc)
         title = appName;
     else
@@ -1545,18 +1548,19 @@ std::string wxDocManager::MakeFrameTitle(wxDocument* doc)
         std::string docName = doc->GetUserReadableName();
         title = docName + _(" - ").ToStdString() + appName;
     }
+    
     return title;
 }
 
 
 // Not yet implemented
-wxDocTemplate *wxDocManager::MatchTemplate(const std::string& WXUNUSED(path))
+wxDocTemplate *wxDocManager::MatchTemplate(const fs::path& WXUNUSED(path))
 {
     return nullptr;
 }
 
 // File history management
-void wxDocManager::AddFileToHistory(const std::string& file)
+void wxDocManager::AddFileToHistory(const fs::path& file)
 {
     if (m_fileHistory)
         m_fileHistory->AddFileToHistory(file);
@@ -1568,12 +1572,13 @@ void wxDocManager::RemoveFileFromHistory(size_t i)
         m_fileHistory->RemoveFileFromHistory(i);
 }
 
-std::string wxDocManager::GetHistoryFile(size_t i) const
+// FIXME: Return optional?
+fs::path wxDocManager::GetHistoryFile(size_t i) const
 {
-    std::string histFile;
+    fs::path histFile;
 
     if (m_fileHistory)
-        histFile = m_fileHistory->GetHistoryFile(i).ToStdString();
+        histFile = m_fileHistory->GetHistoryFile(i);
 
     return histFile;
 }
@@ -1624,7 +1629,7 @@ size_t wxDocManager::GetHistoryFilesCount() const
 
 // Find out the document template via matching in the document file format
 // against that of the template
-wxDocTemplate *wxDocManager::FindTemplateForPath(const std::string& path)
+wxDocTemplate *wxDocManager::FindTemplateForPath(const fs::path& path)
 {
     wxDocTemplate *theTemplate = nullptr;
 
@@ -1647,7 +1652,7 @@ wxDocTemplate *wxDocManager::FindTemplateForPath(const std::string& path)
 
 wxDocTemplate *wxDocManager::SelectDocumentPath(wxDocTemplate **templates,
                                                 int noTemplates,
-                                                std::string& path,
+                                                fs::path& path,
                                                 unsigned int WXUNUSED(flags),
                                                 bool WXUNUSED(save))
 {
@@ -1675,7 +1680,7 @@ wxDocTemplate *wxDocManager::SelectDocumentPath(wxDocTemplate **templates,
     int FilterIndex = -1;
 
     wxString pathTmp = wxFileSelectorEx(_("Open File"),
-                                        GetLastDirectory(),
+                                        GetLastDirectory().string(),
                                         "",
                                         &FilterIndex,
                                         descrBuf,

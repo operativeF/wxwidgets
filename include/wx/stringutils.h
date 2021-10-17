@@ -27,6 +27,20 @@ namespace wx::utils
     return count;
 }
 
+[[maybe_unused]] constexpr std::size_t ReplaceAll(std::wstring& instr, std::wstring_view candidate, std::wstring_view replacement)
+{
+    std::size_t count{ 0 };
+    for (std::wstring::size_type pos{};
+        instr.npos != (pos = instr.find(candidate.data(), pos, candidate.length()));
+        pos += replacement.length(), ++count)
+    {
+        instr.replace(pos, candidate.length(), replacement.data(), replacement.length());
+    }
+
+    return count;
+}
+
+
 namespace detail
 {
     // FIXME: Not valid for unicode strings.

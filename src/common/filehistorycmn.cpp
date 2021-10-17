@@ -18,6 +18,7 @@
 #include "wx/menu.h"
 #include "wx/confbase.h"
 #include "wx/filename.h"
+#include "wx/stringutils.h"
 
 // ============================================================================
 // implementation
@@ -33,21 +34,21 @@ namespace
 // return the string used for the MRU list items in the menu
 //
 // NB: the index n is 0-based, as usual, but the strings start from 1
-wxString GetMRUEntryLabel(int n, const wxString& path)
+wxString GetMRUEntryLabel(int n, const fs::path& path)
 {
     // we need to quote '&' characters which are used for mnemonics
-    wxString pathInMenu(path);
-    pathInMenu.Replace("&", "&&");
+    auto pathInMenu = path.wstring();
+    wx::utils::ReplaceAll(pathInMenu, L"&", L"&&");
 
 #ifdef __WXMSW__
     // absolute paths always start with Latin characters even in RTL
     // environments and should therefore be rendered as LTR text (possibly with
     // RTL chunks in it). Ensure this on Windows by prepending
     // LEFT-TO-RIGHT EMBEDDING (other platforms detect this automatically)
-    pathInMenu.insert(0, wchar_t(0x202a));
+    pathInMenu.insert(0, 1, wchar_t(0x202a));
 #endif
 
-    return fmt::format("&{:d} {:s}", n + 1, pathInMenu.ToStdString());
+    return fmt::format("&{:d} {:s}", n + 1, boost::nowide::narrow(pathInMenu));
 }
 
 } // anonymous namespace
@@ -78,19 +79,19 @@ wxString wxFileHistoryBase::NormalizeFileName(const wxFileName& fn)
     return fnNorm.GetFullPath();
 }
 
-void wxFileHistoryBase::AddFileToHistory(const wxString& file)
+void wxFileHistoryBase::AddFileToHistory(const fs::path& file)
 {
     // Check if we don't already have this file. Notice that we avoid
     // wxFileName::operator==(wxString) here as it converts the string to
     // wxFileName and then normalizes it using all normalizations which is too
     // slow (see the comment above), so we use our own quick normalization
     // functions and a string comparison.
-    const wxFileName fnNew(file);
-    const wxString newFile = NormalizeFileName(fnNew);
+    const fs::path fnNew = file;
+    const fs::path newFile = fs::canonical(fnNew);
     size_t numFiles = m_fileHistory.size();
     for ( size_t i = 0; i < numFiles; i++ )
     {
-        if ( newFile == NormalizeFileName(m_fileHistory[i]) )
+        if ( newFile == fs::canonical(m_fileHistory[i]) )
         {
             // we do have it, move it to the top of the history
             RemoveFileFromHistory(i);
@@ -136,30 +137,30 @@ void wxFileHistoryBase::DoRefreshLabels()
         return;
 
     // Remember the path in case we need to compare with it below.
-    const wxString firstPath(wxFileName(m_fileHistory[0]).GetPath());
+    const auto firstPath = m_fileHistory[0].relative_path();
 
     // Update the labels in all menus
     for ( size_t i = 0; i < numFiles; i++ )
     {
-        const wxFileName currFn(m_fileHistory[i]);
+        const fs::path currFn = m_fileHistory[i].filename();
 
-        const wxString pathInMenu = [this, currFn, firstPath]() {
+        const fs::path pathInMenu = [this, currFn, firstPath]() {
             switch ( m_menuPathStyle )
             {
                 case wxFileHistoryMenuPathStyle::ShowIfDifferent:
-                    if ( currFn.HasName() && currFn.GetPath() == firstPath )
-                        return currFn.GetFullName();
+                    if ( currFn.has_filename() && currFn.relative_path() == firstPath )
+                        return currFn.filename();
                     else
-                        return currFn.GetFullPath();
+                        return currFn.relative_path();
 
                 case wxFileHistoryMenuPathStyle::ShowNever:
                     // Only show the filename + extension and not the path.
-                    return currFn.GetFullName();
+                    return currFn.filename();
 
                 case wxFileHistoryMenuPathStyle::ShowAlways:
                 default: // Default to just showing the full path.
                     // Always show full path.
-                    return currFn.GetFullPath();
+                    return currFn.relative_path();
             }
         }();
 
@@ -247,11 +248,11 @@ void wxFileHistoryBase::Load(const wxConfigBase& config)
     wxString buf;
     buf.Printf(wxT("file%d"), 1);
 
-    wxString historyFile;
+    wxString historyFile; // TODO: Need to have config read filesystem paths.
     while ((m_fileHistory.size() < m_fileMaxFiles) &&
            config.Read(buf, &historyFile) && !historyFile.empty())
     {
-        m_fileHistory.push_back(historyFile);
+        m_fileHistory.push_back(fs::path{historyFile.ToStdString()});
 
         buf.Printf(wxT("file%d"), (int)m_fileHistory.size()+1);
         historyFile.clear();
