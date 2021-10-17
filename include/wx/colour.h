@@ -113,7 +113,7 @@ namespace detail
 
     constexpr color8_t XXAsByte(std::span<char> hexValue)
     {
-        return color8_t{hexValue[0] << 4 | hexValue[1]};
+        return color8_t{static_cast<unsigned int>(hexValue[0] << 4) | static_cast<unsigned int>(hexValue[1])};
     }
 
 } // namespace detail
