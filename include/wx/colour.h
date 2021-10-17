@@ -16,7 +16,11 @@
 #include "wx/gdiobj.h"
 #include "wx/string.h"
 
+#include <algorithm>
+#include <array>
 #include <cstdint>
+#include <optional>
+#include <span>
 
 class WXDLLIMPEXP_FWD_CORE wxColour;
 
@@ -65,6 +69,122 @@ constexpr unsigned char wxALPHA_OPAQUE = 0xff;
 #include "wx/variant.h"
 DECLARE_VARIANT_OBJECT_EXPORTED(wxColour,WXDLLIMPEXP_CORE)
 #endif
+
+namespace wx::color
+{
+
+using color8_t = std::byte;
+
+namespace detail
+{
+    constexpr bool isHex(char c) noexcept
+    {
+        return ('F' >= c && c >= 'A') ||
+               ('9' >= c && c >= '0') ||
+               ('f' >= c && c >= 'a');
+    }
+
+    constexpr bool isLowerHex(char c) noexcept
+    {
+        return ('f' >= c && c >= 'a');
+    }
+
+    constexpr char LowerToUpper(char c) noexcept
+    {
+        if(isLowerHex(c))
+            return c - char{32};
+        
+        return c;
+    }
+
+    constexpr bool isValidHexSeq(std::span<const char> str)
+    {
+        return std::all_of(str.begin(), str.end(), isHex);
+    }
+
+    template<std::size_t HexLength>
+    constexpr std::array<char, HexLength> ToUpperCase(std::string_view str)
+    {
+        std::array<char, HexLength> strarr{};
+        std::transform(str.begin(), str.end(), strarr.begin(), LowerToUpper);
+
+        return strarr;
+    }
+
+    constexpr color8_t XXAsByte(std::span<char> hexValue)
+    {
+        return color8_t{hexValue[0] << 4 | hexValue[1]};
+    }
+
+} // namespace detail
+
+struct ColorRGBA
+{
+    constexpr ColorRGBA() noexcept {}
+
+    constexpr ColorRGBA(color8_t red, color8_t green, color8_t blue, color8_t alpha = color8_t{wxALPHA_OPAQUE}) noexcept
+        : r{red},
+          g{green},
+          b{blue},
+          a{alpha}
+    {
+    }
+
+    constexpr ColorRGBA(std::uint32_t rgb) noexcept
+        : r{static_cast<color8_t>(rgb & 0xFF)},
+          g{static_cast<color8_t>((rgb >> 8) & 0xFF)},
+          b{static_cast<color8_t>((rgb >> 16) & 0xFF)},
+          a{static_cast<color8_t>((rgb >> 24) & 0xFF)}
+    {
+    }
+
+    constexpr std::uint32_t ToInt() noexcept
+    {
+        return (static_cast<std::uint32_t>(r)        |
+               (static_cast<std::uint32_t>(g) << 8)  |
+               (static_cast<std::uint32_t>(b) << 16) |
+               (static_cast<std::uint32_t>(a) << 24));
+    }
+
+    color8_t r{};
+    color8_t g{};
+    color8_t b{};
+    color8_t a{};
+};
+
+// FIXME: WIP
+// constexpr std::optional<ColorRGBA> FromString(std::string_view rgba_str)
+// {
+//     if(rgba_str.starts_with('#'))
+//     {
+//         auto rgba_sans_hash = rgba_str.substr(1, 8);
+
+//         switch(rgba_sans_hash.length())
+//         {
+//             case 8: // #RRGGBBAA
+//                 if(detail::isValidHexSeq(rgba_sans_hash))
+//                 {
+//                     auto RGBA_AsArray = detail::ToUpperCase<8>(rgba_sans_hash);
+
+//                     auto RGBA_Span = std::span{RGBA_AsArray};
+
+//                     return ColorRGBA{detail::XXAsByte(RGBA_Span.subspan(0, 2)),
+//                                      detail::XXAsByte(RGBA_Span.subspan(2, 2)),
+//                                      detail::XXAsByte(RGBA_Span.subspan(4, 2)),
+//                                      detail::XXAsByte(RGBA_Span.subspan(6, 2))
+//                                     };
+//                 }
+//                 return std::nullopt;
+
+//             default:
+//                 return std::nullopt;
+//         }
+//     }
+// }
+
+
+
+} // namespace wx::color
 
 //-----------------------------------------------------------------------------
 // wxColourBase: this class has no data members, just some functions to avoid
