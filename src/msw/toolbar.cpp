@@ -1426,10 +1426,10 @@ void wxToolBar::UpdateStretchableSpacersSize()
             if ( !IsVertical() )
             {
                 // Just update in place.
-                WinStruct<TBBUTTONINFO> tbbi;
+                WinStruct<TBBUTTONINFOW> tbbi;
                 tbbi.dwMask = TBIF_BYINDEX | TBIF_SIZE;
                 tbbi.cx = newSize;
-                if ( !::SendMessageW(GetHwnd(), TB_SETBUTTONINFO,
+                if ( !::SendMessageW(GetHwnd(), TB_SETBUTTONINFOW,
                                     toolIndex, (LPARAM)&tbbi) )
                 {
                     wxLogLastError(wxT("TB_SETBUTTONINFO (separator)"));
@@ -1450,7 +1450,7 @@ void wxToolBar::UpdateStretchableSpacersSize()
                     button.iBitmap = newSize; // set separator height
                     button.fsState = TBSTATE_ENABLED | TBSTATE_WRAP;
                     button.fsStyle = TBSTYLE_SEP;
-                    if ( !::SendMessageW(GetHwnd(), TB_INSERTBUTTON,
+                    if ( !::SendMessageW(GetHwnd(), TB_INSERTBUTTONW,
                                         toolIndex, (LPARAM)&button) )
                     {
                         wxLogLastError(wxT("TB_INSERTBUTTON (separator)"));

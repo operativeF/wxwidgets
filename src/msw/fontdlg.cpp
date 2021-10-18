@@ -89,7 +89,7 @@ int wxFontDialog::ShowModal()
     // It should be OK to always use GDI simulations
     DWORD flags = CF_SCREENFONTS /* | CF_NOSIMULATIONS */ ;
 
-    LOGFONT logFont;
+    LOGFONTW logFont;
 
     CHOOSEFONT chooseFontStruct;
     wxZeroMemory(chooseFontStruct);

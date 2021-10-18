@@ -1525,7 +1525,7 @@ private:
     int m_pos;
 
     wxChar m_buf[1024];
-    WinStruct<MENUITEMINFO> m_mii;
+    WinStruct<MENUITEMINFOW> m_mii;
 };
 
 void MDIInsertWindowMenu(wxWindow *win, WXHMENU hMenu, HMENU menuWin, const std::string& windowMenuLabelTranslated)

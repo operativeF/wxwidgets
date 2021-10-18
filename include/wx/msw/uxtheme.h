@@ -162,12 +162,12 @@ enum POPUPCHECKSTATES
 
 // Amazingly, GetThemeFont() and GetThemeSysFont() functions use LOGFONTA under
 // XP but LOGFONTW (even in non-Unicode build) under later versions of Windows.
-// If we declare them as taking LOGFONT below, the code would be able to
+// If we declare them as taking LOGFONTW below, the code would be able to
 // silently pass LOGFONTA to them in ANSI build and would crash at run-time
 // under Windows Vista/7 because of a buffer overrun (LOGFONTA being smaller
 // than LOGFONTW expected by these functions). If we we declare them as taking
 // LOGFONTW, the code wouldn't work correctly under XP. So we use a special
-// wxUxThemeFont class to encapsulate this and intentionally change the LOGFONT
+// wxUxThemeFont class to encapsulate this and intentionally change the LOGFONTW
 // output parameters of the theme functions to take it instead.
 
 class wxUxThemeFont
@@ -176,7 +176,7 @@ public:
     // Trivial default ctor.
     wxUxThemeFont() = default;
 
-    // In Unicode build we always use LOGFONT anyhow so this class is
+    // In Unicode build we always use LOGFONTW anyhow so this class is
     // completely trivial.
     LPLOGFONTW GetPtr() { return &m_lfW; }
     const LOGFONTW& GetLOGFONT() { return m_lfW; }

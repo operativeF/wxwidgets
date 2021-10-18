@@ -154,7 +154,7 @@ public:
 
         if ( gs_classForHiddenWindow )
         {
-            if ( !::UnregisterClass(wxMSWEXEC_WNDCLASSNAME, wxGetInstance()) )
+            if ( !::UnregisterClassW(wxMSWEXEC_WNDCLASSNAME, wxGetInstance()) )
             {
                 wxLogLastError(wxT("UnregisterClass(wxExecClass)"));
             }

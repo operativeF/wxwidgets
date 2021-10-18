@@ -36,7 +36,7 @@
 // constants
 // ----------------------------------------------------------------------------
 
-// the mask used to extract the pitch from LOGFONT::lfPitchAndFamily field
+// the mask used to extract the pitch from LOGFONTW::lfPitchAndFamily field
 constexpr int PITCH_MASK = FIXED_PITCH | VARIABLE_PITCH;
 
 // ----------------------------------------------------------------------------
@@ -237,7 +237,7 @@ public:
 
     const wxNativeFontInfo& GetNativeFontInfo() const
     {
-        // we need to create the font now to get the corresponding LOGFONT if
+        // we need to create the font now to get the corresponding LOGFONTW if
         // it hadn't been done yet
         AllocIfNeeded();
 
@@ -357,7 +357,7 @@ void wxFontRefData::Init(const wxNativeFontInfo& info, WXHFONT hFont)
     // hFont may be zero, or it be passed in case we really want to
     // use the exact font created in the underlying system
     // (for example where we can't guarantee conversion from HFONT
-    // to LOGFONT back to HFONT)
+    // to LOGFONTW back to HFONT)
     m_hFont.reset(hFont);
     m_nativeFontInfo = info;
 
@@ -382,7 +382,7 @@ bool wxFontRefData::Alloc()
 // wxNativeFontInfo
 // ----------------------------------------------------------------------------
 
-wxNativeFontInfo::wxNativeFontInfo(const LOGFONT& lf_, const wxWindow* win)
+wxNativeFontInfo::wxNativeFontInfo(const LOGFONTW& lf_, const wxWindow* win)
     : lf(lf_),
       pointSize(GetPointSizeAtPPI(lf.lfHeight, win ? win->GetDPI().y : 0))
 { }
@@ -491,7 +491,7 @@ wxFontFamily wxNativeFontInfo::GetFamily() const
             break;
 
         default:
-            wxFAIL_MSG( "unknown LOGFONT::lfFamily value" );
+            wxFAIL_MSG( "unknown LOGFONTW::lfFamily value" );
             family = wxFontFamily::Unknown;
                 // just to avoid a warning
     }
@@ -896,7 +896,7 @@ void wxFont::SetPixelSize(const wxSize& pixelSize)
 
 void wxFont::WXAdjustToPPI(const wxSize& ppi)
 {
-    // We only use vertical component here as we only adjust LOGFONT::lfHeight.
+    // We only use vertical component here as we only adjust LOGFONTW::lfHeight.
     const int heightNew = M_FONTDATA->GetLogFontHeightAtPPI(ppi.y);
 
     if ( heightNew != M_FONTDATA->GetLogFontHeight() )
@@ -936,7 +936,7 @@ bool wxFont::SetFaceName(const wxString& faceName)
         return false;
 
     // NB: using win32's GetObject() API on M_FONTDATA->GetHFONT()
-    //     to retrieve a LOGFONT and then compare lf.lfFaceName
+    //     to retrieve a LOGFONTW and then compare lf.lfFaceName
     //     with given facename is not reliable at all:
     //     Windows copies the facename given to ::CreateFontIndirect()
     //     without any validity check.
@@ -1054,7 +1054,7 @@ bool wxFont::IsFixedWidth() const
 {
     wxCHECK_MSG( IsOk(), false, wxT("invalid font") );
 
-    // LOGFONT doesn't contain the correct pitch information so we need to call
+    // LOGFONTW doesn't contain the correct pitch information so we need to call
     // GetTextMetrics() to get it
     using msw::utils::unique_dcwnd;
 
@@ -1062,7 +1062,7 @@ bool wxFont::IsFixedWidth() const
 
     SelectInHDC selectFont(screenDC.get(), M_FONTDATA->GetHFONT());
 
-    TEXTMETRIC tm;
+    TEXTMETRICW tm;
     if ( !::GetTextMetricsW(screenDC.get(), &tm) )
     {
         wxLogLastError(wxT("GetTextMetrics"));

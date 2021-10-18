@@ -107,7 +107,7 @@ extern EXCEPTION_POINTERS *wxGlobalSEInformation;
 
 wxCrashReportImpl::wxCrashReportImpl(const wxChar *filename)
 {
-    m_hFile = ::CreateFile
+    m_hFile = ::CreateFileW
                 (
                     filename,
                     GENERIC_WRITE,
@@ -357,7 +357,7 @@ wxString wxCrashContext::GetExceptionString() const
 
         default:
             // unknown exception, ask NTDLL for the name
-            s = wxMSWFormatMessage(code, ::GetModuleHandle(wxT("NTDLL.DLL")));
+            s = wxMSWFormatMessage(code, ::GetModuleHandleW(L"NTDLL.DLL"));
     }
 
     #undef CASE_EXCEPTION

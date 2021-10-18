@@ -184,7 +184,7 @@ private:
 wxMutexInternal::wxMutexInternal(wxMutexType mutexType)
 {
     // create a nameless (hence intra process and always private) mutex
-    m_mutex = ::CreateMutex
+    m_mutex = ::CreateMutexW
                 (
                     nullptr,       // default secutiry attributes
                     FALSE,      // not initially locked
@@ -324,7 +324,7 @@ wxSemaphoreInternal::wxSemaphoreInternal(int initialcount, int maxcount)
         maxcount = std::numeric_limits<int>::max();
     }
 
-    m_semaphore = ::CreateSemaphore
+    m_semaphore = ::CreateSemaphoreW
                     (
                         nullptr,           // default security attributes
                         initialcount,
@@ -1367,7 +1367,7 @@ bool WXDLLIMPEXP_BASE wxGuiOwnedByMainThread()
 void WXDLLIMPEXP_BASE wxWakeUpMainThread()
 {
     // sending any message would do - hopefully WM_NULL is harmless enough
-    if ( !::PostThreadMessage(wxThread::GetMainId(), WM_NULL, 0, 0) )
+    if ( !::PostThreadMessageW(wxThread::GetMainId(), WM_NULL, 0, 0) )
     {
         // should never happen, but log an error if it does, however do not use
         // wxLog here as it would result in reentrancy because logging from a

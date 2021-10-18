@@ -394,7 +394,7 @@ wxString wxDataFormat::GetId() const
     wxCHECK_MSG( !IsStandard(), s,
                  wxT("name of predefined format cannot be retrieved") );
 
-    int len = ::GetClipboardFormatName(m_format, wxStringBuffer(s, max), max);
+    int len = ::GetClipboardFormatNameW(m_format, wxStringBuffer(s, max), max);
 
     if ( !len )
     {
@@ -424,9 +424,9 @@ wxIEnumFORMATETC::wxIEnumFORMATETC(const wxDataFormat *formats, ULONG nCount)
     m_formats = new CLIPFORMAT[nCount];
     for ( ULONG n = 0; n < nCount; n++ ) {
         if ( formats[n].GetFormatId() == wxDF_HTML )
-            m_formats[n] = ::RegisterClipboardFormat(wxT("HTML Format"));
+            m_formats[n] = ::RegisterClipboardFormatW(L"HTML Format");
         else if ( formats[n].GetFormatId() == wxDF_PNG )
-            m_formats[n] = ::RegisterClipboardFormat(wxT("PNG"));
+            m_formats[n] = ::RegisterClipboardFormatW(L"PNG");
         else
             m_formats[n] = formats[n].GetFormatId();
     }
@@ -1262,7 +1262,7 @@ bool wxFileDataObject::SetData(size_t WXUNUSED(size),
     HDROP hdrop = static_cast<HDROP>(const_cast<void*>(pData));   // NB: it works, but I'm not sure about it
 
     // get number of files (magic value -1)
-    UINT nFiles = ::DragQueryFile(hdrop, (unsigned)-1, nullptr, 0u);
+    UINT nFiles = ::DragQueryFileW(hdrop, (unsigned)-1, nullptr, 0u);
 
     wxCHECK_MSG ( nFiles != (UINT)-1, FALSE, wxT("wrong HDROP handle") );
 
@@ -1271,9 +1271,9 @@ bool wxFileDataObject::SetData(size_t WXUNUSED(size),
     UINT len, n;
     for ( n = 0; n < nFiles; n++ ) {
         // +1 for terminating NUL
-        len = ::DragQueryFile(hdrop, n, nullptr, 0) + 1;
+        len = ::DragQueryFileW(hdrop, n, nullptr, 0) + 1;
 
-        UINT len2 = ::DragQueryFile(hdrop, n, wxStringBuffer(str, len), len);
+        UINT len2 = ::DragQueryFileW(hdrop, n, wxStringBuffer(str, len), len);
         m_filenames.push_back(str);
 
         if ( len2 != len - 1 ) {

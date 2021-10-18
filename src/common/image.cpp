@@ -2583,7 +2583,7 @@ static wxImage LoadImageFromResource(const std::string &name, wxBitmapType type)
 
     if ( type == wxBitmapType::BMP_Resource )
     {
-        hBitmap = unique_bitmap( ::LoadBitmap(wxGetInstance(), boost::nowide::widen(name).c_str()) );
+        hBitmap = unique_bitmap( ::LoadBitmapW(wxGetInstance(), boost::nowide::widen(name).c_str()) );
 
         if ( !hBitmap )
         {
@@ -2657,7 +2657,7 @@ bool wxImage::LoadFile( const std::string& filename,
         || type == wxBitmapType::ICO_Resource
         || type == wxBitmapType::CUR_Resource)
     {
-        const wxImage image = ::LoadImageFromResource(filename, type);
+        const wxImage image = LoadImageFromResource(filename, type);
         if ( image.IsOk() )
         {
             *this = image;

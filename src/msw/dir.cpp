@@ -101,7 +101,7 @@ FindFirst(const wxString& spec,
           const wxString& filter,
           FIND_STRUCT *finddata)
 {
-    FIND_DATA fd = ::FindFirstFile(spec.t_str(), finddata);
+    FIND_DATA fd = ::FindFirstFileW(spec.t_str(), finddata);
 
     // As in FindNext() above, we need to check that the file name we found
     // really matches our filter and look for the next match if it doesn't.

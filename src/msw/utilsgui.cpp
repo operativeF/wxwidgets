@@ -88,10 +88,10 @@ bool wxCheckForInterrupt(wxWindow *wnd)
     wxCHECK( wnd, false );
 
     MSG msg;
-    while ( ::PeekMessage(&msg, GetHwndOf(wnd), 0, 0, PM_REMOVE) )
+    while ( ::PeekMessageW(&msg, GetHwndOf(wnd), 0, 0, PM_REMOVE) )
     {
         ::TranslateMessage(&msg);
-        ::DispatchMessage(&msg);
+        ::DispatchMessageW(&msg);
     }
 
     return true;
@@ -147,7 +147,7 @@ wxString WXDLLEXPORT wxGetWindowClass(WXHWND hWnd)
 
         for ( ;; )
         {
-            int count = ::GetClassName((HWND)hWnd, wxStringBuffer(str, len), len);
+            int count = ::GetClassNameW((HWND)hWnd, wxStringBuffer(str, len), len);
 
             if ( count == len )
             {

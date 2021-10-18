@@ -35,18 +35,18 @@ namespace
 // wxSecretStoreImpl for MSW
 // ============================================================================
 
-// Helper class to ensure that a CREDENTIAL pointer is always freed.
+// Helper class to ensure that a CREDENTIALW pointer is always freed.
 class CredentialPtr
 {
 public:
-    explicit CredentialPtr(CREDENTIAL* cred) : m_cred(cred) { }
+    explicit CredentialPtr(CREDENTIALW* cred) : m_cred(cred) { }
     ~CredentialPtr() { ::CredFree(m_cred); }
 
     CredentialPtr(const CredentialPtr&) = delete;
 	CredentialPtr& operator=(const CredentialPtr&) = delete;
 
 private:
-    CREDENTIAL* const m_cred;
+    CREDENTIALW* const m_cred;
 };
 
 class wxSecretStoreMSWImpl : public wxSecretStoreImpl
@@ -57,7 +57,7 @@ public:
                       const wxSecretValueImpl& secret,
                       wxString& errmsg) override
     {
-        CREDENTIAL cred;
+        CREDENTIALW cred;
         wxZeroMemory(cred);
         cred.Type = CRED_TYPE_GENERIC;
         cred.TargetName = const_cast<TCHAR*>(static_cast<const TCHAR*>(service.t_str()));
@@ -73,7 +73,7 @@ public:
         // an option for the password persistence scope.
         cred.Persist = CRED_PERSIST_LOCAL_MACHINE;
 
-        if ( !::CredWrite(&cred, 0) )
+        if ( !::CredWriteW(&cred, 0) )
         {
             errmsg = wxSysErrorMsgStr();
             return false;
@@ -87,8 +87,8 @@ public:
                       wxSecretValueImpl** secret,
                       wxString& errmsg) const override
     {
-        CREDENTIAL* pcred = nullptr;
-        if ( !::CredRead(service.t_str(), CRED_TYPE_GENERIC, 0, &pcred) || !pcred )
+        CREDENTIALW* pcred = nullptr;
+        if ( !::CredReadW(service.t_str(), CRED_TYPE_GENERIC, 0, &pcred) || !pcred )
         {
             // Not having the password for this service/user combination is not
             // an error, but anything else is.
@@ -110,7 +110,7 @@ public:
     bool Delete(const wxString& service,
                         wxString& errmsg) override
     {
-        if ( !::CredDelete(service.t_str(), CRED_TYPE_GENERIC, 0) )
+        if ( !::CredDeleteW(service.t_str(), CRED_TYPE_GENERIC, 0) )
         {
             // Same logic as in Load() above.
             if ( ::GetLastError() != ERROR_NOT_FOUND )

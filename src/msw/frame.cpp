@@ -87,7 +87,7 @@ bool wxFrame::Create(wxWindow *parent,
     {
         s_taskbarButtonCreatedMsgRegistered = true;
         wxMsgTaskbarButtonCreated =
-            ::RegisterWindowMessage(wxT("TaskbarButtonCreated"));
+            ::RegisterWindowMessageW(L"TaskbarButtonCreated");
 
         // In case the application is run elevated, allow the
         // TaskbarButtonCreated and WM_COMMAND messages through.

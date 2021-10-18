@@ -3196,7 +3196,7 @@ wxD2DFontData::wxD2DFontData(wxGraphicsRenderer* renderer, const wxFont& font, c
     int n = GetObjectW(font.GetHFONT(), sizeof(logfont), &logfont);
     wxCHECK_RET( n > 0, wxS("Failed to obtain font info") );
 
-    // Ensure the LOGFONT object contains the correct font face name
+    // Ensure the LOGFONTW object contains the correct font face name
     if (logfont.lfFaceName[0] == L'\0')
     {
         // The length of the font name must not exceed LF_FACESIZE TCHARs,
@@ -3256,7 +3256,7 @@ wxD2DFontData::wxD2DFontData(wxGraphicsRenderer* renderer, const wxFont& font, c
         wxCHECK_HRESULT_RET(hr);
 
         // Even though DWRITE_FONT_WEIGHT is an enum, it's values are within the same range
-        // as font width values in LOGFONT (0-1000) so we can cast LONG to this enum.
+        // as font width values in LOGFONTW (0-1000) so we can cast LONG to this enum.
         const DWRITE_FONT_WEIGHT fWeight = static_cast<DWRITE_FONT_WEIGHT>(logfont.lfWeight);
 
         DWRITE_FONT_STYLE fStyle;

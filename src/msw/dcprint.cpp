@@ -117,7 +117,7 @@ bool wxPrinterDCImpl::wxStartDoc(const std::string& message)
     if (!m_hDC)
         return false;
 
-    if ( ::StartDoc(GetHdc(), &docinfo) <= 0 )
+    if ( ::StartDocW(GetHdc(), &docinfo) <= 0 )
     {
         wxLogLastError(wxT("StartDoc"));
         return false;

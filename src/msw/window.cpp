@@ -289,7 +289,7 @@ void wxRemoveHandleAssociation(wxWindowMSW *win);
 extern void wxAssociateWinWithHandle(HWND hWnd, wxWindowMSW *win);
 
 // get the text metrics for the current font
-static TEXTMETRIC wxGetTextMetrics(const wxWindowMSW *win);
+static TEXTMETRICW wxGetTextMetrics(const wxWindowMSW *win);
 
 // wrapper around BringWindowToTop() API
 static inline void wxBringWindowToTop(HWND hwnd)
@@ -6527,7 +6527,7 @@ wxWindowMSW::MSWUnregisterMessageHandler(int msg, MSWMessageHandler handler)
 
 wxSize wxGetCharSize(WXHWND wnd, const wxFont& the_font)
 {
-    TEXTMETRIC tm;
+    TEXTMETRICW tm;
     HDC dc = ::GetDC((HWND) wnd);
     HFONT was = nullptr;
 
@@ -6706,7 +6706,7 @@ int VKToWX(WXWORD vk, WXLPARAM lParam, wchar_t *uc)
         case VK_OEM_102:
             // MapVirtualKey() returns 0 if it fails to convert the virtual
             // key which nicely corresponds to our WXK_NONE.
-            wxk = ::MapVirtualKey(vk, MAPVK_VK_TO_CHAR);
+            wxk = ::MapVirtualKeyW(vk, MAPVK_VK_TO_CHAR);
 
             if ( HIWORD(wxk) & 0x8000 )
             {
@@ -7622,10 +7622,10 @@ const wxChar *wxGetMessageName(int message)
 }
 #endif // wxDEBUG_LEVEL >= 2
 
-static TEXTMETRIC wxGetTextMetrics(const wxWindowMSW *win)
+static TEXTMETRICW wxGetTextMetrics(const wxWindowMSW *win)
 {
     // prepare the DC
-    TEXTMETRIC tm;
+    TEXTMETRICW tm;
     HWND hwnd = GetHwndOf(win);
     HDC hdc = ::GetDC(hwnd);
 

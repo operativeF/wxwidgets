@@ -133,7 +133,7 @@ bool wxGetNativeFontEncoding(wxFontEncoding encoding,
 bool wxTestFontEncoding(const wxNativeEncodingInfo& info)
 {
     // try to create such font
-    LOGFONT lf;
+    LOGFONTW lf;
     wxZeroMemory(lf);       // all default values
 
     lf.lfCharSet = (BYTE)info.charset;

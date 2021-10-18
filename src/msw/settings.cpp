@@ -128,15 +128,15 @@ wxFont wxCreateFontFromStockObject(int index)
     HFONT hFont = (HFONT) ::GetStockObject(index);
     if ( hFont )
     {
-        LOGFONT lf;
-        if ( ::GetObjectW(hFont, sizeof(LOGFONT), &lf) != 0 )
+        LOGFONTW lf;
+        if ( ::GetObjectW(hFont, sizeof(LOGFONTW), &lf) != 0 )
         {
             wxNativeFontInfo info(lf, nullptr);
             font.Create(info);
         }
         else
         {
-            wxFAIL_MSG( wxT("failed to get LOGFONT") );
+            wxFAIL_MSG( wxT("failed to get LOGFONTW") );
         }
     }
     else // GetStockObject() failed
@@ -320,7 +320,7 @@ extern wxFont wxGetCCDefaultFont()
     // the default font used for the common controls seems to be the desktop
     // font which is also used for the icon titles and not the stock default
     // GUI font
-    LOGFONT lf;
+    LOGFONTW lf;
     const wxWindow* win = wxApp::GetMainTopWindow();
     if ( wxSystemParametersInfo
            (

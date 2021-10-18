@@ -1003,7 +1003,7 @@ wxString wxMSWFormatMessage(DWORD nErrCode, HMODULE hModule)
 
     // get error message from system
     LPVOID lpMsgBuf;
-    if ( ::FormatMessage
+    if ( ::FormatMessageW
          (
             flags,
             hModule,

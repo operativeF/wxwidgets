@@ -98,12 +98,12 @@ namespace
 struct wxDisplayInfo
 {
     wxDisplayInfo(HMONITOR hmon_,
-                  const MONITORINFOEX& monInfo_,
+                  const MONITORINFOEXW& monInfo_,
                   int depth_)
         : hmon(hmon_), monInfo(monInfo_), depth(depth_)
     {}
 
-    MONITORINFOEX monInfo;
+    MONITORINFOEXW monInfo;
 
     HMONITOR hmon;
 
@@ -572,7 +572,7 @@ wxDisplayFactoryMSW::MultimonEnumProc(
 {
     wxDisplayFactoryMSW *const self = (wxDisplayFactoryMSW *)dwData;
 
-    WinStruct<MONITORINFOEX> monInfo;
+    WinStruct<MONITORINFOEXW> monInfo;
     if ( !::GetMonitorInfoW(hMonitor, &monInfo) )
     {
         wxLogLastError(wxT("GetMonitorInfo"));

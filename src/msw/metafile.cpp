@@ -214,7 +214,7 @@ void wxMetafileDCImpl::DoGetTextExtent(const wxString& string,
     SelectInHDC selFont(dc, GetHfontOf(*fontToUse));
 
     SIZE sizeRect;
-    TEXTMETRIC tm;
+    TEXTMETRICW tm;
     ::GetTextExtentPoint32(dc, string.c_str(), string.length(), &sizeRect);
     ::GetTextMetrics(dc, &tm);
 

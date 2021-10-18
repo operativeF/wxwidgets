@@ -132,7 +132,7 @@ void wxFontEnumeratorHelper::DoEnumerate()
 {
     HDC hDC = ::GetDC(nullptr);
 
-    LOGFONT lf;
+    LOGFONTW lf;
     lf.lfCharSet = (BYTE)m_charset;
     wxStrlcpy(lf.lfFaceName, m_facename.c_str(), WXSIZEOF(lf.lfFaceName));
     lf.lfPitchAndFamily = 0;

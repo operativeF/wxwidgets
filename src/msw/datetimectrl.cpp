@@ -180,7 +180,7 @@ wxSize wxDateTimePickerCtrl::DoGetBestSize() const
         HWND hwnd;
         if ( MSWAllowsNone() )
         {
-            hwnd = ::CreateWindow
+            hwnd = ::CreateWindowW
                      (
                         DATETIMEPICK_CLASS,
                         wxT(""),

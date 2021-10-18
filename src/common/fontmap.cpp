@@ -26,7 +26,7 @@
 #endif // wxUSE_CONFIG
 
 #if defined(__WXMSW__)
-  #include  "wx/msw/private.h"  // includes windows.h for LOGFONT
+  #include  "wx/msw/private.h"  // includes windows.h for LOGFONTW
 #endif
 
 #include "wx/fmappriv.h"

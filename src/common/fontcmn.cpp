@@ -22,7 +22,7 @@
 
 #ifndef WX_PRECOMP
     #if defined(__WXMSW__)
-        #include  "wx/msw/private.h"  // includes windows.h for LOGFONT
+        #include  "wx/msw/private.h"  // includes windows.h for LOGFONTW
     #endif
 
     #include <cassert>

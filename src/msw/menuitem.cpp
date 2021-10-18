@@ -372,7 +372,7 @@ void MenuDrawData::Init(wxWindow const* window)
     else
 #endif // wxUSE_UXTHEME
     {
-        const NONCLIENTMETRICS& metrics = wxMSWImpl::GetNonClientMetrics(window);
+        const NONCLIENTMETRICSW& metrics = wxMSWImpl::GetNonClientMetrics(window);
 
         CheckMargin.cxLeftWidth =
         CheckMargin.cxRightWidth  = wxGetSystemMetrics(SM_CXEDGE, window);
@@ -504,7 +504,7 @@ void wxMenuItem::Enable(bool enable)
     const int itemPos = MSGetMenuItemPos();
     if ( itemPos != -1 )
     {
-        long rc = EnableMenuItem(GetHMenuOf(m_parentMenu),
+        long rc = ::EnableMenuItem(GetHMenuOf(m_parentMenu),
                                  itemPos,
                                  MF_BYPOSITION |
                                  (enable ? MF_ENABLED : MF_GRAYED));
@@ -619,7 +619,7 @@ void wxMenuItem::SetItemLabel(const std::string& txt)
     HMENU hMenu = GetHMenuOf(m_parentMenu);
 
     // update the text of the native menu item
-    WinStruct<MENUITEMINFO> info;
+    WinStruct<MENUITEMINFOW> info;
 
     // surprisingly, calling SetMenuItemInfo() with just MIIM_STRING doesn't
     // work as it resets the menu bitmap, so we need to first get the old item
@@ -728,7 +728,7 @@ void wxMenuItem::DoSetBitmap(const wxBitmap& bmpNew, bool bChecked)
     // update the bitmap of the native menu item
     // don't set hbmpItem for the checkable items as it would
     // be used for both checked and unchecked state
-    WinStruct<MENUITEMINFO> mii;
+    WinStruct<MENUITEMINFOW> mii;
     if ( IsCheckable() )
     {
         mii.fMask = MIIM_CHECKMARKS;
@@ -1305,7 +1305,7 @@ bool wxMenuItem::MSWMustUseOwnerDrawn()
 
 #endif // wxUSE_OWNER_DRAWN
 
-// returns the HBITMAP to use in MENUITEMINFO
+// returns the HBITMAP to use in MENUITEMINFOW
 HBITMAP wxMenuItem::GetHBitmapForMenu(BitmapKind kind) const
 {
     // Under versions of Windows older than Vista we can't pass HBITMAP

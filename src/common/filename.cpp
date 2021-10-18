@@ -641,7 +641,7 @@ wxFileSystemObjectExists(const wxString& path, unsigned int flags)
 
     // we must use GetFileAttributes() instead of the ANSI C functions because
     // it can cope with network (UNC) paths unlike them
-    const DWORD ret = ::GetFileAttributes(strPath.t_str());
+    const DWORD ret = ::GetFileAttributesW(strPath.t_str());
 
     if ( ret == INVALID_FILE_ATTRIBUTES )
         return false;
@@ -816,7 +816,7 @@ static int wxOpenWithDeleteOnClose(const wxString& filename)
     static constexpr DWORD attributes = FILE_ATTRIBUTE_TEMPORARY |
                        FILE_FLAG_DELETE_ON_CLOSE;
 
-    HANDLE h = ::CreateFile(filename.t_str(), access, 0, nullptr,
+    HANDLE h = ::CreateFileW(filename.t_str(), access, 0, nullptr,
                             disposition, attributes, nullptr);
 
     return wxOpenOSFHandle(h, wxO_BINARY);
@@ -901,7 +901,7 @@ static wxString wxCreateTempImpl(
     }
 
 #if defined(__WINDOWS__)
-    if (!::GetTempFileName(dir.t_str(), name.t_str(), 0,
+    if (!::GetTempFileNameW(dir.t_str(), name.t_str(), 0,
                            wxStringBuffer(path, MAX_PATH + 1)))
     {
         wxLogLastError(wxT("GetTempFileName"));
@@ -1207,7 +1207,7 @@ wxString wxFileName::GetTempDir()
     if ( dir.empty() )
     {
 #if defined(__WINDOWS__)
-        if ( !::GetTempPath(MAX_PATH, wxStringBuffer(dir, MAX_PATH + 1)) )
+        if ( !::GetTempPathW(MAX_PATH, wxStringBuffer(dir, MAX_PATH + 1)) )
         {
             wxLogLastError(wxT("GetTempPath"));
         }
@@ -2163,11 +2163,11 @@ wxString wxFileName::GetShortPath() const
     wxString path(GetFullPath());
 
 #if defined(__WINDOWS__) && defined(__WIN32__)
-    DWORD sz = ::GetShortPathName(path.t_str(), nullptr, 0);
+    DWORD sz = ::GetShortPathNameW(path.t_str(), nullptr, 0);
     if ( sz != 0 )
     {
         wxString pathOut;
-        if ( ::GetShortPathName
+        if ( ::GetShortPathNameW
                (
                 path.t_str(),
                 wxStringBuffer(pathOut, sz),
@@ -2190,10 +2190,10 @@ wxString wxFileName::GetLongPath() const
 
 #if defined(__WIN32__)
 
-    DWORD dwSize = ::GetLongPathName(path.t_str(), nullptr, 0);
+    DWORD dwSize = ::GetLongPathNameW(path.t_str(), nullptr, 0);
     if ( dwSize > 0 )
     {
-        if ( ::GetLongPathName
+        if ( ::GetLongPathNameW
                 (
                 path.t_str(),
                 wxStringBuffer(pathOut, dwSize),
@@ -2244,7 +2244,7 @@ wxString wxFileName::GetLongPath() const
 
         WIN32_FIND_DATA findFileData;
 
-        HANDLE hFind = ::FindFirstFile(tmpPath.t_str(), &findFileData);
+        HANDLE hFind = ::FindFirstFileW(tmpPath.t_str(), &findFileData);
         if (hFind == INVALID_HANDLE_VALUE)
         {
             // Error: most likely reason is that path doesn't exist, so

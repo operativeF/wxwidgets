@@ -406,7 +406,7 @@ BOOL CALLBACK wxAbortProc(HDC WXUNUSED(hdc), int WXUNUSED(error))
 
     /* Process messages intended for the abort dialog box */
 
-    while (!wxPrinterBase::sm_abortIt && ::PeekMessage(&msg, nullptr, 0, 0, TRUE))
+    while (!wxPrinterBase::sm_abortIt && ::PeekMessageW(&msg, nullptr, 0, 0, TRUE))
         if (!::IsDialogMessageW((HWND) wxPrinterBase::sm_abortWindow->GetHWND(), &msg)) {
             TranslateMessage(&msg);
             ::DispatchMessageW(&msg);

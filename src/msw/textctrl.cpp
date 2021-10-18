@@ -2935,14 +2935,14 @@ bool wxTextCtrl::MSWSetCharFormat(const wxTextAttr& style, long start, long end)
         cf.dwMask |= CFM_FACE | CFM_SIZE | CFM_CHARSET |
                      CFM_ITALIC | CFM_BOLD | CFM_UNDERLINE | CFM_STRIKEOUT;
 
-        // fill in data from LOGFONT but recalculate lfHeight because we need
+        // fill in data from LOGFONTW but recalculate lfHeight because we need
         // the real height in twips and not the negative number used inside
-        // LOGFONT returns (this is correct in general and works with
+        // LOGFONTW returns (this is correct in general and works with
         // the Windows font mapper, but not here)
 
         wxFont font(style.GetFont());
 
-        LOGFONT lf = font.GetNativeFontInfo()->lf;
+        LOGFONTW lf = font.GetNativeFontInfo()->lf;
         cf.yHeight = 20 * font.GetFractionalPointSize(); // 1 pt = 20 twips
         cf.bCharSet = lf.lfCharSet;
         cf.bPitchAndFamily = lf.lfPitchAndFamily;
@@ -3264,7 +3264,7 @@ bool wxTextCtrl::GetStyle(long position, wxTextAttr& style)
                             SCF_SELECTION, (LPARAM)&cf) ;
 
 
-    LOGFONT lf;
+    LOGFONTW lf;
     lf.lfWidth = 0;
     lf.lfCharSet = ANSI_CHARSET; // FIXME: how to get correct charset?
     lf.lfClipPrecision = 0;
@@ -3272,7 +3272,7 @@ bool wxTextCtrl::GetStyle(long position, wxTextAttr& style)
     wxStrcpy(lf.lfFaceName, cf.szFaceName);
 
     //NOTE:  we _MUST_ set each of these values to _something_ since we
-    //do not call wxZeroMemory on the LOGFONT lf
+    //do not call wxZeroMemory on the LOGFONTW lf
     if (cf.dwEffects & CFE_ITALIC)
         lf.lfItalic = TRUE;
     else

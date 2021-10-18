@@ -62,7 +62,7 @@ namespace
 // make the given menu item default
 void SetDefaultMenuItem(HMENU hmenu, UINT id)
 {
-    WinStruct<MENUITEMINFO> mii;
+    WinStruct<MENUITEMINFOW> mii;
     mii.fMask = MIIM_STATE;
     mii.fState = MFS_DEFAULT;
 
@@ -78,7 +78,7 @@ void SetOwnerDrawnMenuItem(HMENU hmenu,
                            ULONG_PTR data,
                            BOOL byPositon = FALSE)
 {
-    WinStruct<MENUITEMINFO> mii;
+    WinStruct<MENUITEMINFOW> mii;
     mii.fMask = MIIM_FTYPE | MIIM_DATA;
     mii.fType = MFT_OWNERDRAW;
     mii.dwItemData = data;
@@ -368,7 +368,7 @@ bool wxMenu::DoInsertOrAppend(wxMenuItem *pItem, size_t pos)
 #endif
         !pItem->IsSeparator() )
             {
-                WinStruct<MENUITEMINFO> mii;
+                WinStruct<MENUITEMINFOW> mii;
                 mii.fMask = MIIM_STRING | MIIM_DATA;
 
                 // don't set hbmpItem for the checkable items as it would
@@ -916,7 +916,7 @@ void wxMenuBar::EnableTop(size_t pos, bool enable)
 bool wxMenuBar::IsEnabledTop(size_t pos) const
 {
     wxCHECK_MSG( pos < GetMenuCount(), false, wxS("invalid menu index") );
-    WinStruct<MENUITEMINFO> mii;
+    WinStruct<MENUITEMINFOW> mii;
     mii.fMask = MIIM_STATE;
     if ( !::GetMenuItemInfoW(GetHmenu(), pos, TRUE, &mii) )
     {

@@ -116,7 +116,7 @@ WXDLLIMPEXP_DATA_BASE(const wxChar *) wxUserResourceStr = wxT("TEXT");
 bool wxGetHostName(wxChar *buf, int maxSize)
 {
     DWORD nSize = maxSize;
-    if ( !::GetComputerName(buf, &nSize) )
+    if ( !::GetComputerNameW(buf, &nSize) )
     {
         wxLogLastError(wxT("GetComputerName"));
 

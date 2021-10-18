@@ -122,28 +122,28 @@ public:
 #elif defined(__WXMSW__)
     // Preserve compatibility in the semi-public (i.e. private, but still
     // unfortunately used by some existing code outside of the library) API
-    // by allowing to create wxNativeFontInfo from just LOGFONT, but ensure
+    // by allowing to create wxNativeFontInfo from just LOGFONTW, but ensure
     // that we always specify the window, to use the correct DPI, when creating
     // fonts inside the library itself.
-    wxNativeFontInfo(const LOGFONT& lf_, const wxWindow* win
+    wxNativeFontInfo(const LOGFONTW& lf_, const wxWindow* win
 #ifndef WXBUILDING
         = NULL
 #endif
     );
 
-    // MSW-specific: get point size from LOGFONT height using specified DPI,
+    // MSW-specific: get point size from LOGFONTW height using specified DPI,
     // or screen DPI when 0.
     static double GetPointSizeAtPPI(int lfHeight, int ppi = 0);
 
-    // MSW-specific: get the height value in pixels using LOGFONT convention
+    // MSW-specific: get the height value in pixels using LOGFONTW convention
     // (i.e. negative) corresponding to the given size in points and DPI.
     static int GetLogFontHeightAtPPI(double size, int ppi);
 
-    LOGFONT      lf;
+    LOGFONTW      lf;
 
     // MSW only has limited support for fractional point sizes and we need to
     // store the fractional point size separately if it was initially specified
-    // as we can't losslessly recover it from LOGFONT later.
+    // as we can't losslessly recover it from LOGFONTW later.
     double       pointSize;
 #elif defined(__WXOSX__)
 public:

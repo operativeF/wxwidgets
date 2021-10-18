@@ -128,7 +128,7 @@ wxSize wxTextMeasure::DoGetTextExtent(std::string_view string,
 
     if ( descent || externalLeading )
     {
-        TEXTMETRIC tm;
+        TEXTMETRICW tm;
         ::GetTextMetricsW(m_hdc, &tm);
         if ( descent )
             *descent = tm.tmDescent;

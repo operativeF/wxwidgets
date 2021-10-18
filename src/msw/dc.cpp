@@ -1529,7 +1529,7 @@ void wxMSWDCImpl::DoDrawRotatedText(std::string_view text,
             font.WXAdjustToPPI(m_window->GetDPI());
     }
 
-    LOGFONT lf;
+    LOGFONTW lf;
     if ( ::GetObjectW(GetHfontOf(font), sizeof(lf), &lf) == 0 )
     {
         wxLogLastError(wxT("GetObject(hfont)"));
@@ -1870,7 +1870,7 @@ void wxMSWDCImpl::EndPage()
 
 wxCoord wxMSWDCImpl::GetCharHeight() const
 {
-    TEXTMETRIC lpTextMetric;
+    TEXTMETRICW lpTextMetric;
 
     GetTextMetrics(GetHdc(), &lpTextMetric);
 
@@ -1879,7 +1879,7 @@ wxCoord wxMSWDCImpl::GetCharHeight() const
 
 wxCoord wxMSWDCImpl::wxGetCharWidth() const
 {
-    TEXTMETRIC lpTextMetric;
+    TEXTMETRICW lpTextMetric;
 
     GetTextMetrics(GetHdc(), &lpTextMetric);
 
@@ -1893,7 +1893,7 @@ void wxMSWDCImpl::DoGetFontMetrics(int *height,
                                    int *externalLeading,
                                    int *averageWidth) const
 {
-    TEXTMETRIC tm;
+    TEXTMETRICW tm;
 
     GetTextMetrics(GetHdc(), &tm);
 

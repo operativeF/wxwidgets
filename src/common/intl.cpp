@@ -119,7 +119,7 @@ static wxString wxGetANSICodePageForLocale(LCID lcid)
     wxString cp;
 
     wxChar buffer[16];
-    if ( ::GetLocaleInfo(lcid, LOCALE_IDEFAULTANSICODEPAGE,
+    if ( ::GetLocaleInfoW(lcid, LOCALE_IDEFAULTANSICODEPAGE,
                         buffer, WXSIZEOF(buffer)) > 0 )
     {
         if ( buffer[0] != wxT('0') || buffer[1] != wxT('\0') )
@@ -149,7 +149,7 @@ const char* wxLanguageInfo::TrySetLocale() const
     // CRT (check by calling setlocale()).
     if ( wxGetWinVersion() >= wxWinVersion_Vista )
     {
-        if ( ::GetLocaleInfo(lcid, LOCALE_SNAME, buffer, WXSIZEOF(buffer)) )
+        if ( ::GetLocaleInfoW(lcid, LOCALE_SNAME, buffer, WXSIZEOF(buffer)) )
         {
             locale = buffer;
         }
@@ -164,14 +164,14 @@ const char* wxLanguageInfo::TrySetLocale() const
         //else: fall back to LOCALE_SENGLANGUAGE
     }
 
-    if ( !::GetLocaleInfo(lcid, LOCALE_SENGLANGUAGE, buffer, WXSIZEOF(buffer)) )
+    if ( !::GetLocaleInfoW(lcid, LOCALE_SENGLANGUAGE, buffer, WXSIZEOF(buffer)) )
     {
         wxLogLastError(wxT("GetLocaleInfo(LOCALE_SENGLANGUAGE)"));
         return nullptr;
     }
 
     locale = buffer;
-    if ( ::GetLocaleInfo(lcid, LOCALE_SENGCOUNTRY,
+    if ( ::GetLocaleInfoW(lcid, LOCALE_SENGCOUNTRY,
                         buffer, WXSIZEOF(buffer)) > 0 )
     {
         locale << wxT('_') << buffer;
@@ -1598,12 +1598,12 @@ GetInfoFromLCID(LCID lcid,
     switch ( index )
     {
         case wxLOCALE_THOUSANDS_SEP:
-            if ( ::GetLocaleInfo(lcid, LOCALE_STHOUSAND, buf, WXSIZEOF(buf)) )
+            if ( ::GetLocaleInfoW(lcid, LOCALE_STHOUSAND, buf, WXSIZEOF(buf)) )
                 str = buf;
             break;
 
         case wxLOCALE_DECIMAL_POINT:
-            if ( ::GetLocaleInfo(lcid,
+            if ( ::GetLocaleInfoW(lcid,
                                  cat == wxLOCALE_CAT_MONEY
                                      ? LOCALE_SMONDECIMALSEP
                                      : LOCALE_SDECIMAL,
@@ -1631,7 +1631,7 @@ GetInfoFromLCID(LCID lcid,
         case wxLOCALE_SHORT_DATE_FMT:
         case wxLOCALE_LONG_DATE_FMT:
         case wxLOCALE_TIME_FMT:
-            if ( ::GetLocaleInfo(lcid, GetLCTYPEFormatFromLocalInfo(index),
+            if (::GetLocaleInfoW(lcid, GetLCTYPEFormatFromLocalInfo(index),
                                  buf, WXSIZEOF(buf)) )
             {
                 return wxTranslateFromUnicodeFormat(buf);
