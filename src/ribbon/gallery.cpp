@@ -78,7 +78,7 @@ wxRibbonGallery::wxRibbonGallery(wxWindow* parent,
                   unsigned int style)
     : wxRibbonControl(parent, id, pos, size, wxBORDER_NONE)
 {
-    CommonInit(style);
+    SetBackgroundStyle(wxBackgroundStyle::Paint);
 }
 
 wxRibbonGallery::~wxRibbonGallery()
@@ -97,31 +97,9 @@ bool wxRibbonGallery::Create(wxWindow* parent,
         return false;
     }
 
-    CommonInit(style);
-    return true;
-}
-
-void wxRibbonGallery::CommonInit(unsigned int WXUNUSED(style))
-{
-    m_selected_item = nullptr;
-    m_hovered_item = nullptr;
-    m_active_item = nullptr;
-    m_scroll_up_button_rect = wxRect(0, 0, 0, 0);
-    m_scroll_down_button_rect = wxRect(0, 0, 0, 0);
-    m_extension_button_rect = wxRect(0, 0, 0, 0);
-    m_mouse_active_rect = nullptr;
-    m_bitmap_size = wxSize(64, 32);
-    m_bitmap_padded_size = m_bitmap_size;
-    m_item_separation_x = 0;
-    m_item_separation_y = 0;
-    m_scroll_amount = 0;
-    m_scroll_limit = 0;
-    m_up_button_state = wxRibbonGalleryButtonState::Disabled;
-    m_down_button_state = wxRibbonGalleryButtonState::Normal;
-    m_extension_button_state = wxRibbonGalleryButtonState::Normal;
-    m_hovered = false;
-
     SetBackgroundStyle(wxBackgroundStyle::Paint);
+    
+    return true;
 }
 
 void wxRibbonGallery::OnMouseEnter(wxMouseEvent& evt)

@@ -73,7 +73,6 @@ public:
 
 protected:
     wxBorder GetDefaultBorder() const override { return wxBORDER_NONE; }
-    void CommonInit(unsigned int style);
     void CalculateMinSize();
     bool TestButtonHover(const wxRect& rect, wxPoint pos,
         wxRibbonGalleryButtonState* state);
@@ -96,25 +95,32 @@ protected:
                                        wxSize relative_to) const override;
 
     wxArrayRibbonGalleryItem m_items;
-    wxRibbonGalleryItem* m_selected_item;
-    wxRibbonGalleryItem* m_hovered_item;
-    wxRibbonGalleryItem* m_active_item;
-    wxSize m_bitmap_size;
-    wxSize m_bitmap_padded_size;
+
+    wxRibbonGalleryItem*     m_selected_item{nullptr};
+    wxRibbonGalleryItem*     m_hovered_item{nullptr};
+    wxRibbonGalleryItem*     m_active_item{nullptr};
+
+    wxRect m_client_rect{};
+    wxRect m_scroll_up_button_rect{};
+    wxRect m_scroll_down_button_rect{};
+    wxRect m_extension_button_rect{};
+
+    wxSize m_bitmap_size{64, 32};
+    wxSize m_bitmap_padded_size{64, 32};
     wxSize m_best_size;
-    wxRect m_client_rect;
-    wxRect m_scroll_up_button_rect;
-    wxRect m_scroll_down_button_rect;
-    wxRect m_extension_button_rect;
-    const wxRect* m_mouse_active_rect;
+
+    const wxRect* m_mouse_active_rect{nullptr};
+
     int m_item_separation_x{};
     int m_item_separation_y{};
     int m_scroll_amount{};
     int m_scroll_limit{};
-    wxRibbonGalleryButtonState m_up_button_state;
-    wxRibbonGalleryButtonState m_down_button_state;
-    wxRibbonGalleryButtonState m_extension_button_state;
-    bool m_hovered;
+
+    wxRibbonGalleryButtonState m_up_button_state{wxRibbonGalleryButtonState::Disabled};
+    wxRibbonGalleryButtonState m_down_button_state{wxRibbonGalleryButtonState::Normal};
+    wxRibbonGalleryButtonState m_extension_button_state{wxRibbonGalleryButtonState::Normal};
+    
+    bool m_hovered{false};
 
 #ifndef SWIG
     wxDECLARE_CLASS(wxRibbonGallery);
