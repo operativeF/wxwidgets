@@ -24,19 +24,10 @@
 // need it
 #ifdef _DEBUG
     #define wxSUFFIX_DEBUG "d"
-    #ifdef _UNICODE
-        #define wxSUFFIX ud
-    #else // !_UNICODE
-        #define wxSUFFIX d
-    #endif // _UNICODE/!_UNICODE
+    #define wxSUFFIX ud
 #else
     #define wxSUFFIX_DEBUG ""
-    #ifdef _UNICODE
-        #define wxSUFFIX u
-    #else // !_UNICODE
-        // don't define wxSUFFIX at all as preprocessor operations don't work
-        // with empty values so we need to check for this case specially below
-    #endif // _UNICODE/!_UNICODE
+    #define wxSUFFIX u
 #endif
 
 // compiler-specific prefix: by default it's always just "vc" for compatibility

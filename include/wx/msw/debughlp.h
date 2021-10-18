@@ -105,19 +105,11 @@ typedef BOOL
 
 // wx-prefixed types map to either the ANSI or Unicode ("W") version depending
 // on the build of wx itself.
-#ifdef UNICODE
-    #define wxPSYM_ENUMERATESYMBOLS_CALLBACK PSYM_ENUMERATESYMBOLS_CALLBACKW
-#else // !UNICODE
-    #define wxPSYM_ENUMERATESYMBOLS_CALLBACK PSYM_ENUMERATESYMBOLS_CALLBACK
-#endif // UNICODE/!UNICODE
+#define wxPSYM_ENUMERATESYMBOLS_CALLBACK PSYM_ENUMERATESYMBOLS_CALLBACKW
 
 // This one could be already defined by wx/msw/stackwalk.h
 #ifndef wxSYMBOL_INFO
-    #ifdef UNICODE
         #define wxSYMBOL_INFO SYMBOL_INFOW
-    #else // !UNICODE
-        #define wxSYMBOL_INFO SYMBOL_INFO
-    #endif // UNICODE/!UNICODE
 #endif // !defined(wxSYMBOL_INFO)
 
 typedef wxSYMBOL_INFO* wxPSYMBOL_INFO;
