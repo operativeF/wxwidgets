@@ -15,6 +15,13 @@
 
 #if wxUSE_FILE_HISTORY
 
+#ifndef WX_PRECOMP
+    #include <boost/nowide/convert.hpp>
+    #include <fmt/core.h>
+
+    #include <filesystem>
+#endif
+
 #include "wx/menu.h"
 #include "wx/confbase.h"
 #include "wx/filename.h"
@@ -186,7 +193,7 @@ void wxFileHistoryBase::SetMenuPathStyle(wxFileHistoryMenuPathStyle style)
 
 void wxFileHistoryBase::RemoveFileFromHistory(size_t i)
 {
-    size_t numFiles = m_fileHistory.size();
+    auto numFiles = m_fileHistory.size();
     wxCHECK_RET( i < numFiles,
                  wxT("invalid index in wxFileHistoryBase::RemoveFileFromHistory") );
 

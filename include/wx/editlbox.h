@@ -57,7 +57,7 @@ public:
                 const std::string& name = wxEditableListBoxNameStr);
 
     void SetStrings(const std::vector<std::string>& strings);
-    void GetStrings(std::vector<std::string>& strings) const;
+    std::vector<std::string> GetStrings() const;
 
     wxListCtrl* GetListCtrl()       { return m_listCtrl; }
     wxBitmapButton* GetDelButton()  { return m_bDel; }

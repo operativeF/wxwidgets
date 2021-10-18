@@ -55,6 +55,77 @@ namespace detail
         };
 }
 
+// FIXME: Not valid for unicode strings
+[[nodiscard]] constexpr char ToUpperCh(char c) noexcept
+{
+    switch(c)
+    {
+        case 'a': return 'A';
+        case 'b': return 'B';
+        case 'c': return 'C';
+        case 'd': return 'D';
+        case 'e': return 'E';
+        case 'f': return 'F';
+        case 'g': return 'G';
+        case 'h': return 'H';
+        case 'i': return 'I';
+        case 'j': return 'J';
+        case 'k': return 'K';
+        case 'l': return 'L';
+        case 'm': return 'M';
+        case 'n': return 'N';
+        case 'o': return 'O';
+        case 'p': return 'P';
+        case 'q': return 'Q';
+        case 'r': return 'R';
+        case 's': return 'S';
+        case 't': return 'T';
+        case 'u': return 'U';
+        case 'v': return 'V';
+        case 'w': return 'W';
+        case 'x': return 'X';
+        case 'y': return 'Y';
+        case 'z': return 'Z';
+        default:  return c;
+    }
+}
+
+// FIXME: Not valid for unicode strings
+[[nodiscard]] constexpr char ToLowerCh(char c) noexcept
+{
+    switch(c)
+    {
+        case 'A': return 'a';
+        case 'B': return 'b';
+        case 'C': return 'c';
+        case 'D': return 'd';
+        case 'E': return 'e';
+        case 'F': return 'f';
+        case 'G': return 'g';
+        case 'H': return 'h';
+        case 'I': return 'i';
+        case 'J': return 'j';
+        case 'K': return 'k';
+        case 'L': return 'l';
+        case 'M': return 'm';
+        case 'N': return 'n';
+        case 'O': return 'o';
+        case 'P': return 'p';
+        case 'Q': return 'q';
+        case 'R': return 'r';
+        case 'S': return 's';
+        case 'T': return 't';
+        case 'U': return 'u';
+        case 'V': return 'v';
+        case 'W': return 'w';
+        case 'X': return 'x';
+        case 'Y': return 'y';
+        case 'Z': return 'z';
+        default:  return c;
+    }
+}
+
+
 // FIXME: Not valid for unicode strings.
 constexpr void TrimAllSpace(std::string& str)
 {
@@ -78,40 +149,40 @@ constexpr void TrimTrailingSpace(std::string& str)
 }
 
 // FIXME: Not valid for unicode strings.
-inline void ToUpper(std::string& str)
+constexpr void ToUpper(std::string& str)
 {
-    std::transform(str.begin(), str.end(), str.begin(), [](unsigned char c) noexcept { return gsl::narrow_cast<char>(std::toupper(c)); });
+    std::transform(str.begin(), str.end(), str.begin(), [](auto c) noexcept { return ToUpperCh(c); });
 }
 
 // FIXME: Not valid for unicode strings.
-inline void ToLower(std::string& str)
+constexpr void ToLower(std::string& str)
 {
-    std::transform(str.begin(), str.end(), str.begin(), [](unsigned char c) noexcept { return gsl::narrow_cast<char>(std::tolower(c)); });
+    std::transform(str.begin(), str.end(), str.begin(), [](auto c) noexcept { return ToLowerCh(c); });
 }
 
 // FIXME: Not valid for unicode strings.
-[[nodiscard]] inline std::string ToUpperCopy(std::string_view str)
+[[nodiscard]] constexpr std::string ToUpperCopy(std::string_view str)
 {
     std::string out;
     out.resize(str.size());
 
-    std::transform(str.begin(), str.end(), out.begin(), [](unsigned char c) noexcept { return gsl::narrow_cast<char>(std::toupper(c)); });
+    std::transform(str.begin(), str.end(), out.begin(), [](auto c) noexcept { return ToUpperCh(c); });
 
     return out;
 }
 
 // FIXME: Not valid for unicode strings.
-[[nodiscard]] inline std::string ToLowerCopy(std::string_view str)
+[[nodiscard]] constexpr std::string ToLowerCopy(std::string_view str)
 {
     std::string out;
     out.resize(str.size());
 
-    std::transform(str.begin(), str.end(), out.begin(), [](unsigned char c) noexcept { return gsl::narrow_cast<char>(std::tolower(c)); });
+    std::transform(str.begin(), str.end(), out.begin(), [](unsigned char c) noexcept { return ToLowerCh(c); });
 
     return out;
 }
 
-[[nodiscard]] inline std::vector<std::string> StrSplit(std::string_view strView, char delim)
+[[nodiscard]] constexpr std::vector<std::string> StrSplit(std::string_view strView, char delim)
 {
     std::vector<std::string> output;
 
@@ -181,21 +252,21 @@ inline void ToLower(std::string& str)
 // Non-modifying string functions
 
 // FIXME: Wrong (for Unicode), and temporary implementation of a case insensitive string comparison
-[[nodiscard]] inline int CmpNoCase(std::string_view strViewA, std::string_view strViewB)
+[[nodiscard]] constexpr int CmpNoCase(std::string_view strViewA, std::string_view strViewB)
 {
     const auto nA = strViewA.size();
 
     std::string strA(nA, '0');
     std::string strB(nA, '0');
 
-    std::transform(strViewA.begin(), strViewA.end(), strA.begin(), [](unsigned char c) noexcept { return gsl::narrow_cast<char>(std::tolower(c)); });
-    std::transform(strViewB.begin(), strViewB.end(), strB.begin(), [](unsigned char c) noexcept { return gsl::narrow_cast<char>(std::tolower(c)); });
+    std::transform(strViewA.begin(), strViewA.end(), strA.begin(), [](auto c) noexcept { return ToLowerCh(c); });
+    std::transform(strViewB.begin(), strViewB.end(), strB.begin(), [](auto c) noexcept { return ToLowerCh(c); });
 
     return strA.compare(strB);
 }
 
 // FIXME: Wrong (for Unicode), and temporary implementation of a case insensitive string comparison
-[[nodiscard]] inline int CmpNoCase(const char* const chsA, const char* const chsB)
+[[nodiscard]] constexpr int CmpNoCase(const char* const chsA, const char* const chsB)
 {
     return CmpNoCase(std::string_view(chsA), std::string_view(chsB));
 }
@@ -206,7 +277,7 @@ inline void ToLower(std::string& str)
 }
 
 // FIXME: Wrong (for Unicode), and temporary implementation of a case insensitive string comparison
-[[nodiscard]] inline bool IsSameAsNoCase(std::string_view strViewA, std::string_view strViewB) 
+[[nodiscard]] constexpr bool IsSameAsNoCase(std::string_view strViewA, std::string_view strViewB) 
 {
     return CmpNoCase(strViewA, strViewB) == 0;
 }
@@ -319,7 +390,7 @@ inline void ToLower(std::string& str)
 }
 
 // FIXME: Not valid for unicode strings
-[[nodiscard]] inline bool ContainsNoCase(std::string_view strView, std::string_view strToFind)
+[[nodiscard]] constexpr bool ContainsNoCase(std::string_view strView, std::string_view strToFind)
 {
     std::string str{strView};
     std::string substrToFind{strToFind};

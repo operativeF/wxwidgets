@@ -50,7 +50,7 @@ bool wxNativeEncodingInfo::FromString(const wxString& s)
     else // not a number, interpret as an encoding name
     {
 #if wxUSE_FONTMAP
-        encoding = wxFontMapper::GetEncodingFromName(encid);
+        encoding = GetEncodingFromName(encid.ToStdString());
         if ( encoding == wxFONTENCODING_MAX )
 #endif // wxUSE_FONTMAP
         {

@@ -189,7 +189,7 @@ wxFontMapper::CharsetToEncoding(const std::string& charset, bool interactive)
         // FIXME: iteration over two separate containers.
         for (size_t i{0}; auto& encodingNameTranslated : encodingNamesTranslated)
         {
-            encodingNameTranslated = GetEncodingDescription(GetEncoding(i));
+            encodingNameTranslated = GetEncodingDescription(GetFontEncodingFromIndex(i));
             ++i;
         }
 
@@ -205,7 +205,7 @@ wxFontMapper::CharsetToEncoding(const std::string& charset, bool interactive)
 
         if ( n != -1 )
         {
-            encoding = GetEncoding(n);
+            encoding = GetFontEncodingFromIndex(n);
         }
 
 #if wxUSE_CONFIG && wxUSE_FILECONFIG

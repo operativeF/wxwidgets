@@ -766,7 +766,7 @@ std::string wxRichTextStyleListBox::CreateHTML(wxRichTextStyleDefinition* def) c
     for (i = 0; i < GetStyleSheet()->GetParagraphStyleCount(); i++)
     {
         wxRichTextStyleDefinition* d = GetStyleSheet()->GetParagraphStyle(i);
-        std::string name{wx::utils::ToLowerCopy(d->GetName())};
+        std::string name = wx::utils::ToLowerCopy(d->GetName());
         if (name.find("normal") != std::string::npos || name.find(normalTranslated) != std::string::npos ||
             name.find("default") != std::string::npos || name.find(defaultTranslated) != std::string::npos)
         {

@@ -97,7 +97,7 @@ wxCUSTOM_TYPE_INFO(wxSize, wxToStringConverter<wxSize> , wxFromStringConverter<w
 // wxColourDatabase dtor
 // ----------------------------------------------------------------------------
 
-wxColourDatabase::~wxColourDatabase ()
+wxColourDatabase::~wxColourDatabase()
 {
     if ( m_map )
     {

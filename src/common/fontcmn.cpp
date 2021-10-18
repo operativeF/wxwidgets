@@ -525,10 +525,6 @@ void InitInfoWithLegacyParams(wxFontInfo& info,
                               const wxString& face,
                               wxFontEncoding encoding)
 {
-    // FIXME: Superfluous now
-    if ( static_cast<int>(weight) == wxFONTWEIGHT_NORMAL)
-        weight = wxFONTWEIGHT_NORMAL;
-
     info
         .Family(family)
         .Style(style)

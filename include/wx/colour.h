@@ -15,6 +15,7 @@
 
 #include "wx/gdiobj.h"
 #include "wx/string.h"
+#include "wx/stringutils.h"
 
 #include <algorithm>
 #include <array>
@@ -89,14 +90,6 @@ namespace detail
         return ('f' >= c && c >= 'a');
     }
 
-    constexpr char LowerToUpper(char c) noexcept
-    {
-        if(isLowerHex(c))
-            return c - char{32};
-        
-        return c;
-    }
-
     constexpr bool isValidHexSeq(std::span<const char> str)
     {
         return std::all_of(str.begin(), str.end(), isHex);
@@ -106,7 +99,7 @@ namespace detail
     constexpr std::array<char, HexLength> ToUpperCase(std::string_view str)
     {
         std::array<char, HexLength> strarr{};
-        std::transform(str.begin(), str.end(), strarr.begin(), LowerToUpper);
+        std::transform(str.begin(), str.end(), strarr.begin(), wx::utils::ToUpperCh);
 
         return strarr;
     }

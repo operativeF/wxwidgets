@@ -38,6 +38,7 @@
 #include "wx/tokenzr.h"
 #include "wx/modalhook.h"
 #include "wx/msw/private/dpiaware.h"
+#include "wx/stringutils.h"
 
 
 // ----------------------------------------------------------------------------
@@ -560,21 +561,12 @@ int wxFileDialog::ShowModal()
 
     std::string filterBuffer;
 
-    // FIXME: Use fmt lib
     for (size_t i = 0; i < items ; i++)
     {
-        filterBuffer += wildDescriptions[i];
-        filterBuffer += "|";
-        filterBuffer += wildFilters[i];
-        filterBuffer += "|";
+        filterBuffer += fmt::format("{}|{}|", wildDescriptions[i].ToStdString(), wildFilters[i].ToStdString());
     }
 
-    // Replace | with \0
-    for (size_t i = 0; i < filterBuffer.length(); i++ ) {
-        if ( filterBuffer[i] == '|' ) {
-            filterBuffer[i] = '\0';
-        }
-    }
+    std::replace(filterBuffer.begin(), filterBuffer.end(), '|', '\0');
 
     of.lpstrFilter  = boost::nowide::widen(filterBuffer).c_str();
     of.nFilterIndex = m_filterIndex + 1;

@@ -187,13 +187,16 @@ void wxEditableListBox::SetStrings(const std::vector<std::string>& strings)
     m_listCtrl->SetItemState(0, ListStates::Selected, ListStates::Selected);
 }
 
-// FIXME: Just return a vector.
-void wxEditableListBox::GetStrings(std::vector<std::string>& strings) const
+std::vector<std::string> wxEditableListBox::GetStrings() const
 {
-    strings.clear();
+    std::vector<std::string> listBoxStrings;
 
-    for (int i = 0; i < m_listCtrl->GetItemCount()-1; i++)
-        strings.push_back(m_listCtrl->GetItemText(i));
+    listBoxStrings.reserve(m_listCtrl->GetItemCount() - 1);
+
+    for (std::size_t i{}; i != m_listCtrl->GetItemCount() - 1; i++)
+        listBoxStrings.push_back(m_listCtrl->GetItemText(i));
+
+    return listBoxStrings;
 }
 
 void wxEditableListBox::OnItemSelected(wxListEvent& event)

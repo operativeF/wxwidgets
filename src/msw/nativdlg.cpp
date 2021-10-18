@@ -162,7 +162,7 @@ wxWindow* wxWindow::CreateWindowFromHWND(wxWindow* parent, WXHWND hWnd)
 {
     wxCHECK_MSG( parent, nullptr, wxT("must have valid parent for a control") );
 
-    std::string str(wxGetWindowClass(hWnd));
+    std::string str = wxGetWindowClass(hWnd);
     wx::utils::ToUpper(str);
 
     long id = wxGetWindowId(hWnd);
