@@ -1,6 +1,8 @@
 #ifndef _WX_WXSTRINGUTILS_H__
 #define _WX_WXSTRINGUTILS_H__
 
+#include "wx/charutils.h"
+
 #include <gsl/gsl>
 
 #include <algorithm>
@@ -40,102 +42,16 @@ namespace wx::utils
     return count;
 }
 
-
-namespace detail
-{
-    // FIXME: Not valid for unicode strings.
-    constexpr auto isWhitespace = [](unsigned char c)
-        {
-            return ((c == ' ')  ||
-                    (c == '\f') ||
-                    (c == '\n') ||
-                    (c == '\r') ||
-                    (c == '\t') ||
-                    (c == '\v'));
-        };
-}
-
-// FIXME: Not valid for unicode strings
-[[nodiscard]] constexpr char ToUpperCh(char c) noexcept
-{
-    switch(c)
-    {
-        case 'a': return 'A';
-        case 'b': return 'B';
-        case 'c': return 'C';
-        case 'd': return 'D';
-        case 'e': return 'E';
-        case 'f': return 'F';
-        case 'g': return 'G';
-        case 'h': return 'H';
-        case 'i': return 'I';
-        case 'j': return 'J';
-        case 'k': return 'K';
-        case 'l': return 'L';
-        case 'm': return 'M';
-        case 'n': return 'N';
-        case 'o': return 'O';
-        case 'p': return 'P';
-        case 'q': return 'Q';
-        case 'r': return 'R';
-        case 's': return 'S';
-        case 't': return 'T';
-        case 'u': return 'U';
-        case 'v': return 'V';
-        case 'w': return 'W';
-        case 'x': return 'X';
-        case 'y': return 'Y';
-        case 'z': return 'Z';
-        default:  return c;
-    }
-}
-
-// FIXME: Not valid for unicode strings
-[[nodiscard]] constexpr char ToLowerCh(char c) noexcept
-{
-    switch(c)
-    {
-        case 'A': return 'a';
-        case 'B': return 'b';
-        case 'C': return 'c';
-        case 'D': return 'd';
-        case 'E': return 'e';
-        case 'F': return 'f';
-        case 'G': return 'g';
-        case 'H': return 'h';
-        case 'I': return 'i';
-        case 'J': return 'j';
-        case 'K': return 'k';
-        case 'L': return 'l';
-        case 'M': return 'm';
-        case 'N': return 'n';
-        case 'O': return 'o';
-        case 'P': return 'p';
-        case 'Q': return 'q';
-        case 'R': return 'r';
-        case 'S': return 's';
-        case 'T': return 't';
-        case 'U': return 'u';
-        case 'V': return 'v';
-        case 'W': return 'w';
-        case 'X': return 'x';
-        case 'Y': return 'y';
-        case 'Z': return 'z';
-        default:  return c;
-    }
-}
-
-
 // FIXME: Not valid for unicode strings.
 constexpr void TrimAllSpace(std::string& str)
 {
-    std::erase_if(str, detail::isWhitespace);
+    std::erase_if(str, isWhitespace);
 }
 
 // FIXME: Not valid for unicode strings.
 constexpr void TrimLeadingSpace(std::string& str)
 {
-    auto it = std::find_if_not(str.begin(), str.end(), detail::isWhitespace);
+    auto it = std::find_if_not(str.begin(), str.end(), isWhitespace);
 
     str.erase(str.begin(), it);
 }
@@ -143,7 +59,7 @@ constexpr void TrimLeadingSpace(std::string& str)
 // FIXME: Not valid for unicode strings.
 constexpr void TrimTrailingSpace(std::string& str)
 {
-    auto it = std::find_if_not(str.rbegin(), str.rend(), detail::isWhitespace);
+    auto it = std::find_if_not(str.rbegin(), str.rend(), isWhitespace);
 
     str.erase(it.base(), str.end());
 }

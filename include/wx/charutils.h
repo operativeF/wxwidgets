@@ -1,0 +1,247 @@
+/////////////////////////////////////////////////////////////////////////////
+// Name:        wx/charutils.h
+// Purpose:     Constexpr char functions
+// Author:      Thomas Figueroa
+// Modified by:
+// Created:     2021-10-19
+// Copyright:   Thomas Figueroa
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+#ifndef _CHAR_UTILS_H
+#define _CHAR_UTILS_H
+
+namespace wx::utils
+{
+
+constexpr bool isAlphaUpper(char ch) noexcept
+{
+    return 'A' == ch ||
+           'B' == ch ||
+           'C' == ch ||
+           'D' == ch ||
+           'E' == ch ||
+           'F' == ch ||
+           'G' == ch ||
+           'H' == ch ||
+           'I' == ch ||
+           'J' == ch ||
+           'K' == ch ||
+           'L' == ch ||
+           'M' == ch ||
+           'N' == ch ||
+           'O' == ch ||
+           'P' == ch ||
+           'Q' == ch ||
+           'R' == ch ||
+           'S' == ch ||
+           'T' == ch ||
+           'U' == ch ||
+           'V' == ch ||
+           'W' == ch ||
+           'X' == ch ||
+           'Y' == ch ||
+           'Z' == ch;
+}
+
+constexpr bool isAlphaLower(char ch) noexcept
+{
+    return 'a' == ch ||
+           'b' == ch ||
+           'c' == ch ||
+           'd' == ch ||
+           'e' == ch ||
+           'f' == ch ||
+           'g' == ch ||
+           'h' == ch ||
+           'i' == ch ||
+           'j' == ch ||
+           'k' == ch ||
+           'l' == ch ||
+           'm' == ch ||
+           'n' == ch ||
+           'o' == ch ||
+           'p' == ch ||
+           'q' == ch ||
+           'r' == ch ||
+           's' == ch ||
+           't' == ch ||
+           'u' == ch ||
+           'v' == ch ||
+           'w' == ch ||
+           'x' == ch ||
+           'y' == ch ||
+           'z' == ch;
+}
+
+constexpr bool isAlpha(char ch) noexcept
+{
+    return isAlphaUpper(ch) || isAlphaLower(ch);
+}
+
+constexpr bool isDigit(char ch) noexcept
+{
+    return '0' == ch ||
+           '1' == ch ||
+           '2' == ch ||
+           '3' == ch ||
+           '4' == ch ||
+           '5' == ch ||
+           '6' == ch ||
+           '7' == ch ||
+           '8' == ch ||
+           '9' == ch;
+}
+
+constexpr bool isHexLetterUpper(char ch) noexcept
+{
+    return 'A' == ch ||
+           'B' == ch ||
+           'C' == ch ||
+           'D' == ch ||
+           'E' == ch ||
+           'F' == ch;
+}
+
+constexpr bool isHexLetterLower(char ch) noexcept
+{
+    return 'a' == ch ||
+           'b' == ch ||
+           'c' == ch ||
+           'd' == ch ||
+           'e' == ch ||
+           'f' == ch;
+}
+
+constexpr bool isHexLetter(char ch) noexcept
+{
+    return isHexLetterUpper(ch) || isHexLetterLower(ch);
+}
+
+constexpr bool isHex(char ch) noexcept
+{
+    return isHexLetter(ch) || isDigit(ch);
+}
+
+constexpr bool isWhitespace(char ch)
+{
+    return ch == ' '  ||
+           ch == '\f' ||
+           ch == '\n' ||
+           ch == '\r' ||
+           ch == '\t' ||
+           ch == '\v';
+};
+
+constexpr bool isPunct(char ch) noexcept
+{
+    return '!'  == ch ||
+           '"'  == ch ||
+           '#'  == ch ||
+           '$'  == ch ||
+           '%'  == ch ||
+           '&'  == ch ||
+           '\'' == ch ||
+           '('  == ch ||
+           ')'  == ch ||
+           '*'  == ch ||
+           '+'  == ch ||
+           ','  == ch ||
+           '-'  == ch ||
+           '.'  == ch ||
+           '/'  == ch ||
+           ':'  == ch ||
+           ';'  == ch ||
+           '<'  == ch ||
+           '='  == ch ||
+           '>'  == ch ||
+           '?'  == ch ||
+           '@'  == ch ||
+           '['  == ch ||
+           '\\' == ch ||
+           ']'  == ch ||
+           '^'  == ch ||
+           '_'  == ch ||
+           '`'  == ch ||
+           '{'  == ch ||
+           '|'  == ch ||
+           '}'  == ch ||
+           '~'  == ch; 
+}
+
+constexpr bool isAlNum(char ch) noexcept
+{
+    return isDigit(ch) || isAlpha(ch);
+}
+
+[[nodiscard]] constexpr char ToUpperCh(char ch) noexcept
+{
+    switch(ch)
+    {
+        case 'a': return 'A';
+        case 'b': return 'B';
+        case 'c': return 'C';
+        case 'd': return 'D';
+        case 'e': return 'E';
+        case 'f': return 'F';
+        case 'g': return 'G';
+        case 'h': return 'H';
+        case 'i': return 'I';
+        case 'j': return 'J';
+        case 'k': return 'K';
+        case 'l': return 'L';
+        case 'm': return 'M';
+        case 'n': return 'N';
+        case 'o': return 'O';
+        case 'p': return 'P';
+        case 'q': return 'Q';
+        case 'r': return 'R';
+        case 's': return 'S';
+        case 't': return 'T';
+        case 'u': return 'U';
+        case 'v': return 'V';
+        case 'w': return 'W';
+        case 'x': return 'X';
+        case 'y': return 'Y';
+        case 'z': return 'Z';
+        default:  return ch;
+    }
+}
+
+[[nodiscard]] constexpr char ToLowerCh(char ch) noexcept
+{
+    switch(ch)
+    {
+        case 'A': return 'a';
+        case 'B': return 'b';
+        case 'C': return 'c';
+        case 'D': return 'd';
+        case 'E': return 'e';
+        case 'F': return 'f';
+        case 'G': return 'g';
+        case 'H': return 'h';
+        case 'I': return 'i';
+        case 'J': return 'j';
+        case 'K': return 'k';
+        case 'L': return 'l';
+        case 'M': return 'm';
+        case 'N': return 'n';
+        case 'O': return 'o';
+        case 'P': return 'p';
+        case 'Q': return 'q';
+        case 'R': return 'r';
+        case 'S': return 's';
+        case 'T': return 't';
+        case 'U': return 'u';
+        case 'V': return 'v';
+        case 'W': return 'w';
+        case 'X': return 'x';
+        case 'Y': return 'y';
+        case 'Z': return 'z';
+        default:  return ch;
+    }
+}
+
+} // namespace wx::utils
+
+#endif // _CHAR_UTILS_H

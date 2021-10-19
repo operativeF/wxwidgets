@@ -78,21 +78,9 @@ using color8_t = std::byte;
 
 namespace detail
 {
-    constexpr bool isHex(char c) noexcept
-    {
-        return ('F' >= c && c >= 'A') ||
-               ('9' >= c && c >= '0') ||
-               ('f' >= c && c >= 'a');
-    }
-
-    constexpr bool isLowerHex(char c) noexcept
-    {
-        return ('f' >= c && c >= 'a');
-    }
-
     constexpr bool isValidHexSeq(std::span<const char> str)
     {
-        return std::all_of(str.begin(), str.end(), isHex);
+        return std::all_of(str.begin(), str.end(), wx::utils::isHex);
     }
 
     template<std::size_t HexLength>
