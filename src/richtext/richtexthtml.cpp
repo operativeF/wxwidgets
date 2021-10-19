@@ -46,10 +46,12 @@ wxRichTextHTMLHandler::wxRichTextHTMLHandler(const std::string& name, const std:
 }
 
 /// Can we handle this filename (if using files)? By default, checks the extension.
-bool wxRichTextHTMLHandler::CanHandle(const fs::path& filename) const
+bool wxRichTextHTMLHandler::CanHandle(const std::string& filename) const
 {
-    const auto ext = wx::utils::ToLowerCopy(filename.extension().string());
-    return (ext == "html" || ext == "htm");
+    wxString path, file, ext;
+    wxFileName::SplitPath(filename, & path, & file, & ext);
+
+    return (ext.Lower() == wxT("html") || ext.Lower() == wxT("htm"));
 }
 
 
@@ -74,7 +76,7 @@ bool wxRichTextHTMLHandler::DoSaveFile(wxRichTextBuffer *buffer, wxOutputStream&
 
     wxCSConv* customEncoding = nullptr;
     wxMBConv* conv = nullptr;
-    if (!GetEncoding().empty())
+    if (!GetEncoding().IsEmpty())
     {
         customEncoding = new wxCSConv(GetEncoding());
         if (!customEncoding->IsOk())

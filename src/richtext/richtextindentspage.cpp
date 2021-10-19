@@ -535,7 +535,7 @@ bool wxRichTextIndentsSpacingPage::ShowToolTips()
  * Get bitmap resources
  */
 
-wxBitmap wxRichTextIndentsSpacingPage::GetBitmapResource( const std::string& name )
+wxBitmap wxRichTextIndentsSpacingPage::GetBitmapResource( const wxString& name )
 {
     // Bitmap retrieval
 ////@begin wxRichTextIndentsSpacingPage bitmap retrieval
@@ -548,7 +548,7 @@ wxBitmap wxRichTextIndentsSpacingPage::GetBitmapResource( const std::string& nam
  * Get icon resources
  */
 
-wxIcon wxRichTextIndentsSpacingPage::GetIconResource( const std::string& name )
+wxIcon wxRichTextIndentsSpacingPage::GetIconResource( const wxString& name )
 {
     // Icon retrieval
 ////@begin wxRichTextIndentsSpacingPage icon retrieval

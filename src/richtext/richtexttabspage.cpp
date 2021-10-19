@@ -215,7 +215,7 @@ bool wxRichTextTabsPage::ShowToolTips()
  * Get bitmap resources
  */
 
-wxBitmap wxRichTextTabsPage::GetBitmapResource( const std::string& name )
+wxBitmap wxRichTextTabsPage::GetBitmapResource( const wxString& name )
 {
     // Bitmap retrieval
 ////@begin wxRichTextTabsPage bitmap retrieval
@@ -228,7 +228,7 @@ wxBitmap wxRichTextTabsPage::GetBitmapResource( const std::string& name )
  * Get icon resources
  */
 
-wxIcon wxRichTextTabsPage::GetIconResource( const std::string& name )
+wxIcon wxRichTextTabsPage::GetIconResource( const wxString& name )
 {
     // Icon retrieval
 ////@begin wxRichTextTabsPage icon retrieval

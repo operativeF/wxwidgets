@@ -3439,7 +3439,7 @@ bool wxRichTextCtrl::Newline()
 /// Insert a line break at the current insertion point.
 bool wxRichTextCtrl::LineBreak()
 {
-    return GetFocusObject()->InsertTextWithUndo(& GetBuffer(), m_caretPosition+1, std::string{wxRichTextLineBreakChar}, this);
+    return GetFocusObject()->InsertTextWithUndo(& GetBuffer(), m_caretPosition+1, wxRichTextLineBreakChar, this);
 }
 
 void wxRichTextCtrl::Copy()

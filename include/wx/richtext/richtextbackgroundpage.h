@@ -97,10 +97,10 @@ public:
 ////@begin wxRichTextBackgroundPage member function declarations
 
     /// Retrieves bitmap resources
-    wxBitmap GetBitmapResource( const std::string& name );
+    wxBitmap GetBitmapResource( const wxString& name );
 
     /// Retrieves icon resources
-    wxIcon GetIconResource( const std::string& name );
+    wxIcon GetIconResource( const wxString& name );
 ////@end wxRichTextBackgroundPage member function declarations
 
     /// Should we show tooltips?
