@@ -74,6 +74,10 @@
 
 #include <gsl/gsl>
 
+#include <filesystem>
+
+namespace fs = std::filesystem;
+
 // Compatibility
 //#define wxRichTextAttr wxTextAttr
 #define wxTextAttrEx wxTextAttr
@@ -105,7 +109,7 @@
 /**
     The line break character that can be embedded in content.
  */
-constexpr wxChar wxRichTextLineBreakChar = (wxChar)29;
+constexpr char wxRichTextLineBreakChar = char(29);
 
 
 /**
@@ -1691,12 +1695,12 @@ public:
     /**
         Returns the box style name.
     */
-    const wxString& GetBoxStyleName() const { return m_boxStyleName; }
+    const std::string& GetBoxStyleName() const { return m_boxStyleName; }
 
     /**
         Sets the box style name.
     */
-    void SetBoxStyleName(const wxString& name) { m_boxStyleName = name; AddFlag(wxTEXT_BOX_ATTR_BOX_STYLE_NAME); }
+    void SetBoxStyleName(const std::string& name) { m_boxStyleName = name; AddFlag(wxTEXT_BOX_ATTR_BOX_STYLE_NAME); }
 
     /**
         Returns @true if the box style name is present.
@@ -1735,7 +1739,7 @@ public:
     wxTextBoxAttrVerticalAlignment  m_verticalAlignment;
     wxTextBoxAttrWhitespaceMode     m_whitespaceMode;
     wxTextAttrDimension             m_cornerRadius;
-    wxString                        m_boxStyleName;
+    std::string                        m_boxStyleName;
     wxTextAttrShadow                m_shadow;
 };
 
@@ -1923,47 +1927,47 @@ public:
     /**
         Returns @true if the given property is found.
     */
-    bool HasProperty(const wxString& name) const { return Find(name) != -1; }
+    bool HasProperty(const std::string& name) const { return Find(name) != -1; }
 
     /**
         Finds the given property.
     */
-    int Find(const wxString& name) const;
+    int Find(const std::string& name) const;
 
     /**
         Removes the given property.
     */
-    bool Remove(const wxString& name);
+    bool Remove(const std::string& name);
 
     /**
         Gets the property variant by name.
     */
-    const wxVariant& GetProperty(const wxString& name) const;
+    const wxVariant& GetProperty(const std::string& name) const;
 
     /**
         Finds or creates a property with the given name, returning a pointer to the variant.
     */
-    wxVariant* FindOrCreateProperty(const wxString& name);
+    wxVariant* FindOrCreateProperty(const std::string& name);
 
     /**
         Gets the value of the named property as a string.
     */
-    wxString GetPropertyString(const wxString& name) const;
+    std::string GetPropertyString(const std::string& name) const;
 
     /**
         Gets the value of the named property as a long integer.
     */
-    long GetPropertyLong(const wxString& name) const;
+    long GetPropertyLong(const std::string& name) const;
 
     /**
         Gets the value of the named property as a boolean.
     */
-    bool GetPropertyBool(const wxString& name) const;
+    bool GetPropertyBool(const std::string& name) const;
 
     /**
         Gets the value of the named property as a double.
     */
-    double GetPropertyDouble(const wxString& name) const;
+    double GetPropertyDouble(const std::string& name) const;
 
     /**
         Sets the property by passing a variant which contains a name and value.
@@ -1973,32 +1977,32 @@ public:
     /**
         Sets a property by name and variant.
     */
-    void SetProperty(const wxString& name, const wxVariant& variant);
+    void SetProperty(const std::string& name, const wxVariant& variant);
 
     /**
         Sets a property by name and string value.
     */
-    void SetProperty(const wxString& name, const wxString& value);
+    void SetProperty(const std::string& name, const std::string& value);
 
     /**
         Sets a property by name and wxChar* value.
     */
-    void SetProperty(const wxString& name, const wxChar* value) { SetProperty(name, wxString(value)); }
+    void SetProperty(const std::string& name, const char* value) { SetProperty(name, std::string(value)); }
 
     /**
         Sets  property by name and long integer value.
     */
-    void SetProperty(const wxString& name, long value);
+    void SetProperty(const std::string& name, long value);
 
     /**
         Sets  property by name and double value.
     */
-    void SetProperty(const wxString& name, double value);
+    void SetProperty(const std::string& name, double value);
 
     /**
         Sets  property by name and boolean value.
     */
-    void SetProperty(const wxString& name, bool value);
+    void SetProperty(const std::string& name, bool value);
 
     /**
         Removes the given properties from these properties.
@@ -2100,12 +2104,12 @@ public:
     /**
         Default constructor.
     */
-    wxRichTextRange() { m_start = 0; m_end = 0; }
+    wxRichTextRange() = default;
 
     /**
         Constructor taking start and end positions.
     */
-    wxRichTextRange(long start, long end) { m_start = start; m_end = end; }
+    wxRichTextRange(std::size_t start, std::size_t end) { m_start = start; m_end = end; }
 
     /**
         Copy constructor.
@@ -2141,27 +2145,27 @@ public:
     /**
         Sets the range start and end positions.
     */
-    void SetRange(long start, long end) { m_start = start; m_end = end; }
+    void SetRange(std::size_t start, std::size_t end) { m_start = start; m_end = end; }
 
     /**
         Sets the start position.
     */
-    void SetStart(long start) { m_start = start; }
+    void SetStart(std::size_t start) { m_start = start; }
 
     /**
         Returns the start position.
     */
-    long GetStart() const { return m_start; }
+    std::size_t GetStart() const { return m_start; }
 
     /**
         Sets the end position.
     */
-    void SetEnd(long end) { m_end = end; }
+    void SetEnd(std::size_t end) { m_end = end; }
 
     /**
         Gets the end position.
     */
-    long GetEnd() const { return m_end; }
+    std::size_t GetEnd() const { return m_end; }
 
     /**
         Returns true if this range is completely outside @a range.
@@ -2176,7 +2180,7 @@ public:
     /**
         Returns true if @a pos was within the range. Does not match if the range is empty.
     */
-    bool Contains(long pos) const { return pos >= m_start && pos <= m_end ; }
+    bool Contains(std::size_t pos) const { return pos >= m_start && pos <= m_end ; }
 
     /**
         Limit this range to be within @a range.
@@ -2191,7 +2195,7 @@ public:
     /**
         Swaps the start and end.
     */
-    void Swap() { long tmp = m_start; m_start = m_end; m_end = tmp; }
+    void Swap() { std::size_t tmp = m_start; m_start = m_end; m_end = tmp; }
 
     /**
         Converts the API-standard range, whose end is one past the last character in
@@ -2210,8 +2214,8 @@ public:
     wxRichTextRange FromInternal() const { return wxRichTextRange(m_start, m_end+1); }
 
 protected:
-    long m_start;
-    long m_end;
+    std::size_t m_start;
+    std::size_t m_end;
 };
 
 WX_DECLARE_USER_EXPORTED_OBJARRAY(wxRichTextRange, wxRichTextRangeArray, WXDLLIMPEXP_RICHTEXT);
@@ -2446,7 +2450,7 @@ public:
     /**
         Gets the virtual text for this object.
     */
-    bool GetVirtualText(const wxRichTextPlainText* obj, wxString& text) const;
+    bool GetVirtualText(const wxRichTextPlainText* obj, std::string& text) const;
 
     /**
         Enables virtual attribute processing.
@@ -2625,7 +2629,7 @@ public:
     /**
         Returns any text in this object for the given range.
     */
-    virtual wxString GetTextForRange(const wxRichTextRange& WXUNUSED(range)) const { return {}; }
+    virtual std::string GetTextForRange(const wxRichTextRange& WXUNUSED(range)) const { return {}; }
 
     /**
         Returns @true if this object can merge itself with the given one.
@@ -2668,7 +2672,7 @@ public:
     /**
         Returns the label to be used for the properties context menu item.
     */
-    virtual wxString GetPropertiesMenuLabel() const { return {}; }
+    virtual std::string GetPropertiesMenuLabel() const { return {}; }
 
     /**
         Returns @true if objects of this class can accept the focus, i.e. a call to SetFocusObject
@@ -2712,7 +2716,7 @@ public:
     /**
         Returns the XML node name of this object. This must be overridden for wxXmlNode-base XML export to work.
     */
-    virtual wxString GetXMLNodeName() const { return wxT("unknown"); }
+    virtual std::string GetXMLNodeName() const { return "unknown"; }
 
     /**
         Invalidates the object at the given range. With no argument, invalidates the whole object.
@@ -2965,12 +2969,12 @@ public:
     /**
         Sets the identifying name for this object as a property using the "name" key.
     */
-    void SetName(const wxString& name) { m_properties.SetProperty(wxT("name"), name); }
+    void SetName(const std::string& name) { m_properties.SetProperty("name", name); }
 
     /**
         Returns the identifying name for this object from the properties, using the "name" key.
     */
-    wxString GetName() const { return m_properties.GetPropertyString(wxT("name")); }
+    std::string GetName() const { return m_properties.GetPropertyString("name"); }
 
     /**
         Returns @true if this object is top-level, i.e. contains its own paragraphs, such as a text box.
@@ -3127,7 +3131,7 @@ public:
 
     bool DeleteRange(const wxRichTextRange& range) override;
 
-    wxString GetTextForRange(const wxRichTextRange& range) const override;
+    std::string GetTextForRange(const wxRichTextRange& range) const override;
 
     bool GetRangeSize(const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, unsigned int flags, const wxPoint& position = wxPoint(0,0), const wxSize& parentSize = wxDefaultSize, std::vector<int>* partialExtents = nullptr) const override;
 
@@ -3250,7 +3254,7 @@ public:
 
     bool DeleteRange(const wxRichTextRange& range) override;
 
-    wxString GetTextForRange(const wxRichTextRange& range) const override;
+    std::string GetTextForRange(const wxRichTextRange& range) const override;
 
 #if wxUSE_XML
     bool ImportFromXML(wxRichTextBuffer* buffer, wxXmlNode* node, wxRichTextXMLHandler* handler, bool* recurse) override;
@@ -3264,7 +3268,7 @@ public:
     bool ExportXML(wxXmlNode* parent, wxRichTextXMLHandler* handler) override;
 #endif
 
-    wxString GetXMLNodeName() const override { return wxT("paragraphlayout"); }
+    std::string GetXMLNodeName() const override { return "paragraphlayout"; }
 
     bool AcceptsFocus() const override { return true; }
 
@@ -3307,7 +3311,7 @@ public:
     /**
         Submits a command to insert the given text.
     */
-    bool InsertTextWithUndo(wxRichTextBuffer* buffer, long pos, const wxString& text, wxRichTextCtrl* ctrl, unsigned int flags = 0);
+    bool InsertTextWithUndo(wxRichTextBuffer* buffer, long pos, const std::string& text, wxRichTextCtrl* ctrl, unsigned int flags = 0);
 
     /**
         Submits a command to insert the given text.
@@ -3325,7 +3329,7 @@ public:
 
         @see wxRichTextField, wxRichTextFieldType, wxRichTextFieldTypeStandard
     */
-    wxRichTextField* InsertFieldWithUndo(wxRichTextBuffer* buffer, long pos, const wxString& fieldType,
+    wxRichTextField* InsertFieldWithUndo(wxRichTextBuffer* buffer, long pos, const std::string& fieldType,
                                                         const wxRichTextProperties& properties,
                                                         wxRichTextCtrl* ctrl, unsigned int flags,
                                                         const wxRichTextAttr& textAttr);
@@ -3375,7 +3379,7 @@ public:
     /**
         Convenience function to add a paragraph of text.
     */
-    virtual wxRichTextRange AddParagraph(const wxString& text, wxRichTextAttr* paraStyle = nullptr);
+    virtual wxRichTextRange AddParagraph(const std::string& text, wxRichTextAttr* paraStyle = nullptr);
 
     /**
         Convenience function to add an image.
@@ -3385,7 +3389,7 @@ public:
     /**
         Adds multiple paragraphs, based on newlines.
     */
-    virtual wxRichTextRange AddParagraphs(const wxString& text, wxRichTextAttr* paraStyle = nullptr);
+    virtual wxRichTextRange AddParagraphs(const std::string& text, wxRichTextAttr* paraStyle = nullptr);
 
     /**
         Returns the line at the given position. If @a caretPosition is true, the position is
@@ -3455,7 +3459,7 @@ public:
     /**
         Returns the text of the paragraph.
     */
-    virtual wxString GetParagraphText(long paragraphNumber) const;
+    virtual std::string GetParagraphText(long paragraphNumber) const;
 
     /**
         Converts zero-based line column and paragraph number to a position.
@@ -3573,7 +3577,7 @@ public:
         @see NumberList(), PromoteList(), ClearListStyle().
     */
     virtual bool SetListStyle(const wxRichTextRange& range, wxRichTextListStyleDefinition* def, unsigned int flags = wxRICHTEXT_SETSTYLE_WITH_UNDO, int startFrom = 1, int specifiedLevel = -1);
-    virtual bool SetListStyle(const wxRichTextRange& range, const wxString& defName, unsigned int flags = wxRICHTEXT_SETSTYLE_WITH_UNDO, int startFrom = 1, int specifiedLevel = -1);
+    virtual bool SetListStyle(const wxRichTextRange& range, const std::string& defName, unsigned int flags = wxRICHTEXT_SETSTYLE_WITH_UNDO, int startFrom = 1, int specifiedLevel = -1);
     //@}
 
     /**
@@ -3607,7 +3611,7 @@ public:
         @see SetListStyle(), PromoteList(), ClearListStyle()
     */
     virtual bool NumberList(const wxRichTextRange& range, wxRichTextListStyleDefinition* def = nullptr, unsigned int flags = wxRICHTEXT_SETSTYLE_WITH_UNDO, int startFrom = 1, int specifiedLevel = -1);
-    virtual bool NumberList(const wxRichTextRange& range, const wxString& defName, unsigned int flags = wxRICHTEXT_SETSTYLE_WITH_UNDO, int startFrom = 1, int specifiedLevel = -1);
+    virtual bool NumberList(const wxRichTextRange& range, const std::string& defName, unsigned int flags = wxRICHTEXT_SETSTYLE_WITH_UNDO, int startFrom = 1, int specifiedLevel = -1);
     //@}
 
     //@{
@@ -3628,7 +3632,7 @@ public:
         @see SetListStyle(), SetListStyle(), ClearListStyle()
     */
     virtual bool PromoteList(int promoteBy, const wxRichTextRange& range, wxRichTextListStyleDefinition* def = nullptr, unsigned int flags = wxRICHTEXT_SETSTYLE_WITH_UNDO, int specifiedLevel = -1);
-    virtual bool PromoteList(int promoteBy, const wxRichTextRange& range, const wxString& defName, unsigned int flags = wxRICHTEXT_SETSTYLE_WITH_UNDO, int specifiedLevel = -1);
+    virtual bool PromoteList(int promoteBy, const wxRichTextRange& range, const std::string& defName, unsigned int flags = wxRICHTEXT_SETSTYLE_WITH_UNDO, int specifiedLevel = -1);
     //@}
 
     /**
@@ -3722,7 +3726,7 @@ public:
     /**
         Get all the text.
     */
-    virtual wxString GetText() const;
+    virtual std::string GetText() const;
 
     /**
         Sets the default style, affecting the style currently being applied
@@ -3854,13 +3858,13 @@ public:
 
     bool Draw(wxDC& dc, wxRichTextDrawingContext& context, const wxRichTextRange& range, const wxRichTextSelection& selection, const wxRect& rect, int descent, unsigned int style) override;
 
-    wxString GetXMLNodeName() const override { return wxT("textbox"); }
+    std::string GetXMLNodeName() const override { return "textbox"; }
 
     bool CanEditProperties() const override { return true; }
 
     bool EditProperties(wxWindow* parent, wxRichTextBuffer* buffer) override;
 
-    wxString GetPropertiesMenuLabel() const override { return wxGetTranslation("&Box"); }
+    std::string GetPropertiesMenuLabel() const override { return wxGetTranslation("&Box"); }
 
 // Accessors
 
@@ -3922,7 +3926,7 @@ public:
         Default constructor; optionally pass the parent object.
     */
 
-    wxRichTextField(const wxString& fieldType = {}, wxRichTextObject* parent = nullptr);
+    wxRichTextField(const std::string& fieldType = {}, wxRichTextObject* parent = nullptr);
 
     /**
         Copy constructor.
@@ -3938,13 +3942,13 @@ public:
 
     bool GetRangeSize(const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, unsigned int flags, const wxPoint& position = wxPoint(0,0), const wxSize& parentSize = wxDefaultSize, std::vector<int>* partialExtents = nullptr) const override;
 
-    wxString GetXMLNodeName() const override { return wxT("field"); }
+    std::string GetXMLNodeName() const override { return "field"; }
 
     bool CanEditProperties() const override;
 
     bool EditProperties(wxWindow* parent, wxRichTextBuffer* buffer) override;
 
-    wxString GetPropertiesMenuLabel() const override;
+    std::string GetPropertiesMenuLabel() const override;
 
     bool AcceptsFocus() const override { return false; }
 
@@ -3961,8 +3965,8 @@ public:
 
 // Accessors
 
-    void SetFieldType(const wxString& fieldType) { GetProperties().SetProperty(wxT("FieldType"), fieldType); }
-    wxString GetFieldType() const { return GetProperties().GetPropertyString(wxT("FieldType")); }
+    void SetFieldType(const std::string& fieldType) { GetProperties().SetProperty("FieldType", fieldType); }
+    std::string GetFieldType() const { return GetProperties().GetPropertyString("FieldType"); }
 
 // Operations
 
@@ -4001,7 +4005,7 @@ public:
     /**
         Creates a field type definition.
     */
-    wxRichTextFieldType(const wxString& name = {})
+    wxRichTextFieldType(const std::string& name = {})
         : m_name(name)
         { }
 
@@ -4047,7 +4051,7 @@ public:
     /**
         Returns the label to be used for the properties context menu item.
     */
-    virtual wxString GetPropertiesMenuLabel(wxRichTextField* WXUNUSED(obj)) const { return {}; }
+    virtual std::string GetPropertiesMenuLabel(wxRichTextField* WXUNUSED(obj)) const { return {}; }
 
     /**
         Update the field. This would typically expand the field to its value,
@@ -4063,16 +4067,16 @@ public:
     /**
         Sets the field type name. There should be a unique name per field type object.
     */
-    void SetName(const wxString& name) { m_name = name; }
+    void SetName(const std::string& name) { m_name = name; }
 
     /**
         Returns the field type name. There should be a unique name per field type object.
     */
-    wxString GetName() const { return m_name; }
+    std::string GetName() const { return m_name; }
 
 protected:
 
-    wxString  m_name;
+    std::string  m_name;
 };
 
 WX_DECLARE_STRING_HASH_MAP(wxRichTextFieldType*, wxRichTextFieldTypeHashMap);
@@ -4135,7 +4139,7 @@ public:
             wxRICHTEXT_FIELD_STYLE_END_TAG.
 
     */
-    wxRichTextFieldTypeStandard(const wxString& name, const wxString& label, int displayStyle = wxRICHTEXT_FIELD_STYLE_RECTANGLE);
+    wxRichTextFieldTypeStandard(const std::string& name, const std::string& label, int displayStyle = wxRICHTEXT_FIELD_STYLE_RECTANGLE);
 
     /**
         Constructor, creating a field type definition with a bitmap label.
@@ -4151,7 +4155,7 @@ public:
             wxRICHTEXT_FIELD_STYLE_END_TAG.
 
     */
-    wxRichTextFieldTypeStandard(const wxString& name, const wxBitmap& bitmap, int displayStyle = wxRICHTEXT_FIELD_STYLE_NO_BORDER);
+    wxRichTextFieldTypeStandard(const std::string& name, const wxBitmap& bitmap, int displayStyle = wxRICHTEXT_FIELD_STYLE_NO_BORDER);
 
     wxRichTextFieldTypeStandard() = default;
 
@@ -4206,12 +4210,12 @@ public:
     /**
         Sets the text label for fields of this type.
     */
-    void SetLabel(const wxString& label) { m_label = label; }
+    void SetLabel(const std::string& label) { m_label = label; }
 
     /**
         Returns the text label for fields of this type.
     */
-    const wxString& GetLabel() const { return m_label; }
+    const std::string& GetLabel() const { return m_label; }
 
     /**
         Sets the bitmap label for fields of this type.
@@ -4314,7 +4318,7 @@ public:
     int GetVerticalMargin() const { return m_verticalMargin; }
 
 protected:
-    wxString    m_label;
+    std::string    m_label;
 
     wxColour    m_textColour{*wxWHITE};
     wxColour    m_borderColour{*wxBLACK};
@@ -4491,7 +4495,7 @@ public:
     /**
         Constructor taking a text string, a parent and paragraph and character attributes.
     */
-    wxRichTextParagraph(const wxString& text, wxRichTextObject* parent = nullptr, wxRichTextAttr* paraStyle = nullptr, wxRichTextAttr* charStyle = nullptr);
+    wxRichTextParagraph(const std::string& text, wxRichTextObject* parent = nullptr, wxRichTextAttr* paraStyle = nullptr, wxRichTextAttr* charStyle = nullptr);
     ~wxRichTextParagraph();
     wxRichTextParagraph(const wxRichTextParagraph& obj) { Copy(obj); }
 
@@ -4509,7 +4513,7 @@ public:
 
     void CalculateRange(long start, long& end) override;
 
-    wxString GetXMLNodeName() const override { return wxT("paragraph"); }
+    std::string GetXMLNodeName() const override { return "paragraph"; }
 
 // Accessors
 
@@ -4542,7 +4546,7 @@ public:
     /**
         Inserts text at the given position.
     */
-    virtual bool InsertText(long pos, const wxString& text);
+    virtual bool InsertText(long pos, const std::string& text);
 
     /**
         Splits an object at this position if necessary, and returns
@@ -4564,13 +4568,13 @@ public:
         Returns the plain text searching from the start or end of the range.
         The resulting string may be shorter than the range given.
     */
-    bool GetContiguousPlainText(wxString& text, const wxRichTextRange& range, bool fromStart = true);
+    bool GetContiguousPlainText(std::string& text, const wxRichTextRange& range, bool fromStart = true);
 
     /**
         Finds a suitable wrap position. @a wrapPosition is the last position in the line to the left
         of the split.
     */
-    bool FindWrapPosition(const wxRichTextRange& range, wxDC& dc, wxRichTextDrawingContext& context, int availableSpace, long& wrapPosition, std::vector<int>* partialExtents);
+    bool FindWrapPosition(const wxRichTextRange& range, wxDC& dc, wxRichTextDrawingContext& context, int availableSpace, std::size_t& wrapPosition, std::vector<int>* partialExtents);
 
     /**
         Finds the object at the given position.
@@ -4580,7 +4584,7 @@ public:
     /**
         Returns the bullet text for this paragraph.
     */
-    wxString GetBulletText();
+    std::string GetBulletText();
 
     /**
         Allocates or reuses a line object.
@@ -4671,7 +4675,7 @@ public:
     /**
         Constructor.
     */
-    wxRichTextPlainText(const wxString& text = {}, wxRichTextObject* parent = nullptr, wxRichTextAttr* style = nullptr);
+    wxRichTextPlainText(const std::string& text = {}, wxRichTextObject* parent = nullptr, wxRichTextAttr* style = nullptr);
 
     /**
         Copy constructor.
@@ -4688,7 +4692,7 @@ public:
 
     bool GetRangeSize(const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, unsigned int flags, const wxPoint& position = wxPoint(0,0), const wxSize& parentSize = wxDefaultSize, std::vector<int>* partialExtents = nullptr) const override;
 
-    wxString GetTextForRange(const wxRichTextRange& range) const override;
+    std::string GetTextForRange(const wxRichTextRange& range) const override;
 
     wxRichTextObject* DoSplit(long pos) override;
 
@@ -4728,19 +4732,19 @@ public:
     bool ExportXML(wxXmlNode* parent, wxRichTextXMLHandler* handler) override;
 #endif
 
-    wxString GetXMLNodeName() const override { return wxT("text"); }
+    std::string GetXMLNodeName() const override { return "text"; }
 
 // Accessors
 
     /**
         Returns the text.
     */
-    const wxString& GetText() const { return m_text; }
+    const std::string& GetText() const { return m_text; }
 
     /**
         Sets the text.
     */
-    void SetText(const wxString& text) { m_text = text; }
+    void SetText(const std::string& text) { m_text = text; }
 
 // Operations
 
@@ -4754,7 +4758,7 @@ private:
     bool DrawTabbedString(wxDC& dc, const wxRichTextAttr& attr, const wxRect& rect, std::string& str, wxCoord& x, wxCoord& y, bool selected);
 
 protected:
-    wxString    m_text;
+    std::string    m_text;
 };
 
 /**
@@ -4789,7 +4793,7 @@ public:
         If it's not a JPEG we can make use of @a image, already scaled, so we don't have to
         load the image a second time.
     */
-    virtual bool MakeImageBlock(const wxString& filename, wxBitmapType imageType,
+    virtual bool MakeImageBlock(const std::string& filename, wxBitmapType imageType,
                                 wxImage& image, bool convertToJPEG = true);
 
     /**
@@ -4811,7 +4815,7 @@ public:
     /**
         Writes the block to a file.
     */
-    bool Write(const wxString& filename);
+    bool Write(const std::string& filename);
 
     /**
         Writes the data in hex to a stream.
@@ -4879,7 +4883,7 @@ public:
     /**
         Gets the extension for the block's type.
     */
-    wxString GetExtension() const;
+    std::string GetExtension() const;
 
 /// Implementation
 
@@ -4891,7 +4895,7 @@ public:
     /**
         Allocates and reads from a file as a block of memory.
     */
-    static unsigned char* ReadBlock(const wxString& filename, size_t size);
+    static unsigned char* ReadBlock(const std::string& filename, size_t size);
 
     /**
         Writes a memory block to stream.
@@ -4901,7 +4905,7 @@ public:
     /**
         Writes a memory block to a file.
     */
-    static bool WriteBlock(const wxString& filename, unsigned char* block, size_t size);
+    static bool WriteBlock(const std::string& filename, unsigned char* block, size_t size);
 
 protected:
     // Size in bytes of the image stored.
@@ -4959,7 +4963,7 @@ public:
 
     bool EditProperties(wxWindow* parent, wxRichTextBuffer* buffer) override;
 
-    wxString GetPropertiesMenuLabel() const override { return wxGetTranslation("&Picture"); }
+    std::string GetPropertiesMenuLabel() const override { return wxGetTranslation("&Picture"); }
 
     bool UsesParagraphAttributes() const override { return false; }
 
@@ -4978,7 +4982,7 @@ public:
     // Images can be floatable (optionally).
     bool IsFloatable() const override { return true; }
 
-    wxString GetXMLNodeName() const override { return wxT("image"); }
+    std::string GetXMLNodeName() const override { return "image"; }
 
 // Accessors
 
@@ -5167,7 +5171,7 @@ public:
         Loads content from a file.
         Not all handlers will implement file loading.
     */
-    virtual bool LoadFile(const wxString& filename, wxRichTextFileType type = wxRICHTEXT_TYPE_ANY);
+    virtual bool LoadFile(const std::string& filename, wxRichTextFileType type = wxRICHTEXT_TYPE_ANY);
     //@}
 
     //@{
@@ -5175,7 +5179,7 @@ public:
         Saves content to a file.
         Not all handlers will implement file saving.
     */
-    virtual bool SaveFile(const wxString& filename, wxRichTextFileType type = wxRICHTEXT_TYPE_ANY);
+    virtual bool SaveFile(const std::string& filename, wxRichTextFileType type = wxRICHTEXT_TYPE_ANY);
     //@}
 #endif // wxUSE_FFILE
 
@@ -5210,7 +5214,7 @@ public:
     /**
         Convenience function to add a paragraph of text.
     */
-    wxRichTextRange AddParagraph(const wxString& text, wxRichTextAttr* paraStyle = nullptr) override { Modify(); return wxRichTextParagraphLayoutBox::AddParagraph(text, paraStyle); }
+    wxRichTextRange AddParagraph(const std::string& text, wxRichTextAttr* paraStyle = nullptr) override { Modify(); return wxRichTextParagraphLayoutBox::AddParagraph(text, paraStyle); }
 
     /**
         Begin collapsing undo/redo commands. Note that this may not work properly
@@ -5220,7 +5224,7 @@ public:
         @a cmdName should be the name of the combined command that will appear
         next to Undo and Redo in the edit menu.
     */
-    virtual bool BeginBatchUndo(const wxString& cmdName);
+    virtual bool BeginBatchUndo(const std::string& cmdName);
 
     /**
         End collapsing undo/redo commands.
@@ -5450,7 +5454,7 @@ public:
         See BeginNumberedBullet() for an explanation of how indentation is used
         to render the bulleted paragraph.
     */
-    bool BeginSymbolBullet(const wxString& symbol, int leftIndent, int leftSubIndent, int bulletStyle = wxTEXT_ATTR_BULLET_STYLE_SYMBOL);
+    bool BeginSymbolBullet(const std::string& symbol, int leftIndent, int leftSubIndent, int bulletStyle = wxTEXT_ATTR_BULLET_STYLE_SYMBOL);
 
     /**
         Ends symbol bullet.
@@ -5464,7 +5468,7 @@ public:
         See BeginNumberedBullet() for an explanation of how indentation is used to
         render the bulleted paragraph.
     */
-    bool BeginStandardBullet(const wxString& bulletName, int leftIndent, int leftSubIndent, int bulletStyle = wxTEXT_ATTR_BULLET_STYLE_STANDARD);
+    bool BeginStandardBullet(const std::string& bulletName, int leftIndent, int leftSubIndent, int bulletStyle = wxTEXT_ATTR_BULLET_STYLE_STANDARD);
 
     /**
         Ends standard bullet.
@@ -5474,7 +5478,7 @@ public:
     /**
         Begins named character style.
     */
-    bool BeginCharacterStyle(const wxString& characterStyle);
+    bool BeginCharacterStyle(const std::string& characterStyle);
 
     /**
         Ends named character style.
@@ -5484,7 +5488,7 @@ public:
     /**
         Begins named paragraph style.
     */
-    bool BeginParagraphStyle(const wxString& paragraphStyle);
+    bool BeginParagraphStyle(const std::string& paragraphStyle);
 
     /**
         Ends named character style.
@@ -5496,7 +5500,7 @@ public:
 
         Optionally, you can also pass a level and a number.
     */
-    bool BeginListStyle(const wxString& listStyle, int level = 1, int number = 1);
+    bool BeginListStyle(const std::string& listStyle, int level = 1, int number = 1);
 
     /**
         Ends named character style.
@@ -5509,7 +5513,7 @@ public:
         Pass a URL and optionally, a character style to apply, since it is common
         to mark a URL with a familiar style such as blue text with underlining.
     */
-    bool BeginURL(const wxString& url, const wxString& characterStyle = {});
+    bool BeginURL(const std::string& url, const std::string& characterStyle = {});
 
     /**
         Ends URL.
@@ -5575,7 +5579,7 @@ public:
     /**
         Submits a command to insert the given text.
     */
-    bool InsertTextWithUndo(long pos, const wxString& text, wxRichTextCtrl* ctrl, unsigned int flags = 0);
+    bool InsertTextWithUndo(long pos, const std::string& text, wxRichTextCtrl* ctrl, unsigned int flags = 0);
 
     /**
         Submits a command to insert a newline.
@@ -5634,22 +5638,22 @@ public:
     /**
         Removes a file handler.
     */
-    static bool RemoveHandler(const wxString& name);
+    static bool RemoveHandler(const std::string& name);
 
     /**
         Finds a file handler by name.
     */
-    static wxRichTextFileHandler *FindHandler(const wxString& name);
+    static wxRichTextFileHandler *FindHandler(const std::string& name);
 
     /**
         Finds a file handler by extension and type.
     */
-    static wxRichTextFileHandler *FindHandler(const wxString& extension, wxRichTextFileType imageType);
+    static wxRichTextFileHandler *FindHandler(const std::string& extension, wxRichTextFileType imageType);
 
     /**
         Finds a handler by filename or, if supplied, type.
     */
-    static wxRichTextFileHandler *FindHandlerFilenameOrType(const wxString& filename,
+    static wxRichTextFileHandler *FindHandlerFilenameOrType(const fs::path& filename,
                                                             wxRichTextFileType imageType);
 
     /**
@@ -5662,7 +5666,7 @@ public:
         it will be filled with the file type corresponding to each filter. This can be
         used to determine the type to pass to LoadFile given a selected filter.
     */
-    static wxString GetExtWildcard(bool combine = false, bool save = false, std::vector<int>* types = nullptr);
+    static std::string GetExtWildcard(bool combine = false, bool save = false, std::vector<int>* types = nullptr);
 
     /**
         Clean up file handlers.
@@ -5693,12 +5697,12 @@ public:
     /**
         Removes a drawing handler.
     */
-    static bool RemoveDrawingHandler(const wxString& name);
+    static bool RemoveDrawingHandler(const std::string& name);
 
     /**
         Finds a drawing handler by name.
     */
-    static wxRichTextDrawingHandler *FindDrawingHandler(const wxString& name);
+    static wxRichTextDrawingHandler *FindDrawingHandler(const std::string& name);
 
     /**
         Clean up drawing handlers.
@@ -5723,14 +5727,14 @@ public:
 
         @see AddFieldType(), FindFieldType(), wxRichTextField, wxRichTextFieldType, wxRichTextFieldTypeStandard
     */
-    static bool RemoveFieldType(const wxString& name);
+    static bool RemoveFieldType(const std::string& name);
 
     /**
         Finds a field type by name.
 
         @see RemoveFieldType(), AddFieldType(), wxRichTextField, wxRichTextFieldType, wxRichTextFieldTypeStandard
     */
-    static wxRichTextFieldType *FindFieldType(const wxString& name);
+    static wxRichTextFieldType *FindFieldType(const std::string& name);
 
     /**
         Cleans up field types.
@@ -5804,7 +5808,7 @@ protected:
     wxRichTextFontTable     m_fontTable;
 
     /// Name for collapsed command
-    wxString                m_batchedCommandsName;
+    std::string                m_batchedCommandsName;
 
     /// Current collapsed command accumulating actions
     wxRichTextCommand*      m_batchedCommand{nullptr};
@@ -5893,13 +5897,13 @@ public:
 
     bool AdjustAttributes(wxRichTextAttr& attr, wxRichTextDrawingContext& context) override;
 
-    wxString GetXMLNodeName() const override { return wxT("cell"); }
+    std::string GetXMLNodeName() const override { return "cell"; }
 
     bool CanEditProperties() const override { return true; }
 
     bool EditProperties(wxWindow* parent, wxRichTextBuffer* buffer) override;
 
-    wxString GetPropertiesMenuLabel() const override { return wxGetTranslation("&Cell"); }
+    std::string GetPropertiesMenuLabel() const override { return wxGetTranslation("&Cell"); }
 
     /// Don't allow a cell to be deleted in Defragment
     bool IsEmpty() const override { return false; }
@@ -5971,7 +5975,7 @@ public:
 
     bool AdjustAttributes(wxRichTextAttr& attr, wxRichTextDrawingContext& context) override;
 
-    wxString GetXMLNodeName() const override { return wxT("table"); }
+    std::string GetXMLNodeName() const override { return "table"; }
 
     bool Layout(wxDC& dc, wxRichTextDrawingContext& context, const wxRect& rect, const wxRect& parentRect, unsigned int style) override;
 
@@ -5979,7 +5983,7 @@ public:
 
     bool DeleteRange(const wxRichTextRange& range) override;
 
-    wxString GetTextForRange(const wxRichTextRange& range) const override;
+    std::string GetTextForRange(const wxRichTextRange& range) const override;
 
 #if wxUSE_XML
     bool ImportFromXML(wxRichTextBuffer* buffer, wxXmlNode* node, wxRichTextXMLHandler* handler, bool* recurse) override;
@@ -6008,7 +6012,7 @@ public:
 
     bool EditProperties(wxWindow* parent, wxRichTextBuffer* buffer) override;
 
-    wxString GetPropertiesMenuLabel() const override { return wxGetTranslation("&Table"); }
+    std::string GetPropertiesMenuLabel() const override { return wxGetTranslation("&Table"); }
 
     // Returns true if objects of this class can accept the focus, i.e. a call to SetFocusObject
     // is possible. For example, containers supporting text, such as a text box object, can accept the focus,
@@ -6330,13 +6334,13 @@ public:
     /**
         Constructor for one action.
     */
-    wxRichTextCommand(const wxString& name, wxRichTextCommandId id, wxRichTextBuffer* buffer,
+    wxRichTextCommand(const std::string& name, wxRichTextCommandId id, wxRichTextBuffer* buffer,
         wxRichTextParagraphLayoutBox* container, wxRichTextCtrl* ctrl, bool ignoreFirstTime = false);
 
     /**
         Constructor for multiple actions.
     */
-    wxRichTextCommand(const wxString& name);
+    wxRichTextCommand(const std::string& name);
 
     ~wxRichTextCommand();
 
@@ -6395,7 +6399,7 @@ public:
         Constructor. @a buffer is the top-level buffer, while @a container is the object within
         which the action is taking place. In the simplest case, they are the same.
     */
-    wxRichTextAction(wxRichTextCommand* cmd, const wxString& name, wxRichTextCommandId id,
+    wxRichTextAction(wxRichTextCommand* cmd, const std::string& name, wxRichTextCommandId id,
         wxRichTextBuffer* buffer, wxRichTextParagraphLayoutBox* container,
         wxRichTextCtrl* ctrl, bool ignoreFirstTime = false);
 
@@ -6486,7 +6490,7 @@ public:
     /**
         Returns the position used for e.g. insertion.
     */
-    long GetPosition() const { return m_position; }
+    std::size_t GetPosition() const { return m_position; }
 
     /**
         Sets the range for e.g. deletion.
@@ -6526,7 +6530,7 @@ public:
     /**
         Returns the action name.
     */
-    const wxString& GetName() const { return m_name; }
+    const std::string& GetName() const { return m_name; }
 
     /**
         Instructs the first Do() command should be skipped as it's already been applied.
@@ -6540,7 +6544,7 @@ public:
 
 protected:
     // Action name
-    wxString                        m_name;
+    std::string                        m_name;
 
     // Buffer
     wxRichTextBuffer*               m_buffer;
@@ -6576,7 +6580,7 @@ protected:
     wxRichTextRange                 m_range;
 
     // The insertion point for this command
-    long                            m_position{-1};
+    std::size_t                     m_position{static_cast<std::size_t>(-1)};
 
     // Ignore 1st 'Do' operation because we already did it
     bool                            m_ignoreThis;
@@ -6627,7 +6631,7 @@ public:
     /**
         Creates a file handler object.
     */
-    wxRichTextFileHandler(const wxString& name = {}, const wxString& ext = {}, int type = 0)
+    wxRichTextFileHandler(const std::string& name = {}, const std::string& ext = {}, int type = 0)
         : m_name(name), m_extension(ext), m_type(type) 
         { }
 
@@ -6651,18 +6655,18 @@ public:
     /**
         Loads the buffer from a file.
     */
-    virtual bool LoadFile(wxRichTextBuffer *buffer, const wxString& filename);
+    virtual bool LoadFile(wxRichTextBuffer *buffer, const std::string& filename);
 
     /**
         Saves the buffer to a file.
     */
-    virtual bool SaveFile(wxRichTextBuffer *buffer, const wxString& filename);
+    virtual bool SaveFile(wxRichTextBuffer *buffer, const std::string& filename);
 #endif // wxUSE_STREAMS && wxUSE_STREAMS
 
     /**
         Returns @true if we handle this filename (if using files). By default, checks the extension.
     */
-    virtual bool CanHandle(const std::string& filename) const;
+    virtual bool CanHandle(const fs::path& filename) const;
 
     /**
         Returns @true if we can save using this handler.
@@ -6688,22 +6692,22 @@ public:
     /**
         Sets the name of the handler.
     */
-    void SetName(const wxString& name) { m_name = name; }
+    void SetName(const std::string& name) { m_name = name; }
 
     /**
         Returns the name of the handler.
     */
-    wxString GetName() const { return m_name; }
+    std::string GetName() const { return m_name; }
 
     /**
         Sets the default extension to recognise.
     */
-    void SetExtension(const wxString& ext) { m_extension = ext; }
+    void SetExtension(const std::string& ext) { m_extension = ext; }
 
     /**
         Returns the default extension to recognise.
     */
-    wxString GetExtension() const { return m_extension; }
+    std::string GetExtension() const { return m_extension; }
 
     /**
         Sets the handler type.
@@ -6735,12 +6739,12 @@ public:
     /**
         Sets the encoding to use when saving a file. If empty, a suitable encoding is chosen.
     */
-    void SetEncoding(const wxString& encoding) { m_encoding = encoding; }
+    void SetEncoding(const std::string& encoding) { m_encoding = encoding; }
 
     /**
         Returns the encoding to use when saving a file. If empty, a suitable encoding is chosen.
     */
-    const wxString& GetEncoding() const { return m_encoding; }
+    const std::string& GetEncoding() const { return m_encoding; }
 
 protected:
 
@@ -6756,9 +6760,9 @@ protected:
     virtual bool DoSaveFile(wxRichTextBuffer *buffer, wxOutputStream& stream) = 0;
 #endif
 
-    wxString  m_name;
-    wxString  m_encoding;
-    wxString  m_extension;
+    std::string  m_name;
+    std::string  m_encoding;
+    std::string  m_extension;
     int       m_type;
     int       m_flags{0};
     bool      m_visible{true};
@@ -6779,8 +6783,8 @@ class WXDLLIMPEXP_RICHTEXT wxRichTextPlainTextHandler: public wxRichTextFileHand
 {
     wxDECLARE_CLASS(wxRichTextPlainTextHandler);
 public:
-    wxRichTextPlainTextHandler(const wxString& name = wxT("Text"),
-                               const wxString& ext = wxT("txt"),
+    wxRichTextPlainTextHandler(const std::string& name = "Text",
+                               const std::string& ext = "txt",
                                wxRichTextFileType type = wxRICHTEXT_TYPE_TEXT)
         : wxRichTextFileHandler(name, ext, type)
         { }
@@ -6819,7 +6823,7 @@ public:
     /**
         Creates a drawing handler object.
     */
-    wxRichTextDrawingHandler(const wxString& name = {})
+    wxRichTextDrawingHandler(const std::string& name = {})
         : m_name(name)
         { }
 
@@ -6856,21 +6860,21 @@ public:
     /**
         Gets the virtual text for this object.
     */
-    virtual bool GetVirtualText(const wxRichTextPlainText* obj, wxString& text) const = 0;
+    virtual bool GetVirtualText(const wxRichTextPlainText* obj, std::string& text) const = 0;
 
     /**
         Sets the name of the handler.
     */
-    void SetName(const wxString& name) { m_name = name; }
+    void SetName(const std::string& name) { m_name = name; }
 
     /**
         Returns the name of the handler.
     */
-    wxString GetName() const { return m_name; }
+    std::string GetName() const { return m_name; }
 
 protected:
 
-    wxString  m_name;
+    std::string  m_name;
 };
 
 #if wxUSE_DATAOBJ
@@ -6952,7 +6956,7 @@ public:
     /**
         Draws a bullet that can be described by text, such as numbered or symbol bullets. This function should be overridden.
     */
-    virtual bool DrawTextBullet(wxRichTextParagraph* paragraph, wxDC& dc, const wxRichTextAttr& attr, const wxRect& rect, const wxString& text) = 0;
+    virtual bool DrawTextBullet(wxRichTextParagraph* paragraph, wxDC& dc, const wxRichTextAttr& attr, const wxRect& rect, const std::string& text) = 0;
 
     /**
         Draws a bitmap bullet, where the bullet bitmap is specified by the value of GetBulletName. This function should be overridden.
@@ -6993,7 +6997,7 @@ public:
     bool DrawStandardBullet(wxRichTextParagraph* paragraph, wxDC& dc, const wxRichTextAttr& attr, const wxRect& rect) override;
 
     // Draw a bullet that can be described by text, such as numbered or symbol bullets
-    bool DrawTextBullet(wxRichTextParagraph* paragraph, wxDC& dc, const wxRichTextAttr& attr, const wxRect& rect, const wxString& text) override;
+    bool DrawTextBullet(wxRichTextParagraph* paragraph, wxDC& dc, const wxRichTextAttr& attr, const wxRect& rect, const std::string& text) override;
 
     // Draw a bitmap bullet, where the bullet bitmap is specified by the value of GetBulletName
     bool DrawBitmapBullet(wxRichTextParagraph* paragraph, wxDC& dc, const wxRichTextAttr& attr, const wxRect& rect) override;
@@ -7041,7 +7045,7 @@ WXDLLIMPEXP_RICHTEXT bool wxRichTextSplitParaCharStyles(const wxRichTextAttr& st
 WXDLLIMPEXP_RICHTEXT bool wxRichTextTabsEq(const std::vector<int>& tabs1, const std::vector<int>& tabs2);
 
 /// Convert a decimal to Roman numerals
-WXDLLIMPEXP_RICHTEXT wxString wxRichTextDecimalToRoman(long n);
+WXDLLIMPEXP_RICHTEXT std::string wxRichTextDecimalToRoman(long n);
 
 // Collects the attributes that are common to a range of content, building up a note of
 // which attributes are absent in some objects and which clash in some objects.

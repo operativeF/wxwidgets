@@ -440,7 +440,7 @@ bool wxRichTextBackgroundPage::ShowToolTips()
  * Get bitmap resources
  */
 
-wxBitmap wxRichTextBackgroundPage::GetBitmapResource( const wxString& name )
+wxBitmap wxRichTextBackgroundPage::GetBitmapResource( const std::string& name )
 {
     // Bitmap retrieval
 ////@begin wxRichTextBackgroundPage bitmap retrieval
@@ -453,7 +453,7 @@ wxBitmap wxRichTextBackgroundPage::GetBitmapResource( const wxString& name )
  * Get icon resources
  */
 
-wxIcon wxRichTextBackgroundPage::GetIconResource( const wxString& name )
+wxIcon wxRichTextBackgroundPage::GetIconResource( const std::string& name )
 {
     // Icon retrieval
 ////@begin wxRichTextBackgroundPage icon retrieval

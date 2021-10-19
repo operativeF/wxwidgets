@@ -105,10 +105,10 @@ class WXDLLIMPEXP_RICHTEXT wxRichTextStyleOrganiserDialog: public wxDialog
 public:
     /// Constructors
     wxRichTextStyleOrganiserDialog() = default;
-    wxRichTextStyleOrganiserDialog( int flags, wxRichTextStyleSheet* sheet, wxRichTextCtrl* ctrl, wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& caption = SYMBOL_WXRICHTEXTSTYLEORGANISERDIALOG_TITLE, const wxPoint& pos = SYMBOL_WXRICHTEXTSTYLEORGANISERDIALOG_POSITION, const wxSize& size = SYMBOL_WXRICHTEXTSTYLEORGANISERDIALOG_SIZE, unsigned int style = SYMBOL_WXRICHTEXTSTYLEORGANISERDIALOG_STYLE );
+    wxRichTextStyleOrganiserDialog( int flags, wxRichTextStyleSheet* sheet, wxRichTextCtrl* ctrl, wxWindow* parent, wxWindowID id = wxID_ANY, const std::string& caption = SYMBOL_WXRICHTEXTSTYLEORGANISERDIALOG_TITLE, const wxPoint& pos = SYMBOL_WXRICHTEXTSTYLEORGANISERDIALOG_POSITION, const wxSize& size = SYMBOL_WXRICHTEXTSTYLEORGANISERDIALOG_SIZE, unsigned int style = SYMBOL_WXRICHTEXTSTYLEORGANISERDIALOG_STYLE );
 
     /// Creation
-    bool Create( int flags, wxRichTextStyleSheet* sheet, wxRichTextCtrl* ctrl, wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& caption = SYMBOL_WXRICHTEXTSTYLEORGANISERDIALOG_TITLE, const wxPoint& pos = SYMBOL_WXRICHTEXTSTYLEORGANISERDIALOG_POSITION, const wxSize& size = SYMBOL_WXRICHTEXTSTYLEORGANISERDIALOG_SIZE, unsigned int style = SYMBOL_WXRICHTEXTSTYLEORGANISERDIALOG_STYLE );
+    bool Create( int flags, wxRichTextStyleSheet* sheet, wxRichTextCtrl* ctrl, wxWindow* parent, wxWindowID id = wxID_ANY, const std::string& caption = SYMBOL_WXRICHTEXTSTYLEORGANISERDIALOG_TITLE, const wxPoint& pos = SYMBOL_WXRICHTEXTSTYLEORGANISERDIALOG_POSITION, const wxSize& size = SYMBOL_WXRICHTEXTSTYLEORGANISERDIALOG_SIZE, unsigned int style = SYMBOL_WXRICHTEXTSTYLEORGANISERDIALOG_STYLE );
 
     /// Creates the controls and sizers
     void CreateControls();
@@ -143,7 +143,7 @@ public:
     void SetRestartNumbering(bool restartNumbering) { m_restartNumbering = restartNumbering; }
 
     /// Get selected style name or definition
-    wxString GetSelectedStyle() const;
+    std::string GetSelectedStyle() const;
     wxRichTextStyleDefinition* GetSelectedStyleDefinition() const;
 
     /// Apply the style
@@ -213,10 +213,10 @@ public:
 ////@begin wxRichTextStyleOrganiserDialog member function declarations
 
     /// Retrieves bitmap resources
-    wxBitmap GetBitmapResource( const wxString& name );
+    wxBitmap GetBitmapResource( const std::string& name );
 
     /// Retrieves icon resources
-    wxIcon GetIconResource( const wxString& name );
+    wxIcon GetIconResource( const std::string& name );
 ////@end wxRichTextStyleOrganiserDialog member function declarations
 
 ////@begin wxRichTextStyleOrganiserDialog member variables

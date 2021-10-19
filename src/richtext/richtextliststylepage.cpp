@@ -520,7 +520,7 @@ iaculis malesuada. Donec bibendum ipsum ut ante porta fringilla.\n";
         wxRichTextAttr levelAttr = * def->GetLevelAttributes(i);
         levelAttr.SetBulletNumber(1);
         m_previewCtrl->BeginStyle(levelAttr);
-        m_previewCtrl->WriteText(wxString::Format(wxT("List level %d. "), i+1) + s_para2);
+        m_previewCtrl->WriteText(fmt::format("List level %d. ", i+1) + s_para2);
         m_previewCtrl->EndStyle();
     }
     m_previewCtrl->EndStyle();
@@ -1187,7 +1187,7 @@ bool wxRichTextListStylePage::ShowToolTips()
  * Get bitmap resources
  */
 
-wxBitmap wxRichTextListStylePage::GetBitmapResource( const wxString& name )
+wxBitmap wxRichTextListStylePage::GetBitmapResource( const std::string& name )
 {
     // Bitmap retrieval
 ////@begin wxRichTextListStylePage bitmap retrieval
@@ -1200,7 +1200,7 @@ wxBitmap wxRichTextListStylePage::GetBitmapResource( const wxString& name )
  * Get icon resources
  */
 
-wxIcon wxRichTextListStylePage::GetIconResource( const wxString& name )
+wxIcon wxRichTextListStylePage::GetIconResource( const std::string& name )
 {
     // Icon retrieval
 ////@begin wxRichTextListStylePage icon retrieval

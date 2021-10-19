@@ -1191,9 +1191,9 @@ wxRect wxRichTextObject::AdjustAvailableSpace(wxDC& dc, wxRichTextBuffer* buffer
 // Dump to output stream for debugging
 void wxRichTextObject::Dump(wxTextOutputStream& stream)
 {
-    stream << wxGetClassInfo()->wxGetClassName() << wxT("\n");
-    stream << wxString::Format(wxT("Size: %d,%d. Position: %d,%d, Range: %ld,%ld"), m_size.x, m_size.y, m_pos.x, m_pos.y, m_range.GetStart(), m_range.GetEnd()) << wxT("\n");
-    stream << wxString::Format(wxT("Text colour: %d,%d,%d."), (int) m_attributes.GetTextColour().Red(), (int) m_attributes.GetTextColour().Green(), (int) m_attributes.GetTextColour().Blue()) << wxT("\n");
+    stream << wxGetClassInfo()->wxGetClassName() << "\n";
+    stream << fmt::format("Size: %d,%d. Position: %d,%d, Range: %ld,%ld", m_size.x, m_size.y, m_pos.x, m_pos.y, m_range.GetStart(), m_range.GetEnd()) << "\n";
+    stream << fmt::format("Text colour: %d,%d,%d.", (int) m_attributes.GetTextColour().Red(), (int) m_attributes.GetTextColour().Green(), (int) m_attributes.GetTextColour().Blue()) << wxT("\n");
 }
 
 // Gets the containing buffer
@@ -1579,9 +1579,9 @@ bool wxRichTextCompositeObject::DeleteRange(const wxRichTextRange& range)
 }
 
 /// Get any text in this object for the given range
-wxString wxRichTextCompositeObject::GetTextForRange(const wxRichTextRange& range) const
+std::string wxRichTextCompositeObject::GetTextForRange(const wxRichTextRange& range) const
 {
-    wxString text;
+    std::string text;
     wxRichTextObjectList::compatibility_iterator node = m_children.GetFirst();
     while (node)
     {
@@ -1594,7 +1594,7 @@ wxString wxRichTextCompositeObject::GetTextForRange(const wxRichTextRange& range
             else
                 childRange.LimitTo(child->GetRange());
 
-            wxString childText = child->GetTextForRange(childRange);
+            std::string childText = child->GetTextForRange(childRange);
 
             text += childText;
         }
@@ -2695,7 +2695,7 @@ wxSize wxRichTextParagraphLayoutBox::GetLineSizeAtPosition(long pos, bool caretP
 
 
 /// Convenience function to add a paragraph of text
-wxRichTextRange wxRichTextParagraphLayoutBox::AddParagraph(const wxString& text, wxRichTextAttr* paraStyle)
+wxRichTextRange wxRichTextParagraphLayoutBox::AddParagraph(const std::string& text, wxRichTextAttr* paraStyle)
 {
     // Don't use the base style, just the default style, and the base style will
     // be combined at display time.
@@ -2729,7 +2729,7 @@ wxRichTextRange wxRichTextParagraphLayoutBox::AddParagraph(const wxString& text,
 }
 
 /// Adds multiple paragraphs, based on newlines.
-wxRichTextRange wxRichTextParagraphLayoutBox::AddParagraphs(const wxString& text, wxRichTextAttr* paraStyle)
+wxRichTextRange wxRichTextParagraphLayoutBox::AddParagraphs(const std::string& text, wxRichTextAttr* paraStyle)
 {
     // Don't use the base style, just the default style, and the base style will
     // be combined at display time.
@@ -2759,7 +2759,7 @@ wxRichTextRange wxRichTextParagraphLayoutBox::AddParagraphs(const wxString& text
 
     size_t i = 0;
     size_t len = text.length();
-    wxString line;
+    std::string line;
     wxRichTextParagraph* para = new wxRichTextParagraph({}, this, pStyle, cStyle);
     para->GetAttributes().GetTextBoxAttr().Reset();
 
@@ -3316,10 +3316,10 @@ bool wxRichTextParagraphLayoutBox::DeleteRange(const wxRichTextRange& range)
 }
 
 /// Get any text in this object for the given range
-wxString wxRichTextParagraphLayoutBox::GetTextForRange(const wxRichTextRange& range) const
+std::string wxRichTextParagraphLayoutBox::GetTextForRange(const wxRichTextRange& range) const
 {
     int lineCount = 0;
-    wxString text;
+    std::string text;
     wxRichTextObjectList::compatibility_iterator node = m_children.GetFirst();
     while (node)
     {
@@ -3332,12 +3332,12 @@ wxString wxRichTextParagraphLayoutBox::GetTextForRange(const wxRichTextRange& ra
             else
                 childRange.LimitTo(child->GetRange());
 
-            wxString childText = child->GetTextForRange(childRange);
+            std::string childText = child->GetTextForRange(childRange);
 
             text += childText;
 
             if ((childRange.GetEnd() == child->GetRange().GetEnd()) && node->GetNext())
-                text += wxT("\n");
+                text += "\n";
 
             lineCount ++;
         }
@@ -3348,7 +3348,7 @@ wxString wxRichTextParagraphLayoutBox::GetTextForRange(const wxRichTextRange& ra
 }
 
 /// Get all the text
-wxString wxRichTextParagraphLayoutBox::GetText() const
+std::string wxRichTextParagraphLayoutBox::GetText() const
 {
     return GetTextForRange(GetOwnRange());
 }
@@ -3373,7 +3373,7 @@ int wxRichTextParagraphLayoutBox::GetParagraphLength(long paragraphNumber) const
 }
 
 /// Get the text of the paragraph
-wxString wxRichTextParagraphLayoutBox::GetParagraphText(long paragraphNumber) const
+std::string wxRichTextParagraphLayoutBox::GetParagraphText(long paragraphNumber) const
 {
     wxRichTextParagraph* para = GetParagraphAtLine(paragraphNumber);
     if (para)
@@ -3617,13 +3617,13 @@ bool wxRichTextParagraphLayoutBox::SetStyle(const wxRichTextRange& range, const 
                         else if (resetExistingStyle)
                         {
                             // Preserve the URL as it's not really a formatting style but a property of the object
-                            wxString url;
+                            std::string url;
                             if (child->GetAttributes().HasURL() && !characterAttributes.HasURL())
                                 url = child->GetAttributes().GetURL();
 
                             child->GetAttributes() = characterAttributes;
 
-                            if (!url.IsEmpty())
+                            if (!url.empty())
                                 child->GetAttributes().SetURL(url);
                         }
                         else
@@ -4420,7 +4420,7 @@ bool wxRichTextParagraphLayoutBox::SetListStyle(const wxRichTextRange& range, wx
     return true;
 }
 
-bool wxRichTextParagraphLayoutBox::SetListStyle(const wxRichTextRange& range, const wxString& defName, unsigned int flags, int startFrom, int specifiedLevel)
+bool wxRichTextParagraphLayoutBox::SetListStyle(const wxRichTextRange& range, const std::string& defName, unsigned int flags, int startFrom, int specifiedLevel)
 {
     wxRichTextBuffer* buffer = GetBuffer();
     if (buffer && buffer->GetStyleSheet())
@@ -4603,12 +4603,13 @@ bool wxRichTextParagraphLayoutBox::DoNumberList(const wxRichTextRange& range, co
                     // Create the bullet text if an outline list
                     if (listStyle.GetBulletStyle() & wxTEXT_ATTR_BULLET_STYLE_OUTLINE)
                     {
-                        wxString text;
+                        // FIXME: Use fmt
+                        std::string text;
                         for (i = 0; i <= currentLevel; i++)
                         {
-                            if (!text.IsEmpty())
-                                text += wxT(".");
-                            text += wxString::Format(wxT("%d"), levels[i]);
+                            if (!text.empty())
+                                text += ".";
+                            text += fmt::format("%d", levels[i]);
                         }
                         newPara->GetAttributes().SetBulletText(text);
                     }
@@ -4626,13 +4627,13 @@ bool wxRichTextParagraphLayoutBox::DoNumberList(const wxRichTextRange& range, co
     return true;
 }
 
-bool wxRichTextParagraphLayoutBox::NumberList(const wxRichTextRange& range, const wxString& defName, unsigned int flags, int startFrom, int specifiedLevel)
+bool wxRichTextParagraphLayoutBox::NumberList(const wxRichTextRange& range, const std::string& defName, unsigned int flags, int startFrom, int specifiedLevel)
 {
     wxRichTextBuffer* buffer = GetBuffer();
     if (buffer->GetStyleSheet())
     {
         wxRichTextListStyleDefinition* def = nullptr;
-        if (!defName.IsEmpty())
+        if (!defName.empty())
             def = buffer->GetStyleSheet()->FindListStyle(defName);
         return NumberList(range, def, flags, startFrom, specifiedLevel);
     }
@@ -4657,13 +4658,13 @@ bool wxRichTextParagraphLayoutBox::PromoteList(int promoteBy, const wxRichTextRa
     return DoNumberList(range, range, promoteBy, def, flags, 1, specifiedLevel);
 }
 
-bool wxRichTextParagraphLayoutBox::PromoteList(int promoteBy, const wxRichTextRange& range, const wxString& defName, unsigned int flags, int specifiedLevel)
+bool wxRichTextParagraphLayoutBox::PromoteList(int promoteBy, const wxRichTextRange& range, const std::string& defName, unsigned int flags, int specifiedLevel)
 {
     wxRichTextBuffer* buffer = GetBuffer();
     if (buffer->GetStyleSheet())
     {
         wxRichTextListStyleDefinition* def = nullptr;
-        if (!defName.IsEmpty())
+        if (!defName.empty())
             def = buffer->GetStyleSheet()->FindListStyle(defName);
         return PromoteList(promoteBy, range, def, flags, specifiedLevel);
     }
@@ -4717,19 +4718,19 @@ bool wxRichTextParagraphLayoutBox::FindNextParagraphNumber(wxRichTextParagraph* 
 
             if (isOutline)
             {
-                wxString text = previousParagraph->GetAttributes().GetBulletText();
-                if (!text.IsEmpty())
+                std::string text = previousParagraph->GetAttributes().GetBulletText();
+                if (!text.empty())
                 {
-                    int pos = text.Find(wxT('.'), true);
-                    if (pos != wxNOT_FOUND)
+                    auto pos = text.rfind('.');
+                    if (pos != std::string::npos)
                     {
-                        text = text.Mid(0, text.Length() - pos - 1);
+                        text = text.substr(0, text.length() - pos - 1);
                     }
                     else
                         text.clear();
-                    if (!text.IsEmpty())
-                        text += wxT(".");
-                    text += wxString::Format(wxT("%d"), nextNumber);
+                    if (!text.empty())
+                        text += '.';
+                    text += fmt::format("%d", nextNumber);
                     attr.SetBulletText(text);
                 }
             }
@@ -4757,7 +4758,7 @@ wxRichTextParagraph::wxRichTextParagraph(wxRichTextObject* parent, wxRichTextAtt
         SetAttributes(*style);
 }
 
-wxRichTextParagraph::wxRichTextParagraph(const wxString& text, wxRichTextObject* parent, wxRichTextAttr* paraStyle, wxRichTextAttr* charStyle):
+wxRichTextParagraph::wxRichTextParagraph(const std::string& text, wxRichTextObject* parent, wxRichTextAttr* paraStyle, wxRichTextAttr* charStyle):
     wxRichTextCompositeObject(parent)
 {
     if (paraStyle)
@@ -4835,7 +4836,7 @@ bool wxRichTextParagraph::Draw(wxDC& dc, wxRichTextDrawingContext& context, cons
             }
             else
             {
-                wxString bulletText = GetBulletText();
+                std::string bulletText = GetBulletText();
 
                 if (!bulletText.empty() && wxRichTextBuffer::GetRenderer())
                     wxRichTextBuffer::GetRenderer()->DrawTextBullet(this, dc, bulletAttr, bulletRect, bulletText);
@@ -5010,8 +5011,8 @@ bool wxRichTextParagraph::Layout(wxDC& dc, wxRichTextDrawingContext& context, co
     if (attr.GetBulletStyle() != wxTEXT_ATTR_BULLET_STYLE_NONE)
         startPositionFirstLine = startPositionSubsequentLines;
 
-    long lastEndPos = GetRange().GetStart()-1;
-    long lastCompletedEndPos = lastEndPos;
+    std::size_t lastEndPos = GetRange().GetStart() - 1;
+    std::size_t lastCompletedEndPos = lastEndPos;
 
     int currentWidth = 0;
     SetPosition(rect.GetPosition());
@@ -5247,7 +5248,7 @@ bool wxRichTextParagraph::Layout(wxDC& dc, wxRichTextDrawingContext& context, co
 #endif
             )
         {
-            long wrapPosition = 0;
+            std::size_t wrapPosition = 0;
             if ((childSize.x + currentWidth <= availableRect.width) && !node->GetNext() && !lineBreakInThisObject)
                 wrapPosition = child->GetRange().GetEnd();
             else
@@ -5257,7 +5258,7 @@ bool wxRichTextParagraph::Layout(wxDC& dc, wxRichTextDrawingContext& context, co
             // Note: one object must contains only one wxTextAtrr, so the line height will not
             //       change inside one object. Thus, we can pass the remain line width to the
             //       FindWrapPosition function.
-            if (!FindWrapPosition(wxRichTextRange(lastCompletedEndPos+1, child->GetRange().GetEnd()), dc, context, availableRect.width, wrapPosition, & partialExtents))
+            if (!FindWrapPosition(wxRichTextRange(lastCompletedEndPos + 1, child->GetRange().GetEnd()), dc, context, availableRect.width, wrapPosition, & partialExtents))
             {
                 // If the function failed, just cut it off at the end of this child.
                 wrapPosition = child->GetRange().GetEnd();
@@ -5265,11 +5266,11 @@ bool wxRichTextParagraph::Layout(wxDC& dc, wxRichTextDrawingContext& context, co
 
             // FindWrapPosition can still return a value that will put us in an endless wrapping loop
             if (wrapPosition <= lastCompletedEndPos)
-                wrapPosition = std::max(lastCompletedEndPos+1,child->GetRange().GetEnd());
+                wrapPosition = std::max(lastCompletedEndPos + 1, child->GetRange().GetEnd());
 
             // Line end position shouldn't be the same as the end, or greater.
             if (wrapPosition >= GetRange().GetEnd())
-                wrapPosition = std::max(0L, GetRange().GetEnd()-1);
+                wrapPosition = GetRange().GetEnd() - 1;
 
             // wxLogDebug(wxT("Split at %ld"), wrapPosition);
 
@@ -5579,7 +5580,7 @@ void wxRichTextParagraph::ApplyParagraphStyle(wxRichTextLine* line, const wxRich
 }
 
 /// Insert text at the given position
-bool wxRichTextParagraph::InsertText(long pos, const wxString& text)
+bool wxRichTextParagraph::InsertText(long pos, const std::string& text)
 {
     wxRichTextObject* childToUse = nullptr;
     wxRichTextObjectList::compatibility_iterator nodeToUse = wxRichTextObjectList::compatibility_iterator();
@@ -5605,8 +5606,8 @@ bool wxRichTextParagraph::InsertText(long pos, const wxString& text)
         {
             int posInString = pos - textObject->GetRange().GetStart();
 
-            wxString newText = textObject->GetText().Mid(0, posInString) +
-                               text + textObject->GetText().Mid(posInString);
+            std::string newText = textObject->GetText().substr(0, posInString) +
+                               text + textObject->GetText().substr(posInString);
             textObject->SetText(newText);
 
             int textLength = text.length();
@@ -6256,7 +6257,7 @@ wxRichTextObject* wxRichTextParagraph::FindObjectAtPosition(long position)
 
 /// Get the plain text searching from the start or end of the range.
 /// The resulting string may be shorter than the range given.
-bool wxRichTextParagraph::GetContiguousPlainText(wxString& text, const wxRichTextRange& range, bool fromStart)
+bool wxRichTextParagraph::GetContiguousPlainText(std::string& text, const wxRichTextRange& range, bool fromStart)
 {
     text.clear();
 
@@ -6275,7 +6276,7 @@ bool wxRichTextParagraph::GetContiguousPlainText(wxString& text, const wxRichTex
                 }
                 else
                 {
-                    text += wxT(" ");
+                    text += " ";
                 }
             }
 
@@ -6309,14 +6310,14 @@ bool wxRichTextParagraph::GetContiguousPlainText(wxString& text, const wxRichTex
 }
 
 /// Find a suitable wrap position.
-bool wxRichTextParagraph::FindWrapPosition(const wxRichTextRange& range, wxDC& dc, wxRichTextDrawingContext& context, int availableSpace, long& wrapPosition, std::vector<int>* partialExtents)
+bool wxRichTextParagraph::FindWrapPosition(const wxRichTextRange& range, wxDC& dc, wxRichTextDrawingContext& context, int availableSpace, std::size_t& wrapPosition, std::vector<int>* partialExtents)
 {
     if (range.GetLength() <= 0)
         return false;
 
     // Find the first position where the line exceeds the available space.
     wxSize sz;
-    long breakPosition = range.GetEnd();
+    std::size_t breakPosition = range.GetEnd();
 
 #if wxRICHTEXT_USE_PARTIAL_TEXT_EXTENTS
     if (partialExtents && partialExtents->size() >= (size_t) (GetRange().GetLength()-1)) // the final position in a paragraph is the newline
@@ -6328,8 +6329,7 @@ bool wxRichTextParagraph::FindWrapPosition(const wxRichTextRange& range, wxDC& d
         else
             widthBefore = 0;
 
-        size_t i;
-        for (i = (size_t) range.GetStart(); i <= (size_t) range.GetEnd(); i++)
+        for (std::size_t i = range.GetStart(); i <= (size_t) range.GetEnd(); i++)
         {
             int widthFromStartOfThisRange = (*partialExtents)[i - GetRange().GetStart()] - widthBefore;
 
@@ -6394,20 +6394,20 @@ bool wxRichTextParagraph::FindWrapPosition(const wxRichTextRange& range, wxDC& d
     // Now we know the last position on the line.
     // Let's try to find a word break.
 
-    wxString plainText;
+    std::string plainText;
     if (GetContiguousPlainText(plainText, wxRichTextRange(range.GetStart(), breakPosition), false))
     {
-        int newLinePos = plainText.Find(wxRichTextLineBreakChar);
-        if (newLinePos != wxNOT_FOUND)
+        auto newLinePos = plainText.find(wxRichTextLineBreakChar);
+        if (newLinePos != std::string::npos)
         {
-            breakPosition = std::max(0L, range.GetStart() + newLinePos);
+            breakPosition = range.GetStart() + newLinePos;
         }
         else
         {
-            int spacePos = plainText.Find(wxT(' '), true);
-            int tabPos = plainText.Find(wxT('\t'), true);
-            int pos = std::max(spacePos, tabPos);
-            if (pos != wxNOT_FOUND)
+            auto spacePos = plainText.rfind(' ');
+            auto tabPos = plainText.rfind('\t');
+            auto pos = std::max(spacePos, tabPos);
+            if (pos != std::string::npos)
             {
                 int positionsFromEndOfString = plainText.length() - pos - 1;
                 breakPosition = breakPosition - positionsFromEndOfString;
@@ -6421,7 +6421,7 @@ bool wxRichTextParagraph::FindWrapPosition(const wxRichTextRange& range, wxDC& d
 }
 
 /// Get the bullet text for this paragraph.
-wxString wxRichTextParagraph::GetBulletText()
+std::string wxRichTextParagraph::GetBulletText()
 {
     if (GetAttributes().GetBulletStyle() == wxTEXT_ATTR_BULLET_STYLE_NONE ||
         (GetAttributes().GetBulletStyle() & wxTEXT_ATTR_BULLET_STYLE_BITMAP))
@@ -6429,20 +6429,20 @@ wxString wxRichTextParagraph::GetBulletText()
 
     int number = GetAttributes().GetBulletNumber();
 
-    wxString text;
+    std::string text;
     if ((GetAttributes().GetBulletStyle() & wxTEXT_ATTR_BULLET_STYLE_ARABIC) || (GetAttributes().GetBulletStyle() & wxTEXT_ATTR_BULLET_STYLE_OUTLINE))
     {
-        text.Printf(wxT("%d"), number);
+        text = fmt::format("%d", number);
     }
     else if (GetAttributes().GetBulletStyle() & wxTEXT_ATTR_BULLET_STYLE_LETTERS_UPPER)
     {
         // TODO: Unicode, and also check if number > 26
-        text.Printf(wxT("%c"), (wxChar) (number+64));
+        text = fmt::format("%c", char(number+64));
     }
     else if (GetAttributes().GetBulletStyle() & wxTEXT_ATTR_BULLET_STYLE_LETTERS_LOWER)
     {
         // TODO: Unicode, and also check if number > 26
-        text.Printf(wxT("%c"), (wxChar) (number+96));
+        text = fmt::format("%c", char(number+96));
     }
     else if (GetAttributes().GetBulletStyle() & wxTEXT_ATTR_BULLET_STYLE_ROMAN_UPPER)
     {
@@ -6451,7 +6451,7 @@ wxString wxRichTextParagraph::GetBulletText()
     else if (GetAttributes().GetBulletStyle() & wxTEXT_ATTR_BULLET_STYLE_ROMAN_LOWER)
     {
         text = wxRichTextDecimalToRoman(number);
-        text.MakeLower();
+        wx::utils::ToLower(text);
     }
     else if (GetAttributes().GetBulletStyle() & wxTEXT_ATTR_BULLET_STYLE_SYMBOL)
     {
@@ -6470,16 +6470,16 @@ wxString wxRichTextParagraph::GetBulletText()
 
     if (GetAttributes().GetBulletStyle() & wxTEXT_ATTR_BULLET_STYLE_PARENTHESES)
     {
-        text = wxT("(") + text + wxT(")");
+        text = fmt::format("({})", text);
     }
     else if (GetAttributes().GetBulletStyle() & wxTEXT_ATTR_BULLET_STYLE_RIGHT_PARENTHESIS)
     {
-        text = text + wxT(")");
+        text = fmt::format("{})", text);
     }
 
     if (GetAttributes().GetBulletStyle() & wxTEXT_ATTR_BULLET_STYLE_PERIOD)
     {
-        text += wxT(".");
+        text += ".";
     }
 
     return text;
@@ -6736,7 +6736,7 @@ wxRichTextRange wxRichTextLine::GetAbsoluteRange() const
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxRichTextPlainText, wxRichTextObject);
 
-wxRichTextPlainText::wxRichTextPlainText(const wxString& text, wxRichTextObject* parent, wxRichTextAttr* style):
+wxRichTextPlainText::wxRichTextPlainText(const std::string& text, wxRichTextObject* parent, wxRichTextAttr* style):
     wxRichTextObject(parent)
 {
     if (style)
@@ -6776,21 +6776,20 @@ bool wxRichTextPlainText::Draw(wxDC& dc, wxRichTextDrawingContext& context, cons
 
     int offset = GetRange().GetStart();
 
-    wxString str = m_text;
+    std::string str = m_text;
     if (context.HasVirtualText(this))
     {
-        if (!context.GetVirtualText(this, str) || str.Length() != m_text.Length())
+        if (!context.GetVirtualText(this, str) || str.length() != m_text.length())
             str = m_text;
     }
 
     // Replace line break characters with spaces
-    wxString toRemove = wxRichTextLineBreakChar;
-    str.Replace(toRemove, wxT(" "));
+    wx::utils::ReplaceAll(str, std::string{wxRichTextLineBreakChar}, " ");
     if (textAttr.HasTextEffects() && (textAttr.GetTextEffects() & (wxTEXT_ATTR_EFFECT_CAPITALS|wxTEXT_ATTR_EFFECT_SMALL_CAPITALS)))
-        str.MakeUpper();
+        wx::utils::ToUpper(str);
 
     long len = range.GetLength();
-    std::string stringChunk = str.Mid(range.GetStart() - offset, (size_t) len);
+    std::string stringChunk = str.substr(range.GetStart() - offset, len);
 
     // Test for the optimized situations where all is selected, or none
     // is selected.
@@ -6888,7 +6887,7 @@ bool wxRichTextPlainText::Draw(wxDC& dc, wxRichTextDrawingContext& context, cons
             {
                 wxLogDebug(wxT("Mid(%d, %d"), (int)(r1 - offset), (int)fragmentLen);
             }
-            std::string stringFragment = str.Mid(r1 - offset, fragmentLen);
+            std::string stringFragment = str.substr(r1 - offset, fragmentLen);
 
             DrawTabbedString(dc, textAttr, rect, stringFragment, x, y, false);
 
@@ -6896,8 +6895,8 @@ bool wxRichTextPlainText::Draw(wxDC& dc, wxRichTextDrawingContext& context, cons
             if (stringChunk.find('\t') == std::string::npos)
             {
                 // Compensate for kerning difference
-                std::string stringFragment2(str.Mid(r1 - offset, fragmentLen+1));
-                std::string stringFragment3(str.Mid(r1 - offset + fragmentLen, 1));
+                std::string stringFragment2(str.substr(r1 - offset, fragmentLen+1));
+                std::string stringFragment3(str.substr(r1 - offset + fragmentLen, 1));
 
                 wxCoord w1, h1, w2, h2, w3, h3;
                 dc.GetTextExtent(stringFragment,  & w1, & h1);
@@ -6922,7 +6921,7 @@ bool wxRichTextPlainText::Draw(wxDC& dc, wxRichTextDrawingContext& context, cons
                 wxLogDebug(wxT("Mid(%d, %d"), (int)(s1 - offset), (int)fragmentLen);
             }
 
-            std::string stringFragment = str.Mid(s1 - offset, fragmentLen);
+            std::string stringFragment = str.substr(s1 - offset, fragmentLen);
 
             DrawTabbedString(dc, textAttr, rect, stringFragment, x, y, true);
 
@@ -6930,8 +6929,8 @@ bool wxRichTextPlainText::Draw(wxDC& dc, wxRichTextDrawingContext& context, cons
             if (stringChunk.find('\t') == std::string::npos)
             {
                 // Compensate for kerning difference
-                std::string stringFragment2(str.Mid(s1 - offset, fragmentLen+1));
-                std::string stringFragment3(str.Mid(s1 - offset + fragmentLen, 1));
+                std::string stringFragment2(str.substr(s1 - offset, fragmentLen+1));
+                std::string stringFragment3(str.substr(s1 - offset + fragmentLen, 1));
 
                 wxCoord w1, h1, w2, h2, w3, h3;
                 dc.GetTextExtent(stringFragment,  & w1, & h1);
@@ -6953,9 +6952,9 @@ bool wxRichTextPlainText::Draw(wxDC& dc, wxRichTextDrawingContext& context, cons
             int fragmentLen = r2 - s2 + 1;
             if (fragmentLen < 0)
             {
-                wxLogDebug(wxT("Mid(%d, %d"), (int)(s2 - offset), (int)fragmentLen);
+                wxLogDebug("Mid(%d, %d", (int)(s2 - offset), (int)fragmentLen);
             }
-            std::string stringFragment = str.Mid(s2 - offset, fragmentLen);
+            std::string stringFragment = str.substr(s2 - offset, fragmentLen);
 
             DrawTabbedString(dc, textAttr, rect, stringFragment, x, y, false);
         }
@@ -7178,19 +7177,18 @@ bool wxRichTextPlainText::GetRangeSize(const wxRichTextRange& range, wxSize& siz
 
     bool haveDescent = false;
     int startPos = range.GetStart() - GetRange().GetStart();
-    long len = range.GetLength();
+    std::size_t len = range.GetLength();
 
-    wxString str(m_text);
+    std::string str(m_text);
     if (context.HasVirtualText(this))
     {
-        if (!context.GetVirtualText(this, str) || str.Length() != m_text.Length())
+        if (!context.GetVirtualText(this, str) || str.length() != m_text.length())
             str = m_text;
     }
 
-    wxString toReplace = wxRichTextLineBreakChar;
-    str.Replace(toReplace, wxT(" "));
+    wx::utils::ReplaceAll(str, std::string{wxRichTextLineBreakChar}, " ");
 
-    std::string stringChunk = str.Mid(startPos, (size_t) len);
+    std::string stringChunk = str.substr(startPos, len);
 
     if (textAttr.HasTextEffects() && (textAttr.GetTextEffects() & (wxTEXT_ATTR_EFFECT_CAPITALS|wxTEXT_ATTR_EFFECT_SMALL_CAPITALS)))
         wx::utils::ToUpper(stringChunk);
@@ -7334,8 +7332,8 @@ wxRichTextObject* wxRichTextPlainText::DoSplit(long pos)
     if (index < 0 || index >= (int) m_text.length())
         return nullptr;
 
-    wxString firstPart = m_text.Mid(0, index);
-    wxString secondPart = m_text.Mid(index);
+    std::string firstPart = m_text.substr(0, index);
+    std::string secondPart = m_text.substr(index);
 
     m_text = firstPart;
 
@@ -7365,28 +7363,28 @@ bool wxRichTextPlainText::DeleteRange(const wxRichTextRange& range)
 
     if (r.GetStart() == GetRange().GetStart() && r.GetEnd() == GetRange().GetEnd())
     {
-        m_text.Empty();
+        m_text.clear();
         return true;
     }
 
     long startIndex = r.GetStart() - GetRange().GetStart();
     long len = r.GetLength();
 
-    m_text = m_text.Mid(0, startIndex) + m_text.Mid(startIndex+len);
+    m_text = m_text.substr(0, startIndex + len);
     return true;
 }
 
 /// Get text for the given range.
-wxString wxRichTextPlainText::GetTextForRange(const wxRichTextRange& range) const
+std::string wxRichTextPlainText::GetTextForRange(const wxRichTextRange& range) const
 {
     wxRichTextRange r = range;
 
     r.LimitTo(GetRange());
 
-    long startIndex = r.GetStart() - GetRange().GetStart();
-    long len = r.GetLength();
+    auto startIndex = r.GetStart() - GetRange().GetStart();
+    auto len = r.GetLength();
 
-    return m_text.Mid(startIndex, len);
+    return m_text.substr(startIndex, len);
 }
 
 /// Returns true if this object can merge itself with the given one.
@@ -7447,7 +7445,7 @@ bool wxRichTextPlainText::CanSplit(wxRichTextDrawingContext& context) const
     // If this object has any virtual attributes at all, whether for the whole object
     // or individual ones, we should try splitting it by calling Split.
     // Must be more than one character in order to be able to split.
-    return m_text.Length() > 1 && context.HasVirtualAttributes(const_cast<wxRichTextPlainText*>(this));
+    return m_text.length() > 1 && context.HasVirtualAttributes(const_cast<wxRichTextPlainText*>(this));
 }
 
 wxRichTextObject* wxRichTextPlainText::Split(wxRichTextDrawingContext& context)
@@ -7470,7 +7468,7 @@ wxRichTextObject* wxRichTextPlainText::Split(wxRichTextDrawingContext& context)
 
                 // We will gather up runs of text with the same virtual attributes
 
-                int len = m_text.Length();
+                auto len = m_text.length();
                 int i = 0;
 
                 // runStart and runEnd represent the accumulated run with a consistent attribute
@@ -7478,7 +7476,7 @@ wxRichTextObject* wxRichTextPlainText::Split(wxRichTextDrawingContext& context)
                 int runStart = -1;
                 int runEnd = -1;
                 wxRichTextAttr currentAttr;
-                wxString text = m_text;
+                std::string text = m_text;
                 wxRichTextPlainText* lastPlainText = this;
 
                 for (i = 0; i < (int) positions.size(); i++)
@@ -7519,7 +7517,7 @@ wxRichTextObject* wxRichTextPlainText::Split(wxRichTextDrawingContext& context)
                                     if (runStart == 0)
                                     {
                                         lastPlainText = this;
-                                        SetText(text.Mid(runStart, runEnd - runStart + 1));
+                                        SetText(text.substr(runStart, runEnd - runStart + 1));
                                     }
                                     else
                                     {
@@ -7529,7 +7527,7 @@ wxRichTextObject* wxRichTextPlainText::Split(wxRichTextDrawingContext& context)
                                         obj->SetProperties(GetProperties());
                                         obj->SetParent(parent);
 
-                                        obj->SetText(text.Mid(runStart, runEnd - runStart + 1));
+                                        obj->SetText(text.substr(runStart, runEnd - runStart + 1));
                                         if (next)
                                             parent->GetChildren().Insert(next, obj);
                                         else
@@ -7561,7 +7559,7 @@ wxRichTextObject* wxRichTextPlainText::Split(wxRichTextDrawingContext& context)
                                 if (runStart == 0)
                                 {
                                     lastPlainText = this;
-                                    SetText(text.Mid(runStart, runEnd - runStart + 1));
+                                    SetText(text.substr(runStart, runEnd - runStart + 1));
                                 }
                                 else
                                 {
@@ -7571,7 +7569,7 @@ wxRichTextObject* wxRichTextPlainText::Split(wxRichTextDrawingContext& context)
                                     obj->SetProperties(GetProperties());
                                     obj->SetParent(parent);
 
-                                    obj->SetText(text.Mid(runStart, runEnd - runStart + 1));
+                                    obj->SetText(text.substr(runStart, runEnd - runStart + 1));
                                     if (next)
                                         parent->GetChildren().Insert(next, obj);
                                     else
@@ -7602,7 +7600,7 @@ wxRichTextObject* wxRichTextPlainText::Split(wxRichTextDrawingContext& context)
                         if (runStart == 0)
                         {
                             lastPlainText = this;
-                            SetText(text.Mid(runStart, runEnd - runStart + 1));
+                            SetText(text.substr(runStart, runEnd - runStart + 1));
                         }
                         else
                         {
@@ -7612,7 +7610,7 @@ wxRichTextObject* wxRichTextPlainText::Split(wxRichTextDrawingContext& context)
                             obj->SetProperties(GetProperties());
                             obj->SetParent(parent);
 
-                            obj->SetText(text.Mid(runStart, runEnd - runStart + 1));
+                            obj->SetText(text.substr(runStart, runEnd - runStart + 1));
                             if (next)
                                 parent->GetChildren().Insert(next, obj);
                             else
@@ -7633,7 +7631,7 @@ wxRichTextObject* wxRichTextPlainText::Split(wxRichTextDrawingContext& context)
                         obj->SetProperties(GetProperties());
                         obj->SetParent(parent);
 
-                        obj->SetText(text.Mid(runStart, runEnd - runStart + 1));
+                        obj->SetText(text.substr(runStart, runEnd - runStart + 1));
                         if (next)
                             parent->GetChildren().Insert(next, obj);
                         else
@@ -7772,7 +7770,7 @@ bool wxRichTextParagraphLayoutBox::InsertParagraphsWithUndo(wxRichTextBuffer* bu
 }
 
 /// Submit command to insert the given text
-bool wxRichTextBuffer::InsertTextWithUndo(long pos, const wxString& text, wxRichTextCtrl* ctrl, unsigned int flags)
+bool wxRichTextBuffer::InsertTextWithUndo(long pos, const std::string& text, wxRichTextCtrl* ctrl, unsigned int flags)
 {
     if (ctrl)
         return ctrl->GetFocusObject()->InsertTextWithUndo(this, pos, text, ctrl, flags);
@@ -7781,7 +7779,7 @@ bool wxRichTextBuffer::InsertTextWithUndo(long pos, const wxString& text, wxRich
 }
 
 /// Submit command to insert the given text
-bool wxRichTextParagraphLayoutBox::InsertTextWithUndo(wxRichTextBuffer* buffer, long pos, const wxString& text, wxRichTextCtrl* ctrl, unsigned int flags)
+bool wxRichTextParagraphLayoutBox::InsertTextWithUndo(wxRichTextBuffer* buffer, long pos, const std::string& text, wxRichTextCtrl* ctrl, unsigned int flags)
 {
     wxRichTextAction* action = new wxRichTextAction(nullptr, _("Insert Text"), wxRICHTEXT_INSERT, buffer, this, ctrl, false);
 
@@ -7799,7 +7797,7 @@ bool wxRichTextParagraphLayoutBox::InsertTextWithUndo(wxRichTextBuffer* buffer, 
 
     int length = action->GetNewParagraphs().GetOwnRange().GetLength();
 
-    if (!text.empty() && text.Last() != wxT('\n'))
+    if (!text.empty() && text.back() != '\n')
     {
         // Don't count the newline when undoing
         length --;
@@ -7993,7 +7991,7 @@ wxRichTextObject* wxRichTextParagraphLayoutBox::InsertObjectWithUndo(wxRichTextB
     return obj;
 }
 
-wxRichTextField* wxRichTextParagraphLayoutBox::InsertFieldWithUndo(wxRichTextBuffer* buffer, long pos, const wxString& fieldType,
+wxRichTextField* wxRichTextParagraphLayoutBox::InsertFieldWithUndo(wxRichTextBuffer* buffer, long pos, const std::string& fieldType,
                                                         const wxRichTextProperties& properties,
                                                         wxRichTextCtrl* ctrl, unsigned int flags,
                                                         const wxRichTextAttr& textAttr)
@@ -8184,7 +8182,7 @@ bool wxRichTextParagraphLayoutBox::DeleteRangeWithUndo(const wxRichTextRange& ra
 }
 
 /// Collapse undo/redo commands
-bool wxRichTextBuffer::BeginBatchUndo(const wxString& cmdName)
+bool wxRichTextBuffer::BeginBatchUndo(const std::string& cmdName)
 {
     if (m_batchedCommandDepth == 0)
     {
@@ -8451,7 +8449,7 @@ bool wxRichTextBuffer::BeginNumberedBullet(int bulletNumber, int leftIndent, int
 }
 
 /// Begin symbol bullet
-bool wxRichTextBuffer::BeginSymbolBullet(const wxString& symbol, int leftIndent, int leftSubIndent, int bulletStyle)
+bool wxRichTextBuffer::BeginSymbolBullet(const std::string& symbol, int leftIndent, int leftSubIndent, int bulletStyle)
 {
     wxRichTextAttr attr;
     attr.SetFlags(wxTEXT_ATTR_BULLET_STYLE|wxTEXT_ATTR_LEFT_INDENT);
@@ -8463,7 +8461,7 @@ bool wxRichTextBuffer::BeginSymbolBullet(const wxString& symbol, int leftIndent,
 }
 
 /// Begin standard bullet
-bool wxRichTextBuffer::BeginStandardBullet(const wxString& bulletName, int leftIndent, int leftSubIndent, int bulletStyle)
+bool wxRichTextBuffer::BeginStandardBullet(const std::string& bulletName, int leftIndent, int leftSubIndent, int bulletStyle)
 {
     wxRichTextAttr attr;
     attr.SetFlags(wxTEXT_ATTR_BULLET_STYLE|wxTEXT_ATTR_LEFT_INDENT);
@@ -8475,7 +8473,7 @@ bool wxRichTextBuffer::BeginStandardBullet(const wxString& bulletName, int leftI
 }
 
 /// Begin named character style
-bool wxRichTextBuffer::BeginCharacterStyle(const wxString& characterStyle)
+bool wxRichTextBuffer::BeginCharacterStyle(const std::string& characterStyle)
 {
     if (GetStyleSheet())
     {
@@ -8490,7 +8488,7 @@ bool wxRichTextBuffer::BeginCharacterStyle(const wxString& characterStyle)
 }
 
 /// Begin named paragraph style
-bool wxRichTextBuffer::BeginParagraphStyle(const wxString& paragraphStyle)
+bool wxRichTextBuffer::BeginParagraphStyle(const std::string& paragraphStyle)
 {
     if (GetStyleSheet())
     {
@@ -8505,7 +8503,7 @@ bool wxRichTextBuffer::BeginParagraphStyle(const wxString& paragraphStyle)
 }
 
 /// Begin named list style
-bool wxRichTextBuffer::BeginListStyle(const wxString& listStyle, int level, int number)
+bool wxRichTextBuffer::BeginListStyle(const std::string& listStyle, int level, int number)
 {
     if (GetStyleSheet())
     {
@@ -8523,11 +8521,11 @@ bool wxRichTextBuffer::BeginListStyle(const wxString& listStyle, int level, int 
 }
 
 /// Begin URL
-bool wxRichTextBuffer::BeginURL(const wxString& url, const wxString& characterStyle)
+bool wxRichTextBuffer::BeginURL(const std::string& url, const std::string& characterStyle)
 {
     wxRichTextAttr attr;
 
-    if (!characterStyle.IsEmpty() && GetStyleSheet())
+    if (!characterStyle.empty() && GetStyleSheet())
     {
         wxRichTextCharacterStyleDefinition* def = GetStyleSheet()->FindCharacterStyle(characterStyle);
         if (def)
@@ -8553,7 +8551,7 @@ void wxRichTextBuffer::InsertHandler(wxRichTextFileHandler *handler)
 }
 
 /// Removes a handler
-bool wxRichTextBuffer::RemoveHandler(const wxString& name)
+bool wxRichTextBuffer::RemoveHandler(const std::string& name)
 {
     wxRichTextFileHandler *handler = FindHandler(name);
     if (handler)
@@ -8567,15 +8565,14 @@ bool wxRichTextBuffer::RemoveHandler(const wxString& name)
 }
 
 /// Finds a handler by filename or, if supplied, type
-wxRichTextFileHandler *wxRichTextBuffer::FindHandlerFilenameOrType(const wxString& filename,
+wxRichTextFileHandler *wxRichTextBuffer::FindHandlerFilenameOrType(const fs::path& filename,
                                                                    wxRichTextFileType imageType)
 {
     if (imageType != wxRICHTEXT_TYPE_ANY)
         return FindHandler(imageType);
-    else if (!filename.IsEmpty())
+    else if (!filename.empty())
     {
-        wxString path, file, ext;
-        wxFileName::SplitPath(filename, & path, & file, & ext);
+        std::string ext = filename.extension().string();
         return FindHandler(ext, imageType);
     }
     else
@@ -8584,13 +8581,13 @@ wxRichTextFileHandler *wxRichTextBuffer::FindHandlerFilenameOrType(const wxStrin
 
 
 /// Finds a handler by name
-wxRichTextFileHandler* wxRichTextBuffer::FindHandler(const wxString& name)
+wxRichTextFileHandler* wxRichTextBuffer::FindHandler(const std::string& name)
 {
     wxList::compatibility_iterator node = sm_handlers.GetFirst();
     while (node)
     {
         wxRichTextFileHandler *handler = (wxRichTextFileHandler*)node->GetData();
-        if (handler->GetName().Lower() == name.Lower()) return handler;
+        if (wx::utils::ToLowerCopy(handler->GetName()) == wx::utils::ToLowerCopy(name)) return handler;
 
         node = node->GetNext();
     }
@@ -8598,13 +8595,13 @@ wxRichTextFileHandler* wxRichTextBuffer::FindHandler(const wxString& name)
 }
 
 /// Finds a handler by extension and type
-wxRichTextFileHandler* wxRichTextBuffer::FindHandler(const wxString& extension, wxRichTextFileType type)
+wxRichTextFileHandler* wxRichTextBuffer::FindHandler(const std::string& extension, wxRichTextFileType type)
 {
     wxList::compatibility_iterator node = sm_handlers.GetFirst();
     while (node)
     {
         wxRichTextFileHandler *handler = (wxRichTextFileHandler*)node->GetData();
-        if ( handler->GetExtension().Lower() == extension.Lower() &&
+        if ( wx::utils::ToLowerCopy(handler->GetExtension()) == wx::utils::ToLowerCopy(extension) &&
             (type == wxRICHTEXT_TYPE_ANY || handler->GetType() == type) )
             return handler;
         node = node->GetNext();
@@ -8645,12 +8642,12 @@ void wxRichTextBuffer::CleanUpHandlers()
     sm_handlers.Clear();
 }
 
-wxString wxRichTextBuffer::GetExtWildcard(bool combine, bool save, std::vector<int>* types)
+std::string wxRichTextBuffer::GetExtWildcard(bool combine, bool save, std::vector<int>* types)
 {
     if (types)
         types->clear();
 
-    wxString wildcard;
+    std::string wildcard;
 
     wxList::compatibility_iterator node = GetHandlers().GetFirst();
     int count = 0;
@@ -8662,19 +8659,19 @@ wxString wxRichTextBuffer::GetExtWildcard(bool combine, bool save, std::vector<i
             if (combine)
             {
                 if (count > 0)
-                    wildcard += wxT(";");
-                wildcard += wxT("*.") + handler->GetExtension();
+                    wildcard += ";";
+                wildcard += "*." + handler->GetExtension();
             }
             else
             {
                 if (count > 0)
-                    wildcard += wxT("|");
+                    wildcard += "|";
                 wildcard += handler->GetName();
-                wildcard += wxT(" ");
+                wildcard += " ";
                 wildcard += _("files");
-                wildcard += wxT(" (*.");
+                wildcard += " (*.";
                 wildcard += handler->GetExtension();
-                wildcard += wxT(")|*.");
+                wildcard += ")|*.";
                 wildcard += handler->GetExtension();
                 if (types)
                     types->push_back(handler->GetType());
@@ -8692,7 +8689,7 @@ wxString wxRichTextBuffer::GetExtWildcard(bool combine, bool save, std::vector<i
 
 #if wxUSE_FFILE && wxUSE_STREAMS
 /// Load a file
-bool wxRichTextBuffer::LoadFile(const wxString& filename, wxRichTextFileType type)
+bool wxRichTextBuffer::LoadFile(const std::string& filename, wxRichTextFileType type)
 {
     wxRichTextFileHandler* handler = FindHandlerFilenameOrType(filename, type);
     if (handler)
@@ -8708,7 +8705,7 @@ bool wxRichTextBuffer::LoadFile(const wxString& filename, wxRichTextFileType typ
 }
 
 /// Save a file
-bool wxRichTextBuffer::SaveFile(const wxString& filename, wxRichTextFileType type)
+bool wxRichTextBuffer::SaveFile(const std::string& filename, wxRichTextFileType type)
 {
     wxRichTextFileHandler* handler = FindHandlerFilenameOrType(filename, type);
     if (handler)
@@ -8771,7 +8768,7 @@ bool wxRichTextBuffer::CopyToClipboard(const wxRichTextRange& range)
         wxDataObjectComposite* compositeObject = new wxDataObjectComposite();
 
         {
-            wxString text = container->GetTextForRange(range);
+            std::string text = container->GetTextForRange(range);
 
 #ifdef __WXMSW__
             text = wxTextFile::Translate(text, wxTextFileType::Dos);
@@ -8839,24 +8836,22 @@ bool wxRichTextBuffer::PasteFromClipboard(long position)
             {
                 wxTextDataObject data;
                 wxTheClipboard->GetData(data);
-                wxString text(data.GetText());
+                std::string text(data.GetText());
 #ifdef __WXMSW__
-                wxString text2;
-                text2.Alloc(text.Length()+1);
-                size_t i;
-                for (i = 0; i < text.Length(); i++)
+                std::string text2;
+                text2.resize(text.length() + 1);
+                for (const auto ch : text)
                 {
-                    wxChar ch = text[i];
-                    if (ch != wxT('\r'))
+                    if (ch != '\r')
                         text2 += ch;
                 }
 #else
-                wxString text2 = text;
+                std::string text2 = text;
 #endif
                 container->InsertTextWithUndo(this, position+1, text2, GetRichTextCtrl(), wxRICHTEXT_INSERT_WITH_PREVIOUS_PARAGRAPH_STYLE);
 
                 if (GetRichTextCtrl())
-                    GetRichTextCtrl()->ShowPosition(position + text2.Length());
+                    GetRichTextCtrl()->ShowPosition(position + text2.length());
 
                 success = true;
             }
@@ -8910,19 +8905,6 @@ bool wxRichTextBuffer::CanPasteFromClipboard() const
     }
 #endif
     return canPaste;
-}
-
-/// Dumps contents of buffer for debugging purposes
-void wxRichTextBuffer::Dump()
-{
-    wxString text;
-    {
-        wxStringOutputStream stream(& text);
-        wxTextOutputStream textStream(stream);
-        Dump(textStream);
-    }
-
-    wxLogDebug(text);
 }
 
 /// Add an event handler
@@ -9120,7 +9102,7 @@ bool wxRichTextStdRenderer::DrawStandardBullet(wxRichTextParagraph* paragraph, w
     return true;
 }
 
-bool wxRichTextStdRenderer::DrawTextBullet(wxRichTextParagraph* paragraph, wxDC& dc, const wxRichTextAttr& attr, const wxRect& rect, const wxString& text)
+bool wxRichTextStdRenderer::DrawTextBullet(wxRichTextParagraph* paragraph, wxDC& dc, const wxRichTextAttr& attr, const wxRect& rect, const std::string& text)
 {
     if (!text.empty())
     {
@@ -9327,7 +9309,7 @@ bool wxRichTextBox::EditProperties(wxWindow* parent, wxRichTextBuffer* buffer)
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxRichTextField, wxRichTextParagraphLayoutBox);
 
-wxRichTextField::wxRichTextField(const wxString& fieldType, wxRichTextObject* parent):
+wxRichTextField::wxRichTextField(const std::string& fieldType, wxRichTextObject* parent):
     wxRichTextParagraphLayoutBox(parent)
 {
     SetFieldType(fieldType);
@@ -9344,9 +9326,9 @@ bool wxRichTextField::Draw(wxDC& dc, wxRichTextDrawingContext& context, const wx
         return true;
 
     // Fallback so unknown fields don't become invisible.
-    wxString fieldTypeStr(GetFieldType());
+    std::string fieldTypeStr(GetFieldType());
     wxRichTextFieldTypeStandard defaultFieldType;
-    defaultFieldType.SetLabel(wxString::Format(wxT("unknown field %s"), fieldTypeStr.c_str()));
+    defaultFieldType.SetLabel(fmt::format("unknown field %s", fieldTypeStr));
     return defaultFieldType.Draw(this, dc, context, range, selection, rect, descent, style);
 }
 
@@ -9357,9 +9339,9 @@ bool wxRichTextField::Layout(wxDC& dc, wxRichTextDrawingContext& context, const 
         return true;
 
     // Fallback so unknown fields don't become invisible.
-    wxString fieldTypeStr(GetFieldType());
+    std::string fieldTypeStr = GetFieldType();
     wxRichTextFieldTypeStandard defaultFieldType;
-    defaultFieldType.SetLabel(wxString::Format(wxT("unknown field %s"), fieldTypeStr.c_str()));
+    defaultFieldType.SetLabel(fmt::format("unknown field %s", fieldTypeStr));
     return defaultFieldType.Layout(this, dc, context, rect, parentRect, style);
 }
 
@@ -9370,9 +9352,9 @@ bool wxRichTextField::GetRangeSize(const wxRichTextRange& range, wxSize& size, i
         return fieldType->GetRangeSize(const_cast<wxRichTextField*>(this), range, size, descent, dc, context, flags, position, parentSize, partialExtents);
 
     // Fallback so unknown fields don't become invisible.
-    wxString fieldTypeStr(GetFieldType());
+    std::string fieldTypeStr(GetFieldType());
     wxRichTextFieldTypeStandard defaultFieldType;
-    defaultFieldType.SetLabel(wxString::Format(wxT("unknown field %s"), fieldTypeStr.c_str()));
+    defaultFieldType.SetLabel(fmt::format("unknown field %s", fieldTypeStr));
     return defaultFieldType.GetRangeSize(const_cast<wxRichTextField*>(this), range, size, descent, dc, context, flags, position, parentSize, partialExtents);
 }
 
@@ -9412,7 +9394,7 @@ bool wxRichTextField::CanEditProperties() const
     return false;
 }
 
-wxString wxRichTextField::GetPropertiesMenuLabel() const
+std::string wxRichTextField::GetPropertiesMenuLabel() const
 {
     wxRichTextFieldType* fieldType = wxRichTextBuffer::FindFieldType(GetFieldType());
     if (fieldType)
@@ -9443,14 +9425,14 @@ wxIMPLEMENT_CLASS(wxRichTextFieldType, wxObject);
 
 wxIMPLEMENT_CLASS(wxRichTextFieldTypeStandard, wxRichTextFieldType);
 
-wxRichTextFieldTypeStandard::wxRichTextFieldTypeStandard(const wxString& name, const wxString& label, int displayStyle)
+wxRichTextFieldTypeStandard::wxRichTextFieldTypeStandard(const std::string& name, const std::string& label, int displayStyle)
 {
     SetName(name);
     SetLabel(label);
     SetDisplayStyle(displayStyle);
 }
 
-wxRichTextFieldTypeStandard::wxRichTextFieldTypeStandard(const wxString& name, const wxBitmap& bitmap, int displayStyle)
+wxRichTextFieldTypeStandard::wxRichTextFieldTypeStandard(const std::string& name, const wxBitmap& bitmap, int displayStyle)
 {
     SetName(name);
     SetBitmap(bitmap);
@@ -9871,7 +9853,7 @@ bool wxRichTextCell::EditProperties(wxWindow* parent, wxRichTextBuffer* buffer)
         attr = GetAttributes();
     }
 
-    wxString caption;
+    std::string caption;
     if (multipleCells)
         caption = _("Multiple Cell Properties");
     else
@@ -9918,23 +9900,23 @@ void wxRichTextCell::SetColSpan(int span)
 {
     wxASSERT(span >= 1);
     if (span >= 1)
-        GetProperties().SetProperty(wxT("colspan"), (long) span);
+        GetProperties().SetProperty("colspan", (long) span);
 }
 
 void wxRichTextCell::SetRowSpan(int span)
 {
     wxASSERT(span >= 1);
     if (span >= 1)
-        GetProperties().SetProperty(wxT("rowspan"), (long) span);
+        GetProperties().SetProperty("rowspan", (long) span);
 }
 
 // The next 2 methods return span values. Note that the default is 1, not 0
 int wxRichTextCell::GetColSpan() const
 {
     int span = 1;
-    if (GetProperties().HasProperty(wxT("colspan")))
+    if (GetProperties().HasProperty("colspan"))
     {
-        span = GetProperties().GetPropertyLong(wxT("colspan"));
+        span = GetProperties().GetPropertyLong("colspan");
     }
 
     return span;
@@ -9943,9 +9925,9 @@ int wxRichTextCell::GetColSpan() const
 int wxRichTextCell::GetRowSpan() const
 {
     int span = 1;
-    if (GetProperties().HasProperty(wxT("rowspan")))
+    if (GetProperties().HasProperty("rowspan"))
     {
-        span = GetProperties().GetPropertyLong(wxT("rowspan"));
+        span = GetProperties().GetPropertyLong("rowspan");
     }
 
     return span;
@@ -10992,7 +10974,7 @@ bool wxRichTextTable::DeleteRange(const wxRichTextRange& WXUNUSED(range))
 }
 
 // Gets any text in this object for the given range.
-wxString wxRichTextTable::GetTextForRange(const wxRichTextRange& range) const
+std::string wxRichTextTable::GetTextForRange(const wxRichTextRange& range) const
 {
     return wxRichTextBox::GetTextForRange(range);
 }
@@ -11606,14 +11588,14 @@ void wxRichTextModuleInit()
  *
  */
 
-wxRichTextCommand::wxRichTextCommand(const wxString& name, wxRichTextCommandId id, wxRichTextBuffer* buffer,
+wxRichTextCommand::wxRichTextCommand(const std::string& name, wxRichTextCommandId id, wxRichTextBuffer* buffer,
                                      wxRichTextParagraphLayoutBox* container, wxRichTextCtrl* ctrl, bool ignoreFirstTime): wxCommand(true, name)
 {
     m_freeze = ctrl ? ctrl->IsFrozen() : false;
     /* wxRichTextAction* action = */ new wxRichTextAction(this, name, id, buffer, container, ctrl, ignoreFirstTime);
 }
 
-wxRichTextCommand::wxRichTextCommand(const wxString& name): wxCommand(true, name)
+wxRichTextCommand::wxRichTextCommand(const std::string& name): wxCommand(true, name)
 {
 }
 
@@ -11675,7 +11657,7 @@ void wxRichTextCommand::ClearActions()
  *
  */
 
-wxRichTextAction::wxRichTextAction(wxRichTextCommand* cmd, const wxString& name, wxRichTextCommandId id,
+wxRichTextAction::wxRichTextAction(wxRichTextCommand* cmd, const std::string& name, wxRichTextCommandId id,
                                    wxRichTextBuffer* buffer, wxRichTextParagraphLayoutBox* container,
                                    wxRichTextCtrl* ctrl, bool ignoreFirstTime)
     : m_buffer(buffer),
@@ -11817,9 +11799,9 @@ bool wxRichTextAction::Do()
 
             // InvalidateHierarchy goes up the hierarchy as well as down, otherwise with a nested object,
             // Layout() would stop prematurely at the top level.
-            container->InvalidateHierarchy(wxRichTextRange(std::max(0L, GetRange().GetStart()-1), GetRange().GetEnd()));
+            container->InvalidateHierarchy(wxRichTextRange(GetRange().GetStart() - 1, GetRange().GetEnd()));
 
-            long newCaretPosition = GetPosition() + m_newParagraphs.GetOwnRange().GetLength();
+            auto newCaretPosition = GetPosition() + m_newParagraphs.GetOwnRange().GetLength();
 
             // Character position to caret position
             newCaretPosition --;
@@ -12870,7 +12852,7 @@ bool wxRichTextSplitParaCharStyles(const wxRichTextAttr& style, wxRichTextAttr& 
 }
 
 /// Convert a decimal to Roman numerals
-wxString wxRichTextDecimalToRoman(long n)
+std::string wxRichTextDecimalToRoman(long n)
 {
     static std::vector<int> decimalNumbers;
     static wxArrayString romanNumbers;
@@ -12903,7 +12885,7 @@ wxString wxRichTextDecimalToRoman(long n)
     }
 
     int i = 0;
-    wxString roman;
+    std::string roman;
 
     while (n > 0 && i < 13)
     {
@@ -12917,8 +12899,8 @@ wxString wxRichTextDecimalToRoman(long n)
             i ++;
         }
     }
-    if (roman.IsEmpty())
-        roman = wxT("0");
+    if (roman.empty())
+        roman = "0";
     return roman;
 }
 
@@ -12930,7 +12912,7 @@ wxString wxRichTextDecimalToRoman(long n)
 wxIMPLEMENT_CLASS(wxRichTextFileHandler, wxObject);
 
 #if wxUSE_FFILE && wxUSE_STREAMS
-bool wxRichTextFileHandler::LoadFile(wxRichTextBuffer *buffer, const wxString& filename)
+bool wxRichTextFileHandler::LoadFile(wxRichTextBuffer *buffer, const std::string& filename)
 {
     wxFFileInputStream stream(filename);
     if (stream.IsOk())
@@ -12939,7 +12921,7 @@ bool wxRichTextFileHandler::LoadFile(wxRichTextBuffer *buffer, const wxString& f
     return false;
 }
 
-bool wxRichTextFileHandler::SaveFile(wxRichTextBuffer *buffer, const wxString& filename)
+bool wxRichTextFileHandler::SaveFile(wxRichTextBuffer *buffer, const std::string& filename)
 {
     wxFFileOutputStream stream(filename);
     if (stream.IsOk())
@@ -12950,12 +12932,9 @@ bool wxRichTextFileHandler::SaveFile(wxRichTextBuffer *buffer, const wxString& f
 #endif // wxUSE_FFILE && wxUSE_STREAMS
 
 /// Can we handle this filename (if using files)? By default, checks the extension.
-bool wxRichTextFileHandler::CanHandle(const std::string& filename) const
+bool wxRichTextFileHandler::CanHandle(const fs::path& filename) const
 {
-    wxString path, file, ext;
-    wxFileName::SplitPath(filename, & path, & file, & ext);
-
-    return (ext.Lower() == GetExtension());
+    return (wx::utils::ToLowerCopy(filename.extension().string()) == GetExtension());
 }
 
 /*!
@@ -12971,7 +12950,7 @@ bool wxRichTextPlainTextHandler::DoLoadFile(wxRichTextBuffer *buffer, wxInputStr
     if (!stream.IsOk())
         return false;
 
-    wxString str;
+    std::string str;
     int lastCh = 0;
 
     while (!stream.Eof())
@@ -12981,10 +12960,10 @@ bool wxRichTextPlainTextHandler::DoLoadFile(wxRichTextBuffer *buffer, wxInputStr
         if (!stream.Eof())
         {
             if (ch == 10 && lastCh != 13)
-                str += wxT('\n');
+                str += '\n';
 
             if (ch > 0 && ch != 10)
-                str += wxChar(ch);
+                str += char(ch);
 
             lastCh = ch;
         }
@@ -13003,12 +12982,11 @@ bool wxRichTextPlainTextHandler::DoSaveFile(wxRichTextBuffer *buffer, wxOutputSt
     if (!stream.IsOk())
         return false;
 
-    wxString text = buffer->GetText();
+    std::string text = buffer->GetText();
 
-    wxString newLine = wxRichTextLineBreakChar;
-    text.Replace(newLine, wxT("\n"));
+    wx::utils::ReplaceAll(text, std::string{wxRichTextLineBreakChar}, "\n");
 
-    wxCharBuffer buf = text.ToAscii();
+    wxCharBuffer buf = text.c_str();
 
     stream.Write((const char*) buf, text.length());
     return true;
@@ -13043,12 +13021,12 @@ void wxRichTextImageBlock::Clear()
 // If it's not a JPEG we can make use of 'image', already scaled, so we don't have to
 // load the image a 2nd time.
 
-bool wxRichTextImageBlock::MakeImageBlock(const wxString& filename, wxBitmapType imageType,
+bool wxRichTextImageBlock::MakeImageBlock(const std::string& filename, wxBitmapType imageType,
                                           wxImage& image, bool convertToJPEG)
 {
     m_imageType = imageType;
 
-    wxString filenameToRead(filename);
+    std::string filenameToRead(filename);
     bool removeFile = false;
 
     if (imageType == wxBitmapType::Invalid)
@@ -13056,10 +13034,10 @@ bool wxRichTextImageBlock::MakeImageBlock(const wxString& filename, wxBitmapType
 
     if ((imageType != wxBitmapType::JPEG) && convertToJPEG)
     {
-        wxString tempFile =
+        std::string tempFile =
             wxFileName::CreateTempFileName(_("image"));
 
-        wxASSERT(!tempFile.IsEmpty());
+        wxASSERT(!tempFile.empty());
 
         image.SaveFile(tempFile, wxBitmapType::JPEG);
         filenameToRead = tempFile;
@@ -13131,7 +13109,7 @@ bool wxRichTextImageBlock::DoMakeImageBlock(const wxImage& image, wxBitmapType i
 }
 
 // Write to a file
-bool wxRichTextImageBlock::Write(const wxString& filename)
+bool wxRichTextImageBlock::Write(const std::string& filename)
 {
     return WriteBlock(filename, m_data, m_dataSize);
 }
@@ -13167,7 +13145,7 @@ bool wxRichTextImageBlock::Load(wxImage& image)
     wxMemoryInputStream mstream(m_data, m_dataSize);
     bool success = image.LoadFile(mstream, GetImageType());
 #else
-    wxString tempFile = wxFileName::CreateTempFileName(_("image"));
+    std::string tempFile = wxFileName::CreateTempFileName(_("image"));
     wxASSERT(!tempFile.IsEmpty());
 
     if (!WriteBlock(tempFile, m_data, m_dataSize))
@@ -13260,7 +13238,7 @@ unsigned char* wxRichTextImageBlock::ReadBlock(wxInputStream& stream, size_t siz
     return block;
 }
 
-unsigned char* wxRichTextImageBlock::ReadBlock(const wxString& filename, size_t size)
+unsigned char* wxRichTextImageBlock::ReadBlock(const std::string& filename, size_t size)
 {
     wxFileInputStream stream(filename);
     if (!stream.IsOk())
@@ -13278,7 +13256,7 @@ bool wxRichTextImageBlock::WriteBlock(wxOutputStream& stream, unsigned char* blo
 }
 
 // Write memory block to file
-bool wxRichTextImageBlock::WriteBlock(const wxString& filename, unsigned char* block, size_t size)
+bool wxRichTextImageBlock::WriteBlock(const std::string& filename, unsigned char* block, size_t size)
 {
     wxFileOutputStream outStream(filename);
     if (!outStream.IsOk())
@@ -13288,7 +13266,7 @@ bool wxRichTextImageBlock::WriteBlock(const wxString& filename, unsigned char* b
 }
 
 // Gets the extension for the block's type
-wxString wxRichTextImageBlock::GetExtension() const
+std::string wxRichTextImageBlock::GetExtension() const
 {
     wxImageHandler* handler = wxImage::FindHandler(GetImageType());
     if (handler)
@@ -13338,10 +13316,11 @@ size_t wxRichTextBufferDataObject::GetDataSize() const
     if (!m_richTextBuffer)
         return 0;
 
+    // FIXME: Replace with std stream
     wxString bufXML;
 
     {
-        wxStringOutputStream stream(& bufXML);
+        wxStringOutputStream stream(&bufXML);
         m_richTextBuffer->SetHandlerFlags(wxRICHTEXT_HANDLER_INCLUDE_STYLESHEET);
         if (!m_richTextBuffer->SaveFile(stream, wxRICHTEXT_TYPE_XML))
         {
@@ -13350,14 +13329,15 @@ size_t wxRichTextBufferDataObject::GetDataSize() const
         }
     }
 
-    wxCharBuffer buffer = bufXML.mb_str(wxConvUTF8);
-    return strlen(buffer) + 1;
+    return bufXML.length();
 }
 
 bool wxRichTextBufferDataObject::GetDataHere(void *pBuf) const
 {
     if (!pBuf || !m_richTextBuffer)
         return false;
+
+    // FIXME: Replace with std stream
 
     wxString bufXML;
 
@@ -13371,9 +13351,8 @@ bool wxRichTextBufferDataObject::GetDataHere(void *pBuf) const
         }
     }
 
-    wxCharBuffer buffer = bufXML.mb_str(wxConvUTF8);
-    size_t len = strlen(buffer);
-    memcpy((char*) pBuf, (const char*) buffer, len);
+    size_t len = bufXML.size();
+    std::memcpy((char*) pBuf, bufXML.data(), len);
     ((char*) pBuf)[len] = 0;
 
     return true;
@@ -13383,7 +13362,7 @@ bool wxRichTextBufferDataObject::SetData(size_t WXUNUSED(len), const void *buf)
 {
     wxDELETE(m_richTextBuffer);
 
-    wxString bufXML((const char*) buf, wxConvUTF8);
+    std::string bufXML((const char*) buf);
 
     m_richTextBuffer = new wxRichTextBuffer;
 
@@ -13420,19 +13399,19 @@ struct wxRichTextFontTableData : public wxObjectRefData
 
 wxFont wxRichTextFontTableData::FindFont(const wxRichTextAttr& fontSpec, double fontScale)
 {
-    wxString facename(fontSpec.GetFontFaceName());
+    std::string facename(fontSpec.GetFontFaceName());
 
     int fontSize = fontSpec.GetFontSize();
     if (fontScale != 1.0)
         fontSize = (int) ((double(fontSize) * fontScale) + 0.5);
 
-    wxString units;
+    std::string units;
     if (fontSpec.HasFontPixelSize() && !fontSpec.HasFontPointSize())
-        units = wxT("px");
+        units = "px";
     else
-        units = wxT("pt");
+        units = "pt";
     // FIXME: Get rid of this, or at least simplify it.
-    wxString spec = wxString::Format(wxT("%d-%s-%d-%d-%d-%d-%s-%d"),
+    std::string spec = fmt::format("%d-%s-%d-%d-%d-%d-%s-%d",
          fontSize, units.c_str(), fontSpec.GetFontStyle(), fontSpec.GetFontWeight(), (int) fontSpec.GetFontUnderlined(), (int) fontSpec.GetFontStrikethrough(),
          facename.c_str(), (int) fontSpec.GetFontEncoding());
 
@@ -14522,8 +14501,8 @@ void wxTextAttrCollectCommonAttributes(wxTextAttr& currentStyle, const wxTextAtt
     {
         if (currentStyle.HasFontFaceName())
         {
-            wxString faceName1(currentStyle.GetFontFaceName());
-            wxString faceName2(attr.GetFontFaceName());
+            std::string faceName1(currentStyle.GetFontFaceName());
+            std::string faceName2(attr.GetFontFaceName());
 
             if (faceName1 != faceName2)
             {
@@ -15060,7 +15039,7 @@ wxArrayString wxRichTextProperties::GetPropertyNames() const
     return arr;
 }
 
-int wxRichTextProperties::Find(const wxString& name) const
+int wxRichTextProperties::Find(const std::string& name) const
 {
     size_t i;
     for (i = 0; i < m_properties.GetCount(); i++)
@@ -15071,7 +15050,7 @@ int wxRichTextProperties::Find(const wxString& name) const
     return -1;
 }
 
-bool wxRichTextProperties::Remove(const wxString& name)
+bool wxRichTextProperties::Remove(const std::string& name)
 {
     int idx = Find(name);
     if (idx != -1)
@@ -15083,11 +15062,11 @@ bool wxRichTextProperties::Remove(const wxString& name)
         return false;
 }
 
-wxVariant* wxRichTextProperties::FindOrCreateProperty(const wxString& name)
+wxVariant* wxRichTextProperties::FindOrCreateProperty(const std::string& name)
 {
     int idx = Find(name);
     if (idx == wxNOT_FOUND)
-        SetProperty(name, wxString());
+        SetProperty(name, std::string());
     idx = Find(name);
     if (idx != wxNOT_FOUND)
     {
@@ -15097,7 +15076,7 @@ wxVariant* wxRichTextProperties::FindOrCreateProperty(const wxString& name)
         return nullptr;
 }
 
-const wxVariant& wxRichTextProperties::GetProperty(const wxString& name) const
+const wxVariant& wxRichTextProperties::GetProperty(const std::string& name) const
 {
     static const wxVariant nullVariant;
     int idx = Find(name);
@@ -15107,22 +15086,22 @@ const wxVariant& wxRichTextProperties::GetProperty(const wxString& name) const
         return nullVariant;
 }
 
-wxString wxRichTextProperties::GetPropertyString(const wxString& name) const
+std::string wxRichTextProperties::GetPropertyString(const std::string& name) const
 {
     return GetProperty(name).GetString();
 }
 
-long wxRichTextProperties::GetPropertyLong(const wxString& name) const
+long wxRichTextProperties::GetPropertyLong(const std::string& name) const
 {
     return GetProperty(name).GetLong();
 }
 
-bool wxRichTextProperties::GetPropertyBool(const wxString& name) const
+bool wxRichTextProperties::GetPropertyBool(const std::string& name) const
 {
     return GetProperty(name).GetBool();
 }
 
-double wxRichTextProperties::GetPropertyDouble(const wxString& name) const
+double wxRichTextProperties::GetPropertyDouble(const std::string& name) const
 {
     return GetProperty(name).GetDouble();
 }
@@ -15139,7 +15118,7 @@ void wxRichTextProperties::SetProperty(const wxVariant& variant)
         m_properties[idx] = variant;
 }
 
-void wxRichTextProperties::SetProperty(const wxString& name, const wxVariant& variant)
+void wxRichTextProperties::SetProperty(const std::string& name, const wxVariant& variant)
 {
     int idx = Find(name);
     wxVariant var(variant);
@@ -15151,22 +15130,22 @@ void wxRichTextProperties::SetProperty(const wxString& name, const wxVariant& va
         m_properties[idx] = var;
 }
 
-void wxRichTextProperties::SetProperty(const wxString& name, const wxString& value)
+void wxRichTextProperties::SetProperty(const std::string& name, const std::string& value)
 {
     SetProperty(name, wxVariant(value, name));
 }
 
-void wxRichTextProperties::SetProperty(const wxString& name, long value)
+void wxRichTextProperties::SetProperty(const std::string& name, long value)
 {
     SetProperty(name, wxVariant(value, name));
 }
 
-void wxRichTextProperties::SetProperty(const wxString& name, double value)
+void wxRichTextProperties::SetProperty(const std::string& name, double value)
 {
     SetProperty(name, wxVariant(value, name));
 }
 
-void wxRichTextProperties::SetProperty(const wxString& name, bool value)
+void wxRichTextProperties::SetProperty(const std::string& name, bool value)
 {
     SetProperty(name, wxVariant(value, name));
 }
@@ -15176,7 +15155,7 @@ void wxRichTextProperties::RemoveProperties(const wxRichTextProperties& properti
     size_t i;
     for (i = 0; i < properties.GetCount(); i++)
     {
-        wxString name = properties.GetProperties()[i].GetName();
+        std::string name = properties.GetProperties()[i].GetName();
         if (HasProperty(name))
             Remove(name);
     }
@@ -15458,7 +15437,7 @@ bool wxRichTextDrawingContext::HasVirtualText(const wxRichTextPlainText* obj) co
     return false;
 }
 
-bool wxRichTextDrawingContext::GetVirtualText(const wxRichTextPlainText* obj, wxString& text) const
+bool wxRichTextDrawingContext::GetVirtualText(const wxRichTextPlainText* obj, std::string& text) const
 {
     if (!GetVirtualAttributesEnabled())
         return false;
@@ -15488,7 +15467,7 @@ void wxRichTextBuffer::InsertDrawingHandler(wxRichTextDrawingHandler *handler)
 }
 
 /// Removes a handler
-bool wxRichTextBuffer::RemoveDrawingHandler(const wxString& name)
+bool wxRichTextBuffer::RemoveDrawingHandler(const std::string& name)
 {
     wxRichTextDrawingHandler *handler = FindDrawingHandler(name);
     if (handler)
@@ -15501,13 +15480,13 @@ bool wxRichTextBuffer::RemoveDrawingHandler(const wxString& name)
         return false;
 }
 
-wxRichTextDrawingHandler* wxRichTextBuffer::FindDrawingHandler(const wxString& name)
+wxRichTextDrawingHandler* wxRichTextBuffer::FindDrawingHandler(const std::string& name)
 {
     wxList::compatibility_iterator node = sm_drawingHandlers.GetFirst();
     while (node)
     {
         wxRichTextDrawingHandler *handler = (wxRichTextDrawingHandler*)node->GetData();
-        if (handler->GetName().Lower() == name.Lower()) return handler;
+        if (wx::utils::ToLowerCopy(handler->GetName()) == wx::utils::ToLowerCopy(name)) return handler;
 
         node = node->GetNext();
     }
@@ -15533,7 +15512,7 @@ void wxRichTextBuffer::AddFieldType(wxRichTextFieldType *fieldType)
     sm_fieldTypes[fieldType->GetName()] = fieldType;
 }
 
-bool wxRichTextBuffer::RemoveFieldType(const wxString& name)
+bool wxRichTextBuffer::RemoveFieldType(const std::string& name)
 {
     wxRichTextFieldTypeHashMap::iterator it = sm_fieldTypes.find(name);
     if (it == sm_fieldTypes.end())
@@ -15547,7 +15526,7 @@ bool wxRichTextBuffer::RemoveFieldType(const wxString& name)
     }
 }
 
-wxRichTextFieldType *wxRichTextBuffer::FindFieldType(const wxString& name)
+wxRichTextFieldType *wxRichTextBuffer::FindFieldType(const std::string& name)
 {
     wxRichTextFieldTypeHashMap::iterator it = sm_fieldTypes.find(name);
     if (it == sm_fieldTypes.end())

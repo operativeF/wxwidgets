@@ -37,7 +37,7 @@ public:
     bool CanLoad() const override { return false; }
 
     /// Can we handle this filename (if using files)? By default, checks the extension.
-    bool CanHandle(const std::string& filename) const override;
+    bool CanHandle(const fs::path& filename) const override;
 
 // Accessors and operations unique to this handler
 

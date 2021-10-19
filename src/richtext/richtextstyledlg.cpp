@@ -22,6 +22,11 @@
 #include "wx/stattext.h"
 
 #include "wx/generic/textdlgg.h"
+#include "wx/stringutils.h"
+
+#include <fmt/core.h>
+
+#include <algorithm>
 
 /*!
  * wxRichTextStyleOrganiserDialog type definition
@@ -65,7 +70,7 @@ IMPLEMENT_HELP_PROVISION(wxRichTextStyleOrganiserDialog)
  * wxRichTextStyleOrganiserDialog constructors
  */
 
-wxRichTextStyleOrganiserDialog::wxRichTextStyleOrganiserDialog( int flags, wxRichTextStyleSheet* sheet, wxRichTextCtrl* ctrl, wxWindow* parent, wxWindowID id, const wxString& caption, const wxPoint& pos, const wxSize& size, unsigned int style )
+wxRichTextStyleOrganiserDialog::wxRichTextStyleOrganiserDialog( int flags, wxRichTextStyleSheet* sheet, wxRichTextCtrl* ctrl, wxWindow* parent, wxWindowID id, const std::string& caption, const wxPoint& pos, const wxSize& size, unsigned int style )
 {
     Create(flags, sheet, ctrl, parent, id, caption, pos, size, style);
 }
@@ -74,7 +79,7 @@ wxRichTextStyleOrganiserDialog::wxRichTextStyleOrganiserDialog( int flags, wxRic
  * wxRichTextStyleOrganiserDialog creator
  */
 
-bool wxRichTextStyleOrganiserDialog::Create( int flags, wxRichTextStyleSheet* sheet, wxRichTextCtrl* ctrl, wxWindow* parent, wxWindowID id, const wxString& caption, const wxPoint& pos, const wxSize& size, unsigned int style )
+bool wxRichTextStyleOrganiserDialog::Create( int flags, wxRichTextStyleSheet* sheet, wxRichTextCtrl* ctrl, wxWindow* parent, wxWindowID id, const std::string& caption, const wxPoint& pos, const wxSize& size, unsigned int style )
 {
     m_richTextStyleSheet = sheet;
     m_richTextCtrl = ctrl;
@@ -344,7 +349,7 @@ void wxRichTextStyleOrganiserDialog::CreateControls()
  */
 
 /// Get selected style name or definition
-wxString wxRichTextStyleOrganiserDialog::GetSelectedStyle() const
+std::string wxRichTextStyleOrganiserDialog::GetSelectedStyle() const
 {
     wxRichTextStyleDefinition* def = GetSelectedStyleDefinition();
     if (def)
@@ -437,7 +442,7 @@ iaculis malesuada. Donec bibendum ipsum ut ante porta fringilla.\n";
             wxRichTextAttr levelAttr = * listDef->GetLevelAttributes(i);
             levelAttr.SetBulletNumber(1);
             m_previewCtrl->BeginStyle(levelAttr);
-            m_previewCtrl->WriteText(wxString::Format(wxT("List level %d. "), i+1) + s_para2List);
+            m_previewCtrl->WriteText(fmt::format("List level %d. ", i+1) + s_para2List);
             m_previewCtrl->EndStyle();
         }
         long listEnd = m_previewCtrl->GetInsertionPoint();
@@ -453,8 +458,8 @@ iaculis malesuada. Donec bibendum ipsum ut ante porta fringilla.\n";
         wxRichTextBox* textBox = m_previewCtrl->WriteTextBox(attr);
         m_previewCtrl->SetFocusObject(textBox);
         m_previewCtrl->BeginStyle(cellParaAttr);
-        wxString text(s_para2);
-        text.Replace(wxT("\n"), {});
+        std::string text(s_para2);
+        std::erase(text, '\n');
         m_previewCtrl->WriteText(text);
         m_previewCtrl->EndStyle();
         m_previewCtrl->SetFocusObject(nullptr); // Set the focus back to the main buffer
@@ -512,7 +517,7 @@ bool wxRichTextStyleOrganiserDialog::ApplyStyle(wxRichTextCtrl* ctrl)
  * Get bitmap resources
  */
 
-wxBitmap wxRichTextStyleOrganiserDialog::GetBitmapResource( const wxString& name )
+wxBitmap wxRichTextStyleOrganiserDialog::GetBitmapResource( const std::string& name )
 {
     // Bitmap retrieval
 ////@begin wxRichTextStyleOrganiserDialog bitmap retrieval
@@ -525,7 +530,7 @@ wxBitmap wxRichTextStyleOrganiserDialog::GetBitmapResource( const wxString& name
  * Get icon resources
  */
 
-wxIcon wxRichTextStyleOrganiserDialog::GetIconResource( const wxString& name )
+wxIcon wxRichTextStyleOrganiserDialog::GetIconResource( const std::string& name )
 {
     // Icon retrieval
 ////@begin wxRichTextStyleOrganiserDialog icon retrieval
@@ -559,8 +564,8 @@ void wxRichTextStyleOrganiserDialog::OnApplyUpdate( wxUpdateUIEvent& event )
 
 void wxRichTextStyleOrganiserDialog::OnNewCharClick( wxCommandEvent& WXUNUSED(event) )
 {
-    wxString styleName = wxGetTextFromUser(_("Enter a character style name"), _("New Style"));
-    if (!styleName.IsEmpty())
+    std::string styleName = wxGetTextFromUser(_("Enter a character style name"), _("New Style"));
+    if (!styleName.empty())
     {
         if (GetStyleSheet()->FindCharacterStyle(styleName))
         {
@@ -607,8 +612,8 @@ void wxRichTextStyleOrganiserDialog::OnNewCharUpdate( wxUpdateUIEvent& event )
 
 void wxRichTextStyleOrganiserDialog::OnNewParaClick( wxCommandEvent& WXUNUSED(event) )
 {
-    wxString styleName = wxGetTextFromUser(_("Enter a paragraph style name"), _("New Style"));
-    if (!styleName.IsEmpty())
+    std::string styleName = wxGetTextFromUser(_("Enter a paragraph style name"), _("New Style"));
+    if (!styleName.empty())
     {
         if (GetStyleSheet()->FindParagraphStyle(styleName))
         {
@@ -734,8 +739,8 @@ void wxRichTextStyleOrganiserDialog::OnDeleteClick( wxCommandEvent& WXUNUSED(eve
     if (sel != wxNOT_FOUND)
     {
         wxRichTextStyleDefinition* def = m_stylesListBox->GetStyleListBox()->GetStyle(sel);
-        wxString name(def->GetName());
-        if (wxYES == wxMessageBox(wxString::Format(_("Delete style %s?"), name), _("Delete Style"), wxYES_NO|wxICON_QUESTION, this))
+        std::string name(def->GetName());
+        if (wxYES == wxMessageBox(fmt::format(_("Delete style %s?").ToStdString(), name), _("Delete Style").ToStdString(), wxYES_NO|wxICON_QUESTION, this))
         {
             m_stylesListBox->GetStyleListBox()->SetItemCount(0);
 

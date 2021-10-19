@@ -78,10 +78,10 @@ public:
 ////@begin wxRichTextStylePage member function declarations
 
     /// Retrieves bitmap resources
-    wxBitmap GetBitmapResource( const wxString& name );
+    wxBitmap GetBitmapResource( const std::string& name );
 
     /// Retrieves icon resources
-    wxIcon GetIconResource( const wxString& name );
+    wxIcon GetIconResource( const std::string& name );
 ////@end wxRichTextStylePage member function declarations
 
     /// Should we show tooltips?
