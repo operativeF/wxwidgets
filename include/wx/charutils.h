@@ -11,6 +11,8 @@
 #ifndef _CHAR_UTILS_H
 #define _CHAR_UTILS_H
 
+#include <concepts>
+
 namespace wx::utils
 {
 
@@ -239,6 +241,49 @@ constexpr bool isAlNum(char ch) noexcept
         case 'Y': return 'y';
         case 'Z': return 'z';
         default:  return ch;
+    }
+}
+
+template<char c>
+concept Hexable = requires
+{
+    requires(('A' <= c && c <= 'F') ||
+             ('0' <= c && c <= '9') ||
+             ('a' <= c && c <= 'f'));
+};
+
+template<char C> requires(Hexable<C>)
+consteval char HexCharToDec()
+{
+    if constexpr('A' <= C && C <= 'F')
+    {
+        return C - char(55);
+    }
+    else if('a' <= C && C <= 'f')
+    {
+        return C - char(87);
+    }
+    else // '0' - '9
+    {
+        return C - char(48);
+    }
+}
+
+constexpr std::byte HexCharToDec(std::byte C)
+{
+    auto asChar = static_cast<char>(C);
+
+    if('A' <= asChar && asChar <= 'F')
+    {
+        return static_cast<std::byte>(asChar - char{55});
+    }
+    else if('a' <= asChar && asChar <= 'f')
+    {
+        return static_cast<std::byte>(asChar - char{87});
+    }
+    else // '0' - '9
+    {
+        return static_cast<std::byte>(asChar - char{48});
     }
 }
 
