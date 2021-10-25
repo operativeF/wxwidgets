@@ -45,12 +45,8 @@ public:
               const wxSize& size = wxDefaultSize,
               unsigned int style = 0,
               const std::string& name = wxNotebookNameStr);
-  ~wxNotebook() = default;
 
-  wxNotebook(const wxNotebook&) = delete;
-  wxNotebook& operator=(const wxNotebook&) = delete;
-  wxNotebook(wxNotebook&&) = default;
-  wxNotebook& operator=(wxNotebook&&) = default;
+  wxNotebook& operator=(wxNotebook&&) = delete;
 
   // accessors
   // ---------

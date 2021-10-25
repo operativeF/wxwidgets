@@ -30,9 +30,6 @@ class WXDLLIMPEXP_FWD_CORE wxPalette;
 class WXDLLIMPEXP_CORE wxDIB
 {
 public:
-    
-    // --------------
-
     // create an uninitialized DIB with the given width, height and depth (only
     // 24 and 32 bpp DIBs are currently supported)
     //
@@ -66,10 +63,8 @@ public:
     }
 
     // DIBs can't be copied
-    wxDIB(const wxDIB&) = delete;
-    wxDIB& operator=(const wxDIB&) = delete;
-    wxDIB(wxDIB&&) = default;
-    wxDIB& operator=(wxDIB&&) = default;
+    // FIXME: Can DIBs be moved?
+    wxDIB& operator=(wxDIB&&) = delete;
 
     // same as the corresponding ctors but with return value
     [[maybe_unused]] bool Create(wxSize sz, int depth);

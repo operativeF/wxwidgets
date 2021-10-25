@@ -59,10 +59,7 @@ public:
 
     ~wxProcess();
 
-    wxProcess(const wxProcess&) = delete;
-    wxProcess& operator=(const wxProcess&) = delete;
-    wxProcess(wxProcess&&) = default;
-    wxProcess& operator=(wxProcess&&) = default;
+    wxProcess& operator=(wxProcess&&) = delete;
 
     // get the process ID of the process executed by Open()
     long GetPid() const { return m_pid; }

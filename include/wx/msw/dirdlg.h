@@ -24,10 +24,7 @@ public:
                 const wxSize& size = wxDefaultSize,
                 const std::string& name = wxDirDialogNameStr);
 
-    wxDirDialog(const wxDirDialog&) = delete;
-    wxDirDialog& operator=(const wxDirDialog&) = delete;
-    wxDirDialog(wxDirDialog&&) = default;
-    wxDirDialog& operator=(wxDirDialog&&) = default;
+    wxDirDialog& operator=(wxDirDialog&&) = delete;
 
     void SetPath(const std::string& path) override;
 

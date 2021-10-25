@@ -42,8 +42,7 @@ public:
 
     ~wxHtmlWinParser();
 
-    wxHtmlWinParser(const wxHtmlWinParser&) = delete;
-	wxHtmlWinParser& operator=(const wxHtmlWinParser&) = delete;
+	wxHtmlWinParser& operator=(wxHtmlWinParser&&) = delete;
 
     void InitParser(const wxString& source) override;
     void DoneParser() override;
@@ -246,10 +245,7 @@ class WXDLLIMPEXP_HTML wxHtmlWinTagHandler : public wxHtmlTagHandler
     wxDECLARE_ABSTRACT_CLASS(wxHtmlWinTagHandler);
 
 public:
-    wxHtmlWinTagHandler()  = default;
-
-    wxHtmlWinTagHandler(const wxHtmlWinTagHandler&) = delete;
-	wxHtmlWinTagHandler& operator=(const wxHtmlWinTagHandler&) = delete;
+	wxHtmlWinTagHandler& operator=(wxHtmlWinTagHandler&&) = delete;
 
     void SetParser(wxHtmlParser *parser) override {wxHtmlTagHandler::SetParser(parser); m_WParser = (wxHtmlWinParser*) parser;}
 

@@ -28,10 +28,7 @@ public:
     wxTaskBarIcon(wxTaskBarIconType iconType = wxTaskBarIconType::DefaultType);
     ~wxTaskBarIcon();
 
-    wxTaskBarIcon(const wxTaskBarIcon&) = delete;
-    wxTaskBarIcon& operator=(const wxTaskBarIcon&) = delete;
-    wxTaskBarIcon(wxTaskBarIcon&&) = default;
-    wxTaskBarIcon& operator=(wxTaskBarIcon&&) = default;
+    wxTaskBarIcon& operator=(wxTaskBarIcon&&) = delete;
 
     // Accessors
     bool IsOk() const { return true; }

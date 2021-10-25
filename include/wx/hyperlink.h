@@ -154,7 +154,7 @@ typedef void (wxEvtHandler::*wxHyperlinkEventFunction)(wxHyperlinkEvent&);
     class WXDLLIMPEXP_CORE wxHyperlinkCtrl : public wxGenericHyperlinkCtrl
     {
     public:
-        wxHyperlinkCtrl() { }
+        wxHyperlinkCtrl() = default;
 
         wxHyperlinkCtrl(wxWindow *parent,
                         wxWindowID id,
@@ -169,8 +169,7 @@ typedef void (wxEvtHandler::*wxHyperlinkEventFunction)(wxHyperlinkEvent&);
         {
         }
         
-        wxHyperlinkCtrl (const  wxHyperlinkCtrl &) = delete;
-        wxHyperlinkCtrl & operator=(const  wxHyperlinkCtrl &) = delete;
+        wxHyperlinkCtrl& operator=(wxHyperlinkCtrl&&) = delete;
 
         wxClassInfo *wxGetClassInfo() const;
         static wxClassInfo ms_classInfo;

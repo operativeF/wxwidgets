@@ -33,12 +33,8 @@ public:
         Create(parent, id, label, pos, size, style, validator, name);
     }
 
-    wxButton(const wxButton&) = delete;
-    wxButton& operator=(const wxButton&) = delete;
-    wxButton(wxButton&&) = default;
-    wxButton& operator=(wxButton&&) = default;
-
     ~wxButton();
+    wxButton& operator=(wxButton&&) = delete;
 
     [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,

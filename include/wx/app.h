@@ -68,10 +68,7 @@ public:
     wxAppConsoleBase();
     ~wxAppConsoleBase();
 
-   wxAppConsoleBase(const wxAppConsoleBase&) = delete;
-   wxAppConsoleBase& operator=(const wxAppConsoleBase&) = delete;
-   wxAppConsoleBase(wxAppConsoleBase&&) = default;
-   wxAppConsoleBase& operator=(wxAppConsoleBase&&) = default;
+    wxAppConsoleBase& operator=(wxAppConsoleBase&&) = delete;
 
     // the virtual functions which may/must be overridden in the derived class
     // -----------------------------------------------------------------------
@@ -537,10 +534,8 @@ class WXDLLIMPEXP_CORE wxAppBase : public wxAppConsole
 {
 public:
     wxAppBase();
-    ~wxAppBase() = default;
 
-    wxAppBase(const wxAppBase&) = delete;
-    wxAppBase& operator=(const wxAppBase&) = delete;
+    wxAppBase& operator=(wxAppBase&&) = delete;
 
     // the virtual functions which may/must be overridden in the derived class
     // -----------------------------------------------------------------------

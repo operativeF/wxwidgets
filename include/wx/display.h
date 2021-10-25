@@ -49,10 +49,7 @@ public:
     // default ctor creates the object corresponding to the primary display
     wxDisplay();
 
-    wxDisplay(const wxDisplay&) = delete;
-    wxDisplay& operator=(const wxDisplay&) = delete;
-    wxDisplay(wxDisplay&&) = default;
-    wxDisplay& operator=(wxDisplay&&) = default;
+    wxDisplay& operator=(wxDisplay&&) = delete;
 
     // initialize the object containing all information about the given
     // display

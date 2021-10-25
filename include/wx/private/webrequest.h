@@ -208,9 +208,6 @@ private:
     wxMemoryBuffer m_readBuffer;
     mutable wxFFile m_file;
     mutable std::unique_ptr<wxInputStream> m_stream;
-
-    wxWebResponseImpl(const wxWebResponseImpl&) = delete;
-	wxWebResponseImpl& operator=(const wxWebResponseImpl&) = delete;
 };
 
 // ----------------------------------------------------------------------------

@@ -112,11 +112,7 @@ private:
 class WXDLLIMPEXP_CORE wxTaskBarButton
 {
 public:
-
-   wxTaskBarButton(const wxTaskBarButton&) = delete;
-   wxTaskBarButton& operator=(const wxTaskBarButton&) = delete;
-   wxTaskBarButton(wxTaskBarButton&&) = default;
-   wxTaskBarButton& operator=(wxTaskBarButton&&) = default;
+    wxTaskBarButton& operator=(wxTaskBarButton&&) = delete;
 
     // Factory function, may return NULL if task bar buttons are not supported
     // by the current system.
@@ -166,10 +162,7 @@ public:
         const std::string& iconPath = {},
         int iconIndex = 0);
 
-   wxTaskBarJumpListItem(const wxTaskBarJumpListItem&) = delete;
-   wxTaskBarJumpListItem& operator=(const wxTaskBarJumpListItem&) = delete;
-   wxTaskBarJumpListItem(wxTaskBarJumpListItem&&) = default;
-   wxTaskBarJumpListItem& operator=(wxTaskBarJumpListItem&&) = default;
+    wxTaskBarJumpListItem& operator=(wxTaskBarJumpListItem&&) = delete;
 
     wxTaskBarJumpListItemType GetType() const;
     void SetType(wxTaskBarJumpListItemType type);
@@ -210,10 +203,7 @@ public:
                               const std::string& title = {});
     virtual ~wxTaskBarJumpListCategory();
 
-   wxTaskBarJumpListCategory(const wxTaskBarJumpListCategory&) = delete;
-   wxTaskBarJumpListCategory& operator=(const wxTaskBarJumpListCategory&) = delete;
-   wxTaskBarJumpListCategory(wxTaskBarJumpListCategory&&) = default;
-   wxTaskBarJumpListCategory& operator=(wxTaskBarJumpListCategory&&) = default;
+    wxTaskBarJumpListCategory& operator=(wxTaskBarJumpListCategory&&) = delete;
 
     wxTaskBarJumpListItem* Append(wxTaskBarJumpListItem *item);
     void Delete(wxTaskBarJumpListItem *item);
@@ -243,10 +233,7 @@ public:
     wxTaskBarJumpList(const std::string& appID = {});
     virtual ~wxTaskBarJumpList();
 
-   wxTaskBarJumpList(const wxTaskBarJumpList&) = delete;
-   wxTaskBarJumpList& operator=(const wxTaskBarJumpList&) = delete;
-   wxTaskBarJumpList(wxTaskBarJumpList&&) = default;
-   wxTaskBarJumpList& operator=(wxTaskBarJumpList&&) = default;
+    wxTaskBarJumpList& operator=(wxTaskBarJumpList&&) = delete;
 
     void ShowRecentCategory(bool shown = true);
     void HideRecentCategory();

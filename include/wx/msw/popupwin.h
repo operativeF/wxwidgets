@@ -23,10 +23,7 @@ public:
     wxPopupWindow(wxWindow *parent, unsigned int flags = wxBORDER_NONE)
         { Create(parent, flags); }
 
-    wxPopupWindow(const wxPopupWindow&) = delete;
-    wxPopupWindow& operator=(const wxPopupWindow&) = delete;
-    wxPopupWindow(wxPopupWindow&&) = default;
-    wxPopupWindow& operator=(wxPopupWindow&&) = default;
+    wxPopupWindow& operator=(wxPopupWindow&&) = delete;
 
     [[maybe_unused]] bool Create(wxWindow *parent, unsigned int flags = wxBORDER_NONE);
 

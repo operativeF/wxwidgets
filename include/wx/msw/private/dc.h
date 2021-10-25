@@ -40,6 +40,8 @@ public:
         Change(colFg, colBg);
     }
 
+	wxTextColoursChanger& operator=(wxTextColoursChanger&&) = delete;
+
     ~wxTextColoursChanger()
     {
         if ( m_oldColFg != CLR_INVALID )
@@ -97,9 +99,6 @@ private:
     const HDC m_hdc;
     COLORREF m_oldColFg,
              m_oldColBg;
-
-    wxTextColoursChanger(const wxTextColoursChanger&) = delete;
-	wxTextColoursChanger& operator=(const wxTextColoursChanger&) = delete;
 };
 
 // background mode
@@ -118,6 +117,8 @@ public:
         if ( m_oldMode )
             ::SetBkMode(m_hdc, m_oldMode);
     }
+
+    wxBkModeChanger& operator=(wxBkModeChanger&&) = delete;
 
 protected:
     // this ctor doesn't change mode immediately, call Change() later to do it
@@ -138,9 +139,6 @@ protected:
 private:
     const HDC m_hdc;
     int m_oldMode;
-
-    wxBkModeChanger(const wxBkModeChanger&) = delete;
-	wxBkModeChanger& operator=(const wxBkModeChanger&) = delete;
 };
 
 } // namespace wxMSWImpl

@@ -30,12 +30,7 @@ public:
         Create(parent, id, pos, size, style, name);
     }
 
-    ~wxSpinButton() = default;
-
-    wxSpinButton(const wxSpinButton&) = delete;
-    wxSpinButton& operator=(const wxSpinButton&) = delete;
-    wxSpinButton(wxSpinButton&&) = default;
-    wxSpinButton& operator=(wxSpinButton&&) = default;
+    wxSpinButton& operator=(wxSpinButton&&) = delete;
 
     [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id = wxID_ANY,

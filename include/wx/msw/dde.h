@@ -47,8 +47,7 @@ public:
   wxDDEConnection() = default; // use internal buffer
   ~wxDDEConnection();
 
-  wxDDEConnection(const wxDDEConnection&) = delete;
-	wxDDEConnection& operator=(const wxDDEConnection&) = delete;
+	wxDDEConnection& operator=(wxDDEConnection&&) = delete;
 
   // implement base class pure virtual methods
   const void *Request(const wxString& item,

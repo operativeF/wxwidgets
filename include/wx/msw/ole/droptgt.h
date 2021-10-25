@@ -38,8 +38,7 @@ public:
     wxDropTarget(wxDataObject *dataObject = nullptr);
     ~wxDropTarget();
 
-    wxDropTarget(const wxDropTarget&) = delete;
-    wxDropTarget& operator=(const wxDropTarget&) = delete;
+    wxDropTarget& operator=(wxDropTarget&&) = delete;
 
     // normally called by wxWindow on window creation/destruction, but might be
     // called `manually' as well. Register() returns true on success.

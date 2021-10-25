@@ -105,12 +105,7 @@ public:
     {
     }
 
-    ~wxFindReplaceDialogBase() = default;
-
-    wxFindReplaceDialogBase(const wxFindReplaceDialogBase&) = delete;
-    wxFindReplaceDialogBase& operator=(const wxFindReplaceDialogBase&) = delete;
-    wxFindReplaceDialogBase(wxFindReplaceDialogBase&&) = default;
-    wxFindReplaceDialogBase& operator=(wxFindReplaceDialogBase&&) = default;
+    wxFindReplaceDialogBase& operator=(wxFindReplaceDialogBase&&) = delete;
     
     // find dialog data access
     const wxFindReplaceData *GetData() const { return m_FindReplaceData; }

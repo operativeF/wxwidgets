@@ -428,12 +428,7 @@ class WXDLLIMPEXP_CORE wxControlWithItemsBase :
     public wxWindowWithItems<wxControl, wxItemContainer>
 {
 public:
-    wxControlWithItemsBase() = default;
-
-    wxControlWithItemsBase(const wxControlWithItemsBase&) = delete;
-    wxControlWithItemsBase& operator=(const wxControlWithItemsBase&) = delete;
-    wxControlWithItemsBase(wxControlWithItemsBase&&) = default;
-    wxControlWithItemsBase& operator=(wxControlWithItemsBase&&) = default;
+    wxControlWithItemsBase& operator=(wxControlWithItemsBase&&) = delete;
     
     // usually the controls like list/combo boxes have their own background
     // colour
@@ -464,11 +459,7 @@ protected:
     class WXDLLIMPEXP_CORE wxControlWithItems : public wxControlWithItemsBase
     {
     public:
-        wxControlWithItems() { }
-        wxControlWithItems(const wxControlWithItems&) = delete;
-        wxControlWithItems& operator=(const wxControlWithItems&) = delete;
-        wxControlWithItems(wxControlWithItems&&) = default;
-        wxControlWithItems& operator=(wxControlWithItems&&) = default;
+        wxControlWithItems& operator=(wxControlWithItems&&) = delete;
         
     private:
         wxDECLARE_ABSTRACT_CLASS(wxControlWithItems);

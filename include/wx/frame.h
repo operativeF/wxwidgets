@@ -60,13 +60,9 @@ constexpr unsigned int wxFRAME_FLOAT_ON_PARENT = 0x0008;  // Always above its pa
 class WXDLLIMPEXP_CORE wxFrameBase : public wxTopLevelWindow
 {
 public:
-    wxFrameBase() = default;
     ~wxFrameBase();
 
-    wxFrameBase(const wxFrameBase&) = delete;
-    wxFrameBase& operator=(const wxFrameBase&) = delete;
-    wxFrameBase(wxFrameBase&&) = default;
-    wxFrameBase& operator=(wxFrameBase&&) = default;
+    wxFrameBase& operator=(wxFrameBase&&) = delete;
 
     wxFrame *New(wxWindow *parent,
                  wxWindowID winid,

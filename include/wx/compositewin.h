@@ -41,8 +41,7 @@ class wxCompositeWindowSettersOnly : public W
 public:
     using BaseWindowClass = W;
 
-    wxCompositeWindowSettersOnly(const wxCompositeWindowSettersOnly<W>&)  = delete;
-	wxCompositeWindowSettersOnly& operator=(const wxCompositeWindowSettersOnly<W>&) = delete;
+	wxCompositeWindowSettersOnly& operator=(wxCompositeWindowSettersOnly<W>&&) = delete;
 
     // Override all wxWindow methods which must be forwarded to the composite
     // window parts.
@@ -170,8 +169,7 @@ public:
         wxSetFocusToChild(this, nullptr);
     }
 
-    wxCompositeWindow(const wxCompositeWindow<W>&)  = delete;
-	wxCompositeWindow& operator=(const wxCompositeWindow<W>&) = delete;
+	wxCompositeWindow& operator=(wxCompositeWindow<W>&&) = delete;
 
 protected:
     // Default ctor sets things up for handling children events correctly.

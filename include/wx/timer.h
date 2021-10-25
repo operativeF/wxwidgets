@@ -70,10 +70,7 @@ public:
 
     ~wxTimer();
 
-   wxTimer(const wxTimer&) = delete;
-   wxTimer& operator=(const wxTimer&) = delete;
-   wxTimer(wxTimer&&) = default;
-   wxTimer& operator=(wxTimer&&) = default;
+    wxTimer& operator=(wxTimer&&) = delete;
 
     // working with the timer
     // ----------------------
@@ -147,11 +144,6 @@ public:
             m_timer.Stop();
         }
     }
-
-   wxTimerRunner(const wxTimerRunner&) = delete;
-   wxTimerRunner& operator=(const wxTimerRunner&) = delete;
-   wxTimerRunner(wxTimerRunner&&) = default;
-   wxTimerRunner& operator=(wxTimerRunner&&) = default;
 
 private:
     wxTimer& m_timer;

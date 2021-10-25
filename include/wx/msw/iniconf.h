@@ -53,12 +53,8 @@ public:
               const std::string& localFilename = {},
               const std::string& globalFilename = {},
               unsigned int style = wxCONFIG_USE_LOCAL_FILE);
-  ~wxIniConfig() = default;
 
-  wxIniConfig(const wxIniConfig&) = delete;
-  wxIniConfig& operator=(const wxIniConfig&) = delete;
-  wxIniConfig(wxIniConfig&&) = default;
-  wxIniConfig& operator=(wxIniConfig&&) = default;
+  wxIniConfig& operator=(wxIniConfig&&) = delete;
 
   // implement inherited pure virtual functions
   void SetPath(const wxString& strPath) override;

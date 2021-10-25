@@ -42,12 +42,7 @@ constexpr char wxStaticLineNameStr[] = "staticLine";
 class WXDLLIMPEXP_CORE wxStaticLineBase : public wxControl
 {
 public:
-    wxStaticLineBase() = default;
-    ~wxStaticLineBase() = default;
-    wxStaticLineBase(const wxStaticLineBase&) = delete;
-    wxStaticLineBase& operator=(const wxStaticLineBase&) = delete;
-    wxStaticLineBase(wxStaticLineBase&&) = default;
-    wxStaticLineBase& operator=(wxStaticLineBase&&) = default;
+    wxStaticLineBase& operator=(wxStaticLineBase&&) = delete;
 
     // is the line vertical?
     bool IsVertical() const { return (wxGetWindowStyle() & wxLI_VERTICAL) != 0; }

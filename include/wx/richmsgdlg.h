@@ -32,12 +32,7 @@ public:
           m_detailsExpanderExpandedLabel( wxGetTranslation("&Hide details") )
     {}
 
-    ~wxRichMessageDialogBase() = default;
-
-    wxRichMessageDialogBase(const wxRichMessageDialogBase&) = delete;
-    wxRichMessageDialogBase& operator=(const wxRichMessageDialogBase&) = delete;
-    wxRichMessageDialogBase(wxRichMessageDialogBase&&) = default;
-    wxRichMessageDialogBase& operator=(wxRichMessageDialogBase&&) = default;
+    wxRichMessageDialogBase& operator=(wxRichMessageDialogBase&&) = delete;
 
     void ShowCheckBox(const wxString& checkBoxText, bool checked = false)
     {
@@ -96,8 +91,7 @@ private:
             : wxGenericRichMessageDialog( parent, message, caption, style )
             { }
 
-        wxRichMessageDialog(const wxRichMessageDialog&) = delete;
-        wxRichMessageDialog& operator=(const wxRichMessageDialog&) = delete;
+        wxRichMessageDialog& operator=(wxRichMessageDialog&&) = delete;
 
         wxClassInfo *wxGetClassInfo() const;
         static wxClassInfo ms_classInfo;

@@ -32,13 +32,8 @@ WX_DECLARE_EXPORTED_OBJARRAY(wxImage, wxImageArray);
 class WXDLLIMPEXP_CORE wxANIDecoder : public wxAnimationDecoder
 {
 public:
-   wxANIDecoder() = default;
-   ~wxANIDecoder() = default;
 
-   wxANIDecoder(const wxANIDecoder&) = delete;
-   wxANIDecoder& operator=(const wxANIDecoder&) = delete;
-   wxANIDecoder(wxANIDecoder&&) = default;
-   wxANIDecoder& operator=(wxANIDecoder&&) = default;
+   wxANIDecoder& operator=(wxANIDecoder&&) = delete;
 
     wxSize GetFrameSize(unsigned int frame) const override;
     wxPoint GetFramePosition(unsigned int frame) const override;

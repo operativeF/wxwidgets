@@ -33,10 +33,7 @@ public:
         Create(parent, id, bitmap, pos, size, style, validator, name);
     }
 
-    wxBitmapButton(const wxBitmapButton&) = delete;
-    wxBitmapButton& operator=(const wxBitmapButton&) = delete;
-    wxBitmapButton(wxBitmapButton&&) = default;
-    wxBitmapButton& operator=(wxBitmapButton&&) = default;
+    wxBitmapButton& operator=(wxBitmapButton&&) = delete;
 
     [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,

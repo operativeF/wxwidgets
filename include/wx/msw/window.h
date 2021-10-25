@@ -52,10 +52,7 @@ public:
 
     ~wxWindowMSW();
 
-    wxWindowMSW(const wxWindowMSW&) = delete;
-	wxWindowMSW& operator=(const wxWindowMSW&) = delete;
-    wxWindowMSW(wxWindowMSW&&) = default;
-    wxWindowMSW& operator=(wxWindowMSW&&) = default;
+    wxWindowMSW& operator=(wxWindowMSW&&) = delete;
 
     [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,

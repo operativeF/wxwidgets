@@ -34,10 +34,7 @@ public:
         Create(parent, id, dt, pos, size, style, validator, name);
     }
 
-    wxTimePickerCtrl(const wxTimePickerCtrl&) = delete;
-    wxTimePickerCtrl& operator=(const wxTimePickerCtrl&) = delete;
-    wxTimePickerCtrl(wxTimePickerCtrl&&) = default;
-    wxTimePickerCtrl& operator=(wxTimePickerCtrl&&) = default;
+    wxTimePickerCtrl& operator=(wxTimePickerCtrl&&) = delete;
 
     [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,

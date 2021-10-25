@@ -21,13 +21,9 @@ class wxNonOwnedWindowShapeImpl;
 class WXDLLIMPEXP_CORE wxNonOwnedWindow : public wxNonOwnedWindowBase
 {
 public:
-    wxNonOwnedWindow() = default;
     ~wxNonOwnedWindow();
 
-    wxNonOwnedWindow(const wxNonOwnedWindow&) = delete;
-    wxNonOwnedWindow& operator=(const wxNonOwnedWindow&) = delete;
-    wxNonOwnedWindow(wxNonOwnedWindow&&) = default;
-    wxNonOwnedWindow& operator=(wxNonOwnedWindow&&) = default;
+    wxNonOwnedWindow& operator=(wxNonOwnedWindow&&) = delete;
     
     bool Reparent(wxWindowBase* newParent) override;
     void InheritAttributes() override;

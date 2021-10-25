@@ -55,10 +55,7 @@ public:
     wxCommandProcessor(int maxCommands = -1);
     ~wxCommandProcessor();
 
-    wxCommandProcessor(const wxCommandProcessor&) = delete;
-    wxCommandProcessor& operator=(const wxCommandProcessor&) = delete;
-    wxCommandProcessor(wxCommandProcessor&&) = default;
-    wxCommandProcessor& operator=(wxCommandProcessor&&) = default;
+    wxCommandProcessor& operator=(wxCommandProcessor&&) = delete;
 
     // Pass a command to the processor. The processor calls Do(); if
     // successful, is appended to the command history unless storeIt is false.

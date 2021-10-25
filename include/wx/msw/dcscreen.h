@@ -20,10 +20,7 @@ struct WXDLLIMPEXP_CORE wxScreenDCImpl : public wxMSWDCImpl
     // Create a DC representing the whole virtual screen (all monitors)
     wxScreenDCImpl( wxScreenDC *owner );
 
-    wxScreenDCImpl(const wxScreenDCImpl&) = delete;
-    wxScreenDCImpl& operator=(const wxScreenDCImpl&) = delete;
-    wxScreenDCImpl(wxScreenDCImpl&&) = default;
-    wxScreenDCImpl& operator=(wxScreenDCImpl&&) = default;
+    wxScreenDCImpl& operator=(wxScreenDCImpl&&) = delete;
 
     // Return the size of the whole virtual screen (all monitors)
     wxSize DoGetSize() const override;

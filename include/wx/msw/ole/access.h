@@ -35,8 +35,7 @@ public:
     wxAccessible(wxWindow *win = nullptr);
     ~wxAccessible();
 
-    wxAccessible(const wxAccessible&) = delete;
-	wxAccessible& operator=(const wxAccessible&) = delete;
+	wxAccessible& operator=(wxAccessible&&) = delete;
 
     // Returns the wxIAccessible pointer
     wxIAccessible* GetIAccessible() { return m_pIAccessible; }

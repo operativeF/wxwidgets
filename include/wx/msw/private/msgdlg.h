@@ -35,7 +35,7 @@ namespace wxMSWMessageDialog
         wxMSWTaskDialogConfig()
             : buttons(new TASKDIALOG_BUTTON[MAX_BUTTONS])
               
-            { }
+        {}
 
         // initializes the object from a message dialog.
         wxMSWTaskDialogConfig(const wxMessageDialogBase& dlg);

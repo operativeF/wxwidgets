@@ -28,12 +28,7 @@
 class WXDLLIMPEXP_BASE wxCmdLineArgsArray
 {
 public:
-    wxCmdLineArgsArray() = default;
-
-    wxCmdLineArgsArray(const wxCmdLineArgsArray&) = delete;
-    wxCmdLineArgsArray& operator=(const wxCmdLineArgsArray&) = delete;
-    wxCmdLineArgsArray(wxCmdLineArgsArray&&) = default;
-    wxCmdLineArgsArray& operator=(wxCmdLineArgsArray&&) = default;
+    wxCmdLineArgsArray& operator=(wxCmdLineArgsArray&&) = delete;
 
     template <typename T>
     void Init(int argc, T **argv)

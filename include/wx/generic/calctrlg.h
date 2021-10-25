@@ -57,6 +57,8 @@ public:
                           unsigned int style = wxCAL_SHOW_HOLIDAYS,
                           const std::string& name = wxCalendarNameStr);
 
+	wxGenericCalendarCtrl& operator=(wxGenericCalendarCtrl&&) = delete;
+
     [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,
                 const wxDateTime& date = wxDefaultDateTime,
@@ -332,8 +334,6 @@ private:
 
     wxDECLARE_DYNAMIC_CLASS(wxGenericCalendarCtrl);
     wxDECLARE_EVENT_TABLE();
-    wxGenericCalendarCtrl(const wxGenericCalendarCtrl&) = delete;
-	wxGenericCalendarCtrl& operator=(const wxGenericCalendarCtrl&) = delete;
 };
 
 #endif // _WX_GENERIC_CALCTRLG_H

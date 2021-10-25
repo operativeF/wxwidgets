@@ -59,8 +59,7 @@ protected:
     wxTextBuffer(const wxString& strBufferName);
 
 public:
-    wxTextBuffer(const wxTextBuffer&) = delete;
-    wxTextBuffer& operator=(const wxTextBuffer&) = delete;
+    wxTextBuffer& operator=(wxTextBuffer&&) = delete;
 
     virtual ~wxTextBuffer() = default;
 

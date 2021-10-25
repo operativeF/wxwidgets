@@ -23,10 +23,7 @@ public:
     wxMemoryText() = default;
     wxMemoryText(const wxString& name) : wxTextBuffer(name) { }
 
-    wxMemoryText(const wxMemoryText&) = delete;
-    wxMemoryText& operator=(const wxMemoryText&) = delete;
-    wxMemoryText(wxMemoryText&&) = default;
-    wxMemoryText& operator=(wxMemoryText&&) = default;
+    wxMemoryText& operator=(wxMemoryText&&) = delete;
 
 protected:
     bool OnExists() const override

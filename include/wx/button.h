@@ -26,12 +26,7 @@ constexpr char wxButtonNameStr[] = "button";
 class WXDLLIMPEXP_CORE wxButtonBase : public wxAnyButton
 {
 public:
-    wxButtonBase() = default;
-
-    wxButtonBase(const wxButtonBase&) = delete;
-    wxButtonBase& operator=(const wxButtonBase&) = delete;
-    wxButtonBase(wxButtonBase&&) = default;
-    wxButtonBase& operator=(wxButtonBase&&) = default;
+    wxButtonBase& operator=(wxButtonBase&&) = delete;
     
     // show the authentication needed symbol on the button: this is currently
     // only implemented on Windows Vista and newer (on which it shows the UAC

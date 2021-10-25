@@ -52,10 +52,7 @@ public:
         Create(parent, id, pos, size, style, name);
     }
 
-wxToolbook(const wxToolbook&) = delete;
-   wxToolbook& operator=(const wxToolbook&) = delete;
-   wxToolbook(wxToolbook&&) = default;
-   wxToolbook& operator=(wxToolbook&&) = default;
+    wxToolbook& operator=(wxToolbook&&) = delete;
 
     // quasi ctor
     [[maybe_unused]] bool Create(wxWindow *parent,

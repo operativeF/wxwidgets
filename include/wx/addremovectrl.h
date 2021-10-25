@@ -24,14 +24,9 @@ constexpr char wxAddRemoveCtrlNameStr[] = "wxAddRemoveCtrl";
 
 struct WXDLLIMPEXP_CORE wxAddRemoveAdaptor
 {
-    // Default ctor and trivial but virtual dtor.
-    wxAddRemoveAdaptor() = default;
     virtual ~wxAddRemoveAdaptor() = default;
 
-    wxAddRemoveAdaptor(const wxAddRemoveAdaptor&) = delete;
-    wxAddRemoveAdaptor& operator=(const wxAddRemoveAdaptor&) = delete;
-    wxAddRemoveAdaptor(wxAddRemoveAdaptor&&) = default;
-    wxAddRemoveAdaptor& operator=(wxAddRemoveAdaptor&&) = default;
+    wxAddRemoveAdaptor& operator=(wxAddRemoveAdaptor&&) = delete;
 
     // Override to return the associated control.
     virtual wxWindow* GetItemsCtrl() const = 0;
@@ -71,10 +66,7 @@ public:
         Create(parent, winid, pos, size, style, name);
     }
 
-    wxAddRemoveCtrl(const wxAddRemoveCtrl&) = delete;
-    wxAddRemoveCtrl& operator=(const wxAddRemoveCtrl&) = delete;
-    wxAddRemoveCtrl(wxAddRemoveCtrl&&) = default;
-    wxAddRemoveCtrl& operator=(wxAddRemoveCtrl&&) = default;
+    wxAddRemoveCtrl& operator=(wxAddRemoveCtrl&&) = delete;
 
     [[maybe_unused]] bool Create(wxWindow* parent,
                 wxWindowID winid = wxID_ANY,

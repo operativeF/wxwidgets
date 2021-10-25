@@ -60,9 +60,6 @@ private:
     wxWebRequestWinHTTP& m_request;
     DWORD m_target;
     DWORD m_selectedScheme;
-
-    wxWebAuthChallengeWinHTTP(const wxWebAuthChallengeWinHTTP&) = delete;
-	wxWebAuthChallengeWinHTTP& operator=(const wxWebAuthChallengeWinHTTP&) = delete;
 };
 
 class wxWebRequestWinHTTP : public wxWebRequestImpl
@@ -127,9 +124,6 @@ private:
     }
 
     friend class wxWebAuthChallengeWinHTTP;
-
-    wxWebRequestWinHTTP(const wxWebRequestWinHTTP&) = delete;
-	wxWebRequestWinHTTP& operator=(const wxWebRequestWinHTTP&) = delete;
 };
 
 class wxWebSessionWinHTTP : public wxWebSessionImpl

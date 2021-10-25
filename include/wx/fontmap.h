@@ -214,19 +214,10 @@ constexpr std::vector<std::string_view> GetAllEncodingNames(wxFontEncoding encod
 class WXDLLIMPEXP_BASE wxFontMapperBase
 {
 public:
-    // constructor and such
-    // ---------------------
-
-    // default ctor
-    wxFontMapperBase() = default;
-
     // virtual dtor for any base class
     virtual ~wxFontMapperBase();
 
-    wxFontMapperBase(const wxFontMapperBase&) = delete;
-    wxFontMapperBase& operator=(const wxFontMapperBase&) = delete;
-    wxFontMapperBase(wxFontMapperBase&&) = default;
-    wxFontMapperBase& operator=(wxFontMapperBase&&) = default;
+    wxFontMapperBase& operator=(wxFontMapperBase&&) = delete;
     
     // return instance of the wxFontMapper singleton
     // wxBase code only cares that it's a wxFontMapperBase
@@ -345,16 +336,7 @@ private:
 class WXDLLIMPEXP_CORE wxFontMapper : public wxFontMapperBase
 {
 public:
-    // default ctor
-    wxFontMapper() = default;
-
-    // virtual dtor for a base class
-    ~wxFontMapper() = default;
-
-    wxFontMapper(const wxFontMapper&) = delete;
-    wxFontMapper& operator=(const wxFontMapper&) = delete;
-    wxFontMapper(wxFontMapper&&) = default;
-    wxFontMapper& operator=(wxFontMapper&&) = default;
+    wxFontMapper& operator=(wxFontMapper&&) = delete;
 
     // working with the encodings
     // --------------------------

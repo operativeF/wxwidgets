@@ -33,12 +33,7 @@ public:
                  const wxSize& sz = wxDefaultSize,
                  const std::string& name = wxFileDialogNameStr);
 
-    wxFileDialog(const wxFileDialog&) = delete;
-    wxFileDialog& operator=(const wxFileDialog&) = delete;
-    wxFileDialog(wxFileDialog&&) = default;
-    wxFileDialog& operator=(wxFileDialog&&) = default;
-
-    ~wxFileDialog() = default;
+    wxFileDialog& operator=(wxFileDialog&&) = delete;
 
     std::vector<wxString> GetPaths() const override;
     std::vector<wxString> GetFilenames() const override;

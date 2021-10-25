@@ -30,10 +30,7 @@ public:
         m_pidl = pidl;
     }
 
-    wxItemIdList(const wxItemIdList&) = delete;
-    wxItemIdList& operator=(const wxItemIdList&) = delete;
-    wxItemIdList(wxItemIdList&&) = default;
-    wxItemIdList& operator=(wxItemIdList&&) = default;
+    wxItemIdList& operator=(wxItemIdList&&) = delete;
 
     static void Free(LPITEMIDLIST pidl)
     {

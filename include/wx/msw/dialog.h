@@ -32,10 +32,7 @@ public:
 
     ~wxDialog();
 
-    wxDialog(const wxDialog&) = delete;
-    wxDialog& operator=(const wxDialog&) = delete;
-    wxDialog(wxDialog&&) = default;
-    wxDialog& operator=(wxDialog&&) = default;
+    wxDialog& operator=(wxDialog&&) = delete;
 
     [[maybe_unused]] bool Create(wxWindow *parent, wxWindowID id,
                 const std::string& title,

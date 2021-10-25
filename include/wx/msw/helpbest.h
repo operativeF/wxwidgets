@@ -29,12 +29,7 @@ public:
     {
     }
 
-    ~wxBestHelpController() = default;
-
-    wxBestHelpController(const wxBestHelpController&) = delete;
-    wxBestHelpController& operator=(const wxBestHelpController&) = delete;
-    wxBestHelpController(wxBestHelpController&&) = default;
-    wxBestHelpController& operator=(wxBestHelpController&&) = default;
+    wxBestHelpController& operator=(wxBestHelpController&&) = delete;
 
     // Must call this to set the filename
     bool Initialize(const std::string& file) override;

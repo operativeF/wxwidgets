@@ -98,7 +98,7 @@ using wxDatePickerCtrlBase = wxDatePickerCtrlCommonBase<wxDateTimePickerCtrl>;
     class WXDLLIMPEXP_CORE wxDatePickerCtrl : public wxDatePickerCtrlGeneric
     {
     public:
-        wxDatePickerCtrl() { }
+        wxDatePickerCtrl() = default;
         wxDatePickerCtrl(wxWindow *parent,
                          wxWindowID id,
                          const wxDateTime& date = wxDefaultDateTime,
@@ -111,8 +111,7 @@ using wxDatePickerCtrlBase = wxDatePickerCtrlCommonBase<wxDateTimePickerCtrl>;
         {
         }
 
-        wxDatePickerCtrl(const wxDatePickerCtrl&) = delete;
-        wxDatePickerCtrl& operator=(const wxDatePickerCtrl&) = delete;
+        wxDatePickerCtrl& operator=(wxDatePickerCtrl&&) = delete;
 
         wxClassInfo *wxGetClassInfo() const;
         static wxClassInfo ms_classInfo;

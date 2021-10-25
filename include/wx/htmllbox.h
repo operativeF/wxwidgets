@@ -58,10 +58,9 @@ public:
                   unsigned int style = 0,
                   const std::string& name = wxHtmlListBoxNameStr);
 
-    wxHtmlListBox(const wxHtmlListBox&) = delete;
-    wxHtmlListBox& operator=(const wxHtmlListBox&) = delete;
-    wxHtmlListBox(wxHtmlListBox&&) = default;
-    wxHtmlListBox& operator=(wxHtmlListBox&&) = default;
+    ~wxHtmlListBox();
+
+    wxHtmlListBox& operator=(wxHtmlListBox&&) = delete;
 
     // really creates the control and sets the initial number of items in it
     // (which may be changed later with SetItemCount())
@@ -75,9 +74,6 @@ public:
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = 0,
                 const std::string& name = wxHtmlListBoxNameStr);
-
-    // destructor cleans up whatever resources we use
-    ~wxHtmlListBox();
 
     // override some base class virtuals
     void RefreshRow(size_t line) override;
@@ -237,10 +233,7 @@ public:
 
     ~wxSimpleHtmlListBox();
 
-    wxSimpleHtmlListBox(const wxSimpleHtmlListBox&) = delete;
-    wxSimpleHtmlListBox& operator=(const wxSimpleHtmlListBox&) = delete;
-    wxSimpleHtmlListBox(wxSimpleHtmlListBox&&) = default;
-    wxSimpleHtmlListBox& operator=(wxSimpleHtmlListBox&&) = default;
+    wxSimpleHtmlListBox& operator=(wxSimpleHtmlListBox&&) = delete;
 
     // these must be overloaded otherwise the compiler will complain
     // about  wxItemContainerImmutable::[G|S]etSelection being pure virtuals...

@@ -47,10 +47,7 @@ public:
 
     ~wxTopLevelWindowMSW();
 
-    wxTopLevelWindowMSW(const wxTopLevelWindowMSW&) = delete;
-    wxTopLevelWindowMSW& operator=(const wxTopLevelWindowMSW&) = delete;
-    wxTopLevelWindowMSW(wxTopLevelWindowMSW&&) = default;
-    wxTopLevelWindowMSW& operator=(wxTopLevelWindowMSW&&) = default;
+    wxTopLevelWindowMSW& operator=(wxTopLevelWindowMSW&&) = delete;
     
     void SetTitle( const std::string& title) override;
     std::string GetTitle() const override;

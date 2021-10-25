@@ -39,12 +39,8 @@ public:
     wxGCDC(std::unique_ptr<wxGraphicsContext> context);
 
     wxGCDC();
-    ~wxGCDC() = default;
 
-    wxGCDC(const wxGCDC&) = delete;
-    wxGCDC& operator=(const wxGCDC&) = delete;
-    wxGCDC(wxGCDC&&) = default;
-    wxGCDC& operator=(wxGCDC&&) = default;
+    wxGCDC& operator=(wxGCDC&&) = delete;
 
 #ifdef __WXMSW__
     // override wxDC virtual functions to provide access to HDC associated with
@@ -75,12 +71,7 @@ public:
 
     wxGCDCImpl( wxDC *owner );
 
-    ~wxGCDCImpl() = default;
-
-    wxGCDCImpl(const wxGCDCImpl&) = delete;
-    wxGCDCImpl& operator=(const wxGCDCImpl&) = delete;
-    wxGCDCImpl(wxGCDCImpl&&) = default;
-    wxGCDCImpl& operator=(wxGCDCImpl&&) = default;
+    wxGCDCImpl& operator=(wxGCDCImpl&&) = delete;
     
     void Clear() override;
 

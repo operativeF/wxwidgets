@@ -62,10 +62,7 @@ public:
     // from the event loop monitoring it
     virtual ~wxEventLoopSource() = 0;
 
-    wxEventLoopSource(const wxEventLoopSource&) = delete;
-    wxEventLoopSource& operator=(const wxEventLoopSource&) = delete;
-    wxEventLoopSource(wxEventLoopSource&&) = default;
-    wxEventLoopSource& operator=(wxEventLoopSource&&) = default;
+    wxEventLoopSource& operator=(wxEventLoopSource&&) = delete;
 
     void SetHandler(wxEventLoopSourceHandler* handler) { m_handler = handler; }
     wxEventLoopSourceHandler* GetHandler() const { return m_handler; }

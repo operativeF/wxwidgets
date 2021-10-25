@@ -40,6 +40,8 @@ public:
         Init(wxBusyInfoFlags().Parent(parent).Label(message));
     }
 
+	wxBusyInfo& operator=(wxBusyInfo&&) = delete;
+
     void UpdateText(const std::string& str);
     void UpdateLabel(const std::string& str);
 
@@ -50,9 +52,6 @@ private:
 
     wxFrame *m_InfoFrame;
     wxControl *m_text;
-
-    wxBusyInfo(const wxBusyInfo&) = delete;
-	wxBusyInfo& operator=(const wxBusyInfo&) = delete;
 };
 
 #endif // wxUSE_BUSYINFO

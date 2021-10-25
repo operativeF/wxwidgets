@@ -51,13 +51,9 @@ enum class wxGIFErrorCode
 class WXDLLIMPEXP_CORE wxGIFDecoder : public wxAnimationDecoder
 {
 public:
-    wxGIFDecoder() = default;
     ~wxGIFDecoder();
 
-    wxGIFDecoder(const wxGIFDecoder&) = delete;
-    wxGIFDecoder& operator=(const wxGIFDecoder&) = delete;
-    wxGIFDecoder(wxGIFDecoder&&) = default;
-    wxGIFDecoder& operator=(wxGIFDecoder&&) = default;
+    wxGIFDecoder& operator=(wxGIFDecoder&&) = delete;
 
     // get data of current frame
     unsigned char* GetData(unsigned int frame) const;

@@ -44,12 +44,8 @@ public:
                const std::string& help = {},
                wxItemKind kind = wxITEM_NORMAL,
                wxMenu *subMenu = nullptr);
-    ~wxMenuItem() = default;
 
-    wxMenuItem(const wxMenuItem&) = delete;
-    wxMenuItem& operator=(const wxMenuItem&) = delete;
-    wxMenuItem(wxMenuItem&&) = default;
-    wxMenuItem& operator=(wxMenuItem&&) = default;
+    wxMenuItem& operator=(wxMenuItem&&) = delete;
 
     // override base class virtuals
     void SetItemLabel(const std::string& strName) override;

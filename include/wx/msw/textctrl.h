@@ -35,10 +35,7 @@ public:
 
     ~wxTextCtrl();
 
-    wxTextCtrl(const wxTextCtrl&) = delete;
-    wxTextCtrl& operator=(const wxTextCtrl&) = delete;
-    wxTextCtrl(wxTextCtrl&&) = default;
-    wxTextCtrl& operator=(wxTextCtrl&&) = default;
+    wxTextCtrl& operator=(wxTextCtrl&&) = delete;
 
     [[maybe_unused]] bool Create(wxWindow *parent, wxWindowID id,
                 const std::string& value = {},

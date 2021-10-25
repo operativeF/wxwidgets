@@ -26,13 +26,7 @@ class WXDLLIMPEXP_FWD_BASE wxLog;
 class WXDLLIMPEXP_CORE wxApp : public wxAppBase
 {
 public:
-    wxApp() = default;
-    ~wxApp() = default;
-
-    wxApp(const wxApp&) = delete;
-    wxApp& operator=(const wxApp&) = delete;
-    wxApp(wxApp&&) = default;
-    wxApp& operator=(wxApp&&) = default;
+    wxApp& operator=(wxApp&&) = delete;
 
     bool Initialize(int& argc, wxChar **argv) override;
     void CleanUp() override;

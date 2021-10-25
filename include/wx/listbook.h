@@ -53,10 +53,7 @@ public:
         Create(parent, id, pos, size, style, name);
     }
 
-    wxListbook(const wxListbook&) = delete;
-    wxListbook& operator=(const wxListbook&) = delete;
-    wxListbook(wxListbook&&) = default;
-    wxListbook& operator=(wxListbook&&) = default;
+    wxListbook& operator=(wxListbook&&) = delete;
 
     // quasi ctor
     [[maybe_unused]] bool Create(wxWindow *parent,

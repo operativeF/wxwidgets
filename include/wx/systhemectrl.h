@@ -28,10 +28,7 @@ public:
 #endif // wxHAS_SYSTEM_THEMED_CONTROL
     }
 
-   wxSystemThemedControlBase(const wxSystemThemedControlBase&) = delete;
-   wxSystemThemedControlBase& operator=(const wxSystemThemedControlBase&) = delete;
-   wxSystemThemedControlBase(wxSystemThemedControlBase&&) = default;
-   wxSystemThemedControlBase& operator=(wxSystemThemedControlBase&&) = default;
+    wxSystemThemedControlBase& operator=(wxSystemThemedControlBase&&) = delete;
 
     bool IsSystemThemeDisabled() const
     {
@@ -68,10 +65,7 @@ class wxSystemThemedControl : public C,
                               public wxSystemThemedControlBase
 {
 public:
-    wxSystemThemedControl() = default;
-
-    wxSystemThemedControl(const wxSystemThemedControl<C>&)  = delete;
-	wxSystemThemedControl& operator=(const wxSystemThemedControl<C>&) = delete;
+	wxSystemThemedControl& operator=(wxSystemThemedControl<C>&&) = delete;
 
     void EnableSystemTheme(bool enable = true)
     {

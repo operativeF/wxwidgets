@@ -29,10 +29,7 @@ public:
         m_slot = ::TlsAlloc();
     }
 
-    wxTlsKey(const wxTlsKey&) = delete;
-    wxTlsKey& operator=(const wxTlsKey&) = delete;
-    wxTlsKey(wxTlsKey&&) = default;
-    wxTlsKey& operator=(wxTlsKey&&) = default;
+    wxTlsKey& operator=(wxTlsKey&&) = delete;
 
     // return true if the key was successfully allocated
     bool IsOk() const { return m_slot != TLS_OUT_OF_INDEXES; }

@@ -41,10 +41,7 @@ public:
         Create(parent, id, label, pos, size, style, name);
     }
 
-    wxStaticBox(const wxStaticBox&) = delete;
-    wxStaticBox& operator=(const wxStaticBox&) = delete;
-    wxStaticBox(wxStaticBox&&) = default;
-    wxStaticBox& operator=(wxStaticBox&&) = default;
+    wxStaticBox& operator=(wxStaticBox&&) = delete;
 
     [[maybe_unused]] bool Create(wxWindow *parent, wxWindowID id,
                 const std::string& label,

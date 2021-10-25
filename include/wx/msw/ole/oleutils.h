@@ -241,11 +241,10 @@ public:
             wxOleUninitialize();
     }
 
+	wxOleInitializer& operator=(wxOleInitializer&&) = delete;
+
 private:
     const bool m_ok;
-
-    wxOleInitializer(const wxOleInitializer&) = delete;
-	wxOleInitializer& operator=(const wxOleInitializer&) = delete;
 };
 
 #endif  //_WX_OLEUTILS_H

@@ -490,9 +490,6 @@ public:
         Flush();
     }
 
-    wxGDIPlusImageContext(const wxGDIPlusImageContext&) = delete;
-	wxGDIPlusImageContext& operator=(const wxGDIPlusImageContext&) = delete;
-
     void Flush() override
     {
         m_image = m_bitmap.ConvertToImage();

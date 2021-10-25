@@ -420,12 +420,11 @@ public:
         m_win->SetHWND(m_hWndOrig);
     }
 
+	TempHWNDSetter& operator=(TempHWNDSetter&&) = delete;
+
 private:
     wxWindow* const m_win;
     WXHWND const m_hWndOrig;
-
-    TempHWNDSetter(const TempHWNDSetter&) = delete;
-	TempHWNDSetter& operator=(const TempHWNDSetter&) = delete;
 };
 
 #endif // __WXMSW__
@@ -438,13 +437,12 @@ public:
     ScreenHDC() { m_hdc = ::GetDC(nullptr);    }
    ~ScreenHDC() { ::ReleaseDC(nullptr, m_hdc); }
 
+	ScreenHDC& operator=(ScreenHDC&&) = delete;
+
     operator HDC() const { return m_hdc; }
 
 private:
     HDC m_hdc;
-
-    ScreenHDC(const ScreenHDC&) = delete;
-	ScreenHDC& operator=(const ScreenHDC&) = delete;
 };
 
 // the same as ScreenHDC but for window DCs
@@ -454,15 +452,14 @@ public:
     WindowHDC()  = default;
     WindowHDC(HWND hwnd) { m_hdc = ::GetDC(m_hwnd = hwnd); }
    ~WindowHDC() { if ( m_hwnd && m_hdc ) { ::ReleaseDC(m_hwnd, m_hdc); } }
+	
+    WindowHDC& operator=(WindowHDC&&) = delete;
 
     operator HDC() const { return m_hdc; }
 
 private:
    HWND m_hwnd{nullptr};
    HDC m_hdc{nullptr};
-
-   WindowHDC(const WindowHDC&) = delete;
-	WindowHDC& operator=(const WindowHDC&) = delete;
 };
 
 // the same as ScreenHDC but for memory DCs: creates the HDC compatible with
@@ -473,13 +470,12 @@ public:
     MemoryHDC(HDC hdc = nullptr) { m_hdc = ::CreateCompatibleDC(hdc); }
    ~MemoryHDC() { ::DeleteDC(m_hdc); }
 
+	MemoryHDC& operator=(MemoryHDC&&) = delete;
+
     operator HDC() const { return m_hdc; }
 
 private:
     HDC m_hdc;
-
-    MemoryHDC(const MemoryHDC&) = delete;
-	MemoryHDC& operator=(const MemoryHDC&) = delete;
 };
 
 // a class which selects a GDI object into a DC in its ctor and deselects in
@@ -502,6 +498,8 @@ public:
         DoInit(hgdiobj);
     }
 
+	SelectInHDC& operator=(SelectInHDC&&) = delete;
+
     ~SelectInHDC() { if ( m_hdc ) ::SelectObject(m_hdc, m_hgdiobj); }
 
     // return true if the object was successfully selected
@@ -510,9 +508,6 @@ public:
 private:
     HDC m_hdc{nullptr};
     HGDIOBJ m_hgdiobj{nullptr};
-
-    SelectInHDC(const SelectInHDC&) = delete;
-	SelectInHDC& operator=(const SelectInHDC&) = delete;
 };
 
 // Class automatically freeing ICONINFO struct fields after retrieving it using
@@ -560,11 +555,10 @@ public:
         ::SelectClipRgn(m_hdc, nullptr);
     }
 
+	HDCClipper& operator=(HDCClipper&&) = delete;
+
 private:
     HDC m_hdc;
-
-    HDCClipper(const HDCClipper&) = delete;
-	HDCClipper& operator=(const HDCClipper&) = delete;
 };
 
 // set the given map mode for the life time of this object
@@ -586,13 +580,12 @@ private:
             if ( m_modeOld )
                 ::SetMapMode(m_hdc, m_modeOld);
         }
+    
+    	HDCMapModeChanger& operator=(HDCMapModeChanger&&) = delete;
 
     private:
         HDC m_hdc;
         int m_modeOld;
-
-        HDCMapModeChanger(const HDCMapModeChanger&) = delete;
-	HDCMapModeChanger& operator=(const HDCMapModeChanger&) = delete;
     };
 
     #define wxCHANGE_HDC_MAP_MODE(hdc, mm) \
@@ -605,8 +598,7 @@ public:
     // default ctor, call Init() later
     GlobalPtr() = default;
 
-    GlobalPtr(const GlobalPtr&) = delete;
-	GlobalPtr& operator=(const GlobalPtr&) = delete;
+	GlobalPtr& operator=(GlobalPtr&&) = delete;
 
     // allocates a block of given size
     void Init(size_t size, unsigned flags = GMEM_MOVEABLE)
@@ -648,8 +640,7 @@ public:
     // be NULL (in which case Init() shouldn't be called)
     GlobalPtrLock() = default;
 
-    GlobalPtrLock(const GlobalPtrLock&) = delete;
-	GlobalPtrLock& operator=(const GlobalPtrLock&) = delete;
+	GlobalPtrLock& operator=(GlobalPtrLock&&) = delete;
 
     // initialize the object, may be only called if we were created using the
     // default ctor; HGLOBAL must not be NULL

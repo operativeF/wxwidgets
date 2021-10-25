@@ -22,13 +22,7 @@
 class WXDLLIMPEXP_BASE wxFilterFSHandler : public wxFileSystemHandler
 {
 public:
-    wxFilterFSHandler()  = default;
-    ~wxFilterFSHandler() = default;
-
-    wxFilterFSHandler(const wxFilterFSHandler&) = delete;
-    wxFilterFSHandler& operator=(const wxFilterFSHandler&) = delete;
-    wxFilterFSHandler(wxFilterFSHandler&&) = default;
-    wxFilterFSHandler& operator=(wxFilterFSHandler&&) = default;
+    wxFilterFSHandler& operator=(wxFilterFSHandler&&) = delete;
 
     bool CanOpen(const wxString& location) override;
     wxFSFile* OpenFile(wxFileSystem& fs, const wxString& location) override;

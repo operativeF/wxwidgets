@@ -860,10 +860,6 @@ public:
     inline ~MemoryCriticalSectionLocker() { if(m_locked) m_critsect.Leave(); }
 
 private:
-    // no assignment operator nor copy ctor
-    MemoryCriticalSectionLocker(const MemoryCriticalSectionLocker&);
-    MemoryCriticalSectionLocker& operator=(const MemoryCriticalSectionLocker&);
-
     wxCriticalSection& m_critsect;
     bool m_locked;
 };

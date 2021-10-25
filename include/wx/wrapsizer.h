@@ -34,10 +34,7 @@ public:
     wxWrapSizer(unsigned int orient = wxHORIZONTAL, unsigned int flags = wxWRAPSIZER_DEFAULT_FLAGS);
     ~wxWrapSizer();
 
-    wxWrapSizer(const wxWrapSizer&) = delete;
-    wxWrapSizer& operator=(const wxWrapSizer&) = delete;
-    wxWrapSizer(wxWrapSizer&&) = default;
-    wxWrapSizer& operator=(wxWrapSizer&&) = default;
+    wxWrapSizer& operator=(wxWrapSizer&&) = delete;
 
     wxSize CalcMin() override;
     void RepositionChildren(wxSize minSize) override;

@@ -218,15 +218,12 @@ public:
     // creating the window
     // -------------------
 
-        // default ctor, initializes everything which can be initialized before
-        // Create()
+    // default ctor, initializes everything which can be initialized before
+    // Create()
     wxWindowBase();
     ~wxWindowBase();
 
-    wxWindowBase(const wxWindowBase&) = delete;
-    wxWindowBase& operator=(const wxWindowBase&) = delete;
-    wxWindowBase(wxWindowBase&&) = default;
-    wxWindowBase& operator=(wxWindowBase&&) = default;
+    wxWindowBase& operator=(wxWindowBase&&) = delete;
 
     // deleting the window
     // -------------------
@@ -599,8 +596,7 @@ public:
                 m_win->EndRepositioningChildren();
         }
 
-        ChildrenRepositioningGuard(const ChildrenRepositioningGuard&) = delete;
-	    ChildrenRepositioningGuard& operator=(const ChildrenRepositioningGuard&) = delete;
+	    ChildrenRepositioningGuard& operator=(ChildrenRepositioningGuard&&) = delete;
 
     private:
         wxWindowBase* const m_win;

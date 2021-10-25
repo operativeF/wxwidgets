@@ -31,12 +31,7 @@ constexpr char wxToggleButtonNameStr[] = "toggle";
 class WXDLLIMPEXP_CORE wxToggleButtonBase : public wxAnyButton
 {
 public:
-    wxToggleButtonBase() = default;
-
-   wxToggleButtonBase(const wxToggleButtonBase&) = delete;
-   wxToggleButtonBase& operator=(const wxToggleButtonBase&) = delete;
-   wxToggleButtonBase(wxToggleButtonBase&&) = default;
-   wxToggleButtonBase& operator=(wxToggleButtonBase&&) = default;
+   wxToggleButtonBase& operator=(wxToggleButtonBase&&) = delete;
 
     // Get/set the value
     virtual void SetValue(bool state) = 0;

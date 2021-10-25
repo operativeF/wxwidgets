@@ -170,13 +170,9 @@ public:
         SetEventObject(generator);
     }
 
-    wxColourPickerEvent& operator=(const wxColourPickerEvent&) = delete;
-
     wxColour GetColour() const { return m_colour; }
     void SetColour(const wxColour &c) { m_colour = c; }
 
-
-    // default copy ctor, assignment operator and dtor are ok
     wxEvent *Clone() const override { return new wxColourPickerEvent(*this); }
 
 private:

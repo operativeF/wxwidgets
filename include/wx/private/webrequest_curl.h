@@ -36,9 +36,6 @@ public:
 
 private:
     wxWebRequestCURL& m_request;
-
-    wxWebAuthChallengeCURL(const wxWebAuthChallengeCURL&) = delete;
-	wxWebAuthChallengeCURL& operator=(const wxWebAuthChallengeCURL&) = delete;
 };
 
 class wxWebRequestCURL : public wxWebRequestImpl
@@ -93,9 +90,6 @@ private:
     wxFileOffset m_bytesSent;
 
     void DestroyHeaderList();
-
-    wxWebRequestCURL(const wxWebRequestCURL&) = delete;
-	wxWebRequestCURL& operator=(const wxWebRequestCURL&) = delete;
 };
 
 class wxWebResponseCURL : public wxWebResponseImpl

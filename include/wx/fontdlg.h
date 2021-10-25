@@ -33,10 +33,7 @@ public:
     wxFontDialogBase(wxWindow *parent, const wxFontData& data)
         { m_parent = parent; InitFontData(&data); }
 
-    wxFontDialogBase(const wxFontDialogBase&) = delete;
-    wxFontDialogBase& operator=(const wxFontDialogBase&) = delete;
-    wxFontDialogBase(wxFontDialogBase&&) = default;
-    wxFontDialogBase& operator=(wxFontDialogBase&&) = default;
+    wxFontDialogBase& operator=(wxFontDialogBase&&) = delete;
     
     [[maybe_unused]] bool Create(wxWindow *parent)
         { return DoCreate(parent); }

@@ -22,10 +22,7 @@ public:
     wxMemoryDCImpl( wxMemoryDC *owner, wxBitmap& bitmap );
     wxMemoryDCImpl( wxMemoryDC *owner, wxDC *dc ); // Create compatible DC
 
-    wxMemoryDCImpl(const wxMemoryDCImpl&) = delete;
-    wxMemoryDCImpl& operator=(const wxMemoryDCImpl&) = delete;
-    wxMemoryDCImpl(wxMemoryDCImpl&&) = default;
-    wxMemoryDCImpl& operator=(wxMemoryDCImpl&&) = default;
+    wxMemoryDCImpl& operator=(wxMemoryDCImpl&&) = delete;
 
     // override some base class virtuals
     void DoDrawRectangle(wxCoord x, wxCoord y, wxCoord width, wxCoord height) override;

@@ -35,13 +35,7 @@ public:
               const wxString& globalFilename = {},
               unsigned int style = wxCONFIG_USE_GLOBAL_FILE);
 
-    // dtor will save unsaved data
-  ~wxRegConfig() = default;
-
-  wxRegConfig(const wxRegConfig&) = delete;
-	wxRegConfig& operator=(const wxRegConfig&) = delete;
-  wxRegConfig(wxRegConfig&&) = default;
-	wxRegConfig& operator=(wxRegConfig&&) = default;
+	wxRegConfig& operator=(wxRegConfig&&) = delete;
 
   // implement inherited pure virtual functions
   // ------------------------------------------

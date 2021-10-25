@@ -32,11 +32,7 @@ struct WXDLLIMPEXP_CORE wxPanel : public wxPanelBase
         Create(parent, winid, pos, size, style, name);
     }
 
-    wxPanel(const wxPanel&) = delete;
-    wxPanel& operator=(const wxPanel&) = delete;
-    wxPanel(wxPanel&&) = default;
-    wxPanel& operator=(wxPanel&&) = default;
-    ~wxPanel() = default;
+    wxPanel& operator=(wxPanel&&) = delete;
 
 	wxClassInfo *wxGetClassInfo() const override;
 	static wxClassInfo ms_classInfo;

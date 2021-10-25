@@ -34,13 +34,7 @@ constexpr unsigned int wxPU_CONTAINS_CONTROLS = 0x0001;
 class WXDLLIMPEXP_CORE wxPopupWindowBase : public wxNonOwnedWindow
 {
 public:
-    wxPopupWindowBase() = default;
-    ~wxPopupWindowBase() = default;
-
-    wxPopupWindowBase(const wxPopupWindowBase&) = delete;
-    wxPopupWindowBase& operator=(const wxPopupWindowBase&) = delete;
-    wxPopupWindowBase(wxPopupWindowBase&&) = default;
-    wxPopupWindowBase& operator=(wxPopupWindowBase&&) = default;
+    wxPopupWindowBase& operator=(wxPopupWindowBase&&) = delete;
 
     // create the popup window
     //
@@ -136,10 +130,7 @@ public:
     wxPopupTransientWindow(wxWindow *parent, int style = wxBORDER_NONE)
         { Create(parent, style); }
 
-    wxPopupTransientWindow(const wxPopupTransientWindow&) = delete;
-    wxPopupTransientWindow& operator=(const wxPopupTransientWindow&) = delete;
-    wxPopupTransientWindow(wxPopupTransientWindow&&) = default;
-    wxPopupTransientWindow& operator=(wxPopupTransientWindow&&) = default;
+    wxPopupTransientWindow& operator=(wxPopupTransientWindow&&) = delete;
 
     void Popup(wxWindow *focus = nullptr) override;
     void Dismiss() override;
@@ -172,10 +163,7 @@ public:
 
     ~wxPopupTransientWindow();
 
-    wxPopupTransientWindow(const wxPopupTransientWindow&) = delete;
-    wxPopupTransientWindow& operator=(const wxPopupTransientWindow&) = delete;
-    wxPopupTransientWindow(wxPopupTransientWindow&&) = default;
-    wxPopupTransientWindow& operator=(wxPopupTransientWindow&&) = default;
+    wxPopupTransientWindow& operator=(wxPopupTransientWindow&&) = delete;
 
     void Popup(wxWindow *focus = NULL) override;
     void Dismiss() override;

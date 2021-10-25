@@ -33,10 +33,7 @@ public:
     wxPrinterDCImpl( wxPrinterDC *owner, const wxPrintData& data );
     wxPrinterDCImpl( wxPrinterDC *owner, WXHDC theDC );
 
-    wxPrinterDCImpl(const wxPrinterDCImpl&) = delete;
-    wxPrinterDCImpl& operator=(const wxPrinterDCImpl&) = delete;
-    wxPrinterDCImpl(wxPrinterDCImpl&&) = default;
-    wxPrinterDCImpl& operator=(wxPrinterDCImpl&&) = default;
+    wxPrinterDCImpl& operator=(wxPrinterDCImpl&&) = delete;
 
     // override some base class virtuals
     bool wxStartDoc(const std::string& message) override;

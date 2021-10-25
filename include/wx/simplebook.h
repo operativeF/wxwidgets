@@ -47,10 +47,7 @@ public:
         SetInternalBorder(0);
     }
 
-    wxSimplebook(const wxSimplebook&) = delete;
-    wxSimplebook& operator=(const wxSimplebook&) = delete;
-    wxSimplebook(wxSimplebook&&) = default;
-    wxSimplebook& operator=(wxSimplebook&&) = default;
+    wxSimplebook& operator=(wxSimplebook&&) = delete;
 
     [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID winid = wxID_ANY,

@@ -18,7 +18,6 @@ class WXDLLIMPEXP_CORE wxScrollBar: public wxScrollBarBase
 {
 public:
     wxScrollBar() = default;
-    ~wxScrollBar() = default;
 
     wxScrollBar(wxWindow *parent, wxWindowID id,
             const wxPoint& pos = wxDefaultPosition,
@@ -30,10 +29,7 @@ public:
         Create(parent, id, pos, size, style, validator, name);
     }
 
-    wxScrollBar(const wxScrollBar&) = delete;
-    wxScrollBar& operator=(const wxScrollBar&) = delete;
-    wxScrollBar(wxScrollBar&&) = default;
-    wxScrollBar& operator=(wxScrollBar&&) = default;
+    wxScrollBar& operator=(wxScrollBar&&) = delete;
 
     [[maybe_unused]] bool Create(wxWindow *parent, wxWindowID id,
             const wxPoint& pos = wxDefaultPosition,

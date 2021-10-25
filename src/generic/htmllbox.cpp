@@ -145,11 +145,8 @@ class wxHtmlListBoxStyle : public wxDefaultHtmlRenderingStyle
 public:
     explicit wxHtmlListBoxStyle(const wxHtmlListBox& hlbox)
         : wxDefaultHtmlRenderingStyle(&hlbox), m_hlbox(hlbox)
-    { }
-
-    wxHtmlListBoxStyle(const wxHtmlListBoxStyle&) = delete;
-	wxHtmlListBoxStyle& operator=(const wxHtmlListBoxStyle&) = delete;
-
+    {}
+    
     wxColour GetSelectedTextColour(const wxColour& colFg) override
     {
         // by default wxHtmlListBox doesn't implement GetSelectedTextColour()

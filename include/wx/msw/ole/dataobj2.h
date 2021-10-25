@@ -32,7 +32,8 @@ public:
             m_data = nullptr;
         }
 
-    
+    wxBitmapDataObject& operator=(wxBitmapDataObject&&) = delete;
+
     size_t GetDataSize() const override;
     bool GetDataHere(void *buf) const override;
     bool SetData(size_t len, const void *buf) override;
@@ -49,9 +50,6 @@ public:
 private:
     // the DIB data
     void /* BITMAPINFO */ *m_data;
-
-    wxBitmapDataObject(const wxBitmapDataObject&) = delete;
-	wxBitmapDataObject& operator=(const wxBitmapDataObject&) = delete;
 };
 
 // ----------------------------------------------------------------------------

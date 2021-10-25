@@ -55,6 +55,8 @@ public:
 
     ~wxDropSource();
 
+	wxDropSource& operator=(wxDropSource&&) = delete;
+
     // do it (call this in response to a mouse button press, for example)
     // params: if bAllowMove is false, data can be only copied
     wxDragResult DoDragDrop(unsigned int flags = wxDrag_CopyOnly) override;
@@ -69,9 +71,6 @@ protected:
 
 private:
     wxIDropSource *m_pIDropSource;  // the pointer to COM interface
-
-    wxDropSource(const wxDropSource&) = delete;
-	wxDropSource& operator=(const wxDropSource&) = delete;
 };
 
 #endif  //wxUSE_DRAG_AND_DROP

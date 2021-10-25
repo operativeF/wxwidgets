@@ -52,10 +52,9 @@ public:
                    style,
                    validator,
                    name)
-        { }
+    {}
 
-    wxCommandLinkButtonBase(const wxCommandLinkButtonBase&) = delete;
-	wxCommandLinkButtonBase& operator=(const wxCommandLinkButtonBase&) = delete;
+	wxCommandLinkButtonBase& operator=(wxCommandLinkButtonBase&&) = delete;
 
     virtual void SetMainLabelAndNote(const std::string& mainLabel,
                                      const std::string& note) = 0;
@@ -111,8 +110,7 @@ public:
         Create(parent, id, mainLabel, note, pos, size, style, validator, name);
     }
 
-    wxGenericCommandLinkButton(const wxGenericCommandLinkButton&) = delete;
-	wxGenericCommandLinkButton& operator=(const wxGenericCommandLinkButton&) = delete;
+	wxGenericCommandLinkButton& operator=(wxGenericCommandLinkButton&&) = delete;
 
     [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,
@@ -162,8 +160,7 @@ private:
                                          name)
             { }
 
-        wxCommandLinkButton(const wxCommandLinkButton&) = delete;
-        wxCommandLinkButton& operator=(const wxCommandLinkButton&) = delete;
+        wxCommandLinkButton& operator=(wxCommandLinkButton&&) = delete;
 
         wxClassInfo *wxGetClassInfo() const;
         static wxClassInfo ms_classInfo;

@@ -33,7 +33,7 @@ using wxDocMDIParentFrameBase = wxDocParentFrameAny<wxMDIParentFrame>;
 class WXDLLIMPEXP_CORE wxDocMDIParentFrame : public wxDocMDIParentFrameBase
 {
 public:
-    wxDocMDIParentFrame()  = default;
+    wxDocMDIParentFrame() = default;
 
     wxDocMDIParentFrame(wxDocManager *manager,
                         wxFrame *parent,
@@ -48,10 +48,7 @@ public:
     {
     }
 
-    wxDocMDIParentFrame(const wxDocMDIParentFrame&) = delete;
-    wxDocMDIParentFrame& operator=(const wxDocMDIParentFrame&) = delete;
-    wxDocMDIParentFrame(wxDocMDIParentFrame&&) = default;
-    wxDocMDIParentFrame& operator=(wxDocMDIParentFrame&&) = default;
+    wxDocMDIParentFrame& operator=(wxDocMDIParentFrame&&) = delete;
 
 private:
     wxDECLARE_CLASS(wxDocMDIParentFrame);
@@ -82,10 +79,7 @@ public:
     {
     }
 
-    wxDocMDIChildFrame(const wxDocMDIChildFrame&) = delete;
-    wxDocMDIChildFrame& operator=(const wxDocMDIChildFrame&) = delete;
-    wxDocMDIChildFrame(wxDocMDIChildFrame&&) = default;
-    wxDocMDIChildFrame& operator=(wxDocMDIChildFrame&&) = default;
+    wxDocMDIChildFrame& operator=(wxDocMDIChildFrame&&) = delete;
 
 private:
     wxDECLARE_CLASS(wxDocMDIChildFrame);

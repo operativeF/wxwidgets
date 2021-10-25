@@ -30,12 +30,7 @@ public:
     // explicitly shown when it is needed (this is done because it is supposed
     // to be shown only intermittently and hiding it after creating it from the
     // user code would result in flicker)
-    wxInfoBarBase() = default;
-
-    wxInfoBarBase(const wxInfoBarBase&) = delete;
-    wxInfoBarBase& operator=(const wxInfoBarBase&) = delete;
-    wxInfoBarBase(wxInfoBarBase&&) = default;
-    wxInfoBarBase& operator=(wxInfoBarBase&&) = default;
+    wxInfoBarBase& operator=(wxInfoBarBase&&) = delete;
 
     // show the info bar with the given message and optionally an icon
     virtual void ShowMessage(const std::string& msg,

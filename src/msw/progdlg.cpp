@@ -169,9 +169,6 @@ public:
     {
     }
 
-    wxProgressDialogModalLoop(const wxProgressDialogModalLoop&) = delete;
-	wxProgressDialogModalLoop& operator=(const wxProgressDialogModalLoop&) = delete;
-
 protected:
     void OnNextIteration() override
     {

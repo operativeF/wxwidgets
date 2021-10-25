@@ -33,10 +33,7 @@ public:
         Create(parent, id, label, pos, size, style, validator, name);
     }
 
-    wxCheckBox(const wxCheckBox&) = delete;
-    wxCheckBox& operator=(const wxCheckBox&) = delete;
-    wxCheckBox(wxCheckBox&&) = default;
-    wxCheckBox& operator=(wxCheckBox&&) = default;
+    wxCheckBox& operator=(wxCheckBox&&) = delete;
 
     [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,

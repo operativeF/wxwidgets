@@ -126,9 +126,6 @@ public:
         m_var = false;
     }
 
-    TempSetter(const TempSetter&) = delete;
-	TempSetter& operator=(const TempSetter&) = delete;
-
 private:
     bool& m_var;
 };
@@ -560,9 +557,6 @@ public:
             if (tree->GetCount() > 0)
                 DoTraverse(tree->GetRootItem());
         }
-
-    TraverseSelections(const TraverseSelections&) = delete;
-	TraverseSelections& operator=(const TraverseSelections&) = delete;
 
     bool OnVisit(const wxTreeItemId& item) override
     {

@@ -47,10 +47,7 @@ public:
         Create(parent, id, value, pos, size, style, min, max, initial, name);
     }
 
-    wxSpinCtrl(const wxSpinCtrl&) = delete;
-    wxSpinCtrl& operator=(const wxSpinCtrl&) = delete;
-    wxSpinCtrl(wxSpinCtrl&&) = default;
-    wxSpinCtrl& operator=(wxSpinCtrl&&) = default;
+    wxSpinCtrl& operator=(wxSpinCtrl&&) = delete;
 
     ~wxSpinCtrl();
 

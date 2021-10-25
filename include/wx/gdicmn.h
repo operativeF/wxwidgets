@@ -371,12 +371,9 @@ public:
         ITEMCOUNT
     };
 
-    wxStockGDI() = default;
     virtual ~wxStockGDI() = default;
-    wxStockGDI(const wxStockGDI&) = delete;
-    wxStockGDI& operator=(const wxStockGDI&) = delete;
-    wxStockGDI(wxStockGDI&&) = default;
-    wxStockGDI& operator=(wxStockGDI&&) = default;
+
+    wxStockGDI& operator=(wxStockGDI&&) = delete;
 
     static void DeleteAll();
 

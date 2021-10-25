@@ -15,13 +15,9 @@
 class WXDLLIMPEXP_CORE wxAppProgressIndicatorBase
 {
 public:
-    wxAppProgressIndicatorBase() = default;
     virtual ~wxAppProgressIndicatorBase() = default;
 
-    wxAppProgressIndicatorBase(const wxAppProgressIndicatorBase&) = delete;
-    wxAppProgressIndicatorBase& operator=(const wxAppProgressIndicatorBase&) = delete;
-    wxAppProgressIndicatorBase(wxAppProgressIndicatorBase&&) = default;
-    wxAppProgressIndicatorBase& operator=(wxAppProgressIndicatorBase&&) = default;
+    wxAppProgressIndicatorBase& operator=(wxAppProgressIndicatorBase&&) = delete;
     
     virtual bool IsAvailable() const = 0;
 

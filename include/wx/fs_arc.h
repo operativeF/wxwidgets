@@ -25,12 +25,7 @@ WX_DECLARE_STRING_HASH_MAP(int, wxArchiveFilenameHashMap);
 class WXDLLIMPEXP_BASE wxArchiveFSHandler : public wxFileSystemHandler
 {
 public:
-    wxArchiveFSHandler() = default;
-
-    wxArchiveFSHandler(const wxArchiveFSHandler&) = delete;
-    wxArchiveFSHandler& operator=(const wxArchiveFSHandler&) = delete;
-    wxArchiveFSHandler(wxArchiveFSHandler&&) = default;
-    wxArchiveFSHandler& operator=(wxArchiveFSHandler&&) = default;
+    wxArchiveFSHandler& operator=(wxArchiveFSHandler&&) = delete;
 
     bool CanOpen(const wxString& location) override;
     wxFSFile* OpenFile(wxFileSystem& fs, const wxString& location) override;

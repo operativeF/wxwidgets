@@ -125,10 +125,7 @@ public:
     wxTopLevelWindowBase();
     ~wxTopLevelWindowBase();
 
-   wxTopLevelWindowBase(const wxTopLevelWindowBase&) = delete;
-   wxTopLevelWindowBase& operator=(const wxTopLevelWindowBase&) = delete;
-   wxTopLevelWindowBase(wxTopLevelWindowBase&&) = default;
-   wxTopLevelWindowBase& operator=(wxTopLevelWindowBase&&) = default;
+    wxTopLevelWindowBase& operator=(wxTopLevelWindowBase&&) = delete;
 
     // top level wnd state
     // --------------------
@@ -394,8 +391,7 @@ protected:
         {
         }
 
-        wxTopLevelWindow(const wxTopLevelWindow&) = delete;
-        wxTopLevelWindow& operator=(const wxTopLevelWindow&) = delete;
+        wxTopLevelWindow& operator=(wxTopLevelWindow&&) = delete;
 
     	wxClassInfo *wxGetClassInfo() const override;
 	    static wxClassInfo ms_classInfo;

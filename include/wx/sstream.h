@@ -25,11 +25,8 @@ public:
     // ctor associates the stream with the given string which makes a copy of
     // it
     wxStringInputStream(const wxString& s);
-    ~wxStringInputStream() = default;
-    wxStringInputStream(const wxStringInputStream&) = delete;
-    wxStringInputStream& operator=(const wxStringInputStream&) = delete;
-    wxStringInputStream(wxStringInputStream&&) = default;
-    wxStringInputStream& operator=(wxStringInputStream&&) = default;
+
+    wxStringInputStream& operator=(wxStringInputStream&&) = delete;
 
     wxFileOffset GetLength() const override;
     bool IsSeekable() const override { return true; }
@@ -67,11 +64,6 @@ public:
     // this stream.
     explicit wxStringOutputStream(wxString *pString = nullptr,
                                   wxMBConv& conv = wxConvUTF8);
-
-    wxStringOutputStream(const wxStringOutputStream&) = delete;
-    wxStringOutputStream& operator=(const wxStringOutputStream&) = delete;
-    wxStringOutputStream(wxStringOutputStream&&) = default;
-    wxStringOutputStream& operator=(wxStringOutputStream&&) = default;
 
     // get the string containing current output
     const wxString& GetString() const { return *m_str; }

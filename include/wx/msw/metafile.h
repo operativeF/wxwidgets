@@ -80,10 +80,7 @@ public:
                      int xext, int yext, int xorg, int yorg);
     ~wxMetafileDCImpl();
 
-    wxMetafileDCImpl(const wxMetafileDCImpl&) = delete;
-	wxMetafileDCImpl& operator=(const wxMetafileDCImpl&) = delete;
-    wxMetafileDCImpl(wxMetafileDCImpl&&) = default;
-	wxMetafileDCImpl& operator=(wxMetafileDCImpl&&) = default;
+	wxMetafileDCImpl& operator=(wxMetafileDCImpl&&) = delete;
 
     virtual wxMetafile *Close();
     void SetMapMode(wxMappingMode mode) override;
@@ -124,10 +121,7 @@ public:
         : wxDC(std::make_unique<wxMetafileDCImpl>( this, file, xext, yext, xorg, yorg ))
         { }
 
-   wxMetafileDC(const wxMetafileDC&) = delete;
-   wxMetafileDC& operator=(const wxMetafileDC&) = delete;
-   wxMetafileDC(wxMetafileDC&&) = default;
-   wxMetafileDC& operator=(wxMetafileDC&&) = default;
+   wxMetafileDC& operator=(wxMetafileDC&&) = delete;
 
     wxMetafile *GetMetafile() const
        { return ((wxMetafileDCImpl*)m_pimpl.get())->GetMetaFile(); }

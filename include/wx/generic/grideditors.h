@@ -59,9 +59,6 @@ class WXDLLIMPEXP_CORE wxGridCellTextEditor : public wxGridCellEditor
 public:
     explicit wxGridCellTextEditor(size_t maxChars = 0);
 
-    wxGridCellTextEditor(const wxGridCellTextEditor&) = delete;
-    wxGridCellTextEditor& operator=(const wxGridCellTextEditor&) = delete;
-
     void Create(wxWindow* parent,
                         wxWindowID id,
                         wxEvtHandler* evtHandler) override;

@@ -36,13 +36,7 @@ constexpr char wxControlNameStr[] = "control";
 class WXDLLIMPEXP_CORE wxControlBase : public wxWindow
 {
 public:
-    wxControlBase() = default;
-    ~wxControlBase() = default;
-
-    wxControlBase(const wxControlBase&) = delete;
-    wxControlBase& operator=(const wxControlBase&) = delete;
-    wxControlBase(wxControlBase&&) = default;
-    wxControlBase& operator=(wxControlBase&&) = default;
+    wxControlBase& operator=(wxControlBase&&) = delete;
 
     // Create() function adds the validator parameter
     [[maybe_unused]] bool Create(wxWindow *parent, wxWindowID id,

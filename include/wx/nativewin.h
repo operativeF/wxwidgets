@@ -69,12 +69,7 @@ class WXDLLIMPEXP_CORE wxNativeWindow : public wxWindow
 {
 public:
     // Default ctor, Create() must be called later to really create the window.
-    wxNativeWindow() = default;
-
-    wxNativeWindow(const wxNativeWindow&) = delete;
-    wxNativeWindow& operator=(const wxNativeWindow&) = delete;
-    wxNativeWindow(wxNativeWindow&&) = default;
-    wxNativeWindow& operator=(wxNativeWindow&&) = default;
+    wxNativeWindow& operator=(wxNativeWindow&&) = delete;
 
     // Create a window from an existing native window handle.
     //
@@ -161,10 +156,7 @@ public:
     // as it normally doesn't belong to us
     ~wxNativeContainerWindow();
 
-   wxNativeContainerWindow(const wxNativeContainerWindow&) = delete;
-   wxNativeContainerWindow& operator=(const wxNativeContainerWindow&) = delete;
-   wxNativeContainerWindow(wxNativeContainerWindow&&) = default;
-   wxNativeContainerWindow& operator=(wxNativeContainerWindow&&) = default;
+    wxNativeContainerWindow& operator=(wxNativeContainerWindow&&) = delete;
 
     // provide (trivial) implementation of the base class pure virtuals
     void SetTitle(const std::string& WXUNUSED(title)) override

@@ -119,10 +119,7 @@ public:
     wxScrollHelperBase(wxWindow *winToScroll);
     ~wxScrollHelperBase();
 
-   wxScrollHelperBase(const wxScrollHelperBase&) = delete;
-   wxScrollHelperBase& operator=(const wxScrollHelperBase&) = delete;
-   wxScrollHelperBase(wxScrollHelperBase&&) = default;
-   wxScrollHelperBase& operator=(wxScrollHelperBase&&) = default;
+   wxScrollHelperBase& operator=(wxScrollHelperBase&&) = delete;
 
     // configure the scrolling
     virtual void SetScrollbars(int pixelsPerUnitX, int pixelsPerUnitY,
@@ -441,10 +438,7 @@ public:
         Create(parent, winid, pos, size, style, name);
     }
 
-    wxScrolled(const wxScrolled&) = delete;
-    wxScrolled& operator=(const wxScrolled&) = delete;
-    wxScrolled(wxScrolled&&) = default;
-    wxScrolled& operator=(wxScrolled&&) = default;
+    wxScrolled& operator=(wxScrolled&&) = delete;
 
     [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID winid,
@@ -509,10 +503,7 @@ public:
         : wxScrolled<wxPanel>(parent, winid, pos, size, style, name)
     {}
 
-    wxScrolledWindow(const wxScrolledWindow&) = delete;
-    wxScrolledWindow& operator=(const wxScrolledWindow&) = delete;
-    wxScrolledWindow(wxScrolledWindow&&) = default;
-    wxScrolledWindow& operator=(wxScrolledWindow&&) = default;
+    wxScrolledWindow& operator=(wxScrolledWindow&&) = delete;
 
 	wxClassInfo *wxGetClassInfo() const override;
 	static wxClassInfo ms_classInfo;

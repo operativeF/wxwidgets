@@ -89,12 +89,7 @@ public:
         SetMessageDialogStyle(style);
     }
 
-    ~wxMessageDialogBase() = default;
-
-    wxMessageDialogBase(const wxMessageDialogBase&) = delete;
-    wxMessageDialogBase& operator=(const wxMessageDialogBase&) = delete;
-    wxMessageDialogBase(wxMessageDialogBase&&) = default;
-    wxMessageDialogBase& operator=(wxMessageDialogBase&&) = default;
+    wxMessageDialogBase& operator=(wxMessageDialogBase&&) = delete;
 
     std::string GetCaption() const { return m_caption; }
 

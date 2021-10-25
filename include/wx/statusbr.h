@@ -115,12 +115,9 @@ WX_DECLARE_EXPORTED_OBJARRAY(wxStatusBarPane, wxStatusBarPaneArray);
 class WXDLLIMPEXP_CORE wxStatusBarBase : public wxControl
 {
 public:
-    wxStatusBarBase() = default;
     ~wxStatusBarBase();
-    wxStatusBarBase(const wxStatusBarBase&) = delete;
-    wxStatusBarBase& operator=(const wxStatusBarBase&) = delete;
-    wxStatusBarBase(wxStatusBarBase&&) = default;
-    wxStatusBarBase& operator=(wxStatusBarBase&&) = default;
+
+    wxStatusBarBase& operator=(wxStatusBarBase&&) = delete;
 
     // field count
     // -----------

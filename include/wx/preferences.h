@@ -43,13 +43,8 @@ class wxPreferencesEditorImpl;
 class WXDLLIMPEXP_CORE wxPreferencesPage
 {
 public:
-    wxPreferencesPage() = default;
     virtual ~wxPreferencesPage() = default;
-
-    wxPreferencesPage(const wxPreferencesPage&) = delete;
-    wxPreferencesPage& operator=(const wxPreferencesPage&) = delete;
-    wxPreferencesPage(wxPreferencesPage&&) = default;
-    wxPreferencesPage& operator=(wxPreferencesPage&&) = default;
+    wxPreferencesPage& operator=(wxPreferencesPage&&) = delete;
 
     // Name of the page, used e.g. for tabs
     virtual wxString GetName() const = 0;
@@ -99,10 +94,7 @@ public:
     // Ctor creates an empty editor, use AddPage() to add controls to it.
     wxPreferencesEditor(const wxString& title = {});
 
-    wxPreferencesEditor(const wxPreferencesEditor&) = delete;
-    wxPreferencesEditor& operator=(const wxPreferencesEditor&) = delete;
-    wxPreferencesEditor(wxPreferencesEditor&&) = default;
-    wxPreferencesEditor& operator=(wxPreferencesEditor&&) = default;
+    wxPreferencesEditor& operator=(wxPreferencesEditor&&) = delete;
     
     // Dtor destroys the dialog if still shown.
     virtual ~wxPreferencesEditor();

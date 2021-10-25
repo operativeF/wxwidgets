@@ -87,9 +87,6 @@ private:
     // The values that we compute.
     wxSize m_size;
     int * const m_visibleHeight;    // may be NULL
-
-    wxMarkupParserMeasureOutput(const wxMarkupParserMeasureOutput&) = delete;
-	wxMarkupParserMeasureOutput& operator=(const wxMarkupParserMeasureOutput&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -180,9 +177,6 @@ protected:
     //
     // TODO-MULTILINE-MARKUP: Must keep vertical position too.
     int m_pos;
-
-    wxMarkupParserRenderOutput(const wxMarkupParserRenderOutput&) = delete;
-	wxMarkupParserRenderOutput& operator=(const wxMarkupParserRenderOutput&) = delete;
 };
 
 // An output renderer suitable for control labels.

@@ -585,10 +585,7 @@ public:
         Create(parent, id, pos, size, style, name);
     }
 
-   wxVScrolledWindow(const wxVScrolledWindow&) = delete;
-   wxVScrolledWindow& operator=(const wxVScrolledWindow&) = delete;
-   wxVScrolledWindow(wxVScrolledWindow&&) = default;
-   wxVScrolledWindow& operator=(wxVScrolledWindow&&) = default;
+    wxVScrolledWindow& operator=(wxVScrolledWindow&&) = delete;
 
     // same as the previous ctor but returns status code: true if ok
     //
@@ -656,10 +653,7 @@ public:
         Create(parent, id, pos, size, style, name);
     }
 
-   wxHScrolledWindow(const wxHScrolledWindow&) = delete;
-   wxHScrolledWindow& operator=(const wxHScrolledWindow&) = delete;
-   wxHScrolledWindow(wxHScrolledWindow&&) = default;
-   wxHScrolledWindow& operator=(wxHScrolledWindow&&) = default;
+    wxHScrolledWindow& operator=(wxHScrolledWindow&&) = delete;
 
     // same as the previous ctor but returns status code: true if ok
     //
@@ -724,10 +718,7 @@ public:
         Create(parent, id, pos, size, style, name);
     }
 
-   wxHVScrolledWindow(const wxHVScrolledWindow&) = delete;
-   wxHVScrolledWindow& operator=(const wxHVScrolledWindow&) = delete;
-   wxHVScrolledWindow(wxHVScrolledWindow&&) = default;
-   wxHVScrolledWindow& operator=(wxHVScrolledWindow&&) = default;
+    wxHVScrolledWindow& operator=(wxHVScrolledWindow&&) = delete;
 
     // same as the previous ctor but returns status code: true if ok
     //

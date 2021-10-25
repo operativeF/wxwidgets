@@ -52,10 +52,7 @@ public:
     wxPluginLibrary( const wxString &libname, unsigned int flags = wxDL_DEFAULT );
     ~wxPluginLibrary();
 
-    wxPluginLibrary(const wxPluginLibrary&) = delete;
-    wxPluginLibrary& operator=(const wxPluginLibrary&) = delete;
-    wxPluginLibrary(wxPluginLibrary&&) = default;
-    wxPluginLibrary& operator=(wxPluginLibrary&&) = default;
+    wxPluginLibrary& operator=(wxPluginLibrary&&) = delete;
 
     wxPluginLibrary  *RefLib();
     bool              UnrefLib();
@@ -124,10 +121,7 @@ public:
 
     // We could allow this class to be copied if we really
     // wanted to, but not without modification.
-    wxPluginManager(const wxPluginManager&) = delete;
-    wxPluginManager& operator=(const wxPluginManager&) = delete;
-    wxPluginManager(wxPluginManager&&) = default;
-    wxPluginManager& operator=(wxPluginManager&&) = default;
+    wxPluginManager& operator=(wxPluginManager&&) = delete;
 
     bool   Load(const wxString &libname, unsigned int flags = wxDL_DEFAULT);
     void   Unload();

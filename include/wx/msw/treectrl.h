@@ -101,10 +101,7 @@ public:
 
     ~wxTreeCtrl();
 
-    wxTreeCtrl(const wxTreeCtrl&) = delete;
-    wxTreeCtrl& operator=(const wxTreeCtrl&) = delete;
-    wxTreeCtrl(wxTreeCtrl&&) = default;
-    wxTreeCtrl& operator=(wxTreeCtrl&&) = default;
+    wxTreeCtrl& operator=(wxTreeCtrl&&) = delete;
     
     [[maybe_unused]] bool Create(wxWindow *parent, wxWindowID id = wxID_ANY,
                 const wxPoint& pos = wxDefaultPosition,

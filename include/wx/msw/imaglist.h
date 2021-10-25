@@ -33,10 +33,7 @@ public:
   
   ~wxImageList();
 
-  wxImageList(const wxImageList&) = delete;
-  wxImageList& operator=(const wxImageList&) = delete;
-  wxImageList(wxImageList&&) = default;
-  wxImageList& operator=(wxImageList&&) = default;
+  wxImageList& operator=(wxImageList&&) = delete;
 
 
   // Attributes

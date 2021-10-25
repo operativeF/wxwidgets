@@ -308,10 +308,7 @@ public:
                       wxMBConv& conv = wxConvUTF8);
     WXZIPFIX ~wxZipOutputStream();
 
-   wxZipOutputStream(const wxZipOutputStream&) = delete;
-   wxZipOutputStream& operator=(const wxZipOutputStream&) = delete;
-   wxZipOutputStream(wxZipOutputStream&&) = default;
-   wxZipOutputStream& operator=(wxZipOutputStream&&) = default;
+    wxZipOutputStream& operator=(wxZipOutputStream&&) = delete;
 
     bool PutNextEntry(wxZipEntry *entry)        { return DoCreate(entry); }
 
@@ -396,10 +393,7 @@ public:
 
     WXZIPFIX ~wxZipInputStream();
 
-   wxZipInputStream(const wxZipInputStream&) = delete;
-   wxZipInputStream& operator=(const wxZipInputStream&) = delete;
-   wxZipInputStream(wxZipInputStream&&) = default;
-   wxZipInputStream& operator=(wxZipInputStream&&) = default;
+    wxZipInputStream& operator=(wxZipInputStream&&) = delete;
 
     bool OpenEntry(wxZipEntry& entry)   { return DoOpen(&entry); }
     bool WXZIPFIX CloseEntry() override;

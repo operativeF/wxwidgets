@@ -34,12 +34,7 @@ public:
         AspectFill
     };
 
-    wxStaticBitmapBase() = default;
-    ~wxStaticBitmapBase() = default;
-    wxStaticBitmapBase(const wxStaticBitmapBase&) = delete;
-    wxStaticBitmapBase& operator=(const wxStaticBitmapBase&) = delete;
-    wxStaticBitmapBase(wxStaticBitmapBase&&) = default;
-    wxStaticBitmapBase& operator=(wxStaticBitmapBase&&) = default;
+    wxStaticBitmapBase& operator=(wxStaticBitmapBase&&) = delete;
 
     virtual void SetIcon(const wxIcon& icon) = 0;
     virtual void SetBitmap(const wxBitmap& bitmap) = 0;

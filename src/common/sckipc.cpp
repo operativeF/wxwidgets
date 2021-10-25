@@ -190,9 +190,6 @@ public:
     {
     }
 
-    wxIPCSocketStreams(const wxIPCSocketStreams&) = delete;
-	wxIPCSocketStreams& operator=(const wxIPCSocketStreams&) = delete;
-
     // expose the IO methods needed by IPC code (notice that writing is only
     // done via IPCOutput)
 
@@ -300,9 +297,6 @@ public:
 
     // dtor calls Flush() really sending the IPC data to the network
     ~IPCOutput() { m_streams.Flush(); }
-
-    IPCOutput(const IPCOutput&) = delete;
-	IPCOutput& operator=(const IPCOutput&) = delete;
 
     // write a byte
     void Write8(std::uint8_t i)

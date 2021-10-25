@@ -44,10 +44,7 @@ public:
     {
     }
 
-    wxMemoryConfig(const wxMemoryConfig&) = delete;
-    wxMemoryConfig& operator=(const wxMemoryConfig&) = delete;
-    wxMemoryConfig(wxMemoryConfig&&) = default;
-    wxMemoryConfig& operator=(wxMemoryConfig&&) = default;
+    wxMemoryConfig& operator=(wxMemoryConfig&&) = delete;
 };
 
 #endif // wxUSE_CONFIG

@@ -83,13 +83,9 @@ class WXDLLIMPEXP_BASE wxHashTableBase
 public:
     using Node = wxHashTableBase_Node;
 
-    wxHashTableBase() = default;
     virtual ~wxHashTableBase() = default;
 
-    wxHashTableBase(const wxHashTableBase&) = delete;
-    wxHashTableBase& operator=(const wxHashTableBase&) = delete;
-    wxHashTableBase(wxHashTableBase&&) = default;
-    wxHashTableBase& operator=(wxHashTableBase&&) = default;
+    wxHashTableBase& operator=(wxHashTableBase&&) = delete;
 
     void Create( wxKeyType keyType = wxKEY_INTEGER,
                  size_t size = wxHASH_SIZE_DEFAULT );

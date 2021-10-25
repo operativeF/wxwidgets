@@ -138,10 +138,7 @@ public:
 
     ~wxDragImage();
 
-    wxDragImage(const wxDragImage&) = delete;
-    wxDragImage& operator=(const wxDragImage&) = delete;
-    wxDragImage(wxDragImage&&) = default;
-    wxDragImage& operator=(wxDragImage&&) = default;
+    wxDragImage& operator=(wxDragImage&&) = delete;
     
     // Attributes
     ////////////////////////////////////////////////////////////////////////////

@@ -159,10 +159,7 @@ public:
     wxTarInputStream(wxInputStream *stream, wxMBConv& conv = wxConvLocal);
     ~wxTarInputStream();
 
-    wxTarInputStream(const wxTarInputStream&) = delete;
-    wxTarInputStream& operator=(const wxTarInputStream&) = delete;
-    wxTarInputStream(wxTarInputStream&&) = default;
-    wxTarInputStream& operator=(wxTarInputStream&&) = default;
+    wxTarInputStream& operator=(wxTarInputStream&&) = delete;
 
     bool OpenEntry(wxTarEntry& entry);
     bool CloseEntry() override;
@@ -217,10 +214,7 @@ public:
                       wxMBConv& conv = wxConvLocal);
     ~wxTarOutputStream();
 
-    wxTarOutputStream(const wxTarOutputStream&) = delete;
-    wxTarOutputStream& operator=(const wxTarOutputStream&) = delete;
-    wxTarOutputStream(wxTarOutputStream&&) = default;
-    wxTarOutputStream& operator=(wxTarOutputStream&&) = default;
+    wxTarOutputStream& operator=(wxTarOutputStream&&) = delete;
 
     bool PutNextEntry(wxTarEntry *entry);
 

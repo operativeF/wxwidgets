@@ -39,10 +39,7 @@ public:
                      pos, size, style, validator, name);
     }
 
-    wxSlider(const wxSlider&) = delete;
-    wxSlider& operator=(const wxSlider&) = delete;
-    wxSlider(wxSlider&&) = default;
-    wxSlider& operator=(wxSlider&&) = default;
+    wxSlider& operator=(wxSlider&&) = delete;
 
     [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,

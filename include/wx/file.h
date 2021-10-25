@@ -52,10 +52,7 @@ public:
     // attach to (already opened) file
   wxFile(int lfd) : m_fd(lfd), m_lasterror(0) {}
 
-  wxFile(const wxFile&) = delete;
-  wxFile& operator=(const wxFile&) = delete;
-  wxFile(wxFile&&) = default;
-  wxFile& operator=(wxFile&&) = default;
+  wxFile& operator=(wxFile&&) = delete;
 
   // open/close
     // create a new file (with the default value of bOverwrite, it will fail if
@@ -140,8 +137,7 @@ public:
     // associates the temp file with the file to be replaced and opens it
   explicit wxTempFile(const wxString& strName);
 
-  wxTempFile(const wxTempFile&) = delete;
-  wxTempFile& operator=(const wxTempFile&) = delete;
+  wxTempFile& operator=(wxTempFile&&) = delete;
 
   // open the temp file (strName is the name of file to be replaced)
   bool Open(const wxString& strName);

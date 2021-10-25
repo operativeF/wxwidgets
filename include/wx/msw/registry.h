@@ -111,10 +111,7 @@ public:
     // dtor closes the key
   ~wxRegKey();
 
-  wxRegKey(const wxRegKey&) = delete;
-  wxRegKey& operator=(const wxRegKey&) = delete;
-  wxRegKey(wxRegKey&&) = default;
-  wxRegKey& operator=(wxRegKey&&) = default;
+  wxRegKey& operator=(wxRegKey&&) = delete;
 
   // change key (closes the previously opened key if any)
     // the name is absolute, i.e. should start with HKEY_xxx

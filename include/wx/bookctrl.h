@@ -75,10 +75,7 @@ public:
         Create(parent, winid, pos, size, style, name);
     }
 
-    wxBookCtrlBase(const wxBookCtrlBase&) = delete;
-    wxBookCtrlBase& operator=(const wxBookCtrlBase&) = delete;
-    wxBookCtrlBase(wxBookCtrlBase&&) = default;
-    wxBookCtrlBase& operator=(wxBookCtrlBase&&) = default;
+    wxBookCtrlBase& operator=(wxBookCtrlBase&&) = delete;
 
     // quasi ctor
     [[maybe_unused]] bool Create(wxWindow *parent,
@@ -393,6 +390,8 @@ public:
         m_nOldSel = event.m_nOldSel;
     }
 
+    wxBookCtrlEvent& operator=(const wxBookCtrlEvent&) = delete;
+
     wxEvent *Clone() const override { return new wxBookCtrlEvent(*this); }
 
         // the currently selected page (wxNOT_FOUND if none)
@@ -406,8 +405,7 @@ private:
     int m_nSel,     // currently selected page
         m_nOldSel;  // previously selected page
 
-    public:
-	wxBookCtrlEvent& operator=(const wxBookCtrlEvent&) = delete;
+public:
 	wxClassInfo *wxGetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();

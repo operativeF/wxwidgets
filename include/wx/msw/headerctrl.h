@@ -36,10 +36,7 @@ public:
         Create(parent, id, pos, size, style, name);
     }
 
-    wxHeaderCtrl(const wxHeaderCtrl&) = delete;
-    wxHeaderCtrl& operator=(const wxHeaderCtrl&) = delete;
-    wxHeaderCtrl(wxHeaderCtrl&&) = default;
-    wxHeaderCtrl& operator=(wxHeaderCtrl&&) = default;
+    wxHeaderCtrl& operator=(wxHeaderCtrl&&) = delete;
 
     [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id = wxID_ANY,

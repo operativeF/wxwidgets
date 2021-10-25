@@ -75,9 +75,6 @@ public:
         Create(parent, id, pos, size, style, name);
     }
 
-    wxSplitterWindow(const wxSplitterWindow&) = delete;
-    wxSplitterWindow& operator=(const wxSplitterWindow&) = delete;
-
     bool Create(wxWindow *parent, wxWindowID id = wxID_ANY,
                      const wxPoint& pos = wxDefaultPosition,
                      const wxSize& size = wxDefaultSize,

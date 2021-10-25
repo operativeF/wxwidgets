@@ -614,9 +614,6 @@ public:
 private:
     wxImage& m_image;
     wxCairoBitmapData m_data;
-
-    wxCairoImageContext(const wxCairoImageContext&) = delete;
-	wxCairoImageContext& operator=(const wxCairoImageContext&) = delete;
 };
 #endif // wxUSE_IMAGE
 

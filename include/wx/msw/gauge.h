@@ -33,12 +33,7 @@ public:
         Create(parent, id, range, pos, size, style, validator, name);
     }
 
-    ~wxGauge() = default;
-
-    wxGauge(const wxGauge&) = delete;
-    wxGauge& operator=(const wxGauge&) = delete;
-    wxGauge(wxGauge&&) = default;
-    wxGauge& operator=(wxGauge&&) = default;
+    wxGauge& operator=(wxGauge&&) = delete;
 
     [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,

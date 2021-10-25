@@ -36,12 +36,7 @@ constexpr char wxStaticTextNameStr[] = "staticText";
 class WXDLLIMPEXP_CORE wxStaticTextBase : public wxControl
 {
 public:
-    wxStaticTextBase() = default;
-    ~wxStaticTextBase() = default;
-    wxStaticTextBase(const wxStaticTextBase&) = delete;
-    wxStaticTextBase& operator=(const wxStaticTextBase&) = delete;
-    wxStaticTextBase(wxStaticTextBase&&) = default;
-    wxStaticTextBase& operator=(wxStaticTextBase&&) = default;
+    wxStaticTextBase& operator=(wxStaticTextBase&&) = delete;
 
     // wrap the text of the control so that no line is longer than the given
     // width (if possible: this function won't break words)

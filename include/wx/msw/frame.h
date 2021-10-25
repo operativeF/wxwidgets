@@ -32,10 +32,7 @@ public:
         Create(parent, id, title, pos, size, style, name);
     }
 
-    wxFrame(const wxFrame&) = delete;
-    wxFrame& operator=(const wxFrame&) = delete;
-    wxFrame(wxFrame&&) = default;
-    wxFrame& operator=(wxFrame&&) = default;
+    wxFrame& operator=(wxFrame&&) = delete;
 
     [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,
@@ -44,9 +41,6 @@ public:
                 const wxSize& size = wxDefaultSize,
                 unsigned int style = wxDEFAULT_FRAME_STYLE,
                 const std::string& name = wxFrameNameStr);
-
-    ~wxFrame() = default;
-
     
     bool ShowFullScreen(bool show, unsigned int style = wxFULLSCREEN_ALL) override;
 

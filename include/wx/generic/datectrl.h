@@ -40,10 +40,7 @@ public:
         Create(parent, id, date, pos, size, style, validator, name);
     }
 
-    ~wxDatePickerCtrlGeneric() = default;
-
-    wxDatePickerCtrlGeneric(const wxDatePickerCtrlGeneric&) = delete;
-	wxDatePickerCtrlGeneric& operator=(const wxDatePickerCtrlGeneric&) = delete;
+	wxDatePickerCtrlGeneric& operator=(wxDatePickerCtrlGeneric&&) = delete;
 
     [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,

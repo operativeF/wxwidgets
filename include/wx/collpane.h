@@ -84,8 +84,6 @@ public:
         SetEventObject(generator);
     }
 
-	wxCollapsiblePaneEvent& operator=(const wxCollapsiblePaneEvent&) = delete;
-
     bool GetCollapsed() const { return m_bCollapsed; }
     void SetCollapsed(bool c) { m_bCollapsed = c; }
 

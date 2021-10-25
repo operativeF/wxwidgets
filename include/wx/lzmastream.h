@@ -30,10 +30,7 @@ struct wxLZMAStream;
 class WXDLLIMPEXP_BASE wxLZMAData
 {
 public:
-    wxLZMAData(const wxLZMAData&) = delete;
-    wxLZMAData& operator=(const wxLZMAData&) = delete;
-    wxLZMAData(wxLZMAData&&) = default;
-    wxLZMAData& operator=(wxLZMAData&&) = default;
+    wxLZMAData& operator=(wxLZMAData&&) = delete;
 
 protected:
     wxLZMAData();

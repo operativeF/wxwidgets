@@ -17,13 +17,9 @@
 class WXDLLIMPEXP_CORE wxAnyButton : public wxAnyButtonBase
 {
 public:
-    wxAnyButton() = default;
     ~wxAnyButton();
     
-    wxAnyButton(const wxAnyButton&) = delete;
-    wxAnyButton& operator=(const wxAnyButton&) = delete;
-    wxAnyButton(wxAnyButton&&) = default;
-    wxAnyButton& operator=(wxAnyButton&&) = default;
+    wxAnyButton& operator=(wxAnyButton&&) = delete;
 
     void SetLabel(const std::string& label) override;
     bool SetBackgroundColour(const wxColour &colour) override;

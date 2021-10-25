@@ -242,9 +242,6 @@ class wxDebugReportDialog : public wxDialog
 public:
     explicit wxDebugReportDialog(wxDebugReport& dbgrpt);
 
-    wxDebugReportDialog(const wxDebugReportDialog&) = delete;
-	wxDebugReportDialog& operator=(const wxDebugReportDialog&) = delete;
-
     bool TransferDataToWindow() override;
     bool TransferDataFromWindow() override;
 

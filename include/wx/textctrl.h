@@ -540,13 +540,9 @@ private:
 class WXDLLIMPEXP_CORE wxTextAreaBase
 {
 public:
-    wxTextAreaBase() = default;
     virtual ~wxTextAreaBase() = default;
 
-   wxTextAreaBase(const wxTextAreaBase&) = delete;
-   wxTextAreaBase& operator=(const wxTextAreaBase&) = delete;
-   wxTextAreaBase(wxTextAreaBase&&) = default;
-   wxTextAreaBase& operator=(wxTextAreaBase&&) = default;
+    wxTextAreaBase& operator=(wxTextAreaBase&&) = delete;
 
     // lines access
     // ------------
@@ -648,12 +644,7 @@ class WXDLLIMPEXP_CORE wxTextCtrlIface : public wxTextAreaBase,
                                          public wxTextEntryBase
 {
 public:
-    wxTextCtrlIface() = default;
-
-   wxTextCtrlIface(const wxTextCtrlIface&) = delete;
-   wxTextCtrlIface& operator=(const wxTextCtrlIface&) = delete;
-   wxTextCtrlIface(wxTextCtrlIface&&) = default;
-   wxTextCtrlIface& operator=(wxTextCtrlIface&&) = default;
+    wxTextCtrlIface& operator=(wxTextCtrlIface&&) = delete;
 
     // wxTextAreaBase overrides
     std::string GetValue() const override
@@ -684,13 +675,7 @@ class WXDLLIMPEXP_CORE wxTextCtrlBase : public wxControl,
                                    public wxTextEntry
 {
 public:
-    wxTextCtrlBase() = default;
-    ~wxTextCtrlBase() = default;
-
-   wxTextCtrlBase(const wxTextCtrlBase&) = delete;
-   wxTextCtrlBase& operator=(const wxTextCtrlBase&) = delete;
-   wxTextCtrlBase(wxTextCtrlBase&&) = default;
-   wxTextCtrlBase& operator=(wxTextCtrlBase&&) = default;
+    wxTextCtrlBase& operator=(wxTextCtrlBase&&) = delete;
 
     // more readable flag testing methods
     bool IsSingleLine() const { return !HasFlag(wxTE_MULTILINE); }

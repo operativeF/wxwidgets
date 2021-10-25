@@ -297,10 +297,7 @@ public:
         Create(parent, winid, pos, size, style, name);
     }
 
-    wxHeaderCtrlSimple(const wxHeaderCtrlSimple&) = delete;
-    wxHeaderCtrlSimple& operator=(const wxHeaderCtrlSimple&) = delete;
-    wxHeaderCtrlSimple(wxHeaderCtrlSimple&&) = default;
-    wxHeaderCtrlSimple& operator=(wxHeaderCtrlSimple&&) = default;
+    wxHeaderCtrlSimple& operator=(wxHeaderCtrlSimple&&) = delete;
 
     // managing the columns
     // --------------------
@@ -417,7 +414,6 @@ public:
     }
 
     wxHeaderCtrlEvent(const wxHeaderCtrlEvent& event) = default;
-
 	wxHeaderCtrlEvent& operator=(const wxHeaderCtrlEvent&) = delete;
 
     // the column which this event pertains to: valid for all header events

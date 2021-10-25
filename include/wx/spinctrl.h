@@ -34,12 +34,7 @@ wxDECLARE_EXPORTED_EVENT(WXDLLIMPEXP_CORE, wxEVT_SPINCTRLDOUBLE, wxSpinDoubleEve
 class WXDLLIMPEXP_CORE wxSpinCtrlBase : public wxControl
 {
 public:
-    wxSpinCtrlBase() = default;
-    ~wxSpinCtrlBase() = default;
-    wxSpinCtrlBase(const wxSpinCtrlBase&) = delete;
-    wxSpinCtrlBase& operator=(const wxSpinCtrlBase&) = delete;
-    wxSpinCtrlBase(wxSpinCtrlBase&&) = default;
-    wxSpinCtrlBase& operator=(wxSpinCtrlBase&&) = default;
+    wxSpinCtrlBase& operator=(wxSpinCtrlBase&&) = delete;
 
     // accessor functions that derived classes are expected to have
     virtual std::string GetTextValue() const = 0;

@@ -56,10 +56,7 @@ public:
         Create(parent, winid, pos, size, style, validator, name);
     }
 
-    wxListView(const wxListView&) = delete;
-    wxListView& operator=(const wxListView&) = delete;
-    wxListView(wxListView&&) = default;
-    wxListView& operator=(wxListView&&) = default;
+    wxListView& operator=(wxListView&&) = delete;
 
     // focus/selection stuff
     // ---------------------

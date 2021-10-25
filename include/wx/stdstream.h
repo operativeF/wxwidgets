@@ -26,7 +26,6 @@ class WXDLLIMPEXP_BASE wxStdInputStreamBuffer : public std::streambuf
 {
 public:
     wxStdInputStreamBuffer(wxInputStream& stream);
-    ~wxStdInputStreamBuffer() = default;
 
 protected:
     std::streambuf *setbuf(char *s, std::streamsize n) override;
@@ -71,7 +70,6 @@ class WXDLLIMPEXP_BASE wxStdOutputStreamBuffer : public std::streambuf
 {
 public:
     wxStdOutputStreamBuffer(wxOutputStream& stream);
-    ~wxStdOutputStreamBuffer() = default;
 
 protected:
     std::streambuf *setbuf(char *s, std::streamsize n) override;

@@ -105,12 +105,7 @@ WX_DECLARE_EXPORTED_LIST(wxNotebookPageInfo, wxNotebookPageInfoList );
 class WXDLLIMPEXP_CORE wxNotebookBase : public wxBookCtrlBase
 {
 public:
-    wxNotebookBase() = default;
-
-    wxNotebookBase(const wxNotebookBase&) = delete;
-    wxNotebookBase& operator=(const wxNotebookBase&) = delete;
-    wxNotebookBase(wxNotebookBase&&) = default;
-    wxNotebookBase& operator=(wxNotebookBase&&) = default;
+    wxNotebookBase& operator=(wxNotebookBase&&) = delete;
 
     // wxNotebook-specific additions to wxBookCtrlBase interface
     // ---------------------------------------------------------
@@ -125,14 +120,11 @@ public:
     // set the size of the tabs for wxNB_FIXEDWIDTH controls
     virtual void SetTabSize(const wxSize& sz) = 0;
 
-
-
     // implement some base class functions
     wxSize CalcSizeFromPage(const wxSize& sizePage) const override;
 
     // On platforms that support it, get the theme page background colour, else invalid colour
     virtual wxColour GetThemeBackgroundColour() const { return wxNullColour; }
-
 
     // send wxEVT_NOTEBOOK_PAGE_CHANGING/ED events
 

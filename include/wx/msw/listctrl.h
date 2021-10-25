@@ -93,10 +93,7 @@ public:
 
     ~wxListCtrl();
 
-    wxListCtrl(const wxListCtrl&) = delete;
-    wxListCtrl& operator=(const wxListCtrl&) = delete;
-    wxListCtrl(wxListCtrl&&) = default;
-    wxListCtrl& operator=(wxListCtrl&&) = default;
+    wxListCtrl& operator=(wxListCtrl&&) = delete;
 
     [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id = wxID_ANY,

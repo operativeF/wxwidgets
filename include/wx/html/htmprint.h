@@ -34,8 +34,7 @@ public:
     wxHtmlDCRenderer();
     ~wxHtmlDCRenderer();
 
-    wxHtmlDCRenderer(const wxHtmlDCRenderer&) = delete;
-    wxHtmlDCRenderer& operator=(const wxHtmlDCRenderer&) = delete;
+    wxHtmlDCRenderer& operator=(wxHtmlDCRenderer&&) = delete;
 
     // Following 3 methods *must* be called before any call to Render:
 
@@ -117,8 +116,7 @@ class WXDLLIMPEXP_HTML wxHtmlPrintout : public wxPrintout
 public:
     wxHtmlPrintout(const wxString& title = wxT("Printout"));
 
-    wxHtmlPrintout(const wxHtmlPrintout&) = delete;
-    wxHtmlPrintout& operator=(const wxHtmlPrintout&) = delete;
+    wxHtmlPrintout& operator=(wxHtmlPrintout&&) = delete;
 
     void SetHtmlText(const wxString& html, const wxString &basepath = {}, bool isdir = true);
             // prepares the class for printing this html document.
@@ -237,8 +235,7 @@ public:
     wxHtmlEasyPrinting(const wxString& name = wxT("Printing"), wxWindow *parentWindow = nullptr);
     ~wxHtmlEasyPrinting();
 
-    wxHtmlEasyPrinting(const wxHtmlEasyPrinting&) = delete;
-    wxHtmlEasyPrinting& operator=(const wxHtmlEasyPrinting&) = delete;
+    wxHtmlEasyPrinting& operator=(wxHtmlEasyPrinting&&) = delete;
 
     bool PreviewFile(const wxString &htmlfile);
     bool PreviewText(const wxString &htmltext, const wxString& basepath = {});

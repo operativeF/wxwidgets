@@ -34,12 +34,7 @@ public:
     // Create a DC corresponding to the whole window
     wxWindowDCImpl( wxDC *owner, wxWindow *win );
 
-    wxWindowDCImpl(const wxWindowDCImpl&) = delete;
-	wxWindowDCImpl& operator=(const wxWindowDCImpl&) = delete;
-    wxWindowDCImpl(wxWindowDCImpl&&) = default;
-	wxWindowDCImpl& operator=(wxWindowDCImpl&&) = default;
-
-    ~wxWindowDCImpl() = default;
+	wxWindowDCImpl& operator=(wxWindowDCImpl&&) = delete;
 
     wxSize DoGetSize() const override;
 
@@ -59,12 +54,7 @@ public:
     // Create a DC corresponding to the client area of the window
     wxClientDCImpl( wxDC *owner, wxWindow *win );
 
-    ~wxClientDCImpl() = default;
-
-    wxClientDCImpl(const wxClientDCImpl&) = delete;
-	wxClientDCImpl& operator=(const wxClientDCImpl&) = delete;
-    wxClientDCImpl(wxClientDCImpl&&) = default;
-	wxClientDCImpl& operator=(wxClientDCImpl&&) = default;
+	wxClientDCImpl& operator=(wxClientDCImpl&&) = delete;
 
     wxSize DoGetSize() const override;
 
@@ -84,10 +74,7 @@ public:
 
     ~wxPaintDCImpl();
 
-    wxPaintDCImpl(const wxPaintDCImpl&) = delete;
-	wxPaintDCImpl& operator=(const wxPaintDCImpl&) = delete;
-    wxPaintDCImpl(wxPaintDCImpl&&) = default;
-	wxPaintDCImpl& operator=(wxPaintDCImpl&&) = default;
+	wxPaintDCImpl& operator=(wxPaintDCImpl&&) = delete;
 
     // find the entry for this DC in the cache (keyed by the window)
     static WXHDC FindDCInCache(wxWindow* win);
@@ -112,12 +99,9 @@ protected:
 struct WXDLLIMPEXP_CORE wxPaintDCEx : public wxPaintDC
 {
     wxPaintDCEx(wxWindow *canvas, WXHDC dc);
+    wxPaintDCEx& operator=(wxPaintDCEx&&) = delete;
 
     wxDECLARE_CLASS(wxPaintDCEx);
-    wxPaintDCEx(const wxPaintDCEx&) = delete;
-    wxPaintDCEx& operator=(const wxPaintDCEx&) = delete;
-    wxPaintDCEx(wxPaintDCEx&&) = default;
-    wxPaintDCEx& operator=(wxPaintDCEx&&) = default;
 };
 
 #endif

@@ -60,10 +60,7 @@ enum class wxCheckBoxState
 class WXDLLIMPEXP_CORE wxCheckBoxBase : public wxControl
 {
 public:
-    wxCheckBoxBase() = default;
-
-    wxCheckBoxBase(const wxCheckBoxBase&) = delete;
-	wxCheckBoxBase& operator=(const wxCheckBoxBase&) = delete;
+	wxCheckBoxBase& operator=(wxCheckBoxBase&&) = delete;
     
     // set/get the checked status of the listbox
     virtual void SetValue(bool value) = 0;

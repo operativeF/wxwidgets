@@ -61,10 +61,7 @@ public:
 
     ~wxClassInfo();
 
-   wxClassInfo(const wxClassInfo&) = delete;
-   wxClassInfo& operator=(const wxClassInfo&) = delete;
-   wxClassInfo(wxClassInfo&&) = default;
-   wxClassInfo& operator=(wxClassInfo&&) = default;
+   wxClassInfo& operator=(wxClassInfo&&) = delete;
 
     wxObject *CreateObject() const
         { return m_objectConstructor ? (*m_objectConstructor)() : nullptr; }

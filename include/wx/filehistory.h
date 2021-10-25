@@ -44,8 +44,7 @@ class WXDLLIMPEXP_CORE wxFileHistoryBase
 public:
     wxFileHistoryBase(size_t maxFiles = 9, wxWindowID idBase = wxID_FILE1);
 
-    wxFileHistoryBase(const wxFileHistoryBase&) = delete;
-	wxFileHistoryBase& operator=(const wxFileHistoryBase&) = delete;
+	wxFileHistoryBase& operator=(wxFileHistoryBase&&) = delete;
 
     virtual ~wxFileHistoryBase() = default;
 

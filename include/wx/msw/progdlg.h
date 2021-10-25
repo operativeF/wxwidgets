@@ -28,10 +28,7 @@ public:
 
     ~wxProgressDialog();
 
-    wxProgressDialog(const wxProgressDialog&) = delete;
-    wxProgressDialog& operator=(const wxProgressDialog&) = delete;
-    wxProgressDialog(wxProgressDialog&&) = default;
-    wxProgressDialog& operator=(wxProgressDialog&&) = default;
+    wxProgressDialog& operator=(wxProgressDialog&&) = delete;
 
     bool Update(int value, const std::string& newmsg = {}, bool *skip = nullptr) override;
     bool Pulse(const std::string& newmsg = {}, bool *skip = nullptr) override;

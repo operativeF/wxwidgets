@@ -235,10 +235,7 @@ public:
     wxAccessibleBase(wxWindow* win): m_window(win) {}
     virtual ~wxAccessibleBase() = default;
 
-    wxAccessibleBase(const wxAccessibleBase&) = delete;
-    wxAccessibleBase& operator=(const wxAccessibleBase&) = delete;
-    wxAccessibleBase(wxAccessibleBase&&) = default;
-    wxAccessibleBase& operator=(wxAccessibleBase&&) = default;
+    wxAccessibleBase& operator=(wxAccessibleBase&&) = delete;
 
         // Can return either a child object, or an integer
         // representing the child element, starting from 1.

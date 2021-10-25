@@ -30,10 +30,7 @@ public:
         Nonsignaled
     };
 
-    Event() = default;
-
-    Event(const Event&) = delete;
-	Event& operator=(const Event&) = delete;
+	Event& operator=(Event&&) = delete;
     
     // Wrappers around {Create,Set,Reset}Event() Windows API functions, with
     // the same semantics.

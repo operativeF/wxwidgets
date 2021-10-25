@@ -162,6 +162,8 @@ public:
         m_array = nullptr;
     }
 
+	wxSafeArray& operator=(wxSafeArray<varType>&&) = delete;
+
     // Creates and locks a zero-based one-dimensional SAFEARRAY with the given
     // number of elements.
     bool Create(size_t count)
@@ -386,9 +388,6 @@ public:
 
         return result;
     }
-
-    wxSafeArray(const wxSafeArray<varType>&)  = delete;
-	wxSafeArray& operator=(const wxSafeArray<varType>&) = delete;
 };
 
 #endif // wxUSE_OLE && wxUSE_VARIANT

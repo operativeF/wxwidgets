@@ -36,12 +36,7 @@ class WXDLLIMPEXP_FWD_CORE wxBitmapButton;
 class WXDLLIMPEXP_CORE wxBitmapButtonBase : public wxButton
 {
 public:
-    wxBitmapButtonBase() = default;
-
-    wxBitmapButtonBase(const wxBitmapButtonBase&) = delete;
-    wxBitmapButtonBase& operator=(const wxBitmapButtonBase&) = delete;
-    wxBitmapButtonBase(wxBitmapButtonBase&&) = default;
-    wxBitmapButtonBase& operator=(wxBitmapButtonBase&&) = default;
+    wxBitmapButtonBase& operator=(wxBitmapButtonBase&&) = delete;
     
     [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID winid,

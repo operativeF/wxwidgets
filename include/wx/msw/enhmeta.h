@@ -109,10 +109,7 @@ struct WXDLLIMPEXP_CORE wxEnhMetaFileDC : public wxDC
                     int width = 0, int height = 0,
                     const std::string& description = {});
 
-    wxEnhMetaFileDC(const wxEnhMetaFileDC&) = delete;
-    wxEnhMetaFileDC& operator=(const wxEnhMetaFileDC&) = delete;
-    wxEnhMetaFileDC(wxEnhMetaFileDC&&) = default;
-    wxEnhMetaFileDC& operator=(wxEnhMetaFileDC&&) = default;
+    wxEnhMetaFileDC& operator=(wxEnhMetaFileDC&&) = delete;
 
     // obtain a pointer to the new metafile (caller should delete it)
     wxEnhMetaFile *Close();
@@ -138,8 +135,7 @@ public:
     wxEnhMetaFileDataObject(const wxEnhMetaFile& metafile)
         : m_metafile(metafile) { }
 
-    wxEnhMetaFileDataObject(const wxEnhMetaFileDataObject&) = delete;
-    wxEnhMetaFileDataObject& operator=(const wxEnhMetaFileDataObject&) = delete;
+    wxEnhMetaFileDataObject& operator=(wxEnhMetaFileDataObject&&) = delete;
 
     // functions which you may override if you want to provide data on
     // demand only - otherwise, the trivial default versions will be used
@@ -177,8 +173,7 @@ public:
     wxEnhMetaFileSimpleDataObject(const wxEnhMetaFile& metafile)
         : wxDataObjectSimple(wxDF_ENHMETAFILE), m_metafile(metafile) { }
     
-    wxEnhMetaFileSimpleDataObject(const wxEnhMetaFileSimpleDataObject&) = delete;
-    wxEnhMetaFileSimpleDataObject& operator=(const wxEnhMetaFileSimpleDataObject&) = delete;
+    wxEnhMetaFileSimpleDataObject& operator=(wxEnhMetaFileSimpleDataObject&&) = delete;
 
     // functions which you may override if you want to provide data on
     // demand only - otherwise, the trivial default versions will be used

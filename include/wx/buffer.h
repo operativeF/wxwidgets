@@ -431,8 +431,7 @@ using wxWritableWCharBuffer = wxWritableCharTypeBuffer<wchar_t>;
 class wxMemoryBufferData
 {
 public:
-    wxMemoryBufferData(const wxMemoryBufferData&) = delete;
-	wxMemoryBufferData& operator=(const wxMemoryBufferData&) = delete;
+	wxMemoryBufferData& operator=(wxMemoryBufferData&&) = delete;
     
     // the initial size and also the size added by ResizeIfNeeded()
     static constexpr auto DefBufSize = 1024;

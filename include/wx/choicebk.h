@@ -53,10 +53,7 @@ public:
         Create(parent, id, pos, size, style, name);
     }
 
-    wxChoicebook(const wxChoicebook&) = delete;
-    wxChoicebook& operator=(const wxChoicebook&) = delete;
-    wxChoicebook(wxChoicebook&&) = default;
-    wxChoicebook& operator=(wxChoicebook&&) = default;
+    wxChoicebook& operator=(wxChoicebook&&) = delete;
 
     // quasi ctor
     [[maybe_unused]] bool Create(wxWindow *parent,

@@ -38,10 +38,7 @@ public:
                       const wxSize &size = wxDefaultSize,
                       unsigned int style = wxDEFAULT_DIALOG_STYLE);
 
-    wxPrintDialogBase(const wxPrintDialogBase&) = delete;
-    wxPrintDialogBase& operator=(const wxPrintDialogBase&) = delete;
-    wxPrintDialogBase(wxPrintDialogBase&&) = default;
-    wxPrintDialogBase& operator=(wxPrintDialogBase&&) = default;
+    wxPrintDialogBase& operator=(wxPrintDialogBase&&) = delete;
 
     virtual wxPrintDialogData& GetPrintDialogData() = 0;
     virtual wxPrintData& GetPrintData() = 0;
@@ -62,10 +59,7 @@ public:
     wxPrintDialog(wxWindow *parent, wxPrintData* data);
     virtual ~wxPrintDialog();
 
-    wxPrintDialog(const wxPrintDialog&) = delete;
-    wxPrintDialog& operator=(const wxPrintDialog&) = delete;
-    wxPrintDialog(wxPrintDialog&&) = default;
-    wxPrintDialog& operator=(wxPrintDialog&&) = default;
+    wxPrintDialog& operator=(wxPrintDialog&&) = delete;
 
     virtual int ShowModal();
 
@@ -92,10 +86,7 @@ public:
                       const wxSize &size = wxDefaultSize,
                       unsigned int style = wxDEFAULT_DIALOG_STYLE);
 
-    wxPageSetupDialogBase(const wxPageSetupDialogBase&) = delete;
-    wxPageSetupDialogBase& operator=(const wxPageSetupDialogBase&) = delete;
-    wxPageSetupDialogBase(wxPageSetupDialogBase&&) = default;
-    wxPageSetupDialogBase& operator=(wxPageSetupDialogBase&&) = default;
+    wxPageSetupDialogBase& operator=(wxPageSetupDialogBase&&) = delete;
 
     virtual wxPageSetupDialogData& GetPageSetupDialogData() = 0;
 
@@ -113,10 +104,7 @@ public:
     wxPageSetupDialog(wxWindow *parent, wxPageSetupDialogData *data = nullptr);
     ~wxPageSetupDialog();
 
-    wxPageSetupDialog(const wxPageSetupDialog&) = delete;
-    wxPageSetupDialog& operator=(const wxPageSetupDialog&) = delete;
-    wxPageSetupDialog(wxPageSetupDialog&&) = default;
-    wxPageSetupDialog& operator=(wxPageSetupDialog&&) = default;
+    wxPageSetupDialog& operator=(wxPageSetupDialog&&) = delete;
 
     int ShowModal();
     wxPageSetupDialogData& GetPageSetupDialogData();

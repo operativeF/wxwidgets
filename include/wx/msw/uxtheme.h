@@ -173,8 +173,7 @@ enum POPUPCHECKSTATES
 class wxUxThemeFont
 {
 public:
-    // Trivial default ctor.
-    wxUxThemeFont() = default;
+	wxUxThemeFont& operator=(wxUxThemeFont&&) = delete;
 
     // In Unicode build we always use LOGFONTW anyhow so this class is
     // completely trivial.
@@ -183,9 +182,6 @@ public:
 
 private:
     LOGFONTW m_lfW;
-
-    wxUxThemeFont(const wxUxThemeFont&) = delete;
-	wxUxThemeFont& operator=(const wxUxThemeFont&) = delete;
 };
 
 WXDLLIMPEXP_CORE bool wxUxThemeIsActive();
@@ -212,11 +208,10 @@ public:
         }
     }
 
+	wxUxThemeHandle& operator=(wxUxThemeHandle&&) = delete;
+
 private:
     HTHEME m_hTheme;
-
-    wxUxThemeHandle(const wxUxThemeHandle&) = delete;
-	wxUxThemeHandle& operator=(const wxUxThemeHandle&) = delete;
 };
 
 #else // !wxUSE_UXTHEME

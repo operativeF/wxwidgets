@@ -355,10 +355,7 @@ public:
     wxSizerItem() = default;
     ~wxSizerItem();
 
-    wxSizerItem(const wxSizerItem&) = delete;
-    wxSizerItem& operator=(const wxSizerItem&) = delete;
-    wxSizerItem(wxSizerItem&&) = default;
-    wxSizerItem& operator=(wxSizerItem&&) = default;
+    wxSizerItem& operator=(wxSizerItem&&) = delete;
 
     virtual void DeleteWindows();
 
@@ -906,12 +903,7 @@ public:
     wxFlexGridSizer( int rows, int cols, int vgap, int hgap );
     wxFlexGridSizer( int rows, int cols, wxSize gap );
 
-    ~wxFlexGridSizer() = default;
-
-    wxFlexGridSizer(const wxFlexGridSizer&) = delete;
-    wxFlexGridSizer& operator=(const wxFlexGridSizer&) = delete;
-    wxFlexGridSizer(wxFlexGridSizer&&) = default;
-    wxFlexGridSizer& operator=(wxFlexGridSizer&&) = default;
+    wxFlexGridSizer& operator=(wxFlexGridSizer&&) = delete;
 
     // set the rows/columns which will grow (the others will remain of the
     // constant initial size)
@@ -1076,10 +1068,7 @@ public:
     wxStaticBoxSizer(int orient, wxWindow *win, const std::string& label = {});
     ~wxStaticBoxSizer();
 
-    wxStaticBoxSizer(const wxStaticBoxSizer&) = delete;
-    wxStaticBoxSizer& operator=(const wxStaticBoxSizer&) = delete;
-    wxStaticBoxSizer(wxStaticBoxSizer&&) = default;
-    wxStaticBoxSizer& operator=(wxStaticBoxSizer&&) = default;
+    wxStaticBoxSizer& operator=(wxStaticBoxSizer&&) = delete;
 
     wxSize CalcMin() override;
     void RepositionChildren(wxSize minSize) override;
@@ -1118,10 +1107,7 @@ public:
     // vertical for PDAs, horizontal for everything else?
     wxStdDialogButtonSizer();
 
-    wxStdDialogButtonSizer(const wxStdDialogButtonSizer&) = delete;
-    wxStdDialogButtonSizer& operator=(const wxStdDialogButtonSizer&) = delete;
-    wxStdDialogButtonSizer(wxStdDialogButtonSizer&&) = default;
-    wxStdDialogButtonSizer& operator=(wxStdDialogButtonSizer&&) = default;
+    wxStdDialogButtonSizer& operator=(wxStdDialogButtonSizer&&) = delete;
 
     // Checks button ID against system IDs and sets one of the pointers below
     // to this button. Does not do any sizer-related things here.

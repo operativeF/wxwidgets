@@ -53,12 +53,7 @@ class WXDLLIMPEXP_CORE wxSpinButtonBase : public wxControl
 {
 public:
     // range has by default (0..100) values
-    wxSpinButtonBase() = default;
-    ~wxSpinButtonBase() = default;
-    wxSpinButtonBase(const wxSpinButtonBase&) = delete;
-    wxSpinButtonBase& operator=(const wxSpinButtonBase&) = delete;
-    wxSpinButtonBase(wxSpinButtonBase&&) = default;
-    wxSpinButtonBase& operator=(wxSpinButtonBase&&) = default;
+    wxSpinButtonBase& operator=(wxSpinButtonBase&&) = delete;
 
     virtual int GetValue() const = 0;
     virtual int GetMin() const { return m_min; }
@@ -117,7 +112,6 @@ public:
     }
 
     wxSpinEvent(const wxSpinEvent& event)  = default;
-
 	wxSpinEvent& operator=(const wxSpinEvent&) = delete;
 
     // get the current value of the control

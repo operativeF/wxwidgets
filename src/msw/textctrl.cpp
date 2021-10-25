@@ -284,9 +284,6 @@ public:
         m_count = -1;
     }
 
-    UpdatesCountFilter(const UpdatesCountFilter&) = delete;
-	UpdatesCountFilter& operator=(const UpdatesCountFilter&) = delete;
-
     // return true if an event has been received
     bool GotUpdate() const
     {

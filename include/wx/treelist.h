@@ -90,8 +90,6 @@ extern WXDLLIMPEXP_DATA_CORE(const wxTreeListItem) wxTLI_LAST;
 class wxTreeListItemComparator
 {
 public:
-    wxTreeListItemComparator() = default;
-
     // The comparison function should return negative, null or positive value
     // depending on whether the first item is less than, equal to or greater
     // than the second one. The items should be compared using their values for
@@ -106,10 +104,7 @@ public:
     // provide virtual dtor in case it's used like this in the user code.
     virtual ~wxTreeListItemComparator() = default;
 
-    wxTreeListItemComparator(const wxTreeListItemComparator&) = delete;
-    wxTreeListItemComparator& operator=(const wxTreeListItemComparator&) = delete;
-    wxTreeListItemComparator(wxTreeListItemComparator&&) = default;
-    wxTreeListItemComparator& operator=(wxTreeListItemComparator&&) = default;
+    wxTreeListItemComparator& operator=(wxTreeListItemComparator&&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -144,10 +139,8 @@ public:
         Create(parent, id, pos, size, style, name);
     }
 
-   wxTreeListCtrl(const wxTreeListCtrl&) = delete;
-   wxTreeListCtrl& operator=(const wxTreeListCtrl&) = delete;
-   wxTreeListCtrl(wxTreeListCtrl&&) = default;
-   wxTreeListCtrl& operator=(wxTreeListCtrl&&) = default;
+    wxTreeListCtrl& operator=(wxTreeListCtrl&&) = delete;
+    ~wxTreeListCtrl();
 
     [[maybe_unused]] bool Create(wxWindow* parent,
                 wxWindowID id,
@@ -156,8 +149,6 @@ public:
                 unsigned int style = wxTL_DEFAULT_STYLE,
                 const std::string& name = wxTreeListCtrlNameStr);
 
-
-    ~wxTreeListCtrl();
 
     // Columns methods
     // ---------------

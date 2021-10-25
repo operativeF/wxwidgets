@@ -96,8 +96,7 @@
                 m_key.Set(NULL); // this deletes the value
         }
 
-        wxTlsValue(const wxTlsValue<T>&)  = delete;
-	    wxTlsValue& operator=(const wxTlsValue<T>&) = delete;
+	    wxTlsValue& operator=(wxTlsValue<T>&&) = delete;
 
         // access the object creating it on demand
         ValueType *Get()

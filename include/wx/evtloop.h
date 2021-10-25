@@ -69,10 +69,7 @@ public:
     wxEventLoopBase();
     virtual ~wxEventLoopBase();
 
-    wxEventLoopBase(const wxEventLoopBase&) = delete;
-    wxEventLoopBase& operator=(const wxEventLoopBase&) = delete;
-    wxEventLoopBase(wxEventLoopBase&&) = default;
-    wxEventLoopBase& operator=(wxEventLoopBase&&) = default;
+    wxEventLoopBase& operator=(wxEventLoopBase&&) = delete;
 
     // use this to check whether the event loop was successfully created before
     // using it
@@ -239,12 +236,7 @@ private:
 class WXDLLIMPEXP_BASE wxEventLoopManual : public wxEventLoopBase
 {
 public:
-    wxEventLoopManual() = default;
-
-    wxEventLoopManual(const wxEventLoopManual&) = delete;
-    wxEventLoopManual& operator=(const wxEventLoopManual&) = delete;
-    wxEventLoopManual(wxEventLoopManual&&) = default;
-    wxEventLoopManual& operator=(wxEventLoopManual&&) = default;
+    wxEventLoopManual& operator=(wxEventLoopManual&&) = delete;
 
     // sets the "should exit" flag and wakes up the loop so that it terminates
     // soon
@@ -318,10 +310,7 @@ public:
     wxGUIEventLoop() { m_impl = NULL; }
     ~wxGUIEventLoop();
 
-    wxGUIEventLoop(const wxGUIEventLoop&) = delete;
-    wxGUIEventLoop& operator=(const wxGUIEventLoop&) = delete;
-    wxGUIEventLoop(wxGUIEventLoop&&) = default;
-    wxGUIEventLoop& operator=(wxGUIEventLoop&&) = default;
+    wxGUIEventLoop& operator=(wxGUIEventLoop&&) = delete;
 
     virtual void ScheduleExit(int rc = 0);
     virtual bool Pending() const;

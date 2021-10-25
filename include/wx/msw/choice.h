@@ -42,10 +42,7 @@ public:
         Create(parent, id, pos, size, choices, style, validator, name);
     }
 
-    wxChoice(const wxChoice&) = delete;
-    wxChoice& operator=(const wxChoice&) = delete;
-    wxChoice(wxChoice&&) = default;
-    wxChoice& operator=(wxChoice&&) = default;
+    wxChoice& operator=(wxChoice&&) = delete;
 
     [[maybe_unused]] bool Create(wxWindow* parent,
                 wxWindowID id,

@@ -55,10 +55,7 @@ public:
 
     ~wxListBox();
 
-    wxListBox(const wxListBox&) = delete;
-    wxListBox& operator=(const wxListBox&) = delete;
-    wxListBox(wxListBox&&) = default;
-    wxListBox& operator=(wxListBox&&) = default;
+    wxListBox& operator=(wxListBox&&) = delete;
 
     size_t GetCount() const override;
     std::string GetString(unsigned int n) const override;

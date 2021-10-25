@@ -79,10 +79,7 @@ public:
 
     ~wxMenu();
 
-    wxMenu(const wxMenu&) = delete;
-    wxMenu& operator=(const wxMenu&) = delete;
-    wxMenu(wxMenu&&) = default;
-    wxMenu& operator=(wxMenu&&) = default;
+    wxMenu& operator=(wxMenu&&) = delete;
 
     void Break() override;
 
@@ -222,10 +219,7 @@ public:
     wxMenuBar(size_t n, wxMenu *menus[], const std::string titles[], unsigned int style = 0);
     ~wxMenuBar();
 
-    wxMenuBar(const wxMenuBar&) = delete;
-    wxMenuBar& operator=(const wxMenuBar&) = delete;
-    wxMenuBar(wxMenuBar&&) = default;
-    wxMenuBar& operator=(wxMenuBar&&) = default;
+    wxMenuBar& operator=(wxMenuBar&&) = delete;
 
     // menubar construction
     bool Append( wxMenu *menu, const std::string &title ) override;

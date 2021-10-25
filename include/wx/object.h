@@ -161,16 +161,11 @@ inline T *wxCheckCast(const void *ptr)
 class WXDLLIMPEXP_BASE wxRefCounter
 {
 public:
-    wxRefCounter() = default;
-
     // It doesn't make sense to copy the reference counted objects, a new ref
     // counter should be created for a new object instead and compilation
     // errors in the code using wxRefCounter due to the lack of copy ctor often
     // indicate a problem, e.g. a forgotten copy ctor implementation somewhere.
-    wxRefCounter(const wxRefCounter&) = delete;
-    wxRefCounter& operator=(const wxRefCounter&) = delete;
-    wxRefCounter(wxRefCounter&&) = default;
-    wxRefCounter& operator=(wxRefCounter&&) = default;
+    wxRefCounter& operator=(wxRefCounter&&) = delete;
 
     int GetRefCount() const { return m_count; }
 

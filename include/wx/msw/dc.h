@@ -51,10 +51,7 @@ public:
     wxMSWDCImpl(wxDC *owner, WXHDC hDC);
     ~wxMSWDCImpl();
 
-    wxMSWDCImpl(const wxMSWDCImpl&) = delete;
-    wxMSWDCImpl& operator=(const wxMSWDCImpl&) = delete;
-    wxMSWDCImpl(wxMSWDCImpl&&) = default;
-    wxMSWDCImpl& operator=(wxMSWDCImpl&&) = default;
+    wxMSWDCImpl& operator=(wxMSWDCImpl&&) = delete;
 
     void Clear() override;
 
@@ -335,10 +332,7 @@ public:
         SetHDC((WXHDC)nullptr);
     }
 
-    wxDCTempImpl(const wxDCTempImpl&) = delete;
-	wxDCTempImpl& operator=(const wxDCTempImpl&) = delete;
-    wxDCTempImpl(wxDCTempImpl&&) = default;
-	wxDCTempImpl& operator=(wxDCTempImpl&&) = default;
+	wxDCTempImpl& operator=(wxDCTempImpl&&) = delete;
 
     wxSize DoGetSize() const override
     {

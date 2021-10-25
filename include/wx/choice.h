@@ -34,11 +34,7 @@ constexpr char wxChoiceNameStr[] = "choice";
 class WXDLLIMPEXP_CORE wxChoiceBase : public wxControlWithItems
 {
 public:
-    wxChoiceBase() = default;
-    ~wxChoiceBase() = default;
-
-    wxChoiceBase(const wxChoiceBase&) = delete;
-	wxChoiceBase& operator=(const wxChoiceBase&) = delete;
+	wxChoiceBase& operator=(wxChoiceBase&&) = delete;
     
     // all generic methods are in wxControlWithItems
 

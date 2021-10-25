@@ -544,13 +544,9 @@ constexpr unsigned int wxDV_VARIABLE_LINE_HEIGHT    = 0x0020;     // variable li
 class WXDLLIMPEXP_CORE wxDataViewCtrlBase: public wxSystemThemedControl<wxControl>
 {
 public:
-    wxDataViewCtrlBase() = default;
     ~wxDataViewCtrlBase();
 
-    wxDataViewCtrlBase(const wxDataViewCtrlBase&) = delete;
-    wxDataViewCtrlBase& operator=(const wxDataViewCtrlBase&) = delete;
-    wxDataViewCtrlBase(wxDataViewCtrlBase&&) = default;
-    wxDataViewCtrlBase& operator=(wxDataViewCtrlBase&&) = default;
+    wxDataViewCtrlBase& operator=(wxDataViewCtrlBase&&) = delete;
 
     // model
     // -----
@@ -848,9 +844,7 @@ public:
     }
 
     wxDataViewEvent(const wxDataViewEvent& event) = default;
-
 	wxDataViewEvent& operator=(const wxDataViewEvent&) = delete;
-
 
     wxDataViewItem GetItem() const { return m_item; }
     int GetColumn() const { return m_col; }

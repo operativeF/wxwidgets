@@ -64,10 +64,7 @@ public:
 
     ~wxTCPConnection();
 
-   wxTCPConnection(const wxTCPConnection&) = delete;
-   wxTCPConnection& operator=(const wxTCPConnection&) = delete;
-   wxTCPConnection(wxTCPConnection&&) = default;
-   wxTCPConnection& operator=(wxTCPConnection&&) = default;
+   wxTCPConnection& operator=(wxTCPConnection&&) = delete;
 
     // implement base class pure virtual methods
     const void *Request(const wxString& item,
@@ -115,13 +112,9 @@ private:
 class WXDLLIMPEXP_NET wxTCPServer : public wxServerBase
 {
 public:
-    wxTCPServer() = default;
     ~wxTCPServer();
 
-   wxTCPServer(const wxTCPServer&) = delete;
-   wxTCPServer& operator=(const wxTCPServer&) = delete;
-   wxTCPServer(wxTCPServer&&) = default;
-   wxTCPServer& operator=(wxTCPServer&&) = default;
+   wxTCPServer& operator=(wxTCPServer&&) = delete;
 
     // Returns false on error (e.g. port number is already in use)
     bool Create(const wxString& serverName) override;

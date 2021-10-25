@@ -53,10 +53,7 @@ public:
 
     ~wxFSFile() { delete m_Stream; }
 
-    wxFSFile(const wxFSFile&) = delete;
-    wxFSFile& operator=(const wxFSFile&) = delete;
-    wxFSFile(wxFSFile&&) = default;
-    wxFSFile& operator=(wxFSFile&&) = default;
+    wxFSFile& operator=(wxFSFile&&) = delete;
 
     // returns stream. This doesn't give away ownership of the stream object.
     wxInputStream *GetStream() const { return m_Stream; }
@@ -176,10 +173,7 @@ public:
     wxFileSystem()  { m_FindFileHandler = nullptr;}
     ~wxFileSystem();
 
-    wxFileSystem(const wxFileSystem&) = delete;
-    wxFileSystem& operator=(const wxFileSystem&) = delete;
-    wxFileSystem(wxFileSystem&&) = default;
-    wxFileSystem& operator=(wxFileSystem&&) = default;
+    wxFileSystem& operator=(wxFileSystem&&) = delete;
 
     // sets the current location. Every call to OpenFile is
     // relative to this location.
@@ -300,10 +294,7 @@ public:
     wxFSInputStream(const wxString& filename, unsigned int flags = 0);
     ~wxFSInputStream();
 
-    wxFSInputStream(const wxFSInputStream&) = delete;
-    wxFSInputStream& operator=(const wxFSInputStream&) = delete;
-    wxFSInputStream(wxFSInputStream&&) = default;
-    wxFSInputStream& operator=(wxFSInputStream&&) = default;
+    wxFSInputStream& operator=(wxFSInputStream&&) = delete;
 
 private:
     wxFSFile* m_file;

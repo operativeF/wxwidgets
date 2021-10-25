@@ -555,12 +555,7 @@ class WXDLLIMPEXP_CORE wxGraphicsContext : public wxGraphicsObject
 public:
     wxGraphicsContext(wxGraphicsRenderer* renderer, wxWindow* window = nullptr);
 
-    ~wxGraphicsContext() = default;
-
-    wxGraphicsContext(const wxGraphicsContext&) = delete;
-    wxGraphicsContext& operator=(const wxGraphicsContext&) = delete;
-    wxGraphicsContext(wxGraphicsContext&&) = default;
-    wxGraphicsContext& operator=(wxGraphicsContext&&) = default;
+    wxGraphicsContext& operator=(wxGraphicsContext&&) = delete;
 
     static std::unique_ptr<wxGraphicsContext> Create( const wxWindowDC& dc);
     static std::unique_ptr<wxGraphicsContext> Create( const wxMemoryDC& dc);
@@ -956,13 +951,7 @@ private:
 class WXDLLIMPEXP_CORE wxGraphicsRenderer : public wxObject
 {
 public:
-    wxGraphicsRenderer() = default;
-    ~wxGraphicsRenderer() = default;
-
-    wxGraphicsRenderer(const wxGraphicsRenderer&) = delete;
-    wxGraphicsRenderer& operator=(const wxGraphicsRenderer&) = delete;
-    wxGraphicsRenderer(wxGraphicsRenderer&&) = default;
-    wxGraphicsRenderer& operator=(wxGraphicsRenderer&&) = default;
+    wxGraphicsRenderer& operator=(wxGraphicsRenderer&&) = delete;
 
     static wxGraphicsRenderer* GetDefaultRenderer();
 

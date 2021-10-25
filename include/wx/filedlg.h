@@ -88,13 +88,7 @@ public:
         Create(parent, message, defaultDir, defaultFile, wildCard, style, pos, sz, name);
     }
 
-    wxFileDialogBase(const wxFileDialogBase&) = delete;
-    wxFileDialogBase& operator=(const wxFileDialogBase&) = delete;
-    wxFileDialogBase(wxFileDialogBase&&) = default;
-    wxFileDialogBase& operator=(wxFileDialogBase&&) = default;
-
-    ~wxFileDialogBase() = default;
-
+    wxFileDialogBase& operator=(wxFileDialogBase&&) = delete;
 
     [[maybe_unused]] bool Create(wxWindow *parent,
                 const std::string& message = wxFileSelectorPromptStr,

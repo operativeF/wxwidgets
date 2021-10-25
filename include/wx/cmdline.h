@@ -164,8 +164,6 @@ public:
 
     wxCmdLineArgs (const wxCmdLineParser& parser) : m_parser(parser) {}
 
-    wxCmdLineArgs& operator=(const wxCmdLineArgs&) = delete;
-
     const_iterator begin() const { return const_iterator(m_parser, 0); }
     const_iterator end() const { return const_iterator(m_parser, size()); }
 
@@ -230,8 +228,7 @@ public:
 
     ~wxCmdLineParser();
 
-    wxCmdLineParser(const wxCmdLineParser&) = delete;
-	wxCmdLineParser& operator=(const wxCmdLineParser&) = delete;
+	wxCmdLineParser& operator=(wxCmdLineParser&&) = delete;
 
     // set different parser options
     // ----------------------------

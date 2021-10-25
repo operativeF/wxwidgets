@@ -62,10 +62,7 @@ public:
         Create(parent, id, pos, size, order, items, style, validator, name);
     }
 
-    wxRearrangeList(const wxRearrangeList&) = delete;
-    wxRearrangeList& operator=(const wxRearrangeList&) = delete;
-    wxRearrangeList(wxRearrangeList&&) = default;
-    wxRearrangeList& operator=(wxRearrangeList&&) = default;
+    wxRearrangeList& operator=(wxRearrangeList&&) = delete;
 
     // Create() function takes the same parameters as the base class one and
     // the order array determining the initial display order
@@ -142,10 +139,7 @@ public:
         Create(parent, id, pos, size, order, items, style, validator, name);
     }
 
-    wxRearrangeCtrl(const wxRearrangeCtrl&) = delete;
-    wxRearrangeCtrl& operator=(const wxRearrangeCtrl&) = delete;
-    wxRearrangeCtrl(wxRearrangeCtrl&&) = default;
-    wxRearrangeCtrl& operator=(wxRearrangeCtrl&&) = default;
+    wxRearrangeCtrl& operator=(wxRearrangeCtrl&&) = delete;
 
     [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,
@@ -193,10 +187,7 @@ public:
         Create(parent, message, title, order, items, pos, name);
     }
 
-    wxRearrangeDialog(const wxRearrangeDialog&) = delete;
-    wxRearrangeDialog& operator=(const wxRearrangeDialog&) = delete;
-    wxRearrangeDialog(wxRearrangeDialog&&) = default;
-    wxRearrangeDialog& operator=(wxRearrangeDialog&&) = default;
+    wxRearrangeDialog& operator=(wxRearrangeDialog&&) = delete;
 
     [[maybe_unused]] bool Create(wxWindow *parent,
                 const std::string& message,

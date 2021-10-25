@@ -44,10 +44,7 @@ public:
 
     ~wxTipWindow();
 
-   wxTipWindow(const wxTipWindow&) = delete;
-   wxTipWindow& operator=(const wxTipWindow&) = delete;
-   wxTipWindow(wxTipWindow&&) = default;
-   wxTipWindow& operator=(wxTipWindow&&) = default;
+    wxTipWindow& operator=(wxTipWindow&&) = delete;
 
     // If windowPtr is not NULL the given address will be NULLed when the
     // window has closed

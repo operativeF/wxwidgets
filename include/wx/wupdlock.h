@@ -43,10 +43,7 @@ public:
             m_win->Thaw();
     }
 
-   wxWindowUpdateLocker(const wxWindowUpdateLocker&) = delete;
-   wxWindowUpdateLocker& operator=(const wxWindowUpdateLocker&) = delete;
-   wxWindowUpdateLocker(wxWindowUpdateLocker&&) = default;
-   wxWindowUpdateLocker& operator=(wxWindowUpdateLocker&&) = default;
+   wxWindowUpdateLocker& operator=(wxWindowUpdateLocker&&) = delete;
 
 private:
     wxWindow *m_win{nullptr};

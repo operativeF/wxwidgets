@@ -29,10 +29,7 @@ public:
                         const std::string &title,
                         unsigned int style = 0);
 
-    wxFindReplaceDialog(const wxFindReplaceDialog&) = delete;
-    wxFindReplaceDialog& operator=(const wxFindReplaceDialog&) = delete;
-    wxFindReplaceDialog(wxFindReplaceDialog&&) = default;
-    wxFindReplaceDialog& operator=(wxFindReplaceDialog&&) = default;
+    wxFindReplaceDialog& operator=(wxFindReplaceDialog&&) = delete;
 
     [[maybe_unused]] bool Create(wxWindow *parent,
                 wxFindReplaceData *data,

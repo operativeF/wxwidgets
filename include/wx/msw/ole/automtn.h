@@ -47,6 +47,8 @@ public:
     wxAutomationObject(WXIDISPATCH* dispatchPtr = nullptr);
     ~wxAutomationObject();
 
+	wxAutomationObject& operator=(wxAutomationObject&&) = delete;
+
     // Set/get dispatch pointer
     void SetDispatchPtr(WXIDISPATCH* dispatchPtr) { m_dispatchPtr = dispatchPtr; }
     WXIDISPATCH* GetDispatchPtr() const { return m_dispatchPtr; }
@@ -127,9 +129,6 @@ public: // public for compatibility only, don't use m_dispatchPtr directly.
 private:
     WXLCID m_lcid{LOCALE_SYSTEM_DEFAULT};
     long   m_convertVariantFlags{wxOleConvertVariant_Default};
-
-    wxAutomationObject(const wxAutomationObject&) = delete;
-	wxAutomationObject& operator=(const wxAutomationObject&) = delete;
 };
 
 #endif // wxUSE_OLE_AUTOMATION

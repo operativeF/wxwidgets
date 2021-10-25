@@ -80,9 +80,6 @@ public:
 
 private:
     const wxRegion& m_clip;
-
-    wxPaintDCImpl(const wxPaintDCImpl&) = delete;
-	wxPaintDCImpl& operator=(const wxPaintDCImpl&) = delete;
 };
 //-----------------------------------------------------------------------------
 

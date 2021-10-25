@@ -51,12 +51,9 @@ WX_DEFINE_ARRAY_INT(wxFontEncoding, wxFontEncodingArray);
 class WXDLLIMPEXP_BASE wxEncodingConverter
 {
     public:
-
-            wxEncodingConverter() = default;
             ~wxEncodingConverter() { delete[] m_Table; }
 
-            wxEncodingConverter(const wxEncodingConverter&) = delete;
-            wxEncodingConverter& operator=(const wxEncodingConverter&) = delete;
+            wxEncodingConverter& operator=(wxEncodingConverter&&) = delete;
 
             // Initialize conversion. Both output or input encoding may
             // be wxFONTENCODING_UNICODE.

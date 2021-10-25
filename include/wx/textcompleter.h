@@ -22,8 +22,6 @@
 class WXDLLIMPEXP_CORE wxTextCompleter
 {
 public:
-    wxTextCompleter() = default;
-
     // The virtual functions to be implemented by the derived classes: the
     // first one is called to start preparing for completions for the given
     // prefix and, if it returns true, GetNext() is called until it returns an
@@ -33,10 +31,7 @@ public:
 
     virtual ~wxTextCompleter() = default;
 
-    wxTextCompleter(const wxTextCompleter&) = delete;
-    wxTextCompleter& operator=(const wxTextCompleter&) = delete;
-    wxTextCompleter(wxTextCompleter&&) = default;
-    wxTextCompleter& operator=(wxTextCompleter&&) = default;
+    wxTextCompleter& operator=(wxTextCompleter&&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -46,12 +41,7 @@ public:
 class WXDLLIMPEXP_CORE wxTextCompleterSimple : public wxTextCompleter
 {
 public:
-    wxTextCompleterSimple() = default;
-
-   wxTextCompleterSimple(const wxTextCompleterSimple&) = delete;
-   wxTextCompleterSimple& operator=(const wxTextCompleterSimple&) = delete;
-   wxTextCompleterSimple(wxTextCompleterSimple&&) = default;
-   wxTextCompleterSimple& operator=(wxTextCompleterSimple&&) = default;
+   wxTextCompleterSimple& operator=(wxTextCompleterSimple&&) = delete;
 
     // Must be implemented to return all the completions for the given prefix.
     virtual const std::vector<std::string>& GetCompletions(const std::string& prefix) = 0;

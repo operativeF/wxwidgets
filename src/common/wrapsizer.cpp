@@ -48,9 +48,6 @@ private:
     wxSizer& m_sizer;
     wxSizerItem& m_item;
     const int m_propOld;
-
-    wxPropChanger(const wxPropChanger&) = delete;
-	wxPropChanger& operator=(const wxPropChanger&) = delete;
 };
 
 } // anonymous namespace

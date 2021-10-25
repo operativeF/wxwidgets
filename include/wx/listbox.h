@@ -45,13 +45,7 @@ constexpr unsigned int wxLB_EXTENDED       = 0x0080;
 class WXDLLIMPEXP_CORE wxListBoxBase : public wxControlWithItems
 {
 public:
-    wxListBoxBase() = default;
-    ~wxListBoxBase() = default;
-
-    wxListBoxBase(const wxListBoxBase&) = delete;
-    wxListBoxBase& operator=(const wxListBoxBase&) = delete;
-    wxListBoxBase(wxListBoxBase&&) = default;
-    wxListBoxBase& operator=(wxListBoxBase&&) = default;
+    wxListBoxBase& operator=(wxListBoxBase&&) = delete;
 
     void InsertItems(const std::vector<std::string>& items, unsigned int pos)
         { Insert(items, pos); }

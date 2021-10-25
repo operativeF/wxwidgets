@@ -127,9 +127,6 @@ public:
     { m_flag = true; }
     ~ReentrancyBlocker() { m_flag = m_flagOld; }
 
-    ReentrancyBlocker(const ReentrancyBlocker&) = delete;
-	ReentrancyBlocker& operator=(const ReentrancyBlocker&) = delete;
-
 private:
     bool& m_flag;
     bool m_flagOld;

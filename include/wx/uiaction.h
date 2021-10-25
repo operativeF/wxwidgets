@@ -25,12 +25,8 @@ class WXDLLIMPEXP_CORE wxUIActionSimulator
 {
 public:
     wxUIActionSimulator();
-    ~wxUIActionSimulator() = default;
 
-   wxUIActionSimulator(const wxUIActionSimulator&) = delete;
-   wxUIActionSimulator& operator=(const wxUIActionSimulator&) = delete;
-   wxUIActionSimulator(wxUIActionSimulator&&) = default;
-   wxUIActionSimulator& operator=(wxUIActionSimulator&&) = default;
+   wxUIActionSimulator& operator=(wxUIActionSimulator&&) = delete;
 
     // Mouse simulation
     // ----------------

@@ -29,10 +29,7 @@ public:
      if ( n ) Create(n);
     }
 
-    wxSubwindows(const wxSubwindows&) = delete;
-    wxSubwindows& operator=(const wxSubwindows&) = delete;
-    wxSubwindows(wxSubwindows&&) = default;
-    wxSubwindows& operator=(wxSubwindows&&) = default;
+    wxSubwindows& operator=(wxSubwindows&&) = delete;
     
     // allocate enough space for the given number of windows
     void Create(size_t n)

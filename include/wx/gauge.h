@@ -59,12 +59,7 @@ public:
 #endif
         m_appProgressIndicator{nullptr} { }
 
-    ~wxGaugeBase() = default;
-
-    wxGaugeBase(const wxGaugeBase&) = delete;
-    wxGaugeBase& operator=(const wxGaugeBase&) = delete;
-    wxGaugeBase(wxGaugeBase&&) = default;
-    wxGaugeBase& operator=(wxGaugeBase&&) = default;
+    wxGaugeBase& operator=(wxGaugeBase&&) = delete;
 
     [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,

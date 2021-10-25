@@ -63,12 +63,7 @@ public:
              const wxValidator& validator = wxDefaultValidator,
              const std::string& name = wxSliderNameStr);
     */
-    wxSliderBase() = default;
-    ~wxSliderBase() = default;
-    wxSliderBase(const wxSliderBase&) = delete;
-    wxSliderBase& operator=(const wxSliderBase&) = delete;
-    wxSliderBase(wxSliderBase&&) = default;
-    wxSliderBase& operator=(wxSliderBase&&) = default;
+    wxSliderBase& operator=(wxSliderBase&&) = delete;
 
     // get/set the current slider value (should be in range)
     virtual int GetValue() const = 0;

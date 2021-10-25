@@ -38,10 +38,7 @@ public:
 
     }
 
-    wxColourDialog(const wxColourDialog&) = delete;
-    wxColourDialog& operator=(const wxColourDialog&) = delete;
-    wxColourDialog(wxColourDialog&&) = default;
-    wxColourDialog& operator=(wxColourDialog&&) = default;
+    wxColourDialog& operator=(wxColourDialog&&) = delete;
 
     wxColourData& GetColourData() { return m_colourData; }
 

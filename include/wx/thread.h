@@ -130,10 +130,7 @@ public:
     // destroys the mutex kernel object
     ~wxMutex();
 
-   wxMutex(const wxMutex&) = delete;
-   wxMutex& operator=(const wxMutex&) = delete;
-   wxMutex(wxMutex&&) = default;
-   wxMutex& operator=(wxMutex&&) = default;
+    wxMutex& operator=(wxMutex&&) = delete;
 
     // test if the mutex has been created successfully
     bool IsOk() const;
@@ -175,9 +172,6 @@ public:
     wxMutexLocker(wxMutex& mutex)
         : m_mutex(mutex)
         { m_isOk = ( m_mutex.Lock() == wxMutexError::None ); }
-
-    wxMutexLocker(const wxMutexLocker&) = delete;
-    wxMutexLocker& operator=(const wxMutexLocker&) = delete;
 
     // returns true if mutex was successfully locked in ctor
     bool IsOk() const
@@ -232,10 +226,7 @@ public:
     wxCRITSECT_INLINE wxCriticalSection( wxCriticalSectionType critSecType = wxCRITSEC_DEFAULT );
     wxCRITSECT_INLINE ~wxCriticalSection();
 
-   wxCriticalSection(const wxCriticalSection&) = delete;
-   wxCriticalSection& operator=(const wxCriticalSection&) = delete;
-   wxCriticalSection(wxCriticalSection&&) = default;
-   wxCriticalSection& operator=(wxCriticalSection&&) = default;
+    wxCriticalSection& operator=(wxCriticalSection&&) = delete;
 
     // enter the section (the same as locking a mutex)
     wxCRITSECT_INLINE void Enter();
@@ -302,11 +293,6 @@ public:
         m_critsect.Leave();
     }
 
-   wxCriticalSectionLocker(const wxCriticalSectionLocker&) = delete;
-   wxCriticalSectionLocker& operator=(const wxCriticalSectionLocker&) = delete;
-   wxCriticalSectionLocker(wxCriticalSectionLocker&&) = default;
-   wxCriticalSectionLocker& operator=(wxCriticalSectionLocker&&) = default;
-
 private:
     wxCriticalSection& m_critsect;
 };
@@ -325,10 +311,7 @@ public:
 
     ~wxCondition();
 
-   wxCondition(const wxCondition&) = delete;
-   wxCondition& operator=(const wxCondition&) = delete;
-   wxCondition(wxCondition&&) = default;
-   wxCondition& operator=(wxCondition&&) = default;
+    wxCondition& operator=(wxCondition&&) = delete;
 
     // return true if the condition has been created successfully
     bool IsOk() const;
@@ -398,10 +381,7 @@ public:
     // dtor is not virtual, don't use this class polymorphically
     ~wxSemaphore();
 
-   wxSemaphore(const wxSemaphore&) = delete;
-   wxSemaphore& operator=(const wxSemaphore&) = delete;
-   wxSemaphore(wxSemaphore&&) = default;
-   wxSemaphore& operator=(wxSemaphore&&) = default;
+    wxSemaphore& operator=(wxSemaphore&&) = delete;
 
     // return true if the semaphore has been created successfully
     bool IsOk() const;
@@ -663,10 +643,6 @@ protected:
 private:
     // the owner of the thread
     wxThreadHelper& m_owner;
-
-    // no copy ctor/assignment operator
-    wxThreadHelperThread(const wxThreadHelperThread&);
-    wxThreadHelperThread& operator=(const wxThreadHelperThread&);
 };
 
 // ----------------------------------------------------------------------------

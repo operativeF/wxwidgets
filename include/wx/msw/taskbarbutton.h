@@ -27,10 +27,7 @@ class WXDLLIMPEXP_CORE wxTaskBarButtonImpl : public wxTaskBarButton
 public:
     ~wxTaskBarButtonImpl();
 
-    wxTaskBarButtonImpl(const wxTaskBarButtonImpl&) = delete;
-    wxTaskBarButtonImpl& operator=(const wxTaskBarButtonImpl&) = delete;
-    wxTaskBarButtonImpl(wxTaskBarButtonImpl&&) = default;
-    wxTaskBarButtonImpl& operator=(wxTaskBarButtonImpl&&) = default;
+    wxTaskBarButtonImpl& operator=(wxTaskBarButtonImpl&&) = delete;
     
     void SetProgressRange(int range) override;
     void SetProgressValue(int value) override;

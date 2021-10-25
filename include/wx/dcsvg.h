@@ -92,10 +92,7 @@ public:
 
     ~wxSVGFileDCImpl();
 
-    wxSVGFileDCImpl(const wxSVGFileDCImpl&) = delete;
-    wxSVGFileDCImpl& operator=(const wxSVGFileDCImpl&) = delete;
-    wxSVGFileDCImpl(wxSVGFileDCImpl&&) = default;
-    wxSVGFileDCImpl& operator=(wxSVGFileDCImpl&&) = default;
+    wxSVGFileDCImpl& operator=(wxSVGFileDCImpl&&) = delete;
 
     bool IsOk() const override { return m_OK; }
 
