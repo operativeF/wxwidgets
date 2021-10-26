@@ -288,9 +288,6 @@ private:
     int const m_rendererFlags;
     wxEllipsizeMode m_ellipsizeMode;
     wxRendererNative* const m_renderer;
-
-    wxMarkupParserRenderItemOutput(const wxMarkupParserRenderItemOutput&) = delete;
-	wxMarkupParserRenderItemOutput& operator=(const wxMarkupParserRenderItemOutput&) = delete;
 };
 
 } // anonymous namespace

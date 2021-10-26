@@ -23,8 +23,9 @@
 class wxDisplayFactory
 {
 public:
-    wxDisplayFactory() = default;
     virtual ~wxDisplayFactory() { ClearImpls(); }
+
+	wxDisplayFactory& operator=(wxDisplayFactory&&) = delete;
 
     // Create the display if necessary using CreateDisplay(), otherwise just
     // get it from cache.
@@ -90,9 +91,6 @@ private:
 
     // On-demand populated vector of wxDisplayImpl objects.
     std::vector<wxDisplayImpl*> m_impls;
-
-    wxDisplayFactory(const wxDisplayFactory&) = delete;
-	wxDisplayFactory& operator=(const wxDisplayFactory&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -146,15 +144,10 @@ protected:
     // create the object providing access to the display with the given index
     wxDisplayImpl(unsigned n) : m_index(n) { }
 
-
     // the index of this display (0 is always the primary one)
     const unsigned m_index;
 
-
     friend class wxDisplayFactory;
-
-    wxDisplayImpl(const wxDisplayImpl&) = delete;
-	wxDisplayImpl& operator=(const wxDisplayImpl&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -187,9 +180,6 @@ public:
         return false;
     }
 #endif // wxUSE_DISPLAY
-
-    wxDisplayImplSingle(const wxDisplayImplSingle&) = delete;
-	wxDisplayImplSingle& operator=(const wxDisplayImplSingle&) = delete;
 };
 
 // ----------------------------------------------------------------------------

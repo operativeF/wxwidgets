@@ -21,6 +21,17 @@ public:
   wxMiniFrame() = default;
   wxMiniFrame& operator=(wxMiniFrame&&) = delete;
 
+  wxMiniFrame(wxWindow *parent,
+              wxWindowID id,
+              const std::string& title,
+              const wxPoint& pos = wxDefaultPosition,
+              const wxSize& size = wxDefaultSize,
+              unsigned int style = wxCAPTION | wxCLIP_CHILDREN | wxRESIZE_BORDER,
+              const std::string& name = wxFrameNameStr)
+  {
+      Create(parent, id, title, pos, size, style, name);
+  }
+  
   [[maybe_unused]] bool Create(wxWindow *parent,
               wxWindowID id,
               const std::string& title,
@@ -33,17 +44,6 @@ public:
                              style |
                              wxFRAME_TOOL_WINDOW |
                              (parent ? wxFRAME_FLOAT_ON_PARENT : 0), name);
-  }
-
-  wxMiniFrame(wxWindow *parent,
-              wxWindowID id,
-              const std::string& title,
-              const wxPoint& pos = wxDefaultPosition,
-              const wxSize& size = wxDefaultSize,
-              unsigned int style = wxCAPTION | wxCLIP_CHILDREN | wxRESIZE_BORDER,
-              const std::string& name = wxFrameNameStr)
-  {
-      Create(parent, id, title, pos, size, style, name);
   }
 
 public:

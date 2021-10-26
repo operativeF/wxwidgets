@@ -46,9 +46,6 @@ protected:
 
 private:
     const wxString m_traceMask;
-
-    wxProtocolLog(const wxProtocolLog&) = delete;
-	wxProtocolLog& operator=(const wxProtocolLog&) = delete;
 };
 
 #endif // _WX_PROTOCOL_LOG_H_

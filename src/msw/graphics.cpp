@@ -382,9 +382,6 @@ public:
 
     ~wxGDIPlusContext();
 
-    wxGDIPlusContext(const wxGDIPlusContext&) = delete;
-	wxGDIPlusContext& operator=(const wxGDIPlusContext&) = delete;
-
     void Clip( const wxRegion &region ) override;
     // clips drawings to the rect
     void Clip( float x, float y, float w, float h ) override;

@@ -124,9 +124,6 @@ class WXDLLIMPEXP_CORE wxTreeListCtrl
       public wxWithImages
 {
 public:
-    // Constructors and such
-    // ---------------------
-
     wxTreeListCtrl() = default;
 
     wxTreeListCtrl(wxWindow* parent,
@@ -477,10 +474,7 @@ public:
 
     wxEvent* Clone() const override { return new wxTreeListEvent(*this); }
 
-private:
-    // Common part of all ctors.
-    
-
+private:    
     // Ctor is private, only wxTreeListCtrl can create events of this type.
     wxTreeListEvent(wxEventType evtType,
                     wxTreeListCtrl* treelist,
@@ -496,8 +490,6 @@ private:
         m_oldCheckedState = wxCheckBoxState::Indeterminate;
     
     }
-
-    wxTreeListEvent& operator=(const wxTreeListEvent&) = delete;
 
     // Set the checkbox state before this event for ITEM_CHECKED events.
     void SetOldCheckedState(wxCheckBoxState state)

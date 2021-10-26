@@ -596,8 +596,6 @@ public:
                 m_win->EndRepositioningChildren();
         }
 
-	    ChildrenRepositioningGuard& operator=(ChildrenRepositioningGuard&&) = delete;
-
     private:
         wxWindowBase* const m_win;
         const bool m_callEnd;

@@ -28,8 +28,6 @@ public:
     wxTaskBarIcon(wxTaskBarIconType iconType = wxTaskBarIconType::DefaultType);
     ~wxTaskBarIcon();
 
-    wxTaskBarIcon& operator=(wxTaskBarIcon&&) = delete;
-
     // Accessors
     bool IsOk() const { return true; }
     bool IsIconInstalled() const { return m_iconAdded; }

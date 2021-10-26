@@ -37,9 +37,6 @@ protected:
 
     std::unique_ptr<wxWindow> m_win;
     wxFlexGridSizer* m_sizer;
-
-    GridSizerTestCase(const GridSizerTestCase&) = delete;
-	GridSizerTestCase& operator=(const GridSizerTestCase&) = delete;
 };
 
 // ----------------------------------------------------------------------------

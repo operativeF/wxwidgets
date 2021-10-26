@@ -307,10 +307,6 @@ class WXDLLIMPEXP_CORE wxStandardDialogLayoutAdapter: public wxDialogLayoutAdapt
 {
     wxDECLARE_CLASS(wxStandardDialogLayoutAdapter);
 public:
-    wxStandardDialogLayoutAdapter() = default;
-
-// Overrides
-
     // Indicate that adaptation should be done
     bool CanDoLayoutAdaptation(wxDialog* dialog) override;
 

@@ -62,8 +62,6 @@ class WXDLLIMPEXP_CORE wxFrameBase : public wxTopLevelWindow
 public:
     ~wxFrameBase();
 
-    wxFrameBase& operator=(wxFrameBase&&) = delete;
-
     wxFrame *New(wxWindow *parent,
                  wxWindowID winid,
                  const std::string& title,

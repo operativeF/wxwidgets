@@ -108,9 +108,6 @@ private:
     LONG_PTR m_style;
 
     const int m_gwlSlot;
-
-    wxMSWWinLongUpdater(const wxMSWWinLongUpdater&) = delete;
-	wxMSWWinLongUpdater& operator=(const wxMSWWinLongUpdater&) = delete;
 };
 
 // A variant of wxMSWWinLongUpdater which updates the extended style.

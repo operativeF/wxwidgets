@@ -160,9 +160,6 @@ private:
 
 
     wxMarkupParserOutput& m_output;
-
-    wxMarkupParser(const wxMarkupParser&) = delete;
-	wxMarkupParser& operator=(const wxMarkupParser&) = delete;
 };
 
 #endif // _WX_PRIVATE_MARKUPPARSER_H_

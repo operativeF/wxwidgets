@@ -332,8 +332,6 @@ public:
         SetHDC((WXHDC)nullptr);
     }
 
-	wxDCTempImpl& operator=(wxDCTempImpl&&) = delete;
-
     wxSize DoGetSize() const override
     {
         wxASSERT_MSG( m_size.IsFullySpecified(),

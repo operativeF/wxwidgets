@@ -52,9 +52,6 @@ public:
 
 private:
     const bool m_ok;
-
-    Initializer(const Initializer&) = delete;
-	Initializer& operator=(const Initializer&) = delete;
 };
 
 // Simple class to convert wxString to HSTRING

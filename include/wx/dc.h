@@ -658,8 +658,6 @@ private:
 class WXDLLIMPEXP_CORE wxDC : public wxObject
 {
 public:
-    wxDC& operator=(wxDC&&) = delete;
-
     // copy attributes (font, colours and writing direction) from another DC
     void CopyAttributes(const wxDC& dc);
 

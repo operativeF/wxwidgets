@@ -79,8 +79,6 @@ public:
 
     ~wxMenu();
 
-    wxMenu& operator=(wxMenu&&) = delete;
-
     void Break() override;
 
     void SetTitle(const std::string& title) override;

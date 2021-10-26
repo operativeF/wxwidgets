@@ -404,9 +404,6 @@ public:
         SetBackgroundStyle(wxBackgroundStyle::Paint);
     }
 
-    wxGridWindow(const wxGridWindow&) = delete;
-	wxGridWindow& operator=(const wxGridWindow&) = delete;
-
     void ScrollWindow( int dx, int dy, const wxRect *rect ) override;
 
     bool AcceptsFocus() const override { return true; }

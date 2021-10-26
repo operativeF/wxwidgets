@@ -41,9 +41,6 @@ protected:
 
 private:
     const wxWebAuthChallenge::Source m_source;
-
-    wxWebAuthChallengeImpl(const wxWebAuthChallengeImpl&) = delete;
-	wxWebAuthChallengeImpl& operator=(const wxWebAuthChallengeImpl&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -53,9 +50,6 @@ private:
 class wxWebRequestImpl : public wxRefCounterMT
 {
 public:
-    wxWebRequestImpl(const wxWebRequestImpl&) = delete;
-	wxWebRequestImpl& operator=(const wxWebRequestImpl&) = delete;
-
     void SetHeader(const wxString& name, const wxString& value)
     { m_headers[name] = value; }
 

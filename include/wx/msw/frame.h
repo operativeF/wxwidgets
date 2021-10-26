@@ -32,8 +32,6 @@ public:
         Create(parent, id, title, pos, size, style, name);
     }
 
-    wxFrame& operator=(wxFrame&&) = delete;
-
     [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,
                 const std::string& title,

@@ -32,8 +32,6 @@ public:
           m_detailsExpanderExpandedLabel( wxGetTranslation("&Hide details") )
     {}
 
-    wxRichMessageDialogBase& operator=(wxRichMessageDialogBase&&) = delete;
-
     void ShowCheckBox(const wxString& checkBoxText, bool checked = false)
     {
         m_checkBoxText = checkBoxText;

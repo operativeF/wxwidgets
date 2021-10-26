@@ -115,10 +115,7 @@ protected:
 private:
     // override MSW-specific methods needed for new control
     DWORD MSWGetStyle(unsigned int style, DWORD *exstyle) const override;
-    bool MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result) override;
-
-    // common part of all ctors
-    
+    bool MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result) override;    
 
     // wrapper around Header_InsertItem(): insert the item using information
     // from the given column at the given index

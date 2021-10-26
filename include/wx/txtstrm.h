@@ -40,8 +40,6 @@ public:
 
     ~wxTextInputStream();
 
-    wxTextInputStream& operator=(wxTextInputStream&&) = delete;
-
     const wxInputStream& GetInputStream() const { return m_input; }
 
     // base may be between 2 and 36, inclusive, or the special 0 (= C format)
@@ -130,8 +128,6 @@ public:
                        const wxMBConv& conv = wxConvAuto());
 
     virtual ~wxTextOutputStream();
-
-    wxTextOutputStream& operator=(wxTextOutputStream&&) = delete;
 
     const wxOutputStream& GetOutputStream() const { return m_output; }
 

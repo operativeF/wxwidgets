@@ -814,8 +814,6 @@ public:
     {
     }
 
-    wxLogger& operator=(wxLogger&&) = delete;
-
     // store extra data in our log record and return this object itself (so
     // that further calls to its functions could be chained)
     template <typename T>

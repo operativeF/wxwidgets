@@ -70,8 +70,6 @@ public:
     wxGCDCImpl(wxDC *owner, std::unique_ptr<wxGraphicsContext> context);
 
     wxGCDCImpl( wxDC *owner );
-
-    wxGCDCImpl& operator=(wxGCDCImpl&&) = delete;
     
     void Clear() override;
 

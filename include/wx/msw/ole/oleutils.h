@@ -241,8 +241,6 @@ public:
             wxOleUninitialize();
     }
 
-	wxOleInitializer& operator=(wxOleInitializer&&) = delete;
-
 private:
     const bool m_ok;
 };

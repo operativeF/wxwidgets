@@ -536,7 +536,6 @@ WX_DECLARE_EXPORTED_LIST( wxSizerItem, wxSizerItemList );
 class WXDLLIMPEXP_CORE wxSizer: public wxObject, public wxClientDataContainer
 {
 public:
-    wxSizer() = default;
     ~wxSizer();
 
     // methods for adding elements to the sizer: there are Add/Insert/Prepend

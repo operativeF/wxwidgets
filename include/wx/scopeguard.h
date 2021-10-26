@@ -384,9 +384,6 @@ public:
 private:
     T& m_var;
     const U m_value;
-
-    // suppress the warning about assignment operator not being generated
-    VariableSetterImpl<T, U>& operator=(const VariableSetterImpl<T, U>&);
 };
 
 template <typename T>
@@ -404,8 +401,6 @@ public:
 
 private:
     T& m_var;
-
-    VariableNullerImpl<T>& operator=(const VariableNullerImpl<T>&);
 };
 
 } // namespace wxPrivate

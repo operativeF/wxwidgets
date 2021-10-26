@@ -40,8 +40,6 @@ public:
         Change(colFg, colBg);
     }
 
-	wxTextColoursChanger& operator=(wxTextColoursChanger&&) = delete;
-
     ~wxTextColoursChanger()
     {
         if ( m_oldColFg != CLR_INVALID )
@@ -117,8 +115,6 @@ public:
         if ( m_oldMode )
             ::SetBkMode(m_hdc, m_oldMode);
     }
-
-    wxBkModeChanger& operator=(wxBkModeChanger&&) = delete;
 
 protected:
     // this ctor doesn't change mode immediately, call Change() later to do it

@@ -92,8 +92,6 @@ public:
 
     ~wxSVGFileDCImpl();
 
-    wxSVGFileDCImpl& operator=(wxSVGFileDCImpl&&) = delete;
-
     bool IsOk() const override { return m_OK; }
 
     bool CanDrawBitmap() const override { return true; }
