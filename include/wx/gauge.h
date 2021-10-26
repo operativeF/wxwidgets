@@ -53,14 +53,6 @@ constexpr char wxGaugeNameStr[] = "gauge";
 class WXDLLIMPEXP_CORE wxGaugeBase : public wxControl
 {
 public:
-    wxGaugeBase() : m_rangeMax(0), m_gaugePos(0),
-#if wxGAUGE_EMULATE_INDETERMINATE_MODE
-        m_nDirection(wxRIGHT),
-#endif
-        m_appProgressIndicator{nullptr} { }
-
-    wxGaugeBase& operator=(wxGaugeBase&&) = delete;
-
     [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,
                 int range,
@@ -98,10 +90,10 @@ protected:
     void InitProgressIndicatorIfNeeded();
 
     // the max position
-    int m_rangeMax;
+    int m_rangeMax{0};
 
     // the current position
-    int m_gaugePos;
+    int m_gaugePos{0};
 
 #if wxGAUGE_EMULATE_INDETERMINATE_MODE
     // in case we need to emulate indeterminate mode...
