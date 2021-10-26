@@ -471,12 +471,14 @@ int wxFileDialog::ShowModal()
         msw_flags |= OFN_OVERWRITEPROMPT;
     }
 
-    OPENFILENAME of;
+    OPENFILENAMEW of;
     wxZeroMemory(of);
 
-    of.lStructSize       = sizeof(OPENFILENAME);
+    boost::nowide::wstackstring stackTitle{m_message.c_str()};
+
+    of.lStructSize       = sizeof(OPENFILENAMEW);
     of.hwndOwner         = hWndParent;
-    of.lpstrTitle        = boost::nowide::widen(m_message).c_str();
+    of.lpstrTitle        = stackTitle.get();
     of.lpstrFileTitle    = titleBuffer;
     of.nMaxFileTitle     = wxMAXFILE + 1 + wxMAXEXT;
 
@@ -568,7 +570,9 @@ int wxFileDialog::ShowModal()
 
     std::replace(filterBuffer.begin(), filterBuffer.end(), '|', '\0');
 
-    of.lpstrFilter  = boost::nowide::widen(filterBuffer).c_str();
+    boost::nowide::wstackstring stackFilterBuffer{filterBuffer.c_str()};
+
+    of.lpstrFilter  = stackFilterBuffer.get();
     of.nFilterIndex = m_filterIndex + 1;
     m_currentlySelectedFilterIndex = m_filterIndex;
 

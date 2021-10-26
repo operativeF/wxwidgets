@@ -45,19 +45,26 @@ int wxRichMessageDialog::ShowModal()
         // add a checkbox
         if ( !m_checkBoxText.empty() )
         {
-            tdc.pszVerificationText = boost::nowide::widen(m_checkBoxText).c_str();
+            boost::nowide::wstackstring stackCheckBoxText{m_checkBoxText.c_str()};
+
+            tdc.pszVerificationText = stackCheckBoxText.get();
+
             if ( m_checkBoxValue )
                 tdc.dwFlags |= TDF_VERIFICATION_FLAG_CHECKED;
         }
 
         // add collapsible footer
         if ( !m_detailedText.empty() )
-            tdc.pszExpandedInformation = boost::nowide::widen(m_detailedText).c_str();
-
+        {
+            boost::nowide::wstackstring stackDetText{m_detailedText.c_str()};
+            tdc.pszExpandedInformation = stackDetText.get();
+        }
         // Add footer text
         if ( !m_footerText.empty() )
         {
-            tdc.pszFooter = boost::nowide::widen(m_footerText).c_str();
+            boost::nowide::wstackstring stackFooterText{m_footerText.c_str()};
+
+            tdc.pszFooter = stackFooterText.get();
             switch ( m_footerIcon )
             {
                 case wxICON_INFORMATION:

@@ -817,8 +817,9 @@ bool wxMDIChildFrame::Create(wxMDIParentFrame *parent,
                               );
 
   boost::nowide::wstackstring stackTitle(title.c_str());
+  boost::nowide::wstackstring stackClassName{className.c_str()};
 
-  mcs.szClass = boost::nowide::widen(className).c_str();
+  mcs.szClass = stackClassName.get();
   mcs.szTitle = stackTitle.get();
   mcs.hOwner = wxGetInstance();
   if (x != wxDefaultCoord)
