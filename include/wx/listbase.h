@@ -349,8 +349,6 @@ protected:
 class WXDLLIMPEXP_CORE wxListCtrlBase : public wxSystemThemedControl<wxControl>
 {
 public:
-    wxListCtrlBase() = default;
-
     // Image list methods.
     // -------------------
 

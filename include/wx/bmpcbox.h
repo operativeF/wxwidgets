@@ -40,8 +40,6 @@ constexpr char wxBitmapComboBoxNameStr[] = "bitmapComboBox";
 class WXDLLIMPEXP_CORE wxBitmapComboBoxBase
 {
 public:
-    wxBitmapComboBoxBase() = default;
-
     virtual ~wxBitmapComboBoxBase() = default;
 
     // Sets the image for the given item.

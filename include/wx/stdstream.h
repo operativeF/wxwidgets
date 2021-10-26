@@ -56,7 +56,6 @@ class WXDLLIMPEXP_BASE wxStdInputStream : public std::istream
 {
 public:
     wxStdInputStream(wxInputStream& stream);
-    ~wxStdInputStream() = default;
 
 protected:
     wxStdInputStreamBuffer m_streamBuffer;
@@ -96,7 +95,6 @@ class WXDLLIMPEXP_BASE wxStdOutputStream : public std::ostream
 {
 public:
     wxStdOutputStream(wxOutputStream& stream);
-    ~wxStdOutputStream() = default;
 
 protected:
     wxStdOutputStreamBuffer m_streamBuffer;

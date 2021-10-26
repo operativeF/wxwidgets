@@ -25,7 +25,6 @@ public:
     wxBrush() = default;
     wxBrush(const wxColour& col, wxBrushStyle style = wxBrushStyle::Solid);
     explicit wxBrush(const wxBitmap& stipple);
-    ~wxBrush() = default;
 
     void SetColour(const wxColour& col) override;
     void SetColour(unsigned char r, unsigned char g, unsigned char b) override;

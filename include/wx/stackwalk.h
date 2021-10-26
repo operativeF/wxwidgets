@@ -88,9 +88,6 @@ public:
         return false;
     }
 
-
-    // although this class is not supposed to be used polymorphically, give it
-    // a virtual dtor to silence compiler warnings
     virtual ~wxStackFrameBase() = default;
 
 protected:
@@ -120,9 +117,6 @@ protected:
 class WXDLLIMPEXP_BASE wxStackWalkerBase
 {
 public:
-    // ctor does nothing, use Walk() to walk the stack
-    wxStackWalkerBase() = default;
-
     // dtor does nothing neither but should be virtual
     virtual ~wxStackWalkerBase() = default;
 

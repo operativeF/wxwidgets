@@ -382,7 +382,6 @@ private:
     // respective columns from m_cols and the arrays have same size
     struct CachedColWidthInfo
     {
-        CachedColWidthInfo()  = default;
         int width{0};  // cached width or 0 if not computed
         bool dirty{true}; // column was invalidated, header needs updating
     };
@@ -433,7 +432,6 @@ class WXDLLIMPEXP_CORE wxDataViewCtrlAccessible: public wxWindowAccessible
 {
 public:
     wxDataViewCtrlAccessible(wxDataViewCtrl* win);
-    ~wxDataViewCtrlAccessible() = default;
 
     wxAccStatus HitTest(const wxPoint& pt, int* childId,
                                 wxAccessible** childObject) override;

@@ -27,9 +27,6 @@
 class WXDLLIMPEXP_BASE wxFileTypeImpl
 {
 public:
-    // ctor
-    wxFileTypeImpl() = default;
-
     // one of these Init() function must be called (ctor can't take any
     // arguments because it's common)
 
@@ -121,7 +118,6 @@ class WXDLLIMPEXP_BASE wxMimeTypesManagerImpl
 public:
     // nothing to do here, we don't load any data but just go and fetch it from
     // the registry when asked for
-    wxMimeTypesManagerImpl() = default;
 
     // implement containing class functions
     wxFileType *GetFileTypeFromExtension(const wxString& ext);

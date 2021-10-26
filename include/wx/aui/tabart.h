@@ -41,8 +41,6 @@ class wxDC;
 class WXDLLIMPEXP_AUI wxAuiTabArt
 {
 public:
-
-    wxAuiTabArt() = default;
     virtual ~wxAuiTabArt() = default;
 
     virtual wxAuiTabArt* Clone() = 0;

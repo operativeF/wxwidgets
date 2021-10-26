@@ -119,9 +119,6 @@ public:
                const std::string& globalFilename = {},
                unsigned int style = 0);
 
-    // empty but ensures that dtor of all derived classes is virtual
-  ~wxConfigBase() = default;
-
   // path management
     // set current path: if the first character is '/', it's the absolute path,
     // otherwise it's a relative path. '..' is supported. If the strPath

@@ -65,9 +65,6 @@ wxDECLARE_EXPORTED_EVENT(WXDLLIMPEXP_CORE, wxEVT_SEARCH, wxCommandEvent);
 class WXDLLIMPEXP_CORE wxSearchCtrlBase : public wxSearchCtrlBaseBaseClass
 {
 public:
-    wxSearchCtrlBase() = default;
-    ~wxSearchCtrlBase() = default;
-
     // search control
 #if wxUSE_MENUS
     virtual void SetMenu(wxMenu *menu) = 0;

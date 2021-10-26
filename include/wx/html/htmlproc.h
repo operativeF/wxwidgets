@@ -33,9 +33,6 @@ class WXDLLIMPEXP_HTML wxHtmlProcessor : public wxObject
     wxDECLARE_ABSTRACT_CLASS(wxHtmlProcessor);
 
 public:
-    wxHtmlProcessor()  = default;
-    ~wxHtmlProcessor() = default;
-
     // Process input text and return processed result
     virtual wxString Process(const wxString& text) const = 0;
 

@@ -107,7 +107,6 @@ template<typename T> class wxVariantDataT : public wxVariantData
 {
 public:
     wxVariantDataT(const T& d) : m_data(d) {}
-    virtual ~wxVariantDataT() = default;
 
     // get a ref to the stored data
     T & Get() { return m_data; }

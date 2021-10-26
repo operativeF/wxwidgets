@@ -60,8 +60,6 @@ public:
         Init(data.m_nativeFontInfo);
     }
 
-    ~wxFontRefData() = default;
-
     // operations
     bool Alloc();
 

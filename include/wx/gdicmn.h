@@ -274,7 +274,6 @@ enum class wxEllipsizeMode
 
 class WXDLLIMPEXP_CORE wxGDIObjListBase {
 public:
-    wxGDIObjListBase() = default;
     ~wxGDIObjListBase();
 
 protected:
@@ -286,7 +285,6 @@ WX_DECLARE_STRING_HASH_MAP(wxColour*, wxStringToColourHashMap);
 class WXDLLIMPEXP_CORE wxColourDatabase
 {
 public:
-    wxColourDatabase() = default;
     ~wxColourDatabase();
 
     // find colour by name or name for the given colour
@@ -307,7 +305,6 @@ private:
 class WXDLLIMPEXP_CORE wxResourceCache: public wxList
 {
 public:
-    wxResourceCache() = default;
     ~wxResourceCache();
 };
 

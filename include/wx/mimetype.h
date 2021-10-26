@@ -387,7 +387,6 @@ private:
 class WXDLLIMPEXP_BASE wxMimeTypesManagerFactory
 {
 public:
-    wxMimeTypesManagerFactory() = default;
     virtual ~wxMimeTypesManagerFactory() = default;
 
     virtual wxMimeTypesManagerImpl *CreateMimeTypesManagerImpl();

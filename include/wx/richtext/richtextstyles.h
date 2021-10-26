@@ -59,9 +59,6 @@ public:
     /// Default constructor
     wxRichTextStyleDefinition(const std::string& name = {}) { Init(); m_name = name; }
 
-    /// Destructor
-    ~wxRichTextStyleDefinition() = default;
-
     /// Initialises members
     void Init() {}
 
@@ -136,9 +133,6 @@ public:
     wxRichTextCharacterStyleDefinition(const std::string& name = {}):
         wxRichTextStyleDefinition(name) {}
 
-    /// Destructor
-    ~wxRichTextCharacterStyleDefinition() = default;
-
     /// Clones the object
     wxRichTextStyleDefinition* Clone() const override { return new wxRichTextCharacterStyleDefinition(*this); }
 
@@ -160,9 +154,6 @@ public:
     /// Default constructor
     wxRichTextParagraphStyleDefinition(const std::string& name = {}):
         wxRichTextStyleDefinition(name) {}
-
-    // Destructor
-    ~wxRichTextParagraphStyleDefinition() = default;
 
     /// Sets and gets the next style
     void SetNextStyle(const std::string& name) { m_nextStyle = name; }
@@ -201,9 +192,6 @@ public:
     /// Default constructor
     wxRichTextListStyleDefinition(const std::string& name = {}):
         wxRichTextParagraphStyleDefinition(name) { Init(); }
-
-    /// Destructor
-    ~wxRichTextListStyleDefinition() = default;
 
     /// Copies from def
     void Copy(const wxRichTextListStyleDefinition& def);
@@ -267,9 +255,6 @@ public:
     /// Default constructor
     wxRichTextBoxStyleDefinition(const std::string& name = {}):
         wxRichTextStyleDefinition(name) {}
-
-    // Destructor
-    ~wxRichTextBoxStyleDefinition() = default;
 
     /// Copies from def
     void Copy(const wxRichTextBoxStyleDefinition& def);
@@ -683,8 +668,6 @@ public:
         Init();
         Create(parent, id, pos, size, style);
     }
-
-    ~wxRichTextStyleComboCtrl() = default;
 
     void Init()
     {

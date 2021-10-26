@@ -110,7 +110,6 @@ class WXDLLIMPEXP_FWD_CORE wxDCImpl;
 class WXDLLIMPEXP_CORE wxDCFactory
 {
 public:
-    wxDCFactory() = default;
     virtual ~wxDCFactory() = default;
 
     virtual std::unique_ptr<wxDCImpl> CreateWindowDC( wxWindowDC *owner, wxWindow *window ) = 0;
@@ -138,8 +137,6 @@ private:
 class WXDLLIMPEXP_CORE wxNativeDCFactory: public wxDCFactory
 {
 public:
-    wxNativeDCFactory() = default;
-
     std::unique_ptr<wxDCImpl> CreateWindowDC( wxWindowDC *owner, wxWindow *window ) override;
     std::unique_ptr<wxDCImpl> CreateClientDC( wxClientDC *owner, wxWindow *window ) override;
     std::unique_ptr<wxDCImpl> CreatePaintDC( wxPaintDC *owner, wxWindow *window ) override;

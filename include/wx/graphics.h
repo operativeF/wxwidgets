@@ -145,9 +145,6 @@ protected:
 
 class WXDLLIMPEXP_CORE wxGraphicsPen : public wxGraphicsObject
 {
-public:
-    wxGraphicsPen() = default;
-    ~wxGraphicsPen() = default;
 private:
     wxDECLARE_DYNAMIC_CLASS(wxGraphicsPen);
 };
@@ -156,9 +153,6 @@ extern WXDLLIMPEXP_DATA_CORE(wxGraphicsPen) wxNullGraphicsPen;
 
 class WXDLLIMPEXP_CORE wxGraphicsBrush : public wxGraphicsObject
 {
-public:
-    wxGraphicsBrush() = default;
-    ~wxGraphicsBrush() = default;
 private:
     wxDECLARE_DYNAMIC_CLASS(wxGraphicsBrush);
 };
@@ -167,9 +161,6 @@ extern WXDLLIMPEXP_DATA_CORE(wxGraphicsBrush) wxNullGraphicsBrush;
 
 class WXDLLIMPEXP_CORE wxGraphicsFont : public wxGraphicsObject
 {
-public:
-    wxGraphicsFont() = default;
-    ~wxGraphicsFont() = default;
 private:
     wxDECLARE_DYNAMIC_CLASS(wxGraphicsFont);
 };
@@ -179,9 +170,6 @@ extern WXDLLIMPEXP_DATA_CORE(wxGraphicsFont) wxNullGraphicsFont;
 class WXDLLIMPEXP_CORE wxGraphicsBitmap : public wxGraphicsObject
 {
 public:
-    wxGraphicsBitmap() = default;
-    ~wxGraphicsBitmap() = default;
-
     // Convert bitmap to wxImage: this is more efficient than converting to
     // wxBitmap first and then to wxImage and also works without X server
     // connection under Unix that wxBitmap requires.
@@ -205,10 +193,6 @@ extern WXDLLIMPEXP_DATA_CORE(wxGraphicsBitmap) wxNullGraphicsBitmap;
 class WXDLLIMPEXP_CORE wxGraphicsMatrix : public wxGraphicsObject
 {
 public:
-    wxGraphicsMatrix() = default;
-
-    ~wxGraphicsMatrix() = default;
-
     // concatenates the matrix
     virtual void Concat( const wxGraphicsMatrix *t );
     void Concat( const wxGraphicsMatrix &t ) { Concat( &t ); }

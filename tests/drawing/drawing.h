@@ -59,7 +59,6 @@ private:
     class ImageGraphicsContextLifeCycle: public DrawingTestGCFactory
     {
     public:
-        virtual ~ImageGraphicsContextLifeCycle() = default;
         wxString GetIdForFileName () const override { return "image"; }
         wxString GetExtensionForFileName () const override { return "png"; }
         bool UseImageComparison() const override { return true; }

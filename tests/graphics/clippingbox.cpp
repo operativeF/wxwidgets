@@ -354,8 +354,6 @@ public:
         m_gcdc->SetGraphicsContext(ctx);
     }
 
-    virtual ~ClippingBoxTestCaseGCDCGDIPlus() = default;
-
 private:
     CPPUNIT_TEST_SUITE( ClippingBoxTestCaseGCDCGDIPlus );
         CPPUNIT_TEST( InitialState );
@@ -477,8 +475,6 @@ public:
         wxGraphicsContext* ctx = rend->CreateContext(m_mdc);
         m_gcdc->SetGraphicsContext(ctx);
     }
-
-    virtual ~ClippingBoxTestCaseGCDCCairo() = default;
 
 private:
     CPPUNIT_TEST_SUITE( ClippingBoxTestCaseGCDCCairo );
@@ -1576,8 +1572,6 @@ public:
         m_rend = wxGraphicsRenderer::GetGDIPlusRenderer();
     }
 
-    virtual ~ClippingBoxTestCaseGCGDIPlus() = default;
-
 private:
     CPPUNIT_TEST_SUITE( ClippingBoxTestCaseGCGDIPlus );
         CPPUNIT_TEST( InitialState );
@@ -1669,8 +1663,6 @@ public:
         m_rend = wxGraphicsRenderer::GetCairoRenderer();
     }
 
-    virtual ~ClippingBoxTestCaseGCCairo() = default;
-
 private:
     CPPUNIT_TEST_SUITE( ClippingBoxTestCaseGCCairo );
         CPPUNIT_TEST( InitialState );
@@ -1708,8 +1700,6 @@ public:
     {
         m_rend = wxGraphicsRenderer::GetDefaultRenderer();
     }
-
-    virtual ~ClippingBoxTestCaseGCCoreGraphics() = default;
 
 private:
     CPPUNIT_TEST_SUITE( ClippingBoxTestCaseGCCoreGraphics );

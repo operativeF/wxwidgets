@@ -30,8 +30,6 @@ WX_DECLARE_STRING_HASH_MAP_WITH_DECL(
 class WXDLLIMPEXP_BASE wxShadowObject
 {
 public:
-    wxShadowObject() = default;
-
     void AddMethod( const wxString &name, wxShadowObjectMethod method )
     {
         wxShadowObjectMethods::iterator it = m_methods.find( name );
@@ -98,7 +96,6 @@ enum class wxClientDataType
 class WXDLLIMPEXP_BASE wxClientData
 {
 public:
-    wxClientData() = default;
     virtual ~wxClientData() = default;
 };
 

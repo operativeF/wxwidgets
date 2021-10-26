@@ -33,8 +33,6 @@ constexpr unsigned int wxCP_NO_TLW_RESIZE          = 0x0002;
 class WXDLLIMPEXP_CORE wxCollapsiblePaneBase : public wxControl
 {
 public:
-    wxCollapsiblePaneBase() = default;
-
     virtual void Collapse(bool collapse = true) = 0;
     void Expand() { Collapse(false); }
 

@@ -156,7 +156,7 @@ class LinearRGB
     using linear_color = boost::tmp::true_;
 
     DataRed   r{};
-    DataGreen g{};
+    DataGreen g{};  
     DataBlue  b{};
 };
 
@@ -829,9 +829,7 @@ public:
     // type of a single colour component
     using ChannelType = unsigned char;
 
-    wxColourBase() = default;
     ~wxColourBase() = default;
-
 
     // Set() functions
     // ---------------

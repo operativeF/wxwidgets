@@ -169,8 +169,6 @@ public:
         DefaultPane();
     }
 
-    ~wxAuiPaneInfo() = default;
-
     // Write the safe parts of a newly loaded PaneInfo structure "source" into "this"
     // used on loading perspectives etc.
     void SafeSet(wxAuiPaneInfo source)

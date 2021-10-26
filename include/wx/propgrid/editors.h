@@ -405,14 +405,6 @@ class WXDLLIMPEXP_PROPGRID wxPGEditorDialogAdapter : public wxObject
 {
     wxDECLARE_ABSTRACT_CLASS(wxPGEditorDialogAdapter);
 public:
-    wxPGEditorDialogAdapter()
-         
-    {
-        m_clientData = nullptr;
-    }
-
-    ~wxPGEditorDialogAdapter() = default;
-
     bool ShowDialog( wxPropertyGrid* propGrid, wxPGProperty* property );
 
     virtual bool DoShowDialog( wxPropertyGrid* propGrid,
@@ -429,7 +421,7 @@ public:
 
     // This member is public so scripting language bindings
     // wrapper code can access it freely.
-    void*               m_clientData;
+    void*               m_clientData{nullptr};
 
 private:
     wxVariant           m_value;
@@ -446,7 +438,6 @@ class WXDLLIMPEXP_PROPGRID wxPGMultiButton : public wxWindow
 {
 public:
     wxPGMultiButton( wxPropertyGrid* pg, const wxSize& sz );
-    ~wxPGMultiButton() = default;
 
     wxWindow* GetButton( unsigned int i ) { return m_buttons[i]; }
     const wxWindow* GetButton( unsigned int i ) const

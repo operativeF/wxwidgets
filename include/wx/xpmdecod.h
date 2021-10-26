@@ -23,10 +23,6 @@ class WXDLLIMPEXP_FWD_BASE wxInputStream;
 class WXDLLIMPEXP_CORE wxXPMDecoder
 {
 public:
-    // constructor, destructor, etc.
-    wxXPMDecoder() = default;
-    ~wxXPMDecoder() = default;
-
 #if wxUSE_STREAMS
     // Is the stream XPM file?
     // NOTE: this function modifies the current stream position

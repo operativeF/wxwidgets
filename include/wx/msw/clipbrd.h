@@ -41,7 +41,6 @@ WXDLLIMPEXP_CORE bool wxGetClipboardFormatName(wxDataFormat dataFormat,
 class WXDLLIMPEXP_CORE wxClipboard : public wxClipboardBase
 {
 public:
-    wxClipboard() = default;
     ~wxClipboard();
 
     // open the clipboard before SetData() and GetData()

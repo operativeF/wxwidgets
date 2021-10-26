@@ -1041,8 +1041,6 @@ public:
         REQUIRE(ctx != nullptr);
         m_gcdc->SetGraphicsContext(std::move(ctx));
     }
-
-    virtual ~CoordinatesGCDCGDIPlusTestCase() = default;
 };
 
 TEST_CASE_FIXTURE(CoordinatesGCDCGDIPlusTestCase, "CoordinatesGCDCGDIPlus::InitialState")
@@ -1302,8 +1300,6 @@ public:
         REQUIRE(ctx != nullptr);
         m_gcdc->SetGraphicsContext(ctx);
     }
-
-    virtual ~CoordinatesGCDCCairoTestCase() = default;
 };
 
 TEST_CASE_FIXTURE(CoordinatesGCDCCairoTestCase, "CoordinatesGCDCCairo::InitialState")

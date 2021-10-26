@@ -33,10 +33,6 @@ class WXDLLIMPEXP_FWD_CORE wxWindow;
 class wxOverlayImpl
 {
 public:
-    wxOverlayImpl() = default;
-    ~wxOverlayImpl() = default;
-
-
     // clears the overlay without restoring the former state
     // to be done eg when the window content has been changed and repainted
     void Reset();

@@ -134,8 +134,6 @@ private:
 class WXDLLIMPEXP_CORE wxMessageOutputMessageBox : public wxMessageOutput
 {
 public:
-    wxMessageOutputMessageBox() = default;
-
     void Output(const std::string& str) override;
 };
 
@@ -148,8 +146,6 @@ public:
 class WXDLLIMPEXP_BASE wxMessageOutputDebug : public wxMessageOutputStderr
 {
 public:
-    wxMessageOutputDebug() = default;
-
     void Output(const std::string& str) override;
 };
 
@@ -160,8 +156,6 @@ public:
 class WXDLLIMPEXP_BASE wxMessageOutputLog : public wxMessageOutput
 {
 public:
-    wxMessageOutputLog() = default;
-
     void Output(const std::string& str) override;
 };
 

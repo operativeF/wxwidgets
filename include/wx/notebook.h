@@ -65,9 +65,6 @@ constexpr char wxNotebookNameStr[] = "notebook";
 class WXDLLEXPORT wxNotebookPageInfo : public wxObject
 {
 public:
-    wxNotebookPageInfo() = default;
-    ~wxNotebookPageInfo() = default;
-
     [[maybe_unused]] bool Create(wxNotebookPage *page,
                 const std::string& text,
                 bool selected,

@@ -71,8 +71,6 @@ public:
         free(pPal);
     }
 
-    ~wxPaletteRefData() = default;
-
     bool IsOk() const override { return m_hPalette.get() != nullptr; }
 
     UINT GetEntries() const

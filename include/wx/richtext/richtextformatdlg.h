@@ -85,11 +85,6 @@ enum {
 class WXDLLIMPEXP_RICHTEXT wxRichTextFormattingDialogFactory: public wxObject
 {
 public:
-    wxRichTextFormattingDialogFactory() = default;
-    ~wxRichTextFormattingDialogFactory() = default;
-
-// Overridables
-
     /// Create all pages, under the dialog's book control, also calling AddPage
     virtual bool CreatePages(long pages, wxRichTextFormattingDialog* dialog);
 

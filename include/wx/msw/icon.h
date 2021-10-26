@@ -54,8 +54,6 @@ public:
 
     explicit wxIcon(const wxIconLocation& loc);
 
-    ~wxIcon() = default;
-
     virtual bool LoadFile(const std::string& name,
                           wxBitmapType type = wxICON_DEFAULT_TYPE,
                           wxSize desiredSz = {-1, -1});

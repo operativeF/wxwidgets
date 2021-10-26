@@ -1021,7 +1021,6 @@ public:
     using DataBuffer = wxScopedCharBuffer;
 
     wxMsgCatalogFile() = default;
-    ~wxMsgCatalogFile() = default;
 
     wxMsgCatalogFile(const wxMsgCatalogFile&) = delete;
 	wxMsgCatalogFile& operator=(const wxMsgCatalogFile&) = delete;

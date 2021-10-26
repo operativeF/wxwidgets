@@ -74,12 +74,6 @@ enum wxRelationship
 class WXDLLIMPEXP_CORE wxIndividualLayoutConstraint
 {
 public:
-    wxIndividualLayoutConstraint() = default;
-
-    // note that default copy ctor and assignment operators are ok
-
-    ~wxIndividualLayoutConstraint() = default;
-
     void Set(wxRelationship rel, wxWindowBase *otherW, wxEdge otherE, int val = 0, int marg = wxLAYOUT_DEFAULT_MARGIN);
 
     //
@@ -176,10 +170,6 @@ public:
     wxIndividualLayoutConstraint centreY;
 
     wxLayoutConstraints();
-
-    // note that default copy ctor and assignment operators are ok
-
-    ~wxLayoutConstraints() = default;
 
     bool SatisfyConstraints(wxWindowBase *win, int *noChanges);
     bool AreSatisfied() const

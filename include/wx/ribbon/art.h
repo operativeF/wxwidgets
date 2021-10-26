@@ -187,7 +187,6 @@ class wxRibbonPageTabInfoArray;
 class WXDLLIMPEXP_RIBBON wxRibbonArtProvider
 {
 public:
-    wxRibbonArtProvider() = default;
     virtual ~wxRibbonArtProvider() = default;
 
     virtual wxRibbonArtProvider* Clone() const = 0;

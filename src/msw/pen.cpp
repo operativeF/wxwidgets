@@ -39,7 +39,6 @@ public:
     wxPenRefData();
     wxPenRefData(const wxPenRefData& data);
     explicit wxPenRefData(const wxPenInfo& info);
-    ~wxPenRefData() = default;
 
     wxPenRefData& operator=(const wxPenRefData&) = delete;
 

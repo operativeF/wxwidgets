@@ -23,7 +23,6 @@ class WXDLLIMPEXP_CORE wxGenericCredentialEntryDialog : public wxDialog
 {
 public:
     wxGenericCredentialEntryDialog() = default;
-    ~wxGenericCredentialEntryDialog() = default;
 
     wxGenericCredentialEntryDialog(wxWindow* parent,
                                    const std::string& message,

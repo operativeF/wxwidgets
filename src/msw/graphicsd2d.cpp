@@ -2324,8 +2324,6 @@ public:
     {
     }
 
-    virtual ~wxHatchBitmapSource() = default;
-
     HRESULT STDMETHODCALLTYPE GetSize(__RPC__out UINT *width, __RPC__out UINT *height) override
     {
         if (width != nullptr) *width = 8;

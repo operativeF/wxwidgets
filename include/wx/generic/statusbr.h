@@ -35,8 +35,6 @@ public:
         Create(parent, winid, style, name);
     }
 
-    ~wxStatusBarGeneric() = default;
-
 	wxStatusBarGeneric(const wxStatusBarGeneric&) = delete;
 	wxStatusBarGeneric& operator=(const wxStatusBarGeneric&) = delete;
 

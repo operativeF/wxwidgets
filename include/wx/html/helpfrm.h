@@ -70,7 +70,6 @@ public:
                 , wxConfigBase *config=nullptr, const wxString& rootpath = {}
 #endif // wxUSE_CONFIG
                 );
-    ~wxHtmlHelpFrame() = default;
 
     wxHtmlHelpFrame(const wxHtmlHelpFrame&) = delete;
 	wxHtmlHelpFrame& operator=(const wxHtmlHelpFrame&) = delete;

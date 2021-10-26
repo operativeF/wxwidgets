@@ -60,7 +60,6 @@ wxGetDialogClassDescription(const wxClassInfo *ci, const std::type_info& ti)
 class wxModalExpectation
 {
 public:
-    wxModalExpectation() = default;
     virtual ~wxModalExpectation() = default;
 
     wxString GetDescription() const

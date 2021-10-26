@@ -151,8 +151,6 @@ void wxPGGetFailed( const wxPGProperty* p, const wxString& typestr );
 class WXDLLIMPEXP_PROPGRID wxPropertyGridInterface
 {
 public:
-
-    // Destructor.
     virtual ~wxPropertyGridInterface() = default;
 
     // Appends property to the list.

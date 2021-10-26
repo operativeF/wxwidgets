@@ -43,7 +43,7 @@ constexpr unsigned int wxCLRBTN_DEFAULT_STYLE = wxCLRBTN_SHOW_LABEL;
 class WXDLLIMPEXP_CORE wxColourPickerWidgetBase
 {
 public:
-    wxColourPickerWidgetBase() : m_colour(*wxBLACK) { }
+    wxColourPickerWidgetBase() : m_colour(*wxBLACK) {}
     virtual ~wxColourPickerWidgetBase() = default;
 
     wxColour GetColour() const
@@ -54,7 +54,6 @@ public:
         { m_colour.Set(col); UpdateColour(); }
 
 protected:
-
     virtual void UpdateColour() = 0;
 
     // the current colour (may be invalid if none)
@@ -104,8 +103,6 @@ class WXDLLIMPEXP_CORE wxColourPickerCtrl : public wxPickerBase
 {
 public:
     wxColourPickerCtrl() = default;
-    ~wxColourPickerCtrl() = default;
-
 
     wxColourPickerCtrl(wxWindow *parent, wxWindowID id,
         const wxColour& col = *wxBLACK, const wxPoint& pos = wxDefaultPosition,

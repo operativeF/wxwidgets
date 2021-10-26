@@ -3040,7 +3040,6 @@ namespace
 class DoJob
 {
 public:
-    DoJob() = default;
     virtual ~DoJob() = default;
 
     // The return value control how the tree-walker tranverse the tree

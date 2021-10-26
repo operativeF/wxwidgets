@@ -33,8 +33,6 @@
 class WXDLLIMPEXP_AUI wxAuiDockArt
 {
 public:
-
-    wxAuiDockArt() = default;
     virtual ~wxAuiDockArt() = default;
 
     virtual wxAuiDockArt* Clone() = 0;

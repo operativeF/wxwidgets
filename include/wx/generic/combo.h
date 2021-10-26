@@ -64,8 +64,6 @@ public:
                 const wxValidator& validator = wxDefaultValidator,
                 const std::string& name = wxComboBoxNameStr);
 
-    virtual ~wxGenericComboCtrl() = default;
-
     void SetCustomPaintWidth( int width );
 
     bool IsKeyPopupToggle(const wxKeyEvent& event) const override;

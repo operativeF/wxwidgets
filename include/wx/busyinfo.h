@@ -31,8 +31,6 @@ class WXDLLIMPEXP_FWD_CORE wxWindow;
 class wxBusyInfoFlags
 {
 public:
-    wxBusyInfoFlags() = default;
-
     wxBusyInfoFlags& Parent(wxWindow* parent)
         { m_parent = parent; return *this; }
 

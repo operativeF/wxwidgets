@@ -115,8 +115,6 @@ public:
         return *this;
     }
 
-    ~wxBitmap() = default;
-
 #if wxUSE_IMAGE
     wxImage ConvertToImage() const;
     wxBitmap ConvertToDisabled(unsigned char brightness = 255) const;
@@ -254,8 +252,6 @@ public:
     // construct a mask from the givne bitmap handle
     wxMask(WXHBITMAP hbmp) { m_maskBitmap = unique_bitmap{hbmp}; }
 
-    ~wxMask() = default;
-
     [[maybe_unused]] bool Create(const wxBitmap& bitmap, const wxColour& colour);
     [[maybe_unused]] bool Create(const wxBitmap& bitmap, int paletteIndex);
     [[maybe_unused]] bool Create(const wxBitmap& bitmap);
@@ -281,8 +277,6 @@ struct WXDLLIMPEXP_CORE wxBitmapHandler : public wxGDIImageHandler
     wxBitmapHandler() = default;
     wxBitmapHandler(const std::string& name, const std::string& ext, wxBitmapType type)
         : wxGDIImageHandler(name, ext, type) { }
-
-    ~wxBitmapHandler() = default;
 
     // implement wxGDIImageHandler's pure virtuals:
 

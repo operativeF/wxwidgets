@@ -29,7 +29,6 @@ class wxTLWGeometryBase
 public:
     using Serializer = wxTopLevelWindow::GeometrySerializer;
 
-    wxTLWGeometryBase() = default;
     virtual ~wxTLWGeometryBase() = default;
 
     // Initialize from the given window.

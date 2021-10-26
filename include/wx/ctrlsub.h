@@ -40,7 +40,6 @@
 class WXDLLIMPEXP_CORE wxItemContainerImmutable
 {
 public:
-    wxItemContainerImmutable() = default;
     virtual ~wxItemContainerImmutable() = default;
 
     // accessing strings
@@ -204,9 +203,6 @@ private:
     }
 
 public:
-    wxItemContainer() = default;
-    ~wxItemContainer() = default;
-
     // adding items
     // ------------
 
@@ -402,8 +398,6 @@ class wxWindowWithItems : public W, public C
 public:
     using BaseWindowClass = W;
     using BaseContainerInterface = C;
-
-    wxWindowWithItems() = default;
 
     void SetClientData(void *data)
         { BaseWindowClass::SetClientData(data); }

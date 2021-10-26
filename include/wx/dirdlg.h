@@ -67,9 +67,6 @@ public:
         Create(parent, title, defaultPath, style, pos, sz, name);
     }
 
-    ~wxDirDialogBase() = default;
-
-
     [[maybe_unused]] bool Create(wxWindow *parent,
                 const std::string& title = wxDirSelectorPromptStr,
                 const std::string& defaultPath = {},

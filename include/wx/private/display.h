@@ -105,7 +105,6 @@ public:
     // virtual dtor for this base class
     virtual ~wxDisplayImpl() = default;
 
-
     // return the full area of this display
     virtual wxRect GetGeometry() const = 0;
 

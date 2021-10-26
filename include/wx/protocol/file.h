@@ -20,13 +20,7 @@
 class WXDLLIMPEXP_NET wxFileProto: public wxProtocol
 {
 public:
-    wxFileProto() = default;
-    ~wxFileProto() = default;
-
-    wxFileProto(const wxFileProto&) = delete;
-    wxFileProto& operator=(const wxFileProto&) = delete;
-    wxFileProto(wxFileProto&&) = default;
-    wxFileProto& operator=(wxFileProto&&) = default;
+    wxFileProto& operator=(wxFileProto&&) = delete;
 
 
     bool Abort() override { return true; }

@@ -19,7 +19,6 @@ class wxEventConnectionRef;
 class WXDLLIMPEXP_BASE wxTrackerNode
 {
 public:
-    wxTrackerNode()  = default;
     virtual ~wxTrackerNode() = default;
 
     virtual void OnObjectDestroy() = 0;

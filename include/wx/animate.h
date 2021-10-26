@@ -94,8 +94,6 @@ constexpr unsigned int wxAC_DEFAULT_STYLE       = wxBORDER_NONE;
 class WXDLLIMPEXP_CORE wxAnimationCtrlBase : public wxControl
 {
 public:
-    wxAnimationCtrlBase() = default;
-
     // public API
     virtual bool LoadFile(const std::string& filename,
                           wxAnimationType type = wxANIMATION_TYPE_ANY) = 0;

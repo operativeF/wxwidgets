@@ -54,8 +54,6 @@ public:
     wxTextValidator(unsigned int style = wxFILTER_NONE, wxString *val = nullptr);
     wxTextValidator(const wxTextValidator& val);
 
-    ~wxTextValidator() = default;
-
     wxTextValidator& operator=(const wxTextValidator&) = delete;
 
     // Make a clone of this validator (or return NULL) - currently necessary

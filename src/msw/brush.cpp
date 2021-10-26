@@ -33,7 +33,6 @@ public:
     explicit wxBrushRefData(const wxColour& colour = wxNullColour, wxBrushStyle style = wxBrushStyle::Solid);
     explicit wxBrushRefData(const wxBitmap& stipple);
     wxBrushRefData(const wxBrushRefData& data);
-    ~wxBrushRefData() = default;
 
     // no assignment operator, the objects of this class are shared and never
     // assigned after being created once

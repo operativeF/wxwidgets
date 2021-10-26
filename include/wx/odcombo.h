@@ -75,9 +75,6 @@ class WXDLLIMPEXP_CORE wxVListBoxComboPopup : public wxVListBox,
 {
     friend class wxOwnerDrawnComboBox;
 public:
-
-    // init and dtor
-    wxVListBoxComboPopup()  = default;
     ~wxVListBoxComboPopup();
 
     [[maybe_unused]] bool Create(wxWindow* parent) override;

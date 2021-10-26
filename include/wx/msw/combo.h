@@ -37,7 +37,6 @@
 class WXDLLIMPEXP_CORE wxComboCtrl : public wxComboCtrlBase
 {
 public:
-    
     wxComboCtrl()  = default;
 
     wxComboCtrl(wxWindow *parent,
@@ -61,8 +60,6 @@ public:
                 unsigned int style = 0,
                 const wxValidator& validator = wxDefaultValidator,
                 const std::string& name = wxComboCtrlNameStr);
-
-    ~wxComboCtrl() = default;
 
     void PrepareBackground( wxDC& dc, const wxRect& rect, unsigned int flags ) const override;
     bool IsKeyPopupToggle(const wxKeyEvent& event) const override;

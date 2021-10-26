@@ -328,10 +328,6 @@ public:
            wxFontEncoding encoding = wxFONTENCODING_DEFAULT);
     */
 
-    // creator function
-    ~wxFontBase() = default;
-
-
     // from the font components
     static wxFont *New(
         int pointSize,              // size of the font in points

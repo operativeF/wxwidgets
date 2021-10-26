@@ -108,7 +108,6 @@ class wxTCPEventHandler : public wxEvtHandler
 {
 public:
     wxTCPEventHandler()  = default;
-    ~wxTCPEventHandler()  = default;
 
     wxTCPEventHandler(const wxTCPEventHandler&) = delete;
 	wxTCPEventHandler& operator=(const wxTCPEventHandler&) = delete;
@@ -136,7 +135,6 @@ class wxTCPEventHandlerModule : public wxModule
 {
 public:
     wxTCPEventHandlerModule()  = default;
-    ~wxTCPEventHandlerModule()  = default;
     wxTCPEventHandlerModule(const wxTCPEventHandlerModule&) = delete;
 	wxTCPEventHandlerModule& operator=(const wxTCPEventHandlerModule&) = delete;
 

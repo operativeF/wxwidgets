@@ -35,8 +35,6 @@ class WXDLLIMPEXP_FWD_CORE wxDC;
 class WXDLLIMPEXP_CORE wxOwnerDrawnBase
 {
 public:
-    wxOwnerDrawnBase() = default;
-
     virtual ~wxOwnerDrawnBase() = default;
 
     void SetFont(const wxFont& font)

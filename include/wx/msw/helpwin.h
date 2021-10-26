@@ -23,7 +23,6 @@ class WXDLLIMPEXP_CORE wxWinHelpController: public wxHelpControllerBase
 
 public:
     explicit wxWinHelpController(wxWindow* parentWindow = nullptr): wxHelpControllerBase(parentWindow) {}
-    ~wxWinHelpController() = default;
 
     // Must call this to set the filename
     bool Initialize(const std::string& file) override;

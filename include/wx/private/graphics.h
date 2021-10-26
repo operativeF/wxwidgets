@@ -33,8 +33,6 @@ public :
     wxGraphicsBitmapData( wxGraphicsRenderer* renderer) :
        wxGraphicsObjectRefData(renderer) {}
 
-       ~wxGraphicsBitmapData() = default;
-
        // returns the native representation
        virtual void * GetNativeBitmap() const = 0;
 } ;
@@ -44,8 +42,6 @@ class WXDLLIMPEXP_CORE wxGraphicsMatrixData : public wxGraphicsObjectRefData
 public:
     wxGraphicsMatrixData( wxGraphicsRenderer* renderer) :
        wxGraphicsObjectRefData(renderer) {}
-
-       ~wxGraphicsMatrixData() = default;
 
        // concatenates the matrix
        virtual void Concat( const wxGraphicsMatrixData *t ) = 0;
@@ -99,7 +95,6 @@ class WXDLLIMPEXP_CORE wxGraphicsPathData : public wxGraphicsObjectRefData
 {
 public :
     wxGraphicsPathData(wxGraphicsRenderer* renderer) : wxGraphicsObjectRefData(renderer) {}
-    ~wxGraphicsPathData() = default;
 
     //
     // These are the path primitives from which everything else can be constructed

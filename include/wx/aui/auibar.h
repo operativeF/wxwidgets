@@ -258,8 +258,6 @@ WX_DECLARE_USER_EXPORTED_OBJARRAY(wxAuiToolBarItem, wxAuiToolBarItemArray, WXDLL
 class WXDLLIMPEXP_AUI wxAuiToolBarArt
 {
 public:
-
-    wxAuiToolBarArt() = default;
     virtual ~wxAuiToolBarArt() = default;
 
     virtual wxAuiToolBarArt* Clone() = 0;

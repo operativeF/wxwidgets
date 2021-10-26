@@ -29,7 +29,6 @@
 // ABC for different sound data representations
 struct wxSoundData
 {
-    wxSoundData() = default;
     virtual ~wxSoundData() = default;
 
     // return true if we had been successfully initialized

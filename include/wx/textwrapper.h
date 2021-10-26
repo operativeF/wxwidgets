@@ -23,12 +23,7 @@ class WXDLLIMPEXP_CORE wxWindow;
 class WXDLLIMPEXP_CORE wxTextWrapper
 {
 public:
-    wxTextWrapper() = default;
-
-   wxTextWrapper(const wxTextWrapper&) = delete;
-   wxTextWrapper& operator=(const wxTextWrapper&) = delete;
-   wxTextWrapper(wxTextWrapper&&) = default;
-   wxTextWrapper& operator=(wxTextWrapper&&) = default;
+    wxTextWrapper& operator=(wxTextWrapper&&) = delete;
 
     // win is used for getting the font, text is the text to wrap, width is the
     // max line width or -1 to disable wrapping

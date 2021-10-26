@@ -31,8 +31,6 @@ constexpr char wxTRACE_WEBREQUEST[] = "webrequest";
 class wxWebAuthChallengeImpl : public wxRefCounterMT
 {
 public:
-    ~wxWebAuthChallengeImpl() = default;
-
     wxWebAuthChallenge::Source GetSource() const { return m_source; }
 
     virtual void SetCredentials(const wxWebCredentials& cred) = 0;
@@ -55,8 +53,6 @@ private:
 class wxWebRequestImpl : public wxRefCounterMT
 {
 public:
-    ~wxWebRequestImpl() = default;
-
     wxWebRequestImpl(const wxWebRequestImpl&) = delete;
 	wxWebRequestImpl& operator=(const wxWebRequestImpl&) = delete;
 
@@ -231,8 +227,6 @@ public:
 class wxWebSessionImpl : public wxRefCounterMT
 {
 public:
-    ~wxWebSessionImpl() = default;
-
     virtual wxWebRequestImplPtr
     CreateRequest(wxWebSession& session,
                   wxEvtHandler* handler,

@@ -40,11 +40,6 @@ public:
         Create(parent, id, col, pos, size, style, validator, name);
     }
 
-    ~wxGenericColourButton() = default;
-
-
-public:     // API extensions specific for wxGenericColourButton
-
     // user can override this to init colour data in a different way
     virtual void InitColourData();
 

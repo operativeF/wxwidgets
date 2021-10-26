@@ -37,12 +37,6 @@ class WXDLLIMPEXP_CORE wxQuantize: public wxObject
 {
 public:
     wxDECLARE_DYNAMIC_CLASS(wxQuantize);
-
-//// Constructor
-
-    wxQuantize() = default;
-    ~wxQuantize() = default;
-
 //// Operations
 
     // Reduce the colours in the source image and put the result into the

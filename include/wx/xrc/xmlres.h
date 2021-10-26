@@ -482,9 +482,6 @@ public:
     // Constructor.
     wxXmlResourceHandlerImpl(wxXmlResourceHandler *handler);
 
-    // Destructor.
-    ~wxXmlResourceHandlerImpl() = default;
-
     // Creates an object (menu, dialog, control, ...) from an XML node.
     // Should check for validity.
     // parent is a higher-level object (usually window, dialog or panel)

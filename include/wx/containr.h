@@ -37,7 +37,6 @@ class WXDLLIMPEXP_CORE wxControlContainerBase
 {
 public:
     // default ctor, SetContainerWindow() must be called later
-    wxControlContainerBase() = default;
     virtual ~wxControlContainerBase() = default;
 
     // FIXME: Make sure it can't be called twice.

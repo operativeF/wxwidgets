@@ -40,7 +40,6 @@ public:
          m_validatorWindow(other.m_validatorWindow)
     {
     }
-    ~wxValidator() = default;
 
     wxValidator& operator=(const wxValidator&) = delete;
 

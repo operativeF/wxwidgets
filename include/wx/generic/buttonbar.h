@@ -49,8 +49,6 @@ public:
                  unsigned int style = 0,
                  const std::string& name = wxToolBarNameStr);
 
-    virtual ~wxButtonToolBar() = default;
-
     bool Realize() override;
 
     void SetToolShortHelp(int id, const std::string& helpString) override;

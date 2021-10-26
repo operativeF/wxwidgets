@@ -294,12 +294,8 @@ struct wxLogRecord
 class WXDLLIMPEXP_BASE wxLogFormatter
 {
 public:
-    // Default constructor.
-    wxLogFormatter() = default;
-
     // Trivial but virtual destructor for the base class.
     virtual ~wxLogFormatter() = default;
-
 
     // Override this method to implement custom formatting of the given log
     // record. The default implementation simply prepends a level-dependent

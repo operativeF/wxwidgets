@@ -36,7 +36,6 @@ class wxIDropSource : public IDropSource
 {
 public:
   explicit wxIDropSource(wxDropSource *pDropSource);
-  virtual ~wxIDropSource() = default;
 
   wxIDropSource(const wxIDropSource&) = delete;
   wxIDropSource& operator=(const wxIDropSource&) = delete;

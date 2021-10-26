@@ -107,7 +107,6 @@ public:
 #if wxUSE_ANY
     wxVariant(const wxAny& any);
 #endif
-    ~wxVariant() = default;
 
     // generic assignment
     void operator= (const wxVariant& variant);

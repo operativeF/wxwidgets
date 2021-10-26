@@ -54,8 +54,6 @@ public:
 
     wxGenericValidator(const wxGenericValidator& copyFrom);
 
-    ~wxGenericValidator() = default;
-
     wxGenericValidator& operator=(const wxGenericValidator&) = delete;
 
     // Make a clone of this validator (or return NULL) - currently necessary

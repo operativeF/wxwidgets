@@ -2055,7 +2055,6 @@ class WXDLLIMPEXP_CORE wxWindowAccessible: public wxAccessible
 {
 public:
     wxWindowAccessible(wxWindow* win): wxAccessible(win) { if (win) win->SetAccessible(this); }
-    ~wxWindowAccessible() = default;
 
 // Overridables
 

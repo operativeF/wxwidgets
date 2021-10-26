@@ -140,7 +140,6 @@ public:
                        bool case_sensitive, bool whole_words_only,
                        const wxString& book = {});
 
-    ~wxHtmlSearchStatus() = default;
     wxHtmlSearchStatus(const wxHtmlSearchStatus&) = delete;
 	wxHtmlSearchStatus& operator=(const wxHtmlSearchStatus&) = delete;
 
@@ -171,7 +170,6 @@ class WXDLLIMPEXP_HTML wxHtmlHelpData : public wxObject
 
 public:
     wxHtmlHelpData() = default;
-    ~wxHtmlHelpData() = default;
 
     wxHtmlHelpData(const wxHtmlHelpData&) = delete;
 	wxHtmlHelpData& operator=(const wxHtmlHelpData&) = delete;

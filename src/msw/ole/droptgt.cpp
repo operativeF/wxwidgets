@@ -68,8 +68,6 @@ public:
         m_pTarget(p)
     {}
 
-    virtual ~wxIDropTarget() = default;
-
     wxIDropTarget(const wxIDropTarget&) = delete;
 	wxIDropTarget& operator=(const wxIDropTarget&) = delete;
 

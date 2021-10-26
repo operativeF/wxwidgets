@@ -106,7 +106,6 @@ class WXDLLIMPEXP_RICHTEXT wxRichTextPrintout : public wxPrintout
 {
 public:
     wxRichTextPrintout(const wxString& title = wxGetTranslation("Printout"));
-    ~wxRichTextPrintout() = default;
 
     wxRichTextPrintout(const wxRichTextPrintout&) = delete;
 	wxRichTextPrintout& operator=(const wxRichTextPrintout&) = delete;

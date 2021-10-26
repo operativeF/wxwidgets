@@ -56,8 +56,6 @@ enum class wxHtmlOpeningStatus
 class WXDLLIMPEXP_HTML wxHtmlWindowInterface
 {
 public:
-    /// Ctor
-    wxHtmlWindowInterface() = default;
     virtual ~wxHtmlWindowInterface() = default;
 
     /**

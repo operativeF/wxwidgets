@@ -271,7 +271,6 @@ class WXDLLIMPEXP_HTML wxHtmlEntitiesParser : public wxObject
 
 public:
     wxHtmlEntitiesParser() = default;
-    ~wxHtmlEntitiesParser() = default;
 
     wxHtmlEntitiesParser(const wxHtmlEntitiesParser&) = delete;
 	wxHtmlEntitiesParser& operator=(const wxHtmlEntitiesParser&) = delete;

@@ -23,12 +23,8 @@ class WXDLLIMPEXP_CORE wxPen : public wxPenBase
 public:
     wxPen() = default;
     wxPen(const wxColour& col, int width = 1, wxPenStyle style = wxPenStyle::Solid);
-
     wxPen(const wxBitmap& stipple, int width);
-
     wxPen(const wxPenInfo& info);
-
-    ~wxPen() = default;
 
     bool operator==(const wxPen& pen) const;
     bool operator!=(const wxPen& pen) const { return !(*this == pen); }

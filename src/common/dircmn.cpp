@@ -253,13 +253,7 @@ size_t wxDir::GetAllFiles(const wxString& dirname,
 class wxDirTraverserFindFirst : public wxDirTraverser
 {
 public:
-    wxDirTraverserFindFirst() = default;
-    ~wxDirTraverserFindFirst() = default;
-
-    wxDirTraverserFindFirst(const wxDirTraverserFindFirst&) = delete;
-	wxDirTraverserFindFirst& operator=(const wxDirTraverserFindFirst&) = delete;
-    wxDirTraverserFindFirst(wxDirTraverserFindFirst&&) = default;
-    wxDirTraverserFindFirst& operator=(wxDirTraverserFindFirst&&) = default;
+    wxDirTraverserFindFirst& operator=(wxDirTraverserFindFirst&&) = delete;
 
     wxDirTraverseResult OnFile(const wxString& filename) override
     {

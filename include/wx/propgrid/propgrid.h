@@ -371,14 +371,6 @@ class WXDLLIMPEXP_PROPGRID wxPGValidationInfo
 {
     friend class wxPropertyGrid;
 public:
-    wxPGValidationInfo()
-    {
-        m_failureBehavior = 0;
-        m_isFailing = false;
-    }
-
-    ~wxPGValidationInfo() = default;
-
     // Returns failure behaviour which is a combination of
     // wxPG_VFB_XXX flags.
     wxPGVFBFlags GetFailureBehavior() const
@@ -412,10 +404,10 @@ private:
     wxString        m_failureMessage;
 
     // Validation failure behaviour. Use wxPG_VFB_XXX flags.
-    wxPGVFBFlags    m_failureBehavior;
+    wxPGVFBFlags    m_failureBehavior{0};
 
     // True when validation is currently failing.
-    bool            m_isFailing;
+    bool            m_isFailing{false};
 };
 
 // -----------------------------------------------------------------------

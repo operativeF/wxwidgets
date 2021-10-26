@@ -58,11 +58,6 @@ struct wxPGPaintData
 class WXDLLIMPEXP_PROPGRID wxPGCellRenderer : public wxObjectRefData
 {
 public:
-
-    wxPGCellRenderer()
-         = default;
-    ~wxPGCellRenderer() = default;
-
     // Render flags
     enum
     {
@@ -167,8 +162,6 @@ class WXDLLIMPEXP_PROPGRID wxPGCellData : public wxObjectRefData
 {
     friend class wxPGCell;
 public:
-    wxPGCellData() = default;
-
     void SetText( const wxString& text )
     {
         m_text = text;
@@ -198,14 +191,11 @@ class WXDLLIMPEXP_PROPGRID wxPGCell : public wxObject
 {
 public:
     wxPGCell() = default;
-    wxPGCell(const wxPGCell& other) = default;
 
     wxPGCell( const wxString& text,
               const wxBitmap& bitmap = wxNullBitmap,
               const wxColour& fgCol = wxNullColour,
               const wxColour& bgCol = wxNullColour );
-
-    ~wxPGCell() = default;
 
     wxPGCellData* GetData()
     {
@@ -617,8 +607,6 @@ public:
     {
         SetText(label);
     }
-
-    ~wxPGChoiceEntry() = default;
 
     void SetValue( int value ) { m_value = value; }
     int GetValue() const { return m_value; }

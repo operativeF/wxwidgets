@@ -69,8 +69,9 @@ struct wxMarkupSpanAttributes
 class wxMarkupParserOutput
 {
 public:
-    wxMarkupParserOutput() = default;
     virtual ~wxMarkupParserOutput() = default;
+
+	wxMarkupParserOutput& operator=(wxMarkupParserOutput&&) = delete;
 
     // Virtual functions called by wxMarkupParser while parsing the markup.
 
@@ -102,10 +103,6 @@ public:
     // The generic span start and end functions.
     virtual void OnSpanStart(const wxMarkupSpanAttributes& attrs) = 0;
     virtual void OnSpanEnd(const wxMarkupSpanAttributes& attrs) = 0;
-
-private:
-    wxMarkupParserOutput(const wxMarkupParserOutput&) = delete;
-	wxMarkupParserOutput& operator=(const wxMarkupParserOutput&) = delete;
 };
 
 // ----------------------------------------------------------------------------

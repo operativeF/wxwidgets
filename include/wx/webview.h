@@ -144,8 +144,6 @@ public:
         m_runScriptCount = 0;
     }
 
-    ~wxWebView() = default;
-
     [[maybe_unused]] virtual bool Create(wxWindow* parent,
            wxWindowID id,
            const std::string& url = wxWebViewDefaultURLStr,

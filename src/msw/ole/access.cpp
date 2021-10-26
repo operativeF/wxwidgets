@@ -133,7 +133,6 @@ class wxIEnumVARIANT : public IEnumVARIANT
 {
 public:
     explicit wxIEnumVARIANT(const wxVariant& variant);
-    virtual ~wxIEnumVARIANT() = default;
 
     wxIEnumVARIANT(const wxIEnumVARIANT&) = delete;
 	wxIEnumVARIANT& operator=(const wxIEnumVARIANT&) = delete;
@@ -247,7 +246,6 @@ class wxIAccessible : public IAccessible
 {
 public:
     explicit wxIAccessible(wxAccessible *pAccessible);
-    virtual ~wxIAccessible() = default;
 
     wxIAccessible(const wxIAccessible&) = delete;
 	wxIAccessible& operator=(const wxIAccessible&) = delete;

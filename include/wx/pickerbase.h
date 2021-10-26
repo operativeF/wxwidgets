@@ -37,11 +37,6 @@ constexpr unsigned int wxPB_SMALL        = 0x8000;
 class WXDLLIMPEXP_CORE wxPickerBase : public wxNavigationEnabled<wxControl>
 {
 public:
-    // ctor: text is the associated text control
-    wxPickerBase() = default;
-    ~wxPickerBase() = default;
-
-
     // if present, intercepts wxPB_USE_TEXTCTRL style and creates the text control
     // The 3rd argument is the initial std::string to display in the text control
     bool CreateBase(wxWindow *parent,
@@ -52,8 +47,6 @@ public:
                     unsigned int style = 0,
                     const wxValidator& validator = wxDefaultValidator,
                     const std::string& name = wxPickerNameStr);
-
-public:     // public API
 
     // margin between the text control and the picker
     void SetInternalMargin(int newmargin)

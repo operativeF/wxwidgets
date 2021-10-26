@@ -36,9 +36,6 @@ public:
     }
 #endif // wxUSE_IMAGE
 
-    // m_refData unrefed in ~wxObject
-    ~wxRegion() = default;
-
     // wxRegionBase methods
     void Clear() override;
     bool IsEmpty() const override;
@@ -71,8 +68,6 @@ public:
     wxRegionIterator(const wxRegionIterator& ri) : wxObject(ri) { *this = ri; }
 
     wxRegionIterator& operator=(const wxRegionIterator& ri);
-
-    ~wxRegionIterator() = default;
 
     void Reset() { m_current = 0; }
     void Reset(const wxRegion& region);

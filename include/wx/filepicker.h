@@ -88,7 +88,6 @@ typedef void (wxEvtHandler::*wxFileDirPickerEventFunction)(wxFileDirPickerEvent&
 class WXDLLIMPEXP_CORE wxFileDirPickerWidgetBase
 {
 public:
-    wxFileDirPickerWidgetBase() = default;
     virtual ~wxFileDirPickerWidgetBase() = default;
 
     // Path here is the name of the selected file or directory.

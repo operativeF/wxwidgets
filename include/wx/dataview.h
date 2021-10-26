@@ -146,8 +146,6 @@ private:
 class WXDLLIMPEXP_CORE wxDataViewItemAttr
 {
 public:
-    wxDataViewItemAttr() = default;
-
     void SetColour(const wxColour& colour) { m_colour = colour; }
     void SetBold( bool set ) { m_bold = set; }
     void SetItalic( bool set ) { m_italic = set; }
@@ -188,8 +186,6 @@ using wxDataViewModelNotifiers = std::vector<wxDataViewModelNotifier *>;
 class WXDLLIMPEXP_CORE wxDataViewModel: public wxRefCounter
 {
 public:
-    wxDataViewModel() = default;
-
     virtual unsigned int GetColumnCount() const = 0;
 
     // return type as reported by wxVariant
@@ -1038,7 +1034,6 @@ private:
 class WXDLLIMPEXP_CORE wxDataViewListStore: public wxDataViewIndexListModel
 {
 public:
-    wxDataViewListStore() = default;
     ~wxDataViewListStore();
 
     void PrependColumn( const std::string &varianttype );
@@ -1087,8 +1082,6 @@ public:
            const wxValidator& validator = wxDefaultValidator );
 
 	wxDataViewListCtrl& operator=(const wxDataViewListCtrl&) = delete;
-
-    ~wxDataViewListCtrl() = default;
 
     [[maybe_unused]] bool Create( wxWindow *parent, wxWindowID id,
            const wxPoint& pos = wxDefaultPosition,

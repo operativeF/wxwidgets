@@ -40,7 +40,6 @@ public:
     // it's too late)
     virtual ~wxTimerImpl() = default;
 
-
     // start the timer. When overriding call base version first.
     virtual bool Start(std::chrono::milliseconds startTime = -1ms, bool oneShot = false);
 

@@ -185,10 +185,7 @@ class WXDLLIMPEXP_CORE wxPageSetupDialogData
 {
 public:
     wxPageSetupDialogData();
-    wxPageSetupDialogData(const wxPageSetupDialogData& dialogData) = default;
-    wxPageSetupDialogData& operator=(const wxPageSetupDialogData& data) = default;
     wxPageSetupDialogData(const wxPrintData& printData);
-    ~wxPageSetupDialogData() = default;
 
     wxSize GetPaperSize() const { return m_paperSize; }
     wxPaperSize GetPaperId() const { return m_printData.GetPaperId(); }

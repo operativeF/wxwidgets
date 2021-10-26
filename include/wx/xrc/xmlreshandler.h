@@ -54,9 +54,6 @@ public:
         : m_handler(handler)
     {}
 
-    // Destructor.
-    ~wxXmlResourceHandlerImplBase() = default;
-
     virtual wxObject *CreateResource(wxXmlNode *node, wxObject *parent,
                                      wxObject *instance) = 0;
     virtual bool IsOfClass(wxXmlNode *node, const wxString& classname) const = 0;

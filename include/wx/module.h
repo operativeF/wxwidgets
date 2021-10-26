@@ -25,9 +25,6 @@ using wxModuleList = std::vector<wxModule *>;
 class WXDLLIMPEXP_BASE wxModule : public wxObject
 {
 public:
-    wxModule() = default;
-    virtual ~wxModule() = default;
-
     // if module init routine returns false the application
     // will fail to startup
 

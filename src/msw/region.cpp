@@ -49,8 +49,6 @@ struct WXDLLEXPORT wxRegionRefData : public wxGDIRefData
     wxRegionRefData& operator=(wxRegionRefData&&) = default;
     wxRegionRefData(wxRegionRefData&&) = default;
 
-    ~wxRegionRefData() = default;
-
     unique_region m_region{};
 };
 

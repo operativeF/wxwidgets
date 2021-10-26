@@ -35,8 +35,6 @@ class WXDLLIMPEXP_FWD_CORE wxClipboard;
 class WXDLLIMPEXP_CORE wxClipboardBase : public wxObject
 {
 public:
-    wxClipboardBase() = default;
-
     // open the clipboard before Add/SetData() and GetData()
     virtual bool Open() = 0;
 

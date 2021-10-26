@@ -38,7 +38,6 @@ public:
     wxGenericColourDialog();
     wxGenericColourDialog(wxWindow *parent,
                           const wxColourData *data = NULL);
-    virtual ~wxGenericColourDialog() = default;
 
     bool Create(wxWindow *parent, const wxColourData *data = NULL);
 

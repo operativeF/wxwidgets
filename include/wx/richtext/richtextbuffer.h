@@ -2111,7 +2111,6 @@ public:
         Copy constructor.
     */
     wxRichTextRange(const wxRichTextRange& range) { m_start = range.m_start; m_end = range.m_end; }
-    ~wxRichTextRange() = default;
 
     /**
         Assigns @a range to this range.
@@ -4938,8 +4937,6 @@ public:
 
     wxRichTextImage(const wxRichTextImage& obj): wxRichTextObject(obj) { Copy(obj); }
 
-    ~wxRichTextImage() = default;
-
 // Overridables
 
     bool Draw(wxDC& dc, wxRichTextDrawingContext& context, const wxRichTextRange& range, const wxRichTextSelection& selection, const wxRect& rect, int descent, unsigned int style) override;
@@ -6938,11 +6935,6 @@ protected:
 class WXDLLIMPEXP_RICHTEXT wxRichTextRenderer: public wxObject
 {
 public:
-    /**
-        Constructor.
-    */
-    wxRichTextRenderer() = default;
-    ~wxRichTextRenderer() = default;
 
     /**
         Draws a standard bullet, as specified by the value of GetBulletName. This function should be overridden.

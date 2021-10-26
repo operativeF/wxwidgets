@@ -34,7 +34,6 @@
 class WXDLLIMPEXP_RICHTEXT wxRichTextUICustomization
 {
 public:
-    wxRichTextUICustomization() = default;
     virtual ~wxRichTextUICustomization() = default;
 
     /// Show the help given the current active window, and a help topic id.
@@ -50,11 +49,6 @@ public:
 class WXDLLIMPEXP_RICHTEXT wxRichTextHelpInfo
 {
 public:
-    wxRichTextHelpInfo()
-    {
-        m_helpTopic = -1;
-        m_uiCustomization = nullptr;
-    }
     virtual ~wxRichTextHelpInfo() = default;
 
     virtual bool ShowHelp(wxWindow* win)
@@ -84,8 +78,8 @@ public:
     bool HasUICustomization() const { return m_uiCustomization != nullptr; }
 
 protected:
-    wxRichTextUICustomization*  m_uiCustomization;
-    long                        m_helpTopic;
+    wxRichTextUICustomization*  m_uiCustomization{nullptr};
+    long                        m_helpTopic{-1};
 };
 
 /// Add this to the base class of dialogs

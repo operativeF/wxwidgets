@@ -207,8 +207,6 @@ public:
                style, pos, size, name );
     }
 
-    ~wxGenericFileCtrl() = default;
-
     bool Create( wxWindow *parent,
                  wxWindowID id,
                  const std::string& defaultDirectory = {},

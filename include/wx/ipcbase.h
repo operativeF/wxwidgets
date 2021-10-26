@@ -229,7 +229,6 @@ protected:
 class WXDLLIMPEXP_BASE wxServerBase
 {
 public:
-  wxServerBase() = default;
   virtual ~wxServerBase() = default;
 
   // Returns false on error (e.g. port number is already in use)
@@ -242,7 +241,6 @@ public:
 class WXDLLIMPEXP_BASE wxClientBase
 {
 public:
-  wxClientBase() = default;
   virtual ~wxClientBase() = default;
 
   virtual bool ValidHost(const wxString& host) = 0;

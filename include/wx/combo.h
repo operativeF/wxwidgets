@@ -750,8 +750,6 @@ class WXDLLIMPEXP_CORE wxComboPopup
 {
     friend class wxComboCtrlBase;
 public:
-    wxComboPopup() = default;
-
     // This is called immediately after construction finishes. m_combo member
     // variable has been initialized before the call.
     // NOTE: It is not in constructor so the derived class doesn't need to redefine

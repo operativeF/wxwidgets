@@ -24,8 +24,6 @@ WXDLLIMPEXP_BASE
 wxSystemOptions
 {
 public:
-    wxSystemOptions() = default;
-
     // User-customizable hints to wxWidgets or associated libraries
     // These could also be used to influence GetSystem... calls, indeed
     // to implement SetSystemColour/Font/Metric
