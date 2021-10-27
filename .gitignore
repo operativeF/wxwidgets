@@ -192,6 +192,9 @@
 /docs/doxygen/doxygen.log
 /docs/doxygen/out
 
+# precompiled headers
+dummy.pch
+
 # /include/
 /include/Makefile.in
 /include/*.mch
@@ -418,6 +421,7 @@
 /tests/test*.sln
 /tests/test.suo
 /tests/test_test.vcproj
+/tests/packages*
 
 # /tests/benchmarks/
 /tests/benchmarks/*.sln
