@@ -437,11 +437,9 @@ IMPLEMENT_IUNKNOWN_METHODS(wxDirect2DFontFileEnumerator)
 class wxDirect2DFontCollectionLoader : public IDWriteFontCollectionLoader
 {
 public:
-    wxDirect2DFontCollectionLoader() = default;
     virtual ~wxDirect2DFontCollectionLoader() = default;
 
-    wxDirect2DFontCollectionLoader(const wxDirect2DFontCollectionLoader&) = delete;
-	wxDirect2DFontCollectionLoader& operator=(const wxDirect2DFontCollectionLoader&) = delete;
+	wxDirect2DFontCollectionLoader& operator=(wxDirect2DFontCollectionLoader&&) = delete;
 
     // IDWriteFontCollectionLoader methods
     wxSTDMETHODIMP CreateEnumeratorFromKey(IDWriteFactory* pFactory,
@@ -702,9 +700,7 @@ template<typename T>
 class wxD2DResourceHolder: public wxManagedResourceHolder
 {
 public:
-    wxD2DResourceHolder() = default;
-
-    ~wxD2DResourceHolder() override
+    ~wxD2DResourceHolder()
     {
         UnBind();
         ReleaseResource();
@@ -812,8 +808,6 @@ struct wxD2DManagedGraphicsData : public wxD2DManagedObject
     }
 
     virtual wxD2DManagedObject* GetManagedObject() = 0;
-
-    ~wxD2DManagedGraphicsData() override = default;
 };
 
 D2D1_CAP_STYLE wxD2DConvertPenCap(wxPenCap cap)

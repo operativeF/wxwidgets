@@ -18,9 +18,9 @@
 class WXDLLIMPEXP_CORE wxMemoryDCImpl: public wxMSWDCImpl
 {
 public:
-    wxMemoryDCImpl( wxMemoryDC *owner );
+    // A non-null wxDC will attempt to create a compatible DC
+    wxMemoryDCImpl( wxMemoryDC *owner, wxDC* dc = nullptr);
     wxMemoryDCImpl( wxMemoryDC *owner, wxBitmap& bitmap );
-    wxMemoryDCImpl( wxMemoryDC *owner, wxDC *dc ); // Create compatible DC
 
     wxMemoryDCImpl& operator=(wxMemoryDCImpl&&) = delete;
 

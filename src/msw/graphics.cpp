@@ -530,7 +530,6 @@ public:
 class wxGDIPlusRenderer : public wxGraphicsRenderer
 {
 public :
-    wxGDIPlusRenderer() = default;
     ~wxGDIPlusRenderer()
     {
         if ( m_loaded == 1 )
@@ -539,8 +538,7 @@ public :
         }
     }
 
-	wxGDIPlusRenderer(const wxGDIPlusRenderer&) = delete;
-	wxGDIPlusRenderer& operator=(const wxGDIPlusRenderer&) = delete;
+	wxGDIPlusRenderer& operator=(wxGDIPlusRenderer&&) = delete;
 
     // Context
 

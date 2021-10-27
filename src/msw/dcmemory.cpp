@@ -26,10 +26,10 @@
 
 wxIMPLEMENT_ABSTRACT_CLASS(wxMemoryDCImpl, wxMSWDCImpl);
 
-wxMemoryDCImpl::wxMemoryDCImpl( wxMemoryDC *owner )
+wxMemoryDCImpl::wxMemoryDCImpl( wxMemoryDC *owner, wxDC* dc )
         : wxMSWDCImpl( owner )
 {
-    CreateCompatible(nullptr);
+    CreateCompatible(dc);
 
     if ( m_ok )
     {
@@ -44,41 +44,9 @@ wxMemoryDCImpl::wxMemoryDCImpl( wxMemoryDC *owner )
 }
 
 wxMemoryDCImpl::wxMemoryDCImpl( wxMemoryDC *owner, wxBitmap& bitmap )
-        : wxMSWDCImpl( owner )
-{
-    CreateCompatible(nullptr);
-
-    if ( m_ok )
-    {
-        SetBrush(*wxWHITE_BRUSH);
-        SetPen(*wxBLACK_PEN);
-        SetFont(*wxNORMAL_FONT);
-
-        // the background mode is only used for text background and is set in
-        // DrawText() to OPAQUE as required, otherwise always TRANSPARENT
-        ::SetBkMode( GetHdc(), TRANSPARENT );
-    }
-    
+        : wxMemoryDCImpl( owner, nullptr )
+{    
     DoSelect(bitmap);
-}
-
-wxMemoryDCImpl::wxMemoryDCImpl( wxMemoryDC *owner, wxDC *dc )
-        : wxMSWDCImpl( owner )
-{
-    wxCHECK_RET( dc, wxT("NULL dc in wxMemoryDC ctor") );
-
-    CreateCompatible(dc);
-
-    if ( m_ok )
-    {
-        SetBrush(*wxWHITE_BRUSH);
-        SetPen(*wxBLACK_PEN);
-        SetFont(*wxNORMAL_FONT);
-
-        // the background mode is only used for text background and is set in
-        // DrawText() to OPAQUE as required, otherwise always TRANSPARENT
-        ::SetBkMode( GetHdc(), TRANSPARENT );
-    }
 }
 
 bool wxMemoryDCImpl::CreateCompatible(wxDC *dc)

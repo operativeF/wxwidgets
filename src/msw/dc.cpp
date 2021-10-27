@@ -427,9 +427,6 @@ public:
         }
     }
 
-    StretchBltModeChanger(const StretchBltModeChanger&) = delete;
-	StretchBltModeChanger& operator=(const StretchBltModeChanger&) = delete;
-
 private:
     const HDC m_hdc;
     int m_modeOld;

@@ -355,7 +355,8 @@ class WXDLLIMPEXP_CORE wxGridCellEnumEditor : public wxGridCellChoiceEditor
 {
 public:
     wxGridCellEnumEditor( const std::string& choices = {} );
-    ~wxGridCellEnumEditor() = default;
+
+	wxGridCellEnumEditor& operator=(wxGridCellEnumEditor&&) = delete;
 
     wxGridCellEditor*  Clone() const override;
 
@@ -366,9 +367,6 @@ public:
 
 private:
     long m_index{-1};
-
-    wxGridCellEnumEditor(const wxGridCellEnumEditor&) = delete;
-	wxGridCellEnumEditor& operator=(const wxGridCellEnumEditor&) = delete;
 };
 
 #endif // wxUSE_COMBOBOX

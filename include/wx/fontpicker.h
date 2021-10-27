@@ -102,7 +102,7 @@ constexpr unsigned int wxFNTP_DEFAULT_STYLE      = wxFNTP_FONTDESC_AS_LABEL|wxFN
 class WXDLLIMPEXP_CORE wxFontPickerCtrl : public wxPickerBase
 {
 public:
-     wxFontPickerCtrl() = default;
+    wxFontPickerCtrl() = default;
 
     wxFontPickerCtrl(wxWindow *parent,
                      wxWindowID id,
