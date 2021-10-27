@@ -88,27 +88,6 @@ wxGCDC::wxGCDC() :
 
 wxIMPLEMENT_ABSTRACT_CLASS(wxGCDCImpl, wxDCImpl);
 
-wxGCDCImpl::wxGCDCImpl(wxDC *owner, std::unique_ptr<wxGraphicsContext> context) :
-    wxDCImpl(owner)
-{
-    CommonInit();
-
-    DoInitContext(std::move(context));
-
-    // We can't currently initialize m_font, m_pen and m_brush here as we don't
-    // have any way of converting the corresponding wxGraphicsXXX objects to
-    // plain wxXXX ones. This is obviously not ideal as it means that GetXXX()
-    // won't return the actual object being used, but is better than the only
-    // alternative which is overwriting the objects currently used in the
-    // graphics context with the defaults.
-}
-
-wxGCDCImpl::wxGCDCImpl( wxDC *owner ) :
-   wxDCImpl( owner )
-{
-    Init(wxGraphicsContext::Create());
-}
-
 void wxGCDCImpl::SetGraphicsContext( std::unique_ptr<wxGraphicsContext> ctx )
 {
     if ( DoInitContext(std::move(ctx)) )
@@ -118,37 +97,6 @@ void wxGCDCImpl::SetGraphicsContext( std::unique_ptr<wxGraphicsContext> ctx )
         m_graphicContext->SetPen( m_pen );
         m_graphicContext->SetBrush( m_brush);
     }
-}
-
-wxGCDCImpl::wxGCDCImpl(wxDC* owner, int)
-   : wxDCImpl(owner)
-{
-    // derived class will set a context
-    Init(nullptr);
-}
-
-void wxGCDCImpl::CommonInit()
-{
-    m_mm_to_pix_x = mm2pt;
-    m_mm_to_pix_y = mm2pt;
-
-    m_isClipBoxValid = false;
-
-    m_logicalFunctionSupported = true;
-}
-
-void wxGCDCImpl::Init(std::unique_ptr<wxGraphicsContext> ctx)
-{
-    CommonInit();
-
-    m_ok = false;
-
-    m_pen = *wxBLACK_PEN;
-    m_font = *wxNORMAL_FONT;
-    m_brush = *wxWHITE_BRUSH;
-
-    if (ctx)
-        SetGraphicsContext(std::move(ctx));
 }
 
 bool wxGCDCImpl::DoInitContext(std::unique_ptr<wxGraphicsContext> ctx)

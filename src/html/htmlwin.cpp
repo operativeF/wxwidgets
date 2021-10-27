@@ -115,34 +115,9 @@ void wxHtmlWinAutoScrollTimer::Notify()
 #endif // wxUSE_CLIPBOARD
 
 
-
-//-----------------------------------------------------------------------------
-// wxHtmlHistoryItem
-//-----------------------------------------------------------------------------
-
-// item of history list
-class WXDLLIMPEXP_HTML wxHtmlHistoryItem
-{
-public:
-    wxHtmlHistoryItem(const std::string& p, const std::string& a) : m_Page(p), m_Anchor(a), m_Pos(0) { }
-    int GetPos() const {return m_Pos;}
-    void SetPos(int p) {m_Pos = p;}
-    const std::string& GetPage() const {return m_Page;}
-    const std::string& GetAnchor() const {return m_Anchor;}
-
-private:
-    std::string m_Page;
-    std::string m_Anchor;
-    int m_Pos;
-};
-
-
 //-----------------------------------------------------------------------------
 // our private arrays:
 //-----------------------------------------------------------------------------
-
-WX_DECLARE_OBJARRAY(wxHtmlHistoryItem, wxHtmlHistoryArray);
-WX_DEFINE_OBJARRAY(wxHtmlHistoryArray)
 
 WX_DECLARE_LIST(wxHtmlProcessor, wxHtmlProcessorList);
 WX_DEFINE_LIST(wxHtmlProcessorList)
@@ -296,36 +271,6 @@ void wxHtmlWindow::CleanUpStatics()
     wxDELETE(ms_cursorDefault);
 }
 
-void wxHtmlWindow::Init()
-{
-    m_tmpCanDrawLocks = 0;
-    m_FS = new wxFileSystem();
-#if wxUSE_STATUSBAR
-    m_RelatedStatusBar = nullptr;
-    m_RelatedStatusBarIndex = -1;
-#endif // wxUSE_STATUSBAR
-    m_RelatedFrame = nullptr;
-    m_TitleFormat = "%s";
-    m_OpenedPage.clear();
-    m_OpenedAnchor.clear();
-    m_OpenedPageTitle.clear();
-    m_Cell = nullptr;
-    m_Parser = new wxHtmlWinParser(this);
-    m_Parser->SetFS(m_FS);
-    m_HistoryPos = -1;
-    m_HistoryOn = true;
-    m_History = new wxHtmlHistoryArray;
-    m_Processors = nullptr;
-    SetBorders(10);
-    m_selection = nullptr;
-    m_makingSelection = false;
-#if wxUSE_CLIPBOARD
-    m_timerAutoScroll = nullptr;
-    m_lastDoubleClick = 0;
-#endif // wxUSE_CLIPBOARD
-    m_tmpSelFromCell = nullptr;
-}
-
 bool wxHtmlWindow::Create(wxWindow *parent,
                           wxWindowID id,
                           const wxPoint& pos,
@@ -376,7 +321,6 @@ wxHtmlWindow::~wxHtmlWindow()
 
     delete m_Parser;
     delete m_FS;
-    delete m_History;
     delete m_Processors;
 }
 
@@ -536,7 +480,7 @@ bool wxHtmlWindow::LoadPage(const std::string& location)
     {
         // store scroll position into history item:
         int y_pos = GetViewStart().y;
-        (*m_History)[m_HistoryPos].SetPos(y_pos);
+        m_History[m_HistoryPos]->SetPos(y_pos);
     }
 
     // first check if we're moving to an anchor in the same page
@@ -649,16 +593,16 @@ bool wxHtmlWindow::LoadPage(const std::string& location)
 
     if (m_HistoryOn) // add this page to history there:
     {
-        int c = m_History->GetCount() - (m_HistoryPos + 1);
+        int c = m_History.size() - (m_HistoryPos + 1);
 
         if (m_HistoryPos < 0 ||
-            (*m_History)[m_HistoryPos].GetPage() != m_OpenedPage ||
-            (*m_History)[m_HistoryPos].GetAnchor() != m_OpenedAnchor)
+            m_History[m_HistoryPos]->GetPage() != m_OpenedPage ||
+            m_History[m_HistoryPos]->GetAnchor() != m_OpenedAnchor)
         {
             m_HistoryPos++;
-            for (int i = 0; i < c; i++)
-                m_History->RemoveAt(m_HistoryPos);
-            m_History->Add(new wxHtmlHistoryItem(m_OpenedPage, m_OpenedAnchor));
+            for (int i = 0; i < c; i++) // TODO: Questionable.
+                m_History.erase(m_History.begin() + m_HistoryPos);
+            m_History.emplace_back(new wxHtmlHistoryItem(m_OpenedPage, m_OpenedAnchor));
         }
     }
 
@@ -830,20 +774,20 @@ bool wxHtmlWindow::HistoryBack()
 
     // store scroll position into history item:
     int y_pos = GetViewStart().y;
-    (*m_History)[m_HistoryPos].SetPos(y_pos);
+    m_History[m_HistoryPos]->SetPos(y_pos);
 
     // go to previous position:
     m_HistoryPos--;
 
-    l = (*m_History)[m_HistoryPos].GetPage();
-    a = (*m_History)[m_HistoryPos].GetAnchor();
+    l = m_History[m_HistoryPos]->GetPage();
+    a = m_History[m_HistoryPos]->GetAnchor();
     m_HistoryOn = false;
     m_tmpCanDrawLocks++;
     if (a.empty()) LoadPage(l);
     else LoadPage(l + wxT("#") + a);
     m_HistoryOn = true;
     m_tmpCanDrawLocks--;
-    Scroll(0, (*m_History)[m_HistoryPos].GetPos());
+    Scroll(0, m_History[m_HistoryPos]->GetPos());
     Refresh();
     return true;
 }
@@ -859,20 +803,20 @@ bool wxHtmlWindow::HistoryForward()
     std::string a, l;
 
     if (m_HistoryPos == -1) return false;
-    if (m_HistoryPos >= (int)m_History->GetCount() - 1)return false;
+    if (m_HistoryPos >= m_History.size() - 1) return false;
 
     m_OpenedPage.clear(); // this will disable adding new entry into history in LoadPage()
 
     m_HistoryPos++;
-    l = (*m_History)[m_HistoryPos].GetPage();
-    a = (*m_History)[m_HistoryPos].GetAnchor();
+    l = m_History[m_HistoryPos]->GetPage();
+    a = m_History[m_HistoryPos]->GetAnchor();
     m_HistoryOn = false;
     m_tmpCanDrawLocks++;
     if (a.empty()) LoadPage(l);
     else LoadPage(l + wxT("#") + a);
     m_HistoryOn = true;
     m_tmpCanDrawLocks--;
-    Scroll(0, (*m_History)[m_HistoryPos].GetPos());
+    Scroll(0, m_History[m_HistoryPos]->GetPos());
     Refresh();
     return true;
 }
@@ -880,14 +824,14 @@ bool wxHtmlWindow::HistoryForward()
 bool wxHtmlWindow::HistoryCanForward()
 {
     if (m_HistoryPos == -1) return false;
-    if (m_HistoryPos >= (int)m_History->GetCount() - 1)return false;
+    if (m_HistoryPos >= m_History.size() - 1)return false;
     return true ;
 }
 
 
 void wxHtmlWindow::HistoryClear()
 {
-    m_History->Empty();
+    m_History.clear();
     m_HistoryPos = -1;
 }
 

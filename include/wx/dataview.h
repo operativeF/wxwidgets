@@ -476,18 +476,21 @@ class WXDLLIMPEXP_CORE wxDataViewColumnBase : public wxSettableHeaderColumn
 public:
     // ctor for the text columns: takes ownership of renderer
     wxDataViewColumnBase(wxDataViewRenderer *renderer,
-                         unsigned int model_column)
+                         int model_column)
+        : m_model_column{model_column}
     {
-        Init(renderer, model_column);
+        m_renderer = renderer;
+        // FIXME: This cast is BS.
+        m_renderer->SetOwner((wxDataViewColumn*) this);
     }
 
     // ctor for the bitmap columns
     wxDataViewColumnBase(const wxBitmap& bitmap,
                          wxDataViewRenderer *renderer,
-                         unsigned int model_column)
-        : m_bitmap(bitmap)
+                         int model_column)
+        : wxDataViewColumnBase{renderer, model_column}
     {
-        Init(renderer, model_column);
+        m_bitmap = bitmap;
     }
 
     ~wxDataViewColumnBase();
@@ -516,13 +519,9 @@ protected:
     wxBitmap                 m_bitmap;
 
     wxDataViewRenderer      *m_renderer;
-    wxDataViewCtrl          *m_owner;
+    wxDataViewCtrl          *m_owner{nullptr};
 
     int                      m_model_column;
-
-private:
-    // common part of all ctors
-    void Init(wxDataViewRenderer *renderer, unsigned int model_column);
 };
 
 // ---------------------------------------------------------

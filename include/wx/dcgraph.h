@@ -23,6 +23,8 @@
 #include <string_view>
 #include <vector>
 
+struct Contextless {};
+
 class WXDLLIMPEXP_FWD_CORE wxWindowDC;
 
 class WXDLLIMPEXP_CORE wxGCDCImpl: public wxDCImpl
@@ -32,7 +34,19 @@ public:
     wxGCDCImpl( wxDC* owner, const DCType& dc)
         : wxDCImpl{owner}
     {
-        Init(wxGraphicsContext::Create(dc));
+        m_mm_to_pix_x = mm2pt;
+        m_mm_to_pix_y = mm2pt;
+
+        m_ok = false;
+
+        m_pen = *wxBLACK_PEN;
+        m_font = *wxNORMAL_FONT;
+        m_brush = *wxWHITE_BRUSH;
+
+        auto ctx = wxGraphicsContext::Create(dc);
+
+        if (ctx)
+            SetGraphicsContext(std::move(ctx));
 
         if constexpr(std::is_same_v<DCType, wxWindowDC>)
         {
@@ -41,9 +55,46 @@ public:
     }
 
     // Ctor using an existing graphics context given to wxGCDC ctor.
-    wxGCDCImpl(wxDC *owner, std::unique_ptr<wxGraphicsContext> context);
+    wxGCDCImpl(wxDC *owner, std::unique_ptr<wxGraphicsContext> context)
+        : wxDCImpl{owner}
+    {
+        m_mm_to_pix_x = mm2pt;
+        m_mm_to_pix_y = mm2pt;
 
-    wxGCDCImpl( wxDC *owner );
+        m_graphicContext = std::move(context);
+        m_ok = m_graphicContext != nullptr;
+
+        if ( m_ok )
+        {
+            // apply the stored transformations to the passed in context
+            m_matrixOriginal = m_graphicContext->GetTransform();
+            ComputeScaleAndOrigin();
+        }
+        // We can't currently initialize m_font, m_pen and m_brush here as we don't
+        // have any way of converting the corresponding wxGraphicsXXX objects to
+        // plain wxXXX ones. This is obviously not ideal as it means that GetXXX()
+        // won't return the actual object being used, but is better than the only
+        // alternative which is overwriting the objects currently used in the
+        // graphics context with the defaults.
+    }
+
+    wxGCDCImpl( wxDC *owner )
+        : wxDCImpl{owner}
+    {
+        m_mm_to_pix_x = mm2pt;
+        m_mm_to_pix_y = mm2pt;
+
+        m_ok = false;
+
+        m_pen = *wxBLACK_PEN;
+        m_font = *wxNORMAL_FONT;
+        m_brush = *wxWHITE_BRUSH;
+
+        auto ctx = wxGraphicsContext::Create();
+
+        if(ctx)
+            SetGraphicsContext(std::move(ctx));
+    }
     
     void Clear() override;
 
@@ -198,7 +249,18 @@ public:
 protected:
     // unused int parameter distinguishes this version, which does not create a
     // wxGraphicsContext, in the expectation that the derived class will do it
-    wxGCDCImpl(wxDC* owner, int);
+    wxGCDCImpl(wxDC* owner, int)
+        : wxDCImpl{owner}
+    {
+        m_mm_to_pix_x = mm2pt;
+        m_mm_to_pix_y = mm2pt;
+
+        m_ok = false;
+
+        m_pen = *wxBLACK_PEN;
+        m_font = *wxNORMAL_FONT;
+        m_brush = *wxWHITE_BRUSH;
+    }
 
 #ifdef __WXOSX__
     virtual wxPoint OSXGetOrigin() const { return wxPoint(); }
@@ -214,17 +276,9 @@ private:
 
     std::unique_ptr<wxGraphicsContext> m_graphicContext;
 
-    bool m_isClipBoxValid;
+    bool m_isClipBoxValid{false};
 
-    bool m_logicalFunctionSupported;
-
-    // This method only initializes trivial fields.
-    void CommonInit();
-
-    // This method initializes all fields (including those initialized by
-    // CommonInit() as it calls it) and the given context, if non-null, which
-    // is assumed to be newly created.
-    void Init(std::unique_ptr<wxGraphicsContext> ctx);
+    bool m_logicalFunctionSupported{true};
 
     // This method initializes m_graphicContext, m_ok and m_matrixOriginal
     // fields, returns true if the context was valid.

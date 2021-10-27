@@ -23,8 +23,8 @@
 
 class wxHtmlProcessor;
 class wxHtmlWinModule;
-class wxHtmlHistoryArray;
 class wxHtmlProcessorList;
+
 class WXDLLIMPEXP_FWD_HTML wxHtmlWinAutoScrollTimer;
 class WXDLLIMPEXP_FWD_HTML wxHtmlCellEvent;
 class WXDLLIMPEXP_FWD_HTML wxHtmlLinkEvent;
@@ -46,6 +46,26 @@ enum class wxHtmlOpeningStatus
     Open,     /// Open the requested URL
     Block,    /// Do not open the URL
     Redirect  /// Redirect to another URL (returned from OnOpeningURL)
+};
+
+//-----------------------------------------------------------------------------
+// wxHtmlHistoryItem
+//-----------------------------------------------------------------------------
+
+// item of history list
+class WXDLLIMPEXP_HTML wxHtmlHistoryItem
+{
+public:
+    wxHtmlHistoryItem(const std::string& p, const std::string& a) : m_Page(p), m_Anchor(a), m_Pos(0) { }
+    int GetPos() const {return m_Pos;}
+    void SetPos(int p) {m_Pos = p;}
+    const std::string& GetPage() const {return m_Page;}
+    const std::string& GetAnchor() const {return m_Anchor;}
+
+private:
+    std::string m_Page;
+    std::string m_Anchor;
+    int m_Pos;
 };
 
 /**
@@ -216,6 +236,8 @@ private:
     wxHtmlWindowInterface *m_interface;
 };
 
+using wxHtmlHistoryArray = std::vector<std::unique_ptr<wxHtmlHistoryItem>>;
+
 // ----------------------------------------------------------------------------
 // wxHtmlWindow
 //                  (This is probably the only class you will directly use.)
@@ -235,7 +257,7 @@ class WXDLLIMPEXP_HTML wxHtmlWindow : public wxScrolledWindow,
     friend class wxHtmlWinModule;
 
 public:
-    wxHtmlWindow() : wxHtmlWindowMouseHelper(this) { Init(); }
+    wxHtmlWindow() : wxHtmlWindowMouseHelper(this) {}
     wxHtmlWindow(wxWindow *parent, wxWindowID id = wxID_ANY,
                  const wxPoint& pos = wxDefaultPosition,
                  const wxSize& size = wxDefaultSize,
@@ -243,9 +265,11 @@ public:
                  const std::string& name = "htmlWindow")
         : wxHtmlWindowMouseHelper(this)
     {
-        Init();
         Create(parent, id, pos, size, style, name);
+        m_Parser->SetFS(m_FS);
+        SetBorders(10);
     }
+
     ~wxHtmlWindow();
 
     wxHtmlWindow(const wxHtmlWindow&) = delete;
@@ -389,8 +413,6 @@ public:
     static void SetDefaultHTMLCursor(HTMLCursor type, const wxCursor& cursor);
 
 protected:
-    void Init();
-
     // Scrolls to anchor of this name. (Anchor is #news
     // or #features etc. it is part of address sometimes:
     // http://www.ms.mff.cuni.cz/~vsla8348/wxhtml/index.html#news)
@@ -469,11 +491,11 @@ public:
 protected:
     // This is pointer to the first cell in parsed data.  (Note: the first cell
     // is usually top one = all other cells are sub-cells of this one)
-    wxHtmlContainerCell *m_Cell;
+    wxHtmlContainerCell *m_Cell{nullptr};
     // parser which is used to parse HTML input.
     // Each wxHtmlWindow has its own parser because sharing one global
     // parser would be problematic (because of reentrancy)
-    wxHtmlWinParser *m_Parser;
+    wxHtmlWinParser *m_Parser{new wxHtmlWinParser(this)};
     // contains name of actually opened page or empty string if no page opened
     std::string m_OpenedPage;
     // contains name of current anchor within m_OpenedPage
@@ -481,35 +503,36 @@ protected:
     // contains title of actually opened page or empty string if no <TITLE> tag
     std::string m_OpenedPageTitle;
     // class for opening files (file system)
-    wxFileSystem* m_FS;
+    wxFileSystem* m_FS{new wxFileSystem()};
 
     // frame in which page title should be displayed & number of its statusbar
     // reserved for usage with this html window
-    wxFrame *m_RelatedFrame;
+    wxFrame *m_RelatedFrame{nullptr};
 #if wxUSE_STATUSBAR
-    int m_RelatedStatusBarIndex;
-    wxStatusBar* m_RelatedStatusBar;
+    int m_RelatedStatusBarIndex{-1};
+
+    wxStatusBar* m_RelatedStatusBar{nullptr};
 #endif // wxUSE_STATUSBAR
-    std::string m_TitleFormat;
+    std::string m_TitleFormat{"%s"};
 
     // borders (free space between text and window borders)
     // defaults to 10 pixels.
     int m_Borders;
 
     // current text selection or NULL
-    wxHtmlSelection *m_selection;
+    wxHtmlSelection *m_selection{nullptr};
 
     // true if the user is dragging mouse to select text
-    bool m_makingSelection;
+    bool m_makingSelection{false};
 
 #if wxUSE_CLIPBOARD
     // time of the last double-click event, used to detect triple clicks
     // (triple clicks are used to select whole line):
-    wxMilliClock_t m_lastDoubleClick;
+    wxMilliClock_t m_lastDoubleClick{0};
 
     // helper class to automatically scroll the window if the user is selecting
     // text and the mouse leaves wxHtmlWindow:
-    wxHtmlWinAutoScrollTimer *m_timerAutoScroll;
+    wxHtmlWinAutoScrollTimer *m_timerAutoScroll{nullptr};
 #endif // wxUSE_CLIPBOARD
 
 private:
@@ -526,11 +549,11 @@ private:
 
     // variables used when user is selecting text
     wxPoint     m_tmpSelFromPos;
-    wxHtmlCell *m_tmpSelFromCell;
+    wxHtmlCell *m_tmpSelFromCell{nullptr};
 
     // if >0 contents of the window is not redrawn
     // (in order to avoid ugly blinking)
-    int m_tmpCanDrawLocks;
+    int m_tmpCanDrawLocks{};
 
     // list of HTML filters
     static wxList m_Filters;
@@ -538,14 +561,14 @@ private:
     static wxHtmlFilter *m_DefaultFilter;
 
     // html processors array:
-    wxHtmlProcessorList *m_Processors;
+    wxHtmlProcessorList *m_Processors{nullptr};
     static wxHtmlProcessorList *m_GlobalProcessors;
 
     // browser history
-    wxHtmlHistoryArray *m_History;
-    int m_HistoryPos;
+    wxHtmlHistoryArray m_History;
+    int m_HistoryPos{-1};
     // if this FLAG is false, items are not added to history
-    bool m_HistoryOn;
+    bool m_HistoryOn{true};
 
     // Flag used to communicate between OnPaint() and OnEraseBackground(), see
     // the comments near its use.
