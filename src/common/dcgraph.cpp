@@ -76,30 +76,6 @@ static wxCompositionMode TranslateRasterOp(wxRasterOperationMode function)
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxGCDC, wxDC);
 
-wxGCDC::wxGCDC(const wxWindowDC& dc) :
-  wxDC(std::make_unique<wxGCDCImpl>( this, dc ))
-{
-}
-
-wxGCDC::wxGCDC( const wxMemoryDC& dc) :
-  wxDC(std::make_unique<wxGCDCImpl>( this, dc ))
-{
-}
-
-#if wxUSE_PRINTING_ARCHITECTURE
-wxGCDC::wxGCDC( const wxPrinterDC& dc) :
-  wxDC(std::make_unique<wxGCDCImpl>( this, dc ))
-{
-}
-#endif
-
-#if defined(__WXMSW__) && wxUSE_ENH_METAFILE
-wxGCDC::wxGCDC(const wxEnhMetaFileDC& dc)
-   : wxDC(std::make_unique<wxGCDCImpl>(this, dc))
-{
-}
-#endif
-
 wxGCDC::wxGCDC(std::unique_ptr<wxGraphicsContext> context) :
     wxDC(std::make_unique<wxGCDCImpl>(this, std::move(context)))
 {
@@ -143,35 +119,6 @@ void wxGCDCImpl::SetGraphicsContext( std::unique_ptr<wxGraphicsContext> ctx )
         m_graphicContext->SetBrush( m_brush);
     }
 }
-
-wxGCDCImpl::wxGCDCImpl( wxDC *owner, const wxWindowDC& dc ) :
-   wxDCImpl( owner )
-{
-    Init(wxGraphicsContext::Create(dc));
-    m_window = dc.GetWindow();
-}
-
-wxGCDCImpl::wxGCDCImpl( wxDC *owner, const wxMemoryDC& dc ) :
-   wxDCImpl( owner )
-{
-    Init(wxGraphicsContext::Create(dc));
-}
-
-#if wxUSE_PRINTING_ARCHITECTURE
-wxGCDCImpl::wxGCDCImpl( wxDC *owner, const wxPrinterDC& dc ) :
-   wxDCImpl( owner )
-{
-    Init(wxGraphicsContext::Create(dc));
-}
-#endif
-
-#if defined(__WXMSW__) && wxUSE_ENH_METAFILE
-wxGCDCImpl::wxGCDCImpl(wxDC *owner, const wxEnhMetaFileDC& dc)
-   : wxDCImpl(owner)
-{
-    Init(wxGraphicsContext::Create(dc));
-}
-#endif
 
 wxGCDCImpl::wxGCDCImpl(wxDC* owner, int)
    : wxDCImpl(owner)

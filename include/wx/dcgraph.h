@@ -25,46 +25,20 @@
 
 class WXDLLIMPEXP_FWD_CORE wxWindowDC;
 
-class WXDLLIMPEXP_CORE wxGCDC: public wxDC
-{
-public:
-    wxGCDC( const wxWindowDC& dc );
-    wxGCDC( const wxMemoryDC& dc );
-#if wxUSE_PRINTING_ARCHITECTURE
-    wxGCDC( const wxPrinterDC& dc );
-#endif
-#if defined(__WXMSW__) && wxUSE_ENH_METAFILE
-    wxGCDC( const wxEnhMetaFileDC& dc );
-#endif
-    wxGCDC(std::unique_ptr<wxGraphicsContext> context);
-
-    wxGCDC();
-
-    wxGCDC& operator=(wxGCDC&&) = delete;
-
-#ifdef __WXMSW__
-    // override wxDC virtual functions to provide access to HDC associated with
-    // this Graphics object (implemented in src/msw/graphics.cpp)
-    WXHDC AcquireHDC() override;
-    void ReleaseHDC(WXHDC hdc) override;
-#endif // __WXMSW__
-
-private:
-    wxDECLARE_DYNAMIC_CLASS(wxGCDC);
-};
-
-
 class WXDLLIMPEXP_CORE wxGCDCImpl: public wxDCImpl
 {
 public:
-    wxGCDCImpl( wxDC *owner, const wxWindowDC& dc );
-    wxGCDCImpl( wxDC *owner, const wxMemoryDC& dc );
-#if wxUSE_PRINTING_ARCHITECTURE
-    wxGCDCImpl( wxDC *owner, const wxPrinterDC& dc );
-#endif
-#if defined(__WXMSW__) && wxUSE_ENH_METAFILE
-    wxGCDCImpl( wxDC *owner, const wxEnhMetaFileDC& dc );
-#endif
+    template<typename DCType>
+    wxGCDCImpl( wxDC* owner, const DCType& dc)
+        : wxDCImpl{owner}
+    {
+        Init(wxGraphicsContext::Create(dc));
+
+        if constexpr(std::is_same_v<DCType, wxWindowDC>)
+        {
+            m_window = dc.GetWindow();
+        }
+    }
 
     // Ctor using an existing graphics context given to wxGCDC ctor.
     wxGCDCImpl(wxDC *owner, std::unique_ptr<wxGraphicsContext> context);
@@ -257,6 +231,32 @@ private:
     bool DoInitContext(std::unique_ptr<wxGraphicsContext> ctx);
 
     wxDECLARE_CLASS(wxGCDCImpl);
+};
+
+class WXDLLIMPEXP_CORE wxGCDC: public wxDC
+{
+public:
+    template<typename DCType>
+    wxGCDC(const DCType& dc)
+        : wxDC{std::make_unique<wxGCDCImpl>(this, dc)}
+    {
+    }
+
+    wxGCDC(std::unique_ptr<wxGraphicsContext> context);
+
+    wxGCDC();
+
+    wxGCDC& operator=(wxGCDC&&) = delete;
+
+#ifdef __WXMSW__
+    // override wxDC virtual functions to provide access to HDC associated with
+    // this Graphics object (implemented in src/msw/graphics.cpp)
+    WXHDC AcquireHDC() override;
+    void ReleaseHDC(WXHDC hdc) override;
+#endif // __WXMSW__
+
+private:
+    wxDECLARE_DYNAMIC_CLASS(wxGCDC);
 };
 
 #endif // wxUSE_GRAPHICS_CONTEXT
