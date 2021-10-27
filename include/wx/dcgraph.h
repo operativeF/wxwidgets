@@ -23,8 +23,6 @@
 #include <string_view>
 #include <vector>
 
-struct Contextless {};
-
 class WXDLLIMPEXP_FWD_CORE wxWindowDC;
 
 class WXDLLIMPEXP_CORE wxGCDCImpl: public wxDCImpl
