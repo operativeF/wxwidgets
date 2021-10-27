@@ -1368,17 +1368,19 @@ private:
 class WXDLLIMPEXP_CORE wxDCClipper
 {
 public:
-    wxDCClipper(wxDC& dc, const wxRegion& r) : m_dc(dc)
+    wxDCClipper(wxDC& dc, const wxRect& r)
+        : m_dc(dc)
     {
-        Init(r.GetBox());
+        m_restoreOld = m_dc.GetClippingBox(m_oldClipRect);
+        m_dc.SetClippingRegion(r);
     }
-    wxDCClipper(wxDC& dc, const wxRect& r) : m_dc(dc)
+    wxDCClipper(wxDC& dc, const wxRegion& r)
+        : wxDCClipper{dc, r.GetBox()}
     {
-        Init(r);
     }
-    wxDCClipper(wxDC& dc, wxCoord x, wxCoord y, wxCoord w, wxCoord h) : m_dc(dc)
+    wxDCClipper(wxDC& dc, wxCoord x, wxCoord y, wxCoord w, wxCoord h)
+        : wxDCClipper{dc, wxRect{x, y, w, h}}
     {
-        Init(wxRect(x, y, w, h));
     }
 
     ~wxDCClipper()
@@ -1389,13 +1391,6 @@ public:
     }
 
 private:
-    // Common part of all ctors.
-    void Init(const wxRect& r)
-    {
-        m_restoreOld = m_dc.GetClippingBox(m_oldClipRect);
-        m_dc.SetClippingRegion(r);
-    }
-
     wxDC& m_dc;
     wxRect m_oldClipRect;
     bool m_restoreOld;
