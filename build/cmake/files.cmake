@@ -730,7 +730,6 @@ set(GUI_CMN_SRC
     src/common/dcsvg.cpp
     src/common/dirctrlcmn.cpp
     src/common/dlgcmn.cpp
-    src/common/dndcmn.cpp
     src/common/dobjcmn.cpp
     src/common/docmdi.cpp
     src/common/docview.cpp
