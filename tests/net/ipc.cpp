@@ -263,4 +263,4 @@ void IPCTestCase::Disconnect()
 
 #endif // wxUSE_THREADS
 
-#endif // !__WINDOWS__
+#endif // !WX_WINDOWS

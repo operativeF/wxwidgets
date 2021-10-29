@@ -9,10 +9,6 @@
 // Licence:     wxWindows licence (part of wxExtra library)
 /////////////////////////////////////////////////////////////////////////////
 
-// for compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
-
-
 #if wxUSE_MIMETYPE
 
 #include "wx/mimetype.h"
@@ -27,7 +23,7 @@
 #include "wx/confbase.h"
 
 // implementation classes:
-#if defined(__WINDOWS__)
+#if defined(WX_WINDOWS)
     #include "wx/msw/mimetype.h"
 #elif ( defined(__DARWIN__) )
     #include "wx/osx/mimetype.h"
@@ -305,9 +301,9 @@ bool wxFileType::GetIcon(wxIconLocation *iconLoc) const
         if ( iconLoc )
         {
             iconLoc->SetFileName(m_info->GetIconFile().ToStdString());
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
             iconLoc->SetIndex(m_info->GetIconIndex());
-#endif // __WINDOWS__
+#endif // WX_WINDOWS
         }
 
         return true;
@@ -411,9 +407,9 @@ size_t wxFileType::GetAllCommands(std::vector<wxString> *verbs,
     if ( commands )
         commands->clear();
 
-#if defined (__WINDOWS__)  || defined(__UNIX__)
+#if defined (WX_WINDOWS)  || defined(__UNIX__)
     return m_impl->GetAllCommands(verbs, commands, params);
-#else // !__WINDOWS__ || __UNIX__
+#else // !WX_WINDOWS || __UNIX__
     // we don't know how to retrieve all commands, so just try the 2 we know
     // about
     size_t count = 0;
@@ -438,12 +434,12 @@ size_t wxFileType::GetAllCommands(std::vector<wxString> *verbs,
     }
 
     return count;
-#endif // __WINDOWS__/| __UNIX__
+#endif // WX_WINDOWS/| __UNIX__
 }
 
 bool wxFileType::Unassociate()
 {
-#if defined(__WINDOWS__)
+#if defined(WX_WINDOWS)
     return m_impl->Unassociate();
 #elif defined(__UNIX__)
     return m_impl->Unassociate(this);
@@ -457,7 +453,7 @@ bool wxFileType::SetCommand(const wxString& cmd,
                             const wxString& verb,
                             bool overwriteprompt)
 {
-#if defined (__WINDOWS__)  || defined(__UNIX__)
+#if defined (WX_WINDOWS)  || defined(__UNIX__)
     return m_impl->SetCommand(cmd, verb, overwriteprompt);
 #else
     wxUnusedVar(cmd);
@@ -471,7 +467,7 @@ bool wxFileType::SetCommand(const wxString& cmd,
 bool wxFileType::SetDefaultIcon(const wxString& cmd, int index)
 {
     wxString sTmp = cmd;
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
     // VZ: should we do this?
     // chris elliott : only makes sense in MS windows
     if ( sTmp.empty() )
@@ -479,7 +475,7 @@ bool wxFileType::SetDefaultIcon(const wxString& cmd, int index)
 #endif
     wxCHECK_MSG( !sTmp.empty(), false, wxT("need the icon file") );
 
-#if defined (__WINDOWS__) || defined(__UNIX__)
+#if defined (WX_WINDOWS) || defined(__UNIX__)
     return m_impl->SetDefaultIcon (cmd, index);
 #else
     wxUnusedVar(index);
@@ -571,7 +567,7 @@ wxMimeTypesManager::Associate(const wxFileTypeInfo& ftInfo)
 {
     EnsureImpl();
 
-#if defined(__WINDOWS__) || defined(__UNIX__)
+#if defined(WX_WINDOWS) || defined(__UNIX__)
     return m_impl->Associate(ftInfo);
 #else // other platforms
     wxUnusedVar(ftInfo);

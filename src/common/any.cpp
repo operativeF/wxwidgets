@@ -8,22 +8,20 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include "wx/wxprec.h"
-
 
 #include "wx/any.h"
 
 #if wxUSE_ANY
 
-#ifndef WX_PRECOMP
-    #include <memory>
-    #include <vector>
-#endif
-
 #include "wx/crt.h"
 #include "wx/module.h"
 #include "wx/hashmap.h"
 #include "wx/hashset.h"
+
+#include <fmt/core.h>
+
+#include <memory>
+#include <vector>
 
 using namespace wxPrivate;
 

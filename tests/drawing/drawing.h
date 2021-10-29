@@ -47,13 +47,13 @@ private:
         // FIXME: Reference data files are currently not found when using Unix
         // build system, so these tests are failing there, fix this and remove
         // this ifdef.
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
         CPPUNIT_TEST( DrawToImage_Fonts );
 #if wxUSE_SVG
 //        CPPUNIT_TEST( DrawToSVG_Fonts );
 #endif
         CPPUNIT_TEST( DrawToPlugins_Fonts );
-#endif // __WINDOWS__
+#endif // WX_WINDOWS
    CPPUNIT_TEST_SUITE_END();
 
     class ImageGraphicsContextLifeCycle: public DrawingTestGCFactory

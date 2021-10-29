@@ -8,11 +8,22 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
-
-
 #if wxUSE_DIRDLG || wxUSE_FILEDLG
+
+#ifdef WX_WINDOWS
+#include <windows.h>
+#include "wx/volume.h"
+
+// MinGW has _getdrive() and _chdrive(), Cygwin doesn't.
+#if defined(__GNUWIN32__) && !defined(__CYGWIN__)
+    #define wxHAS_DRIVE_FUNCTIONS
+#endif
+
+#ifdef wxHAS_DRIVE_FUNCTIONS
+    #include <direct.h>
+#endif
+
+#endif // WX_WINDOWS
 
 #include "wx/generic/dirctrlg.h"
 
@@ -50,21 +61,6 @@
 #if defined(__WXMAC__)
     #include  "wx/osx/private.h"  // includes mac headers
 #endif
-
-#ifdef __WINDOWS__
-#include <windows.h>
-#include "wx/volume.h"
-
-// MinGW has _getdrive() and _chdrive(), Cygwin doesn't.
-#if defined(__GNUWIN32__) && !defined(__CYGWIN__)
-    #define wxHAS_DRIVE_FUNCTIONS
-#endif
-
-#ifdef wxHAS_DRIVE_FUNCTIONS
-    #include <direct.h>
-#endif
-
-#endif // __WINDOWS__
 
 #if defined(__WXMAC__)
 //    #include "MoreFilesX.h"
@@ -166,7 +162,7 @@ size_t wxGetAvailableDrives(wxArrayString &paths, wxArrayString &names, std::vec
 // wxIsDriveAvailable
 // ----------------------------------------------------------------------------
 
-#if defined(__WINDOWS__)
+#if defined(WX_WINDOWS)
 
 int setdrive(int drive)
 {
@@ -180,7 +176,7 @@ int setdrive(int drive)
     newdrive[0] = (wxChar)(wxT('A') + drive - 1);
     newdrive[1] = wxT(':');
     newdrive[2] = wxT('\0');
-#if defined(__WINDOWS__)
+#if defined(WX_WINDOWS)
     if (::SetCurrentDirectory(newdrive))
 #else
     // VA doesn't know what LPSTR is and has its own set
@@ -224,7 +220,7 @@ bool wxIsDriveAvailable(const wxString& dirName)
 
     return success;
 }
-#endif // __WINDOWS__
+#endif // WX_WINDOWS
 
 #endif // wxUSE_DIRDLG || wxUSE_FILEDLG
 
@@ -393,7 +389,7 @@ bool wxGenericDirCtrl::Create(wxWindow *parent,
     m_showHidden = false;
     wxDirItemData* rootData = new wxDirItemData("", "", true);
 
-#if defined(__WINDOWS__)
+#if defined(WX_WINDOWS)
     std::string rootName = _("Computer");
 #else
     std::string rootName = _("Sections");
@@ -637,7 +633,7 @@ void wxGenericDirCtrl::PopulateNode(wxTreeItemId parentId)
 
     wxString dirName = data->m_path;
 
-#if defined(__WINDOWS__)
+#if defined(WX_WINDOWS)
     // Check if this is a root directory and if so,
     // whether the drive is available.
     if (!wxIsDriveAvailable(dirName))
@@ -651,7 +647,7 @@ void wxGenericDirCtrl::PopulateNode(wxTreeItemId parentId)
     // This may take a longish time. Go to busy cursor
     wxBusyCursor busy;
 
-#if defined(__WINDOWS__)
+#if defined(WX_WINDOWS)
     if (dirName.Last() == ':')
         dirName += wxString(wxFILE_SEP_PATH);
 #endif
@@ -800,7 +796,7 @@ wxTreeItemId wxGenericDirCtrl::FindChild(wxTreeItemId parentId, const wxString& 
     path2 += wxString(wxFILE_SEP_PATH);
 
     // In MSW case is not significant
-#if defined(__WINDOWS__)
+#if defined(WX_WINDOWS)
     path2.MakeLower();
 #endif
 
@@ -817,7 +813,7 @@ wxTreeItemId wxGenericDirCtrl::FindChild(wxTreeItemId parentId, const wxString& 
                 childPath += wxString(wxFILE_SEP_PATH);
 
             // In MSW case is not significant
-#if defined(__WINDOWS__)
+#if defined(WX_WINDOWS)
             childPath.MakeLower();
 #endif
 
@@ -1063,7 +1059,7 @@ void wxGenericDirCtrl::FindChildFiles(wxTreeItemId treeid, int dirFlags, wxArray
 
     wxString dirName(data->m_path);
 
-#if defined(__WINDOWS__)
+#if defined(WX_WINDOWS)
     if (dirName.Last() == ':')
         dirName += wxString(wxFILE_SEP_PATH);
 #endif
@@ -1510,7 +1506,7 @@ int wxFileIconsTable::GetIconID(const wxString& extension, const wxString& mime)
     {
         m_smallImageList->Add(bmp);
     }
-#if wxUSE_IMAGE && (!defined(__WINDOWS__) || wxUSE_WXDIB)
+#if wxUSE_IMAGE && (!defined(WX_WINDOWS) || wxUSE_WXDIB)
     else
     {
         wxImage img = bmp.ConvertToImage();

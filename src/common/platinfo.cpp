@@ -8,18 +8,12 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-// for compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
-
-
 #include "wx/platinfo.h"
 #include "wx/app.h"
 #include "wx/utils.h"
 #include "wx/apptrait.h"
 
-#ifndef WX_PRECOMP
-    #include <cassert>
-#endif
+#include <cassert>
 
 namespace
 {

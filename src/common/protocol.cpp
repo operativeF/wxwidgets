@@ -8,21 +8,15 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
-
-
 #if wxUSE_PROTOCOL
 
 #include "wx/protocol/protocol.h"
 #include "wx/protocol/log.h"
 
-#ifndef WX_PRECOMP
-    #include <cstdlib>
-#endif
-
 #include "wx/log.h"
 #include "wx/url.h"
+
+#include <cstdlib>
 
 // ----------------------------------------------------------------------------
 // wxProtoInfo

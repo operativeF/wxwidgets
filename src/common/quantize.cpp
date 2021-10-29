@@ -75,7 +75,7 @@ typedef struct {
         JSAMPLE *sample_range_limit, *srl_orig;
 } j_decompress;
 
-#if defined(__WINDOWS__)
+#if defined(WX_WINDOWS)
     #define JMETHOD(type,methodname,arglist)  type (__cdecl methodname) arglist
 #else
     #define JMETHOD(type,methodname,arglist)  type (methodname) arglist

@@ -123,9 +123,9 @@
 /* MS-DOS with DJGPP */
 #cmakedefine __DOS__ 1
 
-/* Stupid hack; __WINDOWS__ clashes with wx/defs.h */
-#ifndef __WINDOWS__
-#cmakedefine __WINDOWS__ 1
+/* Stupid hack; WX_WINDOWS clashes with wx/defs.h */
+#ifndef WX_WINDOWS
+#cmakedefine WX_WINDOWS 1
 #endif
 
 #ifndef __WIN32__

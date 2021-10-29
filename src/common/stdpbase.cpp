@@ -8,10 +8,6 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-// for compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
-
-
 #include "wx/app.h"
 #include "wx/apptrait.h"
 #include "wx/filename.h"
@@ -55,18 +51,18 @@ std::string wxStandardPathsBase::GetExecutablePath() const
 
     wxString argv0 = wxTheApp->argv[0];
     if (wxIsAbsolutePath(argv0))
-        return argv0;
+        return argv0.ToStdString();
 
     // Search PATH.environment variable...
     wxPathList pathlist;
     pathlist.AddEnvList(wxT("PATH"));
     wxString path = pathlist.FindAbsoluteValidPath(argv0);
     if ( path.empty() )
-        return argv0;       // better than nothing
+        return argv0.ToStdString();       // better than nothing
 
     wxFileName filename(path);
     filename.Normalize();
-    return filename.GetFullPath();
+    return filename.GetFullPath().ToStdString();
 }
 
 wxStandardPaths& wxAppTraitsBase::GetStandardPaths()

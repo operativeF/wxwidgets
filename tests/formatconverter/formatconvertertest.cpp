@@ -70,7 +70,7 @@ static void check(const wxString& input,
 
     wxString result, msg;
 
-#ifndef __WINDOWS__
+#ifndef WX_WINDOWS
     // on windows, wxScanf() string needs no modifications
     result = wxScanfConvertFormatW(input.wc_str());
 
@@ -78,7 +78,7 @@ static void check(const wxString& input,
         wxT("', result (scanf): '") + result +
         wxT("', expected: '") + expectedScanf + wxT("'");
     CPPUNIT_ASSERT_MESSAGE(string(msg.mb_str()), result == expectedScanf);
-#endif // !__WINDOWS__
+#endif // !WX_WINDOWS
 
 #if wxUSE_UNICODE_UTF8
     result = (const char*)wxFormatString(input);
@@ -92,7 +92,7 @@ static void check(const wxString& input,
 #if !wxUSE_UTF8_LOCALE_ONLY
     result = (const wchar_t*)wxFormatString(input);
 
-#if defined(__WINDOWS__) && \
+#if defined(WX_WINDOWS) && \
     !defined(__CYGWIN__) && \
     !defined(__MINGW32__)
     wxString expectedWchar(expectedWcharWindows);

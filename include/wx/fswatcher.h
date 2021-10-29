@@ -406,7 +406,7 @@ protected:
 #elif defined(wxHAS_KQUEUE)
     #include "wx/unix/fswatcher_kqueue.h"
     #define wxFileSystemWatcher wxKqueueFileSystemWatcher
-#elif defined(__WINDOWS__)
+#elif defined(WX_WINDOWS)
     #include "wx/msw/fswatcher.h"
     #define wxFileSystemWatcher wxMSWFileSystemWatcher
 #else

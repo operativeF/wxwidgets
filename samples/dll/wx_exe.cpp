@@ -27,7 +27,7 @@
 #include "wx/stattext.h"
 #include "wx/button.h"
 
-#ifndef __WINDOWS__
+#ifndef WX_WINDOWS
     #error "This sample is Windows-only"
 #endif
 

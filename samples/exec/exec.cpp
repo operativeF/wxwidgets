@@ -59,9 +59,9 @@
 
 #include "wx/mimetype.h"
 
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
     #include "wx/dde.h"
-#endif // __WINDOWS__
+#endif // WX_WINDOWS
 
 #ifndef wxHAS_IMAGES_IN_RESOURCES
     #include "../sample.xpm"
@@ -159,7 +159,7 @@ private:
     // last command we executed
     wxString m_cmdLast;
 
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
     void OnDDEExec(wxCommandEvent& event);
     void OnDDERequest(wxCommandEvent& event);
 
@@ -169,7 +169,7 @@ private:
     wxString m_server,
              m_topic,
              m_cmdDde;
-#endif // __WINDOWS__
+#endif // WX_WINDOWS
 
     wxListBox *m_lbox;
 
@@ -372,10 +372,10 @@ wxBEGIN_EVENT_TABLE(MyFrame, wxFrame)
     EVT_MENU(Exec_LaunchFile, MyFrame::OnFileLaunch)
     EVT_MENU(Exec_OpenURL, MyFrame::OnOpenURL)
 
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
     EVT_MENU(Exec_DDEExec, MyFrame::OnDDEExec)
     EVT_MENU(Exec_DDERequest, MyFrame::OnDDERequest)
-#endif // __WINDOWS__
+#endif // WX_WINDOWS
 
     EVT_MENU(Exec_About, MyFrame::OnAbout)
 
@@ -502,7 +502,7 @@ MyFrame::MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
     execMenu->Append(Exec_POpen, "&Open a pipe to a command...\tCtrl-P",
                      "Open a pipe to and from another program");
 
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
     execMenu->AppendSeparator();
     execMenu->Append(Exec_DDEExec, "Execute command via &DDE...\tCtrl-D");
     execMenu->Append(Exec_DDERequest, "Send DDE &request...\tCtrl-R");
@@ -1178,7 +1178,7 @@ void MyFrame::OnOpenURL(wxCommandEvent& WXUNUSED(event))
 // DDE stuff
 // ----------------------------------------------------------------------------
 
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
 
 bool MyFrame::GetDDEServer()
 {
@@ -1256,7 +1256,7 @@ void MyFrame::OnDDERequest(wxCommandEvent& WXUNUSED(event))
     }
 }
 
-#endif // __WINDOWS__
+#endif // WX_WINDOWS
 
 // ----------------------------------------------------------------------------
 // various helpers

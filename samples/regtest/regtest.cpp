@@ -26,7 +26,7 @@
 #include "wx/imaglist.h"
 #include "wx/tokenzr.h"
 
-#if wxUSE_CONFIG_NATIVE && defined( __WINDOWS__ )
+#if wxUSE_CONFIG_NATIVE && defined( WX_WINDOWS )
 #   define DO_REGTEST 1
 #else
 #   define DO_REGTEST 0

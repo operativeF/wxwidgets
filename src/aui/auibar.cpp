@@ -9,14 +9,7 @@
 // Licence:     wxWindows Library Licence, Version 3.1
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "wx/wxprec.h"
-
-
 #if wxUSE_AUI
-
-#ifndef WX_PRECOMP
-    #include <gsl/gsl>
-#endif
 
 #include "wx/image.h"
 #include "wx/menu.h"
@@ -36,6 +29,7 @@
 #include "wx/arrimpl.cpp"
 WX_DEFINE_OBJARRAY(wxAuiToolBarItemArray)
 
+#include <gsl/gsl>
 
 wxDEFINE_EVENT( wxEVT_AUITOOLBAR_TOOL_DROPDOWN, wxAuiToolBarEvent );
 wxDEFINE_EVENT( wxEVT_AUITOOLBAR_OVERFLOW_CLICK, wxAuiToolBarEvent );

@@ -24,11 +24,11 @@
 #include "wx/intl.h"        // for wxLayoutDirection
 #include "wx/log.h"         // for wxDISABLE_DEBUG_LOGGING_IN_RELEASE_BUILD()
 
-class WXDLLIMPEXP_FWD_BASE wxAppConsole;
-class WXDLLIMPEXP_FWD_BASE wxAppTraits;
-class WXDLLIMPEXP_FWD_BASE wxCmdLineParser;
-class WXDLLIMPEXP_FWD_BASE wxEventLoopBase;
-class WXDLLIMPEXP_FWD_BASE wxMessageOutput;
+class wxAppConsole;
+class wxAppTraits;
+class wxCmdLineParser;
+class wxEventLoopBase;
+class wxMessageOutput;
 
 #if wxUSE_GUI
     struct WXDLLIMPEXP_FWD_CORE wxVideoMode;
@@ -514,10 +514,10 @@ protected:
     // flag modified by Suspend/ResumeProcessingOfPendingEvents()
     bool m_bDoPendingEventProcessing{true};
 
-    friend class WXDLLIMPEXP_FWD_BASE wxEvtHandler;
+    friend class wxEvtHandler;
 };
 
-#if defined(__UNIX__) && !defined(__WINDOWS__)
+#if defined(__UNIX__) && !defined(WX_WINDOWS)
     #include "wx/unix/app.h"
 #else
     // this has to be a class and not a typedef as we forward declare it
@@ -790,7 +790,7 @@ public:
 // locale (under Unix UTF-8, capable of representing any Unicode string, is
 // almost always used and there is no way to retrieve the Unicode command line
 // anyhow).
-#if defined(__WINDOWS__)
+#if defined(WX_WINDOWS)
     #ifdef __VISUALC__
         #define wxIMPLEMENT_WXWIN_MAIN_CONSOLE                                \
             int wmain(int argc, wchar_t **argv)                               \

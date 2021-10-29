@@ -7,22 +7,15 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
-
-
 #if wxUSE_FSWATCHER
 
-#ifndef WX_PRECOMP  
-    #include "wx/msw/private.h"
-
-    #include <memory>
-#endif
-
+#include "wx/msw/private.h"
 #include "wx/fswatcher.h"
 #include "wx/thread.h"
 #include "wx/msw/fswatcher.h"
 #include "wx/private/fswatcher.h"
+
+#include <memory>
 
 class wxFSWatcherImplMSW : public wxFSWatcherImpl
 {

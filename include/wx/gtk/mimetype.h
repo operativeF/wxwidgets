@@ -14,7 +14,7 @@
 
 #if defined(__UNIX__)
 #include "wx/unix/mimetype.h"
-#elif defined(__WINDOWS__)
+#elif defined(WX_WINDOWS)
 #include "wx/msw/mimetype.h"
 #endif
 

@@ -64,7 +64,7 @@ public:
 
 
     // Returns the directory corresponding to the specified Windows shell CSIDL
-    static wxString MSWGetShellDir(const GUID& rfid);
+    static wxString MSWGetShellDir(const _GUID& rfid);
 
 protected:
     // Ctor is protected, use wxStandardPaths::Get() instead of instantiating

@@ -216,7 +216,7 @@ protected:
 };
 
 #if wxUSE_STDPATHS
-    #if defined(__WINDOWS__)
+    #if defined(WX_WINDOWS)
         #include "wx/msw/stdpaths.h"
         #define wxHAS_NATIVE_STDPATHS
     #elif defined(__WXOSX_COCOA__) || defined(__WXOSX_IPHONE__) || defined(__DARWIN__)
@@ -241,8 +241,8 @@ protected:
 class WXDLLIMPEXP_BASE wxStandardPaths : public wxStandardPathsBase
 {
 public:
-    void SetInstallPrefix(const wxString& prefix) { m_prefix = prefix; }
-    wxString GetInstallPrefix() const { return m_prefix; }
+    void SetInstallPrefix(const std::string& prefix) { m_prefix = prefix; }
+    std::string GetInstallPrefix() const { return m_prefix; }
 
     virtual std::string GetExecutablePath() const { return m_prefix; }
     virtual wxString GetConfigDir() const { return m_prefix; }

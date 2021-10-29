@@ -25,7 +25,7 @@
 // the macro below to do it
 //#define CHANGE_SYSTEM_DATE
 
-#ifndef __WINDOWS__
+#ifndef WX_WINDOWS
     #undef CHANGE_SYSTEM_DATE
 #endif
 
@@ -1471,7 +1471,7 @@ TEST_CASE("TestDateOnly")
 
 TEST_CASE("TestTranslateFromUnicodeFormat")
 {
-#if defined(__WINDOWS__) || defined(__WXOSX__)
+#if defined(WX_WINDOWS) || defined(__WXOSX__)
     // This function is defined in src/common/intl.cpp and as it is not public we
     // need to declare it here explicitly.
     WXDLLIMPEXP_BASE

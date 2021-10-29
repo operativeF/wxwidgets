@@ -6,16 +6,11 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "wx/wxprec.h"
-
-
 #if wxUSE_BASE64
 
-#ifndef WX_PRECOMP
-    #include <gsl/gsl>
-#endif
-
 #include "wx/base64.h"
+
+#include <gsl/gsl>
 
 size_t
 wxBase64Encode(char *dst, size_t dstLen, const void *src_, size_t srcLen)

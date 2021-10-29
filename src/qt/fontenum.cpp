@@ -5,8 +5,7 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
+
 
 #include "wx/fontenum.h"
 #include "wx/qt/private/converter.h"

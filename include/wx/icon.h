@@ -29,7 +29,7 @@ constexpr auto wxICON_SCREEN_DEPTH = gsl::narrow_cast<unsigned int>(-1);
   #define wxICON_DEFAULT_TYPE   wxBitmapType::XPM
   #include "wx/motif/icon.h"
 #elif defined(__WXGTK20__)
-  #ifdef __WINDOWS__
+  #ifdef WX_WINDOWS
     #define wxICON_DEFAULT_TYPE   wxBitmapType::ICO_Resource
   #else
     #define wxICON_DEFAULT_TYPE   wxBitmapType::XPM

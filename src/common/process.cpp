@@ -8,10 +8,6 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
-
-
 #include "wx/process.h"
 #include "wx/stream.h"
 
@@ -168,7 +164,7 @@ bool wxProcess::Exists(int pid)
 
 bool wxProcess::Activate() const
 {
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
     // This function is defined in src/msw/utils.cpp.
     extern bool wxMSWActivatePID(long pid);
 

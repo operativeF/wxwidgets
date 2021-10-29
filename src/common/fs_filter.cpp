@@ -12,6 +12,7 @@
 #if wxUSE_FILESYSTEM
 
 #include "wx/fs_filter.h"
+#include "wx/scopedptr.h"
 #include "wx/stream.h"
 
 wxDEFINE_SCOPED_PTR_TYPE(wxFSFile)

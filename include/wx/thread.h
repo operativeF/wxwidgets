@@ -198,7 +198,7 @@ private:
 
 // in order to avoid any overhead under platforms where critical sections are
 // just mutexes make all wxCriticalSection class functions inline
-#if !defined(__WINDOWS__)
+#if !defined(WX_WINDOWS)
     #define wxCRITSECT_IS_MUTEX 1
 
     #define wxCRITSECT_INLINE WXEXPORT inline
@@ -240,7 +240,7 @@ public:
 private:
 #if wxCRITSECT_IS_MUTEX
     wxMutex m_mutex;
-#elif defined(__WINDOWS__)
+#elif defined(WX_WINDOWS)
     // we can't allocate any memory in the ctor, so use placement new -
     // unfortunately, we have to hardcode the sizeof() here because we can't
     // include windows.h from this public header and we also have to use the
@@ -557,10 +557,10 @@ public:
     // identifies a thread inside a process
     wxThreadIdType GetId() const;
 
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
     // Get the internal OS handle
     WXHANDLE MSWGetHandle() const;
-#endif // __WINDOWS__
+#endif // WX_WINDOWS
 
     wxThreadKind GetKind() const
         { return m_isDetached ?  wxThreadKind::Detached :  wxThreadKind::Joinable; }
@@ -808,7 +808,7 @@ public:
 
 #if wxUSE_THREADS
 
-#if defined(__WINDOWS__) || defined(__DARWIN__)
+#if defined(WX_WINDOWS) || defined(__DARWIN__)
     // unlock GUI if there are threads waiting for and lock it back when
     // there are no more of them - should be called periodically by the main
     // thread

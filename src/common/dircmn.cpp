@@ -8,8 +8,7 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
+
 
 
 #include "wx/string.h"
@@ -46,7 +45,7 @@ bool wxDir::HasFiles(const wxString& spec) const
 }
 
 // we have a (much) faster version for Unix
-#if (defined(__CYGWIN__) && defined(__WINDOWS__)) || !defined(__UNIX_LIKE__) || defined(__WINE__)
+#if (defined(__CYGWIN__) && defined(WX_WINDOWS)) || !defined(__UNIX_LIKE__) || defined(__WINE__)
 
 bool wxDir::HasSubDirs(const wxString& spec) const
 {

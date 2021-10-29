@@ -8,17 +8,10 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include  "wx/wxprec.h"
-
-
 #if wxUSE_DYNLIB_CLASS
 
-#ifndef WX_PRECOMP
-    #include "wx/msw/private.h"
-#endif
-
+#include "wx/msw/private.h"
 #include "wx/dynlib.h"
-
 #include "wx/msw/debughlp.h"
 #include "wx/filename.h"
 

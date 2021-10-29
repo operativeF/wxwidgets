@@ -2,13 +2,14 @@
 #ifndef _MSW_UTILS_H
 #define _MSW_UTILS_H
 
-#include <memory>
+#include <windows.h>
 
 #include <consoleapi.h>
 #include <handleapi.h>
-#include <windef.h>
 #include <WinUser.h>
 #include <wingdi.h>
+
+#include <memory>
 
 namespace msw::utils
 {

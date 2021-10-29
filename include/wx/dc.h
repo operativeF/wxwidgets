@@ -717,7 +717,7 @@ public:
     // page and document
 
     bool wxStartDoc(const wxString& message)
-        { return m_pimpl->wxStartDoc(message); }
+        { return m_pimpl->wxStartDoc(message.ToStdString()); }
     void EndDoc()
         { m_pimpl->EndDoc(); }
 

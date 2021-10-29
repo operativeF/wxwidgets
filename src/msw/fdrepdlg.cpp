@@ -8,23 +8,14 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
-
-
 #if wxUSE_FINDREPLDLG
 
-#ifndef WX_PRECOMP
-    #include "wx/msw/wrapcdlg.h"
-
-    #include <boost/nowide/convert.hpp>
-#endif
-
+#include "wx/msw/wrapcdlg.h"
 #include "wx/intl.h"
 #include "wx/log.h"
-
 #include "wx/fdrepdlg.h"
 
+#include <boost/nowide/convert.hpp>
 
 // ----------------------------------------------------------------------------
 // functions prototypes

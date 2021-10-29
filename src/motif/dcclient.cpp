@@ -27,8 +27,7 @@
   perform by SetPen and SetBrush. C'est la vie.
 */
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
+
 
 #ifndef WX_PRECOMP
     #include "wx/log.h"

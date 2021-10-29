@@ -14,16 +14,10 @@
           caling GetDIBits() in the DC we use with it.
  */
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
+
 
 
 #if wxUSE_WXDIB
-
-#ifndef WX_PRECOMP
-    #include <memory>
-    #include <string>
-#endif //WX_PRECOMP
 
 #include "wx/log.h"
 #include "wx/intl.h"
@@ -32,6 +26,9 @@
 #include "wx/quantize.h"
 
 #include "wx/msw/dib.h"
+
+#include <memory>
+#include <string>
 
 using msw::utils::unique_dcwnd;
 

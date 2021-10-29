@@ -134,7 +134,7 @@ TEST_CASE("wxFileSystem::FileNameToUrlConversion")
         const wxChar *input, *expected;
     } data[] =
     {
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
         { wxT("\\\\host\\C$\\path to\\file.txt"),
                 wxT("file://host/C$/path%20to/file.txt")},
         { wxT("C:\\path to\\file.txt"), wxT("file:///C:/path%20to/file.txt")}

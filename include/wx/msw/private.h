@@ -70,10 +70,10 @@ extern WXDLLIMPEXP_DATA_BASE(HINSTANCE) wxhInstance;
 
 extern "C"
 {
-    WXDLLIMPEXP_BASE HINSTANCE wxGetInstance();
+    HINSTANCE wxGetInstance();
 }
 
-WXDLLIMPEXP_BASE void wxSetInstance(HINSTANCE hInst);
+void wxSetInstance(HINSTANCE hInst);
 
 // ---------------------------------------------------------------------------
 // define things missing from some compilers' headers
@@ -266,7 +266,7 @@ enum wxSTD_COLOUR
     wxSTD_COL_MAX
 };
 
-struct WXDLLIMPEXP_CORE wxCOLORMAP
+struct wxCOLORMAP
 {
     COLORREF from, to;
 };
@@ -873,11 +873,11 @@ enum wxWinVersion
     wxWinVersion_Unknown = 0x7fff
 };
 
-WXDLLIMPEXP_BASE wxWinVersion wxGetWinVersion();
+wxWinVersion wxGetWinVersion();
 
 // This is similar to wxSysErrorMsgStr(), but takes an extra HMODULE parameter
 // specific to wxMSW.
-WXDLLIMPEXP_BASE wxString wxMSWFormatMessage(DWORD nErrCode, HMODULE hModule = nullptr);
+wxString wxMSWFormatMessage(DWORD nErrCode, HMODULE hModule = nullptr);
 
 #if wxUSE_GUI && defined(__WXMSW__)
 
@@ -886,10 +886,10 @@ extern HCURSOR wxGetCurrentBusyCursor();    // from msw/utils.cpp
 extern const wxCursor *wxGetGlobalCursor(); // from msw/cursor.cpp
 
 // GetCursorPos can fail without populating the POINT. This falls back to GetMessagePos.
-WXDLLIMPEXP_CORE void wxGetCursorPosMSW(POINT* pt);
+void wxGetCursorPosMSW(POINT* pt);
 
-WXDLLIMPEXP_CORE wxSize wxGetCharSize(WXHWND wnd, const wxFont& the_font);
-WXDLLIMPEXP_CORE wxFontEncoding wxGetFontEncFromCharSet(int charset);
+wxSize wxGetCharSize(WXHWND wnd, const wxFont& the_font);
+wxFontEncoding wxGetFontEncFromCharSet(int charset);
 
 inline void wxSetWindowFont(HWND hwnd, const wxFont& font)
 {
@@ -897,18 +897,18 @@ inline void wxSetWindowFont(HWND hwnd, const wxFont& font)
                   (WPARAM)GetHfontOf(font), MAKELPARAM(TRUE, 0));
 }
 
-WXDLLIMPEXP_CORE void wxSliderEvent(WXHWND control, WXWORD wParam, WXWORD pos);
-WXDLLIMPEXP_CORE void wxScrollBarEvent(WXHWND hbar, WXWORD wParam, WXWORD pos);
+void wxSliderEvent(WXHWND control, WXWORD wParam, WXWORD pos);
+void wxScrollBarEvent(WXHWND hbar, WXWORD wParam, WXWORD pos);
 
 // Safely get the window text (i.e. without using fixed size buffer)
-extern WXDLLIMPEXP_CORE std::string wxGetWindowText(WXHWND hWnd);
+extern std::string wxGetWindowText(WXHWND hWnd);
 
 // get the window class name
-extern WXDLLIMPEXP_CORE wxString wxGetWindowClass(WXHWND hWnd);
+extern wxString wxGetWindowClass(WXHWND hWnd);
 
 // get the window id (should be unsigned, hence this is not wxWindowID which
 // is, for mainly historical reasons, signed)
-extern WXDLLIMPEXP_CORE int wxGetWindowId(WXHWND hWnd);
+extern int wxGetWindowId(WXHWND hWnd);
 
 // check if hWnd's WNDPROC is wndProc. Return true if yes, false if they are
 // different
@@ -1008,21 +1008,21 @@ inline wxLayoutDirection wxGetEditLayoutDirection(WXHWND hWnd)
 
 // this function simply checks whether the given hwnd corresponds to a wxWindow
 // and returns either that window if it does or NULL otherwise
-extern WXDLLIMPEXP_CORE wxWindow* wxFindWinFromHandle(HWND hwnd);
+extern wxWindow* wxFindWinFromHandle(HWND hwnd);
 
 // find the window for HWND which is part of some wxWindow, i.e. unlike
 // wxFindWinFromHandle() above it will also work for "sub controls" of a
 // wxWindow.
 //
 // returns the wxWindow corresponding to the given HWND or NULL.
-extern WXDLLIMPEXP_CORE wxWindow *wxGetWindowFromHWND(WXHWND hwnd);
+extern wxWindow *wxGetWindowFromHWND(WXHWND hwnd);
 
 // Get the size of an icon
-extern WXDLLIMPEXP_CORE wxSize wxGetHiconSize(HICON hicon);
+extern wxSize wxGetHiconSize(HICON hicon);
 
-WXDLLIMPEXP_CORE void wxDrawLine(HDC hdc, int x1, int y1, int x2, int y2);
+void wxDrawLine(HDC hdc, int x1, int y1, int x2, int y2);
 
-WXDLLIMPEXP_CORE void wxDrawHVLine(HDC hdc, int x1, int y1, int x2, int y2, COLORREF color, int width);
+void wxDrawHVLine(HDC hdc, int x1, int y1, int x2, int y2, COLORREF color, int width);
 
 // fill the client rect of the given window on the provided dc using this brush
 inline void wxFillRect(HWND hwnd, HDC hdc, HBRUSH hbr)

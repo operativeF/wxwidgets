@@ -18,12 +18,12 @@
 #include "wx/stdpaths.h"
 #include "wx/scopeguard.h"
 
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
     #include "wx/msw/registry.h"
     #include "wx/msw/wrapshl.h"
     #include "wx/msw/ole/oleutils.h"
     #include "wx/msw/private/comptr.h"
-#endif // __WINDOWS__
+#endif // WX_WINDOWS
 
 #ifdef __UNIX__
     #include <unistd.h>
@@ -129,9 +129,9 @@ private:
         CPPUNIT_TEST( TestRelative );
         CPPUNIT_TEST( TestReplace );
         CPPUNIT_TEST( TestGetHumanReadable );
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
         CPPUNIT_TEST( TestShortLongPath );
-#endif // __WINDOWS__
+#endif // WX_WINDOWS
         CPPUNIT_TEST( TestUNC );
         CPPUNIT_TEST( TestVolumeUniqueName );
         CPPUNIT_TEST( TestCreateTempFileName );
@@ -142,9 +142,9 @@ private:
 #if defined(__UNIX__)
         CPPUNIT_TEST( TestSymlinks );
 #endif // __UNIX__
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
         CPPUNIT_TEST( TestShortcuts );
-#endif // __WINDOWS__
+#endif // WX_WINDOWS
     CPPUNIT_TEST_SUITE_END();
 
     void TestConstruction();
@@ -156,9 +156,9 @@ private:
     void TestNormalize();
     void TestReplace();
     void TestGetHumanReadable();
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
     void TestShortLongPath();
-#endif // __WINDOWS__
+#endif // WX_WINDOWS
     void TestUNC();
     void TestVolumeUniqueName();
     void TestCreateTempFileName();
@@ -169,9 +169,9 @@ private:
 #if defined(__UNIX__)
     void TestSymlinks();
 #endif // __UNIX__
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
     void TestShortcuts();
-#endif // __WINDOWS__
+#endif // WX_WINDOWS
 
     FileNameTestCase(const FileNameTestCase&) = delete;
 	FileNameTestCase& operator=(const FileNameTestCase&) = delete;
@@ -336,7 +336,7 @@ void FileNameTestCase::TestNormalize()
     } tests[] =
     {
         // test wxPATH_NORM_ENV_VARS
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
         { "%ABCDEF%/g/h/i", wxPATH_NORM_ENV_VARS, "abcdef/g/h/i", wxPATH_UNIX },
 #else
         { "$(ABCDEF)/g/h/i", wxPATH_NORM_ENV_VARS, "abcdef/g/h/i", wxPATH_UNIX },
@@ -421,7 +421,7 @@ void FileNameTestCase::TestNormalize()
     // and also that the registry key was changed recently and didn't take
     // effect yet but these are marginal cases which we consciously choose to
     // ignore for now)
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
     long shortNamesDisabled;
     if ( wxRegKey
          (
@@ -435,7 +435,7 @@ void FileNameTestCase::TestNormalize()
         CPPUNIT_ASSERT_EQUAL( "..\\mkinstalldirs", fn.GetFullPath() );
     }
     //else: when in doubt, don't run the test
-#endif // __WINDOWS__
+#endif // WX_WINDOWS
 }
 
 void FileNameTestCase::TestRelative()
@@ -578,7 +578,7 @@ void FileNameTestCase::TestStrip()
     CPPUNIT_ASSERT_EQUAL( "good.wav", wxFileName::StripExtension("good.wav.wav") );
 }
 
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
 
 void FileNameTestCase::TestShortLongPath()
 {
@@ -590,7 +590,7 @@ void FileNameTestCase::TestShortLongPath()
     CPPUNIT_ASSERT_EQUAL( fn.GetShortPath(), fn.GetShortPath() );
 }
 
-#endif // __WINDOWS__
+#endif // WX_WINDOWS
 
 void FileNameTestCase::TestUNC()
 {
@@ -637,7 +637,7 @@ void FileNameTestCase::TestCreateTempFileName()
         { "foo", "$SYSTEM_TEMP", true },
         { "..", "$SYSTEM_TEMP", true },
         { "../bar", "..", true },
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
         { "$USER_DOCS_DIR\\", "$USER_DOCS_DIR", true },
         { "c:\\a\\directory\\which\\does\\not\\exist", "", false },
 #elif defined( __UNIX__ )
@@ -710,9 +710,9 @@ void FileNameTestCase::TestSetTimes()
     CPPUNIT_ASSERT_EQUAL( dtModify, dtModify2 );
 
     // Under Unix the creation time can't be set.
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
     CPPUNIT_ASSERT_EQUAL( dtCreate, dtCreate2 );
-#endif // __WINDOWS__
+#endif // WX_WINDOWS
 }
 
 void FileNameTestCase::TestExists()
@@ -1049,7 +1049,7 @@ void FileNameTestCase::TestSymlinks()
 
 #endif // __UNIX__
 
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
 
 namespace
 {
@@ -1097,7 +1097,7 @@ void FileNameTestCase::TestShortcuts()
    CPPUNIT_ASSERT_EQUAL(fnLink.GetFullName(), fnLinkRel.GetFullName());
 }
 
-#endif // __WINDOWS__
+#endif // WX_WINDOWS
 
 #ifdef __LINUX__
 

@@ -37,7 +37,7 @@ using @ifdef_ and not @if_.
 @itemdef{__WXMSW__, GUI using <a href="http://en.wikipedia.org/wiki/Windows_User">Windows Controls</a>.
 Notice that for compatibility reasons, this symbol is defined for console
 applications under Windows as well, but it should only be used in the GUI code
-while <tt>__WINDOWS__</tt> should be used for the platform tests.}
+while <tt>WX_WINDOWS</tt> should be used for the platform tests.}
 @itemdef{__WXOSX__, OS X GUI using any Apple widget framework (AppKit or UIKit)}
 @itemdef{__WXOSX_IPHONE__, iPhone (UIKit)}
 @itemdef{__WXOSX_COCOA__, macOS using Cocoa (AppKit)}
@@ -93,7 +93,7 @@ symbols, although this has not always been followed.
 @itemdef{__UNIX__, any Unix}
 @itemdef{__UNIX_LIKE__, Unix, BeOS or VMS}
 @itemdef{__VMS__, VMS}
-@itemdef{__WINDOWS__, Any Windows platform, using any port (see also <tt>__WXMSW__</tt>)}
+@itemdef{WX_WINDOWS, Any Windows platform, using any port (see also <tt>__WXMSW__</tt>)}
 @itemdef{__WIN16__, Win16 API (not supported since wxWidgets 2.6)}
 @itemdef{__WIN32__, Win32 API}
 @itemdef{__WIN64__, Win64 (mostly same as Win32 but data type sizes are different)}

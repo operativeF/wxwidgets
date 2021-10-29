@@ -54,7 +54,7 @@ WXDLLIMPEXP_BASE void wxDebugFree(void * buf, bool isVect = false);
 // devik 2000-8-29: All new/delete ops are now inline because they can't
 // be marked as dllexport/dllimport. It then leads to weird bugs when
 // used on MSW as DLL
-#if defined(__WINDOWS__) && (defined(WXUSINGDLL) || defined(WXMAKINGDLL_BASE))
+#if defined(WX_WINDOWS) && (defined(WXUSINGDLL) || defined(WXMAKINGDLL_BASE))
 inline void * operator new (size_t size, wxChar * fileName, int lineNum)
 {
     return wxDebugAlloc(size, fileName, lineNum, false, false);
@@ -102,7 +102,7 @@ void * operator new[] (size_t size, wxChar * fileName, int lineNum);
 
 void operator delete[] (void * buf);
 #endif // wxUSE_ARRAY_MEMORY_OPERATORS
-#endif // defined(__WINDOWS__) && (defined(WXUSINGDLL) || defined(WXMAKINGDLL_BASE))
+#endif // defined(WX_WINDOWS) && (defined(WXUSINGDLL) || defined(WXMAKINGDLL_BASE))
 
 #if defined(__VISUALC__)
 inline void operator delete(void* pData, wxChar* /* fileName */, int /* lineNum */)

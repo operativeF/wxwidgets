@@ -9,14 +9,8 @@
 /////////////////////////////////////////////////////////////////////////////
 
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
-
-
-#ifndef WX_PRECOMP
-    #if defined(__WINDOWS__)
-        #include "wx/msw/private.h"
-    #endif
+#ifdef WX_WINDOWS
+    #include "wx/msw/private.h"
 #endif
 
 #include "wx/string.h"
@@ -31,6 +25,8 @@
 #include "wx/apptrait.h"
 #include "wx/msgout.h"
 #include "wx/stringutils.h"
+
+#include <boost/nowide/convert.hpp>
 
 // ===========================================================================
 // implementation
@@ -71,7 +67,7 @@ void wxMessageOutput::DoPrintfWchar(const wxChar *format, ...)
     out.PrintfV(format, args);
     va_end(args);
 
-    Output(out);
+    Output(out.ToStdString());
 }
 #endif // !wxUSE_UTF8_LOCALE_ONLY
 
@@ -95,14 +91,14 @@ void wxMessageOutput::DoPrintfUtf8(const char *format, ...)
 
 void wxMessageOutputBest::Output(const std::string& str)
 {
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
     // decide whether to use console output or not
     wxAppTraits * const traits = wxApp::GetTraitsIfExists();
     const bool hasStderr = traits ? traits->CanUseStderr() : false;
 
     if ( !(m_flags == wxMessageOutputFlags::MsgBox) )
     {
-        if ( hasStderr && traits->WriteToStderr(AppendLineFeedIfNeeded(str)) )
+        if ( hasStderr && traits->WriteToStderr(AppendLineFeedIfNeeded(str).ToStdString()) )
             return;
     }
 
@@ -113,12 +109,12 @@ void wxMessageOutputBest::Output(const std::string& str)
         title = _("Message").ToStdString();
 
     ::MessageBoxW(nullptr, boost::nowide::widen(str).c_str(), boost::nowide::widen(title).c_str(), MB_ICONINFORMATION | MB_OK);
-#else // !__WINDOWS__
+#else // !WX_WINDOWS
     wxUnusedVar(m_flags);
 
     // TODO: use the native message box for the other ports too
     wxMessageOutputStderr::Output(str);
-#endif // __WINDOWS__/!__WINDOWS__
+#endif // WX_WINDOWS/!WX_WINDOWS
 }
 
 // ----------------------------------------------------------------------------
@@ -138,7 +134,7 @@ wxCharBuffer wxMessageOutputWithConv::PrepareForOutput(const wxString& str)
 {
     wxString strWithLF = AppendLineFeedIfNeeded(str);
 
-#if defined(__WINDOWS__)
+#if defined(WX_WINDOWS)
     // Determine whether the encoding is UTF-16. In that case, the file
     // should have been opened in "wb" mode, and EOL conversion must be done
     // here as it won't be done at stdio level.
@@ -146,7 +142,7 @@ wxCharBuffer wxMessageOutputWithConv::PrepareForOutput(const wxString& str)
     {
         strWithLF.Replace("\n", "\r\n");
     }
-#endif // __WINDOWS__
+#endif // WX_WINDOWS
 
     return m_conv->cWX2MB(strWithLF.c_str());
 }
@@ -174,8 +170,8 @@ void wxMessageOutputStderr::Output(const std::string& str)
 
 void wxMessageOutputDebug::Output(const std::string& str)
 {
-#if defined(__WINDOWS__)
-    std::string out = AppendLineFeedIfNeeded(str);
+#if defined(WX_WINDOWS)
+    std::string out = AppendLineFeedIfNeeded(str).ToStdString();
 
     wx::utils::ReplaceAll(out, "\t", "        ");
     wx::utils::ReplaceAll(out, "\n", "\r\n");
@@ -213,7 +209,7 @@ void wxMessageOutputMessageBox::Output(const std::string& str)
     std::string out = str;
 
     // the native MSW msg box understands the TABs, others don't
-#ifndef __WINDOWS__
+#ifndef WX_WINDOWS
     out.Replace(wxT("\t"), wxT("        "));
 #endif
 

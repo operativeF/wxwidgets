@@ -7,8 +7,7 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
+
 
 #include "wx/webrequest.h"
 
@@ -23,7 +22,7 @@
 #include "wx/private/socket.h"
 #include "wx/evtloop.h"
 
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
     #include "wx/hashset.h"
     #include "wx/msw/wrapwin.h"
 #else
@@ -490,7 +489,7 @@ void SocketPoller::ResumePolling(wxSOCKET_T sock)
     m_impl->ResumePolling(sock);
 }
 
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
 
 class WinSock1SocketPoller: public SocketPollerImpl
 {

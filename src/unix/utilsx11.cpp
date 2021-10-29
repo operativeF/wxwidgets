@@ -10,8 +10,7 @@
 
 #if defined(__WXX11__) || defined(__WXGTK__) || defined(__WXMOTIF__)
 
-// for compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
+
 
 #ifndef WX_PRECOMP
     #include "wx/log.h"

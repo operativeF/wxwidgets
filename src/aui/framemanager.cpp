@@ -8,15 +8,10 @@
 // Licence:     wxWindows Library Licence, Version 3.1
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "wx/wxprec.h"
-
-
 #if wxUSE_AUI
 
-#ifndef WX_PRECOMP
-    #include "wx/msw/wrapwin.h"
-    #include "wx/msw/private.h"
-#endif
+#include "wx/msw/wrapwin.h"
+#include "wx/msw/private.h"
 
 #include "wx/aui/framemanager.h"
 #include "wx/aui/dockart.h"

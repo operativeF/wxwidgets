@@ -9,14 +9,17 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
+#ifdef WX_WINDOWS
+    #include "wx/msw/wrapwin.h"
+#endif
 
+#include <cstdio>       // SEEK_xxx constants
+#include <cerrno>
 
 #if wxUSE_FILE
 
 // standard
-#if defined(__WINDOWS__) && !defined(__GNUWIN32__)
+#if defined(WX_WINDOWS) && !defined(__GNUWIN32__)
 
 #define   WIN32_LEAN_AND_MEAN
 #define   NOSERVICE
@@ -61,11 +64,6 @@
 #else
     #error  "Please specify the header with file functions declarations."
 #endif  //Win/UNIX
-
-#ifndef WX_PRECOMP
-    #include <cstdio>       // SEEK_xxx constants
-    #include <cerrno>
-#endif
 
 // Windows compilers don't have these constants
 #ifndef W_OK
@@ -204,12 +202,12 @@ bool wxFile::Open(const wxString& fileName, OpenMode mode, unsigned int accessMo
             break;
     }
 
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
     // only read/write bits for "all" are supported by this function under
     // Windows, and VC++ 8 returns EINVAL if any other bits are used in
     // accessMode, so clear them as they have at best no effect anyhow
     accessMode &= wxS_IRUSR | wxS_IWUSR;
-#endif // __WINDOWS__
+#endif // WX_WINDOWS
 
     const int fildes = wxOpen( fileName, flags, accessMode);
 

@@ -8,14 +8,7 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
-
-
-#ifndef WX_PRECOMP
-    #include "wx/msw/private.h"
-#endif
-
+#include "wx/msw/private.h"
 #include "wx/evtloop.h"
 
 #include "wx/window.h"
@@ -26,6 +19,7 @@
 #include "wx/except.h"
 
 #include "wx/tooltip.h"
+
 #if wxUSE_THREADS
     // define the list of MSG strutures
     WX_DECLARE_LIST(MSG, wxMsgList);

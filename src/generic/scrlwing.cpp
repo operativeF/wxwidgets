@@ -9,9 +9,9 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
-
+#ifdef WX_WINDOWS
+    #include <windows.h> // for DLGC_WANTARROWS
+#endif
 
 #include "wx/scrolwin.h"
 
@@ -25,10 +25,6 @@
 
 #ifdef __WXMAC__
 #include "wx/scrolbar.h"
-#endif
-
-#ifdef __WXMSW__
-    #include <windows.h> // for DLGC_WANTARROWS
 #endif
 
 #ifdef __WXMOTIF__

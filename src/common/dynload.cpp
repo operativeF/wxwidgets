@@ -15,7 +15,7 @@
 #if wxUSE_DYNAMIC_LOADER
 
 #ifndef WX_PRECOMP
-    #ifdef __WINDOWS__
+    #ifdef WX_WINDOWS
         #include "wx/msw/private.h"
     #endif
 #endif

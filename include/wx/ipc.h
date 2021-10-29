@@ -15,14 +15,14 @@
 // 0, or if the platform is not Windows, use TCP/IP for IPC implementation
 
 #if !defined(wxUSE_DDE_FOR_IPC)
-    #ifdef __WINDOWS__
+    #ifdef WX_WINDOWS
         #define wxUSE_DDE_FOR_IPC 1
     #else
         #define wxUSE_DDE_FOR_IPC 0
     #endif
 #endif // !defined(wxUSE_DDE_FOR_IPC)
 
-#if !defined(__WINDOWS__)
+#if !defined(WX_WINDOWS)
     #undef wxUSE_DDE_FOR_IPC
     #define wxUSE_DDE_FOR_IPC 0
 #endif

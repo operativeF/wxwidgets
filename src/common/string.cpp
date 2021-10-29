@@ -9,18 +9,10 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-// ===========================================================================
-// headers, declarations, constants
-// ===========================================================================
-
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
-
-
 #ifndef WX_PRECOMP
-    #ifdef __WINDOWS__
+    #ifdef WX_WINDOWS
         #include "wx/msw/wrapwin.h"
-    #endif // __WINDOWS__
+    #endif // WX_WINDOWS
 
     #include <cstdlib>
     #include <cstring>

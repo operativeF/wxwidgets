@@ -403,6 +403,6 @@
 #include <wx/zipstrm.h>
 #include <wx/zstream.h>
 
-#if defined(__WINDOWS__)
+#if defined(WX_WINDOWS)
 #include <wx/dde.h>
 #endif

@@ -11,15 +11,7 @@
 // by the author of xv, John Bradley for using the iff loading part
 // in wxWidgets has been gratefully given.
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
-
-
 #if wxUSE_IMAGE && wxUSE_IFF
-
-#ifndef WX_PRECOMP
-    #include <array>
-#endif
 
 #include "wx/log.h"
 #include "wx/intl.h"
@@ -30,6 +22,8 @@
 
 #include "wx/imagiff.h"
 #include "wx/wfstream.h"
+
+#include <array>
 
 // --------------------------------------------------------------------------
 // Constants

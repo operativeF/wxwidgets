@@ -9,17 +9,7 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
-
-
 #if wxUSE_SOCKETS
-
-#ifndef WX_PRECOMP
-    #include <tuple>
-
-    #include <memory.h>
-#endif // !WX_PRECOMP
 
 #include "wx/log.h"
 #include "wx/intl.h"
@@ -29,10 +19,14 @@
 #include "wx/private/socket.h"
 #include "wx/private/sckaddr.h"
 
-#if defined(__UNIX__) && !defined(__WINDOWS__)
+#if defined(__UNIX__) && !defined(WX_WINDOWS)
     #include <netdb.h>
     #include <arpa/inet.h>
 #endif // __UNIX__
+
+#include <memory.h>
+
+#include <tuple>
 
 #ifndef INADDR_NONE
     #define INADDR_NONE INADDR_ANY
@@ -42,7 +36,7 @@
 // wxRTTI macros
 // ----------------------------------------------------------------------------
 
-#if defined(__UNIX__) && !defined(__WINDOWS__) && !defined(__WINE__)
+#if defined(__UNIX__) && !defined(WX_WINDOWS) && !defined(__WINE__)
 wxIMPLEMENT_DYNAMIC_CLASS(wxUNIXaddress, wxSockAddress);
 #endif
 
@@ -53,7 +47,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxUNIXaddress, wxSockAddress);
 // TODO: use POSIX getaddrinfo() (also available in Winsock 2) for simplicity
 //       and to use the same code for IPv4 and IPv6 support
 
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
     #define HAVE_INET_ADDR
 
     #ifndef HAVE_GETHOSTBYNAME
@@ -81,7 +75,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxUNIXaddress, wxSockAddress);
             #include <ws2tcpip.h>
         #endif
     #endif
-#endif // __WINDOWS__
+#endif // WX_WINDOWS
 
 // we assume that we have gethostbyaddr_r() if and only if we have
 // gethostbyname_r() and that it uses the similar conventions to it (see

@@ -22,3 +22,5 @@
 # wxzlib
 # xml
 # xrc
+
+add_subdirectory(base)

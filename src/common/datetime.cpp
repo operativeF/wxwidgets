@@ -44,13 +44,12 @@
  *    wxDateTime::Tm.
  */
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
+
 
 
 #if !defined(wxUSE_DATETIME) || wxUSE_DATETIME
 
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
     #include "wx/msw/wrapwin.h"
 #endif
 
@@ -64,7 +63,7 @@
 #include "wx/time.h"
 #include "wx/tokenzr.h"
 
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
     #include <clocale>
     #include <winnls.h>
 #endif
@@ -541,7 +540,7 @@ bool wxDateTime::IsLeapYear(int year, wxDateTime::Calendar cal)
     }
 }
 
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
 #include "wx/msw/registry.h"
 
 /* static */
@@ -2297,7 +2296,7 @@ WXDLLIMPEXP_BASE void wxPrevWDay(wxDateTime::WeekDay& wd)
                                : (wxDateTime::WeekDay)(wd - 1);
 }
 
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
 
 wxDateTime& wxDateTime::SetFromMSWSysTime(const SYSTEMTIME& st)
 {
@@ -2345,6 +2344,6 @@ void wxDateTime::GetAsMSWSysDate(SYSTEMTIME* st) const
     st->wMilliseconds = 0;
 }
 
-#endif // __WINDOWS__
+#endif // WX_WINDOWS
 
 #endif // wxUSE_DATETIME

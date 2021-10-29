@@ -8,14 +8,7 @@
 // Licence:     wxWindows Library Licence, Version 3.1
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "wx/wxprec.h"
-
-
 #if wxUSE_AUI
-
-#ifndef WX_PRECOMP
-    #include <array>
-#endif
 
 #include "wx/dc.h"
 #include "wx/dcclient.h"
@@ -31,6 +24,8 @@
 #ifdef __WXMAC__
 #include "wx/osx/private.h"
 #endif
+
+#include <array>
 
 // -- GUI helper classes and functions --
 

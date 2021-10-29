@@ -6,10 +6,6 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
-
-
 #if wxUSE_IMAGE
 
 #include "wx/imagbmp.h"
@@ -22,11 +18,6 @@
 #include "wx/palette.h"
 #include "wx/intl.h"
 
-#ifndef WX_PRECOMP
-    #include <array>
-    #include <memory>
-#endif
-
 #include "wx/filefn.h"
 #include "wx/wfstream.h"
 #include "wx/quantize.h"
@@ -35,6 +26,9 @@
 
 #include "wx/anidecod.h"
 #include "wx/private/icondir.h"
+
+#include <array>
+#include <memory>
 
 // ----------------------------------------------------------------------------
 // private functions

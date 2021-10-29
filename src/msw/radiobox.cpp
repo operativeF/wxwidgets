@@ -8,18 +8,9 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
-
-
 #if wxUSE_RADIOBOX
 
 #include "wx/radiobox.h"
-
-#ifndef WX_PRECOMP
-    #include <boost/nowide/convert.hpp>
-#endif
-
 #include "wx/hashmap.h"
 #include "wx/settings.h"
 #include "wx/log.h"
@@ -31,6 +22,8 @@
 #if wxUSE_TOOLTIPS
     #include "wx/tooltip.h"
 #endif // wxUSE_TOOLTIPS
+
+#include <boost/nowide/convert.hpp>
 
 // TODO: wxCONSTRUCTOR
 #if 0 // wxUSE_EXTENDED_RTTI

@@ -12,8 +12,7 @@
 // per-user file, which can be edited using a Windows-control-panel clone.
 // Also they should be documented better. Some are very MS Windows-ish.
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
+
 
 #include "wx/settings.h"
 

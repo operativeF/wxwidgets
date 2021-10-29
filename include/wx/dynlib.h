@@ -24,7 +24,7 @@ class WXDLLIMPEXP_FWD_BASE wxDynamicLibraryDetailsCreator;
 // conditional compilation
 // ----------------------------------------------------------------------------
 
-#if defined(__WINDOWS__)
+#if defined(WX_WINDOWS)
     using wxDllType = WXHMODULE;
 #elif defined(HAVE_DLOPEN)
     #include <dlfcn.h>
@@ -109,14 +109,14 @@ enum class wxPluginCategory
 #define wxDL_INIT_FUNC(pfx, name, dynlib) \
     pfx ## name = (name ## _t)(dynlib).RawGetSymbol(#name)
 
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
 
 // same as wxDL_INIT_FUNC() but appends 'A' or 'W' to the function name, see
 // wxDynamicLibrary::GetSymbolAorW()
 #define wxDL_INIT_FUNC_AW(pfx, name, dynlib) \
     pfx ## name = (name ## _t)(dynlib).GetSymbolAorW(#name)
 
-#endif // __WINDOWS__
+#endif // WX_WINDOWS
 
 // the following macros can be used to redirect a whole library to a class and
 // check at run-time if the library is present and contains all required
@@ -293,7 +293,7 @@ public:
         return RawGetSymbol(m_handle, name);
     }
 
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
     // this function is useful for loading functions from the standard Windows
     // DLLs: such functions have an 'A' (in ANSI build) or 'W' (in Unicode, or
     // wide character build) suffix if they take string parameters
@@ -311,7 +311,7 @@ public:
     {
         return RawGetSymbolAorW(m_handle, name);
     }
-#endif // __WINDOWS__
+#endif // WX_WINDOWS
 
     // return all modules/shared libraries in the address space of this process
     //
@@ -340,7 +340,7 @@ public:
     // module disk file on success.
     static void* GetModuleFromAddress(const void* addr, wxString* path = nullptr);
 
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
     // return the handle (HMODULE/HINSTANCE) of the DLL with the given name
     // and/or containing the specified address: for XP and later systems only
     // the address is used and the name is ignored but for the previous systems
@@ -351,7 +351,7 @@ public:
     // need to be freed using FreeLibrary() but it also means that it can
     // become invalid if the DLL is unloaded
     static WXHMODULE MSWGetModuleHandle(const wxString& name, void *addr);
-#endif // __WINDOWS__
+#endif // WX_WINDOWS
 
 protected:
     // common part of GetSymbol() and HasSymbol()
@@ -365,7 +365,7 @@ protected:
     wxDllType m_handle{nullptr};
 };
 
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
 
 // ----------------------------------------------------------------------------
 // wxLoadedDLL is a MSW-only internal helper class allowing to dynamically bind
@@ -386,7 +386,7 @@ public:
     }
 };
 
-#endif // __WINDOWS__
+#endif // WX_WINDOWS
 
 // ----------------------------------------------------------------------------
 // Interesting defines

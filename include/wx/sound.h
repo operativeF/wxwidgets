@@ -54,7 +54,7 @@ protected:
 // wxSound class implementation
 // ----------------------------------------------------------------------------
 
-#if defined(__WINDOWS__)
+#if defined(WX_WINDOWS)
     #include "wx/msw/sound.h"
 #elif defined(__WXMAC__)
     #include "wx/osx/sound.h"

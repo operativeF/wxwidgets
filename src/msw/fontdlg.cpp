@@ -8,28 +8,18 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
-
-
 #if wxUSE_FONTDLG
 
 #include "wx/fontdlg.h"
 #include "wx/modalhook.h"
-
-#ifndef WX_PRECOMP
-    #include "wx/msw/wrapcdlg.h"
-
-    #include <boost/nowide/convert.hpp>
-#endif
-
+#include "wx/msw/wrapcdlg.h"
 #include "wx/utils.h"
 #include "wx/dialog.h"
 #include "wx/log.h"
-
 #include "wx/fontutil.h"
 #include "wx/msw/private/dpiaware.h"
 
+#include <boost/nowide/convert.hpp>
 
 // ----------------------------------------------------------------------------
 // wxWin macros

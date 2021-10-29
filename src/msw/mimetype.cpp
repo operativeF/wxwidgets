@@ -8,10 +8,6 @@
 // Licence:     wxWidgets licence (part of base library)
 /////////////////////////////////////////////////////////////////////////////
 
-// for compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
-
-
 #if wxUSE_MIMETYPE
 
 #include "wx/msw/mimetype.h"
@@ -37,7 +33,7 @@
 #include "wx/confbase.h"
 #include "wx/dynlib.h"
 
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
     #include "wx/msw/registry.h"
     #include <shlwapi.h>
     #include "wx/msw/wrapshl.h"
@@ -299,7 +295,7 @@ wxString wxAssocQueryString(ASSOCSTR assoc,
 
 wxString wxFileTypeImpl::GetCommand(const wxString& verb) const
 {
-    wxString command = wxAssocQueryString(ASSOCSTR_COMMAND, m_ext, verb);
+    wxString command = wxAssocQueryString(ASSOCSTR_COMMAND, m_ext.ToStdString(), verb.ToStdString());
     const bool foundFilename = CanonicalizeParams(command);
 
 #if wxUSE_IPC
@@ -401,7 +397,7 @@ bool wxFileTypeImpl::GetMimeTypes(std::vector<wxString>& mimeTypes) const
 
 bool wxFileTypeImpl::GetIcon(wxIconLocation *iconLoc) const
 {
-    wxString strIcon = wxAssocQueryString(wxASSOCSTR_DEFAULTICON, m_ext);
+    wxString strIcon = wxAssocQueryString(wxASSOCSTR_DEFAULTICON, m_ext.ToStdString());
 
     if ( !strIcon.empty() )
     {

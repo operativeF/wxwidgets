@@ -8,8 +8,7 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
+
 
 
 #if wxUSE_FILEDLG
@@ -71,7 +70,7 @@
 #include <unistd.h>
 #endif
 
-#if defined(__WINDOWS__)
+#if defined(WX_WINDOWS)
 #define IsTopMostDir(dir)   (dir.empty())
 #else
 #define IsTopMostDir(dir)   (dir == wxT("/"))
@@ -100,9 +99,9 @@ wxBEGIN_EVENT_TABLE(wxGenericFileDialog,wxDialog)
     EVT_FILECTRL_FILEACTIVATED(ID_FILE_CTRL, wxGenericFileDialog::OnFileActivated)
 
     EVT_UPDATE_UI(ID_UP_DIR, wxGenericFileDialog::OnUpdateButtonsUI)
-#if defined(__WINDOWS__)
+#if defined(WX_WINDOWS)
     EVT_UPDATE_UI(ID_NEW_DIR, wxGenericFileDialog::OnUpdateButtonsUI)
-#endif // defined(__WINDOWS__)
+#endif // defined(WX_WINDOWS)
 wxEND_EVENT_TABLE()
 
 long wxGenericFileDialog::ms_lastViewStyle = wxLC_LIST;

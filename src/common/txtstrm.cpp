@@ -8,8 +8,7 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
+
 
 
 #if wxUSE_STREAMS
@@ -408,7 +407,7 @@ wxTextOutputStream::wxTextOutputStream(wxOutputStream& s,
 {
     if (m_mode == wxEOL::Native)
     {
-#if defined(__WINDOWS__)
+#if defined(WX_WINDOWS)
         m_mode = wxEOL::Dos;
 #else
         m_mode = wxEOL::Unix;
@@ -430,7 +429,7 @@ void wxTextOutputStream::SetMode(wxEOL mode)
     m_mode = mode;
     if (m_mode == wxEOL::Native)
     {
-#if defined(__WINDOWS__)
+#if defined(WX_WINDOWS)
         m_mode = wxEOL::Dos;
 #else
         m_mode = wxEOL::Unix;

@@ -8,8 +8,7 @@
 // Licence:     wxWindows licence (part of wxExtra library)
 /////////////////////////////////////////////////////////////////////////////
 
-// for compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
+
 
 
 #if wxUSE_MIMETYPE && wxUSE_FILE

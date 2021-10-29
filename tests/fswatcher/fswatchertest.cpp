@@ -499,7 +499,7 @@ TEST_CASE_FIXTURE(FileSystemWatcherTestCase,
 }
 
 // MSW implementation doesn't detect file access events currently
-#ifndef __WINDOWS__
+#ifndef WX_WINDOWS
 
 // ----------------------------------------------------------------------------
 // TestEventAccess
@@ -533,7 +533,7 @@ TEST_CASE_FIXTURE(FileSystemWatcherTestCase,
     tester.Run();
 }
 
-#endif // __WINDOWS__
+#endif // WX_WINDOWS
 
 #endif // !wxHAS_KQUEUE
 
@@ -700,12 +700,12 @@ TEST_CASE_FIXTURE(FileSystemWatcherTestCase,
             REQUIRE(m_watcher);
 
             int treeitems = 1; // the trunk
-#if !defined(__WINDOWS__) && !defined(wxHAVE_FSEVENTS_FILE_NOTIFICATIONS)
+#if !defined(WX_WINDOWS) && !defined(wxHAVE_FSEVENTS_FILE_NOTIFICATIONS)
             // When there's no file mask, wxMSW and wxOSX set a single watch
             // on the trunk which is implemented recursively.
             // wxGTK always sets an additional watch for each subdir
             treeitems += subdirs + 1; // +1 for 'child'
-#endif // !__WINDOWS__ && !wxHAVE_FSEVENTS_FILE_NOTIFICATIONS
+#endif // !WX_WINDOWS && !wxHAVE_FSEVENTS_FILE_NOTIFICATIONS
 
             // Store the initial count; there may already be some watches
             const int initial = m_watcher->GetWatchedPathsCount();
@@ -731,9 +731,9 @@ TEST_CASE_FIXTURE(FileSystemWatcherTestCase,
             // Except that in wxMSW this isn't true: each watch will be a
             // single, recursive dir; so fudge the count
             int fudge = 0;
-#if defined(__WINDOWS__) || defined(wxHAVE_FSEVENTS_FILE_NOTIFICATIONS)
+#if defined(WX_WINDOWS) || defined(wxHAVE_FSEVENTS_FILE_NOTIFICATIONS)
             fudge = 1;
-#endif // __WINDOWS__ || wxHAVE_FSEVENTS_FILE_NOTIFICATIONS
+#endif // WX_WINDOWS || wxHAVE_FSEVENTS_FILE_NOTIFICATIONS
             m_watcher->AddTree(dir);
             CHECK( m_watcher->GetWatchedPathsCount() == plustree + fudge );
             m_watcher->RemoveTree(child);
@@ -813,9 +813,9 @@ TEST_CASE_FIXTURE(FileSystemWatcherTestCase,
             // Now test adding and removing a tree using a filespec
             // wxMSW uses the generic method to add matching files; which fails
             // as it doesn't support adding files :/ So disable the test
-#ifndef __WINDOWS__
+#ifndef WX_WINDOWS
             WatchTreeWithFilespec(treedir);
-#endif // __WINDOWS__
+#endif // WX_WINDOWS
 
             RemoveSingleWatch(singledir);
             // Add it back again, ready to test RemoveAll()

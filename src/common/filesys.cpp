@@ -650,7 +650,7 @@ wxFileName wxFileSystem::URLToFileName(const wxString& url)
 // Returns the file URL for a native path
 std::string wxFileSystem::FileNameToURL(const wxFileName& filename)
 {
-    return wxFileName::FileNameToURL( filename );
+    return wxFileName::FileNameToURL( filename ).ToStdString();
 }
 
 

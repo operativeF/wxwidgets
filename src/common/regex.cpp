@@ -9,17 +9,9 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
-
-
 #if wxUSE_REGEX
 
 #include "wx/regex.h"
-
-#ifndef WX_PRECOMP
-    #include <gsl/gsl>
-#endif //WX_PRECOMP
 
 #include "wx/object.h"
 #include "wx/log.h"
@@ -32,6 +24,8 @@
 #endif
 
 #include <regex.h>
+
+#include <gsl/gsl>
 
 // WXREGEX_USING_BUILTIN    defined when using the built-in regex lib
 // WXREGEX_USING_RE_SEARCH  defined when using re_search in the GNU regex lib

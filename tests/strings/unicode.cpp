@@ -249,7 +249,7 @@ TEST_CASE("ConversionUTF7")
         //    fine, go figure)
         //
         // I have no idea how to fix this so just disable the test for now
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
         wxCSConv conv("utf-7");
         d.Test(n, conv);
 #endif
@@ -374,7 +374,7 @@ TEST_CASE("IsConvOk")
     CHECK( wxCSConv("UTF-8").IsOk() );
     CHECK( !wxCSConv("NoSuchConversion").IsOk() );
 
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
     CHECK( wxCSConv("WINDOWS-437").IsOk() );
 #endif
 }

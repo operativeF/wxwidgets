@@ -75,7 +75,7 @@ wxMutexError wxMutex::Unlock()
 // variables and its events/event semaphores have quite different semantics,
 // so we reimplement the conditions from scratch using the mutexes and
 // semaphores
-#if defined(__WINDOWS__)
+#if defined(WX_WINDOWS)
 
 class wxConditionInternal
 {
@@ -220,7 +220,7 @@ wxCondError wxConditionInternal::Broadcast()
     return wxCondError::None;
 }
 
-#endif // __WINDOWS__
+#endif // WX_WINDOWS
 
 // ----------------------------------------------------------------------------
 // wxCondition

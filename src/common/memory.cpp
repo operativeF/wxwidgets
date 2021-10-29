@@ -8,15 +8,11 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
-
-
 #if wxUSE_MEMORY_TRACING || wxUSE_DEBUG_CONTEXT
 
 #include "wx/memory.h"
 
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
     #include "wx/msw/wrapwin.h"
 #endif
 
@@ -869,7 +865,7 @@ static MemoryCriticalSection memLocker;
 #endif // USE_THREADSAFE_MEMORY_ALLOCATION
 
 
-#if !(defined(__WINDOWS__) && (defined(WXUSINGDLL) || defined(WXMAKINGDLL_BASE)))
+#if !(defined(WX_WINDOWS) && (defined(WXUSINGDLL) || defined(WXMAKINGDLL_BASE)))
 #if wxUSE_GLOBAL_MEMORY_OPERATORS
 void * operator new (size_t size, wxChar * fileName, int lineNum)
 {
@@ -903,7 +899,7 @@ void operator delete[] (void * buf)
 }
 #endif // wxUSE_ARRAY_MEMORY_OPERATORS
 #endif // wxUSE_GLOBAL_MEMORY_OPERATORS
-#endif // !(defined(__WINDOWS__) && (defined(WXUSINGDLL) || defined(WXMAKINGDLL_BASE)))
+#endif // !(defined(WX_WINDOWS) && (defined(WXUSINGDLL) || defined(WXMAKINGDLL_BASE)))
 
 // TODO: store whether this is a vector or not.
 void * wxDebugAlloc(size_t size, wxChar * fileName, int lineNum, bool isObject, bool WXUNUSED(isVect) )
@@ -1018,7 +1014,7 @@ void wxTrace(const wxChar * ...)
 
   va_start(ap, fmt);
 
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
   wvsprintf(buffer,fmt,ap) ;
 #else
   vsprintf(buffer,fmt,ap) ;
@@ -1032,7 +1028,7 @@ void wxTrace(const wxChar * ...)
     wxDebugContext::GetStream().flush();
   }
   else
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
 #ifdef __WIN32__
     OutputDebugString((LPCTSTR)buffer) ;
 #else
@@ -1058,7 +1054,7 @@ void wxTraceLevel(int, const wxChar * ...)
 
   va_start(ap, fmt);
 
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
   wxWvsprintf(buffer,fmt,ap) ;
 #else
   vsprintf(buffer,fmt,ap) ;
@@ -1072,7 +1068,7 @@ void wxTraceLevel(int, const wxChar * ...)
     wxDebugContext::GetStream().flush();
   }
   else
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
 #ifdef __WIN32__
     OutputDebugString((LPCTSTR)buffer) ;
 #else

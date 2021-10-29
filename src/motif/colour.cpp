@@ -11,8 +11,7 @@
 //// TODO: make wxColour a ref-counted object,
 //// so pixel values get shared.
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
+
 
 #include "wx/colour.h"
 

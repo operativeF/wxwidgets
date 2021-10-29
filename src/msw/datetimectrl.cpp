@@ -7,19 +7,13 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-// for compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
-
+#ifdef wxNEEDS_DATETIMEPICKCTRL
 
 #include "wx/datetimectrl.h"
 
-#ifdef wxNEEDS_DATETIMEPICKCTRL
-
-#ifndef WX_PRECOMP
-    #include "wx/msw/wrapwin.h"
-    #include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
-    #include "wx/msw/private.h"
-#endif
+#include "wx/msw/wrapwin.h"
+#include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
+#include "wx/msw/private.h"
 
 #include "wx/dcclient.h"
 #include "wx/settings.h"

@@ -61,17 +61,17 @@ struct WXDLLIMPEXP_BASE wxLanguageInfo
 {
     int Language;                   // wxLanguage id
     wxString CanonicalName;         // Canonical name, e.g. fr_FR
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
     std::uint32_t WinLang,               // Win32 language identifiers
              WinSublang;
-#endif // __WINDOWS__
+#endif // WX_WINDOWS
     wxString Description;           // human-readable name of the language
     wxLayoutDirection LayoutDirection;
 
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
     // return the LCID corresponding to this language
     std::uint32_t GetLCID() const;
-#endif // __WINDOWS__
+#endif // WX_WINDOWS
 
     // return the locale name corresponding to this language usable with
     // setlocale() on the current system or empty string if this locale is not

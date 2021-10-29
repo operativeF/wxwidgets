@@ -33,7 +33,7 @@ public:
 };
 
 // Trivial common implementation of wxSecretValueImpl used under MSW and OS X.
-#if defined(__WINDOWS__) || defined(__DARWIN__)
+#if defined(WX_WINDOWS) || defined(__DARWIN__)
 
 class wxSecretValueGenericImpl : public wxSecretValueImpl
 {

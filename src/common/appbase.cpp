@@ -8,27 +8,9 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-// for compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
-
-
-#ifndef WX_PRECOMP
-    #ifdef __WINDOWS__
-        #include  "wx/msw/wrapwin.h"  // includes windows.h for MessageBox()
-    #endif
-
-    #include <boost/nowide/convert.hpp>
-
-    #include <clocale>
-    
-    #ifdef HAS_EXCEPTION_PTR
-        #include <exception>        // for std::current_exception()
-        #include <utility>          // for std::swap()
-    #endif
-
-    #include <exception>
-    #include <typeinfo>
-#endif //WX_PRECOMP
+#if defined(WX_WINDOWS)
+    #include  "wx/msw/wrapwin.h"  // includes windows.h for MessageBox()
+#endif
 
 #include "wx/list.h"
 #include "wx/app.h"
@@ -48,6 +30,19 @@
 #include "wx/tokenzr.h"
 #include "wx/thread.h"
 #include "wx/stdpaths.h"
+#include "wx/scopedptr.h"
+
+#include <boost/nowide/convert.hpp>
+
+#include <clocale>
+
+#ifdef HAS_EXCEPTION_PTR
+    #include <exception>        // for std::current_exception()
+    #include <utility>          // for std::swap()
+#endif
+
+#include <exception>
+#include <typeinfo>
 
 #if wxUSE_EXCEPTIONS
     // Any conforming C++11 compiler should have it, but g++ implementation
@@ -69,7 +64,7 @@
     #endif
 #endif // wxUSE_EXCEPTIONS
 
-#if !defined(__WINDOWS__)
+#if !defined(WX_WINDOWS)
   #include  <signal.h>      // for SIGTRAP used by wxTrap()
 #endif  //Win/Unix
 
@@ -80,7 +75,7 @@
 #if wxDEBUG_LEVEL
     #if wxUSE_STACKWALKER
         #include "wx/stackwalk.h"
-        #ifdef __WINDOWS__
+        #ifdef WX_WINDOWS
             #include "wx/msw/debughlp.h"
         #endif
     #endif // wxUSE_STACKWALKER
@@ -123,7 +118,7 @@ void ShowAssertDialog(const wxString& file,
 // global vars
 // ----------------------------------------------------------------------------
 
-WXDLLIMPEXP_DATA_BASE(wxList) wxPendingDelete;
+wxList wxPendingDelete;
 
 // ----------------------------------------------------------------------------
 // wxEventLoopPtr
@@ -172,8 +167,8 @@ wxAppConsoleBase::~wxAppConsoleBase()
 
 bool wxAppConsoleBase::Initialize(int& WXUNUSED(argc), wxChar **WXUNUSED(argv))
 {
-#if defined(__WINDOWS__)
-    SetErrorMode(SEM_FAILCRITICALERRORS|SEM_NOOPENFILEERRORBOX);
+#if defined(WX_WINDOWS)
+    ::SetErrorMode(SEM_FAILCRITICALERRORS | SEM_NOOPENFILEERRORBOX);
 #endif
 
     return true;
@@ -207,16 +202,16 @@ std::string wxAppConsoleBase::GetAppDisplayName() const
 {
     // use the explicitly provided display name, if any
     if ( !m_appDisplayName.empty() )
-        return m_appDisplayName;
+        return m_appDisplayName.ToStdString();
 
     // if the application name was explicitly set, use it as is as capitalizing
     // it won't always produce good results
     if ( !m_appName.empty() )
-        return m_appName;
+        return m_appName.ToStdString();
 
     // if neither is set, use the capitalized version of the program file as
     // it's the most reasonable default
-    return GetAppName().Capitalize();
+    return GetAppName().Capitalize().ToStdString();
 }
 
 wxEventLoopBase *wxAppConsoleBase::CreateMainLoop()
@@ -967,7 +962,7 @@ bool wxAppTraitsBase::ShowAssertDialog(const wxString& msgOriginal)
     }
 #endif // wxUSE_STACKWALKER
 
-    return DoShowAssertDialog(msgOriginal + msg);
+    return DoShowAssertDialog(msgOriginal.ToStdString() + msg.ToStdString());
 #else // !wxDEBUG_LEVEL
     wxUnusedVar(msgOriginal);
 
@@ -980,12 +975,12 @@ wxString wxAppTraitsBase::GetAssertStackTrace()
 {
 #if wxDEBUG_LEVEL
 
-#if !defined(__WINDOWS__)
+#if !defined(WX_WINDOWS)
     // on Unix stack frame generation may take some time, depending on the
     // size of the executable mainly... warn the user that we are working
     wxFprintf(stderr, "Collecting stack trace information, please wait...");
     fflush(stderr);
-#endif // !__WINDOWS__
+#endif // !WX_WINDOWS
 
 
     class StackDump : public wxStackWalker
@@ -1092,7 +1087,7 @@ void wxAbort()
 
 void wxTrap()
 {
-#if defined(__WINDOWS__)
+#if defined(WX_WINDOWS)
     DebugBreak();
 #elif defined(_MSL_USING_MW_C_HEADERS) && _MSL_USING_MW_C_HEADERS
     Debugger();
@@ -1256,7 +1251,7 @@ static
 bool DoShowAssertDialog(const std::string& msg)
 {
     // under Windows we can show the dialog even in the console mode
-#if defined(__WINDOWS__)
+#if defined(WX_WINDOWS)
     std::string msgDlg = msg;
 
     // this message is intentionally not translated -- it is for developers
@@ -1266,7 +1261,7 @@ bool DoShowAssertDialog(const std::string& msg)
               "You can also choose [Cancel] to suppress "
               "further warnings.";
 
-    switch ( ::MessageBoxW(nullptr, boost::nowide::widen(msgDlg).c_str(), wxT("wxWidgets Debug Alert"),
+    switch ( ::MessageBoxW(nullptr, boost::nowide::widen(msgDlg).c_str(), L"wxWidgets Debug Alert",
                           MB_YESNOCANCEL | MB_DEFBUTTON2 | MB_ICONSTOP ) )
     {
         case IDYES:
@@ -1286,9 +1281,9 @@ bool DoShowAssertDialog(const std::string& msg)
 
         //case IDNO: nothing to do
     }
-#else // !__WINDOWS__
+#else // !WX_WINDOWS
     wxUnusedVar(msg);
-#endif // __WINDOWS__/!__WINDOWS__
+#endif // WX_WINDOWS/!WX_WINDOWS
 
     // continue with the asserts by default
     return false;
@@ -1336,7 +1331,7 @@ void ShowAssertDialog(const wxString& file,
 #endif // wxUSE_THREADS
 
     // log the assert in any case
-    wxMessageOutputDebug().Output(msg);
+    wxMessageOutputDebug().Output(msg.ToStdString());
 
     if ( !s_bNoAsserts )
     {
@@ -1348,7 +1343,7 @@ void ShowAssertDialog(const wxString& file,
         else // no traits object
         {
             // fall back to the function of last resort
-            s_bNoAsserts = DoShowAssertDialog(msg);
+            s_bNoAsserts = DoShowAssertDialog(msg.ToStdString());
         }
     }
 }

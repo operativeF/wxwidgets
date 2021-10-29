@@ -15,7 +15,7 @@
 
 #if wxUSE_JOYSTICK
 
-#if defined(__WINDOWS__)
+#if defined(WX_WINDOWS)
 #include "wx/msw/joystick.h"
 #elif defined(__WXMOTIF__)
 #include "wx/unix/joystick.h"

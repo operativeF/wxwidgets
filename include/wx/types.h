@@ -81,7 +81,7 @@ typedef wxUint16 wxWord;
  */
 
 /*  32bit */
-#if defined(__WINDOWS__)
+#if defined(WX_WINDOWS)
     #if defined(__WIN32__)
         typedef int wxInt32;
         typedef unsigned int wxUint32;

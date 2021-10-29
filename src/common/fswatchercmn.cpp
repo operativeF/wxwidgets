@@ -7,8 +7,7 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
+
 
 
 #if wxUSE_FSWATCHER
@@ -272,7 +271,7 @@ bool wxFileSystemWatcherBase::RemoveTree(const wxFileName& path)
     wxFSWatchInfo watch = it->second;
     const wxString filespec = watch.GetFilespec();
 
-#if defined(__WINDOWS__)
+#if defined(WX_WINDOWS)
     // When there's no filespec, the wxMSW AddTree() would have set a watch
     // on only the passed 'path'. We must therefore remove only this
     if (filespec.empty())
@@ -280,7 +279,7 @@ bool wxFileSystemWatcherBase::RemoveTree(const wxFileName& path)
         return Remove(path);
     }
     // Otherwise fall through to the generic implementation
-#endif // __WINDOWS__
+#endif // WX_WINDOWS
 
     wxDir dir(path.GetFullPath());
     // AddTree() might have used the wxDIR_NO_FOLLOW to prevent asserts or

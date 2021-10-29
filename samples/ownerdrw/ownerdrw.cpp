@@ -12,8 +12,7 @@
 // headers & declarations
 // ============================================================================
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
+
 
 
 #ifndef WX_PRECOMP

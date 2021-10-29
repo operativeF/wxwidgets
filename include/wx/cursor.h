@@ -52,7 +52,7 @@ public:
     #define wxCURSOR_DEFAULT_TYPE   wxBitmapType::XBM
     #include "wx/motif/cursor.h"
 #elif defined(__WXGTK20__)
-    #ifdef __WINDOWS__
+    #ifdef WX_WINDOWS
         #define wxCURSOR_DEFAULT_TYPE   wxBitmapType::CUR_Resource
     #else
         #define wxCURSOR_DEFAULT_TYPE   wxBitmapType::XPM

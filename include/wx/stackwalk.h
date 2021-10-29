@@ -138,7 +138,7 @@ protected:
     virtual void OnStackFrame(const wxStackFrame& frame) = 0;
 };
 
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
     #include "wx/msw/stackwalk.h"
 #elif defined(__UNIX__)
     #include "wx/unix/stackwalk.h"

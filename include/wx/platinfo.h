@@ -149,7 +149,7 @@ public:
     // the current platform.
     static std::string GetCurrent()
     {
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
         return "msw";
 #elif defined(__APPLE__)
         return "mac";
@@ -165,10 +165,10 @@ public:
     {
         // Under MSW we also support "win" platform name for compatibility with
         // the existing XRC files using it.
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
         if (s == wxASCII_STR("win"))
             return true;
-#endif // __WINDOWS__
+#endif // WX_WINDOWS
 
         return s == GetCurrent();
     }

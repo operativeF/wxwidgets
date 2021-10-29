@@ -8,8 +8,7 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
+
 
 #include "wx/debug.h"
 
@@ -38,7 +37,7 @@
 #endif
 
 #ifndef WX_PRECOMP
-    #if defined(__WINDOWS__)
+    #if defined(WX_WINDOWS)
         #include "wx/msw/private.h"
     #endif
 
@@ -342,7 +341,7 @@ void wxPlatform::ClearPlatforms()
 
 bool wxPlatform::Is(int platform)
 {
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
     if (platform == wxOS_WINDOWS)
         return true;
 #endif
@@ -551,9 +550,9 @@ bool wxGetEnvMap(wxEnvVariableHashMap *map)
     // standard headers anyhow so we can just rely on already having the
     // correct declaration. And if this turns out to be wrong, we can always
     // add a configure test checking whether it is declared later.
-#ifndef __WINDOWS__
+#ifndef WX_WINDOWS
     extern char **environ;
-#endif // !__WINDOWS__
+#endif // !WX_WINDOWS
 
     char **env = environ;
 #endif
@@ -964,7 +963,7 @@ bool wxSetDetectableAutoRepeat( bool WXUNUSED(flag) )
 // Launch default browser
 // ----------------------------------------------------------------------------
 
-#if defined(__WINDOWS__) && !defined(__WXQT__) || \
+#if defined(WX_WINDOWS) && !defined(__WXQT__) || \
     defined(__WXX11__) || defined(__WXGTK__) || defined(__WXMOTIF__) || \
     defined(__WXOSX__)
 
@@ -1039,12 +1038,12 @@ static bool DoLaunchDefaultBrowserHelper(const std::string& url, unsigned int fl
     else if ( hasValidScheme )
     {
         params.url = url;
-        params.scheme = uri.GetScheme();
+        params.scheme = uri.GetScheme().ToStdString();
 
         if ( params.scheme == "file" )
         {
             // for same reason as above, remove the scheme from the URL
-            params.path = wxFileName::URLToFileName(url).GetFullPath();
+            params.path = wxFileName::URLToFileName(url).GetFullPath().ToStdString();
         }
     }
 
@@ -1063,10 +1062,10 @@ bool wxLaunchDefaultBrowser(const wxString& url, unsigned int flags)
     //       and a local file name
 
     if ( flags & wxBROWSER_NOBUSYCURSOR )
-        return DoLaunchDefaultBrowserHelper(url, flags);
+        return DoLaunchDefaultBrowserHelper(url.ToStdString(), flags);
 
     wxBusyCursor bc;
-    return DoLaunchDefaultBrowserHelper(url, flags);
+    return DoLaunchDefaultBrowserHelper(url.ToStdString(), flags);
 }
 
 // ----------------------------------------------------------------------------

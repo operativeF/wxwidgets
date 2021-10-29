@@ -6,10 +6,6 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
-
-
 #if wxUSE_IMAGE && wxUSE_LIBPNG
 
 #include "wx/imagpng.h"
@@ -20,12 +16,9 @@
 #include "wx/stream.h"
 #include "wx/stringutils.h"
 
-#ifndef WX_PRECOMP
-    #include <tuple>
-#endif
-
 #include "png.h"
 
+#include <tuple>
 
 // ----------------------------------------------------------------------------
 // local functions

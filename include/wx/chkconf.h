@@ -266,14 +266,6 @@
 #   endif
 #endif /* !defined(wxUSE_PROTOCOL_FILE) */
 
-#ifndef wxUSE_REGEX
-#   ifdef wxABORT_ON_CONFIG_ERROR
-#       error "wxUSE_REGEX must be defined, please read comment near the top of this file."
-#   else
-#       define wxUSE_REGEX 0
-#   endif
-#endif /* !defined(wxUSE_REGEX) */
-
 #ifndef wxUSE_SECRETSTORE
 #   ifdef wxABORT_ON_CONFIG_ERROR
 #       error "wxUSE_SECRETSTORE must be defined, please read comment near the top of this file."
@@ -289,14 +281,6 @@
 #       define wxUSE_STDPATHS 1
 #   endif
 #endif /* !defined(wxUSE_STDPATHS) */
-
-#ifndef wxUSE_XML
-#   ifdef wxABORT_ON_CONFIG_ERROR
-#       error "wxUSE_XML must be defined, please read comment near the top of this file."
-#   else
-#       define wxUSE_XML 0
-#   endif
-#endif /* !defined(wxUSE_XML) */
 
 #ifndef wxUSE_SOCKETS
 #   ifdef wxABORT_ON_CONFIG_ERROR
@@ -1253,7 +1237,7 @@
    checks use wxUSE_XXX symbols in #if tests.
  */
 
-#if defined(__WINDOWS__)
+#if defined(WX_WINDOWS)
 #  include "wx/msw/chkconf.h"
 #  if defined(__WXGTK__)
 #      include "wx/gtk/chkconf.h"
@@ -1276,7 +1260,7 @@
     __UNIX__ is also defined under Cygwin but we shouldn't perform these checks
     there if we're building Windows ports.
  */
-#if defined(__UNIX__) && !defined(__WINDOWS__)
+#if defined(__UNIX__) && !defined(WX_WINDOWS)
 #   include "wx/unix/chkconf.h"
 #endif
 

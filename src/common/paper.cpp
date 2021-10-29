@@ -8,17 +8,11 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
-
-
 #if wxUSE_PRINTING_ARCHITECTURE
 
-#ifndef WX_PRECOMP
-    #if defined(__WXMSW__)
-        #include "wx/msw/wrapcdlg.h"
-    #endif // MSW
-#endif
+#if defined(__WXMSW__)
+    #include "wx/msw/wrapcdlg.h"
+#endif // MSW
 
 #include "wx/utils.h"
 #include "wx/settings.h"

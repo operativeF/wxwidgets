@@ -23,12 +23,12 @@
     #include <dirent.h>
 #endif
 
-#if defined(__WINDOWS__)
+#if defined(WX_WINDOWS)
 #if !defined( __GNUWIN32__ ) && !defined(__CYGWIN__)
     #include <direct.h>
     #include <dos.h>
     #include <io.h>
-#endif // __WINDOWS__
+#endif // WX_WINDOWS
 #endif // native Win compiler
 
 #include  <fcntl.h>       // O_RDONLY &c
@@ -118,7 +118,7 @@ enum wxPosixPermissions
 // underscores to the usual names, some also have Unicode versions of them
 // ----------------------------------------------------------------------------
 
-#if defined(__WINDOWS__) && \
+#if defined(WX_WINDOWS) && \
       ( \
         defined(__VISUALC__) || \
         defined(__MINGW64_TOOLCHAIN__) || \
@@ -407,7 +407,7 @@ inline int wxLstat(const wxString& path, wxStructStat *buf)
     { return wxCRT_Lstat(path.fn_str(), buf); }
 inline int wxRmDir(const wxString& path)
     { return wxCRT_RmDir(path.fn_str()); }
-#if (defined(__WINDOWS__) && !defined(__CYGWIN__))
+#if (defined(WX_WINDOWS) && !defined(__CYGWIN__))
 inline int wxMkDir(const wxString& path, mode_t WXUNUSED(mode) = 0)
     { return wxCRT_MkDir(path.fn_str()); }
 #else

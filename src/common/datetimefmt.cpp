@@ -15,13 +15,12 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
+
 
 
 #if !defined(wxUSE_DATETIME) || wxUSE_DATETIME
 
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
     #include "wx/msw/wrapwin.h"
 #endif
 #include "wx/string.h"
@@ -32,7 +31,7 @@
 
 #include "wx/thread.h"
 
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
     #include <clocale>
     #include <winnls.h>
 #endif
@@ -342,12 +341,12 @@ wxString wxDateTime::Format(const wxString& formatp, const TimeZone& tz) const
         switch ( (*p).GetValue() )
         {
             case 'l':
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
             case 'g':
             case 'G':
             case 'V':
             case 'z':
-#endif // __WINDOWS__
+#endif // WX_WINDOWS
                 canUseStrftime = false;
                 break;
         }

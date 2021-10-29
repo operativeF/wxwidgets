@@ -8,17 +8,11 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
+#include "wx/msw/private.h"     // includes <windows.h>
 
+#include <boost/nowide/convert.hpp>
 
-#ifndef WX_PRECOMP
-    #include "wx/msw/private.h"     // includes <windows.h>
-
-    #include <boost/nowide/convert.hpp>
-
-    #include <tuple>
-#endif  //WX_PRECOMP
+#include <tuple>
 
 #include "wx/utils.h"
 #include "wx/intl.h"
@@ -967,7 +961,7 @@ wxLoadUserResource(const wxString& resourceName,
 {
     const void *data;
     size_t len;
-    if ( !wxLoadUserResource(&data, &len, resourceName, resourceType, instance) )
+    if ( !wxLoadUserResource(&data, &len, resourceName.ToStdString(), resourceType, instance) )
         return nullptr;
 
     char *s = new char[len + 1];

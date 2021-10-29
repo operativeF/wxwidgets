@@ -8,8 +8,7 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-// for compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
+
 
 
 #if wxUSE_FONTMAP
@@ -20,7 +19,7 @@
     #include <string_view>
 #endif //WX_PRECOMP
 
-#if defined(__WINDOWS__)
+#if defined(WX_WINDOWS)
     #include  "wx/msw/private.h"  // includes windows.h for LOGFONTW
 #endif
 
@@ -458,7 +457,7 @@ std::string wxFontMapperBase::GetEncodingDescription(wxFontEncoding encoding)
 {
     if ( encoding == wxFONTENCODING_DEFAULT )
     {
-        return _("Default encoding").ToStdString();
+        return _("Default encoding");
     }
 
     auto possibleMatch = std::find_if(gs_encodings.begin(), gs_encodings.end(),
@@ -469,7 +468,7 @@ std::string wxFontMapperBase::GetEncodingDescription(wxFontEncoding encoding)
 
     if(possibleMatch != gs_encodings.end())
     {
-        return wxGetTranslation(std::string{possibleMatch->description}).ToStdString();
+        return wxGetTranslation(std::string{possibleMatch->description});
     }
 
     wxString str;
@@ -483,7 +482,7 @@ std::string wxFontMapperBase::GetEncodingName(wxFontEncoding encoding)
 {
     if ( encoding == wxFONTENCODING_DEFAULT )
     {
-        return _("default").ToStdString();
+        return _("default");
     }
 
     auto possibleMatch = std::find_if(gs_encodings.begin(), gs_encodings.end(),

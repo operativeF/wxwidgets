@@ -8,8 +8,7 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-// for compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
+
 
 // TODO: these settings should probably be configurable from some central or
 // per-user file, which can be edited using a Windows-control-panel clone.

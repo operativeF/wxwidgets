@@ -38,7 +38,7 @@ private:
 
 // under Windows the same file may contain several icons so we also store the
 // index of the icon
-#if defined(__WINDOWS__)
+#if defined(WX_WINDOWS)
 
 class WXDLLIMPEXP_BASE wxIconLocation : public wxIconLocationBase
 {
@@ -62,7 +62,7 @@ wxIconLocation::wxIconLocation(const std::string& file, int num)
     SetIndex(num);
 }
 
-#else // !__WINDOWS__
+#else // !WX_WINDOWS
 
 // must be a class because we forward declare it as class
 class WXDLLIMPEXP_BASE wxIconLocation : public wxIconLocationBase

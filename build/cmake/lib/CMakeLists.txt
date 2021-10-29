@@ -37,7 +37,6 @@ macro(add_opt_lib name var_name)
 endmacro()
 
 # Define base libraries
-set(LIBS base)
 add_opt_lib(net wxUSE_SOCKETS)
 
 # Define UI libraries

@@ -12,16 +12,12 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-// for compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
-
+#if wxUSE_STOPWATCH
 
 #include "wx/stopwatch.h"
 
-#if wxUSE_STOPWATCH
-
 #ifndef WX_PRECOMP
-    #ifdef __WINDOWS__
+    #ifdef WX_WINDOWS
         #include "wx/msw/wrapwin.h"
     #endif
 #endif //WX_PRECOMP
@@ -40,7 +36,7 @@
 namespace
 {
 
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
 
 struct PerfCounter
 {
@@ -61,7 +57,7 @@ PerfCounter& GetPerfCounterState()
     return s_perfCounter;
 }
 
-#endif // __WINDOWS__
+#endif // WX_WINDOWS
 
 } // anonymous namespace
 
@@ -70,7 +66,7 @@ constexpr int MICROSECONDS_PER_SECOND = 1000 * 1000;
 
 void wxStopWatch::DoStart()
 {
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
     PerfCounter& perfCounter = GetPerfCounterState();
     if ( !perfCounter.init )
     {
@@ -79,14 +75,14 @@ void wxStopWatch::DoStart()
 
         perfCounter.init = true;
     }
-#endif // __WINDOWS__
+#endif // WX_WINDOWS
 
     m_t0 = GetCurrentClockValue();
 }
 
 wxLongLong wxStopWatch::GetClockFreq() const
 {
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
     // Under MSW we use the high resolution performance counter timer which has
     // its own frequency (usually related to the CPU clock speed).
     return GetPerfCounterState().freq.QuadPart;
@@ -98,7 +94,7 @@ wxLongLong wxStopWatch::GetClockFreq() const
 #else // !HAVE_GETTIMEOFDAY
     // Currently milliseconds are used everywhere else.
     return MILLISECONDS_PER_SECOND;
-#endif // __WINDOWS__/HAVE_GETTIMEOFDAY/else
+#endif // WX_WINDOWS/HAVE_GETTIMEOFDAY/else
 }
 
 void wxStopWatch::Start(long t0)
@@ -114,7 +110,7 @@ void wxStopWatch::Start(long t0)
 
 wxLongLong wxStopWatch::GetCurrentClockValue() const
 {
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
     LARGE_INTEGER counter;
     ::QueryPerformanceCounter(&counter);
     return counter.QuadPart;
@@ -122,7 +118,7 @@ wxLongLong wxStopWatch::GetCurrentClockValue() const
     return wxGetUTCTimeUSec();
 #else // !HAVE_GETTIMEOFDAY
     return wxGetUTCTimeMillis();
-#endif // __WINDOWS__/HAVE_GETTIMEOFDAY/else
+#endif // WX_WINDOWS/HAVE_GETTIMEOFDAY/else
 }
 
 wxLongLong wxStopWatch::TimeInMicro() const

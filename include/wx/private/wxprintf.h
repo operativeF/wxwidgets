@@ -282,7 +282,7 @@ bool wxPrintfConvSpec<CharType>::Parse(const CharType *format)
                 CHECK_PREC
                 m_szFlags[flagofs++] = char(ch);
                 break;
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
             // under Windows we support the special '%I64' notation as longlong
             // integer conversion specifier for MSVC compatibility
             // (it behaves exactly as '%lli' or '%Li' or '%qi')
@@ -302,7 +302,7 @@ bool wxPrintfConvSpec<CharType>::Parse(const CharType *format)
                 }
                 // else: fall-through, 'I' is MSVC equivalent of C99 'z'
                 [[fallthrough]];
-#endif      // __WINDOWS__
+#endif      // WX_WINDOWS
 
             case wxT('z'):
             case wxT('Z'):

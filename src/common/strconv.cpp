@@ -11,16 +11,9 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
-
-#ifndef WX_PRECOMP
-    #if defined(__WIN32__)
-        #include "wx/msw/private.h"
-        #define wxHAVE_WIN32_MB2WC
-    #endif
-    
-    #include <unordered_map>
+#if defined(WX_WINDOWS)
+    #include "wx/msw/private.h"
+    #define wxHAVE_WIN32_MB2WC
 #endif
 
 #include "wx/strconv.h"
@@ -42,7 +35,9 @@
 #include "wx/osx/core/private/strconv_cf.h"
 #endif //def __DARWIN__
 
-#if defined(__WIN32__)
+#include <unordered_map>
+
+#if defined(WX_WINDOWS)
     #define wxHAVE_WIN32_MB2WC
 #endif
 
@@ -3220,7 +3215,7 @@ wxWhateverWorksConv::FromWChar(char *dst, size_t dstLen,
     WX_DEFINE_GLOBAL_CONV2(klass, klass, name, ctor_args)
 
 
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
     WX_DEFINE_GLOBAL_CONV2(wxMBConv, wxMBConv_win32, wxConvLibc, wxEMPTY_PARAMETER_VALUE);
 #elif 0 // defined(__WXOSX__)
     WX_DEFINE_GLOBAL_CONV2(wxMBConv, wxMBConv_cf, wxConvLibc,  (wxFONTENCODING_UTF8));

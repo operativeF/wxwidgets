@@ -7,9 +7,6 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include "wx/wxprec.h"
-
-
 #include "wx/wxcrt.h"
 #include "wx/msw/debughlp.h"
 
@@ -17,9 +14,7 @@
 
 #include "wx/scopedarray.h"
 
-#ifndef WX_PRECOMP
-    #include <cassert>
-#endif
+#include <cassert>
 
 // ----------------------------------------------------------------------------
 // constants

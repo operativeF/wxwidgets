@@ -28,7 +28,7 @@
 #include "wx/chartype.h"
 
 // include standard Windows headers
-#if defined(__WINDOWS__)
+#if defined(WX_WINDOWS)
     #include "wx/msw/wrapwin.h"
     #include "wx/msw/private.h"
 #endif

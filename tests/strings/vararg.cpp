@@ -226,7 +226,7 @@ TEST_CASE("ArgsValidation", "[wxString][vararg][error]")
 
     // check size_t handling
     size_t len = sizeof(ptr);
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
     wxString::Format("%Iu", len);
 #else
     wxString::Format("%zu", len);

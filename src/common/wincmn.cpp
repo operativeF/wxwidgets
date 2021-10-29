@@ -8,8 +8,7 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
+
 
 
 #include "wx/string.h"
@@ -63,7 +62,7 @@
 #include "wx/recguard.h"
 #include "wx/private/window.h"
 
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
     #include "wx/msw/wrapwin.h"
 #endif
 

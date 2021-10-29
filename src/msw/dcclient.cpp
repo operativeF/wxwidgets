@@ -7,9 +7,6 @@
 // Copyright:   (c) Julian Smart
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
-
 
 #include "wx/dcclient.h"
 #include "wx/msw/dcclient.h"
@@ -17,14 +14,10 @@
 #include "wx/log.h"
 #include "wx/window.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/msw/private.h"
-
-    #include <unordered_map>
-#endif
-
+#include "wx/msw/private.h"
 #include "wx/msw/private/paint.h"
 
+#include <unordered_map>
 
 // ----------------------------------------------------------------------------
 // local data structures

@@ -8,9 +8,6 @@
 // Licence:     wxWindows Library Licence, Version 3.1
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "wx/wxprec.h"
-
-
 #if wxUSE_AUI
 
 #include "wx/aui/framemanager.h"
@@ -18,13 +15,9 @@
 #include "wx/aui/dockart.h"
 #include "wx/geometry/rect.h"
 
-
-#ifndef WX_PRECOMP
-    #ifdef __WXMSW__
-        #include "wx/msw/private.h"
-    #endif
+#ifdef __WXMSW__
+    #include "wx/msw/private.h"
 #endif
-
 
 wxIMPLEMENT_CLASS(wxAuiFloatingFrame, wxAuiFloatingFrameBaseClass);
 

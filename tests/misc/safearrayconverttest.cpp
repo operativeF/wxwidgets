@@ -11,7 +11,7 @@
 #include "testprec.h"
 
 
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
 
 #if wxUSE_OLE && wxUSE_VARIANT
 
@@ -163,6 +163,6 @@ TEST_CASE("StringsReturnSafeArray")
     }
 }
 
-#endif // __WINDOWS__
+#endif // WX_WINDOWS
 
 #endif // wxUSE_OLE && wxUSE_VARIANT

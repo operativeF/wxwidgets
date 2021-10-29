@@ -13,14 +13,13 @@
 // declaration
 // ============================================================================
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
+
 
 
 #if wxUSE_INTL
 
 #ifndef WX_PRECOMP
-    #ifdef __WINDOWS__
+    #ifdef WX_WINDOWS
         #include "wx/msw/wrapwin.h"
     #endif
 
@@ -49,7 +48,7 @@
 #include "wx/version.h"
 #include "wx/private/threadinfo.h"
 
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
     #include "wx/dynlib.h"
     #include "wx/scopedarray.h"
 #endif
@@ -120,7 +119,7 @@ wxString GetPreferredUILanguageFallback(const std::vector<wxString>& WXUNUSED(av
     return lang;
 }
 
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
 
 wxString GetPreferredUILanguage(const std::vector<wxString>& available)
 {
@@ -1930,7 +1929,7 @@ std::vector<wxString> wxFileTranslationsLoader::GetAvailableTranslations(const w
 // wxResourceTranslationsLoader
 // ----------------------------------------------------------------------------
 
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
 
 wxMsgCatalog *wxResourceTranslationsLoader::LoadCatalog(const wxString& domain,
                                                         const wxString& lang)
@@ -2011,7 +2010,7 @@ std::vector<wxString> wxResourceTranslationsLoader::GetAvailableTranslations(con
     return data.langs;
 }
 
-#endif // __WINDOWS__
+#endif // WX_WINDOWS
 
 
 // ----------------------------------------------------------------------------

@@ -7,10 +7,6 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-// for compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
-
-
 #if wxUSE_SECRETSTORE
 
 #include "wx/log.h"
@@ -97,7 +93,7 @@ wxString wxSecretValue::GetAsString(const wxMBConv& conv) const
     return {static_cast<const char*>(m_impl->GetData()), conv, m_impl->GetSize()};
 }
 
-#ifndef __WINDOWS__
+#ifndef WX_WINDOWS
 
 /* static */
 void wxSecretValue::Wipe(size_t size, void *data)
@@ -108,7 +104,7 @@ void wxSecretValue::Wipe(size_t size, void *data)
     memset(data, 0, size);
 }
 
-#endif // __WINDOWS__
+#endif // WX_WINDOWS
 
 /* static */
 void wxSecretValue::WipeString(wxString& str)

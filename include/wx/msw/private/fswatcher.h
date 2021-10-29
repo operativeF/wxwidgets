@@ -35,7 +35,7 @@ public:
         wxFSWatchInfo(winfo)
     {
         // get handle for this path
-        m_handle = OpenDir(m_path);
+        m_handle = OpenDir(m_path.ToStdString());
         m_overlapped = (OVERLAPPED*)calloc(1, sizeof(OVERLAPPED));
         wxZeroMemory(m_buffer);
     }

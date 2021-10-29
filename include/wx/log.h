@@ -109,7 +109,7 @@ constexpr char wxTRACE_Messages[] = "messages"; // trace window messages/X callb
 constexpr char wxTRACE_ResAlloc[] = "resalloc"; // trace GDI resource allocation
 constexpr char wxTRACE_RefCount[] = "refcount"; // trace various ref counting operations
 
-#ifdef  __WINDOWS__
+#ifdef  WX_WINDOWS
     constexpr wxChar wxTRACE_OleCalls[] = wxT("ole");  // OLE interface calls
 #endif
 

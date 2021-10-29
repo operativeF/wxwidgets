@@ -6,10 +6,6 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
-
-
 #if wxUSE_IMAGE && wxUSE_LIBJPEG
 
 #include "wx/imagjpeg.h"
@@ -18,9 +14,7 @@
 #include "wx/intl.h"
 #include "wx/module.h"
 
-#ifndef WX_PRECOMP
-    #include <cstring> // For memcpy
-#endif
+#include <cstring> // For memcpy
 
 // A hack based on one from tif_jpeg.c to overcome the problem on Windows
 // of rpcndr.h defining boolean with a different type to the jpeg headers.

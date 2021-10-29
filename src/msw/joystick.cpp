@@ -8,29 +8,20 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
-
-
 #if wxUSE_JOYSTICK
 
-#ifndef WX_PRECOMP
-    #include <chrono>
-
-    #include "wx/msw/private.h"
-#endif
+#include "wx/msw/private.h"
 
 #include "wx/joystick.h"
 
 #include "wx/string.h"
 #include "wx/window.h"
-
-
-#include <mmsystem.h>
-
 #include "wx/msw/registry.h"
 
+#include <mmsystem.h>
 #include <regstr.h>
+
+#include <chrono>
 
 
 enum {

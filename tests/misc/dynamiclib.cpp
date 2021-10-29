@@ -23,7 +23,7 @@
 
 TEST_CASE("Load")
 {
-#if defined(__WINDOWS__)
+#if defined(WX_WINDOWS)
     static constexpr wxChar LIB_NAME[] = wxT("kernel32.dll");
     static constexpr wxChar FUNC_NAME[] = wxT("lstrlenA");
 #elif defined(__UNIX__)
@@ -58,7 +58,7 @@ TEST_CASE("Load")
     // Call the function dynamically loaded
     CHECK( pfnStrlen("foo") == 3 );
 
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
     static constexpr wxChar FUNC_NAME_AW[] = wxT("lstrlen");
 
     typedef int (wxSTDCALL *wxStrlenTypeAorW)(const wxChar *);
@@ -70,5 +70,5 @@ TEST_CASE("Load")
     CHECK_MESSAGE((pfnStrlenAorW != nullptr), errMsg2.ToStdString());
 
     CHECK( pfnStrlenAorW(wxT("foobar")) == 6 );
-#endif // __WINDOWS__
+#endif // WX_WINDOWS
 }

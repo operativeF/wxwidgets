@@ -6,8 +6,7 @@
 // Copyright:   (c) 2015 wxWidgets development team
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
-// for compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
+
 
 #if wxUSE_NOTIFICATION_MESSAGE && wxUSE_WINRT
 

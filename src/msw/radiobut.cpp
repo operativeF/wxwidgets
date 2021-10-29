@@ -8,18 +8,10 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
-
-
 #if wxUSE_RADIOBTN
 
-#ifndef WX_PRECOMP
-    #include "wx/msw/private.h"
-#endif
-
+#include "wx/msw/private.h"
 #include "wx/radiobut.h"
-
 #include "wx/settings.h"
 #include "wx/dcclient.h"
 #include "wx/private/window.h"

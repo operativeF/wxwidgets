@@ -27,7 +27,7 @@ std::string wxTheCurrentTestClass, wxTheCurrentTestMethod;
 #include "wx/cmdline.h"
 #include <exception>
 
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
     #include "wx/msw/msvcrt.h"
 #endif
 

@@ -27,7 +27,7 @@
 #include "wx/fileconf.h"
 #define wxConfig wxFileConfig
 
-#if defined(__WINDOWS__) && wxUSE_CONFIG_NATIVE && wxUSE_REGISTRY
+#if defined(WX_WINDOWS) && wxUSE_CONFIG_NATIVE && wxUSE_REGISTRY
     #include "wx/msw/regconf.h"
     #define wxConfig  wxRegConfig
 #endif

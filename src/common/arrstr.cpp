@@ -12,8 +12,7 @@
 // headers, declarations, constants
 // ===========================================================================
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
+
 
 
 #include "wx/arrstr.h"
@@ -25,7 +24,7 @@
     #include <functional>
 #endif
 
-#if defined( __WINDOWS__ )
+#if defined( WX_WINDOWS )
     #include <shlwapi.h>
 
     // In some distributions of MinGW32, this function is exported in the library,
@@ -417,10 +416,10 @@ int wxCMPFUNC_CONV wxCmpNaturalGeneric(const wxString& s1, const wxString& s2)
 // use the generic version.
 int wxCMPFUNC_CONV wxCmpNatural(const wxString& s1, const wxString& s2)
 {
-#if defined( __WINDOWS__ )
+#if defined( WX_WINDOWS )
     return StrCmpLogicalW(s1.wc_str(), s2.wc_str());
 #else
     return wxCmpNaturalGeneric(s1, s2);
-#endif // #if defined( __WINDOWS__ )
+#endif // #if defined( WX_WINDOWS )
 }
 

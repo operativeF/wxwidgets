@@ -7,18 +7,12 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
-
-
 #include "wx/private/threadinfo.h"
 
 #if wxUSE_THREADS
 
-#ifndef WX_PRECOMP
-    #include <memory>
-    #include <vector>
-#endif
+#include <memory>
+#include <vector>
 
 #include "wx/tls.h"
 #include "wx/thread.h"

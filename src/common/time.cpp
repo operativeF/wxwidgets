@@ -7,19 +7,13 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-// for compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
-
-
 #include "wx/time.h"
 
-#ifndef WX_PRECOMP
-    #ifdef __WINDOWS__
-        #include "wx/msw/wrapwin.h"
-    #endif
-    
-    #include <ctime>
+#ifdef WX_WINDOWS
+    #include "wx/msw/wrapwin.h"
 #endif
+
+#include <ctime>
 
 #include "wx/intl.h"
 #include "wx/log.h"
@@ -51,7 +45,7 @@ wxDECL_FOR_STRICT_MINGW32(void, tzset, (void));
 #endif
 
 constexpr int MILLISECONDS_PER_SECOND = 1000;
-#if !defined(__WINDOWS__)
+#if !defined(WX_WINDOWS)
 constexpr int MICROSECONDS_PER_MILLISECOND = 1000;
 #ifdef HAVE_GETTIMEOFDAY
 constexpr int MICROSECONDS_PER_SECOND = 1000*1000;
@@ -62,14 +56,14 @@ constexpr int MICROSECONDS_PER_SECOND = 1000*1000;
 // implementation
 // ============================================================================
 
-#if (!defined(HAVE_LOCALTIME_R) || !defined(HAVE_GMTIME_R)) && wxUSE_THREADS && !defined(__WINDOWS__)
+#if (!defined(HAVE_LOCALTIME_R) || !defined(HAVE_GMTIME_R)) && wxUSE_THREADS && !defined(WX_WINDOWS)
 static wxMutex timeLock;
 #endif
 
 #ifndef HAVE_LOCALTIME_R
 struct tm *wxLocaltime_r(const time_t* ticks, struct tm* temp)
 {
-#if wxUSE_THREADS && !defined(__WINDOWS__)
+#if wxUSE_THREADS && !defined(WX_WINDOWS)
   // No need to waste time with a mutex on windows since it's using
   // thread local storage for localtime anyway.
   wxMutexLocker locker(timeLock);
@@ -87,7 +81,7 @@ struct tm *wxLocaltime_r(const time_t* ticks, struct tm* temp)
 #ifndef HAVE_GMTIME_R
 struct tm *wxGmtime_r(const time_t* ticks, struct tm* temp)
 {
-#if wxUSE_THREADS && !defined(__WINDOWS__)
+#if wxUSE_THREADS && !defined(WX_WINDOWS)
   // No need to waste time with a mutex on windows since it's
   // using thread local storage for gmtime anyway.
   wxMutexLocker locker(timeLock);
@@ -215,7 +209,7 @@ long wxGetUTCTime()
 
 wxLongLong wxGetUTCTimeUSec()
 {
-#if defined(__WINDOWS__)
+#if defined(WX_WINDOWS)
     FILETIME ft;
     ::GetSystemTimeAsFileTime(&ft);
 
@@ -248,7 +242,7 @@ wxLongLong wxGetUTCTimeMillis()
 {
     // If possible, use a function which avoids conversions from
     // broken-up time structures to milliseconds
-#if defined(__WINDOWS__)
+#if defined(WX_WINDOWS)
     FILETIME ft;
     ::GetSystemTimeAsFileTime(&ft);
 
@@ -258,7 +252,7 @@ wxLongLong wxGetUTCTimeMillis()
     t /= 10000;
     t -= wxLL(11644473600000); // Unix - Windows epochs difference in ms.
     return t;
-#else // !__WINDOWS__
+#else // !WX_WINDOWS
     wxLongLong val = MILLISECONDS_PER_SECOND;
 
 #if defined(HAVE_GETTIMEOFDAY)
@@ -296,7 +290,7 @@ wxLongLong wxGetUTCTimeMillis()
     return val;
 #endif // time functions
 
-#endif // __WINDOWS__/!__WINDOWS__
+#endif // WX_WINDOWS/!WX_WINDOWS
 }
 
 wxLongLong wxGetLocalTimeMillis()

@@ -8,17 +8,7 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
-
-
 #if wxUSE_CHOICE
-
-#ifndef WX_PRECOMP
-    #include "wx/msw/private.h"
-
-    #include <boost/nowide/convert.hpp>
-#endif
 
 #include "wx/choice.h"
 #include "wx/utils.h"
@@ -26,6 +16,10 @@
 #include "wx/log.h"
 #include "wx/settings.h"
 #include "wx/dynlib.h"
+
+#include "wx/msw/private.h"
+
+#include <boost/nowide/convert.hpp>
 
 bool wxChoice::Create(wxWindow *parent,
                       wxWindowID id,

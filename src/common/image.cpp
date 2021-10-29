@@ -6,9 +6,6 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
-
 
 #if wxUSE_IMAGE
 
@@ -22,15 +19,14 @@
 #include "wx/colour.h"
 #include "wx/stringutils.h"
 
-#ifndef WX_PRECOMP
-    #include <algorithm>
-    #include <cmath>
-    #include <cstring> // For memcpy
-    #include <gsl/gsl>
-#endif
-
 #include "wx/wfstream.h"
 #include "wx/xpmdecod.h"
+
+#include <gsl/gsl>
+
+#include <algorithm>
+#include <cmath>
+#include <cstring> // For memcpy
 
 
 // make the code compile with either wxFile*Stream or wxFFile*Stream:
@@ -2559,7 +2555,7 @@ unsigned int wxImage::GetLoadFlags() const
 
 // Under Windows we can load wxImage not only from files but also from
 // resources.
-#if defined(__WINDOWS__) && wxUSE_WXDIB && wxUSE_IMAGE \
+#if defined(WX_WINDOWS) && wxUSE_WXDIB && wxUSE_IMAGE \
 && !defined(__WXQT__) // undefined reference to `wxDIB::ConvertToImage(wxDIB::ConversionFlags) const'
     #define HAS_LOAD_FROM_RESOURCE
 #endif
@@ -2568,10 +2564,8 @@ unsigned int wxImage::GetLoadFlags() const
 
 #include "wx/msw/dib.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/msw/private.h"
-    #include "wx/msw/wrap/utils.h"
-#endif
+#include "wx/msw/private.h"
+#include "wx/msw/wrap/utils.h"
 
 
 static wxImage LoadImageFromResource(const std::string &name, wxBitmapType type)

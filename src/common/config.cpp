@@ -9,8 +9,6 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "wx/wxprec.h"
-
 #ifndef wxUSE_CONFIG_NATIVE
     #define wxUSE_CONFIG_NATIVE 1
 #endif
@@ -21,13 +19,11 @@
 #include "wx/app.h"
 #include "wx/utils.h"
 
-#ifndef WX_PRECOMP
-    #include <limits>
-    #include <string>
-    #include <vector>
+#include <gsl/gsl>
 
-    #include <gsl/gsl>
-#endif //WX_PRECOMP
+#include <limits>
+#include <string>
+#include <vector>
 
 #if wxUSE_CONFIG && ((wxUSE_FILE && wxUSE_TEXTFILE) || wxUSE_CONFIG_NATIVE)
 
@@ -419,7 +415,7 @@ enum Bracket
   Bracket_None,
   Bracket_Normal  = ')',
   Bracket_Curly   = '}',
-#ifdef  __WINDOWS__
+#ifdef  WX_WINDOWS
   Bracket_Windows = '%',    // yeah, Windows people are a bit strange ;-)
 #endif
   Bracket_Max
@@ -433,17 +429,17 @@ wxString wxExpandEnvVars(const wxString& str)
   size_t m;
   for ( size_t n = 0; n < str.length(); n++ ) {
     switch ( str[n].GetValue() ) {
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
       case wxT('%'):
-#endif // __WINDOWS__
+#endif // WX_WINDOWS
       case wxT('$'):
         {
           Bracket bracket;
-          #ifdef __WINDOWS__
+          #ifdef WX_WINDOWS
             if ( str[n] == wxT('%') )
               bracket = Bracket_Windows;
             else
-          #endif // __WINDOWS__
+          #endif // WX_WINDOWS
           if ( n == str.length() - 1 ) {
             bracket = Bracket_None;
           }
@@ -475,7 +471,7 @@ wxString wxExpandEnvVars(const wxString& str)
           //     set through wxSetEnv may not be read correctly!
           bool expanded = false;
           std::string tmp;
-          if (wxGetEnv(strVarName, &tmp))
+          if (wxGetEnv(strVarName.ToStdString(), &tmp))
           {
               strResult += tmp;
               expanded = true;
@@ -483,7 +479,7 @@ wxString wxExpandEnvVars(const wxString& str)
           else
           {
             // variable doesn't exist => don't change anything
-            #ifdef  __WINDOWS__
+            #ifdef  WX_WINDOWS
               if ( bracket != Bracket_Windows )
             #endif
                 if ( bracket != Bracket_None )
@@ -500,10 +496,10 @@ wxString wxExpandEnvVars(const wxString& str)
               //
               // under Unix, OTOH, this warning could be useful for the user to
               // understand why isn't the variable expanded as intended
-              #ifndef __WINDOWS__
+              #ifndef WX_WINDOWS
                 wxLogWarning(_("Environment variables expansion failed: missing '%c' at position %u in '%s'."),
                              (char)bracket, (unsigned int) (m + 1), str.c_str());
-              #endif // __WINDOWS__
+              #endif // WX_WINDOWS
             }
             else {
               // skip closing bracket unless the variables wasn't expanded

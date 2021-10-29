@@ -164,7 +164,7 @@ private:
 #endif // wxUSE_IPV6
 
 // Unix domain sockets are only available under, well, Unix
-#if defined(__UNIX__) && !defined(__WINDOWS__) && !defined(__WINE__)
+#if defined(__UNIX__) && !defined(WX_WINDOWS) && !defined(__WINE__)
     #define wxHAS_UNIX_DOMAIN_SOCKETS
 #endif
 

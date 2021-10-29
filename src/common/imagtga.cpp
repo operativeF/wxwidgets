@@ -6,20 +6,14 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
-
-
 #if wxUSE_IMAGE && wxUSE_TGA
-
-#ifndef WX_PRECOMP
-    #include <gsl/gsl>
-#endif
 
 #include "wx/log.h"
 #include "wx/palette.h"
 #include "wx/imagtga.h"
 #include "wx/scopedarray.h"
+
+#include <gsl/gsl>
 
 // ----------------------------------------------------------------------------
 // constants

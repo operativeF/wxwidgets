@@ -386,7 +386,7 @@ TEST_CASE("File Functions")
         // wxFileName::GetFullPath returns absolute path
         CHECK_MESSAGE(wxIsAbsolutePath(filename.GetFullPath()), msg);
 
-    #ifdef __WINDOWS__
+    #ifdef WX_WINDOWS
         CHECK( wxIsAbsolutePath("\\"));
         CHECK( wxIsAbsolutePath("c:"));
         CHECK( !wxIsAbsolutePath("c"));

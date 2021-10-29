@@ -217,7 +217,7 @@
     #define wxCRT_VfprintfW     vfwprintf
     #define wxCRT_VprintfW      vwprintf
 
-    #if defined(__WINDOWS__) && !defined(HAVE_VSWPRINTF)
+    #if defined(WX_WINDOWS) && !defined(HAVE_VSWPRINTF)
         // only non-standard vswprintf() without buffer size argument can be used here
         #define  wxCRT_VsprintfW     vswprintf
     #endif
@@ -404,7 +404,7 @@ wxVsnprintf(wchar_t *str, size_t size, const wxString& format, va_list argptr);
 
 // this is needed to normalize the format string, see src/common/strvararg.cpp
 // for more details
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
     #define wxScanfConvertFormatW(fmt) fmt
 #else
     const wxScopedWCharBuffer

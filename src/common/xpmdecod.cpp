@@ -89,8 +89,7 @@ license is as follows:
  * in this Software without prior written authorization from GROUPE BULL.
  */
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
+
 
 
 #if wxUSE_IMAGE && wxUSE_XPM

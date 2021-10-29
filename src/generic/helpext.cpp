@@ -8,14 +8,10 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include "wx/wxprec.h"
-
-
 #if wxUSE_HELP
 
-#ifndef WX_PRECOMP
-    #include <string>
-    #include <vector>
+#ifdef __WXMSW__
+#include <windows.h>
 #endif
 
 #include "wx/list.h"
@@ -32,13 +28,12 @@
 
 #include <sys/stat.h>
 
-#if !defined(__WINDOWS__)
+#if !defined(WX_WINDOWS)
     #include   <unistd.h>
 #endif
 
-#ifdef __WXMSW__
-#include <windows.h>
-#endif
+#include <string>
+#include <vector>
 
 // ----------------------------------------------------------------------------
 // constants

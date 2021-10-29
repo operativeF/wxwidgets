@@ -8,8 +8,7 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-// for compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
+
 
 
 #include "wx/renderer.h"
@@ -26,7 +25,7 @@
     #include "wx/osx/private.h"
 #endif
 
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
     // We only need it to get ::MulDiv() declaration, used by wxMulDivInt32().
     #include "wx/msw/wrapwin.h"
 #endif

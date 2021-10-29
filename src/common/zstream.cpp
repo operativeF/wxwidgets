@@ -8,8 +8,7 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
+
 
 
 #if wxUSE_ZLIB && wxUSE_STREAMS
@@ -25,7 +24,7 @@
 // apparently not the case for all MSW makefiles and so, unless we use
 // configure (which defines __WX_SETUP_H__) or it is explicitly overridden by
 // the user (who can define wxUSE_ZLIB_H_IN_PATH), we hardcode the path here
-#if defined(__WINDOWS__) && !defined(__WX_SETUP_H__) && !defined(wxUSE_ZLIB_H_IN_PATH)
+#if defined(WX_WINDOWS) && !defined(__WX_SETUP_H__) && !defined(wxUSE_ZLIB_H_IN_PATH)
     #include "../zlib/zlib.h"
 #else
     #include "zlib.h"

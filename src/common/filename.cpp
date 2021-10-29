@@ -60,19 +60,11 @@
                  ] between directory and file
  */
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
 
-#ifndef WX_PRECOMP
-    #ifdef __WINDOWS__
-        #include "wx/msw/private.h"
-        #include "wx/msw/wrapwin.h" // For GetShort/LongPathName
-    #endif
 
-    #include <cassert>
-    #if defined(wxHAS_NATIVE_READLINK)
-        #include <vector>
-    #endif
+#ifdef WX_WINDOWS
+    #include "wx/msw/private.h"
+    #include "wx/msw/wrapwin.h" // For GetShort/LongPathName
 #endif
 
 #include "wx/intl.h"
@@ -92,7 +84,7 @@
     #include "wx/msw/gccpriv.h"
 #endif
 
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
     #include "wx/msw/ole/oleutils.h"
     #include "wx/msw/private/comptr.h"
     #include "wx/msw/wrapshl.h"         // for CLSID_ShellLink
@@ -108,6 +100,11 @@
 #include <utime.h>
 #include <sys/stat.h>
 #include <unistd.h>
+#endif
+
+#include <cassert>
+#if defined(wxHAS_NATIVE_READLINK)
+    #include <vector>
 #endif
 
 #ifndef S_ISREG
@@ -596,7 +593,7 @@ wxFileName wxFileName::DirName(const wxString& dir, wxPathFormat format)
 namespace
 {
 
-#if defined(__WINDOWS__)
+#if defined(WX_WINDOWS)
 
 void RemoveTrailingSeparatorsFromPath(wxString& strPath)
 {
@@ -631,7 +628,7 @@ wxFileSystemObjectExists(const wxString& path, unsigned int flags)
 
     wxString strPath(path);
 
-#if defined(__WINDOWS__)
+#if defined(WX_WINDOWS)
     if ( acceptDir )
     {
         // Ensure that the path doesn't have any trailing separators when
@@ -769,7 +766,7 @@ bool wxFileName::SetCwd() const
 
 bool wxFileName::SetCwd( const wxString &cwd )
 {
-    return ::wxSetWorkingDirectory( cwd );
+    return ::wxSetWorkingDirectory( cwd.ToStdString() );
 }
 
 void wxFileName::AssignHomeDir()
@@ -796,7 +793,7 @@ wxString wxFileName::GetHomeDir()
 
 // NB: GetTempFileName() under Windows creates the file, so using
 //     O_EXCL there would fail
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
     #define wxOPEN_EXCL 0
 #else
     #define wxOPEN_EXCL O_EXCL
@@ -900,7 +897,7 @@ static wxString wxCreateTempImpl(
         dir = wxFileName::GetTempDir();
     }
 
-#if defined(__WINDOWS__)
+#if defined(WX_WINDOWS)
     if (!::GetTempFileNameW(dir.t_str(), name.t_str(), 0,
                            wxStringBuffer(path, MAX_PATH + 1)))
     {
@@ -1206,7 +1203,7 @@ wxString wxFileName::GetTempDir()
     // if no environment variables are set, use the system default
     if ( dir.empty() )
     {
-#if defined(__WINDOWS__)
+#if defined(WX_WINDOWS)
         if ( !::GetTempPathW(MAX_PATH, wxStringBuffer(dir, MAX_PATH + 1)) )
         {
             wxLogLastError(wxT("GetTempPath"));
@@ -1294,7 +1291,7 @@ bool wxFileName::Rmdir(unsigned int flags) const
 
 bool wxFileName::Rmdir(const wxString& dir, unsigned int flags)
 {
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
     if ( flags & wxPATH_RMDIR_RECURSIVE )
     {
         // SHFileOperation needs double null termination string
@@ -1323,11 +1320,11 @@ bool wxFileName::Rmdir(const wxString& dir, unsigned int flags)
         return true;
     }
     else if ( flags & wxPATH_RMDIR_FULL )
-#else // !__WINDOWS__
+#else // !WX_WINDOWS
     if ( flags != 0 )   // wxPATH_RMDIR_FULL or wxPATH_RMDIR_RECURSIVE
-#endif // !__WINDOWS__
+#endif // !WX_WINDOWS
     {
-#ifndef __WINDOWS__
+#ifndef WX_WINDOWS
         if ( flags & wxPATH_RMDIR_RECURSIVE )
         {
             // When deleting the tree recursively, we are supposed to delete
@@ -1339,7 +1336,7 @@ bool wxFileName::Rmdir(const wxString& dir, unsigned int flags)
                 return wxRemoveFile(dir);
             }
         }
-#endif // !__WINDOWS__
+#endif // !WX_WINDOWS
 
         wxString path(dir);
         if ( path.Last() != wxFILE_SEP_PATH )
@@ -1363,7 +1360,7 @@ bool wxFileName::Rmdir(const wxString& dir, unsigned int flags)
             cont = d.GetNext(&filename);
         }
 
-#ifndef __WINDOWS__
+#ifndef WX_WINDOWS
         if ( flags & wxPATH_RMDIR_RECURSIVE )
         {
             // Delete all files too and, for the same reasons as above, don't
@@ -1377,7 +1374,7 @@ bool wxFileName::Rmdir(const wxString& dir, unsigned int flags)
                 cont = d.GetNext(&filename);
             }
         }
-#endif // !__WINDOWS__
+#endif // !WX_WINDOWS
     }
 
     return ::wxRmdir(dir);
@@ -1561,7 +1558,7 @@ bool wxFileName::ReplaceEnvVariable(const wxString& envname,
     // look into stringForm for the contents of the given environment variable
     std::string val;
     if (envname.empty() ||
-        !wxGetEnv(envname, &val))
+        !wxGetEnv(envname.ToStdString(), &val))
         return false;
     if (val.empty())
         return false;
@@ -2162,7 +2159,7 @@ wxString wxFileName::GetShortPath() const
 {
     wxString path(GetFullPath());
 
-#if defined(__WINDOWS__) && defined(__WIN32__)
+#if defined(WX_WINDOWS) && defined(__WIN32__)
     DWORD sz = ::GetShortPathNameW(path.t_str(), nullptr, 0);
     if ( sz != 0 )
     {
@@ -2272,7 +2269,7 @@ wxPathFormat wxFileName::GetFormat( wxPathFormat format )
 {
     if (format == wxPATH_NATIVE)
     {
-#if defined(__WINDOWS__)
+#if defined(WX_WINDOWS)
         format = wxPATH_DOS;
 #elif defined(__VMS)
         format = wxPATH_VMS;
@@ -2530,7 +2527,7 @@ bool wxFileName::SetPermissions(int permissions)
         return false;
     }
 
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
     int accMode = 0;
 
     if ( permissions & (wxS_IRUSR|wxS_IRGRP|wxS_IROTH) )
@@ -2540,7 +2537,7 @@ bool wxFileName::SetPermissions(int permissions)
         accMode |= _S_IWRITE;
 
     permissions = accMode;
-#endif // __WINDOWS__
+#endif // WX_WINDOWS
 
     return wxChmod(GetFullPath(), permissions) == 0;
 }
@@ -2558,7 +2555,7 @@ wxFileName wxFileName::URLToFileName(const wxString& url)
 
     path = wxURI::Unescape(path);
 
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
     // file urls either start with a forward slash (local harddisk),
     // otherwise they have a servername/sharename notation,
     // which only exists on msw and corresponds to a unc

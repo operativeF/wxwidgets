@@ -7,8 +7,6 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include "wx/wxprec.h"
-
 #if wxUSE_GRAPHICS_DIRECT2D
 
 // Minimum supported client: Windows 8 and Platform Update for Windows 7
@@ -46,19 +44,6 @@
 #include <dxgi1_2.h>
 #endif
 
-#ifndef WX_PRECOMP
-    #include "wx/msw/private.h"
-    #include "wx/msw/wrap/utils.h"
-    
-    #include <boost/nowide/convert.hpp>
-    #include <fmt/core.h>
-    #include <gsl/gsl>
-
-    #include <algorithm>
-    #include <limits>
-    #include <memory>
-#endif // !WX_PRECOMP
-
 #include "wx/dc.h"
 #include "wx/dcclient.h"
 #include "wx/dcmemory.h"
@@ -72,6 +57,16 @@
 #include "wx/msw/private/comptr.h"
 #include "wx/private/graphics.h"
 
+#include "wx/msw/private.h"
+#include "wx/msw/wrap/utils.h"
+
+#include <boost/nowide/convert.hpp>
+#include <fmt/core.h>
+#include <gsl/gsl>
+
+#include <algorithm>
+#include <limits>
+#include <memory>
 #include <stack>
 
 // This must be the last header included to only affect the DEFINE_GUID()

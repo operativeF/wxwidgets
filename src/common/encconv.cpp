@@ -7,8 +7,7 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
+
 
 
 #include "wx/encconv.h"
@@ -417,7 +416,7 @@ wxFontEncodingArray wxEncodingConverter::GetPlatformEquivalents(wxFontEncoding e
 {
     if (platform == wxPLATFORM_CURRENT)
     {
-#if defined(__WINDOWS__)
+#if defined(WX_WINDOWS)
         platform = wxPLATFORM_WINDOWS;
 #elif defined(__WXMAC__)
         platform = wxPLATFORM_MAC;

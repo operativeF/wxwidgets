@@ -10,7 +10,8 @@
 cmake_minimum_required(VERSION 3.11)
 include(FetchContent)
 
-set(CMAKE_CXX_STANDARD_REQUIRED 23)
+set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # FIXME: Needs to get the right triplet. It's most likely trying to get the x86 default.
 # if(DEFINED ENV{VCPKG_ROOT} AND NOT DEFINED CMAKE_TOOLCHAIN_FILE)
@@ -22,6 +23,8 @@ include("C:/dev/vcpkg/scripts/buildsystems/vcpkg.cmake")
 
 find_package(Microsoft.GSL CONFIG REQUIRED)
 find_package(doctest CONFIG REQUIRED)
+find_package(fmt CONFIG REQUIRED)
+find_package(Boost REQUIRED COMPONENTS nowide)
 
 if(NOT CMAKE_CONFIGURATION_TYPES)
     get_property(HAVE_MULTI_CONFIG_GENERATOR GLOBAL PROPERTY GENERATOR_IS_MULTI_CONFIG)
@@ -84,16 +87,13 @@ endif()
 set(wxVERSION ${wxMAJOR_VERSION}.${wxMINOR_VERSION}.${wxRELEASE_NUMBER})
 set(wxCOPYRIGHT "1992-2021 wxWidgets")
 
-if(MSVC)
-	# Disable unreferenced inline function removal warning
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /wd4514")
+if(WIN32)
 	# Enable usage of updated __cplusplus macro
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /Zc:__cplusplus")
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /Zc:__cplusplus /D WX_WINDOWS")	
+    set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
 endif()
 
 project(wxWidgets VERSION ${wxVERSION})
-
-include(build/cmake/main.cmake)
 
 # Set the default startup project for Visual Studio
 if(wxBUILD_SAMPLES AND wxUSE_GUI)
@@ -102,4 +102,6 @@ endif()
 
 enable_testing()
 
+include(${CMAKE_SOURCE_DIR}/cmake/options.cmake)
+add_subdirectory(src)
 add_subdirectory(tests)

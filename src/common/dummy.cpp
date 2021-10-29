@@ -20,7 +20,7 @@
 #include "wx/wxprec.h"
 
 
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
     #include "wx/msw/msvcrt.h"
 #endif
 

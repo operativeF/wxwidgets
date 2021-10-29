@@ -224,7 +224,7 @@ public:
 };
 
 
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
 // loads translations from win32 resources
 class WXDLLIMPEXP_BASE wxResourceTranslationsLoader
     : public wxTranslationsLoader
@@ -242,7 +242,7 @@ protected:
     // returns module to load resources from
     virtual WXHINSTANCE GetModule() const { return nullptr; }
 };
-#endif // __WINDOWS__
+#endif // WX_WINDOWS
 
 
 // ----------------------------------------------------------------------------

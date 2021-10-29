@@ -8,15 +8,7 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
-
-#ifndef WX_PRECOMP
-    #ifdef __WINDOWS__
-        #include "wx/msw/private.h"
-    #endif
-#endif
-
+#include "wx/msw/private.h"
 #include "wx/intl.h"
 #include "wx/log.h"
 #include "wx/dir.h"

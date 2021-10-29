@@ -8,19 +8,12 @@
 // Licence:     wxWindows Library Licence, Version 3.1
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "wx/wxprec.h"
-
-
 #if wxUSE_AUI
 
 #include "wx/aui/framemanager.h"
 #include "wx/aui/dockart.h"
 #include "wx/aui/auibook.h"
 #include "wx/aui/tabart.h"
-
-#ifndef WX_PRECOMP
-    #include <cmath>
-#endif
 
 #include "wx/settings.h"
 #include "wx/dcclient.h"
@@ -45,6 +38,8 @@
     #include "wx/gtk/private.h"
 #endif
 #endif
+
+#include <cmath>
 
 wxColor wxAuiLightContrastColour(const wxColour& c)
 {

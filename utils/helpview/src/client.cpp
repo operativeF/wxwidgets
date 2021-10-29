@@ -10,8 +10,7 @@
 
 #define USE_REMOTE 1
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
+
 
 
 #ifndef WX_PRECOMP

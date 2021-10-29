@@ -7,10 +7,6 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-// for compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
-
-
 #include "wx/strvararg.h"
 #include "wx/string.h"
 #include "wx/crt.h"
@@ -404,7 +400,7 @@ private:
 // (__USE_MINGW_ANSI_STDIO=1, which is explicitly set by including any standard
 // C++ header such as e.g. <string>). Luckily, "%ls" and "%lc" work in both
 // cases, at least for recent MinGW versions, so just use it always.
-#if defined(__WINDOWS__) && \
+#if defined(WX_WINDOWS) && \
     !defined(__CYGWIN__) && \
     !defined(__MINGW32__)
 
@@ -428,7 +424,7 @@ class wxPrintfFormatConverterWchar : public wxFormatConverterBase<wchar_t>
     }
 };
 
-#else // !__WINDOWS__
+#else // !WX_WINDOWS
 
 // on Unix, it's %s for ANSI functions and %ls for widechar:
 
@@ -453,7 +449,7 @@ class wxPrintfFormatConverterWchar : public wxFormatConverterBase<wchar_t>
 };
 #endif // !wxUSE_UTF8_LOCALE_ONLY
 
-#endif // __WINDOWS__/!__WINDOWS__
+#endif // WX_WINDOWS/!WX_WINDOWS
 
 #if wxUSE_UNICODE_UTF8
 class wxPrintfFormatConverterUtf8 : public wxFormatConverterBase<char>
@@ -478,7 +474,7 @@ class wxPrintfFormatConverterUtf8 : public wxFormatConverterBase<char>
 };
 #endif // wxUSE_UNICODE_UTF8
 
-#ifndef __WINDOWS__
+#ifndef WX_WINDOWS
 /*
 
    wxScanf() format translation is different, we need to translate %s to %ls
@@ -534,7 +530,7 @@ const wxScopedWCharBuffer wxScanfConvertFormatW(const wchar_t *format)
 {
     return wxScanfFormatConverterWchar().Convert(format);
 }
-#endif // !__WINDOWS__
+#endif // !WX_WINDOWS
 
 
 // ----------------------------------------------------------------------------

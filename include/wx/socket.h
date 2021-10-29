@@ -33,7 +33,7 @@ class wxSocketImpl;
 // ------------------------------------------------------------------------
 
 // Define the type of native sockets.
-#if defined(__WINDOWS__)
+#if defined(WX_WINDOWS)
     // Although socket descriptors are still 32 bit values, even under Win64,
     // the socket type is 64 bit there.
     using wxSOCKET_T = wxUIntPtr;

@@ -32,7 +32,7 @@
 
 #include "wx/wfstream.h"
 
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
     #include "wx/msw/wrapwin.h"
 
     #include <winioctl.h>
@@ -293,7 +293,7 @@ CppUnit::Test *largeFile::suite()
 // are picked up. However this is only possible when sparse files are
 // supported otherwise the tests require too much disk space.
 
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
 
 #ifndef FILE_SUPPORTS_SPARSE_FILES
 #define FILE_SUPPORTS_SPARSE_FILES 0x00000040
@@ -388,7 +388,7 @@ CppUnit::Test* GetlargeFileSuite()
         return NULL;
 }
 
-#else // __WINDOWS__
+#else // WX_WINDOWS
 
 bool IsFAT(const wxString& WXUNUSED(path)) { return false; }
 void MakeSparse(const wxString& WXUNUSED(path), int WXUNUSED(fd)) { }
@@ -424,6 +424,6 @@ CppUnit::Test* GetlargeFileSuite()
         return NULL;
 }
 
-#endif // __WINDOWS__
+#endif // WX_WINDOWS
 
 CPPUNIT_TEST_SUITE_NAMED_REGISTRATION(largeFile, "Streams.largeFile");

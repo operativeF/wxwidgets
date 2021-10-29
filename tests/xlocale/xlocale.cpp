@@ -163,7 +163,7 @@ TEST_CASE("TestCtor")
 #ifdef wxHAS_XLOCALE_SUPPORT
     if ( wxXLocale(wxLANGUAGE_FRENCH).IsOk() )
     {
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
         CHECK( wxXLocale("french").IsOk() );
 #else
         CHECK( wxXLocale("fr_FR").IsOk() );

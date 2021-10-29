@@ -13,8 +13,7 @@
 // Declarations
 // ==========================================================================
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
+
 
 
 #if wxUSE_SOCKETS
@@ -2167,7 +2166,7 @@ wxFORCE_LINK_MODULE( socketiohandler )
 #endif
 
 // same for ManagerSetter in the MSW file
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
     wxFORCE_LINK_MODULE( mswsocket )
 #endif
 

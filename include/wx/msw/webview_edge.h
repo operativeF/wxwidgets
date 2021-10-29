@@ -10,8 +10,6 @@
 #ifndef wxWebViewEdge_H
 #define wxWebViewEdge_H
 
-#include "wx/setup.h"
-
 #if wxUSE_WEBVIEW && wxUSE_WEBVIEW_EDGE && defined(__WXMSW__)
 
 #include "wx/control.h"

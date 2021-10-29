@@ -66,7 +66,7 @@ public:
     // constants and static functions
     // default type for current platform (determined at compile time)
     inline static const wxTextFileType typeDefault = 
-#if defined(__WINDOWS__)
+#if defined(WX_WINDOWS)
   wxTextFileType::Dos;
 #elif defined(__UNIX__)
   wxTextFileType::Unix;

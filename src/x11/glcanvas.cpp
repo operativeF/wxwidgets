@@ -11,8 +11,7 @@
 
 // TODO: merge this with wxGTK version in some src/unix/glcanvasx11.cpp
 
-// for compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
+
 
 
 #if wxUSE_GLCANVAS

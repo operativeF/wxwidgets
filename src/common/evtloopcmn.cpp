@@ -8,8 +8,7 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-// for compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
+
 
 
 #include "wx/evtloop.h"
@@ -189,7 +188,7 @@ wxEventLoopBase::AddSourceForFD(int fd,
 
 #endif // wxUSE_EVENTLOOP_SOURCE
 // wxEventLoopManual is unused in the other ports
-#if defined(__WINDOWS__) || defined(__WXDFB__) || ( ( defined(__UNIX__) && !defined(__WXOSX__) ) && wxUSE_BASE)
+#if defined(WX_WINDOWS) || defined(__WXDFB__) || ( ( defined(__UNIX__) && !defined(__WXOSX__) ) && wxUSE_BASE)
 
 // ============================================================================
 // wxEventLoopManual implementation
@@ -377,5 +376,5 @@ void wxEventLoopManual::ScheduleExit(int rc)
     WakeUp();
 }
 
-#endif // __WINDOWS__ || __WXMAC__ || __WXDFB__
+#endif // WX_WINDOWS || __WXMAC__ || __WXDFB__
 

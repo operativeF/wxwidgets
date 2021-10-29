@@ -8,19 +8,12 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
+
 
 
 #if wxUSE_ENH_METAFILE
 
-#ifndef WX_PRECOMP
-    #include "wx/msw/private.h"
-
-    #include <string>
-
-    #include <boost/nowide/convert.hpp>
-#endif //WX_PRECOMP
+#include "wx/msw/private.h"
 
 #include "wx/log.h"
 #include "wx/intl.h"
@@ -29,6 +22,10 @@
 
 #include "wx/metafile.h"
 #include "wx/clipbrd.h"
+
+#include <boost/nowide/convert.hpp>
+
+#include <string>
 
 // ----------------------------------------------------------------------------
 // wxWin macros

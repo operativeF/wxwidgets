@@ -39,7 +39,7 @@ constexpr double pt2mm = 1 / mm2pt;
 static constexpr double wxDegToRad(double deg) { return (deg * std::numbers::pi) / 180.0; }
 static constexpr double wxRadToDeg(double rad) { return (rad * 180.0) / std::numbers::pi; }
 
-#if defined(__WINDOWS__)
+#if defined(WX_WINDOWS)
     #define wxMulDivInt32( a , b , c ) ::MulDiv( a , b , c )
 #else
     #define wxMulDivInt32( a , b , c ) (std::lround((a)*(((double)b)/((double)c))))

@@ -11,19 +11,13 @@
 //              - add high level functions (RegisterOleServer, ...)
 ///////////////////////////////////////////////////////////////////////////////
 
-// for compilers that support precompilation, includes "wx.h".
-#include  "wx/wxprec.h"
-
-
 #if wxUSE_REGKEY
 
-#ifndef WX_PRECOMP
-    #include "wx/msw/private.h"
-    #include "wx/msw/wrapwin.h"
+#include "wx/msw/private.h"
+#include "wx/msw/wrapwin.h"
 
-    #include <fmt/core.h>
-    #include <cstdlib>      // for _MAX_PATH
-#endif
+#include <fmt/core.h>
+#include <cstdlib>      // for _MAX_PATH
 
 #include "wx/string.h"
 #include "wx/intl.h"

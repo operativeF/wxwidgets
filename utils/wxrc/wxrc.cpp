@@ -345,7 +345,7 @@ void XmlResApp::ParseParams(const wxCmdLineParser& cmdline)
 
     for (size_t i = 0; i < cmdline.GetParamCount(); i++)
     {
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
         wxString fn=wxFindFirstFile(cmdline.GetParam(i), wxFILE);
         while (!fn.empty())
         {

@@ -31,7 +31,7 @@
     #define ASYNC_COMMAND "xclock"
     #define SHELL_COMMAND "echo hi from shell>/dev/null"
     #define COMMAND_NO_OUTPUT "echo -n"
-#elif defined(__WINDOWS__)
+#elif defined(WX_WINDOWS)
     #define COMMAND "cmd.exe /c \"echo hi\""
     #define COMMAND_STDERR "cmd.exe /c \"type nonexistentfile\""
     #define ASYNC_COMMAND "notepad"
@@ -164,7 +164,7 @@ static void DoTestAsyncRedirect(const wxString& command,
     static const char* const scriptText =
         "sleep %d\n"
         "echo " SLEEP_END_STRING "\n";
-#elif defined(__WINDOWS__)
+#elif defined(WX_WINDOWS)
     static const char* const scriptExt = ".bat";
 
     // Notice that we need to ping N+1 times for it to take N seconds as the
@@ -196,7 +196,7 @@ static void DoTestAsyncRedirect(const wxString& command,
 
 #ifdef __UNIX__
     command = "/bin/sh " + filename;
-#elif defined(__WINDOWS__)
+#elif defined(WX_WINDOWS)
     command = wxString::Format("cmd.exe /c \"%s\"", filename);
 #else
 #error "Need to code to launch shell for this platform"
@@ -390,7 +390,7 @@ TEST_CASE("TestOverlappedSyncExecute")
     //
     // Too bad you can't just register one test case of a test suite as a
     // "fixme".
-#ifndef __WINDOWS__
+#ifndef WX_WINDOWS
     // Simple helper delaying the call to wxExecute(): instead of running it
     // immediately, it runs it when we re-enter the event loop.
     class DelayedExecuteTimer : public wxTimer
@@ -449,7 +449,7 @@ TEST_CASE("TestOverlappedSyncExecute")
 
     CHECK( !longSleepOutput.empty() );
     CHECK_EQ( SLEEP_END_STRING, longSleepOutput.Last() );
-#endif // !__WINDOWS__
+#endif // !WX_WINDOWS
 }
 
 #ifdef __UNIX__

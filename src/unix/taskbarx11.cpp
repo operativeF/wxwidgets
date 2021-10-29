@@ -17,8 +17,7 @@
 //     KDE and GNOME 1.2 methods.
 
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
+
 
 #if wxUSE_TASKBARICON && !defined(__WXGTK20__)
 

@@ -8,22 +8,13 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
+
 
 
 #if wxUSE_FILEDLG
 
 #include "wx/filedlg.h"
-
-#ifndef WX_PRECOMP
-    #include "wx/msw/wrapcdlg.h"
-
-    #include <memory>
-    #include <string>
-    #include <tuple>
-    #include <vector>
-#endif
+#include "wx/msw/wrapcdlg.h"
 
 #include "wx/utils.h"
 #include "wx/filefn.h"
@@ -39,6 +30,11 @@
 #include "wx/modalhook.h"
 #include "wx/msw/private/dpiaware.h"
 #include "wx/stringutils.h"
+
+#include <memory>
+#include <string>
+#include <tuple>
+#include <vector>
 
 
 // ----------------------------------------------------------------------------

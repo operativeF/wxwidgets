@@ -10,8 +10,7 @@
 
 // CAUTION : This is only experimental stuff right now
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
+
 
 
 #if wxUSE_POPUPWIN

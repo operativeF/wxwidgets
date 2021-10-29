@@ -6,8 +6,7 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
+
 
 
 #if wxUSE_IMAGE && wxUSE_LIBTIFF
@@ -22,10 +21,6 @@
 #include "wx/wxcrtvararg.h"
 #include "wx/stringutils.h"
 
-#ifndef WX_PRECOMP
-    #include <gsl/gsl>
-#endif
-
 extern "C"
 {
     #include "tiff.h"
@@ -33,6 +28,8 @@ extern "C"
 }
 #include "wx/filefn.h"
 #include "wx/wfstream.h"
+
+#include <gsl/gsl>
 
 #ifndef TIFFLINKAGEMODE
     #define TIFFLINKAGEMODE

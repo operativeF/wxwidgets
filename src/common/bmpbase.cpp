@@ -7,8 +7,7 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
+
 
 
 #include "wx/bitmap.h"
@@ -67,12 +66,10 @@ wxBitmap wxBitmapHelpers::NewFromPNGData(const void* data, size_t size)
 
 #if wxUSE_BITMAP_BASE
 
-#ifndef WX_PRECOMP
-    #include "wx/log.h"
-    #include "wx/utils.h"
-    #include "wx/palette.h"
-    #include "wx/module.h"
-#endif // WX_PRECOMP
+#include "wx/log.h"
+#include "wx/utils.h"
+#include "wx/palette.h"
+#include "wx/module.h"
 
 
 wxIMPLEMENT_ABSTRACT_CLASS(wxBitmapBase, wxGDIObject);

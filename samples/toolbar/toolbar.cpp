@@ -33,7 +33,7 @@
 
 // define this to use XPMs everywhere (by default, BMPs are used under Win)
 // BMPs use less space, but aren't compiled into the executable on other platforms
-#if defined(__WINDOWS__) && wxUSE_WXDIB
+#if defined(WX_WINDOWS) && wxUSE_WXDIB
     #define USE_XPM_BITMAPS 0
 #else
     #define USE_XPM_BITMAPS 1

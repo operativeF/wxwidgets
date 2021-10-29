@@ -7,14 +7,9 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
+#include <clocale> // for setlocale and LC_ALL
 
-#ifndef WX_PRECOMP
-    #include <clocale> // for setlocale and LC_ALL
-
-    #include <fmt/core.h>
-#endif
+#include <fmt/core.h>
 
 #include "wx/numformatter.h"
 #include "wx/intl.h"

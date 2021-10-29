@@ -6,8 +6,7 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
+
 
 #ifdef __VMS
 #define XWarpPointer XWARPPOINTER
@@ -2461,7 +2460,7 @@ bool wxGetKeyState(wxKeyCode WXUNUSED(key))
     wxFAIL_MSG(wxS("Not implemented under Windows"));
     return false;
 }
-#endif // __WINDOWS__
+#endif // WX_WINDOWS
 
 wxMouseState wxGetMouseState()
 {

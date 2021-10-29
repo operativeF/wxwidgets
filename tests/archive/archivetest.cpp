@@ -388,7 +388,7 @@ void TempDir::RemoveDir(wxString& path)
 #   define WXARC_pclose(fp)
 #endif
 
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
 #   define WXARC_b "b"
 #else
 #   define WXARC_b
@@ -653,7 +653,7 @@ void ArchiveTestCase<ClassFactoryT>::CreateArchive(wxOutputStream& out,
         wxFileName fn(i->first, wxPATH_UNIX);
         TestEntry& entry = *i->second;
         wxDateTime dt = entry.GetDateTime();
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
         if (fn.IsDir())
             entry.SetDateTime(wxDateTime());
         else
@@ -802,7 +802,7 @@ void ArchiveTestCase<ClassFactoryT>::ExtractArchive(wxInputStream& in)
 
         const TestEntry& testEntry = *it->second;
 
-#ifndef __WINDOWS__
+#ifndef WX_WINDOWS
         // On Windows some archivers compensate for Windows DST handling, but
         // other don't, so disable the test for now.
         wxDateTime dt = testEntry.GetDateTime();
@@ -952,7 +952,7 @@ void ArchiveTestCase<ClassFactoryT>::VerifyDir(wxString& path,
 
             const TestEntry& testEntry = *it->second;
 
-#if 0 //ndef __WINDOWS__
+#if 0 //ndef WX_WINDOWS
             CPPUNIT_ASSERT_MESSAGE("timestamp check" + error_context,
                                    testEntry.GetDateTime() ==
                                    wxFileName(path).GetModificationTime());
@@ -1301,7 +1301,7 @@ void ArchiveTestSuite::AddCmd(std::vector<wxString>& cmdlist, const wxString& cm
 bool ArchiveTestSuite::IsInPath(const wxString& cmd)
 {
     wxString c = cmd.BeforeFirst(wxT(' '));
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
     c += wxT(".exe");
 #endif
     return !m_path.FindValidPath(c).empty();

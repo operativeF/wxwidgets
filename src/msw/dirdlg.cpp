@@ -8,10 +8,6 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
-
-
 #if wxUSE_DIRDLG
 
 #if wxUSE_OLE
@@ -23,13 +19,6 @@
 #include "wx/log.h"
 #include "wx/stringutils.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/msw/private.h"
-
-    #include <boost/nowide/convert.hpp>
-    #include <boost/nowide/stackstring.hpp>
-#endif
-
 #include "wx/msw/wrapshl.h"
 #include "wx/msw/private/comptr.h"
 #include "wx/msw/private/cotaskmemptr.h"
@@ -37,6 +26,10 @@
 
 #include <initguid.h>
 
+#include "wx/msw/private.h"
+
+#include <boost/nowide/convert.hpp>
+#include <boost/nowide/stackstring.hpp>
 
 // IFileOpenDialog implementation needs wxDynamicLibrary for
 // run-time linking SHCreateItemFromParsingName(), available

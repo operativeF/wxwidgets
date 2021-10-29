@@ -8,20 +8,12 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
-
-
 #if wxUSE_GAUGE
 
-#ifndef WX_PRECOMP
-    #include "wx/msw/private.h"
-    #include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
-#endif
-
+#include "wx/msw/private.h"
+#include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
 #include "wx/gauge.h"
 #include "wx/app.h"
-
 #include "wx/appprogress.h"
 #include "wx/msw/private/winstyle.h"
 

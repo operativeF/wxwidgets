@@ -7,15 +7,9 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-// for compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
-
-
 #include "wx/modalhook.h"
 
-#ifndef WX_PRECOMP
-    #include <algorithm>
-#endif // WX_PRECOMP
+#include <algorithm>
 
 
 wxModalDialogHook::Hooks wxModalDialogHook::ms_hooks;

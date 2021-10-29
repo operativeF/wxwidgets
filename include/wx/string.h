@@ -53,7 +53,7 @@
 // it would have to be re-tested and probably corrected
 // CS: under OSX release builds the string destructor/cache cleanup sometimes
 // crashes, disable until we find the true reason or a better workaround
-#if wxUSE_UNICODE_UTF8 && !defined(__WINDOWS__) && !defined(__WXOSX__)
+#if wxUSE_UNICODE_UTF8 && !defined(WX_WINDOWS) && !defined(__WXOSX__)
     #define wxUSE_STRING_POS_CACHE 1
 #else
     #define wxUSE_STRING_POS_CACHE 0

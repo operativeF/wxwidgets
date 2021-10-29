@@ -8,21 +8,7 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
-
-
 #if wxUSE_CHECKLISTBOX && wxUSE_OWNER_DRAWN
-
-#ifndef WX_PRECOMP
-    #include "wx/msw/private.h"
-    #include "wx/msw/wrapcctl.h"
-    #include "wx/msw/wrap/utils.h"
-
-    #include <memory>
-    #include <string>
-    #include <vector>
-#endif
 
 #include "wx/checklst.h"
 #include "wx/object.h"
@@ -32,11 +18,19 @@
 #include "wx/log.h"
 #include "wx/ownerdrw.h"
 
-#include <windowsx.h>
-
 #include "wx/renderer.h"
 #include "wx/msw/dc.h"
 #include "wx/msw/private/dcdynwrap.h"
+
+#include "wx/msw/private.h"
+#include "wx/msw/wrapcctl.h"
+#include "wx/msw/wrap/utils.h"
+
+#include <windowsx.h>
+
+#include <memory>
+#include <string>
+#include <vector>
 
 // ----------------------------------------------------------------------------
 // private functions

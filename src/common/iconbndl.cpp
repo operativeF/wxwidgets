@@ -7,13 +7,12 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
+
 
 
 #include "wx/iconbndl.h"
 
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
     #include "wx/msw/wrapwin.h"
 #endif
 
@@ -27,7 +26,7 @@
 #include "wx/utils.h"
 #include "wx/wfstream.h"
 
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
     #include "wx/private/icondir.h"
 #endif
 
@@ -89,7 +88,7 @@ wxIconBundle::wxIconBundle(const wxIcon& icon)
     AddIcon(icon);
 }
 
-#if defined(__WINDOWS__) && wxUSE_ICO_CUR
+#if defined(WX_WINDOWS) && wxUSE_ICO_CUR
 
 wxIconBundle::wxIconBundle(const std::string& resourceName, WXHINSTANCE module)
             : wxGDIObject()
@@ -97,7 +96,7 @@ wxIconBundle::wxIconBundle(const std::string& resourceName, WXHINSTANCE module)
     AddIcon(resourceName, module);
 }
 
-#endif // defined(__WINDOWS__) && wxUSE_ICO_CUR
+#endif // defined(WX_WINDOWS) && wxUSE_ICO_CUR
 
 wxGDIRefData *wxIconBundle::CreateGDIRefData() const
 {
@@ -202,7 +201,7 @@ void wxIconBundle::AddIcon(wxInputStream& stream, wxBitmapType type)
 
 #endif // wxUSE_STREAMS && wxUSE_IMAGE
 
-#if defined(__WINDOWS__) && wxUSE_ICO_CUR
+#if defined(WX_WINDOWS) && wxUSE_ICO_CUR
 
 // Loads all the icons for an icon group (i.e., different sizes of one icon)
 // stored as an MS Windows resource.
@@ -247,7 +246,7 @@ void wxIconBundle::AddIcon(const std::string& resourceName, WXHINSTANCE module)
 #endif
 }
 
-#endif // defined(__WINDOWS__) && wxUSE_ICO_CUR
+#endif // defined(WX_WINDOWS) && wxUSE_ICO_CUR
 
 wxIcon wxIconBundle::GetIcon(const wxSize& size, IconFallback flags) const
 {

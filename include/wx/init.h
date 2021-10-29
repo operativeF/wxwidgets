@@ -51,7 +51,7 @@ extern int WXDLLIMPEXP_BASE wxEntry(int& argc, char **argv);
 
 // Under Windows we define additional wxEntry() overloads with signature
 // compatible with WinMain() and not the traditional main().
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
     #include "wx/msw/init.h"
 #endif
 

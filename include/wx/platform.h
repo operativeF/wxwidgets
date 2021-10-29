@@ -76,7 +76,7 @@
 #endif
 
 /*
-    We use __WINDOWS__ as our main identification symbol for Microsoft Windows
+    We use WX_WINDOWS as our main identification symbol for Microsoft Windows
     but it's actually not predefined directly by any commonly used compilers
     (only Watcom defines it itself and it's not supported any longer), so we
     define it ourselves if any of the following macros is defined:
@@ -85,12 +85,12 @@
     - Our __WXMSW__ which selects Windows as platform automatically
  */
 #if defined(_WIN32) || defined(__WIN32__) || defined(__WXMSW__)
-#    ifndef __WINDOWS__
-#        define __WINDOWS__
-#    endif /* !__WINDOWS__ */
+#    ifndef WX_WINDOWS
+#        define WX_WINDOWS
+#    endif /* !WX_WINDOWS */
 #endif /* Any standard symbol indicating Windows */
 
-#if defined(__WINDOWS__)
+#if defined(WX_WINDOWS)
     /* Select wxMSW under Windows if no other port is specified. */
 #   if !defined(__WXMSW__) && !defined(__WXMOTIF__) && !defined(__WXGTK__) && !defined(__WXX11__) && !defined(__WXQT__)
 #       define __WXMSW__
@@ -116,7 +116,7 @@
 #       endif /* !__WIN64__ */
 #   endif /* _WIN64 */
 
-#endif /* __WINDOWS__ */
+#endif /* WX_WINDOWS */
 
 /*
     Don't use widget toolkit specific code in non-GUI code in the library
@@ -133,13 +133,13 @@
 #   endif
 #endif
 
-#if (defined(__WXGTK__) || defined(__WXQT__)) && defined(__WINDOWS__)
+#if (defined(__WXGTK__) || defined(__WXQT__)) && defined(WX_WINDOWS)
 
 #   ifdef __WXMSW__
 #       undef __WXMSW__
 #   endif
 
-#endif /* (__WXGTK__ || __WXQT__) && __WINDOWS__ */
+#endif /* (__WXGTK__ || __WXQT__) && WX_WINDOWS */
 
 #ifdef __ANDROID__
 #   define __WXANDROID__
@@ -156,7 +156,6 @@
    could be already defined by configure but it must be included after defining
    the compiler macros above as msvc/wx/setup.h relies on them under Windows.
  */
-#include "wx/setup.h"
 
 /*
    Convenience for any optional classes that use the wxAnyButton base class.
@@ -274,7 +273,7 @@
 /*
    OS: Windows
  */
-#elif defined(__WINDOWS__)
+#elif defined(WX_WINDOWS)
 
     /* to be changed for Win64! */
 #    ifndef __WIN32__
@@ -311,7 +310,7 @@
 #endif
 
 /* Force linking against required libraries under Windows: */
-#if defined __WINDOWS__
+#ifdef WX_WINDOWS
 #   include "wx/msw/libraries.h"
 #endif
 
@@ -320,7 +319,7 @@
     _UNICODE macros as it includes _mingw.h which relies on them being set.
  */
 #if ( defined( __GNUWIN32__ ) || defined( __MINGW32__ ) || \
-    ( defined( __CYGWIN__ ) && defined( __WINDOWS__ ) ) ) && \
+    ( defined( __CYGWIN__ ) && defined( WX_WINDOWS ) ) ) && \
     !defined(__WXMOTIF__) && \
     !defined(__WXX11__)
 #    include "wx/msw/gccpriv.h"
@@ -482,8 +481,8 @@
    check the consistency of the settings in setup.h: note that this must be
    done after setting wxUSE_UNICODE correctly as it is used in wx/chkconf.h
    and after defining the compiler macros which are used in it too
+   #include "wx/chkconf.h"
  */
-#include "wx/chkconf.h"
 
 /* On OpenVMS with the most recent HP C++ compiler some function (i.e. wscanf)
  * are only available in the std-namespace. (BUG???)

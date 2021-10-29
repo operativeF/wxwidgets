@@ -8,18 +8,6 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
-
-
-#ifndef WX_PRECOMP
-    #include "wx/msw/private.h"
-
-    #include <string>
-
-    #include <boost/nowide/convert.hpp>
-#endif // WX_PRECOMP
-
 #include "wx/log.h"
 #include "wx/app.h"
 #include "wx/bitmap.h"
@@ -36,6 +24,12 @@
 #if wxUSE_WXDIB
 #include "wx/msw/dib.h"
 #endif
+
+#include "wx/msw/private.h"
+
+#include <string>
+
+#include <boost/nowide/convert.hpp>
 
 // By default, use PNG resource handler if we can, i.e. have support for
 // loading PNG images in the library. This symbol could be predefined as 0 to

@@ -189,7 +189,7 @@ enum class wxEllipsizeMode
 // macros
 // ---------------------------------------------------------------------------
 
-#if defined(__WINDOWS__) && wxUSE_WXDIB
+#if defined(WX_WINDOWS) && wxUSE_WXDIB
     #define wxHAS_IMAGES_IN_RESOURCES
 #endif
 
@@ -233,7 +233,7 @@ enum class wxEllipsizeMode
    under Unix bitmaps live in XPMs and under Windows they're in resources.
  */
 
-#if defined(__WINDOWS__) && wxUSE_WXDIB
+#if defined(WX_WINDOWS) && wxUSE_WXDIB
     #define wxBITMAP(name) wxBitmap(wxT(#name), wxBitmapType::BMP_Resource)
 #elif defined(__WXGTK__)   || \
       defined(__WXMOTIF__) || \
@@ -262,7 +262,7 @@ enum class wxEllipsizeMode
 // resource type and under OS X the PNG file with the specified name must be
 // available in the resource subdirectory of the bundle. Elsewhere, this is
 // exactly the same thing as wxBITMAP_PNG_FROM_DATA() described above.
-#if (defined(__WINDOWS__) && wxUSE_WXDIB) || defined(__WXOSX__)
+#if (defined(WX_WINDOWS) && wxUSE_WXDIB) || defined(__WXOSX__)
     #define wxBITMAP_PNG(name) wxBitmap(wxS(#name), wxBITMAP_TYPE_PNG_RESOURCE)
 #else
     #define wxBITMAP_PNG(name) wxBITMAP_PNG_FROM_DATA(name)

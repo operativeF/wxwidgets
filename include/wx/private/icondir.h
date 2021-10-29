@@ -50,7 +50,7 @@ struct ICONDIR
 #endif // wxUSE_STREAMS
 
 
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
 
 #pragma pack(push)
 #pragma pack(2)
@@ -84,7 +84,7 @@ struct GRPICONDIR
 
 #pragma pack(pop)
 
-#endif // __WINDOWS__
+#endif // WX_WINDOWS
 
 #endif // wxUSE_ICO_CUR
 

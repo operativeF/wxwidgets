@@ -54,7 +54,7 @@
         typedef void (*wxTlsDestructorFunction)(void*);
     }
 
-    #if defined(__WINDOWS__)
+    #if defined(WX_WINDOWS)
         #include "wx/msw/tls.h"
     #elif defined(__UNIX__)
         #include "wx/unix/tls.h"

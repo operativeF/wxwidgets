@@ -20,9 +20,9 @@
 // IsOpened() method.
 //
 // wxPipeOutputStream is similar but has no additional methods at all.
-#if defined(__UNIX__) && !defined(__WINDOWS__)
+#if defined(__UNIX__) && !defined(WX_WINDOWS)
     #include "wx/unix/private/pipestream.h"
-#elif defined(__WINDOWS__)
+#elif defined(WX_WINDOWS)
     #include "wx/msw/private/pipestream.h"
 #endif
 

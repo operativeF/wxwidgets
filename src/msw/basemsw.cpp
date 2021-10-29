@@ -8,15 +8,7 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-// for compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
-
-
-#ifndef WX_PRECOMP
-    #include "wx/msw/private.h"
-
-    #include <boost/nowide/convert.hpp>
-#endif //WX_PRECOMP
+#include "wx/msw/private.h"
 
 #include "wx/apptrait.h"
 #include "wx/evtloop.h"
@@ -28,6 +20,7 @@
 
 #include "wx/crt.h"
 
+#include <boost/nowide/convert.hpp>
 #include <fmt/printf.h>
 
 // ============================================================================

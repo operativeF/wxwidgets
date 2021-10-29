@@ -8,18 +8,12 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
-
-
-#ifndef WX_PRECOMP
-    #include <algorithm>
-#endif
-
 #include "wx/module.h"
 #include "wx/hash.h"
 #include "wx/intl.h"
 #include "wx/log.h"
+
+#include <algorithm>
 
 constexpr wxChar TRACE_MODULE[] = wxT("module");
 

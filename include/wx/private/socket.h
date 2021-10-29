@@ -56,7 +56,7 @@
 
 // include the header defining timeval: under Windows this struct is used only
 // with sockets so we need to include winsock.h which we do via windows.h
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
     #include "wx/msw/wrapwin.h"
 #else
     #include <sys/time.h>   // for timeval
@@ -65,7 +65,7 @@
 // 64 bit Cygwin can't use the standard struct timeval because it has long
 // fields, which are supposed to be 32 bits in Win64 API, but long is 64 bits
 // in 64 bit Cygwin, so we need to use its special __ms_timeval instead.
-#if defined(__CYGWIN__) && defined(__LP64__) && defined(__WINDOWS__)
+#if defined(__CYGWIN__) && defined(__LP64__) && defined(WX_WINDOWS)
     typedef __ms_timeval wxTimeVal_t;
 #else
     using wxTimeVal_t = timeval;
@@ -370,7 +370,7 @@ private:
 	wxSocketImpl& operator=(const wxSocketImpl&) = delete;
 };
 
-#if defined(__WINDOWS__)
+#if defined(WX_WINDOWS)
     #include "wx/msw/private/sockmsw.h"
 #else
     #include "wx/unix/private/sockunix.h"

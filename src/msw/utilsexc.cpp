@@ -8,15 +8,7 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
-
-
-#ifndef WX_PRECOMP
-    #include "wx/msw/private.h"
-
-    #include <vector>
-#endif
+#include "wx/msw/private.h"
 
 #include "wx/utils.h"
 #include "wx/app.h"
@@ -55,6 +47,8 @@
 
 #include "wx/msw/private/hiddenwin.h"
 #include "wx/msw/private/event.h"
+
+#include <vector>
 
 // ----------------------------------------------------------------------------
 // constants

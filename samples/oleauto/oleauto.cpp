@@ -28,7 +28,7 @@
 
 #include "wx/msw/ole/automtn.h"
 
-#ifndef __WINDOWS__
+#ifndef WX_WINDOWS
 #error "Sorry, this sample works under Windows only."
 #endif
 

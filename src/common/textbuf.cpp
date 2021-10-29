@@ -134,7 +134,7 @@ bool wxTextBuffer::Create()
     // if the buffer already exists do nothing
     if ( Exists() ) return false;
 
-    if ( !OnOpen(m_strBufferName, wxTextBufferOpenMode::WriteAccess) )
+    if ( !OnOpen(m_strBufferName.ToStdString(), wxTextBufferOpenMode::WriteAccess) )
         return false;
 
     OnClose();
@@ -154,7 +154,7 @@ bool wxTextBuffer::Open(const wxMBConv& conv)
     wxASSERT( !m_strBufferName.empty() );
 
     // open buffer in read-only mode
-    if ( !OnOpen(m_strBufferName, wxTextBufferOpenMode::ReadAccess) )
+    if ( !OnOpen(m_strBufferName.ToStdString(), wxTextBufferOpenMode::ReadAccess) )
         return false;
 
     // read buffer into memory

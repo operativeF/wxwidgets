@@ -25,8 +25,7 @@
                verbatim from src.h.in.
  */
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
+
 
 
 #if wxUSE_STC

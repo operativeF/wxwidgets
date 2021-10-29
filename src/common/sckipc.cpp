@@ -22,8 +22,7 @@
 // headers
 // --------------------------------------------------------------------------
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
+
 
 
 #if wxUSE_SOCKETS && wxUSE_IPC && wxUSE_STREAMS
@@ -77,7 +76,7 @@ GetAddressFromName(const wxString& serverName,
                    const wxString& host = {})
 {
     // we always use INET sockets under non-Unix systems
-#if defined(__UNIX__) && !defined(__WINDOWS__) && !defined(__WINE__)
+#if defined(__UNIX__) && !defined(WX_WINDOWS) && !defined(__WINE__)
     // under Unix, if the server name looks like a path, create a AF_UNIX
     // socket instead of AF_INET one
     if ( serverName.Find(wxT('/')) != wxNOT_FOUND )

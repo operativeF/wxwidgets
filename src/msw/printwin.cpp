@@ -8,18 +8,12 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
-
-
 // Don't use the Windows printer if we're in wxUniv mode and using
 // the PostScript architecture
 #if wxUSE_PRINTING_ARCHITECTURE && (!defined(__WXUNIVERSAL__) || !wxUSE_POSTSCRIPT_ARCHITECTURE_IN_MSW)
 
-#ifndef WX_PRECOMP
-    #include "wx/msw/wrapcdlg.h"
-    #include "wx/msw/private.h"
-#endif
+#include "wx/msw/wrapcdlg.h"
+#include "wx/msw/private.h"
 
 #include "wx/window.h"
 #include "wx/utils.h"

@@ -39,7 +39,7 @@ WX_DEFINE_USER_EXPORTED_OBJARRAY(wxDynamicLibraryDetailsArray)
 // ---------------------------------------------------------------------------
 
 // for MSW/Unix it is defined in platform-specific file
-#if !(defined(__WINDOWS__) || defined(__UNIX__))
+#if !(defined(WX_WINDOWS) || defined(__UNIX__))
 
 wxDllType wxDynamicLibrary::GetProgramHandle()
 {
@@ -47,7 +47,7 @@ wxDllType wxDynamicLibrary::GetProgramHandle()
    return 0;
 }
 
-#endif // __WINDOWS__ || __UNIX__
+#endif // WX_WINDOWS || __UNIX__
 
 
 bool wxDynamicLibrary::Load(const wxString& libnameOrig, unsigned int flags)
@@ -109,7 +109,7 @@ void *wxDynamicLibrary::GetSymbol(const wxString& name, bool *success) const
 wxString wxDynamicLibrary::GetDllExt(wxDynamicLibraryCategory cat)
 {
     wxUnusedVar(cat);
-#if defined(__WINDOWS__)
+#if defined(WX_WINDOWS)
     return ".dll";
 #elif defined(__HPUX__)
     return ".sl";
@@ -191,7 +191,7 @@ wxString wxDynamicLibrary::CanonicalizePluginName(const wxString& name,
 #undef wxDLLVER
 #undef WXSTRINGIZE
 
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
     // Add compiler identification:
     #if defined(__GNUG__)
         suffix << wxT("_gcc");

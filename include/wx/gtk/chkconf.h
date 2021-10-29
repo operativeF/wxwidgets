@@ -77,14 +77,14 @@
     We always need Cairo with wxGTK, enable it if necessary (this can only
     happen under Windows).
  */
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
 
 #if !wxUSE_CAIRO
 #   undef  wxUSE_CAIRO
 #   define wxUSE_CAIRO 1
 #endif
 
-#endif  /* __WINDOWS__ */
+#endif  /* WX_WINDOWS */
 
 #ifdef __WXGTK3__
     #if !wxUSE_GRAPHICS_CONTEXT

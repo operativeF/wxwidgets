@@ -18,7 +18,7 @@
 
 #if wxUSE_LOG
 
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
     #include "wx/msw/wrapwin.h"
 #else
     #include <errno.h>
@@ -259,7 +259,7 @@ void LogTestCase::SysError()
     WX_ASSERT_MESSAGE( ("Error message is \"(%s\"", s), s.StartsWith("error 17") );
 
     // Try to ensure that the system error is 0.
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
     ::SetLastError(0);
 #else
     errno = 0;

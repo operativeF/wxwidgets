@@ -18,6 +18,8 @@
                         headers and missing declarations
    ------------------------------------------------------------------------- */
 
+#include "defs.h"
+
 #include "wx/chartype.h"
 
 /*
@@ -37,7 +39,7 @@
 #include <wctype.h>
 #include <time.h>
 
-#if defined(__WINDOWS__)
+#if defined(WX_WINDOWS)
     #include <io.h>
 #endif
 
@@ -66,7 +68,7 @@
 /* string.h functions */
 
 #ifdef wxNEED_STRDUP
-    WXDLLIMPEXP_BASE char *strdup(const char* s);
+    char *strdup(const char* s);
 #endif
 
 
@@ -80,10 +82,10 @@
         #if wxUSE_UTF8_LOCALE_ONLY
         #define wxLocaleIsUtf8 true
         #else
-        extern WXDLLIMPEXP_BASE bool wxLocaleIsUtf8;
+        extern bool wxLocaleIsUtf8;
         #endif
         /* function used to update the flag: */
-        extern WXDLLIMPEXP_BASE void wxUpdateLocaleIsUtf8();
+        extern void wxUpdateLocaleIsUtf8();
 #endif /* __cplusplus */
 
 
@@ -136,7 +138,7 @@
 #endif
 
 /* Windows compilers provide _wcsdup() except for (old) Cygwin */
-#if defined(__WINDOWS__) && !defined(__CYGWIN__)
+#if defined(WX_WINDOWS) && !defined(__CYGWIN__)
     wxDECL_FOR_STRICT_MINGW32(wchar_t*, _wcsdup, (const wchar_t*))
     #define wxCRT_StrdupW _wcsdup
 #elif defined(HAVE_WCSDUP)
@@ -274,11 +276,11 @@ extern "C" {
 #endif
 
 #ifndef wxCRT_StrlenW
-WXDLLIMPEXP_BASE size_t wxCRT_StrlenW(const wchar_t *s);
+size_t wxCRT_StrlenW(const wchar_t *s);
 #endif
 
 #ifndef wxCRT_StrncmpW
-WXDLLIMPEXP_BASE int wxCRT_StrncmpW(const wchar_t *s1, const wchar_t *s2, size_t n);
+int wxCRT_StrncmpW(const wchar_t *s1, const wchar_t *s2, size_t n);
 #endif
 
 #ifdef __cplusplus
@@ -292,116 +294,116 @@ WXDLLIMPEXP_BASE int wxCRT_StrncmpW(const wchar_t *s1, const wchar_t *s2, size_t
 #define wxCRT_TolowerNative wxCRT_TolowerW
 
 #ifndef wxCRT_StrcatW
-WXDLLIMPEXP_BASE wchar_t *wxCRT_StrcatW(wchar_t *dest, const wchar_t *src);
+wchar_t *wxCRT_StrcatW(wchar_t *dest, const wchar_t *src);
 #endif
 
 #ifndef wxCRT_StrchrW
-WXDLLIMPEXP_BASE const wchar_t *wxCRT_StrchrW(const wchar_t *s, wchar_t c);
+const wchar_t *wxCRT_StrchrW(const wchar_t *s, wchar_t c);
 #endif
 
 #ifndef wxCRT_StrcmpW
-WXDLLIMPEXP_BASE int wxCRT_StrcmpW(const wchar_t *s1, const wchar_t *s2);
+int wxCRT_StrcmpW(const wchar_t *s1, const wchar_t *s2);
 #endif
 
 #ifndef wxCRT_StrcollW
-WXDLLIMPEXP_BASE int wxCRT_StrcollW(const wchar_t *s1, const wchar_t *s2);
+int wxCRT_StrcollW(const wchar_t *s1, const wchar_t *s2);
 #endif
 
 #ifndef wxCRT_StrcpyW
-WXDLLIMPEXP_BASE wchar_t *wxCRT_StrcpyW(wchar_t *dest, const wchar_t *src);
+wchar_t *wxCRT_StrcpyW(wchar_t *dest, const wchar_t *src);
 #endif
 
 #ifndef wxCRT_StrcspnW
-WXDLLIMPEXP_BASE size_t wxCRT_StrcspnW(const wchar_t *s, const wchar_t *reject);
+size_t wxCRT_StrcspnW(const wchar_t *s, const wchar_t *reject);
 #endif
 
 #ifndef wxCRT_StrncatW
-WXDLLIMPEXP_BASE wchar_t *wxCRT_StrncatW(wchar_t *dest, const wchar_t *src, size_t n);
+wchar_t *wxCRT_StrncatW(wchar_t *dest, const wchar_t *src, size_t n);
 #endif
 
 #ifndef wxCRT_StrncpyW
-WXDLLIMPEXP_BASE wchar_t *wxCRT_StrncpyW(wchar_t *dest, const wchar_t *src, size_t n);
+wchar_t *wxCRT_StrncpyW(wchar_t *dest, const wchar_t *src, size_t n);
 #endif
 
 #ifndef wxCRT_StrpbrkW
-WXDLLIMPEXP_BASE const wchar_t *wxCRT_StrpbrkW(const wchar_t *s, const wchar_t *accept);
+const wchar_t *wxCRT_StrpbrkW(const wchar_t *s, const wchar_t *accept);
 #endif
 
 #ifndef wxCRT_StrrchrW
-WXDLLIMPEXP_BASE const wchar_t *wxCRT_StrrchrW(const wchar_t *s, wchar_t c);
+const wchar_t *wxCRT_StrrchrW(const wchar_t *s, wchar_t c);
 #endif
 
 #ifndef wxCRT_StrspnW
-WXDLLIMPEXP_BASE size_t wxCRT_StrspnW(const wchar_t *s, const wchar_t *accept);
+size_t wxCRT_StrspnW(const wchar_t *s, const wchar_t *accept);
 #endif
 
 #ifndef wxCRT_StrstrW
-WXDLLIMPEXP_BASE const wchar_t *wxCRT_StrstrW(const wchar_t *haystack, const wchar_t *needle);
+const wchar_t *wxCRT_StrstrW(const wchar_t *haystack, const wchar_t *needle);
 #endif
 
 #ifndef wxCRT_StrtodW
-WXDLLIMPEXP_BASE double wxCRT_StrtodW(const wchar_t *nptr, wchar_t **endptr);
+double wxCRT_StrtodW(const wchar_t *nptr, wchar_t **endptr);
 #endif
 
 #ifndef wxCRT_StrtolW
-WXDLLIMPEXP_BASE long int wxCRT_StrtolW(const wchar_t *nptr, wchar_t **endptr, int base);
+long int wxCRT_StrtolW(const wchar_t *nptr, wchar_t **endptr, int base);
 #endif
 
 #ifndef wxCRT_StrtoulW
-WXDLLIMPEXP_BASE unsigned long int wxCRT_StrtoulW(const wchar_t *nptr, wchar_t **endptr, int base);
+unsigned long int wxCRT_StrtoulW(const wchar_t *nptr, wchar_t **endptr, int base);
 #endif
 
 #ifndef wxCRT_StrxfrmW
-WXDLLIMPEXP_BASE size_t wxCRT_StrxfrmW(wchar_t *dest, const wchar_t *src, size_t n);
+size_t wxCRT_StrxfrmW(wchar_t *dest, const wchar_t *src, size_t n);
 #endif
 
 #ifndef wxCRT_StrdupA
-WXDLLIMPEXP_BASE char *wxCRT_StrdupA(const char *psz);
+char *wxCRT_StrdupA(const char *psz);
 #endif
 
 #ifndef wxCRT_StrdupW
-WXDLLIMPEXP_BASE wchar_t *wxCRT_StrdupW(const wchar_t *pwz);
+wchar_t *wxCRT_StrdupW(const wchar_t *pwz);
 #endif
 
 #ifndef wxCRT_StricmpA
-WXDLLIMPEXP_BASE int wxCRT_StricmpA(const char *psz1, const char *psz2);
+int wxCRT_StricmpA(const char *psz1, const char *psz2);
 #endif
 
 #ifndef wxCRT_StricmpW
-WXDLLIMPEXP_BASE int wxCRT_StricmpW(const wchar_t *psz1, const wchar_t *psz2);
+int wxCRT_StricmpW(const wchar_t *psz1, const wchar_t *psz2);
 #endif
 
 #ifndef wxCRT_StrnicmpA
-WXDLLIMPEXP_BASE int wxCRT_StrnicmpA(const char *psz1, const char *psz2, size_t len);
+int wxCRT_StrnicmpA(const char *psz1, const char *psz2, size_t len);
 #endif
 
 #ifndef wxCRT_StrnicmpW
-WXDLLIMPEXP_BASE int wxCRT_StrnicmpW(const wchar_t *psz1, const wchar_t *psz2, size_t len);
+int wxCRT_StrnicmpW(const wchar_t *psz1, const wchar_t *psz2, size_t len);
 #endif
 
 #ifndef wxCRT_StrtokA
-WXDLLIMPEXP_BASE char *wxCRT_StrtokA(char *psz, const char *delim, char **save_ptr);
+char *wxCRT_StrtokA(char *psz, const char *delim, char **save_ptr);
 #endif
 
 #ifndef wxCRT_StrtokW
-WXDLLIMPEXP_BASE wchar_t *wxCRT_StrtokW(wchar_t *psz, const wchar_t *delim, wchar_t **save_ptr);
+wchar_t *wxCRT_StrtokW(wchar_t *psz, const wchar_t *delim, wchar_t **save_ptr);
 #endif
 
 /* supply strtoll and strtoull, if needed */
 #ifdef wxLongLong_t
     #ifndef wxCRT_StrtollA
-        WXDLLIMPEXP_BASE wxLongLong_t wxCRT_StrtollA(const char* nptr,
+        wxLongLong_t wxCRT_StrtollA(const char* nptr,
                                                      char** endptr,
                                                      int base);
-        WXDLLIMPEXP_BASE wxULongLong_t wxCRT_StrtoullA(const char* nptr,
+        wxULongLong_t wxCRT_StrtoullA(const char* nptr,
                                                        char** endptr,
                                                        int base);
     #endif
     #ifndef wxCRT_StrtollW
-        WXDLLIMPEXP_BASE wxLongLong_t wxCRT_StrtollW(const wchar_t* nptr,
+        wxLongLong_t wxCRT_StrtollW(const wchar_t* nptr,
                                                      wchar_t** endptr,
                                                      int base);
-        WXDLLIMPEXP_BASE wxULongLong_t wxCRT_StrtoullW(const wchar_t* nptr,
+        wxULongLong_t wxCRT_StrtoullW(const wchar_t* nptr,
                                                        wchar_t** endptr,
                                                        int base);
     #endif
@@ -465,15 +467,15 @@ WXDLLIMPEXP_BASE wchar_t *wxCRT_StrtokW(wchar_t *psz, const wchar_t *delim, wcha
 #define wxCRT_FgetsW  fgetws
 
 #ifndef wxCRT_PutsW
-WXDLLIMPEXP_BASE int wxCRT_PutsW(const wchar_t *ws);
+int wxCRT_PutsW(const wchar_t *ws);
 #endif
 
 #ifndef wxCRT_FputsW
-WXDLLIMPEXP_BASE int wxCRT_FputsW(const wchar_t *ch, FILE *stream);
+int wxCRT_FputsW(const wchar_t *ch, FILE *stream);
 #endif
 
 #ifndef wxCRT_FputcW
-WXDLLIMPEXP_BASE int wxCRT_FputcW(wchar_t wc, FILE *stream);
+int wxCRT_FputcW(wchar_t wc, FILE *stream);
 #endif
 
 /*
@@ -498,7 +500,7 @@ WXDLLIMPEXP_BASE int wxCRT_FputcW(wchar_t wc, FILE *stream);
 #endif
 
 #ifndef wxCRT_GetenvW
-WXDLLIMPEXP_BASE wchar_t * wxCRT_GetenvW(const wchar_t *name);
+wchar_t * wxCRT_GetenvW(const wchar_t *name);
 #endif
 
 
@@ -563,7 +565,7 @@ WXDLLIMPEXP_BASE wchar_t * wxCRT_GetenvW(const wchar_t *name);
 #endif
 
 #ifndef wxCRT_StrftimeW
-WXDLLIMPEXP_BASE size_t wxCRT_StrftimeW(wchar_t *s, size_t max,
+size_t wxCRT_StrftimeW(wchar_t *s, size_t max,
                                         const wchar_t *fmt,
                                         const struct tm *tm);
 #endif
@@ -618,8 +620,8 @@ WXDLLIMPEXP_BASE size_t wxCRT_StrftimeW(wchar_t *s, size_t max,
 
 #if defined(wxNEED_WX_MBSTOWCS) && defined(__ANDROID__)
     #warning "Custom mb/wchar conv. only works for ASCII, see Android NDK notes"
-    WXDLLIMPEXP_BASE size_t android_mbstowcs(wchar_t *, const char *, size_t);
-    WXDLLIMPEXP_BASE size_t android_wcstombs(char *, const wchar_t *, size_t);
+    size_t android_mbstowcs(wchar_t *, const char *, size_t);
+    size_t android_wcstombs(char *, const wchar_t *, size_t);
     #define wxMbstowcs android_mbstowcs
     #define wxWcstombs android_wcstombs
 #else
@@ -642,10 +644,10 @@ WXDLLIMPEXP_BASE size_t wxCRT_StrftimeW(wchar_t *s, size_t max,
 inline size_t wxStrlen(const char *s) { return s ? wxCRT_StrlenA(s) : 0; }
 inline size_t wxStrlen(const wchar_t *s) { return s ? wxCRT_StrlenW(s) : 0; }
 #ifndef wxWCHAR_T_IS_WXCHAR16
-       WXDLLIMPEXP_BASE size_t wxStrlen(const wxChar16 *s );
+       size_t wxStrlen(const wxChar16 *s );
 #endif
 #ifndef wxWCHAR_T_IS_WXCHAR32
-       WXDLLIMPEXP_BASE size_t wxStrlen(const wxChar32 *s );
+       size_t wxStrlen(const wxChar32 *s );
 #endif
 #define wxWcslen wxCRT_StrlenW
 
@@ -654,10 +656,10 @@ inline size_t wxStrlen(const wchar_t *s) { return s ? wxCRT_StrlenW(s) : 0; }
 inline char* wxStrdup(const char *s) { return wxCRT_StrdupA(s); }
 inline wchar_t* wxStrdup(const wchar_t *s) { return wxCRT_StrdupW(s); }
 #ifndef wxWCHAR_T_IS_WXCHAR16
-       WXDLLIMPEXP_BASE wxChar16* wxStrdup(const wxChar16* s);
+       wxChar16* wxStrdup(const wxChar16* s);
 #endif
 #ifndef wxWCHAR_T_IS_WXCHAR32
-       WXDLLIMPEXP_BASE wxChar32* wxStrdup(const wxChar32* s);
+       wxChar32* wxStrdup(const wxChar32* s);
 #endif
 
 #endif /* __cplusplus */

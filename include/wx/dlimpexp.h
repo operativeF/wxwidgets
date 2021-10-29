@@ -18,7 +18,7 @@
 #if defined(HAVE_VISIBILITY)
 #    define WXEXPORT __attribute__ ((visibility("default")))
 #    define WXIMPORT __attribute__ ((visibility("default")))
-#elif defined(__WINDOWS__)
+#elif defined(WX_WINDOWS)
     /*
        __declspec works in as VC++.
      */
@@ -262,7 +262,7 @@
    __declspec for the classes later declared with it, so we need a separate set
    of macros for forward declarations to hide this difference:
  */
-#if defined(HAVE_VISIBILITY) || (defined(__WINDOWS__) && defined(__GNUC__))
+#if defined(HAVE_VISIBILITY) || (defined(WX_WINDOWS) && defined(__GNUC__))
     #define WXDLLIMPEXP_FWD_BASE
     #define WXDLLIMPEXP_FWD_NET
     #define WXDLLIMPEXP_FWD_CORE

@@ -8,19 +8,10 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
-
-
 #if wxUSE_DRAGIMAGE
 
-#ifndef WX_PRECOMP
-    #include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
-    #include "wx/msw/private.h"
-
-    #include <string>
-#endif
-
+#include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
+#include "wx/msw/private.h"
 #include "wx/dcmemory.h"
 #include "wx/dcscreen.h"
 #include "wx/frame.h"
@@ -30,6 +21,8 @@
 #include "wx/settings.h"
 #include "wx/window.h"
 #include "wx/msw/dragimag.h"
+
+#include <string>
 
 // Wine doesn't have this yet
 #ifndef ListView_CreateDragImage

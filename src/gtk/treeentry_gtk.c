@@ -13,7 +13,6 @@ typedef pid_t GPid;
 #define GSEAL(x) x
 #endif
 
-#include "wx/setup.h"
 #ifndef __WXGTK3__
     #define GLIB_DISABLE_DEPRECATION_WARNINGS
 #endif

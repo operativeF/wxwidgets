@@ -57,7 +57,7 @@ public:
     // initializes the bundle with a single icon
     wxIconBundle(const wxIcon& icon);
 
-#if defined(__WINDOWS__) && wxUSE_ICO_CUR
+#if defined(WX_WINDOWS) && wxUSE_ICO_CUR
     // initializes the bundle with the icons from a group icon stored as an MS Windows resource
     wxIconBundle(const std::string& resourceName, WXHINSTANCE module);
 #endif
@@ -74,7 +74,7 @@ public:
     void AddIcon(wxInputStream& stream, wxBitmapType type = wxBitmapType::Any);
 #endif // wxUSE_STREAMS && wxUSE_IMAGE
 
-#if defined(__WINDOWS__) && wxUSE_ICO_CUR
+#if defined(WX_WINDOWS) && wxUSE_ICO_CUR
     // loads all the icons from a group icon stored in an MS Windows resource
     void AddIcon(const std::string& resourceName, WXHINSTANCE module);
 #endif

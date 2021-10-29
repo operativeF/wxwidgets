@@ -8,22 +8,13 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
-
-
 #if wxUSE_NOTEBOOK
 
 #include "wx/notebook.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
-    #include "wx/msw/private.h"
-    #include "wx/msw/wrap/utils.h"
-
-    #include <boost/nowide/convert.hpp>
-    #include <boost/nowide/stackstring.hpp>
-#endif  // WX_PRECOMP
+#include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
+#include "wx/msw/private.h"
+#include "wx/msw/wrap/utils.h"
 
 #include "wx/string.h"
 #include "wx/log.h"
@@ -39,11 +30,14 @@
 
 #include "wx/msw/dc.h"
 
-#include <windowsx.h>
-
 #if wxUSE_UXTHEME
     #include "wx/msw/uxtheme.h"
 #endif
+
+#include <boost/nowide/convert.hpp>
+#include <boost/nowide/stackstring.hpp>
+
+#include <windowsx.h>
 
 // ----------------------------------------------------------------------------
 // macros

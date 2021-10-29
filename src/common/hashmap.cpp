@@ -8,10 +8,6 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
-
-
 #include "wx/hashmap.h"
 
 /* FYI: This is the "One-at-a-Time" algorithm by Bob Jenkins */

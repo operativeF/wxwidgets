@@ -8,8 +8,7 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
+
 
 
 #if wxUSE_PRINTING_ARCHITECTURE
@@ -20,14 +19,6 @@
 #include "wx/log.h"
 #include "wx/dcmemory.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/msw/private.h"
-    #include "wx/msw/wrap/utils.h"
-    #include "wx/msw/wrapcdlg.h"
-
-    #include <boost/nowide/stackstring.hpp>
-#endif
-
 #if wxUSE_WXDIB
     #include "wx/msw/dib.h"
 #endif
@@ -35,6 +26,11 @@
 #include "wx/printdlg.h"
 #include "wx/msw/printdlg.h"
 
+#include "wx/msw/private.h"
+#include "wx/msw/wrap/utils.h"
+#include "wx/msw/wrapcdlg.h"
+
+#include <boost/nowide/stackstring.hpp>
 
 // mingw32 defines GDI_ERROR incorrectly
 #if defined(__GNUWIN32__) || !defined(GDI_ERROR)

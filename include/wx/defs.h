@@ -105,7 +105,7 @@
 
 /* Prevents conflicts between sys/types.h and winsock.h with Cygwin, */
 /* when using Windows sockets. */
-#if defined(__CYGWIN__) && defined(__WINDOWS__)
+#if defined(__CYGWIN__) && defined(WX_WINDOWS)
 #define __USE_W32_SOCKETS
 #endif
 
@@ -179,7 +179,7 @@
 /*  ---------------------------------------------------------------------------- */
 
 /*  stdcall is used for all functions called by Windows under Windows */
-#if defined(__WINDOWS__)
+#if defined(WX_WINDOWS)
     #if defined(__GNUWIN32__)
         #define wxSTDCALL __attribute__((stdcall))
     #else

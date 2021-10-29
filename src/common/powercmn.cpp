@@ -8,10 +8,6 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-// for compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
-
-
 #include "wx/power.h"
 
 // ============================================================================
@@ -28,7 +24,7 @@
 #endif
 
 // Provide stubs for systems without power resource management functions
-#if !defined(__WINDOWS__) && !defined(__APPLE__)
+#if !defined(WX_WINDOWS) && !defined(__APPLE__)
 
 bool
 wxPowerResource::Acquire(wxPowerResourceKind WXUNUSED(kind),
@@ -41,10 +37,10 @@ void wxPowerResource::Release(wxPowerResourceKind WXUNUSED(kind))
 {
 }
 
-#endif // !(__WINDOWS__ || __APPLE__)
+#endif // !(WX_WINDOWS || __APPLE__)
 
 // provide stubs for the systems not implementing these functions
-#if !defined(__WINDOWS__)
+#if !defined(WX_WINDOWS)
 
 wxPowerType wxGetPowerType()
 {

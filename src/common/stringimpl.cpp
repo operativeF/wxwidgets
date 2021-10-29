@@ -16,20 +16,10 @@
  *  3) Unlock() decrements nRefs and frees memory if it goes to 0
  */
 
-// ===========================================================================
-// headers, declarations, constants
-// ===========================================================================
-
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
-
-
-#ifndef WX_PRECOMP
-    #include <cstdlib>
-    #include <cstring>
-    #include <cctype>
-    #include <cerrno>
-#endif
+#include <cstdlib>
+#include <cstring>
+#include <cctype>
+#include <cerrno>
 
 #include "wx/stringimpl.h"
 #include "wx/wxcrt.h"

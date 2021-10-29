@@ -1,10 +1,11 @@
+#include <windows.h>
+
 #include "wx/msw/wrap/wrapgdi.h"
 
 #include <boost/nowide/convert.hpp>
 #include <boost/nowide/stackstring.hpp>
 
-#include <windef.h>
-#include <winuser.h>
+#include <WinUser.h>
 
 namespace msw::wrap
 {

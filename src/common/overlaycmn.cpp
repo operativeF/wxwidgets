@@ -8,18 +8,12 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
-
-
 #include "wx/dc.h"
 #include "wx/overlay.h"
 #include "wx/private/overlay.h"
 #include "wx/dcmemory.h"
 
-#ifndef WX_PRECOMP
-    #include <memory>
-#endif
+#include <memory>
 
 // ============================================================================
 // implementation

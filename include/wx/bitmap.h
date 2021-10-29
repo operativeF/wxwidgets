@@ -265,7 +265,7 @@ protected:
     #define wxBITMAP_DEFAULT_TYPE    wxBitmapType::XPM
     #include "wx/x11/bitmap.h"
 #elif defined(__WXGTK20__)
-    #ifdef __WINDOWS__
+    #ifdef WX_WINDOWS
         #define wxBITMAP_DEFAULT_TYPE    wxBitmapType::BMP_Resource
     #else
         #define wxBITMAP_DEFAULT_TYPE    wxBitmapType::XPM

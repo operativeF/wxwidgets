@@ -79,7 +79,7 @@ wxREGISTER_UNIT_TEST_WITH_TAGS(InteractiveOutputTestCase,
 // wxDllLoader
 // ----------------------------------------------------------------------------
 
-#if !defined(__WINDOWS__) && !defined(__UNIX__)
+#if !defined(WX_WINDOWS) && !defined(__UNIX__)
     #undef TEST_DYNLIB
 #endif
 

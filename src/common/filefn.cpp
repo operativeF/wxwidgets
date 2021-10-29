@@ -8,22 +8,10 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
-
-
 #include "wx/filefn.h"
 
-#ifndef WX_PRECOMP
-    #include <boost/nowide/convert.hpp>
-
-    #include <algorithm>
-    #include <array>
-    #include <vector>
-
-    #ifdef __WINDOWS__
-        #include "wx/msw/private.h"
-    #endif
+#ifdef WX_WINDOWS
+    #include "wx/msw/private.h"
 #endif
 
 #include "wx/intl.h"
@@ -39,7 +27,7 @@
     #include  "wx/osx/private.h"  // includes mac headers
 #endif
 
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
     // sys/cygwin.h is needed for cygwin_conv_to_full_win32_path()
     // and for cygwin_conv_path()
     //
@@ -56,11 +44,17 @@
     #if defined __CYGWIN__
         #include <io.h>
     #endif
-#endif // __WINDOWS__
+#endif // WX_WINDOWS
 
 #if defined(__VMS__)
     #include <fab.h>
 #endif
+
+#include <boost/nowide/convert.hpp>
+
+#include <algorithm>
+#include <array>
+#include <vector>
 
 #if defined(_MSC_VER) || defined(__MINGW32__)
     wxDECL_FOR_STRICT_MINGW32(wchar_t*, _wgetcwd, (wchar_t*, int))
@@ -118,14 +112,14 @@ void wxPathList::AddEnvList (const wxString& envVariable)
     // "C:\Program" and "Files"; this is true for both Windows and Unix.
 
     static constexpr wxChar PATH_TOKS[] =
-#if defined(__WINDOWS__)
+#if defined(WX_WINDOWS)
         wxT(";"); // Don't separate with colon in DOS (used for drive)
 #else
         wxT(":;");
 #endif
 
     std::string val;
-    if ( wxGetEnv(envVariable, &val) )
+    if ( wxGetEnv(envVariable.ToStdString(), &val) )
     {
         // split into an array of string the value of the env var
         const std::vector<wxString> arr = wxStringTokenize(val, PATH_TOKS);
@@ -215,7 +209,7 @@ wxIsAbsolutePath (const wxString& filename)
         if (filename.size() > 1 && (filename[0] == wxT('[') && filename[1] != wxT('.')))
             return true;
 #endif
-#if defined(__WINDOWS__)
+#if defined(WX_WINDOWS)
         // MSDOS like
         if (filename[0] == wxT('\\') ||
             (filename.size() > 1 && (wxIsalpha (filename[0]) && filename[1] == wxT(':'))))
@@ -274,7 +268,7 @@ wxPathOnly (wxChar *path)
             i --;
         }
 
-#if defined(__WINDOWS__)
+#if defined(WX_WINDOWS)
         // Try Drive specifier
         if (wxIsalpha (buf[0]) && buf[1] == wxT(':'))
         {
@@ -326,7 +320,7 @@ wxString wxPathOnly (const wxString& path)
             i --;
         }
 
-#if defined(__WINDOWS__)
+#if defined(WX_WINDOWS)
         // Try Drive specifier
         if (wxIsalpha (buf[0]) && buf[1] == wxT(':'))
         {
@@ -544,7 +538,7 @@ wxCopyFile (const std::string& file1, const std::string& file2, bool overwrite)
     wxUnusedVar(overwrite);
     return false;
 
-#endif // __WINDOWS__ && __WIN32__
+#endif // WX_WINDOWS && __WIN32__
 
     return true;
 }
@@ -568,7 +562,7 @@ wxRenameFile(const wxString& file1, const wxString& file2, bool overwrite)
     return true;
 
   // Try to copy
-  if (wxCopyFile(file1, file2, overwrite)) {
+  if (wxCopyFile(file1.ToStdString(), file2.ToStdString(), overwrite)) {
     wxRemoveFile(file1);
     return true;
   }
@@ -601,7 +595,7 @@ bool wxMkdir(const wxString& dir, int perm)
 
     // assume mkdir() has 2 args on all platforms
     // for the GNU compiler
-#elif (!defined(__WINDOWS__)) || \
+#elif (!defined(WX_WINDOWS)) || \
       (defined(__GNUWIN32__) && !defined(__MINGW32__)) ||                \
       defined(__WINE__)
     const wxChar *dirname = dir.c_str();
@@ -751,7 +745,7 @@ wxChar *wxDoGetCwd(wxChar *buf, int sz)
     {
 // MBN: we hope that in the case the user is compiling a GTK+/Motif app,
 //      he needs Unix as opposed to Win32 pathnames
-#if defined( __CYGWIN__ ) && defined( __WINDOWS__ )
+#if defined( __CYGWIN__ ) && defined( WX_WINDOWS )
         // another example of DOS/Unix mix (Cygwin)
         wxString pathUnix = buf;
     #if CYGWIN_VERSION_DLL_MAJOR >= 1007
@@ -779,7 +773,7 @@ bool wxSetWorkingDirectory(const std::string& d)
     bool success = false;
 #if defined(__UNIX__) || defined(__WXMAC__)
     success = (chdir(d.fn_str()) == 0);
-#elif defined(__WINDOWS__)
+#elif defined(WX_WINDOWS)
     success = (::SetCurrentDirectoryW(boost::nowide::widen(d).c_str()) != 0);
 #endif
     if ( !success )
@@ -793,7 +787,7 @@ bool wxSetWorkingDirectory(const std::string& d)
 // On non-Windows platform, probably just return the empty string.
 wxString wxGetOSDirectory()
 {
-#if defined(__WINDOWS__)
+#if defined(WX_WINDOWS)
     wxChar buf[MAX_PATH];
     if ( !::GetWindowsDirectoryW(buf, MAX_PATH) )
     {
@@ -969,7 +963,7 @@ std::size_t WXDLLIMPEXP_BASE wxParseCommonDialogsFilter(const wxString& filterSt
     return filters.size();
 }
 
-#if defined(__WINDOWS__) && !defined(__UNIX__)
+#if defined(WX_WINDOWS) && !defined(__UNIX__)
 static bool wxCheckWin32Permission(const std::string& path, DWORD access)
 {
     // quoting the MSDN: "To obtain a handle to a directory, call the
@@ -998,15 +992,15 @@ static bool wxCheckWin32Permission(const std::string& path, DWORD access)
 
     return h != INVALID_HANDLE_VALUE;
 }
-#endif // __WINDOWS__
+#endif // WX_WINDOWS
 
 bool wxIsWritable(const wxString &path)
 {
 #if defined( __UNIX__ )
     // access() will take in count also symbolic links
     return wxAccess(path.c_str(), W_OK) == 0;
-#elif defined( __WINDOWS__ )
-    return wxCheckWin32Permission(path, GENERIC_WRITE);
+#elif defined( WX_WINDOWS )
+    return wxCheckWin32Permission(path.ToStdString(), GENERIC_WRITE);
 #else
     wxUnusedVar(path);
     // TODO
@@ -1019,8 +1013,8 @@ bool wxIsReadable(const wxString &path)
 #if defined( __UNIX__ )
     // access() will take in count also symbolic links
     return wxAccess(path.c_str(), R_OK) == 0;
-#elif defined( __WINDOWS__ )
-    return wxCheckWin32Permission(path, GENERIC_READ);
+#elif defined( WX_WINDOWS )
+    return wxCheckWin32Permission(path.ToStdString(), GENERIC_READ);
 #else
     wxUnusedVar(path);
     // TODO
@@ -1033,8 +1027,8 @@ bool wxIsExecutable(const wxString &path)
 #if defined( __UNIX__ )
     // access() will take in count also symbolic links
     return wxAccess(path.c_str(), X_OK) == 0;
-#elif defined( __WINDOWS__ )
-   return wxCheckWin32Permission(path, GENERIC_EXECUTE);
+#elif defined( WX_WINDOWS )
+   return wxCheckWin32Permission(path.ToStdString(), GENERIC_EXECUTE);
 #else
     wxUnusedVar(path);
     // TODO
@@ -1062,7 +1056,7 @@ bool wxIsExecutable(const wxString &path)
 //
 wxFileKind wxGetFileKind(int fd)
 {
-#if defined __WINDOWS__ && defined wxGetOSFHandle
+#if defined WX_WINDOWS && defined wxGetOSFHandle
     switch (::GetFileType(wxGetOSFHandle(fd)) & ~FILE_TYPE_REMOTE)
     {
         case FILE_TYPE_CHAR:
@@ -1106,7 +1100,7 @@ wxFileKind wxGetFileKind(FILE *fp)
 #if defined(wxFILEKIND_STUB)
     (void)fp;
     return wxFileKind::Disk;
-#elif defined(__WINDOWS__) && !defined(__CYGWIN__) && !defined(__WINE__)
+#elif defined(WX_WINDOWS) && !defined(__CYGWIN__) && !defined(__WINE__)
     return fp ? wxGetFileKind(_fileno(fp)) : wxFileKind::Unknown;
 #else
     return fp ? wxGetFileKind(fileno(fp)) : wxFileKind::Unknown;

@@ -8,24 +8,11 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
-
-
 #if wxUSE_LOG
 
-#ifndef WX_PRECOMP
-    #if defined(__WINDOWS__)
-        #include "wx/msw/private.h" // includes windows.h
-    #endif
-    
-    #include <algorithm>
-    #include <iostream>
-    #include <vector>
-
-    #include <fmt/core.h>
-    #include <gsl/gsl>
-#endif //WX_PRECOMP
+#if defined(WX_WINDOWS)
+    #include "wx/msw/private.h" // includes windows.h
+#endif
 
 #include "wx/log.h"
 #include "wx/app.h"
@@ -41,6 +28,13 @@
 #include "wx/thread.h"
 #include "wx/private/threadinfo.h"
 #include "wx/crt.h"
+
+#include <fmt/core.h>
+#include <gsl/gsl>
+
+#include <algorithm>
+#include <iostream>
+#include <vector>
 
 #undef wxLOG_COMPONENT
 const char *wxLOG_COMPONENT = "";
@@ -149,7 +143,7 @@ public:
 protected:
     void DoLogText(const wxString& msg) override
     {
-        wxMessageOutputBest().Output(msg);
+        wxMessageOutputBest().Output(msg.ToStdString());
     }
 };
 
@@ -165,7 +159,7 @@ protected:
 
 bool wxSafeShowMessage(const wxString& title, const wxString& text)
 {
-    if ( !wxApp::GetValidTraits().SafeMessageBox(text, title) )
+    if ( !wxApp::GetValidTraits().SafeMessageBox(text.ToStdString(), title.ToStdString()) )
     {
         wxFprintf(stderr, wxS("%s: %s\n"), title.c_str(), text.c_str());
         fflush(stderr);
@@ -189,9 +183,9 @@ wxLogFormatter::Format(wxLogLevel level,
 
     // don't time stamp debug messages under MSW as debug viewers usually
     // already have an option to do it
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
     if ( level != wxLOG_Debug && level != wxLOG_Trace )
-#endif // __WINDOWS__
+#endif // WX_WINDOWS
     {
             prefix = FormatTimeMS(info.timestampMS);
     }
@@ -208,7 +202,7 @@ wxLogFormatter::Format(wxLogLevel level,
 
         // don't prepend "debug/trace" prefix under MSW as it goes to the debug
         // window anyhow and so can't be confused with something else
-#ifndef __WINDOWS__
+#ifndef WX_WINDOWS
     case wxLOG_Debug:
         // this prefix (as well as the one below) is intentionally not
         // translated as nobody translates debug messages anyhow
@@ -218,7 +212,7 @@ wxLogFormatter::Format(wxLogLevel level,
     case wxLOG_Trace:
         prefix += "Trace: ";
         break;
-#endif // !__WINDOWS__
+#endif // !WX_WINDOWS
     }
 
     return prefix + msg;
@@ -433,7 +427,7 @@ void wxLog::DoLogTextAtLevel(wxLogLevel level, const wxString& msg)
     // anything else needs to be handled in the derived class
     if ( level == wxLOG_Debug || level == wxLOG_Trace )
     {
-        wxMessageOutputDebug().Output(msg + wxS('\n'));
+        wxMessageOutputDebug().Output(msg.ToStdString() + '\n');
     }
     else
     {
@@ -820,7 +814,7 @@ void wxLogStderr::DoLogText(const wxString& msg)
     // First send it to stderr, even if we don't have it (e.g. in a Windows GUI
     // application under) it's not a problem to try to use it and it's easier
     // than determining whether we do have it or not.
-    wxMessageOutputStderr::Output(msg);
+    wxMessageOutputStderr::Output(msg.ToStdString());
 
     // under GUI systems such as Windows or Mac, programs usually don't have
     // stderr at all, so show the messages also somewhere else, typically in
@@ -831,7 +825,7 @@ void wxLogStderr::DoLogText(const wxString& msg)
         wxAppTraits *traits = wxApp::GetTraitsIfExists();
         if ( traits && !traits->HasStderr() )
         {
-            wxMessageOutputDebug().Output(msg + wxS('\n'));
+            wxMessageOutputDebug().Output(msg.ToStdString() + '\n');
         }
     }
 }
@@ -984,14 +978,14 @@ static void wxLogWrap(FILE *f, const char *pszPrefix, const char *psz)
 // get error code from syste
 unsigned long wxSysErrorCode()
 {
-#if defined(__WINDOWS__)
+#if defined(WX_WINDOWS)
     return ::GetLastError();
 #else   //Unix
     return errno;
 #endif  //Win/Unix
 }
 
-#if defined(__WINDOWS__)
+#if defined(WX_WINDOWS)
 
 wxString wxMSWFormatMessage(DWORD nErrCode, HMODULE hModule)
 {
@@ -1043,16 +1037,16 @@ wxString wxMSWFormatMessage(DWORD nErrCode, HMODULE hModule)
     return str;
 }
 
-#endif // __WINDOWS__
+#endif // WX_WINDOWS
 
 wxString wxSysErrorMsgStr(unsigned long nErrCode)
 {
     if ( nErrCode == 0 )
         nErrCode = wxSysErrorCode();
 
-#if defined(__WINDOWS__)
-    return wxMSWFormatMessage(nErrCode);
-#else // !__WINDOWS__
+#if defined(WX_WINDOWS)
+    return wxMSWFormatMessage(nErrCode, nullptr);
+#else // !WX_WINDOWS
         char buffer[1024];
         char *errorMsg = buffer;
 
@@ -1073,7 +1067,7 @@ wxString wxSysErrorMsgStr(unsigned long nErrCode)
 
         // at this point errorMsg might not point to buffer anymore
         return errorMsg;
-#endif  // __WINDOWS__/!__WINDOWS__
+#endif  // WX_WINDOWS/!WX_WINDOWS
 }
 
 // get error message from system as a char pointer: this function has to use a

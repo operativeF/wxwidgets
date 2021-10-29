@@ -9,18 +9,12 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
-
-
-#ifndef WX_PRECOMP
-    #include <cstring>
-#endif
-
 #include "wx/object.h"
 #include "wx/hash.h"
 #include "wx/memory.h"
 #include "wx/crt.h"
+
+#include <cstring>
 
 // we must disable optimizations for VC.NET because otherwise its too eager
 // linker discards wxClassInfo objects in release build thus breaking many,

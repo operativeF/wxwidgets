@@ -37,7 +37,7 @@
 #include  "wx/stdpaths.h"
 
 #ifndef WX_PRECOMP
-    #if defined(__WINDOWS__)
+    #if defined(WX_WINDOWS)
         #include "wx/msw/private.h"
     #endif  //windows.h
 

@@ -9,23 +9,19 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/msw/private.h"
-    #include "wx/msw/wrapwin.h"
-    #include "wx/msw/wrap/utils.h"
-
-    #include <boost/nowide/convert.hpp>
-
-    #include <memory>
-#endif
+#include "wx/msw/private.h"
+#include "wx/msw/wrapwin.h"
+#include "wx/msw/wrap/utils.h"
 
 #include "wx/app.h"
 #include "wx/frame.h"
 #include "wx/private/display.h"
 #include "wx/dynlib.h"
+
+#include <boost/nowide/convert.hpp>
+
+#include <memory>
 
 namespace
 {

@@ -11,8 +11,6 @@
 #ifndef _WX_WEBVIEW_FS_HANDLER_H_
 #define _WX_WEBVIEW_FS_HANDLER_H_
 
-#include "wx/setup.h"
-
 #if wxUSE_WEBVIEW
 
 class wxFSFile;

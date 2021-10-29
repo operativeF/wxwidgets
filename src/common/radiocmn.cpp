@@ -8,17 +8,9 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
-
-
 #if wxUSE_RADIOBOX
 
 #include "wx/radiobox.h"
-
-#ifndef WX_PRECOMP    
-    #include <gsl/gsl>
-#endif //WX_PRECOMP
 
 #if wxUSE_TOOLTIPS
     #include "wx/tooltip.h"
@@ -27,6 +19,8 @@
 #if wxUSE_HELP
     #include "wx/cshelp.h"
 #endif
+
+#include <gsl/gsl>
 
 // ============================================================================
 // implementation

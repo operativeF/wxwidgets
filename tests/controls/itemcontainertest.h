@@ -222,7 +222,7 @@ protected:
         const wxUIntPtr minus1 = static_cast<wxUIntPtr>(-1);
         m_container->Append("item -1", wxUIntToPtr(minus1));
 
-    #ifdef __WINDOWS__
+    #ifdef WX_WINDOWS
         ::SetLastError(ERROR_INVALID_DATA);
     #endif
 

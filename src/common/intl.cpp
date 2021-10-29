@@ -13,10 +13,6 @@
 // declaration
 // ============================================================================
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
-
-
 #if wxUSE_INTL
 
 #include "wx/dynarray.h"
@@ -26,10 +22,6 @@
 #include "wx/utils.h"
 #include "wx/hashmap.h"
 #include "wx/module.h"
-
-#ifndef WX_PRECOMP
-    #include <clocale>
-#endif
 
 #ifdef HAVE_LANGINFO_H
     #include <langinfo.h>
@@ -63,6 +55,8 @@
     #include <CoreFoundation/CFDateFormatter.h>
     #include <CoreFoundation/CFString.h>
 #endif
+
+#include <clocale>
 
 // ----------------------------------------------------------------------------
 // constants
@@ -109,7 +103,7 @@ inline wxString ExtractNotLang(const wxString& langFull)
 // wxLanguageInfo
 // ----------------------------------------------------------------------------
 
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
 
 // helper used by wxLanguageInfo::GetLocaleName() and elsewhere to determine
 // whether the locale is Unicode-only (it is if this function returns empty
@@ -186,14 +180,14 @@ const char* wxLanguageInfo::TrySetLocale() const
     return wxSetlocale(LC_ALL, locale);
 }
 
-#else // !__WINDOWS__
+#else // !WX_WINDOWS
 
 const char* wxLanguageInfo::TrySetLocale() const
 {
     return wxSetlocale(LC_ALL, CanonicalName);
 }
 
-#endif // __WINDOWS__/!__WINDOWS__
+#endif // WX_WINDOWS/!WX_WINDOWS
 
 wxString wxLanguageInfo::GetLocaleName() const
 {
@@ -1179,7 +1173,7 @@ wxString wxLocale::GetHeaderValue(const wxString& header,
 // accessors for locale-dependent data
 // ----------------------------------------------------------------------------
 
-#if defined(__WINDOWS__) || defined(__WXOSX__)
+#if defined(WX_WINDOWS) || defined(__WXOSX__)
 
 namespace
 {
@@ -1220,7 +1214,7 @@ wxString wxTranslateFromUnicodeFormat(const wxString& fmt)
 
     const char* formatchars =
         "dghHmMsSy"
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
         "t"
 #else
         "EcLawD"
@@ -1260,7 +1254,7 @@ wxString wxTranslateFromUnicodeFormat(const wxString& fmt)
                             // between 1 and 2 digits for days
                             fmtWX += "%d";
                             break;
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
                         case 3: // ddd
                             fmtWX += "%a";
                             break;
@@ -1273,7 +1267,7 @@ wxString wxTranslateFromUnicodeFormat(const wxString& fmt)
                             wxFAIL_MSG( "too many 'd's" );
                     }
                     break;
-#ifndef __WINDOWS__
+#ifndef WX_WINDOWS
                 case 'D':
                     switch ( lastCount )
                     {
@@ -1470,12 +1464,12 @@ wxString wxTranslateFromUnicodeFormat(const wxString& fmt)
                     wxASSERT_MSG( lastCount <= 2, "too many 'g's" );
 
                     break;
-#ifndef __WINDOWS__
+#ifndef WX_WINDOWS
                 case 'a':
                     fmtWX += "%p";
                     break;
 #endif
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
                 case 't':
                     switch ( lastCount )
                     {
@@ -1558,9 +1552,9 @@ wxString wxTranslateFromUnicodeFormat(const wxString& fmt)
 }
 
 
-#endif // __WINDOWS__ || __WXOSX__
+#endif // WX_WINDOWS || __WXOSX__
 
-#if defined(__WINDOWS__)
+#if defined(WX_WINDOWS)
 
 namespace
 {
@@ -1801,7 +1795,7 @@ wxString wxLocale::GetInfo(wxLocaleInfo index, wxLocaleCategory WXUNUSED(cat))
     return str.AsString();
 }
 
-#else // !__WINDOWS__ && !__WXOSX__, assume generic POSIX
+#else // !WX_WINDOWS && !__WXOSX__, assume generic POSIX
 
 namespace
 {
@@ -1936,7 +1930,7 @@ wxString wxLocale::GetInfo(wxLocaleInfo index, wxLocaleCategory cat)
 
 #endif // platform
 
-#ifndef __WINDOWS__
+#ifndef WX_WINDOWS
 
 /* static */
 wxString wxLocale::GetOSInfo(wxLocaleInfo index, wxLocaleCategory cat)
@@ -1944,7 +1938,7 @@ wxString wxLocale::GetOSInfo(wxLocaleInfo index, wxLocaleCategory cat)
     return GetInfo(index, cat);
 }
 
-#endif // !__WINDOWS__
+#endif // !WX_WINDOWS
 
 // ----------------------------------------------------------------------------
 // global functions and variables

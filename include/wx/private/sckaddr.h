@@ -10,7 +10,7 @@
 #ifndef _WX_PRIVATE_SOCKADDR_H_
 #define _WX_PRIVATE_SOCKADDR_H_
 
-#ifdef __WINDOWS__
+#ifdef WX_WINDOWS
     #include "wx/msw/wrapwin.h"
 
     #if wxUSE_IPV6

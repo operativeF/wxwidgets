@@ -61,8 +61,7 @@ license is as follows:
 %
 */
 
-// For compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
+
 
 
 #if wxUSE_XPM

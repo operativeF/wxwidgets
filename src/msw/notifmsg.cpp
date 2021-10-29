@@ -7,8 +7,7 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-// for compilers that support precompilation, includes "wx.h".
-#include "wx/wxprec.h"
+
 
 
 // we can only use the native implementation if we have a working
@@ -17,12 +16,6 @@
         wxUSE_TASKBARICON && wxUSE_TASKBARICON_BALLOONS
 
 #include "wx/notifmsg.h"
-
-#ifndef WX_PRECOMP
-    #include <chrono>
-    #include <string>
-#endif // WX_PRECOMP
-
 #include "wx/toplevel.h"
 #include "wx/app.h"
 
@@ -31,6 +24,8 @@
 
 #include "wx/taskbar.h"
 
+#include <chrono>
+#include <string>
 
 // ----------------------------------------------------------------------------
 // different implementations used by wxNotificationMessage

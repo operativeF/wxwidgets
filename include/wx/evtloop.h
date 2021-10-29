@@ -19,7 +19,7 @@
 
 // TODO: implement wxEventLoopSource for MSW (it should wrap a HANDLE and be
 //       monitored using MsgWaitForMultipleObjects())
-#if defined(__WXOSX__) || (defined(__UNIX__) && !defined(__WINDOWS__))
+#if defined(__WXOSX__) || (defined(__UNIX__) && !defined(WX_WINDOWS))
     #define wxUSE_EVENTLOOP_SOURCE 1
 #else
     #define wxUSE_EVENTLOOP_SOURCE 0
@@ -227,7 +227,7 @@ private:
     bool m_isInsideRun{false};
 };
 
-#if defined(__WINDOWS__) || defined(__WXMAC__) || defined(__WXDFB__) || (defined(__UNIX__) && !defined(__WXOSX__))
+#if defined(WX_WINDOWS) || defined(__WXMAC__) || defined(__WXDFB__) || (defined(__UNIX__) && !defined(__WXOSX__))
 
 // this class can be used to implement a standard event loop logic using
 // Pending() and Dispatch()
@@ -278,9 +278,9 @@ private:
 #endif
 
 // include the header defining wxConsoleEventLoop
-#if defined(__UNIX__) && !defined(__WINDOWS__)
+#if defined(__UNIX__) && !defined(WX_WINDOWS)
     #include "wx/unix/evtloop.h"
-#elif defined(__WINDOWS__)
+#elif defined(WX_WINDOWS)
     #include "wx/msw/evtloopconsole.h"
 #endif
 
@@ -350,7 +350,7 @@ protected:
 #else // !wxUSE_GUI
     // we can't define wxEventLoop differently in GUI and base libraries so use
     // a #define to still allow writing wxEventLoop in the user code
-    #if wxUSE_CONSOLE_EVENTLOOP && (defined(__WINDOWS__) || defined(__UNIX__))
+    #if wxUSE_CONSOLE_EVENTLOOP && (defined(WX_WINDOWS) || defined(__UNIX__))
         #define wxEventLoop wxConsoleEventLoop
     #else // we still must define it somehow for the code below...
         #define wxEventLoop wxEventLoopBase

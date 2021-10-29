@@ -18,7 +18,7 @@
 #include "wx/wxprec.h"
 
 
-#ifndef __WINDOWS__
+#ifndef WX_WINDOWS
     #error "This sample is Windows-only"
 #endif
 
