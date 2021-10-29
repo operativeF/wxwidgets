@@ -12,11 +12,8 @@
 
 #if wxUSE_CHECKBOX
 
-
-#ifndef WX_PRECOMP
-    #include "wx/app.h"
-    #include "wx/checkbox.h"
-#endif // WX_PRECOMP
+#include "wx/app.h"
+#include "wx/checkbox.h"
 
 #include "testableframe.h"
 

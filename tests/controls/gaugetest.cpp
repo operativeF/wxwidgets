@@ -12,12 +12,8 @@
 
 #if wxUSE_GAUGE
 
-
-#ifndef WX_PRECOMP
-    #include "wx/app.h"
-    #include "wx/gauge.h"
-#endif // WX_PRECOMP
-
+#include "wx/app.h"
+#include "wx/gauge.h"
 
 TEST_CASE("Gauge test")
 {

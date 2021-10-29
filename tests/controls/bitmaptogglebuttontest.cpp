@@ -12,14 +12,11 @@
 
 #if wxUSE_TOGGLEBTN
 
-
 #include "wx/tglbtn.h"
 
 #ifdef wxHAS_BITMAPTOGGLEBUTTON
 
-#ifndef WX_PRECOMP
-    #include "wx/app.h"
-#endif // WX_PRECOMP
+#include "wx/app.h"
 
 #include "testableframe.h"
 #include "wx/uiaction.h"

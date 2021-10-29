@@ -12,10 +12,7 @@
 
 #if wxUSE_HTML
 
-
-#ifndef WX_PRECOMP
-    #include "wx/app.h"
-#endif // WX_PRECOMP
+#include "wx/app.h"
 
 #include "wx/htmllbox.h"
 #include "itemcontainertest.h"

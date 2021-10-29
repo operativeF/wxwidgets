@@ -10,10 +10,8 @@
 
 #include "testprec.h"
 
-
-#ifndef WX_PRECOMP
-    #include "wx/wx.h"
-#endif // WX_PRECOMP
+// FIXME: Mass include
+#include "wx/wx.h"
 
 #if wxUSE_XRC
 

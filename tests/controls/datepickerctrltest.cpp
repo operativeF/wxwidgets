@@ -12,11 +12,8 @@
 
 #if wxUSE_DATEPICKCTRL
 
-
-#ifndef WX_PRECOMP
-    #include "wx/app.h"
-    #include "wx/button.h"
-#endif // WX_PRECOMP
+#include "wx/app.h"
+#include "wx/button.h"
 
 #include "wx/datectrl.h"
 #include "wx/uiaction.h"

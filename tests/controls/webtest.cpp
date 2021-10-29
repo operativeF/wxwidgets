@@ -12,10 +12,7 @@
 
 #if wxUSE_WEBVIEW && (wxUSE_WEBVIEW_WEBKIT || wxUSE_WEBVIEW_WEBKIT2 || wxUSE_WEBVIEW_IE)
 
-
-#ifndef WX_PRECOMP
-    #include "wx/app.h"
-#endif // WX_PRECOMP
+#include "wx/app.h"
 
 #include "testableframe.h"
 #include "wx/webview.h"

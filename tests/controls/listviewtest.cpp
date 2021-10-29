@@ -12,10 +12,7 @@
 
 #if wxUSE_LISTCTRL
 
-
-#ifndef WX_PRECOMP
-    #include "wx/app.h"
-#endif // WX_PRECOMP
+#include "wx/app.h"
 
 #include "wx/uiaction.h"
 #include "wx/listctrl.h"

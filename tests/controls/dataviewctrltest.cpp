@@ -12,11 +12,7 @@
 
 #if wxUSE_DATAVIEWCTRL
 
-#ifndef WX_PRECOMP
-    #include "wx/app.h"
-
-    #include <memory>
-#endif
+#include "wx/app.h"
 
 #include "wx/dataview.h"
 #ifdef __WXGTK__

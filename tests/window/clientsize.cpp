@@ -10,11 +10,8 @@
 
 #include "testprec.h"
 
-
-#ifndef WX_PRECOMP
-    #include "wx/app.h"
-    #include "wx/window.h"
-#endif // WX_PRECOMP
+#include "wx/app.h"
+#include "wx/window.h"
 
 #include "asserthelper.h"
 

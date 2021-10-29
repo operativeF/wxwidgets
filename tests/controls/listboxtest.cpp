@@ -13,10 +13,8 @@
 #if wxUSE_LISTBOX
 
 
-#ifndef WX_PRECOMP
-    #include "wx/app.h"
-    #include "wx/listbox.h"
-#endif // WX_PRECOMP
+#include "wx/app.h"
+#include "wx/listbox.h"
 
 #include "itemcontainertest.h"
 #include "testableframe.h"

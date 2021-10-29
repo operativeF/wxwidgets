@@ -10,13 +10,10 @@
 
 #include "testprec.h"
 
+#include "wx/app.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/app.h"
-
-    #include <algorithm>
-    #include <array>
-#endif // WX_PRECOMP
+#include <algorithm>
+#include <array>
 
 #include "wx/headerctrl.h"
 

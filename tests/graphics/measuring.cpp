@@ -11,12 +11,9 @@
 
 #include "testprec.h"
 
-
-#ifndef WX_PRECOMP
-    #include "wx/app.h"
-    #include "wx/font.h"
-    #include "wx/window.h"
-#endif // WX_PRECOMP
+#include "wx/app.h"
+#include "wx/font.h"
+#include "wx/window.h"
 
 // wxCairoRenderer::CreateMeasuringContext() is not implement for wxX11
 #if wxUSE_GRAPHICS_CONTEXT && !defined(__WXX11__)

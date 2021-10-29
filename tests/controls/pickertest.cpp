@@ -15,10 +15,7 @@
     wxUSE_FILEPICKERCTRL   || \
     wxUSE_FONTPICKERCTRL
 
-
-#ifndef WX_PRECOMP
-    #include "wx/app.h"
-#endif // WX_PRECOMP
+#include "wx/app.h"
 
 #include "wx/clrpicker.h"
 #include "wx/filepicker.h"

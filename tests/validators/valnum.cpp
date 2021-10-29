@@ -10,13 +10,10 @@
 
 #include "testprec.h"
 
-
-#ifndef WX_PRECOMP
-    #include "wx/app.h"
-    #include "wx/intl.h"
-    #include "wx/textctrl.h"
-    #include "wx/validate.h"
-#endif // WX_PRECOMP
+#include "wx/app.h"
+#include "wx/intl.h"
+#include "wx/textctrl.h"
+#include "wx/validate.h"
 
 #include "wx/valnum.h"
 

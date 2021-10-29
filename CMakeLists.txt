@@ -10,13 +10,18 @@
 cmake_minimum_required(VERSION 3.11)
 include(FetchContent)
 
-set(CMAKE_CXX_STANDARD_REQUIRED 17)
+set(CMAKE_CXX_STANDARD_REQUIRED 23)
 
-FetchContent_Declare(DocTest
-    GIT_REPOSITORY "https://github.com/onqtam/doctest"         
-    GIT_TAG "4d8716f1efc1d14aa736ef52ee727bd4204f4c40")
+# FIXME: Needs to get the right triplet. It's most likely trying to get the x86 default.
+# if(DEFINED ENV{VCPKG_ROOT} AND NOT DEFINED CMAKE_TOOLCHAIN_FILE)
+#   set(CMAKE_TOOLCHAIN_FILE "$ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
+#       CACHE STRING "")
+# endif()
 
-FetchContent_MakeAvailable(DocTest)
+include("C:/dev/vcpkg/scripts/buildsystems/vcpkg.cmake")
+
+find_package(Microsoft.GSL CONFIG REQUIRED)
+find_package(doctest CONFIG REQUIRED)
 
 if(NOT CMAKE_CONFIGURATION_TYPES)
     get_property(HAVE_MULTI_CONFIG_GENERATOR GLOBAL PROPERTY GENERATOR_IS_MULTI_CONFIG)
@@ -79,6 +84,13 @@ endif()
 set(wxVERSION ${wxMAJOR_VERSION}.${wxMINOR_VERSION}.${wxRELEASE_NUMBER})
 set(wxCOPYRIGHT "1992-2021 wxWidgets")
 
+if(MSVC)
+	# Disable unreferenced inline function removal warning
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /wd4514")
+	# Enable usage of updated __cplusplus macro
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /Zc:__cplusplus")
+endif()
+
 project(wxWidgets VERSION ${wxVERSION})
 
 include(build/cmake/main.cmake)
@@ -89,3 +101,5 @@ if(wxBUILD_SAMPLES AND wxUSE_GUI)
 endif()
 
 enable_testing()
+
+add_subdirectory(tests)

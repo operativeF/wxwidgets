@@ -13,7 +13,6 @@
 
 #include "testprec.h"
 
-#ifndef WX_PRECOMP
 #include "wx/app.h"
 #include "wx/bmpcbox.h"
 #include "wx/dialog.h"
@@ -24,7 +23,6 @@
 #include "wx/textentry.h"
 #include "wx/timer.h"
 #include "wx/window.h"
-#endif // WX_PRECOMP
 
 #include "textentrytest.h"
 #include "testableframe.h"

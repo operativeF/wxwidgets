@@ -9,10 +9,8 @@
 #ifndef _WX_TESTS_CONTROLS_BOOKCTRLBASETEST_H_
 #define _WX_TESTS_CONTROLS_BOOKCTRLBASETEST_H_
 
-#ifndef WX_PRECOMP
 #include "wx/app.h"
 #include "wx/panel.h"
-#endif // WX_PRECOMP
 
 #include "wx/artprov.h"
 #include "wx/choicebk.h"

@@ -12,10 +12,7 @@
 
 #if wxUSE_HTML
 
-
-#ifndef WX_PRECOMP
-    #include "wx/dcmemory.h"
-#endif // WX_PRECOMP
+#include "wx/dcmemory.h"
 
 #include "wx/html/htmprint.h"
 

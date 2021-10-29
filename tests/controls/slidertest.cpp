@@ -12,11 +12,8 @@
 
 #if wxUSE_SLIDER
 
-
-#ifndef WX_PRECOMP
-    #include "wx/app.h"
-    #include "wx/slider.h"
-#endif // WX_PRECOMP
+#include "wx/app.h"
+#include "wx/slider.h"
 
 #include "wx/uiaction.h"
 #include "testableframe.h"

@@ -12,13 +12,8 @@
 
 #if wxUSE_AUI
 
-
-#ifndef WX_PRECOMP
-    #include "wx/app.h"
-#endif // WX_PRECOMP
-
+#include "wx/app.h"
 #include "wx/panel.h"
-
 #include "wx/aui/auibook.h"
 
 #include "asserthelper.h"

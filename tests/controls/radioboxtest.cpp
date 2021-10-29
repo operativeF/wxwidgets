@@ -12,11 +12,8 @@
 
 #if wxUSE_RADIOBOX
 
-
-#ifndef WX_PRECOMP
-    #include "wx/app.h"
-    #include "wx/radiobox.h"
-#endif // WX_PRECOMP
+#include "wx/app.h"
+#include "wx/radiobox.h"
 
 #include "wx/tooltip.h"
 

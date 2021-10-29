@@ -12,12 +12,10 @@
 
 #if wxUSE_MENUBAR
 
+// FIXME: Mass include.
+#include "wx/wx.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/wx.h"
-
-    #include "wx/menu.h"
-#endif // WX_PRECOMP
+#include "wx/menu.h"
 
 
 #include "wx/translation.h"

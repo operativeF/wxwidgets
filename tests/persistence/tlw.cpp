@@ -13,13 +13,11 @@
 
 #include "testpersistence.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/frame.h"
+#include "wx/frame.h"
 
-    #ifdef __WXGTK__
-        #include "wx/stopwatch.h"
-    #endif // __WXGTK__
-#endif // WX_PRECOMP
+#ifdef __WXGTK__
+    #include "wx/stopwatch.h"
+#endif // __WXGTK__
 
 #include "wx/persist/toplevel.h"
 

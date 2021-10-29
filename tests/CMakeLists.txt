@@ -10,7 +10,7 @@ add_executable(nongui_test
     streams/bstream.h
 )
 
-target_compile_features(nongui_test PRIVATE cxx_std_17)
+target_compile_features(nongui_test PRIVATE cxx_std_23)
 
 target_include_directories(nongui_test 
     PUBLIC
@@ -23,3 +23,230 @@ target_link_libraries(nongui_test
     PRIVATE
         doctest::doctest
 )
+
+set(TEST_GUI_SRC
+    asserthelper.cpp
+    test.cpp
+    testableframe.cpp
+    geometry/rect.cpp
+    geometry/size.cpp
+    geometry/point.cpp
+    geometry/region.cpp
+    graphics/bitmap.cpp
+    #graphics/colour.cpp # Doesn't work yet.
+    graphics/ellipsization.cpp
+    graphics/measuring.cpp
+    #graphics/affinematrix.cpp # Doesn't work yet.
+    graphics/boundingbox.cpp
+    #graphics/clippingbox.cpp # Doesn't work yet.
+    graphics/coords.cpp
+    #graphics/graphbitmap.cpp # Doesn't work yet.
+    #graphics/graphmatrix.cpp # Doesn't work yet.
+    graphics/graphpath.cpp
+    graphics/imagelist.cpp
+    config/config.cpp
+    controls/auitest.cpp
+    controls/bitmapcomboboxtest.cpp
+    controls/bitmaptogglebuttontest.cpp
+    controls/buttontest.cpp
+    controls/checkboxtest.cpp
+    controls/checklistboxtest.cpp
+    controls/choicebooktest.cpp
+    controls/choicetest.cpp
+    controls/comboboxtest.cpp
+    controls/dataviewctrltest.cpp
+    controls/datepickerctrltest.cpp
+    controls/frametest.cpp
+    controls/gaugetest.cpp
+    controls/gridtest.cpp
+    controls/headerctrltest.cpp
+    controls/htmllboxtest.cpp
+    controls/hyperlinkctrltest.cpp
+    controls/label.cpp
+    controls/listbooktest.cpp
+    controls/listboxtest.cpp
+    controls/listctrltest.cpp
+    controls/listviewtest.cpp
+    controls/markuptest.cpp
+    controls/notebooktest.cpp
+    controls/ownerdrawncomboboxtest.cpp
+    controls/pickertest.cpp
+    controls/radioboxtest.cpp
+    controls/radiobuttontest.cpp
+    controls/rearrangelisttest.cpp
+    controls/richtextctrltest.cpp
+    controls/searchctrltest.cpp
+    controls/simplebooktest.cpp
+    controls/slidertest.cpp
+    controls/spinctrldbltest.cpp
+    controls/spinctrltest.cpp
+    controls/styledtextctrltest.cpp
+    controls/textctrltest.cpp
+    controls/togglebuttontest.cpp
+    controls/toolbooktest.cpp
+    controls/treebooktest.cpp
+    controls/treectrltest.cpp
+    controls/treelistctrltest.cpp
+    controls/virtlistctrltest.cpp
+    controls/webtest.cpp
+    controls/windowtest.cpp
+    controls/dialogtest.cpp
+    events/clone.cpp
+    # Duplicate this file here to test GUI event loops too.
+    events/evtlooptest.cpp
+    #events/propagation.cpp # Needs some fixes.
+    events/keyboard.cpp
+    # And duplicate this one too as wxExecute behaves differently in
+    # console and GUI applications.
+    exec/exec.cpp
+    font/fonttest.cpp
+    image/image.cpp
+    image/rawbmp.cpp
+    html/htmlparser.cpp
+    html/htmlwindow.cpp
+    html/htmprint.cpp
+    menu/accelentry.cpp
+    menu/menu.cpp
+    misc/guifuncs.cpp
+    misc/selstoretest.cpp
+    misc/garbage.cpp
+    misc/safearrayconverttest.cpp
+    misc/settings.cpp
+    # This one is intentionally duplicated here (it is also part of
+    # non-GUI test) as sockets behave differently in console and GUI
+    # applications.
+    net/socket.cpp
+    persistence/tlw.cpp
+    persistence/dataview.cpp
+    rowheightcache/rowheightcachetest.cpp
+    sizers/boxsizer.cpp
+    sizers/gridsizer.cpp
+    sizers/wrapsizer.cpp
+    toplevel/toplevel.cpp
+    validators/valnum.cpp
+    validators/valtext.cpp
+    window/clientsize.cpp
+    window/setsize.cpp
+    xml/xrctest.cpp
+
+    testprec.h
+    testableframe.h
+    asserthelper.h
+    testdate.h
+    testfile.h
+    #testimage.h # Doesn't work yet.
+    controls/bookctrlbasetest.h
+    controls/itemcontainertest.h
+    controls/listbasetest.h
+    controls/pickerbasetest.h
+    controls/textentrytest.h
+    persistence/testpersistence.h
+)
+
+set(TEST_GUI_DATA
+    horse.ani
+    horse.bmp
+    horse.cur
+    horse.gif
+    horse.ico
+    horse.jpg
+    horse.pcx
+    horse.png
+    horse.pnm
+    horse.tga
+    horse.tif
+    horse.xpm
+    image/horse_grey.bmp
+    image/horse_grey_flipped.bmp
+    image/horse_rle4.bmp
+    image/horse_rle4_flipped.bmp
+    image/horse_rle8.bmp
+    image/horse_rle8_flipped.bmp
+    image/cross_bicubic_256x256.png
+    image/cross_bilinear_256x256.png
+    image/cross_box_average_256x256.png
+    image/cross_nearest_neighb_256x256.png
+    image/horse_bicubic_50x50.png
+    image/horse_bicubic_100x100.png
+    image/horse_bicubic_150x150.png
+    image/horse_bicubic_300x300.png
+    image/horse_bilinear_50x50.png
+    image/horse_bilinear_100x100.png
+    image/horse_bilinear_150x150.png
+    image/horse_bilinear_300x300.png
+    image/horse_box_average_50x50.png
+    image/horse_box_average_100x100.png
+    image/horse_box_average_150x150.png
+    image/horse_box_average_300x300.png
+    image/paste_input_background.png
+    image/paste_input_black.png
+    image/paste_input_overlay_transparent_border_opaque_square.png
+    image/paste_input_overlay_transparent_border_semitransparent_circle.png
+    image/paste_input_overlay_transparent_border_semitransparent_square.png
+    image/paste_result_background_plus_circle_plus_square.png
+    image/paste_result_background_plus_overlay_transparent_border_opaque_square.png
+    image/paste_result_background_plus_overlay_transparent_border_semitransparent_square.png
+    image/paste_result_no_background_square_over_circle.png
+    image/wx.png
+    image/wx.ico
+    image/toucan.png
+    image/toucan_hue_0.538.png
+    image/toucan_sat_-0.41.png
+    image/toucan_bright_-0.259.png
+    image/toucan_hsv_0.538_-0.41_-0.259.png
+    image/toucan_light_46.png
+    image/toucan_dis_240.png
+    image/toucan_grey.png
+    image/toucan_mono_255_255_255.png
+    intl/ja/internat.mo
+    intl/ja/internat.po
+)
+
+add_executable(test_gui
+    ${TEST_GUI_SRC}
+)
+
+target_compile_features(test_gui PRIVATE cxx_std_23)
+
+target_include_directories(test_gui 
+    PUBLIC
+        ${CMAKE_CURRENT_SOURCE_DIR}
+        ${CMAKE_SOURCE_DIR}/3rdparty/tmp/include
+        ${CMAKE_SOURCE_DIR}/include/msvc
+        ${CMAKE_SOURCE_DIR}/include
+)
+
+target_link_libraries(test_gui
+    PRIVATE
+        doctest::doctest
+)
+
+add_test(test_gui 
+    ${TEST_GUI_SRC}
+    DATA ${TEST_GUI_DATA}
+)
+
+# if(wxUSE_AUI)
+#     target_link_libraries(test_gui PRIVATE wxaui)
+# endif()
+# if(wxUSE_RICHTEXT)
+#     target_link_libraries(test_gui PRIVATE wxrichtext)
+# endif()
+# if(wxUSE_MEDIACTRL)
+#     target_link_libraries(test_gui PRIVATE wxmedia)
+# endif()
+# if(wxUSE_XRC)
+#     target_link_libraries(test_gui PRIVATE wxxrc)
+# endif()
+# if(wxUSE_XML)
+#     target_link_libraries(test_gui PRIVATE wxxml)
+# endif()
+# if(wxUSE_HTML)
+#     target_link_libraries(test_gui PRIVATE wxhtml)
+# endif()
+# if(wxUSE_SOCKETS)
+#     target_link_libraries(test_gui PRIVATE wxnet)
+# endif()
+# if(wxUSE_WEBVIEW)
+#     target_link_libraries(test_gui PRIVATE wxwebview)
+# endif()

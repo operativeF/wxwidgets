@@ -10,13 +10,8 @@
 
 #include "testprec.h"
 
-
-#ifndef WX_PRECOMP
-    #include "wx/app.h"
-    #include "wx/checkbox.h"
-
-    #include <array>
-#endif // WX_PRECOMP
+#include "wx/app.h"
+#include "wx/checkbox.h"
 
 #include "wx/control.h"
 

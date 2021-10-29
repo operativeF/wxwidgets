@@ -10,12 +10,9 @@
 
 #include "testprec.h"
 
-
-#ifndef WX_PRECOMP
-    #include "wx/app.h"
-    #include "wx/sizer.h"
-    #include "wx/listbox.h"
-#endif // WX_PRECOMP
+#include "wx/app.h"
+#include "wx/sizer.h"
+#include "wx/listbox.h"
 
 #include "asserthelper.h"
 

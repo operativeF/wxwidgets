@@ -13,16 +13,11 @@
 
 #if wxUSE_IMAGE
 
-
-#ifndef WX_PRECOMP
-    #include "wx/bitmap.h"
-    #include "wx/cursor.h"
-    #include "wx/icon.h"
-    #include "wx/palette.h"
-    #include "wx/log.h"
-
-    #include <array>
-#endif // WX_PRECOMP
+#include "wx/bitmap.h"
+#include "wx/cursor.h"
+#include "wx/icon.h"
+#include "wx/palette.h"
+#include "wx/log.h"
 
 #include "wx/anidecod.h" // wxImageArray
 #include "wx/url.h"

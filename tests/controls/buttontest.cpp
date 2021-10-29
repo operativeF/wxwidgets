@@ -12,11 +12,8 @@
 
 #if wxUSE_BUTTON
 
-
-#ifndef WX_PRECOMP
-    #include "wx/app.h"
-    #include "wx/button.h"
-#endif // WX_PRECOMP
+#include "wx/app.h"
+#include "wx/button.h"
 
 #include "testableframe.h"
 #include "wx/uiaction.h"

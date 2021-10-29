@@ -10,13 +10,10 @@
 
 #include "testprec.h"
 
-
-#ifndef WX_PRECOMP
-    #include "wx/app.h"
-    #include "wx/event.h"
-    #include "wx/scrolwin.h"
-    #include "wx/window.h"
-#endif // WX_PRECOMP
+#include "wx/app.h"
+#include "wx/event.h"
+#include "wx/scrolwin.h"
+#include "wx/window.h"
 
 #include "wx/docmdi.h"
 #include "wx/frame.h"

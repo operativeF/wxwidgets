@@ -10,11 +10,8 @@
 
 #include "testprec.h"
 
-
-#ifndef WX_PRECOMP
-    #include "wx/event.h"
-    #include "wx/timer.h"
-#endif // WX_PRECOMP
+#include "wx/event.h"
+#include "wx/timer.h"
 
 TEST_CASE("EventClone")
 {

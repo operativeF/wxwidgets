@@ -10,14 +10,11 @@
 
 #include "testprec.h"
 
-
-#ifndef WX_PRECOMP
-    #include "wx/app.h"
-    #include "wx/dialog.h"
-    #include "wx/frame.h"
-    #include "wx/textctrl.h"
-    #include "wx/toplevel.h"
-#endif // WX_PRECOMP
+#include "wx/app.h"
+#include "wx/dialog.h"
+#include "wx/frame.h"
+#include "wx/textctrl.h"
+#include "wx/toplevel.h"
 
 #include "testableframe.h"
 

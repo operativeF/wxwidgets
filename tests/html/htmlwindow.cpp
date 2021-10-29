@@ -12,12 +12,7 @@
 
 #if wxUSE_HTML
 
-
-#ifndef WX_PRECOMP
-    #include "wx/app.h"
-
-    #include <memory>
-#endif // WX_PRECOMP
+#include "wx/app.h"
 
 #include "wx/html/htmlwin.h"
 #include "wx/uiaction.h"

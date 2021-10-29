@@ -11,12 +11,9 @@
 
 #if wxUSE_VALIDATORS && wxUSE_UIACTIONSIMULATOR
 
-
-#ifndef WX_PRECOMP
-    #include "wx/app.h"
-    #include "wx/textctrl.h"
-    #include "wx/valtext.h"
-#endif // WX_PRECOMP
+#include "wx/app.h"
+#include "wx/textctrl.h"
+#include "wx/valtext.h"
 
 #include "wx/uiaction.h"
 

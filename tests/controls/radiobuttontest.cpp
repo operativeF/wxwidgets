@@ -12,15 +12,12 @@
 
 #if wxUSE_RADIOBTN
 
-
-#ifndef WX_PRECOMP
-    #include "wx/app.h"
-    #include "wx/button.h"
-    #include "wx/panel.h"
-    #include "wx/radiobut.h"
-    #include "wx/sizer.h"
-    #include "wx/stattext.h"
-#endif // WX_PRECOMP
+#include "wx/app.h"
+#include "wx/button.h"
+#include "wx/panel.h"
+#include "wx/radiobut.h"
+#include "wx/sizer.h"
+#include "wx/stattext.h"
 
 #include "wx/uiaction.h"
 #include "testableframe.h"

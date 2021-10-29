@@ -12,11 +12,7 @@
 
 #if wxUSE_SEARCHCTRL
 
-
-#ifndef WX_PRECOMP
-    #include "wx/app.h"
-#endif // WX_PRECOMP
-
+#include "wx/app.h"
 #include "wx/srchctrl.h"
 
 #include "testwindow.h"

@@ -13,12 +13,8 @@
 #if wxUSE_GRID
 
 
-#ifndef WX_PRECOMP
-    #include "wx/app.h"
-    #include "wx/dcclient.h"
-
-    #include <array>
-#endif // WX_PRECOMP
+#include "wx/app.h"
+#include "wx/dcclient.h"
 
 #include "wx/grid.h"
 #include "wx/headerctrl.h"

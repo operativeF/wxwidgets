@@ -10,12 +10,8 @@
 
 #include "testprec.h"
 
-
-#ifndef WX_PRECOMP
-    #include "wx/app.h"
-    #include "wx/sizer.h"
-    #include <vector>
-#endif // WX_PRECOMP
+#include "wx/app.h"
+#include "wx/sizer.h"
 
 #include "wx/window.h"
 

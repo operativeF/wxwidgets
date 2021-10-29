@@ -13,13 +13,9 @@
 
 #if wxUSE_UIACTIONSIMULATOR
 
-#ifndef WX_PRECOMP
-    #include "wx/app.h"
-    #include "wx/event.h"
-    #include "wx/window.h"
-
-    #include <vector>
-#endif // WX_PRECOMP
+#include "wx/app.h"
+#include "wx/event.h"
+#include "wx/window.h"
 
 #include "wx/uiaction.h"
 
