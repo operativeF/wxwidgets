@@ -9,8 +9,6 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include "wx/wxprec.h"
-
 #if wxUSE_UIACTIONSIMULATOR
 
 #include "wx/uiaction.h"

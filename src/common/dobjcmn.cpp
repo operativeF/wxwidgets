@@ -8,12 +8,10 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_DATAOBJ
 
 #include "wx/dataobj.h"
+#include "wx/image.h"
 #include "wx/mstream.h"
 #include "wx/textbuf.h"
 
@@ -30,7 +28,7 @@ WX_DEFINE_LIST(wxSimpleDataObjectList)
 // ----------------------------------------------------------------------------
 
 static wxDataFormat dataFormatInvalid;
-WXDLLEXPORT const wxDataFormat& wxFormatInvalid = dataFormatInvalid;
+const wxDataFormat& wxFormatInvalid = dataFormatInvalid;
 
 // ============================================================================
 // implementation

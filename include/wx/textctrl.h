@@ -276,7 +276,7 @@ enum class wxTextAttrUnderlineType
 // wxTextAttr: a structure containing the visual attributes of a text
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxTextAttr
+class wxTextAttr
 {
 public:
     wxTextAttr() = default;
@@ -537,7 +537,7 @@ private:
 // wxTextAreaBase: multiline text control specific methods
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxTextAreaBase
+class wxTextAreaBase
 {
 public:
     virtual ~wxTextAreaBase() = default;
@@ -640,8 +640,8 @@ protected:
 // and so any classes which "look like" wxTextCtrl (such as wxRichTextCtrl)
 // but don't need the (native) implementation bits from wxTextEntry should
 // actually derive from this one and not wxTextCtrlBase
-class WXDLLIMPEXP_CORE wxTextCtrlIface : public wxTextAreaBase,
-                                         public wxTextEntryBase
+class wxTextCtrlIface : public wxTextAreaBase,
+                        public wxTextEntryBase
 {
 public:
     wxTextCtrlIface& operator=(wxTextCtrlIface&&) = delete;
@@ -667,7 +667,7 @@ protected:
 // wxTextCtrl: a single or multiple line text zone where user can edit text
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxTextCtrlBase : public wxControl,
+class wxTextCtrlBase : public wxControl,
 #if wxHAS_TEXT_WINDOW_STREAM
                                    public std::streambuf,
 #endif

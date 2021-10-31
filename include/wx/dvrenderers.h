@@ -75,13 +75,13 @@ private:
     wxDECLARE_DYNAMIC_CLASS(wxDataViewIconText);
 };
 
-DECLARE_VARIANT_OBJECT_EXPORTED(wxDataViewIconText, WXDLLIMPEXP_CORE)
+DECLARE_VARIANT_OBJECT_EXPORTED(wxDataViewIconText)
 
 // ----------------------------------------------------------------------------
 // wxDataViewCheckIconText: value class used by wxDataViewCheckIconTextRenderer
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxDataViewCheckIconText : public wxDataViewIconText
+class wxDataViewCheckIconText : public wxDataViewIconText
 {
 public:
     wxDataViewCheckIconText(const std::string& text = std::string(),
@@ -101,7 +101,7 @@ private:
     wxDECLARE_DYNAMIC_CLASS(wxDataViewCheckIconText);
 };
 
-DECLARE_VARIANT_OBJECT_EXPORTED(wxDataViewCheckIconText, WXDLLIMPEXP_CORE)
+DECLARE_VARIANT_OBJECT_EXPORTED(wxDataViewCheckIconText)
 
 // ----------------------------------------------------------------------------
 // wxDataViewRendererBase

@@ -11,12 +11,7 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include "wx/wxprec.h"
-
-#ifndef WX_PRECOMP
-    #include "wx/frame.h"
-#endif
-
+#include "wx/frame.h"
 #include "wx/laywin.h"
 #include "wx/mdi.h"
 

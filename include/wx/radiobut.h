@@ -11,13 +11,12 @@
 #ifndef _WX_RADIOBUT_H_BASE_
 #define _WX_RADIOBUT_H_BASE_
 
-#include "wx/defs.h"
-
 #if wxUSE_RADIOBTN
 
+#include "wx/defs.h"
 #include "wx/control.h"
 
-class WXDLLIMPEXP_FWD_CORE wxRadioButton;
+class wxRadioButton;
 
 /*
  * wxRadioButton style flag
@@ -37,7 +36,7 @@ class WXDLLIMPEXP_FWD_CORE wxRadioButton;
     using wxRadioButtonBaseBase = wxControl;
 #endif
 
-class WXDLLIMPEXP_CORE wxRadioButtonBase : public wxRadioButtonBaseBase
+class wxRadioButtonBase : public wxRadioButtonBaseBase
 {
 public:
     wxRadioButtonBase& operator=(wxRadioButtonBase&&) = delete;

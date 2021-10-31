@@ -3,13 +3,15 @@
 
 #include <cmath>
 
-struct WXDLLIMPEXP_CORE wxSize
+#include "wx/geometry/point.h"
+
+struct wxSize
 {
     int x {0};
     int y {0};
 
     // constructors
-    constexpr wxSize() noexcept {};
+    constexpr wxSize() noexcept {}
     constexpr wxSize(int xx, int yy) noexcept : x(xx), y(yy) { }
 
     constexpr wxSize& operator+=(const wxSize& sz) { x += sz.x; y += sz.y; return *this; }

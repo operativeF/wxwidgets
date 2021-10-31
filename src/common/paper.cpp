@@ -10,7 +10,7 @@
 
 #if wxUSE_PRINTING_ARCHITECTURE
 
-#if defined(__WXMSW__)
+#ifdef WX_WINDOWS
     #include "wx/msw/wrapcdlg.h"
 #endif // MSW
 
@@ -20,12 +20,12 @@
 #include "wx/module.h"
 #include "wx/paper.h"
 
-#ifdef __WXMSW__
+#ifdef WX_WINDOWS
     #ifndef __WIN32__
         #include <print.h>
     #endif
 #endif
- // End __WXMSW__
+ // End WX_WINDOWS
 
 /*
  * Paper size database for all platforms

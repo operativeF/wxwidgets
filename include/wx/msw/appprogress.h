@@ -13,10 +13,10 @@
 #include <memory>
 #include <vector>
 
-class WXDLLIMPEXP_FWD_CORE wxTaskBarButton;
+class wxTaskBarButton;
+class wxWindow;
 
-class WXDLLIMPEXP_CORE wxAppProgressIndicator
-    : public wxAppProgressIndicatorBase
+class wxAppProgressIndicator : public wxAppProgressIndicatorBase
 {
 public:
     wxAppProgressIndicator(wxWindow* parent = nullptr, int maxValue = 100);

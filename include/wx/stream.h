@@ -11,22 +11,22 @@
 #ifndef _WX_WXSTREAM_H__
 #define _WX_WXSTREAM_H__
 
-#include "wx/defs.h"
-
 #if wxUSE_STREAMS
+
+#include "wx/defs.h"
 
 #include "wx/filefn.h"  // for wxFileOffset, wxInvalidOffset and wxSeekMode
 #include "wx/object.h"
 #include "wx/string.h"
 
-class WXDLLIMPEXP_FWD_BASE wxStreamBase;
-class WXDLLIMPEXP_FWD_BASE wxInputStream;
-class WXDLLIMPEXP_FWD_BASE wxOutputStream;
+class wxStreamBase;
+class wxInputStream;
+class wxOutputStream;
 
 typedef wxInputStream& (*__wxInputManip)(wxInputStream&);
 typedef wxOutputStream& (*__wxOutputManip)(wxOutputStream&);
 
-WXDLLIMPEXP_BASE wxOutputStream& wxEndL(wxOutputStream& o_stream);
+wxOutputStream& wxEndL(wxOutputStream& o_stream);
 
 // ----------------------------------------------------------------------------
 // constants
@@ -50,7 +50,7 @@ constexpr auto wxEOF = gsl::narrow_cast<unsigned int>(-1);
 // wxStreamBase: common (but non virtual!) base for all stream classes
 // ---------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxStreamBase
+class wxStreamBase
 {
 public:
     virtual ~wxStreamBase() = default;
@@ -86,7 +86,7 @@ protected:
 // wxInputStream: base class for the input streams
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxInputStream : public wxStreamBase
+class wxInputStream : public wxStreamBase
 {
 public:
     ~wxInputStream();

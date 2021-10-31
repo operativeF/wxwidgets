@@ -177,7 +177,7 @@ int setdrive(int drive)
     newdrive[1] = wxT(':');
     newdrive[2] = wxT('\0');
 #if defined(WX_WINDOWS)
-    if (::SetCurrentDirectory(newdrive))
+    if (::SetCurrentDirectoryW(newdrive))
 #else
     // VA doesn't know what LPSTR is and has its own set
     if (!DosSetCurrentDir((PSZ)newdrive))

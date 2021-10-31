@@ -6,9 +6,6 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include "wx/wxprec.h"
-
-
 #if wxUSE_FILESYSTEM && wxUSE_STREAMS
 
 #include "wx/fs_mem.h"

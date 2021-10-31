@@ -214,7 +214,7 @@ bool wxIFFDecoder::CanRead()
     std::array<unsigned char, 12> buf;
 
     // TODO: Use span
-    if ( !m_f->Read(buf, buf.size()) )
+    if ( !m_f->Read(buf.data(), buf.size()) )
         return false;
 
     // TODO: Change this.

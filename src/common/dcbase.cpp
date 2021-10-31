@@ -8,8 +8,6 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
 #include "wx/dcprint.h"
 #include "wx/prntbase.h"
 #include "wx/scopeguard.h"
@@ -19,11 +17,6 @@
 #include "wx/dcscreen.h"
 #include "wx/module.h"
 #include "wx/window.h"
-
-#ifndef WX_PRECOMP
-    #include <array>
-    #include <cmath>
-#endif
 
 #include "wx/private/textmeasure.h"
 
@@ -74,6 +67,9 @@
     #include "wx/qt/dcmemory.h"
     #include "wx/qt/dcscreen.h"
 #endif
+
+#include <array>
+#include <cmath>
 
 //----------------------------------------------------------------------------
 // wxDCFactory

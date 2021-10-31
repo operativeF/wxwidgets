@@ -17,10 +17,10 @@
 
 #include <vector>
 
-class WXDLLIMPEXP_FWD_CORE wxClientDC;
-class WXDLLIMPEXP_FWD_CORE wxToolTip;
+class wxClientDC;
+class wxToolTip;
 
-class WXDLLIMPEXP_CORE wxStatusBar : public wxStatusBarBase
+class wxStatusBar : public wxStatusBarBase
 {
 public:
     

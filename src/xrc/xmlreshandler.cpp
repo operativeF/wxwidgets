@@ -7,11 +7,9 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include "wx/wxprec.h"
-
-
 #if wxUSE_XRC
 
+#include "wx/event.h"
 #include "wx/xrc/xmlreshandler.h"
 
 wxIMPLEMENT_ABSTRACT_CLASS(wxXmlResourceHandler, wxObject);

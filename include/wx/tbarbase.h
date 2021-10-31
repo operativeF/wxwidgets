@@ -11,14 +11,9 @@
 #ifndef _WX_TBARBASE_H_
 #define _WX_TBARBASE_H_
 
-// ----------------------------------------------------------------------------
-// headers
-// ----------------------------------------------------------------------------
-
-#include "wx/defs.h"
-
 #if wxUSE_TOOLBAR
 
+#include "wx/defs.h"
 #include "wx/bitmap.h"
 #include "wx/list.h"
 #include "wx/control.h"
@@ -51,7 +46,7 @@ enum class wxToolBarToolStyle
 // for the applications status bar.
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxToolBarToolBase
+class wxToolBarToolBase
 {
 public:
 
@@ -240,7 +235,7 @@ WX_DECLARE_EXPORTED_LIST(wxToolBarToolBase, wxToolBarToolsList);
 // the base class for all toolbars
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxToolBarBase : public wxControl
+class wxToolBarBase : public wxControl
 {
 public:
     wxToolBarBase();

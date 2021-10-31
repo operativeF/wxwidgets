@@ -15,7 +15,7 @@
 #include <vector>
 
 // General item class
-class WXDLLIMPEXP_CORE wxControl : public wxControlBase
+class wxControl : public wxControlBase
 {
 public:
     wxControl() = default;

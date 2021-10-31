@@ -8,12 +8,6 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-#ifndef WX_PRECOMP
-    #include <cmath>
-#endif
-
 #include "wx/geometry/size.h"
 #include "wx/geometry/point.h"
 #include "wx/geometry/rect.h"
@@ -32,6 +26,8 @@
 #include "wx/palette.h"
 #include "wx/pen.h"
 #include "wx/settings.h"
+
+#include <cmath>
 
 wxIMPLEMENT_ABSTRACT_CLASS(wxGDIObject, wxObject);
 

@@ -8,9 +8,6 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include "wx/wxprec.h"
-
-
 #if wxUSE_PRINTING_ARCHITECTURE && wxUSE_POSTSCRIPT
 
 #include "wx/generic/dcpsg.h"
@@ -20,19 +17,16 @@
 #include "wx/dcmemory.h"
 #include "wx/image.h"
 #include "wx/icon.h"
-
-#ifndef WX_PRECOMP
-    #include <cmath>
-    #include <numbers>
-    #include <string_view>
-#endif // WX_PRECOMP
-
+#include "wx/font.h"
 #include "wx/prntbase.h"
 #include "wx/generic/prntdlgg.h"
 #include "wx/paper.h"
 #include "wx/filename.h"
 #include "wx/stdpaths.h"
 
+#include <cmath>
+#include <numbers>
+#include <string_view>
 
 #ifdef __WXMSW__
 
@@ -1422,7 +1416,7 @@ void wxPostScriptDCImpl::DoDrawRotatedText( const wxString& text, const wxPoint&
     PsPrint( buffer );
 
     wxCoord w, h;
-    GetOwner()->GetMultiLineTextExtent(text, &w, &h);
+    GetOwner()->GetMultiLineTextExtent(text);
     // "upper left" and "upper right"
     CalcBoundingBox(pt.x, pt.y);
     CalcBoundingBox(pt.x + wxCoord(w*cos(rad)), pt.y - wxCoord(w * std::sin(rad)));

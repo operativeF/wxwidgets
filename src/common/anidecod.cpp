@@ -6,12 +6,10 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_STREAMS && wxUSE_ICO_CUR
 
 #include "wx/anidecod.h"
+#include "wx/gdicmn.h"
 
 #include <chrono>
 

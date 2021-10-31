@@ -8,9 +8,6 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #include "wx/intl.h"
 #include "wx/string.h"
 #include "wx/accel.h"

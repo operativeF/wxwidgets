@@ -28,7 +28,7 @@
 #define WXADDPAPER(paperId, platformId, name, w, h) AddPaperType(paperId, 0, name, w, h)
 #endif
 
-class WXDLLIMPEXP_CORE wxPrintPaperType
+class wxPrintPaperType
 {
 public:
     wxPrintPaperType() = default;
@@ -65,9 +65,9 @@ public:
 
 WX_DECLARE_STRING_HASH_MAP(wxPrintPaperType*, wxStringToPrintPaperTypeHashMap);
 
-class WXDLLIMPEXP_FWD_CORE wxPrintPaperTypeList;
+class wxPrintPaperTypeList;
 
-class WXDLLIMPEXP_CORE wxPrintPaperDatabase
+class wxPrintPaperDatabase
 {
 public:
     wxPrintPaperDatabase();

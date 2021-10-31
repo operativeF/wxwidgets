@@ -18,6 +18,7 @@
 #include "wx/string.h"
 #include "wx/stringutils.h"
 
+#include <boost/tmp.hpp>
 #include <fmt/core.h>
 #include <fmt/format.h>
 
@@ -73,7 +74,7 @@ constexpr unsigned char wxALPHA_OPAQUE = 0xff;
 
 #if wxUSE_VARIANT
 #include "wx/variant.h"
-DECLARE_VARIANT_OBJECT_EXPORTED(wxColour,WXDLLIMPEXP_CORE)
+DECLARE_VARIANT_OBJECT_EXPORTED(wxColour)
 #endif
 
 namespace wx::color

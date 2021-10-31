@@ -5,9 +5,6 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include "wx/wxprec.h"
-
-
 #if wxUSE_FONTDLG || wxUSE_FONTPICKERCTRL
 
 #include "wx/fontdata.h"

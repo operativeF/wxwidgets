@@ -8,13 +8,6 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "wx/wxprec.h"
-
-
-#ifndef WX_PRECOMP
-    #include <memory>
-#endif //WX_PRECOMP
-
 #include "wx/app.h"
 #include "wx/log.h"
 #include "wx/intl.h"
@@ -24,6 +17,8 @@
 #if wxUSE_DYNLIB_CLASS
     #include "wx/dynlib.h"
 #endif // wxUSE_DYNLIB_CLASS
+
+#include <memory>
 
 // ----------------------------------------------------------------------------
 // wxRendererPtr: auto pointer holding the global renderer

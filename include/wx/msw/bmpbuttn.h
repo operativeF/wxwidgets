@@ -13,10 +13,10 @@
 
 #include <string>
 
-class WXDLLIMPEXP_FWD_CORE wxBitmap;
+class wxBitmap;
 
 
-class WXDLLIMPEXP_CORE wxBitmapButton : public wxBitmapButtonBase
+class wxBitmapButton : public wxBitmapButtonBase
 {
 public:
     wxBitmapButton() = default;

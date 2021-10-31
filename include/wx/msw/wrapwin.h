@@ -23,13 +23,6 @@
     #define STRICT 1
 #endif
 
-// this macro tells windows.h to not define min() and max() as macros: we need
-// this as otherwise they conflict with standard C++ functions
-#ifndef NOMINMAX
-    #define NOMINMAX
-#endif // NOMINMAX
-
-
 // When the application wants to use <winsock2.h> (this is required for IPv6
 // support, for example), we must include it before winsock.h, and as windows.h
 // includes winsock.h, we have to do it before including it.

@@ -9,18 +9,14 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 
-
-
-#ifndef WX_PRECOMP
-    #include <memory>
-#endif
-
 #include "wx/geometry/point.h"
 #include "wx/geometry/rect.h"
 #include "wx/window.h"
 #include "wx/module.h"
 
 #include "wx/private/display.h"
+
+#include <memory>
 
 #if wxUSE_DISPLAY
 

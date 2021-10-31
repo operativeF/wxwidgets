@@ -24,9 +24,6 @@
 #ifndef _WX_RENDERER_H_
 #define _WX_RENDERER_H_
 
-class WXDLLIMPEXP_FWD_CORE wxDC;
-class WXDLLIMPEXP_FWD_CORE wxWindow;
-
 #include "wx/geometry/point.h"
 #include "wx/geometry/rect.h"
 #include "wx/geometry/size.h"
@@ -36,6 +33,9 @@ class WXDLLIMPEXP_FWD_CORE wxWindow;
 #include "wx/string.h"
 
 #include <string>
+
+class wxDC;
+class wxWindow;
 
 // some platforms have their own renderers, others use the generic one
 #if defined(__WXMSW__) || ( defined(__WXMAC__) && wxOSX_USE_COCOA_OR_CARBON ) || defined(__WXGTK__)
@@ -98,7 +98,7 @@ enum class wxTitleBarButton
 // ----------------------------------------------------------------------------
 
 // wxSplitterWindow parameters
-struct WXDLLIMPEXP_CORE wxSplitterRenderParams
+struct wxSplitterRenderParams
 {
     // the only way to initialize this struct is by using this ctor
     wxSplitterRenderParams(wxCoord widthSash_, wxCoord border_, bool isSens_)
@@ -118,7 +118,7 @@ struct WXDLLIMPEXP_CORE wxSplitterRenderParams
 
 
 // extra optional parameters for DrawHeaderButton
-struct WXDLLIMPEXP_CORE wxHeaderButtonParams
+struct wxHeaderButtonParams
 {
     wxColour    m_arrowColour;
     wxColour    m_selectionColour;
@@ -138,7 +138,7 @@ enum class wxHeaderSortIconType
 
 
 // wxRendererNative interface version
-struct WXDLLIMPEXP_CORE wxRendererVersion
+struct wxRendererVersion
 {
     wxRendererVersion(int version_, int age_) : version(version_), age(age_) { }
 
@@ -172,7 +172,7 @@ struct WXDLLIMPEXP_CORE wxRendererVersion
 // wxRendererNative: abstracts drawing methods needed by the native controls
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxRendererNative
+class wxRendererNative
 {
 public:
     // drawing functions
@@ -419,7 +419,7 @@ public:
 // wxDelegateRendererNative: allows reuse of renderers code
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxDelegateRendererNative : public wxRendererNative
+class wxDelegateRendererNative : public wxRendererNative
 {
 public:
     wxDelegateRendererNative()

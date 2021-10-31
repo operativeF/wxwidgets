@@ -9,10 +9,11 @@
 #ifndef _WX_IMAGE_H_
 #define _WX_IMAGE_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_IMAGE
 
+#include "wx/defs.h"
+
+#include "wx/gdicmn.h"
 #include "wx/object.h"
 #include "wx/geometry/point.h"
 #include "wx/geometry/rect.h"
@@ -89,9 +90,9 @@ constexpr unsigned char wxIMAGE_ALPHA_OPAQUE = 0xff;
 // classes
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_FWD_CORE wxImageHandler;
-class WXDLLIMPEXP_FWD_CORE wxImage;
-class WXDLLIMPEXP_FWD_CORE wxPalette;
+class wxImageHandler;
+class wxImage;
+class wxPalette;
 
 
 //-----------------------------------------------------------------------------
@@ -100,14 +101,14 @@ class WXDLLIMPEXP_FWD_CORE wxPalette;
 
 #if wxUSE_VARIANT
 #include "wx/variant.h"
-DECLARE_VARIANT_OBJECT_EXPORTED(wxImage,WXDLLIMPEXP_CORE)
+DECLARE_VARIANT_OBJECT_EXPORTED(wxImage)
 #endif
 
 //-----------------------------------------------------------------------------
 // wxImageHandler
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxImageHandler: public wxObject
+class wxImageHandler: public wxObject
 {
 public:
     wxImageHandler() = default;
@@ -177,7 +178,7 @@ private:
 // wxImageHistogram
 //-----------------------------------------------------------------------------
 
-struct WXDLLIMPEXP_CORE wxImageHistogramEntry
+struct wxImageHistogramEntry
 {
     unsigned long index{0};
     unsigned long value{0};
@@ -263,7 +264,7 @@ struct RGBValue
     unsigned char blue{ 0 };
 };
 
-class WXDLLIMPEXP_CORE wxImage: public wxObject
+class wxImage: public wxObject
 {
 public:
     // hue, saturation and value are doubles in the range 0.0..1.0
@@ -604,7 +605,7 @@ protected:
     void ApplyToAllPixels(void (*filter)(wxImage *, unsigned char *, T), T value);
 
 private:
-    friend class WXDLLIMPEXP_FWD_CORE wxImageHandler;
+    friend class wxImageHandler;
 
     // Possible values for MakeEmptyClone() flags.
     enum
@@ -638,9 +639,9 @@ private:
 };
 
 
-extern void WXDLLIMPEXP_CORE wxInitAllImageHandlers();
+extern void wxInitAllImageHandlers();
 
-extern WXDLLIMPEXP_DATA_CORE(wxImage)    wxNullImage;
+extern wxImage    wxNullImage;
 
 //-----------------------------------------------------------------------------
 // wxImage handlers

@@ -8,16 +8,10 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_CHOICE
 
 #include "wx/choice.h"
 #include "wx/private/textmeasure.h"
-
-#ifndef WX_PRECOMP
-#endif
 
 wxDEFINE_FLAGS( wxChoiceStyle )
 wxBEGIN_FLAGS( wxChoiceStyle )

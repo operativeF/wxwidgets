@@ -9,10 +9,9 @@
 #ifndef _WX_FS_MEM_H_
 #define _WX_FS_MEM_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_FILESYSTEM
 
+#include "wx/defs.h"
 #include "wx/filesys.h"
 
 #include "wx/hashmap.h"
@@ -28,7 +27,7 @@ WX_DECLARE_STRING_HASH_MAP(wxMemoryFSFile *, wxMemoryFSHash);
 // wxMemoryFSHandlerBase
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxMemoryFSHandlerBase : public wxFileSystemHandler
+class wxMemoryFSHandlerBase : public wxFileSystemHandler
 {
 public:
     wxMemoryFSHandlerBase() = default;
@@ -78,7 +77,7 @@ protected:
 #if wxUSE_GUI
 
 // add GUI-only operations to the base class
-class WXDLLIMPEXP_CORE wxMemoryFSHandler : public wxMemoryFSHandlerBase
+class wxMemoryFSHandler : public wxMemoryFSHandlerBase
 {
 public:
     // bring the base class versions into the scope, otherwise they would be

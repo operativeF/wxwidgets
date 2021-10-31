@@ -8,8 +8,6 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "wx/wxprec.h"
-
 #if wxUSE_FILECTRL
 
 #include "wx/filectrl.h"

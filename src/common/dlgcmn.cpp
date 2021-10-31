@@ -8,9 +8,6 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #include "wx/app.h"
 #include "wx/button.h"
 #include "wx/dcclient.h"

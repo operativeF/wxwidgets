@@ -11,6 +11,7 @@
 #ifndef _WX_MSW_TOPLEVEL_H_
 #define _WX_MSW_TOPLEVEL_H_
 
+#include "wx/msw/wrapwin.h"
 #include "wx/geometry/rect.h"
 
 #include "wx/weakref.h"
@@ -21,7 +22,7 @@
 // wxTopLevelWindowMSW
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxTopLevelWindowMSW : public wxTopLevelWindowBase
+class wxTopLevelWindowMSW : public wxTopLevelWindowBase
 {
 public:
     wxTopLevelWindowMSW() = default;

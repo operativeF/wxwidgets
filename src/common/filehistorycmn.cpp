@@ -7,32 +7,19 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
-#include "wx/filehistory.h"
-
 #if wxUSE_FILE_HISTORY
 
-#ifndef WX_PRECOMP
-    #include <boost/nowide/convert.hpp>
-    #include <fmt/core.h>
-
-    #include <filesystem>
-#endif
+#include "wx/filehistory.h"
 
 #include "wx/menu.h"
 #include "wx/confbase.h"
 #include "wx/filename.h"
 #include "wx/stringutils.h"
 
-// ============================================================================
-// implementation
-// ============================================================================
+#include <boost/nowide/convert.hpp>
+#include <fmt/core.h>
 
-// ----------------------------------------------------------------------------
-// private helpers
-// ----------------------------------------------------------------------------
+#include <filesystem>
 
 namespace
 {

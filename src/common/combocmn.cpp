@@ -8,19 +8,14 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include "wx/wxprec.h"
-
-
 #include "wx/app.h"
 #include "wx/combo.h"
 #include "wx/display.h"
 #include "wx/dc.h"
 #include "wx/textctrl.h"
 
-#ifndef WX_PRECOMP
-    #ifdef __WXMSW__
-        #include "wx/msw/private.h"
-    #endif
+#ifdef __WXMSW__
+    #include "wx/msw/private.h"
 #endif
 
 #if wxUSE_COMBOBOX

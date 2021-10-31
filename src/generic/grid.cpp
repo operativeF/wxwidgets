@@ -16,8 +16,6 @@
     - Implement row reordering after dealing with the columns.
  */
 
-#include "wx/wxprec.h"
-
 
 #if wxUSE_GRID
 

@@ -8,9 +8,6 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #include "wx/renderer.h"
 
 #include "wx/dc.h"
@@ -34,7 +31,7 @@
 // wxRendererGeneric: our wxRendererNative implementation
 // ----------------------------------------------------------------------------
 
-class WXDLLEXPORT wxRendererGeneric : public wxRendererNative
+class wxRendererGeneric : public wxRendererNative
 {
 public:
     wxRendererGeneric();

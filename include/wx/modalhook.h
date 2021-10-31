@@ -12,7 +12,7 @@
 
 #include <vector>
 
-class WXDLLIMPEXP_FWD_CORE wxDialog;
+class wxDialog;
 
 // ----------------------------------------------------------------------------
 // Class allowing to be notified about any modal dialog calls.
@@ -22,7 +22,7 @@ class WXDLLIMPEXP_FWD_CORE wxDialog;
 // replace them with something else (e.g. just return a predefined value for
 // testing), define an object of this class, override its Enter() and
 // possibly Exit() methods and call Register() on it.
-class WXDLLIMPEXP_CORE wxModalDialogHook
+class wxModalDialogHook
 {
 public:
     // Dtor unregisters the hook if it had been registered.

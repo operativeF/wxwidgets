@@ -481,7 +481,6 @@
    check the consistency of the settings in setup.h: note that this must be
    done after setting wxUSE_UNICODE correctly as it is used in wx/chkconf.h
    and after defining the compiler macros which are used in it too
-   #include "wx/chkconf.h"
  */
 
 /* On OpenVMS with the most recent HP C++ compiler some function (i.e. wscanf)

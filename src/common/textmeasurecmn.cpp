@@ -7,9 +7,6 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #include "wx/dc.h"
 #include "wx/window.h"
 #include "wx/private/textmeasure.h"

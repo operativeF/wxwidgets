@@ -8,17 +8,10 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_TREEBOOK
 
 #include "wx/treebook.h"
-
-#ifndef WX_PRECOMP
-    #include "wx/settings.h"
-#endif
-
+#include "wx/settings.h"
 #include "wx/imaglist.h"
 #include "wx/treectrl.h"
 

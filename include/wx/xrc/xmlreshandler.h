@@ -10,24 +10,25 @@
 #ifndef _WX_XRC_XMLRESHANDLER_H_
 #define _WX_XRC_XMLRESHANDLER_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_XRC
+
+#include "wx/defs.h"
 
 #include "wx/string.h"
 #include "wx/artprov.h"
 #include "wx/colour.h"
 #include "wx/filesys.h"
+#include "wx/font.h"
 #include "wx/imaglist.h"
 
-class WXDLLIMPEXP_FWD_CORE wxAnimation;
-class WXDLLIMPEXP_FWD_CORE wxAnimationCtrlBase;
+class wxAnimation;
+class wxAnimationCtrlBase;
 
-class WXDLLIMPEXP_FWD_XML wxXmlNode;
-class WXDLLIMPEXP_FWD_XML wxXmlResource;
+class wxXmlNode;
+class wxXmlResource;
 
-class WXDLLIMPEXP_FWD_CORE wxXmlResourceHandler;
-class WXDLLIMPEXP_FWD_CORE wxWindow;
+class wxXmlResourceHandler;
+class wxWindow;
 
 
 // Helper macro used by the classes derived from wxXmlResourceHandler but also
@@ -46,7 +47,7 @@ enum
 // wxXmlResourceHandlerImpl class in the "xrc" library while this class is in
 // the "core" itself -- but it is so small that it doesn't matter.
 
-class WXDLLIMPEXP_CORE wxXmlResourceHandlerImplBase : public wxObject
+class wxXmlResourceHandlerImplBase : public wxObject
 {
 public:
     // Constructor.
@@ -136,7 +137,7 @@ protected:
 // Also note that all the methods forwarding to GetImpl() are documented only
 // in wxXmlResourceHandlerImpl in wx/xrc/xmlres.h to avoid duplication.
 
-class WXDLLIMPEXP_CORE wxXmlResourceHandler : public wxObject
+class wxXmlResourceHandler : public wxObject
 {
 public:
     // Constructor creates an unusable object, before anything can be done with

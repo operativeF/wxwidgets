@@ -13,12 +13,13 @@
 #include "wx/defs.h"
 #include "wx/icon.h"
 #include "wx/imaglist.h"
+#include "wx/gdicmn.h"
 
 // ----------------------------------------------------------------------------
 // wxWithImages: mix-in class providing access to wxImageList.
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxWithImages
+class wxWithImages
 {
 public:
     enum

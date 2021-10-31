@@ -9,23 +9,24 @@
 #ifndef _WX_IMAGE_IFF_H_
 #define _WX_IMAGE_IFF_H_
 
-#include "wx/image.h"
-
 //-----------------------------------------------------------------------------
 // wxIFFHandler
 //-----------------------------------------------------------------------------
 
 #if wxUSE_IMAGE && wxUSE_IFF
 
-class WXDLLIMPEXP_CORE wxIFFHandler : public wxImageHandler
+#include "wx/gdicmn.h"
+#include "wx/image.h"
+
+class wxIFFHandler : public wxImageHandler
 {
 public:
     wxIFFHandler()
     {
-        m_name = wxT("IFF file");
-        m_extension = wxT("iff");
+        m_name = "IFF file";
+        m_extension = "iff";
         m_type = wxBitmapType::IFF;
-        m_mime = wxT("image/x-iff");
+        m_mime = "image/x-iff";
     }
 
 #if wxUSE_STREAMS

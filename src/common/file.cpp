@@ -28,7 +28,6 @@
 #define   NOGDI
 #define   NOGDICAPMASKS
 #define   NOMETAFILE
-#define   NOMINMAX
 #define   NOMSG
 #define   NOOPENFILE
 #define   NORASTEROPS

@@ -8,13 +8,7 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "wx/wxprec.h"
-
 #if wxUSE_ANIMATIONCTRL
-
-#ifndef WX_PRECOMP
-    #include <chrono>
-#endif
 
 #include "wx/animate.h"
 #include "wx/generic/animate.h"
@@ -26,6 +20,8 @@
 #include "wx/dcclient.h"
 
 #include "wx/wfstream.h"
+
+#include <chrono>
 
 // ----------------------------------------------------------------------------
 // wxAnimation

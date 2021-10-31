@@ -19,6 +19,7 @@
 
 #include "wx/fontenc.h"         // for wxFontEncoding
 #include "wx/stringutils.h"
+#include "wx/translation.h"
 
 #if wxUSE_GUI
     #include "wx/fontutil.h"    // for wxNativeEncodingInfo

@@ -18,8 +18,8 @@
     #include "wx/event.h"
 #endif
 
-class WXDLLIMPEXP_FWD_CORE wxWindow;
-class WXDLLIMPEXP_FWD_CORE wxWindowBase;
+class wxWindow;
+class wxWindowBase;
 
 /*
     This header declares wxControlContainer class however it's not a real
@@ -33,7 +33,7 @@ class WXDLLIMPEXP_FWD_CORE wxWindowBase;
 // wxControlContainerBase: common part used in both native and generic cases
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxControlContainerBase
+class wxControlContainerBase
 {
 public:
     // default ctor, SetContainerWindow() must be called later
@@ -131,7 +131,7 @@ private:
 // ----------------------------------------------------------------------------
 
 // this must be a real class as we forward-declare it elsewhere
-class WXDLLIMPEXP_CORE wxControlContainer : public wxControlContainerBase
+class wxControlContainer : public wxControlContainerBase
 {
 protected:
     // set the focus to the child which had it the last time
@@ -144,7 +144,7 @@ protected:
 // wxControlContainer for TAB navigation implemented in wx itself
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxControlContainer : public wxControlContainerBase
+class wxControlContainer : public wxControlContainerBase
 {
 public:
     // default ctor, SetContainerWindow() must be called later
@@ -165,7 +165,7 @@ public:
 #endif // wxHAS_NATIVE_TAB_TRAVERSAL/!wxHAS_NATIVE_TAB_TRAVERSAL
 
 // this function is for wxWidgets internal use only
-extern WXDLLIMPEXP_CORE bool wxSetFocusToChild(wxWindow *win, wxWindow **child);
+extern bool wxSetFocusToChild(wxWindow *win, wxWindow **child);
 
 // ----------------------------------------------------------------------------
 // wxNavigationEnabled: Derive from this class to support keyboard navigation
@@ -197,22 +197,22 @@ public:
 
 	wxNavigationEnabled& operator=(wxNavigationEnabled<W>&&) = delete;
 
-    WXDLLIMPEXP_INLINE_CORE bool AcceptsFocus() const override
+    bool AcceptsFocus() const override
     {
         return m_container.AcceptsFocus();
     }
 
-    WXDLLIMPEXP_INLINE_CORE bool AcceptsFocusRecursively() const override
+    bool AcceptsFocusRecursively() const override
     {
         return m_container.AcceptsFocusRecursively();
     }
 
-    WXDLLIMPEXP_INLINE_CORE bool AcceptsFocusFromKeyboard() const override
+    bool AcceptsFocusFromKeyboard() const override
     {
         return m_container.AcceptsFocusFromKeyboard();
     }
 
-    WXDLLIMPEXP_INLINE_CORE void AddChild(wxWindowBase *child) override
+    void AddChild(wxWindowBase *child) override
     {
         BaseWindowClass::AddChild(child);
 
@@ -225,7 +225,7 @@ public:
         }
     }
 
-    WXDLLIMPEXP_INLINE_CORE void RemoveChild(wxWindowBase *child) override
+    void RemoveChild(wxWindowBase *child) override
     {
 #ifndef wxHAS_NATIVE_TAB_TRAVERSAL
         m_container.HandleOnWindowDestroy(child);
@@ -238,7 +238,7 @@ public:
         m_container.UpdateCanFocusChildren();
     }
 
-    WXDLLIMPEXP_INLINE_CORE void SetFocus() override
+    void SetFocus() override
     {
         if ( !m_container.DoSetFocus() )
             BaseWindowClass::SetFocus();
@@ -250,7 +250,7 @@ public:
     }
 
 #ifdef __WXMSW__
-    WXDLLIMPEXP_INLINE_CORE bool HasTransparentBackground() override
+    bool HasTransparentBackground() override
     {
         return m_container.HasTransparentBackground();
     }

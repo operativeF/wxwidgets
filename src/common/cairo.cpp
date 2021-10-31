@@ -7,9 +7,6 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include "wx/wxprec.h"
-
-
 #if wxUSE_CAIRO && !defined(__WXGTK20__)
 
 // keep cairo.h from defining dllimport as we're defining the symbols inside

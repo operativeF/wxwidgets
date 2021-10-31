@@ -8,21 +8,16 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
-
 #include "wx/artprov.h"
 
+#include "wx/dcmemory.h"
 #include "wx/list.h"
 #include "wx/log.h"
 #include "wx/hashmap.h"
 #include "wx/image.h"
 #include "wx/module.h"
 
-#ifndef WX_PRECOMP
-    #include <fmt/core.h>
-#endif
+#include <fmt/core.h>
 
 // ===========================================================================
 // implementation
@@ -218,7 +213,7 @@ void wxArtProvider::RescaleBitmap(wxBitmap& bmp, const wxSize& sizeNeeded)
         wxMemoryDC dc(newBmp);
         double scX = (double)sizeNeeded.GetWidth() / bmp.GetWidth();
         double scY = (double)sizeNeeded.GetHeight() / bmp.GetHeight();
-        dc.SetUserScale(scX, scY);
+        dc.SetUserScale({scX, scY});
         dc.DrawBitmap(bmp, 0, 0);
     }
     bmp = newBmp;

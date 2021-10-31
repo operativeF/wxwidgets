@@ -11,9 +11,9 @@
 #ifndef _WX_CHOICEBOOK_H_
 #define _WX_CHOICEBOOK_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_CHOICEBOOK
+
+#include "wx/defs.h"
 
 #include "wx/bookctrl.h"
 #include "wx/choice.h"
@@ -21,7 +21,7 @@
 
 #include <string>
 
-class WXDLLIMPEXP_FWD_CORE wxChoice;
+class wxChoice;
 
 wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_CHOICEBOOK_PAGE_CHANGED,  wxBookCtrlEvent );
 wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_CHOICEBOOK_PAGE_CHANGING, wxBookCtrlEvent );
@@ -38,7 +38,7 @@ constexpr unsigned int wxCHB_ALIGN_MASK       = wxBK_ALIGN_MASK;
 // wxChoicebook
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxChoicebook : public wxNavigationEnabled<wxBookCtrlBase>
+class wxChoicebook : public wxNavigationEnabled<wxBookCtrlBase>
 {
 public:
     wxChoicebook() = default;

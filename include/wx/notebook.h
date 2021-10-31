@@ -15,10 +15,9 @@
 // headers
 // ----------------------------------------------------------------------------
 
-#include "wx/defs.h"
-
 #if wxUSE_NOTEBOOK
 
+#include "wx/defs.h"
 #include "wx/bookctrl.h"
 
 #include <string>
@@ -62,7 +61,7 @@ constexpr char wxNotebookNameStr[] = "notebook";
 // XTI accessor
 // ----------------------------------------------------------------------------
 
-class WXDLLEXPORT wxNotebookPageInfo : public wxObject
+class wxNotebookPageInfo : public wxObject
 {
 public:
     [[maybe_unused]] bool Create(wxNotebookPage *page,
@@ -99,7 +98,7 @@ WX_DECLARE_EXPORTED_LIST(wxNotebookPageInfo, wxNotebookPageInfoList );
 // wxNotebookBase: define wxNotebook interface
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxNotebookBase : public wxBookCtrlBase
+class wxNotebookBase : public wxBookCtrlBase
 {
 public:
     wxNotebookBase& operator=(wxNotebookBase&&) = delete;

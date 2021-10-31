@@ -13,16 +13,16 @@
 
 #include "wx/iconloc.h"
 
+#include <gsl/gsl>
 
 // a more readable way to tell
 constexpr auto wxICON_SCREEN_DEPTH = gsl::narrow_cast<unsigned int>(-1);
-
 
 // the wxICON_DEFAULT_TYPE (the wxIcon equivalent of wxBITMAP_DEFAULT_TYPE)
 // constant defines the default argument value for wxIcon ctor and wxIcon::LoadFile()
 // functions.
 
-#if defined(__WXMSW__)
+#ifdef WX_WINDOWS
   #define wxICON_DEFAULT_TYPE   wxBitmapType::ICO_Resource
   #include "wx/msw/icon.h"
 #elif defined(__WXMOTIF__)
@@ -64,7 +64,7 @@ constexpr auto wxICON_SCREEN_DEPTH = gsl::narrow_cast<unsigned int>(-1);
 
 #if wxUSE_VARIANT
 #include "wx/variant.h"
-DECLARE_VARIANT_OBJECT_EXPORTED(wxIcon,WXDLLIMPEXP_CORE)
+DECLARE_VARIANT_OBJECT_EXPORTED(wxIcon)
 #endif
 
 

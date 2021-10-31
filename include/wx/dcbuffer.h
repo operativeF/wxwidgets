@@ -13,10 +13,11 @@
 
 #include "wx/dcmemory.h"
 #include "wx/dcclient.h"
+#include "wx/window.h"
 
 #include <memory>
 
-class WXDLLIMPEXP_CORE wxWindow;
+class wxWindow;
 
 // Split platforms into two groups - those which have well-working
 // double-buffering by default, and those which do not.
@@ -145,7 +146,7 @@ private:
 
 // Creates a double buffered wxPaintDC, optionally allowing the
 // user to specify their own buffer to use.
-class WXDLLIMPEXP_CORE wxBufferedPaintDC : public wxBufferedDC
+class wxBufferedPaintDC : public wxBufferedDC
 {
 public:
     // If no bitmap is supplied by the user, a temporary one will be created.
@@ -217,7 +218,7 @@ private:
     #define wxAutoBufferedPaintDCBase           wxBufferedPaintDC
 #endif
 
-class WXDLLIMPEXP_CORE wxAutoBufferedPaintDC : public wxAutoBufferedPaintDCBase
+class wxAutoBufferedPaintDC : public wxAutoBufferedPaintDCBase
 {
 public:
 

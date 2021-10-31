@@ -11,13 +11,9 @@
 #ifndef _WX_CONTROL_H_BASE_
 #define _WX_CONTROL_H_BASE_
 
-// ----------------------------------------------------------------------------
-// headers
-// ----------------------------------------------------------------------------
+#if wxUSE_CONTROLS
 
 #include "wx/defs.h"
-
-#if wxUSE_CONTROLS
 
 #include "wx/window.h"      // base class
 #include "wx/gdicmn.h"      // wxEllipsize...
@@ -33,7 +29,7 @@ constexpr char wxControlNameStr[] = "control";
 // wxControl is the base class for all controls
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxControlBase : public wxWindow
+class wxControlBase : public wxWindow
 {
 public:
     wxControlBase& operator=(wxControlBase&&) = delete;

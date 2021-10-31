@@ -8,18 +8,13 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_FONTENUM
-
-#ifndef WX_PRECOMP
-    #include <string>
-    #include <vector>
-#endif
 
 #include "wx/module.h"
 #include "wx/fontenum.h"
+
+#include <string>
+#include <vector>
 
 namespace
 {

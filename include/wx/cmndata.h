@@ -11,19 +11,19 @@
 #ifndef _WX_CMNDATA_H_BASE_
 #define _WX_CMNDATA_H_BASE_
 
-#include "wx/printercfg.h"
-
 #if wxUSE_PRINTING_ARCHITECTURE
 
+#include "wx/printercfg.h"
 #include "wx/geometry/point.h"
+#include "wx/geometry/size.h"
 
 #include <string>
 
-class WXDLLIMPEXP_FWD_CORE wxPrintNativeDataBase;
+class wxPrintNativeDataBase;
 
 constexpr unsigned int wxPRINTMEDIA_DEFAULT = 0;
 
-class WXDLLIMPEXP_CORE wxPrintData
+class wxPrintData
 {
 public:
     wxPrintData();
@@ -112,7 +112,7 @@ private:
  * from the dialog.
  */
 
-class WXDLLIMPEXP_CORE wxPrintDialogData
+class wxPrintDialogData
 {
 public:
     wxPrintDialogData();
@@ -181,7 +181,7 @@ private:
 * This is the data used (and returned) by the wxPageSetupDialog.
 */
 
-class WXDLLIMPEXP_CORE wxPageSetupDialogData
+class wxPageSetupDialogData
 {
 public:
     wxPageSetupDialogData();

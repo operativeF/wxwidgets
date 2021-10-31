@@ -6,9 +6,6 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "wx/wxprec.h"
-
-
 #if wxUSE_CALENDARCTRL || wxUSE_DATEPICKCTRL || wxUSE_TIMEPICKCTRL
 
 #include "wx/dateevt.h"

@@ -7,15 +7,13 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_ARTPROVIDER_TANGO
 
 #include "wx/image.h"
 #include "wx/log.h"
 #include "wx/artprov.h"
 #include "wx/mstream.h"
+#include "wx/imagpng.h"
 
 // ----------------------------------------------------------------------------
 // image data

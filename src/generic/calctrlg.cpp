@@ -8,12 +8,11 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
+#if wxUSE_CALENDARCTRL
 
-
-
-#ifndef WX_PRECOMP
-    #include <fmt/core.h>
-#endif //WX_PRECOMP
+#include "wx/spinctrl.h"
+#include "wx/calctrl.h"
+#include "wx/generic/calctrlg.h"
 
 #include "wx/dcclient.h"
 #include "wx/settings.h"
@@ -23,12 +22,7 @@
 #include "wx/stattext.h"
 #include "wx/textctrl.h"
 
-#if wxUSE_CALENDARCTRL
-
-#include "wx/spinctrl.h"
-#include "wx/calctrl.h"
-#include "wx/generic/calctrlg.h"
-
+#include <fmt/core.h>
 
 #define DEBUG_PAINT 0
 

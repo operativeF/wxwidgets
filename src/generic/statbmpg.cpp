@@ -7,8 +7,6 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "wx/wxprec.h"
-
 #if wxUSE_STATBMP
 
 #include "wx/dcclient.h"
@@ -21,9 +19,7 @@
     #include "wx/math.h"
 #endif
 
-#ifndef WX_PRECOMP
-    #include <cmath>
-#endif
+#include <cmath>
 
 bool wxGenericStaticBitmap::Create(wxWindow *parent,
                                    wxWindowID id,

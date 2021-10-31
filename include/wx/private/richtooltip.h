@@ -15,6 +15,9 @@
 #include <chrono>
 #include <memory>
 
+class wxIcon;
+class wxColour;
+
 // ----------------------------------------------------------------------------
 // wxRichToolTipImpl: defines wxRichToolTip implementation.
 // ----------------------------------------------------------------------------

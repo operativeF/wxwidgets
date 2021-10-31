@@ -11,10 +11,9 @@
 #ifndef _WX_STATUSBR_H_BASE_
 #define _WX_STATUSBR_H_BASE_
 
-#include "wx/defs.h"
-
 #if wxUSE_STATUSBAR
 
+#include "wx/defs.h"
 #include "wx/control.h"
 #include "wx/dynarray.h"
 #include "wx/geometry/rect.h"
@@ -53,7 +52,7 @@ constexpr unsigned int wxSB_SUNKEN    = 0x0003;
 // wxStatusBarPane: an helper for wxStatusBar
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxStatusBarPane
+class wxStatusBarPane
 {
 public:
     wxStatusBarPane(unsigned int style = wxSB_NORMAL, int width = 0)
@@ -112,7 +111,7 @@ WX_DECLARE_EXPORTED_OBJARRAY(wxStatusBarPane, wxStatusBarPaneArray);
 // wxStatusBar: a window near the bottom of the frame used for status info
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxStatusBarBase : public wxControl
+class wxStatusBarBase : public wxControl
 {
 public:
     ~wxStatusBarBase();

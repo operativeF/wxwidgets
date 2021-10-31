@@ -17,7 +17,7 @@
 #include <string>
 
 // Checkbox item (single checkbox)
-class WXDLLIMPEXP_CORE wxCheckBox : public wxMSWOwnerDrawnButton<wxCheckBoxBase>
+class wxCheckBox : public wxMSWOwnerDrawnButton<wxCheckBoxBase>
 {
 public:
     wxCheckBox()  = default;

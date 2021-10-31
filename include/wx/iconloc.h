@@ -17,7 +17,7 @@
 // wxIconLocation: describes the location of an icon
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxIconLocationBase
+class wxIconLocationBase
 {
 public:
     // ctor takes the name of the file where the icon is
@@ -40,7 +40,7 @@ private:
 // index of the icon
 #if defined(WX_WINDOWS)
 
-class WXDLLIMPEXP_BASE wxIconLocation : public wxIconLocationBase
+class wxIconLocation : public wxIconLocationBase
 {
 public:
     // ctor takes the name of the file where the icon is and the icons index in
@@ -65,7 +65,7 @@ wxIconLocation::wxIconLocation(const std::string& file, int num)
 #else // !WX_WINDOWS
 
 // must be a class because we forward declare it as class
-class WXDLLIMPEXP_BASE wxIconLocation : public wxIconLocationBase
+class wxIconLocation : public wxIconLocationBase
 {
 public:
     explicit wxIconLocation(const std::string& filename = {})

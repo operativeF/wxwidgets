@@ -7,6 +7,7 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
+#include "wx/defs.h"
 #include "wx/modalhook.h"
 
 #include <algorithm>

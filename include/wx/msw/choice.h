@@ -23,7 +23,7 @@ struct tagCOMBOBOXINFO;
 // Choice item
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxChoice : public wxChoiceBase
+class wxChoice : public wxChoiceBase
 {
 public:
     // ctors

@@ -11,15 +11,10 @@
 #ifndef _WX_LISTBOX_H_BASE_
 #define _WX_LISTBOX_H_BASE_
 
-// ----------------------------------------------------------------------------
-// headers
-// ----------------------------------------------------------------------------
-
-#include "wx/defs.h"
-
 #if wxUSE_LISTBOX
 
 #include "wx/ctrlsub.h"         // base class
+#include "wx/defs.h"
 
 #include <string>
 #include <vector>
@@ -42,7 +37,7 @@ constexpr unsigned int wxLB_EXTENDED       = 0x0080;
 // wxListBox interface is defined by the class wxListBoxBase
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxListBoxBase : public wxControlWithItems
+class wxListBoxBase : public wxControlWithItems
 {
 public:
     wxListBoxBase& operator=(wxListBoxBase&&) = delete;

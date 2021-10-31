@@ -6,10 +6,6 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
-
 #if wxUSE_IMAGE && !defined(__WXMSW__)
 // we have no use for this code in wxMSW...
 
@@ -23,7 +19,10 @@
 // a color different from the start pixel is reached (wxFloodFillStyle::Surface)
 // or fill color is reached (wxFloodFillStyle::Border)
 
-static bool MatchPixel(wxImage *img, int x, int y, int w, int h, const wxColour& c)
+namespace
+{
+
+bool MatchPixel(wxImage *img, int x, int y, int w, int h, const wxColour& c)
 {
     if ((x<0)||(x>=w)||(y<0)||(y>=h)) return false;
 
@@ -33,7 +32,7 @@ static bool MatchPixel(wxImage *img, int x, int y, int w, int h, const wxColour&
     return c.Red() == r && c.Green() == g && c.Blue() == b ;
 }
 
-static bool MatchBoundaryPixel(wxImage *img, int x, int y, int w, int h, const wxColour & fill, const wxColour& bound)
+bool MatchBoundaryPixel(wxImage *img, int x, int y, int w, int h, const wxColour & fill, const wxColour& bound)
 {
     if ((x<0)||(x>=w)||(y<0)||(y>=h)) return true;
 
@@ -48,10 +47,10 @@ static bool MatchBoundaryPixel(wxImage *img, int x, int y, int w, int h, const w
 }
 
 
-static void
+void
 wxImageFloodFill(wxImage *image,
                  wxCoord x, wxCoord y, const wxBrush & fillBrush,
-                 const wxColour& testColour, int style)
+                 const wxColour& testColour, wxFloodFillStyle style)
 {
     /* A diamond flood-fill using a circular queue system.
     Each pixel surrounding the current pixel is added to
@@ -284,14 +283,13 @@ bool wxDoFloodFill(wxDC *dc, wxCoord x, wxCoord y,
     if (!wxRect(0, 0, dcSize.x, dcSize.y).Contains(x_dev, y_dev))
         return false;
 
-    wxBitmap bitmap(dcSize.x, dcSize.y);
+    wxBitmap bitmap(dcSize);
     wxMemoryDC memdc(bitmap);
     // match dc scales
-    double sx, sy;
-    dc->GetUserScale(&sx, &sy);
-    memdc.SetUserScale(sx, sy);
-    dc->GetLogicalScale(&sx, &sy);
-    memdc.SetLogicalScale(sx, sy);
+    auto userScale = dc->GetUserScale();
+    memdc.SetUserScale(userScale);
+    auto logicScale = dc->GetLogicalScale();
+    memdc.SetLogicalScale(logicScale);
 
     // get logical size and origin
     const int w_log = dc->DeviceToLogicalXRel(dcSize.x);
@@ -299,16 +297,18 @@ bool wxDoFloodFill(wxDC *dc, wxCoord x, wxCoord y,
     const int x0_log = dc->DeviceToLogicalX(0);
     const int y0_log = dc->DeviceToLogicalY(0);
 
-    memdc.Blit(0, 0, w_log, h_log, dc, x0_log, y0_log);
+    memdc.Blit({0, 0}, {w_log, h_log}, dc, {x0_log, y0_log});
     memdc.SelectObject(wxNullBitmap);
 
     wxImage image = bitmap.ConvertToImage();
     wxImageFloodFill(&image, x_dev, y_dev, dc->GetBrush(), col, style);
     bitmap = wxBitmap(image);
     memdc.SelectObject(bitmap);
-    dc->Blit(x0_log, y0_log, w_log, h_log, &memdc, 0, 0);
+    dc->Blit({x0_log, y0_log}, {w_log, h_log}, &memdc, {0, 0});
 
     return true;
 }
+
+} // namespace anonymous
 
 #endif // wxUSE_IMAGE

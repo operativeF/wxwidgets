@@ -12,10 +12,11 @@
 #define _WX_MSW_REGION_H_
 
 #include "wx/geometry/rect.h"
+#include "wx/gdicmn.h"
 
 #include <memory>
 
-class WXDLLIMPEXP_CORE wxRegion : public wxRegionWithCombine
+class wxRegion : public wxRegionWithCombine
 {
 public:
     wxRegion() = default;

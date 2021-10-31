@@ -11,13 +11,12 @@
 #ifndef _WX_DATAOBJ_H_BASE_
 #define _WX_DATAOBJ_H_BASE_
 
-// ----------------------------------------------------------------------------
-// headers
-// ----------------------------------------------------------------------------
-#include "wx/defs.h"
-
 #if wxUSE_DATAOBJ
 
+#include "wx/defs.h"
+
+#include "wx/gdicmn.h"
+#include "wx/image.h"
 #include "wx/string.h"
 #include "wx/bitmap.h"
 #include "wx/list.h"
@@ -119,7 +118,7 @@ enum wxDataFormatId
 
 // the value for default argument to some functions (corresponds to
 // wxDF_INVALID)
-extern WXDLLIMPEXP_CORE const wxDataFormat& wxFormatInvalid;
+extern const wxDataFormat& wxFormatInvalid;
 
 // ----------------------------------------------------------------------------
 // wxDataObject represents a piece of data which knows which formats it
@@ -141,7 +140,7 @@ extern WXDLLIMPEXP_CORE const wxDataFormat& wxFormatInvalid;
 // to be supported by SetData() or GetDataHere().
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxDataObjectBase
+class wxDataObjectBase
 {
 public:
     enum Direction
@@ -218,7 +217,7 @@ public:
 // Otherwise, you should use wxDataObjectComposite or wxDataObject directly.
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxDataObjectSimple : public wxDataObject
+class wxDataObjectSimple : public wxDataObject
 {
 public:
     // ctor takes the format we support, but it can also be set later with
@@ -285,7 +284,7 @@ private:
 
 WX_DECLARE_EXPORTED_LIST(wxDataObjectSimple, wxSimpleDataObjectList);
 
-class WXDLLIMPEXP_CORE wxDataObjectComposite : public wxDataObject
+class wxDataObjectComposite : public wxDataObject
 {
 public:
     ~wxDataObjectComposite();
@@ -354,7 +353,7 @@ private:
     #define wxNEEDS_UTF16_FOR_TEXT_DATAOBJ
 #endif
 
-class WXDLLIMPEXP_CORE wxHTMLDataObject : public wxDataObjectSimple
+class wxHTMLDataObject : public wxDataObjectSimple
 {
 public:
     // ctor: you can specify the text here or in SetText(), or override
@@ -393,7 +392,7 @@ private:
     wxString m_html;
 };
 
-class WXDLLIMPEXP_CORE wxTextDataObject : public wxDataObjectSimple
+class wxTextDataObject : public wxDataObjectSimple
 {
 public:
     // ctor: you can specify the text here or in SetText(), or override
@@ -460,7 +459,7 @@ private:
 // wxBitmapDataObject contains a bitmap
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxBitmapDataObjectBase : public wxDataObjectSimple
+class wxBitmapDataObjectBase : public wxDataObjectSimple
 {
 public:
     // ctor: you can specify the bitmap here or in SetBitmap(), or override
@@ -488,7 +487,7 @@ protected:
 //     data from drag and drop operation.
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxFileDataObjectBase : public wxDataObjectSimple
+class wxFileDataObjectBase : public wxDataObjectSimple
 {
 public:
     // ctor: use AddFile() later to fill the array
@@ -509,7 +508,7 @@ protected:
 // It is understood that this data can be copied bitwise.
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxCustomDataObject : public wxDataObjectSimple
+class wxCustomDataObject : public wxDataObjectSimple
 {
 public:
     // if you don't specify the format in the ctor, you can still use
@@ -568,7 +567,7 @@ private:
 // wxImageDataObject - data object for wxImage
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxImageDataObject : public wxCustomDataObject
+class wxImageDataObject : public wxCustomDataObject
 {
 public:
     explicit wxImageDataObject(const wxImage& image = wxNullImage);
@@ -604,7 +603,7 @@ public:
     #endif
 
     // wxURLDataObject is simply wxTextDataObject with a different name
-    class WXDLLIMPEXP_CORE wxURLDataObject : public wxTextDataObject
+    class wxURLDataObject : public wxTextDataObject
     {
     public:
         wxURLDataObject(const wxString& url = {})

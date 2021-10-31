@@ -9,6 +9,7 @@
 #ifndef _WX_IMAGPNM_H_
 #define _WX_IMAGPNM_H_
 
+#include "wx/gdicmn.h"
 #include "wx/image.h"
 
 //-----------------------------------------------------------------------------

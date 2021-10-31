@@ -19,10 +19,10 @@
 #include <string>
 #include <vector>
 
-struct WXDLLIMPEXP_FWD_CORE wxOwnerDrawn;
-class WXDLLIMPEXP_FWD_CORE wxCheckListBoxItem; // fwd decl, defined in checklst.cpp
+struct wxOwnerDrawn;
+class wxCheckListBoxItem; // fwd decl, defined in checklst.cpp
 
-class WXDLLIMPEXP_CORE wxCheckListBox : public wxCheckListBoxBase
+class wxCheckListBox : public wxCheckListBoxBase
 {
 public:
     // ctors

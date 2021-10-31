@@ -29,8 +29,6 @@
 
 /* modified by Vaclav Slavik for use as jpeglib-independent module */
 
-#include "wx/wxprec.h"
-
 #if wxUSE_IMAGE
 
 #include "wx/quantize.h"

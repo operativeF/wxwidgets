@@ -9,15 +9,16 @@
 #ifndef _WX_IMAGPCX_H_
 #define _WX_IMAGPCX_H_
 
-#include "wx/image.h"
+#if wxUSE_PCX
 
+#include "wx/gdicmn.h"
+#include "wx/image.h"
 
 //-----------------------------------------------------------------------------
 // wxPCXHandler
 //-----------------------------------------------------------------------------
 
-#if wxUSE_PCX
-class WXDLLIMPEXP_CORE wxPCXHandler : public wxImageHandler
+class wxPCXHandler : public wxImageHandler
 {
 public:
     wxPCXHandler()

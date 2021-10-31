@@ -12,7 +12,7 @@
 
 #include "wx/defs.h"
 
-class WXDLLIMPEXP_CORE wxAppProgressIndicatorBase
+class wxAppProgressIndicatorBase
 {
 public:
     virtual ~wxAppProgressIndicatorBase() = default;

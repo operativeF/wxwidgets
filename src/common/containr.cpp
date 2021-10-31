@@ -8,9 +8,6 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #include "wx/containr.h"
 #include "wx/log.h"
 #include "wx/event.h"

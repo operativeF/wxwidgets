@@ -10,9 +10,9 @@
 #ifndef _WX_FILEHISTORY_H_
 #define _WX_FILEHISTORY_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_FILE_HISTORY
+
+#include "wx/defs.h"
 
 #include "wx/windowid.h"
 #include "wx/object.h"
@@ -22,9 +22,9 @@
 #include <filesystem>
 #include <vector>
 
-class WXDLLIMPEXP_FWD_CORE wxMenu;
-class WXDLLIMPEXP_FWD_BASE wxConfigBase;
-class WXDLLIMPEXP_FWD_BASE wxFileName;
+class wxMenu;
+class wxConfigBase;
+class wxFileName;
 
 enum class wxFileHistoryMenuPathStyle
 {
@@ -39,7 +39,7 @@ namespace fs = std::filesystem;
 // File history management
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxFileHistoryBase
+class wxFileHistoryBase
 {
 public:
     wxFileHistoryBase(size_t maxFiles = 9, wxWindowID idBase = wxID_FILE1);
@@ -109,7 +109,7 @@ private:
     #include "wx/gtk/filehistory.h"
 #else
     // no platform-specific implementation of wxFileHistory yet
-    class WXDLLIMPEXP_CORE wxFileHistory : public wxFileHistoryBase
+    class wxFileHistory : public wxFileHistoryBase
     {
     public:
         wxFileHistory(size_t maxFiles = 9, wxWindowID idBase = wxID_FILE1)

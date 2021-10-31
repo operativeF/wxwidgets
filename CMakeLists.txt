@@ -13,6 +13,8 @@ include(FetchContent)
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+include(${CMAKE_SOURCE_DIR}/cmake/options.cmake)
+
 # FIXME: Needs to get the right triplet. It's most likely trying to get the x86 default.
 # if(DEFINED ENV{VCPKG_ROOT} AND NOT DEFINED CMAKE_TOOLCHAIN_FILE)
 #   set(CMAKE_TOOLCHAIN_FILE "$ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
@@ -25,6 +27,7 @@ find_package(Microsoft.GSL CONFIG REQUIRED)
 find_package(doctest CONFIG REQUIRED)
 find_package(fmt CONFIG REQUIRED)
 find_package(Boost REQUIRED COMPONENTS nowide)
+find_package(libpng CONFIG REQUIRED)
 
 if(NOT CMAKE_CONFIGURATION_TYPES)
     get_property(HAVE_MULTI_CONFIG_GENERATOR GLOBAL PROPERTY GENERATOR_IS_MULTI_CONFIG)
@@ -89,7 +92,7 @@ set(wxCOPYRIGHT "1992-2021 wxWidgets")
 
 if(WIN32)
 	# Enable usage of updated __cplusplus macro
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /Zc:__cplusplus /D WX_WINDOWS")	
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /Zc:__cplusplus /D WX_WINDOWS /EHsc /MP24 /arch:AVX2 /Zi /D NOMINMAX")	
     set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
 endif()
 
@@ -102,6 +105,5 @@ endif()
 
 enable_testing()
 
-include(${CMAKE_SOURCE_DIR}/cmake/options.cmake)
 add_subdirectory(src)
 add_subdirectory(tests)

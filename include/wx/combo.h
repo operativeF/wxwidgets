@@ -36,10 +36,9 @@
    instead it is just a mix-in.
  */
 
+#if wxUSE_COMBOCTRL
 
 #include "wx/defs.h"
-
-#if wxUSE_COMBOCTRL
 
 #include "wx/control.h"
 #include "wx/renderer.h" // this is needed for wxCONTROL_XXX flags
@@ -52,8 +51,8 @@
 #include <cstdint>
 #include <string>
 
-class WXDLLIMPEXP_FWD_CORE wxTextCtrl;
-class WXDLLIMPEXP_FWD_CORE wxComboPopup;
+class wxTextCtrl;
+class wxComboPopup;
 
 //
 // New window styles for wxComboCtrlBase
@@ -154,8 +153,7 @@ struct wxComboCtrlFeatures
 
 constexpr char wxComboCtrlNameStr[] = "comboCtrl";
 
-class WXDLLIMPEXP_CORE wxComboCtrlBase : public wxControl,
-                                         public wxTextEntry
+class wxComboCtrlBase : public wxControl, public wxTextEntry
 {
     friend class wxComboPopup;
     friend class wxComboPopupEvtHandler;
@@ -870,5 +868,4 @@ private:
 
 #endif // wxUSE_COMBOCTRL
 
-#endif
-    // _WX_COMBOCONTROL_H_BASE_
+#endif // _WX_COMBOCONTROL_H_BASE_

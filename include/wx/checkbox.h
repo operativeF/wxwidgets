@@ -57,7 +57,7 @@ enum class wxCheckBoxState
 // wxCheckBox: a control which shows a label and a box which may be checked
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxCheckBoxBase : public wxControl
+class wxCheckBoxBase : public wxControl
 {
 public:
 	wxCheckBoxBase& operator=(wxCheckBoxBase&&) = delete;

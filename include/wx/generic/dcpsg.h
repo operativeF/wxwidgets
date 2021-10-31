@@ -10,9 +10,9 @@
 #ifndef _WX_DCPSG_H_
 #define _WX_DCPSG_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_PRINTING_ARCHITECTURE && wxUSE_POSTSCRIPT
+
+#include "wx/defs.h"
 
 #include "wx/dc.h"
 #include "wx/dcprint.h"
@@ -20,13 +20,14 @@
 #include "wx/module.h"
 #include "wx/cmndata.h"
 #include "wx/strvararg.h"
+#include "wx/arrstr.h"
 
 //-----------------------------------------------------------------------------
 // wxPostScriptDC
 //-----------------------------------------------------------------------------
 
 
-class WXDLLIMPEXP_CORE wxPostScriptDC : public wxDC
+class wxPostScriptDC : public wxDC
 {
 public:
     wxPostScriptDC();
@@ -38,7 +39,7 @@ private:
     wxDECLARE_DYNAMIC_CLASS(wxPostScriptDC);
 };
 
-class WXDLLIMPEXP_CORE wxPostScriptDCImpl : public wxDCImpl
+class wxPostScriptDCImpl : public wxDCImpl
 {
 public:
     wxPostScriptDCImpl( wxPrinterDC *owner );
@@ -63,7 +64,7 @@ public:
 
     void DestroyClippingRegion() override;
 
-    bool wxStartDoc(const wxString& message) override;
+    bool wxStartDoc(const std::string& message) override;
     void EndDoc() override;
     void StartPage() override;
     void EndPage() override;

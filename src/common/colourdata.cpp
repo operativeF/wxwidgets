@@ -5,9 +5,6 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include "wx/wxprec.h"
-
-
 #if wxUSE_COLOURDLG || wxUSE_COLOURPICKERCTRL
 
 #include "wx/colourdata.h"

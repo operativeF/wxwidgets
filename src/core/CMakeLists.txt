@@ -1,0 +1,1102 @@
+set(CORE_SRC_DIR ${CMAKE_SOURCE_DIR}/src)
+set(CORE_INC_DIR ${CMAKE_SOURCE_DIR}/include)
+
+set(GUI_CMN_HDR
+    ${CORE_INC_DIR}/wx/affinematrix2d.h
+    ${CORE_INC_DIR}/wx/anybutton.h
+    ${CORE_INC_DIR}/wx/bmpbuttn.h
+    ${CORE_INC_DIR}/wx/brush.h
+    ${CORE_INC_DIR}/wx/button.h
+    ${CORE_INC_DIR}/wx/checkbox.h
+    ${CORE_INC_DIR}/wx/checklst.h
+    ${CORE_INC_DIR}/wx/choicdlg.h
+    ${CORE_INC_DIR}/wx/choice.h
+    ${CORE_INC_DIR}/wx/cmndata.h
+    ${CORE_INC_DIR}/wx/collheaderctrl.h
+    ${CORE_INC_DIR}/wx/collpane.h
+    ${CORE_INC_DIR}/wx/combo.h
+    ${CORE_INC_DIR}/wx/combobox.h
+    ${CORE_INC_DIR}/wx/compositewin.h
+    ${CORE_INC_DIR}/wx/control.h
+    ${CORE_INC_DIR}/wx/ctrlsub.h
+    ${CORE_INC_DIR}/wx/cursor.h
+    ${CORE_INC_DIR}/wx/custombgwin.h
+    ${CORE_INC_DIR}/wx/dc.h
+    ${CORE_INC_DIR}/wx/dcclient.h
+    ${CORE_INC_DIR}/wx/dcgraph.h
+    ${CORE_INC_DIR}/wx/dcmemory.h
+    ${CORE_INC_DIR}/wx/dcprint.h
+    ${CORE_INC_DIR}/wx/dcscreen.h
+    ${CORE_INC_DIR}/wx/dcsvg.h
+    ${CORE_INC_DIR}/wx/dialog.h
+    ${CORE_INC_DIR}/wx/dirdlg.h
+    ${CORE_INC_DIR}/wx/dragimag.h
+    ${CORE_INC_DIR}/wx/encinfo.h
+    ${CORE_INC_DIR}/wx/filedlg.h
+    ${CORE_INC_DIR}/wx/frame.h
+    ${CORE_INC_DIR}/wx/gauge.h
+    ${CORE_INC_DIR}/wx/gbsizer.h
+    ${CORE_INC_DIR}/wx/gdicmn.h
+    ${CORE_INC_DIR}/wx/generic/accel.h
+    ${CORE_INC_DIR}/wx/generic/buttonbar.h
+    ${CORE_INC_DIR}/wx/generic/choicdgg.h
+    ${CORE_INC_DIR}/wx/generic/collheaderctrl.h
+    ${CORE_INC_DIR}/wx/generic/combo.h
+    ${CORE_INC_DIR}/wx/generic/custombgwin.h
+    ${CORE_INC_DIR}/wx/generic/dcpsg.h
+    ${CORE_INC_DIR}/wx/generic/dirctrlg.h
+    ${CORE_INC_DIR}/wx/generic/dragimgg.h
+    ${CORE_INC_DIR}/wx/generic/filectrlg.h
+    ${CORE_INC_DIR}/wx/generic/headerctrlg.h
+    ${CORE_INC_DIR}/wx/generic/infobar.h
+    ${CORE_INC_DIR}/wx/generic/logg.h
+    ${CORE_INC_DIR}/wx/generic/msgdlgg.h
+    ${CORE_INC_DIR}/wx/generic/numdlgg.h
+    ${CORE_INC_DIR}/wx/generic/notebook.h
+    ${CORE_INC_DIR}/wx/generic/panelg.h
+    ${CORE_INC_DIR}/wx/generic/prntdlgg.h
+    ${CORE_INC_DIR}/wx/generic/printps.h
+    ${CORE_INC_DIR}/wx/generic/progdlgg.h
+    ${CORE_INC_DIR}/wx/generic/richmsgdlgg.h
+    ${CORE_INC_DIR}/wx/generic/scrolwin.h
+    ${CORE_INC_DIR}/wx/generic/spinctlg.h
+    ${CORE_INC_DIR}/wx/generic/splitter.h
+    ${CORE_INC_DIR}/wx/generic/srchctlg.h
+    ${CORE_INC_DIR}/wx/generic/statbmpg.h
+    ${CORE_INC_DIR}/wx/generic/stattextg.h
+    ${CORE_INC_DIR}/wx/generic/textdlgg.h
+    ${CORE_INC_DIR}/wx/generic/treectlg.h
+    ${CORE_INC_DIR}/wx/graphics.h
+    ${CORE_INC_DIR}/wx/headercol.h
+    ${CORE_INC_DIR}/wx/headerctrl.h
+    ${CORE_INC_DIR}/wx/helphtml.h
+    ${CORE_INC_DIR}/wx/icon.h
+    ${CORE_INC_DIR}/wx/infobar.h
+    ${CORE_INC_DIR}/wx/itemid.h
+    ${CORE_INC_DIR}/wx/layout.h
+    ${CORE_INC_DIR}/wx/listbox.h
+    ${CORE_INC_DIR}/wx/mdi.h
+    ${CORE_INC_DIR}/wx/menu.h
+    ${CORE_INC_DIR}/wx/modalhook.h
+    ${CORE_INC_DIR}/wx/mousemanager.h
+    ${CORE_INC_DIR}/wx/msgdlg.h
+    ${CORE_INC_DIR}/wx/nativewin.h
+    ${CORE_INC_DIR}/wx/numdlg.h
+    ${CORE_INC_DIR}/wx/overlay.h
+    ${CORE_INC_DIR}/wx/palette.h
+    ${CORE_INC_DIR}/wx/panel.h
+    ${CORE_INC_DIR}/wx/pen.h
+    ${CORE_INC_DIR}/wx/peninfobase.h
+    ${CORE_INC_DIR}/wx/position.h
+    ${CORE_INC_DIR}/wx/preferences.h
+    ${CORE_INC_DIR}/wx/radiobox.h
+    ${CORE_INC_DIR}/wx/radiobut.h
+    ${CORE_INC_DIR}/wx/range.h
+    ${CORE_INC_DIR}/wx/rearrangectrl.h
+    ${CORE_INC_DIR}/wx/renderer.h
+    ${CORE_INC_DIR}/wx/richmsgdlg.h
+    ${CORE_INC_DIR}/wx/scrolbar.h
+    ${CORE_INC_DIR}/wx/scrolwin.h
+    ${CORE_INC_DIR}/wx/selstore.h
+    ${CORE_INC_DIR}/wx/settings.h
+    ${CORE_INC_DIR}/wx/sizer.h
+    ${CORE_INC_DIR}/wx/slider.h
+    ${CORE_INC_DIR}/wx/statbmp.h
+    ${CORE_INC_DIR}/wx/statbox.h
+    ${CORE_INC_DIR}/wx/stattext.h
+    ${CORE_INC_DIR}/wx/statusbr.h
+    ${CORE_INC_DIR}/wx/systhemectrl.h
+    ${CORE_INC_DIR}/wx/taskbarbutton.h
+    ${CORE_INC_DIR}/wx/testing.h
+    ${CORE_INC_DIR}/wx/textcompleter.h
+    ${CORE_INC_DIR}/wx/textctrl.h
+    ${CORE_INC_DIR}/wx/textdlg.h
+    ${CORE_INC_DIR}/wx/textentry.h
+    ${CORE_INC_DIR}/wx/textwrapper.h
+    ${CORE_INC_DIR}/wx/toolbar.h
+    ${CORE_INC_DIR}/wx/validate.h
+    ${CORE_INC_DIR}/wx/valtext.h
+    ${CORE_INC_DIR}/wx/valnum.h
+    ${CORE_INC_DIR}/wx/window.h
+    ${CORE_INC_DIR}/wx/windowid.h
+    ${CORE_INC_DIR}/wx/windowptr.h
+    ${CORE_INC_DIR}/wx/withimages.h
+    ${CORE_INC_DIR}/wx/wrapsizer.h
+    ${CORE_INC_DIR}/wx/wupdlock.h
+    ${CORE_INC_DIR}/wx/accel.h
+    ${CORE_INC_DIR}/wx/access.h
+    ${CORE_INC_DIR}/wx/anidecod.h
+    ${CORE_INC_DIR}/wx/animdecod.h
+    ${CORE_INC_DIR}/wx/appprogress.h
+    ${CORE_INC_DIR}/wx/artprov.h
+    ${CORE_INC_DIR}/wx/bitmap.h
+    ${CORE_INC_DIR}/wx/bookctrl.h
+    ${CORE_INC_DIR}/wx/busyinfo.h
+    ${CORE_INC_DIR}/wx/generic/busyinfo.h
+    ${CORE_INC_DIR}/wx/caret.h
+    ${CORE_INC_DIR}/wx/choicebk.h
+    ${CORE_INC_DIR}/wx/clipbrd.h
+    ${CORE_INC_DIR}/wx/clrpicker.h
+    ${CORE_INC_DIR}/wx/cmdproc.h
+    ${CORE_INC_DIR}/wx/colordlg.h
+    ${CORE_INC_DIR}/wx/colour.h
+    ${CORE_INC_DIR}/wx/colourdata.h
+    ${CORE_INC_DIR}/wx/cshelp.h
+    ${CORE_INC_DIR}/wx/dataobj.h
+    ${CORE_INC_DIR}/wx/dcmirror.h
+    ${CORE_INC_DIR}/wx/dcps.h
+    ${CORE_INC_DIR}/wx/dirctrl.h
+    ${CORE_INC_DIR}/wx/display.h
+    ${CORE_INC_DIR}/wx/dnd.h
+    ${CORE_INC_DIR}/wx/docmdi.h
+    ${CORE_INC_DIR}/wx/docview.h
+    ${CORE_INC_DIR}/wx/fdrepdlg.h
+    ${CORE_INC_DIR}/wx/filectrl.h
+    ${CORE_INC_DIR}/wx/filehistory.h
+    ${CORE_INC_DIR}/wx/filepicker.h
+    ${CORE_INC_DIR}/wx/fontpicker.h
+    ${CORE_INC_DIR}/wx/fmappriv.h
+    ${CORE_INC_DIR}/wx/font.h
+    ${CORE_INC_DIR}/wx/fontdata.h
+    ${CORE_INC_DIR}/wx/fontdlg.h
+    ${CORE_INC_DIR}/wx/fontenum.h
+    ${CORE_INC_DIR}/wx/fontutil.h
+    ${CORE_INC_DIR}/wx/gdiobj.h
+    ${CORE_INC_DIR}/wx/geometry.h
+    ${CORE_INC_DIR}/wx/gifdecod.h
+    ${CORE_INC_DIR}/wx/help.h
+    ${CORE_INC_DIR}/wx/helpbase.h
+    ${CORE_INC_DIR}/wx/helpwin.h
+    ${CORE_INC_DIR}/wx/iconbndl.h
+    ${CORE_INC_DIR}/wx/imagbmp.h
+    ${CORE_INC_DIR}/wx/image.h
+    ${CORE_INC_DIR}/wx/imaggif.h
+    ${CORE_INC_DIR}/wx/imagiff.h
+    ${CORE_INC_DIR}/wx/imagjpeg.h
+    ${CORE_INC_DIR}/wx/imaglist.h
+    ${CORE_INC_DIR}/wx/imagpcx.h
+    ${CORE_INC_DIR}/wx/imagpng.h
+    ${CORE_INC_DIR}/wx/imagpnm.h
+    ${CORE_INC_DIR}/wx/imagtga.h
+    ${CORE_INC_DIR}/wx/imagtiff.h
+    ${CORE_INC_DIR}/wx/imagxpm.h
+    ${CORE_INC_DIR}/wx/itemattr.h
+    ${CORE_INC_DIR}/wx/listbase.h
+    ${CORE_INC_DIR}/wx/listbook.h
+    ${CORE_INC_DIR}/wx/listctrl.h
+    ${CORE_INC_DIR}/wx/menuitem.h
+    ${CORE_INC_DIR}/wx/metafile.h
+    ${CORE_INC_DIR}/wx/minifram.h
+    ${CORE_INC_DIR}/wx/nonownedwnd.h
+    ${CORE_INC_DIR}/wx/notebook.h
+    ${CORE_INC_DIR}/wx/ownerdrw.h
+    ${CORE_INC_DIR}/wx/paper.h
+    ${CORE_INC_DIR}/wx/persist.h
+    ${CORE_INC_DIR}/wx/persist/bookctrl.h
+    ${CORE_INC_DIR}/wx/persist/dataview.h
+    ${CORE_INC_DIR}/wx/persist/splitter.h
+    ${CORE_INC_DIR}/wx/persist/toplevel.h
+    ${CORE_INC_DIR}/wx/persist/treebook.h
+    ${CORE_INC_DIR}/wx/persist/window.h
+    ${CORE_INC_DIR}/wx/pickerbase.h
+    ${CORE_INC_DIR}/wx/popupwin.h
+    ${CORE_INC_DIR}/wx/print.h
+    ${CORE_INC_DIR}/wx/printdlg.h
+    ${CORE_INC_DIR}/wx/prntbase.h
+    ${CORE_INC_DIR}/wx/progdlg.h
+    ${CORE_INC_DIR}/wx/quantize.h
+    ${CORE_INC_DIR}/wx/rawbmp.h
+    ${CORE_INC_DIR}/wx/region.h
+    ${CORE_INC_DIR}/wx/scopeguard.h
+    ${CORE_INC_DIR}/wx/simplebook.h
+    ${CORE_INC_DIR}/wx/spinbutt.h
+    ${CORE_INC_DIR}/wx/spinctrl.h
+    ${CORE_INC_DIR}/wx/splitter.h
+    ${CORE_INC_DIR}/wx/srchctrl.h
+    ${CORE_INC_DIR}/wx/statline.h
+    ${CORE_INC_DIR}/wx/tbarbase.h
+    ${CORE_INC_DIR}/wx/tglbtn.h
+    ${CORE_INC_DIR}/wx/tipwin.h
+    ${CORE_INC_DIR}/wx/toolbook.h
+    ${CORE_INC_DIR}/wx/tooltip.h
+    ${CORE_INC_DIR}/wx/toplevel.h
+    ${CORE_INC_DIR}/wx/treebase.h
+    ${CORE_INC_DIR}/wx/treebook.h
+    ${CORE_INC_DIR}/wx/treectrl.h
+    ${CORE_INC_DIR}/wx/uiaction.h
+    ${CORE_INC_DIR}/wx/valgen.h
+    ${CORE_INC_DIR}/wx/vidmode.h
+    ${CORE_INC_DIR}/wx/vlbox.h
+    ${CORE_INC_DIR}/wx/vms_x_fix.h
+    ${CORE_INC_DIR}/wx/vscroll.h
+    ${CORE_INC_DIR}/wx/xpmdecod.h
+    ${CORE_INC_DIR}/wx/xpmhand.h
+    ${CORE_INC_DIR}/wx/xrc/xmlreshandler.h
+    ${CORE_INC_DIR}/wx/splash.h
+    ${CORE_INC_DIR}/wx/dateevt.h
+    ${CORE_INC_DIR}/wx/editlbox.h
+    ${CORE_INC_DIR}/wx/generic/hyperlink.h
+    ${CORE_INC_DIR}/wx/joystick.h
+    ${CORE_INC_DIR}/wx/dcbuffer.h
+    ${CORE_INC_DIR}/wx/timectrl.h
+    ${CORE_INC_DIR}/wx/hyperlink.h
+    ${CORE_INC_DIR}/wx/bmpcbox.h
+    ${CORE_INC_DIR}/wx/addremovectrl.h
+    ${CORE_INC_DIR}/wx/generic/gridctrl.h
+    ${CORE_INC_DIR}/wx/generic/notifmsg.h
+    ${CORE_INC_DIR}/wx/odcombo.h
+    ${CORE_INC_DIR}/wx/animate.h
+    ${CORE_INC_DIR}/wx/sashwin.h
+    ${CORE_INC_DIR}/wx/generic/propdlg.h
+    ${CORE_INC_DIR}/wx/tipdlg.h
+    ${CORE_INC_DIR}/wx/dataview.h
+    ${CORE_INC_DIR}/wx/generic/helpext.h
+    ${CORE_INC_DIR}/wx/grid.h
+    ${CORE_INC_DIR}/wx/generic/grid.h
+    ${CORE_INC_DIR}/wx/generic/grideditors.h
+    ${CORE_INC_DIR}/wx/wizard.h
+    ${CORE_INC_DIR}/wx/generic/dataview.h
+    ${CORE_INC_DIR}/wx/generic/wizard.h
+    ${CORE_INC_DIR}/wx/generic/dvrenderers.h
+    ${CORE_INC_DIR}/wx/generic/bmpcbox.h
+    ${CORE_INC_DIR}/wx/datetimectrl.h
+    ${CORE_INC_DIR}/wx/activityindicator.h
+    ${CORE_INC_DIR}/wx/bannerwindow.h
+    ${CORE_INC_DIR}/wx/dvrenderers.h
+    ${CORE_INC_DIR}/wx/generic/datectrl.h
+    ${CORE_INC_DIR}/wx/calctrl.h
+    ${CORE_INC_DIR}/wx/propdlg.h
+    ${CORE_INC_DIR}/wx/generic/dvrenderer.h
+    ${CORE_INC_DIR}/wx/generic/timectrl.h
+    ${CORE_INC_DIR}/wx/commandlinkbutton.h
+    ${CORE_INC_DIR}/wx/richtooltip.h
+    ${CORE_INC_DIR}/wx/sound.h
+    ${CORE_INC_DIR}/wx/generic/aboutdlgg.h
+    ${CORE_INC_DIR}/wx/taskbar.h
+    ${CORE_INC_DIR}/wx/treelist.h
+    ${CORE_INC_DIR}/wx/notifmsg.h
+    ${CORE_INC_DIR}/wx/datectrl.h
+    ${CORE_INC_DIR}/wx/laywin.h
+    ${CORE_INC_DIR}/wx/generic/gridsel.h
+    ${CORE_INC_DIR}/wx/aboutdlg.h
+    ${CORE_INC_DIR}/wx/generic/laywin.h
+    ${CORE_INC_DIR}/wx/generic/splash.h
+    ${CORE_INC_DIR}/wx/generic/calctrlg.h
+    ${CORE_INC_DIR}/wx/generic/sashwin.h
+    ${CORE_INC_DIR}/wx/creddlg.h
+    ${CORE_INC_DIR}/wx/generic/creddlgg.h
+    ${CORE_INC_DIR}/wx/generic/animate.h
+)
+
+# Same as base lib
+set(BASE_CMN_HDR
+    ${CORE_INC_DIR}/wx/any.h
+    ${CORE_INC_DIR}/wx/anystr.h
+    ${CORE_INC_DIR}/wx/app.h
+    ${CORE_INC_DIR}/wx/apptrait.h
+    ${CORE_INC_DIR}/wx/archive.h
+    ${CORE_INC_DIR}/wx/arrimpl.cpp
+    ${CORE_INC_DIR}/wx/arrstr.h
+    ${CORE_INC_DIR}/wx/base64.h
+    ${CORE_INC_DIR}/wx/buffer.h
+    ${CORE_INC_DIR}/wx/build.h
+    ${CORE_INC_DIR}/wx/chartype.h
+    ${CORE_INC_DIR}/wx/checkeddelete.h
+    ${CORE_INC_DIR}/wx/chkconf.h
+    ${CORE_INC_DIR}/wx/clntdata.h
+    ${CORE_INC_DIR}/wx/cmdargs.h
+    ${CORE_INC_DIR}/wx/cmdline.h
+    ${CORE_INC_DIR}/wx/compiler.h
+    ${CORE_INC_DIR}/wx/confbase.h
+    ${CORE_INC_DIR}/wx/config.h
+    ${CORE_INC_DIR}/wx/convauto.h
+    ${CORE_INC_DIR}/wx/containr.h
+    ${CORE_INC_DIR}/wx/cpp.h
+    ${CORE_INC_DIR}/wx/crt.h
+    ${CORE_INC_DIR}/wx/datetime.h
+    ${CORE_INC_DIR}/wx/datstrm.h
+    ${CORE_INC_DIR}/wx/dde.h
+    ${CORE_INC_DIR}/wx/debug.h
+    ${CORE_INC_DIR}/wx/defs.h
+    ${CORE_INC_DIR}/wx/dir.h
+    ${CORE_INC_DIR}/wx/dlimpexp.h
+    ${CORE_INC_DIR}/wx/dlist.h
+    ${CORE_INC_DIR}/wx/dynarray.h
+    ${CORE_INC_DIR}/wx/dynlib.h
+    ${CORE_INC_DIR}/wx/dynload.h
+    ${CORE_INC_DIR}/wx/encconv.h
+    ${CORE_INC_DIR}/wx/event.h
+    ${CORE_INC_DIR}/wx/eventfilter.h
+    ${CORE_INC_DIR}/wx/evtloop.h
+    ${CORE_INC_DIR}/wx/evtloopsrc.h
+    ${CORE_INC_DIR}/wx/except.h
+    ${CORE_INC_DIR}/wx/features.h
+    ${CORE_INC_DIR}/wx/flags.h
+    ${CORE_INC_DIR}/wx/ffile.h
+    ${CORE_INC_DIR}/wx/file.h
+    ${CORE_INC_DIR}/wx/fileconf.h
+    ${CORE_INC_DIR}/wx/filefn.h
+    ${CORE_INC_DIR}/wx/filename.h
+    ${CORE_INC_DIR}/wx/filesys.h
+    ${CORE_INC_DIR}/wx/fontenc.h
+    ${CORE_INC_DIR}/wx/fontmap.h
+    ${CORE_INC_DIR}/wx/fs_arc.h
+    ${CORE_INC_DIR}/wx/fs_filter.h
+    ${CORE_INC_DIR}/wx/fs_mem.h
+    ${CORE_INC_DIR}/wx/fs_zip.h
+    ${CORE_INC_DIR}/wx/hash.h
+    ${CORE_INC_DIR}/wx/hashmap.h
+    ${CORE_INC_DIR}/wx/hashset.h
+    ${CORE_INC_DIR}/wx/iconloc.h
+    ${CORE_INC_DIR}/wx/init.h
+    ${CORE_INC_DIR}/wx/intl.h
+    ${CORE_INC_DIR}/wx/ipc.h
+    ${CORE_INC_DIR}/wx/ipcbase.h
+    ${CORE_INC_DIR}/wx/kbdstate.h
+    ${CORE_INC_DIR}/wx/language.h
+    ${CORE_INC_DIR}/wx/link.h
+    ${CORE_INC_DIR}/wx/list.h
+    ${CORE_INC_DIR}/wx/listimpl.cpp
+    ${CORE_INC_DIR}/wx/log.h
+    ${CORE_INC_DIR}/wx/longlong.h
+    ${CORE_INC_DIR}/wx/math.h
+    ${CORE_INC_DIR}/wx/memconf.h
+    ${CORE_INC_DIR}/wx/memory.h
+    ${CORE_INC_DIR}/wx/memtext.h
+    ${CORE_INC_DIR}/wx/mimetype.h
+    ${CORE_INC_DIR}/wx/module.h
+    ${CORE_INC_DIR}/wx/mousestate.h
+    ${CORE_INC_DIR}/wx/msgout.h
+    ${CORE_INC_DIR}/wx/msgqueue.h
+    ${CORE_INC_DIR}/wx/mstream.h
+    ${CORE_INC_DIR}/wx/numformatter.h
+    ${CORE_INC_DIR}/wx/object.h
+    ${CORE_INC_DIR}/wx/platform.h
+    ${CORE_INC_DIR}/wx/platinfo.h
+    ${CORE_INC_DIR}/wx/power.h
+    ${CORE_INC_DIR}/wx/process.h
+    ${CORE_INC_DIR}/wx/ptr_scpd.h
+    ${CORE_INC_DIR}/wx/recguard.h
+    ${CORE_INC_DIR}/wx/regex.h
+    ${CORE_INC_DIR}/wx/rtti.h
+    ${CORE_INC_DIR}/wx/scopedarray.h
+    ${CORE_INC_DIR}/wx/scopedptr.h
+    ${CORE_INC_DIR}/wx/scopeguard.h
+    ${CORE_INC_DIR}/wx/secretstore.h
+    ${CORE_INC_DIR}/wx/snglinst.h
+    ${CORE_INC_DIR}/wx/sstream.h
+    ${CORE_INC_DIR}/wx/stackwalk.h
+    ${CORE_INC_DIR}/wx/stdpaths.h
+    ${CORE_INC_DIR}/wx/stdstream.h
+    ${CORE_INC_DIR}/wx/stockitem.h
+    ${CORE_INC_DIR}/wx/stopwatch.h
+    ${CORE_INC_DIR}/wx/strconv.h
+    ${CORE_INC_DIR}/wx/stream.h
+    ${CORE_INC_DIR}/wx/string.h
+    ${CORE_INC_DIR}/wx/stringimpl.h
+    ${CORE_INC_DIR}/wx/stringops.h
+    ${CORE_INC_DIR}/wx/strvararg.h
+    ${CORE_INC_DIR}/wx/sysopt.h
+    ${CORE_INC_DIR}/wx/tarstrm.h
+    ${CORE_INC_DIR}/wx/textbuf.h
+    ${CORE_INC_DIR}/wx/textfile.h
+    ${CORE_INC_DIR}/wx/thread.h
+    ${CORE_INC_DIR}/wx/thrimpl.cpp
+    ${CORE_INC_DIR}/wx/time.h
+    ${CORE_INC_DIR}/wx/timer.h
+    ${CORE_INC_DIR}/wx/tls.h
+    ${CORE_INC_DIR}/wx/tokenzr.h
+    ${CORE_INC_DIR}/wx/tracker.h
+    ${CORE_INC_DIR}/wx/translation.h
+    ${CORE_INC_DIR}/wx/txtstrm.h
+    ${CORE_INC_DIR}/wx/typeinfo.h
+    ${CORE_INC_DIR}/wx/types.h
+    ${CORE_INC_DIR}/wx/unichar.h
+    ${CORE_INC_DIR}/wx/uri.h
+    ${CORE_INC_DIR}/wx/ustring.h
+    ${CORE_INC_DIR}/wx/utils.h
+    ${CORE_INC_DIR}/wx/variant.h
+    ${CORE_INC_DIR}/wx/vector.h
+    ${CORE_INC_DIR}/wx/version.h
+    ${CORE_INC_DIR}/wx/versioninfo.h
+    ${CORE_INC_DIR}/wx/volume.h
+    ${CORE_INC_DIR}/wx/weakref.h
+    ${CORE_INC_DIR}/wx/wfstream.h
+    ${CORE_INC_DIR}/wx/wx.h
+    ${CORE_INC_DIR}/wx/wxchar.h
+    ${CORE_INC_DIR}/wx/wxcrt.h
+    ${CORE_INC_DIR}/wx/wxcrtbase.h
+    ${CORE_INC_DIR}/wx/wxcrtvararg.h
+    ${CORE_INC_DIR}/wx/xlocale.h
+    ${CORE_INC_DIR}/wx/xti.h
+    ${CORE_INC_DIR}/wx/xti2.h
+    ${CORE_INC_DIR}/wx/xtistrm.h
+    ${CORE_INC_DIR}/wx/xtictor.h
+    ${CORE_INC_DIR}/wx/xtihandler.h
+    ${CORE_INC_DIR}/wx/xtiprop.h
+    ${CORE_INC_DIR}/wx/xtitypes.h
+    ${CORE_INC_DIR}/wx/zipstrm.h
+    ${CORE_INC_DIR}/wx/zstream.h
+    ${CORE_INC_DIR}/wx/meta/convertible.h
+    ${CORE_INC_DIR}/wx/meta/if.h
+    ${CORE_INC_DIR}/wx/meta/implicitconversion.h
+    ${CORE_INC_DIR}/wx/meta/int2type.h
+    ${CORE_INC_DIR}/wx/meta/movable.h
+    ${CORE_INC_DIR}/wx/meta/pod.h
+    ${CORE_INC_DIR}/wx/meta/removeref.h
+    ${CORE_INC_DIR}/wx/fswatcher.h
+    ${CORE_INC_DIR}/wx/generic/fswatcher.h
+    ${CORE_INC_DIR}/wx/lzmastream.h
+)
+
+set(BASE_WIN32_HDR
+    ${CORE_INC_DIR}/wx/msw/apptrait.h
+    ${CORE_INC_DIR}/wx/msw/apptbase.h
+    ${CORE_INC_DIR}/wx/msw/chkconf.h
+    ${CORE_INC_DIR}/wx/msw/crashrpt.h
+    ${CORE_INC_DIR}/wx/msw/dde.h
+    ${CORE_INC_DIR}/wx/msw/debughlp.h
+    ${CORE_INC_DIR}/wx/msw/evtloopconsole.h
+    ${CORE_INC_DIR}/wx/msw/gccpriv.h
+    ${CORE_INC_DIR}/wx/msw/libraries.h
+    ${CORE_INC_DIR}/wx/msw/mimetype.h
+    ${CORE_INC_DIR}/wx/msw/private.h
+    ${CORE_INC_DIR}/wx/msw/regconf.h
+    ${CORE_INC_DIR}/wx/msw/registry.h
+    ${CORE_INC_DIR}/wx/msw/seh.h
+    ${CORE_INC_DIR}/wx/msw/stackwalk.h
+    ${CORE_INC_DIR}/wx/msw/stdpaths.h
+    ${CORE_INC_DIR}/wx/msw/winver.h
+    ${CORE_INC_DIR}/wx/msw/wrapcctl.h
+    ${CORE_INC_DIR}/wx/msw/wrapcdlg.h
+    ${CORE_INC_DIR}/wx/msw/wrapwin.h
+    ${CORE_INC_DIR}/wx/msw/fswatcher.h
+)
+
+set(MSW_LOWLEVEL_HDR
+    ${CORE_INC_DIR}/wx/msw/nonownedwnd.h
+    ${CORE_INC_DIR}/wx/msw/ole/activex.h
+    ${CORE_INC_DIR}/wx/msw/popupwin.h
+    ${CORE_INC_DIR}/wx/msw/uxtheme.h
+    ${CORE_INC_DIR}/wx/msw/htmlhelp.h
+    ${CORE_INC_DIR}/wx/msw/helpchm.h
+    ${CORE_INC_DIR}/wx/msw/sound.h
+    ${CORE_INC_DIR}/wx/msw/joystick.h
+    ${CORE_INC_DIR}/wx/msw/helpwin.h
+    ${CORE_INC_DIR}/wx/msw/taskbar.h
+    ${CORE_INC_DIR}/wx/msw/evtloop.h
+)
+
+set(MSW_DESKTOP_LOWLEVEL_HDR
+    ${CORE_INC_DIR}/wx/msw/helpchm.h
+    ${CORE_INC_DIR}/wx/msw/helpwin.h
+)
+
+set(MSW_HDR
+    ${CORE_INC_DIR}/wx/generic/clrpickerg.h
+    ${CORE_INC_DIR}/wx/generic/collpaneg.h
+    ${CORE_INC_DIR}/wx/generic/filepickerg.h
+    ${CORE_INC_DIR}/wx/generic/fontpickerg.h
+    ${CORE_INC_DIR}/wx/msw/accel.h
+    ${CORE_INC_DIR}/wx/msw/anybutton.h
+    ${CORE_INC_DIR}/wx/msw/app.h
+    ${CORE_INC_DIR}/wx/msw/appprogress.h
+    ${CORE_INC_DIR}/wx/msw/bitmap.h
+    ${CORE_INC_DIR}/wx/msw/bmpbuttn.h
+    ${CORE_INC_DIR}/wx/msw/brush.h
+    ${CORE_INC_DIR}/wx/msw/button.h
+    ${CORE_INC_DIR}/wx/msw/caret.h
+    ${CORE_INC_DIR}/wx/msw/checkbox.h
+    ${CORE_INC_DIR}/wx/msw/choice.h
+    ${CORE_INC_DIR}/wx/msw/clipbrd.h
+    ${CORE_INC_DIR}/wx/msw/colordlg.h
+    ${CORE_INC_DIR}/wx/msw/colour.h
+    ${CORE_INC_DIR}/wx/msw/combo.h
+    ${CORE_INC_DIR}/wx/msw/combobox.h
+    ${CORE_INC_DIR}/wx/msw/control.h
+    ${CORE_INC_DIR}/wx/msw/ctrlsub.h
+    ${CORE_INC_DIR}/wx/msw/cursor.h
+    ${CORE_INC_DIR}/wx/msw/custombgwin.h
+    ${CORE_INC_DIR}/wx/msw/dc.h
+    ${CORE_INC_DIR}/wx/msw/dcclient.h
+    ${CORE_INC_DIR}/wx/msw/dcmemory.h
+    ${CORE_INC_DIR}/wx/msw/dcprint.h
+    ${CORE_INC_DIR}/wx/msw/dcscreen.h
+    ${CORE_INC_DIR}/wx/msw/dialog.h
+    ${CORE_INC_DIR}/wx/msw/dib.h
+    ${CORE_INC_DIR}/wx/msw/dirdlg.h
+    ${CORE_INC_DIR}/wx/msw/dragimag.h
+    ${CORE_INC_DIR}/wx/msw/enhmeta.h
+    ${CORE_INC_DIR}/wx/msw/filedlg.h
+    ${CORE_INC_DIR}/wx/msw/font.h
+    ${CORE_INC_DIR}/wx/msw/frame.h
+    ${CORE_INC_DIR}/wx/msw/gauge.h
+    ${CORE_INC_DIR}/wx/msw/gdiimage.h
+    ${CORE_INC_DIR}/wx/msw/headerctrl.h
+    ${CORE_INC_DIR}/wx/msw/icon.h
+    ${CORE_INC_DIR}/wx/msw/imaglist.h
+    ${CORE_INC_DIR}/wx/msw/iniconf.h
+    ${CORE_INC_DIR}/wx/msw/init.h
+    ${CORE_INC_DIR}/wx/msw/listbox.h
+    ${CORE_INC_DIR}/wx/msw/listctrl.h
+    ${CORE_INC_DIR}/wx/msw/mdi.h
+    ${CORE_INC_DIR}/wx/msw/menu.h
+    ${CORE_INC_DIR}/wx/msw/menuitem.h
+    ${CORE_INC_DIR}/wx/msw/metafile.h
+    ${CORE_INC_DIR}/wx/msw/minifram.h
+    ${CORE_INC_DIR}/wx/msw/missing.h
+    ${CORE_INC_DIR}/wx/msw/msgdlg.h
+    ${CORE_INC_DIR}/wx/msw/msvcrt.h
+    ${CORE_INC_DIR}/wx/msw/notebook.h
+    ${CORE_INC_DIR}/wx/msw/ole/access.h
+    ${CORE_INC_DIR}/wx/msw/ole/comimpl.h
+    ${CORE_INC_DIR}/wx/msw/ole/dataform.h
+    ${CORE_INC_DIR}/wx/msw/ole/dataobj.h
+    ${CORE_INC_DIR}/wx/msw/ole/dataobj2.h
+    ${CORE_INC_DIR}/wx/msw/ole/dropsrc.h
+    ${CORE_INC_DIR}/wx/msw/ole/droptgt.h
+    ${CORE_INC_DIR}/wx/msw/ole/oleutils.h
+    ${CORE_INC_DIR}/wx/msw/ole/safearray.h
+    ${CORE_INC_DIR}/wx/msw/ownerdrw.h
+    ${CORE_INC_DIR}/wx/msw/ownerdrawnbutton.h
+    ${CORE_INC_DIR}/wx/msw/palette.h
+    ${CORE_INC_DIR}/wx/msw/panel.h
+    ${CORE_INC_DIR}/wx/msw/pen.h
+    ${CORE_INC_DIR}/wx/msw/printdlg.h
+    ${CORE_INC_DIR}/wx/msw/printwin.h
+    ${CORE_INC_DIR}/wx/msw/progdlg.h
+    ${CORE_INC_DIR}/wx/msw/radiobox.h
+    ${CORE_INC_DIR}/wx/msw/radiobut.h
+    ${CORE_INC_DIR}/wx/msw/region.h
+    ${CORE_INC_DIR}/wx/msw/rcdefs.h
+    ${CORE_INC_DIR}/wx/msw/richmsgdlg.h
+    ${CORE_INC_DIR}/wx/msw/rt/utils.h
+    ${CORE_INC_DIR}/wx/msw/scrolbar.h
+    ${CORE_INC_DIR}/wx/msw/slider.h
+    ${CORE_INC_DIR}/wx/msw/spinbutt.h
+    ${CORE_INC_DIR}/wx/msw/spinctrl.h
+    ${CORE_INC_DIR}/wx/msw/statbmp.h
+    ${CORE_INC_DIR}/wx/msw/statbox.h
+    ${CORE_INC_DIR}/wx/msw/statusbar.h
+    ${CORE_INC_DIR}/wx/msw/statline.h
+    ${CORE_INC_DIR}/wx/msw/stattext.h
+    ${CORE_INC_DIR}/wx/msw/taskbarbutton.h
+    ${CORE_INC_DIR}/wx/msw/toolbar.h
+    ${CORE_INC_DIR}/wx/msw/textctrl.h
+    ${CORE_INC_DIR}/wx/msw/textentry.h
+    ${CORE_INC_DIR}/wx/msw/tglbtn.h
+    ${CORE_INC_DIR}/wx/msw/tooltip.h
+    ${CORE_INC_DIR}/wx/msw/toplevel.h
+    ${CORE_INC_DIR}/wx/msw/treectrl.h
+    ${CORE_INC_DIR}/wx/msw/window.h
+    ${CORE_INC_DIR}/wx/msw/calctrl.h
+    ${CORE_INC_DIR}/wx/msw/bmpcbox.h
+    ${CORE_INC_DIR}/wx/msw/datectrl.h
+    ${CORE_INC_DIR}/wx/msw/commandlinkbutton.h
+    ${CORE_INC_DIR}/wx/msw/hyperlink.h
+    ${CORE_INC_DIR}/wx/msw/datetimectrl.h
+    ${CORE_INC_DIR}/wx/msw/timectrl.h
+    ${CORE_INC_DIR}/wx/generic/activityindicator.h
+)
+
+set(MSW_DESKTOP_HDR
+    ${CORE_INC_DIR}/wx/msw/checklst.h
+    ${CORE_INC_DIR}/wx/msw/fdrepdlg.h
+    ${CORE_INC_DIR}/wx/msw/fontdlg.h
+    ${CORE_INC_DIR}/wx/msw/ole/automtn.h
+    ${CORE_INC_DIR}/wx/msw/ole/uuid.h
+)
+
+set(GUI_CMN_SRC
+    ${CORE_SRC_DIR}/common/accelcmn.cpp
+    ${CORE_SRC_DIR}/common/accesscmn.cpp
+    ${CORE_SRC_DIR}/common/anidecod.cpp
+    ${CORE_SRC_DIR}/common/appcmn.cpp
+    ${CORE_SRC_DIR}/common/artprov.cpp
+    ${CORE_SRC_DIR}/common/artstd.cpp
+    ${CORE_SRC_DIR}/common/arttango.cpp
+    ${CORE_SRC_DIR}/common/bmpbase.cpp
+    ${CORE_SRC_DIR}/common/bmpbtncmn.cpp
+    ${CORE_SRC_DIR}/common/bookctrl.cpp
+    ${CORE_SRC_DIR}/common/btncmn.cpp
+    ${CORE_SRC_DIR}/common/cairo.cpp
+    ${CORE_SRC_DIR}/common/checkboxcmn.cpp
+    ${CORE_SRC_DIR}/common/checklstcmn.cpp
+    ${CORE_SRC_DIR}/common/choiccmn.cpp
+    ${CORE_SRC_DIR}/common/clipcmn.cpp
+    ${CORE_SRC_DIR}/common/clrpickercmn.cpp
+    ${CORE_SRC_DIR}/common/colourcmn.cpp
+    ${CORE_SRC_DIR}/common/colourdata.cpp
+    ${CORE_SRC_DIR}/common/combocmn.cpp
+    ${CORE_SRC_DIR}/common/cmdproc.cpp
+    ${CORE_SRC_DIR}/common/cmndata.cpp
+    ${CORE_SRC_DIR}/common/containr.cpp
+    ${CORE_SRC_DIR}/common/cshelp.cpp
+    ${CORE_SRC_DIR}/common/ctrlcmn.cpp
+    ${CORE_SRC_DIR}/common/ctrlsub.cpp
+    ${CORE_SRC_DIR}/common/dcbase.cpp
+    ${CORE_SRC_DIR}/common/dcbufcmn.cpp
+    ${CORE_SRC_DIR}/common/dcgraph.cpp
+    ${CORE_SRC_DIR}/common/dcsvg.cpp
+    ${CORE_SRC_DIR}/common/dirctrlcmn.cpp
+    ${CORE_SRC_DIR}/common/dlgcmn.cpp
+    ${CORE_SRC_DIR}/common/dobjcmn.cpp
+    ${CORE_SRC_DIR}/common/docmdi.cpp
+    ${CORE_SRC_DIR}/common/docview.cpp
+    ${CORE_SRC_DIR}/common/dpycmn.cpp
+    ${CORE_SRC_DIR}/common/dseldlg.cpp
+    ${CORE_SRC_DIR}/common/fddlgcmn.cpp
+    ${CORE_SRC_DIR}/common/filectrlcmn.cpp
+    ${CORE_SRC_DIR}/common/filehistorycmn.cpp
+    ${CORE_SRC_DIR}/common/filepickercmn.cpp
+    ${CORE_SRC_DIR}/common/fontpickercmn.cpp
+    ${CORE_SRC_DIR}/common/fldlgcmn.cpp
+    ${CORE_SRC_DIR}/common/fontcmn.cpp
+    ${CORE_SRC_DIR}/common/fontdata.cpp
+    ${CORE_SRC_DIR}/generic/graphicc.cpp
+    ${CORE_SRC_DIR}/common/fontenumcmn.cpp
+    ${CORE_SRC_DIR}/common/fontmap.cpp
+    ${CORE_SRC_DIR}/common/fontutilcmn.cpp
+    ${CORE_SRC_DIR}/common/framecmn.cpp
+    ${CORE_SRC_DIR}/common/gaugecmn.cpp
+    ${CORE_SRC_DIR}/common/gbsizer.cpp
+    ${CORE_SRC_DIR}/common/gdicmn.cpp
+    ${CORE_SRC_DIR}/common/geometry.cpp
+    ${CORE_SRC_DIR}/common/gifdecod.cpp
+    ${CORE_SRC_DIR}/common/graphcmn.cpp
+    ${CORE_SRC_DIR}/common/headercolcmn.cpp
+    ${CORE_SRC_DIR}/common/headerctrlcmn.cpp
+    ${CORE_SRC_DIR}/common/helpbase.cpp
+    ${CORE_SRC_DIR}/common/iconbndl.cpp
+    ${CORE_SRC_DIR}/common/imagall.cpp
+    ${CORE_SRC_DIR}/common/imagbmp.cpp
+    ${CORE_SRC_DIR}/common/image.cpp
+    ${CORE_SRC_DIR}/common/imagfill.cpp
+    ${CORE_SRC_DIR}/common/imaggif.cpp
+    ${CORE_SRC_DIR}/common/imagiff.cpp
+    ${CORE_SRC_DIR}/common/imagjpeg.cpp
+    ${CORE_SRC_DIR}/common/imagpcx.cpp
+    ${CORE_SRC_DIR}/common/imagpng.cpp
+    ${CORE_SRC_DIR}/common/imagpnm.cpp
+    ${CORE_SRC_DIR}/common/imagtga.cpp
+    ${CORE_SRC_DIR}/common/imagtiff.cpp
+    ${CORE_SRC_DIR}/common/imagxpm.cpp
+    ${CORE_SRC_DIR}/common/layout.cpp
+    ${CORE_SRC_DIR}/common/lboxcmn.cpp
+    ${CORE_SRC_DIR}/common/listctrlcmn.cpp
+    ${CORE_SRC_DIR}/common/markupparser.cpp
+    ${CORE_SRC_DIR}/common/menucmn.cpp
+    ${CORE_SRC_DIR}/common/modalhook.cpp
+    ${CORE_SRC_DIR}/common/mousemanager.cpp
+    ${CORE_SRC_DIR}/common/nbkbase.cpp
+    ${CORE_SRC_DIR}/common/overlaycmn.cpp
+    ${CORE_SRC_DIR}/common/ownerdrwcmn.cpp
+    ${CORE_SRC_DIR}/common/paper.cpp
+    ${CORE_SRC_DIR}/common/panelcmn.cpp
+    ${CORE_SRC_DIR}/common/persist.cpp
+    ${CORE_SRC_DIR}/common/pickerbase.cpp
+    ${CORE_SRC_DIR}/common/popupcmn.cpp
+    ${CORE_SRC_DIR}/common/preferencescmn.cpp
+    ${CORE_SRC_DIR}/common/prntbase.cpp
+    ${CORE_SRC_DIR}/common/quantize.cpp
+    ${CORE_SRC_DIR}/common/radiobtncmn.cpp
+    ${CORE_SRC_DIR}/common/radiocmn.cpp
+    ${CORE_SRC_DIR}/common/rearrangectrl.cpp
+    ${CORE_SRC_DIR}/common/rendcmn.cpp
+    ${CORE_SRC_DIR}/common/rgncmn.cpp
+    ${CORE_SRC_DIR}/common/scrolbarcmn.cpp
+    ${CORE_SRC_DIR}/common/settcmn.cpp
+    ${CORE_SRC_DIR}/common/sizer.cpp
+    ${CORE_SRC_DIR}/common/slidercmn.cpp
+    ${CORE_SRC_DIR}/common/spinbtncmn.cpp
+    ${CORE_SRC_DIR}/common/spinctrlcmn.cpp
+    ${CORE_SRC_DIR}/common/srchcmn.cpp
+    ${CORE_SRC_DIR}/common/statbar.cpp
+    ${CORE_SRC_DIR}/common/statbmpcmn.cpp
+    ${CORE_SRC_DIR}/common/statboxcmn.cpp
+    ${CORE_SRC_DIR}/common/statlinecmn.cpp
+    ${CORE_SRC_DIR}/common/stattextcmn.cpp
+    ${CORE_SRC_DIR}/common/stockitem.cpp
+    ${CORE_SRC_DIR}/common/tbarbase.cpp
+    ${CORE_SRC_DIR}/common/textcmn.cpp
+    ${CORE_SRC_DIR}/common/textentrycmn.cpp
+    ${CORE_SRC_DIR}/common/textmeasurecmn.cpp
+    ${CORE_SRC_DIR}/common/toplvcmn.cpp
+    ${CORE_SRC_DIR}/common/treebase.cpp
+    ${CORE_SRC_DIR}/common/uiactioncmn.cpp
+    ${CORE_SRC_DIR}/common/valgen.cpp
+    ${CORE_SRC_DIR}/common/validate.cpp
+    ${CORE_SRC_DIR}/common/valtext.cpp
+    ${CORE_SRC_DIR}/common/valnum.cpp
+    ${CORE_SRC_DIR}/common/wincmn.cpp
+    ${CORE_SRC_DIR}/common/windowid.cpp
+    ${CORE_SRC_DIR}/common/wrapsizer.cpp
+    ${CORE_SRC_DIR}/common/xpmdecod.cpp
+    ${CORE_SRC_DIR}/generic/busyinfo.cpp
+    ${CORE_SRC_DIR}/generic/buttonbar.cpp
+    ${CORE_SRC_DIR}/generic/choicdgg.cpp
+    ${CORE_SRC_DIR}/generic/choicbkg.cpp
+    ${CORE_SRC_DIR}/generic/collheaderctrlg.cpp
+    ${CORE_SRC_DIR}/generic/combog.cpp
+    ${CORE_SRC_DIR}/generic/dcpsg.cpp
+    ${CORE_SRC_DIR}/generic/dirctrlg.cpp
+    ${CORE_SRC_DIR}/generic/dragimgg.cpp
+    ${CORE_SRC_DIR}/generic/filectrlg.cpp
+    ${CORE_SRC_DIR}/generic/headerctrlg.cpp
+    ${CORE_SRC_DIR}/generic/infobar.cpp
+    ${CORE_SRC_DIR}/generic/listbkg.cpp
+    ${CORE_SRC_DIR}/generic/logg.cpp
+    ${CORE_SRC_DIR}/generic/markuptext.cpp
+    ${CORE_SRC_DIR}/generic/msgdlgg.cpp
+    ${CORE_SRC_DIR}/generic/numdlgg.cpp
+    ${CORE_SRC_DIR}/generic/progdlgg.cpp
+    ${CORE_SRC_DIR}/generic/preferencesg.cpp
+    ${CORE_SRC_DIR}/generic/printps.cpp
+    ${CORE_SRC_DIR}/generic/renderg.cpp
+    ${CORE_SRC_DIR}/generic/richmsgdlgg.cpp
+    ${CORE_SRC_DIR}/generic/scrlwing.cpp
+    ${CORE_SRC_DIR}/generic/selstore.cpp
+    ${CORE_SRC_DIR}/generic/spinctlg.cpp
+    ${CORE_SRC_DIR}/generic/splitter.cpp
+    ${CORE_SRC_DIR}/generic/srchctlg.cpp
+    ${CORE_SRC_DIR}/generic/statbmpg.cpp
+    ${CORE_SRC_DIR}/generic/stattextg.cpp
+    ${CORE_SRC_DIR}/generic/textdlgg.cpp
+    ${CORE_SRC_DIR}/generic/tipwin.cpp
+    ${CORE_SRC_DIR}/generic/toolbkg.cpp
+    ${CORE_SRC_DIR}/generic/treectlg.cpp
+    ${CORE_SRC_DIR}/generic/treebkg.cpp
+    ${CORE_SRC_DIR}/generic/vlbox.cpp
+    ${CORE_SRC_DIR}/generic/vscroll.cpp
+    ${CORE_SRC_DIR}/xrc/xmlreshandler.cpp
+    ${CORE_SRC_DIR}/common/bmpcboxcmn.cpp
+    ${CORE_SRC_DIR}/generic/grideditors.cpp
+    ${CORE_SRC_DIR}/generic/gridctrl.cpp
+    ${CORE_SRC_DIR}/generic/grid.cpp
+    ${CORE_SRC_DIR}/generic/hyperlinkg.cpp
+    ${CORE_SRC_DIR}/common/calctrlcmn.cpp
+    ${CORE_SRC_DIR}/generic/notifmsgg.cpp
+    ${CORE_SRC_DIR}/generic/odcombo.cpp
+    ${CORE_SRC_DIR}/generic/splash.cpp
+    ${CORE_SRC_DIR}/common/gridcmn.cpp
+    ${CORE_SRC_DIR}/common/addremovectrl.cpp
+    ${CORE_SRC_DIR}/generic/tipdlg.cpp
+    ${CORE_SRC_DIR}/generic/aboutdlgg.cpp
+    ${CORE_SRC_DIR}/generic/gridsel.cpp
+    ${CORE_SRC_DIR}/generic/sashwin.cpp
+    ${CORE_SRC_DIR}/generic/helpext.cpp
+    ${CORE_SRC_DIR}/generic/richtooltipg.cpp
+    ${CORE_SRC_DIR}/generic/bmpcboxg.cpp
+    ${CORE_SRC_DIR}/generic/timectrlg.cpp
+    ${CORE_SRC_DIR}/common/notifmsgcmn.cpp
+    ${CORE_SRC_DIR}/generic/commandlinkbuttong.cpp
+    ${CORE_SRC_DIR}/generic/propdlg.cpp
+    ${CORE_SRC_DIR}/generic/treelist.cpp
+    ${CORE_SRC_DIR}/common/datavcmn.cpp
+    ${CORE_SRC_DIR}/common/animatecmn.cpp
+    ${CORE_SRC_DIR}/common/odcombocmn.cpp
+    ${CORE_SRC_DIR}/common/hyperlnkcmn.cpp
+    ${CORE_SRC_DIR}/common/richtooltipcmn.cpp
+    ${CORE_SRC_DIR}/generic/datectlg.cpp
+    ${CORE_SRC_DIR}/generic/bannerwindow.cpp
+    ${CORE_SRC_DIR}/generic/laywin.cpp
+    ${CORE_SRC_DIR}/generic/calctrlg.cpp
+    ${CORE_SRC_DIR}/generic/wizard.cpp
+    ${CORE_SRC_DIR}/generic/editlbox.cpp
+    ${CORE_SRC_DIR}/generic/datavgen.cpp
+    ${CORE_SRC_DIR}/generic/creddlgg.cpp
+    ${CORE_SRC_DIR}/generic/rowheightcache.cpp
+    ${CORE_SRC_DIR}/generic/animateg.cpp
+)
+
+set(MSW_DESKTOP_LOWLEVEL_SRC
+    ${CORE_SRC_DIR}/msw/helpchm.cpp
+    ${CORE_SRC_DIR}/msw/helpwin.cpp
+    ${CORE_SRC_DIR}/msw/ole/automtn.cpp
+    ${CORE_SRC_DIR}/msw/ole/uuid.cpp
+)
+
+set(MSW_LOWLEVEL_SRC
+    ${CORE_SRC_DIR}/msw/ole/activex.cpp
+    ${CORE_SRC_DIR}/msw/app.cpp
+    ${CORE_SRC_DIR}/msw/bitmap.cpp
+    ${CORE_SRC_DIR}/msw/brush.cpp
+    ${CORE_SRC_DIR}/msw/caret.cpp
+    ${CORE_SRC_DIR}/msw/clipbrd.cpp
+    ${CORE_SRC_DIR}/msw/colour.cpp
+    ${CORE_SRC_DIR}/msw/cursor.cpp
+    ${CORE_SRC_DIR}/msw/data.cpp
+    ${CORE_SRC_DIR}/msw/dc.cpp
+    ${CORE_SRC_DIR}/msw/dcclient.cpp
+    ${CORE_SRC_DIR}/msw/dcmemory.cpp
+    ${CORE_SRC_DIR}/msw/dcprint.cpp
+    ${CORE_SRC_DIR}/msw/dcscreen.cpp
+    ${CORE_SRC_DIR}/msw/dib.cpp
+    ${CORE_SRC_DIR}/msw/display.cpp
+    ${CORE_SRC_DIR}/msw/enhmeta.cpp
+    ${CORE_SRC_DIR}/msw/font.cpp
+    ${CORE_SRC_DIR}/msw/fontenum.cpp
+    ${CORE_SRC_DIR}/msw/fontutil.cpp
+    ${CORE_SRC_DIR}/msw/gdiimage.cpp
+    ${CORE_SRC_DIR}/msw/gdiobj.cpp
+    ${CORE_SRC_DIR}/msw/gdiplus.cpp
+    ${CORE_SRC_DIR}/msw/graphics.cpp
+    ${CORE_SRC_DIR}/msw/graphicsd2d.cpp
+    ${CORE_SRC_DIR}/msw/icon.cpp
+    ${CORE_SRC_DIR}/msw/imaglist.cpp
+    ${CORE_SRC_DIR}/msw/minifram.cpp
+    ${CORE_SRC_DIR}/msw/nonownedwnd.cpp
+    ${CORE_SRC_DIR}/msw/ole/comimpl.cpp
+    ${CORE_SRC_DIR}/msw/ole/dataobj.cpp
+    ${CORE_SRC_DIR}/msw/ole/dropsrc.cpp
+    ${CORE_SRC_DIR}/msw/ole/droptgt.cpp
+    ${CORE_SRC_DIR}/msw/ole/oleutils.cpp
+    ${CORE_SRC_DIR}/msw/ole/safearray.cpp
+    ${CORE_SRC_DIR}/msw/palette.cpp
+    ${CORE_SRC_DIR}/msw/pen.cpp
+    ${CORE_SRC_DIR}/msw/popupwin.cpp
+    ${CORE_SRC_DIR}/msw/printdlg.cpp
+    ${CORE_SRC_DIR}/msw/printwin.cpp
+    ${CORE_SRC_DIR}/msw/region.cpp
+    ${CORE_SRC_DIR}/msw/renderer.cpp
+    ${CORE_SRC_DIR}/msw/rt/utilsrt.cpp
+    ${CORE_SRC_DIR}/msw/settings.cpp
+    ${CORE_SRC_DIR}/msw/textmeasure.cpp
+    ${CORE_SRC_DIR}/msw/tooltip.cpp
+    ${CORE_SRC_DIR}/msw/toplevel.cpp
+    ${CORE_SRC_DIR}/msw/uiaction.cpp
+    ${CORE_SRC_DIR}/msw/utilsgui.cpp
+    ${CORE_SRC_DIR}/msw/utilswin.cpp
+    ${CORE_SRC_DIR}/msw/uxtheme.cpp
+    ${CORE_SRC_DIR}/msw/window.cpp
+    ${CORE_SRC_DIR}/msw/joystick.cpp
+    ${CORE_SRC_DIR}/msw/rt/notifmsgrt.cpp
+    ${CORE_SRC_DIR}/msw/aboutdlg.cpp
+    ${CORE_SRC_DIR}/msw/sound.cpp
+    ${CORE_SRC_DIR}/msw/ole/uuid.cpp
+    ${CORE_SRC_DIR}/msw/helpchm.cpp
+    ${CORE_SRC_DIR}/common/taskbarcmn.cpp
+    ${CORE_SRC_DIR}/msw/helpwin.cpp
+    ${CORE_SRC_DIR}/msw/notifmsg.cpp
+    ${CORE_SRC_DIR}/msw/ole/automtn.cpp
+    ${CORE_SRC_DIR}/msw/taskbar.cpp
+    ${CORE_SRC_DIR}/msw/richtooltip.cpp
+    ${CORE_SRC_DIR}/msw/evtloop.cpp
+    ${CORE_SRC_DIR}/msw/ole/access.cpp
+)
+
+set(MSW_SRC
+    ${CORE_SRC_DIR}/generic/clrpickerg.cpp
+    ${CORE_SRC_DIR}/generic/collpaneg.cpp
+    ${CORE_SRC_DIR}/generic/filepickerg.cpp
+    ${CORE_SRC_DIR}/generic/fontpickerg.cpp
+    ${CORE_SRC_DIR}/generic/statusbr.cpp
+    ${CORE_SRC_DIR}/generic/prntdlgg.cpp
+    ${CORE_SRC_DIR}/msw/accel.cpp
+    ${CORE_SRC_DIR}/msw/anybutton.cpp
+    ${CORE_SRC_DIR}/msw/appprogress.cpp
+    ${CORE_SRC_DIR}/msw/artmsw.cpp
+    ${CORE_SRC_DIR}/msw/bmpbuttn.cpp
+    ${CORE_SRC_DIR}/msw/button.cpp
+    ${CORE_SRC_DIR}/msw/checkbox.cpp
+    ${CORE_SRC_DIR}/msw/choice.cpp
+    ${CORE_SRC_DIR}/msw/colordlg.cpp
+    ${CORE_SRC_DIR}/msw/combo.cpp
+    ${CORE_SRC_DIR}/msw/combobox.cpp
+    ${CORE_SRC_DIR}/msw/control.cpp
+    ${CORE_SRC_DIR}/msw/customdraw.cpp
+    ${CORE_SRC_DIR}/msw/dialog.cpp
+    ${CORE_SRC_DIR}/msw/dirdlg.cpp
+    ${CORE_SRC_DIR}/msw/dragimag.cpp
+    ${CORE_SRC_DIR}/msw/filedlg.cpp
+    ${CORE_SRC_DIR}/msw/frame.cpp
+    ${CORE_SRC_DIR}/msw/gauge.cpp
+    ${CORE_SRC_DIR}/msw/headerctrl.cpp
+    ${CORE_SRC_DIR}/msw/iniconf.cpp
+    ${CORE_SRC_DIR}/msw/listbox.cpp
+    ${CORE_SRC_DIR}/msw/listctrl.cpp
+    ${CORE_SRC_DIR}/msw/mdi.cpp
+    ${CORE_SRC_DIR}/msw/menu.cpp
+    ${CORE_SRC_DIR}/msw/menuitem.cpp
+    ${CORE_SRC_DIR}/msw/metafile.cpp
+    ${CORE_SRC_DIR}/msw/msgdlg.cpp
+    ${CORE_SRC_DIR}/msw/nativdlg.cpp
+    ${CORE_SRC_DIR}/msw/nativewin.cpp
+    ${CORE_SRC_DIR}/msw/notebook.cpp
+    ${CORE_SRC_DIR}/msw/ownerdrw.cpp
+    ${CORE_SRC_DIR}/msw/progdlg.cpp
+    ${CORE_SRC_DIR}/msw/radiobox.cpp
+    ${CORE_SRC_DIR}/msw/radiobut.cpp
+    ${CORE_SRC_DIR}/msw/richmsgdlg.cpp
+    ${CORE_SRC_DIR}/msw/scrolbar.cpp
+    ${CORE_SRC_DIR}/msw/slider.cpp
+    ${CORE_SRC_DIR}/msw/spinbutt.cpp
+    ${CORE_SRC_DIR}/msw/spinctrl.cpp
+    ${CORE_SRC_DIR}/msw/statbmp.cpp
+    ${CORE_SRC_DIR}/msw/statbox.cpp
+    ${CORE_SRC_DIR}/msw/statusbar.cpp
+    ${CORE_SRC_DIR}/msw/statline.cpp
+    ${CORE_SRC_DIR}/msw/stattext.cpp
+    ${CORE_SRC_DIR}/msw/systhemectrl.cpp
+    ${CORE_SRC_DIR}/msw/taskbarbutton.cpp
+    ${CORE_SRC_DIR}/msw/toolbar.cpp
+    ${CORE_SRC_DIR}/msw/textctrl.cpp
+    ${CORE_SRC_DIR}/msw/textentry.cpp
+    ${CORE_SRC_DIR}/msw/tglbtn.cpp
+    ${CORE_SRC_DIR}/msw/treectrl.cpp
+    ${CORE_SRC_DIR}/msw/bmpcbox.cpp
+    ${CORE_SRC_DIR}/msw/datectrl.cpp
+    ${CORE_SRC_DIR}/msw/calctrl.cpp
+    ${CORE_SRC_DIR}/msw/datecontrols.cpp
+    ${CORE_SRC_DIR}/msw/timectrl.cpp
+    ${CORE_SRC_DIR}/msw/commandlinkbutton.cpp
+    ${CORE_SRC_DIR}/msw/datetimectrl.cpp
+    ${CORE_SRC_DIR}/msw/hyperlink.cpp
+    ${CORE_SRC_DIR}/generic/activityindicator.cpp
+)
+
+set(MSW_DESKTOP_SRC
+    ${CORE_SRC_DIR}/msw/checklst.cpp
+    ${CORE_SRC_DIR}/msw/fdrepdlg.cpp
+    ${CORE_SRC_DIR}/msw/fontdlg.cpp
+)
+
+# Same as base lib
+set(BASE_AND_GUI_CMN_SRC
+    ${CORE_SRC_DIR}/common/event.cpp
+    ${CORE_SRC_DIR}/common/fs_mem.cpp
+    ${CORE_SRC_DIR}/common/msgout.cpp
+    ${CORE_SRC_DIR}/common/utilscmn.cpp
+)
+
+set(BASE_AND_GUI_WIN32_SRC
+    ${CORE_SRC_DIR}/msw/main.cpp
+    ${CORE_SRC_DIR}/msw/volume.cpp
+)
+
+set(CORE_SRC ${GUI_CMN_SRC} ${BASE_AND_GUI_CMN_SRC})
+set(CORE_HDR ${BASE_CMN_HDR} ${GUI_CMN_HDR})
+
+if(WIN32)
+    list(APPEND CORE_SRC ${BASE_AND_GUI_WIN32_SRC} ${BASE_WIN32_SRC})
+elseif(UNIX)
+    list(APPEND CORE_SRC ${UNIX_SRC})
+    if(wxUSE_LIBSDL)
+        list(APPEND CORE_SRC ${UNIX_SOUND_SDL_SRC})
+    endif()
+endif()
+
+if(WXMSW)
+    list(APPEND CORE_SRC
+        ${MSW_LOWLEVEL_SRC}
+        ${MSW_DESKTOP_SRC}
+        ${MSW_DESKTOP_LOWLEVEL_SRC}
+        ${MSW_SRC}
+    )
+    list(APPEND CORE_HDR
+        ${MSW_LOWLEVEL_HDR}
+        ${MSW_DESKTOP_LOWLEVEL_HDR}
+        ${MSW_HDR}
+        ${MSW_DESKTOP_HDR}
+    )
+
+    if(NOT wxUSE_OLE)
+        wx_list_add_prefix(CORE_SRC "${wxSOURCE_DIR}/" "src/generic/dirdlgg.cpp")
+    endif()
+elseif(WXGTK)
+    if(WXGTK2)
+        wx_append_sources(CORE_SRC GTK2_LOWLEVEL)
+        wx_append_sources(CORE_SRC GTK2)
+    else()
+        wx_append_sources(CORE_SRC GTK_LOWLEVEL)
+        wx_append_sources(CORE_SRC GTK)
+    endif()
+
+    if(UNIX)
+        wx_append_sources(CORE_SRC XWIN_LOWLEVEL)
+    elseif(WIN32)
+        list(APPEND CORE_SRC ${GTK_WIN32})
+    endif()
+elseif(WXOSX_COCOA)
+    wx_append_sources(CORE_SRC BASE_AND_GUI_OSX_COCOA)
+    wx_append_sources(CORE_SRC OSX_LOWLEVEL)
+    wx_append_sources(CORE_SRC OSX_SHARED)
+    wx_append_sources(CORE_SRC OSX_COCOA)
+elseif(WXOSX_IPHONE)
+    wx_append_sources(CORE_SRC OSX_LOWLEVEL)
+    wx_append_sources(CORE_SRC OSX_IPHONE)
+elseif(WXQT)
+    wx_append_sources(CORE_SRC QT)
+    if(WIN32)
+        wx_append_sources(CORE_SRC QT_WIN32)
+    endif()
+endif()
+
+add_library(wxcore 
+    ${CORE_SRC}
+)
+
+target_include_directories(wxcore
+    PUBLIC
+        ${CMAKE_SOURCE_DIR}/include
+        ${CMAKE_SOURCE_DIR}/3rdparty/tmp/include
+)
+
+target_link_libraries(wxcore
+    PRIVATE
+        Boost::nowide
+        fmt::fmt
+        Microsoft.GSL::GSL
+        png
+)
+
+foreach(lib JPEG PNG TIFF)
+    if(${lib}_LIBRARIES)
+        if(lib STREQUAL JPEG)
+            wx_lib_include_directories(wxcore PRIVATE ${${lib}_INCLUDE_DIR})
+        else()
+            wx_lib_include_directories(wxcore PRIVATE ${${lib}_INCLUDE_DIRS})
+        endif()
+
+        wx_lib_link_libraries(wxcore PRIVATE ${${lib}_LIBRARIES})
+    endif()
+endforeach()
+
+if(WIN32)
+    target_link_libraries(wxcore
+        PRIVATE
+            winmm
+    )
+endif()
+if(WXOSX_COCOA)
+    wx_lib_link_libraries(wxcore PUBLIC "-framework AudioToolbox")
+    if(wxUSE_WEBVIEW)
+        wx_lib_link_libraries(wxcore PUBLIC "-framework WebKit")
+    endif()
+endif()
+if(WXOSX_IPHONE)
+    wx_lib_link_libraries(wxcore
+        PUBLIC
+        "-framework AudioToolbox"
+        "-framework CoreGraphics"
+        "-framework CoreText"
+        "-framework UIKit"
+        )
+endif()
+if(WXGTK AND wxUSE_PRIVATE_FONTS)
+    wx_lib_include_directories(wxcore PUBLIC ${FONTCONFIG_INCLUDE_DIRS} ${PANGOFT2_INCLUDE_DIRS})
+    wx_lib_link_libraries(wxcore PUBLIC ${FONTCONFIG_LIBRARIES} ${PANGOFT2_LIBRARIES})
+endif()
+if(wxUSE_LIBSDL)
+    if(SDL2_FOUND)
+        wx_lib_include_directories(wxcore PUBLIC ${SDL2_INCLUDE_DIR})
+        wx_lib_link_libraries(wxcore PUBLIC ${SDL2_LIBRARY})
+    elseif(SDL_FOUND)
+        wx_lib_include_directories(wxcore PUBLIC ${SDL_INCLUDE_DIR})
+        wx_lib_link_libraries(wxcore PUBLIC ${SDL_LIBRARY})
+    endif()
+endif()
+if(wxUSE_LIBNOTIFY)
+    wx_lib_include_directories(wxcore PUBLIC ${LIBNOTIFY_INCLUDE_DIRS})
+    wx_lib_link_libraries(wxcore PUBLIC ${LIBNOTIFY_LIBRARIES})
+endif()

@@ -124,7 +124,7 @@ private:
 bool WXDLLIMPEXP_PROPGRID
 operator==(const wxColourPropertyValue&, const wxColourPropertyValue&);
 
-DECLARE_VARIANT_OBJECT_EXPORTED(wxColourPropertyValue, WXDLLIMPEXP_PROPGRID)
+DECLARE_VARIANT_OBJECT_EXPORTED(wxColourPropertyValue)
 
 // -----------------------------------------------------------------------
 

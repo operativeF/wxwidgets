@@ -15,7 +15,7 @@
 
 #include <string>
 
-class WXDLLIMPEXP_CORE wxTextCtrl : public wxTextCtrlBase
+class wxTextCtrl : public wxTextCtrlBase
 {
 public:
     // creation

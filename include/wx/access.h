@@ -15,10 +15,12 @@
 // headers we have to include here
 // ----------------------------------------------------------------------------
 
-#include "wx/defs.h"
-
 #if wxUSE_ACCESSIBILITY
 
+#include "wx/defs.h"
+
+#include "wx/geometry/point.h"
+#include "wx/geometry/rect.h"
 #include "wx/variant.h"
 
 #include <string>
@@ -226,10 +228,10 @@ constexpr unsigned int wxACC_EVENT_OBJECT_ACCELERATORCHANGE      = 0x8012;
 // All functions return an indication of success, failure, or not implemented.
 // ----------------------------------------------------------------------------
 
-class  WXDLLIMPEXP_FWD_CORE wxAccessible;
-class  WXDLLIMPEXP_FWD_CORE wxWindow;
+class wxAccessible;
+class wxWindow;
 
-class WXDLLIMPEXP_CORE wxAccessibleBase
+class wxAccessibleBase
 {
 public:
     wxAccessibleBase(wxWindow* win): m_window(win) {}

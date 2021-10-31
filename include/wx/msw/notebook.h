@@ -26,7 +26,7 @@ using msw::utils::unique_brush;
 // expense of some extra GDI resource consumption
 #define USE_NOTEBOOK_ANTIFLICKER    1
 
-class WXDLLIMPEXP_CORE wxNotebook : public wxNotebookBase
+class wxNotebook : public wxNotebookBase
 {
 public:
   wxNotebook() = default;

@@ -36,19 +36,9 @@
     #endif // defined(environ)
 #endif
 
-#ifndef WX_PRECOMP
-    #if defined(WX_WINDOWS)
-        #include "wx/msw/private.h"
-    #endif
-
-    #include <algorithm>
-    #include <memory>
-    #include <string>
-    #include <vector>
-    #include <utility>
-
-    #include <fmt/core.h>
-#endif // WX_PRECOMP
+#if defined(WX_WINDOWS)
+    #include "wx/msw/private.h"
+#endif
 
 #include "wx/app.h"
 #include "wx/string.h"
@@ -97,6 +87,13 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
+#include <algorithm>
+#include <memory>
+#include <string>
+#include <vector>
+#include <utility>
+
+#include <fmt/core.h>
 
 #if wxUSE_GUI
     // Include the definitions of GTK_XXX_VERSION constants.

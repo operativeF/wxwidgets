@@ -7,11 +7,9 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include "wx/wxprec.h"
+#if wxUSE_COLLPANE
 
 #include "wx/defs.h"
-
-#if wxUSE_COLLPANE
 
 #include "wx/collheaderctrl.h"
 #include "wx/dcclient.h"

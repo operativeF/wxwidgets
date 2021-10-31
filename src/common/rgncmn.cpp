@@ -8,9 +8,6 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #include "wx/region.h"
 #include "wx/dcmemory.h"
 #include "wx/bitmap.h"

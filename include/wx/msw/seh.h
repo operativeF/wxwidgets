@@ -15,7 +15,7 @@
     // the exception handler which should be called from the exception filter
     //
     // it calls wxApp::OnFatalException() if wxTheApp object exists
-    WXDLLIMPEXP_BASE unsigned long wxGlobalSEHandler(EXCEPTION_POINTERS *pExcPtrs);
+    unsigned long wxGlobalSEHandler(EXCEPTION_POINTERS *pExcPtrs);
 
     // helper macro for wxSEH_HANDLE
     #define wxSEH_DUMMY_RETURN(rc)

@@ -32,6 +32,8 @@
     #include   <unistd.h>
 #endif
 
+#include <boost/nowide/convert.hpp>
+
 #include <string>
 #include <vector>
 

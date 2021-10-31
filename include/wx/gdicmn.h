@@ -33,16 +33,16 @@
 // forward declarations
 // ---------------------------------------------------------------------------
 
-class  WXDLLIMPEXP_FWD_CORE wxBitmap;
-class  WXDLLIMPEXP_FWD_CORE wxBrush;
-class  WXDLLIMPEXP_FWD_CORE wxColour;
-class  WXDLLIMPEXP_FWD_CORE wxCursor;
-class  WXDLLIMPEXP_FWD_CORE wxFont;
-class  WXDLLIMPEXP_FWD_CORE wxIcon;
-class  WXDLLIMPEXP_FWD_CORE wxPalette;
-class  WXDLLIMPEXP_FWD_CORE wxPen;
-class  WXDLLIMPEXP_FWD_CORE wxRegion;
-class  WXDLLIMPEXP_FWD_CORE wxIconBundle;
+class wxBitmap;
+class wxBrush;
+class wxColour;
+class wxCursor;
+class wxFont;
+class wxIcon;
+class wxPalette;
+class wxPen;
+class wxRegion;
+class wxIconBundle;
 
 // ---------------------------------------------------------------------------
 // constants
@@ -272,7 +272,7 @@ enum class wxEllipsizeMode
 // Management of pens, brushes and fonts
 // ---------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxGDIObjListBase {
+class wxGDIObjListBase {
 public:
     ~wxGDIObjListBase();
 
@@ -282,7 +282,7 @@ protected:
 
 WX_DECLARE_STRING_HASH_MAP(wxColour*, wxStringToColourHashMap);
 
-class WXDLLIMPEXP_CORE wxColourDatabase
+class wxColourDatabase
 {
 public:
     ~wxColourDatabase();
@@ -302,7 +302,7 @@ private:
     wxStringToColourHashMap *m_map{nullptr};
 };
 
-class WXDLLIMPEXP_CORE wxResourceCache: public wxList
+class wxResourceCache: public wxList
 {
 public:
     ~wxResourceCache();
@@ -323,7 +323,7 @@ public:
   pointer.  By default this pointer is set to an instance of wxStockGDI.
   A derived class must arrange to set this pointer to an instance of itself.
 */
-class WXDLLIMPEXP_CORE wxStockGDI
+class wxStockGDI
 {
 public:
     enum Item {
@@ -433,17 +433,17 @@ protected:
 #define wxSTANDARD_CURSOR   wxStockGDI::GetCursor(wxStockGDI::CURSOR_STANDARD)
 
 // 'Null' objects
-extern WXDLLIMPEXP_DATA_CORE(wxBitmap)     wxNullBitmap;
-extern WXDLLIMPEXP_DATA_CORE(wxIcon)       wxNullIcon;
-extern WXDLLIMPEXP_DATA_CORE(wxCursor)     wxNullCursor;
-extern WXDLLIMPEXP_DATA_CORE(wxPen)        wxNullPen;
-extern WXDLLIMPEXP_DATA_CORE(wxBrush)      wxNullBrush;
-extern WXDLLIMPEXP_DATA_CORE(wxPalette)    wxNullPalette;
-extern WXDLLIMPEXP_DATA_CORE(wxFont)       wxNullFont;
-extern WXDLLIMPEXP_DATA_CORE(wxColour)     wxNullColour;
-extern WXDLLIMPEXP_DATA_CORE(wxIconBundle) wxNullIconBundle;
+extern wxBitmap     wxNullBitmap;
+extern wxIcon       wxNullIcon;
+extern wxCursor     wxNullCursor;
+extern wxPen        wxNullPen;
+extern wxBrush      wxNullBrush;
+extern wxPalette    wxNullPalette;
+extern wxFont       wxNullFont;
+extern wxColour     wxNullColour;
+extern wxIconBundle wxNullIconBundle;
 
-extern WXDLLIMPEXP_DATA_CORE(wxColourDatabase*)  wxTheColourDatabase;
+extern wxColourDatabase*  wxTheColourDatabase;
 
 constexpr char wxPanelNameStr[] = "panel";
 
@@ -455,32 +455,32 @@ constexpr wxPoint wxDefaultPosition{wxDefaultCoord, wxDefaultCoord};
 // ---------------------------------------------------------------------------
 
 // resource management
-extern void WXDLLIMPEXP_CORE wxInitializeStockLists();
-extern void WXDLLIMPEXP_CORE wxDeleteStockLists();
+extern void wxInitializeStockLists();
+extern void wxDeleteStockLists();
 
 // Note: all the display-related functions here exist for compatibility only,
 // please use wxDisplay class in the new code
 
 // is the display colour (or monochrome)?
-extern bool WXDLLIMPEXP_CORE wxColourDisplay();
+extern bool wxColourDisplay();
 
 // Returns depth of screen
-extern int WXDLLIMPEXP_CORE wxDisplayDepth();
+extern int wxDisplayDepth();
 #define wxGetDisplayDepth wxDisplayDepth
 
 // get the display size
-extern void WXDLLIMPEXP_CORE wxDisplaySize(int *width, int *height);
-extern wxSize WXDLLIMPEXP_CORE wxGetDisplaySize();
-extern void WXDLLIMPEXP_CORE wxDisplaySizeMM(int *width, int *height);
-extern wxSize WXDLLIMPEXP_CORE wxGetDisplaySizeMM();
-extern wxSize WXDLLIMPEXP_CORE wxGetDisplayPPI();
+extern void wxDisplaySize(int *width, int *height);
+extern wxSize wxGetDisplaySize();
+extern void wxDisplaySizeMM(int *width, int *height);
+extern wxSize wxGetDisplaySizeMM();
+extern wxSize wxGetDisplayPPI();
 
 // Get position and size of the display workarea
-extern void WXDLLIMPEXP_CORE wxClientDisplayRect(int *x, int *y, int *width, int *height);
-extern wxRect WXDLLIMPEXP_CORE wxGetClientDisplayRect();
+extern void wxClientDisplayRect(int *x, int *y, int *width, int *height);
+extern wxRect wxGetClientDisplayRect();
 
 // set global cursor
-extern void WXDLLIMPEXP_CORE wxSetCursor(const wxCursor& cursor);
+extern void wxSetCursor(const wxCursor& cursor);
 
 #endif
     // _WX_GDICMNH__

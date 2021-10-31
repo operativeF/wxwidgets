@@ -23,7 +23,7 @@ constexpr char wxButtonNameStr[] = "button";
 // wxButton: a push button
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxButtonBase : public wxAnyButton
+class wxButtonBase : public wxAnyButton
 {
 public:
     wxButtonBase& operator=(wxButtonBase&&) = delete;

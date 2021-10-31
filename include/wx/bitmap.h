@@ -21,12 +21,12 @@
 
 #include <string>
 
-class WXDLLIMPEXP_FWD_CORE wxBitmap;
-struct WXDLLIMPEXP_FWD_CORE wxBitmapHandler;
-class WXDLLIMPEXP_FWD_CORE wxIcon;
-class WXDLLIMPEXP_FWD_CORE wxMask;
-class WXDLLIMPEXP_FWD_CORE wxPalette;
-class WXDLLIMPEXP_FWD_CORE wxDC;
+class wxBitmap;
+struct wxBitmapHandler;
+class wxIcon;
+class wxMask;
+class wxPalette;
+class wxDC;
 
 // ----------------------------------------------------------------------------
 // wxVariant support
@@ -34,7 +34,7 @@ class WXDLLIMPEXP_FWD_CORE wxDC;
 
 #if wxUSE_VARIANT
 #include "wx/variant.h"
-DECLARE_VARIANT_OBJECT_EXPORTED(wxBitmap,WXDLLIMPEXP_CORE)
+DECLARE_VARIANT_OBJECT_EXPORTED(wxBitmap)
 #endif
 
 // ----------------------------------------------------------------------------
@@ -43,7 +43,7 @@ DECLARE_VARIANT_OBJECT_EXPORTED(wxBitmap,WXDLLIMPEXP_CORE)
 
 // TODO: all implementation of wxMask, except the generic one,
 //       do not derive from wxMaskBase,,, they should
-class WXDLLIMPEXP_CORE wxMaskBase
+class wxMaskBase
 {
 public:
     // create the mask from bitmap pixels of the given colour
@@ -93,7 +93,7 @@ protected:
 // methods into this class from which both wxBitmapBase (and hence wxBitmap on
 // all platforms where it does inherit from it) and wxBitmap in wxMSW and other
 // exceptional ports (only wxPM and old wxCocoa) inherit.
-class WXDLLIMPEXP_CORE wxBitmapHelpers
+class wxBitmapHelpers
 {
 public:
     // Create a new wxBitmap from the PNG data in the given buffer.
@@ -111,7 +111,7 @@ public:
 // different formats
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxBitmapHandler : public wxObject
+class wxBitmapHandler : public wxObject
 {
 public:
     wxBitmapHandler() { m_type = wxBitmapType::Invalid; }
@@ -154,7 +154,7 @@ private:
 // wxBitmap: class which represents platform-dependent bitmap (unlike wxImage)
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxBitmapBase : public wxGDIObject,
+class wxBitmapBase : public wxGDIObject,
                                       public wxBitmapHelpers
 {
 public:

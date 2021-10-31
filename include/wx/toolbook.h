@@ -37,7 +37,7 @@ constexpr unsigned int wxTBK_HORZ_LAYOUT = 0x8000;
 // wxToolbook
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxToolbook : public wxNavigationEnabled<wxBookCtrlBase>
+class wxToolbook : public wxNavigationEnabled<wxBookCtrlBase>
 {
 public:
     wxToolbook() = default;

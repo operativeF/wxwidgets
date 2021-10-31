@@ -9,17 +9,8 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #include "wx/sizer.h"
 #include "wx/private/flagscheck.h"
-
-#ifndef WX_PRECOMP
-    #include <memory>
-    #include <string>
-    #include <vector>
-#endif // WX_PRECOMP
 
 #include "wx/intl.h"
 #include "wx/utils.h"
@@ -31,6 +22,10 @@
 #include "wx/display.h"
 #include "wx/listimpl.cpp"
 #include "wx/private/window.h"
+
+#include <memory>
+#include <string>
+#include <vector>
 
 //---------------------------------------------------------------------------
 

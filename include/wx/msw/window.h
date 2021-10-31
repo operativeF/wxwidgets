@@ -12,13 +12,15 @@
 #ifndef _WX_WINDOW_H_
 #define _WX_WINDOW_H_
 
+#include "wx/msw/wrapwin.h"
+
 #include "wx/geometry/point.h"
 #include "wx/geometry/rect.h"
 #include "wx/geometry/size.h"
 
 #include <string_view>
 
-class WXDLLIMPEXP_FWD_CORE wxButton;
+class wxButton;
 
 enum wxSystemColour : unsigned int;
 
@@ -32,7 +34,7 @@ enum wxSystemColour : unsigned int;
 // wxWindow declaration for MSW
 // ---------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxWindowMSW : public wxWindowBase
+class wxWindowMSW : public wxWindowBase
 {
     friend class wxSpinCtrl;
     friend class wxSlider;

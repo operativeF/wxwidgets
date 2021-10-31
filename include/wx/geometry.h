@@ -11,9 +11,9 @@
 #ifndef _WX_GEOMETRY_H_
 #define _WX_GEOMETRY_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_GEOMETRY
+
+#include "wx/defs.h"
 
 #include "wx/utils.h"
 #include "wx/geometry/point.h"
@@ -21,6 +21,7 @@
 #include "wx/geometry/rect.h"
 #include "wx/bitflags.h"
 
+#include <algorithm>
 #include <cstdint>
 
 class WXDLLIMPEXP_FWD_BASE wxDataInputStream;

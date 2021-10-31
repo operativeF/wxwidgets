@@ -13,6 +13,8 @@
 #ifdef wxHAS_ANY_BUTTON
 
 #include "wx/defs.h"
+#include "wx/bitmap.h"
+#include "wx/control.h"
 
 // ----------------------------------------------------------------------------
 // wxAnyButton specific flags
@@ -40,15 +42,11 @@ constexpr unsigned int wxBU_EXACTFIT        = 0x0001;
 // bitmap would be shown
 constexpr unsigned int wxBU_NOTEXT          = 0x0002;
 
-
-#include "wx/bitmap.h"
-#include "wx/control.h"
-
 // ----------------------------------------------------------------------------
 // wxAnyButton: common button functionality
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxAnyButtonBase : public wxControl
+class wxAnyButtonBase : public wxControl
 {
 public:
    wxAnyButtonBase& operator=(wxAnyButtonBase&&) = delete;

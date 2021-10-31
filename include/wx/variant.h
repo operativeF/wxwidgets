@@ -469,11 +469,11 @@ REGISTER_WXANY_CONVERSION(T, CLASSNAME)
 
 
 #define DECLARE_VARIANT_OBJECT(classname) \
-    DECLARE_VARIANT_OBJECT_EXPORTED(classname, wxEMPTY_PARAMETER_VALUE)
+    DECLARE_VARIANT_OBJECT_EXPORTED(classname)
 
-#define DECLARE_VARIANT_OBJECT_EXPORTED(classname,expdecl) \
-expdecl classname& operator << ( classname &object, const wxVariant &variant ); \
-expdecl wxVariant& operator << ( wxVariant &variant, const classname &object );
+#define DECLARE_VARIANT_OBJECT_EXPORTED(classname) \
+    classname& operator << ( classname &object, const wxVariant &variant ); \
+    wxVariant& operator << ( wxVariant &variant, const classname &object );
 
 #define IMPLEMENT_VARIANT_OBJECT(classname) \
     IMPLEMENT_VARIANT_OBJECT_EXPORTED(classname, wxEMPTY_PARAMETER_VALUE)

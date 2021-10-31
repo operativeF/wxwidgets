@@ -11,9 +11,9 @@
 #ifndef _WX_CHECKLST_H_BASE_
 #define _WX_CHECKLST_H_BASE_
 
-#include "wx/defs.h"
-
 #if wxUSE_CHECKLISTBOX
+
+#include "wx/defs.h"
 
 #include "wx/listbox.h"
 
@@ -24,7 +24,7 @@
 // wxCheckListBox: a listbox whose items may be checked
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxCheckListBoxBase : public wxListBox
+class wxCheckListBoxBase : public wxListBox
 {
 public:
     wxCheckListBoxBase& operator=(wxCheckListBoxBase&&) = delete;

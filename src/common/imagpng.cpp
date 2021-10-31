@@ -16,7 +16,7 @@
 #include "wx/stream.h"
 #include "wx/stringutils.h"
 
-#include "png.h"
+#include <png.h>
 
 #include <tuple>
 

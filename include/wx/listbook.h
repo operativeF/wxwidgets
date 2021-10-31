@@ -38,7 +38,7 @@ constexpr unsigned int wxLB_ALIGN_MASK = wxBK_ALIGN_MASK;
 // wxListbook
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxListbook : public wxNavigationEnabled<wxBookCtrlBase>
+class wxListbook : public wxNavigationEnabled<wxBookCtrlBase>
 {
 public:
     wxListbook() = default;

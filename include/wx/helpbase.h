@@ -11,16 +11,18 @@
 #ifndef _WX_HELPBASEH__
 #define _WX_HELPBASEH__
 
-#include "wx/defs.h"
-
 #if wxUSE_HELP
 
+#include "wx/defs.h"
+
+#include "wx/gdicmn.h"
+#include "wx/geometry/size.h"
 #include "wx/geometry/point.h"
 
 #include <string>
 
-class WXDLLIMPEXP_FWD_CORE wxFrame;
-class WXDLLIMPEXP_FWD_CORE wxWindow;
+class wxFrame;
+class wxWindow;
 
 // Flags for SetViewer
 constexpr unsigned int wxHELP_NETSCAPE = 1;
@@ -33,7 +35,7 @@ enum class wxHelpSearchMode
 };
 
 // Defines the API for help controllers
-class WXDLLIMPEXP_CORE wxHelpControllerBase
+class wxHelpControllerBase
 {
 public:
     wxHelpControllerBase(wxWindow* parentWindow = nullptr) { m_parentWindow = parentWindow; }

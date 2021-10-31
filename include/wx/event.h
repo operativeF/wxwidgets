@@ -53,10 +53,10 @@ class wxEvent;
 class wxEventFilter;
 
 #if wxUSE_GUI
-    class WXDLLIMPEXP_FWD_CORE wxDC;
-    class WXDLLIMPEXP_FWD_CORE wxMenu;
-    class WXDLLIMPEXP_FWD_CORE wxWindow;
-    class WXDLLIMPEXP_FWD_CORE wxWindowBase;
+    class wxDC;
+    class wxMenu;
+    class wxWindow;
+    class wxWindowBase;
 #endif // wxUSE_GUI
 
 // We operate with pointer to members of wxEvtHandler (such functions are used
@@ -793,9 +793,9 @@ wxDECLARE_EXPORTED_EVENT(WXDLLIMPEXP_CORE, wxEVT_SCROLL_CHANGED, wxScrollEvent);
 
 #if wxUSE_SPINBTN
 
-wxDECLARE_EXPORTED_EVENT_ALIAS( WXDLLIMPEXP_CORE, wxEVT_SPIN_UP,   wxSpinEvent );
-wxDECLARE_EXPORTED_EVENT_ALIAS( WXDLLIMPEXP_CORE, wxEVT_SPIN_DOWN, wxSpinEvent );
-wxDECLARE_EXPORTED_EVENT_ALIAS( WXDLLIMPEXP_CORE, wxEVT_SPIN,      wxSpinEvent );
+wxDECLARE_EXPORTED_EVENT_ALIAS(, wxEVT_SPIN_UP,   wxSpinEvent );
+wxDECLARE_EXPORTED_EVENT_ALIAS(, wxEVT_SPIN_DOWN, wxSpinEvent );
+wxDECLARE_EXPORTED_EVENT_ALIAS(, wxEVT_SPIN,      wxSpinEvent );
 
 #endif
 
@@ -1563,7 +1563,7 @@ private:
  wxEVT_TOGGLEBUTTON
 */
 
-class WXDLLIMPEXP_CORE wxCommandEvent : public wxEvent,
+class wxCommandEvent : public wxEvent,
                                         public wxEventBasicPayloadMixin
 {
 public:
@@ -1628,7 +1628,7 @@ public:
 
 // this class adds a possibility to react (from the user) code to a control
 // notification: allow or veto the operation being reported.
-class WXDLLIMPEXP_CORE wxNotifyEvent  : public wxCommandEvent
+class wxNotifyEvent  : public wxCommandEvent
 {
 public:
     wxNotifyEvent(wxEventType commandType = wxEVT_NULL, int winid = 0)
@@ -1676,7 +1676,7 @@ public:
  wxEVT_SCROLL_CHANGED
 */
 
-class WXDLLIMPEXP_CORE wxScrollEvent : public wxCommandEvent
+class wxScrollEvent : public wxCommandEvent
 {
 public:
     wxScrollEvent(wxEventType commandType = wxEVT_NULL,
@@ -1710,7 +1710,7 @@ public:
  wxEVT_SCROLLWIN_THUMBRELEASE
 */
 
-class WXDLLIMPEXP_CORE wxScrollWinEvent : public wxEvent
+class wxScrollWinEvent : public wxEvent
 {
 public:
     wxScrollWinEvent(wxEventType commandType = wxEVT_NULL,
@@ -1763,7 +1763,7 @@ enum class wxMouseWheelAxis
     Horizontal
 };
 
-class WXDLLIMPEXP_CORE wxMouseEvent : public wxEvent,
+class wxMouseEvent : public wxEvent,
                                       public wxMouseState
 {
 public:
@@ -1909,7 +1909,7 @@ private:
    wxEVT_SET_CURSOR
  */
 
-class WXDLLIMPEXP_CORE wxSetCursorEvent : public wxEvent
+class wxSetCursorEvent : public wxEvent
 {
 public:
     wxSetCursorEvent(wxCoord x = 0, wxCoord y = 0)
@@ -1945,7 +1945,7 @@ public:
 
 static constexpr unsigned int wxTwoFingerTimeInterval = 200;
 
-class WXDLLIMPEXP_CORE wxGestureEvent : public wxEvent
+class wxGestureEvent : public wxEvent
 {
 public:
     wxGestureEvent(wxWindowID winid = 0, wxEventType type = wxEVT_NULL)
@@ -1990,7 +1990,7 @@ public:
   wxEVT_GESTURE_PAN
   */
 
-class WXDLLIMPEXP_CORE wxPanGestureEvent : public wxGestureEvent
+class wxPanGestureEvent : public wxGestureEvent
 {
 public:
     wxPanGestureEvent(wxWindowID winid = 0)
@@ -2022,7 +2022,7 @@ public:
   wxEVT_GESTURE_ZOOM
   */
 
-class WXDLLIMPEXP_CORE wxZoomGestureEvent : public wxGestureEvent
+class wxZoomGestureEvent : public wxGestureEvent
 {
 public:
     wxZoomGestureEvent(wxWindowID winid = 0)
@@ -2056,7 +2056,7 @@ public:
   wxEVT_GESTURE_ROTATE
   */
 
-class WXDLLIMPEXP_CORE wxRotateGestureEvent : public wxGestureEvent
+class wxRotateGestureEvent : public wxGestureEvent
 {
 public:
     wxRotateGestureEvent(wxWindowID winid = 0)
@@ -2090,7 +2090,7 @@ public:
   wxEVT_TWO_FINGER_TAP
   */
 
-class WXDLLIMPEXP_CORE wxTwoFingerTapEvent : public wxGestureEvent
+class wxTwoFingerTapEvent : public wxGestureEvent
 {
 public:
     wxTwoFingerTapEvent(wxWindowID winid = 0)
@@ -2115,7 +2115,7 @@ public:
   wxEVT_LONG_PRESS
   */
 
-class WXDLLIMPEXP_CORE wxLongPressEvent : public wxGestureEvent
+class wxLongPressEvent : public wxGestureEvent
 {
 public:
     wxLongPressEvent(wxWindowID winid = 0)
@@ -2140,7 +2140,7 @@ public:
   wxEVT_PRESS_AND_TAP
   */
 
-class WXDLLIMPEXP_CORE wxPressAndTapEvent : public wxGestureEvent
+class wxPressAndTapEvent : public wxGestureEvent
 {
 public:
     wxPressAndTapEvent(wxWindowID winid = 0)
@@ -2196,7 +2196,7 @@ enum wxKeyCategoryFlags
                               WXK_CATEGORY_JUMP
 };
 
-class WXDLLIMPEXP_CORE wxKeyEvent : public wxEvent,
+class wxKeyEvent : public wxEvent,
                                     public wxKeyboardState
 {
 public:
@@ -2312,7 +2312,7 @@ private:
  wxEVT_SIZE
  */
 
-class WXDLLIMPEXP_CORE wxSizeEvent : public wxEvent
+class wxSizeEvent : public wxEvent
 {
 public:
     wxSizeEvent() : wxEvent(0, wxEVT_SIZE)
@@ -2353,7 +2353,7 @@ public:
  wxEVT_MOVE
  */
 
-class WXDLLIMPEXP_CORE wxMoveEvent : public wxEvent
+class wxMoveEvent : public wxEvent
 {
 public:
     wxMoveEvent()
@@ -2397,7 +2397,7 @@ public:
  wxEVT_NC_PAINT
  */
 
-class WXDLLIMPEXP_CORE wxPaintEvent : public wxEvent
+class wxPaintEvent : public wxEvent
 {
     // This ctor is only intended to be used by wxWidgets itself, so it's
     // intentionally declared as private when not building the library itself.
@@ -2415,7 +2415,7 @@ public:
 	static wxObject* wxCreateObject();
 };
 
-class WXDLLIMPEXP_CORE wxNcPaintEvent : public wxEvent
+class wxNcPaintEvent : public wxEvent
 {
     // This ctor is only intended to be used by wxWidgets itself, so it's
     // intentionally declared as private when not building the library itself.
@@ -2438,7 +2438,7 @@ public:
  wxEVT_ERASE_BACKGROUND
  */
 
-class WXDLLIMPEXP_CORE wxEraseEvent : public wxEvent
+class wxEraseEvent : public wxEvent
 {
 public:
     wxEraseEvent(int Id = 0, wxDC *dc = nullptr)
@@ -2469,7 +2469,7 @@ public:
  wxEVT_KILL_FOCUS
  */
 
-class WXDLLIMPEXP_CORE wxFocusEvent : public wxEvent
+class wxFocusEvent : public wxEvent
 {
 public:
     wxFocusEvent(wxEventType type = wxEVT_NULL, int winid = 0)
@@ -2501,7 +2501,7 @@ public:
 
 // wxChildFocusEvent notifies the parent that a child has got the focus: unlike
 // wxFocusEvent it is propagated upwards the window chain
-class WXDLLIMPEXP_CORE wxChildFocusEvent : public wxCommandEvent
+class wxChildFocusEvent : public wxCommandEvent
 {
 public:
     wxChildFocusEvent(wxWindow *win = nullptr);
@@ -2525,7 +2525,7 @@ public:
  wxEVT_HIBERNATE
  */
 
-class WXDLLIMPEXP_CORE wxActivateEvent : public wxEvent
+class wxActivateEvent : public wxEvent
 {
 public:
     // Type of activation. For now we can only detect if it was by mouse or by
@@ -2573,7 +2573,7 @@ public:
  wxEVT_INIT_DIALOG
  */
 
-class WXDLLIMPEXP_CORE wxInitDialogEvent : public wxEvent
+class wxInitDialogEvent : public wxEvent
 {
 public:
     wxInitDialogEvent(int Id = 0)
@@ -2597,7 +2597,7 @@ public:
  wxEVT_MENU_HIGHLIGHT,
 */
 
-class WXDLLIMPEXP_CORE wxMenuEvent : public wxEvent
+class wxMenuEvent : public wxEvent
 {
 public:
     wxMenuEvent(wxEventType type = wxEVT_NULL, int winid = 0, wxMenu* menu = nullptr)
@@ -2638,7 +2638,7 @@ public:
  wxEVT_QUERY_END_SESSION
  */
 
-class WXDLLIMPEXP_CORE wxCloseEvent : public wxEvent
+class wxCloseEvent : public wxEvent
 {
 public:
     wxCloseEvent(wxEventType type = wxEVT_NULL, int winid = 0)
@@ -2689,7 +2689,7 @@ public:
  wxEVT_SHOW
  */
 
-class WXDLLIMPEXP_CORE wxShowEvent : public wxEvent
+class wxShowEvent : public wxEvent
 {
 public:
     wxShowEvent(int winid = 0, bool show = false)
@@ -2721,7 +2721,7 @@ public:
  wxEVT_ICONIZE
  */
 
-class WXDLLIMPEXP_CORE wxIconizeEvent : public wxEvent
+class wxIconizeEvent : public wxEvent
 {
 public:
     wxIconizeEvent(int winid = 0, bool iconized = true)
@@ -2750,7 +2750,7 @@ public:
  wxEVT_MAXIMIZE
  */
 
-class WXDLLIMPEXP_CORE wxMaximizeEvent : public wxEvent
+class wxMaximizeEvent : public wxEvent
 {
 public:
     wxMaximizeEvent(int winid = 0)
@@ -2770,7 +2770,7 @@ public:
 /*
  wxEVT_FULLSCREEN
  */
-class WXDLLIMPEXP_CORE wxFullScreenEvent : public wxEvent
+class wxFullScreenEvent : public wxEvent
 {
 public:
     wxFullScreenEvent(int winid = 0, bool fullscreen = true)
@@ -2820,7 +2820,7 @@ enum
     wxJOY_BUTTON_ANY = wxJOY_BUTTON1 | wxJOY_BUTTON2 | wxJOY_BUTTON3 | wxJOY_BUTTON4
 };
 
-class WXDLLIMPEXP_CORE wxJoystickEvent : public wxEvent
+class wxJoystickEvent : public wxEvent
 {
 protected:
     wxPoint      m_pos;
@@ -2899,7 +2899,7 @@ public:
  wxEVT_DROP_FILES
  */
 
-class WXDLLIMPEXP_CORE wxDropFilesEvent : public wxEvent
+class wxDropFilesEvent : public wxEvent
 {
 public:
     wxDropFilesEvent(wxEventType type = wxEVT_NULL,
@@ -2947,7 +2947,7 @@ enum class wxUpdateUIMode
     Specified
 };
 
-class WXDLLIMPEXP_CORE wxUpdateUIEvent : public wxCommandEvent
+class wxUpdateUIEvent : public wxCommandEvent
 {
 public:
     wxUpdateUIEvent(wxWindowID commandId = 0)
@@ -3030,7 +3030,7 @@ public:
  */
 
 // TODO: shouldn't all events record the window ID?
-class WXDLLIMPEXP_CORE wxSysColourChangedEvent : public wxEvent
+class wxSysColourChangedEvent : public wxEvent
 {
 public:
     wxSysColourChangedEvent()
@@ -3053,7 +3053,7 @@ public:
  (even if it released the capture itself).
  */
 
-class WXDLLIMPEXP_CORE wxMouseCaptureChangedEvent : public wxEvent
+class wxMouseCaptureChangedEvent : public wxEvent
 {
 public:
     wxMouseCaptureChangedEvent(wxWindowID winid = 0, wxWindow* gainedCapture = nullptr)
@@ -3085,7 +3085,7 @@ public:
  (and so capture will be restored when the new capturer releases it).
  */
 
-class WXDLLIMPEXP_CORE wxMouseCaptureLostEvent : public wxEvent
+class wxMouseCaptureLostEvent : public wxEvent
 {
 public:
     wxMouseCaptureLostEvent(wxWindowID winid = 0)
@@ -3107,7 +3107,7 @@ public:
 /*
  wxEVT_DISPLAY_CHANGED
  */
-class WXDLLIMPEXP_CORE wxDisplayChangedEvent : public wxEvent
+class wxDisplayChangedEvent : public wxEvent
 {
 public:
     wxDisplayChangedEvent()
@@ -3127,7 +3127,7 @@ public:
 /*
  wxEVT_DPI_CHANGED
  */
-class WXDLLIMPEXP_CORE wxDPIChangedEvent : public wxEvent
+class wxDPIChangedEvent : public wxEvent
 {
 public:
     explicit
@@ -3159,7 +3159,7 @@ public:
  wxEVT_PALETTE_CHANGED
  */
 
-class WXDLLIMPEXP_CORE wxPaletteChangedEvent : public wxEvent
+class wxPaletteChangedEvent : public wxEvent
 {
 public:
     wxPaletteChangedEvent(wxWindowID winid = 0)
@@ -3190,7 +3190,7 @@ public:
  Indicates the window is getting keyboard focus and should re-do its palette.
  */
 
-class WXDLLIMPEXP_CORE wxQueryNewPaletteEvent : public wxEvent
+class wxQueryNewPaletteEvent : public wxEvent
 {
 public:
     wxQueryNewPaletteEvent(wxWindowID winid = 0)
@@ -3221,7 +3221,7 @@ public:
  wxEVT_NAVIGATION_KEY
  */
 // NB: don't derive from command event to avoid being propagated to the parent
-class WXDLLIMPEXP_CORE wxNavigationKeyEvent : public wxEvent
+class wxNavigationKeyEvent : public wxEvent
 {
 public:
     wxNavigationKeyEvent()
@@ -3293,7 +3293,7 @@ public:
  wxEVT_DESTROY
  */
 
-class WXDLLIMPEXP_CORE wxWindowCreateEvent : public wxCommandEvent
+class wxWindowCreateEvent : public wxCommandEvent
 {
 public:
     wxWindowCreateEvent(wxWindow *win = nullptr);
@@ -3309,7 +3309,7 @@ public:
 	static wxObject* wxCreateObject();
 };
 
-class WXDLLIMPEXP_CORE wxWindowDestroyEvent : public wxCommandEvent
+class wxWindowDestroyEvent : public wxCommandEvent
 {
 public:
     wxWindowDestroyEvent(wxWindow *win = nullptr);
@@ -3331,7 +3331,7 @@ public:
  wxEVT_DETAILED_HELP
 */
 
-class WXDLLIMPEXP_CORE wxHelpEvent : public wxCommandEvent
+class wxHelpEvent : public wxCommandEvent
 {
 public:
     // how was this help event generated?
@@ -3401,7 +3401,7 @@ wxEVT_TEXT_CUT
 wxEVT_TEXT_PASTE
 */
 
-class WXDLLIMPEXP_CORE wxClipboardTextEvent : public wxCommandEvent
+class wxClipboardTextEvent : public wxCommandEvent
 {
 public:
     wxClipboardTextEvent(wxEventType type = wxEVT_NULL,
@@ -3429,7 +3429,7 @@ public:
  wxEVT_CONTEXT_MENU
 */
 
-class WXDLLIMPEXP_CORE wxContextMenuEvent : public wxCommandEvent
+class wxContextMenuEvent : public wxCommandEvent
 {
 public:
     wxContextMenuEvent(wxEventType type = wxEVT_NULL,
@@ -4195,7 +4195,7 @@ typedef void (wxEvtHandler::*wxThreadEventFunction)(wxThreadEvent&);
 // wxEventBlocker: helper class to temporarily disable event handling for a window
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxEventBlocker : public wxEvtHandler
+class wxEventBlocker : public wxEvtHandler
 {
 public:
     wxEventBlocker(wxWindow *win, wxEventType type = wxEVT_ANY);

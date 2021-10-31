@@ -11,10 +11,9 @@
 #ifndef _WX_BMPBUTTON_H_BASE_
 #define _WX_BMPBUTTON_H_BASE_
 
-#include "wx/defs.h"
-
 #if wxUSE_BMPBUTTON
 
+#include "wx/defs.h"
 #include "wx/button.h"
 
 #include <string>
@@ -26,14 +25,14 @@
     #define wxHAS_BUTTON_BITMAP
 #endif
 
-class WXDLLIMPEXP_FWD_CORE wxBitmapButton;
+class wxBitmapButton;
 
 // ----------------------------------------------------------------------------
 // wxBitmapButton: a button which shows bitmaps instead of the usual string.
 // It has different bitmaps for different states (focused/disabled/pressed)
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxBitmapButtonBase : public wxButton
+class wxBitmapButtonBase : public wxButton
 {
 public:
     wxBitmapButtonBase& operator=(wxBitmapButtonBase&&) = delete;

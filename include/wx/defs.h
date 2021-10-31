@@ -42,10 +42,6 @@
 #   endif
 #endif /*__cplusplus*/
 
-#ifndef __WXWINDOWS__
-    #define __WXWINDOWS__ 1
-#endif
-
 #ifndef wxUSE_BASE
     /*  by default consider that this is a monolithic build */
     #define wxUSE_BASE 1

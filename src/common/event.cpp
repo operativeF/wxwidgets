@@ -8,9 +8,6 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #include "wx/eventfilter.h"
 #include "wx/evtloop.h"
 #include "wx/event.h"

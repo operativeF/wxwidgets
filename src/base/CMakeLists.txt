@@ -129,7 +129,6 @@ set(BASE_CMN_HDR
     ${BASE_INC_DIR}/wx/build.h
     ${BASE_INC_DIR}/wx/chartype.h
     ${BASE_INC_DIR}/wx/checkeddelete.h
-    ${BASE_INC_DIR}/wx/chkconf.h
     ${BASE_INC_DIR}/wx/clntdata.h
     ${BASE_INC_DIR}/wx/cmdargs.h
     ${BASE_INC_DIR}/wx/cmdline.h
@@ -254,7 +253,6 @@ set(BASE_CMN_HDR
     ${BASE_INC_DIR}/wx/wxcrt.h
     ${BASE_INC_DIR}/wx/wxcrtbase.h
     ${BASE_INC_DIR}/wx/wxcrtvararg.h
-    ${BASE_INC_DIR}/wx/wxprec.h
     ${BASE_INC_DIR}/wx/xlocale.h
     ${BASE_INC_DIR}/wx/xti.h
     ${BASE_INC_DIR}/wx/xti2.h
@@ -310,7 +308,6 @@ set(BASE_WIN32_SRC
 set(BASE_WIN32_HDR
     ${BASE_INC_DIR}/wx/msw/apptrait.h
     ${BASE_INC_DIR}/wx/msw/apptbase.h
-    ${BASE_INC_DIR}/wx/msw/chkconf.h
     ${BASE_INC_DIR}/wx/msw/crashrpt.h
     ${BASE_INC_DIR}/wx/msw/dde.h
     ${BASE_INC_DIR}/wx/msw/debughlp.h
@@ -356,7 +353,9 @@ set(BASE_UNIX_SRC
     ${BASE_SRC_DIR}/unix/stdpaths.cpp
 )
 
-list(APPEND BASE_FILES ${BASE_AND_GUI_CMN_SRC} ${BASE_CMN_SRC})
+set(BASE_FILES ${BASE_CMN_SRC})
+
+list(APPEND BASE_FILES ${BASE_AND_GUI_CMN_SRC})
 
 set(BASE_HDR ${BASE_CMN_HDR})
 
@@ -374,13 +373,11 @@ endif()
 
 add_library(wxbase
     ${BASE_FILES}
-    ${wxBUILD_CUSTOM_SETUP_HEADER_PATH}
 )
 
 target_include_directories(wxbase
     PUBLIC
         ${CMAKE_SOURCE_DIR}/include
-        ${wxBUILD_CUSTOM_SETUP_HEADER_PATH}
         ${CMAKE_SOURCE_DIR}/3rdparty/tmp/include
 )
 

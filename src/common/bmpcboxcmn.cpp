@@ -7,12 +7,9 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include "wx/wxprec.h"
-
+#if wxUSE_BITMAPCOMBOBOX
 
 #include "wx/bmpcbox.h"
-
-#if wxUSE_BITMAPCOMBOBOX
 
 #include "wx/log.h"
 #include "wx/dc.h"
