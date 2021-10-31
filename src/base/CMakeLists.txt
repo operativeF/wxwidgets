@@ -24,7 +24,6 @@ else()
 endif()
 
 set(BASE_SRC_DIR ${CMAKE_SOURCE_DIR}/src)
-set(BASE_INC_DIR ${CMAKE_SOURCE_DIR}/include)
 
 set(BASE_CMN_SRC
     ${BASE_SRC_DIR}/common/any.cpp
@@ -116,165 +115,6 @@ set(BASE_CMN_SRC
     ${BASE_SRC_DIR}/common/lzmastream.cpp
 )
 
-set(BASE_CMN_HDR
-    ${BASE_INC_DIR}/wx/any.h
-    ${BASE_INC_DIR}/wx/anystr.h
-    ${BASE_INC_DIR}/wx/app.h
-    ${BASE_INC_DIR}/wx/apptrait.h
-    ${BASE_INC_DIR}/wx/archive.h
-    ${BASE_INC_DIR}/wx/arrimpl.cpp
-    ${BASE_INC_DIR}/wx/arrstr.h
-    ${BASE_INC_DIR}/wx/base64.h
-    ${BASE_INC_DIR}/wx/buffer.h
-    ${BASE_INC_DIR}/wx/build.h
-    ${BASE_INC_DIR}/wx/chartype.h
-    ${BASE_INC_DIR}/wx/checkeddelete.h
-    ${BASE_INC_DIR}/wx/clntdata.h
-    ${BASE_INC_DIR}/wx/cmdargs.h
-    ${BASE_INC_DIR}/wx/cmdline.h
-    ${BASE_INC_DIR}/wx/compiler.h
-    ${BASE_INC_DIR}/wx/confbase.h
-    ${BASE_INC_DIR}/wx/config.h
-    ${BASE_INC_DIR}/wx/convauto.h
-    ${BASE_INC_DIR}/wx/containr.h
-    ${BASE_INC_DIR}/wx/cpp.h
-    ${BASE_INC_DIR}/wx/crt.h
-    ${BASE_INC_DIR}/wx/datetime.h
-    ${BASE_INC_DIR}/wx/datstrm.h
-    ${BASE_INC_DIR}/wx/dde.h
-    ${BASE_INC_DIR}/wx/debug.h
-    ${BASE_INC_DIR}/wx/defs.h
-    ${BASE_INC_DIR}/wx/dir.h
-    ${BASE_INC_DIR}/wx/dlimpexp.h
-    ${BASE_INC_DIR}/wx/dlist.h
-    ${BASE_INC_DIR}/wx/dynarray.h
-    ${BASE_INC_DIR}/wx/dynlib.h
-    ${BASE_INC_DIR}/wx/dynload.h
-    ${BASE_INC_DIR}/wx/encconv.h
-    ${BASE_INC_DIR}/wx/event.h
-    ${BASE_INC_DIR}/wx/eventfilter.h
-    ${BASE_INC_DIR}/wx/evtloop.h
-    ${BASE_INC_DIR}/wx/evtloopsrc.h
-    ${BASE_INC_DIR}/wx/except.h
-    ${BASE_INC_DIR}/wx/features.h
-    ${BASE_INC_DIR}/wx/flags.h
-    ${BASE_INC_DIR}/wx/ffile.h
-    ${BASE_INC_DIR}/wx/file.h
-    ${BASE_INC_DIR}/wx/fileconf.h
-    ${BASE_INC_DIR}/wx/filefn.h
-    ${BASE_INC_DIR}/wx/filename.h
-    ${BASE_INC_DIR}/wx/filesys.h
-    ${BASE_INC_DIR}/wx/fontenc.h
-    ${BASE_INC_DIR}/wx/fontmap.h
-    ${BASE_INC_DIR}/wx/fs_arc.h
-    ${BASE_INC_DIR}/wx/fs_filter.h
-    ${BASE_INC_DIR}/wx/fs_mem.h
-    ${BASE_INC_DIR}/wx/fs_zip.h
-    ${BASE_INC_DIR}/wx/hash.h
-    ${BASE_INC_DIR}/wx/hashmap.h
-    ${BASE_INC_DIR}/wx/hashset.h
-    ${BASE_INC_DIR}/wx/iconloc.h
-    ${BASE_INC_DIR}/wx/init.h
-    ${BASE_INC_DIR}/wx/intl.h
-    ${BASE_INC_DIR}/wx/ipc.h
-    ${BASE_INC_DIR}/wx/ipcbase.h
-    ${BASE_INC_DIR}/wx/kbdstate.h
-    ${BASE_INC_DIR}/wx/language.h
-    ${BASE_INC_DIR}/wx/link.h
-    ${BASE_INC_DIR}/wx/list.h
-    ${BASE_INC_DIR}/wx/listimpl.cpp
-    ${BASE_INC_DIR}/wx/log.h
-    ${BASE_INC_DIR}/wx/longlong.h
-    ${BASE_INC_DIR}/wx/math.h
-    ${BASE_INC_DIR}/wx/memconf.h
-    ${BASE_INC_DIR}/wx/memory.h
-    ${BASE_INC_DIR}/wx/memtext.h
-    ${BASE_INC_DIR}/wx/mimetype.h
-    ${BASE_INC_DIR}/wx/module.h
-    ${BASE_INC_DIR}/wx/mousestate.h
-    ${BASE_INC_DIR}/wx/msgout.h
-    ${BASE_INC_DIR}/wx/msgqueue.h
-    ${BASE_INC_DIR}/wx/mstream.h
-    ${BASE_INC_DIR}/wx/numformatter.h
-    ${BASE_INC_DIR}/wx/object.h
-    ${BASE_INC_DIR}/wx/platform.h
-    ${BASE_INC_DIR}/wx/platinfo.h
-    ${BASE_INC_DIR}/wx/power.h
-    ${BASE_INC_DIR}/wx/process.h
-    ${BASE_INC_DIR}/wx/ptr_scpd.h
-    ${BASE_INC_DIR}/wx/recguard.h
-    ${BASE_INC_DIR}/wx/regex.h
-    ${BASE_INC_DIR}/wx/rtti.h
-    ${BASE_INC_DIR}/wx/scopedarray.h
-    ${BASE_INC_DIR}/wx/scopedptr.h
-    ${BASE_INC_DIR}/wx/scopeguard.h
-    ${BASE_INC_DIR}/wx/secretstore.h
-    ${BASE_INC_DIR}/wx/snglinst.h
-    ${BASE_INC_DIR}/wx/sstream.h
-    ${BASE_INC_DIR}/wx/stackwalk.h
-    ${BASE_INC_DIR}/wx/stdpaths.h
-    ${BASE_INC_DIR}/wx/stdstream.h
-    ${BASE_INC_DIR}/wx/stockitem.h
-    ${BASE_INC_DIR}/wx/stopwatch.h
-    ${BASE_INC_DIR}/wx/strconv.h
-    ${BASE_INC_DIR}/wx/stream.h
-    ${BASE_INC_DIR}/wx/string.h
-    ${BASE_INC_DIR}/wx/stringimpl.h
-    ${BASE_INC_DIR}/wx/stringops.h
-    ${BASE_INC_DIR}/wx/strvararg.h
-    ${BASE_INC_DIR}/wx/sysopt.h
-    ${BASE_INC_DIR}/wx/tarstrm.h
-    ${BASE_INC_DIR}/wx/textbuf.h
-    ${BASE_INC_DIR}/wx/textfile.h
-    ${BASE_INC_DIR}/wx/thread.h
-    ${BASE_INC_DIR}/wx/thrimpl.cpp
-    ${BASE_INC_DIR}/wx/time.h
-    ${BASE_INC_DIR}/wx/timer.h
-    ${BASE_INC_DIR}/wx/tls.h
-    ${BASE_INC_DIR}/wx/tokenzr.h
-    ${BASE_INC_DIR}/wx/tracker.h
-    ${BASE_INC_DIR}/wx/translation.h
-    ${BASE_INC_DIR}/wx/txtstrm.h
-    ${BASE_INC_DIR}/wx/typeinfo.h
-    ${BASE_INC_DIR}/wx/types.h
-    ${BASE_INC_DIR}/wx/unichar.h
-    ${BASE_INC_DIR}/wx/uri.h
-    ${BASE_INC_DIR}/wx/ustring.h
-    ${BASE_INC_DIR}/wx/utils.h
-    ${BASE_INC_DIR}/wx/variant.h
-    ${BASE_INC_DIR}/wx/vector.h
-    ${BASE_INC_DIR}/wx/version.h
-    ${BASE_INC_DIR}/wx/versioninfo.h
-    ${BASE_INC_DIR}/wx/volume.h
-    ${BASE_INC_DIR}/wx/weakref.h
-    ${BASE_INC_DIR}/wx/wfstream.h
-    ${BASE_INC_DIR}/wx/wx.h
-    ${BASE_INC_DIR}/wx/wxchar.h
-    ${BASE_INC_DIR}/wx/wxcrt.h
-    ${BASE_INC_DIR}/wx/wxcrtbase.h
-    ${BASE_INC_DIR}/wx/wxcrtvararg.h
-    ${BASE_INC_DIR}/wx/xlocale.h
-    ${BASE_INC_DIR}/wx/xti.h
-    ${BASE_INC_DIR}/wx/xti2.h
-    ${BASE_INC_DIR}/wx/xtistrm.h
-    ${BASE_INC_DIR}/wx/xtictor.h
-    ${BASE_INC_DIR}/wx/xtihandler.h
-    ${BASE_INC_DIR}/wx/xtiprop.h
-    ${BASE_INC_DIR}/wx/xtitypes.h
-    ${BASE_INC_DIR}/wx/zipstrm.h
-    ${BASE_INC_DIR}/wx/zstream.h
-    ${BASE_INC_DIR}/wx/meta/convertible.h
-    ${BASE_INC_DIR}/wx/meta/if.h
-    ${BASE_INC_DIR}/wx/meta/implicitconversion.h
-    ${BASE_INC_DIR}/wx/meta/int2type.h
-    ${BASE_INC_DIR}/wx/meta/movable.h
-    ${BASE_INC_DIR}/wx/meta/pod.h
-    ${BASE_INC_DIR}/wx/meta/removeref.h
-    ${BASE_INC_DIR}/wx/fswatcher.h
-    ${BASE_INC_DIR}/wx/generic/fswatcher.h
-    ${BASE_INC_DIR}/wx/lzmastream.h
-)
-
 set(BASE_AND_GUI_CMN_SRC
     ${BASE_SRC_DIR}/common/event.cpp
     ${BASE_SRC_DIR}/common/fs_mem.cpp
@@ -303,29 +143,6 @@ set(BASE_WIN32_SRC
     ${BASE_SRC_DIR}/msw/utils.cpp
     ${BASE_SRC_DIR}/msw/utilsexc.cpp
     ${BASE_SRC_DIR}/msw/fswatcher.cpp
-)
-
-set(BASE_WIN32_HDR
-    ${BASE_INC_DIR}/wx/msw/apptrait.h
-    ${BASE_INC_DIR}/wx/msw/apptbase.h
-    ${BASE_INC_DIR}/wx/msw/crashrpt.h
-    ${BASE_INC_DIR}/wx/msw/dde.h
-    ${BASE_INC_DIR}/wx/msw/debughlp.h
-    ${BASE_INC_DIR}/wx/msw/evtloopconsole.h
-    ${BASE_INC_DIR}/wx/msw/gccpriv.h
-    ${BASE_INC_DIR}/wx/msw/libraries.h
-    ${BASE_INC_DIR}/wx/msw/mimetype.h
-    ${BASE_INC_DIR}/wx/msw/private.h
-    ${BASE_INC_DIR}/wx/msw/regconf.h
-    ${BASE_INC_DIR}/wx/msw/registry.h
-    ${BASE_INC_DIR}/wx/msw/seh.h
-    ${BASE_INC_DIR}/wx/msw/stackwalk.h
-    ${BASE_INC_DIR}/wx/msw/stdpaths.h
-    ${BASE_INC_DIR}/wx/msw/winver.h
-    ${BASE_INC_DIR}/wx/msw/wrapcctl.h
-    ${BASE_INC_DIR}/wx/msw/wrapcdlg.h
-    ${BASE_INC_DIR}/wx/msw/wrapwin.h
-    ${BASE_INC_DIR}/wx/msw/fswatcher.h
 )
 
 set(BASE_AND_GUI_WIN32_SRC
@@ -357,11 +174,8 @@ set(BASE_FILES ${BASE_CMN_SRC})
 
 list(APPEND BASE_FILES ${BASE_AND_GUI_CMN_SRC})
 
-set(BASE_HDR ${BASE_CMN_HDR})
-
 if(WIN32)
     list(APPEND BASE_FILES ${BASE_WIN32_SRC} ${BASE_AND_GUI_WIN32_SRC})
-    list(APPEND BASE_HDR ${BASE_WIN32_HDR})
 elseif(APPLE)
     set(BASE_FILES ${BASE_OSX_SHARED})
     if(WXOSX_COCOA)
@@ -378,6 +192,7 @@ add_library(wxbase
 target_include_directories(wxbase
     PUBLIC
         ${CMAKE_SOURCE_DIR}/include
+    PRIVATE
         ${CMAKE_SOURCE_DIR}/3rdparty/tmp/include
 )
 
