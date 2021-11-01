@@ -10,9 +10,9 @@
 #ifndef _WX_DATETIME_CTRL_H_
 #define _WX_DATETIME_CTRL_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_DATEPICKCTRL || wxUSE_TIMEPICKCTRL
+
+#include "wx/defs.h"
 
 #define wxNEEDS_DATETIMEPICKCTRL
 
@@ -26,7 +26,7 @@
 
 // This class is an implementation detail and should not be used directly, only
 // use the documented API of wxDateTimePickerCtrl and wxTimePickerCtrl.
-class WXDLLIMPEXP_CORE wxDateTimePickerCtrlBase : public wxControl
+class wxDateTimePickerCtrlBase : public wxControl
 {
 public:
     // Set/get the date or time (in the latter case, time part is ignored).

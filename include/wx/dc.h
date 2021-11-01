@@ -1140,7 +1140,7 @@ public:
         { m_pimpl->DrawSpline(points); }
 #endif // wxUSE_SPLINES
 
-#ifdef __WXMSW__
+#ifdef WX_WINDOWS
     // GetHDC() is the simplest way to retrieve an HDC From a wxDC but only
     // works if this wxDC is GDI-based and fails for GDI+ contexts (and
     // anything else without HDC, e.g. wxPostScriptDC)

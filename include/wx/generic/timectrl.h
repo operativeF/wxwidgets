@@ -15,7 +15,7 @@
 
 using wxTimePickerCtrlGenericBase = wxTimePickerCtrlCommonBase<wxDateTimePickerCtrlBase>;
 
-class WXDLLIMPEXP_CORE wxTimePickerCtrlGeneric
+class wxTimePickerCtrlGeneric
     : public wxCompositeWindow< wxNavigationEnabled<wxTimePickerCtrlGenericBase> >
 {
 public:

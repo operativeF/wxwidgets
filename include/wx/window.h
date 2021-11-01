@@ -1407,11 +1407,11 @@ public:
 
     // Accept files for dragging
     virtual void DragAcceptFiles(bool accept)
-#ifdef __WXMSW__
+#ifdef WX_WINDOWS
     // it does have common implementation but not for MSW which has its own
     // native version of it
     = 0
-#endif // __WXMSW__
+#endif // WX_WINDOWS
     ;
 
 #endif // wxUSE_DRAG_AND_DROP
@@ -1934,7 +1934,7 @@ private:
 // ----------------------------------------------------------------------------
 
 // include the declaration of the platform-specific class
-#if defined(__WXMSW__)
+#if defined(WX_WINDOWS)
     #ifdef __WXUNIVERSAL__
         #define wxWindowNative wxWindowMSW
     #else // !wxUniv

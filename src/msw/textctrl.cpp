@@ -344,9 +344,9 @@ wxTextCtrl::~wxTextCtrl()
         // don't try to destroy this dummy pointer in the base class dtor
         m_dropTarget = nullptr;
     }
-#endif // wxUSE_DRAG_AND_DROP && wxUSE_RICHEDIT
 
     delete m_privateContextMenu;
+#endif // wxUSE_DRAG_AND_DROP && wxUSE_RICHEDIT
 }
 
 bool wxTextCtrl::Create(wxWindow *parent,

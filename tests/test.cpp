@@ -332,6 +332,7 @@ extern void SetProcessEventFunc(ProcessEventFunc func)
     wxGetApp().SetProcessEventFunc(func);
 }
 
+#if wxUSE_SOCKETS
 extern bool IsNetworkAvailable()
 {
     // Somehow even though network is available on Travis CI build machines,
@@ -364,6 +365,7 @@ extern bool IsNetworkAvailable()
 
     return online;
 }
+#endif
 
 extern bool IsAutomaticTest()
 {

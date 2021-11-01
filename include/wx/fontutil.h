@@ -75,7 +75,7 @@ enum wxXLFDField
 // somewhere and pass it somewhere else (possibly save them somewhere using
 // ToString() and restore them using FromString())
 
-class WXDLLIMPEXP_CORE wxNativeFontInfo
+class wxNativeFontInfo
 {
 public:
 #if wxUSE_PANGO

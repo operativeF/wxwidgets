@@ -412,9 +412,9 @@ private:
 
     // we need to return a special WM_GETDLGCODE value to process just the
     // arrows but let the other navigation characters through
-#ifdef __WXMSW__
+#ifdef WX_WINDOWS
     WXLRESULT MSWWindowProc(WXUINT nMsg, WXWPARAM wParam, WXLPARAM lParam) override;
-#endif // __WXMSW__
+#endif // WX_WINDOWS
 
     WX_FORWARD_TO_SCROLL_HELPER()
 

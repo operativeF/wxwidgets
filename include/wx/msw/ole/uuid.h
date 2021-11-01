@@ -41,7 +41,7 @@ using uchar = unsigned char;
 // ------------------------------------------------------------------
 
 // uses RPC functions to create/convert Universally Unique Identifiers
-class WXDLLIMPEXP_CORE Uuid
+class Uuid
 {
 private:
   UUID  m_uuid{};

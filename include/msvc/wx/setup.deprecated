@@ -123,11 +123,6 @@
 /* MS-DOS with DJGPP */
 /* #undef __DOS__ */
 
-/* Stupid hack; WX_WINDOWS clashes with wx/defs.h */
-#ifndef WX_WINDOWS
-/* #undef WX_WINDOWS */
-#endif
-
 #ifndef __WIN32__
 /* #undef __WIN32__ */
 #endif

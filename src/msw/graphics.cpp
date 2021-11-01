@@ -8,18 +8,10 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include "wx/wxprec.h"
-
-
 #if wxUSE_GRAPHICS_GDIPLUS
 
-#ifndef WX_PRECOMP
-    #include "wx/msw/wrapcdlg.h"
-    #include "wx/msw/private.h" // needs to be before #include <commdlg.h>
-
-    #include <boost/nowide/convert.hpp>
-    #include <boost/nowide/stackstring.hpp>
-#endif
+#include "wx/msw/wrapcdlg.h"
+#include "wx/msw/private.h" // needs to be before #include <commdlg.h>
 
 #include "wx/dc.h"
 #include "wx/image.h"
@@ -46,6 +38,9 @@
 #if wxUSE_COMMON_DIALOGS
 #include <commdlg.h>
 #endif
+
+#include <boost/nowide/convert.hpp>
+#include <boost/nowide/stackstring.hpp>
 
 #include <stack>
 

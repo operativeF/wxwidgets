@@ -136,7 +136,7 @@ public:
     // Adjusts the panes
     void OnSize(wxSizeEvent& event);
 
-#if defined(__WXMSW__) || defined(__WXMAC__)
+#if defined(WX_WINDOWS) || defined(__WXMAC__)
     // Handle cursor correctly
     void OnSetCursor(wxSetCursorEvent& event);
 #endif // wxMSW

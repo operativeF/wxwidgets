@@ -300,9 +300,9 @@ private:
 // wxFontBase represents a font object
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_FWD_CORE wxNativeFontInfo;
+class wxNativeFontInfo;
 
-class WXDLLIMPEXP_CORE wxFontBase : public wxGDIObject
+class wxFontBase : public wxGDIObject
 {
 public:
     /*

@@ -22,9 +22,9 @@
 #include <dwrite.h>
 #include <wincodec.h>
 
-WXDLLIMPEXP_CORE IWICImagingFactory* wxWICImagingFactory();
-WXDLLIMPEXP_CORE ID2D1Factory* wxD2D1Factory();
-WXDLLIMPEXP_CORE IDWriteFactory* wxDWriteFactory();
+IWICImagingFactory* wxWICImagingFactory();
+ID2D1Factory* wxD2D1Factory();
+IDWriteFactory* wxDWriteFactory();
 
 #endif // wxUSE_GRAPHICS_DIRECT2D
 
