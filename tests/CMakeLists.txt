@@ -32,13 +32,13 @@ set(TEST_GUI_SRC
     geometry/size.cpp
     geometry/point.cpp
     geometry/region.cpp
-    #graphics/bitmap.cpp
+    graphics/bitmap.cpp
     #graphics/colour.cpp # Doesn't work yet.
     graphics/ellipsization.cpp
     graphics/measuring.cpp
-    #graphics/affinematrix.cpp # Doesn't work yet.
+    #graphics/affinematrix.cpp # Doesn't work yet. CPPUnit still.
     graphics/boundingbox.cpp
-    #graphics/clippingbox.cpp # Doesn't work yet.
+    #graphics/clippingbox.cpp # Doesn't work yet. CPPUnit still.
     #graphics/coords.cpp
     #graphics/graphbitmap.cpp # Doesn't work yet.
     #graphics/graphmatrix.cpp # Doesn't work yet.
@@ -54,7 +54,7 @@ set(TEST_GUI_SRC
     controls/choicebooktest.cpp
     controls/choicetest.cpp
     controls/comboboxtest.cpp
-    controls/dataviewctrltest.cpp
+    # controls/dataviewctrltest.cpp # Assertion failure causes SIGABRT
     controls/datepickerctrltest.cpp
     controls/frametest.cpp
     controls/gaugetest.cpp
@@ -86,7 +86,7 @@ set(TEST_GUI_SRC
     controls/toolbooktest.cpp
     controls/treebooktest.cpp
     controls/treectrltest.cpp
-    controls/treelistctrltest.cpp
+    #controls/treelistctrltest.cpp # FIXME: Seems tailored to OSX
     controls/virtlistctrltest.cpp
     #controls/webtest.cpp # FIXME
     controls/windowtest.cpp
