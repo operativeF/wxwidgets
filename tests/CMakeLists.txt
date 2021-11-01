@@ -32,14 +32,14 @@ set(TEST_GUI_SRC
     geometry/size.cpp
     geometry/point.cpp
     geometry/region.cpp
-    graphics/bitmap.cpp
+    #graphics/bitmap.cpp
     #graphics/colour.cpp # Doesn't work yet.
     graphics/ellipsization.cpp
     graphics/measuring.cpp
     #graphics/affinematrix.cpp # Doesn't work yet.
     graphics/boundingbox.cpp
     #graphics/clippingbox.cpp # Doesn't work yet.
-    graphics/coords.cpp
+    #graphics/coords.cpp
     #graphics/graphbitmap.cpp # Doesn't work yet.
     #graphics/graphmatrix.cpp # Doesn't work yet.
     graphics/graphpath.cpp
@@ -101,7 +101,7 @@ set(TEST_GUI_SRC
     exec/exec.cpp
     font/fonttest.cpp
     image/image.cpp
-    image/rawbmp.cpp
+    #image/rawbmp.cpp
     #html/htmlparser.cpp
     #html/htmlwindow.cpp
     #html/htmprint.cpp
