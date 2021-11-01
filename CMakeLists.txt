@@ -23,12 +23,6 @@ include(${CMAKE_SOURCE_DIR}/cmake/options.cmake)
 
 include("C:/dev/vcpkg/scripts/buildsystems/vcpkg.cmake")
 
-find_package(Microsoft.GSL CONFIG REQUIRED)
-find_package(doctest CONFIG REQUIRED)
-find_package(fmt CONFIG REQUIRED)
-find_package(Boost REQUIRED COMPONENTS nowide)
-find_package(libpng CONFIG REQUIRED)
-
 if(NOT CMAKE_CONFIGURATION_TYPES)
     get_property(HAVE_MULTI_CONFIG_GENERATOR GLOBAL PROPERTY GENERATOR_IS_MULTI_CONFIG)
     # Set default configuration types for multi-config generators
@@ -58,7 +52,8 @@ if(APPLE AND NOT CMAKE_OSX_DEPLOYMENT_TARGET)
     endif()
 endif()
 
-include(build/cmake/policies.cmake NO_POLICY_SCOPE)
+# FIXME implement new policies
+#include(build/cmake/policies.cmake NO_POLICY_SCOPE)
 
 # Initialize variables for quick access to wx root dir in sub dirs
 set(wxSOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR})
@@ -92,11 +87,17 @@ set(wxCOPYRIGHT "1992-2021 wxWidgets")
 
 if(WIN32)
 	# Enable usage of updated __cplusplus macro
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /Zc:__cplusplus /D WX_WINDOWS /EHsc /MP24 /arch:AVX2 /Zi /D NOMINMAX")	
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /Zc:__cplusplus /D WX_WINDOWS /EHsc /MP24 /arch:AVX2 /Zi /D NOMINMAX /D WXBUILDING")	
     set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
 endif()
 
 project(wxWidgets VERSION ${wxVERSION})
+
+find_package(Microsoft.GSL CONFIG REQUIRED)
+find_package(doctest CONFIG REQUIRED)
+find_package(fmt CONFIG REQUIRED)
+find_package(Boost REQUIRED COMPONENTS nowide)
+find_package(libpng CONFIG REQUIRED)
 
 # Set the default startup project for Visual Studio
 if(wxBUILD_SAMPLES AND wxUSE_GUI)
