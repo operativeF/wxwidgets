@@ -286,7 +286,9 @@ TEST_CASE("Image test")
 #if wxUSE_GIF
     wxImage::AddHandler(new wxGIFHandler);
 #endif // wxUSE_GIF
+#if wxUSE_JPEG
     wxImage::AddHandler(new wxJPEGHandler);
+#endif
     wxImage::AddHandler(new wxPCXHandler);
     wxImage::AddHandler(new wxPNMHandler);
     wxImage::AddHandler(new wxTGAHandler);
@@ -358,6 +360,7 @@ TEST_CASE("Image test")
     }
     */
 
+   #if wxUSE_ZLIB
     SUBCASE("LoadFromZipStream")
     {
         for (const auto& testFile : g_testfiles)
@@ -405,7 +408,8 @@ TEST_CASE("Image test")
                          ("Could not load file type '%d' after it was zipped", testFile.type));
         }
     }
-
+    #endif
+    
     SUBCASE("SizeImage")
     {
        // Test the wxImage::Size() function which takes a rectangle from source and

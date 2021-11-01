@@ -115,7 +115,7 @@ set(BASE_CMN_SRC
     ${BASE_SRC_DIR}/common/lzmastream.cpp
 )
 
-set(BASE_AND_GUI_CMN_SRC
+set(SHARED_BASE_CMN_SRC
     ${BASE_SRC_DIR}/common/event.cpp
     ${BASE_SRC_DIR}/common/fs_mem.cpp
     ${BASE_SRC_DIR}/common/msgout.cpp
@@ -145,7 +145,7 @@ set(BASE_WIN32_SRC
     ${BASE_SRC_DIR}/msw/fswatcher.cpp
 )
 
-set(BASE_AND_GUI_WIN32_SRC
+set(SHARED_BASE_WIN32_CMN
     ${BASE_SRC_DIR}/msw/main.cpp
     ${BASE_SRC_DIR}/msw/volume.cpp
 )
@@ -171,11 +171,10 @@ set(BASE_UNIX_SRC
 )
 
 set(BASE_FILES ${BASE_CMN_SRC})
-
-list(APPEND BASE_FILES ${BASE_AND_GUI_CMN_SRC})
-
+set(SHARED_BASE_CMN ${SHARED_BASE_CMN_SRC})
 if(WIN32)
-    list(APPEND BASE_FILES ${BASE_WIN32_SRC} ${BASE_AND_GUI_WIN32_SRC})
+    list(APPEND BASE_FILES ${BASE_FILES} ${BASE_WIN32_SRC})
+    list(APPEND SHARED_BASE_CMN ${SHARED_BASE_CMN} ${SHARED_BASE_WIN32_CMN})
 elseif(APPLE)
     set(BASE_FILES ${BASE_OSX_SHARED})
     if(WXOSX_COCOA)
@@ -194,6 +193,22 @@ target_include_directories(wxbase
         ${CMAKE_SOURCE_DIR}/include
     PRIVATE
         ${CMAKE_SOURCE_DIR}/3rdparty/tmp/include
+)
+
+add_library(wxsharedcmn
+    OBJECT
+        ${SHARED_BASE_CMN}
+)
+
+target_include_directories(wxsharedcmn
+    PRIVATE
+        ${CMAKE_SOURCE_DIR}/include
+        ${CMAKE_SOURCE_DIR}/3rdparty/tmp/include
+)
+
+target_link_libraries(wxsharedcmn
+    PRIVATE
+        Microsoft.GSL::GSL
 )
 
 if(wxUSE_ZLIB)
@@ -242,7 +257,22 @@ endif()
 
 target_link_libraries(wxbase
     PRIVATE
+        wxsharedcmn
         Boost::nowide
-        fmt::fmt
         Microsoft.GSL::GSL
+    
+    # Windows libraries
+        kernel32
+        user32
+        gdi32
+        comdlg32
+        winspool
+        shell32
+        comctl32
+        ole32
+        oleaut32
+        uuid
+        rpcrt4
+        advapi32
+        wininet
 )

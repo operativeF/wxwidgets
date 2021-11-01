@@ -45,7 +45,7 @@ set(TEST_GUI_SRC
     graphics/graphpath.cpp
     graphics/imagelist.cpp
     config/config.cpp
-    controls/auitest.cpp
+    #controls/auitest.cpp
     controls/bitmapcomboboxtest.cpp
     controls/bitmaptogglebuttontest.cpp
     controls/buttontest.cpp
@@ -60,7 +60,7 @@ set(TEST_GUI_SRC
     controls/gaugetest.cpp
     controls/gridtest.cpp
     controls/headerctrltest.cpp
-    controls/htmllboxtest.cpp
+    #controls/htmllboxtest.cpp
     controls/hyperlinkctrltest.cpp
     controls/label.cpp
     controls/listbooktest.cpp
@@ -74,7 +74,7 @@ set(TEST_GUI_SRC
     controls/radioboxtest.cpp
     controls/radiobuttontest.cpp
     controls/rearrangelisttest.cpp
-    controls/richtextctrltest.cpp
+    #controls/richtextctrltest.cpp
     controls/searchctrltest.cpp
     controls/simplebooktest.cpp
     controls/slidertest.cpp
@@ -88,9 +88,9 @@ set(TEST_GUI_SRC
     controls/treectrltest.cpp
     controls/treelistctrltest.cpp
     controls/virtlistctrltest.cpp
-    controls/webtest.cpp
+    #controls/webtest.cpp # FIXME
     controls/windowtest.cpp
-    controls/dialogtest.cpp
+    #controls/dialogtest.cpp
     events/clone.cpp
     # Duplicate this file here to test GUI event loops too.
     events/evtlooptest.cpp
@@ -102,20 +102,20 @@ set(TEST_GUI_SRC
     font/fonttest.cpp
     image/image.cpp
     image/rawbmp.cpp
-    html/htmlparser.cpp
-    html/htmlwindow.cpp
-    html/htmprint.cpp
+    #html/htmlparser.cpp
+    #html/htmlwindow.cpp
+    #html/htmprint.cpp
     menu/accelentry.cpp
     menu/menu.cpp
     misc/guifuncs.cpp
     misc/selstoretest.cpp
-    misc/garbage.cpp
+    #misc/garbage.cpp
     misc/safearrayconverttest.cpp
     misc/settings.cpp
     # This one is intentionally duplicated here (it is also part of
     # non-GUI test) as sockets behave differently in console and GUI
     # applications.
-    net/socket.cpp
+    #net/socket.cpp
     persistence/tlw.cpp
     persistence/dataview.cpp
     rowheightcache/rowheightcachetest.cpp
@@ -127,7 +127,7 @@ set(TEST_GUI_SRC
     validators/valtext.cpp
     window/clientsize.cpp
     window/setsize.cpp
-    xml/xrctest.cpp
+    #xml/xrctest.cpp
 
     testprec.h
     testableframe.h
@@ -209,16 +209,31 @@ add_executable(test_gui
 target_compile_features(test_gui PRIVATE cxx_std_23)
 
 target_include_directories(test_gui 
-    PUBLIC
+    PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}
-        ${CMAKE_SOURCE_DIR}/3rdparty/tmp/include
-        ${CMAKE_SOURCE_DIR}/include/msvc
         ${CMAKE_SOURCE_DIR}/include
+        ${CMAKE_SOURCE_DIR}/3rdparty/tmp/include
 )
 
 target_link_libraries(test_gui
     PRIVATE
+        wxcore
+        wxbase
         doctest::doctest
+    # Windows libraries
+        kernel32
+        user32
+        gdi32
+        comdlg32
+        winspool
+        shell32
+        comctl32
+        ole32
+        oleaut32
+        uuid
+        rpcrt4
+        advapi32
+        wininet
 )
 
 add_test(test_gui 

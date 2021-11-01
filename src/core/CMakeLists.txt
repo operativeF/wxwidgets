@@ -1,5 +1,4 @@
 set(CORE_SRC_DIR ${CMAKE_SOURCE_DIR}/src)
-set(CORE_INC_DIR ${CMAKE_SOURCE_DIR}/include)
 
 set(GUI_CMN_SRC
     ${CORE_SRC_DIR}/common/accelcmn.cpp
@@ -355,38 +354,14 @@ set(MSW_DESKTOP_SRC
     ${CORE_SRC_DIR}/msw/fontdlg.cpp
 )
 
-# Same as base lib
-set(BASE_AND_GUI_CMN_SRC
-    ${CORE_SRC_DIR}/common/event.cpp
-    ${CORE_SRC_DIR}/common/fs_mem.cpp
-    ${CORE_SRC_DIR}/common/msgout.cpp
-    ${CORE_SRC_DIR}/common/utilscmn.cpp
-)
-
-set(BASE_AND_GUI_WIN32_SRC
-    ${CORE_SRC_DIR}/msw/main.cpp
-    ${CORE_SRC_DIR}/msw/volume.cpp
-)
-
-set(CORE_SRC ${GUI_CMN_SRC} ${BASE_AND_GUI_CMN_SRC})
-
-if(WIN32)
-    list(APPEND CORE_SRC ${BASE_AND_GUI_WIN32_SRC} ${BASE_WIN32_SRC})
-elseif(UNIX)
+if(UNIX)
     list(APPEND CORE_SRC ${UNIX_SRC})
     if(wxUSE_LIBSDL)
         list(APPEND CORE_SRC ${UNIX_SOUND_SDL_SRC})
     endif()
 endif()
 
-if(WXMSW)
-    list(APPEND CORE_SRC
-        ${MSW_LOWLEVEL_SRC}
-        ${MSW_DESKTOP_SRC}
-        ${MSW_DESKTOP_LOWLEVEL_SRC}
-        ${MSW_SRC}
-    )
-
+if(WX_WINDOWS)
     if(NOT wxUSE_OLE)
         wx_list_add_prefix(CORE_SRC "${wxSOURCE_DIR}/" "src/generic/dirdlgg.cpp")
     endif()
@@ -420,21 +395,43 @@ elseif(WXQT)
 endif()
 
 add_library(wxcore 
-    ${CORE_SRC}
+    ${GUI_CMN_SRC}
+    ${MSW_LOWLEVEL_SRC}
+    ${MSW_DESKTOP_SRC}
+    ${MSW_DESKTOP_LOWLEVEL_SRC}
+    ${MSW_SRC}
 )
 
 target_include_directories(wxcore
     PUBLIC
         ${CMAKE_SOURCE_DIR}/include
+    PRIVATE
         ${CMAKE_SOURCE_DIR}/3rdparty/tmp/include
 )
 
 target_link_libraries(wxcore
     PRIVATE
+        wxsharedcmn
+        wxbase
         Boost::nowide
         fmt::fmt
         Microsoft.GSL::GSL
         png
+    
+    # Microsoft Libraries
+        kernel32
+        user32
+        gdi32
+        comdlg32
+        winspool
+        shell32
+        comctl32
+        ole32
+        oleaut32
+        uuid
+        rpcrt4
+        advapi32
+        wininet
 )
 
 foreach(lib JPEG TIFF)
