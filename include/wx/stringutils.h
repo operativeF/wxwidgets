@@ -171,9 +171,10 @@ constexpr void ToLower(std::string& str)
 [[nodiscard]] constexpr int CmpNoCase(std::string_view strViewA, std::string_view strViewB)
 {
     const auto nA = strViewA.size();
+    const auto nB = strViewB.size();
 
     std::string strA(nA, '0');
-    std::string strB(nA, '0');
+    std::string strB(nB, '0');
 
     std::transform(strViewA.begin(), strViewA.end(), strA.begin(), [](auto c) noexcept { return ToLowerCh(c); });
     std::transform(strViewB.begin(), strViewB.end(), strB.begin(), [](auto c) noexcept { return ToLowerCh(c); });
