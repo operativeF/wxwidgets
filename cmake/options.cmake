@@ -186,9 +186,9 @@ endfunction()
 
 # FIXME: Use extern library or use vcpkg
 #wx_add_thirdparty_library(wxUSE_REGEX REGEX "enable support for wxRegEx class" DEFAULT builtin)
-wx_add_thirdparty_library(wxUSE_ZLIB ZLIB "use zlib for LZW compression" DEFAULT_APPLE sys)
+#wx_add_thirdparty_library(wxUSE_ZLIB ZLIB "use zlib for LZW compression" DEFAULT_APPLE sys)
 wx_add_thirdparty_library(wxUSE_EXPAT EXPAT "use expat for XML parsing" DEFAULT_APPLE sys)
-wx_add_thirdparty_library(wxUSE_LIBJPEG JPEG "use libjpeg (JPEG file format)")
+#wx_add_thirdparty_library(wxUSE_LIBJPEG JPEG "use libjpeg (JPEG file format)")
 wx_add_thirdparty_library(wxUSE_LIBTIFF TIFF "use libtiff (TIFF file format)")
 
 AddGlobalOption(wxUSE_LIBPNG "Use libpng (PNG image format)" ON)
@@ -218,7 +218,7 @@ AddGlobalOption(wxUSE_INTL "use internationalization system" ON)
 AddGlobalOption(wxUSE_XLOCALE "use x-locale support (requires wxLocale)" ON)
 AddGlobalOption(wxUSE_CONFIG "use wxConfig (and derived) classes" ON)
 
-AddGlobalOption(wxUSE_SOCKETS "use socket/network classes" ON)
+AddGlobalOption(wxUSE_SOCKETS "use socket/network classes" OFF)
 AddGlobalOption(wxUSE_IPV6 "enable IPv6 support in wxSocket" ON)
 if(WIN32)
     AddGlobalOption(wxUSE_OLE "use OLE classes" ON)
@@ -291,11 +291,11 @@ option(wxUSE_WEBREQUEST_CURL "use wxWebRequest libcurl backend" ${wxUSE_WEBREQUE
 AddGlobalOption(wxUSE_ZIPSTREAM "use wxZip streams" OFF)
 
 # URL-related classes
-AddGlobalOption(wxUSE_URL "use wxURL class" ON)
-AddGlobalOption(wxUSE_PROTOCOL "use wxProtocol class" ON)
-AddGlobalOption(wxUSE_PROTOCOL_HTTP "HTTP support in wxProtocol" ON)
-AddGlobalOption(wxUSE_PROTOCOL_FTP "FTP support in wxProtocol" ON)
-AddGlobalOption(wxUSE_PROTOCOL_FILE "FILE support in wxProtocol" ON)
+AddGlobalOption(wxUSE_URL "use wxURL class" OFF)
+AddGlobalOption(wxUSE_PROTOCOL "use wxProtocol class" OFF)
+AddGlobalOption(wxUSE_PROTOCOL_HTTP "HTTP support in wxProtocol" OFF)
+AddGlobalOption(wxUSE_PROTOCOL_FTP "FTP support in wxProtocol" OFF)
+AddGlobalOption(wxUSE_PROTOCOL_FILE "FILE support in wxProtocol" OFF)
 
 AddGlobalOption(wxUSE_THREADS "use threads" ON)
 
@@ -307,7 +307,7 @@ if(WIN32)
         set(wxUSE_DBGHELP_DEFAULT ON)
     endif()
     option(wxUSE_DBGHELP "use dbghelp.dll API" ${wxUSE_DBGHELP_DEFAULT})
-    AddGlobalOption(wxUSE_INICONF "use wxIniConfig" ON)
+    AddGlobalOption(wxUSE_INICONF "use wxIniConfig" OFF)
     AddGlobalOption(wxUSE_WINSOCK2 "include <winsock2.h> rather than <winsock.h>" OFF)
     AddGlobalOption(wxUSE_REGKEY "use wxRegKey class" ON)
 endif()
@@ -349,6 +349,7 @@ if(APPLE)
     set(wxUSE_GRAPHICS_CONTEXT ON)
 else()
     AddGlobalOption(wxUSE_GRAPHICS_CONTEXT "use graphics context 2D drawing API" ON)
+    AddGlobalOption(wxUSE_GRAPHICS_GDIPLUS "Use Windows GDI" ${wxUSE_GRAPHICS_CONTEXT}) # FIXME: make toggled option
     if(WIN32)
         AddGlobalOption(wxUSE_GRAPHICS_DIRECT2D "enable Direct2D graphics context" ON)
     endif()
@@ -449,9 +450,10 @@ AddGlobalOption(wxUSE_TEXTCTRL "use wxTextCtrl class" ON)
 if(wxUSE_TEXTCTRL)
     # we don't have special switches to disable wxUSE_RICHEDIT[2], it doesn't
     # seem useful to allow disabling them
-    set(wxUSE_RICHEDIT ON)
-    set(wxUSE_RICHEDIT2 ON)
+    set(wxUSE_RICHEDIT 1)
+    set(wxUSE_RICHEDIT2 1)
 endif()
+
 AddGlobalOption(wxUSE_TIMEPICKCTRL "use wxTimePickerCtrl class" ON)
 AddGlobalOption(wxUSE_TIPWINDOW "use wxTipWindow class" ON)
 AddGlobalOption(wxUSE_TOGGLEBTN "use wxToggleButton class" ON)
@@ -460,6 +462,10 @@ AddGlobalOption(wxUSE_TOOLBOOK "use wxToolbook class" ON)
 AddGlobalOption(wxUSE_TREEBOOK "use wxTreebook class" ON)
 AddGlobalOption(wxUSE_TREECTRL "use wxTreeCtrl class" ON)
 AddGlobalOption(wxUSE_TREELISTCTRL "use wxTreeListCtrl class" ON)
+
+if(wxUSE_BUTTON AND wxUSE_TOGGLEBTN)
+    add_compile_definitions(wxHAS_ANY_BUTTON)
+endif()
 
 # ---------------------------------------------------------------------------
 # common dialogs
@@ -496,7 +502,7 @@ AddGlobalOption(wxUSE_VALIDATORS "use wxValidator and derived classes" ON)
 AddGlobalOption(wxUSE_BUSYINFO "use wxBusyInfo" ON)
 AddGlobalOption(wxUSE_HOTKEY "use wxWindow::RegisterHotKey()" ON)
 AddGlobalOption(wxUSE_JOYSTICK "use wxJoystick" ON)
-AddGlobalOption(wxUSE_METAFILE "use wxMetaFile" ON)
+AddGlobalOption(wxUSE_METAFILE "use wxMetaFile" OFF)
 AddGlobalOption(wxUSE_DRAGIMAGE "use wxDragImage" ON)
 AddGlobalOption(wxUSE_UIACTIONSIMULATOR "use wxUIActionSimulator (experimental)" ON)
 AddGlobalOption(wxUSE_DC_TRANSFORM_MATRIX "use wxDC::SetTransformMatrix and related" ON)
