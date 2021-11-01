@@ -115,7 +115,7 @@ void wxGetMousePosition( int* x, int* y )
 // window information functions
 // ---------------------------------------------------------------------------
 
-std::string WXDLLEXPORT wxGetWindowText(WXHWND hWnd)
+std::string wxGetWindowText(WXHWND hWnd)
 {
     if ( hWnd )
     {

@@ -19,52 +19,39 @@
 #include "wx/spinctrl.h"
 #include "wx/textctrl.h"
 
+#include <memory>
+
 class SpinCtrlTestCase1
 {
 public:
     SpinCtrlTestCase1()
-        : m_spin(new wxSpinCtrl())
+        : m_spin(std::make_unique<wxSpinCtrl>())
     {
-    }
-
-    ~SpinCtrlTestCase1()
-    {
-        delete m_spin;
     }
 
 protected:
-    wxSpinCtrl* m_spin;
+    std::unique_ptr<wxSpinCtrl> m_spin;
 };
 
 class SpinCtrlTestCase2
 {
 public:
     SpinCtrlTestCase2()
-        : m_spin(new wxSpinCtrl(wxTheApp->GetTopWindow()))
+        : m_spin(std::make_unique<wxSpinCtrl>(wxTheApp->GetTopWindow()))
     {
-    }
-
-    ~SpinCtrlTestCase2()
-    {
-        delete m_spin;
     }
 
 protected:
-    wxSpinCtrl* m_spin;
+    std::unique_ptr<wxSpinCtrl> m_spin;
 };
 
 class SpinCtrlTestCase3
 {
 public:
     SpinCtrlTestCase3()
-        : m_spin(new wxSpinCtrl(wxTheApp->GetTopWindow()))
+        : m_spin(std::make_unique<wxSpinCtrl>(wxTheApp->GetTopWindow()))
     {
         m_spin->Bind(wxEVT_SPINCTRL, &SpinCtrlTestCase3::OnSpinSetValue, this);
-    }
-
-    ~SpinCtrlTestCase3()
-    {
-        delete m_spin;
     }
 
 private:
@@ -80,7 +67,7 @@ private:
     }
 
 protected:
-    wxSpinCtrl* m_spin;
+    std::unique_ptr<wxSpinCtrl> m_spin;
 };
 
 
@@ -127,8 +114,8 @@ TEST_CASE_FIXTURE(SpinCtrlTestCase1, "SpinCtrl::NoEventsInCtor")
 {
     // Verify that creating the control does not generate any events. This is
     // unexpected and shouldn't happen.
-    EventCounter updatedSpin(m_spin, wxEVT_SPINCTRL);
-    EventCounter updatedText(m_spin, wxEVT_TEXT);
+    EventCounter updatedSpin(m_spin.get(), wxEVT_SPINCTRL);
+    EventCounter updatedText(m_spin.get(), wxEVT_TEXT);
 
     m_spin->Create(wxTheApp->GetTopWindow(), wxID_ANY, "",
                    wxDefaultPosition, wxDefaultSize, 0,
@@ -141,7 +128,7 @@ TEST_CASE_FIXTURE(SpinCtrlTestCase1, "SpinCtrl::NoEventsInCtor")
 TEST_CASE_FIXTURE(SpinCtrlTestCase2, "SpinCtrl::Arrows")
 {
 #if wxUSE_UIACTIONSIMULATOR
-    EventCounter updated(m_spin, wxEVT_SPINCTRL);
+    EventCounter updated(m_spin.get(), wxEVT_SPINCTRL);
 
     wxUIActionSimulator sim;
 
@@ -200,9 +187,10 @@ TEST_CASE_FIXTURE(SpinCtrlTestCase2, "SpinCtrl::Range")
     // Test that the value is adjusted to be inside the new valid range but
     // that this doesn't result in any events (as this is not something done by
     // the user).
+    SUBCASE("Test value adjustment for no new events.")
     {
-        EventCounter updatedSpin(m_spin, wxEVT_SPINCTRL);
-        EventCounter updatedText(m_spin, wxEVT_TEXT);
+        EventCounter updatedSpin(m_spin.get(), wxEVT_SPINCTRL);
+        EventCounter updatedText(m_spin.get(), wxEVT_TEXT);
 
         m_spin->SetRange(1, 10);
         CHECK(m_spin->GetValue() == 1);
@@ -250,8 +238,8 @@ TEST_CASE_FIXTURE(SpinCtrlTestCase2, "SpinCtrl::Range")
 
 TEST_CASE_FIXTURE(SpinCtrlTestCase2, "SpinCtrl::Value")
 {
-    EventCounter updatedSpin(m_spin, wxEVT_SPINCTRL);
-    EventCounter updatedText(m_spin, wxEVT_TEXT);
+    EventCounter updatedSpin(m_spin.get(), wxEVT_SPINCTRL);
+    EventCounter updatedText(m_spin.get(), wxEVT_TEXT);
 
     CHECK(m_spin->GetValue() == 0);
 

@@ -15,7 +15,7 @@
 
 #include <string>
 
-class WXDLLIMPEXP_CORE wxSpinButton : public wxSpinButtonBase
+class wxSpinButton : public wxSpinButtonBase
 {
 public:
     wxSpinButton() = default;

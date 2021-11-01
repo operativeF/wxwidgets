@@ -490,6 +490,9 @@ int wxSpinCtrl::GetValue() const
     if ( ec != std::errc() )
         n = std::numeric_limits<int>::min();
 
+    if(m_min > m_max)
+        return std::clamp(n, m_max, m_min);
+    
     return std::clamp(n, m_min, m_max);
 }
 

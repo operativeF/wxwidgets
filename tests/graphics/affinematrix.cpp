@@ -255,44 +255,7 @@ CPPUNIT_TEST_SUITE_NAMED_REGISTRATION( TransformMatrixTestCaseGCDC, "TransformMa
 #endif // !__WXMSW__
 
 #ifdef __WXMSW__
-// GDI+ and Direct2D are available only under MSW.
-
-#if wxUSE_GRAPHICS_GDIPLUS
-class TransformMatrixTestCaseGCDCGDIPlus : public TransformMatrixTestCaseGCDC
-{
-public:
-    TransformMatrixTestCaseGCDCGDIPlus() {}
-
-    virtual ~TransformMatrixTestCaseGCDCGDIPlus() {}
-
-    void setUp() override
-    {
-        TransformMatrixTestCaseGCDC::setUp();
-
-        wxGraphicsRenderer* rend = wxGraphicsRenderer::GetGDIPlusRenderer();
-        wxGraphicsContext* ctx = rend->CreateContext(m_mdc);
-        m_gcdc->SetGraphicsContext(ctx);
-    }
-
-private:
-    CPPUNIT_TEST_SUITE( TransformMatrixTestCaseGCDCGDIPlus );
-        CPPUNIT_TEST( VMirrorAndTranslate );
-        CPPUNIT_TEST( Rotate90Clockwise );
-    CPPUNIT_TEST_SUITE_END();
-
-protected:
-
-    TransformMatrixTestCaseGCDCGDIPlus(const TransformMatrixTestCaseGCDCGDIPlus&) = delete;
-	TransformMatrixTestCaseGCDCGDIPlus& operator=(const TransformMatrixTestCaseGCDCGDIPlus&) = delete;
-};
-
-// register in the unnamed registry so that these tests are run by default
-CPPUNIT_TEST_SUITE_REGISTRATION( TransformMatrixTestCaseGCDCGDIPlus );
-
-// also include in it's own registry so that these tests can be run alone
-CPPUNIT_TEST_SUITE_NAMED_REGISTRATION( TransformMatrixTestCaseGCDCGDIPlus, "TransformMatrixTestCaseGCDCGDIPlus" );
-
-#endif // wxUSE_GRAPHICS_GDIPLUS
+// Direct2D are available only under MSW.
 
 #if wxUSE_GRAPHICS_DIRECT2D
 class TransformMatrixTestCaseGCDCDirect2D : public TransformMatrixTestCaseGCDC

@@ -137,7 +137,12 @@ TEST_CASE("wxDC::GetPartialTextExtent")
 
 TEST_CASE("wxGC::GetTextExtent")
 {
+#ifndef __WXMSW__
     wxGraphicsRenderer* renderer = wxGraphicsRenderer::GetDefaultRenderer();
+#else
+    wxGraphicsRenderer* renderer = wxGraphicsRenderer::GetDirect2DRenderer();
+#endif
+
     REQUIRE(renderer);
     std::unique_ptr<wxGraphicsContext> context = renderer->CreateMeasuringContext();
     REQUIRE(context);

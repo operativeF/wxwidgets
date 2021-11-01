@@ -49,7 +49,7 @@ constexpr char wxSPIN_BUTTON_NAME[] = "wxSpinButton";
 #define wxSP_WRAP             0x8000
 
 
-class WXDLLIMPEXP_CORE wxSpinButtonBase : public wxControl
+class wxSpinButtonBase : public wxControl
 {
 public:
     // range has by default (0..100) values

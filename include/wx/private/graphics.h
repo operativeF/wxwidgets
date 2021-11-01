@@ -15,19 +15,19 @@
 
 #include "wx/graphics.h"
 
-class WXDLLIMPEXP_CORE wxGraphicsObjectRefData : public wxObjectRefData
+class wxGraphicsObjectRefData : public wxObjectRefData
 {
-    public :
+public :
     wxGraphicsObjectRefData( wxGraphicsRenderer* renderer );
     wxGraphicsObjectRefData( const wxGraphicsObjectRefData* data );
     wxGraphicsRenderer* GetRenderer() const ;
     virtual wxGraphicsObjectRefData* Clone() const ;
 
-    protected :
+protected :
     wxGraphicsRenderer* m_renderer;
 } ;
 
-class WXDLLIMPEXP_CORE wxGraphicsBitmapData : public wxGraphicsObjectRefData
+class wxGraphicsBitmapData : public wxGraphicsObjectRefData
 {
 public :
     wxGraphicsBitmapData( wxGraphicsRenderer* renderer) :
@@ -37,7 +37,7 @@ public :
        virtual void * GetNativeBitmap() const = 0;
 } ;
 
-class WXDLLIMPEXP_CORE wxGraphicsMatrixData : public wxGraphicsObjectRefData
+class wxGraphicsMatrixData : public wxGraphicsObjectRefData
 {
 public:
     wxGraphicsMatrixData( wxGraphicsRenderer* renderer) :
@@ -91,7 +91,7 @@ public:
        virtual void* GetNativeMatrix() const = 0;
 } ;
 
-class WXDLLIMPEXP_CORE wxGraphicsPathData : public wxGraphicsObjectRefData
+class wxGraphicsPathData : public wxGraphicsObjectRefData
 {
 public :
     wxGraphicsPathData(wxGraphicsRenderer* renderer) : wxGraphicsObjectRefData(renderer) {}

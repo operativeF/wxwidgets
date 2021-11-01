@@ -349,7 +349,7 @@ if(APPLE)
     set(wxUSE_GRAPHICS_CONTEXT ON)
 else()
     AddGlobalOption(wxUSE_GRAPHICS_CONTEXT "use graphics context 2D drawing API" ON)
-    AddGlobalOption(wxUSE_GRAPHICS_GDIPLUS "Use Windows GDI" ${wxUSE_GRAPHICS_CONTEXT}) # FIXME: make toggled option
+
     if(WIN32)
         AddGlobalOption(wxUSE_GRAPHICS_DIRECT2D "enable Direct2D graphics context" ON)
     endif()

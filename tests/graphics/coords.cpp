@@ -1029,136 +1029,8 @@ TEST_CASE_FIXTURE(CoordinatesGCDCTestCase, "CoordinatesGCDC::RotatedWithMatrixEx
     // Apply matrix transformations with rotation component
     RotatedWithMatrixEx(m_dc);
 }
-#else// GDI+ and Direct2D are available only under MSW.
-#if wxUSE_GRAPHICS_GDIPLUS
-class CoordinatesGCDCGDIPlusTestCase : public CoordinatesGCDCTestCase
-{
-public:
-    CoordinatesGCDCGDIPlusTestCase()
-    {
-        wxGraphicsRenderer* rend = wxGraphicsRenderer::GetGDIPlusRenderer();
-        std::unique_ptr<wxGraphicsContext> ctx = rend->CreateContext(m_mdc);
-        REQUIRE(ctx != nullptr);
-        m_gcdc->SetGraphicsContext(std::move(ctx));
-    }
-};
+#else // Direct2D is available only under MSW.
 
-TEST_CASE_FIXTURE(CoordinatesGCDCGDIPlusTestCase, "CoordinatesGCDCGDIPlus::InitialState")
-{
-    // Check initial state
-    InitialState(m_dc);
-}
-
-TEST_CASE_FIXTURE(CoordinatesGCDCGDIPlusTestCase, "CoordinatesGCDCGDIPlus::NoTransform")
-{
-    // No transformations
-    NoTransform(m_dc);
-}
-
-TEST_CASE_FIXTURE(CoordinatesGCDCGDIPlusTestCase, "CoordinatesGCDCGDIPlus::NoTransformEx")
-{
-    // No transformations
-    NoTransformEx(m_dc);
-}
-
-TEST_CASE_FIXTURE(CoordinatesGCDCGDIPlusTestCase, "CoordinatesGCDCGDIPlus::DeviceOriginChanged")
-{
-    // Only device origin is changed
-    DeviceOriginChanged(m_dc);
-}
-
-TEST_CASE_FIXTURE(CoordinatesGCDCGDIPlusTestCase, "CoordinatesGCDCGDIPlus::DeviceOriginChangedEx")
-{
-    // Only device origin is changed
-    DeviceOriginChangedEx(m_dc);
-}
-
-TEST_CASE_FIXTURE(CoordinatesGCDCGDIPlusTestCase, "CoordinatesGCDCGDIPlus::LogicalOriginChanged")
-{
-    // Only logical origin is changed
-    LogicalOriginChanged(m_dc);
-}
-
-TEST_CASE_FIXTURE(CoordinatesGCDCGDIPlusTestCase, "CoordinatesGCDCGDIPlus::LogicalOriginChangedEx")
-{
-    // Only logical origin is changed
-    LogicalOriginChangedEx(m_dc);
-}
-
-TEST_CASE_FIXTURE(CoordinatesGCDCGDIPlusTestCase, "CoordinatesGCDCGDIPlus::UserScaleChanged")
-{
-    // Only user scale is changed
-    UserScaleChanged(m_dc);
-}
-
-TEST_CASE_FIXTURE(CoordinatesGCDCGDIPlusTestCase, "CoordinatesGCDCGDIPlus::UserScaleChangedEx")
-{
-    // Only user scale is changed
-    UserScaleChangedEx(m_dc);
-}
-
-TEST_CASE_FIXTURE(CoordinatesGCDCGDIPlusTestCase, "CoordinatesGCDCGDIPlus::LogicalScaleChanged")
-{
-    // Only logical scale is changed
-    LogicalScaleChanged(m_dc);
-}
-
-TEST_CASE_FIXTURE(CoordinatesGCDCGDIPlusTestCase, "CoordinatesGCDCGDIPlus::LogicalScaleChangedex")
-{
-    // Only logical scale is changed
-    LogicalScaleChangedEx(m_dc);
-}
-
-TEST_CASE_FIXTURE(CoordinatesGCDCGDIPlusTestCase, "CoordinatesGCDCGDIPlus::TransformedStd")
-{
-    // Apply all standardd transformations
-    TransformedStd(m_dc);
-}
-
-TEST_CASE_FIXTURE(CoordinatesGCDCGDIPlusTestCase, "CoordinatesGCDCGDIPlus::TransformedStdEx")
-{
-    // Apply all standardd transformations
-    TransformedStdEx(m_dc);
-}
-
-TEST_CASE_FIXTURE(CoordinatesGCDCGDIPlusTestCase, "CoordinatesGCDCGDIPlus::TransformedWithMatrix")
-{
-    // Apply transformation matrix only
-    TransformedWithMatrix(m_dc);
-}
-
-TEST_CASE_FIXTURE(CoordinatesGCDCGDIPlusTestCase, "CoordinatesGCDCGDIPlus::TransformedWithMatrixEx")
-{
-    // Apply transformation matrix only
-    TransformedWithMatrixEx(m_dc);
-}
-
-TEST_CASE_FIXTURE(CoordinatesGCDCGDIPlusTestCase, "CoordinatesGCDCGDIPlus::TransformedWithMatrixAndStd")
-{
-    // Apply combination of standard and matrix transformations
-    TransformedWithMatrixAndStd(m_dc);
-}
-
-TEST_CASE_FIXTURE(CoordinatesGCDCGDIPlusTestCase, "CoordinatesGCDCGDIPlus::TransformedWithMatrixAndStdEx")
-{
-    // Apply combination of standard and matrix transformations
-    TransformedWithMatrixAndStdEx(m_dc);
-}
-
-TEST_CASE_FIXTURE(CoordinatesGCDCGDIPlusTestCase, "CoordinatesGCDCGDIPlus::RotatedWithMatrix")
-{
-    // Apply matrix transformations with rotation component
-    RotatedWithMatrix(m_dc);
-}
-
-TEST_CASE_FIXTURE(CoordinatesGCDCGDIPlusTestCase, "CoordinatesGCDCGDIPlus::RotatedWithMatrixEx")
-{
-    // Apply matrix transformations with rotation component
-    RotatedWithMatrixEx(m_dc);
-}
-#endif // wxUSE_GRAPHICS_GDIPLUS
-
-#if wxUSE_GRAPHICS_DIRECT2D
 class CoordinatesGCDCDirect2DTestCase : public CoordinatesGCDCTestCase
 {
 public:
@@ -1286,7 +1158,7 @@ TEST_CASE_FIXTURE(CoordinatesGCDCDirect2DTestCase, "CoordinatesGCDCDirect2D::Rot
     // Apply matrix transformations with rotation component
     RotatedWithMatrixEx(m_dc);
 }
-#endif // wxUSE_GRAPHICS_DIRECT2D
+
 #endif // __WXMSW__/!__WXMSW__
 
 #if wxUSE_CAIRO

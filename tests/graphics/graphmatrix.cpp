@@ -76,45 +76,7 @@ private:
 // ========================
 
 #ifdef __WXMSW__
-// GDI+ and Direct2D are available only under MSW.
-
-#if wxUSE_GRAPHICS_GDIPLUS
-
-class GraphicsMatrixTestCaseGDIPlus : public GraphicsMatrixTestCaseBase
-{
-public:
-    GraphicsMatrixTestCaseGDIPlus()
-    {
-        m_rend = wxGraphicsRenderer::GetGDIPlusRenderer();
-    }
-
-    virtual ~GraphicsMatrixTestCaseGDIPlus()
-    {
-    }
-
-private:
-    CPPUNIT_TEST_SUITE( GraphicsMatrixTestCaseGDIPlus );
-        CPPUNIT_TEST( InitState );
-        CPPUNIT_TEST( InvertMatrix );
-        CPPUNIT_TEST( Concat1 );
-        CPPUNIT_TEST( Concat2 );
-        CPPUNIT_TEST( Concat3 );
-    CPPUNIT_TEST_SUITE_END();
-
-protected:
-    GraphicsMatrixTestCaseGDIPlus(const GraphicsMatrixTestCaseGDIPlus&) = delete;
-	GraphicsMatrixTestCaseGDIPlus& operator=(const GraphicsMatrixTestCaseGDIPlus&) = delete;
-};
-
-// register in the unnamed registry so that these tests are run by default
-CPPUNIT_TEST_SUITE_REGISTRATION( GraphicsMatrixTestCaseGDIPlus );
-
-// also include in it's own registry so that these tests can be run alone
-CPPUNIT_TEST_SUITE_NAMED_REGISTRATION( GraphicsMatrixTestCaseGDIPlus, "GraphicsMatrixTestCaseGDIPlus" );
-
-#endif // wxUSE_GRAPHICS_GDIPLUS
-
-#if wxUSE_GRAPHICS_DIRECT2D
+// Direct2D are available only under MSW.
 
 class GraphicsMatrixTestCaseDirect2D : public GraphicsMatrixTestCaseBase
 {
@@ -147,8 +109,6 @@ CPPUNIT_TEST_SUITE_REGISTRATION( GraphicsMatrixTestCaseDirect2D );
 
 // also include in it's own registry so that these tests can be run alone
 CPPUNIT_TEST_SUITE_NAMED_REGISTRATION( GraphicsMatrixTestCaseDirect2D, "GraphicsMatrixTestCaseDirect2D" );
-
-#endif // wxUSE_GRAPHICS_DIRECT2D
 
 #endif // __WXMSW__
 

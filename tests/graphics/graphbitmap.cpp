@@ -270,26 +270,6 @@ TEST_CASE("GraphicsBitmapTestCase::Create", "[graphbitmap][create]")
             CheckCreateGraphBitmap(gr, bmp, image);
         }
 
-#if defined(__WXMSW__)
-#if wxUSE_GRAPHICS_GDIPLUS
-        SECTION("GDI+ GC")
-        {
-            wxGraphicsRenderer* gr = wxGraphicsRenderer::GetGDIPlusRenderer();
-            REQUIRE(gr != NULL);
-            CheckCreateGraphBitmap(gr, bmp, image);
-        }
-#endif // wxUSE_GRAPHICS_GDIPLUS
-
-#if wxUSE_GRAPHICS_DIRECT2D
-        SECTION("Direct2D GC")
-        {
-            wxGraphicsRenderer* gr = wxGraphicsRenderer::GetDirect2DRenderer();
-            REQUIRE(gr != NULL);
-            CheckCreateGraphBitmap(gr, bmp, image);
-        }
-#endif // wxUSE_GRAPHICS_DIRECT2D
-#endif // __WXMSW__
-
 #if wxUSE_CAIRO
         SECTION("Cairo GC")
         {
@@ -323,26 +303,6 @@ TEST_CASE("GraphicsBitmapTestCase::Create", "[graphbitmap][create]")
             CheckCreateGraphBitmap(gr, bmp, image);
         }
 
-#if defined(__WXMSW__)
-#if wxUSE_GRAPHICS_GDIPLUS
-        SECTION("GDI+ GC")
-        {
-            wxGraphicsRenderer* gr = wxGraphicsRenderer::GetGDIPlusRenderer();
-            REQUIRE(gr != NULL);
-            CheckCreateGraphBitmap(gr, bmp, image);
-        }
-#endif // wxUSE_GRAPHICS_GDIPLUS
-
-#if wxUSE_GRAPHICS_DIRECT2D
-        SECTION("Direct2D GC")
-        {
-            wxGraphicsRenderer* gr = wxGraphicsRenderer::GetDirect2DRenderer();
-            REQUIRE(gr != NULL);
-            CheckCreateGraphBitmap(gr, bmp, image);
-        }
-#endif // wxUSE_GRAPHICS_DIRECT2D
-#endif // __WXMSW__
-
 #if wxUSE_CAIRO
         SECTION("Cairo GC")
         {
@@ -375,26 +335,6 @@ TEST_CASE("GraphicsBitmapTestCase::Create", "[graphbitmap][create]")
             REQUIRE(gr != NULL);
             CheckCreateGraphBitmap(gr, bmp, image);
         }
-
-#if defined(__WXMSW__)
-#if wxUSE_GRAPHICS_GDIPLUS
-        SECTION("GDI+ GC")
-        {
-            wxGraphicsRenderer* gr = wxGraphicsRenderer::GetGDIPlusRenderer();
-            REQUIRE(gr != NULL);
-            CheckCreateGraphBitmap(gr, bmp, image);
-        }
-#endif // wxUSE_GRAPHICS_GDIPLUS
-
-#if wxUSE_GRAPHICS_DIRECT2D
-        SECTION("Direct2D GC")
-        {
-            wxGraphicsRenderer* gr = wxGraphicsRenderer::GetDirect2DRenderer();
-            REQUIRE(gr != NULL);
-            CheckCreateGraphBitmap(gr, bmp, image);
-        }
-#endif // wxUSE_GRAPHICS_DIRECT2D
-#endif // __WXMSW__
 
 #if wxUSE_CAIRO
         SECTION("Cairo GC")
@@ -430,26 +370,6 @@ TEST_CASE("GraphicsBitmapTestCase::Create", "[graphbitmap][create]")
             CheckCreateGraphBitmap(gr, bmp, image);
         }
 
-#if defined(__WXMSW__)
-#if wxUSE_GRAPHICS_GDIPLUS
-        SECTION("GDI+ GC")
-        {
-            wxGraphicsRenderer* gr = wxGraphicsRenderer::GetGDIPlusRenderer();
-            REQUIRE(gr != NULL);
-            CheckCreateGraphBitmap(gr, bmp, image);
-        }
-#endif // wxUSE_GRAPHICS_GDIPLUS
-
-#if wxUSE_GRAPHICS_DIRECT2D
-        SECTION("Direct2D GC")
-        {
-            wxGraphicsRenderer* gr = wxGraphicsRenderer::GetDirect2DRenderer();
-            REQUIRE(gr != NULL);
-            CheckCreateGraphBitmap(gr, bmp, image);
-        }
-#endif // wxUSE_GRAPHICS_DIRECT2D
-#endif // __WXMSW__
-
 #if wxUSE_CAIRO
         SECTION("Cairo GC")
         {
@@ -481,26 +401,6 @@ TEST_CASE("GraphicsBitmapTestCase::Create", "[graphbitmap][create]")
             REQUIRE(gr != NULL);
             CheckCreateGraphBitmap(gr, bmp, image);
         }
-
-#if defined(__WXMSW__)
-#if wxUSE_GRAPHICS_GDIPLUS
-        SECTION("GDI+ GC")
-        {
-            wxGraphicsRenderer* gr = wxGraphicsRenderer::GetGDIPlusRenderer();
-            REQUIRE(gr != NULL);
-            CheckCreateGraphBitmap(gr, bmp, image);
-        }
-#endif // wxUSE_GRAPHICS_GDIPLUS
-
-#if wxUSE_GRAPHICS_DIRECT2D
-        SECTION("Direct2D GC")
-        {
-            wxGraphicsRenderer* gr = wxGraphicsRenderer::GetDirect2DRenderer();
-            REQUIRE(gr != NULL);
-            CheckCreateGraphBitmap(gr, bmp, image);
-        }
-#endif // wxUSE_GRAPHICS_DIRECT2D
-#endif // __WXMSW__
 
 #if wxUSE_CAIRO
         SECTION("Cairo GC")
@@ -534,26 +434,6 @@ TEST_CASE("GraphicsBitmapTestCase::Create", "[graphbitmap][create]")
             REQUIRE(gr != NULL);
             CheckCreateGraphBitmap(gr, bmp, image);
         }
-
-#if defined(__WXMSW__)
-#if wxUSE_GRAPHICS_GDIPLUS
-        SECTION("GDI+ GC")
-        {
-            wxGraphicsRenderer* gr = wxGraphicsRenderer::GetGDIPlusRenderer();
-            REQUIRE(gr != NULL);
-            CheckCreateGraphBitmap(gr, bmp, image);
-        }
-#endif // wxUSE_GRAPHICS_GDIPLUS
-
-#if wxUSE_GRAPHICS_DIRECT2D
-        SECTION("Direct2D GC")
-        {
-            wxGraphicsRenderer* gr = wxGraphicsRenderer::GetDirect2DRenderer();
-            REQUIRE(gr != NULL);
-            CheckCreateGraphBitmap(gr, bmp, image);
-        }
-#endif // wxUSE_GRAPHICS_DIRECT2D
-#endif // __WXMSW__
 
 #if wxUSE_CAIRO
         SECTION("Cairo GC")
@@ -593,26 +473,6 @@ TEST_CASE("GraphicsBitmapTestCase::SubBitmap", "[graphbitmap][subbitmap][create]
             CheckCreateGraphSubBitmap(gr, bmp, subX, subY, subW, subH, image);
         }
 
-#if defined(__WXMSW__)
-#if wxUSE_GRAPHICS_GDIPLUS
-        SECTION("GDI+ GC")
-        {
-            wxGraphicsRenderer* gr = wxGraphicsRenderer::GetGDIPlusRenderer();
-            REQUIRE(gr != NULL);
-            CheckCreateGraphSubBitmap(gr, bmp, subX, subY, subW, subH, image);
-        }
-#endif // wxUSE_GRAPHICS_GDIPLUS
-
-#if wxUSE_GRAPHICS_DIRECT2D
-        SECTION("Direct2D GC")
-        {
-            wxGraphicsRenderer* gr = wxGraphicsRenderer::GetDirect2DRenderer();
-            REQUIRE(gr != NULL);
-            CheckCreateGraphSubBitmap(gr, bmp, subX, subY, subW, subH, image);
-        }
-#endif // wxUSE_GRAPHICS_DIRECT2D
-#endif // __WXMSW__
-
 #if wxUSE_CAIRO
         SECTION("Cairo GC")
         {
@@ -650,26 +510,6 @@ TEST_CASE("GraphicsBitmapTestCase::SubBitmap", "[graphbitmap][subbitmap][create]
             CheckCreateGraphSubBitmap(gr, bmp, subX, subY, subW, subH, image);
         }
 
-#if defined(__WXMSW__)
-#if wxUSE_GRAPHICS_GDIPLUS
-        SECTION("GDI+ GC")
-        {
-            wxGraphicsRenderer* gr = wxGraphicsRenderer::GetGDIPlusRenderer();
-            REQUIRE(gr != NULL);
-            CheckCreateGraphSubBitmap(gr, bmp, subX, subY, subW, subH, image);
-        }
-#endif // wxUSE_GRAPHICS_GDIPLUS
-
-#if wxUSE_GRAPHICS_DIRECT2D
-        SECTION("Direct2D GC")
-        {
-            wxGraphicsRenderer* gr = wxGraphicsRenderer::GetDirect2DRenderer();
-            REQUIRE(gr != NULL);
-            CheckCreateGraphSubBitmap(gr, bmp, subX, subY, subW, subH, image);
-        }
-#endif // wxUSE_GRAPHICS_DIRECT2D
-#endif // __WXMSW__
-
 #if wxUSE_CAIRO
         SECTION("Cairo GC")
         {
@@ -700,31 +540,20 @@ TEST_CASE("GraphicsBitmapTestCase::SubBitmap", "[graphbitmap][subbitmap][create]
         REQUIRE(image.GetWidth() == subW);
         REQUIRE(image.GetHeight() == subH);
 
+#ifndef __WXMSW__
         SECTION("Default GC")
         {
             wxGraphicsRenderer* gr = wxGraphicsRenderer::GetDefaultRenderer();
             REQUIRE(gr != NULL);
             CheckCreateGraphSubBitmap(gr, bmp, subX, subY, subW, subH, image);
         }
-
-#if defined(__WXMSW__)
-#if wxUSE_GRAPHICS_GDIPLUS
-        SECTION("GDI+ GC")
-        {
-            wxGraphicsRenderer* gr = wxGraphicsRenderer::GetGDIPlusRenderer();
-            REQUIRE(gr != NULL);
-            CheckCreateGraphSubBitmap(gr, bmp, subX, subY, subW, subH, image);
-        }
-#endif // wxUSE_GRAPHICS_GDIPLUS
-
-#if wxUSE_GRAPHICS_DIRECT2D
+#else
         SECTION("Direct2D GC")
         {
             wxGraphicsRenderer* gr = wxGraphicsRenderer::GetDirect2DRenderer();
             REQUIRE(gr != NULL);
             CheckCreateGraphSubBitmap(gr, bmp, subX, subY, subW, subH, image);
         }
-#endif // wxUSE_GRAPHICS_DIRECT2D
 #endif // __WXMSW__
 
 #if wxUSE_CAIRO
@@ -774,31 +603,20 @@ TEST_CASE("GraphicsBitmapTestCase::SubBitmap", "[graphbitmap][subbitmap][create]
                 }
             }
 
+#ifndef __WXMSW__
         SECTION("Default GC")
         {
             wxGraphicsRenderer* gr = wxGraphicsRenderer::GetDefaultRenderer();
             REQUIRE(gr != NULL);
             CheckCreateGraphSubBitmap(gr, bmp, subX, subY, subW, subH, image);
         }
-
-#if defined(__WXMSW__)
-#if wxUSE_GRAPHICS_GDIPLUS
-        SECTION("GDI+ GC")
-        {
-            wxGraphicsRenderer* gr = wxGraphicsRenderer::GetGDIPlusRenderer();
-            REQUIRE(gr != NULL);
-            CheckCreateGraphSubBitmap(gr, bmp, subX, subY, subW, subH, image);
-        }
-#endif // wxUSE_GRAPHICS_GDIPLUS
-
-#if wxUSE_GRAPHICS_DIRECT2D
+#else
         SECTION("Direct2D GC")
         {
             wxGraphicsRenderer* gr = wxGraphicsRenderer::GetDirect2DRenderer();
             REQUIRE(gr != NULL);
             CheckCreateGraphSubBitmap(gr, bmp, subX, subY, subW, subH, image);
         }
-#endif // wxUSE_GRAPHICS_DIRECT2D
 #endif // __WXMSW__
 
 #if wxUSE_CAIRO
@@ -830,31 +648,20 @@ TEST_CASE("GraphicsBitmapTestCase::SubBitmap", "[graphbitmap][subbitmap][create]
         REQUIRE(image.GetWidth() == subW);
         REQUIRE(image.GetHeight() == subH);
 
+#ifndef __WXMSW__
         SECTION("Default GC")
         {
             wxGraphicsRenderer* gr = wxGraphicsRenderer::GetDefaultRenderer();
             REQUIRE(gr != NULL);
             CheckCreateGraphSubBitmap(gr, bmp, subX, subY, subW, subH, image);
         }
-
-#if defined(__WXMSW__)
-#if wxUSE_GRAPHICS_GDIPLUS
-        SECTION("GDI+ GC")
-        {
-            wxGraphicsRenderer* gr = wxGraphicsRenderer::GetGDIPlusRenderer();
-            REQUIRE(gr != NULL);
-            CheckCreateGraphSubBitmap(gr, bmp, subX, subY, subW, subH, image);
-        }
-#endif // wxUSE_GRAPHICS_GDIPLUS
-
-#if wxUSE_GRAPHICS_DIRECT2D
+#else
         SECTION("Direct2D GC")
         {
             wxGraphicsRenderer* gr = wxGraphicsRenderer::GetDirect2DRenderer();
             REQUIRE(gr != NULL);
             CheckCreateGraphSubBitmap(gr, bmp, subX, subY, subW, subH, image);
         }
-#endif // wxUSE_GRAPHICS_DIRECT2D
 #endif // __WXMSW__
 
 #if wxUSE_CAIRO
@@ -887,31 +694,20 @@ TEST_CASE("GraphicsBitmapTestCase::SubBitmap", "[graphbitmap][subbitmap][create]
         const wxColour maskCol(image.GetMaskRed(), image.GetMaskGreen(), image.GetMaskBlue());
         REQUIRE(maskCol.IsOk());
 
+#ifndef __WXMSW__
         SECTION("Default GC")
         {
             wxGraphicsRenderer* gr = wxGraphicsRenderer::GetDefaultRenderer();
             REQUIRE(gr != NULL);
             CheckCreateGraphSubBitmap(gr, bmp, subX, subY, subW, subH, image);
         }
-
-#if defined(__WXMSW__)
-#if wxUSE_GRAPHICS_GDIPLUS
-        SECTION("GDI+ GC")
-        {
-            wxGraphicsRenderer* gr = wxGraphicsRenderer::GetGDIPlusRenderer();
-            REQUIRE(gr != NULL);
-            CheckCreateGraphSubBitmap(gr, bmp, subX, subY, subW, subH, image);
-        }
-#endif // wxUSE_GRAPHICS_GDIPLUS
-
-#if wxUSE_GRAPHICS_DIRECT2D
+#else
         SECTION("Direct2D GC")
         {
             wxGraphicsRenderer* gr = wxGraphicsRenderer::GetDirect2DRenderer();
             REQUIRE(gr != NULL);
             CheckCreateGraphSubBitmap(gr, bmp, subX, subY, subW, subH, image);
         }
-#endif // wxUSE_GRAPHICS_DIRECT2D
 #endif // __WXMSW__
 
 #if wxUSE_CAIRO
@@ -944,31 +740,20 @@ TEST_CASE("GraphicsBitmapTestCase::CreateFromImage", "[graphbitmap][create][from
         REQUIRE_FALSE(img.HasAlpha());
         REQUIRE_FALSE(img.HasMask());
 
+#ifndef __WXMSW__
         SECTION("Default GC")
         {
             wxGraphicsRenderer* gr = wxGraphicsRenderer::GetDefaultRenderer();
             REQUIRE(gr != NULL);
             CheckCreateGraphBitmapFromImage(gr, img);
         }
-
-#if defined(__WXMSW__)
-#if wxUSE_GRAPHICS_GDIPLUS
-        SECTION("GDI+ GC")
-        {
-            wxGraphicsRenderer* gr = wxGraphicsRenderer::GetGDIPlusRenderer();
-            REQUIRE(gr != NULL);
-            CheckCreateGraphBitmapFromImage(gr, img);
-        }
-#endif // wxUSE_GRAPHICS_GDIPLUS
-
-#if wxUSE_GRAPHICS_DIRECT2D
+#else
         SECTION("Direct2D GC")
         {
             wxGraphicsRenderer* gr = wxGraphicsRenderer::GetDirect2DRenderer();
             REQUIRE(gr != NULL);
             CheckCreateGraphBitmapFromImage(gr, img);
         }
-#endif // wxUSE_GRAPHICS_DIRECT2D
 #endif // __WXMSW__
 
 #if wxUSE_CAIRO
@@ -996,31 +781,20 @@ TEST_CASE("GraphicsBitmapTestCase::CreateFromImage", "[graphbitmap][create][from
         REQUIRE_FALSE(img.HasAlpha());
         REQUIRE(img.HasMask() == true);
 
+#ifndef __WXMSW__
         SECTION("Default GC")
         {
             wxGraphicsRenderer* gr = wxGraphicsRenderer::GetDefaultRenderer();
             REQUIRE(gr != NULL);
             CheckCreateGraphBitmapFromImage(gr, img);
         }
-
-#if defined(__WXMSW__)
-#if wxUSE_GRAPHICS_GDIPLUS
-        SECTION("GDI+ GC")
-        {
-            wxGraphicsRenderer* gr = wxGraphicsRenderer::GetGDIPlusRenderer();
-            REQUIRE(gr != NULL);
-            CheckCreateGraphBitmapFromImage(gr, img);
-        }
-#endif // wxUSE_GRAPHICS_GDIPLUS
-
-#if wxUSE_GRAPHICS_DIRECT2D
+#else
         SECTION("Direct2D GC")
         {
             wxGraphicsRenderer* gr = wxGraphicsRenderer::GetDirect2DRenderer();
             REQUIRE(gr != NULL);
             CheckCreateGraphBitmapFromImage(gr, img);
         }
-#endif // wxUSE_GRAPHICS_DIRECT2D
 #endif // __WXMSW__
 
 #if wxUSE_CAIRO
@@ -1053,31 +827,20 @@ TEST_CASE("GraphicsBitmapTestCase::CreateFromImage", "[graphbitmap][create][from
         REQUIRE(img.HasAlpha() == true);
         REQUIRE_FALSE(img.HasMask());
 
+#ifndef __WXMSW__
         SECTION("Default GC")
         {
             wxGraphicsRenderer* gr = wxGraphicsRenderer::GetDefaultRenderer();
             REQUIRE(gr != NULL);
             CheckCreateGraphBitmapFromImage(gr, img);
         }
-
-#if defined(__WXMSW__)
-#if wxUSE_GRAPHICS_GDIPLUS
-        SECTION("GDI+ GC")
-        {
-            wxGraphicsRenderer* gr = wxGraphicsRenderer::GetGDIPlusRenderer();
-            REQUIRE(gr != NULL);
-            CheckCreateGraphBitmapFromImage(gr, img);
-        }
-#endif // wxUSE_GRAPHICS_GDIPLUS
-
-#if wxUSE_GRAPHICS_DIRECT2D
+#else
         SECTION("Direct2D GC")
         {
             wxGraphicsRenderer* gr = wxGraphicsRenderer::GetDirect2DRenderer();
             REQUIRE(gr != NULL);
             CheckCreateGraphBitmapFromImage(gr, img);
         }
-#endif // wxUSE_GRAPHICS_DIRECT2D
 #endif // __WXMSW__
 
 #if wxUSE_CAIRO
@@ -1111,31 +874,20 @@ TEST_CASE("GraphicsBitmapTestCase::CreateFromImage", "[graphbitmap][create][from
         REQUIRE(img.HasAlpha() == true);
         REQUIRE(img.HasMask() == true);
 
+#ifndef __WXMSW__
         SECTION("Default GC")
         {
             wxGraphicsRenderer* gr = wxGraphicsRenderer::GetDefaultRenderer();
             REQUIRE(gr != NULL);
             CheckCreateGraphBitmapFromImage(gr, img);
         }
-
-#if defined(__WXMSW__)
-#if wxUSE_GRAPHICS_GDIPLUS
-        SECTION("GDI+ GC")
-        {
-            wxGraphicsRenderer* gr = wxGraphicsRenderer::GetGDIPlusRenderer();
-            REQUIRE(gr != NULL);
-            CheckCreateGraphBitmapFromImage(gr, img);
-        }
-#endif // wxUSE_GRAPHICS_GDIPLUS
-
-#if wxUSE_GRAPHICS_DIRECT2D
+#else
         SECTION("Direct2D GC")
         {
             wxGraphicsRenderer* gr = wxGraphicsRenderer::GetDirect2DRenderer();
             REQUIRE(gr != NULL);
             CheckCreateGraphBitmapFromImage(gr, img);
         }
-#endif // wxUSE_GRAPHICS_DIRECT2D
 #endif // __WXMSW__
 
 #if wxUSE_CAIRO

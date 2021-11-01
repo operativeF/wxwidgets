@@ -11,9 +11,9 @@
 #ifndef _WX_GRAPHICS_H_
 #define _WX_GRAPHICS_H_
 
-#include "wx/defs.h"
-
 #if wxUSE_GRAPHICS_CONTEXT
+
+#include "wx/defs.h"
 
 #include "wx/affinematrix2d.h"
 #include "wx/geometry.h"
@@ -79,26 +79,26 @@ enum class wxGradientType
 };
 
 
-class WXDLLIMPEXP_FWD_CORE wxDC;
-class WXDLLIMPEXP_FWD_CORE wxWindowDC;
-class WXDLLIMPEXP_FWD_CORE wxMemoryDC;
+class wxDC;
+class wxWindowDC;
+class wxMemoryDC;
 #if wxUSE_PRINTING_ARCHITECTURE
-class WXDLLIMPEXP_FWD_CORE wxPrinterDC;
+class wxPrinterDC;
 #endif
 #ifdef __WXMSW__
 #if wxUSE_ENH_METAFILE
-struct WXDLLIMPEXP_FWD_CORE wxEnhMetaFileDC;
+struct wxEnhMetaFileDC;
 #endif
 #endif
-class WXDLLIMPEXP_FWD_CORE wxGraphicsContext;
-class WXDLLIMPEXP_FWD_CORE wxGraphicsPath;
-class WXDLLIMPEXP_FWD_CORE wxGraphicsMatrix;
-class WXDLLIMPEXP_FWD_CORE wxGraphicsFigure;
-class WXDLLIMPEXP_FWD_CORE wxGraphicsRenderer;
-class WXDLLIMPEXP_FWD_CORE wxGraphicsPen;
-class WXDLLIMPEXP_FWD_CORE wxGraphicsBrush;
-class WXDLLIMPEXP_FWD_CORE wxGraphicsFont;
-class WXDLLIMPEXP_FWD_CORE wxGraphicsBitmap;
+class wxGraphicsContext;
+class wxGraphicsPath;
+class wxGraphicsMatrix;
+class wxGraphicsFigure;
+class wxGraphicsRenderer;
+class wxGraphicsPen;
+class wxGraphicsBrush;
+class wxGraphicsFont;
+class wxGraphicsBitmap;
 
 
 /*
@@ -118,12 +118,12 @@ class WXDLLIMPEXP_FWD_CORE wxGraphicsBitmap;
 // instance from the other instances that were shared - using copy on write semantics
 //
 
-class WXDLLIMPEXP_FWD_CORE wxGraphicsObjectRefData;
-class WXDLLIMPEXP_FWD_CORE wxGraphicsBitmapData;
-class WXDLLIMPEXP_FWD_CORE wxGraphicsMatrixData;
-class WXDLLIMPEXP_FWD_CORE wxGraphicsPathData;
+class wxGraphicsObjectRefData;
+class wxGraphicsBitmapData;
+class wxGraphicsMatrixData;
+class wxGraphicsPathData;
 
-class WXDLLIMPEXP_CORE wxGraphicsObject : public wxObject
+class wxGraphicsObject : public wxObject
 {
 public:
     wxGraphicsObject() = default;
@@ -143,31 +143,31 @@ protected:
 
 
 
-class WXDLLIMPEXP_CORE wxGraphicsPen : public wxGraphicsObject
+class wxGraphicsPen : public wxGraphicsObject
 {
 private:
     wxDECLARE_DYNAMIC_CLASS(wxGraphicsPen);
 };
 
-extern WXDLLIMPEXP_DATA_CORE(wxGraphicsPen) wxNullGraphicsPen;
+extern wxGraphicsPen wxNullGraphicsPen;
 
-class WXDLLIMPEXP_CORE wxGraphicsBrush : public wxGraphicsObject
+class wxGraphicsBrush : public wxGraphicsObject
 {
 private:
     wxDECLARE_DYNAMIC_CLASS(wxGraphicsBrush);
 };
 
-extern WXDLLIMPEXP_DATA_CORE(wxGraphicsBrush) wxNullGraphicsBrush;
+extern wxGraphicsBrush wxNullGraphicsBrush;
 
-class WXDLLIMPEXP_CORE wxGraphicsFont : public wxGraphicsObject
+class wxGraphicsFont : public wxGraphicsObject
 {
 private:
     wxDECLARE_DYNAMIC_CLASS(wxGraphicsFont);
 };
 
-extern WXDLLIMPEXP_DATA_CORE(wxGraphicsFont) wxNullGraphicsFont;
+extern wxGraphicsFont wxNullGraphicsFont;
 
-class WXDLLIMPEXP_CORE wxGraphicsBitmap : public wxGraphicsObject
+class wxGraphicsBitmap : public wxGraphicsObject
 {
 public:
     // Convert bitmap to wxImage: this is more efficient than converting to
@@ -188,9 +188,9 @@ private:
     wxDECLARE_DYNAMIC_CLASS(wxGraphicsBitmap);
 };
 
-extern WXDLLIMPEXP_DATA_CORE(wxGraphicsBitmap) wxNullGraphicsBitmap;
+extern wxGraphicsBitmap wxNullGraphicsBitmap;
 
-class WXDLLIMPEXP_CORE wxGraphicsMatrix : public wxGraphicsObject
+class wxGraphicsMatrix : public wxGraphicsObject
 {
 public:
     // concatenates the matrix
@@ -250,7 +250,7 @@ private:
     wxDECLARE_DYNAMIC_CLASS(wxGraphicsMatrix);
 };
 
-extern WXDLLIMPEXP_DATA_CORE(wxGraphicsMatrix) wxNullGraphicsMatrix;
+extern wxGraphicsMatrix wxNullGraphicsMatrix;
 
 // ----------------------------------------------------------------------------
 // wxGradientStop and wxGradientStops: Specify what intermediate colors are used
@@ -293,7 +293,7 @@ private:
 // highest). The first stop (index 0, position 0.0) is always the starting
 // colour and the last one (index GetCount() - 1, position 1.0) is the end
 // colour.
-class WXDLLIMPEXP_CORE wxGraphicsGradientStops
+class wxGraphicsGradientStops
 {
 public:
     wxGraphicsGradientStops(wxColour startCol = wxTransparentColour,
@@ -450,7 +450,7 @@ private:
 
 
 
-class WXDLLIMPEXP_CORE wxGraphicsPath : public wxGraphicsObject
+class wxGraphicsPath : public wxGraphicsObject
 {
 public:
     //
@@ -531,10 +531,10 @@ private:
     wxDECLARE_DYNAMIC_CLASS(wxGraphicsPath);
 };
 
-extern WXDLLIMPEXP_DATA_CORE(wxGraphicsPath) wxNullGraphicsPath;
+extern wxGraphicsPath wxNullGraphicsPath;
 
 
-class WXDLLIMPEXP_CORE wxGraphicsContext : public wxGraphicsObject
+class wxGraphicsContext : public wxGraphicsObject
 {
 public:
     wxGraphicsContext(wxGraphicsRenderer* renderer, wxWindow* window = nullptr);
@@ -897,7 +897,7 @@ private:
 // A graphics figure allows to cache path, pen etc creations, also will be a basis for layering/grouping elements
 //
 
-class WXDLLIMPEXP_CORE wxGraphicsFigure : public wxGraphicsObject
+class wxGraphicsFigure : public wxGraphicsObject
 {
 public:
     wxGraphicsFigure(wxGraphicsRenderer* renderer);
@@ -932,7 +932,7 @@ private:
 // paths at any point from a given matrix etc.
 //
 
-class WXDLLIMPEXP_CORE wxGraphicsRenderer : public wxObject
+class wxGraphicsRenderer : public wxObject
 {
 public:
     wxGraphicsRenderer& operator=(wxGraphicsRenderer&&) = delete;
@@ -941,14 +941,8 @@ public:
 
     static wxGraphicsRenderer* GetCairoRenderer();
 
-#ifdef __WXMSW__
-#if wxUSE_GRAPHICS_GDIPLUS
-    static wxGraphicsRenderer* GetGDIPlusRenderer();
-#endif
-
 #if wxUSE_GRAPHICS_DIRECT2D
     static wxGraphicsRenderer* GetDirect2DRenderer();
-#endif
 #endif
 
     // Context

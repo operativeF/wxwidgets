@@ -341,61 +341,7 @@ wxREGISTER_UNIT_TEST_WITH_TAGS(ClippingBoxTestCaseGCDC, "[clip][gcdc]");
 #endif // !__WXMSW__
 
 #ifdef __WXMSW__
-// GDI+ and Direct2D are available only under MSW.
-
-#if wxUSE_GRAPHICS_GDIPLUS
-class ClippingBoxTestCaseGCDCGDIPlus : public ClippingBoxTestCaseGCDC
-{
-public:
-    ClippingBoxTestCaseGCDCGDIPlus()
-    {
-        wxGraphicsRenderer* rend = wxGraphicsRenderer::GetGDIPlusRenderer();
-        wxGraphicsContext* ctx = rend->CreateContext(m_mdc);
-        m_gcdc->SetGraphicsContext(ctx);
-    }
-
-private:
-    CPPUNIT_TEST_SUITE( ClippingBoxTestCaseGCDCGDIPlus );
-        CPPUNIT_TEST( InitialState );
-        CPPUNIT_TEST( InitialStateWithTransformedDC );
-        CPPUNIT_TEST( InitialStateWithRotatedDC );
-        CPPUNIT_TEST( InitialStateWithRotatedGCForDC );
-        CPPUNIT_TEST( OneRegion );
-        CPPUNIT_TEST( OneLargeRegion );
-        CPPUNIT_TEST( OneOuterRegion );
-        CPPUNIT_TEST( OneRegionNegDim );
-        CPPUNIT_TEST( OneRegionAndReset );
-        CPPUNIT_TEST( OneRegionAndEmpty );
-        CPPUNIT_TEST( OneRegionOverTransformedDC );
-        CPPUNIT_TEST( OneRegionAndDCTransformation );
-        CPPUNIT_TEST( TwoRegionsOverlapping );
-        CPPUNIT_TEST( TwoRegionsOverlappingNegDim );
-        CPPUNIT_TEST( TwoRegionsNonOverlapping );
-        CPPUNIT_TEST( TwoRegionsNonOverlappingNegDim );
-        CPPUNIT_TEST( OneDevRegion);
-        CPPUNIT_TEST( OneLargeDevRegion );
-        CPPUNIT_TEST( OneOuterDevRegion );
-        CPPUNIT_TEST( OneDevRegionNegDim );
-        CPPUNIT_TEST( OneDevRegionNonRect );
-        CPPUNIT_TEST( OneDevRegionAndReset);
-        CPPUNIT_TEST( OneDevRegionAndEmpty );
-        CPPUNIT_TEST( OneDevRegionOverTransformedDC);
-        CPPUNIT_TEST( OneDevRegionAndDCTransformation );
-        CPPUNIT_TEST( TwoDevRegionsOverlapping );
-        CPPUNIT_TEST( TwoDevRegionsOverlappingNegDim);
-        CPPUNIT_TEST( TwoDevRegionsNonOverlapping );
-        CPPUNIT_TEST( TwoDevRegionsNonOverlappingNegDim );
-    CPPUNIT_TEST_SUITE_END();
-
-protected:
-
-    ClippingBoxTestCaseGCDCGDIPlus(const ClippingBoxTestCaseGCDCGDIPlus&) = delete;
-	ClippingBoxTestCaseGCDCGDIPlus& operator=(const ClippingBoxTestCaseGCDCGDIPlus&) = delete;
-};
-
-wxREGISTER_UNIT_TEST_WITH_TAGS(ClippingBoxTestCaseGCDCGDIPlus, "[clip][gcdc][gdi+]");
-
-#endif // wxUSE_GRAPHICS_GDIPLUS
+// Direct2D are available only under MSW.
 
 #if wxUSE_GRAPHICS_DIRECT2D
 class ClippingBoxTestCaseGCDCDirect2D : public ClippingBoxTestCaseGCDC
@@ -1561,45 +1507,7 @@ protected:
 };
 
 #ifdef __WXMSW__
-// GDI+ and Direct2D are available only under MSW.
-
-#if wxUSE_GRAPHICS_GDIPLUS
-class ClippingBoxTestCaseGCGDIPlus : public ClippingBoxTestCaseGCBase
-{
-public:
-    ClippingBoxTestCaseGCGDIPlus()
-    {
-        m_rend = wxGraphicsRenderer::GetGDIPlusRenderer();
-    }
-
-private:
-    CPPUNIT_TEST_SUITE( ClippingBoxTestCaseGCGDIPlus );
-        CPPUNIT_TEST( InitialState );
-        CPPUNIT_TEST( InitialStateWithTransformedGC );
-        CPPUNIT_TEST( OneRegion );
-        CPPUNIT_TEST( OneLargeRegion );
-        CPPUNIT_TEST( OneOuterRegion );
-        CPPUNIT_TEST( OneRegionNegDim );
-        CPPUNIT_TEST( OneRegionAndReset );
-        CPPUNIT_TEST( OneRegionAndEmpty );
-        CPPUNIT_TEST( OneRegionWithTransformedGC );
-        CPPUNIT_TEST( OneRegionWithRotatedGC );
-        CPPUNIT_TEST( TwoRegionsOverlapping );
-        CPPUNIT_TEST( TwoRegionsOverlappingNegDim );
-        CPPUNIT_TEST( TwoRegionsNonOverlapping );
-        CPPUNIT_TEST( TwoRegionsNonOverlappingNegDim );
-        CPPUNIT_TEST( RegionsAndPushPopState );
-    CPPUNIT_TEST_SUITE_END();
-
-protected:
-
-    ClippingBoxTestCaseGCGDIPlus(const ClippingBoxTestCaseGCGDIPlus&) = delete;
-	ClippingBoxTestCaseGCGDIPlus& operator=(const ClippingBoxTestCaseGCGDIPlus&) = delete;
-};
-
-wxREGISTER_UNIT_TEST_WITH_TAGS(ClippingBoxTestCaseGCGDIPlus, "[clip][gc][gdi+]");
-
-#endif // wxUSE_GRAPHICS_GDIPLUS
+// Direct2D are available only under MSW.
 
 #if wxUSE_GRAPHICS_DIRECT2D
 class ClippingBoxTestCaseGCDirect2D : public ClippingBoxTestCaseGCBase

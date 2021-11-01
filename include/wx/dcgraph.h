@@ -285,7 +285,7 @@ private:
     wxDECLARE_CLASS(wxGCDCImpl);
 };
 
-class WXDLLIMPEXP_CORE wxGCDC: public wxDC
+class wxGCDC: public wxDC
 {
 public:
     template<typename DCType>

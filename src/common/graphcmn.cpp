@@ -8,14 +8,7 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_GRAPHICS_CONTEXT
-
-#ifndef WX_PRECOMP
-    #include <cmath>
-#endif
 
 #include "wx/graphics.h"
 
@@ -33,6 +26,7 @@
 
 #include "wx/private/graphics.h"
 
+#include <cmath>
 #include <memory>
 
 //-----------------------------------------------------------------------------
@@ -104,17 +98,17 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxGraphicsBrush, wxGraphicsObject);
 wxIMPLEMENT_DYNAMIC_CLASS(wxGraphicsFont, wxGraphicsObject);
 wxIMPLEMENT_DYNAMIC_CLASS(wxGraphicsBitmap, wxGraphicsObject);
 
-WXDLLIMPEXP_DATA_CORE(wxGraphicsPen) wxNullGraphicsPen;
-WXDLLIMPEXP_DATA_CORE(wxGraphicsBrush) wxNullGraphicsBrush;
-WXDLLIMPEXP_DATA_CORE(wxGraphicsFont) wxNullGraphicsFont;
-WXDLLIMPEXP_DATA_CORE(wxGraphicsBitmap) wxNullGraphicsBitmap;
+wxGraphicsPen wxNullGraphicsPen;
+wxGraphicsBrush wxNullGraphicsBrush;
+wxGraphicsFont wxNullGraphicsFont;
+wxGraphicsBitmap wxNullGraphicsBitmap;
 
 //-----------------------------------------------------------------------------
 // matrix
 //-----------------------------------------------------------------------------
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxGraphicsMatrix, wxGraphicsObject);
-WXDLLIMPEXP_DATA_CORE(wxGraphicsMatrix) wxNullGraphicsMatrix;
+wxGraphicsMatrix wxNullGraphicsMatrix;
 
 // concatenates the matrix
 void wxGraphicsMatrix::Concat( const wxGraphicsMatrix *t )

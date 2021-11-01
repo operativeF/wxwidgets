@@ -37,18 +37,6 @@ TEST_CASE("GraphicsPathTestCase", "[path]")
 
 #else
 
-#if wxUSE_GRAPHICS_GDIPLUS
-TEST_CASE("GraphicsPathTestCaseGDIPlus")
-{
-    wxBitmap bmp(wxSize{500, 500});
-    wxMemoryDC mdc(bmp);
-    std::unique_ptr<wxGraphicsContext> gc(wxGraphicsRenderer::GetGDIPlusRenderer()->CreateContext(mdc));
-    REQUIRE(gc);
-    DoAllTests(gc.get());
-}
-#endif // wxUSE_GRAPHICS_GDIPLUS
-
-#if wxUSE_GRAPHICS_DIRECT2D
 TEST_CASE("GraphicsPathTestCaseDirect2D")
 {
     wxBitmap bmp(wxSize{500, 500});
@@ -57,7 +45,6 @@ TEST_CASE("GraphicsPathTestCaseDirect2D")
     REQUIRE(gc);
     DoAllTests(gc.get());
 }
-#endif // wxUSE_GRAPHICS_DIRECT2D
 
 #endif // __WXMSW__ / !__WXMSW__
 
