@@ -224,7 +224,6 @@ target_link_libraries(test_gui
     # Windows libraries
         kernel32
         user32
-        gdi32
         comdlg32
         winspool
         shell32

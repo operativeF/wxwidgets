@@ -264,7 +264,6 @@ target_link_libraries(wxbase
     # Windows libraries
         kernel32
         user32
-        gdi32
         comdlg32
         winspool
         shell32

@@ -422,7 +422,6 @@ target_link_libraries(wxcore
     # Microsoft Libraries
         kernel32
         user32
-        gdi32
         comdlg32
         winspool
         shell32
