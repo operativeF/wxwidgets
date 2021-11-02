@@ -6,9 +6,6 @@
 // Copyright:   (c) 2014 Ellié Computing <opensource@elliecomputing.com>
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "wx/wxprec.h"
-
-
 #include "plugin.h"
 
 #if wxUSE_TEST_GC_DRAWING

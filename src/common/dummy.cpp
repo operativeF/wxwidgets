@@ -17,8 +17,6 @@
  * This will produce a big PCH file.
  */
 
-#include "wx/wxprec.h"
-
 
 #ifdef WX_WINDOWS
     #include "wx/msw/msvcrt.h"

@@ -6,10 +6,6 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include "wx/wxprec.h"
-
-
-
 #if wxUSE_FILESYSTEM
 
 #include "wx/filesys.h"

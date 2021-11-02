@@ -8,14 +8,7 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include "wx/wxprec.h"
-
-
-#ifndef WX_PRECOMP
-    #include "wx/msw/private.h"
-
-    #include <string>
-#endif
+#include "wx/msw/private.h"
 
 #include "wx/bmpbuttn.h"
 #include "wx/button.h"
@@ -30,6 +23,8 @@
 #include "wx/statbox.h"
 #include "wx/stattext.h"
 #include "wx/textctrl.h"
+
+#include <string>
 
 // ---------------------------------------------------------------------------
 // global functions

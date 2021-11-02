@@ -8,17 +8,12 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include "wx/wxprec.h"
-
-
 #if wxUSE_RADIOBTN
 
 #include "wx/radiobut.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/dcclient.h"
-    #include "wx/validate.h"
-#endif
+#include "wx/dcclient.h"
+#include "wx/validate.h"
 
 #include "wx/univ/theme.h"
 #include "wx/univ/renderer.h"

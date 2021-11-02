@@ -8,17 +8,13 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-// For compilers that support precompilation, includes "wx.h"
-
-#include "wx/wxprec.h"
-
-
 #if wxUSE_WXHTML_HELP
 
 #include "wx/object.h"
 #include "wx/dynarray.h"
 #include "wx/intl.h"
 #include "wx/log.h"
+
 #if wxUSE_STREAMS
     #include "wx/stream.h"
 #endif

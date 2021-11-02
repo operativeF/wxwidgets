@@ -25,7 +25,7 @@
 
 #include <string>
 
-class WXDLLIMPEXP_CORE wxCursorBase : public wxGDIImage
+class wxCursorBase : public wxGDIImage
 {
 public:
 /*

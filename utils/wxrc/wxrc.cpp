@@ -7,16 +7,9 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-// For compilers that support precompilation, includes "wx/wx.h".
-#include "wx/wxprec.h"
-
-
-// for all others, include the necessary headers
-#ifndef WX_PRECOMP
-    #include "wx/app.h"
-    #include "wx/log.h"
-    #include "wx/wxcrtvararg.h"
-#endif
+#include "wx/app.h"
+#include "wx/log.h"
+#include "wx/wxcrtvararg.h"
 
 #include "wx/cmdline.h"
 #include "wx/xml/xml.h"

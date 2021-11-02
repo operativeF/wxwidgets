@@ -10,21 +10,17 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include "wx/wxprec.h"
+#if wxUSE_UIACTIONSIMULATOR    
 
-#if wxUSE_UIACTIONSIMULATOR
-
-#ifndef WX_PRECOMP
-    #include <cmath>
-    
-    #include "wx/msw/private.h"             // For wxGetCursorPosMSW()
-    #include "wx/msw/wrapwin.h"
-#endif
+#include "wx/msw/private.h"             // For wxGetCursorPosMSW()
+#include "wx/msw/wrapwin.h"
 
 #include "wx/uiaction.h"
 #include "wx/private/uiaction.h"
 
 #include "wx/msw/private/keyboard.h"
+
+#include <cmath>
 
 namespace
 {

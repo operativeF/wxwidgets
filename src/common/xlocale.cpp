@@ -8,18 +8,13 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "wx/wxprec.h"
-
-
 #if wxUSE_XLOCALE
 
 #include "wx/module.h"
 #include "wx/xlocale.h"
 
-#ifndef WX_PRECOMP
-    #include <cerrno>
-    #include <clocale>
-#endif
+#include <cerrno>
+#include <clocale>
 
 // ----------------------------------------------------------------------------
 // module globals

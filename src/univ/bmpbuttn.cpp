@@ -8,17 +8,12 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include "wx/wxprec.h"
-
-
 #if wxUSE_BMPBUTTON
 
 #include "wx/bmpbuttn.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/dc.h"
-    #include "wx/validate.h"
-#endif
+#include "wx/dc.h"
+#include "wx/validate.h"
 
 #include "wx/univ/renderer.h"
 

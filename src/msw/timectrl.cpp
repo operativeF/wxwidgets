@@ -7,14 +7,9 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include "wx/wxprec.h"
-
-
 #if wxUSE_TIMEPICKCTRL
 
-#ifndef WX_PRECOMP
-    #include "wx/msw/wrapcctl.h"
-#endif
+#include "wx/msw/wrapcctl.h"
 
 #include "wx/timectrl.h"
 #include "wx/dateevt.h"

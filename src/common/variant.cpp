@@ -8,12 +8,9 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include "wx/wxprec.h"
-
+#if wxUSE_VARIANT
 
 #include "wx/variant.h"
-
-#if wxUSE_VARIANT
 
 #include "wx/string.h"
 #include "wx/crt.h"

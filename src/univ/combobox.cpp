@@ -8,22 +8,17 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include "wx/wxprec.h"
-
-
 #if wxUSE_COMBOBOX
 
-#ifndef WX_PRECOMP
-    #include "wx/log.h"
+#include "wx/log.h"
 
-    #include "wx/button.h"
-    #include "wx/combobox.h"
-    #include "wx/listbox.h"
-    #include "wx/textctrl.h"
-    #include "wx/bmpbuttn.h"
+#include "wx/button.h"
+#include "wx/combobox.h"
+#include "wx/listbox.h"
+#include "wx/textctrl.h"
+#include "wx/bmpbuttn.h"
 
-    #include "wx/validate.h"
-#endif
+#include "wx/validate.h"
 
 #include "wx/tooltip.h"
 #include "wx/combo.h"

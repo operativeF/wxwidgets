@@ -6,15 +6,10 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include "wx/wxprec.h"
-
-
 #if wxUSE_HTML && wxUSE_STREAMS
 
-#ifndef WX_PRECOMP
-    #include "wx/log.h"
-    #include "wx/intl.h"
-#endif
+#include "wx/log.h"
+#include "wx/intl.h"
 
 #include "wx/strconv.h"
 #include "wx/sstream.h"

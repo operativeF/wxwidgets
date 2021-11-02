@@ -39,7 +39,7 @@ class WXDLLIMPEXP_FWD_CORE wxSVGFileDC;
 // Base class for bitmap handlers used by wxSVGFileDC, used by the standard
 // "embed" and "link" handlers below but can also be used to create a custom
 // handler.
-class WXDLLIMPEXP_CORE wxSVGBitmapHandler
+class wxSVGBitmapHandler
 {
 public:
     // Write the representation of the given bitmap, appearing at the specified
@@ -53,7 +53,7 @@ public:
 
 // Predefined standard bitmap handler: creates a file, stores the bitmap in
 // this file and uses the file name in the generated SVG.
-class WXDLLIMPEXP_CORE wxSVGBitmapFileHandler : public wxSVGBitmapHandler
+class wxSVGBitmapFileHandler : public wxSVGBitmapHandler
 {
 public:
     wxSVGBitmapFileHandler() = default;
@@ -73,7 +73,7 @@ private:
 
 // Predefined handler which embeds the bitmap (base64-encoding it) inside the
 // generated SVG file.
-class WXDLLIMPEXP_CORE wxSVGBitmapEmbedHandler : public wxSVGBitmapHandler
+class wxSVGBitmapEmbedHandler : public wxSVGBitmapHandler
 {
 public:
     bool ProcessBitmap(const wxBitmap& bitmap,
@@ -81,7 +81,7 @@ public:
                                wxOutputStream& stream) const override;
 };
 
-class WXDLLIMPEXP_CORE wxSVGFileDCImpl : public wxDCImpl
+class wxSVGFileDCImpl : public wxDCImpl
 {
 public:
     wxSVGFileDCImpl(wxSVGFileDC* owner,
@@ -299,7 +299,7 @@ private:
 };
 
 
-class WXDLLIMPEXP_CORE wxSVGFileDC : public wxDC
+class wxSVGFileDC : public wxDC
 {
 public:
     wxSVGFileDC(const std::string& filename,

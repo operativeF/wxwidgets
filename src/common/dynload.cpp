@@ -9,15 +9,10 @@
 // Licence:      wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include "wx/wxprec.h"
-
-
 #if wxUSE_DYNAMIC_LOADER
 
-#ifndef WX_PRECOMP
-    #ifdef WX_WINDOWS
-        #include "wx/msw/private.h"
-    #endif
+#ifdef WX_WINDOWS
+    #include "wx/msw/private.h"
 #endif
 
 #include "wx/log.h"

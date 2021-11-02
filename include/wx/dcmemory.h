@@ -13,14 +13,14 @@
 
 #include "wx/dc.h"
 
-class WXDLLIMPEXP_FWD_CORE wxBitmap;
+class wxBitmap;
 
 
 //-----------------------------------------------------------------------------
 // wxMemoryDC
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxMemoryDC: public wxDC
+class wxMemoryDC: public wxDC
 {
 public:
     wxMemoryDC();

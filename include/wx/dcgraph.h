@@ -23,9 +23,9 @@
 #include <string_view>
 #include <vector>
 
-class WXDLLIMPEXP_FWD_CORE wxWindowDC;
+class wxWindowDC;
 
-class WXDLLIMPEXP_CORE wxGCDCImpl: public wxDCImpl
+class wxGCDCImpl: public wxDCImpl
 {
 public:
     template<typename DCType>

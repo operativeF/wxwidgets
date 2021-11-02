@@ -6,13 +6,7 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include "wx/wxprec.h"
-
-
 #if wxUSE_HTML && wxUSE_STREAMS
-
-#ifndef WX_PRECOMP
-#endif
 
 #include "wx/html/forcelnk.h"
 #include "wx/html/m_templ.h"

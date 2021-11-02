@@ -6,15 +6,7 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include "wx/wxprec.h"
-
-
 #if wxUSE_HTML && wxUSE_STREAMS
-
-#ifndef WX_PRECOMP
-    #include <cmath>
-    #include <vector>
-#endif
 
 #include "wx/app.h"
 #include "wx/dynarray.h"
@@ -34,15 +26,14 @@
 #include "wx/gifdecod.h"
 #include "wx/artprov.h"
 
+#include <cmath>
+#include <vector>
+
 FORCE_LINK_ME(m_image)
-
-
-
 
 WX_DECLARE_OBJARRAY(int, CoordArray);
 #include "wx/arrimpl.cpp" // this is a magic incantation which must be done!
 WX_DEFINE_OBJARRAY(CoordArray)
-
 
 // ---------------------------------------------------------------------------
 // wxHtmlImageMapAreaCell

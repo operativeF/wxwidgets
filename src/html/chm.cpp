@@ -6,18 +6,13 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include "wx/wxprec.h"
-
-
 #if wxUSE_LIBMSPACK
 
 #include <mspack.h>
 
-#ifndef WX_PRECOMP
-    #include "wx/intl.h"
-    #include "wx/log.h"
-    #include "wx/module.h"
-#endif
+#include "wx/intl.h"
+#include "wx/log.h"
+#include "wx/module.h"
 
 #include "wx/filesys.h"
 #include "wx/mstream.h"

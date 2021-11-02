@@ -8,14 +8,7 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include "wx/wxprec.h"
-
-
 #if wxUSE_COMBOCTRL
-
-#ifndef WX_PRECOMP
-    #include <chrono>
-#endif
 
 #include "wx/combo.h"
 
@@ -29,6 +22,8 @@
 #include "wx/msw/registry.h"
 #include "wx/msw/uxtheme.h"
 #include "wx/msw/dc.h"
+
+#include <chrono>
 
 constexpr int NATIVE_TEXT_INDENT_XP = 4;
 constexpr int NATIVE_TEXT_INDENT_CLASSIC = 2;

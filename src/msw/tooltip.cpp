@@ -8,24 +8,12 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "wx/wxprec.h"
-
-
 #if wxUSE_TOOLTIPS
 
 #include "wx/tooltip.h"
 
-#ifndef WX_PRECOMP
-    #include <chrono>
-    #include <vector>
-
-    #include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
-    #include "wx/msw/private.h"
-
-    #include <boost/nowide/convert.hpp>
-    #include <boost/nowide/stackstring.hpp>
-    #include <fmt/core.h>
-#endif
+#include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
+#include "wx/msw/private.h"
 
 #include "wx/app.h"
 #include "wx/control.h"
@@ -34,6 +22,12 @@
 #include "wx/stringutils.h"
 #include "wx/tokenzr.h"
 
+#include <boost/nowide/convert.hpp>
+#include <boost/nowide/stackstring.hpp>
+#include <fmt/core.h>
+
+#include <chrono>
+#include <vector>
 
 #ifndef TTTOOLINFO_V1_SIZE
     #define TTTOOLINFO_V1_SIZE 0x28

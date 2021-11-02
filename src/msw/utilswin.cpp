@@ -8,12 +8,7 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "wx/wxprec.h"
-
-
-#ifndef WX_PRECOMP
-    #include "wx/msw/private.h"     // includes <windows.h>
-#endif
+#include "wx/msw/private.h"     // includes <windows.h>
 
 #include "wx/utils.h"
 

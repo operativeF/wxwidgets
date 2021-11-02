@@ -8,14 +8,7 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #include "wx/clntdata.h"
-
-
-// ----------------------------------------------------------------------------
-
 
 wxClientDataContainer::wxClientDataContainer()
 {

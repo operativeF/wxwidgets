@@ -8,20 +8,11 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 // Don't use the Windows print dialog if we're in wxUniv mode and using
 // the PostScript architecture
 #if wxUSE_PRINTING_ARCHITECTURE && (!defined(__WXUNIVERSAL__) || !wxUSE_POSTSCRIPT_ARCHITECTURE_IN_MSW)
 
-#ifndef WX_PRECOMP
-    #include "wx/msw/wrapcdlg.h"
-
-    #include <boost/nowide/stackstring.hpp>
-
-    #include <cstdlib>
-#endif
+#include "wx/msw/wrapcdlg.h"
 
 #include "wx/app.h"
 #include "wx/dcprint.h"
@@ -32,7 +23,9 @@
 #include "wx/paper.h"
 #include "wx/modalhook.h"
 
+#include <boost/nowide/stackstring.hpp>
 
+#include <cstdlib>
 
 // smart pointer like class using OpenPrinter and ClosePrinter
 class WinPrinter

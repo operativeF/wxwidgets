@@ -388,7 +388,6 @@
 #include <wx/wxcrtvararg.h>
 #include <wx/wx.h>
 #include <wx/wxhtml.h>
-#include <wx/wxprec.h>
 #include <wx/xlocale.h>
 #include <wx/xpmdecod.h>
 #include <wx/xrc/xmlres.h>

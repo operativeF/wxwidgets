@@ -37,7 +37,7 @@
  * window for the application to display help for.
  */
 
-class WXDLLIMPEXP_CORE wxContextHelp
+class wxContextHelp
 {
 public:
     wxContextHelp(wxWindow* win = nullptr, bool beginHelp = true);
@@ -63,7 +63,7 @@ private:
  * to put the application into context help mode.
  */
 
-class WXDLLIMPEXP_CORE wxContextHelpButton : public wxBitmapButton
+class wxContextHelpButton : public wxBitmapButton
 {
 public:
     wxContextHelpButton() = default;
@@ -122,7 +122,7 @@ private:
 // and overriding ShowHelp() but calling the base class version wouldn't work
 // any more, which forces us to use a rather ugly hack and pass the extra
 // parameters of ShowHelpAtPoint() to ShowHelp() via member variables.
-class WXDLLIMPEXP_CORE wxHelpProvider
+class wxHelpProvider
 {
 public:
     // get/set the current (application-global) help provider (Set() returns
@@ -203,7 +203,7 @@ WX_DECLARE_EXPORTED_HASH_MAP( wxUIntPtr, std::string, wxIntegerHash,
 // wxSimpleHelpProvider is an implementation of wxHelpProvider which supports
 // only plain text help strings and shows the string associated with the
 // control (if any) in a tooltip
-class WXDLLIMPEXP_CORE wxSimpleHelpProvider : public wxHelpProvider
+class wxSimpleHelpProvider : public wxHelpProvider
 {
 public:
     // implement wxHelpProvider methods
@@ -227,7 +227,7 @@ private:
 // both context identifiers and plain text help strings. If the help text is an integer,
 // it is passed to wxHelpController::DisplayContextPopup. Otherwise, it shows the string
 // in a tooltip as per wxSimpleHelpProvider.
-class WXDLLIMPEXP_CORE wxHelpControllerHelpProvider : public wxSimpleHelpProvider
+class wxHelpControllerHelpProvider : public wxSimpleHelpProvider
 {
 public:
     // Note that it doesn't own the help controller. The help controller
@@ -251,7 +251,7 @@ private:
 };
 
 // Convenience function for turning context id into std::string
-WXDLLIMPEXP_CORE std::string wxContextId(int id);
+std::string wxContextId(int id);
 
 #endif // wxUSE_HELP
 

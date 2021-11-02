@@ -6,21 +6,16 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include "wx/wxprec.h"
-
-
 #if wxUSE_HTML && wxUSE_STREAMS
 
-#ifndef WX_PRECOMP
-    #include "wx/image.h"
-
-    #include <cstdlib>                     // bsearch()
-#endif
+#include "wx/image.h"
 
 #include "wx/html/forcelnk.h"
 #include "wx/html/m_templ.h"
 
 #include "wx/html/htmlwin.h"
+
+#include <cstdlib>                     // bsearch()
 
 FORCE_LINK_ME(m_layout)
 

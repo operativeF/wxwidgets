@@ -15,7 +15,7 @@
 // wxWindowDC
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxWindowDC : public wxDC
+class wxWindowDC : public wxDC
 {
 public:
     wxWindowDC(wxWindow *win);
@@ -31,7 +31,7 @@ private:
 // wxClientDC
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxClientDC : public wxWindowDC
+class wxClientDC : public wxWindowDC
 {
 public:
     wxClientDC(wxWindow *win);
@@ -47,7 +47,7 @@ private:
 // wxPaintDC
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxPaintDC : public wxClientDC
+class wxPaintDC : public wxClientDC
 {
 public:
     wxPaintDC(wxWindow *win);

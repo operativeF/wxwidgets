@@ -8,25 +8,18 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "wx/wxprec.h"
-
-
 #if wxUSE_TIPWINDOW
 
 #include "wx/tipwin.h"
-
-#ifndef WX_PRECOMP
-    #include <vector>
-
-    #include <gsl/gsl>
-#endif // WX_PRECOMP
-
 #include "wx/dcclient.h"
 #include "wx/timer.h"
 #include "wx/settings.h"
 
 #include "wx/display.h"
 
+#include <gsl/gsl>
+
+#include <vector>
 
 // ----------------------------------------------------------------------------
 // constants

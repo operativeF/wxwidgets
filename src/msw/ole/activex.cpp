@@ -8,14 +8,9 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include "wx/wxprec.h"
-
-
 #if wxUSE_ACTIVEX
 
-#ifndef WX_PRECOMP
-    #include "wx/msw/private.h" // for wxCopyRectToRECT
-#endif
+#include "wx/msw/private.h" // for wxCopyRectToRECT
 
 #include "wx/dcclient.h"
 #include "wx/math.h"

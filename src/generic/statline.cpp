@@ -7,11 +7,6 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include "wx/wxprec.h"
-
-// For compilers that support precompilation, includes "wx.h".
-
-
 #if wxUSE_STATLINE
 
 #include "wx/statline.h"

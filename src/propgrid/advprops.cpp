@@ -8,9 +8,6 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include "wx/wxprec.h"
-
-
 #if wxUSE_PROPGRID
 
 #include "wx/dc.h"
@@ -40,14 +37,15 @@
 #define wxPG_USE_GC_FOR_ALPHA  (wxUSE_GRAPHICS_CONTEXT && !wxPG_DC_SUPPORTS_ALPHA)
 
 #if wxPG_USE_GC_FOR_ALPHA
+
 #include "wx/dcgraph.h"
-#ifndef WX_PRECOMP
 #include "wx/dcclient.h" // for wxDynamicCast purposes
 #include "wx/dcmemory.h" // for wxDynamicCast purposes
-#endif // WX_PRECOMP
+
 #if wxUSE_METAFILE
     #include "wx/metafile.h"  // for wxDynamicCast purposes
 #endif // wxUSE_METAFILE
+
 #endif // wxPG_USE_GC_FOR_ALPHA
 
 // -----------------------------------------------------------------------

@@ -6,14 +6,7 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include "wx/wxprec.h"
-
-
 #if wxUSE_HTML && wxUSE_STREAMS
-
-#ifndef WX_PRECOMP
-    #include <cstdlib>
-#endif
 
 #include "wx/brush.h"
 #include "wx/colour.h"
@@ -25,6 +18,7 @@
 #include "wx/html/htmlcell.h"
 #include "wx/html/htmlwin.h"
 
+#include <cstdlib>
 
 //-----------------------------------------------------------------------------
 // Helper classes

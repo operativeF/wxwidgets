@@ -8,19 +8,12 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include "wx/wxprec.h"
-
-
 #if wxUSE_CHECKLISTBOX
 
 #include "wx/checklst.h"
-
-#ifndef WX_PRECOMP
-    #include "wx/log.h"
-    #include "wx/dcclient.h"
-    #include "wx/validate.h"
-#endif
-
+#include "wx/log.h"
+#include "wx/dcclient.h"
+#include "wx/validate.h"
 #include "wx/univ/renderer.h"
 #include "wx/univ/inphand.h"
 #include "wx/univ/theme.h"

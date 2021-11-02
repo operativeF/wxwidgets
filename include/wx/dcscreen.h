@@ -15,7 +15,7 @@
 #include "wx/dc.h"
 #include "wx/geometry/rect.h"
 
-class WXDLLIMPEXP_CORE wxScreenDC : public wxDC
+class wxScreenDC : public wxDC
 {
 public:
     wxScreenDC();

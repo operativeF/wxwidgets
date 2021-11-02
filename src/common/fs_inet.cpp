@@ -6,9 +6,6 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include "wx/wxprec.h"
-
-
 #if !wxUSE_SOCKETS
     #undef wxUSE_FS_INET
     #define wxUSE_FS_INET 0

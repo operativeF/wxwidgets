@@ -44,7 +44,7 @@ constexpr unsigned int wxBUFFER_CLIENT_AREA = 0x02;
 // is private style and not returned by GetStyle.
 constexpr unsigned int wxBUFFER_USES_SHARED_BUFFER = 0x04;
 
-class WXDLLIMPEXP_CORE wxBufferedDC : public wxMemoryDC
+class wxBufferedDC : public wxMemoryDC
 {
 public:
     // Default ctor, must subsequently call Init for two stage construction.

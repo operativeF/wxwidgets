@@ -7,18 +7,11 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include "wx/wxprec.h"
-
-
 #if wxUSE_BITMAPCOMBOBOX
 
 #include "wx/bmpcbox.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/msw/private.h"
-
-    #include <vector>
-#endif
+#include "wx/msw/private.h"
 
 #include "wx/log.h"
 #include "wx/settings.h"
@@ -28,7 +21,7 @@
 // For wxODCB_XXX flags
 #include "wx/odcombo.h"
 
-
+#include <vector>
 
 // ============================================================================
 // implementation

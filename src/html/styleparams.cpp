@@ -6,13 +6,11 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include "wx/wxprec.h"
+#if wxUSE_HTML
+
 #include "wx/tokenzr.h"
 #include "wx/html/htmltag.h"
 #include "wx/html/styleparams.h"
-
-
-#if wxUSE_HTML
 
 wxHtmlStyleParams::wxHtmlStyleParams(const wxHtmlTag& tag)
 {

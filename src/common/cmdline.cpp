@@ -8,20 +8,15 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-
-
-
-#ifndef WX_PRECOMP
-    #include <vector>
-    #include <clocale>             // for LC_ALL
-#endif //WX_PRECOMP
-
 #include "wx/dynarray.h"
 #include "wx/string.h"
 #include "wx/log.h"
 #include "wx/intl.h"
 #include "wx/app.h"
 #include "wx/cmdline.h"
+
+#include <vector>
+#include <clocale>             // for LC_ALL
 
 #if wxUSE_CMDLINE_PARSER
 

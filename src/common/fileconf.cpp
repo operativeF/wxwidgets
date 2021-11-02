@@ -9,10 +9,6 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-// For compilers that support precompilation, includes "wx.h".
-#include  "wx/wxprec.h"
-
-
 #if wxUSE_CONFIG && wxUSE_FILECONFIG
 
 #include  "wx/dynarray.h"
@@ -36,14 +32,12 @@
 
 #include  "wx/stdpaths.h"
 
-#ifndef WX_PRECOMP
-    #if defined(WX_WINDOWS)
-        #include "wx/msw/private.h"
-    #endif  //windows.h
+#if defined(WX_WINDOWS)
+    #include "wx/msw/private.h"
+#endif  //windows.h
 
-    #include  <cctype>
-    #include  <cstdlib>
-#endif
+#include  <cctype>
+#include  <cstdlib>
 
 // ----------------------------------------------------------------------------
 // constants

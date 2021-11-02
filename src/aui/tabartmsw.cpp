@@ -7,13 +7,9 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include "wx/wxprec.h"
-
 #if wxUSE_AUI && wxUSE_UXTHEME && !defined(__WXUNIVERSAL__)
 
-#ifndef WX_PRECOMP
-    #include "wx/msw/private.h"
-#endif
+#include "wx/msw/private.h"
 
 #include "wx/dc.h"
 #include "wx/settings.h"

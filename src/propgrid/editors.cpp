@@ -8,13 +8,7 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include "wx/wxprec.h"
-
-
 #if wxUSE_PROPGRID
-
-#ifndef WX_PRECOMP
-#endif
 
 #include "wx/dcbuffer.h"
 #include "wx/odcombo.h"

@@ -6,8 +6,6 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include "wx/wxprec.h"
-
 #if wxUSE_FS_ARCHIVE
 
 #include "wx/fs_arc.h"

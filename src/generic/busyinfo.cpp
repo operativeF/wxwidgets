@@ -6,8 +6,6 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include "wx/wxprec.h"
-
 #if wxUSE_BUSYINFO
 
 // for all others, include the necessary headers

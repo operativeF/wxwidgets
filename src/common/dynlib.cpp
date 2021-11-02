@@ -12,9 +12,6 @@
 //FIXME:  This class isn't really common at all, it should be moved into
 //        platform dependent files (already done for Windows and Unix)
 
-#include  "wx/wxprec.h"
-
-
 #if wxUSE_DYNLIB_CLASS
 
 #include "wx/dynlib.h"

@@ -8,21 +8,15 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include "wx/wxprec.h"
-
-
 #if wxUSE_COMBOCTRL
 
 #include "wx/combo.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/log.h"
-    #include "wx/combobox.h"
-    #include "wx/dcclient.h"
-    #include "wx/settings.h"
-    #include "wx/textctrl.h"
-#endif
-
+#include "wx/log.h"
+#include "wx/combobox.h"
+#include "wx/dcclient.h"
+#include "wx/settings.h"
+#include "wx/textctrl.h"
 #include "wx/dcbuffer.h"
 
 // ----------------------------------------------------------------------------

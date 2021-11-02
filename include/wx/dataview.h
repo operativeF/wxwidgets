@@ -107,7 +107,7 @@ using wxDataViewItemArray = std::vector<wxDataViewItem>;
 // wxDataViewModelNotifier
 // ---------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxDataViewModelNotifier
+class wxDataViewModelNotifier
 {
 public:
     wxDataViewModelNotifier() { m_owner = nullptr; }
@@ -143,7 +143,7 @@ private:
 
 // TODO: Merge with wxItemAttr somehow.
 
-class WXDLLIMPEXP_CORE wxDataViewItemAttr
+class wxDataViewItemAttr
 {
 public:
     void SetColour(const wxColour& colour) { m_colour = colour; }
@@ -183,7 +183,7 @@ private:
 
 using wxDataViewModelNotifiers = std::vector<wxDataViewModelNotifier *>;
 
-class WXDLLIMPEXP_CORE wxDataViewModel: public wxRefCounter
+class wxDataViewModel: public wxRefCounter
 {
 public:
     virtual unsigned int GetColumnCount() const = 0;
@@ -295,7 +295,7 @@ private:
 //      wxDataViewVirtualListModel
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxDataViewListModel : public wxDataViewModel
+class wxDataViewListModel : public wxDataViewModel
 {
 public:
     // derived classes should override these methods instead of
@@ -373,7 +373,7 @@ public:
 // wxDataViewIndexListModel
 // ---------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxDataViewIndexListModel: public wxDataViewListModel
+class wxDataViewIndexListModel: public wxDataViewListModel
 {
 public:
     wxDataViewIndexListModel( unsigned int initial_size = 0 );
@@ -414,7 +414,7 @@ private:
 using wxDataViewVirtualListModel = wxDataViewIndexListModel;
 #else
 
-class WXDLLIMPEXP_CORE wxDataViewVirtualListModel: public wxDataViewListModel
+class wxDataViewVirtualListModel: public wxDataViewListModel
 {
 public:
     wxDataViewVirtualListModel( unsigned int initial_size = 0 );
@@ -471,7 +471,7 @@ enum wxDataViewColumnFlags
     wxDATAVIEW_COL_HIDDEN        = wxCOL_HIDDEN
 };
 
-class WXDLLIMPEXP_CORE wxDataViewColumnBase : public wxSettableHeaderColumn
+class wxDataViewColumnBase : public wxSettableHeaderColumn
 {
 public:
     // ctor for the text columns: takes ownership of renderer
@@ -536,7 +536,7 @@ constexpr unsigned int wxDV_VERT_RULES              = 0x0008;     // light verti
 constexpr unsigned int wxDV_ROW_LINES               = 0x0010;     // alternating colour in rows
 constexpr unsigned int wxDV_VARIABLE_LINE_HEIGHT    = 0x0020;     // variable line height
 
-class WXDLLIMPEXP_CORE wxDataViewCtrlBase: public wxSystemThemedControl<wxControl>
+class wxDataViewCtrlBase: public wxSystemThemedControl<wxControl>
 {
 public:
     ~wxDataViewCtrlBase();
@@ -808,7 +808,7 @@ public:
 // wxDataViewEvent - the event class for the wxDataViewCtrl notifications
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxDataViewEvent : public wxNotifyEvent
+class wxDataViewEvent : public wxNotifyEvent
 {
 public:
     // Default ctor, normally shouldn't be used and mostly exists only for
@@ -1010,7 +1010,7 @@ typedef void (wxEvtHandler::*wxDataViewEventFunction)(wxDataViewEvent&);
 // wxDataViewListStore
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxDataViewListStoreLine
+class wxDataViewListStoreLine
 {
 public:
     wxDataViewListStoreLine( wxUIntPtr data = 0 )
@@ -1030,7 +1030,7 @@ private:
 };
 
 
-class WXDLLIMPEXP_CORE wxDataViewListStore: public wxDataViewIndexListModel
+class wxDataViewListStore: public wxDataViewIndexListModel
 {
 public:
     ~wxDataViewListStore();
@@ -1071,7 +1071,7 @@ public:
 
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxDataViewListCtrl: public wxDataViewCtrl
+class wxDataViewListCtrl: public wxDataViewCtrl
 {
 public:
     wxDataViewListCtrl() = default;
@@ -1181,7 +1181,7 @@ public:
 // wxDataViewTreeStore
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxDataViewTreeStoreNode
+class wxDataViewTreeStoreNode
 {
 public:
     wxDataViewTreeStoreNode( wxDataViewTreeStoreNode *parent,
@@ -1221,7 +1221,7 @@ private:
 
 using wxDataViewTreeStoreNodes = std::vector<wxDataViewTreeStoreNode *>;
 
-class WXDLLIMPEXP_CORE wxDataViewTreeStoreContainerNode: public wxDataViewTreeStoreNode
+class wxDataViewTreeStoreContainerNode: public wxDataViewTreeStoreNode
 {
 public:
     wxDataViewTreeStoreContainerNode( wxDataViewTreeStoreNode *parent,
@@ -1259,7 +1259,7 @@ private:
 
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxDataViewTreeStore: public wxDataViewModel
+class wxDataViewTreeStore: public wxDataViewModel
 {
 public:
     wxDataViewTreeStore();
@@ -1328,7 +1328,7 @@ public:
 
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxDataViewTreeCtrl: public wxDataViewCtrl,
+class wxDataViewTreeCtrl: public wxDataViewCtrl,
                                           public wxWithImages
 {
 public:
