@@ -74,7 +74,7 @@ set(TEST_GUI_SRC
     controls/radioboxtest.cpp
     controls/radiobuttontest.cpp
     controls/rearrangelisttest.cpp
-    #controls/richtextctrltest.cpp
+    controls/richtextctrltest.cpp
     controls/searchctrltest.cpp
     controls/simplebooktest.cpp
     controls/slidertest.cpp
@@ -127,7 +127,7 @@ set(TEST_GUI_SRC
     validators/valtext.cpp
     window/clientsize.cpp
     window/setsize.cpp
-    #xml/xrctest.cpp
+    xml/xrctest.cpp
 )
 
 add_executable(test_gui
@@ -171,18 +171,18 @@ add_test(test_gui
 if(wxUSE_AUI)
     target_link_libraries(test_gui PRIVATE wxaui)
 endif()
-# if(wxUSE_RICHTEXT)
-#     target_link_libraries(test_gui PRIVATE wxrichtext)
-# endif()
+if(wxUSE_RICHTEXT)
+    target_link_libraries(test_gui PRIVATE wxrichtext)
+endif()
 # if(wxUSE_MEDIACTRL)
 #     target_link_libraries(test_gui PRIVATE wxmedia)
 # endif()
 # if(wxUSE_XRC)
 #     target_link_libraries(test_gui PRIVATE wxxrc)
 # endif()
-# if(wxUSE_XML)
-#     target_link_libraries(test_gui PRIVATE wxxml)
-# endif()
+if(wxUSE_XML)
+    target_link_libraries(test_gui PRIVATE wxxml)
+endif()
 if(wxUSE_HTML)
     target_link_libraries(test_gui PRIVATE wxhtml)
 endif()
