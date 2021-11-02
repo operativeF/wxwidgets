@@ -54,7 +54,7 @@ set(TEST_GUI_SRC
     controls/choicebooktest.cpp
     controls/choicetest.cpp
     controls/comboboxtest.cpp
-    controls/dataviewctrltest.cpp # Assertion failure causes SIGABRT
+    controls/dataviewctrltest.cpp
     controls/datepickerctrltest.cpp
     controls/frametest.cpp
     controls/gaugetest.cpp

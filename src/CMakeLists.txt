@@ -6,7 +6,6 @@
 # propgrid
 # qa
 # webview
-# wxzlib
 # xrc
 
 add_subdirectory(aui)
