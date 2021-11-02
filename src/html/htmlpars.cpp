@@ -6,14 +6,7 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include "wx/wxprec.h"
-
-
 #if wxUSE_HTML && wxUSE_STREAMS
-
-#ifndef WX_PRECOMP
-    #include <vector>
-#endif
 
 #include "wx/dynarray.h"
 #include "wx/log.h"
@@ -27,6 +20,8 @@
 #include "wx/fontmap.h"
 #include "wx/html/htmldefs.h"
 #include "wx/html/htmlpars.h"
+
+#include <vector>
 
 // DLL options compatibility check:
 WX_CHECK_BUILD_OPTIONS("wxHTML")

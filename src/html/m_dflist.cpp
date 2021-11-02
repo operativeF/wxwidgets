@@ -6,13 +6,7 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include "wx/wxprec.h"
-
-
 #if wxUSE_HTML && wxUSE_STREAMS
-
-#ifndef WX_PRECOMP
-#endif
 
 #include "wx/html/forcelnk.h"
 #include "wx/html/m_templ.h"
@@ -20,9 +14,6 @@
 #include "wx/html/htmlcell.h"
 
 FORCE_LINK_ME(m_dflist)
-
-
-
 
 TAG_HANDLER_BEGIN(DEFLIST, "DL,DT,DD" )
 

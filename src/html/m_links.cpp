@@ -6,21 +6,13 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include "wx/wxprec.h"
-
-
 #if wxUSE_HTML && wxUSE_STREAMS
-
-#ifndef WX_PRECOMP
-#endif
 
 #include "wx/html/forcelnk.h"
 #include "wx/html/m_templ.h"
 #include "wx/html/styleparams.h"
 
-
 FORCE_LINK_ME(m_links)
-
 
 class wxHtmlAnchorCell : public wxHtmlCell
 {

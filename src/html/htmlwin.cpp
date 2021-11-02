@@ -6,9 +6,6 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include "wx/wxprec.h"
-
-
 #if wxUSE_HTML && wxUSE_STREAMS
 
 #include "wx/list.h"

@@ -60,7 +60,7 @@ set(TEST_GUI_SRC
     controls/gaugetest.cpp
     controls/gridtest.cpp
     controls/headerctrltest.cpp
-    #controls/htmllboxtest.cpp
+    controls/htmllboxtest.cpp
     controls/hyperlinkctrltest.cpp
     controls/label.cpp
     controls/listbooktest.cpp
@@ -102,9 +102,9 @@ set(TEST_GUI_SRC
     font/fonttest.cpp
     image/image.cpp
     image/rawbmp.cpp
-    #html/htmlparser.cpp
-    #html/htmlwindow.cpp
-    #html/htmprint.cpp
+    html/htmlparser.cpp
+    html/htmlwindow.cpp
+    html/htmprint.cpp
     menu/accelentry.cpp
     menu/menu.cpp
     misc/guifuncs.cpp
@@ -183,9 +183,9 @@ endif()
 # if(wxUSE_XML)
 #     target_link_libraries(test_gui PRIVATE wxxml)
 # endif()
-# if(wxUSE_HTML)
-#     target_link_libraries(test_gui PRIVATE wxhtml)
-# endif()
+if(wxUSE_HTML)
+    target_link_libraries(test_gui PRIVATE wxhtml)
+endif()
 # if(wxUSE_SOCKETS)
 #     target_link_libraries(test_gui PRIVATE wxnet)
 # endif()

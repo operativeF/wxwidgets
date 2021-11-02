@@ -6,25 +6,19 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include "wx/wxprec.h"
-
-
 #if wxUSE_HTML
 
 #include "wx/html/htmltag.h"
 
-    #include "wx/colour.h"
-    #include "wx/wxcrtvararg.h"
-
-#ifndef WX_PRECOMP
-    #include <cstdio> // for vsscanf
-    #include <cstdarg>
-    #include <vector>
-#endif
+#include "wx/colour.h"
+#include "wx/wxcrtvararg.h"
 
 #include "wx/html/htmlpars.h"
 #include "wx/html/styleparams.h"
 
+#include <cstdio> // for vsscanf
+#include <cstdarg>
+#include <vector>
 
 //-----------------------------------------------------------------------------
 // wxHtmlTagsCache

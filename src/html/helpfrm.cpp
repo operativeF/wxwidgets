@@ -8,34 +8,27 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-// For compilers that support precompilation, includes "wx.h"
-
-#include "wx/wxprec.h"
-
-
 #if wxUSE_WXHTML_HELP
 
-#ifndef WX_PRECOMP
-    #include "wx/object.h"
-    #include "wx/intl.h"
-    #include "wx/log.h"
-    #if wxUSE_STREAMS
-        #include "wx/stream.h"
-    #endif
+#include "wx/object.h"
+#include "wx/intl.h"
+#include "wx/log.h"
+#if wxUSE_STREAMS
+    #include "wx/stream.h"
+#endif
 
-    #include "wx/sizer.h"
+#include "wx/sizer.h"
 
-    #include "wx/bmpbuttn.h"
-    #include "wx/statbox.h"
-    #include "wx/radiobox.h"
-    #include "wx/menu.h"
-    #include "wx/settings.h"
-    #include "wx/msgdlg.h"
-    #include "wx/textctrl.h"
-    #include "wx/toolbar.h"
-    #include "wx/choicdlg.h"
-    #include "wx/filedlg.h"
-#endif // WX_PRECOMP
+#include "wx/bmpbuttn.h"
+#include "wx/statbox.h"
+#include "wx/radiobox.h"
+#include "wx/menu.h"
+#include "wx/settings.h"
+#include "wx/msgdlg.h"
+#include "wx/textctrl.h"
+#include "wx/toolbar.h"
+#include "wx/choicdlg.h"
+#include "wx/filedlg.h"
 
 #include "wx/html/helpfrm.h"
 #include "wx/html/helpctrl.h"

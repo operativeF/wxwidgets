@@ -21,4 +21,5 @@
 add_subdirectory(aui)
 add_subdirectory(base)
 add_subdirectory(core)
+add_subdirectory(html)
 add_subdirectory(ribbon)

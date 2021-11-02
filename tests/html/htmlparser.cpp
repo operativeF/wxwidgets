@@ -12,11 +12,9 @@
 
 #if wxUSE_HTML
 
-
 #include "wx/dcmemory.h"
 
 #include "wx/html/winpars.h"
-
 
 // Test that parsing invalid HTML simply fails but doesn't crash for example.
 TEST_CASE("wxHtmlParser::ParseInvalid")
