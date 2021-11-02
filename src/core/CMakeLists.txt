@@ -419,6 +419,7 @@ target_link_libraries(wxcore
         png
         ${JPEG_LIBRARIES}
         TIFF::TIFF
+
     # Microsoft Libraries
         kernel32
         user32
@@ -440,12 +441,14 @@ if(WIN32)
             winmm
     )
 endif()
+
 if(WXOSX_COCOA)
     wx_lib_link_libraries(wxcore PUBLIC "-framework AudioToolbox")
     if(wxUSE_WEBVIEW)
         wx_lib_link_libraries(wxcore PUBLIC "-framework WebKit")
     endif()
 endif()
+
 if(WXOSX_IPHONE)
     wx_lib_link_libraries(wxcore
         PUBLIC
@@ -455,10 +458,12 @@ if(WXOSX_IPHONE)
         "-framework UIKit"
         )
 endif()
+
 if(WXGTK AND wxUSE_PRIVATE_FONTS)
     wx_lib_include_directories(wxcore PUBLIC ${FONTCONFIG_INCLUDE_DIRS} ${PANGOFT2_INCLUDE_DIRS})
     wx_lib_link_libraries(wxcore PUBLIC ${FONTCONFIG_LIBRARIES} ${PANGOFT2_LIBRARIES})
 endif()
+
 if(wxUSE_LIBSDL)
     if(SDL2_FOUND)
         wx_lib_include_directories(wxcore PUBLIC ${SDL2_INCLUDE_DIR})
@@ -468,6 +473,7 @@ if(wxUSE_LIBSDL)
         wx_lib_link_libraries(wxcore PUBLIC ${SDL_LIBRARY})
     endif()
 endif()
+
 if(wxUSE_LIBNOTIFY)
     wx_lib_include_directories(wxcore PUBLIC ${LIBNOTIFY_INCLUDE_DIRS})
     wx_lib_link_libraries(wxcore PUBLIC ${LIBNOTIFY_LIBRARIES})

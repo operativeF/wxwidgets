@@ -39,7 +39,7 @@ set(TEST_GUI_SRC
     #graphics/affinematrix.cpp # Doesn't work yet. CPPUnit still.
     graphics/boundingbox.cpp
     #graphics/clippingbox.cpp # Doesn't work yet. CPPUnit still.
-    #graphics/coords.cpp
+    graphics/coords.cpp
     #graphics/graphbitmap.cpp # Doesn't work yet.
     #graphics/graphmatrix.cpp # Doesn't work yet.
     graphics/graphpath.cpp
@@ -54,7 +54,7 @@ set(TEST_GUI_SRC
     controls/choicebooktest.cpp
     controls/choicetest.cpp
     controls/comboboxtest.cpp
-    # controls/dataviewctrltest.cpp # Assertion failure causes SIGABRT
+    controls/dataviewctrltest.cpp # Assertion failure causes SIGABRT
     controls/datepickerctrltest.cpp
     controls/frametest.cpp
     controls/gaugetest.cpp
@@ -86,7 +86,7 @@ set(TEST_GUI_SRC
     controls/toolbooktest.cpp
     controls/treebooktest.cpp
     controls/treectrltest.cpp
-    #controls/treelistctrltest.cpp # FIXME: Seems tailored to OSX
+    controls/treelistctrltest.cpp
     controls/virtlistctrltest.cpp
     #controls/webtest.cpp # FIXME
     controls/windowtest.cpp
@@ -101,7 +101,7 @@ set(TEST_GUI_SRC
     exec/exec.cpp
     font/fonttest.cpp
     image/image.cpp
-    #image/rawbmp.cpp
+    image/rawbmp.cpp
     #html/htmlparser.cpp
     #html/htmlwindow.cpp
     #html/htmprint.cpp
@@ -128,78 +128,6 @@ set(TEST_GUI_SRC
     window/clientsize.cpp
     window/setsize.cpp
     #xml/xrctest.cpp
-
-    testprec.h
-    testableframe.h
-    asserthelper.h
-    testdate.h
-    testfile.h
-    #testimage.h # Doesn't work yet.
-    controls/bookctrlbasetest.h
-    controls/itemcontainertest.h
-    controls/listbasetest.h
-    controls/pickerbasetest.h
-    controls/textentrytest.h
-    persistence/testpersistence.h
-)
-
-set(TEST_GUI_DATA
-    horse.ani
-    horse.bmp
-    horse.cur
-    horse.gif
-    horse.ico
-    horse.jpg
-    horse.pcx
-    horse.png
-    horse.pnm
-    horse.tga
-    horse.tif
-    horse.xpm
-    image/horse_grey.bmp
-    image/horse_grey_flipped.bmp
-    image/horse_rle4.bmp
-    image/horse_rle4_flipped.bmp
-    image/horse_rle8.bmp
-    image/horse_rle8_flipped.bmp
-    image/cross_bicubic_256x256.png
-    image/cross_bilinear_256x256.png
-    image/cross_box_average_256x256.png
-    image/cross_nearest_neighb_256x256.png
-    image/horse_bicubic_50x50.png
-    image/horse_bicubic_100x100.png
-    image/horse_bicubic_150x150.png
-    image/horse_bicubic_300x300.png
-    image/horse_bilinear_50x50.png
-    image/horse_bilinear_100x100.png
-    image/horse_bilinear_150x150.png
-    image/horse_bilinear_300x300.png
-    image/horse_box_average_50x50.png
-    image/horse_box_average_100x100.png
-    image/horse_box_average_150x150.png
-    image/horse_box_average_300x300.png
-    image/paste_input_background.png
-    image/paste_input_black.png
-    image/paste_input_overlay_transparent_border_opaque_square.png
-    image/paste_input_overlay_transparent_border_semitransparent_circle.png
-    image/paste_input_overlay_transparent_border_semitransparent_square.png
-    image/paste_result_background_plus_circle_plus_square.png
-    image/paste_result_background_plus_overlay_transparent_border_opaque_square.png
-    image/paste_result_background_plus_overlay_transparent_border_semitransparent_square.png
-    image/paste_result_no_background_square_over_circle.png
-    image/wx.png
-    image/wx.ico
-    image/toucan.png
-    image/toucan_hue_0.538.png
-    image/toucan_sat_-0.41.png
-    image/toucan_bright_-0.259.png
-    image/toucan_hsv_0.538_-0.41_-0.259.png
-    image/toucan_light_46.png
-    image/toucan_dis_240.png
-    image/toucan_grey.png
-    image/toucan_mono_255_255_255.png
-    intl/ja/internat.mo
-    intl/ja/internat.po
 )
 
 add_executable(test_gui
@@ -238,7 +166,6 @@ target_link_libraries(test_gui
 
 add_test(test_gui 
     ${TEST_GUI_SRC}
-    DATA ${TEST_GUI_DATA}
 )
 
 # if(wxUSE_AUI)

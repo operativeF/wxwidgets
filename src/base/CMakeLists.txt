@@ -215,22 +215,27 @@ if(wxUSE_ZLIB)
     target_include_directories(wxbase PRIVATE ${ZLIB_INCLUDE_DIRS})
     target_link_libraries(wxbase PRIVATE ${ZLIB_LIBRARIES})
 endif()
+
 if(wxUSE_REGEX)
     target_include_directories(wxbase PRIVATE ${REGEX_INCLUDE_DIRS})
     target_link_libraries(wxbase PRIVATE ${REGEX_LIBRARIES})
 endif()
+
 if(wxUSE_LIBLZMA)
     target_include_directories(wxbase PRIVATE ${LIBLZMA_INCLUDE_DIRS})
     target_link_libraries(wxbase PRIVATE ${LIBLZMA_LIBRARIES})
 endif()
+
 if(UNIX AND wxUSE_SECRETSTORE)
     target_include_directories(wxbase PRIVATE ${LIBSECRET_INCLUDE_DIRS})
     target_link_libraries(wxbase PRIVATE ${LIBSECRET_LIBRARIES})
 endif()
+
 if(wxUSE_LIBICONV)
     target_include_directories(wxbase PRIVATE ${ICONV_INCLUDE_DIR})
     target_link_libraries(wxbase PRIVATE ${ICONV_LIBRARIES})
 endif()
+
 if(wxUSE_THREADS AND CMAKE_THREAD_LIBS_INIT)
     target_link_libraries(wxbase PRIVATE ${CMAKE_THREAD_LIBS_INIT})
 endif()

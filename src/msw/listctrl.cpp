@@ -1709,7 +1709,9 @@ long wxListCtrl::FindItem(long start, const std::string& str, bool partial)
     findInfo.flags = LVFI_STRING;
     if ( partial )
         findInfo.flags |= LVFI_PARTIAL;
-    findInfo.psz = boost::nowide::widen(str).c_str();
+    
+    boost::nowide::wstackstring stackStr(str.c_str());
+    findInfo.psz = stackStr.get();
 
     // ListView_FindItem() excludes the first item from search and to look
     // through all the items you need to start from -1 which is unnatural and
