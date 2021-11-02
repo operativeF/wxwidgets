@@ -609,7 +609,7 @@ private:
 
 
 // Path searching
-class WXDLLIMPEXP_BASE wxPathList
+class wxPathList
 {
 public:
     wxPathList() = default;

@@ -126,6 +126,10 @@ AddGlobalOption(wxUSE_INTL "use internationalization system" ON)
 AddGlobalOption(wxUSE_XLOCALE "use x-locale support (requires wxLocale)" ON)
 AddGlobalOption(wxUSE_CONFIG "use wxConfig (and derived) classes" ON)
 
+if(wxUSE_CONFIG AND wxUSE_TEXTFILE)
+    AddGlobalOption(wxUSE_FILECONFIG "Use file configuration classes." ON)
+endif()
+
 AddGlobalOption(wxUSE_SOCKETS "use socket/network classes" OFF)
 AddGlobalOption(wxUSE_IPV6 "enable IPv6 support in wxSocket" ON)
 if(WIN32)
