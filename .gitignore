@@ -129,9 +129,6 @@
 # /build/packages
 /build/packages
 
-# /wx-check-cppcheck-build-dir
-/wx-check-cppcheck-build-dir/*
-
 # /demos/
 /demos/*/*.sln
 /demos/*/*c*_msw
