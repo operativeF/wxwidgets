@@ -417,7 +417,8 @@ target_link_libraries(wxcore
         fmt::fmt
         Microsoft.GSL::GSL
         png
-    
+        ${JPEG_LIBRARIES}
+        TIFF::TIFF
     # Microsoft Libraries
         kernel32
         user32
@@ -433,18 +434,6 @@ target_link_libraries(wxcore
         advapi32
         wininet
 )
-
-foreach(lib JPEG TIFF)
-    if(${lib}_LIBRARIES)
-        if(lib STREQUAL JPEG)
-            wx_lib_include_directories(wxcore PRIVATE ${${lib}_INCLUDE_DIR})
-        else()
-            wx_lib_include_directories(wxcore PRIVATE ${${lib}_INCLUDE_DIRS})
-        endif()
-
-        wx_lib_link_libraries(wxcore PRIVATE ${${lib}_LIBRARIES})
-    endif()
-endforeach()
 
 if(WIN32)
     target_link_libraries(wxcore

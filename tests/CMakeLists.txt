@@ -220,6 +220,7 @@ target_link_libraries(test_gui
         wxcore
         wxbase
         doctest::doctest
+        ${JPEG_LIBRARIES}
     # Windows libraries
         kernel32
         user32

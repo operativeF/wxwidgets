@@ -23,10 +23,16 @@
 /build/x64
 /build/.vs*
 *.obj
+*.dll
+*.exe
 *.db
+*.pdb
+*.ilk
 *.log
 *.lib
 *.recipe
+*.stamp
+*.def
 *.tlog
 *.vcxproj.filters
 *.stamp.*

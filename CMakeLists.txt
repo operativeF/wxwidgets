@@ -98,6 +98,8 @@ find_package(doctest CONFIG REQUIRED)
 find_package(fmt CONFIG REQUIRED)
 find_package(Boost REQUIRED COMPONENTS nowide)
 find_package(libpng CONFIG REQUIRED)
+find_package(JPEG REQUIRED)
+find_package(TIFF REQUIRED)
 
 # Set the default startup project for Visual Studio
 if(wxBUILD_SAMPLES AND wxUSE_GUI)

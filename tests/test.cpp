@@ -109,7 +109,7 @@ static void TestAssertHandler(const wxString& file,
         // so we'd just die without any useful information -- abort instead.
         abortReason << assertMessage << wxASCII_STR(" in a worker thread.");
     }
-    else if ( uncaught_exceptions() )
+    else if ( std::uncaught_exceptions() )
     {
         // Throwing while already handling an exception would result in
         // terminate() being called and we wouldn't get any useful information
@@ -148,6 +148,23 @@ static void TestAssertHandler(const wxString& file,
 }
 
 #endif // wxDEBUG_LEVEL
+
+#ifdef wxUSE_VC_CRTDBG
+
+namespace 
+{
+
+int TestCrtReportHook(int reportType, char *message, int *)
+{
+    if ( reportType != _CRT_ASSERT )
+        return FALSE;
+
+    throw CrtAssertFailure(message);
+}
+
+} // namespace anonymous
+
+#endif // wxUSE_VC_CRTDBG
 
 #if wxUSE_GUI
     typedef wxApp TestAppBase;
@@ -309,18 +326,6 @@ int main(int argc, char** argv)
 // ----------------------------------------------------------------------------
 // global functions
 // ----------------------------------------------------------------------------
-
-#ifdef wxUSE_VC_CRTDBG
-
-static int TestCrtReportHook(int reportType, char *message, int *)
-{
-    if ( reportType != _CRT_ASSERT )
-        return FALSE;
-
-    throw CrtAssertFailure(message);
-}
-
-#endif // wxUSE_VC_CRTDBG
 
 extern void SetFilterEventFunc(FilterEventFunc func)
 {

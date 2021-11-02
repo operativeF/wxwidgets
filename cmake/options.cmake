@@ -188,10 +188,10 @@ endfunction()
 #wx_add_thirdparty_library(wxUSE_REGEX REGEX "enable support for wxRegEx class" DEFAULT builtin)
 #wx_add_thirdparty_library(wxUSE_ZLIB ZLIB "use zlib for LZW compression" DEFAULT_APPLE sys)
 wx_add_thirdparty_library(wxUSE_EXPAT EXPAT "use expat for XML parsing" DEFAULT_APPLE sys)
-#wx_add_thirdparty_library(wxUSE_LIBJPEG JPEG "use libjpeg (JPEG file format)")
-wx_add_thirdparty_library(wxUSE_LIBTIFF TIFF "use libtiff (TIFF file format)")
 
 AddGlobalOption(wxUSE_LIBPNG "Use libpng (PNG image format)" ON)
+AddGlobalOption(wxUSE_LIBTIFF "Use libtiff (TIFF image format)" ON)
+AddGlobalOption(wxUSE_LIBJPEG "Use libjpeg (JPEG file format)" ON)
 
 AddGlobalOption(wxUSE_LIBLZMA "use LZMA compression" OFF)
 set(wxTHIRD_PARTY_LIBRARIES ${wxTHIRD_PARTY_LIBRARIES} wxUSE_LIBLZMA "use liblzma for LZMA compression")
