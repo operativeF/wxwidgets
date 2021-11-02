@@ -23,5 +23,6 @@
 # xml
 # xrc
 
+add_subdirectory(aui)
 add_subdirectory(base)
 add_subdirectory(core)

@@ -91,103 +91,11 @@ AddGlobalOption(wxUSE_REPRODUCIBLE_BUILD "enable reproducable build" OFF)
 # ---------------------------------------------------------------------------
 # external libraries
 # ---------------------------------------------------------------------------
-#TBR wx_option
-# Add a option and mark is as advanced if it starts with wxUSE_
-# wx_option(<name> <desc> [default] [STRINGS strings])
-# The default is 1 if not third parameter is specified
-function(wx_option name desc)
-    cmake_parse_arguments(OPTION "" "" "STRINGS" ${ARGN})
-    if(ARGC EQUAL 2)
-        set(default ON)
-    else()
-        set(default ${OPTION_UNPARSED_ARGUMENTS})
-    endif()
-
-    if(OPTION_STRINGS)
-        set(cache_type STRING)
-    else()
-        set(cache_type BOOL)
-    endif()
-
-    set(${name} "${default}" CACHE ${cache_type} "${desc}")
-    string(SUBSTRING ${name} 0 6 prefix)
-    if(prefix STREQUAL "wxUSE_")
-        mark_as_advanced(${name})
-    endif()
-    if(OPTION_STRINGS)
-        set_property(CACHE ${name} PROPERTY STRINGS ${OPTION_STRINGS})
-        # Check valid value
-        set(value_is_valid FALSE)
-        set(avail_values)
-        foreach(opt ${OPTION_STRINGS})
-            if(${name} STREQUAL opt)
-                set(value_is_valid TRUE)
-                break()
-            endif()
-            wx_string_append(avail_values " ${opt}")
-        endforeach()
-        if(NOT value_is_valid)
-            message(FATAL_ERROR "Invalid value \"${${name}}\" for option ${name}. Valid values are: ${avail_values}")
-        endif()
-    endif()
-endfunction()
-
-# TBR
-# wx_install(...)
-# Forward to install call if wxBUILD_INSTALL is enabled
-macro(wx_install)
-    if(wxBUILD_INSTALL)
-        install(${ARGN})
-    endif()
-endmacro()
-
-# Add third party library
-function(wx_add_thirdparty_library var_name lib_name help_str)
-    cmake_parse_arguments(THIRDPARTY "" "DEFAULT;DEFAULT_APPLE;DEFAULT_WIN32" "" ${ARGN})
-
-    if(THIRDPARTY_DEFAULT)
-        set(thirdparty_lib_default ${THIRDPARTY_DEFAULT})
-    elseif(THIRDPARTY_DEFAULT_APPLE AND APPLE)
-        set(thirdparty_lib_default ${THIRDPARTY_DEFAULT_APPLE})
-    elseif(THIRDPARTY_DEFAULT_WIN32 AND WIN32)
-        set(thirdparty_lib_default ${THIRDPARTY_DEFAULT_WIN32})
-    elseif(UNIX AND NOT APPLE)
-        # Try sys libraries for MSYS and CYGWIN
-        set(thirdparty_lib_default sys)
-    elseif(WIN32 OR APPLE)
-        # On Windows or apple platforms prefer using the builtin libraries
-        set(thirdparty_lib_default builtin)
-    else()
-        set(thirdparty_lib_default sys)
-    endif()
-
-    wx_option(${var_name} ${help_str} ${thirdparty_lib_default}
-        STRINGS builtin sys OFF)
-
-    if(${var_name} STREQUAL "sys")
-        # If the sys library can not be found use builtin
-        find_package(${lib_name})
-        string(TOUPPER ${lib_name} lib_name_upper)
-        if(NOT ${${lib_name_upper}_FOUND})
-            wx_option_force_value(${var_name} builtin)
-        endif()
-    endif()
-
-    if(${var_name} STREQUAL "builtin" AND NOT wxBUILD_SHARED)
-        # Only install if we build as static libraries
-        wx_install(TARGETS ${target_name}
-            LIBRARY DESTINATION lib
-            ARCHIVE DESTINATION lib
-            )
-    endif()
-
-    set(wxTHIRD_PARTY_LIBRARIES ${wxTHIRD_PARTY_LIBRARIES} ${var_name} "${help_str}" PARENT_SCOPE)
-endfunction()
 
 # FIXME: Use extern library or use vcpkg
 #wx_add_thirdparty_library(wxUSE_REGEX REGEX "enable support for wxRegEx class" DEFAULT builtin)
 #wx_add_thirdparty_library(wxUSE_ZLIB ZLIB "use zlib for LZW compression" DEFAULT_APPLE sys)
-wx_add_thirdparty_library(wxUSE_EXPAT EXPAT "use expat for XML parsing" DEFAULT_APPLE sys)
+#wx_add_thirdparty_library(wxUSE_EXPAT EXPAT "use expat for XML parsing" DEFAULT_APPLE sys)
 
 AddGlobalOption(wxUSE_LIBPNG "Use libpng (PNG image format)" ON)
 AddGlobalOption(wxUSE_LIBTIFF "Use libtiff (TIFF image format)" ON)
@@ -323,7 +231,7 @@ AddGlobalOption(wxUSE_HELP "use help subsystem" ON)
 AddGlobalOption(wxUSE_MS_HTML_HELP "use MS HTML Help (win32)" ON)
 AddGlobalOption(wxUSE_HTML "use wxHTML sub-library" ON)
 AddGlobalOption(wxUSE_WXHTML_HELP "use wxHTML-based help" ON)
-AddGlobalOption(wxUSE_XRC "use XRC resources sub-library" ON)
+AddGlobalOption(wxUSE_XRC "use XRC resources sub-library" OFF)
 AddGlobalOption(wxUSE_XML "use the xml library (overruled by wxUSE_XRC)" ON)
 AddGlobalOption(wxUSE_AUI "use AUI docking library" ON)
 AddGlobalOption(wxUSE_PROPGRID "use wxPropertyGrid library" ON)

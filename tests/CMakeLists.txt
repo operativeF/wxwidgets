@@ -45,7 +45,7 @@ set(TEST_GUI_SRC
     graphics/graphpath.cpp
     graphics/imagelist.cpp
     config/config.cpp
-    #controls/auitest.cpp
+    controls/auitest.cpp
     controls/bitmapcomboboxtest.cpp
     controls/bitmaptogglebuttontest.cpp
     controls/buttontest.cpp
@@ -168,9 +168,9 @@ add_test(test_gui
     ${TEST_GUI_SRC}
 )
 
-# if(wxUSE_AUI)
-#     target_link_libraries(test_gui PRIVATE wxaui)
-# endif()
+if(wxUSE_AUI)
+    target_link_libraries(test_gui PRIVATE wxaui)
+endif()
 # if(wxUSE_RICHTEXT)
 #     target_link_libraries(test_gui PRIVATE wxrichtext)
 # endif()
