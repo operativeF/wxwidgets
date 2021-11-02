@@ -8,18 +8,13 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "wx/wxprec.h"
-
-
 #if wxUSE_RIBBON
 
 #include "wx/ribbon/control.h"
 #include "wx/ribbon/bar.h"
 
-#ifndef WX_PRECOMP
-    #ifdef __WXMSW__
-        #include "wx/msw/private.h"
-    #endif
+#ifdef __WXMSW__
+    #include "wx/msw/private.h"
 #endif
 
 wxIMPLEMENT_CLASS(wxRibbonControl, wxControl);

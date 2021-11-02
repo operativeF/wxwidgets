@@ -8,9 +8,6 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "wx/wxprec.h"
-
-
 #if wxUSE_RIBBON
 
 #include "wx/ribbon/art.h"
@@ -24,9 +21,9 @@
 #include "wx/settings.h"
 
 #ifdef __WXMSW__
-#include "wx/msw/private.h"
+    #include "wx/msw/private.h"
 #elif defined(__WXMAC__)
-#include "wx/osx/private.h"
+    #include "wx/osx/private.h"
 #endif
 
 wxRibbonAUIArtProvider::wxRibbonAUIArtProvider()

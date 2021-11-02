@@ -8,9 +8,6 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "wx/wxprec.h"
-
-
 #if wxUSE_RIBBON
 
 #include "wx/ribbon/gallery.h"
@@ -19,10 +16,8 @@
 #include "wx/dcbuffer.h"
 #include "wx/clntdata.h"
 
-#ifndef WX_PRECOMP
-    #ifdef __WXMSW__
-        #include "wx/msw/private.h"
-    #endif
+#ifdef __WXMSW__
+    #include "wx/msw/private.h"
 #endif
 
 wxDEFINE_EVENT(wxEVT_RIBBONGALLERY_HOVER_CHANGED, wxRibbonGalleryEvent);

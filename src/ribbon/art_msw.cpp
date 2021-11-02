@@ -8,9 +8,6 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "wx/wxprec.h"
-
-
 #if wxUSE_RIBBON
 
 #include "wx/ribbon/art.h"
@@ -21,10 +18,8 @@
 
 #include "wx/dcmemory.h"
 
-#ifndef WX_PRECOMP
-    #ifdef __WXMSW__
-        #include "wx/msw/private.h"
-    #endif
+#ifdef __WXMSW__
+    #include "wx/msw/private.h"
 #endif
 
 static const char* const gallery_up_xpm[] = {

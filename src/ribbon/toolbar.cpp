@@ -8,9 +8,6 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "wx/wxprec.h"
-
-
 #if wxUSE_RIBBON
 
 #include "wx/ribbon/toolbar.h"
@@ -18,12 +15,8 @@
 #include "wx/ribbon/bar.h"
 #include "wx/dcbuffer.h"
 
-
-#ifndef WX_PRECOMP
-#endif
-
 #ifdef __WXMSW__
-#include "wx/msw/private.h"
+    #include "wx/msw/private.h"
 #endif
 
 struct wxRibbonToolBarToolBase

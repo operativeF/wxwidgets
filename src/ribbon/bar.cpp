@@ -8,30 +8,25 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "wx/wxprec.h"
-
-
 #if wxUSE_RIBBON
 
 #include "wx/ribbon/bar.h"
 #include "wx/ribbon/art.h"
 #include "wx/dcbuffer.h"
 
-#ifndef WX_PRECOMP
-    #ifdef __WXMSW__
-        #include "wx/msw/private.h"
-    #endif
-    
-    #include <algorithm>
-    #include <vector>
-
-    #include <gsl/gsl>
+#ifdef __WXMSW__
+    #include "wx/msw/private.h"
 #endif
 
 #include "wx/app.h"
 
 #include "wx/arrimpl.cpp"
 #include "wx/imaglist.h"
+
+#include <gsl/gsl>
+
+#include <algorithm>
+#include <vector>
 
 WX_DEFINE_USER_EXPORTED_OBJARRAY(wxRibbonPageTabInfoArray)
 
