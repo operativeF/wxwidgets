@@ -581,7 +581,11 @@ std::string wxControlBase::Ellipsize(std::string_view label, const wxDC& dc,
 
     for ( std::string_view::const_iterator pc = label.begin(); ; ++pc )
     {
-        auto ch = *pc;
+        char ch{};
+
+        if(pc != label.end())
+            ch = *pc;
+
         if ( pc == label.end() || ch == '\n' )
         {
             wx::utils::TrimTrailingSpace(curLine);
