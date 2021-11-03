@@ -33,7 +33,7 @@ constexpr unsigned int wxST_ELLIPSIZE_MASK =
 
 constexpr char wxStaticTextNameStr[] = "staticText";
 
-class WXDLLIMPEXP_CORE wxStaticTextBase : public wxControl
+class wxStaticTextBase : public wxControl
 {
 public:
     wxStaticTextBase& operator=(wxStaticTextBase&&) = delete;

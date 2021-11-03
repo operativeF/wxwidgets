@@ -44,7 +44,7 @@ class WXDLLIMPEXP_FWD_CORE wxDropSource;
 // wxDropTarget
 //-------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxDropTarget: public wxDropTargetBase
+class wxDropTarget: public wxDropTargetBase
 {
 public:
     wxDropTarget(wxDataObject *dataObject = NULL );
@@ -77,7 +77,7 @@ public:
 // wxDropSource
 //-------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxDropSource: public wxDropSourceBase
+class wxDropSource: public wxDropSourceBase
 {
 public:
     // constructor. set data later with SetData()

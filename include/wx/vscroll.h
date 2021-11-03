@@ -66,7 +66,7 @@ class WXDLLIMPEXP_FWD_CORE wxVarScrollHelperEvtHandler;
 // required virtual functions that need to be implemented for any orientation
 // specific work.
 
-class WXDLLIMPEXP_CORE wxVarScrollHelperBase : public wxAnyScrollHelperBase
+class wxVarScrollHelperBase : public wxAnyScrollHelperBase
 {
 public:
     // constructors and such
@@ -292,7 +292,7 @@ private:
 // Provides public API functions targeted for vertical-specific scrolling,
 // wrapping the functionality of wxVarScrollHelperBase.
 
-class WXDLLIMPEXP_CORE wxVarVScrollHelper : public wxVarScrollHelperBase
+class wxVarVScrollHelper : public wxVarScrollHelperBase
 {
 public:
     // constructors and such
@@ -363,7 +363,7 @@ protected:
 // Provides public API functions targeted for horizontal-specific scrolling,
 // wrapping the functionality of wxVarScrollHelperBase.
 
-class WXDLLIMPEXP_CORE wxVarHScrollHelper : public wxVarScrollHelperBase
+class wxVarHScrollHelper : public wxVarScrollHelperBase
 {
 public:
     // constructors and such
@@ -444,7 +444,7 @@ protected:
 // functions to make changing values for both orientations at the same time
 // easier.
 
-class WXDLLIMPEXP_CORE wxVarHVScrollHelper : public wxVarVScrollHelper,
+class wxVarHVScrollHelper : public wxVarVScrollHelper,
                                         public wxVarHScrollHelper
 {
 public:
@@ -560,7 +560,7 @@ public:                                                                       \
 // wxScrolledWindow features however, notably it can't scroll only a rectangle
 // of the window and not its entire client area.
 
-class WXDLLIMPEXP_CORE wxVScrolledWindow : public wxPanel,
+class wxVScrolledWindow : public wxPanel,
                                       public wxVarVScrollLegacyAdaptor
 {
 public:
@@ -628,7 +628,7 @@ private:
 // wxScrolledWindow features however, notably it can't scroll only a rectangle
 // of the window and not its entire client area.
 
-class WXDLLIMPEXP_CORE wxHScrolledWindow : public wxPanel,
+class wxHScrolledWindow : public wxPanel,
                                       public wxVarHScrollHelper
 {
 public:
@@ -690,7 +690,7 @@ private:
 // scrolled windows automatically handling everything needed to scroll both
 // axis simultaneously.
 
-class WXDLLIMPEXP_CORE wxHVScrolledWindow : public wxPanel,
+class wxHVScrolledWindow : public wxPanel,
                                        public wxVarHVScrollHelper
 {
 public:

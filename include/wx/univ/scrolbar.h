@@ -37,7 +37,7 @@ constexpr wxChar wxACTION_SCROLL_THUMB_RELEASE[]   = wxT("thumbrelease");
 // wxScrollBar
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxScrollBar : public wxScrollBarBase,
+class wxScrollBar : public wxScrollBarBase,
                                 public wxControlWithArrows
 {
 public:
@@ -202,7 +202,7 @@ private:
 // Standard scrollbar input handler which can be used as a base class
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxStdScrollBarInputHandler : public wxStdInputHandler
+class wxStdScrollBarInputHandler : public wxStdInputHandler
 {
 public:
     // constructor takes a renderer (used for scrollbar hit testing) and the

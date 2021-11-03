@@ -264,7 +264,7 @@ private:
 };
 
 // common base class for various grid subwindows
-class WXDLLIMPEXP_CORE wxGridSubwindow : public wxWindow
+class wxGridSubwindow : public wxWindow
 {
 public:
     wxGridSubwindow(wxGrid *owner,
@@ -295,7 +295,7 @@ protected:
     wxDECLARE_EVENT_TABLE();
 };
 
-class WXDLLIMPEXP_CORE wxGridRowLabelWindow : public wxGridSubwindow
+class wxGridRowLabelWindow : public wxGridSubwindow
 {
 public:
     wxGridRowLabelWindow(wxGrid *parent)
@@ -329,7 +329,7 @@ public:
 };
 
 
-class WXDLLIMPEXP_CORE wxGridColLabelWindow : public wxGridSubwindow
+class wxGridColLabelWindow : public wxGridSubwindow
 {
 public:
     wxGridColLabelWindow(wxGrid *parent)
@@ -363,7 +363,7 @@ public:
 };
 
 
-class WXDLLIMPEXP_CORE wxGridCornerLabelWindow : public wxGridSubwindow
+class wxGridCornerLabelWindow : public wxGridSubwindow
 {
 public:
     wxGridCornerLabelWindow(wxGrid *parent)
@@ -382,7 +382,7 @@ private:
     wxDECLARE_EVENT_TABLE();
 };
 
-class WXDLLIMPEXP_CORE wxGridWindow : public wxGridSubwindow
+class wxGridWindow : public wxGridSubwindow
 {
 public:
     // grid window variants for scrolling possibilities
@@ -429,7 +429,7 @@ private:
 // ----------------------------------------------------------------------------
 
 // this class stores attributes set for cells
-class WXDLLIMPEXP_CORE wxGridCellAttrData
+class wxGridCellAttrData
 {
 public:
     ~wxGridCellAttrData();
@@ -447,7 +447,7 @@ private:
 };
 
 // this class stores attributes set for rows or columns
-class WXDLLIMPEXP_CORE wxGridRowOrColAttrData
+class wxGridRowOrColAttrData
 {
 public:
     // empty ctor to suppress warnings
@@ -465,7 +465,7 @@ private:
 
 // NB: this is just a wrapper around 3 objects: one which stores cell
 //     attributes, and 2 others for row/col ones
-struct WXDLLIMPEXP_CORE wxGridCellAttrProviderData
+struct wxGridCellAttrProviderData
 {
     wxGridCellAttrData     m_cellAttrs;
     wxGridRowOrColAttrData m_rowAttrs;
@@ -1008,7 +1008,7 @@ WX_DEFINE_ARRAY_WITH_DECL_PTR(wxGridDataTypeInfo*, wxGridDataTypeInfoArray,
                                  class WXDLLIMPEXP_CORE);
 
 
-class WXDLLIMPEXP_CORE wxGridTypeRegistry
+class wxGridTypeRegistry
 {
 public:
     wxGridTypeRegistry() = default;

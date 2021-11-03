@@ -12,7 +12,7 @@
 #include <wx/scopedarray.h>
 
 class QApplication;
-class WXDLLIMPEXP_CORE wxApp : public wxAppBase
+class wxApp : public wxAppBase
 {
 public:
     wxApp();

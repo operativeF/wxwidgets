@@ -18,7 +18,7 @@ class WXDLLIMPEXP_FWD_BASE wxArrayString;
 
 class wxGtkCollatedArrayString;
 
-class WXDLLIMPEXP_CORE wxChoice : public wxChoiceBase
+class wxChoice : public wxChoiceBase
 {
 public:
     wxChoice()

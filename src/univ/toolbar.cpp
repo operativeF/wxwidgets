@@ -32,7 +32,7 @@
 // click into button press/release actions
 // ----------------------------------------------------------------------------
 
-class WXDLLEXPORT wxStdToolbarInputHandler : public wxStdInputHandler
+class wxStdToolbarInputHandler : public wxStdInputHandler
 {
 public:
     wxStdToolbarInputHandler(wxInputHandler *inphand);
@@ -63,7 +63,7 @@ static const wxCoord INVALID_WIDTH = wxDefaultCoord;
 // wxToolBarTool: our implementation of wxToolBarToolBase
 // ----------------------------------------------------------------------------
 
-class WXDLLEXPORT wxToolBarTool : public wxToolBarToolBase
+class wxToolBarTool : public wxToolBarToolBase
 {
 public:
     wxToolBarTool(wxToolBar *tbar,

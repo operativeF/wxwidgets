@@ -23,7 +23,7 @@
 //
 // This class is always defined but it is trivial if wxUSE_AUTOID_MANAGEMENT is
 // off.
-class WXDLLIMPEXP_CORE wxWindowIDRef
+class wxWindowIDRef
 {
 public:
     wxWindowIDRef() = default;
@@ -165,7 +165,7 @@ inline bool operator!=(long lhs, const wxWindowIDRef& rhs)
 // wxIdManager
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxIdManager
+class wxIdManager
 {
 public:
     // This returns an id value and not an wxWindowIDRef.  The returned value

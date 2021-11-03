@@ -14,7 +14,7 @@
 #include "wx/bitmap.h"
 
 // Icon
-class WXDLLIMPEXP_CORE wxIcon : public wxBitmap
+class wxIcon : public wxBitmap
 {
 public:
     wxIcon();

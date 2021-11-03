@@ -15,7 +15,7 @@ class QStatusBar;
 
 template < class T > class QList;
 
-class WXDLLIMPEXP_CORE wxStatusBar : public wxStatusBarBase
+class wxStatusBar : public wxStatusBarBase
 {
 public:
     wxStatusBar();

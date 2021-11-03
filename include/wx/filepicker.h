@@ -35,7 +35,7 @@ constexpr char wxDirPickerWidgetLabel[] = wxTRANSLATE("Browse");
 // wxFileDirPickerEvent: used by wxFilePickerCtrl and wxDirPickerCtrl only
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxFileDirPickerEvent : public wxCommandEvent
+class wxFileDirPickerEvent : public wxCommandEvent
 {
 public:
     wxFileDirPickerEvent() = default;
@@ -85,7 +85,7 @@ typedef void (wxEvtHandler::*wxFileDirPickerEventFunction)(wxFileDirPickerEvent&
 //                           implemented by controls used by wxFileDirPickerCtrlBase
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxFileDirPickerWidgetBase
+class wxFileDirPickerWidgetBase
 {
 public:
     virtual ~wxFileDirPickerWidgetBase() = default;
@@ -148,7 +148,7 @@ constexpr unsigned int wxDIRP_SMALL                  = wxPB_SMALL;
 // wxFileDirPickerCtrlBase
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxFileDirPickerCtrlBase : public wxPickerBase
+class wxFileDirPickerCtrlBase : public wxPickerBase
 {
 protected:
     // NB: no default values since this function will never be used
@@ -228,7 +228,7 @@ constexpr unsigned int wxFLP_USE_TEXTCTRL            = wxPB_USE_TEXTCTRL;
     constexpr unsigned int wxFLP_DEFAULT_STYLE       = wxFLP_USE_TEXTCTRL|wxFLP_OPEN|wxFLP_FILE_MUST_EXIST;
 #endif
 
-class WXDLLIMPEXP_CORE wxFilePickerCtrl : public wxFileDirPickerCtrlBase
+class wxFilePickerCtrl : public wxFileDirPickerCtrlBase
 {
 public:
     wxFilePickerCtrl() = default;
@@ -333,7 +333,7 @@ constexpr unsigned int wxDIRP_USE_TEXTCTRL            = wxPB_USE_TEXTCTRL;
     constexpr unsigned int wxDIRP_DEFAULT_STYLE       = wxDIRP_USE_TEXTCTRL|wxDIRP_DIR_MUST_EXIST;
 #endif
 
-class WXDLLIMPEXP_CORE wxDirPickerCtrl : public wxFileDirPickerCtrlBase
+class wxDirPickerCtrl : public wxFileDirPickerCtrlBase
 {
 public:
     wxDirPickerCtrl() = default;

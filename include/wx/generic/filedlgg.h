@@ -31,7 +31,7 @@ class WXDLLIMPEXP_FWD_CORE wxFileCtrlEvent;
 // wxGenericFileDialog
 //-------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxGenericFileDialog: public wxFileDialogBase
+class wxGenericFileDialog: public wxFileDialogBase
 {
 public:
     wxGenericFileDialog() { Init(); }
@@ -137,7 +137,7 @@ private:
 
 #ifdef wxHAS_GENERIC_FILEDIALOG
 
-class WXDLLIMPEXP_CORE wxFileDialog: public wxGenericFileDialog
+class wxFileDialog: public wxGenericFileDialog
 {
 public:
     wxFileDialog() {}

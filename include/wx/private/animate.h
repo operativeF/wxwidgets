@@ -16,7 +16,7 @@
 
 #include <chrono>
 
-class WXDLLIMPEXP_CORE wxAnimationImpl : public wxRefCounter
+class wxAnimationImpl : public wxRefCounter
 {
 public:
     virtual bool IsOk() const = 0;

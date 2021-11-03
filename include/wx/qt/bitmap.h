@@ -17,7 +17,7 @@ class QImage;
 class QPixmap;
 class QBitmap;
 
-class WXDLLIMPEXP_CORE wxBitmap : public wxBitmapBase
+class wxBitmap : public wxBitmapBase
 {
 public:
     wxBitmap();
@@ -80,7 +80,7 @@ protected:
     wxDECLARE_DYNAMIC_CLASS(wxBitmap);
 };
 
-class WXDLLIMPEXP_CORE wxMask : public wxMaskBase
+class wxMask : public wxMaskBase
 {
 public:
     wxMask();

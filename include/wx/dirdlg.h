@@ -52,7 +52,7 @@ constexpr unsigned int wxDD_DEFAULT_STYLE = wxDEFAULT_DIALOG_STYLE | wxRESIZE_BO
 // wxDirDialogBase
 //-------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxDirDialogBase : public wxDialog
+class wxDirDialogBase : public wxDialog
 {
 public:
     wxDirDialogBase() = default;
@@ -134,7 +134,7 @@ protected:
 // common ::wxDirSelector() function
 // ----------------------------------------------------------------------------
 
-WXDLLIMPEXP_CORE wxString
+wxString
 wxDirSelector(const wxString& message = wxASCII_STR(wxDirSelectorPromptStr),
               const wxString& defaultPath = {},
               unsigned int style = wxDD_DEFAULT_STYLE,

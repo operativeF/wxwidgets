@@ -15,7 +15,7 @@
     DECLARE_WXCOCOA_OBJC_CLASS(NSOpenPanel);
 #endif
 
-class WXDLLIMPEXP_CORE wxDirDialog : public wxDirDialogBase
+class wxDirDialog : public wxDirDialogBase
 {
 public:
     wxDirDialog() { Init(); }

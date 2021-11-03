@@ -34,7 +34,7 @@ constexpr int wxCHOICE_WIDTH  = 200;
 // wxAnyChoiceDialog: a base class for dialogs containing a listbox
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxAnyChoiceDialog : public wxDialog
+class wxAnyChoiceDialog : public wxDialog
 {
 public:
     wxAnyChoiceDialog()  = default;
@@ -72,7 +72,7 @@ protected:
 // wxSingleChoiceDialog: a dialog with single selection listbox
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxSingleChoiceDialog : public wxAnyChoiceDialog
+class wxSingleChoiceDialog : public wxAnyChoiceDialog
 {
 public:
     wxSingleChoiceDialog() = default;
@@ -125,7 +125,7 @@ public:
 // wxMultiChoiceDialog: a dialog with multi selection listbox
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxMultiChoiceDialog : public wxAnyChoiceDialog
+class wxMultiChoiceDialog : public wxAnyChoiceDialog
 {
 public:
     wxMultiChoiceDialog() = default;
@@ -175,7 +175,7 @@ public:
 // ----------------------------------------------------------------------------
 
 // get the user selection as a string
-WXDLLIMPEXP_CORE std::string wxGetSingleChoice(const std::string& message,
+std::string wxGetSingleChoice(const std::string& message,
                                        const std::string& caption,
                                        const std::vector<std::string>& choices,
                                        wxWindow *parent = nullptr,
@@ -186,7 +186,7 @@ WXDLLIMPEXP_CORE std::string wxGetSingleChoice(const std::string& message,
                                        int height = wxCHOICE_HEIGHT,
                                        int initialSelection = 0);
 
-WXDLLIMPEXP_CORE std::string wxGetSingleChoice(const std::string& message,
+std::string wxGetSingleChoice(const std::string& message,
                                        const std::string& caption,
                                        int n, const std::string *choices,
                                        wxWindow *parent = nullptr,
@@ -197,13 +197,13 @@ WXDLLIMPEXP_CORE std::string wxGetSingleChoice(const std::string& message,
                                        int height = wxCHOICE_HEIGHT,
                                        int initialSelection = 0);
 
-WXDLLIMPEXP_CORE std::string wxGetSingleChoice(const std::string& message,
+std::string wxGetSingleChoice(const std::string& message,
                                             const std::string& caption,
                                             const wxArrayString& choices,
                                             int initialSelection,
                                             wxWindow *parent = nullptr);
 
-WXDLLIMPEXP_CORE std::string wxGetSingleChoice(const std::string& message,
+std::string wxGetSingleChoice(const std::string& message,
                                             const std::string& caption,
                                             int n, const std::string *choices,
                                             int initialSelection,
@@ -211,7 +211,7 @@ WXDLLIMPEXP_CORE std::string wxGetSingleChoice(const std::string& message,
 
 // Same as above but gets position in list of strings, instead of string,
 // or -1 if no selection
-WXDLLIMPEXP_CORE int wxGetSingleChoiceIndex(const std::string& message,
+int wxGetSingleChoiceIndex(const std::string& message,
                                        const std::string& caption,
                                        const std::vector<std::string>& choices,
                                        wxWindow *parent = nullptr,
@@ -223,7 +223,7 @@ WXDLLIMPEXP_CORE int wxGetSingleChoiceIndex(const std::string& message,
                                        int initialSelection = 0);
 
 // Return client data instead or NULL if canceled
-WXDLLIMPEXP_CORE void* wxGetSingleChoiceData(const std::string& message,
+void* wxGetSingleChoiceData(const std::string& message,
                                         const std::string& caption,
                                         const std::vector<std::string>& choices,
                                         void **client_data,
@@ -238,7 +238,7 @@ WXDLLIMPEXP_CORE void* wxGetSingleChoiceData(const std::string& message,
 // fill the array with the indices of the chosen items, it will be empty
 // if no items were selected or Cancel was pressed - return the number of
 // selections or -1 if cancelled
-WXDLLIMPEXP_CORE int wxGetSelectedChoices(std::vector<int>& selections,
+int wxGetSelectedChoices(std::vector<int>& selections,
                                         const std::string& message,
                                         const std::string& caption,
                                         const std::vector<std::string>& choices,

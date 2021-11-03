@@ -26,7 +26,7 @@
 wxIMPLEMENT_DYNAMIC_CLASS(wxCursor, wxGDIObject);
 
 
-class WXDLLEXPORT wxCursorRefData: public wxGDIRefData
+class wxCursorRefData: public wxGDIRefData
 {
 public:
     wxCursorRefData();

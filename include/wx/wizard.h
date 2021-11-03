@@ -52,7 +52,7 @@ class WXDLLIMPEXP_FWD_CORE wxWizard;
 // used as such (i.e. controls may be placed directly on it &c).
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxWizardPage : public wxPanel
+class wxWizardPage : public wxPanel
 {
 public:
     wxWizardPage() { Init(); }
@@ -122,7 +122,7 @@ public:
 // this, you must derive from wxWizardPage directly.
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxWizardPageSimple : public wxWizardPage
+class wxWizardPageSimple : public wxWizardPage
 {
 public:
     wxWizardPageSimple() { 
@@ -195,7 +195,7 @@ public:
 // wxWizard
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxWizardBase : public wxDialog
+class wxWizardBase : public wxDialog
 {
 public:
     /*
@@ -268,7 +268,7 @@ public:
 // window hierarchy as usual
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxWizardEvent : public wxNotifyEvent
+class wxWizardEvent : public wxNotifyEvent
 {
 public:
     wxWizardEvent(wxEventType type = wxEVT_NULL,

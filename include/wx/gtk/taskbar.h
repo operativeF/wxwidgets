@@ -10,7 +10,7 @@
 #ifndef _WX_GTK_TASKBARICON_H_
 #define _WX_GTK_TASKBARICON_H_
 
-class WXDLLIMPEXP_CORE wxTaskBarIcon: public wxTaskBarIconBase
+class wxTaskBarIcon: public wxTaskBarIconBase
 {
 public:
     wxTaskBarIcon(wxTaskBarIconType iconType = wxTaskBarIconType::DefaultType);

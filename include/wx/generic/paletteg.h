@@ -26,7 +26,7 @@ class WXDLLIMPEXP_FWD_CORE wxPalette;
 // wxPalette
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxPalette: public wxPaletteBase
+class wxPalette: public wxPaletteBase
 {
 public:
     wxPalette();

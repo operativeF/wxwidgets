@@ -40,7 +40,7 @@ class wxPreferencesEditorImpl;
 // ----------------------------------------------------------------------------
 
 // One page of a preferences window
-class WXDLLIMPEXP_CORE wxPreferencesPage
+class wxPreferencesPage
 {
 public:
     virtual ~wxPreferencesPage() = default;
@@ -65,7 +65,7 @@ public:
 
 
 // Helper for implementing some common pages (General, Advanced)
-class WXDLLIMPEXP_CORE wxStockPreferencesPage : public wxPreferencesPage
+class wxStockPreferencesPage : public wxPreferencesPage
 {
 public:
     enum class Kind
@@ -88,7 +88,7 @@ private:
 
 
 // Notice that this class does not inherit from wxWindow.
-class WXDLLIMPEXP_CORE wxPreferencesEditor
+class wxPreferencesEditor
 {
 public:
     // Ctor creates an empty editor, use AddPage() to add controls to it.

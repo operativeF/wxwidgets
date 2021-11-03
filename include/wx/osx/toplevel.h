@@ -15,7 +15,7 @@
 // wxTopLevelWindowMac
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxTopLevelWindowMac : public wxTopLevelWindowBase
+class wxTopLevelWindowMac : public wxTopLevelWindowBase
 {
 public:
     // constructors and such

@@ -15,7 +15,7 @@
 // wxGridCellCoords: location of a cell in the grid
 // ----------------------------------------------------------------------------
 
-struct WXDLLIMPEXP_CORE wxGridCellCoords
+struct wxGridCellCoords
 {
     constexpr wxGridCellCoords() {};
     constexpr wxGridCellCoords( int r, int c ) : m_row{r}, m_col{c} {}

@@ -11,7 +11,7 @@
 #ifndef _WX_TOOLBAR_H_
 #define _WX_TOOLBAR_H_
 
-class WXDLLIMPEXP_CORE wxToolBar : public wxToolBarBase
+class wxToolBar : public wxToolBarBase
 {
 public:
     // ctors and dtor

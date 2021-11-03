@@ -13,7 +13,7 @@ class QRegion;
 class QRect;
 template<class T> class QVector;
 
-class WXDLLIMPEXP_CORE wxRegion : public wxRegionBase
+class wxRegion : public wxRegionBase
 {
 public:
     wxRegion();
@@ -56,7 +56,7 @@ private:
 
 
 
-class WXDLLIMPEXP_CORE wxRegionIterator: public wxObject
+class wxRegionIterator: public wxObject
 {
 public:
     wxRegionIterator();

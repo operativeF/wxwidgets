@@ -40,7 +40,7 @@ constexpr unsigned int wxCLRBTN_DEFAULT_STYLE = wxCLRBTN_SHOW_LABEL;
 //                           implemented by controls used by wxColourPickerCtrl
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxColourPickerWidgetBase
+class wxColourPickerWidgetBase
 {
 public:
     wxColourPickerWidgetBase() : m_colour(*wxBLACK) {}
@@ -99,7 +99,7 @@ constexpr unsigned int wxCLRP_SHOW_ALPHA             = 0x0010;
 #define wxCLRP_USE_TEXTCTRL       (wxPB_USE_TEXTCTRL)
 #define wxCLRP_DEFAULT_STYLE      0
 
-class WXDLLIMPEXP_CORE wxColourPickerCtrl : public wxPickerBase
+class wxColourPickerCtrl : public wxPickerBase
 {
 public:
     wxColourPickerCtrl() = default;
@@ -156,7 +156,7 @@ wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_COLOURPICKER_CHANGED, wxColour
 wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_COLOURPICKER_CURRENT_CHANGED, wxColourPickerEvent );
 wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_COLOURPICKER_DIALOG_CANCELLED, wxColourPickerEvent );
 
-class WXDLLIMPEXP_CORE wxColourPickerEvent : public wxCommandEvent
+class wxColourPickerEvent : public wxCommandEvent
 {
 public:
     wxColourPickerEvent() = default;

@@ -15,7 +15,7 @@
 
 #define wxDEFAULT_BUTTON_MARGIN 4
 
-class WXDLLIMPEXP_CORE wxBitmapButton: public wxBitmapButtonBase
+class wxBitmapButton: public wxBitmapButtonBase
 {
 public:
     wxBitmapButton();

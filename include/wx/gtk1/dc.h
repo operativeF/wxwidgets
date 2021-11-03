@@ -15,7 +15,7 @@
 // wxDC
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxGTKDCImpl : public wxDCImpl
+class wxGTKDCImpl : public wxDCImpl
 {
 public:
     wxGTKDCImpl(wxDC *owner);

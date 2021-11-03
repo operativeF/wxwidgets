@@ -31,7 +31,7 @@ constexpr char wxFontPickerWidgetNameStr[] = "fontpickerwidget";
 //                         implemented by controls used by wxFontPickerCtrl
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxFontPickerWidgetBase
+class wxFontPickerWidgetBase
 {
 public:
     wxFontPickerWidgetBase() : m_selectedFont(*wxNORMAL_FONT) { }
@@ -99,7 +99,7 @@ constexpr unsigned int wxFNTP_DEFAULT_STYLE      = wxFNTP_FONTDESC_AS_LABEL|wxFN
 // used, a textctrl next to it.
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxFontPickerCtrl : public wxPickerBase
+class wxFontPickerCtrl : public wxPickerBase
 {
 public:
     wxFontPickerCtrl() = default;
@@ -188,7 +188,7 @@ private:
 
 wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_FONTPICKER_CHANGED, wxFontPickerEvent );
 
-class WXDLLIMPEXP_CORE wxFontPickerEvent : public wxCommandEvent
+class wxFontPickerEvent : public wxCommandEvent
 {
 public:
     wxFontPickerEvent() = default;

@@ -49,7 +49,7 @@
 // them to wxScrollHelper
 // ----------------------------------------------------------------------------
 
-class WXDLLEXPORT wxScrollHelperEvtHandler : public wxEvtHandler
+class wxScrollHelperEvtHandler : public wxEvtHandler
 {
 public:
     explicit wxScrollHelperEvtHandler(wxScrollHelperBase *scrollHelper)

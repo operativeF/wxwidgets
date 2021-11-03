@@ -8,7 +8,7 @@
 #ifndef _WX_QT_CONTROL_H_
 #define _WX_QT_CONTROL_H_
 
-class WXDLLIMPEXP_CORE wxControl : public wxControlBase
+class wxControl : public wxControlBase
 {
 public:
     wxControl();

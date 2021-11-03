@@ -15,7 +15,7 @@
 // wxMenuItem implements wxMenuItemBase
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxMenuItem : public wxMenuItemBase
+class wxMenuItem : public wxMenuItemBase
 {
 public:
     // ctor & dtor

@@ -41,7 +41,7 @@ constexpr char wxListCtrlNameStr[] = "listCtrl";
 // wxListView: a class which provides a better API for list control
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxListView : public wxListCtrl
+class wxListView : public wxListCtrl
 {
 public:
     wxListView() = default;

@@ -304,7 +304,7 @@ private:
 
 class WXDLLIMPEXP_FWD_CORE wxEventLoopImpl;
 
-class WXDLLIMPEXP_CORE wxGUIEventLoop : public wxEventLoopBase
+class wxGUIEventLoop : public wxEventLoopBase
 {
 public:
     wxGUIEventLoop() { m_impl = NULL; }
@@ -368,7 +368,7 @@ inline bool wxEventLoopBase::IsRunning() const { return GetActive() == this; }
 // implement modality, we will surely need platform-specific implementations
 // too, this generic implementation is here only temporarily to see how it
 // works
-class WXDLLIMPEXP_CORE wxModalEventLoop : public wxGUIEventLoop
+class wxModalEventLoop : public wxGUIEventLoop
 {
 public:
     wxModalEventLoop(wxWindow *winModal)

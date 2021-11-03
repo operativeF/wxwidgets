@@ -16,7 +16,7 @@ class wxDataViewRendererNativeData;
 // wxDataViewRenderer
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxDataViewRenderer : public wxDataViewRendererBase
+class wxDataViewRenderer : public wxDataViewRendererBase
 {
 public:
     // constructors / destructor

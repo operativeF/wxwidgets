@@ -10,7 +10,7 @@
 #ifndef _WX_GTK_FILEHISTORY_H_
 #define _WX_GTK_FILEHISTORY_H_
 
-class WXDLLIMPEXP_CORE wxFileHistory : public wxFileHistoryBase
+class wxFileHistory : public wxFileHistoryBase
 {
 public:
     wxFileHistory(size_t maxFiles = 9, wxWindowID idBase = wxID_FILE1)

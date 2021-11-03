@@ -70,7 +70,7 @@ enum class wxScrollbarVisibility
 
 // This class allows reusing some of wxScrollHelperBase functionality in
 // wxVarScrollHelperBase in wx/vscroll.h without duplicating its code.
-class WXDLLIMPEXP_CORE wxAnyScrollHelperBase
+class wxAnyScrollHelperBase
 {
 public:
     explicit wxAnyScrollHelperBase(wxWindow* win);
@@ -112,7 +112,7 @@ protected:
 };
 
 // This is the class containing the guts of (uniform) scrolling logic.
-class WXDLLIMPEXP_CORE wxScrollHelperBase : public wxAnyScrollHelperBase
+class wxScrollHelperBase : public wxAnyScrollHelperBase
 {
 public:
     // ctor must be given the associated window
@@ -377,7 +377,7 @@ public:                                                                       \
 // ----------------------------------------------------------------------------
 
 // helper class for wxScrolled<T> below
-struct WXDLLIMPEXP_CORE wxScrolledT_Helper
+struct wxScrolledT_Helper
 {
     static wxSize FilterBestSize(const wxWindow *win,
                                  const wxScrollHelper *helper,
@@ -490,7 +490,7 @@ protected:
 // "typedef" for wxScrolled<wxPanel>. It's not a real typedef because we
 // want wxScrolledWindow to show in wxRTTI information (the class is widely
 // used and likelihood of its wxRTTI information being used too is high):
-class WXDLLIMPEXP_CORE wxScrolledWindow : public wxScrolled<wxPanel>
+class wxScrolledWindow : public wxScrolled<wxPanel>
 {
 public:
     wxScrolledWindow()  = default;

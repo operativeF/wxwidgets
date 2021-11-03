@@ -28,7 +28,7 @@ constexpr char wxToggleButtonNameStr[] = "toggle";
 // wxToggleButtonBase
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxToggleButtonBase : public wxAnyButton
+class wxToggleButtonBase : public wxAnyButton
 {
 public:
    wxToggleButtonBase& operator=(wxToggleButtonBase&&) = delete;

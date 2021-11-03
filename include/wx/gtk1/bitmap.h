@@ -31,7 +31,7 @@ class WXDLLIMPEXP_FWD_CORE wxCursor;
 // wxMask
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxMask: public wxObject
+class wxMask: public wxObject
 {
 public:
     wxMask();
@@ -63,7 +63,7 @@ private:
 // wxBitmap
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxBitmap: public wxBitmapBase
+class wxBitmap: public wxBitmapBase
 {
 public:
     wxBitmap() {}

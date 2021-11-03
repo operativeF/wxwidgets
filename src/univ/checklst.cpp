@@ -22,7 +22,7 @@
 // wxStdCheckListBoxInputHandler
 // ----------------------------------------------------------------------------
 
-class WXDLLEXPORT wxStdCheckListboxInputHandler : public wxStdInputHandler
+class wxStdCheckListboxInputHandler : public wxStdInputHandler
 {
 public:
     wxStdCheckListboxInputHandler(wxInputHandler *inphand);

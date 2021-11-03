@@ -40,7 +40,7 @@ enum class wxTaskBarIconType
 // wxTaskBarIconBase: define wxTaskBarIcon interface
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxTaskBarIconBase : public wxEvtHandler
+class wxTaskBarIconBase : public wxEvtHandler
 {
 public:
    wxTaskBarIconBase& operator=(wxTaskBarIconBase&&) = delete;
@@ -99,7 +99,7 @@ private:
 // wxTaskBarIcon events
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxTaskBarIconEvent : public wxEvent
+class wxTaskBarIconEvent : public wxEvent
 {
 public:
     wxTaskBarIconEvent(wxEventType evtType, wxTaskBarIcon *tbIcon)

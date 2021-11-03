@@ -15,7 +15,7 @@
 // wxCollapsiblePane
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxCollapsiblePane : public wxCollapsiblePaneBase
+class wxCollapsiblePane : public wxCollapsiblePaneBase
 {
 public:
     wxCollapsiblePane() { Init(); }

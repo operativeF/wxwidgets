@@ -10,7 +10,7 @@
 
 #define wxDROP_ICON(name)   wxCursor(name##_xpm)
 
-class WXDLLIMPEXP_CORE wxDropTarget : public wxDropTargetBase
+class wxDropTarget : public wxDropTargetBase
 {
 public:
     wxDropTarget(wxDataObject *dataObject = NULL);
@@ -32,7 +32,7 @@ private:
     Impl* m_pImpl;
 };
 
-class WXDLLIMPEXP_CORE wxDropSource: public wxDropSourceBase
+class wxDropSource: public wxDropSourceBase
 {
 public:
     wxDropSource(wxWindow *win = NULL,

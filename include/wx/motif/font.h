@@ -21,7 +21,7 @@
 class wxXFont;
 
 // Font
-class WXDLLIMPEXP_CORE wxFont : public wxFontBase
+class wxFont : public wxFontBase
 {
 public:
     

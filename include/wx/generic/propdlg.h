@@ -73,7 +73,7 @@ enum wxPropertySheetDialogFlags
     wxPROPSHEET_SHRINKTOFIT = 0x0100
 };
 
-class WXDLLIMPEXP_CORE wxPropertySheetDialog : public wxDialog
+class wxPropertySheetDialog : public wxDialog
 {
 public:
     wxPropertySheetDialog() = default;

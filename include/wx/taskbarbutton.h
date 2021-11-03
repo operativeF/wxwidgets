@@ -42,7 +42,7 @@ enum class wxTaskBarButtonState
     Paused        = 8
 };
 
-class WXDLLIMPEXP_CORE wxThumbBarButton : public wxObject
+class wxThumbBarButton : public wxObject
 {
 public:
     wxThumbBarButton() = default;
@@ -109,7 +109,7 @@ private:
     wxDECLARE_DYNAMIC_CLASS(wxThumbBarButton);
 };
 
-class WXDLLIMPEXP_CORE wxTaskBarButton
+class wxTaskBarButton
 {
 public:
     wxTaskBarButton& operator=(wxTaskBarButton&&) = delete;
@@ -150,7 +150,7 @@ enum class wxTaskBarJumpListItemType
     Destination
 };
 
-class WXDLLIMPEXP_CORE wxTaskBarJumpListItem
+class wxTaskBarJumpListItem
 {
 public:
     wxTaskBarJumpListItem(wxTaskBarJumpListCategory *parentCategory = nullptr,
@@ -196,7 +196,7 @@ private:
 
 using wxTaskBarJumpListItems = std::vector<wxTaskBarJumpListItem *>;
 
-class WXDLLIMPEXP_CORE wxTaskBarJumpListCategory
+class wxTaskBarJumpListCategory
 {
 public:
     wxTaskBarJumpListCategory(wxTaskBarJumpList *parent = nullptr,
@@ -227,7 +227,7 @@ private:
 
 using wxTaskBarJumpListCategories = std::vector<wxTaskBarJumpListCategory *>;
 
-class WXDLLIMPEXP_CORE wxTaskBarJumpList
+class wxTaskBarJumpList
 {
 public:
     wxTaskBarJumpList(const std::string& appID = {});

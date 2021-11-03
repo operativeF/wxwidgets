@@ -24,7 +24,7 @@ class WXDLLIMPEXP_FWD_CORE wxStatusBar;
 // wxFrame
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxFrame : public wxFrameBase
+class wxFrame : public wxFrameBase
 {
 public:
     // construction

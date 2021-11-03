@@ -14,7 +14,7 @@
 
 #include "wx/listbox.h"
 
-class WXDLLIMPEXP_CORE wxCheckListBox : public wxCheckListBoxBase
+class wxCheckListBox : public wxCheckListBoxBase
 {
     wxDECLARE_DYNAMIC_CLASS(wxCheckListBox);
 

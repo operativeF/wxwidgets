@@ -60,7 +60,7 @@ enum wxSizerFlagBits
     wxSIZER_FLAG_BITS_MASK         = 0x8002
 };
 
-class WXDLLIMPEXP_CORE wxSizerFlags
+class wxSizerFlags
 {
 public:
     // construct the flags object initialized with the given proportion (0 by
@@ -280,7 +280,7 @@ private:
 // wxSizerSpacer: used by wxSizerItem to represent a spacer
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxSizerSpacer
+class wxSizerSpacer
 {
 public:
     wxSizerSpacer(wxSize size) : m_size(size), m_isShown(true) { }
@@ -303,7 +303,7 @@ private:
 // wxSizerItem
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxSizerItem : public wxObject
+class wxSizerItem : public wxObject
 {
 public:
     // window
@@ -533,7 +533,7 @@ WX_DECLARE_EXPORTED_LIST( wxSizerItem, wxSizerItemList );
 // wxSizer
 //---------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxSizer: public wxObject, public wxClientDataContainer
+class wxSizer: public wxObject, public wxClientDataContainer
 {
 public:
     ~wxSizer();
@@ -790,7 +790,7 @@ private:
 // wxGridSizer
 //---------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxGridSizer: public wxSizer
+class wxGridSizer: public wxSizer
 {
 public:
     // ctors specifying the number of columns only: number of rows will be
@@ -891,7 +891,7 @@ enum class wxFlexSizerGrowMode
     All
 };
 
-class WXDLLIMPEXP_CORE wxFlexGridSizer: public wxGridSizer
+class wxFlexGridSizer: public wxGridSizer
 {
 public:
     // ctors specifying the number of columns only: number of rows will be
@@ -964,7 +964,7 @@ private:
 // wxBoxSizer
 //---------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxBoxSizer: public wxSizer
+class wxBoxSizer: public wxSizer
 {
 public:
     wxBoxSizer(int orient)
@@ -1060,7 +1060,7 @@ private:
 
 class WXDLLIMPEXP_FWD_CORE wxStaticBox;
 
-class WXDLLIMPEXP_CORE wxStaticBoxSizer: public wxBoxSizer
+class wxStaticBoxSizer: public wxBoxSizer
 {
 public:
     wxStaticBoxSizer(wxStaticBox *box, int orient);
@@ -1098,7 +1098,7 @@ private:
 
 #if wxUSE_BUTTON
 
-class WXDLLIMPEXP_CORE wxStdDialogButtonSizer: public wxBoxSizer
+class wxStdDialogButtonSizer: public wxBoxSizer
 {
 public:
     // Constructor just creates a new wxBoxSizer, not much else.

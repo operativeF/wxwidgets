@@ -14,7 +14,7 @@
 
 #include "wx/checkbox.h"
 
-class WXDLLIMPEXP_CORE wxToggleButton : public wxCheckBox
+class wxToggleButton : public wxCheckBox
 {
 public:
     wxToggleButton() { Init(); }

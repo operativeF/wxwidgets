@@ -33,7 +33,7 @@ wxString ConcatenateDataViewItemValues(wxDataViewCtrl const* dataViewCtrlPtr, wx
 //  to be passed)!
 // ATTENTION
 // ---------------------------------------------------------
-class WXDLLIMPEXP_CORE wxDataViewWidgetImpl
+class wxDataViewWidgetImpl
 {
 public:
  //

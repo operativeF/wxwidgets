@@ -17,7 +17,7 @@
 // wxHyperlinkCtrl
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxHyperlinkCtrl : public wxGenericHyperlinkCtrl
+class wxHyperlinkCtrl : public wxGenericHyperlinkCtrl
 {
     typedef wxGenericHyperlinkCtrl base_type;
 public:

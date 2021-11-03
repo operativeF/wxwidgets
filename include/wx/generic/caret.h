@@ -21,7 +21,7 @@
 
 class WXDLLIMPEXP_FWD_CORE wxCaret;
 
-class WXDLLIMPEXP_CORE wxCaretTimer : public wxTimer
+class wxCaretTimer : public wxTimer
 {
 public:
     wxCaretTimer(wxCaret *caret);
@@ -31,7 +31,7 @@ private:
     wxCaret *m_caret;
 };
 
-class WXDLLIMPEXP_CORE wxCaret : public wxCaretBase
+class wxCaret : public wxCaretBase
 {
 public:
     // ctors

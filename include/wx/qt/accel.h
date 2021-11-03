@@ -38,7 +38,7 @@
 class QShortcut;
 template < class T > class QList;
 
-class WXDLLIMPEXP_CORE wxAcceleratorTable : public wxObject
+class wxAcceleratorTable : public wxObject
 {
 public:
     wxAcceleratorTable();

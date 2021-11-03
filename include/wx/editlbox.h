@@ -34,7 +34,7 @@ constexpr char wxEditableListBoxNameStr[] = "editableListBox";
 // This class provides a composite control that lets the
 // user easily enter list of strings
 
-class WXDLLIMPEXP_CORE wxEditableListBox : public wxPanel
+class wxEditableListBox : public wxPanel
 {
 public:
     wxEditableListBox() = default;

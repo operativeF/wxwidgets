@@ -76,7 +76,7 @@ enum class wxPreviewFrameModalityKind
 // wxPrintFactory
 //----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxPrintFactory
+class wxPrintFactory
 {
 public:
     virtual ~wxPrintFactory() = default;
@@ -122,7 +122,7 @@ private:
     inline static wxPrintFactory *m_factory{nullptr};
 };
 
-class WXDLLIMPEXP_CORE wxNativePrintFactory: public wxPrintFactory
+class wxNativePrintFactory: public wxPrintFactory
 {
 public:
     wxPrinterBase *CreatePrinter( wxPrintDialogData *data ) override;
@@ -159,7 +159,7 @@ public:
 // wxPrintNativeDataBase
 //----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxPrintNativeDataBase
+class wxPrintNativeDataBase
 {
 public:
     virtual ~wxPrintNativeDataBase() = default;
@@ -185,7 +185,7 @@ public:
  * Represents the printer: manages printing a wxPrintout object
  */
 
-class WXDLLIMPEXP_CORE wxPrinterBase
+class wxPrinterBase
 {
 public:
     wxPrinterBase(wxPrintDialogData *data = nullptr);
@@ -223,7 +223,7 @@ public:
 // wxPrinter
 //----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxPrinter: public wxPrinterBase
+class wxPrinter: public wxPrinterBase
 {
 public:
     wxPrinter(wxPrintDialogData *data = nullptr);
@@ -255,7 +255,7 @@ protected:
  * object for previewing.
  */
 
-class WXDLLIMPEXP_CORE wxPrintout
+class wxPrintout
 {
 public:
     wxPrintout(const wxString& title = wxGetTranslation("Printout")) :
@@ -352,7 +352,7 @@ private:
  * Canvas upon which a preview is drawn.
  */
 
-class WXDLLIMPEXP_CORE wxPreviewCanvas: public wxScrolledWindow
+class wxPreviewCanvas: public wxScrolledWindow
 {
 public:
     wxPreviewCanvas(wxPrintPreviewBase *preview,
@@ -391,7 +391,7 @@ private:
  * Default frame for showing preview.
  */
 
-class WXDLLIMPEXP_CORE wxPreviewFrame: public wxFrame
+class wxPreviewFrame: public wxFrame
 {
 public:
     wxPreviewFrame(wxPrintPreviewBase *preview,
@@ -479,7 +479,7 @@ private:
 #define wxID_PREVIEW_ZOOM_IN    9
 #define wxID_PREVIEW_ZOOM_OUT   10
 
-class WXDLLIMPEXP_CORE wxPreviewControlBar: public wxPanel
+class wxPreviewControlBar: public wxPanel
 {
     wxDECLARE_CLASS(wxPreviewControlBar);
 
@@ -571,7 +571,7 @@ private:
  * Programmer creates an object of this class to preview a wxPrintout.
  */
 
-class WXDLLIMPEXP_CORE wxPrintPreviewBase
+class wxPrintPreviewBase
 {
 public:
     wxPrintPreviewBase(wxPrintout *printout,
@@ -683,7 +683,7 @@ private:
 // wxPrintPreview
 //----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxPrintPreview: public wxPrintPreviewBase
+class wxPrintPreview: public wxPrintPreviewBase
 {
 public:
     wxPrintPreview(wxPrintout *printout,
@@ -736,7 +736,7 @@ private:
 // wxPrintAbortDialog
 //----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxPrintAbortDialog: public wxDialog
+class wxPrintAbortDialog: public wxDialog
 {
 public:
     wxPrintAbortDialog(wxWindow *parent,

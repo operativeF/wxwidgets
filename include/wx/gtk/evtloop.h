@@ -16,7 +16,7 @@
 
 typedef union  _GdkEvent        GdkEvent;
 
-class WXDLLIMPEXP_CORE wxGUIEventLoop : public wxEventLoopBase
+class wxGUIEventLoop : public wxEventLoopBase
 {
 public:
     wxGUIEventLoop();

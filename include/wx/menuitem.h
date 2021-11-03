@@ -42,7 +42,7 @@ class WXDLLIMPEXP_FWD_CORE wxMenu;
 // menu or a separator
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxMenuItemBase
+class wxMenuItemBase
 {
 public:
     // creation

@@ -17,7 +17,7 @@
 // wxWindow class for Motif - see also wxWindowBase
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxWindowX11 : public wxWindowBase
+class wxWindowX11 : public wxWindowBase
 {
     friend class WXDLLIMPEXP_FWD_CORE wxDC;
     friend class WXDLLIMPEXP_FWD_CORE wxWindowDC;
@@ -201,7 +201,7 @@ private:
 // optimisation, it will be re-enabled as soon as the object goes out from scope.
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxNoOptimize
+class wxNoOptimize
 {
 public:
     wxNoOptimize() { ms_count++; }

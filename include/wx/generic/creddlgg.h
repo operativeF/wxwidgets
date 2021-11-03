@@ -19,7 +19,7 @@
 
 #include <string>
 
-class WXDLLIMPEXP_CORE wxGenericCredentialEntryDialog : public wxDialog
+class wxGenericCredentialEntryDialog : public wxDialog
 {
 public:
     wxGenericCredentialEntryDialog() = default;

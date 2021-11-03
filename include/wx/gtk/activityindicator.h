@@ -26,7 +26,7 @@
 // wxActivityIndicator: implementation using GtkSpinner.
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxActivityIndicator : public wxActivityIndicatorGtkBase
+class wxActivityIndicator : public wxActivityIndicatorGtkBase
 {
 public:
     wxActivityIndicator()

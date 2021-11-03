@@ -21,7 +21,7 @@
 class WXDLLIMPEXP_FWD_CORE wxPaintDC;
 class WXDLLIMPEXP_FWD_CORE wxWindow;
 
-class WXDLLIMPEXP_CORE wxWindowDCImpl: public wxGCDCImpl
+class wxWindowDCImpl: public wxGCDCImpl
 {
 public:
     wxWindowDCImpl( wxDC *owner );
@@ -45,7 +45,7 @@ protected:
 };
 
 
-class WXDLLIMPEXP_CORE wxClientDCImpl: public wxWindowDCImpl
+class wxClientDCImpl: public wxWindowDCImpl
 {
 public:
     wxClientDCImpl( wxDC *owner );
@@ -59,7 +59,7 @@ private:
 };
 
 
-class WXDLLIMPEXP_CORE wxPaintDCImpl: public wxWindowDCImpl
+class wxPaintDCImpl: public wxWindowDCImpl
 {
 public:
     wxPaintDCImpl( wxDC *owner );

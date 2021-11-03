@@ -12,7 +12,7 @@
 #ifndef _WX_TOGGLEBUTTON_H_
 #define _WX_TOGGLEBUTTON_H_
 
-class WXDLLIMPEXP_CORE wxToggleButton : public wxToggleButtonBase
+class wxToggleButton : public wxToggleButtonBase
 {
 public:
     wxToggleButton() {}
@@ -57,7 +57,7 @@ public:
 };
 
 
-class WXDLLIMPEXP_CORE wxBitmapToggleButton : public wxToggleButton
+class wxBitmapToggleButton : public wxToggleButton
 {
 public:
     wxBitmapToggleButton() {}

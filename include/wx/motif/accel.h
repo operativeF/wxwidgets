@@ -15,7 +15,7 @@
 #include "wx/string.h"
 #include "wx/event.h"
 
-class WXDLLIMPEXP_CORE wxAcceleratorTable: public wxObject
+class wxAcceleratorTable: public wxObject
 {
     wxDECLARE_DYNAMIC_CLASS(wxAcceleratorTable);
 public:

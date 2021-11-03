@@ -10,7 +10,7 @@
 
 #include "wx/prntbase.h"
 
-class WXDLLIMPEXP_CORE wxQtPrinter : public wxPrinterBase
+class wxQtPrinter : public wxPrinterBase
 {
 public:
     wxQtPrinter( wxPrintDialogData *data = NULL );
@@ -23,7 +23,7 @@ private:
 
 
 
-class WXDLLIMPEXP_CORE wxQtPrintPreview : public wxPrintPreviewBase
+class wxQtPrintPreview : public wxPrintPreviewBase
 {
 public:
     wxQtPrintPreview(wxPrintout *printout,

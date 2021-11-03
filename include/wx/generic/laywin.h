@@ -57,7 +57,7 @@ enum wxLayoutAlignment
  * orientation and size.
  */
 
-class WXDLLIMPEXP_CORE wxQueryLayoutInfoEvent: public wxEvent
+class wxQueryLayoutInfoEvent: public wxEvent
 {
 public:
     wxQueryLayoutInfoEvent(wxWindowID id = 0)
@@ -112,7 +112,7 @@ typedef void (wxEvtHandler::*wxQueryLayoutInfoEventFunction)(wxQueryLayoutInfoEv
  * This event is used to take a bite out of the available client area.
  */
 
-class WXDLLIMPEXP_CORE wxCalculateLayoutEvent: public wxEvent
+class wxCalculateLayoutEvent: public wxEvent
 {
 public:
     wxCalculateLayoutEvent(wxWindowID id = 0)
@@ -156,7 +156,7 @@ typedef void (wxEvtHandler::*wxCalculateLayoutEventFunction)(wxCalculateLayoutEv
 // This is window that can remember alignment/orientation, does its own layout,
 // and can provide sashes too. Useful for implementing docked windows with sashes in
 // an IDE-style interface.
-class WXDLLIMPEXP_CORE wxSashLayoutWindow: public wxSashWindow
+class wxSashLayoutWindow: public wxSashWindow
 {
 public:
     wxSashLayoutWindow()
@@ -221,7 +221,7 @@ class WXDLLIMPEXP_FWD_CORE wxMDIParentFrame;
 class WXDLLIMPEXP_FWD_CORE wxFrame;
 
 // This class implements the layout algorithm
-class WXDLLIMPEXP_CORE wxLayoutAlgorithm
+class wxLayoutAlgorithm
 {
 public:
     wxLayoutAlgorithm() = default;

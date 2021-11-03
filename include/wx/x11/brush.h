@@ -25,7 +25,7 @@ class WXDLLIMPEXP_FWD_CORE wxBitmap;
 // wxBrush
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxBrush : public wxBrushBase
+class wxBrush : public wxBrushBase
 {
 public:
     wxBrush() { }

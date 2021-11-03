@@ -33,7 +33,7 @@ constexpr unsigned int wxFC_DEFAULT_STYLE = wxFC_OPEN;
 
 constexpr char wxFileCtrlNameStr[] = "wxfilectrl";
 
-class WXDLLIMPEXP_CORE wxFileCtrlBase
+class wxFileCtrlBase
 {
 public:
     virtual ~wxFileCtrlBase() = default;
@@ -90,7 +90,7 @@ void wxGenerateFileActivatedEvent( wxFileCtrlBase *fileCtrl, wxWindow *wnd, cons
 // file(s).
 // In wxGTK, after each wxEVT_FILECTRL_FOLDERCHANGED, wxEVT_FILECTRL_SELECTIONCHANGED
 // is fired automatically once or more with 0 files.
-class WXDLLIMPEXP_CORE wxFileCtrlEvent : public wxCommandEvent
+class wxFileCtrlEvent : public wxCommandEvent
 {
 public:
     wxFileCtrlEvent() = default;

@@ -31,7 +31,7 @@ wxDECLARE_EXPORTED_EVENT(WXDLLIMPEXP_CORE, wxEVT_SPINCTRLDOUBLE, wxSpinDoubleEve
 // There are two kinds for number types T=integer or T=double.
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxSpinCtrlBase : public wxControl
+class wxSpinCtrlBase : public wxControl
 {
 public:
     wxSpinCtrlBase& operator=(wxSpinCtrlBase&&) = delete;
@@ -64,7 +64,7 @@ public:
 // wxSpinDoubleEvent - a wxSpinEvent for double valued controls
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxSpinDoubleEvent : public wxNotifyEvent
+class wxSpinDoubleEvent : public wxNotifyEvent
 {
 public:
     wxSpinDoubleEvent(wxEventType commandType = wxEVT_NULL, int winid = 0,

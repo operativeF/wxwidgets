@@ -157,7 +157,7 @@ protected:
 // Note that this is still an ABC and GetGeometry() and GetClientArea() methods
 // must be implemented in the derived classes.
 
-class WXDLLEXPORT wxDisplayImplSingle : public wxDisplayImpl
+class wxDisplayImplSingle : public wxDisplayImpl
 {
 public:
     wxDisplayImplSingle() : wxDisplayImpl(0) { }

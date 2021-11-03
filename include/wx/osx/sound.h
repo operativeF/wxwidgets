@@ -18,7 +18,7 @@
 
 class WXDLLIMPEXP_FWD_CORE wxSoundTimer;
 
-class WXDLLIMPEXP_CORE wxSoundData
+class wxSoundData
 {
 public :
     wxSoundData();
@@ -39,7 +39,7 @@ protected:
     bool m_markedForDeletion;
 } ;
 
-class WXDLLIMPEXP_CORE wxSound : public wxSoundBase
+class wxSound : public wxSoundBase
 {
 public:
     wxSound();

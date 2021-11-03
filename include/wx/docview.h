@@ -67,7 +67,7 @@ using wxDocVector = std::vector<wxDocument *>;
 using wxViewVector = std::vector<wxView *>;
 using wxDocTemplateVector = std::vector<wxDocTemplate *>;
 
-class WXDLLIMPEXP_CORE wxDocument : public wxEvtHandler
+class wxDocument : public wxEvtHandler
 {
 public:
     wxDocument(wxDocument *parent = nullptr);
@@ -213,7 +213,7 @@ private:
     wxDECLARE_ABSTRACT_CLASS(wxDocument);
 };
 
-class WXDLLIMPEXP_CORE wxView: public wxEvtHandler
+class wxView: public wxEvtHandler
 {
 public:
     ~wxView();
@@ -287,7 +287,7 @@ private:
 };
 
 // Represents user interface (and other) properties of documents and views
-class WXDLLIMPEXP_CORE wxDocTemplate: public wxObject
+class wxDocTemplate: public wxObject
 {
 
 friend class WXDLLIMPEXP_FWD_CORE wxDocManager;
@@ -377,7 +377,7 @@ private:
 
 // One object of this class may be created in an application, to manage all
 // the templates and documents.
-class WXDLLIMPEXP_CORE wxDocManager: public wxEvtHandler
+class wxDocManager: public wxEvtHandler
 {
 public:
     // NB: flags are unused, don't pass wxDOC_XXX to this ctor
@@ -563,7 +563,7 @@ protected:
 // wxDocChildFrameAny does
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxDocChildFrameAnyBase
+class wxDocChildFrameAnyBase
 {
 public:
     // default ctor, use Create() after it
@@ -658,7 +658,7 @@ private:
 // wxMDIParentFrame.
 // ----------------------------------------------------------------------------
 
-// Note that we intentionally do not use WXDLLIMPEXP_CORE for this class as it
+// Note that we intentionally do not use for this class as it
 // has only inline methods.
 
 template <class ChildFrame, class ParentFrame>
@@ -740,7 +740,7 @@ private:
 
 using wxDocChildFrameBase = wxDocChildFrameAny<wxFrame, wxFrame>;
 
-class WXDLLIMPEXP_CORE wxDocChildFrame : public wxDocChildFrameBase
+class wxDocChildFrame : public wxDocChildFrameBase
 {
 public:
     wxDocChildFrame() = default;
@@ -793,7 +793,7 @@ private:
 //
 // Similarly to wxDocChildFrameAnyBase, this class is a mix-in and doesn't
 // derive from wxWindow.
-class WXDLLIMPEXP_CORE wxDocParentFrameAnyBase
+class wxDocParentFrameAnyBase
 {
 public:
     wxDocParentFrameAnyBase(wxWindow* frame)
@@ -894,7 +894,7 @@ private:
 
 using wxDocParentFrameBase = wxDocParentFrameAny<wxFrame>;
 
-class WXDLLIMPEXP_CORE wxDocParentFrame : public wxDocParentFrameBase
+class wxDocParentFrame : public wxDocParentFrameBase
 {
 public:
     wxDocParentFrame()  = default;
@@ -937,7 +937,7 @@ private:
 // ----------------------------------------------------------------------------
 
 #if wxUSE_PRINTING_ARCHITECTURE
-class WXDLLIMPEXP_CORE wxDocPrintout : public wxPrintout
+class wxDocPrintout : public wxPrintout
 {
 public:
     wxDocPrintout(wxView *view = nullptr, const std::string& title = {});

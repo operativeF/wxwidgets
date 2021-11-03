@@ -77,7 +77,7 @@ enum
 // wxPostScriptNativeData
 //----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxPostScriptPrintNativeData: public wxPrintNativeDataBase
+class wxPostScriptPrintNativeData: public wxPrintNativeDataBase
 {
 public:
     wxPostScriptPrintNativeData();
@@ -134,7 +134,7 @@ private:
 // Windows using PostScript print/preview)
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxGenericPrintDialog : public wxPrintDialogBase
+class wxGenericPrintDialog : public wxPrintDialogBase
 {
 public:
     wxGenericPrintDialog(wxWindow *parent,
@@ -177,7 +177,7 @@ private:
     wxDECLARE_DYNAMIC_CLASS(wxGenericPrintDialog);
 };
 
-class WXDLLIMPEXP_CORE wxGenericPrintSetupDialog : public wxDialog
+class wxGenericPrintSetupDialog : public wxDialog
 {
 public:
     // There are no configuration options for the dialog, so we
@@ -214,7 +214,7 @@ private:
 #endif
     // wxUSE_POSTSCRIPT
 
-class WXDLLIMPEXP_CORE wxGenericPageSetupDialog : public wxPageSetupDialogBase
+class wxGenericPageSetupDialog : public wxPageSetupDialogBase
 {
 public:
     wxGenericPageSetupDialog(wxWindow *parent = nullptr,

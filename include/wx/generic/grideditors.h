@@ -54,7 +54,7 @@ private:
 #if wxUSE_TEXTCTRL
 
 // the editor for string/text data
-class WXDLLIMPEXP_CORE wxGridCellTextEditor : public wxGridCellEditor
+class wxGridCellTextEditor : public wxGridCellEditor
 {
 public:
     explicit wxGridCellTextEditor(size_t maxChars = 0);
@@ -103,7 +103,7 @@ private:
 };
 
 // the editor for numeric (long) data
-class WXDLLIMPEXP_CORE wxGridCellNumberEditor : public wxGridCellTextEditor
+class wxGridCellNumberEditor : public wxGridCellTextEditor
 {
 public:
     // allows to specify the range - if min == max == -1, no range checking is
@@ -189,7 +189,7 @@ enum wxGridCellFloatFormat
 };
 
 // the editor for floating point numbers (double) data
-class WXDLLIMPEXP_CORE wxGridCellFloatEditor : public wxGridCellTextEditor
+class wxGridCellFloatEditor : public wxGridCellTextEditor
 {
 public:
     wxGridCellFloatEditor(int width = -1,
@@ -237,7 +237,7 @@ private:
 #if wxUSE_CHECKBOX
 
 // the editor for boolean data
-class WXDLLIMPEXP_CORE wxGridCellBoolEditor : public wxGridCellEditor
+class wxGridCellBoolEditor : public wxGridCellEditor
 {
 public:
     wxGridCellBoolEditor() = default;
@@ -306,7 +306,7 @@ private:
 #if wxUSE_COMBOBOX
 
 // the editor for string data allowing to choose from the list of strings
-class WXDLLIMPEXP_CORE wxGridCellChoiceEditor : public wxGridCellEditor
+class wxGridCellChoiceEditor : public wxGridCellEditor
 {
 public:
     // if !allowOthers, user can't type a string not in choices array
@@ -351,7 +351,7 @@ protected:
 
 #if wxUSE_COMBOBOX
 
-class WXDLLIMPEXP_CORE wxGridCellEnumEditor : public wxGridCellChoiceEditor
+class wxGridCellEnumEditor : public wxGridCellChoiceEditor
 {
 public:
     wxGridCellEnumEditor( const std::string& choices = {} );
@@ -371,7 +371,7 @@ private:
 
 #endif // wxUSE_COMBOBOX
 
-class WXDLLIMPEXP_CORE wxGridCellAutoWrapStringEditor : public wxGridCellTextEditor
+class wxGridCellAutoWrapStringEditor : public wxGridCellTextEditor
 {
 public:
     wxGridCellAutoWrapStringEditor()  = default;
@@ -388,7 +388,7 @@ public:
 
 #if wxUSE_DATEPICKCTRL
 
-class WXDLLIMPEXP_CORE wxGridCellDateEditor : public wxGridCellEditor
+class wxGridCellDateEditor : public wxGridCellEditor
 {
 public:
     explicit wxGridCellDateEditor(const std::string& format = {});

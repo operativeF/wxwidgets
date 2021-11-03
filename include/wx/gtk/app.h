@@ -17,7 +17,7 @@
 // wxApp
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxApp: public wxAppBase
+class wxApp: public wxAppBase
 {
 public:
     wxApp();

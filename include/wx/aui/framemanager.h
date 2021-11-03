@@ -29,7 +29,7 @@
 
 #include <vector>
 
-class WXDLLIMPEXP_CORE wxWindow;
+class wxWindow;
 
 enum wxAuiManagerDock
 {

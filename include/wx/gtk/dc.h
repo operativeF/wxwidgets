@@ -115,7 +115,7 @@ private:
 };
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxGTKCairoDC: public wxDC
+class wxGTKCairoDC: public wxDC
 {
 public:
     wxGTKCairoDC(cairo_t* cr, wxWindow* window, wxLayoutDirection dir = wxLayoutDirection::LeftToRight, int width = 0);
@@ -132,7 +132,7 @@ public:
 // wxDC
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxGTKDCImpl : public wxDCImpl
+class wxGTKDCImpl : public wxDCImpl
 {
 public:
     wxGTKDCImpl( wxDC *owner );

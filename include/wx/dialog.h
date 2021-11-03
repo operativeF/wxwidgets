@@ -65,7 +65,7 @@ enum class wxDialogModality
 
 constexpr char wxDialogNameStr[] = "dialog";
 
-class WXDLLIMPEXP_CORE wxDialogBase : public wxNavigationEnabled<wxTopLevelWindow>
+class wxDialogBase : public wxNavigationEnabled<wxTopLevelWindow>
 {
 public:
     wxDialogBase();
@@ -285,7 +285,7 @@ private:
  * a help mechanism.
  */
 
-class WXDLLIMPEXP_CORE wxDialogLayoutAdapter
+class wxDialogLayoutAdapter
 {
     wxDECLARE_CLASS(wxDialogLayoutAdapter);
 public:
@@ -303,7 +303,7 @@ public:
  *
  */
 
-class WXDLLIMPEXP_CORE wxStandardDialogLayoutAdapter: public wxDialogLayoutAdapter
+class wxStandardDialogLayoutAdapter: public wxDialogLayoutAdapter
 {
     wxDECLARE_CLASS(wxStandardDialogLayoutAdapter);
 public:
@@ -366,7 +366,7 @@ public:
     #endif
 #endif
 
-class WXDLLIMPEXP_CORE wxWindowModalDialogEvent  : public wxCommandEvent
+class wxWindowModalDialogEvent  : public wxCommandEvent
 {
 public:
     wxWindowModalDialogEvent (wxEventType commandType = wxEVT_NULL, int id = 0)

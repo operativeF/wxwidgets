@@ -8,7 +8,7 @@
 #ifndef _WX_QT_TEXTENTRY_H_
 #define _WX_QT_TEXTENTRY_H_
 
-class WXDLLIMPEXP_CORE wxTextEntry : public wxTextEntryBase
+class wxTextEntry : public wxTextEntryBase
 {
 public:
     wxTextEntry();

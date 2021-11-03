@@ -17,7 +17,7 @@
 
 class WXDLLIMPEXP_FWD_CORE wxMacToolTip ;
 
-class WXDLLIMPEXP_CORE wxFrame: public wxFrameBase
+class wxFrame: public wxFrameBase
 {
 public:
     // construction

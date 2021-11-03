@@ -27,7 +27,7 @@ class WXDLLIMPEXP_FWD_CORE wxSpinEvent;
 // wxGenericCalendarCtrl
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxGenericCalendarCtrl : public wxCalendarCtrlBase
+class wxGenericCalendarCtrl : public wxCalendarCtrlBase
 {
 public:
     // construction

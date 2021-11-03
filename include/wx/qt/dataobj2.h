@@ -8,7 +8,7 @@
 #ifndef _WX_QT_DATAOBJ2_H_
 #define _WX_QT_DATAOBJ2_H_
 
-class WXDLLIMPEXP_CORE wxBitmapDataObject : public wxBitmapDataObjectBase
+class wxBitmapDataObject : public wxBitmapDataObjectBase
 {
 public:
     wxBitmapDataObject();
@@ -26,7 +26,7 @@ private:
 
 
 
-class WXDLLIMPEXP_CORE wxFileDataObject : public wxFileDataObjectBase
+class wxFileDataObject : public wxFileDataObjectBase
 {
 public:
     wxFileDataObject();

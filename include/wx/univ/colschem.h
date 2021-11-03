@@ -20,7 +20,7 @@ class WXDLLIMPEXP_FWD_CORE wxWindow;
 // wxColourScheme
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxColourScheme
+class wxColourScheme
 {
 public:
     // the standard colours

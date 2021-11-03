@@ -14,7 +14,7 @@
 // wxDataViewCustomRenderer
 // ---------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxDataViewCustomRenderer : public wxDataViewCustomRendererBase
+class wxDataViewCustomRenderer : public wxDataViewCustomRendererBase
 {
 public:
     static wxString GetDefaultType() { return wxS("string"); }
@@ -74,7 +74,7 @@ protected:
 // wxDataViewTextRenderer
 // ---------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxDataViewTextRenderer: public wxDataViewRenderer
+class wxDataViewTextRenderer: public wxDataViewRenderer
 {
 public:
     static wxString GetDefaultType() { return wxS("string"); }
@@ -112,7 +112,7 @@ public:
 // wxDataViewBitmapRenderer
 // ---------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxDataViewBitmapRenderer: public wxDataViewRenderer
+class wxDataViewBitmapRenderer: public wxDataViewRenderer
 {
 public:
     static wxString GetDefaultType() { return wxS("wxBitmap"); }
@@ -135,7 +135,7 @@ public:
 // wxDataViewChoiceRenderer
 // -------------------------------------
 
-class WXDLLIMPEXP_CORE wxDataViewChoiceRenderer
+class wxDataViewChoiceRenderer
     : public wxOSXDataViewDisabledInertRenderer
 {
 public:
@@ -168,7 +168,7 @@ public:
 // wxDataViewChoiceByIndexRenderer
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxDataViewChoiceByIndexRenderer: public wxDataViewChoiceRenderer
+class wxDataViewChoiceByIndexRenderer: public wxDataViewChoiceRenderer
 {
 public:
     wxDataViewChoiceByIndexRenderer(const wxArrayString& choices,
@@ -186,7 +186,7 @@ public:
 // ---------------------------------------------------------
 // wxDataViewIconTextRenderer
 // ---------------------------------------------------------
-class WXDLLIMPEXP_CORE wxDataViewIconTextRenderer: public wxDataViewRenderer
+class wxDataViewIconTextRenderer: public wxDataViewRenderer
 {
 public:
     static wxString GetDefaultType() { return wxS("wxDataViewIconText"); }
@@ -213,7 +213,7 @@ public:
 // wxDataViewIconTextRenderer
 // ---------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxDataViewCheckIconTextRenderer
+class wxDataViewCheckIconTextRenderer
     : public wxDataViewRenderer
 {
 public:
@@ -253,7 +253,7 @@ public:
 // wxDataViewToggleRenderer
 // ---------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxDataViewToggleRenderer
+class wxDataViewToggleRenderer
     : public wxOSXDataViewDisabledInertRenderer
 {
 public:
@@ -287,7 +287,7 @@ public:
 // wxDataViewProgressRenderer
 // ---------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxDataViewProgressRenderer: public wxDataViewRenderer
+class wxDataViewProgressRenderer: public wxDataViewRenderer
 {
 public:
     static wxString GetDefaultType() { return wxS("long"); }
@@ -316,7 +316,7 @@ public:
 // wxDataViewDateRenderer
 // ---------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxDataViewDateRenderer: public wxDataViewRenderer
+class wxDataViewDateRenderer: public wxDataViewRenderer
 {
 public:
     static wxString GetDefaultType() { return wxS("datetime"); }

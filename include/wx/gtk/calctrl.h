@@ -9,7 +9,7 @@
 #ifndef GTK_CALCTRL_H__
 #define GTK_CALCTRL_H__
 
-class WXDLLIMPEXP_CORE wxGtkCalendarCtrl : public wxCalendarCtrlBase
+class wxGtkCalendarCtrl : public wxCalendarCtrlBase
 {
 public:
     wxGtkCalendarCtrl() {}

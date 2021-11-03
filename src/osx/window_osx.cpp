@@ -109,7 +109,7 @@ std::vector<wxHotKeyRec> s_hotkeys;
 // the grow box has to be implemented as an inactive window, so that nothing can direct
 // the focus to it
 
-class WXDLLIMPEXP_CORE wxBlindPlateWindow : public wxWindow
+class wxBlindPlateWindow : public wxWindow
 {
 public:
     wxBlindPlateWindow() { Init(); }

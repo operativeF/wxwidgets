@@ -341,12 +341,12 @@ public:
 // translate a wxFontEncoding into native encoding parameter (defined above),
 // returning true if an (exact) macth could be found, false otherwise (without
 // attempting any substitutions)
-WXDLLIMPEXP_CORE bool wxGetNativeFontEncoding(wxFontEncoding encoding,
+bool wxGetNativeFontEncoding(wxFontEncoding encoding,
                                               wxNativeEncodingInfo *info);
 
 // test for the existence of the font described by this facename/encoding,
 // return true if such font(s) exist, false otherwise
-WXDLLIMPEXP_CORE bool wxTestFontEncoding(const wxNativeEncodingInfo& info);
+bool wxTestFontEncoding(const wxNativeEncodingInfo& info);
 
 // ----------------------------------------------------------------------------
 // font-related functions (X and GTK)

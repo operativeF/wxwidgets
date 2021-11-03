@@ -21,7 +21,7 @@ class WXDLLIMPEXP_FWD_CORE wxIcon;
 class WXDLLIMPEXP_FWD_CORE wxColour;
 
 
-class WXDLLIMPEXP_CORE wxGenericImageList: public wxObject
+class wxGenericImageList: public wxObject
 {
 public:
     wxGenericImageList() = default;
@@ -78,7 +78,7 @@ public:
  * the run-time information.
  */
 
-class WXDLLIMPEXP_CORE wxImageList: public wxGenericImageList
+class wxImageList: public wxGenericImageList
 {
     wxDECLARE_DYNAMIC_CLASS(wxImageList);
 

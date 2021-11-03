@@ -37,7 +37,7 @@ class WXDLLIMPEXP_FWD_CORE wxPerDisplayData;
 
 WX_DECLARE_VOIDPTR_HASH_MAP( wxPerDisplayData*, wxPerDisplayDataMap );
 
-class WXDLLIMPEXP_CORE wxApp : public wxAppBase
+class wxApp : public wxAppBase
 {
     wxDECLARE_DYNAMIC_CLASS(wxApp);
 

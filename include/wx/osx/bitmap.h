@@ -30,7 +30,7 @@ class WXDLLIMPEXP_FWD_CORE wxPixelDataBase;
 // 8 bit is chosen only for performance reasons, note also that this is the inverse value range
 // from alpha, where 0 = invisible , 255 = fully drawn
 
-class WXDLLIMPEXP_CORE wxMask: public wxMaskBase
+class wxMask: public wxMaskBase
 {
     wxDECLARE_DYNAMIC_CLASS(wxMask);
 
@@ -87,7 +87,7 @@ private:
 
 };
 
-class WXDLLIMPEXP_CORE wxBitmap: public wxBitmapBase
+class wxBitmap: public wxBitmapBase
 {
     wxDECLARE_DYNAMIC_CLASS(wxBitmap);
 

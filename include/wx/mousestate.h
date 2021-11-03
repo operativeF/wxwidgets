@@ -33,7 +33,7 @@ enum wxMouseButton
 
 // wxMouseState is used to hold information about button and modifier state
 // and is what is returned from wxGetMouseState.
-class WXDLLIMPEXP_CORE wxMouseState : public wxKeyboardState
+class wxMouseState : public wxKeyboardState
 {
 public:
     // accessors for the mouse position

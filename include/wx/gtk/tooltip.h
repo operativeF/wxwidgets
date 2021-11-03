@@ -22,7 +22,7 @@ class WXDLLIMPEXP_FWD_CORE wxWindow;
 // wxToolTip
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxToolTip : public wxObject
+class wxToolTip : public wxObject
 {
 public:
     wxToolTip( const wxString &tip );

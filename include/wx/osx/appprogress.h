@@ -12,7 +12,7 @@
 
 #include "wx/window.h"
 
-class WXDLLIMPEXP_CORE wxAppProgressIndicator
+class wxAppProgressIndicator
     : public wxAppProgressIndicatorBase
 {
 public:

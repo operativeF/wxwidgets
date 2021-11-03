@@ -15,7 +15,7 @@
 // wxFileDialog
 //-------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxFileDialog: public wxFileDialogBase
+class wxFileDialog: public wxFileDialogBase
 {
     wxDECLARE_DYNAMIC_CLASS(wxFileDialog);
 public:

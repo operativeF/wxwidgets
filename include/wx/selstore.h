@@ -38,7 +38,7 @@ WX_DEFINE_SORTED_EXPORTED_ARRAY_CMP_INT(unsigned, wxUIntCmp, wxSelectedIndices);
 // individual items) without changing its API.
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxSelectionStore
+class wxSelectionStore
 {
 public:
     // set the total number of items we handle

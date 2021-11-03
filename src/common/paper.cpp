@@ -324,7 +324,7 @@ wxPrintPaperType* wxPrintPaperDatabase::Item(size_t index) const
 // A module to allow initialization/cleanup of print paper
 // things without calling these functions from app.cpp.
 
-class WXDLLEXPORT wxPrintPaperModule: public wxModule
+class wxPrintPaperModule: public wxModule
 {
     wxDECLARE_DYNAMIC_CLASS(wxPrintPaperModule);
 public:

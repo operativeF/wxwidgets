@@ -20,7 +20,7 @@
 typedef long wxDataType;
 
 // fwd decl
-class  WXDLLIMPEXP_CORE wxImageList;
+class  wxImageList;
 struct wxTreeViewItem;
 
 // a callback function used for sorting tree items, it should return -1 if the
@@ -67,7 +67,7 @@ static constexpr int wxTREE_HITTEST_ONITEM  = wxTREE_HITTEST_ONITEMICON |
 // just a trivial wrapper around GTK GtkTreeItem *. It's opaque for the
 // application.
 // ----------------------------------------------------------------------------
-class WXDLLIMPEXP_CORE wxTreeItemId {
+class wxTreeItemId {
 public:
   // ctors
   wxTreeItemId() { m_itemId = NULL; }
@@ -104,7 +104,7 @@ protected:
 // Because the objects of this class are deleted by the tree, they should
 // always be allocated on the heap!
 // ----------------------------------------------------------------------------
-class WXDLLIMPEXP_CORE wxTreeItemData : private wxTreeItemId {
+class wxTreeItemData : private wxTreeItemId {
 public:
     // default ctor/copy ctor/assignment operator are ok
 
@@ -117,7 +117,7 @@ public:
     const wxTreeItemId& GetId() const { return (wxTreeItemId&) m_itemId; }
 };
 
-class WXDLLIMPEXP_CORE wxTreeCtrl: public wxControl {
+class wxTreeCtrl: public wxControl {
 public:
   wxTreeCtrl() { Init(); }
 

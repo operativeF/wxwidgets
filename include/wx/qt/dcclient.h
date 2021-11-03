@@ -14,7 +14,7 @@
 
 class QPicture;
 
-class WXDLLIMPEXP_CORE wxWindowDCImpl : public wxQtDCImpl
+class wxWindowDCImpl : public wxQtDCImpl
 {
 public:
     wxWindowDCImpl( wxDC *owner );
@@ -32,7 +32,7 @@ private:
 };
 
 
-class WXDLLIMPEXP_CORE wxClientDCImpl : public wxWindowDCImpl
+class wxClientDCImpl : public wxWindowDCImpl
 {
 public:
     wxClientDCImpl( wxDC *owner );
@@ -48,7 +48,7 @@ private:
 };
 
 
-class WXDLLIMPEXP_CORE wxPaintDCImpl : public wxWindowDCImpl
+class wxPaintDCImpl : public wxWindowDCImpl
 {
 public:
     wxPaintDCImpl( wxDC *owner );

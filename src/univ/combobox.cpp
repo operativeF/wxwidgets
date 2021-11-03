@@ -31,7 +31,7 @@
 // wxStdComboBoxInputHandler: allows the user to open/close the combo from kbd
 // ----------------------------------------------------------------------------
 
-class WXDLLEXPORT wxStdComboBoxInputHandler : public wxStdInputHandler
+class wxStdComboBoxInputHandler : public wxStdInputHandler
 {
 public:
     wxStdComboBoxInputHandler(wxInputHandler *inphand);

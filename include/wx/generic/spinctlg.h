@@ -42,7 +42,7 @@ class wxSpinCtrlTextGeneric; // wxTextCtrl used for the wxSpinCtrlGenericBase
 // function ambiguity.
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxSpinCtrlGenericBase
+class wxSpinCtrlGenericBase
                 : public wxNavigationEnabled<wxCompositeWindow<wxSpinCtrlBase> >
 {
 public:
@@ -184,7 +184,7 @@ private:
 
 #include "wx/textctrl.h"
 
-class WXDLLIMPEXP_CORE wxSpinCtrlGenericBase : public wxTextCtrl
+class wxSpinCtrlGenericBase : public wxTextCtrl
 {
 public:
     wxSpinCtrlGenericBase() : m_value(0), m_min(0), m_max(100),
@@ -282,7 +282,7 @@ protected:
 // wxSpinCtrl
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxSpinCtrl : public wxSpinCtrlGenericBase
+class wxSpinCtrl : public wxSpinCtrlGenericBase
 {
 public:
     wxSpinCtrl() = default;
@@ -344,7 +344,7 @@ private:
 // wxSpinCtrlDouble
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxSpinCtrlDouble : public wxSpinCtrlGenericBase
+class wxSpinCtrlDouble : public wxSpinCtrlGenericBase
 {
 public:
     wxSpinCtrlDouble() = default;

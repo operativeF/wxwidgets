@@ -10,7 +10,7 @@
 
 class QGroupBox;
 
-class WXDLLIMPEXP_CORE wxStaticBox : public wxStaticBoxBase
+class wxStaticBox : public wxStaticBoxBase
 {
 public:
     wxStaticBox();

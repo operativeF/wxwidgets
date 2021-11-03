@@ -107,7 +107,7 @@ using wxTimePickerCtrlBase = wxTimePickerCtrlCommonBase<wxDateTimePickerCtrl>;
 #else
     #include "wx/generic/timectrl.h"
 
-    class WXDLLIMPEXP_CORE wxTimePickerCtrl : public wxTimePickerCtrlGeneric
+    class wxTimePickerCtrl : public wxTimePickerCtrlGeneric
     {
     public:
         wxTimePickerCtrl() = default;

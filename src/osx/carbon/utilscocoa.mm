@@ -229,14 +229,14 @@ WXImage  wxOSXGetImageFromCGImage( CGImageRef image, double scaleFactor, bool is
 }
 
 #if wxOSX_USE_COCOA
-WXImage WXDLLIMPEXP_CORE wxOSXGetNSImageFromIconRef( WXHICON iconref )
+WXImage wxOSXGetNSImageFromIconRef( WXHICON iconref )
 {
     NSImage  *newImage = [[NSImage alloc] initWithIconRef:iconref];
     [newImage autorelease];
     return( newImage );
 }
 
-WX_NSImage WXDLLIMPEXP_CORE wxOSXGetNSImageFromCFURL( CFURLRef urlref )
+WX_NSImage wxOSXGetNSImageFromCFURL( CFURLRef urlref )
 {
     NSImage  *newImage = [[NSImage alloc] initWithContentsOfURL:(NSURL*)urlref];
     [newImage autorelease];
@@ -244,7 +244,7 @@ WX_NSImage WXDLLIMPEXP_CORE wxOSXGetNSImageFromCFURL( CFURLRef urlref )
 }
 #endif
 
-CGImageRef WXDLLIMPEXP_CORE wxOSXGetCGImageFromImage( WXImage nsimage, CGRect* r, CGContextRef cg)
+CGImageRef wxOSXGetCGImageFromImage( WXImage nsimage, CGRect* r, CGContextRef cg)
 {
 #if wxOSX_USE_COCOA
     NSRect nsRect = NSRectFromCGRect(*r);
@@ -256,7 +256,7 @@ CGImageRef WXDLLIMPEXP_CORE wxOSXGetCGImageFromImage( WXImage nsimage, CGRect* r
 #endif
 }
 
-CGContextRef WXDLLIMPEXP_CORE wxOSXCreateBitmapContextFromImage( WXImage nsimage, bool *isTemplate)
+CGContextRef wxOSXCreateBitmapContextFromImage( WXImage nsimage, bool *isTemplate)
 {
     // based on http://www.mail-archive.com/cocoa-dev@lists.apple.com/msg18065.html
 
@@ -288,7 +288,7 @@ CGContextRef WXDLLIMPEXP_CORE wxOSXCreateBitmapContextFromImage( WXImage nsimage
     return hbitmap;
 }
 
-void WXDLLIMPEXP_CORE wxOSXDrawNSImage(
+void wxOSXDrawNSImage(
                                           CGContextRef    inContext,
                                           const CGRect *  inBounds,
                                           WXImage      inImage)
@@ -577,7 +577,7 @@ WX_NSCursor wxMacCocoaCreateStockCursor( int cursor_type )
     return cursor;
 }
 
-WXImage WXDLLIMPEXP_CORE wxOSXGetNSImageFromNSCursor(const WXHCURSOR cursor)
+WXImage wxOSXGetNSImageFromNSCursor(const WXHCURSOR cursor)
 {
     return [(NSCursor *)cursor image];
 }

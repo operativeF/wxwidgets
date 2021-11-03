@@ -13,7 +13,7 @@
 // wxStaticText
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxStaticText : public wxStaticTextBase
+class wxStaticText : public wxStaticTextBase
 {
 public:
     wxStaticText();

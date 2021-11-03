@@ -21,7 +21,7 @@ enum
     wxFONTRESTRICT_FIXEDPITCH   = 1 << 1
 };
 
-class WXDLLIMPEXP_CORE wxFontData
+class wxFontData
 {
 public:
     void SetAllowSymbols(bool flag) { m_allowSymbols = flag; }

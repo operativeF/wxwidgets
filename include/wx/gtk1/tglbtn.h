@@ -25,7 +25,7 @@ class WXDLLIMPEXP_FWD_CORE wxToggleBitmapButton;
 // wxToggleBitmapButton
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxToggleBitmapButton: public wxToggleButtonBase
+class wxToggleBitmapButton: public wxToggleButtonBase
 {
 public:
     // construction/destruction
@@ -82,7 +82,7 @@ private:
 // wxToggleButton
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxToggleButton: public wxControl
+class wxToggleButton: public wxControl
 {
 public:
     // construction/destruction

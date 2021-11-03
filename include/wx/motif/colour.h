@@ -15,7 +15,7 @@
 #include "wx/string.h"
 
 // Colour
-class WXDLLIMPEXP_CORE wxColour : public wxColourBase
+class wxColour : public wxColourBase
 {
     wxDECLARE_DYNAMIC_CLASS(wxColour);
 public:

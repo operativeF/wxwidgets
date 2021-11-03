@@ -24,7 +24,7 @@
 
 using namespace msw::utils;
 
-class WXDLLEXPORT wxPenRefData : public wxGDIRefData
+class wxPenRefData : public wxGDIRefData
 {
 public:
     // ctors and dtor

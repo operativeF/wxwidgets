@@ -21,7 +21,7 @@ class wxTextCoalesceData;     // another private class
 // wxTextEntry: roughly corresponds to GtkEditable
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxTextEntry : public wxTextEntryBase
+class wxTextEntry : public wxTextEntryBase
 {
 public:
     wxTextEntry();

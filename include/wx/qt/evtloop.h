@@ -11,7 +11,7 @@
 class wxQtIdleTimer;
 class QEventLoop;
 
-class WXDLLIMPEXP_CORE wxQtEventLoopBase : public wxEventLoopBase
+class wxQtEventLoopBase : public wxEventLoopBase
 {
 public:
     wxQtEventLoopBase();
@@ -38,7 +38,7 @@ private:
 
 #if wxUSE_GUI
 
-class WXDLLIMPEXP_CORE wxGUIEventLoop : public wxQtEventLoopBase
+class wxGUIEventLoop : public wxQtEventLoopBase
 {
 public:
     wxGUIEventLoop();

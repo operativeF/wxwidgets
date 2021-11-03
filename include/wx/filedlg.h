@@ -70,7 +70,7 @@ constexpr char wxFileSelectorDefaultWildcardStr[] =
 // wxFileDialogBase
 //----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxFileDialogBase: public wxDialog
+class wxFileDialogBase: public wxDialog
 {
 public:
     wxFileDialogBase() = default;
@@ -211,7 +211,7 @@ private:
 //----------------------------------------------------------------------------
 
 // File selector - backward compatibility
-WXDLLIMPEXP_CORE wxString
+wxString
 wxFileSelector(const wxString& message = wxASCII_STR(wxFileSelectorPromptStr),
                const wxString& default_path = {},
                const wxString& default_filename = {},
@@ -222,7 +222,7 @@ wxFileSelector(const wxString& message = wxASCII_STR(wxFileSelectorPromptStr),
                int x = wxDefaultCoord, int y = wxDefaultCoord);
 
 // An extended version of wxFileSelector
-WXDLLIMPEXP_CORE wxString
+wxString
 wxFileSelectorEx(const wxString& message = wxASCII_STR(wxFileSelectorPromptStr),
                  const wxString& default_path = {},
                  const wxString& default_filename = {},
@@ -233,14 +233,14 @@ wxFileSelectorEx(const wxString& message = wxASCII_STR(wxFileSelectorPromptStr),
                  int x = wxDefaultCoord, int y = wxDefaultCoord);
 
 // Ask for filename to load
-WXDLLIMPEXP_CORE wxString
+wxString
 wxLoadFileSelector(const wxString& what,
                    const wxString& extension,
                    const wxString& default_name = {},
                    wxWindow *parent = nullptr);
 
 // Ask for filename to save
-WXDLLIMPEXP_CORE wxString
+wxString
 wxSaveFileSelector(const wxString& what,
                    const wxString& extension,
                    const wxString& default_name = {},

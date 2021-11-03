@@ -45,7 +45,7 @@ public:
     #define wxHAS_GUI_SOCKET_MANAGER
 #endif
 
-class WXDLLIMPEXP_CORE wxGUIAppTraits : public wxGUIAppTraitsBase
+class wxGUIAppTraits : public wxGUIAppTraitsBase
 {
 public:
     wxEventLoopBase *CreateEventLoop() override;

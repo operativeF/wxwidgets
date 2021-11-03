@@ -25,7 +25,7 @@
     #include "wx/compositewin.h"
     #include "wx/containr.h"
 
-    class WXDLLIMPEXP_CORE wxSearchCtrlBaseBaseClass
+    class wxSearchCtrlBaseBaseClass
         : public wxCompositeWindow< wxNavigationEnabled<wxControl> >,
           public wxTextCtrlIface
     {
@@ -40,7 +40,7 @@
     // otherwise.
     #define wxUSE_NATIVE_SEARCH_CONTROL 1
 
-    class WXDLLIMPEXP_CORE wxGTKSearchCtrlBase
+    class wxGTKSearchCtrlBase
         : public wxControl, public wxTextEntry
     {
     };
@@ -62,7 +62,7 @@ wxDECLARE_EXPORTED_EVENT(WXDLLIMPEXP_CORE, wxEVT_SEARCH, wxCommandEvent);
 // it is based on the MacOSX 10.3 control HISearchFieldCreate
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxSearchCtrlBase : public wxSearchCtrlBaseBaseClass
+class wxSearchCtrlBase : public wxSearchCtrlBaseBaseClass
 {
 public:
     // search control

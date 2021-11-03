@@ -33,7 +33,7 @@ public:
     bool              m_destroyable;
 };
 
-class WXDLLIMPEXP_CORE wxPaletteRefData: public wxGDIRefData
+class wxPaletteRefData: public wxGDIRefData
 {
     friend class WXDLLIMPEXP_FWD_CORE wxPalette;
 public:
@@ -46,7 +46,7 @@ protected:
 
 #define M_PALETTEDATA ((wxPaletteRefData *)m_refData)
 
-class WXDLLIMPEXP_CORE wxPalette : public wxPaletteBase
+class wxPalette : public wxPaletteBase
 {
     wxDECLARE_DYNAMIC_CLASS(wxPalette);
 

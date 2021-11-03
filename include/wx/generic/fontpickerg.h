@@ -18,7 +18,7 @@
 // wxGenericFontButton: a button which brings up a wxFontDialog
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxGenericFontButton : public wxButton,
+class wxGenericFontButton : public wxButton,
                                              public wxFontPickerWidgetBase
 {
 public:

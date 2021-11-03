@@ -18,7 +18,7 @@
  * Platform-specific colour dialog implementation
  */
 
-class WXDLLIMPEXP_CORE wxColourDialog: public wxDialog
+class wxColourDialog: public wxDialog
 {
     wxDECLARE_DYNAMIC_CLASS(wxColourDialog);
 public:

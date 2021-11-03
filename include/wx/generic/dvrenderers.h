@@ -15,7 +15,7 @@
 // wxDataViewCustomRenderer
 // ---------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxDataViewCustomRenderer: public wxDataViewRenderer
+class wxDataViewCustomRenderer: public wxDataViewRenderer
 {
 public:
     inline static constexpr char DefaultType[] = "string";
@@ -54,7 +54,7 @@ public:
 // wxDataViewTextRenderer
 // ---------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxDataViewTextRenderer: public wxDataViewRenderer
+class wxDataViewTextRenderer: public wxDataViewRenderer
 {
 public:
     inline static constexpr char DefaultType[] = "string";
@@ -104,7 +104,7 @@ public:
 // wxDataViewBitmapRenderer
 // ---------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxDataViewBitmapRenderer: public wxDataViewRenderer
+class wxDataViewBitmapRenderer: public wxDataViewRenderer
 {
 public:
     inline static constexpr char DefaultType[] = "wxBitmap";
@@ -139,7 +139,7 @@ public:
 // wxDataViewToggleRenderer
 // ---------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxDataViewToggleRenderer: public wxDataViewRenderer
+class wxDataViewToggleRenderer: public wxDataViewRenderer
 {
 public:
     inline static constexpr char DefaultType[] = "bool";
@@ -182,7 +182,7 @@ public:
 // wxDataViewProgressRenderer
 // ---------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxDataViewProgressRenderer: public wxDataViewRenderer
+class wxDataViewProgressRenderer: public wxDataViewRenderer
 {
 public:
     inline static constexpr char DefaultType[] = "long";
@@ -218,7 +218,7 @@ public:
 // wxDataViewIconTextRenderer
 // ---------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxDataViewIconTextRenderer: public wxDataViewRenderer
+class wxDataViewIconTextRenderer: public wxDataViewRenderer
 {
 public:
     inline static constexpr char DefaultType[] = "wxDataViewIconText";

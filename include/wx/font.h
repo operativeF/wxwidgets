@@ -525,8 +525,8 @@ private:
 };
 
 // wxFontBase <-> wxString utilities, used by wxConfig
-WXDLLIMPEXP_CORE wxString wxToString(const wxFontBase& font);
-WXDLLIMPEXP_CORE bool wxFromString(const wxString& str, wxFontBase* font);
+wxString wxToString(const wxFontBase& font);
+bool wxFromString(const wxString& str, wxFontBase* font);
 
 
 // this macro must be used in all derived wxFont classes declarations
@@ -568,7 +568,7 @@ WXDLLIMPEXP_CORE bool wxFromString(const wxString& str, wxFontBase* font);
     #include "wx/qt/font.h"
 #endif
 
-class WXDLLIMPEXP_CORE wxFontList: public wxGDIObjListBase
+class wxFontList: public wxGDIObjListBase
 {
 public:
     wxFont *FindOrCreateFont(int pointSize,

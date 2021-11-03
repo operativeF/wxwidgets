@@ -10,7 +10,7 @@
 
 class wxQTreeWidget;
 
-class WXDLLIMPEXP_CORE wxTreeCtrl : public wxTreeCtrlBase
+class wxTreeCtrl : public wxTreeCtrlBase
 {
 public:
     wxTreeCtrl();

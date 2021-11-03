@@ -39,7 +39,7 @@ class WXDLLIMPEXP_FWD_CORE wxDataViewCustomRenderer;
 // wxDataViewIconText: helper class used by wxDataViewIconTextRenderer
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxDataViewIconText : public wxObject
+class wxDataViewIconText : public wxObject
 {
 public:
     wxDataViewIconText( const std::string &text = {},
@@ -123,7 +123,7 @@ enum wxDataViewCellRenderState
 };
 
 // helper for fine-tuning rendering of values depending on row's state
-class WXDLLIMPEXP_CORE wxDataViewValueAdjuster
+class wxDataViewValueAdjuster
 {
 public:
     virtual ~wxDataViewValueAdjuster() = default;
@@ -132,7 +132,7 @@ public:
     virtual wxVariant MakeHighlighted(const wxVariant& value) const { return value; }
 };
 
-class WXDLLIMPEXP_CORE wxDataViewRendererBase: public wxObject
+class wxDataViewRendererBase: public wxObject
 {
 public:
     wxDataViewRendererBase( const std::string &varianttype,
@@ -305,7 +305,7 @@ public:
 // wxDataViewCustomRendererBase
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxDataViewCustomRendererBase
+class wxDataViewCustomRendererBase
     : public wxDataViewCustomRendererRealBase
 {
 public:
@@ -413,7 +413,7 @@ private:
 // wxDataViewSpinRenderer
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxDataViewSpinRenderer: public wxDataViewCustomRenderer
+class wxDataViewSpinRenderer: public wxDataViewCustomRenderer
 {
 public:
     wxDataViewSpinRenderer( int min, int max,
@@ -444,7 +444,7 @@ private:
 // wxDataViewChoiceRenderer
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxDataViewChoiceRenderer: public wxDataViewCustomRenderer
+class wxDataViewChoiceRenderer: public wxDataViewCustomRenderer
 {
 public:
     wxDataViewChoiceRenderer( const std::vector<std::string>& choices,
@@ -473,7 +473,7 @@ private:
 // wxDataViewChoiceByIndexRenderer
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxDataViewChoiceByIndexRenderer: public wxDataViewChoiceRenderer
+class wxDataViewChoiceByIndexRenderer: public wxDataViewChoiceRenderer
 {
 public:
     wxDataViewChoiceByIndexRenderer( const std::vector<std::string> &choices,
@@ -500,7 +500,7 @@ public:
 // ----------------------------------------------------------------------------
 
 #if wxUSE_DATEPICKCTRL
-class WXDLLIMPEXP_CORE wxDataViewDateRenderer: public wxDataViewCustomRenderer
+class wxDataViewDateRenderer: public wxDataViewCustomRenderer
 {
 public:
     static std::string GetDefaultType() { return "datetime"; }
@@ -535,7 +535,7 @@ using wxDataViewDateRenderer = wxDataViewTextRenderer;
 
 #if defined(wxHAS_GENERIC_DATAVIEWCTRL) || !defined(__WXOSX__)
 
-class WXDLLIMPEXP_CORE wxDataViewCheckIconTextRenderer
+class wxDataViewCheckIconTextRenderer
     : public wxDataViewCustomRenderer
 {
 public:

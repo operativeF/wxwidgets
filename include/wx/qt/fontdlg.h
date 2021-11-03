@@ -10,7 +10,7 @@
 
 class QFontDialog;
 
-class WXDLLIMPEXP_CORE wxFontDialog : public wxFontDialogBase
+class wxFontDialog : public wxFontDialogBase
 {
 public:
     wxFontDialog() { }

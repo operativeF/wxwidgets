@@ -13,7 +13,7 @@
 // wxMenuBar
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxMenuBar : public wxMenuBarBase
+class wxMenuBar : public wxMenuBarBase
 {
 public:
     // ctors
@@ -62,7 +62,7 @@ private:
 // wxMenu
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxMenu : public wxMenuBase
+class wxMenu : public wxMenuBase
 {
 public:
     // ctors & dtor

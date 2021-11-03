@@ -15,7 +15,7 @@
 // wxRadioButton
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxRadioButton : public wxRadioButtonBase
+class wxRadioButton : public wxRadioButtonBase
 {
 public:
     // constructors

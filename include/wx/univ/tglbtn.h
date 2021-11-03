@@ -15,7 +15,7 @@
 // wxToggleButton: a push button
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxToggleButton: public wxToggleButtonBase
+class wxToggleButton: public wxToggleButtonBase
 {
 public:
     wxToggleButton();

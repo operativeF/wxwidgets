@@ -24,7 +24,7 @@
  */
 
 class WXDLLIMPEXP_FWD_CORE wxDC;
-class WXDLLIMPEXP_CORE wxMacPrintDialog: public wxPrintDialogBase
+class wxMacPrintDialog: public wxPrintDialogBase
 {
 public:
     wxMacPrintDialog();
@@ -54,7 +54,7 @@ private:
  * The Mac page setup dialog
  */
 
-class WXDLLIMPEXP_CORE wxMacPageSetupDialog: public wxPageSetupDialogBase
+class wxMacPageSetupDialog: public wxPageSetupDialogBase
 {
 public:
     wxMacPageSetupDialog(wxWindow *parent, wxPageSetupDialogData *data = NULL);
@@ -86,7 +86,7 @@ class WXDLLIMPEXP_FWD_CORE wxTextCtrl;
 * (native) wxMacPageSetupDialog doesn't let you set margins.
 */
 
-class WXDLLIMPEXP_CORE wxMacPageMarginsDialog : public wxDialog
+class wxMacPageMarginsDialog : public wxDialog
 {
 public:
     wxMacPageMarginsDialog(wxFrame* parent, wxPageSetupDialogData* data);

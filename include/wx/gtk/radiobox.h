@@ -22,7 +22,7 @@ WX_DECLARE_EXPORTED_LIST(wxGTKRadioButtonInfo, wxRadioBoxButtonsInfoList);
 // wxRadioBox
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxRadioBox : public wxControl,
+class wxRadioBox : public wxControl,
                                     public wxRadioBoxBase
 {
 public:

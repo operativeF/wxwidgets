@@ -11,7 +11,7 @@
 #ifndef _WX_X11_DATAFORM_H
 #define _WX_X11_DATAFORM_H
 
-class WXDLLIMPEXP_CORE wxDataFormat
+class wxDataFormat
 {
 public:
     // the clipboard formats under Xt are Atoms

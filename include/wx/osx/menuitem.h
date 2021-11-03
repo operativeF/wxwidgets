@@ -24,7 +24,7 @@
 
 class WXDLLIMPEXP_FWD_CORE wxMenuItemImpl ;
 
-class WXDLLIMPEXP_CORE wxMenuItem: public wxMenuItemBase
+class wxMenuItem: public wxMenuItemBase
 {
 public:
     // ctor & dtor

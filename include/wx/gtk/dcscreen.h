@@ -16,7 +16,7 @@
 // wxScreenDCImpl
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxScreenDCImpl : public wxWindowDCImpl
+class wxScreenDCImpl : public wxWindowDCImpl
 {
 public:
     wxScreenDCImpl( wxScreenDC *owner );

@@ -17,7 +17,7 @@
 // wxFontButton
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxFontButton : public wxButton,
+class wxFontButton : public wxButton,
                                       public wxFontPickerWidgetBase
 {
 public:

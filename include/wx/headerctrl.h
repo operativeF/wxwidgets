@@ -55,7 +55,7 @@ constexpr char wxHeaderCtrlNameStr[] = "wxHeaderCtrl";
 // wxHeaderCtrlBase defines the interface of a header control
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxHeaderCtrlBase : public wxControl
+class wxHeaderCtrlBase : public wxControl
 {
 public:
     /*
@@ -274,7 +274,7 @@ constexpr unsigned int wxID_COLUMNS_BASE = 1;
 // wxHeaderCtrlSimple: concrete header control which can be used standalone
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxHeaderCtrlSimple : public wxHeaderCtrl
+class wxHeaderCtrlSimple : public wxHeaderCtrl
 {
 public:
     // control creation
@@ -403,7 +403,7 @@ private:
 // wxHeaderCtrl events
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxHeaderCtrlEvent : public wxNotifyEvent
+class wxHeaderCtrlEvent : public wxNotifyEvent
 {
 public:
     wxHeaderCtrlEvent(wxEventType commandType = wxEVT_NULL, int winid = 0)

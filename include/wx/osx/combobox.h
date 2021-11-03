@@ -24,7 +24,7 @@ class wxComboBoxChoice;
 class wxComboWidgetImpl;
 
 // Combobox item
-class WXDLLIMPEXP_CORE wxComboBox :
+class wxComboBox :
     public wxWindowWithItems<
                 wxControl,
                 wxComboBoxBase>

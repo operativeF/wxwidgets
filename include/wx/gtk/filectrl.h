@@ -26,7 +26,7 @@ typedef struct _GtkFileChooser GtkFileChooser;
 
 // A wx wrapper for any Gtk object implementing the interface GtkFileChooser
 
-class WXDLLIMPEXP_CORE wxGtkFileChooser
+class wxGtkFileChooser
 {
 public:
     wxGtkFileChooser() { m_ignoreNextFilterEvent = false; }
@@ -65,7 +65,7 @@ private:
 
 #if wxUSE_FILECTRL
 
-class WXDLLIMPEXP_CORE wxGtkFileCtrl: public wxControl,
+class wxGtkFileCtrl: public wxControl,
             public wxFileCtrlBase
 {
 public:

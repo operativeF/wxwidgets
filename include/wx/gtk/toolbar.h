@@ -15,7 +15,7 @@ typedef struct _GtkTooltips GtkTooltips;
 // wxToolBar
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxToolBar : public wxToolBarBase
+class wxToolBar : public wxToolBarBase
 {
 public:
     // construction/destruction

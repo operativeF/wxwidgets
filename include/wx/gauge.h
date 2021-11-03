@@ -50,7 +50,7 @@ constexpr char wxGaugeNameStr[] = "gauge";
 // wxGauge: a progress bar
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxGaugeBase : public wxControl
+class wxGaugeBase : public wxControl
 {
 public:
     [[maybe_unused]] bool Create(wxWindow *parent,

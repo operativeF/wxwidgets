@@ -14,7 +14,7 @@
 // wxTextEntry wraps XmTextXXX() methods suitable for single-line controls
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxTextEntry : public wxTextEntryBase
+class wxTextEntry : public wxTextEntryBase
 {
 public:
     wxTextEntry() { }

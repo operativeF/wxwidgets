@@ -11,7 +11,7 @@
 #define _WX_OSX_ANYBUTTON_H_
 
 // Any button
-class WXDLLIMPEXP_CORE wxAnyButton : public wxAnyButtonBase
+class wxAnyButton : public wxAnyButtonBase
 {
 public:
     wxAnyButton() {}

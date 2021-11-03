@@ -8,7 +8,7 @@
 #ifndef _WX_QT_MDI_H_
 #define _WX_QT_MDI_H_
 
-class WXDLLIMPEXP_CORE wxMDIParentFrame : public wxMDIParentFrameBase
+class wxMDIParentFrame : public wxMDIParentFrameBase
 {
 public:
     wxMDIParentFrame();
@@ -44,7 +44,7 @@ private:
 
 
 
-class WXDLLIMPEXP_CORE wxMDIChildFrame : public wxMDIChildFrameBase
+class wxMDIChildFrame : public wxMDIChildFrameBase
 {
 public:
     wxMDIChildFrame();
@@ -71,7 +71,7 @@ public:
 
 
 
-class WXDLLIMPEXP_CORE wxMDIClientWindow : public wxMDIClientWindowBase
+class wxMDIClientWindow : public wxMDIClientWindowBase
 {
 public:
     wxMDIClientWindow();

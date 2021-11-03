@@ -22,7 +22,7 @@
 
 using namespace msw::utils;
 
-class WXDLLEXPORT wxPaletteRefData: public wxGDIRefData
+class wxPaletteRefData: public wxGDIRefData
 {
 public:
     wxPaletteRefData() = default;

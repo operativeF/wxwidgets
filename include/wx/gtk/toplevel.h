@@ -15,7 +15,7 @@ class WXDLLIMPEXP_FWD_CORE wxGUIEventLoop;
 // wxTopLevelWindowGTK
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxTopLevelWindowGTK : public wxTopLevelWindowBase
+class wxTopLevelWindowGTK : public wxTopLevelWindowBase
 {
     typedef wxTopLevelWindowBase base_type;
 public:

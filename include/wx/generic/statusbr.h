@@ -21,7 +21,7 @@
 // wxStatusBarGeneric
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxStatusBarGeneric : public wxStatusBarBase
+class wxStatusBarGeneric : public wxStatusBarBase
 {
 public:
     wxStatusBarGeneric() { Init(); }

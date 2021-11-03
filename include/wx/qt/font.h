@@ -9,7 +9,7 @@
 #define _WX_QT_FONT_H_
 
 class QFont;
-class WXDLLIMPEXP_CORE wxFont : public wxFontBase
+class wxFont : public wxFontBase
 {
 public:
     wxFont();

@@ -530,7 +530,7 @@ protected:
 
 #if wxUSE_GUI
 
-class WXDLLIMPEXP_CORE wxAppBase : public wxAppConsole
+class wxAppBase : public wxAppConsole
 {
 public:
     wxAppBase();
@@ -757,7 +757,7 @@ WXDLLIMPEXP_BASE void wxExit();
 #define wx_YIELD_DECLARED
 
 // Yield to other apps/messages
-WXDLLIMPEXP_CORE bool wxYield();
+bool wxYield();
 
 #endif // wx_YIELD_DECLARED
 

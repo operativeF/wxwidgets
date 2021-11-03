@@ -18,7 +18,7 @@ class WXDLLIMPEXP_FWD_CORE wxWindow;
 // wxWindowDCImpl
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxWindowDCImpl : public wxDFBDCImpl
+class wxWindowDCImpl : public wxDFBDCImpl
 {
 public:
     wxWindowDCImpl(wxDC *owner) : wxDFBDCImpl(owner), m_shouldFlip(false) { }
@@ -46,7 +46,7 @@ private:
 // wxClientDCImpl
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxClientDCImpl : public wxWindowDCImpl
+class wxClientDCImpl : public wxWindowDCImpl
 {
 public:
     wxClientDCImpl(wxDC *owner) : wxWindowDCImpl(owner) { }
@@ -62,7 +62,7 @@ public:
 // wxPaintDCImpl
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxPaintDCImpl : public wxClientDCImpl
+class wxPaintDCImpl : public wxClientDCImpl
 {
 public:
     wxPaintDCImpl(wxDC *owner) : wxClientDCImpl(owner) { }

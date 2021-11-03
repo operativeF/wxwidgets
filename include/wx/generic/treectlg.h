@@ -36,7 +36,7 @@ class WXDLLIMPEXP_FWD_CORE wxTextCtrl;
 // wxGenericTreeCtrl - the tree control
 // -----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxGenericTreeCtrl : public wxTreeCtrlBase,
+class wxGenericTreeCtrl : public wxTreeCtrlBase,
                                       public wxScrollHelper
 {
 public:
@@ -396,7 +396,7 @@ private:
  * the run-time information.
  */
 
-class WXDLLIMPEXP_CORE wxTreeCtrl: public wxGenericTreeCtrl
+class wxTreeCtrl: public wxGenericTreeCtrl
 {
     wxDECLARE_DYNAMIC_CLASS(wxTreeCtrl);
 

@@ -43,7 +43,7 @@ enum wxNumValidatorStyle
 // Base class for all numeric validators.
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxNumValidatorBase : public wxValidator
+class wxNumValidatorBase : public wxValidator
 {
 public:
     // Change the validator style. Usually it's specified during construction.
@@ -280,7 +280,7 @@ private:
 // type-dependent code of wxIntegerValidator<> and always works with values of
 // type LongestValueType. It is not meant to be used directly, please use
 // wxIntegerValidator<> only instead.
-class WXDLLIMPEXP_CORE wxIntegerValidatorBase : public wxNumValidatorBase
+class wxIntegerValidatorBase : public wxNumValidatorBase
 {
 protected:
     // Define the type we use here, it should be the maximal-sized integer type
@@ -375,7 +375,7 @@ wxMakeIntegerValidator(T *value, unsigned int style = wxNUM_VAL_DEFAULT)
 
 // Similar to wxIntegerValidatorBase, this class is not meant to be used
 // directly, only wxFloatingPointValidator<> should be used in the user code.
-class WXDLLIMPEXP_CORE wxFloatingPointValidatorBase : public wxNumValidatorBase
+class wxFloatingPointValidatorBase : public wxNumValidatorBase
 {
 public:
     // Set precision i.e. the number of digits shown (and accepted on input)

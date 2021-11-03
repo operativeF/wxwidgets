@@ -51,7 +51,7 @@ static inline bool IsCGImageAlphaFlag(CGImageAlphaInfo alphaInfo)
     return !(alphaInfo == kCGImageAlphaNone || alphaInfo == kCGImageAlphaNoneSkipFirst || alphaInfo == kCGImageAlphaNoneSkipLast);
 }
 
-class WXDLLEXPORT wxBitmapRefData: public wxGDIRefData
+class wxBitmapRefData: public wxGDIRefData
 {
     friend class WXDLLIMPEXP_FWD_CORE wxIcon;
     friend class WXDLLIMPEXP_FWD_CORE wxCursor;
@@ -1666,7 +1666,7 @@ void wxMask::FreeData()
 // Standard Handlers
 // ----------------------------------------------------------------------------
 
-class WXDLLEXPORT wxBundleResourceHandler: public wxBitmapHandler
+class wxBundleResourceHandler: public wxBitmapHandler
 {
     wxDECLARE_ABSTRACT_CLASS(wxBundleResourceHandler);
 
@@ -1684,7 +1684,7 @@ public:
 
 wxIMPLEMENT_ABSTRACT_CLASS(wxBundleResourceHandler, wxBitmapHandler);
 
-class WXDLLEXPORT wxPNGResourceHandler: public wxBundleResourceHandler
+class wxPNGResourceHandler: public wxBundleResourceHandler
 {
     wxDECLARE_DYNAMIC_CLASS(wxPNGResourceHandler);
 
@@ -1699,7 +1699,7 @@ public:
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxPNGResourceHandler, wxBundleResourceHandler);
 
-class WXDLLEXPORT wxJPEGResourceHandler: public wxBundleResourceHandler
+class wxJPEGResourceHandler: public wxBundleResourceHandler
 {
     wxDECLARE_DYNAMIC_CLASS(wxJPEGResourceHandler);
 
@@ -1716,7 +1716,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxJPEGResourceHandler, wxBundleResourceHandler);
 
 #if wxOSX_USE_COCOA
 
-class WXDLLEXPORT wxICNSHandler: public wxBitmapHandler
+class wxICNSHandler: public wxBitmapHandler
 {
     wxDECLARE_DYNAMIC_CLASS(wxICNSHandler);
 
@@ -1754,7 +1754,7 @@ public:
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxICNSHandler, wxBitmapHandler);
 
-class WXDLLEXPORT wxICNSResourceHandler: public wxBundleResourceHandler
+class wxICNSResourceHandler: public wxBundleResourceHandler
 {
     wxDECLARE_DYNAMIC_CLASS(wxICNSResourceHandler);
 

@@ -14,7 +14,7 @@
 // generic wxMask implementation
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxMask : public wxMaskBase
+class wxMask : public wxMaskBase
 {
 public:
     wxMask() = default;

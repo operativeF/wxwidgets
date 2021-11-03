@@ -10,7 +10,7 @@
 
 #include "wx/qt/dcclient.h"
 
-class WXDLLIMPEXP_CORE wxMemoryDCImpl : public wxQtDCImpl
+class wxMemoryDCImpl : public wxQtDCImpl
 {
 public:
     wxMemoryDCImpl( wxMemoryDC *owner );

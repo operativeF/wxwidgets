@@ -38,7 +38,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxIconBundle, wxGDIObject);
 // wxIconBundleRefData
 // ----------------------------------------------------------------------------
 
-class WXDLLEXPORT wxIconBundleRefData : public wxGDIRefData
+class wxIconBundleRefData : public wxGDIRefData
 {
 public:
     wxIconBundleRefData() = default;

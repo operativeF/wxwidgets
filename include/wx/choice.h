@@ -31,7 +31,7 @@ constexpr char wxChoiceNameStr[] = "choice";
 // wxChoice allows to select one of a non-modifiable list of strings
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxChoiceBase : public wxControlWithItems
+class wxChoiceBase : public wxControlWithItems
 {
 public:
 	wxChoiceBase& operator=(wxChoiceBase&&) = delete;

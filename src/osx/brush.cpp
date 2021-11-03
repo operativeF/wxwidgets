@@ -20,7 +20,7 @@
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxBrush, wxGDIObject);
 
-class WXDLLEXPORT wxBrushRefData: public wxGDIRefData
+class wxBrushRefData: public wxGDIRefData
 {
 public:
     wxBrushRefData(const wxColour& colour = wxNullColour, wxBrushStyle style = wxBrushStyle::Solid);

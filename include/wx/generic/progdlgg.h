@@ -26,7 +26,7 @@ class WXDLLIMPEXP_FWD_CORE wxWindowDisabler;
     Progress dialog which shows a moving progress bar.
     Taken from the Mahogany project.
 */
-class WXDLLIMPEXP_CORE wxGenericProgressDialog : public wxDialog
+class wxGenericProgressDialog : public wxDialog
 {
 public:
     wxGenericProgressDialog();

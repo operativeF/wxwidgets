@@ -188,7 +188,7 @@ using wxListItemAttr = wxItemAttr;
 // wxListItem: the item or column info, used to exchange data with wxListCtrl
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxListItem
+class wxListItem
 {
 public:
     wxListItem() = default;
@@ -346,7 +346,7 @@ protected:
 // the real control class but is just used for implementation convenience. We
 // should define the public class functions as pure virtual here in the future
 // however.
-class WXDLLIMPEXP_CORE wxListCtrlBase : public wxSystemThemedControl<wxControl>
+class wxListCtrlBase : public wxSystemThemedControl<wxControl>
 {
 public:
     // Image list methods.
@@ -490,7 +490,7 @@ private:
 // wxListEvent - the event class for the wxListCtrl notifications
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxListEvent : public wxNotifyEvent
+class wxListEvent : public wxNotifyEvent
 {
 public:
     wxListEvent(wxEventType commandType = wxEVT_NULL, int winid = 0)

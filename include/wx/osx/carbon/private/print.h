@@ -17,7 +17,7 @@
 // for PrintingManager
 #include "ApplicationServices/ApplicationServices.h"
 
-class WXDLLIMPEXP_CORE wxOSXPrintData : public wxPrintNativeDataBase
+class wxOSXPrintData : public wxPrintNativeDataBase
 {
 public:
                             wxOSXPrintData();
@@ -58,10 +58,10 @@ private:
     wxDECLARE_DYNAMIC_CLASS(wxOSXPrintData);
 } ;
 
-WXDLLIMPEXP_CORE wxPrintNativeDataBase* wxOSXCreatePrintData();
+wxPrintNativeDataBase* wxOSXCreatePrintData();
 
 #if wxOSX_USE_COCOA
-class WXDLLIMPEXP_CORE wxOSXCocoaPrintData : public wxOSXPrintData
+class wxOSXCocoaPrintData : public wxOSXPrintData
 {
 public:
                             wxOSXCocoaPrintData();

@@ -25,7 +25,7 @@ class WXDLLIMPEXP_FWD_CORE wxButtonToolBarTool;
 // wxButtonToolBar
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxButtonToolBar : public wxToolBarBase
+class wxButtonToolBar : public wxToolBarBase
 {
 public:
     // construction/destruction

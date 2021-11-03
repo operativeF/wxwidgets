@@ -10,7 +10,7 @@
 
 class QTabWidget;
 
-class WXDLLIMPEXP_CORE wxNotebook : public wxNotebookBase
+class wxNotebook : public wxNotebookBase
 {
 public:
     wxNotebook();

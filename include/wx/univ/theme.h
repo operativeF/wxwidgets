@@ -26,7 +26,7 @@ class WXDLLIMPEXP_FWD_CORE wxInputHandler;
 class WXDLLIMPEXP_FWD_CORE wxRenderer;
 struct WXDLLIMPEXP_FWD_CORE wxThemeInfo;
 
-class WXDLLIMPEXP_CORE wxTheme
+class wxTheme
 {
 public:
     // static methods
@@ -82,7 +82,7 @@ private:
 // will be left to the original theme
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxDelegateTheme : public wxTheme
+class wxDelegateTheme : public wxTheme
 {
 public:
     wxDelegateTheme(const wxString& theme);
@@ -107,7 +107,7 @@ protected:
 // dynamic theme creation helpers
 // ----------------------------------------------------------------------------
 
-struct WXDLLIMPEXP_CORE wxThemeInfo
+struct wxThemeInfo
 {
     typedef wxTheme *(*Constructor)();
 

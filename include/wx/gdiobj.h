@@ -19,7 +19,7 @@
 // the same native GDI object
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxGDIRefData : public wxObjectRefData
+class wxGDIRefData : public wxObjectRefData
 {
 public:
     wxGDIRefData& operator=(wxGDIRefData&&) = delete;
@@ -33,7 +33,7 @@ public:
 // wxGDIObject: base class for bitmaps, pens, brushes, ...
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxGDIObject : public wxObject
+class wxGDIObject : public wxObject
 {
 public:
     // checks if the object can be used

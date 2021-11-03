@@ -12,7 +12,7 @@
 #ifndef _WX_MAC_CHECKLST_H_
 #define _WX_MAC_CHECKLST_H_
 
-class WXDLLIMPEXP_CORE wxCheckListBox : public wxCheckListBoxBase
+class wxCheckListBox : public wxCheckListBoxBase
 {
 public:
     // ctors

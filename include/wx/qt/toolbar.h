@@ -12,7 +12,7 @@
 class QActionGroup;
 class QToolBar;
 
-class WXDLLIMPEXP_CORE wxToolBar : public wxToolBarBase
+class wxToolBar : public wxToolBarBase
 {
 public:
 

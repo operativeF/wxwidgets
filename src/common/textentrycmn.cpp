@@ -25,7 +25,7 @@
 // wxTextEntryHintData
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxTextEntryHintData : public wxEvtHandler
+class wxTextEntryHintData : public wxEvtHandler
 {
 public:
     wxTextEntryHintData(wxTextEntryBase *entry, wxWindow *win)

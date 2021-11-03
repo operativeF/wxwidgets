@@ -103,7 +103,7 @@ protected:
 // the wxSpinButton event
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxSpinEvent : public wxNotifyEvent
+class wxSpinEvent : public wxNotifyEvent
 {
 public:
     wxSpinEvent(wxEventType commandType = wxEVT_NULL, int winid = 0)

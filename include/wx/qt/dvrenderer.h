@@ -12,7 +12,7 @@
 // wxDataViewRenderer
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxDataViewRenderer: public wxDataViewRendererBase
+class wxDataViewRenderer: public wxDataViewRendererBase
 {
 public:
     wxDataViewRenderer( const wxString &varianttype,

@@ -10,7 +10,7 @@
 #ifndef _WX_DFB_REGION_H_
 #define _WX_DFB_REGION_H_
 
-class WXDLLIMPEXP_CORE wxRegion : public wxRegionBase
+class wxRegion : public wxRegionBase
 {
 public:
     wxRegion();
@@ -63,7 +63,7 @@ protected:
 };
 
 
-class WXDLLIMPEXP_CORE wxRegionIterator : public wxObject
+class wxRegionIterator : public wxObject
 {
 public:
     wxRegionIterator() {}

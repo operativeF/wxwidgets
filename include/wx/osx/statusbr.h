@@ -12,7 +12,7 @@
 #ifndef _WX_STATBAR_H_
 #define _WX_STATBAR_H_
 
-class WXDLLIMPEXP_CORE wxStatusBarMac : public wxStatusBarGeneric
+class wxStatusBarMac : public wxStatusBarGeneric
 {
 public:
     wxStatusBarMac();

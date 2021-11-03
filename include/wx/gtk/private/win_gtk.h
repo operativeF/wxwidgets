@@ -12,7 +12,7 @@
 #define WX_PIZZA(obj) G_TYPE_CHECK_INSTANCE_CAST(obj, wxPizza::type(), wxPizza)
 #define WX_IS_PIZZA(obj) G_TYPE_CHECK_INSTANCE_TYPE(obj, wxPizza::type())
 
-struct WXDLLIMPEXP_CORE wxPizza
+struct wxPizza
 {
     // borders styles which can be used with wxPizza
     enum { BORDER_STYLES =

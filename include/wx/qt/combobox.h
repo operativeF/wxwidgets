@@ -11,7 +11,7 @@
 #include "wx/choice.h"
 class QComboBox;
 
-class WXDLLIMPEXP_CORE wxComboBox : public wxChoice, public wxTextEntry
+class wxComboBox : public wxChoice, public wxTextEntry
 {
 public:
     wxComboBox();

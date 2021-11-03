@@ -10,7 +10,7 @@
 
 class QCheckBox;
 
-class WXDLLIMPEXP_CORE wxCheckBox : public wxCheckBoxBase
+class wxCheckBox : public wxCheckBoxBase
 {
 public:
     wxCheckBox();

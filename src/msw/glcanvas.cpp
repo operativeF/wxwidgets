@@ -19,7 +19,7 @@
 #include "wx/glcanvas.h"
 
 // from src/msw/window.cpp
-LRESULT WXDLLEXPORT APIENTRY
+LRESULT APIENTRY
 wxWndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 
 #ifdef GL_EXT_vertex_array

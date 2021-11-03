@@ -12,7 +12,7 @@
 #define _WX_GAUGE_H_
 
 // Group box
-class WXDLLIMPEXP_CORE wxGauge : public wxGaugeBase
+class wxGauge : public wxGaugeBase
 {
     wxDECLARE_DYNAMIC_CLASS(wxGauge);
 

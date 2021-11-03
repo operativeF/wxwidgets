@@ -17,7 +17,7 @@ typedef struct _GdkRGBA GdkRGBA;
 // wxColour
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxColour : public wxColourBase
+class wxColour : public wxColourBase
 {
 public:
     // constructors

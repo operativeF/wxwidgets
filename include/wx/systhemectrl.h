@@ -18,7 +18,7 @@
 
 class WXDLLIMPEXP_FWD_CORE wxWindow;
 
-class WXDLLIMPEXP_CORE wxSystemThemedControlBase
+class wxSystemThemedControlBase
 {
 public:
     wxSystemThemedControlBase()

@@ -19,7 +19,7 @@ class WXDLLIMPEXP_FWD_CORE wxWindow;
 // wxWindowDCImpl
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxWindowDCImpl : public wxMotifDCImpl
+class wxWindowDCImpl : public wxMotifDCImpl
 {
 public:
     wxWindowDCImpl(wxDC *owner);
@@ -157,7 +157,7 @@ protected:
     wxDECLARE_DYNAMIC_CLASS(wxWindowDCImpl);
 };
 
-class WXDLLIMPEXP_CORE wxPaintDCImpl: public wxWindowDCImpl
+class wxPaintDCImpl: public wxWindowDCImpl
 {
 public:
     wxPaintDCImpl(wxDC *owner) : wxWindowDCImpl(owner) { }
@@ -168,7 +168,7 @@ public:
     wxDECLARE_DYNAMIC_CLASS(wxPaintDCImpl);
 };
 
-class WXDLLIMPEXP_CORE wxClientDCImpl: public wxWindowDCImpl
+class wxClientDCImpl: public wxWindowDCImpl
 {
 public:
     wxClientDCImpl(wxDC *owner) : wxWindowDCImpl(owner) { }

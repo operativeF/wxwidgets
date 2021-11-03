@@ -14,7 +14,7 @@
 #include "wx/object.h"
 
 // Colour
-class WXDLLIMPEXP_CORE wxColour: public wxColourBase
+class wxColour: public wxColourBase
 {
 public:
     DEFINE_STD_WXCOLOUR_CONSTRUCTORS

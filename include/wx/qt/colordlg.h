@@ -12,7 +12,7 @@
 
 class QColorDialog;
 
-class WXDLLIMPEXP_CORE wxColourDialog : public wxDialog
+class wxColourDialog : public wxDialog
 {
 public:
     wxColourDialog() { }

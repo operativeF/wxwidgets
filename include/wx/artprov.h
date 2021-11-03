@@ -120,7 +120,7 @@ using wxArtID = std::string;
 // wxArtProvider class
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxArtProvider
+class wxArtProvider
 {
 public:
     // Dtor removes the provider from providers stack if it's still on it

@@ -37,7 +37,7 @@ class WXDLLIMPEXP_FWD_CORE wxImageList;
 // wxTreeCtrlBase
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxTreeCtrlBase : public wxSystemThemedControl<wxControl>
+class wxTreeCtrlBase : public wxSystemThemedControl<wxControl>
 {
 public:
     wxTreeCtrlBase();

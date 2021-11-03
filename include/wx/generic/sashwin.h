@@ -37,7 +37,7 @@ enum wxSashEdgePosition {
  * wxSashEdge represents one of the four edges of a window.
  */
 
-struct WXDLLIMPEXP_CORE wxSashEdge
+struct wxSashEdge
 {
     bool    m_show{false};     // Is the sash showing?
     int     m_margin{0};   // The margin size
@@ -61,7 +61,7 @@ struct WXDLLIMPEXP_CORE wxSashEdge
  * of wxSashWindow.
  */
 
-class WXDLLIMPEXP_CORE wxSashWindow: public wxWindow
+class wxSashWindow: public wxWindow
 {
 public:
     // Default constructor
@@ -206,7 +206,7 @@ enum class wxSashDragStatus
     OutOfRange
 };
 
-class WXDLLIMPEXP_CORE wxSashEvent: public wxCommandEvent
+class wxSashEvent: public wxCommandEvent
 {
 public:
     wxSashEvent(int id = 0, wxSashEdgePosition edge = wxSASH_NONE)

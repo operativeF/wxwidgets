@@ -66,7 +66,7 @@ public:
                           const wxPalette *palette = nullptr) const override;
 };
 
-class WXDLLEXPORT wxBMPResourceHandler: public wxBitmapHandler
+class wxBMPResourceHandler: public wxBitmapHandler
 {
 public:
     wxBMPResourceHandler() : wxBitmapHandler("Windows bitmap resource",
@@ -83,7 +83,7 @@ private:
     wxDECLARE_DYNAMIC_CLASS(wxBMPResourceHandler);
 };
 
-class WXDLLEXPORT wxIconHandler : public wxGDIImageHandler
+class wxIconHandler : public wxGDIImageHandler
 {
 public:
     wxIconHandler(const std::string& name, const std::string& ext, wxBitmapType type)
@@ -125,7 +125,7 @@ protected:
                           wxSize desiredSz = {-1, -1}) = 0;
 };
 
-class WXDLLEXPORT wxICOFileHandler : public wxIconHandler
+class wxICOFileHandler : public wxIconHandler
 {
 public:
     wxICOFileHandler() : wxIconHandler("ICO icon file",
@@ -140,7 +140,7 @@ protected:
                           wxSize desiredSz = {-1, -1}) override;
 };
 
-class WXDLLEXPORT wxICOResourceHandler: public wxIconHandler
+class wxICOResourceHandler: public wxIconHandler
 {
 public:
     wxICOResourceHandler() : wxIconHandler("ICO resource",
@@ -157,7 +157,7 @@ protected:
 
 #if wxUSE_PNG_RESOURCE_HANDLER
 
-class WXDLLEXPORT wxPNGResourceHandler : public wxBitmapHandler
+class wxPNGResourceHandler : public wxBitmapHandler
 {
 public:
     wxPNGResourceHandler() : wxBitmapHandler("Windows PNG resource",

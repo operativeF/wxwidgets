@@ -23,7 +23,7 @@ class wxTimerDesc;
 
 using namespace std::chrono_literals;
 
-class WXDLLIMPEXP_CORE wxGenericTimerImpl : public wxTimerImpl
+class wxGenericTimerImpl : public wxTimerImpl
 {
 public:
     wxGenericTimerImpl(wxTimer* timer) : wxTimerImpl(timer) { Init(); }

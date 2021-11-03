@@ -17,7 +17,7 @@
 // type is an 'or' (|) of wxOK, wxCANCEL, wxYES_NO
 // Returns wxYES/NO/OK/CANCEL
 
-class WXDLLIMPEXP_CORE wxMessageDialog: public wxDialog, public wxMessageDialogBase
+class wxMessageDialog: public wxDialog, public wxMessageDialogBase
 {
 public:
     wxMessageDialog(wxWindow *parent, const wxString& message,

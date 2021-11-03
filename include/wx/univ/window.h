@@ -49,7 +49,7 @@ class WXDLLIMPEXP_FWD_CORE wxRenderer;
 #define wxWindowNative wxWindowMac
 #endif
 
-class WXDLLIMPEXP_CORE wxWindow : public wxWindowNative
+class wxWindow : public wxWindowNative
 {
 public:
     // ctors and create functions

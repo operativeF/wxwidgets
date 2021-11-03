@@ -27,7 +27,7 @@
 // forward decl for wxListWidgetImpl implementation type.
 class WXDLLIMPEXP_FWD_CORE wxTextWidgetImpl;
 
-class WXDLLIMPEXP_CORE wxTextEntry: public wxTextEntryBase
+class wxTextEntry: public wxTextEntryBase
 {
 
 public:

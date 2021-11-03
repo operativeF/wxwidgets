@@ -30,7 +30,7 @@
 
 using wxDocMDIParentFrameBase = wxDocParentFrameAny<wxMDIParentFrame>;
 
-class WXDLLIMPEXP_CORE wxDocMDIParentFrame : public wxDocMDIParentFrameBase
+class wxDocMDIParentFrame : public wxDocMDIParentFrameBase
 {
 public:
     wxDocMDIParentFrame() = default;
@@ -60,7 +60,7 @@ private:
 
 using wxDocMDIChildFrameBase = wxDocChildFrameAny<wxMDIChildFrame, wxMDIParentFrame>;
 
-class WXDLLIMPEXP_CORE wxDocMDIChildFrame : public wxDocMDIChildFrameBase
+class wxDocMDIChildFrame : public wxDocMDIChildFrameBase
 {
 public:
     wxDocMDIChildFrame() = default;

@@ -34,7 +34,7 @@ extern "C" {
     typedef GtkWidget* (*wxGtkWidgetNewFromAdj_t)(GtkAdjustment*);
 }
 
-class WXDLLIMPEXP_CORE wxControl : public wxControlBase
+class wxControl : public wxControlBase
 {
 public:
     wxControl();

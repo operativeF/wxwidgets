@@ -14,12 +14,12 @@
 // http://qt.nokia.com/products/appdev/add-on-products/catalog/4/Widgets/qtcolorpicker/
 // How to integrate into wxWidgets:
 //
-// class WXDLLIMPEXP_CORE wxColourPickerWidget : public wxButton, public wxColourPickerWidgetBase
+// class wxColourPickerWidget : public wxButton, public wxColourPickerWidgetBase
 
 // TODO: For now we reuse the existing wxGenericColourButton but this should be
 // changed to use the above mentioned color picker.
 
-class WXDLLIMPEXP_CORE wxColourPickerWidget : public wxGenericColourButton
+class wxColourPickerWidget : public wxGenericColourButton
 {
 public:
     wxColourPickerWidget();

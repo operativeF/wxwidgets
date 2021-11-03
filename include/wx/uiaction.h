@@ -21,7 +21,7 @@
 #include <string>
 #include <string_view>
 
-class WXDLLIMPEXP_CORE wxUIActionSimulator
+class wxUIActionSimulator
 {
 public:
     wxUIActionSimulator();

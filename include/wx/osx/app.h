@@ -24,14 +24,14 @@ class WXDLLIMPEXP_FWD_BASE wxLog;
 class WXDLLIMPEXP_FWD_CORE wxMacAutoreleasePool;
 
 // Force an exit from main loop
-void WXDLLIMPEXP_CORE wxExit();
+void wxExit();
 
 // Yield to other apps/messages
-bool WXDLLIMPEXP_CORE wxYield();
+bool wxYield();
 
 // Represents the application. Derive OnInit and declare
 // a new App object to start application
-class WXDLLIMPEXP_CORE wxApp: public wxAppBase
+class wxApp: public wxAppBase
 {
     wxDECLARE_DYNAMIC_CLASS(wxApp);
 

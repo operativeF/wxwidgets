@@ -27,7 +27,7 @@ constexpr wxChar wxACTION_CHECKBOX_TOGGLE[]  = wxT("toggle");  // toggle the che
 // wxCheckBox
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxCheckBox : public wxCheckBoxBase
+class wxCheckBox : public wxCheckBoxBase
 {
 public:
     // checkbox constants

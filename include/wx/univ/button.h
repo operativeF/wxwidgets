@@ -26,7 +26,7 @@ constexpr wxChar wxACTION_BUTTON_CLICK[]   = wxT("click");     // generate butto
 // wxButton: a push button
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxButton : public wxButtonBase
+class wxButton : public wxButtonBase
 {
 public:
     wxButton() { Init(); }

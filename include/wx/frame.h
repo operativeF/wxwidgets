@@ -57,7 +57,7 @@ constexpr unsigned int wxFRAME_FLOAT_ON_PARENT = 0x0008;  // Always above its pa
 // CreateXXXBar() is called.
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxFrameBase : public wxTopLevelWindow
+class wxFrameBase : public wxTopLevelWindow
 {
 public:
     ~wxFrameBase();

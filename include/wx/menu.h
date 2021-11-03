@@ -34,7 +34,7 @@ class WXDLLIMPEXP_FWD_CORE wxMenuItem;
 WX_DECLARE_EXPORTED_LIST(wxMenu, wxMenuList);
 WX_DECLARE_EXPORTED_LIST(wxMenuItem, wxMenuItemList);
 
-class WXDLLIMPEXP_CORE wxMenuBase : public wxEvtHandler
+class wxMenuBase : public wxEvtHandler
 {
 public:
     // create a menu
@@ -405,7 +405,7 @@ protected:
 // XTI accessor
 // ----------------------------------------------------------------------------
 
-class WXDLLEXPORT wxMenuInfoHelper : public wxObject
+class wxMenuInfoHelper : public wxObject
 {
 public:
     wxMenuInfoHelper() { m_menu = NULL; }
@@ -438,7 +438,7 @@ WX_DECLARE_EXPORTED_LIST(wxMenuInfoHelper, wxMenuInfoHelperList );
 
 #if wxUSE_MENUBAR
 
-class WXDLLIMPEXP_CORE wxMenuBarBase : public wxWindow
+class wxMenuBarBase : public wxWindow
 {
 public:
     // dtor will delete all menus we own

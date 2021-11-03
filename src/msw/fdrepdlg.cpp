@@ -36,7 +36,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxFindReplaceDialog, wxDialog);
 // wxFindReplaceDialogImpl: the internals of wxFindReplaceDialog
 // ----------------------------------------------------------------------------
 
-class WXDLLEXPORT wxFindReplaceDialogImpl
+class wxFindReplaceDialogImpl
 {
 public:
     wxFindReplaceDialogImpl(wxFindReplaceDialog *dialog, FindReplaceFlags flagsWX);

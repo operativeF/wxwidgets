@@ -11,7 +11,7 @@
 class QMenu;
 class QMenuBar;
 
-class WXDLLIMPEXP_CORE wxMenu : public wxMenuBase
+class wxMenu : public wxMenuBase
 {
 public:
     wxMenu(unsigned int style = 0);
@@ -32,7 +32,7 @@ private:
 
 
 
-class WXDLLIMPEXP_CORE wxMenuBar : public wxMenuBarBase
+class wxMenuBar : public wxMenuBarBase
 {
 public:
     wxMenuBar();

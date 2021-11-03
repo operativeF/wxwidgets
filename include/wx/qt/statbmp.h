@@ -10,7 +10,7 @@
 
 class QLabel;
 
-class WXDLLIMPEXP_CORE wxStaticBitmap : public wxStaticBitmapBase
+class wxStaticBitmap : public wxStaticBitmapBase
 {
 public:
     wxStaticBitmap();

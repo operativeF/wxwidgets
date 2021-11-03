@@ -16,7 +16,7 @@ class WXDLLIMPEXP_FWD_BASE wxArrayString;
 // wxChoice
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxChoice : public wxChoiceBase
+class wxChoice : public wxChoiceBase
 {
 public:
     wxChoice();

@@ -31,7 +31,7 @@ class WXDLLIMPEXP_FWD_CORE wxWindow;
  Note that wxValidator and derived classes use reference counting.
 */
 
-class WXDLLIMPEXP_CORE wxValidator : public wxEvtHandler
+class wxValidator : public wxEvtHandler
 {
 public:
     wxValidator() = default;

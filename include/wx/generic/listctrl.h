@@ -29,7 +29,7 @@ class WXDLLIMPEXP_FWD_CORE wxListMainWindow;
 // wxListCtrl
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxGenericListCtrl: public wxNavigationEnabled<wxListCtrlBase>,
+class wxGenericListCtrl: public wxNavigationEnabled<wxListCtrlBase>,
                                           public wxScrollHelper
 {
     using BaseType = wxNavigationEnabled<wxListCtrlBase>;
@@ -256,7 +256,7 @@ private:
  * the run-time information.
  */
 
-class WXDLLIMPEXP_CORE wxListCtrl: public wxGenericListCtrl
+class wxListCtrl: public wxGenericListCtrl
 {
     wxDECLARE_DYNAMIC_CLASS(wxListCtrl);
 

@@ -28,7 +28,7 @@ constexpr char wxMessageBoxCaptionStr[] = "Message";
 // wxMessageDialogBase: base class defining wxMessageDialog interface
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxMessageDialogBase : public wxDialog
+class wxMessageDialogBase : public wxDialog
 {
 public:
     // helper class for SetXXXLabels() methods: it makes it possible to pass
@@ -307,7 +307,7 @@ private:
 // wxMessageBox: the simplest way to use wxMessageDialog
 // ----------------------------------------------------------------------------
 
-int WXDLLIMPEXP_CORE wxMessageBox(const std::string& message,
+int wxMessageBox(const std::string& message,
                              const std::string& caption = wxMessageBoxCaptionStr,
                              unsigned int style = wxOK | wxCENTRE,
                              wxWindow *parent = nullptr,

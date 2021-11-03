@@ -32,7 +32,7 @@ class WXDLLIMPEXP_FWD_CORE wxTextCtrl;
 //  wxFileData - a class to hold the file info for the wxFileListCtrl
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxFileData
+class wxFileData
 {
 public:
     enum fileType
@@ -127,7 +127,7 @@ protected:
 //  wxFileListCtrl
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxFileListCtrl : public wxListCtrl
+class wxFileListCtrl : public wxListCtrl
 {
 public:
     wxFileListCtrl() = default;
@@ -186,7 +186,7 @@ private:
     wxDECLARE_EVENT_TABLE();
 };
 
-class WXDLLIMPEXP_CORE wxGenericFileCtrl : public wxNavigationEnabled<wxControl>,
+class wxGenericFileCtrl : public wxNavigationEnabled<wxControl>,
                                            public wxFileCtrlBase
 {
 public:

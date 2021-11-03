@@ -215,7 +215,7 @@ wxMSWEntryCommon(HINSTANCE hInstance, int nCmdShow)
     return true;
 }
 
-WXDLLEXPORT bool wxEntryStart(HINSTANCE hInstance,
+bool wxEntryStart(HINSTANCE hInstance,
                               HINSTANCE WXUNUSED(hPrevInstance),
                               wxCmdLineArgType WXUNUSED(pCmdLine),
                               int nCmdShow)
@@ -226,7 +226,7 @@ WXDLLEXPORT bool wxEntryStart(HINSTANCE hInstance,
     return wxEntryStart(wxArgs.argc, wxArgs.argv);
 }
 
-WXDLLEXPORT int wxEntry(HINSTANCE hInstance,
+int wxEntry(HINSTANCE hInstance,
                         HINSTANCE WXUNUSED(hPrevInstance),
                         wxCmdLineArgType WXUNUSED(pCmdLine),
                         int nCmdShow)

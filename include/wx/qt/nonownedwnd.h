@@ -12,7 +12,7 @@
 // wxNonOwnedWindow contains code common to wx{Popup,TopLevel}Window in wxQT.
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxNonOwnedWindow : public wxNonOwnedWindowBase
+class wxNonOwnedWindow : public wxNonOwnedWindowBase
 {
 public:
     wxNonOwnedWindow();

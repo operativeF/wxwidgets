@@ -30,7 +30,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxAcceleratorTable, wxObject);
 
 using msw::utils::unique_accel;
 
-class WXDLLEXPORT wxAcceleratorRefData: public wxObjectRefData
+class wxAcceleratorRefData: public wxObjectRefData
 {
     friend class WXDLLIMPEXP_FWD_CORE wxAcceleratorTable;
 public:

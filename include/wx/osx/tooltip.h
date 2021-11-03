@@ -14,7 +14,7 @@
 #include "wx/string.h"
 #include "wx/event.h"
 
-class WXDLLIMPEXP_CORE wxToolTip : public wxObject
+class wxToolTip : public wxObject
 {
 public:
     wxToolTip(const wxString &tip);

@@ -37,7 +37,7 @@ class WXDLLIMPEXP_FWD_CORE wxDC;
 constexpr char wxBitmapComboBoxNameStr[] = "bitmapComboBox";
 
 
-class WXDLLIMPEXP_CORE wxBitmapComboBoxBase
+class wxBitmapComboBoxBase
 {
 public:
     virtual ~wxBitmapComboBoxBase() = default;

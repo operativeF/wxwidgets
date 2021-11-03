@@ -11,7 +11,7 @@
 #include "wx/control.h"
 #include "wx/button.h"
 
-class WXDLLIMPEXP_CORE wxButton : public wxButtonBase
+class wxButton : public wxButtonBase
 {
 public:
     wxButton();

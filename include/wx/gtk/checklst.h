@@ -14,7 +14,7 @@
 // wxCheckListBox
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxCheckListBox : public wxCheckListBoxBase
+class wxCheckListBox : public wxCheckListBoxBase
 {
 public:
     wxCheckListBox();

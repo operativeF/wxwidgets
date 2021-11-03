@@ -13,7 +13,7 @@
 
 #include "wx/dc.h"
 
-class WXDLLIMPEXP_CORE wxPrinterDC: public wxDC
+class wxPrinterDC: public wxDC
 {
 public:
     wxDECLARE_CLASS(wxPrinterDC);

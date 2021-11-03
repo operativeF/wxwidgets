@@ -12,7 +12,7 @@
 
 #include "wx/dfb/dc.h"
 
-class WXDLLIMPEXP_CORE wxScreenDCImpl : public wxDFBDCImpl
+class wxScreenDCImpl : public wxDFBDCImpl
 {
 public:
     wxScreenDCImpl(wxScreenDC *owner);

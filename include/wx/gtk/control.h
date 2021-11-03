@@ -17,7 +17,7 @@ typedef struct _GtkEntry GtkEntry;
 // wxControl
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxControl : public wxControlBase
+class wxControl : public wxControlBase
 {
     typedef wxControlBase base_type;
 public:

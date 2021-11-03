@@ -11,7 +11,7 @@
 #include "wx/prntbase.h"
 #include "wx/printdlg.h"
 
-class WXDLLIMPEXP_CORE wxQtPrintNativeData: public wxPrintNativeDataBase
+class wxQtPrintNativeData: public wxPrintNativeDataBase
 {
 public:
     wxQtPrintNativeData();
@@ -23,7 +23,7 @@ public:
 
 };
 
-class WXDLLIMPEXP_CORE wxQtPrintDialog : public wxPrintDialogBase
+class wxQtPrintDialog : public wxPrintDialogBase
 {
 public:
     wxQtPrintDialog(wxWindow *parent, wxPrintDialogData *data);
@@ -40,7 +40,7 @@ private:
 
 
 
-class WXDLLIMPEXP_CORE wxQtPageSetupDialog: public wxPageSetupDialogBase
+class wxQtPageSetupDialog: public wxPageSetupDialogBase
 {
 public:
     wxQtPageSetupDialog();

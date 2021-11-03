@@ -20,7 +20,7 @@ wxDFB_DECLARE_INTERFACE(IDirectFBSurface);
 // wxBitmap
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxBitmap : public wxBitmapBase
+class wxBitmap : public wxBitmapBase
 {
 public:
     wxBitmap() {}

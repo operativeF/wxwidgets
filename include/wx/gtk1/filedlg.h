@@ -15,7 +15,7 @@
 // wxFileDialog
 //-------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxFileDialog: public wxGenericFileDialog
+class wxFileDialog: public wxGenericFileDialog
 {
 public:
     wxFileDialog() { }

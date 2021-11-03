@@ -14,7 +14,7 @@
 // wxTopLevelWindowDFB
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxTopLevelWindowDFB : public wxTopLevelWindowBase
+class wxTopLevelWindowDFB : public wxTopLevelWindowBase
 {
 public:
     // construction

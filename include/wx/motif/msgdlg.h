@@ -16,7 +16,7 @@
 // Message box dialog
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxMessageDialog : public wxMessageDialogBase
+class wxMessageDialog : public wxMessageDialogBase
 {
 public:
     wxMessageDialog(wxWindow *parent,

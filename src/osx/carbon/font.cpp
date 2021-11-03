@@ -36,7 +36,7 @@
 
 #define TRACE_CTFONT "ctfont"
 
-class WXDLLEXPORT wxFontRefData : public wxGDIRefData
+class wxFontRefData : public wxGDIRefData
 {
 public:
     wxFontRefData(const wxFontInfo& info = wxFontInfo());

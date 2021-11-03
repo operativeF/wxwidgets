@@ -34,7 +34,7 @@ constexpr wxChar wxACTION_COMBOBOX_DISMISS[]   = wxT("dismiss");
 
 #endif
 
-class WXDLLIMPEXP_CORE wxGenericComboCtrl
+class wxGenericComboCtrl
     : public wxNavigationEnabled<wxComboCtrlBase>
 {
 public:
@@ -117,7 +117,7 @@ private:
 // If native wxComboCtrl was not defined, then prepare a simple
 // front-end so that wxRTTI works as expected.
 
-class WXDLLIMPEXP_CORE wxComboCtrl : public wxGenericComboCtrl
+class wxComboCtrl : public wxGenericComboCtrl
 {
 public:
     wxComboCtrl() : wxGenericComboCtrl() {}

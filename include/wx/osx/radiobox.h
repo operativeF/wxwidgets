@@ -18,7 +18,7 @@ class WXDLLIMPEXP_FWD_CORE wxBitmap ;
 
 class WXDLLIMPEXP_FWD_CORE wxRadioButton ;
 
-class WXDLLIMPEXP_CORE wxRadioBox: public wxNavigationEnabled<wxControl>, public wxRadioBoxBase
+class wxRadioBox: public wxNavigationEnabled<wxControl>, public wxRadioBoxBase
 {
     wxDECLARE_DYNAMIC_CLASS(wxRadioBox);
 public:

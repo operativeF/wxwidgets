@@ -36,7 +36,7 @@
 //
 // Notice that this class is almost identical to wxColourPickerEvent but it
 // doesn't really sense to reuse the same class for both controls.
-class WXDLLIMPEXP_CORE wxColourDialogEvent : public wxCommandEvent
+class wxColourDialogEvent : public wxCommandEvent
 {
 public:
     wxColourDialogEvent() = default;
@@ -81,7 +81,7 @@ wxDECLARE_EXPORTED_EVENT(WXDLLIMPEXP_CORE, wxEVT_COLOUR_CHANGED, wxColourDialogE
 
 
 // get the colour from user and return it
-WXDLLIMPEXP_CORE wxColour wxGetColourFromUser(wxWindow *parent = nullptr,
+wxColour wxGetColourFromUser(wxWindow *parent = nullptr,
                                               const wxColour& colInit = wxNullColour,
                                               const wxString& caption = {},
                                               wxColourData *data = nullptr);

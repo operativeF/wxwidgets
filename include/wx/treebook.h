@@ -31,7 +31,7 @@ class WXDLLIMPEXP_FWD_CORE wxTreeEvent;
 // wxTreebook
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxTreebook : public wxNavigationEnabled<wxBookCtrlBase>
+class wxTreebook : public wxNavigationEnabled<wxBookCtrlBase>
 {
 public:
     // Constructors and such

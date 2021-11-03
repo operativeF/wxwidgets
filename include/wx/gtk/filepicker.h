@@ -50,7 +50,7 @@ protected:                                                                    \
 // wxFileButton
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxFileButton : public wxGenericFileButton
+class wxFileButton : public wxGenericFileButton
 {
 public:
     wxFileButton() { Init(); }
@@ -115,7 +115,7 @@ private:
 // wxDirButton
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxDirButton : public wxGenericDirButton
+class wxDirButton : public wxGenericDirButton
 {
 public:
     wxDirButton() { Init(); }

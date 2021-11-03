@@ -744,7 +744,7 @@ enum
 class WXDLLIMPEXP_FWD_CORE wxComboCtrl;
 
 
-class WXDLLIMPEXP_CORE wxComboPopup
+class wxComboPopup
 {
     friend class wxComboCtrlBase;
 public:

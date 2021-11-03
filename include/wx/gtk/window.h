@@ -38,7 +38,7 @@ typedef void (*wxGTKCallback)();
 // wxWindowGTK
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxWindowGTK : public wxWindowBase
+class wxWindowGTK : public wxWindowBase
 {
 public:
     // creating the window

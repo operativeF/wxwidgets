@@ -24,7 +24,7 @@ constexpr char wxComboBoxNameStr[] = "comboBox";
 #include "wx/ctrlsub.h"
 #include "wx/textentry.h"
 
-class WXDLLIMPEXP_CORE wxComboBoxBase : public wxItemContainer,
+class wxComboBoxBase : public wxItemContainer,
                                         public wxTextEntry
 {
 public:

@@ -89,7 +89,7 @@ private:
     for mingw 3.2.3 compiler bug that prevents a static function of liT class
     from being exported into dll. A minimal code snippet reproducing the bug:
 
-         struct WXDLLIMPEXP_CORE Foo
+         struct Foo
          {
             static void Bar();
             struct SomeInnerClass

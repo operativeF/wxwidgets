@@ -19,7 +19,7 @@
 // wxTextCompleter: used by wxTextEnter::AutoComplete()
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxTextCompleter
+class wxTextCompleter
 {
 public:
     // The virtual functions to be implemented by the derived classes: the
@@ -38,7 +38,7 @@ public:
 // wxTextCompleterSimple: returns the entire set of completions at once
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxTextCompleterSimple : public wxTextCompleter
+class wxTextCompleterSimple : public wxTextCompleter
 {
 public:
    wxTextCompleterSimple& operator=(wxTextCompleterSimple&&) = delete;

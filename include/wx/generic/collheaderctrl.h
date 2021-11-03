@@ -12,7 +12,7 @@
 
 #include <string>
 
-class WXDLLIMPEXP_CORE wxGenericCollapsibleHeaderCtrl
+class wxGenericCollapsibleHeaderCtrl
     : public wxCollapsibleHeaderCtrlBase
 {
 public:

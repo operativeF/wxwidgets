@@ -61,7 +61,7 @@ bool wxOSXDataSource::IsSupported(const wxDataObject &dataobj)
     return HasData(typesarray);
 }
 
-class WXDLLIMPEXP_CORE wxOSXPasteboardSinkItem : public wxOSXDataSinkItem
+class wxOSXPasteboardSinkItem : public wxOSXDataSinkItem
 {
 public:
     wxOSXPasteboardSinkItem(NSPasteboardItem* item): m_item(item)
@@ -94,7 +94,7 @@ private:
     NSPasteboardItem* m_item;
 };
 
-class WXDLLIMPEXP_CORE wxOSXPasteboardSourceItem : public wxOSXDataSourceItem
+class wxOSXPasteboardSourceItem : public wxOSXDataSourceItem
 {
 public:
     wxOSXPasteboardSourceItem(NSPasteboardItem* item, NSPasteboard* board): m_item(item), m_pasteboard(board)

@@ -11,7 +11,7 @@
 #ifndef _WX_GENERIC_REGION_H__
 #define _WX_GENERIC_REGION_H__
 
-class WXDLLIMPEXP_CORE wxRegionGeneric : public wxRegionBase
+class wxRegionGeneric : public wxRegionBase
 {
 public:
     wxRegionGeneric(wxCoord x, wxCoord y, wxCoord w, wxCoord h);
@@ -47,7 +47,7 @@ protected:
     friend class WXDLLIMPEXP_FWD_CORE wxRegionIteratorGeneric;
 };
 
-class WXDLLIMPEXP_CORE wxRegionIteratorGeneric : public wxObject
+class wxRegionIteratorGeneric : public wxObject
 {
 public:
     wxRegionIteratorGeneric();

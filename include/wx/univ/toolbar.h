@@ -30,7 +30,7 @@ constexpr wxChar wxACTION_TOOLBAR_LEAVE[]   = wxT("leave");     // unhighlight t
 // wxToolBar
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxToolBar : public wxToolBarBase
+class wxToolBar : public wxToolBarBase
 {
 public:
     // construction/destruction

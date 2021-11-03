@@ -19,7 +19,7 @@
     @see wxTaskBarButton
     @since 3.1.0
 */
-class WXDLLIMPEXP_CORE wxAppProgressIndicator
+class wxAppProgressIndicator
 {
 public:
     /**

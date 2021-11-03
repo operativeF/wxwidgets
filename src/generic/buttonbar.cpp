@@ -31,7 +31,7 @@
 // wxButtonToolBarTool: our implementation of wxToolBarToolBase
 // ----------------------------------------------------------------------------
 
-class WXDLLEXPORT wxButtonToolBarTool : public wxToolBarToolBase
+class wxButtonToolBarTool : public wxToolBarToolBase
 {
 public:
     wxButtonToolBarTool(wxButtonToolBar *tbar,

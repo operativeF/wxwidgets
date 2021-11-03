@@ -11,7 +11,7 @@
 #ifndef _WX_RADIOBUT_H_
 #define _WX_RADIOBUT_H_
 
-class WXDLLIMPEXP_CORE wxRadioButton: public wxRadioButtonBase
+class wxRadioButton: public wxRadioButtonBase
 {
     wxDECLARE_DYNAMIC_CLASS(wxRadioButton);
 
@@ -59,7 +59,7 @@ class WXDLLIMPEXP_FWD_CORE wxBitmap;
 
 inline constexpr char wxBitmapRadioButtonNameStr[] = "radioButton";
 
-class WXDLLIMPEXP_CORE wxBitmapRadioButton: public wxRadioButton
+class wxBitmapRadioButton: public wxRadioButton
 {
   wxDECLARE_DYNAMIC_CLASS(wxBitmapRadioButton);
 protected:

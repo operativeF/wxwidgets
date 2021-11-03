@@ -224,7 +224,7 @@ public: \
 
 #define WX_DECLARE_EXPORTED_HASH_MAP( KEY_T, VALUE_T, HASH_T, KEY_EQ_T, CLASSNAME) \
     WX_DECLARE_HASH_MAP_WITH_DECL( KEY_T, VALUE_T, HASH_T, KEY_EQ_T, \
-                                   CLASSNAME, class WXDLLIMPEXP_CORE )
+                                   CLASSNAME, class )
 
 // note: DECL is not used since the class is inline
 #define WX_DECLARE_STRING_HASH_MAP_WITH_DECL( VALUE_T, CLASSNAME, DECL ) \
@@ -233,7 +233,7 @@ public: \
 
 #define WX_DECLARE_EXPORTED_STRING_HASH_MAP( VALUE_T, CLASSNAME ) \
     WX_DECLARE_STRING_HASH_MAP_WITH_DECL( VALUE_T, CLASSNAME, \
-                                          class WXDLLIMPEXP_CORE )
+                                          class )
 
 // note: DECL is not used since the class is inline
 #define WX_DECLARE_VOIDPTR_HASH_MAP_WITH_DECL( VALUE_T, CLASSNAME, DECL ) \
@@ -242,7 +242,7 @@ public: \
 
 #define WX_DECLARE_EXPORTED_VOIDPTR_HASH_MAP( VALUE_T, CLASSNAME ) \
     WX_DECLARE_VOIDPTR_HASH_MAP_WITH_DECL( VALUE_T, CLASSNAME, \
-                                           class WXDLLIMPEXP_CORE )
+                                           class )
 
 // delete all hash elements
 //

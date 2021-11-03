@@ -40,7 +40,7 @@ class WXDLLIMPEXP_FWD_CORE wxNotebook;
 // wxGenericMDIParentFrame
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxGenericMDIParentFrame : public wxMDIParentFrameBase
+class wxGenericMDIParentFrame : public wxMDIParentFrameBase
 {
 public:
     wxGenericMDIParentFrame() { Init(); }
@@ -134,7 +134,7 @@ private:
 // wxGenericMDIChildFrame
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxGenericMDIChildFrame : public wxTDIChildFrame
+class wxGenericMDIChildFrame : public wxTDIChildFrame
 {
 public:
     wxGenericMDIChildFrame() { Init(); }
@@ -216,7 +216,7 @@ private:
 // wxGenericMDIClientWindow
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxGenericMDIClientWindow : public wxMDIClientWindowBase
+class wxGenericMDIClientWindow : public wxMDIClientWindowBase
 {
 public:
     wxGenericMDIClientWindow() { }

@@ -10,7 +10,7 @@
 
 #include "wx/dc.h"
 
-class WXDLLIMPEXP_CORE wxPrinterDCImpl : public wxDCImpl
+class wxPrinterDCImpl : public wxDCImpl
 {
 public:
     wxPrinterDCImpl( wxPrinterDC *, const wxPrintData & );

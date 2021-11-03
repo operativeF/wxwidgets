@@ -1111,7 +1111,7 @@ public:
         wxHashMap "template" and is defined as follows:
 
         @code
-        class WXDLLEXPORT wxImageHistogramEntry
+        class wxImageHistogramEntry
         {
         public:
             wxImageHistogramEntry() : index(0), value(0) {}

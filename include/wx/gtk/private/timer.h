@@ -17,7 +17,7 @@
 // wxTimer
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxGTKTimerImpl : public wxTimerImpl
+class wxGTKTimerImpl : public wxTimerImpl
 {
 public:
     wxGTKTimerImpl(wxTimer* timer) : wxTimerImpl(timer) { m_sourceId = 0; }

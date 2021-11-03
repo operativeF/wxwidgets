@@ -15,7 +15,7 @@ class WXDLLIMPEXP_FWD_CORE wxImage;
 // wxCursor
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxCursor : public wxCursorBase
+class wxCursor : public wxCursorBase
 {
 public:
     wxCursor();

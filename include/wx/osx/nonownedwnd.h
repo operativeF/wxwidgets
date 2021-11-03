@@ -31,7 +31,7 @@
 
 class wxNonOwnedWindowImpl;
 
-class WXDLLIMPEXP_CORE wxNonOwnedWindow : public wxNonOwnedWindowBase
+class wxNonOwnedWindow : public wxNonOwnedWindowBase
 {
 public:
     // constructors and such

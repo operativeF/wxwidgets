@@ -14,7 +14,7 @@
 // Common button functionality
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxAnyButton : public wxAnyButtonBase
+class wxAnyButton : public wxAnyButtonBase
 {
 public:
     wxAnyButton() {}
@@ -64,7 +64,7 @@ private:
 // click into button press/release actions
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxStdAnyButtonInputHandler : public wxStdInputHandler
+class wxStdAnyButtonInputHandler : public wxStdInputHandler
 {
 public:
     wxStdAnyButtonInputHandler(wxInputHandler *inphand);

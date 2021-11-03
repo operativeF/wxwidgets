@@ -130,7 +130,7 @@ std::string wxGetWindowText(WXHWND hWnd)
     return {};
 }
 
-wxString WXDLLEXPORT wxGetWindowClass(WXHWND hWnd)
+wxString wxGetWindowClass(WXHWND hWnd)
 {
     wxString str;
 
@@ -158,7 +158,7 @@ wxString WXDLLEXPORT wxGetWindowClass(WXHWND hWnd)
     return str;
 }
 
-int WXDLLEXPORT wxGetWindowId(WXHWND hWnd)
+int wxGetWindowId(WXHWND hWnd)
 {
     return ::GetWindowLongPtrW((HWND)hWnd, GWL_ID);
 }

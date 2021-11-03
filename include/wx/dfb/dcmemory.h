@@ -13,7 +13,7 @@
 #include "wx/dfb/dc.h"
 #include "wx/bitmap.h"
 
-class WXDLLIMPEXP_CORE wxMemoryDCImpl : public wxDFBDCImpl
+class wxMemoryDCImpl : public wxDFBDCImpl
 {
 public:
     wxMemoryDCImpl(wxMemoryDC *owner);

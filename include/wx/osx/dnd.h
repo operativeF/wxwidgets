@@ -46,7 +46,7 @@ class WXDLLIMPEXP_FWD_CORE wxOSXDataSource;
 // wxDropTarget
 //-------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxDropTarget: public wxDropTargetBase
+class wxDropTarget: public wxDropTargetBase
 {
   public:
 
@@ -70,7 +70,7 @@ class WXDLLIMPEXP_CORE wxDropTarget: public wxDropTargetBase
 // wxDropSource
 //-------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxDropSource: public wxDropSourceBase
+class wxDropSource: public wxDropSourceBase
 {
 public:
     // ctors: if you use default ctor you must call SetData() later!

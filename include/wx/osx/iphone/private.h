@@ -26,15 +26,15 @@
 
 typedef CGRect WXRect;
 
-OSStatus WXDLLIMPEXP_CORE wxMacDrawCGImage(
+OSStatus wxMacDrawCGImage(
                                CGContextRef    inContext,
                                const CGRect *  inBounds,
                                CGImageRef      inImage) ;
 
-WX_UIImage WXDLLIMPEXP_CORE wxOSXGetUIImageFromCGImage( CGImageRef image );
-wxBitmap WXDLLIMPEXP_CORE wxOSXCreateSystemBitmap(const wxString& id, const wxString &client, const wxSize& size);
+WX_UIImage wxOSXGetUIImageFromCGImage( CGImageRef image );
+wxBitmap wxOSXCreateSystemBitmap(const wxString& id, const wxString &client, const wxSize& size);
 
-class WXDLLIMPEXP_CORE wxWidgetIPhoneImpl : public wxWidgetImpl
+class wxWidgetIPhoneImpl : public wxWidgetImpl
 {
 public :
     wxWidgetIPhoneImpl( wxWindowMac* peer , WXWidget w, int flags = 0 ) ;
@@ -216,12 +216,12 @@ public:
 
 #ifdef __OBJC__
 
-    WXDLLIMPEXP_CORE CGRect wxToNSRect( UIView* parent, const wxRect& r );
-    WXDLLIMPEXP_CORE wxRect wxFromNSRect( UIView* parent, const CGRect& rect );
-    WXDLLIMPEXP_CORE CGPoint wxToNSPoint( UIView* parent, const wxPoint& p );
-    WXDLLIMPEXP_CORE wxPoint wxFromNSPoint( UIView* parent, const CGPoint& p );
+    CGRect wxToNSRect( UIView* parent, const wxRect& r );
+    wxRect wxFromNSRect( UIView* parent, const CGRect& rect );
+    CGPoint wxToNSPoint( UIView* parent, const wxPoint& p );
+    wxPoint wxFromNSPoint( UIView* parent, const CGPoint& p );
 
-    CGRect WXDLLIMPEXP_CORE wxOSXGetFrameForControl( wxWindowMac* window , const wxPoint& pos , const wxSize &size ,
+    CGRect wxOSXGetFrameForControl( wxWindowMac* window , const wxPoint& pos , const wxSize &size ,
         bool adjustForOrigin = true );
 
     @interface wxUIButton : UIButton
@@ -237,7 +237,7 @@ public:
     @end // wxUIView
 
 
-    void WXDLLIMPEXP_CORE wxOSXIPhoneClassAddWXMethods(Class c);
+    void wxOSXIPhoneClassAddWXMethods(Class c);
 
 #endif
 

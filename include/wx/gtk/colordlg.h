@@ -13,7 +13,7 @@
 
 #include "wx/dialog.h"
 
-class WXDLLIMPEXP_CORE wxColourDialog : public wxDialog
+class wxColourDialog : public wxDialog
 {
 public:
     wxColourDialog() {}

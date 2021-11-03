@@ -27,7 +27,7 @@ class WXDLLIMPEXP_FWD_CORE wxControlContainer;
 // wxPanel contains other controls and implements TAB traversal between them
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxPanelBase : public wxNavigationEnabled<wxWindow>
+class wxPanelBase : public wxNavigationEnabled<wxWindow>
 {
 public:
     wxPanelBase& operator=(wxPanelBase&&) = delete;

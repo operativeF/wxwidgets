@@ -13,7 +13,7 @@
 // wxScrollBar
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxScrollBar: public wxScrollBarBase
+class wxScrollBar: public wxScrollBarBase
 {
 public:
     wxScrollBar();

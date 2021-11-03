@@ -71,7 +71,7 @@ enum wxRelationship
 // wxIndividualLayoutConstraint: a constraint on window position
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxIndividualLayoutConstraint
+class wxIndividualLayoutConstraint
 {
 public:
     void Set(wxRelationship rel, wxWindowBase *otherW, wxEdge otherE, int val = 0, int marg = wxLAYOUT_DEFAULT_MARGIN);
@@ -154,7 +154,7 @@ protected:
 // wxLayoutConstraints: the complete set of constraints for a window
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxLayoutConstraints
+class wxLayoutConstraints
 {
 public:
     // Edge constraints

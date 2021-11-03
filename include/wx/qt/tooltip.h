@@ -12,7 +12,7 @@
 
 class WXDLLIMPEXP_FWD_CORE wxWindow;
 
-class WXDLLIMPEXP_CORE wxToolTip : public wxObject
+class wxToolTip : public wxObject
 {
 public:
     // controlling tooltip behaviour: globally change tooltip parameters

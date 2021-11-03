@@ -8,7 +8,7 @@
 #ifndef _WX_QT_CTRLSUB_H_
 #define _WX_QT_CTRLSUB_H_
 
-class WXDLLIMPEXP_CORE wxControlWithItems : public wxControlWithItemsBase
+class wxControlWithItems : public wxControlWithItemsBase
 {
 public:
     wxControlWithItems();

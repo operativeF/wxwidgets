@@ -34,7 +34,7 @@ WX_DECLARE_LIST_WITH_DECL(wxAnimationDecoder, wxAnimationDecoderList, class WXDL
 // wxAnimation
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxAnimation : public wxObject
+class wxAnimation : public wxObject
 {
 public:
     wxAnimation();
@@ -91,7 +91,7 @@ constexpr unsigned int wxAC_NO_AUTORESIZE       = 0x0010;
 // auto-resizes by default to fit the new animation when SetAnimation() is called
 constexpr unsigned int wxAC_DEFAULT_STYLE       = wxBORDER_NONE;
 
-class WXDLLIMPEXP_CORE wxAnimationCtrlBase : public wxControl
+class wxAnimationCtrlBase : public wxControl
 {
 public:
     // public API
@@ -157,7 +157,7 @@ protected:
 #else
     #include "wx/generic/animate.h"
 
-    class WXDLLIMPEXP_CORE wxAnimationCtrl : public wxGenericAnimationCtrl
+    class wxAnimationCtrl : public wxGenericAnimationCtrl
     {
     public:
         wxAnimationCtrl() = default;

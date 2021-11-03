@@ -11,7 +11,7 @@
 #include "wx/dialog.h"
 class QDialog;
 
-class WXDLLIMPEXP_CORE wxDialog : public wxDialogBase
+class wxDialog : public wxDialogBase
 {
 public:
     wxDialog();

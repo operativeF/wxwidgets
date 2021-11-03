@@ -24,7 +24,7 @@ class WXDLLIMPEXP_FWD_BASE wxInputStream;
 WX_DECLARE_EXPORTED_OBJARRAY(wxIcon, wxIconArray);
 
 // Load icons of multiple sizes from files or resources (MSW-only).
-class WXDLLIMPEXP_CORE wxIconBundle : public wxGDIObject
+class wxIconBundle : public wxGDIObject
 {
 public:
     // Flags that determine what happens if GetIcon() doesn't find the icon of

@@ -48,7 +48,7 @@ enum wxTextValidatorStyle
 // wxTextValidator
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxTextValidator: public wxValidator
+class wxTextValidator: public wxValidator
 {
 public:
     wxTextValidator(unsigned int style = wxFILTER_NONE, wxString *val = nullptr);

@@ -14,7 +14,7 @@ class QScrollBar;
 
 class WXDLLIMPEXP_FWD_CORE wxQtScrollBar;
 
-class WXDLLIMPEXP_CORE wxScrollBar : public wxScrollBarBase
+class wxScrollBar : public wxScrollBarBase
 {
 public:
     wxScrollBar();

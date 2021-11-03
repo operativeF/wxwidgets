@@ -18,7 +18,7 @@
 // wxToggleButton
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxToggleButton: public wxToggleButtonBase
+class wxToggleButton: public wxToggleButtonBase
 {
 public:
     // construction/destruction
@@ -78,7 +78,7 @@ private:
 // wxBitmapToggleButton
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxBitmapToggleButton: public wxToggleButton
+class wxBitmapToggleButton: public wxToggleButton
 {
 public:
     // construction/destruction

@@ -45,7 +45,7 @@ using OutCodeFlags = InclBitfield<wxOutCode>;
 // top left and bottom right corner, or by the top left corner and size. A point is contained within the rectangle if
 // left <= x < right  and top <= m_y < bottom , thus it is a half open interval.
 
-class WXDLLIMPEXP_CORE wxRect2DDouble
+class wxRect2DDouble
 {
 public:
     wxRect2DDouble()
@@ -187,7 +187,7 @@ public:
 // top left and bottom right corner, or by the top left corner and size. A point is contained within the rectangle if
 // left <= x < right  and top <= m_y < bottom , thus it is a half open interval.
 
-class WXDLLIMPEXP_CORE wxRect2DInt
+class wxRect2DInt
 {
 public:
        wxRect2DInt() { m_x = m_y = m_width = m_height = 0; }
@@ -323,7 +323,7 @@ inline bool wxRect2DInt::operator != (const wxRect2DInt& rect) const
     return !(*this == rect);
 }
 
-class WXDLLIMPEXP_CORE wxTransform2D
+class wxTransform2D
 {
 public :
     virtual ~wxTransform2D() = default;

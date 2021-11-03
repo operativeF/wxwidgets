@@ -13,7 +13,7 @@
 
 #include "wx/motif/dc.h"
 
-class WXDLLIMPEXP_CORE wxPrinterDC : public wxMotifDCImpl
+class wxPrinterDC : public wxMotifDCImpl
 {
 public:
     // Create a printer DC

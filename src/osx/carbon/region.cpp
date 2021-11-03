@@ -29,7 +29,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxRegionIterator, wxObject);
 // wxRegionRefData implementation
 //-----------------------------------------------------------------------------
 
-class WXDLLEXPORT wxRegionRefData : public wxGDIRefData
+class wxRegionRefData : public wxGDIRefData
 {
 public:
     wxRegionRefData()

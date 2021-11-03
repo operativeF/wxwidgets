@@ -22,7 +22,7 @@
 // wxDataViewTextRenderer
 // ---------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxDataViewTextRenderer: public wxDataViewRenderer
+class wxDataViewTextRenderer: public wxDataViewRenderer
 {
 public:
     static wxString GetDefaultType() { return wxS("string"); }
@@ -84,7 +84,7 @@ public:
 // wxDataViewBitmapRenderer
 // ---------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxDataViewBitmapRenderer: public wxDataViewRenderer
+class wxDataViewBitmapRenderer: public wxDataViewRenderer
 {
 public:
     static wxString GetDefaultType() { return wxS("wxBitmap"); }
@@ -108,7 +108,7 @@ public:
 // wxDataViewToggleRenderer
 // ---------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxDataViewToggleRenderer: public wxDataViewRenderer
+class wxDataViewToggleRenderer: public wxDataViewRenderer
 {
 public:
     static wxString GetDefaultType() { return wxS("bool"); }
@@ -135,7 +135,7 @@ public:
 // wxDataViewCustomRenderer
 // ---------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxDataViewCustomRenderer: public wxDataViewCustomRendererBase
+class wxDataViewCustomRenderer: public wxDataViewCustomRendererBase
 {
 public:
     static wxString GetDefaultType() { return wxS("string"); }
@@ -197,7 +197,7 @@ public:
 // wxDataViewProgressRenderer
 // ---------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxDataViewProgressRenderer: public wxDataViewCustomRenderer
+class wxDataViewProgressRenderer: public wxDataViewCustomRenderer
 {
 public:
     static wxString GetDefaultType() { return wxS("long"); }
@@ -233,7 +233,7 @@ public:
 // wxDataViewIconTextRenderer
 // ---------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxDataViewIconTextRenderer: public wxDataViewTextRenderer
+class wxDataViewIconTextRenderer: public wxDataViewTextRenderer
 {
 public:
     static wxString GetDefaultType() { return wxS("wxDataViewIconText"); }
@@ -270,7 +270,7 @@ public:
 // wxDataViewChoiceRenderer
 // -------------------------------------
 
-class WXDLLIMPEXP_CORE wxDataViewChoiceRenderer: public wxDataViewCustomRenderer
+class wxDataViewChoiceRenderer: public wxDataViewCustomRenderer
 {
 public:
     wxDataViewChoiceRenderer(const wxArrayString &choices,
@@ -295,7 +295,7 @@ private:
 // wxDataViewChoiceByIndexRenderer
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxDataViewChoiceByIndexRenderer: public wxDataViewChoiceRenderer
+class wxDataViewChoiceByIndexRenderer: public wxDataViewChoiceRenderer
 {
 public:
     wxDataViewChoiceByIndexRenderer( const wxArrayString &choices,

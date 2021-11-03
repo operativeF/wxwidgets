@@ -41,7 +41,7 @@ constexpr unsigned int wxPD_CAN_SKIP           = 0x0080;
 
 // If there is no native one, just use the generic version.
 #ifndef wxHAS_NATIVE_PROGRESSDIALOG
-    class WXDLLIMPEXP_CORE wxProgressDialog
+    class wxProgressDialog
                            : public wxGenericProgressDialog
     {
     public:

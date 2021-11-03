@@ -28,7 +28,7 @@ class WXDLLIMPEXP_FWD_CORE wxWindow;
 // wxTextEntryBase
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxTextEntryBase
+class wxTextEntryBase
 {
 public:
     wxTextEntryBase() = default;
@@ -318,7 +318,7 @@ private:
 #ifdef __WXUNIVERSAL__
     // TODO: we need to use wxTextEntryDelegate here, but for now just prevent
     //       the GTK/MSW classes from being used in wxUniv build
-    class WXDLLIMPEXP_CORE wxTextEntry : public wxTextEntryBase
+    class wxTextEntry : public wxTextEntryBase
     {
     };
 #elif defined(__WXGTK20__)
@@ -333,7 +333,7 @@ private:
     #include "wx/qt/textentry.h"
 #else
     // no platform-specific implementation of wxTextEntry yet
-    class WXDLLIMPEXP_CORE wxTextEntry : public wxTextEntryBase
+    class wxTextEntry : public wxTextEntryBase
     {
     };
 #endif

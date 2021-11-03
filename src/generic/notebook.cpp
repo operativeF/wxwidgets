@@ -60,7 +60,7 @@ WX_DECLARE_HASH_MAP(wxNotebookPage*, int, wxPointerHash, wxPointerEqual,
                     wxNotebookPageToIntHashMap);
 
 // This reuses wxTabView to draw the tabs.
-class WXDLLEXPORT wxNotebookTabView: public wxTabView
+class wxNotebookTabView: public wxTabView
 {
     wxDECLARE_DYNAMIC_CLASS(wxNotebookTabView);
 public:

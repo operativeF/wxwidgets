@@ -29,7 +29,7 @@ class wxDfbOverlaysList;
 // wxWindow
 // ---------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxWindowDFB : public wxWindowBase
+class wxWindowDFB : public wxWindowBase
 {
 public:
     wxWindowDFB() { Init(); }

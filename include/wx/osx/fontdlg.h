@@ -30,7 +30,7 @@
 
 #if wxOSX_USE_EXPERIMENTAL_FONTDIALOG
 
-class WXDLLIMPEXP_CORE wxFontDialog : public wxDialog
+class wxFontDialog : public wxDialog
 {
 public:
     wxFontDialog();
@@ -91,7 +91,7 @@ class WXDLLIMPEXP_FWD_CORE wxCheckBox;
 #endif
     // !USE_NATIVE_FONT_DIALOG_FOR_MACOSX
 
-class WXDLLIMPEXP_CORE wxFontDialog: public wxDialog
+class wxFontDialog: public wxDialog
 {
     wxDECLARE_DYNAMIC_CLASS(wxFontDialog);
 

@@ -25,7 +25,7 @@
 // them to wxVarScrollHelperBase
 // ----------------------------------------------------------------------------
 
-class WXDLLEXPORT wxVarScrollHelperEvtHandler : public wxEvtHandler
+class wxVarScrollHelperEvtHandler : public wxEvtHandler
 {
 public:
     explicit wxVarScrollHelperEvtHandler(wxVarScrollHelperBase *scrollHelper)

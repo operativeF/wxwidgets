@@ -2303,7 +2303,7 @@ void wxWin32Renderer::DrawSliderTicks(wxDC& dc,
 // ----------------------------------------------------------------------------
 
 // wxWin32MenuGeometryInfo: the wxMenuGeometryInfo used by wxWin32Renderer
-class WXDLLEXPORT wxWin32MenuGeometryInfo : public wxMenuGeometryInfo
+class wxWin32MenuGeometryInfo : public wxMenuGeometryInfo
 {
 public:
     virtual wxSize GetSize() const { return m_size; }

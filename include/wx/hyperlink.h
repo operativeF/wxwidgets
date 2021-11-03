@@ -45,7 +45,7 @@ constexpr char wxHyperlinkCtrlNameStr[] = "hyperlink";
 // just like a wxCommandEvent.
 //
 // Use the EVT_HYPERLINK() to catch link events.
-class WXDLLIMPEXP_CORE wxHyperlinkCtrlBase : public wxControl
+class wxHyperlinkCtrlBase : public wxControl
 {
 public:
 
@@ -97,7 +97,7 @@ wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_HYPERLINK, wxHyperlinkEvent );
 // An event fired when the user clicks on the label in a hyperlink control.
 // See HyperlinkControl for details.
 //
-class WXDLLIMPEXP_CORE wxHyperlinkEvent : public wxCommandEvent
+class wxHyperlinkEvent : public wxCommandEvent
 {
 public:
     wxHyperlinkEvent() = default;
@@ -151,7 +151,7 @@ typedef void (wxEvtHandler::*wxHyperlinkEventFunction)(wxHyperlinkEvent&);
 #else
     #include "wx/generic/hyperlink.h"
 
-    class WXDLLIMPEXP_CORE wxHyperlinkCtrl : public wxGenericHyperlinkCtrl
+    class wxHyperlinkCtrl : public wxGenericHyperlinkCtrl
     {
     public:
         wxHyperlinkCtrl() = default;

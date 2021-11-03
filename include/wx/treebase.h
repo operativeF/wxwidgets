@@ -52,7 +52,7 @@ public:
 // always be allocated on the heap!
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxTreeItemData: public wxClientData
+class wxTreeItemData: public wxClientData
 {
 friend class WXDLLIMPEXP_FWD_CORE wxTreeCtrl;
 friend class WXDLLIMPEXP_FWD_CORE wxGenericTreeCtrl;
@@ -185,7 +185,7 @@ constexpr char wxTreeCtrlNameStr[] = "treeCtrl";
 
 class WXDLLIMPEXP_FWD_CORE wxTreeCtrlBase;
 
-class WXDLLIMPEXP_CORE wxTreeEvent : public wxNotifyEvent
+class wxTreeEvent : public wxNotifyEvent
 {
 public:
     wxTreeEvent(wxEventType commandType = wxEVT_NULL, int id = 0);

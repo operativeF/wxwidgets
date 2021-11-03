@@ -15,7 +15,7 @@
 
 class WXDLLIMPEXP_FWD_CORE wxDataObject;
 
-class WXDLLIMPEXP_CORE wxOSXDataSourceItem
+class wxOSXDataSourceItem
 {
 public:
     virtual ~wxOSXDataSourceItem();
@@ -29,7 +29,7 @@ public:
     virtual CFDataRef DoGetData(wxDataFormat::NativeFormat type) const = 0;
 };
 
-class WXDLLIMPEXP_CORE wxOSXDataSource
+class wxOSXDataSource
 {
 public:
     // the number of source items
@@ -49,7 +49,7 @@ public:
 
 };
 
-class WXDLLIMPEXP_CORE wxOSXDataSinkItem
+class wxOSXDataSinkItem
 {
 public:
     virtual ~wxOSXDataSinkItem();
@@ -67,7 +67,7 @@ public:
 };
 
 
-class WXDLLIMPEXP_CORE wxOSXDataSink
+class wxOSXDataSink
 {
 public:
     // delete all created sink items
@@ -80,7 +80,7 @@ public:
     virtual void Flush() = 0 ;
 };
 
-class WXDLLIMPEXP_CORE wxOSXPasteboard : public wxOSXDataSink, public wxOSXDataSource
+class wxOSXPasteboard : public wxOSXDataSink, public wxOSXDataSource
 {
 public:
     wxOSXPasteboard(OSXPasteboard native);

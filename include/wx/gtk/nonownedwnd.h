@@ -16,7 +16,7 @@ class wxNonOwnedWindowShapeImpl;
 // wxNonOwnedWindow contains code common to wx{Popup,TopLevel}Window in wxGTK.
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxNonOwnedWindow : public wxNonOwnedWindowBase
+class wxNonOwnedWindow : public wxNonOwnedWindowBase
 {
 public:
     wxNonOwnedWindow() { m_shapeImpl = NULL; }

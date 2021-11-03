@@ -47,7 +47,7 @@ constexpr wxChar wxACTION_LISTBOX_EXTENDSEL[]   = wxT("extend");      // extend 
 // wxListBox: a list of selectable items
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxListBox : public wxListBoxBase, public wxScrollHelper
+class wxListBox : public wxListBoxBase, public wxScrollHelper
 {
 public:
     

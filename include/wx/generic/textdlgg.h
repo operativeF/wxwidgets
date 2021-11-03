@@ -33,7 +33,7 @@ constexpr char wxGetPasswordFromUserPromptStr[] = "Enter Password";
 // wxTextEntryDialog: a dialog with text control, [ok] and [cancel] buttons
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxTextEntryDialog : public wxDialog
+class wxTextEntryDialog : public wxDialog
 {
 public:
     wxTextEntryDialog()
@@ -94,7 +94,7 @@ private:
 // wxPasswordEntryDialog: dialog with password control, [ok] and [cancel]
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxPasswordEntryDialog : public wxTextEntryDialog
+class wxPasswordEntryDialog : public wxTextEntryDialog
 {
 public:
     wxPasswordEntryDialog() = default;
@@ -126,7 +126,7 @@ private:
 // function to get a string from user
 // ----------------------------------------------------------------------------
 
-WXDLLIMPEXP_CORE std::string
+std::string
     wxGetTextFromUser(const std::string& message,
                     const std::string& caption = wxGetTextFromUserPromptStr,
                     const std::string& default_value = {},
@@ -135,7 +135,7 @@ WXDLLIMPEXP_CORE std::string
                     wxCoord y = wxDefaultCoord,
                     bool centre = true);
 
-WXDLLIMPEXP_CORE std::string
+std::string
     wxGetPasswordFromUser(const std::string& message,
                         const std::string& caption = wxGetPasswordFromUserPromptStr,
                         const std::string& default_value = {},

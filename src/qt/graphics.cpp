@@ -66,7 +66,7 @@ private:
 
 } // anonymous namespace
 
-class WXDLLIMPEXP_CORE wxQtBrushData : public wxGraphicsObjectRefData
+class wxQtBrushData : public wxGraphicsObjectRefData
 {
 public:
     wxQtBrushData(wxGraphicsRenderer* renderer)
@@ -125,7 +125,7 @@ private:
 	wxQtBrushData& operator=(const wxQtBrushData&) = delete;
 };
 
-class WXDLLIMPEXP_CORE wxQtPenData : public wxGraphicsObjectRefData
+class wxQtPenData : public wxGraphicsObjectRefData
 {
 public:
     wxQtPenData(wxGraphicsRenderer* renderer, const wxGraphicsPenInfo& info)
@@ -167,7 +167,7 @@ private:
 	wxQtPenData& operator=(const wxQtPenData&) = delete;
 };
 
-class WXDLLIMPEXP_CORE wxQtBitmapData : public wxGraphicsBitmapData
+class wxQtBitmapData : public wxGraphicsBitmapData
 {
 public:
     wxQtBitmapData(wxGraphicsRenderer* renderer, QPixmap* pixmap)
@@ -216,7 +216,7 @@ private:
 };
 
 
-class WXDLLIMPEXP_CORE wxQtMatrixData : public wxGraphicsMatrixData
+class wxQtMatrixData : public wxGraphicsMatrixData
 {
 public:
     explicit wxQtMatrixData(wxGraphicsRenderer* renderer)
@@ -439,7 +439,7 @@ private:
 // wxQtGraphicsPathData
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxQtGraphicsPathData : public wxGraphicsPathData
+class wxQtGraphicsPathData : public wxGraphicsPathData
 {
 public:
     wxQtGraphicsPathData(wxGraphicsRenderer* renderer)
@@ -639,7 +639,7 @@ private:
     wxQtGraphicsPathData& operator=(const wxQtGraphicsPathData&);
 };
 
-class WXDLLIMPEXP_CORE wxQtGraphicsContext : public wxGraphicsContext
+class wxQtGraphicsContext : public wxGraphicsContext
 {
     void InitFromDC(const wxDC& dc)
     {
@@ -1095,7 +1095,7 @@ private:
 // wxQtGraphicsRenderer declaration
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxQtGraphicsRenderer : public wxGraphicsRenderer
+class wxQtGraphicsRenderer : public wxGraphicsRenderer
 {
 public:
     wxQtGraphicsRenderer() {}

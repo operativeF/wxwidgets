@@ -34,7 +34,7 @@ class WXDLLIMPEXP_FWD_CORE wxSizerFlags;
 // wxGenericAboutDialog: generic "About" dialog implementation
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxGenericAboutDialog : public wxDialog
+class wxGenericAboutDialog : public wxDialog
 {
 public:
     // constructors and Create() method
@@ -90,7 +90,7 @@ private:
 
 // unlike wxAboutBox which can show either the native or generic about dialog,
 // this function always shows the generic one
-WXDLLIMPEXP_CORE void wxGenericAboutBox(const wxAboutDialogInfo& info, wxWindow* parent = nullptr);
+void wxGenericAboutBox(const wxAboutDialogInfo& info, wxWindow* parent = nullptr);
 
 #endif // wxUSE_ABOUTDLG
 

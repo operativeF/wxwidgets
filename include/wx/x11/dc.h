@@ -21,7 +21,7 @@
 // wxDC
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxX11DCImpl : public wxDCImpl
+class wxX11DCImpl : public wxDCImpl
 {
 public:
     wxX11DCImpl( wxDC *owner );

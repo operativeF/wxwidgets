@@ -8,7 +8,7 @@
 #ifndef _WX_QT_POPUPWIN_H_
 #define _WX_QT_POPUPWIN_H_
 
-class WXDLLIMPEXP_CORE wxPopupWindow : public wxPopupWindowBase
+class wxPopupWindow : public wxPopupWindowBase
 {
 public:
     wxPopupWindow();

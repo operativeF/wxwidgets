@@ -67,7 +67,7 @@ public:
 // wxGtkPrintDialog
 //----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxGtkPrintDialog: public wxPrintDialogBase
+class wxGtkPrintDialog: public wxPrintDialogBase
 {
 public:
     wxGtkPrintDialog( wxWindow *parent,
@@ -112,7 +112,7 @@ private:
 // wxGtkPageSetupDialog
 //----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxGtkPageSetupDialog: public wxPageSetupDialogBase
+class wxGtkPageSetupDialog: public wxPageSetupDialogBase
 {
 public:
     wxGtkPageSetupDialog( wxWindow *parent,
@@ -147,7 +147,7 @@ private:
 // wxGtkPrinter
 //----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxGtkPrinter : public wxPrinterBase
+class wxGtkPrinter : public wxPrinterBase
 {
 public:
     wxGtkPrinter(wxPrintDialogData *data = NULL);
@@ -177,7 +177,7 @@ private:
 // wxGtkPrintNativeData
 //----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxGtkPrintNativeData : public wxPrintNativeDataBase
+class wxGtkPrintNativeData : public wxPrintNativeDataBase
 {
 public:
     wxGtkPrintNativeData();
@@ -216,7 +216,7 @@ private:
 // wxGtkPrinterDC
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxGtkPrinterDCImpl : public wxDCImpl
+class wxGtkPrinterDCImpl : public wxDCImpl
 {
 public:
     wxGtkPrinterDCImpl( wxPrinterDC *owner, const wxPrintData& data );
@@ -326,7 +326,7 @@ private:
 // wxPrintout.
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxGtkPrintPreview : public wxPrintPreviewBase
+class wxGtkPrintPreview : public wxPrintPreviewBase
 {
 public:
     wxGtkPrintPreview(wxPrintout *printout,

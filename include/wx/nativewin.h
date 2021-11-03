@@ -65,7 +65,7 @@
 // wxNativeWindow: for using native windows inside wxWidgets windows
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxNativeWindow : public wxWindow
+class wxNativeWindow : public wxWindow
 {
 public:
     // Default ctor, Create() must be called later to really create the window.
@@ -122,7 +122,7 @@ private:
 // wxNativeContainerWindow: can be used for creating other wxWindows inside it
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxNativeContainerWindow : public wxTopLevelWindow
+class wxNativeContainerWindow : public wxTopLevelWindow
 {
 public:
     // default ctor, call Create() later

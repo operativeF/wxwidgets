@@ -45,8 +45,8 @@
 // wxBase part of it).
 #include <Carbon/Carbon.h>
 
-void WXDLLIMPEXP_CORE wxMacStringToPascal( const wxString&from , unsigned char * to );
-wxString WXDLLIMPEXP_CORE wxMacMakeStringFromPascal( const unsigned char * from );
+void wxMacStringToPascal( const wxString&from , unsigned char * to );
+wxString wxMacMakeStringFromPascal( const unsigned char * from );
 
 WXDLLIMPEXP_BASE wxString wxMacFSRefToPath( const FSRef *fsRef , CFStringRef additionalPathComponent = NULL );
 WXDLLIMPEXP_BASE OSStatus wxMacPathToFSRef( const wxString&path , FSRef *fsRef );
@@ -77,7 +77,7 @@ WXDLLIMPEXP_BASE CFURLRef wxOSXCreateURLFromFileSystemPath( const wxString& path
 #include "wx/bitmap.h"
 #include "wx/window.h"
 
-class WXDLLIMPEXP_CORE wxMacCGContextStateSaver
+class wxMacCGContextStateSaver
 {
     wxMacCGContextStateSaver(const wxMacCGContextStateSaver&) = delete;
 	wxMacCGContextStateSaver& operator=(const wxMacCGContextStateSaver&) = delete;
@@ -96,7 +96,7 @@ private:
     CGContextRef m_cg;
 };
 
-class WXDLLIMPEXP_CORE wxDeferredObjectDeleter : public wxObject
+class wxDeferredObjectDeleter : public wxObject
 {
 public :
     wxDeferredObjectDeleter( wxObject* obj ) : m_obj(obj)
@@ -112,22 +112,22 @@ protected :
 
 // Quartz
 
-WXDLLIMPEXP_CORE CGDataProviderRef wxMacCGDataProviderCreateWithCFData( CFDataRef data );
-WXDLLIMPEXP_CORE CGDataConsumerRef wxMacCGDataConsumerCreateWithCFData( CFMutableDataRef data );
-WXDLLIMPEXP_CORE CGDataProviderRef wxMacCGDataProviderCreateWithMemoryBuffer( const wxMemoryBuffer& buf );
+CGDataProviderRef wxMacCGDataProviderCreateWithCFData( CFDataRef data );
+CGDataConsumerRef wxMacCGDataConsumerCreateWithCFData( CFMutableDataRef data );
+CGDataProviderRef wxMacCGDataProviderCreateWithMemoryBuffer( const wxMemoryBuffer& buf );
 
-WXDLLIMPEXP_CORE CGColorSpaceRef wxMacGetGenericRGBColorSpace();
+CGColorSpaceRef wxMacGetGenericRGBColorSpace();
 
-WXDLLIMPEXP_CORE double wxOSXGetMainScreenContentScaleFactor();
+double wxOSXGetMainScreenContentScaleFactor();
 
 // UI
 
-CGSize WXDLLIMPEXP_CORE wxOSXGetImageSize(WXImage image);
-CGImageRef WXDLLIMPEXP_CORE wxOSXCreateCGImageFromImage( WXImage nsimage, double *scale = NULL );
-CGImageRef WXDLLIMPEXP_CORE wxOSXGetCGImageFromImage( WXImage nsimage, CGRect* r, CGContextRef cg);
-CGContextRef WXDLLIMPEXP_CORE wxOSXCreateBitmapContextFromImage( WXImage nsimage, bool *isTemplate = NULL);
-WXImage WXDLLIMPEXP_CORE wxOSXGetImageFromCGImage( CGImageRef image, double scale = 1.0, bool isTemplate = false);
-double WXDLLIMPEXP_CORE wxOSXGetImageScaleFactor(WXImage image);
+CGSize wxOSXGetImageSize(WXImage image);
+CGImageRef wxOSXCreateCGImageFromImage( WXImage nsimage, double *scale = NULL );
+CGImageRef wxOSXGetCGImageFromImage( WXImage nsimage, CGRect* r, CGContextRef cg);
+CGContextRef wxOSXCreateBitmapContextFromImage( WXImage nsimage, bool *isTemplate = NULL);
+WXImage wxOSXGetImageFromCGImage( CGImageRef image, double scale = 1.0, bool isTemplate = false);
+double wxOSXGetImageScaleFactor(WXImage image);
 
 
 class wxWindowMac;
@@ -146,7 +146,7 @@ class wxSearchCtrl;
 class wxMenuItem;
 class wxAcceleratorEntry;
 
-WXDLLIMPEXP_CORE wxWindowMac * wxFindWindowFromWXWidget(WXWidget inControl );
+wxWindowMac * wxFindWindowFromWXWidget(WXWidget inControl );
 
 typedef wxWidgetImpl wxWidgetImplType;
 
@@ -221,7 +221,7 @@ protected :
 #endif
 
 
-class WXDLLIMPEXP_CORE wxWidgetImpl : public wxObject
+class wxWidgetImpl : public wxObject
 {
 public :
     enum WidgetFlags
@@ -609,13 +609,13 @@ protected :
 // the interface to be implemented eg by a listbox
 //
 
-class WXDLLIMPEXP_CORE wxListWidgetColumn
+class wxListWidgetColumn
 {
 public :
     virtual ~wxListWidgetColumn() {}
 } ;
 
-class WXDLLIMPEXP_CORE wxListWidgetCellValue
+class wxListWidgetCellValue
 {
 public :
     wxListWidgetCellValue() {}
@@ -631,7 +631,7 @@ public :
     virtual wxString GetStringValue() const = 0;
 } ;
 
-class WXDLLIMPEXP_CORE wxListWidgetImpl
+class wxListWidgetImpl
 {
 public:
     wxListWidgetImpl() {}
@@ -680,7 +680,7 @@ class WXDLLIMPEXP_FWD_CORE wxTextAttr;
 class WXDLLIMPEXP_FWD_CORE wxTextEntry;
 
 // common interface for all implementations
-class WXDLLIMPEXP_CORE wxTextWidgetImpl
+class wxTextWidgetImpl
 
 {
 public :
@@ -753,7 +753,7 @@ private:
 };
 
 // common interface for all combobox implementations
-class WXDLLIMPEXP_CORE wxComboWidgetImpl
+class wxComboWidgetImpl
 
 {
 public :
@@ -783,7 +783,7 @@ public :
 // common interface for choice
 //
 
-class WXDLLIMPEXP_CORE wxChoiceWidgetImpl
+class wxChoiceWidgetImpl
 
 {
 public :
@@ -1008,7 +1008,7 @@ protected :
 
 bool wxMacInitCocoa();
 
-class WXDLLIMPEXP_CORE wxMacAutoreleasePool
+class wxMacAutoreleasePool
 {
 public :
     wxMacAutoreleasePool();

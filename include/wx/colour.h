@@ -819,7 +819,7 @@ struct fmt::formatter<wx::color::ColorRGBA>
 #define wxCOLOUR_IS_GDIOBJECT 1
 #endif
 
-class WXDLLIMPEXP_CORE wxColourBase : public
+class wxColourBase : public
 #if wxCOLOUR_IS_GDIOBJECT
     wxGDIObject
 #else
@@ -944,8 +944,8 @@ protected:
 
 
 // wxColour <-> wxString utilities, used by wxConfig, defined in colourcmn.cpp
-WXDLLIMPEXP_CORE wxString wxToString(const wxColourBase& col);
-WXDLLIMPEXP_CORE bool wxFromString(const wxString& str, wxColourBase* col);
+wxString wxToString(const wxColourBase& col);
+bool wxFromString(const wxString& str, wxColourBase* col);
 
 
 

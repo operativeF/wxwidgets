@@ -17,7 +17,7 @@
 // wxStaticLine
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxStaticLine : public wxStaticLineBase
+class wxStaticLine : public wxStaticLineBase
 {
 public:
     wxStaticLine();

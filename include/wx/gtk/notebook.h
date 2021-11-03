@@ -23,7 +23,7 @@ WX_DECLARE_LIST(wxGtkNotebookPage, wxGtkNotebookPagesList);
 // wxNotebook
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxNotebook : public wxNotebookBase
+class wxNotebook : public wxNotebookBase
 {
 public:
       // default for dynamic class

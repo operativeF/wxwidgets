@@ -16,7 +16,7 @@
 class QMainWindow;
 class QScrollArea;
 
-class WXDLLIMPEXP_CORE wxFrame : public wxFrameBase
+class wxFrame : public wxFrameBase
 {
 public:
     wxFrame() { Init(); }

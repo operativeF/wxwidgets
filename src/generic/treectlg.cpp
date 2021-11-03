@@ -74,7 +74,7 @@ constexpr auto EDITING_DELAY = 500ms;
 // -----------------------------------------------------------------------------
 
 // timer used for enabling in-place edit
-class WXDLLEXPORT wxTreeRenameTimer: public wxTimer
+class wxTreeRenameTimer: public wxTimer
 {
 public:
     explicit wxTreeRenameTimer( wxGenericTreeCtrl *owner );
@@ -89,7 +89,7 @@ private:
 };
 
 // control used for in-place edit
-class WXDLLEXPORT wxTreeTextCtrl: public wxTextCtrl
+class wxTreeTextCtrl: public wxTextCtrl
 {
 public:
     wxTreeTextCtrl(wxGenericTreeCtrl *owner, wxGenericTreeItem *item);
@@ -122,7 +122,7 @@ private:
 
 // timer used to clear wxGenericTreeCtrl::m_findPrefix if no key was pressed
 // for a sufficiently long time
-class WXDLLEXPORT wxTreeFindTimer : public wxTimer
+class wxTreeFindTimer : public wxTimer
 {
 public:
     explicit wxTreeFindTimer( wxGenericTreeCtrl *owner ) : m_owner(owner) {}
@@ -137,7 +137,7 @@ private:
 };
 
 // a tree item
-class WXDLLEXPORT wxGenericTreeItem
+class wxGenericTreeItem
 {
 public:
     wxGenericTreeItem() = default;

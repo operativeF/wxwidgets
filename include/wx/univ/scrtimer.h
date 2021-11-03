@@ -24,7 +24,7 @@
 // pressed
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxScrollTimer : public wxTimer
+class wxScrollTimer : public wxTimer
 {
 public:
     // default ctor

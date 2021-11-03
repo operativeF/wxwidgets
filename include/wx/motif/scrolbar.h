@@ -12,7 +12,7 @@
 #define _WX_SCROLBAR_H_
 
 // Scrollbar item
-class WXDLLIMPEXP_CORE wxScrollBar: public wxScrollBarBase
+class wxScrollBar: public wxScrollBarBase
 {
     wxDECLARE_DYNAMIC_CLASS(wxScrollBar);
 

@@ -16,7 +16,7 @@ class wxQtAction;
 
 class WXDLLIMPEXP_FWD_CORE wxMenu;
 
-class WXDLLIMPEXP_CORE wxMenuItem : public wxMenuItemBase
+class wxMenuItem : public wxMenuItemBase
 {
 public:
     wxMenuItem(wxMenu *parentMenu = NULL,

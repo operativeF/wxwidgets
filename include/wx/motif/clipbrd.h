@@ -21,22 +21,22 @@ struct wxDataIdToDataObject;
 WX_DECLARE_LIST(wxDataObject, wxDataObjectList);
 WX_DECLARE_LIST(wxDataIdToDataObject, wxDataIdToDataObjectList);
 
-WXDLLIMPEXP_CORE bool wxOpenClipboard();
-WXDLLIMPEXP_CORE bool wxClipboardOpen();
-WXDLLIMPEXP_CORE bool wxCloseClipboard();
-WXDLLIMPEXP_CORE bool wxEmptyClipboard();
-WXDLLIMPEXP_CORE bool wxIsClipboardFormatAvailable(wxDataFormat dataFormat);
-WXDLLIMPEXP_CORE bool wxSetClipboardData(wxDataFormat dataFormat, wxObject *obj, int width = 0, int height = 0);
-WXDLLIMPEXP_CORE wxObject* wxGetClipboardData(wxDataFormat dataFormat, long *len = NULL);
-WXDLLIMPEXP_CORE wxDataFormat wxEnumClipboardFormats(wxDataFormat dataFormat);
-WXDLLIMPEXP_CORE wxDataFormat wxRegisterClipboardFormat(char *formatName);
-WXDLLIMPEXP_CORE bool wxGetClipboardFormatName(wxDataFormat dataFormat, char *formatName, int maxCount);
+bool wxOpenClipboard();
+bool wxClipboardOpen();
+bool wxCloseClipboard();
+bool wxEmptyClipboard();
+bool wxIsClipboardFormatAvailable(wxDataFormat dataFormat);
+bool wxSetClipboardData(wxDataFormat dataFormat, wxObject *obj, int width = 0, int height = 0);
+wxObject* wxGetClipboardData(wxDataFormat dataFormat, long *len = NULL);
+wxDataFormat wxEnumClipboardFormats(wxDataFormat dataFormat);
+wxDataFormat wxRegisterClipboardFormat(char *formatName);
+bool wxGetClipboardFormatName(wxDataFormat dataFormat, char *formatName, int maxCount);
 
 //-----------------------------------------------------------------------------
 // wxClipboard
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxClipboard : public wxClipboardBase
+class wxClipboard : public wxClipboardBase
 {
 public:
     wxClipboard();

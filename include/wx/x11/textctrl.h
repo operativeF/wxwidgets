@@ -83,7 +83,7 @@ enum wxSourceLanguage
 // wxTextCtrl
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxTextCtrl: public wxTextCtrlBase, public wxScrollHelper
+class wxTextCtrl: public wxTextCtrlBase, public wxScrollHelper
 {
 public:
     wxTextCtrl() { Init(); }
@@ -358,7 +358,7 @@ constexpr wxChar wxACTION_TEXT_REDO[]          = wxT("redo");
 // wxTextCtrl types
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxStdTextCtrlInputHandler : public wxStdInputHandler
+class wxStdTextCtrlInputHandler : public wxStdInputHandler
 {
 public:
     wxStdTextCtrlInputHandler(wxInputHandler *inphand) : wxStdInputHandler(inphand) {}

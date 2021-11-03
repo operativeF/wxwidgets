@@ -25,7 +25,7 @@ class WXDLLIMPEXP_FWD_CORE wxFont;
 // wxFont
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxFont : public wxFontBase
+class wxFont : public wxFontBase
 {
 public:
     

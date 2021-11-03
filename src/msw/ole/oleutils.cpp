@@ -26,12 +26,12 @@
 // Implementation
 // ============================================================================
 
-WXDLLEXPORT BSTR wxConvertStringToOle(const wxString& str)
+BSTR wxConvertStringToOle(const wxString& str)
 {
     return wxBasicString(str).Detach();
 }
 
-WXDLLEXPORT wxString wxConvertStringFromOle(BSTR bStr)
+wxString wxConvertStringFromOle(BSTR bStr)
 {
     // NULL BSTR is equivalent to an empty string (this is the convention used
     // by VB and hence we must follow it)
@@ -232,7 +232,7 @@ bool wxVariantDataSafeArray::Write(wxString& str) const
     return true;
 }
 
-WXDLLEXPORT bool wxConvertVariantToOle(const wxVariant& variant, VARIANTARG& oleVariant)
+bool wxConvertVariantToOle(const wxVariant& variant, VARIANTARG& oleVariant)
 {
     VariantInit(&oleVariant);
     if (variant.IsNull())
@@ -355,7 +355,7 @@ WXDLLEXPORT bool wxConvertVariantToOle(const wxVariant& variant, VARIANTARG& ole
     return true;
 }
 
-WXDLLEXPORT bool
+bool
 wxConvertOleToVariant(const VARIANTARG& oleVariant, wxVariant& variant, long flags)
 {
     bool ok = true;

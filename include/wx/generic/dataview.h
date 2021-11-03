@@ -32,7 +32,7 @@ class WXDLLIMPEXP_FWD_CORE wxDataViewCtrlAccessible;
 // wxDataViewColumn
 // ---------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxDataViewColumn : public wxDataViewColumnBase
+class wxDataViewColumn : public wxDataViewColumnBase
 {
 public:
     wxDataViewColumn(const std::string& title,
@@ -183,7 +183,7 @@ private:
 // wxDataViewCtrl
 // ---------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxDataViewCtrl : public wxDataViewCtrlBase,
+class wxDataViewCtrl : public wxDataViewCtrlBase,
                                        public wxScrollHelper
 {
     friend class wxDataViewMainWindow;
@@ -428,7 +428,7 @@ private:
 // wxDataViewCtrlAccessible
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxDataViewCtrlAccessible: public wxWindowAccessible
+class wxDataViewCtrlAccessible: public wxWindowAccessible
 {
 public:
     wxDataViewCtrlAccessible(wxDataViewCtrl* win);

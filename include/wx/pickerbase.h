@@ -34,7 +34,7 @@ constexpr char wxPickerNameStr[] = "picker";
 constexpr unsigned int wxPB_USE_TEXTCTRL = 0x0002;
 constexpr unsigned int wxPB_SMALL        = 0x8000;
 
-class WXDLLIMPEXP_CORE wxPickerBase : public wxNavigationEnabled<wxControl>
+class wxPickerBase : public wxNavigationEnabled<wxControl>
 {
 public:
     // if present, intercepts wxPB_USE_TEXTCTRL style and creates the text control

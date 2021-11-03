@@ -9,7 +9,7 @@
 #ifndef _WX_QT_TOPLEVEL_H_
 #define _WX_QT_TOPLEVEL_H_
 
-class WXDLLIMPEXP_CORE wxTopLevelWindowQt : public wxTopLevelWindowBase
+class wxTopLevelWindowQt : public wxTopLevelWindowBase
 {
 public:
     wxTopLevelWindowQt();

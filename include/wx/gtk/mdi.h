@@ -22,7 +22,7 @@ typedef struct _GtkNotebook GtkNotebook;
 // wxMDIParentFrame
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxMDIParentFrame : public wxMDIParentFrameBase
+class wxMDIParentFrame : public wxMDIParentFrameBase
 {
 public:
     wxMDIParentFrame() { Init(); }
@@ -79,7 +79,7 @@ private:
 // wxMDIChildFrame
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxMDIChildFrame : public wxTDIChildFrame
+class wxMDIChildFrame : public wxTDIChildFrame
 {
 public:
     wxMDIChildFrame() { Init(); }
@@ -138,7 +138,7 @@ private:
 // wxMDIClientWindow
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxMDIClientWindow : public wxMDIClientWindowBase
+class wxMDIClientWindow : public wxMDIClientWindowBase
 {
 public:
     wxMDIClientWindow() { }

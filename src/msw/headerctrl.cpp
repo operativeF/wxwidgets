@@ -38,7 +38,7 @@
 #endif
 
 // from src/msw/listctrl.cpp
-extern int WXDLLIMPEXP_CORE wxMSWGetColumnClicked(NMHDR *nmhdr, POINT *ptClick);
+extern int wxMSWGetColumnClicked(NMHDR *nmhdr, POINT *ptClick);
 
 // ----------------------------------------------------------------------------
 // wxMSWHeaderCtrlCustomDraw: our custom draw helper

@@ -28,7 +28,7 @@ enum
 // available line width.
 // ----------------------------------------------------------------------------
 
-class WXDLLEXPORT wxWrapSizer : public wxBoxSizer
+class wxWrapSizer : public wxBoxSizer
 {
 public:
     wxWrapSizer(unsigned int orient = wxHORIZONTAL, unsigned int flags = wxWRAPSIZER_DEFAULT_FLAGS);

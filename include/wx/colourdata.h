@@ -12,7 +12,7 @@
 
 #include <array>
 
-class WXDLLIMPEXP_CORE wxColourData
+class wxColourData
 {
 public:
     // number of custom colours we store

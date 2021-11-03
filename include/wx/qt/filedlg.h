@@ -10,7 +10,7 @@
 
 class QFileDialog;
 
-class WXDLLIMPEXP_CORE wxFileDialog : public wxFileDialogBase
+class wxFileDialog : public wxFileDialogBase
 {
 public:
     wxFileDialog() { }

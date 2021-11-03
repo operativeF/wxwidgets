@@ -27,25 +27,25 @@
 
 #if wxUSE_GUI
 typedef SInt16 ThemeBrush;
-CGColorRef WXDLLIMPEXP_CORE wxMacCreateCGColorFromHITheme( ThemeBrush brush ) ;
-OSStatus WXDLLIMPEXP_CORE wxMacDrawCGImage(
+CGColorRef wxMacCreateCGColorFromHITheme( ThemeBrush brush ) ;
+OSStatus wxMacDrawCGImage(
                                CGContextRef    inContext,
                                const CGRect *  inBounds,
                                CGImageRef      inImage) ;
-void WXDLLIMPEXP_CORE wxOSXDrawNSImage(
+void wxOSXDrawNSImage(
                                            CGContextRef    inContext,
                                            const CGRect *  inBounds,
                                            WX_NSImage      inImage) ;
-WX_NSImage WXDLLIMPEXP_CORE wxOSXGetSystemImage(const wxString& name);
-WX_NSImage WXDLLIMPEXP_CORE wxOSXGetNSImageFromCGImage( CGImageRef image, double scale = 1.0, bool isTemplate = false);
-WX_NSImage WXDLLIMPEXP_CORE wxOSXGetNSImageFromIconRef( WXHICON iconref );
-WX_NSImage WXDLLIMPEXP_CORE wxOSXGetNSImageFromCFURL( CFURLRef urlref );
-WX_NSImage WXDLLIMPEXP_CORE wxOSXGetIconForType(OSType type );
-void WXDLLIMPEXP_CORE wxOSXSetImageSize(WX_NSImage image, CGFloat width, CGFloat height);
-wxBitmap WXDLLIMPEXP_CORE wxOSXCreateSystemBitmap(const wxString& id, const wxString &client, const wxSize& size);
-WXWindow WXDLLIMPEXP_CORE wxOSXGetMainWindow();
-WXWindow WXDLLIMPEXP_CORE wxOSXGetKeyWindow();
-WXImage WXDLLIMPEXP_CORE wxOSXGetNSImageFromNSCursor(const WXHCURSOR cursor);
+WX_NSImage wxOSXGetSystemImage(const wxString& name);
+WX_NSImage wxOSXGetNSImageFromCGImage( CGImageRef image, double scale = 1.0, bool isTemplate = false);
+WX_NSImage wxOSXGetNSImageFromIconRef( WXHICON iconref );
+WX_NSImage wxOSXGetNSImageFromCFURL( CFURLRef urlref );
+WX_NSImage wxOSXGetIconForType(OSType type );
+void wxOSXSetImageSize(WX_NSImage image, CGFloat width, CGFloat height);
+wxBitmap wxOSXCreateSystemBitmap(const wxString& id, const wxString &client, const wxSize& size);
+WXWindow wxOSXGetMainWindow();
+WXWindow wxOSXGetKeyWindow();
+WXImage wxOSXGetNSImageFromNSCursor(const WXHCURSOR cursor);
 
 class WXDLLIMPEXP_FWD_CORE wxDialog;
 
@@ -70,7 +70,7 @@ private:
 	wxWidgetCocoaNativeKeyDownSuspender& operator=(const wxWidgetCocoaNativeKeyDownSuspender&) = delete;
 };
 
-class WXDLLIMPEXP_CORE wxWidgetCocoaImpl : public wxWidgetImpl
+class wxWidgetCocoaImpl : public wxWidgetImpl
 {
 public :
     wxWidgetCocoaImpl( wxWindowMac* peer , WXWidget w, int flags = 0 ) ;
@@ -390,16 +390,16 @@ public:
     typedef void (*wxOSX_DraggingExitedHandlerPtr)(NSView *self, SEL _cmd, void *sender);
     typedef BOOL (*wxOSX_PerformDragOperationHandlerPtr)(NSView *self, SEL _cmd, void *sender);
 
-    WXDLLIMPEXP_CORE NSScreen* wxOSXGetMenuScreen();
-    WXDLLIMPEXP_CORE NSRect wxToNSRect( NSView* parent, const wxRect& r );
-    WXDLLIMPEXP_CORE wxRect wxFromNSRect( NSView* parent, const NSRect& rect );
-    WXDLLIMPEXP_CORE NSPoint wxToNSPoint( NSView* parent, const wxPoint& p );
-    WXDLLIMPEXP_CORE wxPoint wxFromNSPoint( NSView* parent, const NSPoint& p );
+    NSScreen* wxOSXGetMenuScreen();
+    NSRect wxToNSRect( NSView* parent, const wxRect& r );
+    wxRect wxFromNSRect( NSView* parent, const NSRect& rect );
+    NSPoint wxToNSPoint( NSView* parent, const wxPoint& p );
+    wxPoint wxFromNSPoint( NSView* parent, const NSPoint& p );
 
-    NSRect WXDLLIMPEXP_CORE wxOSXGetFrameForControl( wxWindowMac* window , const wxPoint& pos , const wxSize &size ,
+    NSRect wxOSXGetFrameForControl( wxWindowMac* window , const wxPoint& pos , const wxSize &size ,
         bool adjustForOrigin = true );
 
-    WXDLLIMPEXP_CORE NSView* wxOSXGetViewFromResponder( NSResponder* responder );
+    NSView* wxOSXGetViewFromResponder( NSResponder* responder );
 
     // used for many wxControls
 
@@ -492,7 +492,7 @@ public:
         wxOSXSKIP_DRAW = 0x1
     };
 
-    void WXDLLIMPEXP_CORE wxOSXCocoaClassAddWXMethods(Class c, wxOSXSkipOverrides skipFlags = wxOSXSKIP_NONE);
+    void wxOSXCocoaClassAddWXMethods(Class c, wxOSXSkipOverrides skipFlags = wxOSXSKIP_NONE);
 
     /*
     We need this for ShowModal, as the sheet just disables the parent window and
@@ -578,7 +578,7 @@ extern NSLayoutManager* gNSLayoutManager;
 // helper class for setting the current appearance to the
 // effective appearance and restore when exiting scope
 
-class WXDLLIMPEXP_CORE wxOSXEffectiveAppearanceSetter
+class wxOSXEffectiveAppearanceSetter
 {
 public:
     wxOSXEffectiveAppearanceSetter();

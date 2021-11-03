@@ -16,7 +16,7 @@
 
 #include "wx/weakref.h"
 
-class WXDLLIMPEXP_CORE wxClipboard : public wxClipboardBase
+class wxClipboard : public wxClipboardBase
 {
 public:
     // there are several clipboards in X11 (and in GDK)

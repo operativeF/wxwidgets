@@ -8,7 +8,7 @@
 #ifndef _WX_QT_DATAFORM_H_
 #define _WX_QT_DATAFORM_H_
 
-class WXDLLIMPEXP_CORE wxDataFormat
+class wxDataFormat
 {
 public:
     wxDataFormat(wxDataFormatId formatId = wxDF_INVALID);

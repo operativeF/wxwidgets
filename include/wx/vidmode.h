@@ -15,7 +15,7 @@
 // wxVideoMode: a simple struct containing video mode parameters for a display
 // ----------------------------------------------------------------------------
 
-struct WXDLLIMPEXP_CORE wxVideoMode
+struct wxVideoMode
 {
     wxVideoMode() = default;
     wxVideoMode(int width, int height, int depth, int freq)

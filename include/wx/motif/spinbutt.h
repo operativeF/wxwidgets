@@ -13,7 +13,7 @@
 
 class WXDLLIMPEXP_FWD_CORE wxArrowButton; // internal
 
-class WXDLLIMPEXP_CORE wxSpinButton : public wxSpinButtonBase
+class wxSpinButton : public wxSpinButtonBase
 {
     wxDECLARE_DYNAMIC_CLASS(wxSpinButton);
 

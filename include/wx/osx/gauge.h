@@ -14,7 +14,7 @@
 #include "wx/control.h"
 
 // Group box
-class WXDLLIMPEXP_CORE wxGauge: public wxGaugeBase
+class wxGauge: public wxGaugeBase
 {
  public:
   wxGauge() { }

@@ -32,7 +32,7 @@ enum wxTaskBarButtonState
     @see wxTaskBarButton
     @since 3.1.0
 */
-class WXDLLIMPEXP_CORE wxThumbBarButton {
+class wxThumbBarButton {
 public:
     /**
         Default constructor to allow 2-phase creation.
@@ -191,7 +191,7 @@ public:
     @see wxFrame::MSWGetTaskBarButton()
     @since 3.1.0
 */
-class WXDLLIMPEXP_CORE wxTaskBarButton
+class wxTaskBarButton
 {
 public:
     /**
@@ -359,7 +359,7 @@ enum wxTaskBarJumpListItemType
     @onlyfor{wxmsw}
     @since 3.1.0
 */
-class WXDLLIMPEXP_CORE wxTaskBarJumpListItem
+class wxTaskBarJumpListItem
 {
 public:
     /**
@@ -502,7 +502,7 @@ typedef std::vector<wxTaskBarJumpListItem*> wxTaskBarJumpListItems;
 
     @since 3.1.0
 */
-class WXDLLIMPEXP_CORE wxTaskBarJumpListCategory
+class wxTaskBarJumpListCategory
 {
 public:
     /**
@@ -610,7 +610,7 @@ typedef std::vector<wxTaskBarJumpListCategory*> wxTaskBarJumpListCategories;
     @see wxTaskBarJumpListCategory, wxTaskBarJumpListItem
     @since 3.1.0
 */
-class WXDLLIMPEXP_CORE wxTaskBarJumpList
+class wxTaskBarJumpList
 {
 public:
     /**

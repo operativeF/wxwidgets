@@ -801,7 +801,7 @@ wxDECLARE_EXPORTED_EVENT(WXDLLIMPEXP_CORE, wxEVT_TEXT_ENTER, wxCommandEvent);
 wxDECLARE_EXPORTED_EVENT(WXDLLIMPEXP_CORE, wxEVT_TEXT_URL, wxTextUrlEvent);
 wxDECLARE_EXPORTED_EVENT(WXDLLIMPEXP_CORE, wxEVT_TEXT_MAXLEN, wxCommandEvent);
 
-class WXDLLIMPEXP_CORE wxTextUrlEvent : public wxCommandEvent
+class wxTextUrlEvent : public wxCommandEvent
 {
 public:
     wxTextUrlEvent(int winid, const wxMouseEvent& evtMouse,
@@ -866,7 +866,7 @@ typedef void (wxEvtHandler::*wxTextUrlEventFunction)(wxTextUrlEvent&);
 // C++ stream to the wxTextCtrl given to its ctor during its lifetime.
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxStreamToTextRedirector
+class wxStreamToTextRedirector
 {
 private:
     void Init(wxTextCtrl *text)

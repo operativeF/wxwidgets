@@ -48,7 +48,7 @@ using msw::utils::unique_bitmap;
 using msw::utils::unique_dc;
 using msw::utils::unique_dcwnd;
 
-class WXDLLEXPORT wxBitmapRefData : public wxGDIImageRefData
+class wxBitmapRefData : public wxGDIImageRefData
 {
 public:
     wxBitmapRefData() 

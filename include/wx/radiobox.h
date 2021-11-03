@@ -36,7 +36,7 @@ constexpr char wxRadioBoxNameStr[] = "radioBox";
 // example, it is a wxStaticBox in wxUniv and wxMSW but not in other ports
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxRadioBoxBase : public wxItemContainerImmutable
+class wxRadioBoxBase : public wxItemContainerImmutable
 {
 public:
     ~wxRadioBoxBase();

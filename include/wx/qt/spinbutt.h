@@ -11,7 +11,7 @@
 #include "wx/spinbutt.h"
 class QSpinBox;
 
-class WXDLLIMPEXP_CORE wxSpinButton : public wxSpinButtonBase
+class wxSpinButton : public wxSpinButtonBase
 {
 public:
     wxSpinButton();

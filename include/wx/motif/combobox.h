@@ -15,7 +15,7 @@
 #include "wx/textentry.h"
 
 // Combobox item
-class WXDLLIMPEXP_CORE wxComboBox : public wxChoice,
+class wxComboBox : public wxChoice,
                                public wxTextEntry
 {
 public:

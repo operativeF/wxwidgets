@@ -14,7 +14,7 @@
 
 class QMimeData;
 
-class WXDLLIMPEXP_CORE wxDataObject : public wxDataObjectBase
+class wxDataObject : public wxDataObjectBase
 {
 public:
     wxDataObject();

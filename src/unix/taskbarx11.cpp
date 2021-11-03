@@ -46,7 +46,7 @@
 // base class that implements toolkit-specific method:
 // ----------------------------------------------------------------------------
 
-    class WXDLLIMPEXP_CORE wxTaskBarIconAreaBase : public wxFrame
+    class wxTaskBarIconAreaBase : public wxFrame
     {
     public:
         wxTaskBarIconAreaBase()
@@ -84,7 +84,7 @@
 // wxTaskBarIconArea is the real window that shows the icon:
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxTaskBarIconArea : public wxTaskBarIconAreaBase
+class wxTaskBarIconArea : public wxTaskBarIconAreaBase
 {
 public:
     wxTaskBarIconArea(wxTaskBarIcon *icon, const wxBitmap &bmp);

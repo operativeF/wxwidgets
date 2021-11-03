@@ -35,7 +35,7 @@ constexpr wxChar wxACTION_SLIDER_THUMB_RELEASE[]   = wxT("thumbrelease");
 // wxSlider
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxSlider : public wxSliderBase,
+class wxSlider : public wxSliderBase,
                              public wxControlWithThumb
 {
 public:

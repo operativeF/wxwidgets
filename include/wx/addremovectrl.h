@@ -22,7 +22,7 @@ constexpr char wxAddRemoveCtrlNameStr[] = "wxAddRemoveCtrl";
 // wxAddRemoveAdaptor: used by wxAddRemoveCtrl to work with the list control
 // ----------------------------------------------------------------------------
 
-struct WXDLLIMPEXP_CORE wxAddRemoveAdaptor
+struct wxAddRemoveAdaptor
 {
     virtual ~wxAddRemoveAdaptor() = default;
 
@@ -51,7 +51,7 @@ struct WXDLLIMPEXP_CORE wxAddRemoveAdaptor
 // wxAddRemoveCtrl: a list-like control combined with add/remove buttons
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxAddRemoveCtrl : public wxPanel
+class wxAddRemoveCtrl : public wxPanel
 {
 public:
     wxAddRemoveCtrl() = default;

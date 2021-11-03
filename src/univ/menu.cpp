@@ -41,7 +41,7 @@ typedef wxMenuItemList::compatibility_iterator wxMenuItemIter;
 // wxMenuInfo contains all extra information about top level menus we need
 // ----------------------------------------------------------------------------
 
-class WXDLLEXPORT wxMenuInfo
+class wxMenuInfo
 {
 public:
     wxMenuInfo(const wxString& text)

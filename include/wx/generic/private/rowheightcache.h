@@ -26,7 +26,7 @@ struct RowRange
     It stores the indices that are members of a group in a memory
     efficient way.
 */
-class WXDLLIMPEXP_CORE RowRanges
+class RowRanges
 {
 public:
     /**
@@ -127,7 +127,7 @@ using HeightToRowRangesMap = std::unordered_map< unsigned int, RowRanges*, wxInt
     Use bisect algorithm in combination with GetLineStart() to
     find the appropriate item
 */
-class WXDLLIMPEXP_CORE HeightCache
+class HeightCache
 {
 public:
     ~HeightCache();

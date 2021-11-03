@@ -19,7 +19,7 @@
 WX_DEFINE_ARRAY( char * , wxChoiceDataArray ) ;
 
 // Choice item
-class WXDLLIMPEXP_CORE wxChoice: public wxChoiceBase
+class wxChoice: public wxChoiceBase
 {
     wxDECLARE_DYNAMIC_CLASS(wxChoice);
 

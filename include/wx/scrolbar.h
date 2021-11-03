@@ -25,7 +25,7 @@ constexpr char wxScrollBarNameStr[] = "scrollBar";
 // wxScrollBar: a scroll bar control
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxScrollBarBase : public wxControl
+class wxScrollBarBase : public wxControl
 {
 public:
     wxScrollBarBase& operator=(wxScrollBarBase&&) = delete;

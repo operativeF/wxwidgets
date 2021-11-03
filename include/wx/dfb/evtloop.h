@@ -19,7 +19,7 @@ wxDFB_DECLARE_INTERFACE(IDirectFBEventBuffer);
 // wxEventLoop
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxGUIEventLoop : public wxConsoleEventLoop
+class wxGUIEventLoop : public wxConsoleEventLoop
 {
 public:
     wxGUIEventLoop();

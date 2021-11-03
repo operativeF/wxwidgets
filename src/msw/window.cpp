@@ -259,7 +259,7 @@ private:
 // ---------------------------------------------------------------------------
 
 // the window proc for all our windows
-LRESULT WXDLLEXPORT APIENTRY
+LRESULT APIENTRY
 wxWndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 
 #if wxDEBUG_LEVEL >= 2
@@ -2833,7 +2833,7 @@ wxWindowCreationHook::~wxWindowCreationHook()
 }
 
 // Main window proc
-LRESULT WXDLLEXPORT APIENTRY
+LRESULT APIENTRY
 wxWndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     // trace all messages: useful for the debugging but noticeably slows down

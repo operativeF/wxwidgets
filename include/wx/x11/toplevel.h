@@ -15,7 +15,7 @@
 // wxTopLevelWindowX11
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxTopLevelWindowX11 : public wxTopLevelWindowBase
+class wxTopLevelWindowX11 : public wxTopLevelWindowBase
 {
 public:
     // constructors and such

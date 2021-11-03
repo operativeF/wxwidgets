@@ -33,7 +33,7 @@ constexpr wxChar wxACTION_COMBOBOX_SELECT[]      = wxT("select");
 // NB: Normally we'd like wxComboBox to inherit from wxComboBoxBase, but here
 //     we can't really do that since both wxComboBoxBase and wxComboCtrl inherit
 //     from wxTextCtrl.
-class WXDLLIMPEXP_CORE wxComboBox :
+class wxComboBox :
     public wxWindowWithItems<wxComboCtrl, wxItemContainer>
 {
 public:

@@ -11,7 +11,7 @@
 #ifndef __MOTIFTOPLEVELH__
 #define __MOTIFTOPLEVELH__
 
-class WXDLLIMPEXP_CORE wxTopLevelWindowMotif : public wxTopLevelWindowBase
+class wxTopLevelWindowMotif : public wxTopLevelWindowBase
 {
 public:
     wxTopLevelWindowMotif() { Init(); }

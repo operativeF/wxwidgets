@@ -32,7 +32,7 @@
 class wxStaticBitmap;
 #endif // wxCLRDLGG_USE_PREVIEW_WITH_ALPHA
 
-class WXDLLIMPEXP_CORE wxGenericColourDialog : public wxDialog
+class wxGenericColourDialog : public wxDialog
 {
 public:
     wxGenericColourDialog();

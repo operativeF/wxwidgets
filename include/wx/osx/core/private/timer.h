@@ -14,7 +14,7 @@
 
 struct wxOSXTimerInfo;
 
-class WXDLLIMPEXP_CORE wxOSXTimerImpl : public wxTimerImpl
+class wxOSXTimerImpl : public wxTimerImpl
 {
 public:
     wxOSXTimerImpl(wxTimer *timer);

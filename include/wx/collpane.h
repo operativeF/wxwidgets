@@ -30,7 +30,7 @@ constexpr char wxCollapsiblePaneNameStr[] = "collapsiblePane";
 constexpr unsigned int wxCP_DEFAULT_STYLE          = wxTAB_TRAVERSAL | wxNO_BORDER;
 constexpr unsigned int wxCP_NO_TLW_RESIZE          = 0x0002;
 
-class WXDLLIMPEXP_CORE wxCollapsiblePaneBase : public wxControl
+class wxCollapsiblePaneBase : public wxControl
 {
 public:
     virtual void Collapse(bool collapse = true) = 0;
@@ -71,7 +71,7 @@ class WXDLLIMPEXP_FWD_CORE wxCollapsiblePaneEvent;
 
 wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_COLLAPSIBLEPANE_CHANGED, wxCollapsiblePaneEvent );
 
-class WXDLLIMPEXP_CORE wxCollapsiblePaneEvent : public wxCommandEvent
+class wxCollapsiblePaneEvent : public wxCommandEvent
 {
 public:
     wxCollapsiblePaneEvent() = default;

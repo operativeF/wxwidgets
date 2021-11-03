@@ -30,7 +30,7 @@ constexpr char wxBannerWindowNameStr[] = "bannerwindow";
 // A simple banner window showing either a bitmap or text.
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxBannerWindow : public wxWindow
+class wxBannerWindow : public wxWindow
 {
 public:
     // Default constructor, use Create() later.

@@ -14,7 +14,7 @@
 // wxPanel
 // ----------------------------------------------------------------------------
 
-struct WXDLLIMPEXP_CORE wxPanel : public wxPanelBase
+struct wxPanel : public wxPanelBase
 {
     wxPanel() { }
 

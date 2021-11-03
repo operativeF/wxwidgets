@@ -43,7 +43,7 @@ class WXDLLIMPEXP_FWD_CORE wxDisplayImpl;
 // wxDisplay: represents a display/monitor attached to the system
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxDisplay
+class wxDisplay
 {
 public:
     // default ctor creates the object corresponding to the primary display

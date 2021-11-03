@@ -26,7 +26,7 @@
 // wxStdTLWInputHandler: handles focus, resizing and titlebar buttons clicks
 // ----------------------------------------------------------------------------
 
-class WXDLLEXPORT wxStdTLWInputHandler : public wxStdInputHandler
+class wxStdTLWInputHandler : public wxStdInputHandler
 {
 public:
     wxStdTLWInputHandler(wxInputHandler *inphand);

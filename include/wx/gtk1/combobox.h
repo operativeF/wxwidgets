@@ -30,7 +30,7 @@ class WXDLLIMPEXP_FWD_CORE wxComboBox;
 // wxComboBox
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxComboBox :
+class wxComboBox :
     public wxWindowWithItems<wxControl, wxComboBoxBase>
 {
 public:

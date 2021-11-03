@@ -19,7 +19,7 @@
 // wxClipboard
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxClipboard : public wxClipboardBase
+class wxClipboard : public wxClipboardBase
 {
 public:
     wxClipboard();

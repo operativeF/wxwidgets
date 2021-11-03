@@ -13,7 +13,7 @@
 
 #include "wx/generic/stattextg.h"
 
-class WXDLLIMPEXP_CORE wxStaticText : public wxGenericStaticText
+class wxStaticText : public wxGenericStaticText
 {
 public:
     wxStaticText() { }

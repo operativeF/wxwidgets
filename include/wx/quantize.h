@@ -33,7 +33,7 @@ constexpr unsigned int wxQUANTIZE_INCLUDE_WINDOWS_COLOURS = 0x01;
 constexpr unsigned int wxQUANTIZE_RETURN_8BIT_DATA        = 0x02;
 constexpr unsigned int wxQUANTIZE_FILL_DESTINATION_IMAGE  = 0x04;
 
-class WXDLLIMPEXP_CORE wxQuantize: public wxObject
+class wxQuantize: public wxObject
 {
 public:
     wxDECLARE_DYNAMIC_CLASS(wxQuantize);

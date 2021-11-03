@@ -26,7 +26,7 @@
 // wxEventLoopImpl
 // ----------------------------------------------------------------------------
 
-class WXDLLEXPORT wxEventLoopImpl
+class wxEventLoopImpl
 {
 public:
     // ctor

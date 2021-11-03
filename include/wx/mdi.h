@@ -33,7 +33,7 @@ class WXDLLIMPEXP_FWD_CORE wxMDIClientWindow;
 // wxMDIParentFrameBase: base class for parent frame for MDI children
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxMDIParentFrameBase : public wxFrame
+class wxMDIParentFrameBase : public wxFrame
 {
 public:
     /*
@@ -129,7 +129,7 @@ protected:
 // wxMDIChildFrameBase: child frame managed by wxMDIParentFrame
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxMDIChildFrameBase : public wxFrame
+class wxMDIChildFrameBase : public wxFrame
 {
 public:
     /*
@@ -195,7 +195,7 @@ protected:
 // wxTDIChildFrame: child frame used by TDI implementations
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxTDIChildFrame : public wxMDIChildFrameBase
+class wxTDIChildFrame : public wxMDIChildFrameBase
 {
 public:
     // override wxFrame methods for this non top-level window
@@ -321,7 +321,7 @@ protected:
 // wxMDIClientWindowBase: child of parent frame, parent of children frames
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxMDIClientWindowBase : public wxWindow
+class wxMDIClientWindowBase : public wxWindow
 {
 public:
     /*

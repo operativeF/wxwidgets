@@ -12,7 +12,7 @@
 
 #include <string>
 
-class WXDLLIMPEXP_CORE wxWindow;
+class wxWindow;
 
 // ----------------------------------------------------------------------------
 // wxTextWrapper
@@ -20,7 +20,7 @@ class WXDLLIMPEXP_CORE wxWindow;
 
 // this class is used to wrap the text on word boundary: wrapping is done by
 // calling OnStartLine() and OnOutputLine() functions
-class WXDLLIMPEXP_CORE wxTextWrapper
+class wxTextWrapper
 {
 public:
     wxTextWrapper& operator=(wxTextWrapper&&) = delete;

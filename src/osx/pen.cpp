@@ -18,7 +18,7 @@
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxPen, wxGDIObject);
 
-class WXDLLEXPORT wxPenRefData : public wxGDIRefData
+class wxPenRefData : public wxGDIRefData
 {
 public:
     wxPenRefData();

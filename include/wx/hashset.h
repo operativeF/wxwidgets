@@ -81,7 +81,7 @@ public:                                                                       \
 
 #define WX_DECLARE_EXPORTED_HASH_SET( KEY_T, HASH_T, KEY_EQ_T, CLASSNAME) \
     WX_DECLARE_HASH_SET_WITH_DECL( KEY_T, HASH_T, KEY_EQ_T, \
-                                   CLASSNAME, class WXDLLIMPEXP_CORE )
+                                   CLASSNAME, class )
 
 // Finally these versions allow to define hash sets of non-objects (including
 // pointers, hence the confusing but wxArray-compatible name) without

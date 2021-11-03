@@ -8,7 +8,7 @@
 #ifndef _WX_QT_CHECKLST_H_
 #define _WX_QT_CHECKLST_H_
 
-class WXDLLIMPEXP_CORE wxCheckListBox : public wxCheckListBoxBase
+class wxCheckListBox : public wxCheckListBoxBase
 {
 public:
     wxCheckListBox();

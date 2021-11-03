@@ -19,7 +19,7 @@ struct _GtkTreePath;
 // wxDataViewColumn
 // ---------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxDataViewColumn: public wxDataViewColumnBase
+class wxDataViewColumn: public wxDataViewColumnBase
 {
 public:
     wxDataViewColumn( const wxString &title, wxDataViewRenderer *renderer,
@@ -100,7 +100,7 @@ WX_DECLARE_LIST_WITH_DECL(wxDataViewColumn, wxDataViewColumnList,
 // wxDataViewCtrl
 // ---------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxDataViewCtrl: public wxDataViewCtrlBase
+class wxDataViewCtrl: public wxDataViewCtrlBase
 {
 public:
     wxDataViewCtrl()

@@ -30,7 +30,7 @@
 // selection listbox
 // ----------------------------------------------------------------------------
 
-class WXDLLEXPORT wxStdListboxInputHandler : public wxStdInputHandler
+class wxStdListboxInputHandler : public wxStdInputHandler
 {
 public:
     // if pressing the mouse button in a multiselection listbox should toggle

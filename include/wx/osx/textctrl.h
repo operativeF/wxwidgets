@@ -25,7 +25,7 @@
 #include "wx/control.h"
 #include "wx/textctrl.h"
 
-class WXDLLIMPEXP_CORE wxTextCtrl: public wxTextCtrlBase
+class wxTextCtrl: public wxTextCtrlBase
 {
     wxDECLARE_DYNAMIC_CLASS(wxTextCtrl);
 

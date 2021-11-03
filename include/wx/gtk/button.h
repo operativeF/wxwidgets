@@ -13,7 +13,7 @@
 // wxButton
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxButton : public wxButtonBase
+class wxButton : public wxButtonBase
 {
 public:
     wxButton() {}

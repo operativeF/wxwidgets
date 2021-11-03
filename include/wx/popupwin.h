@@ -31,7 +31,7 @@ constexpr unsigned int wxPU_CONTAINS_CONTROLS = 0x0001;
 // combobox popups and such.
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxPopupWindowBase : public wxNonOwnedWindow
+class wxPopupWindowBase : public wxNonOwnedWindow
 {
 public:
     wxPopupWindowBase& operator=(wxPopupWindowBase&&) = delete;
@@ -83,7 +83,7 @@ public:
 // ----------------------------------------------------------------------------
 
 // Define the public API of wxPopupTransientWindow:
-class WXDLLIMPEXP_CORE wxPopupTransientWindowBase : public wxPopupWindow
+class wxPopupTransientWindowBase : public wxPopupWindow
 {
 public:
     // popup the window (this will show it too) and keep focus at winFocus
@@ -123,7 +123,7 @@ protected:
 
 #ifdef __WXMSW__
 
-class WXDLLIMPEXP_CORE wxPopupTransientWindow : public wxPopupTransientWindowBase
+class wxPopupTransientWindow : public wxPopupTransientWindowBase
 {
 public:
     wxPopupTransientWindow() = default;
@@ -155,7 +155,7 @@ private:
 class WXDLLIMPEXP_FWD_CORE wxPopupWindowHandler;
 class WXDLLIMPEXP_FWD_CORE wxPopupFocusHandler;
 
-class WXDLLIMPEXP_CORE wxPopupTransientWindow : public wxPopupTransientWindowBase
+class wxPopupTransientWindow : public wxPopupTransientWindowBase
 {
 public:
     wxPopupTransientWindow() { Init(); }
@@ -216,7 +216,7 @@ protected:
 class WXDLLIMPEXP_FWD_CORE wxComboBox;
 class WXDLLIMPEXP_FWD_CORE wxComboCtrl;
 
-class WXDLLIMPEXP_CORE wxPopupComboWindow : public wxPopupTransientWindow
+class wxPopupComboWindow : public wxPopupTransientWindow
 {
 public:
     wxPopupComboWindow() { m_combo = NULL; }

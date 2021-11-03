@@ -39,7 +39,7 @@ constexpr wxChar wxINP_HANDLER_TOPLEVEL[]          = wxT("toplevel");
 // wxInputHandler: maps the events to the actions
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxInputHandler : public wxObject
+class wxInputHandler : public wxObject
 {
 public:
     // map a keyboard event to one or more actions (pressed == true if the key
@@ -78,7 +78,7 @@ public:
 // and also provides the way to chain input handlers together
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxStdInputHandler : public wxInputHandler
+class wxStdInputHandler : public wxInputHandler
 {
 public:
     wxStdInputHandler(wxInputHandler *handler) : m_handler(handler) { }

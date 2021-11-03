@@ -47,7 +47,7 @@ enum wxAcceleratorEntryFlags
 // an entry in wxAcceleratorTable corresponds to one accelerator
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxAcceleratorEntry
+class wxAcceleratorEntry
 {
 public:
     wxAcceleratorEntry() = default;

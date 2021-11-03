@@ -62,7 +62,7 @@ struct IFFImage
     ~IFFImage() { delete [] p; delete [] pal; }
 };
 
-class WXDLLEXPORT wxIFFDecoder
+class wxIFFDecoder
 {
 private:
     IFFImage *m_image{nullptr};        // image data

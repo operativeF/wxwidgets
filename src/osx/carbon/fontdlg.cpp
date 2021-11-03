@@ -105,7 +105,7 @@ static wxFontFamily FontFamilyStringToInt(const wxChar *family);
 // helper class - wxFontPreviewCtrl
 //-----------------------------------------------------------------------------
 
-class WXDLLEXPORT wxFontPreviewCtrl : public wxWindow
+class wxFontPreviewCtrl : public wxWindow
 {
 public:
     wxFontPreviewCtrl(wxWindow *parent, wxWindowID id = wxID_ANY, const wxPoint& pos = wxDefaultPosition, const wxSize& sz = wxDefaultSize, long style = 0) :

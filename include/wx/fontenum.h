@@ -26,7 +26,7 @@
 // fonts with given attributes
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxFontEnumerator
+class wxFontEnumerator
 {
 public:
     // virtual dtor for the base class

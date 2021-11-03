@@ -15,7 +15,7 @@
 #include "wx/stattext.h"
 
 // Slider
-class WXDLLIMPEXP_CORE wxSlider: public wxCompositeWindow<wxSliderBase>
+class wxSlider: public wxCompositeWindow<wxSliderBase>
 {
     wxDECLARE_DYNAMIC_CLASS(wxSlider);
 

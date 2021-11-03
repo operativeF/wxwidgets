@@ -35,7 +35,7 @@ class WXDLLIMPEXP_FWD_CORE wxSplashScreenWindow;
  * wxSplashScreen
  */
 
-class WXDLLIMPEXP_CORE wxSplashScreen: public wxFrame,
+class wxSplashScreen: public wxFrame,
                                       public wxEventFilter
 {
 public:
@@ -79,7 +79,7 @@ protected:
  * wxSplashScreenWindow
  */
 
-class WXDLLIMPEXP_CORE wxSplashScreenWindow: public wxWindow
+class wxSplashScreenWindow: public wxWindow
 {
 public:
     wxSplashScreenWindow(const wxBitmap& bitmap,

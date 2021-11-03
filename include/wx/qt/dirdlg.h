@@ -10,7 +10,7 @@
 
 class QFileDialog;
 
-class WXDLLIMPEXP_CORE wxDirDialog : public wxDirDialogBase
+class wxDirDialog : public wxDirDialogBase
 {
 public:
     wxDirDialog() { }

@@ -13,7 +13,7 @@
 
 class WXDLLIMPEXP_FWD_CORE wxSizer;
 
-class WXDLLIMPEXP_CORE wxGenericMessageDialog : public wxMessageDialogBase
+class wxGenericMessageDialog : public wxMessageDialogBase
 {
 public:
     wxGenericMessageDialog(wxWindow *parent,

@@ -43,7 +43,7 @@
 // helper class - wxFontPreviewer
 //-----------------------------------------------------------------------------
 
-class WXDLLEXPORT wxFontPreviewer : public wxWindow
+class wxFontPreviewer : public wxWindow
 {
 public:
     wxFontPreviewer(wxWindow *parent, const wxSize& sz = wxDefaultSize) : wxWindow(parent, wxID_ANY, wxDefaultPosition, sz)

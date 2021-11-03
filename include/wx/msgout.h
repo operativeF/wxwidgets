@@ -131,7 +131,7 @@ private:
 
 #if wxUSE_GUI && wxUSE_MSGDLG
 
-class WXDLLIMPEXP_CORE wxMessageOutputMessageBox : public wxMessageOutput
+class wxMessageOutputMessageBox : public wxMessageOutput
 {
 public:
     void Output(const std::string& str) override;

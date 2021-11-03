@@ -17,7 +17,7 @@
 
 #include "wx/geometry/rect.h"
 
-class WXDLLIMPEXP_CORE wxDataViewRenderer: public wxDataViewCustomRendererBase
+class wxDataViewRenderer: public wxDataViewCustomRendererBase
 {
 public:
     wxDataViewRenderer( const wxString &varianttype,

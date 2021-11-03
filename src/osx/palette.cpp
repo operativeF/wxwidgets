@@ -21,7 +21,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxPalette, wxGDIObject);
 // wxPaletteRefData
 // ============================================================================
 
-class WXDLLEXPORT wxPaletteRefData: public wxGDIRefData
+class wxPaletteRefData: public wxGDIRefData
 {
 public:
     wxPaletteRefData();

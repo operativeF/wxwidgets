@@ -22,7 +22,7 @@ class WXDLLIMPEXP_FWD_CORE wxMemoryDCImpl;
 // wxMemoryDCImpl
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxMemoryDCImpl : public wxWindowDCImpl
+class wxMemoryDCImpl : public wxWindowDCImpl
 {
 public:
     wxMemoryDCImpl(wxMemoryDC *owner)

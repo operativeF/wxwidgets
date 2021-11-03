@@ -2090,7 +2090,7 @@ bool wxListCtrl::MSWCommand(WXUINT cmd, WXWORD id_)
 }
 
 // utility used by wxListCtrl::MSWOnNotify and by wxDataViewHeaderWindowMSW::MSWOnNotify
-int WXDLLIMPEXP_CORE wxMSWGetColumnClicked(NMHDR *nmhdr, POINT *ptClick)
+int wxMSWGetColumnClicked(NMHDR *nmhdr, POINT *ptClick)
 {
     // find the column clicked: we have to search for it ourselves as the
     // notification message doesn't provide this info

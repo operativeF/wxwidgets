@@ -29,7 +29,7 @@ class WXDLLIMPEXP_FWD_CORE wxRenderer;
 // wxMenu
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxMenu : public wxMenuBase
+class wxMenu : public wxMenuBase
 {
 public:
     // ctors and dtor
@@ -137,7 +137,7 @@ private:
 // wxMenuBar
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxMenuBar : public wxMenuBarBase
+class wxMenuBar : public wxMenuBarBase
 {
 public:
     // ctors and dtor

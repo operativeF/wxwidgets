@@ -29,7 +29,7 @@
 // click into button press/release actions
 // ----------------------------------------------------------------------------
 
-class WXDLLEXPORT wxStdNotebookInputHandler : public wxStdInputHandler
+class wxStdNotebookInputHandler : public wxStdInputHandler
 {
 public:
     wxStdNotebookInputHandler(wxInputHandler *inphand);

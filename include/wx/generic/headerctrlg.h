@@ -18,7 +18,7 @@
 // wxHeaderCtrl
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxHeaderCtrl : public wxHeaderCtrlBase
+class wxHeaderCtrl : public wxHeaderCtrlBase
 {
 public:
     wxHeaderCtrl()

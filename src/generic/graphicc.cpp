@@ -117,7 +117,7 @@ namespace
 
 } // anonymous namespace
 
-class WXDLLIMPEXP_CORE wxCairoPathData : public wxGraphicsPathData
+class wxCairoPathData : public wxGraphicsPathData
 {
 public :
     wxCairoPathData(wxGraphicsRenderer* renderer, cairo_t* path = NULL);
@@ -188,7 +188,7 @@ private :
     cairo_t* m_pathContext;
 };
 
-class WXDLLIMPEXP_CORE wxCairoMatrixData : public wxGraphicsMatrixData
+class wxCairoMatrixData : public wxGraphicsMatrixData
 {
 public :
     wxCairoMatrixData(wxGraphicsRenderer* renderer, const cairo_matrix_t* matrix = NULL ) ;
@@ -294,7 +294,7 @@ private:
 	wxCairoPenBrushBaseData& operator=(const wxCairoPenBrushBaseData&) = delete;
 };
 
-class WXDLLIMPEXP_CORE wxCairoPenData : public wxCairoPenBrushBaseData
+class wxCairoPenData : public wxCairoPenBrushBaseData
 {
 public:
     wxCairoPenData( wxGraphicsRenderer* renderer, const wxGraphicsPenInfo &info );
@@ -319,7 +319,7 @@ private :
 	wxCairoPenData& operator=(const wxCairoPenData&) = delete;
 };
 
-class WXDLLIMPEXP_CORE wxCairoBrushData : public wxCairoPenBrushBaseData
+class wxCairoBrushData : public wxCairoPenBrushBaseData
 {
 public:
     wxCairoBrushData( wxGraphicsRenderer* renderer );
@@ -413,7 +413,7 @@ private :
     unsigned char* m_buffer;
 };
 
-class WXDLLIMPEXP_CORE wxCairoContext : public wxGraphicsContext
+class wxCairoContext : public wxGraphicsContext
 {
 public:
     wxCairoContext( wxGraphicsRenderer* renderer, const wxWindowDC& dc );
@@ -3079,7 +3079,7 @@ void wxCairoContext::EndLayer()
 // wxCairoRenderer declaration
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxCairoRenderer : public wxGraphicsRenderer
+class wxCairoRenderer : public wxGraphicsRenderer
 {
 public :
     wxCairoRenderer() {}

@@ -1527,7 +1527,7 @@ bool wxXPMDataHandler::Create(wxBitmap *bitmap, const void* bits,
 // wxXBMDataHandler
 // ----------------------------------------------------------------------------
 
-class WXDLLEXPORT wxXBMDataHandler: public wxBitmapHandler
+class wxXBMDataHandler: public wxBitmapHandler
 {
     wxDECLARE_DYNAMIC_CLASS(wxXBMDataHandler);
 public:

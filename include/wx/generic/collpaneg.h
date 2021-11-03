@@ -22,7 +22,7 @@ class WXDLLIMPEXP_FWD_CORE wxCollapsibleHeaderCtrl;
 // wxGenericCollapsiblePane
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxGenericCollapsiblePane :
+class wxGenericCollapsiblePane :
     public wxNavigationEnabled<wxCollapsiblePaneBase>
 {
 public:

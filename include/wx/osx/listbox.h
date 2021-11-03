@@ -35,7 +35,7 @@ class WXDLLIMPEXP_FWD_CORE wxListWidgetColumn;
 
 class WXDLLIMPEXP_FWD_CORE wxListWidgetCellValue;
 
-class WXDLLIMPEXP_CORE wxListBox : public wxListBoxBase
+class wxListBox : public wxListBoxBase
 {
 public:
     

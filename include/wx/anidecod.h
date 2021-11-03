@@ -29,7 +29,7 @@ WX_DECLARE_EXPORTED_OBJARRAY(wxImage, wxImageArray);
 // wxANIDecoder class
 // --------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxANIDecoder : public wxAnimationDecoder
+class wxANIDecoder : public wxAnimationDecoder
 {
 public:
 

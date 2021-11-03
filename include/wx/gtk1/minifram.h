@@ -26,7 +26,7 @@ class WXDLLIMPEXP_FWD_CORE wxMiniFrame;
 // wxMiniFrame
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxMiniFrame: public wxFrame
+class wxMiniFrame: public wxFrame
 {
     wxDECLARE_DYNAMIC_CLASS(wxMiniFrame);
 

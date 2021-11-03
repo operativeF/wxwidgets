@@ -17,7 +17,7 @@
 // wxColourButton
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxColourButton : public wxButton,
+class wxColourButton : public wxButton,
                                         public wxColourPickerWidgetBase
 {
 public:

@@ -60,7 +60,7 @@ private:
 };
 
 
-class WXDLLIMPEXP_CORE wxPenBase : public wxGDIObject
+class wxPenBase : public wxGDIObject
 {
 public:
     virtual void SetColour(const wxColour& col) = 0;
@@ -113,7 +113,7 @@ public:
     #include "wx/qt/pen.h"
 #endif
 
-class WXDLLIMPEXP_CORE wxPenList: public wxGDIObjListBase
+class wxPenList: public wxGDIObjListBase
 {
 public:
     wxPen *FindOrCreatePen(const wxColour& colour,

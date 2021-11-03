@@ -22,7 +22,7 @@ class wxMarkupParserOutput;
 // wxMarkupText: allows to measure and draw the text containing markup.
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxMarkupTextBase
+class wxMarkupTextBase
 {
 public:
     virtual ~wxMarkupTextBase() = default;
@@ -53,7 +53,7 @@ protected:
 };
 
 
-class WXDLLIMPEXP_CORE wxMarkupText : public wxMarkupTextBase
+class wxMarkupText : public wxMarkupTextBase
 {
 public:
     // Constants for Render() flags.
@@ -104,7 +104,7 @@ protected:
 
 // This class has similar interface to wxItemMarkup, but no strings contain
 // mnemonics and no escaping is done.
-class WXDLLIMPEXP_CORE wxItemMarkupText : public wxMarkupTextBase
+class wxItemMarkupText : public wxMarkupTextBase
 {
 public:
     // Initialize with the given string containing markup (which is supposed to

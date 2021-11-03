@@ -11,7 +11,7 @@
 #ifndef _WX_STATBOX_H_
 #define _WX_STATBOX_H_
 
-class WXDLLIMPEXP_CORE wxStaticBox : public wxStaticBoxBase
+class wxStaticBox : public wxStaticBoxBase
 {
     wxDECLARE_DYNAMIC_CLASS(wxStaticBox);
 

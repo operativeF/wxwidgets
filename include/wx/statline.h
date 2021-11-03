@@ -39,7 +39,7 @@ constexpr char wxStaticLineNameStr[] = "staticLine";
 // wxStaticLine - a line in a dialog
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxStaticLineBase : public wxControl
+class wxStaticLineBase : public wxControl
 {
 public:
     wxStaticLineBase& operator=(wxStaticLineBase&&) = delete;

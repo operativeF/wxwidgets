@@ -54,7 +54,7 @@ class WXDLLIMPEXP_FWD_CORE wxQtShortcutHandler;
  * as some events need different handling (paintEvent) depending on that.
  * We pass the QWidget pointer to all event handlers for consistency.
  */
-class WXDLLIMPEXP_CORE wxWindowQt : public wxWindowBase
+class wxWindowQt : public wxWindowBase
 {
 public:
     wxWindowQt();

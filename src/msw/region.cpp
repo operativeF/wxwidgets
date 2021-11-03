@@ -23,7 +23,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxRegionIterator, wxObject);
 
 using namespace msw::utils;
 
-struct WXDLLEXPORT wxRegionRefData : public wxGDIRefData
+struct wxRegionRefData : public wxGDIRefData
 {
     wxRegionRefData() = default;
 

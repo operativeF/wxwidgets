@@ -70,7 +70,7 @@ enum wxOwnerDrawnComboBoxPaintingFlags
 // ----------------------------------------------------------------------------
 
 
-class WXDLLIMPEXP_CORE wxVListBoxComboPopup : public wxVListBox,
+class wxVListBoxComboPopup : public wxVListBox,
                                              public wxComboPopup
 {
     friend class wxOwnerDrawnComboBox;
@@ -232,7 +232,7 @@ private:
 // the wxComboCtrl.
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxOwnerDrawnComboBox :
+class wxOwnerDrawnComboBox :
     public wxWindowWithItems<wxComboCtrl, wxItemContainer>
 {
     //friend class wxComboPopupWindow;

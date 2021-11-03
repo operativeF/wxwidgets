@@ -13,7 +13,7 @@
 
 #include "wx/osx/core/cfstring.h"
 
-class WXDLLIMPEXP_CORE wxDataFormat
+class wxDataFormat
 {
 public:
     typedef CFStringRef NativeFormat;

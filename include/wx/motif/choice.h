@@ -21,7 +21,7 @@
 #endif
 
 // Choice item
-class WXDLLIMPEXP_CORE wxChoice: public wxChoiceBase
+class wxChoice: public wxChoiceBase
 {
     wxDECLARE_DYNAMIC_CLASS(wxChoice);
 

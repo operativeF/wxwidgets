@@ -155,7 +155,7 @@
 // common to Win32 and GTK, platform-specific things are implemented elsewhere
 // ----------------------------------------------------------------------------
 
-class WXDLLEXPORT wxStdTextCtrlInputHandler : public wxStdInputHandler
+class wxStdTextCtrlInputHandler : public wxStdInputHandler
 {
 public:
     wxStdTextCtrlInputHandler(wxInputHandler *inphand);

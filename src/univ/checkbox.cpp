@@ -33,7 +33,7 @@
 // lot between GTK and MSW, so a new class should be derived for this)
 // ----------------------------------------------------------------------------
 
-class WXDLLEXPORT wxStdCheckboxInputHandler : public wxStdInputHandler
+class wxStdCheckboxInputHandler : public wxStdInputHandler
 {
 public:
     wxStdCheckboxInputHandler(wxInputHandler *inphand);

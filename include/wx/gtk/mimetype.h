@@ -20,7 +20,7 @@
 
 #if wxUSE_MIMETYPE
 
-class WXDLLIMPEXP_CORE wxGTKMimeTypesManagerImpl : public wxMimeTypesManagerImpl
+class wxGTKMimeTypesManagerImpl : public wxMimeTypesManagerImpl
 {
 protected:
 #if defined(__UNIX__)
@@ -29,7 +29,7 @@ protected:
 };
 
 
-class WXDLLIMPEXP_CORE wxGTKMimeTypesManagerFactory : public wxMimeTypesManagerFactory
+class wxGTKMimeTypesManagerFactory : public wxMimeTypesManagerFactory
 {
 public:
     wxMimeTypesManagerImpl *CreateMimeTypesManagerImpl() override;

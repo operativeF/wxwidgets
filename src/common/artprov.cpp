@@ -34,7 +34,7 @@ WX_DEFINE_LIST(wxArtProvidersList)
 WX_DECLARE_EXPORTED_STRING_HASH_MAP(wxBitmap, wxArtProviderBitmapsHash);
 WX_DECLARE_EXPORTED_STRING_HASH_MAP(wxIconBundle, wxArtProviderIconBundlesHash);
 
-class WXDLLEXPORT wxArtProviderCache
+class wxArtProviderCache
 {
 public:
     bool GetBitmap(const std::string& full_id, wxBitmap* bmp);

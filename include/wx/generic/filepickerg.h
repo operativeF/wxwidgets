@@ -24,7 +24,7 @@ wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_FILEPICKER_CHANGED, wxFileDirP
 // wxGenericFileDirButton: a button which brings up a wx{File|Dir}Dialog
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxGenericFileDirButton : public wxButton,
+class wxGenericFileDirButton : public wxButton,
                                                 public wxFileDirPickerWidgetBase
 {
 public:
@@ -95,7 +95,7 @@ protected:
 
 #define wxFILEBTN_DEFAULT_STYLE                     (wxFLP_OPEN)
 
-class WXDLLIMPEXP_CORE wxGenericFileButton : public wxGenericFileDirButton
+class wxGenericFileButton : public wxGenericFileDirButton
 {
 public:
     wxGenericFileButton() = default;
@@ -163,7 +163,7 @@ private:
 
 #define wxDIRBTN_DEFAULT_STYLE                     0
 
-class WXDLLIMPEXP_CORE wxGenericDirButton : public wxGenericFileDirButton
+class wxGenericDirButton : public wxGenericFileDirButton
 {
 public:
     wxGenericDirButton() = default;

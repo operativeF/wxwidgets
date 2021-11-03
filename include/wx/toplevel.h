@@ -119,7 +119,7 @@ enum
 // wxTopLevelWindow: a top level (as opposed to child) window
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxTopLevelWindowBase : public wxNonOwnedWindow
+class wxTopLevelWindowBase : public wxNonOwnedWindow
 {
 public:
     wxTopLevelWindowBase();
@@ -375,7 +375,7 @@ protected:
 #ifdef __WXUNIVERSAL__
     #include "wx/univ/toplevel.h"
 #else // !__WXUNIVERSAL__
-    class WXDLLIMPEXP_CORE wxTopLevelWindow : public wxTopLevelWindowNative
+    class wxTopLevelWindow : public wxTopLevelWindowNative
     {
     public:
         wxTopLevelWindow() = default;

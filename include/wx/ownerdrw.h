@@ -32,7 +32,7 @@ class WXDLLIMPEXP_FWD_CORE wxDC;
 // element or one unchangeable bitmap otherwise.
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxOwnerDrawnBase
+class wxOwnerDrawnBase
 {
 public:
     virtual ~wxOwnerDrawnBase() = default;

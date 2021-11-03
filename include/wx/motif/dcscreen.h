@@ -13,7 +13,7 @@
 
 #include "wx/motif/dcclient.h"
 
-class WXDLLIMPEXP_CORE wxScreenDCImpl : public wxWindowDCImpl
+class wxScreenDCImpl : public wxWindowDCImpl
 {
 public:
     // Create a DC representing the whole screen

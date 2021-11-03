@@ -21,7 +21,7 @@
 constexpr wxChar wxACTION_SPIN_INC[]    = wxT("inc");
 constexpr wxChar wxACTION_SPIN_DEC[]    = wxT("dec");
 
-class WXDLLIMPEXP_CORE wxSpinButton : public wxSpinButtonBase,
+class wxSpinButton : public wxSpinButtonBase,
                                  public wxControlWithArrows
 {
 public:
@@ -103,7 +103,7 @@ private:
 // wxStdScrollBarInputHandler) and processes keyboard events too
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxStdSpinButtonInputHandler : public wxStdInputHandler
+class wxStdSpinButtonInputHandler : public wxStdInputHandler
 {
 public:
     wxStdSpinButtonInputHandler(wxInputHandler *inphand);

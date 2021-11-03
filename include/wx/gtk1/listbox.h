@@ -19,7 +19,7 @@ class WXDLLIMPEXP_FWD_BASE wxSortedArrayString;
 // wxListBox
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxListBox : public wxListBoxBase
+class wxListBox : public wxListBoxBase
 {
 public:
     

@@ -40,7 +40,7 @@ struct wxMatrix2D
 
 // A simple implementation of 2-dimensional float affine matrix.
 
-class WXDLLIMPEXP_CORE wxAffineMatrix2D
+class wxAffineMatrix2D
 {
 public:
     // sets the matrix to the respective values

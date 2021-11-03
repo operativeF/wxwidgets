@@ -26,7 +26,7 @@ typedef void (*wxInsertChildFunction)( wxWindowGTK*, wxWindowGTK* );
 // wxWindowGTK
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxWindowGTK : public wxWindowBase
+class wxWindowGTK : public wxWindowBase
 {
 public:
     // creating the window
@@ -269,6 +269,6 @@ private:
 	wxWindowGTK& operator=(const wxWindowGTK&) = delete;
 };
 
-extern WXDLLIMPEXP_CORE wxWindow *wxFindFocusedChild(wxWindowGTK *win);
+extern wxWindow *wxFindFocusedChild(wxWindowGTK *win);
 
 #endif // __GTKWINDOWH__

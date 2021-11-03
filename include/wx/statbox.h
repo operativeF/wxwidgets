@@ -24,7 +24,7 @@ constexpr char wxStaticBoxNameStr[] = "groupBox";
 // wxStaticBox: a grouping box with a label
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxStaticBoxBase : public wxNavigationEnabled<wxControl>
+class wxStaticBoxBase : public wxNavigationEnabled<wxControl>
 {
 public:
     wxStaticBoxBase();

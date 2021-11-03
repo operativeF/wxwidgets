@@ -13,7 +13,7 @@
 // wxSlider
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxSlider : public wxSliderBase
+class wxSlider : public wxSliderBase
 {
 public:
     wxSlider();

@@ -13,7 +13,7 @@ class QImage;
 
 class WXDLLIMPEXP_FWD_CORE wxRegion;
 
-class WXDLLIMPEXP_CORE wxQtDCImpl : public wxDCImpl
+class wxQtDCImpl : public wxDCImpl
 {
 public:
     wxQtDCImpl( wxDC *owner );

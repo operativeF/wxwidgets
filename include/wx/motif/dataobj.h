@@ -13,7 +13,7 @@
 // wxDataObject is the same as wxDataObjectBase under wxMotif
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxDataObject : public wxDataObjectBase
+class wxDataObject : public wxDataObjectBase
 {
 public:
     virtual ~wxDataObject();

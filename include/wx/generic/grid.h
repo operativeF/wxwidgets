@@ -134,7 +134,7 @@ class wxGridDirectionOperations;
 //     class is not documented and is not public at all
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxGridCellWorker : public wxClientDataContainer, public wxRefCounter
+class wxGridCellWorker : public wxClientDataContainer, public wxRefCounter
 {
 public:
     wxGridCellWorker() = default;
@@ -162,7 +162,7 @@ private:
 // predefined derived classes or derive your own class from it.
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxGridCellRenderer : public wxGridCellWorker
+class wxGridCellRenderer : public wxGridCellWorker
 {
 public:
     // draw the given cell on the provided DC inside the given rectangle
@@ -369,7 +369,7 @@ private:
 // even for the entire grid.
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxGridCellEditor : public wxGridCellWorker
+class wxGridCellEditor : public wxGridCellWorker
 {
 public:
     wxGridCellEditor() = default;
@@ -561,7 +561,7 @@ public:
 // ----------------------------------------------------------------------------
 
 // Base class for header cells renderers.
-class WXDLLIMPEXP_CORE wxGridHeaderLabelsRenderer
+class wxGridHeaderLabelsRenderer
 {
 public:
     virtual ~wxGridHeaderLabelsRenderer() = default;
@@ -585,24 +585,24 @@ public:
 // those already in wxGridHeaderLabelsRenderer but still define separate classes
 // for them for future extensions and also for better type safety (i.e. to
 // avoid inadvertently using a column header renderer for the row headers)
-class WXDLLIMPEXP_CORE wxGridRowHeaderRenderer
+class wxGridRowHeaderRenderer
     : public wxGridHeaderLabelsRenderer
 {
 };
 
-class WXDLLIMPEXP_CORE wxGridColumnHeaderRenderer
+class wxGridColumnHeaderRenderer
     : public wxGridHeaderLabelsRenderer
 {
 };
 
-class WXDLLIMPEXP_CORE wxGridCornerHeaderRenderer
+class wxGridCornerHeaderRenderer
     : public wxGridHeaderLabelsRenderer
 {
 };
 
 // Also define the default renderers which are used by wxGridCellAttrProvider
 // by default
-class WXDLLIMPEXP_CORE wxGridRowHeaderRendererDefault
+class wxGridRowHeaderRendererDefault
     : public wxGridRowHeaderRenderer
 {
 public:
@@ -612,7 +612,7 @@ public:
 };
 
 // Column header cells renderers
-class WXDLLIMPEXP_CORE wxGridColumnHeaderRendererDefault
+class wxGridColumnHeaderRendererDefault
     : public wxGridColumnHeaderRenderer
 {
 public:
@@ -622,7 +622,7 @@ public:
 };
 
 // Header corner renderer
-class WXDLLIMPEXP_CORE wxGridCornerHeaderRendererDefault
+class wxGridCornerHeaderRendererDefault
     : public wxGridCornerHeaderRenderer
 {
 public:
@@ -702,7 +702,7 @@ private:
 // class may be returned by wxGridTable::GetAttr().
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxGridCellAttr : public wxClientDataContainer, public wxRefCounter
+class wxGridCellAttr : public wxClientDataContainer, public wxRefCounter
 {
 public:
     enum wxAttrKind
@@ -870,7 +870,7 @@ using wxGridCellAttrPtr = wxObjectDataPtr<wxGridCellAttr>;
 // the default implementation is reasonably efficient for the generic case,
 // but you might still wish to implement your own for some specific situations
 // if you have performance problems with the stock one
-class WXDLLIMPEXP_CORE wxGridCellAttrProvider : public wxClientDataContainer
+class wxGridCellAttrProvider : public wxClientDataContainer
 {
 public:
     wxGridCellAttrProvider() = default;
@@ -921,7 +921,7 @@ private:
 
 struct wxGridBlockDiffResult;
 
-class WXDLLIMPEXP_CORE wxGridBlockCoords
+class wxGridBlockCoords
 {
 public:
     wxGridBlockCoords() = default;
@@ -1105,8 +1105,8 @@ private:
 
 // For comparisons...
 //
-extern WXDLLIMPEXP_CORE wxGridBlockCoords wxGridNoBlockCoords;
-extern WXDLLIMPEXP_CORE wxRect            wxGridNoCellRect;
+extern wxGridBlockCoords wxGridNoBlockCoords;
+extern wxRect            wxGridNoCellRect;
 
 // An array of cell coords...
 //
@@ -1118,7 +1118,7 @@ WX_DECLARE_OBJARRAY_WITH_DECL(wxGridCellCoords, wxGridCellCoordsArray,
 // ----------------------------------------------------------------------------
 
 // the abstract base class
-class WXDLLIMPEXP_CORE wxGridTableBase : public wxObject,
+class wxGridTableBase : public wxObject,
                                         public wxClientDataContainer
 {
 public:
@@ -1259,7 +1259,7 @@ enum wxGridTableRequest
     wxGRIDTABLE_NOTIFY_COLS_DELETED
 };
 
-class WXDLLIMPEXP_CORE wxGridTableMessage
+class wxGridTableMessage
 {
 public:
     wxGridTableMessage() = default;
@@ -1303,7 +1303,7 @@ WX_DECLARE_OBJARRAY_WITH_DECL(wxArrayString, wxGridStringArray,
 // that are stored in memory
 //
 
-class WXDLLIMPEXP_CORE wxGridStringTable : public wxGridTableBase
+class wxGridStringTable : public wxGridTableBase
 {
 public:
     wxGridStringTable() = default;
@@ -1377,7 +1377,7 @@ public:
 using wxUnsignedToIntHashMap = std::unordered_map< unsigned, int, wxIntegerHash, wxIntegerEqual >;
 
 
-struct WXDLLIMPEXP_CORE wxGridSizesInfo
+struct wxGridSizesInfo
 {
     // default ctor, initialize m_sizeDefault and m_customSizes later
     wxGridSizesInfo() = default;
@@ -1402,7 +1402,7 @@ struct WXDLLIMPEXP_CORE wxGridSizesInfo
 // wxGrid
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxGrid : public wxScrolledCanvas
+class wxGrid : public wxScrolledCanvas
 {
 public:
     // possible selection modes
@@ -2926,7 +2926,7 @@ private:
 // wxGridUpdateLocker prevents updates to a grid during its lifetime
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxGridUpdateLocker
+class wxGridUpdateLocker
 {
 public:
     // if the pointer is NULL, Create() can be called later

@@ -21,7 +21,7 @@ wxDFB_DECLARE_INTERFACE(IDirectFBSurface);
 // wxDFBDCImpl
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxDFBDCImpl : public wxDCImpl
+class wxDFBDCImpl : public wxDCImpl
 {
 public:
     // ctors

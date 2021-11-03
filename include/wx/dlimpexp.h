@@ -87,7 +87,7 @@
 #endif /* WXMAKINGDLL */
 
 /*
-   WXDLLIMPEXP_CORE maps to export declaration when building the DLL, to import
+   maps to export declaration when building the DLL, to import
    declaration if using it or to nothing at all if we don't use wxWin as DLL
  */
 #ifdef WXMAKINGDLL_BASE
@@ -124,7 +124,7 @@
 #endif
 
 #ifdef WXMAKINGDLL_CORE
-#    define WXDLLIMPEXP_CORE WXEXPORT
+#    define WXEXPORT
 #    define WXDLLIMPEXP_DATA_CORE(type) WXEXPORT type
 #    if defined(HAVE_VISIBILITY)
 #        define WXDLLIMPEXP_INLINE_CORE WXEXPORT
@@ -132,7 +132,7 @@
 #        define WXDLLIMPEXP_INLINE_CORE
 #    endif
 #elif defined(WXUSINGDLL)
-#    define WXDLLIMPEXP_CORE WXIMPORT
+#    define WXIMPORT
 #    define WXDLLIMPEXP_DATA_CORE(type) WXIMPORT type
 #    if defined(HAVE_VISIBILITY)
 #        define WXDLLIMPEXP_INLINE_CORE WXIMPORT

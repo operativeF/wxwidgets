@@ -351,7 +351,7 @@ static wxString wxDefaultFileSelector(bool load,
 // wxLoadFileSelector
 //----------------------------------------------------------------------------
 
-WXDLLEXPORT wxString wxLoadFileSelector(const wxString& what,
+wxString wxLoadFileSelector(const wxString& what,
                                         const wxString& extension,
                                         const wxString& default_name,
                                         wxWindow *parent)
@@ -363,7 +363,7 @@ WXDLLEXPORT wxString wxLoadFileSelector(const wxString& what,
 // wxSaveFileSelector
 //----------------------------------------------------------------------------
 
-WXDLLEXPORT wxString wxSaveFileSelector(const wxString& what,
+wxString wxSaveFileSelector(const wxString& what,
                                         const wxString& extension,
                                         const wxString& default_name,
                                         wxWindow *parent)

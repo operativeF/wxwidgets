@@ -23,7 +23,7 @@ class wxMenuRadioItemsData;
 
 class WXDLLIMPEXP_FWD_CORE wxMenuImpl ;
 
-class WXDLLIMPEXP_CORE wxMenu : public wxMenuBase
+class wxMenu : public wxMenuBase
 {
 public:
     // ctors & dtor
@@ -110,7 +110,7 @@ private:
 // Menu Bar (a la Windows)
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxMenuBar : public wxMenuBarBase
+class wxMenuBar : public wxMenuBarBase
 {
 public:
     // ctors & dtor

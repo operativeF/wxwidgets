@@ -24,7 +24,7 @@
 // ----------------------------------------------------------------------------
 
 // TODO: Can't convert into std::vector<wxString> until std::fmt
-class WXDLLIMPEXP_CORE wxAboutDialogInfo
+class wxAboutDialogInfo
 {
 public:
     // all fields are initially uninitialized
@@ -163,7 +163,7 @@ private:
 };
 
 // functions to show the about dialog box
-WXDLLIMPEXP_CORE void wxAboutBox(const wxAboutDialogInfo& info, wxWindow* parent = nullptr);
+void wxAboutBox(const wxAboutDialogInfo& info, wxWindow* parent = nullptr);
 
 #endif // wxUSE_ABOUTDLG
 

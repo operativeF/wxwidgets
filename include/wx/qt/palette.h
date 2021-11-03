@@ -8,7 +8,7 @@
 #ifndef _WX_QT_PALETTE_H_
 #define _WX_QT_PALETTE_H_
 
-class WXDLLIMPEXP_CORE wxPalette : public wxPaletteBase
+class wxPalette : public wxPaletteBase
 {
 public:
     wxPalette();

@@ -22,7 +22,7 @@ WX_DEFINE_EXPORTED_ARRAY_PTR(wxRadioButton *, wxArrayRadioButtons);
 // wxRadioBox: a box full of radio buttons
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxRadioBox : public wxStaticBox,
+class wxRadioBox : public wxStaticBox,
                                public wxRadioBoxBase
 {
 public:

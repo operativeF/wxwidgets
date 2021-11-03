@@ -18,7 +18,7 @@
 class WXDLLIMPEXP_FWD_CORE wxWindow;
 class WXDLLIMPEXP_FWD_CORE wxNonOwnedWindow;
 
-class WXDLLIMPEXP_CORE wxModalEventLoop : public wxGUIEventLoop
+class wxModalEventLoop : public wxGUIEventLoop
 {
 public:
     wxModalEventLoop(wxWindow *modalWindow);

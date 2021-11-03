@@ -10,7 +10,7 @@
 
 class QSystemTrayIcon;
 
-class WXDLLIMPEXP_CORE wxTaskBarIcon : public wxTaskBarIconBase
+class wxTaskBarIcon : public wxTaskBarIconBase
 {
 public:
     wxTaskBarIcon(wxTaskBarIconType iconType = wxTaskBarIconType::DefaultType);

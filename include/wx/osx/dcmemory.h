@@ -13,7 +13,7 @@
 
 #include "wx/osx/dcclient.h"
 
-class WXDLLIMPEXP_CORE wxMemoryDCImpl: public wxPaintDCImpl
+class wxMemoryDCImpl: public wxPaintDCImpl
 {
 public:
     wxMemoryDCImpl( wxMemoryDC *owner );

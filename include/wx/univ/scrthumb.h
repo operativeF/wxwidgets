@@ -30,7 +30,7 @@ class WXDLLIMPEXP_FWD_CORE wxScrollTimer;
 // wxScrollThumb: an abstraction of scrollbar thumb
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxScrollThumb
+class wxScrollThumb
 {
 public:
     enum Shaft
@@ -82,7 +82,7 @@ private:
 // wxControlWithThumb: interface implemented by controls using wxScrollThumb
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxControlWithThumb
+class wxControlWithThumb
 {
 public:
     virtual ~wxControlWithThumb() {}

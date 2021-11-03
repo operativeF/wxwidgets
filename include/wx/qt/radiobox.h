@@ -12,7 +12,7 @@ class QGroupBox;
 class QButtonGroup;
 class QGridLayout;
 
-class WXDLLIMPEXP_CORE wxRadioBox : public wxControl, public wxRadioBoxBase
+class wxRadioBox : public wxControl, public wxRadioBoxBase
 {
 public:
     wxRadioBox();

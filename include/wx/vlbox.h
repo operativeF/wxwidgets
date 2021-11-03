@@ -34,7 +34,7 @@ constexpr char wxVListBoxNameStr[] = "wxVListBox";
     It emits the same events as wxListBox and the same event macros may be used
     with it.
  */
-class WXDLLIMPEXP_CORE wxVListBox : public wxVScrolledWindow
+class wxVListBox : public wxVScrolledWindow
 {
 public:
     wxVListBox() = default;

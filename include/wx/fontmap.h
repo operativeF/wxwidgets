@@ -334,7 +334,7 @@ private:
 
 #if wxUSE_GUI
 
-class WXDLLIMPEXP_CORE wxFontMapper : public wxFontMapperBase
+class wxFontMapper : public wxFontMapperBase
 {
 public:
     wxFontMapper& operator=(wxFontMapper&&) = delete;

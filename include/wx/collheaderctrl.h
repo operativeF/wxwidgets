@@ -25,7 +25,7 @@ constexpr char wxCollapsibleHeaderCtrlNameStr[] = "collapsibleHeader";
 // wxGenericCollapsibleHeaderCtrl
 //
 
-class WXDLLIMPEXP_CORE wxCollapsibleHeaderCtrlBase : public wxControl
+class wxCollapsibleHeaderCtrlBase : public wxControl
 {
 public:
     wxCollapsibleHeaderCtrlBase() = default;
@@ -78,7 +78,7 @@ wxDECLARE_EXPORTED_EVENT(WXDLLIMPEXP_CORE, wxEVT_COLLAPSIBLEHEADER_CHANGED, wxCo
 
 #include "wx/generic/collheaderctrl.h"
 
-class WXDLLIMPEXP_CORE wxCollapsibleHeaderCtrl
+class wxCollapsibleHeaderCtrl
     : public wxGenericCollapsibleHeaderCtrl
 {
 public:

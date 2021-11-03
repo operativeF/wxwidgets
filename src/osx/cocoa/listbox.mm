@@ -74,7 +74,7 @@ class wxCocoaTableColumn;
 
 @end
 
-class WXDLLIMPEXP_CORE wxCocoaTableColumn : public wxListWidgetColumn
+class wxCocoaTableColumn : public wxListWidgetColumn
 {
 public :
     wxCocoaTableColumn( wxNSTableColumn* column, bool editable )

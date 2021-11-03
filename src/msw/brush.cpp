@@ -22,7 +22,7 @@
 
 using namespace msw::utils;
 
-class WXDLLEXPORT wxBrushRefData: public wxGDIRefData
+class wxBrushRefData: public wxGDIRefData
 {
 public:
     explicit wxBrushRefData(const wxColour& colour = wxNullColour, wxBrushStyle style = wxBrushStyle::Solid);

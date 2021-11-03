@@ -139,7 +139,7 @@ wxString wxGetXEventName(XEvent& event);
 
 bool wxDoSetShape( Display* xdisplay, Window xwindow, const wxRegion& region );
 
-class WXDLLIMPEXP_CORE wxXVisualInfo
+class wxXVisualInfo
 {
 public:
     wxXVisualInfo();

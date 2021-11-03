@@ -51,7 +51,7 @@ enum class wxSplitDragMode
 //    to prevent flickering. (WS_CLIPCHILDREN doesn't work in all cases so can't be
 //    standard).
 
-class WXDLLIMPEXP_CORE wxSplitterWindow: public wxNavigationEnabled<wxWindow>
+class wxSplitterWindow: public wxNavigationEnabled<wxWindow>
 {
 public:
 
@@ -315,7 +315,7 @@ private:
 // usual wxWin convention, but the three event types have different kind of
 // data associated with them, so the accessors can be only used if the real
 // event type matches with the one for which the accessors make sense
-class WXDLLIMPEXP_CORE wxSplitterEvent : public wxNotifyEvent
+class wxSplitterEvent : public wxNotifyEvent
 {
 public:
     wxSplitterEvent(wxEventType type = wxEVT_NULL,

@@ -307,7 +307,7 @@ protected :
 //-----------------------------------------------------------------------------
 // Graphics Matrix data
 
-class WXDLLIMPEXP_CORE wxMacCoreGraphicsMatrixData : public wxGraphicsMatrixData
+class wxMacCoreGraphicsMatrixData : public wxGraphicsMatrixData
 {
 public :
     wxMacCoreGraphicsMatrixData(wxGraphicsRenderer* renderer) ;
@@ -1155,7 +1155,7 @@ wxMacCoreGraphicsBitmapData::~wxMacCoreGraphicsBitmapData()
 //-----------------------------------------------------------------------------
 // Graphics Path data
 
-class WXDLLEXPORT wxMacCoreGraphicsPathData : public wxGraphicsPathData
+class wxMacCoreGraphicsPathData : public wxGraphicsPathData
 {
 public :
     wxMacCoreGraphicsPathData( wxGraphicsRenderer* renderer, CGMutablePathRef path = NULL);
@@ -1382,7 +1382,7 @@ bool wxMacCoreGraphicsPathData::Contains( double x, double y, wxPolygonFillMode 
 //-----------------------------------------------------------------------------
 // Graphics Context
 
-class WXDLLEXPORT wxMacCoreGraphicsContext : public wxGraphicsContext
+class wxMacCoreGraphicsContext : public wxGraphicsContext
 {
 public:
     wxMacCoreGraphicsContext( wxGraphicsRenderer* renderer,
@@ -2817,7 +2817,7 @@ private:
 // wxMacCoreGraphicsRenderer declaration
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxMacCoreGraphicsRenderer : public wxGraphicsRenderer
+class wxMacCoreGraphicsRenderer : public wxGraphicsRenderer
 {
 public :
     wxMacCoreGraphicsRenderer() {}

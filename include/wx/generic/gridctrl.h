@@ -20,7 +20,7 @@ constexpr char wxGRID_VALUE_DATETIME[]     = "datetime";
 
 
 // the default renderer for the cells containing string data
-class WXDLLIMPEXP_CORE wxGridCellStringRenderer : public wxGridCellRenderer
+class wxGridCellStringRenderer : public wxGridCellRenderer
 {
 public:
     // draw the string
@@ -48,7 +48,7 @@ protected:
 };
 
 // the default renderer for the cells containing numeric (long) data
-class WXDLLIMPEXP_CORE wxGridCellNumberRenderer : public wxGridCellStringRenderer
+class wxGridCellNumberRenderer : public wxGridCellStringRenderer
 {
 public:
     explicit wxGridCellNumberRenderer(long minValue = LONG_MIN,
@@ -88,7 +88,7 @@ protected:
     long m_maxValue;
 };
 
-class WXDLLIMPEXP_CORE wxGridCellFloatRenderer : public wxGridCellStringRenderer
+class wxGridCellFloatRenderer : public wxGridCellStringRenderer
 {
 public:
     wxGridCellFloatRenderer(int width = -1,
@@ -135,7 +135,7 @@ private:
 };
 
 // renderer for boolean fields
-class WXDLLIMPEXP_CORE wxGridCellBoolRenderer : public wxGridCellRenderer
+class wxGridCellBoolRenderer : public wxGridCellRenderer
 {
 public:
     // draw a check mark or nothing
@@ -168,7 +168,7 @@ public:
 namespace wxGridPrivate { class DateParseParams; }
 
 // renderer for the cells containing dates only, without time component
-class WXDLLIMPEXP_CORE wxGridCellDateRenderer : public wxGridCellStringRenderer
+class wxGridCellDateRenderer : public wxGridCellStringRenderer
 {
 public:
     explicit wxGridCellDateRenderer(const std::string& outformat = {});
@@ -214,7 +214,7 @@ protected:
 };
 
 // the default renderer for the cells containing times and dates
-class WXDLLIMPEXP_CORE wxGridCellDateTimeRenderer : public wxGridCellDateRenderer
+class wxGridCellDateTimeRenderer : public wxGridCellDateRenderer
 {
 public:
     wxGridCellDateTimeRenderer(const std::string& outformat = wxDefaultDateTimeFormat,
@@ -235,7 +235,7 @@ protected:
 
 // Renderer for fields taking one of a limited set of values: this is the same
 // as the renderer for strings, except that it can implement GetMaxBestSize().
-class WXDLLIMPEXP_CORE wxGridCellChoiceRenderer : public wxGridCellStringRenderer
+class wxGridCellChoiceRenderer : public wxGridCellStringRenderer
 {
 public:
     wxGridCellChoiceRenderer() = default;
@@ -263,7 +263,7 @@ protected:
 
 
 // renders a number using the corresponding text string
-class WXDLLIMPEXP_CORE wxGridCellEnumRenderer : public wxGridCellChoiceRenderer
+class wxGridCellEnumRenderer : public wxGridCellChoiceRenderer
 {
 public:
     wxGridCellEnumRenderer( const std::string& choices = {} );
@@ -288,7 +288,7 @@ protected:
 };
 
 
-class WXDLLIMPEXP_CORE wxGridCellAutoWrapStringRenderer : public wxGridCellStringRenderer
+class wxGridCellAutoWrapStringRenderer : public wxGridCellStringRenderer
 {
 public:
     wxGridCellAutoWrapStringRenderer() : wxGridCellStringRenderer() { }

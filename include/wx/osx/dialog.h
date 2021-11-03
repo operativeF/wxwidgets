@@ -17,7 +17,7 @@ class WXDLLIMPEXP_FWD_CORE wxMacToolTip ;
 class WXDLLIMPEXP_FWD_CORE wxModalEventLoop ;
 
 // Dialog boxes
-class WXDLLIMPEXP_CORE wxDialog : public wxDialogBase
+class wxDialog : public wxDialogBase
 {
     wxDECLARE_DYNAMIC_CLASS(wxDialog);
 

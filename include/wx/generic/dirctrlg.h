@@ -54,7 +54,7 @@ enum
 // wxDirItemData
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxDirItemData : public wxTreeItemData
+class wxDirItemData : public wxTreeItemData
 {
 public:
     wxDirItemData(const std::string& path, const std::string& name, bool isDir);
@@ -76,7 +76,7 @@ public:
 
 class WXDLLIMPEXP_FWD_CORE wxDirFilterListCtrl;
 
-class WXDLLIMPEXP_CORE wxGenericDirCtrl: public wxControl
+class wxGenericDirCtrl: public wxControl
 {
 public:
     wxGenericDirCtrl() = default;
@@ -224,7 +224,7 @@ wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_DIRCTRL_FILEACTIVATED, wxTreeE
 // wxDirFilterListCtrl
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxDirFilterListCtrl: public wxChoice
+class wxDirFilterListCtrl: public wxChoice
 {
 public:
     wxDirFilterListCtrl() = default;
@@ -275,7 +275,7 @@ protected:
 
 class WXDLLIMPEXP_FWD_CORE wxImageList;
 
-class WXDLLIMPEXP_CORE wxFileIconsTable
+class wxFileIconsTable
 {
 public:
     wxFileIconsTable();

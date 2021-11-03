@@ -81,7 +81,7 @@ enum class wxCalendarDateBorder
 // wxCalendarDateAttr: custom attributes for a calendar date
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxCalendarDateAttr
+class wxCalendarDateAttr
 {
 public:
     // ctors
@@ -156,7 +156,7 @@ private:
 
 class WXDLLIMPEXP_FWD_CORE wxCalendarCtrl;
 
-class WXDLLIMPEXP_CORE wxCalendarEvent : public wxDateEvent
+class wxCalendarEvent : public wxDateEvent
 {
 public:
     wxCalendarEvent()   = default;
@@ -185,7 +185,7 @@ public:
 // wxCalendarCtrlBase
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxCalendarCtrlBase : public wxControl
+class wxCalendarCtrlBase : public wxControl
 {
 public:
     // do we allow changing the month/year?

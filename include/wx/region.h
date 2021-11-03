@@ -55,7 +55,7 @@ enum class wxRegionOp
 // wxRegionBase defines wxRegion API
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxRegionBase : public wxGDIObject
+class wxRegionBase : public wxGDIObject
 {
 public:
     // ctors
@@ -179,7 +179,7 @@ protected:
 
 #define wxHAS_REGION_COMBINE
 
-class WXDLLIMPEXP_CORE wxRegionWithCombine : public wxRegionBase
+class wxRegionWithCombine : public wxRegionBase
 {
 public:
     // these methods are not part of public API as they're not implemented on

@@ -65,7 +65,7 @@ constexpr wxChar wxACTION_TEXT_REDO[]          = wxT("redo");
 // wxTextCtrl
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxTextCtrl : public wxTextCtrlBase,
+class wxTextCtrl : public wxTextCtrlBase,
                                public wxScrollHelper
 {
 public:

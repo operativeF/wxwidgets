@@ -25,7 +25,7 @@ class WXDLLIMPEXP_FWD_CORE wxTipWindowView;
 // wxTipWindow
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxTipWindow : public wxPopupTransientWindow
+class wxTipWindow : public wxPopupTransientWindow
 {
 public:
     // the mandatory ctor parameters are: the parent window and the text to

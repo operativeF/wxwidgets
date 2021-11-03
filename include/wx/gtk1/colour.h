@@ -30,7 +30,7 @@ class WXDLLIMPEXP_FWD_CORE wxColour;
 // wxColour
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxColour : public wxColourBase
+class wxColour : public wxColourBase
 {
 public:
     // constructors

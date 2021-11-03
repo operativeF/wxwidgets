@@ -18,7 +18,7 @@
 // wxGenericAnimationCtrl
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxGenericAnimationCtrl: public wxAnimationCtrlBase
+class wxGenericAnimationCtrl: public wxAnimationCtrlBase
 {
 public:
     wxGenericAnimationCtrl() { Init(); }

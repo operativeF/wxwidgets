@@ -13,7 +13,7 @@
 
 #include "wx/bitmap.h"
 
-struct WXDLLIMPEXP_CORE wxPanel : public wxPanelBase
+struct wxPanel : public wxPanelBase
 {
     wxPanel() = default;
 

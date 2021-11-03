@@ -28,7 +28,7 @@ constexpr wxChar wxACTION_NOTEBOOK_GOTO[]      = wxT("gototab");
 // wxNotebook
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxNotebook : public wxNotebookBase
+class wxNotebook : public wxNotebookBase
 {
 public:
     

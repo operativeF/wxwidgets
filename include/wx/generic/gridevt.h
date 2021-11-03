@@ -18,7 +18,7 @@
 
 #include "wx/generic/gridcoord.h"
 
-class WXDLLIMPEXP_CORE wxGridEvent : public wxNotifyEvent,
+class wxGridEvent : public wxNotifyEvent,
                                     public wxKeyboardState
 {
 public:
@@ -64,7 +64,7 @@ public:
 	static wxObject* wxCreateObject();
 };
 
-class WXDLLIMPEXP_CORE wxGridSizeEvent : public wxNotifyEvent,
+class wxGridSizeEvent : public wxNotifyEvent,
                                         public wxKeyboardState
 {
 public:
@@ -103,7 +103,7 @@ public:
 };
 
 
-class WXDLLIMPEXP_CORE wxGridRangeSelectEvent : public wxNotifyEvent,
+class wxGridRangeSelectEvent : public wxNotifyEvent,
                                                public wxKeyboardState
 {
 public:
@@ -161,7 +161,7 @@ public:
 };
 
 
-class WXDLLIMPEXP_CORE wxGridEditorCreatedEvent : public wxCommandEvent
+class wxGridEditorCreatedEvent : public wxCommandEvent
 {
 public:
     wxGridEditorCreatedEvent() = default;

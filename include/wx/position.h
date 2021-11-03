@@ -10,7 +10,7 @@
 #ifndef _WX_POSITION_H_
 #define _WX_POSITION_H_
 
-class WXDLLIMPEXP_CORE wxPosition
+class wxPosition
 {
 public:
     constexpr wxPosition() noexcept = default;

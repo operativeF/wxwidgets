@@ -16,7 +16,7 @@
 #include "wx/tbarbase.h"
 #include "wx/dynarray.h"
 
-class WXDLLIMPEXP_CORE wxToolBar: public wxToolBarBase
+class wxToolBar: public wxToolBarBase
 {
     wxDECLARE_DYNAMIC_CLASS(wxToolBar);
 public:

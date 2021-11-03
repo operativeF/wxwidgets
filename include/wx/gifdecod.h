@@ -48,7 +48,7 @@ enum class wxGIFErrorCode
 // wxGIFDecoder class
 // --------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxGIFDecoder : public wxAnimationDecoder
+class wxGIFDecoder : public wxAnimationDecoder
 {
 public:
     ~wxGIFDecoder();

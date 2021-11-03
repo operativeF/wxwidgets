@@ -36,7 +36,7 @@ enum class wxBrushStyle
 
 
 // wxBrushBase
-class WXDLLIMPEXP_CORE wxBrushBase: public wxGDIObject
+class wxBrushBase: public wxGDIObject
 {
 public:
     virtual void SetColour(const wxColour& col) = 0;
@@ -81,7 +81,7 @@ public:
     #include "wx/qt/brush.h"
 #endif
 
-class WXDLLIMPEXP_CORE wxBrushList: public wxGDIObjListBase
+class wxBrushList: public wxGDIObjListBase
 {
 public:
     wxBrush *FindOrCreateBrush(const wxColour& colour,

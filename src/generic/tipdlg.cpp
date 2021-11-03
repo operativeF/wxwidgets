@@ -41,7 +41,7 @@ constexpr int wxID_NEXT_TIP = 32000;  // whatever
 // an implementation which takes the tips from the text file - each line
 // represents a tip
 #if wxUSE_TEXTFILE
-class WXDLLIMPEXP_CORE wxFileTipProvider : public wxTipProvider
+class wxFileTipProvider : public wxTipProvider
 {
 public:
     wxFileTipProvider(const std::string& filename, size_t currentTip);
@@ -58,7 +58,7 @@ private:
 
 #ifdef __WIN32__
 // TODO an implementation which takes the tips from the given registry key
-class WXDLLIMPEXP_CORE wxRegTipProvider : public wxTipProvider
+class wxRegTipProvider : public wxTipProvider
 {
 public:
     explicit wxRegTipProvider(const std::string& keyname);
@@ -75,7 +75,7 @@ std::string wxRegTipProvider::GetTip()
 #endif // __WIN32__
 
 // the dialog we show in wxShowTip()
-class WXDLLIMPEXP_CORE wxTipDialog : public wxDialog
+class wxTipDialog : public wxDialog
 {
 public:
     wxTipDialog(wxWindow *parent,

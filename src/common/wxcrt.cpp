@@ -1259,7 +1259,7 @@ double android_wcstod(const wchar_t *nptr, wchar_t **endptr)
 
 #ifdef wxNEED_WX_MBSTOWCS
 
-WXDLLEXPORT size_t android_mbstowcs(wchar_t * out, const char * in, size_t outlen)
+size_t android_mbstowcs(wchar_t * out, const char * in, size_t outlen)
 {
     if (!out)
     {
@@ -1281,7 +1281,7 @@ WXDLLEXPORT size_t android_mbstowcs(wchar_t * out, const char * in, size_t outle
     return in - origin;
 }
 
-WXDLLEXPORT size_t android_wcstombs(char * out, const wchar_t * in, size_t outlen)
+size_t android_wcstombs(char * out, const wchar_t * in, size_t outlen)
 {
     if (!out)
     {

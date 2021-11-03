@@ -22,7 +22,7 @@ class WXDLLIMPEXP_FWD_CORE wxChoice;
 
 inline constexpr wxChar wxOSX_FILEDIALOG_ALWAYS_SHOW_TYPES[] = wxT("osx.openfiledialog.always-show-types");
 
-class WXDLLIMPEXP_CORE wxFileDialog: public wxFileDialogBase
+class wxFileDialog: public wxFileDialogBase
 {
     wxDECLARE_DYNAMIC_CLASS(wxFileDialog);
 protected:

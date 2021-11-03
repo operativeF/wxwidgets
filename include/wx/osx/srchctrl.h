@@ -14,7 +14,7 @@
 
 class wxSearchWidgetImpl;
 
-class WXDLLIMPEXP_CORE wxSearchCtrl : public wxSearchCtrlBase
+class wxSearchCtrl : public wxSearchCtrlBase
 {
 public:
     // creation

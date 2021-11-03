@@ -34,7 +34,7 @@ enum
     wxID_FONT_SIZE
 };
 
-class WXDLLIMPEXP_CORE wxGenericFontDialog : public wxFontDialogBase
+class wxGenericFontDialog : public wxFontDialogBase
 {
 public:
     wxGenericFontDialog() { Init(); }

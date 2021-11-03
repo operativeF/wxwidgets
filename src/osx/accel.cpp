@@ -32,7 +32,7 @@ WX_DEFINE_LIST(wxAccelList)
 // wxAccelRefData: the data used by wxAcceleratorTable
 // ----------------------------------------------------------------------------
 
-class WXDLLEXPORT wxAcceleratorRefData: public wxObjectRefData
+class wxAcceleratorRefData: public wxObjectRefData
 {
     friend class wxAcceleratorTable;
 public:

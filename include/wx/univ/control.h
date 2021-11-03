@@ -37,7 +37,7 @@ constexpr wxChar wxACTION_NONE[]    = wxT("");           // no action to perform
 // wxControl: the base class for all GUI controls
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxControl : public wxControlBase, public wxInputConsumer
+class wxControl : public wxControlBase, public wxInputConsumer
 {
 public:
     wxControl() { Init(); }

@@ -31,7 +31,7 @@ constexpr unsigned int wxSOUND_ASYNC = 1;
 constexpr unsigned int wxSOUND_LOOP  = 2;
 
 // Base class for wxSound implementations
-class WXDLLIMPEXP_CORE wxSoundBase : public wxObject
+class wxSoundBase : public wxObject
 {
 public:
     // Play the sound:

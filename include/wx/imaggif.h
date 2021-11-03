@@ -30,7 +30,7 @@ struct wxRGB;
 struct GifHashTableType;
 class WXDLLIMPEXP_FWD_CORE wxImageArray; // anidecod.h
 
-class WXDLLIMPEXP_CORE wxGIFHandler : public wxImageHandler
+class wxGIFHandler : public wxImageHandler
 {
 public:
     wxGIFHandler()

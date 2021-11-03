@@ -55,7 +55,7 @@ inline bool wxHasCGContext(wxWindow* WXUNUSED(win), wxDC& dc)
 
 
 
-class WXDLLEXPORT wxRendererMac : public wxDelegateRendererNative
+class wxRendererMac : public wxDelegateRendererNative
 {
 public:
     // draw the header control button (used by wxListCtrl)

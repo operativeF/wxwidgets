@@ -26,7 +26,7 @@ class WXDLLIMPEXP_FWD_BASE wxLog;
 // wxApp
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxApp: public wxAppBase
+class wxApp: public wxAppBase
 {
 public:
     wxApp();

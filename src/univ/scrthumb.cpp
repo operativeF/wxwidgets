@@ -24,7 +24,7 @@
 // wxScrollThumbCaptureData: the struct used while dragging the scroll thumb
 // ----------------------------------------------------------------------------
 
-struct WXDLLEXPORT wxScrollThumbCaptureData
+struct wxScrollThumbCaptureData
 {
     // start mouse capture after the user clicked the mouse button btn on this
     // part of the control

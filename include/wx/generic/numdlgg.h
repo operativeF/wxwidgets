@@ -29,7 +29,7 @@
 // wxNumberEntryDialog: a dialog with spin control, [ok] and [cancel] buttons
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxNumberEntryDialog : public wxDialog
+class wxNumberEntryDialog : public wxDialog
 {
 public:
     wxNumberEntryDialog() = default;
@@ -81,7 +81,7 @@ private:
 // function to get a number from user
 // ----------------------------------------------------------------------------
 
-WXDLLIMPEXP_CORE long
+long
     wxGetNumberFromUser(const std::string& message,
                         const std::string& prompt,
                         const std::string& caption,

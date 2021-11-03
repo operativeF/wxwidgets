@@ -42,7 +42,7 @@
 // wxRendererGTK: our wxRendererNative implementation
 // ----------------------------------------------------------------------------
 
-class WXDLLEXPORT wxRendererGTK : public wxDelegateRendererNative
+class wxRendererGTK : public wxDelegateRendererNative
 {
 public:
     // draw the header control button (used by wxListCtrl)

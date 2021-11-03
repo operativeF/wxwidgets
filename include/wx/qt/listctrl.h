@@ -16,7 +16,7 @@ class wxQtVirtualListModel;
 
 class WXDLLIMPEXP_FWD_CORE wxImageList;
 
-class WXDLLIMPEXP_CORE wxListCtrl: public wxListCtrlBase
+class wxListCtrl: public wxListCtrlBase
 {
 public:
     wxListCtrl();

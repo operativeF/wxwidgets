@@ -87,7 +87,7 @@ constexpr wxChar wxACTION_TOPLEVEL_RESIZE[]         = wxT("resize");     // resi
 // wxTopLevelWindow
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxTopLevelWindow : public wxTopLevelWindowNative,
+class wxTopLevelWindow : public wxTopLevelWindowNative,
                                      public wxInputConsumer
 {
 public:

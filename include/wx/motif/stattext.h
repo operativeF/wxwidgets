@@ -11,7 +11,7 @@
 #ifndef _WX_STATTEXT_H_
 #define _WX_STATTEXT_H_
 
-class WXDLLIMPEXP_CORE wxStaticText: public wxStaticTextBase
+class wxStaticText: public wxStaticTextBase
 {
     wxDECLARE_DYNAMIC_CLASS(wxStaticText);
 

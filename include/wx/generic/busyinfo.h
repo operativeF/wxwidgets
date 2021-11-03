@@ -27,7 +27,7 @@ class WXDLLIMPEXP_FWD_CORE wxControl;
 //                  Can be used in exactly same way as wxBusyCursor
 //--------------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxBusyInfo : public wxObject
+class wxBusyInfo : public wxObject
 {
 public:
     wxBusyInfo(const wxBusyInfoFlags& flags)

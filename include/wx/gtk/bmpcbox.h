@@ -18,7 +18,7 @@
 // in front of string items.
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxBitmapComboBox : public wxComboBox,
+class wxBitmapComboBox : public wxComboBox,
                                          public wxBitmapComboBoxBase
 {
 public:

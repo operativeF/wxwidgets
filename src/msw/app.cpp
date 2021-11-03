@@ -111,7 +111,7 @@ std::vector<ClassRegInfo> gs_regClassesInfo;
 // private functions
 // ----------------------------------------------------------------------------
 
-LRESULT WXDLLEXPORT APIENTRY wxWndProc(HWND, UINT, WPARAM, LPARAM);
+LRESULT APIENTRY wxWndProc(HWND, UINT, WPARAM, LPARAM);
 
 // ----------------------------------------------------------------------------
 // Module for OLE initialization and cleanup

@@ -22,7 +22,7 @@ constexpr char wxActivityIndicatorNameStr[] = "activityindicator";
 // wxActivityIndicator: small animated indicator of some application activity.
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxActivityIndicatorBase : public wxControl
+class wxActivityIndicatorBase : public wxControl
 {
 public:
     // Start or stop the activity animation (it is stopped initially).

@@ -49,7 +49,7 @@ constexpr char wxSliderNameStr[] = "slider";
 // wxSliderBase: define wxSlider interface
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxSliderBase : public wxControl
+class wxSliderBase : public wxControl
 {
 public:
     /* the ctor of the derived class should have the following form:

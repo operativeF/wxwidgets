@@ -28,7 +28,7 @@ class WXDLLIMPEXP_FWD_CORE wxTreeEvent;
 // wxGenericDirDialog
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxGenericDirDialog : public wxDirDialogBase
+class wxGenericDirDialog : public wxDirDialogBase
 {
 public:
     wxGenericDirDialog() = default;

@@ -17,7 +17,7 @@
 // wxRegion
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxRegion : public wxRegionBase
+class wxRegion : public wxRegionBase
 {
 public:
     wxRegion() { }
@@ -87,7 +87,7 @@ private:
 // wxRegionIterator: decomposes a region into rectangles
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxRegionIterator: public wxObject
+class wxRegionIterator: public wxObject
 {
 public:
     wxRegionIterator();

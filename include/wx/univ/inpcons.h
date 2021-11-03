@@ -34,7 +34,7 @@ constexpr wxChar wxACTION_NONE[]    = wxT("");           // no action to perform
 // wxControl and wxTopLevelWindow).
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxInputConsumer
+class wxInputConsumer
 {
 public:
     wxInputConsumer() { m_inputHandler = NULL; }

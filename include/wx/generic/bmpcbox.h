@@ -23,7 +23,7 @@
 // in front of string items.
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxBitmapComboBox : public wxOwnerDrawnComboBox,
+class wxBitmapComboBox : public wxOwnerDrawnComboBox,
                                          public wxBitmapComboBoxBase
 {
 public:

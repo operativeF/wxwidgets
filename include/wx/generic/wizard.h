@@ -21,7 +21,7 @@ class WXDLLIMPEXP_FWD_CORE wxWizardEvent;
 class WXDLLIMPEXP_FWD_CORE wxBoxSizer;
 class WXDLLIMPEXP_FWD_CORE wxWizardSizer;
 
-class WXDLLIMPEXP_CORE wxWizard : public wxWizardBase
+class wxWizard : public wxWizardBase
 {
 public:
     wxWizard() { Init(); }

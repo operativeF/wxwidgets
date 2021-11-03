@@ -33,7 +33,7 @@ constexpr wxCoord TEXT_MARGIN_Y = 3;
 // ----------------------------------------------------------------------------
 
 // Viewer window to put in the frame
-class WXDLLEXPORT wxTipWindowView : public wxWindow
+class wxTipWindowView : public wxWindow
 {
 public:
     explicit wxTipWindowView(wxWindow *parent);

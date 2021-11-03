@@ -40,7 +40,7 @@ constexpr int PITCH_MASK = FIXED_PITCH | VARIABLE_PITCH;
 
 using namespace msw::utils;
 
-class WXDLLEXPORT wxFontRefData: public wxGDIRefData
+class wxFontRefData: public wxGDIRefData
 {
 public:
     explicit wxFontRefData(const wxFontInfo& info = wxFontInfo());

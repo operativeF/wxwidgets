@@ -7,7 +7,7 @@
 #include <cmath>
 
 template<typename NumericalT>
-struct WXDLLIMPEXP_CORE wxPoint2D
+struct wxPoint2D
 {
     using value_type = NumericalT;
 

@@ -11,10 +11,10 @@
 #ifndef _WX_MAC_DATAOBJ_H_
 #define _WX_MAC_DATAOBJ_H_
 
-class WXDLLIMPEXP_CORE wxOSXDataSink;
-class WXDLLIMPEXP_CORE wxOSXDataSource;
+class wxOSXDataSink;
+class wxOSXDataSource;
 
-class WXDLLIMPEXP_CORE wxDataObject : public wxDataObjectBase
+class wxDataObject : public wxDataObjectBase
 {
 public:
     wxDataObject();

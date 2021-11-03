@@ -26,7 +26,7 @@ class WXDLLIMPEXP_FWD_CORE wxTabView;
  * of the tab.
  */
 
-class WXDLLIMPEXP_CORE wxTabControl: public wxObject
+class wxTabControl: public wxObject
 {
     wxDECLARE_DYNAMIC_CLASS(wxTabControl);
 public:
@@ -81,7 +81,7 @@ protected:
  * are 3 layers in the MS Word Options dialog.
  */
 
-class WXDLLIMPEXP_CORE wxTabLayer: public wxList
+class wxTabLayer: public wxList
 {
 };
 
@@ -94,7 +94,7 @@ WX_DECLARE_LIST(wxTabLayer, wxTabLayerList);
 #define wxTAB_STYLE_DRAW_BOX         1   // Draws 3D boxes round tab layers
 #define wxTAB_STYLE_COLOUR_INTERIOR  2   // Colours interior of tabs, otherwise draws outline
 
-class WXDLLIMPEXP_CORE wxTabView: public wxObject
+class wxTabView: public wxObject
 {
     wxDECLARE_DYNAMIC_CLASS(wxTabView);
 public:
@@ -266,7 +266,7 @@ protected:
  * A dialog box class that is tab-friendly
  */
 
-class WXDLLIMPEXP_CORE wxTabbedDialog : public wxDialog
+class wxTabbedDialog : public wxDialog
 {
     wxDECLARE_DYNAMIC_CLASS(wxTabbedDialog);
 
@@ -298,7 +298,7 @@ private:
  * A panel class that is tab-friendly
  */
 
-class WXDLLIMPEXP_CORE wxTabbedPanel : public wxPanel
+class wxTabbedPanel : public wxPanel
 {
     wxDECLARE_DYNAMIC_CLASS(wxTabbedPanel);
 
@@ -327,7 +327,7 @@ private:
 WX_DECLARE_HASH_MAP(int, wxWindow*, wxIntegerHash, wxIntegerEqual,
                     wxIntToWindowHashMap);
 
-class WXDLLIMPEXP_CORE wxPanelTabView : public wxTabView
+class wxPanelTabView : public wxTabView
 {
     wxDECLARE_DYNAMIC_CLASS(wxPanelTabView);
 

@@ -22,7 +22,7 @@
 
 // notice that this class is not a window and so doesn't derive from wxWindow
 
-class WXDLLIMPEXP_CORE wxNotificationMessageBase : public wxEvtHandler
+class wxNotificationMessageBase : public wxEvtHandler
 {
 public:
     wxNotificationMessageBase() = default;
@@ -128,7 +128,7 @@ class WXDLLIMPEXP_FWD_CORE wxTaskBarIcon;
 #include "wx/generic/notifmsg.h"
 #endif // wxHAS_NATIVE_NOTIFICATION_MESSAGE
 
-class WXDLLIMPEXP_CORE wxNotificationMessage : public
+class wxNotificationMessage : public
 #ifdef wxHAS_NATIVE_NOTIFICATION_MESSAGE
     wxNotificationMessageBase
 #else

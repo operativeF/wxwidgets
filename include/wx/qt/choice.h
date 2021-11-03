@@ -10,7 +10,7 @@
 
 class QComboBox;
 
-class WXDLLIMPEXP_CORE wxChoice : public wxChoiceBase
+class wxChoice : public wxChoiceBase
 {
 public:
     wxChoice();

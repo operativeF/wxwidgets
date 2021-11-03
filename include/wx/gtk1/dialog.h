@@ -14,7 +14,7 @@
 // wxDialog
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxDialog: public wxDialogBase
+class wxDialog: public wxDialogBase
 {
 public:
     wxDialog() { Init(); }

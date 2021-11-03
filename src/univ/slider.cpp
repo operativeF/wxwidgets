@@ -52,7 +52,7 @@
 // wxStdSliderInputHandler: default slider input handling
 // ----------------------------------------------------------------------------
 
-class WXDLLEXPORT wxStdSliderInputHandler : public wxStdInputHandler
+class wxStdSliderInputHandler : public wxStdInputHandler
 {
 public:
     // default ctor

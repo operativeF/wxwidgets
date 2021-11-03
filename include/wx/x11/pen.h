@@ -28,7 +28,7 @@ typedef char wxX11Dash;
 // wxPen
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxPen: public wxPenBase
+class wxPen: public wxPenBase
 {
 public:
     wxPen() { }

@@ -15,7 +15,7 @@ class QDoubleSpinBox;
 // copy&paste code for the usage of QSpinBox/QDoubleSpinBox.
 
 template < typename T, typename Widget >
-class WXDLLIMPEXP_CORE wxSpinCtrlQt : public wxSpinCtrlBase
+class wxSpinCtrlQt : public wxSpinCtrlBase
 {
 public:
     wxSpinCtrlQt();
@@ -53,7 +53,7 @@ protected:
 
 };
 
-class WXDLLIMPEXP_CORE wxSpinCtrl : public wxSpinCtrlQt< int, QSpinBox >
+class wxSpinCtrl : public wxSpinCtrlQt< int, QSpinBox >
 {
 public:
     wxSpinCtrl();
@@ -89,7 +89,7 @@ private:
     wxDECLARE_DYNAMIC_CLASS(wxSpinCtrl);
 };
 
-class WXDLLIMPEXP_CORE wxSpinCtrlDouble : public wxSpinCtrlQt< double, QDoubleSpinBox >
+class wxSpinCtrlDouble : public wxSpinCtrlQt< double, QDoubleSpinBox >
 {
 public:
     wxSpinCtrlDouble();

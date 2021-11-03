@@ -23,7 +23,7 @@ class wxDataViewWidgetImpl;         // class used as a common interface for carb
 // wxDataViewColumn
 // ---------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxDataViewColumn: public wxDataViewColumnBase
+class wxDataViewColumn: public wxDataViewColumnBase
 {
 public:
     // constructors / destructor
@@ -120,7 +120,7 @@ WX_DEFINE_ARRAY(wxDataViewColumn*,wxDataViewColumnPtrArrayType);
 // ---------------------------------------------------------
 // wxDataViewCtrl
 // ---------------------------------------------------------
-class WXDLLIMPEXP_CORE wxDataViewCtrl: public wxDataViewCtrlBase
+class wxDataViewCtrl: public wxDataViewCtrlBase
 {
 public:
  // Constructors / destructor:

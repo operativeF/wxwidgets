@@ -13,7 +13,7 @@
 
 #include "wx/list.h"
 
-class WXDLLIMPEXP_CORE wxRegion : public wxRegionWithCombine
+class wxRegion : public wxRegionWithCombine
 {
 public:
     wxRegion() { }
@@ -61,7 +61,7 @@ private:
     friend class WXDLLIMPEXP_FWD_CORE wxRegionIterator;
 };
 
-class WXDLLIMPEXP_CORE wxRegionIterator : public wxObject
+class wxRegionIterator : public wxObject
 {
 public:
     wxRegionIterator();
