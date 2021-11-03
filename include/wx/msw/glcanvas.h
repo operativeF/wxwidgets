@@ -18,7 +18,7 @@
 
 #include <string>
 
-class WXDLLIMPEXP_FWD_CORE wxPalette;
+class wxPalette;
 
 // ----------------------------------------------------------------------------
 // wxGLContext: OpenGL rendering context

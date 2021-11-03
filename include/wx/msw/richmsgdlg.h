@@ -12,7 +12,7 @@
 
 #include <string>
 
-class WXDLLIMPEXP_CORE wxRichMessageDialog : public wxGenericRichMessageDialog
+class wxRichMessageDialog : public wxGenericRichMessageDialog
 {
 public:
     wxRichMessageDialog(wxWindow *parent,

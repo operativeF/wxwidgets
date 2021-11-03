@@ -15,7 +15,7 @@
 
 #include "wx/geometry/rect.h"
 
-struct WXDLLIMPEXP_CORE wxOwnerDrawn : public wxOwnerDrawnBase
+struct wxOwnerDrawn : public wxOwnerDrawnBase
 {
     bool OnDrawItem(wxDC& dc, const wxRect& rc,
                             wxODAction act, wxODStatus stat) override;

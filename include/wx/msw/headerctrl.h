@@ -21,7 +21,7 @@ class wxMSWHeaderCtrl;
 // wxHeaderCtrl
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxHeaderCtrl : public wxCompositeWindow<wxHeaderCtrlBase>
+class wxHeaderCtrl : public wxCompositeWindow<wxHeaderCtrlBase>
 {
 public:
     wxHeaderCtrl() = default;

@@ -22,8 +22,8 @@
 
 #include <string>
 
-class WXDLLIMPEXP_FWD_CORE wxBitmap;
-class WXDLLIMPEXP_FWD_CORE wxIcon;
+class wxBitmap;
+class wxIcon;
 
 // If 1, use a simple wxCursor instead of ImageList_SetDragCursorImage
 #define wxUSE_SIMPLER_DRAGIMAGE 0
@@ -103,7 +103,7 @@ class WXDLLIMPEXP_FWD_CORE wxIcon;
  * wxDragImage
  */
 
-class WXDLLIMPEXP_CORE wxDragImage
+class wxDragImage
 {
 public:
     wxDragImage() = default;

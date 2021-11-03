@@ -30,7 +30,7 @@
 // wxEnhMetaFile: encapsulation of Win32 HENHMETAFILE
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxEnhMetaFile : public wxGDIObject
+class wxEnhMetaFile : public wxGDIObject
 {
 public:
     wxEnhMetaFile(const std::string& file = {}) : m_filename(file)
@@ -93,7 +93,7 @@ private:
 // wxEnhMetaFileDC: allows to create a wxEnhMetaFile
 // ----------------------------------------------------------------------------
 
-struct WXDLLIMPEXP_CORE wxEnhMetaFileDC : public wxDC
+struct wxEnhMetaFileDC : public wxDC
 {
     // the ctor parameters specify the filename (empty for memory metafiles),
     // the metafile picture size and the optional description/comment
@@ -127,7 +127,7 @@ struct WXDLLIMPEXP_CORE wxEnhMetaFileDC : public wxDC
 
 // notice that we want to support both CF_METAFILEPICT and CF_ENHMETAFILE and
 // so we derive from wxDataObject and not from wxDataObjectSimple
-class WXDLLIMPEXP_CORE wxEnhMetaFileDataObject : public wxDataObject
+class wxEnhMetaFileDataObject : public wxDataObject
 {
 public:
     // ctors
@@ -165,7 +165,7 @@ protected:
 // CF_ENHMETAFILE
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxEnhMetaFileSimpleDataObject : public wxDataObjectSimple
+class wxEnhMetaFileSimpleDataObject : public wxDataObjectSimple
 {
 public:
     // ctors

@@ -19,7 +19,7 @@
 // of argc/argv provided by the CRT. This is only really useful when using
 // Unicode with a compiler not providing wmain() or similar entry point, but is
 // always provided for consistency.
-extern int WXDLLIMPEXP_BASE wxEntry();
+extern int wxEntry();
 
 #if wxUSE_GUI
 
@@ -35,13 +35,13 @@ using wxCmdLineArgType = char *;
 
 // Windows-only overloads of wxEntry() and wxEntryStart() which take the
 // parameters passed to WinMain() instead of those passed to main()
-extern WXDLLIMPEXP_CORE bool
+extern bool
     wxEntryStart(HINSTANCE hInstance,
                 HINSTANCE hPrevInstance = nullptr,
                 wxCmdLineArgType pCmdLine = nullptr,
                 int nCmdShow = SW_SHOWNORMAL);
 
-extern WXDLLIMPEXP_CORE int
+extern int
     wxEntry(HINSTANCE hInstance,
             HINSTANCE hPrevInstance = nullptr,
             wxCmdLineArgType pCmdLine = nullptr,

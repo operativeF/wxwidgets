@@ -45,7 +45,7 @@ struct wxDCCacheEntry: public wxObject
 
 // this is an ABC: use one of the derived classes to create a DC associated
 // with a window, screen, printer and so on
-class WXDLLIMPEXP_CORE wxMSWDCImpl: public wxDCImpl
+class wxMSWDCImpl: public wxDCImpl
 {
 public:
     wxMSWDCImpl(wxDC *owner, WXHDC hDC);
@@ -315,7 +315,7 @@ protected:
 // only/mainly)
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxDCTempImpl : public wxMSWDCImpl
+class wxDCTempImpl : public wxMSWDCImpl
 {
 public:
     // construct a temporary DC with the specified HDC and size (it should be
@@ -346,7 +346,7 @@ private:
     const wxSize m_size;
 };
 
-struct WXDLLIMPEXP_CORE wxDCTemp : public wxDC
+struct wxDCTemp : public wxDC
 {
     wxDCTemp(WXHDC hdc, const wxSize& size = wxDefaultSize)
         : wxDC(std::make_unique<wxDCTempImpl>(this, hdc, size))

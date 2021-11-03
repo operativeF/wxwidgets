@@ -19,10 +19,10 @@
 #include <vector>
 #include "wx/taskbarbutton.h"
 
-class WXDLLIMPEXP_FWD_CORE wxWindow;
-class WXDLLIMPEXP_FWD_CORE wxITaskbarList3;
+class wxWindow;
+class wxITaskbarList3;
 
-class WXDLLIMPEXP_CORE wxTaskBarButtonImpl : public wxTaskBarButton
+class wxTaskBarButtonImpl : public wxTaskBarButton
 {
 public:
     ~wxTaskBarButtonImpl();

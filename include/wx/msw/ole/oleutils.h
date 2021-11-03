@@ -63,7 +63,7 @@ inline void wxOleUninitialize()
 
 // wrapper around BSTR type (by Vadim Zeitlin)
 
-class WXDLLIMPEXP_CORE wxBasicString
+class wxBasicString
 {
 public:
     // Constructs with the owned BSTR set to NULL
@@ -107,10 +107,10 @@ private:
 
 #if wxUSE_VARIANT
 // Convert variants
-class WXDLLIMPEXP_FWD_BASE wxVariant;
+class wxVariant;
 
 // wrapper for CURRENCY type used in VARIANT (VARIANT.vt == VT_CY)
-class WXDLLIMPEXP_CORE wxVariantDataCurrency : public wxVariantData
+class wxVariantDataCurrency : public wxVariantData
 {
 public:
     wxVariantDataCurrency() { VarCyFromR8(0.0, &m_value); }
@@ -135,7 +135,7 @@ private:
 
 
 // wrapper for SCODE type used in VARIANT (VARIANT.vt == VT_ERROR)
-class WXDLLIMPEXP_CORE wxVariantDataErrorCode : public wxVariantData
+class wxVariantDataErrorCode : public wxVariantData
 {
 public:
     wxVariantDataErrorCode(SCODE value = S_OK) { m_value = value; }
@@ -158,7 +158,7 @@ private:
 };
 
 // wrapper for SAFEARRAY, used for passing multidimensional arrays in wxVariant
-class WXDLLIMPEXP_CORE wxVariantDataSafeArray : public wxVariantData
+class wxVariantDataSafeArray : public wxVariantData
 {
 public:
     explicit wxVariantDataSafeArray(SAFEARRAY* value = nullptr)
@@ -205,10 +205,10 @@ bool wxConvertOleToVariant(const VARIANTARG& oleVariant, wxVariant& variant,
 #endif // wxUSE_VARIANT
 
 // Convert string to Unicode
-WXDLLIMPEXP_CORE BSTR wxConvertStringToOle(const wxString& str);
+BSTR wxConvertStringToOle(const wxString& str);
 
 // Convert string from BSTR to wxString
-WXDLLIMPEXP_CORE wxString wxConvertStringFromOle(BSTR bStr);
+wxString wxConvertStringFromOle(BSTR bStr);
 
 #else // !wxUSE_OLE
 

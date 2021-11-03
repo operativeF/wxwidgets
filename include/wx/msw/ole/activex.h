@@ -148,7 +148,7 @@ using wxAutoIOleInPlaceActiveObject = wxAutoOleInterface<IOleInPlaceActiveObject
 using wxAutoIOleDocumentView = wxAutoOleInterface<IOleDocumentView>;
 using wxAutoIViewObject = wxAutoOleInterface<IViewObject>;
 
-class WXDLLIMPEXP_CORE wxActiveXContainer : public wxWindow
+class wxActiveXContainer : public wxWindow
 {
 public:
     wxActiveXContainer(wxWindow * parent, REFIID iid, IUnknown* pUnk);
@@ -205,7 +205,7 @@ struct wxActiveXEventNativeMSW
 };
 
 // Events
-class WXDLLIMPEXP_CORE wxActiveXEvent : public wxCommandEvent
+class wxActiveXEvent : public wxCommandEvent
 {
 private:
     friend class wxActiveXEvents;

@@ -27,10 +27,10 @@
 #include <boost/nowide/convert.hpp>
 #include <boost/nowide/stackstring.hpp>
 
-class WXDLLIMPEXP_FWD_CORE wxFont;
-struct WXDLLIMPEXP_FWD_CORE wxSize;
-class WXDLLIMPEXP_FWD_CORE wxWindow;
-class WXDLLIMPEXP_FWD_CORE wxWindowBase;
+class wxFont;
+struct wxSize;
+class wxWindow;
+class wxWindowBase;
 
 // ---------------------------------------------------------------------------
 // private constants

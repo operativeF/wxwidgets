@@ -19,7 +19,7 @@ using namespace std::chrono_literals;
 
 class wxJoystickThread;
 
-class WXDLLIMPEXP_CORE wxJoystick: public wxObject
+class wxJoystick: public wxObject
 {
   wxDECLARE_DYNAMIC_CLASS(wxJoystick);
 public:

@@ -15,7 +15,7 @@
 #include "wx/msw/dc.h"
 #include "wx/geometry/rect.h"
 
-class WXDLLIMPEXP_CORE wxMemoryDCImpl: public wxMSWDCImpl
+class wxMemoryDCImpl: public wxMSWDCImpl
 {
 public:
     // A non-null wxDC will attempt to create a compatible DC

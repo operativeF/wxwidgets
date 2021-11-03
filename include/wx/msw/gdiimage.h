@@ -22,9 +22,9 @@
 
 #include <string>
 
-struct WXDLLIMPEXP_FWD_CORE wxGDIImageRefData;
-class WXDLLIMPEXP_FWD_CORE wxGDIImageHandler;
-class WXDLLIMPEXP_FWD_CORE wxGDIImage;
+struct wxGDIImageRefData;
+class wxGDIImageHandler;
+class wxGDIImage;
 
 WX_DECLARE_EXPORTED_LIST(wxGDIImageHandler, wxGDIImageHandlerList);
 
@@ -32,7 +32,7 @@ WX_DECLARE_EXPORTED_LIST(wxGDIImageHandler, wxGDIImageHandlerList);
 // wxGDIImageRefData: common data fields for all derived classes
 // ----------------------------------------------------------------------------
 
-struct WXDLLIMPEXP_CORE wxGDIImageRefData : public wxGDIRefData
+struct wxGDIImageRefData : public wxGDIRefData
 {
     wxGDIImageRefData() = default;
 
@@ -75,7 +75,7 @@ struct WXDLLIMPEXP_CORE wxGDIImageRefData : public wxGDIRefData
 // format. It also falls back to wxImage if no appropriate image is found.
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxGDIImage : public wxGDIObject
+class wxGDIImage : public wxGDIObject
 {
 public:
     // handlers list interface
@@ -137,7 +137,7 @@ protected:
 // wxGDIImageHandler: a class which knows how to load/save wxGDIImages.
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxGDIImageHandler
+class wxGDIImageHandler
 {
 public:
     wxGDIImageHandler() = default;

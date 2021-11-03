@@ -20,9 +20,9 @@
 
 #include <string>
 
-class WXDLLIMPEXP_FWD_CORE wxMetafile;
+class wxMetafile;
 
-struct WXDLLIMPEXP_CORE wxMetafileRefData: public wxGDIRefData
+struct wxMetafileRefData: public wxGDIRefData
 {
     wxMetafileRefData();
     virtual ~wxMetafileRefData();
@@ -34,12 +34,12 @@ struct WXDLLIMPEXP_CORE wxMetafileRefData: public wxGDIRefData
     int m_width{0};
     int m_height{0};
 
-    friend class WXDLLIMPEXP_FWD_CORE wxMetafile;
+    friend class wxMetafile;
 };
 
 #define M_METAFILEDATA ((wxMetafileRefData *)m_refData)
 
-class WXDLLIMPEXP_CORE wxMetafile: public wxGDIObject
+class wxMetafile: public wxGDIObject
 {
 public:
     wxMetafile(const std::string& file = {});
@@ -72,7 +72,7 @@ private:
     wxDECLARE_DYNAMIC_CLASS(wxMetafile);
 };
 
-class WXDLLIMPEXP_CORE wxMetafileDCImpl: public wxMSWDCImpl
+class wxMetafileDCImpl: public wxMSWDCImpl
 {
 public:
     wxMetafileDCImpl(wxDC *owner, const std::string& file = {});
@@ -106,7 +106,7 @@ private:
     wxDECLARE_CLASS(wxMetafileDCImpl);
 };
 
-class WXDLLIMPEXP_CORE wxMetafileDC: public wxDC
+class wxMetafileDC: public wxDC
 {
 public:
     // Don't supply origin and extent
@@ -144,10 +144,10 @@ private:
  */
 
 // No origin or extent
-bool WXDLLIMPEXP_CORE wxMakeMetafilePlaceable(const wxString& filename, float scale = 1.0f);
+bool wxMakeMetafilePlaceable(const wxString& filename, float scale = 1.0f);
 
 // Optional origin and extent
-bool WXDLLIMPEXP_CORE wxMakeMetaFilePlaceable(const wxString& filename, int x1, int y1, int x2, int y2, float scale = 1.0f, bool useOriginAndExtent = true);
+bool wxMakeMetaFilePlaceable(const wxString& filename, int x1, int y1, int x2, int y2, float scale = 1.0f, bool useOriginAndExtent = true);
 
 // ----------------------------------------------------------------------------
 // wxMetafileDataObject is a specialization of wxDataObject for metafile data
@@ -155,7 +155,7 @@ bool WXDLLIMPEXP_CORE wxMakeMetaFilePlaceable(const wxString& filename, int x1, 
 
 #if wxUSE_DATAOBJ
 
-class WXDLLIMPEXP_CORE wxMetafileDataObject : public wxDataObjectSimple
+class wxMetafileDataObject : public wxDataObjectSimple
 {
 public:
     // ctors

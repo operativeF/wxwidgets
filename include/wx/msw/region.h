@@ -56,12 +56,12 @@ protected:
     bool DoOffset(wxCoord x, wxCoord y) override;
     bool DoCombine(const wxRegion& region, wxRegionOp op) override;
 
-    friend class WXDLLIMPEXP_FWD_CORE wxRegionIterator;
+    friend class wxRegionIterator;
 
     wxDECLARE_DYNAMIC_CLASS(wxRegion);
 };
 
-class WXDLLIMPEXP_CORE wxRegionIterator : public wxObject
+class wxRegionIterator : public wxObject
 {
 public:
     wxRegionIterator() = default;

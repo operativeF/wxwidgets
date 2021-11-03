@@ -184,7 +184,7 @@ private:
     LOGFONTW m_lfW;
 };
 
-WXDLLIMPEXP_CORE bool wxUxThemeIsActive();
+bool wxUxThemeIsActive();
 
 // ----------------------------------------------------------------------------
 // wxUxThemeHandle: encapsulates ::Open/CloseThemeData()

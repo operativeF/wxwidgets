@@ -32,7 +32,7 @@ inline void ReleaseInterface(IUnknown *pIUnk)
 #define   RELEASE_AND_NULL(p)   if ( (p) != NULL ) { p->Release(); p = NULL; };
 
 // return true if the iid is in the array
-extern WXDLLIMPEXP_CORE bool IsIidFromList(REFIID riid, const IID *aIids[], size_t nCount);
+extern bool IsIidFromList(REFIID riid, const IID *aIids[], size_t nCount);
 
 // ============================================================================
 // IUnknown implementation helpers
@@ -148,11 +148,11 @@ private:
 // ----------------------------------------------------------------------------
 
 // tries to translate riid into a symbolic name, if possible
-WXDLLIMPEXP_CORE void wxLogQueryInterface(const wxChar *szInterface, REFIID riid);
+void wxLogQueryInterface(const wxChar *szInterface, REFIID riid);
 
 // these functions print out the new value of reference counter
-WXDLLIMPEXP_CORE void wxLogAddRef (const wxChar *szInterface, ULONG cRef);
-WXDLLIMPEXP_CORE void wxLogRelease(const wxChar *szInterface, ULONG cRef);
+void wxLogAddRef (const wxChar *szInterface, ULONG cRef);
+void wxLogRelease(const wxChar *szInterface, ULONG cRef);
 
 #else   //!__WXDEBUG__
   #define   wxLogQueryInterface(szInterface, riid)

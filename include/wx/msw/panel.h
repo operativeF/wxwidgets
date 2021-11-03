@@ -12,13 +12,13 @@
 
 #include <string>
 
-class WXDLLIMPEXP_FWD_CORE wxBrush;
+class wxBrush;
 
 // ----------------------------------------------------------------------------
 // wxPanel
 // ----------------------------------------------------------------------------
 
-struct WXDLLIMPEXP_CORE wxPanel : public wxPanelBase
+struct wxPanel : public wxPanelBase
 {
     wxPanel() = default;
 

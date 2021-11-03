@@ -19,7 +19,7 @@
 // wxSubwindows contains all HWNDs making part of a single wx control
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxSubwindows
+class wxSubwindows
 {
 public:
     // the number of subwindows can be specified either as parameter to ctor or

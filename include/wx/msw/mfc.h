@@ -17,7 +17,7 @@
 #include "wx/app.h"
 #include "wx/evtloop.h"
 
-class WXDLLIMPEXP_FWD_CORE wxWindow;
+class wxWindow;
 
 // ----------------------------------------------------------------------------
 // MFC window class wrapping a window created by wxWidgets

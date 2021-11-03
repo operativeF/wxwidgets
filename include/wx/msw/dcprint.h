@@ -20,13 +20,13 @@
 
 #include <string>
 
-class WXDLLIMPEXP_FWD_CORE wxPrintData;
+class wxPrintData;
 
 // ------------------------------------------------------------------------
 //    wxPrinterDCImpl
 //
 
-class WXDLLIMPEXP_CORE wxPrinterDCImpl : public wxMSWDCImpl
+class wxPrinterDCImpl : public wxMSWDCImpl
 {
 public:
     // Create from print data
@@ -63,13 +63,13 @@ private:
 };
 
 // Gets an HDC for the specified printer configuration
-WXHDC WXDLLIMPEXP_CORE wxGetPrinterDC(const wxPrintData& data);
+WXHDC wxGetPrinterDC(const wxPrintData& data);
 
 // ------------------------------------------------------------------------
 //    wxPrinterDCromHDC
 //
 
-struct WXDLLIMPEXP_CORE wxPrinterDCFromHDC: public wxPrinterDC
+struct wxPrinterDCFromHDC: public wxPrinterDC
 {
     wxPrinterDCFromHDC( WXHDC theDC )
         : wxPrinterDC(std::make_unique<wxPrinterDCImpl>(this, theDC))

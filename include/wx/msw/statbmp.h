@@ -15,10 +15,10 @@
 
 #include <string>
 
-class WXDLLIMPEXP_FWD_CORE wxIcon;
+class wxIcon;
 
 // a control showing an icon or a bitmap
-class WXDLLIMPEXP_CORE wxStaticBitmap : public wxStaticBitmapBase
+class wxStaticBitmap : public wxStaticBitmapBase
 {
 public:
     wxStaticBitmap() = default;

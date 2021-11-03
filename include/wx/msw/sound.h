@@ -15,7 +15,7 @@
 
 #include <string>
 
-class WXDLLIMPEXP_CORE wxSound : public wxSoundBase
+class wxSound : public wxSoundBase
 {
 public:
     wxSound() = default;

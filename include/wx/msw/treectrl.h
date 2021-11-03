@@ -31,10 +31,10 @@
 #endif // Cygwin
 
 // fwd decl
-class  WXDLLIMPEXP_FWD_CORE wxImageList;
-class  WXDLLIMPEXP_FWD_CORE wxDragImage;
-struct WXDLLIMPEXP_FWD_CORE wxTreeViewItem;
-class WXDLLIMPEXP_FWD_CORE wxTextCtrl;
+class  wxImageList;
+class  wxDragImage;
+struct wxTreeViewItem;
+class wxTextCtrl;
 
 
 // hash storing attributes for our items
@@ -74,7 +74,7 @@ static /* const */ wxEventType gs_expandEvents[IDX_WHAT_MAX][IDX_HOW_MAX];
 // wxTreeCtrl
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxTreeCtrl : public wxTreeCtrlBase
+class wxTreeCtrl : public wxTreeCtrlBase
 {
 public:
     // creation

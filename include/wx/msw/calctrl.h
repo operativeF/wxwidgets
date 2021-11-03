@@ -12,7 +12,7 @@
 #include <cstdint>
 #include <string>
 
-class WXDLLIMPEXP_CORE wxCalendarCtrl : public wxCalendarCtrlBase
+class wxCalendarCtrl : public wxCalendarCtrlBase
 {
 public:
     wxCalendarCtrl() = default;

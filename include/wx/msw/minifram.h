@@ -15,7 +15,7 @@
 
 #include <string>
 
-class WXDLLIMPEXP_CORE wxMiniFrame : public wxFrame
+class wxMiniFrame : public wxFrame
 {
 public:
   wxMiniFrame() = default;

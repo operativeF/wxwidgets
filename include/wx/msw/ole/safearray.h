@@ -23,7 +23,7 @@
 
 // The base class with type-independent methods. It exists solely in order to
 // reduce the template bloat.
-class WXDLLIMPEXP_CORE wxSafeArrayBase
+class wxSafeArrayBase
 {
 public:
     // If owns a SAFEARRAY, it's unlocked and destroyed.

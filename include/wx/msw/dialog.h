@@ -13,9 +13,9 @@
 
 #include <string>
 
-class WXDLLIMPEXP_FWD_CORE wxDialogModalData;
+class wxDialogModalData;
 
-class WXDLLIMPEXP_CORE wxDialog : public wxDialogBase
+class wxDialog : public wxDialogBase
 {
 public:
     wxDialog() = default;

@@ -25,7 +25,7 @@ class wxPaintDCInfo;
 // DC classes
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxWindowDCImpl : public wxMSWDCImpl
+class wxWindowDCImpl : public wxMSWDCImpl
 {
 public:
     // default ctor
@@ -45,7 +45,7 @@ protected:
     wxDECLARE_CLASS(wxWindowDCImpl);
 };
 
-class WXDLLIMPEXP_CORE wxClientDCImpl : public wxWindowDCImpl
+class wxClientDCImpl : public wxWindowDCImpl
 {
 public:
     // default ctor
@@ -64,7 +64,7 @@ protected:
     wxDECLARE_CLASS(wxClientDCImpl);
 };
 
-class WXDLLIMPEXP_CORE wxPaintDCImpl : public wxClientDCImpl
+class wxPaintDCImpl : public wxClientDCImpl
 {
 public:
     wxPaintDCImpl( wxDC *owner );
@@ -96,7 +96,7 @@ protected:
  * message. It is used in HandlePaint and need not be used by an application.
  */
 
-struct WXDLLIMPEXP_CORE wxPaintDCEx : public wxPaintDC
+struct wxPaintDCEx : public wxPaintDC
 {
     wxPaintDCEx(wxWindow *canvas, WXHDC dc);
     wxPaintDCEx& operator=(wxPaintDCEx&&) = delete;

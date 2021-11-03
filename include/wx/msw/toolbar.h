@@ -17,9 +17,9 @@
 
 #include <string>
 
-class WXDLLIMPEXP_FWD_CORE wxBitmap;
+class wxBitmap;
 
-class WXDLLIMPEXP_CORE wxToolBar : public wxToolBarBase
+class wxToolBar : public wxToolBarBase
 {
 public:
     wxToolBar() = default;

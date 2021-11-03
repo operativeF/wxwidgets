@@ -15,7 +15,7 @@
 // interface.
 using DWORD = unsigned long;
 
-class WXDLLIMPEXP_BASE wxMSWEventLoopBase : public wxEventLoopManual
+class wxMSWEventLoopBase : public wxEventLoopManual
 {
 public:
     wxMSWEventLoopBase();
@@ -54,7 +54,7 @@ private:
 
 #if wxUSE_CONSOLE_EVENTLOOP
 
-class WXDLLIMPEXP_BASE wxConsoleEventLoop : public wxMSWEventLoopBase
+class wxConsoleEventLoop : public wxMSWEventLoopBase
 {
 public:
     wxConsoleEventLoop() = default;

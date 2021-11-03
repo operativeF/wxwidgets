@@ -34,7 +34,7 @@
 // Define this only if native implementation includes all features
 #define wxCOMBOCONTROL_FULLY_FEATURED
 
-class WXDLLIMPEXP_CORE wxComboCtrl : public wxComboCtrlBase
+class wxComboCtrl : public wxComboCtrlBase
 {
 public:
     wxComboCtrl()  = default;

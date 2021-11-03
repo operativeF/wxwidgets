@@ -25,14 +25,14 @@
 #include <memory>
 #include <string>
 
-class WXDLLIMPEXP_FWD_CORE wxFrame;
+class wxFrame;
 
 
 // ----------------------------------------------------------------------------
 // Menu
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxMenu : public wxMenuBase
+class wxMenu : public wxMenuBase
 {
 public:
     // ctors & dtor
@@ -207,7 +207,7 @@ public:
 // Menu Bar (a la Windows)
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxMenuBar : public wxMenuBarBase
+class wxMenuBar : public wxMenuBarBase
 {
 public:
     wxMenuBar();

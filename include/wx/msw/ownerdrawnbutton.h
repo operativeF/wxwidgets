@@ -23,7 +23,7 @@
 // intentionally not documented. Ideally it wouldn't be even exported from the
 // DLL but this somehow breaks building of applications using wxWidgets with
 // Intel compiler using LTCG, so we do export it.
-class WXDLLIMPEXP_CORE wxMSWOwnerDrawnButtonBase
+class wxMSWOwnerDrawnButtonBase
 {
 protected:
     // Ctor takes the back pointer to the real window, must be non-NULL.

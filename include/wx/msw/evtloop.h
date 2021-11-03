@@ -15,11 +15,11 @@
 #include "wx/msw/wrapwin.h"
 #include "wx/msw/evtloopconsole.h" // for wxMSWEventLoopBase
 
-class WXDLLIMPEXP_FWD_CORE wxWindowMSW;
+class wxWindowMSW;
 
 WX_DECLARE_EXPORTED_OBJARRAY(MSG, wxMSGArray);
 
-class WXDLLIMPEXP_CORE wxGUIEventLoop : public wxMSWEventLoopBase
+class wxGUIEventLoop : public wxMSWEventLoopBase
 {
 public:
     // process a single message: calls PreProcessMessage() before dispatching

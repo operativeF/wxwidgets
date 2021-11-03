@@ -18,7 +18,7 @@
 // Pen
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxPen : public wxPenBase
+class wxPen : public wxPenBase
 {
 public:
     wxPen() = default;

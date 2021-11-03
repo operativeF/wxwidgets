@@ -24,7 +24,7 @@
 // and is never used directly by the application
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxFileTypeImpl
+class wxFileTypeImpl
 {
 public:
     // one of these Init() function must be called (ctor can't take any
@@ -113,7 +113,7 @@ private:
     bool RemoveDescription();
 };
 
-class WXDLLIMPEXP_BASE wxMimeTypesManagerImpl
+class wxMimeTypesManagerImpl
 {
 public:
     // nothing to do here, we don't load any data but just go and fetch it from

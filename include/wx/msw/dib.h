@@ -11,7 +11,7 @@
 #ifndef _WX_MSW_DIB_H_
 #define _WX_MSW_DIB_H_
 
-class WXDLLIMPEXP_FWD_CORE wxPalette;
+class wxPalette;
 
 #include "wx/msw/private.h"
 
@@ -27,7 +27,7 @@ class WXDLLIMPEXP_FWD_CORE wxPalette;
 // wxDIB: represents a DIB section
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxDIB
+class wxDIB
 {
 public:
     // create an uninitialized DIB with the given width, height and depth (only

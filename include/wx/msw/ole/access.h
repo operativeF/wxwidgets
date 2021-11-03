@@ -19,7 +19,7 @@
 
 struct IAccessible;
 class wxIAccessible;
-class WXDLLIMPEXP_FWD_CORE wxWindow;
+class wxWindow;
 
 // ----------------------------------------------------------------------------
 // macros
@@ -29,7 +29,7 @@ class WXDLLIMPEXP_FWD_CORE wxWindow;
 // wxAccessible implements accessibility behaviour.
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxAccessible : public wxAccessibleBase
+class wxAccessible : public wxAccessibleBase
 {
 public:
     wxAccessible(wxWindow *win = nullptr);

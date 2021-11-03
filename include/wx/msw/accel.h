@@ -13,13 +13,13 @@
 
 #include <span>
 
-class WXDLLIMPEXP_FWD_CORE wxWindow;
+class wxWindow;
 
 // ----------------------------------------------------------------------------
 // the accel table has all accelerators for a given window or menu
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxAcceleratorTable : public wxObject
+class wxAcceleratorTable : public wxObject
 {
 public:
     // default ctor

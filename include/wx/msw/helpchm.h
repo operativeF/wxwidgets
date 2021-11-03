@@ -18,7 +18,7 @@
 #include <filesystem>
 #include <string>
 
-class WXDLLIMPEXP_CORE wxCHMHelpController : public wxHelpControllerBase
+class wxCHMHelpController : public wxHelpControllerBase
 {
 public:
     explicit wxCHMHelpController(wxWindow* parentWindow = nullptr): wxHelpControllerBase(parentWindow) { }

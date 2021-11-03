@@ -17,14 +17,14 @@
 #include <memory>
 #include <string>
 
-class WXDLLIMPEXP_FWD_CORE wxAcceleratorTable;
+class wxAcceleratorTable;
 
 
 // ---------------------------------------------------------------------------
 // wxMDIParentFrame
 // ---------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxMDIParentFrame : public wxMDIParentFrameBase
+class wxMDIParentFrame : public wxMDIParentFrameBase
 {
 public:
     wxMDIParentFrame() = default;
@@ -160,7 +160,7 @@ private:
     // it was "handled", see OnActivate() and HandleActivate()
     bool m_activationNotHandled{false};
 
-    friend class WXDLLIMPEXP_FWD_CORE wxMDIChildFrame;
+    friend class wxMDIChildFrame;
 
     wxDECLARE_EVENT_TABLE();
     wxDECLARE_DYNAMIC_CLASS(wxMDIParentFrame);
@@ -170,7 +170,7 @@ private:
 // wxMDIChildFrame
 // ---------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxMDIChildFrame : public wxMDIChildFrameBase
+class wxMDIChildFrame : public wxMDIChildFrameBase
 {
 public:
     wxMDIChildFrame() = default;
@@ -250,7 +250,7 @@ public:
 // wxMDIClientWindow
 // ---------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxMDIClientWindow : public wxMDIClientWindowBase
+class wxMDIClientWindow : public wxMDIClientWindowBase
 {
 public:
     wxMDIClientWindow& operator=(wxMDIClientWindow&&) = delete;

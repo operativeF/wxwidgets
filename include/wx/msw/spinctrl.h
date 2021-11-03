@@ -20,7 +20,7 @@
 #include <string>
 #include <vector>
 
-class WXDLLIMPEXP_FWD_CORE wxSpinCtrl;
+class wxSpinCtrl;
 
 using wxArraySpins = std::vector<wxSpinCtrl*>;
 
@@ -30,7 +30,7 @@ using wxArraySpins = std::vector<wxSpinCtrl*>;
 // control is clicked.
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxSpinCtrl : public wxSpinButton
+class wxSpinCtrl : public wxSpinButton
 {
 public:
     wxSpinCtrl() = default;

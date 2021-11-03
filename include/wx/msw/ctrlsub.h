@@ -13,7 +13,7 @@
 #include <string>
 #include <vector>
 
-class WXDLLIMPEXP_CORE wxControlWithItems : public wxControlWithItemsBase
+class wxControlWithItems : public wxControlWithItemsBase
 {
 public:
     wxControlWithItems& operator=(wxControlWithItems&&) = delete;

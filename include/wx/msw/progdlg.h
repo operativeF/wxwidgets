@@ -17,7 +17,7 @@
 class wxProgressDialogTaskRunner;
 struct wxProgressDialogSharedData;
 
-class WXDLLIMPEXP_CORE wxProgressDialog : public wxGenericProgressDialog
+class wxProgressDialog : public wxGenericProgressDialog
 {
 public:
     wxProgressDialog(const std::string& title,

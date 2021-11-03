@@ -17,9 +17,9 @@
 
 #include <fmt/core.h>
 
-class WXDLLIMPEXP_FWD_CORE wxSubwindows;
+class wxSubwindows;
 
-class WXDLLIMPEXP_CORE wxSlider : public wxSliderBase
+class wxSlider : public wxSliderBase
 {
 public:
     wxSlider() = default;

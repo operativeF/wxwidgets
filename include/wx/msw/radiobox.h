@@ -17,13 +17,13 @@
 #include <string>
 #include <vector>
 
-class WXDLLIMPEXP_FWD_CORE wxSubwindows;
+class wxSubwindows;
 
 // ----------------------------------------------------------------------------
 // wxRadioBox
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxRadioBox : public wxStaticBox, public wxRadioBoxBase
+class wxRadioBox : public wxStaticBox, public wxRadioBoxBase
 {
 public:
     wxRadioBox() = default;

@@ -17,7 +17,7 @@ struct _GUID;
 // wxStandardPaths
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxStandardPaths : public wxStandardPathsBase
+class wxStandardPaths : public wxStandardPathsBase
 {
 public:
     
@@ -89,7 +89,7 @@ protected:
 
 // override config file locations to be compatible with the values used by
 // wxFileConfig (dating from Win16 days which explains the class name)
-class WXDLLIMPEXP_BASE wxStandardPathsWin16 : public wxStandardPaths
+class wxStandardPathsWin16 : public wxStandardPaths
 {
 public:
     wxString GetConfigDir() const override;

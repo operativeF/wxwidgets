@@ -28,7 +28,7 @@ static std::string GetLabelForSysLink(const std::string& text, const std::string
 // wxHyperlinkCtrl
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxHyperlinkCtrl : public wxGenericHyperlinkCtrl
+class wxHyperlinkCtrl : public wxGenericHyperlinkCtrl
 {
 public:
     // Default constructor (for two-step construction).

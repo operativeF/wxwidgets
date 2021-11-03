@@ -12,7 +12,7 @@
 
 #include "wx/brush.h"
 
-class WXDLLIMPEXP_FWD_CORE wxBitmap;
+class wxBitmap;
 
 template <class W>
 class wxCustomBackgroundWindow : public W,

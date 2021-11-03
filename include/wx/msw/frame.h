@@ -17,7 +17,7 @@
 #include <wx/taskbarbutton.h>
 #endif
 
-class WXDLLIMPEXP_CORE wxFrame : public wxFrameBase
+class wxFrame : public wxFrameBase
 {
 public:
     wxFrame() = default;

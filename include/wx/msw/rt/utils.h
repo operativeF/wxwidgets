@@ -22,16 +22,16 @@
 namespace wxWinRT
 {
 
-bool WXDLLIMPEXP_CORE IsAvailable();
+bool IsAvailable();
 
-bool WXDLLIMPEXP_CORE Initialize();
+bool Initialize();
 
-void WXDLLIMPEXP_CORE Uninitialize();
+void Uninitialize();
 
-HRESULT WXDLLIMPEXP_CORE GetActivationFactory(const wxString& activatableClassId, REFIID iid, void ** factory);
+HRESULT GetActivationFactory(const wxString& activatableClassId, REFIID iid, void ** factory);
 
 // RAII class initializing WinRT in its ctor and undoing it in its dtor.
-class WXDLLIMPEXP_CORE Initializer
+class Initializer
 {
 public:
     Initializer()
@@ -57,7 +57,7 @@ private:
 // Simple class to convert wxString to HSTRING
 // This just wraps a reference to the wxString object,
 // which needs a life time greater than the TempStringRef object
-class WXDLLIMPEXP_CORE TempStringRef
+class TempStringRef
 {
 public:
     HSTRING Get() const { return m_hstring; }

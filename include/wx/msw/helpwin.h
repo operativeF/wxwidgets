@@ -17,7 +17,7 @@
 
 #include <string>
 
-class WXDLLIMPEXP_CORE wxWinHelpController: public wxHelpControllerBase
+class wxWinHelpController: public wxHelpControllerBase
 {
     wxDECLARE_DYNAMIC_CLASS(wxWinHelpController);
 

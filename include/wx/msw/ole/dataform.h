@@ -15,7 +15,7 @@
 // wxDataFormat identifies the single format of data
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxDataFormat
+class wxDataFormat
 {
 public:
     // the clipboard formats under Win32 are WORD's

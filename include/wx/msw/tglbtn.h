@@ -14,10 +14,10 @@
 
 #include <string>
 
-class WXDLLIMPEXP_FWD_CORE wxBitmap;
+class wxBitmap;
 
 // Checkbox item (single checkbox)
-class WXDLLIMPEXP_CORE wxToggleButton : public wxToggleButtonBase
+class wxToggleButton : public wxToggleButtonBase
 {
 public:
     wxToggleButton() = default;
@@ -75,7 +75,7 @@ public:
 //-----------------------------------------------------------------------------
 
 
-class WXDLLIMPEXP_CORE wxBitmapToggleButton: public wxToggleButton
+class wxBitmapToggleButton: public wxToggleButton
 {
 public:
     // construction/destruction

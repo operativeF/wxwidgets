@@ -18,10 +18,10 @@
 #include <chrono>
 #include <string>
 
-class WXDLLIMPEXP_FWD_CORE wxWindow;
+class wxWindow;
 class wxToolTipOtherWindows;
 
-class WXDLLIMPEXP_CORE wxToolTip
+class wxToolTip
 {
 public:
     wxToolTip(const std::string& tip);

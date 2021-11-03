@@ -24,7 +24,7 @@
 // wxRegConfig
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxRegConfig : public wxConfigBase
+class wxRegConfig : public wxConfigBase
 {
 public:
   // ctor & dtor

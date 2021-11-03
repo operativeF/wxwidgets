@@ -13,13 +13,13 @@
 
 #include <string>
 
-struct WXDLLIMPEXP_FWD_CORE wxSize;
+struct wxSize;
 
 // ----------------------------------------------------------------------------
 // wxFont
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxFont : public wxFontBase
+class wxFont : public wxFontBase
 {
 public:
     wxFont() = default;

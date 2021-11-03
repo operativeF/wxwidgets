@@ -13,7 +13,7 @@
 
 #include "wx/gdiobj.h"
 
-class WXDLLIMPEXP_CORE wxPalette : public wxPaletteBase
+class wxPalette : public wxPaletteBase
 {
 public:
     wxPalette() = default;

@@ -14,7 +14,7 @@
 #include "wx/compositewin.h"
 
 // Group box
-class WXDLLIMPEXP_CORE wxStaticBox : public wxCompositeWindowSettersOnly<wxStaticBoxBase>
+class wxStaticBox : public wxCompositeWindowSettersOnly<wxStaticBoxBase>
 {
 public:
     wxStaticBox() = default;

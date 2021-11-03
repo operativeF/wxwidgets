@@ -20,9 +20,9 @@
 using namespace std::chrono_literals;
 
 // private helper class:
-class WXDLLIMPEXP_FWD_CORE wxTaskBarIconWindow;
+class wxTaskBarIconWindow;
 
-class WXDLLIMPEXP_CORE wxTaskBarIcon : public wxTaskBarIconBase
+class wxTaskBarIcon : public wxTaskBarIconBase
 {
 public:
     wxTaskBarIcon(wxTaskBarIconType iconType = wxTaskBarIconType::DefaultType);
