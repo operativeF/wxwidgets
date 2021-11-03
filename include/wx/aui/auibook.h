@@ -64,14 +64,13 @@ wxALLOW_COMBINING_ENUMS(wxAuiNotebookOption, wxBorder)
 
 // aui notebook event class
 
-class WXDLLIMPEXP_AUI wxAuiNotebookEvent : public wxBookCtrlEvent
+class wxAuiNotebookEvent : public wxBookCtrlEvent
 {
 public:
     wxAuiNotebookEvent(wxEventType commandType = wxEVT_NULL,
                        int winId = 0)
-          : wxBookCtrlEvent(commandType, winId)
+          : wxBookCtrlEvent{commandType, winId}
     {
-        m_dragSource = nullptr;
     }
 
 	wxAuiNotebookEvent& operator=(const wxAuiNotebookEvent&) = delete;
@@ -82,7 +81,7 @@ public:
     wxAuiNotebook* GetDragSource() const { return m_dragSource; }
 
 private:
-    wxAuiNotebook* m_dragSource;
+    wxAuiNotebook* m_dragSource{nullptr};
 
 #ifndef SWIG
 public:
@@ -93,9 +92,8 @@ public:
 };
 
 
-class WXDLLIMPEXP_AUI wxAuiNotebookPage
+struct wxAuiNotebookPage
 {
-public:
     std::string caption;           // caption displayed on the tab
     wxString tooltip;              // tooltip displayed when hovering over tab title
     wxBitmap bitmap;               // tab's bitmap
@@ -105,7 +103,7 @@ public:
     bool hover{false};             // true if mouse hovering over tab
 };
 
-struct WXDLLIMPEXP_AUI wxAuiTabContainerButton
+struct wxAuiTabContainerButton
 {
     wxBitmap bitmap;     // button's hover bitmap
     wxBitmap disBitmap;  // button's disabled bitmap
@@ -122,7 +120,7 @@ WX_DECLARE_USER_EXPORTED_OBJARRAY(wxAuiTabContainerButton, wxAuiTabContainerButt
 #endif
 
 
-class WXDLLIMPEXP_AUI wxAuiTabContainer
+class wxAuiTabContainer
 {
 public:
 
@@ -179,7 +177,6 @@ protected:
     virtual void Render(wxDC* dc, wxWindow* wnd);
 
 protected:
-
     wxAuiTabArt* m_art;
     wxAuiNotebookPageArray m_pages;
     wxAuiTabContainerButtonArray m_buttons;
@@ -191,7 +188,7 @@ protected:
 
 
 
-class WXDLLIMPEXP_AUI wxAuiTabCtrl : public wxControl,
+class wxAuiTabCtrl : public wxControl,
                                      public wxAuiTabContainer
 {
 public:
@@ -246,7 +243,7 @@ protected:
 
 
 
-class WXDLLIMPEXP_AUI wxAuiNotebook : public wxNavigationEnabled<wxBookCtrlBase>
+class wxAuiNotebook : public wxNavigationEnabled<wxBookCtrlBase>
 {
 
 public:
@@ -422,7 +419,6 @@ protected:
     }
 
 protected:
-
     wxAuiManager m_mgr;
     wxAuiTabContainer m_tabs;
     int m_curPage;

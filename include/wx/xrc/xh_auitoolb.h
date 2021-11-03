@@ -17,9 +17,9 @@
 
 #if wxUSE_XRC && wxUSE_AUI
 
-class WXDLLIMPEXP_FWD_AUI wxAuiToolBar;
+class wxAuiToolBar;
 
-class WXDLLIMPEXP_AUI wxAuiToolBarXmlHandler : public wxXmlResourceHandler
+class wxAuiToolBarXmlHandler : public wxXmlResourceHandler
 {
 public:
     wxAuiToolBarXmlHandler();

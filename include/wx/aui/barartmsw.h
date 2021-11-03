@@ -12,7 +12,7 @@
 
 #include "wx/geometry/rect.h"
 
-class WXDLLIMPEXP_AUI wxAuiMSWToolBarArt : public wxAuiGenericToolBarArt
+class wxAuiMSWToolBarArt : public wxAuiGenericToolBarArt
 {
 public:
     wxAuiMSWToolBarArt();

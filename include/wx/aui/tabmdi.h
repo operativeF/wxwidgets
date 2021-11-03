@@ -28,15 +28,15 @@
 // classes
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_FWD_AUI wxAuiMDIParentFrame;
-class WXDLLIMPEXP_FWD_AUI wxAuiMDIClientWindow;
-class WXDLLIMPEXP_FWD_AUI wxAuiMDIChildFrame;
+class wxAuiMDIParentFrame;
+class wxAuiMDIClientWindow;
+class wxAuiMDIChildFrame;
 
 //-----------------------------------------------------------------------------
 // wxAuiMDIParentFrame
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_AUI wxAuiMDIParentFrame : public wxFrame
+class wxAuiMDIParentFrame : public wxFrame
 {
 public:
     wxAuiMDIParentFrame();
@@ -121,7 +121,7 @@ private:
 // wxAuiMDIChildFrame
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_AUI wxAuiMDIChildFrame : public wxTDIChildFrame
+class wxAuiMDIChildFrame : public wxTDIChildFrame
 {
 public:
     wxAuiMDIChildFrame();
@@ -191,7 +191,7 @@ private:
 // wxAuiMDIClientWindow
 //-----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_AUI wxAuiMDIClientWindow : public wxAuiNotebook
+class wxAuiMDIClientWindow : public wxAuiNotebook
 {
 public:
     wxAuiMDIClientWindow() = default;

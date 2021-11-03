@@ -22,8 +22,8 @@
 #include "wx/pen.h"
 
 
-class WXDLLIMPEXP_FWD_CORE wxClientDC;
-class WXDLLIMPEXP_FWD_AUI wxAuiPaneInfo;
+class wxClientDC;
+class wxAuiPaneInfo;
 
 enum wxAuiToolBarStyle
 {
@@ -66,17 +66,13 @@ enum wxAuiToolBarToolTextOrientation
 
 // aui toolbar event class
 
-class WXDLLIMPEXP_AUI wxAuiToolBarEvent : public wxNotifyEvent
+class wxAuiToolBarEvent : public wxNotifyEvent
 {
 public:
     wxAuiToolBarEvent(wxEventType commandType = wxEVT_NULL,
                       int winId = 0)
-          : wxNotifyEvent(commandType, winId)
-        , m_clickPt(-1, -1)
-        , m_rect(-1, -1, 0, 0)
+          : wxNotifyEvent{commandType, winId}
     {
-        m_isDropdownClicked = false;
-        m_toolId = -1;
     }
 
 	wxAuiToolBarEvent& operator=(const wxAuiToolBarEvent&) = delete;
@@ -96,10 +92,10 @@ public:
     void SetToolId(int toolId) { m_toolId = toolId; }
 
 private:
-    bool m_isDropdownClicked;
-    wxPoint m_clickPt;
-    wxRect m_rect;
-    int m_toolId;
+    wxPoint m_clickPt{-1, -1};
+    wxRect m_rect{-1, -1, 0, 0};
+    int m_toolId{-1};
+    bool m_isDropdownClicked{false};
 
 public:
 	wxClassInfo *wxGetClassInfo() const override ;
@@ -108,52 +104,11 @@ public:
 };
 
 
-class WXDLLIMPEXP_AUI wxAuiToolBarItem
+class wxAuiToolBarItem
 {
     friend class wxAuiToolBar;
 
 public:
-
-    wxAuiToolBarItem()
-    {
-        m_window = nullptr;
-        m_sizerItem = nullptr;
-        m_spacerPixels = 0;
-        m_toolId = 0;
-        m_kind = wxITEM_NORMAL;
-        m_state = 0;  // normal, enabled
-        m_proportion = 0;
-        m_active = true;
-        m_dropDown = true;
-        m_sticky = true;
-        m_userData = 0;
-        m_alignment = wxALIGN_CENTER;
-    }
-
-    void Assign(const wxAuiToolBarItem& c)
-    {
-        m_window = c.m_window;
-        m_label = c.m_label;
-        m_bitmap = c.m_bitmap;
-        m_disabledBitmap = c.m_disabledBitmap;
-        m_hoverBitmap = c.m_hoverBitmap;
-        m_shortHelp = c.m_shortHelp;
-        m_longHelp = c.m_longHelp;
-        m_sizerItem = c.m_sizerItem;
-        m_minSize = c.m_minSize;
-        m_spacerPixels = c.m_spacerPixels;
-        m_toolId = c.m_toolId;
-        m_kind = c.m_kind;
-        m_state = c.m_state;
-        m_proportion = c.m_proportion;
-        m_active = c.m_active;
-        m_dropDown = c.m_dropDown;
-        m_sticky = c.m_sticky;
-        m_userData = c.m_userData;
-        m_alignment = c.m_alignment;
-    }
-
-
     void SetWindow(wxWindow* w) { m_window = w; }
     wxWindow* GetWindow() { return m_window; }
 
@@ -224,26 +179,33 @@ public:
     }
 
 private:
+    wxString m_shortHelp;       // short help (for tooltip)
+    wxString m_longHelp;        // long help (for status bar)
 
-    wxWindow* m_window;          // item's associated window
     std::string m_label;         // label displayed on the item
+
     wxBitmap m_bitmap;           // item's bitmap
     wxBitmap m_disabledBitmap;  // item's disabled bitmap
     wxBitmap m_hoverBitmap;     // item's hover bitmap
-    wxString m_shortHelp;       // short help (for tooltip)
-    wxString m_longHelp;        // long help (for status bar)
-    wxSizerItem* m_sizerItem;   // sizer item
+
+    wxWindow* m_window{nullptr};          // item's associated window
+    wxSizerItem* m_sizerItem{nullptr};   // sizer item
+    
     wxSize m_minSize;           // item's minimum size
-    int m_spacerPixels;         // size of a spacer
-    int m_toolId;                // item's id
-    int m_kind;                  // item's kind
-    int m_state;                 // state
-    int m_proportion;            // proportion
-    bool m_active;               // true if the item is currently active
-    bool m_dropDown;             // true if the item has a dropdown button
-    bool m_sticky;               // overrides button states if true (always active)
-    long m_userData;            // user-specified data
-    int m_alignment;             // sizer alignment flag, defaults to wxCENTER, may be wxEXPAND or any other
+
+    long m_userData{0};            // user-specified data
+
+    int m_spacerPixels{0};         // size of a spacer
+    int m_toolId{0};                // item's id
+    int m_kind{wxITEM_NORMAL};                  // item's kind
+    int m_state{0};                 // state
+    int m_proportion{0};            // proportion
+    int m_alignment{wxALIGN_CENTER};   // sizer alignment flag, defaults to wxCENTER, may be wxEXPAND or any other
+
+    bool m_active{true};               // true if the item is currently active
+    bool m_dropDown{true};             // true if the item has a dropdown button
+    bool m_sticky{true};               // overrides button states if true (always active)
+
 };
 
 #ifndef SWIG
@@ -255,7 +217,7 @@ WX_DECLARE_USER_EXPORTED_OBJARRAY(wxAuiToolBarItem, wxAuiToolBarItemArray, WXDLL
 
 // tab art class
 
-class WXDLLIMPEXP_AUI wxAuiToolBarArt
+class wxAuiToolBarArt
 {
 public:
     virtual ~wxAuiToolBarArt() = default;
@@ -344,7 +306,7 @@ public:
 
 
 
-class WXDLLIMPEXP_AUI wxAuiGenericToolBarArt : public wxAuiToolBarArt
+class wxAuiGenericToolBarArt : public wxAuiToolBarArt
 {
 
 public:
@@ -464,7 +426,7 @@ protected:
 #endif
 
 
-class WXDLLIMPEXP_AUI wxAuiToolBar : public wxControl
+class wxAuiToolBar : public wxControl
 {
 public:
     wxAuiToolBar()

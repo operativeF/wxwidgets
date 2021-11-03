@@ -24,11 +24,11 @@
 
 #include "wx/aui/tabart.h"
 
-struct WXDLLIMPEXP_FWD_CORE wxSize;
+struct wxSize;
 class wxWindow;
 class wxDC;
 
-class WXDLLIMPEXP_AUI wxAuiGtkTabArt : public wxAuiGenericTabArt
+class wxAuiGtkTabArt : public wxAuiGenericTabArt
 {
 public:
     wxAuiGtkTabArt() = default;

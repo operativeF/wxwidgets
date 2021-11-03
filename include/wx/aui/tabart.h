@@ -31,14 +31,14 @@
 
 class wxAuiNotebookPage;
 class wxAuiNotebookPageArray;
-struct WXDLLIMPEXP_FWD_CORE wxSize;
 class wxWindow;
 class wxDC;
 
+struct wxSize;
 
 // tab art class
 
-class WXDLLIMPEXP_AUI wxAuiTabArt
+class wxAuiTabArt
 {
 public:
     virtual ~wxAuiTabArt() = default;
@@ -115,11 +115,9 @@ public:
 };
 
 
-class WXDLLIMPEXP_AUI wxAuiGenericTabArt : public wxAuiTabArt
+class wxAuiGenericTabArt : public wxAuiTabArt
 {
-
 public:
-
     wxAuiGenericTabArt();
 
     wxAuiTabArt* Clone() override;
@@ -215,11 +213,9 @@ protected:
 };
 
 
-class WXDLLIMPEXP_AUI wxAuiSimpleTabArt : public wxAuiTabArt
+class wxAuiSimpleTabArt : public wxAuiTabArt
 {
-
 public:
-
     wxAuiSimpleTabArt();
 
     wxAuiTabArt* Clone() override;
@@ -293,11 +289,14 @@ protected:
     wxFont m_normalFont;
     wxFont m_selectedFont;
     wxFont m_measuringFont;
+
     wxPen m_normalBkPen;
     wxPen m_selectedBkPen;
+
     wxBrush m_normalBkBrush;
     wxBrush m_selectedBkBrush;
     wxBrush m_bkBrush;
+
     wxBitmap m_activeCloseBmp;
     wxBitmap m_disabledCloseBmp;
     wxBitmap m_activeLeftBmp;

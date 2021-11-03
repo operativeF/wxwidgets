@@ -30,7 +30,7 @@
     #define wxAuiFloatingFrameBaseClass wxFrame
 #endif
 
-class WXDLLIMPEXP_AUI wxAuiFloatingFrame : public wxAuiFloatingFrameBaseClass
+class wxAuiFloatingFrame : public wxAuiFloatingFrameBaseClass
 {
 public:
     wxAuiFloatingFrame(wxWindow* parent,
@@ -65,17 +65,20 @@ private:
 
 private:
     wxWindow* m_paneWindow{nullptr};    // pane window being managed
-    bool m_solidDrag{};          // true if system uses solid window drag
-    bool m_moving{};
+
     wxRect m_lastRect;
     wxRect m_last2Rect;
     wxRect m_last3Rect;
+
     wxSize m_lastSize;
+
     wxDirection m_lastDirection;
 
     wxWeakRef<wxAuiManager> m_ownerMgr;
     wxAuiManager m_mgr;
 
+    bool m_solidDrag{false};          // true if system uses solid window drag
+    bool m_moving{false};
 #ifndef SWIG
     wxDECLARE_EVENT_TABLE();
     wxDECLARE_CLASS(wxAuiFloatingFrame);

@@ -14,7 +14,7 @@
 
 #include <string>
 
-class WXDLLIMPEXP_AUI wxAuiMSWTabArt : public wxAuiGenericTabArt
+class wxAuiMSWTabArt : public wxAuiGenericTabArt
 {
 public:
 

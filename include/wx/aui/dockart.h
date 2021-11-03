@@ -30,7 +30,7 @@
 // functionality to the wxAui dock manager.  This allows the dock
 // manager to have pluggable look-and-feels
 
-class WXDLLIMPEXP_AUI wxAuiDockArt
+class wxAuiDockArt
 {
 public:
     virtual ~wxAuiDockArt() = default;
@@ -87,7 +87,7 @@ public:
 // can be customized by creating a class derived from this one,
 // or replacing this class entirely
 
-class WXDLLIMPEXP_AUI wxAuiDefaultDockArt : public wxAuiDockArt
+class wxAuiDefaultDockArt : public wxAuiDockArt
 {
 public:
 
@@ -146,12 +146,14 @@ protected:
     void InitBitmaps();
 
 protected:
-
     wxPen m_borderPen;
+
     wxBrush m_sashBrush;
     wxBrush m_backgroundBrush;
     wxBrush m_gripperBrush;
+
     wxFont m_captionFont;
+
     wxBitmap m_inactiveCloseBitmap;
     wxBitmap m_inactivePinBitmap;
     wxBitmap m_inactiveMaximizeBitmap;
@@ -160,9 +162,11 @@ protected:
     wxBitmap m_activePinBitmap;
     wxBitmap m_activeMaximizeBitmap;
     wxBitmap m_activeRestoreBitmap;
+
     wxPen m_gripperPen1;
     wxPen m_gripperPen2;
     wxPen m_gripperPen3;
+
     wxColour m_baseColour;
     wxColour m_activeCaptionColour;
     wxColour m_activeCaptionGradientColour;
@@ -170,6 +174,7 @@ protected:
     wxColour m_inactiveCaptionColour;
     wxColour m_inactiveCaptionGradientColour;
     wxColour m_inactiveCaptionTextColour;
+
     int m_borderSize;
     int m_captionSize;
     int m_sashSize;

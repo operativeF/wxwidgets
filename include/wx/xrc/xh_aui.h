@@ -16,10 +16,10 @@
 
 #include <vector>
 
-class WXDLLIMPEXP_FWD_AUI wxAuiManager;
-class WXDLLIMPEXP_FWD_AUI wxAuiNotebook;
+class wxAuiManager;
+class wxAuiNotebook;
 
-class WXDLLIMPEXP_AUI wxAuiXmlHandler : public wxXmlResourceHandler
+class wxAuiXmlHandler : public wxXmlResourceHandler
 {
 public:
     wxAuiXmlHandler();

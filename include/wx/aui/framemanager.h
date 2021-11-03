@@ -141,31 +141,17 @@ WX_DEFINE_USER_EXPORTED_ARRAY_PTR(wxAuiPaneInfo*, wxAuiPaneInfoPtrArray, class W
 WX_DEFINE_USER_EXPORTED_ARRAY_PTR(wxAuiDockInfo*, wxAuiDockInfoPtrArray, class WXDLLIMPEXP_AUI);
 #endif // SWIG
 
-extern WXDLLIMPEXP_AUI wxAuiDockInfo wxAuiNullDockInfo;
-extern WXDLLIMPEXP_AUI wxAuiPaneInfo wxAuiNullPaneInfo;
+extern wxAuiDockInfo wxAuiNullDockInfo;
+extern wxAuiPaneInfo wxAuiNullPaneInfo;
 
 
 
-class WXDLLIMPEXP_AUI wxAuiPaneInfo
+class wxAuiPaneInfo
 {
 public:
 
     wxAuiPaneInfo()
-        : best_size(wxDefaultSize)
-        , min_size(wxDefaultSize)
-        , max_size(wxDefaultSize)
-        , floating_pos(wxDefaultPosition)
-        , floating_size(wxDefaultSize)
     {
-        window = nullptr;
-        frame = nullptr;
-        state = 0;
-        dock_direction = wxAUI_DOCK_LEFT;
-        dock_layer = 0;
-        dock_row = 0;
-        dock_pos = 0;
-        dock_proportion = 0;
-
         DefaultPane();
     }
 
@@ -330,7 +316,6 @@ public:
 #endif
 
 public:
-
     // NOTE: You can add and subtract flags from this list,
     // but do not change the values of the flags, because
     // they are stored in a binary integer format in the
@@ -376,33 +361,34 @@ public:
     wxString caption;     // caption displayed on the window
     wxBitmap icon;        // icon of the pane, may be invalid
 
-    wxWindow* window;     // window that is in this pane
-    wxFrame* frame;       // floating frame window that holds the pane
-    unsigned int state;   // a combination of wxPaneState values
-
-    int dock_direction;   // dock direction (top, bottom, left, right, center)
-    int dock_layer;       // layer number (0 = innermost layer)
-    int dock_row;         // row number on the docking bar (0 = first row)
-    int dock_pos;         // position inside the row (0 = first position)
-
-    wxSize best_size;     // size that the layout engine will prefer
-    wxSize min_size;      // minimum size the pane window can tolerate
-    wxSize max_size;      // maximum size the pane window can tolerate
-
-    wxPoint floating_pos; // position while floating
-    wxSize floating_size; // size while floating
-    int dock_proportion;  // proportion while docked
-
     wxRect rect;              // current rectangle (populated by wxAUI)
+
+    wxWindow* window{nullptr};     // window that is in this pane
+    wxFrame* frame{nullptr};       // floating frame window that holds the pane
+    
+    wxSize best_size{wxDefaultSize};     // size that the layout engine will prefer
+    wxSize min_size{wxDefaultSize};      // minimum size the pane window can tolerate
+    wxSize max_size{wxDefaultSize};      // maximum size the pane window can tolerate
+    wxSize floating_size{wxDefaultSize}; // size while floating
+
+    wxPoint floating_pos{wxDefaultPosition}; // position while floating
+
+    unsigned int state{0};   // a combination of wxPaneState values
+
+    int dock_direction{wxAUI_DOCK_LEFT};   // dock direction (top, bottom, left, right, center)
+    int dock_layer{0};       // layer number (0 = innermost layer)
+    int dock_row{0};         // row number on the docking bar (0 = first row)
+    int dock_pos{0};         // position inside the row (0 = first position)
+    int dock_proportion{0};  // proportion while docked
 
     bool IsValid() const;
 };
 
 
 
-class WXDLLIMPEXP_FWD_AUI wxAuiFloatingFrame;
+class wxAuiFloatingFrame;
 
-class WXDLLIMPEXP_AUI wxAuiManager : public wxEvtHandler
+class wxAuiManager : public wxEvtHandler
 {
     friend class wxAuiFloatingFrame;
 
@@ -616,17 +602,11 @@ protected:
 
 // event declarations/classes
 
-class WXDLLIMPEXP_AUI wxAuiManagerEvent : public wxEvent
+class wxAuiManagerEvent : public wxEvent
 {
 public:
     wxAuiManagerEvent(wxEventType type=wxEVT_NULL) : wxEvent(0, type)
     {
-        manager = nullptr;
-        pane = nullptr;
-        button = 0;
-        veto_flag = false;
-        canveto_flag = true;
-        dc = nullptr;
     }
 
 	wxAuiManagerEvent& operator=(const wxAuiManagerEvent&) = delete;
@@ -649,12 +629,14 @@ public:
     bool CanVeto() const { return  canveto_flag && veto_flag; }
 
 public:
-    wxAuiManager* manager;
-    wxAuiPaneInfo* pane;
-    int button;
-    bool veto_flag;
-    bool canveto_flag;
-    wxDC* dc;
+    wxDC* dc{nullptr};
+    wxAuiManager* manager{nullptr};
+    wxAuiPaneInfo* pane{nullptr};
+    
+    int button{0};
+    
+    bool veto_flag{false};
+    bool canveto_flag{true};
 
 #ifndef SWIG
 public:
@@ -665,22 +647,9 @@ public:
 };
 
 
-class WXDLLIMPEXP_AUI wxAuiDockInfo
+class wxAuiDockInfo
 {
 public:
-    wxAuiDockInfo()
-    {
-        dock_direction = 0;
-        dock_layer = 0;
-        dock_row = 0;
-        size = 0;
-        min_size = 0;
-        resizable = true;
-        fixed = false;
-        toolbar = false;
-        reserved1 = false;
-    }
-
     bool IsOk() const { return dock_direction != 0; }
     bool IsHorizontal() const { return dock_direction == wxAUI_DOCK_TOP ||
                              dock_direction == wxAUI_DOCK_BOTTOM; }
@@ -689,23 +658,25 @@ public:
                              dock_direction == wxAUI_DOCK_CENTER; }
 public:
     wxAuiPaneInfoPtrArray panes; // array of panes
+    
     wxRect rect;              // current rectangle
-    int dock_direction;       // dock direction (top, bottom, left, right, center)
-    int dock_layer;           // layer number (0 = innermost layer)
-    int dock_row;             // row number on the docking bar (0 = first row)
-    int size;                 // size of the dock
-    int min_size;             // minimum size of a dock (0 if there is no min)
-    bool resizable;           // flag indicating whether the dock is resizable
-    bool toolbar;             // flag indicating dock contains only toolbars
-    bool fixed;               // flag indicating that the dock operates on
+
+    int dock_direction{0};       // dock direction (top, bottom, left, right, center)
+    int dock_layer{0};           // layer number (0 = innermost layer)
+    int dock_row{0};             // row number on the docking bar (0 = first row)
+    int size{0};                 // size of the dock
+    int min_size{0};             // minimum size of a dock (0 if there is no min)
+    
+    bool resizable{true};           // flag indicating whether the dock is resizable
+    bool toolbar{false};             // flag indicating dock contains only toolbars
+    bool fixed{false};               // flag indicating that the dock operates on
                               // absolute coordinates as opposed to proportional
-    bool reserved1;
+    bool reserved1{false};
 };
 
 
-class WXDLLIMPEXP_AUI wxAuiDockUIPart
+struct wxAuiDockUIPart
 {
-public:
     enum
     {
         typeCaption,
