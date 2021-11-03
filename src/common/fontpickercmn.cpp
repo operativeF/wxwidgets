@@ -8,20 +8,14 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_FONTPICKERCTRL
 
 #include "wx/fontpicker.h"
-
-#ifndef WX_PRECOMP
-    #include <fmt/core.h>
-#endif
-
 #include "wx/textctrl.h"
 #include "wx/fontenum.h"
 #include "wx/tokenzr.h"
+
+#include <fmt/core.h>
 
 // ============================================================================
 // implementation

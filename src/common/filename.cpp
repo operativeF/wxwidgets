@@ -60,8 +60,6 @@
                  ] between directory and file
  */
 
-
-
 #ifdef WX_WINDOWS
     #include "wx/msw/private.h"
     #include "wx/msw/wrapwin.h" // For GetShort/LongPathName

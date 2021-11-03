@@ -19,12 +19,8 @@
 #include "wx/gdicmn.h"
 #include "wx/geometry/size.h"
 
-#ifndef WX_PRECOMP
-    #if defined(__WXMSW__)
-        #include  "wx/msw/private.h"  // includes windows.h for LOGFONTW
-    #endif
-
-    #include <cassert>
+#if defined(__WXMSW__)
+    #include  "wx/msw/private.h"  // includes windows.h for LOGFONTW
 #endif
 
 #include "wx/fontutil.h" // for wxNativeFontInfo
@@ -32,6 +28,8 @@
 #include "wx/fontenum.h"
 
 #include "wx/tokenzr.h"
+
+#include <cassert>
 
 // debugger helper: this function can be called from a debugger to show what
 // the date really is

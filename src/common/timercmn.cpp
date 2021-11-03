@@ -11,14 +11,12 @@
 
 #if wxUSE_TIMER
 
-#ifndef WX_PRECOMP
-    #include <chrono>
-#endif
-
 #include "wx/app.h"
 #include "wx/timer.h"
 #include "wx/apptrait.h"
 #include "wx/private/timer.h"
+
+#include <chrono>
 
 // ----------------------------------------------------------------------------
 // wxWin macros

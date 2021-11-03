@@ -23,9 +23,7 @@
 
 #include "wx/private/uiaction.h"
 
-#ifndef WX_PRECOMP
-    #include <cassert>
-#endif
+#include <cassert>
 
 // ----------------------------------------------------------------------------
 // Methods forwarded to wxUIActionSimulatorImpl

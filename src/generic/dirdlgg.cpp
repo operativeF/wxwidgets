@@ -8,21 +8,16 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_DIRDLG
 
-#ifndef WX_PRECOMP
-    #include "wx/textctrl.h"
-    #include "wx/button.h"
-    #include "wx/checkbox.h"
-    #include "wx/sizer.h"
-    #include "wx/intl.h"
-    #include "wx/log.h"
-    #include "wx/msgdlg.h"
-    #include "wx/bmpbuttn.h"
-#endif
+#include "wx/textctrl.h"
+#include "wx/button.h"
+#include "wx/checkbox.h"
+#include "wx/sizer.h"
+#include "wx/intl.h"
+#include "wx/log.h"
+#include "wx/msgdlg.h"
+#include "wx/bmpbuttn.h"
 
 #include "wx/statline.h"
 #include "wx/dirctrl.h"

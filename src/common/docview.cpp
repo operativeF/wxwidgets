@@ -29,14 +29,6 @@
 #include "wx/stringutils.h"
 #include "wx/filehistory.h"
 
-#ifndef WX_PRECOMP
-    #include <iostream>
-    #include <memory>
-    #include <vector>
-
-    #include <gsl/gsl>
-#endif
-
 #if wxUSE_PRINTING_ARCHITECTURE
     #include "wx/prntbase.h"
     #include "wx/printdlg.h"
@@ -55,8 +47,13 @@
 #include "wx/scopeguard.h"
 #include "wx/except.h"
 
+#include <gsl/gsl>
+
 #include <fstream>
 #include <filesystem>
+#include <iostream>
+#include <memory>
+#include <vector>
 
 // ----------------------------------------------------------------------------
 // wxWidgets macros

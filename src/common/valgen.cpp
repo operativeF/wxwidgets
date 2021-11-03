@@ -8,14 +8,7 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_VALIDATORS
-
-#ifndef WX_PRECOMP
-    #include <fmt/core.h>
-#endif
 
 #include "wx/dynarray.h"
 #include "wx/utils.h"
@@ -46,6 +39,7 @@
 
 #include "wx/valgen.h"
 
+#include <fmt/core.h>
 
 wxIMPLEMENT_CLASS(wxGenericValidator, wxValidator);
 

@@ -8,20 +8,15 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_FFILE
-
-#ifndef WX_PRECOMP
-    #include <gsl/gsl>
-#endif
 
 #include "wx/intl.h"
 #include "wx/log.h"
 #include "wx/crt.h"
 #include "wx/filename.h"
 #include "wx/ffile.h"
+
+#include <gsl/gsl>
 
 // ============================================================================
 // implementation of wxFFile

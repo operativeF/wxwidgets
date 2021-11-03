@@ -8,20 +8,11 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-// ===========================================================================
-// headers, declarations, constants
-// ===========================================================================
-
-
-
-#ifndef WX_PRECOMP
-    #include <cerrno>
-#endif
-
 #include "wx/hash.h"
 #include "wx/log.h"
 #include "wx/private/wxprintf.h"
 
+#include <cerrno>
 
 // ============================================================================
 // printf() implementation

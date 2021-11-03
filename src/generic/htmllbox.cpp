@@ -8,15 +8,6 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-
-
-
-#ifndef WX_PRECOMP
-    #include <algorithm>
-    #include <array>
-    #include <charconv>
-#endif //WX_PRECOMP
-
 #if wxUSE_HTML
 
 #include "wx/dcclient.h"
@@ -29,6 +20,9 @@
 #include "wx/html/forcelnk.h"
 FORCE_WXHTML_MODULES()
 
+#include <algorithm>
+#include <array>
+#include <charconv>
 
 // ----------------------------------------------------------------------------
 // constants

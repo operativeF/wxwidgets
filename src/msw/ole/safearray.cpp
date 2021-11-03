@@ -7,14 +7,9 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_OLE && wxUSE_VARIANT
 
-#ifndef WX_PRECOMP
-    #include "wx/variant.h"
-#endif // WX_PRECOMP
+#include "wx/variant.h"
 
 #include "wx/msw/ole/safearray.h"
 

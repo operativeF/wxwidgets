@@ -8,16 +8,11 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_OLE
 
 #ifndef __CYGWIN10__
 
-#ifndef WX_PRECOMP
-    #include "wx/msw/private.h"
-#endif
+#include "wx/msw/private.h"
 
 #include  "wx/msw/ole/oleutils.h"
 #include "wx/msw/ole/safearray.h"

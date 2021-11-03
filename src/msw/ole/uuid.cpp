@@ -8,20 +8,15 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-
-
 #if wxUSE_OLE && (wxUSE_DRAG_AND_DROP || wxUSE_DATAOBJ)
 
 #include "wx/msw/wrapwin.h"
-
-#ifndef WX_PRECOMP
-    #include <tuple>
-#endif
 
 #include  <rpc.h>                       // UUID related functions
 
 #include  "wx/msw/ole/uuid.h"
 
+#include <tuple>
 
 // ============================================================================
 // Implementation

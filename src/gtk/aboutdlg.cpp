@@ -7,15 +7,11 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-
-
 #if wxUSE_ABOUTDLG
 
 #include "wx/aboutdlg.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/window.h"
-#endif //WX_PRECOMP
+#include "wx/window.h"
 
 #include "wx/gtk/private.h"
 

@@ -13,10 +13,6 @@
 
 #include "wx/zipstrm.h"
 
-#ifndef WX_PRECOMP
-    #include <gsl/gsl>
-#endif
-
 #include "wx/hashmap.h"
 #include "wx/intl.h"
 #include "wx/log.h"
@@ -29,6 +25,7 @@
 
 #include "zlib.h"
 
+#include <gsl/gsl>
 
 // signatures for the various records (PKxx)
 enum {

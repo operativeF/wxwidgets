@@ -91,14 +91,12 @@ wxCONSTRUCTOR_5( wxComboBox, wxWindow*, Parent, wxWindowID, Id, \
 
 #if wxUSE_COMBOCTRL
 
-#ifndef WX_PRECOMP
-    #include "wx/app.h"
-    #include "wx/log.h"
-    #include "wx/dcclient.h"
-    #include "wx/settings.h"
-    #include "wx/timer.h"
-    #include "wx/textctrl.h"
-#endif
+#include "wx/app.h"
+#include "wx/log.h"
+#include "wx/dcclient.h"
+#include "wx/settings.h"
+#include "wx/timer.h"
+#include "wx/textctrl.h"
 
 #include "wx/tooltip.h"
 

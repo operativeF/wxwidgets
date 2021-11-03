@@ -18,25 +18,21 @@
 #error wxGenericFileDialog currently only supports Unix and MSW
 #endif
 
-#ifndef WX_PRECOMP
-    #ifdef __WXMSW__
-        #include "wx/msw/wrapwin.h"
-    #endif
-    #include "wx/hash.h"
-    #include "wx/intl.h"
-    #include "wx/settings.h"
-    #include "wx/log.h"
-    #include "wx/msgdlg.h"
-    #include "wx/bmpbuttn.h"
-    #include "wx/checkbox.h"
-    #include "wx/choice.h"
-    #include "wx/stattext.h"
-    #include "wx/textctrl.h"
-    #include "wx/sizer.h"
-    #include "wx/filedlg.h"     // wxFD_OPEN, wxFD_SAVE...
-
-    #include <ctime>
+#ifdef __WXMSW__
+    #include "wx/msw/wrapwin.h"
 #endif
+#include "wx/hash.h"
+#include "wx/intl.h"
+#include "wx/settings.h"
+#include "wx/log.h"
+#include "wx/msgdlg.h"
+#include "wx/bmpbuttn.h"
+#include "wx/checkbox.h"
+#include "wx/choice.h"
+#include "wx/stattext.h"
+#include "wx/textctrl.h"
+#include "wx/sizer.h"
+#include "wx/filedlg.h"     // wxFD_OPEN, wxFD_SAVE...
 
 #include "wx/longlong.h"
 #include "wx/config.h"
@@ -69,6 +65,8 @@
 #if defined(__UNIX__)
 #include <unistd.h>
 #endif
+
+#include <ctime>
 
 #if defined(WX_WINDOWS)
 #define IsTopMostDir(dir)   (dir.empty())

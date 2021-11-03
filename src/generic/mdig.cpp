@@ -9,16 +9,11 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_MDI
 
-#ifndef WX_PRECOMP
-    #include "wx/menu.h"
-    #include "wx/intl.h"
-    #include "wx/log.h"
-#endif //WX_PRECOMP
+#include "wx/menu.h"
+#include "wx/intl.h"
+#include "wx/log.h"
 
 #include "wx/mdi.h"
 #include "wx/generic/mdig.h"

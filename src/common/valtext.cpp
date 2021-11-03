@@ -21,11 +21,9 @@
 #include "wx/textctrl.h"
 #include "wx/utils.h"
 
-#ifndef WX_PRECOMP
-  #include <cstdio>
-  #include <cstdlib>
-  #include <cctype>
-#endif
+#include <cctype>
+#include <cstdio>
+#include <cstdlib>
 
 
 // ----------------------------------------------------------------------------

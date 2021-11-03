@@ -7,14 +7,7 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
 #if wxUSE_NOTIFICATION_MESSAGE && wxUSE_WINRT
-
-#ifndef WX_PRECOMP
-    #include <string>
-
-    #include <boost/nowide/convert.hpp>
-#endif // WX_PRECOMP
 
 #include "wx/app.h"
 #include "wx/module.h"
@@ -37,6 +30,9 @@
 #include <propvarutil.h>
 #include <wrl/implements.h>
 
+#include <boost/nowide/convert.hpp>
+
+#include <string>
 
 using namespace ABI::Windows::UI::Notifications;
 using namespace ABI::Windows::Data::Xml::Dom;

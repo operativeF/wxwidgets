@@ -8,17 +8,12 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_OLE && wxUSE_DRAG_AND_DROP
 
-#ifndef WX_PRECOMP
-    #include "wx/msw/private.h"
+#include "wx/msw/private.h"
 
-    #include "wx/window.h"
-    #include "wx/log.h"
-#endif
+#include "wx/window.h"
+#include "wx/log.h"
 
 #include "wx/dnd.h"
 

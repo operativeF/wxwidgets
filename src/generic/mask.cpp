@@ -7,13 +7,8 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-
-
-
-#ifndef WX_PRECOMP
-    #include "wx/bitmap.h"
-    #include "wx/image.h"
-#endif // WX_PRECOMP
+#include "wx/bitmap.h"
+#include "wx/image.h"
 
 #if wxUSE_GENERIC_MASK
 

@@ -8,19 +8,14 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_URL
 
 #include "wx/url.h"
 
-#ifndef WX_PRECOMP
-    #include <string>
-#endif
-
 #include "wx/utils.h"
 #include "wx/module.h"
+
+#include <string>
 
 wxIMPLEMENT_CLASS(wxURL, wxURI);
 

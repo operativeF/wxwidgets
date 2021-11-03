@@ -8,16 +8,7 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_FONTMAP
-
-#ifndef WX_PRECOMP
-    #include <array>
-    #include <string>
-    #include <string_view>
-#endif //WX_PRECOMP
 
 #if defined(WX_WINDOWS)
     #include  "wx/msw/private.h"  // includes windows.h for LOGFONTW
@@ -40,7 +31,10 @@
     #include "wx/memconf.h"
 #endif
 
+#include <array>
 #include <cwctype>
+#include <string>
+#include <string_view>
 
 // ----------------------------------------------------------------------------
 // constants

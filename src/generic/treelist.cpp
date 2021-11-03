@@ -7,14 +7,9 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_TREELISTCTRL
 
-#ifndef WX_PRECOMP
-    #include "wx/dc.h"
-#endif // WX_PRECOMP
+#include "wx/dc.h"
 
 #include "wx/treelist.h"
 

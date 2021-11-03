@@ -41,7 +41,6 @@
     #include <utility>          // for std::swap()
 #endif
 
-#include <exception>
 #include <typeinfo>
 
 #if wxUSE_EXCEPTIONS

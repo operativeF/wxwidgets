@@ -282,8 +282,6 @@ wxFileName wxFileConfig::GetLocalFile(const wxString& szFile, unsigned int style
 // ----------------------------------------------------------------------------
 wxIMPLEMENT_ABSTRACT_CLASS(wxFileConfig, wxConfigBase);
 
-
-
 // constructor supports creation of wxFileConfig objects of any type
 wxFileConfig::wxFileConfig(const wxString& appName, const wxString& vendorName,
                            const wxString& strLocal, const wxString& strGlobal,

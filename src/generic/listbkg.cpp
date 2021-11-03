@@ -8,16 +8,11 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_LISTBOOK
 
 #include "wx/listbook.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/settings.h"
-#endif
+#include "wx/settings.h"
 
 #include "wx/listctrl.h"
 #include "wx/statline.h"

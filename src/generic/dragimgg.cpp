@@ -8,14 +8,7 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_DRAGIMAGE
-
-#ifndef WX_PRECOMP
-    #include <cstdio>
-#endif
 
 #include "wx/dcclient.h"
 #include "wx/dcmemory.h"
@@ -30,6 +23,8 @@
 #define wxUSE_IMAGE_IN_DRAGIMAGE 1
 
 #include "wx/generic/dragimgg.h"
+
+#include <cstdio>
 
 // ----------------------------------------------------------------------------
 // macros

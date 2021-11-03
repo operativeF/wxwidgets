@@ -8,14 +8,7 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_STATTEXT
-
-#ifndef WX_PRECOMP
-    #include <algorithm>
-#endif
 
 #include "wx/stattext.h"
 #include "wx/dcclient.h"
@@ -28,6 +21,7 @@
 
 #include "wx/private/markupparser.h"
 
+#include <algorithm>
 
 // ----------------------------------------------------------------------------
 // XTI

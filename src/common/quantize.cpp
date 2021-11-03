@@ -33,17 +33,15 @@
 
 #include "wx/quantize.h"
 
-#ifndef WX_PRECOMP
-  #ifdef __WXMSW__
-    #include "wx/msw/private.h"
-  #endif 
-
-  #include <cstdlib>
-  #include <cstring>
-#endif
+#ifdef __WXMSW__
+  #include "wx/msw/private.h"
+#endif 
 
 #include "wx/palette.h"
 #include "wx/image.h"
+
+#include <cstdlib>
+#include <cstring>
 
 namespace
 {

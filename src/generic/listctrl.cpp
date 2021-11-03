@@ -12,24 +12,18 @@
 //   1. we need to implement searching/sorting for virtual controls somehow
 //   2. when changing selection the lines are refreshed twice
 
-
-
-
-
 #if wxUSE_LISTCTRL
 
 #include "wx/listctrl.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/scrolwin.h"
-    #include "wx/timer.h"
-    #include "wx/settings.h"
-    #include "wx/dynarray.h"
-    #include "wx/dcclient.h"
-    #include "wx/dcscreen.h"
-    #include "wx/settings.h"
-    #include "wx/sizer.h"
-#endif
+#include "wx/scrolwin.h"
+#include "wx/timer.h"
+#include "wx/settings.h"
+#include "wx/dynarray.h"
+#include "wx/dcclient.h"
+#include "wx/dcscreen.h"
+#include "wx/settings.h"
+#include "wx/sizer.h"
 
 #include "wx/imaglist.h"
 #include "wx/renderer.h"

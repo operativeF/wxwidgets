@@ -8,18 +8,12 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_BOOKCTRL
-
-#ifndef WX_PRECOMP
-    #include <numeric>
-#endif
 
 #include "wx/imaglist.h"
 #include "wx/bookctrl.h"
 
+#include <numeric>
 
 // ============================================================================
 // implementation

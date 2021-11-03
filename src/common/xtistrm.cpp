@@ -20,13 +20,9 @@
 #include "wx/tokenzr.h"
 #include "wx/txtstrm.h"
 
-// STL headers:
-
-#ifndef WX_PRECOMP
-    #include <map>
-    #include <vector>
-    #include <string>
-#endif
+#include <map>
+#include <string>
+#include <vector>
 
 using namespace std;
 

@@ -8,19 +8,14 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_NOTEBOOK
 
 #include  "wx/notebook.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/string.h"
-    #include "wx/log.h"
-    #include  "wx/dcclient.h"
-    #include  "wx/settings.h"
-#endif
+#include "wx/string.h"
+#include "wx/log.h"
+#include "wx/dcclient.h"
+#include "wx/settings.h"
 
 #include  "wx/imaglist.h"
 #include  "wx/generic/tabg.h"

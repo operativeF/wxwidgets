@@ -34,13 +34,11 @@
 
 #include "wx/renderer.h"
 
-#ifndef WX_PRECOMP
-    #include <numeric>
-#endif
-
 #ifdef __WXMAC__
     #include "wx/osx/private.h"
 #endif
+
+#include <numeric>
 
 // -----------------------------------------------------------------------------
 // array types

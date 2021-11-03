@@ -21,14 +21,6 @@
 
 #include "wx/grid.h"
 
-#ifndef WX_PRECOMP
-    #include <algorithm>
-    #include <string>
-    #include <vector>
-
-    #include <gsl/gsl>
-#endif
-
 #include "wx/utils.h"
 #include "wx/dcclient.h"
 #include "wx/settings.h"
@@ -57,6 +49,11 @@
 #include "wx/generic/grideditors.h"
 #include "wx/generic/private/grid.h"
 
+#include <gsl/gsl>
+
+#include <algorithm>
+#include <string>
+#include <vector>
 
 WX_DECLARE_HASH_SET_WITH_DECL_PTR(int, wxIntegerHash, wxIntegerEqual,
                                   wxGridFixedIndicesSet, class WXDLLIMPEXP_CORE);

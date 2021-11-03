@@ -7,15 +7,11 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-
-
 #include "wx/msw/rt/utils.h"
 
 #if wxUSE_WINRT
 
-#ifndef WX_PRECOMP
-    #include "wx/log.h"
-#endif //WX_PRECOMP
+#include "wx/log.h"
 
 #include <roapi.h>
 

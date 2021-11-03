@@ -14,6 +14,7 @@
 #define _WX_CONFBASE_H_
 
 #include "wx/defs.h"
+
 #include "wx/object.h"
 #include "wx/base64.h"
 
@@ -41,13 +42,6 @@
 #endif
 
 #if wxUSE_CONFIG
-
-/// should we use registry instead of configuration files under Windows?
-// (i.e. whether wxConfigBase::Create() will create a wxFileConfig (if it's
-//  false) or wxRegConfig (if it's true and we're under Win32))
-#ifndef   wxUSE_CONFIG_NATIVE
-  #define wxUSE_CONFIG_NATIVE 1
-#endif
 
 // not all compilers can deal with template Read/Write() methods, define this
 // symbol if the template functions are available
@@ -78,7 +72,7 @@ enum
 // (long) type (TODO doubles and other types such as wxDate coming soon).
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxConfigBase : public wxObject
+class wxConfigBase : public wxObject
 {
 public:
   // constants
@@ -472,12 +466,12 @@ private:
   '_' only. '$' must be escaped ('\$') in order to be taken literally.
 */
 
-WXDLLIMPEXP_BASE wxString wxExpandEnvVars(const wxString &sz);
+wxString wxExpandEnvVars(const wxString &sz);
 
 /*
   Split path into parts removing '..' in progress
  */
-WXDLLIMPEXP_BASE std::vector<wxString> wxSplitPath(const wxString& path);
+std::vector<wxString> wxSplitPath(const wxString& path);
 
 #endif // _WX_CONFBASE_H_
 

@@ -14,11 +14,6 @@
 
 #include "wx/dataview.h"
 
-#ifndef WX_PRECOMP
-    #include <fmt/core.h>
-    #include <gsl/gsl>
-#endif
-
 #include "wx/dc.h"
 #include "wx/settings.h"
 #include "wx/log.h"
@@ -33,6 +28,9 @@
 #if wxUSE_ACCESSIBILITY
     #include "wx/access.h"
 #endif // wxUSE_ACCESSIBILITY
+
+#include <fmt/core.h>
+#include <gsl/gsl>
 
 namespace
 {

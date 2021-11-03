@@ -8,24 +8,14 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-// =============================================================================
-// declarations
-// =============================================================================
-
-
-
-
 #if wxUSE_CONSTRAINTS
-
-#ifndef WX_PRECOMP
-    #include <gsl/gsl>
-#endif
 
 #include "wx/layout.h"
 #include "wx/window.h"
 #include "wx/utils.h"
 #include "wx/intl.h"
 
+#include <gsl/gsl>
 
 inline void wxGetAsIs(wxWindowBase* win, int* w, int* h)
 {

@@ -14,10 +14,6 @@
 
 #include "wx/infobar.h"
 
-#ifndef WX_PRECOMP
-    #include <fmt/core.h>
-#endif // WX_PRECOMP
-
 #include "wx/bmpbuttn.h"
 #include "wx/button.h"
 #include "wx/dcmemory.h"
@@ -29,6 +25,7 @@
 #include "wx/artprov.h"
 #include "wx/scopeguard.h"
 
+#include <fmt/core.h>
 
 wxBEGIN_EVENT_TABLE(wxInfoBarGeneric, wxInfoBarBase)
     EVT_BUTTON(wxID_ANY, wxInfoBarGeneric::OnButton)

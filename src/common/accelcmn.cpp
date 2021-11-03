@@ -9,16 +9,14 @@
 
 #if wxUSE_ACCEL
 
-#ifndef WX_PRECOMP
-    #include <optional>
-#endif
-
 #include "wx/accel.h"
 #include "wx/string.h"
 #include "wx/intl.h"
 #include "wx/log.h"
 #include "wx/crt.h"
 #include "wx/stringutils.h"
+
+#include <optional>
 
 wxAcceleratorTable wxNullAcceleratorTable;
 

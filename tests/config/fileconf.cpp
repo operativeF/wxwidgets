@@ -10,11 +10,7 @@
 
 #include "testprec.h"
 
-
 #if wxUSE_FILECONFIG
-
-#ifndef WX_PRECOMP
-#endif // WX_PRECOMP
 
 #include "wx/fileconf.h"
 #include "wx/sstream.h"

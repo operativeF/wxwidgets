@@ -7,9 +7,6 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_SEARCHCTRL
 
 #include "wx/srchctrl.h"
@@ -19,10 +16,8 @@
 #include "wx/menu.h"
 #include "wx/dcmemory.h"
 
-#ifndef WX_PRECOMP
-    #include <cmath>
-    #include <numbers>
-#endif
+#include <cmath>
+#include <numbers>
 
 #if !wxUSE_NATIVE_SEARCH_CONTROL
 

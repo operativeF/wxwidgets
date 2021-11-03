@@ -8,15 +8,7 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_GRAPHICS_CONTEXT
-
-#ifndef WX_PRECOMP
-    #include <cmath>
-    #include <numbers>
-#endif
 
 #include "wx/dcgraph.h"
 #include "wx/icon.h"
@@ -26,6 +18,8 @@
 #include "wx/geometry.h"
 #include "wx/stringutils.h"
 
+#include <cmath>
+#include <numbers>
 
 //-----------------------------------------------------------------------------
 // Local functions

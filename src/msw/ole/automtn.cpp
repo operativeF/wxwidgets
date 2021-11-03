@@ -8,20 +8,11 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
-#ifndef WX_PRECOMP
-    #include "wx/msw/private.h"
-
-    #include <ctime>
-
-    #include <fmt/core.h>
-#endif
-
 #ifndef _FORCENAMELESSUNION
     #define _FORCENAMELESSUNION
 #endif
+
+#include "wx/msw/private.h"
 
 #include "wx/log.h"
 
@@ -46,6 +37,9 @@
 
 #include <wx/vector.h>
 
+#include <fmt/core.h>
+
+#include <ctime>
 
 // Report an OLE error when calling the specified method to the user via wxLog.
 static void

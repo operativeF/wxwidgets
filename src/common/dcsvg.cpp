@@ -8,11 +8,6 @@
 
 #if wxUSE_SVG
 
-#ifndef WX_PRECOMP
-    #include <cmath>
-    #include <numbers>
-#endif
-
 #include "wx/dcmemory.h"
 #include "wx/dcscreen.h"
 #include "wx/icon.h"
@@ -29,6 +24,8 @@
     #include "wx/private/markupparser.h"
 #endif
 
+#include <cmath>
+#include <numbers>
 
 // ----------------------------------------------------------
 // Global utilities

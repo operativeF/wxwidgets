@@ -10,14 +10,9 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-#ifndef WX_PRECOMP
-    #include <numeric>
-#endif
-
 #include "wx/gbsizer.h"
 
+#include <numeric>
 
 //---------------------------------------------------------------------------
 

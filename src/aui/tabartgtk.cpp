@@ -9,17 +9,12 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_AUI
 
-#ifndef WX_PRECOMP
-    #include "wx/dc.h"
-    #include "wx/dcclient.h"
-    #include "wx/settings.h"
-    #include "wx/image.h"
-#endif
+#include "wx/dc.h"
+#include "wx/dcclient.h"
+#include "wx/settings.h"
+#include "wx/image.h"
 
 #include "wx/gtk/dc.h"
 #include "wx/gtk/private.h"

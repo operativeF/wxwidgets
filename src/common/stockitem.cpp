@@ -8,18 +8,13 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #include "wx/stockitem.h"
-
-#ifndef WX_PRECOMP
-    #include <fmt/core.h>
-#endif
 
 #include "wx/stringutils.h"
 #include "wx/intl.h"
 #include "wx/utils.h" // for wxStripMenuCodes()
+
+#include <fmt/core.h>
 
 bool wxIsStockID(wxWindowID id)
 {

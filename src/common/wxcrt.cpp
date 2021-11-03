@@ -32,19 +32,9 @@
     extern "C" int vswscanf(const wchar_t *, const wchar_t *, va_list);
 #endif
 
-#ifndef WX_PRECOMP
-    #include "wx/string.h"
-    #include "wx/hash.h"
-    #include "wx/log.h"
-
-    #include <cerrno>
-    #include <clocale>
-    #include <ctime>
-    #include <cstdio>
-    #include <cstdlib>
-    #include <cstring>
-    #include <limits>
-#endif
+#include "wx/string.h"
+#include "wx/hash.h"
+#include "wx/log.h"
 
 #ifdef HAVE_LANGINFO_H
     #include <langinfo.h>
@@ -57,6 +47,14 @@
     #include "wx/osx/core/cfstring.h"
     #include <xlocale.h>
 #endif
+
+#include <cerrno>
+#include <clocale>
+#include <ctime>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+#include <limits>
 
 wxDECL_FOR_STRICT_MINGW32(int, vswprintf, (wchar_t*, const wchar_t*, __VALIST))
 wxDECL_FOR_STRICT_MINGW32(int, _putws, (const wchar_t*))

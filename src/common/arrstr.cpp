@@ -19,11 +19,6 @@
 #include "wx/scopedarray.h"
 #include "wx/wxcrt.h"
 
-#ifndef WX_PRECOMP
-    #include <algorithm>
-    #include <functional>
-#endif
-
 #if defined( WX_WINDOWS )
     #include <shlwapi.h>
 
@@ -40,6 +35,9 @@
         #pragma comment(lib, "shlwapi")
     #endif
 #endif
+
+#include <algorithm>
+#include <functional>
 
 // ============================================================================
 // ArrayString

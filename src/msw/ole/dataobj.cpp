@@ -8,18 +8,9 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_DATAOBJ
 
-#ifndef WX_PRECOMP
-    #include "wx/msw/private.h"         // includes <windows.h>
-
-    #include <vector>
-
-    #include <gsl/gsl>
-#endif
+#include "wx/msw/private.h"         // includes <windows.h>
 
 #include "wx/intl.h"
 #include "wx/log.h"
@@ -38,6 +29,9 @@
 #include "wx/msw/ole/oleutils.h"
 #endif // wxUSE_OLE
 
+#include <gsl/gsl>
+
+#include <vector>
 
 #ifndef CFSTR_SHELLURL
 #define CFSTR_SHELLURL wxT("UniformResourceLocator")

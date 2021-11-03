@@ -9,18 +9,7 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_EXTENDED_RTTI
-
-#ifndef WX_PRECOMP
-    #include <cstring>
-
-    #include <map>
-    #include <string>
-    #include <list>
-#endif
 
 #include "wx/object.h"
 #include "wx/list.h"
@@ -29,6 +18,11 @@
 #include "wx/xml/xml.h"
 #include "wx/tokenzr.h"
 #include "wx/range.h"
+
+#include <cstring>
+#include <list>
+#include <map>
+#include <string>
 
 using namespace std;
 

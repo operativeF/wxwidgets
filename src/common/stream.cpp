@@ -12,17 +12,14 @@
 #if wxUSE_STREAMS
 
 #include "wx/stream.h"
-
-#ifndef WX_PRECOMP
-    #include <string>
-
-    #include <gsl/gsl>
-#endif
-
 #include "wx/log.h"
 #include "wx/datstrm.h"
 #include "wx/scopeguard.h"
 #include "wx/textfile.h"
+
+#include <gsl/gsl>
+
+#include <string>
 
 // ----------------------------------------------------------------------------
 // constants

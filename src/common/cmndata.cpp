@@ -15,11 +15,9 @@
 
 #include "wx/cmndata.h"
 
-#ifndef WX_PRECOMP
-    #if defined(__WXMSW__)
-        #include "wx/msw/wrapcdlg.h"
-    #endif // MSW
-#endif
+#if defined(__WXMSW__)
+    #include "wx/msw/wrapcdlg.h"
+#endif // MSW
 
 #include "wx/gdicmn.h"
 #include "wx/log.h"

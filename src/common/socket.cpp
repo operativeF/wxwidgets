@@ -20,16 +20,6 @@
 
 #include "wx/socket.h"
 
-#ifndef WX_PRECOMP
-    #include <string>
-
-    #include <gsl/gsl>
-
-    #ifdef __UNIX__
-        #include <cerrno>
-    #endif
-#endif
-
 #include "wx/object.h"
 #include "wx/intl.h"
 #include "wx/log.h"
@@ -51,6 +41,13 @@
 #include "wx/private/fd.h"
 #include "wx/private/socket.h"
 
+#include <gsl/gsl>
+
+#include <string>
+
+#ifdef __UNIX__
+    #include <cerrno>
+#endif
 
 // we use MSG_NOSIGNAL to avoid getting SIGPIPE when sending data to a remote
 // host which closed the connection if it is available, otherwise we rely on

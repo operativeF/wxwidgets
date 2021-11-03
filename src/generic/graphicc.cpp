@@ -25,22 +25,20 @@
 
 bool wxCairoInit();
 
-#ifndef WX_PRECOMP
-    #include "wx/bitmap.h"
-    #include "wx/icon.h"
-    #include "wx/dcclient.h"
-    #include "wx/dcmemory.h"
-    #include "wx/dcprint.h"
-    #include "wx/window.h"
-
-    #include <vector>
-#endif
+#include "wx/bitmap.h"
+#include "wx/icon.h"
+#include "wx/dcclient.h"
+#include "wx/dcmemory.h"
+#include "wx/dcprint.h"
+#include "wx/window.h"
 
 #include "wx/private/graphics.h"
 #include "wx/rawbmp.h"
 #ifdef __WXMSW__
     #include "wx/msw/enhmeta.h"
 #endif
+
+#include <vector>
 
 using namespace std;
 

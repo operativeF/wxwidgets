@@ -9,26 +9,11 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-// ============================================================================
-// declaration
-// ============================================================================
-
-
-
-
 #if wxUSE_INTL
 
-#ifndef WX_PRECOMP
-    #ifdef WX_WINDOWS
-        #include "wx/msw/wrapwin.h"
-    #endif
-
-    #include <algorithm>
-    #include <memory>
-    #include <vector>
-
-    #include <gsl/gsl>
-#endif // WX_PRECOMP
+#ifdef WX_WINDOWS
+    #include "wx/msw/wrapwin.h"
+#endif
 
 #include "wx/arrstr.h"
 #include "wx/dynarray.h"
@@ -59,6 +44,11 @@
     #include <CoreFoundation/CFLocale.h>
 #endif
 
+#include <gsl/gsl>
+
+#include <algorithm>
+#include <memory>
+#include <vector>
 
 // ----------------------------------------------------------------------------
 // simple types

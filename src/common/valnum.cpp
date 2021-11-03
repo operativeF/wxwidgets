@@ -7,22 +7,16 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_VALIDATORS && wxUSE_TEXTCTRL
-
-#ifndef WX_PRECOMP
-    #include <cmath>
-
-    #include <gsl/gsl>
-#endif
 
 #include "wx/textctrl.h"
 #include "wx/combobox.h"
 #include "wx/valnum.h"
 #include "wx/numformatter.h"
 
+#include <gsl/gsl>
+
+#include <cmath>
 
 // ============================================================================
 // wxNumValidatorBase implementation

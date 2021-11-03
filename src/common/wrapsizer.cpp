@@ -8,12 +8,9 @@
 /////////////////////////////////////////////////////////////////////////////
 
 
-
-#ifndef WX_PRECOMP
-    #include <vector>
-#endif
-
 #include "wx/wrapsizer.h"
+
+#include <vector>
 
 namespace
 {

@@ -9,10 +9,6 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-#ifndef wxUSE_CONFIG_NATIVE
-    #define wxUSE_CONFIG_NATIVE 1
-#endif
-
 #include "wx/config.h"
 #include "wx/intl.h"
 #include "wx/log.h"
@@ -25,7 +21,7 @@
 #include <string>
 #include <vector>
 
-#if wxUSE_CONFIG && ((wxUSE_FILE && wxUSE_TEXTFILE) || wxUSE_CONFIG_NATIVE)
+#if wxUSE_CONFIG && ((wxUSE_FILE && wxUSE_TEXTFILE))
 
 #include "wx/apptrait.h"
 #include "wx/file.h"

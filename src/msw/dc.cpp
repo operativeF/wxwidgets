@@ -8,19 +8,8 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
-#ifndef WX_PRECOMP
-    #include "wx/msw/wrapcdlg.h"
-    #include "wx/msw/wrap/utils.h"
-
-    #include <cmath>
-    #include <numeric>
-
-    #include <boost/nowide/convert.hpp>
-    #include <gsl/gsl>
-#endif
+#include "wx/msw/wrapcdlg.h"
+#include "wx/msw/wrap/utils.h"
 
 #include "wx/window.h"
 #include "wx/utils.h"
@@ -42,6 +31,11 @@
 #include "wx/msw/private/dc.h"
 #include "wx/private/textmeasure.h"
 
+#include <boost/nowide/convert.hpp>
+#include <gsl/gsl>
+
+#include <cmath>
+#include <numeric>
 
 #ifdef _MSC_VER
     // In the previous versions of wxWidgets, AlphaBlend() was dynamically

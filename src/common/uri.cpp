@@ -9,17 +9,11 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
-#ifndef WX_PRECOMP
-    #include <vector>
-#endif
-
 #include "wx/arrstr.h"
 #include "wx/crt.h"
 #include "wx/uri.h"
 
+#include <vector>
 
 // ---------------------------------------------------------------------------
 // definitions

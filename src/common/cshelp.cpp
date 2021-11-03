@@ -8,16 +8,7 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_HELP
-
-#ifndef WX_PRECOMP
-    #include <charconv>
-
-    #include <fmt/core.h>
-#endif
 
 #include "wx/app.h"
 #include "wx/module.h"
@@ -29,6 +20,9 @@
     #include "wx/utils.h"           // for wxGetMousePosition()
 #endif
 
+#include <fmt/core.h>
+
+#include <charconv>
 
 // ----------------------------------------------------------------------------
 // wxContextHelpEvtHandler private class

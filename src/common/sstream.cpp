@@ -10,12 +10,9 @@
 
 #if wxUSE_STREAMS
 
-#ifndef WX_PRECOMP
-    #include <gsl/gsl>
-#endif
-
 #include "wx/sstream.h"
 
+#include <gsl/gsl>
 
 // ============================================================================
 // wxStringInputStream implementation

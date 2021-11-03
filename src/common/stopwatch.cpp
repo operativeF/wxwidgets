@@ -16,11 +16,9 @@
 
 #include "wx/stopwatch.h"
 
-#ifndef WX_PRECOMP
-    #ifdef WX_WINDOWS
-        #include "wx/msw/wrapwin.h"
-    #endif
-#endif //WX_PRECOMP
+#ifdef WX_WINDOWS
+    #include "wx/msw/wrapwin.h"
+#endif
 
 #include "wx/log.h"
 #include "wx/thread.h"

@@ -9,16 +9,13 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
 #if wxUSE_TIMER
 
 #include "wx/utils.h"               // for wxNewId()
 #include "wx/private/timer.h"
 #include "wx/thread.h"
 
-#ifndef WX_PRECOMP
-    #include <chrono>
-#endif
+#include <chrono>
 
 using namespace std::chrono_literals;
 

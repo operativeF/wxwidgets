@@ -9,20 +9,9 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-#ifndef WX_PRECOMP
-    #ifdef WX_WINDOWS
-        #include "wx/msw/wrapwin.h"
-    #endif // WX_WINDOWS
-
-    #include <cstdlib>
-    #include <cstring>
-    #include <iostream>
-    #include <vector>
-#endif
-
-#include <cctype>
-
-#include <cerrno>
+#ifdef WX_WINDOWS
+    #include "wx/msw/wrapwin.h"
+#endif // WX_WINDOWS
 
 #include "wx/string.h"
 #include "wx/wxcrtvararg.h"
@@ -31,7 +20,14 @@
 #include "wx/hashmap.h"
 #include "wx/xlocale.h"
 
+
+#include <cctype>
+#include <cerrno>
+#include <cstdlib>
+#include <cstring>
+#include <iostream>
 #include <sstream>
+#include <vector>
 
 // define a function declared in wx/buffer.h here as we don't have buffer.cpp
 // and don't want to add it just because of this simple function
