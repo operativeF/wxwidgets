@@ -8,17 +8,6 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
-#ifndef WX_PRECOMP
-    #include "wx/msw/private.h"
-    
-    #include <boost/nowide/convert.hpp>
-
-    #include <cassert>
-#endif
-
 #include "wx/cursor.h"
 #include "wx/utils.h"
 #include "wx/app.h"
@@ -30,6 +19,11 @@
 #include "wx/module.h"
 #include "wx/display.h"
 
+#include "wx/msw/private.h"
+
+#include <boost/nowide/convert.hpp>
+
+#include <cassert>
 
 // ----------------------------------------------------------------------------
 // private classes

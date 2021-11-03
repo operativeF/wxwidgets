@@ -8,22 +8,17 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_HELP
 
 #include "wx/app.h"
 #include "wx/filename.h"
 #include "wx/msw/helpwin.h"
 
-#ifndef WX_PRECOMP
-    #ifdef __WXMSW__
-        #include "wx/msw/private.h"
-    #endif
-    
-    #include <ctime>
+#ifdef __WXMSW__
+    #include "wx/msw/private.h"
 #endif
+    
+#include <ctime>
 
 static HWND GetSuitableHWND(wxWinHelpController* controller)
 {

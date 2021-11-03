@@ -7,19 +7,9 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #ifdef wxHAS_ANY_BUTTON
 
 #include "wx/anybutton.h"
-
-#ifndef WX_PRECOMP
-    #include "wx/msw/wrapcctl.h"
-    #include "wx/msw/private.h"
-    
-    #include <boost/nowide/convert.hpp>
-#endif
 
 #include "wx/brush.h"
 #include "wx/bmpbuttn.h"
@@ -41,6 +31,11 @@
 #if wxUSE_MARKUP
     #include "wx/generic/private/markuptext.h"
 #endif // wxUSE_MARKUP
+
+#include "wx/msw/wrapcctl.h"
+#include "wx/msw/private.h"
+
+#include <boost/nowide/convert.hpp>
 
 using namespace wxMSWImpl;
 

@@ -38,21 +38,13 @@
 //  DECLARATIONS
 //===========================================================================
 
-//---------------------------------------------------------------------------
-// Pre-compiled header stuff
-//---------------------------------------------------------------------------
-
-
-
 #if wxUSE_MEDIACTRL && wxUSE_ACTIVEX
 
 #include "wx/mediactrl.h"
 
 #include "wx/log.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/msw/private.h" // user info and wndproc setting/getting
-#endif
+#include "wx/msw/private.h" // user info and wndproc setting/getting
 
 #include "wx/msw/ole/activex.h" // wxActiveXContainer - COM-specific stuff
 

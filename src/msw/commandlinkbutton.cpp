@@ -7,23 +7,16 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_COMMANDLINKBUTTON
-
-#ifndef WX_PRECOMP
-    #include "wx/msw/private.h"
-
-    #include <boost/nowide/convert.hpp>
-#endif
 
 #include "wx/dcclient.h"
 #include "wx/commandlinkbutton.h"
 #include "wx/msw/private/button.h"
 #include "wx/msw/private/dc.h"
 #include "wx/private/window.h"
+#include "wx/msw/private.h"
 
+#include <boost/nowide/convert.hpp>
 
 #ifndef BCM_SETNOTE
 constexpr unsigned int BCM_SETNOTE = 0x1609;

@@ -7,12 +7,7 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-
-
-#ifndef WX_PRECOMP
-    #include "wx/msw/private.h"
-#endif
-
+#include "wx/msw/private.h"
 #include "wx/msw/private/customdraw.h"
 
 // ============================================================================

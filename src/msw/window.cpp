@@ -8,20 +8,9 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-#ifndef WX_PRECOMP
-    #include "wx/msw/wrapwin.h"
-    #include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
-    #include "wx/msw/private.h"
-
-    #include <array>
-    #include <numbers>
-    #include <vector>
-
-    #include <boost/nowide/convert.hpp>
-    #include <gsl/gsl>
-#endif
+#include "wx/msw/wrapwin.h"
+#include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
+#include "wx/msw/private.h"
 
 #include "wx/window.h"
 #include "wx/accel.h"
@@ -108,6 +97,12 @@
     #include "wx/msw/uxtheme.h"
 #endif
 
+#include <boost/nowide/convert.hpp>
+#include <gsl/gsl>
+
+#include <array>
+#include <numbers>
+#include <vector>
 
 #if wxUSE_DYNLIB_CLASS
     #define HAVE_TRACKMOUSEEVENT

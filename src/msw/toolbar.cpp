@@ -8,20 +8,12 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_TOOLBAR && wxUSE_TOOLBAR_NATIVE
 
 #include "wx/toolbar.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
-    #include "wx/msw/private.h"
-
-    #include <boost/nowide/convert.hpp>
-    #include <gsl/gsl>
-#endif
+#include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
+#include "wx/msw/private.h"
 
 #include "wx/log.h"
 #include "wx/intl.h"
@@ -46,6 +38,9 @@
 #if wxUSE_UXTHEME
 #include "wx/msw/uxtheme.h"
 #endif
+
+#include <boost/nowide/convert.hpp>
+#include <gsl/gsl>
 
 #include <stack>
 

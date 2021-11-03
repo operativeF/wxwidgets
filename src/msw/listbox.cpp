@@ -8,23 +8,9 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_LISTBOX
 
 #include "wx/listbox.h"
-
-#ifndef WX_PRECOMP
-    #include "wx/msw/private.h"
-
-    #include <memory>
-
-    #include <boost/nowide/convert.hpp>
-    #include <boost/nowide/stackstring.hpp>
-
-    #include <gsl/gsl>
-#endif
 
 #include "wx/dynarray.h"
 #include "wx/settings.h"
@@ -37,8 +23,16 @@
 
 #include "wx/msw/dc.h"
 
+#include "wx/msw/private.h"
+
 #include <windowsx.h>
 
+#include <boost/nowide/convert.hpp>
+#include <boost/nowide/stackstring.hpp>
+
+#include <gsl/gsl>
+
+#include <memory>
 
 #if wxUSE_OWNER_DRAWN
     #include  "wx/ownerdrw.h"

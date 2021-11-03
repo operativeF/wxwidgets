@@ -7,16 +7,11 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_STATLINE
 
 #include "wx/statline.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/msw/private.h"
-#endif
+#include "wx/msw/private.h"
 
 // ============================================================================
 // implementation

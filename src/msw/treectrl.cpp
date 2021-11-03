@@ -8,21 +8,12 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_TREECTRL
 
 #include "wx/treectrl.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
-    #include "wx/msw/private.h"
-
-    #include <array>
-    
-    #include <boost/nowide/stackstring.hpp>
-#endif
+#include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
+#include "wx/msw/private.h"
 
 #include "wx/dynarray.h"
 #include "wx/log.h"
@@ -38,6 +29,9 @@
 #include "wx/msw/dragimag.h"
 #include "wx/msw/uxtheme.h"
 
+#include <boost/nowide/stackstring.hpp>
+
+#include <array>
 
 // macros to hide the cast ugliness
 // --------------------------------

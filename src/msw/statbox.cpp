@@ -8,19 +8,12 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_STATBOX
 
 #include "wx/statbox.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/msw/wrap/utils.h"
-    #include "wx/msw/private.h"
-    
-    #include <boost/nowide/convert.hpp>
-#endif
+#include "wx/msw/wrap/utils.h"
+#include "wx/msw/private.h"
 
 #include "wx/dcclient.h"
 #include "wx/dcmemory.h"
@@ -31,10 +24,12 @@
 
 #include "wx/msw/uxtheme.h"
 
-#include <windowsx.h> // needed by GET_X_LPARAM and GET_Y_LPARAM macros
-
 #include "wx/msw/dc.h"
 #include "wx/msw/private/winstyle.h"
+
+#include <windowsx.h> // needed by GET_X_LPARAM and GET_Y_LPARAM macros
+
+#include <boost/nowide/convert.hpp>
 
 namespace
 {

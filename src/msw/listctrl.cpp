@@ -8,21 +8,9 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_LISTCTRL
 
 #include "wx/listctrl.h"
-
-#ifndef WX_PRECOMP
-    #include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
-    #include "wx/msw/private.h"
-    #include "wx/msw/wrap/utils.h"
-
-    #include <cassert>
-    #include <vector>
-#endif
 
 #include "wx/app.h"
 #include "wx/intl.h"
@@ -36,6 +24,13 @@
 
 #include "wx/msw/private/customdraw.h"
 #include "wx/msw/private/keyboard.h"
+
+#include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
+#include "wx/msw/private.h"
+#include "wx/msw/wrap/utils.h"
+
+#include <cassert>
+#include <vector>
 
 // Currently gcc doesn't define NMLVFINDITEM, and DMC only defines
 // it by its old name NM_FINDTIEM.

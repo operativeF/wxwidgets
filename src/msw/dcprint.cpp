@@ -8,9 +8,6 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_PRINTING_ARCHITECTURE
 
 #include "wx/dcprint.h"

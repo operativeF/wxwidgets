@@ -8,14 +8,7 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_UXTHEME
-
-#ifndef WX_PRECOMP
-    #include <string>
-#endif //WX_PRECOMP
 
 #include "wx/toplevel.h"
 #include "wx/log.h"
@@ -23,6 +16,7 @@
 
 #include "wx/msw/uxtheme.h"
 
+#include <string>
 
 bool wxUxThemeIsActive()
 {

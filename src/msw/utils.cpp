@@ -10,10 +10,6 @@
 
 #include "wx/msw/private.h"     // includes <windows.h>
 
-#include <boost/nowide/convert.hpp>
-
-#include <tuple>
-
 #include "wx/utils.h"
 #include "wx/intl.h"
 #include "wx/log.h"
@@ -82,6 +78,10 @@
 
 // For wxKillAllChildren
 #include <tlhelp32.h>
+
+#include <boost/nowide/convert.hpp>
+
+#include <tuple>
 
 // ----------------------------------------------------------------------------
 // constants

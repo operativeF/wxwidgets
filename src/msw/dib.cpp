@@ -14,9 +14,6 @@
           caling GetDIBits() in the DC we use with it.
  */
 
-
-
-
 #if wxUSE_WXDIB
 
 #include "wx/log.h"

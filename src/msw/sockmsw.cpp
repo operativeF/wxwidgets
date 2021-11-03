@@ -9,22 +9,16 @@
 // Licence:    wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
-
 #if wxUSE_SOCKETS
 
-#ifndef WX_PRECOMP
-    #include "wx/msw/private.h"     // for wxGetInstance()
+#include "wx/msw/private.h"     // for wxGetInstance()
 
-    #include <boost/nowide/convert.hpp>
-    #include <boost/nowide/stackstring.hpp>
+#include <boost/nowide/convert.hpp>
+#include <boost/nowide/stackstring.hpp>
 
-    #include <array>
-    #include <memory>
-    #include <string_view>
-#endif
+#include <array>
+#include <memory>
+#include <string_view>
 
 /* including rasasync.h (included from windows.h itself included from
  * wx/setup.h and/or winsock.h results in this warning for

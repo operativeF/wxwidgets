@@ -6,16 +6,11 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #include "wx/msw/webview_ie.h"
 
 #if wxUSE_WEBVIEW && wxUSE_WEBVIEW_IE
 
-#ifndef WX_PRECOMP
-    #include "wx/msw/private.h"
-#endif
+#include "wx/msw/private.h"
 
 #include "wx/msw/registry.h"
 #include "wx/msw/ole/safearray.h"

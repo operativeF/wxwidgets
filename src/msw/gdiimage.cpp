@@ -49,7 +49,7 @@ WX_DEFINE_LIST(wxGDIImageHandlerList)
 // all image handlers are declared/defined in this file because the outside
 // world doesn't have to know about them (but only about wxBITMAP_TYPE_XXX ids)
 
-class WXDLLEXPORT wxBMPFileHandler : public wxBitmapHandler
+class wxBMPFileHandler : public wxBitmapHandler
 {
 public:
     wxBMPFileHandler() : wxBitmapHandler("Windows bitmap file",

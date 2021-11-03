@@ -7,16 +7,11 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_DATEPICKCTRL || wxUSE_CALENDARCTRL
 
 #include "wx/log.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/msw/wrapcctl.h"
-#endif
+#include "wx/msw/wrapcctl.h"
 
 #include "wx/msw/private/datecontrols.h"
 

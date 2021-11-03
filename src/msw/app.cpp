@@ -8,19 +8,8 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
-#ifndef WX_PRECOMP
-    #include "wx/msw/wrapcctl.h"
-    #include "wx/msw/private.h"
-    
-    #include <string>
-    #include <vector>
-
-    #include <boost/nowide/convert.hpp>
-    #include <boost/nowide/stackstring.hpp>
-#endif
+#include "wx/msw/wrapcctl.h"
+#include "wx/msw/private.h"
 
 #include "wx/app.h"
 #include "wx/utils.h"
@@ -44,6 +33,11 @@
     #include <ole2.h>
 #endif
 
+#include <boost/nowide/convert.hpp>
+#include <boost/nowide/stackstring.hpp>
+
+#include <string>
+#include <vector>
 
 // instead of including <shlwapi.h> which is not part of the core SDK and not
 // shipped at all with other compilers, we always define the parts of it we

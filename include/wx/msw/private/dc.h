@@ -13,6 +13,8 @@
 #include "wx/msw/dc.h"
 #include "wx/msw/wrapwin.h"
 
+#include "wx/log.h"
+
 namespace wxMSWImpl
 {
 

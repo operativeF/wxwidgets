@@ -7,15 +7,8 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-
-
-
-#ifndef WX_PRECOMP
-    #include "wx/msw/private.h"
-    #include "wx/msw/wrapwin.h"
-
-    #include <boost/nowide/convert.hpp>
-#endif // WX_PRECOMP
+#include "wx/msw/private.h"
+#include "wx/msw/wrapwin.h"
 
 #include "wx/event.h"
 #include "wx/string.h"
@@ -35,6 +28,8 @@
 #endif
 
 #include <shlwapi.h>
+
+#include <boost/nowide/convert.hpp>
 
 
 #define GetEditHwnd() ((HWND)(GetEditHWND()))

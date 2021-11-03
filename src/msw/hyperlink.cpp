@@ -7,21 +7,15 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_HYPERLINKCTRL
 
 #include "wx/hyperlink.h"
-
-#ifndef WX_PRECOMP
-    #include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
-    #include "wx/msw/private.h"
-    
-    #include <fmt/core.h>
-#endif
-
 #include "wx/app.h"
+
+#include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
+#include "wx/msw/private.h"
+
+#include <fmt/core.h>
 
 // ----------------------------------------------------------------------------
 // Definitions

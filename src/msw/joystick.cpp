@@ -23,7 +23,6 @@
 
 #include <chrono>
 
-
 enum {
     wxJS_AXIS_X = 0,
     wxJS_AXIS_Y,

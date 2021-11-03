@@ -8,18 +8,11 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_STATBMP
 
 #include "wx/statbmp.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/msw/private.h"
-
-    #include <string>
-#endif
+#include "wx/msw/private.h"
 
 #include "wx/app.h"
 #include "wx/window.h"
@@ -31,6 +24,7 @@
 
 #include "wx/sysopt.h"
 
+#include <string>
 
 // ---------------------------------------------------------------------------
 // macros

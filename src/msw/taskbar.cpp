@@ -9,19 +9,9 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_TASKBARICON
 
-#ifndef WX_PRECOMP
-    #include <chrono>
-    #include <memory>
-
-    #include "wx/msw/private.h"
-
-    #include <boost/nowide/convert.hpp>
-#endif
+#include "wx/msw/private.h"
 
 #include "wx/frame.h"
 #include "wx/utils.h"
@@ -32,6 +22,10 @@
 #include "wx/platinfo.h"
 #include "wx/taskbar.h"
 
+#include <boost/nowide/convert.hpp>
+
+#include <chrono>
+#include <memory>
 
 #ifndef NIN_BALLOONTIMEOUT
     #define NIN_BALLOONTIMEOUT      0x0404

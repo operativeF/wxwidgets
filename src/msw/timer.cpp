@@ -11,10 +11,7 @@
 #if wxUSE_TIMER
 
 #include "wx/msw/private/timer.h"
-
-#ifndef WX_PRECOMP
-    #include "wx/msw/private.h"
-#endif
+#include "wx/msw/private.h"
 
 #include "wx/intl.h"
 #include "wx/log.h"

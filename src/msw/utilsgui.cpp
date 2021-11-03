@@ -8,17 +8,9 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-
-
-
-#ifndef WX_PRECOMP
-    #include "wx/msw/wrap/utils.h"
-    #include "wx/msw/private.h"     // includes <windows.h>
-    #include "wx/msw/wrapwin.h"
-    
-    #include <boost/nowide/convert.hpp>
-    #include <boost/nowide/stackstring.hpp>
-#endif //WX_PRECOMP
+#include "wx/msw/wrap/utils.h"
+#include "wx/msw/private.h"     // includes <windows.h>
+#include "wx/msw/wrapwin.h"
 
 #include "wx/cursor.h"
 #include "wx/window.h"
@@ -26,6 +18,8 @@
 
 #include <shlwapi.h>
 
+#include <boost/nowide/convert.hpp>
+#include <boost/nowide/stackstring.hpp>
 
 // ============================================================================
 // implementation

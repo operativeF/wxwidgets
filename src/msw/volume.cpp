@@ -28,9 +28,7 @@
 // some compilers require including <windows.h> before <shellapi.h> so do it
 // even if this is not necessary with most of them
 
-#ifndef WX_PRECOMP
-    #include "wx/msw/wrapwin.h"
-#endif
+#include "wx/msw/wrapwin.h"
 
 #include <shellapi.h>
 #include "wx/msw/wrapshl.h"

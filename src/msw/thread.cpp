@@ -13,13 +13,7 @@
 
 #include "wx/thread.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/msw/private.h"
-
-    #include <gsl/gsl>
-
-    #include <cassert>
-#endif
+#include "wx/msw/private.h"
 
 #include "wx/intl.h"
 #include "wx/app.h"
@@ -33,6 +27,9 @@
 
 #include "wx/except.h"
 
+#include <gsl/gsl>
+
+#include <cassert>
 
 // must have this symbol defined to get _beginthread/_endthread declarations
 #ifndef _MT

@@ -8,19 +8,9 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_TEXTCTRL
 
-#ifndef WX_PRECOMP
-    #include "wx/msw/private.h"
-    
-    #include <boost/nowide/convert.hpp>
-
-    #include <cassert>
-    #include <string>
-#endif
+#include "wx/msw/private.h"
 
 #include "wx/textctrl.h"
 #include "wx/settings.h"
@@ -45,6 +35,11 @@
 #include <windowsx.h>
 
 #include <sys/types.h>
+
+#include <boost/nowide/convert.hpp>
+
+#include <cassert>
+#include <string>
 
 #if wxUSE_RICHEDIT
     #include <richedit.h>

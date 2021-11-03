@@ -8,13 +8,9 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
 #if wxUSE_STATTEXT
 
-#ifndef WX_PRECOMP
-    #include "wx/msw/private.h"
-#endif
+#include "wx/msw/private.h"
 
 #include "wx/stattext.h"
 

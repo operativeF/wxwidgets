@@ -8,20 +8,12 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_MENUS
 
 #include "wx/menu.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/msw/private.h"
-    #include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
-
-    #include <boost/nowide/convert.hpp>
-    #include <boost/nowide/stackstring.hpp>
-#endif
+#include "wx/msw/private.h"
+#include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
 
 #include "wx/frame.h"
 #include "wx/utils.h"
@@ -39,6 +31,8 @@
 
 #include "wx/dynlib.h"
 
+#include <boost/nowide/convert.hpp>
+#include <boost/nowide/stackstring.hpp>
 
 // ----------------------------------------------------------------------------
 // global variables

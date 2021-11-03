@@ -8,18 +8,9 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #include "wx/toplevel.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/msw/private.h"
-    
-    #include <string>
-
-    #include <boost/nowide/convert.hpp>
-#endif //WX_PRECOMP
+#include "wx/msw/private.h"
 
 #include "wx/app.h"
 #include "wx/dialog.h"
@@ -37,7 +28,9 @@
 
 #include "wx/display.h"
 
+#include <boost/nowide/convert.hpp>
 
+#include <string>
 
 // NB: wxDlgProc must be defined here and not in dialog.cpp because the latter
 //     is not included by wxUniv build which does need wxDlgProc

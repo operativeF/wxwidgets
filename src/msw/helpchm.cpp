@@ -8,9 +8,6 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_HELP && wxUSE_MS_HTML_HELP
 
 #include "wx/filename.h"
@@ -18,18 +15,15 @@
 
 #include "wx/dynload.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/msw/private.h"
-
-    #include <boost/nowide/stackstring.hpp>
-    #include <gsl/gsl>
-#endif
+#include "wx/msw/private.h"
 
 #include "wx/intl.h"
 #include "wx/app.h"
 
 #include "wx/msw/htmlhelp.h"
 
+#include <boost/nowide/stackstring.hpp>
+#include <gsl/gsl>
 
 // ----------------------------------------------------------------------------
 // utility functions to manage the loading/unloading

@@ -9,21 +9,15 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_SLIDER
 
 #include "wx/slider.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
-
-    #include <boost/nowide/convert.hpp>
-#endif
+#include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
 
 #include "wx/msw/subwin.h"
 
+#include <boost/nowide/convert.hpp>
 
 // ----------------------------------------------------------------------------
 // constants

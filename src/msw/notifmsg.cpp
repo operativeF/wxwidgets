@@ -7,9 +7,6 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-
-
-
 // we can only use the native implementation if we have a working
 // wxTaskBarIcon::ShowBalloon() method
 #if wxUSE_NOTIFICATION_MESSAGE && \

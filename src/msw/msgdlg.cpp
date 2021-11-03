@@ -8,17 +8,9 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_MSGDLG
 
-#ifndef WX_PRECOMP
-    #include "wx/msw/private.h"
-
-    #include <boost/nowide/convert.hpp>
-    #include <boost/nowide/stackstring.hpp>
-#endif
+#include "wx/msw/private.h"
 
 #include "wx/msgdlg.h"
 #include "wx/app.h"
@@ -35,6 +27,8 @@
 #include "wx/textbuf.h"
 #include "wx/display.h"
 
+#include <boost/nowide/convert.hpp>
+#include <boost/nowide/stackstring.hpp>
 
 // Interestingly, this symbol currently seems to be absent from Platform SDK
 // headers but it is documented at MSDN.

@@ -10,10 +10,8 @@
 
 #if wxUSE_BUTTON
 
-#ifndef WX_PRECOMP
-    #include "wx/msw/wrapcctl.h"
-    #include "wx/msw/private.h"
-#endif
+#include "wx/msw/wrapcctl.h"
+#include "wx/msw/private.h"
 
 #include "wx/button.h"
 #include "wx/app.h"

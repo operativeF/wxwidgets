@@ -8,22 +8,17 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
-#ifndef WX_PRECOMP
-    #include "wx/msw/private.h"
-    #include "wx/msw/wrapwin.h"
-
-    #include <boost/nowide/convert.hpp>
-#endif
-
 #include "wx/artprov.h"
 
 #include "wx/app.h"
 #include "wx/dynlib.h"
 #include "wx/volume.h"
 #include "wx/msw/wrapshl.h"
+
+#include "wx/msw/private.h"
+#include "wx/msw/wrapwin.h"
+
+#include <boost/nowide/convert.hpp>
 
 #ifdef SHGSI_ICON
     #define wxHAS_SHGetStockIconInfo

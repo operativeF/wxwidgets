@@ -7,8 +7,6 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-
-
 #include "wx/webrequest.h"
 
 #if wxUSE_WEBREQUEST && wxUSE_WEBREQUEST_WINHTTP
@@ -21,12 +19,9 @@
 #include "wx/utils.h"
 #include "wx/translation.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/msw/private.h"
+#include "wx/msw/private.h"
 
-    #include <fmt/core.h>
-#endif
-
+#include <fmt/core.h>
 
 // Helper class used to dynamically load the required symbols from winhttp.dll
 class wxWinHTTP

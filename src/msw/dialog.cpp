@@ -8,12 +8,8 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-#ifndef WX_PRECOMP
-    #include "wx/msw/wrapcdlg.h"
-    #include "wx/msw/private.h"
-#endif
+#include "wx/msw/wrapcdlg.h"
+#include "wx/msw/private.h"
 
 #include "wx/modalhook.h"
 

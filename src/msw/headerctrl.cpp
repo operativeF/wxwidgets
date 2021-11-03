@@ -7,19 +7,7 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_HEADERCTRL
-
-#ifndef WX_PRECOMP
-    #include <memory>
-
-    #include "wx/msw/wrapcctl.h"
-    #include "wx/msw/private.h"
-    
-    #include <boost/nowide/stackstring.hpp>
-#endif // WX_PRECOMP
 
 #include "wx/app.h"
 #include "wx/log.h"
@@ -33,6 +21,12 @@
 #include "wx/msw/private/customdraw.h"
 #include "wx/msw/private/winstyle.h"
 
+#include "wx/msw/wrapcctl.h"
+#include "wx/msw/private.h"
+
+#include <boost/nowide/stackstring.hpp>
+
+#include <memory>
 
 #ifndef HDM_SETBITMAPMARGIN
     #define HDM_SETBITMAPMARGIN 0x1234

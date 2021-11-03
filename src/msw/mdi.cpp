@@ -9,21 +9,9 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_MDI && !defined(__WXUNIVERSAL__)
 
 #include "wx/mdi.h"
-
-#ifndef WX_PRECOMP
-    #include "wx/msw/private.h"
-
-    #include <algorithm>
-
-    #include <boost/nowide/convert.hpp>
-    #include <boost/nowide/stackstring.hpp>
-#endif
 
 #include "wx/frame.h"
 #include "wx/menu.h"
@@ -38,6 +26,12 @@
 #include "wx/stockitem.h"
 #include "wx/msw/private/winstyle.h"
 
+#include "wx/msw/private.h"
+
+#include <boost/nowide/convert.hpp>
+#include <boost/nowide/stackstring.hpp>
+
+#include <algorithm>
 
 // ---------------------------------------------------------------------------
 // global variables

@@ -7,20 +7,11 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_PROGRESSDLG && wxUSE_THREADS && wxUSE_NATIVE_PROGRESSDLG
 
 #include "wx/progdlg.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/msw/private.h"
-
-    #include <boost/nowide/convert.hpp>
-    #include <boost/nowide/stackstring.hpp>
-    #include <gsl/gsl>
-#endif
+#include "wx/msw/private.h"
 
 #include "wx/app.h"
 #include "wx/msgdlg.h"
@@ -29,6 +20,9 @@
 #include "wx/msw/private/msgdlg.h"
 #include "wx/evtloop.h"
 
+#include <boost/nowide/convert.hpp>
+#include <boost/nowide/stackstring.hpp>
+#include <gsl/gsl>
 
 using namespace wxMSWMessageDialog;
 

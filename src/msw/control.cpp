@@ -8,20 +8,9 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_CONTROLS
 
 #include "wx/control.h"
-
-#ifndef WX_PRECOMP
-    #include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
-    #include "wx/msw/private.h"
-    
-    #include <boost/nowide/convert.hpp>
-#endif
-
 #include "wx/event.h"
 #include "wx/log.h"
 #include "wx/settings.h"
@@ -33,6 +22,10 @@
 #include "wx/msw/ownerdrawnbutton.h"
 #include "wx/msw/private/winstyle.h"
 
+#include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
+#include "wx/msw/private.h"
+
+#include <boost/nowide/convert.hpp>
 
 // ----------------------------------------------------------------------------
 // wxWin macros

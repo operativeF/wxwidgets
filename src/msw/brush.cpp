@@ -8,12 +8,8 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-#ifndef WX_PRECOMP
-    #include "wx/msw/private.h"
-    #include "wx/msw/wrap/utils.h"
-#endif
+#include "wx/msw/private.h"
+#include "wx/msw/wrap/utils.h"
 
 #include "wx/brush.h"
 #include "wx/utils.h"

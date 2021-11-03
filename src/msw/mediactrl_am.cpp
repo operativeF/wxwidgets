@@ -29,24 +29,9 @@
 //  DECLARATIONS
 //===========================================================================
 
-//---------------------------------------------------------------------------
-// Pre-compiled header stuff
-//---------------------------------------------------------------------------
-
-
-
-
 #if wxUSE_MEDIACTRL && wxUSE_ACTIVEX
 
 #include "wx/mediactrl.h"
-
-#ifndef WX_PRECOMP
-    #include "wx/msw/private.h" // user info and wndproc setting/getting
-
-    #include <cmath>
-    
-    #include <gsl/gsl>
-#endif
 
 #include "wx/log.h"
 #include "wx/dcclient.h"
@@ -60,6 +45,11 @@
 //---------------------------------------------------------------------------
 #include "wx/msw/ole/activex.h"
 
+#include "wx/msw/private.h" // user info and wndproc setting/getting
+
+#include <gsl/gsl>
+
+#include <cmath>
 
 //---------------------------------------------------------------------------
 //  IIDS - used by CoCreateInstance and IUnknown::QueryInterface

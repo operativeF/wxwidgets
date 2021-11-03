@@ -12,7 +12,6 @@
 #include "wx/gdiobj.h"
 #include "wx/utils.h"
 
-
 #define M_GDIDATA static_cast<wxGDIRefData*>(m_refData)
 
 /*

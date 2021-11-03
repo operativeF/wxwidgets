@@ -8,14 +8,9 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_SOUND
 
-#ifndef WX_PRECOMP
-    #include "wx/msw/private.h"
-#endif
+#include "wx/msw/private.h"
 
 #include "wx/sound.h"
 

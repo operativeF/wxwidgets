@@ -16,9 +16,6 @@
 #include "wx/msw/private.h"
 #include "wx/msw/wrapwin.h"
 
-#include <fmt/core.h>
-#include <cstdlib>      // for _MAX_PATH
-
 #include "wx/string.h"
 #include "wx/intl.h"
 #include "wx/log.h"
@@ -27,6 +24,10 @@
 #include "wx/dynlib.h"
 #include "wx/file.h"
 #include "wx/wfstream.h"
+
+#include <fmt/core.h>
+
+#include <cstdlib>      // for _MAX_PATH
 
 #ifndef _MAX_PATH
     #define _MAX_PATH 512

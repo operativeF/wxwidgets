@@ -8,9 +8,6 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_STATUSBAR && wxUSE_NATIVE_STATUSBAR
 
 #include "wx/statusbr.h"
@@ -22,14 +19,8 @@
 #include "wx/log.h"
 #include "wx/control.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
-    #include "wx/msw/private.h"
-
-    #include <numeric>
-
-    #include <boost/nowide/convert.hpp>
-#endif
+#include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
+#include "wx/msw/private.h"
 
 #include "wx/tooltip.h"
 #include <windowsx.h>
@@ -38,6 +29,9 @@
     #include "wx/msw/uxtheme.h"
 #endif
 
+#include <boost/nowide/convert.hpp>
+
+#include <numeric>
 
 // ----------------------------------------------------------------------------
 // constants

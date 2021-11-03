@@ -8,23 +8,12 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_SPINCTRL
 
 #include "wx/spinctrl.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
-    #include "wx/msw/private.h"
-
-    #include <algorithm>
-    #include <charconv>
-    #include <limits>
-
-    #include <boost/nowide/convert.hpp>
-#endif
+#include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
+#include "wx/msw/private.h"
 
 #include "wx/hashmap.h"
 #include "wx/event.h"
@@ -39,6 +28,12 @@
 #if wxUSE_TOOLTIPS
     #include "wx/tooltip.h"
 #endif // wxUSE_TOOLTIPS
+
+#include <boost/nowide/convert.hpp>
+
+#include <algorithm>
+#include <charconv>
+#include <limits>
 
 // ----------------------------------------------------------------------------
 // macros

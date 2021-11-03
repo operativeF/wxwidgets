@@ -8,17 +8,7 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_COMBOBOX
-
-#ifndef WX_PRECOMP
-    #include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
-    #include "wx/msw/private.h"
-
-    #include <boost/nowide/convert.hpp>
-#endif
 
 #include "wx/combobox.h"
 #include "wx/settings.h"
@@ -38,6 +28,10 @@
     #include "wx/tooltip.h"
 #endif // wxUSE_TOOLTIPS
 
+#include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
+#include "wx/msw/private.h"
+
+#include <boost/nowide/convert.hpp>
 
 // ----------------------------------------------------------------------------
 // wxWin macros

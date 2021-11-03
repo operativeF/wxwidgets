@@ -8,17 +8,6 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
-#ifndef WX_PRECOMP
-    #include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
-    #include "wx/msw/private.h"
-    #include "wx/msw/wrap/utils.h"
-
-    #include <algorithm>
-#endif
-
 #include "wx/app.h"
 #include "wx/dc.h"
 #include "wx/dcmemory.h"
@@ -32,6 +21,12 @@
 #include "wx/imaglist.h"
 #include "wx/msw/dc.h"
 #include "wx/msw/dib.h"
+
+#include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
+#include "wx/msw/private.h"
+#include "wx/msw/wrap/utils.h"
+
+#include <algorithm>
 
 using msw::utils::unique_bitmap;
 

@@ -8,32 +8,24 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_COLOURDLG
 
 #include "wx/colordlg.h"
 #include "wx/modalhook.h"
 
-#ifndef WX_PRECOMP
-    #include "wx/msw/private.h"
-    #include "wx/msw/wrapcdlg.h"
-
-    #include <string>
-
-    #include <boost/nowide/convert.hpp>
-#endif
+#include "wx/msw/private.h"
+#include "wx/msw/wrapcdlg.h"
 
 #include "wx/colour.h"
 #include "wx/gdicmn.h"
 #include "wx/geometry/size.h"
 #include "wx/utils.h"
-
 #include "wx/scopeguard.h"
-
 #include "wx/msw/private/dpiaware.h"
 
+#include <boost/nowide/convert.hpp>
+
+#include <string>
 
 // ----------------------------------------------------------------------------
 // wxWin macros

@@ -8,18 +8,9 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #include "wx/bitmap.h"
-
-#ifndef WX_PRECOMP
-    #include "wx/msw/private.h"
-    #include "wx/msw/wrap/utils.h"
-    
-    #include <memory>
-    #include <string>
-#endif
+#include "wx/msw/private.h"
+#include "wx/msw/wrap/utils.h"
 
 #include "wx/utils.h"
 #include "wx/app.h"
@@ -37,6 +28,9 @@
 #ifdef wxHAS_RAW_BITMAP
     #include "wx/rawbmp.h"
 #endif
+
+#include <memory>
+#include <string>
 
 // missing from mingw32 header
 #ifndef CLR_INVALID

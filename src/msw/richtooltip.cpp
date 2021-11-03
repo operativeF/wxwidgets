@@ -7,18 +7,9 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_RICHTOOLTIP
 
-#ifndef WX_PRECOMP
-    #include "wx/msw/private.h"
-
-    #include <boost/nowide/stackstring.hpp>
-
-    #include <memory>
-#endif // WX_PRECOMP
+#include "wx/msw/private.h"
 
 #include "wx/treectrl.h"
 
@@ -26,6 +17,9 @@
 #include "wx/generic/private/richtooltip.h"
 #include "wx/msw/uxtheme.h"
 
+#include <boost/nowide/stackstring.hpp>
+
+#include <memory>
 
 // Provide definitions missing from some compilers SDK headers.
 

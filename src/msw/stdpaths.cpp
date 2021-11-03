@@ -20,6 +20,7 @@
 
 #include "wx/msw/wrapshl.h"
 #include "wx/msw/private/cotaskmemptr.h"
+
 #include <initguid.h>
 
 // ----------------------------------------------------------------------------

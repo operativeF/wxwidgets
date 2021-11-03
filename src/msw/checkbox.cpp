@@ -8,14 +8,7 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
 #if wxUSE_CHECKBOX
-
-#ifndef WX_PRECOMP
-    #include <cassert>
-    
-#endif
 
 #include "wx/checkbox.h"
 #include "wx/dcclient.h"
@@ -24,6 +17,8 @@
 #include "wx/msw/uxtheme.h"
 #include "wx/msw/private/button.h"
 #include "wx/private/window.h"
+
+#include <cassert>
 
 bool wxCheckBox::Create(wxWindow *parent,
                         wxWindowID id,

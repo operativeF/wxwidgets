@@ -8,20 +8,15 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
-#ifndef WX_PRECOMP
-    #include "wx/msw/private.h"
-
-    #include <cstdio>
-    #include <cstring>
-#endif
+#include "wx/msw/private.h"
 
 #include "wx/utils.h"
 
 #include "wx/metafile.h"
 #include "wx/filename.h"
+
+#include <cstdio>
+#include <cstring>
 
 #if wxUSE_METAFILE && !defined(wxMETAFILE_IS_ENH)
 
