@@ -478,3 +478,41 @@ if(wxUSE_LIBNOTIFY)
     wx_lib_include_directories(wxcore PUBLIC ${LIBNOTIFY_INCLUDE_DIRS})
     wx_lib_link_libraries(wxcore PUBLIC ${LIBNOTIFY_LIBRARIES})
 endif()
+
+target_precompile_headers(wxcore
+    PRIVATE
+        # Include standard headers
+        <algorithm>
+        <array>
+        <cassert>
+        <cerrno>
+        <cctype>
+        <charconv>
+        <chrono>
+        <cmath>
+        <cstdlib>
+        <cstdio>
+        <cstring>
+        <ctime>
+        <filesystem>
+        <functional>
+        <iostream>
+        <limits>
+        <memory>
+        <numeric>
+        <numbers>
+        <span>
+        <string>
+        <string_view>
+        <tuple>
+        <unordered_map>
+        <vector>
+    
+        # Include external library headers that are necessary.
+        <fmt/core.h>
+        <boost/nowide/convert.hpp>
+        <boost/nowide/stackstring.hpp>
+        <gsl/gsl>
+    
+        ${CMAKE_SOURCE_DIR}/include/wx/msw/wrapwin.h
+)
