@@ -16,6 +16,7 @@
 
 #if wxUSE_TOGGLEBTN
 
+#include "wx/app.h"
 #include "wx/event.h"
 #include "wx/anybutton.h"     // base class
 

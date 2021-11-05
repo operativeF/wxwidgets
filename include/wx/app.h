@@ -57,6 +57,8 @@ enum
     wxPRINT_POSTSCRIPT = 2
 };
 
+inline wxList wxPendingDelete;
+
 // ----------------------------------------------------------------------------
 // wxAppConsoleBase: wxApp for non-GUI applications
 // ----------------------------------------------------------------------------

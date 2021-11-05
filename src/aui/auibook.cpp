@@ -12,6 +12,7 @@
 
 #include "wx/aui/auibook.h"
 
+#include "wx/app.h"
 #include "wx/settings.h"
 #include "wx/dcclient.h"
 #include "wx/dcmemory.h"

@@ -7,13 +7,11 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-
-
-
 #if wxUSE_DATAVIEWCTRL
 
 #include "wx/dataview.h"
 
+#include "wx/app.h"
 #include "wx/dc.h"
 #include "wx/settings.h"
 #include "wx/log.h"
