@@ -305,11 +305,6 @@
 #   define __STDC_EXT__ 1
 #endif
 
-/* Force linking against required libraries under Windows: */
-#ifdef WX_WINDOWS
-#   include "wx/msw/libraries.h"
-#endif
-
 /*
     Note that wx/msw/gccpriv.h must be included after defining UNICODE and
     _UNICODE macros as it includes _mingw.h which relies on them being set.

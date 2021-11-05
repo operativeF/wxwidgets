@@ -430,7 +430,7 @@ private:
 // you work in the entry directory and the path is automatically restored
 // when the function returns
 // Taken out of wxConfig since not all compilers can cope with nested classes.
-class WXDLLIMPEXP_BASE wxConfigPathChanger
+class wxConfigPathChanger
 {
 public:
   // ctor/dtor do path changing/restoring of the path

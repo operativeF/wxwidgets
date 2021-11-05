@@ -18,8 +18,6 @@
 
 #include <optional>
 
-wxAcceleratorTable wxNullAcceleratorTable;
-
 // ============================================================================
 // wxAcceleratorEntry implementation
 // ============================================================================

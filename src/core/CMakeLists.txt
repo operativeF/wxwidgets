@@ -428,6 +428,8 @@ target_link_libraries(wxcore
         shell32
         comctl32
         ole32
+        oleacc
+        uxtheme
         oleaut32
         uuid
         rpcrt4

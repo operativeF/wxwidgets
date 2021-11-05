@@ -22,6 +22,7 @@
 /build/cmake_install.cmake
 /build/x64
 /build/.vs*
+/build/*
 *.obj
 *.dll
 *.exe
@@ -31,6 +32,7 @@
 *.log
 *.lib
 *.recipe
+*.sarif
 *.stamp
 *.def
 *.tlog
