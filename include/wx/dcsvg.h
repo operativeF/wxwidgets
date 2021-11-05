@@ -13,7 +13,6 @@
 
 #if wxUSE_SVG
 
-#include "wx/string.h"
 #include "wx/filename.h"
 #include "wx/dc.h"
 #include "wx/geometry/rect.h"
@@ -263,7 +262,7 @@ private:
     void Init(const std::string& filename, wxSize dimen,
               double dpi, const std::string& title);
 
-    void write(const wxString& s);
+    void write(const std::string& s);
 
 private:
     // If m_graphics_changed is true, close the current <g> element and start a

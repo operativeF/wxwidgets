@@ -1333,13 +1333,13 @@ void wxSVGFileDCImpl::DoDrawBitmap(const wxBitmap& bmp, wxCoord x, wxCoord y,
     m_OK = m_outfile->IsOk();
 }
 
-void wxSVGFileDCImpl::write(const wxString& s)
+void wxSVGFileDCImpl::write(const std::string& s)
 {
     m_OK = m_outfile && m_outfile->IsOk();
     if (!m_OK)
         return;
 
-    const wxCharBuffer buf = s.utf8_str();
+    const wxCharBuffer buf = s.c_str();
     m_outfile->Write(buf, strlen((const char*)buf));
     m_OK = m_outfile->IsOk();
 }

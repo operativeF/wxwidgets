@@ -11,7 +11,6 @@
 #ifndef _WX_APPTRAIT_H_
 #define _WX_APPTRAIT_H_
 
-#include "wx/string.h"
 #include "wx/platinfo.h"
 
 #include <string>
