@@ -77,6 +77,8 @@ public:
     #error "wxPopupWindow is not supported under this platform."
 #endif
 
+inline wxPopupWindow* wxCurrentPopupWindow{nullptr};
+
 // ----------------------------------------------------------------------------
 // wxPopupTransientWindow: a wxPopupWindow which disappears automatically
 // when the user clicks mouse outside it or if it loses focus in any other way

@@ -18,12 +18,6 @@
 
 #include <memory>
 
-#if wxUSE_DISPLAY
-
-const wxVideoMode wxDefaultVideoMode;
-
-#endif // wxUSE_DISPLAY
-
 namespace
 {
 

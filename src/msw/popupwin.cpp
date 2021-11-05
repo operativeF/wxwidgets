@@ -13,13 +13,6 @@
 #include "wx/msw/private.h"     // for GetDesktopWindow()
 #include "wx/popupwin.h"
 
-
-// Set to the popup window currently being shown, if any.
-//
-// Note that this global variable is used in src/msw/window.cpp and so must be
-// extern.
-wxPopupWindow* wxCurrentPopupWindow = nullptr;
-
 // ============================================================================
 // implementation
 // ============================================================================

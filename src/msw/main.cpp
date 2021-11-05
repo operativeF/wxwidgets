@@ -39,10 +39,6 @@ extern int wxEntryCleanupReal(int& argc, wxChar **argv);
 // OnFatalException() if necessary
 #if wxUSE_ON_FATAL_EXCEPTION
 
-// global pointer to exception information, only valid inside OnFatalException,
-// used by wxStackWalker and wxCrashReport
-extern EXCEPTION_POINTERS *wxGlobalSEInformation = nullptr;
-
 // flag telling us whether the application wants to handle exceptions at all
 static bool gs_handleExceptions = false;
 

@@ -112,7 +112,7 @@ private:
     //wxDECLARE_DYNAMIC_CLASS(wxPrintPaperDatabase);
 };
 
-extern WXDLLIMPEXP_DATA_CORE(wxPrintPaperDatabase*) wxThePrintPaperDatabase;
+inline wxPrintPaperDatabase* wxThePrintPaperDatabase{nullptr};
 
 
 #endif

@@ -27,7 +27,7 @@
     using wxArrayVideoModes = std::vector<wxVideoMode>;
 
     // default, uninitialized, video mode object
-    extern WXDLLIMPEXP_DATA_CORE(const wxVideoMode) wxDefaultVideoMode;
+    inline const wxVideoMode wxDefaultVideoMode;
 #endif // wxUSE_DISPLAY
 
 #include <memory>

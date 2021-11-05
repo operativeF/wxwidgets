@@ -13,6 +13,7 @@
 #include "wx/string.h"
 #include "wx/stackwalk.h"
 
+#include "wx/msw/crashrpt.h"
 #include "wx/msw/debughlp.h"
 #include "wx/msw/seh.h"
 
@@ -288,8 +289,6 @@ void wxStackWalker::WalkFrom(const _EXCEPTION_POINTERS *ep, size_t skip, size_t 
 
 void wxStackWalker::WalkFromException(size_t maxDepth)
 {
-    extern EXCEPTION_POINTERS *wxGlobalSEInformation;
-
     wxCHECK_RET( wxGlobalSEInformation,
                  wxT("wxStackWalker::WalkFromException() can only be called from wxApp::OnFatalException()") );
 

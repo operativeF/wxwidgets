@@ -594,6 +594,8 @@ protected:
 #endif
 #endif // wxUSE_BASE_CLASSES_ONLY/!wxUSE_BASE_CLASSES_ONLY
 
+inline wxMenu* wxCurrentPopupMenu{nullptr};
+
 // ----------------------------------------------------------------------------
 // Helper class used in the implementation only: sets the invoking window of
 // the given menu in its ctor and resets it in dtor.

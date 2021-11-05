@@ -54,8 +54,6 @@ WX_DECLARE_LIST(wxPrintPaperType, wxPrintPaperTypeList);
 #include "wx/listimpl.cpp"
 WX_DEFINE_LIST(wxPrintPaperTypeList)
 
-wxPrintPaperDatabase* wxThePrintPaperDatabase = nullptr;
-
 wxPrintPaperDatabase::wxPrintPaperDatabase()
     : m_map(new wxStringToPrintPaperTypeHashMap),
       m_list(new wxPrintPaperTypeList)

@@ -19,6 +19,11 @@
 
 struct _EXCEPTION_POINTERS;
 
+// global pointer to exception information, only valid inside OnFatalException,
+// used by wxStackWalker and wxCrashReport
+inline EXCEPTION_POINTERS* wxGlobalSEInformation{nullptr};
+
+
 // ----------------------------------------------------------------------------
 // crash report generation flags
 // ----------------------------------------------------------------------------

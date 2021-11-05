@@ -87,9 +87,6 @@ private:
 // crashes
 static wxChar gs_reportFilename[MAX_PATH];
 
-// this is defined in msw/main.cpp
-extern EXCEPTION_POINTERS *wxGlobalSEInformation;
-
 // ============================================================================
 // implementation
 // ============================================================================

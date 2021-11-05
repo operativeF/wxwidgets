@@ -64,14 +64,6 @@
     #include "wx/msw/wrapwin.h"
 #endif
 
-// Windows List
-WXDLLIMPEXP_DATA_CORE(wxWindowList) wxTopLevelWindows;
-
-// globals
-#if wxUSE_MENUS
-wxMenu *wxCurrentPopupMenu = nullptr;
-#endif // wxUSE_MENUS
-
 namespace wxMouseCapture
 {
 

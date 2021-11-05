@@ -37,8 +37,6 @@
 // global variables
 // ---------------------------------------------------------------------------
 
-extern wxMenu *wxCurrentPopupMenu;
-
 extern void wxRemoveHandleAssociation(wxWindow *win);
 
 // ---------------------------------------------------------------------------

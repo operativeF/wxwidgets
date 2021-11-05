@@ -47,22 +47,6 @@ class wxWindowBase;
 #define wxRESERVED_PARAM    0
 
 // ---------------------------------------------------------------------------
-// standard icons from the resources
-// ---------------------------------------------------------------------------
-
-#if wxUSE_GUI
-
-extern WXDLLIMPEXP_DATA_CORE(HICON) wxSTD_FRAME_ICON;
-extern WXDLLIMPEXP_DATA_CORE(HICON) wxSTD_MDIPARENTFRAME_ICON;
-extern WXDLLIMPEXP_DATA_CORE(HICON) wxSTD_MDICHILDFRAME_ICON;
-extern WXDLLIMPEXP_DATA_CORE(HICON) wxDEFAULT_FRAME_ICON;
-extern WXDLLIMPEXP_DATA_CORE(HICON) wxDEFAULT_MDIPARENTFRAME_ICON;
-extern WXDLLIMPEXP_DATA_CORE(HICON) wxDEFAULT_MDICHILDFRAME_ICON;
-extern WXDLLIMPEXP_DATA_CORE(HFONT) wxSTATUS_LINE_FONT;
-
-#endif // wxUSE_GUI
-
-// ---------------------------------------------------------------------------
 // global data
 // ---------------------------------------------------------------------------
 

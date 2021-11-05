@@ -119,14 +119,6 @@
 // global variables
 // ---------------------------------------------------------------------------
 
-#if wxUSE_MENUS_NATIVE
-extern wxMenu *wxCurrentPopupMenu;
-#endif
-
-#if wxUSE_POPUPWIN
-extern wxPopupWindow* wxCurrentPopupWindow;
-#endif // wxUSE_POPUPWIN
-
 #if wxUSE_UXTHEME
 // This is a hack used by the owner-drawn wxButton implementation to ensure
 // that the brush used for erasing its background is correctly aligned with the

@@ -197,7 +197,8 @@ WX_DECLARE_LIST_3(wxWindow, wxWindowBase, wxWindowList, wxWindowListNode, class)
 // global variables
 // ----------------------------------------------------------------------------
 
-extern wxWindowList wxTopLevelWindows;
+// Windows List
+inline wxWindowList wxTopLevelWindows;
 
 // ----------------------------------------------------------------------------
 // wxWindowBase is the base class for all GUI controls/widgets, this is the public

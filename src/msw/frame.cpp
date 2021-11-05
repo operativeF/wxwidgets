@@ -38,15 +38,6 @@
     constexpr unsigned int wxMSGFLT_ADD =   0x01;
 #endif  // wxUSE_TASKBARBUTTON
 
-
-// ----------------------------------------------------------------------------
-// globals
-// ----------------------------------------------------------------------------
-
-#if wxUSE_MENUS || wxUSE_MENUS_NATIVE
-    extern wxMenu *wxCurrentPopupMenu;
-#endif // wxUSE_MENUS || wxUSE_MENUS_NATIVE
-
 // ----------------------------------------------------------------------------
 // event tables
 // ----------------------------------------------------------------------------

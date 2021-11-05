@@ -188,8 +188,6 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxRichEditModule, wxModule);
 
 #if wxUSE_OLE
 
-extern wxMenu *wxCurrentPopupMenu;
-
 class wxTextCtrlOleCallback : public IRichEditOleCallback
 {
 public:
@@ -2222,7 +2220,6 @@ wxTextCtrl::MSWHandleMessage(WXLRESULT *rc,
                 // WM_COMMAND, but it may be non-NULL even when the underlying
                 // native menu is no longer shown. Use ::IsMenu() to check whether
                 // the menu still exists.
-                extern wxMenu *wxCurrentPopupMenu;
                 if ( wxCurrentPopupMenu &&
                         wxCurrentPopupMenu->GetInvokingWindow() == this &&
                         ::IsMenu(GetHmenuOf(wxCurrentPopupMenu)) )
